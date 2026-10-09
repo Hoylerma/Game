@@ -60,7 +60,8 @@ einer Testregion um 1648. Geplant als Version 0.1.0 (so steht es bereits in `CMa
   clang-format 18, Tests und Aktualitätsprüfung des Kartengenerators, Godot-Job mit Brücke,
   Rauchtest und Screenshot der Hauptszene als Artefakt.
 - **Dokumentation:** Abschnitt „Entwicklung“ in der `README.md`, technischer Überblick in
-  [`docs/technik/README.md`](docs/technik/README.md), dieses Änderungsprotokoll.
+  [`docs/technik/README.md`](docs/technik/README.md), dieses Änderungsprotokoll,
+  Meilensteinplan [`docs/meilensteine.md`](docs/meilensteine.md) (M1–M13).
 
 ## [0.0.1] – 2026-10-09
 

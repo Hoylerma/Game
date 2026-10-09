@@ -255,4 +255,5 @@ clang-format-18 -i <datei>                # Datei formatieren
 | [data/README.md](data/README.md) | Inhalt und Aufbau der Testregion 1648 |
 | [game/README.md](game/README.md) | Godot-Projekt: Starten, Bedienung, Aufbau |
 | [tools/kartengenerator/README.md](tools/kartengenerator/README.md) | Kartengenerator: Aufruf, Algorithmus, Determinismus |
+| [docs/meilensteine.md](docs/meilensteine.md) | Meilensteine M1–M13 für Vorproduktion und Vertical Slice |
 | [CHANGELOG.md](CHANGELOG.md) | Änderungsprotokoll |
