@@ -2,7 +2,8 @@ include(FetchContent)
 FetchContent_Declare(doctest
     GIT_REPOSITORY https://github.com/doctest/doctest.git
     GIT_TAG v2.4.11
-    GIT_SHALLOW TRUE)
+    GIT_SHALLOW TRUE
+    SYSTEM)  # Warnungen aus doctest.h zählen nicht als eigene (/WX, -Werror)
 set(DOCTEST_NO_INSTALL ON CACHE BOOL "" FORCE)
 # doctest 2.4.11 verlangt cmake_minimum_required(VERSION 3.0); CMake 4 lehnt das ohne
 # diese Untergrenze ab. Ältere CMake-Versionen ignorieren die Variable.
@@ -22,6 +23,9 @@ add_executable(uhrwerk_tests
 )
 target_link_libraries(uhrwerk_tests PRIVATE uhrwerk::core doctest::doctest uhrwerk_warnings)
 target_compile_definitions(uhrwerk_tests PRIVATE
+    # Echte Standard-Header statt Vorwärtsdeklarationen in namespace std: Neuere MSVC
+    # melden für die Deklaration von std::tuple C5285 (verbotene Spezialisierung).
+    DOCTEST_CONFIG_USE_STD_HEADERS
     UHRWERK_TEST_DATA_DIR="${CMAKE_CURRENT_SOURCE_DIR}/daten"
     UHRWERK_GAME_DATA_DIR="${PROJECT_SOURCE_DIR}/data")
 
