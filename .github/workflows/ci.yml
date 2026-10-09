@@ -1,0 +1,372 @@
+# Kontinuierliche Integration für EINIGKEIT.
+#
+# Jobs:
+#   Kern (Linux)        GCC und Clang: Build mit Warnungen als Fehler, Tests, Prüfsumme nach 100 Jahren
+#   Kern (Windows)      MSVC mit denselben Presets: Portabilität des Kerns
+#   Determinismus       vergleicht die Prüfsummen von GCC, Clang und MSVC (müssen bitgleich sein)
+#   Formatierung        clang-format 18 über core/, cli/, tests/, bridge/
+#   Kartengenerator     Python-Tests und Prüfung, ob data/karte/ aktuell ist
+#   Godot               GDExtension bauen, Rauchtest headless, Screenshot der Hauptszene als Artefakt
+#
+# Lokal nachstellen: siehe README.md, Abschnitt „Entwicklung“.
+
+name: Prüfungen
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+# Minimale Rechte: Die Jobs lesen nur den Quelltext.
+permissions:
+  contents: read
+
+# Ein neuer Lauf auf demselben Branch (bzw. Pull Request) bricht ältere Läufe ab.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  # Jahre für den plattformübergreifenden Prüfsummenvergleich.
+  PRUEFSUMME_JAHRE: 100
+
+jobs:
+  kern-linux:
+    name: Kern (Linux, ${{ matrix.compiler }})
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - compiler: gcc
+            cxx: g++
+          - compiler: clang
+            cxx: clang++
+    steps:
+      - name: Quelltext auschecken
+        uses: actions/checkout@v4
+
+      - name: Ninja installieren (falls nötig)
+        run: |
+          if ! command -v ninja > /dev/null; then
+            sudo apt-get update
+            sudo apt-get install -y --no-install-recommends ninja-build
+          fi
+          ninja --version
+
+      - name: Werkzeuge anzeigen
+        run: |
+          cmake --version
+          ${{ matrix.cxx }} --version
+
+      - name: Konfigurieren (Preset dev)
+        run: cmake --preset dev -DCMAKE_CXX_COMPILER=${{ matrix.cxx }}
+
+      - name: Bauen
+        run: cmake --build --preset dev
+
+      - name: Testen
+        run: ctest --preset dev
+
+      - name: Prüfsumme nach ${{ env.PRUEFSUMME_JAHRE }} Jahren festhalten
+        run: |
+          ./build/dev/cli/uhrwerk-cli lauf --daten data --jahre "$PRUEFSUMME_JAHRE" | tee "$RUNNER_TEMP/lauf.txt"
+          summe=$(tr -d '\r' < "$RUNNER_TEMP/lauf.txt" | grep -E 'summe: [0-9a-f]{16}$' | tail -n 1 | grep -oE '[0-9a-f]{16}$' || true)
+          if [ -z "$summe" ]; then
+            echo "::error::Keine Prüfsumme in der Ausgabe von uhrwerk-cli gefunden."
+            exit 1
+          fi
+          mkdir -p pruefsumme
+          echo "$summe" > "pruefsumme/linux-${{ matrix.compiler }}.txt"
+          echo "Prüfsumme (Linux, ${{ matrix.compiler }}): \`$summe\`" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Prüfsumme hochladen
+        uses: actions/upload-artifact@v4
+        with:
+          name: pruefsumme-linux-${{ matrix.compiler }}
+          path: pruefsumme/
+          if-no-files-found: error
+          retention-days: 7
+
+  kern-windows:
+    name: Kern (Windows, MSVC)
+    runs-on: windows-latest
+    timeout-minutes: 30
+    steps:
+      - name: Quelltext auschecken
+        uses: actions/checkout@v4
+
+      - name: MSVC-Umgebung einrichten
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: x64
+
+      # CMake, Ninja und cl laufen in PowerShell (Standard unter Windows): In Git Bash
+      # verdeckt /usr/bin/link den Linker link.exe von MSVC.
+      - name: Werkzeuge anzeigen
+        run: |
+          # Ninja bringt Visual Studio mit (msvc-dev-cmd legt es in den Pfad); sonst nachinstallieren.
+          # Die Programme von Chocolatey liegen auf den Runnern bereits im Pfad.
+          if (-not (Get-Command ninja -ErrorAction SilentlyContinue)) {
+            Write-Output "Ninja nicht im Pfad – Installation über Chocolatey."
+            choco install ninja --yes --no-progress
+            if ($LASTEXITCODE -ne 0) { exit 1 }
+          }
+          cmake --version
+          ninja --version
+          Get-Command cl | Select-Object -ExpandProperty Source
+
+      - name: Konfigurieren (Preset dev)
+        run: cmake --preset dev -DCMAKE_CXX_COMPILER=cl
+
+      - name: Bauen
+        run: cmake --build --preset dev
+
+      - name: Testen
+        run: ctest --preset dev
+
+      - name: Prüfsumme nach ${{ env.PRUEFSUMME_JAHRE }} Jahren festhalten
+        shell: bash
+        run: |
+          ./build/dev/cli/uhrwerk-cli.exe lauf --daten data --jahre "$PRUEFSUMME_JAHRE" | tee "$RUNNER_TEMP/lauf.txt"
+          summe=$(tr -d '\r' < "$RUNNER_TEMP/lauf.txt" | grep -E 'summe: [0-9a-f]{16}$' | tail -n 1 | grep -oE '[0-9a-f]{16}$' || true)
+          if [ -z "$summe" ]; then
+            echo "::error::Keine Prüfsumme in der Ausgabe von uhrwerk-cli gefunden."
+            exit 1
+          fi
+          mkdir -p pruefsumme
+          echo "$summe" > pruefsumme/windows-msvc.txt
+          echo "Prüfsumme (Windows, MSVC): \`$summe\`" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Prüfsumme hochladen
+        uses: actions/upload-artifact@v4
+        with:
+          name: pruefsumme-windows-msvc
+          path: pruefsumme/
+          if-no-files-found: error
+          retention-days: 7
+
+  determinismus:
+    name: Determinismus (GCC, Clang, MSVC)
+    needs: [kern-linux, kern-windows]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Prüfsummen herunterladen
+        uses: actions/download-artifact@v4
+        with:
+          pattern: pruefsumme-*
+          path: pruefsummen
+          merge-multiple: true
+
+      - name: Prüfsummen vergleichen
+        run: |
+          shopt -s nullglob
+          dateien=(pruefsummen/*.txt)
+          {
+            echo "### Prüfsummen nach $PRUEFSUMME_JAHRE Jahren"
+            echo
+            echo "| Plattform | Prüfsumme |"
+            echo "|---|---|"
+            for datei in "${dateien[@]}"; do
+              echo "| $(basename "$datei" .txt) | \`$(cat "$datei")\` |"
+            done
+          } | tee -a "$GITHUB_STEP_SUMMARY"
+          if [ "${#dateien[@]}" -ne 3 ]; then
+            echo "::error::Erwartet werden 3 Prüfsummen (GCC, Clang, MSVC), gefunden: ${#dateien[@]}."
+            exit 1
+          fi
+          if [ "$(cat "${dateien[@]}" | sort -u | wc -l)" -ne 1 ]; then
+            echo "::error::Die Prüfsummen weichen ab – der Kern rechnet nicht auf allen Plattformen bitgleich."
+            exit 1
+          fi
+          echo "Alle Plattformen liefern dieselbe Prüfsumme."
+
+  formatierung:
+    name: Formatierung
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Quelltext auschecken
+        uses: actions/checkout@v4
+
+      - name: clang-format 18 bereitstellen
+        run: |
+          if ! command -v clang-format-18 > /dev/null; then
+            sudo apt-get update
+            sudo apt-get install -y --no-install-recommends clang-format-18
+          fi
+          clang-format-18 --version
+
+      - name: C++-Quelltext prüfen
+        run: |
+          mapfile -d '' dateien < <(git ls-files -z -- \
+            'core/*.cpp' 'core/*.hpp' 'core/*.h' \
+            'cli/*.cpp' 'cli/*.hpp' 'cli/*.h' \
+            'tests/*.cpp' 'tests/*.hpp' 'tests/*.h' \
+            'bridge/*.cpp' 'bridge/*.hpp' 'bridge/*.h')
+          if [ "${#dateien[@]}" -eq 0 ]; then
+            echo "::error::Keine C++-Dateien gefunden."
+            exit 1
+          fi
+          echo "Prüfe ${#dateien[@]} Dateien mit clang-format 18 …"
+          if ! clang-format-18 --dry-run --Werror "${dateien[@]}"; then
+            echo "::error::Nicht formatierte Dateien – bitte mit 'clang-format -i <datei>' (Version 18) formatieren."
+            exit 1
+          fi
+          echo "Alle Dateien sind korrekt formatiert."
+
+  kartengenerator:
+    name: Kartengenerator (Python ${{ matrix.python }})
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        # Älteste und neueste unterstützte Version: Die Karte muss mit beiden pixelgleich entstehen.
+        python: ['3.10', '3.13']
+    steps:
+      - name: Quelltext auschecken
+        uses: actions/checkout@v4
+
+      - name: Python einrichten
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+
+      - name: Tests des Kartengenerators
+        run: python3 -m unittest discover -s tools/kartengenerator -v
+
+      - name: Karte aktuell? (data/karte/provinzen.png, definition.csv)
+        run: python3 tools/kartengenerator/kartengenerator.py --pruefen
+
+  godot:
+    name: Godot (Brücke, Rauchtest, Screenshot)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    env:
+      GODOT_VERSION: 4.4.1-stable
+      GODOT_BIN: tools/godot/Godot_v4.4.1-stable_linux.x86_64
+      # SHA-512 von Godot_v4.4.1-stable_linux.x86_64.zip (SHA512-SUMS.txt des Releases).
+      GODOT_SHA512: ef4e76880a514257175544952c61191106fdef3095b909bafed9fcbeb230c3e5533920a0f3012882dd4bbde83028a67549825794e2d2c3cf76eba7918b71370e
+    steps:
+      - name: Quelltext mit Submodulen auschecken
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Pakete installieren (Ninja, Xvfb, Mesa)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            ninja-build xvfb xauth \
+            libgl1 libgl1-mesa-dri libglx-mesa0 \
+            libx11-6 libxcursor1 libxext6 libxi6 libxinerama1 libxrandr2 libxrender1 \
+            libxkbcommon0 libfontconfig1
+
+      - name: Cache-Schlüssel für godot-cpp ermitteln
+        id: godotcpp
+        run: |
+          echo "commit=$(git rev-parse HEAD:third_party/godot-cpp)" >> "$GITHUB_OUTPUT"
+          echo "compiler=gcc-$(g++ -dumpfullversion)" >> "$GITHUB_OUTPUT"
+
+      # Gecacht werden die Objektdateien von godot-cpp samt Ninja-Protokoll (.ninja_log,
+      # .ninja_deps); ohne das Protokoll würde Ninja alles neu übersetzen.
+      - name: godot-cpp-Build aus dem Cache holen
+        id: godotcpp-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            build/bridge/godot-cpp
+            build/bridge/bin
+            build/bridge/.ninja_log
+            build/bridge/.ninja_deps
+          key: godot-cpp-ubuntu-24.04-${{ steps.godotcpp.outputs.compiler }}-${{ steps.godotcpp.outputs.commit }}-${{ hashFiles('CMakePresets.json', 'CMakeLists.txt', 'bridge/CMakeLists.txt') }}
+          restore-keys: |
+            godot-cpp-ubuntu-24.04-${{ steps.godotcpp.outputs.compiler }}-${{ steps.godotcpp.outputs.commit }}-
+
+      # Der Checkout setzt die Änderungszeit aller Dateien auf „jetzt“; die Objektdateien
+      # aus dem Cache wären damit veraltet. Das Submodul ist durch den Commit im
+      # Cache-Schlüssel festgelegt, daher bekommen seine Dateien eine feste alte Zeit.
+      - name: Zeitstempel von godot-cpp festsetzen
+        run: find third_party/godot-cpp -exec touch -h -d '2000-01-01 00:00:00 UTC' {} +
+
+      - name: Brücke konfigurieren (Preset bridge)
+        run: cmake --preset bridge -DCMAKE_CXX_COMPILER=g++
+
+      - name: godot-cpp bauen
+        run: cmake --build --preset bridge --target godot-cpp
+
+      # Sofort sichern (nicht erst am Jobende), damit ein späterer Fehler im Rauchtest
+      # nicht jedes Mal einen vollständigen Neubau von godot-cpp nach sich zieht.
+      - name: godot-cpp-Build im Cache ablegen
+        if: steps.godotcpp-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            build/bridge/godot-cpp
+            build/bridge/bin
+            build/bridge/.ninja_log
+            build/bridge/.ninja_deps
+          key: ${{ steps.godotcpp-cache.outputs.cache-primary-key }}
+
+      - name: Brücke bauen
+        run: |
+          cmake --build --preset bridge
+          ls -l game/bin/
+
+      - name: Godot aus dem Cache holen
+        id: godot-cache
+        uses: actions/cache@v4
+        with:
+          path: tools/godot
+          key: godot-${{ env.GODOT_VERSION }}-linux-x86_64
+
+      - name: Godot ${{ env.GODOT_VERSION }} herunterladen
+        if: steps.godot-cache.outputs.cache-hit != 'true'
+        run: |
+          zip="$RUNNER_TEMP/godot.zip"
+          curl -fsSL --retry 3 --retry-delay 5 -o "$zip" \
+            "https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}/Godot_v${GODOT_VERSION}_linux.x86_64.zip"
+          echo "${GODOT_SHA512}  $zip" | sha512sum -c -
+          mkdir -p tools/godot
+          unzip -o "$zip" -d tools/godot
+          chmod +x "$GODOT_BIN"
+
+      - name: Godot-Version
+        run: '"$GODOT_BIN" --version'
+
+      - name: Projekt importieren (headless)
+        run: |
+          "$GODOT_BIN" --headless --path game --import 2>&1 | tee "$RUNNER_TEMP/import.log"
+          if grep -E "SCRIPT ERROR|Parse Error" "$RUNNER_TEMP/import.log"; then
+            echo "::error::Skriptfehler beim Import des Godot-Projekts."
+            exit 1
+          fi
+
+      - name: Einheitentests der Godot-Seite (game/tests/unit_test.gd)
+        run: |
+          "$GODOT_BIN" --headless --path game --script res://tests/unit_test.gd 2>&1 | tee "$RUNNER_TEMP/unit.log"
+          grep -q "UNIT OK" "$RUNNER_TEMP/unit.log"
+
+      - name: Rauchtest (game/tests/smoke_test.gd)
+        run: |
+          "$GODOT_BIN" --headless --path game --script res://tests/smoke_test.gd 2>&1 | tee "$RUNNER_TEMP/smoke.log"
+          grep -q "SMOKE OK" "$RUNNER_TEMP/smoke.log"
+
+      - name: Screenshot der Hauptszene (Xvfb, OpenGL 3)
+        run: |
+          mkdir -p artefakte
+          xvfb-run -a -s "-screen 0 1600x900x24" \
+            "$GODOT_BIN" --path game --rendering-driver opengl3 --audio-driver Dummy \
+            -- --screenshot="$PWD/artefakte/einigkeit.png" --tage=60 --kartenmodus=0 --ort=berlin_coelln
+
+      - name: Screenshot hochladen
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshot-hauptszene
+          path: artefakte/
+          if-no-files-found: warn
+          retention-days: 14
