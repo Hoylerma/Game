@@ -1,0 +1,414 @@
+#include "uhrwerk_simulation.h"
+
+#include "uhrwerk/date.hpp"
+#include "uhrwerk/loader.hpp"
+
+#include <algorithm>
+#include <array>
+#include <filesystem>
+#include <godot_cpp/core/class_db.hpp>
+#include <godot_cpp/core/error_macros.hpp>
+#include <godot_cpp/variant/color.hpp>
+#include <string>
+#include <string_view>
+#include <utility>
+#include <vector>
+
+namespace uhrwerk_bridge {
+
+using godot::Array;
+using godot::Color;
+using godot::D_METHOD;
+using godot::Dictionary;
+using godot::PackedColorArray;
+using godot::PackedStringArray;
+using godot::String;
+
+namespace {
+
+String to_godot(std::string_view text) {
+    return String::utf8(text.data(), static_cast<int>(text.size()));
+}
+
+std::string to_std(const String& text) {
+    const godot::CharString utf8 = text.utf8();
+    return std::string(utf8.get_data(), static_cast<std::size_t>(utf8.length()));
+}
+
+// Pfade als UTF-8 übergeben, damit Umlaute auch unter Windows ankommen.
+std::filesystem::path to_path(const String& text) {
+    const std::string utf8 = to_std(text);
+    return std::filesystem::path(std::u8string(utf8.begin(), utf8.end()));
+}
+
+Color to_godot(const uhrwerk::Color& c) {
+    return Color(static_cast<float>(c.r) / 255.0f, static_cast<float>(c.g) / 255.0f,
+                 static_cast<float>(c.b) / 255.0f);
+}
+
+template <typename T> bool valid_index(const std::vector<T>& items, std::int64_t index) {
+    return index >= 0 && index < static_cast<std::int64_t>(items.size());
+}
+
+template <typename T> const T& at(const std::vector<T>& items, std::int64_t index) {
+    return items[static_cast<std::size_t>(index)];
+}
+
+// Verlauf zwischen zwei Farben, t in [0, 1].
+Color blend(const Color& from, const Color& to, double t) {
+    const float f = static_cast<float>(std::clamp(t, 0.0, 1.0));
+    return from.lerp(to, f);
+}
+
+const Color kUnknown(0.62f, 0.60f, 0.56f);
+const Color kDensityLow(0.96f, 0.93f, 0.84f);
+const Color kDensityHigh(0.36f, 0.16f, 0.12f);
+const Color kDevastationNone(0.90f, 0.88f, 0.80f);
+const Color kDevastationFull(0.72f, 0.08f, 0.06f);
+constexpr double kDensityMax = 120.0; // Einwohner je km², ab hier dunkelste Stufe
+
+double density_of(const uhrwerk::World& world, std::int64_t location) {
+    const uhrwerk::Location& loc = at(world.locations, location);
+    const double area = loc.area_km2.to_double();
+    if (area <= 0.0) {
+        return 0.0;
+    }
+    return world.location_population(static_cast<uhrwerk::Index>(location)).to_double() / area;
+}
+
+std::int64_t to_percent(uhrwerk::Fixed share) {
+    return (share * uhrwerk::Fixed::from_int(100)).round();
+}
+
+} // namespace
+
+UhrwerkSimulation::UhrwerkSimulation() = default;
+UhrwerkSimulation::~UhrwerkSimulation() = default;
+
+const uhrwerk::World* UhrwerkSimulation::world() const {
+    return simulation_ ? &simulation_->world() : nullptr;
+}
+
+String UhrwerkSimulation::load_scenario(const String& data_path, const String& scenario_id,
+                                        std::int64_t seed) {
+    simulation_.reset();
+    load_warnings_.clear();
+
+    uhrwerk::LoadResult result = uhrwerk::load_world(to_path(data_path), to_std(scenario_id));
+
+    String errors;
+    for (const uhrwerk::LoadIssue& issue : result.issues) {
+        if (issue.fatal) {
+            if (!errors.is_empty()) {
+                errors += "\n";
+            }
+            errors += to_godot(issue.to_string());
+        } else {
+            load_warnings_.push_back(to_godot(issue.to_string()));
+        }
+    }
+    if (!result.ok()) {
+        if (errors.is_empty()) {
+            errors = "Die Daten konnten nicht geladen werden.";
+        }
+        return errors;
+    }
+
+    uhrwerk::SimConfig config;
+    config.seed = static_cast<std::uint64_t>(seed);
+    simulation_ = std::make_unique<uhrwerk::Simulation>(std::move(*result.world), config);
+    return String();
+}
+
+bool UhrwerkSimulation::is_loaded() const {
+    return simulation_ != nullptr;
+}
+
+PackedStringArray UhrwerkSimulation::get_load_warnings() const {
+    return load_warnings_;
+}
+
+void UhrwerkSimulation::advance_days(std::int64_t days) {
+    ERR_FAIL_COND_MSG(!simulation_, "Keine Simulation geladen.");
+    ERR_FAIL_COND_MSG(days < 0 || days > kMaxAdvanceDays,
+                      "advance_days: Tage müssen zwischen 0 und 3660 liegen.");
+    simulation_->step_days(days);
+}
+
+Dictionary UhrwerkSimulation::get_date() const {
+    Dictionary result;
+    if (const uhrwerk::World* w = world()) {
+        result["year"] = w->date.year;
+        result["month"] = w->date.month;
+        result["day"] = w->date.day;
+    }
+    return result;
+}
+
+String UhrwerkSimulation::get_date_text() const {
+    const uhrwerk::World* w = world();
+    return w ? to_godot(uhrwerk::format_date_long(w->date)) : String();
+}
+
+std::int64_t UhrwerkSimulation::get_days_elapsed() const {
+    return simulation_ ? simulation_->days_elapsed() : 0;
+}
+
+String UhrwerkSimulation::get_scenario_name() const {
+    const uhrwerk::World* w = world();
+    return w ? to_godot(w->scenario.name) : String();
+}
+
+std::int64_t UhrwerkSimulation::get_player_state_index() const {
+    const uhrwerk::World* w = world();
+    return w ? w->find_state(w->scenario.player_tag) : uhrwerk::kNone;
+}
+
+std::int64_t UhrwerkSimulation::get_state_count() const {
+    const uhrwerk::World* w = world();
+    return w ? static_cast<std::int64_t>(w->states.size()) : 0;
+}
+
+std::int64_t UhrwerkSimulation::get_state_index(const String& tag) const {
+    const uhrwerk::World* w = world();
+    return w ? w->find_state(to_std(tag)) : uhrwerk::kNone;
+}
+
+Dictionary UhrwerkSimulation::get_state(std::int64_t index) const {
+    Dictionary result;
+    const uhrwerk::World* w = world();
+    if (!w || !valid_index(w->states, index)) {
+        return result;
+    }
+    const uhrwerk::State& state = at(w->states, index);
+    const auto state_index = static_cast<uhrwerk::Index>(index);
+    result["tag"] = to_godot(state.tag);
+    result["name"] = to_godot(state.name);
+    result["short_name"] = to_godot(state.short_name);
+    result["color"] = to_godot(state.color);
+    result["ruler"] = to_godot(state.ruler);
+    result["government"] = to_godot(state.government);
+    result["capital_index"] = state.capital;
+    result["treasury"] = state.treasury.to_double();
+    result["tax_rate_percent"] = to_percent(state.tax_rate);
+    result["income_month"] = state.last_month_income.to_double();
+    result["expenses_month"] = state.last_month_expenses.to_double();
+    result["population"] = w->state_population(state_index).round();
+    result["location_count"] = static_cast<std::int64_t>(w->state_locations(state_index).size());
+    return result;
+}
+
+std::int64_t UhrwerkSimulation::get_location_count() const {
+    const uhrwerk::World* w = world();
+    return w ? static_cast<std::int64_t>(w->locations.size()) : 0;
+}
+
+std::int64_t UhrwerkSimulation::get_location_index(const String& id) const {
+    const uhrwerk::World* w = world();
+    return w ? w->find_location(to_std(id)) : uhrwerk::kNone;
+}
+
+Dictionary UhrwerkSimulation::get_location(std::int64_t index) const {
+    Dictionary result;
+    const uhrwerk::World* w = world();
+    if (!w || !valid_index(w->locations, index)) {
+        return result;
+    }
+    const uhrwerk::Location& loc = at(w->locations, index);
+    const auto location_index = static_cast<uhrwerk::Index>(index);
+    const uhrwerk::Fixed population = w->location_population(location_index);
+
+    result["id"] = to_godot(loc.id);
+    result["name"] = to_godot(loc.name);
+    result["owner_index"] = loc.owner;
+    result["owner_name"] =
+        valid_index(w->states, loc.owner) ? to_godot(at(w->states, loc.owner).name) : String();
+    result["terrain"] =
+        valid_index(w->terrains, loc.terrain) ? to_godot(at(w->terrains, loc.terrain).name) : String();
+    result["is_city"] = loc.is_city;
+    result["population"] = population.round();
+    result["area_km2"] = loc.area_km2.to_double();
+    result["density"] = density_of(*w, index);
+    result["devastation_percent"] = to_percent(loc.devastation);
+
+    const uhrwerk::Index majority = w->location_majority_confession(location_index);
+    result["majority_confession"] =
+        valid_index(w->confessions, majority) ? to_godot(at(w->confessions, majority).name) : String();
+
+    // Anteile je Konfession in Prozent, in der Reihenfolge der Konfessionsliste.
+    std::vector<uhrwerk::Fixed> per_confession(w->confessions.size());
+    for (uhrwerk::Index p = loc.first_pop; p < loc.first_pop + loc.pop_count; ++p) {
+        if (!valid_index(w->pops, p)) {
+            continue;
+        }
+        const uhrwerk::PopBlock& pop = at(w->pops, p);
+        if (valid_index(per_confession, pop.confession)) {
+            per_confession[static_cast<std::size_t>(pop.confession)] += pop.size;
+        }
+    }
+    Dictionary confessions;
+    const double total = population.to_double();
+    for (std::size_t c = 0; c < per_confession.size(); ++c) {
+        if (per_confession[c] > uhrwerk::Fixed::zero() && total > 0.0) {
+            confessions[to_godot(w->confessions[c].name)] = per_confession[c].to_double() * 100.0 / total;
+        }
+    }
+    result["confessions"] = confessions;
+
+    const uhrwerk::LocationEconomy economy = simulation_->location_economy(location_index);
+    result["production_month"] = economy.production.to_double();
+    result["taxes_month"] = economy.taxes.to_double();
+    result["source"] = to_godot(loc.source);
+    return result;
+}
+
+PackedColorArray UhrwerkSimulation::get_map_colors(std::int64_t mode) const {
+    PackedColorArray colors;
+    const uhrwerk::World* w = world();
+    if (!w) {
+        return colors;
+    }
+    ERR_FAIL_COND_V_MSG(mode < MAP_POLITICAL || mode > MAP_DEVASTATION, colors,
+                        "get_map_colors: unbekannter Kartenmodus.");
+
+    const auto count = static_cast<std::int64_t>(w->locations.size());
+    colors.resize(count);
+    for (std::int64_t i = 0; i < count; ++i) {
+        const uhrwerk::Location& loc = at(w->locations, i);
+        Color color = kUnknown;
+        switch (mode) {
+        case MAP_POLITICAL:
+            if (valid_index(w->states, loc.owner)) {
+                color = to_godot(at(w->states, loc.owner).color);
+            }
+            break;
+        case MAP_DENSITY:
+            color = blend(kDensityLow, kDensityHigh, density_of(*w, i) / kDensityMax);
+            break;
+        case MAP_CONFESSION: {
+            const uhrwerk::Index majority = w->location_majority_confession(static_cast<uhrwerk::Index>(i));
+            if (valid_index(w->confessions, majority)) {
+                color = to_godot(at(w->confessions, majority).color);
+            }
+            break;
+        }
+        case MAP_TERRAIN:
+            if (valid_index(w->terrains, loc.terrain)) {
+                color = to_godot(at(w->terrains, loc.terrain).color);
+            }
+            break;
+        case MAP_DEVASTATION:
+            color = blend(kDevastationNone, kDevastationFull, loc.devastation.to_double());
+            break;
+        default:
+            break;
+        }
+        colors.set(i, color);
+    }
+    return colors;
+}
+
+bool UhrwerkSimulation::set_tax_rate_percent(std::int64_t state_index, std::int64_t percent) {
+    const uhrwerk::World* w = world();
+    if (!w || !valid_index(w->states, state_index)) {
+        return false;
+    }
+    if (percent < 0 || percent > get_max_tax_rate_percent()) {
+        return false;
+    }
+    uhrwerk::Command command;
+    command.type = uhrwerk::CommandType::SetTaxRate;
+    command.state = static_cast<uhrwerk::Index>(state_index);
+    command.value = uhrwerk::Fixed::from_ratio(percent, 100);
+    simulation_->submit(command);
+    return true;
+}
+
+std::int64_t UhrwerkSimulation::get_max_tax_rate_percent() const {
+    const uhrwerk::World* w = world();
+    // Abrunden, damit der höchste angebotene Wert nie über dem Regelmaximum liegt.
+    return w ? (w->rules.tax_rate_max * uhrwerk::Fixed::from_int(100)).trunc() : 0;
+}
+
+std::int64_t UhrwerkSimulation::get_chronicle_size() const {
+    const uhrwerk::World* w = world();
+    return w ? static_cast<std::int64_t>(w->chronicle.size()) : 0;
+}
+
+Array UhrwerkSimulation::get_chronicle(std::int64_t from_index) const {
+    Array result;
+    const uhrwerk::World* w = world();
+    if (!w) {
+        return result;
+    }
+    const auto size = static_cast<std::int64_t>(w->chronicle.size());
+    for (std::int64_t i = std::max<std::int64_t>(from_index, 0); i < size; ++i) {
+        const uhrwerk::ChronicleEntry& entry = at(w->chronicle, i);
+        Dictionary item;
+        item["date_text"] = to_godot(uhrwerk::format_date(entry.date));
+        item["text"] = to_godot(entry.text);
+        item["location_index"] = entry.location;
+        item["state_index"] = entry.state;
+        result.push_back(item);
+    }
+    return result;
+}
+
+String UhrwerkSimulation::get_checksum() const {
+    if (!simulation_) {
+        return String();
+    }
+    static constexpr std::array<char, 16> kHex = {'0', '1', '2', '3', '4', '5', '6', '7',
+                                                  '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
+    std::uint64_t value = simulation_->checksum();
+    std::string text(16, '0');
+    for (int i = 15; i >= 0; --i) {
+        text[static_cast<std::size_t>(i)] = kHex[value & 0xF];
+        value >>= 4;
+    }
+    return to_godot(text);
+}
+
+void UhrwerkSimulation::_bind_methods() {
+    using godot::ClassDB;
+
+    ClassDB::bind_method(D_METHOD("load_scenario", "data_path", "scenario_id", "seed"),
+                         &UhrwerkSimulation::load_scenario, DEFVAL(String("westfaelischer_frieden")),
+                         DEFVAL(1648));
+    ClassDB::bind_method(D_METHOD("is_loaded"), &UhrwerkSimulation::is_loaded);
+    ClassDB::bind_method(D_METHOD("get_load_warnings"), &UhrwerkSimulation::get_load_warnings);
+
+    ClassDB::bind_method(D_METHOD("advance_days", "days"), &UhrwerkSimulation::advance_days);
+    ClassDB::bind_method(D_METHOD("get_date"), &UhrwerkSimulation::get_date);
+    ClassDB::bind_method(D_METHOD("get_date_text"), &UhrwerkSimulation::get_date_text);
+    ClassDB::bind_method(D_METHOD("get_days_elapsed"), &UhrwerkSimulation::get_days_elapsed);
+    ClassDB::bind_method(D_METHOD("get_scenario_name"), &UhrwerkSimulation::get_scenario_name);
+    ClassDB::bind_method(D_METHOD("get_player_state_index"), &UhrwerkSimulation::get_player_state_index);
+
+    ClassDB::bind_method(D_METHOD("get_state_count"), &UhrwerkSimulation::get_state_count);
+    ClassDB::bind_method(D_METHOD("get_state_index", "tag"), &UhrwerkSimulation::get_state_index);
+    ClassDB::bind_method(D_METHOD("get_state", "index"), &UhrwerkSimulation::get_state);
+
+    ClassDB::bind_method(D_METHOD("get_location_count"), &UhrwerkSimulation::get_location_count);
+    ClassDB::bind_method(D_METHOD("get_location_index", "id"), &UhrwerkSimulation::get_location_index);
+    ClassDB::bind_method(D_METHOD("get_location", "index"), &UhrwerkSimulation::get_location);
+
+    ClassDB::bind_method(D_METHOD("get_map_colors", "mode"), &UhrwerkSimulation::get_map_colors);
+
+    ClassDB::bind_method(D_METHOD("set_tax_rate_percent", "state_index", "percent"),
+                         &UhrwerkSimulation::set_tax_rate_percent);
+    ClassDB::bind_method(D_METHOD("get_max_tax_rate_percent"), &UhrwerkSimulation::get_max_tax_rate_percent);
+
+    ClassDB::bind_method(D_METHOD("get_chronicle_size"), &UhrwerkSimulation::get_chronicle_size);
+    ClassDB::bind_method(D_METHOD("get_chronicle", "from_index"), &UhrwerkSimulation::get_chronicle);
+
+    ClassDB::bind_method(D_METHOD("get_checksum"), &UhrwerkSimulation::get_checksum);
+
+    BIND_ENUM_CONSTANT(MAP_POLITICAL);
+    BIND_ENUM_CONSTANT(MAP_DENSITY);
+    BIND_ENUM_CONSTANT(MAP_CONFESSION);
+    BIND_ENUM_CONSTANT(MAP_TERRAIN);
+    BIND_ENUM_CONSTANT(MAP_DEVASTATION);
+}
+
+} // namespace uhrwerk_bridge
