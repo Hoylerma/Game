@@ -1,0 +1,26 @@
+# Testdaten: Orte Sachsens
+ort dresden {
+    name         = "Dresden"
+    besitzer     = SAX
+    gelaende     = flussaue
+    lage         = { 13.74 51.05 }
+    flaeche      = 200
+    bevoelkerung = 20000
+    stadt        = ja
+    konfession   = { lutherisch = 95 katholisch = 5 }
+    verwuestung  = 0.2
+    quelle       = "Testdaten, geschätzt"
+}
+
+ort leipzig {
+    name         = "Leipzig"
+    besitzer     = SAX
+    gelaende     = ackerland
+    lage         = { 12.37 51.34 }
+    flaeche      = 180
+    bevoelkerung = 15000
+    stadt        = ja
+    konfession   = { lutherisch = 100 reformiert = 0 }   # 0 % → kein Block
+    verwuestung  = 0.3
+    quelle       = "Testdaten, geschätzt"
+}

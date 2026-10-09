@@ -1,0 +1,6 @@
+# Testdaten: Standardszenario
+szenario westfaelischer_frieden {
+    name    = "Der Westfälische Frieden"
+    datum   = 1648.10.24
+    spieler = BRA
+}

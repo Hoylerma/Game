@@ -1,0 +1,641 @@
+// Tests für den Lader (data/-Format, Validierung, Startzustand).
+
+#include "test_hilfen.hpp"
+#include "uhrwerk/loader.hpp"
+
+#include <cstdint>
+#include <cstdlib>
+#include <doctest/doctest.h>
+#include <filesystem>
+#include <optional>
+#include <string>
+#include <utility>
+#include <vector>
+
+using testhilfen::has_issue;
+using testhilfen::issues_text;
+using testhilfen::replace_in_file;
+using testhilfen::TempDir;
+using uhrwerk::Date;
+using uhrwerk::Fixed;
+using uhrwerk::Index;
+using uhrwerk::LoadResult;
+using uhrwerk::World;
+
+namespace {
+
+const char* const kStatesBra = "history/staaten/10_brandenburg.chron";
+const char* const kStatesMid = "history/staaten/20_mitteldeutschland.chron";
+const char* const kPlacesBra = "history/orte/10_brandenburg.chron";
+const char* const kPlacesSax = "history/orte/20_sachsen.chron";
+
+Fixed fx(const char* text) {
+    const auto value = Fixed::parse(text);
+    REQUIRE(value.has_value());
+    return *value;
+}
+
+LoadResult load(const TempDir& dir, std::string_view scenario = uhrwerk::kDefaultScenario) {
+    return uhrwerk::load_world(dir.path(), scenario);
+}
+
+/// Erwartet einen fatalen Fehler mit diesem Text (und optional Datei/Zeile).
+void expect_error(const LoadResult& result, std::string_view needle, const char* file = nullptr,
+                  int line = -1) {
+    INFO(issues_text(result));
+    CHECK_FALSE(result.ok());
+    const uhrwerk::LoadIssue* issue = testhilfen::find_issue(result, needle);
+    REQUIRE_MESSAGE(issue != nullptr, "erwartete Meldung fehlt: " << needle);
+    CHECK(issue->fatal);
+    if (file != nullptr) {
+        CHECK(issue->file == file);
+    }
+    if (line >= 0) {
+        CHECK(issue->line == line);
+    }
+}
+
+struct PlaceSpec {
+    const char* id;
+    std::int64_t population;
+    bool city;
+    std::vector<std::pair<const char*, std::int64_t>> confessions;
+};
+
+} // namespace
+
+// ─── Fixture ────────────────────────────────────────────────────────────────
+
+TEST_CASE("Lader: Fixture lädt ohne Fehler und Warnungen") {
+    const LoadResult result = uhrwerk::load_world(testhilfen::fixture_dir());
+    INFO(issues_text(result));
+    REQUIRE(result.ok());
+    CHECK(result.issues.empty());
+    const World& w = *result.world;
+
+    CHECK(w.terrains.size() == 3);
+    CHECK(w.confessions.size() == 3);
+    CHECK(w.professions.size() == 4);
+    CHECK(w.states.size() == 3);
+    CHECK(w.locations.size() == 5);
+    CHECK(w.pops.size() == 29);
+    CHECK(w.chronicle.empty());
+
+    // Indizes folgen der Ladereihenfolge: Dateien nach Namen, Einträge in Dateireihenfolge.
+    CHECK(w.states[0].tag == "BRA");
+    CHECK(w.states[1].tag == "SAX");
+    CHECK(w.states[2].tag == "ANH");
+    const char* const places[] = {"berlin_coelln", "potsdam", "dresden", "leipzig", "dessau"};
+    for (std::size_t i = 0; i < 5; ++i) {
+        CHECK(w.locations[i].id == places[i]);
+    }
+    CHECK(w.terrains[2].id == "sandboden");
+    CHECK(w.confessions[1].id == "reformiert");
+    CHECK(w.professions[3].id == "adel");
+
+    // Szenario und Datum
+    CHECK(w.scenario.id == "westfaelischer_frieden");
+    CHECK(w.scenario.name == "Der Westfälische Frieden");
+    CHECK(w.scenario.start == Date{1648, 10, 24});
+    CHECK(w.scenario.player_tag == "BRA");
+    CHECK(w.date == Date{1648, 10, 24});
+}
+
+TEST_CASE("Lader: Werte aus common/") {
+    const World w = testhilfen::load_fixture();
+    const uhrwerk::Rules& r = w.rules;
+    CHECK(r.growth_base == fx("0.004"));
+    CHECK(r.growth_reconstruction == fx("0.025"));
+    CHECK(r.growth_tax_pressure == fx("0.02"));
+    CHECK(r.devastation_decay == fx("0.03"));
+    CHECK(r.devastation_yield_loss == fx("0.5"));
+    CHECK(r.plague_chance == fx("0.01"));
+    CHECK(r.plague_loss_min == fx("0.04"));
+    CHECK(r.plague_loss_max == fx("0.12"));
+    CHECK(r.tax_rate_max == fx("0.5"));
+
+    const uhrwerk::TerrainType& aue = w.terrains[0];
+    CHECK(aue.id == "flussaue");
+    CHECK(aue.name == "Flussaue");
+    CHECK(aue.color == uhrwerk::Color{128, 160, 112});
+    CHECK(aue.growth_factor.raw() == 68813);
+    CHECK(aue.yield_factor.raw() == 75366);
+
+    CHECK(w.confessions[0].name == "Lutherisch");
+    CHECK(w.confessions[0].color == uhrwerk::Color{70, 110, 170});
+
+    const uhrwerk::Profession& bauern = w.professions[0];
+    CHECK(bauern.name == "Bauern");
+    CHECK(bauern.stratum == uhrwerk::Stratum::Unten);
+    CHECK(bauern.yield_per_capita == Fixed::from_int(6));
+    CHECK(bauern.taxable);
+    CHECK(bauern.share_city == fx("0.10"));
+    CHECK(bauern.share_rural == fx("0.80"));
+    CHECK(w.professions[1].stratum == uhrwerk::Stratum::Mittel);
+    CHECK(w.professions[2].taxable); // "yes"
+    CHECK(w.professions[2].share_rural == Fixed::zero());
+    CHECK(w.professions[3].stratum == uhrwerk::Stratum::Oben);
+    CHECK_FALSE(w.professions[3].taxable);
+}
+
+TEST_CASE("Lader: Staaten und Orte") {
+    const World w = testhilfen::load_fixture();
+    const uhrwerk::State& bra = w.states[0];
+    CHECK(bra.name == "Kurfürstentum Brandenburg");
+    CHECK(bra.short_name == "Brandenburg");
+    CHECK(bra.color == uhrwerk::Color{58, 95, 143});
+    CHECK(bra.capital == w.find_location("berlin_coelln"));
+    CHECK(bra.government == "absolute_monarchie");
+    CHECK(bra.ruler == "Friedrich Wilhelm");
+    CHECK(bra.confession == w.find_confession("reformiert"));
+    CHECK(bra.treasury == Fixed::from_int(20000));
+    CHECK(bra.tax_rate == fx("0.10"));
+    CHECK(bra.court_expenses == Fixed::from_int(30000));
+    CHECK(bra.last_month_income == Fixed::zero());
+    CHECK(bra.last_month_expenses == Fixed::zero());
+    CHECK(bra.source == "Testdaten, geschätzt");
+    CHECK(w.states[1].capital == w.find_location("dresden"));
+    CHECK(w.states[2].capital == w.find_location("dessau"));
+
+    const uhrwerk::Location& berlin = w.locations[0];
+    CHECK(berlin.name == "Berlin-Cölln");
+    CHECK(berlin.owner == 0);
+    CHECK(berlin.terrain == w.find_terrain("flussaue"));
+    CHECK(berlin.longitude == fx("13.40"));
+    CHECK(berlin.latitude == fx("52.52"));
+    CHECK(berlin.area_km2 == Fixed::from_int(150));
+    CHECK(berlin.is_city);
+    CHECK(berlin.devastation == fx("0.4"));
+    CHECK(berlin.source == "Testdaten, geschätzt");
+    CHECK_FALSE(w.locations[1].is_city);
+    CHECK(w.locations[4].owner == w.find_state("ANH"));
+}
+
+TEST_CASE("Lader: Startzustand der Bevölkerungsblöcke (Abschnitt 4)") {
+    const World w = testhilfen::load_fixture();
+    const std::vector<PlaceSpec> specs = {
+        {"berlin_coelln", 12000, true, {{"lutherisch", 90}, {"reformiert", 10}}},
+        {"potsdam", 1500, false, {{"lutherisch", 100}}},
+        {"dresden", 20000, true, {{"lutherisch", 95}, {"katholisch", 5}}},
+        {"leipzig", 15000, true, {{"lutherisch", 100}, {"reformiert", 0}}},
+        {"dessau", 3000, false, {{"reformiert", 60}, {"lutherisch", 40}}},
+    };
+
+    Index next = 0;
+    for (std::size_t li = 0; li < specs.size(); ++li) {
+        const PlaceSpec& spec = specs[li];
+        const uhrwerk::Location& loc = w.locations[li];
+        INFO("Ort " << spec.id);
+        REQUIRE(loc.id == spec.id);
+        CHECK(loc.first_pop == next); // zusammenhängend
+
+        // Erwartete Blöcke: Berufe in Ladereihenfolge, darin Konfessionen in Dateireihenfolge.
+        Index expected_index = loc.first_pop;
+        for (std::size_t pi = 0; pi < w.professions.size(); ++pi) {
+            const uhrwerk::Profession& prof = w.professions[pi];
+            const Fixed share = spec.city ? prof.share_city : prof.share_rural;
+            if (share == Fixed::zero()) {
+                continue;
+            }
+            for (const auto& [confession, percent] : spec.confessions) {
+                if (percent == 0) {
+                    continue;
+                }
+                REQUIRE(expected_index < loc.first_pop + loc.pop_count);
+                const uhrwerk::PopBlock& pop = w.pops[static_cast<std::size_t>(expected_index)];
+                CHECK(pop.location == static_cast<Index>(li));
+                CHECK(pop.profession == static_cast<Index>(pi));
+                CHECK(pop.confession == w.find_confession(confession));
+                const Fixed size = Fixed::from_int(spec.population) * share * Fixed::from_int(percent) /
+                                   Fixed::from_int(100);
+                CHECK(pop.size == size);
+                ++expected_index;
+            }
+        }
+        CHECK(expected_index == loc.first_pop + loc.pop_count);
+        next = loc.first_pop + loc.pop_count;
+    }
+    CHECK(next == static_cast<Index>(w.pops.size()));
+
+    // Handgerechnet: 12000 × 0,10 (6554/65536) × 90 / 100, abgerundet bzw. abgeschnitten.
+    CHECK(w.pops[0].size.raw() == 70783200);
+    // Blockzahlen: Kaufleute fehlen auf dem Land, Reformierte mit 0 % in Leipzig.
+    CHECK(w.locations[0].pop_count == 8);
+    CHECK(w.locations[1].pop_count == 3);
+    CHECK(w.locations[2].pop_count == 8);
+    CHECK(w.locations[3].pop_count == 4);
+    CHECK(w.locations[4].pop_count == 6);
+}
+
+TEST_CASE("Lader: Szenarioauswahl") {
+    SUBCASE("zweites Szenario") {
+        const World w = testhilfen::load_fixture("jahresbeginn_1650");
+        CHECK(w.scenario.id == "jahresbeginn_1650");
+        CHECK(w.scenario.name == "Jahresbeginn 1650");
+        CHECK(w.scenario.player_tag == "SAX");
+        CHECK(w.date == Date{1650, 1, 1});
+    }
+    SUBCASE("unbekanntes Szenario") {
+        const LoadResult r = uhrwerk::load_world(testhilfen::fixture_dir(), "gibt_es_nicht");
+        expect_error(r, "Szenario 'gibt_es_nicht' nicht gefunden");
+        CHECK(has_issue(r, "jahresbeginn_1650, westfaelischer_frieden"));
+    }
+}
+
+// ─── Warnungen ──────────────────────────────────────────────────────────────
+
+TEST_CASE("Lader: unbekannte Felder und Einträge erzeugen Warnungen") {
+    TempDir dir(true);
+    replace_in_file(dir / kPlacesBra, "    stadt        = ja\n",
+                    "    stadt        = ja\n    hafen        = nein\n");
+    replace_in_file(dir / "common/gelaende.chron", "# Testdaten: Geländetypen\n",
+                    "# Testdaten: Geländetypen\nfluss elbe { name = \"Elbe\" }\nlose_angabe\n");
+    replace_in_file(dir / kStatesBra, "    quelle", "    { anonym }\n    quelle");
+
+    const LoadResult r = load(dir);
+    INFO(issues_text(r));
+    REQUIRE(r.ok());
+    REQUIRE(r.issues.size() == 4);
+    for (const uhrwerk::LoadIssue& issue : r.issues) {
+        CHECK_FALSE(issue.fatal);
+    }
+    const uhrwerk::LoadIssue* hafen = testhilfen::find_issue(r, "unbekanntes Feld 'hafen'");
+    REQUIRE(hafen != nullptr);
+    CHECK(hafen->file == kPlacesBra);
+    CHECK(hafen->line == 10);
+    CHECK(hafen->to_string() ==
+          "history/orte/10_brandenburg.chron:10: Warnung: unbekanntes Feld 'hafen' in ort "
+          "berlin_coelln wird ignoriert");
+    CHECK(has_issue(r, "unbekannter Eintrag 'fluss'", false));
+    CHECK(has_issue(r, "unerwarteter Eintrag 'lose_angabe'", false));
+    CHECK(has_issue(r, "anonymer Block in staat BRA", false));
+}
+
+// ─── Fatale Fehler ──────────────────────────────────────────────────────────
+
+TEST_CASE("Lader: fehlende Pflichtfelder") {
+    TempDir dir(true);
+    SUBCASE("quelle im Staat") {
+        replace_in_file(dir / kStatesBra, "    quelle         = \"Testdaten, geschätzt\"\n", "");
+        expect_error(load(dir), "Pflichtfeld 'quelle' fehlt in staat BRA", kStatesBra, 2);
+    }
+    SUBCASE("lage im Ort") {
+        replace_in_file(dir / kPlacesBra, "    lage         = { 13.40 52.52 }\n", "");
+        expect_error(load(dir), "Pflichtfeld 'lage' fehlt in ort berlin_coelln", kPlacesBra, 2);
+    }
+    SUBCASE("Regelwert") {
+        replace_in_file(dir / "common/regeln.chron",
+                        "    seuche_chance         = 0.01    # jährlich je Ort\n", "");
+        expect_error(load(dir), "Pflichtfeld 'seuche_chance' fehlt in regeln", "common/regeln.chron");
+    }
+    SUBCASE("Szenariodatum") {
+        replace_in_file(dir / "szenarien/westfaelischer_frieden.chron", "    datum   = 1648.10.24\n", "");
+        expect_error(load(dir), "Pflichtfeld 'datum' fehlt in szenario westfaelischer_frieden");
+    }
+    SUBCASE("Block regeln fehlt") {
+        testhilfen::write_file(dir / "common/regeln.chron", "# leer\n");
+        expect_error(load(dir), "Block 'regeln' fehlt", "common/regeln.chron");
+    }
+}
+
+TEST_CASE("Lader: ungültige Werte") {
+    TempDir dir(true);
+    SUBCASE("Steuersatz über dem Maximum") {
+        replace_in_file(dir / kStatesBra, "steuersatz     = 0.10", "steuersatz     = 0.6");
+        expect_error(load(dir), "'steuersatz' muss zwischen 0 und 0.5 liegen (ist 0.6)", kStatesBra, 11);
+    }
+    SUBCASE("Steuersatz über einem abgesenkten Maximum") {
+        replace_in_file(dir / "common/regeln.chron", "steuersatz_max        = 0.5",
+                        "steuersatz_max        = 0.1");
+        expect_error(load(dir), "'steuersatz' muss zwischen 0 und 0.1 liegen (ist 0.12)", kStatesMid);
+    }
+    SUBCASE("Bevölkerung 0") {
+        replace_in_file(dir / kPlacesBra, "bevoelkerung = 12000", "bevoelkerung = 0");
+        expect_error(load(dir), "'bevoelkerung' muss zwischen 1 und 100000000 liegen (ist 0)", kPlacesBra, 8);
+    }
+    SUBCASE("Bevölkerung keine Ganzzahl") {
+        replace_in_file(dir / kPlacesBra, "bevoelkerung = 12000", "bevoelkerung = 12k");
+        expect_error(load(dir), "ungültiger Wert '12k' für 'bevoelkerung'");
+    }
+    SUBCASE("Wahrheitswert") {
+        replace_in_file(dir / kPlacesBra, "stadt        = ja", "stadt        = vielleicht");
+        expect_error(load(dir), "ungültiger Wert 'vielleicht' für 'stadt' (erwartet ja oder nein)");
+    }
+    SUBCASE("Farbe außerhalb 0–255") {
+        replace_in_file(dir / kStatesBra, "{ 58 95 143 }", "{ 58 95 300 }");
+        expect_error(load(dir), "Farbwerte in 'farbe' müssen zwischen 0 und 255 liegen", kStatesBra, 5);
+    }
+    SUBCASE("Farbe mit zwei Werten") {
+        replace_in_file(dir / kStatesBra, "{ 58 95 143 }", "{ 58 95 }");
+        expect_error(load(dir), "'farbe' erwartet drei Zahlen von 0 bis 255");
+    }
+    SUBCASE("Farbe ohne Block") {
+        replace_in_file(dir / kStatesBra, "{ 58 95 143 }", "blau");
+        expect_error(load(dir), "'farbe' erwartet einen Block");
+    }
+    SUBCASE("Datum") {
+        replace_in_file(dir / "szenarien/westfaelischer_frieden.chron", "1648.10.24", "1648.02.30");
+        expect_error(load(dir), "ungültiges Datum '1648.02.30' für 'datum'");
+    }
+    SUBCASE("Lage mit einer Zahl") {
+        replace_in_file(dir / kPlacesBra, "{ 13.40 52.52 }", "{ 13.40 }");
+        expect_error(load(dir), "'lage' erwartet genau zwei Zahlen", kPlacesBra, 6);
+    }
+    SUBCASE("Lage außerhalb der Erde") {
+        replace_in_file(dir / kPlacesBra, "{ 13.40 52.52 }", "{ 13.40 95 }");
+        expect_error(load(dir), "'lage' außerhalb des gültigen Bereichs");
+    }
+    SUBCASE("Schicht") {
+        replace_in_file(dir / "common/berufe.chron", "schicht         = unten",
+                        "schicht         = ganz_unten");
+        expect_error(load(dir), "ungültige Schicht 'ganz_unten'", "common/berufe.chron", 4);
+    }
+    SUBCASE("Verwüstung über 1") {
+        replace_in_file(dir / kPlacesBra, "verwuestung  = 0.4", "verwuestung  = 1.5");
+        expect_error(load(dir), "'verwuestung' muss zwischen 0 und 1 liegen (ist 1.5)");
+    }
+    SUBCASE("Fläche 0") {
+        replace_in_file(dir / kPlacesBra, "flaeche      = 150", "flaeche      = 0");
+        expect_error(load(dir), "'flaeche' muss größer als 0");
+    }
+    SUBCASE("Zahl mit Komma") {
+        replace_in_file(dir / "common/gelaende.chron", "wachstum = 1.05", "wachstum = 1,05");
+        expect_error(load(dir), "ungültiger Wert '1,05' für 'wachstum'", "common/gelaende.chron", 5);
+    }
+    SUBCASE("Konfessionsanteile ergeben nicht 100") {
+        replace_in_file(dir / kPlacesBra, "{ lutherisch = 90 reformiert = 10 }",
+                        "{ lutherisch = 90 reformiert = 20 }");
+        expect_error(load(dir), "die Konfessionsanteile in ort berlin_coelln ergeben 110 %, erwartet 100 %");
+    }
+    SUBCASE("Konfessionsanteil ungültig") {
+        replace_in_file(dir / kPlacesBra, "{ lutherisch = 90 reformiert = 10 }",
+                        "{ lutherisch = 90 reformiert = 10.5 }");
+        expect_error(load(dir), "ungültiger Prozentwert '10.5'");
+    }
+    SUBCASE("Konfession doppelt") {
+        replace_in_file(dir / kPlacesBra, "{ lutherisch = 90 reformiert = 10 }",
+                        "{ lutherisch = 90 lutherisch = 10 }");
+        expect_error(load(dir), "Konfession 'lutherisch' ist in ort berlin_coelln mehrfach angegeben");
+    }
+    SUBCASE("leerer Name") {
+        replace_in_file(dir / kStatesBra, "\"Kurfürstentum Brandenburg\"", "\"\"");
+        expect_error(load(dir), "Feld 'name' darf nicht leer sein", kStatesBra, 3);
+    }
+    SUBCASE("falscher Operator") {
+        replace_in_file(dir / kStatesBra, "schatz         = 20000", "schatz         >= 20000");
+        const LoadResult r = load(dir);
+        expect_error(r, "Feld 'schatz' erwartet '=' statt '>='", kStatesBra, 10);
+        CHECK_FALSE(has_issue(r, "Pflichtfeld 'schatz' fehlt")); // keine Folgemeldung
+    }
+    SUBCASE("Block statt Wert") {
+        replace_in_file(dir / kStatesBra, "\"Kurfürstentum Brandenburg\"", "{ Kurfürstentum Brandenburg }");
+        expect_error(load(dir), "'name' erwartet einen einzelnen Wert, keinen Block");
+    }
+    SUBCASE("Feld doppelt") {
+        replace_in_file(dir / kStatesBra, "    schatz         = 20000\n",
+                        "    schatz         = 20000\n    schatz         = 5\n");
+        expect_error(load(dir), "Feld 'schatz' in staat BRA ist mehrfach angegeben (zuerst in Zeile 10)",
+                     kStatesBra, 11);
+    }
+    SUBCASE("Seuchenverlust Minimum größer als Maximum") {
+        replace_in_file(dir / "common/regeln.chron", "seuche_verlust_min    = 0.04",
+                        "seuche_verlust_min    = 0.2");
+        expect_error(load(dir), "'seuche_verlust_min' (0.2) ist größer als 'seuche_verlust_max' (0.12)");
+    }
+    SUBCASE("Definition ohne Kennung") {
+        replace_in_file(dir / "common/konfessionen.chron", "konfession katholisch {", "konfession {");
+        expect_error(load(dir), "ungültige Definition, erwartet: konfession <kennung> { … }",
+                     "common/konfessionen.chron", 12);
+    }
+}
+
+TEST_CASE("Lader: Summe der Berufsanteile") {
+    TempDir dir(true);
+    SUBCASE("deutlich daneben") {
+        replace_in_file(dir / "common/berufe.chron", "anteil_stadt    = 0.10", "anteil_stadt    = 0.20");
+        expect_error(load(dir), "die Summe aller 'anteil_stadt' ist 1.1", "common/berufe.chron");
+    }
+    SUBCASE("knapp innerhalb der Toleranz") {
+        replace_in_file(dir / "common/berufe.chron", "anteil_stadt    = 0.10", "anteil_stadt    = 0.1005");
+        const LoadResult r = load(dir);
+        INFO(issues_text(r));
+        CHECK(r.ok());
+    }
+    SUBCASE("knapp außerhalb der Toleranz") {
+        replace_in_file(dir / "common/berufe.chron", "anteil_land     = 0.80", "anteil_land     = 0.7985");
+        expect_error(load(dir), "die Summe aller 'anteil_land'");
+    }
+}
+
+TEST_CASE("Lader: doppelte Kennungen") {
+    TempDir dir(true);
+    SUBCASE("Ort") {
+        testhilfen::write_file(dir / "history/orte/40_doppelt.chron",
+                               "ort berlin_coelln {\n name = \"B\" besitzer = BRA gelaende = flussaue\n"
+                               " lage = { 13 52 } flaeche = 1 bevoelkerung = 1 stadt = ja\n"
+                               " konfession = { lutherisch = 100 } verwuestung = 0 quelle = \"x\"\n}\n");
+        expect_error(load(dir),
+                     "doppelte Kennung 'berlin_coelln' für Ort (bereits definiert in "
+                     "history/orte/10_brandenburg.chron:2)",
+                     "history/orte/40_doppelt.chron", 1);
+    }
+    SUBCASE("Staat") {
+        replace_in_file(dir / kStatesMid, "staat ANH {", "staat SAX {");
+        expect_error(load(dir), "doppelte Kennung 'SAX' für Staat", kStatesMid, 16);
+    }
+    SUBCASE("Gelände") {
+        replace_in_file(dir / "common/gelaende.chron", "gelaende sandboden {", "gelaende ackerland {");
+        expect_error(load(dir), "doppelte Kennung 'ackerland' für Gelände");
+    }
+    SUBCASE("Szenario") {
+        replace_in_file(dir / "szenarien/jahresbeginn.chron", "jahresbeginn_1650", "westfaelischer_frieden");
+        expect_error(load(dir), "doppelte Kennung 'westfaelischer_frieden' für Szenario");
+    }
+}
+
+TEST_CASE("Lader: unbekannte Verweise") {
+    TempDir dir(true);
+    SUBCASE("Besitzer") {
+        replace_in_file(dir / kPlacesBra, "    besitzer     = BRA\n    gelaende     = sandboden",
+                        "    besitzer     = XYZ\n    gelaende     = sandboden");
+        expect_error(load(dir), "unbekannter Staat 'XYZ' als Besitzer von ort potsdam", kPlacesBra, 17);
+    }
+    SUBCASE("Gelände") {
+        replace_in_file(dir / kPlacesBra, "gelaende     = sandboden", "gelaende     = sumpf");
+        expect_error(load(dir), "unbekanntes Gelände 'sumpf' in ort potsdam");
+    }
+    SUBCASE("Konfession des Herrscherhauses") {
+        replace_in_file(dir / kStatesBra, "konfession     = reformiert", "konfession     = calvinistisch");
+        expect_error(load(dir), "unbekannte Konfession 'calvinistisch' in staat BRA", kStatesBra, 9);
+    }
+    SUBCASE("Konfession im Ort") {
+        replace_in_file(dir / kPlacesSax, "katholisch = 5", "orthodox = 5");
+        expect_error(load(dir), "unbekannte Konfession 'orthodox' in ort dresden");
+    }
+    SUBCASE("Hauptstadt eines anderen Staates") {
+        replace_in_file(dir / kStatesBra, "hauptstadt     = berlin_coelln", "hauptstadt     = dresden");
+        expect_error(load(dir), "Hauptstadt 'dresden' von BRA gehört nicht zu diesem Staat", kStatesBra, 6);
+    }
+    SUBCASE("unbekannte Hauptstadt") {
+        replace_in_file(dir / kStatesBra, "hauptstadt     = berlin_coelln", "hauptstadt     = atlantis");
+        expect_error(load(dir), "unbekannter Ort 'atlantis' als Hauptstadt von BRA");
+    }
+    SUBCASE("Spieler") {
+        replace_in_file(dir / "szenarien/westfaelischer_frieden.chron", "spieler = BRA", "spieler = XYZ");
+        expect_error(load(dir), "unbekannter Staat 'XYZ' als Spieler");
+    }
+}
+
+TEST_CASE("Lader: Form von Kennungen und Tags") {
+    TempDir dir(true);
+    SUBCASE("Staatstag mit Kleinbuchstaben") {
+        replace_in_file(dir / kStatesMid, "staat ANH {", "staat Anh {");
+        expect_error(load(dir), "ungültiger Staatstag 'Anh'");
+    }
+    SUBCASE("Staatstag zu lang") {
+        replace_in_file(dir / kStatesMid, "staat ANH {", "staat ANHAL {");
+        expect_error(load(dir), "ungültiger Staatstag 'ANHAL'");
+    }
+    SUBCASE("Ortskennung mit Großbuchstaben") {
+        replace_in_file(dir / kPlacesSax, "ort leipzig {", "ort Leipzig {");
+        expect_error(load(dir), "ungültige Ortskennung 'Leipzig'");
+    }
+}
+
+TEST_CASE("Lader: Syntaxfehler mit Datei, Zeile und Spalte") {
+    TempDir dir(true);
+    replace_in_file(dir / "common/konfessionen.chron", "\"Lutherisch\"", "\"Lutherisch");
+    const LoadResult r = load(dir);
+    expect_error(r, "nicht beendete Zeichenkette (Spalte 13)", "common/konfessionen.chron", 3);
+    // Der Rest der Datei wird trotzdem gelesen: keine Folgefehler für andere Konfessionen.
+    CHECK_FALSE(has_issue(r, "unbekannte Konfession"));
+}
+
+TEST_CASE("Lader: fehlende Dateien und Ordner") {
+    TempDir dir(true);
+    SUBCASE("Datei") {
+        std::filesystem::remove(dir / "common/berufe.chron");
+        expect_error(load(dir), "Datei fehlt", "common/berufe.chron", 0);
+    }
+    SUBCASE("Ordner") {
+        std::filesystem::remove_all(dir / "history/orte");
+        expect_error(load(dir), "Ordner fehlt", "history/orte");
+    }
+    SUBCASE("leerer Szenarioordner") {
+        std::filesystem::remove(dir / "szenarien/westfaelischer_frieden.chron");
+        std::filesystem::remove(dir / "szenarien/jahresbeginn.chron");
+        const LoadResult r = load(dir);
+        expect_error(r, "Ordner enthält keine .chron-Dateien", "szenarien");
+        CHECK(has_issue(r, "keine Szenarien vorhanden"));
+    }
+    SUBCASE("Datenordner") {
+        expect_error(uhrwerk::load_world(dir / "gibt_es_nicht"), "Datenordner nicht gefunden");
+    }
+    SUBCASE("andere Dateien werden ignoriert") {
+        testhilfen::write_file(dir / "history/orte/notizen.txt", "kein { gültiges ! Skript");
+        std::filesystem::create_directories(dir / "history/orte/unterordner.chron");
+        const LoadResult r = load(dir);
+        INFO(issues_text(r));
+        CHECK(r.ok());
+        CHECK(r.issues.empty());
+    }
+}
+
+TEST_CASE("Lader: Dateien werden nach Namen sortiert geladen") {
+    TempDir dir(true);
+    testhilfen::write_file(
+        dir / "history/orte/05_cottbus.chron",
+        "ort cottbus {\n name = \"Cottbus\" besitzer = BRA gelaende = sandboden\n"
+        " lage = { 14.33 51.76 } flaeche = 160 bevoelkerung = 2000 stadt = ja\n"
+        " konfession = { lutherisch = 100 } verwuestung = 0.5 quelle = \"Testdaten\"\n}\n");
+    const LoadResult r = load(dir);
+    INFO(issues_text(r));
+    REQUIRE(r.ok());
+    const World& w = *r.world;
+    REQUIRE(w.locations.size() == 6);
+    CHECK(w.locations[0].id == "cottbus");
+    CHECK(w.locations[1].id == "berlin_coelln");
+    CHECK(w.locations[0].first_pop == 0);
+    CHECK(w.locations[1].first_pop == w.locations[0].pop_count);
+    CHECK(w.states[0].capital == 1); // Hauptstadtindex folgt der neuen Reihenfolge
+}
+
+TEST_CASE("Lader: LoadIssue::to_string") {
+    CHECK(uhrwerk::LoadIssue{"a.chron", 12, "Nachricht", true}.to_string() ==
+          "a.chron:12: Fehler: Nachricht");
+    CHECK(uhrwerk::LoadIssue{"a.chron", 12, "Nachricht", false}.to_string() ==
+          "a.chron:12: Warnung: Nachricht");
+    CHECK(uhrwerk::LoadIssue{"a.chron", 0, "Nachricht", true}.to_string() == "a.chron: Fehler: Nachricht");
+    CHECK(uhrwerk::LoadIssue{"", 0, "Nachricht", true}.to_string() == "Fehler: Nachricht");
+}
+
+// ─── find_data_dir ──────────────────────────────────────────────────────────
+
+#ifndef _WIN32
+namespace {
+
+/// Setzt UHRWERK_DATEN für die Dauer eines Tests (nullptr = entfernen) und stellt den alten Wert wieder her.
+class EnvGuard {
+public:
+    explicit EnvGuard(const char* value) {
+        if (const char* old = std::getenv("UHRWERK_DATEN")) {
+            old_ = old;
+        }
+        if (value != nullptr) {
+            setenv("UHRWERK_DATEN", value, 1);
+        } else {
+            unsetenv("UHRWERK_DATEN");
+        }
+    }
+    ~EnvGuard() {
+        if (old_) {
+            setenv("UHRWERK_DATEN", old_->c_str(), 1);
+        } else {
+            unsetenv("UHRWERK_DATEN");
+        }
+    }
+    EnvGuard(const EnvGuard&) = delete;
+    EnvGuard& operator=(const EnvGuard&) = delete;
+
+private:
+    std::optional<std::string> old_;
+};
+
+bool same_dir(const std::optional<std::filesystem::path>& a, const std::filesystem::path& b) {
+    return a.has_value() && std::filesystem::equivalent(*a, b);
+}
+
+} // namespace
+
+TEST_CASE("find_data_dir: Suche aufwärts") {
+    const EnvGuard env(nullptr);
+    TempDir dir;
+    std::filesystem::create_directories(dir / "data/szenarien");
+    std::filesystem::create_directories(dir / "a/b/c");
+    std::filesystem::create_directories(dir / "leer/data"); // ohne szenarien → kein Treffer
+
+    CHECK(same_dir(uhrwerk::find_data_dir(dir / "a/b/c"), dir / "data"));
+    CHECK(same_dir(uhrwerk::find_data_dir(dir.path()), dir / "data"));
+    CHECK(same_dir(uhrwerk::find_data_dir(dir / "data/szenarien"), dir / "data"));
+    CHECK(same_dir(uhrwerk::find_data_dir(dir / "leer"), dir / "data"));
+    CHECK(same_dir(uhrwerk::find_data_dir(dir / "a/b/c/"), dir / "data"));
+
+    const auto found = uhrwerk::find_data_dir(dir / "a/b/c");
+    REQUIRE(found.has_value());
+    CHECK(found->filename() == "data");
+    CHECK(found->is_absolute());
+}
+
+TEST_CASE("find_data_dir: Umgebungsvariable UHRWERK_DATEN hat Vorrang") {
+    TempDir dir;
+    std::filesystem::create_directories(dir / "data/szenarien");
+    {
+        const EnvGuard env("/irgendwo/daten");
+        CHECK(uhrwerk::find_data_dir(dir.path()) == std::filesystem::path("/irgendwo/daten"));
+    }
+    {
+        const EnvGuard env(""); // leer → ignoriert
+        CHECK(same_dir(uhrwerk::find_data_dir(dir.path()), dir / "data"));
+    }
+}
+#endif

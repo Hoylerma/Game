@@ -1,0 +1,26 @@
+# Testdaten: Orte Brandenburgs
+ort berlin_coelln {
+    name         = "Berlin-Cölln"
+    besitzer     = BRA
+    gelaende     = flussaue
+    lage         = { 13.40 52.52 }
+    flaeche      = 150
+    bevoelkerung = 12000
+    stadt        = ja
+    konfession   = { lutherisch = 90 reformiert = 10 }
+    verwuestung  = 0.4
+    quelle       = "Testdaten, geschätzt"
+}
+
+ort potsdam {
+    name         = "Potsdam"
+    besitzer     = BRA
+    gelaende     = sandboden
+    lage         = { 13.06 52.40 }
+    flaeche      = 400
+    bevoelkerung = 1500
+    stadt        = nein
+    konfession   = { lutherisch = 100 }
+    verwuestung  = 0.6
+    quelle       = "Testdaten, geschätzt"
+}

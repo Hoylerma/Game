@@ -1,0 +1,28 @@
+# Testdaten: zwei Staaten in einer Datei (Reihenfolge der Datei zählt)
+staat SAX {
+    name           = "Kurfürstentum Sachsen"
+    kurzname       = "Sachsen"
+    farbe          = { 60 140 70 }
+    hauptstadt     = dresden
+    regierungsform = staendische_monarchie
+    herrscher      = "Johann Georg I."
+    konfession     = lutherisch
+    schatz         = 50000
+    steuersatz     = 0.12
+    hofhaltung     = 60000
+    quelle         = "Testdaten, geschätzt"
+}
+
+staat ANH {
+    name           = "Fürstentum Anhalt-Dessau"
+    kurzname       = "Anhalt"
+    farbe          = { 150 60 60 }
+    hauptstadt     = dessau
+    regierungsform = absolute_monarchie
+    herrscher      = "Johann Kasimir"
+    konfession     = reformiert
+    schatz         = 3000
+    steuersatz     = 0.08
+    hofhaltung     = 4000
+    quelle         = "Testdaten, geschätzt"
+}

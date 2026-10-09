@@ -1,0 +1,577 @@
+// Tests für die Simulation: Determinismus, Staffelung, Befehle, Formeln, Ereignisse.
+
+#include "test_hilfen.hpp"
+#include "uhrwerk/rng.hpp"
+#include "uhrwerk/simulation.hpp"
+
+#include <cstddef>
+#include <cstdint>
+#include <doctest/doctest.h>
+#include <string>
+#include <utility>
+#include <vector>
+
+using uhrwerk::Command;
+using uhrwerk::CommandType;
+using uhrwerk::Date;
+using uhrwerk::Fixed;
+using uhrwerk::Index;
+using uhrwerk::kNone;
+using uhrwerk::Pcg32;
+using uhrwerk::RngStream;
+using uhrwerk::SimConfig;
+using uhrwerk::Simulation;
+using uhrwerk::World;
+
+namespace {
+
+Fixed fx(const char* text) {
+    const auto value = Fixed::parse(text);
+    REQUIRE(value.has_value());
+    return *value;
+}
+
+Command set_tax(Index state, Fixed value) {
+    Command c;
+    c.type = CommandType::SetTaxRate;
+    c.state = state;
+    c.value = value;
+    return c;
+}
+
+/// Kleine handgebaute Welt mit Werten, die im Binärformat exakt darstellbar sind.
+/// Ein Staat TST, ein Ort mit zwei Blöcken (1200 Bauern, 100 Adlige), Datum 1.3.1650.
+World make_small_world() {
+    World w;
+    w.scenario.id = "test";
+    w.date = Date{1650, 3, 1};
+    w.rules.devastation_yield_loss = Fixed::from_ratio(1, 2);
+    w.rules.tax_rate_max = Fixed::from_ratio(1, 2);
+
+    uhrwerk::TerrainType acker;
+    acker.id = "acker";
+    acker.growth_factor = Fixed::one();
+    acker.yield_factor = Fixed::from_ratio(5, 4);
+    w.terrains.push_back(acker);
+
+    uhrwerk::Confession luth;
+    luth.id = "luth";
+    w.confessions.push_back(luth);
+
+    uhrwerk::Profession bauern;
+    bauern.id = "bauern";
+    bauern.yield_per_capita = Fixed::from_int(6);
+    bauern.taxable = true;
+    w.professions.push_back(bauern);
+
+    uhrwerk::Profession adel;
+    adel.id = "adel";
+    adel.yield_per_capita = Fixed::from_int(20);
+    adel.taxable = false;
+    w.professions.push_back(adel);
+
+    uhrwerk::State s;
+    s.tag = "TST";
+    s.short_name = "Test";
+    s.treasury = Fixed::from_int(1000);
+    s.tax_rate = Fixed::from_ratio(1, 4);
+    s.court_expenses = Fixed::from_int(1200);
+    s.capital = 0;
+    w.states.push_back(s);
+
+    uhrwerk::Location l;
+    l.id = "ort";
+    l.name = "Testort";
+    l.owner = 0;
+    l.terrain = 0;
+    l.devastation = Fixed::from_ratio(1, 2);
+    l.first_pop = 0;
+    l.pop_count = 2;
+    w.locations.push_back(l);
+
+    uhrwerk::PopBlock p;
+    p.location = 0;
+    p.confession = 0;
+    p.profession = 0;
+    p.size = Fixed::from_int(1200);
+    w.pops.push_back(p);
+    p.profession = 1;
+    p.size = Fixed::from_int(100);
+    w.pops.push_back(p);
+    return w;
+}
+
+/// Fixture ohne Seuchen (damit sich die Bevölkerung nur durch die Demografie ändert).
+World fixture_without_plague() {
+    World w = testhilfen::load_fixture();
+    w.rules.plague_chance = Fixed::zero();
+    return w;
+}
+
+void step_until(Simulation& sim, const Date& date) {
+    while (sim.world().date < date) {
+        sim.step_day();
+    }
+    REQUIRE(sim.world().date == date);
+}
+
+/// Prüft Tag für Tag: Ort i ändert seine Bevölkerung genau an Monatstag (i % 28) + 1,
+/// Staat j seinen Schatz genau an Monatstag (j % 28) + 1.
+void check_staggering(Simulation& sim, int days) {
+    for (int d = 0; d < days; ++d) {
+        const World& w = sim.world();
+        const std::int32_t today = w.date.day;
+        std::vector<Fixed> population;
+        for (std::size_t i = 0; i < w.locations.size(); ++i) {
+            population.push_back(w.location_population(static_cast<Index>(i)));
+        }
+        std::vector<Fixed> treasury;
+        for (const uhrwerk::State& s : w.states) {
+            treasury.push_back(s.treasury);
+        }
+        const std::string date = uhrwerk::format_date(w.date);
+
+        sim.step_day();
+
+        for (std::size_t i = 0; i < population.size(); ++i) {
+            const bool changed = sim.world().location_population(static_cast<Index>(i)) != population[i];
+            const bool due = static_cast<std::int32_t>(i % 28) + 1 == today;
+            INFO("Ort " << i << " am " << date);
+            CHECK(changed == due);
+        }
+        for (std::size_t j = 0; j < treasury.size(); ++j) {
+            const bool changed = sim.world().states[j].treasury != treasury[j];
+            const bool due = static_cast<std::int32_t>(j % 28) + 1 == today;
+            INFO("Staat " << j << " am " << date);
+            CHECK(changed == due);
+        }
+    }
+}
+
+} // namespace
+
+// ─── Grundlagen ─────────────────────────────────────────────────────────────
+
+TEST_CASE("Simulation: Tage zählen und Datum weiterschalten") {
+    Simulation sim(testhilfen::load_fixture());
+    CHECK(sim.days_elapsed() == 0);
+    CHECK(sim.config().seed == 1648);
+    CHECK(sim.world().date == Date{1648, 10, 24});
+    sim.step_day();
+    CHECK(sim.days_elapsed() == 1);
+    CHECK(sim.world().date == Date{1648, 10, 25});
+    sim.step_days(0);
+    sim.step_days(-3);
+    CHECK(sim.days_elapsed() == 1);
+    sim.step_days(69); // bis 1.1.1649 einschließlich
+    CHECK(sim.world().date == Date{1649, 1, 2});
+    CHECK(sim.days_elapsed() == 70);
+}
+
+TEST_CASE("Simulation: Determinismus") {
+    World base = testhilfen::load_fixture();
+    base.rules.plague_chance = Fixed::from_ratio(1, 2); // viele Ereignisse, damit Seeds sichtbar werden
+
+    Simulation a(base, SimConfig{1648});
+    Simulation b(base, SimConfig{1648});
+    Simulation c(base, SimConfig{1649});
+    CHECK(a.checksum() == b.checksum());
+    CHECK(a.checksum() != c.checksum()); // Zufallsströme gehören zum Zustand
+
+    std::uint64_t previous = a.checksum();
+    for (int year = 0; year < 10; ++year) {
+        a.step_days(365);
+        b.step_days(365);
+        c.step_days(365);
+        INFO("Jahr " << year + 1);
+        CHECK(a.checksum() == b.checksum());
+        CHECK(a.checksum() != previous);
+        previous = a.checksum();
+    }
+    CHECK(a.checksum() != c.checksum());
+
+    // Gleicher Seed: identische Chronik; anderer Seed: andere Ereignisse.
+    REQUIRE(a.world().chronicle.size() == b.world().chronicle.size());
+    for (std::size_t i = 0; i < a.world().chronicle.size(); ++i) {
+        CHECK(a.world().chronicle[i].text == b.world().chronicle[i].text);
+        CHECK(a.world().chronicle[i].date == b.world().chronicle[i].date);
+    }
+    CHECK_FALSE(a.world().chronicle.empty());
+    bool chronicle_differs = a.world().chronicle.size() != c.world().chronicle.size();
+    for (std::size_t i = 0; !chronicle_differs && i < a.world().chronicle.size(); ++i) {
+        chronicle_differs = a.world().chronicle[i].text != c.world().chronicle[i].text ||
+                            a.world().chronicle[i].location != c.world().chronicle[i].location;
+    }
+    CHECK(chronicle_differs);
+
+    // Ein neu geladener Datensatz ergibt denselben Verlauf (deterministischer Lader).
+    World reloaded = testhilfen::load_fixture();
+    reloaded.rules.plague_chance = Fixed::from_ratio(1, 2);
+    Simulation d(std::move(reloaded), SimConfig{1648});
+    d.step_days(3650);
+    CHECK(d.checksum() == a.checksum());
+}
+
+TEST_CASE("Simulation: Prüfsumme erfasst den veränderlichen Zustand") {
+    const World base = testhilfen::load_fixture();
+    const std::uint64_t reference = Simulation(base).checksum();
+
+    World w = base;
+    w.states[1].treasury += Fixed::from_raw(1);
+    CHECK(Simulation(w).checksum() != reference);
+
+    w = base;
+    w.pops[17].size += Fixed::from_raw(1);
+    CHECK(Simulation(w).checksum() != reference);
+
+    w = base;
+    w.locations[3].devastation -= Fixed::from_raw(1);
+    CHECK(Simulation(w).checksum() != reference);
+
+    w = base;
+    w.chronicle.push_back(uhrwerk::ChronicleEntry{w.date, "Eintrag", kNone, kNone});
+    CHECK(Simulation(w).checksum() != reference);
+
+    w = base;
+    w.date = uhrwerk::next_day(w.date);
+    CHECK(Simulation(w).checksum() != reference);
+
+    Simulation pending(base);
+    pending.submit(set_tax(0, Fixed::from_ratio(1, 5)));
+    CHECK(pending.checksum() != reference);
+
+    CHECK(Simulation(base).checksum() == reference);
+}
+
+// ─── Staffelung ─────────────────────────────────────────────────────────────
+
+TEST_CASE("Simulation: Staffelung auf der Fixture") {
+    Simulation sim(fixture_without_plague());
+    check_staggering(sim, 75); // über einen Monatswechsel und den Jahreswechsel 1649
+}
+
+TEST_CASE("Simulation: Staffelung mit mehr als 28 Orten") {
+    World w = make_small_world();
+    w.rules.growth_base = Fixed::from_ratio(1, 8);
+    w.locations.clear();
+    w.pops.clear();
+    for (int i = 0; i < 30; ++i) {
+        uhrwerk::Location l;
+        l.id = "ort" + std::to_string(i);
+        l.owner = 0;
+        l.terrain = 0;
+        l.first_pop = i;
+        l.pop_count = 1;
+        w.locations.push_back(l);
+        uhrwerk::PopBlock p;
+        p.location = i;
+        p.profession = 0;
+        p.confession = 0;
+        p.size = Fixed::from_int(1000);
+        w.pops.push_back(p);
+    }
+    Simulation sim(std::move(w));
+    check_staggering(sim, 62); // März und April 1650
+    // Orte 0 und 28 rechnen beide am 1., Orte 1 und 29 am 2.: gleiche Größe nach zwei Monaten.
+    CHECK(sim.world().pops[0].size == sim.world().pops[28].size);
+    CHECK(sim.world().pops[1].size == sim.world().pops[29].size);
+}
+
+// ─── Befehle ────────────────────────────────────────────────────────────────
+
+TEST_CASE("Simulation: Steuerbefehl") {
+    Simulation sim(testhilfen::load_fixture());
+    const Fixed original = sim.world().states[0].tax_rate;
+
+    SUBCASE("gültig: wird am nächsten Tag ausgeführt und vermerkt") {
+        sim.submit(set_tax(0, Fixed::from_ratio(1, 5)));
+        CHECK(sim.world().states[0].tax_rate == original); // noch nicht ausgeführt
+        sim.step_day();
+        CHECK(sim.world().states[0].tax_rate == Fixed::from_ratio(1, 5));
+        REQUIRE(sim.world().chronicle.size() == 1);
+        const uhrwerk::ChronicleEntry& e = sim.world().chronicle[0];
+        CHECK(e.text == "Brandenburg legt den Steuersatz auf 20 % fest.");
+        CHECK(e.date == Date{1648, 10, 24});
+        CHECK(e.state == 0);
+        CHECK(e.location == kNone);
+    }
+    SUBCASE("Grenzwerte 0 und Maximum sind gültig") {
+        sim.submit(set_tax(1, Fixed::zero()));
+        sim.submit(set_tax(2, sim.world().rules.tax_rate_max));
+        sim.step_day();
+        CHECK(sim.world().states[1].tax_rate == Fixed::zero());
+        CHECK(sim.world().states[2].tax_rate == fx("0.5"));
+        REQUIRE(sim.world().chronicle.size() == 2);
+        CHECK(sim.world().chronicle[0].text == "Sachsen legt den Steuersatz auf 0 % fest.");
+        CHECK(sim.world().chronicle[1].text == "Anhalt legt den Steuersatz auf 50 % fest.");
+    }
+    SUBCASE("ungültig: wird verworfen und nicht vermerkt") {
+        const std::uint64_t untouched_after_step = [] {
+            Simulation reference(testhilfen::load_fixture());
+            reference.step_day();
+            return reference.checksum();
+        }();
+        sim.submit(set_tax(-1, Fixed::from_ratio(1, 5)));
+        sim.submit(set_tax(kNone, Fixed::from_ratio(1, 5)));
+        sim.submit(set_tax(3, Fixed::from_ratio(1, 5)));
+        sim.submit(set_tax(0, -Fixed::from_raw(1)));
+        sim.submit(set_tax(0, sim.world().rules.tax_rate_max + Fixed::from_raw(1)));
+        sim.submit(set_tax(0, Fixed::from_int(5)));
+        sim.step_day();
+        CHECK(sim.world().states[0].tax_rate == original);
+        CHECK(sim.world().chronicle.empty());
+        CHECK(sim.checksum() == untouched_after_step); // als hätte es die Befehle nie gegeben
+    }
+    SUBCASE("mehrere Befehle an einem Tag: der letzte gilt, ein Eintrag") {
+        sim.submit(set_tax(0, Fixed::from_ratio(1, 5)));
+        sim.submit(set_tax(0, Fixed::from_ratio(3, 10)));
+        sim.step_day();
+        CHECK(sim.world().states[0].tax_rate == Fixed::from_ratio(3, 10));
+        REQUIRE(sim.world().chronicle.size() == 1);
+        CHECK(sim.world().chronicle[0].text == "Brandenburg legt den Steuersatz auf 30 % fest.");
+    }
+    SUBCASE("unveränderter Steuersatz wird nicht vermerkt") {
+        sim.submit(set_tax(0, original));
+        sim.step_day();
+        CHECK(sim.world().chronicle.empty());
+    }
+    SUBCASE("neuer Steuersatz gilt schon für die Wirtschaft desselben Tages") {
+        step_until(sim, Date{1648, 11, 1}); // Rechentag von BRA (Index 0)
+        Simulation twin = sim;
+        sim.submit(set_tax(0, Fixed::from_ratio(1, 5)));
+        sim.step_day();
+        twin.step_day();
+        CHECK(sim.world().states[0].last_month_income > twin.world().states[0].last_month_income);
+    }
+}
+
+// ─── Formeln ────────────────────────────────────────────────────────────────
+
+TEST_CASE("Simulation: Wirtschaftsformel exakt gegen Handrechnung") {
+    // Handrechnung (Abschnitt 5):
+    //   Bauern: 1200 × 6 × 1,25 × (1 − 0,5 × 0,5) / 12 = 562,5   Steuer × 0,25 = 140,625
+    //   Adel:    100 × 20 × 1,25 × 0,75 / 12          = 156,25  steuerfrei
+    //   Einnahmen 140,625; Ausgaben 1200 / 12 = 100; Schatz 1000 + 40,625 = 1040,625
+    Simulation sim(make_small_world()); // 1.3.1650: Rechentag von Ort 0 und Staat 0
+
+    const uhrwerk::LocationEconomy before = sim.location_economy(0);
+    CHECK(before.production == fx("718.75"));
+    CHECK(before.taxes == fx("140.625"));
+
+    sim.step_day();
+    const uhrwerk::State& s = sim.world().states[0];
+    CHECK(s.last_month_income == fx("140.625"));
+    CHECK(s.last_month_expenses == Fixed::from_int(100));
+    CHECK(s.treasury == fx("1040.625"));
+    // Demografie mit Rate 0 lässt die Blöcke unverändert.
+    CHECK(sim.world().pops[0].size == Fixed::from_int(1200));
+    CHECK(sim.world().pops[1].size == Fixed::from_int(100));
+
+    // Nur am Rechentag: der Rest des Monats ändert nichts.
+    sim.step_days(30); // bis 31.3. einschließlich
+    CHECK(sim.world().date == Date{1650, 4, 1});
+    CHECK(sim.world().states[0].treasury == fx("1040.625"));
+    sim.step_day(); // 1.4.
+    CHECK(sim.world().states[0].treasury == fx("1081.25"));
+
+    // location_economy ändert nichts.
+    const std::uint64_t checksum = sim.checksum();
+    (void)sim.location_economy(0);
+    (void)sim.location_economy(5);
+    CHECK(sim.checksum() == checksum);
+    CHECK(sim.location_economy(-1).production == Fixed::zero());
+    CHECK(sim.location_economy(1).taxes == Fixed::zero());
+}
+
+TEST_CASE("Simulation: Wirtschaft auf der Fixture entspricht der Formel") {
+    Simulation sim(fixture_without_plague());
+    step_until(sim, Date{1648, 11, 2}); // Rechentag von SAX (Index 1)
+    const World snapshot = sim.world();
+    const uhrwerk::State& sax = snapshot.states[1];
+
+    Fixed income;
+    for (const Index li : snapshot.state_locations(1)) {
+        const uhrwerk::Location& loc = snapshot.locations[static_cast<std::size_t>(li)];
+        const uhrwerk::TerrainType& terrain = snapshot.terrains[static_cast<std::size_t>(loc.terrain)];
+        for (Index p = loc.first_pop; p < loc.first_pop + loc.pop_count; ++p) {
+            const uhrwerk::PopBlock& pop = snapshot.pops[static_cast<std::size_t>(p)];
+            const uhrwerk::Profession& prof = snapshot.professions[static_cast<std::size_t>(pop.profession)];
+            const Fixed production =
+                pop.size * prof.yield_per_capita * terrain.yield_factor *
+                (Fixed::one() - loc.devastation * snapshot.rules.devastation_yield_loss) /
+                Fixed::from_int(12);
+            if (prof.taxable) {
+                income += production * sax.tax_rate;
+            }
+        }
+    }
+    const Fixed expenses = sax.court_expenses / Fixed::from_int(12);
+
+    sim.step_day();
+    const uhrwerk::State& after = sim.world().states[1];
+    CHECK(after.last_month_income == income);
+    CHECK(after.last_month_expenses == expenses);
+    CHECK(after.treasury == sax.treasury + (income - expenses));
+    // Plausibilität: rund 6.000 Reichstaler Steuern im Monat.
+    CHECK(income > Fixed::from_int(5000));
+    CHECK(income < Fixed::from_int(7000));
+
+    // Summe der Ortssteuern = Staatseinnahmen (Orte von SAX haben heute nicht gerechnet).
+    Fixed taxes;
+    for (const Index li : sim.world().state_locations(1)) {
+        taxes += sim.location_economy(li).taxes;
+    }
+    CHECK(taxes == income);
+}
+
+TEST_CASE("Simulation: Demografie exakt gegen Handrechnung") {
+    World w = make_small_world();
+    // rate = (1/8 + 1/4 × 1/2) × 1 − 1/2 × 1/4 = 1/8
+    w.rules.growth_base = Fixed::from_ratio(1, 8);
+    w.rules.growth_reconstruction = Fixed::from_ratio(1, 4);
+    w.rules.growth_tax_pressure = Fixed::from_ratio(1, 2);
+    Simulation sim(std::move(w));
+    sim.step_day();
+    // 1200 + 1200 × 1/8 / 12 = 1212,5
+    CHECK(sim.world().pops[0].size == fx("1212.5"));
+    // 100 + 12,5 / 12: 819200 / 12 = 68266,67 → abgeschnitten 68266
+    CHECK(sim.world().pops[1].size.raw() == 100 * 65536 + 68266);
+
+    SUBCASE("Bevölkerung fällt nie unter 0") {
+        World shrinking = make_small_world();
+        shrinking.rules.growth_base = Fixed::from_int(-24); // Rate −24: size + size × (−24) / 12 = −size
+        Simulation s2(std::move(shrinking));
+        s2.step_day();
+        CHECK(s2.world().pops[0].size == Fixed::zero());
+        CHECK(s2.world().pops[1].size == Fixed::zero());
+    }
+    SUBCASE("Gelände und Steuerdruck") {
+        World other = make_small_world();
+        other.rules.growth_base = Fixed::from_ratio(1, 4);
+        other.rules.growth_tax_pressure = Fixed::from_ratio(1, 2);
+        other.terrains[0].growth_factor = Fixed::from_ratio(1, 2);
+        // rate = (1/4 + 0) × 1/2 − 1/2 × 1/4 = 0 → keine Änderung
+        Simulation s3(std::move(other));
+        s3.step_day();
+        CHECK(s3.world().pops[0].size == Fixed::from_int(1200));
+    }
+}
+
+// ─── Jahresereignisse ───────────────────────────────────────────────────────
+
+TEST_CASE("Simulation: Seuche mit Wahrscheinlichkeit 1 und Chronikeintrag") {
+    World w = testhilfen::load_fixture();
+    w.rules.plague_chance = Fixed::one();
+    // Ohne Wachstum ändert sich die Bevölkerung nur durch die Seuche.
+    w.rules.growth_base = Fixed::zero();
+    w.rules.growth_reconstruction = Fixed::zero();
+    w.rules.growth_tax_pressure = Fixed::zero();
+    Simulation sim(std::move(w), SimConfig{4711});
+
+    step_until(sim, Date{1649, 1, 1});
+    CHECK(sim.world().chronicle.empty());
+    const World before = sim.world();
+    sim.step_day();
+    const World& after = sim.world();
+
+    // Erwartung mit eigenem Ereignisstrom nachrechnen: chance(1) verbraucht nichts, uniform() eine Zahl je
+    // Ort.
+    Pcg32 events(4711, RngStream::Ereignisse);
+    REQUIRE(after.chronicle.size() == before.locations.size());
+    for (std::size_t i = 0; i < before.locations.size(); ++i) {
+        const uhrwerk::Location& loc = before.locations[i];
+        const Fixed loss = events.uniform(before.rules.plague_loss_min, before.rules.plague_loss_max);
+        CHECK(loss >= fx("0.04"));
+        CHECK(loss < fx("0.12"));
+        for (Index p = loc.first_pop; p < loc.first_pop + loc.pop_count; ++p) {
+            const Fixed old_size = before.pops[static_cast<std::size_t>(p)].size;
+            CHECK(after.pops[static_cast<std::size_t>(p)].size == old_size - old_size * loss);
+        }
+        const uhrwerk::ChronicleEntry& e = after.chronicle[i];
+        const std::int64_t percent = (loss * Fixed::from_int(100)).round();
+        CHECK(percent >= 4);
+        CHECK(percent <= 12);
+        CHECK(e.text ==
+              "Seuche in " + loc.name + ": " + std::to_string(percent) + " % der Bevölkerung sterben.");
+        CHECK(e.date == Date{1649, 1, 1});
+        CHECK(e.location == static_cast<Index>(i));
+        CHECK(e.state == loc.owner);
+    }
+    CHECK(after.chronicle[0].text.rfind("Seuche in Berlin-Cölln: ", 0) == 0);
+
+    // Am Folgetag keine weiteren Seuchen.
+    sim.step_day();
+    CHECK(sim.world().chronicle.size() == before.locations.size());
+}
+
+TEST_CASE("Simulation: Seuche mit erhöhter Wahrscheinlichkeit folgt dem Ereignisstrom") {
+    World w = testhilfen::load_fixture();
+    w.rules.plague_chance = Fixed::from_ratio(1, 2);
+    const std::size_t locations = w.locations.size();
+    const Fixed chance = w.rules.plague_chance;
+    const Fixed lo = w.rules.plague_loss_min;
+    const Fixed hi = w.rules.plague_loss_max;
+    Simulation sim(std::move(w));
+    step_until(sim, Date{1661, 1, 2}); // Jahreswechsel 1649 … 1661
+
+    Pcg32 events(SimConfig{}.seed, RngStream::Ereignisse);
+    std::vector<std::pair<Index, std::string>> expected;
+    for (int year = 1649; year <= 1661; ++year) {
+        for (std::size_t i = 0; i < locations; ++i) {
+            if (events.chance(chance)) {
+                const Fixed loss = events.uniform(lo, hi);
+                expected.emplace_back(static_cast<Index>(i),
+                                      std::to_string((loss * Fixed::from_int(100)).round()) + " % der");
+            }
+        }
+    }
+    const auto& chronicle = sim.world().chronicle;
+    REQUIRE(chronicle.size() == expected.size());
+    CHECK(expected.size() > 15); // 13 Jahre × 5 Orte × ½
+    CHECK(expected.size() < 50);
+    for (std::size_t k = 0; k < expected.size(); ++k) {
+        CHECK(chronicle[k].location == expected[k].first);
+        CHECK(chronicle[k].text.find(expected[k].second) != std::string::npos);
+        CHECK(chronicle[k].date.month == 1);
+        CHECK(chronicle[k].date.day == 1);
+    }
+}
+
+TEST_CASE("Simulation: keine Seuchen bei Wahrscheinlichkeit 0") {
+    Simulation sim(fixture_without_plague());
+    sim.step_days(50 * 365);
+    CHECK(sim.world().chronicle.empty());
+}
+
+TEST_CASE("Simulation: Abbau der Verwüstung am Jahreswechsel") {
+    Simulation sim(fixture_without_plague());
+    const World initial = sim.world();
+    step_until(sim, Date{1649, 1, 1});
+    // Bis zum Jahreswechsel bleibt die Verwüstung unverändert.
+    for (std::size_t i = 0; i < initial.locations.size(); ++i) {
+        CHECK(sim.world().locations[i].devastation == initial.locations[i].devastation);
+    }
+    sim.step_day();
+    const Fixed decay = initial.rules.devastation_decay;
+    for (std::size_t i = 0; i < initial.locations.size(); ++i) {
+        const Fixed old = initial.locations[i].devastation;
+        CHECK(sim.world().locations[i].devastation == old - old * decay);
+    }
+
+    // Über 100 Jahre: monoton fallend, am Ende unter 5 % des Ausgangswerts (0,97^100 ≈ 0,048).
+    std::vector<Fixed> last;
+    for (const uhrwerk::Location& l : sim.world().locations) {
+        last.push_back(l.devastation);
+    }
+    for (int year = 1650; year <= 1748; ++year) {
+        step_until(sim, Date{year, 1, 2});
+        for (std::size_t i = 0; i < last.size(); ++i) {
+            CHECK(sim.world().locations[i].devastation < last[i]);
+            last[i] = sim.world().locations[i].devastation;
+        }
+    }
+    for (std::size_t i = 0; i < last.size(); ++i) {
+        CHECK(last[i] > Fixed::zero());
+        CHECK(last[i] < initial.locations[i].devastation * Fixed::from_ratio(5, 100));
+    }
+}

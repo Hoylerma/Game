@@ -1,0 +1,21 @@
+# Testdaten: Geländetypen
+gelaende flussaue {
+    name     = "Flussaue"
+    farbe    = { 128 160 112 }
+    wachstum = 1.05
+    ertrag   = 1.15
+}
+
+gelaende ackerland {
+    name     = "Ackerland"
+    farbe    = { 190 180 110 }
+    wachstum = 1.0
+    ertrag   = 1.0
+}
+
+gelaende sandboden {
+    name     = "Sandboden"
+    farbe    = { 210 200 160 }
+    wachstum = 0.9
+    ertrag   = 0.75
+}

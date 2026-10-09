@@ -1,0 +1,36 @@
+# Testdaten: Berufsgruppen. Summe anteil_stadt = 1, Summe anteil_land = 1.
+beruf bauern {
+    name            = "Bauern"
+    schicht         = unten
+    ertrag          = 6
+    steuerpflichtig = ja
+    anteil_stadt    = 0.10
+    anteil_land     = 0.80
+}
+
+beruf handwerker {
+    name            = "Handwerker"
+    schicht         = mittel
+    ertrag          = 12
+    steuerpflichtig = ja
+    anteil_stadt    = 0.50
+    anteil_land     = 0.15
+}
+
+beruf kaufleute {
+    name            = "Kaufleute"
+    schicht         = oben
+    ertrag          = 30
+    steuerpflichtig = yes
+    anteil_stadt    = 0.30
+    anteil_land     = 0          # auf dem Land keine Kaufleute → kein Block
+}
+
+beruf adel {
+    name            = "Adel"
+    schicht         = oben
+    ertrag          = 20
+    steuerpflichtig = nein       # privilegiert
+    anteil_stadt    = 0.10
+    anteil_land     = 0.05
+}

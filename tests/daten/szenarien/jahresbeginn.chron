@@ -1,0 +1,6 @@
+# Testdaten: zweites Szenario für die Szenarioauswahl
+szenario jahresbeginn_1650 {
+    name    = "Jahresbeginn 1650"
+    datum   = 1650.01.01
+    spieler = SAX
+}

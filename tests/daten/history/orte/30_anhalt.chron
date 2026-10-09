@@ -1,0 +1,13 @@
+# Testdaten: Orte Anhalts
+ort dessau {
+    name         = "Dessau"
+    besitzer     = ANH
+    gelaende     = ackerland
+    lage         = { 12.24 51.83 }
+    flaeche      = 300
+    bevoelkerung = 3000
+    stadt        = nein
+    konfession   = { reformiert = 60 lutherisch = 40 }
+    verwuestung  = 0.5
+    quelle       = "Testdaten, geschätzt"
+}

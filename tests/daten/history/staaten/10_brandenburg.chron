@@ -1,0 +1,14 @@
+# Testdaten: Brandenburg
+staat BRA {
+    name           = "Kurfürstentum Brandenburg"
+    kurzname       = "Brandenburg"
+    farbe          = { 58 95 143 }
+    hauptstadt     = berlin_coelln
+    regierungsform = absolute_monarchie
+    herrscher      = "Friedrich Wilhelm"
+    konfession     = reformiert
+    schatz         = 20000
+    steuersatz     = 0.10
+    hofhaltung     = 30000
+    quelle         = "Testdaten, geschätzt"
+}
