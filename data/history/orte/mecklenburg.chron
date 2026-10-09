@@ -1,0 +1,89 @@
+# Orte: Herzogtümer Mecklenburg-Schwerin und Mecklenburg-Güstrow mit dem schwedischen Wismar – Stand 24.10.1648.
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
+# Ein Ort steht für eine Stadt mit ihrem Amt (Umland); "bevoelkerung" umfasst beides.
+#
+# Grundlage der Aufteilung ist der Fahrenholzer Vertrag (1621): Schwerin erhielt
+# u. a. Schwerin, Parchim, Waren und Wismar, Güstrow u. a. Güstrow und
+# Neubrandenburg mit dem Land Stargard. Rostock mit Warnemünde blieb
+# Kondominium beider Herzöge. Der Güstrower Herzog Gustav Adolf (geb. 1633)
+# stand bis 1654 unter Vormundschaft Adolf Friedrichs I. von Schwerin.
+# Mecklenburg verlor im Krieg einen sehr großen Teil seiner Bevölkerung.
+
+ort schwerin {
+    name         = "Schwerin"
+    besitzer     = MSC
+    gelaende     = seenplatte
+    lage         = { 11.41 53.63 }
+    flaeche      = 250
+    bevoelkerung = 4200
+    stadt        = ja
+    konfession   = { lutherisch = 100 }
+    verwuestung  = 0.6
+    quelle       = "Residenz Herzog Adolf Friedrichs I. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung nach regionaler Kriegsbetroffenheit geschätzt"
+}
+
+ort wismar {
+    name         = "Wismar"
+    besitzer     = SWE
+    gelaende     = kueste
+    lage         = { 11.46 53.89 }
+    flaeche      = 150
+    bevoelkerung = 6000
+    stadt        = ja
+    konfession   = { lutherisch = 100 }
+    verwuestung  = 0.45
+    quelle       = "IPO Art. X: Stadt und Hafen Wismar mit Poel und Neukloster an Schweden (Reichslehen); schwedische Festung. Bevölkerung Schätzung (Größenordnung nach Literatur zur Bevölkerungsentwicklung)"
+}
+
+ort rostock {
+    name         = "Rostock"
+    besitzer     = MSC
+    gelaende     = kueste
+    lage         = { 12.14 54.09 }
+    flaeche      = 200
+    bevoelkerung = 7500
+    stadt        = ja
+    konfession   = { lutherisch = 100 }
+    verwuestung  = 0.45
+    quelle       = "Hansestadt und Universität; nach dem Fahrenholzer Vertrag (1621) Kondominium beider Herzöge, hier vereinfacht Mecklenburg-Schwerin zugeordnet (Adolf Friedrich I. führte 1648 auch die Güstrower Vormundschaft); Seezoll in Warnemünde in schwedischer Hand. Bevölkerung Schätzung"
+}
+
+ort guestrow {
+    name         = "Güstrow"
+    besitzer     = MGU
+    gelaende     = flachland
+    lage         = { 12.18 53.79 }
+    flaeche      = 250
+    bevoelkerung = 4500
+    stadt        = ja
+    konfession   = { lutherisch = 100 }
+    verwuestung  = 0.65
+    quelle       = "Residenz des Güstrower Landesteils. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung nach regionaler Kriegsbetroffenheit geschätzt"
+}
+
+ort parchim {
+    name         = "Parchim"
+    besitzer     = MSC
+    gelaende     = flachland
+    lage         = { 11.85 53.43 }
+    flaeche      = 260
+    bevoelkerung = 3600
+    stadt        = nein
+    konfession   = { lutherisch = 100 }
+    verwuestung  = 0.65
+    quelle       = "Vorderstadt des Landes Mecklenburg an der Elde, nach dem Fahrenholzer Vertrag schwerinsch. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung geschätzt"
+}
+
+ort neubrandenburg {
+    name         = "Neubrandenburg"
+    besitzer     = MGU
+    gelaende     = seenplatte
+    lage         = { 13.26 53.56 }
+    flaeche      = 260
+    bevoelkerung = 3200
+    stadt        = nein
+    konfession   = { lutherisch = 100 }
+    verwuestung  = 0.75
+    quelle       = "Vorderstadt des Landes Stargard, 1631 von Tilly erstürmt. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung nach regionaler Kriegsbetroffenheit geschätzt"
+}

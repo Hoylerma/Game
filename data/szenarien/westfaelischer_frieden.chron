@@ -1,0 +1,13 @@
+# Lesezeichen "Der Westfälische Frieden" (Meilenstein M1, Testregion).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.7.
+# Am 24. Oktober 1648 wurden in Münster und Osnabrück die Friedensverträge
+# unterzeichnet (Instrumentum Pacis Osnabrugense, IPO, und Monasteriense, IPM).
+# Datum gregorianisch; die evangelischen Reichsstände rechneten bis 1700 noch
+# julianisch (14. Oktober 1648 alten Stils).
+
+szenario westfaelischer_frieden {
+    name    = "Der Westfälische Frieden"
+    datum   = 1648.10.24
+    spieler = BRA
+}

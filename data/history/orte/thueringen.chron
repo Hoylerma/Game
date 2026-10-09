@@ -1,0 +1,104 @@
+# Orte: Thüringen – ernestinische Herzogtümer, kurmainzisches Erfurt und Eichsfeld, kursächsischer Thüringischer Kreis – Stand 24.10.1648.
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
+# Ein Ort steht für eine Stadt mit ihrem Amt (Umland); "bevoelkerung" umfasst beides.
+#
+# Die ernestinischen Lande waren 1640 unter Wilhelm (Weimar), Albrecht
+# (Eisenach) und Ernst (Gotha) geteilt; nach Albrechts Tod (Dezember 1644) wurde
+# Eisenach 1645 zwischen Weimar und Gotha aufgeteilt, die Stadt fiel an Weimar.
+# Sachsen-Altenburg bildete eine eigene Linie (mit Anteilen am Coburg-Eisenacher
+# Erbe von 1638; Coburg liegt außerhalb der modellierten Orte). Erfurt und
+# das Eichsfeld unterstanden Kurmainz. Nicht modelliert sind u. a. die
+# Reichsstädte Mühlhausen und Nordhausen sowie Schwarzburg, Reuß, Mansfeld,
+# Stolberg und die Henneberger Lande.
+
+ort erfurt {
+    name         = "Erfurt"
+    besitzer     = MAI
+    gelaende     = boerde
+    lage         = { 11.03 50.98 }
+    flaeche      = 250
+    bevoelkerung = 16000
+    stadt        = ja
+    konfession   = { lutherisch = 85 katholisch = 15 }
+    verwuestung  = 0.4
+    quelle       = "Kurmainzische Landstadt mit weitgehender Selbstverwaltung; schwedisch besetzt 1631–1635 und 1637–1650 (Stadtchronik Erfurt), Unterwerfung unter Kurmainz 1664. Katholische Minderheit um Domstift und Klöster, Anteil geschätzt. Bevölkerung Schätzung (Stadt mit Landgebiet)"
+}
+
+ort heiligenstadt {
+    name         = "Heiligenstadt (Eichsfeld)"
+    besitzer     = MAI
+    gelaende     = huegelland
+    lage         = { 10.14 51.38 }
+    flaeche      = 260
+    bevoelkerung = 6000
+    stadt        = nein
+    konfession   = { katholisch = 90 lutherisch = 10 }
+    verwuestung  = 0.5
+    quelle       = "Hauptort des kurmainzischen Eichsfelds, seit dem späten 16. Jahrhundert rekatholisiert (Jesuitenkolleg); lutherischer Restanteil geschätzt. Bevölkerung Schätzung (Stadt mit Umland; Größenordnung nach Literatur zur Bevölkerungsentwicklung)"
+}
+
+ort gotha {
+    name         = "Gotha"
+    besitzer     = GOT
+    gelaende     = boerde
+    lage         = { 10.70 50.95 }
+    flaeche      = 250
+    bevoelkerung = 6500
+    stadt        = ja
+    konfession   = { lutherisch = 100 }
+    verwuestung  = 0.45
+    quelle       = "Residenz Herzog Ernsts I. (des Frommen), Schloss Friedenstein seit 1643 im Bau. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung geschätzt"
+}
+
+ort weimar {
+    name         = "Weimar"
+    besitzer     = WEI
+    gelaende     = huegelland
+    lage         = { 11.33 50.98 }
+    flaeche      = 230
+    bevoelkerung = 5500
+    stadt        = ja
+    konfession   = { lutherisch = 100 }
+    verwuestung  = 0.45
+    quelle       = "Residenz Herzog Wilhelms IV. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung nach regionaler Kriegsbetroffenheit geschätzt"
+}
+
+ort eisenach {
+    name         = "Eisenach"
+    besitzer     = WEI
+    gelaende     = mittelgebirge
+    lage         = { 10.32 50.98 }
+    flaeche      = 230
+    bevoelkerung = 5500
+    stadt        = ja
+    konfession   = { lutherisch = 100 }
+    verwuestung  = 0.45
+    quelle       = "Stadt mit der Wartburg am Thüringer Wald; nach dem Tod Herzog Albrechts (1644) bei der Teilung 1645 an Sachsen-Weimar. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung)"
+}
+
+ort altenburg {
+    name         = "Altenburg"
+    besitzer     = ALT
+    gelaende     = boerde
+    lage         = { 12.43 50.99 }
+    flaeche      = 250
+    bevoelkerung = 7000
+    stadt        = ja
+    konfession   = { lutherisch = 100 }
+    verwuestung  = 0.45
+    quelle       = "Residenz Herzog Friedrich Wilhelms II. im fruchtbaren Altenburger Land. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung geschätzt"
+}
+
+ort sangerhausen {
+    name         = "Sangerhausen"
+    besitzer     = SAX
+    gelaende     = huegelland
+    lage         = { 11.30 51.47 }
+    flaeche      = 230
+    bevoelkerung = 4500
+    stadt        = nein
+    konfession   = { lutherisch = 100 }
+    verwuestung  = 0.5
+    quelle       = "Kursächsisches Amt im Thüringischen Kreis am Südharz. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung geschätzt"
+}

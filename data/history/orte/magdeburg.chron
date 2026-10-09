@@ -1,0 +1,63 @@
+# Orte: Erzstift Magdeburg, Fürstentum Halberstadt und magdeburgische Ämter – Stand 24.10.1648.
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
+# Ein Ort steht für eine Stadt mit ihrem Amt (Umland); "bevoelkerung" umfasst beides.
+#
+# Das Erzstift Magdeburg wurde 1648 vom Administrator August (Herzog zu
+# Sachsen) von Halle aus regiert; der Westfälische Frieden sprach Brandenburg
+# die Anwartschaft zu (Übergang nach Augusts Tod 1680). Die Ämter Jüterbog,
+# Dahme, Querfurt und Burg waren seit dem Prager Frieden 1635 kursächsisch.
+# Das Hochstift Halberstadt fiel 1648 als weltliches Fürstentum an Brandenburg.
+# Die Magdeburger Börde gehörte zu den am schwersten verwüsteten Landschaften.
+
+ort magdeburg {
+    name         = "Magdeburg"
+    besitzer     = MAG
+    gelaende     = boerde
+    lage         = { 11.63 52.13 }
+    flaeche      = 200
+    bevoelkerung = 5000
+    stadt        = ja
+    konfession   = { lutherisch = 100 }
+    verwuestung  = 0.8
+    quelle       = "Am 20.05.1631 erstürmt und fast völlig zerstört (vor dem Krieg ca. 25.000–30.000 Einwohner); 1648 erst am Beginn des Wiederaufbaus, Bevölkerung Schätzung. Die Stadt beanspruchte Reichsfreiheit; Unterwerfung unter Brandenburg 1666"
+}
+
+ort halle {
+    name         = "Halle (Saale)"
+    besitzer     = MAG
+    gelaende     = flussaue
+    lage         = { 11.97 51.48 }
+    flaeche      = 200
+    bevoelkerung = 9000
+    stadt        = ja
+    konfession   = { lutherisch = 100 }
+    verwuestung  = 0.45
+    quelle       = "Residenz des Administrators August; Salzsiederei. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung nach regionaler Kriegsbetroffenheit geschätzt"
+}
+
+ort halberstadt {
+    name         = "Halberstadt"
+    besitzer     = BRA
+    gelaende     = boerde
+    lage         = { 11.05 51.90 }
+    flaeche      = 250
+    bevoelkerung = 7500
+    stadt        = ja
+    konfession   = { lutherisch = 94 katholisch = 6 }
+    verwuestung  = 0.55
+    quelle       = "IPO Art. XI: Hochstift als weltliches Fürstentum an Brandenburg zugesprochen; der schwedische General Königsmarck verzögerte die Übergabe, Huldigung erst am 03.04.1650. Katholische Minderheit um Domkapitel und Stifte, Anteil geschätzt. Bevölkerung Schätzung (Größenordnung nach Literatur zur Bevölkerungsentwicklung)"
+}
+
+ort jueterbog {
+    name         = "Jüterbog"
+    besitzer     = SAX
+    gelaende     = heide
+    lage         = { 13.07 51.99 }
+    flaeche      = 260
+    bevoelkerung = 3500
+    stadt        = nein
+    konfession   = { lutherisch = 100 }
+    verwuestung  = 0.55
+    quelle       = "Magdeburgisches Amt im Fläming, seit dem Prager Frieden 1635 kursächsisch. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung nach regionaler Kriegsbetroffenheit geschätzt"
+}

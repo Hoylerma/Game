@@ -1,0 +1,22 @@
+# Staat zum Lesezeichen "Der Westfälische Frieden" (24.10.1648), Testregion M1.
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.5.
+# schatz, steuersatz und hofhaltung sind Spielwerte (Reichstaler), skaliert auf
+# die in der Testregion modellierten Orte dieses Staates – keine historischen
+# Haushaltszahlen. Kalibrierung: data/README.md, Abschnitt "Wirtschaftswerte".
+#
+# Güstrower Landesteil nach dem Fahrenholzer Vertrag (1621), u. a. mit dem Land Stargard.
+
+staat MGU {
+    name           = "Herzogtum Mecklenburg-Güstrow"
+    kurzname       = "Mecklenburg-Güstrow"
+    farbe          = { 40 125 95 }
+    hauptstadt     = guestrow
+    regierungsform = staendisches_fuerstentum
+    herrscher      = "Gustav Adolf (Vormundschaft Adolf Friedrichs I.)"
+    konfession     = lutherisch
+    schatz         = 1000
+    steuersatz     = 0.08
+    hofhaltung     = 6250
+    quelle         = "Herzog Gustav Adolf (geb. 1633), Herzog seit dem Tod seines Vaters 1636, bis zur Volljährigkeit 1654 unter Vormundschaft Adolf Friedrichs I. von Mecklenburg-Schwerin (gegen den Widerstand der Mutter). Schatz, Steuersatz und Hofhaltung sind Spielwerte"
+}

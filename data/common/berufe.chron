@@ -1,0 +1,72 @@
+# Berufsgruppen der Epoche 1648–1806 (Meilenstein M1, vereinfacht).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.4.
+#   ertrag          – Produktion in Reichstalern pro Kopf und Jahr (Kopf = alle
+#                     Angehörigen einschließlich Kinder und Gesinde der Gruppe)
+#   steuerpflichtig – Adel und Geistlichkeit sind von der Kontribution befreit
+#                     (ständische Privilegien)
+#   anteil_stadt    – Anteil an der Bevölkerung städtischer Orte (Stadt mit
+#                     Umland, daher auch Ackerbürger und Bauern)
+#   anteil_land     – Anteil an der Bevölkerung ländlicher Orte
+# Die Summen der Anteile ergeben je genau 1.
+#
+# Größenordnungen (Schätzung, Spielwerte): Ein Tagelöhner verdiente um 1650
+# einige Groschen am Tag (1 Reichstaler = 24 Groschen), also wenige Dutzend
+# Taler im Jahr für einen ganzen Haushalt; Vollbauern, Handwerksmeister und
+# Kaufleute lagen deutlich darüber. Daraus ergeben sich Pro-Kopf-Werte von etwa
+# 6 (Landarme) bis 40 (Bürger); Adel und hohe Geistlichkeit beziehen Renten
+# aus Grundherrschaft, Pfründen und Ämtern.
+
+beruf adel {
+    name            = "Adel"
+    schicht         = oben
+    ertrag          = 80      # Rittergüter, Ämter, Grundrenten
+    steuerpflichtig = nein
+    anteil_stadt    = 0.005
+    anteil_land     = 0.010
+}
+
+beruf geistlichkeit {
+    name            = "Geistlichkeit"
+    schicht         = mittel
+    ertrag          = 30      # Pfarrer, Kirchendiener, Stiftsgeistliche
+    steuerpflichtig = nein
+    anteil_stadt    = 0.015
+    anteil_land     = 0.010
+}
+
+beruf buerger {
+    name            = "Bürger"
+    schicht         = mittel
+    ertrag          = 40      # Kaufleute, Brauer, Ratsfamilien, Gelehrte
+    steuerpflichtig = ja
+    anteil_stadt    = 0.150
+    anteil_land     = 0.010
+}
+
+beruf handwerker {
+    name            = "Handwerker"
+    schicht         = mittel
+    ertrag          = 20      # Zunftmeister, Gesellen, Müller, Dorfhandwerk
+    steuerpflichtig = ja
+    anteil_stadt    = 0.300
+    anteil_land     = 0.060
+}
+
+beruf bauern {
+    name            = "Bauern"
+    schicht         = unten
+    ertrag          = 12      # Hufner und Vollbauern, in Städten Ackerbürger
+    steuerpflichtig = ja
+    anteil_stadt    = 0.200
+    anteil_land     = 0.520
+}
+
+beruf landarme {
+    name            = "Landarme"
+    schicht         = unten
+    ertrag          = 6       # Kossäten, Häusler, Gesinde, Tagelöhner
+    steuerpflichtig = ja
+    anteil_stadt    = 0.330
+    anteil_land     = 0.390
+}

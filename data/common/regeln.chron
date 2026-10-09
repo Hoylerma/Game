@@ -1,0 +1,16 @@
+# Globale Regeln und Balancing-Werte (Meilenstein M1).
+#
+# Format und Formeln: docs/technik/chronik-skript.md, Abschnitte 3.1 und 5.
+# Alle Felder sind Pflicht; die Werte entsprechen der Spezifikation.
+
+regeln {
+    wachstum_basis        = 0.004   # jährliches Grundwachstum
+    wachstum_wiederaufbau = 0.025   # zusätzlich je Verwüstungsgrad (Wiederaufbau, Peuplierung)
+    wachstum_steuerdruck  = 0.02    # Abzug je Steuersatz
+    verwuestung_abbau     = 0.03    # jährlicher relativer Abbau der Verwüstung
+    verwuestung_ertrag    = 0.5     # Produktionsverlust je Verwüstungsgrad
+    seuche_chance         = 0.01    # jährlich je Ort
+    seuche_verlust_min    = 0.04    # Bevölkerungsverlust bei einer Seuche, Untergrenze
+    seuche_verlust_max    = 0.12    # … Obergrenze
+    steuersatz_max        = 0.5     # höchster erlaubter Steuersatz
+}

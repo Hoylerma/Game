@@ -1,0 +1,90 @@
+# Orte: Markgraftümer Ober- und Niederlausitz mit der brandenburgischen Herrschaft Cottbus – Stand 24.10.1648.
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
+# Ein Ort steht für eine Stadt mit ihrem Amt bzw. Weichbild (Umland).
+#
+# Beide Lausitzen kamen mit dem Prager Frieden 1635 (Traditionsrezess 1636)
+# als böhmisches Lehen an Kursachsen; der Traditionsrezess sicherte den
+# katholischen Stiften und Klöstern der Oberlausitz ihren Bestand. Cottbus war
+# seit dem 15. Jahrhundert eine brandenburgische Exklave in der Niederlausitz.
+# Die sorbische Bevölkerung ist im M1-Modell nicht gesondert abgebildet
+# (Sprache/Volksgruppe folgt später). Die Oberlausitz nahm viele
+# Glaubensflüchtlinge (Exulanten) aus Böhmen auf.
+
+ort bautzen {
+    name         = "Bautzen"
+    besitzer     = SAX
+    gelaende     = huegelland
+    lage         = { 14.42 51.18 }
+    flaeche      = 220
+    bevoelkerung = 7000
+    stadt        = ja
+    konfession   = { lutherisch = 85 katholisch = 15 }
+    verwuestung  = 0.5
+    quelle       = "Hauptort der Oberlausitz und des Sechsstädtebundes. Katholische Minderheit um Domstift St. Petri (Simultankirche) und Klosterherrschaften, Anteil geschätzt. Bevölkerung Schätzung (Stadt mit Umland; Größenordnung nach Literatur zur Bevölkerungsentwicklung)"
+}
+
+ort goerlitz {
+    name         = "Görlitz"
+    besitzer     = SAX
+    gelaende     = huegelland
+    lage         = { 14.99 51.15 }
+    flaeche      = 200
+    bevoelkerung = 8000
+    stadt        = ja
+    konfession   = { lutherisch = 100 }
+    verwuestung  = 0.45
+    quelle       = "Stadt des Sechsstädtebundes an der Neiße und der Via Regia, Tuchmacherei und Fernhandel. Bevölkerung Schätzung (Stadt mit Umland; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung nach regionaler Kriegsbetroffenheit geschätzt"
+}
+
+ort zittau {
+    name         = "Zittau"
+    besitzer     = SAX
+    gelaende     = huegelland
+    lage         = { 14.81 50.90 }
+    flaeche      = 200
+    bevoelkerung = 8500
+    stadt        = ja
+    konfession   = { lutherisch = 100 }
+    verwuestung  = 0.4
+    quelle       = "Stadt des Sechsstädtebundes an der Grenze zu Böhmen, Leinenhandel, Zuzug böhmischer Exulanten. Bevölkerung Schätzung (Stadt mit Umland; Größenordnung nach Literatur zur Bevölkerungsentwicklung)"
+}
+
+ort luebben {
+    name         = "Lübben (Niederlausitz)"
+    besitzer     = SAX
+    gelaende     = bruch
+    lage         = { 13.90 51.94 }
+    flaeche      = 260
+    bevoelkerung = 3200
+    stadt        = nein
+    konfession   = { lutherisch = 100 }
+    verwuestung  = 0.5
+    quelle       = "Sitz von Landvogtei und Landtag der Niederlausitz am Spreewald. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung nach regionaler Kriegsbetroffenheit geschätzt"
+}
+
+ort guben {
+    name         = "Guben"
+    besitzer     = SAX
+    gelaende     = flussaue
+    lage         = { 14.72 51.95 }
+    flaeche      = 230
+    bevoelkerung = 4200
+    stadt        = ja
+    konfession   = { lutherisch = 100 }
+    verwuestung  = 0.5
+    quelle       = "Größte Stadt der Niederlausitz an der Neiße, Tuchmacherei und Weinbau. Bevölkerung Schätzung (Stadt mit Umland; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung nach regionaler Kriegsbetroffenheit geschätzt"
+}
+
+ort cottbus {
+    name         = "Cottbus"
+    besitzer     = BRA
+    gelaende     = heide
+    lage         = { 14.33 51.76 }
+    flaeche      = 250
+    bevoelkerung = 4000
+    stadt        = nein
+    konfession   = { lutherisch = 100 }
+    verwuestung  = 0.55
+    quelle       = "Herrschaft Cottbus, brandenburgische Exklave in der Niederlausitz (seit dem 15. Jahrhundert, bestätigt im Frieden von Guben 1462). Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung)"
+}

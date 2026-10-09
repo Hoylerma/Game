@@ -1,0 +1,49 @@
+# Orte: Herzogtum Braunschweig-Wolfenbüttel (östlicher Teil) – Stand 24.10.1648.
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
+# Ein Ort steht für eine Stadt mit ihrem Amt (Umland); "bevoelkerung" umfasst beides.
+#
+# Herzog August der Jüngere regierte seit 1635; die Residenz Wolfenbüttel
+# konnte er erst nach dem Abzug der kaiserlichen Besatzung 1643 beziehen. Die
+# Stadt Braunschweig war formal landsässig, verwaltete sich aber faktisch
+# selbst und wurde erst 1671 unterworfen. Weitere Landesteile (Weserraum,
+# Harz) liegen außerhalb der Testregion bzw. sind nicht modelliert.
+
+ort wolfenbuettel {
+    name         = "Wolfenbüttel"
+    besitzer     = BWO
+    gelaende     = boerde
+    lage         = { 10.53 52.16 }
+    flaeche      = 200
+    bevoelkerung = 6000
+    stadt        = ja
+    konfession   = { lutherisch = 100 }
+    verwuestung  = 0.45
+    quelle       = "Residenz und Festung, bis 1643 kaiserlich besetzt. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung nach regionaler Kriegsbetroffenheit geschätzt"
+}
+
+ort braunschweig {
+    name         = "Braunschweig"
+    besitzer     = BWO
+    gelaende     = flachland
+    lage         = { 10.52 52.27 }
+    flaeche      = 150
+    bevoelkerung = 15000
+    stadt        = ja
+    konfession   = { lutherisch = 100 }
+    verwuestung  = 0.25
+    quelle       = "Größte Stadt des Herzogtums, formal landsässig, faktisch weitgehend selbständig bis zur Unterwerfung 1671; vereinfacht dem Herzogtum zugeordnet. Bevölkerung Schätzung (Größenordnung nach Literatur zur Bevölkerungsentwicklung)"
+}
+
+ort helmstedt {
+    name         = "Helmstedt"
+    besitzer     = BWO
+    gelaende     = huegelland
+    lage         = { 11.01 52.23 }
+    flaeche      = 220
+    bevoelkerung = 5000
+    stadt        = ja
+    konfession   = { lutherisch = 100 }
+    verwuestung  = 0.4
+    quelle       = "Universitätsstadt (Academia Julia, gegründet 1576). Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung nach regionaler Kriegsbetroffenheit geschätzt"
+}

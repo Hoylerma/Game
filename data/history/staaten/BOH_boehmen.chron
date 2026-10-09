@@ -1,0 +1,23 @@
+# Staat zum Lesezeichen "Der Westfälische Frieden" (24.10.1648), Testregion M1.
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.5.
+# schatz, steuersatz und hofhaltung sind Spielwerte (Reichstaler), skaliert auf
+# die in der Testregion modellierten Orte dieses Staates – keine historischen
+# Haushaltszahlen. Kalibrierung: data/README.md, Abschnitt "Wirtschaftswerte".
+#
+# Königreich Böhmen in Personalunion mit den habsburgischen Erblanden; nur der Norden liegt in der
+# Testregion (Randgebiet). Böhmen ist im Basisspiel Teil der Habsburger Fokus-Nation.
+
+staat BOH {
+    name           = "Königreich Böhmen"
+    kurzname       = "Böhmen"
+    farbe          = { 175 175 185 }
+    hauptstadt     = prag
+    regierungsform = erbmonarchie
+    herrscher      = "Ferdinand III."
+    konfession     = katholisch
+    schatz         = 32000
+    steuersatz     = 0.14
+    hofhaltung     = 102000
+    quelle         = "König von Böhmen und Kaiser (reg. 1637–1657). Verneuerte Landesordnung 1627: Erbkönigtum der Habsburger, nur katholisches Bekenntnis zugelassen. Lausitzen 1623 an Kursachsen verpfändet und mit dem Prager Frieden 1635 als Lehen abgetreten. Prag am Stichtag teilweise schwedisch besetzt. Hoher Steuerdruck der Kriegsjahre. Schatz, Steuersatz und Hofhaltung sind Spielwerte"
+}

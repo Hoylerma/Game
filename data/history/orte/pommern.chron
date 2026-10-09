@@ -1,0 +1,118 @@
+# Orte: Pommern – schwedisches Vorpommern und brandenburgisches Hinterpommern – Stand 24.10.1648.
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
+# Ein Ort steht für eine Stadt mit ihrem Amt (Umland); "bevoelkerung" umfasst beides.
+#
+# Nach dem Aussterben der Greifen (1637) teilte der Westfälische Frieden (IPO
+# Art. X und XI) Pommern: Vorpommern mit Stettin, Rügen, Usedom und Wollin sowie
+# einem Streifen östlich der Oder (Gartz, Damm, Gollnow) fiel als Reichslehen an
+# Schweden, Hinterpommern und das säkularisierte Stift Cammin an Brandenburg.
+# Hinterpommern blieb bis zum Stettiner Grenzrezess (Mai 1653, Übergabe Juni
+# 1653) schwedisch besetzt; die Zuordnung zu Brandenburg folgt hier dem
+# Rechtsstand des Friedens. Pommern war seit 1627 besetzt (zuerst kaiserlich,
+# ab 1630 schwedisch), Kriegsschauplatz und Durchzugsgebiet und gehörte zu den
+# am stärksten entvölkerten Ländern.
+
+ort stettin {
+    name         = "Stettin"
+    besitzer     = SWE
+    gelaende     = flussaue
+    lage         = { 14.55 53.43 }
+    flaeche      = 200
+    bevoelkerung = 7500
+    stadt        = ja
+    konfession   = { lutherisch = 100 }
+    verwuestung  = 0.4
+    quelle       = "Seit 1630 schwedisch besetzt, 1648 an Schweden; Sitz der schwedischen Regierung in Pommern, Oderhandel. Bevölkerung Schätzung (Stadt mit Umland; Größenordnung nach Literatur zur Bevölkerungsentwicklung)"
+}
+
+ort stralsund {
+    name         = "Stralsund"
+    besitzer     = SWE
+    gelaende     = kueste
+    lage         = { 13.09 54.31 }
+    flaeche      = 150
+    bevoelkerung = 9500
+    stadt        = ja
+    konfession   = { lutherisch = 100 }
+    verwuestung  = 0.3
+    quelle       = "Hansestadt am Strelasund, 1628 erfolgreich gegen Wallenstein verteidigt, seither mit Schweden verbündet und schwedisch besetzt. Bevölkerung Schätzung (Größenordnung nach Literatur zur Bevölkerungsentwicklung)"
+}
+
+ort greifswald {
+    name         = "Greifswald"
+    besitzer     = SWE
+    gelaende     = kueste
+    lage         = { 13.38 54.10 }
+    flaeche      = 220
+    bevoelkerung = 4500
+    stadt        = ja
+    konfession   = { lutherisch = 100 }
+    verwuestung  = 0.5
+    quelle       = "Hansestadt und Universität (gegründet 1456). Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung nach regionaler Kriegsbetroffenheit geschätzt"
+}
+
+ort anklam {
+    name         = "Anklam"
+    besitzer     = SWE
+    gelaende     = flussaue
+    lage         = { 13.69 53.86 }
+    flaeche      = 260
+    bevoelkerung = 4000
+    stadt        = nein
+    konfession   = { lutherisch = 100 }
+    verwuestung  = 0.6
+    quelle       = "Hansestadt an der Peene. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung nach regionaler Kriegsbetroffenheit geschätzt"
+}
+
+ort stargard {
+    name         = "Stargard in Pommern"
+    besitzer     = BRA
+    gelaende     = flachland
+    lage         = { 15.04 53.34 }
+    flaeche      = 260
+    bevoelkerung = 4800
+    stadt        = ja
+    konfession   = { lutherisch = 100 }
+    verwuestung  = 0.6
+    quelle       = "Größte Stadt Hinterpommerns; 1648 an Brandenburg zugesprochen, bis 1653 schwedisch besetzt (Stettiner Grenzrezess). Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung)"
+}
+
+ort kolberg {
+    name         = "Kolberg"
+    besitzer     = BRA
+    gelaende     = kueste
+    lage         = { 15.58 54.18 }
+    flaeche      = 220
+    bevoelkerung = 4500
+    stadt        = ja
+    konfession   = { lutherisch = 100 }
+    verwuestung  = 0.5
+    quelle       = "Hafen- und Salzstadt im weltlichen Gebiet des Stifts Cammin; 1648 an Brandenburg zugesprochen, bis 1653 schwedisch besetzt. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung)"
+}
+
+ort koeslin {
+    name         = "Köslin"
+    besitzer     = BRA
+    gelaende     = flachland
+    lage         = { 16.18 54.19 }
+    flaeche      = 250
+    bevoelkerung = 3600
+    stadt        = nein
+    konfession   = { lutherisch = 100 }
+    verwuestung  = 0.5
+    quelle       = "Stadt im weltlichen Gebiet des Stifts Cammin; 1648 an Brandenburg zugesprochen, bis 1653 schwedisch besetzt. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung)"
+}
+
+ort cammin {
+    name         = "Cammin"
+    besitzer     = BRA
+    gelaende     = kueste
+    lage         = { 14.78 53.97 }
+    flaeche      = 240
+    bevoelkerung = 3000
+    stadt        = nein
+    konfession   = { lutherisch = 100 }
+    verwuestung  = 0.6
+    quelle       = "Bischofsstadt des 1648 säkularisierten Stifts Cammin an der Dievenow; an Brandenburg zugesprochen, bis 1653 schwedisch besetzt. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung)"
+}

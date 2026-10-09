@@ -1,0 +1,41 @@
+# Konfessionen (Meilenstein M1).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.3.
+#
+# Der Westfälische Frieden erkennt im Reich drei Konfessionen an: katholisch,
+# lutherisch (Augsburger Konfession) und – neu seit 1648 – reformiert.
+#
+# Jüdisch ist reichsrechtlich keine "Konfession" des Friedens, gehört aber nach
+# dem Design (docs/07_bevoelkerung_und_gesellschaft.md) zur Glaubensdimension
+# der Bevölkerung. Begründung für 1648 in der Testregion: die Prager Judenstadt,
+# eine der größten jüdischen Gemeinden Europas (um 1600 etwa 6.000 Menschen,
+# Erweiterung des Viertels 1627; Beteiligung an der Verteidigung Prags gegen die
+# Schweden 1648, wofür Ferdinand III. der Gemeinde eine Fahne verlieh).
+# Quelle: Encyclopaedia Judaica, Artikel "Prague" (online bei encyclopedia.com).
+# Kleinere Gemeinden (z. B. Halberstadt) liegen unter 1 % eines Ortes und
+# entfallen bei ganzzahligen Prozentwerten.
+#
+# Einschränkung des M1-Modells: Berufe werden unabhängig von der Konfession
+# verteilt. Historisch waren Juden von Grundbesitz, Zünften und Adel
+# ausgeschlossen (Rechtsstatus "Schutzjude"); das bildet erst ein späteres
+# Bevölkerungsmodell ab (siehe data/README.md).
+
+konfession lutherisch {
+    name  = "Lutherisch"
+    farbe = { 70 110 170 }
+}
+
+konfession reformiert {
+    name  = "Reformiert"
+    farbe = { 226 160 52 }
+}
+
+konfession katholisch {
+    name  = "Katholisch"
+    farbe = { 176 48 60 }
+}
+
+konfession juedisch {
+    name  = "Jüdisch"
+    farbe = { 136 104 176 }
+}

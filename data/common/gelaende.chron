@@ -1,0 +1,80 @@
+# Geländetypen (Meilenstein M1).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.2.
+#   wachstum – Faktor auf die Bevölkerungsentwicklung (Gesundheit, Siedlungsraum)
+#   ertrag   – Faktor auf die Produktion aller Berufsgruppen eines Ortes
+#
+# Die Faktoren sind Spielwerte. Sie bilden grob die naturräumliche Ausstattung
+# Mittel- und Nordostdeutschlands um 1650 ab: fruchtbare Lössbörden und
+# Flussauen, magere Sandböden in Heide und Fläming, ungeteilte Bruchländer vor
+# den Trockenlegungen des 18. Jahrhunderts. Farben für den Kartenmodus "Gelände".
+
+gelaende flussaue {
+    name     = "Flussaue"
+    farbe    = { 128 160 112 }
+    wachstum = 1.05     # Wasser, Wiesen, Handelswege
+    ertrag   = 1.15
+}
+
+gelaende boerde {
+    name     = "Börde"
+    farbe    = { 214 190 108 }
+    wachstum = 1.05     # Lössboden: beste Ackerböden der Region
+    ertrag   = 1.30
+}
+
+gelaende flachland {
+    name     = "Flachland"
+    farbe    = { 190 200 138 }
+    wachstum = 1.00     # Grundmoränenplatten, lehmig-sandig
+    ertrag   = 1.00
+}
+
+gelaende huegelland {
+    name     = "Hügelland"
+    farbe    = { 160 176 112 }
+    wachstum = 1.00
+    ertrag   = 1.00
+}
+
+gelaende mittelgebirge {
+    name     = "Mittelgebirge"
+    farbe    = { 120 128 96 }
+    wachstum = 0.95     # raues Klima, karge Böden; Bergbau gleicht teilweise aus
+    ertrag   = 0.85
+}
+
+gelaende heide {
+    name     = "Heide"
+    farbe    = { 204 184 144 }
+    wachstum = 0.95     # Sandböden (Fläming, Lausitz, Altmark)
+    ertrag   = 0.75
+}
+
+gelaende seenplatte {
+    name     = "Seenplatte"
+    farbe    = { 112 156 176 }
+    wachstum = 0.95     # Seen, Moore und Wald; Fischerei
+    ertrag   = 0.85
+}
+
+gelaende kueste {
+    name     = "Küste"
+    farbe    = { 158 192 204 }
+    wachstum = 1.00     # Seehandel und Fischerei
+    ertrag   = 1.05
+}
+
+gelaende bruch {
+    name     = "Bruchland"
+    farbe    = { 104 136 112 }
+    wachstum = 0.95     # Niederungsmoore (Oderbruch, Spreewald) vor der Trockenlegung
+    ertrag   = 0.80
+}
+
+gelaende wald {
+    name     = "Waldland"
+    farbe    = { 76 112 68 }
+    wachstum = 0.95     # dichte Wälder, Rodungsinseln; Holz, Glas, Leinen
+    ertrag   = 0.70
+}

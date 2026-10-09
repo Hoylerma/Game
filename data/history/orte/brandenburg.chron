@@ -1,0 +1,154 @@
+# Orte: Mark Brandenburg (Kurmark mit Altmark, Prignitz und Uckermark; Neumark) – Stand 24.10.1648.
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
+# Ein Ort steht für eine Stadt mit ihrem Amt (Umland); "bevoelkerung" umfasst beides.
+#
+# Die Mark gehörte zu den am schwersten getroffenen Gebieten des Krieges;
+# besonders Prignitz, Uckermark und Altmark verloren große Teile ihrer
+# Bevölkerung. Das Land war lutherisch, der Hof seit dem Übertritt Johann
+# Sigismunds (1613) reformiert; reformierte Minderheiten gab es vor allem in der
+# Residenz und an der Universität Frankfurt. Cottbus steht in lausitz.chron,
+# Hinterpommern in pommern.chron, Halberstadt in magdeburg.chron.
+
+ort berlin_coelln {
+    name         = "Berlin-Cölln"
+    besitzer     = BRA
+    gelaende     = flussaue
+    lage         = { 13.40 52.52 }
+    flaeche      = 200
+    bevoelkerung = 8000
+    stadt        = ja
+    konfession   = { lutherisch = 95 reformiert = 5 }
+    verwuestung  = 0.45
+    quelle       = "Residenz des Kurfürsten. Doppelstadt 1648 ca. 6.000 Einwohner, etwa die Hälfte des Vorkriegsstandes (Größenordnung nach Stadtgeschichte); Umland geschätzt. Reformierte Minderheit (Hof, Beamte) geschätzt"
+}
+
+ort brandenburg_havel {
+    name         = "Brandenburg an der Havel"
+    besitzer     = BRA
+    gelaende     = flussaue
+    lage         = { 12.55 52.41 }
+    flaeche      = 220
+    bevoelkerung = 4500
+    stadt        = ja
+    konfession   = { lutherisch = 100 }
+    verwuestung  = 0.6
+    quelle       = "Alt- und Neustadt Brandenburg im Havelland. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung nach regionaler Kriegsbetroffenheit geschätzt"
+}
+
+ort neuruppin {
+    name         = "Neuruppin"
+    besitzer     = BRA
+    gelaende     = seenplatte
+    lage         = { 12.80 52.93 }
+    flaeche      = 250
+    bevoelkerung = 3500
+    stadt        = nein
+    konfession   = { lutherisch = 100 }
+    verwuestung  = 0.6
+    quelle       = "Grafschaft Ruppin, seit 1524 brandenburgisch. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung nach regionaler Kriegsbetroffenheit geschätzt"
+}
+
+ort perleberg {
+    name         = "Perleberg (Prignitz)"
+    besitzer     = BRA
+    gelaende     = flachland
+    lage         = { 11.86 53.07 }
+    flaeche      = 280
+    bevoelkerung = 3200
+    stadt        = nein
+    konfession   = { lutherisch = 100 }
+    verwuestung  = 0.7
+    quelle       = "Hauptort der Prignitz, einer der am stärksten entvölkerten Landschaften der Mark. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung nach regionaler Kriegsbetroffenheit geschätzt"
+}
+
+ort prenzlau {
+    name         = "Prenzlau (Uckermark)"
+    besitzer     = BRA
+    gelaende     = flachland
+    lage         = { 13.86 53.32 }
+    flaeche      = 260
+    bevoelkerung = 4200
+    stadt        = ja
+    konfession   = { lutherisch = 100 }
+    verwuestung  = 0.65
+    quelle       = "Hauptstadt der Uckermark. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung nach regionaler Kriegsbetroffenheit geschätzt"
+}
+
+ort frankfurt_oder {
+    name         = "Frankfurt (Oder)"
+    besitzer     = BRA
+    gelaende     = flussaue
+    lage         = { 14.55 52.35 }
+    flaeche      = 200
+    bevoelkerung = 5500
+    stadt        = ja
+    konfession   = { lutherisch = 96 reformiert = 4 }
+    verwuestung  = 0.55
+    quelle       = "Handelsstadt und Universität (Viadrina); 1631 von den Schweden erstürmt. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Reformierte Minderheit geschätzt"
+}
+
+ort stendal {
+    name         = "Stendal (Altmark)"
+    besitzer     = BRA
+    gelaende     = flachland
+    lage         = { 11.86 52.60 }
+    flaeche      = 250
+    bevoelkerung = 4800
+    stadt        = ja
+    konfession   = { lutherisch = 100 }
+    verwuestung  = 0.6
+    quelle       = "Größte Stadt der Altmark. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung nach regionaler Kriegsbetroffenheit geschätzt"
+}
+
+ort salzwedel {
+    name         = "Salzwedel (Altmark)"
+    besitzer     = BRA
+    gelaende     = heide
+    lage         = { 11.15 52.85 }
+    flaeche      = 260
+    bevoelkerung = 4200
+    stadt        = ja
+    konfession   = { lutherisch = 100 }
+    verwuestung  = 0.55
+    quelle       = "Hansestadt in der westlichen Altmark. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung nach regionaler Kriegsbetroffenheit geschätzt"
+}
+
+ort kuestrin {
+    name         = "Küstrin (Neumark)"
+    besitzer     = BRA
+    gelaende     = bruch
+    lage         = { 14.65 52.58 }
+    flaeche      = 220
+    bevoelkerung = 3200
+    stadt        = nein
+    konfession   = { lutherisch = 100 }
+    verwuestung  = 0.5
+    quelle       = "Festung und Regierungssitz der Neumark an der Mündung der Warthe; Oderbruch vor der Trockenlegung (1747–1753) Niederungsmoor. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung)"
+}
+
+ort landsberg_warthe {
+    name         = "Landsberg an der Warthe"
+    besitzer     = BRA
+    gelaende     = flussaue
+    lage         = { 15.24 52.73 }
+    flaeche      = 250
+    bevoelkerung = 4300
+    stadt        = ja
+    konfession   = { lutherisch = 100 }
+    verwuestung  = 0.55
+    quelle       = "Größte Stadt der Neumark, Tuchmacherei und Warthehandel. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung nach regionaler Kriegsbetroffenheit geschätzt"
+}
+
+ort dramburg {
+    name         = "Dramburg (Neumark)"
+    besitzer     = BRA
+    gelaende     = seenplatte
+    lage         = { 15.81 53.53 }
+    flaeche      = 280
+    bevoelkerung = 2500
+    stadt        = nein
+    konfession   = { lutherisch = 100 }
+    verwuestung  = 0.6
+    quelle       = "Nördlicher Teil der Neumark an der Grenze zu Hinterpommern. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung nach regionaler Kriegsbetroffenheit geschätzt"
+}
