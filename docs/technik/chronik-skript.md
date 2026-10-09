@@ -1,4 +1,4 @@
-# Chronik-Skript und Datenformate (Meilensteine M1 und M2)
+# Chronik-Skript und Datenformate (Meilensteine M1 bis M3)
 
 Verbindliche Spezifikation für Parser (`core/src/script.cpp`), Lader (`core/src/loader.cpp`), Inhalte (`data/`) und Werkzeuge (`tools/`). Änderungen hier ziehen Änderungen in Code und Tests nach sich.
 
@@ -73,16 +73,19 @@ data/
 │   └── berufe.chron        Berufsgruppen
 ├── history/                generiert aus tabellen/ (tools/archivar), nicht von Hand bearbeiten
 │   ├── staaten/*.chron     Staaten (Reichsstände) mit datierter Historie
+│   ├── kreise/*.chron      Kreise: Gruppen von 4–12 Orten (seit M3)
 │   └── orte/*.chron        Orte mit datierter Historie (Besitz, Bevölkerung …)
 ├── tabellen/*.csv          Quelle der Wahrheit für history/ (siehe tabellen.md)
 ├── szenarien/*.chron       Lesezeichen
 └── karte/
-    ├── karte.chron         Projektion und Bildgröße für den Kartengenerator
-    ├── provinzen.png       generiert: Ort-ID-Bild
-    └── definition.csv      generiert: Zuordnung Kartenindex → Ort
+    ├── karte.chron         Ausschnitt, Projektion und Bildgröße
+    ├── geometrie/          GeoJSON: Land, Seen, Flüsse (aus Natural Earth), Kernraum (von Hand)
+    ├── provinzen.png       generiert: Ort-ID-Bild mit Flächenart
+    ├── fluesse.png         generiert: Flussebene
+    └── definition.csv      generiert: Kartenindex → Ort, Beschriftungspunkt, Fläche
 ```
 
-Ladereihenfolge: `regeln`, `gelaende`, `konfessionen`, `berufe`, dann alle Dateien der Ordner `szenarien`, `history/staaten`, `history/orte`, jeweils **nach Dateiname sortiert**, Einträge in Dateireihenfolge. Daraus ergeben sich die Indizes in `World`. Die Szenarien kommen vor der Historie, weil das Startdatum des gewählten Szenarios bestimmt, welche datierten Blöcke gelten (Abschnitt 3.8).
+Ladereihenfolge: `regeln`, `gelaende`, `konfessionen`, `berufe`, dann alle Dateien der Ordner `szenarien`, `history/staaten`, `history/kreise` (seit M3), `history/orte`, jeweils **nach Dateiname sortiert**, Einträge in Dateireihenfolge. Daraus ergeben sich die Indizes in `World`. Die Szenarien kommen vor der Historie, weil das Startdatum des gewählten Szenarios bestimmt, welche datierten Blöcke gelten (Abschnitt 3.8).
 
 Die Dateien in `history/` erzeugt das Werkzeug `tools/archivar` aus den Tabellen in `data/tabellen/` (Format: [tabellen.md](tabellen.md)). Änderungen gehören in die Tabellen; die CI prüft mit `archivar.py --pruefen`, dass `history/` aktuell ist.
 
@@ -168,19 +171,30 @@ Der Tag ist der Wert hinter `staat` (Großbuchstaben und Ziffern, 2–4 Zeichen)
 ```text
 ort berlin_coelln {
     name         = "Berlin-Cölln"                  # Pflicht
-    besitzer     = BRA                             # Pflicht, Staatstag
     gelaende     = flussaue                        # Pflicht
     lage         = { 13.40 52.52 }                 # Pflicht: Längengrad Ost, Breitengrad Nord (WGS84)
     flaeche      = 150                             # Pflicht, km²
-    bevoelkerung = 12000                           # Pflicht, > 0
     stadt        = ja                              # Pflicht
-    konfession   = { lutherisch = 90 reformiert = 10 }   # Pflicht, Prozentwerte, Summe 100
-    verwuestung  = 0.4                             # Pflicht, 0..1
+    kreis        = kr_berlin                       # optional (seit M3), Kreiskennung, nicht datierbar
     quelle       = "Testdaten, geschätzt"          # Pflicht
+
+    # Simulationsfelder: alle vier oder keines (siehe unten)
+    besitzer     = BRA                             # Staatstag
+    bevoelkerung = 12000                           # > 0
+    konfession   = { lutherisch = 90 reformiert = 10 }   # Prozentwerte, Summe 100
+    verwuestung  = 0.4                             # 0..1
 }
 ```
 
 Der Ort-Bezeichner ist der Wert hinter `ort` (Kleinbuchstaben, Ziffern, `_`).
+
+**Orte ohne Daten (seit M3).** Die vier Simulationsfelder `besitzer`, `bevoelkerung`,
+`konfession` und `verwuestung` (direkt oder aus datierten Blöcken, Abschnitt 3.8) sind zum
+Startdatum entweder **alle** vorhanden oder **keines**. Fehlen alle, ist der Ort ein *Ort ohne
+Daten*: Besitzer `kNone`, keine Bevölkerungsblöcke, Verwüstung 0. Er erscheint auf der Karte,
+nimmt aber an der Simulation nicht teil. Fehlen nur einige, ist das ein Fehler
+(`Ort potsdam hat zum Startdatum 'besitzer', aber nicht 'bevoelkerung'`). So lässt sich die Karte
+des ganzen Kernraums laden, auch wenn erst ein Teil der Orte historische Daten hat.
 
 ### 3.7 `szenarien/*.chron`
 
@@ -225,6 +239,22 @@ Regeln:
 
 Offen für M7: Staaten, die zum Startdatum noch nicht oder nicht mehr bestehen (heute wird jeder Staat geladen, auch ohne Orte).
 
+### 3.9 `history/kreise/*.chron` (seit M3)
+
+```text
+kreis kr_berlin {
+    name   = "Berlin"            # Pflicht, Anzeigename (meist der Hauptort)
+    quelle = "…"                 # Pflicht
+}
+```
+
+Ein Kreis bündelt 4–12 benachbarte Orte (Design-Dokument 05, Abschnitt 2) und dient in M3 der
+Kartendarstellung (Grenzen, Beschriftung nach Zoomstufe); später ist er Grundlage für Verwaltung und
+Wahlkreise. Kennung: Kleinbuchstaben, Ziffern, `_`, eindeutig. Kreise sind in M3 **nicht
+datiert**. `ort.kreis` muss auf einen bekannten Kreis verweisen (sonst Fehler); ein Kreis ohne Orte
+ist eine Warnung. Im Kern: `World::districts` (`District { id, name, source }`) und
+`Location::district` (`kNone`, wenn der Ort keinen Kreis hat).
+
 ## 4. Startzustand
 
 Für jeden Ort entstehen Bevölkerungsblöcke **in dieser Reihenfolge**: für jeden Beruf (Ladereihenfolge) und darin für jede Konfession des Ortes (Reihenfolge im `konfession`-Block):
@@ -265,45 +295,114 @@ rate  = (wachstum_basis + wachstum_wiederaufbau × verwüstung) × gelände.wach
 größe += größe × rate / 12        (für jeden Block; nie unter 0)
 ```
 
+**Orte ohne Daten** (Abschnitt 3.6) haben keine Bevölkerungsblöcke: Sie tragen nichts zu Demografie
+und Wirtschaft bei, und beim Jahreswechsel werden sie **übersprungen** – sie ziehen keine
+Zufallszahlen, und ihre Verwüstung (0) bleibt unverändert. Ein Ort, der Blöcke hat, deren Größe
+auf 0 gefallen ist, wird dagegen normal behandelt.
+
 **Jahreswechsel** (wenn das aktuelle Datum vor dem Weiterschalten der 1. Januar ist), Orte in aufsteigender Reihenfolge:
 
 1. Seuche: `rng_ereignisse.chance(seuche_chance)`; bei Treffer `verlust = rng_ereignisse.uniform(min, max)`, jeder Block `größe −= größe × verlust`, Chronikeintrag: `Seuche in {Ortsname}: {gerundeter Prozentwert} % der Bevölkerung sterben.`
 2. Verwüstung: `verwüstung −= verwüstung × verwuestung_abbau`.
 
-## 6. Karte
+## 6. Karte (Fassung M3)
+
+Die Karte zeigt den **Kernraum** (Design-Dokument 05: Altes Reich nördlich der Alpen mit Österreich,
+Böhmen, Mähren, Schlesien, Lothringen, Elsass, Luxemburg; Preußen mit Ost- und Westpreußen, Posen,
+Schleswig; angrenzende Grenzregionen) mit etwa 4.500 Orten. Land außerhalb des Kernraums ist
+*Ausland* und hat keine Orte.
 
 ### 6.1 `karte/karte.chron`
 
 ```text
 karte {
-    bild_breite = 1024
-    bild_hoehe  = 1152
-    laenge_min  = 9.5      # Grad Ost, linker Bildrand
-    laenge_max  = 16.5
-    breite_min  = 50.0     # Grad Nord, unterer Bildrand
-    breite_max  = 54.8
-    max_radius_km = 42     # weiter entfernte Punkte gehören zu keinem Ort
-    kueste = { 9.5 54.6  10.9 54.0  … }   # Ostseeküste als Linienzug (Länge Breite …, höchstens 126 Punkte); nördlich davon Meer
+    bild_breite   = 4096
+    bild_hoehe    = 3597
+    laenge_min    = 4.5      # Grad Ost, linker Bildrand
+    laenge_max    = 23.5
+    breite_min    = 45.5     # Grad Nord, unterer Bildrand
+    breite_max    = 56.0
+    bezugsbreite  = 51.0     # Grad Nord, siehe Projektion
+    max_radius_km = 25       # weiter entfernte Pixel gehören zu keinem Ort
 }
 ```
 
-### 6.2 `karte/provinzen.png` (generiert)
+Alle Felder sind Pflicht; `bild_breite` und `bild_hoehe` höchstens 4096 (Texturgrenze).
 
-RGB, 8 Bit je Kanal, Größe `bild_breite × bild_hoehe`. Jeder Pixel kodiert den **Kartenindex + 1**:
+**Projektion** (verbindlich für Generator und Godot): Plattkarte mit Bezugsbreite.
 
 ```
-wert = R + G × 256        # 0 = kein Ort (Meer, Ausland, außerhalb)
+x = (länge − laenge_min) / (laenge_max − laenge_min) × bild_breite
+y = (breite_max − breite) / (breite_max − breite_min) × bild_hoehe
+```
+
+Pixel `(px, py)` deckt `[px, px+1) × [py, py+1)` ab; seine Mitte liegt bei `(px + 0,5, py + 0,5)`.
+Damit Pixel annähernd quadratisch sind, muss gelten
+`bild_breite / bild_hoehe = (laenge_max − laenge_min) × cos(bezugsbreite) / (breite_max − breite_min)`
+mit höchstens 1 % Abweichung. Entfernungen und Flächen in km rechnet der Generator mit
+111,32 km je Grad und `cos(Breite)` für Längengrade.
+
+### 6.2 `karte/geometrie/*.geojson`
+
+GeoJSON (RFC 7946, WGS84 Länge/Breite), je Datei eine `FeatureCollection`:
+
+| Datei | Inhalt | Herkunft |
+|---|---|---|
+| `land.geojson` | Festland und Inseln (`Polygon`/`MultiPolygon`) | Natural Earth 10m `land` + `minor_islands`, auf den Kartenausschnitt zugeschnitten, erzeugt von `tools/geodaten` |
+| `seen.geojson` | Binnengewässer (`Polygon`/`MultiPolygon`) | Natural Earth 10m `lakes` + `lakes_europe`, erzeugt |
+| `fluesse.geojson` | Flüsse (`LineString`/`MultiLineString`), Eigenschaft `rang` (1 = größter Fluss … 6) | Natural Earth 10m `rivers_lake_centerlines` + `rivers_europe`, erzeugt |
+| `kernraum.geojson` | Umriss des Kernraums (`Polygon`/`MultiPolygon`) | von Hand gepflegt |
+
+Rasterregel: Ein Pixel gehört zu einem Polygon, wenn seine **Mitte** innerhalb liegt
+(äußerer Ring minus Löcher; Punkte genau auf dem Rand zählen als außen). Daraus:
+*Meer* = nicht in `land`; *Binnengewässer* = in `land` und in `seen`;
+*Ausland* = Land, nicht Binnengewässer, nicht in `kernraum`; *Kernraum-Land* = der Rest.
+
+### 6.3 `karte/provinzen.png` (generiert)
+
+RGB, 8 Bit je Kanal, Größe `bild_breite × bild_hoehe`:
+
+```
+wert = R + G × 256        # Kartenindex + 1; 0 = kein Ort
 kartenindex = wert − 1
-B = 0
+B = Flächenart            # 0 = Kernraum-Land, 1 = Meer, 2 = Binnengewässer, 3 = Ausland
 ```
 
-### 6.3 `karte/definition.csv` (generiert)
+Regeln: Bei `B ≠ 0` ist `wert = 0`. Jedes Kernraum-Land-Pixel gehört dem nächstgelegenen Ort
+(Entfernung in km, mit deterministischem Rauschen für natürliche Grenzen), höchstens
+`max_radius_km` entfernt; sonst `wert = 0` mit Warnung. Jeder Ort hat **genau eine
+zusammenhängende Fläche** (4er-Nachbarschaft) mit mindestens einem Pixel; liegt seine `lage` auf
+Kernraum-Land, gehört dieses Pixel ihm. Die Fläche (`flaeche`) der Orte geht **nicht** in die
+Zuordnung ein (sie wird aus der Karte berechnet, Abschnitt 6.5).
+
+### 6.4 `karte/fluesse.png` (generiert)
+
+Graustufen, 8 Bit (PNG-Farbtyp 0), gleiche Größe: `0` = kein Fluss, `1…255` = Deckung des Pixels
+durch Flüsse (Breite nach `rang`, kantengeglättet). Nur Darstellung; keine Wirkung auf die
+Simulation.
+
+### 6.5 `karte/definition.csv` (generiert)
 
 Semikolon-getrennt, UTF-8, mit Kopfzeile:
 
 ```
-kartenindex;ort;name
-0;berlin_coelln;Berlin-Cölln
+kartenindex;ort;name;x;y;pixel;flaeche_km2
+0;berlin_coelln;Berlin-Cölln;2118;1043;1734;212
 ```
 
-Der Kartenindex ist unabhängig vom Simulationsindex. Die Godot-Seite ordnet beide über die Ort-Kennung zu.
+- `x`, `y`: Beschriftungspunkt in Pixeln (Ganzzahlen); das Pixel gehört garantiert zum Ort
+  (Pixel mit größtem Abstand zum Rand der Fläche, bei Gleichstand das erste in Zeilenreihenfolge).
+- `pixel`: Anzahl der Pixel des Ortes; `flaeche_km2`: Fläche in km², auf ganze km² gerundet.
+
+Der Kartenindex folgt der Ladereihenfolge der Orte (Dateien sortiert, Einträge in
+Dateireihenfolge). Die Godot-Seite ordnet Kartenindex und Simulationsindex trotzdem immer über die
+Ort-Kennung zu.
+
+### 6.6 Erzeugung und Prüfung
+
+`python3 tools/kartengenerator/kartengenerator.py` erzeugt `provinzen.png`, `fluesse.png` und
+`definition.csv` deterministisch (gleiche Eingaben → pixelgleiche Bilder auf allen Plattformen;
+`--pruefen` vergleicht Pixel, nicht PNG-Bytes). Abhängigkeiten: Python ab 3.10 und **numpy**;
+im Pixelpfad nur Grundrechenarten, Vergleiche und Rundung (keine Winkelfunktionen aus numpy oder
+`math`, deren Ergebnis plattformabhängig sein kann). Ziel: volle Karte in unter einer Minute auf
+vier Kernen.

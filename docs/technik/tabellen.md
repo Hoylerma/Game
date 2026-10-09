@@ -1,4 +1,4 @@
-# Tabellen der Datenpipeline (Meilenstein M2)
+# Tabellen der Datenpipeline (Meilensteine M2 und M3)
 
 Orte und Staaten samt ihrer Geschichte werden in **Tabellen** gepflegt, nicht direkt im
 Chronik-Skript. Das Werkzeug **Archivar** (`tools/archivar/archivar.py`) prüft die Tabellen und
@@ -9,6 +9,7 @@ Tabellen passen.
 ```
 data/tabellen/
 ├── orte.csv               Stammdaten der Orte
+├── kreise.csv             Kreise (seit M3)
 ├── staaten.csv            Stammdaten der Staaten
 ├── besitz.csv             Besitzer je Ort mit Datum
 ├── bevoelkerung.csv       Bevölkerung, Konfession und Verwüstung je Ort und Stichtag
@@ -50,7 +51,19 @@ data/tabellen/
 | `laenge`, `breite` | Lage des Hauptortes in Grad (WGS84) |
 | `flaeche` | Fläche in km² (> 0) |
 | `stadt` | `ja` oder `nein` |
+| `kreis` | Kreiskennung aus `kreise.csv` (seit M3); leer = kein Kreis (Warnung) |
 | `quelle` | Quelle bzw. Begründung für den Ort (erscheint im Spiel) |
+
+## `kreise.csv` (seit M3)
+
+| Spalte | Inhalt |
+|---|---|
+| `id` | Kennung (a–z, 0–9, `_`), eindeutig |
+| `datei` | Zieldatei ohne Endung in `history/kreise/` |
+| `name` | Anzeigename |
+| `quelle` | Quelle bzw. Begründung (z. B. „räumlich gebildet aus 7 benachbarten Orten, M3“) |
+
+Ein Kreis ohne Orte ist eine Warnung.
 
 ## `staaten.csv`
 
@@ -87,6 +100,11 @@ Je Ort und Datum höchstens eine Zeile. Ein Besitzwechsel ist eine weitere Zeile
 Es gilt die jüngste Angabe mit Stichtag ≤ Szenariodatum; zwischen Stichtagen wird (noch) nicht
 interpoliert.
 
+**Orte ohne Daten (seit M3):** Ein Ort ohne Zeilen in `besitz.csv` und `bevoelkerung.csv` ist ein
+Ort ohne Daten (Spezifikation Abschnitt 3.6): Er erscheint auf der Karte, nimmt aber nicht an der
+Simulation teil. Zu jedem Szenariodatum hat ein Ort entweder einen Besitzer **und** eine
+Bevölkerungsangabe oder keines von beiden.
+
 ## `staaten_historie.csv`
 
 | Spalte | Inhalt |
@@ -103,7 +121,7 @@ Je Staat, Datum und Feld höchstens eine Zeile.
 
 | Spalte | Inhalt |
 |---|---|
-| `ordner` | `orte` oder `staaten` |
+| `ordner` | `orte`, `staaten` oder `kreise` |
 | `datei` | Dateiname ohne Endung |
 | `kommentar` | mehrzeiliger Text; erscheint als Kopfkommentar der erzeugten Datei |
 
@@ -118,10 +136,11 @@ Je Staat, Datum und Feld höchstens eine Zeile.
 - Wertebereiche (Verwüstung 0–1, Steuersatz bis `steuersatz_max` aus `common/regeln.chron`,
   Konfessionssumme 100)
 - fehlende Sicherheit oder Quelle
-- **Lücken**: Zu jedem Datum eines Szenarios in `data/szenarien/` braucht jeder Ort einen Besitzer
-  und eine Bevölkerungsangabe, jeder Staat alle Pflichtfelder (`hauptstadt`, `regierungsform`,
+- **Lücken**: Zu jedem Datum eines Szenarios in `data/szenarien/` hat jeder Ort entweder Besitzer
+  und Bevölkerungsangabe oder keines von beiden (Ort ohne Daten); jeder Staat braucht alle Pflichtfelder (`hauptstadt`, `regierungsform`,
   `herrscher`, `konfession`, `schatz`, `steuersatz`, `hofhaltung`), und die Hauptstadt muss zu
-  diesem Datum dem Staat gehören.
+  diesem Datum dem Staat gehören (also ein Ort mit Daten sein).
+- unbekannter Kreis in `orte.csv`
 
 **Warnungen** (Ausreißer, vermutlich Tippfehler):
 

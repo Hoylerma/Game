@@ -1,4 +1,4 @@
-# GDExtension-Brücke: Schnittstelle für GDScript (Meilenstein M1)
+# GDExtension-Brücke: Schnittstelle für GDScript (Meilensteine M1 und M3)
 
 Die Brücke (`bridge/`) stellt dem Godot-Projekt genau eine Klasse bereit: **`UhrwerkSimulation`** (erbt von `RefCounted`). Sie besitzt einen `uhrwerk::Simulation`-Kern und übersetzt zwischen Godot-Typen und Kern-Typen.
 
@@ -28,7 +28,12 @@ Die Brücke (`bridge/`) stellt dem Godot-Projekt genau eine Klasse bereit: **`Uh
 | `get_state(index: int)` | `Dictionary` | `tag`, `name`, `short_name`, `color` (Color), `ruler`, `government`, `capital_index` (int), `treasury` (float), `tax_rate_percent` (int, gerundet), `income_month` (float), `expenses_month` (float), `population` (int), `location_count` (int) |
 | `get_location_count()` | `int` | |
 | `get_location_index(id: String)` | `int` | -1, wenn unbekannt |
-| `get_location(index: int)` | `Dictionary` | `id`, `name`, `owner_index` (int), `owner_name`, `terrain`, `is_city` (bool), `population` (int), `area_km2` (float), `density` (float, Einwohner je km²), `devastation_percent` (int), `majority_confession`, `confessions` (Dictionary Name → Prozent als float), `production_month` (float), `taxes_month` (float), `source` |
+| `get_location(index: int)` | `Dictionary` | `id`, `name`, `owner_index` (int), `owner_name`, `terrain`, `is_city` (bool), `population` (int), `area_km2` (float), `density` (float, Einwohner je km²), `devastation_percent` (int), `majority_confession`, `confessions` (Dictionary Name → Prozent als float), `production_month` (float), `taxes_month` (float), `source`; seit M3 zusätzlich `has_data` (bool), `kreis_index` (int, −1 ohne Kreis), `kreis_name` (String). Für Orte ohne Daten: `has_data = false`, `owner_index = -1`, `owner_name = ""`, Zahlen 0, `majority_confession = ""`, `confessions` leer |
+| `get_location_owner_indices()` | `PackedInt32Array` | seit M3: Besitzer-Staatsindex je Ort (−1 ohne Daten), Länge = `get_location_count()` – für Grenzen im Shader ohne 4.500 Einzelabfragen |
+| `get_location_kreis_indices()` | `PackedInt32Array` | seit M3: Kreisindex je Ort (−1 ohne Kreis) |
+| `get_kreis_count()` | `int` | seit M3 |
+| `get_kreis_index(id: String)` | `int` | seit M3; −1, wenn unbekannt |
+| `get_kreis(index: int)` | `Dictionary` | seit M3: `id`, `name`, `location_count` (int), `source` |
 | `get_map_colors(mode: int)` | `PackedColorArray` | Eine Farbe je Simulations-Ortsindex (Länge = `get_location_count()`), siehe Kartenmodi |
 | `set_tax_rate_percent(state_index: int, percent: int)` | `bool` | Reiht einen `SetTaxRate`-Befehl ein; `false`, wenn Index ungültig oder Prozent außerhalb 0..Maximum |
 | `get_max_tax_rate_percent()` | `int` | |
@@ -45,6 +50,11 @@ Die Brücke (`bridge/`) stellt dem Godot-Projekt genau eine Klasse bereit: **`Uh
 | 2 | `MAP_CONFESSION` | Farbe der Mehrheitskonfession |
 | 3 | `MAP_TERRAIN` | Farbe des Geländes |
 | 4 | `MAP_DEVASTATION` | Verlauf nach Verwüstung (0 → neutral, 1 → rot) |
+| 5 | `MAP_KREISE` | seit M3: Farbe je Kreis aus einer festen Palette (`palette[kreisindex % n]`, benachbarte Kreisindizes unterschiedlich); Orte ohne Kreis grau |
+
+**Orte ohne Daten** (seit M3) erhalten in den Modi 0, 1, 2 und 4 eine Farbe mit **Alpha 0**; die
+Godot-Seite zeichnet dort eine Schraffur „keine Daten“. In den Modi 3 und 5 haben sie normale
+Farben (Alpha 1).
 
 ## Bibliothek und Einbindung
 
