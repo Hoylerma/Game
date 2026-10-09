@@ -486,6 +486,111 @@ TEST_CASE("Lader: unbekannte Verweise") {
     }
 }
 
+// ─── Datierte Historie (Abschnitt 3.8) ──────────────────────────────────────
+
+TEST_CASE("Lader: datierte Blöcke gelten ab ihrem Datum") {
+    TempDir dir(true);
+    replace_in_file(dir / kPlacesBra, "    besitzer     = BRA\n    gelaende     = sandboden",
+                    "    besitzer     = BRA\n"
+                    "    1649.06.01 = { besitzer = SAX bevoelkerung = 2000 }\n"
+                    "    gelaende     = sandboden");
+
+    SUBCASE("vor dem Datum gilt die Grundangabe") {
+        const LoadResult r = load(dir);
+        INFO(issues_text(r));
+        REQUIRE(r.ok());
+        const World& w = *r.world;
+        const Index potsdam = w.find_location("potsdam");
+        CHECK(w.locations[static_cast<std::size_t>(potsdam)].owner == w.find_state("BRA"));
+        CHECK(w.location_population(potsdam).round() == 1500);
+    }
+    SUBCASE("ab dem Datum gilt der Block") {
+        const LoadResult r = load(dir, "jahresbeginn_1650");
+        INFO(issues_text(r));
+        REQUIRE(r.ok());
+        const World& w = *r.world;
+        const Index potsdam = w.find_location("potsdam");
+        CHECK(w.locations[static_cast<std::size_t>(potsdam)].owner == w.find_state("SAX"));
+        CHECK(w.location_population(potsdam).round() == 2000);
+        CHECK(r.issues.empty());
+    }
+}
+
+TEST_CASE("Lader: datierte Blöcke in zeitlicher Reihenfolge, nicht in Dateireihenfolge") {
+    TempDir dir(true);
+    replace_in_file(dir / kStatesBra, "    herrscher      = \"Friedrich Wilhelm\"\n",
+                    "    1649.12.31 = { herrscher = \"Später\" }\n"
+                    "    1648.01.01 = { herrscher = \"Früher\" }\n"
+                    "    1700.01.01 = { herrscher = \"Zukunft\" }\n");
+    const LoadResult r1648 = load(dir);
+    REQUIRE(r1648.ok());
+    CHECK(r1648.world->states[0].ruler == "Früher");
+    const LoadResult r1650 = load(dir, "jahresbeginn_1650");
+    REQUIRE(r1650.ok());
+    CHECK(r1650.world->states[0].ruler == "Später");
+}
+
+TEST_CASE("Lader: Pflichtfeld nur in einem datierten Block") {
+    TempDir dir(true);
+    replace_in_file(dir / kPlacesBra, "    besitzer     = BRA\n    gelaende     = sandboden",
+                    "    1649.06.01 = { besitzer = BRA }\n    gelaende     = sandboden");
+    SUBCASE("vor dem Datum fehlt es") {
+        expect_error(load(dir), "Pflichtfeld 'besitzer' fehlt in ort potsdam", kPlacesBra);
+    }
+    SUBCASE("ab dem Datum ist es vorhanden") {
+        const LoadResult r = load(dir, "jahresbeginn_1650");
+        INFO(issues_text(r));
+        CHECK(r.ok());
+    }
+}
+
+TEST_CASE("Lader: Fehler in datierten Blöcken") {
+    TempDir dir(true);
+    const auto insert = [&](std::string_view text) {
+        replace_in_file(dir / kPlacesBra, "    besitzer     = BRA\n    gelaende     = sandboden",
+                        "    besitzer     = BRA\n" + std::string(text) + "    gelaende     = sandboden");
+    };
+    SUBCASE("ungültiges Datum") {
+        insert("    1648.13.01 = { besitzer = SAX }\n");
+        expect_error(load(dir), "ungültiges Datum '1648.13.01' in ort potsdam", kPlacesBra, 18);
+    }
+    SUBCASE("Wert statt Block") {
+        insert("    1649.01.01 = SAX\n");
+        expect_error(load(dir), "datierter Eintrag '1649.01.01' in ort potsdam erwartet einen Block");
+    }
+    SUBCASE("Datum doppelt") {
+        insert("    1649.01.01 = { besitzer = SAX }\n    1649.01.01 = { besitzer = BRA }\n");
+        expect_error(load(dir),
+                     "Datum '1649.01.01' ist in ort potsdam mehrfach angegeben (zuerst in Zeile 18)",
+                     kPlacesBra, 19);
+    }
+    SUBCASE("Feld, das nicht datiert werden kann") {
+        insert("    1649.01.01 = { lage = { 13.0 52.0 } }\n");
+        expect_error(load(dir), "Feld 'lage' in ort potsdam kann nicht datiert werden");
+    }
+    SUBCASE("Feld doppelt im Block") {
+        insert("    1649.01.01 = { besitzer = SAX besitzer = BRA }\n");
+        expect_error(load(dir),
+                     "Feld 'besitzer' ist im Block '1649.01.01' von ort potsdam mehrfach angegeben");
+    }
+    SUBCASE("Verweise in künftigen Blöcken prüft erst das passende Szenario") {
+        insert("    1700.01.01 = { besitzer = XYZ }\n");
+        const LoadResult r = load(dir, "jahresbeginn_1650");
+        INFO(issues_text(r));
+        CHECK(r.ok());
+    }
+    SUBCASE("die Form künftiger Blöcke wird immer geprüft") {
+        insert("    1700.01.01 = { flaeche = 10 }\n");
+        expect_error(load(dir), "Feld 'flaeche' in ort potsdam kann nicht datiert werden");
+    }
+    SUBCASE("unbekanntes Feld im Block") {
+        insert("    1648.01.01 = { einwohner = 5 }\n");
+        const LoadResult r = load(dir);
+        CHECK(r.ok());
+        CHECK(has_issue(r, "unbekanntes Feld 'einwohner' in ort potsdam wird ignoriert", false));
+    }
+}
+
 TEST_CASE("Lader: Form von Kennungen und Tags") {
     TempDir dir(true);
     SUBCASE("Staatstag mit Kleinbuchstaben") {

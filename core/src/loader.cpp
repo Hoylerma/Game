@@ -429,6 +429,12 @@ struct CapitalRef {
     int line = 0;
 };
 
+struct PlayerRef {
+    std::string tag;
+    std::string file;
+    int line = 0;
+};
+
 class Loader {
 public:
     Loader(fs::path data_dir, std::vector<LoadIssue>& issues)
@@ -445,19 +451,27 @@ public:
         process("common/gelaende.chron", [&](const SourceFile& f) { load_terrains(f); });
         process("common/konfessionen.chron", [&](const SourceFile& f) { load_confessions(f); });
         process("common/berufe.chron", [&](const SourceFile& f) { load_professions(f); });
+
+        // Szenarien vor der Historie: Das Startdatum entscheidet, welche datierten
+        // Blöcke gelten (Abschnitt 3.8).
+        std::vector<Scenario> scenarios;
+        for (const std::string& name : list_folder("szenarien")) {
+            process(name, [&](const SourceFile& f) { load_scenarios(f, scenarios); });
+        }
+        const Scenario* selected = select_scenario(scenarios, scenario_id);
+        // Ohne gültiges Szenario werden alle datierten Blöcke angewendet, damit die
+        // Prüfung trotzdem alle Felder sieht.
+        start_ = selected != nullptr ? selected->start : Date{9999, 12, 31};
+
         for (const std::string& name : list_folder("history/staaten")) {
             process(name, [&](const SourceFile& f) { load_states(f); });
         }
         for (const std::string& name : list_folder("history/orte")) {
             process(name, [&](const SourceFile& f) { load_locations(f); });
         }
-        std::vector<Scenario> scenarios;
-        for (const std::string& name : list_folder("szenarien")) {
-            process(name, [&](const SourceFile& f) { load_scenarios(f, scenarios); });
-        }
 
+        check_players(scenarios);
         check_capitals();
-        const Scenario* selected = select_scenario(scenarios, scenario_id);
 
         if (issues_.has_errors() || selected == nullptr) {
             return std::nullopt;
@@ -733,7 +747,8 @@ private:
                               "ungültiger Staatstag " + quote(node.value) +
                                   " (2–4 Zeichen, nur Großbuchstaben A–Z und Ziffern)");
             }
-            Fields f(node, file.name, "staat " + node.value, issues_,
+            const ScriptNode merged = apply_history(node, file.name, "staat " + node.value, {"farbe"});
+            Fields f(merged, file.name, "staat " + node.value, issues_,
                      {"name", "kurzname", "farbe", "hauptstadt", "regierungsform", "herrscher", "konfession",
                       "schatz", "steuersatz", "hofhaltung", "quelle"});
             State s;
@@ -747,7 +762,7 @@ private:
             if (const auto confession = f.text("konfession")) {
                 s.confession = lookup(confessions_, *confession);
                 if (s.confession == kNone) {
-                    issues_.error(file.name, node.find("konfession")->line,
+                    issues_.error(file.name, merged.find("konfession")->line,
                                   "unbekannte Konfession " + quote(*confession) + " in staat " + node.value);
                 }
             }
@@ -761,7 +776,7 @@ private:
             const auto index = static_cast<Index>(world_.states.size());
             if (register_id(states_, s.tag, index, file.name, node.line, "Staat")) {
                 if (capital) {
-                    const ScriptNode* capital_node = node.find("hauptstadt");
+                    const ScriptNode* capital_node = merged.find("hauptstadt");
                     capitals_.push_back(CapitalRef{*capital, file.name, capital_node->line});
                 } else {
                     capitals_.push_back(CapitalRef{});
@@ -778,7 +793,9 @@ private:
                               "ungültige Ortskennung " + quote(node.value) +
                                   " (nur Kleinbuchstaben a–z, Ziffern und '_')");
             }
-            Fields f(node, file.name, "ort " + node.value, issues_,
+            const ScriptNode merged =
+                apply_history(node, file.name, "ort " + node.value, {"lage", "flaeche"});
+            Fields f(merged, file.name, "ort " + node.value, issues_,
                      {"name", "besitzer", "gelaende", "lage", "flaeche", "bevoelkerung", "stadt",
                       "konfession", "verwuestung", "quelle"});
             Location loc;
@@ -788,7 +805,7 @@ private:
             if (const auto owner = f.text("besitzer")) {
                 loc.owner = lookup(states_, *owner);
                 if (loc.owner == kNone) {
-                    issues_.error(file.name, node.find("besitzer")->line,
+                    issues_.error(file.name, merged.find("besitzer")->line,
                                   "unbekannter Staat " + quote(*owner) + " als Besitzer von ort " +
                                       node.value);
                 }
@@ -796,7 +813,7 @@ private:
             if (const auto terrain = f.text("gelaende")) {
                 loc.terrain = lookup(terrains_, *terrain);
                 if (loc.terrain == kNone) {
-                    issues_.error(file.name, node.find("gelaende")->line,
+                    issues_.error(file.name, merged.find("gelaende")->line,
                                   "unbekanntes Gelände " + quote(*terrain) + " in ort " + node.value);
                 }
             }
@@ -904,22 +921,109 @@ private:
             s.id = node.value;
             s.name = f.text("name").value_or("");
             s.start = f.date("datum").value_or(Date{});
+            PlayerRef player_ref;
             if (const auto player = f.text("spieler")) {
                 s.player_tag = *player;
-                if (lookup(states_, *player) == kNone) {
-                    issues_.error(file.name, node.find("spieler")->line,
-                                  "unbekannter Staat " + quote(*player) + " als Spieler in szenario " +
-                                      node.value);
-                }
+                player_ref = PlayerRef{*player, file.name, node.find("spieler")->line};
             }
             const auto index = static_cast<Index>(scenarios.size());
             if (register_id(scenarios_, s.id, index, file.name, node.line, "Szenario")) {
                 scenarios.push_back(std::move(s));
+                players_.push_back(std::move(player_ref));
             }
         });
     }
 
+    // ── Datierte Historie (Abschnitt 3.8) ──
+
+    /// Prüft alle datierten Blöcke "JJJJ.MM.TT = { … }" eines Objekts und wendet die bis
+    /// zum Startdatum gültigen in zeitlicher Reihenfolge an: Ein Feld aus einem späteren
+    /// Block ersetzt dasselbe Feld aus der Grundangabe oder einem früheren Block.
+    /// Felder in static_keys dürfen nicht datiert werden.
+    ScriptNode apply_history(const ScriptNode& node, const std::string& file, const std::string& what,
+                             std::initializer_list<std::string_view> static_keys) {
+        ScriptNode merged = node;
+        merged.children.clear();
+        std::map<Date, const ScriptNode*> dated;
+        for (const ScriptNode& child : node.children) {
+            const bool looks_dated = !child.key.empty() && child.key[0] >= '0' && child.key[0] <= '9';
+            if (!looks_dated) {
+                merged.children.push_back(child);
+                continue;
+            }
+            const auto date = parse_date(child.key);
+            if (!date) {
+                issues_.error(file, child.line,
+                              "ungültiges Datum " + quote(child.key) + " in " + what +
+                                  " (erwartet JJJJ.MM.TT)");
+                continue;
+            }
+            if (!child.is_block || child.op != "=") {
+                issues_.error(file, child.line,
+                              "datierter Eintrag " + quote(child.key) + " in " + what +
+                                  " erwartet einen Block, z. B. " + child.key + " = { besitzer = BRA }");
+                continue;
+            }
+            const auto [it, inserted] = dated.emplace(*date, &child);
+            if (!inserted) {
+                issues_.error(file, child.line,
+                              "Datum " + quote(child.key) + " ist in " + what +
+                                  " mehrfach angegeben (zuerst in Zeile " + std::to_string(it->second->line) +
+                                  ")");
+                continue;
+            }
+            std::set<std::string_view> keys;
+            for (const ScriptNode& entry : child.children) {
+                if (entry.key.empty()) {
+                    issues_.error(file, entry.line,
+                                  "unerwarteter Eintrag im Block " + quote(child.key) + " von " + what +
+                                      " (erwartet <feld> = <wert>)");
+                    continue;
+                }
+                if (std::find(static_keys.begin(), static_keys.end(), std::string_view(entry.key)) !=
+                    static_keys.end()) {
+                    issues_.error(file, entry.line,
+                                  "Feld " + quote(entry.key) + " in " + what + " kann nicht datiert werden");
+                }
+                if (!keys.insert(entry.key).second) {
+                    issues_.error(file, entry.line,
+                                  "Feld " + quote(entry.key) + " ist im Block " + quote(child.key) + " von " +
+                                      what + " mehrfach angegeben");
+                }
+            }
+        }
+        for (const auto& [date, block] : dated) {
+            if (date > start_) {
+                break;
+            }
+            for (const ScriptNode& entry : block->children) {
+                if (entry.key.empty()) {
+                    continue;
+                }
+                const auto existing = std::find_if(merged.children.begin(), merged.children.end(),
+                                                   [&](const ScriptNode& c) { return c.key == entry.key; });
+                if (existing != merged.children.end()) {
+                    *existing = entry;
+                } else {
+                    merged.children.push_back(entry);
+                }
+            }
+        }
+        return merged;
+    }
+
     // ── Querprüfungen ──
+
+    void check_players(const std::vector<Scenario>& scenarios) {
+        for (std::size_t i = 0; i < scenarios.size() && i < players_.size(); ++i) {
+            const PlayerRef& ref = players_[i];
+            if (!ref.tag.empty() && lookup(states_, ref.tag) == kNone) {
+                issues_.error(ref.file, ref.line,
+                              "unbekannter Staat " + quote(ref.tag) + " als Spieler in szenario " +
+                                  scenarios[i].id);
+            }
+        }
+    }
 
     void check_capitals() {
         for (std::size_t i = 0; i < world_.states.size() && i < capitals_.size(); ++i) {
@@ -1004,7 +1108,9 @@ private:
     Registry locations_;
     Registry scenarios_;
 
+    Date start_{9999, 12, 31};          // Startdatum des gewählten Szenarios
     std::vector<CapitalRef> capitals_;  // parallel zu world_.states
+    std::vector<PlayerRef> players_;    // parallel zu den Szenarien
     std::vector<LocationDraft> drafts_; // parallel zu world_.locations
 };
 

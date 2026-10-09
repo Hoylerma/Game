@@ -1,4 +1,4 @@
-# Chronik-Skript und Datenformate (Meilenstein M1)
+# Chronik-Skript und Datenformate (Meilensteine M1 und M2)
 
 Verbindliche Spezifikation für Parser (`core/src/script.cpp`), Lader (`core/src/loader.cpp`), Inhalte (`data/`) und Werkzeuge (`tools/`). Änderungen hier ziehen Änderungen in Code und Tests nach sich.
 
@@ -71,9 +71,10 @@ data/
 │   ├── gelaende.chron      Geländetypen
 │   ├── konfessionen.chron  Konfessionen
 │   └── berufe.chron        Berufsgruppen
-├── history/
-│   ├── staaten/*.chron     Staaten (Reichsstände) zum Szenariostart
-│   └── orte/*.chron        Orte mit Bevölkerung zum Szenariostart
+├── history/                generiert aus tabellen/ (tools/archivar), nicht von Hand bearbeiten
+│   ├── staaten/*.chron     Staaten (Reichsstände) mit datierter Historie
+│   └── orte/*.chron        Orte mit datierter Historie (Besitz, Bevölkerung …)
+├── tabellen/*.csv          Quelle der Wahrheit für history/ (siehe tabellen.md)
 ├── szenarien/*.chron       Lesezeichen
 └── karte/
     ├── karte.chron         Projektion und Bildgröße für den Kartengenerator
@@ -81,7 +82,9 @@ data/
     └── definition.csv      generiert: Zuordnung Kartenindex → Ort
 ```
 
-Ladereihenfolge: `regeln`, `gelaende`, `konfessionen`, `berufe`, dann alle Dateien der Ordner `history/staaten`, `history/orte`, `szenarien`, jeweils **nach Dateiname sortiert**, Einträge in Dateireihenfolge. Daraus ergeben sich die Indizes in `World`.
+Ladereihenfolge: `regeln`, `gelaende`, `konfessionen`, `berufe`, dann alle Dateien der Ordner `szenarien`, `history/staaten`, `history/orte`, jeweils **nach Dateiname sortiert**, Einträge in Dateireihenfolge. Daraus ergeben sich die Indizes in `World`. Die Szenarien kommen vor der Historie, weil das Startdatum des gewählten Szenarios bestimmt, welche datierten Blöcke gelten (Abschnitt 3.8).
+
+Die Dateien in `history/` erzeugt das Werkzeug `tools/archivar` aus den Tabellen in `data/tabellen/` (Format: [tabellen.md](tabellen.md)). Änderungen gehören in die Tabellen; die CI prüft mit `archivar.py --pruefen`, dass `history/` aktuell ist.
 
 ## 3. Dateischemata
 
@@ -188,6 +191,39 @@ szenario westfaelischer_frieden {
     spieler = BRA                          # Pflicht, Staatstag (Vorauswahl)
 }
 ```
+
+### 3.8 Datierte Blöcke (seit M2)
+
+In `staat`- und `ort`-Definitionen darf ein Block stehen, dessen Schlüssel ein Datum `JJJJ.MM.TT` ist. Er enthält Felder desselben Schemas, die **ab diesem Datum** gelten:
+
+```text
+ort potsdam {
+    name     = "Potsdam"
+    gelaende = sandboden
+    lage     = { 13.06 52.40 }
+    flaeche  = 400
+    stadt    = nein
+    quelle   = "…"
+
+    1648.10.24 = {
+        besitzer     = BRA
+        bevoelkerung = 1500
+        konfession   = { lutherisch = 100 }
+        verwuestung  = 0.6
+    }
+    1701.01.18 = { besitzer = PRE }
+}
+```
+
+Regeln:
+
+- Der Lader wendet alle Blöcke mit Datum **≤ Startdatum** des gewählten Szenarios in **zeitlicher** Reihenfolge an (nicht in Dateireihenfolge). Ein Feld aus einem Block ersetzt dasselbe Feld aus der Grundangabe oder aus einem früheren Block; Felder ohne Datum gelten von Anfang an.
+- Pflichtfelder müssen **zum Startdatum** vorhanden sein, gleich ob aus der Grundangabe oder einem Block.
+- Nicht datierbar: `lage` und `flaeche` (Ort), `farbe` (Staat).
+- Fehler (für alle Blöcke, auch künftige): ungültiges Datum, Wert statt Block, dasselbe Datum zweimal, ein Feld zweimal im selben Block, nicht datierbares Feld. Werte und Verweise (z. B. `besitzer`) prüft der Lader nur für das, was zum Startdatum gilt; die vollständige Prüfung aller Zeiträume übernimmt `archivar.py`.
+- Ohne gültiges Szenario wendet der Lader alle Blöcke an, damit `uhrwerk-cli pruefen` trotzdem alle Felder sieht.
+
+Offen für M7: Staaten, die zum Startdatum noch nicht oder nicht mehr bestehen (heute wird jeder Staat geladen, auch ohne Orte).
 
 ## 4. Startzustand
 
