@@ -1,0 +1,16 @@
+# Testorte im Norden (Dateiname sortiert vor b_sued.chron → Kartenindex 0 und 1).
+
+ort hafen {
+    name         = "Hafenstadt"
+    besitzer     = AAA
+    lage         = { 10.30 52.80 }
+    flaeche      = 150
+    bevoelkerung = 5000      # vom Kartengenerator nicht benötigt
+}
+
+ort heide {
+    name     = "Heide-Süd"
+    besitzer = AAA
+    lage     = { 10.75 52.70 }
+    flaeche  = 250
+}

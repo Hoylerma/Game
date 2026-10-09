@@ -1,0 +1,4 @@
+staat AAA {
+    name  = "Nordland"
+    farbe = { 58 95 143 }
+}

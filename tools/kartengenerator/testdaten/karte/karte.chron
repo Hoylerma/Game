@@ -1,0 +1,22 @@
+# Kleine Testkarte für tools/kartengenerator/test_kartengenerator.py.
+#
+# 1° × 1° bei 52,5 °N, 120 × 192 Pixel (etwa 0,56 km × 0,58 km je Pixel).
+# Die Küste endet bei 10,9 °O; östlich davon ist alles Land.
+# provinzen.png und definition.csv in diesem Ordner sind die erwarteten Ausgaben
+# (Neu erzeugen: python3 tools/kartengenerator/kartengenerator.py --daten tools/kartengenerator/testdaten).
+
+karte {
+    bild_breite   = 120
+    bild_hoehe    = 192
+    laenge_min    = 10.0
+    laenge_max    = 11.0
+    breite_min    = 52.0
+    breite_max    = 53.0
+    max_radius_km = 25
+    kueste = {
+        10.00 52.92
+        10.40 52.90
+        10.60 52.96
+        10.90 52.86
+    }
+}

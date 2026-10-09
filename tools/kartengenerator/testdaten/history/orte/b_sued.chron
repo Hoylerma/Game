@@ -1,0 +1,15 @@
+# Testorte im Süden (Kartenindex 2 und 3).
+
+ort burg {
+    name     = "Burg (Altmark)"
+    besitzer = BBB
+    lage     = { 10.40 52.35 }
+    flaeche  = 200
+}
+
+ort aue {
+    name     = "Aue"
+    besitzer = BBB
+    lage     = { 10.80 52.25 }
+    flaeche  = 200
+}

@@ -1,0 +1,106 @@
+# Karte der Testregion (Meilenstein M1): Projektion, Bildgröße und Küstenlinie.
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 6.1.
+# Eingabe für tools/kartengenerator/kartengenerator.py, der daraus provinzen.png und
+# definition.csv in diesem Ordner erzeugt (nicht von Hand bearbeiten).
+#
+# Projektion: equirektangular (Länge und Breite linear) im Rechteck
+# 9,5–16,5 °O × 50,0–54,8 °N. Bei 52,4 °N sind die Pixel nahezu quadratisch
+# (je etwa 0,46 km × 0,46 km).
+#
+# Küste: Linienzug der Ostseeküste von West nach Ost (Länge Breite, WGS84, auf etwa
+# 0,01° gerundet nach realen Orten); nördlich davon ist Meer. Der Kartengenerator
+# interpoliert die Breite linear zwischen den Punkten, die Längengrade müssen daher
+# streng steigen. Vereinfachungen:
+# - Inseln (Fehmarn, Poel, Rügen, Hiddensee) fehlen und sind Meer; Usedom und Wollin
+#   werden mit ihrer Außenküste als Land geführt, das Stettiner Haff und der
+#   Peenestrom sind dadurch ebenfalls Land.
+# - Förden, Bodden und Buchten, die nach Westen zurückgreifen (Eckernförder Bucht,
+#   Kieler Förde, Salzhaff, Saaler Bodden), sind nur angedeutet oder fehlen.
+# - Das östliche Wagrien (Oldenburg in Holstein, Grömitz) liegt hinter der
+#   vereinfachten Westküste der Lübecker Bucht und erscheint als Meer; dort liegt
+#   kein Ort der Testregion.
+
+karte {
+    bild_breite   = 1024
+    bild_hoehe    = 1152
+    laenge_min    = 9.5      # Grad Ost, linker Bildrand
+    laenge_max    = 16.5
+    breite_min    = 50.0     # Grad Nord, unterer Bildrand
+    breite_max    = 54.8
+    max_radius_km = 42       # weiter entfernte Punkte gehören zu keinem Ort
+
+    kueste = {
+        # Schleswig-Holstein (ohne Orte der Testregion)
+        9.50 54.83      # Flensburger Förde, Südufer
+        9.70 54.81      # Langballig
+        9.90 54.76      # Geltinger Bucht
+        10.00 54.68     # Schleimünde
+        10.03 54.56     # Damp
+        10.10 54.47     # Dänischer Wohld (Eckernförder Bucht vereinfacht)
+        10.19 54.43     # Mündung der Kieler Förde
+        10.30 54.43     # Laboe
+        10.45 54.41     # Probstei
+        10.60 54.36
+        10.70 54.32     # Hohwachter Bucht
+        10.80 54.30
+        10.82 54.10     # Neustadt in Holstein
+        10.89 53.96     # Travemünde
+        # Mecklenburg
+        10.97 53.95     # Priwall, Pötenitzer Wiek
+        11.10 54.00     # Klützer Winkel
+        11.19 53.99     # Boltenhagen
+        11.30 53.94     # Wohlenberger Wiek
+        11.38 53.93     # Westufer der Wismarer Bucht
+        11.46 53.90     # Wismar, Hafen
+        11.52 53.94     # Ostufer der Wismarer Bucht
+        11.56 54.01     # Boiensdorfer Werder
+        11.62 54.11     # Rerik (Salzhaff vereinfacht)
+        11.75 54.15     # Kühlungsborn
+        11.84 54.14     # Heiligendamm
+        11.95 54.16     # Nienhagen
+        12.08 54.18     # Warnemünde
+        12.15 54.20     # Markgrafenheide
+        12.25 54.24     # Graal-Müritz
+        12.35 54.29     # Dierhagen
+        12.42 54.38     # Ahrenshoop (Fischland)
+        12.50 54.47     # Darßer Ort
+        12.57 54.45     # Prerow
+        12.69 54.44     # Zingst
+        12.93 54.44     # Pramort (Ostspitze des Zingst)
+        # Vorpommern (Rügen und Hiddensee fehlen)
+        13.03 54.43     # Barhöft
+        13.07 54.35     # Stralsund-Nord, Strelasund
+        13.12 54.30     # Stralsund, Hafen
+        13.16 54.27     # Devin
+        13.28 54.23     # Stahlbrode
+        13.36 54.16     # Greifswalder Bodden, Westufer
+        13.45 54.10     # Wieck (Ryckmündung, Greifswald)
+        13.53 54.12     # Loissin
+        13.61 54.14     # Lubmin
+        13.75 54.16     # Freest (Peenestrom-Mündung)
+        13.80 54.17     # Peenemünder Haken (Usedom)
+        13.85 54.11     # Karlshagen
+        13.91 54.08     # Zinnowitz
+        14.00 54.05     # Koserow
+        14.13 53.97     # Bansin
+        14.20 53.94     # Ahlbeck
+        14.27 53.92     # Swinemünde
+        # Hinterpommern
+        14.45 53.93     # Misdroy (Wollin)
+        14.68 54.00     # Heidebrink
+        14.77 54.03     # Dievenow
+        14.93 54.06     # Poberow
+        15.07 54.09     # Horst
+        15.27 54.14     # Regamünde
+        15.40 54.16     # Kolberger Deep
+        15.56 54.19     # Kolberg, Hafen
+        15.75 54.21     # Henkenhagen
+        15.94 54.25     # Sorenbohm
+        16.07 54.27     # Großmöllen
+        16.22 54.31     # Laase
+        16.33 54.37     # Neuwasser
+        16.39 54.44     # Rügenwaldermünde
+        16.50 54.52     # bei Jershöft, rechter Bildrand
+    }
+}

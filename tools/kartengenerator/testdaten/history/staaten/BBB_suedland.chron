@@ -1,0 +1,4 @@
+staat BBB {
+    name  = "Südland"
+    farbe = { 70 150 80 }
+}
