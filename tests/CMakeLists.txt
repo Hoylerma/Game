@@ -4,7 +4,11 @@ FetchContent_Declare(doctest
     GIT_TAG v2.4.11
     GIT_SHALLOW TRUE)
 set(DOCTEST_NO_INSTALL ON CACHE BOOL "" FORCE)
+# doctest 2.4.11 verlangt cmake_minimum_required(VERSION 3.0); CMake 4 lehnt das ohne
+# diese Untergrenze ab. Ältere CMake-Versionen ignorieren die Variable.
+set(CMAKE_POLICY_VERSION_MINIMUM 3.5)
 FetchContent_MakeAvailable(doctest)
+unset(CMAKE_POLICY_VERSION_MINIMUM)
 
 add_executable(uhrwerk_tests
     test_main.cpp
