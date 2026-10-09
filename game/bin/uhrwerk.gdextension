@@ -1,0 +1,19 @@
+; GDExtension-Brücke zum Simulationskern Uhrwerk (siehe docs/technik/bridge-api.md).
+; Die Bibliotheken baut CMake direkt in diesen Ordner:
+;   cmake --preset bridge && cmake --build --preset bridge
+; Debug- und Release-Export verwenden dieselbe Datei.
+
+[configuration]
+
+entry_symbol = "uhrwerk_library_init"
+compatibility_minimum = "4.4"
+reloadable = false
+
+[libraries]
+
+linux.debug = "res://bin/libuhrwerk_bridge.so"
+linux.release = "res://bin/libuhrwerk_bridge.so"
+windows.debug = "res://bin/uhrwerk_bridge.dll"
+windows.release = "res://bin/uhrwerk_bridge.dll"
+macos.debug = "res://bin/libuhrwerk_bridge.dylib"
+macos.release = "res://bin/libuhrwerk_bridge.dylib"

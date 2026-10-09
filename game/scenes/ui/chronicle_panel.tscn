@@ -1,0 +1,51 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/chronicle_panel.gd" id="1_panel"]
+
+[node name="ChroniclePanel" type="PanelContainer"]
+custom_minimum_size = Vector2(340, 160)
+offset_right = 340.0
+offset_bottom = 300.0
+size_flags_vertical = 3
+script = ExtResource("1_panel")
+
+[node name="Content" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="HeaderRow" type="HBoxContainer" parent="Content"]
+layout_mode = 2
+
+[node name="Header" type="Label" parent="Content/HeaderRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"HeaderLabel"
+text = "CHRONIK"
+
+[node name="Count" type="Label" parent="Content/HeaderRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"CaptionLabel"
+horizontal_alignment = 2
+
+[node name="Separator" type="HSeparator" parent="Content"]
+layout_mode = 2
+
+[node name="Placeholder" type="Label" parent="Content"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+theme_type_variation = &"MutedLabel"
+text = "Noch keine Einträge. Die Chronik hält fest, was in der Partie geschieht – etwa Seuchen, die zum Jahreswechsel einen Ort treffen."
+autowrap_mode = 3
+
+[node name="Scroll" type="ScrollContainer" parent="Content"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="Entries" type="VBoxContainer" parent="Content/Scroll"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 5

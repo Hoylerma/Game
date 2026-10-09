@@ -1,0 +1,217 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/top_bar.gd" id="1_bar"]
+[ext_resource type="Script" path="res://scripts/ui/coat_of_arms.gd" id="2_coat"]
+
+[node name="TopBar" type="PanelContainer"]
+custom_minimum_size = Vector2(0, 62)
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 62.0
+grow_horizontal = 2
+theme_type_variation = &"TopBarPanel"
+script = ExtResource("1_bar")
+
+[node name="Row" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="Coat" type="Control" parent="Row"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 38)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+script = ExtResource("2_coat")
+
+[node name="StateBox" type="VBoxContainer" parent="Row"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+
+[node name="StateName" type="Label" parent="Row/StateBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"NameLabel"
+text = "Keine Simulation"
+text_overrun_behavior = 3
+
+[node name="StateDetail" type="Label" parent="Row/StateBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"MutedLabel"
+text = "Spielerstaat unbekannt"
+text_overrun_behavior = 3
+
+[node name="Separator1" type="VSeparator" parent="Row"]
+layout_mode = 2
+
+[node name="TreasuryBox" type="VBoxContainer" parent="Row"]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Staatsschatz: Bestand der Staatskasse"
+theme_override_constants/separation = 0
+
+[node name="Caption" type="Label" parent="Row/TreasuryBox"]
+layout_mode = 2
+theme_type_variation = &"CaptionLabel"
+text = "STAATSSCHATZ"
+
+[node name="Treasury" type="Label" parent="Row/TreasuryBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ValueLabel"
+text = "–"
+
+[node name="IncomeBox" type="VBoxContainer" parent="Row"]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Steuereinnahmen des letzten Monats"
+theme_override_constants/separation = 0
+
+[node name="Caption" type="Label" parent="Row/IncomeBox"]
+layout_mode = 2
+theme_type_variation = &"CaptionLabel"
+text = "EINNAHMEN / MONAT"
+
+[node name="Income" type="Label" parent="Row/IncomeBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ValueLabel"
+theme_override_colors/font_color = Color(0.184314, 0.419608, 0.227451, 1)
+text = "–"
+
+[node name="ExpensesBox" type="VBoxContainer" parent="Row"]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Ausgaben des letzten Monats (Hofhaltung und Verwaltung)"
+theme_override_constants/separation = 0
+
+[node name="Caption" type="Label" parent="Row/ExpensesBox"]
+layout_mode = 2
+theme_type_variation = &"CaptionLabel"
+text = "AUSGABEN / MONAT"
+
+[node name="Expenses" type="Label" parent="Row/ExpensesBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ValueLabel"
+theme_override_colors/font_color = Color(0.603922, 0.176471, 0.133333, 1)
+text = "–"
+
+[node name="PopulationBox" type="VBoxContainer" parent="Row"]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Bevölkerung aller Orte des Staates"
+theme_override_constants/separation = 0
+
+[node name="Caption" type="Label" parent="Row/PopulationBox"]
+layout_mode = 2
+theme_type_variation = &"CaptionLabel"
+text = "BEVÖLKERUNG"
+
+[node name="Population" type="Label" parent="Row/PopulationBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ValueLabel"
+text = "–"
+
+[node name="Spacer" type="Control" parent="Row"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="DateBox" type="VBoxContainer" parent="Row"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+
+[node name="Date" type="Label" parent="Row/DateBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"DateLabel"
+text = "–"
+horizontal_alignment = 2
+
+[node name="SpeedText" type="Label" parent="Row/DateBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"MutedLabel"
+text = "Simulation nicht geladen"
+horizontal_alignment = 2
+
+[node name="SpeedButtons" type="HBoxContainer" parent="Row"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 3
+
+[node name="SpeedPause" type="Button" parent="Row/SpeedButtons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(34, 30)
+layout_mode = 2
+tooltip_text = "Pause (Leertaste)"
+focus_mode = 0
+theme_type_variation = &"SpeedButton"
+disabled = true
+toggle_mode = true
+text = "II"
+
+[node name="Speed1" type="Button" parent="Row/SpeedButtons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+tooltip_text = "Stufe 1: 2 Tage je Sekunde (Taste 1)"
+focus_mode = 0
+theme_type_variation = &"SpeedButton"
+disabled = true
+toggle_mode = true
+text = "1"
+
+[node name="Speed2" type="Button" parent="Row/SpeedButtons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+tooltip_text = "Stufe 2: 5 Tage je Sekunde (Taste 2)"
+focus_mode = 0
+theme_type_variation = &"SpeedButton"
+disabled = true
+toggle_mode = true
+text = "2"
+
+[node name="Speed3" type="Button" parent="Row/SpeedButtons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+tooltip_text = "Stufe 3: 15 Tage je Sekunde (Taste 3)"
+focus_mode = 0
+theme_type_variation = &"SpeedButton"
+disabled = true
+toggle_mode = true
+text = "3"
+
+[node name="Speed4" type="Button" parent="Row/SpeedButtons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+tooltip_text = "Stufe 4: 40 Tage je Sekunde (Taste 4)"
+focus_mode = 0
+theme_type_variation = &"SpeedButton"
+disabled = true
+toggle_mode = true
+text = "4"
+
+[node name="Speed5" type="Button" parent="Row/SpeedButtons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+tooltip_text = "Stufe 5: 120 Tage je Sekunde (Taste 5)"
+focus_mode = 0
+theme_type_variation = &"SpeedButton"
+disabled = true
+toggle_mode = true
+text = "5"

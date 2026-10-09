@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/map_mode_bar.gd" id="1_bar"]
+
+[node name="MapModeBar" type="PanelContainer"]
+offset_right = 640.0
+offset_bottom = 48.0
+script = ExtResource("1_bar")
+
+[node name="Row" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Caption" type="Label" parent="Row"]
+layout_mode = 2
+theme_type_variation = &"HeaderLabel"
+text = "KARTE"
+
+[node name="Buttons" type="HBoxContainer" parent="Row"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 4

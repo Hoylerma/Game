@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <!-- EINIGKEIT: Windrose auf Kartenpapier, Kupferstich-Anmutung -->
+  <rect x="4" y="4" width="120" height="120" rx="14" fill="#f1e6cc" stroke="#2b2116" stroke-width="5"/>
+  <rect x="13" y="13" width="102" height="102" rx="8" fill="none" stroke="#8a6d46" stroke-width="2"/>
+  <circle cx="64" cy="64" r="36" fill="none" stroke="#2b2116" stroke-width="2.5"/>
+  <circle cx="64" cy="64" r="29" fill="none" stroke="#8a6d46" stroke-width="1.5" stroke-dasharray="3 3"/>
+  <path d="M64 22 L71 57 L106 64 L71 71 L64 106 L57 71 L22 64 L57 57 Z" fill="#2b2116"/>
+  <path d="M64 22 L71 57 L64 64 Z M106 64 L71 71 L64 64 Z M64 106 L57 71 L64 64 Z M22 64 L57 57 L64 64 Z" fill="#8e2b1d"/>
+  <circle cx="64" cy="64" r="5" fill="#f1e6cc" stroke="#2b2116" stroke-width="2"/>
+</svg>

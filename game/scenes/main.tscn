@@ -1,0 +1,119 @@
+[gd_scene load_steps=11 format=3]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_main"]
+[ext_resource type="PackedScene" path="res://scenes/map/map_view.tscn" id="2_map"]
+[ext_resource type="PackedScene" path="res://scenes/ui/top_bar.tscn" id="3_top"]
+[ext_resource type="PackedScene" path="res://scenes/ui/state_panel.tscn" id="4_state"]
+[ext_resource type="PackedScene" path="res://scenes/ui/chronicle_panel.tscn" id="5_chronicle"]
+[ext_resource type="PackedScene" path="res://scenes/ui/location_panel.tscn" id="6_location"]
+[ext_resource type="PackedScene" path="res://scenes/ui/legend_panel.tscn" id="7_legend"]
+[ext_resource type="PackedScene" path="res://scenes/ui/map_mode_bar.tscn" id="8_modes"]
+[ext_resource type="PackedScene" path="res://scenes/ui/map_tooltip.tscn" id="9_tooltip"]
+[ext_resource type="PackedScene" path="res://scenes/ui/notice_layer.tscn" id="10_notice"]
+[ext_resource type="Script" path="res://scripts/map/map_labels.gd" id="11_labels"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_main")
+
+[node name="MapView" parent="." instance=ExtResource("2_map")]
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Root" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="MapLabels" type="Control" parent="UI/Root"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("11_labels")
+
+[node name="LeftColumn" type="VBoxContainer" parent="UI/Root"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 76.0
+offset_right = 352.0
+offset_bottom = -12.0
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 10
+
+[node name="StatePanel" parent="UI/Root/LeftColumn" instance=ExtResource("4_state")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="ChroniclePanel" parent="UI/Root/LeftColumn" instance=ExtResource("5_chronicle")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="RightColumn" type="VBoxContainer" parent="UI/Root"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -372.0
+offset_top = 76.0
+offset_right = -12.0
+offset_bottom = -12.0
+grow_horizontal = 0
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 10
+
+[node name="LocationPanel" parent="UI/Root/RightColumn" instance=ExtResource("6_location")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="Spacer" type="Control" parent="UI/Root/RightColumn"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="LegendPanel" parent="UI/Root/RightColumn" instance=ExtResource("7_legend")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="ModeBarArea" type="CenterContainer" parent="UI/Root"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 364.0
+offset_top = -64.0
+offset_right = -384.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="MapModeBar" parent="UI/Root/ModeBarArea" instance=ExtResource("8_modes")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="TopBar" parent="UI/Root" instance=ExtResource("3_top")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="NoticeLayer" parent="UI/Root" instance=ExtResource("10_notice")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="MapTooltip" parent="UI/Root" instance=ExtResource("9_tooltip")]
+unique_name_in_owner = true
+layout_mode = 0

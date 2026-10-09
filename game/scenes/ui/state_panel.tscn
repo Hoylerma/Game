@@ -1,0 +1,234 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/state_panel.gd" id="1_panel"]
+[ext_resource type="Script" path="res://scripts/ui/coat_of_arms.gd" id="2_coat"]
+
+[node name="StatePanel" type="PanelContainer"]
+custom_minimum_size = Vector2(340, 0)
+offset_right = 340.0
+offset_bottom = 420.0
+script = ExtResource("1_panel")
+
+[node name="Content" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Header" type="Label" parent="Content"]
+layout_mode = 2
+theme_type_variation = &"HeaderLabel"
+text = "STAAT"
+
+[node name="Identity" type="HBoxContainer" parent="Content"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Coat" type="Control" parent="Content/Identity"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(28, 34)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+script = ExtResource("2_coat")
+
+[node name="Names" type="VBoxContainer" parent="Content/Identity"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="StateName" type="Label" parent="Content/Identity/Names"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+theme_type_variation = &"NameLabel"
+text = "Kein Spielerstaat"
+autowrap_mode = 3
+
+[node name="StateShort" type="Label" parent="Content/Identity/Names"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"MutedLabel"
+text = "–"
+
+[node name="Separator1" type="HSeparator" parent="Content"]
+layout_mode = 2
+
+[node name="Facts" type="GridContainer" parent="Content"]
+layout_mode = 2
+columns = 2
+
+[node name="RulerCaption" type="Label" parent="Content/Facts"]
+layout_mode = 2
+theme_type_variation = &"MutedLabel"
+text = "Herrscher"
+
+[node name="Ruler" type="Label" parent="Content/Facts"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "–"
+horizontal_alignment = 2
+text_overrun_behavior = 3
+
+[node name="GovernmentCaption" type="Label" parent="Content/Facts"]
+layout_mode = 2
+theme_type_variation = &"MutedLabel"
+text = "Regierungsform"
+
+[node name="Government" type="Label" parent="Content/Facts"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "–"
+horizontal_alignment = 2
+text_overrun_behavior = 3
+
+[node name="CapitalCaption" type="Label" parent="Content/Facts"]
+layout_mode = 2
+theme_type_variation = &"MutedLabel"
+text = "Hauptstadt"
+
+[node name="Capital" type="Label" parent="Content/Facts"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "–"
+horizontal_alignment = 2
+text_overrun_behavior = 3
+
+[node name="LocationsCaption" type="Label" parent="Content/Facts"]
+layout_mode = 2
+theme_type_variation = &"MutedLabel"
+text = "Orte"
+
+[node name="Locations" type="Label" parent="Content/Facts"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "–"
+horizontal_alignment = 2
+text_overrun_behavior = 3
+
+[node name="PopulationCaption" type="Label" parent="Content/Facts"]
+layout_mode = 2
+theme_type_variation = &"MutedLabel"
+text = "Bevölkerung"
+
+[node name="Population" type="Label" parent="Content/Facts"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "–"
+horizontal_alignment = 2
+text_overrun_behavior = 3
+
+[node name="TreasuryCaption" type="Label" parent="Content/Facts"]
+layout_mode = 2
+theme_type_variation = &"MutedLabel"
+text = "Staatsschatz"
+
+[node name="Treasury" type="Label" parent="Content/Facts"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "–"
+horizontal_alignment = 2
+text_overrun_behavior = 3
+
+[node name="IncomeCaption" type="Label" parent="Content/Facts"]
+layout_mode = 2
+theme_type_variation = &"MutedLabel"
+text = "Einnahmen / Monat"
+
+[node name="Income" type="Label" parent="Content/Facts"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "–"
+horizontal_alignment = 2
+text_overrun_behavior = 3
+
+[node name="ExpensesCaption" type="Label" parent="Content/Facts"]
+layout_mode = 2
+theme_type_variation = &"MutedLabel"
+text = "Ausgaben / Monat"
+
+[node name="Expenses" type="Label" parent="Content/Facts"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "–"
+horizontal_alignment = 2
+text_overrun_behavior = 3
+
+[node name="BalanceCaption" type="Label" parent="Content/Facts"]
+layout_mode = 2
+theme_type_variation = &"MutedLabel"
+text = "Saldo / Monat"
+
+[node name="Balance" type="Label" parent="Content/Facts"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "–"
+horizontal_alignment = 2
+text_overrun_behavior = 3
+
+[node name="Separator2" type="HSeparator" parent="Content"]
+layout_mode = 2
+
+[node name="TaxRow" type="HBoxContainer" parent="Content"]
+layout_mode = 2
+
+[node name="TaxCaption" type="Label" parent="Content/TaxRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"HeaderLabel"
+text = "STEUERSATZ"
+
+[node name="TaxValue" type="Label" parent="Content/TaxRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ValueLabel"
+text = "–"
+horizontal_alignment = 2
+
+[node name="TaxSlider" type="HSlider" parent="Content"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+tooltip_text = "Kontribution: Anteil der steuerpflichtigen Produktion, der an den Staat geht"
+max_value = 50.0
+editable = false
+
+[node name="TaxScale" type="HBoxContainer" parent="Content"]
+layout_mode = 2
+
+[node name="TaxMin" type="Label" parent="Content/TaxScale"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"CaptionLabel"
+text = "0 %"
+
+[node name="TaxMax" type="Label" parent="Content/TaxScale"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"CaptionLabel"
+text = "50 %"
+horizontal_alignment = 2
+
+[node name="TaxHint" type="Label" parent="Content"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+theme_type_variation = &"MutedLabel"
+text = "Ohne geladene Simulation nicht verfügbar."
+autowrap_mode = 3
