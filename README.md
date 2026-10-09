@@ -97,7 +97,7 @@ Ergänzt durch zwei Querschnittsprinzipien: **Geschichte als lebendiges System**
 
 - **In 20 Minuten verstehen, worum es geht:** README → [00 Vision](docs/00_vision_und_pitch.md) → [03 Kernspielablauf](docs/03_kernspielablauf.md)
 - **Was macht das Spiel einzigartig?** [12 Ländermodus](docs/12_foederalismus_und_bundeslaender.md), [10 Wahlen](docs/10_parlamente_wahlen_koalitionen.md), [15 Emergente Fronten](docs/15_militaer_und_kriegsfuehrung.md), [17 Teilung & Einheit](docs/17_teilung_und_einheit.md)
-- **Für Programmierung:** [02 Engine](docs/02_engine_und_technik.md), [21 KI](docs/21_kuenstliche_intelligenz.md), [23 Modding](docs/23_multiplayer_und_modding.md)
+- **Für Programmierung:** [02 Engine](docs/02_engine_und_technik.md), [21 KI](docs/21_kuenstliche_intelligenz.md), [23 Modding](docs/23_multiplayer_und_modding.md) – und für den Code: [Entwicklung](#entwicklung), [Technische Dokumentation](docs/technik/README.md)
 - **Für Historiker und Content-Team:** [11 Parteien](docs/11_parteien_datenbank.md), [13 Persönlichkeiten](docs/13_persoenlichkeiten.md), [20 Verantwortung](docs/20_verantwortung_und_erinnerungskultur.md), [Anhang A](docs/anhang/a_zeitleiste.md)
 
 ## Hinweise zu diesem Dokument
@@ -106,3 +106,153 @@ Ergänzt durch zwei Querschnittsprinzipien: **Geschichte als lebendiges System**
 - Historische Zahlen sind gerundet und vor der Umsetzung durch das Historiker-Team gegen die in [Anhang C](docs/anhang/c_quellen_und_daten.md) genannten Quellen zu prüfen.
 - Die Datenbasis für die Gegenwart ist auf den Stand Mai 2025 (Startdatum des letzten Lesezeichens) eingefroren und wird per Update fortgeschrieben.
 - „Erstmal nur Deutschland“: Die Architektur ist von Anfang an darauf ausgelegt, später weitere Länder als Nationen-Pakete zu ergänzen (siehe [24 Roadmap](docs/24_produktion_roadmap_dlc.md)).
+
+---
+
+## Entwicklung
+
+[![Prüfungen](https://github.com/Hoylerma/Game/actions/workflows/ci.yml/badge.svg)](https://github.com/Hoylerma/Game/actions/workflows/ci.yml)
+
+### Projektstand
+
+**Meilenstein M1 – technischer Durchstich.** Der ganze Weg von den Daten bis zum Bild steht, in
+kleinem Maßstab: Spieldaten im Chronik-Skript → Simulationskern „Uhrwerk“ → GDExtension →
+Godot-Oberfläche mit Karte. Inhaltlich deckt M1 eine **Testregion um 1648** ab, nicht das ganze
+Spiel aus dem Design-Dokument.
+
+| Baustein | Stand |
+|---|---|
+| Simulationskern „Uhrwerk“ (`core/`) | Festkomma, Zufallsströme, Kalender, Parser und Lader für das Chronik-Skript, Tagestick mit Demografie, Wirtschaft (Steuern, Staatskasse), Seuchen und Kriegsverwüstung, Steuerbefehl, Chronik, Prüfsumme |
+| Kommandozeile `uhrwerk-cli` (`cli/`) | Daten prüfen, Überblick, Simulationsläufe mit Bericht und Chronik, Determinismusprüfung |
+| Tests (`tests/`) | 87 Testfälle (doctest) und Integrationsläufe mit den echten Daten |
+| Spieldaten (`data/`) | Testregion „Der Westfälische Frieden“ (24.10.1648): 16 Staaten, 60 Orte in Mittel- und Nordostdeutschland |
+| Kartengenerator (`tools/kartengenerator/`) | erzeugt das Ort-ID-Bild und die Zuordnungstabelle der Karte aus den Ortsdaten |
+| Brücke (`bridge/`) | GDExtension mit der Klasse `UhrwerkSimulation` |
+| Godot-Prototyp (`game/`) | Karte mit fünf Kartenmodi, Staatspanel mit Steuersatz, Ortsinfo, Chronik, Legende |
+| CI (`.github/workflows/`) | Linux (GCC, Clang), Windows (MSVC), Prüfsummenvergleich, Formatierung, Kartengenerator, Godot-Rauchtest mit Screenshot |
+
+Noch **nicht** umgesetzt ist alles Weitere aus dem Design-Dokument – Politik, Parteien und Wahlen,
+Diplomatie, Krieg, KI, Speicherstände, Multiplayer und Modding-Werkzeuge. Was sich ändert, steht im
+[Änderungsprotokoll](CHANGELOG.md).
+
+### Repository-Struktur
+
+| Ordner | Inhalt | Abhängigkeiten |
+|---|---|---|
+| [`core/`](core/) | Simulationskern **Uhrwerk** (C++20) – engine-unabhängig, deterministisch, headless | nur C++-Standardbibliothek |
+| [`cli/`](cli/) | `uhrwerk-cli`: Kommandozeile für Testläufe, Determinismusprüfung, Berichte | `core` |
+| [`tests/`](tests/) | Unit- und Integrationstests des Kerns | `core`, doctest (wird von CMake geladen) |
+| [`bridge/`](bridge/) | GDExtension-Brücke zwischen Uhrwerk und Godot | `core`, `third_party/godot-cpp` |
+| [`game/`](game/) | Godot-4-Projekt (Szenen, Skripte, Shader, Oberfläche) | `bridge` |
+| [`data/`](data/) | Spielinhalte im **Chronik-Skript** (`*.chron`) und Kartendaten | – |
+| [`tools/`](tools/) | Hilfswerkzeuge (z. B. Kartengenerator) | Python 3 |
+| [`docs/`](docs/) | Game Design Document, technische Dokumentation in [`docs/technik/`](docs/technik/) | – |
+| `third_party/` | Fremdbibliotheken als Git-Submodule (godot-cpp 4.4.1) | – |
+
+Grundregel: **`core/` kennt Godot nicht.** Die Godot-Seite liest nur und schickt Befehle.
+
+### Voraussetzungen
+
+| Werkzeug | Version | wofür |
+|---|---|---|
+| C++-Compiler mit C++20 | GCC 13 oder Clang 18 (lokal geprüft), MSVC 2022 (in der CI) | Kern, CLI, Tests, Brücke |
+| CMake | 3.25 oder neuer (die Presets haben Version 6) | Build |
+| Ninja | aktuelle Version (geprüft mit 1.11) | Generator aller Presets |
+| Python | 3.10 oder neuer | Kartengenerator; godot-cpp erzeugt damit seine Bindings |
+| Godot | **4.4.1** (Standard-Build, kein .NET) | Spiel und Editor; [Download](https://godotengine.org/download/archive/4.4.1-stable/), optional abgelegt unter `tools/godot/` (nicht versioniert) |
+| clang-format | 18 | Formatierung des C++-Codes |
+
+Unter Windows die Befehle in der **Developer PowerShell for VS 2022** ausführen (dort sind `cl`
+und Ninja im Pfad) und beim ersten Konfigurieren `-DCMAKE_CXX_COMPILER=cl` angeben.
+
+### Schnellstart
+
+**1. Klonen** (mit Submodulen, sonst fehlt godot-cpp für die Brücke):
+
+```bash
+git clone --recurse-submodules https://github.com/Hoylerma/Game.git
+cd Game
+# bei einem bestehenden Klon ohne Submodule:
+git submodule update --init --recursive
+```
+
+**2. Kern, Kommandozeile und Tests bauen und testen** (Preset `dev`: Debug, Warnungen als Fehler):
+
+```bash
+cmake --preset dev
+cmake --build --preset dev
+ctest --preset dev
+```
+
+Weitere Presets: `release` (optimiert, Ausgabe in `build/release/`) und `bridge` (siehe Schritt 5).
+
+**3. Kommandozeile** – sucht den Datenordner selbst (`UHRWERK_DATEN` oder `data/` ab dem
+Arbeitsverzeichnis), alternativ `--daten DIR`:
+
+```bash
+./build/dev/cli/uhrwerk-cli pruefen                            # Spieldaten laden, Fehler und Warnungen zeigen
+./build/dev/cli/uhrwerk-cli info                               # Szenario, Staaten und Orte im Überblick
+./build/dev/cli/uhrwerk-cli lauf --jahre 50 --bericht --chronik  # 50 Jahre ab 1648 simulieren
+./build/dev/cli/uhrwerk-cli lauf --jahre 10 --seed 7           # anderer Seed
+./build/dev/cli/uhrwerk-cli determinismus --jahre 100          # zwei Läufe vergleichen (Prüfsumme je Jahr)
+./build/dev/cli/uhrwerk-cli --hilfe                            # alle Befehle und Optionen
+```
+
+Exitcodes: `0` in Ordnung, `1` Daten- oder Determinismusfehler, `2` Bedienfehler.
+
+**4. Karte erzeugen** – nach Änderungen an Orten oder an `data/karte/karte.chron`; die erzeugten
+Dateien `data/karte/provinzen.png` und `definition.csv` werden eingecheckt:
+
+```bash
+python3 tools/kartengenerator/kartengenerator.py                         # Karte neu erzeugen
+python3 tools/kartengenerator/kartengenerator.py --vorschau /tmp/karte.png  # farbige Vorschau (nicht einchecken)
+python3 tools/kartengenerator/kartengenerator.py --pruefen               # ist die Karte aktuell? (wie in der CI)
+python3 -m unittest discover -s tools/kartengenerator -v                # Tests des Generators
+```
+
+**5. Brücke bauen** – baut godot-cpp (beim ersten Mal je nach Rechner 5–15 Minuten) und legt die Bibliothek
+direkt im Godot-Projekt ab (`game/bin/libuhrwerk_bridge.so`, `uhrwerk_bridge.dll` bzw.
+`libuhrwerk_bridge.dylib`):
+
+```bash
+cmake --preset bridge
+cmake --build --preset bridge
+```
+
+**6. Godot öffnen** – `godot` steht für Godot 4.4.1, z. B.
+`tools/godot/Godot_v4.4.1-stable_linux.x86_64`:
+
+```bash
+godot --headless --path game --import     # einmalig: Projekt importieren (legt game/.godot/ an)
+godot --path game                         # Spiel starten
+godot --editor --path game                # im Editor öffnen
+
+# Rauchtest der Brücke und der Kartendaten (wie in der CI)
+godot --headless --path game --script res://tests/smoke_test.gd
+
+# Screenshot ohne Bildschirm (Software-Rendering über Xvfb)
+xvfb-run -a -s "-screen 0 1600x900x24" \
+  godot --path game --rendering-driver opengl3 --audio-driver Dummy \
+  -- --screenshot=/tmp/einigkeit.png --tage=60 --kartenmodus=0 --ort=berlin_coelln
+```
+
+Ohne gebaute Brücke oder ohne Karte startet das Projekt trotzdem und zeigt einen Hinweis, wie
+sie erzeugt werden. Bedienung und Optionen: [`game/README.md`](game/README.md).
+
+**Formatierung prüfen** (wie in der CI):
+
+```bash
+clang-format-18 --dry-run --Werror $(git ls-files 'core/*.[ch]pp' 'cli/*.[ch]pp' 'tests/*.[ch]pp' 'bridge/*.[ch]pp')
+clang-format-18 -i <datei>                # Datei formatieren
+```
+
+### Weiterlesen
+
+| Dokument | Inhalt |
+|---|---|
+| [CONTRIBUTING.md](CONTRIBUTING.md) | Branches, Commit-Nachrichten, Pull Requests, Code-Stil, Regeln für Daten |
+| [docs/technik/](docs/technik/README.md) | Architektur, Tick-Ablauf, Determinismus, Festkomma, Zufallsströme; Spezifikationen [Chronik-Skript](docs/technik/chronik-skript.md) und [Brücken-API](docs/technik/bridge-api.md) |
+| [data/README.md](data/README.md) | Inhalt und Aufbau der Testregion 1648 |
+| [game/README.md](game/README.md) | Godot-Projekt: Starten, Bedienung, Aufbau |
+| [tools/kartengenerator/README.md](tools/kartengenerator/README.md) | Kartengenerator: Aufruf, Algorithmus, Determinismus |
+| [CHANGELOG.md](CHANGELOG.md) | Änderungsprotokoll |
