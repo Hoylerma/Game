@@ -67,6 +67,9 @@ func focus_on(world_point: Vector2, new_zoom: float = -1.0) -> void:
 		_set_zoom_now(clampf(new_zoom, min_zoom, MAX_ZOOM))
 	position = world_point
 	_clamp_position()
+	# Eine laufende Zoom-Glättung hält ab jetzt den neuen Mittelpunkt fest.
+	_zoom_anchor_world = position
+	_zoom_anchor_screen = _viewport_size() * 0.5
 
 
 ## Weltkoordinate eines Punktes in Bildschirmkoordinaten des Viewports.
@@ -134,18 +137,20 @@ static func _is_drag_button(index: MouseButton) -> bool:
 
 
 func _handle_key(key: InputEventKey) -> void:
+	var code := key.physical_keycode if key.physical_keycode != KEY_NONE else key.keycode
+	# Loslassen immer behandeln: Mit inzwischen gedrückter Umschalt- oder Strg-Taste
+	# passt das Ereignis nicht mehr exakt zur Aktion, die Taste muss trotzdem frei werden.
+	if not key.pressed:
+		_held_keys.erase(code)
+		return
 	var direction := Vector2.ZERO
 	for i in PAN_ACTIONS.size():
 		if key.is_action(PAN_ACTIONS[i], true):
 			direction += PAN_DIRECTIONS[i]
 	if direction == Vector2.ZERO:
 		return
-	var code := key.physical_keycode if key.physical_keycode != KEY_NONE else key.keycode
-	if key.pressed:
-		if not _held_keys.has(code):
-			_held_keys[code] = [direction, Time.get_ticks_msec(), MapModes.mode_for_event(key) >= 0]
-	else:
-		_held_keys.erase(code)
+	if not _held_keys.has(code):
+		_held_keys[code] = [direction, Time.get_ticks_msec(), MapModes.mode_for_event(key) >= 0]
 
 
 func _process(delta: float) -> void:

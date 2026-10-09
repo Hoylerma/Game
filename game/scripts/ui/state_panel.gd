@@ -4,6 +4,8 @@ extends PanelContainer
 ##
 ## Der Regler schickt einen Befehl an die Simulation; wirksam wird er erst am
 ## nächsten simulierten Tag. Bis dahin zeigt das Panel den Wunschwert an.
+## Beim Ziehen geht der Befehl erst beim Loslassen hinaus – sonst würde jeder
+## Zwischenschritt als eigener Befehl (und Chronikeintrag) ausgeführt.
 
 ## Neuer Steuersatz in Prozent gewünscht.
 signal tax_rate_requested(percent: int)
@@ -11,6 +13,7 @@ signal tax_rate_requested(percent: int)
 var _state_tax := -1
 var _pending_tax := -1
 var _updating := false
+var _dragging := false
 
 @onready var _coat: CoatOfArms = %Coat
 @onready var _name: Label = %StateName
@@ -35,6 +38,8 @@ func _ready() -> void:
 	_tax_slider.focus_mode = Control.FOCUS_NONE
 	_tax_slider.step = 1.0
 	_tax_slider.value_changed.connect(_on_tax_slider_changed)
+	_tax_slider.drag_started.connect(_on_tax_drag_started)
+	_tax_slider.drag_ended.connect(_on_tax_drag_ended)
 	show_unavailable()
 
 
@@ -80,7 +85,8 @@ func show_state(state: Dictionary, capital_name: String) -> void:
 	if _pending_tax == _state_tax:
 		_pending_tax = -1
 	_tax_slider.editable = true
-	_show_tax(_pending_tax if _pending_tax >= 0 else _state_tax)
+	if not _dragging:
+		_show_tax(_pending_tax if _pending_tax >= 0 else _state_tax)
 
 
 func show_unavailable() -> void:
@@ -123,7 +129,23 @@ func _show_tax(percent: int) -> void:
 func _on_tax_slider_changed(value: float) -> void:
 	if _updating:
 		return
-	var percent := roundi(value)
+	if _dragging:
+		_tax_value.text = GermanFormat.percent(roundi(value))
+		return
+	_request_tax(roundi(value))
+
+
+func _on_tax_drag_started() -> void:
+	_dragging = true
+
+
+func _on_tax_drag_ended(value_changed: bool) -> void:
+	_dragging = false
+	if value_changed and _tax_slider.editable:
+		_request_tax(roundi(_tax_slider.value))
+
+
+func _request_tax(percent: int) -> void:
 	_pending_tax = percent
 	_show_tax(percent)
 	tax_rate_requested.emit(percent)
