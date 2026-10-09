@@ -155,7 +155,7 @@ Grundregel: **`core/` kennt Godot nicht.** Die Godot-Seite liest nur und schickt
 
 | Werkzeug | Version | wofür |
 |---|---|---|
-| C++-Compiler mit C++20 | GCC 13 oder Clang 18 (lokal geprüft), MSVC 2022 (in der CI) | Kern, CLI, Tests, Brücke |
+| C++-Compiler mit C++20 | GCC 13 oder Clang 18 (lokal geprüft), MSVC 2022 (Kern, CLI und Tests in der CI; Brücke unter Windows noch ungeprüft) | Kern, CLI, Tests, Brücke |
 | CMake | 3.25 oder neuer (die Presets haben Version 6) | Build |
 | Ninja | aktuelle Version (geprüft mit 1.11) | Generator aller Presets |
 | Python | 3.10 oder neuer | Kartengenerator; godot-cpp erzeugt damit seine Bindings |
