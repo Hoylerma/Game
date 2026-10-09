@@ -1,0 +1,20 @@
+name: Vorschlag
+description: Eine Idee für eine Mechanik, einen Inhalt oder ein Werkzeug
+labels: ["vorschlag"]
+body:
+  - type: textarea
+    id: idee
+    attributes:
+      label: Idee
+    validations:
+      required: true
+  - type: dropdown
+    id: saeule
+    attributes:
+      label: Welche Designsäule stärkt das?
+      options: [Einigkeit, Recht, Freiheit, Geschichte als System, Verantwortung, Technik/Werkzeuge]
+  - type: textarea
+    id: bezug
+    attributes:
+      label: Bezug zum Design-Dokument
+      description: Welches Kapitel in docs/ betrifft das?

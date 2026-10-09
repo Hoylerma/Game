@@ -1,0 +1,39 @@
+# ── Build-Ausgaben (C++/CMake) ──────────────────────────────
+/build/
+/build-*/
+/out/
+cmake-build-*/
+CMakeUserPresets.json
+compile_commands.json
+
+# ── Godot ──────────────────────────────────────────────────
+# Importcache und Editor-Zustand werden lokal erzeugt.
+/game/.godot/
+/game/export_presets.cfg
+# Kompilierte GDExtension-Bibliotheken werden vom Build in game/bin/ kopiert.
+/game/bin/*.so
+/game/bin/*.dll
+/game/bin/*.dylib
+/game/bin/*.framework/
+/game/bin/*.pdb
+/game/bin/*.exp
+/game/bin/*.lib
+
+# ── Lokale Werkzeuge und Laufzeitdaten ─────────────────────
+/tools/godot/
+/saves/
+*.log
+
+# ── Python ─────────────────────────────────────────────────
+__pycache__/
+*.pyc
+.venv/
+
+# ── IDEs und Betriebssysteme ───────────────────────────────
+.vs/
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.swp
+.DS_Store
+Thumbs.db

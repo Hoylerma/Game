@@ -1,0 +1,24 @@
+name: Historischer Fehler
+description: Ein falsches Datum, ein falscher Name, eine falsche Grenze oder Zahl
+labels: ["historisch", "daten"]
+body:
+  - type: input
+    id: fundstelle
+    attributes:
+      label: Wo steht der Fehler?
+      description: Datei in data/ oder docs/, Ereignis, Ort, Persönlichkeit …
+    validations:
+      required: true
+  - type: textarea
+    id: korrektur
+    attributes:
+      label: Was ist richtig?
+    validations:
+      required: true
+  - type: textarea
+    id: quelle
+    attributes:
+      label: Quelle
+      description: Fachliteratur, Archiv, amtliche Statistik – mit Seitenangabe, wenn möglich.
+    validations:
+      required: true
