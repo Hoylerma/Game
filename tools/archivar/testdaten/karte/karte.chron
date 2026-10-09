@@ -1,0 +1,1 @@
+karte { bild_breite = 100 bild_hoehe = 100 laenge_min = 10 laenge_max = 12 breite_min = 52 breite_max = 54 max_radius_km = 30 }

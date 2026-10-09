@@ -1,0 +1,3 @@
+tag;datei;name;kurzname;farbe;quelle
+AAA;AAA_nordland;Herzogtum Nordland;Nordland;10 20 30;Testdaten
+BBB;BBB_suedland;"Königreich ""Südland""";Südland;200 100 50;Testdaten mit \ Rückstrich

@@ -1,0 +1,17 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+ort burg {
+    name     = "Burg"
+    gelaende = flachland
+    lage     = { 11.50 52.40 }
+    flaeche  = 200
+    stadt    = ja
+    quelle   = "Testdaten"
+
+    1648.10.24 = {
+        besitzer     = BBB
+        bevoelkerung = 5000
+        konfession   = { katholisch = 100 }
+        verwuestung  = 0.1
+    }
+}

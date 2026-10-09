@@ -5,7 +5,7 @@
 #   Kern (Windows)      MSVC mit denselben Presets: Portabilität des Kerns
 #   Determinismus       vergleicht die Prüfsummen von GCC, Clang und MSVC (müssen bitgleich sein)
 #   Formatierung        clang-format 18 über core/, cli/, tests/, bridge/
-#   Kartengenerator     Python-Tests und Prüfung, ob data/karte/ aktuell ist
+#   Archivar und Kartengenerator  Python-Tests; sind data/history/ und data/karte/ aktuell?
 #   Godot               GDExtension bauen, Rauchtest headless, Screenshot der Hauptszene als Artefakt
 #
 # Lokal nachstellen: siehe README.md, Abschnitt „Entwicklung“.
@@ -218,13 +218,13 @@ jobs:
           echo "Alle Dateien sind korrekt formatiert."
 
   kartengenerator:
-    name: Kartengenerator (Python ${{ matrix.python }})
+    name: Archivar und Kartengenerator (Python ${{ matrix.python }})
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     strategy:
       fail-fast: false
       matrix:
-        # Älteste und neueste unterstützte Version: Die Karte muss mit beiden pixelgleich entstehen.
+        # Älteste und neueste unterstützte Version: Karte und Historie müssen mit beiden gleich entstehen.
         python: ['3.10', '3.13']
     steps:
       - name: Quelltext auschecken
@@ -234,6 +234,12 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
+
+      - name: Tests des Archivars
+        run: python3 -m unittest discover -s tools/archivar -v
+
+      - name: Historie aktuell? (data/history/ aus data/tabellen/)
+        run: python3 tools/archivar/archivar.py --pruefen
 
       - name: Tests des Kartengenerators
         run: python3 -m unittest discover -s tools/kartengenerator -v

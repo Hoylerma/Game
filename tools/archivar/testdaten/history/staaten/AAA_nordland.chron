@@ -1,0 +1,24 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
+# Nordland
+
+staat AAA {
+    name     = "Herzogtum Nordland"
+    kurzname = "Nordland"
+    farbe    = { 10 20 30 }
+    quelle   = "Testdaten"
+
+    1648.10.24 = {
+        hauptstadt     = hafen
+        regierungsform = herzogtum
+        herrscher      = "Herzog Alt"
+        konfession     = lutherisch
+        schatz         = 1000
+        steuersatz     = 0.10
+        hofhaltung     = 5000
+    }
+
+    1700.03.01 = {
+        herrscher = "Herzog Neu"
+    }
+}

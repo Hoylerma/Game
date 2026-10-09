@@ -1,0 +1,3 @@
+# Testdaten: Geländetypen
+gelaende flachland { name = "Flachland" farbe = { 200 190 150 } wachstum = 1.0 ertrag = 1.0 }
+gelaende heide { name = "Heide" farbe = { 180 160 120 } wachstum = 0.9 ertrag = 0.7 }

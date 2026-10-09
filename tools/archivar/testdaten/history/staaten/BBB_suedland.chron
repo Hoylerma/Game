@@ -1,0 +1,22 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+staat BBB {
+    name     = "Königreich \"Südland\""
+    kurzname = "Südland"
+    farbe    = { 200 100 50 }
+    quelle   = "Testdaten mit \\ Rückstrich"
+
+    1648.10.24 = {
+        hauptstadt     = burg
+        regierungsform = koenigreich
+        herrscher      = "König Eins"
+        konfession     = katholisch
+        schatz         = 2000
+        steuersatz     = 0.2
+        hofhaltung     = 8000
+    }
+
+    1701.01.18 = {
+        name = "Königreich Groß-Südland"
+    }
+}

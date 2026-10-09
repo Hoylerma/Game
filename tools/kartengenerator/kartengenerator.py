@@ -438,6 +438,10 @@ def _lese_ort(node: chron.ScriptNode, datei: str, meldungen: Meldungen) -> Ort |
     if flaeche is not None and flaeche_node is not None and not flaeche > 0.0:
         meldungen.fehler_bei(datei, flaeche_node.line, "'flaeche' muss größer als 0 sein")
     besitzer = node.get_string("besitzer") or ""
+    # Datierte Blöcke (Spezifikation 3.8): Die Vorschau zeigt den jüngsten Besitzstand.
+    # "JJJJ.MM.TT" sortiert als Text wie als Datum.
+    for block in sorted((k for k in node.children if k.is_block and k.key[:1].isdigit()), key=lambda k: k.key):
+        besitzer = block.get_string("besitzer") or besitzer
     if len(meldungen.fehler) > anzahl or flaeche is None:
         return None
     return Ort(kennung, name, laenge, breite, flaeche, besitzer, datei, node.line)

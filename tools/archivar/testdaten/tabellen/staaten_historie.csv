@@ -1,0 +1,17 @@
+tag;ab;feld;wert;sicherheit;quelle
+AAA;1648.10.24;hauptstadt;hafen;gesichert;Testquelle
+AAA;1648.10.24;regierungsform;herzogtum;gesichert;Testquelle
+AAA;1648.10.24;herrscher;Herzog Alt;gesichert;Testquelle
+AAA;1700.03.01;herrscher;Herzog Neu;gesichert;Testquelle
+AAA;1648.10.24;konfession;lutherisch;gesichert;Testquelle
+AAA;1648.10.24;schatz;1000;spielwert;Spielwert
+AAA;1648.10.24;steuersatz;0.10;spielwert;Spielwert
+AAA;1648.10.24;hofhaltung;5000;spielwert;Spielwert
+BBB;1648.10.24;hauptstadt;burg;gesichert;Testquelle
+BBB;1648.10.24;regierungsform;koenigreich;gesichert;Testquelle
+BBB;1648.10.24;herrscher;König Eins;gesichert;Testquelle
+BBB;1648.10.24;konfession;katholisch;gesichert;Testquelle
+BBB;1648.10.24;schatz;2000;spielwert;Spielwert
+BBB;1648.10.24;steuersatz;0.2;spielwert;Spielwert
+BBB;1648.10.24;hofhaltung;8000;spielwert;Spielwert
+BBB;1701.01.18;name;Königreich Groß-Südland;gesichert;Testquelle

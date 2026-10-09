@@ -387,6 +387,22 @@ class TestLaden(unittest.TestCase):
         # Großbuchstaben vor Kleinbuchstaben, "a.chron" vor "a_2.chron" (Bytefolge wie im Lader).
         self.assertEqual([o.kennung for o in geladen], ["z1", "a1", "a2", "b1"])
 
+    def test_besitzer_aus_datierten_bloecken(self) -> None:
+        orte = self.daten / "history" / "orte"
+        for alt in orte.iterdir():
+            alt.unlink()
+        (orte / "a.chron").write_text(
+            'ort a1 { name = "A" lage = { 10.5 52.5 } flaeche = 100\n'
+            "  1701.01.18 = { besitzer = BBB }\n"
+            "  1648.10.24 = { besitzer = AAA bevoelkerung = 10 }\n"
+            "}\n",
+            encoding="utf-8",
+        )
+        meldungen = kg.Meldungen()
+        geladen = kg.lade_orte(orte, self.daten, meldungen)
+        self.assertEqual(meldungen.fehler, [])
+        self.assertEqual(geladen[0].besitzer, "BBB")  # jüngster Stand, unabhängig von der Reihenfolge
+
     def test_fehler_in_orten(self) -> None:
         (self.daten / "history" / "orte" / "c_fehler.chron").write_text(
             'ort hafen { name = "Doppelt" lage = { 10.1 52.1 } flaeche = 100 }\n'

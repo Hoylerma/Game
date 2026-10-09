@@ -1,0 +1,2 @@
+szenario frieden { name = "Frieden" datum = 1648.10.24 spieler = AAA }
+szenario krone { name = "Krone" datum = 1701.01.18 spieler = BBB }

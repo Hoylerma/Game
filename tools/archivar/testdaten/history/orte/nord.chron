@@ -1,0 +1,46 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
+# Orte im Norden.
+# Zweite Zeile mit "Anführungszeichen".
+
+ort hafen {
+    name     = "Hafen"
+    gelaende = flachland
+    lage     = { 10.30 53.80 }
+    flaeche  = 150
+    stadt    = ja
+    quelle   = "Testdaten"
+
+    1648.10.24 = {
+        besitzer     = AAA
+        bevoelkerung = 6000
+        konfession   = { lutherisch = 90 katholisch = 10 }
+        verwuestung  = 0.2
+    }
+
+    1700.01.01 = {
+        bevoelkerung = 9000
+        konfession   = { lutherisch = 100 }
+        verwuestung  = 0
+    }
+}
+
+ort heide {
+    name     = "Heide-Süd"
+    gelaende = heide
+    lage     = { 11.20 53.10 }
+    flaeche  = 300
+    stadt    = nein
+    quelle   = "Testdaten"
+
+    1648.10.24 = {
+        besitzer     = AAA
+        bevoelkerung = 1500
+        konfession   = { lutherisch = 100 }
+        verwuestung  = 0.5
+    }
+
+    1701.01.18 = {
+        besitzer = BBB
+    }
+}

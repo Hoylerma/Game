@@ -1,0 +1,4 @@
+# Testdaten: nur die vom Archivar gelesenen Werte sind relevant
+regeln {
+    steuersatz_max = 0.5
+}
