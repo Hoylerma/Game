@@ -23,6 +23,7 @@ from __future__ import annotations
 
 import argparse
 import bisect
+import math
 import struct
 import sys
 import time
@@ -63,6 +64,9 @@ RAUSCHEN_OKTAVEN: tuple[tuple[float, float], ...] = (
 #: Werte dazwischen mischen linear in 1 / Gewicht². Abgeschaltet: Die Zellgröße hängt fast nur
 #: vom Abstand der Orte ab (Testregion: Korrelation Pixel–Fläche 0,46 ohne, 0,58 mit voller
 #: Gewichtung), die Grenzen verschieben sich nur um wenige Kilometer.
+# Der Karten-Shader (game/shaders/map.gdshader) hält 128 Polygonpunkte; die Godot-Seite
+# ergänzt zwei Eckpunkte am oberen Bildrand.
+MAX_KUESTENPUNKTE = 126
 FLAECHEN_GEWICHT = 0.0
 
 #: Kantenlänge der Kacheln für die Kandidatensuche (Pixel).
@@ -305,6 +309,13 @@ def lade_karte(pfad: Path, name: str, meldungen: Meldungen) -> Karte | None:
         else:
             kueste = [(zahlen[k], zahlen[k + 1]) for k in range(0, len(zahlen), 2)]
             punkte = [e for e in kueste_node.children]
+            if len(kueste) > MAX_KUESTENPUNKTE:
+                meldungen.fehler_bei(
+                    name,
+                    kueste_node.line,
+                    f"'kueste' hat {len(kueste)} Punkte, erlaubt sind höchstens {MAX_KUESTENPUNKTE} "
+                    "(Grenze des Karten-Shaders in game/shaders/map.gdshader)",
+                )
             for k in range(1, len(kueste)):
                 if not kueste[k][0] > kueste[k - 1][0]:
                     meldungen.fehler_bei(
@@ -675,7 +686,8 @@ class Zentrum:
 
 def zentren(raster: Raster, orte: Sequence[Ort]) -> list[Zentrum]:
     karte = raster.karte
-    mittel = sum(o.flaeche for o in orte) / len(orte) if orte else 1.0
+    # math.fsum statt sum: sum rechnet seit Python 3.12 anders (kompensierte Summation).
+    mittel = math.fsum(o.flaeche for o in orte) / len(orte) if orte else 1.0
     ergebnis = []
     for index, ort in enumerate(orte):
         x_km = (ort.laenge - karte.laenge_min) * raster.kx_ref

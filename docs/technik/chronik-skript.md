@@ -247,7 +247,7 @@ karte {
     breite_min  = 50.0     # Grad Nord, unterer Bildrand
     breite_max  = 54.8
     max_radius_km = 42     # weiter entfernte Punkte gehören zu keinem Ort
-    kueste = { 9.5 54.6  10.9 54.0  … }   # Ostseeküste als Linienzug (Länge Breite …); nördlich davon Meer
+    kueste = { 9.5 54.6  10.9 54.0  … }   # Ostseeküste als Linienzug (Länge Breite …, höchstens 126 Punkte); nördlich davon Meer
 }
 ```
 

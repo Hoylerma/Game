@@ -193,7 +193,10 @@ func _apply_coast(map: MapData) -> void:
 		polygon.append(Vector2(coast[0].x, -1.0))
 	if polygon.size() > MAX_COAST_POINTS:
 		printerr(
-			"EINIGKEIT: Küstenlinie hat mehr als %d Punkte und wird ignoriert." % MAX_COAST_POINTS
+			(
+				"EINIGKEIT: Küstenlinie hat mehr als %d Punkte (mit zwei Eckpunkten) und wird ignoriert."
+				% MAX_COAST_POINTS
+			)
 		)
 		polygon.clear()
 	var padded := polygon.duplicate()

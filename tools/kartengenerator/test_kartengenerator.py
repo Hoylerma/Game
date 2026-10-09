@@ -461,6 +461,11 @@ class TestLaden(unittest.TestCase):
             ),
             "karte {\n"
             + basis
+            + "max_radius_km = 5\n kueste = { "
+            + " ".join(f"{1 + k / 200} 3.5" for k in range(kg.MAX_KUESTENPUNKTE + 1))
+            + " }\n}": (f"'kueste' hat {kg.MAX_KUESTENPUNKTE + 1} Punkte, erlaubt sind höchstens"),
+            "karte {\n"
+            + basis
             + "max_radius_km = 5 max_radius_km = 6\n}": "'max_radius_km' ist mehrfach angegeben",
             "nichts = 1\n": "Block 'karte { … }' fehlt",
             "karte = 5\n": "karte/karte.chron:1: ungültige Definition, erwartet: karte { … }",
