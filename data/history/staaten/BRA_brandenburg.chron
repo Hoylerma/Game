@@ -1,3 +1,5 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
 # Staat zum Lesezeichen "Der Westfälische Frieden" (24.10.1648), Testregion M1.
 #
 # Format: docs/technik/chronik-skript.md, Abschnitt 3.5.
@@ -11,15 +13,18 @@
 # Regierungsform: Fürst mit Landständen (Landtagsrezess erst 1653; der Absolutismus folgt später).
 
 staat BRA {
-    name           = "Kurfürstentum Brandenburg"
-    kurzname       = "Brandenburg"
-    farbe          = { 58 95 143 }
-    hauptstadt     = berlin_coelln
-    regierungsform = staendisches_fuerstentum
-    herrscher      = "Friedrich Wilhelm"
-    konfession     = reformiert
-    schatz         = 23000
-    steuersatz     = 0.12
-    hofhaltung     = 116000
-    quelle         = "Kurfürst seit 1640; Herrscherhaus reformiert seit Johann Sigismund (1613), Land lutherisch. IPO Art. XI: Hinterpommern, Stift Cammin, Halberstadt und Minden, Anwartschaft auf Magdeburg; Hinterpommern bis 1653 schwedisch besetzt. Kasse nach dem Krieg klamm: Schatz, Steuersatz und Hofhaltung sind Spielwerte"
+    name     = "Kurfürstentum Brandenburg"
+    kurzname = "Brandenburg"
+    farbe    = { 58 95 143 }
+    quelle   = "Kurfürst seit 1640; Herrscherhaus reformiert seit Johann Sigismund (1613), Land lutherisch. IPO Art. XI: Hinterpommern, Stift Cammin, Halberstadt und Minden, Anwartschaft auf Magdeburg; Hinterpommern bis 1653 schwedisch besetzt. Kasse nach dem Krieg klamm: Schatz, Steuersatz und Hofhaltung sind Spielwerte"
+
+    1648.10.24 = {
+        hauptstadt     = berlin_coelln
+        regierungsform = staendisches_fuerstentum
+        herrscher      = "Friedrich Wilhelm"
+        konfession     = reformiert
+        schatz         = 23000
+        steuersatz     = 0.12
+        hofhaltung     = 116000
+    }
 }

@@ -8,6 +8,11 @@
 
 Format, Pflichtfelder und Formeln: [docs/technik/chronik-skript.md](../docs/technik/chronik-skript.md).
 
+> **Seit M2 werden Orte und Staaten in Tabellen gepflegt** (`tabellen/*.csv`, Format:
+> [docs/technik/tabellen.md](../docs/technik/tabellen.md)). Die Dateien in `history/` erzeugt
+> `python3 tools/archivar/archivar.py` daraus – bitte nicht von Hand bearbeiten. Die Abschnitte
+> unten nennen die Felder des Chronik-Skripts; sie entsprechen gleichnamigen Spalten der Tabellen.
+
 ## Inhalt
 
 | | |
@@ -27,7 +32,13 @@ data/
 │   ├── gelaende.chron             10 Geländetypen
 │   ├── konfessionen.chron         lutherisch, reformiert, katholisch, jüdisch
 │   └── berufe.chron               adel, geistlichkeit, buerger, handwerker, bauern, landarme
-├── history/
+├── tabellen/                      Quelle der Wahrheit für history/ (CSV, siehe docs/technik/tabellen.md)
+│   ├── orte.csv, staaten.csv      Stammdaten
+│   ├── besitz.csv                 Besitzer je Ort mit Datum
+│   ├── bevoelkerung.csv           Bevölkerung, Konfession, Verwüstung je Stichtag
+│   ├── staaten_historie.csv       Herrscher, Hauptstadt, Kasse … mit Datum
+│   └── dateien.csv                Kopfkommentare der erzeugten Dateien
+├── history/                       erzeugt von tools/archivar (nicht von Hand bearbeiten)
 │   ├── staaten/                   ein Staat je Datei: <TAG>_<name>.chron
 │   │   ├── ALT_sachsen_altenburg.chron
 │   │   ├── BER_anhalt_bernburg.chron
@@ -224,16 +235,18 @@ Staaten mit nur einem oder zwei Orten reagieren stark auf Seuchen in diesem Ort.
 
 ## Prüfung
 
-Bis die Kommandozeile fertig ist, wurden die Daten so geprüft:
+```bash
+python3 tools/archivar/archivar.py --pruefen      # Tabellen prüfen, history/ aktuell?
+python3 tools/archivar/archivar.py --bericht      # Sicherheit der Angaben, Abdeckung der Szenarien
+./build/dev/cli/uhrwerk-cli pruefen               # Laden mit dem Kern: 0 Fehler, 0 Warnungen
+./build/dev/cli/uhrwerk-cli lauf --jahre 50 --bericht
+```
 
-1. Eigener, unabhängiger Prüfer (Lexer und Parser nach der Grammatik, Schema, Verweise, eindeutige
-   Kennungen, Summen der Berufsanteile und Konfessionsprozente, Koordinaten innerhalb der Testregion,
-   Flächen 100–300 km²): 0 Fehler, 0 Warnungen.
-2. Laden mit `uhrwerk::load_world` aus `core/`: 0 Fehler, 0 Warnungen, 450 Bevölkerungsblöcke.
-3. 50 Jahre Simulation mit `uhrwerk::Simulation` (Ergebnisse siehe „Wirtschaftswerte“).
-
-Sobald `uhrwerk-cli` gebaut ist, ersetzt `./build/dev/cli/uhrwerk-cli lauf --jahre 50 --bericht`
-die Schritte 2 und 3.
+Beim Umzug in die Tabellen (M2) wurden die M1-Daten verlustfrei übernommen: Die Prüfsumme nach
+100 Jahren ist unverändert (`8d44cf792e143bb0`). Alle Angaben tragen seitdem eine Sicherheit:
+Besitz, Herrscher, Hauptstadt und Konfession der Staaten `ungeprueft` (recherchiert, noch ohne
+Fachprüfung), Bevölkerung, Konfessionsanteile und Verwüstung `schaetzung`, Schatz, Steuersatz und
+Hofhaltung `spielwert`. Die Begründungen stehen weiter in der Quelle des Ortes bzw. Staates.
 
 ## Quellenhinweise
 

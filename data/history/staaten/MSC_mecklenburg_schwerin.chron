@@ -1,3 +1,5 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
 # Staat zum Lesezeichen "Der Westfälische Frieden" (24.10.1648), Testregion M1.
 #
 # Format: docs/technik/chronik-skript.md, Abschnitt 3.5.
@@ -8,15 +10,18 @@
 # Schweriner Landesteil nach dem Fahrenholzer Vertrag (1621); Rostock (Kondominium) vereinfacht hier.
 
 staat MSC {
-    name           = "Herzogtum Mecklenburg-Schwerin"
-    kurzname       = "Mecklenburg-Schwerin"
-    farbe          = { 215 95 65 }
-    hauptstadt     = schwerin
-    regierungsform = staendisches_fuerstentum
-    herrscher      = "Adolf Friedrich I."
-    konfession     = lutherisch
-    schatz         = 3000
-    steuersatz     = 0.08
-    hofhaltung     = 15500
-    quelle         = "Herzog 1592–1658, 1648 zugleich Vormund des Güstrower Herzogs. IPO Art. XII: Verlust Wismars an Schweden, Entschädigung mit den Stiften Schwerin und Ratzeburg. Starke Ritterschaft, geringer Steuerzugriff. Schatz, Steuersatz und Hofhaltung sind Spielwerte"
+    name     = "Herzogtum Mecklenburg-Schwerin"
+    kurzname = "Mecklenburg-Schwerin"
+    farbe    = { 215 95 65 }
+    quelle   = "Herzog 1592–1658, 1648 zugleich Vormund des Güstrower Herzogs. IPO Art. XII: Verlust Wismars an Schweden, Entschädigung mit den Stiften Schwerin und Ratzeburg. Starke Ritterschaft, geringer Steuerzugriff. Schatz, Steuersatz und Hofhaltung sind Spielwerte"
+
+    1648.10.24 = {
+        hauptstadt     = schwerin
+        regierungsform = staendisches_fuerstentum
+        herrscher      = "Adolf Friedrich I."
+        konfession     = lutherisch
+        schatz         = 3000
+        steuersatz     = 0.08
+        hofhaltung     = 15500
+    }
 }

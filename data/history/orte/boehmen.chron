@@ -1,3 +1,5 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
 # Orte: Königreich Böhmen, nördlicher Teil (Randgebiet der Testregion) – Stand 24.10.1648.
 #
 # Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
@@ -12,53 +14,65 @@
 # Böhmen; Prag war am Stichtag teilweise besetzt.
 
 ort prag {
-    name         = "Prag"
-    besitzer     = BOH
-    gelaende     = flussaue
-    lage         = { 14.42 50.09 }
-    flaeche      = 200
-    bevoelkerung = 34000
-    stadt        = ja
-    konfession   = { katholisch = 74 juedisch = 20 lutherisch = 6 }
-    verwuestung  = 0.4
-    quelle       = "Hauptstadt Böhmens. Seit 26.07.1648 Burg, Hradschin und Kleinseite von Schweden unter Königsmarck besetzt, Alt- und Neustadt belagert bis zur Friedensnachricht Anfang November; Abzug 1649. Jüdische Gemeinde um 1600 ca. 6.000 Menschen, Viertel 1627 erweitert (Encyclopaedia Judaica); Anteile und Gesamtbevölkerung Schätzung"
+    name     = "Prag"
+    gelaende = flussaue
+    lage     = { 14.42 50.09 }
+    flaeche  = 200
+    stadt    = ja
+    quelle   = "Hauptstadt Böhmens. Seit 26.07.1648 Burg, Hradschin und Kleinseite von Schweden unter Königsmarck besetzt, Alt- und Neustadt belagert bis zur Friedensnachricht Anfang November; Abzug 1649. Jüdische Gemeinde um 1600 ca. 6.000 Menschen, Viertel 1627 erweitert (Encyclopaedia Judaica); Anteile und Gesamtbevölkerung Schätzung"
+
+    1648.10.24 = {
+        besitzer     = BOH
+        bevoelkerung = 34000
+        konfession   = { katholisch = 74 juedisch = 20 lutherisch = 6 }
+        verwuestung  = 0.4
+    }
 }
 
 ort leitmeritz {
-    name         = "Leitmeritz"
-    besitzer     = BOH
-    gelaende     = boerde
-    lage         = { 14.13 50.53 }
-    flaeche      = 250
-    bevoelkerung = 7000
-    stadt        = nein
-    konfession   = { katholisch = 80 lutherisch = 20 }
-    verwuestung  = 0.5
-    quelle       = "Königliche Stadt an der Elbe im fruchtbaren nordböhmischen Becken. Bevölkerung Schätzung (Stadt mit Umland; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Nichtkatholischer Anteil geschätzt"
+    name     = "Leitmeritz"
+    gelaende = boerde
+    lage     = { 14.13 50.53 }
+    flaeche  = 250
+    stadt    = nein
+    quelle   = "Königliche Stadt an der Elbe im fruchtbaren nordböhmischen Becken. Bevölkerung Schätzung (Stadt mit Umland; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Nichtkatholischer Anteil geschätzt"
+
+    1648.10.24 = {
+        besitzer     = BOH
+        bevoelkerung = 7000
+        konfession   = { katholisch = 80 lutherisch = 20 }
+        verwuestung  = 0.5
+    }
 }
 
 ort boehmisch_leipa {
-    name         = "Böhmisch Leipa"
-    besitzer     = BOH
-    gelaende     = huegelland
-    lage         = { 14.54 50.69 }
-    flaeche      = 250
-    bevoelkerung = 5500
-    stadt        = nein
-    konfession   = { katholisch = 75 lutherisch = 25 }
-    verwuestung  = 0.45
-    quelle       = "Landstadt in Nordböhmen. Bevölkerung Schätzung (Stadt mit Umland; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Nichtkatholischer Anteil geschätzt"
+    name     = "Böhmisch Leipa"
+    gelaende = huegelland
+    lage     = { 14.54 50.69 }
+    flaeche  = 250
+    stadt    = nein
+    quelle   = "Landstadt in Nordböhmen. Bevölkerung Schätzung (Stadt mit Umland; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Nichtkatholischer Anteil geschätzt"
+
+    1648.10.24 = {
+        besitzer     = BOH
+        bevoelkerung = 5500
+        konfession   = { katholisch = 75 lutherisch = 25 }
+        verwuestung  = 0.45
+    }
 }
 
 ort reichenberg {
-    name         = "Reichenberg"
-    besitzer     = BOH
-    gelaende     = wald
-    lage         = { 15.06 50.77 }
-    flaeche      = 250
-    bevoelkerung = 5000
-    stadt        = nein
-    konfession   = { katholisch = 75 lutherisch = 25 }
-    verwuestung  = 0.45
-    quelle       = "Herrschaft Reichenberg, nach Wallensteins Tod (1634) an Matthias Gallas; stark bewaldetes Vorland des Isergebirges, Tuch- und Leinenweberei. Bevölkerung Schätzung (Größenordnung nach Literatur zur Bevölkerungsentwicklung). Nichtkatholischer Anteil geschätzt"
+    name     = "Reichenberg"
+    gelaende = wald
+    lage     = { 15.06 50.77 }
+    flaeche  = 250
+    stadt    = nein
+    quelle   = "Herrschaft Reichenberg, nach Wallensteins Tod (1634) an Matthias Gallas; stark bewaldetes Vorland des Isergebirges, Tuch- und Leinenweberei. Bevölkerung Schätzung (Größenordnung nach Literatur zur Bevölkerungsentwicklung). Nichtkatholischer Anteil geschätzt"
+
+    1648.10.24 = {
+        besitzer     = BOH
+        bevoelkerung = 5000
+        konfession   = { katholisch = 75 lutherisch = 25 }
+        verwuestung  = 0.45
+    }
 }

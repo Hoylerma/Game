@@ -1,3 +1,5 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
 # Orte: Herzogtum Braunschweig-Wolfenbüttel (östlicher Teil) – Stand 24.10.1648.
 #
 # Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
@@ -10,40 +12,49 @@
 # Harz) liegen außerhalb der Testregion bzw. sind nicht modelliert.
 
 ort wolfenbuettel {
-    name         = "Wolfenbüttel"
-    besitzer     = BWO
-    gelaende     = boerde
-    lage         = { 10.53 52.16 }
-    flaeche      = 200
-    bevoelkerung = 6000
-    stadt        = ja
-    konfession   = { lutherisch = 100 }
-    verwuestung  = 0.45
-    quelle       = "Residenz und Festung, bis 1643 kaiserlich besetzt. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung nach regionaler Kriegsbetroffenheit geschätzt"
+    name     = "Wolfenbüttel"
+    gelaende = boerde
+    lage     = { 10.53 52.16 }
+    flaeche  = 200
+    stadt    = ja
+    quelle   = "Residenz und Festung, bis 1643 kaiserlich besetzt. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung nach regionaler Kriegsbetroffenheit geschätzt"
+
+    1648.10.24 = {
+        besitzer     = BWO
+        bevoelkerung = 6000
+        konfession   = { lutherisch = 100 }
+        verwuestung  = 0.45
+    }
 }
 
 ort braunschweig {
-    name         = "Braunschweig"
-    besitzer     = BWO
-    gelaende     = flachland
-    lage         = { 10.52 52.27 }
-    flaeche      = 150
-    bevoelkerung = 15000
-    stadt        = ja
-    konfession   = { lutherisch = 100 }
-    verwuestung  = 0.25
-    quelle       = "Größte Stadt des Herzogtums, formal landsässig, faktisch weitgehend selbständig bis zur Unterwerfung 1671; vereinfacht dem Herzogtum zugeordnet. Bevölkerung Schätzung (Größenordnung nach Literatur zur Bevölkerungsentwicklung)"
+    name     = "Braunschweig"
+    gelaende = flachland
+    lage     = { 10.52 52.27 }
+    flaeche  = 150
+    stadt    = ja
+    quelle   = "Größte Stadt des Herzogtums, formal landsässig, faktisch weitgehend selbständig bis zur Unterwerfung 1671; vereinfacht dem Herzogtum zugeordnet. Bevölkerung Schätzung (Größenordnung nach Literatur zur Bevölkerungsentwicklung)"
+
+    1648.10.24 = {
+        besitzer     = BWO
+        bevoelkerung = 15000
+        konfession   = { lutherisch = 100 }
+        verwuestung  = 0.25
+    }
 }
 
 ort helmstedt {
-    name         = "Helmstedt"
-    besitzer     = BWO
-    gelaende     = huegelland
-    lage         = { 11.01 52.23 }
-    flaeche      = 220
-    bevoelkerung = 5000
-    stadt        = ja
-    konfession   = { lutherisch = 100 }
-    verwuestung  = 0.4
-    quelle       = "Universitätsstadt (Academia Julia, gegründet 1576). Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung nach regionaler Kriegsbetroffenheit geschätzt"
+    name     = "Helmstedt"
+    gelaende = huegelland
+    lage     = { 11.01 52.23 }
+    flaeche  = 220
+    stadt    = ja
+    quelle   = "Universitätsstadt (Academia Julia, gegründet 1576). Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung nach regionaler Kriegsbetroffenheit geschätzt"
+
+    1648.10.24 = {
+        besitzer     = BWO
+        bevoelkerung = 5000
+        konfession   = { lutherisch = 100 }
+        verwuestung  = 0.4
+    }
 }

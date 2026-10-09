@@ -1,3 +1,5 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
 # Orte: Kurfürstentum Sachsen – Erblande (Meißnischer, Leipziger, Erzgebirgischer und Kurkreis) – Stand 24.10.1648.
 #
 # Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
@@ -11,92 +13,113 @@
 # Thüringischen Kreises in thueringen.chron, Jüterbog in magdeburg.chron.
 
 ort dresden {
-    name         = "Dresden"
-    besitzer     = SAX
-    gelaende     = flussaue
-    lage         = { 13.74 51.05 }
-    flaeche      = 220
-    bevoelkerung = 15000
-    stadt        = ja
-    konfession   = { lutherisch = 100 }
-    verwuestung  = 0.25
-    quelle       = "Residenz und Festung des Kurfürsten Johann Georg I.; im Krieg nicht eingenommen. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung)"
+    name     = "Dresden"
+    gelaende = flussaue
+    lage     = { 13.74 51.05 }
+    flaeche  = 220
+    stadt    = ja
+    quelle   = "Residenz und Festung des Kurfürsten Johann Georg I.; im Krieg nicht eingenommen. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung)"
+
+    1648.10.24 = {
+        besitzer     = SAX
+        bevoelkerung = 15000
+        konfession   = { lutherisch = 100 }
+        verwuestung  = 0.25
+    }
 }
 
 ort leipzig {
-    name         = "Leipzig"
-    besitzer     = SAX
-    gelaende     = flussaue
-    lage         = { 12.37 51.34 }
-    flaeche      = 210
-    bevoelkerung = 14000
-    stadt        = ja
-    konfession   = { lutherisch = 100 }
-    verwuestung  = 0.4
-    quelle       = "Messe- und Universitätsstadt; von November 1642 bis Juni 1650 schwedisch besetzt. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung)"
+    name     = "Leipzig"
+    gelaende = flussaue
+    lage     = { 12.37 51.34 }
+    flaeche  = 210
+    stadt    = ja
+    quelle   = "Messe- und Universitätsstadt; von November 1642 bis Juni 1650 schwedisch besetzt. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung)"
+
+    1648.10.24 = {
+        besitzer     = SAX
+        bevoelkerung = 14000
+        konfession   = { lutherisch = 100 }
+        verwuestung  = 0.4
+    }
 }
 
 ort wittenberg {
-    name         = "Wittenberg"
-    besitzer     = SAX
-    gelaende     = flussaue
-    lage         = { 12.65 51.87 }
-    flaeche      = 220
-    bevoelkerung = 6000
-    stadt        = ja
-    konfession   = { lutherisch = 100 }
-    verwuestung  = 0.4
-    quelle       = "Hauptort des Kurkreises, Universität und Elbfestung. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung nach regionaler Kriegsbetroffenheit geschätzt"
+    name     = "Wittenberg"
+    gelaende = flussaue
+    lage     = { 12.65 51.87 }
+    flaeche  = 220
+    stadt    = ja
+    quelle   = "Hauptort des Kurkreises, Universität und Elbfestung. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung nach regionaler Kriegsbetroffenheit geschätzt"
+
+    1648.10.24 = {
+        besitzer     = SAX
+        bevoelkerung = 6000
+        konfession   = { lutherisch = 100 }
+        verwuestung  = 0.4
+    }
 }
 
 ort torgau {
-    name         = "Torgau"
-    besitzer     = SAX
-    gelaende     = flussaue
-    lage         = { 13.01 51.56 }
-    flaeche      = 220
-    bevoelkerung = 5500
-    stadt        = ja
-    konfession   = { lutherisch = 100 }
-    verwuestung  = 0.45
-    quelle       = "Elbstadt mit Schloss Hartenfels. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung nach regionaler Kriegsbetroffenheit geschätzt"
+    name     = "Torgau"
+    gelaende = flussaue
+    lage     = { 13.01 51.56 }
+    flaeche  = 220
+    stadt    = ja
+    quelle   = "Elbstadt mit Schloss Hartenfels. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung nach regionaler Kriegsbetroffenheit geschätzt"
+
+    1648.10.24 = {
+        besitzer     = SAX
+        bevoelkerung = 5500
+        konfession   = { lutherisch = 100 }
+        verwuestung  = 0.45
+    }
 }
 
 ort freiberg {
-    name         = "Freiberg"
-    besitzer     = SAX
-    gelaende     = mittelgebirge
-    lage         = { 13.34 50.92 }
-    flaeche      = 220
-    bevoelkerung = 8500
-    stadt        = ja
-    konfession   = { lutherisch = 100 }
-    verwuestung  = 0.4
-    quelle       = "Bergstadt und Zentrum des sächsischen Silberbergbaus; hielt den schwedischen Belagerungen von 1639 und 1642/43 stand. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung)"
+    name     = "Freiberg"
+    gelaende = mittelgebirge
+    lage     = { 13.34 50.92 }
+    flaeche  = 220
+    stadt    = ja
+    quelle   = "Bergstadt und Zentrum des sächsischen Silberbergbaus; hielt den schwedischen Belagerungen von 1639 und 1642/43 stand. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung)"
+
+    1648.10.24 = {
+        besitzer     = SAX
+        bevoelkerung = 8500
+        konfession   = { lutherisch = 100 }
+        verwuestung  = 0.4
+    }
 }
 
 ort chemnitz {
-    name         = "Chemnitz"
-    besitzer     = SAX
-    gelaende     = huegelland
-    lage         = { 12.92 50.83 }
-    flaeche      = 230
-    bevoelkerung = 5000
-    stadt        = nein
-    konfession   = { lutherisch = 100 }
-    verwuestung  = 0.5
-    quelle       = "Weberstadt am Erzgebirgsrand. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung nach regionaler Kriegsbetroffenheit geschätzt"
+    name     = "Chemnitz"
+    gelaende = huegelland
+    lage     = { 12.92 50.83 }
+    flaeche  = 230
+    stadt    = nein
+    quelle   = "Weberstadt am Erzgebirgsrand. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung nach regionaler Kriegsbetroffenheit geschätzt"
+
+    1648.10.24 = {
+        besitzer     = SAX
+        bevoelkerung = 5000
+        konfession   = { lutherisch = 100 }
+        verwuestung  = 0.5
+    }
 }
 
 ort zwickau {
-    name         = "Zwickau"
-    besitzer     = SAX
-    gelaende     = huegelland
-    lage         = { 12.50 50.72 }
-    flaeche      = 230
-    bevoelkerung = 7000
-    stadt        = ja
-    konfession   = { lutherisch = 100 }
-    verwuestung  = 0.45
-    quelle       = "Tuch- und Handelsstadt an der Mulde. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung nach regionaler Kriegsbetroffenheit geschätzt"
+    name     = "Zwickau"
+    gelaende = huegelland
+    lage     = { 12.50 50.72 }
+    flaeche  = 230
+    stadt    = ja
+    quelle   = "Tuch- und Handelsstadt an der Mulde. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung nach regionaler Kriegsbetroffenheit geschätzt"
+
+    1648.10.24 = {
+        besitzer     = SAX
+        bevoelkerung = 7000
+        konfession   = { lutherisch = 100 }
+        verwuestung  = 0.45
+    }
 }

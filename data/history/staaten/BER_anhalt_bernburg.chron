@@ -1,3 +1,5 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
 # Staat zum Lesezeichen "Der Westfälische Frieden" (24.10.1648), Testregion M1.
 #
 # Format: docs/technik/chronik-skript.md, Abschnitt 3.5.
@@ -8,15 +10,18 @@
 # Eine der vier anhaltischen Linien des Jahres 1648.
 
 staat BER {
-    name           = "Fürstentum Anhalt-Bernburg"
-    kurzname       = "Anhalt-Bernburg"
-    farbe          = { 150 95 175 }
-    hauptstadt     = bernburg
-    regierungsform = staendisches_fuerstentum
-    herrscher      = "Christian II."
-    konfession     = reformiert
-    schatz         = 2000
-    steuersatz     = 0.10
-    hofhaltung     = 7000
-    quelle         = "Fürst 1630–1656 (Regententafel des Landesarchivs Sachsen-Anhalt). Anhalt seit der Zweiten Reformation (ab 1596) reformiert. Schatz, Steuersatz und Hofhaltung sind Spielwerte"
+    name     = "Fürstentum Anhalt-Bernburg"
+    kurzname = "Anhalt-Bernburg"
+    farbe    = { 150 95 175 }
+    quelle   = "Fürst 1630–1656 (Regententafel des Landesarchivs Sachsen-Anhalt). Anhalt seit der Zweiten Reformation (ab 1596) reformiert. Schatz, Steuersatz und Hofhaltung sind Spielwerte"
+
+    1648.10.24 = {
+        hauptstadt     = bernburg
+        regierungsform = staendisches_fuerstentum
+        herrscher      = "Christian II."
+        konfession     = reformiert
+        schatz         = 2000
+        steuersatz     = 0.10
+        hofhaltung     = 7000
+    }
 }

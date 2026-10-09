@@ -1,3 +1,5 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
 # Staat zum Lesezeichen "Der Westfälische Frieden" (24.10.1648), Testregion M1.
 #
 # Format: docs/technik/chronik-skript.md, Abschnitt 3.5.
@@ -8,15 +10,18 @@
 # Ernestinisches Herzogtum; in der Testregion mit dem Amt Gotha modelliert.
 
 staat GOT {
-    name           = "Herzogtum Sachsen-Gotha"
-    kurzname       = "Sachsen-Gotha"
-    farbe          = { 150 200 90 }
-    hauptstadt     = gotha
-    regierungsform = staendisches_fuerstentum
-    herrscher      = "Ernst I. der Fromme"
-    konfession     = lutherisch
-    schatz         = 11000
-    steuersatz     = 0.10
-    hofhaltung     = 12500
-    quelle         = "Herzog seit der ernestinischen Teilung 1640 (bis 1675); Schulmethodus 1642, vorbildliche Verwaltung und Finanzen, daher vergleichsweise hoher Startschatz; 1645 Anteile am Eisenacher Erbe. Schatz, Steuersatz und Hofhaltung sind Spielwerte"
+    name     = "Herzogtum Sachsen-Gotha"
+    kurzname = "Sachsen-Gotha"
+    farbe    = { 150 200 90 }
+    quelle   = "Herzog seit der ernestinischen Teilung 1640 (bis 1675); Schulmethodus 1642, vorbildliche Verwaltung und Finanzen, daher vergleichsweise hoher Startschatz; 1645 Anteile am Eisenacher Erbe. Schatz, Steuersatz und Hofhaltung sind Spielwerte"
+
+    1648.10.24 = {
+        hauptstadt     = gotha
+        regierungsform = staendisches_fuerstentum
+        herrscher      = "Ernst I. der Fromme"
+        konfession     = lutherisch
+        schatz         = 11000
+        steuersatz     = 0.10
+        hofhaltung     = 12500
+    }
 }

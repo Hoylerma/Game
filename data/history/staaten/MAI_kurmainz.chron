@@ -1,3 +1,5 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
 # Staat zum Lesezeichen "Der Westfälische Frieden" (24.10.1648), Testregion M1.
 #
 # Format: docs/technik/chronik-skript.md, Abschnitt 3.5.
@@ -8,15 +10,18 @@
 # In der Testregion nur die thüringischen Besitzungen: Erfurt und das Eichsfeld.
 
 staat MAI {
-    name           = "Kurfürstentum Mainz"
-    kurzname       = "Kurmainz"
-    farbe          = { 200 50 140 }
-    hauptstadt     = erfurt
-    regierungsform = geistliches_fuerstentum
-    herrscher      = "Johann Philipp von Schönborn"
-    konfession     = katholisch
-    schatz         = 9000
-    steuersatz     = 0.08
-    hofhaltung     = 28000
-    quelle         = "Erzbischof und Kurfürst seit 1647, Reichserzkanzler. Residenz Mainz liegt außerhalb der Testregion, daher Erfurt als Hauptort der thüringischen Besitzungen; Erfurt bis 1664 faktisch weitgehend selbständig und bis 1650 schwedisch besetzt. Schatz, Steuersatz und Hofhaltung sind Spielwerte"
+    name     = "Kurfürstentum Mainz"
+    kurzname = "Kurmainz"
+    farbe    = { 200 50 140 }
+    quelle   = "Erzbischof und Kurfürst seit 1647, Reichserzkanzler. Residenz Mainz liegt außerhalb der Testregion, daher Erfurt als Hauptort der thüringischen Besitzungen; Erfurt bis 1664 faktisch weitgehend selbständig und bis 1650 schwedisch besetzt. Schatz, Steuersatz und Hofhaltung sind Spielwerte"
+
+    1648.10.24 = {
+        hauptstadt     = erfurt
+        regierungsform = geistliches_fuerstentum
+        herrscher      = "Johann Philipp von Schönborn"
+        konfession     = katholisch
+        schatz         = 9000
+        steuersatz     = 0.08
+        hofhaltung     = 28000
+    }
 }

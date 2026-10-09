@@ -1,3 +1,5 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
 # Staat zum Lesezeichen "Der Westfälische Frieden" (24.10.1648), Testregion M1.
 #
 # Format: docs/technik/chronik-skript.md, Abschnitt 3.5.
@@ -9,15 +11,18 @@
 # (Weißenfels, Merseburg, Zeitz) entstehen erst nach dem Tod Johann Georgs I. (1656).
 
 staat SAX {
-    name           = "Kurfürstentum Sachsen"
-    kurzname       = "Kursachsen"
-    farbe          = { 60 145 75 }
-    hauptstadt     = dresden
-    regierungsform = staendisches_fuerstentum
-    herrscher      = "Johann Georg I."
-    konfession     = lutherisch
-    schatz         = 92000
-    steuersatz     = 0.10
-    hofhaltung     = 153000
-    quelle         = "Kurfürst 1611–1656, führender evangelischer Reichsstand. Ober- und Niederlausitz seit dem Prager Frieden 1635 (Traditionsrezess 1636) als böhmisches Lehen; magdeburgische Ämter seit 1635. Wirtschaftlich stärker als Brandenburg (Bergbau, Leipziger Messe), aber ebenfalls kriegsbelastet. Schatz, Steuersatz und Hofhaltung sind Spielwerte"
+    name     = "Kurfürstentum Sachsen"
+    kurzname = "Kursachsen"
+    farbe    = { 60 145 75 }
+    quelle   = "Kurfürst 1611–1656, führender evangelischer Reichsstand. Ober- und Niederlausitz seit dem Prager Frieden 1635 (Traditionsrezess 1636) als böhmisches Lehen; magdeburgische Ämter seit 1635. Wirtschaftlich stärker als Brandenburg (Bergbau, Leipziger Messe), aber ebenfalls kriegsbelastet. Schatz, Steuersatz und Hofhaltung sind Spielwerte"
+
+    1648.10.24 = {
+        hauptstadt     = dresden
+        regierungsform = staendisches_fuerstentum
+        herrscher      = "Johann Georg I."
+        konfession     = lutherisch
+        schatz         = 92000
+        steuersatz     = 0.10
+        hofhaltung     = 153000
+    }
 }

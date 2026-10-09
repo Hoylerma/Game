@@ -1,3 +1,5 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
 # Staat zum Lesezeichen "Der Westfälische Frieden" (24.10.1648), Testregion M1.
 #
 # Format: docs/technik/chronik-skript.md, Abschnitt 3.5.
@@ -8,15 +10,18 @@
 # Welfisches Herzogtum (Fürstentum Wolfenbüttel).
 
 staat BWO {
-    name           = "Herzogtum Braunschweig-Wolfenbüttel"
-    kurzname       = "Braunschweig-Wolfenbüttel"
-    farbe          = { 200 160 90 }
-    hauptstadt     = wolfenbuettel
-    regierungsform = staendisches_fuerstentum
-    herrscher      = "August der Jüngere"
-    konfession     = lutherisch
-    schatz         = 22000
-    steuersatz     = 0.10
-    hofhaltung     = 42000
-    quelle         = "Herzog 1635–1666; Residenz Wolfenbüttel erst nach Abzug der kaiserlichen Besatzung (November 1643) bezogen; Sammler der Bibliotheca Augusta, sparsame Verwaltung. Stadt Braunschweig faktisch selbständig bis 1671. Schatz, Steuersatz und Hofhaltung sind Spielwerte"
+    name     = "Herzogtum Braunschweig-Wolfenbüttel"
+    kurzname = "Braunschweig-Wolfenbüttel"
+    farbe    = { 200 160 90 }
+    quelle   = "Herzog 1635–1666; Residenz Wolfenbüttel erst nach Abzug der kaiserlichen Besatzung (November 1643) bezogen; Sammler der Bibliotheca Augusta, sparsame Verwaltung. Stadt Braunschweig faktisch selbständig bis 1671. Schatz, Steuersatz und Hofhaltung sind Spielwerte"
+
+    1648.10.24 = {
+        hauptstadt     = wolfenbuettel
+        regierungsform = staendisches_fuerstentum
+        herrscher      = "August der Jüngere"
+        konfession     = lutherisch
+        schatz         = 22000
+        steuersatz     = 0.10
+        hofhaltung     = 42000
+    }
 }

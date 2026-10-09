@@ -1,3 +1,5 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
 # Staat zum Lesezeichen "Der Westfälische Frieden" (24.10.1648), Testregion M1.
 #
 # Format: docs/technik/chronik-skript.md, Abschnitt 3.5.
@@ -9,15 +11,18 @@
 # außerhalb der Testregion. Die Hofhaltung steht hier für die Landesverwaltung und Garnisonen in Pommern.
 
 staat SWE {
-    name           = "Königreich Schweden"
-    kurzname       = "Schweden"
-    farbe          = { 236 200 52 }
-    hauptstadt     = stettin
-    regierungsform = staendische_monarchie
-    herrscher      = "Christina"
-    konfession     = lutherisch
-    schatz         = 23500
-    steuersatz     = 0.12
-    hofhaltung     = 59000
-    quelle         = "Königin Christina (reg. 1632–1654, volljährig seit 1644). IPO Art. X: Vorpommern mit Stettin, Rügen, Usedom und Wollin, Wismar sowie Bremen und Verden als Reichslehen mit Sitz im Reichstag. Hauptstadt hier Stettin als Sitz der schwedischen Regierung in Pommern. Schatz, Steuersatz und Hofhaltung sind Spielwerte"
+    name     = "Königreich Schweden"
+    kurzname = "Schweden"
+    farbe    = { 236 200 52 }
+    quelle   = "Königin Christina (reg. 1632–1654, volljährig seit 1644). IPO Art. X: Vorpommern mit Stettin, Rügen, Usedom und Wollin, Wismar sowie Bremen und Verden als Reichslehen mit Sitz im Reichstag. Hauptstadt hier Stettin als Sitz der schwedischen Regierung in Pommern. Schatz, Steuersatz und Hofhaltung sind Spielwerte"
+
+    1648.10.24 = {
+        hauptstadt     = stettin
+        regierungsform = staendische_monarchie
+        herrscher      = "Christina"
+        konfession     = lutherisch
+        schatz         = 23500
+        steuersatz     = 0.12
+        hofhaltung     = 59000
+    }
 }

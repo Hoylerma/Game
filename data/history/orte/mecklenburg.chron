@@ -1,3 +1,5 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
 # Orte: Herzogtümer Mecklenburg-Schwerin und Mecklenburg-Güstrow mit dem schwedischen Wismar – Stand 24.10.1648.
 #
 # Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
@@ -11,79 +13,97 @@
 # Mecklenburg verlor im Krieg einen sehr großen Teil seiner Bevölkerung.
 
 ort schwerin {
-    name         = "Schwerin"
-    besitzer     = MSC
-    gelaende     = seenplatte
-    lage         = { 11.41 53.63 }
-    flaeche      = 250
-    bevoelkerung = 4200
-    stadt        = ja
-    konfession   = { lutherisch = 100 }
-    verwuestung  = 0.6
-    quelle       = "Residenz Herzog Adolf Friedrichs I. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung nach regionaler Kriegsbetroffenheit geschätzt"
+    name     = "Schwerin"
+    gelaende = seenplatte
+    lage     = { 11.41 53.63 }
+    flaeche  = 250
+    stadt    = ja
+    quelle   = "Residenz Herzog Adolf Friedrichs I. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung nach regionaler Kriegsbetroffenheit geschätzt"
+
+    1648.10.24 = {
+        besitzer     = MSC
+        bevoelkerung = 4200
+        konfession   = { lutherisch = 100 }
+        verwuestung  = 0.6
+    }
 }
 
 ort wismar {
-    name         = "Wismar"
-    besitzer     = SWE
-    gelaende     = kueste
-    lage         = { 11.46 53.89 }
-    flaeche      = 150
-    bevoelkerung = 6000
-    stadt        = ja
-    konfession   = { lutherisch = 100 }
-    verwuestung  = 0.45
-    quelle       = "IPO Art. X: Stadt und Hafen Wismar mit Poel und Neukloster an Schweden (Reichslehen); schwedische Festung. Bevölkerung Schätzung (Größenordnung nach Literatur zur Bevölkerungsentwicklung)"
+    name     = "Wismar"
+    gelaende = kueste
+    lage     = { 11.46 53.89 }
+    flaeche  = 150
+    stadt    = ja
+    quelle   = "IPO Art. X: Stadt und Hafen Wismar mit Poel und Neukloster an Schweden (Reichslehen); schwedische Festung. Bevölkerung Schätzung (Größenordnung nach Literatur zur Bevölkerungsentwicklung)"
+
+    1648.10.24 = {
+        besitzer     = SWE
+        bevoelkerung = 6000
+        konfession   = { lutherisch = 100 }
+        verwuestung  = 0.45
+    }
 }
 
 ort rostock {
-    name         = "Rostock"
-    besitzer     = MSC
-    gelaende     = kueste
-    lage         = { 12.14 54.09 }
-    flaeche      = 200
-    bevoelkerung = 7500
-    stadt        = ja
-    konfession   = { lutherisch = 100 }
-    verwuestung  = 0.45
-    quelle       = "Hansestadt und Universität; nach dem Fahrenholzer Vertrag (1621) Kondominium beider Herzöge, hier vereinfacht Mecklenburg-Schwerin zugeordnet (Adolf Friedrich I. führte 1648 auch die Güstrower Vormundschaft); Seezoll in Warnemünde in schwedischer Hand. Bevölkerung Schätzung"
+    name     = "Rostock"
+    gelaende = kueste
+    lage     = { 12.14 54.09 }
+    flaeche  = 200
+    stadt    = ja
+    quelle   = "Hansestadt und Universität; nach dem Fahrenholzer Vertrag (1621) Kondominium beider Herzöge, hier vereinfacht Mecklenburg-Schwerin zugeordnet (Adolf Friedrich I. führte 1648 auch die Güstrower Vormundschaft); Seezoll in Warnemünde in schwedischer Hand. Bevölkerung Schätzung"
+
+    1648.10.24 = {
+        besitzer     = MSC
+        bevoelkerung = 7500
+        konfession   = { lutherisch = 100 }
+        verwuestung  = 0.45
+    }
 }
 
 ort guestrow {
-    name         = "Güstrow"
-    besitzer     = MGU
-    gelaende     = flachland
-    lage         = { 12.18 53.79 }
-    flaeche      = 250
-    bevoelkerung = 4500
-    stadt        = ja
-    konfession   = { lutherisch = 100 }
-    verwuestung  = 0.65
-    quelle       = "Residenz des Güstrower Landesteils. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung nach regionaler Kriegsbetroffenheit geschätzt"
+    name     = "Güstrow"
+    gelaende = flachland
+    lage     = { 12.18 53.79 }
+    flaeche  = 250
+    stadt    = ja
+    quelle   = "Residenz des Güstrower Landesteils. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung nach regionaler Kriegsbetroffenheit geschätzt"
+
+    1648.10.24 = {
+        besitzer     = MGU
+        bevoelkerung = 4500
+        konfession   = { lutherisch = 100 }
+        verwuestung  = 0.65
+    }
 }
 
 ort parchim {
-    name         = "Parchim"
-    besitzer     = MSC
-    gelaende     = flachland
-    lage         = { 11.85 53.43 }
-    flaeche      = 260
-    bevoelkerung = 3600
-    stadt        = nein
-    konfession   = { lutherisch = 100 }
-    verwuestung  = 0.65
-    quelle       = "Vorderstadt des Landes Mecklenburg an der Elde, nach dem Fahrenholzer Vertrag schwerinsch. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung geschätzt"
+    name     = "Parchim"
+    gelaende = flachland
+    lage     = { 11.85 53.43 }
+    flaeche  = 260
+    stadt    = nein
+    quelle   = "Vorderstadt des Landes Mecklenburg an der Elde, nach dem Fahrenholzer Vertrag schwerinsch. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung geschätzt"
+
+    1648.10.24 = {
+        besitzer     = MSC
+        bevoelkerung = 3600
+        konfession   = { lutherisch = 100 }
+        verwuestung  = 0.65
+    }
 }
 
 ort neubrandenburg {
-    name         = "Neubrandenburg"
-    besitzer     = MGU
-    gelaende     = seenplatte
-    lage         = { 13.26 53.56 }
-    flaeche      = 260
-    bevoelkerung = 3200
-    stadt        = nein
-    konfession   = { lutherisch = 100 }
-    verwuestung  = 0.75
-    quelle       = "Vorderstadt des Landes Stargard, 1631 von Tilly erstürmt. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung nach regionaler Kriegsbetroffenheit geschätzt"
+    name     = "Neubrandenburg"
+    gelaende = seenplatte
+    lage     = { 13.26 53.56 }
+    flaeche  = 260
+    stadt    = nein
+    quelle   = "Vorderstadt des Landes Stargard, 1631 von Tilly erstürmt. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung nach regionaler Kriegsbetroffenheit geschätzt"
+
+    1648.10.24 = {
+        besitzer     = MGU
+        bevoelkerung = 3200
+        konfession   = { lutherisch = 100 }
+        verwuestung  = 0.75
+    }
 }

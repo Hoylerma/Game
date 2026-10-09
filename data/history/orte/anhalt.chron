@@ -1,3 +1,5 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
 # Orte: Fürstentümer Anhalt – Stand 24.10.1648.
 #
 # Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
@@ -11,53 +13,65 @@
 # Elbe und Saale und war schwer verwüstet.
 
 ort dessau {
-    name         = "Dessau"
-    besitzer     = DES
-    gelaende     = flussaue
-    lage         = { 12.24 51.83 }
-    flaeche      = 220
-    bevoelkerung = 4200
-    stadt        = ja
-    konfession   = { reformiert = 85 lutherisch = 15 }
-    verwuestung  = 0.55
-    quelle       = "Residenz Anhalt-Dessau an Mulde und Elbe. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Konfession nach der Zweiten Reformation in Anhalt, Anteile geschätzt"
+    name     = "Dessau"
+    gelaende = flussaue
+    lage     = { 12.24 51.83 }
+    flaeche  = 220
+    stadt    = ja
+    quelle   = "Residenz Anhalt-Dessau an Mulde und Elbe. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Konfession nach der Zweiten Reformation in Anhalt, Anteile geschätzt"
+
+    1648.10.24 = {
+        besitzer     = DES
+        bevoelkerung = 4200
+        konfession   = { reformiert = 85 lutherisch = 15 }
+        verwuestung  = 0.55
+    }
 }
 
 ort bernburg {
-    name         = "Bernburg"
-    besitzer     = BER
-    gelaende     = boerde
-    lage         = { 11.74 51.79 }
-    flaeche      = 200
-    bevoelkerung = 4000
-    stadt        = ja
-    konfession   = { reformiert = 85 lutherisch = 15 }
-    verwuestung  = 0.6
-    quelle       = "Residenz Anhalt-Bernburg an der Saale. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Konfession nach der Zweiten Reformation in Anhalt, Anteile geschätzt"
+    name     = "Bernburg"
+    gelaende = boerde
+    lage     = { 11.74 51.79 }
+    flaeche  = 200
+    stadt    = ja
+    quelle   = "Residenz Anhalt-Bernburg an der Saale. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Konfession nach der Zweiten Reformation in Anhalt, Anteile geschätzt"
+
+    1648.10.24 = {
+        besitzer     = BER
+        bevoelkerung = 4000
+        konfession   = { reformiert = 85 lutherisch = 15 }
+        verwuestung  = 0.6
+    }
 }
 
 ort koethen {
-    name         = "Köthen"
-    besitzer     = KOE
-    gelaende     = boerde
-    lage         = { 11.97 51.75 }
-    flaeche      = 200
-    bevoelkerung = 3600
-    stadt        = ja
-    konfession   = { reformiert = 85 lutherisch = 15 }
-    verwuestung  = 0.6
-    quelle       = "Residenz Anhalt-Köthen, Sitz der Fruchtbringenden Gesellschaft (gegründet 1617). Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Konfession nach der Zweiten Reformation in Anhalt, Anteile geschätzt"
+    name     = "Köthen"
+    gelaende = boerde
+    lage     = { 11.97 51.75 }
+    flaeche  = 200
+    stadt    = ja
+    quelle   = "Residenz Anhalt-Köthen, Sitz der Fruchtbringenden Gesellschaft (gegründet 1617). Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Konfession nach der Zweiten Reformation in Anhalt, Anteile geschätzt"
+
+    1648.10.24 = {
+        besitzer     = KOE
+        bevoelkerung = 3600
+        konfession   = { reformiert = 85 lutherisch = 15 }
+        verwuestung  = 0.6
+    }
 }
 
 ort zerbst {
-    name         = "Zerbst"
-    besitzer     = ZER
-    gelaende     = flachland
-    lage         = { 12.08 51.97 }
-    flaeche      = 240
-    bevoelkerung = 4500
-    stadt        = ja
-    konfession   = { lutherisch = 70 reformiert = 30 }
-    verwuestung  = 0.55
-    quelle       = "Residenz Anhalt-Zerbst; 1644 Rückkehr zum lutherischen Bekenntnis unter Fürst Johann (Landeskirche Anhalts; Deutsche Biographie), reformierter Restanteil geschätzt. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung)"
+    name     = "Zerbst"
+    gelaende = flachland
+    lage     = { 12.08 51.97 }
+    flaeche  = 240
+    stadt    = ja
+    quelle   = "Residenz Anhalt-Zerbst; 1644 Rückkehr zum lutherischen Bekenntnis unter Fürst Johann (Landeskirche Anhalts; Deutsche Biographie), reformierter Restanteil geschätzt. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung)"
+
+    1648.10.24 = {
+        besitzer     = ZER
+        bevoelkerung = 4500
+        konfession   = { lutherisch = 70 reformiert = 30 }
+        verwuestung  = 0.55
+    }
 }
