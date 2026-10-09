@@ -12,7 +12,7 @@ Dieses Dokument beschreibt, wie im Repository gearbeitet wird: Struktur, Branche
 | `bridge/` | GDExtension-Brücke zwischen Uhrwerk und Godot | `core`, `third_party/godot-cpp` |
 | `game/` | Godot-4-Projekt (Szenen, Skripte, Shader, Oberfläche) | `bridge` |
 | `data/` | Spielinhalte im **Chronik-Skript** (`*.chron`) und Kartendaten | – |
-| `tools/` | Hilfswerkzeuge (z. B. Kartengenerator) | Python 3 |
+| `tools/` | Hilfswerkzeuge: Archivar (Datenpipeline), Kartengenerator | Python 3 |
 | `docs/` | Game Design Document | – |
 | `third_party/` | Fremdbibliotheken als Git-Submodule | – |
 
@@ -43,6 +43,7 @@ Nützliche Befehle:
 ```bash
 ./build/dev/cli/uhrwerk-cli lauf --jahre 50 --bericht      # 50 Jahre ab 1648 simulieren
 ./build/dev/cli/uhrwerk-cli determinismus --jahre 100      # zwei Läufe, Prüfsummen vergleichen
+python3 tools/archivar/archivar.py                         # data/history/ aus data/tabellen/ erzeugen
 python3 tools/kartengenerator/kartengenerator.py           # Karten-ID-Bild neu erzeugen
 ```
 
@@ -101,7 +102,9 @@ Ein Commit sollte **eine** logische Änderung enthalten und für sich bauen und 
 
 ## Daten und historische Inhalte
 
-- Inhalte liegen in `data/` im Chronik-Skript. Jede historische Tatsache bekommt ein `quelle = "…"`-Feld oder ist als Testdaten bzw. Schätzung gekennzeichnet.
+- Inhalte liegen in `data/` im Chronik-Skript. **Orte und Staaten samt Geschichte** werden in `data/tabellen/*.csv` gepflegt; `python3 tools/archivar/archivar.py` erzeugt daraus `data/history/` (nicht von Hand bearbeiten). Format: [docs/technik/tabellen.md](docs/technik/tabellen.md).
+- Jede Zeile mit Geschichte hat eine **Quelle** und eine **Sicherheit** (`gesichert`, `schaetzung`, `spielwert`, `ungeprueft`). Nur fachlich geprüfte Angaben sind `gesichert`.
+- Nach Änderungen an Orten auch die Karte neu erzeugen (`python3 tools/kartengenerator/kartengenerator.py`); die CI prüft beides mit `--pruefen`.
 - Für sensible Themen gelten die Leitlinien in [docs/20_verantwortung_und_erinnerungskultur.md](docs/20_verantwortung_und_erinnerungskultur.md).
 - Historische Fehler bitte über die Issue-Vorlage „Historischer Fehler“ melden.
 

@@ -14,7 +14,7 @@ gebaut; Abhängigkeiten stehen jeweils dabei.
 | Nr. | Meilenstein | Phase | Baut auf | Stand |
 |---|---|---|---|---|
 | M1 | Technischer Durchstich | 1 – Vorproduktion | – | **fertig** |
-| M2 | Datenpipeline „Archivar“ | 1 – Vorproduktion | M1 | offen |
+| M2 | Datenpipeline „Archivar“ | 1 – Vorproduktion | M1 | **fertig** |
 | M3 | Karte des Kernraums | 1 – Vorproduktion | M2 | offen |
 | M4 | Bevölkerung und Lasttest | 1 – Vorproduktion | M3 | offen |
 | M5 | Wirtschaft und Staatshaushalt | 1 – Vorproduktion | M4 | offen |
@@ -47,7 +47,7 @@ Der ganze Weg von den Daten bis zum Bild steht in kleinem Maßstab.
 Bekannte Grenze: Staatskassen wachsen über Jahrzehnte stark, weil es außer der Hofhaltung keine
 Ausgaben gibt (siehe [data/README.md](../data/README.md)). Wird in M5 gelöst.
 
-### M2 – Datenpipeline „Archivar“
+### M2 – Datenpipeline „Archivar“ ✅
 
 **Ziel:** Große Datenmengen (Tausende Orte, Hunderte Staaten) lassen sich aus Tabellen erzeugen,
 prüfen und mit Quellen belegen, ohne jede `.chron`-Datei von Hand zu schreiben.
@@ -65,6 +65,16 @@ prüfen und mit Quellen belegen, ohne jede `.chron`-Datei von Hand zu schreiben.
   eingecheckten Stand
 - `--pruefen` in der CI (wie beim Kartengenerator)
 - Dokumentation des Tabellenformats in `docs/technik/`
+
+**Ergebnis**
+- Kern: datierte Blöcke `JJJJ.MM.TT = { … }` in Orten und Staaten (Spezifikation Abschnitt 3.8)
+- Tabellen `data/tabellen/*.csv` mit Quelle und Sicherheit je Zeile
+  ([tabellen.md](technik/tabellen.md)); Werkzeug `tools/archivar/` mit 25 Tests
+- Die Testregion wird vollständig aus den Tabellen erzeugt; `archivar.py --pruefen` bestätigt
+  byteidentische Dateien, die Prüfsumme nach 100 Jahren ist gegenüber M1 unverändert
+- CI-Job „Archivar und Kartengenerator“ (Python 3.10 und 3.13)
+- Ende-zu-Ende geprüft: ein Besitzwechsel in `besitz.csv` und ein zweites Szenario ergeben mit
+  denselben Daten zwei verschiedene Startzustände
 
 ### M3 – Karte des Kernraums
 

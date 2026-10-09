@@ -8,6 +8,7 @@ ist (Stand: Meilenstein M1, technischer Durchstich).
 |---|---|---|
 | **README.md** (diese Datei) | Überblick: Schichten, Tick-Ablauf, Determinismus, Festkomma, Zufallsströme, Prüfungen | alle |
 | [chronik-skript.md](chronik-skript.md) | Syntax des Chronik-Skripts, Datenordner, Dateischemata, Startzustand, Formeln der Simulation, Kartenformat | Parser, Lader, `data/`, Kartengenerator |
+| [tabellen.md](tabellen.md) | Tabellen der Datenpipeline (`data/tabellen/*.csv`), Sicherheit der Angaben, Prüfungen des Archivars | Archivar, `data/` |
 | [bridge-api.md](bridge-api.md) | GDScript-Schnittstelle der GDExtension (`UhrwerkSimulation`), Kartenmodi, Bibliotheksnamen | Brücke, Godot-Projekt |
 
 Die öffentlichen Header in [`core/include/uhrwerk/`](../../core/include/uhrwerk/) sind die
@@ -187,6 +188,13 @@ Strom-Kennung:
   Parser meldet deutsche Fehler mit `datei:zeile:spalte` und setzt danach fort. Unbekannte Felder
   sind Warnungen, fehlende Pflichtfelder und unbekannte Verweise sind fatal.
   `uhrwerk-cli pruefen` zeigt alle Probleme eines Datenordners.
+- **Datierte Historie und Tabellen (M2):** Orte und Staaten tragen datierte Blöcke
+  `JJJJ.MM.TT = { … }`; der Lader wendet alle bis zum Startdatum des Szenarios an
+  ([chronik-skript.md, Abschnitt 3.8](chronik-skript.md#38-datierte-blöcke-seit-m2)). So speisen
+  dieselben Daten mehrere Lesezeichen. Gepflegt werden sie in `data/tabellen/*.csv`;
+  `tools/archivar/archivar.py` prüft Verweise, Lücken zu den Szenariodaten und Ausreißer und
+  erzeugt `data/history/` ([tabellen.md](tabellen.md)). Die CI prüft mit `--pruefen`, dass beides
+  zusammenpasst.
 - **Karte:** `tools/kartengenerator/kartengenerator.py` erzeugt aus `data/karte/karte.chron` und
   den Lagen der Orte das Ort-ID-Bild `data/karte/provinzen.png` (Pixelwert `R + G × 256` =
   Kartenindex + 1) und `data/karte/definition.csv`. Beide Dateien sind eingecheckt; die CI prüft

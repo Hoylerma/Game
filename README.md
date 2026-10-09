@@ -115,21 +115,23 @@ Ergänzt durch zwei Querschnittsprinzipien: **Geschichte als lebendiges System**
 
 ### Projektstand
 
-**Meilenstein M1 – technischer Durchstich.** Der ganze Weg von den Daten bis zum Bild steht, in
-kleinem Maßstab: Spieldaten im Chronik-Skript → Simulationskern „Uhrwerk“ → GDExtension →
-Godot-Oberfläche mit Karte. Inhaltlich deckt M1 eine **Testregion um 1648** ab, nicht das ganze
-Spiel aus dem Design-Dokument.
+**Meilensteine M1 (technischer Durchstich) und M2 (Datenpipeline) sind abgeschlossen**, siehe
+[Meilensteinplan](docs/meilensteine.md). Der ganze Weg von den Daten bis zum Bild steht, in
+kleinem Maßstab: Tabellen → Archivar → Chronik-Skript → Simulationskern „Uhrwerk“ → GDExtension →
+Godot-Oberfläche mit Karte. Inhaltlich deckt der Stand eine **Testregion um 1648** ab, nicht das
+ganze Spiel aus dem Design-Dokument.
 
 | Baustein | Stand |
 |---|---|
 | Simulationskern „Uhrwerk“ (`core/`) | Festkomma, Zufallsströme, Kalender, Parser und Lader für das Chronik-Skript, Tagestick mit Demografie, Wirtschaft (Steuern, Staatskasse), Seuchen und Kriegsverwüstung, Steuerbefehl, Chronik, Prüfsumme |
 | Kommandozeile `uhrwerk-cli` (`cli/`) | Daten prüfen, Überblick, Simulationsläufe mit Bericht und Chronik, Determinismusprüfung |
-| Tests (`tests/`) | 87 Testfälle (doctest) und Integrationsläufe mit den echten Daten |
-| Spieldaten (`data/`) | Testregion „Der Westfälische Frieden“ (24.10.1648): 16 Staaten, 60 Orte in Mittel- und Nordostdeutschland |
+| Tests (`tests/`) | 91 Testfälle (doctest) und Integrationsläufe mit den echten Daten |
+| Spieldaten (`data/`) | Testregion „Der Westfälische Frieden“ (24.10.1648): 16 Staaten, 60 Orte in Mittel- und Nordostdeutschland; gepflegt in Tabellen mit Quelle und Sicherheit je Angabe |
+| Archivar (`tools/archivar/`) | erzeugt `data/history/` aus den Tabellen mit datierter Historie und prüft Verweise, Lücken und Ausreißer |
 | Kartengenerator (`tools/kartengenerator/`) | erzeugt das Ort-ID-Bild und die Zuordnungstabelle der Karte aus den Ortsdaten |
 | Brücke (`bridge/`) | GDExtension mit der Klasse `UhrwerkSimulation` |
 | Godot-Prototyp (`game/`) | Karte mit fünf Kartenmodi, Staatspanel mit Steuersatz, Ortsinfo, Chronik, Legende |
-| CI (`.github/workflows/`) | Linux (GCC, Clang), Windows (MSVC), Prüfsummenvergleich, Formatierung, Kartengenerator, Godot-Rauchtest mit Screenshot |
+| CI (`.github/workflows/`) | Linux (GCC, Clang), Windows (MSVC), Prüfsummenvergleich, Formatierung, Archivar und Kartengenerator, Godot-Rauchtest mit Screenshot |
 
 Noch **nicht** umgesetzt ist alles Weitere aus dem Design-Dokument – Politik, Parteien und Wahlen,
 Diplomatie, Krieg, KI, Speicherstände, Multiplayer und Modding-Werkzeuge. Was sich ändert, steht im
@@ -145,7 +147,7 @@ Diplomatie, Krieg, KI, Speicherstände, Multiplayer und Modding-Werkzeuge. Was s
 | [`bridge/`](bridge/) | GDExtension-Brücke zwischen Uhrwerk und Godot | `core`, `third_party/godot-cpp` |
 | [`game/`](game/) | Godot-4-Projekt (Szenen, Skripte, Shader, Oberfläche) | `bridge` |
 | [`data/`](data/) | Spielinhalte im **Chronik-Skript** (`*.chron`) und Kartendaten | – |
-| [`tools/`](tools/) | Hilfswerkzeuge (z. B. Kartengenerator) | Python 3 |
+| [`tools/`](tools/) | Hilfswerkzeuge: Archivar (Datenpipeline), Kartengenerator | Python 3 |
 | [`docs/`](docs/) | Game Design Document, technische Dokumentation in [`docs/technik/`](docs/technik/) | – |
 | `third_party/` | Fremdbibliotheken als Git-Submodule (godot-cpp 4.4.1) | – |
 
@@ -200,7 +202,17 @@ Arbeitsverzeichnis), alternativ `--daten DIR`:
 
 Exitcodes: `0` in Ordnung, `1` Daten- oder Determinismusfehler, `2` Bedienfehler.
 
-**4. Karte erzeugen** – nach Änderungen an Orten oder an `data/karte/karte.chron`; die erzeugten
+**4. Daten bearbeiten** – Orte und Staaten stehen in `data/tabellen/*.csv` (Format:
+[docs/technik/tabellen.md](docs/technik/tabellen.md)); der Archivar erzeugt daraus `data/history/`:
+
+```bash
+python3 tools/archivar/archivar.py              # prüfen und data/history/ neu erzeugen
+python3 tools/archivar/archivar.py --pruefen    # ist data/history/ aktuell? (wie in der CI)
+python3 tools/archivar/archivar.py --bericht    # Umfang und Sicherheit der Angaben
+python3 -m unittest discover -s tools/archivar -v
+```
+
+**Karte erzeugen** – nach Änderungen an Orten oder an `data/karte/karte.chron`; die erzeugten
 Dateien `data/karte/provinzen.png` und `definition.csv` werden eingecheckt:
 
 ```bash
@@ -251,7 +263,7 @@ clang-format-18 -i <datei>                # Datei formatieren
 | Dokument | Inhalt |
 |---|---|
 | [CONTRIBUTING.md](CONTRIBUTING.md) | Branches, Commit-Nachrichten, Pull Requests, Code-Stil, Regeln für Daten |
-| [docs/technik/](docs/technik/README.md) | Architektur, Tick-Ablauf, Determinismus, Festkomma, Zufallsströme; Spezifikationen [Chronik-Skript](docs/technik/chronik-skript.md) und [Brücken-API](docs/technik/bridge-api.md) |
+| [docs/technik/](docs/technik/README.md) | Architektur, Tick-Ablauf, Determinismus, Festkomma, Zufallsströme; Spezifikationen [Chronik-Skript](docs/technik/chronik-skript.md), [Tabellen](docs/technik/tabellen.md) und [Brücken-API](docs/technik/bridge-api.md) |
 | [data/README.md](data/README.md) | Inhalt und Aufbau der Testregion 1648 |
 | [game/README.md](game/README.md) | Godot-Projekt: Starten, Bedienung, Aufbau |
 | [tools/kartengenerator/README.md](tools/kartengenerator/README.md) | Kartengenerator: Aufruf, Algorithmus, Determinismus |

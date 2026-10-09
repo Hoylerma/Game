@@ -8,6 +8,25 @@ Vor Version 1.0 kann sich jede Schnittstelle ändern.
 
 ## [Unveröffentlicht]
 
+### Meilenstein M2 – Datenpipeline „Archivar“
+
+- **Datierte Blöcke** im Chronik-Skript: `JJJJ.MM.TT = { … }` in `staat` und `ort` gilt ab seinem
+  Datum; der Lader liest die Szenarien vor der Historie und wendet alle Blöcke bis zum Startdatum
+  an (Spezifikation Abschnitt 3.8, 4 neue Testfälle).
+- **Tabellen** `data/tabellen/*.csv` als Quelle der Wahrheit für Orte und Staaten: Stammdaten,
+  Besitz, Bevölkerung je Stichtag, Staatshistorie, Kopfkommentare. Jede Zeile mit Geschichte trägt
+  Quelle und Sicherheit (`gesichert`, `schaetzung`, `spielwert`, `ungeprueft`). Format:
+  [`docs/technik/tabellen.md`](docs/technik/tabellen.md).
+- **Archivar** (`tools/archivar/`): prüft Verweise, Lücken zu allen Szenariodaten und Ausreißer,
+  erzeugt `data/history/` deterministisch, `--pruefen` für die CI, `--bericht` für die Übersicht;
+  25 Tests mit eigener Fixture.
+- Die Testregion 1648 ist verlustfrei in die Tabellen umgezogen (Prüfsumme nach 100 Jahren
+  unverändert); die Kopfkommentare der Dateien sind erhalten.
+- Kartengenerator: Die Vorschau liest den Besitzer aus datierten Blöcken.
+- CI: Job „Archivar und Kartengenerator“ mit Tests und Aktualitätsprüfung.
+
+### Meilenstein M1 – technischer Durchstich
+
 Meilenstein **M1 – technischer Durchstich**: Daten → Simulationskern → GDExtension → Godot, mit
 einer Testregion um 1648. Geplant als Version 0.1.0 (so steht es bereits in `CMakeLists.txt` und
 `game/project.godot`).
