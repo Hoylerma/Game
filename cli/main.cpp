@@ -6,6 +6,7 @@
 #include "uhrwerk/date.hpp"
 #include "uhrwerk/fixed.hpp"
 #include "uhrwerk/loader.hpp"
+#include "uhrwerk/script.hpp"
 #include "uhrwerk/simulation.hpp"
 #include "uhrwerk/world.hpp"
 
@@ -409,7 +410,8 @@ int cmd_pruefen(const Options& o, const fs::path& data_dir) {
         load(data_dir, o.scenario, true);
         return kExitDataError;
     }
-    std::cout << "Prüfe Daten in " << data_dir.string() << " (Szenario " << o.scenario << ") …\n";
+    std::cout << "Prüfe Daten in " << uhrwerk::path_to_utf8(data_dir) << " (Szenario " << o.scenario
+              << ") …\n";
     const uhrwerk::LoadResult result = uhrwerk::load_world(data_dir, o.scenario);
     std::size_t errors = 0;
     std::size_t warnings = 0;
@@ -442,7 +444,7 @@ int cmd_info(const Options& o, const fs::path& data_dir) {
     for (std::size_t i = 0; i < w.states.size(); ++i) {
         total += w.state_population(static_cast<Index>(i));
     }
-    std::cout << "Datenordner:  " << data_dir.string() << '\n'
+    std::cout << "Datenordner:  " << uhrwerk::path_to_utf8(data_dir) << '\n'
               << "Szenario:     " << w.scenario.name << " (" << w.scenario.id << ")\n"
               << "Startdatum:   " << uhrwerk::format_date_long(w.date) << '\n'
               << "Spieler:      " << describe_state(w, w.find_state(w.scenario.player_tag)) << '\n'

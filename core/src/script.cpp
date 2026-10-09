@@ -602,8 +602,17 @@ ParseResult parse_script(std::string_view text, std::string file_name) {
     return result;
 }
 
+std::string path_to_utf8(const std::filesystem::path& path) {
+    const std::u8string text = path.generic_u8string();
+    return std::string(text.begin(), text.end());
+}
+
+std::filesystem::path utf8_to_path(std::string_view text) {
+    return std::filesystem::path(std::u8string(text.begin(), text.end()));
+}
+
 ParseResult parse_script_file(const std::filesystem::path& path) {
-    const std::string name = path.generic_string();
+    const std::string name = path_to_utf8(path);
     std::ifstream in(path, std::ios::binary);
     if (!in) {
         ParseResult result;

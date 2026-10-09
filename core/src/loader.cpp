@@ -437,7 +437,7 @@ public:
     std::optional<World> run(std::string_view scenario_id) {
         std::error_code ec;
         if (!fs::is_directory(data_dir_, ec)) {
-            issues_.error(data_dir_.generic_string(), 0, "Datenordner nicht gefunden");
+            issues_.error(path_to_utf8(data_dir_), 0, "Datenordner nicht gefunden");
             return std::nullopt;
         }
 
@@ -482,7 +482,7 @@ private:
     }
 
     std::optional<SourceFile> read_file(const std::string& relative) {
-        const fs::path path = data_dir_ / fs::path(relative);
+        const fs::path path = data_dir_ / utf8_to_path(relative);
         std::error_code ec;
         if (!fs::is_regular_file(path, ec)) {
             issues_.error(relative, 0, "Datei fehlt");
@@ -519,7 +519,7 @@ private:
         while (!ec && it != end) {
             std::error_code type_ec;
             if (it->is_regular_file(type_ec) && it->path().extension() == ".chron") {
-                names.push_back(it->path().filename().string());
+                names.push_back(path_to_utf8(it->path().filename()));
             }
             it.increment(ec);
         }

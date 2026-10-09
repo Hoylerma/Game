@@ -76,4 +76,12 @@ ParseResult parse_script(std::string_view text, std::string file_name = "<text>"
 /// Liest und parst eine Datei (UTF-8, optionales BOM wird ignoriert).
 ParseResult parse_script_file(const std::filesystem::path& path);
 
+/// Pfad als UTF-8 (mit '/' als Trenner) für Meldungen und Namen. Anders als
+/// path::string() hängt das nicht von der ANSI-Codepage unter Windows ab und
+/// wirft keine Ausnahme bei Zeichen, die dort nicht darstellbar sind.
+std::string path_to_utf8(const std::filesystem::path& path);
+
+/// Gegenstück zu path_to_utf8: UTF-8-Text als Pfad.
+std::filesystem::path utf8_to_path(std::string_view text);
+
 } // namespace uhrwerk
