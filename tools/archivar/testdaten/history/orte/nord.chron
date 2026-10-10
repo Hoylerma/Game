@@ -9,6 +9,7 @@ ort hafen {
     lage     = { 10.30 53.80 }
     flaeche  = 150
     stadt    = ja
+    kreis    = kr_hafen
     quelle   = "Testdaten"
 
     1648.10.24 = {
@@ -31,6 +32,7 @@ ort heide {
     lage     = { 11.20 53.10 }
     flaeche  = 300
     stadt    = nein
+    kreis    = kr_hafen
     quelle   = "Testdaten"
 
     1648.10.24 = {
@@ -43,4 +45,14 @@ ort heide {
     1701.01.18 = {
         besitzer = BBB
     }
+}
+
+ort moor {
+    name     = "Moor"
+    gelaende = heide
+    lage     = { 11.00 53.50 }
+    flaeche  = 250
+    stadt    = nein
+    kreis    = kr_hafen
+    quelle   = "Testdaten, Ort ohne Daten"
 }

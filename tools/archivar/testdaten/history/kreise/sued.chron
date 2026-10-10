@@ -1,0 +1,6 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+kreis kr_burg {
+    name   = "Burg"
+    quelle = "Testdaten"
+}

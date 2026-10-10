@@ -6,6 +6,7 @@ ort burg {
     lage     = { 11.50 52.40 }
     flaeche  = 200
     stadt    = ja
+    kreis    = kr_burg
     quelle   = "Testdaten"
 
     1648.10.24 = {

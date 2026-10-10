@@ -1,0 +1,8 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
+# Kreise im Norden
+
+kreis kr_hafen {
+    name   = "Hafen"
+    quelle = "Testdaten"
+}

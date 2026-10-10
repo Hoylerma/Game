@@ -68,7 +68,7 @@ class TestErzeugung(MitKopie):
         # Die eingecheckte Ausgabe unter testdaten/history ist die Referenz.
         code, aus, fehler = self.pruefen()
         self.assertEqual((code, fehler), (0, ""), aus)
-        self.assertIn("history/ ist aktuell (4 Dateien, 3 Orte, 2 Staaten)", aus)
+        self.assertIn("history/ ist aktuell (6 Dateien, 4 Orte, 2 Kreise, 2 Staaten)", aus)
 
     def test_deterministisch(self) -> None:
         m = ar.Meldungen()
@@ -125,7 +125,8 @@ class TestErzeugung(MitKopie):
         code, aus, _ = _ausfuehren("--daten", str(self.daten), "--bericht")
         self.assertEqual(code, 0)
         self.assertIn("besitz.csv                 4 Zeilen  (gesichert 3, ungeprueft 1)", aus)
-        self.assertIn("krone (1701.01.18): 3 Orte mit Besitzer, 2 Staaten mit Orten", aus)
+        self.assertIn("krone (1701.01.18): 3 Orte mit Daten, 1 ohne Daten, 2 Staaten mit Orten", aus)
+        self.assertIn("Orte: 4, Kreise: 2, Staaten: 2", aus)
 
 
 # ─── Prüfungen ──────────────────────────────────────────────────────────────
@@ -170,12 +171,15 @@ class TestFehler(MitKopie):
             ("bevoelkerung.csv", "burg;1648.10.24;5000", "burg;1648.10.24;0"): "ungültige Bevölkerung '0'",
             ("bevoelkerung.csv", "katholisch=100;0.1", "katholisch=100;1.5"): "außerhalb von 0 bis 1",
             ("orte.csv", "11.50;52.40;200;ja", "11,50;52.40;200;ja"): "ungültige Zahl '11,50'",
-            ("orte.csv", "200;ja;Testdaten", "200;vielleicht;Testdaten"): "erwartet ja oder nein",
+            ("orte.csv", "200;ja;kr_burg", "200;vielleicht;kr_burg"): "erwartet ja oder nein",
             ("staaten.csv", "10 20 30", "10 20 300"): "ungültige Farbe '10 20 300'",
             ("staaten.csv", "AAA;AAA_nordland", "aaa;AAA_nordland"): "ungültiger Staatstag 'aaa'",
             ("staaten_historie.csv", "steuersatz;0.2", "steuersatz;0.7"): "außerhalb von 0 bis 0.5",
             ("staaten_historie.csv", "BBB;1648.10.24;schatz", "BBB;1648.10.24;armee"): "unbekanntes Feld 'armee'",
-            ("dateien.csv", "staaten;AAA_nordland", "karten;AAA_nordland"): "erwartet orte oder staaten",
+            ("dateien.csv", "staaten;AAA_nordland", "karten;AAA_nordland"): "erwartet kreise, orte, staaten",
+            ("orte.csv", "200;ja;kr_burg", "200;ja;kr_turm"): "unbekannter Kreis 'kr_turm'",
+            ("kreise.csv", "kr_burg;sued;Burg;Testdaten", "kr_burg;sued;;Testdaten"): "Spalte 'name' darf nicht leer sein",
+            ("kreise.csv", "kr_burg;sued", "Kr_burg;sued"): "ungültige Kreiskennung 'Kr_burg'",
         }
         for (tabelle, alt, neu), text in faelle.items():
             with self.subTest(text):
@@ -185,18 +189,20 @@ class TestFehler(MitKopie):
                 self.erwarte_fehler(text)
 
     def test_doppelte_eintraege(self) -> None:
-        self.anhaengen("orte.csv", "burg;sued;Burg 2;flachland;11.5;52.4;200;ja;Testdaten")
+        self.anhaengen("orte.csv", "burg;sued;Burg 2;flachland;11.5;52.4;200;ja;kr_burg;Testdaten")
         self.anhaengen("besitz.csv", "burg;1648.10.24;AAA;gesichert;Testquelle")
         self.anhaengen("staaten_historie.csv", "AAA;1648.10.24;schatz;5;spielwert;Spielwert")
         code, _, fehler = self.pruefen()
         self.assertEqual(code, 2)
-        self.assertIn("tabellen/orte.csv:5: Ort burg ist doppelt (zuerst in Zeile 4)", fehler)
+        self.assertIn("tabellen/orte.csv:6: Ort burg ist doppelt (zuerst in Zeile 4)", fehler)
         self.assertIn("Besitz von burg ab 1648.10.24 ist doppelt (zuerst in Zeile 5)", fehler)
         self.assertIn("schatz von AAA ab 1648.10.24 ist doppelt", fehler)
 
     def test_luecke_vor_dem_ersten_besitz(self) -> None:
         self.ersetze("besitz.csv", "heide;1648.10.24;AAA", "heide;1650.01.01;AAA")
-        self.erwarte_fehler("Ort heide hat zum Szenario frieden (1648.10.24) keinen Besitzer")
+        self.erwarte_fehler(
+            "Ort heide hat zum Szenario frieden (1648.10.24) eine Bevölkerungsangabe, aber keinen Besitzer"
+        )
 
     def test_luecke_in_der_staatshistorie(self) -> None:
         self.ersetze("staaten_historie.csv", "AAA;1648.10.24;hofhaltung", "AAA;1690.01.01;hofhaltung")
@@ -205,6 +211,45 @@ class TestFehler(MitKopie):
     def test_hauptstadt_in_fremder_hand(self) -> None:
         self.anhaengen("staaten_historie.csv", "AAA;1701.01.01;hauptstadt;heide;gesichert;Testquelle")
         self.erwarte_fehler("Hauptstadt heide von AAA gehört zum Szenario krone (1701.01.18) zu BBB")
+
+
+class TestOrteOhneDatenUndKreise(MitKopie):
+    def test_ort_ohne_daten_ist_erlaubt_und_hat_keine_bloecke(self) -> None:
+        text = (self.daten / "history/orte/nord.chron").read_text(encoding="utf-8")
+        moor = chron.parse_script(text).root.children[-1]
+        self.assertEqual(moor.value, "moor")
+        self.assertEqual([k.key for k in moor.children if k.is_block and k.key[:1].isdigit()], [])
+        self.assertEqual(moor.get_string("kreis"), "kr_hafen")
+
+    def test_kreisdateien(self) -> None:
+        root = chron.parse_script((self.daten / "history/kreise/sued.chron").read_text(encoding="utf-8")).root
+        self.assertEqual([(n.key, n.value, n.get_string("name")) for n in root.children], [("kreis", "kr_burg", "Burg")])
+
+    def test_halbe_daten(self) -> None:
+        self.anhaengen("besitz.csv", "moor;1690.01.01;AAA;gesichert;Testquelle")
+        self.erwarte_fehler(
+            "Ort moor hat zum Szenario krone (1701.01.18) einen Besitzer, aber keine Bevölkerungsangabe"
+        )
+
+    def test_daten_erst_ab_spaeterem_datum(self) -> None:
+        # 1648 ohne Daten, 1701 mit Daten: erlaubt.
+        self.anhaengen("besitz.csv", "moor;1690.01.01;AAA;gesichert;Testquelle")
+        self.anhaengen("bevoelkerung.csv", "moor;1690.01.01;800;lutherisch=100;0;schaetzung;Testquelle")
+        code, aus, fehler = _ausfuehren("--daten", str(self.daten), "--bericht")
+        self.assertEqual(code, 0, fehler)
+        self.assertIn("frieden (1648.10.24): 3 Orte mit Daten, 1 ohne Daten", aus)
+        self.assertIn("krone (1701.01.18): 4 Orte mit Daten, 0 ohne Daten", aus)
+
+    def test_hauptstadt_ohne_daten(self) -> None:
+        self.anhaengen("staaten_historie.csv", "AAA;1700.01.01;hauptstadt;moor;gesichert;Testquelle")
+        self.erwarte_fehler("Hauptstadt moor von AAA ist zum Szenario krone (1701.01.18) ein Ort ohne Daten")
+
+    def test_ort_ohne_kreis_und_kreis_ohne_orte(self) -> None:
+        self.ersetze("orte.csv", "200;ja;kr_burg", "200;ja;")
+        code, _, fehler = _ausfuehren("--daten", str(self.daten), "--bericht")
+        self.assertEqual(code, 0, fehler)
+        self.assertIn("Warnung: tabellen/orte.csv:4: 1 Orte ohne Kreis (Spalte 'kreis' leer): burg", fehler)
+        self.assertIn("Warnung: tabellen/kreise.csv:3: Kreis kr_burg hat keine Orte", fehler)
 
 
 class TestWarnungen(MitKopie):
@@ -239,7 +284,7 @@ class TestWarnungen(MitKopie):
         code, _, fehler = _ausfuehren("--daten", str(self.daten), "--bericht")
         # Hauptstadt burg gehört BBB: das ist ein Fehler, die übrigen Befunde sind Warnungen.
         self.assertEqual(code, 2)
-        self.assertIn("Warnung: tabellen/dateien.csv:5: Kommentar für orte/gibt_es_nicht", fehler)
+        self.assertIn("Warnung: tabellen/dateien.csv:6: Kommentar für orte/gibt_es_nicht", fehler)
 
 
 class TestHilfen(unittest.TestCase):

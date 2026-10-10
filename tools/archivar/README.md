@@ -4,7 +4,7 @@ Erzeugt die Historie der Spieldaten (`data/history/`) aus den Tabellen in `data/
 prüft sie dabei auf Verweise, Lücken und Ausreißer. Nur Python-Standardbibliothek (ab 3.10).
 
 - Tabellenformat und Prüfungen: [docs/technik/tabellen.md](../../docs/technik/tabellen.md)
-- Format der Ausgabe: [docs/technik/chronik-skript.md](../../docs/technik/chronik-skript.md), Abschnitte 3.5, 3.6, 3.8
+- Format der Ausgabe: [docs/technik/chronik-skript.md](../../docs/technik/chronik-skript.md), Abschnitte 3.5, 3.6, 3.8, 3.9
 
 ## Aufruf
 
@@ -24,7 +24,7 @@ Tabellen. Warnungen und Fehler erscheinen auf der Standardfehlerausgabe mit Tabe
 
 1. Tabelle bearbeiten (Tabellenkalkulation mit „Trennzeichen: Semikolon“ oder Texteditor).
 2. `python3 tools/archivar/archivar.py` – schreibt geänderte Dateien und entfernt Dateien in
-   `history/orte` und `history/staaten`, die keine Tabelle mehr erzeugt.
+   `history/orte`, `history/staaten` und `history/kreise`, die keine Tabelle mehr erzeugt.
 3. Bei geänderten Orten auch die Karte neu erzeugen: `python3 tools/kartengenerator/kartengenerator.py`.
 4. `./build/dev/cli/uhrwerk-cli pruefen` und die Tabellen samt erzeugter Dateien committen.
 
@@ -38,8 +38,19 @@ bearbeiten“. Änderungen dort gehen beim nächsten Lauf verloren.
   `pruefe_ausreisser`), Ausgabe erzeugen (`erzeuge`) und vergleichen bzw. schreiben.
 - Den Parser für das Chronik-Skript teilt sich der Archivar mit dem Kartengenerator
   (`tools/kartengenerator/chron.py`).
-- `testdaten/` – kleiner Datensatz (2 Staaten, 3 Orte, 2 Szenarien, ein Besitzwechsel); die
+- `testdaten/` – kleiner Datensatz (2 Staaten, 2 Kreise, 4 Orte davon einer ohne Daten, 2 Szenarien,
+  ein Besitzwechsel); die
   eingecheckten Dateien unter `testdaten/history/` sind die erwartete Ausgabe.
 
 Die Ausgabe ist deterministisch: Daten sind nach Datum sortiert, Felder in fester Reihenfolge,
 Werte werden als Text aus der Tabelle übernommen (keine Gleitkomma-Umwandlung).
+
+## Orte ohne Daten und Kreise (seit M3)
+
+- Ein Ort ohne Zeilen in `besitz.csv` und `bevoelkerung.csv` ist ein **Ort ohne Daten**: Er steht
+  auf der Karte, nimmt aber nicht an der Simulation teil. Zu jedem Szenariodatum hat ein Ort
+  Besitzer **und** Bevölkerung oder keines von beiden; Hauptstädte müssen Orte mit Daten sein.
+- `kreise.csv` erzeugt `history/kreise/<datei>.chron`; die Spalte `kreis` in `orte.csv` verweist
+  darauf. Orte ohne Kreis und Kreise ohne Orte sind Warnungen (Orte ohne Kreis als eine
+  Sammelwarnung).
+- Leistung: 4.500 Orte und 635 Kreise prüfen und schreiben in etwa 0,2 s.
