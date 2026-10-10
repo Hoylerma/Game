@@ -1,21 +1,27 @@
-"""Tests für den Kartengenerator und den Chronik-Skript-Parser.
+"""Tests für den Kartengenerator (Fassung M3).
 
 Aufruf (aus der Wurzel des Repositorys):
 
     python3 -m unittest discover -s tools/kartengenerator -v
 
-Die Testdaten liegen in tools/kartengenerator/testdaten/. Dort liegen auch die
-erwarteten Ausgaben (provinzen.png, definition.csv); nach einer gewollten Änderung
-am Algorithmus neu erzeugen mit:
+Die Testdaten liegen in tools/kartengenerator/testdaten/: kleine Karte (204 × 200 Pixel) mit
+Festland und Haff, Insel und Inselchen, See mit Seeinsel, Ausland mit Grenzsee, drei Flüssen und
+acht Orten (einer ohne Daten). Dort liegen auch die erwarteten Ausgaben (provinzen.png,
+fluesse.png, definition.csv); nach einer gewollten Änderung am Verfahren neu erzeugen mit:
 
     python3 tools/kartengenerator/kartengenerator.py --daten tools/kartengenerator/testdaten
+
+Der Vergleich mit einer zweiten Python-Version (Determinismus) nutzt die Umgebungsvariable
+KARTENGENERATOR_PYTHON_VERGLEICH oder sucht python3.10 … python3.13 mit numpy im Suchpfad.
 """
 
 from __future__ import annotations
 
 import contextlib
 import io
+import json
 import math
+import os
 import shutil
 import struct
 import subprocess
@@ -23,20 +29,18 @@ import sys
 import tempfile
 import unittest
 import zlib
+from fractions import Fraction
 from pathlib import Path
 
-import chron
+import numpy as np
+
+import karte_png
+import karte_raster as kr
 import kartengenerator as kg
 
 HIER = Path(__file__).resolve().parent
 TESTDATEN = HIER / "testdaten"
-
-
-def _parse_ok(text: str | bytes) -> chron.ParseResult:
-    ergebnis = chron.parse_script(text, "test.chron")
-    if not ergebnis.ok:
-        raise AssertionError("\n".join(str(e) for e in ergebnis.errors))
-    return ergebnis
+SKRIPT = HIER / "kartengenerator.py"
 
 
 def _starte(*argumente: str) -> tuple[int, str, str]:
@@ -47,54 +51,925 @@ def _starte(*argumente: str) -> tuple[int, str, str]:
     return code, aus.getvalue(), err.getvalue()
 
 
-def _fixture_laden() -> tuple[kg.Karte, list[kg.Ort]]:
-    karte, orte, warnungen = kg._lade(TESTDATEN)
-    if warnungen:
-        raise AssertionError("\n".join(warnungen))
-    return karte, orte
+_FIXTURE: dict[str, object] = {}
 
 
-def _png_mit_filter(breite: int, hoehe: int, zeilen: list[bytes], filtertyp: int, stufe: int = 6) -> bytes:
-    """Unabhängiger PNG-Schreiber mit festem Zeilenfilter (für Decoder-Tests)."""
-    roh = bytearray()
-    vorher = bytes(3 * breite)
-    for zeile in zeilen:
-        roh.append(filtertyp)
-        for k, wert in enumerate(zeile):
-            links = zeile[k - 3] if k >= 3 else 0
-            oben = vorher[k]
-            oben_links = vorher[k - 3] if k >= 3 else 0
-            vorhersage = (
-                0,
-                links,
-                oben,
-                (links + oben) // 2,
-                kg._paeth(links, oben, oben_links),
-            )[filtertyp]
-            roh.append((wert - vorhersage) & 0xFF)
-        vorher = zeile
-    ihdr = struct.pack(">IIBBBBB", breite, hoehe, 8, 2, 0, 0, 0)
-    return (
-        kg.PNG_SIGNATUR
-        + kg._chunk(b"IHDR", ihdr)
-        + kg._chunk(b"IDAT", zlib.compress(bytes(roh), stufe))
-        + kg._chunk(b"IEND", b"")
-    )
+def _fixture() -> tuple[kg.Grundlage, list[kg.Ort], kg.Ergebnis]:
+    """Grundlage, Orte und Ergebnis der Testdaten (einmal berechnet, nur lesen)."""
+    if not _FIXTURE:
+        grundlage = kg.lade_grundlage(TESTDATEN)
+        orte, warnungen = kg.lade_orte_daten(TESTDATEN)
+        if grundlage.warnungen or warnungen:
+            raise AssertionError("\n".join(grundlage.warnungen + warnungen))
+        _FIXTURE.update(grundlage=grundlage, orte=orte, ergebnis=kg.erzeuge(grundlage, orte))
+    return _FIXTURE["grundlage"], _FIXTURE["orte"], _FIXTURE["ergebnis"]  # type: ignore[return-value]
+
+
+def _karte(breite: int = 16, hoehe: int = 16, radius: float = 25.0, **felder: float) -> kr.Karte:
+    """Karte mit 1 Grad je Pixel (Pixelkoordinaten = Länge bzw. 16 − Breite, exakt)."""
+    werte = dict(laenge_min=0.0, laenge_max=float(breite), breite_min=0.0, breite_max=float(hoehe))
+    werte.update(felder)
+    return kr.Karte(breite, hoehe, bezugsbreite=0.0, max_radius_km=radius, **werte)  # type: ignore[arg-type]
+
+
+def _ring(*punkte: tuple[float, float]) -> np.ndarray:
+    return np.array(punkte, dtype=np.float64)
 
 
 @contextlib.contextmanager
 def _ohne_rauschen():
     """Schaltet das Domain Warping vorübergehend ab (reines Voronoi-Diagramm)."""
-    alt = kg.RAUSCHEN_OKTAVEN
-    kg.RAUSCHEN_OKTAVEN = ()
+    alt = kr.RAUSCHEN_OKTAVEN
+    kr.RAUSCHEN_OKTAVEN = ()
     try:
         yield
     finally:
-        kg.RAUSCHEN_OKTAVEN = alt
+        kr.RAUSCHEN_OKTAVEN = alt
+
+
+def _kopie_testdaten(ziel: Path) -> Path:
+    daten = ziel / "daten"
+    shutil.copytree(TESTDATEN, daten)
+    return daten
+
+
+# ─── Laden ──────────────────────────────────────────────────────────────────
+
+
+class TestLaden(unittest.TestCase):
+    def setUp(self) -> None:
+        self._tmp = tempfile.TemporaryDirectory()
+        self.tmp = Path(self._tmp.name)
+
+    def tearDown(self) -> None:
+        self._tmp.cleanup()
+
+    def _schreibe(self, relativ: str, text: str) -> Path:
+        pfad = self.tmp / relativ
+        pfad.parent.mkdir(parents=True, exist_ok=True)
+        pfad.write_text(text, encoding="utf-8")
+        return pfad
+
+    def _karte_text(self, **ersetzen: str) -> str:
+        felder = {
+            "bild_breite": "204",
+            "bild_hoehe": "200",
+            "laenge_min": "10.0",
+            "laenge_max": "11.0",
+            "breite_min": "52.0",
+            "breite_max": "52.6",
+            "bezugsbreite": "52.3",
+            "max_radius_km": "16",
+        }
+        felder.update(ersetzen)
+        zeilen = [f"    {k} = {v}" for k, v in felder.items() if v != ""]
+        return "karte {\n" + "\n".join(zeilen) + "\n}\n"
+
+    def _lade_karte(self, text: str) -> tuple[kg.Karte | None, kg.Meldungen]:
+        pfad = self._schreibe("karte.chron", text)
+        meldungen = kg.Meldungen()
+        return kg.lade_karte(pfad, "karte.chron", meldungen), meldungen
+
+    def test_fixture(self) -> None:
+        grundlage, orte, _ = _fixture()
+        self.assertEqual(
+            [o.kennung for o in orte], ["hafen", "heide", "insel", "moor", "burg", "aue", "seedorf", "mark"]
+        )
+        karte = grundlage.karte
+        self.assertEqual((karte.breite, karte.hoehe, karte.bezugsbreite, karte.max_radius_km), (204, 200, 52.3, 16.0))
+        hafen, heide, insel, moor = orte[:4]
+        self.assertEqual((hafen.laenge, hafen.breite, hafen.besitzer, hafen.kreis), (10.30, 52.40, "AAA", "kr_nord"))
+        self.assertEqual(hafen.wo, "history/orte/a_nord.chron:3: ort hafen")
+        self.assertTrue(hafen.hat_daten and heide.hat_daten)
+        self.assertEqual(heide.besitzer, "AAA")  # ohne datierten Block
+        self.assertEqual(insel.besitzer, "BBB")  # jüngster datierter Block
+        self.assertFalse(moor.hat_daten)
+        self.assertEqual((moor.besitzer, moor.kreis), ("", ""))
+        self.assertEqual(orte[4].name, "Burg (Altmark)")
+
+    def test_dateireihenfolge_nach_bytes(self) -> None:
+        for name in ("b.chron", "B.chron", "a_z.chron", "a.chron"):
+            self._schreibe(
+                f"history/orte/{name}",
+                f"ort o_{name[:-6].lower()}_{ord(name[0])} {{\n"
+                f'    name = "{name}"\n    lage = {{ 10.5 52.3 }}\n}}\n',
+            )
+        self._schreibe("history/orte/x.txt", "kein chron")
+        meldungen = kg.Meldungen()
+        orte = kg.lade_orte(self.tmp / "history/orte", self.tmp, meldungen)
+        self.assertEqual(meldungen.fehler, [])
+        self.assertEqual([o.name for o in orte], ["B.chron", "a.chron", "a_z.chron", "b.chron"])
+
+    def test_fehler_in_orten(self) -> None:
+        self._schreibe(
+            "history/orte/a.chron",
+            'ort gut {\n    name = "Gut"\n    lage = { 10.5 52.3 }\n}\n'
+            'ort Schlecht {\n    name = "X"\n    lage = { 10.5 52.3 }\n}\n'
+            "ort ohne_name {\n    lage = { 10.5 52.3 }\n}\n"
+            'ort ohne_lage {\n    name = "Y"\n}\n'
+            'ort lage_kaputt {\n    name = "Z"\n    lage = { 10.5 }\n}\n'
+            'ort lage_bereich {\n    name = "Z"\n    lage = { 190 52 }\n}\n'
+            'ort semikolon {\n    name = "A;B"\n    lage = { 10.5 52.3 }\n}\n'
+            'ort gut {\n    name = "Doppelt"\n    lage = { 10.5 52.3 }\n}\n'
+            'ort kreis_kaputt {\n    name = "K"\n    lage = { 10.5 52.3 }\n    kreis = "Text"\n}\n'
+            'ort zweimal {\n    name = "A"\n    name = "B"\n    lage = { 10.5 52.3 }\n}\n'
+            "staat AAA { }\n",
+        )
+        meldungen = kg.Meldungen()
+        orte = kg.lade_orte(self.tmp / "history/orte", self.tmp, meldungen)
+        self.assertEqual([o.kennung for o in orte], ["gut"])
+        text = "\n".join(meldungen.fehler)
+        for erwartet in (
+            "history/orte/a.chron:5: ungültige Ortskennung 'Schlecht'",
+            "history/orte/a.chron:9: Pflichtfeld 'name' fehlt in ort ohne_name",
+            "history/orte/a.chron:12: Pflichtfeld 'lage' fehlt in ort ohne_lage",
+            "history/orte/a.chron:17: 'lage' erwartet genau zwei Zahlen",
+            "history/orte/a.chron:21: 'lage' außerhalb des gültigen Bereichs",
+            "history/orte/a.chron:24: 'name' darf kein ';'",
+            "history/orte/a.chron:27: doppelte Kennung 'gut' (bereits definiert in history/orte/a.chron:1)",
+            "history/orte/a.chron:34: 'kreis' erwartet eine Kreiskennung",
+            "history/orte/a.chron:38: 'name' ist mehrfach angegeben (zuerst in Zeile 37)",
+        ):
+            self.assertIn(erwartet, text)
+        self.assertIn(
+            "history/orte/a.chron:41: unbekannter Eintrag 'staat' wird ignoriert", "\n".join(meldungen.warnungen)
+        )
+
+    def test_orte_ordner_fehlt(self) -> None:
+        with self.assertRaises(kg.DatenFehler) as fehler:
+            kg.lade_orte_daten(self.tmp)
+        self.assertIn("history/orte: Ordner fehlt oder enthält keine .chron-Dateien", fehler.exception.meldungen[0])
+
+    def test_syntaxfehler_mit_zeile(self) -> None:
+        self._schreibe("history/orte/a.chron", 'ort a {\n    name = "A"\n    lage = { 10 52 \n')
+        meldungen = kg.Meldungen()
+        kg.lade_orte(self.tmp / "history/orte", self.tmp, meldungen)
+        self.assertIn("history/orte/a.chron:4:1: nicht geschlossener Block (geöffnet in Zeile 3)", meldungen.fehler)
+
+    def test_karte_gueltig(self) -> None:
+        karte, meldungen = self._lade_karte(self._karte_text() + "# Kommentar\n")
+        self.assertEqual(meldungen.fehler, [])
+        self.assertEqual(meldungen.warnungen, [])
+        self.assertEqual(karte, kr.Karte(204, 200, 10.0, 11.0, 52.0, 52.6, 52.3, 16.0))
+
+    def test_karte_warnungen(self) -> None:
+        text = self._karte_text().replace(
+            "}\n", "    kueste = { 10.0 52.5 11.0 52.5 }\n    farbe = 3\n}\nnoch_was = 1\n"
+        )
+        karte, meldungen = self._lade_karte(text)
+        self.assertIsNotNone(karte)
+        warnungen = "\n".join(meldungen.warnungen)
+        self.assertIn("karte.chron:10: 'kueste' entfällt seit M3", warnungen)
+        self.assertIn("karte.chron:11: unbekanntes Feld 'farbe' in karte wird ignoriert", warnungen)
+        self.assertIn("karte.chron:13: unbekannter Eintrag 'noch_was'", warnungen)
+
+    def test_karte_fehler(self) -> None:
+        faelle = [
+            ({"bezugsbreite": ""}, "Pflichtfeld 'bezugsbreite' fehlt in karte"),
+            ({"bild_breite": "4097", "bild_hoehe": "4016"}, "'bild_breite' muss zwischen 1 und 4096 liegen"),
+            ({"bild_hoehe": "0"}, "'bild_hoehe' muss zwischen 1 und 4096 liegen"),
+            ({"bild_breite": "20.5"}, "ungültige Ganzzahl '20.5' für 'bild_breite'"),
+            ({"laenge_max": "9.0"}, "erwartet −180 ≤ laenge_min < laenge_max ≤ 180"),
+            ({"breite_min": "53.0"}, "erwartet −90 ≤ breite_min < breite_max ≤ 90"),
+            ({"bezugsbreite": "90"}, "'bezugsbreite' muss zwischen −90 und 90 liegen"),
+            ({"max_radius_km": "0"}, "'max_radius_km' muss größer als 0 sein"),
+            ({"max_radius_km": '"25"'}, "'max_radius_km' erwartet eine Zahl"),
+            ({"bild_hoehe": "203"}, "Seitenverhältnis bild_breite/bild_hoehe weicht um 1.40 % vom Sollwert"),
+        ]
+        for ersetzen, erwartet in faelle:
+            with self.subTest(ersetzen=ersetzen):
+                karte, meldungen = self._lade_karte(self._karte_text(**ersetzen))
+                self.assertIsNone(karte)
+                self.assertIn(erwartet, "\n".join(meldungen.fehler))
+        # Höchstens 1 % Abweichung ist erlaubt.
+        karte, meldungen = self._lade_karte(self._karte_text(bild_hoehe="201"))
+        self.assertIsNotNone(karte, meldungen.fehler)
+        for text, erwartet in (
+            ("", "Block 'karte { … }' fehlt"),
+            ("karte = 3\n", "ungültige Definition, erwartet: karte { … }"),
+            (self._karte_text() + self._karte_text(), "zweiter Block 'karte' (der erste steht in Zeile 1)"),
+        ):
+            karte, meldungen = self._lade_karte(text)
+            self.assertIsNone(karte)
+            self.assertIn(erwartet, "\n".join(meldungen.fehler))
+        meldungen = kg.Meldungen()
+        self.assertIsNone(kg.lade_karte(self.tmp / "fehlt.chron", "karte/karte.chron", meldungen))
+        self.assertEqual(meldungen.fehler, ["karte/karte.chron: Datei fehlt"])
+
+    def test_seitenverhaeltnis(self) -> None:
+        karte = kr.Karte(4096, 3329, 1.8, 23.5, 45.1, 56.2, 51.0, 25.0)
+        self.assertLess(kg.seitenverhaeltnis_abweichung(karte), 1e-4)
+
+    def test_geojson(self) -> None:
+        gut = {
+            "type": "FeatureCollection",
+            "features": [
+                {
+                    "type": "Feature",
+                    "properties": {},
+                    "geometry": {
+                        "type": "Polygon",
+                        "coordinates": [
+                            [[0, 0], [1, 0], [1, 1], [0, 0]],
+                            [[0.2, 0.1], [0.3, 0.1], [0.3, 0.2], [0.2, 0.1]],
+                        ],
+                    },
+                },
+                {
+                    "type": "Feature",
+                    "properties": {},
+                    "geometry": {
+                        "type": "MultiPolygon",
+                        "coordinates": [[[[2, 2], [3, 2], [3, 3], [2, 2]]], [[[4, 4], [5, 4], [5, 5, 100], [4, 4]]]],
+                    },
+                },
+            ],
+        }
+        self._schreibe("gut.geojson", json.dumps(gut))
+        meldungen = kg.Meldungen()
+        polygone = kg.lade_flaechen(self.tmp / "gut.geojson", "gut.geojson", meldungen)
+        self.assertEqual(meldungen.fehler, [])
+        self.assertEqual([len(p) for p in polygone], [2, 1, 1])
+        self.assertEqual(polygone[2][0].tolist(), [[4, 4], [5, 4], [5, 5], [4, 4]])
+
+        faelle = [
+            ("{", "kein gültiges GeoJSON"),
+            ('{"type": "Feature"}', "erwartet eine FeatureCollection"),
+            ('{"type": "FeatureCollection"}', "'features' fehlt oder ist keine Liste"),
+            (
+                '{"type": "FeatureCollection", "features": [{"geometry": {"type": "Point", "coordinates": [1, 2]}}]}',
+                "Feature 1: Geometrietyp 'Point' nicht erlaubt",
+            ),
+            (
+                '{"type": "FeatureCollection", "features": [{"geometry": {"type": "Polygon", '
+                '"coordinates": [[[0, 0], [1, 0], [0, 0]]]}}]}',
+                "Feature 1: erwartet eine Liste mit mindestens 4",
+            ),
+            (
+                '{"type": "FeatureCollection", "features": [{"geometry": {"type": "Polygon", '
+                '"coordinates": [[[0, 0], [1, "a"], [1, 1], [0, 0]]]}}]}',
+                "Feature 1: ungültige Position",
+            ),
+            (
+                '{"type": "FeatureCollection", "features": [{"geometry": {"type": "Polygon", '
+                '"coordinates": [[[0, 0], [1, 95], [1, 1], [0, 0]]]}}]}',
+                "Position außerhalb des gültigen Bereichs",
+            ),
+        ]
+        for text, erwartet in faelle:
+            with self.subTest(text=text):
+                self._schreibe("x.geojson", text)
+                meldungen = kg.Meldungen()
+                kg.lade_flaechen(self.tmp / "x.geojson", "x.geojson", meldungen)
+                self.assertIn(erwartet, "\n".join(meldungen.fehler))
+        meldungen = kg.Meldungen()
+        kg.lade_flaechen(self.tmp / "fehlt.geojson", "karte/geometrie/land.geojson", meldungen)
+        self.assertIn("karte/geometrie/land.geojson: Datei fehlt", meldungen.fehler[0])
+
+    def test_fluesse_laden(self) -> None:
+        daten = {
+            "type": "FeatureCollection",
+            "features": [
+                {
+                    "type": "Feature",
+                    "properties": {"rang": 1},
+                    "geometry": {"type": "LineString", "coordinates": [[0, 0], [1, 1]]},
+                },
+                {
+                    "type": "Feature",
+                    "properties": {"rang": 9},
+                    "geometry": {"type": "MultiLineString", "coordinates": [[[0, 0], [1, 1]], [[2, 2], [3, 3]]]},
+                },
+                {"type": "Feature", "properties": {}, "geometry": {"type": "Polygon", "coordinates": []}},
+            ],
+        }
+        self._schreibe("f.geojson", json.dumps(daten))
+        meldungen = kg.Meldungen()
+        linien = kg.lade_linien(self.tmp / "f.geojson", "f.geojson", meldungen)
+        self.assertEqual([rang for rang, _ in linien], [1, 6, 6])
+        self.assertIn("Feature 2: 'rang' fehlt oder ist ungültig (9), nehme 6", "\n".join(meldungen.warnungen))
+        self.assertIn("Feature 3: Geometrietyp 'Polygon' nicht erlaubt", "\n".join(meldungen.fehler))
+
+    def test_staaten_fuer_vorschau(self) -> None:
+        self._schreibe(
+            "history/staaten/a.chron",
+            'staat AAA {\n    name = "A"\n    farbe = { 1 2 3 }\n}\n'
+            'staat BBB {\n    name = "B"\n    farbe = { 1 2 }\n}\n',
+        )
+        meldungen = kg.Meldungen()
+        staaten = kg.lade_staaten(self.tmp / "history/staaten", self.tmp, meldungen)
+        self.assertEqual(list(staaten), ["AAA"])
+        self.assertEqual(staaten["AAA"].farbe, (1, 2, 3))
+        self.assertIn("staat BBB: 'farbe' fehlt oder ist ungültig (Vorschau)", meldungen.warnungen[0])
+
+    def test_echte_karte_und_geometrie(self) -> None:
+        daten = kg.REPO / "data"
+        if not (daten / "karte" / "geometrie").is_dir():
+            self.skipTest("data/karte/geometrie fehlt")
+        meldungen = kg.Meldungen()
+        karte = kg.lade_karte(daten / "karte/karte.chron", "karte/karte.chron", meldungen)
+        geometrie = kg.lade_geometrie(daten / "karte/geometrie", daten, meldungen)
+        self.assertEqual(meldungen.fehler, [])
+        self.assertEqual(meldungen.warnungen, [])
+        self.assertIsNotNone(karte)
+        self.assertTrue(geometrie.land and geometrie.seen and geometrie.kernraum and geometrie.fluesse)
+
+
+# ─── Geometrie ──────────────────────────────────────────────────────────────
+
+
+def _auf_rand(px: Fraction, py: Fraction, ringe: list[list[tuple[Fraction, Fraction]]]) -> bool:
+    for ring in ringe:
+        for (ax, ay), (bx, by) in zip(ring, ring[1:]):
+            if (
+                (bx - ax) * (py - ay) - (by - ay) * (px - ax) == 0
+                and min(ax, bx) <= px <= max(ax, bx)
+                and min(ay, by) <= py <= max(ay, by)
+            ):
+                return True
+    return False
+
+
+def _innen(px: Fraction, py: Fraction, ringe: list[list[tuple[Fraction, Fraction]]]) -> bool:
+    innen = False
+    for ring in ringe:
+        for (ax, ay), (bx, by) in zip(ring, ring[1:]):
+            if (ay > py) != (by > py):
+                xs = ax + (py - ay) * (bx - ax) / (by - ay)
+                if px < xs:
+                    innen = not innen
+    return innen
+
+
+def _raster_referenz(polygone: list[list[np.ndarray]], karte: kr.Karte) -> np.ndarray:
+    """Exakte Referenz (Brüche): Pixelmitte strikt innen (Gerade-ungerade je Polygon), Vereinigung."""
+    maske = np.zeros((karte.hoehe, karte.breite), dtype=bool)
+    exakt = []
+    for polygon in polygone:
+        ringe = []
+        for ring in polygon:
+            punkte = [(Fraction(float(x)), Fraction(karte.hoehe) - Fraction(float(y))) for x, y in ring]
+            if punkte[0] != punkte[-1]:
+                punkte.append(punkte[0])
+            ringe.append(punkte)
+        exakt.append(ringe)
+    for y in range(karte.hoehe):
+        for x in range(karte.breite):
+            px, py = Fraction(2 * x + 1, 2), Fraction(2 * y + 1, 2)
+            maske[y, x] = any(not _auf_rand(px, py, r) and _innen(px, py, r) for r in exakt)
+    return maske
+
+
+class TestGeometrie(unittest.TestCase):
+    def test_cos_grad(self) -> None:
+        for grad in (-720.0, -180.0, -95.5, -45.0, 0.0, 10.0, 45.1, 51.0, 56.2, 60.0, 89.9, 90.0, 135.0, 180.0, 359.0):
+            self.assertAlmostEqual(kr.cos_grad(grad), math.cos(math.radians(grad)), delta=2e-16)
+        self.assertEqual(kr.cos_grad(0.0), 1.0)
+        self.assertEqual(kr.cos_grad(51.0), 0.6293203910498375)
+
+    def test_projektion(self) -> None:
+        karte = kr.Karte(4096, 3329, 1.8, 23.5, 45.1, 56.2, 51.0, 25.0)
+        x, y = karte.nach_pixel(np.array([1.8, 23.5, 13.4]), np.array([56.2, 45.1, 52.52]))
+        self.assertEqual(x[0], 0.0)
+        self.assertEqual(x[1], 4096.0)
+        self.assertEqual(y[0], 0.0)
+        self.assertEqual(y[1], 3329.0)
+        self.assertAlmostEqual(x[2], (13.4 - 1.8) / 21.7 * 4096)
+        laenge, breite = karte.pixelmitte(0, 0)
+        self.assertAlmostEqual(laenge, 1.8 + 0.5 * 21.7 / 4096)
+        self.assertAlmostEqual(breite, 56.2 - 0.5 * 11.1 / 3329)
+
+    def test_rasterung_rand_zaehlt_aussen(self) -> None:
+        karte = _karte(8, 8)
+        # Rechteck mit Kanten genau auf Pixelmitten (x = 1,5 … 4,5, y = 1,5 … 3,5 in Pixeln).
+        quadrat = [_ring((1.5, 6.5), (4.5, 6.5), (4.5, 4.5), (1.5, 4.5), (1.5, 6.5))]
+        maske = kr.rastere_polygone([quadrat], karte)
+        erwartet = np.zeros((8, 8), dtype=bool)
+        erwartet[2, 2:4] = True  # nur Mitten strikt innen
+        np.testing.assert_array_equal(maske, erwartet)
+        # Gleiches Rechteck ohne Schlusspunkt (Ring wird geschlossen).
+        offen = [_ring((1.5, 6.5), (4.5, 6.5), (4.5, 4.5), (1.5, 4.5))]
+        np.testing.assert_array_equal(kr.rastere_polygone([offen], karte), erwartet)
+
+    def test_rasterung_loch_und_multipolygon(self) -> None:
+        karte = _karte(10, 10)
+        aussen = _ring((1, 1), (9, 1), (9, 9), (1, 9), (1, 1))
+        loch = _ring((3, 3), (3, 7), (7, 7), (7, 3), (3, 3))
+        insel = _ring((4, 4), (6, 4), (6, 6), (4, 6), (4, 4))
+        maske = kr.rastere_polygone([[aussen, loch], [insel]], karte)
+        erwartet = np.zeros((10, 10), dtype=bool)
+        erwartet[1:9, 1:9] = True
+        erwartet[3:7, 3:7] = False
+        erwartet[4:6, 4:6] = True
+        np.testing.assert_array_equal(maske, erwartet)
+
+    def test_rasterung_gemeinsame_kante(self) -> None:
+        karte = kr.Karte(50, 50, 10.0, 11.0, 52.0, 52.5, 52.25, 10.0)
+        links = [_ring((10.1, 52.1), (10.537, 52.08), (10.43, 52.41), (10.1, 52.4), (10.1, 52.1))]
+        rechts = [_ring((10.537, 52.08), (10.9, 52.1), (10.9, 52.4), (10.43, 52.41), (10.537, 52.08))]
+        a = kr.rastere_polygone([links], karte)
+        b = kr.rastere_polygone([rechts], karte)
+        beide = kr.rastere_polygone([links, rechts], karte)
+        self.assertFalse((a & b).any())
+        np.testing.assert_array_equal(beide, a | b)
+
+    def test_rasterung_gegen_exakte_referenz(self) -> None:
+        rng = np.random.default_rng(7)
+        karte = _karte(16, 16)
+        for fall in range(120):
+            polygone = []
+            for _ in range(int(rng.integers(1, 3))):
+                ringe = []
+                for _ in range(int(rng.integers(1, 3))):
+                    n = int(rng.integers(3, 9))
+                    punkte = rng.integers(-4, 37, size=(n, 2)) / 2.0  # Halbe: Mitten auf Kanten und Ecken
+                    ringe.append(np.vstack([punkte, punkte[:1]]))
+                polygone.append(ringe)
+            with self.subTest(fall=fall):
+                np.testing.assert_array_equal(kr.rastere_polygone(polygone, karte), _raster_referenz(polygone, karte))
+
+    def test_flaechenarten_der_fixture(self) -> None:
+        grundlage, _, _ = _fixture()
+        karte, art = grundlage.karte, grundlage.art
+
+        def bei(laenge: float, breite: float) -> int:
+            x, y = karte.nach_pixel(np.array([laenge]), np.array([breite]))
+            return int(art[int(y[0]), int(x[0])])
+
+        self.assertEqual(bei(10.3, 52.55), kr.MEER)  # Ostsee
+        self.assertEqual(bei(10.64, 52.53), kr.KERNLAND)  # Insel
+        self.assertEqual(bei(10.215, 52.527), kr.KERNLAND)  # Inselchen
+        self.assertEqual(bei(10.18, 52.19), kr.MEER)  # Haff (Loch im Festland)
+        self.assertEqual(bei(10.44, 52.25), kr.BINNENGEWAESSER)  # Testsee
+        self.assertEqual(bei(10.485, 52.272), kr.KERNLAND)  # Seeinsel (Loch im See)
+        self.assertEqual(bei(10.95, 52.3), kr.AUSLAND)
+        self.assertEqual(bei(10.9, 52.17), kr.BINNENGEWAESSER)  # Grenzsee im Ausland
+        self.assertEqual(bei(10.3, 52.2), kr.KERNLAND)
+        self.assertEqual(set(np.unique(art).tolist()), {0, 1, 2, 3})
+
+
+# ─── Rauschen ───────────────────────────────────────────────────────────────
+
+
+class TestRauschen(unittest.TestCase):
+    def test_raster_gleich_punktauswertung(self) -> None:
+        xs = np.arange(-30, 300, dtype=np.float64) * 0.37 + 0.123
+        ys = np.arange(-10, 250, dtype=np.float64) * 0.41 - 3.0
+        gx, gy = kr.verschiebung_raster(xs, ys)
+        px, py = kr.verschiebung_punkte(xs[None, :], ys[:, None])
+        np.testing.assert_array_equal(gx, px)
+        np.testing.assert_array_equal(gy, py)
+
+    def test_beschraenkt_und_deterministisch(self) -> None:
+        rng = np.random.default_rng(3)
+        xs = rng.uniform(-500, 2000, 20000)
+        ys = rng.uniform(-500, 2000, 20000)
+        dx, dy = kr.verschiebung_punkte(xs, ys)
+        grenze = kr.rauschamplitude()
+        self.assertLessEqual(float(np.abs(dx).max()), grenze)
+        self.assertLessEqual(float(np.abs(dy).max()), grenze)
+        self.assertGreater(float(np.abs(dx).max()), grenze / 3)
+        dx2, dy2 = kr.verschiebung_punkte(xs, ys)
+        np.testing.assert_array_equal(dx, dx2)
+        # Fester Wert: ändert sich nur bei gewollter Änderung von Hash, Startwert oder Oktaven.
+        self.assertEqual(
+            kr._gitterwerte(np.array([0, 1, -1]), np.array([0, 2, 5]), 1648).tolist(),
+            [
+                kr._gitterwerte(np.array([0]), np.array([0]), 1648)[0],
+                kr._gitterwerte(np.array([1]), np.array([2]), 1648)[0],
+                kr._gitterwerte(np.array([-1]), np.array([5]), 1648)[0],
+            ],
+        )
+        werte = kr._gitterwerte(np.arange(-1000, 1000), np.arange(2000), 99)
+        self.assertTrue(((werte >= -1.0) & (werte < 1.0)).all())
+        self.assertAlmostEqual(float(werte.mean()), 0.0, delta=0.05)
+
+    def test_verschiebung_der_pixel(self) -> None:
+        grundlage, _, _ = _fixture()
+        raster = grundlage.raster
+        self.assertIsNotNone(raster.px_km)
+        ohne = raster.spalte_grad[None, :] * raster.kx[:, None]
+        verschiebung = np.abs(raster.px_km - ohne).max()
+        self.assertLessEqual(float(verschiebung), kr.rauschamplitude() + 1e-9)
+        self.assertGreater(float(verschiebung), 0.5)
+
+
+# ─── Zuordnung ──────────────────────────────────────────────────────────────
+
+
+class TestZuordnung(unittest.TestCase):
+    def _zuordnen(self, grundlage: kg.Grundlage, orte: list[kg.Ort], **kw: bool) -> np.ndarray:
+        laengen = np.array([o.laenge for o in orte])
+        breiten = np.array([o.breite for o in orte])
+        lage = kr.lagen(grundlage.raster, laengen, breiten)
+        return kr.zuordnen(grundlage.raster, laengen, breiten, lage, **kw)
+
+    def test_rechteck_gleich_vollsuche(self) -> None:
+        grundlage, orte, _ = _fixture()
+        mehr = orte + [
+            kg.Ort("aussen", "Außen", 9.9, 52.3),  # außerhalb des Bildes, erreicht den Rand
+            kg.Ort("nah", "Nah", 10.301, 52.401),  # fast im selben Pixel wie hafen
+        ]
+        np.testing.assert_array_equal(self._zuordnen(grundlage, mehr), self._zuordnen(grundlage, mehr, vollsuche=True))
+
+    def test_ohne_rauschen_naechster_ort(self) -> None:
+        with _ohne_rauschen():
+            grundlage = kg.lade_grundlage(TESTDATEN, fluesse=False)
+            _, orte, _ = _fixture()
+            werte = self._zuordnen(grundlage, orte)
+        karte = grundlage.karte
+        lagen = kr.lagen(grundlage.raster, np.array([o.laenge for o in orte]), np.array([o.breite for o in orte]))
+        km_y = (karte.breite_max - karte.breite_min) / karte.hoehe * kr.KM_PRO_GRAD
+        km_x_grad = (karte.laenge_max - karte.laenge_min) / karte.breite
+        rng = np.random.default_rng(5)
+        for _ in range(400):
+            x, y = int(rng.integers(0, karte.breite)), int(rng.integers(0, karte.hoehe))
+            if grundlage.art[y, x] != kr.KERNLAND:
+                self.assertEqual(werte[y, x], 0)
+                continue
+            kx = kr.KM_PRO_GRAD * kr.cos_grad(karte.pixelmitte(x, y)[1])
+            abstaende = [
+                math.hypot((x - int(lagen.px[k])) * km_x_grad * kx, (y - int(lagen.py[k])) * km_y)
+                for k in range(len(orte))
+            ]
+            bester = min(range(len(orte)), key=lambda k: (abstaende[k], k))
+            erwartet = bester + 1 if abstaende[bester] <= karte.max_radius_km else 0
+            if abs(sorted(abstaende)[1] - abstaende[bester]) < 1e-9 or abs(abstaende[bester] - 16.0) < 1e-6:
+                continue  # Gleichstand bis auf Rundung: nicht aussagekräftig
+            self.assertEqual(int(werte[y, x]), erwartet, (x, y, abstaende))
+
+    def test_gleichstand_kleinerer_index(self) -> None:
+        grundlage, _, _ = _fixture()
+        zwei = [kg.Ort("a", "A", 10.3, 52.2), kg.Ort("b", "B", 10.3, 52.2)]
+        werte = self._zuordnen(grundlage, zwei)
+        self.assertTrue((werte != 2).all())
+        self.assertGreater(int((werte == 1).sum()), 1000)
+
+    def test_eigenschaften_der_fixture(self) -> None:
+        grundlage, orte, ergebnis = _fixture()
+        werte = ergebnis.werte
+        # Nur Kernraum-Land trägt Orte; Kodierung mit Flächenart.
+        self.assertTrue((werte[grundlage.art != kr.KERNLAND] == 0).all())
+        bild = ergebnis.provinzen()
+        np.testing.assert_array_equal(bild[..., 2], grundlage.art)
+        np.testing.assert_array_equal(bild[..., 0].astype(np.int32) + 256 * bild[..., 1].astype(np.int32), werte)
+        # Genau eine zusammenhängende Fläche je Ort, Lagepixel gehört dem Ort.
+        lf = kr.laeufe(werte)
+        komp = kr.komponenten(werte, lf, lf.wert > 0)
+        _, kwert, _ = kr._komponenten_liste(lf, komp)
+        self.assertEqual(sorted(kwert.tolist()), list(range(1, len(orte) + 1)))
+        lagen = kr.lagen(grundlage.raster, np.array([o.laenge for o in orte]), np.array([o.breite for o in orte]))
+        for k in range(len(orte)):
+            self.assertEqual(int(werte[lagen.py[k], lagen.px[k]]), k + 1, orte[k].kennung)
+        # Die Insel gehört ganz der Inselstadt, Inselchen und Seeinsel keinem Ort.
+        insel = ergebnis.flaeche_nach_ort["insel"]
+        self.assertEqual(insel.pixel, 869)
+        self.assertEqual(len(ergebnis.ohne_ort), 5)
+        self.assertEqual(ergebnis.bereinigung.entfernt, 2)
+        warnungen = "\n".join(ergebnis.warnungen)
+        self.assertIn("Kernraum-Land ohne Ort: 702 Pixel (≈ 78 km²) in 5 Teilflächen", warnungen)
+        self.assertIn("Kernraum-Land ohne Ort: 35 Pixel (≈ 3.9 km²) ab Pixel (41, 22) bei 10.20 °O 52.53 °N", warnungen)
+        self.assertIn("ab Pixel (96, 107) bei 10.47 °O 52.28 °N", warnungen)  # Seeinsel
+
+    def test_warnungen(self) -> None:
+        grundlage, orte, _ = _fixture()
+        test = orte + [
+            kg.Ort("meer", "Meer", 10.3, 52.55, datei="t.chron", zeile=1),
+            kg.Ort("see", "See", 10.44, 52.25, datei="t.chron", zeile=2),
+            kg.Ort("ausland", "Ausland", 10.95, 52.3, datei="t.chron", zeile=3),
+            kg.Ort("fern", "Fern", 30.0, 60.0, datei="t.chron", zeile=4),
+            kg.Ort("doppelt", "Doppelt", 10.3001, 52.4001, datei="t.chron", zeile=5),
+        ]
+        ergebnis = kg.erzeuge(grundlage, test)
+        text = "\n".join(ergebnis.warnungen)
+        for erwartet in (
+            "t.chron:1: ort meer: Lage 10.30 52.55 liegt im Meer, nicht auf Kernraum-Land",
+            "t.chron:2: ort see: Lage 10.44 52.25 liegt in einem Binnengewässer, nicht auf Kernraum-Land",
+            "t.chron:3: ort ausland: Lage 10.95 52.30 liegt im Ausland (außerhalb des Kernraums)",
+            "t.chron:4: ort fern: Lage 30.00 60.00 liegt außerhalb des Kartenausschnitts",
+            "t.chron:4: ort fern: erhält keine Pixel",
+            "t.chron:5: ort doppelt: Lage im selben Kartenpixel (61, 66) wie ort hafen; das Pixel gehört ort hafen",
+            "t.chron:5: ort doppelt: erhält keine Pixel",  # Gleichstand überall: hafen gewinnt
+            "t.chron:1: ort meer: erhält nur 35 Pixel (≈ 4 km², Median aller Orte: ",  # nur das Inselchen
+        ):
+            self.assertIn(erwartet, text)
+        fern = ergebnis.flaeche_nach_ort["fern"]
+        self.assertEqual((fern.x, fern.y, fern.pixel, fern.flaeche_km2), (-1, -1, 0, 0))
+        self.assertEqual((fern.laenge, fern.breite), (30.0, 60.0))
+
+    def test_max_radius(self) -> None:
+        grundlage, _, _ = _fixture()
+        ergebnis = kg.erzeuge(grundlage, [kg.Ort("einsam", "Einsam", 10.3, 52.2)])
+        karte = grundlage.karte
+        flaeche = ergebnis.flaechen[0]
+        # Höchstens ein Kreis mit max_radius_km plus Verschiebung; deutlich weniger als das ganze Land.
+        obergrenze = math.pi * (karte.max_radius_km + kr.rauschamplitude()) ** 2
+        self.assertLess(flaeche.flaeche_km2, obergrenze)
+        self.assertGreater(flaeche.flaeche_km2, 0.5 * math.pi * karte.max_radius_km**2)
+        self.assertTrue(any("Kernraum-Land ohne Ort" in w for w in ergebnis.warnungen))
+
+    def test_api_prueft_orte(self) -> None:
+        grundlage, _, _ = _fixture()
+        with self.assertRaises(kg.DatenFehler) as fehler:
+            kg.erzeuge(
+                grundlage,
+                [kg.Ort("a", "A;B", 10.3, 52.2), kg.Ort("a", "A", 10.3, 52.2), kg.Ort("B", "B", 10.3, 99.0)],
+            )
+        self.assertEqual(
+            fehler.exception.meldungen,
+            [
+                "ort a: 'name' darf kein ';' und keinen Zeilenumbruch enthalten (definition.csv)",
+                "ort a: ungültige oder doppelte Kennung",
+                "ort B: ungültige oder doppelte Kennung",
+                "ort B: 'lage' außerhalb des gültigen Bereichs",
+            ],
+        )
+
+    def test_keine_orte(self) -> None:
+        grundlage, _, _ = _fixture()
+        ergebnis = kg.erzeuge(grundlage, [])
+        self.assertEqual(ergebnis.flaechen, [])
+        self.assertTrue((ergebnis.werte == 0).all())
+        self.assertEqual(kg.definition_csv(ergebnis.flaechen), (kg.CSV_KOPF + "\n").encode())
+
+
+# ─── Bereinigung ────────────────────────────────────────────────────────────
+
+
+def _bild(text: str) -> np.ndarray:
+    return np.array([[int(c) for c in zeile.strip()] for zeile in text.strip().splitlines()], dtype=np.int32)
+
+
+class TestBereinigung(unittest.TestCase):
+    def test_eingeschlossene_teilflaeche(self) -> None:
+        werte = _bild("""
+            11111
+            12111
+            11122
+            11122
+        """)
+        neu, stat = kr.bereinigen(werte.copy(), {2: (4, 3)}, 2)
+        np.testing.assert_array_equal(neu, _bild("11111\n11111\n11122\n11122"))
+        self.assertEqual((stat.umverteilt, stat.entfernt), (1, 0))
+
+    def test_nur_von_meer_umgeben(self) -> None:
+        werte = _bild("""
+            1100
+            1100
+            0001
+        """)
+        neu, stat = kr.bereinigen(werte.copy(), {1: (0, 0)}, 1)
+        np.testing.assert_array_equal(neu, _bild("1100\n1100\n0000"))
+        self.assertEqual((stat.entfernt, stat.entfernt_pixel), (1, 1))
+
+    def test_lagepixel_bestimmt_hauptflaeche(self) -> None:
+        werte = _bild("""
+            11122
+            11122
+            22222
+        """)
+        # Ort 2 hat die größere Fläche unten, sein Lagepixel liegt aber oben rechts.
+        werte[2, :] = 2
+        werte[0, 3:] = 2
+        werte[1, 3:] = 3
+        neu, _ = kr.bereinigen(werte.copy(), {2: (4, 0), 1: (0, 0), 3: (3, 1)}, 3)
+        self.assertEqual(neu[0, 3:].tolist(), [2, 2])
+        # Die größere untere Fläche von 2 geht an den Nachbarn mit der längsten Grenze (1: 3 Kanten, 3: 2).
+        self.assertEqual(neu[2].tolist(), [1, 1, 1, 1, 1])
+
+    def test_groesste_ohne_lagepixel(self) -> None:
+        werte = _bild("""
+            1121
+            1111
+            2222
+        """)
+        neu, _ = kr.bereinigen(werte.copy(), {}, 2)
+        self.assertEqual(int(neu[0, 2]), 1)
+        self.assertTrue((neu[2] == 2).all())
+
+    def test_diagonal_ist_nicht_verbunden(self) -> None:
+        werte = _bild("""
+            1200
+            2100
+            0000
+        """)
+        neu, stat = kr.bereinigen(werte.copy(), {1: (0, 0), 2: (1, 0)}, 2)
+        # Jede Diagonal-Hälfte grenzt nur an die Hauptfläche des anderen Ortes.
+        np.testing.assert_array_equal(neu, _bild("1200\n1200\n0000"))
+        self.assertEqual(stat.umverteilt, 2)
+
+    def test_gleichstand_kleinerer_kartenindex(self) -> None:
+        werte = _bild("""
+            111
+            131
+            222
+        """)
+        werte[1, 2] = 2
+        werte[1, 0] = 1
+        # Teilfläche (Wert 3 ohne Lage, zweites Stück) grenzt gleich lang an 1 und 2.
+        werte = _bild("""
+            1111
+            1332
+            2222
+        """)
+        werte[1, 3] = 2
+        neu, _ = kr.bereinigen(werte.copy(), {1: (0, 0), 2: (0, 2), 3: (1, 1)}, 3)
+        self.assertEqual(int(neu[1, 1]), 3)
+        werte2 = _bild("""
+            1111
+            1342
+            2222
+        """)
+        # Ort 3 hat nur ein Pixel ohne Lagepixel-Angabe: Hauptfläche. Ort 4 ebenso.
+        neu2, stat = kr.bereinigen(werte2.copy(), {}, 4)
+        self.assertEqual(stat.umverteilt, 0)
+        np.testing.assert_array_equal(neu2, werte2)
+
+    def test_kette_ueber_mehrere_runden(self) -> None:
+        # Teilfläche von 3 grenzt nur an eine Teilfläche von 4, diese an die Hauptfläche von 1.
+        werte = _bild("""
+            0000000
+            0344100
+            0000100
+            0333000
+            0000000
+            0444440
+        """)
+        neu, stat = kr.bereinigen(werte.copy(), {1: (5, 1), 3: (1, 3), 4: (1, 5)}, 4)
+        self.assertEqual(neu[1, 1:5].tolist(), [1, 1, 1, 1])
+        self.assertGreaterEqual(stat.runden, 3)
+        self.assertEqual(stat.umverteilt, 2)
+
+    def test_teilflaechen(self) -> None:
+        maske = _bild("""
+            1100
+            0001
+            1101
+        """).astype(bool)
+        self.assertEqual(kr.teilflaechen(maske), [(2, 0, 0), (2, 3, 1), (2, 0, 2)])
+        self.assertEqual(kr.teilflaechen(np.zeros((3, 3), dtype=bool)), [])
+
+
+# ─── Beschriftungspunkt und Flächen ─────────────────────────────────────────
+
+
+def _chamfer_referenz(marken: np.ndarray) -> np.ndarray:
+    """Freier Chamfer-3-4-Abstand zum nächsten Pixel mit anderer Marke (Bildrand = andere Marke)."""
+    h, b = marken.shape
+    andere = [(x, y, None) for x in range(-1, b + 1) for y in (-1, h)] + [
+        (x, y, None) for y in range(h) for x in (-1, b)
+    ]
+    andere += [(x, y, int(marken[y, x])) for y in range(h) for x in range(b)]
+    ergebnis = np.zeros((h, b), dtype=np.int64)
+    for y in range(h):
+        for x in range(b):
+            m = int(marken[y, x])
+            beste = None
+            for qx, qy, qm in andere:
+                if qm == m:
+                    continue
+                dx, dy = abs(qx - x), abs(qy - y)
+                d = 4 * min(dx, dy) + 3 * (max(dx, dy) - min(dx, dy))
+                beste = d if beste is None or d < beste else beste
+            ergebnis[y, x] = beste
+    return ergebnis
+
+
+class TestBeschriftung(unittest.TestCase):
+    def test_chamfer_gegen_referenz(self) -> None:
+        rng = np.random.default_rng(11)
+        for fall in range(12):
+            h, b = int(rng.integers(1, 14)), int(rng.integers(1, 17))
+            grob = rng.integers(0, 3, size=(h // 3 + 1, b // 3 + 1))
+            marken = np.repeat(np.repeat(grob, 3, axis=0), 3, axis=1)[:h, :b].astype(np.int32)
+            marken[rng.random((h, b)) < 0.1] = 7
+            with self.subTest(fall=fall):
+                np.testing.assert_array_equal(kr.chamfer_abstand(marken), _chamfer_referenz(marken))
+
+    def test_rechteck_und_gleichstand(self) -> None:
+        werte = np.zeros((11, 13), dtype=np.int32)
+        werte[1:10, 2:11] = 1  # 9 × 9: Mitte eindeutig
+        werte[0, 0] = 2
+        x, y, d = kr.beschriftungspunkte(werte, 3)
+        self.assertEqual((int(x[0]), int(y[0]), int(d[0])), (6, 5, 15))
+        self.assertEqual((int(x[1]), int(y[1])), (0, 0))
+        self.assertEqual((int(x[2]), int(y[2]), int(d[2])), (-1, -1, 0))  # Ort ohne Pixel
+        werte = np.zeros((6, 8), dtype=np.int32)
+        werte[1:5, 1:7] = 1  # 6 × 4: Gleichstand, das erste in Zeilenreihenfolge
+        x, y, _ = kr.beschriftungspunkte(werte, 1)
+        self.assertEqual((int(x[0]), int(y[0])), (2, 2))
+
+    def test_beschriftung_im_ort(self) -> None:
+        _, _, ergebnis = _fixture()
+        for f in ergebnis.flaechen:
+            self.assertGreaterEqual(f.x, 0)
+            self.assertEqual(int(ergebnis.werte[f.y, f.x]), f.kartenindex + 1, f.ort)
+
+    def test_flaechen(self) -> None:
+        grundlage, _, ergebnis = _fixture()
+        karte = grundlage.karte
+        for f in ergebnis.flaechen:
+            ys, _ = np.nonzero(ergebnis.werte == f.kartenindex + 1)
+            self.assertEqual(len(ys), f.pixel)
+            summe = 0.0
+            for y in ys:
+                breite = karte.pixelmitte(0, int(y))[1]
+                summe += (
+                    (karte.laenge_max - karte.laenge_min)
+                    / karte.breite
+                    * kr.KM_PRO_GRAD
+                    * math.cos(math.radians(breite))
+                ) * ((karte.breite_max - karte.breite_min) / karte.hoehe * kr.KM_PRO_GRAD)
+            self.assertLessEqual(abs(summe - f.flaeche_km2), 0.5 + 1e-6, f.ort)
+
+    def test_flaeche_rundung_festkomma(self) -> None:
+        karte = kr.Karte(4, 2, 0.0, 4.0, 0.0, 2.0, 1.0, 10.0)
+        raster = kr.Raster.erzeuge(karte, [], [], [])
+        werte = np.array([[1, 1, 2, 0], [1, 1, 2, 2]], dtype=np.int32)
+        pixel, flaechen = kr.pixel_und_flaechen(raster, werte, 3)
+        self.assertEqual(pixel.tolist(), [4, 3, 0])
+        zeile = [kr.KM_PRO_GRAD * math.cos(math.radians(b)) * kr.KM_PRO_GRAD for b in (1.5, 0.5)]
+        self.assertEqual(flaechen, [round(2 * zeile[0] + 2 * zeile[1]), round(zeile[0] + 2 * zeile[1]), 0])
+
+
+# ─── Flüsse ─────────────────────────────────────────────────────────────────
+
+
+class TestFluesse(unittest.TestCase):
+    def test_breite_und_kantenglaettung(self) -> None:
+        karte = _karte(20, 12)
+        # Waagrechte Linie in Pixelzeile 5 (Mitte y = 5,5 → Breite 12 − 5,5 = 6,5).
+        linie = _ring((3.0, 6.5), (15.0, 6.5))
+        breit = kr.zeichne_fluesse([(1, linie)], karte)  # Breite 3: Abstand 0 und 1 voll
+        self.assertEqual(breit[:, 9].tolist(), [0, 0, 0, 0, 255, 255, 255, 0, 0, 0, 0, 0])
+        schmal = kr.zeichne_fluesse([(6, linie)], karte)  # Breite 1: nur Abstand 0
+        self.assertEqual(schmal[:, 9].tolist(), [0, 0, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0])
+        # Abstand 0,5 bei Breite 1 → Deckung 0,5 → 128 (kaufmännisch gerundet).
+        halb = kr.zeichne_fluesse([(6, _ring((3.0, 6.0), (15.0, 6.0)))], karte)
+        self.assertEqual(halb[5:7, 9].tolist(), [128, 128])
+        # Runde Enden: hinter dem Endpunkt fällt die Deckung ab.
+        self.assertEqual(int(breit[5, 15]), 255)  # Mitte 15,5: Abstand 0,5 zum Ende
+        self.assertEqual(int(breit[5, 16]), 128)  # Abstand 1,5: Deckung 1,5 + 0,5 − 1,5 = 0,5
+        self.assertEqual(int(breit[5, 17]), 0)
+
+    def test_maximum_und_reihenfolge(self) -> None:
+        karte = _karte(20, 20)
+        a = (3, _ring((2.0, 18.0), (18.0, 3.0)))
+        b = (5, _ring((2.0, 3.0), (18.0, 18.0)))
+        ab = kr.zeichne_fluesse([a, b], karte)
+        ba = kr.zeichne_fluesse([b, a], karte)
+        np.testing.assert_array_equal(ab, ba)
+        np.testing.assert_array_equal(ab, np.maximum(kr.zeichne_fluesse([a], karte), kr.zeichne_fluesse([b], karte)))
+
+    def test_ausserhalb_und_entartet(self) -> None:
+        karte = _karte(10, 10)
+        bild = kr.zeichne_fluesse([(1, _ring((-5.0, 5.0), (-3.0, 6.0))), (2, _ring((4.5, 4.5), (4.5, 4.5)))], karte)
+        self.assertEqual(int(bild.sum() > 0), 1)
+        self.assertEqual(int(bild[5, 4]), 255)
+
+    def test_fixture(self) -> None:
+        _, _, ergebnis = _fixture()
+        fluesse = ergebnis.fluesse
+        self.assertEqual(fluesse.dtype, np.uint8)
+        self.assertEqual(fluesse.shape, (200, 204))
+        self.assertGreater(int((fluesse == 255).sum()), 200)
+        self.assertGreater(int(((fluesse > 0) & (fluesse < 255)).sum()), 200)
+
+
+# ─── PNG ────────────────────────────────────────────────────────────────────
+
+
+def _png_mit_filter(bild: np.ndarray, filtertyp: int, stufe: int = 6) -> bytes:
+    """Unabhängiger PNG-Schreiber mit festem Zeilenfilter (für Decoder-Tests)."""
+    kanaele = 1 if bild.ndim == 2 else bild.shape[2]
+    farbtyp = {1: 0, 3: 2, 4: 6}[kanaele]
+    hoehe, breite = bild.shape[:2]
+    zeilen = [bytes(bild[y].reshape(-1).tolist()) for y in range(hoehe)]
+    roh = bytearray()
+    vorher = bytes(kanaele * breite)
+    for zeile in zeilen:
+        roh.append(filtertyp)
+        for k, wert in enumerate(zeile):
+            a = zeile[k - kanaele] if k >= kanaele else 0
+            b = vorher[k]
+            c = vorher[k - kanaele] if k >= kanaele else 0
+            p = a + b - c
+            paeth = (
+                a if abs(p - a) <= abs(p - b) and abs(p - a) <= abs(p - c) else (b if abs(p - b) <= abs(p - c) else c)
+            )
+            vorhersage = (0, a, b, (a + b) // 2, paeth)[filtertyp]
+            roh.append((wert - vorhersage) & 0xFF)
+        vorher = zeile
+    ihdr = struct.pack(">IIBBBBB", breite, hoehe, 8, farbtyp, 0, 0, 0)
+    return (
+        karte_png.PNG_SIGNATUR
+        + karte_png._chunk(b"IHDR", ihdr)
+        + karte_png._chunk(b"IDAT", zlib.compress(bytes(roh), stufe))
+        + karte_png._chunk(b"IEND", b"")
+    )
 
 
 def _bloecke(png: bytes) -> list[bytes]:
-    """Typen aller Blöcke eines PNG."""
     pos, typen = 8, []
     while pos < len(png):
         (laenge,) = struct.unpack(">I", png[pos : pos + 4])
@@ -103,872 +978,340 @@ def _bloecke(png: bytes) -> list[bytes]:
     return typen
 
 
-# ─── Parser ─────────────────────────────────────────────────────────────────
+class TestPng(unittest.TestCase):
+    def test_rundreise(self) -> None:
+        rng = np.random.default_rng(1)
+        for form in ((7, 5), (7, 5, 3), (3, 9, 4), (1, 1), (1, 1, 3)):
+            bild = rng.integers(0, 256, size=form, dtype=np.uint8)
+            bild[1:] = bild[:1] if form[0] > 1 else bild[1:]  # gleiche Zeilen: Filter Up
+            daten = karte_png.kodieren(bild)
+            self.assertEqual(_bloecke(daten), [b"IHDR", b"IDAT", b"IEND"])
+            np.testing.assert_array_equal(karte_png.dekodieren(daten), bild)
+            self.assertEqual(daten, karte_png.kodieren(bild))
 
+    def test_decoder_alle_filter(self) -> None:
+        rng = np.random.default_rng(2)
+        for form in ((6, 5), (6, 5, 3), (4, 3, 4)):
+            bild = rng.integers(0, 256, size=form, dtype=np.uint8)
+            for filtertyp in range(5):
+                with self.subTest(form=form, filtertyp=filtertyp):
+                    np.testing.assert_array_equal(karte_png.dekodieren(_png_mit_filter(bild, filtertyp)), bild)
 
-class TestParser(unittest.TestCase):
-    def test_leere_eingabe_und_kommentare(self) -> None:
-        for text in ("", "   \n\t\r\n", "# nur ein Kommentar", "# a\n# b\n"):
-            ergebnis = _parse_ok(text)
-            self.assertTrue(ergebnis.root.is_block)
-            self.assertEqual(ergebnis.root.children, [])
-
-    def test_zuweisung_mit_zeichenkette(self) -> None:
-        n = _parse_ok('name = "Berlin"').root.children[0]
-        self.assertEqual((n.key, n.op, n.value, n.quoted, n.is_block), ("name", "=", "Berlin", True, False))
-        self.assertEqual((n.line, n.column), (1, 1))
-
-    def test_alle_operatoren(self) -> None:
-        kinder = _parse_ok("a = 1\nb < 2\nc > 3\nd <= 4\ne >= 5\nf != 6\ng>=7 h<8 i!=9 j=k").root.children
-        erwartet = [
-            ("a", "=", "1"),
-            ("b", "<", "2"),
-            ("c", ">", "3"),
-            ("d", "<=", "4"),
-            ("e", ">=", "5"),
-            ("f", "!=", "6"),
-            ("g", ">=", "7"),
-            ("h", "<", "8"),
-            ("i", "!=", "9"),
-            ("j", "=", "k"),
+    def test_decoder_fehler(self) -> None:
+        gut = karte_png.kodieren(np.zeros((2, 2, 3), dtype=np.uint8))
+        faelle = [
+            (b"kein png", "keine PNG-Datei"),
+            (gut[:30], "PNG abgeschnitten"),
+            (gut[:20] + bytes([gut[20] ^ 1]) + gut[21:], "Prüfsumme des PNG-Blocks IHDR falsch"),
+            (gut[:-12], "PNG ohne IEND-Block"),
+            (karte_png.PNG_SIGNATUR + karte_png._chunk(b"IEND", b""), "PNG ohne gültigen IHDR-Block"),
+            (
+                karte_png.PNG_SIGNATUR
+                + karte_png._chunk(b"IHDR", struct.pack(">IIBBBBB", 2, 2, 16, 2, 0, 0, 0))
+                + karte_png._chunk(b"IEND", b""),
+                "nicht unterstütztes PNG-Format",
+            ),
+            (
+                karte_png.PNG_SIGNATUR
+                + karte_png._chunk(b"IHDR", struct.pack(">IIBBBBB", 2, 2, 8, 2, 0, 0, 0))
+                + karte_png._chunk(b"IDAT", zlib.compress(b"\x00" * 5))
+                + karte_png._chunk(b"IEND", b""),
+                "PNG-Bilddaten haben die falsche Länge",
+            ),
+            (
+                karte_png.PNG_SIGNATUR
+                + karte_png._chunk(b"IHDR", struct.pack(">IIBBBBB", 1, 1, 8, 0, 0, 0, 0))
+                + karte_png._chunk(b"IDAT", zlib.compress(b"\x07\x00"))
+                + karte_png._chunk(b"IEND", b""),
+                "unbekannter PNG-Zeilenfilter 7",
+            ),
         ]
-        self.assertEqual([(n.key, n.op, n.value) for n in kinder], erwartet)
-        self.assertTrue(all(not n.quoted and not n.is_block for n in kinder))
-        self.assertEqual(kinder[4].line, 5)
-        self.assertEqual((kinder[7].line, kinder[7].column), (7, 6))
-
-    def test_blockformen(self) -> None:
-        kinder = _parse_ok(
-            "lage = { 13.4 52.5 }\nregeln { a = 1 }\nort berlin_coelln { name = x }\n{ anonym }\n"
-        ).root.children
-        self.assertEqual(len(kinder), 4)
-        lage, regeln, ort, anonym = kinder
-        self.assertEqual((lage.key, lage.op, lage.value, lage.is_block), ("lage", "=", "", True))
-        self.assertEqual(lage.bare_values(), ["13.4", "52.5"])
-        self.assertEqual((lage.children[0].key, lage.children[0].op), ("", ""))
-        self.assertEqual((regeln.key, regeln.op, regeln.is_block), ("regeln", "=", True))
-        self.assertEqual(regeln.children[0].key, "a")
-        self.assertEqual(
-            (ort.key, ort.op, ort.value, ort.is_block, ort.line), ("ort", "=", "berlin_coelln", True, 3)
-        )
-        self.assertEqual(ort.get_string("name"), "x")
-        self.assertEqual((anonym.key, anonym.is_block, anonym.line, anonym.column), ("", True, 4, 1))
-        self.assertEqual(anonym.bare_values(), ["anonym"])
-
-    def test_vorausschau(self) -> None:
-        c = _parse_ok("liste = { a b c }\nx y { }\np { } q\nm n o = 1\n{ { 1 2 } { 3 } }\n").root.children
-        self.assertEqual(len(c), 8)
-        self.assertEqual(c[0].bare_values(), ["a", "b", "c"])
-        self.assertEqual((c[1].key, c[1].value, c[1].is_block), ("x", "y", True))
-        self.assertEqual((c[2].key, c[2].is_block), ("p", True))
-        self.assertEqual((c[3].key, c[3].value), ("", "q"))
-        self.assertEqual((c[4].key, c[4].value), ("", "m"))
-        self.assertEqual((c[5].key, c[5].value), ("", "n"))
-        self.assertEqual((c[6].key, c[6].value), ("o", "1"))
-        self.assertEqual([len(k.bare_values()) for k in c[7].children], [2, 1])
-
-    def test_verschachtelung_und_positionen(self) -> None:
-        staat = _parse_ok(
-            "staat BRA {\n"
-            "    farbe = { 58 95 143 }\n"
-            "    konfession = { lutherisch = 90 reformiert = 10 }\n"
-            "}\n"
-        ).root.children[0]
-        self.assertEqual((staat.children[0].line, staat.children[0].column), (2, 5))
-        konf = staat.children[1]
-        self.assertEqual((konf.get_int("lutherisch"), konf.get_int("reformiert")), (90, 10))
-        self.assertEqual(konf.children[1].column, 36)
-
-    def test_kommentare(self) -> None:
-        c = _parse_ok(
-            "# Kopf\n"
-            "a = 1 # Kommentar am Zeilenende\n"
-            'b = "Text # kein Kommentar"\n'
-            "c = { x # Kommentar im Block\n"
-            "  y }\n"
-            "d = 2#direkt\n"
-        ).root.children
-        self.assertEqual([n.key for n in c], ["a", "b", "c", "d"])
-        self.assertEqual(c[1].value, "Text # kein Kommentar")
-        self.assertEqual(c[2].bare_values(), ["x", "y"])
-        self.assertEqual(c[3].value, "2")
-
-    def test_zeichenketten_mit_escapes(self) -> None:
-        c = _parse_ok(
-            r'a = "Er sagte \"Ja\"" b = "C:\\Pfad\\" c = "" d = "mit  Leer { } = # zeichen"'
-        ).root.children
-        self.assertEqual(c[0].value, 'Er sagte "Ja"')
-        self.assertEqual(c[1].value, "C:\\Pfad\\")
-        self.assertEqual((c[2].value, c[2].quoted), ("", True))
-        self.assertEqual(c[3].value, "mit  Leer { } = # zeichen")
-
-    def test_zeichenkette_als_listeneintrag(self) -> None:
-        n = _parse_ok('namen = { "Berlin" "Cölln" }').root.children[0]
-        self.assertTrue(n.children[0].quoted)
-        self.assertEqual(n.bare_values(), ["Berlin", "Cölln"])
-
-    def test_utf8_spalten_in_bytes(self) -> None:
-        c = _parse_ok('name = Cölln\nort köln_süd { name = "Köln-Süd" }\näb = 1 c').root.children
-        self.assertEqual(c[0].value, "Cölln")
-        self.assertEqual(c[1].value, "köln_süd")
-        self.assertEqual(c[1].get_string("name"), "Köln-Süd")
-        self.assertEqual(c[2].key, "äb")
-        self.assertEqual((c[3].value, c[3].line, c[3].column), ("c", 3, 9))  # "äb" sind 3 Bytes
-
-    def test_woerter_mit_sonderzeichen(self) -> None:
-        c = _parse_ok("a = -0.25 b = 1648.10.24 c = x.y-z/w:1 d = 12000").root.children
-        self.assertEqual([n.value for n in c], ["-0.25", "1648.10.24", "x.y-z/w:1", "12000"])
-
-    def test_bom_und_crlf(self) -> None:
-        c = _parse_ok(b'\xef\xbb\xbfa = 1\r\nb = "x"\r\nc {\r\n  d\r\n}\r\n').root.children
-        self.assertEqual((c[0].key, c[0].line, c[0].column), ("a", 1, 1))
-        self.assertEqual((c[1].value, c[1].line), ("x", 2))
-        self.assertEqual((c[2].children[0].line, c[2].children[0].column), (4, 3))
-
-    def test_zugriffsfunktionen(self) -> None:
-        root = _parse_ok(
-            "x = 5\nx = 6\nx >= 7\nblk = { 1 2 k = v }\n"
-            'f = 0.25 i = -12 leer = "" bad = 5. bad2 = .5 bad3 = 1e3\n'
-            "b1 = ja b2 = yes b3 = wahr b4 = nein b5 = no b6 = falsch b7 = vielleicht b8 = Ja\n"
-        ).root
-        self.assertIs(root.find("x"), root.children[0])
-        self.assertIsNone(root.find("fehlt"))
-        self.assertEqual(len(root.find_all("x")), 3)
-        self.assertEqual(root.get_string("x"), "5")
-        self.assertIsNone(root.get_string("blk"))
-        self.assertEqual(root.get_string("leer"), "")
-        self.assertEqual(root.get_zahl("f"), 0.25)
-        self.assertEqual(root.get_zahl("i"), -12.0)
-        for schluessel in ("bad", "bad2", "bad3", "leer"):
-            self.assertIsNone(root.get_zahl(schluessel), schluessel)
-        self.assertEqual(root.get_int("i"), -12)
-        self.assertIsNone(root.get_int("f"))
-        self.assertEqual(
-            [root.get_bool(f"b{k}") for k in range(1, 9)], [True, True, True, False, False, False, None, None]
-        )
-        self.assertEqual(root.find("blk").bare_values(), ["1", "2"])
-        self.assertEqual(len(list(root.walk())), len(root.children) + 3)
-
-    # ── Fehler ──
-
-    def test_nicht_geschlossener_block(self) -> None:
-        e = chron.parse_script("a = 1\nb = {\n  c = 2\n", "orte.chron")
-        self.assertEqual([x.message for x in e.errors], ["nicht geschlossener Block (geöffnet in Zeile 2)"])
-        self.assertEqual(e.errors[0].file, "orte.chron")
-        self.assertEqual(e.root.children[1].get_int("c"), 2)  # Inhalt bleibt erhalten
-
-    def test_unerwartete_klammer(self) -> None:
-        e = chron.parse_script("a = 1\n}\nb = 2\n", "x.chron")
-        self.assertEqual(len(e.errors), 1)
-        self.assertEqual(str(e.errors[0]), "x.chron:2:1: unerwartetes '}'")
-        self.assertEqual(len(e.root.children), 2)
-
-    def test_wert_fehlt(self) -> None:
-        e = chron.parse_script("a =", "x.chron")
-        self.assertEqual([(x.line, x.column, x.message) for x in e.errors], [(1, 3, "Wert nach '=' fehlt")])
-        self.assertEqual(e.root.children, [])
-
-        e = chron.parse_script("blk {\n  a >=\n}\nb = 2", "x.chron")
-        self.assertEqual([(x.line, x.message) for x in e.errors], [(2, "Wert nach '>=' fehlt")])
-        self.assertEqual(len(e.root.children), 2)
-        self.assertEqual(e.root.children[0].children, [])
-
-        e = chron.parse_script("name =\nbesitzer = BRA\n", "x.chron")
-        self.assertEqual([(x.line, x.message) for x in e.errors], [(1, "Wert nach '=' fehlt")])
-        self.assertEqual([n.key for n in e.root.children], ["besitzer"])
-
-        e = chron.parse_script("a = = 5\nb = 6", "x.chron")
-        self.assertEqual(len(e.errors), 1)
-        self.assertIn("stattdessen '='", e.errors[0].message)
-        self.assertEqual([n.key for n in e.root.children], ["b"])
-
-        self.assertEqual(len(_parse_ok('lage =\n  { 1 2 }\nname =\n  "x"').root.children), 2)
-
-    def test_fehler_in_zeichenketten(self) -> None:
-        e = chron.parse_script('a = "offen\nb = 2', "x.chron")
-        self.assertEqual(
-            [(x.line, x.column, x.message) for x in e.errors], [(1, 5, "nicht beendete Zeichenkette")]
-        )
-        self.assertEqual(e.root.get_int("b"), 2)  # Wiederaufsetzen in der nächsten Zeile
-
-        e = chron.parse_script(r'a = "x\ny"', "x.chron")
-        self.assertEqual(len(e.errors), 1)
-        self.assertIn("Escape", e.errors[0].message)
-        self.assertEqual(e.errors[0].column, 7)
-
-        e = chron.parse_script('"name" = 5\nb = 1', "x.chron")
-        self.assertEqual([x.message for x in e.errors], ["eine Zeichenkette kann kein Schlüssel sein"])
-        self.assertEqual([n.key for n in e.root.children], ["b"])
-
-    def test_unerwartete_operatoren(self) -> None:
-        e = chron.parse_script("= 5\na ! b\nc = 1", "x.chron")
-        self.assertEqual(len(e.errors), 2)
-        self.assertEqual((e.errors[0].line, e.errors[0].message), (1, "unerwarteter Operator '='"))
-        self.assertEqual((e.errors[1].line, e.errors[1].column), (2, 3))
-        self.assertIn("'!'", e.errors[1].message)
-        self.assertIsNotNone(e.root.find("c"))
-
-    def test_ungueltiges_utf8(self) -> None:
-        e = chron.parse_script(b'name = K\xf6ln\nb = "\xc3\x28"\nc = ok', "x.chron")
-        self.assertEqual([(x.line, x.column) for x in e.errors], [(1, 9), (2, 6)])
-        self.assertTrue(all("UTF-8" in x.message for x in e.errors))
-        self.assertIsNotNone(e.root.find("c"))
-
-    def test_mehrere_fehler_sortiert_und_fortgesetzt(self) -> None:
-        e = chron.parse_script('}\na = "x\n= 3\nb = {\n', "x.chron")
-        self.assertEqual([x.line for x in e.errors], [1, 2, 3, 5])
-        self.assertEqual(e.errors[-1].message, "nicht geschlossener Block (geöffnet in Zeile 4)")
-
-    def test_tiefe_verschachtelung(self) -> None:
-        erlaubt = "{ " * chron.MAX_TIEFE + "x " + "} " * chron.MAX_TIEFE
-        self.assertTrue(_parse_ok(erlaubt).ok)  # iterativ, kein RecursionError
-        zu_tief = "{ " * (chron.MAX_TIEFE + 1) + "x " + "} " * (chron.MAX_TIEFE + 1) + "\nb = 1"
-        e = chron.parse_script(zu_tief, "x.chron")
-        self.assertEqual(len(e.errors), 1)
-        self.assertIn("zu tief verschachtelt", e.errors[0].message)
-        self.assertEqual(e.root.get_int("b"), 1)
-
-    def test_datei_fehlt(self) -> None:
-        e = chron.parse_script_file(TESTDATEN / "gibt_es_nicht.chron", "gibt_es_nicht.chron")
-        self.assertEqual([str(x) for x in e.errors], ["gibt_es_nicht.chron: Datei kann nicht gelesen werden"])
-
-    def test_echte_daten_fehlerfrei(self) -> None:
-        dateien = sorted((kg.REPO / "data").rglob("*.chron"))
-        self.assertTrue(dateien)
-        for pfad in dateien:
-            ergebnis = chron.parse_script_file(pfad)
-            self.assertEqual(ergebnis.errors, [], pfad)
-
-
-# ─── Laden ──────────────────────────────────────────────────────────────────
-
-
-class TestLaden(unittest.TestCase):
-    def setUp(self) -> None:
-        self._tmp = tempfile.TemporaryDirectory(prefix="kartengenerator-test-")
-        self.daten = Path(self._tmp.name) / "daten"
-        shutil.copytree(TESTDATEN, self.daten)
-
-    def tearDown(self) -> None:
-        self._tmp.cleanup()
-
-    def _karte(self, inhalt: str) -> tuple[kg.Karte | None, kg.Meldungen]:
-        (self.daten / "karte" / "karte.chron").write_text(inhalt, encoding="utf-8")
-        meldungen = kg.Meldungen()
-        karte = kg.lade_karte(self.daten / "karte" / "karte.chron", "karte/karte.chron", meldungen)
-        return karte, meldungen
-
-    def test_fixture(self) -> None:
-        karte, orte = _fixture_laden()
-        self.assertEqual((karte.breite, karte.hoehe, karte.max_radius_km), (120, 192, 25.0))
-        self.assertEqual(karte.kueste[0], (10.0, 52.92))
-        self.assertEqual(len(karte.kueste), 4)
-        # Dateien sortiert, Einträge in Dateireihenfolge → Kartenindex.
-        self.assertEqual([o.kennung for o in orte], ["hafen", "heide", "burg", "aue"])
-        self.assertEqual(orte[1].name, "Heide-Süd")
-        self.assertEqual((orte[0].laenge, orte[0].breite, orte[0].flaeche), (10.3, 52.8, 150.0))
-        self.assertEqual(
-            (orte[0].datei, orte[0].zeile, orte[0].besitzer), ("history/orte/a_nord.chron", 3, "AAA")
-        )
-
-    def test_dateireihenfolge_nach_bytes(self) -> None:
-        orte = self.daten / "history" / "orte"
-        for alt in orte.iterdir():
-            alt.unlink()
-        for datei, kennung in (("b.chron", "b1"), ("a.chron", "a1"), ("Z.chron", "z1"), ("a_2.chron", "a2")):
-            (orte / datei).write_text(
-                f'ort {kennung} {{ name = "{kennung}" lage = {{ 10.5 52.5 }} flaeche = 100 }}\n',
-                encoding="utf-8",
-            )
-        (orte / "c.txt").write_text("ort c1 { }", encoding="utf-8")  # keine .chron-Datei
-        meldungen = kg.Meldungen()
-        geladen = kg.lade_orte(orte, self.daten, meldungen)
-        self.assertEqual(meldungen.fehler, [])
-        # Großbuchstaben vor Kleinbuchstaben, "a.chron" vor "a_2.chron" (Bytefolge wie im Lader).
-        self.assertEqual([o.kennung for o in geladen], ["z1", "a1", "a2", "b1"])
-
-    def test_besitzer_aus_datierten_bloecken(self) -> None:
-        orte = self.daten / "history" / "orte"
-        for alt in orte.iterdir():
-            alt.unlink()
-        (orte / "a.chron").write_text(
-            'ort a1 { name = "A" lage = { 10.5 52.5 } flaeche = 100\n'
-            "  1701.01.18 = { besitzer = BBB }\n"
-            "  1648.10.24 = { besitzer = AAA bevoelkerung = 10 }\n"
-            "}\n",
-            encoding="utf-8",
-        )
-        meldungen = kg.Meldungen()
-        geladen = kg.lade_orte(orte, self.daten, meldungen)
-        self.assertEqual(meldungen.fehler, [])
-        self.assertEqual(geladen[0].besitzer, "BBB")  # jüngster Stand, unabhängig von der Reihenfolge
-
-    def test_fehler_in_orten(self) -> None:
-        (self.daten / "history" / "orte" / "c_fehler.chron").write_text(
-            'ort hafen { name = "Doppelt" lage = { 10.1 52.1 } flaeche = 100 }\n'
-            'ort Gross { name = "X" lage = { 10.1 52.1 } flaeche = 100 }\n'
-            'ort ohne_lage { name = "Y" flaeche = 100 }\n'
-            'ort schlechte_lage { name = "Z" lage = { 10.1 } flaeche = 100 }\n'
-            'ort semikolon { name = "A;B" lage = { 10.1 52.1 } flaeche = 100 }\n'
-            'ort null { name = "N" lage = { 10.1 52.1 } flaeche = 0 }\n'
-            "ort = kaputt\n"
-            "fremd = 1\n",
-            encoding="utf-8",
-        )
-        meldungen = kg.Meldungen()
-        kg.lade_orte(self.daten / "history" / "orte", self.daten, meldungen)
-        text = "\n".join(meldungen.fehler)
-        for erwartet in (
-            "history/orte/c_fehler.chron:1: doppelte Kennung 'hafen' (bereits definiert in "
-            "history/orte/a_nord.chron:3)",
-            "c_fehler.chron:2: ungültige Ortskennung 'Gross'",
-            "c_fehler.chron:3: Pflichtfeld 'lage' fehlt in ort ohne_lage",
-            "c_fehler.chron:4: 'lage' erwartet genau zwei Zahlen",
-            "c_fehler.chron:5: 'name' darf kein ';' enthalten",
-            "c_fehler.chron:6: 'flaeche' muss größer als 0 sein",
-            "c_fehler.chron:7: ungültige Definition, erwartet: ort <kennung> { … }",
-        ):
-            self.assertIn(erwartet, text)
-        self.assertEqual(len(meldungen.fehler), 7)
-        self.assertEqual(len(meldungen.warnungen), 1)
-        self.assertIn("c_fehler.chron:8: unbekannter Eintrag 'fremd' wird ignoriert", meldungen.warnungen[0])
-
-    def test_syntaxfehler_mit_zeile(self) -> None:
-        (self.daten / "history" / "orte" / "c_kaputt.chron").write_text('ort x {\n  name = "x\n}\n', "utf-8")
-        meldungen = kg.Meldungen()
-        kg.lade_orte(self.daten / "history" / "orte", self.daten, meldungen)
-        self.assertIn("history/orte/c_kaputt.chron:2:10: nicht beendete Zeichenkette", meldungen.fehler)
-
-    def test_karte_gueltig_mit_warnung(self) -> None:
-        karte, meldungen = self._karte(
-            "karte {\n bild_breite = 10 bild_hoehe = 20\n laenge_min = 1 laenge_max = 2\n"
-            " breite_min = 3 breite_max = 4.5 max_radius_km = 7.5\n farbe = rot\n}\nextra = 1\n"
-        )
-        self.assertEqual(meldungen.fehler, [])
-        self.assertEqual(karte, kg.Karte(10, 20, 1.0, 2.0, 3.0, 4.5, 7.5, ()))
-        self.assertEqual(len(meldungen.warnungen), 2)
-        text = "\n".join(meldungen.warnungen)
-        self.assertIn("karte/karte.chron:5: unbekanntes Feld 'farbe' in karte wird ignoriert", text)
-        self.assertIn("karte/karte.chron:7: unbekannter Eintrag 'extra' wird ignoriert", text)
-
-    def test_karte_fehler(self) -> None:
-        basis = (
-            "bild_breite = 10 bild_hoehe = 20 laenge_min = 1 laenge_max = 2 breite_min = 3 breite_max = 4 "
-        )
-        faelle = {
-            "karte {\n bild_hoehe = 20 laenge_min = 1 laenge_max = 2 breite_min = 3 breite_max = 4 "
-            "max_radius_km = 5\n}": "karte/karte.chron:1: Pflichtfeld 'bild_breite' fehlt in karte",
-            "karte {\n" + basis + "max_radius_km = 0\n}": "'max_radius_km' muss größer als 0 sein",
-            "karte {\n"
-            + basis.replace("bild_breite = 10", "bild_breite = 1.5")
-            + "max_radius_km = 5\n}": ("ungültige Ganzzahl '1.5' für 'bild_breite'"),
-            "karte {\n"
-            + basis.replace("laenge_max = 2", "laenge_max = 0")
-            + "max_radius_km = 5\n}": ("laenge_min < laenge_max"),
-            "karte {\n"
-            + basis
-            + "max_radius_km = 5\n kueste = { 1 2 3 }\n}": (
-                "karte/karte.chron:3: 'kueste' erwartet einen Block mit mindestens zwei Punkten"
-            ),
-            "karte {\n"
-            + basis
-            + "max_radius_km = 5\n kueste = {\n 1 2\n 3 4\n 3 5\n }\n}": (
-                "karte/karte.chron:6: 'kueste': die Längengrade müssen streng steigen (Punkt 3"
-            ),
-            "karte {\n"
-            + basis
-            + "max_radius_km = 5\n kueste = { "
-            + " ".join(f"{1 + k / 200} 3.5" for k in range(kg.MAX_KUESTENPUNKTE + 1))
-            + " }\n}": (f"'kueste' hat {kg.MAX_KUESTENPUNKTE + 1} Punkte, erlaubt sind höchstens"),
-            "karte {\n"
-            + basis
-            + "max_radius_km = 5 max_radius_km = 6\n}": "'max_radius_km' ist mehrfach angegeben",
-            "nichts = 1\n": "Block 'karte { … }' fehlt",
-            "karte = 5\n": "karte/karte.chron:1: ungültige Definition, erwartet: karte { … }",
-            "karte {\n": "nicht geschlossener Block",
-        }
-        for inhalt, erwartet in faelle.items():
+        for daten, erwartet in faelle:
             with self.subTest(erwartet=erwartet):
-                karte, meldungen = self._karte(inhalt)
-                self.assertIsNone(karte)
-                self.assertTrue(any(erwartet in f for f in meldungen.fehler), meldungen.fehler)
-
-    def test_karte_ohne_kueste_ist_ganz_land(self) -> None:
-        karte, meldungen = self._karte(
-            "karte { bild_breite = 8 bild_hoehe = 8 laenge_min = 10 laenge_max = 11 "
-            "breite_min = 52 breite_max = 53 max_radius_km = 30 }"
-        )
-        self.assertEqual(meldungen.fehler, [])
-        self.assertEqual(kg.Raster.aus_karte(karte).erstes_land, [0] * 8)
-
-    def test_staaten_fuer_vorschau(self) -> None:
-        (self.daten / "history" / "staaten" / "CCC.chron").write_text(
-            "staat CCC { farbe = { 1 2 300 } }\n", encoding="utf-8"
-        )
-        meldungen = kg.Meldungen()
-        staaten = kg.lade_staaten(self.daten / "history" / "staaten", self.daten, meldungen)
-        self.assertEqual(sorted(staaten), ["AAA", "BBB"])
-        self.assertEqual(staaten["BBB"].farbe, (70, 150, 80))
-        self.assertEqual(staaten["BBB"].name, "Südland")
-        self.assertEqual(len(meldungen.warnungen), 1)
-        self.assertIn("staat CCC: 'farbe' fehlt oder ist ungültig", meldungen.warnungen[0])
-        self.assertEqual(meldungen.fehler, [])
-
-
-# ─── Geometrie und Rauschen ─────────────────────────────────────────────────
-
-
-class TestGeometrie(unittest.TestCase):
-    def test_cos_grad(self) -> None:
-        for zehntel in range(-3600, 3601, 7):
-            grad = zehntel / 10.0
-            self.assertAlmostEqual(kg.cos_grad(grad), math.cos(math.radians(grad)), delta=2e-16 * 8)
-        self.assertEqual(kg.cos_grad(0.0), 1.0)
-
-    def test_kuestenlinie(self) -> None:
-        kueste = ((10.0, 52.92), (10.4, 52.90), (10.6, 52.96), (10.9, 52.86))
-        self.assertEqual(kg.kuesten_breite(kueste, 10.0), 52.92)
-        self.assertEqual(kg.kuesten_breite(kueste, 10.9), 52.86)
-        self.assertAlmostEqual(kg.kuesten_breite(kueste, 10.5), 52.93, places=12)
-        self.assertAlmostEqual(kg.kuesten_breite(kueste, 10.75), 52.91, places=12)
-        self.assertIsNone(kg.kuesten_breite(kueste, 9.99))
-        self.assertIsNone(kg.kuesten_breite(kueste, 10.95))
-        self.assertTrue(kg.ist_land(kueste, 10.5, 52.92))  # südlich: Land
-        self.assertFalse(kg.ist_land(kueste, 10.5, 52.94))  # nördlich: Meer
-        self.assertTrue(kg.ist_land(kueste, 10.0, 52.92))  # auf der Linie: Land
-        self.assertTrue(kg.ist_land(kueste, 10.95, 53.5))  # außerhalb des Linienzugs: Land
-        self.assertTrue(kg.ist_land(kueste, 9.5, 60.0))
-        self.assertTrue(kg.ist_land((), 10.0, 60.0))
-
-    def test_landmaske_des_rasters(self) -> None:
-        karte, _ = _fixture_laden()
-        raster = kg.Raster.aus_karte(karte)
-        for x in range(raster.breite):
-            for y in range(raster.hoehe):
-                land = kg.ist_land(karte.kueste, raster.laenge_spalte[x], raster.breite_zeile[y])
-                self.assertEqual(land, y >= raster.erstes_land[x], (x, y))
-        # Östlich von 10,9 °O endet die Küste: ganze Spalte Land.
-        self.assertEqual(raster.erstes_land[-1], 0)
-        self.assertGreater(raster.erstes_land[0], 0)
-
-    def test_pixel_von(self) -> None:
-        karte, _ = _fixture_laden()
-        raster = kg.Raster.aus_karte(karte)
-        self.assertEqual(raster.pixel_von(10.0, 53.0), (0, 0))
-        self.assertEqual(raster.pixel_von(10.999, 52.001), (119, 191))
-        self.assertIsNone(raster.pixel_von(11.0, 52.5))
-        self.assertIsNone(raster.pixel_von(10.5, 53.01))
-        self.assertIsNone(raster.pixel_von(9.99, 52.5))
-
-    def test_rauschen_deterministisch_und_beschraenkt(self) -> None:
-        saat = kg._saat(0, 0)
-        werte = [kg.gitterwert(i, j, saat) for i in range(-20, 20) for j in range(-20, 20)]
-        self.assertTrue(all(-1.0 <= w < 1.0 for w in werte))
-        self.assertGreater(len(set(werte)), 1500)
-        self.assertEqual(werte, [kg.gitterwert(i, j, saat) for i in range(-20, 20) for j in range(-20, 20)])
-        self.assertNotEqual(kg.gitterwert(3, 4, saat), kg.gitterwert(3, 4, kg._saat(1, 0)))
-        grenze = sum(a for _, a in kg.RAUSCHEN_OKTAVEN)
-        for k in range(500):
-            ost, sued = kg.verschiebung_km(k * 1.37 - 40.0, k * 0.91 + 3.3)
-            self.assertLessEqual(abs(ost), grenze)
-            self.assertLessEqual(abs(sued), grenze)
-
-    def test_zeilenrauschen_gleich_punktauswertung(self) -> None:
-        karte, _ = _fixture_laden()
-        raster = kg.Raster.aus_karte(karte)
-        rauschen = kg._ZeilenRauschen(raster)
-        for y in range(0, raster.hoehe, 5):
-            ost, sued = rauschen.zeile(y)
-            y_km = (karte.breite_max - raster.breite_zeile[y]) * raster.ky
-            for x in range(0, raster.breite, 3):
-                self.assertEqual((ost[x], sued[x]), kg.verschiebung_km(rauschen.x_km[x], y_km), (x, y))
-
-
-# ─── Zuordnung, Bereinigung, Warnungen ──────────────────────────────────────
-
-
-class TestZuordnung(unittest.TestCase):
-    def test_kacheln_gleich_vollsuche(self) -> None:
-        karte, orte = _fixture_laden()
-        raster = kg.Raster.aus_karte(karte)
-        self.assertEqual(kg.zuordnen(raster, orte), kg.zuordnen(raster, orte, beschleunigt=False))
-
-    def test_eigenschaften_der_fixture(self) -> None:
-        karte, orte = _fixture_laden()
-        ergebnis = kg.erzeuge(karte, orte)
-        self.assertEqual(ergebnis.warnungen, [])
-        raster = ergebnis.raster
-        # Pixel und Orte werden je Achse um höchstens die Amplitudensumme verschoben.
-        spielraum = 2 * sum(a for _, a in kg.RAUSCHEN_OKTAVEN) * math.sqrt(2)
-        for index, ort in enumerate(orte):
-            px, py = raster.pixel_von(ort.laenge, ort.breite)
-            self.assertEqual(ergebnis.zeilen[py][px], index + 1, ort.kennung)
-            self.assertGreater(ergebnis.pixel[index], 1000)
-        for y, zeile in enumerate(ergebnis.zeilen):
-            for x, wert in enumerate(zeile):
-                self.assertEqual(wert == kg.MEER, y < raster.erstes_land[x])
-                if wert > 0:
-                    ort = orte[wert - 1]
-                    dx = (raster.laenge_spalte[x] - ort.laenge) * raster.kx_zeile[y]
-                    dy = (raster.breite_zeile[y] - ort.breite) * raster.ky
-                    self.assertLessEqual(math.hypot(dx, dy), karte.max_radius_km + spielraum)
-        self.assertEqual(sum(ergebnis.pixel), sum(1 for z in ergebnis.zeilen for w in z if w > 0))
-
-    def test_ohne_rauschen_exakt_naechster_ort(self) -> None:
-        karte, orte = _fixture_laden()
-        with _ohne_rauschen():
-            ergebnis = kg.erzeuge(karte, orte)
-        self.assertEqual(ergebnis.umverteilt, 0)
-        raster = ergebnis.raster
-        r2 = karte.max_radius_km * karte.max_radius_km
-        leer = 0
-        for y, zeile in enumerate(ergebnis.zeilen):
-            for x, wert in enumerate(zeile):
-                if y < raster.erstes_land[x]:
-                    erwartet = kg.MEER
-                else:
-                    erwartet, beste = 0, r2
-                    for index, ort in enumerate(orte):
-                        dx = (raster.laenge_spalte[x] - ort.laenge) * raster.kx_zeile[y]
-                        dy = (raster.breite_zeile[y] - ort.breite) * raster.ky
-                        d2 = dx * dx + dy * dy
-                        if d2 < beste or (d2 == beste and erwartet == 0):
-                            erwartet, beste = index + 1, d2
-                    leer += erwartet == 0
-                self.assertEqual(wert, erwartet, (x, y))
-        self.assertGreater(leer, 100)  # der Radius begrenzt tatsächlich
-
-    def test_flaechengewicht(self) -> None:
-        karte = kg.Karte(80, 40, 10.0, 11.2, 52.0, 52.4, 60.0, ())
-        orte = [kg.Ort("klein", "Klein", 10.3, 52.2, 100.0), kg.Ort("gross", "Groß", 10.9, 52.2, 300.0)]
-        alt = kg.FLAECHEN_GEWICHT
-        try:
-            kg.FLAECHEN_GEWICHT = 0.0
-            ohne = kg.erzeuge(karte, orte).pixel
-            kg.FLAECHEN_GEWICHT = 1.0
-            mit = kg.erzeuge(karte, orte).pixel
-        finally:
-            kg.FLAECHEN_GEWICHT = alt
-        self.assertGreater(mit[1], ohne[1])
-        self.assertLess(mit[0], ohne[0])
-        self.assertEqual(sum(mit), sum(ohne))
-
-    def test_warnungen(self) -> None:
-        karte, orte = _fixture_laden()
-        extra = [
-            kg.Ort("im_meer", "Im Meer", 10.5, 52.99, 100.0, datei="t.chron", zeile=1),
-            kg.Ort("draussen", "Draußen", 12.0, 52.5, 100.0, datei="t.chron", zeile=2),
-            kg.Ort("doppelt", "Doppelt", 10.30, 52.80, 100.0, datei="t.chron", zeile=3),
-        ]
-        ergebnis = kg.erzeuge(karte, orte + extra)
-        text = "\n".join(ergebnis.warnungen)
-        self.assertIn("t.chron:1: ort im_meer: Lage 10.5 52.99 liegt im Meer", text)
-        self.assertIn("t.chron:2: ort draussen: Lage 12.0 52.5 liegt außerhalb des Kartenausschnitts", text)
-        self.assertIn("t.chron:2: ort draussen: erhält keine Pixel", text)
-        # Gleiche Lage wie "hafen": der frühere Kartenindex gewinnt.
-        self.assertIn("t.chron:3: ort doppelt: das Pixel der Lage gehört zu ort hafen", text)
-        self.assertIn("t.chron:3: ort doppelt: erhält keine Pixel", text)
-        self.assertNotIn("ort hafen:", text)
-
-    def test_wenige_pixel(self) -> None:
-        # Ohne Rauschen exakt: Der mittlere Ort ist zwischen zwei Nachbarn eingeklemmt.
-        karte = kg.Karte(80, 80, 10.3, 10.7, 52.3, 52.7, 15.0, ())
-        orte = [
-            kg.Ort("links", "Links", 10.49, 52.5, 100.0, datei="t.chron", zeile=1),
-            kg.Ort("mitte", "Mitte", 10.50, 52.5, 100.0, datei="t.chron", zeile=2),
-            kg.Ort("rechts", "Rechts", 10.51, 52.5, 100.0, datei="t.chron", zeile=3),
-        ]
-        with _ohne_rauschen():
-            ergebnis = kg.erzeuge(karte, orte)
-        self.assertEqual(len(ergebnis.warnungen), 1, ergebnis.warnungen)
-        self.assertRegex(
-            ergebnis.warnungen[0], r"^t\.chron:2: ort mitte: erhält nur \d+ Pixel \(Median aller Orte"
-        )
-        self.assertLess(ergebnis.pixel[1] * 10, ergebnis.pixel[0])
-
-    def test_ohne_rauschen_reines_voronoi(self) -> None:
-        karte = kg.Karte(60, 30, 10.0, 11.0, 52.0, 52.3, 40.0, ())
-        orte = [kg.Ort("w", "W", 10.25, 52.15, 100.0), kg.Ort("o", "O", 10.75, 52.15, 100.0)]
-        with _ohne_rauschen():
-            ergebnis = kg.erzeuge(karte, orte)
-        # Senkrechte Mittellinie bei 10,5 °O: Spalten 0–29 West, 30–59 Ost.
-        for zeile in ergebnis.zeilen:
-            self.assertEqual(zeile, [1] * 30 + [2] * 30)
-
-
-class TestBereinigung(unittest.TestCase):
-    def test_eingeschlossene_teilflaeche(self) -> None:
-        zeilen = [[1, 1, 1, 2, 2], [1, 1, 2, 2, 2], [2, 2, 2, 1, 2], [2, 2, 2, 2, 2]]
-        self.assertEqual(kg.bereinigen(zeilen, {1: (0, 0), 2: (4, 3)}), (1, set()))
-        self.assertEqual(zeilen[2], [2, 2, 2, 2, 2])
-
-    def test_meer_zaehlt_nicht(self) -> None:
-        m = kg.MEER
-        zeilen = [[m, m, m, m, m], [m, 1, m, m, m], [2, 2, 2, 1, 1]]
-        self.assertEqual(kg.bereinigen(zeilen, {1: (4, 2), 2: (0, 2)}), (1, set()))
-        self.assertEqual(zeilen[1][1], 2)
-
-    def test_nur_von_meer_umgeben(self) -> None:
-        m = kg.MEER
-        zeilen = [[m, m, m], [m, 1, m], [m, m, m], [1, 1, 1]]
-        self.assertEqual(kg.bereinigen(zeilen, {1: (0, 3)}), (0, {1}))
-        self.assertEqual(zeilen[1][1], 1)
-
-    def test_lagepixel_bestimmt_hauptflaeche(self) -> None:
-        zeilen = [[1, 1, 1, 0, 1]]
-        self.assertEqual(kg.bereinigen(zeilen, {1: (4, 0)}), (1, set()))
-        self.assertEqual(zeilen, [[0, 0, 0, 0, 1]])
-        zeilen = [[1, 1, 1, 0, 1]]
-        kg.bereinigen(zeilen, {})  # ohne Lagepixel bleibt die größte Fläche
-        self.assertEqual(zeilen, [[1, 1, 1, 0, 0]])
-
-    def test_diagonal_ist_nicht_verbunden(self) -> None:
-        # Beide Diagonalpixel sind Teilflächen und gehen an die Hauptfläche des Nachbarn.
-        zeilen = [[1, 2], [2, 1]]
-        self.assertEqual(kg.bereinigen(zeilen, {1: (0, 0), 2: (1, 0)}), (2, set()))
-        self.assertEqual(zeilen, [[1, 2], [1, 2]])
-
-    def test_verschachtelte_teilflaechen_pendeln_nicht(self) -> None:
-        zeilen = [
-            [1, 1, 1, 1, 1, 1],
-            [1, 3, 3, 3, 1, 1],
-            [1, 3, 2, 3, 1, 1],
-            [1, 3, 3, 3, 1, 1],
-            [1, 1, 1, 1, 1, 1],
-            [2, 2, 3, 3, 3, 3],
-        ]
-        # Runde 1: die 2 in der Mitte geht an den 3er-Ring; Runde 2: der Ring geht an 1.
-        self.assertEqual(kg.bereinigen(zeilen, {1: (0, 0), 2: (0, 5), 3: (5, 5)}), (2, set()))
-        self.assertTrue(all(w == 1 for zeile in zeilen[:5] for w in zeile))
-        self.assertEqual(zeilen[5], [2, 2, 3, 3, 3, 3])
-
-
-# ─── Kodierung ──────────────────────────────────────────────────────────────
-
-
-class TestKodierung(unittest.TestCase):
-    def test_wert_kodierung(self) -> None:
-        self.assertEqual(kg.kodiere_wert(0), b"\x00\x00\x00")
-        self.assertEqual(kg.kodiere_wert(1), b"\x01\x00\x00")
-        self.assertEqual(kg.kodiere_wert(255), b"\xff\x00\x00")
-        self.assertEqual(kg.kodiere_wert(256), b"\x00\x01\x00")
-        self.assertEqual(kg.kodiere_wert(4660), b"\x34\x12\x00")
-        self.assertEqual(kg.kodiere_wert(65535), b"\xff\xff\x00")
-        for wert in (0, 1, 60, 255, 256, 257, 4660, 65535):
-            r, g, b = kg.kodiere_wert(wert)
-            self.assertEqual(kg.dekodiere_pixel(r, g, b), wert)
-        for falsch in (-1, 65536):
-            with self.assertRaises(ValueError):
-                kg.kodiere_wert(falsch)
+                with self.assertRaises(ValueError) as fehler:
+                    karte_png.dekodieren(daten)
+                self.assertIn(erwartet, str(fehler.exception))
         with self.assertRaises(ValueError):
-            kg.dekodiere_pixel(1, 0, 1)
+            karte_png.kodieren(np.zeros((2, 2, 2), dtype=np.uint8))
 
-    def test_png_rundreise(self) -> None:
-        breite, hoehe = 7, 5
-        zeilen = [
-            bytes((x * 37 + y * 11 + k * 101) % 256 for x in range(breite) for k in range(3))
-            for y in range(hoehe)
-        ]
-        zeilen[3] = zeilen[2]  # gleiche Zeilen (Up-Filter mit Nullen)
-        png = kg.png_kodieren(breite, hoehe, zeilen)
-        self.assertEqual(kg.png_dekodieren(png), (breite, hoehe, zeilen))
-        self.assertEqual(_bloecke(png), [b"IHDR", b"IDAT", b"IEND"])  # kein tIME, keine Metadaten
-        self.assertEqual(struct.unpack(">IIBBBBB", png[16:29]), (breite, hoehe, 8, 2, 0, 0, 0))
+
+# ─── Ausgaben und Kommandozeile ─────────────────────────────────────────────
+
+
+class TestAusgaben(unittest.TestCase):
+    def test_erwartete_ausgabe_der_fixture(self) -> None:
+        _, _, ergebnis = _fixture()
+        self.assertEqual(kg.pruefe_ausgabe(TESTDATEN / "karte", ergebnis), [])
+        csv = (TESTDATEN / "karte" / "definition.csv").read_text(encoding="utf-8").splitlines()
+        self.assertEqual(csv[0], "kartenindex;ort;name;x;y;pixel;flaeche_km2")
+        self.assertEqual(len(csv), 9)
+        self.assertEqual(csv[3].split(";")[:3], ["2", "insel", "Inselstadt"])
+        provinzen = karte_png.dekodieren((TESTDATEN / "karte" / "provinzen.png").read_bytes())
+        self.assertEqual(provinzen.shape, (200, 204, 3))
+        fluesse = karte_png.dekodieren((TESTDATEN / "karte" / "fluesse.png").read_bytes())
+        self.assertEqual(fluesse.shape, (200, 204))
+        self.assertEqual((TESTDATEN / "karte" / "fluesse.png").read_bytes()[25], 0)  # Farbtyp Graustufen
+        # Blaukanal ≠ 0 ⇒ kein Ort.
+        self.assertTrue((provinzen[..., :2][provinzen[..., 2] != 0] == 0).all())
+
+    def test_api_ohne_dateien(self) -> None:
+        ergebnis = kg.erzeuge_karte(TESTDATEN)
+        csv = (TESTDATEN / "karte" / "definition.csv").read_bytes()
+        self.assertEqual(ergebnis.definition_csv(), csv)
+        f = ergebnis.flaeche_nach_ort["burg"]
+        self.assertEqual(f.kartenindex, 4)
+        self.assertAlmostEqual(f.laenge, ergebnis.karte.pixelmitte(f.x, f.y)[0])
+        teil = kg.erzeuge(kg.lade_grundlage(TESTDATEN, fluesse=False), ergebnis.orte[:2])
+        self.assertIsNone(teil.fluesse)
+        self.assertEqual([f.ort for f in teil.flaechen], ["hafen", "heide"])
         with self.assertRaises(ValueError):
-            kg.png_kodieren(breite, hoehe, zeilen[:-1])
+            kg.ausgaben(teil)
 
-    def test_png_decoder_alle_filter(self) -> None:
-        breite, hoehe = 6, 4
-        zeilen = [
-            bytes((x * 53 + y * 29 + k * 7) % 256 for x in range(breite) for k in range(3))
-            for y in range(hoehe)
-        ]
-        for filtertyp in range(5):
-            with self.subTest(filtertyp=filtertyp):
-                png = _png_mit_filter(breite, hoehe, zeilen, filtertyp)
-                self.assertEqual(kg.png_dekodieren(png), (breite, hoehe, zeilen))
-
-    def test_png_decoder_fehler(self) -> None:
-        gut = kg.png_kodieren(2, 2, [bytes(6), bytes(6)])
-        kaputt = bytearray(gut)
-        kaputt[20] ^= 1  # IHDR verändert → Prüfsumme falsch
-        for daten in (b"kein png", gut[:30], bytes(kaputt)):
-            with self.assertRaises(ValueError):
-                kg.png_dekodieren(daten)
-        rgba = kg.PNG_SIGNATUR + kg._chunk(b"IHDR", struct.pack(">IIBBBBB", 1, 1, 8, 6, 0, 0, 0))
-        with self.assertRaisesRegex(ValueError, "nicht unterstütztes PNG-Format"):
-            kg.png_dekodieren(rgba + kg._chunk(b"IDAT", zlib.compress(b"\x00" + bytes(4))))
-        blau = kg.png_kodieren(1, 1, [b"\x01\x00\x07"])
-        with self.assertRaisesRegex(ValueError, "Blaukanal"):
-            kg.werte_aus_png(blau)
-
-    def test_provinzen_png_der_fixture(self) -> None:
-        karte, orte = _fixture_laden()
-        ergebnis = kg.erzeuge(karte, orte)
-        breite, hoehe, werte = kg.werte_aus_png(kg.provinzen_png(ergebnis))
-        self.assertEqual((breite, hoehe), (120, 192))
-        erwartet = [[0 if w == kg.MEER else w for w in zeile] for zeile in ergebnis.zeilen]
-        self.assertEqual(werte, erwartet)
-        self.assertEqual({w for zeile in werte for w in zeile}, {0, 1, 2, 3, 4})
+    def test_nachbarn_und_ort_bei(self) -> None:
+        _, orte, ergebnis = _fixture()
+        nachbarn = ergebnis.nachbarn()
+        index = {o.kennung: k for k, o in enumerate(orte)}
+        self.assertIn((index["hafen"], index["heide"]), nachbarn)
+        self.assertIn((index["burg"], index["seedorf"]), nachbarn)
+        self.assertFalse(any(index["insel"] in paar for paar in nachbarn))  # Insel: nur Wasser ringsum
+        self.assertTrue(all(a < b and laenge > 0 for (a, b), laenge in nachbarn.items()))
+        # Gegenprobe der Grenzlänge mit einer einfachen Zählung.
+        w = ergebnis.werte
+        a, b = index["burg"] + 1, index["seedorf"] + 1
+        zaehlung = int(((w[:, :-1] == a) & (w[:, 1:] == b)).sum() + ((w[:, :-1] == b) & (w[:, 1:] == a)).sum())
+        zaehlung += int(((w[:-1] == a) & (w[1:] == b)).sum() + ((w[:-1] == b) & (w[1:] == a)).sum())
+        self.assertEqual(nachbarn[(a - 1, b - 1)], zaehlung)
+        self.assertEqual(ergebnis.ort_bei(10.30, 52.40), index["hafen"])
+        self.assertEqual(ergebnis.ort_bei(10.64, 52.53), index["insel"])
+        self.assertIsNone(ergebnis.ort_bei(10.3, 52.55))  # Meer
+        self.assertIsNone(ergebnis.ort_bei(12.0, 52.3))  # außerhalb
 
     def test_definition_csv(self) -> None:
-        _, orte = _fixture_laden()
+        flaechen = [kg.Flaeche(0, "berlin_coelln", "Berlin-Cölln", 2118, 1043, 1734, 212, 13.4, 52.5)]
         self.assertEqual(
-            kg.definition_csv(orte).decode("utf-8"),
-            "kartenindex;ort;name\n0;hafen;Hafenstadt\n1;heide;Heide-Süd\n2;burg;Burg (Altmark)\n3;aue;Aue\n",
+            kg.definition_csv(flaechen),
+            "kartenindex;ort;name;x;y;pixel;flaeche_km2\n0;berlin_coelln;Berlin-Cölln;2118;1043;1734;212\n".encode(),
         )
-
-
-# ─── Determinismus und Kommandozeile ────────────────────────────────────────
 
 
 class TestKommandozeile(unittest.TestCase):
     def setUp(self) -> None:
-        self._tmp = tempfile.TemporaryDirectory(prefix="kartengenerator-test-")
+        self._tmp = tempfile.TemporaryDirectory()
         self.tmp = Path(self._tmp.name)
 
     def tearDown(self) -> None:
         self._tmp.cleanup()
 
-    def test_determinismus(self) -> None:
-        karte, orte = _fixture_laden()
-        a = kg.erzeuge(karte, orte)
-        b = kg.erzeuge(karte, orte)
-        self.assertEqual(a.zeilen, b.zeilen)
-        self.assertEqual(kg.provinzen_png(a), kg.provinzen_png(b))
-
-    def test_zweimal_ausfuehren_byteidentisch(self) -> None:
-        for lauf in ("eins", "zwei"):
-            code, aus, err = _starte("--daten", str(TESTDATEN), "--ausgabe", str(self.tmp / lauf))
-            self.assertEqual(code, 0, err)
-            self.assertEqual(err, "")
-            self.assertIn("geschrieben:", aus)
-        for name in ("provinzen.png", "definition.csv"):
-            self.assertEqual((self.tmp / "eins" / name).read_bytes(), (self.tmp / "zwei" / name).read_bytes())
-        code, aus, _ = _starte("--daten", str(TESTDATEN), "--ausgabe", str(self.tmp / "eins"))
-        self.assertEqual(code, 0)
-        self.assertEqual(aus.count("unverändert:"), 2)
-
-    def test_erwartete_ausgabe_der_fixture(self) -> None:
-        # Die mitgelieferten Dateien entsprechen dem aktuellen Algorithmus (plattformunabhängig).
+    def test_pruefen_der_testdaten(self) -> None:
         code, aus, err = _starte("--daten", str(TESTDATEN), "--pruefen")
         self.assertEqual(code, 0, err)
         self.assertIn("Karte aktuell", aus)
-        neu = self.tmp / "neu"
-        self.assertEqual(_starte("--daten", str(TESTDATEN), "--ausgabe", str(neu))[0], 0)
-        self.assertEqual(
-            (neu / "definition.csv").read_bytes(), (TESTDATEN / "karte" / "definition.csv").read_bytes()
-        )
+        self.assertIn("8 Orte, Bild 204×200", aus)
 
-    def test_pruefen(self) -> None:
+    def test_schreiben_und_unveraendert(self) -> None:
         ausgabe = self.tmp / "aus"
-        argumente = ("--daten", str(TESTDATEN), "--ausgabe", str(ausgabe))
+        code, aus, err = _starte("--daten", str(TESTDATEN), "--ausgabe", str(ausgabe))
+        self.assertEqual(code, 0, err)
+        self.assertEqual(aus.count("geschrieben:"), 3)
+        for name in kg.AUSGABEN:
+            self.assertEqual((ausgabe / name).read_bytes(), (TESTDATEN / "karte" / name).read_bytes(), name)
+        code, aus, _ = _starte("--daten", str(TESTDATEN), "--ausgabe", str(ausgabe))
+        self.assertEqual(aus.count("unverändert:"), 3)
+        # Gleiche Pixel, andere Kompression: bleibt unberührt.
+        bild = karte_png.dekodieren((ausgabe / "provinzen.png").read_bytes())
+        (ausgabe / "provinzen.png").write_bytes(_png_mit_filter(bild, 4, stufe=1))
+        code, aus, _ = _starte("--daten", str(TESTDATEN), "--ausgabe", str(ausgabe), "--pruefen")
+        self.assertEqual(code, 0)
+        code, aus, _ = _starte("--daten", str(TESTDATEN), "--ausgabe", str(ausgabe))
+        self.assertIn(f"unverändert: {ausgabe / 'provinzen.png'}", aus)
 
-        code, _, err = _starte(*argumente, "--pruefen")  # Dateien fehlen
+    def test_pruefen_erkennt_abweichungen(self) -> None:
+        ausgabe = self.tmp / "aus"
+        shutil.copytree(TESTDATEN / "karte", ausgabe)
+        provinzen = karte_png.dekodieren((ausgabe / "provinzen.png").read_bytes()).copy()
+        provinzen[10, 10, 2] ^= 1
+        (ausgabe / "provinzen.png").write_bytes(karte_png.kodieren(provinzen))
+        fluesse = karte_png.dekodieren((ausgabe / "fluesse.png").read_bytes()).copy()
+        fluesse[:2, :3] = 7
+        (ausgabe / "fluesse.png").write_bytes(karte_png.kodieren(fluesse))
+        csv = (ausgabe / "definition.csv").read_bytes()
+        (ausgabe / "definition.csv").write_bytes(csv.replace(b"Aue", b"Au"))
+        code, _, err = _starte("--daten", str(TESTDATEN), "--ausgabe", str(ausgabe), "--pruefen")
         self.assertEqual(code, 1)
-        self.assertIn("definition.csv: Datei fehlt", err)
-        self.assertIn("provinzen.png: Datei fehlt", err)
-        self.assertFalse(ausgabe.exists())  # --pruefen schreibt nichts
-
-        self.assertEqual(_starte(*argumente)[0], 0)
-        self.assertEqual(_starte(*argumente, "--pruefen")[0], 0)
-
-        # Gleiche Pixel, anders komprimiert (andere zlib-Stufe und Filter): weiterhin aktuell.
-        png_pfad = ausgabe / "provinzen.png"
-        original = png_pfad.read_bytes()
-        breite, hoehe, zeilen = kg.png_dekodieren(original)
-        png_pfad.write_bytes(_png_mit_filter(breite, hoehe, zeilen, 4, stufe=1))
-        self.assertNotEqual(png_pfad.read_bytes(), original)
-        self.assertEqual(_starte(*argumente, "--pruefen")[0], 0)
-
-        # Ein Pixel geändert.
-        zeilen[100] = b"\x02\x00\x00" + zeilen[100][3:]
-        png_pfad.write_bytes(kg.png_kodieren(breite, hoehe, zeilen))
-        code, _, err = _starte(*argumente, "--pruefen")
-        self.assertEqual(code, 1)
-        self.assertIn("1 Pixel weichen ab", err)
-
-        # Falsche Größe und unlesbare Datei.
-        png_pfad.write_bytes(kg.png_kodieren(1, 1, [bytes(3)]))
-        self.assertIn("Bildgröße 1×1, erwartet 120×192", _starte(*argumente, "--pruefen")[2])
-        png_pfad.write_bytes(b"kaputt")
-        self.assertIn("nicht lesbar", _starte(*argumente, "--pruefen")[2])
-
-        # definition.csv veraltet.
-        png_pfad.write_bytes(original)
-        csv_pfad = ausgabe / "definition.csv"
-        csv_pfad.write_bytes(csv_pfad.read_bytes().replace(b"Aue", b"Auen"))
-        code, _, err = _starte(*argumente, "--pruefen")
-        self.assertEqual(code, 1)
+        self.assertIn("provinzen.png: 1 Pixel weichen ab", err)
+        self.assertIn("fluesse.png: 6 Pixel weichen ab", err)
         self.assertIn("definition.csv: Inhalt veraltet", err)
-        self.assertNotIn("provinzen.png", err)
+        self.assertIn("Karte nicht aktuell", err)
+        # CRLF-Zeilenenden sind kein Unterschied; fehlende und falsche Dateien schon.
+        shutil.copy(TESTDATEN / "karte" / "provinzen.png", ausgabe / "provinzen.png")
+        shutil.copy(TESTDATEN / "karte" / "fluesse.png", ausgabe / "fluesse.png")
+        (ausgabe / "definition.csv").write_bytes(csv.replace(b"\n", b"\r\n"))
+        code, _, err = _starte("--daten", str(TESTDATEN), "--ausgabe", str(ausgabe), "--pruefen")
+        self.assertEqual(code, 0, err)
+        (ausgabe / "fluesse.png").write_bytes(karte_png.kodieren(np.zeros((200, 204, 3), dtype=np.uint8)))
+        (ausgabe / "provinzen.png").write_bytes(b"kaputt")
+        (ausgabe / "definition.csv").unlink()
+        code, _, err = _starte("--daten", str(TESTDATEN), "--ausgabe", str(ausgabe), "--pruefen")
+        self.assertEqual(code, 1)
+        self.assertIn("provinzen.png: nicht lesbar (keine PNG-Datei)", err)
+        self.assertIn("fluesse.png: Bild 204×200 RGB, erwartet 204×200 Graustufen", err)
+        self.assertIn("definition.csv: Datei fehlt", err)
 
     def test_vorschau(self) -> None:
-        vorschau = self.tmp / "unter" / "vorschau.png"
+        ziel = self.tmp / "v" / "vorschau.png"
         code, aus, err = _starte(
-            "--daten", str(TESTDATEN), "--ausgabe", str(self.tmp / "aus"), "--vorschau", str(vorschau)
+            "--daten",
+            str(TESTDATEN),
+            "--ausgabe",
+            str(self.tmp / "aus"),
+            "--vorschau",
+            str(ziel),
+            "--vorschau-breite",
+            "102",
+            "--zeiten",
         )
         self.assertEqual(code, 0, err)
-        self.assertIn("Vorschau:", aus)
-        breite, hoehe, zeilen = kg.png_dekodieren(vorschau.read_bytes())
-        self.assertEqual((breite, hoehe), (120, 192))
-        farben = {zeile[k : k + 3] for zeile in zeilen for k in range(0, len(zeile), 3)}
-        self.assertIn(bytes(kg.FARBE_MEER), farben)
-        self.assertIn(bytes(kg.FARBE_STAATSGRENZE), farben)
-        self.assertIn(bytes((58, 95, 143)), farben)  # Nordland, Grundton
+        self.assertIn("Zeiten: Geometrie", aus)
+        bild = karte_png.dekodieren(ziel.read_bytes())
+        self.assertEqual(bild.shape, (100, 102, 3))
+        code, aus, err = _starte(
+            "--daten",
+            str(TESTDATEN),
+            "--pruefen",
+            "--vorschau",
+            str(ziel),
+            "--vorschau-ausschnitt",
+            "10.1,52.1,10.5,52.5",
+            "--vorschau-breite",
+            "400",
+            "--vorschau-namen",
+        )
+        self.assertEqual(code, 0, err)
+        bild = karte_png.dekodieren(ziel.read_bytes())
+        self.assertEqual(bild.shape[1], 400)
+        self.assertGreater(bild.shape[0], 300)
+        code, _, err = _starte(
+            "--daten", str(TESTDATEN), "--pruefen", "--vorschau", str(ziel), "--vorschau-ausschnitt", "20,40,21,41"
+        )
+        self.assertEqual(code, 2)
+        self.assertIn("Vorschau-Ausschnitt liegt außerhalb der Karte", err)
+
+    def test_vorschau_inhalt(self) -> None:
+        import karte_vorschau
+
+        _, _, ergebnis = _fixture()
+        staaten = {"AAA": kg.Staat("AAA", "A", (10, 20, 200)), "BBB": kg.Staat("BBB", "B", (200, 20, 10))}
+        bild = karte_vorschau.vorschau(ergebnis, staaten)
+        self.assertEqual(bild.shape, (200, 204, 3))
+
+        def haeufigste(kennung: str) -> tuple[int, ...]:
+            index = ergebnis.flaeche_nach_ort[kennung].kartenindex
+            farben, zahl = np.unique(bild[ergebnis.werte == index + 1], axis=0, return_counts=True)
+            return tuple(int(c) for c in farben[int(np.argmax(zahl))])
+
+        faktor = (0.92, 1.0, 1.08)[(3 * 2654435761 >> 7) % 3]  # Helligkeitsstufe des Kartenwerts 3
+        self.assertEqual(haeufigste("insel"), tuple(int(c * faktor) for c in (200, 20, 10)))  # jüngster Besitzer
+        self.assertEqual(haeufigste("moor"), karte_vorschau.FARBE_OHNE_DATEN)  # Ort ohne Daten, schraffiert
+        moor = ergebnis.werte == ergebnis.flaeche_nach_ort["moor"].kartenindex + 1
+        self.assertTrue((bild[moor] == karte_vorschau.FARBE_SCHRAFFUR).all(axis=1).any())
+        self.assertEqual(tuple(int(c) for c in bild[195, 200]), karte_vorschau.FARBE_AUSLAND)
 
     def test_datenfehler_exitcode_2(self) -> None:
-        daten = self.tmp / "daten"
-        shutil.copytree(TESTDATEN, daten)
-        pfad = daten / "karte" / "karte.chron"
-        pfad.write_text(
-            pfad.read_text(encoding="utf-8").replace("10.60 52.96", "10.30 52.96"), encoding="utf-8"
-        )
-        code, _, err = _starte("--daten", str(daten), "--ausgabe", str(self.tmp / "aus"))
+        daten = _kopie_testdaten(self.tmp)
+        (daten / "history/orte/a_nord.chron").write_text("ort kaputt {\n    lage = { 1 }\n}\n", encoding="utf-8")
+        code, _, err = _starte("--daten", str(daten), "--pruefen")
         self.assertEqual(code, 2)
-        self.assertIn("Fehler: karte/karte.chron:19: 'kueste': die Längengrade müssen streng steigen", err)
-        self.assertIn("Abbruch: 1 Fehler", err)
-        self.assertFalse((self.tmp / "aus").exists())
+        self.assertIn("Fehler: history/orte/a_nord.chron:1: Pflichtfeld 'name' fehlt in ort kaputt", err)
+        self.assertIn("Abbruch: 2 Fehler in den Daten.", err)
+        (daten / "karte/geometrie/seen.geojson").unlink()
+        code, _, err = _starte("--daten", str(daten))
+        self.assertEqual(code, 2)
+        self.assertIn("karte/geometrie/seen.geojson: Datei fehlt", err)
 
     def test_hilfe_und_aufruffehler_deutsch(self) -> None:
-        for argumente, code_erwartet, text in (
-            (["--hilfe"], 0, "Optionen:"),
-            (["--unbekannt"], 2, "Fehler: unbekannte Argumente: --unbekannt"),
-            (["--daten"], 2, "Fehler: Option --daten: erwartet einen Wert"),
-            (["--pruef"], 2, "Fehler: unbekannte Argumente: --pruef"),  # keine Abkürzungen
+        with contextlib.redirect_stdout(io.StringIO()) as aus, self.assertRaises(SystemExit) as ende:
+            kg.main(["--hilfe"])
+        self.assertEqual(ende.exception.code, 0)
+        self.assertIn("Aufruf: kartengenerator.py", aus.getvalue())
+        self.assertIn("--vorschau-breite N", aus.getvalue())
+        for argumente, erwartet in (
+            (["--gibtsnicht"], "Fehler: unbekannte Argumente: --gibtsnicht"),
+            (["--vorschau-breite", "x"], "ungültige Ganzzahl: 'x'"),
+            (["--vorschau-breite", "3"], "erwartet 16 bis 16384"),
+            (["--vorschau-ausschnitt", "1,2,3"], "erwartet LAENGE_MIN,BREITE_MIN,LAENGE_MAX,BREITE_MAX"),
         ):
-            with self.subTest(argumente=argumente):
-                aus, err = io.StringIO(), io.StringIO()
-                with contextlib.redirect_stdout(aus), contextlib.redirect_stderr(err):
-                    with self.assertRaises(SystemExit) as beendet:
-                        kg.main(argumente)
-                self.assertEqual(beendet.exception.code, code_erwartet)
-                self.assertIn(text, aus.getvalue() + err.getvalue())
-                self.assertIn("Aufruf: kartengenerator.py", aus.getvalue() + err.getvalue())
+            with contextlib.redirect_stderr(io.StringIO()) as err, self.assertRaises(SystemExit) as ende:
+                kg.main(argumente)
+            self.assertEqual(ende.exception.code, 2)
+            self.assertIn(erwartet, err.getvalue())
 
     def test_skript_direkt(self) -> None:
-        ausgabe = self.tmp / "aus"
-        lauf = subprocess.run(
-            [
-                sys.executable,
-                str(HIER / "kartengenerator.py"),
-                "--daten",
-                str(TESTDATEN),
-                "--ausgabe",
-                str(ausgabe),
-            ],
+        ergebnis = subprocess.run(
+            [sys.executable, str(SKRIPT), "--daten", str(TESTDATEN), "--pruefen"],
             capture_output=True,
             text=True,
-            encoding="utf-8",
+            cwd=self.tmp,
             check=False,
         )
-        self.assertEqual(lauf.returncode, 0, lauf.stderr)
-        self.assertIn("4 Orte, Bild 120×192", lauf.stdout)
-        # Pixel vergleichen (die Kompression kann je zlib-Version abweichen).
-        self.assertEqual(
-            kg.werte_aus_png((ausgabe / "provinzen.png").read_bytes()),
-            kg.werte_aus_png((TESTDATEN / "karte" / "provinzen.png").read_bytes()),
+        self.assertEqual(ergebnis.returncode, 0, ergebnis.stderr)
+
+
+def _vergleichs_python() -> str | None:
+    """Eine andere Python-Version mit numpy (für den Determinismus-Test) oder None."""
+    kandidaten = [os.environ.get("KARTENGENERATOR_PYTHON_VERGLEICH", "")]
+    kandidaten += [shutil.which(f"python3.{n}") or "" for n in range(10, 15)]
+    eigene = f"{sys.version_info.major}.{sys.version_info.minor}"
+    for pfad in kandidaten:
+        if not pfad:
+            continue
+        probe = subprocess.run(
+            [pfad, "-c", "import sys, numpy; print(f'{sys.version_info.major}.{sys.version_info.minor}')"],
+            capture_output=True,
+            text=True,
+            check=False,
         )
+        if probe.returncode == 0 and probe.stdout.strip() != eigene:
+            return pfad
+    return None
+
+
+class TestDeterminismus(unittest.TestCase):
+    def test_zweimal_gleich(self) -> None:
+        grundlage, orte, ergebnis = _fixture()
+        zweites = kg.erzeuge(grundlage, orte)
+        np.testing.assert_array_equal(zweites.werte, ergebnis.werte)
+        self.assertEqual(zweites.flaechen, ergebnis.flaechen)
+
+    def test_andere_python_version(self) -> None:
+        python = _vergleichs_python()
+        if python is None:
+            self.skipTest("keine zweite Python-Version mit numpy gefunden (KARTENGENERATOR_PYTHON_VERGLEICH)")
+        with tempfile.TemporaryDirectory() as tmp:
+            # Zusätzliche Orte mit Gleichständen und Lagen außerhalb, damit mehr Pfade laufen.
+            daten = _kopie_testdaten(Path(tmp))
+            (daten / "history/orte/c_extra.chron").write_text(
+                "".join(
+                    f'ort x{k} {{\n    name = "X{k}"\n    lage = {{ {10.05 + 0.1 * (k % 9):.2f} '
+                    f"{52.02 + 0.07 * (k // 9):.2f} }}\n}}\n"
+                    for k in range(40)
+                ),
+                encoding="utf-8",
+            )
+            for ordner, programm in (("a", sys.executable), ("b", python)):
+                lauf = subprocess.run(
+                    [programm, str(SKRIPT), "--daten", str(daten), "--ausgabe", str(Path(tmp) / ordner)],
+                    capture_output=True,
+                    text=True,
+                    check=False,
+                )
+                self.assertEqual(lauf.returncode, 0, lauf.stderr)
+            for name in kg.AUSGABEN:
+                a = (Path(tmp) / "a" / name).read_bytes()
+                b = (Path(tmp) / "b" / name).read_bytes()
+                if name.endswith(".png"):
+                    np.testing.assert_array_equal(karte_png.dekodieren(a), karte_png.dekodieren(b))
+                else:
+                    self.assertEqual(a, b)
 
 
 if __name__ == "__main__":

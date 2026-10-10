@@ -1,0 +1,11 @@
+# Testkreise (vom Kartengenerator nicht gelesen; die Kreise kommen aus dem Feld kreis der Orte).
+
+kreis kr_nord {
+    name   = "Nord"
+    quelle = "Testdaten"
+}
+
+kreis kr_sued {
+    name   = "Süd"
+    quelle = "Testdaten"
+}

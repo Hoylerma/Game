@@ -1,0 +1,25 @@
+{
+  "type": "FeatureCollection",
+  "name": "Binnengewässer (Testdaten)",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {"name": "Testsee mit Seeinsel"},
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [[10.42, 52.24], [10.56, 52.24], [10.56, 52.31], [10.42, 52.31], [10.42, 52.24]],
+          [[10.47, 52.265], [10.47, 52.28], [10.5, 52.28], [10.5, 52.265], [10.47, 52.265]]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {"name": "Grenzsee im Ausland"},
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[10.88, 52.15], [10.95, 52.15], [10.95, 52.19], [10.88, 52.19], [10.88, 52.15]]]
+      }
+    }
+  ]
+}

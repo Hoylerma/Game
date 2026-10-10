@@ -1,16 +1,59 @@
-# Testorte im Norden (Dateiname sortiert vor b_sued.chron → Kartenindex 0 und 1).
+# Testorte im Norden (Dateiname sortiert vor b_sued.chron → Kartenindex 0 bis 3).
 
 ort hafen {
-    name         = "Hafenstadt"
-    besitzer     = AAA
-    lage         = { 10.30 52.80 }
-    flaeche      = 150
-    bevoelkerung = 5000      # vom Kartengenerator nicht benötigt
+    name     = "Hafenstadt"
+    gelaende = kueste
+    lage     = { 10.30 52.40 }
+    flaeche  = 150          # vom Kartengenerator nicht benötigt
+    stadt    = ja
+    kreis    = kr_nord
+    quelle   = "Testdaten"
+
+    1648.10.24 = {
+        besitzer     = AAA
+        bevoelkerung = 5000
+        konfession   = { lutherisch = 100 }
+        verwuestung  = 0.1
+    }
 }
 
 ort heide {
     name     = "Heide-Süd"
-    besitzer = AAA
-    lage     = { 10.75 52.70 }
+    gelaende = heide
+    lage     = { 10.65 52.36 }
     flaeche  = 250
+    stadt    = nein
+    kreis    = kr_nord
+    quelle   = "Testdaten"
+    besitzer     = AAA
+    bevoelkerung = 800
+    konfession   = { lutherisch = 100 }
+    verwuestung  = 0.2
+}
+
+ort insel {
+    name     = "Inselstadt"
+    gelaende = kueste
+    lage     = { 10.64 52.53 }
+    flaeche  = 60
+    stadt    = ja
+    kreis    = kr_nord
+    quelle   = "Testdaten"
+
+    1648.10.24 = {
+        besitzer     = AAA
+        bevoelkerung = 1200
+        konfession   = { lutherisch = 100 }
+        verwuestung  = 0.0
+    }
+    1701.01.18 = { besitzer = BBB }   # Vorschau zeigt den jüngsten Besitzer (BBB)
+}
+
+ort moor {
+    name     = "Moordorf"       # Ort ohne Daten, ohne Kreis
+    gelaende = moor
+    lage     = { 10.12 52.30 }
+    flaeche  = 200
+    stadt    = nein
+    quelle   = "Testdaten"
 }

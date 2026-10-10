@@ -1,22 +1,19 @@
-# Kleine Testkarte für tools/kartengenerator/test_kartengenerator.py.
+# Kleine Testkarte für tools/kartengenerator/test_kartengenerator.py (Fassung M3).
 #
-# 1° × 1° bei 52,5 °N, 120 × 192 Pixel (etwa 0,56 km × 0,58 km je Pixel).
-# Die Küste endet bei 10,9 °O; östlich davon ist alles Land.
-# provinzen.png und definition.csv in diesem Ordner sind die erwarteten Ausgaben
-# (Neu erzeugen: python3 tools/kartengenerator/kartengenerator.py --daten tools/kartengenerator/testdaten).
+# 1,0° × 0,6° bei 52,3 °N, 204 × 200 Pixel (etwa 0,33 km × 0,33 km je Pixel).
+# Seitenverhältnis: 1,0 × cos(52,3°) / 0,6 = 1,0192; 204 / 200 = 1,02 (Abweichung 0,08 %).
+# Geometrie in geometrie/: Festland mit Haff (Loch), Insel mit Inselchen, See mit Seeinsel,
+# ein See im Ausland, Ausland im Osten, drei Flüsse.
+# provinzen.png, fluesse.png und definition.csv in diesem Ordner sind die erwarteten Ausgaben
+# (neu erzeugen: python3 tools/kartengenerator/kartengenerator.py --daten tools/kartengenerator/testdaten).
 
 karte {
-    bild_breite   = 120
-    bild_hoehe    = 192
+    bild_breite   = 204
+    bild_hoehe    = 200
     laenge_min    = 10.0
     laenge_max    = 11.0
     breite_min    = 52.0
-    breite_max    = 53.0
-    max_radius_km = 25
-    kueste = {
-        10.00 52.92
-        10.40 52.90
-        10.60 52.96
-        10.90 52.86
-    }
+    breite_max    = 52.6
+    bezugsbreite  = 52.3
+    max_radius_km = 16
 }

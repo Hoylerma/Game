@@ -1,15 +1,69 @@
-# Testorte im Süden (Kartenindex 2 und 3).
+# Testorte im Süden (Kartenindex 4 bis 7).
 
 ort burg {
     name     = "Burg (Altmark)"
-    besitzer = BBB
-    lage     = { 10.40 52.35 }
+    gelaende = flachland
+    lage     = { 10.22 52.08 }
     flaeche  = 200
+    stadt    = ja
+    kreis    = kr_sued
+    quelle   = "Testdaten"
+
+    1648.10.24 = {
+        besitzer     = BBB
+        bevoelkerung = 3000
+        konfession   = { lutherisch = 100 }
+        verwuestung  = 0.3
+    }
 }
 
 ort aue {
     name     = "Aue"
-    besitzer = BBB
-    lage     = { 10.80 52.25 }
+    gelaende = flussaue
+    lage     = { 10.62 52.10 }
     flaeche  = 200
+    stadt    = nein
+    kreis    = kr_sued
+    quelle   = "Testdaten"
+
+    1648.10.24 = {
+        besitzer     = BBB
+        bevoelkerung = 900
+        konfession   = { katholisch = 100 }
+        verwuestung  = 0.0
+    }
+}
+
+ort seedorf {
+    name     = "Seedorf"
+    gelaende = flachland
+    lage     = { 10.45 52.20 }
+    flaeche  = 180
+    stadt    = nein
+    kreis    = kr_sued
+    quelle   = "Testdaten"
+
+    1648.10.24 = {
+        besitzer     = BBB
+        bevoelkerung = 700
+        konfession   = { lutherisch = 100 }
+        verwuestung  = 0.1
+    }
+}
+
+ort mark {
+    name     = "Grenzmark"
+    gelaende = flachland
+    lage     = { 10.74 52.24 }
+    flaeche  = 150
+    stadt    = nein
+    kreis    = kr_sued
+    quelle   = "Testdaten"
+
+    1648.10.24 = {
+        besitzer     = AAA
+        bevoelkerung = 600
+        konfession   = { lutherisch = 100 }
+        verwuestung  = 0.0
+    }
 }

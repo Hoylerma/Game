@@ -1,0 +1,14 @@
+{
+  "type": "FeatureCollection",
+  "name": "Kernraum (Testdaten)",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {"name": "Kernraum", "beschreibung": "alles westlich von etwa 10,8 °O"},
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[9.9, 51.9], [10.82, 51.9], [10.78, 52.35], [10.86, 52.7], [9.9, 52.7], [9.9, 51.9]]]
+      }
+    }
+  ]
+}

@@ -1,5 +1,9 @@
-kartenindex;ort;name
-0;hafen;Hafenstadt
-1;heide;Heide-Süd
-2;burg;Burg (Altmark)
-3;aue;Aue
+kartenindex;ort;name;x;y;pixel;flaeche_km2
+0;hafen;Hafenstadt;71;70;3064;341
+1;heide;Heide-Süd;135;77;3034;338
+2;insel;Inselstadt;126;22;869;96
+3;moor;Moordorf;24;100;3614;403
+4;burg;Burg (Altmark);30;173;3902;437
+5;aue;Aue;129;171;3883;435
+6;seedorf;Seedorf;83;141;3148;352
+7;mark;Grenzmark;141;119;1869;209

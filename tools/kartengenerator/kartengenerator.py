@@ -1,19 +1,24 @@
 #!/usr/bin/env python3
-"""Kartengenerator für EINIGKEIT.
+"""Kartengenerator für EINIGKEIT (Fassung M3).
 
-Erzeugt aus data/karte/karte.chron und den Orten in data/history/orte/*.chron
-das Ort-ID-Bild provinzen.png und die Zuordnungstabelle definition.csv
-(Spezifikation: docs/technik/chronik-skript.md, Abschnitt 6).
+Erzeugt aus data/karte/karte.chron, der Geometrie in data/karte/geometrie/*.geojson und den
+Orten in data/history/orte/*.chron die Dateien provinzen.png (Ort-ID-Bild mit Flächenart),
+fluesse.png (Flussebene) und definition.csv (Kartenindex, Beschriftungspunkt, Fläche).
+Spezifikation: docs/technik/chronik-skript.md, Abschnitt 6.
 
 Aufruf (siehe README.md im selben Ordner):
 
-    python3 tools/kartengenerator/kartengenerator.py [--daten DIR] [--ausgabe DIR]
-                                                     [--vorschau DATEI] [--pruefen]
+    python3 tools/kartengenerator/kartengenerator.py [--daten DIR] [--ausgabe DIR] [--pruefen]
+                                                     [--vorschau DATEI [--vorschau-breite N] …]
 
-Nur Python-Standardbibliothek (Python 3.10+). Die Ausgabe ist deterministisch:
-Die Rechnung verwendet nur Grundrechenarten auf IEEE-754-Gleitkommazahlen (keine
-Bibliotheksfunktionen wie math.cos, deren letzte Stelle je Plattform abweichen
-kann), festes Rauschen ohne Zufallsquelle und keine Zeitstempel.
+Als Bibliothek (ohne Dateien zu schreiben):
+
+    import kartengenerator as kg
+    ergebnis = kg.erzeuge_karte(Path("data"))            # lädt alles, rechnet, schreibt nichts
+    grundlage = kg.lade_grundlage(Path("data"))          # Geometrie einmal rastern …
+    ergebnis = kg.erzeuge(grundlage, orte)               # … und mit eigenen Orten rechnen
+
+Abhängigkeiten: Python ab 3.10 und numpy. Die Ausgabe ist deterministisch (siehe karte_raster.py).
 
 Exitcodes: 0 = Erfolg bzw. Dateien aktuell, 1 = --pruefen: Dateien nicht aktuell,
 2 = Fehler in Daten oder Aufruf.
@@ -22,71 +27,58 @@ Exitcodes: 0 = Erfolg bzw. Dateien aktuell, 1 = --pruefen: Dateien nicht aktuell
 from __future__ import annotations
 
 import argparse
-import bisect
-import math
-import struct
+import json
 import sys
 import time
-import zlib
-from collections import Counter
 from collections.abc import Sequence
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import NoReturn
+from typing import Any, NoReturn
 
 try:
-    import chron
-except ImportError:  # Aufruf als Modul von außerhalb des Werkzeugordners
-    sys.path.insert(0, str(Path(__file__).resolve().parent))
-    import chron
+    import numpy as np
+except ImportError:  # pragma: no cover - nur ohne numpy
+    print(
+        "Fehler: Der Kartengenerator braucht numpy (python3 -m pip install numpy).",
+        file=sys.stderr,
+    )
+    raise SystemExit(2) from None
+
+_HIER = Path(__file__).resolve().parent
+if str(_HIER) not in sys.path:  # Aufruf als Modul von außerhalb des Werkzeugordners
+    sys.path.insert(0, str(_HIER))
+
+import chron  # noqa: E402
+import karte_png  # noqa: E402
+import karte_raster as kr  # noqa: E402
+from karte_raster import AUSLAND, BINNENGEWAESSER, KERNLAND, MEER, Karte  # noqa: E402, F401
 
 # ─── Konstanten ─────────────────────────────────────────────────────────────
 
 #: Wurzel des Repositorys (tools/kartengenerator/ → zwei Ebenen höher).
-REPO = Path(__file__).resolve().parents[2]
+REPO = _HIER.parents[1]
 
-PI = 3.141592653589793
-#: Kugelerde mit mittlerem Radius 6371 km: Kilometer je Grad Breite (und je Grad Länge am Äquator).
-KM_PRO_GRAD = 6371.0 * PI / 180.0
-
-#: Startwert des Rauschens. Eine Änderung verschiebt alle Grenzen.
-RAUSCHEN_SEED = 1648
-#: Oktaven des Domain Warping: (Wellenlänge in km, Amplitude in km). Die Summe der
-#: Amplituden ist die größte mögliche Verschiebung je Achse.
-RAUSCHEN_OKTAVEN: tuple[tuple[float, float], ...] = (
-    (48.0, 6.0),
-    (24.0, 3.5),
-    (12.0, 2.0),
-    (6.0, 1.1),
-    (3.0, 0.6),
-)
-#: Gewichtung nach Fläche: 0 = reine Entfernung, 1 = Entfernung / sqrt(flaeche / mittlere Fläche).
-#: Werte dazwischen mischen linear in 1 / Gewicht². Abgeschaltet: Die Zellgröße hängt fast nur
-#: vom Abstand der Orte ab (Testregion: Korrelation Pixel–Fläche 0,46 ohne, 0,58 mit voller
-#: Gewichtung), die Grenzen verschieben sich nur um wenige Kilometer.
-# Der Karten-Shader (game/shaders/map.gdshader) hält 128 Polygonpunkte; die Godot-Seite
-# ergänzt zwei Eckpunkte am oberen Bildrand.
-MAX_KUESTENPUNKTE = 126
-FLAECHEN_GEWICHT = 0.0
-
-#: Kantenlänge der Kacheln für die Kandidatensuche (Pixel).
-KACHEL = 32
-#: Höchstzahl der Runden beim Bereinigen abgetrennter Teilflächen.
-BEREINIGUNG_RUNDEN = 10
-#: Warnschwelle: weniger Pixel als dieser Anteil des Medians aller Orte.
-WENIGE_PIXEL_ANTEIL = 0.1
-
-#: Höchste Bildgröße je Achse (Schutz vor Tippfehlern).
-MAX_BILDKANTE = 16384
+#: Höchste Bildgröße je Achse (Texturgrenze, Abschnitt 6.1).
+MAX_BILDKANTE = 4096
+#: Höchste erlaubte Abweichung des Seitenverhältnisses (Abschnitt 6.1).
+MAX_SEITENABWEICHUNG = 0.01
 #: Höchstzahl der Orte (R + G·256 = Kartenindex + 1 ≤ 65535).
 MAX_ORTE = 65535
+#: Warnschwelle: weniger Pixel als dieser Anteil des Medians aller Orte.
+WENIGE_PIXEL_ANTEIL = 0.1
+#: So viele Teilflächen „Kernraum-Land ohne Ort“ werden einzeln gemeldet.
+OHNE_ORT_MELDUNGEN = 10
 
-MEER = -1  # interner Wert für Meerpixel (in der Ausgabe 0)
-MEER_SCHLUESSEL = -1  # Bereinigung: Nachbarschlüssel für Meer
-LEER_SCHLUESSEL = -2  # Bereinigung: Nachbarschlüssel für leeres Land
+CSV_KOPF = "kartenindex;ort;name;x;y;pixel;flaeche_km2"
+GEOMETRIE_DATEIEN = ("land", "seen", "fluesse", "kernraum")
+#: Felder, die einen Ort zum „Ort mit Daten“ machen (Abschnitt 3.6).
+SIMULATIONSFELDER = ("besitzer", "bevoelkerung", "konfession", "verwuestung")
 
-CSV_KOPF = "kartenindex;ort;name"
-PNG_SIGNATUR = b"\x89PNG\r\n\x1a\n"
+FLAECHENART_NAME = {
+    MEER: "im Meer",
+    BINNENGEWAESSER: "in einem Binnengewässer",
+    AUSLAND: "im Ausland (außerhalb des Kernraums)",
+}
 
 
 class DatenFehler(Exception):
@@ -113,27 +105,23 @@ class Meldungen:
 
 
 @dataclass(frozen=True)
-class Karte:
-    breite: int
-    hoehe: int
-    laenge_min: float
-    laenge_max: float
-    breite_min: float
-    breite_max: float
-    max_radius_km: float
-    kueste: tuple[tuple[float, float], ...] = ()
-
-
-@dataclass(frozen=True)
 class Ort:
+    """Ein Ort, wie ihn der Generator braucht. ``besitzer``, ``kreis`` und ``hat_daten`` nur für die Vorschau."""
+
     kennung: str
     name: str
     laenge: float
     breite: float
-    flaeche: float
     besitzer: str = ""
+    kreis: str = ""
+    hat_daten: bool = False
     datei: str = ""
     zeile: int = 0
+
+    @property
+    def wo(self) -> str:
+        """Fundstelle für Meldungen."""
+        return f"{self.datei}:{self.zeile}: ort {self.kennung}" if self.datei else f"ort {self.kennung}"
 
 
 @dataclass(frozen=True)
@@ -143,7 +131,17 @@ class Staat:
     farbe: tuple[int, int, int]
 
 
-# ─── Laden ──────────────────────────────────────────────────────────────────
+@dataclass
+class Geometrie:
+    """Inhalt von karte/geometrie/*.geojson; Ringe und Linien als (n, 2)-Felder (Länge, Breite)."""
+
+    land: list[list[np.ndarray]]
+    seen: list[list[np.ndarray]]
+    kernraum: list[list[np.ndarray]]
+    fluesse: list[tuple[int, np.ndarray]]
+
+
+# ─── Laden: Chronik-Dateien ─────────────────────────────────────────────────
 
 
 def _datei_name(pfad: Path, daten: Path) -> str:
@@ -179,13 +177,7 @@ def _einmal(node: chron.ScriptNode, key: str, datei: str, meldungen: Meldungen) 
 
 
 def _zahl(
-    node: chron.ScriptNode,
-    key: str,
-    datei: str,
-    was: str,
-    meldungen: Meldungen,
-    *,
-    ganzzahl: bool = False,
+    node: chron.ScriptNode, key: str, datei: str, was: str, meldungen: Meldungen, *, ganzzahl: bool = False
 ) -> float | None:
     kind = _einmal(node, key, datei, meldungen)
     if kind is None:
@@ -224,9 +216,18 @@ KARTE_FELDER = (
     "laenge_max",
     "breite_min",
     "breite_max",
+    "bezugsbreite",
     "max_radius_km",
-    "kueste",
 )
+
+
+def seitenverhaeltnis_abweichung(karte: Karte) -> float:
+    """Relative Abweichung von bild_breite/bild_hoehe zum Sollwert aus Abschnitt 6.1."""
+    soll = (
+        (karte.laenge_max - karte.laenge_min) * kr.cos_grad(karte.bezugsbreite) / (karte.breite_max - karte.breite_min)
+    )
+    ist = karte.breite / karte.hoehe
+    return abs(ist - soll) / soll
 
 
 def lade_karte(pfad: Path, name: str, meldungen: Meldungen) -> Karte | None:
@@ -234,6 +235,7 @@ def lade_karte(pfad: Path, name: str, meldungen: Meldungen) -> Karte | None:
     if not pfad.is_file():
         meldungen.fehler_bei(name, 0, "Datei fehlt")
         return None
+    anzahl_fehler = len(meldungen.fehler)
     root = _parse(pfad, name, meldungen)
     if root is None:
         return None
@@ -249,9 +251,7 @@ def lade_karte(pfad: Path, name: str, meldungen: Meldungen) -> Karte | None:
             ungueltig = True
             continue
         if karte_node is not None:
-            meldungen.fehler_bei(
-                name, node.line, f"zweiter Block 'karte' (der erste steht in Zeile {karte_node.line})"
-            )
+            meldungen.fehler_bei(name, node.line, f"zweiter Block 'karte' (der erste steht in Zeile {karte_node.line})")
             continue
         karte_node = node
     if karte_node is None:
@@ -259,95 +259,75 @@ def lade_karte(pfad: Path, name: str, meldungen: Meldungen) -> Karte | None:
             meldungen.fehler_bei(name, 0, "Block 'karte { … }' fehlt")
         return None
 
-    anzahl_fehler = len(meldungen.fehler)
     for kind in karte_node.children:
-        if kind.key not in KARTE_FELDER:
+        if kind.key == "kueste":
+            meldungen.warnung_bei(
+                name,
+                kind.line,
+                "'kueste' entfällt seit M3 und wird ignoriert (Land und Meer kommen aus geometrie/*.geojson)",
+            )
+        elif kind.key not in KARTE_FELDER:
             was = f"unbekanntes Feld '{kind.key}'" if kind.key else "unerwarteter Eintrag"
             meldungen.warnung_bei(name, kind.line, f"{was} in karte wird ignoriert")
-
-    def ganz(key: str) -> int | None:
-        wert = _zahl(karte_node, key, name, "karte", meldungen, ganzzahl=True)
-        if wert is not None and not 1 <= wert <= MAX_BILDKANTE:
-            zeile = karte_node.find(key).line  # type: ignore[union-attr]
-            meldungen.fehler_bei(name, zeile, f"'{key}' muss zwischen 1 und {MAX_BILDKANTE} liegen")
-            return None
-        return int(wert) if wert is not None else None
-
-    breite = ganz("bild_breite")
-    hoehe = ganz("bild_hoehe")
-    werte = {key: _zahl(karte_node, key, name, "karte", meldungen) for key in KARTE_FELDER[2:7]}
 
     def zeile_von(key: str) -> int:
         kind = karte_node.find(key)
         return kind.line if kind is not None else karte_node.line
 
+    def ganz(key: str) -> int | None:
+        wert = _zahl(karte_node, key, name, "karte", meldungen, ganzzahl=True)
+        if wert is not None and not 1 <= wert <= MAX_BILDKANTE:
+            meldungen.fehler_bei(
+                name, zeile_von(key), f"'{key}' muss zwischen 1 und {MAX_BILDKANTE} liegen (Texturgrenze)"
+            )
+            return None
+        return int(wert) if wert is not None else None
+
+    breite = ganz("bild_breite")
+    hoehe = ganz("bild_hoehe")
+    werte = {key: _zahl(karte_node, key, name, "karte", meldungen) for key in KARTE_FELDER[2:]}
     lmin, lmax = werte["laenge_min"], werte["laenge_max"]
     bmin, bmax = werte["breite_min"], werte["breite_max"]
-    radius = werte["max_radius_km"]
-    if lmin is not None and lmax is not None:
-        if not (-180.0 <= lmin < lmax <= 180.0):
-            meldungen.fehler_bei(
-                name, zeile_von("laenge_max"), "erwartet −180 ≤ laenge_min < laenge_max ≤ 180"
-            )
-    if bmin is not None and bmax is not None:
-        if not (-90.0 <= bmin < bmax <= 90.0):
-            meldungen.fehler_bei(name, zeile_von("breite_max"), "erwartet −90 ≤ breite_min < breite_max ≤ 90")
+    bezug, radius = werte["bezugsbreite"], werte["max_radius_km"]
+    if lmin is not None and lmax is not None and not (-180.0 <= lmin < lmax <= 180.0):
+        meldungen.fehler_bei(name, zeile_von("laenge_max"), "erwartet −180 ≤ laenge_min < laenge_max ≤ 180")
+    if bmin is not None and bmax is not None and not (-90.0 <= bmin < bmax <= 90.0):
+        meldungen.fehler_bei(name, zeile_von("breite_max"), "erwartet −90 ≤ breite_min < breite_max ≤ 90")
+    if bezug is not None and not -90.0 < bezug < 90.0:
+        meldungen.fehler_bei(name, zeile_von("bezugsbreite"), "'bezugsbreite' muss zwischen −90 und 90 liegen")
     if radius is not None and not radius > 0.0:
         meldungen.fehler_bei(name, zeile_von("max_radius_km"), "'max_radius_km' muss größer als 0 sein")
-
-    kueste: list[tuple[float, float]] = []
-    kueste_node = _einmal(karte_node, "kueste", name, meldungen)
-    if kueste_node is not None:
-        zahlen = _zahlenliste(kueste_node)
-        if zahlen is None or len(zahlen) < 4 or len(zahlen) % 2 != 0:
-            meldungen.fehler_bei(
-                name,
-                kueste_node.line,
-                "'kueste' erwartet einen Block mit mindestens zwei Punkten (Länge Breite …), "
-                "z. B. kueste = { 9.5 54.6  10.9 54.0 }",
-            )
-        else:
-            kueste = [(zahlen[k], zahlen[k + 1]) for k in range(0, len(zahlen), 2)]
-            punkte = [e for e in kueste_node.children]
-            if len(kueste) > MAX_KUESTENPUNKTE:
-                meldungen.fehler_bei(
-                    name,
-                    kueste_node.line,
-                    f"'kueste' hat {len(kueste)} Punkte, erlaubt sind höchstens {MAX_KUESTENPUNKTE} "
-                    "(Grenze des Karten-Shaders in game/shaders/map.gdshader)",
-                )
-            for k in range(1, len(kueste)):
-                if not kueste[k][0] > kueste[k - 1][0]:
-                    meldungen.fehler_bei(
-                        name,
-                        punkte[2 * k].line,
-                        f"'kueste': die Längengrade müssen streng steigen (Punkt {k + 1}: "
-                        f"{kueste[k][0]} nach {kueste[k - 1][0]})",
-                    )
-                    break
-            for k, (laenge, breite_k) in enumerate(kueste):
-                if not (-180.0 <= laenge <= 180.0 and -90.0 <= breite_k <= 90.0):
-                    meldungen.fehler_bei(
-                        name, punkte[2 * k].line, f"'kueste': Punkt {k + 1} außerhalb des gültigen Bereichs"
-                    )
-                    break
-
-    if len(meldungen.fehler) > anzahl_fehler or None in (breite, hoehe, lmin, lmax, bmin, bmax, radius):
+    if len(meldungen.fehler) > anzahl_fehler or None in (breite, hoehe, lmin, lmax, bmin, bmax, bezug, radius):
         return None
-    return Karte(
+    karte = Karte(
         breite=breite,  # type: ignore[arg-type]
         hoehe=hoehe,  # type: ignore[arg-type]
         laenge_min=lmin,  # type: ignore[arg-type]
         laenge_max=lmax,  # type: ignore[arg-type]
         breite_min=bmin,  # type: ignore[arg-type]
         breite_max=bmax,  # type: ignore[arg-type]
+        bezugsbreite=bezug,  # type: ignore[arg-type]
         max_radius_km=radius,  # type: ignore[arg-type]
-        kueste=tuple(kueste),
     )
+    abweichung = seitenverhaeltnis_abweichung(karte)
+    if abweichung > MAX_SEITENABWEICHUNG:
+        meldungen.fehler_bei(
+            name,
+            zeile_von("bild_hoehe"),
+            f"Seitenverhältnis bild_breite/bild_hoehe weicht um {100.0 * abweichung:.2f} % vom Sollwert "
+            f"(laenge_max − laenge_min) × cos(bezugsbreite) / (breite_max − breite_min) ab "
+            f"(erlaubt: {100.0 * MAX_SEITENABWEICHUNG:.0f} %)",
+        )
+        return None
+    return karte
 
 
-def _ist_ortskennung(text: str) -> bool:
+def _ist_kennung(text: str) -> bool:
     return bool(text) and all("a" <= c <= "z" or "0" <= c <= "9" or c == "_" for c in text)
+
+
+def _ist_datum(text: str) -> bool:
+    return text[:1].isdigit()
 
 
 def lade_orte(ordner: Path, daten: Path, meldungen: Meldungen) -> list[Ort]:
@@ -366,9 +346,7 @@ def lade_orte(ordner: Path, daten: Path, meldungen: Meldungen) -> list[Ort]:
         for node in root.children:
             if node.key != "ort":
                 was = f"unbekannter Eintrag '{node.key}'" if node.key else "unerwarteter Eintrag"
-                meldungen.warnung_bei(
-                    name, node.line, f"{was} wird ignoriert (erwartet: ort <kennung> {{ … }})"
-                )
+                meldungen.warnung_bei(name, node.line, f"{was} wird ignoriert (erwartet: ort <kennung> {{ … }})")
                 continue
             if not node.is_block or not node.value:
                 meldungen.fehler_bei(name, node.line, "ungültige Definition, erwartet: ort <kennung> { … }")
@@ -378,17 +356,13 @@ def lade_orte(ordner: Path, daten: Path, meldungen: Meldungen) -> list[Ort]:
                 continue
             if ort.kennung in gesehen:
                 meldungen.fehler_bei(
-                    name,
-                    node.line,
-                    f"doppelte Kennung '{ort.kennung}' (bereits definiert in {gesehen[ort.kennung]})",
+                    name, node.line, f"doppelte Kennung '{ort.kennung}' (bereits definiert in {gesehen[ort.kennung]})"
                 )
                 continue
             gesehen[ort.kennung] = f"{name}:{node.line}"
             orte.append(ort)
     if len(orte) > MAX_ORTE:
-        meldungen.fehler_bei(
-            _datei_name(ordner, daten), 0, f"zu viele Orte ({len(orte)}, höchstens {MAX_ORTE})"
-        )
+        meldungen.fehler_bei(_datei_name(ordner, daten), 0, f"zu viele Orte ({len(orte)}, höchstens {MAX_ORTE})")
     return orte
 
 
@@ -396,7 +370,7 @@ def _lese_ort(node: chron.ScriptNode, datei: str, meldungen: Meldungen) -> Ort |
     kennung = node.value
     was = f"ort {kennung}"
     anzahl = len(meldungen.fehler)
-    if not _ist_ortskennung(kennung):
+    if not _ist_kennung(kennung):
         meldungen.fehler_bei(
             datei, node.line, f"ungültige Ortskennung '{kennung}' (nur Kleinbuchstaben a–z, Ziffern und '_')"
         )
@@ -405,14 +379,12 @@ def _lese_ort(node: chron.ScriptNode, datei: str, meldungen: Meldungen) -> Ort |
     if name_node is None:
         meldungen.fehler_bei(datei, node.line, f"Pflichtfeld 'name' fehlt in {was}")
     elif name_node.is_block or name_node.op != "=":
-        meldungen.fehler_bei(
-            datei, name_node.line, "'name' erwartet einen Text, z. B. name = \"Berlin-Cölln\""
-        )
+        meldungen.fehler_bei(datei, name_node.line, "'name' erwartet einen Text, z. B. name = \"Berlin-Cölln\"")
     else:
         name = name_node.value
-        if ";" in name:
+        if ";" in name or "\n" in name or "\r" in name:
             meldungen.fehler_bei(
-                datei, name_node.line, "'name' darf kein ';' enthalten (Trennzeichen der definition.csv)"
+                datei, name_node.line, "'name' darf kein ';' und keinen Zeilenumbruch enthalten (definition.csv)"
             )
     lage = _einmal(node, "lage", datei, meldungen)
     laenge = breite = 0.0
@@ -424,8 +396,7 @@ def _lese_ort(node: chron.ScriptNode, datei: str, meldungen: Meldungen) -> Ort |
             meldungen.fehler_bei(
                 datei,
                 lage.line,
-                "'lage' erwartet genau zwei Zahlen: Längengrad Ost und Breitengrad Nord, "
-                "z. B. { 13.40 52.52 }",
+                "'lage' erwartet genau zwei Zahlen: Längengrad Ost und Breitengrad Nord, z. B. { 13.40 52.52 }",
             )
         elif not (-180.0 <= zahlen[0] <= 180.0 and -90.0 <= zahlen[1] <= 90.0):
             meldungen.fehler_bei(
@@ -433,18 +404,23 @@ def _lese_ort(node: chron.ScriptNode, datei: str, meldungen: Meldungen) -> Ort |
             )
         else:
             laenge, breite = zahlen
-    flaeche = _zahl(node, "flaeche", datei, was, meldungen)
-    flaeche_node = node.find("flaeche")
-    if flaeche is not None and flaeche_node is not None and not flaeche > 0.0:
-        meldungen.fehler_bei(datei, flaeche_node.line, "'flaeche' muss größer als 0 sein")
+    kreis = ""
+    kreis_node = _einmal(node, "kreis", datei, meldungen)
+    if kreis_node is not None:
+        if kreis_node.is_block or kreis_node.quoted or not _ist_kennung(kreis_node.value):
+            meldungen.fehler_bei(datei, kreis_node.line, "'kreis' erwartet eine Kreiskennung, z. B. kreis = kr_berlin")
+        else:
+            kreis = kreis_node.value
+    # Besitzer für die Vorschau: Grundangabe, dann datierte Blöcke (Abschnitt 3.8) in zeitlicher
+    # Reihenfolge – die Vorschau zeigt den jüngsten Stand. "JJJJ.MM.TT" sortiert als Text wie als Datum.
     besitzer = node.get_string("besitzer") or ""
-    # Datierte Blöcke (Spezifikation 3.8): Die Vorschau zeigt den jüngsten Besitzstand.
-    # "JJJJ.MM.TT" sortiert als Text wie als Datum.
-    for block in sorted((k for k in node.children if k.is_block and k.key[:1].isdigit()), key=lambda k: k.key):
+    hat_daten = any(node.find(f) is not None for f in SIMULATIONSFELDER)
+    for block in sorted((k for k in node.children if k.is_block and _ist_datum(k.key)), key=lambda k: k.key):
         besitzer = block.get_string("besitzer") or besitzer
-    if len(meldungen.fehler) > anzahl or flaeche is None:
+        hat_daten = hat_daten or any(block.find(f) is not None for f in SIMULATIONSFELDER)
+    if len(meldungen.fehler) > anzahl:
         return None
-    return Ort(kennung, name, laenge, breite, flaeche, besitzer, datei, node.line)
+    return Ort(kennung, name, laenge, breite, besitzer, kreis, hat_daten, datei, node.line)
 
 
 def lade_staaten(ordner: Path, daten: Path, meldungen: Meldungen) -> dict[str, Staat]:
@@ -471,911 +447,487 @@ def lade_staaten(ordner: Path, daten: Path, meldungen: Meldungen) -> dict[str, S
     return staaten
 
 
-# ─── Geometrie ──────────────────────────────────────────────────────────────
+# ─── Laden: GeoJSON ─────────────────────────────────────────────────────────
 
 
-def cos_grad(grad: float) -> float:
-    """Kosinus eines Winkels in Grad, nur mit Grundrechenarten (plattformunabhängig bitgleich)."""
-    x = grad * (PI / 180.0)
-    zwei_pi = 2.0 * PI
-    while x > PI:
-        x -= zwei_pi
-    while x < -PI:
-        x += zwei_pi
-    x2 = x * x
-    # Taylorreihe bis x^30 (Horner); für |x| ≤ π genauer als 1e-16.
-    summe = 1.0
-    for n in range(30, 0, -2):
-        summe = 1.0 - x2 / (n * (n - 1)) * summe
-    return summe
+def _punkte(koordinaten: Any, mindestens: int) -> np.ndarray:
+    """Positionsliste als (n, 2)-Feld (Länge, Breite); wirft ValueError bei ungültigen Werten."""
+    if not isinstance(koordinaten, list) or len(koordinaten) < mindestens:
+        raise ValueError(f"erwartet eine Liste mit mindestens {mindestens} Positionen")
+    werte = []
+    for position in koordinaten:
+        if (
+            not isinstance(position, list)
+            or len(position) < 2
+            or not all(isinstance(z, (int, float)) and not isinstance(z, bool) for z in position[:2])
+        ):
+            raise ValueError(f"ungültige Position {json.dumps(position)[:40]}")
+        laenge, breite = float(position[0]), float(position[1])
+        if not (-180.0 <= laenge <= 180.0 and -90.0 <= breite <= 90.0):
+            raise ValueError(f"Position außerhalb des gültigen Bereichs: {laenge} {breite}")
+        werte.append((laenge, breite))
+    return np.array(werte, dtype=np.float64)
 
 
-def kuesten_breite(kueste: Sequence[tuple[float, float]], laenge: float) -> float | None:
-    """Breite der Küstenlinie bei dieser Länge (lineare Interpolation) oder None außerhalb des Linienzugs."""
-    if len(kueste) < 2 or laenge < kueste[0][0] or laenge > kueste[-1][0]:
+def _lade_geojson(pfad: Path, name: str, meldungen: Meldungen) -> list[dict[str, Any]] | None:
+    if not pfad.is_file():
+        meldungen.fehler_bei(name, 0, "Datei fehlt (erzeugt von tools/geodaten/geodaten.py geometrie)")
         return None
-    k = bisect.bisect_right([p[0] for p in kueste], laenge) - 1
-    if k >= len(kueste) - 1:
-        return kueste[-1][1]
-    (l0, b0), (l1, b1) = kueste[k], kueste[k + 1]
-    return b0 + (b1 - b0) * ((laenge - l0) / (l1 - l0))
+    try:
+        daten = json.loads(pfad.read_bytes().decode("utf-8"))
+    except (UnicodeDecodeError, json.JSONDecodeError) as fehler:
+        meldungen.fehler_bei(name, getattr(fehler, "lineno", 0), f"kein gültiges GeoJSON ({fehler})")
+        return None
+    if not isinstance(daten, dict) or daten.get("type") != "FeatureCollection":
+        meldungen.fehler_bei(name, 0, "erwartet eine FeatureCollection")
+        return None
+    features = daten.get("features")
+    if not isinstance(features, list):
+        meldungen.fehler_bei(name, 0, "'features' fehlt oder ist keine Liste")
+        return None
+    return features
 
 
-def ist_land(kueste: Sequence[tuple[float, float]], laenge: float, breite: float) -> bool:
-    """Land: südlich der Küstenlinie oder außerhalb ihres Längenbereichs; nördlich davon Meer."""
-    grenze = kuesten_breite(kueste, laenge)
-    return grenze is None or breite <= grenze
+def lade_flaechen(pfad: Path, name: str, meldungen: Meldungen) -> list[list[np.ndarray]]:
+    """Polygone (Polygon/MultiPolygon) einer FeatureCollection; je Polygon die Ringe."""
+    features = _lade_geojson(pfad, name, meldungen)
+    polygone: list[list[np.ndarray]] = []
+    for nr, feature in enumerate(features or []):
+        geometrie = feature.get("geometry") if isinstance(feature, dict) else None
+        typ = geometrie.get("type") if isinstance(geometrie, dict) else None
+        try:
+            if typ == "Polygon":
+                teile = [geometrie["coordinates"]]
+            elif typ == "MultiPolygon":
+                teile = geometrie["coordinates"]
+            else:
+                raise ValueError(f"Geometrietyp {typ!r} nicht erlaubt (erwartet Polygon oder MultiPolygon)")
+            if not isinstance(teile, list):
+                raise ValueError("'coordinates' ist keine Liste")
+            for polygon in teile:
+                if not isinstance(polygon, list) or not polygon:
+                    raise ValueError("Polygon ohne Ringe")
+                polygone.append([_punkte(ring, 4) for ring in polygon])
+        except (ValueError, KeyError, TypeError) as fehler:
+            meldungen.fehler_bei(name, 0, f"Feature {nr + 1}: {fehler}")
+    return polygone
+
+
+def lade_linien(pfad: Path, name: str, meldungen: Meldungen) -> list[tuple[int, np.ndarray]]:
+    """Flüsse (LineString/MultiLineString) mit Eigenschaft rang 1…6."""
+    features = _lade_geojson(pfad, name, meldungen)
+    linien: list[tuple[int, np.ndarray]] = []
+    for nr, feature in enumerate(features or []):
+        geometrie = feature.get("geometry") if isinstance(feature, dict) else None
+        typ = geometrie.get("type") if isinstance(geometrie, dict) else None
+        eigenschaften = feature.get("properties") if isinstance(feature, dict) else None
+        rang = eigenschaften.get("rang") if isinstance(eigenschaften, dict) else None
+        if not (isinstance(rang, int) and not isinstance(rang, bool) and rang in kr.FLUSS_BREITE_PX):
+            meldungen.warnung_bei(name, 0, f"Feature {nr + 1}: 'rang' fehlt oder ist ungültig ({rang!r}), nehme 6")
+            rang = 6
+        try:
+            if typ == "LineString":
+                teile = [geometrie["coordinates"]]
+            elif typ == "MultiLineString":
+                teile = geometrie["coordinates"]
+            else:
+                raise ValueError(f"Geometrietyp {typ!r} nicht erlaubt (erwartet LineString oder MultiLineString)")
+            if not isinstance(teile, list):
+                raise ValueError("'coordinates' ist keine Liste")
+            for linie in teile:
+                linien.append((rang, _punkte(linie, 2)))
+        except (ValueError, KeyError, TypeError) as fehler:
+            meldungen.fehler_bei(name, 0, f"Feature {nr + 1}: {fehler}")
+    return linien
+
+
+def lade_geometrie(ordner: Path, daten: Path, meldungen: Meldungen) -> Geometrie:
+    def pfad(n: str) -> tuple[Path, str]:
+        p = ordner / f"{n}.geojson"
+        return p, _datei_name(p, daten)
+
+    return Geometrie(
+        land=lade_flaechen(*pfad("land"), meldungen),
+        seen=lade_flaechen(*pfad("seen"), meldungen),
+        kernraum=lade_flaechen(*pfad("kernraum"), meldungen),
+        fluesse=lade_linien(*pfad("fluesse"), meldungen),
+    )
+
+
+# ─── Grundlage und Ergebnis ─────────────────────────────────────────────────
 
 
 @dataclass
-class Raster:
-    """Pixelmittelpunkte, Maßstäbe und Landmaske eines Kartenrechtecks."""
+class Grundlage:
+    """Gerasterte Geometrie eines Kartenausschnitts; unabhängig von den Orten, mehrfach verwendbar."""
 
     karte: Karte
-    breite: int
-    hoehe: int
-    grad_x: float  # Grad Länge je Pixel
-    grad_y: float  # Grad Breite je Pixel
-    laenge_spalte: list[float]
-    breite_zeile: list[float]
-    kx_zeile: list[float]  # km je Grad Länge in jeder Zeile
-    ky: float  # km je Grad Breite
-    kx_ref: float  # km je Grad Länge in der Mitte (für das Rauschen)
-    erstes_land: list[int]  # je Spalte: erste Zeile, die Land ist (Zeilen darüber sind Meer)
+    raster: kr.Raster
+    fluesse: np.ndarray | None  # uint8 (H, W) oder None, wenn nicht berechnet
+    warnungen: list[str] = field(default_factory=list)
 
-    @staticmethod
-    def aus_karte(karte: Karte) -> Raster:
-        b, h = karte.breite, karte.hoehe
-        grad_x = (karte.laenge_max - karte.laenge_min) / b
-        grad_y = (karte.breite_max - karte.breite_min) / h
-        laenge_spalte = [karte.laenge_min + (x + 0.5) * grad_x for x in range(b)]
-        breite_zeile = [karte.breite_max - (y + 0.5) * grad_y for y in range(h)]
-        kx_zeile = [KM_PRO_GRAD * cos_grad(lat) for lat in breite_zeile]
-        kx_ref = KM_PRO_GRAD * cos_grad((karte.breite_min + karte.breite_max) / 2.0)
-        negiert = [-lat for lat in breite_zeile]  # steigend
-        erstes_land = []
-        for laenge in laenge_spalte:
-            grenze = kuesten_breite(karte.kueste, laenge)
-            erstes_land.append(0 if grenze is None else bisect.bisect_left(negiert, -grenze))
-        return Raster(
-            karte,
-            b,
-            h,
-            grad_x,
-            grad_y,
-            laenge_spalte,
-            breite_zeile,
-            kx_zeile,
-            KM_PRO_GRAD,
-            kx_ref,
-            erstes_land,
-        )
-
-    def pixel_von(self, laenge: float, breite: float) -> tuple[int, int] | None:
-        """Pixel, in dem ein Punkt liegt, oder None außerhalb des Bildes."""
-        fx = (laenge - self.karte.laenge_min) / self.grad_x
-        fy = (self.karte.breite_max - breite) / self.grad_y
-        if not (0.0 <= fx < self.breite and 0.0 <= fy < self.hoehe):
-            return None
-        return int(fx), int(fy)
+    @property
+    def art(self) -> np.ndarray:
+        """Flächenart je Pixel (KERNLAND, MEER, BINNENGEWAESSER, AUSLAND)."""
+        return self.raster.art
 
 
-# ─── Deterministisches Rauschen (Value Noise, Domain Warping) ───────────────
+@dataclass(frozen=True)
+class Flaeche:
+    """Eine Zeile der definition.csv (Abschnitt 6.5) plus Lage des Beschriftungspunkts."""
 
-_M32 = 0xFFFFFFFF
-
-
-def _hash32(i: int, j: int, saat: int) -> int:
-    h = (saat * 0x9E3779B1 + i * 0x85EBCA77 + j * 0xC2B2AE3D) & _M32
-    h ^= h >> 15
-    h = (h * 0x2C1B3C6D) & _M32
-    h ^= h >> 12
-    h = (h * 0x297A2D39) & _M32
-    h ^= h >> 15
-    return h
-
-
-def gitterwert(i: int, j: int, saat: int) -> float:
-    """Wert des Gitterpunkts (i, j) in [−1, 1), exakt darstellbar."""
-    return (_hash32(i, j, saat) >> 8) * (1.0 / 8388608.0) - 1.0
+    kartenindex: int
+    ort: str
+    name: str
+    x: int  # Beschriftungspunkt (Pixel), −1 ohne Fläche
+    y: int
+    pixel: int
+    flaeche_km2: int
+    laenge: float  # Mitte des Beschriftungspixels (Länge, Breite); bei −1 die Lage des Ortes
+    breite: float
 
 
-def _glaetten(t: float) -> float:
-    """Quintische Glättung 6t⁵ − 15t⁴ + 10t³."""
-    return t * t * t * (t * (t * 6.0 - 15.0) + 10.0)
+@dataclass(frozen=True)
+class Teilflaeche:
+    """Zusammenhängendes Kernraum-Land ohne Ort."""
 
-
-def _saat(feld: int, oktave: int) -> int:
-    return (RAUSCHEN_SEED << 8) | (feld << 4) | oktave
-
-
-def verschiebung_km(x_km: float, y_km: float) -> tuple[float, float]:
-    """Verschiebung (nach Osten, nach Süden) in km am Punkt (x_km, y_km) des Rauschgebiets.
-
-    Rechnet in derselben Reihenfolge wie die zeilenweise Auswertung in zuordnen(),
-    daher bitgleich an Pixelmittelpunkten.
-    """
-    ergebnis = []
-    for feld in (0, 1):
-        summe = 0.0
-        for oktave, (welle, amplitude) in enumerate(RAUSCHEN_OKTAVEN):
-            saat = _saat(feld, oktave)
-            u = x_km / welle
-            v = y_km / welle
-            i = int(u // 1.0)
-            j = int(v // 1.0)
-            tx = _glaetten(u - i)
-            ty = _glaetten(v - j)
-            a00 = gitterwert(i, j, saat)
-            a01 = gitterwert(i, j + 1, saat)
-            a10 = gitterwert(i + 1, j, saat)
-            a11 = gitterwert(i + 1, j + 1, saat)
-            c0 = a00 + (a01 - a00) * ty
-            c1 = a10 + (a11 - a10) * ty
-            summe = summe + amplitude * (c0 + (c1 - c0) * tx)
-        ergebnis.append(summe)
-    return ergebnis[0], ergebnis[1]
-
-
-class _ZeilenRauschen:
-    """Zeilenweise Auswertung des Warp-Rauschens für alle Pixelmittelpunkte."""
-
-    def __init__(self, raster: Raster) -> None:
-        karte = raster.karte
-        self.raster = raster
-        self.x_km = [(lon - karte.laenge_min) * raster.kx_ref for lon in raster.laenge_spalte]
-        self.oktaven = []
-        for oktave, (welle, amplitude) in enumerate(RAUSCHEN_OKTAVEN):
-            spalten_i = []
-            spalten_t = []
-            for x in self.x_km:
-                u = x / welle
-                i = int(u // 1.0)
-                spalten_i.append(i)
-                spalten_t.append(_glaetten(u - i))
-            i0 = min(spalten_i)
-            i1 = max(spalten_i) + 1
-            rel = [i - i0 for i in spalten_i]
-            tabellen = []
-            for feld in (0, 1):
-                saat = _saat(feld, oktave)
-                tabellen.append({"saat": saat, "zeilen": {}})
-            self.oktaven.append((welle, amplitude, i0, i1, rel, spalten_t, tabellen))
-
-    def _gitterzeile(self, tabelle: dict, j: int, i0: int, i1: int) -> list[float]:
-        zeilen = tabelle["zeilen"]
-        zeile = zeilen.get(j)
-        if zeile is None:
-            saat = tabelle["saat"]
-            zeile = [gitterwert(i, j, saat) for i in range(i0, i1 + 1)]
-            zeilen[j] = zeile
-            # Alte Gitterzeilen verwerfen (Zeilen werden aufsteigend abgefragt).
-            for alt in [k for k in zeilen if k < j - 1]:
-                del zeilen[alt]
-        return zeile
-
-    def zeile(self, y: int) -> tuple[list[float], list[float]]:
-        """Verschiebung in km (Ost, Süd) für alle Pixel der Zeile y."""
-        y_km = (self.raster.karte.breite_max - self.raster.breite_zeile[y]) * self.raster.ky
-        breite = self.raster.breite
-        summen: list[list[float]] = [[0.0] * breite, [0.0] * breite]
-        for welle, amplitude, i0, i1, rel, spalten_t, tabellen in self.oktaven:
-            v = y_km / welle
-            j = int(v // 1.0)
-            ty = _glaetten(v - j)
-            for feld in (0, 1):
-                g0 = self._gitterzeile(tabellen[feld], j, i0, i1)
-                g1 = self._gitterzeile(tabellen[feld], j + 1, i0, i1)
-                linie = [a + (b - a) * ty for a, b in zip(g0, g1)]
-                diff = [b - a for a, b in zip(linie, linie[1:])]
-                diff.append(0.0)
-                summen[feld] = [
-                    s + amplitude * (linie[i] + diff[i] * t) for s, i, t in zip(summen[feld], rel, spalten_t)
-                ]
-        return summen[0], summen[1]
-
-
-# ─── Zuordnung ──────────────────────────────────────────────────────────────
-
-
-@dataclass
-class Zentrum:
-    """Verschobene Lage eines Ortes (in Grad) und seine Gewichtung."""
-
+    pixel: int
+    flaeche_km2: float  # ungefähr (Pixelfläche der ersten Zeile)
+    x: int  # erstes Pixel in Zeilenreihenfolge
+    y: int
     laenge: float
     breite: float
-    inv_gewicht2: float  # 1 / Gewicht² (Faktor auf die quadrierte Entfernung)
-    wert: int  # Kartenindex + 1
-
-
-def zentren(raster: Raster, orte: Sequence[Ort]) -> list[Zentrum]:
-    karte = raster.karte
-    # math.fsum statt sum: sum rechnet seit Python 3.12 anders (kompensierte Summation).
-    mittel = math.fsum(o.flaeche for o in orte) / len(orte) if orte else 1.0
-    ergebnis = []
-    for index, ort in enumerate(orte):
-        x_km = (ort.laenge - karte.laenge_min) * raster.kx_ref
-        y_km = (karte.breite_max - ort.breite) * raster.ky
-        ost, sued = verschiebung_km(x_km, y_km)
-        inv = 1.0 + FLAECHEN_GEWICHT * (mittel / ort.flaeche - 1.0)
-        ergebnis.append(
-            Zentrum(ort.laenge + ost / raster.kx_ref, ort.breite - sued / raster.ky, inv, index + 1)
-        )
-    return ergebnis
-
-
-def _kandidaten(
-    raster: Raster,
-    zent: Sequence[Zentrum],
-    x0: int,
-    x1: int,
-    y0: int,
-    y1: int,
-    rand_lon: float,
-    rand_lat: float,
-) -> list[tuple[float, float, float, int]]:
-    """Orte, die in der Kachel [x0, x1) × [y0, y1) gewinnen können (konservative Schranken)."""
-    r2 = raster.karte.max_radius_km * raster.karte.max_radius_km
-    lon_lo = raster.laenge_spalte[x0] - rand_lon
-    lon_hi = raster.laenge_spalte[x1 - 1] + rand_lon
-    lat_hi = raster.breite_zeile[y0] + rand_lat
-    lat_lo = raster.breite_zeile[y1 - 1] - rand_lat
-    kx = raster.kx_zeile[y0:y1]
-    kx_min, kx_max = min(kx), max(kx)
-    ky = raster.ky
-    schranken = []
-    obere = float("inf")
-    for z in zent:
-        dlon_min = (
-            lon_lo - z.laenge if z.laenge < lon_lo else (z.laenge - lon_hi if z.laenge > lon_hi else 0.0)
-        )
-        dlat_min = (
-            lat_lo - z.breite if z.breite < lat_lo else (z.breite - lat_hi if z.breite > lat_hi else 0.0)
-        )
-        dlon_max = max(abs(z.laenge - lon_lo), abs(z.laenge - lon_hi))
-        dlat_max = max(abs(z.breite - lat_lo), abs(z.breite - lat_hi))
-        ax, ay = dlon_min * kx_min, dlat_min * ky
-        d2_min = ax * ax + ay * ay
-        if d2_min > r2 * (1.0 + 1e-9):
-            continue
-        bx, by = dlon_max * kx_max, dlat_max * ky
-        d2_max = bx * bx + by * by
-        unten = d2_min * z.inv_gewicht2
-        if d2_max < r2 * (1.0 - 1e-9):
-            obere = min(obere, d2_max * z.inv_gewicht2)
-        schranken.append((unten, z))
-    grenze = obere * (1.0 + 1e-9) + 1e-9
-    return [(z.laenge, z.breite, z.inv_gewicht2, z.wert) for unten, z in schranken if unten <= grenze]
-
-
-def zuordnen(raster: Raster, orte: Sequence[Ort], *, beschleunigt: bool = True) -> list[list[int]]:
-    """Ordnet jedem Pixel einen Ort zu: Wert = Kartenindex + 1, 0 = kein Ort, MEER = Meer.
-
-    beschleunigt=False prüft jeden Ort für jedes Pixel (Referenz für Tests).
-    """
-    zent = zentren(raster, orte)
-    r2 = raster.karte.max_radius_km * raster.karte.max_radius_km
-    rauschen = _ZeilenRauschen(raster)
-    amplitude = sum(a for _, a in RAUSCHEN_OKTAVEN)
-    rand_lon = amplitude / raster.kx_ref * (1.0 + 1e-6) + 1e-9
-    rand_lat = amplitude / raster.ky * (1.0 + 1e-6) + 1e-9
-    b, h = raster.breite, raster.hoehe
-    kacheln_x = (b + KACHEL - 1) // KACHEL
-    alle = [(z.laenge, z.breite, z.inv_gewicht2, z.wert) for z in zent]
-    erstes_land = raster.erstes_land
-    laenge_spalte = raster.laenge_spalte
-    ky = raster.ky
-    kx_ref = raster.kx_ref
-    zeilen: list[list[int]] = []
-    kandidaten: list[list[tuple[float, float, float, int]]] = []
-    for y in range(h):
-        if y % KACHEL == 0:
-            y1 = min(y + KACHEL, h)
-            if beschleunigt:
-                kandidaten = [
-                    _kandidaten(raster, zent, k * KACHEL, min((k + 1) * KACHEL, b), y, y1, rand_lon, rand_lat)
-                    for k in range(kacheln_x)
-                ]
-            else:
-                kandidaten = [alle] * kacheln_x
-        ost, sued = rauschen.zeile(y)
-        lat_y = raster.breite_zeile[y]
-        kx = raster.kx_zeile[y]
-        lonw = [lon + d / kx_ref for lon, d in zip(laenge_spalte, ost)]
-        latw = [lat_y - d / ky for d in sued]
-        zeile = [0] * b
-        for k in range(kacheln_x):
-            x0 = k * KACHEL
-            x1 = min(x0 + KACHEL, b)
-            kand = kandidaten[k]
-            for x in range(x0, x1):
-                if y < erstes_land[x]:
-                    zeile[x] = MEER
-                    continue
-                if not kand:
-                    continue
-                lw = lonw[x]
-                aw = latw[x]
-                bester = 0
-                beste_d = float("inf")
-                for zl, zb, inv, wert in kand:
-                    dx = (lw - zl) * kx
-                    dy = (aw - zb) * ky
-                    d2 = dx * dx + dy * dy
-                    if d2 <= r2:
-                        d2 *= inv
-                        if d2 < beste_d:
-                            beste_d = d2
-                            bester = wert
-                zeile[x] = bester
-        zeilen.append(zeile)
-    return zeilen
-
-
-# ─── Bereinigung abgetrennter Teilflächen ───────────────────────────────────
-
-
-def _laeufe(zeile: list[int]) -> list[tuple[int, int, int]]:
-    """Läufe gleicher Werte einer Zeile als (x0, x1, wert)."""
-    grenzen = [x for x, (a, b) in enumerate(zip(zeile, zeile[1:]), 1) if a != b]
-    starts = [0] + grenzen
-    enden = grenzen + [len(zeile)]
-    return [(x0, x1, zeile[x0]) for x0, x1 in zip(starts, enden)]
-
-
-class _Teilflaechen:
-    """Zusammenhangskomponenten (4er-Nachbarschaft) einer Wertekarte über Läufe je Zeile."""
-
-    def __init__(self, zeilen: list[list[int]]) -> None:
-        self.laeufe: list[tuple[int, int, int, int]] = []  # (y, x0, x1, wert)
-        self.zeilen_laeufe: list[list[int]] = []
-        for y, zeile in enumerate(zeilen):
-            ids = []
-            for x0, x1, wert in _laeufe(zeile):
-                ids.append(len(self.laeufe))
-                self.laeufe.append((y, x0, x1, wert))
-            self.zeilen_laeufe.append(ids)
-        self.eltern = list(range(len(self.laeufe)))
-        # Senkrechte Nachbarschaften: Paare überlappender Läufe benachbarter Zeilen.
-        self.paare: list[tuple[int, int, int]] = []  # (oben, unten, Überlappung)
-        laeufe = self.laeufe
-        for y in range(1, len(zeilen)):
-            oben, unten = self.zeilen_laeufe[y - 1], self.zeilen_laeufe[y]
-            a = c = 0
-            while a < len(oben) and c < len(unten):
-                _, ax0, ax1, aw = laeufe[oben[a]]
-                _, cx0, cx1, cw = laeufe[unten[c]]
-                ueberlappung = min(ax1, cx1) - max(ax0, cx0)
-                if ueberlappung > 0:
-                    self.paare.append((oben[a], unten[c], ueberlappung))
-                    if aw == cw and aw > 0:  # nur Orte verbinden, nicht Meer oder leeres Land
-                        ra, rc = self.wurzel(oben[a]), self.wurzel(unten[c])
-                        if ra != rc:
-                            self.eltern[max(ra, rc)] = min(ra, rc)
-                if ax1 <= cx1:
-                    a += 1
-                else:
-                    c += 1
-        # Die Wurzel ist stets der kleinste Lauf der Komponente (erstes Auftreten).
-        self.groesse: Counter[int] = Counter()
-        for lid, (_, x0, x1, wert) in enumerate(laeufe):
-            if wert > 0:
-                self.groesse[self.wurzel(lid)] += x1 - x0
-
-    def wurzel(self, a: int) -> int:
-        eltern = self.eltern
-        while eltern[a] != a:
-            eltern[a] = eltern[eltern[a]]
-            a = eltern[a]
-        return a
-
-    def wert(self, lauf: int) -> int:
-        return self.laeufe[lauf][3]
-
-    def komponente_bei(self, x: int, y: int) -> int | None:
-        for lid in self.zeilen_laeufe[y]:
-            _, x0, x1, _ = self.laeufe[lid]
-            if x0 <= x < x1:
-                return self.wurzel(lid)
-        return None
-
-    def schluessel(self, lauf: int) -> int:
-        """Nachbarschlüssel: Komponente bei Orten, sonst LEER_SCHLUESSEL bzw. MEER_SCHLUESSEL."""
-        wert = self.laeufe[lauf][3]
-        if wert > 0:
-            return self.wurzel(lauf)
-        return MEER_SCHLUESSEL if wert == MEER else LEER_SCHLUESSEL
-
-    def wert_von(self, schluessel: int) -> int:
-        if schluessel >= 0:
-            return self.laeufe[schluessel][3]
-        return MEER if schluessel == MEER_SCHLUESSEL else 0
-
-    def grenzen(self, komponenten: set[int]) -> dict[int, Counter[int]]:
-        """Grenzlänge (Pixelkanten) jeder dieser Komponenten zu jedem Nachbarschlüssel."""
-        ergebnis: dict[int, Counter[int]] = {r: Counter() for r in komponenten}
-
-        def zaehle(lauf: int, nachbar: int, laenge: int) -> None:
-            r = self.wurzel(lauf)
-            if r in ergebnis:
-                ergebnis[r][self.schluessel(nachbar)] += laenge
-
-        for ids in self.zeilen_laeufe:
-            for a, c in zip(ids, ids[1:]):
-                zaehle(a, c, 1)
-                zaehle(c, a, 1)
-        for oben, unten, ueberlappung in self.paare:
-            if self.wert(oben) != self.wert(unten):
-                zaehle(oben, unten, ueberlappung)
-                zaehle(unten, oben, ueberlappung)
-        return ergebnis
-
-
-def _bereinigungsrunde(
-    zeilen: list[list[int]], lagepixel: dict[int, tuple[int, int]], *, aendern: bool = True
-) -> tuple[int, set[int]]:
-    """Eine Runde der Bereinigung.
-
-    Gibt die Zahl der umverteilten Teilflächen und die Werte der Orte zurück, die zu
-    Beginn der Runde aus mehreren Teilflächen bestanden. aendern=False zählt nur.
-    """
-    tf = _Teilflaechen(zeilen)
-    haupt: dict[int, int] = {}
-    for r in sorted(tf.groesse):  # aufsteigend = Reihenfolge des ersten Auftretens
-        wert = tf.wert(r)
-        if wert not in haupt or tf.groesse[r] > tf.groesse[haupt[wert]]:
-            haupt[wert] = r
-    for wert, (px, py) in lagepixel.items():
-        if 0 <= py < len(zeilen) and 0 <= px < len(zeilen[py]) and zeilen[py][px] == wert:
-            r = tf.komponente_bei(px, py)
-            if r is not None:
-                haupt[wert] = r
-    teile = {r for r in tf.groesse if haupt[tf.wert(r)] != r}
-    zerteilt = {tf.wert(r) for r in teile}
-    if not teile or not aendern:
-        return 0, zerteilt
-    grenzen = tf.grenzen(teile)
-
-    # Kleinste Teilflächen zuerst. Eine Teilfläche, die in dieser Runde Ziel einer
-    # Umverteilung war, wartet auf die nächste Runde; ebenso eine, deren bester Nachbar
-    # in dieser Runde schon umverteilt wurde. So pendeln benachbarte Teilflächen nicht.
-    neu: dict[int, int] = {}
-    gesperrt: set[int] = set()
-    for r in sorted(teile, key=lambda k: (tf.groesse[k], k)):
-        if r in gesperrt:
-            continue
-        land = [
-            (anzahl, -tf.wert_von(key), -key, key)
-            for key, anzahl in grenzen[r].items()
-            if key != MEER_SCHLUESSEL
-        ]
-        if not land:
-            continue  # nur von Meer umgeben: nicht zuzuordnen
-        bester = max(land)[3]
-        if bester in neu:
-            continue
-        neu[r] = tf.wert_von(bester)
-        if bester >= 0:
-            gesperrt.add(bester)
-    for lid, (y, x0, x1, wert) in enumerate(tf.laeufe):
-        if wert > 0:
-            ziel = neu.get(tf.wurzel(lid))
-            if ziel is not None:
-                zeilen[y][x0:x1] = [ziel] * (x1 - x0)
-    return len(neu), zerteilt
-
-
-def bereinigen(zeilen: list[list[int]], lagepixel: dict[int, tuple[int, int]]) -> tuple[int, set[int]]:
-    """Gibt abgetrennte Teilflächen eines Ortes dem Nachbarn mit der längsten gemeinsamen Grenze.
-
-    Je Ort bleibt die Zusammenhangskomponente (4er-Nachbarschaft) erhalten, die das
-    Lagepixel des Ortes enthält, sonst die größte. Meer zählt nicht als Nachbar; ist
-    der längste Nachbar leeres Land, wird die Teilfläche leer. Ändert zeilen und gibt
-    die Zahl der umverteilten Teilflächen sowie die Werte der Orte zurück, die danach
-    noch aus mehreren Teilflächen bestehen (z. B. nur von Meer umgeben).
-    """
-    umverteilt = 0
-    for _ in range(BEREINIGUNG_RUNDEN):
-        anzahl, zerteilt = _bereinigungsrunde(zeilen, lagepixel)
-        umverteilt += anzahl
-        if anzahl == 0:
-            return umverteilt, zerteilt
-    return umverteilt, _bereinigungsrunde(zeilen, lagepixel, aendern=False)[1]
-
-
-# ─── Gesamtablauf ───────────────────────────────────────────────────────────
 
 
 @dataclass
 class Ergebnis:
-    raster: Raster
+    karte: Karte
     orte: list[Ort]
-    zeilen: list[list[int]]  # Kartenindex + 1, 0 = leer, MEER = Meer
-    pixel: list[int]  # Pixel je Ort (Kartenindex)
-    umverteilt: int
+    werte: np.ndarray  # int32 (H, W): Kartenindex + 1, 0 = kein Ort
+    art: np.ndarray  # uint8 (H, W): Flächenart
+    fluesse: np.ndarray | None  # uint8 (H, W)
+    flaechen: list[Flaeche]
+    ohne_ort: list[Teilflaeche]
     warnungen: list[str]
+    bereinigung: kr.Bereinigung
+    zeiten: dict[str, float] = field(default_factory=dict)
+
+    def provinzen(self) -> np.ndarray:
+        """provinzen.png als (H, W, 3)-Feld: R + G·256 = Kartenindex + 1, B = Flächenart (Abschnitt 6.3)."""
+        bild = np.empty(self.werte.shape + (3,), dtype=np.uint8)
+        bild[..., 0] = self.werte & 0xFF
+        bild[..., 1] = self.werte >> 8
+        bild[..., 2] = self.art
+        return bild
+
+    def definition_csv(self) -> bytes:
+        return definition_csv(self.flaechen)
+
+    @property
+    def flaeche_nach_ort(self) -> dict[str, Flaeche]:
+        return {f.ort: f for f in self.flaechen}
+
+    def ort_bei(self, laenge: float, breite: float) -> int | None:
+        """Kartenindex des Ortes, dem das Pixel an dieser Stelle gehört, oder None (kein Ort, außerhalb)."""
+        x, y = self.karte.nach_pixel(np.array([laenge]), np.array([breite]))
+        px, py = int(np.floor(x[0])), int(np.floor(y[0]))
+        if not (0 <= px < self.karte.breite and 0 <= py < self.karte.hoehe):
+            return None
+        wert = int(self.werte[py, px])
+        return wert - 1 if wert > 0 else None
+
+    def nachbarn(self) -> dict[tuple[int, int], int]:
+        """Benachbarte Orte: (Kartenindex a, Kartenindex b) mit a < b → Länge der gemeinsamen Grenze in Pixelkanten.
+
+        Zählt waagrechte und senkrechte Pixelkanten (4er-Nachbarschaft); Wasser, Ausland und Land ohne
+        Ort trennen. Nützlich etwa zum Bilden von Kreisen aus benachbarten Orten.
+        """
+        w = self.werte
+        paare = []
+        for a, b in ((w[:, :-1], w[:, 1:]), (w[:-1], w[1:])):
+            grenze = (a != b) & (a > 0) & (b > 0)
+            lo = np.minimum(a[grenze], b[grenze]).astype(np.int64) - 1
+            hi = np.maximum(a[grenze], b[grenze]).astype(np.int64) - 1
+            paare.append(lo * (len(self.orte) + 1) + hi)
+        schluessel, zahl = np.unique(np.concatenate(paare), return_counts=True)
+        n = len(self.orte) + 1
+        return {(int(s // n), int(s % n)): int(z) for s, z in zip(schluessel, zahl)}
 
 
-def erzeuge(karte: Karte, orte: Sequence[Ort], *, beschleunigt: bool = True) -> Ergebnis:
-    raster = Raster.aus_karte(karte)
-    zeilen = zuordnen(raster, orte, beschleunigt=beschleunigt)
-    lagepixel: dict[int, tuple[int, int]] = {}
-    for index, ort in enumerate(orte):
-        p = raster.pixel_von(ort.laenge, ort.breite)
-        if p is not None:
-            lagepixel[index + 1] = p
-    umverteilt, zerteilt = bereinigen(zeilen, lagepixel)
+def grundlage_aus(karte: Karte, geometrie: Geometrie, *, fluesse: bool = True) -> Grundlage:
+    """Rastert die Geometrie (Flächenarten, verschobene Pixelmitten, optional Flussebene)."""
+    raster = kr.Raster.erzeuge(karte, geometrie.land, geometrie.seen, geometrie.kernraum)
+    raster.verschiebe()
+    bild = kr.zeichne_fluesse(geometrie.fluesse, karte) if fluesse else None
+    return Grundlage(karte, raster, bild)
 
-    zaehler: Counter[int] = Counter()
-    for zeile in zeilen:
-        zaehler.update(zeile)
-    pixel = [zaehler.get(index + 1, 0) for index in range(len(orte))]
 
+def lade_grundlage(daten: Path | None = None, *, fluesse: bool = True) -> Grundlage:
+    """Lädt karte.chron und die Geometrie und rastert sie. Wirft DatenFehler."""
+    daten = REPO / "data" if daten is None else Path(daten)
+    meldungen = Meldungen()
+    karte = lade_karte(daten / "karte" / "karte.chron", "karte/karte.chron", meldungen)
+    geometrie = lade_geometrie(daten / "karte" / "geometrie", daten, meldungen)
+    if meldungen.fehler or karte is None:
+        raise DatenFehler(meldungen.fehler or ["karte/karte.chron: unbekannter Fehler"])
+    grundlage = grundlage_aus(karte, geometrie, fluesse=fluesse)
+    grundlage.warnungen = meldungen.warnungen
+    return grundlage
+
+
+def lade_orte_daten(daten: Path | None = None) -> tuple[list[Ort], list[str]]:
+    """Lädt alle Orte aus <daten>/history/orte. Wirft DatenFehler; gibt (Orte, Warnungen) zurück."""
+    daten = REPO / "data" if daten is None else Path(daten)
+    meldungen = Meldungen()
+    orte = lade_orte(daten / "history" / "orte", daten, meldungen)
+    if meldungen.fehler:
+        raise DatenFehler(meldungen.fehler)
+    return orte, meldungen.warnungen
+
+
+def _zahl_text(wert: float) -> str:
+    return f"{wert:.2f}"
+
+
+def erzeuge(grundlage: Grundlage, orte: Sequence[Ort]) -> Ergebnis:
+    """Berechnet die Karte für diese Orte (Kartenindex = Position in ``orte``), ohne zu schreiben."""
+    zeiten: dict[str, float] = {}
+    uhr = time.perf_counter()
+    karte = grundlage.karte
+    raster = grundlage.raster
+    n = len(orte)
+    if n > MAX_ORTE:
+        raise DatenFehler([f"zu viele Orte ({n}, höchstens {MAX_ORTE})"])
+    fehler: list[str] = []
+    kennungen: set[str] = set()
+    for ort in orte:  # für Orte, die nicht aus Chronik-Dateien kommen (Python-API)
+        if not _ist_kennung(ort.kennung) or ort.kennung in kennungen:
+            fehler.append(f"{ort.wo}: ungültige oder doppelte Kennung")
+        if ";" in ort.name or "\n" in ort.name or "\r" in ort.name:
+            fehler.append(f"{ort.wo}: 'name' darf kein ';' und keinen Zeilenumbruch enthalten (definition.csv)")
+        if not (-180.0 <= ort.laenge <= 180.0 and -90.0 <= ort.breite <= 90.0):
+            fehler.append(f"{ort.wo}: 'lage' außerhalb des gültigen Bereichs")
+        kennungen.add(ort.kennung)
+    if fehler:
+        raise DatenFehler(fehler)
+    laengen = np.array([o.laenge for o in orte], dtype=np.float64)
+    breiten = np.array([o.breite for o in orte], dtype=np.float64)
+    lage = kr.lagen(raster, laengen, breiten)
+    werte = kr.zuordnen(raster, laengen, breiten, lage)
+    zeiten["zuordnung"] = time.perf_counter() - uhr
+
+    # Lagepixel auf Kernraum-Land gehören ihrem Ort (bei mehreren Orten im selben Pixel: dem ersten).
     warnungen: list[str] = []
-    belegt = sorted(n for n in pixel if n > 0)
+    lagepixel: dict[int, tuple[int, int]] = {}
+    besetzt: dict[tuple[int, int], int] = {}
+    for k, ort in enumerate(orte):
+        if not lage.innen[k]:
+            warnungen.append(
+                f"{ort.wo}: Lage {_zahl_text(ort.laenge)} {_zahl_text(ort.breite)} liegt außerhalb des Kartenausschnitts"
+            )
+            continue
+        x, y = int(lage.px[k]), int(lage.py[k])
+        art = int(lage.art[k])
+        if art != KERNLAND:
+            warnungen.append(
+                f"{ort.wo}: Lage {_zahl_text(ort.laenge)} {_zahl_text(ort.breite)} liegt {FLAECHENART_NAME[art]}, "
+                "nicht auf Kernraum-Land"
+            )
+            continue
+        if (x, y) in besetzt:
+            erster = orte[besetzt[(x, y)]]
+            warnungen.append(
+                f"{ort.wo}: Lage im selben Kartenpixel ({x}, {y}) wie ort {erster.kennung}; das Pixel gehört "
+                f"ort {erster.kennung}"
+            )
+            continue
+        besetzt[(x, y)] = k
+        lagepixel[k + 1] = (x, y)
+        werte[y, x] = k + 1
+
+    uhr = time.perf_counter()
+    werte, bereinigung = kr.bereinigen(werte, lagepixel, n)
+    zeiten["bereinigung"] = time.perf_counter() - uhr
+
+    uhr = time.perf_counter()
+    pixel, flaechen_km2 = kr.pixel_und_flaechen(raster, werte, n)
+    bx, by, _ = kr.beschriftungspunkte(werte, n)
+    zeiten["beschriftung"] = time.perf_counter() - uhr
+
+    flaechen = []
+    for k, ort in enumerate(orte):
+        x, y = int(bx[k]), int(by[k])
+        if x >= 0:
+            laenge, breite = karte.pixelmitte(x, y)
+        else:
+            laenge, breite = ort.laenge, ort.breite
+        flaechen.append(Flaeche(k, ort.kennung, ort.name, x, y, int(pixel[k]), flaechen_km2[k], laenge, breite))
+
+    belegt = sorted(int(p) for p in pixel if p > 0)
     median = belegt[len(belegt) // 2] if belegt else 0
     schwelle = median * WENIGE_PIXEL_ANTEIL
-    for index, ort in enumerate(orte):
-        wo = f"{ort.datei}:{ort.zeile}: ort {ort.kennung}"
-        p = lagepixel.get(index + 1)
-        if p is None:
-            warnungen.append(f"{wo}: Lage {ort.laenge} {ort.breite} liegt außerhalb des Kartenausschnitts")
-        else:
-            wert = zeilen[p[1]][p[0]]
-            if wert == MEER:
-                warnungen.append(
-                    f"{wo}: Lage {ort.laenge} {ort.breite} liegt im Meer (nördlich der Küstenlinie)"
-                )
-            elif wert != index + 1:
-                gehoert = f"ort {orte[wert - 1].kennung}" if wert > 0 else "keinem Ort"
-                warnungen.append(f"{wo}: das Pixel der Lage gehört zu {gehoert}")
-        if index + 1 in zerteilt:
-            warnungen.append(f"{wo}: besteht aus mehreren getrennten Teilflächen")
-        if pixel[index] == 0:
-            warnungen.append(f"{wo}: erhält keine Pixel")
-        elif pixel[index] < schwelle:
+    for k, ort in enumerate(orte):
+        if pixel[k] == 0:
+            warnungen.append(f"{ort.wo}: erhält keine Pixel")
+        elif pixel[k] < schwelle:
             warnungen.append(
-                f"{wo}: erhält nur {pixel[index]} Pixel (Median aller Orte: {median}); Nachbarorte zu nah?"
+                f"{ort.wo}: erhält nur {int(pixel[k])} Pixel (≈ {flaechen_km2[k]} km², Median aller Orte: "
+                f"{median} Pixel); Nachbarorte zu nah?"
             )
-    return Ergebnis(raster, list(orte), zeilen, pixel, umverteilt, warnungen)
 
+    uhr = time.perf_counter()
+    ohne_ort: list[Teilflaeche] = []
+    for anzahl_pixel, x, y in kr.teilflaechen((werte == 0) & (raster.art == KERNLAND)):
+        laenge, breite = karte.pixelmitte(x, y)
+        km2 = anzahl_pixel * raster.pixel_flaeche_fix[y] / float(1 << kr.FLAECHE_BITS)
+        ohne_ort.append(Teilflaeche(anzahl_pixel, km2, x, y, laenge, breite))
+    if ohne_ort:
+        gesamt = sum(t.pixel for t in ohne_ort)
+        gesamt_km2 = sum(t.flaeche_km2 for t in ohne_ort)
+        warnungen.append(
+            f"Kernraum-Land ohne Ort: {gesamt} Pixel (≈ {gesamt_km2:.0f} km²) in {len(ohne_ort)} Teilflächen "
+            f"(weiter als max_radius_km = {karte.max_radius_km:g} von jedem Ort oder abgetrennt, z. B. Inseln ohne Ort)"
+        )
+        for t in ohne_ort[:OHNE_ORT_MELDUNGEN]:
+            warnungen.append(
+                f"Kernraum-Land ohne Ort: {t.pixel} Pixel (≈ {t.flaeche_km2:.1f} km²) ab Pixel ({t.x}, {t.y}) "
+                f"bei {_zahl_text(t.laenge)} °O {_zahl_text(t.breite)} °N"
+            )
+        if len(ohne_ort) > OHNE_ORT_MELDUNGEN:
+            warnungen.append(f"Kernraum-Land ohne Ort: … und {len(ohne_ort) - OHNE_ORT_MELDUNGEN} kleinere Teilflächen")
+    zeiten["teilflaechen"] = time.perf_counter() - uhr
 
-# ─── PNG ────────────────────────────────────────────────────────────────────
-
-
-def _chunk(typ: bytes, daten: bytes) -> bytes:
-    return struct.pack(">I", len(daten)) + typ + daten + struct.pack(">I", zlib.crc32(typ + daten) & _M32)
-
-
-def png_kodieren(breite: int, hoehe: int, zeilen_rgb: Sequence[bytes]) -> bytes:
-    """RGB-PNG, 8 Bit je Kanal, ohne Zeitstempel und Zusatzblöcke.
-
-    Filter: erste Zeile 'Sub', alle weiteren 'Up' (bei Ort-ID-Bildern meist Nullen).
-    """
-    if len(zeilen_rgb) != hoehe or any(len(z) != 3 * breite for z in zeilen_rgb):
-        raise ValueError("Zeilenlängen passen nicht zur Bildgröße")
-    roh = bytearray()
-    vorher: bytes | None = None
-    for zeile in zeilen_rgb:
-        if vorher is None:
-            roh.append(1)
-            roh += zeile[:3]
-            roh += bytes((a - b) & 0xFF for a, b in zip(zeile[3:], zeile))
-        else:
-            roh.append(2)
-            if zeile == vorher:
-                roh += bytes(len(zeile))
-            else:
-                roh += bytes((a - b) & 0xFF for a, b in zip(zeile, vorher))
-        vorher = zeile
-    ihdr = struct.pack(">IIBBBBB", breite, hoehe, 8, 2, 0, 0, 0)
-    return (
-        PNG_SIGNATUR
-        + _chunk(b"IHDR", ihdr)
-        + _chunk(b"IDAT", zlib.compress(bytes(roh), 9))
-        + _chunk(b"IEND", b"")
+    return Ergebnis(
+        karte=karte,
+        orte=list(orte),
+        werte=werte,
+        art=raster.art,
+        fluesse=grundlage.fluesse,
+        flaechen=flaechen,
+        ohne_ort=ohne_ort,
+        warnungen=warnungen,
+        bereinigung=bereinigung,
+        zeiten=zeiten,
     )
 
 
-def _paeth(a: int, b: int, c: int) -> int:
-    p = a + b - c
-    pa, pb, pc = abs(p - a), abs(p - b), abs(p - c)
-    if pa <= pb and pa <= pc:
-        return a
-    return b if pb <= pc else c
+def erzeuge_karte(daten: Path | None = None, *, fluesse: bool = True) -> Ergebnis:
+    """Lädt alles aus dem Datenordner und berechnet die Karte, ohne Dateien zu schreiben.
 
-
-def png_dekodieren(daten: bytes) -> tuple[int, int, list[bytes]]:
-    """Liest ein RGB-PNG mit 8 Bit je Kanal (ohne Zeilensprung) und gibt (Breite, Höhe, Zeilen) zurück."""
-    if not daten.startswith(PNG_SIGNATUR):
-        raise ValueError("keine PNG-Datei")
-    pos = len(PNG_SIGNATUR)
-    ihdr: bytes | None = None
-    idat = bytearray()
-    while pos + 8 <= len(daten):
-        laenge, typ = struct.unpack(">I4s", daten[pos : pos + 8])
-        inhalt = daten[pos + 8 : pos + 8 + laenge]
-        if len(inhalt) != laenge or pos + 12 + laenge > len(daten):
-            raise ValueError("PNG abgeschnitten")
-        (crc,) = struct.unpack(">I", daten[pos + 8 + laenge : pos + 12 + laenge])
-        if zlib.crc32(typ + inhalt) & _M32 != crc:
-            raise ValueError(f"Prüfsumme des PNG-Blocks {typ.decode('latin-1')} falsch")
-        if typ == b"IHDR":
-            ihdr = inhalt
-        elif typ == b"IDAT":
-            idat += inhalt
-        elif typ == b"IEND":
-            break
-        pos += 12 + laenge
-    if ihdr is None or len(ihdr) != 13:
-        raise ValueError("PNG ohne gültigen IHDR-Block")
-    breite, hoehe, tiefe, farbtyp, kompression, filter_, zeilensprung = struct.unpack(">IIBBBBB", ihdr)
-    if (tiefe, farbtyp, kompression, filter_, zeilensprung) != (8, 2, 0, 0, 0):
-        raise ValueError("nicht unterstütztes PNG-Format (erwartet RGB, 8 Bit, ohne Zeilensprung)")
-    roh = zlib.decompress(bytes(idat))
-    schritt = 3 * breite
-    if len(roh) != hoehe * (schritt + 1):
-        raise ValueError("PNG-Bilddaten haben die falsche Länge")
-    zeilen: list[bytes] = []
-    vorher = bytes(schritt)
-    for y in range(hoehe):
-        start = y * (schritt + 1)
-        art = roh[start]
-        z = bytearray(roh[start + 1 : start + 1 + schritt])
-        if art == 0:
-            pass
-        elif art == 1:
-            for k in range(3, schritt):
-                z[k] = (z[k] + z[k - 3]) & 0xFF
-        elif art == 2:
-            z = bytearray((a + b) & 0xFF for a, b in zip(z, vorher))
-        elif art == 3:
-            for k in range(schritt):
-                links = z[k - 3] if k >= 3 else 0
-                z[k] = (z[k] + ((links + vorher[k]) >> 1)) & 0xFF
-        elif art == 4:
-            for k in range(schritt):
-                links = z[k - 3] if k >= 3 else 0
-                oben_links = vorher[k - 3] if k >= 3 else 0
-                z[k] = (z[k] + _paeth(links, vorher[k], oben_links)) & 0xFF
-        else:
-            raise ValueError(f"unbekannter PNG-Zeilenfilter {art}")
-        zeile = bytes(z)
-        zeilen.append(zeile)
-        vorher = zeile
-    return breite, hoehe, zeilen
-
-
-def kodiere_wert(wert: int) -> bytes:
-    """Abschnitt 6.2: wert = R + G·256 (Kartenindex + 1, 0 = kein Ort), B = 0."""
-    if not 0 <= wert <= 0xFFFF:
-        raise ValueError(f"Wert {wert} außerhalb 0…65535")
-    return bytes((wert & 0xFF, wert >> 8, 0))
-
-
-def dekodiere_pixel(r: int, g: int, b: int) -> int:
-    """Kartenindex + 1 aus einem Pixel (0 = kein Ort); B muss 0 sein."""
-    if b != 0:
-        raise ValueError(f"Blaukanal {b} ≠ 0")
-    return r + g * 256
-
-
-def provinzen_png(ergebnis: Ergebnis) -> bytes:
-    tabelle = [kodiere_wert(w) for w in range(len(ergebnis.orte) + 1)]
-    meer = tabelle[0]
-    zeilen = [b"".join(meer if w == MEER else tabelle[w] for w in zeile) for zeile in ergebnis.zeilen]
-    return png_kodieren(ergebnis.raster.breite, ergebnis.raster.hoehe, zeilen)
-
-
-def werte_aus_png(daten: bytes) -> tuple[int, int, list[list[int]]]:
-    """Dekodiert provinzen.png zu Zeilen von Werten (Kartenindex + 1)."""
-    breite, hoehe, zeilen = png_dekodieren(daten)
-    werte = []
-    for zeile in zeilen:
-        if any(zeile[2::3]):
-            raise ValueError("Blaukanal ≠ 0 (kein Ort-ID-Bild nach Abschnitt 6.2)")
-        werte.append([r + g * 256 for r, g in zip(zeile[0::3], zeile[1::3])])
-    return breite, hoehe, werte
+    Warnungen beim Laden (Geometrie, Orte) stehen vorn in ``Ergebnis.warnungen``. Wirft DatenFehler.
+    """
+    grundlage = lade_grundlage(daten, fluesse=fluesse)
+    orte, warnungen = lade_orte_daten(daten)
+    ergebnis = erzeuge(grundlage, orte)
+    ergebnis.warnungen[:0] = grundlage.warnungen + warnungen
+    return ergebnis
 
 
 # ─── definition.csv ─────────────────────────────────────────────────────────
 
 
-def definition_csv(orte: Sequence[Ort]) -> bytes:
-    """Abschnitt 6.3: Semikolon-getrennt, UTF-8, Kopfzeile, LF-Zeilenenden."""
-    zeilen = [CSV_KOPF] + [f"{index};{ort.kennung};{ort.name}" for index, ort in enumerate(orte)]
+def definition_csv(flaechen: Sequence[Flaeche]) -> bytes:
+    """Abschnitt 6.5: Semikolon-getrennt, UTF-8, Kopfzeile, LF-Zeilenenden."""
+    zeilen = [CSV_KOPF] + [f"{f.kartenindex};{f.ort};{f.name};{f.x};{f.y};{f.pixel};{f.flaeche_km2}" for f in flaechen]
     return ("\n".join(zeilen) + "\n").encode("utf-8")
 
 
-# ─── Vorschau ───────────────────────────────────────────────────────────────
+# ─── Dateien schreiben und prüfen ───────────────────────────────────────────
 
-# 5×7-Pixelschrift (je Zeile 5 Bit, höchstwertiges Bit links) für Ortsnamen.
-_SCHRIFT: dict[str, tuple[int, ...]] = {
-    "A": (0x0E, 0x11, 0x11, 0x1F, 0x11, 0x11, 0x11),
-    "B": (0x1E, 0x11, 0x11, 0x1E, 0x11, 0x11, 0x1E),
-    "C": (0x0E, 0x11, 0x10, 0x10, 0x10, 0x11, 0x0E),
-    "D": (0x1C, 0x12, 0x11, 0x11, 0x11, 0x12, 0x1C),
-    "E": (0x1F, 0x10, 0x10, 0x1E, 0x10, 0x10, 0x1F),
-    "F": (0x1F, 0x10, 0x10, 0x1E, 0x10, 0x10, 0x10),
-    "G": (0x0E, 0x11, 0x10, 0x17, 0x11, 0x11, 0x0F),
-    "H": (0x11, 0x11, 0x11, 0x1F, 0x11, 0x11, 0x11),
-    "I": (0x0E, 0x04, 0x04, 0x04, 0x04, 0x04, 0x0E),
-    "J": (0x07, 0x02, 0x02, 0x02, 0x02, 0x12, 0x0C),
-    "K": (0x11, 0x12, 0x14, 0x18, 0x14, 0x12, 0x11),
-    "L": (0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x1F),
-    "M": (0x11, 0x1B, 0x15, 0x15, 0x11, 0x11, 0x11),
-    "N": (0x11, 0x11, 0x19, 0x15, 0x13, 0x11, 0x11),
-    "O": (0x0E, 0x11, 0x11, 0x11, 0x11, 0x11, 0x0E),
-    "P": (0x1E, 0x11, 0x11, 0x1E, 0x10, 0x10, 0x10),
-    "Q": (0x0E, 0x11, 0x11, 0x11, 0x15, 0x12, 0x0D),
-    "R": (0x1E, 0x11, 0x11, 0x1E, 0x14, 0x12, 0x11),
-    "S": (0x0F, 0x10, 0x10, 0x0E, 0x01, 0x01, 0x1E),
-    "T": (0x1F, 0x04, 0x04, 0x04, 0x04, 0x04, 0x04),
-    "U": (0x11, 0x11, 0x11, 0x11, 0x11, 0x11, 0x0E),
-    "V": (0x11, 0x11, 0x11, 0x11, 0x11, 0x0A, 0x04),
-    "W": (0x11, 0x11, 0x11, 0x15, 0x15, 0x15, 0x0A),
-    "X": (0x11, 0x11, 0x0A, 0x04, 0x0A, 0x11, 0x11),
-    "Y": (0x11, 0x11, 0x11, 0x0A, 0x04, 0x04, 0x04),
-    "Z": (0x1F, 0x01, 0x02, 0x04, 0x08, 0x10, 0x1F),
-    "0": (0x0E, 0x11, 0x13, 0x15, 0x19, 0x11, 0x0E),
-    "1": (0x04, 0x0C, 0x04, 0x04, 0x04, 0x04, 0x0E),
-    "2": (0x0E, 0x11, 0x01, 0x02, 0x04, 0x08, 0x1F),
-    "3": (0x1F, 0x02, 0x04, 0x02, 0x01, 0x11, 0x0E),
-    "4": (0x02, 0x06, 0x0A, 0x12, 0x1F, 0x02, 0x02),
-    "5": (0x1F, 0x10, 0x1E, 0x01, 0x01, 0x11, 0x0E),
-    "6": (0x06, 0x08, 0x10, 0x1E, 0x11, 0x11, 0x0E),
-    "7": (0x1F, 0x01, 0x02, 0x04, 0x08, 0x08, 0x08),
-    "8": (0x0E, 0x11, 0x11, 0x0E, 0x11, 0x11, 0x0E),
-    "9": (0x0E, 0x11, 0x11, 0x0F, 0x01, 0x02, 0x0C),
-    "-": (0x00, 0x00, 0x00, 0x1F, 0x00, 0x00, 0x00),
-    ".": (0x00, 0x00, 0x00, 0x00, 0x00, 0x0C, 0x0C),
-    "(": (0x02, 0x04, 0x08, 0x08, 0x08, 0x04, 0x02),
-    ")": (0x08, 0x04, 0x02, 0x02, 0x02, 0x04, 0x08),
-    " ": (0x00,) * 7,
-}
-_UMSCHRIFT = {"Ä": "AE", "Ö": "OE", "Ü": "UE", "ß": "SS", "É": "E", "È": "E"}
-
-FARBE_MEER = (164, 196, 222)
-FARBE_LEER = (228, 222, 206)
-FARBE_UNBEKANNT = (160, 160, 160)
-FARBE_STAATSGRENZE = (34, 30, 28)
-FARBE_KUESTE = (70, 100, 140)
+AUSGABEN = ("provinzen.png", "fluesse.png", "definition.csv")
 
 
-def _beschriftung(text: str) -> str:
-    gross = "".join(_UMSCHRIFT.get(c, c) for c in text.upper())
-    return "".join(c if c in _SCHRIFT else " " for c in gross)
+def ausgaben(ergebnis: Ergebnis) -> dict[str, np.ndarray | bytes]:
+    """Inhalte der drei Ausgabedateien (Bilder als Felder, CSV als Bytes)."""
+    if ergebnis.fluesse is None:
+        raise ValueError("Ergebnis ohne Flussebene (lade_grundlage(..., fluesse=True) verwenden)")
+    return {
+        "provinzen.png": ergebnis.provinzen(),
+        "fluesse.png": ergebnis.fluesse,
+        "definition.csv": ergebnis.definition_csv(),
+    }
 
 
-def _abdunkeln(farbe: tuple[int, int, int], faktor: float) -> tuple[int, int, int]:
-    return tuple(max(0, min(255, int(c * faktor))) for c in farbe)  # type: ignore[return-value]
-
-
-def vorschau_png(ergebnis: Ergebnis, staaten: dict[str, Staat]) -> bytes:
-    """Politische Vorschau: Besitzerfarben, Ortsgrenzen, Staatsgrenzen, Meer, Lagepunkte und Namen."""
-    orte = ergebnis.orte
-    b, h = ergebnis.raster.breite, ergebnis.raster.hoehe
-    besitzer = [""] + [o.besitzer for o in orte]
-    fuellung: dict[int, tuple[int, int, int]] = {MEER: FARBE_MEER, 0: FARBE_LEER}
-    grenze: dict[int, tuple[int, int, int]] = {MEER: FARBE_KUESTE, 0: FARBE_LEER}
-    for index, ort in enumerate(orte):
-        staat = staaten.get(ort.besitzer)
-        basis = staat.farbe if staat is not None else FARBE_UNBEKANNT
-        # Benachbarte Orte desselben Staates leicht unterschiedlich hell.
-        faktor = (0.90, 1.0, 1.10)[_hash32(index, 0, 7) % 3]
-        fuellung[index + 1] = _abdunkeln(basis, faktor)
-        grenze[index + 1] = _abdunkeln(basis, 0.55)
-
-    zeilen = ergebnis.zeilen
-    pixel = [[fuellung[w] for w in zeile] for zeile in zeilen]
-    for y in range(h):
-        zeile = zeilen[y]
-        unten = zeilen[y + 1] if y + 1 < h else zeile
-        ziel = pixel[y]
-        for x in range(b):
-            w = zeile[x]
-            rechts = zeile[x + 1] if x + 1 < b else w
-            u = unten[x]
-            if rechts == w and u == w:
-                continue
-            andere = rechts if rechts != w else u
-            if w == MEER or andere == MEER:
-                ziel[x] = FARBE_KUESTE
-            elif w == 0 or andere == 0:
-                ziel[x] = grenze[w] if w > 0 else grenze[andere]
-            elif besitzer[w] != besitzer[andere]:
-                ziel[x] = FARBE_STAATSGRENZE
-            else:
-                ziel[x] = grenze[w]
-
-    def setze(x: int, y: int, farbe: tuple[int, int, int]) -> None:
-        if 0 <= x < b and 0 <= y < h:
-            pixel[y][x] = farbe
-
-    for ort in orte:
-        p = ergebnis.raster.pixel_von(ort.laenge, ort.breite)
-        if p is None:
-            continue
-        px, py = p
-        for dy in range(-2, 3):
-            for dx in range(-2, 3):
-                rand = abs(dx) == 2 or abs(dy) == 2
-                setze(px + dx, py + dy, (0, 0, 0) if rand else (255, 255, 255))
-        text = _beschriftung(ort.name)
-        tx, ty = px + 5, py - 3
-        if tx + 6 * len(text) > b:  # am rechten Rand links vom Punkt beschriften
-            tx = px - 4 - 6 * len(text)
-            if tx < 0:
-                tx = max(0, b - 6 * len(text))
-        # Erst die Kontur (dunkel), dann die Schrift (hell).
-        for lauf in (0, 1):
-            for n, zeichen in enumerate(text):
-                glyphe = _SCHRIFT[zeichen]
-                for gy, bits in enumerate(glyphe):
-                    for gx in range(5):
-                        if bits & (0x10 >> gx):
-                            x, y = tx + 6 * n + gx, ty + gy
-                            if lauf == 0:
-                                for ox, oy in ((-1, 0), (1, 0), (0, -1), (0, 1)):
-                                    setze(x + ox, y + oy, (20, 20, 20))
-                            else:
-                                setze(x, y, (255, 255, 255))
-    return png_kodieren(b, h, [bytes(c for farbe in zeile for c in farbe) for zeile in pixel])
-
-
-# ─── Kommandozeile ──────────────────────────────────────────────────────────
-
-
-def _lade(daten: Path) -> tuple[Karte, list[Ort], list[str]]:
-    meldungen = Meldungen()
-    karte = lade_karte(daten / "karte" / "karte.chron", "karte/karte.chron", meldungen)
-    orte = lade_orte(daten / "history" / "orte", daten, meldungen)
-    if meldungen.fehler or karte is None:
-        raise DatenFehler(meldungen.fehler or ["karte/karte.chron: unbekannter Fehler"])
-    return karte, orte, meldungen.warnungen
-
-
-def _schreibe_wenn_anders(pfad: Path, inhalt: bytes) -> bool:
+def _lies_bild(pfad: Path) -> np.ndarray | None:
     try:
-        if pfad.read_bytes() == inhalt:
-            return False
-    except OSError:
-        pass
-    pfad.write_bytes(inhalt)
-    return True
+        return karte_png.dekodieren(pfad.read_bytes())
+    except (OSError, ValueError):
+        return None
+
+
+def _csv_zeilen(inhalt: bytes) -> list[str] | None:
+    try:
+        return inhalt.decode("utf-8").splitlines()
+    except UnicodeDecodeError:
+        return None
+
+
+def _bildform(bild: np.ndarray) -> str:
+    art = {1: "Graustufen", 3: "RGB", 4: "RGBA"}[bild.shape[2] if bild.ndim == 3 else 1]
+    return f"{bild.shape[1]}×{bild.shape[0]} {art}"
 
 
 def pruefe_ausgabe(ausgabe: Path, ergebnis: Ergebnis) -> list[str]:
-    """Vergleicht die Dateien im Ausgabeordner mit dem Ergebnis; Liste der Abweichungen."""
+    """Vergleicht die Dateien im Ausgabeordner mit dem Ergebnis; Liste der Abweichungen.
+
+    Bilder: Pixel (nicht Bytes – andere zlib-Versionen dürfen anders komprimieren);
+    definition.csv: Inhalt zeilenweise (Zeilenenden egal).
+    """
     abweichungen = []
-    csv_pfad = ausgabe / "definition.csv"
-    try:
-        if csv_pfad.read_bytes() != definition_csv(ergebnis.orte):
-            abweichungen.append(f"{csv_pfad}: Inhalt veraltet")
-    except OSError:
-        abweichungen.append(f"{csv_pfad}: Datei fehlt")
-    png_pfad = ausgabe / "provinzen.png"
-    try:
-        daten = png_pfad.read_bytes()
-    except OSError:
-        abweichungen.append(f"{png_pfad}: Datei fehlt")
-    else:
-        # Pixel vergleichen, nicht Bytes: andere zlib-Versionen komprimieren anders.
+    for name, erwartet in ausgaben(ergebnis).items():
+        pfad = ausgabe / name
         try:
-            breite, hoehe, werte = werte_aus_png(daten)
-        except (ValueError, zlib.error) as fehler:
-            abweichungen.append(f"{png_pfad}: nicht lesbar ({fehler})")
-        else:
-            erwartet = [[0 if w == MEER else w for w in zeile] for zeile in ergebnis.zeilen]
-            if (breite, hoehe) != (ergebnis.raster.breite, ergebnis.raster.hoehe):
-                abweichungen.append(
-                    f"{png_pfad}: Bildgröße {breite}×{hoehe}, erwartet "
-                    f"{ergebnis.raster.breite}×{ergebnis.raster.hoehe}"
-                )
-            elif werte != erwartet:
-                anders = sum(a != e for zw, ze in zip(werte, erwartet) for a, e in zip(zw, ze))
-                abweichungen.append(f"{png_pfad}: {anders} Pixel weichen ab")
+            daten = pfad.read_bytes()
+        except OSError:
+            abweichungen.append(f"{pfad}: Datei fehlt")
+            continue
+        if isinstance(erwartet, bytes):
+            if _csv_zeilen(daten) != _csv_zeilen(erwartet):
+                abweichungen.append(f"{pfad}: Inhalt veraltet")
+            continue
+        try:
+            bild = karte_png.dekodieren(daten)
+        except ValueError as fehler:
+            abweichungen.append(f"{pfad}: nicht lesbar ({fehler})")
+            continue
+        if bild.shape != erwartet.shape:
+            abweichungen.append(f"{pfad}: Bild {_bildform(bild)}, erwartet {_bildform(erwartet)}")
+            continue
+        anders = bild != erwartet
+        if anders.ndim == 3:
+            anders = anders.any(axis=2)
+        anzahl = int(np.count_nonzero(anders))
+        if anzahl:
+            abweichungen.append(f"{pfad}: {anzahl} Pixel weichen ab")
     return abweichungen
+
+
+def schreibe_ausgabe(ausgabe: Path, ergebnis: Ergebnis) -> list[tuple[Path, bool, int]]:
+    """Schreibt die drei Dateien; unveränderte (gleiche Pixel bzw. gleicher Inhalt) bleiben unberührt.
+
+    Ergebnis: (Pfad, geschrieben?, Bytes).
+    """
+    ausgabe.mkdir(parents=True, exist_ok=True)
+    bericht = []
+    for name, inhalt in ausgaben(ergebnis).items():
+        pfad = ausgabe / name
+        if isinstance(inhalt, bytes):
+            try:
+                gleich = pfad.read_bytes() == inhalt
+            except OSError:
+                gleich = False
+            daten = inhalt
+        else:
+            alt = _lies_bild(pfad) if pfad.is_file() else None
+            gleich = alt is not None and alt.shape == inhalt.shape and bool(np.array_equal(alt, inhalt))
+            daten = b"" if gleich else karte_png.kodieren(inhalt)
+        if not gleich:
+            pfad.write_bytes(daten)
+        bericht.append((pfad, not gleich, len(daten) if not gleich else pfad.stat().st_size))
+    return bericht
+
+
+# ─── Kommandozeile ──────────────────────────────────────────────────────────
 
 
 class _Hilfeformat(argparse.HelpFormatter):
@@ -1392,6 +944,7 @@ class _Argumente(argparse.ArgumentParser):
         ("ignored explicit argument", "Wert nicht erlaubt:"),
         ("ambiguous option:", "mehrdeutige Option:"),
         ("could match", "passt zu"),
+        ("invalid int value:", "ungültige Ganzzahl:"),
         ("argument ", "Option "),
     )
 
@@ -1402,11 +955,24 @@ class _Argumente(argparse.ArgumentParser):
         self.exit(2, f"Fehler: {message}\n")
 
 
+def _ausschnitt(text: str) -> tuple[float, float, float, float]:
+    teile = text.replace(" ", "").split(",")
+    try:
+        werte = tuple(float(t) for t in teile)
+    except ValueError:
+        werte = ()
+    if len(werte) != 4 or not (werte[0] < werte[2] and werte[1] < werte[3]):
+        raise argparse.ArgumentTypeError(
+            f"'{text}' – erwartet LAENGE_MIN,BREITE_MIN,LAENGE_MAX,BREITE_MAX, z. B. 12.5,52.0,14.5,53.0"
+        )
+    return werte  # type: ignore[return-value]
+
+
 def _argumente() -> argparse.ArgumentParser:
     parser = _Argumente(
         prog="kartengenerator.py",
-        description="Erzeugt provinzen.png und definition.csv aus karte.chron und den Orten "
-        "(docs/technik/chronik-skript.md, Abschnitt 6).",
+        description="Erzeugt provinzen.png, fluesse.png und definition.csv aus karte.chron, der Geometrie "
+        "und den Orten (docs/technik/chronik-skript.md, Abschnitt 6).",
         epilog="Exitcodes: 0 = Erfolg bzw. aktuell, 1 = --pruefen: nicht aktuell, 2 = Fehler.",
         formatter_class=_Hilfeformat,
         add_help=False,
@@ -1417,52 +983,73 @@ def _argumente() -> argparse.ArgumentParser:
     optionen.add_argument(
         "--daten", type=Path, default=REPO / "data", metavar="DIR", help="Datenordner (Standard: <repo>/data)"
     )
-    optionen.add_argument(
-        "--ausgabe", type=Path, metavar="DIR", help="Ausgabeordner (Standard: <daten>/karte)"
-    )
-    optionen.add_argument(
-        "--vorschau", type=Path, metavar="DATEI", help="zusätzlich farbige politische Vorschau (PNG)"
-    )
+    optionen.add_argument("--ausgabe", type=Path, metavar="DIR", help="Ausgabeordner (Standard: <daten>/karte)")
     optionen.add_argument(
         "--pruefen",
         action="store_true",
-        help="nichts schreiben, nur prüfen, ob die Dateien im Ausgabeordner aktuell sind "
-        "(Exitcode 1, wenn nicht)",
+        help="nichts schreiben, nur prüfen, ob die Dateien im Ausgabeordner aktuell sind (Exitcode 1, wenn nicht)",
     )
+    optionen.add_argument(
+        "--vorschau", type=Path, metavar="DATEI", help="zusätzlich eine politische Vorschau als PNG schreiben"
+    )
+    optionen.add_argument(
+        "--vorschau-breite",
+        type=int,
+        metavar="N",
+        help="Breite der Vorschau in Pixeln (verkleinert durch Mitteln, vergrößert ohne Glättung)",
+    )
+    optionen.add_argument(
+        "--vorschau-ausschnitt",
+        type=_ausschnitt,
+        metavar="L0,B0,L1,B1",
+        help="nur diesen Ausschnitt zeigen (Grad: Länge min, Breite min, Länge max, Breite max)",
+    )
+    optionen.add_argument("--vorschau-namen", action="store_true", help="Ortsnamen am Beschriftungspunkt eintragen")
+    optionen.add_argument("--zeiten", action="store_true", help="Laufzeit der einzelnen Schritte ausgeben")
     return parser
 
 
 def main(argv: Sequence[str] | None = None) -> int:
     parser = _argumente()
     args = parser.parse_args(argv)
+    if args.vorschau_breite is not None and not 16 <= args.vorschau_breite <= 16384:
+        parser.error("Option --vorschau-breite: erwartet 16 bis 16384")
     daten: Path = args.daten
     ausgabe: Path = args.ausgabe if args.ausgabe is not None else daten / "karte"
 
     start = time.perf_counter()  # nur für die Laufzeitanzeige
     try:
-        karte, orte, warnungen = _lade(daten)
+        uhr = time.perf_counter()
+        grundlage = lade_grundlage(daten)
+        zeit_grundlage = time.perf_counter() - uhr
+        uhr = time.perf_counter()
+        orte, warnungen = lade_orte_daten(daten)
+        zeit_orte = time.perf_counter() - uhr
     except DatenFehler as fehler:
         for text in fehler.meldungen:
             print(f"Fehler: {text}", file=sys.stderr)
         print(f"Abbruch: {len(fehler.meldungen)} Fehler in den Daten.", file=sys.stderr)
         return 2
-    for text in warnungen:
+    for text in grundlage.warnungen + warnungen:
         print(f"Warnung: {text}", file=sys.stderr)
 
-    ergebnis = erzeuge(karte, orte)
+    ergebnis = erzeuge(grundlage, orte)
     for text in ergebnis.warnungen:
         print(f"Warnung: {text}", file=sys.stderr)
 
-    land = sum(karte.hoehe - min(e, karte.hoehe) for e in ergebnis.raster.erstes_land)
-    belegt = sum(ergebnis.pixel)
+    karte = grundlage.karte
+    art = grundlage.art
+    kernland = int(np.count_nonzero(art == KERNLAND))
+    belegt = sum(f.pixel for f in ergebnis.flaechen)
+    gesamt = karte.breite * karte.hoehe
     print(
-        f"{len(orte)} Orte, Bild {karte.breite}×{karte.hoehe}, "
-        f"Land {100.0 * land / (karte.breite * karte.hoehe):.1f} %, "
-        f"davon Orten zugeordnet {100.0 * belegt / max(land, 1):.1f} %, "
-        f"umverteilte Teilflächen: {ergebnis.umverteilt}"
+        f"{len(orte)} Orte, Bild {karte.breite}×{karte.hoehe}; Kernraum-Land "
+        f"{100.0 * kernland / gesamt:.1f} %, davon Orten zugeordnet {100.0 * belegt / max(kernland, 1):.2f} %; "
+        f"Teilflächen umverteilt: {ergebnis.bereinigung.umverteilt}, ohne Ort: {ergebnis.bereinigung.entfernt}"
     )
 
     rueckgabe = 0
+    uhr = time.perf_counter()
     if args.pruefen:
         abweichungen = pruefe_ausgabe(ausgabe, ergebnis)
         for text in abweichungen:
@@ -1474,34 +1061,43 @@ def main(argv: Sequence[str] | None = None) -> int:
             )
             rueckgabe = 1
         else:
-            print(f"Karte aktuell: {ausgabe / 'provinzen.png'}, {ausgabe / 'definition.csv'}")
+            print(f"Karte aktuell: {', '.join(str(ausgabe / n) for n in AUSGABEN)}")
     else:
         try:
-            ausgabe.mkdir(parents=True, exist_ok=True)
-            for name, inhalt in (
-                ("provinzen.png", provinzen_png(ergebnis)),
-                ("definition.csv", definition_csv(orte)),
-            ):
-                pfad = ausgabe / name
-                status = "geschrieben" if _schreibe_wenn_anders(pfad, inhalt) else "unverändert"
-                print(f"{status}: {pfad} ({len(inhalt)} Bytes)")
+            for pfad, geschrieben, groesse in schreibe_ausgabe(ausgabe, ergebnis):
+                print(f"{'geschrieben' if geschrieben else 'unverändert'}: {pfad} ({groesse} Bytes)")
         except OSError as fehler:
             print(f"Fehler: Ausgabe kann nicht geschrieben werden: {fehler}", file=sys.stderr)
             return 2
+    zeit_ausgabe = time.perf_counter() - uhr
 
     if args.vorschau is not None:
+        import karte_vorschau  # noqa: PLC0415
+
         meldungen = Meldungen()
         staaten = lade_staaten(daten / "history" / "staaten", daten, meldungen)
         for text in meldungen.warnungen:
             print(f"Warnung: {text}", file=sys.stderr)
         try:
+            bild = karte_vorschau.vorschau(
+                ergebnis,
+                staaten,
+                breite=args.vorschau_breite,
+                ausschnitt=args.vorschau_ausschnitt,
+                namen=args.vorschau_namen,
+            )
             args.vorschau.parent.mkdir(parents=True, exist_ok=True)
-            args.vorschau.write_bytes(vorschau_png(ergebnis, staaten))
-        except OSError as fehler:
+            args.vorschau.write_bytes(karte_png.kodieren(bild))
+        except (OSError, ValueError) as fehler:
             print(f"Fehler: Vorschau kann nicht geschrieben werden: {fehler}", file=sys.stderr)
             return 2
-        print(f"Vorschau: {args.vorschau}")
+        print(f"Vorschau: {args.vorschau} ({bild.shape[1]}×{bild.shape[0]})")
 
+    if args.zeiten:
+        teile = {"Geometrie": zeit_grundlage, "Orte laden": zeit_orte}
+        teile.update({k.capitalize(): v for k, v in ergebnis.zeiten.items()})
+        teile["Ausgabe/Prüfung"] = zeit_ausgabe
+        print("Zeiten: " + ", ".join(f"{k} {v:.1f} s" for k, v in teile.items()))
     print(f"Laufzeit: {time.perf_counter() - start:.1f} s")
     return rueckgabe
 

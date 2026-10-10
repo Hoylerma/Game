@@ -373,8 +373,10 @@ Regeln: Bei `B ≠ 0` ist `wert = 0`. Jedes Kernraum-Land-Pixel gehört dem näc
 (Entfernung in km, mit deterministischem Rauschen für natürliche Grenzen), höchstens
 `max_radius_km` entfernt; sonst `wert = 0` mit Warnung. Jeder Ort hat **genau eine
 zusammenhängende Fläche** (4er-Nachbarschaft) mit mindestens einem Pixel; liegt seine `lage` auf
-Kernraum-Land, gehört dieses Pixel ihm. Die Fläche (`flaeche`) der Orte geht **nicht** in die
-Zuordnung ein (sie wird aus der Karte berechnet, Abschnitt 6.5).
+Kernraum-Land, gehört dieses Pixel ihm. Abgetrennte Teilflächen eines Ortes gehen an den Nachbarort
+mit der längsten gemeinsamen Grenze; grenzen sie an keinen Ort (z. B. eine Insel ohne eigenen Ort),
+gehören sie zu keinem Ort (`wert = 0` mit Warnung). Die Fläche (`flaeche`) der Orte geht **nicht**
+in die Zuordnung ein (sie wird aus der Karte berechnet, Abschnitt 6.5).
 
 ### 6.4 `karte/fluesse.png` (generiert)
 
@@ -394,6 +396,7 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 - `x`, `y`: Beschriftungspunkt in Pixeln (Ganzzahlen); das Pixel gehört garantiert zum Ort
   (Pixel mit größtem Abstand zum Rand der Fläche, bei Gleichstand das erste in Zeilenreihenfolge).
 - `pixel`: Anzahl der Pixel des Ortes; `flaeche_km2`: Fläche in km², auf ganze km² gerundet.
+- Ein Ort ohne Pixel (Warnung des Generators) hat `x = y = -1`, `pixel = 0` und `flaeche_km2 = 0`.
 
 Der Kartenindex folgt der Ladereihenfolge der Orte (Dateien sortiert, Einträge in
 Dateireihenfolge). Die Godot-Seite ordnet Kartenindex und Simulationsindex trotzdem immer über die
