@@ -1,0 +1,560 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
+# Orte: Mark und Sauerland – Orte ohne Daten (Meilenstein M3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
+# Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
+# ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
+# und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
+#
+# Umfang: Grafschaft Mark, kurkölnisches Sauerland, Siegerland, Wittgenstein und Dortmund (heute Regierungsbezirk Arnsberg).
+
+ort hamm {
+    name     = "Hamm"
+    gelaende = flachland
+    lage     = { 7.8209 51.6803 }
+    flaeche  = 137
+    stadt    = ja
+    kreis    = kr_hamm
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2911240; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort unna {
+    name     = "Unna"
+    gelaende = huegelland
+    lage     = { 7.6897 51.538 }
+    flaeche  = 124
+    stadt    = ja
+    kreis    = kr_hamm
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2820087; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort soest {
+    name     = "Soest"
+    gelaende = boerde
+    lage     = { 8.1062 51.5756 }
+    flaeche  = 249
+    stadt    = ja
+    kreis    = kr_hamm
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2831708; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort luenen {
+    name     = "Lünen"
+    gelaende = flachland
+    lage     = { 7.5287 51.6163 }
+    flaeche  = 115
+    stadt    = ja
+    kreis    = kr_hamm
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2875107; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bergkamen {
+    name     = "Bergkamen"
+    gelaende = flachland
+    lage     = { 7.6445 51.6163 }
+    flaeche  = 127
+    stadt    = ja
+    kreis    = kr_hamm
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2950344; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort werl {
+    name     = "Werl"
+    gelaende = boerde
+    lage     = { 7.914 51.5549 }
+    flaeche  = 159
+    stadt    = ja
+    kreis    = kr_hamm
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2810878; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort selm {
+    name     = "Selm"
+    gelaende = flachland
+    lage     = { 7.4681 51.6969 }
+    flaeche  = 104
+    stadt    = ja
+    kreis    = kr_hamm
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2833170; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort boenen {
+    name     = "Bönen"
+    gelaende = flachland
+    lage     = { 7.7667 51.6 }
+    flaeche  = 115
+    stadt    = nein
+    kreis    = kr_hamm
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2946478; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort welver {
+    name     = "Welver"
+    gelaende = boerde
+    lage     = { 7.9667 51.6167 }
+    flaeche  = 129
+    stadt    = nein
+    kreis    = kr_hamm
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2811361; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lippstadt {
+    name     = "Lippstadt"
+    gelaende = flachland
+    lage     = { 8.3448 51.6737 }
+    flaeche  = 175
+    stadt    = ja
+    kreis    = kr_lippstadt
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2876865; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort meschede {
+    name     = "Meschede"
+    gelaende = huegelland
+    lage     = { 8.2833 51.3502 }
+    flaeche  = 170
+    stadt    = ja
+    kreis    = kr_lippstadt
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2871668; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort warstein {
+    name     = "Warstein"
+    gelaende = huegelland
+    lage     = { 8.3485 51.4449 }
+    flaeche  = 142
+    stadt    = ja
+    kreis    = kr_lippstadt
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2814005; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort brilon {
+    name     = "Brilon"
+    gelaende = mittelgebirge
+    lage     = { 8.5715 51.3946 }
+    flaeche  = 200
+    stadt    = ja
+    kreis    = kr_lippstadt
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2944079; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort geseke {
+    name     = "Geseke"
+    gelaende = huegelland
+    lage     = { 8.5109 51.6409 }
+    flaeche  = 108
+    stadt    = ja
+    kreis    = kr_lippstadt
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2920834; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort marsberg {
+    name     = "Marsberg"
+    gelaende = huegelland
+    lage     = { 8.8495 51.4617 }
+    flaeche  = 272
+    stadt    = ja
+    kreis    = kr_lippstadt
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2873211; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort anroechte {
+    name     = "Anröchte"
+    gelaende = huegelland
+    lage     = { 8.3333 51.5667 }
+    flaeche  = 152
+    stadt    = nein
+    kreis    = kr_lippstadt
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2955940; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bestwig {
+    name     = "Bestwig"
+    gelaende = huegelland
+    lage     = { 8.4008 51.3608 }
+    flaeche  = 143
+    stadt    = nein
+    kreis    = kr_lippstadt
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2949773; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ruethen {
+    name     = "Rüthen"
+    gelaende = huegelland
+    lage     = { 8.436 51.4909 }
+    flaeche  = 123
+    stadt    = nein
+    kreis    = kr_lippstadt
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2842816; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort dortmund {
+    name     = "Dortmund"
+    gelaende = flachland
+    lage     = { 7.466 51.5149 }
+    flaeche  = 129
+    stadt    = ja
+    kreis    = kr_dortmund
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2935517; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bochum {
+    name     = "Bochum"
+    gelaende = flachland
+    lage     = { 7.2165 51.4817 }
+    flaeche  = 87
+    stadt    = ja
+    kreis    = kr_dortmund
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2947416; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort herne {
+    name     = "Herne"
+    gelaende = flachland
+    lage     = { 7.2257 51.5388 }
+    flaeche  = 65
+    stadt    = ja
+    kreis    = kr_dortmund
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2905891; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hagen {
+    name     = "Hagen"
+    gelaende = huegelland
+    lage     = { 7.4717 51.3608 }
+    flaeche  = 158
+    stadt    = ja
+    kreis    = kr_dortmund
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2912621; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort witten {
+    name     = "Witten"
+    gelaende = huegelland
+    lage     = { 7.3526 51.4436 }
+    flaeche  = 132
+    stadt    = ja
+    kreis    = kr_dortmund
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2807363; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort schwelm {
+    name     = "Schwelm"
+    gelaende = huegelland
+    lage     = { 7.2939 51.2863 }
+    flaeche  = 138
+    stadt    = ja
+    kreis    = kr_dortmund
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2834372; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hattingen {
+    name     = "Hattingen"
+    gelaende = huegelland
+    lage     = { 7.1856 51.3989 }
+    flaeche  = 144
+    stadt    = ja
+    kreis    = kr_dortmund
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2909230; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort schwerte {
+    name     = "Schwerte"
+    gelaende = huegelland
+    lage     = { 7.5675 51.4439 }
+    flaeche  = 144
+    stadt    = ja
+    kreis    = kr_dortmund
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2834265; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort halver {
+    name     = "Halver"
+    gelaende = huegelland
+    lage     = { 7.4982 51.1861 }
+    flaeche  = 95
+    stadt    = nein
+    kreis    = kr_dortmund
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2911384; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort breckerfeld {
+    name     = "Breckerfeld"
+    gelaende = huegelland
+    lage     = { 7.4681 51.2593 }
+    flaeche  = 117
+    stadt    = nein
+    kreis    = kr_dortmund
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2944955; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort arnsberg {
+    name     = "Arnsberg"
+    gelaende = huegelland
+    lage     = { 8.0833 51.3833 }
+    flaeche  = 238
+    stadt    = ja
+    kreis    = kr_arnsberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2955471; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort schmallenberg {
+    name     = "Schmallenberg"
+    gelaende = mittelgebirge
+    lage     = { 8.2851 51.1547 }
+    flaeche  = 268
+    stadt    = ja
+    kreis    = kr_arnsberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2838053; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort sundern {
+    name     = "Sundern"
+    gelaende = huegelland
+    lage     = { 8.0037 51.3281 }
+    flaeche  = 166
+    stadt    = ja
+    kreis    = kr_arnsberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2824655; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort eslohe {
+    name     = "Eslohe"
+    gelaende = huegelland
+    lage     = { 8.1695 51.2537 }
+    flaeche  = 220
+    stadt    = nein
+    kreis    = kr_arnsberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2928890; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort iserlohn {
+    name     = "Iserlohn"
+    gelaende = huegelland
+    lage     = { 7.7028 51.3755 }
+    flaeche  = 108
+    stadt    = ja
+    kreis    = kr_iserlohn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2895669; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort luedenscheid {
+    name     = "Lüdenscheid"
+    gelaende = huegelland
+    lage     = { 7.6273 51.2198 }
+    flaeche  = 93
+    stadt    = ja
+    kreis    = kr_iserlohn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2875457; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort menden {
+    name     = "Menden"
+    gelaende = huegelland
+    lage     = { 7.7782 51.4434 }
+    flaeche  = 145
+    stadt    = ja
+    kreis    = kr_iserlohn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2871983; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort plettenberg {
+    name     = "Plettenberg"
+    gelaende = huegelland
+    lage     = { 7.8726 51.2095 }
+    flaeche  = 115
+    stadt    = ja
+    kreis    = kr_iserlohn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2853209; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lennestadt {
+    name     = "Lennestadt"
+    gelaende = huegelland
+    lage     = { 8.0671 51.1172 }
+    flaeche  = 191
+    stadt    = ja
+    kreis    = kr_iserlohn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2878784; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort attendorn {
+    name     = "Attendorn"
+    gelaende = huegelland
+    lage     = { 7.9033 51.1264 }
+    flaeche  = 129
+    stadt    = ja
+    kreis    = kr_iserlohn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2954932; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort meinerzhagen {
+    name     = "Meinerzhagen"
+    gelaende = huegelland
+    lage     = { 7.6484 51.1074 }
+    flaeche  = 185
+    stadt    = ja
+    kreis    = kr_iserlohn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2872237; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort altena {
+    name     = "Altena"
+    gelaende = huegelland
+    lage     = { 7.6734 51.2947 }
+    flaeche  = 86
+    stadt    = ja
+    kreis    = kr_iserlohn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2957886; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort werdohl {
+    name     = "Werdohl"
+    gelaende = huegelland
+    lage     = { 7.7661 51.2601 }
+    flaeche  = 79
+    stadt    = ja
+    kreis    = kr_iserlohn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2810919; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort balve {
+    name     = "Balve"
+    gelaende = huegelland
+    lage     = { 7.8642 51.3315 }
+    flaeche  = 175
+    stadt    = nein
+    kreis    = kr_iserlohn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2953003; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort herscheid {
+    name     = "Herscheid"
+    gelaende = mittelgebirge
+    lage     = { 7.7435 51.179 }
+    flaeche  = 114
+    stadt    = nein
+    kreis    = kr_iserlohn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2905587; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bad_berleburg {
+    name     = "Bad Berleburg"
+    gelaende = mittelgebirge
+    lage     = { 8.3923 51.0522 }
+    flaeche  = 172
+    stadt    = ja
+    kreis    = kr_bad_berleburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2953545; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bad_laasphe {
+    name     = "Bad Laasphe"
+    gelaende = mittelgebirge
+    lage     = { 8.425 50.9314 }
+    flaeche  = 211
+    stadt    = nein
+    kreis    = kr_bad_berleburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2882091; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort winterberg_sauerland {
+    name     = "Winterberg (Sauerland)"
+    gelaende = mittelgebirge
+    lage     = { 8.5347 51.1925 }
+    flaeche  = 192
+    stadt    = nein
+    kreis    = kr_bad_berleburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2807788; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort erndtebrueck {
+    name     = "Erndtebrück"
+    gelaende = mittelgebirge
+    lage     = { 8.2529 50.9893 }
+    flaeche  = 158
+    stadt    = nein
+    kreis    = kr_bad_berleburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2929370; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort medebach {
+    name     = "Medebach"
+    gelaende = huegelland
+    lage     = { 8.7064 51.1971 }
+    flaeche  = 167
+    stadt    = nein
+    kreis    = kr_bad_berleburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2872557; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hallenberg {
+    name     = "Hallenberg"
+    gelaende = mittelgebirge
+    lage     = { 8.6201 51.1112 }
+    flaeche  = 141
+    stadt    = nein
+    kreis    = kr_bad_berleburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2911514; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort siegen {
+    name     = "Siegen"
+    gelaende = huegelland
+    lage     = { 8.0243 50.8748 }
+    flaeche  = 121
+    stadt    = ja
+    kreis    = kr_siegen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2832495; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort olpe {
+    name     = "Olpe"
+    gelaende = huegelland
+    lage     = { 7.8514 51.029 }
+    flaeche  = 188
+    stadt    = ja
+    kreis    = kr_siegen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2857306; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kreuztal {
+    name     = "Kreuztal"
+    gelaende = huegelland
+    lage     = { 7.9885 50.9678 }
+    flaeche  = 120
+    stadt    = ja
+    kreis    = kr_siegen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2884050; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wilnsdorf {
+    name     = "Wilnsdorf"
+    gelaende = huegelland
+    lage     = { 8.1 50.8167 }
+    flaeche  = 218
+    stadt    = ja
+    kreis    = kr_siegen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2808461; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hilchenbach {
+    name     = "Hilchenbach"
+    gelaende = mittelgebirge
+    lage     = { 8.1106 50.9969 }
+    flaeche  = 149
+    stadt    = nein
+    kreis    = kr_siegen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2904808; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort freudenberg {
+    name     = "Freudenberg"
+    gelaende = huegelland
+    lage     = { 7.8742 50.8974 }
+    flaeche  = 117
+    stadt    = nein
+    kreis    = kr_siegen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2924915; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}

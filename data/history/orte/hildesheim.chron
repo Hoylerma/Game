@@ -1,0 +1,140 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
+# Orte: Hildesheim – Orte ohne Daten (Meilenstein M3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
+# Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
+# ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
+# und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
+#
+# Umfang: Hochstift Hildesheim (heute Landkreis Hildesheim).
+
+ort hildesheim {
+    name     = "Hildesheim"
+    gelaende = boerde
+    lage     = { 9.9511 52.1508 }
+    flaeche  = 124
+    stadt    = ja
+    kreis    = kr_hildesheim
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2904789; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort sarstedt {
+    name     = "Sarstedt"
+    gelaende = boerde
+    lage     = { 9.8541 52.2349 }
+    flaeche  = 99
+    stadt    = nein
+    kreis    = kr_hildesheim
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2841386; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bad_salzdetfurth {
+    name     = "Bad Salzdetfurth"
+    gelaende = huegelland
+    lage     = { 10.0058 52.0578 }
+    flaeche  = 134
+    stadt    = nein
+    kreis    = kr_hildesheim
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2953362; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bockenem {
+    name     = "Bockenem"
+    gelaende = huegelland
+    lage     = { 10.132 52.0099 }
+    flaeche  = 98
+    stadt    = nein
+    kreis    = kr_hildesheim
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2947359; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort algermissen {
+    name     = "Algermissen"
+    gelaende = boerde
+    lage     = { 9.9692 52.2533 }
+    flaeche  = 91
+    stadt    = nein
+    kreis    = kr_hildesheim
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2958509; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort soehlde {
+    name     = "Söhlde"
+    gelaende = flachland
+    lage     = { 10.2324 52.189 }
+    flaeche  = 130
+    stadt    = nein
+    kreis    = kr_hildesheim
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2831671; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort schellerten {
+    name     = "Schellerten"
+    gelaende = boerde
+    lage     = { 10.1023 52.1853 }
+    flaeche  = 100
+    stadt    = nein
+    kreis    = kr_hildesheim
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2839819; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort holle {
+    name     = "Holle"
+    gelaende = huegelland
+    lage     = { 10.1601 52.0872 }
+    flaeche  = 105
+    stadt    = nein
+    kreis    = kr_hildesheim
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2900623; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lamspringe {
+    name     = "Lamspringe"
+    gelaende = huegelland
+    lage     = { 10.011 51.9607 }
+    flaeche  = 116
+    stadt    = nein
+    kreis    = kr_hildesheim
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2881661; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort alfeld_hildesheim {
+    name     = "Alfeld (Hildesheim)"
+    gelaende = huegelland
+    lage     = { 9.8199 51.9838 }
+    flaeche  = 130
+    stadt    = nein
+    kreis    = kr_alfeld_hildesheim
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2958533; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort nordstemmen {
+    name     = "Nordstemmen"
+    gelaende = huegelland
+    lage     = { 9.7835 52.162 }
+    flaeche  = 142
+    stadt    = nein
+    kreis    = kr_alfeld_hildesheim
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2861866; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gronau_hildesheim {
+    name     = "Gronau (Hildesheim)"
+    gelaende = huegelland
+    lage     = { 9.7768 52.0846 }
+    flaeche  = 114
+    stadt    = nein
+    kreis    = kr_alfeld_hildesheim
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2917139; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort duingen {
+    name     = "Duingen"
+    gelaende = huegelland
+    lage     = { 9.6958 52.0045 }
+    flaeche  = 115
+    stadt    = nein
+    kreis    = kr_alfeld_hildesheim
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2934697; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}

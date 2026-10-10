@@ -1,0 +1,48 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
+# Kreise: Kurhessen (Meilenstein M3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
+# Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
+# benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
+# historischen Verwaltungseinheiten.
+
+kreis kr_bad_arolsen {
+    name   = "Bad Arolsen"
+    quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
+}
+
+kreis kr_kassel {
+    name   = "Kassel"
+    quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
+}
+
+kreis kr_korbach {
+    name   = "Korbach"
+    quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
+}
+
+kreis kr_bad_wildungen {
+    name   = "Bad Wildungen"
+    quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
+}
+
+kreis kr_frankenberg_kurhessen {
+    name   = "Frankenberg (Kurhessen)"
+    quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
+}
+
+kreis kr_rotenburg_an_der_fulda {
+    name   = "Rotenburg an der Fulda"
+    quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
+}
+
+kreis kr_bad_hersfeld {
+    name   = "Bad Hersfeld"
+    quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
+}
+
+kreis kr_fulda {
+    name   = "Fulda"
+    quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
+}

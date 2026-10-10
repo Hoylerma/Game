@@ -1,0 +1,410 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
+# Orte: Ostwestfalen – Orte ohne Daten (Meilenstein M3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
+# Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
+# ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
+# und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
+#
+# Umfang: Minden-Ravensberg, Paderborner Land und Lippe (heute Regierungsbezirk Detmold).
+
+ort minden {
+    name     = "Minden"
+    gelaende = flussaue
+    lage     = { 8.9146 52.2895 }
+    flaeche  = 125
+    stadt    = ja
+    kreis    = kr_minden
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2871039; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort herford {
+    name     = "Herford"
+    gelaende = huegelland
+    lage     = { 8.6734 52.1146 }
+    flaeche  = 138
+    stadt    = ja
+    kreis    = kr_minden
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2906121; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bad_oeynhausen {
+    name     = "Bad Oeynhausen"
+    gelaende = huegelland
+    lage     = { 8.8036 52.207 }
+    flaeche  = 173
+    stadt    = ja
+    kreis    = kr_minden
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2953386; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort buende {
+    name     = "Bünde"
+    gelaende = flachland
+    lage     = { 8.5864 52.1984 }
+    flaeche  = 114
+    stadt    = ja
+    kreis    = kr_minden
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2941694; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort loehne {
+    name     = "Löhne"
+    gelaende = huegelland
+    lage     = { 8.6922 52.1885 }
+    flaeche  = 100
+    stadt    = ja
+    kreis    = kr_minden
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2876187; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort petershagen {
+    name     = "Petershagen"
+    gelaende = flussaue
+    lage     = { 8.9654 52.3751 }
+    flaeche  = 194
+    stadt    = ja
+    kreis    = kr_minden
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2854655; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort luebbecke {
+    name     = "Lübbecke"
+    gelaende = huegelland
+    lage     = { 8.6142 52.307 }
+    flaeche  = 114
+    stadt    = ja
+    kreis    = kr_minden
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2875626; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort rahden {
+    name     = "Rahden"
+    gelaende = flachland
+    lage     = { 8.6126 52.4337 }
+    flaeche  = 239
+    stadt    = nein
+    kreis    = kr_minden
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2850887; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort preussisch_oldendorf {
+    name     = "Preußisch Oldendorf"
+    gelaende = huegelland
+    lage     = { 8.4934 52.3059 }
+    flaeche  = 138
+    stadt    = nein
+    kreis    = kr_minden
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2852144; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hille {
+    name     = "Hille"
+    gelaende = flachland
+    lage     = { 8.75 52.3333 }
+    flaeche  = 168
+    stadt    = nein
+    kreis    = kr_minden
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2904725; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bielefeld {
+    name     = "Bielefeld"
+    gelaende = huegelland
+    lage     = { 8.5333 52.0333 }
+    flaeche  = 180
+    stadt    = ja
+    kreis    = kr_bielefeld
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2949186; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort harsewinkel {
+    name     = "Harsewinkel"
+    gelaende = flussaue
+    lage     = { 8.2277 51.9622 }
+    flaeche  = 107
+    stadt    = ja
+    kreis    = kr_bielefeld
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2910278; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort halle_ostwestfalen {
+    name     = "Halle (Ostwestfalen)"
+    gelaende = huegelland
+    lage     = { 8.3608 52.0601 }
+    flaeche  = 187
+    stadt    = ja
+    kreis    = kr_bielefeld
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2911520; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort versmold {
+    name     = "Versmold"
+    gelaende = flachland
+    lage     = { 8.1527 52.0401 }
+    flaeche  = 139
+    stadt    = ja
+    kreis    = kr_bielefeld
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2817537; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort spenge {
+    name     = "Spenge"
+    gelaende = flachland
+    lage     = { 8.4848 52.1402 }
+    flaeche  = 136
+    stadt    = nein
+    kreis    = kr_bielefeld
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2830637; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort detmold {
+    name     = "Detmold"
+    gelaende = huegelland
+    lage     = { 8.8732 51.9385 }
+    flaeche  = 157
+    stadt    = ja
+    kreis    = kr_detmold
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2937936; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lemgo {
+    name     = "Lemgo"
+    gelaende = huegelland
+    lage     = { 8.899 52.0279 }
+    flaeche  = 207
+    stadt    = ja
+    kreis    = kr_detmold
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2878943; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lage {
+    name     = "Lage"
+    gelaende = flachland
+    lage     = { 8.793 51.9922 }
+    flaeche  = 99
+    stadt    = ja
+    kreis    = kr_detmold
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2881956; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort oerlinghausen {
+    name     = "Oerlinghausen"
+    gelaende = huegelland
+    lage     = { 8.6622 51.9545 }
+    flaeche  = 168
+    stadt    = nein
+    kreis    = kr_detmold
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2857900; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort blomberg {
+    name     = "Blomberg"
+    gelaende = huegelland
+    lage     = { 9.0907 51.9433 }
+    flaeche  = 180
+    stadt    = nein
+    kreis    = kr_detmold
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2947641; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort steinheim {
+    name     = "Steinheim"
+    gelaende = flachland
+    lage     = { 9.0914 51.8707 }
+    flaeche  = 234
+    stadt    = nein
+    kreis    = kr_detmold
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2827990; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort guetersloh {
+    name     = "Gütersloh"
+    gelaende = flachland
+    lage     = { 8.3785 51.9069 }
+    flaeche  = 116
+    stadt    = ja
+    kreis    = kr_guetersloh
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2913366; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort rheda_wiedenbrueck {
+    name     = "Rheda-Wiedenbrück"
+    gelaende = flussaue
+    lage     = { 8.3002 51.8497 }
+    flaeche  = 106
+    stadt    = ja
+    kreis    = kr_guetersloh
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2847690; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort verl {
+    name     = "Verl"
+    gelaende = flachland
+    lage     = { 8.5167 51.8833 }
+    flaeche  = 119
+    stadt    = ja
+    kreis    = kr_guetersloh
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2817576; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort rietberg {
+    name     = "Rietberg"
+    gelaende = flussaue
+    lage     = { 8.4284 51.8092 }
+    flaeche  = 145
+    stadt    = ja
+    kreis    = kr_guetersloh
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2846843; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hoexter {
+    name     = "Höxter"
+    gelaende = huegelland
+    lage     = { 9.3816 51.775 }
+    flaeche  = 170
+    stadt    = ja
+    kreis    = kr_hoexter
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2898321; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort warburg {
+    name     = "Warburg"
+    gelaende = huegelland
+    lage     = { 9.1464 51.4901 }
+    flaeche  = 170
+    stadt    = ja
+    kreis    = kr_hoexter
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2814153; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bad_driburg {
+    name     = "Bad Driburg"
+    gelaende = huegelland
+    lage     = { 9.0197 51.733 }
+    flaeche  = 197
+    stadt    = nein
+    kreis    = kr_hoexter
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2953525; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort beverungen {
+    name     = "Beverungen"
+    gelaende = huegelland
+    lage     = { 9.3742 51.668 }
+    flaeche  = 168
+    stadt    = nein
+    kreis    = kr_hoexter
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2949475; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort brakel {
+    name     = "Brakel"
+    gelaende = huegelland
+    lage     = { 9.186 51.7175 }
+    flaeche  = 182
+    stadt    = nein
+    kreis    = kr_hoexter
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2945542; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort borgentreich {
+    name     = "Borgentreich"
+    gelaende = huegelland
+    lage     = { 9.2411 51.5692 }
+    flaeche  = 179
+    stadt    = nein
+    kreis    = kr_hoexter
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2946291; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort willebadessen {
+    name     = "Willebadessen"
+    gelaende = huegelland
+    lage     = { 9.0369 51.6256 }
+    flaeche  = 167
+    stadt    = nein
+    kreis    = kr_hoexter
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2808619; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lichtenau_ostwestfalen {
+    name     = "Lichtenau (Ostwestfalen)"
+    gelaende = huegelland
+    lage     = { 8.8966 51.6171 }
+    flaeche  = 207
+    stadt    = nein
+    kreis    = kr_hoexter
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2878133; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort paderborn {
+    name     = "Paderborn"
+    gelaende = huegelland
+    lage     = { 8.7544 51.7191 }
+    flaeche  = 154
+    stadt    = ja
+    kreis    = kr_paderborn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2855745; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort delbrueck {
+    name     = "Delbrück"
+    gelaende = flachland
+    lage     = { 8.5622 51.765 }
+    flaeche  = 109
+    stadt    = ja
+    kreis    = kr_paderborn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2938389; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort salzkotten {
+    name     = "Salzkotten"
+    gelaende = flachland
+    lage     = { 8.6009 51.6717 }
+    flaeche  = 134
+    stadt    = ja
+    kreis    = kr_paderborn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2842131; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bueren {
+    name     = "Büren"
+    gelaende = huegelland
+    lage     = { 8.5596 51.5511 }
+    flaeche  = 129
+    stadt    = ja
+    kreis    = kr_paderborn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2941570; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hoevelhof {
+    name     = "Hövelhof"
+    gelaende = heide
+    lage     = { 8.65 51.8167 }
+    flaeche  = 147
+    stadt    = nein
+    kreis    = kr_paderborn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2898364; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bad_lippspringe {
+    name     = "Bad Lippspringe"
+    gelaende = huegelland
+    lage     = { 8.8168 51.7833 }
+    flaeche  = 188
+    stadt    = nein
+    kreis    = kr_paderborn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2953405; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wuennenberg {
+    name     = "Wünnenberg"
+    gelaende = huegelland
+    lage     = { 8.6993 51.52 }
+    flaeche  = 186
+    stadt    = nein
+    kreis    = kr_paderborn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2805785; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}

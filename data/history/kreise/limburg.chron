@@ -1,0 +1,18 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
+# Kreise: Limburg (Meilenstein M3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
+# Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
+# benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
+# historischen Verwaltungseinheiten.
+
+kreis kr_venlo {
+    name   = "Venlo"
+    quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
+}
+
+kreis kr_maestricht {
+    name   = "Maestricht"
+    quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
+}

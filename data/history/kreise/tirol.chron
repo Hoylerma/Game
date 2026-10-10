@@ -1,0 +1,78 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
+# Kreise: Tirol (Meilenstein M3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
+# Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
+# benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
+# historischen Verwaltungseinheiten.
+
+kreis kr_sankt_johann_in_tirol {
+    name   = "Sankt Johann in Tirol"
+    quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
+}
+
+kreis kr_woergl {
+    name   = "Wörgl"
+    quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
+}
+
+kreis kr_reutte {
+    name   = "Reutte"
+    quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
+}
+
+kreis kr_innsbruck {
+    name   = "Innsbruck"
+    quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
+}
+
+kreis kr_imst {
+    name   = "Imst"
+    quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
+}
+
+kreis kr_mayrhofen {
+    name   = "Mayrhofen"
+    quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
+}
+
+kreis kr_landeck {
+    name   = "Landeck"
+    quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
+}
+
+kreis kr_sterzing {
+    name   = "Sterzing"
+    quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
+}
+
+kreis kr_lienz {
+    name   = "Lienz"
+    quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
+}
+
+kreis kr_bruneck {
+    name   = "Bruneck"
+    quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
+}
+
+kreis kr_brixen {
+    name   = "Brixen"
+    quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
+}
+
+kreis kr_meran {
+    name   = "Meran"
+    quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
+}
+
+kreis kr_schlanders {
+    name   = "Schlanders"
+    quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
+}
+
+kreis kr_bozen {
+    name   = "Bozen"
+    quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
+}

@@ -11,13 +11,17 @@
 # Kondominium beider Herzöge. Der Güstrower Herzog Gustav Adolf (geb. 1633)
 # stand bis 1654 unter Vormundschaft Adolf Friedrichs I. von Schwerin.
 # Mecklenburg verlor im Krieg einen sehr großen Teil seiner Bevölkerung.
+#
+# Ergänzt in Meilenstein M3 (tools/geodaten/orte.py): weitere Orte ohne Daten (ohne Historie) aus GeoNames, räumlich ausgewählt, Gelände aus dem Höhenmodell, Fläche aus der Karte.
+# Umfang der Landschaft Mecklenburg: Herzogtümer Mecklenburg (heute Mecklenburg-Vorpommern ohne die Landkreise Vorpommern-Rügen und Vorpommern-Greifswald).
 
 ort schwerin {
     name     = "Schwerin"
     gelaende = seenplatte
     lage     = { 11.41 53.63 }
-    flaeche  = 250
+    flaeche  = 106
     stadt    = ja
+    kreis    = kr_schwerin
     quelle   = "Residenz Herzog Adolf Friedrichs I. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung nach regionaler Kriegsbetroffenheit geschätzt"
 
     1648.10.24 = {
@@ -32,8 +36,9 @@ ort wismar {
     name     = "Wismar"
     gelaende = kueste
     lage     = { 11.46 53.89 }
-    flaeche  = 150
+    flaeche  = 146
     stadt    = ja
+    kreis    = kr_wismar
     quelle   = "IPO Art. X: Stadt und Hafen Wismar mit Poel und Neukloster an Schweden (Reichslehen); schwedische Festung. Bevölkerung Schätzung (Größenordnung nach Literatur zur Bevölkerungsentwicklung)"
 
     1648.10.24 = {
@@ -48,8 +53,9 @@ ort rostock {
     name     = "Rostock"
     gelaende = kueste
     lage     = { 12.14 54.09 }
-    flaeche  = 200
+    flaeche  = 218
     stadt    = ja
+    kreis    = kr_rostock
     quelle   = "Hansestadt und Universität; nach dem Fahrenholzer Vertrag (1621) Kondominium beider Herzöge, hier vereinfacht Mecklenburg-Schwerin zugeordnet (Adolf Friedrich I. führte 1648 auch die Güstrower Vormundschaft); Seezoll in Warnemünde in schwedischer Hand. Bevölkerung Schätzung"
 
     1648.10.24 = {
@@ -64,8 +70,9 @@ ort guestrow {
     name     = "Güstrow"
     gelaende = flachland
     lage     = { 12.18 53.79 }
-    flaeche  = 250
+    flaeche  = 239
     stadt    = ja
+    kreis    = kr_guestrow
     quelle   = "Residenz des Güstrower Landesteils. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung nach regionaler Kriegsbetroffenheit geschätzt"
 
     1648.10.24 = {
@@ -80,8 +87,9 @@ ort parchim {
     name     = "Parchim"
     gelaende = flachland
     lage     = { 11.85 53.43 }
-    flaeche  = 260
+    flaeche  = 284
     stadt    = nein
+    kreis    = kr_schwerin
     quelle   = "Vorderstadt des Landes Mecklenburg an der Elde, nach dem Fahrenholzer Vertrag schwerinsch. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung geschätzt"
 
     1648.10.24 = {
@@ -96,8 +104,9 @@ ort neubrandenburg {
     name     = "Neubrandenburg"
     gelaende = seenplatte
     lage     = { 13.26 53.56 }
-    flaeche  = 260
+    flaeche  = 214
     stadt    = nein
+    kreis    = kr_neubrandenburg
     quelle   = "Vorderstadt des Landes Stargard, 1631 von Tilly erstürmt. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung nach regionaler Kriegsbetroffenheit geschätzt"
 
     1648.10.24 = {
@@ -106,4 +115,674 @@ ort neubrandenburg {
         konfession   = { lutherisch = 100 }
         verwuestung  = 0.75
     }
+}
+
+ort bad_doberan {
+    name     = "Bad Doberan"
+    gelaende = flachland
+    lage     = { 11.9005 54.1071 }
+    flaeche  = 121
+    stadt    = nein
+    kreis    = kr_rostock
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2953528; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort buetzow {
+    name     = "Bützow"
+    gelaende = flachland
+    lage     = { 11.9826 53.8483 }
+    flaeche  = 232
+    stadt    = nein
+    kreis    = kr_rostock
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2940476; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kuehlungsborn {
+    name     = "Kühlungsborn"
+    gelaende = huegelland
+    lage     = { 11.7599 54.1504 }
+    flaeche  = 70
+    stadt    = nein
+    kreis    = kr_rostock
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2856193; Name nach GeoNames ohne modernen Zusatz (Ostseebad Kühlungsborn); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort schwaan {
+    name     = "Schwaan"
+    gelaende = flachland
+    lage     = { 12.1072 53.9405 }
+    flaeche  = 197
+    stadt    = nein
+    kreis    = kr_rostock
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2835542; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort laage {
+    name     = "Laage"
+    gelaende = flachland
+    lage     = { 12.3469 53.9256 }
+    flaeche  = 248
+    stadt    = nein
+    kreis    = kr_rostock
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2882141; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort satow_oberhagen {
+    name     = "Satow-Oberhagen"
+    gelaende = flachland
+    lage     = { 11.8847 53.9954 }
+    flaeche  = 240
+    stadt    = nein
+    kreis    = kr_rostock
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2841321; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort graal_mueritz {
+    name     = "Graal-Müritz"
+    gelaende = kueste
+    lage     = { 12.2514 54.2512 }
+    flaeche  = 153
+    stadt    = nein
+    kreis    = kr_rostock
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2856194; Name nach GeoNames ohne modernen Zusatz (Seeheilbad Graal-Müritz); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort elmenhorst {
+    name     = "Elmenhorst"
+    gelaende = kueste
+    lage     = { 12.0108 54.1558 }
+    flaeche  = 82
+    stadt    = nein
+    kreis    = kr_rostock
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2930850; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort dummerstorf {
+    name     = "Dummerstorf"
+    gelaende = flachland
+    lage     = { 12.2282 54.0148 }
+    flaeche  = 149
+    stadt    = nein
+    kreis    = kr_rostock
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2934635; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort tessin {
+    name     = "Tessin"
+    gelaende = flachland
+    lage     = { 12.4652 54.0276 }
+    flaeche  = 278
+    stadt    = nein
+    kreis    = kr_rostock
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2823418; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort demmin {
+    name     = "Demmin"
+    gelaende = flachland
+    lage     = { 13.0314 53.9076 }
+    flaeche  = 281
+    stadt    = nein
+    kreis    = kr_demmin
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2938284; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort malchin {
+    name     = "Malchin"
+    gelaende = flachland
+    lage     = { 12.7654 53.7399 }
+    flaeche  = 201
+    stadt    = nein
+    kreis    = kr_demmin
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2874131; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort teterow {
+    name     = "Teterow"
+    gelaende = flachland
+    lage     = { 12.5749 53.7754 }
+    flaeche  = 199
+    stadt    = nein
+    kreis    = kr_demmin
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2823398; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gnoien {
+    name     = "Gnoien"
+    gelaende = flachland
+    lage     = { 12.711 53.9687 }
+    flaeche  = 166
+    stadt    = nein
+    kreis    = kr_demmin
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2919657; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort dargun {
+    name     = "Dargun"
+    gelaende = seenplatte
+    lage     = { 12.8501 53.9009 }
+    flaeche  = 183
+    stadt    = nein
+    kreis    = kr_demmin
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2938924; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort neukalen {
+    name     = "Neukalen"
+    gelaende = seenplatte
+    lage     = { 12.7902 53.8227 }
+    flaeche  = 95
+    stadt    = nein
+    kreis    = kr_demmin
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2864806; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort joerdenstorf {
+    name     = "Jördenstorf"
+    gelaende = flachland
+    lage     = { 12.6162 53.8782 }
+    flaeche  = 186
+    stadt    = nein
+    kreis    = kr_demmin
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2894707; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort borrentin {
+    name     = "Borrentin"
+    gelaende = seenplatte
+    lage     = { 12.9672 53.8097 }
+    flaeche  = 153
+    stadt    = nein
+    kreis    = kr_demmin
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2946034; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort neubukow {
+    name     = "Neubukow"
+    gelaende = flachland
+    lage     = { 11.6739 54.0318 }
+    flaeche  = 201
+    stadt    = nein
+    kreis    = kr_wismar
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2866087; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort neukloster {
+    name     = "Neukloster"
+    gelaende = flachland
+    lage     = { 11.6851 53.8655 }
+    flaeche  = 293
+    stadt    = nein
+    kreis    = kr_wismar
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2864705; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bad_kleinen {
+    name     = "Bad Kleinen"
+    gelaende = seenplatte
+    lage     = { 11.4717 53.7713 }
+    flaeche  = 279
+    stadt    = nein
+    kreis    = kr_wismar
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2953422; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort blowatz {
+    name     = "Blowatz"
+    gelaende = kueste
+    lage     = { 11.5336 53.9897 }
+    flaeche  = 90
+    stadt    = nein
+    kreis    = kr_wismar
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2947604; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gramkow {
+    name     = "Gramkow"
+    gelaende = flachland
+    lage     = { 11.3174 53.9209 }
+    flaeche  = 89
+    stadt    = nein
+    kreis    = kr_wismar
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2918168; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort grevesmuehlen {
+    name     = "Grevesmühlen"
+    gelaende = flachland
+    lage     = { 11.1916 53.8634 }
+    flaeche  = 174
+    stadt    = nein
+    kreis    = kr_grevesmuehlen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2917520; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gadebusch {
+    name     = "Gadebusch"
+    gelaende = flachland
+    lage     = { 11.1168 53.7014 }
+    flaeche  = 192
+    stadt    = nein
+    kreis    = kr_grevesmuehlen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2923410; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kluetz {
+    name     = "Klütz"
+    gelaende = kueste
+    lage     = { 11.1637 53.9647 }
+    flaeche  = 130
+    stadt    = nein
+    kreis    = kr_grevesmuehlen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2887290; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort dassow {
+    name     = "Dassow"
+    gelaende = seenplatte
+    lage     = { 10.9755 53.911 }
+    flaeche  = 203
+    stadt    = nein
+    kreis    = kr_grevesmuehlen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2938798; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort rehna {
+    name     = "Rehna"
+    gelaende = flachland
+    lage     = { 11.0493 53.7788 }
+    flaeche  = 211
+    stadt    = nein
+    kreis    = kr_grevesmuehlen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2849263; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bruesewitz {
+    name     = "Brüsewitz"
+    gelaende = flachland
+    lage     = { 11.2438 53.6759 }
+    flaeche  = 164
+    stadt    = nein
+    kreis    = kr_grevesmuehlen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2942992; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort krakow_am_see {
+    name     = "Krakow am See"
+    gelaende = flachland
+    lage     = { 12.2703 53.6516 }
+    flaeche  = 316
+    stadt    = nein
+    kreis    = kr_guestrow
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2884850; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort goldberg_mecklenburg {
+    name     = "Goldberg (Mecklenburg)"
+    gelaende = flachland
+    lage     = { 12.0885 53.5888 }
+    flaeche  = 309
+    stadt    = nein
+    kreis    = kr_guestrow
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2919366; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lalendorf {
+    name     = "Lalendorf"
+    gelaende = flachland
+    lage     = { 12.3898 53.7577 }
+    flaeche  = 213
+    stadt    = nein
+    kreis    = kr_guestrow
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2881789; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ludwigslust {
+    name     = "Ludwigslust"
+    gelaende = flachland
+    lage     = { 11.4971 53.3292 }
+    flaeche  = 260
+    stadt    = nein
+    kreis    = kr_schwerin
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2875343; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort neustadt_glewe {
+    name     = "Neustadt-Glewe"
+    gelaende = flachland
+    lage     = { 11.5926 53.3785 }
+    flaeche  = 187
+    stadt    = nein
+    kreis    = kr_schwerin
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2864036; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort luebz {
+    name     = "Lübz"
+    gelaende = flachland
+    lage     = { 12.0292 53.4626 }
+    flaeche  = 278
+    stadt    = nein
+    kreis    = kr_schwerin
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2875558; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort crivitz {
+    name     = "Crivitz"
+    gelaende = flachland
+    lage     = { 11.6519 53.5732 }
+    flaeche  = 244
+    stadt    = nein
+    kreis    = kr_schwerin
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2939739; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort sternberg_mecklenburg {
+    name     = "Sternberg (Mecklenburg)"
+    gelaende = flachland
+    lage     = { 11.8268 53.7124 }
+    flaeche  = 273
+    stadt    = nein
+    kreis    = kr_schwerin
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2827336; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort plate {
+    name     = "Plate"
+    gelaende = flachland
+    lage     = { 11.5093 53.5515 }
+    flaeche  = 162
+    stadt    = nein
+    kreis    = kr_schwerin
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2853406; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort loecknitz {
+    name     = "Löcknitz"
+    gelaende = flachland
+    lage     = { 11.7811 53.2869 }
+    flaeche  = 265
+    stadt    = nein
+    kreis    = kr_schwerin
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2876539; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort rastow {
+    name     = "Rastow"
+    gelaende = flachland
+    lage     = { 11.4314 53.4571 }
+    flaeche  = 194
+    stadt    = nein
+    kreis    = kr_schwerin
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2850238; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort stralendorf {
+    name     = "Stralendorf"
+    gelaende = flachland
+    lage     = { 11.3036 53.575 }
+    flaeche  = 199
+    stadt    = nein
+    kreis    = kr_schwerin
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2826290; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort demen {
+    name     = "Demen"
+    gelaende = flachland
+    lage     = { 11.7664 53.6297 }
+    flaeche  = 228
+    stadt    = nein
+    kreis    = kr_schwerin
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2938304; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort altentreptow {
+    name     = "Altentreptow"
+    gelaende = flachland
+    lage     = { 13.265 53.6942 }
+    flaeche  = 262
+    stadt    = nein
+    kreis    = kr_neubrandenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2957437; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort woldegk {
+    name     = "Woldegk"
+    gelaende = flachland
+    lage     = { 13.5836 53.4606 }
+    flaeche  = 331
+    stadt    = nein
+    kreis    = kr_neubrandenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2806963; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort friedland_mecklenburg {
+    name     = "Friedland (Mecklenburg)"
+    gelaende = flachland
+    lage     = { 13.554 53.6703 }
+    flaeche  = 376
+    stadt    = nein
+    kreis    = kr_neubrandenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2924679; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort penzlin {
+    name     = "Penzlin"
+    gelaende = flachland
+    lage     = { 13.0841 53.504 }
+    flaeche  = 187
+    stadt    = nein
+    kreis    = kr_neubrandenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2854906; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort loitz {
+    name     = "Loitz"
+    gelaende = flachland
+    lage     = { 13.388 53.4421 }
+    flaeche  = 263
+    stadt    = nein
+    kreis    = kr_neubrandenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2876044; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort moellenhagen {
+    name     = "Möllenhagen"
+    gelaende = flachland
+    lage     = { 12.9287 53.5239 }
+    flaeche  = 266
+    stadt    = nein
+    kreis    = kr_neubrandenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2870025; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort guetzkow {
+    name     = "Gützkow"
+    gelaende = flachland
+    lage     = { 13.1066 53.7243 }
+    flaeche  = 195
+    stadt    = nein
+    kreis    = kr_neubrandenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2913290; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gross_nemerow {
+    name     = "Groß Nemerow"
+    gelaende = flachland
+    lage     = { 13.2248 53.4734 }
+    flaeche  = 141
+    stadt    = nein
+    kreis    = kr_neubrandenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2915236; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wackerow {
+    name     = "Wackerow"
+    gelaende = flachland
+    lage     = { 12.9816 53.6768 }
+    flaeche  = 242
+    stadt    = nein
+    kreis    = kr_neubrandenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2815604; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hagenow {
+    name     = "Hagenow"
+    gelaende = flachland
+    lage     = { 11.1916 53.4313 }
+    flaeche  = 219
+    stadt    = nein
+    kreis    = kr_hagenow
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2912481; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort boizenburg {
+    name     = "Boizenburg"
+    gelaende = flussaue
+    lage     = { 10.7238 53.3815 }
+    flaeche  = 221
+    stadt    = nein
+    kreis    = kr_hagenow
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2946821; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wittenburg {
+    name     = "Wittenburg"
+    gelaende = flachland
+    lage     = { 11.0805 53.506 }
+    flaeche  = 234
+    stadt    = nein
+    kreis    = kr_hagenow
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2807335; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort luebtheen {
+    name     = "Lübtheen"
+    gelaende = flachland
+    lage     = { 11.0837 53.3012 }
+    flaeche  = 332
+    stadt    = nein
+    kreis    = kr_hagenow
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2875559; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort doemitz {
+    name     = "Dömitz"
+    gelaende = flussaue
+    lage     = { 11.2502 53.1408 }
+    flaeche  = 211
+    stadt    = nein
+    kreis    = kr_hagenow
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2936292; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort zarrentin {
+    name     = "Zarrentin"
+    gelaende = seenplatte
+    lage     = { 10.9155 53.5508 }
+    flaeche  = 289
+    stadt    = nein
+    kreis    = kr_hagenow
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2805193; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort malliss {
+    name     = "Malliß"
+    gelaende = flachland
+    lage     = { 11.3272 53.2113 }
+    flaeche  = 242
+    stadt    = nein
+    kreis    = kr_hagenow
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2874070; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort neustrelitz {
+    name     = "Neustrelitz"
+    gelaende = flachland
+    lage     = { 13.0729 53.3613 }
+    flaeche  = 182
+    stadt    = ja
+    kreis    = kr_neustrelitz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2864005; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort waren {
+    name     = "Waren"
+    gelaende = seenplatte
+    lage     = { 12.6799 53.5204 }
+    flaeche  = 189
+    stadt    = ja
+    kreis    = kr_neustrelitz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2814131; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort malchow {
+    name     = "Malchow"
+    gelaende = seenplatte
+    lage     = { 12.4221 53.4748 }
+    flaeche  = 255
+    stadt    = nein
+    kreis    = kr_neustrelitz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2874122; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort plau_am_see {
+    name     = "Plau am See"
+    gelaende = seenplatte
+    lage     = { 12.2625 53.4582 }
+    flaeche  = 295
+    stadt    = nein
+    kreis    = kr_neustrelitz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2853297; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wesenberg {
+    name     = "Wesenberg"
+    gelaende = flachland
+    lage     = { 12.9694 53.2803 }
+    flaeche  = 263
+    stadt    = nein
+    kreis    = kr_neustrelitz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2810662; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort roebel {
+    name     = "Röbel"
+    gelaende = seenplatte
+    lage     = { 12.6037 53.3755 }
+    flaeche  = 277
+    stadt    = nein
+    kreis    = kr_neustrelitz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2846286; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort rechlin {
+    name     = "Rechlin"
+    gelaende = seenplatte
+    lage     = { 12.7254 53.3355 }
+    flaeche  = 276
+    stadt    = nein
+    kreis    = kr_neustrelitz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2849717; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort carpin {
+    name     = "Carpin"
+    gelaende = flachland
+    lage     = { 13.2433 53.3569 }
+    flaeche  = 232
+    stadt    = nein
+    kreis    = kr_neustrelitz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2940259; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort grabowhoefe {
+    name     = "Grabowhöfe"
+    gelaende = seenplatte
+    lage     = { 12.5948 53.5686 }
+    flaeche  = 290
+    stadt    = nein
+    kreis    = kr_neustrelitz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2918398; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }

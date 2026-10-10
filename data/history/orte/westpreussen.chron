@@ -1,0 +1,1250 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
+# Orte: Westpreußen – Orte ohne Daten (Meilenstein M3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
+# Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
+# ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
+# und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
+#
+# Umfang: Pommerellen, Kulmer Land, Marienburg und Elbing (1466–1772 Preußen Königlichen Anteils, danach bis 1920 preußisch).
+
+ort gniewino {
+    name     = "Gniewino"
+    gelaende = huegelland
+    lage     = { 18.0166 54.7171 }
+    flaeche  = 198
+    stadt    = nein
+    kreis    = kr_gniewino
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3099125; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort leczyce {
+    name     = "Łęczyce"
+    gelaende = flachland
+    lage     = { 17.8593 54.5941 }
+    flaeche  = 232
+    stadt    = nein
+    kreis    = kr_gniewino
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3093478; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort krokowa {
+    name     = "Krokowa"
+    gelaende = flachland
+    lage     = { 18.1616 54.7792 }
+    flaeche  = 214
+    stadt    = nein
+    kreis    = kr_gniewino
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3094672; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort choczewo {
+    name     = "Choczewo"
+    gelaende = flachland
+    lage     = { 17.8917 54.7399 }
+    flaeche  = 243
+    stadt    = nein
+    kreis    = kr_gniewino
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3101693; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gdingen {
+    name     = "Gdingen"
+    gelaende = huegelland
+    lage     = { 18.5319 54.5189 }
+    flaeche  = 72
+    stadt    = ja
+    kreis    = kr_gdingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3099424; deutscher Name aus den GeoNames-Alternativnamen (heute Gdynia); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort neustadt_westpreussen {
+    name     = "Neustadt (Westpreußen)"
+    gelaende = huegelland
+    lage     = { 18.2356 54.6057 }
+    flaeche  = 155
+    stadt    = ja
+    kreis    = kr_gdingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3082473; deutscher Name aus den GeoNames-Alternativnamen (heute Wejherowo); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort rumia {
+    name     = "Rumia"
+    gelaende = huegelland
+    lage     = { 18.388 54.5709 }
+    flaeche  = 162
+    stadt    = ja
+    kreis    = kr_gdingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3086706; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort zoppot {
+    name     = "Zoppot"
+    gelaende = huegelland
+    lage     = { 18.56 54.4418 }
+    flaeche  = 111
+    stadt    = ja
+    kreis    = kr_gdingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3085151; deutscher Name aus den GeoNames-Alternativnamen (heute Sopot); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort putzig {
+    name     = "Putzig"
+    gelaende = kueste
+    lage     = { 18.4084 54.7179 }
+    flaeche  = 138
+    stadt    = ja
+    kreis    = kr_gdingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3087691; deutscher Name aus den GeoNames-Alternativnamen (heute Puck); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wladyslawowo {
+    name     = "Władysławowo"
+    gelaende = kueste
+    lage     = { 18.4009 54.7909 }
+    flaeche  = 80
+    stadt    = nein
+    kreis    = kr_gdingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3081752; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hela {
+    name     = "Hela"
+    gelaende = kueste
+    lage     = { 18.8141 54.6045 }
+    flaeche  = 19
+    stadt    = nein
+    kreis    = kr_gdingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3098030; deutscher Name aus den GeoNames-Alternativnamen (heute Hel); Lage auf das nächste Landpixel gesetzt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort luzino {
+    name     = "Luzino"
+    gelaende = huegelland
+    lage     = { 18.1091 54.566 }
+    flaeche  = 189
+    stadt    = nein
+    kreis    = kr_gdingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3092643; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort heisternest {
+    name     = "Heisternest"
+    gelaende = kueste
+    lage     = { 18.6763 54.7079 }
+    flaeche  = 17
+    stadt    = nein
+    kreis    = kr_gdingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3097421; deutscher Name aus den GeoNames-Alternativnamen (heute Jastarnia); Lage auf das nächste Landpixel gesetzt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort szemud {
+    name     = "Szemud"
+    gelaende = flachland
+    lage     = { 18.2228 54.4871 }
+    flaeche  = 155
+    stadt    = nein
+    kreis    = kr_gdingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3083725; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bojano {
+    name     = "Bojano"
+    gelaende = flachland
+    lage     = { 18.3841 54.4712 }
+    flaeche  = 131
+    stadt    = nein
+    kreis    = kr_gdingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3103015; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort danzig {
+    name     = "Danzig"
+    gelaende = kueste
+    lage     = { 18.6491 54.3523 }
+    flaeche  = 164
+    stadt    = ja
+    kreis    = kr_danzig
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3099434; deutscher Name aus den GeoNames-Alternativnamen (heute Gdańsk); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort dirschau {
+    name     = "Dirschau"
+    gelaende = flussaue
+    lage     = { 18.7779 54.0924 }
+    flaeche  = 183
+    stadt    = ja
+    kreis    = kr_danzig
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3083426; deutscher Name aus den GeoNames-Alternativnamen (heute Tczew); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort praust {
+    name     = "Praust"
+    gelaende = flachland
+    lage     = { 18.6363 54.2622 }
+    flaeche  = 145
+    stadt    = ja
+    kreis    = kr_danzig
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3088034; deutscher Name aus den GeoNames-Alternativnamen (heute Pruszcz Gdański); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort pszczolki {
+    name     = "Pszczółki"
+    gelaende = flachland
+    lage     = { 18.6979 54.173 }
+    flaeche  = 122
+    stadt    = nein
+    kreis    = kr_danzig
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3087708; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gross_trampken {
+    name     = "Gross Trampken"
+    gelaende = huegelland
+    lage     = { 18.54 54.1706 }
+    flaeche  = 141
+    stadt    = nein
+    kreis    = kr_danzig
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3083255; deutscher Name aus den GeoNames-Alternativnamen (heute Trąbki Wielkie); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gross_zuender {
+    name     = "Gross Zünder"
+    gelaende = flachland
+    lage     = { 18.8457 54.2471 }
+    flaeche  = 272
+    stadt    = nein
+    kreis    = kr_danzig
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3101919; deutscher Name aus den GeoNames-Alternativnamen (heute Cedry Wielkie); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort elbing {
+    name     = "Elbing"
+    gelaende = huegelland
+    lage     = { 19.4088 54.1522 }
+    flaeche  = 372
+    stadt    = ja
+    kreis    = kr_elbing
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3099759; deutscher Name aus den GeoNames-Alternativnamen (heute Elbląg); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort marienburg {
+    name     = "Marienburg"
+    gelaende = flachland
+    lage     = { 19.0266 54.0359 }
+    flaeche  = 186
+    stadt    = ja
+    kreis    = kr_elbing
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3092472; deutscher Name aus den GeoNames-Alternativnamen (heute Malbork); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort tiegenhof {
+    name     = "Tiegenhof"
+    gelaende = flachland
+    lage     = { 19.1177 54.2131 }
+    flaeche  = 204
+    stadt    = nein
+    kreis    = kr_elbing
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3090502; deutscher Name aus den GeoNames-Alternativnamen (heute Nowy Dwór Gdański); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort neuteich {
+    name     = "Neuteich"
+    gelaende = flachland
+    lage     = { 19.0091 54.1361 }
+    flaeche  = 180
+    stadt    = nein
+    kreis    = kr_elbing
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3090470; deutscher Name aus den GeoNames-Alternativnamen (heute Nowy Staw); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort sztutowo {
+    name     = "Sztutowo"
+    gelaende = kueste
+    lage     = { 19.1792 54.3268 }
+    flaeche  = 166
+    stadt    = nein
+    kreis    = kr_elbing
+    quelle   = "GeoNames (CC BY 4.0), geonameid 7534274; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort krynica_morska {
+    name     = "Krynica Morska"
+    gelaende = kueste
+    lage     = { 19.4441 54.3805 }
+    flaeche  = 33
+    stadt    = nein
+    kreis    = kr_elbing
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3094562; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort altfelde {
+    name     = "Altfelde"
+    gelaende = flachland
+    lage     = { 19.2087 54.0567 }
+    flaeche  = 252
+    stadt    = nein
+    kreis    = kr_elbing
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3084859; deutscher Name aus den GeoNames-Alternativnamen (heute Stare Pole); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort koscierzyna {
+    name     = "Kościerzyna"
+    gelaende = flachland
+    lage     = { 17.9812 54.1223 }
+    flaeche  = 184
+    stadt    = ja
+    kreis    = kr_koscierzyna
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3095126; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kartuzy {
+    name     = "Kartuzy"
+    gelaende = huegelland
+    lage     = { 18.1974 54.3342 }
+    flaeche  = 231
+    stadt    = nein
+    kreis    = kr_koscierzyna
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3096525; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort sierakowice {
+    name     = "Sierakowice"
+    gelaende = huegelland
+    lage     = { 17.8925 54.3461 }
+    flaeche  = 221
+    stadt    = nein
+    kreis    = kr_koscierzyna
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3085970; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort zukowo {
+    name     = "Żukowo"
+    gelaende = flachland
+    lage     = { 18.3648 54.3422 }
+    flaeche  = 152
+    stadt    = nein
+    kreis    = kr_koscierzyna
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3079969; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort stezyca {
+    name     = "Stężyca"
+    gelaende = flachland
+    lage     = { 17.9557 54.2059 }
+    flaeche  = 195
+    stadt    = nein
+    kreis    = kr_koscierzyna
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3084641; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kolbudy {
+    name     = "Kolbudy"
+    gelaende = huegelland
+    lage     = { 18.4664 54.2699 }
+    flaeche  = 131
+    stadt    = nein
+    kreis    = kr_koscierzyna
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3095833; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort przywidz {
+    name     = "Przywidz"
+    gelaende = huegelland
+    lage     = { 18.3212 54.1952 }
+    flaeche  = 164
+    stadt    = nein
+    kreis    = kr_koscierzyna
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3087758; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort stara_kiszewa {
+    name     = "Stara Kiszewa"
+    gelaende = flachland
+    lage     = { 18.1696 53.9901 }
+    flaeche  = 231
+    stadt    = nein
+    kreis    = kr_koscierzyna
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3084953; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort suleczyno {
+    name     = "Sulęczyno"
+    gelaende = flachland
+    lage     = { 17.7733 54.233 }
+    flaeche  = 218
+    stadt    = nein
+    kreis    = kr_koscierzyna
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3084234; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort grabowo_koscierskie {
+    name     = "Grabowo Kościerskie"
+    gelaende = huegelland
+    lage     = { 18.1469 54.1682 }
+    flaeche  = 157
+    stadt    = nein
+    kreis    = kr_koscierzyna
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3098453; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort linia {
+    name     = "Linia"
+    gelaende = flachland
+    lage     = { 17.9345 54.4514 }
+    flaeche  = 229
+    stadt    = nein
+    kreis    = kr_koscierzyna
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3093394; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort liniewo {
+    name     = "Liniewo"
+    gelaende = flachland
+    lage     = { 18.2267 54.0766 }
+    flaeche  = 183
+    stadt    = nein
+    kreis    = kr_koscierzyna
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3093389; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort starogard_gdanski {
+    name     = "Starogard Gdański"
+    gelaende = flachland
+    lage     = { 18.5264 53.964 }
+    flaeche  = 179
+    stadt    = ja
+    kreis    = kr_starogard_gdanski
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3084826; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort pelplin {
+    name     = "Pelplin"
+    gelaende = flachland
+    lage     = { 18.6977 53.9283 }
+    flaeche  = 153
+    stadt    = nein
+    kreis    = kr_starogard_gdanski
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3089282; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort skarszewy {
+    name     = "Skarszewy"
+    gelaende = flachland
+    lage     = { 18.4442 54.0691 }
+    flaeche  = 199
+    stadt    = nein
+    kreis    = kr_starogard_gdanski
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3085826; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort skorcz {
+    name     = "Skórcz"
+    gelaende = flachland
+    lage     = { 18.5256 53.7944 }
+    flaeche  = 248
+    stadt    = nein
+    kreis    = kr_starogard_gdanski
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3085766; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort zblewo {
+    name     = "Zblewo"
+    gelaende = flachland
+    lage     = { 18.3226 53.9337 }
+    flaeche  = 178
+    stadt    = nein
+    kreis    = kr_starogard_gdanski
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3080476; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort subkowy {
+    name     = "Subkowy"
+    gelaende = flachland
+    lage     = { 18.7693 54.0023 }
+    flaeche  = 170
+    stadt    = nein
+    kreis    = kr_starogard_gdanski
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3084312; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort smetowo_graniczne {
+    name     = "Smętowo Graniczne"
+    gelaende = flachland
+    lage     = { 18.6859 53.7464 }
+    flaeche  = 206
+    stadt    = nein
+    kreis    = kr_starogard_gdanski
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3085414; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lubichowo {
+    name     = "Lubichowo"
+    gelaende = flachland
+    lage     = { 18.399 53.8514 }
+    flaeche  = 188
+    stadt    = nein
+    kreis    = kr_starogard_gdanski
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3092988; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort stuhm {
+    name     = "Stuhm"
+    gelaende = flachland
+    lage     = { 19.0307 53.9208 }
+    flaeche  = 165
+    stadt    = nein
+    kreis    = kr_stuhm
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3083616; deutscher Name aus den GeoNames-Alternativnamen (heute Sztum); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gniew {
+    name     = "Gniew"
+    gelaende = flussaue
+    lage     = { 18.8231 53.836 }
+    flaeche  = 161
+    stadt    = nein
+    kreis    = kr_stuhm
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3099127; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort christburg {
+    name     = "Christburg"
+    gelaende = flachland
+    lage     = { 19.347 53.922 }
+    flaeche  = 347
+    stadt    = nein
+    kreis    = kr_stuhm
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3099842; deutscher Name aus den GeoNames-Alternativnamen (heute Dzierzgoń); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort saalfeld_westpreussen {
+    name     = "Saalfeld (Westpreußen)"
+    gelaende = seenplatte
+    lage     = { 19.6052 53.8453 }
+    flaeche  = 288
+    stadt    = nein
+    kreis    = kr_stuhm
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3080757; deutscher Name aus den GeoNames-Alternativnamen (heute Zalewo); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ryjewo {
+    name     = "Ryjewo"
+    gelaende = flachland
+    lage     = { 18.9608 53.8446 }
+    flaeche  = 143
+    stadt    = nein
+    kreis    = kr_stuhm
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3086524; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort niklaskirchen {
+    name     = "Niklaskirchen"
+    gelaende = flachland
+    lage     = { 19.1657 53.8513 }
+    flaeche  = 176
+    stadt    = nein
+    kreis    = kr_stuhm
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3091838; deutscher Name aus den GeoNames-Alternativnamen (heute Mikołajki Pomorskie); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort czersk {
+    name     = "Czersk"
+    gelaende = flachland
+    lage     = { 17.9765 53.7959 }
+    flaeche  = 296
+    stadt    = nein
+    kreis    = kr_czersk
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3100984; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort sliwice {
+    name     = "Śliwice"
+    gelaende = flachland
+    lage     = { 18.1737 53.7088 }
+    flaeche  = 261
+    stadt    = nein
+    kreis    = kr_czersk
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3085565; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort brusy {
+    name     = "Brusy"
+    gelaende = flachland
+    lage     = { 17.7179 53.8845 }
+    flaeche  = 371
+    stadt    = nein
+    kreis    = kr_czersk
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3102488; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort czarna_woda {
+    name     = "Czarna Woda"
+    gelaende = flachland
+    lage     = { 18.1001 53.8446 }
+    flaeche  = 208
+    stadt    = nein
+    kreis    = kr_czersk
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3101170; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lipusz {
+    name     = "Lipusz"
+    gelaende = flachland
+    lage     = { 17.7845 54.0981 }
+    flaeche  = 156
+    stadt    = nein
+    kreis    = kr_czersk
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3093237; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort dziemiany {
+    name     = "Dziemiany"
+    gelaende = flachland
+    lage     = { 17.7675 54.0064 }
+    flaeche  = 222
+    stadt    = nein
+    kreis    = kr_czersk
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3099878; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort karsin {
+    name     = "Karsin"
+    gelaende = flachland
+    lage     = { 17.9209 53.9077 }
+    flaeche  = 203
+    stadt    = nein
+    kreis    = kr_czersk
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3096558; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort konitz_westpreussen {
+    name     = "Konitz (Westpreußen)"
+    gelaende = flachland
+    lage     = { 17.557 53.6955 }
+    flaeche  = 359
+    stadt    = ja
+    kreis    = kr_konitz_westpreussen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3101672; deutscher Name aus den GeoNames-Alternativnamen (heute Chojnice); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort schlochau {
+    name     = "Schlochau"
+    gelaende = flachland
+    lage     = { 17.3588 53.6672 }
+    flaeche  = 270
+    stadt    = nein
+    kreis    = kr_konitz_westpreussen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3100933; deutscher Name aus den GeoNames-Alternativnamen (heute Człuchów); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hammerstein {
+    name     = "Hammerstein"
+    gelaende = flachland
+    lage     = { 16.9383 53.6842 }
+    flaeche  = 293
+    stadt    = nein
+    kreis    = kr_konitz_westpreussen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3101161; deutscher Name aus den GeoNames-Alternativnamen (heute Czarne); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort preussisch_friedland {
+    name     = "Preussisch Friedland"
+    gelaende = flachland
+    lage     = { 17.2364 53.5382 }
+    flaeche  = 425
+    stadt    = nein
+    kreis    = kr_konitz_westpreussen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3100489; deutscher Name aus den GeoNames-Alternativnamen (heute Debrzno); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ratzebuhr {
+    name     = "Ratzebuhr"
+    gelaende = flachland
+    lage     = { 16.8516 53.5362 }
+    flaeche  = 291
+    stadt    = nein
+    kreis    = kr_konitz_westpreussen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3090245; deutscher Name aus den GeoNames-Alternativnamen (heute Okonek); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort prechlau {
+    name     = "Prechlau"
+    gelaende = flachland
+    lage     = { 17.2521 53.7985 }
+    flaeche  = 330
+    stadt    = nein
+    kreis    = kr_konitz_westpreussen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3088017; deutscher Name aus den GeoNames-Alternativnamen (heute Przechlewo); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort koczala {
+    name     = "Koczała"
+    gelaende = flachland
+    lage     = { 17.0653 53.9045 }
+    flaeche  = 272
+    stadt    = nein
+    kreis    = kr_konitz_westpreussen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3095874; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort rzeczenica {
+    name     = "Rzeczenica"
+    gelaende = flachland
+    lage     = { 17.1075 53.7579 }
+    flaeche  = 248
+    stadt    = nein
+    kreis    = kr_konitz_westpreussen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3086469; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort deutsch_eylau {
+    name     = "Deutsch Eylau"
+    gelaende = flachland
+    lage     = { 19.5685 53.596 }
+    flaeche  = 383
+    stadt    = ja
+    kreis    = kr_deutsch_eylau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3097902; deutscher Name aus den GeoNames-Alternativnamen (heute Iława); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort riesenburg {
+    name     = "Riesenburg"
+    gelaende = flachland
+    lage     = { 19.2055 53.755 }
+    flaeche  = 220
+    stadt    = nein
+    kreis    = kr_deutsch_eylau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3088161; deutscher Name aus den GeoNames-Alternativnamen (heute Prabuty); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lubawa {
+    name     = "Lubawa"
+    gelaende = flachland
+    lage     = { 19.7497 53.5043 }
+    flaeche  = 296
+    stadt    = nein
+    kreis    = kr_deutsch_eylau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3093028; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort rosenberg_westpreussen {
+    name     = "Rosenberg (Westpreußen)"
+    gelaende = flachland
+    lage     = { 19.3364 53.7174 }
+    flaeche  = 264
+    stadt    = nein
+    kreis    = kr_deutsch_eylau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3084143; deutscher Name aus den GeoNames-Alternativnamen (heute Susz); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort freystadt_westpreussen {
+    name     = "Freystadt (Westpreußen)"
+    gelaende = flachland
+    lage     = { 19.2635 53.6086 }
+    flaeche  = 222
+    stadt    = nein
+    kreis    = kr_deutsch_eylau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3096208; deutscher Name aus den GeoNames-Alternativnamen (heute Kisielice); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort biskupiec {
+    name     = "Biskupiec"
+    gelaende = flachland
+    lage     = { 19.3506 53.5006 }
+    flaeche  = 276
+    stadt    = nein
+    kreis    = kr_deutsch_eylau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 7534548; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort tuchola {
+    name     = "Tuchola"
+    gelaende = flachland
+    lage     = { 17.859 53.5879 }
+    flaeche  = 228
+    stadt    = ja
+    kreis    = kr_tuchola
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3083043; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort zempelburg {
+    name     = "Zempelburg"
+    gelaende = flachland
+    lage     = { 17.5317 53.452 }
+    flaeche  = 174
+    stadt    = nein
+    kreis    = kr_tuchola
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3086153; deutscher Name aus den GeoNames-Alternativnamen (heute Sępólno Krajeńskie); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort vandsburg {
+    name     = "Vandsburg"
+    gelaende = flachland
+    lage     = { 17.4906 53.3538 }
+    flaeche  = 168
+    stadt    = nein
+    kreis    = kr_tuchola
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3082364; deutscher Name aus den GeoNames-Alternativnamen (heute Więcbork); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kamien_krajenski {
+    name     = "Kamień Krajeński"
+    gelaende = flachland
+    lage     = { 17.5202 53.5335 }
+    flaeche  = 220
+    stadt    = nein
+    kreis    = kr_tuchola
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3096791; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gostycyn {
+    name     = "Gostycyn"
+    gelaende = flachland
+    lage     = { 17.8098 53.4901 }
+    flaeche  = 165
+    stadt    = nein
+    kreis    = kr_tuchola
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3098629; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort cekcyn {
+    name     = "Cekcyn"
+    gelaende = flachland
+    lage     = { 18.0112 53.5729 }
+    flaeche  = 220
+    stadt    = nein
+    kreis    = kr_tuchola
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3101902; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort sypniewo {
+    name     = "Sypniewo"
+    gelaende = flachland
+    lage     = { 17.3269 53.3698 }
+    flaeche  = 200
+    stadt    = nein
+    kreis    = kr_tuchola
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3083909; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort sosno {
+    name     = "Sośno"
+    gelaende = flachland
+    lage     = { 17.6871 53.3892 }
+    flaeche  = 221
+    stadt    = nein
+    kreis    = kr_tuchola
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3085134; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kesowo {
+    name     = "Kęsowo"
+    gelaende = flachland
+    lage     = { 17.7158 53.5587 }
+    flaeche  = 179
+    stadt    = nein
+    kreis    = kr_tuchola
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3096334; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort graudenz {
+    name     = "Graudenz"
+    gelaende = flussaue
+    lage     = { 18.7537 53.4841 }
+    flaeche  = 269
+    stadt    = ja
+    kreis    = kr_graudenz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3098218; deutscher Name aus den GeoNames-Alternativnamen (heute Grudziądz); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort marienwerder {
+    name     = "Marienwerder"
+    gelaende = flachland
+    lage     = { 18.9311 53.7249 }
+    flaeche  = 207
+    stadt    = ja
+    kreis    = kr_graudenz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3094086; deutscher Name aus den GeoNames-Alternativnamen (heute Kwidzyn); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort briesen {
+    name     = "Briesen"
+    gelaende = flachland
+    lage     = { 18.9477 53.2799 }
+    flaeche  = 172
+    stadt    = ja
+    kreis    = kr_graudenz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3082734; deutscher Name aus den GeoNames-Alternativnamen (heute Wąbrzeźno); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort nowe {
+    name     = "Nowe"
+    gelaende = flussaue
+    lage     = { 18.7272 53.6491 }
+    flaeche  = 156
+    stadt    = nein
+    kreis    = kr_graudenz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3090660; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort jablonowo_pomorskie {
+    name     = "Jabłonowo Pomorskie"
+    gelaende = flachland
+    lage     = { 19.1551 53.3914 }
+    flaeche  = 261
+    stadt    = nein
+    kreis    = kr_graudenz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3097808; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lasin {
+    name     = "Łasin"
+    gelaende = flachland
+    lage     = { 19.0883 53.5179 }
+    flaeche  = 229
+    stadt    = nein
+    kreis    = kr_graudenz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3093906; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort radzyn_chelminski {
+    name     = "Radzyń Chełmiński"
+    gelaende = flachland
+    lage     = { 18.9372 53.3851 }
+    flaeche  = 215
+    stadt    = nein
+    kreis    = kr_graudenz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3087410; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort garnsee {
+    name     = "Garnsee"
+    gelaende = flachland
+    lage     = { 18.9469 53.6112 }
+    flaeche  = 244
+    stadt    = nein
+    kreis    = kr_graudenz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3099492; deutscher Name aus den GeoNames-Alternativnamen (heute Gardeja); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort warlubie {
+    name     = "Warlubie"
+    gelaende = flachland
+    lage     = { 18.6344 53.5875 }
+    flaeche  = 182
+    stadt    = nein
+    kreis    = kr_graudenz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3082611; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort debowa_laka {
+    name     = "Dębowa Łąka"
+    gelaende = flachland
+    lage     = { 19.0959 53.2554 }
+    flaeche  = 186
+    stadt    = nein
+    kreis    = kr_graudenz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3100518; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kulm {
+    name     = "Kulm"
+    gelaende = flussaue
+    lage     = { 18.4251 53.3486 }
+    flaeche  = 247
+    stadt    = ja
+    kreis    = kr_kulm
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3101795; deutscher Name aus den GeoNames-Alternativnamen (heute Chełmno); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort pruszcz {
+    name     = "Pruszcz"
+    gelaende = flachland
+    lage     = { 18.1989 53.3302 }
+    flaeche  = 273
+    stadt    = nein
+    kreis    = kr_kulm
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3088033; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort jezewo {
+    name     = "Jeżewo"
+    gelaende = flachland
+    lage     = { 18.4944 53.5106 }
+    flaeche  = 272
+    stadt    = nein
+    kreis    = kr_kulm
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3097194; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort osie {
+    name     = "Osie"
+    gelaende = flachland
+    lage     = { 18.3437 53.5992 }
+    flaeche  = 271
+    stadt    = nein
+    kreis    = kr_kulm
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3089942; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bukowiec {
+    name     = "Bukowiec"
+    gelaende = flachland
+    lage     = { 18.2405 53.4338 }
+    flaeche  = 182
+    stadt    = nein
+    kreis    = kr_kulm
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3102100; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lubiewo {
+    name     = "Lubiewo"
+    gelaende = flachland
+    lage     = { 18.0299 53.4654 }
+    flaeche  = 200
+    stadt    = nein
+    kreis    = kr_kulm
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3092938; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lniano {
+    name     = "Lniano"
+    gelaende = flachland
+    lage     = { 18.2127 53.528 }
+    flaeche  = 194
+    stadt    = nein
+    kreis    = kr_kulm
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3093161; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort deutsch_krone {
+    name     = "Deutsch Krone"
+    gelaende = flachland
+    lage     = { 16.4712 53.2779 }
+    flaeche  = 547
+    stadt    = ja
+    kreis    = kr_deutsch_krone
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3082704; deutscher Name aus den GeoNames-Alternativnamen (heute Wałcz); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort flatow_i_westpr {
+    name     = "Flatow i. Westpr."
+    gelaende = flachland
+    lage     = { 17.0408 53.3635 }
+    flaeche  = 334
+    stadt    = nein
+    kreis    = kr_deutsch_krone
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3080071; deutscher Name aus den GeoNames-Alternativnamen (heute Złotów); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort jastrow {
+    name     = "Jastrow"
+    gelaende = flachland
+    lage     = { 16.8176 53.4205 }
+    flaeche  = 202
+    stadt    = nein
+    kreis    = kr_deutsch_krone
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3097420; deutscher Name aus den GeoNames-Alternativnamen (heute Jastrowie); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort maerkisch_friedland {
+    name     = "Märkisch Friedland"
+    gelaende = flachland
+    lage     = { 16.0879 53.3407 }
+    flaeche  = 278
+    stadt    = nein
+    kreis    = kr_deutsch_krone
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3091700; deutscher Name aus den GeoNames-Alternativnamen (heute Mirosławiec); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort schloppe {
+    name     = "Schloppe"
+    gelaende = flachland
+    lage     = { 16.121 53.0886 }
+    flaeche  = 414
+    stadt    = nein
+    kreis    = kr_deutsch_krone
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3100936; deutscher Name aus den GeoNames-Alternativnamen (heute Człopa); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort tuetz {
+    name     = "Tütz"
+    gelaende = flachland
+    lage     = { 16.1537 53.1937 }
+    flaeche  = 308
+    stadt    = nein
+    kreis    = kr_deutsch_krone
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3083026; deutscher Name aus den GeoNames-Alternativnamen (heute Tuczno); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort tarnowka {
+    name     = "Tarnówka"
+    gelaende = flachland
+    lage     = { 16.8527 53.3417 }
+    flaeche  = 251
+    stadt    = nein
+    kreis    = kr_deutsch_krone
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3083453; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort zippnow {
+    name     = "Zippnow"
+    gelaende = flachland
+    lage     = { 16.6058 53.4682 }
+    flaeche  = 441
+    stadt    = nein
+    kreis    = kr_deutsch_krone
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3083908; deutscher Name aus den GeoNames-Alternativnamen (heute Sypniewo); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort brodnica {
+    name     = "Brodnica"
+    gelaende = flachland
+    lage     = { 19.3965 53.2597 }
+    flaeche  = 319
+    stadt    = ja
+    kreis    = kr_brodnica
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3102627; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort nowe_miasto_lubawskie {
+    name     = "Nowe Miasto Lubawskie"
+    gelaende = flachland
+    lage     = { 19.5952 53.4208 }
+    flaeche  = 257
+    stadt    = nein
+    kreis    = kr_brodnica
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3090613; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gorzno {
+    name     = "Górzno"
+    gelaende = flachland
+    lage     = { 19.6432 53.1978 }
+    flaeche  = 290
+    stadt    = nein
+    kreis    = kr_brodnica
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3098727; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort brzozie {
+    name     = "Brzozie"
+    gelaende = flachland
+    lage     = { 19.6048 53.3255 }
+    flaeche  = 202
+    stadt    = nein
+    kreis    = kr_brodnica
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3102316; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort thorn {
+    name     = "Thorn"
+    gelaende = flussaue
+    lage     = { 18.5981 53.0138 }
+    flaeche  = 251
+    stadt    = ja
+    kreis    = kr_thorn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3083271; deutscher Name aus den GeoNames-Alternativnamen (heute Toruń); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort chelmza {
+    name     = "Chełmża"
+    gelaende = flachland
+    lage     = { 18.6047 53.1846 }
+    flaeche  = 232
+    stadt    = nein
+    kreis    = kr_thorn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3101787; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort golub_dobrzyn {
+    name     = "Golub-Dobrzyń"
+    gelaende = flachland
+    lage     = { 19.0538 53.1109 }
+    flaeche  = 166
+    stadt    = nein
+    kreis    = kr_thorn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3098925; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kowalewo_pomorskie {
+    name     = "Kowalewo Pomorskie"
+    gelaende = flachland
+    lage     = { 18.8987 53.1543 }
+    flaeche  = 201
+    stadt    = nein
+    kreis    = kr_thorn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3094953; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort unislaw {
+    name     = "Unisław"
+    gelaende = flachland
+    lage     = { 18.3862 53.2124 }
+    flaeche  = 188
+    stadt    = nein
+    kreis    = kr_thorn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3082785; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort czernikowo {
+    name     = "Czernikowo"
+    gelaende = flachland
+    lage     = { 18.938 52.9469 }
+    flaeche  = 185
+    stadt    = nein
+    kreis    = kr_thorn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3100994; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lubicz_gorny {
+    name     = "Lubicz Górny"
+    gelaende = flachland
+    lage     = { 18.771 53.0269 }
+    flaeche  = 213
+    stadt    = nein
+    kreis    = kr_thorn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 7535493; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lisewo {
+    name     = "Lisewo"
+    gelaende = flachland
+    lage     = { 18.6871 53.2958 }
+    flaeche  = 294
+    stadt    = nein
+    kreis    = kr_thorn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3093226; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort zbojno {
+    name     = "Zbójno"
+    gelaende = flachland
+    lage     = { 19.1575 53.0085 }
+    flaeche  = 245
+    stadt    = nein
+    kreis    = kr_thorn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3080473; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lubianka {
+    name     = "Łubianka"
+    gelaende = flachland
+    lage     = { 18.4811 53.1386 }
+    flaeche  = 201
+    stadt    = nein
+    kreis    = kr_thorn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3093009; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ciechocin {
+    name     = "Ciechocin"
+    gelaende = flachland
+    lage     = { 18.9263 53.0558 }
+    flaeche  = 137
+    stadt    = nein
+    kreis    = kr_thorn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3101428; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}

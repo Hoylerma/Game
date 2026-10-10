@@ -1,0 +1,43 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
+# Kreise: Münsterland (Meilenstein M3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
+# Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
+# benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
+# historischen Verwaltungseinheiten.
+
+kreis kr_rheine {
+    name   = "Rheine"
+    quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
+}
+
+kreis kr_gronau_muensterland {
+    name   = "Gronau (Münsterland)"
+    quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
+}
+
+kreis kr_muenster {
+    name   = "Münster"
+    quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
+}
+
+kreis kr_luedinghausen {
+    name   = "Lüdinghausen"
+    quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
+}
+
+kreis kr_ahlen {
+    name   = "Ahlen"
+    quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
+}
+
+kreis kr_marl {
+    name   = "Marl"
+    quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
+}
+
+kreis kr_gelsenkirchen {
+    name   = "Gelsenkirchen"
+    quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
+}

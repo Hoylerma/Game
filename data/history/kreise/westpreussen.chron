@@ -1,0 +1,88 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
+# Kreise: Westpreußen (Meilenstein M3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
+# Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
+# benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
+# historischen Verwaltungseinheiten.
+
+kreis kr_gniewino {
+    name   = "Gniewino"
+    quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
+}
+
+kreis kr_gdingen {
+    name   = "Gdingen"
+    quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
+}
+
+kreis kr_danzig {
+    name   = "Danzig"
+    quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
+}
+
+kreis kr_elbing {
+    name   = "Elbing"
+    quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
+}
+
+kreis kr_koscierzyna {
+    name   = "Kościerzyna"
+    quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
+}
+
+kreis kr_starogard_gdanski {
+    name   = "Starogard Gdański"
+    quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
+}
+
+kreis kr_stuhm {
+    name   = "Stuhm"
+    quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
+}
+
+kreis kr_czersk {
+    name   = "Czersk"
+    quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
+}
+
+kreis kr_konitz_westpreussen {
+    name   = "Konitz (Westpreußen)"
+    quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
+}
+
+kreis kr_deutsch_eylau {
+    name   = "Deutsch Eylau"
+    quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
+}
+
+kreis kr_tuchola {
+    name   = "Tuchola"
+    quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
+}
+
+kreis kr_graudenz {
+    name   = "Graudenz"
+    quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
+}
+
+kreis kr_kulm {
+    name   = "Kulm"
+    quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
+}
+
+kreis kr_deutsch_krone {
+    name   = "Deutsch Krone"
+    quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
+}
+
+kreis kr_brodnica {
+    name   = "Brodnica"
+    quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
+}
+
+kreis kr_thorn {
+    name   = "Thorn"
+    quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
+}

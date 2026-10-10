@@ -1,0 +1,460 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
+# Orte: Bremen-Verden – Orte ohne Daten (Meilenstein M3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
+# Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
+# ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
+# und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
+#
+# Umfang: Elbe-Weser-Dreieck mit der Stadt Bremen (1648 größtenteils das schwedische Herzogtum Bremen-Verden; heute Landkreise Cuxhaven, Stade, Rotenburg, Osterholz und Verden, Bremen und Bremerhaven).
+
+ort stade {
+    name     = "Stade"
+    gelaende = kueste
+    lage     = { 9.4763 53.5934 }
+    flaeche  = 161
+    stadt    = ja
+    kreis    = kr_stade
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2829901; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort drochtersen {
+    name     = "Drochtersen"
+    gelaende = kueste
+    lage     = { 9.3846 53.7101 }
+    flaeche  = 99
+    stadt    = nein
+    kreis    = kr_stade
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2934915; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hemmoor {
+    name     = "Hemmoor"
+    gelaende = flachland
+    lage     = { 9.1549 53.687 }
+    flaeche  = 255
+    stadt    = nein
+    kreis    = kr_stade
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2906524; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort himmelpforten {
+    name     = "Himmelpforten"
+    gelaende = flachland
+    lage     = { 9.3052 53.6141 }
+    flaeche  = 165
+    stadt    = nein
+    kreis    = kr_stade
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2904543; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wischhafen {
+    name     = "Wischhafen"
+    gelaende = kueste
+    lage     = { 9.3167 53.7833 }
+    flaeche  = 151
+    stadt    = nein
+    kreis    = kr_stade
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2807484; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort cadenberge {
+    name     = "Cadenberge"
+    gelaende = flachland
+    lage     = { 9.0627 53.7693 }
+    flaeche  = 230
+    stadt    = nein
+    kreis    = kr_stade
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2940430; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bremerhaven {
+    name     = "Bremerhaven"
+    gelaende = kueste
+    lage     = { 8.593 53.5361 }
+    flaeche  = 131
+    stadt    = ja
+    kreis    = kr_bremerhaven
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2944368; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort cuxhaven {
+    name     = "Cuxhaven"
+    gelaende = kueste
+    lage     = { 8.699 53.8683 }
+    flaeche  = 74
+    stadt    = ja
+    kreis    = kr_bremerhaven
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2939658; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort loxstedt {
+    name     = "Loxstedt"
+    gelaende = flachland
+    lage     = { 8.65 53.4667 }
+    flaeche  = 164
+    stadt    = nein
+    kreis    = kr_bremerhaven
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2875645; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort nordholz {
+    name     = "Nordholz"
+    gelaende = kueste
+    lage     = { 8.6135 53.7845 }
+    flaeche  = 127
+    stadt    = nein
+    kreis    = kr_bremerhaven
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2861939; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort otterndorf {
+    name     = "Otterndorf"
+    gelaende = kueste
+    lage     = { 8.9007 53.8091 }
+    flaeche  = 111
+    stadt    = nein
+    kreis    = kr_bremerhaven
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2856024; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort dorum {
+    name     = "Dorum"
+    gelaende = kueste
+    lage     = { 8.5673 53.6879 }
+    flaeche  = 153
+    stadt    = nein
+    kreis    = kr_bremerhaven
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2935494; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort drangstedt {
+    name     = "Drangstedt"
+    gelaende = flachland
+    lage     = { 8.7558 53.6136 }
+    flaeche  = 288
+    stadt    = nein
+    kreis    = kr_bremerhaven
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2935334; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wanna {
+    name     = "Wanna"
+    gelaende = flachland
+    lage     = { 8.8083 53.7416 }
+    flaeche  = 176
+    stadt    = nein
+    kreis    = kr_bremerhaven
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2814241; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bremervoerde {
+    name     = "Bremervörde"
+    gelaende = flachland
+    lage     = { 9.1431 53.4846 }
+    flaeche  = 183
+    stadt    = nein
+    kreis    = kr_bremervoerde
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2944354; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gnarrenburg {
+    name     = "Gnarrenburg"
+    gelaende = flachland
+    lage     = { 9 53.3833 }
+    flaeche  = 175
+    stadt    = nein
+    kreis    = kr_bremervoerde
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2919692; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kutenholz {
+    name     = "Kutenholz"
+    gelaende = flachland
+    lage     = { 9.3212 53.4815 }
+    flaeche  = 190
+    stadt    = nein
+    kreis    = kr_bremervoerde
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2882224; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort beverstedt {
+    name     = "Beverstedt"
+    gelaende = flachland
+    lage     = { 8.8192 53.4341 }
+    flaeche  = 145
+    stadt    = nein
+    kreis    = kr_bremervoerde
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2949482; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort selsingen {
+    name     = "Selsingen"
+    gelaende = flachland
+    lage     = { 9.2129 53.3733 }
+    flaeche  = 185
+    stadt    = nein
+    kreis    = kr_bremervoerde
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2833154; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hipstedt {
+    name     = "Hipstedt"
+    gelaende = flachland
+    lage     = { 8.9667 53.4833 }
+    flaeche  = 219
+    stadt    = nein
+    kreis    = kr_bremervoerde
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2903841; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort buxtehude {
+    name     = "Buxtehude"
+    gelaende = flachland
+    lage     = { 9.6864 53.4672 }
+    flaeche  = 206
+    stadt    = ja
+    kreis    = kr_buxtehude
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2940451; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort zeven {
+    name     = "Zeven"
+    gelaende = flachland
+    lage     = { 9.2768 53.2966 }
+    flaeche  = 172
+    stadt    = nein
+    kreis    = kr_buxtehude
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2804642; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort harsefeld {
+    name     = "Harsefeld"
+    gelaende = flachland
+    lage     = { 9.503 53.454 }
+    flaeche  = 169
+    stadt    = nein
+    kreis    = kr_buxtehude
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2910280; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort sittensen {
+    name     = "Sittensen"
+    gelaende = flachland
+    lage     = { 9.5043 53.2762 }
+    flaeche  = 182
+    stadt    = nein
+    kreis    = kr_buxtehude
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2831802; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort sauensiek {
+    name     = "Sauensiek"
+    gelaende = flachland
+    lage     = { 9.6 53.3833 }
+    flaeche  = 105
+    stadt    = nein
+    kreis    = kr_buxtehude
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2841204; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gyhum {
+    name     = "Gyhum"
+    gelaende = flachland
+    lage     = { 9.3167 53.2167 }
+    flaeche  = 157
+    stadt    = nein
+    kreis    = kr_buxtehude
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2913280; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bremen {
+    name     = "Bremen"
+    gelaende = flussaue
+    lage     = { 8.8072 53.0758 }
+    flaeche  = 129
+    stadt    = ja
+    kreis    = kr_bremen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2944388; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort osterholz_scharmbeck {
+    name     = "Osterholz-Scharmbeck"
+    gelaende = flachland
+    lage     = { 8.7953 53.227 }
+    flaeche  = 129
+    stadt    = ja
+    kreis    = kr_bremen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2856500; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort achim {
+    name     = "Achim"
+    gelaende = flussaue
+    lage     = { 9.0263 53.0142 }
+    flaeche  = 186
+    stadt    = ja
+    kreis    = kr_bremen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2959681; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort schwanewede {
+    name     = "Schwanewede"
+    gelaende = flachland
+    lage     = { 8.6 53.2333 }
+    flaeche  = 95
+    stadt    = ja
+    kreis    = kr_bremen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2835260; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lilienthal {
+    name     = "Lilienthal"
+    gelaende = flachland
+    lage     = { 8.9034 53.1419 }
+    flaeche  = 131
+    stadt    = nein
+    kreis    = kr_bremen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2877709; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ottersberg {
+    name     = "Ottersberg"
+    gelaende = flachland
+    lage     = { 9.1441 53.1099 }
+    flaeche  = 193
+    stadt    = nein
+    kreis    = kr_bremen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2856014; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hambergen {
+    name     = "Hambergen"
+    gelaende = flachland
+    lage     = { 8.8252 53.3083 }
+    flaeche  = 145
+    stadt    = nein
+    kreis    = kr_bremen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2911322; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort worpswede {
+    name     = "Worpswede"
+    gelaende = flachland
+    lage     = { 8.9333 53.2167 }
+    flaeche  = 105
+    stadt    = nein
+    kreis    = kr_bremen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2806108; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hagen_im_bremischen {
+    name     = "Hagen im Bremischen"
+    gelaende = flachland
+    lage     = { 8.6434 53.3571 }
+    flaeche  = 167
+    stadt    = nein
+    kreis    = kr_bremen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2912496; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort tarmstedt {
+    name     = "Tarmstedt"
+    gelaende = flachland
+    lage     = { 9.0776 53.2251 }
+    flaeche  = 178
+    stadt    = nein
+    kreis    = kr_bremen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2823989; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort emtinghausen {
+    name     = "Emtinghausen"
+    gelaende = flachland
+    lage     = { 8.9667 52.9333 }
+    flaeche  = 132
+    stadt    = nein
+    kreis    = kr_bremen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2930417; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort verden {
+    name     = "Verden"
+    gelaende = flachland
+    lage     = { 9.2349 52.9234 }
+    flaeche  = 234
+    stadt    = ja
+    kreis    = kr_verden
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2817599; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort rotenburg {
+    name     = "Rotenburg"
+    gelaende = flachland
+    lage     = { 9.4108 53.1112 }
+    flaeche  = 161
+    stadt    = ja
+    kreis    = kr_verden
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2844437; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort scheessel {
+    name     = "Scheeßel"
+    gelaende = flachland
+    lage     = { 9.4833 53.1667 }
+    flaeche  = 116
+    stadt    = nein
+    kreis    = kr_verden
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2840070; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort doerverden {
+    name     = "Dörverden"
+    gelaende = flussaue
+    lage     = { 9.2333 52.85 }
+    flaeche  = 122
+    stadt    = nein
+    kreis    = kr_verden
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2935491; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort visselhoevede {
+    name     = "Visselhövede"
+    gelaende = heide
+    lage     = { 9.5826 52.9855 }
+    flaeche  = 160
+    stadt    = nein
+    kreis    = kr_verden
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2817130; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort fintel {
+    name     = "Fintel"
+    gelaende = heide
+    lage     = { 9.6697 53.1719 }
+    flaeche  = 137
+    stadt    = nein
+    kreis    = kr_verden
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2926667; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kirchwalsede {
+    name     = "Kirchwalsede"
+    gelaende = flachland
+    lage     = { 9.4 53.0167 }
+    flaeche  = 218
+    stadt    = nein
+    kreis    = kr_verden
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2890344; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hemslingen {
+    name     = "Hemslingen"
+    gelaende = heide
+    lage     = { 9.6 53.0833 }
+    flaeche  = 117
+    stadt    = nein
+    kreis    = kr_verden
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2906500; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}

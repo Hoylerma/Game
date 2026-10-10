@@ -1,0 +1,300 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
+# Orte: Nassau – Orte ohne Daten (Meilenstein M3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
+# Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
+# ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
+# und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
+#
+# Umfang: Nassauische Lande an Lahn, Taunus und Westerwald (heute Wiesbaden, Rheingau-Taunus-Kreis, Main-Taunus-Kreis, Lahn-Dill-Kreis, Limburg-Weilburg, Rhein-Lahn-Kreis und Westerwaldkreis).
+
+ort wetzlar {
+    name     = "Wetzlar"
+    gelaende = huegelland
+    lage     = { 8.5049 50.5611 }
+    flaeche  = 144
+    stadt    = ja
+    kreis    = kr_wetzlar
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2809889; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort dillenburg {
+    name     = "Dillenburg"
+    gelaende = huegelland
+    lage     = { 8.287 50.7411 }
+    flaeche  = 267
+    stadt    = ja
+    kreis    = kr_wetzlar
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2936985; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort weilburg {
+    name     = "Weilburg"
+    gelaende = huegelland
+    lage     = { 8.2625 50.4844 }
+    flaeche  = 168
+    stadt    = nein
+    kreis    = kr_wetzlar
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2812626; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort braunfels {
+    name     = "Braunfels"
+    gelaende = huegelland
+    lage     = { 8.3892 50.5155 }
+    flaeche  = 106
+    stadt    = nein
+    kreis    = kr_wetzlar
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2945073; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ehringshausen {
+    name     = "Ehringshausen"
+    gelaende = huegelland
+    lage     = { 8.3833 50.6 }
+    flaeche  = 123
+    stadt    = nein
+    kreis    = kr_wetzlar
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2932788; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort weilmuenster {
+    name     = "Weilmünster"
+    gelaende = huegelland
+    lage     = { 8.3767 50.4314 }
+    flaeche  = 106
+    stadt    = nein
+    kreis    = kr_wetzlar
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2812497; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bischoffen {
+    name     = "Bischoffen"
+    gelaende = huegelland
+    lage     = { 8.45 50.7 }
+    flaeche  = 177
+    stadt    = nein
+    kreis    = kr_wetzlar
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2948307; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort westerburg {
+    name     = "Westerburg"
+    gelaende = huegelland
+    lage     = { 7.9748 50.5594 }
+    flaeche  = 187
+    stadt    = nein
+    kreis    = kr_westerburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2810413; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bad_marienberg {
+    name     = "Bad Marienberg"
+    gelaende = mittelgebirge
+    lage     = { 7.9496 50.6495 }
+    flaeche  = 108
+    stadt    = nein
+    kreis    = kr_westerburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2953404; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort driedorf {
+    name     = "Driedorf"
+    gelaende = mittelgebirge
+    lage     = { 8.1833 50.6333 }
+    flaeche  = 205
+    stadt    = nein
+    kreis    = kr_westerburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2934965; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hachenburg {
+    name     = "Hachenburg"
+    gelaende = huegelland
+    lage     = { 7.8228 50.66 }
+    flaeche  = 157
+    stadt    = nein
+    kreis    = kr_westerburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2912921; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort rennerod {
+    name     = "Rennerod"
+    gelaende = mittelgebirge
+    lage     = { 8.067 50.6082 }
+    flaeche  = 122
+    stadt    = nein
+    kreis    = kr_westerburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2848187; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lahnstein {
+    name     = "Lahnstein"
+    gelaende = huegelland
+    lage     = { 7.6167 50.3 }
+    flaeche  = 95
+    stadt    = nein
+    kreis    = kr_lahnstein
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2881889; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort montabaur {
+    name     = "Montabaur"
+    gelaende = huegelland
+    lage     = { 7.8232 50.4359 }
+    flaeche  = 156
+    stadt    = ja
+    kreis    = kr_lahnstein
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2869746; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bad_ems {
+    name     = "Bad Ems"
+    gelaende = huegelland
+    lage     = { 7.7137 50.3354 }
+    flaeche  = 127
+    stadt    = ja
+    kreis    = kr_lahnstein
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2953507; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hoehr_grenzhausen {
+    name     = "Höhr-Grenzhausen"
+    gelaende = huegelland
+    lage     = { 7.669 50.4347 }
+    flaeche  = 99
+    stadt    = nein
+    kreis    = kr_lahnstein
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2900825; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort nastaetten {
+    name     = "Nastätten"
+    gelaende = huegelland
+    lage     = { 7.8589 50.1988 }
+    flaeche  = 250
+    stadt    = nein
+    kreis    = kr_lahnstein
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2866990; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort selters {
+    name     = "Selters"
+    gelaende = huegelland
+    lage     = { 7.7558 50.5325 }
+    flaeche  = 141
+    stadt    = nein
+    kreis    = kr_lahnstein
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2833138; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort holzappel {
+    name     = "Holzappel"
+    gelaende = huegelland
+    lage     = { 7.9 50.35 }
+    flaeche  = 172
+    stadt    = nein
+    kreis    = kr_lahnstein
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2900027; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wiesbaden {
+    name     = "Wiesbaden"
+    gelaende = huegelland
+    lage     = { 8.2493 50.0826 }
+    flaeche  = 182
+    stadt    = ja
+    kreis    = kr_wiesbaden
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2809346; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort limburg_an_der_lahn {
+    name     = "Limburg an der Lahn"
+    gelaende = huegelland
+    lage     = { 8.0503 50.3836 }
+    flaeche  = 145
+    stadt    = ja
+    kreis    = kr_wiesbaden
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2877648; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hofheim_am_taunus {
+    name     = "Hofheim am Taunus"
+    gelaende = huegelland
+    lage     = { 8.4493 50.0902 }
+    flaeche  = 109
+    stadt    = ja
+    kreis    = kr_wiesbaden
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2902533; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bad_schwalbach {
+    name     = "Bad Schwalbach"
+    gelaende = huegelland
+    lage     = { 8.0696 50.142 }
+    flaeche  = 257
+    stadt    = ja
+    kreis    = kr_wiesbaden
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2953348; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort idstein {
+    name     = "Idstein"
+    gelaende = huegelland
+    lage     = { 8.2668 50.2177 }
+    flaeche  = 181
+    stadt    = ja
+    kreis    = kr_wiesbaden
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2896736; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort eschborn {
+    name     = "Eschborn"
+    gelaende = huegelland
+    lage     = { 8.5711 50.1433 }
+    flaeche  = 80
+    stadt    = ja
+    kreis    = kr_wiesbaden
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2929134; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bad_camberg {
+    name     = "Bad Camberg"
+    gelaende = huegelland
+    lage     = { 8.269 50.297 }
+    flaeche  = 136
+    stadt    = nein
+    kreis    = kr_wiesbaden
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2940381; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort eltville {
+    name     = "Eltville"
+    gelaende = huegelland
+    lage     = { 8.1175 50.0286 }
+    flaeche  = 141
+    stadt    = nein
+    kreis    = kr_wiesbaden
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2930646; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort villmar {
+    name     = "Villmar"
+    gelaende = huegelland
+    lage     = { 8.1931 50.3929 }
+    flaeche  = 149
+    stadt    = nein
+    kreis    = kr_wiesbaden
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2817217; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hahnstaetten {
+    name     = "Hahnstätten"
+    gelaende = huegelland
+    lage     = { 8.0667 50.3 }
+    flaeche  = 192
+    stadt    = nein
+    kreis    = kr_wiesbaden
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2912168; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}

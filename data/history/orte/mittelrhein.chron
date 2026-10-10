@@ -1,0 +1,350 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
+# Orte: Mittelrhein – Orte ohne Daten (Meilenstein M3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
+# Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
+# ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
+# und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
+#
+# Umfang: Mittelrhein mit Koblenz, Neuwied, Ahr, Hunsrück und unterer Mosel (1648 vor allem Kurtrier, Kurköln, Wied und Sayn).
+
+ort kirchen {
+    name     = "Kirchen"
+    gelaende = huegelland
+    lage     = { 7.8863 50.8085 }
+    flaeche  = 132
+    stadt    = nein
+    kreis    = kr_kirchen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2890586; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort altenkirchen_mittelrhein {
+    name     = "Altenkirchen (Mittelrhein)"
+    gelaende = huegelland
+    lage     = { 7.6418 50.6859 }
+    flaeche  = 175
+    stadt    = ja
+    kreis    = kr_kirchen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2957567; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort asbach {
+    name     = "Asbach"
+    gelaende = huegelland
+    lage     = { 7.4167 50.6667 }
+    flaeche  = 147
+    stadt    = nein
+    kreis    = kr_kirchen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2955315; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort dierdorf {
+    name     = "Dierdorf"
+    gelaende = huegelland
+    lage     = { 7.6527 50.5465 }
+    flaeche  = 126
+    stadt    = nein
+    kreis    = kr_kirchen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2937280; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort daaden {
+    name     = "Daaden"
+    gelaende = huegelland
+    lage     = { 7.9667 50.7333 }
+    flaeche  = 134
+    stadt    = nein
+    kreis    = kr_kirchen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2939650; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wissen {
+    name     = "Wissen"
+    gelaende = huegelland
+    lage     = { 7.7347 50.7792 }
+    flaeche  = 137
+    stadt    = nein
+    kreis    = kr_kirchen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2807440; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort sankt_katharinen {
+    name     = "Sankt Katharinen"
+    gelaende = huegelland
+    lage     = { 7.3833 50.5833 }
+    flaeche  = 134
+    stadt    = nein
+    kreis    = kr_kirchen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3207895; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort horhausen {
+    name     = "Horhausen"
+    gelaende = huegelland
+    lage     = { 7.5303 50.5874 }
+    flaeche  = 154
+    stadt    = nein
+    kreis    = kr_kirchen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2899024; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bad_neuenahr_ahrweiler {
+    name     = "Bad Neuenahr-Ahrweiler"
+    gelaende = mittelgebirge
+    lage     = { 7.1113 50.5432 }
+    flaeche  = 116
+    stadt    = ja
+    kreis    = kr_bad_neuenahr_ahrweiler
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2953391; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort sinzig {
+    name     = "Sinzig"
+    gelaende = huegelland
+    lage     = { 7.2464 50.5438 }
+    flaeche  = 130
+    stadt    = nein
+    kreis    = kr_bad_neuenahr_ahrweiler
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2831852; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort burgbrohl {
+    name     = "Burgbrohl"
+    gelaende = huegelland
+    lage     = { 7.2772 50.4546 }
+    flaeche  = 162
+    stadt    = nein
+    kreis    = kr_bad_neuenahr_ahrweiler
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2941413; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort adenau {
+    name     = "Adenau"
+    gelaende = mittelgebirge
+    lage     = { 6.9329 50.3824 }
+    flaeche  = 194
+    stadt    = nein
+    kreis    = kr_bad_neuenahr_ahrweiler
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2959489; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort altenahr {
+    name     = "Altenahr"
+    gelaende = huegelland
+    lage     = { 6.9921 50.5169 }
+    flaeche  = 166
+    stadt    = nein
+    kreis    = kr_bad_neuenahr_ahrweiler
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2957883; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kempenich {
+    name     = "Kempenich"
+    gelaende = mittelgebirge
+    lage     = { 7.117 50.4202 }
+    flaeche  = 165
+    stadt    = nein
+    kreis    = kr_bad_neuenahr_ahrweiler
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2891640; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort koblenz {
+    name     = "Koblenz"
+    gelaende = huegelland
+    lage     = { 7.5788 50.3536 }
+    flaeche  = 111
+    stadt    = ja
+    kreis    = kr_koblenz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2886946; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort neuwied {
+    name     = "Neuwied"
+    gelaende = huegelland
+    lage     = { 7.4706 50.4336 }
+    flaeche  = 133
+    stadt    = ja
+    kreis    = kr_koblenz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2863840; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort mayen {
+    name     = "Mayen"
+    gelaende = huegelland
+    lage     = { 7.2228 50.328 }
+    flaeche  = 186
+    stadt    = nein
+    kreis    = kr_koblenz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2872649; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bendorf {
+    name     = "Bendorf"
+    gelaende = huegelland
+    lage     = { 7.5792 50.4229 }
+    flaeche  = 82
+    stadt    = nein
+    kreis    = kr_koblenz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2951111; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ochtendung {
+    name     = "Ochtendung"
+    gelaende = huegelland
+    lage     = { 7.3833 50.35 }
+    flaeche  = 126
+    stadt    = nein
+    kreis    = kr_koblenz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2858253; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort muenstermaifeld {
+    name     = "Münstermaifeld"
+    gelaende = huegelland
+    lage     = { 7.3621 50.2464 }
+    flaeche  = 143
+    stadt    = nein
+    kreis    = kr_koblenz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2867514; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort treis_karden {
+    name     = "Treis-Karden"
+    gelaende = huegelland
+    lage     = { 7.3022 50.1717 }
+    flaeche  = 137
+    stadt    = nein
+    kreis    = kr_koblenz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2821362; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort boppard {
+    name     = "Boppard"
+    gelaende = mittelgebirge
+    lage     = { 7.5899 50.2308 }
+    flaeche  = 129
+    stadt    = nein
+    kreis    = kr_boppard
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2946366; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort simmern {
+    name     = "Simmern"
+    gelaende = huegelland
+    lage     = { 7.5235 49.982 }
+    flaeche  = 148
+    stadt    = ja
+    kreis    = kr_boppard
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2832013; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort emmelshausen {
+    name     = "Emmelshausen"
+    gelaende = huegelland
+    lage     = { 7.5518 50.1548 }
+    flaeche  = 170
+    stadt    = nein
+    kreis    = kr_boppard
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2930528; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort rheinboellen {
+    name     = "Rheinböllen"
+    gelaende = mittelgebirge
+    lage     = { 7.6725 50.0113 }
+    flaeche  = 152
+    stadt    = nein
+    kreis    = kr_boppard
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2847658; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kastellaun {
+    name     = "Kastellaun"
+    gelaende = huegelland
+    lage     = { 7.4415 50.0692 }
+    flaeche  = 195
+    stadt    = nein
+    kreis    = kr_boppard
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2892485; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kirchberg_mittelrhein {
+    name     = "Kirchberg (Mittelrhein)"
+    gelaende = huegelland
+    lage     = { 7.407 49.944 }
+    flaeche  = 147
+    stadt    = nein
+    kreis    = kr_boppard
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2890660; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort oberwesel {
+    name     = "Oberwesel"
+    gelaende = huegelland
+    lage     = { 7.7252 50.1078 }
+    flaeche  = 233
+    stadt    = nein
+    kreis    = kr_boppard
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2858562; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort zell {
+    name     = "Zell"
+    gelaende = mittelgebirge
+    lage     = { 7.1823 50.0292 }
+    flaeche  = 165
+    stadt    = nein
+    kreis    = kr_boppard
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2804882; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort buechenbeuren {
+    name     = "Büchenbeuren"
+    gelaende = huegelland
+    lage     = { 7.28 49.921 }
+    flaeche  = 163
+    stadt    = nein
+    kreis    = kr_boppard
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2942559; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort cochem {
+    name     = "Cochem"
+    gelaende = mittelgebirge
+    lage     = { 7.1638 50.1451 }
+    flaeche  = 128
+    stadt    = ja
+    kreis    = kr_cochem
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2939949; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ulmen {
+    name     = "Ulmen"
+    gelaende = huegelland
+    lage     = { 6.9794 50.2094 }
+    flaeche  = 105
+    stadt    = nein
+    kreis    = kr_cochem
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2820249; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kaisersesch {
+    name     = "Kaisersesch"
+    gelaende = huegelland
+    lage     = { 7.1386 50.2315 }
+    flaeche  = 146
+    stadt    = nein
+    kreis    = kr_cochem
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2894007; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lutzerath {
+    name     = "Lutzerath"
+    gelaende = huegelland
+    lage     = { 7.0074 50.127 }
+    flaeche  = 112
+    stadt    = nein
+    kreis    = kr_cochem
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2874728; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}

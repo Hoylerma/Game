@@ -1,0 +1,440 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
+# Orte: Calenberg – Orte ohne Daten (Meilenstein M3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
+# Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
+# ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
+# und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
+#
+# Umfang: Fürstentum Calenberg mit Hannover, Hameln, Schaumburg sowie den Grafschaften Hoya und Diepholz.
+
+ort stuhr {
+    name     = "Stuhr"
+    gelaende = flachland
+    lage     = { 8.75 53.0333 }
+    flaeche  = 126
+    stadt    = ja
+    kreis    = kr_stuhr
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2825422; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort syke {
+    name     = "Syke"
+    gelaende = flachland
+    lage     = { 8.8221 52.9134 }
+    flaeche  = 159
+    stadt    = ja
+    kreis    = kr_stuhr
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2824461; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bassum {
+    name     = "Bassum"
+    gelaende = flachland
+    lage     = { 8.7279 52.8506 }
+    flaeche  = 88
+    stadt    = nein
+    kreis    = kr_stuhr
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2952252; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort twistringen {
+    name     = "Twistringen"
+    gelaende = flachland
+    lage     = { 8.6416 52.7993 }
+    flaeche  = 172
+    stadt    = nein
+    kreis    = kr_stuhr
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2820643; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort sudwalde {
+    name     = "Sudwalde"
+    gelaende = flachland
+    lage     = { 8.8361 52.7934 }
+    flaeche  = 135
+    stadt    = nein
+    kreis    = kr_stuhr
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2824967; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort nienburg {
+    name     = "Nienburg"
+    gelaende = flussaue
+    lage     = { 9.2209 52.6461 }
+    flaeche  = 97
+    stadt    = ja
+    kreis    = kr_nienburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2862620; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort sulingen {
+    name     = "Sulingen"
+    gelaende = flachland
+    lage     = { 8.8095 52.6837 }
+    flaeche  = 209
+    stadt    = nein
+    kreis    = kr_nienburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2824902; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort stolzenau {
+    name     = "Stolzenau"
+    gelaende = flussaue
+    lage     = { 9.0667 52.5167 }
+    flaeche  = 130
+    stadt    = nein
+    kreis    = kr_nienburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2826503; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bruchhausen_vilsen {
+    name     = "Bruchhausen-Vilsen"
+    gelaende = flachland
+    lage     = { 8.9907 52.8293 }
+    flaeche  = 140
+    stadt    = nein
+    kreis    = kr_nienburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2943587; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort uchte {
+    name     = "Uchte"
+    gelaende = flachland
+    lage     = { 8.9093 52.4997 }
+    flaeche  = 198
+    stadt    = nein
+    kreis    = kr_nienburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2820537; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hoya {
+    name     = "Hoya"
+    gelaende = flussaue
+    lage     = { 9.1403 52.8078 }
+    flaeche  = 89
+    stadt    = nein
+    kreis    = kr_nienburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2898316; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort liebenau {
+    name     = "Liebenau"
+    gelaende = flussaue
+    lage     = { 9.0972 52.6036 }
+    flaeche  = 153
+    stadt    = nein
+    kreis    = kr_nienburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2877979; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort steimbke {
+    name     = "Steimbke"
+    gelaende = flachland
+    lage     = { 9.3909 52.6548 }
+    flaeche  = 229
+    stadt    = nein
+    kreis    = kr_nienburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2828993; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wietzen {
+    name     = "Wietzen"
+    gelaende = flachland
+    lage     = { 9.0833 52.7167 }
+    flaeche  = 178
+    stadt    = nein
+    kreis    = kr_nienburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2809089; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort husum_calenberg {
+    name     = "Husum (Calenberg)"
+    gelaende = flachland
+    lage     = { 9.25 52.5667 }
+    flaeche  = 147
+    stadt    = nein
+    kreis    = kr_nienburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2897136; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kirchdorf {
+    name     = "Kirchdorf"
+    gelaende = flachland
+    lage     = { 8.8349 52.5952 }
+    flaeche  = 181
+    stadt    = nein
+    kreis    = kr_nienburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2890609; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hassbergen {
+    name     = "Haßbergen"
+    gelaende = flussaue
+    lage     = { 9.2333 52.7333 }
+    flaeche  = 107
+    stadt    = nein
+    kreis    = kr_nienburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2909460; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort diepholz {
+    name     = "Diepholz"
+    gelaende = flachland
+    lage     = { 8.3701 52.6078 }
+    flaeche  = 195
+    stadt    = ja
+    kreis    = kr_diepholz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2937317; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wagenfeld {
+    name     = "Wagenfeld"
+    gelaende = flachland
+    lage     = { 8.5833 52.55 }
+    flaeche  = 249
+    stadt    = nein
+    kreis    = kr_diepholz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2815523; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort barnstorf {
+    name     = "Barnstorf"
+    gelaende = flachland
+    lage     = { 8.5026 52.7101 }
+    flaeche  = 220
+    stadt    = nein
+    kreis    = kr_diepholz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2952452; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lemfoerde {
+    name     = "Lemförde"
+    gelaende = flachland
+    lage     = { 8.3762 52.4656 }
+    flaeche  = 226
+    stadt    = nein
+    kreis    = kr_diepholz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2878944; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort neustadt_am_ruebenberge {
+    name     = "Neustadt am Rübenberge"
+    gelaende = seenplatte
+    lage     = { 9.4587 52.5046 }
+    flaeche  = 191
+    stadt    = ja
+    kreis    = kr_neustadt_am_ruebenberge
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2864058; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort stadthagen {
+    name     = "Stadthagen"
+    gelaende = huegelland
+    lage     = { 9.2031 52.3233 }
+    flaeche  = 200
+    stadt    = ja
+    kreis    = kr_neustadt_am_ruebenberge
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2829777; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wunstorf {
+    name     = "Wunstorf"
+    gelaende = flachland
+    lage     = { 9.4359 52.4238 }
+    flaeche  = 125
+    stadt    = ja
+    kreis    = kr_neustadt_am_ruebenberge
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2805761; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort rehburg_loccum {
+    name     = "Rehburg-Loccum"
+    gelaende = seenplatte
+    lage     = { 9.1996 52.4695 }
+    flaeche  = 117
+    stadt    = nein
+    kreis    = kr_neustadt_am_ruebenberge
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2849371; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort sachsenhagen {
+    name     = "Sachsenhagen"
+    gelaende = flachland
+    lage     = { 9.2679 52.3973 }
+    flaeche  = 132
+    stadt    = nein
+    kreis    = kr_neustadt_am_ruebenberge
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2842531; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hannover {
+    name     = "Hannover"
+    gelaende = flachland
+    lage     = { 9.7332 52.3705 }
+    flaeche  = 88
+    stadt    = ja
+    kreis    = kr_hannover
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2910831; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort garbsen {
+    name     = "Garbsen"
+    gelaende = flachland
+    lage     = { 9.5899 52.4137 }
+    flaeche  = 128
+    stadt    = ja
+    kreis    = kr_hannover
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2922586; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort langenhagen {
+    name     = "Langenhagen"
+    gelaende = flachland
+    lage     = { 9.7374 52.4476 }
+    flaeche  = 178
+    stadt    = ja
+    kreis    = kr_hannover
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2881062; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lehrte {
+    name     = "Lehrte"
+    gelaende = flachland
+    lage     = { 9.9792 52.3719 }
+    flaeche  = 169
+    stadt    = ja
+    kreis    = kr_hannover
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2879367; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort laatzen {
+    name     = "Laatzen"
+    gelaende = flachland
+    lage     = { 9.7974 52.3151 }
+    flaeche  = 105
+    stadt    = ja
+    kreis    = kr_hannover
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2882087; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort burgdorf {
+    name     = "Burgdorf"
+    gelaende = flachland
+    lage     = { 10.0064 52.4463 }
+    flaeche  = 200
+    stadt    = ja
+    kreis    = kr_hannover
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2941405; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ronnenberg {
+    name     = "Ronnenberg"
+    gelaende = flachland
+    lage     = { 9.6554 52.3194 }
+    flaeche  = 146
+    stadt    = ja
+    kreis    = kr_hannover
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2845222; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort uetze {
+    name     = "Uetze"
+    gelaende = flachland
+    lage     = { 10.2047 52.4651 }
+    flaeche  = 161
+    stadt    = nein
+    kreis    = kr_hannover
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2820436; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort elze {
+    name     = "Elze"
+    gelaende = flachland
+    lage     = { 9.7349 52.5816 }
+    flaeche  = 273
+    stadt    = nein
+    kreis    = kr_hannover
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2930622; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hameln {
+    name     = "Hameln"
+    gelaende = huegelland
+    lage     = { 9.3562 52.104 }
+    flaeche  = 218
+    stadt    = ja
+    kreis    = kr_hameln
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2911271; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort springe {
+    name     = "Springe"
+    gelaende = huegelland
+    lage     = { 9.5542 52.2084 }
+    flaeche  = 221
+    stadt    = ja
+    kreis    = kr_hameln
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2830035; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort rinteln {
+    name     = "Rinteln"
+    gelaende = huegelland
+    lage     = { 9.0792 52.186 }
+    flaeche  = 269
+    stadt    = ja
+    kreis    = kr_hameln
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2846523; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bueckeburg {
+    name     = "Bückeburg"
+    gelaende = huegelland
+    lage     = { 9.0494 52.2606 }
+    flaeche  = 132
+    stadt    = ja
+    kreis    = kr_hameln
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2942159; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bad_pyrmont {
+    name     = "Bad Pyrmont"
+    gelaende = huegelland
+    lage     = { 9.2525 51.9859 }
+    flaeche  = 276
+    stadt    = ja
+    kreis    = kr_hameln
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2953379; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hessisch_oldendorf {
+    name     = "Hessisch Oldendorf"
+    gelaende = huegelland
+    lage     = { 9.2491 52.1727 }
+    flaeche  = 190
+    stadt    = ja
+    kreis    = kr_hameln
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2905290; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort barsinghausen {
+    name     = "Barsinghausen"
+    gelaende = huegelland
+    lage     = { 9.45 52.3 }
+    flaeche  = 183
+    stadt    = nein
+    kreis    = kr_hameln
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2952406; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort salzhemmendorf {
+    name     = "Salzhemmendorf"
+    gelaende = huegelland
+    lage     = { 9.5872 52.067 }
+    flaeche  = 164
+    stadt    = nein
+    kreis    = kr_hameln
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2842143; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}

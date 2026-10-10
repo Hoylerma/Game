@@ -1,0 +1,110 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
+# Orte: Jütland – Orte ohne Daten (Meilenstein M3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
+# Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
+# ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
+# und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
+#
+# Umfang: Dänischer Saum nördlich der Königsau mit Kolding, Vejen, Esbjerg, Ribe und Fanø.
+
+ort esbjerg {
+    name     = "Esbjerg"
+    gelaende = kueste
+    lage     = { 8.4519 55.4703 }
+    flaeche  = 282
+    stadt    = ja
+    kreis    = kr_esbjerg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2622447; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kolding {
+    name     = "Kolding"
+    gelaende = flachland
+    lage     = { 9.4722 55.4904 }
+    flaeche  = 244
+    stadt    = ja
+    kreis    = kr_esbjerg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2618528; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort vejen {
+    name     = "Vejen"
+    gelaende = flachland
+    lage     = { 9.138 55.4812 }
+    flaeche  = 212
+    stadt    = ja
+    kreis    = kr_esbjerg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2610634; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ribe {
+    name     = "Ribe"
+    gelaende = flachland
+    lage     = { 8.7697 55.3305 }
+    flaeche  = 324
+    stadt    = nein
+    kreis    = kr_esbjerg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2614813; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bramming {
+    name     = "Bramming"
+    gelaende = flachland
+    lage     = { 8.7001 55.4695 }
+    flaeche  = 250
+    stadt    = nein
+    kreis    = kr_esbjerg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2623570; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort nordby {
+    name     = "Nordby"
+    gelaende = kueste
+    lage     = { 8.3979 55.446 }
+    flaeche  = 49
+    stadt    = ja
+    kreis    = kr_esbjerg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2616172; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort vamdrup {
+    name     = "Vamdrup"
+    gelaende = flachland
+    lage     = { 9.2843 55.4276 }
+    flaeche  = 224
+    stadt    = nein
+    kreis    = kr_esbjerg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2610760; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort christiansfeld {
+    name     = "Christiansfeld"
+    gelaende = flachland
+    lage     = { 9.487 55.3582 }
+    flaeche  = 206
+    stadt    = nein
+    kreis    = kr_esbjerg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2623183; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort roedding {
+    name     = "Rødding"
+    gelaende = flachland
+    lage     = { 9.0632 55.3657 }
+    flaeche  = 185
+    stadt    = nein
+    kreis    = kr_esbjerg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2614623; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort holsted {
+    name     = "Holsted"
+    gelaende = flachland
+    lage     = { 8.9187 55.5109 }
+    flaeche  = 240
+    stadt    = nein
+    kreis    = kr_esbjerg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2620042; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}

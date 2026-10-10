@@ -1,0 +1,38 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
+# Kreise: Salzburg (Meilenstein M3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
+# Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
+# benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
+# historischen Verwaltungseinheiten.
+
+kreis kr_salzburg {
+    name   = "Salzburg"
+    quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
+}
+
+kreis kr_saalfelden_am_steinernen_meer {
+    name   = "Saalfelden am Steinernen Meer"
+    quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
+}
+
+kreis kr_bischofshofen {
+    name   = "Bischofshofen"
+    quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
+}
+
+kreis kr_altenmarkt_im_pongau {
+    name   = "Altenmarkt im Pongau"
+    quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
+}
+
+kreis kr_bramberg_am_wildkogel {
+    name   = "Bramberg am Wildkogel"
+    quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
+}
+
+kreis kr_tamsweg {
+    name   = "Tamsweg"
+    quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
+}

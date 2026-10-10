@@ -1,0 +1,430 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
+# Orte: Hennegau – Orte ohne Daten (Meilenstein M3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
+# Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
+# ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
+# und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
+#
+# Umfang: Hennegau und Cambrésis (heute belgische Provinz Hennegau sowie in Frankreich Valenciennes, Cambrai, Avesnes und die Thiérache).
+
+ort ath {
+    name     = "Ath"
+    gelaende = flachland
+    lage     = { 3.778 50.6294 }
+    flaeche  = 131
+    stadt    = ja
+    kreis    = kr_ath
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2803010; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort soignies {
+    name     = "Soignies"
+    gelaende = flachland
+    lage     = { 4.0713 50.579 }
+    flaeche  = 181
+    stadt    = ja
+    kreis    = kr_ath
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2786420; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lessines {
+    name     = "Lessines"
+    gelaende = flachland
+    lage     = { 3.8358 50.711 }
+    flaeche  = 128
+    stadt    = nein
+    kreis    = kr_ath
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2792567; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort enghien {
+    name     = "Enghien"
+    gelaende = flachland
+    lage     = { 4.0328 50.6837 }
+    flaeche  = 210
+    stadt    = nein
+    kreis    = kr_ath
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2798747; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort beloeil {
+    name     = "Beloeil"
+    gelaende = flachland
+    lage     = { 3.7348 50.5505 }
+    flaeche  = 116
+    stadt    = nein
+    kreis    = kr_ath
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2802292; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort frasnes_lez_buissenal {
+    name     = "Frasnes-lez-Buissenal"
+    gelaende = flachland
+    lage     = { 3.6205 50.6678 }
+    flaeche  = 174
+    stadt    = nein
+    kreis    = kr_ath
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2797979; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lens {
+    name     = "Lens"
+    gelaende = flachland
+    lage     = { 3.8995 50.557 }
+    flaeche  = 160
+    stadt    = nein
+    kreis    = kr_ath
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2792871; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bergen_hennegau {
+    name     = "Bergen (Hennegau)"
+    gelaende = flachland
+    lage     = { 3.9523 50.4541 }
+    flaeche  = 175
+    stadt    = ja
+    kreis    = kr_bergen_hennegau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2790869; deutscher Name aus den GeoNames-Alternativnamen (heute Mons); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort tournai {
+    name     = "Tournai"
+    gelaende = flussaue
+    lage     = { 3.3893 50.6071 }
+    flaeche  = 254
+    stadt    = ja
+    kreis    = kr_bergen_hennegau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2785341; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort valenciennes {
+    name     = "Valenciennes"
+    gelaende = flussaue
+    lage     = { 3.5251 50.3591 }
+    flaeche  = 137
+    stadt    = ja
+    kreis    = kr_bergen_hennegau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2971041; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort mouscron {
+    name     = "Mouscron"
+    gelaende = flachland
+    lage     = { 3.2064 50.745 }
+    flaeche  = 106
+    stadt    = ja
+    kreis    = kr_bergen_hennegau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2790595; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort denain {
+    name     = "Denain"
+    gelaende = flussaue
+    lage     = { 3.3943 50.3293 }
+    flaeche  = 154
+    stadt    = ja
+    kreis    = kr_bergen_hennegau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3021605; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort saint_ghislain {
+    name     = "Saint-Ghislain"
+    gelaende = flachland
+    lage     = { 3.8189 50.4482 }
+    flaeche  = 154
+    stadt    = ja
+    kreis    = kr_bergen_hennegau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2787416; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort saint_amand_les_eaux {
+    name     = "Saint-Amand-les-Eaux"
+    gelaende = flachland
+    lage     = { 3.4308 50.4472 }
+    flaeche  = 187
+    stadt    = nein
+    kreis    = kr_bergen_hennegau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2981839; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort peruwelz {
+    name     = "Péruwelz"
+    gelaende = flachland
+    lage     = { 3.5937 50.5082 }
+    flaeche  = 195
+    stadt    = nein
+    kreis    = kr_bergen_hennegau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2789162; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort quievrain {
+    name     = "Quiévrain"
+    gelaende = flachland
+    lage     = { 3.6835 50.4074 }
+    flaeche  = 157
+    stadt    = nein
+    kreis    = kr_bergen_hennegau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2788444; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort charleroi {
+    name     = "Charleroi"
+    gelaende = flachland
+    lage     = { 4.4445 50.4114 }
+    flaeche  = 126
+    stadt    = ja
+    kreis    = kr_charleroi
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2800481; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort la_louviere {
+    name     = "La Louvière"
+    gelaende = flachland
+    lage     = { 4.1879 50.4866 }
+    flaeche  = 150
+    stadt    = ja
+    kreis    = kr_charleroi
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2793508; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort binche {
+    name     = "Binche"
+    gelaende = huegelland
+    lage     = { 4.1647 50.4115 }
+    flaeche  = 161
+    stadt    = ja
+    kreis    = kr_charleroi
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2801922; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort fleurus {
+    name     = "Fleurus"
+    gelaende = flachland
+    lage     = { 4.5501 50.4835 }
+    flaeche  = 202
+    stadt    = ja
+    kreis    = kr_charleroi
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2798297; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort thuin {
+    name     = "Thuin"
+    gelaende = flachland
+    lage     = { 4.286 50.3393 }
+    flaeche  = 164
+    stadt    = nein
+    kreis    = kr_charleroi
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2785517; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort pont_a_celles {
+    name     = "Pont-à-Celles"
+    gelaende = flachland
+    lage     = { 4.3689 50.5052 }
+    flaeche  = 161
+    stadt    = nein
+    kreis    = kr_charleroi
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2788765; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gerpinnes {
+    name     = "Gerpinnes"
+    gelaende = huegelland
+    lage     = { 4.5273 50.3379 }
+    flaeche  = 126
+    stadt    = nein
+    kreis    = kr_charleroi
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2797598; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort maubeuge {
+    name     = "Maubeuge"
+    gelaende = flachland
+    lage     = { 3.9727 50.2788 }
+    flaeche  = 180
+    stadt    = ja
+    kreis    = kr_maubeuge
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2995150; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort chimay {
+    name     = "Chimay"
+    gelaende = huegelland
+    lage     = { 4.3171 50.0486 }
+    flaeche  = 229
+    stadt    = nein
+    kreis    = kr_maubeuge
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2800325; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort aulnoye_aymeries {
+    name     = "Aulnoye-Aymeries"
+    gelaende = flachland
+    lage     = { 3.8384 50.2014 }
+    flaeche  = 147
+    stadt    = nein
+    kreis    = kr_maubeuge
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3036132; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort jeumont {
+    name     = "Jeumont"
+    gelaende = flachland
+    lage     = { 4.1011 50.2966 }
+    flaeche  = 131
+    stadt    = nein
+    kreis    = kr_maubeuge
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3012346; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort beaumont {
+    name     = "Beaumont"
+    gelaende = huegelland
+    lage     = { 4.2393 50.237 }
+    flaeche  = 143
+    stadt    = nein
+    kreis    = kr_maubeuge
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2802510; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort froidchapelle {
+    name     = "Froidchapelle"
+    gelaende = huegelland
+    lage     = { 4.3274 50.1511 }
+    flaeche  = 195
+    stadt    = nein
+    kreis    = kr_maubeuge
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2797937; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bavay {
+    name     = "Bavay"
+    gelaende = flachland
+    lage     = { 3.7937 50.2983 }
+    flaeche  = 170
+    stadt    = nein
+    kreis    = kr_maubeuge
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3034514; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort avesnelles {
+    name     = "Avesnelles"
+    gelaende = flachland
+    lage     = { 3.9467 50.1178 }
+    flaeche  = 164
+    stadt    = nein
+    kreis    = kr_maubeuge
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3035707; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort solre_le_chateau {
+    name     = "Solre-le-Château"
+    gelaende = huegelland
+    lage     = { 4.089 50.1743 }
+    flaeche  = 195
+    stadt    = nein
+    kreis    = kr_maubeuge
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2974329; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort cambrai {
+    name     = "Cambrai"
+    gelaende = flussaue
+    lage     = { 3.2347 50.176 }
+    flaeche  = 222
+    stadt    = ja
+    kreis    = kr_cambrai
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3029030; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort caudry {
+    name     = "Caudry"
+    gelaende = flachland
+    lage     = { 3.4119 50.1249 }
+    flaeche  = 175
+    stadt    = nein
+    kreis    = kr_cambrai
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3028205; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort le_quesnoy {
+    name     = "Le Quesnoy"
+    gelaende = flachland
+    lage     = { 3.6366 50.248 }
+    flaeche  = 169
+    stadt    = nein
+    kreis    = kr_cambrai
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3002420; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort landrecies {
+    name     = "Landrecies"
+    gelaende = flachland
+    lage     = { 3.6917 50.125 }
+    flaeche  = 230
+    stadt    = nein
+    kreis    = kr_cambrai
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3007830; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort busigny {
+    name     = "Busigny"
+    gelaende = flachland
+    lage     = { 3.4671 50.0342 }
+    flaeche  = 106
+    stadt    = nein
+    kreis    = kr_cambrai
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3029477; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort haussy {
+    name     = "Haussy"
+    gelaende = flachland
+    lage     = { 3.4768 50.2183 }
+    flaeche  = 189
+    stadt    = nein
+    kreis    = kr_cambrai
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3013830; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort fourmies {
+    name     = "Fourmies"
+    gelaende = huegelland
+    lage     = { 4.0478 50.0153 }
+    flaeche  = 178
+    stadt    = nein
+    kreis    = kr_fourmies
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3017512; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hirson {
+    name     = "Hirson"
+    gelaende = flachland
+    lage     = { 4.0826 49.9226 }
+    flaeche  = 129
+    stadt    = nein
+    kreis    = kr_fourmies
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3013258; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort le_nouvion_en_thierache {
+    name     = "Le Nouvion-en-Thiérache"
+    gelaende = flachland
+    lage     = { 3.7851 50.0162 }
+    flaeche  = 158
+    stadt    = nein
+    kreis    = kr_fourmies
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3003101; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort la_capelle {
+    name     = "La Capelle"
+    gelaende = huegelland
+    lage     = { 3.9167 49.9667 }
+    flaeche  = 92
+    stadt    = nein
+    kreis    = kr_fourmies
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3010609; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}

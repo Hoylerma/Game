@@ -11,13 +11,17 @@
 # Landeskirchen reformiert; Anhalt-Zerbst kehrte 1644 unter Fürst Johann zum
 # lutherischen Bekenntnis zurück. Das Land lag im Durchzugsgebiet der Heere an
 # Elbe und Saale und war schwer verwüstet.
+#
+# Ergänzt in Meilenstein M3 (tools/geodaten/orte.py): weitere Orte ohne Daten (ohne Historie) aus GeoNames, räumlich ausgewählt, Gelände aus dem Höhenmodell, Fläche aus der Karte.
+# Umfang der Landschaft Anhalt: Fürstentümer Anhalt (heute Landkreis Anhalt-Bitterfeld und Dessau-Roßlau).
 
 ort dessau {
     name     = "Dessau"
     gelaende = flussaue
     lage     = { 12.24 51.83 }
-    flaeche  = 220
+    flaeche  = 157
     stadt    = ja
+    kreis    = kr_dessau
     quelle   = "Residenz Anhalt-Dessau an Mulde und Elbe. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Konfession nach der Zweiten Reformation in Anhalt, Anteile geschätzt"
 
     1648.10.24 = {
@@ -32,8 +36,9 @@ ort bernburg {
     name     = "Bernburg"
     gelaende = boerde
     lage     = { 11.74 51.79 }
-    flaeche  = 200
+    flaeche  = 202
     stadt    = ja
+    kreis    = kr_dessau
     quelle   = "Residenz Anhalt-Bernburg an der Saale. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Konfession nach der Zweiten Reformation in Anhalt, Anteile geschätzt"
 
     1648.10.24 = {
@@ -48,8 +53,9 @@ ort koethen {
     name     = "Köthen"
     gelaende = boerde
     lage     = { 11.97 51.75 }
-    flaeche  = 200
+    flaeche  = 154
     stadt    = ja
+    kreis    = kr_dessau
     quelle   = "Residenz Anhalt-Köthen, Sitz der Fruchtbringenden Gesellschaft (gegründet 1617). Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Konfession nach der Zweiten Reformation in Anhalt, Anteile geschätzt"
 
     1648.10.24 = {
@@ -64,8 +70,9 @@ ort zerbst {
     name     = "Zerbst"
     gelaende = flachland
     lage     = { 12.08 51.97 }
-    flaeche  = 240
+    flaeche  = 122
     stadt    = ja
+    kreis    = kr_dessau
     quelle   = "Residenz Anhalt-Zerbst; 1644 Rückkehr zum lutherischen Bekenntnis unter Fürst Johann (Landeskirche Anhalts; Deutsche Biographie), reformierter Restanteil geschätzt. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung)"
 
     1648.10.24 = {
@@ -74,4 +81,94 @@ ort zerbst {
         konfession   = { lutherisch = 70 reformiert = 30 }
         verwuestung  = 0.55
     }
+}
+
+ort aken {
+    name     = "Aken"
+    gelaende = flussaue
+    lage     = { 12.0446 51.8527 }
+    flaeche  = 188
+    stadt    = nein
+    kreis    = kr_dessau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2958781; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort groebzig {
+    name     = "Gröbzig"
+    gelaende = boerde
+    lage     = { 11.8745 51.6823 }
+    flaeche  = 143
+    stadt    = nein
+    kreis    = kr_dessau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2917206; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort rodleben {
+    name     = "Rodleben"
+    gelaende = flussaue
+    lage     = { 12.2006 51.8961 }
+    flaeche  = 180
+    stadt    = nein
+    kreis    = kr_dessau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2845914; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lindau_anhalt {
+    name     = "Lindau (Anhalt)"
+    gelaende = flachland
+    lage     = { 12.1079 52.0375 }
+    flaeche  = 209
+    stadt    = nein
+    kreis    = kr_dessau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2877546; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort quellendorf {
+    name     = "Quellendorf"
+    gelaende = flachland
+    lage     = { 12.128 51.7492 }
+    flaeche  = 150
+    stadt    = nein
+    kreis    = kr_dessau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2851450; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wolfen {
+    name     = "Wolfen"
+    gelaende = flachland
+    lage     = { 12.2687 51.6612 }
+    flaeche  = 138
+    stadt    = ja
+    kreis    = kr_wolfen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2806919; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort zoerbig {
+    name     = "Zörbig"
+    gelaende = flachland
+    lage     = { 12.1174 51.6289 }
+    flaeche  = 171
+    stadt    = nein
+    kreis    = kr_wolfen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2803891; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort roitzsch {
+    name     = "Roitzsch"
+    gelaende = flachland
+    lage     = { 12.2633 51.5753 }
+    flaeche  = 84
+    stadt    = nein
+    kreis    = kr_wolfen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2845475; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort pouch {
+    name     = "Pouch"
+    gelaende = flachland
+    lage     = { 12.4013 51.6232 }
+    flaeche  = 142
+    stadt    = nein
+    kreis    = kr_wolfen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2852400; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }

@@ -1,0 +1,410 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
+# Orte: Salzburg – Orte ohne Daten (Meilenstein M3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
+# Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
+# ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
+# und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
+#
+# Umfang: Erzstift Salzburg (heute Land Salzburg).
+
+ort salzburg {
+    name     = "Salzburg"
+    gelaende = mittelgebirge
+    lage     = { 13.044 47.7994 }
+    flaeche  = 142
+    stadt    = ja
+    kreis    = kr_salzburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2766824; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hallein {
+    name     = "Hallein"
+    gelaende = mittelgebirge
+    lage     = { 13.1 47.6833 }
+    flaeche  = 167
+    stadt    = nein
+    kreis    = kr_salzburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2776951; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort oberndorf_bei_salzburg {
+    name     = "Oberndorf bei Salzburg"
+    gelaende = huegelland
+    lage     = { 12.9333 47.95 }
+    flaeche  = 129
+    stadt    = nein
+    kreis    = kr_salzburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2769874; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort henndorf_am_wallersee {
+    name     = "Henndorf am Wallersee"
+    gelaende = mittelgebirge
+    lage     = { 13.1833 47.9 }
+    flaeche  = 95
+    stadt    = nein
+    kreis    = kr_salzburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2776513; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort mattsee {
+    name     = "Mattsee"
+    gelaende = mittelgebirge
+    lage     = { 13.1 47.9667 }
+    flaeche  = 140
+    stadt    = nein
+    kreis    = kr_salzburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2771811; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort strasswalchen {
+    name     = "Strasswalchen"
+    gelaende = mittelgebirge
+    lage     = { 13.2553 47.9795 }
+    flaeche  = 215
+    stadt    = nein
+    kreis    = kr_salzburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2764172; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hof_bei_salzburg {
+    name     = "Hof bei Salzburg"
+    gelaende = mittelgebirge
+    lage     = { 13.2149 47.8193 }
+    flaeche  = 130
+    stadt    = nein
+    kreis    = kr_salzburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2775848; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort golling_an_der_salzach {
+    name     = "Golling an der Salzach"
+    gelaende = hochgebirge
+    lage     = { 13.1667 47.6 }
+    flaeche  = 245
+    stadt    = nein
+    kreis    = kr_salzburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2778361; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hintersee {
+    name     = "Hintersee"
+    gelaende = mittelgebirge
+    lage     = { 13.2833 47.7 }
+    flaeche  = 197
+    stadt    = nein
+    kreis    = kr_salzburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2776240; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort saalfelden_am_steinernen_meer {
+    name     = "Saalfelden am Steinernen Meer"
+    gelaende = hochgebirge
+    lage     = { 12.848 47.4268 }
+    flaeche  = 275
+    stadt    = nein
+    kreis    = kr_saalfelden_am_steinernen_meer
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2766922; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort zell_am_see {
+    name     = "Zell am See"
+    gelaende = hochgebirge
+    lage     = { 12.7984 47.3231 }
+    flaeche  = 155
+    stadt    = nein
+    kreis    = kr_saalfelden_am_steinernen_meer
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2760634; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kaprun {
+    name     = "Kaprun"
+    gelaende = hochgebirge
+    lage     = { 12.7599 47.2724 }
+    flaeche  = 218
+    stadt    = nein
+    kreis    = kr_saalfelden_am_steinernen_meer
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2774758; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lofer {
+    name     = "Lofer"
+    gelaende = hochgebirge
+    lage     = { 12.6933 47.5847 }
+    flaeche  = 271
+    stadt    = nein
+    kreis    = kr_saalfelden_am_steinernen_meer
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2772330; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort dienten_am_hochkoenig {
+    name     = "Dienten am Hochkönig"
+    gelaende = hochgebirge
+    lage     = { 13.0037 47.3832 }
+    flaeche  = 233
+    stadt    = nein
+    kreis    = kr_saalfelden_am_steinernen_meer
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2780988; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bischofshofen {
+    name     = "Bischofshofen"
+    gelaende = hochgebirge
+    lage     = { 13.2167 47.4167 }
+    flaeche  = 233
+    stadt    = nein
+    kreis    = kr_bischofshofen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2781735; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort schwarzach_im_pongau {
+    name     = "Schwarzach im Pongau"
+    gelaende = hochgebirge
+    lage     = { 13.1517 47.3205 }
+    flaeche  = 151
+    stadt    = nein
+    kreis    = kr_bischofshofen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2765495; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bad_hofgastein {
+    name     = "Bad Hofgastein"
+    gelaende = hochgebirge
+    lage     = { 13.0987 47.1727 }
+    flaeche  = 116
+    stadt    = nein
+    kreis    = kr_bischofshofen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2782053; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bad_gastein {
+    name     = "Bad Gastein"
+    gelaende = hochgebirge
+    lage     = { 13.1347 47.1155 }
+    flaeche  = 242
+    stadt    = nein
+    kreis    = kr_bischofshofen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2782058; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort grossarl {
+    name     = "Grossarl"
+    gelaende = hochgebirge
+    lage     = { 13.2 47.2333 }
+    flaeche  = 90
+    stadt    = nein
+    kreis    = kr_bischofshofen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2777905; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort rauris {
+    name     = "Rauris"
+    gelaende = hochgebirge
+    lage     = { 12.9946 47.2266 }
+    flaeche  = 259
+    stadt    = nein
+    kreis    = kr_bischofshofen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2767852; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kleinarl {
+    name     = "Kleinarl"
+    gelaende = hochgebirge
+    lage     = { 13.3195 47.2773 }
+    flaeche  = 176
+    stadt    = nein
+    kreis    = kr_bischofshofen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2606026; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort huettschlag {
+    name     = "Hüttschlag"
+    gelaende = hochgebirge
+    lage     = { 13.2324 47.1763 }
+    flaeche  = 181
+    stadt    = nein
+    kreis    = kr_bischofshofen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2775352; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort altenmarkt_im_pongau {
+    name     = "Altenmarkt im Pongau"
+    gelaende = hochgebirge
+    lage     = { 13.4167 47.3833 }
+    flaeche  = 140
+    stadt    = nein
+    kreis    = kr_altenmarkt_im_pongau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2782673; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort abtenau {
+    name     = "Abtenau"
+    gelaende = hochgebirge
+    lage     = { 13.346 47.5637 }
+    flaeche  = 188
+    stadt    = nein
+    kreis    = kr_altenmarkt_im_pongau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2783050; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort sankt_martin_am_tennengebirge {
+    name     = "Sankt Martin am Tennengebirge"
+    gelaende = hochgebirge
+    lage     = { 13.3776 47.465 }
+    flaeche  = 153
+    stadt    = nein
+    kreis    = kr_altenmarkt_im_pongau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 6692414; Name Sankt Martin am Tennengebirge aus den GeoNames-Alternativnamen (GeoNames: St. Martin of Tennengebirge); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort forstau {
+    name     = "Forstau"
+    gelaende = hochgebirge
+    lage     = { 13.5556 47.3784 }
+    flaeche  = 153
+    stadt    = nein
+    kreis    = kr_altenmarkt_im_pongau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2779414; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort untertauern {
+    name     = "Untertauern"
+    gelaende = hochgebirge
+    lage     = { 13.5 47.3 }
+    flaeche  = 163
+    stadt    = nein
+    kreis    = kr_altenmarkt_im_pongau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2762619; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bramberg_am_wildkogel {
+    name     = "Bramberg am Wildkogel"
+    gelaende = hochgebirge
+    lage     = { 12.3385 47.2698 }
+    flaeche  = 274
+    stadt    = nein
+    kreis    = kr_bramberg_am_wildkogel
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2781587; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort mittersill {
+    name     = "Mittersill"
+    gelaende = hochgebirge
+    lage     = { 12.4833 47.2833 }
+    flaeche  = 192
+    stadt    = nein
+    kreis    = kr_bramberg_am_wildkogel
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2771385; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort krimml {
+    name     = "Krimml"
+    gelaende = hochgebirge
+    lage     = { 12.1749 47.218 }
+    flaeche  = 283
+    stadt    = nein
+    kreis    = kr_bramberg_am_wildkogel
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3323923; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort uttendorf {
+    name     = "Uttendorf"
+    gelaende = hochgebirge
+    lage     = { 12.5667 47.2833 }
+    flaeche  = 165
+    stadt    = nein
+    kreis    = kr_bramberg_am_wildkogel
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2762493; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort saalbach {
+    name     = "Saalbach"
+    gelaende = hochgebirge
+    lage     = { 12.6364 47.3914 }
+    flaeche  = 175
+    stadt    = nein
+    kreis    = kr_bramberg_am_wildkogel
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2766924; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort niedernsill {
+    name     = "Niedernsill"
+    gelaende = hochgebirge
+    lage     = { 12.65 47.2833 }
+    flaeche  = 121
+    stadt    = nein
+    kreis    = kr_bramberg_am_wildkogel
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2770544; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort tamsweg {
+    name     = "Tamsweg"
+    gelaende = hochgebirge
+    lage     = { 13.811 47.1281 }
+    flaeche  = 228
+    stadt    = nein
+    kreis    = kr_tamsweg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2763929; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort sankt_michael_im_lungau {
+    name     = "Sankt Michael im Lungau"
+    gelaende = hochgebirge
+    lage     = { 13.6333 47.1 }
+    flaeche  = 93
+    stadt    = nein
+    kreis    = kr_tamsweg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2766496; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort zederhaus {
+    name     = "Zederhaus"
+    gelaende = hochgebirge
+    lage     = { 13.5058 47.1557 }
+    flaeche  = 134
+    stadt    = nein
+    kreis    = kr_tamsweg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2760704; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ramingstein {
+    name     = "Ramingstein"
+    gelaende = hochgebirge
+    lage     = { 13.8364 47.0746 }
+    flaeche  = 130
+    stadt    = nein
+    kreis    = kr_tamsweg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2768021; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort thomatal {
+    name     = "Thomatal"
+    gelaende = hochgebirge
+    lage     = { 13.75 47.0667 }
+    flaeche  = 148
+    stadt    = nein
+    kreis    = kr_tamsweg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2763677; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort muhr {
+    name     = "Muhr"
+    gelaende = hochgebirge
+    lage     = { 13.4976 47.0989 }
+    flaeche  = 267
+    stadt    = nein
+    kreis    = kr_tamsweg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2771053; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort tweng {
+    name     = "Tweng"
+    gelaende = hochgebirge
+    lage     = { 13.6 47.1833 }
+    flaeche  = 201
+    stadt    = nein
+    kreis    = kr_tamsweg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2763215; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}

@@ -11,13 +11,17 @@
 # Dahme, Querfurt und Burg waren seit dem Prager Frieden 1635 kursächsisch.
 # Das Hochstift Halberstadt fiel 1648 als weltliches Fürstentum an Brandenburg.
 # Die Magdeburger Börde gehörte zu den am schwersten verwüsteten Landschaften.
+#
+# Ergänzt in Meilenstein M3 (tools/geodaten/orte.py): weitere Orte ohne Daten (ohne Historie) aus GeoNames, räumlich ausgewählt, Gelände aus dem Höhenmodell, Fläche aus der Karte.
+# Umfang der Landschaft Magdeburg: Erzstift Magdeburg, Fürstentum Halberstadt und Harzvorland (heute Sachsen-Anhalt ohne Altmark, Anhalt, Wittenberg, Burgenlandkreis und Mansfeld-Südharz).
 
 ort magdeburg {
     name     = "Magdeburg"
     gelaende = boerde
     lage     = { 11.63 52.13 }
-    flaeche  = 200
+    flaeche  = 151
     stadt    = ja
+    kreis    = kr_magdeburg
     quelle   = "Am 20.05.1631 erstürmt und fast völlig zerstört (vor dem Krieg ca. 25.000–30.000 Einwohner); 1648 erst am Beginn des Wiederaufbaus, Bevölkerung Schätzung. Die Stadt beanspruchte Reichsfreiheit; Unterwerfung unter Brandenburg 1666"
 
     1648.10.24 = {
@@ -32,8 +36,9 @@ ort halle {
     name     = "Halle (Saale)"
     gelaende = flussaue
     lage     = { 11.97 51.48 }
-    flaeche  = 200
+    flaeche  = 174
     stadt    = ja
+    kreis    = kr_halle
     quelle   = "Residenz des Administrators August; Salzsiederei. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung nach regionaler Kriegsbetroffenheit geschätzt"
 
     1648.10.24 = {
@@ -48,8 +53,9 @@ ort halberstadt {
     name     = "Halberstadt"
     gelaende = boerde
     lage     = { 11.05 51.90 }
-    flaeche  = 250
+    flaeche  = 162
     stadt    = ja
+    kreis    = kr_halberstadt
     quelle   = "IPO Art. XI: Hochstift als weltliches Fürstentum an Brandenburg zugesprochen; der schwedische General Königsmarck verzögerte die Übergabe, Huldigung erst am 03.04.1650. Katholische Minderheit um Domkapitel und Stifte, Anteil geschätzt. Bevölkerung Schätzung (Größenordnung nach Literatur zur Bevölkerungsentwicklung)"
 
     1648.10.24 = {
@@ -64,8 +70,9 @@ ort jueterbog {
     name     = "Jüterbog"
     gelaende = heide
     lage     = { 13.07 51.99 }
-    flaeche  = 260
+    flaeche  = 367
     stadt    = nein
+    kreis    = kr_luckenwalde
     quelle   = "Magdeburgisches Amt im Fläming, seit dem Prager Frieden 1635 kursächsisch. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung nach regionaler Kriegsbetroffenheit geschätzt"
 
     1648.10.24 = {
@@ -74,4 +81,464 @@ ort jueterbog {
         konfession   = { lutherisch = 100 }
         verwuestung  = 0.55
     }
+}
+
+ort neuhaldensleben {
+    name     = "Neuhaldensleben"
+    gelaende = boerde
+    lage     = { 11.4098 52.2891 }
+    flaeche  = 316
+    stadt    = ja
+    kreis    = kr_neuhaldensleben
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2911584; Name Neuhaldensleben aus den GeoNames-Alternativnamen (GeoNames: Haldensleben I); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort oebisfelde {
+    name     = "Oebisfelde"
+    gelaende = flachland
+    lage     = { 10.9879 52.4342 }
+    flaeche  = 162
+    stadt    = nein
+    kreis    = kr_neuhaldensleben
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2857985; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort calvoerde {
+    name     = "Calvörde"
+    gelaende = flachland
+    lage     = { 11.2946 52.3955 }
+    flaeche  = 227
+    stadt    = nein
+    kreis    = kr_neuhaldensleben
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2940386; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort weferlingen {
+    name     = "Weferlingen"
+    gelaende = flachland
+    lage     = { 11.0579 52.312 }
+    flaeche  = 206
+    stadt    = nein
+    kreis    = kr_neuhaldensleben
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2813405; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort burg_bei_magdeburg {
+    name     = "Burg bei Magdeburg"
+    gelaende = flachland
+    lage     = { 11.8549 52.2715 }
+    flaeche  = 258
+    stadt    = ja
+    kreis    = kr_burg_bei_magdeburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2941501; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort genthin {
+    name     = "Genthin"
+    gelaende = flachland
+    lage     = { 12.1592 52.4067 }
+    flaeche  = 308
+    stadt    = nein
+    kreis    = kr_burg_bei_magdeburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2921309; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort moeckern {
+    name     = "Möckern"
+    gelaende = flachland
+    lage     = { 11.952 52.141 }
+    flaeche  = 205
+    stadt    = nein
+    kreis    = kr_burg_bei_magdeburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2870278; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort loburg {
+    name     = "Loburg"
+    gelaende = flachland
+    lage     = { 12.0784 52.1151 }
+    flaeche  = 204
+    stadt    = nein
+    kreis    = kr_burg_bei_magdeburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2876682; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort tucheim {
+    name     = "Tucheim"
+    gelaende = flachland
+    lage     = { 12.1842 52.2892 }
+    flaeche  = 234
+    stadt    = nein
+    kreis    = kr_burg_bei_magdeburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2820856; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort schoenebeck {
+    name     = "Schönebeck"
+    gelaende = flussaue
+    lage     = { 11.7307 52.0168 }
+    flaeche  = 172
+    stadt    = ja
+    kreis    = kr_magdeburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2836809; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort calbe {
+    name     = "Calbe"
+    gelaende = flachland
+    lage     = { 11.7748 51.9067 }
+    flaeche  = 180
+    stadt    = nein
+    kreis    = kr_magdeburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2940419; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wolmirstedt {
+    name     = "Wolmirstedt"
+    gelaende = flachland
+    lage     = { 11.6295 52.2486 }
+    flaeche  = 166
+    stadt    = nein
+    kreis    = kr_magdeburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2806342; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gommern {
+    name     = "Gommern"
+    gelaende = flachland
+    lage     = { 11.823 52.0739 }
+    flaeche  = 124
+    stadt    = nein
+    kreis    = kr_magdeburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2919138; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort niederndodeleben {
+    name     = "Niederndodeleben"
+    gelaende = boerde
+    lage     = { 11.5008 52.1342 }
+    flaeche  = 152
+    stadt    = nein
+    kreis    = kr_magdeburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2863083; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort barby {
+    name     = "Barby"
+    gelaende = flussaue
+    lage     = { 11.8826 51.9671 }
+    flaeche  = 148
+    stadt    = nein
+    kreis    = kr_magdeburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3205000; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gerwisch {
+    name     = "Gerwisch"
+    gelaende = flachland
+    lage     = { 11.7397 52.1766 }
+    flaeche  = 143
+    stadt    = nein
+    kreis    = kr_magdeburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2920850; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort angern {
+    name     = "Angern"
+    gelaende = flachland
+    lage     = { 11.7333 52.35 }
+    flaeche  = 190
+    stadt    = nein
+    kreis    = kr_magdeburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2956090; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort oschersleben {
+    name     = "Oschersleben"
+    gelaende = boerde
+    lage     = { 11.229 52.0304 }
+    flaeche  = 180
+    stadt    = nein
+    kreis    = kr_oschersleben
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2856930; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort groeningen {
+    name     = "Gröningen"
+    gelaende = boerde
+    lage     = { 11.216 51.9374 }
+    flaeche  = 149
+    stadt    = nein
+    kreis    = kr_oschersleben
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2917107; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort egeln {
+    name     = "Egeln"
+    gelaende = boerde
+    lage     = { 11.4327 51.9438 }
+    flaeche  = 210
+    stadt    = nein
+    kreis    = kr_oschersleben
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2933256; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wanzleben {
+    name     = "Wanzleben"
+    gelaende = boerde
+    lage     = { 11.4408 52.0609 }
+    flaeche  = 180
+    stadt    = nein
+    kreis    = kr_oschersleben
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2814181; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort eilsleben {
+    name     = "Eilsleben"
+    gelaende = boerde
+    lage     = { 11.2104 52.1471 }
+    flaeche  = 219
+    stadt    = nein
+    kreis    = kr_oschersleben
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2931838; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ausleben {
+    name     = "Ausleben"
+    gelaende = boerde
+    lage     = { 11.1119 52.0905 }
+    flaeche  = 149
+    stadt    = nein
+    kreis    = kr_oschersleben
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2953970; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wernigerode {
+    name     = "Wernigerode"
+    gelaende = mittelgebirge
+    lage     = { 10.7822 51.8365 }
+    flaeche  = 187
+    stadt    = ja
+    kreis    = kr_halberstadt
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2810808; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort blankenburg {
+    name     = "Blankenburg"
+    gelaende = mittelgebirge
+    lage     = { 10.9551 51.7903 }
+    flaeche  = 149
+    stadt    = nein
+    kreis    = kr_halberstadt
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2948071; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort huy_neinstedt {
+    name     = "Huy-Neinstedt"
+    gelaende = boerde
+    lage     = { 10.9146 51.9659 }
+    flaeche  = 234
+    stadt    = nein
+    kreis    = kr_halberstadt
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2896834; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort osterwieck {
+    name     = "Osterwieck"
+    gelaende = huegelland
+    lage     = { 10.7104 51.9699 }
+    flaeche  = 214
+    stadt    = nein
+    kreis    = kr_halberstadt
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2856330; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hasselfelde {
+    name     = "Hasselfelde"
+    gelaende = huegelland
+    lage     = { 10.8537 51.6905 }
+    flaeche  = 217
+    stadt    = nein
+    kreis    = kr_halberstadt
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2909386; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort benneckenstein {
+    name     = "Benneckenstein"
+    gelaende = huegelland
+    lage     = { 10.7172 51.6682 }
+    flaeche  = 107
+    stadt    = nein
+    kreis    = kr_halberstadt
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2951040; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort derenburg {
+    name     = "Derenburg"
+    gelaende = boerde
+    lage     = { 10.9103 51.8709 }
+    flaeche  = 102
+    stadt    = nein
+    kreis    = kr_halberstadt
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2938136; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort aschersleben {
+    name     = "Aschersleben"
+    gelaende = flachland
+    lage     = { 11.4608 51.7574 }
+    flaeche  = 204
+    stadt    = ja
+    kreis    = kr_aschersleben
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2955168; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort quedlinburg {
+    name     = "Quedlinburg"
+    gelaende = flachland
+    lage     = { 11.1501 51.7884 }
+    flaeche  = 147
+    stadt    = ja
+    kreis    = kr_aschersleben
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2851465; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort stassfurt {
+    name     = "Staßfurt"
+    gelaende = flachland
+    lage     = { 11.5851 51.8519 }
+    flaeche  = 202
+    stadt    = ja
+    kreis    = kr_aschersleben
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2829422; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ballenstedt {
+    name     = "Ballenstedt"
+    gelaende = huegelland
+    lage     = { 11.2326 51.719 }
+    flaeche  = 184
+    stadt    = nein
+    kreis    = kr_aschersleben
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2953060; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort harzgerode {
+    name     = "Harzgerode"
+    gelaende = huegelland
+    lage     = { 11.1433 51.6419 }
+    flaeche  = 218
+    stadt    = nein
+    kreis    = kr_aschersleben
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2909944; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gatersleben {
+    name     = "Gatersleben"
+    gelaende = flachland
+    lage     = { 11.2866 51.8222 }
+    flaeche  = 181
+    stadt    = nein
+    kreis    = kr_aschersleben
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2922342; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort merseburg {
+    name     = "Merseburg"
+    gelaende = flachland
+    lage     = { 11.9892 51.3548 }
+    flaeche  = 122
+    stadt    = ja
+    kreis    = kr_halle
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2871736; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bad_duerrenberg {
+    name     = "Bad Dürrenberg"
+    gelaende = flachland
+    lage     = { 12.0658 51.2955 }
+    flaeche  = 110
+    stadt    = nein
+    kreis    = kr_halle
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2953521; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort querfurt {
+    name     = "Querfurt"
+    gelaende = flachland
+    lage     = { 11.6005 51.3812 }
+    flaeche  = 196
+    stadt    = nein
+    kreis    = kr_halle
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2851393; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort teutschenthal {
+    name     = "Teutschenthal"
+    gelaende = flachland
+    lage     = { 11.8 51.45 }
+    flaeche  = 115
+    stadt    = nein
+    kreis    = kr_halle
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2823230; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort muecheln {
+    name     = "Mücheln"
+    gelaende = huegelland
+    lage     = { 11.8076 51.2969 }
+    flaeche  = 197
+    stadt    = nein
+    kreis    = kr_halle
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2868933; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bad_lauchstaedt {
+    name     = "Bad Lauchstädt"
+    gelaende = flachland
+    lage     = { 11.8696 51.3865 }
+    flaeche  = 109
+    stadt    = nein
+    kreis    = kr_halle
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2953412; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort koennern {
+    name     = "Könnern"
+    gelaende = boerde
+    lage     = { 11.7707 51.6712 }
+    flaeche  = 134
+    stadt    = nein
+    kreis    = kr_halle
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2885716; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort landsberg_magdeburg {
+    name     = "Landsberg (Magdeburg)"
+    gelaende = flachland
+    lage     = { 12.1608 51.527 }
+    flaeche  = 147
+    stadt    = nein
+    kreis    = kr_halle
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2881508; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wettin {
+    name     = "Wettin"
+    gelaende = flachland
+    lage     = { 11.8063 51.586 }
+    flaeche  = 207
+    stadt    = nein
+    kreis    = kr_halle
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2809939; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort groebers {
+    name     = "Gröbers"
+    gelaende = flachland
+    lage     = { 12.1162 51.4305 }
+    flaeche  = 102
+    stadt    = nein
+    kreis    = kr_halle
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2917217; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }

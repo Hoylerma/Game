@@ -1,0 +1,480 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
+# Orte: Schleswig – Orte ohne Daten (Meilenstein M3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
+# Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
+# ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
+# und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
+#
+# Umfang: Herzogtum Schleswig zwischen Eider und Königsau (heute Kreise Nordfriesland, Schleswig-Flensburg, Flensburg und der nördliche Teil von Rendsburg-Eckernförde, in Dänemark die Kommunen Tønder, Aabenraa, Sønderborg, Haderslev und Ærø).
+
+ort hadersleben {
+    name     = "Hadersleben"
+    gelaende = flachland
+    lage     = { 9.4877 55.2494 }
+    flaeche  = 281
+    stadt    = ja
+    kreis    = kr_hadersleben
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2620964; deutscher Name aus den GeoNames-Alternativnamen (heute Haderslev); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort vojens {
+    name     = "Vojens"
+    gelaende = flachland
+    lage     = { 9.306 55.2464 }
+    flaeche  = 253
+    stadt    = nein
+    kreis    = kr_hadersleben
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2610075; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort loegumkloster {
+    name     = "Løgumkloster"
+    gelaende = flachland
+    lage     = { 8.9551 55.0594 }
+    flaeche  = 308
+    stadt    = nein
+    kreis    = kr_hadersleben
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2617457; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort scherrebek {
+    name     = "Scherrebek"
+    gelaende = kueste
+    lage     = { 8.769 55.1574 }
+    flaeche  = 303
+    stadt    = nein
+    kreis    = kr_hadersleben
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2613539; deutscher Name aus den GeoNames-Alternativnamen (heute Skaerbaek); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort toftlund {
+    name     = "Toftlund"
+    gelaende = flachland
+    lage     = { 9.0693 55.1886 }
+    flaeche  = 269
+    stadt    = nein
+    kreis    = kr_hadersleben
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2611565; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gram {
+    name     = "Gram"
+    gelaende = flachland
+    lage     = { 9.0491 55.2895 }
+    flaeche  = 166
+    stadt    = nein
+    kreis    = kr_hadersleben
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2621279; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort sonderburg {
+    name     = "Sonderburg"
+    gelaende = kueste
+    lage     = { 9.7971 54.9113 }
+    flaeche  = 28
+    stadt    = ja
+    kreis    = kr_sonderburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2613102; deutscher Name aus den GeoNames-Alternativnamen (heute Sønderborg); Lage auf das nächste Landpixel gesetzt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort nordborg {
+    name     = "Nordborg"
+    gelaende = kueste
+    lage     = { 9.7408 55.0573 }
+    flaeche  = 73
+    stadt    = nein
+    kreis    = kr_sonderburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2616176; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort aeroeskoebing {
+    name     = "Ærøskøbing"
+    gelaende = kueste
+    lage     = { 10.4064 54.8879 }
+    flaeche  = 96
+    stadt    = ja
+    kreis    = kr_sonderburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2625001; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Lage auf das nächste Landpixel gesetzt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hoeruphav {
+    name     = "Høruphav"
+    gelaende = kueste
+    lage     = { 9.9031 54.9113 }
+    flaeche  = 103
+    stadt    = nein
+    kreis    = kr_sonderburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2619845; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Lage auf das nächste Landpixel gesetzt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort guderup {
+    name     = "Guderup"
+    gelaende = kueste
+    lage     = { 9.8717 54.9898 }
+    flaeche  = 94
+    stadt    = nein
+    kreis    = kr_sonderburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2621072; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort westerland {
+    name     = "Westerland"
+    gelaende = kueste
+    lage     = { 8.3033 54.9079 }
+    flaeche  = 79
+    stadt    = nein
+    kreis    = kr_westerland
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2810284; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort tondern {
+    name     = "Tondern"
+    gelaende = flachland
+    lage     = { 8.8667 54.9331 }
+    flaeche  = 307
+    stadt    = ja
+    kreis    = kr_westerland
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2611497; deutscher Name aus den GeoNames-Alternativnamen (heute Tønder); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort niebuell {
+    name     = "Niebüll"
+    gelaende = flachland
+    lage     = { 8.8285 54.7866 }
+    flaeche  = 198
+    stadt    = nein
+    kreis    = kr_westerland
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2863696; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bredstedt {
+    name     = "Bredstedt"
+    gelaende = kueste
+    lage     = { 8.9644 54.6187 }
+    flaeche  = 230
+    stadt    = nein
+    kreis    = kr_westerland
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2944879; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wyk_auf_foehr {
+    name     = "Wyk auf Föhr"
+    gelaende = kueste
+    lage     = { 8.567 54.6914 }
+    flaeche  = 73
+    stadt    = nein
+    kreis    = kr_westerland
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2805396; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort leck {
+    name     = "Leck"
+    gelaende = flachland
+    lage     = { 8.9833 54.7667 }
+    flaeche  = 313
+    stadt    = nein
+    kreis    = kr_westerland
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2879758; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort list {
+    name     = "List"
+    gelaende = kueste
+    lage     = { 8.425 55.0246 }
+    flaeche  = 21
+    stadt    = nein
+    kreis    = kr_westerland
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2876837; Name nach GeoNames; Lage auf das nächste Landpixel gesetzt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort pellworm {
+    name     = "Pellworm"
+    gelaende = kueste
+    lage     = { 8.6451 54.5161 }
+    flaeche  = 30
+    stadt    = nein
+    kreis    = kr_westerland
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2854996; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort neukirchen_schleswig {
+    name     = "Neukirchen (Schleswig)"
+    gelaende = kueste
+    lage     = { 8.7333 54.8667 }
+    flaeche  = 180
+    stadt    = nein
+    kreis    = kr_westerland
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2864735; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort flensburg {
+    name     = "Flensburg"
+    gelaende = flachland
+    lage     = { 9.4396 54.7843 }
+    flaeche  = 204
+    stadt    = ja
+    kreis    = kr_flensburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2926271; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort apenrade {
+    name     = "Apenrade"
+    gelaende = flachland
+    lage     = { 9.4174 55.0443 }
+    flaeche  = 311
+    stadt    = ja
+    kreis    = kr_flensburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2625070; deutscher Name aus den GeoNames-Alternativnamen (heute Aabenraa); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gluecksburg {
+    name     = "Glücksburg"
+    gelaende = flachland
+    lage     = { 9.5485 54.8352 }
+    flaeche  = 64
+    stadt    = nein
+    kreis    = kr_flensburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2919765; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gravenstein {
+    name     = "Gravenstein"
+    gelaende = flachland
+    lage     = { 9.5799 54.9213 }
+    flaeche  = 297
+    stadt    = nein
+    kreis    = kr_flensburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2621258; deutscher Name aus den GeoNames-Alternativnamen (heute Gråsten); Lage auf das nächste Landpixel gesetzt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort tinglev {
+    name     = "Tinglev"
+    gelaende = flachland
+    lage     = { 9.2555 54.9379 }
+    flaeche  = 412
+    stadt    = nein
+    kreis    = kr_flensburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2611684; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort schleswig {
+    name     = "Schleswig"
+    gelaende = flachland
+    lage     = { 9.5586 54.5216 }
+    flaeche  = 249
+    stadt    = ja
+    kreis    = kr_schleswig
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2838634; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort husum_schleswig {
+    name     = "Husum (Schleswig)"
+    gelaende = kueste
+    lage     = { 9.0524 54.4858 }
+    flaeche  = 127
+    stadt    = ja
+    kreis    = kr_schleswig
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2897132; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kropp {
+    name     = "Kropp"
+    gelaende = flachland
+    lage     = { 9.5167 54.4167 }
+    flaeche  = 230
+    stadt    = nein
+    kreis    = kr_schleswig
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2883591; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort tarp {
+    name     = "Tarp"
+    gelaende = flachland
+    lage     = { 9.4 54.6667 }
+    flaeche  = 176
+    stadt    = nein
+    kreis    = kr_schleswig
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2823978; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort grossenwiehe {
+    name     = "Großenwiehe"
+    gelaende = flachland
+    lage     = { 9.25 54.7 }
+    flaeche  = 267
+    stadt    = nein
+    kreis    = kr_schleswig
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2916570; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort juebek {
+    name     = "Jübek"
+    gelaende = flachland
+    lage     = { 9.3977 54.5571 }
+    flaeche  = 172
+    stadt    = nein
+    kreis    = kr_schleswig
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2894644; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort vioel {
+    name     = "Viöl"
+    gelaende = flachland
+    lage     = { 9.1833 54.5667 }
+    flaeche  = 156
+    stadt    = nein
+    kreis    = kr_schleswig
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2817154; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort elsdorf_westermuehlen {
+    name     = "Elsdorf-Westermühlen"
+    gelaende = flachland
+    lage     = { 9.5167 54.2667 }
+    flaeche  = 232
+    stadt    = nein
+    kreis    = kr_schleswig
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2930771; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort erfde {
+    name     = "Erfde"
+    gelaende = flachland
+    lage     = { 9.3167 54.3 }
+    flaeche  = 161
+    stadt    = nein
+    kreis    = kr_schleswig
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2929685; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ostenfeld {
+    name     = "Ostenfeld"
+    gelaende = flachland
+    lage     = { 9.2343 54.464 }
+    flaeche  = 207
+    stadt    = nein
+    kreis    = kr_schleswig
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2856765; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort eckernfoerde {
+    name     = "Eckernförde"
+    gelaende = kueste
+    lage     = { 9.8382 54.4685 }
+    flaeche  = 231
+    stadt    = ja
+    kreis    = kr_eckernfoerde
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2933627; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort altenholz {
+    name     = "Altenholz"
+    gelaende = kueste
+    lage     = { 10.1333 54.4 }
+    flaeche  = 108
+    stadt    = nein
+    kreis    = kr_eckernfoerde
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2957588; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kappeln {
+    name     = "Kappeln"
+    gelaende = kueste
+    lage     = { 9.9313 54.6612 }
+    flaeche  = 134
+    stadt    = nein
+    kreis    = kr_eckernfoerde
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2893023; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gettorf {
+    name     = "Gettorf"
+    gelaende = flachland
+    lage     = { 9.9833 54.4 }
+    flaeche  = 165
+    stadt    = nein
+    kreis    = kr_eckernfoerde
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2920776; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort soerup {
+    name     = "Sörup"
+    gelaende = flachland
+    lage     = { 9.6667 54.7167 }
+    flaeche  = 219
+    stadt    = nein
+    kreis    = kr_eckernfoerde
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2830919; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort suederbrarup {
+    name     = "Süderbrarup"
+    gelaende = flachland
+    lage     = { 9.7833 54.6333 }
+    flaeche  = 207
+    stadt    = nein
+    kreis    = kr_eckernfoerde
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2825186; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gelting {
+    name     = "Gelting"
+    gelaende = kueste
+    lage     = { 9.9 54.75 }
+    flaeche  = 92
+    stadt    = nein
+    kreis    = kr_eckernfoerde
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2921444; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort waabs {
+    name     = "Waabs"
+    gelaende = kueste
+    lage     = { 9.9833 54.5333 }
+    flaeche  = 107
+    stadt    = nein
+    kreis    = kr_eckernfoerde
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2815812; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort toenning {
+    name     = "Tönning"
+    gelaende = kueste
+    lage     = { 8.9423 54.3188 }
+    flaeche  = 148
+    stadt    = nein
+    kreis    = kr_toenning
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2821878; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort sankt_peter_ording {
+    name     = "Sankt Peter-Ording"
+    gelaende = kueste
+    lage     = { 8.6414 54.3036 }
+    flaeche  = 56
+    stadt    = nein
+    kreis    = kr_toenning
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2841484; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort garding {
+    name     = "Garding"
+    gelaende = kueste
+    lage     = { 8.7806 54.3306 }
+    flaeche  = 157
+    stadt    = nein
+    kreis    = kr_toenning
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2922571; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort friedrichstadt {
+    name     = "Friedrichstadt"
+    gelaende = flachland
+    lage     = { 9.0867 54.3757 }
+    flaeche  = 169
+    stadt    = nein
+    kreis    = kr_toenning
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2924477; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}

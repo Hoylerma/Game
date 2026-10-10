@@ -1,0 +1,1010 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
+# Orte: Lothringen – Orte ohne Daten (Meilenstein M3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
+# Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
+# ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
+# und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
+#
+# Umfang: Herzogtümer Lothringen und Bar mit den Bistümern Metz, Toul und Verdun (heute Départements Moselle, Meurthe-et-Moselle, Meuse und Vosges).
+
+ort diedenhofen {
+    name     = "Diedenhofen"
+    gelaende = flussaue
+    lage     = { 6.1604 49.3599 }
+    flaeche  = 120
+    stadt    = ja
+    kreis    = kr_diedenhofen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2972811; deutscher Name aus den GeoNames-Alternativnamen (heute Thionville); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort longwy {
+    name     = "Longwy"
+    gelaende = huegelland
+    lage     = { 5.7619 49.5217 }
+    flaeche  = 161
+    stadt    = nein
+    kreis    = kr_diedenhofen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2997638; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hayange {
+    name     = "Hayange"
+    gelaende = huegelland
+    lage     = { 6.0628 49.3288 }
+    flaeche  = 113
+    stadt    = nein
+    kreis    = kr_diedenhofen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3013627; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort amneville {
+    name     = "Amnéville"
+    gelaende = huegelland
+    lage     = { 6.1341 49.2567 }
+    flaeche  = 128
+    stadt    = nein
+    kreis    = kr_diedenhofen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3037838; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort briey {
+    name     = "Briey"
+    gelaende = huegelland
+    lage     = { 5.9398 49.2492 }
+    flaeche  = 159
+    stadt    = ja
+    kreis    = kr_diedenhofen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3030071; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort jarny {
+    name     = "Jarny"
+    gelaende = huegelland
+    lage     = { 5.8764 49.1587 }
+    flaeche  = 270
+    stadt    = nein
+    kreis    = kr_diedenhofen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3012467; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort longuyon {
+    name     = "Longuyon"
+    gelaende = huegelland
+    lage     = { 5.6051 49.4418 }
+    flaeche  = 441
+    stadt    = nein
+    kreis    = kr_diedenhofen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2997646; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort etain {
+    name     = "Étain"
+    gelaende = flachland
+    lage     = { 5.6402 49.2126 }
+    flaeche  = 413
+    stadt    = nein
+    kreis    = kr_diedenhofen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3019474; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort koenigsmachern {
+    name     = "Königsmachern"
+    gelaende = huegelland
+    lage     = { 6.2833 49.4 }
+    flaeche  = 179
+    stadt    = nein
+    kreis    = kr_diedenhofen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3011437; deutscher Name aus den GeoNames-Alternativnamen (heute Kœnigsmacker); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort aumetz {
+    name     = "Aumetz"
+    gelaende = huegelland
+    lage     = { 5.9442 49.4179 }
+    flaeche  = 204
+    stadt    = nein
+    kreis    = kr_diedenhofen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3036107; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort piennes {
+    name     = "Piennes"
+    gelaende = huegelland
+    lage     = { 5.7801 49.3096 }
+    flaeche  = 249
+    stadt    = nein
+    kreis    = kr_diedenhofen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2987328; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort metzervisse {
+    name     = "Metzervisse"
+    gelaende = huegelland
+    lage     = { 6.2828 49.3148 }
+    flaeche  = 148
+    stadt    = nein
+    kreis    = kr_diedenhofen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2994155; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort forbach_lothringen {
+    name     = "Forbach (Lothringen)"
+    gelaende = huegelland
+    lage     = { 6.8925 49.1885 }
+    flaeche  = 110
+    stadt    = ja
+    kreis    = kr_forbach_lothringen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3017805; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort sankt_avold {
+    name     = "Sankt Avold"
+    gelaende = huegelland
+    lage     = { 6.704 49.1046 }
+    flaeche  = 132
+    stadt    = nein
+    kreis    = kr_forbach_lothringen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2981492; deutscher Name aus den GeoNames-Alternativnamen (heute Saint-Avold); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kreuzwald {
+    name     = "Kreuzwald"
+    gelaende = huegelland
+    lage     = { 6.6967 49.2053 }
+    flaeche  = 137
+    stadt    = nein
+    kreis    = kr_forbach_lothringen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3022513; deutscher Name aus den GeoNames-Alternativnamen (heute Creutzwald); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bolchen {
+    name     = "Bolchen"
+    gelaende = huegelland
+    lage     = { 6.5 49.1833 }
+    flaeche  = 192
+    stadt    = ja
+    kreis    = kr_forbach_lothringen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3031182; deutscher Name aus den GeoNames-Alternativnamen (heute Boulay-Moselle); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort falkenberg_lothringen {
+    name     = "Falkenberg (Lothringen)"
+    gelaende = huegelland
+    lage     = { 6.5973 49.0491 }
+    flaeche  = 197
+    stadt    = nein
+    kreis    = kr_forbach_lothringen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3018946; deutscher Name aus den GeoNames-Alternativnamen (heute Faulquemont); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort busendorf {
+    name     = "Busendorf"
+    gelaende = huegelland
+    lage     = { 6.5339 49.2919 }
+    flaeche  = 273
+    stadt    = nein
+    kreis    = kr_forbach_lothringen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3030668; deutscher Name aus den GeoNames-Alternativnamen (heute Bouzonville); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort courcelles_chaussy {
+    name     = "Courcelles-Chaussy"
+    gelaende = huegelland
+    lage     = { 6.4015 49.1094 }
+    flaeche  = 139
+    stadt    = nein
+    kreis    = kr_forbach_lothringen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3023107; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort remilly {
+    name     = "Rémilly"
+    gelaende = huegelland
+    lage     = { 6.3922 49.0136 }
+    flaeche  = 219
+    stadt    = nein
+    kreis    = kr_forbach_lothringen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2984060; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort seingbouse {
+    name     = "Seingbouse"
+    gelaende = huegelland
+    lage     = { 6.8319 49.1134 }
+    flaeche  = 218
+    stadt    = nein
+    kreis    = kr_forbach_lothringen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2975245; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort vigy {
+    name     = "Vigy"
+    gelaende = huegelland
+    lage     = { 6.2991 49.2044 }
+    flaeche  = 160
+    stadt    = nein
+    kreis    = kr_forbach_lothringen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2969074; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort verdun {
+    name     = "Verdun"
+    gelaende = huegelland
+    lage     = { 5.3829 49.1596 }
+    flaeche  = 488
+    stadt    = ja
+    kreis    = kr_verdun
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2969958; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bar_le_duc {
+    name     = "Bar-le-Duc"
+    gelaende = huegelland
+    lage     = { 5.1611 48.7728 }
+    flaeche  = 514
+    stadt    = ja
+    kreis    = kr_verdun
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3034911; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort commercy {
+    name     = "Commercy"
+    gelaende = huegelland
+    lage     = { 5.5907 48.7613 }
+    flaeche  = 384
+    stadt    = ja
+    kreis    = kr_verdun
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3024086; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort saint_mihiel {
+    name     = "Saint-Mihiel"
+    gelaende = huegelland
+    lage     = { 5.551 48.8875 }
+    flaeche  = 384
+    stadt    = nein
+    kreis    = kr_verdun
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2977948; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ligny_en_barrois {
+    name     = "Ligny-en-Barrois"
+    gelaende = huegelland
+    lage     = { 5.3254 48.6886 }
+    flaeche  = 544
+    stadt    = nein
+    kreis    = kr_verdun
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2998362; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort stenay {
+    name     = "Stenay"
+    gelaende = huegelland
+    lage     = { 5.1861 49.4949 }
+    flaeche  = 424
+    stadt    = nein
+    kreis    = kr_verdun
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2973809; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort revigny_sur_ornain {
+    name     = "Revigny-sur-Ornain"
+    gelaende = flachland
+    lage     = { 4.9856 48.8302 }
+    flaeche  = 271
+    stadt    = nein
+    kreis    = kr_verdun
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2983812; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort montmedy {
+    name     = "Montmédy"
+    gelaende = huegelland
+    lage     = { 5.3684 49.521 }
+    flaeche  = 339
+    stadt    = nein
+    kreis    = kr_verdun
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2992260; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort clermont_en_argonne {
+    name     = "Clermont-en-Argonne"
+    gelaende = huegelland
+    lage     = { 5.07 49.1071 }
+    flaeche  = 774
+    stadt    = nein
+    kreis    = kr_verdun
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3024636; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort vigneulles_les_hattonchatel {
+    name     = "Vigneulles-lès-Hattonchâtel"
+    gelaende = huegelland
+    lage     = { 5.7046 48.9815 }
+    flaeche  = 472
+    stadt    = nein
+    kreis    = kr_verdun
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2969113; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort dieue_sur_meuse {
+    name     = "Dieue-sur-Meuse"
+    gelaende = huegelland
+    lage     = { 5.4225 49.072 }
+    flaeche  = 433
+    stadt    = nein
+    kreis    = kr_verdun
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3021398; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort metz {
+    name     = "Metz"
+    gelaende = flussaue
+    lage     = { 6.1727 49.1191 }
+    flaeche  = 149
+    stadt    = ja
+    kreis    = kr_metz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2994160; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort pont_a_mousson {
+    name     = "Pont-à-Mousson"
+    gelaende = huegelland
+    lage     = { 6.0564 48.907 }
+    flaeche  = 109
+    stadt    = nein
+    kreis    = kr_metz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2986306; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ars_sur_moselle {
+    name     = "Ars-sur-Moselle"
+    gelaende = huegelland
+    lage     = { 6.0742 49.0779 }
+    flaeche  = 128
+    stadt    = nein
+    kreis    = kr_metz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3036711; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort pagny_sur_moselle {
+    name     = "Pagny-sur-Moselle"
+    gelaende = huegelland
+    lage     = { 6.0207 48.9836 }
+    flaeche  = 217
+    stadt    = nein
+    kreis    = kr_metz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2988823; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort dieulouard {
+    name     = "Dieulouard"
+    gelaende = huegelland
+    lage     = { 6.0678 48.8414 }
+    flaeche  = 203
+    stadt    = nein
+    kreis    = kr_metz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3021394; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort amanvillers {
+    name     = "Amanvillers"
+    gelaende = huegelland
+    lage     = { 6.0437 49.1678 }
+    flaeche  = 124
+    stadt    = nein
+    kreis    = kr_metz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3037967; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort nomeny {
+    name     = "Nomeny"
+    gelaende = huegelland
+    lage     = { 6.2264 48.8898 }
+    flaeche  = 228
+    stadt    = nein
+    kreis    = kr_metz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2990164; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort verny {
+    name     = "Verny"
+    gelaende = huegelland
+    lage     = { 6.2035 49.0068 }
+    flaeche  = 166
+    stadt    = nein
+    kreis    = kr_metz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2969736; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort saargemuend {
+    name     = "Saargemünd"
+    gelaende = huegelland
+    lage     = { 7.0675 49.1099 }
+    flaeche  = 173
+    stadt    = ja
+    kreis    = kr_saargemuend
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2975964; deutscher Name aus den GeoNames-Alternativnamen (heute Sarreguemines); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bitsch {
+    name     = "Bitsch"
+    gelaende = huegelland
+    lage     = { 7.4299 49.0523 }
+    flaeche  = 178
+    stadt    = nein
+    kreis    = kr_saargemuend
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3032518; deutscher Name aus den GeoNames-Alternativnamen (heute Bitche); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort saaralben {
+    name     = "Saaralben"
+    gelaende = huegelland
+    lage     = { 7.0307 48.9986 }
+    flaeche  = 265
+    stadt    = nein
+    kreis    = kr_saargemuend
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2975992; deutscher Name aus den GeoNames-Alternativnamen (heute Sarralbe); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort goetzenbrueck {
+    name     = "Götzenbrück"
+    gelaende = huegelland
+    lage     = { 7.3796 48.9778 }
+    flaeche  = 108
+    stadt    = nein
+    kreis    = kr_saargemuend
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3015756; deutscher Name aus den GeoNames-Alternativnamen (heute Goetzenbruck); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort rohrbach {
+    name     = "Rohrbach"
+    gelaende = huegelland
+    lage     = { 7.2676 49.0442 }
+    flaeche  = 181
+    stadt    = nein
+    kreis    = kr_saargemuend
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2983095; deutscher Name aus den GeoNames-Alternativnamen (heute Rohrbach-lès-Bitche); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort saarburg_lothringen {
+    name     = "Saarburg (Lothringen)"
+    gelaende = huegelland
+    lage     = { 7.0572 48.7356 }
+    flaeche  = 279
+    stadt    = ja
+    kreis    = kr_saarburg_lothringen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2975967; deutscher Name aus den GeoNames-Alternativnamen (heute Sarrebourg); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort pfalzburg {
+    name     = "Pfalzburg"
+    gelaende = huegelland
+    lage     = { 7.2582 48.7677 }
+    flaeche  = 157
+    stadt    = nein
+    kreis    = kr_saarburg_lothringen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2987421; deutscher Name aus den GeoNames-Alternativnamen (heute Phalsbourg); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort dagsburg {
+    name     = "Dagsburg"
+    gelaende = mittelgebirge
+    lage     = { 7.2361 48.6537 }
+    flaeche  = 162
+    stadt    = nein
+    kreis    = kr_saarburg_lothringen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3021933; deutscher Name aus den GeoNames-Alternativnamen (heute Dabo); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort abreschviller {
+    name     = "Abreschviller"
+    gelaende = huegelland
+    lage     = { 7.0961 48.637 }
+    flaeche  = 138
+    stadt    = nein
+    kreis    = kr_saarburg_lothringen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3038738; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lorquin {
+    name     = "Lorquin"
+    gelaende = huegelland
+    lage     = { 6.9992 48.671 }
+    flaeche  = 182
+    stadt    = nein
+    kreis    = kr_saarburg_lothringen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2997552; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort nancy {
+    name     = "Nancy"
+    gelaende = huegelland
+    lage     = { 6.185 48.6844 }
+    flaeche  = 123
+    stadt    = ja
+    kreis    = kr_nancy
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2990999; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort toul {
+    name     = "Toul"
+    gelaende = flussaue
+    lage     = { 5.8911 48.6808 }
+    flaeche  = 143
+    stadt    = ja
+    kreis    = kr_nancy
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2972350; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort liverdun {
+    name     = "Liverdun"
+    gelaende = huegelland
+    lage     = { 6.0637 48.7497 }
+    flaeche  = 110
+    stadt    = nein
+    kreis    = kr_nancy
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2998078; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort neuves_maisons {
+    name     = "Neuves-Maisons"
+    gelaende = huegelland
+    lage     = { 6.1054 48.6181 }
+    flaeche  = 239
+    stadt    = nein
+    kreis    = kr_nancy
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2990580; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort foug {
+    name     = "Foug"
+    gelaende = huegelland
+    lage     = { 5.7873 48.6838 }
+    flaeche  = 182
+    stadt    = nein
+    kreis    = kr_nancy
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3017622; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bouxieres_aux_chenes {
+    name     = "Bouxières-aux-Chênes"
+    gelaende = huegelland
+    lage     = { 6.2615 48.7722 }
+    flaeche  = 208
+    stadt    = nein
+    kreis    = kr_nancy
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3030714; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort vezelise {
+    name     = "Vézelise"
+    gelaende = huegelland
+    lage     = { 6.0883 48.4875 }
+    flaeche  = 277
+    stadt    = nein
+    kreis    = kr_nancy
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2969477; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort colombey_les_belles {
+    name     = "Colombey-les-Belles"
+    gelaende = huegelland
+    lage     = { 5.8945 48.5292 }
+    flaeche  = 331
+    stadt    = nein
+    kreis    = kr_nancy
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3024264; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort villey_saint_etienne {
+    name     = "Villey-Saint-Étienne"
+    gelaende = flussaue
+    lage     = { 5.9785 48.7325 }
+    flaeche  = 164
+    stadt    = nein
+    kreis    = kr_nancy
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2968220; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort luneville {
+    name     = "Lunéville"
+    gelaende = huegelland
+    lage     = { 6.4938 48.5927 }
+    flaeche  = 184
+    stadt    = ja
+    kreis    = kr_luneville
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2997110; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort salzburgen {
+    name     = "Salzburgen"
+    gelaende = huegelland
+    lage     = { 6.5145 48.8188 }
+    flaeche  = 276
+    stadt    = ja
+    kreis    = kr_luneville
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3026200; deutscher Name aus den GeoNames-Alternativnamen (heute Château-Salins); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort dombasle_sur_meurthe {
+    name     = "Dombasle-sur-Meurthe"
+    gelaende = huegelland
+    lage     = { 6.3554 48.6186 }
+    flaeche  = 190
+    stadt    = nein
+    kreis    = kr_luneville
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3021221; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort dieuze {
+    name     = "Dieuze"
+    gelaende = huegelland
+    lage     = { 6.7178 48.8126 }
+    flaeche  = 427
+    stadt    = nein
+    kreis    = kr_luneville
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3021392; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort morhange {
+    name     = "Morhange"
+    gelaende = huegelland
+    lage     = { 6.6416 48.9236 }
+    flaeche  = 294
+    stadt    = nein
+    kreis    = kr_luneville
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2991806; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gerbeviller {
+    name     = "Gerbéviller"
+    gelaende = huegelland
+    lage     = { 6.5107 48.4962 }
+    flaeche  = 240
+    stadt    = nein
+    kreis    = kr_luneville
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3016264; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bayon {
+    name     = "Bayon"
+    gelaende = huegelland
+    lage     = { 6.3163 48.4742 }
+    flaeche  = 209
+    stadt    = nein
+    kreis    = kr_luneville
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3034476; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort einville_au_jard {
+    name     = "Einville-au-Jard"
+    gelaende = huegelland
+    lage     = { 6.4845 48.6557 }
+    flaeche  = 288
+    stadt    = nein
+    kreis    = kr_luneville
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3020314; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort neufchateau_lothringen {
+    name     = "Neufchâteau (Lothringen)"
+    gelaende = huegelland
+    lage     = { 5.696 48.3556 }
+    flaeche  = 260
+    stadt    = ja
+    kreis    = kr_neufchateau_lothringen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2990682; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort liffol_le_grand {
+    name     = "Liffol-le-Grand"
+    gelaende = huegelland
+    lage     = { 5.5812 48.3177 }
+    flaeche  = 413
+    stadt    = nein
+    kreis    = kr_neufchateau_lothringen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2998425; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gondrecourt_le_chateau {
+    name     = "Gondrecourt-le-Château"
+    gelaende = huegelland
+    lage     = { 5.5106 48.5137 }
+    flaeche  = 501
+    stadt    = nein
+    kreis    = kr_neufchateau_lothringen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3015701; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort vaucouleurs {
+    name     = "Vaucouleurs"
+    gelaende = huegelland
+    lage     = { 5.6666 48.6031 }
+    flaeche  = 270
+    stadt    = nein
+    kreis    = kr_neufchateau_lothringen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2970546; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort saint_die_des_vosges {
+    name     = "Saint-Dié-des-Vosges"
+    gelaende = mittelgebirge
+    lage     = { 6.9492 48.2843 }
+    flaeche  = 263
+    stadt    = ja
+    kreis    = kr_saint_die_des_vosges
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2980827; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort rambervillers {
+    name     = "Rambervillers"
+    gelaende = huegelland
+    lage     = { 6.6358 48.3424 }
+    flaeche  = 276
+    stadt    = nein
+    kreis    = kr_saint_die_des_vosges
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2984516; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort baccarat {
+    name     = "Baccarat"
+    gelaende = huegelland
+    lage     = { 6.7395 48.4498 }
+    flaeche  = 261
+    stadt    = nein
+    kreis    = kr_saint_die_des_vosges
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3035498; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort moyenmoutier {
+    name     = "Moyenmoutier"
+    gelaende = huegelland
+    lage     = { 6.9005 48.3773 }
+    flaeche  = 253
+    stadt    = nein
+    kreis    = kr_saint_die_des_vosges
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2991271; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort badonviller {
+    name     = "Badonviller"
+    gelaende = huegelland
+    lage     = { 6.8922 48.5012 }
+    flaeche  = 226
+    stadt    = nein
+    kreis    = kr_saint_die_des_vosges
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3035449; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort cirey_sur_vezouze {
+    name     = "Cirey-sur-Vezouze"
+    gelaende = huegelland
+    lage     = { 6.9457 48.5809 }
+    flaeche  = 262
+    stadt    = nein
+    kreis    = kr_saint_die_des_vosges
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3024899; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort vittel {
+    name     = "Vittel"
+    gelaende = huegelland
+    lage     = { 5.9484 48.2009 }
+    flaeche  = 209
+    stadt    = nein
+    kreis    = kr_vittel
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2967845; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bulgneville {
+    name     = "Bulgnéville"
+    gelaende = huegelland
+    lage     = { 5.8343 48.2069 }
+    flaeche  = 227
+    stadt    = nein
+    kreis    = kr_vittel
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3029580; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort darney {
+    name     = "Darney"
+    gelaende = huegelland
+    lage     = { 6.0492 48.0866 }
+    flaeche  = 453
+    stadt    = nein
+    kreis    = kr_vittel
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3021716; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort chatenois {
+    name     = "Châtenois"
+    gelaende = huegelland
+    lage     = { 5.8312 48.3029 }
+    flaeche  = 272
+    stadt    = nein
+    kreis    = kr_vittel
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3026099; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lamarche {
+    name     = "Lamarche"
+    gelaende = huegelland
+    lage     = { 5.7814 48.0697 }
+    flaeche  = 339
+    stadt    = nein
+    kreis    = kr_vittel
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3008303; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort epinal {
+    name     = "Épinal"
+    gelaende = huegelland
+    lage     = { 6.453 48.1832 }
+    flaeche  = 169
+    stadt    = ja
+    kreis    = kr_epinal
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3020035; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort mirecourt {
+    name     = "Mirecourt"
+    gelaende = huegelland
+    lage     = { 6.1328 48.3009 }
+    flaeche  = 311
+    stadt    = nein
+    kreis    = kr_epinal
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2993728; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort charmes {
+    name     = "Charmes"
+    gelaende = huegelland
+    lage     = { 6.2912 48.3722 }
+    flaeche  = 177
+    stadt    = nein
+    kreis    = kr_epinal
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3026588; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort chatel_sur_moselle {
+    name     = "Châtel-sur-Moselle"
+    gelaende = huegelland
+    lage     = { 6.394 48.3143 }
+    flaeche  = 220
+    stadt    = nein
+    kreis    = kr_epinal
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3026130; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort darnieulles {
+    name     = "Darnieulles"
+    gelaende = huegelland
+    lage     = { 6.3493 48.1995 }
+    flaeche  = 245
+    stadt    = nein
+    kreis    = kr_epinal
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3021713; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gerardmer {
+    name     = "Gérardmer"
+    gelaende = mittelgebirge
+    lage     = { 6.8779 48.0735 }
+    flaeche  = 239
+    stadt    = nein
+    kreis    = kr_gerardmer
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3016274; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort remiremont {
+    name     = "Remiremont"
+    gelaende = mittelgebirge
+    lage     = { 6.5882 48.0175 }
+    flaeche  = 118
+    stadt    = nein
+    kreis    = kr_gerardmer
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2984050; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bruyeres {
+    name     = "Bruyères"
+    gelaende = mittelgebirge
+    lage     = { 6.7184 48.2071 }
+    flaeche  = 308
+    stadt    = nein
+    kreis    = kr_gerardmer
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3029725; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort vagney {
+    name     = "Vagney"
+    gelaende = mittelgebirge
+    lage     = { 6.7174 48.0063 }
+    flaeche  = 101
+    stadt    = nein
+    kreis    = kr_gerardmer
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2971186; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort rupt_sur_moselle {
+    name     = "Rupt-sur-Moselle"
+    gelaende = mittelgebirge
+    lage     = { 6.6629 47.9227 }
+    flaeche  = 249
+    stadt    = nein
+    kreis    = kr_gerardmer
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2982130; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort eloyes {
+    name     = "Éloyes"
+    gelaende = mittelgebirge
+    lage     = { 6.6065 48.0979 }
+    flaeche  = 201
+    stadt    = nein
+    kreis    = kr_gerardmer
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3020275; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort fraize {
+    name     = "Fraize"
+    gelaende = mittelgebirge
+    lage     = { 6.9979 48.1866 }
+    flaeche  = 186
+    stadt    = nein
+    kreis    = kr_gerardmer
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3017400; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort xertigny {
+    name     = "Xertigny"
+    gelaende = mittelgebirge
+    lage     = { 6.4084 48.0439 }
+    flaeche  = 186
+    stadt    = nein
+    kreis    = kr_gerardmer
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2967269; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort le_thillot {
+    name     = "Le Thillot"
+    gelaende = mittelgebirge
+    lage     = { 6.7628 47.8794 }
+    flaeche  = 196
+    stadt    = nein
+    kreis    = kr_gerardmer
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2999185; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort cornimont {
+    name     = "Cornimont"
+    gelaende = mittelgebirge
+    lage     = { 6.8304 47.96 }
+    flaeche  = 174
+    stadt    = nein
+    kreis    = kr_gerardmer
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3023573; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort plombieres_les_bains {
+    name     = "Plombières-les-Bains"
+    gelaende = mittelgebirge
+    lage     = { 6.4576 47.9634 }
+    flaeche  = 177
+    stadt    = nein
+    kreis    = kr_gerardmer
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2986715; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bains_les_bains {
+    name     = "Bains-les-Bains"
+    gelaende = huegelland
+    lage     = { 6.2649 48.0011 }
+    flaeche  = 290
+    stadt    = nein
+    kreis    = kr_gerardmer
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3035317; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}

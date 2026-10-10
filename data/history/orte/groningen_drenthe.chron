@@ -1,0 +1,260 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
+# Orte: Groningen und Drenthe – Orte ohne Daten (Meilenstein M3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
+# Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
+# ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
+# und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
+#
+# Umfang: Groningen und Drenthe (niederländischer Saum).
+
+ort groningen {
+    name     = "Groningen"
+    gelaende = flachland
+    lage     = { 6.5667 53.2192 }
+    flaeche  = 198
+    stadt    = ja
+    kreis    = kr_groningen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2755251; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort assen {
+    name     = "Assen"
+    gelaende = flachland
+    lage     = { 6.5625 52.9967 }
+    flaeche  = 211
+    stadt    = ja
+    kreis    = kr_groningen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2759633; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort delfzijl {
+    name     = "Delfzijl"
+    gelaende = kueste
+    lage     = { 6.9181 53.33 }
+    flaeche  = 209
+    stadt    = ja
+    kreis    = kr_groningen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2757340; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort leek {
+    name     = "Leek"
+    gelaende = flachland
+    lage     = { 6.3764 53.1625 }
+    flaeche  = 132
+    stadt    = nein
+    kreis    = kr_groningen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2751834; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ten_boer {
+    name     = "Ten Boer"
+    gelaende = flachland
+    lage     = { 6.6944 53.2758 }
+    flaeche  = 211
+    stadt    = nein
+    kreis    = kr_groningen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2746491; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort uithuizen {
+    name     = "Uithuizen"
+    gelaende = kueste
+    lage     = { 6.6708 53.4075 }
+    flaeche  = 235
+    stadt    = nein
+    kreis    = kr_groningen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2745970; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort norg {
+    name     = "Norg"
+    gelaende = flachland
+    lage     = { 6.4583 53.0667 }
+    flaeche  = 193
+    stadt    = nein
+    kreis    = kr_groningen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2749796; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort grijpskerk {
+    name     = "Grijpskerk"
+    gelaende = flachland
+    lage     = { 6.3083 53.2625 }
+    flaeche  = 149
+    stadt    = nein
+    kreis    = kr_groningen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2755317; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort leens {
+    name     = "Leens"
+    gelaende = flachland
+    lage     = { 6.3792 53.36 }
+    flaeche  = 248
+    stadt    = nein
+    kreis    = kr_groningen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2751813; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort veendam {
+    name     = "Veendam"
+    gelaende = flachland
+    lage     = { 6.8792 53.1067 }
+    flaeche  = 166
+    stadt    = ja
+    kreis    = kr_veendam
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2745783; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hoogezand {
+    name     = "Hoogezand"
+    gelaende = flachland
+    lage     = { 6.7611 53.1617 }
+    flaeche  = 183
+    stadt    = ja
+    kreis    = kr_veendam
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2753706; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort winschoten {
+    name     = "Winschoten"
+    gelaende = flachland
+    lage     = { 7.0347 53.1442 }
+    flaeche  = 312
+    stadt    = nein
+    kreis    = kr_veendam
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2744344; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort stadskanaal {
+    name     = "Stadskanaal"
+    gelaende = flachland
+    lage     = { 6.9504 52.9895 }
+    flaeche  = 208
+    stadt    = ja
+    kreis    = kr_veendam
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2746860; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort borger {
+    name     = "Borger"
+    gelaende = flachland
+    lage     = { 6.7931 52.9233 }
+    flaeche  = 232
+    stadt    = nein
+    kreis    = kr_veendam
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2758621; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort annen {
+    name     = "Annen"
+    gelaende = flachland
+    lage     = { 6.7194 53.0575 }
+    flaeche  = 155
+    stadt    = nein
+    kreis    = kr_veendam
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2759729; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort vlagtwedde {
+    name     = "Vlagtwedde"
+    gelaende = flachland
+    lage     = { 7.1083 53.0275 }
+    flaeche  = 186
+    stadt    = nein
+    kreis    = kr_veendam
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2745461; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort emmen {
+    name     = "Emmen"
+    gelaende = flachland
+    lage     = { 6.9069 52.7792 }
+    flaeche  = 169
+    stadt    = ja
+    kreis    = kr_emmen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2756136; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort coevorden {
+    name     = "Coevorden"
+    gelaende = flachland
+    lage     = { 6.7405 52.661 }
+    flaeche  = 153
+    stadt    = nein
+    kreis    = kr_emmen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2757937; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort emmer_compascuum {
+    name     = "Emmer-Compascuum"
+    gelaende = flachland
+    lage     = { 7.0472 52.8117 }
+    flaeche  = 237
+    stadt    = nein
+    kreis    = kr_emmen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2756133; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort aalden {
+    name     = "Aalden"
+    gelaende = flachland
+    lage     = { 6.7181 52.79 }
+    flaeche  = 220
+    stadt    = nein
+    kreis    = kr_emmen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2760142; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort weiteveen {
+    name     = "Weiteveen"
+    gelaende = flachland
+    lage     = { 6.9875 52.6725 }
+    flaeche  = 213
+    stadt    = nein
+    kreis    = kr_emmen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2744875; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hoogeveen {
+    name     = "Hoogeveen"
+    gelaende = flachland
+    lage     = { 6.4764 52.7225 }
+    flaeche  = 303
+    stadt    = ja
+    kreis    = kr_hoogeveen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2753719; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort meppel {
+    name     = "Meppel"
+    gelaende = flachland
+    lage     = { 6.1944 52.6958 }
+    flaeche  = 347
+    stadt    = ja
+    kreis    = kr_hoogeveen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2750947; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort beilen {
+    name     = "Beilen"
+    gelaende = flachland
+    lage     = { 6.5139 52.8633 }
+    flaeche  = 207
+    stadt    = nein
+    kreis    = kr_hoogeveen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2759271; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort dwingeloo {
+    name     = "Dwingeloo"
+    gelaende = flachland
+    lage     = { 6.3694 52.8342 }
+    flaeche  = 224
+    stadt    = nein
+    kreis    = kr_hoogeveen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2756451; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}

@@ -11,13 +11,17 @@
 # regional sehr unterschiedlich, insgesamt aber geringer als in Mecklenburg,
 # Pommern oder der Mark. Lausitzer Orte stehen in lausitz.chron, Orte des
 # Thüringischen Kreises in thueringen.chron, Jüterbog in magdeburg.chron.
+#
+# Ergänzt in Meilenstein M3 (tools/geodaten/orte.py): weitere Orte ohne Daten (ohne Historie) aus GeoNames, räumlich ausgewählt, Gelände aus dem Höhenmodell, Fläche aus der Karte.
+# Umfang der Landschaft Sachsen: Kursachsen (heute Sachsen ohne die Lausitz, dazu der Kurkreis um Wittenberg).
 
 ort dresden {
     name     = "Dresden"
     gelaende = flussaue
     lage     = { 13.74 51.05 }
-    flaeche  = 220
+    flaeche  = 138
     stadt    = ja
+    kreis    = kr_dresden
     quelle   = "Residenz und Festung des Kurfürsten Johann Georg I.; im Krieg nicht eingenommen. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung)"
 
     1648.10.24 = {
@@ -32,8 +36,9 @@ ort leipzig {
     name     = "Leipzig"
     gelaende = flussaue
     lage     = { 12.37 51.34 }
-    flaeche  = 210
+    flaeche  = 143
     stadt    = ja
+    kreis    = kr_leipzig
     quelle   = "Messe- und Universitätsstadt; von November 1642 bis Juni 1650 schwedisch besetzt. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung)"
 
     1648.10.24 = {
@@ -48,8 +53,9 @@ ort wittenberg {
     name     = "Wittenberg"
     gelaende = flussaue
     lage     = { 12.65 51.87 }
-    flaeche  = 220
+    flaeche  = 200
     stadt    = ja
+    kreis    = kr_wittenberg
     quelle   = "Hauptort des Kurkreises, Universität und Elbfestung. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung nach regionaler Kriegsbetroffenheit geschätzt"
 
     1648.10.24 = {
@@ -64,8 +70,9 @@ ort torgau {
     name     = "Torgau"
     gelaende = flussaue
     lage     = { 13.01 51.56 }
-    flaeche  = 220
+    flaeche  = 166
     stadt    = ja
+    kreis    = kr_torgau
     quelle   = "Elbstadt mit Schloss Hartenfels. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung nach regionaler Kriegsbetroffenheit geschätzt"
 
     1648.10.24 = {
@@ -80,8 +87,9 @@ ort freiberg {
     name     = "Freiberg"
     gelaende = mittelgebirge
     lage     = { 13.34 50.92 }
-    flaeche  = 220
+    flaeche  = 162
     stadt    = ja
+    kreis    = kr_freiberg
     quelle   = "Bergstadt und Zentrum des sächsischen Silberbergbaus; hielt den schwedischen Belagerungen von 1639 und 1642/43 stand. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung)"
 
     1648.10.24 = {
@@ -96,8 +104,9 @@ ort chemnitz {
     name     = "Chemnitz"
     gelaende = huegelland
     lage     = { 12.92 50.83 }
-    flaeche  = 230
+    flaeche  = 132
     stadt    = nein
+    kreis    = kr_chemnitz
     quelle   = "Weberstadt am Erzgebirgsrand. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung nach regionaler Kriegsbetroffenheit geschätzt"
 
     1648.10.24 = {
@@ -112,8 +121,9 @@ ort zwickau {
     name     = "Zwickau"
     gelaende = huegelland
     lage     = { 12.50 50.72 }
-    flaeche  = 230
+    flaeche  = 108
     stadt    = ja
+    kreis    = kr_zwickau
     quelle   = "Tuch- und Handelsstadt an der Mulde. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung nach regionaler Kriegsbetroffenheit geschätzt"
 
     1648.10.24 = {
@@ -122,4 +132,974 @@ ort zwickau {
         konfession   = { lutherisch = 100 }
         verwuestung  = 0.45
     }
+}
+
+ort graefenhainichen {
+    name     = "Gräfenhainichen"
+    gelaende = flachland
+    lage     = { 12.4565 51.7289 }
+    flaeche  = 217
+    stadt    = nein
+    kreis    = kr_wittenberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2918321; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort coswig {
+    name     = "Coswig"
+    gelaende = flussaue
+    lage     = { 12.4501 51.8862 }
+    flaeche  = 305
+    stadt    = nein
+    kreis    = kr_wittenberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2939819; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort zahna {
+    name     = "Zahna"
+    gelaende = flachland
+    lage     = { 12.7856 51.9141 }
+    flaeche  = 221
+    stadt    = nein
+    kreis    = kr_wittenberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2805313; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kemberg {
+    name     = "Kemberg"
+    gelaende = flachland
+    lage     = { 12.6323 51.7719 }
+    flaeche  = 161
+    stadt    = nein
+    kreis    = kr_wittenberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2891718; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort elster {
+    name     = "Elster"
+    gelaende = flussaue
+    lage     = { 12.8242 51.8301 }
+    flaeche  = 173
+    stadt    = nein
+    kreis    = kr_wittenberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2930695; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bad_dueben {
+    name     = "Bad Düben"
+    gelaende = flachland
+    lage     = { 12.5849 51.5917 }
+    flaeche  = 216
+    stadt    = nein
+    kreis    = kr_torgau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2953524; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort jessen {
+    name     = "Jessen"
+    gelaende = flachland
+    lage     = { 12.9576 51.7934 }
+    flaeche  = 173
+    stadt    = nein
+    kreis    = kr_torgau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2894962; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort mockrehna {
+    name     = "Mockrehna"
+    gelaende = flachland
+    lage     = { 12.8142 51.5076 }
+    flaeche  = 206
+    stadt    = nein
+    kreis    = kr_torgau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2870266; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort belgern {
+    name     = "Belgern"
+    gelaende = flussaue
+    lage     = { 13.1238 51.4826 }
+    flaeche  = 137
+    stadt    = nein
+    kreis    = kr_torgau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2951258; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bad_schmiedeberg {
+    name     = "Bad Schmiedeberg"
+    gelaende = flachland
+    lage     = { 12.7348 51.6852 }
+    flaeche  = 175
+    stadt    = nein
+    kreis    = kr_torgau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2953350; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort schildau {
+    name     = "Schildau"
+    gelaende = flachland
+    lage     = { 12.9302 51.4572 }
+    flaeche  = 150
+    stadt    = nein
+    kreis    = kr_torgau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2839303; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort dommitzsch {
+    name     = "Dommitzsch"
+    gelaende = flussaue
+    lage     = { 12.8794 51.6407 }
+    flaeche  = 168
+    stadt    = nein
+    kreis    = kr_torgau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2936280; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort annaburg {
+    name     = "Annaburg"
+    gelaende = flachland
+    lage     = { 13.0473 51.733 }
+    flaeche  = 134
+    stadt    = nein
+    kreis    = kr_torgau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2955999; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort holzdorf {
+    name     = "Holzdorf"
+    gelaende = flachland
+    lage     = { 13.1276 51.7787 }
+    flaeche  = 252
+    stadt    = nein
+    kreis    = kr_torgau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2899961; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort delitzsch {
+    name     = "Delitzsch"
+    gelaende = flachland
+    lage     = { 12.3428 51.5255 }
+    flaeche  = 123
+    stadt    = ja
+    kreis    = kr_delitzsch
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2938376; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort eilenburg {
+    name     = "Eilenburg"
+    gelaende = flachland
+    lage     = { 12.6334 51.4598 }
+    flaeche  = 148
+    stadt    = nein
+    kreis    = kr_delitzsch
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2931871; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort grimma {
+    name     = "Grimma"
+    gelaende = flachland
+    lage     = { 12.7196 51.2337 }
+    flaeche  = 150
+    stadt    = nein
+    kreis    = kr_delitzsch
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2917325; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wurzen {
+    name     = "Wurzen"
+    gelaende = flachland
+    lage     = { 12.7394 51.3707 }
+    flaeche  = 204
+    stadt    = nein
+    kreis    = kr_delitzsch
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2805597; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort taucha {
+    name     = "Taucha"
+    gelaende = flachland
+    lage     = { 12.4833 51.3833 }
+    flaeche  = 136
+    stadt    = nein
+    kreis    = kr_delitzsch
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2823836; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort naunhof {
+    name     = "Naunhof"
+    gelaende = flachland
+    lage     = { 12.5883 51.2777 }
+    flaeche  = 198
+    stadt    = nein
+    kreis    = kr_delitzsch
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2866861; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort krostitz {
+    name     = "Krostitz"
+    gelaende = flachland
+    lage     = { 12.4536 51.4621 }
+    flaeche  = 151
+    stadt    = nein
+    kreis    = kr_delitzsch
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2883552; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort borna {
+    name     = "Borna"
+    gelaende = flachland
+    lage     = { 12.4964 51.1242 }
+    flaeche  = 157
+    stadt    = ja
+    kreis    = kr_leipzig
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2946172; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort schkeuditz {
+    name     = "Schkeuditz"
+    gelaende = flachland
+    lage     = { 12.2214 51.3968 }
+    flaeche  = 128
+    stadt    = nein
+    kreis    = kr_leipzig
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2839050; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort markranstaedt {
+    name     = "Markranstädt"
+    gelaende = flachland
+    lage     = { 12.2202 51.3015 }
+    flaeche  = 106
+    stadt    = nein
+    kreis    = kr_leipzig
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2873331; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bad_lausick {
+    name     = "Bad Lausick"
+    gelaende = flachland
+    lage     = { 12.6445 51.145 }
+    flaeche  = 148
+    stadt    = nein
+    kreis    = kr_leipzig
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2953411; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort zwenkau {
+    name     = "Zwenkau"
+    gelaende = flachland
+    lage     = { 12.3301 51.2187 }
+    flaeche  = 169
+    stadt    = nein
+    kreis    = kr_leipzig
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2803588; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort frohburg {
+    name     = "Frohburg"
+    gelaende = flachland
+    lage     = { 12.5575 51.0572 }
+    flaeche  = 133
+    stadt    = nein
+    kreis    = kr_leipzig
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2924313; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort elstertrebnitz {
+    name     = "Elstertrebnitz"
+    gelaende = flachland
+    lage     = { 12.2333 51.15 }
+    flaeche  = 107
+    stadt    = nein
+    kreis    = kr_leipzig
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2930682; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort riesa {
+    name     = "Riesa"
+    gelaende = flussaue
+    lage     = { 13.2917 51.3078 }
+    flaeche  = 139
+    stadt    = ja
+    kreis    = kr_riesa
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2846939; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort oschatz {
+    name     = "Oschatz"
+    gelaende = flachland
+    lage     = { 13.1098 51.3 }
+    flaeche  = 89
+    stadt    = nein
+    kreis    = kr_riesa
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2856944; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lommatzsch {
+    name     = "Lommatzsch"
+    gelaende = boerde
+    lage     = { 13.3092 51.1954 }
+    flaeche  = 165
+    stadt    = nein
+    kreis    = kr_riesa
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2876009; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wermsdorf {
+    name     = "Wermsdorf"
+    gelaende = flachland
+    lage     = { 12.95 51.2833 }
+    flaeche  = 150
+    stadt    = nein
+    kreis    = kr_riesa
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2810848; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort muegeln {
+    name     = "Mügeln"
+    gelaende = flachland
+    lage     = { 13.0457 51.2362 }
+    flaeche  = 108
+    stadt    = nein
+    kreis    = kr_riesa
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2868842; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort stauchitz {
+    name     = "Stauchitz"
+    gelaende = boerde
+    lage     = { 13.2144 51.2435 }
+    flaeche  = 84
+    stadt    = nein
+    kreis    = kr_riesa
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2829402; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort dahlen {
+    name     = "Dahlen"
+    gelaende = flachland
+    lage     = { 12.9988 51.365 }
+    flaeche  = 121
+    stadt    = nein
+    kreis    = kr_riesa
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2939434; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort cavertitz {
+    name     = "Cavertitz"
+    gelaende = flachland
+    lage     = { 13.1333 51.3833 }
+    flaeche  = 97
+    stadt    = nein
+    kreis    = kr_riesa
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2940218; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wuelknitz {
+    name     = "Wülknitz"
+    gelaende = flachland
+    lage     = { 13.4 51.3667 }
+    flaeche  = 149
+    stadt    = nein
+    kreis    = kr_riesa
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2805861; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort doebeln {
+    name     = "Döbeln"
+    gelaende = huegelland
+    lage     = { 13.1103 51.1221 }
+    flaeche  = 112
+    stadt    = ja
+    kreis    = kr_doebeln
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2936658; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort rosswein {
+    name     = "Roßwein"
+    gelaende = huegelland
+    lage     = { 13.1831 51.0659 }
+    flaeche  = 170
+    stadt    = nein
+    kreis    = kr_doebeln
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2844604; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort leisnig {
+    name     = "Leisnig"
+    gelaende = huegelland
+    lage     = { 12.9279 51.1574 }
+    flaeche  = 136
+    stadt    = nein
+    kreis    = kr_doebeln
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2879109; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort rochlitz {
+    name     = "Rochlitz"
+    gelaende = huegelland
+    lage     = { 12.7975 51.0501 }
+    flaeche  = 151
+    stadt    = nein
+    kreis    = kr_doebeln
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2846261; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort colditz {
+    name     = "Colditz"
+    gelaende = huegelland
+    lage     = { 12.8029 51.1282 }
+    flaeche  = 113
+    stadt    = nein
+    kreis    = kr_doebeln
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2939927; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort waldheim {
+    name     = "Waldheim"
+    gelaende = huegelland
+    lage     = { 13.02 51.0728 }
+    flaeche  = 112
+    stadt    = nein
+    kreis    = kr_doebeln
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2814956; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort meissen {
+    name     = "Meissen"
+    gelaende = huegelland
+    lage     = { 13.4737 51.1616 }
+    flaeche  = 182
+    stadt    = ja
+    kreis    = kr_dresden
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2872155; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort freital {
+    name     = "Freital"
+    gelaende = huegelland
+    lage     = { 13.6488 51.0017 }
+    flaeche  = 122
+    stadt    = ja
+    kreis    = kr_dresden
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2925017; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort radebeul {
+    name     = "Radebeul"
+    gelaende = huegelland
+    lage     = { 13.6605 51.1065 }
+    flaeche  = 124
+    stadt    = ja
+    kreis    = kr_dresden
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2851077; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort grossenhain {
+    name     = "Großenhain"
+    gelaende = flachland
+    lage     = { 13.5335 51.2895 }
+    flaeche  = 176
+    stadt    = nein
+    kreis    = kr_dresden
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2916630; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wilsdruff {
+    name     = "Wilsdruff"
+    gelaende = huegelland
+    lage     = { 13.5366 51.052 }
+    flaeche  = 139
+    stadt    = nein
+    kreis    = kr_dresden
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2808436; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort radeburg {
+    name     = "Radeburg"
+    gelaende = flachland
+    lage     = { 13.7281 51.2152 }
+    flaeche  = 140
+    stadt    = nein
+    kreis    = kr_dresden
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2851074; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort thiendorf {
+    name     = "Thiendorf"
+    gelaende = flachland
+    lage     = { 13.7412 51.2938 }
+    flaeche  = 95
+    stadt    = nein
+    kreis    = kr_dresden
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2822786; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort pirna {
+    name     = "Pirna"
+    gelaende = huegelland
+    lage     = { 13.937 50.9584 }
+    flaeche  = 193
+    stadt    = ja
+    kreis    = kr_pirna
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2853572; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort neustadt_in_sachsen {
+    name     = "Neustadt in Sachsen"
+    gelaende = huegelland
+    lage     = { 14.2179 51.0284 }
+    flaeche  = 212
+    stadt    = nein
+    kreis    = kr_pirna
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2864089; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort stolpen {
+    name     = "Stolpen"
+    gelaende = huegelland
+    lage     = { 14.0794 51.049 }
+    flaeche  = 132
+    stadt    = nein
+    kreis    = kr_pirna
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2826532; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort koenigstein {
+    name     = "Königstein"
+    gelaende = huegelland
+    lage     = { 14.0719 50.9157 }
+    flaeche  = 276
+    stadt    = nein
+    kreis    = kr_pirna
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2885764; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort olbernhau {
+    name     = "Olbernhau"
+    gelaende = mittelgebirge
+    lage     = { 13.3425 50.6587 }
+    flaeche  = 212
+    stadt    = nein
+    kreis    = kr_freiberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2857484; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort dippoldiswalde {
+    name     = "Dippoldiswalde"
+    gelaende = huegelland
+    lage     = { 13.6691 50.8962 }
+    flaeche  = 155
+    stadt    = nein
+    kreis    = kr_freiberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2936842; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort glashuette {
+    name     = "Glashütte"
+    gelaende = mittelgebirge
+    lage     = { 13.7798 50.852 }
+    flaeche  = 187
+    stadt    = nein
+    kreis    = kr_freiberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2920104; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort altenberg {
+    name     = "Altenberg"
+    gelaende = mittelgebirge
+    lage     = { 13.7533 50.7656 }
+    flaeche  = 230
+    stadt    = nein
+    kreis    = kr_freiberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2957834; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort pretzschendorf {
+    name     = "Pretzschendorf"
+    gelaende = huegelland
+    lage     = { 13.525 50.8738 }
+    flaeche  = 243
+    stadt    = nein
+    kreis    = kr_freiberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2852154; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort grosshartmannsdorf {
+    name     = "Großhartmannsdorf"
+    gelaende = huegelland
+    lage     = { 13.3333 50.8 }
+    flaeche  = 223
+    stadt    = nein
+    kreis    = kr_freiberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2915550; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort neuhausen_sachsen {
+    name     = "Neuhausen (Sachsen)"
+    gelaende = mittelgebirge
+    lage     = { 13.4675 50.6765 }
+    flaeche  = 221
+    stadt    = nein
+    kreis    = kr_freiberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2865098; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort reinsberg {
+    name     = "Reinsberg"
+    gelaende = huegelland
+    lage     = { 13.3654 51.0082 }
+    flaeche  = 190
+    stadt    = nein
+    kreis    = kr_freiberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2848737; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort limbach_oberfrohna {
+    name     = "Limbach-Oberfrohna"
+    gelaende = huegelland
+    lage     = { 12.7616 50.8588 }
+    flaeche  = 125
+    stadt    = ja
+    kreis    = kr_chemnitz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2877673; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort mittweida {
+    name     = "Mittweida"
+    gelaende = huegelland
+    lage     = { 12.9754 50.9862 }
+    flaeche  = 101
+    stadt    = nein
+    kreis    = kr_chemnitz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2870318; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort frankenberg_sachsen {
+    name     = "Frankenberg (Sachsen)"
+    gelaende = huegelland
+    lage     = { 13.0401 50.913 }
+    flaeche  = 115
+    stadt    = nein
+    kreis    = kr_chemnitz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2925630; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort marienberg {
+    name     = "Marienberg"
+    gelaende = mittelgebirge
+    lage     = { 13.1612 50.6505 }
+    flaeche  = 156
+    stadt    = nein
+    kreis    = kr_chemnitz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2873632; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort zschopau {
+    name     = "Zschopau"
+    gelaende = mittelgebirge
+    lage     = { 13.0769 50.7482 }
+    flaeche  = 166
+    stadt    = nein
+    kreis    = kr_chemnitz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2803798; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort penig {
+    name     = "Penig"
+    gelaende = huegelland
+    lage     = { 12.7042 50.9334 }
+    flaeche  = 211
+    stadt    = nein
+    kreis    = kr_chemnitz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2854967; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort oederan {
+    name     = "Oederan"
+    gelaende = huegelland
+    lage     = { 13.1716 50.8606 }
+    flaeche  = 149
+    stadt    = nein
+    kreis    = kr_chemnitz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2857970; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort burkhardtsdorf {
+    name     = "Burkhardtsdorf"
+    gelaende = mittelgebirge
+    lage     = { 12.9167 50.7333 }
+    flaeche  = 124
+    stadt    = nein
+    kreis    = kr_chemnitz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2940993; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hainichen {
+    name     = "Hainichen"
+    gelaende = huegelland
+    lage     = { 13.1229 50.9704 }
+    flaeche  = 131
+    stadt    = nein
+    kreis    = kr_chemnitz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2911795; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort claussnitz {
+    name     = "Claußnitz"
+    gelaende = huegelland
+    lage     = { 12.8833 50.9333 }
+    flaeche  = 116
+    stadt    = nein
+    kreis    = kr_chemnitz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2939997; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort drebach {
+    name     = "Drebach"
+    gelaende = mittelgebirge
+    lage     = { 13.0162 50.6758 }
+    flaeche  = 103
+    stadt    = nein
+    kreis    = kr_chemnitz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2935303; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort glauchau {
+    name     = "Glauchau"
+    gelaende = huegelland
+    lage     = { 12.5449 50.8199 }
+    flaeche  = 135
+    stadt    = ja
+    kreis    = kr_zwickau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2920020; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort crimmitschau {
+    name     = "Crimmitschau"
+    gelaende = huegelland
+    lage     = { 12.3904 50.8164 }
+    flaeche  = 105
+    stadt    = ja
+    kreis    = kr_zwickau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2939747; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort werdau {
+    name     = "Werdau"
+    gelaende = huegelland
+    lage     = { 12.3753 50.736 }
+    flaeche  = 117
+    stadt    = ja
+    kreis    = kr_zwickau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2810969; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort reichenbach_vogtland {
+    name     = "Reichenbach/Vogtland"
+    gelaende = huegelland
+    lage     = { 12.3034 50.6228 }
+    flaeche  = 162
+    stadt    = ja
+    kreis    = kr_zwickau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2849156; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lichtenstein {
+    name     = "Lichtenstein"
+    gelaende = huegelland
+    lage     = { 12.6303 50.7566 }
+    flaeche  = 147
+    stadt    = nein
+    kreis    = kr_zwickau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2878037; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kirchberg_sachsen {
+    name     = "Kirchberg (Sachsen)"
+    gelaende = huegelland
+    lage     = { 12.5245 50.6219 }
+    flaeche  = 167
+    stadt    = nein
+    kreis    = kr_zwickau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2890659; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort annaberg_buchholz {
+    name     = "Annaberg-Buchholz"
+    gelaende = mittelgebirge
+    lage     = { 13.0063 50.5795 }
+    flaeche  = 150
+    stadt    = ja
+    kreis    = kr_annaberg_buchholz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2956005; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort aue {
+    name     = "Aue"
+    gelaende = mittelgebirge
+    lage     = { 12.7066 50.5903 }
+    flaeche  = 125
+    stadt    = nein
+    kreis    = kr_annaberg_buchholz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2954695; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort schwarzenberg {
+    name     = "Schwarzenberg"
+    gelaende = mittelgebirge
+    lage     = { 12.7852 50.5379 }
+    flaeche  = 154
+    stadt    = nein
+    kreis    = kr_annaberg_buchholz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2834978; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort stollberg {
+    name     = "Stollberg"
+    gelaende = mittelgebirge
+    lage     = { 12.7803 50.71 }
+    flaeche  = 137
+    stadt    = nein
+    kreis    = kr_annaberg_buchholz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2826584; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort zwoenitz {
+    name     = "Zwönitz"
+    gelaende = mittelgebirge
+    lage     = { 12.81 50.6303 }
+    flaeche  = 131
+    stadt    = nein
+    kreis    = kr_annaberg_buchholz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2803476; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort eibenstock {
+    name     = "Eibenstock"
+    gelaende = mittelgebirge
+    lage     = { 12.5998 50.4943 }
+    flaeche  = 184
+    stadt    = nein
+    kreis    = kr_annaberg_buchholz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2932738; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort johanngeorgenstadt {
+    name     = "Johanngeorgenstadt"
+    gelaende = mittelgebirge
+    lage     = { 12.7114 50.4325 }
+    flaeche  = 165
+    stadt    = nein
+    kreis    = kr_annaberg_buchholz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2894814; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort joehstadt {
+    name     = "Jöhstadt"
+    gelaende = mittelgebirge
+    lage     = { 13.0946 50.5123 }
+    flaeche  = 228
+    stadt    = nein
+    kreis    = kr_annaberg_buchholz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2894737; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort oberwiesenthal {
+    name     = "Oberwiesenthal"
+    gelaende = mittelgebirge
+    lage     = { 12.9684 50.4194 }
+    flaeche  = 180
+    stadt    = nein
+    kreis    = kr_annaberg_buchholz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2882332; Name nach GeoNames ohne modernen Zusatz (Kurort Oberwiesenthal); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort plauen {
+    name     = "Plauen"
+    gelaende = huegelland
+    lage     = { 12.1378 50.4973 }
+    flaeche  = 167
+    stadt    = ja
+    kreis    = kr_plauen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2853292; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort auerbach_sachsen {
+    name     = "Auerbach (Sachsen)"
+    gelaende = mittelgebirge
+    lage     = { 12.4008 50.5115 }
+    flaeche  = 175
+    stadt    = ja
+    kreis    = kr_plauen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2954602; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort klingenthal {
+    name     = "Klingenthal"
+    gelaende = mittelgebirge
+    lage     = { 12.4646 50.3596 }
+    flaeche  = 146
+    stadt    = nein
+    kreis    = kr_plauen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2887713; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort oelsnitz {
+    name     = "Oelsnitz"
+    gelaende = huegelland
+    lage     = { 12.1695 50.4147 }
+    flaeche  = 166
+    stadt    = nein
+    kreis    = kr_plauen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2857919; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort markneukirchen {
+    name     = "Markneukirchen"
+    gelaende = mittelgebirge
+    lage     = { 12.3295 50.3114 }
+    flaeche  = 116
+    stadt    = nein
+    kreis    = kr_plauen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2873340; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort schoeneck {
+    name     = "Schöneck"
+    gelaende = mittelgebirge
+    lage     = { 12.3273 50.3905 }
+    flaeche  = 104
+    stadt    = nein
+    kreis    = kr_plauen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2836772; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort pausa {
+    name     = "Pausa"
+    gelaende = huegelland
+    lage     = { 11.9973 50.5817 }
+    flaeche  = 153
+    stadt    = nein
+    kreis    = kr_plauen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2855175; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bad_brambach {
+    name     = "Bad Brambach"
+    gelaende = mittelgebirge
+    lage     = { 12.3167 50.2167 }
+    flaeche  = 80
+    stadt    = nein
+    kreis    = kr_plauen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2953538; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bergen_sachsen {
+    name     = "Bergen (Sachsen)"
+    gelaende = mittelgebirge
+    lage     = { 12.2745 50.471 }
+    flaeche  = 116
+    stadt    = nein
+    kreis    = kr_plauen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2950626; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
 }

@@ -1,0 +1,190 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
+# Orte: Vorarlberg – Orte ohne Daten (Meilenstein M3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
+# Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
+# ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
+# und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
+#
+# Umfang: Vorarlberg und Liechtenstein.
+
+ort dornbirn {
+    name     = "Dornbirn"
+    gelaende = mittelgebirge
+    lage     = { 9.7419 47.4143 }
+    flaeche  = 119
+    stadt    = ja
+    kreis    = kr_dornbirn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2780741; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bregenz {
+    name     = "Bregenz"
+    gelaende = mittelgebirge
+    lage     = { 9.7471 47.5031 }
+    flaeche  = 89
+    stadt    = ja
+    kreis    = kr_dornbirn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2781503; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort goetzis {
+    name     = "Götzis"
+    gelaende = mittelgebirge
+    lage     = { 9.6331 47.3331 }
+    flaeche  = 122
+    stadt    = nein
+    kreis    = kr_dornbirn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2778218; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hoechst {
+    name     = "Höchst"
+    gelaende = mittelgebirge
+    lage     = { 9.6405 47.4593 }
+    flaeche  = 58
+    stadt    = nein
+    kreis    = kr_dornbirn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2775950; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort andelsbuch {
+    name     = "Andelsbuch"
+    gelaende = mittelgebirge
+    lage     = { 9.8933 47.4117 }
+    flaeche  = 151
+    stadt    = nein
+    kreis    = kr_dornbirn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2782551; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort sulzberg {
+    name     = "Sulzberg"
+    gelaende = mittelgebirge
+    lage     = { 9.9135 47.5218 }
+    flaeche  = 116
+    stadt    = nein
+    kreis    = kr_dornbirn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2764010; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort sibratsgfaell {
+    name     = "Sibratsgfäll"
+    gelaende = hochgebirge
+    lage     = { 10.0381 47.4267 }
+    flaeche  = 156
+    stadt    = nein
+    kreis    = kr_dornbirn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2765139; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort mittelberg {
+    name     = "Mittelberg"
+    gelaende = hochgebirge
+    lage     = { 10.172 47.3513 }
+    flaeche  = 152
+    stadt    = nein
+    kreis    = kr_mittelberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2771533; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lech {
+    name     = "Lech"
+    gelaende = hochgebirge
+    lage     = { 10.1418 47.208 }
+    flaeche  = 220
+    stadt    = nein
+    kreis    = kr_mittelberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2772798; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort schoppernau {
+    name     = "Schoppernau"
+    gelaende = hochgebirge
+    lage     = { 10.0165 47.312 }
+    flaeche  = 165
+    stadt    = nein
+    kreis    = kr_mittelberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2765650; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort damuels {
+    name     = "Damüls"
+    gelaende = hochgebirge
+    lage     = { 9.8916 47.2803 }
+    flaeche  = 242
+    stadt    = nein
+    kreis    = kr_mittelberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 6949508; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort feldkirch {
+    name     = "Feldkirch"
+    gelaende = mittelgebirge
+    lage     = { 9.6 47.2331 }
+    flaeche  = 127
+    stadt    = ja
+    kreis    = kr_feldkirch
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2779674; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort vaduz {
+    name     = "Vaduz"
+    gelaende = hochgebirge
+    lage     = { 9.5215 47.1415 }
+    flaeche  = 129
+    stadt    = ja
+    kreis    = kr_feldkirch
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3042030; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bludenz {
+    name     = "Bludenz"
+    gelaende = hochgebirge
+    lage     = { 9.8225 47.1548 }
+    flaeche  = 137
+    stadt    = ja
+    kreis    = kr_feldkirch
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2781680; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort nenzing {
+    name     = "Nenzing"
+    gelaende = hochgebirge
+    lage     = { 9.7054 47.1844 }
+    flaeche  = 139
+    stadt    = nein
+    kreis    = kr_feldkirch
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2770885; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort schruns {
+    name     = "Schruns"
+    gelaende = hochgebirge
+    lage     = { 9.9192 47.0803 }
+    flaeche  = 257
+    stadt    = nein
+    kreis    = kr_feldkirch
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2765581; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gaschurn {
+    name     = "Gaschurn"
+    gelaende = hochgebirge
+    lage     = { 10.027 46.9858 }
+    flaeche  = 283
+    stadt    = nein
+    kreis    = kr_feldkirch
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2778834; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort brand {
+    name     = "Brand"
+    gelaende = hochgebirge
+    lage     = { 9.7372 47.1008 }
+    flaeche  = 175
+    stadt    = nein
+    kreis    = kr_feldkirch
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3324292; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}

@@ -1,0 +1,400 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
+# Orte: Niederrhein – Orte ohne Daten (Meilenstein M3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
+# Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
+# ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
+# und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
+#
+# Umfang: Niederrhein und Bergisches Land (heute Regierungsbezirk Düsseldorf: Kleve, Geldern, Moers, Duisburg, Essen, Düsseldorf, Wuppertal).
+
+ort kleve {
+    name     = "Kleve"
+    gelaende = flachland
+    lage     = { 6.1387 51.7883 }
+    flaeche  = 144
+    stadt    = ja
+    kreis    = kr_kleve
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2887835; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort emmerich {
+    name     = "Emmerich"
+    gelaende = flussaue
+    lage     = { 6.2479 51.8393 }
+    flaeche  = 146
+    stadt    = ja
+    kreis    = kr_kleve
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2930509; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort goch {
+    name     = "Goch"
+    gelaende = flachland
+    lage     = { 6.1589 51.6787 }
+    flaeche  = 159
+    stadt    = ja
+    kreis    = kr_kleve
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2919625; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kevelaer {
+    name     = "Kevelaer"
+    gelaende = flachland
+    lage     = { 6.246 51.5824 }
+    flaeche  = 120
+    stadt    = ja
+    kreis    = kr_kleve
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2891258; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort rees {
+    name     = "Rees"
+    gelaende = flussaue
+    lage     = { 6.3978 51.7626 }
+    flaeche  = 93
+    stadt    = ja
+    kreis    = kr_kleve
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2849548; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kalkar {
+    name     = "Kalkar"
+    gelaende = flachland
+    lage     = { 6.291 51.7391 }
+    flaeche  = 91
+    stadt    = nein
+    kreis    = kr_kleve
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2893837; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort uedem {
+    name     = "Uedem"
+    gelaende = flachland
+    lage     = { 6.2737 51.6652 }
+    flaeche  = 103
+    stadt    = nein
+    kreis    = kr_kleve
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2820465; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort essen_niederrhein {
+    name     = "Essen (Niederrhein)"
+    gelaende = flachland
+    lage     = { 7.0123 51.4566 }
+    flaeche  = 130
+    stadt    = ja
+    kreis    = kr_essen_niederrhein
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2928810; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort duisburg {
+    name     = "Duisburg"
+    gelaende = flussaue
+    lage     = { 6.7652 51.4325 }
+    flaeche  = 154
+    stadt    = ja
+    kreis    = kr_essen_niederrhein
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2934691; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wuppertal {
+    name     = "Wuppertal"
+    gelaende = huegelland
+    lage     = { 7.1482 51.2563 }
+    flaeche  = 110
+    stadt    = ja
+    kreis    = kr_essen_niederrhein
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2805753; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort oberhausen {
+    name     = "Oberhausen"
+    gelaende = flachland
+    lage     = { 6.8625 51.4781 }
+    flaeche  = 108
+    stadt    = ja
+    kreis    = kr_essen_niederrhein
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2860410; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort solingen {
+    name     = "Solingen"
+    gelaende = huegelland
+    lage     = { 7.0845 51.1734 }
+    flaeche  = 91
+    stadt    = ja
+    kreis    = kr_essen_niederrhein
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2831580; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort remscheid {
+    name     = "Remscheid"
+    gelaende = huegelland
+    lage     = { 7.1925 51.1798 }
+    flaeche  = 116
+    stadt    = ja
+    kreis    = kr_essen_niederrhein
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2848273; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort mettmann {
+    name     = "Mettmann"
+    gelaende = huegelland
+    lage     = { 6.9754 51.2504 }
+    flaeche  = 106
+    stadt    = ja
+    kreis    = kr_essen_niederrhein
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2871535; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort velbert {
+    name     = "Velbert"
+    gelaende = huegelland
+    lage     = { 7.0435 51.3354 }
+    flaeche  = 138
+    stadt    = ja
+    kreis    = kr_essen_niederrhein
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2817724; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ratingen {
+    name     = "Ratingen"
+    gelaende = flachland
+    lage     = { 6.8493 51.2972 }
+    flaeche  = 191
+    stadt    = ja
+    kreis    = kr_essen_niederrhein
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2850174; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort dinslaken {
+    name     = "Dinslaken"
+    gelaende = flachland
+    lage     = { 6.7434 51.5623 }
+    flaeche  = 210
+    stadt    = ja
+    kreis    = kr_essen_niederrhein
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2936871; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort moers {
+    name     = "Moers"
+    gelaende = flachland
+    lage     = { 6.6326 51.4534 }
+    flaeche  = 115
+    stadt    = ja
+    kreis    = kr_moers
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2870221; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wesel {
+    name     = "Wesel"
+    gelaende = flussaue
+    lage     = { 6.6204 51.6669 }
+    flaeche  = 170
+    stadt    = ja
+    kreis    = kr_moers
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2810678; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kamp_lintfort {
+    name     = "Kamp-Lintfort"
+    gelaende = flachland
+    lage     = { 6.5459 51.5047 }
+    flaeche  = 133
+    stadt    = ja
+    kreis    = kr_moers
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2893264; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort geldern {
+    name     = "Geldern"
+    gelaende = flachland
+    lage     = { 6.3236 51.5191 }
+    flaeche  = 105
+    stadt    = ja
+    kreis    = kr_moers
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2921528; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hamminkeln {
+    name     = "Hamminkeln"
+    gelaende = flachland
+    lage     = { 6.5903 51.7326 }
+    flaeche  = 166
+    stadt    = ja
+    kreis    = kr_moers
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2911051; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort xanten {
+    name     = "Xanten"
+    gelaende = flussaue
+    lage     = { 6.453 51.6588 }
+    flaeche  = 159
+    stadt    = ja
+    kreis    = kr_moers
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2805385; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort straelen {
+    name     = "Straelen"
+    gelaende = flachland
+    lage     = { 6.2664 51.4419 }
+    flaeche  = 104
+    stadt    = nein
+    kreis    = kr_moers
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2826304; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort schermbeck {
+    name     = "Schermbeck"
+    gelaende = flachland
+    lage     = { 6.8667 51.6833 }
+    flaeche  = 110
+    stadt    = nein
+    kreis    = kr_moers
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2839674; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort issum {
+    name     = "Issum"
+    gelaende = flachland
+    lage     = { 6.4333 51.5333 }
+    flaeche  = 133
+    stadt    = nein
+    kreis    = kr_moers
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2895617; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort duesseldorf {
+    name     = "Düsseldorf"
+    gelaende = flussaue
+    lage     = { 6.7762 51.2217 }
+    flaeche  = 108
+    stadt    = ja
+    kreis    = kr_duesseldorf
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2934246; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort neuss {
+    name     = "Neuss"
+    gelaende = flussaue
+    lage     = { 6.685 51.1981 }
+    flaeche  = 129
+    stadt    = ja
+    kreis    = kr_duesseldorf
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2864118; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort grevenbroich {
+    name     = "Grevenbroich"
+    gelaende = flachland
+    lage     = { 6.5827 51.091 }
+    flaeche  = 166
+    stadt    = ja
+    kreis    = kr_duesseldorf
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2917540; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort dormagen {
+    name     = "Dormagen"
+    gelaende = flussaue
+    lage     = { 6.8317 51.0968 }
+    flaeche  = 111
+    stadt    = ja
+    kreis    = kr_duesseldorf
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2935825; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hilden {
+    name     = "Hilden"
+    gelaende = flachland
+    lage     = { 6.9309 51.1682 }
+    flaeche  = 94
+    stadt    = ja
+    kreis    = kr_duesseldorf
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2904795; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort langenfeld {
+    name     = "Langenfeld"
+    gelaende = flachland
+    lage     = { 6.9483 51.1082 }
+    flaeche  = 67
+    stadt    = ja
+    kreis    = kr_duesseldorf
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2881085; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort rommerskirchen {
+    name     = "Rommerskirchen"
+    gelaende = flachland
+    lage     = { 6.6833 51.0333 }
+    flaeche  = 104
+    stadt    = nein
+    kreis    = kr_duesseldorf
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2845273; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort moenchengladbach {
+    name     = "Mönchengladbach"
+    gelaende = flachland
+    lage     = { 6.4417 51.1854 }
+    flaeche  = 162
+    stadt    = ja
+    kreis    = kr_moenchengladbach
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2869894; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort krefeld {
+    name     = "Krefeld"
+    gelaende = flachland
+    lage     = { 6.5538 51.3364 }
+    flaeche  = 162
+    stadt    = ja
+    kreis    = kr_moenchengladbach
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2884509; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort viersen {
+    name     = "Viersen"
+    gelaende = flachland
+    lage     = { 6.3944 51.2544 }
+    flaeche  = 134
+    stadt    = ja
+    kreis    = kr_moenchengladbach
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2817311; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort willich {
+    name     = "Willich"
+    gelaende = flachland
+    lage     = { 6.5473 51.2637 }
+    flaeche  = 109
+    stadt    = ja
+    kreis    = kr_moenchengladbach
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2808559; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kempen {
+    name     = "Kempen"
+    gelaende = flachland
+    lage     = { 6.4186 51.3643 }
+    flaeche  = 154
+    stadt    = ja
+    kreis    = kr_moenchengladbach
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2891643; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort niederkruechten {
+    name     = "Niederkrüchten"
+    gelaende = flachland
+    lage     = { 6.2167 51.2 }
+    flaeche  = 165
+    stadt    = nein
+    kreis    = kr_moenchengladbach
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2863199; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}

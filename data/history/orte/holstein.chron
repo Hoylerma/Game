@@ -1,0 +1,770 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
+# Orte: Holstein – Orte ohne Daten (Meilenstein M3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
+# Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
+# ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
+# und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
+#
+# Umfang: Holstein mit Dithmarschen, Lauenburg, Lübeck und Hamburg (heute Schleswig-Holstein südlich der Eider sowie Hamburg).
+
+ort fehmarn {
+    name     = "Fehmarn"
+    gelaende = kueste
+    lage     = { 11.1935 54.4378 }
+    flaeche  = 164
+    stadt    = nein
+    kreis    = kr_fehmarn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 8051091; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort oldenburg_in_holstein {
+    name     = "Oldenburg in Holstein"
+    gelaende = flachland
+    lage     = { 10.9016 54.2958 }
+    flaeche  = 112
+    stadt    = nein
+    kreis    = kr_fehmarn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2857451; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort groemitz {
+    name     = "Grömitz"
+    gelaende = kueste
+    lage     = { 10.9667 54.15 }
+    flaeche  = 62
+    stadt    = nein
+    kreis    = kr_fehmarn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2917150; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort heiligenhafen {
+    name     = "Heiligenhafen"
+    gelaende = kueste
+    lage     = { 10.9802 54.3696 }
+    flaeche  = 78
+    stadt    = nein
+    kreis    = kr_fehmarn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2907589; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lensahn {
+    name     = "Lensahn"
+    gelaende = flachland
+    lage     = { 10.8833 54.2165 }
+    flaeche  = 72
+    stadt    = nein
+    kreis    = kr_fehmarn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2878773; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wangels {
+    name     = "Wangels"
+    gelaende = huegelland
+    lage     = { 10.7667 54.2667 }
+    flaeche  = 94
+    stadt    = nein
+    kreis    = kr_fehmarn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2814287; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort schoenwalde_am_bungsberg {
+    name     = "Schönwalde am Bungsberg"
+    gelaende = huegelland
+    lage     = { 10.75 54.1833 }
+    flaeche  = 103
+    stadt    = nein
+    kreis    = kr_fehmarn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2836438; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort grube {
+    name     = "Grube"
+    gelaende = kueste
+    lage     = { 11.0333 54.2333 }
+    flaeche  = 99
+    stadt    = nein
+    kreis    = kr_fehmarn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2914642; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kiel {
+    name     = "Kiel"
+    gelaende = kueste
+    lage     = { 10.1349 54.3213 }
+    flaeche  = 94
+    stadt    = ja
+    kreis    = kr_kiel
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2891122; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort preetz {
+    name     = "Preetz"
+    gelaende = flachland
+    lage     = { 10.278 54.2354 }
+    flaeche  = 176
+    stadt    = nein
+    kreis    = kr_kiel
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2852280; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort luetjenburg {
+    name     = "Lütjenburg"
+    gelaende = flachland
+    lage     = { 10.5894 54.2919 }
+    flaeche  = 145
+    stadt    = nein
+    kreis    = kr_kiel
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2874919; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort probsteierhagen {
+    name     = "Probsteierhagen"
+    gelaende = kueste
+    lage     = { 10.2877 54.3615 }
+    flaeche  = 159
+    stadt    = nein
+    kreis    = kr_kiel
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2851946; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort selent {
+    name     = "Selent"
+    gelaende = seenplatte
+    lage     = { 10.427 54.2889 }
+    flaeche  = 122
+    stadt    = nein
+    kreis    = kr_kiel
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2833259; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hohenfelde {
+    name     = "Hohenfelde"
+    gelaende = seenplatte
+    lage     = { 10.5 54.3667 }
+    flaeche  = 90
+    stadt    = nein
+    kreis    = kr_kiel
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2901783; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort heide {
+    name     = "Heide"
+    gelaende = flachland
+    lage     = { 9.0988 54.1958 }
+    flaeche  = 136
+    stadt    = ja
+    kreis    = kr_heide
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2908032; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort meldorf {
+    name     = "Meldorf"
+    gelaende = kueste
+    lage     = { 9.0687 54.0918 }
+    flaeche  = 181
+    stadt    = nein
+    kreis    = kr_heide
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2872100; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort buesum {
+    name     = "Büsum"
+    gelaende = kueste
+    lage     = { 8.8576 54.134 }
+    flaeche  = 36
+    stadt    = nein
+    kreis    = kr_heide
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2940669; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wesselburen {
+    name     = "Wesselburen"
+    gelaende = kueste
+    lage     = { 8.9242 54.2122 }
+    flaeche  = 119
+    stadt    = nein
+    kreis    = kr_heide
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2810619; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort friedrichskoog {
+    name     = "Friedrichskoog"
+    gelaende = kueste
+    lage     = { 8.9167 54.0167 }
+    flaeche  = 94
+    stadt    = nein
+    kreis    = kr_heide
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2924505; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort tellingstedt {
+    name     = "Tellingstedt"
+    gelaende = flachland
+    lage     = { 9.2833 54.2167 }
+    flaeche  = 156
+    stadt    = nein
+    kreis    = kr_heide
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2823578; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hennstedt {
+    name     = "Hennstedt"
+    gelaende = flachland
+    lage     = { 9.1667 54.2833 }
+    flaeche  = 110
+    stadt    = nein
+    kreis    = kr_heide
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2906316; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort helgoland {
+    name     = "Helgoland"
+    gelaende = kueste
+    lage     = { 7.8952 54.1844 }
+    flaeche  = 1
+    stadt    = nein
+    kreis    = kr_heide
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3208547; Name nach GeoNames; Lage auf das nächste Landpixel gesetzt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort eutin {
+    name     = "Eutin"
+    gelaende = flachland
+    lage     = { 10.6075 54.1405 }
+    flaeche  = 152
+    stadt    = ja
+    kreis    = kr_eutin
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2928381; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bad_segeberg {
+    name     = "Bad Segeberg"
+    gelaende = flachland
+    lage     = { 10.3021 53.9431 }
+    flaeche  = 214
+    stadt    = ja
+    kreis    = kr_eutin
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2953341; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ploen {
+    name     = "Plön"
+    gelaende = seenplatte
+    lage     = { 10.4233 54.1624 }
+    flaeche  = 134
+    stadt    = ja
+    kreis    = kr_eutin
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2853162; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort neustadt_in_holstein {
+    name     = "Neustadt in Holstein"
+    gelaende = kueste
+    lage     = { 10.8145 54.1071 }
+    flaeche  = 78
+    stadt    = nein
+    kreis    = kr_eutin
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2864034; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort scharbeutz {
+    name     = "Scharbeutz"
+    gelaende = kueste
+    lage     = { 10.75 54.0333 }
+    flaeche  = 77
+    stadt    = nein
+    kreis    = kr_eutin
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2840393; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ahrensboek {
+    name     = "Ahrensbök"
+    gelaende = flachland
+    lage     = { 10.5743 54.0086 }
+    flaeche  = 122
+    stadt    = nein
+    kreis    = kr_eutin
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2959084; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bornhoeved {
+    name     = "Bornhöved"
+    gelaende = flachland
+    lage     = { 10.2333 54.0667 }
+    flaeche  = 203
+    stadt    = nein
+    kreis    = kr_eutin
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2946100; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort seedorf {
+    name     = "Seedorf"
+    gelaende = flachland
+    lage     = { 10.4167 54.05 }
+    flaeche  = 159
+    stadt    = nein
+    kreis    = kr_eutin
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2833878; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort pronstorf {
+    name     = "Pronstorf"
+    gelaende = flachland
+    lage     = { 10.4667 53.95 }
+    flaeche  = 137
+    stadt    = nein
+    kreis    = kr_eutin
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2851893; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort neumuenster {
+    name     = "Neumünster"
+    gelaende = flachland
+    lage     = { 9.9819 54.0748 }
+    flaeche  = 197
+    stadt    = ja
+    kreis    = kr_neumuenster
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2864475; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort rendsburg {
+    name     = "Rendsburg"
+    gelaende = flachland
+    lage     = { 9.6631 54.3066 }
+    flaeche  = 215
+    stadt    = ja
+    kreis    = kr_neumuenster
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2848245; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bordesholm {
+    name     = "Bordesholm"
+    gelaende = flachland
+    lage     = { 10.0315 54.1761 }
+    flaeche  = 149
+    stadt    = nein
+    kreis    = kr_neumuenster
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2946321; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort flintbek {
+    name     = "Flintbek"
+    gelaende = flachland
+    lage     = { 10.0667 54.25 }
+    flaeche  = 100
+    stadt    = nein
+    kreis    = kr_neumuenster
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2926178; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort nortorf {
+    name     = "Nortorf"
+    gelaende = flachland
+    lage     = { 9.8544 54.1674 }
+    flaeche  = 238
+    stadt    = nein
+    kreis    = kr_neumuenster
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2861804; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort felde {
+    name     = "Felde"
+    gelaende = flachland
+    lage     = { 9.9333 54.3 }
+    flaeche  = 172
+    stadt    = nein
+    kreis    = kr_neumuenster
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2927430; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort itzehoe {
+    name     = "Itzehoe"
+    gelaende = flachland
+    lage     = { 9.5153 53.921 }
+    flaeche  = 193
+    stadt    = ja
+    kreis    = kr_itzehoe
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2895569; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort brunsbuettel {
+    name     = "Brunsbüttel"
+    gelaende = kueste
+    lage     = { 9.1046 53.8962 }
+    flaeche  = 92
+    stadt    = nein
+    kreis    = kr_itzehoe
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2943049; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort glueckstadt {
+    name     = "Glückstadt"
+    gelaende = kueste
+    lage     = { 9.4258 53.7889 }
+    flaeche  = 112
+    stadt    = nein
+    kreis    = kr_itzehoe
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2919763; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hohenwestedt {
+    name     = "Hohenwestedt"
+    gelaende = flachland
+    lage     = { 9.6536 54.0889 }
+    flaeche  = 238
+    stadt    = nein
+    kreis    = kr_itzehoe
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2901348; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wilster {
+    name     = "Wilster"
+    gelaende = flachland
+    lage     = { 9.3747 53.9225 }
+    flaeche  = 158
+    stadt    = nein
+    kreis    = kr_itzehoe
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2808413; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort sankt_michaelisdonn {
+    name     = "Sankt Michaelisdonn"
+    gelaende = flachland
+    lage     = { 9.1167 53.9833 }
+    flaeche  = 133
+    stadt    = nein
+    kreis    = kr_itzehoe
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2841509; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hanerau_hademarschen {
+    name     = "Hanerau-Hademarschen"
+    gelaende = flachland
+    lage     = { 9.4167 54.1333 }
+    flaeche  = 200
+    stadt    = nein
+    kreis    = kr_itzehoe
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2910949; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort schenefeld {
+    name     = "Schenefeld"
+    gelaende = flachland
+    lage     = { 9.4833 54.05 }
+    flaeche  = 189
+    stadt    = nein
+    kreis    = kr_itzehoe
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2839763; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort burg {
+    name     = "Burg"
+    gelaende = flachland
+    lage     = { 9.2589 53.9971 }
+    flaeche  = 151
+    stadt    = nein
+    kreis    = kr_itzehoe
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2941497; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort luebeck {
+    name     = "Lübeck"
+    gelaende = flachland
+    lage     = { 10.6873 53.8689 }
+    flaeche  = 130
+    stadt    = ja
+    kreis    = kr_luebeck
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2875601; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bad_oldesloe {
+    name     = "Bad Oldesloe"
+    gelaende = flachland
+    lage     = { 10.3742 53.8117 }
+    flaeche  = 147
+    stadt    = ja
+    kreis    = kr_luebeck
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2953385; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ratzeburg {
+    name     = "Ratzeburg"
+    gelaende = flachland
+    lage     = { 10.7726 53.6996 }
+    flaeche  = 222
+    stadt    = ja
+    kreis    = kr_luebeck
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2850132; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort moelln {
+    name     = "Mölln"
+    gelaende = flachland
+    lage     = { 10.6874 53.617 }
+    flaeche  = 210
+    stadt    = nein
+    kreis    = kr_luebeck
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2869994; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ratekau {
+    name     = "Ratekau"
+    gelaende = flachland
+    lage     = { 10.7333 53.95 }
+    flaeche  = 139
+    stadt    = nein
+    kreis    = kr_luebeck
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2850235; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort trittau {
+    name     = "Trittau"
+    gelaende = flachland
+    lage     = { 10.4 53.6167 }
+    flaeche  = 126
+    stadt    = nein
+    kreis    = kr_luebeck
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2821085; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort reinfeld {
+    name     = "Reinfeld"
+    gelaende = flachland
+    lage     = { 10.4913 53.8318 }
+    flaeche  = 152
+    stadt    = nein
+    kreis    = kr_luebeck
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2848811; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gross_groenau {
+    name     = "Groß Grönau"
+    gelaende = flachland
+    lage     = { 10.75 53.8 }
+    flaeche  = 191
+    stadt    = nein
+    kreis    = kr_luebeck
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2915574; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort sandesneben {
+    name     = "Sandesneben"
+    gelaende = flachland
+    lage     = { 10.5 53.6833 }
+    flaeche  = 199
+    stadt    = nein
+    kreis    = kr_luebeck
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2841874; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort elmshorn {
+    name     = "Elmshorn"
+    gelaende = flachland
+    lage     = { 9.6534 53.754 }
+    flaeche  = 134
+    stadt    = ja
+    kreis    = kr_elmshorn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2930821; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort pinneberg {
+    name     = "Pinneberg"
+    gelaende = flachland
+    lage     = { 9.7894 53.6673 }
+    flaeche  = 150
+    stadt    = ja
+    kreis    = kr_elmshorn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2853658; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wedel {
+    name     = "Wedel"
+    gelaende = kueste
+    lage     = { 9.6983 53.5837 }
+    flaeche  = 87
+    stadt    = ja
+    kreis    = kr_elmshorn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2813464; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort uetersen {
+    name     = "Uetersen"
+    gelaende = flachland
+    lage     = { 9.6639 53.6877 }
+    flaeche  = 127
+    stadt    = nein
+    kreis    = kr_elmshorn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2818067; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kaltenkirchen {
+    name     = "Kaltenkirchen"
+    gelaende = flachland
+    lage     = { 9.9581 53.8329 }
+    flaeche  = 149
+    stadt    = nein
+    kreis    = kr_elmshorn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2893544; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bad_bramstedt {
+    name     = "Bad Bramstedt"
+    gelaende = flachland
+    lage     = { 9.8842 53.9183 }
+    flaeche  = 141
+    stadt    = nein
+    kreis    = kr_elmshorn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2953537; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort barmstedt {
+    name     = "Barmstedt"
+    gelaende = flachland
+    lage     = { 9.7674 53.7921 }
+    flaeche  = 161
+    stadt    = nein
+    kreis    = kr_elmshorn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2952531; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kellinghusen {
+    name     = "Kellinghusen"
+    gelaende = flachland
+    lage     = { 9.7196 53.952 }
+    flaeche  = 189
+    stadt    = nein
+    kreis    = kr_elmshorn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2891750; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort grossenaspe {
+    name     = "Großenaspe"
+    gelaende = flachland
+    lage     = { 9.9667 53.9833 }
+    flaeche  = 144
+    stadt    = nein
+    kreis    = kr_elmshorn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2916676; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hartenholm {
+    name     = "Hartenholm"
+    gelaende = flachland
+    lage     = { 10.0595 53.8986 }
+    flaeche  = 167
+    stadt    = nein
+    kreis    = kr_elmshorn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2910178; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hamburg {
+    name     = "Hamburg"
+    gelaende = flussaue
+    lage     = { 9.993 53.5507 }
+    flaeche  = 236
+    stadt    = ja
+    kreis    = kr_hamburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2911298; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort norderstedt {
+    name     = "Norderstedt"
+    gelaende = flachland
+    lage     = { 9.9804 53.6859 }
+    flaeche  = 165
+    stadt    = ja
+    kreis    = kr_hamburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2862026; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ahrensburg {
+    name     = "Ahrensburg"
+    gelaende = flachland
+    lage     = { 10.2259 53.6752 }
+    flaeche  = 179
+    stadt    = ja
+    kreis    = kr_hamburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2959083; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort reinbek {
+    name     = "Reinbek"
+    gelaende = flachland
+    lage     = { 10.2488 53.517 }
+    flaeche  = 167
+    stadt    = ja
+    kreis    = kr_hamburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2848845; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort barsbuettel {
+    name     = "Barsbüttel"
+    gelaende = flachland
+    lage     = { 10.1667 53.5667 }
+    flaeche  = 144
+    stadt    = nein
+    kreis    = kr_hamburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2952415; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort suelfeld {
+    name     = "Sülfeld"
+    gelaende = flachland
+    lage     = { 10.2333 53.8 }
+    flaeche  = 190
+    stadt    = nein
+    kreis    = kr_hamburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2824907; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort tangstedt {
+    name     = "Tangstedt"
+    gelaende = flachland
+    lage     = { 10.0833 53.7333 }
+    flaeche  = 138
+    stadt    = nein
+    kreis    = kr_hamburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2824245; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort geesthacht {
+    name     = "Geesthacht"
+    gelaende = flussaue
+    lage     = { 10.3779 53.4357 }
+    flaeche  = 160
+    stadt    = ja
+    kreis    = kr_geesthacht
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2922102; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort schwarzenbek {
+    name     = "Schwarzenbek"
+    gelaende = flachland
+    lage     = { 10.4805 53.503 }
+    flaeche  = 160
+    stadt    = nein
+    kreis    = kr_geesthacht
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2835013; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lauenburg_holstein {
+    name     = "Lauenburg (Holstein)"
+    gelaende = flussaue
+    lage     = { 10.5565 53.372 }
+    flaeche  = 127
+    stadt    = nein
+    kreis    = kr_geesthacht
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2880181; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort buechen {
+    name     = "Büchen"
+    gelaende = flachland
+    lage     = { 10.6176 53.4801 }
+    flaeche  = 164
+    stadt    = nein
+    kreis    = kr_geesthacht
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2942627; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}

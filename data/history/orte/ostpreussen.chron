@@ -1,0 +1,1020 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
+# Orte: Ostpreußen – Orte ohne Daten (Meilenstein M3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
+# Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
+# ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
+# und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
+#
+# Umfang: Herzogtum Preußen mit Ermland (bis 1772 polnisch) und Memelland (heute Woiwodschaft Ermland-Masuren, Oblast Kaliningrad und der Westen Litauens um Klaipėda).
+
+ort memel {
+    name     = "Memel"
+    gelaende = kueste
+    lage     = { 21.1391 55.7068 }
+    flaeche  = 331
+    stadt    = ja
+    kreis    = kr_memel
+    quelle   = "GeoNames (CC BY 4.0), geonameid 598098; deutscher Name aus den GeoNames-Alternativnamen (heute Klaipėda); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort heydekrug {
+    name     = "Heydekrug"
+    gelaende = seenplatte
+    lage     = { 21.4831 55.3489 }
+    flaeche  = 442
+    stadt    = ja
+    kreis    = kr_memel
+    quelle   = "GeoNames (CC BY 4.0), geonameid 594656; deutscher Name aus den GeoNames-Alternativnamen (heute Silute); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort russ {
+    name     = "Ruß"
+    gelaende = kueste
+    lage     = { 21.3712 55.2982 }
+    flaeche  = 460
+    stadt    = nein
+    kreis    = kr_memel
+    quelle   = "GeoNames (CC BY 4.0), geonameid 595087; deutscher Name aus den GeoNames-Alternativnamen (heute Rusnė); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort proekuls {
+    name     = "Prökuls"
+    gelaende = flachland
+    lage     = { 21.319 55.5543 }
+    flaeche  = 441
+    stadt    = nein
+    kreis    = kr_memel
+    quelle   = "GeoNames (CC BY 4.0), geonameid 595598; deutscher Name aus den GeoNames-Alternativnamen (heute Priekulė); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort tilsit {
+    name     = "Tilsit"
+    gelaende = flussaue
+    lage     = { 21.8785 55.0839 }
+    flaeche  = 146
+    stadt    = ja
+    kreis    = kr_tilsit
+    quelle   = "GeoNames (CC BY 4.0), geonameid 490068; deutscher Name aus den GeoNames-Alternativnamen (heute Sovetsk); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ragnit {
+    name     = "Ragnit"
+    gelaende = flussaue
+    lage     = { 22.0264 55.0311 }
+    flaeche  = 863
+    stadt    = ja
+    kreis    = kr_tilsit
+    quelle   = "GeoNames (CC BY 4.0), geonameid 522742; deutscher Name aus den GeoNames-Alternativnamen (heute Neman); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort heinrichswalde {
+    name     = "Heinrichswalde"
+    gelaende = flachland
+    lage     = { 21.677 55.0425 }
+    flaeche  = 1124
+    stadt    = ja
+    kreis    = kr_tilsit
+    quelle   = "GeoNames (CC BY 4.0), geonameid 492112; deutscher Name aus den GeoNames-Alternativnamen (heute Slavsk); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort pogegen {
+    name     = "Pogegen"
+    gelaende = flachland
+    lage     = { 21.9138 55.1379 }
+    flaeche  = 535
+    stadt    = ja
+    kreis    = kr_tilsit
+    quelle   = "GeoNames (CC BY 4.0), geonameid 596399; deutscher Name aus den GeoNames-Alternativnamen (heute Pagėgiai); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort koenigsberg {
+    name     = "Königsberg"
+    gelaende = flachland
+    lage     = { 20.511 54.7065 }
+    flaeche  = 220
+    stadt    = ja
+    kreis    = kr_koenigsberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 554234; deutscher Name aus den GeoNames-Alternativnamen (heute Kaliningrad); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort cranz {
+    name     = "Cranz"
+    gelaende = kueste
+    lage     = { 20.4767 54.9589 }
+    flaeche  = 221
+    stadt    = ja
+    kreis    = kr_koenigsberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 463828; deutscher Name aus den GeoNames-Alternativnamen (heute Zelenogradsk); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort tapiau {
+    name     = "Tapiau"
+    gelaende = flachland
+    lage     = { 21.0651 54.6477 }
+    flaeche  = 428
+    stadt    = ja
+    kreis    = kr_koenigsberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 557710; deutscher Name aus den GeoNames-Alternativnamen (heute Gvardeysk); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort neuhausen_ostpreussen {
+    name     = "Neuhausen (Ostpreußen)"
+    gelaende = flachland
+    lage     = { 20.6052 54.7732 }
+    flaeche  = 271
+    stadt    = ja
+    kreis    = kr_koenigsberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 557906; deutscher Name aus den GeoNames-Alternativnamen (heute Gur’yevsk); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort labiau {
+    name     = "Labiau"
+    gelaende = kueste
+    lage     = { 21.1028 54.8621 }
+    flaeche  = 776
+    stadt    = ja
+    kreis    = kr_koenigsberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 507291; deutscher Name aus den GeoNames-Alternativnamen (heute Polessk); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort nidden {
+    name     = "Nidden"
+    gelaende = kueste
+    lage     = { 20.9965 55.3086 }
+    flaeche  = 184
+    stadt    = ja
+    kreis    = kr_koenigsberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 596612; deutscher Name aus den GeoNames-Alternativnamen (heute Nida); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wehlau {
+    name     = "Wehlau"
+    gelaende = flachland
+    lage     = { 21.2272 54.614 }
+    flaeche  = 639
+    stadt    = nein
+    kreis    = kr_koenigsberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 462322; deutscher Name aus den GeoNames-Alternativnamen (heute Znamensk); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bol_shoe_isakovo {
+    name     = "Bol'shoe Isakovo"
+    gelaende = flachland
+    lage     = { 20.6028 54.7177 }
+    flaeche  = 237
+    stadt    = nein
+    kreis    = kr_koenigsberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 825122; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort yuzhnyy {
+    name     = "Yuzhnyy"
+    gelaende = flachland
+    lage     = { 20.5984 54.5484 }
+    flaeche  = 551
+    stadt    = nein
+    kreis    = kr_koenigsberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 825760; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort powunden {
+    name     = "Powunden"
+    gelaende = kueste
+    lage     = { 20.5803 54.8971 }
+    flaeche  = 289
+    stadt    = nein
+    kreis    = kr_koenigsberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 549302; deutscher Name aus den GeoNames-Alternativnamen (heute Khrabrovo); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort pillau {
+    name     = "Pillau"
+    gelaende = kueste
+    lage     = { 19.9093 54.6546 }
+    flaeche  = 87
+    stadt    = ja
+    kreis    = kr_pillau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2609906; deutscher Name aus den GeoNames-Alternativnamen (heute Baltiysk); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort rauschen {
+    name     = "Rauschen"
+    gelaende = flachland
+    lage     = { 20.1548 54.9399 }
+    flaeche  = 268
+    stadt    = ja
+    kreis    = kr_pillau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 485699; deutscher Name aus den GeoNames-Alternativnamen (heute Svetlogorsk); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort zimmerbude {
+    name     = "Zimmerbude"
+    gelaende = kueste
+    lage     = { 20.1332 54.6812 }
+    flaeche  = 54
+    stadt    = ja
+    kreis    = kr_pillau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 485660; deutscher Name aus den GeoNames-Alternativnamen (heute Svetlyy); Lage auf das nächste Landpixel gesetzt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort palmnicken {
+    name     = "Palmnicken"
+    gelaende = flachland
+    lage     = { 19.9402 54.871 }
+    flaeche  = 131
+    stadt    = nein
+    kreis    = kr_pillau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2609894; deutscher Name aus den GeoNames-Alternativnamen (heute Yantarnyy); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort fischhausen {
+    name     = "Fischhausen"
+    gelaende = kueste
+    lage     = { 20.0055 54.739 }
+    flaeche  = 134
+    stadt    = nein
+    kreis    = kr_pillau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 505270; deutscher Name aus den GeoNames-Alternativnamen (heute Primorsk); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort vzmorye {
+    name     = "Vzmorye"
+    gelaende = kueste
+    lage     = { 20.2361 54.6961 }
+    flaeche  = 164
+    stadt    = nein
+    kreis    = kr_pillau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 6930743; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort insterburg {
+    name     = "Insterburg"
+    gelaende = flachland
+    lage     = { 21.8156 54.6335 }
+    flaeche  = 1147
+    stadt    = ja
+    kreis    = kr_insterburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 568595; deutscher Name aus den GeoNames-Alternativnamen (heute Chernyakhovsk); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gumbinnen {
+    name     = "Gumbinnen"
+    gelaende = flachland
+    lage     = { 22.1997 54.5922 }
+    flaeche  = 807
+    stadt    = ja
+    kreis    = kr_insterburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 557882; deutscher Name aus den GeoNames-Alternativnamen (heute Gusev); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort stallupoenen {
+    name     = "Stallupönen"
+    gelaende = flachland
+    lage     = { 22.5714 54.6306 }
+    flaeche  = 812
+    stadt    = ja
+    kreis    = kr_insterburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 522508; deutscher Name aus den GeoNames-Alternativnamen (heute Nesterov); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lasdehnen {
+    name     = "Lasdehnen"
+    gelaende = flachland
+    lage     = { 22.4897 54.9422 }
+    flaeche  = 1099
+    stadt    = ja
+    kreis    = kr_insterburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 541947; deutscher Name aus den GeoNames-Alternativnamen (heute Krasnoznamensk); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort braunsberg_ostpreussen {
+    name     = "Braunsberg (Ostpreußen)"
+    gelaende = flachland
+    lage     = { 19.8196 54.3797 }
+    flaeche  = 227
+    stadt    = ja
+    kreis    = kr_braunsberg_ostpreussen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3102677; deutscher Name aus den GeoNames-Alternativnamen (dort mit Ortszusatz als Braunsberg Ostpreussen, heute Braniewo); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort preussisch_holland {
+    name     = "Preussisch Holland"
+    gelaende = flachland
+    lage     = { 19.6593 54.0616 }
+    flaeche  = 321
+    stadt    = nein
+    kreis    = kr_braunsberg_ostpreussen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3089392; deutscher Name aus den GeoNames-Alternativnamen (heute Pasłęk); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort tolkemit {
+    name     = "Tolkemit"
+    gelaende = huegelland
+    lage     = { 19.5269 54.3204 }
+    flaeche  = 150
+    stadt    = nein
+    kreis    = kr_braunsberg_ostpreussen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3083334; deutscher Name aus den GeoNames-Alternativnamen (heute Tolkmicko); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort frauenburg {
+    name     = "Frauenburg"
+    gelaende = kueste
+    lage     = { 19.6803 54.3577 }
+    flaeche  = 113
+    stadt    = nein
+    kreis    = kr_braunsberg_ostpreussen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3099634; deutscher Name aus den GeoNames-Alternativnamen (heute Frombork); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort muehlhausen_ostpreussen {
+    name     = "Mühlhausen (Ostpreußen)"
+    gelaende = flachland
+    lage     = { 19.7215 54.1869 }
+    flaeche  = 416
+    stadt    = nein
+    kreis    = kr_braunsberg_ostpreussen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3091641; deutscher Name aus den GeoNames-Alternativnamen (heute Młynary); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort heilsberg {
+    name     = "Heilsberg"
+    gelaende = flachland
+    lage     = { 20.5795 54.1259 }
+    flaeche  = 370
+    stadt    = nein
+    kreis    = kr_heilsberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 766307; deutscher Name aus den GeoNames-Alternativnamen (heute Lidzbark Warmiński); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort preussisch_eylau {
+    name     = "Preußisch Eylau"
+    gelaende = flachland
+    lage     = { 20.6437 54.3871 }
+    flaeche  = 378
+    stadt    = ja
+    kreis    = kr_heilsberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 579760; deutscher Name aus den GeoNames-Alternativnamen (heute Bagrationovsk); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort guttstadt {
+    name     = "Guttstadt"
+    gelaende = flachland
+    lage     = { 20.3975 53.9867 }
+    flaeche  = 351
+    stadt    = nein
+    kreis    = kr_heilsberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 773148; deutscher Name aus den GeoNames-Alternativnamen (heute Dobre Miasto); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wormditt {
+    name     = "Wormditt"
+    gelaende = flachland
+    lage     = { 20.1333 54.1148 }
+    flaeche  = 243
+    stadt    = nein
+    kreis    = kr_heilsberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 763066; deutscher Name aus den GeoNames-Alternativnamen (heute Orneta); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort heiligenbeil {
+    name     = "Heiligenbeil"
+    gelaende = kueste
+    lage     = { 19.938 54.4643 }
+    flaeche  = 260
+    stadt    = nein
+    kreis    = kr_heilsberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2609901; deutscher Name aus den GeoNames-Alternativnamen (heute Mamonovo); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort landsberg_ostpreussen {
+    name     = "Landsberg (Ostpreußen)"
+    gelaende = flachland
+    lage     = { 20.4889 54.2856 }
+    flaeche  = 320
+    stadt    = nein
+    kreis    = kr_heilsberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 771779; deutscher Name aus den GeoNames-Alternativnamen (heute Górowo Iławeckie); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ludwigsort {
+    name     = "Ludwigsort"
+    gelaende = kueste
+    lage     = { 20.171 54.5703 }
+    flaeche  = 382
+    stadt    = nein
+    kreis    = kr_heilsberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 537229; deutscher Name aus den GeoNames-Alternativnamen (heute Ladushkin); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort mehlsack {
+    name     = "Mehlsack"
+    gelaende = flachland
+    lage     = { 20.1283 54.2365 }
+    flaeche  = 286
+    stadt    = nein
+    kreis    = kr_heilsberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 762311; deutscher Name aus den GeoNames-Alternativnamen (heute Pieniężno); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort liebstadt {
+    name     = "Liebstadt"
+    gelaende = flachland
+    lage     = { 20.0712 54.0092 }
+    flaeche  = 270
+    stadt    = nein
+    kreis    = kr_heilsberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 764752; deutscher Name aus den GeoNames-Alternativnamen (heute Miłakowo); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lubomino {
+    name     = "Lubomino"
+    gelaende = flachland
+    lage     = { 20.2396 54.0668 }
+    flaeche  = 222
+    stadt    = nein
+    kreis    = kr_heilsberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 765854; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lelkowo {
+    name     = "Lelkowo"
+    gelaende = flachland
+    lage     = { 20.2248 54.3246 }
+    flaeche  = 366
+    stadt    = nein
+    kreis    = kr_heilsberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 766507; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort rastenburg {
+    name     = "Rastenburg"
+    gelaende = flachland
+    lage     = { 21.3753 54.0768 }
+    flaeche  = 305
+    stadt    = ja
+    kreis    = kr_rastenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 769274; deutscher Name aus den GeoNames-Alternativnamen (heute Kętrzyn); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bartenstein {
+    name     = "Bartenstein"
+    gelaende = flachland
+    lage     = { 20.8082 54.2535 }
+    flaeche  = 341
+    stadt    = ja
+    kreis    = kr_rastenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 776337; deutscher Name aus den GeoNames-Alternativnamen (heute Bartoszyce); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort friedland_ostpreussen {
+    name     = "Friedland (Ostpreußen)"
+    gelaende = flachland
+    lage     = { 21.0178 54.4429 }
+    flaeche  = 498
+    stadt    = ja
+    kreis    = kr_rastenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 505599; deutscher Name aus den GeoNames-Alternativnamen (heute Pravdinsk); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bischofsburg {
+    name     = "Bischofsburg"
+    gelaende = flachland
+    lage     = { 20.9569 53.8647 }
+    flaeche  = 398
+    stadt    = nein
+    kreis    = kr_rastenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 775890; deutscher Name aus den GeoNames-Alternativnamen (heute Biskupiec); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort roessel {
+    name     = "Rössel"
+    gelaende = flachland
+    lage     = { 21.1458 54.0504 }
+    flaeche  = 304
+    stadt    = nein
+    kreis    = kr_rastenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 760488; deutscher Name aus den GeoNames-Alternativnamen (heute Reszel); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort seeburg {
+    name     = "Seeburg"
+    gelaende = flachland
+    lage     = { 20.7464 53.9758 }
+    flaeche  = 297
+    stadt    = nein
+    kreis    = kr_rastenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 770078; deutscher Name aus den GeoNames-Alternativnamen (heute Jeziorany); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort korschen {
+    name     = "Korschen"
+    gelaende = flachland
+    lage     = { 21.1392 54.17 }
+    flaeche  = 210
+    stadt    = nein
+    kreis    = kr_rastenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 768116; deutscher Name aus den GeoNames-Alternativnamen (heute Korsze); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bischofstein {
+    name     = "Bischofstein"
+    gelaende = flachland
+    lage     = { 20.9019 54.0863 }
+    flaeche  = 306
+    stadt    = nein
+    kreis    = kr_rastenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 775886; deutscher Name aus den GeoNames-Alternativnamen (heute Bisztynek); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gerdauen {
+    name     = "Gerdauen"
+    gelaende = flachland
+    lage     = { 21.306 54.3601 }
+    flaeche  = 627
+    stadt    = nein
+    kreis    = kr_rastenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 463356; deutscher Name aus den GeoNames-Alternativnamen (heute Zheleznodorozhnyy); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort schippenbeil {
+    name     = "Schippenbeil"
+    gelaende = flachland
+    lage     = { 21.0145 54.269 }
+    flaeche  = 277
+    stadt    = nein
+    kreis    = kr_rastenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 759482; deutscher Name aus den GeoNames-Alternativnamen (heute Sępopol); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort drengfurth {
+    name     = "Drengfurth"
+    gelaende = flachland
+    lage     = { 21.5228 54.2142 }
+    flaeche  = 384
+    stadt    = nein
+    kreis    = kr_rastenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 758467; deutscher Name aus den GeoNames-Alternativnamen (heute Srokowo); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort barten {
+    name     = "Barten"
+    gelaende = flachland
+    lage     = { 21.3535 54.2199 }
+    flaeche  = 208
+    stadt    = nein
+    kreis    = kr_rastenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 776393; deutscher Name aus den GeoNames-Alternativnamen (heute Barciany); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort loetzen {
+    name     = "Lötzen"
+    gelaende = seenplatte
+    lage     = { 21.7644 54.0381 }
+    flaeche  = 212
+    stadt    = ja
+    kreis    = kr_loetzen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 772195; deutscher Name aus den GeoNames-Alternativnamen (heute Giżycko); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort darkehmen {
+    name     = "Darkehmen"
+    gelaende = flachland
+    lage     = { 22.0117 54.4106 }
+    flaeche  = 629
+    stadt    = ja
+    kreis    = kr_loetzen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 513406; deutscher Name aus den GeoNames-Alternativnamen (heute Ozërsk); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort angerburg {
+    name     = "Angerburg"
+    gelaende = seenplatte
+    lage     = { 21.7372 54.2157 }
+    flaeche  = 294
+    stadt    = nein
+    kreis    = kr_loetzen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 756048; deutscher Name aus den GeoNames-Alternativnamen (heute Węgorzewo); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort goldap {
+    name     = "Goldap"
+    gelaende = flachland
+    lage     = { 22.3036 54.3063 }
+    flaeche  = 645
+    stadt    = nein
+    kreis    = kr_loetzen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 771953; deutscher Name aus den GeoNames-Alternativnamen (heute Gołdap); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kowahlen {
+    name     = "Kowahlen"
+    gelaende = huegelland
+    lage     = { 22.4167 54.1635 }
+    flaeche  = 288
+    stadt    = nein
+    kreis    = kr_loetzen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 767883; deutscher Name aus den GeoNames-Alternativnamen (heute Kowale Oleckie); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort benkheim {
+    name     = "Benkheim"
+    gelaende = flachland
+    lage     = { 22.0362 54.2466 }
+    flaeche  = 373
+    stadt    = nein
+    kreis    = kr_loetzen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 776441; deutscher Name aus den GeoNames-Alternativnamen (heute Banie Mazurskie); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort possessern {
+    name     = "Possessern"
+    gelaende = seenplatte
+    lage     = { 21.8597 54.1415 }
+    flaeche  = 155
+    stadt    = nein
+    kreis    = kr_loetzen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 761331; deutscher Name aus den GeoNames-Alternativnamen (heute Pozezdrze); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kruglanken {
+    name     = "Kruglanken"
+    gelaende = flachland
+    lage     = { 21.9223 54.0885 }
+    flaeche  = 203
+    stadt    = nein
+    kreis    = kr_loetzen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 767435; deutscher Name aus den GeoNames-Alternativnamen (heute Kruklanki); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort sensburg {
+    name     = "Sensburg"
+    gelaende = flachland
+    lage     = { 21.3051 53.8644 }
+    flaeche  = 326
+    stadt    = ja
+    kreis    = kr_sensburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 764312; deutscher Name aus den GeoNames-Alternativnamen (heute Mrągowo); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort johannisburg {
+    name     = "Johannisburg"
+    gelaende = seenplatte
+    lage     = { 21.8125 53.6274 }
+    flaeche  = 373
+    stadt    = nein
+    kreis    = kr_sensburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 762120; deutscher Name aus den GeoNames-Alternativnamen (heute Pisz); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ruciane_nida {
+    name     = "Ruciane-Nida"
+    gelaende = flachland
+    lage     = { 21.5396 53.6416 }
+    flaeche  = 367
+    stadt    = nein
+    kreis    = kr_sensburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 760166; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bialla {
+    name     = "Bialla"
+    gelaende = flachland
+    lage     = { 22.0632 53.6119 }
+    flaeche  = 402
+    stadt    = nein
+    kreis    = kr_sensburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 776178; deutscher Name aus den GeoNames-Alternativnamen (heute Biała Piska); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort nikolaiken {
+    name     = "Nikolaiken"
+    gelaende = seenplatte
+    lage     = { 21.5701 53.8029 }
+    flaeche  = 249
+    stadt    = nein
+    kreis    = kr_sensburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 764777; deutscher Name aus den GeoNames-Alternativnamen (heute Mikołajki); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort rhein {
+    name     = "Rhein"
+    gelaende = seenplatte
+    lage     = { 21.5464 53.9377 }
+    flaeche  = 322
+    stadt    = nein
+    kreis    = kr_sensburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 759839; deutscher Name aus den GeoNames-Alternativnamen (heute Ryn); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort peitschendorf {
+    name     = "Peitschendorf"
+    gelaende = flachland
+    lage     = { 21.3391 53.7576 }
+    flaeche  = 316
+    stadt    = nein
+    kreis    = kr_sensburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 762361; deutscher Name aus den GeoNames-Alternativnamen (heute Piecki); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort schwentainen {
+    name     = "Schwentainen"
+    gelaende = flachland
+    lage     = { 21.2155 53.5669 }
+    flaeche  = 326
+    stadt    = nein
+    kreis    = kr_sensburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 757610; deutscher Name aus den GeoNames-Alternativnamen (heute Świętajno); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort friedrichshof {
+    name     = "Friedrichshof"
+    gelaende = flachland
+    lage     = { 21.3622 53.4855 }
+    flaeche  = 283
+    stadt    = nein
+    kreis    = kr_sensburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 760203; deutscher Name aus den GeoNames-Alternativnamen (heute Rozogi); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lyck {
+    name     = "Lyck"
+    gelaende = flachland
+    lage     = { 22.3647 53.8282 }
+    flaeche  = 452
+    stadt    = ja
+    kreis    = kr_lyck
+    quelle   = "GeoNames (CC BY 4.0), geonameid 772621; deutscher Name aus den GeoNames-Alternativnamen (heute Ełk); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort marggrabowa {
+    name     = "Marggrabowa"
+    gelaende = flachland
+    lage     = { 22.507 54.0337 }
+    flaeche  = 335
+    stadt    = nein
+    kreis    = kr_lyck
+    quelle   = "GeoNames (CC BY 4.0), geonameid 763291; deutscher Name aus den GeoNames-Alternativnamen (heute Olecko); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort arys {
+    name     = "Arys"
+    gelaende = flachland
+    lage     = { 21.9481 53.8097 }
+    flaeche  = 461
+    stadt    = nein
+    kreis    = kr_lyck
+    quelle   = "GeoNames (CC BY 4.0), geonameid 763028; deutscher Name aus den GeoNames-Alternativnamen (heute Orzysz); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort widminnen {
+    name     = "Widminnen"
+    gelaende = flachland
+    lage     = { 22.0324 53.9819 }
+    flaeche  = 300
+    stadt    = nein
+    kreis    = kr_lyck
+    quelle   = "GeoNames (CC BY 4.0), geonameid 754652; deutscher Name aus den GeoNames-Alternativnamen (heute Wydminy); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort alt_jucha {
+    name     = "Alt Jucha"
+    gelaende = flachland
+    lage     = { 22.1737 53.922 }
+    flaeche  = 229
+    stadt    = nein
+    kreis    = kr_lyck
+    quelle   = "GeoNames (CC BY 4.0), geonameid 758332; deutscher Name aus den GeoNames-Alternativnamen (heute Stare Juchy); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort swietajno {
+    name     = "Swiętajno"
+    gelaende = flachland
+    lage     = { 22.3183 54.0015 }
+    flaeche  = 276
+    stadt    = nein
+    kreis    = kr_lyck
+    quelle   = "GeoNames (CC BY 4.0), geonameid 757608; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort allenstein {
+    name     = "Allenstein"
+    gelaende = flachland
+    lage     = { 20.4942 53.7799 }
+    flaeche  = 259
+    stadt    = ja
+    kreis    = kr_allenstein
+    quelle   = "GeoNames (CC BY 4.0), geonameid 763166; deutscher Name aus den GeoNames-Alternativnamen (heute Olsztyn); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort osterode {
+    name     = "Osterode"
+    gelaende = flachland
+    lage     = { 19.9649 53.6967 }
+    flaeche  = 337
+    stadt    = ja
+    kreis    = kr_allenstein
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3089779; deutscher Name aus den GeoNames-Alternativnamen (heute Ostróda); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort mohrungen {
+    name     = "Mohrungen"
+    gelaende = flachland
+    lage     = { 19.926 53.9171 }
+    flaeche  = 308
+    stadt    = nein
+    kreis    = kr_allenstein
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3091462; deutscher Name aus den GeoNames-Alternativnamen (heute Morąg); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hohenstein {
+    name     = "Hohenstein"
+    gelaende = flachland
+    lage     = { 20.2847 53.5837 }
+    flaeche  = 311
+    stadt    = nein
+    kreis    = kr_allenstein
+    quelle   = "GeoNames (CC BY 4.0), geonameid 763165; deutscher Name aus den GeoNames-Alternativnamen (heute Olsztynek); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wartenburg {
+    name     = "Wartenburg"
+    gelaende = flachland
+    lage     = { 20.6911 53.8306 }
+    flaeche  = 304
+    stadt    = nein
+    kreis    = kr_allenstein
+    quelle   = "GeoNames (CC BY 4.0), geonameid 776384; deutscher Name aus den GeoNames-Alternativnamen (heute Barczewo); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort liebemuehl {
+    name     = "Liebemühl"
+    gelaende = flachland
+    lage     = { 19.838 53.7645 }
+    flaeche  = 297
+    stadt    = nein
+    kreis    = kr_allenstein
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3091763; deutscher Name aus den GeoNames-Alternativnamen (heute Miłomłyn); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort jonkendorf {
+    name     = "Jonkendorf"
+    gelaende = flachland
+    lage     = { 20.3105 53.8282 }
+    flaeche  = 254
+    stadt    = nein
+    kreis    = kr_allenstein
+    quelle   = "GeoNames (CC BY 4.0), geonameid 770025; deutscher Name aus den GeoNames-Alternativnamen (heute Jonkowo); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort stabigotten {
+    name     = "Stabigotten"
+    gelaende = flachland
+    lage     = { 20.4004 53.6572 }
+    flaeche  = 284
+    stadt    = nein
+    kreis    = kr_allenstein
+    quelle   = "GeoNames (CC BY 4.0), geonameid 758242; deutscher Name aus den GeoNames-Alternativnamen (heute Stawiguda); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort maldeuten {
+    name     = "Maldeuten"
+    gelaende = flachland
+    lage     = { 19.744 53.9198 }
+    flaeche  = 229
+    stadt    = nein
+    kreis    = kr_allenstein
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3092467; deutscher Name aus den GeoNames-Alternativnamen (heute Małdyty); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort dietrichswalde {
+    name     = "Dietrichswalde"
+    gelaende = flachland
+    lage     = { 20.2374 53.7462 }
+    flaeche  = 266
+    stadt    = nein
+    kreis    = kr_allenstein
+    quelle   = "GeoNames (CC BY 4.0), geonameid 772218; deutscher Name aus den GeoNames-Alternativnamen (heute Gietrzwałd); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort geierswalde {
+    name     = "Geierswalde"
+    gelaende = flachland
+    lage     = { 20.0887 53.5413 }
+    flaeche  = 358
+    stadt    = nein
+    kreis    = kr_allenstein
+    quelle   = "GeoNames (CC BY 4.0), geonameid 772220; deutscher Name aus den GeoNames-Alternativnamen (heute Gierzwałd); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ortelsburg {
+    name     = "Ortelsburg"
+    gelaende = flachland
+    lage     = { 20.9875 53.5626 }
+    flaeche  = 263
+    stadt    = ja
+    kreis    = kr_ortelsburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 757357; deutscher Name aus den GeoNames-Alternativnamen (heute Szczytno); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort passenheim {
+    name     = "Passenheim"
+    gelaende = flachland
+    lage     = { 20.7919 53.6507 }
+    flaeche  = 282
+    stadt    = nein
+    kreis    = kr_ortelsburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 762588; deutscher Name aus den GeoNames-Alternativnamen (heute Pasym); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort willenberg {
+    name     = "Willenberg"
+    gelaende = flachland
+    lage     = { 20.9463 53.3986 }
+    flaeche  = 396
+    stadt    = nein
+    kreis    = kr_ortelsburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 755907; deutscher Name aus den GeoNames-Alternativnamen (heute Wielbark); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort mensguth {
+    name     = "Mensguth"
+    gelaende = flachland
+    lage     = { 20.9604 53.7049 }
+    flaeche  = 301
+    stadt    = nein
+    kreis    = kr_ortelsburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 772644; deutscher Name aus den GeoNames-Alternativnamen (heute Dźwierzuty); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gedwangen {
+    name     = "Gedwangen"
+    gelaende = flachland
+    lage     = { 20.7266 53.5299 }
+    flaeche  = 476
+    stadt    = nein
+    kreis    = kr_ortelsburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 770148; deutscher Name aus den GeoNames-Alternativnamen (heute Jedwabno); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort soldau {
+    name     = "Soldau"
+    gelaende = flachland
+    lage     = { 20.17 53.2396 }
+    flaeche  = 276
+    stadt    = ja
+    kreis    = kr_soldau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 772748; deutscher Name aus den GeoNames-Alternativnamen (heute Działdowo); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort neidenburg {
+    name     = "Neidenburg"
+    gelaende = flachland
+    lage     = { 20.4275 53.3605 }
+    flaeche  = 412
+    stadt    = nein
+    kreis    = kr_soldau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 764039; deutscher Name aus den GeoNames-Alternativnamen (heute Nidzica); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lautenburg {
+    name     = "Lautenburg"
+    gelaende = flachland
+    lage     = { 19.8266 53.2628 }
+    flaeche  = 322
+    stadt    = nein
+    kreis    = kr_soldau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3093439; deutscher Name aus den GeoNames-Alternativnamen (heute Lidzbark); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gross_koslau {
+    name     = "Gross Koslau"
+    gelaende = flachland
+    lage     = { 20.291 53.3065 }
+    flaeche  = 262
+    stadt    = nein
+    kreis    = kr_soldau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 767763; deutscher Name aus den GeoNames-Alternativnamen (heute Kozłowo); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort rybno {
+    name     = "Rybno"
+    gelaende = flachland
+    lage     = { 19.9323 53.3835 }
+    flaeche  = 364
+    stadt    = nein
+    kreis    = kr_soldau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3086574; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ilowo_osada {
+    name     = "Iłowo -Osada"
+    gelaende = flachland
+    lage     = { 20.293 53.1681 }
+    flaeche  = 170
+    stadt    = nein
+    kreis    = kr_soldau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 7534560; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}

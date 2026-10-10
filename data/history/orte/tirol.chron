@@ -1,0 +1,980 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
+# Orte: Tirol – Orte ohne Daten (Meilenstein M3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
+# Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
+# ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
+# und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
+#
+# Umfang: Grafschaft Tirol mit Südtirol (heute Tirol und die Provinz Bozen, dazu einige Orte des oberen Nonsbergs in der Provinz Trient am Rand des Umrisses).
+
+ort sankt_johann_in_tirol {
+    name     = "Sankt Johann in Tirol"
+    gelaende = mittelgebirge
+    lage     = { 12.4232 47.5233 }
+    flaeche  = 125
+    stadt    = nein
+    kreis    = kr_sankt_johann_in_tirol
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2766636; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kitzbuehel {
+    name     = "Kitzbühel"
+    gelaende = hochgebirge
+    lage     = { 12.3922 47.4464 }
+    flaeche  = 165
+    stadt    = nein
+    kreis    = kr_sankt_johann_in_tirol
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2774347; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort koessen {
+    name     = "Kössen"
+    gelaende = mittelgebirge
+    lage     = { 12.4055 47.6699 }
+    flaeche  = 230
+    stadt    = nein
+    kreis    = kr_sankt_johann_in_tirol
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2773691; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort fieberbrunn {
+    name     = "Fieberbrunn"
+    gelaende = hochgebirge
+    lage     = { 12.5435 47.4763 }
+    flaeche  = 140
+    stadt    = nein
+    kreis    = kr_sankt_johann_in_tirol
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2779595; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort westendorf {
+    name     = "Westendorf"
+    gelaende = hochgebirge
+    lage     = { 12.2141 47.4321 }
+    flaeche  = 253
+    stadt    = nein
+    kreis    = kr_sankt_johann_in_tirol
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2761457; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ellmau {
+    name     = "Ellmau"
+    gelaende = hochgebirge
+    lage     = { 12.2994 47.5138 }
+    flaeche  = 133
+    stadt    = nein
+    kreis    = kr_sankt_johann_in_tirol
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2780135; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort waidring {
+    name     = "Waidring"
+    gelaende = hochgebirge
+    lage     = { 12.5667 47.5833 }
+    flaeche  = 180
+    stadt    = nein
+    kreis    = kr_sankt_johann_in_tirol
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2762070; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort woergl {
+    name     = "Wörgl"
+    gelaende = mittelgebirge
+    lage     = { 12.0617 47.4891 }
+    flaeche  = 195
+    stadt    = nein
+    kreis    = kr_woergl
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2760854; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort schwaz {
+    name     = "Schwaz"
+    gelaende = hochgebirge
+    lage     = { 11.7101 47.3517 }
+    flaeche  = 239
+    stadt    = ja
+    kreis    = kr_woergl
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2765390; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kufstein {
+    name     = "Kufstein"
+    gelaende = mittelgebirge
+    lage     = { 12.1667 47.5833 }
+    flaeche  = 159
+    stadt    = nein
+    kreis    = kr_woergl
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2773300; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort alpbach {
+    name     = "Alpbach"
+    gelaende = hochgebirge
+    lage     = { 11.9437 47.3988 }
+    flaeche  = 178
+    stadt    = nein
+    kreis    = kr_woergl
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3323982; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort fuegen {
+    name     = "Fügen"
+    gelaende = hochgebirge
+    lage     = { 11.8494 47.347 }
+    flaeche  = 125
+    stadt    = nein
+    kreis    = kr_woergl
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2779154; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort achenkirch {
+    name     = "Achenkirch"
+    gelaende = hochgebirge
+    lage     = { 11.7056 47.5266 }
+    flaeche  = 362
+    stadt    = nein
+    kreis    = kr_woergl
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2783035; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort brandenberg {
+    name     = "Brandenberg"
+    gelaende = hochgebirge
+    lage     = { 11.8946 47.4905 }
+    flaeche  = 195
+    stadt    = nein
+    kreis    = kr_woergl
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2781567; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort reutte {
+    name     = "Reutte"
+    gelaende = hochgebirge
+    lage     = { 10.7167 47.4833 }
+    flaeche  = 255
+    stadt    = nein
+    kreis    = kr_reutte
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2767511; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort tannheim {
+    name     = "Tannheim"
+    gelaende = hochgebirge
+    lage     = { 10.5164 47.4993 }
+    flaeche  = 211
+    stadt    = nein
+    kreis    = kr_reutte
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2763915; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort elbigenalp {
+    name     = "Elbigenalp"
+    gelaende = hochgebirge
+    lage     = { 10.4361 47.2904 }
+    flaeche  = 213
+    stadt    = nein
+    kreis    = kr_reutte
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2780153; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort elmen {
+    name     = "Elmen"
+    gelaende = hochgebirge
+    lage     = { 10.5432 47.3404 }
+    flaeche  = 262
+    stadt    = nein
+    kreis    = kr_reutte
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2780123; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort innsbruck {
+    name     = "Innsbruck"
+    gelaende = hochgebirge
+    lage     = { 11.3945 47.2627 }
+    flaeche  = 223
+    stadt    = ja
+    kreis    = kr_innsbruck
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2775220; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hall_in_tirol {
+    name     = "Hall in Tirol"
+    gelaende = hochgebirge
+    lage     = { 11.5167 47.2833 }
+    flaeche  = 190
+    stadt    = nein
+    kreis    = kr_innsbruck
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2764958; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort telfs {
+    name     = "Telfs"
+    gelaende = hochgebirge
+    lage     = { 11.0682 47.3071 }
+    flaeche  = 162
+    stadt    = nein
+    kreis    = kr_innsbruck
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2763810; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort zirl {
+    name     = "Zirl"
+    gelaende = hochgebirge
+    lage     = { 11.2396 47.2741 }
+    flaeche  = 175
+    stadt    = nein
+    kreis    = kr_innsbruck
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2760523; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort leutasch {
+    name     = "Leutasch"
+    gelaende = hochgebirge
+    lage     = { 11.144 47.3689 }
+    flaeche  = 145
+    stadt    = nein
+    kreis    = kr_innsbruck
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3319549; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort fritzens {
+    name     = "Fritzens"
+    gelaende = hochgebirge
+    lage     = { 11.5895 47.3053 }
+    flaeche  = 206
+    stadt    = nein
+    kreis    = kr_innsbruck
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2779214; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gries_im_sellrain {
+    name     = "Gries im Sellrain"
+    gelaende = hochgebirge
+    lage     = { 11.1562 47.1955 }
+    flaeche  = 218
+    stadt    = nein
+    kreis    = kr_innsbruck
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2777974; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort imst {
+    name     = "Imst"
+    gelaende = hochgebirge
+    lage     = { 10.7397 47.245 }
+    flaeche  = 184
+    stadt    = nein
+    kreis    = kr_imst
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2775307; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort laengenfeld {
+    name     = "Längenfeld"
+    gelaende = hochgebirge
+    lage     = { 10.9695 47.074 }
+    flaeche  = 291
+    stadt    = nein
+    kreis    = kr_imst
+    quelle   = "GeoNames (CC BY 4.0), geonameid 8740442; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort soelden {
+    name     = "Sölden"
+    gelaende = hochgebirge
+    lage     = { 11 46.9667 }
+    flaeche  = 487
+    stadt    = nein
+    kreis    = kr_imst
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2764957; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort oetz {
+    name     = "Oetz"
+    gelaende = hochgebirge
+    lage     = { 10.9 47.2 }
+    flaeche  = 196
+    stadt    = nein
+    kreis    = kr_imst
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2769324; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ehrwald {
+    name     = "Ehrwald"
+    gelaende = hochgebirge
+    lage     = { 10.9167 47.4 }
+    flaeche  = 241
+    stadt    = nein
+    kreis    = kr_imst
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3319581; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort nassereith {
+    name     = "Nassereith"
+    gelaende = hochgebirge
+    lage     = { 10.8333 47.3167 }
+    flaeche  = 209
+    stadt    = nein
+    kreis    = kr_imst
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2770927; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort jerzens {
+    name     = "Jerzens"
+    gelaende = hochgebirge
+    lage     = { 10.7469 47.1512 }
+    flaeche  = 141
+    stadt    = nein
+    kreis    = kr_imst
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2775086; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort mayrhofen {
+    name     = "Mayrhofen"
+    gelaende = hochgebirge
+    lage     = { 11.8667 47.1667 }
+    flaeche  = 250
+    stadt    = nein
+    kreis    = kr_mayrhofen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2771725; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort tux {
+    name     = "Tux"
+    gelaende = hochgebirge
+    lage     = { 11.7287 47.1556 }
+    flaeche  = 310
+    stadt    = nein
+    kreis    = kr_mayrhofen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 11903603; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort aschau_im_zillertal {
+    name     = "Aschau im Zillertal"
+    gelaende = hochgebirge
+    lage     = { 11.8954 47.2661 }
+    flaeche  = 159
+    stadt    = nein
+    kreis    = kr_mayrhofen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 11592193; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gerlos {
+    name     = "Gerlos"
+    gelaende = hochgebirge
+    lage     = { 12.0301 47.2246 }
+    flaeche  = 213
+    stadt    = nein
+    kreis    = kr_mayrhofen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3323921; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort landeck {
+    name     = "Landeck"
+    gelaende = hochgebirge
+    lage     = { 10.5659 47.1399 }
+    flaeche  = 157
+    stadt    = nein
+    kreis    = kr_landeck
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2773070; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort pfunds {
+    name     = "Pfunds"
+    gelaende = hochgebirge
+    lage     = { 10.55 46.9667 }
+    flaeche  = 275
+    stadt    = nein
+    kreis    = kr_landeck
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2768905; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort sankt_anton_am_arlberg {
+    name     = "Sankt Anton am Arlberg"
+    gelaende = hochgebirge
+    lage     = { 10.2637 47.1275 }
+    flaeche  = 177
+    stadt    = nein
+    kreis    = kr_landeck
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2766757; Name Sankt Anton am Arlberg aus den GeoNames-Alternativnamen (GeoNames: St Anton am Arlberg); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ischgl {
+    name     = "Ischgl"
+    gelaende = hochgebirge
+    lage     = { 10.2918 47.0126 }
+    flaeche  = 132
+    stadt    = nein
+    kreis    = kr_landeck
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2775183; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort nauders {
+    name     = "Nauders"
+    gelaende = hochgebirge
+    lage     = { 10.5013 46.8886 }
+    flaeche  = 115
+    stadt    = nein
+    kreis    = kr_landeck
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2770910; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kappl {
+    name     = "Kappl"
+    gelaende = hochgebirge
+    lage     = { 10.3833 47.0667 }
+    flaeche  = 142
+    stadt    = nein
+    kreis    = kr_landeck
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2774761; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort serfaus {
+    name     = "Serfaus"
+    gelaende = hochgebirge
+    lage     = { 10.6034 47.0402 }
+    flaeche  = 183
+    stadt    = nein
+    kreis    = kr_landeck
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2765150; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort prutz {
+    name     = "Prutz"
+    gelaende = hochgebirge
+    lage     = { 10.6667 47.0833 }
+    flaeche  = 170
+    stadt    = nein
+    kreis    = kr_landeck
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2768291; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort flirsch {
+    name     = "Flirsch"
+    gelaende = hochgebirge
+    lage     = { 10.4 47.15 }
+    flaeche  = 133
+    stadt    = nein
+    kreis    = kr_landeck
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2779480; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort galtuer {
+    name     = "Galtür"
+    gelaende = hochgebirge
+    lage     = { 10.1833 46.9667 }
+    flaeche  = 223
+    stadt    = nein
+    kreis    = kr_landeck
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2778953; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort graun_im_vinschgau {
+    name     = "Graun im Vinschgau"
+    gelaende = hochgebirge
+    lage     = { 10.5427 46.8083 }
+    flaeche  = 397
+    stadt    = nein
+    kreis    = kr_landeck
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3177670; deutscher Name aus den GeoNames-Alternativnamen (heute Curon Venosta); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort steeg {
+    name     = "Steeg"
+    gelaende = hochgebirge
+    lage     = { 10.2944 47.2439 }
+    flaeche  = 147
+    stadt    = nein
+    kreis    = kr_landeck
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2764605; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort sterzing {
+    name     = "Sterzing"
+    gelaende = hochgebirge
+    lage     = { 11.4296 46.8931 }
+    flaeche  = 215
+    stadt    = nein
+    kreis    = kr_sterzing
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3164065; deutscher Name aus den GeoNames-Alternativnamen (heute Vipiteno); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort neustift_im_stubaital {
+    name     = "Neustift im Stubaital"
+    gelaende = hochgebirge
+    lage     = { 11.3167 47.1167 }
+    flaeche  = 248
+    stadt    = nein
+    kreis    = kr_sterzing
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2770651; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort steinach_am_brenner {
+    name     = "Steinach am Brenner"
+    gelaende = hochgebirge
+    lage     = { 11.4667 47.0833 }
+    flaeche  = 172
+    stadt    = nein
+    kreis    = kr_sterzing
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2764557; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ried {
+    name     = "Ried"
+    gelaende = hochgebirge
+    lage     = { 11.5241 46.9299 }
+    flaeche  = 232
+    stadt    = nein
+    kreis    = kr_sterzing
+    quelle   = "GeoNames (CC BY 4.0), geonameid 7645253; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort vals {
+    name     = "Vals"
+    gelaende = hochgebirge
+    lage     = { 11.5328 47.0451 }
+    flaeche  = 199
+    stadt    = nein
+    kreis    = kr_sterzing
+    quelle   = "GeoNames (CC BY 4.0), geonameid 11903709; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gschnitz {
+    name     = "Gschnitz"
+    gelaende = hochgebirge
+    lage     = { 11.3509 47.0447 }
+    flaeche  = 179
+    stadt    = nein
+    kreis    = kr_sterzing
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3319569; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lienz {
+    name     = "Lienz"
+    gelaende = hochgebirge
+    lage     = { 12.769 46.8289 }
+    flaeche  = 199
+    stadt    = nein
+    kreis    = kr_lienz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2772505; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort toblach {
+    name     = "Toblach"
+    gelaende = hochgebirge
+    lage     = { 12.2223 46.7288 }
+    flaeche  = 296
+    stadt    = nein
+    kreis    = kr_lienz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3177571; deutscher Name aus den GeoNames-Alternativnamen (heute Dobbiaco); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort matrei_in_osttirol {
+    name     = "Matrei in Osttirol"
+    gelaende = hochgebirge
+    lage     = { 12.5333 47 }
+    flaeche  = 171
+    stadt    = nein
+    kreis    = kr_lienz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2771828; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort sillian {
+    name     = "Sillian"
+    gelaende = hochgebirge
+    lage     = { 12.4211 46.7528 }
+    flaeche  = 276
+    stadt    = nein
+    kreis    = kr_lienz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2765044; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort nikolsdorf {
+    name     = "Nikolsdorf"
+    gelaende = hochgebirge
+    lage     = { 12.9133 46.7858 }
+    flaeche  = 150
+    stadt    = nein
+    kreis    = kr_lienz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2770479; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort obertilliach {
+    name     = "Obertilliach"
+    gelaende = hochgebirge
+    lage     = { 12.6144 46.7106 }
+    flaeche  = 279
+    stadt    = nein
+    kreis    = kr_lienz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2769662; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort schlaiten {
+    name     = "Schlaiten"
+    gelaende = hochgebirge
+    lage     = { 12.6542 46.8794 }
+    flaeche  = 214
+    stadt    = nein
+    kreis    = kr_lienz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3217367; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort san_martino {
+    name     = "San Martino"
+    gelaende = hochgebirge
+    lage     = { 12.2268 46.811 }
+    flaeche  = 268
+    stadt    = nein
+    kreis    = kr_lienz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3168014; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort sankt_veit_in_defereggen {
+    name     = "Sankt Veit in Defereggen"
+    gelaende = hochgebirge
+    lage     = { 12.4297 46.9272 }
+    flaeche  = 296
+    stadt    = nein
+    kreis    = kr_lienz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2766350; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort praegraten {
+    name     = "Prägraten"
+    gelaende = hochgebirge
+    lage     = { 12.3833 47.0167 }
+    flaeche  = 358
+    stadt    = nein
+    kreis    = kr_lienz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2768437; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kals_am_grossglockner {
+    name     = "Kals am Großglockner"
+    gelaende = hochgebirge
+    lage     = { 12.6455 47.0023 }
+    flaeche  = 234
+    stadt    = nein
+    kreis    = kr_lienz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3323885; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bruneck {
+    name     = "Bruneck"
+    gelaende = hochgebirge
+    lage     = { 11.9343 46.7994 }
+    flaeche  = 145
+    stadt    = nein
+    kreis    = kr_bruneck
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3181480; deutscher Name aus den GeoNames-Alternativnamen (heute Brunico); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ahrntal {
+    name     = "Ahrntal"
+    gelaende = hochgebirge
+    lage     = { 11.9799 46.9962 }
+    flaeche  = 209
+    stadt    = nein
+    kreis    = kr_bruneck
+    quelle   = "GeoNames (CC BY 4.0), geonameid 6534793; deutscher Teil des zweisprachigen GeoNames-Namens (Valle Aurina - Ahrntal); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort sand_in_taufers {
+    name     = "Sand in Taufers"
+    gelaende = hochgebirge
+    lage     = { 11.9604 46.9084 }
+    flaeche  = 170
+    stadt    = nein
+    kreis    = kr_bruneck
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3180908; deutscher Name aus den GeoNames-Alternativnamen (heute Campo Tures); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort rasen_antholz {
+    name     = "Rasen-Antholz"
+    gelaende = hochgebirge
+    lage     = { 12.0473 46.7785 }
+    flaeche  = 174
+    stadt    = nein
+    kreis    = kr_bruneck
+    quelle   = "GeoNames (CC BY 4.0), geonameid 6534785; deutscher Teil des zweisprachigen GeoNames-Namens (Rasun Anterselva - Rasen-Antholz); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort muehlwald {
+    name     = "Mühlwald"
+    gelaende = hochgebirge
+    lage     = { 11.8583 46.8903 }
+    flaeche  = 233
+    stadt    = nein
+    kreis    = kr_bruneck
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3166777; deutscher Name aus den GeoNames-Alternativnamen (heute Selva dei Molini); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort prettau {
+    name     = "Prettau"
+    gelaende = hochgebirge
+    lage     = { 12.1066 47.0403 }
+    flaeche  = 319
+    stadt    = nein
+    kreis    = kr_bruneck
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3169874; deutscher Name aus den GeoNames-Alternativnamen (heute Predoi); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort brixen {
+    name     = "Brixen"
+    gelaende = hochgebirge
+    lage     = { 11.656 46.715 }
+    flaeche  = 277
+    stadt    = nein
+    kreis    = kr_brixen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3181550; deutscher Name aus den GeoNames-Alternativnamen (heute Bressanone); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort st_ulrich_in_groeden {
+    name     = "St. Ulrich in Gröden"
+    gelaende = hochgebirge
+    lage     = { 11.6718 46.576 }
+    flaeche  = 239
+    stadt    = nein
+    kreis    = kr_brixen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3171891; deutscher Name aus den GeoNames-Alternativnamen (heute Ortisei); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort klausen {
+    name     = "Klausen"
+    gelaende = hochgebirge
+    lage     = { 11.5657 46.64 }
+    flaeche  = 199
+    stadt    = nein
+    kreis    = kr_brixen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3178764; deutscher Name aus den GeoNames-Alternativnamen (heute Chiusa); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort vintl {
+    name     = "Vintl"
+    gelaende = hochgebirge
+    lage     = { 11.7207 46.8151 }
+    flaeche  = 245
+    stadt    = nein
+    kreis    = kr_brixen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 6534795; deutscher Teil des zweisprachigen GeoNames-Namens (Vandoies - Vintl); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort sankt_vigil {
+    name     = "Sankt Vigil"
+    gelaende = hochgebirge
+    lage     = { 11.931 46.6988 }
+    flaeche  = 214
+    stadt    = nein
+    kreis    = kr_brixen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 8643247; deutscher Name aus den GeoNames-Alternativnamen (heute San Vigilio); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort abtei {
+    name     = "Abtei"
+    gelaende = hochgebirge
+    lage     = { 11.8963 46.6082 }
+    flaeche  = 242
+    stadt    = nein
+    kreis    = kr_brixen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3182585; deutscher Name aus den GeoNames-Alternativnamen (heute Badia); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort meran {
+    name     = "Meran"
+    gelaende = hochgebirge
+    lage     = { 11.1595 46.6682 }
+    flaeche  = 176
+    stadt    = ja
+    kreis    = kr_meran
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3173577; deutscher Name aus den GeoNames-Alternativnamen (heute Merano); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ratschings {
+    name     = "Ratschings"
+    gelaende = hochgebirge
+    lage     = { 11.3 46.8667 }
+    flaeche  = 182
+    stadt    = nein
+    kreis    = kr_meran
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3169646; deutscher Name aus den GeoNames-Alternativnamen (heute Racines); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort sarnthein {
+    name     = "Sarnthein"
+    gelaende = hochgebirge
+    lage     = { 11.3541 46.6412 }
+    flaeche  = 233
+    stadt    = nein
+    kreis    = kr_meran
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3167131; deutscher Name aus den GeoNames-Alternativnamen (heute Sarentino); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort sankt_martin_in_passeier {
+    name     = "Sankt Martin in Passeier"
+    gelaende = hochgebirge
+    lage     = { 11.2273 46.7839 }
+    flaeche  = 172
+    stadt    = nein
+    kreis    = kr_meran
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3168043; deutscher Name aus den GeoNames-Alternativnamen (heute San Martino in Passiria); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gargazon {
+    name     = "Gargazon"
+    gelaende = mittelgebirge
+    lage     = { 11.2016 46.5846 }
+    flaeche  = 173
+    stadt    = nein
+    kreis    = kr_meran
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3176305; deutscher Name aus den GeoNames-Alternativnamen (heute Gargazzone); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort moos_in_passeier {
+    name     = "Moos in Passeier"
+    gelaende = hochgebirge
+    lage     = { 11.1671 46.8315 }
+    flaeche  = 270
+    stadt    = nein
+    kreis    = kr_meran
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3172526; deutscher Name aus den GeoNames-Alternativnamen (heute Moso in Passiria); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort schlanders {
+    name     = "Schlanders"
+    gelaende = hochgebirge
+    lage     = { 10.7681 46.6283 }
+    flaeche  = 174
+    stadt    = nein
+    kreis    = kr_schlanders
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3166537; deutscher Name aus den GeoNames-Alternativnamen (heute Silandro); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort naturns {
+    name     = "Naturns"
+    gelaende = hochgebirge
+    lage     = { 11.0013 46.648 }
+    flaeche  = 148
+    stadt    = nein
+    kreis    = kr_schlanders
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3172367; deutscher Name aus den GeoNames-Alternativnamen (heute Naturno); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort prad_am_stilfser_joch {
+    name     = "Prad am Stilfser Joch"
+    gelaende = hochgebirge
+    lage     = { 10.5914 46.619 }
+    flaeche  = 266
+    stadt    = nein
+    kreis    = kr_schlanders
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3169914; deutscher Name aus den GeoNames-Alternativnamen (heute Prato Allo Stelvio); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ulten {
+    name     = "Ulten"
+    gelaende = hochgebirge
+    lage     = { 11.0042 46.5483 }
+    flaeche  = 181
+    stadt    = nein
+    kreis    = kr_schlanders
+    quelle   = "GeoNames (CC BY 4.0), geonameid 6534791; deutscher Teil des zweisprachigen GeoNames-Namens (Ultimo - Ulten); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort schnals {
+    name     = "Schnals"
+    gelaende = hochgebirge
+    lage     = { 10.9085 46.706 }
+    flaeche  = 355
+    stadt    = nein
+    kreis    = kr_schlanders
+    quelle   = "GeoNames (CC BY 4.0), geonameid 6534789; deutscher Name aus den GeoNames-Alternativnamen (heute Senales); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort taufers_im_muenstertal {
+    name     = "Taufers im Münstertal"
+    gelaende = hochgebirge
+    lage     = { 10.4633 46.644 }
+    flaeche  = 176
+    stadt    = nein
+    kreis    = kr_schlanders
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3165124; deutscher Name aus den GeoNames-Alternativnamen (heute Tubre); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort martell {
+    name     = "Martell"
+    gelaende = hochgebirge
+    lage     = { 10.7804 46.5546 }
+    flaeche  = 292
+    stadt    = nein
+    kreis    = kr_schlanders
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3176331; deutscher Name aus den GeoNames-Alternativnamen (heute Ganda); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bozen {
+    name     = "Bozen"
+    gelaende = mittelgebirge
+    lage     = { 11.3398 46.4907 }
+    flaeche  = 185
+    stadt    = ja
+    kreis    = kr_bozen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3181913; deutscher Name aus den GeoNames-Alternativnamen (heute Bolzano); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kaltern {
+    name     = "Kaltern"
+    gelaende = hochgebirge
+    lage     = { 11.2462 46.4133 }
+    flaeche  = 132
+    stadt    = nein
+    kreis    = kr_bozen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3181215; deutscher Name aus den GeoNames-Alternativnamen (heute Caldaro sulla Strada del Vino); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ritten {
+    name     = "Ritten"
+    gelaende = hochgebirge
+    lage     = { 11.4573 46.5415 }
+    flaeche  = 183
+    stadt    = nein
+    kreis    = kr_bozen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 6534786; deutscher Teil des zweisprachigen GeoNames-Namens (Renon - Ritten); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort neumarkt_tirol {
+    name     = "Neumarkt (Tirol)"
+    gelaende = hochgebirge
+    lage     = { 11.2734 46.3178 }
+    flaeche  = 178
+    stadt    = nein
+    kreis    = kr_bozen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3177431; deutscher Name aus den GeoNames-Alternativnamen (heute Egna); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort salurn {
+    name     = "Salurn"
+    gelaende = mittelgebirge
+    lage     = { 11.2119 46.2406 }
+    flaeche  = 49
+    stadt    = nein
+    kreis    = kr_bozen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3168632; deutscher Name aus den GeoNames-Alternativnamen (heute Salorno); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort welschnofen {
+    name     = "Welschnofen"
+    gelaende = hochgebirge
+    lage     = { 11.5394 46.429 }
+    flaeche  = 235
+    stadt    = nein
+    kreis    = kr_bozen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3172192; deutscher Name aus den GeoNames-Alternativnamen (heute Nova Levante); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort castelfondo {
+    name     = "Castelfondo"
+    gelaende = hochgebirge
+    lage     = { 11.1179 46.4562 }
+    flaeche  = 136
+    stadt    = nein
+    kreis    = kr_bozen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3179693; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}

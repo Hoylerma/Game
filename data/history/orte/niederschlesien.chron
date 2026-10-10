@@ -1,0 +1,1010 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
+# Orte: Niederschlesien – Orte ohne Daten (Meilenstein M3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
+# Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
+# ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
+# und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
+#
+# Umfang: Niederschlesien mit Brieg und Namslau sowie Grünberg, Sagan und Neusalz.
+
+ort gruenberg_niederschlesien {
+    name     = "Grünberg (Niederschlesien)"
+    gelaende = huegelland
+    lage     = { 15.5064 51.9355 }
+    flaeche  = 227
+    stadt    = ja
+    kreis    = kr_gruenberg_niederschlesien
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3080165; deutscher Name aus den GeoNames-Alternativnamen (heute Zielona Góra); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort zuellichau {
+    name     = "Züllichau"
+    gelaende = flachland
+    lage     = { 15.6251 52.0836 }
+    flaeche  = 268
+    stadt    = nein
+    kreis    = kr_gruenberg_niederschlesien
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3084241; deutscher Name aus den GeoNames-Alternativnamen (heute Sulechów); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort naumburg_am_bober {
+    name     = "Naumburg am Bober"
+    gelaende = flachland
+    lage     = { 15.2352 51.7986 }
+    flaeche  = 311
+    stadt    = nein
+    kreis    = kr_gruenberg_niederschlesien
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3090553; deutscher Name aus den GeoNames-Alternativnamen (heute Nowogród Bobrzański); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort rothenburg_niederschlesien {
+    name     = "Rothenburg (Niederschlesien)"
+    gelaende = flachland
+    lage     = { 15.4232 52.0129 }
+    flaeche  = 238
+    stadt    = nein
+    kreis    = kr_gruenberg_niederschlesien
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3100976; deutscher Name aus den GeoNames-Alternativnamen (heute Czerwieńsk); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bomst {
+    name     = "Bomst"
+    gelaende = flachland
+    lage     = { 15.8277 52.1649 }
+    flaeche  = 158
+    stadt    = nein
+    kreis    = kr_gruenberg_niederschlesien
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3104002; deutscher Name aus den GeoNames-Alternativnamen (heute Babimost); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort unruhstadt {
+    name     = "Unruhstadt"
+    gelaende = flachland
+    lage     = { 15.8614 52.0714 }
+    flaeche  = 195
+    stadt    = nein
+    kreis    = kr_gruenberg_niederschlesien
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3096640; deutscher Name aus den GeoNames-Alternativnamen (heute Kargowa); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort schweinitz {
+    name     = "Schweinitz"
+    gelaende = flachland
+    lage     = { 15.3901 51.8884 }
+    flaeche  = 225
+    stadt    = nein
+    kreis    = kr_gruenberg_niederschlesien
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3084092; deutscher Name aus den GeoNames-Alternativnamen (heute Świdnica); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort boyadel {
+    name     = "Boyadel"
+    gelaende = flussaue
+    lage     = { 15.8104 51.9532 }
+    flaeche  = 253
+    stadt    = nein
+    kreis    = kr_gruenberg_niederschlesien
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3103016; deutscher Name aus den GeoNames-Alternativnamen (heute Bojadła); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kolzig {
+    name     = "Kolzig"
+    gelaende = flachland
+    lage     = { 15.9599 51.9615 }
+    flaeche  = 187
+    stadt    = nein
+    kreis    = kr_gruenberg_niederschlesien
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3095417; deutscher Name aus den GeoNames-Alternativnamen (heute Kolsko); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort guhrau {
+    name     = "Guhrau"
+    gelaende = flachland
+    lage     = { 16.5349 51.6664 }
+    flaeche  = 305
+    stadt    = nein
+    kreis    = kr_guhrau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3098898; deutscher Name aus den GeoNames-Alternativnamen (heute Góra); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort trachenberg {
+    name     = "Trachenberg"
+    gelaende = flachland
+    lage     = { 16.9056 51.4667 }
+    flaeche  = 341
+    stadt    = nein
+    kreis    = kr_guhrau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3080058; deutscher Name aus den GeoNames-Alternativnamen (heute Żmigród); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort herrnstadt {
+    name     = "Herrnstadt"
+    gelaende = flachland
+    lage     = { 16.6906 51.5622 }
+    flaeche  = 214
+    stadt    = nein
+    kreis    = kr_guhrau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3082556; deutscher Name aus den GeoNames-Alternativnamen (heute Wąsosz); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort winzig {
+    name     = "Winzig"
+    gelaende = flachland
+    lage     = { 16.6139 51.4703 }
+    flaeche  = 258
+    stadt    = nein
+    kreis    = kr_guhrau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3081895; deutscher Name aus den GeoNames-Alternativnamen (heute Wińsko); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort glogau {
+    name     = "Glogau"
+    gelaende = flussaue
+    lage     = { 16.0845 51.6636 }
+    flaeche  = 173
+    stadt    = ja
+    kreis    = kr_glogau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3099213; deutscher Name aus den GeoNames-Alternativnamen (heute Głogów); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort neusalz {
+    name     = "Neusalz"
+    gelaende = flussaue
+    lage     = { 15.717 51.8033 }
+    flaeche  = 229
+    stadt    = ja
+    kreis    = kr_glogau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3090764; deutscher Name aus den GeoNames-Alternativnamen (heute Nowa Sól); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort polkwitz {
+    name     = "Polkwitz"
+    gelaende = flachland
+    lage     = { 16.0726 51.5039 }
+    flaeche  = 217
+    stadt    = ja
+    kreis    = kr_glogau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3088435; deutscher Name aus den GeoNames-Alternativnamen (heute Polkowice); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort freystadt_niederschlesien {
+    name     = "Freystadt (Niederschlesien)"
+    gelaende = flachland
+    lage     = { 15.5949 51.7456 }
+    flaeche  = 327
+    stadt    = nein
+    kreis    = kr_glogau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3094832; deutscher Name aus den GeoNames-Alternativnamen (heute Kożuchów); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kotzenau {
+    name     = "Kotzenau"
+    gelaende = flachland
+    lage     = { 15.9017 51.4187 }
+    flaeche  = 215
+    stadt    = nein
+    kreis    = kr_glogau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3101722; deutscher Name aus den GeoNames-Alternativnamen (heute Chocianów); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort primkenau {
+    name     = "Primkenau"
+    gelaende = flachland
+    lage     = { 15.7944 51.5253 }
+    flaeche  = 292
+    stadt    = nein
+    kreis    = kr_glogau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3087954; deutscher Name aus den GeoNames-Alternativnamen (heute Przemków); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort beuthen_an_der_oder {
+    name     = "Beuthen an der Oder"
+    gelaende = flussaue
+    lage     = { 15.8236 51.7306 }
+    flaeche  = 234
+    stadt    = nein
+    kreis    = kr_glogau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3101947; deutscher Name aus den GeoNames-Alternativnamen (heute Bytom Odrzański); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gromadka {
+    name     = "Gromadka"
+    gelaende = flachland
+    lage     = { 15.7645 51.3606 }
+    flaeche  = 291
+    stadt    = nein
+    kreis    = kr_glogau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3098267; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort radwanice {
+    name     = "Radwanice"
+    gelaende = flachland
+    lage     = { 15.948 51.5708 }
+    flaeche  = 180
+    stadt    = nein
+    kreis    = kr_glogau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 7534656; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kuttlau {
+    name     = "Kuttlau"
+    gelaende = flachland
+    lage     = { 16.0358 51.7454 }
+    flaeche  = 219
+    stadt    = nein
+    kreis    = kr_glogau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3095015; deutscher Name aus den GeoNames-Alternativnamen (heute Kotla); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort sagan {
+    name     = "Sagan"
+    gelaende = flachland
+    lage     = { 15.3149 51.6176 }
+    flaeche  = 202
+    stadt    = ja
+    kreis    = kr_sagan
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3080944; deutscher Name aus den GeoNames-Alternativnamen (heute Żagań); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort sprottau {
+    name     = "Sprottau"
+    gelaende = flachland
+    lage     = { 15.5366 51.5656 }
+    flaeche  = 253
+    stadt    = nein
+    kreis    = kr_sagan
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3083632; deutscher Name aus den GeoNames-Alternativnamen (heute Szprotawa); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort halbau {
+    name     = "Halbau"
+    gelaende = flachland
+    lage     = { 15.1998 51.5006 }
+    flaeche  = 230
+    stadt    = nein
+    kreis    = kr_sagan
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3097896; deutscher Name aus den GeoNames-Alternativnamen (heute Iłowa); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort freiwaldau_niederschlesien {
+    name     = "Freiwaldau (Niederschlesien)"
+    gelaende = flachland
+    lage     = { 15.0986 51.4363 }
+    flaeche  = 170
+    stadt    = nein
+    kreis    = kr_sagan
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3098583; deutscher Name aus den GeoNames-Alternativnamen (heute Gozdnica); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort mallmitz {
+    name     = "Mallmitz"
+    gelaende = flachland
+    lage     = { 15.45 51.556 }
+    flaeche  = 283
+    stadt    = nein
+    kreis    = kr_sagan
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3092402; deutscher Name aus den GeoNames-Alternativnamen (heute Małomice); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bunzlau {
+    name     = "Bunzlau"
+    gelaende = huegelland
+    lage     = { 15.5697 51.2642 }
+    flaeche  = 335
+    stadt    = ja
+    kreis    = kr_bunzlau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3102987; deutscher Name aus den GeoNames-Alternativnamen (heute Bolesławiec); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort haynau {
+    name     = "Haynau"
+    gelaende = flachland
+    lage     = { 15.9366 51.2737 }
+    flaeche  = 253
+    stadt    = nein
+    kreis    = kr_bunzlau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3101660; deutscher Name aus den GeoNames-Alternativnamen (heute Chojnów); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort goldberg_niederschlesien {
+    name     = "Goldberg (Niederschlesien)"
+    gelaende = huegelland
+    lage     = { 15.9198 51.1264 }
+    flaeche  = 250
+    stadt    = nein
+    kreis    = kr_bunzlau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3080074; deutscher Name aus den GeoNames-Alternativnamen (heute Złotoryja); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort loewenberg {
+    name     = "Löwenberg"
+    gelaende = huegelland
+    lage     = { 15.5858 51.1107 }
+    flaeche  = 233
+    stadt    = nein
+    kreis    = kr_bunzlau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3092638; deutscher Name aus den GeoNames-Alternativnamen (heute Lwówek Śląski); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort greiffenberg {
+    name     = "Greiffenberg"
+    gelaende = huegelland
+    lage     = { 15.4202 51.0308 }
+    flaeche  = 204
+    stadt    = nein
+    kreis    = kr_bunzlau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3098199; deutscher Name aus den GeoNames-Alternativnamen (heute Gryfów Śląski); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort naumburg_am_queis {
+    name     = "Naumburg am Queis"
+    gelaende = huegelland
+    lage     = { 15.3985 51.1954 }
+    flaeche  = 195
+    stadt    = nein
+    kreis    = kr_bunzlau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3090551; deutscher Name aus den GeoNames-Alternativnamen (heute Nowogrodziec); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort laehn {
+    name     = "Lähn"
+    gelaende = huegelland
+    lage     = { 15.6747 51.0164 }
+    flaeche  = 227
+    stadt    = nein
+    kreis    = kr_bunzlau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3081748; deutscher Name aus den GeoNames-Alternativnamen (heute Wleń); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort olszanica {
+    name     = "Olszanica"
+    gelaende = huegelland
+    lage     = { 15.8004 51.2067 }
+    flaeche  = 210
+    stadt    = nein
+    kreis    = kr_bunzlau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3090130; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort oels {
+    name     = "Oels"
+    gelaende = flachland
+    lage     = { 17.3899 51.2134 }
+    flaeche  = 342
+    stadt    = ja
+    kreis    = kr_oels
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3090170; deutscher Name aus den GeoNames-Alternativnamen (heute Oleśnica); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort militsch {
+    name     = "Militsch"
+    gelaende = flachland
+    lage     = { 17.2714 51.5277 }
+    flaeche  = 296
+    stadt    = nein
+    kreis    = kr_oels
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3091788; deutscher Name aus den GeoNames-Alternativnamen (heute Milicz); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gross_wartenberg {
+    name     = "Gross Wartenberg"
+    gelaende = flachland
+    lage     = { 17.7198 51.3081 }
+    flaeche  = 323
+    stadt    = nein
+    kreis    = kr_oels
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3083921; deutscher Name aus den GeoNames-Alternativnamen (heute Syców); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort festenberg {
+    name     = "Festenberg"
+    gelaende = huegelland
+    lage     = { 17.4688 51.3649 }
+    flaeche  = 272
+    stadt    = nein
+    kreis    = kr_oels
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3082938; deutscher Name aus den GeoNames-Alternativnamen (heute Twardogóra); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bernstadt {
+    name     = "Bernstadt"
+    gelaende = flachland
+    lage     = { 17.5461 51.1244 }
+    flaeche  = 335
+    stadt    = nein
+    kreis    = kr_oels
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3103364; deutscher Name aus den GeoNames-Alternativnamen (heute Bierutów); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort neumittelwalde {
+    name     = "Neumittelwalde"
+    gelaende = flachland
+    lage     = { 17.6661 51.3963 }
+    flaeche  = 151
+    stadt    = nein
+    kreis    = kr_oels
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3091991; deutscher Name aus den GeoNames-Alternativnamen (heute Międzybórz); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kraschnitz {
+    name     = "Kraschnitz"
+    gelaende = flachland
+    lage     = { 17.3592 51.4764 }
+    flaeche  = 255
+    stadt    = nein
+    kreis    = kr_oels
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3094639; deutscher Name aus den GeoNames-Alternativnamen (heute Krośnice); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort freyhan {
+    name     = "Freyhan"
+    gelaende = flachland
+    lage     = { 17.3573 51.631 }
+    flaeche  = 167
+    stadt    = nein
+    kreis    = kr_oels
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3101330; deutscher Name aus den GeoNames-Alternativnamen (heute Cieszków); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort liegnitz {
+    name     = "Liegnitz"
+    gelaende = flachland
+    lage     = { 16.1619 51.2101 }
+    flaeche  = 307
+    stadt    = ja
+    kreis    = kr_liegnitz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3093692; deutscher Name aus den GeoNames-Alternativnamen (heute Legnica); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lueben {
+    name     = "Lüben"
+    gelaende = flachland
+    lage     = { 16.2015 51.4009 }
+    flaeche  = 228
+    stadt    = ja
+    kreis    = kr_liegnitz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3092931; deutscher Name aus den GeoNames-Alternativnamen (heute Lubin); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort neumarkt_niederschlesien {
+    name     = "Neumarkt (Niederschlesien)"
+    gelaende = flachland
+    lage     = { 16.5951 51.1641 }
+    flaeche  = 158
+    stadt    = ja
+    kreis    = kr_liegnitz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3085047; deutscher Name aus den GeoNames-Alternativnamen (heute Środa Śląska); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort dyhernfurth {
+    name     = "Dyhernfurth"
+    gelaende = flussaue
+    lage     = { 16.7081 51.273 }
+    flaeche  = 143
+    stadt    = nein
+    kreis    = kr_liegnitz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3102456; deutscher Name aus den GeoNames-Alternativnamen (heute Brzeg Dolny); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wohlau {
+    name     = "Wohlau"
+    gelaende = flachland
+    lage     = { 16.6443 51.3366 }
+    flaeche  = 241
+    stadt    = nein
+    kreis    = kr_liegnitz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3081430; deutscher Name aus den GeoNames-Alternativnamen (heute Wołów); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort steinau {
+    name     = "Steinau"
+    gelaende = flussaue
+    lage     = { 16.4251 51.4163 }
+    flaeche  = 273
+    stadt    = nein
+    kreis    = kr_liegnitz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3086206; deutscher Name aus den GeoNames-Alternativnamen (heute Ścinawa); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort parchwitz {
+    name     = "Parchwitz"
+    gelaende = flachland
+    lage     = { 16.3653 51.2731 }
+    flaeche  = 213
+    stadt    = nein
+    kreis    = kr_liegnitz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3088096; deutscher Name aus den GeoNames-Alternativnamen (heute Prochowice); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort miekinia {
+    name     = "Miękinia"
+    gelaende = flachland
+    lage     = { 16.7359 51.1884 }
+    flaeche  = 162
+    stadt    = nein
+    kreis    = kr_liegnitz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3091953; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort maltsch {
+    name     = "Maltsch"
+    gelaende = flussaue
+    lage     = { 16.4936 51.2204 }
+    flaeche  = 172
+    stadt    = nein
+    kreis    = kr_liegnitz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3092468; deutscher Name aus den GeoNames-Alternativnamen (heute Malczyce); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort raudten {
+    name     = "Raudten"
+    gelaende = flachland
+    lage     = { 16.2636 51.5098 }
+    flaeche  = 293
+    stadt    = nein
+    kreis    = kr_liegnitz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3086775; deutscher Name aus den GeoNames-Alternativnamen (heute Rudna); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort breslau {
+    name     = "Breslau"
+    gelaende = flussaue
+    lage     = { 17.0333 51.1 }
+    flaeche  = 119
+    stadt    = ja
+    kreis    = kr_breslau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3081368; deutscher Name aus den GeoNames-Alternativnamen (heute Wrocław); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ohlau {
+    name     = "Ohlau"
+    gelaende = flussaue
+    lage     = { 17.2926 50.9466 }
+    flaeche  = 182
+    stadt    = ja
+    kreis    = kr_breslau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3090205; deutscher Name aus den GeoNames-Alternativnamen (heute Oława); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort trebnitz {
+    name     = "Trebnitz"
+    gelaende = huegelland
+    lage     = { 17.0633 51.3108 }
+    flaeche  = 324
+    stadt    = nein
+    kreis    = kr_breslau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3083103; deutscher Name aus den GeoNames-Alternativnamen (heute Trzebnica); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort obernigk {
+    name     = "Obernigk"
+    gelaende = flachland
+    lage     = { 16.9147 51.3014 }
+    flaeche  = 250
+    stadt    = nein
+    kreis    = kr_breslau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3090401; deutscher Name aus den GeoNames-Alternativnamen (heute Oborniki Śląskie); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort jelcz_laskowice {
+    name     = "Jelcz Laskowice"
+    gelaende = flussaue
+    lage     = { 17.3165 51.0213 }
+    flaeche  = 211
+    stadt    = nein
+    kreis    = kr_breslau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 7303641; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kanth {
+    name     = "Kanth"
+    gelaende = flachland
+    lage     = { 16.7677 51.031 }
+    flaeche  = 267
+    stadt    = nein
+    kreis    = kr_breslau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3096444; deutscher Name aus den GeoNames-Alternativnamen (heute Kąty Wrocławskie); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort tschechnitz {
+    name     = "Tschechnitz"
+    gelaende = flussaue
+    lage     = { 17.1474 51.0338 }
+    flaeche  = 128
+    stadt    = nein
+    kreis    = kr_breslau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3086106; deutscher Name aus den GeoNames-Alternativnamen (heute Siechnice); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort rothsuerben {
+    name     = "Rothsürben"
+    gelaende = flachland
+    lage     = { 17.0367 50.9808 }
+    flaeche  = 250
+    stadt    = nein
+    kreis    = kr_breslau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3080007; deutscher Name aus den GeoNames-Alternativnamen (heute Żórawina); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kielczow {
+    name     = "Kiełczów"
+    gelaende = flachland
+    lage     = { 17.178 51.14 }
+    flaeche  = 203
+    stadt    = nein
+    kreis    = kr_breslau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3096292; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort schmolz {
+    name     = "Schmolz"
+    gelaende = flachland
+    lage     = { 16.8822 51.0732 }
+    flaeche  = 138
+    stadt    = nein
+    kreis    = kr_breslau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3085357; deutscher Name aus den GeoNames-Alternativnamen (heute Smolec); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort psary {
+    name     = "Psary"
+    gelaende = flachland
+    lage     = { 17.0317 51.1871 }
+    flaeche  = 159
+    stadt    = nein
+    kreis    = kr_breslau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3087740; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort jauer {
+    name     = "Jauer"
+    gelaende = huegelland
+    lage     = { 16.1935 51.0513 }
+    flaeche  = 316
+    stadt    = ja
+    kreis    = kr_jauer
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3097367; deutscher Name aus den GeoNames-Alternativnamen (heute Jawor); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort striegau {
+    name     = "Striegau"
+    gelaende = huegelland
+    lage     = { 16.3501 50.9626 }
+    flaeche  = 169
+    stadt    = nein
+    kreis    = kr_jauer
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3084440; deutscher Name aus den GeoNames-Alternativnamen (heute Strzegom); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort saarau {
+    name     = "Saarau"
+    gelaende = flachland
+    lage     = { 16.4947 50.9412 }
+    flaeche  = 149
+    stadt    = nein
+    kreis    = kr_jauer
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3080652; deutscher Name aus den GeoNames-Alternativnamen (heute Żarów); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bolkenhain {
+    name     = "Bolkenhain"
+    gelaende = huegelland
+    lage     = { 16.1011 50.922 }
+    flaeche  = 255
+    stadt    = nein
+    kreis    = kr_jauer
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3102969; deutscher Name aus den GeoNames-Alternativnamen (heute Bolków); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kauffung {
+    name     = "Kauffung"
+    gelaende = mittelgebirge
+    lage     = { 15.9218 50.9519 }
+    flaeche  = 294
+    stadt    = nein
+    kreis    = kr_jauer
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3081653; deutscher Name aus den GeoNames-Alternativnamen (heute Wojcieszów); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort udanin {
+    name     = "Udanin"
+    gelaende = flachland
+    lage     = { 16.4547 51.0374 }
+    flaeche  = 247
+    stadt    = nein
+    kreis    = kr_jauer
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3082866; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hirschberg_niederschlesien {
+    name     = "Hirschberg (Niederschlesien)"
+    gelaende = huegelland
+    lage     = { 15.729 50.8997 }
+    flaeche  = 187
+    stadt    = ja
+    kreis    = kr_hirschberg_niederschlesien
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3097257; deutscher Name aus den GeoNames-Alternativnamen (heute Jelenia Góra); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort schmiedeberg {
+    name     = "Schmiedeberg"
+    gelaende = mittelgebirge
+    lage     = { 15.8356 50.7931 }
+    flaeche  = 204
+    stadt    = nein
+    kreis    = kr_hirschberg_niederschlesien
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3094934; deutscher Name aus den GeoNames-Alternativnamen (heute Kowary); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort schreiberhau {
+    name     = "Schreiberhau"
+    gelaende = mittelgebirge
+    lage     = { 15.5227 50.8257 }
+    flaeche  = 176
+    stadt    = nein
+    kreis    = kr_hirschberg_niederschlesien
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3083677; deutscher Name aus den GeoNames-Alternativnamen (heute Szklarska Poręba); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort stara_kamienica {
+    name     = "Stara Kamienica"
+    gelaende = mittelgebirge
+    lage     = { 15.5729 50.916 }
+    flaeche  = 171
+    stadt    = nein
+    kreis    = kr_hirschberg_niederschlesien
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3084954; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort brieg {
+    name     = "Brieg"
+    gelaende = flussaue
+    lage     = { 17.4674 50.8608 }
+    flaeche  = 346
+    stadt    = ja
+    kreis    = kr_brieg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3102459; deutscher Name aus den GeoNames-Alternativnamen (heute Brzeg); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort namslau {
+    name     = "Namslau"
+    gelaende = flachland
+    lage     = { 17.7228 51.0759 }
+    flaeche  = 260
+    stadt    = ja
+    kreis    = kr_brieg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3091141; deutscher Name aus den GeoNames-Alternativnamen (heute Namysłów); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort strehlen {
+    name     = "Strehlen"
+    gelaende = flachland
+    lage     = { 17.0648 50.7816 }
+    flaeche  = 232
+    stadt    = nein
+    kreis    = kr_brieg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3084404; deutscher Name aus den GeoNames-Alternativnamen (heute Strzelin); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort grottkau {
+    name     = "Grottkau"
+    gelaende = flachland
+    lage     = { 17.3845 50.6984 }
+    flaeche  = 218
+    stadt    = nein
+    kreis    = kr_brieg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3098333; deutscher Name aus den GeoNames-Alternativnamen (heute Grodków); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort loewen_niederschlesien {
+    name     = "Löwen (Niederschlesien)"
+    gelaende = flachland
+    lage     = { 17.6169 50.7487 }
+    flaeche  = 185
+    stadt    = nein
+    kreis    = kr_brieg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3093501; deutscher Name aus den GeoNames-Alternativnamen (dort mit Ortszusatz als Löwen Glatzer Neiße, heute Lewin Brzeski); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wansen {
+    name     = "Wansen"
+    gelaende = flachland
+    lage     = { 17.2021 50.814 }
+    flaeche  = 203
+    stadt    = nein
+    kreis    = kr_brieg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3082411; deutscher Name aus den GeoNames-Alternativnamen (heute Wiązów); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort carlsruhe {
+    name     = "Carlsruhe"
+    gelaende = flachland
+    lage     = { 17.8375 50.9027 }
+    flaeche  = 186
+    stadt    = nein
+    kreis    = kr_brieg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3088526; deutscher Name aus den GeoNames-Alternativnamen (heute Pokój); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort domaszowice {
+    name     = "Domaszowice"
+    gelaende = flachland
+    lage     = { 17.8888 51.0429 }
+    flaeche  = 168
+    stadt    = nein
+    kreis    = kr_brieg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3100193; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort prieborn {
+    name     = "Prieborn"
+    gelaende = huegelland
+    lage     = { 17.1659 50.6863 }
+    flaeche  = 202
+    stadt    = nein
+    kreis    = kr_brieg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3087920; deutscher Name aus den GeoNames-Alternativnamen (heute Przeworno); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort waldenburg_niederschlesien {
+    name     = "Waldenburg (Niederschlesien)"
+    gelaende = mittelgebirge
+    lage     = { 16.2843 50.7714 }
+    flaeche  = 182
+    stadt    = ja
+    kreis    = kr_waldenburg_niederschlesien
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3082707; deutscher Name aus den GeoNames-Alternativnamen (heute Wałbrzych); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort schweidnitz {
+    name     = "Schweidnitz"
+    gelaende = huegelland
+    lage     = { 16.4886 50.8438 }
+    flaeche  = 204
+    stadt    = ja
+    kreis    = kr_waldenburg_niederschlesien
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3084093; deutscher Name aus den GeoNames-Alternativnamen (heute Świdnica); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort freiburg_niederschlesien {
+    name     = "Freiburg (Niederschlesien)"
+    gelaende = huegelland
+    lage     = { 16.3197 50.8597 }
+    flaeche  = 149
+    stadt    = ja
+    kreis    = kr_waldenburg_niederschlesien
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3084084; deutscher Name aus den GeoNames-Alternativnamen (heute Świebodzice); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort landeshut {
+    name     = "Landeshut"
+    gelaende = mittelgebirge
+    lage     = { 16.0304 50.7831 }
+    flaeche  = 199
+    stadt    = ja
+    kreis    = kr_waldenburg_niederschlesien
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3096779; deutscher Name aus den GeoNames-Alternativnamen (heute Kamienna Góra); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wuestegiersdorf {
+    name     = "Wüstegiersdorf"
+    gelaende = mittelgebirge
+    lage     = { 16.3717 50.6874 }
+    flaeche  = 197
+    stadt    = nein
+    kreis    = kr_waldenburg_niederschlesien
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3099146; deutscher Name aus den GeoNames-Alternativnamen (heute Głuszyca); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort liebau {
+    name     = "Liebau"
+    gelaende = mittelgebirge
+    lage     = { 16.0003 50.7046 }
+    flaeche  = 127
+    stadt    = nein
+    kreis    = kr_waldenburg_niederschlesien
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3093027; deutscher Name aus den GeoNames-Alternativnamen (heute Lubawka); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort friedland_niederschlesien {
+    name     = "Friedland (Niederschlesien)"
+    gelaende = mittelgebirge
+    lage     = { 16.1888 50.6659 }
+    flaeche  = 144
+    stadt    = nein
+    kreis    = kr_waldenburg_niederschlesien
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3091901; deutscher Name aus den GeoNames-Alternativnamen (heute Mieroszów); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort reichenbach_niederschlesien {
+    name     = "Reichenbach (Niederschlesien)"
+    gelaende = huegelland
+    lage     = { 16.6514 50.7282 }
+    flaeche  = 213
+    stadt    = ja
+    kreis    = kr_reichenbach_niederschlesien
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3099828; deutscher Name aus den GeoNames-Alternativnamen (heute Dzierżoniów); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort frankenstein {
+    name     = "Frankenstein"
+    gelaende = huegelland
+    lage     = { 16.8124 50.5897 }
+    flaeche  = 182
+    stadt    = nein
+    kreis    = kr_reichenbach_niederschlesien
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3081046; deutscher Name aus den GeoNames-Alternativnamen (heute Ząbkowice Śląskie); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort muensterberg {
+    name     = "Münsterberg"
+    gelaende = huegelland
+    lage     = { 17.0406 50.6012 }
+    flaeche  = 164
+    stadt    = nein
+    kreis    = kr_reichenbach_niederschlesien
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3080226; deutscher Name aus den GeoNames-Alternativnamen (heute Ziębice); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gnadenfrei {
+    name     = "Gnadenfrei"
+    gelaende = huegelland
+    lage     = { 16.7436 50.6836 }
+    flaeche  = 126
+    stadt    = nein
+    kreis    = kr_reichenbach_niederschlesien
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3089025; deutscher Name aus den GeoNames-Alternativnamen (heute Piława Górna); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort zobten {
+    name     = "Zobten"
+    gelaende = huegelland
+    lage     = { 16.7444 50.8999 }
+    flaeche  = 284
+    stadt    = nein
+    kreis    = kr_reichenbach_niederschlesien
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3085252; deutscher Name aus den GeoNames-Alternativnamen (heute Sobótka); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort reichenstein {
+    name     = "Reichenstein"
+    gelaende = mittelgebirge
+    lage     = { 16.8759 50.4447 }
+    flaeche  = 130
+    stadt    = nein
+    kreis    = kr_reichenbach_niederschlesien
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3080061; deutscher Name aus den GeoNames-Alternativnamen (heute Złoty Stok); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wartha {
+    name     = "Wartha"
+    gelaende = mittelgebirge
+    lage     = { 16.7399 50.5059 }
+    flaeche  = 149
+    stadt    = nein
+    kreis    = kr_reichenbach_niederschlesien
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3103847; deutscher Name aus den GeoNames-Alternativnamen (heute Bardo); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort heidersdorf {
+    name     = "Heidersdorf"
+    gelaende = flachland
+    lage     = { 16.8446 50.7909 }
+    flaeche  = 232
+    stadt    = nein
+    kreis    = kr_reichenbach_niederschlesien
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3094003; deutscher Name aus den GeoNames-Alternativnamen (heute Łagiewniki); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort tepliwoda {
+    name     = "Tepliwoda"
+    gelaende = huegelland
+    lage     = { 16.9087 50.6748 }
+    flaeche  = 141
+    stadt    = nein
+    kreis    = kr_reichenbach_niederschlesien
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3101365; deutscher Name aus den GeoNames-Alternativnamen (heute Ciepłowody); Gelände aus Höhenmodell; Fläche aus der Karte"
+}

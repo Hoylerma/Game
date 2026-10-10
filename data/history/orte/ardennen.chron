@@ -1,0 +1,100 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
+# Orte: Ardennen – Orte ohne Daten (Meilenstein M3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
+# Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
+# ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
+# und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
+#
+# Umfang: Französische Ardennen mit Charleville, Sedan und Givet.
+
+ort charleville_mezieres {
+    name     = "Charleville-Mézières"
+    gelaende = huegelland
+    lage     = { 4.7249 49.7685 }
+    flaeche  = 266
+    stadt    = ja
+    kreis    = kr_charleville_mezieres
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3026613; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort sedan {
+    name     = "Sedan"
+    gelaende = huegelland
+    lage     = { 4.9403 49.7019 }
+    flaeche  = 265
+    stadt    = ja
+    kreis    = kr_charleville_mezieres
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2975349; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort givet {
+    name     = "Givet"
+    gelaende = huegelland
+    lage     = { 4.8255 50.138 }
+    flaeche  = 279
+    stadt    = nein
+    kreis    = kr_charleville_mezieres
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3015904; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort revin {
+    name     = "Revin"
+    gelaende = huegelland
+    lage     = { 4.635 49.9404 }
+    flaeche  = 284
+    stadt    = nein
+    kreis    = kr_charleville_mezieres
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2983806; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort carignan {
+    name     = "Carignan"
+    gelaende = huegelland
+    lage     = { 5.168 49.6316 }
+    flaeche  = 175
+    stadt    = nein
+    kreis    = kr_charleville_mezieres
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3028600; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort mouzon {
+    name     = "Mouzon"
+    gelaende = huegelland
+    lage     = { 5.0757 49.6071 }
+    flaeche  = 185
+    stadt    = nein
+    kreis    = kr_charleville_mezieres
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2991283; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort les_hautes_rivieres {
+    name     = "Les Hautes-Rivières"
+    gelaende = huegelland
+    lage     = { 4.8419 49.886 }
+    flaeche  = 247
+    stadt    = nein
+    kreis    = kr_charleville_mezieres
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3000674; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort renwez {
+    name     = "Renwez"
+    gelaende = huegelland
+    lage     = { 4.6033 49.8384 }
+    flaeche  = 285
+    stadt    = nein
+    kreis    = kr_charleville_mezieres
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2983957; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort signy_le_petit {
+    name     = "Signy-le-Petit"
+    gelaende = huegelland
+    lage     = { 4.2799 49.9028 }
+    flaeche  = 309
+    stadt    = nein
+    kreis    = kr_charleville_mezieres
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2974579; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}

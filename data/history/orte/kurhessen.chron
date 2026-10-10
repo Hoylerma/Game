@@ -1,0 +1,550 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
+# Orte: Kurhessen – Orte ohne Daten (Meilenstein M3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
+# Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
+# ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
+# und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
+#
+# Umfang: Niederhessen mit Fulda, Hersfeld und Waldeck (heute Regierungsbezirk Kassel).
+
+ort bad_arolsen {
+    name     = "Bad Arolsen"
+    gelaende = huegelland
+    lage     = { 9.0145 51.3798 }
+    flaeche  = 199
+    stadt    = nein
+    kreis    = kr_bad_arolsen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2955421; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hofgeismar {
+    name     = "Hofgeismar"
+    gelaende = huegelland
+    lage     = { 9.385 51.4961 }
+    flaeche  = 138
+    stadt    = nein
+    kreis    = kr_bad_arolsen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2902559; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wolfhagen {
+    name     = "Wolfhagen"
+    gelaende = huegelland
+    lage     = { 9.1701 51.3261 }
+    flaeche  = 114
+    stadt    = nein
+    kreis    = kr_bad_arolsen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2806799; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort calden {
+    name     = "Calden"
+    gelaende = huegelland
+    lage     = { 9.4019 51.4094 }
+    flaeche  = 152
+    stadt    = nein
+    kreis    = kr_bad_arolsen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2940412; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort zierenberg {
+    name     = "Zierenberg"
+    gelaende = huegelland
+    lage     = { 9.3016 51.3695 }
+    flaeche  = 127
+    stadt    = nein
+    kreis    = kr_bad_arolsen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2804297; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort trendelburg {
+    name     = "Trendelburg"
+    gelaende = huegelland
+    lage     = { 9.4209 51.5741 }
+    flaeche  = 173
+    stadt    = nein
+    kreis    = kr_bad_arolsen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2821336; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort niedenstein {
+    name     = "Niedenstein"
+    gelaende = huegelland
+    lage     = { 9.3103 51.2334 }
+    flaeche  = 143
+    stadt    = nein
+    kreis    = kr_bad_arolsen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2863685; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort naumburg_kurhessen {
+    name     = "Naumburg (Kurhessen)"
+    gelaende = huegelland
+    lage     = { 9.1657 51.2482 }
+    flaeche  = 101
+    stadt    = nein
+    kreis    = kr_bad_arolsen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2866905; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort breuna {
+    name     = "Breuna"
+    gelaende = huegelland
+    lage     = { 9.185 51.4158 }
+    flaeche  = 110
+    stadt    = nein
+    kreis    = kr_bad_arolsen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2944169; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kassel {
+    name     = "Kassel"
+    gelaende = huegelland
+    lage     = { 9.5 51.3167 }
+    flaeche  = 160
+    stadt    = ja
+    kreis    = kr_kassel
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2892518; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort eschwege {
+    name     = "Eschwege"
+    gelaende = huegelland
+    lage     = { 10.0533 51.1839 }
+    flaeche  = 151
+    stadt    = ja
+    kreis    = kr_kassel
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2928967; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort witzenhausen {
+    name     = "Witzenhausen"
+    gelaende = huegelland
+    lage     = { 9.8554 51.341 }
+    flaeche  = 154
+    stadt    = nein
+    kreis    = kr_kassel
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2807184; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hessisch_lichtenau {
+    name     = "Hessisch Lichtenau"
+    gelaende = huegelland
+    lage     = { 9.7186 51.1995 }
+    flaeche  = 148
+    stadt    = nein
+    kreis    = kr_kassel
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2905293; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kaufungen {
+    name     = "Kaufungen"
+    gelaende = mittelgebirge
+    lage     = { 9.6186 51.2811 }
+    flaeche  = 129
+    stadt    = nein
+    kreis    = kr_kassel
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3336895; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bad_sooden_allendorf {
+    name     = "Bad Sooden-Allendorf"
+    gelaende = huegelland
+    lage     = { 9.9748 51.2709 }
+    flaeche  = 167
+    stadt    = nein
+    kreis    = kr_kassel
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2953336; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort grossalmerode {
+    name     = "Großalmerode"
+    gelaende = huegelland
+    lage     = { 9.7845 51.2586 }
+    flaeche  = 121
+    stadt    = nein
+    kreis    = kr_kassel
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2917053; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort korbach {
+    name     = "Korbach"
+    gelaende = huegelland
+    lage     = { 8.873 51.2756 }
+    flaeche  = 193
+    stadt    = ja
+    kreis    = kr_korbach
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2885536; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort voehl {
+    name     = "Vöhl"
+    gelaende = huegelland
+    lage     = { 8.9451 51.2056 }
+    flaeche  = 160
+    stadt    = nein
+    kreis    = kr_korbach
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2816769; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort waldeck {
+    name     = "Waldeck"
+    gelaende = huegelland
+    lage     = { 9.0629 51.2062 }
+    flaeche  = 108
+    stadt    = nein
+    kreis    = kr_korbach
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2815101; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort willingen {
+    name     = "Willingen"
+    gelaende = mittelgebirge
+    lage     = { 8.6091 51.2942 }
+    flaeche  = 203
+    stadt    = nein
+    kreis    = kr_korbach
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2808544; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bad_wildungen {
+    name     = "Bad Wildungen"
+    gelaende = huegelland
+    lage     = { 9.1248 51.1196 }
+    flaeche  = 158
+    stadt    = nein
+    kreis    = kr_bad_wildungen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2953317; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort homberg_kurhessen {
+    name     = "Homberg (Kurhessen)"
+    gelaende = huegelland
+    lage     = { 9.4026 51.0299 }
+    flaeche  = 201
+    stadt    = ja
+    kreis    = kr_bad_wildungen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2899478; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort fritzlar {
+    name     = "Fritzlar"
+    gelaende = huegelland
+    lage     = { 9.2756 51.1318 }
+    flaeche  = 115
+    stadt    = nein
+    kreis    = kr_bad_wildungen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2924326; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort melsungen {
+    name     = "Melsungen"
+    gelaende = huegelland
+    lage     = { 9.5524 51.1303 }
+    flaeche  = 167
+    stadt    = nein
+    kreis    = kr_bad_wildungen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2872028; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort borken_kurhessen {
+    name     = "Borken (Kurhessen)"
+    gelaende = huegelland
+    lage     = { 9.2844 51.045 }
+    flaeche  = 112
+    stadt    = nein
+    kreis    = kr_bad_wildungen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2946230; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort felsberg {
+    name     = "Felsberg"
+    gelaende = huegelland
+    lage     = { 9.4214 51.1376 }
+    flaeche  = 99
+    stadt    = nein
+    kreis    = kr_bad_wildungen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2927226; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort frielendorf {
+    name     = "Frielendorf"
+    gelaende = huegelland
+    lage     = { 9.3227 50.9707 }
+    flaeche  = 147
+    stadt    = nein
+    kreis    = kr_bad_wildungen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2924428; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort guxhagen {
+    name     = "Guxhagen"
+    gelaende = huegelland
+    lage     = { 9.4833 51.2 }
+    flaeche  = 121
+    stadt    = nein
+    kreis    = kr_bad_wildungen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2913286; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort frankenberg_kurhessen {
+    name     = "Frankenberg (Kurhessen)"
+    gelaende = huegelland
+    lage     = { 8.8008 51.0589 }
+    flaeche  = 166
+    stadt    = nein
+    kreis    = kr_frankenberg_kurhessen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2925629; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort allendorf {
+    name     = "Allendorf"
+    gelaende = huegelland
+    lage     = { 8.6723 51.0299 }
+    flaeche  = 119
+    stadt    = nein
+    kreis    = kr_frankenberg_kurhessen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2958438; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gilserberg {
+    name     = "Gilserberg"
+    gelaende = huegelland
+    lage     = { 9.0667 50.95 }
+    flaeche  = 180
+    stadt    = nein
+    kreis    = kr_frankenberg_kurhessen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2920389; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hatzfeld {
+    name     = "Hatzfeld"
+    gelaende = mittelgebirge
+    lage     = { 8.5457 50.9933 }
+    flaeche  = 129
+    stadt    = nein
+    kreis    = kr_frankenberg_kurhessen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2909194; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort haina_kurhessen {
+    name     = "Haina (Kurhessen)"
+    gelaende = huegelland
+    lage     = { 8.9744 51.0277 }
+    flaeche  = 171
+    stadt    = nein
+    kreis    = kr_frankenberg_kurhessen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2911909; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort rosenthal {
+    name     = "Rosenthal"
+    gelaende = huegelland
+    lage     = { 8.8674 50.9744 }
+    flaeche  = 116
+    stadt    = nein
+    kreis    = kr_frankenberg_kurhessen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2844924; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort rotenburg_an_der_fulda {
+    name     = "Rotenburg an der Fulda"
+    gelaende = huegelland
+    lage     = { 9.7284 50.9956 }
+    flaeche  = 300
+    stadt    = nein
+    kreis    = kr_rotenburg_an_der_fulda
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2844434; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort sontra {
+    name     = "Sontra"
+    gelaende = huegelland
+    lage     = { 9.9356 51.0717 }
+    flaeche  = 191
+    stadt    = nein
+    kreis    = kr_rotenburg_an_der_fulda
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2831083; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort heringen {
+    name     = "Heringen"
+    gelaende = huegelland
+    lage     = { 10.0072 50.888 }
+    flaeche  = 142
+    stadt    = nein
+    kreis    = kr_rotenburg_an_der_fulda
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2906088; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort waldkappel {
+    name     = "Waldkappel"
+    gelaende = huegelland
+    lage     = { 9.877 51.1446 }
+    flaeche  = 169
+    stadt    = nein
+    kreis    = kr_rotenburg_an_der_fulda
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2814888; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort herleshausen {
+    name     = "Herleshausen"
+    gelaende = huegelland
+    lage     = { 10.1673 51.0063 }
+    flaeche  = 102
+    stadt    = nein
+    kreis    = kr_rotenburg_an_der_fulda
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2906050; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort friedewald {
+    name     = "Friedewald"
+    gelaende = huegelland
+    lage     = { 9.8667 50.8833 }
+    flaeche  = 139
+    stadt    = nein
+    kreis    = kr_rotenburg_an_der_fulda
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2924703; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bad_hersfeld {
+    name     = "Bad Hersfeld"
+    gelaende = huegelland
+    lage     = { 9.7089 50.872 }
+    flaeche  = 171
+    stadt    = ja
+    kreis    = kr_bad_hersfeld
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2953439; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort huenfeld {
+    name     = "Hünfeld"
+    gelaende = huegelland
+    lage     = { 9.7673 50.6797 }
+    flaeche  = 160
+    stadt    = nein
+    kreis    = kr_bad_hersfeld
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2897436; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort willingshausen {
+    name     = "Willingshausen"
+    gelaende = huegelland
+    lage     = { 9.2 50.85 }
+    flaeche  = 166
+    stadt    = nein
+    kreis    = kr_bad_hersfeld
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2808533; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort niederaula {
+    name     = "Niederaula"
+    gelaende = huegelland
+    lage     = { 9.6 50.8 }
+    flaeche  = 133
+    stadt    = nein
+    kreis    = kr_bad_hersfeld
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2863638; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort eiterfeld {
+    name     = "Eiterfeld"
+    gelaende = huegelland
+    lage     = { 9.8 50.7667 }
+    flaeche  = 128
+    stadt    = nein
+    kreis    = kr_bad_hersfeld
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2931372; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort neukirchen_kurhessen {
+    name     = "Neukirchen (Kurhessen)"
+    gelaende = huegelland
+    lage     = { 9.3466 50.8691 }
+    flaeche  = 130
+    stadt    = nein
+    kreis    = kr_bad_hersfeld
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2864748; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort oberaula {
+    name     = "Oberaula"
+    gelaende = huegelland
+    lage     = { 9.4667 50.85 }
+    flaeche  = 185
+    stadt    = nein
+    kreis    = kr_bad_hersfeld
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2861358; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort fulda {
+    name     = "Fulda"
+    gelaende = huegelland
+    lage     = { 9.6752 50.5516 }
+    flaeche  = 187
+    stadt    = ja
+    kreis    = kr_fulda
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2923822; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort grossenlueder {
+    name     = "Großenlüder"
+    gelaende = huegelland
+    lage     = { 9.5423 50.5925 }
+    flaeche  = 122
+    stadt    = nein
+    kreis    = kr_fulda
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2916606; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort flieden {
+    name     = "Flieden"
+    gelaende = huegelland
+    lage     = { 9.5666 50.4239 }
+    flaeche  = 128
+    stadt    = nein
+    kreis    = kr_fulda
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2926226; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hofbieber {
+    name     = "Hofbieber"
+    gelaende = huegelland
+    lage     = { 9.8353 50.5863 }
+    flaeche  = 178
+    stadt    = nein
+    kreis    = kr_fulda
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2902731; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gersfeld {
+    name     = "Gersfeld"
+    gelaende = mittelgebirge
+    lage     = { 9.9142 50.4514 }
+    flaeche  = 152
+    stadt    = nein
+    kreis    = kr_fulda
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2920926; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hilders {
+    name     = "Hilders"
+    gelaende = mittelgebirge
+    lage     = { 10.003 50.5719 }
+    flaeche  = 179
+    stadt    = nein
+    kreis    = kr_fulda
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2904791; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hosenfeld {
+    name     = "Hosenfeld"
+    gelaende = huegelland
+    lage     = { 9.4797 50.505 }
+    flaeche  = 118
+    stadt    = nein
+    kreis    = kr_fulda
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2898483; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}

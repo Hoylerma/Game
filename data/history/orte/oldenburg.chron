@@ -1,0 +1,350 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
+# Orte: Oldenburg – Orte ohne Daten (Meilenstein M3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
+# Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
+# ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
+# und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
+#
+# Umfang: Oldenburger Land mit Jeverland und Oldenburger Münsterland (Cloppenburg und Vechta gehörten 1648 zum Hochstift Münster).
+
+ort wilhelmshaven {
+    name     = "Wilhelmshaven"
+    gelaende = kueste
+    lage     = { 8.1125 53.53 }
+    flaeche  = 119
+    stadt    = ja
+    kreis    = kr_wilhelmshaven
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2808720; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort jever {
+    name     = "Jever"
+    gelaende = flachland
+    lage     = { 7.8981 53.5737 }
+    flaeche  = 201
+    stadt    = ja
+    kreis    = kr_wilhelmshaven
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2894897; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort nordenham {
+    name     = "Nordenham"
+    gelaende = kueste
+    lage     = { 8.4809 53.4861 }
+    flaeche  = 149
+    stadt    = ja
+    kreis    = kr_wilhelmshaven
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2862104; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort varel {
+    name     = "Varel"
+    gelaende = kueste
+    lage     = { 8.1362 53.3969 }
+    flaeche  = 203
+    stadt    = ja
+    kreis    = kr_wilhelmshaven
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2817873; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort zetel {
+    name     = "Zetel"
+    gelaende = flachland
+    lage     = { 7.9833 53.4167 }
+    flaeche  = 232
+    stadt    = nein
+    kreis    = kr_wilhelmshaven
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2804697; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort butjadingen {
+    name     = "Butjadingen"
+    gelaende = kueste
+    lage     = { 8.335 53.5472 }
+    flaeche  = 119
+    stadt    = nein
+    kreis    = kr_wilhelmshaven
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3336894; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort schillig {
+    name     = "Schillig"
+    gelaende = kueste
+    lage     = { 8.0217 53.7038 }
+    flaeche  = 77
+    stadt    = nein
+    kreis    = kr_wilhelmshaven
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2839229; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wangerooge {
+    name     = "Wangerooge"
+    gelaende = kueste
+    lage     = { 7.8994 53.79 }
+    flaeche  = 6
+    stadt    = nein
+    kreis    = kr_wilhelmshaven
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2814266; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort oldenburg {
+    name     = "Oldenburg"
+    gelaende = flachland
+    lage     = { 8.2147 53.1412 }
+    flaeche  = 168
+    stadt    = ja
+    kreis    = kr_oldenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2857458; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort westerstede {
+    name     = "Westerstede"
+    gelaende = flachland
+    lage     = { 7.9274 53.2568 }
+    flaeche  = 269
+    stadt    = ja
+    kreis    = kr_oldenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2810188; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bad_zwischenahn {
+    name     = "Bad Zwischenahn"
+    gelaende = flachland
+    lage     = { 8 53.1833 }
+    flaeche  = 192
+    stadt    = ja
+    kreis    = kr_oldenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2953310; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort rastede {
+    name     = "Rastede"
+    gelaende = flachland
+    lage     = { 8.2 53.25 }
+    flaeche  = 224
+    stadt    = ja
+    kreis    = kr_oldenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2850253; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort barssel {
+    name     = "Barßel"
+    gelaende = flachland
+    lage     = { 7.7501 53.1698 }
+    flaeche  = 243
+    stadt    = nein
+    kreis    = kr_oldenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2952398; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wardenburg {
+    name     = "Wardenburg"
+    gelaende = flachland
+    lage     = { 8.2 53.0667 }
+    flaeche  = 183
+    stadt    = nein
+    kreis    = kr_oldenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2814146; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort delmenhorst {
+    name     = "Delmenhorst"
+    gelaende = flachland
+    lage     = { 8.6309 53.0511 }
+    flaeche  = 164
+    stadt    = ja
+    kreis    = kr_delmenhorst
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2938323; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort brake_unterweser {
+    name     = "Brake (Unterweser)"
+    gelaende = kueste
+    lage     = { 8.4833 53.3333 }
+    flaeche  = 233
+    stadt    = ja
+    kreis    = kr_delmenhorst
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2945545; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hude {
+    name     = "Hude"
+    gelaende = flachland
+    lage     = { 8.4632 53.1077 }
+    flaeche  = 150
+    stadt    = nein
+    kreis    = kr_delmenhorst
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2898079; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort elsfleth {
+    name     = "Elsfleth"
+    gelaende = flussaue
+    lage     = { 8.4566 53.2375 }
+    flaeche  = 182
+    stadt    = nein
+    kreis    = kr_delmenhorst
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2930726; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lemwerder {
+    name     = "Lemwerder"
+    gelaende = flussaue
+    lage     = { 8.6167 53.1667 }
+    flaeche  = 143
+    stadt    = nein
+    kreis    = kr_delmenhorst
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2878912; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hatten {
+    name     = "Hatten"
+    gelaende = flachland
+    lage     = { 8.3833 53.05 }
+    flaeche  = 152
+    stadt    = nein
+    kreis    = kr_delmenhorst
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2909268; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort cloppenburg {
+    name     = "Cloppenburg"
+    gelaende = flachland
+    lage     = { 8.045 52.8475 }
+    flaeche  = 239
+    stadt    = ja
+    kreis    = kr_cloppenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2939969; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort friesoythe {
+    name     = "Friesoythe"
+    gelaende = flachland
+    lage     = { 7.8576 53.0226 }
+    flaeche  = 255
+    stadt    = ja
+    kreis    = kr_cloppenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2924360; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort loeningen {
+    name     = "Löningen"
+    gelaende = flachland
+    lage     = { 7.7581 52.7368 }
+    flaeche  = 197
+    stadt    = nein
+    kreis    = kr_cloppenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2875987; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort garrel {
+    name     = "Garrel"
+    gelaende = flachland
+    lage     = { 8.0167 52.95 }
+    flaeche  = 196
+    stadt    = nein
+    kreis    = kr_cloppenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2922511; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort molbergen {
+    name     = "Molbergen"
+    gelaende = flachland
+    lage     = { 7.9255 52.858 }
+    flaeche  = 196
+    stadt    = nein
+    kreis    = kr_cloppenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2870094; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort vechta {
+    name     = "Vechta"
+    gelaende = flachland
+    lage     = { 8.286 52.7263 }
+    flaeche  = 162
+    stadt    = ja
+    kreis    = kr_vechta
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2817812; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wildeshausen {
+    name     = "Wildeshausen"
+    gelaende = flachland
+    lage     = { 8.4337 52.8945 }
+    flaeche  = 149
+    stadt    = ja
+    kreis    = kr_vechta
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2808893; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lohne {
+    name     = "Lohne"
+    gelaende = flachland
+    lage     = { 8.2375 52.6662 }
+    flaeche  = 140
+    stadt    = ja
+    kreis    = kr_vechta
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2876185; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort grossenkneten {
+    name     = "Großenkneten"
+    gelaende = flachland
+    lage     = { 8.2532 52.9438 }
+    flaeche  = 176
+    stadt    = nein
+    kreis    = kr_vechta
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2916611; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort damme {
+    name     = "Damme"
+    gelaende = flachland
+    lage     = { 8.1979 52.5216 }
+    flaeche  = 188
+    stadt    = nein
+    kreis    = kr_vechta
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2939167; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort goldenstedt {
+    name     = "Goldenstedt"
+    gelaende = flachland
+    lage     = { 8.432 52.7883 }
+    flaeche  = 105
+    stadt    = nein
+    kreis    = kr_vechta
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2919310; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort visbek {
+    name     = "Visbek"
+    gelaende = flachland
+    lage     = { 8.3167 52.8333 }
+    flaeche  = 140
+    stadt    = nein
+    kreis    = kr_vechta
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2817139; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort holdorf {
+    name     = "Holdorf"
+    gelaende = flachland
+    lage     = { 8.1167 52.5833 }
+    flaeche  = 130
+    stadt    = nein
+    kreis    = kr_vechta
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2900740; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort harpstedt {
+    name     = "Harpstedt"
+    gelaende = flachland
+    lage     = { 8.5896 52.9094 }
+    flaeche  = 145
+    stadt    = nein
+    kreis    = kr_vechta
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2910344; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}

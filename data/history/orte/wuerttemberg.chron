@@ -1,0 +1,1080 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
+# Orte: Württemberg – Orte ohne Daten (Meilenstein M3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
+# Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
+# ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
+# und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
+#
+# Umfang: Herzogtum Württemberg mit Hohenlohe und Hohenzollern-Hechingen (heute Regierungsbezirk Stuttgart ohne Main-Tauber-Kreis, Tübingen, Reutlingen, Zollernalbkreis, Rottweil, Tuttlingen, Calw und Freudenstadt).
+
+ort oehringen {
+    name     = "Öhringen"
+    gelaende = huegelland
+    lage     = { 9.5072 49.1988 }
+    flaeche  = 165
+    stadt    = ja
+    kreis    = kr_oehringen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2857565; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kuenzelsau {
+    name     = "Künzelsau"
+    gelaende = huegelland
+    lage     = { 9.6835 49.2818 }
+    flaeche  = 107
+    stadt    = ja
+    kreis    = kr_oehringen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2882439; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort neuenstadt_am_kocher {
+    name     = "Neuenstadt am Kocher"
+    gelaende = huegelland
+    lage     = { 9.3322 49.235 }
+    flaeche  = 163
+    stadt    = nein
+    kreis    = kr_oehringen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2865560; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort moeckmuehl {
+    name     = "Möckmühl"
+    gelaende = huegelland
+    lage     = { 9.3584 49.3249 }
+    flaeche  = 170
+    stadt    = nein
+    kreis    = kr_oehringen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2870269; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort forchtenberg {
+    name     = "Forchtenberg"
+    gelaende = huegelland
+    lage     = { 9.5603 49.2887 }
+    flaeche  = 146
+    stadt    = nein
+    kreis    = kr_oehringen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2925905; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort mulfingen {
+    name     = "Mulfingen"
+    gelaende = huegelland
+    lage     = { 9.8008 49.3403 }
+    flaeche  = 138
+    stadt    = nein
+    kreis    = kr_oehringen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2867847; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort krautheim {
+    name     = "Krautheim"
+    gelaende = huegelland
+    lage     = { 9.6355 49.3879 }
+    flaeche  = 160
+    stadt    = nein
+    kreis    = kr_oehringen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2884625; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort waldenburg_wuerttemberg {
+    name     = "Waldenburg (Württemberg)"
+    gelaende = huegelland
+    lage     = { 9.6399 49.1847 }
+    flaeche  = 120
+    stadt    = nein
+    kreis    = kr_oehringen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2815075; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort heilbronn {
+    name     = "Heilbronn"
+    gelaende = huegelland
+    lage     = { 9.2205 49.1399 }
+    flaeche  = 160
+    stadt    = ja
+    kreis    = kr_heilbronn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2907669; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort eppingen {
+    name     = "Eppingen"
+    gelaende = huegelland
+    lage     = { 8.9123 49.1365 }
+    flaeche  = 104
+    stadt    = ja
+    kreis    = kr_heilbronn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2929831; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bad_rappenau {
+    name     = "Bad Rappenau"
+    gelaende = huegelland
+    lage     = { 9.1018 49.2385 }
+    flaeche  = 156
+    stadt    = ja
+    kreis    = kr_heilbronn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2953374; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort brackenheim {
+    name     = "Brackenheim"
+    gelaende = huegelland
+    lage     = { 9.066 49.0779 }
+    flaeche  = 173
+    stadt    = nein
+    kreis    = kr_heilbronn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2945591; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ilsfeld {
+    name     = "Ilsfeld"
+    gelaende = huegelland
+    lage     = { 9.246 49.0555 }
+    flaeche  = 120
+    stadt    = nein
+    kreis    = kr_heilbronn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2896477; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kirchardt {
+    name     = "Kirchardt"
+    gelaende = huegelland
+    lage     = { 8.9917 49.205 }
+    flaeche  = 119
+    stadt    = nein
+    kreis    = kr_heilbronn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2890769; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort zaberfeld {
+    name     = "Zaberfeld"
+    gelaende = huegelland
+    lage     = { 8.9269 49.0561 }
+    flaeche  = 126
+    stadt    = nein
+    kreis    = kr_heilbronn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2805361; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort schwaebisch_hall {
+    name     = "Schwäbisch Hall"
+    gelaende = huegelland
+    lage     = { 9.7391 49.1113 }
+    flaeche  = 165
+    stadt    = ja
+    kreis    = kr_schwaebisch_hall
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2835481; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort crailsheim {
+    name     = "Crailsheim"
+    gelaende = huegelland
+    lage     = { 10.0719 49.1344 }
+    flaeche  = 170
+    stadt    = ja
+    kreis    = kr_schwaebisch_hall
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2939797; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gaildorf {
+    name     = "Gaildorf"
+    gelaende = huegelland
+    lage     = { 9.7695 49.0003 }
+    flaeche  = 143
+    stadt    = nein
+    kreis    = kr_schwaebisch_hall
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2923325; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ilshofen {
+    name     = "Ilshofen"
+    gelaende = huegelland
+    lage     = { 9.9183 49.1701 }
+    flaeche  = 124
+    stadt    = nein
+    kreis    = kr_schwaebisch_hall
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2896476; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort rot_am_see {
+    name     = "Rot am See"
+    gelaende = huegelland
+    lage     = { 10.0167 49.25 }
+    flaeche  = 166
+    stadt    = nein
+    kreis    = kr_schwaebisch_hall
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2844567; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort schrozberg {
+    name     = "Schrozberg"
+    gelaende = huegelland
+    lage     = { 9.9794 49.3453 }
+    flaeche  = 133
+    stadt    = nein
+    kreis    = kr_schwaebisch_hall
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2836040; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort obersontheim {
+    name     = "Obersontheim"
+    gelaende = huegelland
+    lage     = { 9.8992 49.0567 }
+    flaeche  = 136
+    stadt    = nein
+    kreis    = kr_schwaebisch_hall
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2858999; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort braunsbach {
+    name     = "Braunsbach"
+    gelaende = huegelland
+    lage     = { 9.7906 49.1992 }
+    flaeche  = 138
+    stadt    = nein
+    kreis    = kr_schwaebisch_hall
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2945043; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gerabronn {
+    name     = "Gerabronn"
+    gelaende = huegelland
+    lage     = { 9.9199 48.9707 }
+    flaeche  = 129
+    stadt    = nein
+    kreis    = kr_schwaebisch_hall
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2921226; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort rosenberg_wuerttemberg {
+    name     = "Rosenberg (Württemberg)"
+    gelaende = huegelland
+    lage     = { 10.0296 49.0189 }
+    flaeche  = 120
+    stadt    = nein
+    kreis    = kr_schwaebisch_hall
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2845056; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ludwigsburg {
+    name     = "Ludwigsburg"
+    gelaende = huegelland
+    lage     = { 9.1916 48.8973 }
+    flaeche  = 89
+    stadt    = ja
+    kreis    = kr_ludwigsburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2875392; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort leonberg {
+    name     = "Leonberg"
+    gelaende = huegelland
+    lage     = { 9.0167 48.8 }
+    flaeche  = 111
+    stadt    = ja
+    kreis    = kr_ludwigsburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2878695; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bietigheim_bissingen {
+    name     = "Bietigheim-Bissingen"
+    gelaende = huegelland
+    lage     = { 9.1175 48.9441 }
+    flaeche  = 121
+    stadt    = ja
+    kreis    = kr_ludwigsburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2949012; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort vaihingen_an_der_enz {
+    name     = "Vaihingen an der Enz"
+    gelaende = huegelland
+    lage     = { 8.9604 48.9356 }
+    flaeche  = 120
+    stadt    = ja
+    kreis    = kr_ludwigsburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2817927; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort schwieberdingen {
+    name     = "Schwieberdingen"
+    gelaende = huegelland
+    lage     = { 9.0744 48.8764 }
+    flaeche  = 81
+    stadt    = nein
+    kreis    = kr_ludwigsburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2834226; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort steinheim_an_der_murr {
+    name     = "Steinheim an der Murr"
+    gelaende = huegelland
+    lage     = { 9.2771 48.9682 }
+    flaeche  = 147
+    stadt    = nein
+    kreis    = kr_ludwigsburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2827988; Name Steinheim an der Murr aus den GeoNames-Alternativnamen (GeoNames: Steinheim am der Murr); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort weissach {
+    name     = "Weissach"
+    gelaende = huegelland
+    lage     = { 8.9283 48.8469 }
+    flaeche  = 87
+    stadt    = nein
+    kreis    = kr_ludwigsburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2812053; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort aalen {
+    name     = "Aalen"
+    gelaende = mittelgebirge
+    lage     = { 10.0933 48.8378 }
+    flaeche  = 185
+    stadt    = ja
+    kreis    = kr_aalen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2959927; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ellwangen {
+    name     = "Ellwangen"
+    gelaende = huegelland
+    lage     = { 10.1317 48.9616 }
+    flaeche  = 180
+    stadt    = ja
+    kreis    = kr_aalen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2930889; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bopfingen {
+    name     = "Bopfingen"
+    gelaende = mittelgebirge
+    lage     = { 10.3542 48.8585 }
+    flaeche  = 152
+    stadt    = nein
+    kreis    = kr_aalen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2946368; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort abtsgmuend {
+    name     = "Abtsgmünd"
+    gelaende = huegelland
+    lage     = { 10.0017 48.895 }
+    flaeche  = 107
+    stadt    = nein
+    kreis    = kr_aalen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2959766; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort neresheim {
+    name     = "Neresheim"
+    gelaende = huegelland
+    lage     = { 10.3304 48.7551 }
+    flaeche  = 209
+    stadt    = nein
+    kreis    = kr_aalen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2866486; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort unterschneidheim {
+    name     = "Unterschneidheim"
+    gelaende = huegelland
+    lage     = { 10.3667 48.9333 }
+    flaeche  = 90
+    stadt    = nein
+    kreis    = kr_aalen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2818754; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort stoedtlen {
+    name     = "Stödtlen"
+    gelaende = huegelland
+    lage     = { 10.3 49 }
+    flaeche  = 140
+    stadt    = nein
+    kreis    = kr_aalen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2826637; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort waiblingen {
+    name     = "Waiblingen"
+    gelaende = huegelland
+    lage     = { 9.3164 48.8324 }
+    flaeche  = 111
+    stadt    = ja
+    kreis    = kr_waiblingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2815330; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort schorndorf {
+    name     = "Schorndorf"
+    gelaende = huegelland
+    lage     = { 9.5272 48.8054 }
+    flaeche  = 164
+    stadt    = ja
+    kreis    = kr_waiblingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2836320; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort backnang {
+    name     = "Backnang"
+    gelaende = huegelland
+    lage     = { 9.4372 48.9474 }
+    flaeche  = 119
+    stadt    = ja
+    kreis    = kr_waiblingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2953568; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort winnenden {
+    name     = "Winnenden"
+    gelaende = huegelland
+    lage     = { 9.3982 48.8756 }
+    flaeche  = 97
+    stadt    = ja
+    kreis    = kr_waiblingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2807872; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ebersbach_an_der_fils {
+    name     = "Ebersbach an der Fils"
+    gelaende = huegelland
+    lage     = { 9.5236 48.716 }
+    flaeche  = 129
+    stadt    = nein
+    kreis    = kr_waiblingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2933959; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort murrhardt {
+    name     = "Murrhardt"
+    gelaende = huegelland
+    lage     = { 9.5705 48.9819 }
+    flaeche  = 171
+    stadt    = nein
+    kreis    = kr_waiblingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2867431; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wuestenrot {
+    name     = "Wüstenrot"
+    gelaende = huegelland
+    lage     = { 9.4606 49.0808 }
+    flaeche  = 212
+    stadt    = nein
+    kreis    = kr_waiblingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2805497; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort schwaebisch_gmuend {
+    name     = "Schwäbisch Gmünd"
+    gelaende = huegelland
+    lage     = { 9.7981 48.7995 }
+    flaeche  = 133
+    stadt    = ja
+    kreis    = kr_schwaebisch_gmuend
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2835482; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort goeppingen {
+    name     = "Göppingen"
+    gelaende = huegelland
+    lage     = { 9.6521 48.7035 }
+    flaeche  = 128
+    stadt    = ja
+    kreis    = kr_schwaebisch_gmuend
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2919054; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort geislingen_an_der_steige {
+    name     = "Geislingen an der Steige"
+    gelaende = mittelgebirge
+    lage     = { 9.8274 48.6242 }
+    flaeche  = 103
+    stadt    = ja
+    kreis    = kr_schwaebisch_gmuend
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2921653; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort welzheim {
+    name     = "Welzheim"
+    gelaende = mittelgebirge
+    lage     = { 9.6343 48.8768 }
+    flaeche  = 157
+    stadt    = nein
+    kreis    = kr_schwaebisch_gmuend
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2811354; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort heubach {
+    name     = "Heubach"
+    gelaende = mittelgebirge
+    lage     = { 9.9337 48.7927 }
+    flaeche  = 154
+    stadt    = nein
+    kreis    = kr_schwaebisch_gmuend
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2905154; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort suessen {
+    name     = "Süßen"
+    gelaende = mittelgebirge
+    lage     = { 9.7553 48.6793 }
+    flaeche  = 85
+    stadt    = nein
+    kreis    = kr_schwaebisch_gmuend
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2824545; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort deggingen {
+    name     = "Deggingen"
+    gelaende = mittelgebirge
+    lage     = { 9.7189 48.5971 }
+    flaeche  = 105
+    stadt    = nein
+    kreis    = kr_schwaebisch_gmuend
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2938538; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort spraitbach {
+    name     = "Spraitbach"
+    gelaende = huegelland
+    lage     = { 9.7622 48.8807 }
+    flaeche  = 136
+    stadt    = nein
+    kreis    = kr_schwaebisch_gmuend
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2830133; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort stuttgart {
+    name     = "Stuttgart"
+    gelaende = huegelland
+    lage     = { 9.177 48.7823 }
+    flaeche  = 127
+    stadt    = ja
+    kreis    = kr_stuttgart
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2825297; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort esslingen {
+    name     = "Esslingen"
+    gelaende = huegelland
+    lage     = { 9.3047 48.7396 }
+    flaeche  = 127
+    stadt    = ja
+    kreis    = kr_stuttgart
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2928751; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort boeblingen {
+    name     = "Böblingen"
+    gelaende = huegelland
+    lage     = { 9.0117 48.6821 }
+    flaeche  = 115
+    stadt    = ja
+    kreis    = kr_stuttgart
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2947444; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort leinfelden_echterdingen {
+    name     = "Leinfelden-Echterdingen"
+    gelaende = huegelland
+    lage     = { 9.1681 48.6941 }
+    flaeche  = 118
+    stadt    = ja
+    kreis    = kr_stuttgart
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2879185; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort dettenhausen {
+    name     = "Dettenhausen"
+    gelaende = huegelland
+    lage     = { 9.1004 48.6076 }
+    flaeche  = 154
+    stadt    = nein
+    kreis    = kr_stuttgart
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2937919; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort heidenheim_an_der_brenz {
+    name     = "Heidenheim an der Brenz"
+    gelaende = mittelgebirge
+    lage     = { 10.1516 48.678 }
+    flaeche  = 203
+    stadt    = ja
+    kreis    = kr_heidenheim_an_der_brenz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2907851; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort giengen_an_der_brenz {
+    name     = "Giengen an der Brenz"
+    gelaende = huegelland
+    lage     = { 10.2431 48.6222 }
+    flaeche  = 120
+    stadt    = ja
+    kreis    = kr_heidenheim_an_der_brenz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2920620; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gerstetten {
+    name     = "Gerstetten"
+    gelaende = huegelland
+    lage     = { 10.0198 48.6225 }
+    flaeche  = 134
+    stadt    = nein
+    kreis    = kr_heidenheim_an_der_brenz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2920896; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort boehmenkirch {
+    name     = "Böhmenkirch"
+    gelaende = huegelland
+    lage     = { 9.9333 48.6833 }
+    flaeche  = 151
+    stadt    = nein
+    kreis    = kr_heidenheim_an_der_brenz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2946950; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort niederstotzingen {
+    name     = "Niederstotzingen"
+    gelaende = huegelland
+    lage     = { 10.235 48.5413 }
+    flaeche  = 113
+    stadt    = nein
+    kreis    = kr_heidenheim_an_der_brenz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2862825; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort altensteig {
+    name     = "Altensteig"
+    gelaende = mittelgebirge
+    lage     = { 8.6039 48.5865 }
+    flaeche  = 145
+    stadt    = nein
+    kreis    = kr_altensteig
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2957459; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bad_wildbad {
+    name     = "Bad Wildbad"
+    gelaende = mittelgebirge
+    lage     = { 8.5504 48.7507 }
+    flaeche  = 116
+    stadt    = nein
+    kreis    = kr_altensteig
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2809025; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bad_herrenalb {
+    name     = "Bad Herrenalb"
+    gelaende = mittelgebirge
+    lage     = { 8.4362 48.7979 }
+    flaeche  = 122
+    stadt    = nein
+    kreis    = kr_altensteig
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2953440; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort neuweiler {
+    name     = "Neuweiler"
+    gelaende = mittelgebirge
+    lage     = { 8.6 48.6667 }
+    flaeche  = 101
+    stadt    = nein
+    kreis    = kr_altensteig
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2863876; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort enzkloesterle {
+    name     = "Enzklösterle"
+    gelaende = mittelgebirge
+    lage     = { 8.4708 48.6664 }
+    flaeche  = 159
+    stadt    = nein
+    kreis    = kr_altensteig
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2929892; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort tuebingen {
+    name     = "Tübingen"
+    gelaende = huegelland
+    lage     = { 9.0522 48.5227 }
+    flaeche  = 128
+    stadt    = ja
+    kreis    = kr_tuebingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2820860; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort calw {
+    name     = "Calw"
+    gelaende = mittelgebirge
+    lage     = { 8.7403 48.7142 }
+    flaeche  = 161
+    stadt    = ja
+    kreis    = kr_tuebingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2940383; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort herrenberg {
+    name     = "Herrenberg"
+    gelaende = mittelgebirge
+    lage     = { 8.8665 48.5952 }
+    flaeche  = 124
+    stadt    = ja
+    kreis    = kr_tuebingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2905826; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort weil_der_stadt {
+    name     = "Weil der Stadt"
+    gelaende = mittelgebirge
+    lage     = { 8.8718 48.7495 }
+    flaeche  = 80
+    stadt    = nein
+    kreis    = kr_tuebingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2812625; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort nagold {
+    name     = "Nagold"
+    gelaende = mittelgebirge
+    lage     = { 8.7237 48.5498 }
+    flaeche  = 132
+    stadt    = ja
+    kreis    = kr_tuebingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2867164; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort rottenburg {
+    name     = "Rottenburg"
+    gelaende = huegelland
+    lage     = { 8.9353 48.4763 }
+    flaeche  = 133
+    stadt    = ja
+    kreis    = kr_tuebingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2843729; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort aidlingen {
+    name     = "Aidlingen"
+    gelaende = huegelland
+    lage     = { 8.8952 48.6785 }
+    flaeche  = 94
+    stadt    = nein
+    kreis    = kr_tuebingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2958904; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bondorf {
+    name     = "Bondorf"
+    gelaende = huegelland
+    lage     = { 8.837 48.5206 }
+    flaeche  = 112
+    stadt    = nein
+    kreis    = kr_tuebingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2946485; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort reutlingen {
+    name     = "Reutlingen"
+    gelaende = huegelland
+    lage     = { 9.2043 48.4914 }
+    flaeche  = 188
+    stadt    = ja
+    kreis    = kr_reutlingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2847736; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort nuertingen {
+    name     = "Nürtingen"
+    gelaende = huegelland
+    lage     = { 9.342 48.6257 }
+    flaeche  = 121
+    stadt    = ja
+    kreis    = kr_reutlingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2861632; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kirchheim_unter_teck {
+    name     = "Kirchheim unter Teck"
+    gelaende = huegelland
+    lage     = { 9.4538 48.6468 }
+    flaeche  = 129
+    stadt    = ja
+    kreis    = kr_reutlingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2890473; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort metzingen {
+    name     = "Metzingen"
+    gelaende = mittelgebirge
+    lage     = { 9.2833 48.5369 }
+    flaeche  = 102
+    stadt    = ja
+    kreis    = kr_reutlingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2871486; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort muensingen {
+    name     = "Münsingen"
+    gelaende = huegelland
+    lage     = { 9.497 48.4113 }
+    flaeche  = 265
+    stadt    = nein
+    kreis    = kr_reutlingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2867560; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bad_urach {
+    name     = "Bad Urach"
+    gelaende = mittelgebirge
+    lage     = { 9.4001 48.4911 }
+    flaeche  = 124
+    stadt    = nein
+    kreis    = kr_reutlingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2818246; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lenningen {
+    name     = "Lenningen"
+    gelaende = mittelgebirge
+    lage     = { 9.4767 48.5505 }
+    flaeche  = 179
+    stadt    = nein
+    kreis    = kr_reutlingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 11670107; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort zwiefalten {
+    name     = "Zwiefalten"
+    gelaende = mittelgebirge
+    lage     = { 9.4623 48.234 }
+    flaeche  = 186
+    stadt    = nein
+    kreis    = kr_reutlingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2803545; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort moessingen {
+    name     = "Mössingen"
+    gelaende = mittelgebirge
+    lage     = { 9.0542 48.4057 }
+    flaeche  = 164
+    stadt    = ja
+    kreis    = kr_moessingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2869019; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hechingen {
+    name     = "Hechingen"
+    gelaende = mittelgebirge
+    lage     = { 8.9632 48.3515 }
+    flaeche  = 133
+    stadt    = nein
+    kreis    = kr_moessingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2908495; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort burladingen {
+    name     = "Burladingen"
+    gelaende = mittelgebirge
+    lage     = { 9.1129 48.2911 }
+    flaeche  = 189
+    stadt    = nein
+    kreis    = kr_moessingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2940977; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort messstetten {
+    name     = "Meßstetten"
+    gelaende = mittelgebirge
+    lage     = { 8.9657 48.1832 }
+    flaeche  = 168
+    stadt    = nein
+    kreis    = kr_moessingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2871601; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort winterlingen {
+    name     = "Winterlingen"
+    gelaende = mittelgebirge
+    lage     = { 9.1167 48.1833 }
+    flaeche  = 108
+    stadt    = nein
+    kreis    = kr_moessingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2807736; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort balingen {
+    name     = "Balingen"
+    gelaende = mittelgebirge
+    lage     = { 8.8546 48.2752 }
+    flaeche  = 145
+    stadt    = ja
+    kreis    = kr_balingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2953089; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort freudenstadt {
+    name     = "Freudenstadt"
+    gelaende = mittelgebirge
+    lage     = { 8.4137 48.4669 }
+    flaeche  = 227
+    stadt    = ja
+    kreis    = kr_balingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2924894; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort horb_am_neckar {
+    name     = "Horb am Neckar"
+    gelaende = mittelgebirge
+    lage     = { 8.6913 48.4442 }
+    flaeche  = 124
+    stadt    = ja
+    kreis    = kr_balingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2899101; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort sulz_am_neckar {
+    name     = "Sulz am Neckar"
+    gelaende = mittelgebirge
+    lage     = { 8.6331 48.3624 }
+    flaeche  = 113
+    stadt    = nein
+    kreis    = kr_balingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2824855; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort haigerloch {
+    name     = "Haigerloch"
+    gelaende = huegelland
+    lage     = { 8.8036 48.3661 }
+    flaeche  = 128
+    stadt    = nein
+    kreis    = kr_balingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2911960; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort alpirsbach {
+    name     = "Alpirsbach"
+    gelaende = mittelgebirge
+    lage     = { 8.402 48.3451 }
+    flaeche  = 203
+    stadt    = nein
+    kreis    = kr_balingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2958173; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort oberndorf {
+    name     = "Oberndorf"
+    gelaende = mittelgebirge
+    lage     = { 8.5722 48.2905 }
+    flaeche  = 118
+    stadt    = nein
+    kreis    = kr_balingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2859654; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort rosenfeld {
+    name     = "Rosenfeld"
+    gelaende = mittelgebirge
+    lage     = { 8.7236 48.2864 }
+    flaeche  = 127
+    stadt    = nein
+    kreis    = kr_balingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2845027; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort schopfloch {
+    name     = "Schopfloch"
+    gelaende = mittelgebirge
+    lage     = { 8.5513 48.4548 }
+    flaeche  = 147
+    stadt    = nein
+    kreis    = kr_balingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2836409; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort tuttlingen {
+    name     = "Tuttlingen"
+    gelaende = mittelgebirge
+    lage     = { 8.8177 47.9846 }
+    flaeche  = 162
+    stadt    = ja
+    kreis    = kr_tuttlingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2820693; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort rottweil {
+    name     = "Rottweil"
+    gelaende = mittelgebirge
+    lage     = { 8.6272 48.1678 }
+    flaeche  = 112
+    stadt    = ja
+    kreis    = kr_tuttlingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2843636; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort schramberg {
+    name     = "Schramberg"
+    gelaende = mittelgebirge
+    lage     = { 8.3858 48.224 }
+    flaeche  = 127
+    stadt    = nein
+    kreis    = kr_tuttlingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2836203; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort trossingen {
+    name     = "Trossingen"
+    gelaende = mittelgebirge
+    lage     = { 8.6441 48.0767 }
+    flaeche  = 149
+    stadt    = nein
+    kreis    = kr_tuttlingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2820973; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort dunningen {
+    name     = "Dunningen"
+    gelaende = huegelland
+    lage     = { 8.5062 48.2124 }
+    flaeche  = 94
+    stadt    = nein
+    kreis    = kr_tuttlingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2934560; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort immendingen {
+    name     = "Immendingen"
+    gelaende = mittelgebirge
+    lage     = { 8.7333 47.9333 }
+    flaeche  = 164
+    stadt    = nein
+    kreis    = kr_tuttlingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2896288; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gosheim {
+    name     = "Gosheim"
+    gelaende = mittelgebirge
+    lage     = { 8.7543 48.1343 }
+    flaeche  = 188
+    stadt    = nein
+    kreis    = kr_tuttlingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2918844; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort fridingen_an_der_donau {
+    name     = "Fridingen an der Donau"
+    gelaende = mittelgebirge
+    lage     = { 8.9232 48.0196 }
+    flaeche  = 162
+    stadt    = nein
+    kreis    = kr_tuttlingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2924820; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}

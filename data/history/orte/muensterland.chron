@@ -1,0 +1,520 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
+# Orte: Münsterland – Orte ohne Daten (Meilenstein M3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
+# Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
+# ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
+# und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
+#
+# Umfang: Münsterland mit dem Vest Recklinghausen (heute Regierungsbezirk Münster).
+
+ort rheine {
+    name     = "Rheine"
+    gelaende = flussaue
+    lage     = { 7.4405 52.2851 }
+    flaeche  = 115
+    stadt    = ja
+    kreis    = kr_rheine
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2847645; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ibbenbueren {
+    name     = "Ibbenbüren"
+    gelaende = huegelland
+    lage     = { 7.7146 52.2796 }
+    flaeche  = 151
+    stadt    = ja
+    kreis    = kr_rheine
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2896817; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hoerstel {
+    name     = "Hörstel"
+    gelaende = flachland
+    lage     = { 7.5838 52.2976 }
+    flaeche  = 132
+    stadt    = nein
+    kreis    = kr_rheine
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2898603; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort westerkappeln {
+    name     = "Westerkappeln"
+    gelaende = flachland
+    lage     = { 7.8833 52.3167 }
+    flaeche  = 145
+    stadt    = nein
+    kreis    = kr_rheine
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2810289; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort recke {
+    name     = "Recke"
+    gelaende = flachland
+    lage     = { 7.7212 52.3689 }
+    flaeche  = 190
+    stadt    = nein
+    kreis    = kr_rheine
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2849689; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gronau_muensterland {
+    name     = "Gronau (Münsterland)"
+    gelaende = flachland
+    lage     = { 7.0224 52.211 }
+    flaeche  = 150
+    stadt    = ja
+    kreis    = kr_gronau_muensterland
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2917138; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort steinfurt {
+    name     = "Steinfurt"
+    gelaende = flachland
+    lage     = { 7.3366 52.1504 }
+    flaeche  = 152
+    stadt    = ja
+    kreis    = kr_gronau_muensterland
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2828105; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ahaus {
+    name     = "Ahaus"
+    gelaende = flachland
+    lage     = { 7.0134 52.0794 }
+    flaeche  = 191
+    stadt    = ja
+    kreis    = kr_gronau_muensterland
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2959279; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort stadtlohn {
+    name     = "Stadtlohn"
+    gelaende = flachland
+    lage     = { 6.9192 51.994 }
+    flaeche  = 147
+    stadt    = ja
+    kreis    = kr_gronau_muensterland
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2829758; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort vreden {
+    name     = "Vreden"
+    gelaende = flachland
+    lage     = { 6.828 52.0379 }
+    flaeche  = 134
+    stadt    = ja
+    kreis    = kr_gronau_muensterland
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2815824; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ochtrup {
+    name     = "Ochtrup"
+    gelaende = flachland
+    lage     = { 7.1899 52.208 }
+    flaeche  = 144
+    stadt    = nein
+    kreis    = kr_gronau_muensterland
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2858245; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort schoeppingen {
+    name     = "Schöppingen"
+    gelaende = flachland
+    lage     = { 7.2333 52.1 }
+    flaeche  = 185
+    stadt    = nein
+    kreis    = kr_gronau_muensterland
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2836390; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort muenster {
+    name     = "Münster"
+    gelaende = flachland
+    lage     = { 7.6257 51.9624 }
+    flaeche  = 180
+    stadt    = ja
+    kreis    = kr_muenster
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2867543; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort emsdetten {
+    name     = "Emsdetten"
+    gelaende = flussaue
+    lage     = { 7.5278 52.1734 }
+    flaeche  = 151
+    stadt    = ja
+    kreis    = kr_muenster
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2930449; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort greven {
+    name     = "Greven"
+    gelaende = flussaue
+    lage     = { 7.594 52.0936 }
+    flaeche  = 134
+    stadt    = ja
+    kreis    = kr_muenster
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2917544; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort telgte {
+    name     = "Telgte"
+    gelaende = flussaue
+    lage     = { 7.7829 51.98 }
+    flaeche  = 154
+    stadt    = nein
+    kreis    = kr_muenster
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2823590; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lengerich {
+    name     = "Lengerich"
+    gelaende = huegelland
+    lage     = { 7.8604 52.1866 }
+    flaeche  = 136
+    stadt    = ja
+    kreis    = kr_muenster
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2878840; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ostbevern {
+    name     = "Ostbevern"
+    gelaende = flachland
+    lage     = { 7.8423 52.0402 }
+    flaeche  = 143
+    stadt    = nein
+    kreis    = kr_muenster
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2856816; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort altenberge {
+    name     = "Altenberge"
+    gelaende = flachland
+    lage     = { 7.4667 52.05 }
+    flaeche  = 200
+    stadt    = nein
+    kreis    = kr_muenster
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2957829; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lienen {
+    name     = "Lienen"
+    gelaende = huegelland
+    lage     = { 7.9833 52.15 }
+    flaeche  = 106
+    stadt    = nein
+    kreis    = kr_muenster
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2877843; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ladbergen {
+    name     = "Ladbergen"
+    gelaende = flachland
+    lage     = { 7.75 52.1333 }
+    flaeche  = 143
+    stadt    = nein
+    kreis    = kr_muenster
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2881991; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort luedinghausen {
+    name     = "Lüdinghausen"
+    gelaende = flachland
+    lage     = { 7.4438 51.7683 }
+    flaeche  = 120
+    stadt    = ja
+    kreis    = kr_luedinghausen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2875417; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ascheberg {
+    name     = "Ascheberg"
+    gelaende = flachland
+    lage     = { 7.6167 51.7833 }
+    flaeche  = 162
+    stadt    = nein
+    kreis    = kr_luedinghausen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2955224; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort drensteinfurt {
+    name     = "Drensteinfurt"
+    gelaende = flachland
+    lage     = { 7.7382 51.7953 }
+    flaeche  = 109
+    stadt    = nein
+    kreis    = kr_luedinghausen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2935042; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort senden_muensterland {
+    name     = "Senden (Münsterland)"
+    gelaende = flachland
+    lage     = { 7.4833 51.8565 }
+    flaeche  = 164
+    stadt    = ja
+    kreis    = kr_luedinghausen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2833079; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort sendenhorst {
+    name     = "Sendenhorst"
+    gelaende = flachland
+    lage     = { 7.83 51.843 }
+    flaeche  = 138
+    stadt    = nein
+    kreis    = kr_luedinghausen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2833076; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ahlen {
+    name     = "Ahlen"
+    gelaende = flachland
+    lage     = { 7.8887 51.7634 }
+    flaeche  = 125
+    stadt    = ja
+    kreis    = kr_ahlen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2959223; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort warendorf {
+    name     = "Warendorf"
+    gelaende = flussaue
+    lage     = { 7.9876 51.9511 }
+    flaeche  = 168
+    stadt    = ja
+    kreis    = kr_ahlen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2814127; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort beckum {
+    name     = "Beckum"
+    gelaende = flachland
+    lage     = { 8.0407 51.7557 }
+    flaeche  = 143
+    stadt    = ja
+    kreis    = kr_ahlen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2951654; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort oelde {
+    name     = "Oelde"
+    gelaende = flachland
+    lage     = { 8.1472 51.8289 }
+    flaeche  = 108
+    stadt    = ja
+    kreis    = kr_ahlen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2857943; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ennigerloh {
+    name     = "Ennigerloh"
+    gelaende = flachland
+    lage     = { 8.0309 51.8384 }
+    flaeche  = 109
+    stadt    = ja
+    kreis    = kr_ahlen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2930030; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wadersloh {
+    name     = "Wadersloh"
+    gelaende = flachland
+    lage     = { 8.25 51.7333 }
+    flaeche  = 189
+    stadt    = nein
+    kreis    = kr_ahlen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2815563; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort beelen {
+    name     = "Beelen"
+    gelaende = flachland
+    lage     = { 8.1112 51.9291 }
+    flaeche  = 109
+    stadt    = nein
+    kreis    = kr_ahlen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2951596; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort marl {
+    name     = "Marl"
+    gelaende = flachland
+    lage     = { 7.0904 51.6567 }
+    flaeche  = 108
+    stadt    = ja
+    kreis    = kr_marl
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2873263; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort coesfeld {
+    name     = "Coesfeld"
+    gelaende = flachland
+    lage     = { 7.1681 51.9435 }
+    flaeche  = 172
+    stadt    = ja
+    kreis    = kr_marl
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2939945; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort borken_muensterland {
+    name     = "Borken (Münsterland)"
+    gelaende = flachland
+    lage     = { 6.8577 51.8438 }
+    flaeche  = 134
+    stadt    = ja
+    kreis    = kr_marl
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2946228; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bocholt {
+    name     = "Bocholt"
+    gelaende = flachland
+    lage     = { 6.6153 51.8388 }
+    flaeche  = 156
+    stadt    = ja
+    kreis    = kr_marl
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2947421; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort dorsten {
+    name     = "Dorsten"
+    gelaende = flachland
+    lage     = { 6.9651 51.6617 }
+    flaeche  = 104
+    stadt    = ja
+    kreis    = kr_marl
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2935530; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort duelmen {
+    name     = "Dülmen"
+    gelaende = flachland
+    lage     = { 7.2808 51.8315 }
+    flaeche  = 158
+    stadt    = ja
+    kreis    = kr_marl
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2934662; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort haltern_am_see {
+    name     = "Haltern am See"
+    gelaende = flachland
+    lage     = { 7.1816 51.743 }
+    flaeche  = 156
+    stadt    = ja
+    kreis    = kr_marl
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2911395; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort nottuln {
+    name     = "Nottuln"
+    gelaende = flachland
+    lage     = { 7.35 51.9333 }
+    flaeche  = 179
+    stadt    = ja
+    kreis    = kr_marl
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2861733; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort velen {
+    name     = "Velen"
+    gelaende = flachland
+    lage     = { 6.9881 51.8945 }
+    flaeche  = 163
+    stadt    = nein
+    kreis    = kr_marl
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2817704; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort raesfeld {
+    name     = "Raesfeld"
+    gelaende = flachland
+    lage     = { 6.85 51.7667 }
+    flaeche  = 144
+    stadt    = nein
+    kreis    = kr_marl
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2850942; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort isselburg {
+    name     = "Isselburg"
+    gelaende = flachland
+    lage     = { 6.4643 51.8323 }
+    flaeche  = 97
+    stadt    = nein
+    kreis    = kr_marl
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2895630; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort klein_reken {
+    name     = "Klein Reken"
+    gelaende = flachland
+    lage     = { 7.0437 51.7871 }
+    flaeche  = 179
+    stadt    = nein
+    kreis    = kr_marl
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2888344; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gelsenkirchen {
+    name     = "Gelsenkirchen"
+    gelaende = flachland
+    lage     = { 7.0965 51.5051 }
+    flaeche  = 88
+    stadt    = ja
+    kreis    = kr_gelsenkirchen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2921466; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort recklinghausen {
+    name     = "Recklinghausen"
+    gelaende = flachland
+    lage     = { 7.1974 51.6138 }
+    flaeche  = 96
+    stadt    = ja
+    kreis    = kr_gelsenkirchen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2849647; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bottrop {
+    name     = "Bottrop"
+    gelaende = flachland
+    lage     = { 6.9285 51.5239 }
+    flaeche  = 78
+    stadt    = ja
+    kreis    = kr_gelsenkirchen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2945756; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort castrop_rauxel {
+    name     = "Castrop-Rauxel"
+    gelaende = flachland
+    lage     = { 7.3116 51.5566 }
+    flaeche  = 98
+    stadt    = ja
+    kreis    = kr_gelsenkirchen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2940231; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gladbeck {
+    name     = "Gladbeck"
+    gelaende = flachland
+    lage     = { 6.9859 51.5708 }
+    flaeche  = 106
+    stadt    = ja
+    kreis    = kr_gelsenkirchen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2920236; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort datteln {
+    name     = "Datteln"
+    gelaende = flachland
+    lage     = { 7.3453 51.656 }
+    flaeche  = 131
+    stadt    = ja
+    kreis    = kr_gelsenkirchen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2938784; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}

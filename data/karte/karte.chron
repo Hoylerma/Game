@@ -16,6 +16,13 @@
 #
 # Die Küstenlinie des Meilensteins M1 (Feld kueste) entfällt: Land, Meer, Seen und Flüsse kommen
 # aus geometrie/*.geojson (erzeugt mit tools/geodaten aus Natural Earth).
+#
+# max_radius_km: Die Orte stammen aus GeoNames cities1000 (Siedlungen ab 1.000 Einwohnern). Im Osten
+# Ostpreußens (heute Oblast Kaliningrad) und im Memelland führt diese Quelle nur wenige Orte; dort
+# liegt Kernraum-Land bis 27 km vom nächsten Ort entfernt. Im übrigen Kernraum sind es höchstens
+# 25 km, mehr als 20 km nur in wenigen Randgebieten (etwa an der Biebrza und an der Maas). 32 km
+# lassen Raum für die Verschiebung durch das Rauschen des Kartengenerators, damit dieses Land Orten
+# zugeordnet wird, statt leer zu bleiben (tools/geodaten/orte.py, README „Orte des Kernraums“).
 
 karte {
     bild_breite   = 4096
@@ -25,5 +32,5 @@ karte {
     breite_min    = 45.1     # Grad Nord, unterer Bildrand
     breite_max    = 56.2
     bezugsbreite  = 51.0     # Grad Nord, siehe Projektion
-    max_radius_km = 25       # weiter entfernte Pixel gehören zu keinem Ort
+    max_radius_km = 32       # weiter entfernte Pixel gehören zu keinem Ort (Begründung oben)
 }

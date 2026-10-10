@@ -1,0 +1,170 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
+# Orte: Limburg – Orte ohne Daten (Meilenstein M3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
+# Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
+# ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
+# und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
+#
+# Umfang: Niederländisch-Limburg (1839–1866 als Herzogtum Limburg im Deutschen Bund).
+
+ort venlo {
+    name     = "Venlo"
+    gelaende = flussaue
+    lage     = { 6.1681 51.37 }
+    flaeche  = 160
+    stadt    = ja
+    kreis    = kr_venlo
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2745641; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort roermond {
+    name     = "Roermond"
+    gelaende = flussaue
+    lage     = { 5.9875 51.1942 }
+    flaeche  = 121
+    stadt    = ja
+    kreis    = kr_venlo
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2748000; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort weert {
+    name     = "Weert"
+    gelaende = flachland
+    lage     = { 5.7069 51.2517 }
+    flaeche  = 197
+    stadt    = ja
+    kreis    = kr_venlo
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2744911; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort venray {
+    name     = "Venray"
+    gelaende = flachland
+    lage     = { 5.975 51.525 }
+    flaeche  = 207
+    stadt    = ja
+    kreis    = kr_venlo
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2745634; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gennep {
+    name     = "Gennep"
+    gelaende = flussaue
+    lage     = { 5.9736 51.6983 }
+    flaeche  = 199
+    stadt    = nein
+    kreis    = kr_venlo
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2755584; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort arcen {
+    name     = "Arcen"
+    gelaende = flussaue
+    lage     = { 6.1806 51.4767 }
+    flaeche  = 129
+    stadt    = nein
+    kreis    = kr_venlo
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2759684; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort heythuysen {
+    name     = "Heythuysen"
+    gelaende = flachland
+    lage     = { 5.8986 51.25 }
+    flaeche  = 118
+    stadt    = nein
+    kreis    = kr_venlo
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2754111; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort maasbracht {
+    name     = "Maasbracht"
+    gelaende = flussaue
+    lage     = { 5.8863 51.1393 }
+    flaeche  = 153
+    stadt    = nein
+    kreis    = kr_venlo
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2751303; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort meijel {
+    name     = "Meijel"
+    gelaende = flachland
+    lage     = { 5.8847 51.3442 }
+    flaeche  = 193
+    stadt    = nein
+    kreis    = kr_venlo
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2750995; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort sevenum {
+    name     = "Sevenum"
+    gelaende = flachland
+    lage     = { 6.0375 51.4125 }
+    flaeche  = 137
+    stadt    = nein
+    kreis    = kr_venlo
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2747382; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort offenbeek {
+    name     = "Offenbeek"
+    gelaende = flussaue
+    lage     = { 6.095 51.2822 }
+    flaeche  = 180
+    stadt    = nein
+    kreis    = kr_venlo
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2749696; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort maestricht {
+    name     = "Maestricht"
+    gelaende = flussaue
+    lage     = { 5.6889 50.8483 }
+    flaeche  = 134
+    stadt    = ja
+    kreis    = kr_maestricht
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2751283; deutscher Name aus den GeoNames-Alternativnamen (heute Maastricht); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort heerlen {
+    name     = "Heerlen"
+    gelaende = flachland
+    lage     = { 5.9815 50.8837 }
+    flaeche  = 103
+    stadt    = ja
+    kreis    = kr_maestricht
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2754652; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort sittard {
+    name     = "Sittard"
+    gelaende = flachland
+    lage     = { 5.8694 50.9983 }
+    flaeche  = 114
+    stadt    = ja
+    kreis    = kr_maestricht
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2747203; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gulpen {
+    name     = "Gulpen"
+    gelaende = huegelland
+    lage     = { 5.8889 50.8158 }
+    flaeche  = 106
+    stadt    = nein
+    kreis    = kr_maestricht
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2755045; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort schimmert {
+    name     = "Schimmert"
+    gelaende = flachland
+    lage     = { 5.8236 50.9067 }
+    flaeche  = 128
+    stadt    = nein
+    kreis    = kr_maestricht
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2747561; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}

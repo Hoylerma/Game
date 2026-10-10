@@ -1,0 +1,190 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
+# Orte: Ostfriesland – Orte ohne Daten (Meilenstein M3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
+# Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
+# ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
+# und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
+#
+# Umfang: Ostfriesland (heute Landkreise Aurich, Leer, Wittmund und Emden).
+
+ort wittmund {
+    name     = "Wittmund"
+    gelaende = flachland
+    lage     = { 7.7784 53.5767 }
+    flaeche  = 226
+    stadt    = ja
+    kreis    = kr_wittmund
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2807218; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort esens {
+    name     = "Esens"
+    gelaende = kueste
+    lage     = { 7.6127 53.6487 }
+    flaeche  = 229
+    stadt    = nein
+    kreis    = kr_wittmund
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2928911; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort dornum {
+    name     = "Dornum"
+    gelaende = kueste
+    lage     = { 7.4296 53.6465 }
+    flaeche  = 154
+    stadt    = nein
+    kreis    = kr_wittmund
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2935633; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort langeoog {
+    name     = "Langeoog"
+    gelaende = kueste
+    lage     = { 7.4833 53.75 }
+    flaeche  = 20
+    stadt    = nein
+    kreis    = kr_wittmund
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2880861; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort aurich {
+    name     = "Aurich"
+    gelaende = flachland
+    lage     = { 7.4823 53.4692 }
+    flaeche  = 270
+    stadt    = ja
+    kreis    = kr_aurich
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2954006; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort leer {
+    name     = "Leer"
+    gelaende = flussaue
+    lage     = { 7.461 53.2316 }
+    flaeche  = 194
+    stadt    = ja
+    kreis    = kr_aurich
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2879697; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wiesmoor {
+    name     = "Wiesmoor"
+    gelaende = flachland
+    lage     = { 7.7333 53.4167 }
+    flaeche  = 212
+    stadt    = nein
+    kreis    = kr_aurich
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2809134; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort weener {
+    name     = "Weener"
+    gelaende = flussaue
+    lage     = { 7.3505 53.1633 }
+    flaeche  = 229
+    stadt    = nein
+    kreis    = kr_aurich
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2813433; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ostrhauderfehn {
+    name     = "Ostrhauderfehn"
+    gelaende = flachland
+    lage     = { 7.6167 53.1333 }
+    flaeche  = 200
+    stadt    = nein
+    kreis    = kr_aurich
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2856213; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort mittegrossefehn {
+    name     = "Mittegroßefehn"
+    gelaende = flachland
+    lage     = { 7.566 53.3916 }
+    flaeche  = 181
+    stadt    = nein
+    kreis    = kr_aurich
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2870911; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hesel {
+    name     = "Hesel"
+    gelaende = flachland
+    lage     = { 7.6 53.3 }
+    flaeche  = 215
+    stadt    = nein
+    kreis    = kr_aurich
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2905421; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort emden {
+    name     = "Emden"
+    gelaende = kueste
+    lage     = { 7.2078 53.3674 }
+    flaeche  = 203
+    stadt    = ja
+    kreis    = kr_emden
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2930596; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort norden {
+    name     = "Norden"
+    gelaende = kueste
+    lage     = { 7.2064 53.5955 }
+    flaeche  = 162
+    stadt    = ja
+    kreis    = kr_emden
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2862118; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort borkum {
+    name     = "Borkum"
+    gelaende = kueste
+    lage     = { 6.6915 53.5809 }
+    flaeche  = 25
+    stadt    = nein
+    kreis    = kr_emden
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2946206; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort norderney {
+    name     = "Norderney"
+    gelaende = kueste
+    lage     = { 7.1582 53.7083 }
+    flaeche  = 27
+    stadt    = nein
+    kreis    = kr_emden
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2862041; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort upgant_schott {
+    name     = "Upgant-Schott"
+    gelaende = flachland
+    lage     = { 7.2833 53.5167 }
+    flaeche  = 146
+    stadt    = nein
+    kreis    = kr_emden
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2818297; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort juist {
+    name     = "Juist"
+    gelaende = kueste
+    lage     = { 6.9945 53.6809 }
+    flaeche  = 12
+    stadt    = nein
+    kreis    = kr_emden
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2894569; Name nach GeoNames; Lage auf das nächste Landpixel gesetzt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wirdum {
+    name     = "Wirdum"
+    gelaende = flachland
+    lage     = { 7.2059 53.4767 }
+    flaeche  = 200
+    stadt    = nein
+    kreis    = kr_emden
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2807558; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}

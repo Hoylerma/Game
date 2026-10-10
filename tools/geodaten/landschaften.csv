@@ -1,0 +1,420 @@
+staat;admin1;admin2;admin3;admin4;landschaft;bemerkung
+DE;01;;;;wuerttemberg;Baden-Württemberg (Grundzuordnung)
+DE;01;082;;;baden;Regierungsbezirk Karlsruhe
+DE;01;082;08221;;kurpfalz;Heidelberg
+DE;01;082;08222;;kurpfalz;Mannheim
+DE;01;082;08225;;kurpfalz;Neckar-Odenwald-Kreis
+DE;01;082;08226;;kurpfalz;Rhein-Neckar-Kreis
+DE;01;082;08235;;wuerttemberg;Landkreis Calw
+DE;01;082;08237;;wuerttemberg;Landkreis Freudenstadt
+DE;01;083;;;baden;Regierungsbezirk Freiburg
+DE;01;083;08325;;wuerttemberg;Landkreis Rottweil
+DE;01;083;08327;;wuerttemberg;Landkreis Tuttlingen
+DE;01;081;08128;;mainfranken;Main-Tauber-Kreis (Taubergrund)
+DE;01;084;08421;;schwaben;Ulm
+DE;01;084;08425;;schwaben;Alb-Donau-Kreis
+DE;01;084;08426;;schwaben;Landkreis Biberach
+DE;01;084;08435;;schwaben;Bodenseekreis
+DE;01;084;08436;;schwaben;Landkreis Ravensburg
+DE;01;084;08437;;schwaben;Landkreis Sigmaringen
+DE;02;091;;;bayern;Oberbayern
+DE;02;092;;;bayern;Niederbayern
+DE;02;093;;;oberpfalz;Oberpfalz
+DE;02;094;;;franken;Oberfranken
+DE;02;095;;;franken;Mittelfranken
+DE;02;096;;;mainfranken;Unterfranken
+DE;02;097;;;schwaben;Schwaben
+DE;03;;;;bremen_verden;Bremen und Bremerhaven
+DE;04;;;;holstein;Hamburg
+DE;05;064;;;starkenburg;Regierungsbezirk Darmstadt (Grundzuordnung)
+DE;05;064;06412;;wetterau;Frankfurt am Main
+DE;05;064;06434;;wetterau;Hochtaunuskreis
+DE;05;064;06435;;wetterau;Main-Kinzig-Kreis
+DE;05;064;06440;;wetterau;Wetteraukreis
+DE;05;064;06414;;nassau;Wiesbaden
+DE;05;064;06436;;nassau;Main-Taunus-Kreis
+DE;05;064;06439;;nassau;Rheingau-Taunus-Kreis
+DE;05;065;;;oberhessen;Regierungsbezirk Gießen (Grundzuordnung)
+DE;05;065;06532;;nassau;Lahn-Dill-Kreis
+DE;05;065;06533;;nassau;Landkreis Limburg-Weilburg
+DE;05;066;;;kurhessen;Regierungsbezirk Kassel
+DE;06;;;;calenberg;Niedersachsen (Grundzuordnung: Region Hannover, Hameln-Pyrmont, Schaumburg, Nienburg, Diepholz)
+DE;06;00;03101;;braunschweig;Braunschweig
+DE;06;00;03102;;braunschweig;Salzgitter
+DE;06;00;03103;;braunschweig;Wolfsburg
+DE;06;00;03153;;braunschweig;Landkreis Goslar
+DE;06;00;03154;;braunschweig;Landkreis Helmstedt
+DE;06;00;03157;;braunschweig;Landkreis Peine
+DE;06;00;03158;;braunschweig;Landkreis Wolfenbüttel
+DE;06;00;03255;;braunschweig;Landkreis Holzminden
+DE;06;00;03151;;lueneburg;Landkreis Gifhorn
+DE;06;00;03351;;lueneburg;Landkreis Celle
+DE;06;00;03353;;lueneburg;Landkreis Harburg
+DE;06;00;03354;;lueneburg;Landkreis Lüchow-Dannenberg
+DE;06;00;03355;;lueneburg;Landkreis Lüneburg
+DE;06;00;03358;;lueneburg;Heidekreis
+DE;06;00;03360;;lueneburg;Landkreis Uelzen
+DE;06;00;03352;;bremen_verden;Landkreis Cuxhaven
+DE;06;00;03356;;bremen_verden;Landkreis Osterholz
+DE;06;00;03357;;bremen_verden;Landkreis Rotenburg (Wümme)
+DE;06;00;03359;;bremen_verden;Landkreis Stade
+DE;06;00;03361;;bremen_verden;Landkreis Verden
+DE;06;00;03254;;hildesheim;Landkreis Hildesheim
+DE;06;00;03155;;goettingen;Landkreis Northeim
+DE;06;00;03159;;goettingen;Landkreis Göttingen
+DE;06;00;03402;;ostfriesland;Emden
+DE;06;00;03452;;ostfriesland;Landkreis Aurich
+DE;06;00;03457;;ostfriesland;Landkreis Leer
+DE;06;00;03462;;ostfriesland;Landkreis Wittmund
+DE;06;00;03401;;oldenburg;Delmenhorst
+DE;06;00;03403;;oldenburg;Oldenburg
+DE;06;00;03405;;oldenburg;Wilhelmshaven
+DE;06;00;03451;;oldenburg;Landkreis Ammerland
+DE;06;00;03453;;oldenburg;Landkreis Cloppenburg
+DE;06;00;03455;;oldenburg;Landkreis Friesland
+DE;06;00;03458;;oldenburg;Landkreis Oldenburg
+DE;06;00;03460;;oldenburg;Landkreis Vechta
+DE;06;00;03461;;oldenburg;Landkreis Wesermarsch
+DE;06;00;03404;;osnabrueck;Osnabrück
+DE;06;00;03454;;osnabrueck;Landkreis Emsland
+DE;06;00;03456;;osnabrueck;Landkreis Grafschaft Bentheim
+DE;06;00;03459;;osnabrueck;Landkreis Osnabrück
+DE;07;051;;;niederrhein;Regierungsbezirk Düsseldorf
+DE;07;053;;;rheinland;Regierungsbezirk Köln
+DE;07;055;;;muensterland;Regierungsbezirk Münster
+DE;07;057;;;ostwestfalen;Regierungsbezirk Detmold
+DE;07;059;;;mark_sauerland;Regierungsbezirk Arnsberg
+DE;08;;;;mittelrhein;Rheinland-Pfalz (Grundzuordnung: Koblenz, Ahrweiler, Altenkirchen, Cochem-Zell, Mayen-Koblenz, Neuwied, Rhein-Hunsrück)
+DE;08;00;07141;;nassau;Rhein-Lahn-Kreis
+DE;08;00;07143;;nassau;Westerwaldkreis
+DE;08;00;07134;;trier;Landkreis Birkenfeld
+DE;08;00;07211;;trier;Trier
+DE;08;00;07231;;trier;Landkreis Bernkastel-Wittlich
+DE;08;00;07232;;trier;Eifelkreis Bitburg-Prüm
+DE;08;00;07233;;trier;Landkreis Vulkaneifel
+DE;08;00;07235;;trier;Landkreis Trier-Saarburg
+DE;08;00;07133;;rheinhessen;Landkreis Bad Kreuznach
+DE;08;00;07315;;rheinhessen;Mainz
+DE;08;00;07319;;rheinhessen;Worms
+DE;08;00;07331;;rheinhessen;Landkreis Alzey-Worms
+DE;08;00;07333;;rheinhessen;Donnersbergkreis
+DE;08;00;07339;;rheinhessen;Landkreis Mainz-Bingen
+DE;08;00;07311;;kurpfalz;Frankenthal
+DE;08;00;07312;;kurpfalz;Kaiserslautern
+DE;08;00;07313;;kurpfalz;Landau in der Pfalz
+DE;08;00;07314;;kurpfalz;Ludwigshafen am Rhein
+DE;08;00;07316;;kurpfalz;Neustadt an der Weinstraße
+DE;08;00;07317;;kurpfalz;Pirmasens
+DE;08;00;07318;;kurpfalz;Speyer
+DE;08;00;07320;;kurpfalz;Zweibrücken
+DE;08;00;07332;;kurpfalz;Landkreis Bad Dürkheim
+DE;08;00;07334;;kurpfalz;Landkreis Germersheim
+DE;08;00;07335;;kurpfalz;Landkreis Kaiserslautern
+DE;08;00;07336;;kurpfalz;Landkreis Kusel
+DE;08;00;07337;;kurpfalz;Landkreis Südliche Weinstraße
+DE;08;00;07338;;kurpfalz;Rhein-Pfalz-Kreis
+DE;08;00;07340;;kurpfalz;Landkreis Südwestpfalz
+DE;09;;;;saar;Saarland
+DE;10;;;;holstein;Schleswig-Holstein (Grundzuordnung: südlich der Eider)
+DE;10;00;01001;;schleswig;Flensburg
+DE;10;00;01054;;schleswig;Kreis Nordfriesland
+DE;10;00;01059;;schleswig;Kreis Schleswig-Flensburg
+DE;10;00;01058;;schleswig;Kreis Rendsburg-Eckernförde (nördlich der Eider, Orte südlich davon einzeln zu Holstein)
+DE;10;00;01058;01058135;holstein;Rendsburg (Altstadt auf der Eiderinsel, historisch holsteinisch)
+DE;10;00;01058;01058022;holstein;Bordesholm (südlich des Kanals)
+DE;10;00;01058;01058050;holstein;Felde (südlich des Kanals)
+DE;10;00;01058;01058053;holstein;Flintbek (südlich des Kanals)
+DE;10;00;01058;01058072;holstein;Hanerau-Hademarschen (südlich des Kanals)
+DE;10;00;01058;01058077;holstein;Hohenwestedt (südlich des Kanals)
+DE;10;00;01058;01058117;holstein;Nortorf (südlich des Kanals)
+DE;10;00;01058;01058009;holstein;Aukrug (südlich des Kanals)
+DE;10;00;01058;01058169;holstein;Wasbek (südlich des Kanals)
+DE;10;00;01058;01058128;holstein;Padenstedt (südlich des Kanals)
+DE;10;00;01058;01058164;holstein;Todenbüttel (südlich des Kanals)
+DE;10;00;01058;01058059;holstein;Gnutz (südlich des Kanals)
+DE;10;00;01058;01058163;holstein;Timmaspe (südlich des Kanals)
+DE;10;00;01058;01058170;holstein;Wattenbek (südlich des Kanals)
+DE;10;00;01058;01058033;holstein;Brügge (südlich des Kanals)
+DE;10;00;01058;01058029;holstein;Breiholz (südlich des Kanals)
+DE;10;00;01058;01058094;holstein;Langwedel (südlich des Kanals)
+DE;10;00;01058;01058070;holstein;Hamdorf (südlich des Kanals)
+DE;10;00;01058;01058086;holstein;Jevenstedt (südlich des Kanals)
+DE;10;00;01058;01058148;holstein;Schülp (südlich des Kanals)
+DE;10;00;01058;01058107;holstein;Molfsee (südlich des Kanals)
+DE;10;00;01058;01058049;holstein;Emkendorf (südlich des Kanals)
+DE;10;00;01058;01058171;holstein;Westensee (südlich des Kanals)
+DE;10;00;01058;01058172;holstein;Westerrönfeld (südlich des Kanals)
+DE;10;00;01058;01058105;holstein;Mielkendorf (südlich des Kanals)
+DE;10;00;01058;01058124;holstein;Osterrönfeld (südlich des Kanals)
+DE;10;00;01058;01058104;holstein;Melsdorf (südlich des Kanals)
+DE;10;00;01058;01058028;holstein;Bredenbek (südlich des Kanals)
+DE;10;00;01058;01058130;holstein;Quarnbek (südlich des Kanals)
+DE;10;00;01058;01058092;holstein;Kronshagen (südlich des Kanals)
+DE;11;;;;brandenburg;Brandenburg (Grundzuordnung)
+DE;11;00;12052;;lausitz;Cottbus
+DE;11;00;12061;;lausitz;Landkreis Dahme-Spreewald
+DE;11;00;12062;;lausitz;Landkreis Elbe-Elster
+DE;11;00;12066;;lausitz;Landkreis Oberspreewald-Lausitz
+DE;11;00;12071;;lausitz;Landkreis Spree-Neiße
+DE;12;;;;mecklenburg;Mecklenburg-Vorpommern (Grundzuordnung)
+DE;12;00;13073;;pommern;Landkreis Vorpommern-Rügen
+DE;12;00;13075;;pommern;Landkreis Vorpommern-Greifswald
+DE;13;;;;sachsen;Sachsen (Grundzuordnung)
+DE;13;00;14625;;lausitz;Landkreis Bautzen
+DE;13;00;14626;;lausitz;Landkreis Görlitz
+DE;14;;;;magdeburg;Sachsen-Anhalt (Grundzuordnung)
+DE;14;00;15001;;anhalt;Dessau-Roßlau
+DE;14;00;15082;;anhalt;Landkreis Anhalt-Bitterfeld
+DE;14;00;15081;;brandenburg;Altmarkkreis Salzwedel
+DE;14;00;15090;;brandenburg;Landkreis Stendal (Altmark)
+DE;14;00;15091;;sachsen;Landkreis Wittenberg (Kurkreis)
+DE;14;00;15084;;thueringen;Burgenlandkreis
+DE;14;00;15087;;thueringen;Landkreis Mansfeld-Südharz
+DE;15;;;;thueringen;Thüringen
+DE;16;;;;brandenburg;Berlin
+AT;01;;;;burgenland;Burgenland
+AT;02;;;;kaernten;Kärnten
+AT;03;;;;niederoesterreich;Niederösterreich
+AT;04;;;;oberoesterreich;Oberösterreich
+AT;05;;;;salzburg;Salzburg
+AT;06;;;;steiermark;Steiermark
+AT;07;;;;tirol;Tirol
+AT;08;;;;vorarlberg;Vorarlberg
+AT;09;;;;niederoesterreich;Wien
+LI;;;;;vorarlberg;Liechtenstein
+LU;;;;;luxemburg;Luxemburg
+IT;17;BZ;;;tirol;Provinz Bozen (Südtirol)
+IT;17;TN;;;tirol;Provinz Trient: Orte am Rand des Umrisses
+IT;06;UD;;;kaernten;Kanaltal (Tarvis, Malborghetto, Pontafel)
+CZ;52;;;;boehmen;Prag
+CZ;79;;;;boehmen;Südböhmen
+CZ;81;;;;boehmen;Karlsbader Region (Egerland)
+CZ;82;;;;boehmen;Königgrätzer Region
+CZ;83;;;;boehmen;Reichenberger Region
+CZ;86;;;;boehmen;Pardubitzer Region
+CZ;87;;;;boehmen;Pilsner Region
+CZ;88;;;;boehmen;Mittelböhmen
+CZ;89;;;;boehmen;Aussiger Region
+CZ;80;;;;maehren;Region Vysočina (Grundzuordnung)
+CZ;80;0631;;;boehmen;Bezirk Havlíčkův Brod
+CZ;80;0633;;;boehmen;Bezirk Pelhřimov
+CZ;78;;;;maehren;Südmähren
+CZ;84;;;;maehren;Olmützer Region
+CZ;84;0711;;;oesterreichisch_schlesien;Bezirk Jeseník
+CZ;90;;;;maehren;Zliner Region
+CZ;85;;;;oesterreichisch_schlesien;Mährisch-Schlesische Region (Grundzuordnung)
+CZ;85;0804;;;maehren;Bezirk Nový Jičín
+CZ;85;0806;;;maehren;Ostrava (Mährisch Ostrau)
+PL;72;;;;niederschlesien;Woiwodschaft Niederschlesien
+PL;72;0208;;;glatz;Kreis Kłodzko
+PL;72;0210;;;lausitz;Kreis Lubań (Oberlausitz)
+PL;72;0225;;;lausitz;Kreis Zgorzelec (Oberlausitz)
+PL;76;;;;niederschlesien;Woiwodschaft Lebus (Grundzuordnung: Süden)
+PL;76;0801;;;brandenburg;Kreis Gorzów (Neumark)
+PL;76;0802;;;brandenburg;Kreis Krosno Odrzańskie
+PL;76;0805;;;brandenburg;Kreis Słubice
+PL;76;0806;;;brandenburg;Kreis Strzelce-Drezdenko (Neumark)
+PL;76;0807;;;brandenburg;Kreis Sulęcin
+PL;76;0808;;;brandenburg;Kreis Świebodzin
+PL;76;0861;;;brandenburg;Gorzów Wielkopolski
+PL;76;0803;;;posen;Kreis Międzyrzecz
+PL;76;0812;;;posen;Kreis Wschowa
+PL;76;0811;;;lausitz;Kreis Żary (Niederlausitz)
+PL;79;;;;oberschlesien;Woiwodschaft Oppeln
+PL;79;1601;;;niederschlesien;Kreis Brzeg
+PL;79;1606;;;niederschlesien;Kreis Namysłów
+PL;83;;;;oberschlesien;Woiwodschaft Schlesien (Grundzuordnung: preußischer Teil)
+PL;83;2401;;;kongresspolen;Kreis Będzin
+PL;83;2404;;;kongresspolen;Kreis Częstochowa
+PL;83;2406;;;kongresspolen;Kreis Kłobuck
+PL;83;2409;;;kongresspolen;Kreis Myszków
+PL;83;2416;;;kongresspolen;Kreis Zawiercie
+PL;83;2464;;;kongresspolen;Częstochowa
+PL;83;2465;;;kongresspolen;Dąbrowa Górnicza
+PL;83;2475;;;kongresspolen;Sosnowiec
+PL;83;2468;;;galizien;Jaworzno
+PL;83;2417;;;galizien;Kreis Żywiec
+PL;83;2402;;;oesterreichisch_schlesien;Kreis Bielsko
+PL;83;2403;;;oesterreichisch_schlesien;Kreis Cieszyn
+PL;83;2461;;;oesterreichisch_schlesien;Bielsko-Biała
+PL;83;-;;;lausitz;Zawidów (GeoNames ohne Kreiscode und mit Woiwodschaft 83 statt 72)
+PL;77;;;;galizien;Woiwodschaft Kleinpolen
+PL;77;1212;;;kongresspolen;Kreis Olkusz
+PL;77;-;;;brandenburg;Sulęcin (GeoNames ohne Kreiscode und mit Woiwodschaft 77 statt 76)
+PL;74;;;;kongresspolen;Woiwodschaft Łódź
+PL;78;;;;kongresspolen;Woiwodschaft Masowien
+PL;81;;;;kongresspolen;Woiwodschaft Podlachien
+PL;86;;;;posen;Woiwodschaft Großpolen (Grundzuordnung)
+PL;86;3007;;;kongresspolen;Kreis Kalisz
+PL;86;3061;;;kongresspolen;Kalisz
+PL;86;3009;;;kongresspolen;Kreis Koło
+PL;86;3010;;;kongresspolen;Kreis Konin
+PL;86;3062;;;kongresspolen;Konin
+PL;86;3023;;;kongresspolen;Kreis Słupca
+PL;86;3027;;;kongresspolen;Kreis Turek
+PL;86;3031;;;westpreussen;Kreis Złotów
+PL;73;;;;westpreussen;Woiwodschaft Kujawien-Pommern (Grundzuordnung)
+PL;73;0403;;;posen;Kreis Bydgoszcz
+PL;73;0461;;;posen;Bydgoszcz
+PL;73;0407;;;posen;Kreis Inowrocław
+PL;73;0409;;;posen;Kreis Mogilno
+PL;73;0410;;;posen;Kreis Nakło
+PL;73;0419;;;posen;Kreis Żnin
+PL;73;0401;;;kongresspolen;Kreis Aleksandrów Kujawski
+PL;73;0408;;;kongresspolen;Kreis Lipno
+PL;73;0411;;;kongresspolen;Kreis Radziejów
+PL;73;0412;;;kongresspolen;Kreis Rypin
+PL;73;0418;;;kongresspolen;Kreis Włocławek
+PL;73;0464;;;kongresspolen;Włocławek
+PL;82;;;;westpreussen;Woiwodschaft Pommern (Grundzuordnung)
+PL;82;2201;;;pommern;Kreis Bytów
+PL;82;2208;;;pommern;Kreis Lębork
+PL;82;2212;;;pommern;Kreis Słupsk
+PL;82;2263;;;pommern;Słupsk
+PL;85;;;;ostpreussen;Woiwodschaft Ermland-Masuren (Grundzuordnung)
+PL;85;2861;;;westpreussen;Elbląg
+PL;85;2807;;;westpreussen;Kreis Iława
+PL;85;2812;;;westpreussen;Kreis Nowe Miasto Lubawskie
+PL;87;;;;pommern;Woiwodschaft Westpommern (Grundzuordnung)
+PL;87;3202;;;brandenburg;Kreis Choszczno (Neumark)
+PL;87;3203;;;brandenburg;Kreis Drawsko (Neumark)
+PL;87;3210;;;brandenburg;Kreis Myślibórz (Neumark)
+PL;87;3216;;;brandenburg;Kreis Świdwin (Neumark)
+PL;87;3217;;;westpreussen;Kreis Wałcz
+RU;;;;;ostpreussen;Oblast Kaliningrad
+LT;;;;;ostpreussen;Memelland
+DK;21;;;;juetland;Region Syddanmark (Grundzuordnung: nördlich der Königsau)
+DK;21;492;;;schleswig;Kommune Ærø
+DK;21;510;;;schleswig;Kommune Haderslev
+DK;21;540;;;schleswig;Kommune Sønderborg
+DK;21;550;;;schleswig;Kommune Tønder
+DK;21;580;;;schleswig;Kommune Aabenraa
+NL;01;;;;groningen_drenthe;Drenthe
+NL;04;;;;groningen_drenthe;Groningen
+NL;03;;;;geldern;Gelderland
+NL;06;;;;geldern;Nordbrabant (Land van Cuijk)
+NL;15;;;;overijssel;Overijssel
+NL;05;;;;limburg;Limburg
+BE;BRU;;;;brabant;Brüssel
+BE;VLG;VAN;;;brabant;Provinz Antwerpen
+BE;VLG;VBR;;;brabant;Flämisch-Brabant
+BE;WAL;WBR;;;brabant;Wallonisch-Brabant
+BE;VLG;VWV;;;flandern;Westflandern
+BE;VLG;VOV;;;flandern;Ostflandern
+BE;VLG;VLI;;;luettich;Provinz Limburg (Grafschaft Loon)
+BE;WAL;WLG;;;luettich;Provinz Lüttich
+BE;WAL;WNA;;;namur;Provinz Namur
+BE;WAL;WHT;;;hennegau;Provinz Hennegau
+BE;WAL;WLX;;;luxemburg;Provinz Luxemburg
+FR;44;67;;;elsass;Bas-Rhin
+FR;44;68;;;elsass;Haut-Rhin
+FR;27;90;;;elsass;Territoire de Belfort
+FR;27;25;;;burgundische_pforte;Doubs (Montbéliard)
+FR;27;70;;;burgundische_pforte;Haute-Saône (Lure, Héricourt)
+FR;44;57;;;lothringen;Moselle
+FR;44;54;;;lothringen;Meurthe-et-Moselle
+FR;44;55;;;lothringen;Meuse
+FR;44;88;;;lothringen;Vosges
+FR;44;08;;;ardennen;Ardennes
+FR;32;59;;;franzoesisch_flandern;Nord (Grundzuordnung: Dunkerque, Lille, Douai)
+FR;32;59;591;;hennegau;Arrondissement Avesnes-sur-Helpe
+FR;32;59;592;;hennegau;Arrondissement Cambrai
+FR;32;59;596;;hennegau;Arrondissement Valenciennes
+FR;32;62;;;franzoesisch_flandern;Pas-de-Calais (Bergbaugebiet um Lens)
+FR;32;02;;;hennegau;Aisne (Thiérache)
+SI;;;;;krain;Slowenien (Grundzuordnung: Krain)
+SI;08;;;;steiermark;Brežice
+SI;11;;;;steiermark;Celje
+SI;24;;;;steiermark;Dornava
+SI;26;;;;steiermark;Duplek
+SI;28;;;;steiermark;Gorišnica
+SI;29;;;;steiermark;Gornja Radgona
+SI;30;;;;steiermark;Gornji Grad
+SI;34;;;;steiermark;Hrastnik
+SI;42;;;;steiermark;Juršinci
+SI;45;;;;steiermark;Kidričevo
+SI;51;;;;steiermark;Kozje
+SI;55;;;;steiermark;Kungota
+SI;57;;;;steiermark;Laško
+SI;62;;;;steiermark;Ljubno
+SI;76;;;;steiermark;Mislinja
+SI;79;;;;steiermark;Mozirje
+SI;81;;;;steiermark;Muta
+SI;83;;;;steiermark;Nazarje
+SI;87;;;;steiermark;Ormož
+SI;89;;;;steiermark;Pesnica
+SI;92;;;;steiermark;Podčetrtek
+SI;98;;;;steiermark;Rače-Fram
+SI;A1;;;;steiermark;Radenci
+SI;A2;;;;steiermark;Radlje ob Dravi
+SI;A7;;;;steiermark;Rogaška Slatina
+SI;A8;;;;steiermark;Rogatec
+SI;B3;;;;steiermark;Šentilj
+SI;B6;;;;steiermark;Sevnica
+SI;C2;;;;steiermark;Slovenj Gradec
+SI;C4;;;;steiermark;Slovenske Konjice
+SI;C5;;;;steiermark;Šmarje pri Jelšah
+SI;C6;;;;steiermark;Šmartno ob Paki
+SI;C7;;;;steiermark;Šoštanj
+SI;C8;;;;steiermark;Starše
+SI;C9;;;;steiermark;Štore
+SI;D1;;;;steiermark;Sveti Jurij ob Ščavnici
+SI;D3;;;;steiermark;Trbovlje
+SI;D7;;;;steiermark;Velenje
+SI;E2;;;;steiermark;Vitanje
+SI;E6;;;;steiermark;Vuzenica
+SI;E9;;;;steiermark;Zavrč
+SI;F3;;;;steiermark;Zreče
+SI;F4;;;;steiermark;Benedikt
+SI;F7;;;;steiermark;Braslovče
+SI;F9;;;;steiermark;Cerkvenjak
+SI;G1;;;;steiermark;Destrnik
+SI;G2;;;;steiermark;Dobje
+SI;G3;;;;steiermark;Dobrna
+SI;G9;;;;steiermark;Hajdina
+SI;H1;;;;steiermark;Hoče-Slivnica
+SI;I1;;;;steiermark;Križevci
+SI;I3;;;;steiermark;Lenart
+SI;I6;;;;steiermark;Ljutomer
+SI;I8;;;;steiermark;Lovrenc na Pohorju
+SI;I9;;;;steiermark;Luče
+SI;J1;;;;steiermark;Majšperk
+SI;J2;;;;steiermark;Maribor
+SI;J3;;;;steiermark;Markovci
+SI;J4;;;;steiermark;Miklavž na Dravskem polju
+SI;J8;;;;steiermark;Oplotnica
+SI;K1;;;;steiermark;Podlehnik
+SI;K2;;;;steiermark;Podvelka
+SI;K3;;;;steiermark;Polzela
+SI;K4;;;;steiermark;Prebold
+SI;K7;;;;steiermark;Ptuj
+SI;L2;;;;steiermark;Ribnica na Pohorju
+SI;L3;;;;steiermark;Ruše
+SI;L5;;;;steiermark;Selnica ob Dravi
+SI;L7;;;;steiermark;Šentjur
+SI;L8;;;;steiermark;Slovenska Bistrica
+SI;M2;;;;steiermark;Solčava
+SI;M3;;;;steiermark;Sveta Ana
+SI;M4;;;;steiermark;Sveti Andraž v Slovenskih goricah
+SI;M5;;;;steiermark;Tabor
+SI;M7;;;;steiermark;Trnovska vas
+SI;N2;;;;steiermark;Videm
+SI;N3;;;;steiermark;Vojnik
+SI;N4;;;;steiermark;Vransko
+SI;N5;;;;steiermark;Žalec
+SI;N6;;;;steiermark;Žetale
+SI;N9;;;;steiermark;Apače
+SI;O1;;;;steiermark;Cirkulane
+SI;O5;;;;steiermark;Makole
+SI;O8;;;;steiermark;Poljčane
+SI;O9;;;;steiermark;Rečica ob Savinji
+SI;P4;;;;steiermark;Središče ob Dravi
+SI;P6;;;;steiermark;Sveta Trojica v Slovenskih goricah
+SI;P7;;;;steiermark;Sveti Jurij v Slovenskih goricah
+SI;P8;;;;steiermark;Sveti Tomaž
+SI;16;;;;kaernten;Črna na Koroškem (Mießtal)
+SI;25;;;;kaernten;Dravograd (Unterdrauburg)
+SI;74;;;;kaernten;Mežica (Mießtal)
+SI;H5;;;;kaernten;Jezersko (Seeland, bis 1919 Kärnten)
+SI;K6;;;;kaernten;Prevalje (Mießtal)
+SI;K8;;;;kaernten;Ravne na Koroškem (Mießtal)

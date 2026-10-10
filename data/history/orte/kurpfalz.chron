@@ -1,0 +1,510 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
+# Orte: Kurpfalz – Orte ohne Daten (Meilenstein M3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
+# Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
+# ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
+# und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
+#
+# Umfang: Pfalz links des Rheins mit Zweibrücken und Speyer sowie die rechtsrheinische Kurpfalz um Mannheim und Heidelberg.
+
+ort mannheim {
+    name     = "Mannheim"
+    gelaende = flussaue
+    lage     = { 8.4669 49.4891 }
+    flaeche  = 132
+    stadt    = ja
+    kreis    = kr_mannheim
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2873891; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort speyer {
+    name     = "Speyer"
+    gelaende = flussaue
+    lage     = { 8.4311 49.3208 }
+    flaeche  = 108
+    stadt    = ja
+    kreis    = kr_mannheim
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2830582; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort neustadt_an_der_haardt {
+    name     = "Neustadt an der Haardt"
+    gelaende = mittelgebirge
+    lage     = { 8.1389 49.3501 }
+    flaeche  = 182
+    stadt    = ja
+    kreis    = kr_mannheim
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2864054; Name Neustadt an der Haardt aus den GeoNames-Alternativnamen (GeoNames: Neustadt); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort frankenthal {
+    name     = "Frankenthal"
+    gelaende = flachland
+    lage     = { 8.3536 49.5341 }
+    flaeche  = 112
+    stadt    = ja
+    kreis    = kr_mannheim
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2925550; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bad_duerkheim {
+    name     = "Bad Dürkheim"
+    gelaende = mittelgebirge
+    lage     = { 8.1724 49.4618 }
+    flaeche  = 118
+    stadt    = ja
+    kreis    = kr_mannheim
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2953522; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hassloch {
+    name     = "Haßloch"
+    gelaende = flachland
+    lage     = { 8.2581 49.3628 }
+    flaeche  = 118
+    stadt    = ja
+    kreis    = kr_mannheim
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2909313; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort schifferstadt {
+    name     = "Schifferstadt"
+    gelaende = flachland
+    lage     = { 8.3775 49.3842 }
+    flaeche  = 102
+    stadt    = nein
+    kreis    = kr_mannheim
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2839335; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gruenstadt {
+    name     = "Grünstadt"
+    gelaende = huegelland
+    lage     = { 8.1628 49.563 }
+    flaeche  = 113
+    stadt    = nein
+    kreis    = kr_mannheim
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2914101; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort fussgoenheim {
+    name     = "Fußgönheim"
+    gelaende = flachland
+    lage     = { 8.2922 49.4611 }
+    flaeche  = 92
+    stadt    = nein
+    kreis    = kr_mannheim
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2923503; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort carlsberg {
+    name     = "Carlsberg"
+    gelaende = huegelland
+    lage     = { 8.0417 49.5039 }
+    flaeche  = 127
+    stadt    = nein
+    kreis    = kr_mannheim
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2940309; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kaiserslautern {
+    name     = "Kaiserslautern"
+    gelaende = huegelland
+    lage     = { 7.7716 49.443 }
+    flaeche  = 109
+    stadt    = ja
+    kreis    = kr_kaiserslautern
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2894003; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hochspeyer {
+    name     = "Hochspeyer"
+    gelaende = huegelland
+    lage     = { 7.895 49.4421 }
+    flaeche  = 97
+    stadt    = nein
+    kreis    = kr_kaiserslautern
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2903026; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort trippstadt {
+    name     = "Trippstadt"
+    gelaende = huegelland
+    lage     = { 7.7748 49.3593 }
+    flaeche  = 159
+    stadt    = nein
+    kreis    = kr_kaiserslautern
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2821099; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort elmstein {
+    name     = "Elmstein"
+    gelaende = huegelland
+    lage     = { 7.9333 49.3667 }
+    flaeche  = 201
+    stadt    = nein
+    kreis    = kr_kaiserslautern
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2930820; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort landstuhl {
+    name     = "Landstuhl"
+    gelaende = huegelland
+    lage     = { 7.5702 49.4131 }
+    flaeche  = 169
+    stadt    = nein
+    kreis    = kr_landstuhl
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2881477; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kusel {
+    name     = "Kusel"
+    gelaende = huegelland
+    lage     = { 7.4047 49.5377 }
+    flaeche  = 179
+    stadt    = ja
+    kreis    = kr_landstuhl
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2882265; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bruchmuehlbach_miesau {
+    name     = "Bruchmühlbach-Miesau"
+    gelaende = huegelland
+    lage     = { 7.4333 49.3833 }
+    flaeche  = 141
+    stadt    = nein
+    kreis    = kr_landstuhl
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3207512; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort weilerbach {
+    name     = "Weilerbach"
+    gelaende = huegelland
+    lage     = { 7.6333 49.4833 }
+    flaeche  = 149
+    stadt    = nein
+    kreis    = kr_landstuhl
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2812568; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lauterecken {
+    name     = "Lauterecken"
+    gelaende = huegelland
+    lage     = { 7.5926 49.6499 }
+    flaeche  = 180
+    stadt    = nein
+    kreis    = kr_landstuhl
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2879895; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort altenkirchen_kurpfalz {
+    name     = "Altenkirchen (Kurpfalz)"
+    gelaende = huegelland
+    lage     = { 7.3208 49.4431 }
+    flaeche  = 140
+    stadt    = nein
+    kreis    = kr_landstuhl
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2957570; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort niederkirchen {
+    name     = "Niederkirchen"
+    gelaende = huegelland
+    lage     = { 7.7 49.5833 }
+    flaeche  = 134
+    stadt    = nein
+    kreis    = kr_landstuhl
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2863214; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort heidelberg {
+    name     = "Heidelberg"
+    gelaende = mittelgebirge
+    lage     = { 8.6908 49.4077 }
+    flaeche  = 77
+    stadt    = ja
+    kreis    = kr_heidelberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2907911; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort weinheim {
+    name     = "Weinheim"
+    gelaende = huegelland
+    lage     = { 8.667 49.5489 }
+    flaeche  = 84
+    stadt    = ja
+    kreis    = kr_heidelberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2812174; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort sinsheim {
+    name     = "Sinsheim"
+    gelaende = huegelland
+    lage     = { 8.8787 49.2529 }
+    flaeche  = 147
+    stadt    = ja
+    kreis    = kr_heidelberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2831872; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wiesloch {
+    name     = "Wiesloch"
+    gelaende = huegelland
+    lage     = { 8.6985 49.295 }
+    flaeche  = 140
+    stadt    = ja
+    kreis    = kr_heidelberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2809138; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort schwetzingen {
+    name     = "Schwetzingen"
+    gelaende = flachland
+    lage     = { 8.5823 49.3822 }
+    flaeche  = 84
+    stadt    = ja
+    kreis    = kr_heidelberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2834240; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort edingen_neckarhausen {
+    name     = "Edingen-Neckarhausen"
+    gelaende = flachland
+    lage     = { 8.6064 49.4572 }
+    flaeche  = 83
+    stadt    = nein
+    kreis    = kr_heidelberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2933345; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort neckargemuend {
+    name     = "Neckargemünd"
+    gelaende = mittelgebirge
+    lage     = { 8.7959 49.389 }
+    flaeche  = 108
+    stadt    = nein
+    kreis    = kr_heidelberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2866774; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort reilingen {
+    name     = "Reilingen"
+    gelaende = flachland
+    lage     = { 8.5642 49.2983 }
+    flaeche  = 118
+    stadt    = nein
+    kreis    = kr_heidelberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2848867; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort heiligkreuzsteinach {
+    name     = "Heiligkreuzsteinach"
+    gelaende = huegelland
+    lage     = { 8.795 49.4833 }
+    flaeche  = 111
+    stadt    = nein
+    kreis    = kr_heidelberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2907501; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort mosbach {
+    name     = "Mosbach"
+    gelaende = huegelland
+    lage     = { 9.1511 49.3536 }
+    flaeche  = 163
+    stadt    = ja
+    kreis    = kr_mosbach
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2869120; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort buchen_in_odenwald {
+    name     = "Buchen in Odenwald"
+    gelaende = huegelland
+    lage     = { 9.3229 49.5242 }
+    flaeche  = 177
+    stadt    = nein
+    kreis    = kr_mosbach
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2942634; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort eberbach {
+    name     = "Eberbach"
+    gelaende = mittelgebirge
+    lage     = { 8.9902 49.4668 }
+    flaeche  = 118
+    stadt    = nein
+    kreis    = kr_mosbach
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2934020; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hardheim {
+    name     = "Hardheim"
+    gelaende = huegelland
+    lage     = { 9.4719 49.6119 }
+    flaeche  = 183
+    stadt    = nein
+    kreis    = kr_mosbach
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2910633; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort aglasterhausen {
+    name     = "Aglasterhausen"
+    gelaende = huegelland
+    lage     = { 8.9869 49.3569 }
+    flaeche  = 161
+    stadt    = nein
+    kreis    = kr_mosbach
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2959296; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort osterburken {
+    name     = "Osterburken"
+    gelaende = huegelland
+    lage     = { 9.4225 49.43 }
+    flaeche  = 205
+    stadt    = nein
+    kreis    = kr_mosbach
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2856637; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort mudau {
+    name     = "Mudau"
+    gelaende = mittelgebirge
+    lage     = { 9.2044 49.5344 }
+    flaeche  = 129
+    stadt    = nein
+    kreis    = kr_mosbach
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2868867; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort fahrenbach {
+    name     = "Fahrenbach"
+    gelaende = huegelland
+    lage     = { 9.1506 49.4314 }
+    flaeche  = 141
+    stadt    = nein
+    kreis    = kr_mosbach
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2928163; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort pirmasens {
+    name     = "Pirmasens"
+    gelaende = huegelland
+    lage     = { 7.6053 49.2015 }
+    flaeche  = 177
+    stadt    = ja
+    kreis    = kr_pirmasens
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2853574; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort zweibruecken {
+    name     = "Zweibrücken"
+    gelaende = huegelland
+    lage     = { 7.3698 49.2469 }
+    flaeche  = 191
+    stadt    = ja
+    kreis    = kr_pirmasens
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2803620; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort waldfischbach_burgalben {
+    name     = "Waldfischbach-Burgalben"
+    gelaende = huegelland
+    lage     = { 7.6667 49.2833 }
+    flaeche  = 218
+    stadt    = nein
+    kreis    = kr_pirmasens
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2815032; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort dahn {
+    name     = "Dahn"
+    gelaende = huegelland
+    lage     = { 7.7784 49.151 }
+    flaeche  = 231
+    stadt    = nein
+    kreis    = kr_pirmasens
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2939370; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort eppenbrunn {
+    name     = "Eppenbrunn"
+    gelaende = huegelland
+    lage     = { 7.5667 49.1167 }
+    flaeche  = 191
+    stadt    = nein
+    kreis    = kr_pirmasens
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2929858; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort landau_in_der_pfalz {
+    name     = "Landau in der Pfalz"
+    gelaende = flachland
+    lage     = { 8.1169 49.1984 }
+    flaeche  = 193
+    stadt    = ja
+    kreis    = kr_landau_in_der_pfalz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2881646; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort germersheim {
+    name     = "Germersheim"
+    gelaende = flussaue
+    lage     = { 8.3639 49.2231 }
+    flaeche  = 143
+    stadt    = ja
+    kreis    = kr_landau_in_der_pfalz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2921034; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort woerth_am_rhein {
+    name     = "Wörth am Rhein"
+    gelaende = flachland
+    lage     = { 8.2596 49.0489 }
+    flaeche  = 122
+    stadt    = nein
+    kreis    = kr_landau_in_der_pfalz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2806081; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bad_bergzabern {
+    name     = "Bad Bergzabern"
+    gelaende = huegelland
+    lage     = { 8.0009 49.1024 }
+    flaeche  = 125
+    stadt    = nein
+    kreis    = kr_landau_in_der_pfalz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2953549; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort annweiler_am_trifels {
+    name     = "Annweiler am Trifels"
+    gelaende = huegelland
+    lage     = { 7.9753 49.2061 }
+    flaeche  = 177
+    stadt    = nein
+    kreis    = kr_landau_in_der_pfalz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2955951; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ruelzheim {
+    name     = "Rülzheim"
+    gelaende = flachland
+    lage     = { 8.2929 49.1531 }
+    flaeche  = 119
+    stadt    = nein
+    kreis    = kr_landau_in_der_pfalz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2843146; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort freckenfeld {
+    name     = "Freckenfeld"
+    gelaende = flachland
+    lage     = { 8.1139 49.065 }
+    flaeche  = 137
+    stadt    = nein
+    kreis    = kr_landau_in_der_pfalz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2925249; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}

@@ -15,7 +15,9 @@ Rasterregel, Dateien unter `data/karte/geometrie/`); Inhalt des Kernraums:
 | `geo.py` | Gemeinsame Hilfen: Projektion nach 6.1, Punkt-in-Polygon und Rasterung nach 6.2, Zuschnitt, Vereinfachung, GeoJSON lesen/schreiben |
 | `staedte.py` | Ortskandidaten aus GeoNames `cities1000` im Kernraum |
 | `hoehen.py` | Höhen aus Terrarium-Kacheln, Höhenstatistik im Umkreis, Abstand zu Küste und Flüssen |
-| `test_geodaten.py`, `testdaten/` | Tests ohne Netz und ohne Zwischenspeicher |
+| `orte.py` | Orte und Kreise des Kernraums: `data/tabellen/orte.csv`, `kreise.csv`, `dateien.csv` (siehe [Orte des Kernraums](#orte-des-kernraums-ortepy)) |
+| `landschaften.csv`, `landschaften_dateien.csv`, `exonyme.csv`, `ausschluesse.csv`, `gelaende_gebiete.csv` | Hilfstabellen von `orte.py` (von Hand gepflegt) |
+| `test_geodaten.py`, `test_orte.py`, `testdaten/` | Tests ohne Netz und ohne Zwischenspeicher |
 
 Erzeugt bzw. gepflegt in `data/karte/`:
 
@@ -42,6 +44,9 @@ python3 tools/geodaten/geodaten.py vorschau --breite 1500 --max-rang 6 --ausschn
 
 python3 tools/geodaten/staedte.py --min-einwohner 5000 --ausgabe /tmp/kandidaten.tsv
 python3 tools/geodaten/hoehen.py 13.40 52.52 --radius 5
+
+python3 tools/geodaten/orte.py                         # Orte und Kreise erzeugen (≈ 70 s), siehe unten
+python3 tools/geodaten/orte.py --pruefen               # Exitcode 1, wenn die Tabellen veraltet sind
 
 python3 -m unittest discover -s tools/geodaten         # Tests (auch mit Python 3.10)
 ```
@@ -243,3 +248,146 @@ Bei durchschnittlich 150 km² je Ort (Design-Dokument 05) ergäbe das Kernraum-L
 Österreich und Böhmen-Mähren umfasst etwa 700.000 km². Der Ort-Generator sollte die Säume und dünn
 besiedelte Gebiete (Hochgebirge, Moore) gröber aufteilen, oder die Zahl der Orte steigt auf etwa
 5.000.
+
+## Orte des Kernraums (`orte.py`)
+
+`orte.py` erzeugt reproduzierbar die Orte und Kreise des ganzen Kernraums (Meilenstein M3) in
+`data/tabellen/orte.csv`, `kreise.csv` und `dateien.csv`. Die 60 Orte der Testregion (M1, mit
+Historie) bleiben unverändert – Kennung, Name, Datei, Lage, Gelände, Stadt, Quelle, Reihenfolge und
+Historie; sie erhalten nur ihren Kreis und ihre Fläche aus der Karte. Alle neuen Orte sind *Orte ohne
+Daten* (chronik-skript.md, Abschnitt 3.6): ohne Besitz und Bevölkerung, ohne Historie.
+`besitz.csv`, `bevoelkerung.csv` und `staaten_historie.csv` bleiben unberührt.
+
+### Aufruf und Reihenfolge
+
+```sh
+python3 tools/geodaten/orte.py                         # Tabellen schreiben (≈ 70 s; Rohdaten im Zwischenspeicher)
+python3 tools/archivar/archivar.py                     # data/history/orte/*.chron, kreise/*.chron
+python3 tools/kartengenerator/kartengenerator.py       # provinzen.png, fluesse.png, definition.csv
+python3 tools/archivar/archivar.py --pruefen           # history/ aktuell?
+python3 tools/geodaten/orte.py --pruefen               # Tabellen aktuell? (Exitcode 1 sonst)
+ORTE_VOLLTEST=1 python3 -m unittest tools.geodaten.test_orte   # dasselbe als Test
+```
+
+`orte.py` rechnet die Karte selbst mit der Python-API des Kartengenerators (gleiche Eingaben, gleiche
+Ladereihenfolge wie `kartengenerator.py`): daraus kommen die Nachbarschaften für die Kreise und die
+Fläche aller Orte, die damit genau zu `definition.csv` passt. Der Lauf ist deterministisch: gleiche
+Eingaben ergeben byte-gleiche Tabellen (geprüft mit Python 3.10/numpy 2.2 und 3.13/numpy 2.5).
+`--bericht DATEI` schreibt die Kennzahlen zusätzlich in eine Datei.
+
+### Hilfstabellen
+
+| Datei | Inhalt |
+|---|---|
+| `landschaften.csv` | Staat und GeoNames-Verwaltungscodes (admin1–admin4) → Landschaft; 419 Regeln. Es gilt die passende Regel mit der tiefsten Ebene; leeres Feld = beliebig, „-“ = Feld muss leer sein (für fehlerhafte Codes in GeoNames). Ohne passende Regel erhält ein Kandidat die Landschaft des nächsten zugeordneten Kandidaten (steht im Bericht). |
+| `landschaften_dateien.csv` | 77 Landschaften = Dateien unter `history/orte` und `history/kreise`: Name, Kurzname (Zusatz bei gleichnamigen Orten), Abstandsfaktor der Auswahl, Umfang für den Kopfkommentar (`dateien.csv`) |
+| `exonyme.csv` | Deutsche Namen: `geonameid;name_de;geprueft;heute`. `geprueft = ja` nur, wenn `name_de` wörtlich in den GeoNames-Alternativnamen steht – allein oder mit Ortszusatz („Braunsberg  Ostpreußen“, „Landskron/Schönhengstgau“: Name, dann Leerzeichen oder Schrägstrich, dann ein groß geschriebener Zusatz). `orte.py` prüft das und die Spalte `heute` (GeoNames-Name, zur Lesbarkeit) bei jedem Lauf. Einträge mit `nein` (208) sind Namen ohne Beleg in GeoNames; sie wirken nicht. 902 Einträge mit `ja`. |
+| `ausschluesse.csv` | 51 Kandidaten, die entfallen, mit Begründung: moderne Gründungen (`neugruendung`, etwa Wolfsburg, Eisenhüttenstadt), Kunstnamen aus Gemeindereformen (`kunstname`, etwa Filderstadt, Rodgau), außerdem `ortsteil`, `doppelt`, `datenfehler` |
+| `gelaende_gebiete.csv` | 14 Börden und 2 Heiden als Kreise (Mittelpunkt und Radius geschätzt) mit Beleg |
+
+### Ablauf
+
+1. **Kandidaten**: `staedte.kandidaten()` (im Kernraum, auf Land oder bis 2 km vor dem Ufer), nur
+   GeoNames-Codes PPL, PPLA … PPLA4, PPLC (keine Ortsteile PPLX, keine Wüstungen), ohne
+   `ausschluesse.csv`. Die GeoNames-Entsprechung eines M1-Ortes (gleicher Name, auch
+   Alternativname oder Namensanfang, höchstens 5 km entfernt) entfällt als Kandidat.
+2. **Bedeutung** = log10(max(Einwohner, 300)) + Rangzuschlag + Bekanntheit. Rangzuschlag nach
+   Verwaltungsrang: 1,0 Haupt- oder Landeshauptstadt, 0,5 Sitz auf Kreisebene (Kreis, Bezirk,
+   Powiat, Okres, Arrondissement), 0,1 Gemeindesitz; die GeoNames-Codes bedeuten je Staat
+   Verschiedenes (Tabelle `VERWALTUNGSRANG`). Bekanntheit = 0,1 × log2(1 + Zahl der
+   Alternativnamen), höchstens 0,5 – sie hebt bekannte Orte über gleich große Vororte (Bad Ischl).
+3. **Lage**: Kandidaten knapp im Wasser rücken auf das nächste Kernraum-Landpixel (höchstens 3 km,
+   in der Quellenangabe vermerkt); ohne Land in 3 km entfallen sie (Reichenau im Bodensee).
+   Länge und Breite mit 4 Nachkommastellen.
+4. **Auswahl** (gewichtete Poisson-Scheibe): in absteigender Bedeutung wird ein Kandidat genommen,
+   wenn kein gewählter Ort (die M1-Orte eingeschlossen) näher liegt als
+   r = 7,95 km × f × Landschaftsfaktor. f fällt linear von 1,2 (Bedeutung ≤ 3,2, ein Dorf) auf
+   0,55 (≥ 6,8, eine Großstadt); der Landschaftsfaktor ist 1,15 in den Säumen (Flandern, Brabant,
+   Hennegau, Namur, Ardennen, Französisch-Flandern, Geldern, Overijssel, Groningen-Drenthe, Jütland,
+   Kongresspolen, Galizien), sonst 1. Gegenüber Orten anderer Landschaften gilt 0,8 × r, damit
+   Grenzorte (Asch neben Selb) nicht verdrängt werden. Danach erhält jede Landfläche ohne Ort
+   (Insel) ihren wichtigsten Kandidaten. Zuletzt die Lückenfüllung: solange ein Landblock
+   (4 × 4 Pixel) weiter als 15 km vom nächsten Ort entfernt ist, kommt der ihm nächste Kandidat
+   hinzu, der mindestens 6 km Abstand zu allen Orten hat.
+5. **Name**: (a) Eintrag in `exonyme.csv` mit `geprueft = ja`; (b) in DE, AT, LI der GeoNames-Name
+   ohne moderne Zusätze („Lutherstadt“, „Ostseebad“, „Hansestadt“, „… Stadt“ usw.; „Bad“ bleibt);
+   (c) in Südtirol der deutsche Teil des zweisprachigen Namens („Bolzano - Bozen“ → Bozen);
+   (d) sonst der heutige Name. Deutsche Namen werden nie ohne GeoNames-Beleg vergeben.
+   Gleichnamige Orte (auch gleich einem M1-Ort) erhalten „ (Kurzname der Landschaft)“, etwa
+   „Neustadt (Oberschlesien)“; Namen mit Klammerzusatz bleiben.
+6. **Kennung**: Kleinbuchstaben, ä → ae, ö → oe, ü → ue, ß → ss, Akzente weg, sonst „_“.
+   Gleiche Kennungen erhalten alle die Landschaft als Zusatz, dann den nächsten benannten Fluss
+   (bis 5 km), zuletzt eine Zahl; Kennungen der M1-Orte sind belegt.
+7. **Gelände** aus dem Höhenmodell (Landpixel im Umkreis von 6 km: Mittel, 5- und 95-%-Perzentil,
+   Relief = p95 − p5; Perzentile, weil einzelne Kacheln Ausreißer haben). Vorrang in dieser
+   Reihenfolge:
+
+   | Gelände | Regel |
+   |---|---|
+   | `kueste` | auf einer Insel bis 400 km² oder bis 6 km von der Küste und Mittel ≤ 30 m; Haffe (Binnengewässer ab 20 km², die ans Meer grenzen: Frisches Haff, Lebasee) zählen als Küste |
+   | `hochgebirge` | p95 ≥ 1500 m oder Mittel ≥ 1200 m |
+   | `mittelgebirge` | Relief ≥ 300 m, oder Mittel ≥ 450 m und Relief ≥ 150 m |
+   | `boerde`, `heide` | in einem Gebiet aus `gelaende_gebiete.csv` und Relief < 150 m |
+   | `flussaue` | bis 3 km von einem großen Fluss, Mittel höchstens 40 m über p5, Relief < 150 m |
+   | `seenplatte` | Seenanteil ≥ 5 % im Umkreis von 10 km (ohne Haffe) und Mittel < 200 m |
+   | `huegelland` | Relief ≥ 100 m, oder Mittel ≥ 200 m und Relief ≥ 50 m |
+   | `flachland` | sonst (auch flache Hochebenen wie die Münchner Schotterebene) |
+
+   `hochgebirge` ist in M3 zu `data/common/gelaende.chron` hinzugekommen. `bruch` und `wald`
+   vergibt die Regel nicht (nur M1-Orte haben sie).
+8. **Stadt** = `ja`, wenn der Ort heute Haupt-, Landeshaupt- oder Kreisstadt ist (Verwaltungsrang
+   ≤ 2) oder heute mindestens 20.000 Einwohner hat. Eine Näherung, kein historisches Stadtrecht.
+9. **Kreise**: Nachbarn sind Orte mit gemeinsamer Grenze auf der Karte. Ein abgetrennter Teil einer
+   Landschaft mit weniger als 4 Orten (Exklave, etwa Jüterbog) bildet Kreise mit der Landschaft, mit
+   der er die längste Grenze teilt; Inseln bleiben in ihrer Landschaft und werden über die
+   kürzeste Luftlinie angebunden. Je Landschaft verschmilzt eine Ward-Agglomeration auf dem
+   Nachbarschaftsgraphen benachbarte Gruppen (höchstens 12 Orte) bis zur Zielzahl
+   round(n / 7,1), danach nur noch Gruppen unter 4 Orten; eine zu kleine Gruppe ohne freien
+   Nachbarn wird mit der kleinsten Nachbargruppe zusammengelegt und neu zweigeteilt. Name und
+   Kennung (`kr_<Hauptort>`) nach dem größten Ort (heutige Einwohnerzahl, für M1-Orte die ihrer
+   GeoNames-Entsprechung); Quelle „räumlich gebildet (M3), keine historische Verwaltungseinheit“.
+10. **Reihenfolge** in `orte.csv`: die M1-Orte unverändert vorn, dann die neuen Orte nach
+    Landschaft, Kreis (je Landschaft von Nord nach Süd), Hauptort zuerst, dann nach Bedeutung;
+    `kreise.csv` in derselben Kreisfolge. `dateien.csv` erhält Kopfkommentare für die neuen Dateien
+    und einen M3-Absatz für die Dateien der M1-Orte (bei jedem Lauf ersetzt); die Zeilen der
+    Staaten bleiben unverändert.
+
+Quellenangabe eines neuen Ortes: `GeoNames (CC BY 4.0), geonameid N; <Herkunft des Namens>[; Zusatz
+der Landschaft …][; Lage auf das nächste Landpixel gesetzt]; Gelände aus Höhenmodell; Fläche aus der
+Karte`.
+
+### Kennzahlen (Stand dieses Laufs)
+
+- 14.411 Kandidaten (51 ausgeschlossen, 60 M1-Entsprechungen); gewählt 4.481 neue Orte (Scheibe
+  4.411, Inseln 1, Füllung 69). Zusammen **4.541 Orte** in 77 Landschaften, **627 Kreise**
+  (4–12 Orte, Median 7).
+- Fläche: Median 169 km², kleinste 1 km² (Helgoland), größte 1.147 km² (Insterburg), Summe
+  826.356 km².
+- Gelände: Hügelland 1.619, Flachland 1.487, Mittelgebirge 736, Flussaue 243, Hochgebirge 195,
+  Küste 131, Börde 66, Seenplatte 40, Heide 21, Bruch 2, Wald 1. Städte: 1.086.
+- Namen der neuen Orte: 2.632 deutsche GeoNames-Namen in DE/AT/LI, 890 deutsche Namen aus
+  `exonyme.csv`, 5 aus zweisprachigen Südtiroler Namen, 954 heutige Namen ohne abweichenden
+  deutschen Namen in GeoNames (am meisten in Posen 91, Lothringen 84, Böhmen 82,
+  Westpreußen 79, Kongresspolen 78).
+
+### Bekannte Grenzen
+
+- GeoNames `cities1000` führt nur Orte mit heute mindestens 1.000 Einwohnern. In der Oblast
+  Kaliningrad und im Memelland ist die Quelle dünn: Land liegt dort bis 27 km vom nächsten Ort
+  entfernt (im übrigen Kernraum höchstens 25 km); deshalb `max_radius_km = 32` in `karte.chron`.
+  Inseln ohne Kandidaten bleiben ohne Ort: 41 Teilflächen mit zusammen 2.139 Pixeln (Rømø 85 km²,
+  Nordstrand 48, Poel 34, Amrum 29, Spiekeroog 19, Schilfgürtel des Neusiedler Sees 12, Memmert 8,
+  Mellum 7, Wustrow 7, Trischen 6, Rottumeroog 5, Baltrum 4 …).
+- Auswahl und Kreisnamen folgen der heutigen Bedeutung (Einwohner, Verwaltungssitze): Industrie-
+  städte des 19./20. Jahrhunderts sind stärker vertreten, abgegangene Orte fehlen; Kreise heißen
+  nach dem heute größten Ort (Kreis Freistadt statt Teschen, Kreis Ostrava).
+- Deutsche Namen nur mit GeoNames-Beleg: Für 954 Orte führt GeoNames keinen abweichenden deutschen
+  Namen (etwa Lubawa/Löbau, Krynica Morska/Kahlberg, Mährisch Ostrau). Ergänzen nur mit Beleg in
+  `exonyme.csv`. Umbenennungen der Jahre 1933–1945 sind nicht aufgenommen; „Bad“ im Namen ist meist
+  erst im 19./20. Jahrhundert verliehen und bleibt trotzdem stehen (92 Orte).
+- Landschaftsgrenzen folgen heutigen Verwaltungsgrenzen (Kreise, Powiats, Okresy, Départements,
+  Gemeinden) und nähern die historischen Grenzen nur an.
+- Gelände ist eine Näherung aus Höhen im Raster von etwa 400 m mit festen Schwellen; Börden und
+  Heiden nur in den Kreisen von `gelaende_gebiete.csv`.
+- Helgoland (1 km²) und Wangerooge (6 km²) sind auf der Karte sehr klein; Archivar und
+  Kartengenerator warnen darüber.

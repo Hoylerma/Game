@@ -1,0 +1,100 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
+# Orte: Grafschaft Glatz – Orte ohne Daten (Meilenstein M3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
+# Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
+# ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
+# und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
+#
+# Umfang: Grafschaft Glatz (bis 1742 böhmisch, danach preußisch; heute Kreis Kłodzko).
+
+ort glatz {
+    name     = "Glatz"
+    gelaende = huegelland
+    lage     = { 16.6614 50.4349 }
+    flaeche  = 164
+    stadt    = ja
+    kreis    = kr_glatz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3096053; deutscher Name aus den GeoNames-Alternativnamen (heute Kłodzko); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort neurode {
+    name     = "Neurode"
+    gelaende = mittelgebirge
+    lage     = { 16.5016 50.5801 }
+    flaeche  = 242
+    stadt    = ja
+    kreis    = kr_glatz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3090768; deutscher Name aus den GeoNames-Alternativnamen (heute Nowa Ruda); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bad_kudowa {
+    name     = "Bad Kudowa"
+    gelaende = mittelgebirge
+    lage     = { 16.244 50.443 }
+    flaeche  = 100
+    stadt    = nein
+    kreis    = kr_glatz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3094303; deutscher Name aus den GeoNames-Alternativnamen (heute Kudowa-Zdrój); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort habelschwerdt {
+    name     = "Habelschwerdt"
+    gelaende = huegelland
+    lage     = { 16.6423 50.3018 }
+    flaeche  = 310
+    stadt    = nein
+    kreis    = kr_glatz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3101968; deutscher Name aus den GeoNames-Alternativnamen (heute Bystrzyca Kłodzka); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bad_altheide {
+    name     = "Bad Altheide"
+    gelaende = mittelgebirge
+    lage     = { 16.5127 50.4037 }
+    flaeche  = 160
+    stadt    = nein
+    kreis    = kr_glatz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3088496; deutscher Name aus den GeoNames-Alternativnamen (heute Polanica-Zdrój); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bad_landeck {
+    name     = "Bad Landeck"
+    gelaende = mittelgebirge
+    lage     = { 16.8795 50.3437 }
+    flaeche  = 191
+    stadt    = nein
+    kreis    = kr_glatz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3094016; deutscher Name aus den GeoNames-Alternativnamen (heute Lądek-Zdrój); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bad_reinerz {
+    name     = "Bad Reinerz"
+    gelaende = mittelgebirge
+    lage     = { 16.3909 50.4033 }
+    flaeche  = 172
+    stadt    = nein
+    kreis    = kr_glatz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3099992; deutscher Name aus den GeoNames-Alternativnamen (heute Duszniki-Zdrój); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort mittelwalde {
+    name     = "Mittelwalde"
+    gelaende = mittelgebirge
+    lage     = { 16.6671 50.1478 }
+    flaeche  = 223
+    stadt    = nein
+    kreis    = kr_glatz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3091979; deutscher Name aus den GeoNames-Alternativnamen (heute Międzylesie); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wuenschelburg {
+    name     = "Wünschelburg"
+    gelaende = mittelgebirge
+    lage     = { 16.4006 50.5043 }
+    flaeche  = 123
+    stadt    = nein
+    kreis    = kr_glatz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3087535; deutscher Name aus den GeoNames-Alternativnamen (heute Radków); Gelände aus Höhenmodell; Fläche aus der Karte"
+}

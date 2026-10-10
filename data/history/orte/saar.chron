@@ -1,0 +1,220 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
+# Orte: Saar – Orte ohne Daten (Meilenstein M3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
+# Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
+# ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
+# und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
+#
+# Umfang: Land an der Saar (heute Saarland; 1648 u. a. Nassau-Saarbrücken, Pfalz-Zweibrücken, Kurtrier und Lothringen).
+
+ort sankt_wendel {
+    name     = "Sankt Wendel"
+    gelaende = huegelland
+    lage     = { 7.1681 49.4663 }
+    flaeche  = 118
+    stadt    = ja
+    kreis    = kr_sankt_wendel
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2841463; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wadern {
+    name     = "Wadern"
+    gelaende = huegelland
+    lage     = { 6.8877 49.5412 }
+    flaeche  = 138
+    stadt    = nein
+    kreis    = kr_sankt_wendel
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2815565; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort tholey {
+    name     = "Tholey"
+    gelaende = huegelland
+    lage     = { 7.0369 49.4837 }
+    flaeche  = 138
+    stadt    = nein
+    kreis    = kr_sankt_wendel
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2822713; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort nohfelden {
+    name     = "Nohfelden"
+    gelaende = huegelland
+    lage     = { 7.1428 49.5869 }
+    flaeche  = 104
+    stadt    = nein
+    kreis    = kr_sankt_wendel
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2862294; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort nonnweiler {
+    name     = "Nonnweiler"
+    gelaende = mittelgebirge
+    lage     = { 6.9699 49.6076 }
+    flaeche  = 135
+    stadt    = nein
+    kreis    = kr_sankt_wendel
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2862174; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort freisen {
+    name     = "Freisen"
+    gelaende = huegelland
+    lage     = { 7.25 49.55 }
+    flaeche  = 104
+    stadt    = nein
+    kreis    = kr_sankt_wendel
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2925038; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort neunkirchen {
+    name     = "Neunkirchen"
+    gelaende = huegelland
+    lage     = { 7.1805 49.3445 }
+    flaeche  = 124
+    stadt    = ja
+    kreis    = kr_neunkirchen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2864435; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort homburg {
+    name     = "Homburg"
+    gelaende = huegelland
+    lage     = { 7.3387 49.3264 }
+    flaeche  = 94
+    stadt    = ja
+    kreis    = kr_neunkirchen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2899449; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort blieskastel {
+    name     = "Blieskastel"
+    gelaende = huegelland
+    lage     = { 7.2562 49.2372 }
+    flaeche  = 116
+    stadt    = ja
+    kreis    = kr_neunkirchen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2947739; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort sankt_ingbert {
+    name     = "Sankt Ingbert"
+    gelaende = huegelland
+    lage     = { 7.1167 49.277 }
+    flaeche  = 112
+    stadt    = ja
+    kreis    = kr_neunkirchen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2841590; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gersheim {
+    name     = "Gersheim"
+    gelaende = huegelland
+    lage     = { 7.2 49.15 }
+    flaeche  = 165
+    stadt    = nein
+    kreis    = kr_neunkirchen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2920921; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort saarbruecken {
+    name     = "Saarbrücken"
+    gelaende = huegelland
+    lage     = { 7.0098 49.2326 }
+    flaeche  = 121
+    stadt    = ja
+    kreis    = kr_saarbruecken
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2842647; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort saarlouis {
+    name     = "Saarlouis"
+    gelaende = huegelland
+    lage     = { 6.7515 49.3137 }
+    flaeche  = 132
+    stadt    = ja
+    kreis    = kr_saarbruecken
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2842632; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort merzig {
+    name     = "Merzig"
+    gelaende = huegelland
+    lage     = { 6.6387 49.4433 }
+    flaeche  = 187
+    stadt    = ja
+    kreis    = kr_saarbruecken
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2871675; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort voelklingen {
+    name     = "Völklingen"
+    gelaende = huegelland
+    lage     = { 6.8587 49.2516 }
+    flaeche  = 97
+    stadt    = ja
+    kreis    = kr_saarbruecken
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2816630; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort heusweiler {
+    name     = "Heusweiler"
+    gelaende = huegelland
+    lage     = { 6.9304 49.3363 }
+    flaeche  = 93
+    stadt    = ja
+    kreis    = kr_saarbruecken
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2904985; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort eppelborn {
+    name     = "Eppelborn"
+    gelaende = huegelland
+    lage     = { 6.9667 49.4 }
+    flaeche  = 124
+    stadt    = nein
+    kreis    = kr_saarbruecken
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2929865; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort nalbach {
+    name     = "Nalbach"
+    gelaende = huegelland
+    lage     = { 6.7833 49.3833 }
+    flaeche  = 126
+    stadt    = nein
+    kreis    = kr_saarbruecken
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2867127; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort merchweiler {
+    name     = "Merchweiler"
+    gelaende = huegelland
+    lage     = { 7.05 49.35 }
+    flaeche  = 84
+    stadt    = nein
+    kreis    = kr_saarbruecken
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2871832; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort losheim {
+    name     = "Losheim"
+    gelaende = huegelland
+    lage     = { 6.7455 49.5099 }
+    flaeche  = 142
+    stadt    = nein
+    kreis    = kr_saarbruecken
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2875831; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort orscholz {
+    name     = "Orscholz"
+    gelaende = huegelland
+    lage     = { 6.525 49.5059 }
+    flaeche  = 156
+    stadt    = nein
+    kreis    = kr_saarbruecken
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2857044; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}

@@ -1,0 +1,670 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
+# Orte: Mainfranken – Orte ohne Daten (Meilenstein M3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
+# Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
+# ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
+# und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
+#
+# Umfang: Mainfranken mit Würzburg, Aschaffenburg und Schweinfurt (heute Unterfranken und Main-Tauber-Kreis).
+
+ort bad_neustadt_an_der_saale {
+    name     = "Bad Neustadt an der Saale"
+    gelaende = huegelland
+    lage     = { 10.2067 50.3217 }
+    flaeche  = 151
+    stadt    = nein
+    kreis    = kr_bad_neustadt_an_der_saale
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2953389; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bad_koenigshofen_im_grabfeld {
+    name     = "Bad Königshofen im Grabfeld"
+    gelaende = huegelland
+    lage     = { 10.4689 50.3008 }
+    flaeche  = 196
+    stadt    = nein
+    kreis    = kr_bad_neustadt_an_der_saale
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2885829; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort muennerstadt {
+    name     = "Münnerstadt"
+    gelaende = huegelland
+    lage     = { 10.2019 50.2464 }
+    flaeche  = 103
+    stadt    = nein
+    kreis    = kr_bad_neustadt_an_der_saale
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2867571; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort mellrichstadt {
+    name     = "Mellrichstadt"
+    gelaende = huegelland
+    lage     = { 10.3033 50.4285 }
+    flaeche  = 218
+    stadt    = nein
+    kreis    = kr_bad_neustadt_an_der_saale
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2872047; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bischofsheim_an_der_rhoen {
+    name     = "Bischofsheim an der Rhön"
+    gelaende = mittelgebirge
+    lage     = { 10.0075 50.4024 }
+    flaeche  = 117
+    stadt    = nein
+    kreis    = kr_bad_neustadt_an_der_saale
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2948287; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort massbach {
+    name     = "Maßbach"
+    gelaende = huegelland
+    lage     = { 10.2752 50.1832 }
+    flaeche  = 222
+    stadt    = nein
+    kreis    = kr_bad_neustadt_an_der_saale
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2873011; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort oberelsbach {
+    name     = "Oberelsbach"
+    gelaende = mittelgebirge
+    lage     = { 10.1169 50.4412 }
+    flaeche  = 112
+    stadt    = nein
+    kreis    = kr_bad_neustadt_an_der_saale
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2860932; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort fladungen {
+    name     = "Fladungen"
+    gelaende = mittelgebirge
+    lage     = { 10.1458 50.5205 }
+    flaeche  = 177
+    stadt    = nein
+    kreis    = kr_bad_neustadt_an_der_saale
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2926402; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wuelfershausen {
+    name     = "Wülfershausen"
+    gelaende = huegelland
+    lage     = { 10.3408 50.332 }
+    flaeche  = 132
+    stadt    = nein
+    kreis    = kr_bad_neustadt_an_der_saale
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2805928; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bad_kissingen {
+    name     = "Bad Kissingen"
+    gelaende = huegelland
+    lage     = { 10.0778 50.2023 }
+    flaeche  = 108
+    stadt    = ja
+    kreis    = kr_bad_kissingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2953424; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort karlstadt {
+    name     = "Karlstadt"
+    gelaende = huegelland
+    lage     = { 9.7724 49.9603 }
+    flaeche  = 179
+    stadt    = ja
+    kreis    = kr_bad_kissingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2892786; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hammelburg {
+    name     = "Hammelburg"
+    gelaende = huegelland
+    lage     = { 9.8914 50.1163 }
+    flaeche  = 136
+    stadt    = nein
+    kreis    = kr_bad_kissingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2911214; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gemuenden_am_main {
+    name     = "Gemünden am Main"
+    gelaende = huegelland
+    lage     = { 9.7059 50.0495 }
+    flaeche  = 145
+    stadt    = nein
+    kreis    = kr_bad_kissingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2921379; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bad_brueckenau {
+    name     = "Bad Brückenau"
+    gelaende = mittelgebirge
+    lage     = { 9.7898 50.3085 }
+    flaeche  = 141
+    stadt    = nein
+    kreis    = kr_bad_kissingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2953535; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort burkardroth {
+    name     = "Burkardroth"
+    gelaende = huegelland
+    lage     = { 9.9916 50.2713 }
+    flaeche  = 150
+    stadt    = nein
+    kreis    = kr_bad_kissingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2941034; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort oberthulba {
+    name     = "Oberthulba"
+    gelaende = huegelland
+    lage     = { 9.9588 50.199 }
+    flaeche  = 110
+    stadt    = nein
+    kreis    = kr_bad_kissingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2858787; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort burgsinn {
+    name     = "Burgsinn"
+    gelaende = huegelland
+    lage     = { 9.6512 50.1497 }
+    flaeche  = 234
+    stadt    = nein
+    kreis    = kr_bad_kissingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2941159; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wartmannsroth {
+    name     = "Wartmannsroth"
+    gelaende = huegelland
+    lage     = { 9.7833 50.1667 }
+    flaeche  = 132
+    stadt    = nein
+    kreis    = kr_bad_kissingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2813888; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort zeitlofs {
+    name     = "Zeitlofs"
+    gelaende = huegelland
+    lage     = { 9.6724 50.2619 }
+    flaeche  = 187
+    stadt    = nein
+    kreis    = kr_bad_kissingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2804925; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort motten {
+    name     = "Motten"
+    gelaende = mittelgebirge
+    lage     = { 9.7725 50.3956 }
+    flaeche  = 171
+    stadt    = nein
+    kreis    = kr_bad_kissingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2868992; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort schweinfurt {
+    name     = "Schweinfurt"
+    gelaende = huegelland
+    lage     = { 10.2218 50.0494 }
+    flaeche  = 196
+    stadt    = ja
+    kreis    = kr_schweinfurt
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2834498; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort werneck {
+    name     = "Werneck"
+    gelaende = huegelland
+    lage     = { 10.0988 49.982 }
+    flaeche  = 118
+    stadt    = nein
+    kreis    = kr_schweinfurt
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2810832; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort arnstein {
+    name     = "Arnstein"
+    gelaende = huegelland
+    lage     = { 9.9698 49.9777 }
+    flaeche  = 159
+    stadt    = nein
+    kreis    = kr_schweinfurt
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2955431; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bergtheim {
+    name     = "Bergtheim"
+    gelaende = huegelland
+    lage     = { 10.0667 49.9 }
+    flaeche  = 145
+    stadt    = nein
+    kreis    = kr_schweinfurt
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2950249; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wasserlosen {
+    name     = "Wasserlosen"
+    gelaende = huegelland
+    lage     = { 10.0302 50.0948 }
+    flaeche  = 150
+    stadt    = nein
+    kreis    = kr_schweinfurt
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2813723; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hassfurt {
+    name     = "Haßfurt"
+    gelaende = huegelland
+    lage     = { 10.5156 50.0352 }
+    flaeche  = 209
+    stadt    = ja
+    kreis    = kr_hassfurt
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2909335; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort eltmann {
+    name     = "Eltmann"
+    gelaende = huegelland
+    lage     = { 10.6671 49.9715 }
+    flaeche  = 210
+    stadt    = nein
+    kreis    = kr_hassfurt
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2930650; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hofheim_in_unterfranken {
+    name     = "Hofheim in Unterfranken"
+    gelaende = huegelland
+    lage     = { 10.5232 50.1367 }
+    flaeche  = 194
+    stadt    = nein
+    kreis    = kr_hassfurt
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2902531; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort maroldsweisach {
+    name     = "Maroldsweisach"
+    gelaende = huegelland
+    lage     = { 10.66 50.1958 }
+    flaeche  = 222
+    stadt    = nein
+    kreis    = kr_hassfurt
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2873228; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort rentweinsdorf {
+    name     = "Rentweinsdorf"
+    gelaende = huegelland
+    lage     = { 10.7992 50.0634 }
+    flaeche  = 192
+    stadt    = nein
+    kreis    = kr_hassfurt
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2848143; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort aschaffenburg {
+    name     = "Aschaffenburg"
+    gelaende = huegelland
+    lage     = { 9.1521 49.977 }
+    flaeche  = 115
+    stadt    = ja
+    kreis    = kr_aschaffenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2955272; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort grossostheim {
+    name     = "Großostheim"
+    gelaende = huegelland
+    lage     = { 9.076 49.9198 }
+    flaeche  = 109
+    stadt    = nein
+    kreis    = kr_aschaffenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2915196; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lohr_am_main {
+    name     = "Lohr am Main"
+    gelaende = mittelgebirge
+    lage     = { 9.5722 49.9892 }
+    flaeche  = 169
+    stadt    = nein
+    kreis    = kr_aschaffenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2876147; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort moembris {
+    name     = "Mömbris"
+    gelaende = huegelland
+    lage     = { 9.1637 50.0692 }
+    flaeche  = 120
+    stadt    = nein
+    kreis    = kr_aschaffenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2869936; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort erlenbach_am_main {
+    name     = "Erlenbach am Main"
+    gelaende = huegelland
+    lage     = { 9.1631 49.8034 }
+    flaeche  = 171
+    stadt    = nein
+    kreis    = kr_aschaffenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2929484; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort laufach {
+    name     = "Laufach"
+    gelaende = huegelland
+    lage     = { 9.3 50.0167 }
+    flaeche  = 129
+    stadt    = nein
+    kreis    = kr_aschaffenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2880146; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort leidersbach {
+    name     = "Leidersbach"
+    gelaende = huegelland
+    lage     = { 9.2217 49.9014 }
+    flaeche  = 130
+    stadt    = nein
+    kreis    = kr_aschaffenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2879299; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort frammersbach {
+    name     = "Frammersbach"
+    gelaende = huegelland
+    lage     = { 9.4689 50.0647 }
+    flaeche  = 206
+    stadt    = nein
+    kreis    = kr_aschaffenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2925665; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort weibersbrunn {
+    name     = "Weibersbrunn"
+    gelaende = huegelland
+    lage     = { 9.3661 49.9308 }
+    flaeche  = 199
+    stadt    = nein
+    kreis    = kr_aschaffenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2813176; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kleinkahl {
+    name     = "Kleinkahl"
+    gelaende = huegelland
+    lage     = { 9.2667 50.1167 }
+    flaeche  = 167
+    stadt    = nein
+    kreis    = kr_aschaffenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2888684; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wuerzburg {
+    name     = "Würzburg"
+    gelaende = huegelland
+    lage     = { 9.9512 49.7939 }
+    flaeche  = 168
+    stadt    = ja
+    kreis    = kr_wuerzburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2805615; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort marktheidenfeld {
+    name     = "Marktheidenfeld"
+    gelaende = huegelland
+    lage     = { 9.6036 49.8454 }
+    flaeche  = 185
+    stadt    = nein
+    kreis    = kr_wuerzburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2873301; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort guentersleben {
+    name     = "Güntersleben"
+    gelaende = huegelland
+    lage     = { 9.905 49.8697 }
+    flaeche  = 133
+    stadt    = nein
+    kreis    = kr_wuerzburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2913587; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hettstadt {
+    name     = "Hettstadt"
+    gelaende = huegelland
+    lage     = { 9.815 49.7994 }
+    flaeche  = 131
+    stadt    = nein
+    kreis    = kr_wuerzburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2905208; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort helmstadt {
+    name     = "Helmstadt"
+    gelaende = huegelland
+    lage     = { 9.708 49.7618 }
+    flaeche  = 198
+    stadt    = nein
+    kreis    = kr_wuerzburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2906680; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wertheim {
+    name     = "Wertheim"
+    gelaende = huegelland
+    lage     = { 9.5085 49.759 }
+    flaeche  = 126
+    stadt    = ja
+    kreis    = kr_wertheim
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2810716; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort tauberbischofsheim {
+    name     = "Tauberbischofsheim"
+    gelaende = huegelland
+    lage     = { 9.6628 49.6247 }
+    flaeche  = 209
+    stadt    = ja
+    kreis    = kr_wertheim
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2823854; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort miltenberg {
+    name     = "Miltenberg"
+    gelaende = mittelgebirge
+    lage     = { 9.2673 49.7045 }
+    flaeche  = 181
+    stadt    = ja
+    kreis    = kr_wertheim
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2871079; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kuelsheim {
+    name     = "Külsheim"
+    gelaende = huegelland
+    lage     = { 9.5236 49.6694 }
+    flaeche  = 114
+    stadt    = nein
+    kreis    = kr_wertheim
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2882575; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kirchzell {
+    name     = "Kirchzell"
+    gelaende = mittelgebirge
+    lage     = { 9.1778 49.618 }
+    flaeche  = 157
+    stadt    = nein
+    kreis    = kr_wertheim
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2890327; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort dorfprozelten {
+    name     = "Dorfprozelten"
+    gelaende = mittelgebirge
+    lage     = { 9.3803 49.7806 }
+    flaeche  = 181
+    stadt    = nein
+    kreis    = kr_wertheim
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2936040; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kitzingen {
+    name     = "Kitzingen"
+    gelaende = huegelland
+    lage     = { 10.1507 49.7397 }
+    flaeche  = 147
+    stadt    = ja
+    kreis    = kr_kitzingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2890158; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ochsenfurt {
+    name     = "Ochsenfurt"
+    gelaende = huegelland
+    lage     = { 10.0623 49.6643 }
+    flaeche  = 149
+    stadt    = nein
+    kreis    = kr_kitzingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2858333; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort volkach {
+    name     = "Volkach"
+    gelaende = huegelland
+    lage     = { 10.2281 49.8635 }
+    flaeche  = 132
+    stadt    = nein
+    kreis    = kr_kitzingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2816702; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gerolzhofen {
+    name     = "Gerolzhofen"
+    gelaende = huegelland
+    lage     = { 10.3483 49.9002 }
+    flaeche  = 174
+    stadt    = nein
+    kreis    = kr_kitzingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2920959; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort grettstadt {
+    name     = "Grettstadt"
+    gelaende = huegelland
+    lage     = { 10.3167 49.9833 }
+    flaeche  = 154
+    stadt    = nein
+    kreis    = kr_kitzingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2917586; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wiesentheid {
+    name     = "Wiesentheid"
+    gelaende = huegelland
+    lage     = { 10.3451 49.7945 }
+    flaeche  = 139
+    stadt    = nein
+    kreis    = kr_kitzingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2809191; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort giebelstadt {
+    name     = "Giebelstadt"
+    gelaende = huegelland
+    lage     = { 9.9444 49.6531 }
+    flaeche  = 241
+    stadt    = nein
+    kreis    = kr_kitzingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2920652; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort iphofen {
+    name     = "Iphofen"
+    gelaende = huegelland
+    lage     = { 10.2604 49.7024 }
+    flaeche  = 133
+    stadt    = nein
+    kreis    = kr_kitzingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2895882; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort geiselwind {
+    name     = "Geiselwind"
+    gelaende = huegelland
+    lage     = { 10.4706 49.7736 }
+    flaeche  = 166
+    stadt    = nein
+    kreis    = kr_kitzingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2921724; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bad_mergentheim {
+    name     = "Bad Mergentheim"
+    gelaende = huegelland
+    lage     = { 9.7736 49.4925 }
+    flaeche  = 164
+    stadt    = ja
+    kreis    = kr_bad_mergentheim
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2953402; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort weikersheim {
+    name     = "Weikersheim"
+    gelaende = huegelland
+    lage     = { 9.8998 49.4787 }
+    flaeche  = 125
+    stadt    = nein
+    kreis    = kr_bad_mergentheim
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2812655; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort niederstetten {
+    name     = "Niederstetten"
+    gelaende = huegelland
+    lage     = { 9.9194 49.4 }
+    flaeche  = 110
+    stadt    = nein
+    kreis    = kr_bad_mergentheim
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2862831; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort creglingen {
+    name     = "Creglingen"
+    gelaende = huegelland
+    lage     = { 10.0312 49.4694 }
+    flaeche  = 136
+    stadt    = nein
+    kreis    = kr_bad_mergentheim
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2939767; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort boxberg_mainfranken {
+    name     = "Boxberg (Mainfranken)"
+    gelaende = huegelland
+    lage     = { 9.6401 49.4796 }
+    flaeche  = 181
+    stadt    = nein
+    kreis    = kr_bad_mergentheim
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2945703; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort aub {
+    name     = "Aub"
+    gelaende = huegelland
+    lage     = { 10.0653 49.5527 }
+    flaeche  = 138
+    stadt    = nein
+    kreis    = kr_bad_mergentheim
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2954774; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}

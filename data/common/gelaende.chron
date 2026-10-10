@@ -8,6 +8,9 @@
 # Mittel- und Nordostdeutschlands um 1650 ab: fruchtbare Lössbörden und
 # Flussauen, magere Sandböden in Heide und Fläming, ungeteilte Bruchländer vor
 # den Trockenlegungen des 18. Jahrhunderts. Farben für den Kartenmodus "Gelände".
+#
+# Seit Meilenstein M3 (Karte des Kernraums) zusätzlich "hochgebirge" für die Alpen;
+# die Gelände der neuen Orte leitet tools/geodaten/orte.py aus dem Höhenmodell ab.
 
 gelaende flussaue {
     name     = "Flussaue"
@@ -77,4 +80,11 @@ gelaende wald {
     farbe    = { 76 112 68 }
     wachstum = 0.95     # dichte Wälder, Rodungsinseln; Holz, Glas, Leinen
     ertrag   = 0.70
+}
+
+gelaende hochgebirge {
+    name     = "Hochgebirge"
+    farbe    = { 168 162 156 }
+    wachstum = 0.90     # Alpen: kurze Vegetationszeit, wenig Siedlungsraum; Almwirtschaft, Salz, Pässe
+    ertrag   = 0.65
 }

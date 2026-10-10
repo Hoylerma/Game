@@ -1,0 +1,480 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
+# Orte: Krain – Orte ohne Daten (Meilenstein M3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
+# Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
+# ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
+# und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
+#
+# Umfang: Herzogtum Krain mit Laibach (heute Mittel-, Nordwest- und Südslowenien ohne das Küstenland).
+
+ort assling_krain {
+    name     = "Assling"
+    gelaende = mittelgebirge
+    lage     = { 14.0669 46.4306 }
+    flaeche  = 267
+    stadt    = nein
+    kreis    = kr_assling_krain
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3198647; deutscher Name aus den GeoNames-Alternativnamen (heute Jesenice); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort radmannsdorf {
+    name     = "Radmannsdorf"
+    gelaende = mittelgebirge
+    lage     = { 14.1744 46.3444 }
+    flaeche  = 199
+    stadt    = nein
+    kreis    = kr_assling_krain
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3192063; deutscher Name aus den GeoNames-Alternativnamen (heute Radovljica); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort neumarktl {
+    name     = "Neumarktl"
+    gelaende = mittelgebirge
+    lage     = { 14.3105 46.3636 }
+    flaeche  = 180
+    stadt    = nein
+    kreis    = kr_assling_krain
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3188688; deutscher Name aus den GeoNames-Alternativnamen (heute Tržič); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort zelezniki {
+    name     = "Železniki"
+    gelaende = mittelgebirge
+    lage     = { 14.1721 46.2248 }
+    flaeche  = 193
+    stadt    = nein
+    kreis    = kr_assling_krain
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3186607; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kronau {
+    name     = "Kronau"
+    gelaende = hochgebirge
+    lage     = { 13.7782 46.4569 }
+    flaeche  = 245
+    stadt    = nein
+    kreis    = kr_assling_krain
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3197373; deutscher Name aus den GeoNames-Alternativnamen (heute Kranjska Gora); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wochein_feistritz {
+    name     = "Wochein Feistritz"
+    gelaende = mittelgebirge
+    lage     = { 13.9535 46.2722 }
+    flaeche  = 270
+    stadt    = nein
+    kreis    = kr_assling_krain
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3203808; deutscher Name aus den GeoNames-Alternativnamen (heute Bohinjska Bistrica); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gorenja_vas {
+    name     = "Gorenja Vas"
+    gelaende = mittelgebirge
+    lage     = { 14.1481 46.1072 }
+    flaeche  = 277
+    stadt    = nein
+    kreis    = kr_assling_krain
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3200379; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort krainburg {
+    name     = "Krainburg"
+    gelaende = huegelland
+    lage     = { 14.3556 46.2389 }
+    flaeche  = 141
+    stadt    = ja
+    kreis    = kr_krainburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3197378; deutscher Name aus den GeoNames-Alternativnamen (heute Kranj); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort stein {
+    name     = "Stein"
+    gelaende = mittelgebirge
+    lage     = { 14.6121 46.2259 }
+    flaeche  = 183
+    stadt    = nein
+    kreis    = kr_krainburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3198365; deutscher Name aus den GeoNames-Alternativnamen (heute Kamnik); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bischoflack {
+    name     = "Bischoflack"
+    gelaende = mittelgebirge
+    lage     = { 14.3063 46.1655 }
+    flaeche  = 122
+    stadt    = nein
+    kreis    = kr_krainburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3190717; deutscher Name aus den GeoNames-Alternativnamen (heute Škofja Loka); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort domzale {
+    name     = "Domžale"
+    gelaende = huegelland
+    lage     = { 14.5937 46.1377 }
+    flaeche  = 134
+    stadt    = nein
+    kreis    = kr_krainburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3201730; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort medvode {
+    name     = "Medvode"
+    gelaende = mittelgebirge
+    lage     = { 14.4111 46.1422 }
+    flaeche  = 137
+    stadt    = nein
+    kreis    = kr_krainburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3195281; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort zirklach {
+    name     = "Zirklach"
+    gelaende = mittelgebirge
+    lage     = { 14.4886 46.2542 }
+    flaeche  = 163
+    stadt    = nein
+    kreis    = kr_krainburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3202711; deutscher Name aus den GeoNames-Alternativnamen (heute Cerklje na Gorenjskem); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort littai {
+    name     = "Littai"
+    gelaende = mittelgebirge
+    lage     = { 14.8225 46.0586 }
+    flaeche  = 221
+    stadt    = nein
+    kreis    = kr_littai
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3196425; deutscher Name aus den GeoNames-Alternativnamen (heute Litija); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort trebnje {
+    name     = "Trebnje"
+    gelaende = huegelland
+    lage     = { 15.0217 45.9042 }
+    flaeche  = 225
+    stadt    = nein
+    kreis    = kr_littai
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3188886; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort radece {
+    name     = "Radeče"
+    gelaende = mittelgebirge
+    lage     = { 15.1839 46.0681 }
+    flaeche  = 151
+    stadt    = nein
+    kreis    = kr_littai
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3192144; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ivancna_gorica {
+    name     = "Ivančna Gorica"
+    gelaende = huegelland
+    lage     = { 14.8044 45.9383 }
+    flaeche  = 212
+    stadt    = nein
+    kreis    = kr_littai
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3199078; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort seisenberg {
+    name     = "Seisenberg"
+    gelaende = huegelland
+    lage     = { 14.9292 45.8339 }
+    flaeche  = 209
+    stadt    = nein
+    kreis    = kr_littai
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3186270; deutscher Name aus den GeoNames-Alternativnamen (heute Žužemberk); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort moravce {
+    name     = "Moravče"
+    gelaende = mittelgebirge
+    lage     = { 14.745 46.1369 }
+    flaeche  = 191
+    stadt    = nein
+    kreis    = kr_littai
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3194873; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort izlake {
+    name     = "Izlake"
+    gelaende = mittelgebirge
+    lage     = { 14.95 46.15 }
+    flaeche  = 153
+    stadt    = nein
+    kreis    = kr_littai
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3199020; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort nassenfuss {
+    name     = "Nassenfuß"
+    gelaende = huegelland
+    lage     = { 15.1408 45.9342 }
+    flaeche  = 208
+    stadt    = nein
+    kreis    = kr_littai
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3194904; deutscher Name aus den GeoNames-Alternativnamen (heute Mokronog); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort laibach {
+    name     = "Laibach"
+    gelaende = huegelland
+    lage     = { 14.5051 46.0511 }
+    flaeche  = 146
+    stadt    = ja
+    kreis    = kr_laibach
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3196359; deutscher Name aus den GeoNames-Alternativnamen (heute Ljubljana); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort grosuplje {
+    name     = "Grosuplje"
+    gelaende = huegelland
+    lage     = { 14.6589 45.9556 }
+    flaeche  = 178
+    stadt    = nein
+    kreis    = kr_laibach
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3199523; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort logatec {
+    name     = "Logatec"
+    gelaende = mittelgebirge
+    lage     = { 14.2258 45.9144 }
+    flaeche  = 244
+    stadt    = nein
+    kreis    = kr_laibach
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3218907; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort borovnica {
+    name     = "Borovnica"
+    gelaende = mittelgebirge
+    lage     = { 14.3631 45.9158 }
+    flaeche  = 148
+    stadt    = nein
+    kreis    = kr_laibach
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3203677; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ig {
+    name     = "Ig"
+    gelaende = mittelgebirge
+    lage     = { 14.5289 45.9603 }
+    flaeche  = 148
+    stadt    = nein
+    kreis    = kr_laibach
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3199162; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort log_pri_brezovici {
+    name     = "Log pri Brezovici"
+    gelaende = huegelland
+    lage     = { 14.3667 46.0167 }
+    flaeche  = 194
+    stadt    = nein
+    kreis    = kr_laibach
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3196281; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort rudolfswert {
+    name     = "Rudolfswert"
+    gelaende = huegelland
+    lage     = { 15.1689 45.804 }
+    flaeche  = 171
+    stadt    = ja
+    kreis    = kr_rudolfswert
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3194351; deutscher Name aus den GeoNames-Alternativnamen (heute Novo Mesto); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gurkfeld {
+    name     = "Gurkfeld"
+    gelaende = huegelland
+    lage     = { 15.4917 45.9592 }
+    flaeche  = 192
+    stadt    = nein
+    kreis    = kr_rudolfswert
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3197147; deutscher Name aus den GeoNames-Alternativnamen (heute Krško); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort tschernembl {
+    name     = "Tschernembl"
+    gelaende = mittelgebirge
+    lage     = { 15.1889 45.5711 }
+    flaeche  = 461
+    stadt    = nein
+    kreis    = kr_rudolfswert
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3202333; deutscher Name aus den GeoNames-Alternativnamen (heute Črnomelj); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort moettling {
+    name     = "Möttling"
+    gelaende = huegelland
+    lage     = { 15.3142 45.6472 }
+    flaeche  = 152
+    stadt    = nein
+    kreis    = kr_rudolfswert
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3195214; deutscher Name aus den GeoNames-Alternativnamen (heute Metlika); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort sankt_bartlmae {
+    name     = "Sankt Bartlmä"
+    gelaende = mittelgebirge
+    lage     = { 15.3361 45.84 }
+    flaeche  = 276
+    stadt    = nein
+    kreis    = kr_rudolfswert
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3191033; deutscher Name aus den GeoNames-Alternativnamen (heute Šentjernej); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort dolenjske_toplice {
+    name     = "Dolenjske Toplice"
+    gelaende = mittelgebirge
+    lage     = { 15.0592 45.7566 }
+    flaeche  = 233
+    stadt    = nein
+    kreis    = kr_rudolfswert
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3201817; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort adelsberg {
+    name     = "Adelsberg"
+    gelaende = mittelgebirge
+    lage     = { 14.2153 45.7743 }
+    flaeche  = 187
+    stadt    = nein
+    kreis    = kr_adelsberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3192673; deutscher Name aus den GeoNames-Alternativnamen (heute Postojna); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort zirknitz {
+    name     = "Zirknitz"
+    gelaende = mittelgebirge
+    lage     = { 14.3625 45.7931 }
+    flaeche  = 203
+    stadt    = nein
+    kreis    = kr_adelsberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3202709; deutscher Name aus den GeoNames-Alternativnamen (heute Cerknica); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort illyrisch_feistritz {
+    name     = "Illyrisch Feistritz"
+    gelaende = mittelgebirge
+    lage     = { 14.2457 45.5676 }
+    flaeche  = 247
+    stadt    = nein
+    kreis    = kr_adelsberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3199131; deutscher Name aus den GeoNames-Alternativnamen (heute Ilirska Bistrica); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort idria {
+    name     = "Idria"
+    gelaende = mittelgebirge
+    lage     = { 14.0306 46.0028 }
+    flaeche  = 192
+    stadt    = nein
+    kreis    = kr_adelsberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3199171; deutscher Name aus den GeoNames-Alternativnamen (heute Idrija); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort pivka {
+    name     = "Pivka"
+    gelaende = mittelgebirge
+    lage     = { 14.1959 45.6829 }
+    flaeche  = 264
+    stadt    = nein
+    kreis    = kr_adelsberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3193299; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort vipava {
+    name     = "Vipava"
+    gelaende = mittelgebirge
+    lage     = { 13.9612 45.8486 }
+    flaeche  = 151
+    stadt    = nein
+    kreis    = kr_adelsberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3187706; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Lage auf das nächste Landpixel gesetzt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gottschee {
+    name     = "Gottschee"
+    gelaende = mittelgebirge
+    lage     = { 14.8633 45.6433 }
+    flaeche  = 335
+    stadt    = nein
+    kreis    = kr_gottschee
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3197943; deutscher Name aus den GeoNames-Alternativnamen (heute Kočevje); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort reifnitz {
+    name     = "Reifnitz"
+    gelaende = mittelgebirge
+    lage     = { 14.7275 45.7386 }
+    flaeche  = 209
+    stadt    = nein
+    kreis    = kr_gottschee
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3191685; deutscher Name aus den GeoNames-Alternativnamen (heute Ribnica); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort grosslaschitz {
+    name     = "Großlaschitz"
+    gelaende = mittelgebirge
+    lage     = { 14.6364 45.8322 }
+    flaeche  = 191
+    stadt    = nein
+    kreis    = kr_gottschee
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3188128; deutscher Name aus den GeoNames-Alternativnamen (heute Velike Lašče); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort leskova_dolina {
+    name     = "Leskova Dolina"
+    gelaende = mittelgebirge
+    lage     = { 14.4606 45.6214 }
+    flaeche  = 264
+    stadt    = nein
+    kreis    = kr_gottschee
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3218745; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kostel {
+    name     = "Kostel"
+    gelaende = mittelgebirge
+    lage     = { 14.9101 45.5084 }
+    flaeche  = 213
+    stadt    = nein
+    kreis    = kr_gottschee
+    quelle   = "GeoNames (CC BY 4.0), geonameid 8358613; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort loski_potok {
+    name     = "Loški Potok"
+    gelaende = mittelgebirge
+    lage     = { 14.5803 45.7014 }
+    flaeche  = 166
+    stadt    = nein
+    kreis    = kr_gottschee
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3196192; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort osilnica {
+    name     = "Osilnica"
+    gelaende = mittelgebirge
+    lage     = { 14.6984 45.5291 }
+    flaeche  = 158
+    stadt    = nein
+    kreis    = kr_gottschee
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3193930; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort nova_vas {
+    name     = "Nova Vas"
+    gelaende = mittelgebirge
+    lage     = { 14.5058 45.7717 }
+    flaeche  = 150
+    stadt    = nein
+    kreis    = kr_gottschee
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3194403; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}

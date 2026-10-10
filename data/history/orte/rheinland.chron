@@ -1,0 +1,550 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
+# Orte: Rheinland – Orte ohne Daten (Meilenstein M3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
+# Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
+# ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
+# und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
+#
+# Umfang: Kölner Bucht, Jülicher Land, Aachen und südliches Bergisches Land (heute Regierungsbezirk Köln).
+
+ort erkelenz {
+    name     = "Erkelenz"
+    gelaende = flachland
+    lage     = { 6.3153 51.0795 }
+    flaeche  = 124
+    stadt    = ja
+    kreis    = kr_erkelenz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2929622; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort heinsberg {
+    name     = "Heinsberg"
+    gelaende = flachland
+    lage     = { 6.0998 51.0636 }
+    flaeche  = 170
+    stadt    = ja
+    kreis    = kr_erkelenz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2907201; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort geilenkirchen {
+    name     = "Geilenkirchen"
+    gelaende = flachland
+    lage     = { 6.1176 50.9674 }
+    flaeche  = 94
+    stadt    = ja
+    kreis    = kr_erkelenz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2921837; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wegberg {
+    name     = "Wegberg"
+    gelaende = flachland
+    lage     = { 6.2844 51.1422 }
+    flaeche  = 116
+    stadt    = ja
+    kreis    = kr_erkelenz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2813390; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gangelt {
+    name     = "Gangelt"
+    gelaende = flachland
+    lage     = { 5.998 50.9925 }
+    flaeche  = 108
+    stadt    = nein
+    kreis    = kr_erkelenz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2922722; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort leverkusen {
+    name     = "Leverkusen"
+    gelaende = flussaue
+    lage     = { 6.9843 51.0303 }
+    flaeche  = 123
+    stadt    = ja
+    kreis    = kr_leverkusen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2878234; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bergisch_gladbach {
+    name     = "Bergisch Gladbach"
+    gelaende = huegelland
+    lage     = { 7.133 50.9856 }
+    flaeche  = 104
+    stadt    = ja
+    kreis    = kr_leverkusen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2950349; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort roesrath {
+    name     = "Rösrath"
+    gelaende = huegelland
+    lage     = { 7.1818 50.8956 }
+    flaeche  = 86
+    stadt    = ja
+    kreis    = kr_leverkusen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2844862; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wipperfuerth {
+    name     = "Wipperfürth"
+    gelaende = huegelland
+    lage     = { 7.3986 51.1161 }
+    flaeche  = 134
+    stadt    = ja
+    kreis    = kr_leverkusen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2807594; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort overath {
+    name     = "Overath"
+    gelaende = huegelland
+    lage     = { 7.2839 50.9327 }
+    flaeche  = 101
+    stadt    = ja
+    kreis    = kr_leverkusen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2855859; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort radevormwald {
+    name     = "Radevormwald"
+    gelaende = huegelland
+    lage     = { 7.3603 51.2022 }
+    flaeche  = 101
+    stadt    = ja
+    kreis    = kr_leverkusen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2850995; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kuerten {
+    name     = "Kürten"
+    gelaende = huegelland
+    lage     = { 7.2667 51.05 }
+    flaeche  = 154
+    stadt    = ja
+    kreis    = kr_leverkusen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2882318; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort burscheid {
+    name     = "Burscheid"
+    gelaende = huegelland
+    lage     = { 7.1139 51.0847 }
+    flaeche  = 114
+    stadt    = nein
+    kreis    = kr_leverkusen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2940942; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gummersbach {
+    name     = "Gummersbach"
+    gelaende = huegelland
+    lage     = { 7.5647 51.0261 }
+    flaeche  = 139
+    stadt    = ja
+    kreis    = kr_gummersbach
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2913761; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wiehl {
+    name     = "Wiehl"
+    gelaende = huegelland
+    lage     = { 7.5506 50.9495 }
+    flaeche  = 98
+    stadt    = ja
+    kreis    = kr_gummersbach
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2809517; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort engelskirchen {
+    name     = "Engelskirchen"
+    gelaende = huegelland
+    lage     = { 7.4139 50.9885 }
+    flaeche  = 112
+    stadt    = ja
+    kreis    = kr_gummersbach
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2930216; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort eitorf {
+    name     = "Eitorf"
+    gelaende = huegelland
+    lage     = { 7.45 50.7667 }
+    flaeche  = 172
+    stadt    = nein
+    kreis    = kr_gummersbach
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2931361; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort waldbroel {
+    name     = "Waldbröl"
+    gelaende = huegelland
+    lage     = { 7.6169 50.8758 }
+    flaeche  = 113
+    stadt    = nein
+    kreis    = kr_gummersbach
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2815137; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ruppichteroth {
+    name     = "Ruppichteroth"
+    gelaende = huegelland
+    lage     = { 7.4841 50.8437 }
+    flaeche  = 108
+    stadt    = nein
+    kreis    = kr_gummersbach
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2842960; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort morsbach {
+    name     = "Morsbach"
+    gelaende = huegelland
+    lage     = { 7.7279 50.8666 }
+    flaeche  = 143
+    stadt    = nein
+    kreis    = kr_gummersbach
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2869196; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort much {
+    name     = "Much"
+    gelaende = huegelland
+    lage     = { 7.4031 50.9038 }
+    flaeche  = 113
+    stadt    = nein
+    kreis    = kr_gummersbach
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2868936; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort koeln {
+    name     = "Köln"
+    gelaende = flussaue
+    lage     = { 6.95 50.9333 }
+    flaeche  = 109
+    stadt    = ja
+    kreis    = kr_koeln
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2886242; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bonn {
+    name     = "Bonn"
+    gelaende = flussaue
+    lage     = { 7.0955 50.7344 }
+    flaeche  = 100
+    stadt    = ja
+    kreis    = kr_koeln
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2946447; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort siegburg {
+    name     = "Siegburg"
+    gelaende = huegelland
+    lage     = { 7.2077 50.8002 }
+    flaeche  = 172
+    stadt    = ja
+    kreis    = kr_koeln
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2832521; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort huerth {
+    name     = "Hürth"
+    gelaende = flachland
+    lage     = { 6.8676 50.8708 }
+    flaeche  = 134
+    stadt    = ja
+    kreis    = kr_koeln
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2897216; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort koenigswinter {
+    name     = "Königswinter"
+    gelaende = huegelland
+    lage     = { 7.1867 50.6838 }
+    flaeche  = 166
+    stadt    = ja
+    kreis    = kr_koeln
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2885734; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bornheim {
+    name     = "Bornheim"
+    gelaende = huegelland
+    lage     = { 6.9909 50.7631 }
+    flaeche  = 104
+    stadt    = ja
+    kreis    = kr_koeln
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2946111; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wesseling {
+    name     = "Wesseling"
+    gelaende = flussaue
+    lage     = { 6.9747 50.8271 }
+    flaeche  = 80
+    stadt    = ja
+    kreis    = kr_koeln
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2810612; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort meckenheim {
+    name     = "Meckenheim"
+    gelaende = huegelland
+    lage     = { 7.0294 50.6239 }
+    flaeche  = 181
+    stadt    = ja
+    kreis    = kr_koeln
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2872582; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort weilerswist {
+    name     = "Weilerswist"
+    gelaende = flachland
+    lage     = { 6.8459 50.7529 }
+    flaeche  = 145
+    stadt    = nein
+    kreis    = kr_koeln
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2812522; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort porz_am_rhein {
+    name     = "Porz am Rhein"
+    gelaende = flussaue
+    lage     = { 7.0583 50.8864 }
+    flaeche  = 106
+    stadt    = nein
+    kreis    = kr_koeln
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2852566; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kerpen {
+    name     = "Kerpen"
+    gelaende = boerde
+    lage     = { 6.6969 50.8699 }
+    flaeche  = 127
+    stadt    = ja
+    kreis    = kr_kerpen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2891524; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bergheim {
+    name     = "Bergheim"
+    gelaende = boerde
+    lage     = { 6.6399 50.9557 }
+    flaeche  = 137
+    stadt    = ja
+    kreis    = kr_kerpen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2950438; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort pulheim {
+    name     = "Pulheim"
+    gelaende = flachland
+    lage     = { 6.8063 50.9997 }
+    flaeche  = 128
+    stadt    = ja
+    kreis    = kr_kerpen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2851746; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort noervenich {
+    name     = "Nörvenich"
+    gelaende = boerde
+    lage     = { 6.6395 50.806 }
+    flaeche  = 133
+    stadt    = nein
+    kreis    = kr_kerpen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2861801; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort dueren {
+    name     = "Düren"
+    gelaende = boerde
+    lage     = { 6.493 50.8043 }
+    flaeche  = 139
+    stadt    = ja
+    kreis    = kr_dueren
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2934486; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort simmerath {
+    name     = "Simmerath"
+    gelaende = mittelgebirge
+    lage     = { 6.3 50.6 }
+    flaeche  = 237
+    stadt    = nein
+    kreis    = kr_dueren
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2832023; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort nideggen {
+    name     = "Nideggen"
+    gelaende = huegelland
+    lage     = { 6.4844 50.6927 }
+    flaeche  = 196
+    stadt    = nein
+    kreis    = kr_dueren
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2863711; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort roetgen {
+    name     = "Roetgen"
+    gelaende = huegelland
+    lage     = { 6.2 50.65 }
+    flaeche  = 186
+    stadt    = nein
+    kreis    = kr_dueren
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2844277; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort aachen {
+    name     = "Aachen"
+    gelaende = huegelland
+    lage     = { 6.0834 50.7766 }
+    flaeche  = 147
+    stadt    = ja
+    kreis    = kr_aachen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3247449; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort eschweiler {
+    name     = "Eschweiler"
+    gelaende = boerde
+    lage     = { 6.2718 50.8185 }
+    flaeche  = 232
+    stadt    = ja
+    kreis    = kr_aachen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2928963; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort herzogenrath {
+    name     = "Herzogenrath"
+    gelaende = flachland
+    lage     = { 6.0932 50.8687 }
+    flaeche  = 94
+    stadt    = ja
+    kreis    = kr_aachen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2905455; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort juelich {
+    name     = "Jülich"
+    gelaende = boerde
+    lage     = { 6.3627 50.9215 }
+    flaeche  = 94
+    stadt    = ja
+    kreis    = kr_aachen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2894553; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort baesweiler {
+    name     = "Baesweiler"
+    gelaende = boerde
+    lage     = { 6.1887 50.9096 }
+    flaeche  = 90
+    stadt    = ja
+    kreis    = kr_aachen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2953302; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort niederzier {
+    name     = "Niederzier"
+    gelaende = huegelland
+    lage     = { 6.4667 50.8833 }
+    flaeche  = 103
+    stadt    = nein
+    kreis    = kr_aachen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2862698; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort linnich {
+    name     = "Linnich"
+    gelaende = boerde
+    lage     = { 6.2705 50.98 }
+    flaeche  = 104
+    stadt    = nein
+    kreis    = kr_aachen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2877021; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort titz {
+    name     = "Titz"
+    gelaende = boerde
+    lage     = { 6.4248 51.0062 }
+    flaeche  = 150
+    stadt    = nein
+    kreis    = kr_aachen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2822073; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort euskirchen {
+    name     = "Euskirchen"
+    gelaende = huegelland
+    lage     = { 6.7872 50.6606 }
+    flaeche  = 159
+    stadt    = ja
+    kreis    = kr_euskirchen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2928396; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort mechernich {
+    name     = "Mechernich"
+    gelaende = huegelland
+    lage     = { 6.6522 50.593 }
+    flaeche  = 133
+    stadt    = ja
+    kreis    = kr_euskirchen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2872611; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bad_muenstereifel {
+    name     = "Bad Münstereifel"
+    gelaende = huegelland
+    lage     = { 6.7642 50.5567 }
+    flaeche  = 171
+    stadt    = nein
+    kreis    = kr_euskirchen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2953398; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort zuelpich {
+    name     = "Zülpich"
+    gelaende = flachland
+    lage     = { 6.6541 50.6945 }
+    flaeche  = 127
+    stadt    = ja
+    kreis    = kr_euskirchen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2803723; Name Zülpich aus den GeoNames-Alternativnamen (GeoNames: Zulpich); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort schleiden {
+    name     = "Schleiden"
+    gelaende = mittelgebirge
+    lage     = { 6.4769 50.529 }
+    flaeche  = 235
+    stadt    = nein
+    kreis    = kr_euskirchen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2838744; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort nettersheim {
+    name     = "Nettersheim"
+    gelaende = huegelland
+    lage     = { 6.629 50.4937 }
+    flaeche  = 177
+    stadt    = nein
+    kreis    = kr_euskirchen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2866336; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort dahlem {
+    name     = "Dahlem"
+    gelaende = huegelland
+    lage     = { 6.5477 50.3861 }
+    flaeche  = 214
+    stadt    = nein
+    kreis    = kr_euskirchen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2939442; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}

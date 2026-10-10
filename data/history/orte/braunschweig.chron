@@ -10,13 +10,17 @@
 # Stadt Braunschweig war formal landsässig, verwaltete sich aber faktisch
 # selbst und wurde erst 1671 unterworfen. Weitere Landesteile (Weserraum,
 # Harz) liegen außerhalb der Testregion bzw. sind nicht modelliert.
+#
+# Ergänzt in Meilenstein M3 (tools/geodaten/orte.py): weitere Orte ohne Daten (ohne Historie) aus GeoNames, räumlich ausgewählt, Gelände aus dem Höhenmodell, Fläche aus der Karte.
+# Umfang der Landschaft Braunschweig: Herzogtum Braunschweig-Wolfenbüttel und Umgebung (heute Braunschweig, Wolfenbüttel, Salzgitter, Wolfsburg, Helmstedt, Peine, Goslar, Holzminden).
 
 ort wolfenbuettel {
     name     = "Wolfenbüttel"
     gelaende = boerde
     lage     = { 10.53 52.16 }
-    flaeche  = 200
+    flaeche  = 193
     stadt    = ja
+    kreis    = kr_wolfenbuettel
     quelle   = "Residenz und Festung, bis 1643 kaiserlich besetzt. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung nach regionaler Kriegsbetroffenheit geschätzt"
 
     1648.10.24 = {
@@ -31,8 +35,9 @@ ort braunschweig {
     name     = "Braunschweig"
     gelaende = flachland
     lage     = { 10.52 52.27 }
-    flaeche  = 150
+    flaeche  = 112
     stadt    = ja
+    kreis    = kr_braunschweig
     quelle   = "Größte Stadt des Herzogtums, formal landsässig, faktisch weitgehend selbständig bis zur Unterwerfung 1671; vereinfacht dem Herzogtum zugeordnet. Bevölkerung Schätzung (Größenordnung nach Literatur zur Bevölkerungsentwicklung)"
 
     1648.10.24 = {
@@ -47,8 +52,9 @@ ort helmstedt {
     name     = "Helmstedt"
     gelaende = huegelland
     lage     = { 11.01 52.23 }
-    flaeche  = 220
+    flaeche  = 185
     stadt    = ja
+    kreis    = kr_braunschweig
     quelle   = "Universitätsstadt (Academia Julia, gegründet 1576). Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung nach regionaler Kriegsbetroffenheit geschätzt"
 
     1648.10.24 = {
@@ -57,4 +63,234 @@ ort helmstedt {
         konfession   = { lutherisch = 100 }
         verwuestung  = 0.4
     }
+}
+
+ort peine {
+    name     = "Peine"
+    gelaende = flachland
+    lage     = { 10.2352 52.3193 }
+    flaeche  = 171
+    stadt    = ja
+    kreis    = kr_peine
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2855047; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort vechelde {
+    name     = "Vechelde"
+    gelaende = flachland
+    lage     = { 10.3649 52.2604 }
+    flaeche  = 129
+    stadt    = nein
+    kreis    = kr_peine
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2817813; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hohenhameln {
+    name     = "Hohenhameln"
+    gelaende = boerde
+    lage     = { 10.0642 52.2576 }
+    flaeche  = 99
+    stadt    = nein
+    kreis    = kr_peine
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2901731; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wendeburg {
+    name     = "Wendeburg"
+    gelaende = flachland
+    lage     = { 10.3925 52.3296 }
+    flaeche  = 101
+    stadt    = nein
+    kreis    = kr_peine
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2811317; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort koenigslutter_am_elm {
+    name     = "Königslutter am Elm"
+    gelaende = huegelland
+    lage     = { 10.8168 52.2512 }
+    flaeche  = 159
+    stadt    = nein
+    kreis    = kr_braunschweig
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2885800; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort schoeningen {
+    name     = "Schöningen"
+    gelaende = huegelland
+    lage     = { 10.9674 52.138 }
+    flaeche  = 161
+    stadt    = nein
+    kreis    = kr_braunschweig
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2836543; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort cremlingen {
+    name     = "Cremlingen"
+    gelaende = flachland
+    lage     = { 10.65 52.25 }
+    flaeche  = 112
+    stadt    = nein
+    kreis    = kr_braunschweig
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2939763; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort schoeppenstedt {
+    name     = "Schöppenstedt"
+    gelaende = huegelland
+    lage     = { 10.7745 52.1431 }
+    flaeche  = 183
+    stadt    = nein
+    kreis    = kr_braunschweig
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2836396; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lehre {
+    name     = "Lehre"
+    gelaende = flachland
+    lage     = { 10.6667 52.3333 }
+    flaeche  = 135
+    stadt    = nein
+    kreis    = kr_braunschweig
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2879378; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gross_twuelpstedt {
+    name     = "Groß Twülpstedt"
+    gelaende = flachland
+    lage     = { 10.9193 52.3736 }
+    flaeche  = 142
+    stadt    = nein
+    kreis    = kr_braunschweig
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2914932; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort goslar {
+    name     = "Goslar"
+    gelaende = mittelgebirge
+    lage     = { 10.4277 51.9042 }
+    flaeche  = 151
+    stadt    = ja
+    kreis    = kr_wolfenbuettel
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2918840; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bad_harzburg {
+    name     = "Bad Harzburg"
+    gelaende = mittelgebirge
+    lage     = { 10.5616 51.8827 }
+    flaeche  = 203
+    stadt    = ja
+    kreis    = kr_wolfenbuettel
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2953449; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort seesen {
+    name     = "Seesen"
+    gelaende = mittelgebirge
+    lage     = { 10.1785 51.8909 }
+    flaeche  = 129
+    stadt    = ja
+    kreis    = kr_wolfenbuettel
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2833592; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort clausthal_zellerfeld {
+    name     = "Clausthal-Zellerfeld"
+    gelaende = mittelgebirge
+    lage     = { 10.3382 51.8095 }
+    flaeche  = 185
+    stadt    = nein
+    kreis    = kr_wolfenbuettel
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2939995; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort liebenburg {
+    name     = "Liebenburg"
+    gelaende = huegelland
+    lage     = { 10.4317 52.0218 }
+    flaeche  = 176
+    stadt    = nein
+    kreis    = kr_wolfenbuettel
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2877969; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort braunlage {
+    name     = "Braunlage"
+    gelaende = mittelgebirge
+    lage     = { 10.6109 51.7265 }
+    flaeche  = 216
+    stadt    = nein
+    kreis    = kr_wolfenbuettel
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2945055; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lutter_am_barenberge {
+    name     = "Lutter am Barenberge"
+    gelaende = huegelland
+    lage     = { 10.2693 51.9894 }
+    flaeche  = 129
+    stadt    = nein
+    kreis    = kr_wolfenbuettel
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2874832; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort boerssum {
+    name     = "Börßum"
+    gelaende = flachland
+    lage     = { 10.5843 52.0692 }
+    flaeche  = 157
+    stadt    = nein
+    kreis    = kr_wolfenbuettel
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2946007; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort elbe {
+    name     = "Elbe"
+    gelaende = huegelland
+    lage     = { 10.2833 52.0833 }
+    flaeche  = 130
+    stadt    = nein
+    kreis    = kr_wolfenbuettel
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3208598; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort holzminden {
+    name     = "Holzminden"
+    gelaende = huegelland
+    lage     = { 9.4455 51.828 }
+    flaeche  = 167
+    stadt    = ja
+    kreis    = kr_holzminden
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2899601; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort stadtoldendorf {
+    name     = "Stadtoldendorf"
+    gelaende = huegelland
+    lage     = { 9.6265 51.8824 }
+    flaeche  = 134
+    stadt    = nein
+    kreis    = kr_holzminden
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2829753; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bodenwerder {
+    name     = "Bodenwerder"
+    gelaende = huegelland
+    lage     = { 9.5193 51.9716 }
+    flaeche  = 228
+    stadt    = nein
+    kreis    = kr_holzminden
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2947092; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort eimen {
+    name     = "Eimen"
+    gelaende = huegelland
+    lage     = { 9.7833 51.8833 }
+    flaeche  = 113
+    stadt    = nein
+    kreis    = kr_holzminden
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2931825; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }

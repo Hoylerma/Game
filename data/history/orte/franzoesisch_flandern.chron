@@ -1,0 +1,220 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
+# Orte: Französisch-Flandern – Orte ohne Daten (Meilenstein M3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
+# Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
+# ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
+# und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
+#
+# Umfang: Französisch-Flandern mit Dünkirchen, Lille und Douai sowie das Bergbaugebiet um Lens (Artois); im 17. Jahrhundert schrittweise von Frankreich erworben (Pyrenäenfrieden 1659, Aachen 1668, Nimwegen 1678).
+
+ort duenkirchen {
+    name     = "Dünkirchen"
+    gelaende = kueste
+    lage     = { 2.377 51.033 }
+    flaeche  = 114
+    stadt    = ja
+    kreis    = kr_duenkirchen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3020686; deutscher Name aus den GeoNames-Alternativnamen (heute Dunkerque); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort loon_plage {
+    name     = "Loon-Plage"
+    gelaende = kueste
+    lage     = { 2.2212 50.9968 }
+    flaeche  = 83
+    stadt    = nein
+    kreis    = kr_duenkirchen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2997621; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Lage auf das nächste Landpixel gesetzt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wormhout {
+    name     = "Wormhout"
+    gelaende = flachland
+    lage     = { 2.469 50.8813 }
+    flaeche  = 263
+    stadt    = nein
+    kreis    = kr_duenkirchen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2967288; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bray_dunes {
+    name     = "Bray-Dunes"
+    gelaende = kueste
+    lage     = { 2.5167 51.0779 }
+    flaeche  = 85
+    stadt    = nein
+    kreis    = kr_duenkirchen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3030473; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hondschoote {
+    name     = "Hondschoote"
+    gelaende = flachland
+    lage     = { 2.5837 50.978 }
+    flaeche  = 197
+    stadt    = nein
+    kreis    = kr_duenkirchen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3013174; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lille {
+    name     = "Lille"
+    gelaende = flachland
+    lage     = { 3.0586 50.633 }
+    flaeche  = 173
+    stadt    = ja
+    kreis    = kr_lille
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2998324; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort roubaix {
+    name     = "Roubaix"
+    gelaende = flachland
+    lage     = { 3.1746 50.6942 }
+    flaeche  = 130
+    stadt    = ja
+    kreis    = kr_lille
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2982681; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort armentieres {
+    name     = "Armentières"
+    gelaende = flachland
+    lage     = { 2.8821 50.6857 }
+    flaeche  = 167
+    stadt    = ja
+    kreis    = kr_lille
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3036903; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hazebrouck {
+    name     = "Hazebrouck"
+    gelaende = flachland
+    lage     = { 2.5373 50.7237 }
+    flaeche  = 161
+    stadt    = ja
+    kreis    = kr_lille
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3013619; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bailleul {
+    name     = "Bailleul"
+    gelaende = flachland
+    lage     = { 2.7359 50.7359 }
+    flaeche  = 130
+    stadt    = nein
+    kreis    = kr_lille
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3035359; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort comines {
+    name     = "Comines"
+    gelaende = flachland
+    lage     = { 3.0106 50.7615 }
+    flaeche  = 138
+    stadt    = nein
+    kreis    = kr_lille
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3024102; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort estaires {
+    name     = "Estaires"
+    gelaende = flachland
+    lage     = { 2.7278 50.6457 }
+    flaeche  = 172
+    stadt    = nein
+    kreis    = kr_lille
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3019578; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort steenvoorde {
+    name     = "Steenvoorde"
+    gelaende = flachland
+    lage     = { 2.5824 50.8105 }
+    flaeche  = 156
+    stadt    = nein
+    kreis    = kr_lille
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2973823; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort douai {
+    name     = "Douai"
+    gelaende = flachland
+    lage     = { 3.0792 50.3707 }
+    flaeche  = 140
+    stadt    = ja
+    kreis    = kr_douai
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3021000; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort henin_beaumont {
+    name     = "Hénin-Beaumont"
+    gelaende = flachland
+    lage     = { 2.9649 50.4136 }
+    flaeche  = 73
+    stadt    = ja
+    kreis    = kr_douai
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3013525; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort carvin {
+    name     = "Carvin"
+    gelaende = flachland
+    lage     = { 2.9581 50.4924 }
+    flaeche  = 203
+    stadt    = nein
+    kreis    = kr_douai
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3028486; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort somain {
+    name     = "Somain"
+    gelaende = flachland
+    lage     = { 3.2811 50.3596 }
+    flaeche  = 144
+    stadt    = nein
+    kreis    = kr_douai
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2974324; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort la_bassee {
+    name     = "La Bassée"
+    gelaende = flachland
+    lage     = { 2.8062 50.5342 }
+    flaeche  = 135
+    stadt    = nein
+    kreis    = kr_douai
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3011307; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort orchies {
+    name     = "Orchies"
+    gelaende = flachland
+    lage     = { 3.2333 50.4667 }
+    flaeche  = 191
+    stadt    = nein
+    kreis    = kr_douai
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2989422; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort cysoing {
+    name     = "Cysoing"
+    gelaende = flachland
+    lage     = { 3.2163 50.5694 }
+    flaeche  = 162
+    stadt    = nein
+    kreis    = kr_douai
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3021935; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort arleux {
+    name     = "Arleux"
+    gelaende = flachland
+    lage     = { 3.1045 50.2804 }
+    flaeche  = 134
+    stadt    = nein
+    kreis    = kr_douai
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3036932; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}

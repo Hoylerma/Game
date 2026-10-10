@@ -1,0 +1,240 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
+# Orte: Oberhessen – Orte ohne Daten (Meilenstein M3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
+# Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
+# ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
+# und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
+#
+# Umfang: Oberhessen (heute Landkreise Gießen, Marburg-Biedenkopf und Vogelsberg).
+
+ort marburg_an_der_lahn {
+    name     = "Marburg an der Lahn"
+    gelaende = huegelland
+    lage     = { 8.7707 50.809 }
+    flaeche  = 167
+    stadt    = ja
+    kreis    = kr_marburg_an_der_lahn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2873759; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort stadtallendorf {
+    name     = "Stadtallendorf"
+    gelaende = huegelland
+    lage     = { 9.0129 50.8226 }
+    flaeche  = 92
+    stadt    = ja
+    kreis    = kr_marburg_an_der_lahn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2829804; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort alsfeld {
+    name     = "Alsfeld"
+    gelaende = huegelland
+    lage     = { 9.2708 50.7518 }
+    flaeche  = 174
+    stadt    = nein
+    kreis    = kr_marburg_an_der_lahn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2958128; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort biedenkopf {
+    name     = "Biedenkopf"
+    gelaende = huegelland
+    lage     = { 8.5302 50.9113 }
+    flaeche  = 142
+    stadt    = nein
+    kreis    = kr_marburg_an_der_lahn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2949229; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gladenbach {
+    name     = "Gladenbach"
+    gelaende = huegelland
+    lage     = { 8.5808 50.7685 }
+    flaeche  = 202
+    stadt    = nein
+    kreis    = kr_marburg_an_der_lahn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2920229; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wetter {
+    name     = "Wetter"
+    gelaende = huegelland
+    lage     = { 8.7237 50.9025 }
+    flaeche  = 147
+    stadt    = nein
+    kreis    = kr_marburg_an_der_lahn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2809985; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort homberg_oberhessen {
+    name     = "Homberg (Oberhessen)"
+    gelaende = huegelland
+    lage     = { 8.9964 50.7311 }
+    flaeche  = 174
+    stadt    = nein
+    kreis    = kr_marburg_an_der_lahn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2899479; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort fronhausen {
+    name     = "Fronhausen"
+    gelaende = huegelland
+    lage     = { 8.7 50.7 }
+    flaeche  = 176
+    stadt    = nein
+    kreis    = kr_marburg_an_der_lahn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2924201; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kirtorf {
+    name     = "Kirtorf"
+    gelaende = huegelland
+    lage     = { 9.1039 50.7694 }
+    flaeche  = 136
+    stadt    = nein
+    kreis    = kr_marburg_an_der_lahn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2890222; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort rauschenberg {
+    name     = "Rauschenberg"
+    gelaende = huegelland
+    lage     = { 8.9186 50.8833 }
+    flaeche  = 137
+    stadt    = nein
+    kreis    = kr_marburg_an_der_lahn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2849875; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lauterbach {
+    name     = "Lauterbach"
+    gelaende = huegelland
+    lage     = { 9.3978 50.6356 }
+    flaeche  = 181
+    stadt    = ja
+    kreis    = kr_lauterbach
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2879929; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort schotten {
+    name     = "Schotten"
+    gelaende = mittelgebirge
+    lage     = { 9.1252 50.5035 }
+    flaeche  = 139
+    stadt    = nein
+    kreis    = kr_lauterbach
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2836251; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort schlitz {
+    name     = "Schlitz"
+    gelaende = huegelland
+    lage     = { 9.561 50.6742 }
+    flaeche  = 145
+    stadt    = nein
+    kreis    = kr_lauterbach
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2838459; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort grebenhain {
+    name     = "Grebenhain"
+    gelaende = mittelgebirge
+    lage     = { 9.3385 50.4892 }
+    flaeche  = 127
+    stadt    = nein
+    kreis    = kr_lauterbach
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2917850; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort freiensteinau {
+    name     = "Freiensteinau"
+    gelaende = huegelland
+    lage     = { 9.4027 50.4251 }
+    flaeche  = 102
+    stadt    = nein
+    kreis    = kr_lauterbach
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2925141; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort grebenau {
+    name     = "Grebenau"
+    gelaende = huegelland
+    lage     = { 9.4731 50.7424 }
+    flaeche  = 123
+    stadt    = nein
+    kreis    = kr_lauterbach
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2917858; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ulrichstein {
+    name     = "Ulrichstein"
+    gelaende = mittelgebirge
+    lage     = { 9.1927 50.5755 }
+    flaeche  = 205
+    stadt    = nein
+    kreis    = kr_lauterbach
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2820217; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort giessen {
+    name     = "Gießen"
+    gelaende = flachland
+    lage     = { 8.6755 50.5873 }
+    flaeche  = 124
+    stadt    = ja
+    kreis    = kr_giessen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2920512; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort langgoens {
+    name     = "Langgöns"
+    gelaende = huegelland
+    lage     = { 8.6667 50.5 }
+    flaeche  = 120
+    stadt    = nein
+    kreis    = kr_giessen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2880672; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gruenberg_oberhessen {
+    name     = "Grünberg (Oberhessen)"
+    gelaende = huegelland
+    lage     = { 8.9587 50.594 }
+    flaeche  = 168
+    stadt    = nein
+    kreis    = kr_giessen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2914432; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort reiskirchen {
+    name     = "Reiskirchen"
+    gelaende = huegelland
+    lage     = { 8.8333 50.6 }
+    flaeche  = 89
+    stadt    = nein
+    kreis    = kr_giessen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2848543; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lich {
+    name     = "Lich"
+    gelaende = huegelland
+    lage     = { 8.8157 50.5209 }
+    flaeche  = 155
+    stadt    = nein
+    kreis    = kr_giessen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2878166; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort rabenau {
+    name     = "Rabenau"
+    gelaende = huegelland
+    lage     = { 8.8643 50.6775 }
+    flaeche  = 126
+    stadt    = nein
+    kreis    = kr_giessen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 7576812; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}

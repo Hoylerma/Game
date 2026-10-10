@@ -1,0 +1,150 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
+# Orte: Overijssel – Orte ohne Daten (Meilenstein M3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
+# Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
+# ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
+# und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
+#
+# Umfang: Overijssel mit Twente (niederländischer Saum).
+
+ort zwolle {
+    name     = "Zwolle"
+    gelaende = flussaue
+    lage     = { 6.0944 52.5125 }
+    flaeche  = 224
+    stadt    = ja
+    kreis    = kr_zwolle
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2743477; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort deventer {
+    name     = "Deventer"
+    gelaende = flussaue
+    lage     = { 6.1639 52.255 }
+    flaeche  = 163
+    stadt    = ja
+    kreis    = kr_zwolle
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2756987; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hardenberg {
+    name     = "Hardenberg"
+    gelaende = flachland
+    lage     = { 6.6194 52.5758 }
+    flaeche  = 224
+    stadt    = ja
+    kreis    = kr_zwolle
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2754861; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort dalfsen {
+    name     = "Dalfsen"
+    gelaende = flachland
+    lage     = { 6.2569 52.5117 }
+    flaeche  = 181
+    stadt    = ja
+    kreis    = kr_zwolle
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2757850; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort raalte {
+    name     = "Raalte"
+    gelaende = flachland
+    lage     = { 6.275 52.3858 }
+    flaeche  = 331
+    stadt    = ja
+    kreis    = kr_zwolle
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2748371; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ommen {
+    name     = "Ommen"
+    gelaende = flachland
+    lage     = { 6.4208 52.5208 }
+    flaeche  = 206
+    stadt    = nein
+    kreis    = kr_zwolle
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2749613; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort vroomshoop {
+    name     = "Vroomshoop"
+    gelaende = flachland
+    lage     = { 6.5653 52.4608 }
+    flaeche  = 231
+    stadt    = nein
+    kreis    = kr_zwolle
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2745169; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort enschede {
+    name     = "Enschede"
+    gelaende = flachland
+    lage     = { 6.8958 52.2183 }
+    flaeche  = 127
+    stadt    = ja
+    kreis    = kr_enschede
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2756071; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hengelo {
+    name     = "Hengelo"
+    gelaende = flachland
+    lage     = { 6.7931 52.2658 }
+    flaeche  = 140
+    stadt    = ja
+    kreis    = kr_enschede
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2754394; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort almelo {
+    name     = "Almelo"
+    gelaende = flachland
+    lage     = { 6.6625 52.3567 }
+    flaeche  = 215
+    stadt    = ja
+    kreis    = kr_enschede
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2759887; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort oldenzaal {
+    name     = "Oldenzaal"
+    gelaende = flachland
+    lage     = { 6.9292 52.3133 }
+    flaeche  = 180
+    stadt    = ja
+    kreis    = kr_enschede
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2749644; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort haaksbergen {
+    name     = "Haaksbergen"
+    gelaende = flachland
+    lage     = { 6.7389 52.1567 }
+    flaeche  = 139
+    stadt    = ja
+    kreis    = kr_enschede
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2755030; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort tubbergen {
+    name     = "Tubbergen"
+    gelaende = flachland
+    lage     = { 6.7847 52.4075 }
+    flaeche  = 177
+    stadt    = ja
+    kreis    = kr_enschede
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2746133; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort goor {
+    name     = "Goor"
+    gelaende = flachland
+    lage     = { 6.5861 52.2333 }
+    flaeche  = 220
+    stadt    = nein
+    kreis    = kr_enschede
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2755449; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}

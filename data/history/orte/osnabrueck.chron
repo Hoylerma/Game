@@ -1,0 +1,370 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
+# Orte: Osnabrück und Emsland – Orte ohne Daten (Meilenstein M3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
+# Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
+# ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
+# und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
+#
+# Umfang: Hochstift Osnabrück, Emsland (Niederstift Münster) und Grafschaft Bentheim.
+
+ort papenburg {
+    name     = "Papenburg"
+    gelaende = flachland
+    lage     = { 7.4044 53.0774 }
+    flaeche  = 164
+    stadt    = ja
+    kreis    = kr_papenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2855525; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort haren {
+    name     = "Haren"
+    gelaende = flussaue
+    lage     = { 7.2414 52.7926 }
+    flaeche  = 176
+    stadt    = ja
+    kreis    = kr_papenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2910514; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort werlte {
+    name     = "Werlte"
+    gelaende = flachland
+    lage     = { 7.6833 52.85 }
+    flaeche  = 219
+    stadt    = nein
+    kreis    = kr_papenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2810860; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort soegel {
+    name     = "Sögel"
+    gelaende = flachland
+    lage     = { 7.5167 52.85 }
+    flaeche  = 206
+    stadt    = nein
+    kreis    = kr_papenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2831699; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lathen {
+    name     = "Lathen"
+    gelaende = flussaue
+    lage     = { 7.3167 52.8667 }
+    flaeche  = 165
+    stadt    = nein
+    kreis    = kr_papenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2880351; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort esterwegen {
+    name     = "Esterwegen"
+    gelaende = flachland
+    lage     = { 7.6333 52.9929 }
+    flaeche  = 250
+    stadt    = nein
+    kreis    = kr_papenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2928717; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort doerpen {
+    name     = "Dörpen"
+    gelaende = flussaue
+    lage     = { 7.3227 52.9647 }
+    flaeche  = 193
+    stadt    = nein
+    kreis    = kr_papenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2935597; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort rhede {
+    name     = "Rhede"
+    gelaende = flussaue
+    lage     = { 7.2713 53.0602 }
+    flaeche  = 161
+    stadt    = nein
+    kreis    = kr_papenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2847688; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lingen {
+    name     = "Lingen"
+    gelaende = flussaue
+    lage     = { 7.3185 52.5214 }
+    flaeche  = 141
+    stadt    = ja
+    kreis    = kr_lingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2877088; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort meppen {
+    name     = "Meppen"
+    gelaende = flussaue
+    lage     = { 7.291 52.6906 }
+    flaeche  = 189
+    stadt    = ja
+    kreis    = kr_lingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2871845; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort haseluenne {
+    name     = "Haselünne"
+    gelaende = flachland
+    lage     = { 7.4846 52.6741 }
+    flaeche  = 159
+    stadt    = nein
+    kreis    = kr_lingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2909761; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort fuerstenau {
+    name     = "Fürstenau"
+    gelaende = flachland
+    lage     = { 7.6767 52.5167 }
+    flaeche  = 182
+    stadt    = nein
+    kreis    = kr_lingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2923658; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort geeste {
+    name     = "Geeste"
+    gelaende = flussaue
+    lage     = { 7.2667 52.6 }
+    flaeche  = 131
+    stadt    = nein
+    kreis    = kr_lingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2922112; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort laehden {
+    name     = "Lähden"
+    gelaende = flachland
+    lage     = { 7.5704 52.7455 }
+    flaeche  = 148
+    stadt    = nein
+    kreis    = kr_lingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2881921; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort freren {
+    name     = "Freren"
+    gelaende = flachland
+    lage     = { 7.5431 52.487 }
+    flaeche  = 181
+    stadt    = nein
+    kreis    = kr_lingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2924967; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bawinkel {
+    name     = "Bawinkel"
+    gelaende = flachland
+    lage     = { 7.4 52.6 }
+    flaeche  = 143
+    stadt    = nein
+    kreis    = kr_lingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2951863; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort nordhorn {
+    name     = "Nordhorn"
+    gelaende = flachland
+    lage     = { 7.0683 52.4308 }
+    flaeche  = 162
+    stadt    = ja
+    kreis    = kr_nordhorn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2861934; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bad_bentheim {
+    name     = "Bad Bentheim"
+    gelaende = flachland
+    lage     = { 7.1576 52.3007 }
+    flaeche  = 193
+    stadt    = nein
+    kreis    = kr_nordhorn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2953552; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort emsbueren {
+    name     = "Emsbüren"
+    gelaende = flussaue
+    lage     = { 7.3 52.4 }
+    flaeche  = 171
+    stadt    = nein
+    kreis    = kr_nordhorn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2930454; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wietmarschen {
+    name     = "Wietmarschen"
+    gelaende = flachland
+    lage     = { 7.1341 52.5181 }
+    flaeche  = 210
+    stadt    = nein
+    kreis    = kr_nordhorn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2809100; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort spelle {
+    name     = "Spelle"
+    gelaende = flachland
+    lage     = { 7.4667 52.3667 }
+    flaeche  = 129
+    stadt    = nein
+    kreis    = kr_nordhorn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2830652; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort salzbergen {
+    name     = "Salzbergen"
+    gelaende = flussaue
+    lage     = { 7.35 52.3333 }
+    flaeche  = 106
+    stadt    = nein
+    kreis    = kr_nordhorn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2842175; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort emlichheim {
+    name     = "Emlichheim"
+    gelaende = flachland
+    lage     = { 6.85 52.6167 }
+    flaeche  = 162
+    stadt    = nein
+    kreis    = kr_nordhorn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2930546; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort uelsen {
+    name     = "Uelsen"
+    gelaende = flachland
+    lage     = { 6.8833 52.5 }
+    flaeche  = 193
+    stadt    = nein
+    kreis    = kr_nordhorn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2820458; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bramsche {
+    name     = "Bramsche"
+    gelaende = flachland
+    lage     = { 7.9729 52.4088 }
+    flaeche  = 184
+    stadt    = ja
+    kreis    = kr_bramsche
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2945474; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort quakenbrueck {
+    name     = "Quakenbrück"
+    gelaende = flachland
+    lage     = { 7.9498 52.675 }
+    flaeche  = 196
+    stadt    = nein
+    kreis    = kr_bramsche
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2851523; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bersenbrueck {
+    name     = "Bersenbrück"
+    gelaende = flachland
+    lage     = { 7.9484 52.5516 }
+    flaeche  = 118
+    stadt    = nein
+    kreis    = kr_bramsche
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2949906; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort merzen {
+    name     = "Merzen"
+    gelaende = flachland
+    lage     = { 7.8333 52.4833 }
+    flaeche  = 110
+    stadt    = nein
+    kreis    = kr_bramsche
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2871690; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort rieste {
+    name     = "Rieste"
+    gelaende = flachland
+    lage     = { 8.0167 52.4833 }
+    flaeche  = 152
+    stadt    = nein
+    kreis    = kr_bramsche
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2846853; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort nortrup {
+    name     = "Nortrup"
+    gelaende = flachland
+    lage     = { 7.8607 52.615 }
+    flaeche  = 188
+    stadt    = nein
+    kreis    = kr_bramsche
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2861802; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort osnabrueck {
+    name     = "Osnabrück"
+    gelaende = flachland
+    lage     = { 8.0498 52.2726 }
+    flaeche  = 151
+    stadt    = ja
+    kreis    = kr_osnabrueck
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2856883; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort melle {
+    name     = "Melle"
+    gelaende = huegelland
+    lage     = { 8.3383 52.202 }
+    flaeche  = 175
+    stadt    = ja
+    kreis    = kr_osnabrueck
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2872079; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort georgsmarienhuette {
+    name     = "Georgsmarienhütte"
+    gelaende = huegelland
+    lage     = { 8.0448 52.203 }
+    flaeche  = 83
+    stadt    = ja
+    kreis    = kr_osnabrueck
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2921242; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bad_essen {
+    name     = "Bad Essen"
+    gelaende = huegelland
+    lage     = { 8.3333 52.3167 }
+    flaeche  = 202
+    stadt    = nein
+    kreis    = kr_osnabrueck
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2953464; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bissendorf {
+    name     = "Bissendorf"
+    gelaende = flachland
+    lage     = { 8.1667 52.2333 }
+    flaeche  = 148
+    stadt    = nein
+    kreis    = kr_osnabrueck
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2948212; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bad_laer {
+    name     = "Bad Laer"
+    gelaende = flachland
+    lage     = { 8.0833 52.1 }
+    flaeche  = 146
+    stadt    = nein
+    kreis    = kr_osnabrueck
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2881972; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}

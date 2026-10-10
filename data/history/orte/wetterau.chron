@@ -1,0 +1,210 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
+# Orte: Wetterau – Orte ohne Daten (Meilenstein M3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
+# Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
+# ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
+# und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
+#
+# Umfang: Wetterau und Untermain mit Frankfurt und Hanau (heute Frankfurt, Wetteraukreis, Main-Kinzig-Kreis und Hochtaunuskreis).
+
+ort nidda {
+    name     = "Nidda"
+    gelaende = huegelland
+    lage     = { 9.0064 50.4133 }
+    flaeche  = 197
+    stadt    = nein
+    kreis    = kr_nidda
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2863716; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort schluechtern {
+    name     = "Schlüchtern"
+    gelaende = huegelland
+    lage     = { 9.5253 50.3489 }
+    flaeche  = 165
+    stadt    = nein
+    kreis    = kr_nidda
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2838201; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bad_soden_salmuenster {
+    name     = "Bad Soden-Salmünster"
+    gelaende = huegelland
+    lage     = { 9.3671 50.2757 }
+    flaeche  = 202
+    stadt    = nein
+    kreis    = kr_nidda
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2953338; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort birstein {
+    name     = "Birstein"
+    gelaende = huegelland
+    lage     = { 9.3 50.35 }
+    flaeche  = 124
+    stadt    = nein
+    kreis    = kr_nidda
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2948351; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gedern {
+    name     = "Gedern"
+    gelaende = huegelland
+    lage     = { 9.1984 50.4248 }
+    flaeche  = 132
+    stadt    = nein
+    kreis    = kr_nidda
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2922124; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hanau_am_main {
+    name     = "Hanau am Main"
+    gelaende = flussaue
+    lage     = { 8.9142 50.1342 }
+    flaeche  = 135
+    stadt    = ja
+    kreis    = kr_hanau_am_main
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2911007; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gelnhausen {
+    name     = "Gelnhausen"
+    gelaende = huegelland
+    lage     = { 9.1874 50.2016 }
+    flaeche  = 145
+    stadt    = ja
+    kreis    = kr_hanau_am_main
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2921473; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort buedingen {
+    name     = "Büdingen"
+    gelaende = huegelland
+    lage     = { 9.1114 50.2901 }
+    flaeche  = 190
+    stadt    = ja
+    kreis    = kr_hanau_am_main
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2942073; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort langenselbold {
+    name     = "Langenselbold"
+    gelaende = flachland
+    lage     = { 9.04 50.1766 }
+    flaeche  = 152
+    stadt    = nein
+    kreis    = kr_hanau_am_main
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2880913; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort frankfurt_am_main {
+    name     = "Frankfurt am Main"
+    gelaende = flussaue
+    lage     = { 8.6842 50.1155 }
+    flaeche  = 58
+    stadt    = ja
+    kreis    = kr_frankfurt_am_main
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2925533; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bad_homburg_vor_der_hoehe {
+    name     = "Bad Homburg vor der Höhe"
+    gelaende = huegelland
+    lage     = { 8.6182 50.2268 }
+    flaeche  = 131
+    stadt    = ja
+    kreis    = kr_frankfurt_am_main
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2953436; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort friedberg {
+    name     = "Friedberg"
+    gelaende = boerde
+    lage     = { 8.7559 50.3374 }
+    flaeche  = 136
+    stadt    = ja
+    kreis    = kr_frankfurt_am_main
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2924802; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bad_vilbel {
+    name     = "Bad Vilbel"
+    gelaende = flachland
+    lage     = { 8.7376 50.1787 }
+    flaeche  = 149
+    stadt    = ja
+    kreis    = kr_frankfurt_am_main
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2953321; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort butzbach {
+    name     = "Butzbach"
+    gelaende = huegelland
+    lage     = { 8.6712 50.434 }
+    flaeche  = 124
+    stadt    = ja
+    kreis    = kr_frankfurt_am_main
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2940512; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort koenigstein_im_taunus {
+    name     = "Königstein im Taunus"
+    gelaende = mittelgebirge
+    lage     = { 8.4713 50.1794 }
+    flaeche  = 94
+    stadt    = nein
+    kreis    = kr_frankfurt_am_main
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2885760; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort usingen {
+    name     = "Usingen"
+    gelaende = huegelland
+    lage     = { 8.5369 50.3355 }
+    flaeche  = 133
+    stadt    = nein
+    kreis    = kr_frankfurt_am_main
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2818097; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort woelfersheim {
+    name     = "Wölfersheim"
+    gelaende = boerde
+    lage     = { 8.8167 50.4 }
+    flaeche  = 126
+    stadt    = nein
+    kreis    = kr_frankfurt_am_main
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2806852; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort florstadt {
+    name     = "Florstadt"
+    gelaende = boerde
+    lage     = { 8.8667 50.3167 }
+    flaeche  = 199
+    stadt    = nein
+    kreis    = kr_frankfurt_am_main
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3208053; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort schmitten {
+    name     = "Schmitten"
+    gelaende = mittelgebirge
+    lage     = { 8.45 50.2667 }
+    flaeche  = 122
+    stadt    = nein
+    kreis    = kr_frankfurt_am_main
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2837706; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort graevenwiesbach {
+    name     = "Grävenwiesbach"
+    gelaende = huegelland
+    lage     = { 8.4569 50.3902 }
+    flaeche  = 118
+    stadt    = nein
+    kreis    = kr_frankfurt_am_main
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2917868; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}

@@ -1,0 +1,230 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
+# Orte: Rheinhessen – Orte ohne Daten (Meilenstein M3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
+# Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
+# ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
+# und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
+#
+# Umfang: Rheinhessen und Nahe (heute Mainz, Worms, Alzey-Worms, Mainz-Bingen, Bad Kreuznach und Donnersbergkreis).
+
+ort mainz {
+    name     = "Mainz"
+    gelaende = flussaue
+    lage     = { 8.2791 49.9842 }
+    flaeche  = 110
+    stadt    = ja
+    kreis    = kr_mainz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2874225; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort worms {
+    name     = "Worms"
+    gelaende = flussaue
+    lage     = { 8.3592 49.6328 }
+    flaeche  = 77
+    stadt    = ja
+    kreis    = kr_mainz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2806142; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort alzey {
+    name     = "Alzey"
+    gelaende = huegelland
+    lage     = { 8.1151 49.7466 }
+    flaeche  = 204
+    stadt    = ja
+    kreis    = kr_mainz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2956710; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort nieder_olm {
+    name     = "Nieder-Olm"
+    gelaende = huegelland
+    lage     = { 8.2053 49.9117 }
+    flaeche  = 99
+    stadt    = nein
+    kreis    = kr_mainz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2863014; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort woerrstadt {
+    name     = "Wörrstadt"
+    gelaende = huegelland
+    lage     = { 8.1242 49.8486 }
+    flaeche  = 133
+    stadt    = nein
+    kreis    = kr_mainz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2806105; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort osthofen {
+    name     = "Osthofen"
+    gelaende = flachland
+    lage     = { 8.3242 49.7038 }
+    flaeche  = 151
+    stadt    = nein
+    kreis    = kr_mainz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2856278; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort oppenheim {
+    name     = "Oppenheim"
+    gelaende = flussaue
+    lage     = { 8.3597 49.8547 }
+    flaeche  = 185
+    stadt    = nein
+    kreis    = kr_mainz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2857167; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort monsheim {
+    name     = "Monsheim"
+    gelaende = huegelland
+    lage     = { 8.2119 49.6372 }
+    flaeche  = 125
+    stadt    = nein
+    kreis    = kr_mainz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2869751; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bad_kreuznach {
+    name     = "Bad Kreuznach"
+    gelaende = huegelland
+    lage     = { 7.8671 49.8414 }
+    flaeche  = 130
+    stadt    = ja
+    kreis    = kr_bad_kreuznach
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2953416; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ingelheim_am_rhein {
+    name     = "Ingelheim am Rhein"
+    gelaende = huegelland
+    lage     = { 8.0588 49.9708 }
+    flaeche  = 118
+    stadt    = ja
+    kreis    = kr_bad_kreuznach
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2896020; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bingen_am_rhein {
+    name     = "Bingen am Rhein"
+    gelaende = huegelland
+    lage     = { 7.8992 49.9667 }
+    flaeche  = 201
+    stadt    = ja
+    kreis    = kr_bad_kreuznach
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2948825; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kirn {
+    name     = "Kirn"
+    gelaende = huegelland
+    lage     = { 7.4577 49.7891 }
+    flaeche  = 175
+    stadt    = nein
+    kreis    = kr_bad_kreuznach
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2890314; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort sprendlingen {
+    name     = "Sprendlingen"
+    gelaende = huegelland
+    lage     = { 7.9833 49.8667 }
+    flaeche  = 133
+    stadt    = nein
+    kreis    = kr_bad_kreuznach
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2830080; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort meisenheim {
+    name     = "Meisenheim"
+    gelaende = huegelland
+    lage     = { 7.6677 49.7072 }
+    flaeche  = 117
+    stadt    = nein
+    kreis    = kr_bad_kreuznach
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2872173; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort waldboeckelheim {
+    name     = "Waldböckelheim"
+    gelaende = huegelland
+    lage     = { 7.7167 49.8167 }
+    flaeche  = 109
+    stadt    = nein
+    kreis    = kr_bad_kreuznach
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2815139; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort monzingen {
+    name     = "Monzingen"
+    gelaende = huegelland
+    lage     = { 7.5928 49.7976 }
+    flaeche  = 146
+    stadt    = nein
+    kreis    = kr_bad_kreuznach
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2869732; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort spabruecken {
+    name     = "Spabrücken"
+    gelaende = huegelland
+    lage     = { 7.7167 49.9 }
+    flaeche  = 165
+    stadt    = nein
+    kreis    = kr_bad_kreuznach
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2830869; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kirchheimbolanden {
+    name     = "Kirchheimbolanden"
+    gelaende = huegelland
+    lage     = { 8.0151 49.6625 }
+    flaeche  = 140
+    stadt    = ja
+    kreis    = kr_kirchheimbolanden
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2890478; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort rockenhausen {
+    name     = "Rockenhausen"
+    gelaende = huegelland
+    lage     = { 7.8213 49.6297 }
+    flaeche  = 113
+    stadt    = nein
+    kreis    = kr_kirchheimbolanden
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2846229; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kerzenheim {
+    name     = "Kerzenheim"
+    gelaende = huegelland
+    lage     = { 8.0597 49.5764 }
+    flaeche  = 94
+    stadt    = nein
+    kreis    = kr_kirchheimbolanden
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2891480; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort alsenz {
+    name     = "Alsenz"
+    gelaende = huegelland
+    lage     = { 7.8167 49.7167 }
+    flaeche  = 164
+    stadt    = nein
+    kreis    = kr_kirchheimbolanden
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2958134; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort muenchweiler_an_der_alsenz {
+    name     = "Münchweiler an der Alsenz"
+    gelaende = huegelland
+    lage     = { 7.8833 49.55 }
+    flaeche  = 158
+    stadt    = nein
+    kreis    = kr_kirchheimbolanden
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2867627; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}

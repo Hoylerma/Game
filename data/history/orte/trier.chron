@@ -1,0 +1,310 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
+# Orte: Trier – Orte ohne Daten (Meilenstein M3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
+# Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
+# ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
+# und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
+#
+# Umfang: Trierer Land mit Mosel, Eifel und Hunsrück (heute Trier, Bernkastel-Wittlich, Bitburg-Prüm, Vulkaneifel, Trier-Saarburg und Birkenfeld).
+
+ort daun {
+    name     = "Daun"
+    gelaende = mittelgebirge
+    lage     = { 6.8294 50.1972 }
+    flaeche  = 158
+    stadt    = ja
+    kreis    = kr_daun
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2938714; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gerolstein {
+    name     = "Gerolstein"
+    gelaende = mittelgebirge
+    lage     = { 6.6598 50.2222 }
+    flaeche  = 240
+    stadt    = nein
+    kreis    = kr_daun
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2920963; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kelberg {
+    name     = "Kelberg"
+    gelaende = mittelgebirge
+    lage     = { 6.9195 50.2916 }
+    flaeche  = 154
+    stadt    = nein
+    kreis    = kr_daun
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2891846; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort uexheim {
+    name     = "Üxheim"
+    gelaende = huegelland
+    lage     = { 6.75 50.35 }
+    flaeche  = 196
+    stadt    = nein
+    kreis    = kr_daun
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2817980; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gillenfeld {
+    name     = "Gillenfeld"
+    gelaende = huegelland
+    lage     = { 6.9038 50.1279 }
+    flaeche  = 121
+    stadt    = nein
+    kreis    = kr_daun
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2920413; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lissendorf {
+    name     = "Lissendorf"
+    gelaende = mittelgebirge
+    lage     = { 6.6 50.3167 }
+    flaeche  = 126
+    stadt    = nein
+    kreis    = kr_daun
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2876842; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bitburg {
+    name     = "Bitburg"
+    gelaende = huegelland
+    lage     = { 6.5273 49.9679 }
+    flaeche  = 182
+    stadt    = nein
+    kreis    = kr_bitburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2948184; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort pruem {
+    name     = "Prüm"
+    gelaende = huegelland
+    lage     = { 6.4202 50.2079 }
+    flaeche  = 287
+    stadt    = nein
+    kreis    = kr_bitburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2851826; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort arzfeld {
+    name     = "Arzfeld"
+    gelaende = huegelland
+    lage     = { 6.2707 50.0896 }
+    flaeche  = 231
+    stadt    = nein
+    kreis    = kr_bitburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2955363; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bleialf {
+    name     = "Bleialf"
+    gelaende = huegelland
+    lage     = { 6.2833 50.2333 }
+    flaeche  = 213
+    stadt    = nein
+    kreis    = kr_bitburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2947874; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kyllburg {
+    name     = "Kyllburg"
+    gelaende = huegelland
+    lage     = { 6.5948 50.0386 }
+    flaeche  = 295
+    stadt    = nein
+    kreis    = kr_bitburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2882167; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort mettendorf {
+    name     = "Mettendorf"
+    gelaende = huegelland
+    lage     = { 6.33 49.9478 }
+    flaeche  = 183
+    stadt    = nein
+    kreis    = kr_bitburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2871559; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort trier {
+    name     = "Trier"
+    gelaende = huegelland
+    lage     = { 6.6394 49.7557 }
+    flaeche  = 143
+    stadt    = ja
+    kreis    = kr_trier
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2821164; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort konz {
+    name     = "Konz"
+    gelaende = huegelland
+    lage     = { 6.5765 49.7004 }
+    flaeche  = 121
+    stadt    = nein
+    kreis    = kr_trier
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2885672; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort saarburg_trier {
+    name     = "Saarburg (Trier)"
+    gelaende = huegelland
+    lage     = { 6.5437 49.6064 }
+    flaeche  = 122
+    stadt    = nein
+    kreis    = kr_trier
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2842644; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort schweich {
+    name     = "Schweich"
+    gelaende = huegelland
+    lage     = { 6.7526 49.8222 }
+    flaeche  = 146
+    stadt    = nein
+    kreis    = kr_trier
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2834594; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort welschbillig {
+    name     = "Welschbillig"
+    gelaende = huegelland
+    lage     = { 6.5667 49.85 }
+    flaeche  = 150
+    stadt    = nein
+    kreis    = kr_trier
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2811420; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort zemmer {
+    name     = "Zemmer"
+    gelaende = huegelland
+    lage     = { 6.7 49.9 }
+    flaeche  = 155
+    stadt    = nein
+    kreis    = kr_trier
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2804791; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort zerf {
+    name     = "Zerf"
+    gelaende = mittelgebirge
+    lage     = { 6.6833 49.6 }
+    flaeche  = 156
+    stadt    = nein
+    kreis    = kr_trier
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2804745; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort idar_oberstein {
+    name     = "Idar-Oberstein"
+    gelaende = huegelland
+    lage     = { 7.3078 49.7144 }
+    flaeche  = 164
+    stadt    = ja
+    kreis    = kr_idar_oberstein
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2896753; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wittlich {
+    name     = "Wittlich"
+    gelaende = huegelland
+    lage     = { 6.8931 49.986 }
+    flaeche  = 201
+    stadt    = ja
+    kreis    = kr_idar_oberstein
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2807240; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort birkenfeld {
+    name     = "Birkenfeld"
+    gelaende = huegelland
+    lage     = { 7.1667 49.6525 }
+    flaeche  = 152
+    stadt    = ja
+    kreis    = kr_idar_oberstein
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2948595; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bernkastel_kues {
+    name     = "Bernkastel-Kues"
+    gelaende = mittelgebirge
+    lage     = { 7.0766 49.916 }
+    flaeche  = 148
+    stadt    = nein
+    kreis    = kr_idar_oberstein
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2949998; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort morbach {
+    name     = "Morbach"
+    gelaende = mittelgebirge
+    lage     = { 7.1271 49.8077 }
+    flaeche  = 189
+    stadt    = nein
+    kreis    = kr_idar_oberstein
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2869306; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort baumholder {
+    name     = "Baumholder"
+    gelaende = mittelgebirge
+    lage     = { 7.3338 49.6174 }
+    flaeche  = 147
+    stadt    = nein
+    kreis    = kr_idar_oberstein
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2951950; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort neumagen_dhron {
+    name     = "Neumagen-Dhron"
+    gelaende = huegelland
+    lage     = { 6.8978 49.8555 }
+    flaeche  = 195
+    stadt    = nein
+    kreis    = kr_idar_oberstein
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3207532; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort reinsfeld {
+    name     = "Reinsfeld"
+    gelaende = mittelgebirge
+    lage     = { 6.8833 49.6833 }
+    flaeche  = 193
+    stadt    = nein
+    kreis    = kr_idar_oberstein
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2848710; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort rhaunen {
+    name     = "Rhaunen"
+    gelaende = huegelland
+    lage     = { 7.342 49.8638 }
+    flaeche  = 139
+    stadt    = nein
+    kreis    = kr_idar_oberstein
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2847695; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort thalfang {
+    name     = "Thalfang"
+    gelaende = mittelgebirge
+    lage     = { 7 49.75 }
+    flaeche  = 168
+    stadt    = nein
+    kreis    = kr_idar_oberstein
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3204961; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kinderbeuern {
+    name     = "Kinderbeuern"
+    gelaende = huegelland
+    lage     = { 7.0236 50.0093 }
+    flaeche  = 133
+    stadt    = nein
+    kreis    = kr_idar_oberstein
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2890873; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}

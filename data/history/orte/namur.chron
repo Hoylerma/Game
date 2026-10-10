@@ -1,0 +1,170 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
+# Orte: Namur – Orte ohne Daten (Meilenstein M3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
+# Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
+# ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
+# und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
+#
+# Umfang: Grafschaft Namur (heute belgische Provinz Namur).
+
+ort namur {
+    name     = "Namur"
+    gelaende = huegelland
+    lage     = { 4.8675 50.4669 }
+    flaeche  = 197
+    stadt    = ja
+    kreis    = kr_namur
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2790471; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gembloux {
+    name     = "Gembloux"
+    gelaende = flachland
+    lage     = { 4.6989 50.5615 }
+    flaeche  = 212
+    stadt    = ja
+    kreis    = kr_namur
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2797713; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort andenne {
+    name     = "Andenne"
+    gelaende = huegelland
+    lage     = { 5.0951 50.4894 }
+    flaeche  = 111
+    stadt    = ja
+    kreis    = kr_namur
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2803204; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort eghezee {
+    name     = "Éghezée"
+    gelaende = flachland
+    lage     = { 4.9117 50.5908 }
+    flaeche  = 189
+    stadt    = nein
+    kreis    = kr_namur
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2798949; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort profondeville {
+    name     = "Profondeville"
+    gelaende = huegelland
+    lage     = { 4.8651 50.3758 }
+    flaeche  = 209
+    stadt    = nein
+    kreis    = kr_namur
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2788577; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gesves {
+    name     = "Gesves"
+    gelaende = huegelland
+    lage     = { 5.0746 50.4015 }
+    flaeche  = 143
+    stadt    = nein
+    kreis    = kr_namur
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2797581; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort havelange {
+    name     = "Havelange"
+    gelaende = huegelland
+    lage     = { 5.2382 50.3893 }
+    flaeche  = 183
+    stadt    = nein
+    kreis    = kr_namur
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2796369; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort walcourt {
+    name     = "Walcourt"
+    gelaende = huegelland
+    lage     = { 4.438 50.254 }
+    flaeche  = 136
+    stadt    = nein
+    kreis    = kr_walcourt
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2784189; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort philippeville {
+    name     = "Philippeville"
+    gelaende = huegelland
+    lage     = { 4.5437 50.1961 }
+    flaeche  = 230
+    stadt    = ja
+    kreis    = kr_walcourt
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2789016; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ciney {
+    name     = "Ciney"
+    gelaende = huegelland
+    lage     = { 5.1002 50.2945 }
+    flaeche  = 218
+    stadt    = nein
+    kreis    = kr_walcourt
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2800298; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort dinant {
+    name     = "Dinant"
+    gelaende = huegelland
+    lage     = { 4.9117 50.2581 }
+    flaeche  = 233
+    stadt    = nein
+    kreis    = kr_walcourt
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2799357; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort couvin {
+    name     = "Couvin"
+    gelaende = huegelland
+    lage     = { 4.495 50.0528 }
+    flaeche  = 284
+    stadt    = nein
+    kreis    = kr_walcourt
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2800025; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort mettet {
+    name     = "Mettet"
+    gelaende = huegelland
+    lage     = { 4.6623 50.3212 }
+    flaeche  = 239
+    stadt    = nein
+    kreis    = kr_walcourt
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2791261; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort rochefort {
+    name     = "Rochefort"
+    gelaende = huegelland
+    lage     = { 5.2216 50.1631 }
+    flaeche  = 160
+    stadt    = nein
+    kreis    = kr_walcourt
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2787948; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort beauraing {
+    name     = "Beauraing"
+    gelaende = huegelland
+    lage     = { 4.9555 50.1104 }
+    flaeche  = 175
+    stadt    = nein
+    kreis    = kr_walcourt
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2802501; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gedinne {
+    name     = "Gedinne"
+    gelaende = huegelland
+    lage     = { 4.9367 49.9804 }
+    flaeche  = 247
+    stadt    = nein
+    kreis    = kr_walcourt
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2797781; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}

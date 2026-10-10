@@ -1,0 +1,490 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
+# Orte: Luxemburg – Orte ohne Daten (Meilenstein M3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
+# Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
+# ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
+# und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
+#
+# Umfang: Herzogtum Luxemburg (heute Großherzogtum Luxemburg und belgische Provinz Luxemburg).
+
+ort vielsalm {
+    name     = "Vielsalm"
+    gelaende = mittelgebirge
+    lage     = { 5.915 50.2841 }
+    flaeche  = 142
+    stadt    = nein
+    kreis    = kr_vielsalm
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2784775; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gouvy {
+    name     = "Gouvy"
+    gelaende = huegelland
+    lage     = { 5.9392 50.186 }
+    flaeche  = 135
+    stadt    = nein
+    kreis    = kr_vielsalm
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2797346; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort clerf {
+    name     = "Clerf"
+    gelaende = huegelland
+    lage     = { 6.0314 50.0547 }
+    flaeche  = 198
+    stadt    = ja
+    kreis    = kr_vielsalm
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2960684; deutscher Name aus den GeoNames-Alternativnamen (heute Clervaux); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort weiswampach {
+    name     = "Weiswampach"
+    gelaende = huegelland
+    lage     = { 6.075 50.1372 }
+    flaeche  = 175
+    stadt    = nein
+    kreis    = kr_vielsalm
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2959989; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort marche_en_famenne {
+    name     = "Marche-en-Famenne"
+    gelaende = huegelland
+    lage     = { 5.3442 50.2268 }
+    flaeche  = 141
+    stadt    = nein
+    kreis    = kr_marche_en_famenne
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2791744; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bastogne {
+    name     = "Bastogne"
+    gelaende = huegelland
+    lage     = { 5.7184 50.0035 }
+    flaeche  = 180
+    stadt    = ja
+    kreis    = kr_marche_en_famenne
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2802583; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort durbuy {
+    name     = "Durbuy"
+    gelaende = huegelland
+    lage     = { 5.4563 50.3529 }
+    flaeche  = 152
+    stadt    = nein
+    kreis    = kr_marche_en_famenne
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2799047; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort houffalize {
+    name     = "Houffalize"
+    gelaende = huegelland
+    lage     = { 5.7896 50.1324 }
+    flaeche  = 186
+    stadt    = nein
+    kreis    = kr_marche_en_famenne
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2795322; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hotton {
+    name     = "Hotton"
+    gelaende = huegelland
+    lage     = { 5.4461 50.2674 }
+    flaeche  = 132
+    stadt    = nein
+    kreis    = kr_marche_en_famenne
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2795337; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort la_roche_en_ardenne {
+    name     = "La Roche-en-Ardenne"
+    gelaende = huegelland
+    lage     = { 5.5755 50.1836 }
+    flaeche  = 181
+    stadt    = nein
+    kreis    = kr_marche_en_famenne
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2793279; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort manhay {
+    name     = "Manhay"
+    gelaende = mittelgebirge
+    lage     = { 5.6756 50.2922 }
+    flaeche  = 201
+    stadt    = nein
+    kreis    = kr_marche_en_famenne
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2791790; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bertogne {
+    name     = "Bertogne"
+    gelaende = huegelland
+    lage     = { 5.6669 50.0836 }
+    flaeche  = 125
+    stadt    = nein
+    kreis    = kr_marche_en_famenne
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2802113; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort tenneville {
+    name     = "Tenneville"
+    gelaende = huegelland
+    lage     = { 5.529 50.095 }
+    flaeche  = 159
+    stadt    = nein
+    kreis    = kr_marche_en_famenne
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2785745; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bertrix {
+    name     = "Bertrix"
+    gelaende = huegelland
+    lage     = { 5.2554 49.856 }
+    flaeche  = 203
+    stadt    = nein
+    kreis    = kr_bertrix
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2802106; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort florenville {
+    name     = "Florenville"
+    gelaende = huegelland
+    lage     = { 5.3074 49.6998 }
+    flaeche  = 226
+    stadt    = nein
+    kreis    = kr_bertrix
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2798272; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort paliseul {
+    name     = "Paliseul"
+    gelaende = huegelland
+    lage     = { 5.1354 49.904 }
+    flaeche  = 183
+    stadt    = nein
+    kreis    = kr_bertrix
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2789354; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort nassogne {
+    name     = "Nassogne"
+    gelaende = huegelland
+    lage     = { 5.3427 50.1285 }
+    flaeche  = 153
+    stadt    = nein
+    kreis    = kr_bertrix
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2790451; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort libin {
+    name     = "Libin"
+    gelaende = huegelland
+    lage     = { 5.2561 49.9811 }
+    flaeche  = 174
+    stadt    = nein
+    kreis    = kr_bertrix
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2792442; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bouillon {
+    name     = "Bouillon"
+    gelaende = huegelland
+    lage     = { 5.067 49.7932 }
+    flaeche  = 236
+    stadt    = nein
+    kreis    = kr_bertrix
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2801283; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort saint_hubert {
+    name     = "Saint-Hubert"
+    gelaende = mittelgebirge
+    lage     = { 5.374 50.0267 }
+    flaeche  = 171
+    stadt    = nein
+    kreis    = kr_bertrix
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2787407; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wellin {
+    name     = "Wellin"
+    gelaende = huegelland
+    lage     = { 5.1141 50.0813 }
+    flaeche  = 181
+    stadt    = nein
+    kreis    = kr_bertrix
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2783862; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort arel {
+    name     = "Arel"
+    gelaende = huegelland
+    lage     = { 5.8167 49.6833 }
+    flaeche  = 168
+    stadt    = ja
+    kreis    = kr_arel
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2803073; deutscher Name aus den GeoNames-Alternativnamen (heute Arlon); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort diekirch {
+    name     = "Diekirch"
+    gelaende = huegelland
+    lage     = { 6.1558 49.8678 }
+    flaeche  = 131
+    stadt    = ja
+    kreis    = kr_arel
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2960657; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort echternach {
+    name     = "Echternach"
+    gelaende = huegelland
+    lage     = { 6.4185 49.8121 }
+    flaeche  = 170
+    stadt    = ja
+    kreis    = kr_arel
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2960630; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort grevenmacher {
+    name     = "Grevenmacher"
+    gelaende = huegelland
+    lage     = { 6.4402 49.6775 }
+    flaeche  = 146
+    stadt    = ja
+    kreis    = kr_arel
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2960515; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wiltz {
+    name     = "Wiltz"
+    gelaende = huegelland
+    lage     = { 5.9339 49.9655 }
+    flaeche  = 202
+    stadt    = ja
+    kreis    = kr_arel
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2959977; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort mersch {
+    name     = "Mersch"
+    gelaende = huegelland
+    lage     = { 6.1061 49.7489 }
+    flaeche  = 175
+    stadt    = ja
+    kreis    = kr_arel
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2960276; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort vianden {
+    name     = "Vianden"
+    gelaende = huegelland
+    lage     = { 6.2089 49.935 }
+    flaeche  = 153
+    stadt    = ja
+    kreis    = kr_arel
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2960021; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort redingen {
+    name     = "Redingen"
+    gelaende = huegelland
+    lage     = { 5.89 49.7644 }
+    flaeche  = 139
+    stadt    = ja
+    kreis    = kr_arel
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2960160; deutscher Name aus den GeoNames-Alternativnamen (heute Redange-sur-Attert); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort befort {
+    name     = "Befort"
+    gelaende = huegelland
+    lage     = { 6.2917 49.8358 }
+    flaeche  = 147
+    stadt    = nein
+    kreis    = kr_arel
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2960809; deutscher Name aus den GeoNames-Alternativnamen (heute Beaufort); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort mertzig {
+    name     = "Mertzig"
+    gelaende = huegelland
+    lage     = { 6.0075 49.8339 }
+    flaeche  = 155
+    stadt    = nein
+    kreis    = kr_arel
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2960270; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bauschleiden {
+    name     = "Bauschleiden"
+    gelaende = huegelland
+    lage     = { 5.8164 49.8878 }
+    flaeche  = 189
+    stadt    = nein
+    kreis    = kr_arel
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2960737; deutscher Name aus den GeoNames-Alternativnamen (heute Boulaide); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort luxemburg {
+    name     = "Luxemburg"
+    gelaende = huegelland
+    lage     = { 6.13 49.6117 }
+    flaeche  = 134
+    stadt    = ja
+    kreis    = kr_luxemburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2960316; deutscher Name aus den GeoNames-Alternativnamen (heute Luxembourg); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort esch_an_der_alzette {
+    name     = "Esch an der Alzette"
+    gelaende = huegelland
+    lage     = { 5.9806 49.4958 }
+    flaeche  = 115
+    stadt    = ja
+    kreis    = kr_luxemburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2960596; deutscher Name aus den GeoNames-Alternativnamen (heute Esch-sur-Alzette); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort duedelingen {
+    name     = "Düdelingen"
+    gelaende = huegelland
+    lage     = { 6.0875 49.4806 }
+    flaeche  = 134
+    stadt    = nein
+    kreis    = kr_luxemburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2960634; deutscher Name aus den GeoNames-Alternativnamen (heute Dudelange); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort remich {
+    name     = "Remich"
+    gelaende = huegelland
+    lage     = { 6.3669 49.545 }
+    flaeche  = 163
+    stadt    = ja
+    kreis    = kr_luxemburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2960154; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort petingen {
+    name     = "Petingen"
+    gelaende = huegelland
+    lage     = { 5.8806 49.5583 }
+    flaeche  = 138
+    stadt    = nein
+    kreis    = kr_luxemburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2960187; deutscher Name aus den GeoNames-Alternativnamen (heute Pétange); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort capellen {
+    name     = "Capellen"
+    gelaende = huegelland
+    lage     = { 5.9908 49.645 }
+    flaeche  = 167
+    stadt    = ja
+    kreis    = kr_luxemburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2960697; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort niederanven {
+    name     = "Niederanven"
+    gelaende = huegelland
+    lage     = { 6.262 49.652 }
+    flaeche  = 186
+    stadt    = nein
+    kreis    = kr_luxemburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2960231; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort aspelt {
+    name     = "Aspelt"
+    gelaende = huegelland
+    lage     = { 6.2247 49.5228 }
+    flaeche  = 151
+    stadt    = nein
+    kreis    = kr_luxemburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2960823; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort virton {
+    name     = "Virton"
+    gelaende = huegelland
+    lage     = { 5.5326 49.5682 }
+    flaeche  = 174
+    stadt    = ja
+    kreis    = kr_virton
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2784555; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort neufchateau_luxemburg {
+    name     = "Neufchâteau (Luxemburg)"
+    gelaende = huegelland
+    lage     = { 5.4353 49.8407 }
+    flaeche  = 164
+    stadt    = ja
+    kreis    = kr_virton
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2790286; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort habay_la_vieille {
+    name     = "Habay-la-Vieille"
+    gelaende = huegelland
+    lage     = { 5.62 49.7233 }
+    flaeche  = 125
+    stadt    = nein
+    kreis    = kr_virton
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2796807; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort vaux_sur_sure {
+    name     = "Vaux-sur-Sûre"
+    gelaende = huegelland
+    lage     = { 5.5785 49.911 }
+    flaeche  = 183
+    stadt    = nein
+    kreis    = kr_virton
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2784994; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort leglise {
+    name     = "Léglise"
+    gelaende = huegelland
+    lage     = { 5.5365 49.7998 }
+    flaeche  = 115
+    stadt    = nein
+    kreis    = kr_virton
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2792985; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort tintigny {
+    name     = "Tintigny"
+    gelaende = huegelland
+    lage     = { 5.5135 49.6833 }
+    flaeche  = 177
+    stadt    = nein
+    kreis    = kr_virton
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2785422; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort fauvillers {
+    name     = "Fauvillers"
+    gelaende = huegelland
+    lage     = { 5.664 49.8512 }
+    flaeche  = 155
+    stadt    = nein
+    kreis    = kr_virton
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2798438; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort saint_leger {
+    name     = "Saint-Léger"
+    gelaende = huegelland
+    lage     = { 5.6569 49.612 }
+    flaeche  = 129
+    stadt    = nein
+    kreis    = kr_virton
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2787378; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}

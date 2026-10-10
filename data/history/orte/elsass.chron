@@ -1,0 +1,600 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
+# Orte: Elsass – Orte ohne Daten (Meilenstein M3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
+# Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
+# ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
+# und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
+#
+# Umfang: Elsass mit Belfort (heute Départements Bas-Rhin, Haut-Rhin und Territoire de Belfort).
+
+ort weissenburg {
+    name     = "Weißenburg"
+    gelaende = huegelland
+    lage     = { 7.9455 49.0371 }
+    flaeche  = 151
+    stadt    = ja
+    kreis    = kr_weissenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2967325; deutscher Name aus den GeoNames-Alternativnamen (heute Wissembourg); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort reichshofen {
+    name     = "Reichshofen"
+    gelaende = huegelland
+    lage     = { 7.6656 48.9329 }
+    flaeche  = 214
+    stadt    = nein
+    kreis    = kr_weissenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2984136; deutscher Name aus den GeoNames-Alternativnamen (heute Reichshoffen); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort sufflenheim {
+    name     = "Sufflenheim"
+    gelaende = flachland
+    lage     = { 7.9627 48.8303 }
+    flaeche  = 122
+    stadt    = nein
+    kreis    = kr_weissenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2974086; deutscher Name aus den GeoNames-Alternativnamen (heute Soufflenheim); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort betschdorf {
+    name     = "Betschdorf"
+    gelaende = flachland
+    lage     = { 7.902 48.8982 }
+    flaeche  = 159
+    stadt    = nein
+    kreis    = kr_weissenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2989816; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort selz {
+    name     = "Selz"
+    gelaende = flussaue
+    lage     = { 8.1076 48.8952 }
+    flaeche  = 137
+    stadt    = nein
+    kreis    = kr_weissenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2975199; deutscher Name aus den GeoNames-Alternativnamen (heute Seltz); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lembach {
+    name     = "Lembach"
+    gelaende = huegelland
+    lage     = { 7.7899 49.0036 }
+    flaeche  = 211
+    stadt    = nein
+    kreis    = kr_weissenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3003496; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lauterburg {
+    name     = "Lauterburg"
+    gelaende = flussaue
+    lage     = { 8.1785 48.9751 }
+    flaeche  = 104
+    stadt    = nein
+    kreis    = kr_weissenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3005948; deutscher Name aus den GeoNames-Alternativnamen (heute Lauterbourg); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hagenau {
+    name     = "Hagenau"
+    gelaende = flachland
+    lage     = { 7.7905 48.8156 }
+    flaeche  = 155
+    stadt    = ja
+    kreis    = kr_hagenau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3014078; deutscher Name aus den GeoNames-Alternativnamen (heute Haguenau); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort brumath {
+    name     = "Brumath"
+    gelaende = flachland
+    lage     = { 7.711 48.734 }
+    flaeche  = 127
+    stadt    = nein
+    kreis    = kr_hagenau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3029771; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wanzenau {
+    name     = "Wanzenau"
+    gelaende = flussaue
+    lage     = { 7.8307 48.6579 }
+    flaeche  = 145
+    stadt    = nein
+    kreis    = kr_hagenau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3005422; deutscher Name aus den GeoNames-Alternativnamen (heute La Wantzenau); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort herrlisheim {
+    name     = "Herrlisheim"
+    gelaende = flachland
+    lage     = { 7.9054 48.7305 }
+    flaeche  = 97
+    stadt    = nein
+    kreis    = kr_hagenau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3013387; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort zabern {
+    name     = "Zabern"
+    gelaende = huegelland
+    lage     = { 7.3622 48.7416 }
+    flaeche  = 147
+    stadt    = ja
+    kreis    = kr_zabern
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2975588; deutscher Name aus den GeoNames-Alternativnamen (heute Saverne); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wasselnheim {
+    name     = "Wasselnheim"
+    gelaende = huegelland
+    lage     = { 7.4451 48.6378 }
+    flaeche  = 150
+    stadt    = nein
+    kreis    = kr_zabern
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2967437; deutscher Name aus den GeoNames-Alternativnamen (heute Wasselonne); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort saarunion {
+    name     = "Saarunion"
+    gelaende = huegelland
+    lage     = { 7.0937 48.9382 }
+    flaeche  = 204
+    stadt    = nein
+    kreis    = kr_zabern
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2975957; deutscher Name aus den GeoNames-Alternativnamen (heute Sarre-Union); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort buchsweiler {
+    name     = "Buchsweiler"
+    gelaende = huegelland
+    lage     = { 7.4812 48.825 }
+    flaeche  = 138
+    stadt    = nein
+    kreis    = kr_zabern
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3030708; deutscher Name aus den GeoNames-Alternativnamen (heute Bouxwiller); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort pfaffenhofen {
+    name     = "Pfaffenhofen"
+    gelaende = huegelland
+    lage     = { 7.6071 48.8422 }
+    flaeche  = 134
+    stadt    = nein
+    kreis    = kr_zabern
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2987431; deutscher Name aus den GeoNames-Alternativnamen (heute Pfaffenhoffen); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hochfelden {
+    name     = "Hochfelden"
+    gelaende = flachland
+    lage     = { 7.5677 48.7574 }
+    flaeche  = 148
+    stadt    = nein
+    kreis    = kr_zabern
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3013249; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wimmenau {
+    name     = "Wimmenau"
+    gelaende = huegelland
+    lage     = { 7.4219 48.9122 }
+    flaeche  = 129
+    stadt    = nein
+    kreis    = kr_zabern
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2967349; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort drulingen {
+    name     = "Drulingen"
+    gelaende = huegelland
+    lage     = { 7.1896 48.868 }
+    flaeche  = 200
+    stadt    = nein
+    kreis    = kr_zabern
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3020740; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort strassburg {
+    name     = "Straßburg"
+    gelaende = flachland
+    lage     = { 7.7455 48.5839 }
+    flaeche  = 136
+    stadt    = ja
+    kreis    = kr_strassburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2973783; deutscher Name aus den GeoNames-Alternativnamen (heute Strasbourg); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort schlettstadt {
+    name     = "Schlettstadt"
+    gelaende = huegelland
+    lage     = { 7.4489 48.2619 }
+    flaeche  = 128
+    stadt    = ja
+    kreis    = kr_strassburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2975233; deutscher Name aus den GeoNames-Alternativnamen (heute Sélestat); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort molsheim {
+    name     = "Molsheim"
+    gelaende = huegelland
+    lage     = { 7.492 48.5404 }
+    flaeche  = 106
+    stadt    = ja
+    kreis    = kr_strassburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2993476; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort oberehnheim {
+    name     = "Oberehnheim"
+    gelaende = huegelland
+    lage     = { 7.481 48.4631 }
+    flaeche  = 141
+    stadt    = nein
+    kreis    = kr_strassburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2989796; deutscher Name aus den GeoNames-Alternativnamen (heute Obernai); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort erstein {
+    name     = "Erstein"
+    gelaende = flachland
+    lage     = { 7.6626 48.4237 }
+    flaeche  = 129
+    stadt    = nein
+    kreis    = kr_strassburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3019865; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort geispolsheim {
+    name     = "Geispolsheim"
+    gelaende = flachland
+    lage     = { 7.6482 48.516 }
+    flaeche  = 132
+    stadt    = nein
+    kreis    = kr_strassburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3016424; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort la_broque {
+    name     = "La Broque"
+    gelaende = mittelgebirge
+    lage     = { 7.2164 48.473 }
+    flaeche  = 291
+    stadt    = nein
+    kreis    = kr_strassburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3010778; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort rhinau {
+    name     = "Rhinau"
+    gelaende = flussaue
+    lage     = { 7.7053 48.3202 }
+    flaeche  = 121
+    stadt    = nein
+    kreis    = kr_strassburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2983761; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hilsenheim {
+    name     = "Hilsenheim"
+    gelaende = flachland
+    lage     = { 7.5635 48.2876 }
+    flaeche  = 100
+    stadt    = nein
+    kreis    = kr_strassburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3013282; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort epfig {
+    name     = "Epfig"
+    gelaende = huegelland
+    lage     = { 7.4643 48.3593 }
+    flaeche  = 150
+    stadt    = nein
+    kreis    = kr_strassburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3020051; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort niederhaslach {
+    name     = "Niederhaslach"
+    gelaende = mittelgebirge
+    lage     = { 7.3428 48.5426 }
+    flaeche  = 142
+    stadt    = nein
+    kreis    = kr_strassburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2990417; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ittenheim {
+    name     = "Ittenheim"
+    gelaende = flachland
+    lage     = { 7.5937 48.6051 }
+    flaeche  = 139
+    stadt    = nein
+    kreis    = kr_strassburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3012640; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kolmar_elsass {
+    name     = "Kolmar (Elsass)"
+    gelaende = flachland
+    lage     = { 7.3558 48.0808 }
+    flaeche  = 214
+    stadt    = ja
+    kreis    = kr_kolmar_elsass
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3024297; deutscher Name aus den GeoNames-Alternativnamen (heute Colmar); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort rappoltsweiler {
+    name     = "Rappoltsweiler"
+    gelaende = mittelgebirge
+    lage     = { 7.3194 48.1951 }
+    flaeche  = 151
+    stadt    = ja
+    kreis    = kr_kolmar_elsass
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2983705; deutscher Name aus den GeoNames-Alternativnamen (heute Ribeauvillé); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort markirch {
+    name     = "Markirch"
+    gelaende = mittelgebirge
+    lage     = { 7.1838 48.2465 }
+    flaeche  = 211
+    stadt    = nein
+    kreis    = kr_kolmar_elsass
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2980438; deutscher Name aus den GeoNames-Alternativnamen (heute Sainte-Marie-aux-Mines); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort markolsheim {
+    name     = "Markolsheim"
+    gelaende = flachland
+    lage     = { 7.544 48.1647 }
+    flaeche  = 191
+    stadt    = nein
+    kreis    = kr_kolmar_elsass
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2995936; deutscher Name aus den GeoNames-Alternativnamen (heute Marckolsheim); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort munster_elsass {
+    name     = "Munster (Elsass)"
+    gelaende = mittelgebirge
+    lage     = { 7.1393 48.0405 }
+    flaeche  = 238
+    stadt    = nein
+    kreis    = kr_kolmar_elsass
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2991189; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort orbey {
+    name     = "Orbey"
+    gelaende = mittelgebirge
+    lage     = { 7.1646 48.1265 }
+    flaeche  = 166
+    stadt    = nein
+    kreis    = kr_kolmar_elsass
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2989441; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort weiler {
+    name     = "Weiler"
+    gelaende = mittelgebirge
+    lage     = { 7.3026 48.3427 }
+    flaeche  = 203
+    stadt    = nein
+    kreis    = kr_kolmar_elsass
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2968894; deutscher Name aus den GeoNames-Alternativnamen (heute Villé); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort muelhausen {
+    name     = "Mülhausen"
+    gelaende = huegelland
+    lage     = { 7.3287 47.752 }
+    flaeche  = 168
+    stadt    = ja
+    kreis    = kr_muelhausen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2991214; deutscher Name aus den GeoNames-Alternativnamen (heute Mulhouse); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gebweiler {
+    name     = "Gebweiler"
+    gelaende = mittelgebirge
+    lage     = { 7.2 47.9167 }
+    flaeche  = 146
+    stadt    = ja
+    kreis    = kr_muelhausen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3014433; deutscher Name aus den GeoNames-Alternativnamen (heute Guebwiller); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ensisheim {
+    name     = "Ensisheim"
+    gelaende = flachland
+    lage     = { 7.3505 47.8658 }
+    flaeche  = 130
+    stadt    = nein
+    kreis    = kr_muelhausen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3020152; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wittelsheim {
+    name     = "Wittelsheim"
+    gelaende = huegelland
+    lage     = { 7.2415 47.8095 }
+    flaeche  = 99
+    stadt    = nein
+    kreis    = kr_muelhausen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2967319; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort rufach {
+    name     = "Rufach"
+    gelaende = huegelland
+    lage     = { 7.3002 47.9579 }
+    flaeche  = 169
+    stadt    = nein
+    kreis    = kr_muelhausen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2982636; deutscher Name aus den GeoNames-Alternativnamen (heute Rouffach); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort fessenheim {
+    name     = "Fessenheim"
+    gelaende = flachland
+    lage     = { 7.535 47.9156 }
+    flaeche  = 146
+    stadt    = nein
+    kreis    = kr_muelhausen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3018601; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bantzenheim {
+    name     = "Bantzenheim"
+    gelaende = flussaue
+    lage     = { 7.5145 47.8245 }
+    flaeche  = 129
+    stadt    = nein
+    kreis    = kr_muelhausen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3035099; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort beffert {
+    name     = "Beffert"
+    gelaende = huegelland
+    lage     = { 6.8539 47.6422 }
+    flaeche  = 208
+    stadt    = ja
+    kreis    = kr_beffert
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3033791; deutscher Name aus den GeoNames-Alternativnamen (heute Belfort); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort thann {
+    name     = "Thann"
+    gelaende = mittelgebirge
+    lage     = { 7.103 47.8079 }
+    flaeche  = 105
+    stadt    = ja
+    kreis    = kr_beffert
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2973013; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort masmuenster {
+    name     = "Masmünster"
+    gelaende = mittelgebirge
+    lage     = { 6.9968 47.7767 }
+    flaeche  = 186
+    stadt    = nein
+    kreis    = kr_beffert
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2995281; deutscher Name aus den GeoNames-Alternativnamen (heute Masevaux); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort giromagny {
+    name     = "Giromagny"
+    gelaende = mittelgebirge
+    lage     = { 6.8273 47.7427 }
+    flaeche  = 178
+    stadt    = nein
+    kreis    = kr_beffert
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3015958; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort sankt_amarin {
+    name     = "Sankt Amarin"
+    gelaende = mittelgebirge
+    lage     = { 7.0294 47.8749 }
+    flaeche  = 191
+    stadt    = nein
+    kreis    = kr_beffert
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2981815; deutscher Name aus den GeoNames-Alternativnamen (heute Saint-Amarin); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort niederburnhaupt {
+    name     = "Niederburnhaupt"
+    gelaende = huegelland
+    lage     = { 7.1615 47.7176 }
+    flaeche  = 163
+    stadt    = nein
+    kreis    = kr_beffert
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3029499; deutscher Name aus den GeoNames-Alternativnamen (heute Burnhaupt-le-Bas); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort montreux_chateau {
+    name     = "Montreux-Château"
+    gelaende = flachland
+    lage     = { 6.9992 47.61 }
+    flaeche  = 178
+    stadt    = nein
+    kreis    = kr_beffert
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2992057; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort st_ludwig {
+    name     = "St. Ludwig"
+    gelaende = flussaue
+    lage     = { 7.5592 47.5921 }
+    flaeche  = 58
+    stadt    = ja
+    kreis    = kr_st_ludwig
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2978742; deutscher Name aus den GeoNames-Alternativnamen (heute Saint-Louis); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort altkirch {
+    name     = "Altkirch"
+    gelaende = huegelland
+    lage     = { 7.2395 47.6242 }
+    flaeche  = 165
+    stadt    = ja
+    kreis    = kr_st_ludwig
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3038012; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort dattenried {
+    name     = "Dattenried"
+    gelaende = huegelland
+    lage     = { 6.9997 47.508 }
+    flaeche  = 113
+    stadt    = nein
+    kreis    = kr_st_ludwig
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3021629; deutscher Name aus den GeoNames-Alternativnamen (heute Delle); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort sierenz {
+    name     = "Sierenz"
+    gelaende = huegelland
+    lage     = { 7.4539 47.6583 }
+    flaeche  = 169
+    stadt    = nein
+    kreis    = kr_st_ludwig
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2974608; deutscher Name aus den GeoNames-Alternativnamen (heute Sierentz); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort waldighofen {
+    name     = "Waldighofen"
+    gelaende = huegelland
+    lage     = { 7.3151 47.5504 }
+    flaeche  = 212
+    stadt    = nein
+    kreis    = kr_st_ludwig
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2967500; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort pfetterhausen {
+    name     = "Pfetterhausen"
+    gelaende = huegelland
+    lage     = { 7.166 47.5013 }
+    flaeche  = 158
+    stadt    = nein
+    kreis    = kr_st_ludwig
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2987428; deutscher Name aus den GeoNames-Alternativnamen (heute Pfetterhouse); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hagenthal_le_bas {
+    name     = "Hagenthal-le-Bas"
+    gelaende = huegelland
+    lage     = { 7.4778 47.525 }
+    flaeche  = 75
+    stadt    = nein
+    kreis    = kr_st_ludwig
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3014088; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}

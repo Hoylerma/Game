@@ -1,0 +1,300 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
+# Orte: Burgenland – Orte ohne Daten (Meilenstein M3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
+# Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
+# ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
+# und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
+#
+# Umfang: Burgenland (Deutschwestungarn, bis 1921 Teil des Königreichs Ungarn).
+
+ort neusiedl_am_see {
+    name     = "Neusiedl am See"
+    gelaende = seenplatte
+    lage     = { 16.8417 47.949 }
+    flaeche  = 111
+    stadt    = ja
+    kreis    = kr_neusiedl_am_see
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2770684; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kittsee {
+    name     = "Kittsee"
+    gelaende = flachland
+    lage     = { 17.0639 48.0925 }
+    flaeche  = 64
+    stadt    = nein
+    kreis    = kr_neusiedl_am_see
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2774348; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort illmitz {
+    name     = "Illmitz"
+    gelaende = seenplatte
+    lage     = { 16.8002 47.7615 }
+    flaeche  = 112
+    stadt    = nein
+    kreis    = kr_neusiedl_am_see
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2775327; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort frauenkirchen {
+    name     = "Frauenkirchen"
+    gelaende = flachland
+    lage     = { 16.9258 47.8368 }
+    flaeche  = 173
+    stadt    = nein
+    kreis    = kr_neusiedl_am_see
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2779324; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort andau {
+    name     = "Andau"
+    gelaende = flachland
+    lage     = { 17.0329 47.7744 }
+    flaeche  = 92
+    stadt    = nein
+    kreis    = kr_neusiedl_am_see
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2782552; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort zurndorf {
+    name     = "Zurndorf"
+    gelaende = flachland
+    lage     = { 17.0032 47.9831 }
+    flaeche  = 215
+    stadt    = nein
+    kreis    = kr_neusiedl_am_see
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2760449; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort purbach_am_neusiedler_see {
+    name     = "Purbach am Neusiedler See"
+    gelaende = seenplatte
+    lage     = { 16.6956 47.9129 }
+    flaeche  = 121
+    stadt    = nein
+    kreis    = kr_neusiedl_am_see
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2768242; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort pamhagen {
+    name     = "Pamhagen"
+    gelaende = flachland
+    lage     = { 16.9078 47.7009 }
+    flaeche  = 77
+    stadt    = nein
+    kreis    = kr_neusiedl_am_see
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2769258; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort eisenstadt {
+    name     = "Eisenstadt"
+    gelaende = huegelland
+    lage     = { 16.5233 47.8456 }
+    flaeche  = 137
+    stadt    = ja
+    kreis    = kr_eisenstadt
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2780190; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort mattersburg {
+    name     = "Mattersburg"
+    gelaende = huegelland
+    lage     = { 16.4 47.7333 }
+    flaeche  = 130
+    stadt    = ja
+    kreis    = kr_eisenstadt
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2771817; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort oberpullendorf {
+    name     = "Oberpullendorf"
+    gelaende = huegelland
+    lage     = { 16.5045 47.5035 }
+    flaeche  = 163
+    stadt    = ja
+    kreis    = kr_eisenstadt
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2769812; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort rust {
+    name     = "Rust"
+    gelaende = seenplatte
+    lage     = { 16.6716 47.8012 }
+    flaeche  = 97
+    stadt    = ja
+    kreis    = kr_eisenstadt
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2766939; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort neufeld_an_der_leitha {
+    name     = "Neufeld an der Leitha"
+    gelaende = huegelland
+    lage     = { 16.3786 47.8656 }
+    flaeche  = 118
+    stadt    = nein
+    kreis    = kr_eisenstadt
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2770788; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort deutschkreutz {
+    name     = "Deutschkreutz"
+    gelaende = huegelland
+    lage     = { 16.6333 47.6 }
+    flaeche  = 74
+    stadt    = nein
+    kreis    = kr_eisenstadt
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2781024; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort sieggraben {
+    name     = "Sieggraben"
+    gelaende = mittelgebirge
+    lage     = { 16.3799 47.6513 }
+    flaeche  = 89
+    stadt    = nein
+    kreis    = kr_eisenstadt
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2765092; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort klingenbach {
+    name     = "Klingenbach"
+    gelaende = huegelland
+    lage     = { 16.5407 47.752 }
+    flaeche  = 83
+    stadt    = nein
+    kreis    = kr_eisenstadt
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2773938; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ritzing {
+    name     = "Ritzing"
+    gelaende = huegelland
+    lage     = { 16.4955 47.6132 }
+    flaeche  = 113
+    stadt    = nein
+    kreis    = kr_eisenstadt
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2767346; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lutzmannsburg {
+    name     = "Lutzmannsburg"
+    gelaende = huegelland
+    lage     = { 16.6366 47.4637 }
+    flaeche  = 62
+    stadt    = nein
+    kreis    = kr_eisenstadt
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2772168; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort oberwart {
+    name     = "Oberwart"
+    gelaende = huegelland
+    lage     = { 16.206 47.2897 }
+    flaeche  = 120
+    stadt    = ja
+    kreis    = kr_oberwart
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2769623; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort pinkafeld {
+    name     = "Pinkafeld"
+    gelaende = huegelland
+    lage     = { 16.1167 47.3667 }
+    flaeche  = 106
+    stadt    = nein
+    kreis    = kr_oberwart
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2768811; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort rechnitz {
+    name     = "Rechnitz"
+    gelaende = mittelgebirge
+    lage     = { 16.441 47.3047 }
+    flaeche  = 77
+    stadt    = nein
+    kreis    = kr_oberwart
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2767815; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort markt_allhau {
+    name     = "Markt Allhau"
+    gelaende = huegelland
+    lage     = { 16.0833 47.2833 }
+    flaeche  = 92
+    stadt    = nein
+    kreis    = kr_oberwart
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2771876; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lockenhaus {
+    name     = "Lockenhaus"
+    gelaende = mittelgebirge
+    lage     = { 16.4162 47.4075 }
+    flaeche  = 134
+    stadt    = nein
+    kreis    = kr_oberwart
+    quelle   = "GeoNames (CC BY 4.0), geonameid 6692403; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bernstein {
+    name     = "Bernstein"
+    gelaende = mittelgebirge
+    lage     = { 16.25 47.4 }
+    flaeche  = 160
+    stadt    = nein
+    kreis    = kr_oberwart
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2781820; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort guessing {
+    name     = "Güssing"
+    gelaende = huegelland
+    lage     = { 16.3243 47.0594 }
+    flaeche  = 222
+    stadt    = ja
+    kreis    = kr_guessing
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2777216; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort jennersdorf {
+    name     = "Jennersdorf"
+    gelaende = huegelland
+    lage     = { 16.1416 46.9385 }
+    flaeche  = 143
+    stadt    = ja
+    kreis    = kr_guessing
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2775089; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort stegersbach {
+    name     = "Stegersbach"
+    gelaende = huegelland
+    lage     = { 16.1667 47.1667 }
+    flaeche  = 190
+    stadt    = nein
+    kreis    = kr_guessing
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2764587; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort grosspetersdorf {
+    name     = "Grosspetersdorf"
+    gelaende = huegelland
+    lage     = { 16.3178 47.239 }
+    flaeche  = 178
+    stadt    = nein
+    kreis    = kr_guessing
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2777627; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort eberau {
+    name     = "Eberau"
+    gelaende = huegelland
+    lage     = { 16.4604 47.1076 }
+    flaeche  = 101
+    stadt    = nein
+    kreis    = kr_guessing
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2780539; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}

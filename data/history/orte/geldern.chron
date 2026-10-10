@@ -1,0 +1,130 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
+# Orte: Geldern – Orte ohne Daten (Meilenstein M3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
+# Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
+# ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
+# und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
+#
+# Umfang: Geldern mit Arnheim, Nimwegen und Zutphen sowie das Land van Cuijk (niederländischer Saum).
+
+ort doetinchem {
+    name     = "Doetinchem"
+    gelaende = flachland
+    lage     = { 6.2889 51.965 }
+    flaeche  = 224
+    stadt    = ja
+    kreis    = kr_doetinchem
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2756767; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort winterswijk {
+    name     = "Winterswijk"
+    gelaende = flachland
+    lage     = { 6.7194 51.9725 }
+    flaeche  = 182
+    stadt    = ja
+    kreis    = kr_doetinchem
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2744332; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort aalten {
+    name     = "Aalten"
+    gelaende = flachland
+    lage     = { 6.5806 51.925 }
+    flaeche  = 163
+    stadt    = nein
+    kreis    = kr_doetinchem
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2760123; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wisch {
+    name     = "Wisch"
+    gelaende = flachland
+    lage     = { 6.417 51.9265 }
+    flaeche  = 149
+    stadt    = nein
+    kreis    = kr_doetinchem
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2744324; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort eibergen {
+    name     = "Eibergen"
+    gelaende = flachland
+    lage     = { 6.6486 52.1 }
+    flaeche  = 213
+    stadt    = nein
+    kreis    = kr_doetinchem
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2756295; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lochem {
+    name     = "Lochem"
+    gelaende = flachland
+    lage     = { 6.4111 52.1592 }
+    flaeche  = 318
+    stadt    = nein
+    kreis    = kr_doetinchem
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2751537; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort nimwegen {
+    name     = "Nimwegen"
+    gelaende = flussaue
+    lage     = { 5.8528 51.8425 }
+    flaeche  = 185
+    stadt    = ja
+    kreis    = kr_nimwegen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2750053; deutscher Name aus den GeoNames-Alternativnamen (heute Nijmegen); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort arnheim {
+    name     = "Arnheim"
+    gelaende = flussaue
+    lage     = { 5.9111 51.98 }
+    flaeche  = 173
+    stadt    = ja
+    kreis    = kr_nimwegen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2759661; deutscher Name aus den GeoNames-Alternativnamen (heute Arnhem); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort zutphen {
+    name     = "Zutphen"
+    gelaende = flussaue
+    lage     = { 6.2014 52.1383 }
+    flaeche  = 168
+    stadt    = ja
+    kreis    = kr_nimwegen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2743608; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort zevenaar {
+    name     = "Zevenaar"
+    gelaende = flachland
+    lage     = { 6.0708 51.93 }
+    flaeche  = 220
+    stadt    = ja
+    kreis    = kr_nimwegen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2743949; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort groesbeek {
+    name     = "Groesbeek"
+    gelaende = flachland
+    lage     = { 5.9361 51.7767 }
+    flaeche  = 126
+    stadt    = nein
+    kreis    = kr_nimwegen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2755272; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort dieren {
+    name     = "Dieren"
+    gelaende = flussaue
+    lage     = { 6.1 52.0525 }
+    flaeche  = 147
+    stadt    = nein
+    kreis    = kr_nimwegen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2756865; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}

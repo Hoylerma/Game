@@ -1,0 +1,100 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
+# Orte: Burgundische Pforte – Orte ohne Daten (Meilenstein M3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
+# Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
+# ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
+# und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
+#
+# Umfang: Mömpelgard mit Héricourt (bis 1793 württembergisch) und der Nordrand der Freigrafschaft Burgund um Lure und Luxeuil.
+
+ort moempelgard {
+    name     = "Mömpelgard"
+    gelaende = huegelland
+    lage     = { 6.7982 47.5096 }
+    flaeche  = 149
+    stadt    = ja
+    kreis    = kr_moempelgard
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2992938; deutscher Name aus den GeoNames-Alternativnamen (heute Montbéliard); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lure {
+    name     = "Lure"
+    gelaende = huegelland
+    lage     = { 6.4966 47.6829 }
+    flaeche  = 251
+    stadt    = ja
+    kreis    = kr_moempelgard
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2997076; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort luxeuil_les_bains {
+    name     = "Luxeuil-les-Bains"
+    gelaende = huegelland
+    lage     = { 6.365 47.8171 }
+    flaeche  = 234
+    stadt    = nein
+    kreis    = kr_moempelgard
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2996995; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort pont_de_roide {
+    name     = "Pont-de-Roide"
+    gelaende = mittelgebirge
+    lage     = { 6.7684 47.3874 }
+    flaeche  = 80
+    stadt    = nein
+    kreis    = kr_moempelgard
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2986237; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort saint_loup_sur_semouse {
+    name     = "Saint-Loup-sur-Semouse"
+    gelaende = huegelland
+    lage     = { 6.2753 47.8835 }
+    flaeche  = 249
+    stadt    = nein
+    kreis    = kr_moempelgard
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2978688; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ronchamp {
+    name     = "Ronchamp"
+    gelaende = mittelgebirge
+    lage     = { 6.6359 47.7006 }
+    flaeche  = 220
+    stadt    = nein
+    kreis    = kr_moempelgard
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2982951; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort herimoncourt {
+    name     = "Hérimoncourt"
+    gelaende = mittelgebirge
+    lage     = { 6.8824 47.4428 }
+    flaeche  = 115
+    stadt    = nein
+    kreis    = kr_moempelgard
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3013448; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort colombier_fontaine {
+    name     = "Colombier-Fontaine"
+    gelaende = huegelland
+    lage     = { 6.6901 47.4522 }
+    flaeche  = 74
+    stadt    = nein
+    kreis    = kr_moempelgard
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3024243; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort arcey {
+    name     = "Arcey"
+    gelaende = huegelland
+    lage     = { 6.6622 47.5226 }
+    flaeche  = 214
+    stadt    = nein
+    kreis    = kr_moempelgard
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3037221; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}

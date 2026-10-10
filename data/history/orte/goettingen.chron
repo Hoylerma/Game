@@ -1,0 +1,190 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
+# Orte: Göttingen – Orte ohne Daten (Meilenstein M3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
+# Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
+# ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
+# und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
+#
+# Umfang: Göttingen und Grubenhagen mit dem Untereichsfeld (heute Landkreise Göttingen und Northeim).
+
+ort northeim {
+    name     = "Northeim"
+    gelaende = huegelland
+    lage     = { 10 51.7066 }
+    flaeche  = 201
+    stadt    = ja
+    kreis    = kr_northeim
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2861814; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort einbeck {
+    name     = "Einbeck"
+    gelaende = huegelland
+    lage     = { 9.8696 51.8202 }
+    flaeche  = 171
+    stadt    = ja
+    kreis    = kr_northeim
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2931804; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bad_gandersheim {
+    name     = "Bad Gandersheim"
+    gelaende = huegelland
+    lage     = { 10.0254 51.8717 }
+    flaeche  = 108
+    stadt    = nein
+    kreis    = kr_northeim
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2953456; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort dassel {
+    name     = "Dassel"
+    gelaende = huegelland
+    lage     = { 9.689 51.8018 }
+    flaeche  = 197
+    stadt    = nein
+    kreis    = kr_northeim
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2938813; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hardegsen {
+    name     = "Hardegsen"
+    gelaende = huegelland
+    lage     = { 9.8305 51.6523 }
+    flaeche  = 162
+    stadt    = nein
+    kreis    = kr_northeim
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2910663; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kalefeld {
+    name     = "Kalefeld"
+    gelaende = huegelland
+    lage     = { 10.0333 51.8 }
+    flaeche  = 97
+    stadt    = nein
+    kreis    = kr_northeim
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2893868; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gittelde {
+    name     = "Gittelde"
+    gelaende = mittelgebirge
+    lage     = { 10.1878 51.7984 }
+    flaeche  = 163
+    stadt    = nein
+    kreis    = kr_northeim
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2920268; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort goettingen {
+    name     = "Göttingen"
+    gelaende = huegelland
+    lage     = { 9.9323 51.5344 }
+    flaeche  = 169
+    stadt    = ja
+    kreis    = kr_goettingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2918632; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hannoversch_muenden {
+    name     = "Hannoversch Münden"
+    gelaende = huegelland
+    lage     = { 9.6505 51.4151 }
+    flaeche  = 206
+    stadt    = ja
+    kreis    = kr_goettingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2867613; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort uslar {
+    name     = "Uslar"
+    gelaende = huegelland
+    lage     = { 9.635 51.6569 }
+    flaeche  = 264
+    stadt    = nein
+    kreis    = kr_goettingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2818094; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort adelebsen {
+    name     = "Adelebsen"
+    gelaende = huegelland
+    lage     = { 9.7546 51.5827 }
+    flaeche  = 133
+    stadt    = nein
+    kreis    = kr_goettingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2959548; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort friedland_goettingen {
+    name     = "Friedland (Göttingen)"
+    gelaende = huegelland
+    lage     = { 9.9333 51.4167 }
+    flaeche  = 187
+    stadt    = nein
+    kreis    = kr_goettingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2924681; Name nach GeoNames ohne modernen Zusatz (Gemeinde Friedland); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort dransfeld {
+    name     = "Dransfeld"
+    gelaende = huegelland
+    lage     = { 9.7618 51.4991 }
+    flaeche  = 162
+    stadt    = nein
+    kreis    = kr_goettingen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2935326; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort duderstadt {
+    name     = "Duderstadt"
+    gelaende = huegelland
+    lage     = { 10.2595 51.5131 }
+    flaeche  = 168
+    stadt    = ja
+    kreis    = kr_duderstadt
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2934728; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort herzberg_am_harz {
+    name     = "Herzberg am Harz"
+    gelaende = mittelgebirge
+    lage     = { 10.3394 51.6555 }
+    flaeche  = 170
+    stadt    = nein
+    kreis    = kr_duderstadt
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2905496; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bad_lauterberg_im_harz {
+    name     = "Bad Lauterberg im Harz"
+    gelaende = mittelgebirge
+    lage     = { 10.4703 51.6327 }
+    flaeche  = 168
+    stadt    = nein
+    kreis    = kr_duderstadt
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2953410; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gieboldehausen {
+    name     = "Gieboldehausen"
+    gelaende = flachland
+    lage     = { 10.2162 51.6096 }
+    flaeche  = 189
+    stadt    = nein
+    kreis    = kr_duderstadt
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2920645; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort landolfshausen {
+    name     = "Landolfshausen"
+    gelaende = huegelland
+    lage     = { 10.1 51.5333 }
+    flaeche  = 149
+    stadt    = nein
+    kreis    = kr_duderstadt
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2881526; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}

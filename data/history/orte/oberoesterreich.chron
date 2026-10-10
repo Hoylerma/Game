@@ -1,0 +1,620 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
+# Orte: Österreich ob der Enns – Orte ohne Daten (Meilenstein M3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
+# Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
+# ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
+# und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
+#
+# Umfang: Erzherzogtum Österreich ob der Enns (heute Oberösterreich; das Innviertel gehörte bis 1779 zu Bayern).
+
+ort rohrbach_in_oberoesterreich {
+    name     = "Rohrbach in Oberösterreich"
+    gelaende = mittelgebirge
+    lage     = { 13.9883 48.5727 }
+    flaeche  = 142
+    stadt    = nein
+    kreis    = kr_rohrbach_in_oberoesterreich
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2767280; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort altenfelden {
+    name     = "Altenfelden"
+    gelaende = mittelgebirge
+    lage     = { 13.9698 48.4856 }
+    flaeche  = 255
+    stadt    = nein
+    kreis    = kr_rohrbach_in_oberoesterreich
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2782691; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ulrichsberg {
+    name     = "Ulrichsberg"
+    gelaende = mittelgebirge
+    lage     = { 13.9105 48.675 }
+    flaeche  = 197
+    stadt    = nein
+    kreis    = kr_rohrbach_in_oberoesterreich
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2763176; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort afiesl {
+    name     = "Afiesl"
+    gelaende = mittelgebirge
+    lage     = { 14.1278 48.5823 }
+    flaeche  = 144
+    stadt    = nein
+    kreis    = kr_rohrbach_in_oberoesterreich
+    quelle   = "GeoNames (CC BY 4.0), geonameid 6697276; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort freistadt_oberoesterreich {
+    name     = "Freistadt (Oberösterreich)"
+    gelaende = mittelgebirge
+    lage     = { 14.5045 48.511 }
+    flaeche  = 252
+    stadt    = nein
+    kreis    = kr_freistadt_oberoesterreich
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2779275; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort perg {
+    name     = "Perg"
+    gelaende = huegelland
+    lage     = { 14.6333 48.25 }
+    flaeche  = 136
+    stadt    = ja
+    kreis    = kr_freistadt_oberoesterreich
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2769105; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hellmonsoedt {
+    name     = "Hellmonsödt"
+    gelaende = mittelgebirge
+    lage     = { 14.3 48.4333 }
+    flaeche  = 141
+    stadt    = nein
+    kreis    = kr_freistadt_oberoesterreich
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2776531; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort grein {
+    name     = "Grein"
+    gelaende = mittelgebirge
+    lage     = { 14.8588 48.2286 }
+    flaeche  = 243
+    stadt    = nein
+    kreis    = kr_freistadt_oberoesterreich
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2778039; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort tragwein {
+    name     = "Tragwein"
+    gelaende = mittelgebirge
+    lage     = { 14.6224 48.3331 }
+    flaeche  = 155
+    stadt    = nein
+    kreis    = kr_freistadt_oberoesterreich
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2763477; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort neumarkt_im_muehlkreis {
+    name     = "Neumarkt im Mühlkreis"
+    gelaende = mittelgebirge
+    lage     = { 14.4844 48.4282 }
+    flaeche  = 102
+    stadt    = nein
+    kreis    = kr_freistadt_oberoesterreich
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2770722; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort koenigswiesen {
+    name     = "Königswiesen"
+    gelaende = mittelgebirge
+    lage     = { 14.8382 48.4045 }
+    flaeche  = 210
+    stadt    = nein
+    kreis    = kr_freistadt_oberoesterreich
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2773733; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gutau {
+    name     = "Gutau"
+    gelaende = mittelgebirge
+    lage     = { 14.6128 48.4172 }
+    flaeche  = 120
+    stadt    = nein
+    kreis    = kr_freistadt_oberoesterreich
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2777210; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort burgfried {
+    name     = "Burgfried"
+    gelaende = mittelgebirge
+    lage     = { 14.2957 48.5199 }
+    flaeche  = 170
+    stadt    = nein
+    kreis    = kr_freistadt_oberoesterreich
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2781183; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort weitersfelden {
+    name     = "Weitersfelden"
+    gelaende = mittelgebirge
+    lage     = { 14.7255 48.4773 }
+    flaeche  = 262
+    stadt    = nein
+    kreis    = kr_freistadt_oberoesterreich
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2761541; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort schaerding {
+    name     = "Schärding"
+    gelaende = huegelland
+    lage     = { 13.4372 48.4529 }
+    flaeche  = 134
+    stadt    = ja
+    kreis    = kr_schaerding
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2766155; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort andorf {
+    name     = "Andorf"
+    gelaende = huegelland
+    lage     = { 13.5741 48.3713 }
+    flaeche  = 232
+    stadt    = nein
+    kreis    = kr_schaerding
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2782542; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort muenzkirchen {
+    name     = "Münzkirchen"
+    gelaende = mittelgebirge
+    lage     = { 13.5667 48.4833 }
+    flaeche  = 142
+    stadt    = nein
+    kreis    = kr_schaerding
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2771020; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort sankt_aegidi {
+    name     = "Sankt Aegidi"
+    gelaende = mittelgebirge
+    lage     = { 13.7374 48.4793 }
+    flaeche  = 181
+    stadt    = nein
+    kreis    = kr_schaerding
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2766779; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort linz {
+    name     = "Linz"
+    gelaende = huegelland
+    lage     = { 14.2861 48.3064 }
+    flaeche  = 124
+    stadt    = ja
+    kreis    = kr_linz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2772400; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wels {
+    name     = "Wels"
+    gelaende = huegelland
+    lage     = { 14.0333 48.1667 }
+    flaeche  = 220
+    stadt    = ja
+    kreis    = kr_linz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2761524; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gallneukirchen {
+    name     = "Gallneukirchen"
+    gelaende = huegelland
+    lage     = { 14.416 48.3536 }
+    flaeche  = 132
+    stadt    = nein
+    kreis    = kr_linz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2778966; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort neuhofen_an_der_krems {
+    name     = "Neuhofen an der Krems"
+    gelaende = huegelland
+    lage     = { 14.2276 48.1387 }
+    flaeche  = 178
+    stadt    = nein
+    kreis    = kr_linz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2770750; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort traun {
+    name     = "Traun"
+    gelaende = huegelland
+    lage     = { 14.2383 48.2209 }
+    flaeche  = 125
+    stadt    = nein
+    kreis    = kr_linz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2763423; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort eferding {
+    name     = "Eferding"
+    gelaende = huegelland
+    lage     = { 14.0223 48.3087 }
+    flaeche  = 233
+    stadt    = nein
+    kreis    = kr_linz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2780394; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort walding {
+    name     = "Walding"
+    gelaende = mittelgebirge
+    lage     = { 14.1576 48.3521 }
+    flaeche  = 206
+    stadt    = nein
+    kreis    = kr_linz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2761999; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort sankt_georgen_an_der_gusen {
+    name     = "Sankt Georgen an der Gusen"
+    gelaende = huegelland
+    lage     = { 14.4495 48.2718 }
+    flaeche  = 119
+    stadt    = nein
+    kreis    = kr_linz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2766701; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort sankt_florian {
+    name     = "Sankt Florian"
+    gelaende = huegelland
+    lage     = { 14.3784 48.2057 }
+    flaeche  = 133
+    stadt    = nein
+    kreis    = kr_linz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2771867; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ried_im_innkreis {
+    name     = "Ried im Innkreis"
+    gelaende = huegelland
+    lage     = { 13.4886 48.2112 }
+    flaeche  = 226
+    stadt    = nein
+    kreis    = kr_ried_im_innkreis
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2767471; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort grieskirchen {
+    name     = "Grieskirchen"
+    gelaende = huegelland
+    lage     = { 13.8333 48.2333 }
+    flaeche  = 238
+    stadt    = ja
+    kreis    = kr_ried_im_innkreis
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2777972; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort peuerbach {
+    name     = "Peuerbach"
+    gelaende = huegelland
+    lage     = { 13.7721 48.3453 }
+    flaeche  = 253
+    stadt    = nein
+    kreis    = kr_ried_im_innkreis
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2768996; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort frankenburg {
+    name     = "Frankenburg"
+    gelaende = mittelgebirge
+    lage     = { 13.4907 48.0684 }
+    flaeche  = 275
+    stadt    = nein
+    kreis    = kr_ried_im_innkreis
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2779380; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort haag_am_hausruck {
+    name     = "Haag am Hausruck"
+    gelaende = mittelgebirge
+    lage     = { 13.6437 48.1842 }
+    flaeche  = 183
+    stadt    = nein
+    kreis    = kr_ried_im_innkreis
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2777154; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ottnang_am_hausruck {
+    name     = "Ottnang am Hausruck"
+    gelaende = mittelgebirge
+    lage     = { 13.6584 48.0957 }
+    flaeche  = 146
+    stadt    = nein
+    kreis    = kr_ried_im_innkreis
+    quelle   = "GeoNames (CC BY 4.0), geonameid 8015328; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort mattighofen {
+    name     = "Mattighofen"
+    gelaende = mittelgebirge
+    lage     = { 13.1508 48.1073 }
+    flaeche  = 200
+    stadt    = nein
+    kreis    = kr_mattighofen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2771814; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort altheim {
+    name     = "Altheim"
+    gelaende = huegelland
+    lage     = { 13.2341 48.2515 }
+    flaeche  = 193
+    stadt    = nein
+    kreis    = kr_mattighofen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2782649; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort mauerkirchen {
+    name     = "Mauerkirchen"
+    gelaende = huegelland
+    lage     = { 13.1334 48.1917 }
+    flaeche  = 122
+    stadt    = nein
+    kreis    = kr_mattighofen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2771779; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort obernberg_am_inn {
+    name     = "Obernberg am Inn"
+    gelaende = flussaue
+    lage     = { 13.3343 48.3213 }
+    flaeche  = 143
+    stadt    = nein
+    kreis    = kr_mattighofen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2769900; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort moosdorf {
+    name     = "Moosdorf"
+    gelaende = huegelland
+    lage     = { 12.989 48.0449 }
+    flaeche  = 124
+    stadt    = nein
+    kreis    = kr_mattighofen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2771243; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort handenberg {
+    name     = "Handenberg"
+    gelaende = huegelland
+    lage     = { 13.0075 48.1336 }
+    flaeche  = 150
+    stadt    = nein
+    kreis    = kr_mattighofen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2776906; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort steyr {
+    name     = "Steyr"
+    gelaende = huegelland
+    lage     = { 14.4213 48.0427 }
+    flaeche  = 180
+    stadt    = ja
+    kreis    = kr_steyr
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2764359; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kremsmuenster {
+    name     = "Kremsmünster"
+    gelaende = huegelland
+    lage     = { 14.1292 48.0529 }
+    flaeche  = 167
+    stadt    = nein
+    kreis    = kr_steyr
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2773538; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort micheldorf_in_oberoesterreich {
+    name     = "Micheldorf in Oberösterreich"
+    gelaende = mittelgebirge
+    lage     = { 14.1336 47.8776 }
+    flaeche  = 242
+    stadt    = nein
+    kreis    = kr_steyr
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2771619; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ternberg {
+    name     = "Ternberg"
+    gelaende = mittelgebirge
+    lage     = { 14.3587 47.9452 }
+    flaeche  = 121
+    stadt    = nein
+    kreis    = kr_steyr
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2763797; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort weyer {
+    name     = "Weyer"
+    gelaende = mittelgebirge
+    lage     = { 14.6641 47.8572 }
+    flaeche  = 143
+    stadt    = nein
+    kreis    = kr_steyr
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2761419; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort adlwang {
+    name     = "Adlwang"
+    gelaende = mittelgebirge
+    lage     = { 14.2174 47.9924 }
+    flaeche  = 164
+    stadt    = nein
+    kreis    = kr_steyr
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2782980; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort windischgarsten {
+    name     = "Windischgarsten"
+    gelaende = mittelgebirge
+    lage     = { 14.3276 47.7222 }
+    flaeche  = 430
+    stadt    = nein
+    kreis    = kr_steyr
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2761096; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort molln {
+    name     = "Molln"
+    gelaende = mittelgebirge
+    lage     = { 14.2582 47.8872 }
+    flaeche  = 152
+    stadt    = nein
+    kreis    = kr_steyr
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2771299; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort maria_neustift {
+    name     = "Maria Neustift"
+    gelaende = mittelgebirge
+    lage     = { 14.6 47.9333 }
+    flaeche  = 155
+    stadt    = nein
+    kreis    = kr_steyr
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2771918; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort reichraming {
+    name     = "Reichraming"
+    gelaende = mittelgebirge
+    lage     = { 14.45 47.8833 }
+    flaeche  = 205
+    stadt    = nein
+    kreis    = kr_steyr
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2767743; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gmunden {
+    name     = "Gmunden"
+    gelaende = mittelgebirge
+    lage     = { 13.797 47.9225 }
+    flaeche  = 153
+    stadt    = nein
+    kreis    = kr_gmunden
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2778436; Name nach GeoNames; Lage auf das nächste Landpixel gesetzt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort attnang_puchheim {
+    name     = "Attnang-Puchheim"
+    gelaende = huegelland
+    lage     = { 13.7167 48.0083 }
+    flaeche  = 192
+    stadt    = nein
+    kreis    = kr_gmunden
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3233832; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort vorchdorf {
+    name     = "Vorchdorf"
+    gelaende = huegelland
+    lage     = { 13.9212 48.0039 }
+    flaeche  = 184
+    stadt    = nein
+    kreis    = kr_gmunden
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2762290; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ebensee {
+    name     = "Ebensee"
+    gelaende = mittelgebirge
+    lage     = { 13.779 47.8072 }
+    flaeche  = 259
+    stadt    = nein
+    kreis    = kr_gmunden
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2780547; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lambach {
+    name     = "Lambach"
+    gelaende = huegelland
+    lage     = { 13.8745 48.0928 }
+    flaeche  = 182
+    stadt    = nein
+    kreis    = kr_gmunden
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2773110; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gruenau_im_almtal {
+    name     = "Grünau im Almtal"
+    gelaende = mittelgebirge
+    lage     = { 13.9557 47.8549 }
+    flaeche  = 312
+    stadt    = nein
+    kreis    = kr_gmunden
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2777459; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort mondsee {
+    name     = "Mondsee"
+    gelaende = mittelgebirge
+    lage     = { 13.3491 47.8565 }
+    flaeche  = 160
+    stadt    = nein
+    kreis    = kr_mondsee
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2771277; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort sankt_georgen_im_attergau {
+    name     = "Sankt Georgen im Attergau"
+    gelaende = mittelgebirge
+    lage     = { 13.4831 47.9359 }
+    flaeche  = 253
+    stadt    = nein
+    kreis    = kr_mondsee
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2766692; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bad_ischl {
+    name     = "Bad Ischl"
+    gelaende = mittelgebirge
+    lage     = { 13.6189 47.7111 }
+    flaeche  = 230
+    stadt    = nein
+    kreis    = kr_mondsee
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2782052; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort sankt_wolfgang_im_salzkammergut {
+    name     = "Sankt Wolfgang im Salzkammergut"
+    gelaende = mittelgebirge
+    lage     = { 13.4467 47.7393 }
+    flaeche  = 212
+    stadt    = nein
+    kreis    = kr_mondsee
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2766340; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gosau {
+    name     = "Gosau"
+    gelaende = hochgebirge
+    lage     = { 13.5345 47.5842 }
+    flaeche  = 269
+    stadt    = nein
+    kreis    = kr_mondsee
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2778302; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort steinbach_am_attersee {
+    name     = "Steinbach am Attersee"
+    gelaende = mittelgebirge
+    lage     = { 13.5461 47.8309 }
+    flaeche  = 132
+    stadt    = nein
+    kreis    = kr_mondsee
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2764527; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}

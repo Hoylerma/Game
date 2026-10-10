@@ -1,0 +1,140 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
+# Orte: Westgalizien – Orte ohne Daten (Meilenstein M3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
+# Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
+# ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
+# und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
+#
+# Umfang: Polnischer Saum in Westgalizien (Auschwitz, Zator, Saybusch, Chrzanów; 1772–1918 österreichisch).
+
+ort jaworzno {
+    name     = "Jaworzno"
+    gelaende = huegelland
+    lage     = { 19.275 50.2053 }
+    flaeche  = 140
+    stadt    = ja
+    kreis    = kr_jaworzno
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3097333; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort krenau {
+    name     = "Krenau"
+    gelaende = huegelland
+    lage     = { 19.402 50.1355 }
+    flaeche  = 214
+    stadt    = ja
+    kreis    = kr_jaworzno
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3101547; deutscher Name aus den GeoNames-Alternativnamen (heute Chrzanów); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort auschwitz {
+    name     = "Auschwitz"
+    gelaende = flachland
+    lage     = { 19.2104 50.0344 }
+    flaeche  = 192
+    stadt    = ja
+    kreis    = kr_jaworzno
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3089658; deutscher Name aus den GeoNames-Alternativnamen (heute Oświęcim); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort alwernia {
+    name     = "Alwernia"
+    gelaende = huegelland
+    lage     = { 19.5395 50.0606 }
+    flaeche  = 73
+    stadt    = nein
+    kreis    = kr_jaworzno
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3104127; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort zator {
+    name     = "Zator"
+    gelaende = huegelland
+    lage     = { 19.438 49.996 }
+    flaeche  = 200
+    stadt    = nein
+    kreis    = kr_jaworzno
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3080590; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort saybusch {
+    name     = "Saybusch"
+    gelaende = huegelland
+    lage     = { 19.1924 49.6853 }
+    flaeche  = 183
+    stadt    = ja
+    kreis    = kr_saybusch
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3079855; deutscher Name aus den GeoNames-Alternativnamen (heute Żywiec); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wadowice {
+    name     = "Wadowice"
+    gelaende = huegelland
+    lage     = { 19.4929 49.8834 }
+    flaeche  = 121
+    stadt    = ja
+    kreis    = kr_saybusch
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3082722; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort andrychow {
+    name     = "Andrychów"
+    gelaende = huegelland
+    lage     = { 19.3383 49.855 }
+    flaeche  = 147
+    stadt    = ja
+    kreis    = kr_saybusch
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3104115; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kenty {
+    name     = "Kenty"
+    gelaende = huegelland
+    lage     = { 19.2233 49.8821 }
+    flaeche  = 139
+    stadt    = nein
+    kreis    = kr_saybusch
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3096328; deutscher Name aus den GeoNames-Alternativnamen (heute Kęty); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort milowka {
+    name     = "Milówka"
+    gelaende = mittelgebirge
+    lage     = { 19.0907 49.5554 }
+    flaeche  = 294
+    stadt    = nein
+    kreis    = kr_saybusch
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3091743; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort jelesnia {
+    name     = "Jeleśnia"
+    gelaende = mittelgebirge
+    lage     = { 19.327 49.6425 }
+    flaeche  = 260
+    stadt    = nein
+    kreis    = kr_saybusch
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3097241; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lachowice {
+    name     = "Lachowice"
+    gelaende = mittelgebirge
+    lage     = { 19.4746 49.7156 }
+    flaeche  = 142
+    stadt    = nein
+    kreis    = kr_saybusch
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3094045; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort rycerka_gorna {
+    name     = "Rycerka Górna"
+    gelaende = mittelgebirge
+    lage     = { 19.016 49.4444 }
+    flaeche  = 153
+    stadt    = nein
+    kreis    = kr_saybusch
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3086565; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}

@@ -1,0 +1,78 @@
+landschaft;name;kurzname;abstand;kommentar
+anhalt;Anhalt;Anhalt;1.0;Fürstentümer Anhalt (heute Landkreis Anhalt-Bitterfeld und Dessau-Roßlau).
+boehmen;Böhmen;Böhmen;1.0;Königreich Böhmen (heute Tschechien westlich der Landesgrenze zu Mähren, Grenze nach heutigen Bezirken vereinfacht: Bezirke Havlíčkův Brod, Pelhřimov und Svitavy zu Böhmen).
+brandenburg;Brandenburg;Brandenburg;1.0;Mark Brandenburg mit Altmark (heute Landkreise Stendal und Altmarkkreis Salzwedel), Berlin und Neumark (heute Polen: Gorzów, Słubice, Strzelce-Drezdenko, Sulęcin, Krosno Odrzańskie, Świebodzin, Myślibórz, Choszczno, Drawsko, Świdwin).
+braunschweig;Braunschweig;Braunschweig;1.0;Herzogtum Braunschweig-Wolfenbüttel und Umgebung (heute Braunschweig, Wolfenbüttel, Salzgitter, Wolfsburg, Helmstedt, Peine, Goslar, Holzminden).
+lausitz;Lausitz;Lausitz;1.0;Ober- und Niederlausitz, Grenzen vereinfacht (heute Landkreise Bautzen und Görlitz, Spree-Neiße, Cottbus, Oberspreewald-Lausitz, Dahme-Spreewald, Elbe-Elster sowie in Polen Zgorzelec, Lubań und Żary).
+magdeburg;Magdeburg;Magdeburg;1.0;Erzstift Magdeburg, Fürstentum Halberstadt und Harzvorland (heute Sachsen-Anhalt ohne Altmark, Anhalt, Wittenberg, Burgenlandkreis und Mansfeld-Südharz).
+mecklenburg;Mecklenburg;Mecklenburg;1.0;Herzogtümer Mecklenburg (heute Mecklenburg-Vorpommern ohne die Landkreise Vorpommern-Rügen und Vorpommern-Greifswald).
+pommern;Pommern;Pommern;1.0;Vorpommern mit Rügen und Hinterpommern (heute Landkreise Vorpommern-Rügen und Vorpommern-Greifswald, in Polen die Woiwodschaft Westpommern ohne Neumark sowie die Kreise Słupsk, Lębork und Bytów).
+sachsen;Sachsen;Sachsen;1.0;Kursachsen (heute Sachsen ohne die Lausitz, dazu der Kurkreis um Wittenberg).
+thueringen;Thüringen;Thüringen;1.0;Thüringen mit dem kursächsischen Thüringischen Kreis (heute Thüringen, Burgenlandkreis und Mansfeld-Südharz).
+schleswig;Schleswig;Schleswig;1.0;Herzogtum Schleswig zwischen Eider und Königsau (heute Kreise Nordfriesland, Schleswig-Flensburg, Flensburg und der nördliche Teil von Rendsburg-Eckernförde, in Dänemark die Kommunen Tønder, Aabenraa, Sønderborg, Haderslev und Ærø).
+holstein;Holstein;Holstein;1.0;Holstein mit Dithmarschen, Lauenburg, Lübeck und Hamburg (heute Schleswig-Holstein südlich der Eider sowie Hamburg).
+ostfriesland;Ostfriesland;Ostfriesland;1.0;Ostfriesland (heute Landkreise Aurich, Leer, Wittmund und Emden).
+oldenburg;Oldenburg;Oldenburg;1.0;Oldenburger Land mit Jeverland und Oldenburger Münsterland (Cloppenburg und Vechta gehörten 1648 zum Hochstift Münster).
+osnabrueck;Osnabrück und Emsland;Osnabrück;1.0;Hochstift Osnabrück, Emsland (Niederstift Münster) und Grafschaft Bentheim.
+bremen_verden;Bremen-Verden;Bremen-Verden;1.0;"Elbe-Weser-Dreieck mit der Stadt Bremen (1648 größtenteils das schwedische Herzogtum Bremen-Verden; heute Landkreise Cuxhaven, Stade, Rotenburg, Osterholz und Verden, Bremen und Bremerhaven)."
+lueneburg;Lüneburg;Lüneburg;1.0;Fürstentum Lüneburg mit Lüneburger Heide und Wendland (heute Landkreise Lüneburg, Harburg, Uelzen, Lüchow-Dannenberg, Celle, Heidekreis und Gifhorn).
+calenberg;Calenberg;Calenberg;1.0;Fürstentum Calenberg mit Hannover, Hameln, Schaumburg sowie den Grafschaften Hoya und Diepholz.
+hildesheim;Hildesheim;Hildesheim;1.0;Hochstift Hildesheim (heute Landkreis Hildesheim).
+goettingen;Göttingen;Göttingen;1.0;Göttingen und Grubenhagen mit dem Untereichsfeld (heute Landkreise Göttingen und Northeim).
+niederrhein;Niederrhein;Niederrhein;1.0;Niederrhein und Bergisches Land (heute Regierungsbezirk Düsseldorf: Kleve, Geldern, Moers, Duisburg, Essen, Düsseldorf, Wuppertal).
+rheinland;Rheinland;Rheinland;1.0;Kölner Bucht, Jülicher Land, Aachen und südliches Bergisches Land (heute Regierungsbezirk Köln).
+muensterland;Münsterland;Münsterland;1.0;Münsterland mit dem Vest Recklinghausen (heute Regierungsbezirk Münster).
+ostwestfalen;Ostwestfalen;Ostwestfalen;1.0;Minden-Ravensberg, Paderborner Land und Lippe (heute Regierungsbezirk Detmold).
+mark_sauerland;Mark und Sauerland;Sauerland;1.0;Grafschaft Mark, kurkölnisches Sauerland, Siegerland, Wittgenstein und Dortmund (heute Regierungsbezirk Arnsberg).
+nassau;Nassau;Nassau;1.0;Nassauische Lande an Lahn, Taunus und Westerwald (heute Wiesbaden, Rheingau-Taunus-Kreis, Main-Taunus-Kreis, Lahn-Dill-Kreis, Limburg-Weilburg, Rhein-Lahn-Kreis und Westerwaldkreis).
+oberhessen;Oberhessen;Oberhessen;1.0;Oberhessen (heute Landkreise Gießen, Marburg-Biedenkopf und Vogelsberg).
+wetterau;Wetterau;Wetterau;1.0;Wetterau und Untermain mit Frankfurt und Hanau (heute Frankfurt, Wetteraukreis, Main-Kinzig-Kreis und Hochtaunuskreis).
+starkenburg;Starkenburg;Starkenburg;1.0;Starkenburg, Bergstraße und Odenwald (heute Darmstadt, Offenbach und die südhessischen Landkreise).
+kurhessen;Kurhessen;Kurhessen;1.0;Niederhessen mit Fulda, Hersfeld und Waldeck (heute Regierungsbezirk Kassel).
+mittelrhein;Mittelrhein;Mittelrhein;1.0;Mittelrhein mit Koblenz, Neuwied, Ahr, Hunsrück und unterer Mosel (1648 vor allem Kurtrier, Kurköln, Wied und Sayn).
+trier;Trier;Trier;1.0;Trierer Land mit Mosel, Eifel und Hunsrück (heute Trier, Bernkastel-Wittlich, Bitburg-Prüm, Vulkaneifel, Trier-Saarburg und Birkenfeld).
+rheinhessen;Rheinhessen;Rheinhessen;1.0;Rheinhessen und Nahe (heute Mainz, Worms, Alzey-Worms, Mainz-Bingen, Bad Kreuznach und Donnersbergkreis).
+kurpfalz;Kurpfalz;Kurpfalz;1.0;Pfalz links des Rheins mit Zweibrücken und Speyer sowie die rechtsrheinische Kurpfalz um Mannheim und Heidelberg.
+saar;Saar;Saar;1.0;"Land an der Saar (heute Saarland; 1648 u. a. Nassau-Saarbrücken, Pfalz-Zweibrücken, Kurtrier und Lothringen)."
+wuerttemberg;Württemberg;Württemberg;1.0;Herzogtum Württemberg mit Hohenlohe und Hohenzollern-Hechingen (heute Regierungsbezirk Stuttgart ohne Main-Tauber-Kreis, Tübingen, Reutlingen, Zollernalbkreis, Rottweil, Tuttlingen, Calw und Freudenstadt).
+baden;Baden;Baden;1.0;Markgrafschaften Baden, vorderösterreichischer Breisgau, Ortenau, Schwarzwald und Hochrhein (heute Regierungsbezirke Karlsruhe und Freiburg ohne Kurpfalz und Württemberg).
+schwaben;Schwaben;Schwaben;1.0;Bayerisch-Schwaben und Oberschwaben mit Ulm und dem nördlichen Bodensee.
+bayern;Bayern;Bayern;1.0;Altbayern (heute Regierungsbezirke Oberbayern und Niederbayern).
+oberpfalz;Oberpfalz;Oberpfalz;1.0;Oberpfalz (heute Regierungsbezirk Oberpfalz).
+franken;Franken;Franken;1.0;Ober- und Mittelfranken mit Bamberg, Bayreuth, Ansbach und Nürnberg.
+mainfranken;Mainfranken;Mainfranken;1.0;Mainfranken mit Würzburg, Aschaffenburg und Schweinfurt (heute Unterfranken und Main-Tauber-Kreis).
+niederoesterreich;Österreich unter der Enns;Niederösterreich;1.0;Erzherzogtum Österreich unter der Enns mit Wien (heute Niederösterreich und Wien).
+oberoesterreich;Österreich ob der Enns;Oberösterreich;1.0;"Erzherzogtum Österreich ob der Enns (heute Oberösterreich; das Innviertel gehörte bis 1779 zu Bayern)."
+salzburg;Salzburg;Salzburg;1.0;Erzstift Salzburg (heute Land Salzburg).
+steiermark;Steiermark;Steiermark;1.0;Herzogtum Steiermark mit der Untersteiermark (heute Steiermark und der Nordosten Sloweniens).
+kaernten;Kärnten;Kärnten;1.0;Herzogtum Kärnten mit Kanaltal und Mießtal (heute Kärnten, in Italien Tarvis, Malborghetto und Pontafel, in Slowenien das Mießtal, Dravograd und Jezersko).
+krain;Krain;Krain;1.0;Herzogtum Krain mit Laibach (heute Mittel-, Nordwest- und Südslowenien ohne das Küstenland).
+tirol;Tirol;Tirol;1.0;Grafschaft Tirol mit Südtirol (heute Tirol und die Provinz Bozen, dazu einige Orte des oberen Nonsbergs in der Provinz Trient am Rand des Umrisses).
+vorarlberg;Vorarlberg;Vorarlberg;1.0;Vorarlberg und Liechtenstein.
+burgenland;Burgenland;Burgenland;1.0;Burgenland (Deutschwestungarn, bis 1921 Teil des Königreichs Ungarn).
+maehren;Mähren;Mähren;1.0;"Markgrafschaft Mähren (heute Tschechien östlich der Landesgrenze zu Böhmen ohne den schlesischen Teil; Grenze nach heutigen Bezirken vereinfacht)."
+oesterreichisch_schlesien;Österreichisch-Schlesien;Österreichisch-Schlesien;1.0;Österreichisch-Schlesien mit Troppau, Teschen und Bielitz (heute Bezirke Jeseník, Bruntál, Opava mit dem bis 1920 preußischen Hultschiner Ländchen, Karviná und Frýdek-Místek sowie in Polen Cieszyn und Bielsko).
+glatz;Grafschaft Glatz;Glatz;1.0;"Grafschaft Glatz (bis 1742 böhmisch, danach preußisch; heute Kreis Kłodzko)."
+niederschlesien;Niederschlesien;Niederschlesien;1.0;Niederschlesien mit Brieg und Namslau sowie Grünberg, Sagan und Neusalz.
+oberschlesien;Oberschlesien;Oberschlesien;1.0;Oberschlesien (heute Woiwodschaft Oppeln ohne Brieg und Namslau sowie der preußische Teil der Woiwodschaft Schlesien).
+posen;Posen;Posen;1.0;Großpolen und Netzedistrikt, 1815–1920 preußische Provinz Posen (heute Woiwodschaft Großpolen ohne Kalisch und Konin sowie Bydgoszcz, Inowrocław, Mogilno, Nakło, Żnin, Międzyrzecz und Wschowa).
+westpreussen;Westpreußen;Westpreußen;1.0;Pommerellen, Kulmer Land, Marienburg und Elbing (1466–1772 Preußen Königlichen Anteils, danach bis 1920 preußisch).
+ostpreussen;Ostpreußen;Ostpreußen;1.0;Herzogtum Preußen mit Ermland (bis 1772 polnisch) und Memelland (heute Woiwodschaft Ermland-Masuren, Oblast Kaliningrad und der Westen Litauens um Klaipėda).
+kongresspolen;Polnischer Saum (Kongresspolen);Kongresspolen;1.15;Polnischer Saum jenseits der preußischen Grenze von 1815–1918 (Kongresspolen): Kujawien, Dobriner Land, Nordmasowien, Kalisch, Konin, Wieluń, Tschenstochau, Dombrowaer Becken und Suwałki.
+galizien;Westgalizien;Galizien;1.15;"Polnischer Saum in Westgalizien (Auschwitz, Zator, Saybusch, Chrzanów; 1772–1918 österreichisch)."
+elsass;Elsass;Elsass;1.0;Elsass mit Belfort (heute Départements Bas-Rhin, Haut-Rhin und Territoire de Belfort).
+lothringen;Lothringen;Lothringen;1.0;Herzogtümer Lothringen und Bar mit den Bistümern Metz, Toul und Verdun (heute Départements Moselle, Meurthe-et-Moselle, Meuse und Vosges).
+burgundische_pforte;Burgundische Pforte;Burgundische Pforte;1.0;Mömpelgard mit Héricourt (bis 1793 württembergisch) und der Nordrand der Freigrafschaft Burgund um Lure und Luxeuil.
+franzoesisch_flandern;Französisch-Flandern;Französisch-Flandern;1.15;"Französisch-Flandern mit Dünkirchen, Lille und Douai sowie das Bergbaugebiet um Lens (Artois); im 17. Jahrhundert schrittweise von Frankreich erworben (Pyrenäenfrieden 1659, Aachen 1668, Nimwegen 1678)."
+hennegau;Hennegau;Hennegau;1.15;Hennegau und Cambrésis (heute belgische Provinz Hennegau sowie in Frankreich Valenciennes, Cambrai, Avesnes und die Thiérache).
+ardennen;Ardennen;Ardennen;1.15;Französische Ardennen mit Charleville, Sedan und Givet.
+namur;Namur;Namur;1.15;Grafschaft Namur (heute belgische Provinz Namur).
+luettich;Lüttich;Lüttich;1.0;Hochstift Lüttich mit der Grafschaft Loon, das alte Herzogtum Limburg mit Eupen sowie Stablo-Malmedy (heute belgische Provinzen Lüttich und Limburg).
+brabant;Brabant;Brabant;1.15;Herzogtum Brabant mit Antwerpen und Mecheln (heute Brüssel, Flämisch- und Wallonisch-Brabant, Provinz Antwerpen).
+flandern;Flandern;Flandern;1.15;Grafschaft Flandern (heute Provinzen West- und Ostflandern).
+luxemburg;Luxemburg;Luxemburg;1.0;Herzogtum Luxemburg (heute Großherzogtum Luxemburg und belgische Provinz Luxemburg).
+limburg;Limburg;Limburg;1.0;Niederländisch-Limburg (1839–1866 als Herzogtum Limburg im Deutschen Bund).
+geldern;Geldern;Geldern;1.15;Geldern mit Arnheim, Nimwegen und Zutphen sowie das Land van Cuijk (niederländischer Saum).
+overijssel;Overijssel;Overijssel;1.15;Overijssel mit Twente (niederländischer Saum).
+groningen_drenthe;Groningen und Drenthe;Groningen;1.15;Groningen und Drenthe (niederländischer Saum).
+juetland;Jütland;Jütland;1.15;Dänischer Saum nördlich der Königsau mit Kolding, Vejen, Esbjerg, Ribe und Fanø.

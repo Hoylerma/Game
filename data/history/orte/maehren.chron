@@ -1,0 +1,1220 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
+# Orte: Mähren – Orte ohne Daten (Meilenstein M3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
+# Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
+# ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
+# und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
+#
+# Umfang: Markgrafschaft Mähren (heute Tschechien östlich der Landesgrenze zu Böhmen ohne den schlesischen Teil; Grenze nach heutigen Bezirken vereinfacht).
+
+ort maehrisch_schoenberg {
+    name     = "Mährisch-Schönberg"
+    gelaende = huegelland
+    lage     = { 16.9706 49.9653 }
+    flaeche  = 147
+    stadt    = ja
+    kreis    = kr_maehrisch_schoenberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3064673; deutscher Name aus den GeoNames-Alternativnamen (heute Šumperk); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hohenstadt {
+    name     = "Hohenstadt"
+    gelaende = huegelland
+    lage     = { 16.8722 49.8826 }
+    flaeche  = 161
+    stadt    = nein
+    kreis    = kr_maehrisch_schoenberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3062111; deutscher Name aus den GeoNames-Alternativnamen (heute Zábřeh); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hannsdorf {
+    name     = "Hannsdorf"
+    gelaende = mittelgebirge
+    lage     = { 16.9364 50.0805 }
+    flaeche  = 170
+    stadt    = nein
+    kreis    = kr_maehrisch_schoenberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3075958; deutscher Name aus den GeoNames-Alternativnamen (heute Hanušovice); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gross_ullersdorf {
+    name     = "Gross-Ullersdorf"
+    gelaende = mittelgebirge
+    lage     = { 17.0406 50.032 }
+    flaeche  = 218
+    stadt    = nein
+    kreis    = kr_maehrisch_schoenberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3063197; deutscher Name aus den GeoNames-Alternativnamen (heute Velké Losiny); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort stepanov {
+    name     = "Štěpánov"
+    gelaende = mittelgebirge
+    lage     = { 16.917 50.1624 }
+    flaeche  = 256
+    stadt    = nein
+    kreis    = kr_maehrisch_schoenberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3065180; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort schildberg {
+    name     = "Schildberg"
+    gelaende = mittelgebirge
+    lage     = { 16.7658 49.9612 }
+    flaeche  = 171
+    stadt    = nein
+    kreis    = kr_maehrisch_schoenberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3065118; deutscher Name aus den GeoNames-Alternativnamen (heute Štíty); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort oskava {
+    name     = "Oskava"
+    gelaende = mittelgebirge
+    lage     = { 17.1321 49.8952 }
+    flaeche  = 193
+    stadt    = nein
+    kreis    = kr_maehrisch_schoenberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3068837; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ostrava {
+    name     = "Ostrava"
+    gelaende = flussaue
+    lage     = { 18.282 49.8347 }
+    flaeche  = 117
+    stadt    = ja
+    kreis    = kr_ostrava
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3068799; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort nesselsdorf {
+    name     = "Nesselsdorf"
+    gelaende = huegelland
+    lage     = { 18.1448 49.5995 }
+    flaeche  = 159
+    stadt    = ja
+    kreis    = kr_ostrava
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3073254; deutscher Name aus den GeoNames-Alternativnamen (heute Kopřivnice); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort neutitschein {
+    name     = "Neutitschein"
+    gelaende = huegelland
+    lage     = { 18.0103 49.5944 }
+    flaeche  = 195
+    stadt    = ja
+    kreis    = kr_ostrava
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3069305; deutscher Name aus den GeoNames-Alternativnamen (heute Nový Jičín); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wagstadt {
+    name     = "Wagstadt"
+    gelaende = huegelland
+    lage     = { 18.0158 49.7564 }
+    flaeche  = 150
+    stadt    = nein
+    kreis    = kr_ostrava
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3079336; deutscher Name aus den GeoNames-Alternativnamen (heute Bílovec); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort fulnek {
+    name     = "Fulnek"
+    gelaende = huegelland
+    lage     = { 17.9032 49.7124 }
+    flaeche  = 192
+    stadt    = nein
+    kreis    = kr_ostrava
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3076116; deutscher Name nach GeoNames (dort Hauptname des Eintrags); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort vresina {
+    name     = "Vřesina"
+    gelaende = huegelland
+    lage     = { 18.1257 49.8242 }
+    flaeche  = 117
+    stadt    = nein
+    kreis    = kr_ostrava
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3062417; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort vaclavovice {
+    name     = "Václavovice"
+    gelaende = huegelland
+    lage     = { 18.3722 49.7553 }
+    flaeche  = 83
+    stadt    = nein
+    kreis    = kr_ostrava
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3063471; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort olmuetz {
+    name     = "Olmütz"
+    gelaende = boerde
+    lage     = { 17.2518 49.5955 }
+    flaeche  = 167
+    stadt    = ja
+    kreis    = kr_olmuetz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3069011; deutscher Name aus den GeoNames-Alternativnamen (heute Olomouc); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort sternberg_maehren {
+    name     = "Sternberg (Mähren)"
+    gelaende = mittelgebirge
+    lage     = { 17.2989 49.7304 }
+    flaeche  = 189
+    stadt    = nein
+    kreis    = kr_olmuetz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3065166; deutscher Name aus den GeoNames-Alternativnamen (heute Šternberk); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort maehrisch_neustadt {
+    name     = "Mährisch Neustadt"
+    gelaende = flachland
+    lage     = { 17.1214 49.7709 }
+    flaeche  = 186
+    stadt    = nein
+    kreis    = kr_olmuetz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3063596; deutscher Name aus den GeoNames-Alternativnamen (heute Uničov); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort littau {
+    name     = "Littau"
+    gelaende = flussaue
+    lage     = { 17.0761 49.7012 }
+    flaeche  = 192
+    stadt    = nein
+    kreis    = kr_olmuetz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3071669; deutscher Name aus den GeoNames-Alternativnamen (heute Litovel); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort mueglitz {
+    name     = "Müglitz"
+    gelaende = huegelland
+    lage     = { 16.9195 49.777 }
+    flaeche  = 258
+    stadt    = nein
+    kreis    = kr_olmuetz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3070409; deutscher Name aus den GeoNames-Alternativnamen (heute Mohelnice); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hlubocky {
+    name     = "Hlubočky"
+    gelaende = mittelgebirge
+    lage     = { 17.3944 49.6178 }
+    flaeche  = 199
+    stadt    = nein
+    kreis    = kr_olmuetz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3075744; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort baern {
+    name     = "Bärn"
+    gelaende = huegelland
+    lage     = { 17.4421 49.7937 }
+    flaeche  = 183
+    stadt    = nein
+    kreis    = kr_olmuetz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3070314; deutscher Name aus den GeoNames-Alternativnamen (heute Moravský Beroun); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lutin {
+    name     = "Lutín"
+    gelaende = boerde
+    lage     = { 17.1357 49.5585 }
+    flaeche  = 169
+    stadt    = nein
+    kreis    = kr_olmuetz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3071350; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort stadt_liebau {
+    name     = "Stadt Liebau"
+    gelaende = mittelgebirge
+    lage     = { 17.5201 49.7216 }
+    flaeche  = 156
+    stadt    = nein
+    kreis    = kr_olmuetz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3070816; deutscher Name aus den GeoNames-Alternativnamen (heute Město Libavá); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort saar {
+    name     = "Saar"
+    gelaende = huegelland
+    lage     = { 15.9392 49.5626 }
+    flaeche  = 207
+    stadt    = ja
+    kreis    = kr_saar
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3061695; deutscher Name aus den GeoNames-Alternativnamen (heute Žďár nad Sázavou); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bystrice_nad_pernstejnem {
+    name     = "Bystřice nad Pernštejnem"
+    gelaende = mittelgebirge
+    lage     = { 16.2615 49.523 }
+    flaeche  = 267
+    stadt    = nein
+    kreis    = kr_saar
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3078288; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort neustadtl {
+    name     = "Neustadtl"
+    gelaende = mittelgebirge
+    lage     = { 16.0742 49.5614 }
+    flaeche  = 191
+    stadt    = nein
+    kreis    = kr_saar
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3069465; deutscher Name aus den GeoNames-Alternativnamen (heute Nové Město na Moravě); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort olesnice {
+    name     = "Olešnice"
+    gelaende = mittelgebirge
+    lage     = { 16.4217 49.5575 }
+    flaeche  = 136
+    stadt    = nein
+    kreis    = kr_saar
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3069029; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort svratka {
+    name     = "Svratka"
+    gelaende = mittelgebirge
+    lage     = { 16.0321 49.7107 }
+    flaeche  = 183
+    stadt    = nein
+    kreis    = kr_saar
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3064415; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort jimramov {
+    name     = "Jimramov"
+    gelaende = mittelgebirge
+    lage     = { 16.2263 49.6372 }
+    flaeche  = 130
+    stadt    = nein
+    kreis    = kr_saar
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3074170; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort prossnitz {
+    name     = "Prossnitz"
+    gelaende = boerde
+    lage     = { 17.1118 49.4719 }
+    flaeche  = 130
+    stadt    = ja
+    kreis    = kr_prossnitz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3067421; deutscher Name aus den GeoNames-Alternativnamen (heute Prostějov); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kojetein {
+    name     = "Kojetein"
+    gelaende = flussaue
+    lage     = { 17.3021 49.3518 }
+    flaeche  = 99
+    stadt    = nein
+    kreis    = kr_prossnitz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3073407; deutscher Name aus den GeoNames-Alternativnamen (heute Kojetín); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort tobitschau {
+    name     = "Tobitschau"
+    gelaende = boerde
+    lage     = { 17.2879 49.4308 }
+    flaeche  = 159
+    stadt    = nein
+    kreis    = kr_prossnitz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3064143; deutscher Name aus den GeoNames-Alternativnamen (heute Tovačov); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort otaslavice {
+    name     = "Otaslavice"
+    gelaende = huegelland
+    lage     = { 17.0711 49.3883 }
+    flaeche  = 168
+    stadt    = nein
+    kreis    = kr_prossnitz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3068727; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort nezamyslice {
+    name     = "Nezamyslice"
+    gelaende = huegelland
+    lage     = { 17.1733 49.3254 }
+    flaeche  = 183
+    stadt    = nein
+    kreis    = kr_prossnitz
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3069773; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort prerau {
+    name     = "Prerau"
+    gelaende = huegelland
+    lage     = { 17.4509 49.4551 }
+    flaeche  = 183
+    stadt    = ja
+    kreis    = kr_prerau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3067580; deutscher Name aus den GeoNames-Alternativnamen (heute Přerov); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort maehrisch_weisskirchen {
+    name     = "Mährisch Weisskirchen"
+    gelaende = huegelland
+    lage     = { 17.7347 49.548 }
+    flaeche  = 173
+    stadt    = nein
+    kreis    = kr_prerau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3074893; deutscher Name aus den GeoNames-Alternativnamen (heute Hranice); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort holleschau {
+    name     = "Holleschau"
+    gelaende = huegelland
+    lage     = { 17.5783 49.3333 }
+    flaeche  = 188
+    stadt    = nein
+    kreis    = kr_prerau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3075606; deutscher Name aus den GeoNames-Alternativnamen (heute Holešov); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lipnik_nad_becvou {
+    name     = "Lipník nad Bečvou"
+    gelaende = huegelland
+    lage     = { 17.5859 49.5272 }
+    flaeche  = 178
+    stadt    = nein
+    kreis    = kr_prerau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3071791; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bystritz_am_hostein {
+    name     = "Bystritz-am-Hostein"
+    gelaende = mittelgebirge
+    lage     = { 17.674 49.3992 }
+    flaeche  = 197
+    stadt    = nein
+    kreis    = kr_prerau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3078286; deutscher Name aus den GeoNames-Alternativnamen (heute Bystřice pod Hostýnem); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kelc {
+    name     = "Kelč"
+    gelaende = huegelland
+    lage     = { 17.8153 49.4784 }
+    flaeche  = 121
+    stadt    = nein
+    kreis    = kr_prerau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3073731; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bodenstadt {
+    name     = "Bodenstadt"
+    gelaende = mittelgebirge
+    lage     = { 17.6517 49.6369 }
+    flaeche  = 208
+    stadt    = nein
+    kreis    = kr_prerau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3067752; deutscher Name aus den GeoNames-Alternativnamen (heute Potštát); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort iglau {
+    name     = "Iglau"
+    gelaende = huegelland
+    lage     = { 15.5912 49.3961 }
+    flaeche  = 233
+    stadt    = ja
+    kreis    = kr_iglau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3074199; deutscher Name aus den GeoNames-Alternativnamen (heute Jihlava); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort maehrisch_budwitz {
+    name     = "Mährisch-Budwitz"
+    gelaende = huegelland
+    lage     = { 15.8086 49.0521 }
+    flaeche  = 257
+    stadt    = nein
+    kreis    = kr_iglau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3070323; deutscher Name aus den GeoNames-Alternativnamen (heute Moravské Budějovice); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort teltsch {
+    name     = "Teltsch"
+    gelaende = huegelland
+    lage     = { 15.4527 49.1842 }
+    flaeche  = 201
+    stadt    = nein
+    kreis    = kr_iglau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3064316; deutscher Name aus den GeoNames-Alternativnamen (heute Telč); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort jamnitz {
+    name     = "Jamnitz"
+    gelaende = huegelland
+    lage     = { 15.5699 49.019 }
+    flaeche  = 267
+    stadt    = nein
+    kreis    = kr_iglau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3074331; deutscher Name aus den GeoNames-Alternativnamen (heute Jemnice); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort pirnitz {
+    name     = "Pirnitz"
+    gelaende = mittelgebirge
+    lage     = { 15.6764 49.307 }
+    flaeche  = 233
+    stadt    = nein
+    kreis    = kr_iglau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3078561; deutscher Name aus den GeoNames-Alternativnamen (heute Brtnice); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort triesch {
+    name     = "Triesch"
+    gelaende = huegelland
+    lage     = { 15.4821 49.2909 }
+    flaeche  = 182
+    stadt    = nein
+    kreis    = kr_iglau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3064029; deutscher Name aus den GeoNames-Alternativnamen (heute Třešť); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort zeletava {
+    name     = "Želetava"
+    gelaende = huegelland
+    lage     = { 15.673 49.1419 }
+    flaeche  = 231
+    stadt    = nein
+    kreis    = kr_iglau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3061577; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort blansko {
+    name     = "Blansko"
+    gelaende = huegelland
+    lage     = { 16.6445 49.363 }
+    flaeche  = 169
+    stadt    = ja
+    kreis    = kr_blansko
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3079273; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort boskowitz {
+    name     = "Boskowitz"
+    gelaende = mittelgebirge
+    lage     = { 16.66 49.4875 }
+    flaeche  = 123
+    stadt    = nein
+    kreis    = kr_blansko
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3078910; deutscher Name aus den GeoNames-Alternativnamen (heute Boskovice); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gurein {
+    name     = "Gurein"
+    gelaende = huegelland
+    lage     = { 16.5314 49.2985 }
+    flaeche  = 162
+    stadt    = nein
+    kreis    = kr_blansko
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3072476; deutscher Name aus den GeoNames-Alternativnamen (heute Kuřim); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort tischnowitz {
+    name     = "Tischnowitz"
+    gelaende = huegelland
+    lage     = { 16.4244 49.3487 }
+    flaeche  = 220
+    stadt    = nein
+    kreis    = kr_blansko
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3064211; deutscher Name aus den GeoNames-Alternativnamen (heute Tišnov); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lettowitz {
+    name     = "Lettowitz"
+    gelaende = huegelland
+    lage     = { 16.5736 49.5471 }
+    flaeche  = 113
+    stadt    = nein
+    kreis    = kr_blansko
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3072130; deutscher Name aus den GeoNames-Alternativnamen (heute Letovice); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gross_opatowitz {
+    name     = "Gross Opatowitz"
+    gelaende = huegelland
+    lage     = { 16.6795 49.6124 }
+    flaeche  = 200
+    stadt    = nein
+    kreis    = kr_blansko
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3063193; deutscher Name aus den GeoNames-Alternativnamen (heute Velké Opatovice); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort konitz_maehren {
+    name     = "Konitz (Mähren)"
+    gelaende = mittelgebirge
+    lage     = { 16.8891 49.5903 }
+    flaeche  = 210
+    stadt    = nein
+    kreis    = kr_blansko
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3073299; deutscher Name aus den GeoNames-Alternativnamen (heute Konice); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lysice {
+    name     = "Lysice"
+    gelaende = huegelland
+    lage     = { 16.5372 49.4516 }
+    flaeche  = 156
+    stadt    = nein
+    kreis    = kr_blansko
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3071302; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort pteni {
+    name     = "Ptení"
+    gelaende = huegelland
+    lage     = { 16.9611 49.5116 }
+    flaeche  = 129
+    stadt    = nein
+    kreis    = kr_blansko
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3067351; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort protivanov {
+    name     = "Protivanov"
+    gelaende = mittelgebirge
+    lage     = { 16.8359 49.4835 }
+    flaeche  = 135
+    stadt    = nein
+    kreis    = kr_blansko
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3067398; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lipovec {
+    name     = "Lipovec"
+    gelaende = huegelland
+    lage     = { 16.8058 49.3839 }
+    flaeche  = 234
+    stadt    = nein
+    kreis    = kr_blansko
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3071771; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wsetin {
+    name     = "Wsetin"
+    gelaende = mittelgebirge
+    lage     = { 17.9962 49.3387 }
+    flaeche  = 187
+    stadt    = ja
+    kreis    = kr_wsetin
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3062339; deutscher Name aus den GeoNames-Alternativnamen (heute Vsetín); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wallachisch_meseritsch {
+    name     = "Wallachisch Meseritsch"
+    gelaende = huegelland
+    lage     = { 17.9711 49.4718 }
+    flaeche  = 187
+    stadt    = ja
+    kreis    = kr_wsetin
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3063447; deutscher Name aus den GeoNames-Alternativnamen (heute Valašské Meziříčí); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort roznov_pod_radhostem {
+    name     = "Rožnov pod Radhoštěm"
+    gelaende = mittelgebirge
+    lage     = { 18.143 49.4585 }
+    flaeche  = 144
+    stadt    = nein
+    kreis    = kr_wsetin
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3066651; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort karolinka {
+    name     = "Karolinka"
+    gelaende = mittelgebirge
+    lage     = { 18.2401 49.3513 }
+    flaeche  = 198
+    stadt    = nein
+    kreis    = kr_wsetin
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3073792; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort trojanovice {
+    name     = "Trojanovice"
+    gelaende = mittelgebirge
+    lage     = { 18.238 49.5204 }
+    flaeche  = 106
+    stadt    = nein
+    kreis    = kr_wsetin
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3063955; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hostalkova {
+    name     = "Hošťálková"
+    gelaende = mittelgebirge
+    lage     = { 17.8694 49.3547 }
+    flaeche  = 189
+    stadt    = nein
+    kreis    = kr_wsetin
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3075091; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort horni_becva {
+    name     = "Horní Bečva"
+    gelaende = mittelgebirge
+    lage     = { 18.2886 49.4322 }
+    flaeche  = 198
+    stadt    = nein
+    kreis    = kr_wsetin
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3075454; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wischau {
+    name     = "Wischau"
+    gelaende = huegelland
+    lage     = { 16.999 49.2775 }
+    flaeche  = 219
+    stadt    = ja
+    kreis    = kr_wischau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3062283; deutscher Name aus den GeoNames-Alternativnamen (heute Vyškov); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gaya {
+    name     = "Gaya"
+    gelaende = huegelland
+    lage     = { 17.1225 49.0102 }
+    flaeche  = 179
+    stadt    = nein
+    kreis    = kr_wischau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3072407; deutscher Name aus den GeoNames-Alternativnamen (heute Kyjov); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort austerlitz {
+    name     = "Austerlitz"
+    gelaende = huegelland
+    lage     = { 16.8765 49.1532 }
+    flaeche  = 170
+    stadt    = nein
+    kreis    = kr_wischau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3065824; deutscher Name aus den GeoNames-Alternativnamen (heute Slavkov u Brna); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort butschowitz {
+    name     = "Butschowitz"
+    gelaende = huegelland
+    lage     = { 17.0019 49.149 }
+    flaeche  = 134
+    stadt    = nein
+    kreis    = kr_wischau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3078503; deutscher Name aus den GeoNames-Alternativnamen (heute Bučovice); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort korycany {
+    name     = "Koryčany"
+    gelaende = huegelland
+    lage     = { 17.1643 49.1064 }
+    flaeche  = 178
+    stadt    = nein
+    kreis    = kr_wischau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3073222; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort steinitz {
+    name     = "Steinitz"
+    gelaende = huegelland
+    lage     = { 17.0275 49.0673 }
+    flaeche  = 136
+    stadt    = nein
+    kreis    = kr_wischau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3061729; deutscher Name aus den GeoNames-Alternativnamen (heute Ždánice); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort zlin {
+    name     = "Zlín"
+    gelaende = huegelland
+    lage     = { 17.6706 49.2264 }
+    flaeche  = 177
+    stadt    = ja
+    kreis    = kr_zlin
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3061370; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kremsier {
+    name     = "Kremsier"
+    gelaende = flussaue
+    lage     = { 17.3931 49.2978 }
+    flaeche  = 128
+    stadt    = ja
+    kreis    = kr_zlin
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3072649; deutscher Name aus den GeoNames-Alternativnamen (heute Kroměříž); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort otrokovice {
+    name     = "Otrokovice"
+    gelaende = huegelland
+    lage     = { 17.5394 49.2093 }
+    flaeche  = 146
+    stadt    = nein
+    kreis    = kr_zlin
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3068690; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort zdounky {
+    name     = "Zdounky"
+    gelaende = huegelland
+    lage     = { 17.319 49.2277 }
+    flaeche  = 201
+    stadt    = nein
+    kreis    = kr_zlin
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3061637; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort brezolupy {
+    name     = "Březolupy"
+    gelaende = huegelland
+    lage     = { 17.5803 49.1214 }
+    flaeche  = 136
+    stadt    = nein
+    kreis    = kr_zlin
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3078672; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort trebic {
+    name     = "Třebíč"
+    gelaende = huegelland
+    lage     = { 15.8817 49.2149 }
+    flaeche  = 341
+    stadt    = ja
+    kreis    = kr_trebic
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3064104; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort grossmeseritsch {
+    name     = "Großmeseritsch"
+    gelaende = huegelland
+    lage     = { 16.0122 49.3552 }
+    flaeche  = 268
+    stadt    = nein
+    kreis    = kr_trebic
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3063196; deutscher Name aus den GeoNames-Alternativnamen (heute Velké Meziříčí); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort polna {
+    name     = "Polna"
+    gelaende = huegelland
+    lage     = { 15.7188 49.487 }
+    flaeche  = 125
+    stadt    = nein
+    kreis    = kr_trebic
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3067870; deutscher Name aus den GeoNames-Alternativnamen (heute Polná); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort merin {
+    name     = "Měřín"
+    gelaende = huegelland
+    lage     = { 15.8838 49.3932 }
+    flaeche  = 178
+    stadt    = nein
+    kreis    = kr_trebic
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3070847; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bohdalov {
+    name     = "Bohdalov"
+    gelaende = huegelland
+    lage     = { 15.8758 49.4792 }
+    flaeche  = 142
+    stadt    = nein
+    kreis    = kr_trebic
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3079159; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bruenn {
+    name     = "Brünn"
+    gelaende = huegelland
+    lage     = { 16.608 49.1952 }
+    flaeche  = 142
+    stadt    = ja
+    kreis    = kr_bruenn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3078610; deutscher Name aus den GeoNames-Alternativnamen (heute Brno); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort schlappanitz {
+    name     = "Schlappanitz"
+    gelaende = huegelland
+    lage     = { 16.7273 49.1686 }
+    flaeche  = 194
+    stadt    = nein
+    kreis    = kr_bruenn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3065901; deutscher Name aus den GeoNames-Alternativnamen (heute Šlapanice); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ivancice {
+    name     = "Ivančice"
+    gelaende = huegelland
+    lage     = { 16.3775 49.1014 }
+    flaeche  = 171
+    stadt    = nein
+    kreis    = kr_bruenn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3074615; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gross_bittesch {
+    name     = "Gross Bittesch"
+    gelaende = huegelland
+    lage     = { 16.2274 49.2884 }
+    flaeche  = 238
+    stadt    = nein
+    kreis    = kr_bruenn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3063276; deutscher Name aus den GeoNames-Alternativnamen (heute Velká Bíteš); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort auspitz {
+    name     = "Auspitz"
+    gelaende = huegelland
+    lage     = { 16.7376 48.9408 }
+    flaeche  = 147
+    stadt    = nein
+    kreis    = kr_bruenn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3074677; deutscher Name aus den GeoNames-Alternativnamen (heute Hustopeče); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort rossitz {
+    name     = "Rossitz"
+    gelaende = huegelland
+    lage     = { 16.3879 49.1823 }
+    flaeche  = 193
+    stadt    = nein
+    kreis    = kr_bruenn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3066759; deutscher Name aus den GeoNames-Alternativnamen (heute Rosice); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort pohrlitz {
+    name     = "Pohrlitz"
+    gelaende = flachland
+    lage     = { 16.5245 48.9812 }
+    flaeche  = 223
+    stadt    = nein
+    kreis    = kr_bruenn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3067953; deutscher Name aus den GeoNames-Alternativnamen (heute Pohořelice); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gross_seelowitz {
+    name     = "Groß Seelowitz"
+    gelaende = huegelland
+    lage     = { 16.6188 49.0395 }
+    flaeche  = 151
+    stadt    = nein
+    kreis    = kr_bruenn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3061472; deutscher Name aus den GeoNames-Alternativnamen (heute Židlochovice); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort namiest {
+    name     = "Namiest"
+    gelaende = huegelland
+    lage     = { 16.1585 49.2073 }
+    flaeche  = 195
+    stadt    = nein
+    kreis    = kr_bruenn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3070055; deutscher Name aus den GeoNames-Alternativnamen (heute Náměšť nad Oslavou); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort strelitz {
+    name     = "Strelitz"
+    gelaende = huegelland
+    lage     = { 16.504 49.1522 }
+    flaeche  = 118
+    stadt    = nein
+    kreis    = kr_bruenn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3064962; deutscher Name aus den GeoNames-Alternativnamen (heute Střelice); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort tesany {
+    name     = "Těšany"
+    gelaende = huegelland
+    lage     = { 16.77 49.0396 }
+    flaeche  = 171
+    stadt    = nein
+    kreis    = kr_bruenn
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3064260; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort slavicin {
+    name     = "Slavičín"
+    gelaende = huegelland
+    lage     = { 17.8735 49.088 }
+    flaeche  = 194
+    stadt    = nein
+    kreis    = kr_slavicin
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3065843; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort luhatschowitz {
+    name     = "Luhatschowitz"
+    gelaende = huegelland
+    lage     = { 17.7575 49.0998 }
+    flaeche  = 132
+    stadt    = nein
+    kreis    = kr_slavicin
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3071407; deutscher Name aus den GeoNames-Alternativnamen (heute Luhačovice); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort valasske_klobouky {
+    name     = "Valašské Klobouky"
+    gelaende = mittelgebirge
+    lage     = { 18.0076 49.1406 }
+    flaeche  = 185
+    stadt    = nein
+    kreis    = kr_slavicin
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3063448; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wisowitz {
+    name     = "Wisowitz"
+    gelaende = mittelgebirge
+    lage     = { 17.8545 49.2229 }
+    flaeche  = 204
+    stadt    = nein
+    kreis    = kr_slavicin
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3062783; deutscher Name aus den GeoNames-Alternativnamen (heute Vizovice); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort francova_lhota {
+    name     = "Francova Lhota"
+    gelaende = mittelgebirge
+    lage     = { 18.1118 49.2017 }
+    flaeche  = 119
+    stadt    = nein
+    kreis    = kr_slavicin
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3076153; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ungarisch_hradisch {
+    name     = "Ungarisch Hradisch"
+    gelaende = flussaue
+    lage     = { 17.4597 49.0697 }
+    flaeche  = 112
+    stadt    = ja
+    kreis    = kr_ungarisch_hradisch
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3063739; deutscher Name aus den GeoNames-Alternativnamen (heute Uherské Hradiště); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ungarisch_brod {
+    name     = "Ungarisch Brod"
+    gelaende = huegelland
+    lage     = { 17.6471 49.0251 }
+    flaeche  = 126
+    stadt    = nein
+    kreis    = kr_ungarisch_hradisch
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3063736; deutscher Name aus den GeoNames-Alternativnamen (heute Uherský Brod); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort veseli_nad_moravou {
+    name     = "Veselí nad Moravou"
+    gelaende = flussaue
+    lage     = { 17.3765 48.9536 }
+    flaeche  = 187
+    stadt    = nein
+    kreis    = kr_ungarisch_hradisch
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3063032; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hluk {
+    name     = "Hluk"
+    gelaende = huegelland
+    lage     = { 17.5274 48.9881 }
+    flaeche  = 118
+    stadt    = nein
+    kreis    = kr_ungarisch_hradisch
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3075715; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort buchlowitz {
+    name     = "Buchlowitz"
+    gelaende = huegelland
+    lage     = { 17.3385 49.0863 }
+    flaeche  = 165
+    stadt    = nein
+    kreis    = kr_ungarisch_hradisch
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3078513; deutscher Name aus den GeoNames-Alternativnamen (heute Buchlovice); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort velka_nad_velickou {
+    name     = "Velká nad Veličkou"
+    gelaende = huegelland
+    lage     = { 17.5206 48.8826 }
+    flaeche  = 182
+    stadt    = nein
+    kreis    = kr_ungarisch_hradisch
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3063240; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort strani {
+    name     = "Strání"
+    gelaende = mittelgebirge
+    lage     = { 17.7067 48.9022 }
+    flaeche  = 230
+    stadt    = nein
+    kreis    = kr_ungarisch_hradisch
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3065051; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort petrov {
+    name     = "Petrov"
+    gelaende = huegelland
+    lage     = { 17.2781 48.882 }
+    flaeche  = 131
+    stadt    = nein
+    kreis    = kr_ungarisch_hradisch
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3068383; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort znaim {
+    name     = "Znaim"
+    gelaende = huegelland
+    lage     = { 16.0488 48.8555 }
+    flaeche  = 234
+    stadt    = ja
+    kreis    = kr_znaim
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3061344; deutscher Name aus den GeoNames-Alternativnamen (heute Znojmo); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort grusbach {
+    name     = "Grusbach"
+    gelaende = flachland
+    lage     = { 16.4027 48.8299 }
+    flaeche  = 200
+    stadt    = nein
+    kreis    = kr_znaim
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3074764; deutscher Name aus den GeoNames-Alternativnamen (heute Hrušovany nad Jevišovkou); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort misslitz {
+    name     = "Misslitz"
+    gelaende = huegelland
+    lage     = { 16.3125 48.9477 }
+    flaeche  = 226
+    stadt    = nein
+    kreis    = kr_znaim
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3070593; deutscher Name aus den GeoNames-Alternativnamen (heute Miroslav); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hrottowitz {
+    name     = "Hrottowitz"
+    gelaende = huegelland
+    lage     = { 16.0607 49.1077 }
+    flaeche  = 226
+    stadt    = nein
+    kreis    = kr_znaim
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3074803; deutscher Name aus den GeoNames-Alternativnamen (heute Hrotovice); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort jevisovice {
+    name     = "Jevišovice"
+    gelaende = huegelland
+    lage     = { 15.9899 48.9874 }
+    flaeche  = 192
+    stadt    = nein
+    kreis    = kr_znaim
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3074239; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort visnove {
+    name     = "Višňové"
+    gelaende = huegelland
+    lage     = { 16.1502 48.9824 }
+    flaeche  = 232
+    stadt    = nein
+    kreis    = kr_znaim
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3062835; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort joslowitz {
+    name     = "Joslowitz"
+    gelaende = huegelland
+    lage     = { 16.2335 48.7566 }
+    flaeche  = 191
+    stadt    = nein
+    kreis    = kr_znaim
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3074452; deutscher Name aus den GeoNames-Alternativnamen (heute Jaroslavice); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort goeding {
+    name     = "Göding"
+    gelaende = flussaue
+    lage     = { 17.1324 48.8489 }
+    flaeche  = 94
+    stadt    = ja
+    kreis    = kr_goeding
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3075654; deutscher Name aus den GeoNames-Alternativnamen (heute Hodonín); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lundenburg {
+    name     = "Lundenburg"
+    gelaende = flachland
+    lage     = { 16.882 48.759 }
+    flaeche  = 92
+    stadt    = ja
+    kreis    = kr_goeding
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3078773; deutscher Name aus den GeoNames-Alternativnamen (heute Břeclav); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort nikolsburg {
+    name     = "Nikolsburg"
+    gelaende = huegelland
+    lage     = { 16.6378 48.8056 }
+    flaeche  = 243
+    stadt    = nein
+    kreis    = kr_goeding
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3070720; deutscher Name aus den GeoNames-Alternativnamen (heute Mikulov); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort feldsberg {
+    name     = "Feldsberg"
+    gelaende = huegelland
+    lage     = { 16.755 48.7407 }
+    flaeche  = 140
+    stadt    = nein
+    kreis    = kr_goeding
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3063409; deutscher Name aus den GeoNames-Alternativnamen (heute Valtice); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort mutenice {
+    name     = "Mutěnice"
+    gelaende = huegelland
+    lage     = { 17.0292 48.9041 }
+    flaeche  = 115
+    stadt    = nein
+    kreis    = kr_goeding
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3070190; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort velke_bilovice {
+    name     = "Velké Bílovice"
+    gelaende = flachland
+    lage     = { 16.8923 48.8493 }
+    flaeche  = 153
+    stadt    = nein
+    kreis    = kr_goeding
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3063217; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kobyli {
+    name     = "Kobylí"
+    gelaende = huegelland
+    lage     = { 16.8916 48.9329 }
+    flaeche  = 164
+    stadt    = nein
+    kreis    = kr_goeding
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3073483; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort moravska_nova_ves {
+    name     = "Moravská Nová Ves"
+    gelaende = flachland
+    lage     = { 17.0137 48.803 }
+    flaeche  = 105
+    stadt    = nein
+    kreis    = kr_goeding
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3070329; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}

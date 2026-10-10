@@ -1,0 +1,420 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
+# Orte: Brabant – Orte ohne Daten (Meilenstein M3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
+# Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
+# ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
+# und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
+#
+# Umfang: Herzogtum Brabant mit Antwerpen und Mecheln (heute Brüssel, Flämisch- und Wallonisch-Brabant, Provinz Antwerpen).
+
+ort turnhout {
+    name     = "Turnhout"
+    gelaende = flachland
+    lage     = { 4.9447 51.3225 }
+    flaeche  = 165
+    stadt    = ja
+    kreis    = kr_turnhout
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2785141; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort geel {
+    name     = "Geel"
+    gelaende = flachland
+    lage     = { 4.9892 51.1656 }
+    flaeche  = 132
+    stadt    = ja
+    kreis    = kr_turnhout
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2797779; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort mol {
+    name     = "Mol"
+    gelaende = flachland
+    lage     = { 5.1166 51.1919 }
+    flaeche  = 164
+    stadt    = ja
+    kreis    = kr_turnhout
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2791067; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort herentals {
+    name     = "Herentals"
+    gelaende = flachland
+    lage     = { 4.8325 51.1765 }
+    flaeche  = 165
+    stadt    = ja
+    kreis    = kr_turnhout
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2796009; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort diest {
+    name     = "Diest"
+    gelaende = flachland
+    lage     = { 5.0506 50.9892 }
+    flaeche  = 154
+    stadt    = ja
+    kreis    = kr_turnhout
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2799397; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort westerlo {
+    name     = "Westerlo"
+    gelaende = flachland
+    lage     = { 4.9154 51.0905 }
+    flaeche  = 130
+    stadt    = ja
+    kreis    = kr_turnhout
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2783801; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ravels {
+    name     = "Ravels"
+    gelaende = flachland
+    lage     = { 4.9921 51.3727 }
+    flaeche  = 117
+    stadt    = nein
+    kreis    = kr_turnhout
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2788312; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort arendonk {
+    name     = "Arendonk"
+    gelaende = flachland
+    lage     = { 5.0829 51.3227 }
+    flaeche  = 97
+    stadt    = nein
+    kreis    = kr_turnhout
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2803083; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort antwerpen {
+    name     = "Antwerpen"
+    gelaende = flussaue
+    lage     = { 4.4003 51.2205 }
+    flaeche  = 118
+    stadt    = ja
+    kreis    = kr_antwerpen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2803138; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort brasschaat {
+    name     = "Brasschaat"
+    gelaende = flachland
+    lage     = { 4.4918 51.2912 }
+    flaeche  = 121
+    stadt    = ja
+    kreis    = kr_antwerpen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2801117; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort brecht {
+    name     = "Brecht"
+    gelaende = flachland
+    lage     = { 4.6383 51.3502 }
+    flaeche  = 140
+    stadt    = ja
+    kreis    = kr_antwerpen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2801106; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hoogstraten {
+    name     = "Hoogstraten"
+    gelaende = flachland
+    lage     = { 4.7603 51.4003 }
+    flaeche  = 152
+    stadt    = nein
+    kreis    = kr_antwerpen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2795398; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort zoersel {
+    name     = "Zoersel"
+    gelaende = flachland
+    lage     = { 4.713 51.2683 }
+    flaeche  = 196
+    stadt    = ja
+    kreis    = kr_antwerpen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2783204; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kalmthout {
+    name     = "Kalmthout"
+    gelaende = flachland
+    lage     = { 4.4756 51.3844 }
+    flaeche  = 108
+    stadt    = nein
+    kreis    = kr_antwerpen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2794788; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort stabroek {
+    name     = "Stabroek"
+    gelaende = kueste
+    lage     = { 4.3713 51.3319 }
+    flaeche  = 92
+    stadt    = nein
+    kreis    = kr_antwerpen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2786229; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort essen_brabant {
+    name     = "Essen (Brabant)"
+    gelaende = flachland
+    lage     = { 4.469 51.4679 }
+    flaeche  = 45
+    stadt    = nein
+    kreis    = kr_antwerpen
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2798615; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort mecheln {
+    name     = "Mecheln"
+    gelaende = flachland
+    lage     = { 4.4776 51.0257 }
+    flaeche  = 139
+    stadt    = ja
+    kreis    = kr_mecheln
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2791537; deutscher Name aus den GeoNames-Alternativnamen (heute Mechelen); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lier {
+    name     = "Lier"
+    gelaende = flachland
+    lage     = { 4.5704 51.1313 }
+    flaeche  = 162
+    stadt    = ja
+    kreis    = kr_mecheln
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2792397; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort willebroek {
+    name     = "Willebroek"
+    gelaende = flachland
+    lage     = { 4.3602 51.0604 }
+    flaeche  = 135
+    stadt    = ja
+    kreis    = kr_mecheln
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2783632; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kontich {
+    name     = "Kontich"
+    gelaende = flachland
+    lage     = { 4.4471 51.1321 }
+    flaeche  = 112
+    stadt    = ja
+    kreis    = kr_mecheln
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2794117; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bornem {
+    name     = "Bornem"
+    gelaende = flussaue
+    lage     = { 4.2436 51.0972 }
+    flaeche  = 142
+    stadt    = nein
+    kreis    = kr_mecheln
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2801447; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort loewen_brabant {
+    name     = "Löwen (Brabant)"
+    gelaende = flachland
+    lage     = { 4.7009 50.8796 }
+    flaeche  = 140
+    stadt    = ja
+    kreis    = kr_loewen_brabant
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2792482; deutscher Name aus den GeoNames-Alternativnamen (heute Leuven); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort heist_op_den_berg {
+    name     = "Heist-op-den-Berg"
+    gelaende = flachland
+    lage     = { 4.7283 51.0754 }
+    flaeche  = 140
+    stadt    = ja
+    kreis    = kr_loewen_brabant
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2796153; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort thienen {
+    name     = "Thienen"
+    gelaende = flachland
+    lage     = { 4.9378 50.8075 }
+    flaeche  = 130
+    stadt    = ja
+    kreis    = kr_loewen_brabant
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2785470; deutscher Name aus den GeoNames-Alternativnamen (heute Tienen); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort aarschot {
+    name     = "Aarschot"
+    gelaende = flachland
+    lage     = { 4.8369 50.9871 }
+    flaeche  = 165
+    stadt    = ja
+    kreis    = kr_loewen_brabant
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2803429; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort jodoigne {
+    name     = "Jodoigne"
+    gelaende = flachland
+    lage     = { 4.8691 50.7236 }
+    flaeche  = 135
+    stadt    = nein
+    kreis    = kr_loewen_brabant
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2794895; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort haacht {
+    name     = "Haacht"
+    gelaende = flachland
+    lage     = { 4.6378 50.9774 }
+    flaeche  = 153
+    stadt    = nein
+    kreis    = kr_loewen_brabant
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2796844; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort landen {
+    name     = "Landen"
+    gelaende = flachland
+    lage     = { 5.082 50.7527 }
+    flaeche  = 134
+    stadt    = nein
+    kreis    = kr_loewen_brabant
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2793429; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lubbeek {
+    name     = "Lubbeek"
+    gelaende = flachland
+    lage     = { 4.839 50.8828 }
+    flaeche  = 159
+    stadt    = nein
+    kreis    = kr_loewen_brabant
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2792034; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort beauvechain {
+    name     = "Beauvechain"
+    gelaende = flachland
+    lage     = { 4.7718 50.782 }
+    flaeche  = 105
+    stadt    = nein
+    kreis    = kr_loewen_brabant
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2802483; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bruessel {
+    name     = "Brüssel"
+    gelaende = flachland
+    lage     = { 4.3488 50.8505 }
+    flaeche  = 140
+    stadt    = ja
+    kreis    = kr_bruessel
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2800866; deutscher Name aus den GeoNames-Alternativnamen (heute Brussels); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort halle_brabant {
+    name     = "Halle (Brabant)"
+    gelaende = flachland
+    lage     = { 4.2345 50.7338 }
+    flaeche  = 156
+    stadt    = ja
+    kreis    = kr_bruessel
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2796696; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort vilvoorde {
+    name     = "Vilvoorde"
+    gelaende = flachland
+    lage     = { 4.4294 50.9281 }
+    flaeche  = 170
+    stadt    = ja
+    kreis    = kr_bruessel
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2784604; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort asse {
+    name     = "Asse"
+    gelaende = flachland
+    lage     = { 4.1984 50.9101 }
+    flaeche  = 157
+    stadt    = ja
+    kreis    = kr_bruessel
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2803033; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort tervuren {
+    name     = "Tervuren"
+    gelaende = flachland
+    lage     = { 4.5142 50.8237 }
+    flaeche  = 235
+    stadt    = ja
+    kreis    = kr_bruessel
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2785622; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort sint_martens_lennik {
+    name     = "Sint-Martens-Lennik"
+    gelaende = flachland
+    lage     = { 4.1696 50.8116 }
+    flaeche  = 115
+    stadt    = nein
+    kreis    = kr_bruessel
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2786587; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort braine_l_alleud {
+    name     = "Braine-l'Alleud"
+    gelaende = flachland
+    lage     = { 4.3678 50.6836 }
+    flaeche  = 178
+    stadt    = ja
+    kreis    = kr_braine_l_alleud
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2801154; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wavre {
+    name     = "Wavre"
+    gelaende = flachland
+    lage     = { 4.6014 50.7172 }
+    flaeche  = 152
+    stadt    = ja
+    kreis    = kr_braine_l_alleud
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2783941; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort nivelles {
+    name     = "Nivelles"
+    gelaende = flachland
+    lage     = { 4.3285 50.5983 }
+    flaeche  = 169
+    stadt    = ja
+    kreis    = kr_braine_l_alleud
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2790101; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort chaumont_gistoux {
+    name     = "Chaumont-Gistoux"
+    gelaende = flachland
+    lage     = { 4.7212 50.6775 }
+    flaeche  = 127
+    stadt    = nein
+    kreis    = kr_braine_l_alleud
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2800430; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort court_saint_etienne {
+    name     = "Court-Saint-Étienne"
+    gelaende = flachland
+    lage     = { 4.5685 50.6338 }
+    flaeche  = 157
+    stadt    = nein
+    kreis    = kr_braine_l_alleud
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2800042; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}

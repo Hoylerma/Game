@@ -1,0 +1,290 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
+# Orte: Starkenburg – Orte ohne Daten (Meilenstein M3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
+# Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
+# ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
+# und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
+#
+# Umfang: Starkenburg, Bergstraße und Odenwald (heute Darmstadt, Offenbach und die südhessischen Landkreise).
+
+ort offenbach {
+    name     = "Offenbach"
+    gelaende = flussaue
+    lage     = { 8.7665 50.1006 }
+    flaeche  = 78
+    stadt    = ja
+    kreis    = kr_offenbach
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2857807; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort dietzenbach {
+    name     = "Dietzenbach"
+    gelaende = flachland
+    lage     = { 8.7778 50.0098 }
+    flaeche  = 108
+    stadt    = ja
+    kreis    = kr_offenbach
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2937040; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort neu_isenburg {
+    name     = "Neu Isenburg"
+    gelaende = flachland
+    lage     = { 8.6941 50.0483 }
+    flaeche  = 75
+    stadt    = ja
+    kreis    = kr_offenbach
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2864820; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gross_umstadt {
+    name     = "Groß-Umstadt"
+    gelaende = huegelland
+    lage     = { 8.9321 49.869 }
+    flaeche  = 143
+    stadt    = ja
+    kreis    = kr_offenbach
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2914929; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort seligenstadt {
+    name     = "Seligenstadt"
+    gelaende = flussaue
+    lage     = { 8.9739 50.0432 }
+    flaeche  = 136
+    stadt    = nein
+    kreis    = kr_offenbach
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2833242; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort reinheim {
+    name     = "Reinheim"
+    gelaende = huegelland
+    lage     = { 8.8357 49.8292 }
+    flaeche  = 120
+    stadt    = nein
+    kreis    = kr_offenbach
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2848762; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort babenhausen_starkenburg {
+    name     = "Babenhausen (Starkenburg)"
+    gelaende = flachland
+    lage     = { 8.9513 49.9652 }
+    flaeche  = 108
+    stadt    = nein
+    kreis    = kr_offenbach
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2953770; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort messel {
+    name     = "Messel"
+    gelaende = flachland
+    lage     = { 8.7406 49.9383 }
+    flaeche  = 115
+    stadt    = nein
+    kreis    = kr_offenbach
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2871636; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ruesselsheim {
+    name     = "Rüsselsheim"
+    gelaende = flussaue
+    lage     = { 8.4225 49.9896 }
+    flaeche  = 123
+    stadt    = ja
+    kreis    = kr_ruesselsheim
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2842884; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gross_gerau {
+    name     = "Groß-Gerau"
+    gelaende = flachland
+    lage     = { 8.4825 49.9214 }
+    flaeche  = 124
+    stadt    = ja
+    kreis    = kr_ruesselsheim
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2915613; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort moerfelden_walldorf {
+    name     = "Mörfelden-Walldorf"
+    gelaende = flachland
+    lage     = { 8.5836 49.9947 }
+    flaeche  = 101
+    stadt    = ja
+    kreis    = kr_ruesselsheim
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3272460; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kelsterbach {
+    name     = "Kelsterbach"
+    gelaende = flussaue
+    lage     = { 8.5292 50.0613 }
+    flaeche  = 80
+    stadt    = nein
+    kreis    = kr_ruesselsheim
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2891742; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort darmstadt {
+    name     = "Darmstadt"
+    gelaende = huegelland
+    lage     = { 8.6503 49.8717 }
+    flaeche  = 119
+    stadt    = ja
+    kreis    = kr_darmstadt
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2938913; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort heppenheim {
+    name     = "Heppenheim"
+    gelaende = huegelland
+    lage     = { 8.6321 49.6414 }
+    flaeche  = 103
+    stadt    = ja
+    kreis    = kr_darmstadt
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2906268; Name Heppenheim aus den GeoNames-Alternativnamen (GeoNames: Heppenheim an der Bergstrasse); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort viernheim {
+    name     = "Viernheim"
+    gelaende = flachland
+    lage     = { 8.5782 49.5403 }
+    flaeche  = 87
+    stadt    = ja
+    kreis    = kr_darmstadt
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2817324; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lampertheim {
+    name     = "Lampertheim"
+    gelaende = flachland
+    lage     = { 8.4725 49.5979 }
+    flaeche  = 88
+    stadt    = ja
+    kreis    = kr_darmstadt
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2881695; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort pfungstadt {
+    name     = "Pfungstadt"
+    gelaende = huegelland
+    lage     = { 8.6031 49.8056 }
+    flaeche  = 138
+    stadt    = ja
+    kreis    = kr_darmstadt
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2853924; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort biblis {
+    name     = "Biblis"
+    gelaende = flachland
+    lage     = { 8.4586 49.6917 }
+    flaeche  = 97
+    stadt    = nein
+    kreis    = kr_darmstadt
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2949367; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort zwingenberg {
+    name     = "Zwingenberg"
+    gelaende = huegelland
+    lage     = { 8.6108 49.7239 }
+    flaeche  = 106
+    stadt    = nein
+    kreis    = kr_darmstadt
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2803515; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort biebesheim {
+    name     = "Biebesheim"
+    gelaende = flussaue
+    lage     = { 8.467 49.7809 }
+    flaeche  = 124
+    stadt    = nein
+    kreis    = kr_darmstadt
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2949240; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort erbach_starkenburg {
+    name     = "Erbach (Starkenburg)"
+    gelaende = huegelland
+    lage     = { 8.994 49.6615 }
+    flaeche  = 144
+    stadt    = ja
+    kreis    = kr_erbach_starkenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2929802; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wald_michelbach {
+    name     = "Wald-Michelbach"
+    gelaende = huegelland
+    lage     = { 8.8317 49.57 }
+    flaeche  = 119
+    stadt    = nein
+    kreis    = kr_erbach_starkenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2814853; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort moerlenbach {
+    name     = "Mörlenbach"
+    gelaende = huegelland
+    lage     = { 8.7347 49.5992 }
+    flaeche  = 73
+    stadt    = nein
+    kreis    = kr_erbach_starkenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2869221; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort bad_koenig {
+    name     = "Bad König"
+    gelaende = huegelland
+    lage     = { 9.0075 49.7432 }
+    flaeche  = 139
+    stadt    = nein
+    kreis    = kr_erbach_starkenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2953419; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort beerfelden {
+    name     = "Beerfelden"
+    gelaende = huegelland
+    lage     = { 8.9744 49.5686 }
+    flaeche  = 128
+    stadt    = nein
+    kreis    = kr_erbach_starkenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2951556; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lindenfels {
+    name     = "Lindenfels"
+    gelaende = mittelgebirge
+    lage     = { 8.7815 49.6837 }
+    flaeche  = 115
+    stadt    = nein
+    kreis    = kr_erbach_starkenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2877315; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort fraenkisch_crumbach {
+    name     = "Fränkisch-Crumbach"
+    gelaende = huegelland
+    lage     = { 8.8586 49.7461 }
+    flaeche  = 110
+    stadt    = nein
+    kreis    = kr_erbach_starkenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2925507; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort hirschhorn {
+    name     = "Hirschhorn"
+    gelaende = mittelgebirge
+    lage     = { 8.8959 49.4457 }
+    flaeche  = 96
+    stadt    = nein
+    kreis    = kr_erbach_starkenburg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2903625; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}

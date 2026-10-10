@@ -1,0 +1,370 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
+# Orte: Flandern – Orte ohne Daten (Meilenstein M3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
+# Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
+# ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
+# und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
+#
+# Umfang: Grafschaft Flandern (heute Provinzen West- und Ostflandern).
+
+ort bruegge {
+    name     = "Brügge"
+    gelaende = flachland
+    lage     = { 3.2242 51.2089 }
+    flaeche  = 161
+    stadt    = ja
+    kreis    = kr_bruegge
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2800931; deutscher Name aus den GeoNames-Alternativnamen (heute Brugge); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ostende {
+    name     = "Ostende"
+    gelaende = kueste
+    lage     = { 2.927 51.2155 }
+    flaeche  = 231
+    stadt    = ja
+    kreis    = kr_bruegge
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2789786; deutscher Name aus den GeoNames-Alternativnamen (heute Ostend); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort eeklo {
+    name     = "Eeklo"
+    gelaende = flachland
+    lage     = { 3.5565 51.187 }
+    flaeche  = 230
+    stadt    = ja
+    kreis    = kr_bruegge
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2798987; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort knokke_heist {
+    name     = "Knokke-Heist"
+    gelaende = kueste
+    lage     = { 3.2667 51.35 }
+    flaeche  = 114
+    stadt    = ja
+    kreis    = kr_bruegge
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2794210; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort zedelgem {
+    name     = "Zedelgem"
+    gelaende = flachland
+    lage     = { 3.1368 51.1424 }
+    flaeche  = 137
+    stadt    = ja
+    kreis    = kr_bruegge
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2783308; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort torhout {
+    name     = "Torhout"
+    gelaende = flachland
+    lage     = { 3.1008 51.0656 }
+    flaeche  = 177
+    stadt    = nein
+    kreis    = kr_bruegge
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2785364; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort aalter {
+    name     = "Aalter"
+    gelaende = flachland
+    lage     = { 3.4469 51.0902 }
+    flaeche  = 161
+    stadt    = nein
+    kreis    = kr_bruegge
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2803443; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort blankenberge {
+    name     = "Blankenberge"
+    gelaende = kueste
+    lage     = { 3.1323 51.3131 }
+    flaeche  = 100
+    stadt    = nein
+    kreis    = kr_bruegge
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2801858; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort assenede {
+    name     = "Assenede"
+    gelaende = flachland
+    lage     = { 3.7508 51.226 }
+    flaeche  = 164
+    stadt    = nein
+    kreis    = kr_bruegge
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2803026; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort beernem {
+    name     = "Beernem"
+    gelaende = flachland
+    lage     = { 3.339 51.1398 }
+    flaeche  = 171
+    stadt    = nein
+    kreis    = kr_bruegge
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2802437; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gent {
+    name     = "Gent"
+    gelaende = flussaue
+    lage     = { 3.7167 51.05 }
+    flaeche  = 204
+    stadt    = ja
+    kreis    = kr_gent
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2797656; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort sint_niklaas {
+    name     = "Sint-Niklaas"
+    gelaende = flachland
+    lage     = { 4.1437 51.1651 }
+    flaeche  = 182
+    stadt    = ja
+    kreis    = kr_gent
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2786578; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort dendermonde {
+    name     = "Dendermonde"
+    gelaende = flussaue
+    lage     = { 4.1011 51.0287 }
+    flaeche  = 156
+    stadt    = ja
+    kreis    = kr_gent
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2799645; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort aalst {
+    name     = "Aalst"
+    gelaende = flachland
+    lage     = { 4.0355 50.936 }
+    flaeche  = 157
+    stadt    = ja
+    kreis    = kr_gent
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2803448; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort beveren {
+    name     = "Beveren"
+    gelaende = flachland
+    lage     = { 4.2563 51.2119 }
+    flaeche  = 204
+    stadt    = ja
+    kreis    = kr_gent
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2802031; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lokeren {
+    name     = "Lokeren"
+    gelaende = flachland
+    lage     = { 3.9934 51.1036 }
+    flaeche  = 151
+    stadt    = ja
+    kreis    = kr_gent
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2792196; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort wetteren {
+    name     = "Wetteren"
+    gelaende = flussaue
+    lage     = { 3.8834 51.0053 }
+    flaeche  = 174
+    stadt    = ja
+    kreis    = kr_gent
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2783763; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort lochristi {
+    name     = "Lochristi"
+    gelaende = flachland
+    lage     = { 3.8319 51.0964 }
+    flaeche  = 184
+    stadt    = nein
+    kreis    = kr_gent
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2792235; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort waregem {
+    name     = "Waregem"
+    gelaende = flachland
+    lage     = { 3.4276 50.889 }
+    flaeche  = 137
+    stadt    = ja
+    kreis    = kr_waregem
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2784068; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort oudenaarde {
+    name     = "Oudenaarde"
+    gelaende = flussaue
+    lage     = { 3.6089 50.8517 }
+    flaeche  = 149
+    stadt    = ja
+    kreis    = kr_waregem
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2789529; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ninove {
+    name     = "Ninove"
+    gelaende = flachland
+    lage     = { 4.0266 50.8278 }
+    flaeche  = 146
+    stadt    = ja
+    kreis    = kr_waregem
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2790114; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort geraardsbergen {
+    name     = "Geraardsbergen"
+    gelaende = flachland
+    lage     = { 3.8822 50.7734 }
+    flaeche  = 126
+    stadt    = ja
+    kreis    = kr_waregem
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2797638; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort deinze {
+    name     = "Deinze"
+    gelaende = flachland
+    lage     = { 3.531 50.9817 }
+    flaeche  = 154
+    stadt    = ja
+    kreis    = kr_waregem
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2799746; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort zottegem {
+    name     = "Zottegem"
+    gelaende = flachland
+    lage     = { 3.8105 50.8695 }
+    flaeche  = 187
+    stadt    = ja
+    kreis    = kr_waregem
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2783175; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ronse {
+    name     = "Ronse"
+    gelaende = flachland
+    lage     = { 3.6005 50.7457 }
+    flaeche  = 166
+    stadt    = ja
+    kreis    = kr_waregem
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2787769; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort gavere {
+    name     = "Gavere"
+    gelaende = flussaue
+    lage     = { 3.6618 50.9292 }
+    flaeche  = 134
+    stadt    = nein
+    kreis    = kr_waregem
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2797798; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort avelgem {
+    name     = "Avelgem"
+    gelaende = flussaue
+    lage     = { 3.445 50.7762 }
+    flaeche  = 178
+    stadt    = nein
+    kreis    = kr_waregem
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2802871; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ypern {
+    name     = "Ypern"
+    gelaende = flachland
+    lage     = { 2.8857 50.8511 }
+    flaeche  = 225
+    stadt    = ja
+    kreis    = kr_ypern
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2795100; deutscher Name aus den GeoNames-Alternativnamen (heute Ieper); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort diksmuide {
+    name     = "Diksmuide"
+    gelaende = flachland
+    lage     = { 2.8638 51.0325 }
+    flaeche  = 290
+    stadt    = ja
+    kreis    = kr_ypern
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2799369; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort veurne {
+    name     = "Veurne"
+    gelaende = flachland
+    lage     = { 2.668 51.0732 }
+    flaeche  = 206
+    stadt    = ja
+    kreis    = kr_ypern
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2784804; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort poperinge {
+    name     = "Poperinge"
+    gelaende = flachland
+    lage     = { 2.7266 50.8539 }
+    flaeche  = 176
+    stadt    = nein
+    kreis    = kr_ypern
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2788726; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort kortrijk {
+    name     = "Kortrijk"
+    gelaende = flachland
+    lage     = { 3.2649 50.828 }
+    flaeche  = 127
+    stadt    = ja
+    kreis    = kr_kortrijk
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2794055; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort roeselare {
+    name     = "Roeselare"
+    gelaende = flachland
+    lage     = { 3.1227 50.9465 }
+    flaeche  = 251
+    stadt    = ja
+    kreis    = kr_kortrijk
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2787889; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort tielt {
+    name     = "Tielt"
+    gelaende = flachland
+    lage     = { 3.3271 50.9993 }
+    flaeche  = 194
+    stadt    = ja
+    kreis    = kr_kortrijk
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2785476; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort menen {
+    name     = "Menen"
+    gelaende = flachland
+    lage     = { 3.1225 50.7972 }
+    flaeche  = 122
+    stadt    = ja
+    kreis    = kr_kortrijk
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2791343; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort ingelmunster {
+    name     = "Ingelmunster"
+    gelaende = flachland
+    lage     = { 3.2557 50.9208 }
+    flaeche  = 138
+    stadt    = nein
+    kreis    = kr_kortrijk
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2795056; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
