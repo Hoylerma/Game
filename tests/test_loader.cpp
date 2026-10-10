@@ -77,7 +77,9 @@ TEST_CASE("Lader: Fixture lädt ohne Fehler und Warnungen") {
     CHECK(w.confessions.size() == 3);
     CHECK(w.professions.size() == 4);
     CHECK(w.states.size() == 3);
-    CHECK(w.locations.size() == 5);
+    CHECK(w.districts.size() == 3);
+    CHECK(w.locations.size() == 6); // davon ein Ort ohne Daten (zerbst)
+    CHECK(w.locations_with_data() == 5);
     CHECK(w.pops.size() == 29);
     CHECK(w.chronicle.empty());
 
@@ -85,8 +87,12 @@ TEST_CASE("Lader: Fixture lädt ohne Fehler und Warnungen") {
     CHECK(w.states[0].tag == "BRA");
     CHECK(w.states[1].tag == "SAX");
     CHECK(w.states[2].tag == "ANH");
-    const char* const places[] = {"berlin_coelln", "potsdam", "dresden", "leipzig", "dessau"};
-    for (std::size_t i = 0; i < 5; ++i) {
+    const char* const districts[] = {"kr_berlin", "kr_dresden", "kr_anhalt"};
+    for (std::size_t i = 0; i < 3; ++i) {
+        CHECK(w.districts[i].id == districts[i]);
+    }
+    const char* const places[] = {"berlin_coelln", "potsdam", "dresden", "leipzig", "dessau", "zerbst"};
+    for (std::size_t i = 0; i < 6; ++i) {
         CHECK(w.locations[i].id == places[i]);
     }
     CHECK(w.terrains[2].id == "sandboden");
@@ -216,6 +222,11 @@ TEST_CASE("Lader: Startzustand der Bevölkerungsblöcke (Abschnitt 4)") {
         next = loc.first_pop + loc.pop_count;
     }
     CHECK(next == static_cast<Index>(w.pops.size()));
+    // Der Ort ohne Daten am Ende hat keine Blöcke.
+    const uhrwerk::Location& zerbst = w.locations[5];
+    REQUIRE(zerbst.id == "zerbst");
+    CHECK(zerbst.first_pop == next);
+    CHECK(zerbst.pop_count == 0);
 
     // Handgerechnet: 12000 × 0,10 (6554/65536) × 90 / 100, abgerundet bzw. abgeschnitten.
     CHECK(w.pops[0].size.raw() == 70783200);
@@ -458,7 +469,7 @@ TEST_CASE("Lader: unbekannte Verweise") {
     SUBCASE("Besitzer") {
         replace_in_file(dir / kPlacesBra, "    besitzer     = BRA\n    gelaende     = sandboden",
                         "    besitzer     = XYZ\n    gelaende     = sandboden");
-        expect_error(load(dir), "unbekannter Staat 'XYZ' als Besitzer von ort potsdam", kPlacesBra, 17);
+        expect_error(load(dir), "unbekannter Staat 'XYZ' als Besitzer von ort potsdam", kPlacesBra, 18);
     }
     SUBCASE("Gelände") {
         replace_in_file(dir / kPlacesBra, "gelaende     = sandboden", "gelaende     = sumpf");
@@ -535,7 +546,13 @@ TEST_CASE("Lader: Pflichtfeld nur in einem datierten Block") {
     replace_in_file(dir / kPlacesBra, "    besitzer     = BRA\n    gelaende     = sandboden",
                     "    1649.06.01 = { besitzer = BRA }\n    gelaende     = sandboden");
     SUBCASE("vor dem Datum fehlt es") {
-        expect_error(load(dir), "Pflichtfeld 'besitzer' fehlt in ort potsdam", kPlacesBra);
+        // Die übrigen Simulationsfelder sind da: Fehler „alle vier oder keines“ (Abschnitt 3.6).
+        const LoadResult r = load(dir);
+        expect_error(r,
+                     "Ort potsdam hat zum Startdatum 'bevoelkerung', 'konfession' und 'verwuestung', aber "
+                     "nicht 'besitzer'",
+                     kPlacesBra, 16);
+        CHECK_FALSE(has_issue(r, "Pflichtfeld 'besitzer' fehlt")); // keine doppelte Meldung
     }
     SUBCASE("ab dem Datum ist es vorhanden") {
         const LoadResult r = load(dir, "jahresbeginn_1650");
@@ -552,7 +569,7 @@ TEST_CASE("Lader: Fehler in datierten Blöcken") {
     };
     SUBCASE("ungültiges Datum") {
         insert("    1648.13.01 = { besitzer = SAX }\n");
-        expect_error(load(dir), "ungültiges Datum '1648.13.01' in ort potsdam", kPlacesBra, 18);
+        expect_error(load(dir), "ungültiges Datum '1648.13.01' in ort potsdam", kPlacesBra, 19);
     }
     SUBCASE("Wert statt Block") {
         insert("    1649.01.01 = SAX\n");
@@ -561,8 +578,8 @@ TEST_CASE("Lader: Fehler in datierten Blöcken") {
     SUBCASE("Datum doppelt") {
         insert("    1649.01.01 = { besitzer = SAX }\n    1649.01.01 = { besitzer = BRA }\n");
         expect_error(load(dir),
-                     "Datum '1649.01.01' ist in ort potsdam mehrfach angegeben (zuerst in Zeile 18)",
-                     kPlacesBra, 19);
+                     "Datum '1649.01.01' ist in ort potsdam mehrfach angegeben (zuerst in Zeile 19)",
+                     kPlacesBra, 20);
     }
     SUBCASE("Feld, das nicht datiert werden kann") {
         insert("    1649.01.01 = { lage = { 13.0 52.0 } }\n");
@@ -657,7 +674,7 @@ TEST_CASE("Lader: Dateien werden nach Namen sortiert geladen") {
     INFO(issues_text(r));
     REQUIRE(r.ok());
     const World& w = *r.world;
-    REQUIRE(w.locations.size() == 6);
+    REQUIRE(w.locations.size() == 7);
     CHECK(w.locations[0].id == "cottbus");
     CHECK(w.locations[1].id == "berlin_coelln");
     CHECK(w.locations[0].first_pop == 0);
@@ -672,6 +689,275 @@ TEST_CASE("Lader: LoadIssue::to_string") {
           "a.chron:12: Warnung: Nachricht");
     CHECK(uhrwerk::LoadIssue{"a.chron", 0, "Nachricht", true}.to_string() == "a.chron: Fehler: Nachricht");
     CHECK(uhrwerk::LoadIssue{"", 0, "Nachricht", true}.to_string() == "Fehler: Nachricht");
+}
+
+// ─── Orte ohne Daten (Abschnitt 3.6) ────────────────────────────────────────
+
+namespace {
+
+const char* const kPlacesAnh = "history/orte/30_anhalt.chron";
+const char* const kZerbstFields = "    stadt    = ja\n    kreis    = kr_anhalt\n";
+
+/// Fügt dem Ort ohne Daten (zerbst) Zeilen nach stadt/kreis hinzu.
+void add_to_zerbst(const TempDir& dir, std::string_view lines) {
+    replace_in_file(dir / kPlacesAnh, kZerbstFields, std::string(kZerbstFields) + std::string(lines));
+}
+
+} // namespace
+
+TEST_CASE("Lader: Ort ohne Daten") {
+    const World w = testhilfen::load_fixture();
+    const Index index = w.find_location("zerbst");
+    REQUIRE(index == 5);
+    const uhrwerk::Location& zerbst = w.locations[static_cast<std::size_t>(index)];
+    CHECK(zerbst.name == "Zerbst");
+    CHECK_FALSE(zerbst.has_data());
+    CHECK(zerbst.owner == uhrwerk::kNone);
+    CHECK(zerbst.pop_count == 0);
+    CHECK(zerbst.devastation == Fixed::zero());
+    CHECK(w.location_population(index) == Fixed::zero());
+    CHECK(w.location_majority_confession(index) == uhrwerk::kNone);
+    // Kartenfelder sind vollständig.
+    CHECK(zerbst.terrain == w.find_terrain("ackerland"));
+    CHECK(zerbst.longitude == fx("12.08"));
+    CHECK(zerbst.latitude == fx("51.97"));
+    CHECK(zerbst.area_km2 == Fixed::from_int(250));
+    CHECK(zerbst.is_city);
+    CHECK(zerbst.district == w.find_district("kr_anhalt"));
+    CHECK(zerbst.source == "Testdaten, ohne Simulationsdaten");
+    // Er gehört keinem Staat.
+    CHECK(w.state_locations(w.find_state("ANH")) == std::vector<Index>{4});
+    for (std::size_t i = 0; i < 5; ++i) {
+        CHECK(w.locations[i].has_data());
+    }
+}
+
+TEST_CASE("Lader: Simulationsfelder alle oder keines") {
+    TempDir dir(true);
+    SUBCASE("ein Feld fehlt") {
+        replace_in_file(dir / kPlacesBra, "    verwuestung  = 0.6\n", "");
+        const LoadResult r = load(dir);
+        expect_error(r,
+                     "Ort potsdam hat zum Startdatum 'besitzer', 'bevoelkerung' und 'konfession', aber nicht "
+                     "'verwuestung'",
+                     kPlacesBra, 16);
+        CHECK_FALSE(has_issue(r, "Pflichtfeld 'verwuestung' fehlt"));
+    }
+    SUBCASE("nur ein Feld vorhanden") {
+        add_to_zerbst(dir, "    besitzer = ANH\n");
+        const LoadResult r = load(dir);
+        expect_error(r,
+                     "Ort zerbst hat zum Startdatum 'besitzer', aber nicht 'bevoelkerung', 'konfession' und "
+                     "'verwuestung'",
+                     kPlacesAnh, 18);
+        // Nur diese eine Meldung, keine Folgefehler je fehlendem Feld.
+        std::size_t errors = 0;
+        for (const uhrwerk::LoadIssue& issue : r.issues) {
+            errors += issue.fatal ? 1 : 0;
+        }
+        CHECK(errors == 1);
+    }
+    SUBCASE("alle vier Felder machen einen Ort mit Daten") {
+        add_to_zerbst(dir,
+                      "    besitzer = ANH\n    bevoelkerung = 2000\n    konfession = { lutherisch = 100 }\n"
+                      "    verwuestung = 0.25\n");
+        const LoadResult r = load(dir);
+        INFO(issues_text(r));
+        REQUIRE(r.ok());
+        CHECK(r.issues.empty());
+        const World& w = *r.world;
+        const uhrwerk::Location& zerbst = w.locations[5];
+        CHECK(zerbst.has_data());
+        CHECK(zerbst.owner == w.find_state("ANH"));
+        CHECK(zerbst.devastation == fx("0.25"));
+        CHECK(zerbst.pop_count == 4); // Stadt: alle vier Berufe × lutherisch
+        CHECK(w.location_population(5).round() == 2000);
+    }
+    SUBCASE("Werte werden auch bei Orten mit Daten geprüft") {
+        add_to_zerbst(dir,
+                      "    besitzer = XYZ\n    bevoelkerung = 2000\n    konfession = { lutherisch = 100 }\n"
+                      "    verwuestung = 0\n");
+        expect_error(load(dir), "unbekannter Staat 'XYZ' als Besitzer von ort zerbst", kPlacesAnh, 25);
+    }
+}
+
+TEST_CASE("Lader: Orte ohne Daten und datierte Blöcke") {
+    TempDir dir(true);
+    SUBCASE("Daten ab einem späteren Datum") {
+        add_to_zerbst(
+            dir, "    1649.06.01 = { besitzer = ANH bevoelkerung = 2000 konfession = { lutherisch = 100 } "
+                 "verwuestung = 0.1 }\n");
+        const LoadResult r1648 = load(dir);
+        INFO(issues_text(r1648));
+        REQUIRE(r1648.ok());
+        CHECK_FALSE(r1648.world->locations[5].has_data()); // vor dem Datum: Ort ohne Daten
+        CHECK(r1648.world->locations[5].owner == uhrwerk::kNone);
+
+        const LoadResult r1650 = load(dir, "jahresbeginn_1650");
+        INFO(issues_text(r1650));
+        REQUIRE(r1650.ok());
+        const World& w = *r1650.world;
+        CHECK(w.locations[5].has_data());
+        CHECK(w.locations[5].owner == w.find_state("ANH"));
+        CHECK(w.locations[5].devastation == fx("0.1"));
+        CHECK(w.location_population(5).round() == 2000);
+    }
+    SUBCASE("unvollständiger künftiger Block fällt erst zu seinem Datum auf") {
+        add_to_zerbst(dir, "    1649.06.01 = { besitzer = ANH }\n");
+        const LoadResult r1648 = load(dir);
+        INFO(issues_text(r1648));
+        CHECK(r1648.ok());
+        expect_error(load(dir, "jahresbeginn_1650"),
+                     "Ort zerbst hat zum Startdatum 'besitzer', aber nicht 'bevoelkerung'", kPlacesAnh, 18);
+    }
+}
+
+TEST_CASE("Lader: Hauptstadt muss ein Ort mit Daten sein") {
+    TempDir dir(true);
+    replace_in_file(dir / kStatesMid, "hauptstadt     = dessau", "hauptstadt     = zerbst");
+    expect_error(load(dir), "Hauptstadt 'zerbst' von ANH ist ein Ort ohne Daten", kStatesMid, 20);
+}
+
+// ─── Kreise (Abschnitt 3.9) ─────────────────────────────────────────────────
+
+namespace {
+
+const char* const kDistrictsBra = "history/kreise/10_brandenburg.chron";
+const char* const kDistrictsMid = "history/kreise/20_mitteldeutschland.chron";
+
+/// Entfernt alle Zeilen "kreis = …" aus den Ortsdateien.
+void remove_district_fields(const TempDir& dir) {
+    for (const char* file : {kPlacesBra, kPlacesSax, kPlacesAnh}) {
+        const std::string text = testhilfen::read_file(dir / file);
+        std::string result;
+        std::size_t start = 0;
+        while (start < text.size()) {
+            std::size_t end = text.find('\n', start);
+            end = end == std::string::npos ? text.size() : end + 1;
+            const std::string line = text.substr(start, end - start);
+            if (line.find_first_not_of(' ') == line.find("kreis ")) {
+                start = end;
+                continue;
+            }
+            result += line;
+            start = end;
+        }
+        testhilfen::write_file(dir / file, result);
+    }
+}
+
+} // namespace
+
+TEST_CASE("Lader: Kreise") {
+    const World w = testhilfen::load_fixture();
+    REQUIRE(w.districts.size() == 3);
+    const uhrwerk::District& berlin = w.districts[0];
+    CHECK(berlin.id == "kr_berlin");
+    CHECK(berlin.name == "Berlin");
+    CHECK(berlin.source == "Testdaten");
+    CHECK(w.districts[2].name == "Anhalt");
+    CHECK(w.find_district("kr_dresden") == 1);
+    CHECK(w.find_district("kr_anhalt") == 2);
+    CHECK(w.find_district("kr_leipzig") == uhrwerk::kNone);
+
+    CHECK(w.locations[0].district == 0);
+    CHECK(w.locations[1].district == 0);
+    CHECK(w.locations[2].district == 1);
+    CHECK(w.locations[3].district == uhrwerk::kNone); // Leipzig ohne Kreis
+    CHECK(w.locations[4].district == 2);
+    CHECK(w.district_locations(0) == std::vector<Index>{0, 1});
+    CHECK(w.district_locations(2) == std::vector<Index>{4, 5}); // auch der Ort ohne Daten
+}
+
+TEST_CASE("Lader: Fehler und Warnungen bei Kreisen") {
+    TempDir dir(true);
+    SUBCASE("unbekannter Kreis") {
+        replace_in_file(dir / kPlacesBra,
+                        "    kreis        = kr_berlin\n    quelle       = \"Testdaten, geschätzt\"\n}\n",
+                        "    kreis        = kr_potsdam\n    quelle       = \"Testdaten, geschätzt\"\n}\n");
+        expect_error(load(dir), "unbekannter Kreis 'kr_potsdam' in ort berlin_coelln", kPlacesBra, 12);
+    }
+    SUBCASE("unbekannter Kreis im Ort ohne Daten") {
+        replace_in_file(dir / kPlacesAnh, "kreis    = kr_anhalt", "kreis    = kr_zerbst");
+        expect_error(load(dir), "unbekannter Kreis 'kr_zerbst' in ort zerbst", kPlacesAnh, 24);
+    }
+    SUBCASE("kreis kann nicht datiert werden") {
+        add_to_zerbst(dir, "    1649.01.01 = { kreis = kr_dresden }\n");
+        expect_error(load(dir), "Feld 'kreis' in ort zerbst kann nicht datiert werden", kPlacesAnh, 25);
+    }
+    SUBCASE("Kreis ohne Orte ist eine Warnung") {
+        testhilfen::write_file(
+            dir / "history/kreise/30_leer.chron",
+            "# leer\n\nkreis kr_leer {\n    name = \"Leer\"\n    quelle = \"Testdaten\"\n}\n");
+        const LoadResult r = load(dir);
+        INFO(issues_text(r));
+        REQUIRE(r.ok());
+        REQUIRE(r.issues.size() == 1);
+        const uhrwerk::LoadIssue& issue = r.issues[0];
+        CHECK_FALSE(issue.fatal);
+        CHECK(issue.message == "Kreis 'kr_leer' hat keine Orte");
+        CHECK(issue.file == "history/kreise/30_leer.chron");
+        CHECK(issue.line == 3);
+        CHECK(r.world->districts.size() == 4);
+    }
+    SUBCASE("doppelte Kennung") {
+        replace_in_file(dir / kDistrictsMid, "kreis kr_anhalt {", "kreis kr_berlin {");
+        expect_error(load(dir),
+                     "doppelte Kennung 'kr_berlin' für Kreis (bereits definiert in " +
+                         std::string(kDistrictsBra) + ":2)",
+                     kDistrictsMid, 7);
+    }
+    SUBCASE("ungültige Kennung") {
+        replace_in_file(dir / kDistrictsBra, "kreis kr_berlin {", "kreis Kr-Berlin {");
+        expect_error(load(dir), "ungültige Kreiskennung 'Kr-Berlin'", kDistrictsBra, 2);
+    }
+    SUBCASE("Pflichtfeld fehlt") {
+        replace_in_file(dir / kDistrictsBra, "    name   = \"Berlin\"\n", "");
+        expect_error(load(dir), "Pflichtfeld 'name' fehlt in kreis kr_berlin", kDistrictsBra, 2);
+    }
+    SUBCASE("Kreise sind nicht datiert") {
+        replace_in_file(dir / kDistrictsBra, "    name   = \"Berlin\"\n",
+                        "    name   = \"Berlin\"\n    1701.01.18 = { name = \"Berlin (Residenz)\" }\n");
+        expect_error(load(dir),
+                     "datierter Eintrag '1701.01.18' in kreis kr_berlin: Kreise können nicht datiert werden",
+                     kDistrictsBra, 4);
+    }
+    SUBCASE("unbekanntes Feld ist eine Warnung") {
+        replace_in_file(dir / kDistrictsBra, "    name   = \"Berlin\"\n",
+                        "    name   = \"Berlin\"\n    hauptort = berlin_coelln\n");
+        const LoadResult r = load(dir);
+        INFO(issues_text(r));
+        CHECK(r.ok());
+        CHECK(has_issue(r, "unbekanntes Feld 'hauptort' in kreis kr_berlin wird ignoriert", false));
+    }
+}
+
+TEST_CASE("Lader: Ordner history/kreise ist optional") {
+    TempDir dir(true);
+    remove_district_fields(dir);
+    SUBCASE("Ordner fehlt") {
+        std::filesystem::remove_all(dir / "history/kreise");
+    }
+    SUBCASE("Ordner ohne .chron-Dateien") {
+        std::filesystem::remove(dir / kDistrictsBra);
+        std::filesystem::remove(dir / kDistrictsMid);
+    }
+    const LoadResult r = load(dir);
+    INFO(issues_text(r));
+    REQUIRE(r.ok());
+    CHECK(r.issues.empty());
+    const World& w = *r.world;
+    CHECK(w.districts.empty());
+    CHECK(w.locations.size() == 6);
+    for (const uhrwerk::Location& loc : w.locations) {
+        CHECK(loc.district == uhrwerk::kNone);
+    }
+}
+
+TEST_CASE("Lader: Verweis auf Kreis ohne Ordner history/kreise") {
+    TempDir dir(true);
+    std::filesystem::remove_all(dir / "history/kreise");
+    expect_error(load(dir), "unbekannter Kreis 'kr_berlin' in ort berlin_coelln", kPlacesBra, 12);
 }
 
 // ─── find_data_dir ──────────────────────────────────────────────────────────

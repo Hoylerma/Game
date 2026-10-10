@@ -9,5 +9,18 @@ ort dessau {
     stadt        = nein
     konfession   = { reformiert = 60 lutherisch = 40 }
     verwuestung  = 0.5
+    kreis        = kr_anhalt
     quelle       = "Testdaten, geschätzt"
+}
+
+# Ort ohne Daten (Abschnitt 3.6): nur Kartenfelder, keine Simulationsfelder.
+# Steht zuletzt, damit die Indizes der übrigen Orte gleich bleiben.
+ort zerbst {
+    name     = "Zerbst"
+    gelaende = ackerland
+    lage     = { 12.08 51.97 }
+    flaeche  = 250
+    stadt    = ja
+    kreis    = kr_anhalt
+    quelle   = "Testdaten, ohne Simulationsdaten"
 }

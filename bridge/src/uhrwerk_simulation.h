@@ -14,9 +14,13 @@
 #include <godot_cpp/variant/array.hpp>
 #include <godot_cpp/variant/dictionary.hpp>
 #include <godot_cpp/variant/packed_color_array.hpp>
+#include <godot_cpp/variant/packed_int32_array.hpp>
 #include <godot_cpp/variant/packed_string_array.hpp>
 #include <godot_cpp/variant/string.hpp>
 #include <memory>
+#include <string>
+#include <unordered_map>
+#include <vector>
 
 namespace uhrwerk_bridge {
 
@@ -31,6 +35,7 @@ public:
         MAP_CONFESSION = 2,
         MAP_TERRAIN = 3,
         MAP_DEVASTATION = 4,
+        MAP_KREISE = 5, // seit M3
     };
 
     static constexpr std::int64_t kMaxAdvanceDays = 3660;
@@ -57,6 +62,12 @@ public:
     std::int64_t get_location_count() const;
     std::int64_t get_location_index(const godot::String& id) const;
     godot::Dictionary get_location(std::int64_t index) const;
+    godot::PackedInt32Array get_location_owner_indices() const;
+    godot::PackedInt32Array get_location_kreis_indices() const;
+
+    std::int64_t get_kreis_count() const;
+    std::int64_t get_kreis_index(const godot::String& id) const;
+    godot::Dictionary get_kreis(std::int64_t index) const;
 
     godot::PackedColorArray get_map_colors(std::int64_t mode) const;
 
@@ -73,9 +84,15 @@ protected:
 
 private:
     const uhrwerk::World* world() const;
+    /// Nachschlagetabellen für Kennungen und Orte je Kreis; Orte und Kreise ändern sich
+    /// während einer Partie nicht. Nur Anzeige, ohne Einfluss auf die Simulation.
+    void build_lookups();
 
     std::unique_ptr<uhrwerk::Simulation> simulation_;
     godot::PackedStringArray load_warnings_;
+    std::unordered_map<std::string, std::int64_t> location_lookup_;
+    std::unordered_map<std::string, std::int64_t> kreis_lookup_;
+    std::vector<std::int64_t> kreis_location_counts_;
 };
 
 } // namespace uhrwerk_bridge

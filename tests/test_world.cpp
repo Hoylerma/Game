@@ -153,3 +153,32 @@ TEST_CASE("World: Hilfsfunktionen auf der Fixture") {
     CHECK(berlin > Fixed::from_int(11999));
     CHECK(berlin < Fixed::from_int(12001));
 }
+
+TEST_CASE("World: Kreise und Orte ohne Daten") {
+    World w = make_world();
+    for (const char* id : {"kr_a", "kr_b", "kr_leer"}) {
+        uhrwerk::District d;
+        d.id = id;
+        w.districts.push_back(d);
+    }
+    w.locations[0].district = 1;
+    w.locations[2].district = 1;
+    w.locations[3].district = 0;
+
+    CHECK(w.find_district("kr_a") == 0);
+    CHECK(w.find_district("kr_leer") == 2);
+    CHECK(w.find_district("kr_c") == kNone);
+    CHECK(w.find_district("") == kNone);
+
+    CHECK(w.district_locations(1) == std::vector<Index>{0, 2});
+    CHECK(w.district_locations(0) == std::vector<Index>{3});
+    CHECK(w.district_locations(2).empty());
+    CHECK(w.district_locations(kNone).empty());
+    CHECK(w.district_locations(3).empty());
+
+    // Ort "leer" hat keine Bevölkerungsblöcke → keine Daten.
+    CHECK(w.locations[0].has_data());
+    CHECK_FALSE(w.locations[3].has_data());
+    CHECK(w.locations_with_data() == 3);
+    CHECK(World{}.locations_with_data() == 0);
+}

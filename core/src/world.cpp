@@ -34,6 +34,10 @@ Index World::find_location(std::string_view id) const {
     return find_by(locations, id, [](const Location& l) -> std::string_view { return l.id; });
 }
 
+Index World::find_district(std::string_view id) const {
+    return find_by(districts, id, [](const District& d) -> std::string_view { return d.id; });
+}
+
 Index World::find_terrain(std::string_view id) const {
     return find_by(terrains, id, [](const TerrainType& t) -> std::string_view { return t.id; });
 }
@@ -79,6 +83,29 @@ std::vector<Index> World::state_locations(Index state) const {
         }
     }
     return result;
+}
+
+std::vector<Index> World::district_locations(Index district) const {
+    std::vector<Index> result;
+    if (!in_range(districts, district)) {
+        return result;
+    }
+    for (std::size_t i = 0; i < locations.size(); ++i) {
+        if (locations[i].district == district) {
+            result.push_back(static_cast<Index>(i));
+        }
+    }
+    return result;
+}
+
+std::size_t World::locations_with_data() const {
+    std::size_t count = 0;
+    for (const Location& location : locations) {
+        if (location.has_data()) {
+            ++count;
+        }
+    }
+    return count;
 }
 
 Index World::location_majority_confession(Index location) const {

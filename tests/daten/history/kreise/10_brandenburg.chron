@@ -1,0 +1,5 @@
+# Testdaten: Kreise Brandenburgs
+kreis kr_berlin {
+    name   = "Berlin"
+    quelle = "Testdaten"
+}

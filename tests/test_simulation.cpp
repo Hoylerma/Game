@@ -7,6 +7,7 @@
 #include <cstddef>
 #include <cstdint>
 #include <doctest/doctest.h>
+#include <filesystem>
 #include <string>
 #include <utility>
 #include <vector>
@@ -116,7 +117,7 @@ void step_until(Simulation& sim, const Date& date) {
 }
 
 /// Prüft Tag für Tag: Ort i ändert seine Bevölkerung genau an Monatstag (i % 28) + 1,
-/// Staat j seinen Schatz genau an Monatstag (j % 28) + 1.
+/// Staat j seinen Schatz genau an Monatstag (j % 28) + 1. Orte ohne Daten ändern sich nie.
 void check_staggering(Simulation& sim, int days) {
     for (int d = 0; d < days; ++d) {
         const World& w = sim.world();
@@ -135,7 +136,8 @@ void check_staggering(Simulation& sim, int days) {
 
         for (std::size_t i = 0; i < population.size(); ++i) {
             const bool changed = sim.world().location_population(static_cast<Index>(i)) != population[i];
-            const bool due = static_cast<std::int32_t>(i % 28) + 1 == today;
+            const bool due =
+                sim.world().locations[i].has_data() && static_cast<std::int32_t>(i % 28) + 1 == today;
             INFO("Ort " << i << " am " << date);
             CHECK(changed == due);
         }
@@ -236,9 +238,19 @@ TEST_CASE("Simulation: Prüfsumme erfasst den veränderlichen Zustand") {
     w.date = uhrwerk::next_day(w.date);
     CHECK(Simulation(w).checksum() != reference);
 
+    w = base;
+    w.locations[2].owner = 0;
+    CHECK(Simulation(w).checksum() != reference);
+
     Simulation pending(base);
     pending.submit(set_tax(0, Fixed::from_ratio(1, 5)));
     CHECK(pending.checksum() != reference);
+
+    // Die Kreiszugehörigkeit ist unveränderlicher Inhalt wie Gelände und Lage, kein Zustand.
+    w = base;
+    w.locations[0].district = 2;
+    w.locations[3].district = 1;
+    CHECK(Simulation(w).checksum() == reference);
 
     CHECK(Simulation(base).checksum() == reference);
 }
@@ -247,6 +259,7 @@ TEST_CASE("Simulation: Prüfsumme erfasst den veränderlichen Zustand") {
 
 TEST_CASE("Simulation: Staffelung auf der Fixture") {
     Simulation sim(fixture_without_plague());
+    REQUIRE_FALSE(sim.world().locations[5].has_data()); // zerbst rechnet nie
     check_staggering(sim, 75); // über einen Monatswechsel und den Jahreswechsel 1649
 }
 
@@ -475,11 +488,17 @@ TEST_CASE("Simulation: Seuche mit Wahrscheinlichkeit 1 und Chronikeintrag") {
     const World& after = sim.world();
 
     // Erwartung mit eigenem Ereignisstrom nachrechnen: chance(1) verbraucht nichts, uniform() eine Zahl je
-    // Ort.
+    // Ort mit Daten. Orte ohne Daten werden übersprungen.
     Pcg32 events(4711, RngStream::Ereignisse);
-    REQUIRE(after.chronicle.size() == before.locations.size());
+    REQUIRE(before.locations_with_data() == 5);
+    REQUIRE(after.chronicle.size() == before.locations_with_data());
+    std::size_t entry_index = 0;
     for (std::size_t i = 0; i < before.locations.size(); ++i) {
         const uhrwerk::Location& loc = before.locations[i];
+        if (!loc.has_data()) {
+            CHECK(after.locations[i].devastation == Fixed::zero());
+            continue;
+        }
         const Fixed loss = events.uniform(before.rules.plague_loss_min, before.rules.plague_loss_max);
         CHECK(loss >= fx("0.04"));
         CHECK(loss < fx("0.12"));
@@ -487,7 +506,7 @@ TEST_CASE("Simulation: Seuche mit Wahrscheinlichkeit 1 und Chronikeintrag") {
             const Fixed old_size = before.pops[static_cast<std::size_t>(p)].size;
             CHECK(after.pops[static_cast<std::size_t>(p)].size == old_size - old_size * loss);
         }
-        const uhrwerk::ChronicleEntry& e = after.chronicle[i];
+        const uhrwerk::ChronicleEntry& e = after.chronicle[entry_index++];
         const std::int64_t percent = (loss * Fixed::from_int(100)).round();
         CHECK(percent >= 4);
         CHECK(percent <= 12);
@@ -501,13 +520,17 @@ TEST_CASE("Simulation: Seuche mit Wahrscheinlichkeit 1 und Chronikeintrag") {
 
     // Am Folgetag keine weiteren Seuchen.
     sim.step_day();
-    CHECK(sim.world().chronicle.size() == before.locations.size());
+    CHECK(sim.world().chronicle.size() == before.locations_with_data());
 }
 
 TEST_CASE("Simulation: Seuche mit erhöhter Wahrscheinlichkeit folgt dem Ereignisstrom") {
     World w = testhilfen::load_fixture();
     w.rules.plague_chance = Fixed::from_ratio(1, 2);
-    const std::size_t locations = w.locations.size();
+    std::vector<bool> has_data;
+    for (const uhrwerk::Location& loc : w.locations) {
+        has_data.push_back(loc.has_data());
+    }
+    REQUIRE(has_data == std::vector<bool>{true, true, true, true, true, false});
     const Fixed chance = w.rules.plague_chance;
     const Fixed lo = w.rules.plague_loss_min;
     const Fixed hi = w.rules.plague_loss_max;
@@ -517,7 +540,10 @@ TEST_CASE("Simulation: Seuche mit erhöhter Wahrscheinlichkeit folgt dem Ereigni
     Pcg32 events(SimConfig{}.seed, RngStream::Ereignisse);
     std::vector<std::pair<Index, std::string>> expected;
     for (int year = 1649; year <= 1661; ++year) {
-        for (std::size_t i = 0; i < locations; ++i) {
+        for (std::size_t i = 0; i < has_data.size(); ++i) {
+            if (!has_data[i]) {
+                continue; // Orte ohne Daten ziehen keine Zufallszahlen
+            }
             if (events.chance(chance)) {
                 const Fixed loss = events.uniform(lo, hi);
                 expected.emplace_back(static_cast<Index>(i),
@@ -566,12 +592,107 @@ TEST_CASE("Simulation: Abbau der Verwüstung am Jahreswechsel") {
     for (int year = 1650; year <= 1748; ++year) {
         step_until(sim, Date{year, 1, 2});
         for (std::size_t i = 0; i < last.size(); ++i) {
+            if (!initial.locations[i].has_data()) {
+                CHECK(sim.world().locations[i].devastation == Fixed::zero()); // Ort ohne Daten
+                continue;
+            }
             CHECK(sim.world().locations[i].devastation < last[i]);
             last[i] = sim.world().locations[i].devastation;
         }
     }
     for (std::size_t i = 0; i < last.size(); ++i) {
+        if (!initial.locations[i].has_data()) {
+            continue;
+        }
         CHECK(last[i] > Fixed::zero());
         CHECK(last[i] < initial.locations[i].devastation * Fixed::from_ratio(5, 100));
+    }
+}
+
+// ─── Orte ohne Daten ────────────────────────────────────────────────────────
+
+TEST_CASE("Simulation: Orte ohne Daten ändern die Ergebnisse der übrigen Orte nicht") {
+    // Vergleichslauf ohne Orte ohne Daten: Fixture ohne zerbst.
+    const testhilfen::TempDir plain(true);
+    {
+        const std::filesystem::path path = plain / "history/orte/30_anhalt.chron";
+        const std::string text = testhilfen::read_file(path);
+        const std::size_t cut = text.find("\n# Ort ohne Daten");
+        REQUIRE(cut != std::string::npos);
+        testhilfen::write_file(path, text.substr(0, cut + 1));
+    }
+    // Lauf mit 41 Orten ohne Daten hinten (zerbst und 40 weitere: alle 28 Rechentage kommen vor).
+    const testhilfen::TempDir extended(true);
+    std::string extra;
+    for (int i = 0; i < 40; ++i) {
+        extra +=
+            "ort leer_" + std::to_string(i) + " {\n    name = \"Leer " + std::to_string(i) +
+            "\"\n    gelaende = ackerland\n    lage = { 12.5 51.5 }\n    flaeche = 100\n    stadt = nein\n"
+            "    kreis = kr_anhalt\n    quelle = \"Testdaten\"\n}\n";
+    }
+    testhilfen::write_file(extended / "history/orte/90_ohne_daten.chron", extra);
+
+    const uhrwerk::LoadResult loaded_plain = uhrwerk::load_world(plain.path());
+    const uhrwerk::LoadResult loaded_extended = uhrwerk::load_world(extended.path());
+    INFO(testhilfen::issues_text(loaded_plain) << testhilfen::issues_text(loaded_extended));
+    REQUIRE(loaded_plain.ok());
+    REQUIRE(loaded_extended.ok());
+    World a = *loaded_plain.world;
+    World b = *loaded_extended.world;
+    REQUIRE(a.locations.size() == 5);
+    REQUIRE(b.locations.size() == 46);
+    REQUIRE(b.locations_with_data() == 5);
+    // Viele Seuchen, damit der Ereignisstrom stark genutzt wird.
+    a.rules.plague_chance = Fixed::from_ratio(1, 2);
+    b.rules.plague_chance = Fixed::from_ratio(1, 2);
+
+    Simulation sa(std::move(a));
+    Simulation sb(std::move(b));
+    sa.submit(set_tax(1, Fixed::from_ratio(1, 5)));
+    sb.submit(set_tax(1, Fixed::from_ratio(1, 5)));
+    for (int year = 0; year < 30; ++year) {
+        sa.step_days(365);
+        sb.step_days(365);
+    }
+    const World& wa = sa.world();
+    const World& wb = sb.world();
+    REQUIRE(wa.date == wb.date);
+
+    // Bevölkerung Block für Block gleich.
+    REQUIRE(wa.pops.size() == wb.pops.size());
+    for (std::size_t p = 0; p < wa.pops.size(); ++p) {
+        INFO("Block " << p);
+        CHECK(wa.pops[p].size == wb.pops[p].size);
+        CHECK(wa.pops[p].location == wb.pops[p].location);
+    }
+    // Kassen und Monatswerte der Staaten gleich.
+    REQUIRE(wa.states.size() == wb.states.size());
+    for (std::size_t s = 0; s < wa.states.size(); ++s) {
+        INFO("Staat " << wa.states[s].tag);
+        CHECK(wa.states[s].treasury == wb.states[s].treasury);
+        CHECK(wa.states[s].last_month_income == wb.states[s].last_month_income);
+        CHECK(wa.states[s].last_month_expenses == wb.states[s].last_month_expenses);
+        CHECK(wa.states[s].tax_rate == wb.states[s].tax_rate);
+        CHECK(wa.state_population(static_cast<Index>(s)) == wb.state_population(static_cast<Index>(s)));
+    }
+    // Verwüstung der Orte mit Daten gleich; Orte ohne Daten unverändert.
+    for (std::size_t i = 0; i < wa.locations.size(); ++i) {
+        CHECK(wa.locations[i].devastation == wb.locations[i].devastation);
+    }
+    for (std::size_t i = wa.locations.size(); i < wb.locations.size(); ++i) {
+        const uhrwerk::Location& loc = wb.locations[i];
+        CHECK_FALSE(loc.has_data());
+        CHECK(loc.owner == kNone);
+        CHECK(loc.devastation == Fixed::zero());
+        CHECK(sb.location_economy(static_cast<Index>(i)).production == Fixed::zero());
+    }
+    // Gleiche Chronik: gleiche Seuchen an gleichen Orten (Orte ohne Daten ziehen keine Zufallszahlen).
+    REQUIRE(wa.chronicle.size() == wb.chronicle.size());
+    CHECK(wa.chronicle.size() > 30);
+    for (std::size_t k = 0; k < wa.chronicle.size(); ++k) {
+        CHECK(wa.chronicle[k].date == wb.chronicle[k].date);
+        CHECK(wa.chronicle[k].text == wb.chronicle[k].text);
+        CHECK(wa.chronicle[k].location == wb.chronicle[k].location);
+        CHECK(wa.chronicle[k].state == wb.chronicle[k].state);
     }
 }

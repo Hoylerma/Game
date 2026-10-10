@@ -253,7 +253,8 @@ Kartendarstellung (Grenzen, Beschriftung nach Zoomstufe); später ist er Grundla
 Wahlkreise. Kennung: Kleinbuchstaben, Ziffern, `_`, eindeutig. Kreise sind in M3 **nicht
 datiert**. `ort.kreis` muss auf einen bekannten Kreis verweisen (sonst Fehler); ein Kreis ohne Orte
 ist eine Warnung. Im Kern: `World::districts` (`District { id, name, source }`) und
-`Location::district` (`kNone`, wenn der Ort keinen Kreis hat).
+`Location::district` (`kNone`, wenn der Ort keinen Kreis hat). Der Ordner `history/kreise` darf
+fehlen oder leer sein (ältere Datenstände, Testdaten); dann hat kein Ort einen Kreis.
 
 ## 4. Startzustand
 

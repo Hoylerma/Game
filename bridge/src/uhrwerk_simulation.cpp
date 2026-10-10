@@ -5,12 +5,15 @@
 
 #include <algorithm>
 #include <array>
+#include <cstddef>
+#include <cstdint>
 #include <filesystem>
 #include <godot_cpp/core/class_db.hpp>
 #include <godot_cpp/core/error_macros.hpp>
 #include <godot_cpp/variant/color.hpp>
 #include <string>
 #include <string_view>
+#include <unordered_map>
 #include <utility>
 #include <vector>
 
@@ -21,6 +24,7 @@ using godot::Color;
 using godot::D_METHOD;
 using godot::Dictionary;
 using godot::PackedColorArray;
+using godot::PackedInt32Array;
 using godot::PackedStringArray;
 using godot::String;
 
@@ -67,6 +71,24 @@ const Color kDevastationNone(0.90f, 0.88f, 0.80f);
 const Color kDevastationFull(0.72f, 0.08f, 0.06f);
 constexpr double kDensityMax = 120.0; // Einwohner je km², ab hier dunkelste Stufe
 
+// Feste Palette für MAP_KREISE: palette[kreisindex % n]. Gedämpfte, gut unterscheidbare Töne;
+// aufeinanderfolgende Einträge liegen weit auseinander (CIELAB ΔE ≥ 37), alle mindestens
+// ΔE 25 vom Grau für Orte ohne Kreis (kUnknown) entfernt.
+const std::array<Color, 12> kKreisPalette = {
+    Color(0.80f, 0.50f, 0.40f), // Terrakotta
+    Color(0.44f, 0.62f, 0.80f), // Stahlblau
+    Color(0.88f, 0.77f, 0.40f), // Ocker
+    Color(0.52f, 0.72f, 0.46f), // Salbeigrün
+    Color(0.72f, 0.54f, 0.80f), // Lavendel
+    Color(0.93f, 0.60f, 0.28f), // Orange
+    Color(0.36f, 0.68f, 0.66f), // Petrol
+    Color(0.90f, 0.60f, 0.70f), // Rosa
+    Color(0.64f, 0.68f, 0.30f), // Oliv
+    Color(0.42f, 0.46f, 0.74f), // Indigo
+    Color(0.74f, 0.58f, 0.40f), // Hellbraun
+    Color(0.62f, 0.84f, 0.88f), // Eisblau
+};
+
 double density_of(const uhrwerk::World& world, std::int64_t location) {
     const uhrwerk::Location& loc = at(world.locations, location);
     const double area = loc.area_km2.to_double();
@@ -80,6 +102,11 @@ std::int64_t to_percent(uhrwerk::Fixed share) {
     return (share * uhrwerk::Fixed::from_int(100)).round();
 }
 
+std::int64_t find_in(const std::unordered_map<std::string, std::int64_t>& lookup, const String& id) {
+    const auto it = lookup.find(to_std(id));
+    return it == lookup.end() ? uhrwerk::kNone : it->second;
+}
+
 } // namespace
 
 UhrwerkSimulation::UhrwerkSimulation() = default;
@@ -89,10 +116,35 @@ const uhrwerk::World* UhrwerkSimulation::world() const {
     return simulation_ ? &simulation_->world() : nullptr;
 }
 
+void UhrwerkSimulation::build_lookups() {
+    location_lookup_.clear();
+    kreis_lookup_.clear();
+    kreis_location_counts_.clear();
+    const uhrwerk::World* w = world();
+    if (!w) {
+        return;
+    }
+    location_lookup_.reserve(w->locations.size());
+    for (std::size_t i = 0; i < w->locations.size(); ++i) {
+        location_lookup_.emplace(w->locations[i].id, static_cast<std::int64_t>(i));
+    }
+    kreis_lookup_.reserve(w->districts.size());
+    for (std::size_t i = 0; i < w->districts.size(); ++i) {
+        kreis_lookup_.emplace(w->districts[i].id, static_cast<std::int64_t>(i));
+    }
+    kreis_location_counts_.assign(w->districts.size(), 0);
+    for (const uhrwerk::Location& loc : w->locations) {
+        if (valid_index(kreis_location_counts_, loc.district)) {
+            ++kreis_location_counts_[static_cast<std::size_t>(loc.district)];
+        }
+    }
+}
+
 String UhrwerkSimulation::load_scenario(const String& data_path, const String& scenario_id,
                                         std::int64_t seed) {
     simulation_.reset();
     load_warnings_.clear();
+    build_lookups();
 
     uhrwerk::LoadResult result = uhrwerk::load_world(to_path(data_path), to_std(scenario_id));
 
@@ -117,6 +169,7 @@ String UhrwerkSimulation::load_scenario(const String& data_path, const String& s
     uhrwerk::SimConfig config;
     config.seed = static_cast<std::uint64_t>(seed);
     simulation_ = std::make_unique<uhrwerk::Simulation>(std::move(*result.world), config);
+    build_lookups();
     return String();
 }
 
@@ -204,8 +257,7 @@ std::int64_t UhrwerkSimulation::get_location_count() const {
 }
 
 std::int64_t UhrwerkSimulation::get_location_index(const String& id) const {
-    const uhrwerk::World* w = world();
-    return w ? w->find_location(to_std(id)) : uhrwerk::kNone;
+    return world() ? find_in(location_lookup_, id) : uhrwerk::kNone;
 }
 
 Dictionary UhrwerkSimulation::get_location(std::int64_t index) const {
@@ -220,6 +272,12 @@ Dictionary UhrwerkSimulation::get_location(std::int64_t index) const {
 
     result["id"] = to_godot(loc.id);
     result["name"] = to_godot(loc.name);
+    // Orte ohne Daten (seit M3): kein Besitzer, keine Blöcke, Simulationszahlen 0; Kartenfelder
+    // (Gelände, Stadt, Fläche, Kreis) wie in den Daten.
+    result["has_data"] = loc.has_data();
+    result["kreis_index"] = valid_index(w->districts, loc.district) ? loc.district : uhrwerk::kNone;
+    result["kreis_name"] =
+        valid_index(w->districts, loc.district) ? to_godot(at(w->districts, loc.district).name) : String();
     result["owner_index"] = loc.owner;
     result["owner_name"] =
         valid_index(w->states, loc.owner) ? to_godot(at(w->states, loc.owner).name) : String();
@@ -262,13 +320,67 @@ Dictionary UhrwerkSimulation::get_location(std::int64_t index) const {
     return result;
 }
 
+PackedInt32Array UhrwerkSimulation::get_location_owner_indices() const {
+    PackedInt32Array result;
+    const uhrwerk::World* w = world();
+    if (!w) {
+        return result;
+    }
+    const auto count = static_cast<std::int64_t>(w->locations.size());
+    result.resize(count);
+    for (std::int64_t i = 0; i < count; ++i) {
+        const uhrwerk::Index owner = at(w->locations, i).owner;
+        result.set(i, valid_index(w->states, owner) ? owner : uhrwerk::kNone);
+    }
+    return result;
+}
+
+PackedInt32Array UhrwerkSimulation::get_location_kreis_indices() const {
+    PackedInt32Array result;
+    const uhrwerk::World* w = world();
+    if (!w) {
+        return result;
+    }
+    const auto count = static_cast<std::int64_t>(w->locations.size());
+    result.resize(count);
+    for (std::int64_t i = 0; i < count; ++i) {
+        const uhrwerk::Index district = at(w->locations, i).district;
+        result.set(i, valid_index(w->districts, district) ? district : uhrwerk::kNone);
+    }
+    return result;
+}
+
+std::int64_t UhrwerkSimulation::get_kreis_count() const {
+    const uhrwerk::World* w = world();
+    return w ? static_cast<std::int64_t>(w->districts.size()) : 0;
+}
+
+std::int64_t UhrwerkSimulation::get_kreis_index(const String& id) const {
+    return world() ? find_in(kreis_lookup_, id) : uhrwerk::kNone;
+}
+
+Dictionary UhrwerkSimulation::get_kreis(std::int64_t index) const {
+    Dictionary result;
+    const uhrwerk::World* w = world();
+    if (!w || !valid_index(w->districts, index)) {
+        return result;
+    }
+    const uhrwerk::District& district = at(w->districts, index);
+    result["id"] = to_godot(district.id);
+    result["name"] = to_godot(district.name);
+    result["location_count"] =
+        valid_index(kreis_location_counts_, index) ? at(kreis_location_counts_, index) : std::int64_t{0};
+    result["source"] = to_godot(district.source);
+    return result;
+}
+
 PackedColorArray UhrwerkSimulation::get_map_colors(std::int64_t mode) const {
     PackedColorArray colors;
     const uhrwerk::World* w = world();
     if (!w) {
         return colors;
     }
-    ERR_FAIL_COND_V_MSG(mode < MAP_POLITICAL || mode > MAP_DEVASTATION, colors,
+    ERR_FAIL_COND_V_MSG(mode < MAP_POLITICAL || mode > MAP_KREISE, colors,
                         "get_map_colors: unbekannter Kartenmodus.");
 
     const auto count = static_cast<std::int64_t>(w->locations.size());
@@ -300,8 +412,18 @@ PackedColorArray UhrwerkSimulation::get_map_colors(std::int64_t mode) const {
         case MAP_DEVASTATION:
             color = blend(kDevastationNone, kDevastationFull, loc.devastation.to_double());
             break;
+        case MAP_KREISE:
+            if (valid_index(w->districts, loc.district)) {
+                color = kKreisPalette[static_cast<std::size_t>(loc.district) % kKreisPalette.size()];
+            }
+            break;
         default:
             break;
+        }
+        // Orte ohne Daten: in den datenabhängigen Modi Alpha 0, die Godot-Seite zeichnet dort
+        // eine Schraffur „keine Daten“. Gelände und Kreise sind auch ohne Daten bekannt.
+        if (!loc.has_data() && mode != MAP_TERRAIN && mode != MAP_KREISE) {
+            color.a = 0.0f;
         }
         colors.set(i, color);
     }
@@ -392,6 +514,14 @@ void UhrwerkSimulation::_bind_methods() {
     ClassDB::bind_method(D_METHOD("get_location_count"), &UhrwerkSimulation::get_location_count);
     ClassDB::bind_method(D_METHOD("get_location_index", "id"), &UhrwerkSimulation::get_location_index);
     ClassDB::bind_method(D_METHOD("get_location", "index"), &UhrwerkSimulation::get_location);
+    ClassDB::bind_method(D_METHOD("get_location_owner_indices"),
+                         &UhrwerkSimulation::get_location_owner_indices);
+    ClassDB::bind_method(D_METHOD("get_location_kreis_indices"),
+                         &UhrwerkSimulation::get_location_kreis_indices);
+
+    ClassDB::bind_method(D_METHOD("get_kreis_count"), &UhrwerkSimulation::get_kreis_count);
+    ClassDB::bind_method(D_METHOD("get_kreis_index", "id"), &UhrwerkSimulation::get_kreis_index);
+    ClassDB::bind_method(D_METHOD("get_kreis", "index"), &UhrwerkSimulation::get_kreis);
 
     ClassDB::bind_method(D_METHOD("get_map_colors", "mode"), &UhrwerkSimulation::get_map_colors);
 
@@ -409,6 +539,7 @@ void UhrwerkSimulation::_bind_methods() {
     BIND_ENUM_CONSTANT(MAP_CONFESSION);
     BIND_ENUM_CONSTANT(MAP_TERRAIN);
     BIND_ENUM_CONSTANT(MAP_DEVASTATION);
+    BIND_ENUM_CONSTANT(MAP_KREISE);
 }
 
 } // namespace uhrwerk_bridge

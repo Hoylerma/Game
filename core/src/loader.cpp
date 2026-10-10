@@ -89,6 +89,27 @@ bool is_location_id(std::string_view id) {
                        [](char c) { return (c >= 'a' && c <= 'z') || (c >= '0' && c <= '9') || c == '_'; });
 }
 
+/// Sieht der Schlüssel wie ein Datum aus (beginnt mit einer Ziffer)? Dann ist er ein datierter
+/// Block (Abschnitt 3.8) – gültig oder nicht.
+bool looks_dated(std::string_view key) {
+    return !key.empty() && key[0] >= '0' && key[0] <= '9';
+}
+
+/// "'a'", "'a' und 'b'", "'a', 'b' und 'c'"
+std::string quote_list(const std::vector<std::string_view>& keys) {
+    std::string result;
+    for (std::size_t i = 0; i < keys.size(); ++i) {
+        if (i > 0) {
+            result += i + 1 == keys.size() ? " und " : ", ";
+        }
+        result += quote(keys[i]);
+    }
+    return result;
+}
+
+/// Die vier Simulationsfelder eines Ortes: alle oder keines (Abschnitt 3.6).
+constexpr std::string_view kSimulationFields[] = {"besitzer", "bevoelkerung", "konfession", "verwuestung"};
+
 bool is_state_tag(std::string_view tag) {
     if (tag.size() < 2 || tag.size() > 4) {
         return false;
@@ -349,6 +370,11 @@ public:
         return node;
     }
 
+    /// Ist das Feld angegeben (auch wenn es fehlerhaft ist, z. B. mit falschem Operator)?
+    bool has(std::string_view key) const {
+        return fields_.find(key) != fields_.end() || broken_.find(key) != broken_.end();
+    }
+
     const std::string& file() const { return file_; }
     const std::string& what() const { return what_; }
     int line() const { return block_.line; }
@@ -419,6 +445,7 @@ struct Definition {
 using Registry = std::map<std::string, Definition, std::less<>>;
 
 struct LocationDraft {
+    bool without_data = false; // keines der vier Simulationsfelder (Ort ohne Daten)
     std::int64_t population = 0;
     std::vector<std::pair<Index, std::int64_t>> confessions; // Konfession, Prozent (Reihenfolge der Datei)
 };
@@ -466,12 +493,18 @@ public:
         for (const std::string& name : list_folder("history/staaten")) {
             process(name, [&](const SourceFile& f) { load_states(f); });
         }
+        // Kreise (seit M3) vor den Orten, die auf sie verweisen. Ältere Datenstände haben
+        // keinen Ordner history/kreise; das ist kein Fehler.
+        for (const std::string& name : list_folder("history/kreise", Folder::Optional)) {
+            process(name, [&](const SourceFile& f) { load_districts(f); });
+        }
         for (const std::string& name : list_folder("history/orte")) {
             process(name, [&](const SourceFile& f) { load_locations(f); });
         }
 
         check_players(scenarios);
         check_capitals();
+        check_districts();
 
         if (issues_.has_errors() || selected == nullptr) {
             return std::nullopt;
@@ -519,10 +552,18 @@ private:
         return SourceFile{relative, std::move(parsed.root)};
     }
 
+    enum class Folder : std::uint8_t {
+        Required, // fehlender oder leerer Ordner ist ein Fehler
+        Optional, // fehlender oder leerer Ordner ist in Ordnung
+    };
+
     /// Alle *.chron-Dateien eines Ordners, nach Dateiname sortiert.
-    std::vector<std::string> list_folder(const std::string& folder) {
+    std::vector<std::string> list_folder(const std::string& folder, Folder kind = Folder::Required) {
         const fs::path dir = data_dir_ / fs::path(folder);
         std::error_code ec;
+        if (!fs::exists(dir, ec) && kind == Folder::Optional) {
+            return {};
+        }
         if (!fs::is_directory(dir, ec)) {
             issues_.error(folder, 0, "Ordner fehlt");
             return {};
@@ -541,7 +582,7 @@ private:
             issues_.error(folder, 0, "Ordner kann nicht gelesen werden: " + ec.message());
         }
         std::sort(names.begin(), names.end());
-        if (names.empty() && !ec) {
+        if (names.empty() && !ec && kind == Folder::Required) {
             issues_.error(folder, 0, "Ordner enthält keine .chron-Dateien");
         }
         std::vector<std::string> result;
@@ -786,6 +827,37 @@ private:
         });
     }
 
+    void load_districts(const SourceFile& file) {
+        for_each_definition(file, "kreis", "kreis <kennung> { … }", [&](const ScriptNode& node) {
+            if (!is_location_id(node.value)) {
+                issues_.error(file.name, node.line,
+                              "ungültige Kreiskennung " + quote(node.value) +
+                                  " (nur Kleinbuchstaben a–z, Ziffern und '_')");
+            }
+            // Kreise sind in M3 nicht datiert (Abschnitt 3.9).
+            ScriptNode plain = node;
+            plain.children.clear();
+            for (const ScriptNode& child : node.children) {
+                if (looks_dated(child.key)) {
+                    issues_.error(file.name, child.line,
+                                  "datierter Eintrag " + quote(child.key) + " in kreis " + node.value +
+                                      ": Kreise können nicht datiert werden");
+                    continue;
+                }
+                plain.children.push_back(child);
+            }
+            Fields f(plain, file.name, "kreis " + node.value, issues_, {"name", "quelle"});
+            District d;
+            d.id = node.value;
+            d.name = f.text("name").value_or("");
+            d.source = f.text("quelle").value_or("");
+            const auto index = static_cast<Index>(world_.districts.size());
+            if (register_id(districts_, d.id, index, file.name, node.line, "Kreis")) {
+                world_.districts.push_back(std::move(d));
+            }
+        });
+    }
+
     void load_locations(const SourceFile& file) {
         for_each_definition(file, "ort", "ort <kennung> { … }", [&](const ScriptNode& node) {
             if (!is_location_id(node.value)) {
@@ -794,20 +866,39 @@ private:
                                   " (nur Kleinbuchstaben a–z, Ziffern und '_')");
             }
             const ScriptNode merged =
-                apply_history(node, file.name, "ort " + node.value, {"lage", "flaeche"});
+                apply_history(node, file.name, "ort " + node.value, {"lage", "flaeche", "kreis"});
             Fields f(merged, file.name, "ort " + node.value, issues_,
-                     {"name", "besitzer", "gelaende", "lage", "flaeche", "bevoelkerung", "stadt",
+                     {"name", "besitzer", "gelaende", "lage", "flaeche", "bevoelkerung", "stadt", "kreis",
                       "konfession", "verwuestung", "quelle"});
             Location loc;
             LocationDraft draft;
             loc.id = node.value;
             loc.name = f.text("name").value_or("");
-            if (const auto owner = f.text("besitzer")) {
-                loc.owner = lookup(states_, *owner);
-                if (loc.owner == kNone) {
-                    issues_.error(file.name, merged.find("besitzer")->line,
-                                  "unbekannter Staat " + quote(*owner) + " als Besitzer von ort " +
-                                      node.value);
+
+            // Simulationsfelder zum Startdatum: alle vier oder keines (Abschnitt 3.6). Ohne alle
+            // ist der Ort ein Ort ohne Daten: kein Besitzer, keine Blöcke, Verwüstung 0.
+            std::vector<std::string_view> present;
+            std::vector<std::string_view> missing;
+            for (const std::string_view key : kSimulationFields) {
+                (f.has(key) ? present : missing).push_back(key);
+            }
+            draft.without_data = present.empty();
+            if (!present.empty() && !missing.empty()) {
+                issues_.error(file.name, node.line,
+                              "Ort " + node.value + " hat zum Startdatum " + quote_list(present) +
+                                  ", aber nicht " + quote_list(missing) +
+                                  " (ein Ort hat alle vier Simulationsfelder besitzer, bevoelkerung, "
+                                  "konfession und verwuestung oder keines)");
+            }
+
+            if (f.has("besitzer")) {
+                if (const auto owner = f.text("besitzer")) {
+                    loc.owner = lookup(states_, *owner);
+                    if (loc.owner == kNone) {
+                        issues_.error(file.name, merged.find("besitzer")->line,
+                                      "unbekannter Staat " + quote(*owner) + " als Besitzer von ort " +
+                                          node.value);
+                    }
                 }
             }
             if (const auto terrain = f.text("gelaende")) {
@@ -819,10 +910,25 @@ private:
             }
             read_position(f, loc);
             loc.area_km2 = f.fixed("flaeche", above_up_to(fx(0), fx(1'000'000))).value_or(Fixed{});
-            draft.population = f.integer("bevoelkerung", 1, 100'000'000).value_or(0);
+            if (f.has("bevoelkerung")) {
+                draft.population = f.integer("bevoelkerung", 1, 100'000'000).value_or(0);
+            }
             loc.is_city = f.boolean("stadt").value_or(false);
-            read_confessions(f, draft);
-            loc.devastation = f.fixed("verwuestung", between(fx(0), fx(1))).value_or(Fixed{});
+            if (f.has("kreis")) {
+                if (const auto district = f.text("kreis")) {
+                    loc.district = lookup(districts_, *district);
+                    if (loc.district == kNone) {
+                        issues_.error(file.name, merged.find("kreis")->line,
+                                      "unbekannter Kreis " + quote(*district) + " in ort " + node.value);
+                    }
+                }
+            }
+            if (f.has("konfession")) {
+                read_confessions(f, draft);
+            }
+            if (f.has("verwuestung")) {
+                loc.devastation = f.fixed("verwuestung", between(fx(0), fx(1))).value_or(Fixed{});
+            }
             loc.source = f.text("quelle").value_or("");
 
             const auto index = static_cast<Index>(world_.locations.size());
@@ -946,8 +1052,7 @@ private:
         merged.children.clear();
         std::map<Date, const ScriptNode*> dated;
         for (const ScriptNode& child : node.children) {
-            const bool looks_dated = !child.key.empty() && child.key[0] >= '0' && child.key[0] <= '9';
-            if (!looks_dated) {
+            if (!looks_dated(child.key)) {
                 merged.children.push_back(child);
                 continue;
             }
@@ -1039,13 +1144,41 @@ private:
                                   state.tag);
                 continue;
             }
-            if (world_.locations[static_cast<std::size_t>(location)].owner != static_cast<Index>(i)) {
+            const Index owner = world_.locations[static_cast<std::size_t>(location)].owner;
+            if (drafts_[static_cast<std::size_t>(location)].without_data) {
+                issues_.error(ref.file, ref.line,
+                              "Hauptstadt " + quote(ref.location_id) + " von " + state.tag +
+                                  " ist ein Ort ohne Daten (die Hauptstadt muss ein Ort mit Daten dieses "
+                                  "Staates sein)");
+                continue;
+            }
+            if (owner != static_cast<Index>(i)) {
                 issues_.error(ref.file, ref.line,
                               "Hauptstadt " + quote(ref.location_id) + " von " + state.tag +
                                   " gehört nicht zu diesem Staat");
                 continue;
             }
             state.capital = location;
+        }
+    }
+
+    /// Ein Kreis ohne Orte ist eine Warnung (Abschnitt 3.9).
+    void check_districts() {
+        std::vector<bool> used(world_.districts.size(), false);
+        for (const Location& loc : world_.locations) {
+            if (loc.district != kNone) {
+                used[static_cast<std::size_t>(loc.district)] = true;
+            }
+        }
+        for (std::size_t i = 0; i < world_.districts.size(); ++i) {
+            if (used[i]) {
+                continue;
+            }
+            const District& district = world_.districts[i];
+            const auto it = districts_.find(district.id);
+            const std::string file = it != districts_.end() ? it->second.file : std::string("history/kreise");
+            const int line = it != districts_.end() ? it->second.line : 0;
+            issues_.warning(file, line, "Kreis " + quote(district.id) + " hat keine Orte");
         }
     }
 
@@ -1105,6 +1238,7 @@ private:
     Registry confessions_;
     Registry professions_;
     Registry states_;
+    Registry districts_;
     Registry locations_;
     Registry scenarios_;
 

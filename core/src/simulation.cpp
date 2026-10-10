@@ -282,6 +282,11 @@ void Simulation::run_yearly() {
     const Rules& rules = world_.rules;
     for (std::size_t i = 0; i < world_.locations.size(); ++i) {
         Location& loc = world_.locations[i];
+        // Orte ohne Bevölkerungsblöcke (Orte ohne Daten) werden übersprungen: keine Zufallszahlen,
+        // kein Abbau der Verwüstung (chronik-skript.md, Abschnitt 5). Blöcke mit Größe 0 zählen mit.
+        if (loc.pop_count == 0) {
+            continue;
+        }
 
         // 1. Seuche
         if (rng_events_.chance(rules.plague_chance)) {

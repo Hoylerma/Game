@@ -9,6 +9,7 @@ ort dresden {
     stadt        = ja
     konfession   = { lutherisch = 95 katholisch = 5 }
     verwuestung  = 0.2
+    kreis        = kr_dresden
     quelle       = "Testdaten, geschätzt"
 }
 
@@ -22,5 +23,5 @@ ort leipzig {
     stadt        = ja
     konfession   = { lutherisch = 100 reformiert = 0 }   # 0 % → kein Block
     verwuestung  = 0.3
-    quelle       = "Testdaten, geschätzt"
+    quelle       = "Testdaten, geschätzt"   # ohne Kreis
 }

@@ -1,0 +1,10 @@
+# Testdaten: zwei Kreise in einer Datei (Reihenfolge der Datei zählt)
+kreis kr_dresden {
+    name   = "Dresden"
+    quelle = "Testdaten"
+}
+
+kreis kr_anhalt {
+    name   = "Anhalt"
+    quelle = "Testdaten"
+}

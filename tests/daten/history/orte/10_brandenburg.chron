@@ -9,6 +9,7 @@ ort berlin_coelln {
     stadt        = ja
     konfession   = { lutherisch = 90 reformiert = 10 }
     verwuestung  = 0.4
+    kreis        = kr_berlin
     quelle       = "Testdaten, geschätzt"
 }
 
@@ -22,5 +23,6 @@ ort potsdam {
     stadt        = nein
     konfession   = { lutherisch = 100 }
     verwuestung  = 0.6
+    kreis        = kr_berlin
     quelle       = "Testdaten, geschätzt"
 }

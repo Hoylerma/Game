@@ -12,6 +12,7 @@
 //   2. Demografie der Orte, die heute ihren Rechentag haben
 //   3. Wirtschaft der Staaten, die heute ihren Rechentag haben
 //   4. Am 1. Januar: Jahresereignisse (Seuchen) und Abbau der Verwüstung
+//      (Orte ohne Bevölkerungsblöcke werden dabei übersprungen)
 //   5. Datum um einen Tag weiterschalten
 
 #include "uhrwerk/rng.hpp"
@@ -62,6 +63,10 @@ public:
 
     /// FNV-1a-64 über den gesamten veränderlichen Zustand (Datum, Bevölkerung,
     /// Kassen, Steuersätze, Verwüstung, Zufallsströme, Chronik).
+    ///
+    /// Orte ohne Daten (seit M3) sind über Besitzer (kNone) und Blockzahl (0) erfasst. Die
+    /// Kreiszugehörigkeit ist wie Gelände, Lage und Name unveränderlicher Inhalt und gehört
+    /// nicht dazu; so ändern neue Kreise in den Daten die Referenzprüfsumme nicht.
     std::uint64_t checksum() const;
 
 private:

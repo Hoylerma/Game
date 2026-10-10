@@ -9,6 +9,7 @@
 #include "uhrwerk/date.hpp"
 #include "uhrwerk/fixed.hpp"
 
+#include <cstddef>
 #include <cstdint>
 #include <string>
 #include <string_view>
@@ -65,19 +66,34 @@ struct PopBlock {
 };
 
 /// Ort – kleinste Karteneinheit (data/history/orte/*.chron).
+///
+/// Orte ohne Daten (seit M3, chronik-skript.md Abschnitt 3.6) erscheinen nur auf der Karte:
+/// Besitzer kNone, keine Bevölkerungsblöcke, Verwüstung 0. Sie nehmen an der Simulation nicht teil.
 struct Location {
     std::string id;
     std::string name;
-    Index owner = kNone;
+    Index owner = kNone; // kNone bei Orten ohne Daten
     Index terrain = kNone;
-    Fixed longitude; // Grad Ost (WGS84)
-    Fixed latitude;  // Grad Nord (WGS84)
+    Index district = kNone; // Kreis (seit M3), kNone ohne Kreis; unveränderlich
+    Fixed longitude;        // Grad Ost (WGS84)
+    Fixed latitude;         // Grad Nord (WGS84)
     Fixed area_km2;
     bool is_city = false;
     Fixed devastation;   // Kriegsverwüstung 0..1
     std::string source;  // Quellenangabe oder "Testdaten"
     Index first_pop = 0; // Bevölkerungsblöcke liegen zusammenhängend: [first_pop, first_pop + pop_count)
     Index pop_count = 0;
+
+    /// Ort mit Simulationsdaten? Orte ohne Daten haben keine Bevölkerungsblöcke.
+    bool has_data() const { return pop_count > 0; }
+};
+
+/// Kreis (data/history/kreise/*.chron, seit M3): Gruppe von 4–12 benachbarten Orten für die
+/// Kartendarstellung, später für Verwaltung und Wahlkreise. In M3 nicht datiert.
+struct District {
+    std::string id; // z. B. "kr_berlin"
+    std::string name;
+    std::string source;
 };
 
 /// Staat bzw. Reichsstand (data/history/staaten/*.chron).
@@ -136,12 +152,14 @@ struct World {
     std::vector<Confession> confessions;
     std::vector<Profession> professions;
     std::vector<State> states;
+    std::vector<District> districts;
     std::vector<Location> locations;
     std::vector<PopBlock> pops;
     std::vector<ChronicleEntry> chronicle;
 
     Index find_state(std::string_view tag) const;
     Index find_location(std::string_view id) const;
+    Index find_district(std::string_view id) const;
     Index find_terrain(std::string_view id) const;
     Index find_confession(std::string_view id) const;
     Index find_profession(std::string_view id) const;
@@ -150,6 +168,10 @@ struct World {
     Fixed state_population(Index state) const;
     /// Indizes aller Orte eines Staates, aufsteigend.
     std::vector<Index> state_locations(Index state) const;
+    /// Indizes aller Orte eines Kreises, aufsteigend.
+    std::vector<Index> district_locations(Index district) const;
+    /// Anzahl der Orte mit Simulationsdaten (Location::has_data).
+    std::size_t locations_with_data() const;
     /// Konfession mit den meisten Angehörigen im Ort (bei Gleichstand der kleinere Index).
     Index location_majority_confession(Index location) const;
 };

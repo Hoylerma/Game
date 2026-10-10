@@ -48,8 +48,8 @@ Aufruf:
 
 Befehle:
   pruefen        Spieldaten laden und alle Fehler und Warnungen ausgeben
-  info           Überblick über Szenario, Staaten und Orte
-  lauf           Simulation laufen lassen und Ergebnis ausgeben
+  info           Überblick über Szenario, Staaten, Orte (mit und ohne Daten) und Kreise
+  lauf           Simulation laufen lassen und Ergebnis ausgeben (mit Lade- und Laufzeit)
   determinismus  Zwei Läufe mit gleichem Seed vergleichen (Prüfsumme nach jedem Jahr)
                  und einen Lauf mit Seed+1 (Abweichung erwartet)
 
@@ -306,7 +306,27 @@ void print_table(const std::vector<std::vector<std::string>>& rows, const std::v
 }
 
 std::string plural(std::size_t n, std::string_view one, std::string_view many) {
-    return std::to_string(n) + " " + std::string(n == 1 ? one : many);
+    return group_digits(std::to_string(n)) + " " + std::string(n == 1 ? one : many);
+}
+
+/// "(5 mit Daten, 1 ohne Daten)"
+std::string location_data_split(const World& w) {
+    const std::size_t with_data = w.locations_with_data();
+    return "(" + group_digits(std::to_string(with_data)) + " mit Daten, " +
+           group_digits(std::to_string(w.locations.size() - with_data)) + " ohne Daten)";
+}
+
+/// "6 Orte (5 mit Daten, 1 ohne Daten)"
+std::string describe_locations(const World& w) {
+    return plural(w.locations.size(), "Ort", "Orte") + " " + location_data_split(w);
+}
+
+/// "(5 Orte mit Kreis, 1 ohne Kreis)"
+std::string location_district_split(const World& w) {
+    const auto without = static_cast<std::size_t>(std::count_if(
+        w.locations.begin(), w.locations.end(), [](const uhrwerk::Location& l) { return l.district < 0; }));
+    return "(" + plural(w.locations.size() - without, "Ort", "Orte") + " mit Kreis, " +
+           group_digits(std::to_string(without)) + " ohne Kreis)";
 }
 
 // ─── Daten laden ────────────────────────────────────────────────────────────
@@ -429,7 +449,7 @@ int cmd_pruefen(const Options& o, const fs::path& data_dir) {
               << plural(w.confessions.size(), "Konfession", "Konfessionen") << ", "
               << plural(w.professions.size(), "Beruf", "Berufe") << ", "
               << plural(w.states.size(), "Staat", "Staaten") << ", "
-              << plural(w.locations.size(), "Ort", "Orte") << ", "
+              << plural(w.districts.size(), "Kreis", "Kreise") << ", " << describe_locations(w) << ", "
               << plural(w.pops.size(), "Bevölkerungsblock", "Bevölkerungsblöcke") << ".\n";
     return kExitOk;
 }
@@ -452,8 +472,11 @@ int cmd_info(const Options& o, const fs::path& data_dir) {
               << plural(w.confessions.size(), "Konfession", "Konfessionen") << ", "
               << plural(w.professions.size(), "Beruf", "Berufe") << '\n'
               << "              " << plural(w.states.size(), "Staat", "Staaten") << ", "
-              << plural(w.locations.size(), "Ort", "Orte") << ", "
               << plural(w.pops.size(), "Bevölkerungsblock", "Bevölkerungsblöcke") << '\n'
+              << "Orte:         " << group_digits(std::to_string(w.locations.size())) << " "
+              << location_data_split(w) << '\n'
+              << "Kreise:       " << group_digits(std::to_string(w.districts.size())) << " "
+              << location_district_split(w) << '\n'
               << "Bevölkerung:  " << format_int(total.round()) << "\n\n";
 
     std::vector<std::vector<std::string>> rows;
@@ -504,10 +527,15 @@ void print_chronicle(const World& w) {
 }
 
 int cmd_lauf(const Options& o, const fs::path& data_dir) {
+    const auto load_start = std::chrono::steady_clock::now();
     auto world = load(data_dir, o.scenario, true);
     if (!world) {
         return kExitDataError;
     }
+    const double load_seconds =
+        std::chrono::duration<double>(std::chrono::steady_clock::now() - load_start).count();
+    const std::string content =
+        plural(world->states.size(), "Staat", "Staaten") + ", " + describe_locations(*world);
     const Date start = world->date;
     const Period period = period_from(o, start);
     const Date end_of_years = add_years(start, period.years);
@@ -521,6 +549,8 @@ int cmd_lauf(const Options& o, const fs::path& data_dir) {
     const double seconds = std::chrono::duration<double>(t1 - t0).count();
 
     std::cout << "Szenario:  " << scenario_name << '\n'
+              << "Inhalt:    " << content << '\n'
+              << "Laden:     " << format_seconds(load_seconds) << '\n'
               << "Seed:      " << o.seed << '\n'
               << "Start:     " << uhrwerk::format_date_long(start) << '\n'
               << "Ende:      " << uhrwerk::format_date_long(sim.world().date) << " (" << format_int(days)
