@@ -7,7 +7,8 @@
 # ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
 # und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 #
-# Umfang: Polnischer Saum in Westgalizien (Auschwitz, Zator, Saybusch, Chrzanów; 1772–1918 österreichisch).
+# Umfang: Polnischer Saum in Westgalizien (Auschwitz, Zator, Saybusch, Chrzanów; 1772–1918
+# österreichisch).
 
 ort jaworzno {
     name     = "Jaworzno"

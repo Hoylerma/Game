@@ -99,14 +99,14 @@ ort lamspringe {
     quelle   = "GeoNames (CC BY 4.0), geonameid 2881661; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort alfeld_hildesheim {
-    name     = "Alfeld (Hildesheim)"
+ort alfeld_leine {
+    name     = "Alfeld (Leine)"
     gelaende = huegelland
     lage     = { 9.8199 51.9838 }
     flaeche  = 130
     stadt    = nein
-    kreis    = kr_alfeld_hildesheim
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2958533; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+    kreis    = kr_alfeld_leine
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2958533; Name Alfeld (Leine) aus den GeoNames-Alternativnamen (GeoNames: Alfeld); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort nordstemmen {
@@ -115,7 +115,7 @@ ort nordstemmen {
     lage     = { 9.7835 52.162 }
     flaeche  = 142
     stadt    = nein
-    kreis    = kr_alfeld_hildesheim
+    kreis    = kr_alfeld_leine
     quelle   = "GeoNames (CC BY 4.0), geonameid 2861866; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
@@ -125,7 +125,7 @@ ort gronau_hildesheim {
     lage     = { 9.7768 52.0846 }
     flaeche  = 114
     stadt    = nein
-    kreis    = kr_alfeld_hildesheim
+    kreis    = kr_alfeld_leine
     quelle   = "GeoNames (CC BY 4.0), geonameid 2917139; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
@@ -135,6 +135,6 @@ ort duingen {
     lage     = { 9.6958 52.0045 }
     flaeche  = 115
     stadt    = nein
-    kreis    = kr_alfeld_hildesheim
+    kreis    = kr_alfeld_leine
     quelle   = "GeoNames (CC BY 4.0), geonameid 2934697; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }

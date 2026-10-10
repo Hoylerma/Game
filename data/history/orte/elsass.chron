@@ -7,7 +7,8 @@
 # ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
 # und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 #
-# Umfang: Elsass mit Belfort (heute Départements Bas-Rhin, Haut-Rhin und Territoire de Belfort).
+# Umfang: Elsass mit Belfort (heute Départements Bas-Rhin, Haut-Rhin und Territoire de
+# Belfort).
 
 ort weissenburg {
     name     = "Weißenburg"
@@ -269,14 +270,14 @@ ort la_broque {
     quelle   = "GeoNames (CC BY 4.0), geonameid 3010778; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort rhinau {
-    name     = "Rhinau"
+ort rheinau {
+    name     = "Rheinau"
     gelaende = flussaue
     lage     = { 7.7053 48.3202 }
     flaeche  = 121
     stadt    = nein
     kreis    = kr_strassburg
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2983761; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2983761; deutscher Name aus den GeoNames-Alternativnamen (heute Rhinau); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort hilsenheim {

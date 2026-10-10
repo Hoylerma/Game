@@ -12,8 +12,12 @@
 # Residenz und an der Universität Frankfurt. Cottbus steht in lausitz.chron,
 # Hinterpommern in pommern.chron, Halberstadt in magdeburg.chron.
 #
-# Ergänzt in Meilenstein M3 (tools/geodaten/orte.py): weitere Orte ohne Daten (ohne Historie) aus GeoNames, räumlich ausgewählt, Gelände aus dem Höhenmodell, Fläche aus der Karte.
-# Umfang der Landschaft Brandenburg: Mark Brandenburg mit Altmark (heute Landkreise Stendal und Altmarkkreis Salzwedel), Berlin und Neumark (heute Polen: Gorzów, Słubice, Strzelce-Drezdenko, Sulęcin, Krosno Odrzańskie, Świebodzin, Myślibórz, Choszczno, Drawsko, Świdwin).
+# Ergänzt in Meilenstein M3 (tools/geodaten/orte.py): weitere Orte ohne Daten (ohne Historie)
+# aus GeoNames, räumlich ausgewählt, Gelände aus dem Höhenmodell, Fläche aus der Karte.
+# Umfang der Landschaft Brandenburg: Mark Brandenburg mit Altmark (heute Landkreise Stendal
+# und Altmarkkreis Salzwedel), Berlin und Neumark (heute Polen: Gorzów, Słubice,
+# Strzelce-Drezdenko, Sulęcin, Krosno Odrzańskie, Świebodzin, Myślibórz, Choszczno, Drawsko,
+# Świdwin).
 
 ort berlin_coelln {
     name     = "Berlin-Cölln"
@@ -702,14 +706,14 @@ ort driesen {
     quelle   = "GeoNames (CC BY 4.0), geonameid 3100127; deutscher Name aus den GeoNames-Alternativnamen (heute Drezdenko); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort friedeberg_brandenburg {
-    name     = "Friedeberg (Brandenburg)"
+ort friedeberg_in_neumark {
+    name     = "Friedeberg in Neumark"
     gelaende = flachland
     lage     = { 15.5298 52.8773 }
     flaeche  = 342
     stadt    = ja
     kreis    = kr_driesen
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3084421; deutscher Name aus den GeoNames-Alternativnamen (heute Strzelce Krajeńskie); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3084421; deutscher Name aus den GeoNames-Alternativnamen (heute Strzelce Krajeńskie); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort woldenberg {
@@ -1012,14 +1016,14 @@ ort zantoch {
     quelle   = "GeoNames (CC BY 4.0), geonameid 3086283; deutscher Name aus den GeoNames-Alternativnamen (heute Santok); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort nowogrodek_pomorski {
-    name     = "Nowogródek Pomorski"
+ort neuenburg {
+    name     = "Neuenburg"
     gelaende = flachland
     lage     = { 15.0295 52.9115 }
     flaeche  = 232
     stadt    = nein
     kreis    = kr_landsberg_warthe
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3090552; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3090552; deutscher Name aus den GeoNames-Alternativnamen (heute Nowogródek Pomorski); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort bernau_bei_berlin {
@@ -1292,14 +1296,14 @@ ort zossen {
     quelle   = "GeoNames (CC BY 4.0), geonameid 2803870; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort beelitz_brandenburg {
-    name     = "Beelitz (Brandenburg)"
+ort beelitz {
+    name     = "Beelitz"
     gelaende = flachland
     lage     = { 12.9714 52.2381 }
     flaeche  = 224
     stadt    = nein
     kreis    = kr_berlin_coelln
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2951595; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2951595; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort michendorf {

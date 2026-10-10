@@ -7,7 +7,8 @@
 # ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
 # und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 #
-# Umfang: Geldern mit Arnheim, Nimwegen und Zutphen sowie das Land van Cuijk (niederländischer Saum).
+# Umfang: Geldern mit Arnheim, Nimwegen und Zutphen sowie das Land van Cuijk (niederländischer
+# Saum).
 
 ort doetinchem {
     name     = "Doetinchem"

@@ -12,8 +12,10 @@
 # Pommern oder der Mark. Lausitzer Orte stehen in lausitz.chron, Orte des
 # Thüringischen Kreises in thueringen.chron, Jüterbog in magdeburg.chron.
 #
-# Ergänzt in Meilenstein M3 (tools/geodaten/orte.py): weitere Orte ohne Daten (ohne Historie) aus GeoNames, räumlich ausgewählt, Gelände aus dem Höhenmodell, Fläche aus der Karte.
-# Umfang der Landschaft Sachsen: Kursachsen (heute Sachsen ohne die Lausitz, dazu der Kurkreis um Wittenberg).
+# Ergänzt in Meilenstein M3 (tools/geodaten/orte.py): weitere Orte ohne Daten (ohne Historie)
+# aus GeoNames, räumlich ausgewählt, Gelände aus dem Höhenmodell, Fläche aus der Karte.
+# Umfang der Landschaft Sachsen: Kursachsen (heute Sachsen ohne die Lausitz, dazu der Kurkreis
+# um Wittenberg).
 
 ort dresden {
     name     = "Dresden"
@@ -914,14 +916,14 @@ ort lichtenstein {
     quelle   = "GeoNames (CC BY 4.0), geonameid 2878037; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort kirchberg_sachsen {
-    name     = "Kirchberg (Sachsen)"
+ort kirchberg {
+    name     = "Kirchberg"
     gelaende = huegelland
     lage     = { 12.5245 50.6219 }
     flaeche  = 167
     stadt    = nein
     kreis    = kr_zwickau
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2890659; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2890659; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort annaberg_buchholz {
@@ -1024,14 +1026,14 @@ ort plauen {
     quelle   = "GeoNames (CC BY 4.0), geonameid 2853292; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort auerbach_sachsen {
-    name     = "Auerbach (Sachsen)"
+ort auerbach {
+    name     = "Auerbach"
     gelaende = mittelgebirge
     lage     = { 12.4008 50.5115 }
     flaeche  = 175
     stadt    = ja
     kreis    = kr_plauen
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2954602; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2954602; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort klingenthal {

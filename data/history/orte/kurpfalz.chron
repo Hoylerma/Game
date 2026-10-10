@@ -7,7 +7,8 @@
 # ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
 # und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 #
-# Umfang: Pfalz links des Rheins mit Zweibrücken und Speyer sowie die rechtsrheinische Kurpfalz um Mannheim und Heidelberg.
+# Umfang: Pfalz links des Rheins mit Zweibrücken und Speyer sowie die rechtsrheinische
+# Kurpfalz um Mannheim und Heidelberg.
 
 ort mannheim {
     name     = "Mannheim"

@@ -37,8 +37,8 @@ kreis kr_villingen_schwenningen {
     quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
 }
 
-kreis kr_freiburg_baden {
-    name   = "Freiburg (Baden)"
+kreis kr_freiburg_im_breisgau {
+    name   = "Freiburg im Breisgau"
     quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
 }
 

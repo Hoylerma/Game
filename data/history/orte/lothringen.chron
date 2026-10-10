@@ -7,7 +7,8 @@
 # ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
 # und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 #
-# Umfang: Herzogtümer Lothringen und Bar mit den Bistümern Metz, Toul und Verdun (heute Départements Moselle, Meurthe-et-Moselle, Meuse und Vosges).
+# Umfang: Herzogtümer Lothringen und Bar mit den Bistümern Metz, Toul und Verdun (heute
+# Départements Moselle, Meurthe-et-Moselle, Meuse und Vosges).
 
 ort diedenhofen {
     name     = "Diedenhofen"

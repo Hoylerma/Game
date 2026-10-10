@@ -539,14 +539,14 @@ ort ochsenhausen {
     quelle   = "GeoNames (CC BY 4.0), geonameid 2858326; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort erbach_schwaben {
-    name     = "Erbach (Schwaben)"
+ort erbach {
+    name     = "Erbach"
     gelaende = huegelland
     lage     = { 9.8875 48.3284 }
     flaeche  = 121
     stadt    = nein
     kreis    = kr_biberach_an_der_riss
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2929804; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2929804; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort erolzheim {

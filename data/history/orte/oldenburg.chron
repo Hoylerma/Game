@@ -7,7 +7,8 @@
 # ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
 # und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 #
-# Umfang: Oldenburger Land mit Jeverland und Oldenburger Münsterland (Cloppenburg und Vechta gehörten 1648 zum Hochstift Münster).
+# Umfang: Oldenburger Land mit Jeverland und Oldenburger Münsterland (Cloppenburg und Vechta
+# gehörten 1648 zum Hochstift Münster).
 
 ort wilhelmshaven {
     name     = "Wilhelmshaven"

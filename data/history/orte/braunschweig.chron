@@ -11,8 +11,10 @@
 # selbst und wurde erst 1671 unterworfen. Weitere Landesteile (Weserraum,
 # Harz) liegen außerhalb der Testregion bzw. sind nicht modelliert.
 #
-# Ergänzt in Meilenstein M3 (tools/geodaten/orte.py): weitere Orte ohne Daten (ohne Historie) aus GeoNames, räumlich ausgewählt, Gelände aus dem Höhenmodell, Fläche aus der Karte.
-# Umfang der Landschaft Braunschweig: Herzogtum Braunschweig-Wolfenbüttel und Umgebung (heute Braunschweig, Wolfenbüttel, Salzgitter, Wolfsburg, Helmstedt, Peine, Goslar, Holzminden).
+# Ergänzt in Meilenstein M3 (tools/geodaten/orte.py): weitere Orte ohne Daten (ohne Historie)
+# aus GeoNames, räumlich ausgewählt, Gelände aus dem Höhenmodell, Fläche aus der Karte.
+# Umfang der Landschaft Braunschweig: Herzogtum Braunschweig-Wolfenbüttel und Umgebung (heute
+# Braunschweig, Wolfenbüttel, Salzgitter, Wolfsburg, Helmstedt, Peine, Goslar, Holzminden).
 
 ort wolfenbuettel {
     name     = "Wolfenbüttel"

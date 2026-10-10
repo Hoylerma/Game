@@ -13,8 +13,11 @@
 # (Sprache/Volksgruppe folgt später). Die Oberlausitz nahm viele
 # Glaubensflüchtlinge (Exulanten) aus Böhmen auf.
 #
-# Ergänzt in Meilenstein M3 (tools/geodaten/orte.py): weitere Orte ohne Daten (ohne Historie) aus GeoNames, räumlich ausgewählt, Gelände aus dem Höhenmodell, Fläche aus der Karte.
-# Umfang der Landschaft Lausitz: Ober- und Niederlausitz, Grenzen vereinfacht (heute Landkreise Bautzen und Görlitz, Spree-Neiße, Cottbus, Oberspreewald-Lausitz, Dahme-Spreewald, Elbe-Elster sowie in Polen Zgorzelec, Lubań und Żary).
+# Ergänzt in Meilenstein M3 (tools/geodaten/orte.py): weitere Orte ohne Daten (ohne Historie)
+# aus GeoNames, räumlich ausgewählt, Gelände aus dem Höhenmodell, Fläche aus der Karte.
+# Umfang der Landschaft Lausitz: Ober- und Niederlausitz, Grenzen vereinfacht (heute
+# Landkreise Bautzen und Görlitz, Spree-Neiße, Cottbus, Oberspreewald-Lausitz,
+# Dahme-Spreewald, Elbe-Elster sowie in Polen Zgorzelec, Lubań und Żary).
 
 ort bautzen {
     name     = "Bautzen"
@@ -508,14 +511,14 @@ ort rietschen {
     quelle   = "GeoNames (CC BY 4.0), geonameid 2846806; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort rothenburg_lausitz {
-    name     = "Rothenburg (Lausitz)"
+ort rothenburg {
+    name     = "Rothenburg"
     gelaende = flachland
     lage     = { 14.9687 51.334 }
     flaeche  = 182
     stadt    = nein
     kreis    = kr_weisswasser
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2844062; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2844062; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort boxberg_lausitz {
@@ -728,14 +731,14 @@ ort herrnhut {
     quelle   = "GeoNames (CC BY 4.0), geonameid 2905643; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort reichenbach_lausitz {
-    name     = "Reichenbach (Lausitz)"
+ort reichenbach {
+    name     = "Reichenbach"
     gelaende = huegelland
     lage     = { 14.8027 51.1414 }
     flaeche  = 166
     stadt    = nein
     kreis    = kr_bautzen
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2849145; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2849145; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort lauban {

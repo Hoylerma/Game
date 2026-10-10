@@ -7,7 +7,8 @@
 # ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
 # und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 #
-# Umfang: Grafschaft Tirol mit Südtirol (heute Tirol und die Provinz Bozen, dazu einige Orte des oberen Nonsbergs in der Provinz Trient am Rand des Umrisses).
+# Umfang: Grafschaft Tirol mit Südtirol (heute Tirol und die Provinz Bozen, dazu einige Orte
+# des oberen Nonsbergs in der Provinz Trient am Rand des Umrisses).
 
 ort sankt_johann_in_tirol {
     name     = "Sankt Johann in Tirol"

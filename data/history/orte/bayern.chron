@@ -129,14 +129,14 @@ ort bernried {
     quelle   = "GeoNames (CC BY 4.0), geonameid 2949975; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort kirchberg_bayern {
-    name     = "Kirchberg (Bayern)"
+ort kirchberg_im_wald {
+    name     = "Kirchberg im Wald"
     gelaende = mittelgebirge
     lage     = { 13.182 48.9001 }
     flaeche  = 182
     stadt    = nein
     kreis    = kr_deggendorf
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2890662; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2890662; Name Kirchberg im Wald aus den GeoNames-Alternativnamen (GeoNames: Kirchberg); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort zachenberg {

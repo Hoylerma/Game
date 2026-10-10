@@ -7,7 +7,8 @@
 # ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
 # und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 #
-# Umfang: Herzogtum Steiermark mit der Untersteiermark (heute Steiermark und der Nordosten Sloweniens).
+# Umfang: Herzogtum Steiermark mit der Untersteiermark (heute Steiermark und der Nordosten
+# Sloweniens).
 
 ort muerzzuschlag {
     name     = "Mürzzuschlag"
@@ -879,14 +880,14 @@ ort gornja_radgona {
     quelle   = "GeoNames (CC BY 4.0), geonameid 3200197; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort lenart_v_slov_goricah {
-    name     = "Lenart v Slov. Goricah"
+ort sankt_leonhard {
+    name     = "Sankt Leonhard"
     gelaende = huegelland
     lage     = { 15.8314 46.5761 }
     flaeche  = 247
     stadt    = nein
     kreis    = kr_marburg_an_der_drau
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3196682; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3196682; deutscher Name aus den GeoNames-Alternativnamen (heute Lenart v Slov. Goricah); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort sentilj_v_slov_goricah {
@@ -1169,14 +1170,14 @@ ort rann {
     quelle   = "GeoNames (CC BY 4.0), geonameid 3203412; deutscher Name aus den GeoNames-Alternativnamen (heute Brežice); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort sentjur {
-    name     = "Šentjur"
+ort sankt_georgen {
+    name     = "Sankt Georgen"
     gelaende = huegelland
     lage     = { 15.3975 46.2172 }
     flaeche  = 165
     stadt    = nein
     kreis    = kr_cilli
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3191029; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3191029; deutscher Name aus den GeoNames-Alternativnamen (heute Šentjur); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort gonobitz {

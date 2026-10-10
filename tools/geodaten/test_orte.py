@@ -535,6 +535,95 @@ class TestErzeugteTabellen(unittest.TestCase):
             self.assertEqual(tuple(zeilen[0]), spalten)
             self.assertEqual(orte.csv_text(spalten, zeilen[1:]), text, name)
 
+    def test_m1_orte_vorn_und_nur_sie_mit_historie(self) -> None:
+        m1 = [z["id"] for z in self.orte if not z["quelle"].startswith(orte.QUELLE_PRAEFIX)]
+        self.assertEqual(m1, [z["id"] for z in self.orte[:60]])  # Reihenfolge: M1-Orte unverändert vorn
+        mit_historie = set()
+        for name in ("besitz.csv", "bevoelkerung.csv"):
+            mit_historie |= {z["ort"] for z in orte.lies_csv(TABELLEN / name)}
+        self.assertEqual(mit_historie, set(m1))  # neue Orte sind Orte ohne Daten
+
+    def test_flaeche_wie_karte(self) -> None:
+        definition = {z["ort"]: z for z in orte.lies_csv(orte.DATEN / "karte/definition.csv")}
+        self.assertEqual(set(definition), {z["id"] for z in self.orte})
+        for z in self.orte:
+            self.assertEqual(z["flaeche"], definition[z["id"]]["flaeche_km2"], z["id"])
+
+    def test_stichprobe_bekannter_staedte(self) -> None:
+        nach_id = {z["id"]: z for z in self.orte}
+        kreisname = {k["id"]: k["name"] for k in self.kreise}
+        erwartet = {
+            "berlin_coelln": ("Berlin-Cölln", "brandenburg"),
+            "hamburg": ("Hamburg", "holstein"),
+            "muenchen": ("München", "bayern"),
+            "wien": ("Wien", "niederoesterreich"),
+            "prag": ("Prag", "boehmen"),
+            "breslau": ("Breslau", "niederschlesien"),
+            "koenigsberg": ("Königsberg", "ostpreussen"),
+            "danzig": ("Danzig", "westpreussen"),
+            "strassburg": ("Straßburg", "elsass"),
+            "koeln": ("Köln", "rheinland"),
+            "frankfurt_am_main": ("Frankfurt am Main", "wetterau"),
+            "nuernberg": ("Nürnberg", "franken"),
+            "dresden": ("Dresden", "sachsen"),
+            "leipzig": ("Leipzig", "sachsen"),
+            "bruessel": ("Brüssel", "brabant"),
+            "memel": ("Memel", "ostpreussen"),
+            "glatz": ("Glatz", "glatz"),
+            "iglau": ("Iglau", "maehren"),
+            "diedenhofen": ("Diedenhofen", "lothringen"),
+            "liegnitz": ("Liegnitz", "niederschlesien"),
+            "freiburg_im_breisgau": ("Freiburg im Breisgau", "baden"),
+            "hirschberg_in_schlesien": ("Hirschberg in Schlesien", "niederschlesien"),
+        }
+        for kennung, (name, datei) in erwartet.items():
+            with self.subTest(kennung):
+                z = nach_id[kennung]
+                self.assertEqual((z["name"], z["datei"], z["stadt"]), (name, datei, "ja"))
+                self.assertEqual(kreisname[z["kreis"]], name)  # jeweils Hauptort ihres Kreises
+        # Amsterdam liegt außerhalb des Kernraums (Niederlande nur als Saum)
+        self.assertNotIn("amsterdam", nach_id)
+
+    def test_dateien_kommentare(self) -> None:
+        zeilen = orte.lies_csv(TABELLEN / "dateien.csv", orte.DATEIEN_SPALTEN)
+        orte_dateien = {z["datei"] for z in self.orte}
+        self.assertEqual({z["datei"] for z in zeilen if z["ordner"] == "orte"}, orte_dateien)
+        self.assertEqual({z["datei"] for z in zeilen if z["ordner"] == "kreise"}, {k["datei"] for k in self.kreise})
+        for z in zeilen:
+            if z["ordner"] != "staaten":
+                self.assertEqual(z["kommentar"].count(orte.M3_ABSATZ), 1 if "Stand 24.10.1648" in z["kommentar"] else 0)
+
+
+class TestDateienZeilen(unittest.TestCase):
+    def setUp(self) -> None:
+        self.landschaften = {
+            "anhalt": orte.Landschaft("anhalt", "Anhalt", "Anhalt", 1.0, "Fürstentümer Anhalt " + "lang " * 30),
+            "glatz": orte.Landschaft("glatz", "Grafschaft Glatz", "Glatz", 1.0, "Grafschaft Glatz"),
+        }
+        self.alt = [
+            {"ordner": "staaten", "datei": "DES", "kommentar": "Staat\nunverändert"},
+            {"ordner": "orte", "datei": "anhalt", "kommentar": "Orte: Anhalt – Stand 24.10.1648."},
+        ]
+
+    def test_m3_absatz_umgebrochen_und_ersetzt(self) -> None:
+        erste = orte.dateien_zeilen(self.alt, self.landschaften, {"anhalt"}, {"anhalt", "glatz"})
+        self.assertEqual(erste[0], ("staaten", "DES", "Staat\nunverändert"))
+        reihenfolge = [("orte", "anhalt"), ("orte", "glatz"), ("kreise", "anhalt"), ("kreise", "glatz")]
+        self.assertEqual([(o, d) for o, d, _ in erste[1:]], reihenfolge)
+        anhalt = erste[1][2]
+        self.assertTrue(anhalt.startswith("Orte: Anhalt – Stand 24.10.1648.\n\n" + orte.M3_ABSATZ))
+        self.assertTrue(all(len(z) <= orte.KOMMENTAR_BREITE for z in anhalt.splitlines()))
+        # ein zweiter Lauf über die eigene Ausgabe ersetzt den M3-Absatz, statt ihn zu verdoppeln
+        alt2 = self.alt[:1] + [{"ordner": "orte", "datei": "anhalt", "kommentar": anhalt}]
+        zweite = orte.dateien_zeilen(alt2, self.landschaften, {"anhalt"}, {"anhalt", "glatz"})
+        self.assertEqual(zweite, erste)
+        self.assertIn("Umfang: Grafschaft Glatz", erste[2][2])
+
+    def test_umbrechen(self) -> None:
+        self.assertEqual(orte.umbrechen("a b c", 3), "a b\nc")
+        lang = "Anhalt-Bitterfeld-Dessau-Roßlau-Wittenberg"
+        self.assertEqual(orte.umbrechen(f"x {lang} y", 10), f"x\n{lang}\ny")  # kein Umbruch im Wort
+
 
 # ─── Vollständiger Lauf (optional) ──────────────────────────────────────────
 

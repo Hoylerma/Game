@@ -7,7 +7,8 @@
 # ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
 # und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 #
-# Umfang: Erzherzogtum Österreich ob der Enns (heute Oberösterreich; das Innviertel gehörte bis 1779 zu Bayern).
+# Umfang: Erzherzogtum Österreich ob der Enns (heute Oberösterreich; das Innviertel gehörte
+# bis 1779 zu Bayern).
 
 ort rohrbach_in_oberoesterreich {
     name     = "Rohrbach in Oberösterreich"

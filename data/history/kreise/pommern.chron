@@ -7,8 +7,8 @@
 # benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 # historischen Verwaltungseinheiten.
 
-kreis kr_lauenburg_pommern {
-    name   = "Lauenburg (Pommern)"
+kreis kr_lauenburg_in_pommern {
+    name   = "Lauenburg in Pommern"
     quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
 }
 

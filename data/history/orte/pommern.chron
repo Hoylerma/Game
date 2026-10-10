@@ -15,8 +15,11 @@
 # ab 1630 schwedisch), Kriegsschauplatz und Durchzugsgebiet und gehörte zu den
 # am stärksten entvölkerten Ländern.
 #
-# Ergänzt in Meilenstein M3 (tools/geodaten/orte.py): weitere Orte ohne Daten (ohne Historie) aus GeoNames, räumlich ausgewählt, Gelände aus dem Höhenmodell, Fläche aus der Karte.
-# Umfang der Landschaft Pommern: Vorpommern mit Rügen und Hinterpommern (heute Landkreise Vorpommern-Rügen und Vorpommern-Greifswald, in Polen die Woiwodschaft Westpommern ohne Neumark sowie die Kreise Słupsk, Lębork und Bytów).
+# Ergänzt in Meilenstein M3 (tools/geodaten/orte.py): weitere Orte ohne Daten (ohne Historie)
+# aus GeoNames, räumlich ausgewählt, Gelände aus dem Höhenmodell, Fläche aus der Karte.
+# Umfang der Landschaft Pommern: Vorpommern mit Rügen und Hinterpommern (heute Landkreise
+# Vorpommern-Rügen und Vorpommern-Greifswald, in Polen die Woiwodschaft Westpommern ohne
+# Neumark sowie die Kreise Słupsk, Lębork und Bytów).
 
 ort stettin {
     name     = "Stettin"
@@ -154,14 +157,14 @@ ort cammin {
     }
 }
 
-ort lauenburg_pommern {
-    name     = "Lauenburg (Pommern)"
+ort lauenburg_in_pommern {
+    name     = "Lauenburg in Pommern"
     gelaende = huegelland
     lage     = { 17.7501 54.5392 }
     flaeche  = 243
     stadt    = ja
-    kreis    = kr_lauenburg_pommern
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3093739; deutscher Name aus den GeoNames-Alternativnamen (heute Lębork); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+    kreis    = kr_lauenburg_in_pommern
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3093739; deutscher Name aus den GeoNames-Alternativnamen (heute Lębork); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort leba {
@@ -170,7 +173,7 @@ ort leba {
     lage     = { 17.5555 54.761 }
     flaeche  = 213
     stadt    = nein
-    kreis    = kr_lauenburg_pommern
+    kreis    = kr_lauenburg_in_pommern
     quelle   = "GeoNames (CC BY 4.0), geonameid 3093749; deutscher Name aus den GeoNames-Alternativnamen (heute Łeba); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
@@ -180,7 +183,7 @@ ort glowitz {
     lage     = { 17.3723 54.6193 }
     flaeche  = 247
     stadt    = nein
-    kreis    = kr_lauenburg_pommern
+    kreis    = kr_lauenburg_in_pommern
     quelle   = "GeoNames (CC BY 4.0), geonameid 3099192; deutscher Name aus den GeoNames-Alternativnamen (heute Główczyce); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
@@ -190,7 +193,7 @@ ort potegowo {
     lage     = { 17.4862 54.4828 }
     flaeche  = 250
     stadt    = nein
-    kreis    = kr_lauenburg_pommern
+    kreis    = kr_lauenburg_in_pommern
     quelle   = "GeoNames (CC BY 4.0), geonameid 3088220; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
@@ -200,7 +203,7 @@ ort zewitz {
     lage     = { 17.7349 54.4355 }
     flaeche  = 186
     stadt    = nein
-    kreis    = kr_lauenburg_pommern
+    kreis    = kr_lauenburg_in_pommern
     quelle   = "GeoNames (CC BY 4.0), geonameid 3101869; deutscher Name aus den GeoNames-Alternativnamen (heute Cewice); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
@@ -210,7 +213,7 @@ ort czarna_dabrowka {
     lage     = { 17.5646 54.3563 }
     flaeche  = 350
     stadt    = nein
-    kreis    = kr_lauenburg_pommern
+    kreis    = kr_lauenburg_in_pommern
     quelle   = "GeoNames (CC BY 4.0), geonameid 7535732; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
@@ -220,7 +223,7 @@ ort damnica {
     lage     = { 17.2715 54.5003 }
     flaeche  = 231
     stadt    = nein
-    kreis    = kr_lauenburg_pommern
+    kreis    = kr_lauenburg_in_pommern
     quelle   = "GeoNames (CC BY 4.0), geonameid 3100671; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
@@ -230,7 +233,7 @@ ort schmolsin {
     lage     = { 17.2137 54.6632 }
     flaeche  = 218
     stadt    = nein
-    kreis    = kr_lauenburg_pommern
+    kreis    = kr_lauenburg_in_pommern
     quelle   = "GeoNames (CC BY 4.0), geonameid 3085360; deutscher Name aus den GeoNames-Alternativnamen (heute Smołdzino); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
@@ -1224,14 +1227,14 @@ ort prillwitz {
     quelle   = "GeoNames (CC BY 4.0), geonameid 3087958; deutscher Name aus den GeoNames-Alternativnamen (heute Przelewice); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort beelitz_pommern {
-    name     = "Beelitz (Pommern)"
+ort beelitz_in_pommern {
+    name     = "Beelitz in Pommern"
     gelaende = flachland
     lage     = { 14.7276 53.2002 }
     flaeche  = 248
     stadt    = nein
     kreis    = kr_stargard
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3103432; deutscher Name aus den GeoNames-Alternativnamen (heute Bielice); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3103432; deutscher Name aus den GeoNames-Alternativnamen (heute Bielice); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort kublank {

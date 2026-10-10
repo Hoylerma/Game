@@ -7,7 +7,8 @@
 # ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
 # und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 #
-# Umfang: Wetterau und Untermain mit Frankfurt und Hanau (heute Frankfurt, Wetteraukreis, Main-Kinzig-Kreis und Hochtaunuskreis).
+# Umfang: Wetterau und Untermain mit Frankfurt und Hanau (heute Frankfurt, Wetteraukreis,
+# Main-Kinzig-Kreis und Hochtaunuskreis).
 
 ort nidda {
     name     = "Nidda"

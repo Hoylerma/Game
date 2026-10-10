@@ -7,7 +7,9 @@
 # ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
 # und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 #
-# Umfang: Großpolen und Netzedistrikt, 1815–1920 preußische Provinz Posen (heute Woiwodschaft Großpolen ohne Kalisch und Konin sowie Bydgoszcz, Inowrocław, Mogilno, Nakło, Żnin, Międzyrzecz und Wschowa).
+# Umfang: Großpolen und Netzedistrikt, 1815–1920 preußische Provinz Posen (heute Woiwodschaft
+# Großpolen ohne Kalisch und Konin sowie Bydgoszcz, Inowrocław, Mogilno, Nakło, Żnin,
+# Międzyrzecz und Wschowa).
 
 ort schneidemuehl {
     name     = "Schneidemühl"

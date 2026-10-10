@@ -7,7 +7,8 @@
 # ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
 # und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 #
-# Umfang: Starkenburg, Bergstraße und Odenwald (heute Darmstadt, Offenbach und die südhessischen Landkreise).
+# Umfang: Starkenburg, Bergstraße und Odenwald (heute Darmstadt, Offenbach und die
+# südhessischen Landkreise).
 
 ort offenbach {
     name     = "Offenbach"
@@ -209,14 +210,14 @@ ort biebesheim {
     quelle   = "GeoNames (CC BY 4.0), geonameid 2949240; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort erbach_starkenburg {
-    name     = "Erbach (Starkenburg)"
+ort erbach_im_odenwald {
+    name     = "Erbach im Odenwald"
     gelaende = huegelland
     lage     = { 8.994 49.6615 }
     flaeche  = 144
     stadt    = ja
-    kreis    = kr_erbach_starkenburg
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2929802; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+    kreis    = kr_erbach_im_odenwald
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2929802; Name Erbach im Odenwald aus den GeoNames-Alternativnamen (GeoNames: Erbach); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort wald_michelbach {
@@ -225,7 +226,7 @@ ort wald_michelbach {
     lage     = { 8.8317 49.57 }
     flaeche  = 119
     stadt    = nein
-    kreis    = kr_erbach_starkenburg
+    kreis    = kr_erbach_im_odenwald
     quelle   = "GeoNames (CC BY 4.0), geonameid 2814853; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
@@ -235,7 +236,7 @@ ort moerlenbach {
     lage     = { 8.7347 49.5992 }
     flaeche  = 73
     stadt    = nein
-    kreis    = kr_erbach_starkenburg
+    kreis    = kr_erbach_im_odenwald
     quelle   = "GeoNames (CC BY 4.0), geonameid 2869221; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
@@ -245,7 +246,7 @@ ort bad_koenig {
     lage     = { 9.0075 49.7432 }
     flaeche  = 139
     stadt    = nein
-    kreis    = kr_erbach_starkenburg
+    kreis    = kr_erbach_im_odenwald
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953419; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
@@ -255,7 +256,7 @@ ort beerfelden {
     lage     = { 8.9744 49.5686 }
     flaeche  = 128
     stadt    = nein
-    kreis    = kr_erbach_starkenburg
+    kreis    = kr_erbach_im_odenwald
     quelle   = "GeoNames (CC BY 4.0), geonameid 2951556; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
@@ -265,7 +266,7 @@ ort lindenfels {
     lage     = { 8.7815 49.6837 }
     flaeche  = 115
     stadt    = nein
-    kreis    = kr_erbach_starkenburg
+    kreis    = kr_erbach_im_odenwald
     quelle   = "GeoNames (CC BY 4.0), geonameid 2877315; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
@@ -275,7 +276,7 @@ ort fraenkisch_crumbach {
     lage     = { 8.8586 49.7461 }
     flaeche  = 110
     stadt    = nein
-    kreis    = kr_erbach_starkenburg
+    kreis    = kr_erbach_im_odenwald
     quelle   = "GeoNames (CC BY 4.0), geonameid 2925507; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
@@ -285,6 +286,6 @@ ort hirschhorn {
     lage     = { 8.8959 49.4457 }
     flaeche  = 96
     stadt    = nein
-    kreis    = kr_erbach_starkenburg
+    kreis    = kr_erbach_im_odenwald
     quelle   = "GeoNames (CC BY 4.0), geonameid 2903625; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }

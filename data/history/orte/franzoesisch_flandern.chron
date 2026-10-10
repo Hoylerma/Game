@@ -7,7 +7,9 @@
 # ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
 # und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 #
-# Umfang: Französisch-Flandern mit Dünkirchen, Lille und Douai sowie das Bergbaugebiet um Lens (Artois); im 17. Jahrhundert schrittweise von Frankreich erworben (Pyrenäenfrieden 1659, Aachen 1668, Nimwegen 1678).
+# Umfang: Französisch-Flandern mit Dünkirchen, Lille und Douai sowie das Bergbaugebiet um Lens
+# (Artois); im 17. Jahrhundert schrittweise von Frankreich erworben (Pyrenäenfrieden 1659,
+# Aachen 1668, Nimwegen 1678).
 
 ort duenkirchen {
     name     = "Dünkirchen"

@@ -7,7 +7,8 @@
 # ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
 # und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 #
-# Umfang: Herzogtum Preußen mit Ermland (bis 1772 polnisch) und Memelland (heute Woiwodschaft Ermland-Masuren, Oblast Kaliningrad und der Westen Litauens um Klaipėda).
+# Umfang: Herzogtum Preußen mit Ermland (bis 1772 polnisch) und Memelland (heute Woiwodschaft
+# Ermland-Masuren, Oblast Kaliningrad und der Westen Litauens um Klaipėda).
 
 ort memel {
     name     = "Memel"
@@ -169,14 +170,14 @@ ort bol_shoe_isakovo {
     quelle   = "GeoNames (CC BY 4.0), geonameid 825122; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort yuzhnyy {
-    name     = "Yuzhnyy"
+ort jesau {
+    name     = "Jesau"
     gelaende = flachland
     lage     = { 20.5984 54.5484 }
     flaeche  = 551
     stadt    = nein
     kreis    = kr_koenigsberg
-    quelle   = "GeoNames (CC BY 4.0), geonameid 825760; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 825760; deutscher Name aus den GeoNames-Alternativnamen (heute Yuzhnyy); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort powunden {
@@ -389,14 +390,14 @@ ort heiligenbeil {
     quelle   = "GeoNames (CC BY 4.0), geonameid 2609901; deutscher Name aus den GeoNames-Alternativnamen (heute Mamonovo); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort landsberg_ostpreussen {
-    name     = "Landsberg (Ostpreußen)"
+ort landsberg {
+    name     = "Landsberg"
     gelaende = flachland
     lage     = { 20.4889 54.2856 }
     flaeche  = 320
     stadt    = nein
     kreis    = kr_heilsberg
-    quelle   = "GeoNames (CC BY 4.0), geonameid 771779; deutscher Name aus den GeoNames-Alternativnamen (heute Górowo Iławeckie); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 771779; deutscher Name aus den GeoNames-Alternativnamen (heute Górowo Iławeckie); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort ludwigsort {
@@ -429,24 +430,24 @@ ort liebstadt {
     quelle   = "GeoNames (CC BY 4.0), geonameid 764752; deutscher Name aus den GeoNames-Alternativnamen (heute Miłakowo); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort lubomino {
-    name     = "Lubomino"
+ort arnsdorf {
+    name     = "Arnsdorf"
     gelaende = flachland
     lage     = { 20.2396 54.0668 }
     flaeche  = 222
     stadt    = nein
     kreis    = kr_heilsberg
-    quelle   = "GeoNames (CC BY 4.0), geonameid 765854; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 765854; deutscher Name aus den GeoNames-Alternativnamen (heute Lubomino); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort lelkowo {
-    name     = "Lelkowo"
+ort lichtenfeld {
+    name     = "Lichtenfeld"
     gelaende = flachland
     lage     = { 20.2248 54.3246 }
     flaeche  = 366
     stadt    = nein
     kreis    = kr_heilsberg
-    quelle   = "GeoNames (CC BY 4.0), geonameid 766507; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 766507; deutscher Name aus den GeoNames-Alternativnamen (heute Lelkowo); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort rastenburg {
@@ -829,14 +830,14 @@ ort mohrungen {
     quelle   = "GeoNames (CC BY 4.0), geonameid 3091462; deutscher Name aus den GeoNames-Alternativnamen (heute Morąg); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort hohenstein {
-    name     = "Hohenstein"
+ort hohenstein_ostpreussen {
+    name     = "Hohenstein (Ostpreußen)"
     gelaende = flachland
     lage     = { 20.2847 53.5837 }
     flaeche  = 311
     stadt    = nein
     kreis    = kr_allenstein
-    quelle   = "GeoNames (CC BY 4.0), geonameid 763165; deutscher Name aus den GeoNames-Alternativnamen (heute Olsztynek); Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 763165; deutscher Name aus den GeoNames-Alternativnamen (heute Olsztynek); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort wartenburg {

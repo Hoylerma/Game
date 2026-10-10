@@ -189,14 +189,14 @@ ort sulzbach_rosenberg {
     quelle   = "GeoNames (CC BY 4.0), geonameid 2824801; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort auerbach_oberpfalz {
-    name     = "Auerbach (Oberpfalz)"
+ort auerbach_in_der_oberpfalz {
+    name     = "Auerbach in der Oberpfalz"
     gelaende = huegelland
     lage     = { 11.6333 49.692 }
     flaeche  = 125
     stadt    = nein
     kreis    = kr_amberg
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2954603; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2954603; Name Auerbach in der Oberpfalz aus den GeoNames-Alternativnamen (GeoNames: Auerbach); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort vilseck {

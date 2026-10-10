@@ -7,7 +7,8 @@
 # ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
 # und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 #
-# Umfang: Markgrafschaft Mähren (heute Tschechien östlich der Landesgrenze zu Böhmen ohne den schlesischen Teil; Grenze nach heutigen Bezirken vereinfacht).
+# Umfang: Markgrafschaft Mähren (heute Tschechien östlich der Landesgrenze zu Böhmen ohne den
+# schlesischen Teil; Grenze nach heutigen Bezirken vereinfacht).
 
 ort maehrisch_schoenberg {
     name     = "Mährisch-Schönberg"
@@ -69,14 +70,14 @@ ort schildberg {
     quelle   = "GeoNames (CC BY 4.0), geonameid 3065118; deutscher Name aus den GeoNames-Alternativnamen (heute Štíty); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort oskava {
-    name     = "Oskava"
+ort oskau {
+    name     = "Oskau"
     gelaende = mittelgebirge
     lage     = { 17.1321 49.8952 }
     flaeche  = 193
     stadt    = nein
     kreis    = kr_maehrisch_schoenberg
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3068837; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3068837; deutscher Name aus den GeoNames-Alternativnamen (heute Oskava); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort ostrava {
@@ -249,14 +250,14 @@ ort saar {
     quelle   = "GeoNames (CC BY 4.0), geonameid 3061695; deutscher Name aus den GeoNames-Alternativnamen (heute Žďár nad Sázavou); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort bystrice_nad_pernstejnem {
-    name     = "Bystřice nad Pernštejnem"
+ort bystritz_am_pernstein {
+    name     = "Bystritz am Pernstein"
     gelaende = mittelgebirge
     lage     = { 16.2615 49.523 }
     flaeche  = 267
     stadt    = nein
     kreis    = kr_saar
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3078288; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3078288; deutscher Name aus den GeoNames-Alternativnamen (heute Bystřice nad Pernštejnem); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort neustadtl {
@@ -289,14 +290,14 @@ ort svratka {
     quelle   = "GeoNames (CC BY 4.0), geonameid 3064415; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort jimramov {
-    name     = "Jimramov"
+ort ingrowitz {
+    name     = "Ingrowitz"
     gelaende = mittelgebirge
     lage     = { 16.2263 49.6372 }
     flaeche  = 130
     stadt    = nein
     kreis    = kr_saar
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3074170; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3074170; deutscher Name aus den GeoNames-Alternativnamen (heute Jimramov); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort prossnitz {
@@ -479,14 +480,14 @@ ort triesch {
     quelle   = "GeoNames (CC BY 4.0), geonameid 3064029; deutscher Name aus den GeoNames-Alternativnamen (heute Třešť); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort zeletava {
-    name     = "Želetava"
+ort scheletau {
+    name     = "Scheletau"
     gelaende = huegelland
     lage     = { 15.673 49.1419 }
     flaeche  = 231
     stadt    = nein
     kreis    = kr_iglau
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3061577; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3061577; deutscher Name aus den GeoNames-Alternativnamen (heute Želetava); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort blansko {
@@ -619,14 +620,14 @@ ort wallachisch_meseritsch {
     quelle   = "GeoNames (CC BY 4.0), geonameid 3063447; deutscher Name aus den GeoNames-Alternativnamen (heute Valašské Meziříčí); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort roznov_pod_radhostem {
-    name     = "Rožnov pod Radhoštěm"
+ort roznau {
+    name     = "Roznau"
     gelaende = mittelgebirge
     lage     = { 18.143 49.4585 }
     flaeche  = 144
     stadt    = nein
     kreis    = kr_wsetin
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3066651; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3066651; deutscher Name aus den GeoNames-Alternativnamen (heute Rožnov pod Radhoštěm); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort karolinka {
@@ -639,14 +640,14 @@ ort karolinka {
     quelle   = "GeoNames (CC BY 4.0), geonameid 3073792; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort trojanovice {
-    name     = "Trojanovice"
+ort trojanowitz {
+    name     = "Trojanowitz"
     gelaende = mittelgebirge
     lage     = { 18.238 49.5204 }
     flaeche  = 106
     stadt    = nein
     kreis    = kr_wsetin
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3063955; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3063955; deutscher Name aus den GeoNames-Alternativnamen (heute Trojanovice); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort hostalkova {
@@ -819,14 +820,14 @@ ort merin {
     quelle   = "GeoNames (CC BY 4.0), geonameid 3070847; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort bohdalov {
-    name     = "Bohdalov"
+ort bohdalau {
+    name     = "Bohdalau"
     gelaende = huegelland
     lage     = { 15.8758 49.4792 }
     flaeche  = 142
     stadt    = nein
     kreis    = kr_trebic
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3079159; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3079159; deutscher Name aus den GeoNames-Alternativnamen (heute Bohdalov); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort bruenn {

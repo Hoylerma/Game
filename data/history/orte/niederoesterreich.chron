@@ -9,14 +9,14 @@
 #
 # Umfang: Erzherzogtum Österreich unter der Enns mit Wien (heute Niederösterreich und Wien).
 
-ort gmuend_niederoesterreich {
-    name     = "Gmünd (Niederösterreich)"
+ort gmuend {
+    name     = "Gmünd"
     gelaende = huegelland
     lage     = { 14.9808 48.7683 }
     flaeche  = 162
     stadt    = nein
-    kreis    = kr_gmuend_niederoesterreich
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2778439; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+    kreis    = kr_gmuend
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2778439; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort zwettl {
@@ -25,7 +25,7 @@ ort zwettl {
     lage     = { 15.1671 48.6073 }
     flaeche  = 146
     stadt    = ja
-    kreis    = kr_gmuend_niederoesterreich
+    kreis    = kr_gmuend
     quelle   = "GeoNames (CC BY 4.0), geonameid 2760416; Name nach GeoNames ohne modernen Zusatz (Zwettl Stadt); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
@@ -35,7 +35,7 @@ ort waidhofen_an_der_thaya {
     lage     = { 15.2833 48.8167 }
     flaeche  = 114
     stadt    = nein
-    kreis    = kr_gmuend_niederoesterreich
+    kreis    = kr_gmuend
     quelle   = "GeoNames (CC BY 4.0), geonameid 2762079; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
@@ -45,7 +45,7 @@ ort heidenreichstein {
     lage     = { 15.1167 48.8667 }
     flaeche  = 173
     stadt    = nein
-    kreis    = kr_gmuend_niederoesterreich
+    kreis    = kr_gmuend
     quelle   = "GeoNames (CC BY 4.0), geonameid 2776603; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
@@ -55,7 +55,7 @@ ort weitra {
     lage     = { 14.8833 48.7 }
     flaeche  = 226
     stadt    = nein
-    kreis    = kr_gmuend_niederoesterreich
+    kreis    = kr_gmuend
     quelle   = "GeoNames (CC BY 4.0), geonameid 2761538; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
@@ -65,7 +65,7 @@ ort litschau {
     lage     = { 15.0448 48.9441 }
     flaeche  = 183
     stadt    = nein
-    kreis    = kr_gmuend_niederoesterreich
+    kreis    = kr_gmuend
     quelle   = "GeoNames (CC BY 4.0), geonameid 2772385; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
@@ -75,7 +75,7 @@ ort allentsteig {
     lage     = { 15.3276 48.6972 }
     flaeche  = 159
     stadt    = nein
-    kreis    = kr_gmuend_niederoesterreich
+    kreis    = kr_gmuend
     quelle   = "GeoNames (CC BY 4.0), geonameid 2782800; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
@@ -85,7 +85,7 @@ ort gross_siegharts {
     lage     = { 15.4043 48.7918 }
     flaeche  = 125
     stadt    = nein
-    kreis    = kr_gmuend_niederoesterreich
+    kreis    = kr_gmuend
     quelle   = "GeoNames (CC BY 4.0), geonameid 2777590; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
@@ -95,7 +95,7 @@ ort dobersberg {
     lage     = { 15.3219 48.9151 }
     flaeche  = 157
     stadt    = nein
-    kreis    = kr_gmuend_niederoesterreich
+    kreis    = kr_gmuend
     quelle   = "GeoNames (CC BY 4.0), geonameid 2780901; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
@@ -105,7 +105,7 @@ ort raabs_an_der_thaya {
     lage     = { 15.5 48.85 }
     flaeche  = 232
     stadt    = nein
-    kreis    = kr_gmuend_niederoesterreich
+    kreis    = kr_gmuend
     quelle   = "GeoNames (CC BY 4.0), geonameid 2768177; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
@@ -115,7 +115,7 @@ ort schweiggers {
     lage     = { 15.0667 48.6667 }
     flaeche  = 149
     stadt    = nein
-    kreis    = kr_gmuend_niederoesterreich
+    kreis    = kr_gmuend
     quelle   = "GeoNames (CC BY 4.0), geonameid 2765383; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
@@ -125,7 +125,7 @@ ort vitis {
     lage     = { 15.1826 48.7596 }
     flaeche  = 154
     stadt    = nein
-    kreis    = kr_gmuend_niederoesterreich
+    kreis    = kr_gmuend
     quelle   = "GeoNames (CC BY 4.0), geonameid 2762348; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 

@@ -7,7 +7,8 @@
 # ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
 # und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 #
-# Umfang: Hennegau und Cambrésis (heute belgische Provinz Hennegau sowie in Frankreich Valenciennes, Cambrai, Avesnes und die Thiérache).
+# Umfang: Hennegau und Cambrésis (heute belgische Provinz Hennegau sowie in Frankreich
+# Valenciennes, Cambrai, Avesnes und die Thiérache).
 
 ort ath {
     name     = "Ath"

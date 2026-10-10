@@ -38,6 +38,7 @@ import csv
 import io
 import math
 import sys
+import textwrap
 import time
 import unicodedata
 from collections.abc import Iterable, Sequence
@@ -175,6 +176,8 @@ QUELLE_PRAEFIX = "GeoNames (CC BY 4.0), geonameid "
 KREIS_QUELLE = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
 #: Absatz, den orte.py an die Kopfkommentare der M1-Dateien anhängt (wird bei jedem Lauf ersetzt).
 M3_ABSATZ = "Ergänzt in Meilenstein M3 (tools/geodaten/orte.py):"
+#: Zeilenbreite der erzeugten Absätze in dateien.csv (wie die übrigen Kopfkommentare, etwa 90 Zeichen).
+KOMMENTAR_BREITE = 92
 
 ORTE_SPALTEN = ("id", "datei", "name", "gelaende", "laenge", "breite", "flaeche", "stadt", "kreis", "quelle")
 KREISE_SPALTEN = ("id", "datei", "name", "quelle")
@@ -1587,6 +1590,11 @@ def erzeuge(melde: Any = print) -> Ergebnis:
     return Ergebnis(orte, kreise, texte, bericht, karte)
 
 
+def umbrechen(text: str, breite: int = KOMMENTAR_BREITE) -> str:
+    """Bricht einen Absatz für die Kopfkommentare an Leerzeichen um (Wörter und Bindestriche bleiben ganz)."""
+    return textwrap.fill(text, width=breite, break_long_words=False, break_on_hyphens=False)
+
+
 def dateien_zeilen(
     alt: Sequence[dict[str, str]], landschaften: dict[str, Landschaft], m1_dateien: set[str], benutzt: set[str]
 ) -> list[tuple[str, str, str]]:
@@ -1603,11 +1611,11 @@ def dateien_zeilen(
             stelle = basis.find("\n\n" + M3_ABSATZ)
             if stelle >= 0:
                 basis = basis[:stelle]
-            kommentar = (
-                f"{basis}\n\n{M3_ABSATZ} weitere Orte ohne Daten (ohne Historie) aus GeoNames, "
-                f"räumlich ausgewählt, Gelände aus dem Höhenmodell, Fläche aus der Karte.\n"
-                f"Umfang der Landschaft {l.name}: {l.kommentar}"
+            absatz = umbrechen(
+                f"{M3_ABSATZ} weitere Orte ohne Daten (ohne Historie) aus GeoNames, räumlich ausgewählt, "
+                "Gelände aus dem Höhenmodell, Fläche aus der Karte."
             )
+            kommentar = f"{basis}\n\n{absatz}\n{umbrechen(f'Umfang der Landschaft {l.name}: {l.kommentar}')}"
         else:
             kommentar = (
                 f"Orte: {l.name} – Orte ohne Daten (Meilenstein M3).\n\n"
@@ -1615,7 +1623,7 @@ def dateien_zeilen(
                 "Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich\n"
                 "ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell\n"
                 "und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).\n\n"
-                f"Umfang: {l.kommentar}"
+                f"{umbrechen(f'Umfang: {l.kommentar}')}"
             )
         zeilen.append(("orte", datei, kommentar))
     for datei in sorted(benutzt):

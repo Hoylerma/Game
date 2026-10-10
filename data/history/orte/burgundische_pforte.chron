@@ -7,7 +7,8 @@
 # ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
 # und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 #
-# Umfang: Mömpelgard mit Héricourt (bis 1793 württembergisch) und der Nordrand der Freigrafschaft Burgund um Lure und Luxeuil.
+# Umfang: Mömpelgard mit Héricourt (bis 1793 württembergisch) und der Nordrand der
+# Freigrafschaft Burgund um Lure und Luxeuil.
 
 ort moempelgard {
     name     = "Mömpelgard"

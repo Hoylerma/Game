@@ -7,7 +7,8 @@
 # ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
 # und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 #
-# Umfang: Herzogtum Kärnten mit Kanaltal und Mießtal (heute Kärnten, in Italien Tarvis, Malborghetto und Pontafel, in Slowenien das Mießtal, Dravograd und Jezersko).
+# Umfang: Herzogtum Kärnten mit Kanaltal und Mießtal (heute Kärnten, in Italien Tarvis,
+# Malborghetto und Pontafel, in Slowenien das Mießtal, Dravograd und Jezersko).
 
 ort spittal_an_der_drau {
     name     = "Spittal an der Drau"
@@ -29,14 +30,14 @@ ort sachsenburg {
     quelle   = "GeoNames (CC BY 4.0), geonameid 2766905; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort gmuend_kaernten {
-    name     = "Gmünd (Kärnten)"
+ort gmuend_in_kaernten {
+    name     = "Gmünd in Kärnten"
     gelaende = hochgebirge
     lage     = { 13.5294 46.9072 }
     flaeche  = 268
     stadt    = nein
     kreis    = kr_spittal_an_der_drau
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2778441; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2778441; Name Gmünd in Kärnten aus den GeoNames-Alternativnamen (GeoNames: Gmünd); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort obervellach {

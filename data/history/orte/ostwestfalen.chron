@@ -129,14 +129,14 @@ ort harsewinkel {
     quelle   = "GeoNames (CC BY 4.0), geonameid 2910278; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort halle_ostwestfalen {
-    name     = "Halle (Ostwestfalen)"
+ort halle_westfalen {
+    name     = "Halle (Westfalen)"
     gelaende = huegelland
     lage     = { 8.3608 52.0601 }
     flaeche  = 187
     stadt    = ja
     kreis    = kr_bielefeld
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2911520; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2911520; Name Halle (Westfalen) aus den GeoNames-Alternativnamen (GeoNames: Halle); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort versmold {

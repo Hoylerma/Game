@@ -7,7 +7,8 @@
 # ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
 # und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 #
-# Umfang: Pommerellen, Kulmer Land, Marienburg und Elbing (1466–1772 Preußen Königlichen Anteils, danach bis 1920 preußisch).
+# Umfang: Pommerellen, Kulmer Land, Marienburg und Elbing (1466–1772 Preußen Königlichen
+# Anteils, danach bis 1920 preußisch).
 
 ort gniewino {
     name     = "Gniewino"
@@ -59,14 +60,14 @@ ort gdingen {
     quelle   = "GeoNames (CC BY 4.0), geonameid 3099424; deutscher Name aus den GeoNames-Alternativnamen (heute Gdynia); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort neustadt_westpreussen {
-    name     = "Neustadt (Westpreußen)"
+ort neustadt {
+    name     = "Neustadt"
     gelaende = huegelland
     lage     = { 18.2356 54.6057 }
     flaeche  = 155
     stadt    = ja
     kreis    = kr_gdingen
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3082473; deutscher Name aus den GeoNames-Alternativnamen (heute Wejherowo); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3082473; deutscher Name aus den GeoNames-Alternativnamen (heute Wejherowo); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort rumia {
@@ -189,14 +190,14 @@ ort praust {
     quelle   = "GeoNames (CC BY 4.0), geonameid 3088034; deutscher Name aus den GeoNames-Alternativnamen (heute Pruszcz Gdański); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort pszczolki {
-    name     = "Pszczółki"
+ort hohenstein_westpreussen {
+    name     = "Hohenstein (Westpreußen)"
     gelaende = flachland
     lage     = { 18.6979 54.173 }
     flaeche  = 122
     stadt    = nein
     kreis    = kr_danzig
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3087708; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3087708; deutscher Name aus den GeoNames-Alternativnamen (heute Pszczółki); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort gross_trampken {
@@ -449,14 +450,14 @@ ort skorcz {
     quelle   = "GeoNames (CC BY 4.0), geonameid 3085766; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort zblewo {
-    name     = "Zblewo"
+ort hoch_stueblau {
+    name     = "Hoch Stüblau"
     gelaende = flachland
     lage     = { 18.3226 53.9337 }
     flaeche  = 178
     stadt    = nein
     kreis    = kr_starogard_gdanski
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3080476; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3080476; deutscher Name aus den GeoNames-Alternativnamen (heute Zblewo); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort subkowy {
@@ -529,14 +530,14 @@ ort saalfeld_westpreussen {
     quelle   = "GeoNames (CC BY 4.0), geonameid 3080757; deutscher Name aus den GeoNames-Alternativnamen (heute Zalewo); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort ryjewo {
-    name     = "Ryjewo"
+ort rehhof {
+    name     = "Rehhof"
     gelaende = flachland
     lage     = { 18.9608 53.8446 }
     flaeche  = 143
     stadt    = nein
     kreis    = kr_stuhm
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3086524; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3086524; deutscher Name aus den GeoNames-Alternativnamen (heute Ryjewo); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort niklaskirchen {
@@ -679,14 +680,14 @@ ort prechlau {
     quelle   = "GeoNames (CC BY 4.0), geonameid 3088017; deutscher Name aus den GeoNames-Alternativnamen (heute Przechlewo); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort koczala {
-    name     = "Koczała"
+ort floetenstein {
+    name     = "Flötenstein"
     gelaende = flachland
     lage     = { 17.0653 53.9045 }
     flaeche  = 272
     stadt    = nein
     kreis    = kr_konitz_westpreussen
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3095874; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3095874; deutscher Name aus den GeoNames-Alternativnamen (heute Koczała); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort rzeczenica {

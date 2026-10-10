@@ -7,7 +7,8 @@
 # ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
 # und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 #
-# Umfang: Holstein mit Dithmarschen, Lauenburg, Lübeck und Hamburg (heute Schleswig-Holstein südlich der Eider sowie Hamburg).
+# Umfang: Holstein mit Dithmarschen, Lauenburg, Lübeck und Hamburg (heute Schleswig-Holstein
+# südlich der Eider sowie Hamburg).
 
 ort fehmarn {
     name     = "Fehmarn"
@@ -749,14 +750,14 @@ ort schwarzenbek {
     quelle   = "GeoNames (CC BY 4.0), geonameid 2835013; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort lauenburg_holstein {
-    name     = "Lauenburg (Holstein)"
+ort lauenburg {
+    name     = "Lauenburg"
     gelaende = flussaue
     lage     = { 10.5565 53.372 }
     flaeche  = 127
     stadt    = nein
     kreis    = kr_geesthacht
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2880181; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2880181; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort buechen {

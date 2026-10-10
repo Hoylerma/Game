@@ -7,7 +7,8 @@
 # ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
 # und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 #
-# Umfang: Mittelrhein mit Koblenz, Neuwied, Ahr, Hunsrück und unterer Mosel (1648 vor allem Kurtrier, Kurköln, Wied und Sayn).
+# Umfang: Mittelrhein mit Koblenz, Neuwied, Ahr, Hunsrück und unterer Mosel (1648 vor allem
+# Kurtrier, Kurköln, Wied und Sayn).
 
 ort kirchen {
     name     = "Kirchen"
@@ -269,14 +270,14 @@ ort kastellaun {
     quelle   = "GeoNames (CC BY 4.0), geonameid 2892485; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort kirchberg_mittelrhein {
-    name     = "Kirchberg (Mittelrhein)"
+ort kirchberg_hunsrueck {
+    name     = "Kirchberg (Hunsrück)"
     gelaende = huegelland
     lage     = { 7.407 49.944 }
     flaeche  = 147
     stadt    = nein
     kreis    = kr_boppard
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2890660; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2890660; Name Kirchberg (Hunsrück) aus den GeoNames-Alternativnamen (GeoNames: Kirchberg); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort oberwesel {

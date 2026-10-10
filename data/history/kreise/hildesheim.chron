@@ -12,7 +12,7 @@ kreis kr_hildesheim {
     quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
 }
 
-kreis kr_alfeld_hildesheim {
-    name   = "Alfeld (Hildesheim)"
+kreis kr_alfeld_leine {
+    name   = "Alfeld (Leine)"
     quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
 }

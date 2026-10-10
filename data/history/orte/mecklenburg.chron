@@ -12,8 +12,10 @@
 # stand bis 1654 unter Vormundschaft Adolf Friedrichs I. von Schwerin.
 # Mecklenburg verlor im Krieg einen sehr großen Teil seiner Bevölkerung.
 #
-# Ergänzt in Meilenstein M3 (tools/geodaten/orte.py): weitere Orte ohne Daten (ohne Historie) aus GeoNames, räumlich ausgewählt, Gelände aus dem Höhenmodell, Fläche aus der Karte.
-# Umfang der Landschaft Mecklenburg: Herzogtümer Mecklenburg (heute Mecklenburg-Vorpommern ohne die Landkreise Vorpommern-Rügen und Vorpommern-Greifswald).
+# Ergänzt in Meilenstein M3 (tools/geodaten/orte.py): weitere Orte ohne Daten (ohne Historie)
+# aus GeoNames, räumlich ausgewählt, Gelände aus dem Höhenmodell, Fläche aus der Karte.
+# Umfang der Landschaft Mecklenburg: Herzogtümer Mecklenburg (heute Mecklenburg-Vorpommern
+# ohne die Landkreise Vorpommern-Rügen und Vorpommern-Greifswald).
 
 ort schwerin {
     name     = "Schwerin"
@@ -417,14 +419,14 @@ ort krakow_am_see {
     quelle   = "GeoNames (CC BY 4.0), geonameid 2884850; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort goldberg_mecklenburg {
-    name     = "Goldberg (Mecklenburg)"
+ort goldberg {
+    name     = "Goldberg"
     gelaende = flachland
     lage     = { 12.0885 53.5888 }
     flaeche  = 309
     stadt    = nein
     kreis    = kr_guestrow
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2919366; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2919366; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort lalendorf {

@@ -79,14 +79,14 @@ ort niedenstein {
     quelle   = "GeoNames (CC BY 4.0), geonameid 2863685; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort naumburg_kurhessen {
-    name     = "Naumburg (Kurhessen)"
+ort naumburg {
+    name     = "Naumburg"
     gelaende = huegelland
     lage     = { 9.1657 51.2482 }
     flaeche  = 101
     stadt    = nein
     kreis    = kr_bad_arolsen
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2866905; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2866905; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort breuna {
@@ -219,14 +219,14 @@ ort bad_wildungen {
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953317; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort homberg_kurhessen {
-    name     = "Homberg (Kurhessen)"
+ort homberg_efze {
+    name     = "Homberg (Efze)"
     gelaende = huegelland
     lage     = { 9.4026 51.0299 }
     flaeche  = 201
     stadt    = ja
     kreis    = kr_bad_wildungen
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2899478; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2899478; Name Homberg (Efze) aus den GeoNames-Alternativnamen (GeoNames: Homberg); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort fritzlar {

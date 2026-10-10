@@ -639,14 +639,14 @@ ort neuhaus_an_der_pegnitz {
     quelle   = "GeoNames (CC BY 4.0), geonameid 2865129; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort alfeld_franken {
-    name     = "Alfeld (Franken)"
+ort alfeld {
+    name     = "Alfeld"
     gelaende = huegelland
     lage     = { 11.55 49.4333 }
     flaeche  = 149
     stadt    = nein
     kreis    = kr_lauf_an_der_pegnitz
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2958534; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2958534; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort bad_windsheim {

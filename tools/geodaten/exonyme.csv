@@ -3,6 +3,7 @@ geonameid;name_de;geprueft;heute
 6692414;Sankt Martin am Tennengebirge;ja;St. Martin of Tennengebirge
 2761369;Wien;ja;Vienna
 2774326;Klagenfurt;ja;Klagenfurt am Wörthersee
+2778441;Gmünd in Kärnten;ja;Gmünd
 2803242;Amel;ja;Amblève
 2803073;Arel;ja;Arlon
 2802583;Bastnach;nein;Bastogne
@@ -46,7 +47,7 @@ geonameid;name_de;geprueft;heute
 3078469;Bautsch;ja;Budišov nad Budišovkou
 3078503;Butschowitz;ja;Bučovice
 3078306;Bistrau;ja;Bystré
-3078288;Bistritz ob Pernstein;nein;Bystřice nad Pernštejnem
+3078288;Bystritz am Pernstein;ja;Bystřice nad Pernštejnem
 3078286;Bystritz-am-Hostein;ja;Bystřice pod Hostýnem
 3079348;Bilin;ja;Bílina
 3079336;Wagstadt;ja;Bílovec
@@ -63,14 +64,14 @@ geonameid;name_de;geprueft;heute
 3077318;Zwickau;ja;Cvikov
 3077304;Datschitz;ja;Dačice
 3077073;Dobrzan;ja;Dobřany
-3076972;Hirschberg;ja;Doksy
+3076972;Hirschberg in Böhmen;ja;Doksy
 3076873;Unter-Haid;ja;Dolní Dvořiště
 3076627;Unter-Sandau;ja;Dolní Žandov
 3076587;Taus;ja;Domažlice
 3061284;Königinhof an der Elbe;ja;Dvůr Králové nad Labem
 3077244;Tetschen;ja;Děčín
 3076120;Friedberg in Böhmen;ja;Frymburk
-3076124;Friedland;ja;Frýdlant
+3076124;Friedland in Böhmen;ja;Frýdlant
 3076116;Fulnek;ja;Fulnek
 3076098;Goltsch Jenikau;ja;Golčův Jeníkov
 3075958;Hannsdorf;ja;Hanušovice
@@ -223,7 +224,7 @@ geonameid;name_de;geprueft;heute
 3066759;Rossitz;ja;Rosice
 3066743;Rothau;ja;Rotava
 3066727;Raudnitz a.d. Elbe;ja;Roudnice nad Labem
-3066651;Rosenau;nein;Rožnov pod Radhoštěm
+3066651;Roznau;ja;Rožnov pod Radhoštěm
 3066503;Reichenau an der Knieschna;ja;Rychnov nad Kněžnou
 3066483;Römerstadt;ja;Rýmařov
 3066333;Seltschan;nein;Sedlčany
@@ -232,7 +233,7 @@ geonameid;name_de;geprueft;heute
 3065903;Schlan;ja;Slaný
 3065824;Austerlitz;ja;Slavkov u Brna
 3065818;Zlabings;ja;Slavonice
-3065644;Sobieslau;nein;Soběslav
+3065644;Sobeslau;ja;Soběslav
 3065617;Falkenau;ja;Sokolov
 3065249;Alt Pilsenetz;ja;Starý Plzenec
 3065067;Strakonitz;ja;Strakonice
@@ -327,6 +328,26 @@ geonameid;name_de;geprueft;heute
 3061350;Luditz;ja;Žlutice
 3061321;Friedeberg;ja;Žulová
 3061695;Saar;ja;Žďár nad Sázavou
+3061577;Scheletau;ja;Želetava
+3061750;Zbraslawitz;ja;Zbraslavice
+3063955;Trojanowitz;ja;Trojanovice
+3066385;Sazau;ja;Sázava
+3067324;Wüst Pohlom;ja;Pustá Polom
+3068837;Oskau;ja;Oskava
+3069785;Neweklau;ja;Neveklov
+3069844;Neratowitz;ja;Neratovice
+3070030;Nassaberg;ja;Nasavrky
+3070678;Mühlhausen;ja;Milevsko
+3072894;Schönberg;ja;Krásná Hora nad Vltavou
+3073371;Kolin;ja;Kolín
+3073780;Kasejowitz;ja;Kasejovice
+3074170;Ingrowitz;ja;Jimramov
+3075051;Hostiwitz;ja;Hostivice
+3076127;Friedeck;ja;Frýdek-Místek
+3076413;Zirnau;ja;Dřiteň
+3077543;Chroustowitz;ja;Chroustovice
+3079159;Bohdalau;ja;Bohdalov
+3079203;Blowitz;ja;Blovice
 2911584;Neuhaldensleben;ja;Haldensleben I
 2906268;Heppenheim;ja;Heppenheim an der Bergstrasse
 2867714;München;ja;Munich
@@ -335,6 +356,18 @@ geonameid;name_de;geprueft;heute
 2807845;Winsen (Luhe);ja;Winsen
 2807846;Winsen (Aller);ja;Winsen
 2803723;Zülpich;ja;Zulpich
+2866906;Naumburg an der Saale;ja;Naumburg
+2881508;Landsberg bei Halle;ja;Landsberg
+2890660;Kirchberg (Hunsrück);ja;Kirchberg
+2890662;Kirchberg im Wald;ja;Kirchberg
+2899478;Homberg (Efze);ja;Homberg
+2899479;Homberg an der Ohm;ja;Homberg
+2911520;Halle (Westfalen);ja;Halle
+2914432;Grünberg in Hessen;ja;Grünberg
+2925177;Freiburg im Breisgau;ja;Freiburg
+2929802;Erbach im Odenwald;ja;Erbach
+2954603;Auerbach in der Oberpfalz;ja;Auerbach
+2958533;Alfeld (Leine);ja;Alfeld
 2625070;Apenrade;ja;Aabenraa
 2621258;Gravenstein;ja;Gråsten
 2620964;Hadersleben;ja;Haderslev
@@ -419,6 +452,7 @@ geonameid;name_de;geprueft;heute
 2968894;Weiler;ja;Villé
 2967437;Wasselnheim;ja;Wasselonne
 2967325;Weißenburg;ja;Wissembourg
+2983761;Rheinau;ja;Rhinau
 3182585;Abtei;ja;Badia
 3181913;Bozen;ja;Bolzano
 3181550;Brixen;ja;Bressanone
@@ -487,7 +521,7 @@ geonameid;name_de;geprueft;heute
 776178;Bialla;ja;Biała Piska
 3103556;Belgard;ja;Białogard
 3103531;Baldenburg;ja;Biały Bór
-3103432;Beelitz;ja;Bielice
+3103432;Beelitz in Pommern;ja;Bielice
 3103402;Bielitz;nein;Bielsko-Biala
 3103364;Bernstadt;ja;Bierutów
 3103365;Berun;ja;Bieruń
@@ -545,7 +579,7 @@ geonameid;name_de;geprueft;heute
 3101145;Czarnikau;nein;Czarnków
 3101053;Czempin;ja;Czempiń
 3101006;Schwarzenau;nein;Czerniejewo
-3100976;Rothenburg;ja;Czerwieńsk
+3100976;Rothenburg an der Oder;ja;Czerwieńsk
 3100946;Tschenstochau;ja;Częstochowa
 3100936;Schloppe;ja;Człopa
 3100933;Schlochau;ja;Człuchów
@@ -566,7 +600,7 @@ geonameid;name_de;geprueft;heute
 3099966;Degow;ja;Dygowo
 772748;Soldau;ja;Działdowo
 3099842;Christburg;ja;Dzierzgoń
-3099828;Reichenbach;ja;Dzierżoniów
+3099828;Reichenbach in Schlesien;ja;Dzierżoniów
 3100849;Dambrau;ja;Dąbrowa
 3100553;Rathsdamnitz;ja;Dębnica Kaszubska
 3100545;Neudamm;ja;Dębno
@@ -622,7 +656,7 @@ geonameid;name_de;geprueft;heute
 3097420;Jastrow;ja;Jastrowie
 3097367;Jauer;ja;Jawor
 770148;Gedwangen;ja;Jedwabno
-3097257;Hirschberg;ja;Jelenia Góra
+3097257;Hirschberg in Schlesien;ja;Jelenia Góra
 770078;Seeburg;ja;Jeziorany
 770025;Jonkendorf;ja;Jonkowo
 3096880;Kalisch;ja;Kalisz
@@ -701,7 +735,7 @@ geonameid;name_de;geprueft;heute
 3092639;Neustadt bei Pinne;ja;Lwówek
 3092638;Löwenberg;ja;Lwówek Śląski
 3094016;Bad Landeck;ja;Lądek-Zdrój
-3093739;Lauenburg;ja;Lębork
+3093739;Lauenburg in Pommern;ja;Lębork
 3092472;Marienburg;ja;Malbork
 3092468;Maltsch;ja;Malczyce
 3092197;Massow;ja;Maszewo
@@ -710,7 +744,7 @@ geonameid;name_de;geprueft;heute
 3092080;Rummelsburg;ja;Miastko
 3091957;Görchen;nein;Miejska Górka
 3091913;Grossmöllen;ja;Mielno
-3091901;Friedland;ja;Mieroszów
+3091901;Friedland in Schlesien;ja;Mieroszów
 3091861;Bärwalde in Neumark;ja;Mieszkowice
 3091874;Mietschisko;nein;Mieścisko
 764777;Nikolaiken;ja;Mikołajki
@@ -803,7 +837,7 @@ geonameid;name_de;geprueft;heute
 3088477;Bad Polzin;ja;Połczyn-Zdrój
 3088161;Riesenburg;ja;Prabuty
 3088096;Parchwitz;ja;Prochowice
-3088065;Neustadt;ja;Prudnik
+3088065;Neustadt in Oberschlesien;ja;Prudnik
 3088034;Praust;ja;Pruszcz Gdański
 3088017;Prechlau;ja;Przechlewo
 3087958;Prillwitz;ja;Przelewice
@@ -872,7 +906,7 @@ geonameid;name_de;geprueft;heute
 758242;Stabigotten;ja;Stawiguda
 3084660;Stepenitz;ja;Stepnica
 3084440;Striegau;ja;Strzegom
-3084421;Friedeberg;ja;Strzelce Krajeńskie
+3084421;Friedeberg in Neumark;ja;Strzelce Krajeńskie
 3084415;Groß Strehlitz;ja;Strzelce Opolskie
 3084404;Strehlen;ja;Strzelin
 3084396;Strelno;ja;Strzelno
@@ -932,7 +966,7 @@ geonameid;name_de;geprueft;heute
 3082722;Wadowitz;nein;Wadowice
 3082705;Walzen;nein;Walce
 3082607;Warnitz;ja;Warnice
-3082707;Waldenburg;ja;Wałbrzych
+3082707;Waldenburg in Schlesien;ja;Wałbrzych
 3082704;Deutsch Krone;ja;Wałcz
 3082473;Neustadt;ja;Wejherowo
 3082376;Fiddichow;ja;Widuchowa
@@ -979,7 +1013,7 @@ geonameid;name_de;geprueft;heute
 3080226;Münsterberg;ja;Ziębice
 3081046;Frankenstein;ja;Ząbkowice Śląskie
 3080102;Falkenburg;ja;Złocieniec
-3080074;Goldberg;ja;Złotoryja
+3080074;Goldberg in Schlesien;ja;Złotoryja
 3080061;Reichenstein;ja;Złoty Stok
 3080071;Flatow i. Westpr.;ja;Złotów
 3094052;Labischin;ja;Łabiszyn
@@ -999,7 +1033,7 @@ geonameid;name_de;geprueft;heute
 3084092;Schweinitz;ja;Świdnica
 3084093;Schweidnitz;ja;Świdnica
 3084085;Schivelbein;ja;Świdwin
-3084084;Freiburg;ja;Świebodzice
+3084084;Freiburg in Schlesien;ja;Świebodzice
 3084062;Schwiebus;ja;Świebodzin
 3084055;Bad Flinsberg;ja;Świeradów-Zdrój
 3084020;Schwirsen;ja;Świerzno
@@ -1015,6 +1049,15 @@ geonameid;name_de;geprueft;heute
 3079969;Zuckau;nein;Żukowo
 3079855;Saybusch;ja;Żywiec
 3080007;Rothsürben;ja;Żórawina
+765854;Arnsdorf;ja;Lubomino
+766507;Lichtenfeld;ja;Lelkowo
+3080476;Hoch Stüblau;ja;Zblewo
+3085976;Schierokau;ja;Sieraków Śląski
+3086524;Rehhof;ja;Ryjewo
+3087708;Hohenstein;ja;Pszczółki
+3090552;Neuenburg;ja;Nowogródek Pomorski
+3095874;Flötenstein;ja;Koczała
+3100193;Noldau;ja;Domaszowice
 579760;Preußisch Eylau;ja;Bagrationovsk
 2609906;Pillau;ja;Baltiysk
 568595;Insterburg;ja;Chernyakhovsk
@@ -1041,6 +1084,7 @@ geonameid;name_de;geprueft;heute
 463828;Cranz;ja;Zelenogradsk
 463356;Gerdauen;ja;Zheleznodorozhnyy
 462322;Wehlau;ja;Znamensk
+825760;Jesau;ja;Yuzhnyy
 3203808;Wochein Feistritz;ja;Bohinjska Bistrica
 3203677;Franzdorf;nein;Borovnica
 3203412;Rann;ja;Brežice
@@ -1109,3 +1153,6 @@ geonameid;name_de;geprueft;heute
 3190717;Bischoflack;ja;Škofja Loka
 3186607;Eisnern;nein;Železniki
 3186270;Seisenberg;ja;Žužemberk
+3191029;Sankt Georgen;ja;Šentjur
+3196192;Laserbach;ja;Loški Potok
+3196682;Sankt Leonhard;ja;Lenart v Slov. Goricah

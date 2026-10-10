@@ -12,8 +12,10 @@
 # lutherischen Bekenntnis zurück. Das Land lag im Durchzugsgebiet der Heere an
 # Elbe und Saale und war schwer verwüstet.
 #
-# Ergänzt in Meilenstein M3 (tools/geodaten/orte.py): weitere Orte ohne Daten (ohne Historie) aus GeoNames, räumlich ausgewählt, Gelände aus dem Höhenmodell, Fläche aus der Karte.
-# Umfang der Landschaft Anhalt: Fürstentümer Anhalt (heute Landkreis Anhalt-Bitterfeld und Dessau-Roßlau).
+# Ergänzt in Meilenstein M3 (tools/geodaten/orte.py): weitere Orte ohne Daten (ohne Historie)
+# aus GeoNames, räumlich ausgewählt, Gelände aus dem Höhenmodell, Fläche aus der Karte.
+# Umfang der Landschaft Anhalt: Fürstentümer Anhalt (heute Landkreis Anhalt-Bitterfeld und
+# Dessau-Roßlau).
 
 ort dessau {
     name     = "Dessau"

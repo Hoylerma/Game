@@ -8,7 +8,7 @@ kr_baden_baden;baden;Baden-Baden;räumlich gebildet (M3), keine historische Verw
 kr_offenburg;baden;Offenburg;räumlich gebildet (M3), keine historische Verwaltungseinheit
 kr_emmendingen;baden;Emmendingen;räumlich gebildet (M3), keine historische Verwaltungseinheit
 kr_villingen_schwenningen;baden;Villingen-Schwenningen;räumlich gebildet (M3), keine historische Verwaltungseinheit
-kr_freiburg_baden;baden;Freiburg (Baden);räumlich gebildet (M3), keine historische Verwaltungseinheit
+kr_freiburg_im_breisgau;baden;Freiburg im Breisgau;räumlich gebildet (M3), keine historische Verwaltungseinheit
 kr_donaueschingen;baden;Donaueschingen;räumlich gebildet (M3), keine historische Verwaltungseinheit
 kr_konstanz;baden;Konstanz;räumlich gebildet (M3), keine historische Verwaltungseinheit
 kr_waldshut_tiengen;baden;Waldshut-Tiengen;räumlich gebildet (M3), keine historische Verwaltungseinheit
@@ -53,7 +53,7 @@ kr_prag;boehmen;Prag;räumlich gebildet (M3), keine historische Verwaltungseinhe
 kr_eger;boehmen;Eger;räumlich gebildet (M3), keine historische Verwaltungseinheit
 kr_theusing;boehmen;Theusing;räumlich gebildet (M3), keine historische Verwaltungseinheit
 kr_pardubitz;boehmen;Pardubitz;räumlich gebildet (M3), keine historische Verwaltungseinheit
-kr_kolin;boehmen;Kolín;räumlich gebildet (M3), keine historische Verwaltungseinheit
+kr_kolin;boehmen;Kolin;räumlich gebildet (M3), keine historische Verwaltungseinheit
 kr_marienbad;boehmen;Marienbad;räumlich gebildet (M3), keine historische Verwaltungseinheit
 kr_beraun;boehmen;Beraun;räumlich gebildet (M3), keine historische Verwaltungseinheit
 kr_kuttenberg;boehmen;Kuttenberg;räumlich gebildet (M3), keine historische Verwaltungseinheit
@@ -64,7 +64,7 @@ kr_pilsen;boehmen;Pilsen;räumlich gebildet (M3), keine historische Verwaltungse
 kr_wlaschim;boehmen;Wlaschim;räumlich gebildet (M3), keine historische Verwaltungseinheit
 kr_pribram;boehmen;Příbram;räumlich gebildet (M3), keine historische Verwaltungseinheit
 kr_deutsch_brod;boehmen;Deutsch Brod;räumlich gebildet (M3), keine historische Verwaltungseinheit
-kr_milevsko;boehmen;Milevsko;räumlich gebildet (M3), keine historische Verwaltungseinheit
+kr_muehlhausen_boehmen;boehmen;Mühlhausen (Böhmen);räumlich gebildet (M3), keine historische Verwaltungseinheit
 kr_taus;boehmen;Taus;räumlich gebildet (M3), keine historische Verwaltungseinheit
 kr_blatna;boehmen;Blatná;räumlich gebildet (M3), keine historische Verwaltungseinheit
 kr_tabor;boehmen;Tábor;räumlich gebildet (M3), keine historische Verwaltungseinheit
@@ -174,7 +174,7 @@ kr_maubeuge;hennegau;Maubeuge;räumlich gebildet (M3), keine historische Verwalt
 kr_cambrai;hennegau;Cambrai;räumlich gebildet (M3), keine historische Verwaltungseinheit
 kr_fourmies;hennegau;Fourmies;räumlich gebildet (M3), keine historische Verwaltungseinheit
 kr_hildesheim;hildesheim;Hildesheim;räumlich gebildet (M3), keine historische Verwaltungseinheit
-kr_alfeld_hildesheim;hildesheim;Alfeld (Hildesheim);räumlich gebildet (M3), keine historische Verwaltungseinheit
+kr_alfeld_leine;hildesheim;Alfeld (Leine);räumlich gebildet (M3), keine historische Verwaltungseinheit
 kr_fehmarn;holstein;Fehmarn;räumlich gebildet (M3), keine historische Verwaltungseinheit
 kr_kiel;holstein;Kiel;räumlich gebildet (M3), keine historische Verwaltungseinheit
 kr_heide;holstein;Heide;räumlich gebildet (M3), keine historische Verwaltungseinheit
@@ -337,7 +337,7 @@ kr_wetzlar;nassau;Wetzlar;räumlich gebildet (M3), keine historische Verwaltungs
 kr_westerburg;nassau;Westerburg;räumlich gebildet (M3), keine historische Verwaltungseinheit
 kr_lahnstein;nassau;Lahnstein;räumlich gebildet (M3), keine historische Verwaltungseinheit
 kr_wiesbaden;nassau;Wiesbaden;räumlich gebildet (M3), keine historische Verwaltungseinheit
-kr_gmuend_niederoesterreich;niederoesterreich;Gmünd (Niederösterreich);räumlich gebildet (M3), keine historische Verwaltungseinheit
+kr_gmuend;niederoesterreich;Gmünd;räumlich gebildet (M3), keine historische Verwaltungseinheit
 kr_laa_an_der_thaya;niederoesterreich;Laa an der Thaya;räumlich gebildet (M3), keine historische Verwaltungseinheit
 kr_eggenburg;niederoesterreich;Eggenburg;räumlich gebildet (M3), keine historische Verwaltungseinheit
 kr_mistelbach;niederoesterreich;Mistelbach;räumlich gebildet (M3), keine historische Verwaltungseinheit
@@ -358,7 +358,7 @@ kr_essen_niederrhein;niederrhein;Essen (Niederrhein);räumlich gebildet (M3), ke
 kr_moers;niederrhein;Moers;räumlich gebildet (M3), keine historische Verwaltungseinheit
 kr_duesseldorf;niederrhein;Düsseldorf;räumlich gebildet (M3), keine historische Verwaltungseinheit
 kr_moenchengladbach;niederrhein;Mönchengladbach;räumlich gebildet (M3), keine historische Verwaltungseinheit
-kr_gruenberg_niederschlesien;niederschlesien;Grünberg (Niederschlesien);räumlich gebildet (M3), keine historische Verwaltungseinheit
+kr_gruenberg;niederschlesien;Grünberg;räumlich gebildet (M3), keine historische Verwaltungseinheit
 kr_guhrau;niederschlesien;Guhrau;räumlich gebildet (M3), keine historische Verwaltungseinheit
 kr_glogau;niederschlesien;Glogau;räumlich gebildet (M3), keine historische Verwaltungseinheit
 kr_sagan;niederschlesien;Sagan;räumlich gebildet (M3), keine historische Verwaltungseinheit
@@ -367,10 +367,10 @@ kr_oels;niederschlesien;Oels;räumlich gebildet (M3), keine historische Verwaltu
 kr_liegnitz;niederschlesien;Liegnitz;räumlich gebildet (M3), keine historische Verwaltungseinheit
 kr_breslau;niederschlesien;Breslau;räumlich gebildet (M3), keine historische Verwaltungseinheit
 kr_jauer;niederschlesien;Jauer;räumlich gebildet (M3), keine historische Verwaltungseinheit
-kr_hirschberg_niederschlesien;niederschlesien;Hirschberg (Niederschlesien);räumlich gebildet (M3), keine historische Verwaltungseinheit
+kr_hirschberg_in_schlesien;niederschlesien;Hirschberg in Schlesien;räumlich gebildet (M3), keine historische Verwaltungseinheit
 kr_brieg;niederschlesien;Brieg;räumlich gebildet (M3), keine historische Verwaltungseinheit
-kr_waldenburg_niederschlesien;niederschlesien;Waldenburg (Niederschlesien);räumlich gebildet (M3), keine historische Verwaltungseinheit
-kr_reichenbach_niederschlesien;niederschlesien;Reichenbach (Niederschlesien);räumlich gebildet (M3), keine historische Verwaltungseinheit
+kr_waldenburg_in_schlesien;niederschlesien;Waldenburg in Schlesien;räumlich gebildet (M3), keine historische Verwaltungseinheit
+kr_reichenbach_in_schlesien;niederschlesien;Reichenbach in Schlesien;räumlich gebildet (M3), keine historische Verwaltungseinheit
 kr_marburg_an_der_lahn;oberhessen;Marburg an der Lahn;räumlich gebildet (M3), keine historische Verwaltungseinheit
 kr_lauterbach;oberhessen;Lauterbach;räumlich gebildet (M3), keine historische Verwaltungseinheit
 kr_giessen;oberhessen;Gießen;räumlich gebildet (M3), keine historische Verwaltungseinheit
@@ -443,7 +443,7 @@ kr_hoexter;ostwestfalen;Höxter;räumlich gebildet (M3), keine historische Verwa
 kr_paderborn;ostwestfalen;Paderborn;räumlich gebildet (M3), keine historische Verwaltungseinheit
 kr_zwolle;overijssel;Zwolle;räumlich gebildet (M3), keine historische Verwaltungseinheit
 kr_enschede;overijssel;Enschede;räumlich gebildet (M3), keine historische Verwaltungseinheit
-kr_lauenburg_pommern;pommern;Lauenburg (Pommern);räumlich gebildet (M3), keine historische Verwaltungseinheit
+kr_lauenburg_in_pommern;pommern;Lauenburg in Pommern;räumlich gebildet (M3), keine historische Verwaltungseinheit
 kr_stolp;pommern;Stolp;räumlich gebildet (M3), keine historische Verwaltungseinheit
 kr_bergen_auf_ruegen;pommern;Bergen auf Rügen;räumlich gebildet (M3), keine historische Verwaltungseinheit
 kr_stralsund;pommern;Stralsund;räumlich gebildet (M3), keine historische Verwaltungseinheit
@@ -538,7 +538,7 @@ kr_sonthofen;schwaben;Sonthofen;räumlich gebildet (M3), keine historische Verwa
 kr_offenbach;starkenburg;Offenbach;räumlich gebildet (M3), keine historische Verwaltungseinheit
 kr_ruesselsheim;starkenburg;Rüsselsheim;räumlich gebildet (M3), keine historische Verwaltungseinheit
 kr_darmstadt;starkenburg;Darmstadt;räumlich gebildet (M3), keine historische Verwaltungseinheit
-kr_erbach_starkenburg;starkenburg;Erbach (Starkenburg);räumlich gebildet (M3), keine historische Verwaltungseinheit
+kr_erbach_im_odenwald;starkenburg;Erbach im Odenwald;räumlich gebildet (M3), keine historische Verwaltungseinheit
 kr_muerzzuschlag;steiermark;Mürzzuschlag;räumlich gebildet (M3), keine historische Verwaltungseinheit
 kr_liezen;steiermark;Liezen;räumlich gebildet (M3), keine historische Verwaltungseinheit
 kr_eisenerz;steiermark;Eisenerz;räumlich gebildet (M3), keine historische Verwaltungseinheit

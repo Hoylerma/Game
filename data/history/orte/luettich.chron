@@ -7,7 +7,8 @@
 # ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
 # und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 #
-# Umfang: Hochstift Lüttich mit der Grafschaft Loon, das alte Herzogtum Limburg mit Eupen sowie Stablo-Malmedy (heute belgische Provinzen Lüttich und Limburg).
+# Umfang: Hochstift Lüttich mit der Grafschaft Loon, das alte Herzogtum Limburg mit Eupen
+# sowie Stablo-Malmedy (heute belgische Provinzen Lüttich und Limburg).
 
 ort genk {
     name     = "Genk"

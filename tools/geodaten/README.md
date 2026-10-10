@@ -281,7 +281,7 @@ Eingaben ergeben byte-gleiche Tabellen (geprüft mit Python 3.10/numpy 2.2 und 3
 |---|---|
 | `landschaften.csv` | Staat und GeoNames-Verwaltungscodes (admin1–admin4) → Landschaft; 419 Regeln. Es gilt die passende Regel mit der tiefsten Ebene; leeres Feld = beliebig, „-“ = Feld muss leer sein (für fehlerhafte Codes in GeoNames). Ohne passende Regel erhält ein Kandidat die Landschaft des nächsten zugeordneten Kandidaten (steht im Bericht). |
 | `landschaften_dateien.csv` | 77 Landschaften = Dateien unter `history/orte` und `history/kreise`: Name, Kurzname (Zusatz bei gleichnamigen Orten), Abstandsfaktor der Auswahl, Umfang für den Kopfkommentar (`dateien.csv`) |
-| `exonyme.csv` | Deutsche Namen: `geonameid;name_de;geprueft;heute`. `geprueft = ja` nur, wenn `name_de` wörtlich in den GeoNames-Alternativnamen steht – allein oder mit Ortszusatz („Braunsberg  Ostpreußen“, „Landskron/Schönhengstgau“: Name, dann Leerzeichen oder Schrägstrich, dann ein groß geschriebener Zusatz). `orte.py` prüft das und die Spalte `heute` (GeoNames-Name, zur Lesbarkeit) bei jedem Lauf. Einträge mit `nein` (208) sind Namen ohne Beleg in GeoNames; sie wirken nicht. 902 Einträge mit `ja`. |
+| `exonyme.csv` | Deutsche Namen: `geonameid;name_de;geprueft;heute`. `geprueft = ja` nur, wenn `name_de` wörtlich in den GeoNames-Alternativnamen steht – allein oder mit Ortszusatz („Braunsberg  Ostpreußen“, „Landskron/Schönhengstgau“: Name, dann Leerzeichen oder Schrägstrich, dann ein groß geschriebener Zusatz). `orte.py` prüft das und die Spalte `heute` (GeoNames-Name, zur Lesbarkeit) bei jedem Lauf. Einträge mit `nein` (205) sind Namen ohne Beleg in GeoNames; sie wirken nicht. 952 Einträge mit `ja`, darunter für Orte in DE/AT auch die deutsche oder volle Namensform, wo der GeoNames-Hauptname abweicht (München statt Munich, Freiburg im Breisgau statt Freiburg). |
 | `ausschluesse.csv` | 51 Kandidaten, die entfallen, mit Begründung: moderne Gründungen (`neugruendung`, etwa Wolfsburg, Eisenhüttenstadt), Kunstnamen aus Gemeindereformen (`kunstname`, etwa Filderstadt, Rodgau), außerdem `ortsteil`, `doppelt`, `datenfehler` |
 | `gelaende_gebiete.csv` | 14 Börden und 2 Heiden als Kreise (Mittelpunkt und Radius geschätzt) mit Beleg |
 
@@ -313,8 +313,14 @@ Eingaben ergeben byte-gleiche Tabellen (geprüft mit Python 3.10/numpy 2.2 und 3
    ohne moderne Zusätze („Lutherstadt“, „Ostseebad“, „Hansestadt“, „… Stadt“ usw.; „Bad“ bleibt);
    (c) in Südtirol der deutsche Teil des zweisprachigen Namens („Bolzano - Bozen“ → Bozen);
    (d) sonst der heutige Name. Deutsche Namen werden nie ohne GeoNames-Beleg vergeben.
-   Gleichnamige Orte (auch gleich einem M1-Ort) erhalten „ (Kurzname der Landschaft)“, etwa
-   „Neustadt (Oberschlesien)“; Namen mit Klammerzusatz bleiben.
+   Führt GeoNames für einen von mehreren gleichnamigen Orten eine volle historische Namensform,
+   steht diese in `exonyme.csv` („Freiburg im Breisgau“, „Hirschberg in Schlesien“, „Neustadt in
+   Oberschlesien“, „Friedland in Böhmen“, „Naumburg an der Saale“). Die übrigen gleichnamigen Orte
+   (auch gleich einem M1-Ort) erhalten „ (Kurzname der Landschaft)“, etwa „Mühlhausen (Böhmen)“
+   (82 Orte); Namen mit Klammerzusatz bleiben. Namen aus den Umbenennungen der Jahre 1933–1945
+   werden nicht übernommen, auch wenn GeoNames sie führt (Hindenburg für Zabrze, Heydebreck für
+   Kędzierzyn, Breitenmarkt für Sieraków Śląski, Dietfurt für Żnin, Eichenbrück für Wągrowiec);
+   ebenso keine Namen der Nachkriegszeit (Gottwald für Zlín).
 6. **Kennung**: Kleinbuchstaben, ä → ae, ö → oe, ü → ue, ß → ss, Akzente weg, sonst „_“.
    Gleiche Kennungen erhalten alle die Landschaft als Zusatz, dann den nächsten benannten Fluss
    (bis 5 km), zuletzt eine Zahl; Kennungen der M1-Orte sind belegt.
@@ -349,8 +355,8 @@ Eingaben ergeben byte-gleiche Tabellen (geprüft mit Python 3.10/numpy 2.2 und 3
 10. **Reihenfolge** in `orte.csv`: die M1-Orte unverändert vorn, dann die neuen Orte nach
     Landschaft, Kreis (je Landschaft von Nord nach Süd), Hauptort zuerst, dann nach Bedeutung;
     `kreise.csv` in derselben Kreisfolge. `dateien.csv` erhält Kopfkommentare für die neuen Dateien
-    und einen M3-Absatz für die Dateien der M1-Orte (bei jedem Lauf ersetzt); die Zeilen der
-    Staaten bleiben unverändert.
+    und einen M3-Absatz für die Dateien der M1-Orte (bei jedem Lauf ersetzt, auf 92 Zeichen je
+    Zeile umgebrochen); die Zeilen der Staaten bleiben unverändert.
 
 Quellenangabe eines neuen Ortes: `GeoNames (CC BY 4.0), geonameid N; <Herkunft des Namens>[; Zusatz
 der Landschaft …][; Lage auf das nächste Landpixel gesetzt]; Gelände aus Höhenmodell; Fläche aus der
@@ -365,10 +371,14 @@ Karte`.
   826.356 km².
 - Gelände: Hügelland 1.619, Flachland 1.487, Mittelgebirge 736, Flussaue 243, Hochgebirge 195,
   Küste 131, Börde 66, Seenplatte 40, Heide 21, Bruch 2, Wald 1. Städte: 1.086.
-- Namen der neuen Orte: 2.632 deutsche GeoNames-Namen in DE/AT/LI, 890 deutsche Namen aus
-  `exonyme.csv`, 5 aus zweisprachigen Südtiroler Namen, 954 heutige Namen ohne abweichenden
-  deutschen Namen in GeoNames (am meisten in Posen 91, Lothringen 84, Böhmen 82,
-  Westpreußen 79, Kongresspolen 78).
+- Namen der neuen Orte: 2.607 GeoNames-Namen in DE/AT/LI, 952 Namen aus `exonyme.csv` (927
+  deutsche Namen außerhalb von DE/AT/LI, 25 abweichende Namensformen in DE/AT), 5 aus
+  zweisprachigen Südtiroler Namen, 917 heutige Namen ohne abweichenden deutschen Namen in
+  GeoNames (am meisten in Posen 91, Lothringen 84, Kongresspolen 78, Westpreußen 75,
+  Böhmen 68). 82 Orte tragen den Kurznamen ihrer Landschaft als Zusatz.
+- Prüfungen: `archivar.py --pruefen` und `kartengenerator.py --pruefen` aktuell (Warnungen nur zu
+  Helgoland, Wangerooge und Juist sowie zum Land ohne Ort); `uhrwerk-cli pruefen`: 0 Fehler,
+  0 Warnungen, 4.541 Orte (60 mit Daten, 4.481 ohne Daten), 627 Kreise.
 
 ### Bekannte Grenzen
 
@@ -381,13 +391,40 @@ Karte`.
 - Auswahl und Kreisnamen folgen der heutigen Bedeutung (Einwohner, Verwaltungssitze): Industrie-
   städte des 19./20. Jahrhunderts sind stärker vertreten, abgegangene Orte fehlen; Kreise heißen
   nach dem heute größten Ort (Kreis Freistadt statt Teschen, Kreis Ostrava).
-- Deutsche Namen nur mit GeoNames-Beleg: Für 954 Orte führt GeoNames keinen abweichenden deutschen
-  Namen (etwa Lubawa/Löbau, Krynica Morska/Kahlberg, Mährisch Ostrau). Ergänzen nur mit Beleg in
-  `exonyme.csv`. Umbenennungen der Jahre 1933–1945 sind nicht aufgenommen; „Bad“ im Namen ist meist
-  erst im 19./20. Jahrhundert verliehen und bleibt trotzdem stehen (92 Orte).
+- Deutsche Namen nur mit GeoNames-Beleg: Für 917 Orte führt GeoNames keinen abweichenden deutschen
+  Namen (etwa Lubawa/Löbau, Krynica Morska/Kahlberg, Ostrava/Mährisch Ostrau, Bielsko-Biala/Bielitz,
+  Lille/Ryssel). Ergänzen nur mit Beleg in `exonyme.csv`. Manche Belege sind Abkürzungen oder
+  Nebenformen und stehen so in GeoNames („Raudnitz a.d. Elbe“, „Flatow i. Westpr.“, „Roznau“ für
+  Rožnau, „Sobeslau“ neben Sobieslau). Umbenennungen der Jahre 1933–1945 sind nicht aufgenommen;
+  „Bad“ im Namen ist meist erst im 19./20. Jahrhundert verliehen und bleibt trotzdem stehen
+  (92 Orte).
+- Städte, die im 20. Jahrhundert aus mehreren Orten zusammengelegt wurden, tragen ihren heutigen
+  Namen (Wuppertal, Kędzierzyn-Koźle, Bielsko-Biala, Castrop-Rauxel, Villingen-Schwenningen,
+  Garmisch-Partenkirchen). Ihre historischen Teile führt `cities1000` nur als Ortsteile (PPLX, nicht
+  aufgenommen: Cosel, Altona) oder gar nicht (Elberfeld, Barmen); sie sind keine eigenen Orte.
+  Frýdek-Místek heißt nach dem belegten Namen seines älteren Teils Friedeck.
 - Landschaftsgrenzen folgen heutigen Verwaltungsgrenzen (Kreise, Powiats, Okresy, Départements,
   Gemeinden) und nähern die historischen Grenzen nur an.
 - Gelände ist eine Näherung aus Höhen im Raster von etwa 400 m mit festen Schwellen; Börden und
   Heiden nur in den Kreisen von `gelaende_gebiete.csv`.
 - Helgoland (1 km²) und Wangerooge (6 km²) sind auf der Karte sehr klein; Archivar und
   Kartengenerator warnen darüber.
+
+### Tests (`test_orte.py`)
+
+Ohne Netz und ohne Zwischenspeicher, unter Python 3.10 und 3.13:
+
+- Namen: Bereinigung moderner Zusätze, Namensbeleg (auch mit Ortszusatz), Namenswahl, Prüfung von
+  `exonyme.csv`, Zusatz bei gleichnamigen Orten; Kennungen (Umschrift, Zusatz Landschaft – Fluss –
+  Zahl, Eindeutigkeit bei 300 Zufallsfällen).
+- Regeln in `landschaften.csv` (tiefste Ebene, „-“ für leere Felder), Verwaltungsrang und
+  Bedeutung, Abstandsfaktor, Punktgitter; Gelände-Regeln in Vorrangfolge, Gebiete, Haffe.
+- Kreisbildung auf Gittern aller Größen bis 8 × 12 (4–12 Orte, zusammenhängend, im Mittel 5–9),
+  Ketten, Teile ohne Landverbindung, Unabhängigkeit von der Reihenfolge der Eingaben (Determinismus),
+  Exklaven; Kopfkommentare (`dateien.csv`: Umbruch, M3-Absatz wird ersetzt, nicht verdoppelt).
+- Eingecheckte Hilfstabellen und erzeugte Tabellen: Umfang (4.200–4.800 Orte), eindeutige Kennungen,
+  bekannte Geländetypen, Kreise mit Hauptort, M1-Orte vorn und als einzige mit Historie, Fläche wie
+  in `definition.csv`, Stichprobe bekannter Städte (Berlin-Cölln, Hamburg, München, Wien, Prag,
+  Breslau, Königsberg, Danzig, Straßburg, Köln, Frankfurt am Main, Nürnberg, Dresden, Leipzig,
+  Brüssel, Memel, Glatz, Iglau, Diedenhofen, Liegnitz …).
+- `ORTE_VOLLTEST=1`: vollständiger Lauf mit Byte-Vergleich (braucht den Zwischenspeicher).

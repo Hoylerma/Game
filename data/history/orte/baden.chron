@@ -7,7 +7,8 @@
 # ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
 # und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 #
-# Umfang: Markgrafschaften Baden, vorderösterreichischer Breisgau, Ortenau, Schwarzwald und Hochrhein (heute Regierungsbezirke Karlsruhe und Freiburg ohne Kurpfalz und Württemberg).
+# Umfang: Markgrafschaften Baden, vorderösterreichischer Breisgau, Ortenau, Schwarzwald und
+# Hochrhein (heute Regierungsbezirke Karlsruhe und Freiburg ohne Kurpfalz und Württemberg).
 
 ort karlsruhe {
     name     = "Karlsruhe"
@@ -449,14 +450,14 @@ ort hornberg {
     quelle   = "GeoNames (CC BY 4.0), geonameid 2898876; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort freiburg_baden {
-    name     = "Freiburg (Baden)"
+ort freiburg_im_breisgau {
+    name     = "Freiburg im Breisgau"
     gelaende = mittelgebirge
     lage     = { 7.8522 47.9959 }
     flaeche  = 102
     stadt    = ja
-    kreis    = kr_freiburg_baden
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2925177; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+    kreis    = kr_freiburg_im_breisgau
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2925177; Name Freiburg im Breisgau aus den GeoNames-Alternativnamen (GeoNames: Freiburg); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort breisach_am_rhein {
@@ -465,7 +466,7 @@ ort breisach_am_rhein {
     lage     = { 7.5829 48.0328 }
     flaeche  = 188
     stadt    = nein
-    kreis    = kr_freiburg_baden
+    kreis    = kr_freiburg_im_breisgau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2944800; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
@@ -475,7 +476,7 @@ ort kirchzarten {
     lage     = { 7.95 47.9667 }
     flaeche  = 145
     stadt    = nein
-    kreis    = kr_freiburg_baden
+    kreis    = kr_freiburg_im_breisgau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2890328; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
@@ -485,7 +486,7 @@ ort schallstadt {
     lage     = { 7.7576 47.9586 }
     flaeche  = 115
     stadt    = nein
-    kreis    = kr_freiburg_baden
+    kreis    = kr_freiburg_im_breisgau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2840526; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
@@ -495,7 +496,7 @@ ort boetzingen {
     lage     = { 7.7248 48.0764 }
     flaeche  = 137
     stadt    = nein
-    kreis    = kr_freiburg_baden
+    kreis    = kr_freiburg_im_breisgau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2945740; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
@@ -505,7 +506,7 @@ ort muenstertal_schwarzwald {
     lage     = { 7.7842 47.8547 }
     flaeche  = 170
     stadt    = nein
-    kreis    = kr_freiburg_baden
+    kreis    = kr_freiburg_im_breisgau
     quelle   = "GeoNames (CC BY 4.0), geonameid 6559224; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
@@ -515,7 +516,7 @@ ort hartheim {
     lage     = { 7.6333 47.9333 }
     flaeche  = 99
     stadt    = nein
-    kreis    = kr_freiburg_baden
+    kreis    = kr_freiburg_im_breisgau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2910108; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
@@ -525,7 +526,7 @@ ort weisweil {
     lage     = { 7.6771 48.1994 }
     flaeche  = 160
     stadt    = nein
-    kreis    = kr_freiburg_baden
+    kreis    = kr_freiburg_im_breisgau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2811691; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 

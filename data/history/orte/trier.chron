@@ -7,7 +7,8 @@
 # ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
 # und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 #
-# Umfang: Trierer Land mit Mosel, Eifel und Hunsrück (heute Trier, Bernkastel-Wittlich, Bitburg-Prüm, Vulkaneifel, Trier-Saarburg und Birkenfeld).
+# Umfang: Trierer Land mit Mosel, Eifel und Hunsrück (heute Trier, Bernkastel-Wittlich,
+# Bitburg-Prüm, Vulkaneifel, Trier-Saarburg und Birkenfeld).
 
 ort daun {
     name     = "Daun"

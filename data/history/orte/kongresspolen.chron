@@ -7,7 +7,9 @@
 # ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
 # und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 #
-# Umfang: Polnischer Saum jenseits der preußischen Grenze von 1815–1918 (Kongresspolen): Kujawien, Dobriner Land, Nordmasowien, Kalisch, Konin, Wieluń, Tschenstochau, Dombrowaer Becken und Suwałki.
+# Umfang: Polnischer Saum jenseits der preußischen Grenze von 1815–1918 (Kongresspolen):
+# Kujawien, Dobriner Land, Nordmasowien, Kalisch, Konin, Wieluń, Tschenstochau, Dombrowaer
+# Becken und Suwałki.
 
 ort suwalki {
     name     = "Suwałki"

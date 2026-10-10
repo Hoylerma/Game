@@ -7,7 +7,9 @@
 # ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
 # und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 #
-# Umfang: Österreichisch-Schlesien mit Troppau, Teschen und Bielitz (heute Bezirke Jeseník, Bruntál, Opava mit dem bis 1920 preußischen Hultschiner Ländchen, Karviná und Frýdek-Místek sowie in Polen Cieszyn und Bielsko).
+# Umfang: Österreichisch-Schlesien mit Troppau, Teschen und Bielitz (heute Bezirke Jeseník,
+# Bruntál, Opava mit dem bis 1920 preußischen Hultschiner Ländchen, Karviná und Frýdek-Místek
+# sowie in Polen Cieszyn und Bielsko).
 
 ort jaegerndorf {
     name     = "Jägerndorf"
@@ -89,14 +91,14 @@ ort bennisch {
     quelle   = "GeoNames (CC BY 4.0), geonameid 3075451; deutscher Name aus den GeoNames-Alternativnamen (heute Horní Benešov); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort friedeberg_oesterreichisch_schlesien {
-    name     = "Friedeberg (Österreichisch-Schlesien)"
+ort friedeberg {
+    name     = "Friedeberg"
     gelaende = mittelgebirge
     lage     = { 17.0987 50.3093 }
     flaeche  = 161
     stadt    = nein
     kreis    = kr_jaegerndorf
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3061321; deutscher Name aus den GeoNames-Alternativnamen (heute Žulová); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3061321; deutscher Name aus den GeoNames-Alternativnamen (heute Žulová); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort weidenau {
@@ -179,14 +181,14 @@ ort bautsch {
     quelle   = "GeoNames (CC BY 4.0), geonameid 3078469; deutscher Name aus den GeoNames-Alternativnamen (heute Budišov nad Budišovkou); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort pusta_polom {
-    name     = "Pustá Polom"
+ort wuest_pohlom {
+    name     = "Wüst Pohlom"
     gelaende = huegelland
     lage     = { 17.9979 49.8492 }
     flaeche  = 150
     stadt    = nein
     kreis    = kr_troppau
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3067324; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3067324; deutscher Name aus den GeoNames-Alternativnamen (heute Pustá Polom); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort dolni_zivotice {
@@ -209,14 +211,14 @@ ort freistadt_oesterreichisch_schlesien {
     quelle   = "GeoNames (CC BY 4.0), geonameid 3073789; deutscher Name aus den GeoNames-Alternativnamen (heute Karviná); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort frydek_mistek {
-    name     = "Frýdek-Místek"
+ort friedeck {
+    name     = "Friedeck"
     gelaende = huegelland
     lage     = { 18.35 49.6833 }
     flaeche  = 106
     stadt    = ja
     kreis    = kr_freistadt_oesterreichisch_schlesien
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3076127; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3076127; deutscher Name aus den GeoNames-Alternativnamen (heute Frýdek-Místek); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort teschen {

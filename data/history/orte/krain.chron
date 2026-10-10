@@ -7,7 +7,8 @@
 # ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
 # und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 #
-# Umfang: Herzogtum Krain mit Laibach (heute Mittel-, Nordwest- und Südslowenien ohne das Küstenland).
+# Umfang: Herzogtum Krain mit Laibach (heute Mittel-, Nordwest- und Südslowenien ohne das
+# Küstenland).
 
 ort assling_krain {
     name     = "Assling"
@@ -449,14 +450,14 @@ ort kostel {
     quelle   = "GeoNames (CC BY 4.0), geonameid 8358613; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort loski_potok {
-    name     = "Loški Potok"
+ort laserbach {
+    name     = "Laserbach"
     gelaende = mittelgebirge
     lage     = { 14.5803 45.7014 }
     flaeche  = 166
     stadt    = nein
     kreis    = kr_gottschee
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3196192; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3196192; deutscher Name aus den GeoNames-Alternativnamen (heute Loški Potok); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort osilnica {

@@ -7,7 +7,8 @@
 # ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
 # und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 #
-# Umfang: Oberschlesien (heute Woiwodschaft Oppeln ohne Brieg und Namslau sowie der preußische Teil der Woiwodschaft Schlesien).
+# Umfang: Oberschlesien (heute Woiwodschaft Oppeln ohne Brieg und Namslau sowie der preußische
+# Teil der Woiwodschaft Schlesien).
 
 ort kreuzburg {
     name     = "Kreuzburg"
@@ -89,14 +90,14 @@ ort kolonowskie {
     quelle   = "GeoNames (CC BY 4.0), geonameid 3095421; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort sierakow_slaski {
-    name     = "Sieraków Śląski"
+ort schierokau {
+    name     = "Schierokau"
     gelaende = flachland
     lage     = { 18.5755 50.8029 }
     flaeche  = 297
     stadt    = nein
     kreis    = kr_rosenberg_oberschlesien
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3085976; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3085976; deutscher Name aus den GeoNames-Alternativnamen (heute Sieraków Śląski); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort oppeln {
@@ -269,14 +270,14 @@ ort neisse {
     quelle   = "GeoNames (CC BY 4.0), geonameid 3090436; deutscher Name aus den GeoNames-Alternativnamen (heute Nysa); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort neustadt_oberschlesien {
-    name     = "Neustadt (Oberschlesien)"
+ort neustadt_in_oberschlesien {
+    name     = "Neustadt in Oberschlesien"
     gelaende = huegelland
     lage     = { 17.5746 50.3212 }
     flaeche  = 110
     stadt    = ja
     kreis    = kr_neisse
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3088065; deutscher Name aus den GeoNames-Alternativnamen (heute Prudnik); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3088065; deutscher Name aus den GeoNames-Alternativnamen (heute Prudnik); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort ziegenhals {

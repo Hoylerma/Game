@@ -7,8 +7,8 @@
 # benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 # historischen Verwaltungseinheiten.
 
-kreis kr_gmuend_niederoesterreich {
-    name   = "Gmünd (Niederösterreich)"
+kreis kr_gmuend {
+    name   = "Gmünd"
     quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
 }
 

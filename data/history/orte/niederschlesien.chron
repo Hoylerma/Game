@@ -9,14 +9,14 @@
 #
 # Umfang: Niederschlesien mit Brieg und Namslau sowie Grünberg, Sagan und Neusalz.
 
-ort gruenberg_niederschlesien {
-    name     = "Grünberg (Niederschlesien)"
+ort gruenberg {
+    name     = "Grünberg"
     gelaende = huegelland
     lage     = { 15.5064 51.9355 }
     flaeche  = 227
     stadt    = ja
-    kreis    = kr_gruenberg_niederschlesien
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3080165; deutscher Name aus den GeoNames-Alternativnamen (heute Zielona Góra); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+    kreis    = kr_gruenberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3080165; deutscher Name aus den GeoNames-Alternativnamen (heute Zielona Góra); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort zuellichau {
@@ -25,7 +25,7 @@ ort zuellichau {
     lage     = { 15.6251 52.0836 }
     flaeche  = 268
     stadt    = nein
-    kreis    = kr_gruenberg_niederschlesien
+    kreis    = kr_gruenberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 3084241; deutscher Name aus den GeoNames-Alternativnamen (heute Sulechów); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
@@ -35,18 +35,18 @@ ort naumburg_am_bober {
     lage     = { 15.2352 51.7986 }
     flaeche  = 311
     stadt    = nein
-    kreis    = kr_gruenberg_niederschlesien
+    kreis    = kr_gruenberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 3090553; deutscher Name aus den GeoNames-Alternativnamen (heute Nowogród Bobrzański); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort rothenburg_niederschlesien {
-    name     = "Rothenburg (Niederschlesien)"
+ort rothenburg_an_der_oder {
+    name     = "Rothenburg an der Oder"
     gelaende = flachland
     lage     = { 15.4232 52.0129 }
     flaeche  = 238
     stadt    = nein
-    kreis    = kr_gruenberg_niederschlesien
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3100976; deutscher Name aus den GeoNames-Alternativnamen (heute Czerwieńsk); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+    kreis    = kr_gruenberg
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3100976; deutscher Name aus den GeoNames-Alternativnamen (heute Czerwieńsk); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort bomst {
@@ -55,7 +55,7 @@ ort bomst {
     lage     = { 15.8277 52.1649 }
     flaeche  = 158
     stadt    = nein
-    kreis    = kr_gruenberg_niederschlesien
+    kreis    = kr_gruenberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 3104002; deutscher Name aus den GeoNames-Alternativnamen (heute Babimost); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
@@ -65,7 +65,7 @@ ort unruhstadt {
     lage     = { 15.8614 52.0714 }
     flaeche  = 195
     stadt    = nein
-    kreis    = kr_gruenberg_niederschlesien
+    kreis    = kr_gruenberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 3096640; deutscher Name aus den GeoNames-Alternativnamen (heute Kargowa); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
@@ -75,7 +75,7 @@ ort schweinitz {
     lage     = { 15.3901 51.8884 }
     flaeche  = 225
     stadt    = nein
-    kreis    = kr_gruenberg_niederschlesien
+    kreis    = kr_gruenberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 3084092; deutscher Name aus den GeoNames-Alternativnamen (heute Świdnica); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
@@ -85,7 +85,7 @@ ort boyadel {
     lage     = { 15.8104 51.9532 }
     flaeche  = 253
     stadt    = nein
-    kreis    = kr_gruenberg_niederschlesien
+    kreis    = kr_gruenberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 3103016; deutscher Name aus den GeoNames-Alternativnamen (heute Bojadła); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
@@ -95,7 +95,7 @@ ort kolzig {
     lage     = { 15.9599 51.9615 }
     flaeche  = 187
     stadt    = nein
-    kreis    = kr_gruenberg_niederschlesien
+    kreis    = kr_gruenberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 3095417; deutscher Name aus den GeoNames-Alternativnamen (heute Kolsko); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
@@ -309,14 +309,14 @@ ort haynau {
     quelle   = "GeoNames (CC BY 4.0), geonameid 3101660; deutscher Name aus den GeoNames-Alternativnamen (heute Chojnów); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort goldberg_niederschlesien {
-    name     = "Goldberg (Niederschlesien)"
+ort goldberg_in_schlesien {
+    name     = "Goldberg in Schlesien"
     gelaende = huegelland
     lage     = { 15.9198 51.1264 }
     flaeche  = 250
     stadt    = nein
     kreis    = kr_bunzlau
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3080074; deutscher Name aus den GeoNames-Alternativnamen (heute Złotoryja); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3080074; deutscher Name aus den GeoNames-Alternativnamen (heute Złotoryja); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort loewenberg {
@@ -719,14 +719,14 @@ ort udanin {
     quelle   = "GeoNames (CC BY 4.0), geonameid 3082866; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort hirschberg_niederschlesien {
-    name     = "Hirschberg (Niederschlesien)"
+ort hirschberg_in_schlesien {
+    name     = "Hirschberg in Schlesien"
     gelaende = huegelland
     lage     = { 15.729 50.8997 }
     flaeche  = 187
     stadt    = ja
-    kreis    = kr_hirschberg_niederschlesien
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3097257; deutscher Name aus den GeoNames-Alternativnamen (heute Jelenia Góra); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+    kreis    = kr_hirschberg_in_schlesien
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3097257; deutscher Name aus den GeoNames-Alternativnamen (heute Jelenia Góra); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort schmiedeberg {
@@ -735,7 +735,7 @@ ort schmiedeberg {
     lage     = { 15.8356 50.7931 }
     flaeche  = 204
     stadt    = nein
-    kreis    = kr_hirschberg_niederschlesien
+    kreis    = kr_hirschberg_in_schlesien
     quelle   = "GeoNames (CC BY 4.0), geonameid 3094934; deutscher Name aus den GeoNames-Alternativnamen (heute Kowary); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
@@ -745,7 +745,7 @@ ort schreiberhau {
     lage     = { 15.5227 50.8257 }
     flaeche  = 176
     stadt    = nein
-    kreis    = kr_hirschberg_niederschlesien
+    kreis    = kr_hirschberg_in_schlesien
     quelle   = "GeoNames (CC BY 4.0), geonameid 3083677; deutscher Name aus den GeoNames-Alternativnamen (heute Szklarska Poręba); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
@@ -755,7 +755,7 @@ ort stara_kamienica {
     lage     = { 15.5729 50.916 }
     flaeche  = 171
     stadt    = nein
-    kreis    = kr_hirschberg_niederschlesien
+    kreis    = kr_hirschberg_in_schlesien
     quelle   = "GeoNames (CC BY 4.0), geonameid 3084954; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
@@ -829,14 +829,14 @@ ort carlsruhe {
     quelle   = "GeoNames (CC BY 4.0), geonameid 3088526; deutscher Name aus den GeoNames-Alternativnamen (heute Pokój); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort domaszowice {
-    name     = "Domaszowice"
+ort noldau {
+    name     = "Noldau"
     gelaende = flachland
     lage     = { 17.8888 51.0429 }
     flaeche  = 168
     stadt    = nein
     kreis    = kr_brieg
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3100193; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3100193; deutscher Name aus den GeoNames-Alternativnamen (heute Domaszowice); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort prieborn {
@@ -849,14 +849,14 @@ ort prieborn {
     quelle   = "GeoNames (CC BY 4.0), geonameid 3087920; deutscher Name aus den GeoNames-Alternativnamen (heute Przeworno); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort waldenburg_niederschlesien {
-    name     = "Waldenburg (Niederschlesien)"
+ort waldenburg_in_schlesien {
+    name     = "Waldenburg in Schlesien"
     gelaende = mittelgebirge
     lage     = { 16.2843 50.7714 }
     flaeche  = 182
     stadt    = ja
-    kreis    = kr_waldenburg_niederschlesien
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3082707; deutscher Name aus den GeoNames-Alternativnamen (heute Wałbrzych); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+    kreis    = kr_waldenburg_in_schlesien
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3082707; deutscher Name aus den GeoNames-Alternativnamen (heute Wałbrzych); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort schweidnitz {
@@ -865,18 +865,18 @@ ort schweidnitz {
     lage     = { 16.4886 50.8438 }
     flaeche  = 204
     stadt    = ja
-    kreis    = kr_waldenburg_niederschlesien
+    kreis    = kr_waldenburg_in_schlesien
     quelle   = "GeoNames (CC BY 4.0), geonameid 3084093; deutscher Name aus den GeoNames-Alternativnamen (heute Świdnica); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort freiburg_niederschlesien {
-    name     = "Freiburg (Niederschlesien)"
+ort freiburg_in_schlesien {
+    name     = "Freiburg in Schlesien"
     gelaende = huegelland
     lage     = { 16.3197 50.8597 }
     flaeche  = 149
     stadt    = ja
-    kreis    = kr_waldenburg_niederschlesien
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3084084; deutscher Name aus den GeoNames-Alternativnamen (heute Świebodzice); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+    kreis    = kr_waldenburg_in_schlesien
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3084084; deutscher Name aus den GeoNames-Alternativnamen (heute Świebodzice); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort landeshut {
@@ -885,7 +885,7 @@ ort landeshut {
     lage     = { 16.0304 50.7831 }
     flaeche  = 199
     stadt    = ja
-    kreis    = kr_waldenburg_niederschlesien
+    kreis    = kr_waldenburg_in_schlesien
     quelle   = "GeoNames (CC BY 4.0), geonameid 3096779; deutscher Name aus den GeoNames-Alternativnamen (heute Kamienna Góra); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
@@ -895,7 +895,7 @@ ort wuestegiersdorf {
     lage     = { 16.3717 50.6874 }
     flaeche  = 197
     stadt    = nein
-    kreis    = kr_waldenburg_niederschlesien
+    kreis    = kr_waldenburg_in_schlesien
     quelle   = "GeoNames (CC BY 4.0), geonameid 3099146; deutscher Name aus den GeoNames-Alternativnamen (heute Głuszyca); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
@@ -905,28 +905,28 @@ ort liebau {
     lage     = { 16.0003 50.7046 }
     flaeche  = 127
     stadt    = nein
-    kreis    = kr_waldenburg_niederschlesien
+    kreis    = kr_waldenburg_in_schlesien
     quelle   = "GeoNames (CC BY 4.0), geonameid 3093027; deutscher Name aus den GeoNames-Alternativnamen (heute Lubawka); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort friedland_niederschlesien {
-    name     = "Friedland (Niederschlesien)"
+ort friedland_in_schlesien {
+    name     = "Friedland in Schlesien"
     gelaende = mittelgebirge
     lage     = { 16.1888 50.6659 }
     flaeche  = 144
     stadt    = nein
-    kreis    = kr_waldenburg_niederschlesien
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3091901; deutscher Name aus den GeoNames-Alternativnamen (heute Mieroszów); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+    kreis    = kr_waldenburg_in_schlesien
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3091901; deutscher Name aus den GeoNames-Alternativnamen (heute Mieroszów); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort reichenbach_niederschlesien {
-    name     = "Reichenbach (Niederschlesien)"
+ort reichenbach_in_schlesien {
+    name     = "Reichenbach in Schlesien"
     gelaende = huegelland
     lage     = { 16.6514 50.7282 }
     flaeche  = 213
     stadt    = ja
-    kreis    = kr_reichenbach_niederschlesien
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3099828; deutscher Name aus den GeoNames-Alternativnamen (heute Dzierżoniów); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+    kreis    = kr_reichenbach_in_schlesien
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3099828; deutscher Name aus den GeoNames-Alternativnamen (heute Dzierżoniów); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort frankenstein {
@@ -935,7 +935,7 @@ ort frankenstein {
     lage     = { 16.8124 50.5897 }
     flaeche  = 182
     stadt    = nein
-    kreis    = kr_reichenbach_niederschlesien
+    kreis    = kr_reichenbach_in_schlesien
     quelle   = "GeoNames (CC BY 4.0), geonameid 3081046; deutscher Name aus den GeoNames-Alternativnamen (heute Ząbkowice Śląskie); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
@@ -945,7 +945,7 @@ ort muensterberg {
     lage     = { 17.0406 50.6012 }
     flaeche  = 164
     stadt    = nein
-    kreis    = kr_reichenbach_niederschlesien
+    kreis    = kr_reichenbach_in_schlesien
     quelle   = "GeoNames (CC BY 4.0), geonameid 3080226; deutscher Name aus den GeoNames-Alternativnamen (heute Ziębice); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
@@ -955,7 +955,7 @@ ort gnadenfrei {
     lage     = { 16.7436 50.6836 }
     flaeche  = 126
     stadt    = nein
-    kreis    = kr_reichenbach_niederschlesien
+    kreis    = kr_reichenbach_in_schlesien
     quelle   = "GeoNames (CC BY 4.0), geonameid 3089025; deutscher Name aus den GeoNames-Alternativnamen (heute Piława Górna); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
@@ -965,7 +965,7 @@ ort zobten {
     lage     = { 16.7444 50.8999 }
     flaeche  = 284
     stadt    = nein
-    kreis    = kr_reichenbach_niederschlesien
+    kreis    = kr_reichenbach_in_schlesien
     quelle   = "GeoNames (CC BY 4.0), geonameid 3085252; deutscher Name aus den GeoNames-Alternativnamen (heute Sobótka); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
@@ -975,7 +975,7 @@ ort reichenstein {
     lage     = { 16.8759 50.4447 }
     flaeche  = 130
     stadt    = nein
-    kreis    = kr_reichenbach_niederschlesien
+    kreis    = kr_reichenbach_in_schlesien
     quelle   = "GeoNames (CC BY 4.0), geonameid 3080061; deutscher Name aus den GeoNames-Alternativnamen (heute Złoty Stok); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
@@ -985,7 +985,7 @@ ort wartha {
     lage     = { 16.7399 50.5059 }
     flaeche  = 149
     stadt    = nein
-    kreis    = kr_reichenbach_niederschlesien
+    kreis    = kr_reichenbach_in_schlesien
     quelle   = "GeoNames (CC BY 4.0), geonameid 3103847; deutscher Name aus den GeoNames-Alternativnamen (heute Bardo); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
@@ -995,7 +995,7 @@ ort heidersdorf {
     lage     = { 16.8446 50.7909 }
     flaeche  = 232
     stadt    = nein
-    kreis    = kr_reichenbach_niederschlesien
+    kreis    = kr_reichenbach_in_schlesien
     quelle   = "GeoNames (CC BY 4.0), geonameid 3094003; deutscher Name aus den GeoNames-Alternativnamen (heute Łagiewniki); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
@@ -1005,6 +1005,6 @@ ort tepliwoda {
     lage     = { 16.9087 50.6748 }
     flaeche  = 141
     stadt    = nein
-    kreis    = kr_reichenbach_niederschlesien
+    kreis    = kr_reichenbach_in_schlesien
     quelle   = "GeoNames (CC BY 4.0), geonameid 3101365; deutscher Name aus den GeoNames-Alternativnamen (heute Ciepłowody); Gelände aus Höhenmodell; Fläche aus der Karte"
 }

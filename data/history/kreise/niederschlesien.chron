@@ -7,8 +7,8 @@
 # benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 # historischen Verwaltungseinheiten.
 
-kreis kr_gruenberg_niederschlesien {
-    name   = "Grünberg (Niederschlesien)"
+kreis kr_gruenberg {
+    name   = "Grünberg"
     quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
 }
 
@@ -52,8 +52,8 @@ kreis kr_jauer {
     quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
 }
 
-kreis kr_hirschberg_niederschlesien {
-    name   = "Hirschberg (Niederschlesien)"
+kreis kr_hirschberg_in_schlesien {
+    name   = "Hirschberg in Schlesien"
     quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
 }
 
@@ -62,12 +62,12 @@ kreis kr_brieg {
     quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
 }
 
-kreis kr_waldenburg_niederschlesien {
-    name   = "Waldenburg (Niederschlesien)"
+kreis kr_waldenburg_in_schlesien {
+    name   = "Waldenburg in Schlesien"
     quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
 }
 
-kreis kr_reichenbach_niederschlesien {
-    name   = "Reichenbach (Niederschlesien)"
+kreis kr_reichenbach_in_schlesien {
+    name   = "Reichenbach in Schlesien"
     quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
 }

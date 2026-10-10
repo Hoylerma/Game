@@ -7,7 +7,9 @@
 # ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
 # und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 #
-# Umfang: Herzogtum Württemberg mit Hohenlohe und Hohenzollern-Hechingen (heute Regierungsbezirk Stuttgart ohne Main-Tauber-Kreis, Tübingen, Reutlingen, Zollernalbkreis, Rottweil, Tuttlingen, Calw und Freudenstadt).
+# Umfang: Herzogtum Württemberg mit Hohenlohe und Hohenzollern-Hechingen (heute
+# Regierungsbezirk Stuttgart ohne Main-Tauber-Kreis, Tübingen, Reutlingen, Zollernalbkreis,
+# Rottweil, Tuttlingen, Calw und Freudenstadt).
 
 ort oehringen {
     name     = "Öhringen"
@@ -79,14 +81,14 @@ ort krautheim {
     quelle   = "GeoNames (CC BY 4.0), geonameid 2884625; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort waldenburg_wuerttemberg {
-    name     = "Waldenburg (Württemberg)"
+ort waldenburg {
+    name     = "Waldenburg"
     gelaende = huegelland
     lage     = { 9.6399 49.1847 }
     flaeche  = 120
     stadt    = nein
     kreis    = kr_oehringen
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2815075; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2815075; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort heilbronn {

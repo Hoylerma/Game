@@ -69,14 +69,14 @@ ort wetter {
     quelle   = "GeoNames (CC BY 4.0), geonameid 2809985; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort homberg_oberhessen {
-    name     = "Homberg (Oberhessen)"
+ort homberg_an_der_ohm {
+    name     = "Homberg an der Ohm"
     gelaende = huegelland
     lage     = { 8.9964 50.7311 }
     flaeche  = 174
     stadt    = nein
     kreis    = kr_marburg_an_der_lahn
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2899479; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2899479; Name Homberg an der Ohm aus den GeoNames-Alternativnamen (GeoNames: Homberg); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort fronhausen {
@@ -199,14 +199,14 @@ ort langgoens {
     quelle   = "GeoNames (CC BY 4.0), geonameid 2880672; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort gruenberg_oberhessen {
-    name     = "Grünberg (Oberhessen)"
+ort gruenberg_in_hessen {
+    name     = "Grünberg in Hessen"
     gelaende = huegelland
     lage     = { 8.9587 50.594 }
     flaeche  = 168
     stadt    = nein
     kreis    = kr_giessen
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2914432; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2914432; Name Grünberg in Hessen aus den GeoNames-Alternativnamen (GeoNames: Grünberg); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort reiskirchen {

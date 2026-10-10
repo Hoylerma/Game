@@ -65,7 +65,7 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 63;niedereschach;Niedereschach;1268;2418;653;95
 64;wolfach;Wolfach;1215;2368;1139;166
 65;hornberg;Hornberg;1212;2397;1000;146
-66;freiburg_baden;Freiburg (Baden);1142;2453;699;102
+66;freiburg_im_breisgau;Freiburg im Breisgau;1142;2453;699;102
 67;breisach_am_rhein;Breisach am Rhein;1087;2446;1283;188
 68;kirchzarten;Kirchzarten;1162;2474;992;145
 69;schallstadt;Schallstadt;1123;2473;787;115
@@ -115,7 +115,7 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 113;viechtach;Viechtach;2090;2134;759;109
 114;bodenmais;Bodenmais;2133;2139;947;136
 115;bernried;Bernried;2089;2186;947;136
-116;kirchberg_bayern;Kirchberg (Bayern);2149;2194;1263;182
+116;kirchberg_im_wald;Kirchberg im Wald;2149;2194;1263;182
 117;zachenberg;Zachenberg;2112;2164;902;130
 118;arnbruck;Arnbruck;2112;2121;740;106
 119;konzell;Konzell;2058;2138;967;139
@@ -287,7 +287,7 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 285;reichenberg;Reichenberg;2499;1623;1444;200
 286;gablonz;Gablonz;2523;1650;1195;166
 287;turnau;Turnau;2519;1686;1303;181
-288;friedland_boehmen;Friedland (Böhmen);2508;1579;888;123
+288;friedland_in_boehmen;Friedland in Böhmen;2508;1579;888;123
 289;tannwald;Tannwald;2548;1627;1351;187
 290;semil;Semil;2556;1681;1559;217
 291;neustadt_an_der_tafelfichte;Neustadt an der Tafelfichte;2533;1577;1011;140
@@ -337,7 +337,7 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 335;jungbunzlau;Jungbunzlau;2476;1738;1456;203
 336;muenchengraetz;Münchengrätz;2487;1698;1344;187
 337;niemes;Niemes;2449;1665;1428;198
-338;hirschberg_boehmen;Hirschberg (Böhmen);2419;1690;1648;229
+338;hirschberg_in_boehmen;Hirschberg in Böhmen;2419;1690;1648;229
 339;weisswasser_in_boehmen;Weisswasser in Böhmen;2454;1708;1299;181
 340;dolni_bousov;Dolní Bousov;2515;1727;1810;252
 341;mseno;Mšeno;2423;1728;1668;233
@@ -366,9 +366,9 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 364;kladno;Kladno;2320;1820;1175;165
 365;kralupy_nad_vltavou;Kralupy nad Vltavou;2358;1779;1664;233
 366;melnik;Mělník;2392;1751;1560;218
-367;neratovice;Neratovice;2401;1783;1501;210
+367;neratowitz;Neratowitz;2401;1783;1501;210
 368;schlan;Schlan;2321;1785;1581;221
-369;hostivice;Hostivice;2350;1837;1452;204
+369;hostiwitz;Hostiwitz;2350;1837;1452;204
 370;klecany;Klecany;2378;1806;966;135
 371;eger;Eger;1998;1834;1044;147
 372;falkenau;Falkenau;2047;1806;1029;144
@@ -392,9 +392,9 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 390;skutsch;Skutsch;2676;1903;1057;149
 391;hermannstaedtel;Hermannstädtel;2615;1874;979;138
 392;prosec;Proseč;2705;1917;1167;165
-393;nasavrky;Nasavrky;2638;1908;1253;177
-394;chroustovice;Chroustovice;2676;1872;1067;150
-395;kolin;Kolín;2529;1849;1538;216
+393;nassaberg;Nassaberg;2638;1908;1253;177
+394;chroustowitz;Chroustowitz;2676;1872;1067;150
+395;kolin;Kolin;2529;1849;1538;216
 396;podebrady;Poděbrady;2518;1819;1267;178
 397;brandys_nad_labem_stara_boleslav;Brandýs nad Labem-Stará Boleslav;2429;1803;1547;217
 398;neu_benatek;Neu Benatek;2451;1767;1658;232
@@ -438,7 +438,7 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 436;tynec_nad_sazavou;Týnec nad Sázavou;2418;1903;842;119
 437;wotitz;Wotitz;2424;1969;1522;216
 438;eule;Eule;2394;1886;1400;197
-439;neveklov;Neveklov;2405;1936;1330;188
+439;neweklau;Neweklau;2405;1936;1330;188
 440;zwittau;Zwittau;2769;1926;1514;214
 441;maehrisch_truebau;Mährisch Trübau;2808;1931;1867;264
 442;policka;Polička;2732;1940;1279;181
@@ -453,10 +453,10 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 451;ober_bris;Ober Bris;2181;1903;1620;229
 452;wlaschim;Wlaschim;2470;1943;1653;234
 453;zruc_nad_sazavou;Zruč nad Sázavou;2507;1938;1293;183
-454;sazava;Sázava;2467;1896;1807;255
+454;sazau;Sazau;2467;1896;1807;255
 455;kohljanowitz;Kohljanowitz;2503;1891;1203;170
 456;cechtice;Čechtice;2504;1972;1287;183
-457;zbraslavice;Zbraslavice;2529;1912;1228;173
+457;zbraslawitz;Zbraslawitz;2529;1912;1228;173
 458;naceradec;Načeradec;2473;1977;1070;152
 459;pribram;Příbram;2300;1950;1735;246
 460;rokitzan;Rokitzan;2227;1933;1233;174
@@ -473,12 +473,12 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 471;pribislau;Pribislau;2631;1982;1238;176
 472;stecken;Stecken;2598;2007;1209;172
 473;seelau;Seelau;2529;1997;1249;177
-474;milevsko;Milevsko;2363;2033;1445;206
+474;muehlhausen_boehmen;Mühlhausen (Böhmen);2363;2033;1445;206
 475;sedlcany;Sedlčany;2386;1965;1937;274
 476;jistebnice;Jistebnice;2403;2007;1501;213
 477;oparany;Opařany;2393;2041;1058;151
 478;kovarov;Kovářov;2351;2006;1274;181
-479;krasna_hora_nad_vltavou;Krásná Hora nad Vltavou;2352;1968;1811;257
+479;schoenberg;Schönberg;2352;1968;1811;257
 480;taus;Taus;2097;2029;928;132
 481;neugedein;Neugedein;2129;2034;1463;208
 482;bischofteinitz;Bischofteinitz;2103;1995;1443;205
@@ -487,11 +487,11 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 485;blatna;Blatná;2280;2038;1470;209
 486;horazdovice;Horažďovice;2247;2062;1455;208
 487;nepomuk;Nepomuk;2222;2015;1429;203
-488;blovice;Blovice;2214;1981;1549;220
-489;kasejovice;Kasejovice;2253;2017;1600;228
+488;blowitz;Blowitz;2214;1981;1549;220
+489;kasejowitz;Kasejowitz;2253;2017;1600;228
 490;tabor;Tábor;2426;2035;1440;205
 491;neuhaus;Neuhaus;2495;2112;1758;252
-492;sobeslav;Soběslav;2440;2076;1402;200
+492;sobeslau;Sobeslau;2440;2076;1402;200
 493;veseli_nad_luznici;Veselí nad Lužnicí;2429;2104;919;131
 494;patzau;Patzau;2494;2012;1493;212
 495;kamenitz_an_der_linde;Kamenitz an der Linde;2505;2072;1582;226
@@ -516,7 +516,7 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 514;wolin;Wolin;2289;2114;1567;224
 515;netolitz;Netolitz;2341;2148;1656;238
 516;mirotice;Mirotice;2314;2025;1587;226
-517;driten;Dřiteň;2365;2116;935;134
+517;zirnau;Zirnau;2365;2116;935;134
 518;datschitz;Datschitz;2574;2135;1240;178
 519;neu_bistritz;Neu-Bistritz;2520;2158;1219;175
 520;zlabings;Zlabings;2551;2157;1185;170
@@ -576,7 +576,7 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 574;lubbeek;Lubbeek;576;1594;1150;159
 575;beauvechain;Beauvechain;558;1625;756;105
 576;bruessel;Brüssel;478;1606;1016;140
-577;halle_brabant;Halle (Brabant);460;1639;1128;156
+577;halle_brabant;Halle;460;1639;1128;156
 578;vilvoorde;Vilvoorde;499;1581;1235;170
 579;asse;Asse;454;1581;1140;157
 580;tervuren;Tervuren;516;1612;1701;235
@@ -647,7 +647,7 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 645;mieste;Mieste;1773;1112;1552;207
 646;uchtspringe;Uchtspringe;1858;1098;1720;229
 647;driesen;Driesen;2649;1023;2344;310
-648;friedeberg_brandenburg;Friedeberg (Brandenburg);2579;991;2589;342
+648;friedeberg_in_neumark;Friedeberg in Neumark;2579;991;2589;342
 649;woldenberg;Woldenberg;2643;969;1925;254
 650;stare_kurowo;Stare Kurowo;2619;999;1448;191
 651;bierzwnik;Bierzwnik;2620;940;1874;247
@@ -678,7 +678,7 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 676;duehringshof;Dühringshof;2506;1052;1509;200
 677;ludwigsruh;Ludwigsruh;2477;1023;1806;239
 678;zantoch;Zantoch;2574;1041;2330;309
-679;nowogrodek_pomorski;Nowogródek Pomorski;2502;990;1754;232
+679;neuenburg;Neuenburg;2502;990;1754;232
 680;bernau_bei_berlin;Bernau bei Berlin;2224;1061;1489;198
 681;strausberg;Strausberg;2284;1094;1282;171
 682;wandlitz;Wandlitz;2198;1033;1651;219
@@ -706,7 +706,7 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 704;kleinmachnow;Kleinmachnow;2162;1136;1465;196
 705;werder;Werder;2093;1151;931;124
 706;zossen;Zossen;2206;1197;1234;166
-707;beelitz_brandenburg;Beelitz (Brandenburg);2109;1192;1668;224
+707;beelitz;Beelitz;2109;1192;1668;224
 708;michendorf;Michendorf;2123;1166;899;120
 709;rangsdorf;Rangsdorf;2190;1170;1003;134
 710;trebbin;Trebbin;2150;1196;1336;179
@@ -929,7 +929,7 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 927;erstein;Erstein;1101;2335;888;129
 928;geispolsheim;Geispolsheim;1101;2306;910;132
 929;la_broque;La Broque;1017;2319;2002;291
-930;rhinau;Rhinau;1112;2362;831;121
+930;rheinau;Rheinau;1112;2362;831;121
 931;hilsenheim;Hilsenheim;1088;2370;690;100
 932;epfig;Epfig;1068;2350;1032;150
 933;niederhaslach;Niederhaslach;1044;2293;983;142
@@ -1061,7 +1061,7 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 1059;pegnitz;Pegnitz;1833;1931;1222;173
 1060;hersbruck;Hersbruck;1815;1996;1373;195
 1061;neuhaus_an_der_pegnitz;Neuhaus an der Pegnitz;1835;1971;1304;185
-1062;alfeld_franken;Alfeld (Franken);1837;2028;1047;149
+1062;alfeld;Alfeld;1837;2028;1047;149
 1063;bad_windsheim;Bad Windsheim;1630;2006;954;136
 1064;uffenheim;Uffenheim;1590;1998;1089;155
 1065;burgbernheim;Burgbernheim;1605;2022;874;124
@@ -1251,7 +1251,7 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 1249;schellerten;Schellerten;1565;1206;747;100
 1250;holle;Holle;1577;1230;780;105
 1251;lamspringe;Lamspringe;1546;1270;860;116
-1252;alfeld_hildesheim;Alfeld (Hildesheim);1517;1264;963;130
+1252;alfeld_leine;Alfeld (Leine);1517;1264;963;130
 1253;nordstemmen;Nordstemmen;1500;1209;1055;142
 1254;gronau_hildesheim;Gronau (Hildesheim);1508;1236;845;114
 1255;duingen;Duingen;1487;1263;852;115
@@ -1329,7 +1329,7 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 1327;tangstedt;Tangstedt;1567;739;1062;138
 1328;geesthacht;Geesthacht;1615;830;1224;160
 1329;schwarzenbek;Schwarzenbek;1637;803;1229;160
-1330;lauenburg_holstein;Lauenburg (Holstein);1656;844;974;127
+1330;lauenburg;Lauenburg;1656;844;974;127
 1331;buechen;Büchen;1669;813;1259;164
 1332;esbjerg;Esbjerg;1259;202;2276;282
 1333;kolding;Kolding;1440;205;1967;244
@@ -1343,7 +1343,7 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 1341;holsted;Holsted;1345;208;1934;240
 1342;spittal_an_der_drau;Spittal an der Drau;2210;2821;1319;198
 1343;sachsenburg;Sachsenburg;2180;2807;1702;255
-1344;gmuend_kaernten;Gmünd (Kärnten);2212;2784;1792;268
+1344;gmuend_in_kaernten;Gmünd in Kärnten;2212;2784;1792;268
 1345;obervellach;Obervellach;2154;2770;2308;345
 1346;rennweg_am_katschberg;Rennweg am Katschberg;2226;2755;1056;158
 1347;sankt_veit_an_der_glan;Sankt Veit an der Glan;2372;2828;1028;154
@@ -1515,7 +1515,7 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 1513;grosslaschitz;Großlaschitz;2422;3106;1255;191
 1514;leskova_dolina;Leskova Dolina;2384;3173;1726;264
 1515;kostel;Kostel;2488;3196;1391;213
-1516;loski_potok;Loški Potok;2414;3147;1083;166
+1516;laserbach;Laserbach;2414;3147;1083;166
 1517;osilnica;Osilnica;2443;3194;1033;158
 1518;nova_vas;Nova Vas;2397;3126;985;150
 1519;bad_arolsen;Bad Arolsen;1360;1444;1456;199
@@ -1525,7 +1525,7 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 1523;zierenberg;Zierenberg;1417;1456;928;127
 1524;trendelburg;Trendelburg;1445;1385;1272;173
 1525;niedenstein;Niedenstein;1420;1485;1047;143
-1526;naumburg_kurhessen;Naumburg (Kurhessen);1391;1486;740;101
+1526;naumburg;Naumburg;1391;1486;740;101
 1527;breuna;Breuna;1391;1435;809;110
 1528;kassel;Kassel;1448;1464;1172;160
 1529;eschwege;Eschwege;1557;1507;1100;151
@@ -1539,7 +1539,7 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 1537;waldeck;Waldeck;1371;1499;786;108
 1538;willingen;Willingen;1289;1469;1486;203
 1539;bad_wildungen;Bad Wildungen;1381;1525;1149;158
-1540;homberg_kurhessen;Homberg (Kurhessen);1445;1551;1463;201
+1540;homberg_efze;Homberg (Efze);1445;1551;1463;201
 1541;fritzlar;Fritzlar;1410;1520;834;115
 1542;melsungen;Melsungen;1467;1523;1214;167
 1543;borken_kurhessen;Borken (Kurhessen);1407;1547;812;112
@@ -1667,7 +1667,7 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 1665;penzig;Penzig;2502;1486;1343;184
 1666;kohlfurt;Kohlfurt;2546;1459;2642;361
 1667;rietschen;Rietschen;2450;1438;1471;201
-1668;rothenburg_lausitz;Rothenburg (Lausitz);2486;1454;1334;182
+1668;rothenburg;Rothenburg;2486;1454;1334;182
 1669;boxberg_lausitz;Boxberg (Lausitz);2414;1440;1319;180
 1670;gross_dueben;Groß Düben;2400;1380;2229;303
 1671;priebus;Priebus;2480;1412;1660;226
@@ -1689,7 +1689,7 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 1687;grossdubrau;Großdubrau;2396;1477;1257;172
 1688;weissenberg;Weißenberg;2425;1496;1359;186
 1689;herrnhut;Herrnhut;2444;1556;1133;156
-1690;reichenbach_lausitz;Reichenbach (Lausitz);2455;1512;1206;166
+1690;reichenbach;Reichenbach;2455;1512;1206;166
 1691;lauban;Lauban;2538;1520;1478;203
 1692;reichenau;Reichenau;2483;1595;1119;155
 1693;bad_flinsberg;Bad Flinsberg;2560;1587;1297;179
@@ -1968,7 +1968,7 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 1966;gross_ullersdorf;Gross-Ullersdorf;2892;1844;1552;218
 1967;stepanov;Štěpánov;2852;1801;1830;256
 1968;schildberg;Schildberg;2824;1869;1214;171
-1969;oskava;Oskava;2891;1890;1366;193
+1969;oskau;Oskau;2891;1890;1366;193
 1970;ostrava;Ostrava;3111;1912;829;117
 1971;nesselsdorf;Nesselsdorf;3086;1976;1120;159
 1972;neutitschein;Neutitschein;3055;1980;1374;195
@@ -1986,11 +1986,11 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 1984;lutin;Lutín;2886;1985;1193;169
 1985;stadt_liebau;Stadt Liebau;2968;1945;1102;156
 1986;saar;Saar;2664;1977;1457;207
-1987;bystrice_nad_pernstejnem;Bystřice nad Pernštejnem;2729;2013;1879;267
+1987;bystritz_am_pernstein;Bystritz am Pernstein;2729;2013;1879;267
 1988;neustadtl;Neustadtl;2696;1987;1342;191
 1989;olesnice;Olešnice;2759;1993;957;136
 1990;svratka;Svratka;2688;1950;1290;183
-1991;jimramov;Jimramov;2718;1969;914;130
+1991;ingrowitz;Ingrowitz;2718;1969;914;130
 1992;prossnitz;Prossnitz;2890;2017;915;130
 1993;kojetein;Kojetein;2926;2053;691;99
 1994;tobitschau;Tobitschau;2923;2027;1116;159
@@ -2009,7 +2009,7 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 2007;jamnitz;Jamnitz;2605;2157;1858;267
 2008;pirnitz;Pirnitz;2622;2070;1634;233
 2009;triesch;Triesch;2582;2070;1277;182
-2010;zeletava;Želetava;2616;2113;1614;231
+2010;scheletau;Scheletau;2616;2113;1614;231
 2011;blansko;Blansko;2801;2049;1183;169
 2012;boskowitz;Boskowitz;2806;2016;867;123
 2013;gurein;Gurein;2781;2071;1135;162
@@ -2023,9 +2023,9 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 2021;lipovec;Lipovec;2835;2049;1642;234
 2022;wsetin;Wsetin;3063;2061;1313;187
 2023;wallachisch_meseritsch;Wallachisch Meseritsch;3053;2017;1316;187
-2024;roznov_pod_radhostem;Rožnov pod Radhoštěm;3083;2027;1013;144
+2024;roznau;Roznau;3083;2027;1013;144
 2025;karolinka;Karolinka;3098;2055;1390;198
-2026;trojanovice;Trojanovice;3104;2001;746;106
+2026;trojanowitz;Trojanowitz;3104;2001;746;106
 2027;hostalkova;Hošťálková;3029;2054;1325;189
 2028;horni_becva;Horní Bečva;3120;2027;1390;198
 2029;wischau;Wischau;2864;2076;1533;219
@@ -2043,7 +2043,7 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 2041;grossmeseritsch;Großmeseritsch;2689;2045;1879;268
 2042;polna;Polna;2628;2015;878;125
 2043;merin;Měřín;2652;2043;1252;178
-2044;bohdalov;Bohdalov;2655;2013;1000;142
+2044;bohdalau;Bohdalau;2655;2013;1000;142
 2045;bruenn;Brünn;2796;2095;993;142
 2046;schlappanitz;Schlappanitz;2816;2113;1357;194
 2047;ivancice;Ivančice;2750;2133;1193;171
@@ -2130,7 +2130,7 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 2128;muecheln;Mücheln;1885;1472;1439;197
 2129;bad_lauchstaedt;Bad Lauchstädt;1899;1445;796;109
 2130;koennern;Könnern;1875;1356;984;134
-2131;landsberg_magdeburg;Landsberg (Magdeburg);1949;1401;1081;147
+2131;landsberg_bei_halle;Landsberg bei Halle;1949;1401;1081;147
 2132;wettin;Wettin;1886;1386;1519;207
 2133;groebers;Gröbers;1944;1428;749;102
 2134;bad_neustadt_an_der_saale;Bad Neustadt an der Saale;1581;1757;1081;151
@@ -2290,7 +2290,7 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 2288;rehna;Rehna;1734;726;1630;211
 2289;bruesewitz;Brüsewitz;1784;751;1268;164
 2290;krakow_am_see;Krakow am See;1981;768;2436;316
-2291;goldberg_mecklenburg;Goldberg (Mecklenburg);1934;777;2375;309
+2291;goldberg;Goldberg;1934;777;2375;309
 2292;lalendorf;Lalendorf;1996;725;1645;213
 2293;ludwigslust;Ludwigslust;1821;860;1986;260
 2294;neustadt_glewe;Neustadt-Glewe;1852;841;1433;187
@@ -2353,7 +2353,7 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 2351;emmelshausen;Emmelshausen;1088;1818;1212;170
 2352;rheinboellen;Rheinböllen;1111;1857;1082;152
 2353;kastellaun;Kastellaun;1061;1836;1387;195
-2354;kirchberg_mittelrhein;Kirchberg (Mittelrhein);1057;1873;1044;147
+2354;kirchberg_hunsrueck;Kirchberg (Hunsrück);1057;1873;1044;147
 2355;oberwesel;Oberwesel;1119;1825;1659;233
 2356;zell;Zell;1016;1849;1170;165
 2357;buechenbeuren;Büchenbeuren;1030;1879;1160;163
@@ -2457,7 +2457,7 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 2455;eltville;Eltville;1191;1847;1006;141
 2456;villmar;Villmar;1209;1743;1068;149
 2457;hahnstaetten;Hahnstätten;1180;1773;1374;192
-2458;gmuend_niederoesterreich;Gmünd (Niederösterreich);2489;2226;1122;162
+2458;gmuend;Gmünd;2489;2226;1122;162
 2459;zwettl;Zwettl;2524;2277;1011;146
 2460;waidhofen_an_der_thaya;Waidhofen an der Thaya;2544;2210;792;114
 2461;heidenreichstein;Heidenreichstein;2517;2199;1204;173
@@ -2608,10 +2608,10 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 2606;willich;Willich;897;1482;798;109
 2607;kempen;Kempen;870;1450;1128;154
 2608;niederkruechten;Niederkrüchten;836;1493;1202;165
-2609;gruenberg_niederschlesien;Grünberg (Niederschlesien);2597;1280;1685;227
+2609;gruenberg;Grünberg;2597;1280;1685;227
 2610;zuellichau;Züllichau;2608;1232;1996;268
 2611;naumburg_am_bober;Naumburg am Bober;2533;1321;2297;311
-2612;rothenburg_niederschlesien;Rothenburg (Niederschlesien);2561;1256;1769;238
+2612;rothenburg_an_der_oder;Rothenburg an der Oder;2561;1256;1769;238
 2613;bomst;Bomst;2645;1210;1180;158
 2614;unruhstadt;Unruhstadt;2657;1238;1447;195
 2615;schweinitz;Schweinitz;2560;1291;1664;225
@@ -2638,7 +2638,7 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 2636;mallmitz;Mallmitz;2573;1420;2076;283
 2637;bunzlau;Bunzlau;2600;1479;2446;335
 2638;haynau;Haynau;2671;1475;1848;253
-2639;goldberg_niederschlesien;Goldberg (Niederschlesien);2670;1523;1816;250
+2639;goldberg_in_schlesien;Goldberg in Schlesien;2670;1523;1816;250
 2640;loewenberg;Löwenberg;2601;1522;1697;233
 2641;greiffenberg;Greiffenberg;2572;1551;1483;204
 2642;naumburg_am_queis;Naumburg am Queis;2563;1493;1425;195
@@ -2679,7 +2679,7 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 2677;bolkenhain;Bolkenhain;2701;1580;1849;255
 2678;kauffung;Kauffung;2664;1565;2130;294
 2679;udanin;Udanin;2763;1536;1793;247
-2680;hirschberg_niederschlesien;Hirschberg (Niederschlesien);2631;1591;1353;187
+2680;hirschberg_in_schlesien;Hirschberg in Schlesien;2631;1591;1353;187
 2681;schmiedeberg;Schmiedeberg;2645;1624;1474;204
 2682;schreiberhau;Schreiberhau;2589;1612;1273;176
 2683;stara_kamienica;Stara Kamienica;2595;1582;1239;171
@@ -2690,16 +2690,16 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 2688;loewen_niederschlesien;Löwen (Niederschlesien);2979;1633;1339;185
 2689;wansen;Wansen;2912;1613;1466;203
 2690;carlsruhe;Carlsruhe;3023;1582;1345;186
-2691;domaszowice;Domaszowice;3035;1548;1220;168
+2691;noldau;Noldau;3035;1548;1220;168
 2692;prieborn;Prieborn;2904;1654;1458;202
-2693;waldenburg_niederschlesien;Waldenburg (Niederschlesien);2726;1629;1311;182
+2693;waldenburg_in_schlesien;Waldenburg in Schlesien;2726;1629;1311;182
 2694;schweidnitz;Schweidnitz;2774;1608;1479;204
-2695;freiburg_niederschlesien;Freiburg (Niederschlesien);2731;1599;1077;149
+2695;freiburg_in_schlesien;Freiburg in Schlesien;2731;1599;1077;149
 2696;landeshut;Landeshut;2685;1620;1437;199
 2697;wuestegiersdorf;Wüstegiersdorf;2759;1648;1421;197
 2698;liebau;Liebau;2687;1650;919;127
-2699;friedland_niederschlesien;Friedland (Niederschlesien);2714;1659;1039;144
-2700;reichenbach_niederschlesien;Reichenbach (Niederschlesien);2795;1642;1538;213
+2699;friedland_in_schlesien;Friedland in Schlesien;2714;1659;1039;144
+2700;reichenbach_in_schlesien;Reichenbach in Schlesien;2795;1642;1538;213
 2701;frankenstein;Frankenstein;2831;1680;1311;182
 2702;muensterberg;Münsterberg;2876;1674;1178;164
 2703;gnadenfrei;Gnadenfrei;2822;1654;912;126
@@ -2714,7 +2714,7 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 2712;biedenkopf;Biedenkopf;1275;1588;1030;142
 2713;gladenbach;Gladenbach;1279;1621;1462;202
 2714;wetter;Wetter;1306;1587;1068;147
-2715;homberg_oberhessen;Homberg (Oberhessen);1361;1648;1257;174
+2715;homberg_an_der_ohm;Homberg an der Ohm;1361;1648;1257;174
 2716;fronhausen;Fronhausen;1305;1647;1268;176
 2717;kirtorf;Kirtorf;1381;1630;985;136
 2718;rauschenberg;Rauschenberg;1341;1592;992;137
@@ -2727,7 +2727,7 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 2725;ulrichstein;Ulrichstein;1394;1677;1475;205
 2726;giessen;Gießen;1292;1681;890;124
 2727;langgoens;Langgöns;1293;1707;859;120
-2728;gruenberg_oberhessen;Grünberg (Oberhessen);1356;1680;1212;168
+2728;gruenberg_in_hessen;Grünberg in Hessen;1356;1680;1212;168
 2729;reiskirchen;Reiskirchen;1323;1680;641;89
 2730;lich;Lich;1329;1707;1113;155
 2731;rabenau;Rabenau;1333;1655;912;126
@@ -2810,7 +2810,7 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 2808;neualbenreuth;Neualbenreuth;2007;1865;696;98
 2809;amberg;Amberg;1908;2032;1261;180
 2810;sulzbach_rosenberg;Sulzbach-Rosenberg;1875;2007;1040;148
-2811;auerbach_oberpfalz;Auerbach (Oberpfalz);1855;1950;886;125
+2811;auerbach_in_der_oberpfalz;Auerbach in der Oberpfalz;1855;1950;886;125
 2812;vilseck;Vilseck;1887;1973;1221;173
 2813;hirschau;Hirschau;1918;1995;1662;236
 2814;ursensollen;Ursensollen;1877;2038;940;134
@@ -2864,7 +2864,7 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 2862;zawadzkie;Zawadzkie;3156;1678;1494;208
 2863;guttentag;Guttentag;3135;1635;1239;172
 2864;kolonowskie;Kolonowskie;3127;1663;954;132
-2865;sierakow_slaski;Sieraków Śląski;3175;1617;2145;297
+2865;schierokau;Schierokau;3175;1617;2145;297
 2866;oppeln;Oppeln;3041;1656;901;125
 2867;malapane;Malapane;3101;1649;1383;192
 2868;falkenberg_oberschlesien;Falkenberg (Oberschlesien);2979;1666;1304;181
@@ -2882,7 +2882,7 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 2880;oberglogau;Oberglogau;3031;1751;1501;210
 2881;walce;Walce;3061;1755;1094;153
 2882;neisse;Neisse;2937;1720;1680;234
-2883;neustadt_oberschlesien;Neustadt (Oberschlesien);2973;1760;789;110
+2883;neustadt_in_oberschlesien;Neustadt in Oberschlesien;2973;1760;789;110
 2884;ziegenhals;Ziegenhals;2941;1758;1641;229
 2885;patschkau;Patschkau;2870;1715;1000;139
 2886;ottmachau;Ottmachau;2900;1718;977;136
@@ -2942,7 +2942,7 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 2940;olbersdorf;Olbersdorf;2975;1811;1311;184
 2941;jauernig;Jauernig;2869;1744;696;97
 2942;bennisch;Bennisch;2988;1866;1562;220
-2943;friedeberg_oesterreichisch_schlesien;Friedeberg (Österreichisch-Schlesien);2884;1769;1149;161
+2943;friedeberg;Friedeberg;2884;1769;1149;161
 2944;weidenau;Weidenau;2909;1748;1111;155
 2945;hotzenplotz;Hotzenplotz;3007;1774;1167;163
 2946;hennersdorf;Hennersdorf;2963;1785;954;134
@@ -2951,10 +2951,10 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 2949;wigstadtl;Wigstadtl;3013;1922;1175;166
 2950;bolatitz;Bolatitz;3071;1876;780;110
 2951;bautsch;Bautsch;2984;1911;1167;165
-2952;pusta_polom;Pustá Polom;3054;1904;1065;150
+2952;wuest_pohlom;Wüst Pohlom;3054;1904;1065;150
 2953;dolni_zivotice;Dolní Životice;3012;1891;1286;181
 2954;freistadt_oesterreichisch_schlesien;Freistadt (Österreichisch-Schlesien);3161;1900;844;119
-2955;frydek_mistek;Frýdek-Místek;3121;1955;749;106
+2955;friedeck;Friedeck;3121;1955;749;106
 2956;teschen;Teschen;3177;1929;856;121
 2957;trinec;Třinec;3185;1958;781;111
 2958;orlau;Orlau;3139;1909;690;97
@@ -3080,7 +3080,7 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 3078;nidden;Nidden;3616;275;1478;184
 3079;wehlau;Wehlau;3684;477;5040;639
 3080;bol_shoe_isakovo;Bol'shoe Isakovo;3560;454;1871;237
-3081;yuzhnyy;Yuzhnyy;3533;496;4339;551
+3081;jesau;Jesau;3533;496;4339;551
 3082;powunden;Powunden;3545;393;2293;289
 3083;pillau;Pillau;3419;465;683;87
 3084;rauschen;Rauschen;3473;395;2129;268
@@ -3102,12 +3102,12 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 3100;guttstadt;Guttstadt;3514;665;2724;351
 3101;wormditt;Wormditt;3453;624;1895;243
 3102;heiligenbeil;Heiligenbeil;3434;526;2045;260
-3103;landsberg_ostpreussen;Landsberg (Ostpreußen);3522;576;2501;320
+3103;landsberg;Landsberg;3522;576;2501;320
 3104;ludwigsort;Ludwigsort;3480;501;3009;382
 3105;mehlsack;Mehlsack;3445;587;2233;286
 3106;liebstadt;Liebstadt;3422;648;2097;270
-3107;lubomino;Lubomino;3493;624;1731;222
-3108;lelkowo;Lelkowo;3481;551;2870;366
+3107;arnsdorf;Arnsdorf;3493;624;1731;222
+3108;lichtenfeld;Lichtenfeld;3481;551;2870;366
 3109;rastenburg;Rastenburg;3696;636;2377;305
 3110;bartenstein;Bartenstein;3584;586;2670;341
 3111;friedland_ostpreussen;Friedland (Ostpreußen);3620;520;3915;498
@@ -3146,7 +3146,7 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 3144;allenstein;Allenstein;3529;724;2002;259
 3145;osterode;Osterode;3434;753;2599;337
 3146;mohrungen;Mohrungen;3433;692;2391;308
-3147;hohenstein;Hohenstein;3497;795;2393;311
+3147;hohenstein_ostpreussen;Hohenstein (Ostpreußen);3497;795;2393;311
 3148;wartenburg;Wartenburg;3568;711;2350;304
 3149;liebemuehl;Liebemühl;3400;725;2292;297
 3150;jonkendorf;Jonkendorf;3495;705;1966;254
@@ -3177,7 +3177,7 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 3175;hille;Hille;1314;1153;1259;168
 3176;bielefeld;Bielefeld;1268;1251;1334;180
 3177;harsewinkel;Harsewinkel;1215;1268;790;107
-3178;halle_ostwestfalen;Halle (Ostwestfalen);1234;1239;1389;187
+3178;halle_westfalen;Halle (Westfalen);1234;1239;1389;187
 3179;versmold;Versmold;1204;1245;1030;139
 3180;spenge;Spenge;1257;1216;1009;136
 3181;detmold;Detmold;1337;1284;1163;157
@@ -3227,7 +3227,7 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 3225;kolberg;Kolberg;2586;618;964;124
 3226;koeslin;Köslin;2710;613;2285;293
 3227;cammin;Cammin;2448;672;1974;254
-3228;lauenburg_pommern;Lauenburg (Pommern);2992;486;1912;243
+3228;lauenburg_in_pommern;Lauenburg in Pommern;2992;486;1912;243
 3229;leba;Leba;2984;443;1688;213
 3230;glowitz;Glowitz;2945;475;1946;247
 3231;potegowo;Potęgowo;2961;513;1965;250
@@ -3334,7 +3334,7 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 3332;bahn;Bahn;2417;927;2057;270
 3333;doelitz;Dölitz;2527;900;1686;221
 3334;prillwitz;Prillwitz;2500;924;1441;189
-3335;beelitz_pommern;Beelitz (Pommern);2437;892;1892;248
+3335;beelitz_in_pommern;Beelitz in Pommern;2437;892;1892;248
 3336;kublank;Kublank;2454;848;2345;306
 3337;warnitz;Warnitz;2491;886;1255;164
 3338;koenigsberg_in_neumark;Königsberg in Neumark;2384;968;1505;198
@@ -3666,7 +3666,7 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 3664;werdau;Werdau;1994;1643;843;117
 3665;reichenbach_vogtland;Reichenbach/Vogtland;1988;1672;1167;162
 3666;lichtenstein;Lichtenstein;2045;1632;1058;147
-3667;kirchberg_sachsen;Kirchberg (Sachsen);2023;1674;1201;167
+3667;kirchberg;Kirchberg;2023;1674;1201;167
 3668;annaberg_buchholz;Annaberg-Buchholz;2110;1686;1082;150
 3669;aue;Aue;2053;1682;896;125
 3670;schwarzenberg;Schwarzenberg;2079;1702;1107;154
@@ -3677,7 +3677,7 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 3675;joehstadt;Jöhstadt;2145;1700;1641;228
 3676;oberwiesenthal;Oberwiesenthal;2102;1732;1289;180
 3677;plauen;Plauen;1949;1708;1203;167
-3678;auerbach_sachsen;Auerbach (Sachsen);2002;1702;1257;175
+3678;auerbach;Auerbach;2002;1702;1257;175
 3679;klingenthal;Klingenthal;2017;1744;1044;146
 3680;oelsnitz;Oelsnitz;1956;1737;1191;166
 3681;markneukirchen;Markneukirchen;1982;1765;830;116
@@ -3825,7 +3825,7 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 3823;weissenhorn;Weißenhorn;1582;2367;998;145
 3824;senden_schwaben;Senden (Schwaben);1552;2365;852;124
 3825;ochsenhausen;Ochsenhausen;1536;2438;1092;160
-3826;erbach_schwaben;Erbach (Schwaben);1525;2361;834;121
+3826;erbach;Erbach;1525;2361;834;121
 3827;erolzheim;Erolzheim;1566;2432;921;135
 3828;schwendi;Schwendi;1544;2408;984;144
 3829;sigmaringen;Sigmaringen;1404;2423;1019;149
@@ -3904,7 +3904,7 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 3902;biblis;Biblis;1257;1951;683;97
 3903;zwingenberg;Zwingenberg;1282;1942;750;106
 3904;biebesheim;Biebesheim;1258;1924;878;124
-3905;erbach_starkenburg;Erbach (Starkenburg);1351;1960;1014;144
+3905;erbach_im_odenwald;Erbach im Odenwald;1351;1960;1014;144
 3906;wald_michelbach;Wald-Michelbach;1328;1990;840;119
 3907;moerlenbach;Mörlenbach;1309;1975;517;73
 3908;bad_koenig;Bad König;1360;1933;983;139
@@ -3999,7 +3999,7 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 3997;garanas;Garanas;2510;2827;904;136
 3998;marburg_an_der_drau;Marburg an der Drau;2614;2887;1045;157
 3999;gornja_radgona;Gornja Radgona;2667;2854;761;114
-4000;lenart_v_slov_goricah;Lenart v Slov. Goricah;2648;2882;1642;247
+4000;sankt_leonhard;Sankt Leonhard;2648;2882;1642;247
 4001;sentilj_v_slov_goricah;Šentilj v Slov. Goricah;2612;2856;1090;164
 4002;mureck;Mureck;2642;2846;910;137
 4003;sankt_peter_am_ottersbach;Sankt Peter am Ottersbach;2637;2817;1080;162
@@ -4028,7 +4028,7 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 4026;cilli;Cilli;2538;2983;1003;152
 4027;trbovlje;Trbovlje;2505;3014;1096;166
 4028;rann;Rann;2603;3092;1387;211
-4029;sentjur;Šentjur;2566;2990;1091;165
+4029;sankt_georgen;Sankt Georgen;2566;2990;1091;165
 4030;gonobitz;Gonobitz;2573;2960;1356;205
 4031;rogaska_slatina;Rogaška Slatina;2615;2982;917;139
 4032;tueffer;Tüffer;2541;3016;1011;153
@@ -4093,7 +4093,7 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 4091;brotterode;Brotterode;1631;1614;771;107
 4092;haina_thueringen;Haina (Thüringen);1645;1558;1573;217
 4093;jena;Jena;1850;1579;1176;162
-4094;naumburg_thueringen;Naumburg (Thüringen);1884;1511;1382;190
+4094;naumburg_an_der_saale;Naumburg an der Saale;1884;1511;1382;190
 4095;apolda;Apolda;1831;1554;1404;193
 4096;eisenberg;Eisenberg;1913;1565;1123;155
 4097;hermsdorf;Hermsdorf;1897;1591;896;124
@@ -4294,7 +4294,7 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 4292;krokowa;Krokowa;3093;425;1693;214
 4293;choczewo;Choczewo;3028;436;1926;243
 4294;gdingen;Gdingen;3154;504;567;72
-4295;neustadt_westpreussen;Neustadt (Westpreußen);3102;472;1222;155
+4295;neustadt;Neustadt;3102;472;1222;155
 4296;rumia;Rumia;3136;483;1280;162
 4297;zoppot;Zoppot;3155;532;871;111
 4298;putzig;Putzig;3123;447;1090;138
@@ -4307,7 +4307,7 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 4305;danzig;Danzig;3180;552;1283;164
 4306;dirschau;Dirschau;3208;630;1425;183
 4307;praust;Praust;3177;582;1133;145
-4308;pszczolki;Pszczółki;3193;606;955;122
+4308;hohenstein_westpreussen;Hohenstein (Westpreußen);3193;606;955;122
 4309;gross_trampken;Gross Trampken;3159;609;1102;141
 4310;gross_zuender;Gross Zünder;3224;577;2130;272
 4311;elbing;Elbing;3327;613;2900;372
@@ -4333,7 +4333,7 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 4331;pelplin;Pelplin;3186;683;1183;153
 4332;skarszewy;Skarszewy;3141;638;1551;199
 4333;skorcz;Skórcz;3151;730;1917;248
-4334;zblewo;Zblewo;3121;677;1380;178
+4334;hoch_stueblau;Hoch Stüblau;3121;677;1380;178
 4335;subkowy;Subkowy;3211;660;1322;170
 4336;smetowo_graniczne;Smętowo Graniczne;3187;734;1589;206
 4337;lubichowo;Lubichowo;3119;710;1454;188
@@ -4341,7 +4341,7 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 4339;gniew;Gniew;3210;707;1247;161
 4340;christburg;Christburg;3314;680;2695;347
 4341;saalfeld_westpreussen;Saalfeld (Westpreußen);3351;701;2228;288
-4342;ryjewo;Ryjewo;3241;709;1111;143
+4342;rehhof;Rehhof;3241;709;1111;143
 4343;niklaskirchen;Niklaskirchen;3279;702;1366;176
 4344;czersk;Czersk;3046;729;2285;296
 4345;sliwice;Śliwice;3090;748;2017;261
@@ -4356,7 +4356,7 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 4354;preussisch_friedland;Preussisch Friedland;2908;799;3266;425
 4355;ratzebuhr;Ratzebuhr;2836;794;2236;291
 4356;prechlau;Prechlau;2929;711;2553;330
-4357;koczala;Koczała;2887;686;2109;272
+4357;floetenstein;Flötenstein;2887;686;2109;272
 4358;rzeczenica;Rzeczenica;2885;730;1915;248
 4359;deutsch_eylau;Deutsch Eylau;3372;774;2946;383
 4360;riesenburg;Riesenburg;3277;738;1702;220
@@ -4440,7 +4440,7 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 4438;forchtenberg;Forchtenberg;1460;2069;1024;146
 4439;mulfingen;Mulfingen;1515;2063;966;138
 4440;krautheim;Krautheim;1480;2044;1123;160
-4441;waldenburg_wuerttemberg;Waldenburg (Württemberg);1480;2102;842;120
+4441;waldenburg;Waldenburg;1480;2102;842;120
 4442;heilbronn;Heilbronn;1401;2114;1117;160
 4443;eppingen;Eppingen;1344;2119;729;104
 4444;bad_rappenau;Bad Rappenau;1384;2087;1089;156

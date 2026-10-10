@@ -7,7 +7,8 @@
 # ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
 # und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 #
-# Umfang: Land an der Saar (heute Saarland; 1648 u. a. Nassau-Saarbrücken, Pfalz-Zweibrücken, Kurtrier und Lothringen).
+# Umfang: Land an der Saar (heute Saarland; 1648 u. a. Nassau-Saarbrücken, Pfalz-Zweibrücken,
+# Kurtrier und Lothringen).
 
 ort sankt_wendel {
     name     = "Sankt Wendel"

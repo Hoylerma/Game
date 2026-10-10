@@ -22,7 +22,7 @@ kreis kr_darmstadt {
     quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
 }
 
-kreis kr_erbach_starkenburg {
-    name   = "Erbach (Starkenburg)"
+kreis kr_erbach_im_odenwald {
+    name   = "Erbach im Odenwald"
     quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
 }

@@ -12,8 +12,11 @@
 # Das Hochstift Halberstadt fiel 1648 als weltliches Fürstentum an Brandenburg.
 # Die Magdeburger Börde gehörte zu den am schwersten verwüsteten Landschaften.
 #
-# Ergänzt in Meilenstein M3 (tools/geodaten/orte.py): weitere Orte ohne Daten (ohne Historie) aus GeoNames, räumlich ausgewählt, Gelände aus dem Höhenmodell, Fläche aus der Karte.
-# Umfang der Landschaft Magdeburg: Erzstift Magdeburg, Fürstentum Halberstadt und Harzvorland (heute Sachsen-Anhalt ohne Altmark, Anhalt, Wittenberg, Burgenlandkreis und Mansfeld-Südharz).
+# Ergänzt in Meilenstein M3 (tools/geodaten/orte.py): weitere Orte ohne Daten (ohne Historie)
+# aus GeoNames, räumlich ausgewählt, Gelände aus dem Höhenmodell, Fläche aus der Karte.
+# Umfang der Landschaft Magdeburg: Erzstift Magdeburg, Fürstentum Halberstadt und Harzvorland
+# (heute Sachsen-Anhalt ohne Altmark, Anhalt, Wittenberg, Burgenlandkreis und
+# Mansfeld-Südharz).
 
 ort magdeburg {
     name     = "Magdeburg"
@@ -513,14 +516,14 @@ ort koennern {
     quelle   = "GeoNames (CC BY 4.0), geonameid 2885716; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort landsberg_magdeburg {
-    name     = "Landsberg (Magdeburg)"
+ort landsberg_bei_halle {
+    name     = "Landsberg bei Halle"
     gelaende = flachland
     lage     = { 12.1608 51.527 }
     flaeche  = 147
     stadt    = nein
     kreis    = kr_halle
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2881508; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2881508; Name Landsberg bei Halle aus den GeoNames-Alternativnamen (GeoNames: Landsberg); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort wettin {

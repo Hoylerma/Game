@@ -7,7 +7,8 @@
 # ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
 # und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 #
-# Umfang: Fürstentum Lüneburg mit Lüneburger Heide und Wendland (heute Landkreise Lüneburg, Harburg, Uelzen, Lüchow-Dannenberg, Celle, Heidekreis und Gifhorn).
+# Umfang: Fürstentum Lüneburg mit Lüneburger Heide und Wendland (heute Landkreise Lüneburg,
+# Harburg, Uelzen, Lüchow-Dannenberg, Celle, Heidekreis und Gifhorn).
 
 ort buchholz_in_der_nordheide {
     name     = "Buchholz in der Nordheide"

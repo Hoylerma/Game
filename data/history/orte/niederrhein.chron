@@ -7,7 +7,8 @@
 # ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
 # und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 #
-# Umfang: Niederrhein und Bergisches Land (heute Regierungsbezirk Düsseldorf: Kleve, Geldern, Moers, Duisburg, Essen, Düsseldorf, Wuppertal).
+# Umfang: Niederrhein und Bergisches Land (heute Regierungsbezirk Düsseldorf: Kleve, Geldern,
+# Moers, Duisburg, Essen, Düsseldorf, Wuppertal).
 
 ort kleve {
     name     = "Kleve"

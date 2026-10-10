@@ -7,7 +7,8 @@
 # ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
 # und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 #
-# Umfang: Herzogtum Brabant mit Antwerpen und Mecheln (heute Brüssel, Flämisch- und Wallonisch-Brabant, Provinz Antwerpen).
+# Umfang: Herzogtum Brabant mit Antwerpen und Mecheln (heute Brüssel, Flämisch- und
+# Wallonisch-Brabant, Provinz Antwerpen).
 
 ort turnhout {
     name     = "Turnhout"
@@ -320,13 +321,13 @@ ort bruessel {
 }
 
 ort halle_brabant {
-    name     = "Halle (Brabant)"
+    name     = "Halle"
     gelaende = flachland
     lage     = { 4.2345 50.7338 }
     flaeche  = 156
     stadt    = ja
     kreis    = kr_bruessel
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2796696; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2796696; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort vilvoorde {

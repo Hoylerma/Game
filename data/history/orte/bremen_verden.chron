@@ -7,7 +7,9 @@
 # ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem Höhenmodell
 # und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 #
-# Umfang: Elbe-Weser-Dreieck mit der Stadt Bremen (1648 größtenteils das schwedische Herzogtum Bremen-Verden; heute Landkreise Cuxhaven, Stade, Rotenburg, Osterholz und Verden, Bremen und Bremerhaven).
+# Umfang: Elbe-Weser-Dreieck mit der Stadt Bremen (1648 größtenteils das schwedische Herzogtum
+# Bremen-Verden; heute Landkreise Cuxhaven, Stade, Rotenburg, Osterholz und Verden, Bremen und
+# Bremerhaven).
 
 ort stade {
     name     = "Stade"

@@ -14,8 +14,10 @@
 # Reichsstädte Mühlhausen und Nordhausen sowie Schwarzburg, Reuß, Mansfeld,
 # Stolberg und die Henneberger Lande.
 #
-# Ergänzt in Meilenstein M3 (tools/geodaten/orte.py): weitere Orte ohne Daten (ohne Historie) aus GeoNames, räumlich ausgewählt, Gelände aus dem Höhenmodell, Fläche aus der Karte.
-# Umfang der Landschaft Thüringen: Thüringen mit dem kursächsischen Thüringischen Kreis (heute Thüringen, Burgenlandkreis und Mansfeld-Südharz).
+# Ergänzt in Meilenstein M3 (tools/geodaten/orte.py): weitere Orte ohne Daten (ohne Historie)
+# aus GeoNames, räumlich ausgewählt, Gelände aus dem Höhenmodell, Fläche aus der Karte.
+# Umfang der Landschaft Thüringen: Thüringen mit dem kursächsischen Thüringischen Kreis (heute
+# Thüringen, Burgenlandkreis und Mansfeld-Südharz).
 
 ort erfurt {
     name     = "Erfurt"
@@ -646,14 +648,14 @@ ort jena {
     quelle   = "GeoNames (CC BY 4.0), geonameid 2895044; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort naumburg_thueringen {
-    name     = "Naumburg (Thüringen)"
+ort naumburg_an_der_saale {
+    name     = "Naumburg an der Saale"
     gelaende = huegelland
     lage     = { 11.8098 51.1499 }
     flaeche  = 190
     stadt    = ja
     kreis    = kr_jena
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2866906; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2866906; Name Naumburg an der Saale aus den GeoNames-Alternativnamen (GeoNames: Naumburg); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort apolda {
