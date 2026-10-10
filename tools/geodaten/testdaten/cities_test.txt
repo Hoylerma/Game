@@ -1,0 +1,6 @@
+3081368	Wrocław	Wroclaw	Breslau,Breslavia,Vratislavia,WRO,Wrocław,Вроцлав	51.1	17.03333	P	PPLA	PL		72	0264	026401		634893		119	Europe/Warsaw	2019-09-05
+2950159	Berlin	Berlin	BER,Berlijn,Berlino,Berlín	52.52437	13.41053	P	PPLC	DE		16	00	11000	11000000	3426354	74	43	Europe/Berlin	2019-07-13
+2661604	Basel	Basel	Bale,Basilea,Bâle	47.55839	7.57327	P	PPLA	CH		BS	1200	2701		164488		260	Europe/Zurich	2019-09-05
+2907085	Helgoland	Helgoland	Heligoland	54.18143	7.8863	P	PPLA4	DE		10	00	01051	01051045	1333		-9999	Europe/Berlin	2015-09-04
+9999999	Testdorf	Testdorf		50.0	10.0	P	PPL	DE	DE,PL								Europe/Berlin	2020-01-01
+
