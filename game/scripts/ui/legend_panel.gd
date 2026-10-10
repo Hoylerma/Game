@@ -5,6 +5,11 @@ extends PanelContainer
 const SWATCH_SIZE := Vector2(16, 12)
 ## Ab dieser Zahl von Einträgen zweispaltig.
 const TWO_COLUMNS_FROM := 7
+## Schraffur „keine Daten“ wie im Kartenshader (Grund, Linie).
+const HATCH_BASE := Color(0.910, 0.882, 0.812)
+const HATCH_LINE := Color(0.42, 0.35, 0.26)
+
+static var _hatch_texture: ImageTexture = null
 
 ## Inhalt der aktuellen Anzeige; gleicher Inhalt wird nicht neu aufgebaut.
 var _shown: Array = []
@@ -13,10 +18,15 @@ var _shown: Array = []
 @onready var _body: VBoxContainer = %Body
 
 
-## Farbfelder; entries: Dictionaries { "color": Color, "text": String, "detail": String }.
+## Farbfelder; entries: Dictionaries { "color": Color, "text": String, "detail": String,
+## optional "hatch": true für die Schraffur „keine Daten“ }.
 func show_swatches(title: String, entries: Array[Dictionary]) -> void:
 	if not _begin(["swatches", title, entries]):
 		return
+	_add_swatch_grid(entries)
+
+
+func _add_swatch_grid(entries: Array[Dictionary]) -> void:
 	var grid := GridContainer.new()
 	grid.columns = 2 if entries.size() >= TWO_COLUMNS_FROM else 1
 	grid.add_theme_constant_override(&"h_separation", 14)
@@ -24,8 +34,13 @@ func show_swatches(title: String, entries: Array[Dictionary]) -> void:
 	for entry in entries:
 		var row := HBoxContainer.new()
 		row.add_theme_constant_override(&"separation", 6)
-		var swatch := ColorRect.new()
-		swatch.color = entry.get("color", Color.GRAY)
+		var swatch: Control = null
+		if bool(entry.get("hatch", false)):
+			swatch = hatch_swatch()
+		else:
+			var plain := ColorRect.new()
+			plain.color = entry.get("color", Color.GRAY)
+			swatch = plain
 		swatch.custom_minimum_size = SWATCH_SIZE
 		swatch.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 		row.add_child(swatch)
@@ -42,11 +57,16 @@ func show_swatches(title: String, entries: Array[Dictionary]) -> void:
 	_body.add_child(grid)
 
 
-## Farbverlauf mit Beschriftungen (links, Mitte, rechts) und Einheit.
+## Farbverlauf mit Beschriftungen (links, Mitte, rechts) und Einheit; extra sind
+## zusätzliche Farbfelder darunter (z. B. „Keine Daten“, wie bei show_swatches).
 func show_gradient(
-	title: String, gradient: Gradient, labels: PackedStringArray, unit: String
+	title: String,
+	gradient: Gradient,
+	labels: PackedStringArray,
+	unit: String,
+	extra: Array[Dictionary] = []
 ) -> void:
-	if not _begin(["gradient", title, gradient.offsets, gradient.colors, labels, unit]):
+	if not _begin(["gradient", title, gradient.offsets, gradient.colors, labels, unit, extra]):
 		return
 	var texture := GradientTexture2D.new()
 	texture.gradient = gradient
@@ -78,6 +98,45 @@ func show_gradient(
 		unit_label.text = unit
 		unit_label.theme_type_variation = &"MutedLabel"
 		_body.add_child(unit_label)
+	if not extra.is_empty():
+		_add_swatch_grid(extra)
+
+
+## Farbreihe ohne Einzelnamen (z. B. Kreise) mit Erklärung darunter.
+func show_palette(title: String, colors: PackedColorArray, text: String) -> void:
+	if not _begin(["palette", title, colors, text]):
+		return
+	var strip := HBoxContainer.new()
+	strip.add_theme_constant_override(&"separation", 2)
+	for color in colors:
+		var swatch := ColorRect.new()
+		swatch.color = color
+		swatch.custom_minimum_size = SWATCH_SIZE
+		strip.add_child(swatch)
+	_body.add_child(strip)
+	var label := Label.new()
+	label.text = text
+	label.theme_type_variation = &"MutedLabel"
+	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	label.custom_minimum_size = Vector2(240, 0)
+	_body.add_child(label)
+
+
+## Kleines Feld mit der Schraffur „keine Daten“.
+static func hatch_swatch() -> TextureRect:
+	if _hatch_texture == null:
+		var image := Image.create_empty(int(SWATCH_SIZE.x), int(SWATCH_SIZE.y), false,
+			Image.FORMAT_RGBA8)
+		for y in image.get_height():
+			for x in image.get_width():
+				var on_line := (x + y) % 5 == 0
+				image.set_pixel(x, y, HATCH_BASE.lerp(HATCH_LINE, 0.5 if on_line else 0.0))
+		_hatch_texture = ImageTexture.create_from_image(image)
+	var rect := TextureRect.new()
+	rect.texture = _hatch_texture
+	rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	rect.stretch_mode = TextureRect.STRETCH_SCALE
+	return rect
 
 
 ## Nur ein Hinweistext (z. B. ohne Simulation).

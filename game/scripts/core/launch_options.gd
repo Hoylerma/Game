@@ -4,8 +4,10 @@ extends RefCounted
 ##
 ##   --screenshot=<pfad>    nach dem Laden simulieren, Bild speichern, beenden
 ##   --tage=<n>             Tage vor dem Screenshot (Standard 60)
-##   --kartenmodus=<0..4>   Kartenmodus (0 Politisch … 4 Verwüstung)
+##   --kartenmodus=<0..5>   Kartenmodus (0 Politisch … 4 Verwüstung, 5 Kreise)
 ##   --ort=<ort_id>         Ort auswählen und Ortsinfo öffnen
+##   --zoom=<faktor>        Vergrößerung gegenüber der Übersicht (1 = ganze Karte);
+##                          zentriert auf --ort, sonst auf die Kartenmitte (bis 1: Übersicht)
 
 const DEFAULT_SCREENSHOT_DAYS := 60
 
@@ -13,6 +15,8 @@ var screenshot_path := ""
 var days := DEFAULT_SCREENSHOT_DAYS
 var map_mode := -1
 var location_id := ""
+## Vergrößerung gegenüber der Übersicht; 0 = Übersicht ohne Zentrierung.
+var zoom_factor := 0.0
 ## Unbekannte oder fehlerhafte Angaben (deutsche Meldungen).
 var problems := PackedStringArray()
 
@@ -52,6 +56,13 @@ static func parse(args: PackedStringArray) -> LaunchOptions:
 					options.problems.append(
 						"--kartenmodus erwartet 0 bis %d, nicht „%s“."
 						% [MapModes.COUNT - 1, value]
+					)
+			"--zoom":
+				if value.is_valid_float() and value.to_float() > 0.0:
+					options.zoom_factor = value.to_float()
+				else:
+					options.problems.append(
+						"--zoom erwartet eine positive Zahl (z. B. --zoom=4), nicht „%s“." % value
 					)
 			"--ort":
 				if value.is_empty():

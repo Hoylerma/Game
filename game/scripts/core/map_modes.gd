@@ -8,7 +8,8 @@ const MAP_DENSITY := 1
 const MAP_CONFESSION := 2
 const MAP_TERRAIN := 3
 const MAP_DEVASTATION := 4
-const COUNT := 5
+const MAP_KREISE := 5
+const COUNT := 6
 
 ## Anzeigenamen der Modi (Index = Modus).
 const NAMES: PackedStringArray = [
@@ -17,6 +18,7 @@ const NAMES: PackedStringArray = [
 	"Konfession",
 	"Gelände",
 	"Verwüstung",
+	"Kreise",
 ]
 
 ## Kurze Erklärung für Tooltips der Modusleiste.
@@ -26,6 +28,7 @@ const DESCRIPTIONS: PackedStringArray = [
 	"Mehrheitskonfession der Orte",
 	"Geländetyp der Orte",
 	"Kriegsverwüstung der Orte",
+	"Kreise (je 4–12 Orte)",
 ]
 
 ## Aktionen der Eingabebelegung (project.godot), Index = Modus.
@@ -35,10 +38,16 @@ const ACTIONS: Array[StringName] = [
 	&"kartenmodus_konfession",
 	&"kartenmodus_gelaende",
 	&"kartenmodus_verwuestung",
+	&"kartenmodus_kreise",
 ]
 
-## Tastenbezeichnung für die Anzeige, Index = Modus.
-const KEY_HINTS: PackedStringArray = ["Q", "W", "E", "R", "T"]
+## Tastenbezeichnung für die Anzeige, Index = Modus. Die Belegung nutzt physische
+## Tasten: „Z“ ist die Taste rechts neben T (auf englischen Tastaturen „Y“).
+const KEY_HINTS: PackedStringArray = ["Q", "W", "E", "R", "T", "Z"]
+
+## Modi, deren Farben von der Simulation abhängen; dort erhalten Orte ohne Daten
+## Alpha 0 (Schraffur „keine Daten“, bridge-api.md).
+const DATA_MODES: PackedInt32Array = [MAP_POLITICAL, MAP_DENSITY, MAP_CONFESSION, MAP_DEVASTATION]
 
 ## Obergrenze der Dichteskala der Brücke (≥ 120 Einwohner je km² → dunkelste Farbe).
 const DENSITY_SCALE_MAX := 120.0

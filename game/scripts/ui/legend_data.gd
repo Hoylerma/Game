@@ -6,6 +6,8 @@ extends RefCounted
 ## übereinstimmen. Verläufe (Dichte, Verwüstung) werden aus den Orten
 ## geschätzt: Passt eine lineare Abbildung Wert → Farbe, zeigt die Legende die
 ## exakten Endfarben, sonst die tatsächlich vorkommenden Farben.
+## Orte ohne Daten (Alpha 0 in den datenabhängigen Modi) zählen nicht mit; für sie
+## gibt es einen eigenen Eintrag mit Schraffur (no_data_entry).
 
 ## Höchste Abweichung (je Farbkanal), bis zu der ein linearer Verlauf gilt.
 const LINEAR_TOLERANCE := 0.02
@@ -19,9 +21,7 @@ static func political_entries(sim: SimulationClient) -> Array[Dictionary]:
 		var count := int(state.get("location_count", 0))
 		if count <= 0:
 			continue
-		var detail := "%s – %s" % [
-			str(state.get("name", "")), "1 Ort" if count == 1 else "%d Orte" % count
-		]
+		var detail := "%s – %s" % [str(state.get("name", "")), count_text(count)]
 		entries.append({
 			"color": state.get("color", Color.GRAY),
 			"text": str(state.get("short_name", state.get("tag", ""))),
@@ -34,13 +34,42 @@ static func political_entries(sim: SimulationClient) -> Array[Dictionary]:
 	return entries
 
 
-## Kategorien eines Kartenmodus (Name aus dem Ortsfeld field) mit Anzahl der Orte.
-static func category_entries(sim: SimulationClient, mode: int, field: String) -> Array[Dictionary]:
+## Eintrag „Keine Daten“ (Schraffur) für count Orte ohne Daten.
+static func no_data_entry(count: int) -> Dictionary:
+	return {
+		"color": UiPalette.PAPER_DEEP,
+		"hatch": true,
+		"text": "Keine Daten",
+		"detail": "%s ohne historische Daten zum Startdatum" % count_text(count),
+	}
+
+
+## "1 Ort" bzw. "1.234 Orte".
+static func count_text(count: int) -> String:
+	return "1 Ort" if count == 1 else "%s Orte" % GermanFormat.integer(count)
+
+
+## Kategorien eines Kartenmodus (Name aus dem Ortsfeld field) mit Anzahl der Orte;
+## Orte ohne Daten (Alpha 0) am Ende als ein Eintrag mit Schraffur.
+## catalog liefert Kategorien ohne get_location, wenn field "terrain" ist.
+static func category_entries(
+	sim: SimulationClient, mode: int, field: String, catalog: LocationCatalog = null
+) -> Array[Dictionary]:
 	var colors := sim.get_map_colors(mode)
 	var by_name := {}
 	var order: Array[String] = []
+	var without_data := 0
+	var use_catalog := catalog != null and field == "terrain" and catalog.size() == colors.size()
 	for index in mini(colors.size(), sim.get_location_count()):
-		var category := GermanFormat.humanize(str(sim.get_location(index).get(field, "")))
+		if colors[index].a <= 0.0:
+			without_data += 1
+			continue
+		var raw := ""
+		if use_catalog:
+			raw = catalog.terrains[index]
+		else:
+			raw = str(sim.get_location(index).get(field, ""))
+		var category := GermanFormat.humanize(raw)
 		if not by_name.has(category):
 			by_name[category] = {"color": colors[index], "count": 0}
 			order.append(category)
@@ -55,8 +84,10 @@ static func category_entries(sim: SimulationClient, mode: int, field: String) ->
 		entries.append({
 			"color": by_name[category]["color"],
 			"text": category,
-			"detail": "1 Ort" if count == 1 else "%d Orte" % count,
+			"detail": count_text(count),
 		})
+	if without_data > 0:
+		entries.append(no_data_entry(without_data))
 	return entries
 
 
@@ -64,8 +95,33 @@ static func category_entries(sim: SimulationClient, mode: int, field: String) ->
 static func category_colors(sim: SimulationClient, mode: int, field: String) -> Dictionary:
 	var result := {}
 	for entry in category_entries(sim, mode, field):
-		result[entry["text"]] = entry["color"]
+		if not bool(entry.get("hatch", false)):
+			result[entry["text"]] = entry["color"]
 	return result
+
+
+## Farben der Kreise (Palette der Brücke) in der Reihenfolge der Kreisindizes,
+## ohne Wiederholungen; Orte ohne Kreis (Grau) zuletzt.
+static func kreis_palette(sim: SimulationClient, catalog: LocationCatalog) -> PackedColorArray:
+	var colors := sim.get_map_colors(MapModes.MAP_KREISE)
+	var first_of_kreis := {}
+	var without_kreis := Color(0, 0, 0, 0)
+	for index in mini(colors.size(), catalog.kreis_indices.size()):
+		var kreis := catalog.kreis_indices[index]
+		if kreis < 0:
+			without_kreis = colors[index]
+		elif not first_of_kreis.has(kreis):
+			first_of_kreis[kreis] = colors[index]
+	var kreise: Array = first_of_kreis.keys()
+	kreise.sort()
+	var palette := PackedColorArray()
+	for kreis: int in kreise:
+		var color: Color = first_of_kreis[kreis]
+		if not palette.has(color):
+			palette.append(color)
+	if without_kreis.a > 0.0 and not palette.has(without_kreis):
+		palette.append(without_kreis)
+	return palette
 
 
 ## Verlauf für einen Kartenmodus mit Zahlenwerten im Ortsfeld field (0..scale_max).
@@ -76,6 +132,8 @@ static func gradient_for(
 	var values := PackedFloat32Array()
 	var samples := PackedColorArray()
 	for index in mini(colors.size(), sim.get_location_count()):
+		if colors[index].a <= 0.0:
+			continue
 		values.append(float(sim.get_location(index).get(field, 0.0)))
 		samples.append(colors[index])
 	return gradient_from_samples(values, samples, scale_max)

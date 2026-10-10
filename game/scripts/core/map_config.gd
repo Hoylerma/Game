@@ -1,10 +1,11 @@
 class_name MapConfig
 extends RefCounted
-## Liest data/karte/karte.chron (Projektion, Bildgröße, Küstenlinie).
+## Liest data/karte/karte.chron (Ausschnitt, Projektion, Bildgröße).
 ##
-## Die Datei ist optional für die Oberfläche: Mit ihr unterscheidet die Karte
-## Meer (nördlich der Küste) von Gebieten ohne Ort und zeichnet einen
-## Gradrahmen. Format: docs/technik/chronik-skript.md, Abschnitt 6.1.
+## Die Datei ist optional für die Oberfläche: Mit ihr zeichnet die Karte den
+## Gradrahmen und rechnet Längen-/Breitengrade in Bildpixel um. Land, Meer,
+## Seen und Ausland stehen seit M3 im Blaukanal von provinzen.png (MapData).
+## Format: docs/technik/chronik-skript.md, Abschnitt 6.1.
 ## Der Leser versteht nur die flache Struktur dieses einen Blocks.
 
 var image_width := 0
@@ -14,8 +15,8 @@ var longitude_max := 0.0
 var latitude_min := 0.0
 var latitude_max := 0.0
 var max_radius_km := 0.0
-## Küstenlinie als Längen-/Breitengrade (x = Länge Ost, y = Breite Nord).
-var coast := PackedVector2Array()
+## Bezugsbreite der Plattkarte (Grad Nord); 0, wenn die Datei sie nicht nennt.
+var reference_latitude := 0.0
 
 
 ## Liest die Datei; null, wenn sie fehlt oder unbrauchbar ist.
@@ -40,9 +41,7 @@ static func from_text(text: String) -> MapConfig:
 	config.latitude_min = _number(values, "breite_min")
 	config.latitude_max = _number(values, "breite_max")
 	config.max_radius_km = _number(values, "max_radius_km")
-	var coast_numbers: PackedFloat64Array = values.get("kueste", PackedFloat64Array())
-	for i in range(0, coast_numbers.size() - 1, 2):
-		config.coast.append(Vector2(coast_numbers[i], coast_numbers[i + 1]))
+	config.reference_latitude = _number(values, "bezugsbreite")
 	if not config.is_valid():
 		return null
 	return config
@@ -64,15 +63,11 @@ func geo_to_pixel(longitude: float, latitude: float) -> Vector2:
 	return Vector2(x, y)
 
 
-## Küstenlinie in Bildkoordinaten, skaliert auf die tatsächliche Bildgröße.
-func coast_in_pixels(actual_size: Vector2i) -> PackedVector2Array:
-	var result := PackedVector2Array()
-	var scale := Vector2(
-		float(actual_size.x) / image_width, float(actual_size.y) / image_height
-	)
-	for point in coast:
-		result.append(geo_to_pixel(point.x, point.y) * scale)
-	return result
+## Geografischer Punkt (x = Länge Ost, y = Breite Nord) einer Bildkoordinate.
+func pixel_to_geo(pixel: Vector2) -> Vector2:
+	var longitude := longitude_min + pixel.x / image_width * (longitude_max - longitude_min)
+	var latitude := latitude_max - pixel.y / image_height * (latitude_max - latitude_min)
+	return Vector2(longitude, latitude)
 
 
 static func _number(values: Dictionary, key: String) -> float:

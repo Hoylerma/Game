@@ -4,6 +4,8 @@ extends Camera2D
 ##
 ## Ziehen mit rechter oder mittlerer Maustaste, Bewegen mit WASD und den
 ## Pfeiltasten, Zoomen mit dem Mausrad (zum Mauszeiger hin, mit Grenzen).
+## Zoom = Bildschirmpixel je Kartenpixel. Die Übersicht (fit_to) zeigt die ganze
+## Karte; herausgezoomt wird bis knapp darunter, hineingezoomt bis MAX_ZOOM.
 ## W ist zugleich die Taste des Kartenmodus „Bevölkerungsdichte“: Kurz
 ## getippt schaltet sie den Modus um (siehe main.gd), gehalten bewegt sie
 ## die Kamera. Tasten, die keinem Kartenmodus gehören, bewegen sofort.
@@ -16,15 +18,23 @@ const PAN_ACTIONS: Array[StringName] = [
 const PAN_DIRECTIONS: Array[Vector2] = [Vector2.LEFT, Vector2.RIGHT, Vector2.UP, Vector2.DOWN]
 ## Tastaturbewegung in Bildschirmpunkten je Sekunde.
 const KEY_PAN_SPEED := 820.0
-const ZOOM_STEP := 1.18
-const MAX_ZOOM := 8.0
-## Wie weit über den Kartenausschnitt hinaus herausgezoomt werden darf.
-const MIN_ZOOM_FACTOR := 0.55
+const ZOOM_STEP := 1.2
+## Größter Zoom: ein Kartenpixel wird höchstens so viele Bildschirmpixel groß
+## (auf der Kernraum-Karte ist ein typischer Ort dann etwa 210 Pixel breit).
+const MAX_ZOOM := 6.0
+## Hineinzoomen mindestens bis zum Vierfachen der Übersicht (kleine Karten).
+const MIN_ZOOM_RANGE := 4.0
+## Wie weit unter die Übersicht herausgezoomt werden darf.
+const MIN_ZOOM_FACTOR := 0.8
 const ZOOM_SMOOTHING := 16.0
 
 ## Weltbereich der Karte; die Kamera bleibt über diesem Rechteck.
 var map_rect := Rect2(Vector2.ZERO, Vector2(1024, 1152))
 var min_zoom := 0.2
+var max_zoom := MAX_ZOOM
+## Zoom und Mittelpunkt der Übersicht (ganze Karte im freien Bereich), gesetzt von fit_to.
+var overview_zoom := 1.0
+var overview_center := Vector2.ZERO
 
 var _target_zoom := 1.0
 var _zoom_anchor_screen := Vector2.ZERO
@@ -54,17 +64,20 @@ func fit_to(rect: Rect2, screen_area: Rect2) -> void:
 	if rect.size.x <= 0.0 or rect.size.y <= 0.0 or screen_area.size.x <= 0.0:
 		return
 	var fit := minf(screen_area.size.x / rect.size.x, screen_area.size.y / rect.size.y) * 0.96
-	min_zoom = minf(fit * MIN_ZOOM_FACTOR, MAX_ZOOM)
+	overview_zoom = fit
+	max_zoom = maxf(MAX_ZOOM, fit * MIN_ZOOM_RANGE)
+	min_zoom = minf(fit * MIN_ZOOM_FACTOR, max_zoom)
 	_set_zoom_now(fit)
 	var screen_center := _viewport_size() * 0.5
 	position = rect.get_center() - (screen_area.get_center() - screen_center) / fit
 	_clamp_position()
+	overview_center = position
 
 
 ## Zentriert die Kamera auf einen Weltpunkt (optional mit neuem Zoom).
 func focus_on(world_point: Vector2, new_zoom: float = -1.0) -> void:
 	if new_zoom > 0.0:
-		_set_zoom_now(clampf(new_zoom, min_zoom, MAX_ZOOM))
+		_set_zoom_now(clampf(new_zoom, min_zoom, max_zoom))
 	position = world_point
 	_clamp_position()
 	# Eine laufende Zoom-Glättung hält ab jetzt den neuen Mittelpunkt fest.
@@ -75,6 +88,22 @@ func focus_on(world_point: Vector2, new_zoom: float = -1.0) -> void:
 ## Weltkoordinate eines Punktes in Bildschirmkoordinaten des Viewports.
 func screen_to_world(screen_point: Vector2) -> Vector2:
 	return position + (screen_point - _viewport_size() * 0.5) / zoom.x
+
+
+## Bildschirmkoordinate (Viewport) eines Weltpunktes.
+func world_to_screen(world_point: Vector2) -> Vector2:
+	return (world_point - position) * zoom.x + _viewport_size() * 0.5
+
+
+## Sichtbarer Weltausschnitt.
+func visible_world_rect() -> Rect2:
+	var size := _viewport_size() / zoom.x
+	return Rect2(position - size * 0.5, size)
+
+
+## true, solange eine Zoom-Glättung läuft.
+func is_zooming() -> bool:
+	return not is_equal_approx(zoom.x, _target_zoom)
 
 
 func reset_input_state() -> void:
@@ -192,7 +221,7 @@ func _update_zoom(delta: float) -> void:
 func _zoom_at(screen_point: Vector2, requested_zoom: float) -> void:
 	_zoom_anchor_screen = screen_point
 	_zoom_anchor_world = screen_to_world(screen_point)
-	_target_zoom = clampf(requested_zoom, min_zoom, MAX_ZOOM)
+	_target_zoom = clampf(requested_zoom, min_zoom, max_zoom)
 
 
 ## Verschiebt die Kamera; ein laufender Zoom bewegt sich mit.

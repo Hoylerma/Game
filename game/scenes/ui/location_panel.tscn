@@ -91,6 +91,20 @@ text = "–"
 horizontal_alignment = 2
 text_overrun_behavior = 3
 
+[node name="KreisCaption" type="Label" parent="Scroll/Margin/Content/Facts"]
+layout_mode = 2
+theme_type_variation = &"MutedLabel"
+text = "Kreis"
+
+[node name="Kreis" type="Label" parent="Scroll/Margin/Content/Facts"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "–"
+horizontal_alignment = 2
+text_overrun_behavior = 3
+
 [node name="TerrainCaption" type="Label" parent="Scroll/Margin/Content/Facts"]
 layout_mode = 2
 theme_type_variation = &"MutedLabel"
@@ -174,6 +188,15 @@ size_flags_horizontal = 3
 text = "–"
 horizontal_alignment = 2
 text_overrun_behavior = 3
+
+[node name="NoDataNote" type="Label" parent="Scroll/Margin/Content"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+theme_type_variation = &"MutedLabel"
+text = "Für diesen Ort liegen zum Startdatum keine historischen Daten vor (Besitzer, Bevölkerung, Konfession). Er erscheint auf der Karte, nimmt aber an der Simulation nicht teil."
+autowrap_mode = 3
 
 [node name="DevastationRow" type="HBoxContainer" parent="Scroll/Margin/Content"]
 layout_mode = 2

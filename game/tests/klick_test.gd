@@ -1,0 +1,288 @@
+extends SceneTree
+## Klicktest der Kartenansicht (Abnahme M3: Klickerkennung für alle Orte).
+##
+## 1. Jeder Ort der definition.csv: Sein Beschriftungspunkt wird bei drei Zoomstufen
+##    (fern = Übersicht, mittel, nah; MapDetail.LEVEL_SIZES) mit der Zeichen-
+##    transformation der Karte (Canvas-Transformation, mit der Godot das Kartenbild
+##    zeichnet) in Bildschirmkoordinaten umgerechnet und über die Auswahlfunktion der
+##    Karte (MapView.location_at_screen, dieselbe wie bei Klick und Hervorhebung)
+##    aufgelöst. Die gefundene Ortskennung muss die des Ortes sein. Die Kamera fährt
+##    die Karte dazu in Kacheln ab, damit die Punkte an verschiedenen Bildschirmstellen
+##    liegen.
+## 2. Stichproben über echte Eingabeereignisse: Linksklick (Input.parse_input_event)
+##    auf den Beschriftungspunkt an einer freien Stelle der Karte (nicht unter Panels);
+##    danach muss die Hauptszene genau diesen Ort ausgewählt haben. Ein Klick ins Meer
+##    hebt die Auswahl auf.
+##
+## Aufruf aus dem Repository-Hauptordner, nach einem Import (ohne Grafikausgabe möglich):
+##   godot --headless --path game --script res://tests/klick_test.gd
+## Ergebnis: "KLICK OK n/n" (n = Orte mit Fläche; jeder bei allen drei Zoomstufen
+## richtig) und Exitcode 0, sonst "KLICK FEHLGESCHLAGEN" mit den ersten Abweichungen.
+
+const MAIN_SCENE := "res://scenes/main.tscn"
+## Stichproben mit echten Klicks je Zoomstufe.
+const EVENT_SAMPLES_PER_LEVEL := 40
+const MAX_REPORTED := 20
+
+var _main: Node = null
+var _view: MapView = null
+var _map: MapData = null
+var _sprite: Sprite2D = null
+var _failures := PackedStringArray()
+var _failure_count := 0
+
+
+func _initialize() -> void:
+	_run()
+
+
+func _run() -> void:
+	print("EINIGKEIT – Klicktest der Kartenansicht")
+	_main = (load(MAIN_SCENE) as PackedScene).instantiate()
+	root.add_child(_main)
+	if not bool(_main.get("view_is_ready")):
+		await _main.view_ready
+	_view = _main.call("map_view")
+	var sim: SimulationClient = _main.call("simulation")
+	if not _view.has_map() or sim == null:
+		printerr("KLICK FEHLGESCHLAGEN: Karte oder Simulation nicht geladen.")
+		quit(1)
+		return
+	_view.hover_enabled = false
+	_map = _view.map_data()
+	_sprite = _view.get_node("MapSprite")
+
+	# Erwartung je Kartenindex: Simulationsindex der Kennung aus der CSV.
+	var expected := PackedInt32Array()
+	expected.resize(_map.map_count())
+	var testable := PackedInt32Array()
+	var without_area := PackedStringArray()
+	for map_index in _map.map_count():
+		expected[map_index] = sim.get_location_index(_map.map_ids[map_index])
+		if _map.map_ids[map_index].is_empty():
+			continue
+		if _map.label_points[map_index].x < 0.0:
+			without_area.append(_map.map_ids[map_index])
+		else:
+			testable.append(map_index)
+	print("Viewport %s, Fenster %s" % [str(root.get_visible_rect().size), str(root.size)])
+	print("Orte in definition.csv: %d, davon mit Fläche: %d" % [
+		_map.map_count(), testable.size()
+	])
+	if not without_area.is_empty():
+		print("  ohne Fläche (nicht klickbar): ", ", ".join(without_area))
+
+	var diameter := _view.location_diameter()
+	var zooms := PackedFloat32Array([
+		_view.camera.overview_zoom,
+		MapDetail.zoom_for(MapDetail.LEVEL_SIZES[1], diameter),
+		MapDetail.zoom_for(MapDetail.LEVEL_SIZES[2], diameter),
+	])
+	var passed := PackedInt32Array()
+	passed.resize(_map.map_count())
+	for level in zooms.size():
+		await _check_level(level, zooms[level], testable, expected, passed)
+	var all_levels := 0
+	for map_index in testable:
+		if passed[map_index] == zooms.size():
+			all_levels += 1
+
+	var event_total := 0
+	var event_ok := 0
+	var skipped := 0
+	for level in zooms.size():
+		var result: PackedInt32Array = await _check_events(level, zooms[level], testable, expected)
+		event_total += result[0]
+		event_ok += result[1]
+		skipped += result[2]
+	print("  Eingabeereignisse: %d/%d Klicks richtig (%d Stichproben unter Panels übersprungen)"
+		% [event_ok, event_total, skipped])
+	await _check_click_into_sea()
+
+	if _failure_count == 0 and all_levels == testable.size() and event_ok == event_total:
+		print("KLICK OK %d/%d" % [all_levels, testable.size()])
+		quit(0)
+	else:
+		printerr("KLICK FEHLGESCHLAGEN: %d/%d Orte bei allen Zoomstufen richtig, %d Fehler"
+			% [all_levels, testable.size(), _failure_count])
+		for failure in _failures:
+			printerr("  - ", failure)
+		quit(1)
+
+
+## Fährt die Karte bei einem Zoom in Kacheln ab und löst jeden Beschriftungspunkt auf.
+func _check_level(
+	level: int,
+	zoom: float,
+	testable: PackedInt32Array,
+	expected: PackedInt32Array,
+	passed: PackedInt32Array
+) -> void:
+	var camera := _view.camera
+	var viewport_size := root.get_visible_rect().size
+	var screen := Rect2(Vector2.ZERO, viewport_size)
+	var rect := _view.map_rect()
+	var view_world := viewport_size / zoom
+	var tiles := Vector2i(
+		maxi(ceili(rect.size.x / (view_world.x * 0.9)), 1),
+		maxi(ceili(rect.size.y / (view_world.y * 0.9)), 1)
+	)
+	var tested := PackedByteArray()
+	tested.resize(_map.map_count())
+	var correct := 0
+	for tile_y in tiles.y:
+		for tile_x in tiles.x:
+			var center := rect.position + Vector2(
+				(tile_x + 0.5) * rect.size.x / tiles.x, (tile_y + 0.5) * rect.size.y / tiles.y
+			)
+			camera.focus_on(center, zoom)
+			await process_frame
+			var to_screen := _sprite.get_global_transform_with_canvas()
+			var visible_world := camera.visible_world_rect()
+			for map_index in testable:
+				if tested[map_index] != 0:
+					continue
+				var point := _map.label_points[map_index]
+				if not visible_world.has_point(point):
+					continue
+				var on_screen := to_screen * point
+				if not screen.has_point(on_screen):
+					continue
+				tested[map_index] = 1
+				var found := _view.location_at_screen(on_screen)
+				if found == expected[map_index] and found >= 0:
+					passed[map_index] += 1
+					correct += 1
+				else:
+					_fail("%s: Ort %s (Kartenindex %d) bei Bildschirm %s ergibt %s" % [
+						MapDetail.LEVEL_NAMES[level], _map.map_ids[map_index], map_index,
+						str(on_screen.round()), _describe(found)
+					])
+	var untested := 0
+	for map_index in testable:
+		if tested[map_index] == 0:
+			untested += 1
+			_fail("%s: Ort %s lag in keiner Kachel im Bild" % [
+				MapDetail.LEVEL_NAMES[level], _map.map_ids[map_index]
+			])
+	print("  %s (Zoom %.3f, %d Kacheln): %d/%d Orte richtig%s" % [
+		MapDetail.LEVEL_NAMES[level], camera.zoom.x, tiles.x * tiles.y, correct, testable.size(),
+		", %d nicht erreicht" % untested if untested > 0 else ""
+	])
+
+
+## Echte Linksklicks auf Stichproben. Liefert [Klicks, richtig, übersprungen].
+func _check_events(
+	level: int, zoom: float, testable: PackedInt32Array, expected: PackedInt32Array
+) -> PackedInt32Array:
+	var camera := _view.camera
+	var viewport_size := root.get_visible_rect().size
+	var stride := maxi(testable.size() / EVENT_SAMPLES_PER_LEVEL, 1)
+	var random := RandomNumberGenerator.new()
+	random.seed = 1648 + level
+	var clicks := 0
+	var correct := 0
+	var skipped := 0
+	for sample in range(level * 7 % stride, testable.size(), stride):
+		var map_index := testable[sample]
+		var point := _map.label_points[map_index]
+		# Zielpunkt auf dem Bildschirm, möglichst nicht unter einem Panel.
+		var target := viewport_size * 0.5
+		for _attempt in 30:
+			var candidate := Vector2(
+				random.randf_range(0.0, viewport_size.x), random.randf_range(0.0, viewport_size.y)
+			)
+			if not _covered(candidate):
+				target = candidate
+				break
+		camera.focus_on(point - (target - viewport_size * 0.5) / zoom, zoom)
+		await process_frame
+		var on_screen := _sprite.get_global_transform_with_canvas() * point
+		if _covered(on_screen) or not Rect2(Vector2.ZERO, viewport_size).has_point(on_screen):
+			skipped += 1
+			continue
+		clicks += 1
+		await _click(on_screen)
+		var selected := int(_main.call("selected_location"))
+		if selected == expected[map_index]:
+			correct += 1
+		else:
+			_fail("Klick %s: Ort %s bei Bildschirm %s, ausgewählt wurde %s" % [
+				MapDetail.LEVEL_NAMES[level], _map.map_ids[map_index], str(on_screen.round()),
+				_describe(selected)
+			])
+	return PackedInt32Array([clicks, correct, skipped])
+
+
+## Ein Klick ins Meer hebt die Auswahl auf.
+func _check_click_into_sea() -> void:
+	var sea := Vector2(-1, -1)
+	for y in range(8, _map.size.y, 64):
+		for x in range(8, _map.size.x, 64):
+			if _map.area_at_pixel(Vector2i(x, y)) == MapData.Area.SEA:
+				sea = Vector2(x + 0.5, y + 0.5)
+				break
+		if sea.x >= 0.0:
+			break
+	if sea.x < 0.0:
+		print("  Klick ins Meer: kein Meer auf der Karte, übersprungen")
+		return
+	var viewport_size := root.get_visible_rect().size
+	_main.call("select_location", 0)
+	_view.camera.focus_on(sea, _view.camera.overview_zoom * 4.0)
+	await process_frame
+	var on_screen := _sprite.get_global_transform_with_canvas() * sea
+	if _covered(on_screen):
+		print("  Klick ins Meer: Punkt unter einem Panel, übersprungen")
+		return
+	await _click(on_screen)
+	var selected := int(_main.call("selected_location"))
+	if selected == -1 and Rect2(Vector2.ZERO, viewport_size).has_point(on_screen):
+		print("  Klick ins Meer hebt die Auswahl auf")
+	else:
+		_fail("Klick ins Meer bei %s ergibt %s" % [str(on_screen.round()), _describe(selected)])
+
+
+## Linksklick an einem Punkt in Viewport-Koordinaten. Ereignisse kommen in
+## Fensterkoordinaten an; Godot rechnet sie mit der Streckung (canvas_items) in den
+## Viewport um. Headless ist das Fenster 64 × 64 Pixel groß, der Viewport dann
+## 1600 × 1600; unter xvfb sind beide 1600 × 900.
+func _click(position: Vector2) -> void:
+	var in_window := root.get_final_transform() * position
+	for pressed: bool in [true, false]:
+		var event := InputEventMouseButton.new()
+		event.button_index = MOUSE_BUTTON_LEFT
+		event.pressed = pressed
+		event.position = in_window
+		event.global_position = in_window
+		if pressed:
+			event.button_mask = MOUSE_BUTTON_MASK_LEFT
+		Input.parse_input_event(event)
+		# Eingaben werden einmal je Bild ausgeliefert.
+		await process_frame
+
+
+## true, wenn ein Bedienelement über der Karte den Bildschirmpunkt verdeckt.
+func _covered(screen_point: Vector2) -> bool:
+	var labels: MapLabels = _main.call("map_labels")
+	for control in labels.covering_controls:
+		if control.is_visible_in_tree() and control.get_global_rect().grow(2.0).has_point(
+			screen_point
+		):
+			return true
+	return false
+
+
+func _describe(sim_index: int) -> String:
+	if sim_index < 0:
+		return "keinen Ort"
+	var map_index := _map.map_index_of_sim(sim_index)
+	if map_index < 0:
+		return "Simulationsindex %d (nicht auf der Karte)" % sim_index
+	return "„%s“" % _map.map_ids[map_index]
+
+
+func _fail(message: String) -> void:
+	_failure_count += 1
+	if _failures.size() < MAX_REPORTED:
+		_failures.append(message)

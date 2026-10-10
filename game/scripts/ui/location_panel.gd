@@ -1,6 +1,10 @@
 class_name LocationPanel
 extends PanelContainer
 ## Ortsinfo: alle Felder aus get_location für den ausgewählten Ort.
+##
+## Orte ohne Daten (has_data = false) zeigen nur die Kartenfelder (Art, Kreis,
+## Gelände, Fläche) und einen Hinweis; Bevölkerung, Wirtschaft, Verwüstung und
+## Konfessionen sind dort ausgeblendet.
 
 ## Schließen-Schaltfläche gedrückt.
 signal close_requested
@@ -15,6 +19,8 @@ var _max_height := 100000.0
 @onready var _coat: CoatOfArms = %OwnerCoat
 @onready var _owner: Label = %Owner
 @onready var _kind: Label = %Kind
+@onready var _kreis: Label = %Kreis
+@onready var _no_data_note: Label = %NoDataNote
 @onready var _terrain: Label = %Terrain
 @onready var _population: Label = %Population
 @onready var _area: Label = %Area
@@ -30,6 +36,21 @@ var _max_height := 100000.0
 @onready var _close: Button = %Close
 @onready var _scroll: ScrollContainer = %Scroll
 @onready var _content: MarginContainer = $Scroll/Margin
+## Knoten, die nur für Orte mit Daten erscheinen.
+@onready var _data_only: Array[Control] = [
+	$Scroll/Margin/Content/Facts/PopulationCaption,
+	%Population,
+	$Scroll/Margin/Content/Facts/DensityCaption,
+	%Density,
+	$Scroll/Margin/Content/Facts/ProductionCaption,
+	%Production,
+	$Scroll/Margin/Content/Facts/TaxesCaption,
+	%Taxes,
+	$Scroll/Margin/Content/DevastationRow,
+	$Scroll/Margin/Content/Separator2,
+	$Scroll/Margin/Content/ConfessionRow,
+	%Confessions,
+]
 
 
 func _ready() -> void:
@@ -67,12 +88,18 @@ func show_location(location: Dictionary, owner_color: Color) -> void:
 	if location.is_empty():
 		visible = false
 		return
+	var has_data := bool(location.get("has_data", true))
 	_name.text = str(location.get("name", "–"))
-	_coat.shield_color = owner_color
-	_owner.text = str(location.get("owner_name", "–"))
+	_coat.shield_color = owner_color if has_data else UiPalette.PAPER_DEEP
+	_owner.text = str(location.get("owner_name", "–")) if has_data else "Keine Daten"
 	var is_city := bool(location.get("is_city", false))
 	_kind.text = "Stadt mit Umland" if is_city else "Ländlicher Ort"
+	var kreis_name := str(location.get("kreis_name", ""))
+	_kreis.text = kreis_name if not kreis_name.is_empty() else "–"
 	_terrain.text = GermanFormat.humanize(str(location.get("terrain", "")))
+	_no_data_note.visible = not has_data
+	for node in _data_only:
+		node.visible = has_data
 	_population.text = GermanFormat.integer(int(location.get("population", 0)))
 	_area.text = GermanFormat.area(float(location.get("area_km2", 0.0)))
 	_density.text = GermanFormat.density(float(location.get("density", 0.0)))

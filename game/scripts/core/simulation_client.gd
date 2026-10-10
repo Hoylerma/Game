@@ -35,6 +35,11 @@ const REQUIRED_METHODS: Array[StringName] = [
 	&"get_location_count",
 	&"get_location_index",
 	&"get_location",
+	&"get_location_owner_indices",
+	&"get_location_kreis_indices",
+	&"get_kreis_count",
+	&"get_kreis_index",
+	&"get_kreis",
 	&"get_map_colors",
 	&"set_tax_rate_percent",
 	&"get_max_tax_rate_percent",
@@ -153,6 +158,35 @@ func get_location_index(id: String) -> int:
 ## Ort als Dictionary (Felder siehe bridge-api.md); leer bei ungültigem Index.
 func get_location(index: int) -> Dictionary:
 	return _as_dictionary(_native.call(&"get_location", index))
+
+
+## Besitzer (Staatsindex) je Ort, −1 für Orte ohne Daten; Länge = get_location_count().
+func get_location_owner_indices() -> PackedInt32Array:
+	var result: Variant = _native.call(&"get_location_owner_indices")
+	if result is PackedInt32Array:
+		return result
+	return PackedInt32Array()
+
+
+## Kreisindex je Ort, −1 ohne Kreis; Länge = get_location_count().
+func get_location_kreis_indices() -> PackedInt32Array:
+	var result: Variant = _native.call(&"get_location_kreis_indices")
+	if result is PackedInt32Array:
+		return result
+	return PackedInt32Array()
+
+
+func get_kreis_count() -> int:
+	return int(_native.call(&"get_kreis_count"))
+
+
+func get_kreis_index(id: String) -> int:
+	return int(_native.call(&"get_kreis_index", id))
+
+
+## Kreis als Dictionary { id, name, location_count, source }; leer bei ungültigem Index.
+func get_kreis(index: int) -> Dictionary:
+	return _as_dictionary(_native.call(&"get_kreis", index))
 
 
 ## Eine Farbe je Simulations-Ortsindex für den Kartenmodus mode (MapModes).
