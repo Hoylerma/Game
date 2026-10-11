@@ -66,7 +66,10 @@ func show_state(state: Dictionary, capital_name: String) -> void:
 	_government.text = GermanFormat.government(str(state.get("government", "")))
 	_capital.text = capital_name if not capital_name.is_empty() else "–"
 	_locations.text = GermanFormat.integer(int(state.get("location_count", 0)))
-	_population.text = GermanFormat.integer(int(state.get("population", 0)))
+	var population := int(state.get("population", 0))
+	_population.text = GermanFormat.integer(population)
+	_population.mouse_filter = Control.MOUSE_FILTER_PASS
+	_population.tooltip_text = _population_tooltip(state, population)
 	var treasury := float(state.get("treasury", 0.0))
 	_treasury.text = GermanFormat.money(treasury)
 	_treasury.add_theme_color_override(
@@ -149,3 +152,29 @@ func _request_tax(percent: int) -> void:
 	_pending_tax = percent
 	_show_tax(percent)
 	tax_rate_requested.emit(percent)
+
+
+## Tooltip zur Bevölkerung: Lebensstandard und Bilanz des Vorjahres (seit M4).
+static func _population_tooltip(state: Dictionary, population: int) -> String:
+	var lines := PackedStringArray()
+	lines.append(
+		"Lebensstandard: %s von 100"
+		% GermanFormat.number(float(state.get("living_standard", 0.0)))
+	)
+	var balance: Dictionary = state.get("balance_previous", {})
+	var births := int(balance.get("births", 0))
+	if births == 0 or population <= 0:
+		lines.append("Bilanz des Vorjahres: noch kein volles Jahr gerechnet.")
+		return "\n".join(lines)
+	var natural := births - int(balance.get("deaths", 0)) - int(balance.get("plague_deaths", 0))
+	var migration := int(balance.get("moved_in", 0)) - int(balance.get("moved_out", 0))
+	var emigrated := int(balance.get("emigrated", 0))
+	var change := natural + migration - emigrated
+	lines.append("Vorjahr: %s Einwohner (%s)" % [
+		GermanFormat.signed_number(change),
+		GermanFormat.signed_number(100.0 * change / population, 1) + " %"
+	])
+	lines.append("  Geburten minus Sterbefälle: %s" % GermanFormat.signed_number(natural))
+	lines.append("  Wanderung zwischen Orten: %s" % GermanFormat.signed_number(migration))
+	lines.append("  Auswanderung: %s" % GermanFormat.signed_number(-emigrated))
+	return "\n".join(lines)

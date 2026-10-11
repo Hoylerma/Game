@@ -1,9 +1,10 @@
-# EINIGKEIT – Godot-Projekt (Prototyp der Spieloberfläche, Meilensteine M1 bis M3)
+# EINIGKEIT – Godot-Projekt (Prototyp der Spieloberfläche, Meilensteine M1 bis M4)
 
 Das Projekt zeigt die Simulation des Kerns **Uhrwerk** auf der Karte des **Kernraums**
-(Meilenstein M3: rund 4.500 Orte in rund 620 Kreisen): Kartenansicht mit sechs Kartenmodi,
-Zoomstufen mit Staats-, Kreis- und Ortsnamen, obere Leiste, Staatspanel mit Steuersatz,
-Ortsinfo, Chronik und Legende. Die Simulation selbst läuft in C++ und wird über die
+(Meilenstein M3: rund 4.500 Orte in rund 620 Kreisen): Kartenansicht mit acht Kartenmodi
+(seit M4 auch Lebensstandard und Kultur), Zoomstufen mit Staats-, Kreis- und Ortsnamen, obere
+Leiste, Staatspanel mit Steuersatz, Ortsinfo mit Bevölkerung (Kulturen, Lebensstandard,
+Alphabetisierung, Altersaufbau, Bilanz des Vorjahres), Chronik und Legende. Die Simulation selbst läuft in C++ und wird über die
 GDExtension `uhrwerk_bridge` angesprochen (Schnittstelle:
 [docs/technik/bridge-api.md](../docs/technik/bridge-api.md)). Die Godot-Seite **liest** nur
 und schickt **Befehle**; sie rechnet nichts selbst.
@@ -57,7 +58,7 @@ Optionen stehen nach `--` (Benutzerargumente):
 |---|---|
 | `--screenshot=<pfad>` | Nach dem Laden simulieren, etwa 20 Bilder warten, den Viewport als PNG speichern und beenden |
 | `--tage=<n>` | Simulierte Tage vor dem Screenshot (Standard 60) |
-| `--kartenmodus=<0..5>` | 0 Politisch, 1 Bevölkerungsdichte, 2 Konfession, 3 Gelände, 4 Verwüstung, 5 Kreise |
+| `--kartenmodus=<0..7>` | 0 Politisch, 1 Bevölkerungsdichte, 2 Konfession, 3 Gelände, 4 Verwüstung, 5 Kreise, 6 Lebensstandard, 7 Kultur (6 und 7 seit M4) |
 | `--ort=<ort_id>` | Ort auswählen, Ortsinfo geöffnet (z. B. `berlin_coelln`) |
 | `--zoom=<faktor>` | Vergrößerung gegenüber der Übersicht (1 = ganze Karte), zentriert auf `--ort`, sonst auf die Kartenmitte (bis zum Faktor 1 bleibt die Bildmitte der Übersicht); gilt auch ohne `--screenshot` |
 
@@ -91,7 +92,7 @@ Modus `--headless` gibt es kein Bild; ohne Bildschirm hilft `xvfb-run`.
 | H | Zur Hauptstadt des Spielerstaates (mittlere Zoomstufe) |
 | Leertaste | Pause / weiter |
 | 1 – 5 | Geschwindigkeit: 2, 5, 15, 40 oder 120 Tage je Sekunde |
-| Q W E R T Z | Kartenmodus Politisch, Bevölkerungsdichte, Konfession, Gelände, Verwüstung, Kreise |
+| Q W E R T Z U I | Kartenmodus Politisch, Bevölkerungsdichte, Konfession, Gelände, Verwüstung, Kreise, Lebensstandard, Kultur (die Leiste zeigt Kurznamen, die Taste steht im Tooltip) |
 | Steuersatz-Regler | Steuersatz des Spielerstaates (wirksam ab dem nächsten simulierten Tag) |
 | Klick auf einen Chronikeintrag | Ort des Ereignisses auswählen und anfahren |
 

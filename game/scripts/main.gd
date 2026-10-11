@@ -25,7 +25,7 @@ const OVERVIEW_MARGIN := 28.0
 ## Kartenmodi, deren Legende sich mit der Zeit ändert (monatlich neu aufbauen).
 const DYNAMIC_LEGEND_MODES: PackedInt32Array = [
 	MapModes.MAP_POLITICAL, MapModes.MAP_DENSITY, MapModes.MAP_CONFESSION,
-	MapModes.MAP_DEVASTATION
+	MapModes.MAP_DEVASTATION, MapModes.MAP_LEBENSSTANDARD, MapModes.MAP_KULTUR
 ]
 ## Höchstzahl der Kennungen in einer Hinweismeldung.
 const MAX_LISTED_IDS := 20
@@ -262,6 +262,9 @@ func _load_simulation() -> void:
 	_state_panel.set_max_tax_rate(_sim.get_max_tax_rate_percent())
 	_location_panel.confession_colors = LegendData.category_colors(
 		_sim, MapModes.MAP_CONFESSION, "majority_confession"
+	)
+	_location_panel.culture_colors = LegendData.category_colors(
+		_sim, MapModes.MAP_KULTUR, "majority_culture"
 	)
 	print(
 		(
@@ -541,6 +544,22 @@ func _rebuild_legend() -> void:
 				"Kriegsschäden der Orte",
 				no_data
 			)
+		MapModes.MAP_LEBENSSTANDARD:
+			var living_labels := PackedStringArray(["0", "50", "100"])
+			_legend.show_gradient(
+				title,
+				LegendData.gradient_for(
+					_sim, MapModes.MAP_LEBENSSTANDARD, "living_standard", 100.0
+				),
+				living_labels,
+				"Mittlerer Lebensstandard der Einwohner",
+				no_data
+			)
+		MapModes.MAP_KULTUR:
+			var cultures := LegendData.category_entries(
+				_sim, MapModes.MAP_KULTUR, "majority_culture"
+			)
+			_legend.show_swatches(title, cultures)
 		MapModes.MAP_KREISE:
 			# Nur Kreise mit Orten und Orte mit Kreis (ein leerer Kreis ist nur eine Warnung).
 			var kreis_count := _catalog.kreise_with_places()

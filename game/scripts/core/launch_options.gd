@@ -4,7 +4,7 @@ extends RefCounted
 ##
 ##   --screenshot=<pfad>    nach dem Laden simulieren, Bild speichern, beenden
 ##   --tage=<n>             Tage vor dem Screenshot (Standard 60)
-##   --kartenmodus=<0..5>   Kartenmodus (0 Politisch … 4 Verwüstung, 5 Kreise)
+##   --kartenmodus=<0..7>   Kartenmodus (0 Politisch … 5 Kreise, 6 Lebensstandard, 7 Kultur)
 ##   --ort=<ort_id>         Ort auswählen und Ortsinfo öffnen
 ##   --zoom=<faktor>        Vergrößerung gegenüber der Übersicht (1 = ganze Karte);
 ##                          zentriert auf --ort, sonst auf die Kartenmitte (bis 1: Übersicht)

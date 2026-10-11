@@ -22,6 +22,8 @@ const STATE_FIELDS: PackedStringArray = [
 	"expenses_month",
 	"population",
 	"location_count",
+	"balance_previous",
+	"living_standard",
 ]
 const LOCATION_FIELDS: PackedStringArray = [
 	"id",
@@ -42,10 +44,19 @@ const LOCATION_FIELDS: PackedStringArray = [
 	"has_data",
 	"kreis_index",
 	"kreis_name",
+	"majority_culture",
+	"cultures",
+	"children",
+	"young",
+	"working",
+	"old",
+	"living_standard",
+	"literacy_percent",
+	"balance_previous",
 ]
 const KREIS_FIELDS: PackedStringArray = ["id", "name", "location_count", "source"]
 ## Kartenmodi, in denen Orte ohne Daten Alpha 0 haben (bridge-api.md).
-const NO_DATA_ALPHA_MODES: PackedInt32Array = [0, 1, 2, 4]
+const NO_DATA_ALPHA_MODES: PackedInt32Array = [0, 1, 2, 4, 6, 7]
 const CHRONICLE_FIELDS: PackedStringArray = ["date_text", "text", "location_index", "state_index"]
 
 var _failures := PackedStringArray()
@@ -334,7 +345,7 @@ func _check_data_and_kreise(sim: SimulationClient) -> void:
 		_check(
 			wrong == 0,
 			"",
-			"Kartenmodus %d: %d Orte mit falschem Alpha (0 nur für Orte ohne Daten in 0, 1, 2, 4)"
+			"Kartenmodus %d: %d Orte mit falschem Alpha (0 nur für Orte ohne Daten in 0, 1, 2, 4, 6, 7)"
 			% [mode, wrong]
 		)
 

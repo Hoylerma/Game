@@ -69,7 +69,9 @@ const Color kDensityLow(0.96f, 0.93f, 0.84f);
 const Color kDensityHigh(0.36f, 0.16f, 0.12f);
 const Color kDevastationNone(0.90f, 0.88f, 0.80f);
 const Color kDevastationFull(0.72f, 0.08f, 0.06f);
-constexpr double kDensityMax = 120.0; // Einwohner je km², ab hier dunkelste Stufe
+const Color kLivingLow(0.66f, 0.22f, 0.16f);  // Lebensstandard 0
+const Color kLivingHigh(0.24f, 0.52f, 0.30f); // Lebensstandard 100
+constexpr double kDensityMax = 120.0;         // Einwohner je km², ab hier dunkelste Stufe
 
 // Feste Palette für MAP_KREISE: palette[kreisindex % n]. Gedämpfte, gut unterscheidbare Töne;
 // aufeinanderfolgende Einträge liegen weit auseinander (CIELAB ΔE ≥ 37), alle mindestens
@@ -96,6 +98,92 @@ double density_of(const uhrwerk::World& world, std::int64_t location) {
         return 0.0;
     }
     return world.location_population(static_cast<uhrwerk::Index>(location)).to_double() / area;
+}
+
+/// Bevölkerung eines Ortes aus Blöcken und Zugängen: Altersgruppen, Mittelwerte und Anteile.
+struct People {
+    uhrwerk::Fixed total;
+    uhrwerk::Fixed children;
+    uhrwerk::Fixed young;
+    uhrwerk::Fixed working;
+    uhrwerk::Fixed old;
+    double living_standard = 0.0; // nach Personen gemittelt, 0..100
+    double literacy = 0.0;        // nach Personen gemittelt, 0..1
+    std::vector<uhrwerk::Fixed> per_confession;
+    std::vector<uhrwerk::Fixed> per_culture;
+};
+
+People people_of(const uhrwerk::World& world, std::int64_t location) {
+    People result;
+    result.per_confession.resize(world.confessions.size());
+    result.per_culture.resize(world.cultures.size());
+    double living = 0.0;
+    double literacy = 0.0;
+    const auto add = [&](const uhrwerk::PopBlock& pop) {
+        const uhrwerk::Fixed size = pop.size();
+        result.total += size;
+        result.children += pop.children;
+        result.young += pop.young;
+        result.working += pop.working;
+        result.old += pop.old;
+        living += pop.living_standard.to_double() * size.to_double();
+        literacy += pop.literacy.to_double() * size.to_double();
+        if (valid_index(result.per_confession, pop.confession)) {
+            result.per_confession[static_cast<std::size_t>(pop.confession)] += size;
+        }
+        if (valid_index(result.per_culture, pop.culture)) {
+            result.per_culture[static_cast<std::size_t>(pop.culture)] += size;
+        }
+    };
+    const uhrwerk::Location& loc = at(world.locations, location);
+    for (uhrwerk::Index p = loc.first_pop; p < loc.first_pop + loc.pop_count; ++p) {
+        if (valid_index(world.pops, p)) {
+            add(at(world.pops, p));
+        }
+    }
+    if (valid_index(world.arrivals, location)) {
+        for (const uhrwerk::PopBlock& arrival : at(world.arrivals, location)) {
+            add(arrival);
+        }
+    }
+    const double total = result.total.to_double();
+    if (total > 0.0) {
+        result.living_standard = living / total;
+        result.literacy = literacy / total;
+    }
+    return result;
+}
+
+/// Anteile in Prozent je Name (nur Einträge mit Personen), z. B. für Konfessionen und Kulturen.
+template <typename T>
+Dictionary shares_of(const std::vector<uhrwerk::Fixed>& amounts, const std::vector<T>& items, double total) {
+    Dictionary result;
+    for (std::size_t i = 0; i < amounts.size() && i < items.size(); ++i) {
+        if (amounts[i] > uhrwerk::Fixed::zero() && total > 0.0) {
+            result[to_godot(items[i].name)] = amounts[i].to_double() * 100.0 / total;
+        }
+    }
+    return result;
+}
+
+Dictionary balance_to_godot(const uhrwerk::PopulationBalance& b) {
+    Dictionary result;
+    result["births"] = b.births.round();
+    result["deaths"] = b.deaths.round();
+    result["plague_deaths"] = b.plague_deaths.round();
+    result["moved_in"] = b.moved_in.round();
+    result["moved_out"] = b.moved_out.round();
+    result["emigrated"] = b.emigrated.round();
+    return result;
+}
+
+void add_balance(uhrwerk::PopulationBalance& sum, const uhrwerk::PopulationBalance& b) {
+    sum.births += b.births;
+    sum.deaths += b.deaths;
+    sum.plague_deaths += b.plague_deaths;
+    sum.moved_in += b.moved_in;
+    sum.moved_out += b.moved_out;
+    sum.emigrated += b.emigrated;
 }
 
 std::int64_t to_percent(uhrwerk::Fixed share) {
@@ -247,7 +335,22 @@ Dictionary UhrwerkSimulation::get_state(std::int64_t index) const {
     result["income_month"] = state.last_month_income.to_double();
     result["expenses_month"] = state.last_month_expenses.to_double();
     result["population"] = w->state_population(state_index).round();
-    result["location_count"] = static_cast<std::int64_t>(w->state_locations(state_index).size());
+    const std::vector<uhrwerk::Index> locations = w->state_locations(state_index);
+    result["location_count"] = static_cast<std::int64_t>(locations.size());
+    // Bilanz des Vorjahres und mittlerer Lebensstandard (seit M4).
+    uhrwerk::PopulationBalance balance;
+    double living = 0.0;
+    double people = 0.0;
+    for (const uhrwerk::Index li : locations) {
+        if (valid_index(w->balance_previous, li)) {
+            add_balance(balance, at(w->balance_previous, li));
+        }
+        const People p = people_of(*w, li);
+        living += p.living_standard * p.total.to_double();
+        people += p.total.to_double();
+    }
+    result["balance_previous"] = balance_to_godot(balance);
+    result["living_standard"] = people > 0.0 ? living / people : 0.0;
     return result;
 }
 
@@ -293,25 +396,25 @@ Dictionary UhrwerkSimulation::get_location(std::int64_t index) const {
     result["majority_confession"] =
         valid_index(w->confessions, majority) ? to_godot(at(w->confessions, majority).name) : String();
 
-    // Anteile je Konfession in Prozent, in der Reihenfolge der Konfessionsliste.
-    std::vector<uhrwerk::Fixed> per_confession(w->confessions.size());
-    for (uhrwerk::Index p = loc.first_pop; p < loc.first_pop + loc.pop_count; ++p) {
-        if (!valid_index(w->pops, p)) {
-            continue;
-        }
-        const uhrwerk::PopBlock& pop = at(w->pops, p);
-        if (valid_index(per_confession, pop.confession)) {
-            per_confession[static_cast<std::size_t>(pop.confession)] += pop.size();
-        }
-    }
-    Dictionary confessions;
-    const double total = population.to_double();
-    for (std::size_t c = 0; c < per_confession.size(); ++c) {
-        if (per_confession[c] > uhrwerk::Fixed::zero() && total > 0.0) {
-            confessions[to_godot(w->confessions[c].name)] = per_confession[c].to_double() * 100.0 / total;
-        }
-    }
-    result["confessions"] = confessions;
+    // Anteile je Konfession und Kultur in Prozent (Blöcke und Zugänge).
+    const People people = people_of(*w, index);
+    const double total = people.total.to_double();
+    result["confessions"] = shares_of(people.per_confession, w->confessions, total);
+
+    // Bevölkerung (seit M4): Kultur, Altersaufbau, Lebensstandard, Bildung, Bilanz des Vorjahres.
+    const uhrwerk::Index culture = w->location_majority_culture(location_index);
+    result["majority_culture"] =
+        valid_index(w->cultures, culture) ? to_godot(at(w->cultures, culture).name) : String();
+    result["cultures"] = shares_of(people.per_culture, w->cultures, total);
+    result["children"] = people.children.round();
+    result["young"] = people.young.round();
+    result["working"] = people.working.round();
+    result["old"] = people.old.round();
+    result["living_standard"] = people.living_standard;
+    result["literacy_percent"] = people.literacy * 100.0;
+    result["balance_previous"] = valid_index(w->balance_previous, index)
+                                     ? balance_to_godot(at(w->balance_previous, index))
+                                     : balance_to_godot(uhrwerk::PopulationBalance{});
 
     const uhrwerk::LocationEconomy economy = simulation_->location_economy(location_index);
     result["production_month"] = economy.production.to_double();
@@ -380,7 +483,7 @@ PackedColorArray UhrwerkSimulation::get_map_colors(std::int64_t mode) const {
     if (!w) {
         return colors;
     }
-    ERR_FAIL_COND_V_MSG(mode < MAP_POLITICAL || mode > MAP_KREISE, colors,
+    ERR_FAIL_COND_V_MSG(mode < MAP_POLITICAL || mode > MAP_KULTUR, colors,
                         "get_map_colors: unbekannter Kartenmodus.");
 
     const auto count = static_cast<std::int64_t>(w->locations.size());
@@ -417,6 +520,18 @@ PackedColorArray UhrwerkSimulation::get_map_colors(std::int64_t mode) const {
                 color = kKreisPalette[static_cast<std::size_t>(loc.district) % kKreisPalette.size()];
             }
             break;
+        case MAP_LEBENSSTANDARD:
+            if (loc.has_data()) {
+                color = blend(kLivingLow, kLivingHigh, people_of(*w, i).living_standard / 100.0);
+            }
+            break;
+        case MAP_KULTUR: {
+            const uhrwerk::Index majority = w->location_majority_culture(static_cast<uhrwerk::Index>(i));
+            if (valid_index(w->cultures, majority)) {
+                color = to_godot(at(w->cultures, majority).color);
+            }
+            break;
+        }
         default:
             break;
         }
@@ -540,6 +655,8 @@ void UhrwerkSimulation::_bind_methods() {
     BIND_ENUM_CONSTANT(MAP_TERRAIN);
     BIND_ENUM_CONSTANT(MAP_DEVASTATION);
     BIND_ENUM_CONSTANT(MAP_KREISE);
+    BIND_ENUM_CONSTANT(MAP_LEBENSSTANDARD);
+    BIND_ENUM_CONSTANT(MAP_KULTUR);
 }
 
 } // namespace uhrwerk_bridge

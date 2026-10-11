@@ -200,7 +200,7 @@ autowrap_mode = 3
 
 [node name="DevastationRow" type="HBoxContainer" parent="Scroll/Margin/Content"]
 layout_mode = 2
-tooltip_text = "Kriegsverwüstung: mindert die Produktion, beschleunigt aber den Wiederaufbau"
+tooltip_text = "Kriegsverwüstung: mindert Produktion und Lebensstandard; sie baut sich jedes Jahr ein Stück ab"
 mouse_filter = 1
 
 [node name="DevastationCaption" type="Label" parent="Scroll/Margin/Content/DevastationRow"]
@@ -248,6 +248,92 @@ horizontal_alignment = 2
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 2
+
+[node name="Separator4" type="HSeparator" parent="Scroll/Margin/Content"]
+layout_mode = 2
+
+[node name="CultureRow" type="HBoxContainer" parent="Scroll/Margin/Content"]
+layout_mode = 2
+
+[node name="CultureHeader" type="Label" parent="Scroll/Margin/Content/CultureRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"HeaderLabel"
+text = "KULTUREN"
+
+[node name="MajorityCulture" type="Label" parent="Scroll/Margin/Content/CultureRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"MutedLabel"
+text = "–"
+horizontal_alignment = 2
+
+[node name="Cultures" type="VBoxContainer" parent="Scroll/Margin/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Separator5" type="HSeparator" parent="Scroll/Margin/Content"]
+layout_mode = 2
+
+[node name="SocietyHeader" type="Label" parent="Scroll/Margin/Content"]
+layout_mode = 2
+theme_type_variation = &"HeaderLabel"
+text = "GESELLSCHAFT"
+
+[node name="Society" type="GridContainer" parent="Scroll/Margin/Content"]
+layout_mode = 2
+columns = 2
+
+[node name="LivingStandardCaption" type="Label" parent="Scroll/Margin/Content/Society"]
+layout_mode = 2
+tooltip_text = "Mittlerer Lebensstandard der Einwohner (0–100): Einkommen nach Steuern, Verwüstung und Übervölkerung"
+mouse_filter = 1
+theme_type_variation = &"MutedLabel"
+text = "Lebensstandard"
+
+[node name="LivingStandard" type="Label" parent="Scroll/Margin/Content/Society"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "–"
+horizontal_alignment = 2
+text_overrun_behavior = 3
+
+[node name="LiteracyCaption" type="Label" parent="Scroll/Margin/Content/Society"]
+layout_mode = 2
+theme_type_variation = &"MutedLabel"
+text = "Alphabetisierung"
+
+[node name="Literacy" type="Label" parent="Scroll/Margin/Content/Society"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "–"
+horizontal_alignment = 2
+text_overrun_behavior = 3
+
+[node name="AgeHeader" type="Label" parent="Scroll/Margin/Content"]
+layout_mode = 2
+theme_type_variation = &"MutedLabel"
+text = "Altersaufbau"
+
+[node name="Ages" type="VBoxContainer" parent="Scroll/Margin/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="BalanceHeader" type="Label" parent="Scroll/Margin/Content"]
+layout_mode = 2
+theme_type_variation = &"MutedLabel"
+text = "Bilanz des Vorjahres"
+
+[node name="Balance" type="GridContainer" parent="Scroll/Margin/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+columns = 2
 
 [node name="Separator3" type="HSeparator" parent="Scroll/Margin/Content"]
 layout_mode = 2

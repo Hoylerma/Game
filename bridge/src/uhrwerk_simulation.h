@@ -35,7 +35,9 @@ public:
         MAP_CONFESSION = 2,
         MAP_TERRAIN = 3,
         MAP_DEVASTATION = 4,
-        MAP_KREISE = 5, // seit M3
+        MAP_KREISE = 5,         // seit M3
+        MAP_LEBENSSTANDARD = 6, // seit M4
+        MAP_KULTUR = 7,         // seit M4
     };
 
     static constexpr std::int64_t kMaxAdvanceDays = 3660;

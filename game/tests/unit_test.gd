@@ -80,7 +80,7 @@ func _test_launch_options() -> void:
 	_equal(defaults.map_mode, -1, "Standard --kartenmodus")
 	_true(not defaults.wants_screenshot(), "ohne --screenshot kein Screenshot")
 	var bad_args := PackedStringArray(
-		["--tage=-3", "--kartenmodus=7", "--unbekannt", "--zoom=0", "--zoom=viel"]
+		["--tage=-3", "--kartenmodus=8", "--unbekannt", "--zoom=0", "--zoom=viel"]
 	)
 	var bad := LaunchOptions.parse(bad_args)
 	_equal(bad.problems.size(), 5, "fehlerhafte Optionen gemeldet")
@@ -177,9 +177,14 @@ func _test_legend_entries() -> void:
 
 
 func _test_map_modes() -> void:
-	_equal(MapModes.COUNT, 6, "sechs Kartenmodi")
+	_equal(MapModes.COUNT, 8, "acht Kartenmodi")
 	_equal(MapModes.MAP_KREISE, 5, "Kartenmodus Kreise = 5 (bridge-api.md)")
+	_equal(MapModes.MAP_LEBENSSTANDARD, 6, "Kartenmodus Lebensstandard = 6 (bridge-api.md)")
+	_equal(MapModes.MAP_KULTUR, 7, "Kartenmodus Kultur = 7 (bridge-api.md)")
+	_true(MapModes.DATA_MODES.has(MapModes.MAP_LEBENSSTANDARD), "Lebensstandard mit Schraffur")
+	_true(MapModes.DATA_MODES.has(MapModes.MAP_KULTUR), "Kultur mit Schraffur")
 	_equal(MapModes.NAMES.size(), MapModes.COUNT, "Namen je Kartenmodus")
+	_equal(MapModes.SHORT_NAMES.size(), MapModes.COUNT, "Kurznamen je Kartenmodus")
 	_equal(MapModes.DESCRIPTIONS.size(), MapModes.COUNT, "Beschreibungen je Kartenmodus")
 	_equal(MapModes.KEY_HINTS.size(), MapModes.COUNT, "Tastenhinweise je Kartenmodus")
 	_equal(MapModes.ACTIONS.size(), MapModes.COUNT, "Aktionen je Kartenmodus")
@@ -198,6 +203,12 @@ func _test_map_modes() -> void:
 	var z := InputEventKey.new()
 	z.physical_keycode = KEY_Y
 	_equal(MapModes.mode_for_event(z), MapModes.MAP_KREISE, "Taste rechts neben T: Kreise")
+	var u := InputEventKey.new()
+	u.physical_keycode = KEY_U
+	_equal(MapModes.mode_for_event(u), MapModes.MAP_LEBENSSTANDARD, "U: Lebensstandard")
+	var i_key := InputEventKey.new()
+	i_key.physical_keycode = KEY_I
+	_equal(MapModes.mode_for_event(i_key), MapModes.MAP_KULTUR, "I: Kultur")
 	var w := InputEventKey.new()
 	w.physical_keycode = KEY_W
 	_equal(MapModes.mode_for_event(w), MapModes.MAP_DENSITY, "W gehört zum Kartenmodus Dichte")

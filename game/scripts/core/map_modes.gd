@@ -9,7 +9,9 @@ const MAP_CONFESSION := 2
 const MAP_TERRAIN := 3
 const MAP_DEVASTATION := 4
 const MAP_KREISE := 5
-const COUNT := 6
+const MAP_LEBENSSTANDARD := 6
+const MAP_KULTUR := 7
+const COUNT := 8
 
 ## Anzeigenamen der Modi (Index = Modus).
 const NAMES: PackedStringArray = [
@@ -19,6 +21,21 @@ const NAMES: PackedStringArray = [
 	"Gelände",
 	"Verwüstung",
 	"Kreise",
+	"Lebensstandard",
+	"Kultur",
+]
+
+## Kurznamen für die Knöpfe der Modusleiste (Index = Modus); seit M4 mit acht Modi,
+## damit die Leiste zwischen die Spalten passt.
+const SHORT_NAMES: PackedStringArray = [
+	"Politisch",
+	"Dichte",
+	"Konfession",
+	"Gelände",
+	"Verwüstung",
+	"Kreise",
+	"Lebensstandard",
+	"Kultur",
 ]
 
 ## Kurze Erklärung für Tooltips der Modusleiste.
@@ -29,6 +46,8 @@ const DESCRIPTIONS: PackedStringArray = [
 	"Geländetyp der Orte",
 	"Kriegsverwüstung der Orte",
 	"Kreise (je 4–12 Orte)",
+	"Mittlerer Lebensstandard der Einwohner (0–100)",
+	"Mehrheitskultur (Landsmannschaft) der Orte",
 ]
 
 ## Aktionen der Eingabebelegung (project.godot), Index = Modus.
@@ -39,15 +58,19 @@ const ACTIONS: Array[StringName] = [
 	&"kartenmodus_gelaende",
 	&"kartenmodus_verwuestung",
 	&"kartenmodus_kreise",
+	&"kartenmodus_lebensstandard",
+	&"kartenmodus_kultur",
 ]
 
 ## Tastenbezeichnung für die Anzeige, Index = Modus. Die Belegung nutzt physische
 ## Tasten: „Z“ ist die Taste rechts neben T (auf englischen Tastaturen „Y“).
-const KEY_HINTS: PackedStringArray = ["Q", "W", "E", "R", "T", "Z"]
+const KEY_HINTS: PackedStringArray = ["Q", "W", "E", "R", "T", "Z", "U", "I"]
 
 ## Modi, deren Farben von der Simulation abhängen; dort erhalten Orte ohne Daten
 ## Alpha 0 (Schraffur „keine Daten“, bridge-api.md).
-const DATA_MODES: PackedInt32Array = [MAP_POLITICAL, MAP_DENSITY, MAP_CONFESSION, MAP_DEVASTATION]
+const DATA_MODES: PackedInt32Array = [
+	MAP_POLITICAL, MAP_DENSITY, MAP_CONFESSION, MAP_DEVASTATION, MAP_LEBENSSTANDARD, MAP_KULTUR
+]
 
 ## Obergrenze der Dichteskala der Brücke (≥ 120 Einwohner je km² → dunkelste Farbe).
 const DENSITY_SCALE_MAX := 120.0

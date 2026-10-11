@@ -1,6 +1,7 @@
 class_name MapModeBar
 extends PanelContainer
-## Leiste der Kartenmodi (Tasten Q W E R T).
+## Leiste der Kartenmodi (Tasten Q W E R T Z U I). Die Knöpfe zeigen Kurznamen; Taste und
+## Erklärung stehen im Tooltip.
 
 ## Kartenmodus gewählt (MapModes).
 signal mode_selected(mode: int)
@@ -15,7 +16,7 @@ func _ready() -> void:
 	group.allow_unpress = false
 	for mode in MapModes.COUNT:
 		var button := Button.new()
-		button.text = "%s  %s" % [MapModes.NAMES[mode], MapModes.KEY_HINTS[mode]]
+		button.text = MapModes.SHORT_NAMES[mode]
 		button.tooltip_text = "%s: %s (Taste %s)" % [
 			MapModes.NAMES[mode], MapModes.DESCRIPTIONS[mode], MapModes.KEY_HINTS[mode]
 		]

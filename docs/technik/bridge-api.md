@@ -25,10 +25,10 @@ Die Brücke (`bridge/`) stellt dem Godot-Projekt genau eine Klasse bereit: **`Uh
 | `get_player_state_index()` | `int` | Index des vorausgewählten Spielerstaates oder -1 |
 | `get_state_count()` | `int` | |
 | `get_state_index(tag: String)` | `int` | -1, wenn unbekannt |
-| `get_state(index: int)` | `Dictionary` | `tag`, `name`, `short_name`, `color` (Color), `ruler`, `government`, `capital_index` (int), `treasury` (float), `tax_rate_percent` (int, gerundet), `income_month` (float), `expenses_month` (float), `population` (int), `location_count` (int) |
+| `get_state(index: int)` | `Dictionary` | `tag`, `name`, `short_name`, `color` (Color), `ruler`, `government`, `capital_index` (int), `treasury` (float), `tax_rate_percent` (int, gerundet), `income_month` (float), `expenses_month` (float), `population` (int), `location_count` (int); seit M4 `living_standard` (float 0–100, nach Einwohnern gemittelt) und `balance_previous` (Dictionary wie bei `get_location`, Summe der Orte) |
 | `get_location_count()` | `int` | |
 | `get_location_index(id: String)` | `int` | -1, wenn unbekannt |
-| `get_location(index: int)` | `Dictionary` | `id`, `name`, `owner_index` (int), `owner_name`, `terrain`, `is_city` (bool), `population` (int), `area_km2` (float), `density` (float, Einwohner je km²), `devastation_percent` (int), `majority_confession`, `confessions` (Dictionary Name → Prozent als float), `production_month` (float), `taxes_month` (float), `source`; seit M3 zusätzlich `has_data` (bool), `kreis_index` (int, −1 ohne Kreis), `kreis_name` (String). Für Orte ohne Daten: `has_data = false`, `owner_index = -1`, `owner_name = ""`, Simulationszahlen (`population`, `density`, `devastation_percent`, `production_month`, `taxes_month`) 0, `majority_confession = ""`, `confessions` leer; Kartenfelder (`terrain`, `is_city`, `area_km2`, Kreis) wie in den Daten |
+| `get_location(index: int)` | `Dictionary` | `id`, `name`, `owner_index` (int), `owner_name`, `terrain`, `is_city` (bool), `population` (int), `area_km2` (float), `density` (float, Einwohner je km²), `devastation_percent` (int), `majority_confession`, `confessions` (Dictionary Name → Prozent als float), `production_month` (float), `taxes_month` (float), `source`; seit M3 zusätzlich `has_data` (bool), `kreis_index` (int, −1 ohne Kreis), `kreis_name` (String); seit M4 `majority_culture` (String), `cultures` (Dictionary Name → Prozent als float), `children`, `young`, `working`, `old` (int: 0–14, 15–29, 30–64, 65+ Jahre), `living_standard` (float 0–100), `literacy_percent` (float), `balance_previous` (Dictionary `births`, `deaths`, `plague_deaths`, `moved_in`, `moved_out`, `emigrated` als int, Bilanz des Vorjahres; im ersten Jahr 0). Bevölkerung, Anteile und Mittelwerte umfassen auch die Zugänge, die noch keinen eigenen Block haben (bevoelkerung.md, Abschnitt 4.7). `production_month` und `taxes_month` sind die Werte vom letzten Rechentag des Ortes. Für Orte ohne Daten: `has_data = false`, `owner_index = -1`, `owner_name = ""`, Simulationszahlen (`population`, `density`, `devastation_percent`, `production_month`, `taxes_month`) 0, `majority_confession = ""`, `confessions` leer; Kartenfelder (`terrain`, `is_city`, `area_km2`, Kreis) wie in den Daten |
 | `get_location_owner_indices()` | `PackedInt32Array` | seit M3: Besitzer-Staatsindex je Ort (−1 ohne Daten), Länge = `get_location_count()` – für Grenzen im Shader ohne 4.500 Einzelabfragen |
 | `get_location_kreis_indices()` | `PackedInt32Array` | seit M3: Kreisindex je Ort (−1 ohne Kreis) |
 | `get_kreis_count()` | `int` | seit M3 |
@@ -51,10 +51,16 @@ Die Brücke (`bridge/`) stellt dem Godot-Projekt genau eine Klasse bereit: **`Uh
 | 3 | `MAP_TERRAIN` | Farbe des Geländes |
 | 4 | `MAP_DEVASTATION` | Verlauf nach Verwüstung (0 → neutral, 1 → rot) |
 | 5 | `MAP_KREISE` | seit M3: Farbe je Kreis aus einer festen Palette (`palette[kreisindex % n]`, benachbarte Kreisindizes unterschiedlich); Orte ohne Kreis grau |
+| 6 | `MAP_LEBENSSTANDARD` | seit M4: linearer Verlauf nach mittlerem Lebensstandard (0 → rot, 100 → grün) |
+| 7 | `MAP_KULTUR` | seit M4: Farbe der Mehrheitskultur (`common/kulturen.chron`) |
 
-**Orte ohne Daten** (seit M3) erhalten in den Modi 0, 1, 2 und 4 eine Farbe mit **Alpha 0**; die
-Godot-Seite zeichnet dort eine Schraffur „keine Daten“. In den Modi 3 und 5 haben sie normale
+**Orte ohne Daten** (seit M3) erhalten in den Modi 0, 1, 2, 4, 6 und 7 eine Farbe mit **Alpha 0**;
+die Godot-Seite zeichnet dort eine Schraffur „keine Daten“. In den Modi 3 und 5 haben sie normale
 Farben (Alpha 1).
+
+**Threads (seit M4):** Die Brücke legt die Simulation mit `SimConfig::threads = 0` an, rechnet
+also auf allen Kernen. Das Ergebnis ist bei jeder Thread-Zahl gleich (bevoelkerung.md,
+Abschnitt 5).
 
 ## Bibliothek und Einbindung
 

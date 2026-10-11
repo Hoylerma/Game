@@ -3,14 +3,33 @@ extends PanelContainer
 ## Ortsinfo: alle Felder aus get_location für den ausgewählten Ort.
 ##
 ## Orte ohne Daten (has_data = false) zeigen nur die Kartenfelder (Art, Kreis,
-## Gelände, Fläche) und einen Hinweis; Bevölkerung, Wirtschaft, Verwüstung und
-## Konfessionen sind dort ausgeblendet.
+## Gelände, Fläche) und einen Hinweis; Bevölkerung, Wirtschaft, Verwüstung,
+## Konfessionen, Kulturen und Gesellschaft sind dort ausgeblendet.
+
+## Altersgruppen der Bevölkerung (Feldname in get_location, Anzeigename), seit M4.
+const AGE_GROUPS: Array[Array] = [
+	["children", "0–14 Jahre"],
+	["young", "15–29 Jahre"],
+	["working", "30–64 Jahre"],
+	["old", "65 und älter"],
+]
+## Felder der Jahresbilanz (get_location → balance_previous) mit Anzeigename und Vorzeichen.
+const BALANCE_FIELDS: Array[Array] = [
+	["births", "Geburten", 1],
+	["deaths", "Sterbefälle", -1],
+	["plague_deaths", "Seuchentote", -1],
+	["moved_in", "Zuzug", 1],
+	["moved_out", "Wegzug", -1],
+	["emigrated", "Auswanderung", -1],
+]
 
 ## Schließen-Schaltfläche gedrückt.
 signal close_requested
 
 ## Farben bekannter Konfessionen, solange keine Kartenfarbe vorliegt.
 var confession_colors := {}
+## Farben der Kulturen (aus dem Kartenmodus Kultur), seit M4.
+var culture_colors := {}
 
 ## Höchste Höhe des Panels (fit_height); unbegrenzt, solange nicht gesetzt.
 var _max_height := 100000.0
@@ -31,6 +50,12 @@ var _max_height := 100000.0
 @onready var _devastation: Label = %Devastation
 @onready var _majority: Label = %Majority
 @onready var _confessions: VBoxContainer = %Confessions
+@onready var _majority_culture: Label = %MajorityCulture
+@onready var _cultures: VBoxContainer = %Cultures
+@onready var _living_standard: Label = %LivingStandard
+@onready var _literacy: Label = %Literacy
+@onready var _ages: VBoxContainer = %Ages
+@onready var _balance: GridContainer = %Balance
 @onready var _identifier: Label = %Identifier
 @onready var _source: Label = %Source
 @onready var _close: Button = %Close
@@ -50,6 +75,16 @@ var _max_height := 100000.0
 	$Scroll/Margin/Content/Separator2,
 	$Scroll/Margin/Content/ConfessionRow,
 	%Confessions,
+	$Scroll/Margin/Content/Separator4,
+	$Scroll/Margin/Content/CultureRow,
+	%Cultures,
+	$Scroll/Margin/Content/Separator5,
+	$Scroll/Margin/Content/SocietyHeader,
+	$Scroll/Margin/Content/Society,
+	$Scroll/Margin/Content/AgeHeader,
+	%Ages,
+	$Scroll/Margin/Content/BalanceHeader,
+	%Balance,
 ]
 
 
@@ -112,44 +147,108 @@ func show_location(location: Dictionary, owner_color: Color) -> void:
 		str(location.get("majority_confession", ""))
 	)
 	var confessions: Dictionary = location.get("confessions", {})
-	_show_confessions(confessions)
+	_show_shares(_confessions, confessions, confession_colors)
+	_majority_culture.text = "Mehrheit: %s" % str(location.get("majority_culture", "–"))
+	var cultures: Dictionary = location.get("cultures", {})
+	_show_shares(_cultures, cultures, culture_colors)
+	_living_standard.text = "%s von 100" % GermanFormat.number(
+		float(location.get("living_standard", 0.0))
+	)
+	_literacy.text = GermanFormat.percent(float(location.get("literacy_percent", 0.0)))
+	_show_ages(location)
+	_show_balance(location.get("balance_previous", {}))
 	_identifier.text = "Kennung: %s" % str(location.get("id", "–"))
 	var source := str(location.get("source", ""))
 	_source.text = "Quelle: %s" % (source if not source.is_empty() else "keine Angabe")
 	visible = true
 
 
-func _show_confessions(confessions: Dictionary) -> void:
-	for child in _confessions.get_children():
-		_confessions.remove_child(child)
+## Anteile (Name → Prozent) als Balken, größter zuerst; Farben je Name, sonst neutral.
+func _show_shares(container: VBoxContainer, shares: Dictionary, colors: Dictionary) -> void:
+	_clear(container)
+	var names: Array = shares.keys()
+	names.sort_custom(func(a: Variant, b: Variant) -> bool: return float(shares[a]) > float(shares[b]))
+	for share_name: Variant in names:
+		var text := GermanFormat.humanize(str(share_name))
+		var color: Color = colors.get(str(share_name), UiPalette.BAR_NEUTRAL)
+		container.add_child(_share_row(text, float(shares[share_name]), color))
+
+
+## Altersaufbau: Anteile der vier Altersgruppen an der Bevölkerung.
+func _show_ages(location: Dictionary) -> void:
+	_clear(_ages)
+	var total := 0
+	for group in AGE_GROUPS:
+		total += int(location.get(group[0], 0))
+	for group in AGE_GROUPS:
+		var share := 100.0 * int(location.get(group[0], 0)) / total if total > 0 else 0.0
+		_ages.add_child(_share_row(str(group[1]), share, UiPalette.BAR_NEUTRAL))
+
+
+## Bilanz des Vorjahres; im ersten (unvollständigen) Jahr ein Hinweis.
+func _show_balance(balance: Dictionary) -> void:
+	_clear(_balance)
+	var change := 0
+	var any := false
+	for field in BALANCE_FIELDS:
+		var value := int(balance.get(field[0], 0))
+		any = any or value != 0
+		change += value * int(field[2])
+	if not any:
+		var note := Label.new()
+		note.text = "Noch kein volles Jahr gerechnet."
+		note.theme_type_variation = &"CaptionLabel"
+		_balance.add_child(note)
+		return
+	for field in BALANCE_FIELDS:
+		var value := int(balance.get(field[0], 0))
+		if value == 0 and str(field[0]) == "plague_deaths":
+			continue
+		_add_fact(_balance, str(field[1]), GermanFormat.signed_number(value * int(field[2])))
+	_add_fact(_balance, "Veränderung", GermanFormat.signed_number(change))
+
+
+func _add_fact(grid: GridContainer, caption: String, value: String) -> void:
+	var caption_label := Label.new()
+	caption_label.text = caption
+	caption_label.theme_type_variation = &"MutedLabel"
+	grid.add_child(caption_label)
+	var value_label := Label.new()
+	value_label.text = value
+	value_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	value_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	grid.add_child(value_label)
+
+
+func _share_row(text: String, share: float, color: Color) -> HBoxContainer:
+	var row := HBoxContainer.new()
+	var label := Label.new()
+	label.text = text
+	label.custom_minimum_size = Vector2(96, 0)
+	label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+	row.add_child(label)
+	var bar := ProgressBar.new()
+	bar.show_percentage = false
+	bar.min_value = 0.0
+	bar.max_value = 100.0
+	bar.value = share
+	bar.custom_minimum_size = Vector2(0, 12)
+	bar.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	bar.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	var fill := StyleBoxFlat.new()
+	fill.bg_color = color
+	fill.set_corner_radius_all(2)
+	bar.add_theme_stylebox_override(&"fill", fill)
+	row.add_child(bar)
+	var value := Label.new()
+	value.text = GermanFormat.percent(share, 1)
+	value.custom_minimum_size = Vector2(62, 0)
+	value.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	row.add_child(value)
+	return row
+
+
+func _clear(container: Container) -> void:
+	for child in container.get_children():
+		container.remove_child(child)
 		child.queue_free()
-	var names: Array = confessions.keys()
-	names.sort_custom(
-		func(a: Variant, b: Variant) -> bool: return float(confessions[a]) > float(confessions[b])
-	)
-	for confession_name: Variant in names:
-		var share := float(confessions[confession_name])
-		var row := HBoxContainer.new()
-		var label := Label.new()
-		label.text = GermanFormat.humanize(str(confession_name))
-		label.custom_minimum_size = Vector2(96, 0)
-		row.add_child(label)
-		var bar := ProgressBar.new()
-		bar.show_percentage = false
-		bar.min_value = 0.0
-		bar.max_value = 100.0
-		bar.value = share
-		bar.custom_minimum_size = Vector2(0, 12)
-		bar.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		bar.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-		var fill := StyleBoxFlat.new()
-		fill.bg_color = confession_colors.get(str(confession_name), UiPalette.BAR_NEUTRAL)
-		fill.set_corner_radius_all(2)
-		bar.add_theme_stylebox_override(&"fill", fill)
-		row.add_child(bar)
-		var value := Label.new()
-		value.text = GermanFormat.percent(share, 1)
-		value.custom_minimum_size = Vector2(62, 0)
-		value.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-		row.add_child(value)
-		_confessions.add_child(row)
