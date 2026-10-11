@@ -57,6 +57,25 @@ func no_data_count() -> int:
 	return size() - data_count
 
 
+## Anzahl der Kreise, zu denen mindestens ein Ort gehört (ein Kreis ohne Orte ist
+## in den Daten erlaubt, erscheint aber nicht auf der Karte).
+func kreise_with_places() -> int:
+	var seen := {}
+	for kreis in kreis_indices:
+		if kreis >= 0 and kreis < kreis_names.size():
+			seen[kreis] = true
+	return seen.size()
+
+
+## Anzahl der Orte, die zu einem Kreis gehören.
+func places_in_kreisen() -> int:
+	var count := 0
+	for kreis in kreis_indices:
+		if kreis >= 0 and kreis < kreis_names.size():
+			count += 1
+	return count
+
+
 ## Name des Kreises eines Ortes oder "".
 func kreis_name_of(sim_index: int) -> String:
 	if sim_index < 0 or sim_index >= kreis_indices.size():

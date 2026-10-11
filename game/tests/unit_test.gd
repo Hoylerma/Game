@@ -244,6 +244,20 @@ func _test_map_detail() -> void:
 		is_equal_approx(MapDetail.screen_size(MapDetail.zoom_for(26.0, 36.0), 36.0), 26.0),
 		"zoom_for und screen_size"
 	)
+	# Leere Ebene (ohne Kreisdaten): die nächste nicht leere, die genauere zuerst.
+	var labels := MapLabels.new()
+	_equal(labels.shown_tier(26.0), -1, "keine Namen: keine Ebene")
+	var entry: Array[Dictionary] = [{"world": Vector2(1, 1), "text": "A", "style": 0, "rank": 1.0}]
+	labels.set_layer(MapDetail.Tier.STATE, entry)
+	labels.set_layer(MapDetail.Tier.PLACE, entry)
+	_equal(labels.shown_tier(8.0), MapDetail.Tier.STATE, "fern: Staatsnamen")
+	_equal(labels.shown_tier(26.0), MapDetail.Tier.PLACE, "mittel ohne Kreise: Ortsnamen")
+	_equal(labels.shown_tier(64.0), MapDetail.Tier.PLACE, "nah: Ortsnamen")
+	labels.set_layer(MapDetail.Tier.KREIS, entry)
+	_equal(labels.shown_tier(26.0), MapDetail.Tier.KREIS, "mittel mit Kreisen: Kreisnamen")
+	labels.set_layer(MapDetail.Tier.PLACE, [] as Array[Dictionary])
+	_equal(labels.shown_tier(64.0), MapDetail.Tier.KREIS, "nah ohne Orte: Kreisnamen")
+	labels.free()
 
 
 ## Kleine Testkarte 8 × 6 Pixel: Orte A (4 × 3), B (4 × 3), C (2 × 3), Meer, See, Ausland.
@@ -358,6 +372,9 @@ func _test_location_catalog() -> void:
 	_equal(catalog.kreis_name_of(1), "", "Ort ohne Kreis")
 	_equal(catalog.kreis_name_of(5), "", "ungültiger Index")
 	_equal(catalog.no_data_count(), 1, "Orte ohne Daten")
+	catalog.kreis_names = PackedStringArray(["Teltow", "Leer"])
+	_equal(catalog.kreise_with_places(), 1, "Legende: nur Kreise mit Orten")
+	_equal(catalog.places_in_kreisen(), 1, "Legende: nur Orte mit Kreis")
 	_equal(LocationCatalog.build(null).size(), 0, "Katalog ohne Simulation leer")
 
 

@@ -89,7 +89,7 @@ func _ready() -> void:
 	_catalog = LocationCatalog.build(_sim)
 	_map_labels.camera = _map_view.camera
 	_map_labels.location_diameter = _map_view.location_diameter()
-	_map_labels.covering_controls.assign([
+	_map_labels.set_covering_controls([
 		_top_bar, _state_panel, _chronicle_panel, _location_panel, _legend, _mode_bar
 	])
 	_update_place_labels()
@@ -387,22 +387,18 @@ func _update_place_labels() -> void:
 	var places: Array[Dictionary] = []
 	var kreise: Array[Dictionary] = []
 	if _sim != null and _map.is_valid():
-		var capitals := {}
-		for state_index in _sim.get_state_count():
-			capitals[int(_sim.get_state(state_index).get("capital_index", -1))] = true
+		var capitals := _capitals()
 		for map_index in _map.map_count():
 			var sim_index := _map.map_to_sim[map_index]
 			var point := _map.label_points[map_index]
 			if sim_index < 0 or point.x < 0.0:
 				continue
-			var style := MapLabels.Style.PLACE
+			var style := _place_style(sim_index, capitals)
 			var rank := 0.0
 			var is_seat := _catalog.kreis_name_of(sim_index) == _catalog.names[sim_index]
-			if capitals.has(sim_index):
-				style = MapLabels.Style.CAPITAL
+			if style == MapLabels.Style.CAPITAL:
 				rank = 4.0
-			elif _catalog.is_city[sim_index] != 0:
-				style = MapLabels.Style.CITY
+			elif style == MapLabels.Style.CITY:
 				rank = 3.0 if is_seat else 2.0
 			elif is_seat:
 				rank = 1.0
@@ -423,6 +419,24 @@ func _update_place_labels() -> void:
 			})
 	_map_labels.set_layer(MapDetail.Tier.PLACE, places)
 	_map_labels.set_layer(MapDetail.Tier.KREIS, kreise)
+
+
+## Simulationsindizes der Hauptstädte (als Menge).
+func _capitals() -> Dictionary:
+	var capitals := {}
+	if _sim != null:
+		for state_index in _sim.get_state_count():
+			capitals[int(_sim.get_state(state_index).get("capital_index", -1))] = true
+	return capitals
+
+
+## Stil eines Ortsnamens: Hauptstadt, Stadt oder Ort (auch für den angehefteten Namen).
+func _place_style(sim_index: int, capitals: Dictionary) -> MapLabels.Style:
+	if capitals.has(sim_index):
+		return MapLabels.Style.CAPITAL
+	if _catalog.is_city[sim_index] != 0:
+		return MapLabels.Style.CITY
+	return MapLabels.Style.PLACE
 
 
 ## Staatsnamen (fern): je Staat im pixelgewichteten Schwerpunkt seiner Gebiete.
@@ -528,13 +542,17 @@ func _rebuild_legend() -> void:
 				no_data
 			)
 		MapModes.MAP_KREISE:
-			var kreis_count := _catalog.kreis_names.size()
+			# Nur Kreise mit Orten und Orte mit Kreis (ein leerer Kreis ist nur eine Warnung).
+			var kreis_count := _catalog.kreise_with_places()
 			var text := (
 				(
 					"%s Kreise fassen %s zusammen. Die Farben wiederholen sich; Grenzlinien "
 					+ "trennen die Kreise, ihre Namen erscheinen beim Hineinzoomen."
 				)
-				% [GermanFormat.integer(kreis_count), LegendData.count_text(_catalog.size())]
+				% [
+					GermanFormat.integer(kreis_count),
+					LegendData.count_text(_catalog.places_in_kreisen())
+				]
 			)
 			if kreis_count == 0:
 				text = "Die Daten enthalten keine Kreise (history/kreise fehlt oder ist leer)."
@@ -645,9 +663,7 @@ func _select_location(sim_index: int, focus_camera: bool = false) -> void:
 	_map_view.set_selected(sim_index)
 	var pinned_point := _map_view.location_center(sim_index)
 	if sim_index >= 0 and sim_index < _catalog.size() and pinned_point.x >= 0.0:
-		var style := MapLabels.Style.PLACE
-		if _catalog.is_city[sim_index] != 0:
-			style = MapLabels.Style.CITY
+		var style := _place_style(sim_index, _capitals())
 		_map_labels.set_pinned(pinned_point, _catalog.names[sim_index], style)
 	else:
 		_map_labels.set_pinned(Vector2.ZERO, "", 0)

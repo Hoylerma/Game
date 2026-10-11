@@ -13,6 +13,11 @@ extends SceneTree
 ##    auf den Beschriftungspunkt an einer freien Stelle der Karte (nicht unter Panels);
 ##    danach muss die Hauptszene genau diesen Ort ausgewählt haben. Ein Klick ins Meer
 ##    hebt die Auswahl auf.
+## 3. Namen und Panels (MapLabels.record_drawn, vor 1. und 2.): Nach einem Moduswechsel
+##    und nach der ersten Auswahl per Klick liegt ohne Kamerabewegung kein Name unter
+##    einem Panel;
+##    ein Kreisname bleibt, wenn sein gleichnamiger Hauptort ausgewählt ist; eine
+##    ausgewählte Hauptstadt behält den Hauptstadt-Stil.
 ##
 ## Aufruf aus dem Repository-Hauptordner, nach einem Import (ohne Grafikausgabe möglich):
 ##   godot --headless --path game --script res://tests/klick_test.gd
@@ -71,6 +76,9 @@ func _run() -> void:
 	])
 	if not without_area.is_empty():
 		print("  ohne Fläche (nicht klickbar): ", ", ".join(without_area))
+
+	# Zuerst, solange die Ortsinfo noch nie angezeigt wurde (erste Auswahl der Sitzung).
+	await _check_labels()
 
 	var diameter := _view.location_diameter()
 	var zooms := PackedFloat32Array([
@@ -241,6 +249,107 @@ func _check_click_into_sea() -> void:
 		print("  Klick ins Meer hebt die Auswahl auf")
 	else:
 		_fail("Klick ins Meer bei %s ergibt %s" % [str(on_screen.round()), _describe(selected)])
+
+
+## Namen im Zusammenspiel mit Panels und Auswahl (ohne Kamerabewegung dazwischen).
+func _check_labels() -> void:
+	var labels: MapLabels = _main.call("map_labels")
+	var sim: SimulationClient = _main.call("simulation")
+	labels.record_drawn = true
+	var diameter := _view.location_diameter()
+	var near := MapDetail.zoom_for(MapDetail.LEVEL_SIZES[2], diameter)
+	var middle := MapDetail.zoom_for(MapDetail.LEVEL_SIZES[1], diameter)
+	var checks := 0
+
+	# Moduswechsel: Die Legende ändert ihre Größe, die Kamera bleibt stehen.
+	_main.call("select_location", -1)
+	var nuernberg := sim.get_location_index("nuernberg")
+	if nuernberg >= 0:
+		_main.call("set_map_mode", MapModes.MAP_KREISE)
+		_view.camera.focus_on(_view.location_center(nuernberg), near)
+		await _frames(3)
+		_main.call("set_map_mode", MapModes.MAP_POLITICAL)
+		await _frames(3)
+		_check_labels_free(labels, "nach Moduswechsel Kreise → Politisch")
+		checks += 1
+
+	# Erste Auswahl per Klick: Die Ortsinfo erscheint, die Kamera bleibt stehen.
+	# Ziel: der freie Beschriftungspunkt nächst der Bildmitte.
+	var viewport_size := root.get_visible_rect().size
+	var to_screen := _sprite.get_global_transform_with_canvas()
+	var target := -1
+	var best := INF
+	for map_index in _map.map_count():
+		var on_screen := to_screen * _map.label_points[map_index]
+		var distance := on_screen.distance_to(viewport_size * 0.5)
+		if (
+			_map.label_points[map_index].x >= 0.0
+			and distance < best
+			and Rect2(Vector2.ZERO, viewport_size).grow(-40.0).has_point(on_screen)
+			and not _covered(on_screen)
+		):
+			target = map_index
+			best = distance
+	if target >= 0:
+		await _click(to_screen * _map.label_points[target])
+		await _frames(3)
+		if int(_main.call("selected_location")) < 0:
+			_fail("Namen: Klick auf %s wählt keinen Ort aus" % _map.map_ids[target])
+		_check_labels_free(labels, "nach der ersten Auswahl von %s" % _map.map_ids[target])
+		checks += 1
+
+	# Mittlere Stufe: Kreisname bleibt, wenn der gleichnamige Hauptort ausgewählt ist.
+	var wilhelmshaven := sim.get_location_index("wilhelmshaven")
+	if wilhelmshaven >= 0:
+		_main.call("select_location", wilhelmshaven)
+		_view.camera.focus_on(_view.location_center(wilhelmshaven), middle)
+		await _frames(3)
+		if not _drawn_with_style(labels, "Wilhelmshaven", MapLabels.Style.KREIS):
+			_fail("Namen: Kreisname Wilhelmshaven fehlt, wenn der Ort ausgewählt ist")
+		checks += 1
+
+	# Ausgewählte Hauptstadt: Stil CAPITAL wie ohne Auswahl.
+	var berlin := sim.get_location_index("berlin_coelln")
+	if berlin >= 0:
+		_main.call("select_location", berlin)
+		_view.camera.focus_on(_view.location_center(berlin), near)
+		await _frames(3)
+		if not _drawn_with_style(labels, "Berlin-Cölln", MapLabels.Style.CAPITAL):
+			_fail("Namen: ausgewählte Hauptstadt Berlin-Cölln nicht im Hauptstadt-Stil")
+		checks += 1
+
+	_main.call("select_location", -1)
+	labels.record_drawn = false
+	print("  Namen und Panels: %d Prüfungen" % checks)
+
+
+## Kein gezeichneter Name liegt unter einem sichtbaren Bedienelement.
+func _check_labels_free(labels: MapLabels, situation: String) -> void:
+	var origin := labels.get_global_rect().position
+	var covered := 0
+	var example := ""
+	for entry: Dictionary in labels.drawn_labels:
+		var rect: Rect2 = entry["rect"]
+		rect.position += origin
+		for control in labels.covering_controls:
+			if control.is_visible_in_tree() and control.get_global_rect().intersects(rect.grow(-1.0)):
+				covered += 1
+				example = str(entry["text"])
+				break
+	if covered > 0:
+		_fail("Namen: %d Namen unter Panels %s (z. B. %s)" % [covered, situation, example])
+
+
+func _drawn_with_style(labels: MapLabels, text: String, style: int) -> bool:
+	for entry: Dictionary in labels.drawn_labels:
+		if str(entry["text"]) == text and int(entry["style"]) == style:
+			return true
+	return false
+
+
+func _frames(count: int) -> void:
+	for _frame in count:
+		await process_frame
 
 
 ## Linksklick an einem Punkt in Viewport-Koordinaten. Ereignisse kommen in

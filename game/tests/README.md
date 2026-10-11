@@ -26,8 +26,9 @@ Prüft ohne Simulation: deutsche Zahlenformate (`GermanFormat`), Kommandozeileno
 Projektion (`MapConfig`, das M1-Feld `kueste` wird ignoriert), die Pfadauflösung
 (`UhrwerkPaths`), Legenden (`LegendData`: Verlaufsschätzung, Eintrag „Keine Daten“ mit
 Schraffur), die Kartenmodi samt Kreise-Modus und die Eingabeaktionen aus `project.godot`, die
-Detailstufen (`MapDetail`: je Ortsgröße genau eine Namen-Ebene, Grenzen nach Zoom) und
-`LocationCatalog`.
+Detailstufen (`MapDetail`: je Ortsgröße genau eine Namen-Ebene, Grenzen nach Zoom; bei leerer
+Ebene der Rückfall auf die nächste, `MapLabels.shown_tier`) und `LocationCatalog` (auch die
+Zählung der Kreise mit Orten für die Legende).
 
 Dazu legt der Test unter `user://unit_test_karte` eine kleine Testkarte an (8 × 6 Pixel mit
 drei Orten, Meer, See und Ausland), lädt sie mit `MapData` (Kartenindex und Flächenart je
@@ -104,6 +105,12 @@ echten Daten und prüft:
    Panel liegt; dann geht ein Linksklick über `Input.parse_input_event` durch die ganze
    Eingabekette (Fenster → Viewport → GUI → Karte). Danach muss die Hauptszene genau diesen
    Ort ausgewählt haben. Ein Klick ins Meer muss die Auswahl aufheben.
+3. **Namen und Panels** (zuerst, solange die Ortsinfo noch nie angezeigt wurde;
+   `MapLabels.record_drawn` hält die gezeichneten Namen fest): Nach einem Wechsel vom Modus
+   „Kreise“ zu „Politisch“ (die Legende ändert ihre Größe) und nach der ersten Auswahl per
+   Linksklick (die Ortsinfo erscheint) liegt ohne Kamerabewegung kein Name unter einem Panel;
+   in der mittleren Stufe bleibt der Kreisname Wilhelmshaven stehen, wenn der gleichnamige Ort
+   ausgewählt ist; die ausgewählte Hauptstadt Berlin-Cölln steht im Hauptstadt-Stil.
 
 ```bash
 godot --headless --path game --script res://tests/klick_test.gd
@@ -113,15 +120,16 @@ xvfb-run -a -s "-screen 0 1600x900x24" godot --path game --rendering-driver open
   --audio-driver Dummy --script res://tests/klick_test.gd
 ```
 
-Ausgabe mit den echten Daten (4.541 Orte):
+Ausgabe mit den echten Daten (4.542 Orte) unter xvfb:
 
 ```
-  fern (Zoom 0.182, 1 Kacheln): 4541/4541 Orte richtig
-  mittel (Zoom 0.747, 12 Kacheln): 4541/4541 Orte richtig
-  nah (Zoom 1.838, 48 Kacheln): 4541/4541 Orte richtig
-  Eingabeereignisse: 121/121 Klicks richtig (2 Stichproben unter Panels übersprungen)
+  Namen und Panels: 4 Prüfungen
+  fern (Zoom 0.182, 1 Kacheln): 4542/4542 Orte richtig
+  mittel (Zoom 0.747, 12 Kacheln): 4542/4542 Orte richtig
+  nah (Zoom 1.838, 48 Kacheln): 4542/4542 Orte richtig
+  Eingabeereignisse: 122/122 Klicks richtig (1 Stichproben unter Panels übersprungen)
   Klick ins Meer hebt die Auswahl auf
-KLICK OK 4541/4541
+KLICK OK 4542/4542
 ```
 
 `n` in `KLICK OK n/n` zählt die Orte mit Fläche, die bei allen drei Zoomstufen richtig

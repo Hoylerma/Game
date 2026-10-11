@@ -178,7 +178,7 @@ aufgebaut, deren Werte sich ändern (Politisch, Dichte, Konfession, Verwüstung)
   (`kartenindex;ort;name`) wird mit einem Hinweis abgelehnt.
 
 **Nachschlagetexturen.** Der Shader holt je Pixel Farbe, Besitzer und Kreis über den
-Kartenindex aus zwei Texturen mit 256 Spalten (4.541 Orte → 256 × 18 Texel); eine einzeilige
+Kartenindex aus zwei Texturen mit 256 Spalten (4.542 Orte → 256 × 18 Texel); eine einzeilige
 Textur wäre breiter als die sichere Texturgröße im Kompatibilitätsrenderer.
 `color_lut` enthält die Farbe aus `get_map_colors` (Alpha 1 = Farbe, Alpha 0 = keine Daten,
 Alpha 0,5 = Ort der Karte, den die Simulation nicht kennt). `info_lut` enthält Besitzer + 1
@@ -218,15 +218,19 @@ ist ein typischer Ort etwa 35 Kartenpixel breit, in der Übersicht (Zoom ≈ 0,1
 
 **Namen** (`MapLabels`, `MapLabelLayout`) werden im Bildschirmraum gezeichnet und bleiben
 dadurch bei jedem Zoom scharf. Je Zoom ist genau eine Ebene sichtbar (hartes Umschalten an den
-Schwellen; eine Überblendung zeigte beide Ebenen halb durchsichtig übereinander).
+Schwellen; eine Überblendung zeigte beide Ebenen halb durchsichtig übereinander). Ist die Ebene
+der Zoomstufe leer – ohne Kreisdaten etwa die Kreisebene –, erscheint die nächste nicht leere,
+die genauere zuerst (mittlere Stufe ohne Kreise: Ortsnamen).
 
 - *Ortsnamen* stehen am Beschriftungspunkt aus `definition.csv`. Rangfolge: Hauptstädte,
   Hauptorte der Kreise (ein Kreis heißt nach seinem größten Ort), übrige Städte, übrige Orte;
   bei Gleichstand der flächengrößere. Ist der Platz belegt, weicht ein Ortsname eine Zeile
-  nach oben oder unten aus. Der Name des ausgewählten Ortes wird immer zuerst gesetzt.
+  nach oben oder unten aus. Der Name des ausgewählten Ortes wird immer zuerst gesetzt, im
+  selben Stil wie ohne Auswahl (eine ausgewählte Hauptstadt bleibt fett).
 - *Kreisnamen* (kursiv) stehen im Schwerpunkt der Beschriftungspunkte der Orte des Kreises,
   gewichtet mit deren Pixelzahl; liegt dieser Punkt nicht im Kreis, rückt er auf den
-  nächstgelegenen Ort des Kreises.
+  nächstgelegenen Ort des Kreises. Ein Kreisname bleibt auch dann stehen, wenn sein
+  gleichnamiger Hauptort ausgewählt ist und an derselben Stelle steht.
 - *Staatsnamen* (gesperrte Großbuchstaben, Größe nach Fläche) stehen ebenso im
   pixelgewichteten Schwerpunkt. Die Orte eines Staates werden zu Gebieten gebündelt
   (Beschriftungspunkte höchstens 2,5 Ortsdurchmesser auseinander); beschriftet werden das
@@ -237,7 +241,9 @@ Schwellen; eine Überblendung zeigte beide Ebenen halb durchsichtig übereinande
   Namen der sichtbaren Zellen geprüft, nicht alle 4.500 Orte. Überlappungen verhindert ein
   Belegungsraster im Bildschirmraum (8 Pixel je Zelle); Panels und Leisten sind darin vorab
   belegt, damit keine Namen unter halbtransparenten Panels durchscheinen. Gezeichnet wird nur
-  nach einer Kamerabewegung; Textbreiten werden beim ersten Gebrauch gemessen und gemerkt.
+  nach einer Kamerabewegung, einer neuen Auswahl oder wenn ein Panel Größe, Lage oder
+  Sichtbarkeit ändert (`MapLabels.set_covering_controls`, etwa die Legende beim Moduswechsel);
+  Textbreiten werden beim ersten Gebrauch gemessen und gemerkt.
 
 **Auswahl.** `MapView.location_at_screen(punkt)` rechnet einen Bildschirmpunkt über die
 Kamera in Kartenpixel um und liest den Kartenindex aus dem Bild; Klick und Hervorhebung nutzen
@@ -262,10 +268,12 @@ immer zur Karte passen. Für Dichte und Verwüstung schätzt `LegendData` den Ve
 Orten mit Daten: Passt eine lineare Abbildung Wert → Farbe, zeigt die Legende die exakten
 Endfarben, sonst die tatsächlich vorkommenden Farben. In den datenabhängigen Modi steht
 zusätzlich ein Feld „Keine Daten“ mit der Schraffur. Der Modus „Kreise“ zeigt die Palette der
-Brücke (12 Farben, `palette[kreisindex % 12]`, ohne Bedeutung) und die Zahl der Kreise. Die
-Farben wiederholen sich: Innerhalb einer Landschaftsdatei haben benachbarte Kreise verschiedene
-Farben, an den Grenzen zweier Landschaften nicht immer (mit den Daten des Kernraums 56 von 1.750
-benachbarten Kreispaaren, z. B. Brandenburg an der Havel und Wittenberg). Die Kreisgrenzen sind in
+Brücke (12 Farben, `palette[kreisindex % 12]`, ohne Bedeutung) und die Zahl der Kreise mit
+Orten und der Orte in Kreisen (ein leerer Kreis ist in den Daten erlaubt, erscheint aber nicht
+auf der Karte). Die Farben wiederholen sich: Innerhalb einer Landschaftsdatei haben benachbarte
+Kreise fast immer verschiedene Farben, an den Grenzen zweier Landschaften nicht immer (mit den
+Daten des Kernraums 61 von 1.747 benachbarten Kreispaaren, 60 davon an Landschaftsgrenzen,
+z. B. Karlsruhe und Mannheim). Die Kreisgrenzen sind in
 diesem Modus deshalb immer deutlich gezeichnet.
 
 ### Leistung

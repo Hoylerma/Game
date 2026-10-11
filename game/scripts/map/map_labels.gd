@@ -3,10 +3,12 @@ extends Control
 ## Namen auf der Karte, im Bildschirmraum gezeichnet (scharf bei jedem Zoom).
 ##
 ## Drei Ebenen nach Zoomstufe (MapDetail): fern Staatsnamen, mittel Kreisnamen,
-## nah Ortsnamen; je Zoom ist genau eine Ebene sichtbar. Jede Ebene liegt in einem
-## Weltraster (CELL_SIZE Kartenpixel), damit je Bild nur die Namen der sichtbaren
-## Zellen geprüft werden, nicht alle 4.500 Orte. Innerhalb einer Ebene gilt die
-## Rangfolge der Einträge (Hauptstädte, Städte, übrige Orte; größere zuerst).
+## nah Ortsnamen; je Zoom ist genau eine Ebene sichtbar. Ist sie leer (etwa ohne
+## Kreisdaten), erscheint die nächste nicht leere, die genauere zuerst (shown_tier).
+## Jede Ebene liegt in einem Weltraster (CELL_SIZE Kartenpixel), damit je Bild nur
+## die Namen der sichtbaren Zellen geprüft werden, nicht alle 4.500 Orte. Innerhalb
+## einer Ebene gilt die Rangfolge der Einträge (Hauptstädte, Städte, übrige Orte;
+## größere zuerst).
 ## Überlappungen verhindert ein Belegungsraster im Bildschirmraum: Ein Ortsname,
 ## der eine schon belegte Zelle berühren würde, weicht eine Zeile nach oben oder
 ## unten aus; ist auch dort kein Platz, entfällt er (Kreis- und Staatsnamen
@@ -38,7 +40,8 @@ const ITALIC_FONTS: PackedStringArray = [
 
 ## Kamera der Kartenansicht; ohne sie wird nichts gezeichnet.
 var camera: MapCamera = null
-## Bedienelemente über der Karte; unter ihnen erscheinen keine Namen.
+## Bedienelemente über der Karte; unter ihnen erscheinen keine Namen. Setzen mit
+## set_covering_controls, damit Größen- und Sichtbarkeitswechsel neu zeichnen.
 var covering_controls: Array[Control] = []
 ## Typischer Ortsdurchmesser in Kartenpixeln (MapView.location_diameter).
 var location_diameter := 36.0
@@ -48,6 +51,10 @@ var location_diameter := 36.0
 var last_draw_usec := 0
 var last_drawn := 0
 var draw_count := 0
+## Für Tests: Ist record_drawn gesetzt, hält drawn_labels die zuletzt gezeichneten
+## Namen fest ({ "text", "rect" (im Bildschirmraum dieses Controls), "style" }).
+var record_drawn := false
+var drawn_labels: Array[Dictionary] = []
 
 var _layers: Array[LabelLayer] = []
 var _fonts: Array[Font] = []
@@ -148,6 +155,34 @@ func layer_size(tier: int) -> int:
 	return _layers[tier].size()
 
 
+## Setzt die Bedienelemente über der Karte. Ändert sich eines in Größe, Lage oder
+## Sichtbarkeit (Legende beim Moduswechsel, Ortsinfo bei der ersten Auswahl), wird
+## neu gezeichnet, auch ohne Kamerabewegung.
+func set_covering_controls(controls: Array[Control]) -> void:
+	for control in covering_controls:
+		if is_instance_valid(control):
+			if control.item_rect_changed.is_connected(queue_redraw):
+				control.item_rect_changed.disconnect(queue_redraw)
+			if control.visibility_changed.is_connected(queue_redraw):
+				control.visibility_changed.disconnect(queue_redraw)
+	covering_controls.assign(controls)
+	for control in covering_controls:
+		control.item_rect_changed.connect(queue_redraw)
+		control.visibility_changed.connect(queue_redraw)
+	queue_redraw()
+
+
+## Ebene, deren Namen bei der Ortsgröße detail erscheinen: die Ebene der Zoomstufe,
+## ist sie leer, die nächste nicht leere (genauere zuerst); -1, wenn alle leer sind.
+func shown_tier(detail: float) -> int:
+	var tier := MapDetail.label_tier(detail)
+	for step in MapDetail.Tier.size():
+		for candidate: int in [tier + step, tier - step]:
+			if candidate >= 0 and candidate < MapDetail.Tier.size() and _layers[candidate].size() > 0:
+				return candidate
+	return -1
+
+
 func _process(_delta: float) -> void:
 	if camera == null:
 		return
@@ -165,24 +200,20 @@ func _draw() -> void:
 		return
 	var detail := MapDetail.screen_size(camera.zoom.x, location_diameter)
 	_reset_occupancy()
-	var tiers: Array[int] = []
-	for tier in MapDetail.Tier.size():
-		if MapDetail.tier_alpha(tier, detail) >= 0.02 and _layers[tier].size() > 0:
-			tiers.append(tier)
-	# Die deutlichere Ebene zuerst: Sie bekommt die freien Plätze.
-	tiers.sort_custom(
-		func(a: int, b: int) -> bool:
-			return MapDetail.tier_alpha(a, detail) > MapDetail.tier_alpha(b, detail)
-	)
-	for tier in tiers:
-		var alpha := MapDetail.tier_alpha(tier, detail)
-		if tier == MapDetail.Tier.PLACE and not _pinned.is_empty():
-			_place(_pinned[0], str(_pinned[1]), int(_pinned[2]), -1.0, alpha, true)
-		_draw_layer(_layers[tier], alpha)
+	if record_drawn:
+		drawn_labels.clear()
+	var tier := shown_tier(detail)
+	if tier >= 0:
+		var place_tier := tier == MapDetail.Tier.PLACE
+		if place_tier and not _pinned.is_empty():
+			_place(_pinned[0], str(_pinned[1]), int(_pinned[2]), -1.0, 1.0, true)
+		_draw_layer(_layers[tier], 1.0, place_tier)
 	last_draw_usec = Time.get_ticks_usec() - started
 
 
-func _draw_layer(layer: LabelLayer, alpha: float) -> void:
+## skip_pinned: Den angehefteten Namen gibt es schon (nur in der Ortsebene; ein
+## gleichnamiger Kreisname an derselben Stelle bleibt stehen).
+func _draw_layer(layer: LabelLayer, alpha: float, skip_pinned: bool) -> void:
 	var zoom := camera.zoom.x
 	# Namen, deren Punkt knapp außerhalb liegt, ragen noch ins Bild.
 	var world_rect := camera.visible_world_rect().grow(160.0 / zoom)
@@ -196,11 +227,13 @@ func _draw_layer(layer: LabelLayer, alpha: float) -> void:
 				candidates.append_array(layer.grid[key])
 	candidates.sort()
 	var pinned_world := Vector2(-1, -1)
-	if not _pinned.is_empty():
+	var pinned_text := ""
+	if skip_pinned and not _pinned.is_empty():
 		pinned_world = _pinned[0]
+		pinned_text = str(_pinned[1])
 	for index in candidates:
 		# Der ausgewählte Ort steht schon (set_pinned).
-		if layer.positions[index] == pinned_world and layer.texts[index] == str(_pinned[1]):
+		if layer.positions[index] == pinned_world and layer.texts[index] == pinned_text:
 			continue
 		var style := layer.styles[index]
 		var width := _place(
@@ -250,6 +283,8 @@ func _place(
 		draw_string(font, baseline, text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size,
 			Color(_colors[style], _colors[style].a * alpha))
 		last_drawn += 1
+		if record_drawn:
+			drawn_labels.append({"text": text, "rect": candidate, "style": style})
 		break
 	return width
 
