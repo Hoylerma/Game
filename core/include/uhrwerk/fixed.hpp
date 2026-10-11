@@ -14,6 +14,7 @@
 //
 // Gleitkommazahlen dürfen im Kern nur zur Anzeige verwendet werden (to_double).
 
+#include <bit>
 #include <compare>
 #include <cstdint>
 #include <optional>
@@ -44,9 +45,10 @@ constexpr U128 mul_u64(std::uint64_t a, std::uint64_t b) {
     return r;
 }
 
-// Ganzzahlige Division 128/64 → 64 (Quotient muss in 64 Bit passen),
-// bitweise Schulmethode; identisch auf allen Plattformen.
-constexpr std::uint64_t div_u128_by_u64(U128 n, std::uint64_t d, std::uint64_t* remainder = nullptr) {
+// Ganzzahlige Division 128/64 → 64, bitweise Schulmethode. Referenz für die Tests und Weg
+// für den Fall, dass der Quotient nicht in 64 Bit passt (n.hi >= d): Dann liefert sie die
+// unteren 64 Bit des Quotienten.
+constexpr std::uint64_t div_u128_by_u64_bitwise(U128 n, std::uint64_t d, std::uint64_t* remainder = nullptr) {
     std::uint64_t q = 0;
     std::uint64_t rem = 0;
     for (int i = 127; i >= 0; --i) {
@@ -64,6 +66,65 @@ constexpr std::uint64_t div_u128_by_u64(U128 n, std::uint64_t d, std::uint64_t* 
         *remainder = rem;
     }
     return q;
+}
+
+// Division 128/64 → 64 für n.hi < d (Quotient passt in 64 Bit): Knuth, Algorithmus D, mit
+// 32-Bit-Ziffern (Warren, „Hacker's Delight“, divlu). Nur Ganzzahl-Grundrechenarten, daher auf
+// allen Plattformen gleich; das Ergebnis ist der exakte Quotient wie bei der bitweisen Methode.
+constexpr std::uint64_t div_u128_by_u64_knuth(U128 n, std::uint64_t d, std::uint64_t* remainder) {
+    constexpr std::uint64_t kBase = std::uint64_t{1} << 32;
+    const int shift = std::countl_zero(d);
+    std::uint64_t un32 = n.hi;
+    std::uint64_t un10 = n.lo;
+    if (shift > 0) {
+        d <<= shift;
+        un32 = (n.hi << shift) | (n.lo >> (64 - shift));
+        un10 = n.lo << shift;
+    }
+    const std::uint64_t vn1 = d >> 32;
+    const std::uint64_t vn0 = d & 0xFFFFFFFFu;
+    const std::uint64_t un1 = un10 >> 32;
+    const std::uint64_t un0 = un10 & 0xFFFFFFFFu;
+
+    std::uint64_t q1 = un32 / vn1;
+    std::uint64_t rhat = un32 - q1 * vn1;
+    while (q1 >= kBase || q1 * vn0 > kBase * rhat + un1) {
+        --q1;
+        rhat += vn1;
+        if (rhat >= kBase) {
+            break;
+        }
+    }
+    const std::uint64_t un21 = un32 * kBase + un1 - q1 * d; // modulo 2^64, der wahre Wert passt
+
+    std::uint64_t q0 = un21 / vn1;
+    rhat = un21 - q0 * vn1;
+    while (q0 >= kBase || q0 * vn0 > kBase * rhat + un0) {
+        --q0;
+        rhat += vn1;
+        if (rhat >= kBase) {
+            break;
+        }
+    }
+    if (remainder != nullptr) {
+        *remainder = (un21 * kBase + un0 - q0 * d) >> shift;
+    }
+    return q1 * kBase + q0;
+}
+
+// Ganzzahlige Division 128/64 → 64 (Quotient muss in 64 Bit passen). Wählt den schnellsten
+// Weg; alle drei liefern bitgleich dasselbe Ergebnis wie die bitweise Methode.
+constexpr std::uint64_t div_u128_by_u64(U128 n, std::uint64_t d, std::uint64_t* remainder = nullptr) {
+    if (n.hi == 0) {
+        if (remainder != nullptr) {
+            *remainder = n.lo % d;
+        }
+        return n.lo / d;
+    }
+    if (n.hi < d) {
+        return div_u128_by_u64_knuth(n, d, remainder);
+    }
+    return div_u128_by_u64_bitwise(n, d, remainder);
 }
 
 constexpr std::uint64_t abs_u64(std::int64_t v) {
@@ -129,7 +190,10 @@ public:
 
     friend constexpr Fixed operator*(Fixed a, Fixed b) {
         const bool negative = (a.raw_ < 0) != (b.raw_ < 0);
-        const detail::U128 p = detail::mul_u64(detail::abs_u64(a.raw_), detail::abs_u64(b.raw_));
+        const std::uint64_t ua = detail::abs_u64(a.raw_);
+        const std::uint64_t ub = detail::abs_u64(b.raw_);
+        // Schnellweg: Beide Beträge unter 2^32, dann passt das Produkt in 64 Bit (bitgleich).
+        const detail::U128 p = ((ua | ub) >> 32) == 0 ? detail::U128{0, ua * ub} : detail::mul_u64(ua, ub);
         const std::uint64_t magnitude = (p.hi << (64 - kFracBits)) | (p.lo >> kFracBits);
         const bool has_remainder = (p.lo & static_cast<std::uint64_t>(kOne - 1)) != 0;
         auto value = static_cast<std::int64_t>(magnitude);

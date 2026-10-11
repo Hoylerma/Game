@@ -409,6 +409,11 @@ Dazu kommen die Neuordnung (höchstens 12 Durchläufe, etwa 30 ms) und das Zusam
 von 2 s ist damit erreichbar, auch mit einem Thread knapp. Die Schätzung prüft Schritt 1 der
 Umsetzung mit einer Messung.
 
+**Messung nach Schritt 1** (Release, ein Thread, Modell aus M1, Blöcke der 60 Orte mit Daten auf
+alle 4.542 Orte kopiert): 307.000 Blöcke rechnen 0,05–0,07 s je Spieljahr, also etwa 18 ns je
+Block und Monat statt 450 ns. 100 Jahre mit den echten Daten: 0,008 s statt 0,60 s. Die
+Referenzprüfsumme `40de8c42e8f7a0ff` ist unverändert.
+
 ## 7. Lasttest
 
 **Lasttest-Welt.** `make_load_test_world(base, blocks, seed)` in `core/` (`uhrwerk/lasttest.hpp`)

@@ -18,8 +18,10 @@
 #include "uhrwerk/rng.hpp"
 #include "uhrwerk/world.hpp"
 
+#include <array>
 #include <cstdint>
 #include <deque>
+#include <vector>
 
 namespace uhrwerk {
 
@@ -75,8 +77,14 @@ private:
     void run_economy(Index state);
     void run_yearly();
 
+    /// Hilfslisten aus dem unveränderlichen Inhalt und den Besitzverhältnissen (seit M4).
+    /// Kein Zustand: nicht in der Prüfsumme, im Konstruktor aus der Welt aufgebaut.
+    void build_schedule();
+
     World world_;
     SimConfig config_;
+    std::array<std::vector<Index>, 28> locations_by_day_; // Orte mit Blöcken je Rechentag, aufsteigend
+    std::vector<std::vector<Index>> state_locations_;     // Orte je Staat, aufsteigend
     std::deque<Command> pending_;
     Pcg32 rng_demography_;
     Pcg32 rng_economy_;

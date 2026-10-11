@@ -312,3 +312,87 @@ TEST_CASE("Fixed: 128-Bit-Hilfsfunktionen stimmen mit unsigned __int128 überein
     }
 }
 #endif
+
+// ─── Schnellwege (seit M4) gegen die bitweise Referenz ──────────────────────
+// Ohne __int128, damit die Prüfung auch unter MSVC läuft.
+
+TEST_CASE("Fixed: Division 128/64 – alle Wege stimmen mit der bitweisen Methode überein") {
+    using uhrwerk::detail::div_u128_by_u64;
+    using uhrwerk::detail::div_u128_by_u64_bitwise;
+    using uhrwerk::detail::U128;
+
+    const auto check = [](U128 n, std::uint64_t d) {
+        std::uint64_t r_fast = 0;
+        std::uint64_t r_ref = 0;
+        const std::uint64_t q_fast = div_u128_by_u64(n, d, &r_fast);
+        const std::uint64_t q_ref = div_u128_by_u64_bitwise(n, d, &r_ref);
+        INFO("n=" << n.hi << ":" << n.lo << " d=" << d);
+        CHECK(q_fast == q_ref);
+        CHECK(r_fast == r_ref);
+    };
+
+    // Grenzfälle: Divisor mit und ohne gesetztes oberstes Bit, Zähler knapp unter d·2^64.
+    constexpr std::uint64_t kAll = ~std::uint64_t{0};
+    for (const std::uint64_t d : {std::uint64_t{1}, std::uint64_t{2}, std::uint64_t{3}, std::uint64_t{65536},
+                                  std::uint64_t{0xFFFFFFFFu}, std::uint64_t{1} << 32,
+                                  (std::uint64_t{1} << 32) + 1, std::uint64_t{1} << 63, kAll - 1, kAll}) {
+        for (const std::uint64_t lo : {std::uint64_t{0}, std::uint64_t{1}, d - 1, d, kAll}) {
+            check(U128{0, lo}, d);
+            check(U128{d - 1, lo}, d);
+            check(U128{(d - 1) / 2, lo}, d);
+            check(U128{d, lo}, d); // Quotient passt nicht in 64 Bit: bitweiser Weg
+            check(U128{kAll, lo}, d);
+        }
+    }
+
+    // Zufällige Stichproben über alle Größenordnungen von Zähler und Divisor.
+    Pcg32 rng(2024, 7);
+    const auto random_u64 = [&rng] {
+        const auto bits = static_cast<int>(rng.below(64)) + 1; // 1..64
+        const std::uint64_t v = (std::uint64_t{rng.next()} << 32) | rng.next();
+        return bits == 64 ? v : v & ((std::uint64_t{1} << bits) - 1);
+    };
+    for (int i = 0; i < 100000; ++i) {
+        const std::uint64_t d = random_u64() | 1u;
+        const std::uint64_t hi = random_u64();
+        check(U128{hi % d, random_u64()}, d); // Quotient passt in 64 Bit
+        check(U128{0, random_u64()}, d);
+    }
+}
+
+TEST_CASE("Fixed: Schnellweg der Multiplikation an der Grenze 2^32") {
+    // Beide Beträge < 2^32 → 64-Bit-Produkt; sonst 128 Bit. Ergebnis muss gleich sein wie
+    // die Rechnung über mul_u64.
+    const auto reference = [](std::int64_t a, std::int64_t b) {
+        const bool negative = (a < 0) != (b < 0);
+        const uhrwerk::detail::U128 p =
+            uhrwerk::detail::mul_u64(uhrwerk::detail::abs_u64(a), uhrwerk::detail::abs_u64(b));
+        const std::uint64_t magnitude = (p.hi << 48) | (p.lo >> 16);
+        auto value = static_cast<std::int64_t>(magnitude);
+        if (negative) {
+            value = -value;
+            if ((p.lo & 0xFFFFu) != 0) {
+                --value;
+            }
+        }
+        return value;
+    };
+    constexpr std::int64_t kEdge = std::int64_t{1} << 32;
+    for (const std::int64_t a : {kEdge - 1, kEdge, kEdge + 1, std::int64_t{65535}, std::int64_t{65537},
+                                 std::int64_t{1}, std::int64_t{0}}) {
+        for (const std::int64_t b : {kEdge - 1, kEdge, std::int64_t{3}, std::int64_t{123456789}}) {
+            for (const int sign : {1, -1}) {
+                INFO("a=" << a * sign << " b=" << b);
+                CHECK((raw(a * sign) * raw(b)).raw() == reference(a * sign, b));
+                CHECK((raw(b) * raw(a * sign)).raw() == reference(b, a * sign));
+            }
+        }
+    }
+    Pcg32 rng(77, 3);
+    for (int i = 0; i < 100000; ++i) {
+        const std::int64_t a = random_raw(rng) >> 28; // viele Werte unter 2^32
+        const std::int64_t b = random_raw(rng) >> 28;
+        INFO("a=" << a << " b=" << b);
+        CHECK((raw(a) * raw(b)).raw() == reference(a, b));
+    }
+}

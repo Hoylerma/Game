@@ -72,6 +72,7 @@ werden. Damit gelangt nie eine Gleitkommazahl in den Zustand des Kerns.
 | [`loader.hpp`](../../core/include/uhrwerk/loader.hpp) | `load_world()`: Datenordner → `World`, fatale Fehler und Warnungen |
 | [`world.hpp`](../../core/include/uhrwerk/world.hpp) | Weltmodell: flache Vektoren, Querverweise als Indizes |
 | [`simulation.hpp`](../../core/include/uhrwerk/simulation.hpp) | `Simulation`: Tick-Planer, Systeme, Befehle, Prüfsumme |
+| [`parallel.hpp`](../../core/include/uhrwerk/parallel.hpp) | Thread-Pool `ThreadPool` für die Mehrkernberechnung (seit M4) |
 
 ### Weltmodell
 
@@ -187,7 +188,10 @@ Orte verschieben. Referenz nach 100 Jahren mit `data/` (Seed 1648): seit M3
 | Text | `to_string(n)` deterministisch mit Punkt, z. B. `"12.50"` |
 
 Die 128-Bit-Zwischenwerte rechnet `fixed.hpp` mit zwei 64-Bit-Hälften (`detail::mul_u64`,
-`detail::div_u128_by_u64`), **ohne `__int128` und ohne Compiler-Builtins**. Damit verhält sich
+`detail::div_u128_by_u64`), **ohne `__int128` und ohne Compiler-Builtins**. Seit M4 gibt es
+bitgleiche Schnellwege: Multiplikation mit einem 64-Bit-Produkt, wenn beide Beträge unter 2³²
+liegen; Division nativ in 64 Bit, wenn der Zähler hineinpasst, sonst nach Knuth (Algorithmus D,
+32-Bit-Ziffern); nur wenn der Quotient nicht in 64 Bit passt, die bitweise Schulmethode. Damit verhält sich
 der Code unter GCC, Clang und MSVC gleich. Die Tests vergleichen die Ergebnisse dort, wo der
 Compiler `__int128` kennt, mit 200.000 Zufallsstichproben gegen echte 128-Bit-Arithmetik.
 

@@ -82,7 +82,26 @@ private:
 
 Simulation::Simulation(World world, SimConfig config)
     : world_(std::move(world)), config_(config), rng_demography_(config.seed, RngStream::Demografie),
-      rng_economy_(config.seed, RngStream::Wirtschaft), rng_events_(config.seed, RngStream::Ereignisse) {}
+      rng_economy_(config.seed, RngStream::Wirtschaft), rng_events_(config.seed, RngStream::Ereignisse) {
+    build_schedule();
+}
+
+void Simulation::build_schedule() {
+    for (std::vector<Index>& day : locations_by_day_) {
+        day.clear();
+    }
+    state_locations_.assign(world_.states.size(), {});
+    for (std::size_t i = 0; i < world_.locations.size(); ++i) {
+        const Location& loc = world_.locations[i];
+        // Orte ohne Blöcke tragen zu Demografie und Wirtschaft nichts bei.
+        if (loc.pop_count > 0) {
+            locations_by_day_[static_cast<std::size_t>(compute_day(i) - 1)].push_back(static_cast<Index>(i));
+        }
+        if (in_range(world_.states, loc.owner)) {
+            state_locations_[static_cast<std::size_t>(loc.owner)].push_back(static_cast<Index>(i));
+        }
+    }
+}
 
 void Simulation::submit(const Command& command) {
     pending_.push_back(command);
@@ -117,10 +136,10 @@ void Simulation::step_day() {
 
     const std::int32_t day = world_.date.day;
 
-    // 2. Demografie der Orte mit heutigem Rechentag.
-    for (std::size_t i = 0; i < world_.locations.size(); ++i) {
-        if (compute_day(i) == day) {
-            run_demography(static_cast<Index>(i));
+    // 2. Demografie der Orte mit heutigem Rechentag (Tage 29–31 haben keine).
+    if (day <= kStaggerDays) {
+        for (const Index location : locations_by_day_[static_cast<std::size_t>(day - 1)]) {
+            run_demography(location);
         }
     }
 
@@ -263,7 +282,7 @@ void Simulation::run_demography(Index location) {
 void Simulation::run_economy(Index state) {
     State& s = world_.states[static_cast<std::size_t>(state)];
     Fixed income;
-    for (const Index location : world_.state_locations(state)) {
+    for (const Index location : state_locations_[static_cast<std::size_t>(state)]) {
         const Location& loc = world_.locations[static_cast<std::size_t>(location)];
         for (Index p = loc.first_pop; p < loc.first_pop + loc.pop_count; ++p) {
             const PopBlock& pop = world_.pops[static_cast<std::size_t>(p)];
