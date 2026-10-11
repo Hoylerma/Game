@@ -164,6 +164,8 @@ class TestFehler(MitKopie):
     def test_werte(self) -> None:
         faelle = {
             ("besitz.csv", "burg;1648.10.24", "burg;1648.13.24"): "ungültiges Datum '1648.13.24' in Spalte 'ab'",
+            ("besitz.csv", "burg;1648.10.24", "burg;0000.01.01"): "ungültiges Datum '0000.01.01' in Spalte 'ab'",
+            ("orte.csv", "11.00;53.50;250", "11.00;53.50;0.000001"): "Fläche 0.000001 km² ist für den Kern zu klein",
             ("besitz.csv", "burg;1648.10.24;BBB;gesichert", "burg;1648.10.24;BBB;sicher"): "ungültige Sicherheit 'sicher'",
             ("besitz.csv", "burg;1648.10.24;BBB;gesichert;Testquelle", "burg;1648.10.24;BBB;gesichert;"): "Spalte 'quelle' darf nicht leer sein",
             ("bevoelkerung.csv", "lutherisch=90 katholisch=10", "lutherisch=90 katholisch=20"): "ergeben 110 %",
@@ -186,6 +188,28 @@ class TestFehler(MitKopie):
                 self.tearDown()  # frische Kopie je Fall
                 self.setUp()
                 self.ersetze(tabelle, alt, neu)
+                self.erwarte_fehler(text)
+
+    def test_zeilenumbruch_in_zeichenketten(self) -> None:
+        # Zeilenumbrüche (LF wie mit Alt+Enter, auch ein einzelnes CR) sind im CSV erlaubt, in
+        # Zeichenketten des Chronik-Skripts aber nicht (chronik-skript.md 1.1).
+        faelle = {
+            ("kreise.csv", "kr_hafen;nord;Hafen;", 'kr_hafen;nord;"Ha\nfen";'): "Zeilenumbruch in Spalte 'name'",
+            ("orte.csv", "Testdaten, Ort ohne Daten", '"Testdaten,\nOrt ohne Daten"'): "Zeilenumbruch in Spalte 'quelle'",
+            ("orte.csv", "moor;nord;Moor;", 'moor;nord;"Mo\ror";'): "Zeilenumbruch in Spalte 'name'",
+            ("staaten.csv", ";Nordland;", ';"Nord\r\nland";'): "Zeilenumbruch in Spalte 'kurzname'",
+            ("staaten.csv", "Herzogtum Nordland;", '"Herzogtum\rNordland";'): "Zeilenumbruch in Spalte 'name'",
+            ("staaten.csv", "Testdaten mit \\ Rückstrich", '"Testdaten\nmit Umbruch"'): "Zeilenumbruch in Spalte 'quelle'",
+            ("staaten_historie.csv", "herrscher;Herzog Alt;", 'herrscher;"Herzog\rAlt";'): "Zeilenumbruch im Wert für 'herrscher'",
+        }
+        for (tabelle, alt, neu), text in faelle.items():
+            with self.subTest(tabelle=tabelle, neu=neu):
+                self.tearDown()  # frische Kopie je Fall
+                self.setUp()
+                pfad = self.tabelle(tabelle)
+                inhalt = pfad.read_bytes().decode("utf-8")
+                self.assertIn(alt, inhalt)
+                pfad.write_bytes(inhalt.replace(alt, neu, 1).encode("utf-8"))  # ohne Umwandlung der Zeilenenden
                 self.erwarte_fehler(text)
 
     def test_doppelte_eintraege(self) -> None:
@@ -294,6 +318,18 @@ class TestHilfen(unittest.TestCase):
         self.assertIsNone(ar.parse_datum("1700.02.29"))  # kein Schaltjahr
         self.assertIsNone(ar.parse_datum("1648.10.4"))
         self.assertIsNone(ar.parse_datum("1648-10-24"))
+        self.assertIsNone(ar.parse_datum("0000.01.01"))  # wie der Kern: ab Jahr 1
+        self.assertEqual(ar.parse_datum("0001.01.01"), (1, 1, 1))
+
+    def test_festkomma(self) -> None:
+        # Gleiche Rundung wie Fixed::parse im Kern (16 Nachkommabits, kaufmännisch).
+        self.assertEqual(ar.festkomma_roh("1"), 65536)
+        self.assertEqual(ar.festkomma_roh("0.5"), 32768)
+        self.assertEqual(ar.festkomma_roh("-0.5"), -32768)
+        self.assertEqual(ar.festkomma_roh("0.00001"), 1)
+        self.assertEqual(ar.festkomma_roh("0.00000763"), 1)  # 0,50004 → 1
+        self.assertEqual(ar.festkomma_roh("0.0000076"), 0)  # 0,498 → 0
+        self.assertEqual(ar.festkomma_roh("0.000001"), 0)
 
     def test_konfession(self) -> None:
         self.assertEqual(ar.parse_konfession("lutherisch=95 reformiert=5"), [("lutherisch", 95), ("reformiert", 5)])
@@ -302,6 +338,9 @@ class TestHilfen(unittest.TestCase):
 
     def test_chron_text(self) -> None:
         self.assertEqual(ar.chron_text('a "b" \\ c'), '"a \\"b\\" \\\\ c"')
+        self.assertTrue(ar.hat_zeilenumbruch("a\nb"))
+        self.assertTrue(ar.hat_zeilenumbruch("a\rb"))
+        self.assertFalse(ar.hat_zeilenumbruch("a b"))
 
     def test_echte_daten_sind_aktuell(self) -> None:
         daten = Path(__file__).resolve().parent.parent.parent / "data"

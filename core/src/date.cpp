@@ -51,19 +51,15 @@ std::string pad(std::int64_t value, std::size_t width) {
     return text;
 }
 
-// Liest eine Ziffernfolge (1–9 Ziffern) ab pos.
-std::optional<std::int32_t> read_number(std::string_view text, std::size_t& pos) {
-    const std::size_t begin = pos;
+// Liest genau `width` Ziffern ab pos (JJJJ, MM oder TT, Spezifikation 1.5). Steht danach eine
+// weitere Ziffer, scheitert der Aufrufer am fehlenden Punkt bzw. am Textende.
+std::optional<std::int32_t> read_digits(std::string_view text, std::size_t& pos, std::size_t width) {
     std::int32_t value = 0;
-    while (pos < text.size() && text[pos] >= '0' && text[pos] <= '9') {
-        if (pos - begin >= 9) {
+    for (std::size_t i = 0; i < width; ++i, ++pos) {
+        if (pos >= text.size() || text[pos] < '0' || text[pos] > '9') {
             return std::nullopt;
         }
         value = value * 10 + (text[pos] - '0');
-        ++pos;
-    }
-    if (pos == begin) {
-        return std::nullopt;
     }
     return value;
 }
@@ -144,17 +140,17 @@ Date from_day_number(std::int64_t day_number) {
 
 std::optional<Date> parse_date(std::string_view text) {
     std::size_t pos = 0;
-    const auto year = read_number(text, pos);
+    const auto year = read_digits(text, pos, 4);
     if (!year || pos >= text.size() || text[pos] != '.') {
         return std::nullopt;
     }
     ++pos;
-    const auto month = read_number(text, pos);
+    const auto month = read_digits(text, pos, 2);
     if (!month || pos >= text.size() || text[pos] != '.') {
         return std::nullopt;
     }
     ++pos;
-    const auto day = read_number(text, pos);
+    const auto day = read_digits(text, pos, 2);
     if (!day || pos != text.size()) {
         return std::nullopt;
     }

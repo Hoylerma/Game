@@ -348,6 +348,11 @@ TEST_CASE("Lader: ungültige Werte") {
         replace_in_file(dir / "szenarien/westfaelischer_frieden.chron", "1648.10.24", "1648.02.30");
         expect_error(load(dir), "ungültiges Datum '1648.02.30' für 'datum'");
     }
+    SUBCASE("Datum ohne führende Nullen") {
+        // Wie der Archivar: nur JJJJ.MM.TT (Spezifikation 1.5)
+        replace_in_file(dir / "szenarien/westfaelischer_frieden.chron", "1648.10.24", "1648.10.4");
+        expect_error(load(dir), "ungültiges Datum '1648.10.4' für 'datum'");
+    }
     SUBCASE("Lage mit einer Zahl") {
         replace_in_file(dir / kPlacesBra, "{ 13.40 52.52 }", "{ 13.40 }");
         expect_error(load(dir), "'lage' erwartet genau zwei Zahlen", kPlacesBra, 6);

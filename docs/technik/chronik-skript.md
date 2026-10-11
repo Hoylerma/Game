@@ -57,7 +57,7 @@ Fehlermeldungen sind deutsch und haben die Form `datei.chron:Zeile:Spalte: Nachr
 |---|---|---|
 | Ganzzahl | optionales `-`, Ziffern | `12000` |
 | Festkomma | optionales `-`, Ziffern, optional `.` und Nachkommaziffern | `0.10`, `-2.5` |
-| Datum | `JJJJ.MM.TT` | `1648.10.24` |
+| Datum | `JJJJ.MM.TT`: genau vier, zwei und zwei Ziffern, gregorianisch, Jahr 0001–9999 | `1648.10.24`, `0800.12.25` |
 | Wahrheitswert | `ja`/`nein` (auch `yes`/`no`, `wahr`/`falsch`) | `stadt = ja` |
 | Farbe | Block mit drei Ganzzahlen 0–255 | `farbe = { 58 95 143 }` |
 | Verweis | Bezeichner eines anderen Objekts | `besitzer = BRA` |

@@ -13,7 +13,7 @@ python3 tools/archivar/archivar.py              # prüfen und data/history/ schr
 python3 tools/archivar/archivar.py --pruefen    # ist data/history/ aktuell? (wie in der CI)
 python3 tools/archivar/archivar.py --bericht    # Umfang, Sicherheit der Angaben, Szenarien
 python3 tools/archivar/archivar.py --daten DIR  # anderer Datenordner
-python3 -m unittest discover -s tools/archivar -v   # 31 Tests
+python3 -m unittest discover -s tools/archivar -v   # 33 Tests
 ```
 
 Exitcodes: `0` in Ordnung, `1` `data/history/` ist nicht aktuell (`--pruefen`), `2` Fehler in den
@@ -53,5 +53,5 @@ Werte werden als Text aus der Tabelle übernommen (keine Gleitkomma-Umwandlung).
 - `kreise.csv` erzeugt `history/kreise/<datei>.chron`; die Spalte `kreis` in `orte.csv` verweist
   darauf. Orte ohne Kreis und Kreise ohne Orte sind Warnungen (Orte ohne Kreis als eine
   Sammelwarnung).
-- Leistung: Mit den Daten von M3 (4.541 Orte, 627 Kreise, 170 Dateien) dauert `--pruefen` etwa
+- Leistung: Mit den Daten von M3 (4.542 Orte, 626 Kreise, 170 Dateien) dauert `--pruefen` etwa
   0,2 s.

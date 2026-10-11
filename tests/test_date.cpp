@@ -116,15 +116,18 @@ TEST_CASE("Datum: Rundreise über den ganzen gültigen Bereich (grob)") {
 
 TEST_CASE("Datum: parse_date") {
     CHECK(uhrwerk::parse_date("1648.10.24") == Date{1648, 10, 24});
-    CHECK(uhrwerk::parse_date("1648.1.5") == Date{1648, 1, 5});
     CHECK(uhrwerk::parse_date("1648.01.05") == Date{1648, 1, 5});
     CHECK(uhrwerk::parse_date("0800.12.25") == Date{800, 12, 25});
     CHECK(uhrwerk::parse_date("1600.02.29") == Date{1600, 2, 29});
+    CHECK(uhrwerk::parse_date("0001.01.01") == Date{1, 1, 1});
+    CHECK(uhrwerk::parse_date("9999.12.31") == Date{9999, 12, 31});
+    // Streng JJJJ.MM.TT wie in der Spezifikation 1.5 und im Archivar: genau 4, 2 und 2 Ziffern, Jahr ab 1.
     for (const char* text : {"",           "1648",        "1648.10",           "1648.10.",    "1648.10.24.",
                              "1648-10-24", "24.10.1648x", "1700.02.29",        "1648.13.01",  "1648.00.10",
                              "1648.04.31", "abcd.10.24",  " 1648.10.24",       "1648.10.24 ", "-1648.10.24",
                              "1648.-1.10", "+1648.10.24", "99999999999.01.01", "10000.01.01", "0.01.01",
-                             "1648..24"}) {
+                             "1648..24",   "1648.1.5",    "1701.1.18",         "1648.01.5",   "1648.1.05",
+                             "800.12.25",  "01648.10.24", "1648.010.24",       "1648.10.024", "0000.01.01"}) {
         INFO("Eingabe: '" << text << "'");
         CHECK_FALSE(uhrwerk::parse_date(text).has_value());
     }

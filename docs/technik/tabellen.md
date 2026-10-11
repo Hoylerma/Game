@@ -22,9 +22,12 @@ data/tabellen/
 - **CSV mit Semikolon**, UTF-8 (BOM erlaubt), erste Zeile ist die Kopfzeile mit genau den unten
   genannten Spalten in dieser Reihenfolge. Werte mit Semikolon, Anführungszeichen oder
   Zeilenumbruch stehen in `"…"`, Anführungszeichen darin werden verdoppelt (`""`). So speichern
-  LibreOffice Calc und Excel mit „Trennzeichen: Semikolon“.
+  LibreOffice Calc und Excel mit „Trennzeichen: Semikolon“. Mehrzeilig darf nur der `kommentar` in
+  `dateien.csv` sein; Namen, Kurznamen, Herrscher und Quellen werden Zeichenketten im
+  Chronik-Skript und dürfen keinen Zeilenumbruch (auch kein einzelnes CR) enthalten.
 - Leerzeichen am Anfang und Ende eines Werts werden entfernt; leere Zeilen werden übergangen.
-- **Zahlen mit Dezimalpunkt** (`0.25`, nicht `0,25`), **Daten gregorianisch** als `JJJJ.MM.TT`.
+- **Zahlen mit Dezimalpunkt** (`0.25`, nicht `0,25`), **Daten gregorianisch** als `JJJJ.MM.TT`
+  (genau vier, zwei und zwei Ziffern, Jahr ab 0001 – wie der Kern).
 - Die **Reihenfolge der Zeilen** in `orte.csv` und `staaten.csv` bestimmt die Reihenfolge in den
   erzeugten Dateien und damit (zusammen mit dem Dateinamen) die Indizes im Spiel und die
   Kartenindizes. Verweise laufen trotzdem immer über Kennungen.
@@ -131,6 +134,11 @@ Je Staat, Datum und Feld höchstens eine Zeile.
 
 - Kopfzeile, Spaltenzahl, UTF-8
 - Form von Kennungen, Tags, Dateinamen, Zahlen, Daten, Farben, `ja`/`nein`
+- Zeilenumbruch in einem Wert, der als Zeichenkette ins Chronik-Skript geht (`name`, `kurzname`,
+  `quelle` in `staaten.csv`, `kreise.csv`, `orte.csv`; `name`, `kurzname`, `herrscher` in
+  `staaten_historie.csv`)
+- Fläche nicht größer als 0, auch so klein, dass sie im Festkomma des Kerns 0 wird (unter
+  etwa 0,0000076 km²)
 - doppelte Orte, Staaten und doppelte Einträge je Datum
 - unbekannte Verweise (Orte, Staaten, Gelände, Konfessionen, Felder)
 - Wertebereiche (Verwüstung 0–1, Steuersatz bis `steuersatz_max` aus `common/regeln.chron`,

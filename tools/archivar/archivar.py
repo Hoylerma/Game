@@ -27,6 +27,7 @@ import re
 import sys
 from collections import Counter
 from dataclasses import dataclass, field
+from fractions import Fraction
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "kartengenerator"))
@@ -70,6 +71,7 @@ RE_KENNUNG = re.compile(r"[a-z][a-z0-9_]*")
 RE_DATUM = re.compile(r"(\d{4})\.(\d{2})\.(\d{2})")
 RE_DEZIMAL = re.compile(r"-?\d+(\.\d+)?")
 RE_GANZZAHL = re.compile(r"\d+")
+FESTKOMMA_EINS = 65536  # Festkomma des Kerns: 16 Nachkommabits (core/include/uhrwerk/fixed.hpp)
 
 # Schwellen für Warnungen (Ausreißer); bewusst großzügig, sie sollen Tippfehler finden.
 FLAECHE_MIN_KM2 = 10.0
@@ -107,12 +109,12 @@ Datum = tuple[int, int, int]
 
 
 def parse_datum(text: str) -> Datum | None:
-    """JJJJ.MM.TT im gregorianischen Kalender, sonst None."""
+    """JJJJ.MM.TT im gregorianischen Kalender ab dem Jahr 1 (wie der Kern), sonst None."""
     m = RE_DATUM.fullmatch(text)
     if not m:
         return None
     jahr, monat, tag = (int(g) for g in m.groups())
-    if not 1 <= monat <= 12 or tag < 1:
+    if jahr < 1 or not 1 <= monat <= 12 or tag < 1:
         return None
     schalt = jahr % 4 == 0 and (jahr % 100 != 0 or jahr % 400 == 0)
     tage = (31, 29 if schalt else 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31)[monat - 1]
@@ -128,8 +130,25 @@ def jahre_zwischen(a: Datum, b: Datum) -> float:
 
 
 def chron_text(text: str) -> str:
-    """Zeichenkette für das Chronik-Skript mit Escapes für \\ und \"."""
+    """Zeichenkette für das Chronik-Skript mit Escapes für \\ und \".
+
+    Zeilenumbrüche sind in Zeichenketten nicht erlaubt (chronik-skript.md 1.1); die Prüfung dafür
+    steht in _einzeilig bzw. _pruefe_staatswert.
+    """
     return '"' + text.replace("\\", "\\\\").replace('"', '\\"') + '"'
+
+
+def hat_zeilenumbruch(text: str) -> bool:
+    """LF oder CR: beides beendet im Kern eine Zeichenkette mit Fehler."""
+    return "\n" in text or "\r" in text
+
+
+def festkomma_roh(text: str) -> int:
+    """Rohwert, den der Kern beim Lesen als Festkomma speichert (Fixed::parse: kaufmännisch gerundet)."""
+    wert = Fraction(text) * FESTKOMMA_EINS
+    betrag = abs(wert)
+    roh = int(betrag) + (1 if betrag - int(betrag) >= Fraction(1, 2) else 0)
+    return -roh if wert < 0 else roh
 
 
 # ─── Tabellen lesen ─────────────────────────────────────────────────────────
@@ -296,6 +315,14 @@ def _pflicht(z: Zeile, spalte: str, m: Meldungen) -> bool:
     return True
 
 
+def _einzeilig(z: Zeile, spalte: str, m: Meldungen) -> bool:
+    """Werte, die als Zeichenkette ins Chronik-Skript gehen, dürfen keinen Zeilenumbruch enthalten."""
+    if hat_zeilenumbruch(z[spalte]):
+        m.fehler_bei(z.datei, z.nr, f"Zeilenumbruch in Spalte '{spalte}' (im Chronik-Skript nicht erlaubt)")
+        return False
+    return True
+
+
 def _herkunft(z: Zeile, m: Meldungen) -> None:
     if z["sicherheit"] not in SICHERHEIT:
         m.fehler_bei(
@@ -358,7 +385,8 @@ def baue_archiv(tabellen: Path, bezug: Bezug, m: Meldungen) -> Archiv:
         if not RE_DATEI.fullmatch(z["datei"]):
             m.fehler_bei(z.datei, z.nr, f"ungültiger Dateiname '{z['datei']}' (A–Z, a–z, 0–9, _)")
         for spalte in ("name", "kurzname", "quelle"):
-            _pflicht(z, spalte, m)
+            if _pflicht(z, spalte, m):
+                _einzeilig(z, spalte, m)
         farbe = z["farbe"].split()
         if len(farbe) != 3 or not all(RE_GANZZAHL.fullmatch(f) and int(f) <= 255 for f in farbe):
             m.fehler_bei(z.datei, z.nr, f"ungültige Farbe '{z['farbe']}' (erwartet drei Zahlen 0–255, z. B. 58 95 143)")
@@ -375,7 +403,8 @@ def baue_archiv(tabellen: Path, bezug: Bezug, m: Meldungen) -> Archiv:
         if not RE_ORT.fullmatch(z["datei"]):
             m.fehler_bei(z.datei, z.nr, f"ungültiger Dateiname '{z['datei']}' (a–z, 0–9, _)")
         for spalte in ("name", "quelle"):
-            _pflicht(z, spalte, m)
+            if _pflicht(z, spalte, m):
+                _einzeilig(z, spalte, m)
         archiv.kreise[z["id"]] = z
 
     # Stammdaten der Orte
@@ -390,7 +419,8 @@ def baue_archiv(tabellen: Path, bezug: Bezug, m: Meldungen) -> Archiv:
         if not RE_ORT.fullmatch(z["datei"]):
             m.fehler_bei(z.datei, z.nr, f"ungültiger Dateiname '{z['datei']}' (a–z, 0–9, _)")
         for spalte in ("name", "quelle"):
-            _pflicht(z, spalte, m)
+            if _pflicht(z, spalte, m):
+                _einzeilig(z, spalte, m)
         if z["gelaende"] not in bezug.gelaende:
             m.fehler_bei(z.datei, z.nr, f"unbekanntes Gelände '{z['gelaende']}' (common/gelaende.chron)")
         laenge = _dezimal(z, "laenge", -180, 180, m)
@@ -403,6 +433,13 @@ def baue_archiv(tabellen: Path, bezug: Bezug, m: Meldungen) -> Archiv:
         if flaeche is not None:
             if flaeche <= 0:
                 m.fehler_bei(z.datei, z.nr, "Fläche muss größer als 0 sein")
+            elif festkomma_roh(z["flaeche"]) == 0:
+                # Der Kern liest die Fläche als Festkomma mit 16 Nachkommabits; so klein wird sie 0.
+                m.fehler_bei(
+                    z.datei,
+                    z.nr,
+                    f"Fläche {z['flaeche']} km² ist für den Kern zu klein (Festkomma rundet auf 0; mindestens 0.00001)",
+                )
             elif not FLAECHE_MIN_KM2 <= flaeche <= FLAECHE_MAX_KM2:
                 m.warnung_bei(z.datei, z.nr, f"ungewöhnliche Fläche {z['flaeche']} km² für Ort {z['id']}")
         if z["stadt"] not in ("ja", "nein"):
@@ -540,7 +577,7 @@ def _pruefe_staatswert(z: Zeile, feld_name: str, wert: str, archiv: Archiv, bezu
         return _dezimal(z, "wert", 0, bezug.steuersatz_max, m, wert) is not None
     if feld_name == "hofhaltung":
         return _dezimal(z, "wert", 0, 1e12, m, wert) is not None
-    if feld_name in TEXT_FELDER and "\n" in wert:
+    if feld_name in TEXT_FELDER and hat_zeilenumbruch(wert):
         m.fehler_bei(z.datei, z.nr, f"Zeilenumbruch im Wert für '{feld_name}'")
         return False
     return True
