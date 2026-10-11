@@ -1,11 +1,11 @@
-# Bevölkerung (Meilenstein M4) – Entwurf
+# Bevölkerung (Meilenstein M4)
 
-> **Status: Entwurf zur Abstimmung.** Dieses Dokument beschreibt, wie M4 „Bevölkerung und
-> Lasttest“ ([meilensteine.md](../meilensteine.md#m4--bevölkerung-und-lasttest)) gebaut werden
-> soll: Datenmodell, Ablauf, Formeln, Mehrkernberechnung, Lasttest und Abnahme. Nach der Freigabe
-> wird es verbindlich wie [chronik-skript.md](chronik-skript.md); Abweichungen bei der Umsetzung
-> werden hier nachgetragen. Abschnitt 12 sammelt die Entscheidungen, die vor dem Start bestätigt
-> werden sollen.
+> **Status: verbindlich** für Kern (`core/src/population.cpp`, `core/src/simulation.cpp`), Daten und
+> Tests, wie [chronik-skript.md](chronik-skript.md). Das Dokument entstand als Entwurf für M4
+> „Bevölkerung und Lasttest“ ([meilensteine.md](../meilensteine.md#m4--bevölkerung-und-lasttest))
+> und wurde vor der Umsetzung freigegeben; Abweichungen der Umsetzung vom Entwurf sind eingearbeitet
+> (u. a. Formeln in Abschnitt 4 in der exakten Rechenreihenfolge, paralleles Buchen der Wanderung,
+> kalibrierte Werte in Abschnitt 4.9). Abschnitt 12 hält die bestätigten Entscheidungen fest.
 
 Das Design dahinter steht in [07 Bevölkerung und Gesellschaft](../07_bevoelkerung_und_gesellschaft.md)
 und [02 Engine und Technik](../02_engine_und_technik.md), Abschnitte 5.2–5.5.
@@ -90,9 +90,11 @@ Altersgruppen **innerhalb** jedes Blocks zu führen:
 | **Momentaufnahme** (`LocationSnapshot`) | Bevölkerung, Landreserve, Ziel-Lebensstandard je Beruf | wird von **anderen** Orten gelesen (Wanderung); Abschnitt 5 |
 | **Bilanz** laufendes Jahr und Vorjahr | Geburten, Sterbefälle, Seuchentote, Zuzug, Wegzug, Auswanderung | Anzeige, Statistik, exakte Buchführung (Test) |
 | **Steuern des Monats** | Produktion und Steuern beim letzten Rechentag | Staatseinnahmen (Abschnitt 4.6) |
-| **Zugänge** (`Arrival`) | Zugezogene, für die es im Ort noch keinen Block gibt | werden bei der Neuordnung zu Blöcken |
+| **Zugänge** (`arrivals[ort]`) | Zugezogene, für die es im Ort noch keinen Block gibt (je Ort eine Liste, Felder wie ein Block) | werden bei der Neuordnung zu Blöcken |
 
-Diese Daten gehören zum Zustand (Prüfsumme, später Spielstand) und liegen im `World`.
+Diese Daten gehören zum Zustand (Prüfsumme, später Spielstand) und liegen im `World`
+(`snapshots`, `snapshot_targets`, `balance_current`, `balance_previous`, `economy`, `arrivals`). Der
+Lader lässt sie leer; die Simulation füllt sie beim Start aus dem Anfangszustand.
 Abgeleitete Hilfsdaten, die sich aus dem unveränderlichen Inhalt ergeben – Orte je Rechentag,
 Orte je Staat, Wanderungsziele –, hält die `Simulation`.
 
@@ -138,7 +140,7 @@ Blöcke mit Größe unter `block_mindestgroesse` werden beim Start wie bei der N
 | 2 | **Jahresabschluss**: Bilanz des Jahres wird Bilanz des Vorjahres | 1. Januar | – |
 | 3 | **Neuordnung**: Zugänge werden Blöcke, zu kleine Blöcke aufgelöst (nur wenn nötig) | Monatserster | – |
 | 4 | **Bevölkerung** der Orte mit heutigem Rechentag: Lebensstandard, Geburten, Sterbefälle, Altern, Bildung, Wanderung, Steuern, Momentaufnahme | Ort *i* am Tag `(i % 28) + 1` | ✔ |
-| 5 | **Zusammenführen**: Momentaufnahmen veröffentlichen, Wanderung buchen | nach Schritt 4 | – |
+| 5 | **Zusammenführen**: Momentaufnahmen veröffentlichen (nacheinander), Wanderung je Zielort buchen | nach Schritt 4 | ✔ (Buchen) |
 | 6 | Wirtschaft der Staaten mit heutigem Rechentag | Staat *j* am Tag `(j % 28) + 1` | – |
 | 7 | Jahreswechsel: Seuchen, Abbau der Verwüstung | 1. Januar | – |
 | 8 | Datum weiterschalten | jeden Tag | – |
@@ -148,9 +150,10 @@ prüfen, hält die Simulation je Rechentag die Liste der Orte **mit Daten** (auf
 
 ## 4. Formeln
 
-Alle Rechnungen in `Fixed`, in der angegebenen Reihenfolge. Jahreswerte aus `regeln.chron`
-werden beim Laden einmal in Monatswerte umgerechnet: `x_monat = x / 12`. In der Schleife über die
-Blöcke steht keine Division mehr, außer bei der Wanderung (Abschnitt 4.5).
+Alle Rechnungen in `Fixed`, **genau in der angegebenen Reihenfolge** (Festkomma rundet bei jeder
+Operation: `a × b / c` ist nicht `a × (b / c)`). Regelwerte sind Jahreswerte aus `regeln.chron`; die
+Umrechnung auf einen Monat steht in den Formeln. Konstanten: `1/180` und `1/420` als
+`Fixed::from_ratio`, `bildung_anpassung / 12` einmal beim Start der Simulation berechnet.
 
 ### 4.1 Vorberechnung je Ort (am Rechentag, vor den Blöcken)
 
@@ -184,31 +187,34 @@ Bauern 50, Handwerker 62, Geistlichkeit 71, Bürger 77, Adel 87.
 ### 4.3 Geburten, Sterbefälle, Altern (je Block)
 
 Alle Größen werden aus dem Stand **vor** dem Schritt berechnet (k, j, e, a = Kinder, Jung,
-Erwerbsalter, Alt):
+Erwerbsalter, Alt), mit dem Lebensstandard L nach 4.2:
 
 ```
-s     = clamp(1 + sterblichkeit_armut × (50 − L) / 50, 0.5, 2)      Sterblichkeit nach Lebensstandard
-f     = fruchtbarkeit_monat × (1 + fruchtbarkeit_landreserve × reserve)
-                            × (1 + fruchtbarkeit_wohlstand × (L − 50) / 50)
-geb   = (j + e × anteil_fruchtbar_erwerb) × f
-tk    = k × sterblichkeit_kinder_monat × s     (ebenso tj, te, ta)
-ak    = k × 1/180      aj = j × 1/180      ae = e × 1/420               Altern (15, 15, 35 Jahre)
+d      = (L − 50) / 50                                          −1 … +1
+s      = clamp(1 − sterblichkeit_armut × d, 1/2, 2)               Sterblichkeit nach Lebensstandard
+s_m    = s / 12
+w      = max(0, 1 + fruchtbarkeit_wohlstand × d)
+f_ort  = fruchtbarkeit × (1 + fruchtbarkeit_landreserve × reserve)          einmal je Ort
+f_m    = f_ort × w / 12
+geb    = (j + e × anteil_fruchtbar_erwerb) × f_m
+tk     = k × sterblichkeit_kinder × s_m     (ebenso tj, te, ta mit _jung, _erwerb, _alt)
+ak     = k × 1/180      aj = j × 1/180      ae = e × 1/420                  Altern (15, 15, 35 Jahre)
 k ← k + geb − tk − ak
 j ← j + ak − tj − aj
 e ← e + aj − te − ae
 a ← a + ae − ta
 ```
 
-`(50 − L) / 50` und `(L − 50) / 50` werden als Multiplikation mit vorab berechneten Regelwerten
-geschrieben. Keine Altersgruppe wird negativ: Alle Abgänge einer Altersgruppe zusammen (auch mit
-Wanderung, Abschnitt 4.5) liegen selbst bei `s = 2` unter 2 % je Monat, und die Multiplikation
-rundet ab. Bilanz: `geburten += geb`, `sterbefaelle += tk+tj+te+ta`.
+Keine Altersgruppe wird negativ: Alle Abgänge einer Altersgruppe zusammen (auch mit Wanderung,
+Abschnitt 4.5) liegen selbst bei den Höchstwerten der Regeln unter 100 % je Monat, und
+Multiplikation und Division runden ab bzw. schneiden ab. Bilanz: `geburten += geb`,
+`sterbefaelle += tk + tj + te + ta`.
 
 ### 4.4 Bildung (je Block)
 
 ```
-ziel  = min(1, beruf.bildung × konfession.bildung × (stadt ? bildung_stadt : 1) × (50 + L) / 100)
-A    ← A + (ziel − A) × bildung_anpassung_monat
+ziel  = clamp(beruf.bildung × konfession.bildung × (stadt ? bildung_stadt : 1) × (50 + L) / 100, 0, 1)
+A    ← A + (ziel − A) × (bildung_anpassung / 12)
 ```
 
 Ohne Schulgesetze (M8) ändert sich die Alphabetisierung in M4 über den Lebensstandard (wer mehr
@@ -224,16 +230,22 @@ als `(Δlänge × cos 51°)² + Δbreite²` ohne Wurzel; bei Gleichstand der kle
 Nur die Altersgruppe **Jung** (15–29) wandert – Gesinde, Gesellen, junge Paare.
 
 ```
+j               = Jung nach 4.3
 beruf am Ziel   b' = (ziel.stadt und b.in_stadt gesetzt) ? b.in_stadt : b
 anziehung(o, b) = ziel_b(o) + (b.agrar ? wanderung_landreserve × reserve(o) : 0)
-für jedes Ziel z:
-  diff_z  = max(0, anziehung(z, b') − anziehung(hier, b))     z aus der Momentaufnahme, hier aktuell
-  strom_z = j × wanderung_rate_monat × diff_z / 100 × (besitzer verschieden ? wanderung_fremd : 1)
-summe = Σ strom_z;  falls summe > j × wanderung_max_monat: jeden strom_z mit (j × wanderung_max_monat) / summe skalieren
+für jedes Ziel z (nach Abstand aufsteigend):
+  diff_z  = anziehung(z, b') − anziehung(hier, b)        z aus der Momentaufnahme, hier aktuell
+  strom_z = diff_z > 0 ? j × wanderung_rate × diff_z / 1200 : 0
+  strom_z = strom_z × wanderung_fremd,  wenn z einem anderen Staat gehört
+summe = Σ strom_z
+grenze = j × wanderung_max / 12
+falls summe > grenze: strom_z = strom_z × grenze / summe
 Ströme unter wanderung_mindestmenge entfallen (die Menschen bleiben)
-auswanderung = j × auswanderung_rate_monat × max(0, auswanderung_schwelle − L) / 100
+auswanderung = L < auswanderung_schwelle ? j × auswanderung_rate × (auswanderung_schwelle − L) / 1200 : 0
 j ← j − Σ strom_z − auswanderung
 ```
+
+`/ 1200` rechnet eine Jahresrate je 100 Punkte in eine Monatsrate je Punkt um.
 
 Jeder Strom kommt als Eintrag in den **Ausgang** des Ortes: Zielort, Beruf am Ziel, Konfession,
 Kultur, Menge, Lebensstandard und Alphabetisierung des Herkunftsblocks. Auswanderung verlässt die
@@ -247,24 +259,33 @@ Abzugsgeld).
 Am Rechentag des Ortes, mit den Werten aus 4.1:
 
 ```
-produktion_monat = Σ größe × ertrag_b / 12      (Blöcke aufsteigend)
-steuern_monat    = Σ größe × ertrag_b / 12 × staat.steuersatz   (nur steuerpflichtige Berufe)
+ertrag_monat_b   = ertrag_b / 12                                   einmal je Ort und Beruf
+produziert       = größe × ertrag_monat_b                          Größe vor diesem Schritt
+produktion_monat = Σ produziert                                     (Blöcke aufsteigend)
+steuern_monat    = Σ produziert × staat.steuersatz                 (nur steuerpflichtige Berufe)
 ```
 
-Die Wirtschaft eines Staates summiert an **seinem** Rechentag die zuletzt berechneten
+Die Wirtschaft eines Staates summiert an **seinem** Rechentag die zuletzt festgestellten
 `steuern_monat` seiner Orte (aufsteigend), statt alle Blöcke neu zu rechnen. Hofhaltung und Kasse
-wie in M1. Geändert gegenüber M1: der Agrarfaktor `agrar_b` und der Zeitpunkt (Steuern werden am
-Rechentag des Ortes festgestellt). `location_economy()` rechnet für die Anzeige weiter frisch.
+wie in M1. Geändert gegenüber M1: der Agrarfaktor `agrar_b`, die Rechenreihenfolge und der
+Zeitpunkt (Steuern werden am Rechentag des Ortes festgestellt). `location_economy()` gibt die
+Werte des letzten Rechentags zurück; beim Start rechnet die Simulation sie einmal aus dem
+Anfangszustand.
 
 ### 4.7 Zusammenführen und Neuordnung
 
-**Zusammenführen** (Schritt 5, nacheinander): für jeden Ort des Tages aufsteigend
+**Zusammenführen** (Schritt 5):
 
-1. Momentaufnahme veröffentlichen (Abschnitt 5.1).
-2. Ausgang in Reihenfolge buchen: Gibt es im Zielort einen Block mit gleichem Schlüssel, kommen
-   die Menschen in dessen Altersgruppe Jung; Lebensstandard und Alphabetisierung werden nach
-   Personen gewichtet gemittelt. Sonst: Menge ≥ `block_mindestgroesse` → Zugang (gleicher Schlüssel
-   im selben Ort wird zusammengefasst); kleiner → in den ähnlichsten Block. Bilanz `zuzug`/`wegzug`.
+1. Nacheinander für jeden Ort des Tages aufsteigend: Momentaufnahme veröffentlichen
+   (Abschnitt 5.1) und die Einträge seines Ausgangs dem jeweiligen Zielort zuordnen. Jeder
+   Zielort hat damit eine Eingangsliste in fester Reihenfolge: Herkunftsorte aufsteigend, darin
+   die Einträge in ihrer Reihenfolge.
+2. Je Zielort die Eingangsliste in Reihenfolge buchen: Gibt es im Zielort einen Block mit gleichem
+   Schlüssel, kommen die Menschen in dessen Altersgruppe Jung; Lebensstandard und
+   Alphabetisierung werden nach Personen gewichtet gemittelt. Sonst: Menge unter
+   `block_mindestgroesse` → in den ähnlichsten Block des Zielortes; sonst ein Zugang (gleicher
+   Schlüssel im selben Ort wird zusammengefasst). Bilanz `zuzug` beim Ziel, `wegzug` beim
+   Herkunftsort. Verschiedene Zielorte sind voneinander unabhängig und werden parallel gebucht.
 
 **Neuordnung** (Schritt 3, am Monatsersten, nur wenn es Zugänge oder zu kleine Blöcke gibt), Orte
 aufsteigend:
@@ -292,16 +313,16 @@ Wie in M1 (Seuche mit dem Strom `Ereignisse`, Abbau der Verwüstung, Orte ohne D
 | Feld | Startwert | Bedeutung |
 |---|---|---|
 | `anteil_kinder` / `anteil_jung` / `anteil_erwerb` | 0,34 / 0,26 / 0,33 | Altersaufbau beim Start (Rest: Alte) |
-| `fruchtbarkeit` | 0,095 | Geburten je Person im fruchtbaren Alter und Jahr |
+| `fruchtbarkeit` | 0,088 | Geburten je Person im fruchtbaren Alter und Jahr (kalibriert, Entwurf: 0,095) |
 | `anteil_fruchtbar_erwerb` | 0,4 | Anteil der 30–64-Jährigen im fruchtbaren Alter |
 | `fruchtbarkeit_landreserve` | 0,3 | Zuschlag bei voller Landreserve |
 | `fruchtbarkeit_wohlstand` | 0,15 | Zu- oder Abschlag je 50 Punkte Lebensstandard |
 | `sterblichkeit_kinder` / `_jung` / `_erwerb` / `_alt` | 0,045 / 0,010 / 0,018 / 0,11 | jährliche Sterblichkeit je Altersgruppe |
 | `sterblichkeit_armut` | 0,3 | Zu- oder Abschlag je 50 Punkte Lebensstandard |
-| `tragfaehigkeit_stadt` | 3 | Faktor der Tragfähigkeit für Städte (Markt, Handel, Gewerbe) |
+| `tragfaehigkeit_stadt` | 1,75 | Faktor der Tragfähigkeit für Städte mit Amt (kalibriert, Entwurf: 3) |
 | `lebensstandard_bezug` | 12 | Netto-Einkommen (Taler pro Kopf und Jahr) für Lebensstandard 50 |
 | `lebensstandard_anpassung` | 0,25 | Anteil der Lücke zum Ziel je Monat |
-| `bildung_stadt` / `bildung_anpassung` | 1,5 / 0,03 | Stadtfaktor; Anteil der Lücke je Jahr |
+| `bildung_stadt` / `bildung_anpassung` | 1,25 / 0,03 | Stadtfaktor; Anteil der Lücke je Jahr |
 | `wanderung_ziele` / `wanderung_radius_km` | 4 / 60 | Ziele je Ort |
 | `wanderung_rate` / `wanderung_max` | 0,3 / 0,12 | Anteil der Jungen je Jahr bei 100 Punkten Unterschied; Obergrenze je Jahr |
 | `wanderung_landreserve` / `wanderung_fremd` | 20 / 0,5 | Punkte für freies Land; Faktor über Landesgrenzen |
@@ -312,13 +333,23 @@ Die **Tragfähigkeit** je Gelände liegt beim 1,8-Fachen der Dichte von 1648 auf
 (gemessen an den 60 Orten mit Daten: 10–33 Einwohner je km²), z. B. Börde 60, Hügelland 50,
 Flussaue 45, Flachland 30, Heide, Bruch und Seenplatte 20.
 
-**Kalibrierung.** Eine Überschlagsrechnung (Gleitkomma, ein Ort mit mittleren Werten, Verwüstung
-0,5) ergibt mit diesen Werten: Geburtenrate 38–41 ‰, Sterberate etwa 34 ‰ (typisch für die Frühe
-Neuzeit), Bevölkerung ×1,34 bis
-1700 (Ziel aus Kapitel 07: 11 → 14,5 Mio., ×1,32) und ×2,0 bis 1816 (Ziel ×2,3; die Lücke
-schließt später die steigende Tragfähigkeit). Der Altersaufbau bleibt stabil (Kinder 33–36 %,
-Alte 7–8 %). Die endgültigen Werte legt die Umsetzung mit dem echten Kern fest; ein Test prüft
-den Bereich (Abschnitt 8).
+**Kalibrierung.** Die Werte sind mit dem Kern und den echten Daten (60 Orte der Testregion,
+Seed 1648) abgestimmt; ein Test prüft den Bereich (Abschnitt 8). Zielwerte aus Kapitel 07,
+Abschnitt 7.3: 1648 → 1700 rund ×1,32 (11 → 14,5 Mio.), 1700 → 1816 rund ×1,72 (→ 25 Mio.).
+
+| Jahr | Bevölkerung | Faktor seit 1648 | Geburten | Sterbefälle | Seuchen | Wanderung | Alphabetisierung |
+|---|---|---|---|---|---|---|---|
+| 1648 | 384.000 | ×1,00 | – | – | – | – | 31 % |
+| 1700 | 496.000 | ×1,29 | 37,8 ‰ | 31,7 ‰ | Einzeljahr | 1,1 ‰ | 38 % |
+| 1750 | 646.000 | ×1,68 | 36,8 ‰ | 31,1 ‰ | Einzeljahr | 0,8 ‰ | 44 % |
+| 1816 | 897.000 | ×2,33 | 35,9 ‰ | 30,5 ‰ | Einzeljahr | 0,7 ‰ | 53 % |
+
+Der Altersaufbau bleibt stabil (Kinder 32–34 %, Alte 7–9 %), der mittlere Lebensstandard steigt
+mit dem Abbau der Kriegsverwüstung von 43 auf 60. Die Abstimmung (Parametervergleich
+Fruchtbarkeit 0,082–0,088 × Stadtfaktor 1,5–2 × Armut 0,3–0,6 × Wohlstand 0,15–0,3) zeigte: Die
+Wachstumsrate hängt vor allem an Fruchtbarkeit und Stadtfaktor; ein höheres Gewicht des
+Lebensstandards beschleunigt das Wachstum, weil der Lebensstandard mit dem Wiederaufbau steigt.
+Hungerkrisen und Kriege (M11) fehlen noch; sie bremsen das Wachstum später zusätzlich.
 
 ## 5. Mehrkernberechnung
 
@@ -333,9 +364,14 @@ Das Ergebnis darf nicht von der Zahl der Threads abhängen. Das gilt, wenn jede 
    Momentaufnahmen anderer Orte.
 
 Dann ist jede Aufgabe eine reine Funktion ihrer Eingaben, und es ist gleich, welcher Thread sie
-wann rechnet. Alles, was Orte verbindet – Wanderung buchen, Momentaufnahmen veröffentlichen,
-Staatseinnahmen summieren, Neuordnung, Seuchen –, läuft danach **nacheinander in fester
+wann rechnet. Alles, was Orte verbindet – Momentaufnahmen veröffentlichen, Ströme den Zielorten
+zuordnen, Staatseinnahmen summieren, Neuordnung, Seuchen –, läuft danach **nacheinander in fester
 Reihenfolge** (Orte aufsteigend, Einträge in Reihenfolge).
+
+Das **Buchen** der Wanderung folgt derselben Regel aus Sicht der Zielorte: Jede Aufgabe bucht die
+Eingangsliste genau eines Zielortes in fester Reihenfolge und schreibt nur dessen Blöcke,
+Zugänge und Bilanz. Gemessen ist das nötig: Mit 370.000 Blöcken entstehen rund 2,9 Mio. Ströme
+im Jahr; nacheinander gebucht kosteten sie 44 % der Rechenzeit.
 
 Die veröffentlichte Momentaufnahme eines Ortes ist die von seinem letzten Rechentag. Welcher Stand
 das ist, hängt nur vom Kalender ab, nicht von den Threads.
@@ -351,6 +387,10 @@ bitgleich; der Kern bildet sie trotzdem in fester Reihenfolge, damit die Regel e
   rechnet, ist zufällig – das ist erlaubt, weil nach 5.1 das Ergebnis davon nicht abhängt.
 - Der Haupt-Thread rechnet mit. Am Ende der Phase warten alle (Barriere), dann folgt Schritt 5.
 - Mit einem Thread (oder unter 2 Paketen) läuft alles ohne Thread-Wechsel im Haupt-Thread.
+- Das Buchen der Wanderung teilt die Zielorte in Pakete zu 16, aber erst ab 2.048 Strömen am Tag;
+  darunter kostet das Wecken der Threads mehr, als es bringt (gemessen mit den 60 Orten der
+  Testregion: sonst dreifache Laufzeit mit vier Threads). Paketgrößen und Schwelle beeinflussen
+  nur die Laufzeit, nie das Ergebnis.
 
 ### 5.3 Thread-Pool
 
@@ -371,7 +411,8 @@ Regel für später: Braucht eine parallele Aufgabe Zufall, bekommt sie einen eig
 ### 5.5 Prüfung
 
 - Unit-Test: dieselbe Partie mit 1, 2, 3, 4 und 8 Threads → gleiche Prüfsumme nach jedem Jahr
-  (Testdaten und eine kleine Lasttest-Welt).
+  (600 Orte aus vervielfachten Testdaten, damit mehrere Pakete je Tag entstehen).
+- `uhrwerk-cli determinismus` rechnet Lauf A mit allen Kernen und Lauf B mit einem Thread.
 - `uhrwerk-cli lasttest --vergleich 1`: Lauf mit vielen Threads und mit einem Thread vergleichen.
 - CI: Prüfsummen des Lasttests unter GCC, Clang und MSVC vergleichen (wie heute die 100 Jahre).
 - Lokal einmal mit ThreadSanitizer bauen und den Lasttest laufen lassen (Datenrennen).
@@ -466,6 +507,9 @@ die Steuern je Ort und die Zugänge. Nicht dazu gehören die Thread-Zahl und abg
 Umsetzung; der neue Wert wird in [README.md](README.md) und [data/README.md](../../data/README.md)
 nachgetragen, ebenso eine Referenz für den Lasttest.
 
+Referenz nach 100 Jahren mit `data/` (Seed 1648, jede Thread-Zahl): `ed6b14a02cfbfa5d` (seit M4,
+Schritt 3; vorher `40de8c42e8f7a0ff`).
+
 ## 10. Brücke und Oberfläche
 
 Klein gehalten, damit man die neue Bevölkerung im Spiel sieht:
@@ -490,7 +534,7 @@ Nacheinander, jeder Schritt mit Build unter GCC und Clang, Tests und clang-forma
 | 5 | **Brücke und Godot:** Abschnitt 10 | Godot-Tests in der CI grün |
 | 6 | **Doku und Review:** technik/README, chronik-skript.md, data/README, meilensteine.md; abschließendes Review | CI grün |
 
-## 12. Entscheidungen zur Bestätigung
+## 12. Entscheidungen (bestätigt vor der Umsetzung)
 
 1. **Altersgruppen im Block** statt als Blockmerkmal (Abschnitt 2.3).
 2. **Sechs Berufe** der Epoche bleiben; die 20 Berufsgruppen kommen mit den Betrieben in M5.

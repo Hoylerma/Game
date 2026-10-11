@@ -40,6 +40,7 @@ constexpr int kExitUsageError = 2;
 constexpr std::int64_t kDefaultYears = 10;
 constexpr std::int64_t kMaxYears = 2000;
 constexpr std::int64_t kMaxDays = 1'000'000;
+constexpr std::int64_t kMaxThreads = 256;
 
 constexpr std::string_view kHelp = R"(uhrwerk-cli – Kommandozeile des Simulationskerns Uhrwerk (EINIGKEIT)
 
@@ -60,6 +61,7 @@ Optionen:
   --jahre N      Zu simulierende Jahre (Standard: 10, wenn auch --tage fehlt)
   --tage N       Zusätzlich zu simulierende Tage
   --seed N       Seed der Partie (Standard: 1648)
+  --threads N    Rechnende Threads, 0 = alle Kerne (Standard: 0; lauf, determinismus)
   --bericht      Tabelle je Staat am Ende des Laufs (nur lauf)
   --chronik      Chronik der Partie ausgeben (nur lauf)
   --hilfe, -h    Diese Hilfe anzeigen
@@ -85,6 +87,7 @@ struct Options {
     std::optional<std::int64_t> years;
     std::optional<std::int64_t> days;
     std::uint64_t seed = uhrwerk::SimConfig{}.seed;
+    unsigned threads = 0;
     bool report = false;
     bool chronicle = false;
     bool help = false;
@@ -124,7 +127,8 @@ std::int64_t parse_count(std::string_view option, std::string_view text, std::in
 
 Options parse_options(int argc, char** argv) {
     Options o;
-    const std::set<std::string_view> with_value = {"--daten", "--szenario", "--jahre", "--tage", "--seed"};
+    const std::set<std::string_view> with_value = {"--daten", "--szenario", "--jahre",
+                                                   "--tage",  "--seed",     "--threads"};
     const std::set<std::string_view> flags = {"--bericht", "--chronik"};
 
     for (int i = 1; i < argc; ++i) {
@@ -166,6 +170,8 @@ Options parse_options(int argc, char** argv) {
                     o.years = parse_count(name, *value, kMaxYears);
                 } else if (name == "--tage") {
                     o.days = parse_count(name, *value, kMaxDays);
+                } else if (name == "--threads") {
+                    o.threads = static_cast<unsigned>(parse_count(name, *value, kMaxThreads));
                 } else {
                     const auto seed = parse_unsigned(*value);
                     if (!seed) {
@@ -528,6 +534,45 @@ void print_chronicle(const World& w) {
     }
 }
 
+Fixed total_population(const World& w) {
+    Fixed total;
+    for (std::size_t i = 0; i < w.locations.size(); ++i) {
+        total += w.location_population(static_cast<Index>(i));
+    }
+    return total;
+}
+
+/// Promille einer Größe bezogen auf die Bevölkerung, z. B. "37,9 ‰".
+std::string per_mille(Fixed value, Fixed population) {
+    if (population <= Fixed::zero()) {
+        return "–";
+    }
+    return format_fixed(value * Fixed::from_int(1000) / population, 1) + " ‰";
+}
+
+/// Bevölkerung am Anfang und Ende und die Bilanz des letzten vollen Jahres (seit M4).
+void print_population(const World& w, Fixed start, Fixed end) {
+    std::cout << "\nBevölkerung: " << format_int(start.round()) << " → " << format_int(end.round());
+    if (start > Fixed::zero()) {
+        std::cout << " (×" << format_fixed(end / start, 2) << ")";
+    }
+    std::cout << '\n';
+    uhrwerk::PopulationBalance year;
+    for (const uhrwerk::PopulationBalance& b : w.balance_previous) {
+        year.births += b.births;
+        year.deaths += b.deaths;
+        year.plague_deaths += b.plague_deaths;
+        year.moved_out += b.moved_out;
+        year.emigrated += b.emigrated;
+    }
+    if (year.births > Fixed::zero()) {
+        std::cout << "Vorjahr:     Geburten " << per_mille(year.births, end) << ", Sterbefälle "
+                  << per_mille(year.deaths, end) << ", Seuchen " << per_mille(year.plague_deaths, end)
+                  << ", Wanderung " << per_mille(year.moved_out, end) << ", Auswanderung "
+                  << per_mille(year.emigrated, end) << '\n';
+    }
+}
+
 int cmd_lauf(const Options& o, const fs::path& data_dir) {
     const auto load_start = std::chrono::steady_clock::now();
     auto world = load(data_dir, o.scenario, true);
@@ -544,16 +589,19 @@ int cmd_lauf(const Options& o, const fs::path& data_dir) {
     const std::int64_t days = days_between(start, end_of_years) + period.extra_days;
     const std::string scenario_name = world->scenario.name + " (" + world->scenario.id + ")";
 
-    uhrwerk::Simulation sim(std::move(*world), uhrwerk::SimConfig{o.seed});
+    uhrwerk::Simulation sim(std::move(*world), uhrwerk::SimConfig{o.seed, o.threads});
+    const Fixed population_start = total_population(sim.world());
     const auto t0 = std::chrono::steady_clock::now();
     sim.step_days(days);
     const auto t1 = std::chrono::steady_clock::now();
     const double seconds = std::chrono::duration<double>(t1 - t0).count();
+    const Fixed population_end = total_population(sim.world());
 
     std::cout << "Szenario:  " << scenario_name << '\n'
               << "Inhalt:    " << content << '\n'
               << "Laden:     " << format_seconds(load_seconds) << '\n'
               << "Seed:      " << o.seed << '\n'
+              << "Threads:   " << sim.threads() << '\n'
               << "Start:     " << uhrwerk::format_date_long(start) << '\n'
               << "Ende:      " << uhrwerk::format_date_long(sim.world().date) << " (" << format_int(days)
               << " Tage)\n"
@@ -563,6 +611,7 @@ int cmd_lauf(const Options& o, const fs::path& data_dir) {
                   << " Tage/s)";
     }
     std::cout << '\n';
+    print_population(sim.world(), population_start, population_end);
 
     if (o.report) {
         print_report(sim);
@@ -591,9 +640,10 @@ int cmd_determinismus(const Options& o, const fs::path& data_dir) {
     const std::uint64_t other_seed = o.seed + 1;
     const std::string scenario_name = world_a->scenario.name + " (" + world_a->scenario.id + ")";
 
-    uhrwerk::Simulation a(std::move(*world_a), uhrwerk::SimConfig{o.seed});
-    uhrwerk::Simulation b(std::move(*world_b), uhrwerk::SimConfig{o.seed});
-    uhrwerk::Simulation c(std::move(*world_c), uhrwerk::SimConfig{other_seed});
+    // Lauf B rechnet mit einem Thread: Das Ergebnis darf nicht von der Thread-Zahl abhängen.
+    uhrwerk::Simulation a(std::move(*world_a), uhrwerk::SimConfig{o.seed, o.threads});
+    uhrwerk::Simulation b(std::move(*world_b), uhrwerk::SimConfig{o.seed, 1});
+    uhrwerk::Simulation c(std::move(*world_c), uhrwerk::SimConfig{other_seed, o.threads});
 
     std::cout << "Determinismusprüfung\n"
               << "Szenario:  " << scenario_name << '\n'
@@ -602,7 +652,8 @@ int cmd_determinismus(const Options& o, const fs::path& data_dir) {
         std::cout << " und " << plural(static_cast<std::size_t>(period.extra_days), "Tag", "Tage");
     }
     std::cout << " ab " << uhrwerk::format_date_long(start) << '\n'
-              << "Seeds:     Lauf A und B " << o.seed << ", Lauf C " << other_seed << '\n';
+              << "Seeds:     Lauf A und B " << o.seed << ", Lauf C " << other_seed << '\n'
+              << "Threads:   Lauf A und C " << a.threads() << ", Lauf B 1\n";
 
     const auto t0 = std::chrono::steady_clock::now();
     const auto mismatch = [&](const std::string& when) {
@@ -667,10 +718,10 @@ int run(int argc, char** argv) {
         if (o.command == "pruefen" || o.command == "info") {
             check_applicable(o, {"--daten", "--szenario"});
         } else if (o.command == "lauf") {
-            check_applicable(
-                o, {"--daten", "--szenario", "--jahre", "--tage", "--seed", "--bericht", "--chronik"});
+            check_applicable(o, {"--daten", "--szenario", "--jahre", "--tage", "--seed", "--threads",
+                                 "--bericht", "--chronik"});
         } else if (o.command == "determinismus") {
-            check_applicable(o, {"--daten", "--szenario", "--jahre", "--tage", "--seed"});
+            check_applicable(o, {"--daten", "--szenario", "--jahre", "--tage", "--seed", "--threads"});
         } else {
             throw UsageError{"Unbekannter Befehl '" + o.command + "'"};
         }

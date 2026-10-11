@@ -33,9 +33,8 @@ struct TerrainType {
     std::string id;
     std::string name;
     Color color;
-    Fixed growth_factor = Fixed::one(); // Faktor auf Bevölkerungswachstum (M1, entfällt mit M4)
-    Fixed yield_factor = Fixed::one();  // Faktor auf Produktion
-    Fixed capacity;                     // Tragfähigkeit: Einwohner je km² (seit M4)
+    Fixed yield_factor = Fixed::one(); // Faktor auf Produktion
+    Fixed capacity;                    // Tragfähigkeit: Einwohner je km² (seit M4)
 };
 
 /// Konfession (data/common/konfessionen.chron).
@@ -142,9 +141,6 @@ struct State {
 
 /// Globale Regeln und Balancing-Werte (data/common/regeln.chron).
 struct Rules {
-    Fixed growth_base;            // jährliches Grundwachstum, z. B. 0.004
-    Fixed growth_reconstruction;  // zusätzliches Wachstum je Verwüstungsgrad (Wiederaufbau, Peuplierung)
-    Fixed growth_tax_pressure;    // Wachstumsabzug je Steuersatz
     Fixed devastation_decay;      // jährlicher relativer Abbau der Verwüstung, z. B. 0.03
     Fixed devastation_yield_loss; // Produktionsverlust je Verwüstungsgrad, z. B. 0.5
     Fixed plague_chance;          // jährliche Seuchenwahrscheinlichkeit je Ort
@@ -182,6 +178,29 @@ struct Rules {
     Fixed migration_min_amount;         // kleinere Wanderungsströme entfallen (Personen)
 };
 
+/// Bevölkerungsbilanz eines Ortes über ein Jahr (seit M4), in Personen.
+struct PopulationBalance {
+    Fixed births;
+    Fixed deaths;        // natürliche Sterbefälle
+    Fixed plague_deaths; // Seuchentote
+    Fixed moved_in;      // Zuzug aus anderen Orten
+    Fixed moved_out;     // Wegzug in andere Orte
+    Fixed emigrated;     // Auswanderung (verlässt die Simulation)
+};
+
+/// Momentaufnahme eines Ortes vom letzten Rechentag (seit M4, bevoelkerung.md Abschnitt 2.4):
+/// Andere Orte lesen nur diese Werte, nie den laufenden Zustand.
+struct LocationSnapshot {
+    Fixed population;
+    Fixed reserve; // Landreserve 0..1
+};
+
+/// Produktion und Steuern eines Ortes je Monat, festgestellt am Rechentag des Ortes.
+struct LocationEconomy {
+    Fixed production; // Reichstaler pro Monat
+    Fixed taxes;      // davon an den Staat
+};
+
 /// Szenario/Lesezeichen (data/szenarien/*.chron).
 struct Scenario {
     std::string id;
@@ -213,6 +232,15 @@ struct World {
     std::vector<PopBlock> pops;
     std::vector<ChronicleEntry> chronicle;
 
+    // Zustand der Bevölkerung je Ort (seit M4), parallel zu locations. Der Lader lässt die Vektoren
+    // leer; die Simulation füllt sie beim Start, wenn ihre Größe nicht passt.
+    std::vector<LocationSnapshot> snapshots;
+    std::vector<Fixed> snapshot_targets; // Ziel-Lebensstandard je Ort und Beruf: [ort × berufe + beruf]
+    std::vector<PopulationBalance> balance_current;  // laufendes Jahr
+    std::vector<PopulationBalance> balance_previous; // Vorjahr
+    std::vector<LocationEconomy> economy;            // am letzten Rechentag
+    std::vector<std::vector<PopBlock>> arrivals; // je Ort: Zugezogene ohne eigenen Block, bis zur Neuordnung
+
     Index find_state(std::string_view tag) const;
     Index find_location(std::string_view id) const;
     Index find_district(std::string_view id) const;
@@ -221,6 +249,7 @@ struct World {
     Index find_culture(std::string_view id) const;
     Index find_profession(std::string_view id) const;
 
+    /// Personen in den Blöcken des Ortes und in seinen Zugängen (arrivals).
     Fixed location_population(Index location) const;
     Fixed state_population(Index state) const;
     /// Indizes aller Orte eines Staates, aufsteigend.

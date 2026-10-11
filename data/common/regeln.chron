@@ -4,9 +4,6 @@
 # docs/technik/bevoelkerung.md, Abschnitt 4. Alle Felder sind Pflicht. Raten sind Jahreswerte.
 
 regeln {
-    wachstum_basis        = 0.004   # jährliches Grundwachstum
-    wachstum_wiederaufbau = 0.025   # zusätzlich je Verwüstungsgrad (Wiederaufbau, Peuplierung)
-    wachstum_steuerdruck  = 0.02    # Abzug je Steuersatz
     verwuestung_abbau     = 0.03    # jährlicher relativer Abbau der Verwüstung
     verwuestung_ertrag    = 0.5     # Produktionsverlust je Verwüstungsgrad
     seuche_chance         = 0.01    # jährlich je Ort
@@ -25,7 +22,7 @@ regeln {
     anteil_erwerb             = 0.33    # 30–64
 
     # Geburten
-    fruchtbarkeit             = 0.095   # Geburten je Person im fruchtbaren Alter und Jahr
+    fruchtbarkeit             = 0.088   # Geburten je Person im fruchtbaren Alter und Jahr
     anteil_fruchtbar_erwerb   = 0.4     # Anteil der 30–64-Jährigen im fruchtbaren Alter
     fruchtbarkeit_landreserve = 0.3     # Zuschlag bei voller Landreserve (freie Höfe, frühe Heirat)
     fruchtbarkeit_wohlstand   = 0.15    # Zu-/Abschlag je 50 Punkte Lebensstandard
@@ -38,7 +35,7 @@ regeln {
     sterblichkeit_armut       = 0.3     # Zu-/Abschlag je 50 Punkte Lebensstandard
 
     # Tragfähigkeit und Lebensstandard
-    tragfaehigkeit_stadt      = 3       # Faktor für Städte (Markt, Handel, Gewerbe)
+    tragfaehigkeit_stadt      = 1.75    # Faktor für Städte mit Amt (Markt, Handel, Gewerbe)
     lebensstandard_bezug      = 12      # Netto-Einkommen (Taler pro Kopf und Jahr) für Lebensstandard 50
     lebensstandard_anpassung  = 0.25    # Anteil der Lücke zum Ziel je Monat
 

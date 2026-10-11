@@ -1,8 +1,5 @@
 # Testdaten für die Unit-Tests des Kerns – nicht für das Spiel.
 regeln {
-    wachstum_basis        = 0.004   # jährliches Grundwachstum
-    wachstum_wiederaufbau = 0.025   # zusätzlich je Verwüstungsgrad
-    wachstum_steuerdruck  = 0.02    # Abzug je Steuersatz
     verwuestung_abbau     = 0.03    # jährlicher relativer Abbau der Verwüstung
     verwuestung_ertrag    = 0.5     # Produktionsverlust je Verwüstungsgrad
     seuche_chance         = 0.01    # jährlich je Ort
@@ -14,7 +11,7 @@ regeln {
     anteil_kinder             = 0.34
     anteil_jung               = 0.26
     anteil_erwerb             = 0.33
-    fruchtbarkeit             = 0.095
+    fruchtbarkeit             = 0.088
     anteil_fruchtbar_erwerb   = 0.4
     fruchtbarkeit_landreserve = 0.3
     fruchtbarkeit_wohlstand   = 0.15
@@ -23,7 +20,7 @@ regeln {
     sterblichkeit_erwerb      = 0.018
     sterblichkeit_alt         = 0.11
     sterblichkeit_armut       = 0.3
-    tragfaehigkeit_stadt      = 3
+    tragfaehigkeit_stadt      = 1.75
     lebensstandard_bezug      = 12
     lebensstandard_anpassung  = 0.25
     bildung_stadt             = 1.25

@@ -124,23 +124,38 @@ Index most_similar_block(const std::vector<PopBlock>& blocks, const std::vector<
     return best;
 }
 
-bool reorganize(World& world, std::vector<Arrival>& arrivals) {
+PopulationRates derive_rates(const Rules& rules) {
+    PopulationRates r;
+    r.aging_children = Fixed::from_ratio(1, 15 * 12);
+    r.aging_young = Fixed::from_ratio(1, 15 * 12);
+    r.aging_working = Fixed::from_ratio(1, 35 * 12);
+    r.literacy_month = rules.literacy_adjustment / Fixed::from_int(12);
+    r.fifty = Fixed::from_int(50);
+    r.hundred = Fixed::from_int(100);
+    r.twelve = Fixed::from_int(12);
+    r.twelve_hundred = Fixed::from_int(1200);
+    return r;
+}
+
+bool reorganize(World& world) {
+    std::vector<std::vector<PopBlock>>& arrivals = world.arrivals;
     const Fixed min_size = world.rules.block_min_size;
-    bool needed = !arrivals.empty();
+    std::size_t arrival_count = 0;
+    for (const std::vector<PopBlock>& list : arrivals) {
+        arrival_count += list.size();
+    }
+    bool needed = arrival_count > 0;
     for (std::size_t i = 0; i < world.pops.size() && !needed; ++i) {
         needed = world.pops[i].size() < min_size;
     }
     if (!needed) {
         return false;
     }
-    std::stable_sort(arrivals.begin(), arrivals.end(),
-                     [](const Arrival& a, const Arrival& b) { return a.block.location < b.block.location; });
 
     std::vector<PopBlock>& pops = world.pops;
     std::vector<bool> keep(pops.size(), false);
     std::vector<PopBlock> result;
-    result.reserve(pops.size() + arrivals.size());
-    std::size_t next_arrival = 0;
+    result.reserve(pops.size() + arrival_count);
 
     for (std::size_t li = 0; li < world.locations.size(); ++li) {
         Location& loc = world.locations[li];
@@ -180,31 +195,28 @@ bool reorganize(World& world, std::vector<Arrival>& arrivals) {
         }
 
         // 3. Zugänge dieses Ortes in Eingangsreihenfolge.
-        while (next_arrival < arrivals.size() &&
-               arrivals[next_arrival].block.location == static_cast<Index>(li)) {
-            const PopBlock& arrival = arrivals[next_arrival].block;
-            const auto begin = result.begin() + new_first;
-            const auto same =
-                std::find_if(begin, result.end(), [&](const PopBlock& b) { return same_key(b, arrival); });
-            if (same != result.end()) {
-                absorb(*same, arrival);
-            } else if (arrival.size() >= min_size || begin == result.end()) {
-                result.push_back(arrival);
-            } else {
-                const std::vector<bool> all(result.size(), true);
-                const Index target = most_similar_block(
-                    result, all, new_first, static_cast<Index>(result.size()) - new_first, arrival);
-                absorb(result[static_cast<std::size_t>(target)], arrival);
+        if (li < arrivals.size()) {
+            for (const PopBlock& arrival : arrivals[li]) {
+                const auto begin = result.begin() + new_first;
+                const auto same = std::find_if(begin, result.end(),
+                                               [&](const PopBlock& b) { return same_key(b, arrival); });
+                if (same != result.end()) {
+                    absorb(*same, arrival);
+                } else if (arrival.size() >= min_size || begin == result.end()) {
+                    result.push_back(arrival);
+                } else {
+                    const Index target = most_similar_block(
+                        result, {}, new_first, static_cast<Index>(result.size()) - new_first, arrival);
+                    absorb(result[static_cast<std::size_t>(target)], arrival);
+                }
             }
-            ++next_arrival;
+            arrivals[li].clear();
         }
 
         loc.first_pop = new_first;
         loc.pop_count = static_cast<Index>(result.size()) - new_first;
     }
 
-    // Zugänge zu Orten außerhalb der Welt kann es nicht geben; sie würden hier verworfen.
-    arrivals.clear();
     pops = std::move(result);
     return true;
 }
@@ -225,8 +237,7 @@ void initialize_population(World& world) {
             pop.literacy = literacy_target(world, loc, pop, pop.living_standard);
         }
     }
-    std::vector<Arrival> none;
-    reorganize(world, none);
+    reorganize(world);
 }
 
 } // namespace uhrwerk

@@ -1,8 +1,6 @@
 # Geländetypen (Meilenstein M1).
 #
 # Format: docs/technik/chronik-skript.md, Abschnitt 3.2.
-#   wachstum       – Faktor auf die Bevölkerungsentwicklung (Gesundheit, Siedlungsraum);
-#                    nur für das Modell aus M1, entfällt mit M4, Schritt 3
 #   ertrag         – Faktor auf die Produktion aller Berufsgruppen eines Ortes
 #   tragfaehigkeit – Einwohner je km², die die Landwirtschaft der Zeit ernähren kann (seit M4,
 #                    docs/technik/bevoelkerung.md, Abschnitt 4.1); Städte mal tragfaehigkeit_stadt
@@ -23,7 +21,6 @@
 gelaende flussaue {
     name           = "Flussaue"
     farbe          = { 128 160 112 }
-    wachstum       = 1.05     # Wasser, Wiesen, Handelswege
     ertrag         = 1.15
     tragfaehigkeit = 45
 }
@@ -31,7 +28,6 @@ gelaende flussaue {
 gelaende boerde {
     name           = "Börde"
     farbe          = { 214 190 108 }
-    wachstum       = 1.05     # Lössboden: beste Ackerböden der Region
     ertrag         = 1.30
     tragfaehigkeit = 60
 }
@@ -39,7 +35,6 @@ gelaende boerde {
 gelaende flachland {
     name           = "Flachland"
     farbe          = { 190 200 138 }
-    wachstum       = 1.00     # Grundmoränenplatten, lehmig-sandig
     ertrag         = 1.00
     tragfaehigkeit = 30
 }
@@ -47,7 +42,6 @@ gelaende flachland {
 gelaende huegelland {
     name           = "Hügelland"
     farbe          = { 160 176 112 }
-    wachstum       = 1.00
     ertrag         = 1.00
     tragfaehigkeit = 50
 }
@@ -55,7 +49,6 @@ gelaende huegelland {
 gelaende mittelgebirge {
     name           = "Mittelgebirge"
     farbe          = { 120 128 96 }
-    wachstum       = 0.95     # raues Klima, karge Böden; Bergbau gleicht teilweise aus
     ertrag         = 0.85
     tragfaehigkeit = 40
 }
@@ -63,7 +56,6 @@ gelaende mittelgebirge {
 gelaende heide {
     name           = "Heide"
     farbe          = { 204 184 144 }
-    wachstum       = 0.95     # Sandböden (Fläming, Lausitz, Altmark)
     ertrag         = 0.75
     tragfaehigkeit = 20
 }
@@ -71,7 +63,6 @@ gelaende heide {
 gelaende seenplatte {
     name           = "Seenplatte"
     farbe          = { 112 156 176 }
-    wachstum       = 0.95     # Seen, Moore und Wald; Fischerei
     ertrag         = 0.85
     tragfaehigkeit = 20
 }
@@ -79,7 +70,6 @@ gelaende seenplatte {
 gelaende kueste {
     name           = "Küste"
     farbe          = { 158 192 204 }
-    wachstum       = 1.00     # Seehandel und Fischerei
     ertrag         = 1.05
     tragfaehigkeit = 30
 }
@@ -87,7 +77,6 @@ gelaende kueste {
 gelaende bruch {
     name           = "Bruchland"
     farbe          = { 104 136 112 }
-    wachstum       = 0.95     # Niederungsmoore (Oderbruch, Spreewald) vor der Trockenlegung
     ertrag         = 0.80
     tragfaehigkeit = 20
 }
@@ -95,7 +84,6 @@ gelaende bruch {
 gelaende wald {
     name           = "Waldland"
     farbe          = { 76 112 68 }
-    wachstum       = 0.95     # dichte Wälder, Rodungsinseln; Holz, Glas, Leinen
     ertrag         = 0.70
     tragfaehigkeit = 35
 }
@@ -103,7 +91,6 @@ gelaende wald {
 gelaende hochgebirge {
     name           = "Hochgebirge"
     farbe          = { 168 162 156 }
-    wachstum       = 0.90     # Alpen: kurze Vegetationszeit, wenig Siedlungsraum; Almwirtschaft, Salz, Pässe
     ertrag         = 0.65
     tragfaehigkeit = 12
 }

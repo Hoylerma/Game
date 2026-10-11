@@ -325,7 +325,10 @@ eingefügten Orte ohne Daten haben die meisten der 60 Orte mit Daten einen ander
 in M2; ihre Reihenfolge untereinander ist gleich geblieben. Die Werte nach 100 Jahren weichen
 deshalb nur geringfügig ab (Bevölkerung 627.680 statt 627.721). Der erste M3-Stand (4.541 Orte)
 ergab `5548a5fa80f75c0d` (627.709); mit Osterode am Harz in `goettingen` rückten die 38 Orte mit
-Daten in den Dateien `lausitz` bis `thueringen` um einen Index weiter. Alle Angaben tragen seit M2 eine Sicherheit:
+Daten in den Dateien `lausitz` bis `thueringen` um einen Index weiter. Seit M4 (Bevölkerungsmodell:
+Altersaufbau, Kultur, Lebensstandard, Wanderung) lautet sie `ed6b14a02cfbfa5d`, bei jeder Zahl von
+Threads; nach 100 Jahren leben in den 60 Orten 642.668 Menschen (×1,67).
+Alle Angaben tragen seit M2 eine Sicherheit:
 Besitz, Herrscher, Hauptstadt und Konfession der Staaten `ungeprueft` (recherchiert, noch ohne
 Fachprüfung), Bevölkerung, Konfessionsanteile und Verwüstung `schaetzung`, Schatz, Steuersatz und
 Hofhaltung `spielwert`. Die Begründungen stehen weiter in der Quelle des Ortes bzw. Staates.

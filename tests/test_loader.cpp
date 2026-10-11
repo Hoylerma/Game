@@ -112,9 +112,6 @@ TEST_CASE("Lader: Fixture lädt ohne Fehler und Warnungen") {
 TEST_CASE("Lader: Werte aus common/") {
     const World w = testhilfen::load_fixture();
     const uhrwerk::Rules& r = w.rules;
-    CHECK(r.growth_base == fx("0.004"));
-    CHECK(r.growth_reconstruction == fx("0.025"));
-    CHECK(r.growth_tax_pressure == fx("0.02"));
     CHECK(r.devastation_decay == fx("0.03"));
     CHECK(r.devastation_yield_loss == fx("0.5"));
     CHECK(r.plague_chance == fx("0.01"));
@@ -126,7 +123,6 @@ TEST_CASE("Lader: Werte aus common/") {
     CHECK(aue.id == "flussaue");
     CHECK(aue.name == "Flussaue");
     CHECK(aue.color == uhrwerk::Color{128, 160, 112});
-    CHECK(aue.growth_factor.raw() == 68813);
     CHECK(aue.yield_factor.raw() == 75366);
 
     CHECK(w.confessions[0].name == "Lutherisch");
@@ -149,9 +145,9 @@ TEST_CASE("Lader: Werte aus common/") {
     CHECK(r.share_children == fx("0.34"));
     CHECK(r.share_young == fx("0.26"));
     CHECK(r.share_working == fx("0.33"));
-    CHECK(r.fertility == fx("0.095"));
+    CHECK(r.fertility == fx("0.088"));
     CHECK(r.mortality_old == fx("0.11"));
-    CHECK(r.capacity_city == Fixed::from_int(3));
+    CHECK(r.capacity_city == fx("1.75"));
     CHECK(r.living_standard_reference == Fixed::from_int(12));
     CHECK(r.migration_targets == 4);
     CHECK(r.migration_radius_km == Fixed::from_int(60));
@@ -400,8 +396,8 @@ TEST_CASE("Lader: ungültige Werte") {
         expect_error(load(dir), "'flaeche' muss größer als 0");
     }
     SUBCASE("Zahl mit Komma") {
-        replace_in_file(dir / "common/gelaende.chron", "wachstum = 1.05", "wachstum = 1,05");
-        expect_error(load(dir), "ungültiger Wert '1,05' für 'wachstum'", "common/gelaende.chron", 5);
+        replace_in_file(dir / "common/gelaende.chron", "ertrag   = 1.15", "ertrag   = 1,15");
+        expect_error(load(dir), "ungültiger Wert '1,15' für 'ertrag'", "common/gelaende.chron", 5);
     }
     SUBCASE("Konfessionsanteile ergeben nicht 100") {
         replace_in_file(dir / kPlacesBra, "{ lutherisch = 90 reformiert = 10 }",

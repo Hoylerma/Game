@@ -677,10 +677,7 @@ private:
         }
 
         Fields f(*found, file.name, "regeln", issues_,
-                 {"wachstum_basis",
-                  "wachstum_wiederaufbau",
-                  "wachstum_steuerdruck",
-                  "verwuestung_abbau",
+                 {"verwuestung_abbau",
                   "verwuestung_ertrag",
                   "seuche_chance",
                   "seuche_verlust_min",
@@ -715,9 +712,6 @@ private:
                   "wanderung_mindestmenge"});
         Rules& r = world_.rules;
         const Range unit = between(fx(0), fx(1));
-        const auto growth_base = f.fixed("wachstum_basis", between(fx(-1), fx(1)));
-        const auto growth_reconstruction = f.fixed("wachstum_wiederaufbau", unit);
-        const auto growth_tax_pressure = f.fixed("wachstum_steuerdruck", unit);
         const auto devastation_decay = f.fixed("verwuestung_abbau", unit);
         const auto devastation_yield_loss = f.fixed("verwuestung_ertrag", unit);
         const auto plague_chance = f.fixed("seuche_chance", unit);
@@ -725,9 +719,6 @@ private:
         const auto plague_loss_max = f.fixed("seuche_verlust_max", unit);
         const auto tax_rate_max = f.fixed("steuersatz_max", unit);
 
-        r.growth_base = growth_base.value_or(Fixed{});
-        r.growth_reconstruction = growth_reconstruction.value_or(Fixed{});
-        r.growth_tax_pressure = growth_tax_pressure.value_or(Fixed{});
         r.devastation_decay = devastation_decay.value_or(Fixed{});
         r.devastation_yield_loss = devastation_yield_loss.value_or(Fixed{});
         r.plague_chance = plague_chance.value_or(Fixed{});
@@ -787,12 +778,11 @@ private:
     void load_terrains(const SourceFile& file) {
         for_each_definition(file, "gelaende", "gelaende <kennung> { … }", [&](const ScriptNode& node) {
             Fields f(node, file.name, "gelaende " + node.value, issues_,
-                     {"name", "farbe", "wachstum", "ertrag", "tragfaehigkeit"});
+                     {"name", "farbe", "ertrag", "tragfaehigkeit"});
             TerrainType t;
             t.id = node.value;
             t.name = f.text("name").value_or("");
             t.color = f.color("farbe").value_or(Color{});
-            t.growth_factor = f.fixed("wachstum", between(fx(0), fx(10))).value_or(Fixed::one());
             t.yield_factor = f.fixed("ertrag", between(fx(0), fx(10))).value_or(Fixed::one());
             t.capacity = f.fixed("tragfaehigkeit", between(fx(0), fx(100'000))).value_or(Fixed{});
             const auto index = static_cast<Index>(world_.terrains.size());

@@ -141,12 +141,14 @@ TEST_CASE("Bevölkerung: Neuordnung löst kleine Blöcke auf und legt Zugänge a
     w.locations[2].first_pop = 3;
     w.locations[2].pop_count = 0;
 
-    std::vector<uhrwerk::Arrival> arrivals;
-    arrivals.push_back({block(1, 2, 2, 2, 20)}); // neuer Schlüssel in Ort 1
-    arrivals.push_back({block(0, 1, 1, 1, 5)});  // gleicher Schlüssel wie Block 0 → aufgenommen
-    arrivals.push_back({block(1, 2, 2, 2, 3)});  // gleicher Schlüssel wie der erste Zugang
-    CHECK(uhrwerk::reorganize(w, arrivals));
-    CHECK(arrivals.empty());
+    w.arrivals.resize(3);
+    w.arrivals[1].push_back(block(1, 2, 2, 2, 20)); // neuer Schlüssel in Ort 1
+    w.arrivals[0].push_back(block(0, 1, 1, 1, 5));  // gleicher Schlüssel wie Block 0 → aufgenommen
+    w.arrivals[1].push_back(block(1, 2, 2, 2, 3));  // gleicher Schlüssel wie der erste Zugang
+    CHECK(w.location_population(1) == fx("0.25") + Fixed::from_int(23)); // Zugänge zählen schon mit
+    CHECK(uhrwerk::reorganize(w));
+    CHECK(w.arrivals[0].empty());
+    CHECK(w.arrivals[1].empty());
 
     REQUIRE(w.pops.size() == 3);
     CHECK(w.locations[0].first_pop == 0);
@@ -161,7 +163,6 @@ TEST_CASE("Bevölkerung: Neuordnung löst kleine Blöcke auf und legt Zugänge a
     CHECK(w.locations[2].pop_count == 0);
 
     // Nichts mehr zu tun → false, Welt unverändert.
-    std::vector<uhrwerk::Arrival> none;
     w.pops[1].young = Fixed::from_int(2);
-    CHECK_FALSE(uhrwerk::reorganize(w, none));
+    CHECK_FALSE(uhrwerk::reorganize(w));
 }

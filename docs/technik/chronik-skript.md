@@ -328,42 +328,37 @@ Block ihres Ortes auf (Abschnitt 4.7 dort).
 
 Das Weltdatum wird auf `szenario.datum` gesetzt; der Zustand von `state.last_month_*` ist 0; die Chronik ist leer.
 
-## 5. Formeln der Simulation (M1)
+## 5. Formeln der Simulation
 
 Alle Rechnungen in `Fixed`. Reihenfolge der Operationen wie angegeben (wichtig für Bit-Gleichheit).
+Seit M4 stehen die Formeln der Bevölkerung (Lebensstandard, Geburten, Sterbefälle, Altern, Bildung,
+Wanderung, Neuordnung) und der Ortssteuern in [bevoelkerung.md](bevoelkerung.md), Abschnitt 4; das
+feste Wachstum aus M1 (`wachstum_*`) gibt es nicht mehr.
 
-**Produktion eines Bevölkerungsblocks pro Monat**
+**Produktion und Steuern eines Ortes** (an seinem Rechentag, bevoelkerung.md Abschnitt 4.6):
 
 ```
-p = größe × beruf.ertrag × gelände.ertrag × (1 − verwüstung × regeln.verwuestung_ertrag) / 12
+ertrag_b   = beruf.ertrag × gelände.ertrag × (1 − verwüstung × regeln.verwuestung_ertrag) × agrar_b
+produziert = größe × (ertrag_b / 12)                      je Block, Blöcke aufsteigend
+steuern    = Σ produziert × staat.steuersatz              nur steuerpflichtige Berufe
 ```
-
-**Steuer eines Blocks pro Monat:** `p × staat.steuersatz`, nur wenn `beruf.steuerpflichtig`.
 
 **Wirtschaft eines Staates** (an seinem Rechentag):
 
 ```
-einnahmen = Σ Steuern aller Blöcke aller Orte des Staates (Orte aufsteigend, Blöcke aufsteigend)
+einnahmen = Σ zuletzt festgestellte Steuern seiner Orte (Orte aufsteigend)
 ausgaben  = hofhaltung / 12
 schatz   += einnahmen − ausgaben
 ```
 
-**Demografie eines Ortes** (an seinem Rechentag):
-
-```
-rate  = (wachstum_basis + wachstum_wiederaufbau × verwüstung) × gelände.wachstum
-        − wachstum_steuerdruck × besitzer.steuersatz
-größe += größe × rate / 12        (für jeden Block; nie unter 0)
-```
-
-**Orte ohne Daten** (Abschnitt 3.6) haben keine Bevölkerungsblöcke: Sie tragen nichts zu Demografie
-und Wirtschaft bei, und beim Jahreswechsel werden sie **übersprungen** – sie ziehen keine
-Zufallszahlen, und ihre Verwüstung (0) bleibt unverändert. Ein Ort, der Blöcke hat, deren Größe
-auf 0 gefallen ist, wird dagegen normal behandelt.
+**Orte ohne Daten** (Abschnitt 3.6) haben keine Bevölkerungsblöcke: Sie tragen nichts zu
+Bevölkerung und Wirtschaft bei, sind keine Wanderungsziele, und beim Jahreswechsel werden sie
+**übersprungen** – sie ziehen keine Zufallszahlen, und ihre Verwüstung (0) bleibt unverändert. Ein
+Ort, der Blöcke hat, deren Größe auf 0 gefallen ist, wird dagegen normal behandelt.
 
 **Jahreswechsel** (wenn das aktuelle Datum vor dem Weiterschalten der 1. Januar ist), Orte in aufsteigender Reihenfolge:
 
-1. Seuche: `rng_ereignisse.chance(seuche_chance)`; bei Treffer `verlust = rng_ereignisse.uniform(min, max)`, jeder Block `größe −= größe × verlust`, Chronikeintrag: `Seuche in {Ortsname}: {gerundeter Prozentwert} % der Bevölkerung sterben.`
+1. Seuche: `rng_ereignisse.chance(seuche_chance)`; bei Treffer `verlust = rng_ereignisse.uniform(min, max)`, jede Altersgruppe jedes Blocks `gruppe −= gruppe × verlust` (Bilanz `seuchentote`), Chronikeintrag: `Seuche in {Ortsname}: {gerundeter Prozentwert} % der Bevölkerung sterben.`
 2. Verwüstung: `verwüstung −= verwüstung × verwuestung_abbau`.
 
 ## 6. Karte (Fassung M3)

@@ -1,9 +1,11 @@
 // Tests für die Simulation: Determinismus, Staffelung, Befehle, Formeln, Ereignisse.
 
 #include "test_hilfen.hpp"
+#include "uhrwerk/population.hpp"
 #include "uhrwerk/rng.hpp"
 #include "uhrwerk/simulation.hpp"
 
+#include <algorithm>
 #include <cstddef>
 #include <cstdint>
 #include <doctest/doctest.h>
@@ -51,7 +53,6 @@ World make_small_world() {
 
     uhrwerk::TerrainType acker;
     acker.id = "acker";
-    acker.growth_factor = Fixed::one();
     acker.yield_factor = Fixed::from_ratio(5, 4);
     w.terrains.push_back(acker);
 
@@ -106,6 +107,70 @@ World make_small_world() {
 World fixture_without_plague() {
     World w = testhilfen::load_fixture();
     w.rules.plague_chance = Fixed::zero();
+    return w;
+}
+
+/// Wie fixture_without_plague, aber ohne Wanderung zwischen Orten: Dann ändert sich die Bevölkerung
+/// eines Ortes nur an seinem eigenen Rechentag.
+World fixture_without_migration() {
+    World w = fixture_without_plague();
+    w.rules.migration_targets = 0;
+    return w;
+}
+
+/// Gesamtbevölkerung aller Orte (Blöcke und Zugänge).
+Fixed total_population(const World& w) {
+    Fixed total;
+    for (std::size_t i = 0; i < w.locations.size(); ++i) {
+        total += w.location_population(static_cast<Index>(i));
+    }
+    return total;
+}
+
+/// Summe einer Bilanz über alle Orte.
+uhrwerk::PopulationBalance sum_balance(const std::vector<uhrwerk::PopulationBalance>& balances) {
+    uhrwerk::PopulationBalance sum;
+    for (const uhrwerk::PopulationBalance& b : balances) {
+        sum.births += b.births;
+        sum.deaths += b.deaths;
+        sum.plague_deaths += b.plague_deaths;
+        sum.moved_in += b.moved_in;
+        sum.moved_out += b.moved_out;
+        sum.emigrated += b.emigrated;
+    }
+    return sum;
+}
+
+/// Viele Orte für die Mehrkernberechnung: die Orte mit Daten der Fixture `copies`-mal, jeweils um
+/// 0,3 Grad versetzt (Pakete zu 8 Orten brauchen mehr als 16 Orte je Rechentag).
+World many_locations(int copies) {
+    const World base = testhilfen::load_fixture();
+    World w = base;
+    w.locations.clear();
+    w.pops.clear();
+    for (int c = 0; c < copies; ++c) {
+        for (const uhrwerk::Location& original : base.locations) {
+            if (!original.has_data()) {
+                continue;
+            }
+            uhrwerk::Location loc = original;
+            loc.id = original.id + "_" + std::to_string(c);
+            loc.longitude += Fixed::from_ratio(3 * (c % 10), 10);
+            loc.latitude += Fixed::from_ratio(3 * (c / 10), 10);
+            loc.first_pop = static_cast<Index>(w.pops.size());
+            for (Index p = original.first_pop; p < original.first_pop + original.pop_count; ++p) {
+                uhrwerk::PopBlock pop = base.pops[static_cast<std::size_t>(p)];
+                pop.location = static_cast<Index>(w.locations.size());
+                // Etwas Vielfalt, damit sich die Orte unterscheiden und wandern.
+                pop.young += Fixed::from_int(c % 7);
+                w.pops.push_back(pop);
+            }
+            w.locations.push_back(loc);
+        }
+    }
+    for (uhrwerk::State& s : w.states) {
+        s.capital = kNone; // Hauptstädte spielen für die Bevölkerung keine Rolle
+    }
     return w;
 }
 
@@ -258,14 +323,15 @@ TEST_CASE("Simulation: Prüfsumme erfasst den veränderlichen Zustand") {
 // ─── Staffelung ─────────────────────────────────────────────────────────────
 
 TEST_CASE("Simulation: Staffelung auf der Fixture") {
-    Simulation sim(fixture_without_plague());
+    Simulation sim(fixture_without_migration());
     REQUIRE_FALSE(sim.world().locations[5].has_data()); // zerbst rechnet nie
     check_staggering(sim, 75); // über einen Monatswechsel und den Jahreswechsel 1649
 }
 
 TEST_CASE("Simulation: Staffelung mit mehr als 28 Orten") {
     World w = make_small_world();
-    w.rules.growth_base = Fixed::from_ratio(1, 8);
+    w.rules.fertility = Fixed::from_ratio(1, 8);
+    w.rules.fertile_share_working = Fixed::one();
     w.locations.clear();
     w.pops.clear();
     for (int i = 0; i < 30; ++i) {
@@ -398,75 +464,160 @@ TEST_CASE("Simulation: Wirtschaftsformel exakt gegen Handrechnung") {
 
 TEST_CASE("Simulation: Wirtschaft auf der Fixture entspricht der Formel") {
     Simulation sim(fixture_without_plague());
-    step_until(sim, Date{1648, 11, 2}); // Rechentag von SAX (Index 1)
-    const World snapshot = sim.world();
-    const uhrwerk::State& sax = snapshot.states[1];
 
-    Fixed income;
-    for (const Index li : snapshot.state_locations(1)) {
-        const uhrwerk::Location& loc = snapshot.locations[static_cast<std::size_t>(li)];
-        const uhrwerk::TerrainType& terrain = snapshot.terrains[static_cast<std::size_t>(loc.terrain)];
-        for (Index p = loc.first_pop; p < loc.first_pop + loc.pop_count; ++p) {
-            const uhrwerk::PopBlock& pop = snapshot.pops[static_cast<std::size_t>(p)];
-            const uhrwerk::Profession& prof = snapshot.professions[static_cast<std::size_t>(pop.profession)];
-            const Fixed production =
-                pop.size() * prof.yield_per_capita * terrain.yield_factor *
-                (Fixed::one() - loc.devastation * snapshot.rules.devastation_yield_loss) /
-                Fixed::from_int(12);
-            if (prof.taxable) {
-                income += production * sax.tax_rate;
-            }
+    // Ortssteuern (Abschnitt 4.6): Dresden (Index 2) rechnet am 3. des Monats.
+    step_until(sim, Date{1648, 11, 3});
+    const World before = sim.world();
+    const uhrwerk::Location& dresden = before.locations[2];
+    REQUIRE(dresden.id == "dresden");
+    const Fixed tax_rate = before.states[static_cast<std::size_t>(dresden.owner)].tax_rate;
+    uhrwerk::LocationFactors factors;
+    uhrwerk::compute_location_factors(before, dresden, tax_rate, factors);
+    uhrwerk::LocationEconomy expected;
+    for (Index p = dresden.first_pop; p < dresden.first_pop + dresden.pop_count; ++p) {
+        const uhrwerk::PopBlock& pop = before.pops[static_cast<std::size_t>(p)];
+        const auto b = static_cast<std::size_t>(pop.profession);
+        const Fixed produced = pop.size() * (factors.yield[b] / Fixed::from_int(12));
+        expected.production += produced;
+        if (before.professions[b].taxable) {
+            expected.taxes += produced * tax_rate;
         }
     }
-    const Fixed expenses = sax.court_expenses / Fixed::from_int(12);
+    sim.step_day();
+    CHECK(sim.location_economy(2).production == expected.production);
+    CHECK(sim.location_economy(2).taxes == expected.taxes);
+    // Plausibilität: Dresden (20.000 Einwohner) zahlt einige tausend Reichstaler im Monat.
+    CHECK(expected.taxes > Fixed::from_int(1000));
+    CHECK(expected.taxes < Fixed::from_int(10000));
 
+    // Staatseinnahmen = Summe der zuletzt festgestellten Ortssteuern (SAX rechnet am 2.).
+    step_until(sim, Date{1648, 12, 2});
+    const World snapshot = sim.world();
+    const uhrwerk::State& sax = snapshot.states[1];
+    Fixed income;
+    for (const Index li : snapshot.state_locations(1)) {
+        income += snapshot.economy[static_cast<std::size_t>(li)].taxes;
+    }
+    const Fixed expenses = sax.court_expenses / Fixed::from_int(12);
     sim.step_day();
     const uhrwerk::State& after = sim.world().states[1];
     CHECK(after.last_month_income == income);
     CHECK(after.last_month_expenses == expenses);
     CHECK(after.treasury == sax.treasury + (income - expenses));
-    // Plausibilität: rund 6.000 Reichstaler Steuern im Monat.
-    CHECK(income > Fixed::from_int(5000));
-    CHECK(income < Fixed::from_int(7000));
-
-    // Summe der Ortssteuern = Staatseinnahmen (Orte von SAX haben heute nicht gerechnet).
-    Fixed taxes;
-    for (const Index li : sim.world().state_locations(1)) {
-        taxes += sim.location_economy(li).taxes;
-    }
-    CHECK(taxes == income);
 }
 
-TEST_CASE("Simulation: Demografie exakt gegen Handrechnung") {
+TEST_CASE("Simulation: Bevölkerungsformeln exakt gegen Nachrechnung (Abschnitt 4.2–4.4)") {
+    // Ein Ort, ein Block, keine Wanderung: Der Schritt am Rechentag muss genau den Formeln folgen.
     World w = make_small_world();
-    // rate = (1/8 + 1/4 × 1/2) × 1 − 1/2 × 1/4 = 1/8
-    w.rules.growth_base = Fixed::from_ratio(1, 8);
-    w.rules.growth_reconstruction = Fixed::from_ratio(1, 4);
-    w.rules.growth_tax_pressure = Fixed::from_ratio(1, 2);
-    Simulation sim(std::move(w));
-    sim.step_day();
-    // 1200 + 1200 × 1/8 / 12 = 1212,5
-    CHECK(sim.world().pops[0].size() == fx("1212.5"));
-    // 100 + 12,5 / 12: 819200 / 12 = 68266,67 → abgeschnitten 68266
-    CHECK(sim.world().pops[1].size().raw() == 100 * 65536 + 68266);
+    w.pops.pop_back();
+    w.locations[0].pop_count = 1;
+    w.locations[0].area_km2 = Fixed::from_int(100);
+    w.terrains[0].capacity = Fixed::from_int(30);
+    w.professions[0].agrarian = true;
+    w.professions[0].literacy = Fixed::from_ratio(1, 5);
+    w.confessions[0].literacy_factor = Fixed::from_ratio(6, 5);
+    uhrwerk::Rules& r = w.rules;
+    r.fertility = *Fixed::parse("0.088");
+    r.fertile_share_working = *Fixed::parse("0.4");
+    r.fertility_reserve = *Fixed::parse("0.3");
+    r.fertility_wealth = *Fixed::parse("0.15");
+    r.mortality_children = *Fixed::parse("0.045");
+    r.mortality_young = *Fixed::parse("0.010");
+    r.mortality_working = *Fixed::parse("0.018");
+    r.mortality_old = *Fixed::parse("0.11");
+    r.mortality_poverty = *Fixed::parse("0.3");
+    r.capacity_city = Fixed::one();
+    r.living_standard_reference = Fixed::from_int(12);
+    r.living_standard_adjustment = Fixed::from_ratio(1, 4);
+    r.literacy_city = Fixed::one();
+    r.literacy_adjustment = *Fixed::parse("0.03");
+    r.emigration_threshold = Fixed::from_int(30);
+    r.emigration_rate = *Fixed::parse("0.05");
+    r.block_min_size = Fixed::one();
+    uhrwerk::PopBlock& pop = w.pops[0];
+    pop.children = Fixed::from_int(340);
+    pop.young = Fixed::from_int(260);
+    pop.working = Fixed::from_int(330);
+    pop.old = Fixed::from_int(70);
+    pop.living_standard = Fixed::from_int(20);
+    pop.literacy = Fixed::from_ratio(1, 10);
 
-    SUBCASE("Bevölkerung fällt nie unter 0") {
-        World shrinking = make_small_world();
-        shrinking.rules.growth_base = Fixed::from_int(-24); // Rate −24: size + size × (−24) / 12 = −size
-        Simulation s2(std::move(shrinking));
-        s2.step_day();
-        CHECK(s2.world().pops[0].size() == Fixed::zero());
-        CHECK(s2.world().pops[1].size() == Fixed::zero());
-    }
-    SUBCASE("Gelände und Steuerdruck") {
-        World other = make_small_world();
-        other.rules.growth_base = Fixed::from_ratio(1, 4);
-        other.rules.growth_tax_pressure = Fixed::from_ratio(1, 2);
-        other.terrains[0].growth_factor = Fixed::from_ratio(1, 2);
-        // rate = (1/4 + 0) × 1/2 − 1/2 × 1/4 = 0 → keine Änderung
-        Simulation s3(std::move(other));
-        s3.step_day();
-        CHECK(s3.world().pops[0].size() == Fixed::from_int(1200));
+    const World before = w;
+    Simulation sim(std::move(w)); // 1.3.1650: Rechentag von Ort 0
+    sim.step_day();
+    const uhrwerk::PopBlock& after = sim.world().pops[0];
+
+    // Nachrechnung in der Reihenfolge der Spezifikation.
+    const Fixed one = Fixed::one();
+    const Fixed fifty = Fixed::from_int(50);
+    const Fixed twelve = Fixed::from_int(12);
+    uhrwerk::LocationFactors f;
+    uhrwerk::compute_location_factors(before, before.locations[0], before.states[0].tax_rate, f);
+    CHECK(f.population == Fixed::from_int(1000));
+    CHECK(f.capacity == Fixed::from_int(3000));
+    const uhrwerk::PopBlock& old = before.pops[0];
+    const Fixed living =
+        old.living_standard + (f.target[0] - old.living_standard) * r.living_standard_adjustment;
+    const Fixed deviation = (living - fifty) / fifty;
+    const Fixed mortality =
+        (one - r.mortality_poverty * deviation).clamp(Fixed::from_ratio(1, 2), Fixed::from_int(2));
+    const Fixed mortality_month = mortality / twelve;
+    const Fixed wealth = Fixed::max(Fixed::zero(), one + r.fertility_wealth * deviation);
+    const Fixed fertility_month = r.fertility * (one + r.fertility_reserve * f.reserve) * wealth / twelve;
+    const Fixed births = (old.young + old.working * r.fertile_share_working) * fertility_month;
+    const Fixed dk = old.children * r.mortality_children * mortality_month;
+    const Fixed dj = old.young * r.mortality_young * mortality_month;
+    const Fixed de = old.working * r.mortality_working * mortality_month;
+    const Fixed da = old.old * r.mortality_old * mortality_month;
+    const Fixed ak = old.children * Fixed::from_ratio(1, 180);
+    const Fixed aj = old.young * Fixed::from_ratio(1, 180);
+    const Fixed ae = old.working * Fixed::from_ratio(1, 420);
+    const Fixed young = old.young + ak - dj - aj;
+    // Lebensstandard unter der Schwelle 30: Auswanderung der Jungen.
+    REQUIRE(living < r.emigration_threshold);
+    const Fixed emigrated =
+        young * r.emigration_rate * (r.emigration_threshold - living) / Fixed::from_int(1200);
+
+    CHECK(after.living_standard == living);
+    CHECK(after.children == old.children + births - dk - ak);
+    CHECK(after.young == young - emigrated);
+    CHECK(after.working == old.working + aj - de - ae);
+    CHECK(after.old == old.old + ae - da);
+    const Fixed literacy_target = uhrwerk::literacy_target(before, before.locations[0], old, living);
+    CHECK(after.literacy == old.literacy + (literacy_target - old.literacy) * r.literacy_adjustment / twelve);
+
+    const uhrwerk::PopulationBalance& b = sim.world().balance_current[0];
+    CHECK(b.births == births);
+    CHECK(b.deaths == dk + dj + de + da);
+    CHECK(b.emigrated == emigrated);
+    CHECK(b.moved_out == Fixed::zero());
+
+    // Größenordnung: rund 3,7 Geburten und 3 Sterbefälle je Monat bei 1.000 Menschen.
+    CHECK(births > Fixed::from_int(2));
+    CHECK(births < Fixed::from_int(5));
+    CHECK(b.deaths > Fixed::from_int(2));
+    CHECK(b.deaths < Fixed::from_int(5));
+
+    SUBCASE("kein Wert wird negativ, auch bei extremen Regeln") {
+        World extreme = before;
+        extreme.rules.mortality_children = Fixed::one();
+        extreme.rules.mortality_young = Fixed::one();
+        extreme.rules.mortality_working = Fixed::one();
+        extreme.rules.mortality_old = Fixed::one();
+        extreme.rules.mortality_poverty = Fixed::one();
+        extreme.rules.emigration_rate = Fixed::from_int(10);
+        extreme.rules.emigration_threshold = Fixed::from_int(100);
+        extreme.pops[0].living_standard = Fixed::zero();
+        Simulation harsh(std::move(extreme));
+        for (int year = 0; year < 30; ++year) {
+            harsh.step_days(365);
+            const uhrwerk::PopBlock& p = harsh.world().pops[0];
+            CHECK(p.children >= Fixed::zero());
+            CHECK(p.young >= Fixed::zero());
+            CHECK(p.working >= Fixed::zero());
+            CHECK(p.old >= Fixed::zero());
+        }
+        CHECK(harsh.world().pops[0].size() < Fixed::from_int(10)); // fast ausgestorben
     }
 }
 
@@ -475,10 +626,9 @@ TEST_CASE("Simulation: Demografie exakt gegen Handrechnung") {
 TEST_CASE("Simulation: Seuche mit Wahrscheinlichkeit 1 und Chronikeintrag") {
     World w = testhilfen::load_fixture();
     w.rules.plague_chance = Fixed::one();
-    // Ohne Wachstum ändert sich die Bevölkerung nur durch die Seuche.
-    w.rules.growth_base = Fixed::zero();
-    w.rules.growth_reconstruction = Fixed::zero();
-    w.rules.growth_tax_pressure = Fixed::zero();
+    // Ohne Wanderung ändert sich am 1. Januar nur der Ort mit diesem Rechentag (Index 0) außer
+    // durch die Seuche.
+    w.rules.migration_targets = 0;
     Simulation sim(std::move(w), SimConfig{4711});
 
     step_until(sim, Date{1649, 1, 1});
@@ -502,15 +652,23 @@ TEST_CASE("Simulation: Seuche mit Wahrscheinlichkeit 1 und Chronikeintrag") {
         const Fixed loss = events.uniform(before.rules.plague_loss_min, before.rules.plague_loss_max);
         CHECK(loss >= fx("0.04"));
         CHECK(loss < fx("0.12"));
-        // Die Seuche trifft jede Altersgruppe mit demselben Anteil.
-        for (Index p = loc.first_pop; p < loc.first_pop + loc.pop_count; ++p) {
+        // Die Seuche trifft jede Altersgruppe mit demselben Anteil. Ort 0 rechnet am 1. Januar
+        // vorher seine Bevölkerung; dort prüft die Bilanz.
+        Fixed dead;
+        for (Index p = loc.first_pop; p < loc.first_pop + loc.pop_count && i != 0; ++p) {
             const uhrwerk::PopBlock& old_pop = before.pops[static_cast<std::size_t>(p)];
             const uhrwerk::PopBlock& new_pop = after.pops[static_cast<std::size_t>(p)];
             CHECK(new_pop.children == old_pop.children - old_pop.children * loss);
             CHECK(new_pop.young == old_pop.young - old_pop.young * loss);
             CHECK(new_pop.working == old_pop.working - old_pop.working * loss);
             CHECK(new_pop.old == old_pop.old - old_pop.old * loss);
+            dead +=
+                old_pop.children * loss + old_pop.young * loss + old_pop.working * loss + old_pop.old * loss;
         }
+        if (i != 0) {
+            CHECK(after.balance_current[i].plague_deaths == dead);
+        }
+        CHECK(after.balance_current[i].plague_deaths > Fixed::zero());
         const uhrwerk::ChronicleEntry& e = after.chronicle[entry_index++];
         const std::int64_t percent = (loss * Fixed::from_int(100)).round();
         CHECK(percent >= 4);
@@ -700,4 +858,210 @@ TEST_CASE("Simulation: Orte ohne Daten ändern die Ergebnisse der übrigen Orte 
         CHECK(wa.chronicle[k].location == wb.chronicle[k].location);
         CHECK(wa.chronicle[k].state == wb.chronicle[k].state);
     }
+}
+
+// ─── Bevölkerung (seit M4, docs/technik/bevoelkerung.md) ─────────────────────
+
+TEST_CASE("Simulation: Buchführung der Bevölkerung ist exakt") {
+    // Seuchen, Wanderung und Auswanderung eingeschaltet; über 30 Jahre muss jede Person
+    // nachgewiesen sein: Änderung = Geburten − Sterbefälle − Seuchentote − Auswanderung (bitgenau),
+    // und jeder Wegzug ist irgendwo ein Zuzug.
+    World w = testhilfen::load_fixture();
+    w.rules.plague_chance = Fixed::from_ratio(1, 2);
+    w.rules.migration_rate = Fixed::from_int(3); // viel Wanderung
+    Simulation sim(std::move(w));
+    const Fixed start = total_population(sim.world());
+
+    uhrwerk::PopulationBalance sum;
+    const auto add = [&](const uhrwerk::PopulationBalance& b) {
+        sum.births += b.births;
+        sum.deaths += b.deaths;
+        sum.plague_deaths += b.plague_deaths;
+        sum.moved_in += b.moved_in;
+        sum.moved_out += b.moved_out;
+        sum.emigrated += b.emigrated;
+    };
+    for (int day = 0; day < 30 * 365; ++day) {
+        const Date& d = sim.world().date;
+        if (d.month == 1 && d.day == 1) {
+            add(sum_balance(sim.world().balance_current)); // wird heute zum Vorjahr
+        }
+        sim.step_day();
+    }
+    add(sum_balance(sim.world().balance_current));
+
+    const Fixed end = total_population(sim.world());
+    CHECK(end - start == sum.births - sum.deaths - sum.plague_deaths - sum.emigrated);
+    CHECK(sum.moved_in == sum.moved_out);
+    CHECK(sum.moved_out > Fixed::from_int(100)); // es wurde tatsächlich gewandert
+    CHECK(sum.plague_deaths > Fixed::zero());
+    CHECK(sum.births > sum.deaths);
+
+    // Bilanz des Vorjahres: nach dem Jahresabschluss stimmt sie mit der Summe des letzten Jahres
+    // überein (Stichprobe: der Jahresabschluss verschiebt, statt zu verlieren).
+    CHECK(sum_balance(sim.world().balance_previous).births > Fixed::zero());
+}
+
+TEST_CASE("Simulation: Ergebnis unabhängig von der Zahl der Threads") {
+    World w = many_locations(120); // 600 Orte mit Daten, etwa 21 je Rechentag
+    w.rules.plague_chance = Fixed::from_ratio(1, 10);
+    REQUIRE(w.locations.size() == 600);
+
+    std::vector<Simulation> runs;
+    for (const unsigned threads : {1u, 2u, 3u, 4u, 8u}) {
+        runs.emplace_back(w, SimConfig{1648, threads});
+        CHECK(runs.back().threads() == threads);
+    }
+    const std::uint64_t start = runs[0].checksum();
+    for (const Simulation& run : runs) {
+        CHECK(run.checksum() == start);
+    }
+    for (int year = 0; year < 3; ++year) {
+        for (Simulation& run : runs) {
+            run.step_days(365);
+        }
+        INFO("Jahr " << year + 1);
+        for (std::size_t r = 1; r < runs.size(); ++r) {
+            CHECK(runs[r].checksum() == runs[0].checksum());
+        }
+    }
+    CHECK(runs[0].checksum() != start);
+    // Es wurde gewandert, auch zwischen Orten, die am selben Tag rechnen.
+    CHECK(sum_balance(runs[0].world().balance_current).moved_in > Fixed::zero());
+
+    // Eine Kopie bekommt eigene Threads und rechnet gleich weiter.
+    Simulation twin = runs[3];
+    twin.step_days(40);
+    runs[3].step_days(40);
+    CHECK(twin.checksum() == runs[3].checksum());
+}
+
+TEST_CASE("Simulation: Wanderungsziele (Abschnitt 4.5)") {
+    const World w = testhilfen::load_fixture();
+    Simulation sim(w);
+    // Potsdam (Land) liegt 26 km von Berlin-Cölln (Stadt): Ziel im Umkreis von 60 km.
+    const std::vector<Index>& potsdam = sim.migration_targets(1);
+    REQUIRE_FALSE(potsdam.empty());
+    CHECK(potsdam[0] == 0);
+    // Dessau (Land) hat Leipzig (55 km) im Umkreis; die nächste Stadt ist ohnehin dabei.
+    const std::vector<Index>& dessau = sim.migration_targets(4);
+    CHECK(std::find(dessau.begin(), dessau.end(), 3) != dessau.end());
+    // Dresden (Stadt) hat im Umkreis von 60 km keinen Ort mit Daten.
+    CHECK(sim.migration_targets(2).empty());
+    // Orte ohne Daten haben keine Ziele, ungültige Indizes auch nicht.
+    CHECK(sim.migration_targets(5).empty());
+    CHECK(sim.migration_targets(-1).empty());
+
+    // Ein ländlicher Ort bekommt die nächste Stadt auch außerhalb des Umkreises.
+    World far = w;
+    far.rules.migration_radius_km = Fixed::from_int(1);
+    Simulation sim_far(std::move(far));
+    CHECK(sim_far.migration_targets(1) == std::vector<Index>{0}); // Potsdam → Berlin-Cölln
+    CHECK(sim_far.migration_targets(0).empty());                  // Städte nicht
+
+    World none = w;
+    none.rules.migration_targets = 0;
+    CHECK(Simulation(std::move(none)).migration_targets(1).empty());
+}
+
+TEST_CASE("Simulation: Wanderung in einen besseren Ort und neue Blöcke durch Zuzug") {
+    // Zwei benachbarte Orte desselben Staates: arm (0, Land) und reich (1, Stadt, ohne Verwüstung).
+    World w = make_small_world();
+    w.date = Date{1650, 2, 27};
+    w.rules.migration_targets = 4;
+    w.rules.migration_radius_km = Fixed::from_int(60);
+    w.rules.migration_rate = Fixed::one();
+    w.rules.migration_max = Fixed::one();
+    w.rules.migration_foreign = Fixed::from_ratio(1, 2);
+    w.rules.living_standard_reference = Fixed::from_int(12);
+    w.rules.block_min_size = Fixed::one();
+    w.rules.migration_min_amount = Fixed::from_ratio(1, 100);
+    w.terrains[0].capacity = Fixed::from_int(1000);
+    w.pops.pop_back(); // nur Bauern im armen Ort
+    w.pops[0].young = Fixed::from_int(300);
+    w.locations[0].pop_count = 1;
+    w.locations[0].area_km2 = Fixed::from_int(100);
+    w.locations[0].longitude = Fixed::from_int(13);
+    w.locations[0].latitude = Fixed::from_int(52);
+    uhrwerk::Location rich = w.locations[0];
+    rich.id = "reich";
+    rich.is_city = true;
+    rich.devastation = Fixed::zero();
+    rich.longitude += Fixed::from_ratio(1, 10);
+    rich.first_pop = 1;
+    rich.pop_count = 1;
+    w.locations.push_back(rich);
+    uhrwerk::PopBlock noble = w.pops[0];
+    noble.location = 1;
+    noble.profession = 1; // Adel: dort gibt es keinen Bauernblock
+    w.pops.push_back(noble);
+    // Die Konfession der Zuziehenden gibt es im Zielort auch nicht.
+    w.confessions.push_back(w.confessions[0]);
+    w.confessions[1].id = "ref";
+    w.pops[1].confession = 1;
+    initialize_population(w);
+
+    Simulation sim(std::move(w));
+    CHECK(sim.migration_targets(0) == std::vector<Index>{1});
+    step_until(sim, Date{1650, 3, 2}); // Ort 0 rechnet am 1.3.
+    const uhrwerk::PopulationBalance& out = sim.world().balance_current[0];
+    const uhrwerk::PopulationBalance& in = sim.world().balance_current[1];
+    const Fixed first_move = out.moved_out;
+    CHECK(first_move > Fixed::one());
+    CHECK(in.moved_in == first_move);
+    // Für Bauern-Lutheraner gibt es im reichen Ort keinen Block: ein Zugang.
+    REQUIRE(sim.world().arrivals[1].size() == 1);
+    CHECK(sim.world().arrivals[1][0].location == 1);
+    CHECK(sim.world().arrivals[1][0].young == first_move);
+    CHECK(sim.world().arrivals[0].empty());
+    CHECK(sim.world().location_population(1) == sim.world().pops[1].size() + out.moved_out);
+
+    // Am nächsten Monatsersten wird der Zugang ein Block des reichen Ortes.
+    const Fixed population = sim.world().location_population(1);
+    step_until(sim, Date{1650, 4, 1});
+    sim.step_day(); // 1.4.: Neuordnung (und Ort 0 rechnet wieder)
+    CHECK(sim.world().locations[1].pop_count == 2);
+    CHECK(sim.world().arrivals[1].empty());
+    const uhrwerk::PopBlock& created =
+        sim.world().pops[static_cast<std::size_t>(sim.world().locations[1].first_pop + 1)];
+    CHECK(created.profession == 0);
+    CHECK(created.confession == 0);
+    CHECK(created.young >= first_move); // dazu der Zuzug vom 1.4., direkt in den neuen Block
+    CHECK(sim.world().location_population(1) > population);
+}
+
+TEST_CASE("Simulation: Kalibrierung mit den echten Daten (1648 bis 1700)") {
+    const uhrwerk::LoadResult loaded = uhrwerk::load_world(UHRWERK_GAME_DATA_DIR);
+    INFO(testhilfen::issues_text(loaded));
+    REQUIRE(loaded.ok());
+    Simulation sim(*loaded.world);
+    const Fixed start = total_population(sim.world());
+    step_until(sim, Date{1700, 10, 24});
+    const World& w = sim.world();
+    const Fixed end = total_population(w);
+    // Ziel aus Kapitel 07, Abschnitt 7.3: rund ×1,32 (11 → 14,5 Mio.).
+    CHECK(end > start * *Fixed::parse("1.20"));
+    CHECK(end < start * *Fixed::parse("1.45"));
+    Fixed children;
+    Fixed all;
+    for (const uhrwerk::PopBlock& p : w.pops) {
+        CHECK(p.children >= Fixed::zero());
+        CHECK(p.young >= Fixed::zero());
+        CHECK(p.working >= Fixed::zero());
+        CHECK(p.old >= Fixed::zero());
+        CHECK(p.living_standard >= Fixed::zero());
+        CHECK(p.living_standard <= Fixed::from_int(100));
+        CHECK(p.literacy >= Fixed::zero());
+        CHECK(p.literacy <= Fixed::one());
+        children += p.children;
+        all += p.size();
+    }
+    CHECK(children > all * *Fixed::parse("0.30"));
+    CHECK(children < all * *Fixed::parse("0.40"));
+    // Geburten- und Sterberate des letzten vollen Jahres in der Größenordnung der Frühen Neuzeit.
+    const uhrwerk::PopulationBalance year = sum_balance(w.balance_previous);
+    CHECK(year.births > end * *Fixed::parse("0.030"));
+    CHECK(year.births < end * *Fixed::parse("0.045"));
+    CHECK(year.deaths > end * *Fixed::parse("0.025"));
+    CHECK(year.deaths < end * *Fixed::parse("0.040"));
 }

@@ -107,21 +107,33 @@ Reihenfolge ab:
 | Schritt | Was | Wann |
 |---|---|---|
 | 1 | **Befehle** der Warteschlange ausführen, in Eingangsreihenfolge; ungültige werden verworfen. Geänderte Steuersätze kommen einmal je Staat in die Chronik | jeden Tag |
-| 2 | **Demografie** eines Ortes: Wachstum je Bevölkerungsblock | Ort *i* am Monatstag `(i % 28) + 1` |
-| 3 | **Wirtschaft** eines Staates: Steuern aller Blöcke, Hofhaltung, Staatskasse | Staat *j* am Monatstag `(j % 28) + 1` |
-| 4 | **Jahreswechsel**: Seuchen (Zufallsstrom `Ereignisse`), Abbau der Verwüstung, Orte aufsteigend | am 1. Januar |
-| 5 | Datum um einen Tag weiterschalten | jeden Tag |
+| 2 | **Jahresabschluss**: Bilanz des Jahres wird Bilanz des Vorjahres (seit M4) | am 1. Januar |
+| 3 | **Neuordnung** der Blöcke: Zugänge werden Blöcke, zu kleine Blöcke aufgelöst, nur wenn nötig (seit M4) | am Monatsersten |
+| 4 | **Bevölkerung** eines Ortes: Lebensstandard, Geburten, Sterbefälle, Altern, Bildung, Wanderung, Steuern – **parallel** über die Orte des Tages (seit M4) | Ort *i* am Monatstag `(i % 28) + 1` |
+| 5 | **Zusammenführen**: Momentaufnahmen veröffentlichen, Wanderung je Zielort buchen (parallel über Zielorte) | nach Schritt 4 |
+| 6 | **Wirtschaft** eines Staates: Summe der Ortssteuern, Hofhaltung, Staatskasse | Staat *j* am Monatstag `(j % 28) + 1` |
+| 7 | **Jahreswechsel**: Seuchen (Zufallsstrom `Ereignisse`), Abbau der Verwüstung, Orte aufsteigend | am 1. Januar |
+| 8 | Datum um einen Tag weiterschalten | jeden Tag |
 
 Die monatlichen Systeme sind **gestaffelt**: Jeder Ort und jeder Staat hat einen festen Rechentag
 zwischen dem 1. und 28. Das verteilt die Last gleichmäßig über den Monat und funktioniert in
 jedem Monat (auch im Februar). Weil der Rechentag am Index hängt, verschieben neu eingefügte Orte
 die Rechentage der folgenden Orte (siehe Prüfsumme in Abschnitt 3).
 
-**Orte ohne Daten** haben keine Bevölkerungsblöcke und tragen deshalb nichts zu Demografie und
-Wirtschaft bei; beim Jahreswechsel werden sie übersprungen und ziehen keine Zufallszahlen. Damit
-ändern angehängte Orte ohne Daten die Ergebnisse der übrigen Orte nicht (Unit-Test).
+**Orte ohne Daten** haben keine Bevölkerungsblöcke und tragen deshalb nichts zu Bevölkerung und
+Wirtschaft bei, sind keine Wanderungsziele, und beim Jahreswechsel werden sie übersprungen und
+ziehen keine Zufallszahlen. Damit ändern angehängte Orte ohne Daten die Ergebnisse der übrigen Orte
+nicht (Unit-Test).
 
-Die Formeln stehen in [chronik-skript.md, Abschnitt 5](chronik-skript.md#5-formeln-der-simulation-m1).
+Die Formeln stehen in [bevoelkerung.md, Abschnitt 4](bevoelkerung.md#4-formeln) (Bevölkerung,
+Ortssteuern) und [chronik-skript.md, Abschnitt 5](chronik-skript.md#5-formeln-der-simulation)
+(Staatshaushalt, Jahreswechsel).
+
+**Mehrkernberechnung (seit M4):** Die Ortsrechnungen eines Tages laufen in Paketen zu 8 Orten auf
+allen Kernen (`SimConfig::threads`, 0 = alle). Jede schreibt nur Daten ihres Ortes und liest andere
+Orte nur über deren veröffentlichte Momentaufnahme; das Buchen der Wanderung läuft je Zielort in
+fester Reihenfolge. Das Ergebnis ist daher bei jeder Thread-Zahl bitgleich
+([bevoelkerung.md, Abschnitt 5](bevoelkerung.md#5-mehrkernberechnung)).
 
 Ein Befehl, der über `submit()` (bzw. `set_tax_rate_percent` der Brücke) eingereiht wird, wirkt
 **ab dem nächsten simulierten Tag**. Die Oberfläche zeigt bis dahin „gilt ab dem nächsten Tag“.
@@ -152,17 +164,19 @@ Lockstep-Multiplayer, Replays und reproduzierbare Tests.
    `location_economy()` rechnen, ohne etwas zu ändern.
 
 **Prüfsumme:** `Simulation::checksum()` bildet FNV-1a (64 Bit) über den gesamten veränderlichen
-Zustand: Datum, vergangene Tage, Seed, Staatskassen, Steuersätze, Verwüstung, Bevölkerung, die
-Zustände aller Zufallsströme, die Chronik und die noch wartenden Befehle. Ganzzahlen gehen
+Zustand: Datum, vergangene Tage, Seed, Staatskassen, Steuersätze, Verwüstung, Bevölkerung (seit
+M4 mit Altersgruppen, Kultur, Lebensstandard, Alphabetisierung und den Zugängen), Momentaufnahmen,
+Bilanzen und Ortssteuern, die Zustände aller Zufallsströme, die Chronik und die noch wartenden
+Befehle. Die Zahl der Threads gehört nicht dazu. Ganzzahlen gehen
 byteweise in Little-Endian-Reihenfolge ein, daher ist die Prüfsumme plattformunabhängig.
 
 Unveränderlicher Inhalt – Namen, Lage, Gelände, Fläche und **bewusst auch die Kreise** – gehört
 nicht zur Prüfsumme: Neue oder anders gebildete Kreise in den Daten ändern die Referenzprüfsumme
 nicht. Orte ohne Daten gehen über Besitzer (`kNone`) und Blockzahl (0) ein. Kommen Orte hinzu,
 ändert sich die Referenz trotzdem, weil sich die Zahl der Orte und die Rechentage nachfolgender
-Orte verschieben. Referenz nach 100 Jahren mit `data/` (Seed 1648): seit M3
-`40de8c42e8f7a0ff` (erster M3-Stand mit 4.541 Orten `5548a5fa80f75c0d`), vorher
-`8d44cf792e143bb0` (Begründung in
+Orte verschieben. Referenz nach 100 Jahren mit `data/` (Seed 1648, jede Thread-Zahl): seit M4
+`ed6b14a02cfbfa5d` (Bevölkerungsmodell), in M3 `40de8c42e8f7a0ff` (erster M3-Stand mit 4.541 Orten
+`5548a5fa80f75c0d`), vorher `8d44cf792e143bb0` (Begründung in
 [data/README.md](../../data/README.md#prüfung)).
 
 **Geprüft wird das an drei Stellen:**

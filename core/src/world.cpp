@@ -65,6 +65,11 @@ Fixed World::location_population(Index location) const {
             total += pops[static_cast<std::size_t>(p)].size();
         }
     }
+    if (in_range(arrivals, location)) {
+        for (const PopBlock& arrival : arrivals[static_cast<std::size_t>(location)]) {
+            total += arrival.size();
+        }
+    }
     return total;
 }
 

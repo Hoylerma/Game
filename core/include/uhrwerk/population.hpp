@@ -36,25 +36,32 @@ Fixed literacy_target(const World& world, const Location& location, const PopBlo
 void absorb(PopBlock& into, const PopBlock& from);
 
 /// Ähnlichster Block für die Auflösung von pop (Abschnitt 4.7) unter den Kandidaten
-/// [first, first + count) von blocks, ohne exclude: gleicher Beruf und gleiche Konfession → gleicher
-/// Beruf und gleiche Kultur → gleicher Beruf → gleiche Konfession → größter Block; bei Gleichstand
-/// der kleinere Index. kNone, wenn es keinen Kandidaten gibt. Kandidaten mit keep[i] == false
-/// werden übergangen.
+/// [first, first + count) von blocks: gleicher Beruf und gleiche Konfession → gleicher Beruf und
+/// gleiche Kultur → gleicher Beruf → gleiche Konfession → größter Block; bei Gleichstand der
+/// kleinere Index. kNone, wenn es keinen Kandidaten gibt. Kandidaten mit keep[i] == false werden
+/// übergangen; ein leeres keep lässt alle zu.
 Index most_similar_block(const std::vector<PopBlock>& blocks, const std::vector<bool>& keep, Index first,
                          Index count, const PopBlock& pop);
 
-/// Zugezogene, für die es im Zielort noch keinen Block gibt (Abschnitt 4.7). Sie werden bei der
-/// nächsten Neuordnung zu einem eigenen Block.
-struct Arrival {
-    PopBlock block; // Schlüssel, Personen (nur Altersgruppe Jung), Lebensstandard, Alphabetisierung
-};
-
 /// Neuordnung (Abschnitt 4.7): Blöcke unter rules.block_min_size gehen im ähnlichsten
-/// verbleibenden Block ihres Ortes auf (der größte Block eines Ortes bleibt immer), Zugänge werden
-/// als neue Blöcke angehängt, und world.pops wird neu aufgebaut (first_pop, pop_count).
-/// arrivals müssen nach Zielort aufsteigend und darin in Eingangsreihenfolge sortiert sein; sie
-/// werden geleert. Gibt true zurück, wenn sich etwas geändert hat.
-bool reorganize(World& world, std::vector<Arrival>& arrivals);
+/// verbleibenden Block ihres Ortes auf (der größte Block eines Ortes bleibt immer), die Zugänge
+/// (world.arrivals[ort], in Eingangsreihenfolge) werden als neue Blöcke angehängt, und world.pops
+/// wird neu aufgebaut (first_pop, pop_count). Danach sind alle Listen in world.arrivals leer.
+/// Gibt true zurück, wenn sich etwas geändert hat.
+bool reorganize(World& world);
+
+/// Abgeleitete Konstanten der Bevölkerungsrechnung, einmal aus den Regeln berechnet.
+struct PopulationRates {
+    Fixed aging_children; // 1/180: Anteil der Kinder, die je Monat 15 werden
+    Fixed aging_young;    // 1/180
+    Fixed aging_working;  // 1/420
+    Fixed literacy_month; // bildung_anpassung / 12
+    Fixed fifty;          // 50
+    Fixed hundred;        // 100
+    Fixed twelve;         // 12
+    Fixed twelve_hundred; // 1200 (Jahresrate in Prozentpunkten je Monat)
+};
+PopulationRates derive_rates(const Rules& rules);
 
 /// Startwerte nach dem Laden (Abschnitt 2.6): Lebensstandard = Ziel des Berufs im Ort,
 /// Alphabetisierung = Zielwert, danach Neuordnung (zu kleine Blöcke auflösen).
