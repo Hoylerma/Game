@@ -593,7 +593,7 @@ void print_population(const World& w, Fixed start, Fixed end) {
     if (year.births > Fixed::zero()) {
         std::cout << "Vorjahr:     Geburten " << per_mille(year.births, end) << ", Sterbefälle "
                   << per_mille(year.deaths, end) << ", Seuchen " << per_mille(year.plague_deaths, end)
-                  << ", Wanderung " << per_mille(year.moved_out, end) << ", Auswanderung "
+                  << ", Binnenwanderung " << per_mille(year.moved_out, end) << ", Auswanderung "
                   << per_mille(year.emigrated, end) << '\n';
     }
 }

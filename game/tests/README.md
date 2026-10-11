@@ -53,14 +53,15 @@ Prüft die GDExtension und die Kartendaten ohne Szene und ohne Grafikausgabe:
    liefert eine Fehlermeldung
 3. Daten laden; Anzahl Staaten und Orte, Spielerstaat, Bevölkerung und Fläche > 0; alle
    Felder von `get_state` und `get_location` (seit M3 mit `has_data`, `kreis_index`,
-   `kreis_name`); `get_location_index` passt zu jedem Ort
+   `kreis_name`, seit M4 mit Kultur, Altersgruppen, Lebensstandard, Alphabetisierung und
+   Vorjahresbilanz); `get_location_index` passt zu jedem Ort
 4. ungültige Indizes und Befehle werden abgewiesen (leere Rückgabe bzw. `false`, auch
    `get_kreis` und `get_kreis_index`)
-5. `get_map_colors` liefert für alle sechs Kartenmodi eine Farbe je Ort
+5. `get_map_colors` liefert für alle acht Kartenmodi eine Farbe je Ort
 6. Orte ohne Daten und Kreise: `get_location_owner_indices` und `get_location_kreis_indices`
    passen zu `get_location`; Orte ohne Daten haben keinen Besitzer und keine Bevölkerung;
    `get_kreis` hat alle Felder, `get_kreis_index` passt, `location_count` stimmt; Alpha der
-   Kartenfarben ist 0 genau für Orte ohne Daten in den Modi 0, 1, 2 und 4, sonst 1
+   Kartenfarben ist 0 genau für Orte ohne Daten in den Modi 0, 1, 2, 4, 6 und 7, sonst 1
 7. Steuerbefehl: `set_tax_rate_percent` wird angenommen und ist nach einem Tag wirksam
 8. 365 Tage simulieren; Datum (Kalenderrechnung im Test), `get_days_elapsed`, Datumstext
 9. Einnahmen, Ausgaben und Produktion > 0

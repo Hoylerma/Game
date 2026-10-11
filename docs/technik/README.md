@@ -10,7 +10,7 @@ ist (Stand: Meilenstein M3, Karte des Kernraums).
 | [chronik-skript.md](chronik-skript.md) | Syntax des Chronik-Skripts, Datenordner, Dateischemata (mit Orten ohne Daten und Kreisen), Startzustand, Formeln der Simulation, Kartenformat (Fassung M3) | Parser, Lader, `data/`, Archivar, Geodaten, Kartengenerator |
 | [tabellen.md](tabellen.md) | Tabellen der Datenpipeline (`data/tabellen/*.csv`), Sicherheit der Angaben, Prüfungen des Archivars | Archivar, `data/` |
 | [bridge-api.md](bridge-api.md) | GDScript-Schnittstelle der GDExtension (`UhrwerkSimulation`), Kartenmodi, Bibliotheksnamen | Brücke, Godot-Projekt |
-| [bevoelkerung.md](bevoelkerung.md) | **Entwurf M4:** Bevölkerungsmodell (Altersaufbau, Lebensstandard, Bildung, Kultur, Wanderung), Formeln, Mehrkernberechnung, Lasttest, Abnahme | Kern, `data/`, Archivar (nach Freigabe) |
+| [bevoelkerung.md](bevoelkerung.md) | Bevölkerungsmodell seit M4 (Altersaufbau, Lebensstandard, Bildung, Kultur, Wanderung), Formeln, Mehrkernberechnung, Lasttest, Abnahme mit Messwerten | Kern, `data/`, Archivar |
 
 Die öffentlichen Header in [`core/include/uhrwerk/`](../../core/include/uhrwerk/) sind die
 verbindliche Programmierschnittstelle des Kerns. Jede Datei beginnt mit einem Kommentar, der ihre
@@ -39,7 +39,7 @@ Regeln erklärt.
 │  common/ · szenarien/ · history/{staaten,kreise,orte}/ · karte/        │
 └────────────────────────────────────────────────────────────────────────┘
 
-  Weitere Nutzer des Kerns:   cli/   uhrwerk-cli (pruefen, info, lauf, determinismus)
+  Weitere Nutzer des Kerns:   cli/   uhrwerk-cli (pruefen, info, lauf, determinismus, lasttest)
                               tests/ Unit- und Integrationstests (doctest)
   Werkzeuge für die Daten:    tools/archivar/         erzeugt data/history/ aus data/tabellen/
                               tools/geodaten/         Quellen, Geometrie (karte/geometrie/),
@@ -72,16 +72,21 @@ werden. Damit gelangt nie eine Gleitkommazahl in den Zustand des Kerns.
 | [`loader.hpp`](../../core/include/uhrwerk/loader.hpp) | `load_world()`: Datenordner → `World`, fatale Fehler und Warnungen |
 | [`world.hpp`](../../core/include/uhrwerk/world.hpp) | Weltmodell: flache Vektoren, Querverweise als Indizes |
 | [`simulation.hpp`](../../core/include/uhrwerk/simulation.hpp) | `Simulation`: Tick-Planer, Systeme, Befehle, Prüfsumme |
+| [`population.hpp`](../../core/include/uhrwerk/population.hpp) | Bausteine des Bevölkerungsmodells: Kennzahlen je Ort, Bildungsziel, Zusammenlegen und Neuordnung der Blöcke, Startwerte (seit M4) |
 | [`parallel.hpp`](../../core/include/uhrwerk/parallel.hpp) | Thread-Pool `ThreadPool` für die Mehrkernberechnung (seit M4) |
+| [`lasttest.hpp`](../../core/include/uhrwerk/lasttest.hpp) | `make_load_test_world()`: Lasttest-Welt mit Daten für jeden Ort (seit M4) |
 
 ### Weltmodell
 
-`World` hält alle Objekte in **flachen Vektoren** (`terrains`, `confessions`, `professions`,
-`states`, `districts`, `locations`, `pops`, `chronicle`). Querverweise sind **Indizes**
+`World` hält alle Objekte in **flachen Vektoren** (`terrains`, `confessions`, `cultures`,
+`professions`, `states`, `districts`, `locations`, `pops`, `chronicle`). Querverweise sind **Indizes**
 (`Index` = `int32`, `kNone` = −1), keine Zeiger. Die Reihenfolge jedes Vektors ergibt sich aus der Ladereihenfolge
 ([chronik-skript.md, Abschnitt 2](chronik-skript.md#2-datenordner)): Dateien nach Namen sortiert,
 Einträge in Dateireihenfolge. Die Bevölkerungsblöcke eines Ortes liegen zusammenhängend
-(`first_pop`, `pop_count`).
+(`first_pop`, `pop_count`). Seit M4 trägt ein Block Beruf, Konfession, Kultur, vier Altersgruppen,
+Lebensstandard und Alphabetisierung (64 Byte); dazu kommen je Ort Zugänge (`arrivals`),
+Momentaufnahmen, Jahresbilanzen und Ortssteuern
+([bevoelkerung.md, Abschnitt 2](bevoelkerung.md#2-datenmodell)).
 
 **Orte ohne Daten** (seit M3, [chronik-skript.md, Abschnitt 3.6](chronik-skript.md#36-historyortechron)):
 Ein Ort, der zum Startdatum keines der vier Simulationsfelder (`besitzer`, `bevoelkerung`,
@@ -183,10 +188,13 @@ Orte verschieben. Referenz nach 100 Jahren mit `data/` (Seed 1648, jede Thread-Z
 
 - Unit-Tests in [`tests/test_simulation.cpp`](../../tests/test_simulation.cpp): gleiche Läufe →
   gleiche Prüfsumme; jede Zustandsänderung → andere Prüfsumme.
-- `uhrwerk-cli determinismus --jahre N`: zwei Läufe mit gleichem Seed (Vergleich nach jedem Jahr)
-  und ein Lauf mit Seed + 1, der abweichen muss. Läuft als CTest `determinismus_50_jahre`.
-- Die CI vergleicht die Prüfsumme nach 100 Jahren zwischen **GCC, Clang (Linux) und MSVC
-  (Windows)**; alle drei müssen übereinstimmen.
+- `uhrwerk-cli determinismus --jahre N`: zwei Läufe mit gleichem Seed (Vergleich nach jedem Jahr,
+  seit M4 der zweite mit einem Thread) und ein Lauf mit Seed + 1, der abweichen muss. Läuft als
+  CTest `determinismus_50_jahre`.
+- Seit M4: Unit-Test mit 1, 2, 3, 4 und 8 Threads und `uhrwerk-cli lasttest --vergleich T`
+  (CTest `lasttest_threads`) – die Zahl der Threads ändert die Prüfsumme nicht.
+- Die CI vergleicht die Prüfsumme nach 100 Jahren und die des Lasttests (50.000 Blöcke, 2 Jahre)
+  zwischen **GCC, Clang (Linux) und MSVC (Windows)**; alle drei müssen übereinstimmen.
 
 ## 4. Festkomma (`Fixed`)
 
@@ -300,9 +308,10 @@ jeden Pull Request:
 
 | Job | Prüft |
 |---|---|
-| Kern (Linux, gcc/clang) | Build mit `-Werror`, alle Tests (doctest, `daten_pruefen`, `determinismus_50_jahre`), Prüfsumme nach 100 Jahren |
+| Kern (Linux, gcc/clang) | Build mit `-Werror`, alle Tests (doctest, `daten_pruefen`, `determinismus_50_jahre`, `lasttest_threads`), Prüfsummen nach 100 Jahren und des Lasttests |
 | Kern (Windows, MSVC) | dasselbe mit MSVC (`/W4 /WX`) – Portabilität |
-| Determinismus (GCC, Clang, MSVC) | die drei Prüfsummen sind gleich |
+| Determinismus (GCC, Clang, MSVC) | die Prüfsummen (100 Jahre und Lasttest) sind auf allen drei gleich |
+| Lasttest (Linux, Release) | 500.000 Blöcke, 3 Spieljahre, Median höchstens 3 s (Puffer für schwankende Runner), gleiche Prüfsummen mit einem Thread; Messwerte in der Zusammenfassung des Laufs ([bevoelkerung.md, Abschnitt 7](bevoelkerung.md#7-lasttest)) |
 | Formatierung | `clang-format-18 --dry-run --Werror` über `core/`, `cli/`, `tests/`, `bridge/` |
 | Python-Werkzeuge (Python 3.10 mit numpy 2.2.6, Python 3.13 mit numpy 2.5.3) | Tests von Archivar, Kartengenerator und Geodaten (ohne Netz); `data/history/` und `data/karte/` sind aktuell (`--pruefen`) |
 | Godot | Brücke bauen, Projekt headless importieren, Einheitentest `unit_test.gd`, Rauchtest `smoke_test.gd`, Klicktest `klick_test.gd` (jeder Ort in drei Zoomstufen), alle Protokolle ohne Skriptfehler; zwei Screenshots der Hauptszene (Xvfb, OpenGL 3) als Artefakt |

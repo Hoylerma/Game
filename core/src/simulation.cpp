@@ -471,7 +471,7 @@ void Simulation::execute(const Command& command) {
 // Momentaufnahme) und liest andere Orte nur über world_.snapshots und world_.snapshot_targets.
 void Simulation::run_population(Index location, Scratch& scratch) {
     const auto li = static_cast<std::size_t>(location);
-    Location& loc = world_.locations[li];
+    const Location& loc = world_.locations[li];
     std::vector<Migration>& out = outbox_[li];
     out.clear();
     if (!in_range(world_.states, loc.owner) || !in_range(world_.terrains, loc.terrain)) {
@@ -629,7 +629,6 @@ void Simulation::publish_snapshot(Index location) {
 
 // Bucht einen Wanderungsstrom im Zielort (Abschnitt 4.7). Läuft parallel zu anderen Zielorten:
 // schreibt nur Blöcke, Zugänge und Bilanz des Zielortes.
-
 void Simulation::book_migration(const Migration& migration) {
     PopBlock incoming;
     incoming.location = migration.target;

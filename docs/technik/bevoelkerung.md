@@ -2,7 +2,7 @@
 
 > **Status: verbindlich** für Kern (`core/src/population.cpp`, `core/src/simulation.cpp`), Daten und
 > Tests, wie [chronik-skript.md](chronik-skript.md). Das Dokument entstand als Entwurf für M4
-> „Bevölkerung und Lasttest“ ([meilensteine.md](../meilensteine.md#m4--bevölkerung-und-lasttest))
+> „Bevölkerung und Lasttest“ ([meilensteine.md](../meilensteine.md#m4--bevölkerung-und-lasttest-))
 > und wurde vor der Umsetzung freigegeben; Abweichungen der Umsetzung vom Entwurf sind eingearbeitet
 > (u. a. Formeln in Abschnitt 4 in der exakten Rechenreihenfolge, paralleles Buchen der Wanderung,
 > kalibrierte Werte in Abschnitt 4.9). Abschnitt 12 hält die bestätigten Entscheidungen fest.
@@ -455,9 +455,25 @@ alle 4.542 Orte kopiert): 307.000 Blöcke rechnen 0,05–0,07 s je Spieljahr, al
 Block und Monat statt 450 ns. 100 Jahre mit den echten Daten: 0,008 s statt 0,60 s. Die
 Referenzprüfsumme `40de8c42e8f7a0ff` ist unverändert.
 
+**Messung am Ende von M4** (Release, volles Modell, Lasttest-Welt mit 499.992 Blöcken in 4.542
+Orten, Median aus 3 Spieljahren):
+
+| Rechner | Threads | Median je Spieljahr | Arbeitsspeicher (Spitze) |
+|---|---|---|---|
+| Entwicklungsumgebung: Xeon 2,8 GHz, 4 Kerne | 4 | 0,33–0,40 s | 42 MB |
+| ebenso | 2 | 0,64 s | |
+| ebenso | 1 | 0,88 s | |
+| GitHub-Runner `ubuntu-latest` (2 vCPU) | 2 | 0,52 s | 44 MB |
+
+Das entspricht etwa 150 ns je Block und Monat mit einem Thread – wie geschätzt. Mit vier Threads
+ist der Lauf 2,2- bis 2,7-mal so schnell (die Werte schwanken zwischen Läufen um etwa 20 %); den Rest begrenzen die Teile, die nacheinander laufen
+(Neuordnung, Veröffentlichen der Momentaufnahmen, Sammeln der Wanderung) und das Buchen der rund
+2,8 Mio. Wanderungsströme je Jahr. 100 Jahre mit den 60 Orten der Testregion dauern 0,12 s.
+
 ## 7. Lasttest
 
-**Lasttest-Welt.** `make_load_test_world(base, blocks, seed)` in `core/` (`uhrwerk/lasttest.hpp`)
+**Lasttest-Welt.** `make_load_test_world(base, options)` in `core/` (`uhrwerk/lasttest.hpp`,
+`LoadTestOptions { blocks, seed }`)
 erzeugt aus der geladenen Karte (4.542 Orte, Staaten, Gelände, Flächen) eine Welt, in der **jeder**
 Ort Daten hat. Eigener Zufallsstrom `Lasttest = 5`, damit ist die Welt bei gleichem Seed immer
 gleich.
@@ -484,20 +500,23 @@ S Sekunden liegt.
 
 | Wo | Was |
 |---|---|
-| Kern-Jobs (Debug) | CTest `lasttest_threads`: 20.000 Blöcke, 1 Jahr, 1 gegen 3 Threads |
-| Kern (Linux, Release) | `lasttest` mit 500.000 Blöcken, 3 Jahren, `--grenze 3` (Puffer für schwankende Runner); Zeit steht im Protokoll |
-| Determinismus | Prüfsumme des Lasttests (100.000 Blöcke, 2 Jahre) unter GCC, Clang und MSVC gleich |
+| Kern-Jobs (Debug) | CTest `lasttest_threads`: 20.000 Blöcke, 1 Jahr, 3 Threads gegen 1 Thread |
+| Lasttest (Linux, Release) | `lasttest` mit 500.000 Blöcken, 3 Jahren, `--vergleich 1 --grenze 3` (Puffer für schwankende Runner); Ausgabe in der Zusammenfassung des Laufs |
+| Determinismus | Prüfsumme des Lasttests (50.000 Blöcke, 2 Jahre, Debug) unter GCC, Clang und MSVC gleich |
+
+Referenz: Standardlauf (500.000 Blöcke, 3 Jahre, Seed 1648) endet mit der Prüfsumme
+`a5a4c0d80a2f23ea`, bei jeder Zahl von Threads.
 
 ## 8. Abnahme
 
-| Kriterium | Prüfung |
-|---|---|
-| **500.000 Blöcke, Median ≤ 2,0 s je Spieljahr** auf 4 Kernen | `uhrwerk-cli lasttest` auf dem GitHub-Runner `ubuntu-latest` (4 vCPU). Der Referenz-PC aus Kapitel 02 (6 Kerne/12 Threads) ist schneller; was der Runner schafft, schafft er auch. Messwert und Rechner kommen in [meilensteine.md](../meilensteine.md) |
-| Prüfsummen bitgleich unter GCC, Clang, MSVC | CI-Job Determinismus (100 Jahre Testdaten und Lasttest) |
-| Prüfsummen gleich bei 1, 2, 3, 4, 8 Threads | Unit-Test und `--vergleich` |
-| Exakte Buchführung | Test: Bevölkerungsänderung = Geburten − Sterbefälle − Seuchentote − Auswanderung (bitgenau in `Fixed`); Σ Zuzug = Σ Wegzug |
-| Kalibrierung | Test mit den Daten der Testregion: Bevölkerung 1648 → 1700 wächst um den Faktor 1,20–1,45; Kinderanteil 30–40 %, kein Block negativ |
-| Speicher | 500.000 Blöcke unter 200 MB Arbeitsspeicher (Lasttest gibt den Spitzenwert aus, soweit das Betriebssystem ihn liefert) |
+| Kriterium | Prüfung | Stand (Ende M4) |
+|---|---|---|
+| **500.000 Blöcke, Median ≤ 2,0 s je Spieljahr** auf 4 Kernen | `uhrwerk-cli lasttest` in der CI (Job „Lasttest“, Grenze 3 s als Puffer) und in der Entwicklungsumgebung. Der Referenz-PC aus Kapitel 02 (6 Kerne/12 Threads) ist schneller als beide | **erfüllt:** 0,33–0,40 s mit 4 Kernen, 0,88 s mit einem; auf dem GitHub-Runner (nur 2 vCPU) 0,52 s (Abschnitt 6.3) |
+| Prüfsummen bitgleich unter GCC, Clang, MSVC | CI-Job Determinismus (100 Jahre Testdaten und Lasttest) | **erfüllt** |
+| Prüfsummen gleich bei 1, 2, 3, 4, 8 Threads | Unit-Test, `--vergleich` (CTest und CI-Job Lasttest), `determinismus` (zweiter Lauf mit einem Thread); ThreadSanitizer ohne Befund | **erfüllt** |
+| Exakte Buchführung | Test: Bevölkerungsänderung = Geburten − Sterbefälle − Seuchentote − Auswanderung (bitgenau in `Fixed`); Σ Zuzug = Σ Wegzug | **erfüllt** |
+| Kalibrierung | Test mit den Daten der Testregion: Bevölkerung 1648 → 1700 wächst um den Faktor 1,20–1,45; Kinderanteil 30–40 %, kein Block negativ | **erfüllt:** ×1,29 (Abschnitt 4.9) |
+| Speicher | 500.000 Blöcke unter 200 MB Arbeitsspeicher (Lasttest gibt den Spitzenwert aus, soweit das Betriebssystem ihn liefert) | **erfüllt:** 42–44 MB (Linux) |
 
 ## 9. Prüfsumme
 

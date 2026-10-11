@@ -8,6 +8,55 @@ Vor Version 1.0 kann sich jede Schnittstelle ändern.
 
 ## [Unveröffentlicht]
 
+### Meilenstein M4 – Bevölkerung und Lasttest
+
+Die Bevölkerung entsteht jetzt aus Geburten, Sterbefällen, Altern und Wanderung statt aus einem
+festen Wachstum, und der Kern rechnet **500.000 Bevölkerungsblöcke in 0,33–0,40 s je Spieljahr**
+(4 Kerne, Release) – bitgleich bei jeder Zahl von Threads und unter GCC, Clang und MSVC. Ergebnis
+und bekannte Grenzen: [docs/meilensteine.md](docs/meilensteine.md#m4--bevölkerung-und-lasttest-).
+
+- **Vertrag:** [technik/bevoelkerung.md](docs/technik/bevoelkerung.md) (neu, verbindlich):
+  Datenmodell, Ablauf eines Tages, alle Formeln in Rechenreihenfolge, Regelwerte und
+  Kalibrierung, Mehrkernberechnung, Lasttest, Abnahme mit Messwerten.
+  [chronik-skript.md](docs/technik/chronik-skript.md) Abschnitte 3.1–3.6 und 3.10 (Kulturen,
+  neue Felder), [bridge-api.md](docs/technik/bridge-api.md), [tabellen.md](docs/technik/tabellen.md)
+  ergänzt.
+- **Kern:**
+  - Bevölkerungsblock mit Kultur, vier Altersgruppen, Lebensstandard und Alphabetisierung
+    (64 Byte); `World::cultures`, Zugänge je Ort, Momentaufnahmen, Jahresbilanzen und
+    Ortssteuern als neuer Zustand (alle in der Prüfsumme).
+  - Bevölkerungsmodell (`uhrwerk/population.hpp`): Tragfähigkeit und Landreserve, Lebensstandard
+    aus dem Netto-Einkommen, Geburten und Sterbefälle nach Lebensstandard, Altern, Bildung,
+    Wanderung der Jungen (bis zu 4 Nachbarorte im Umkreis von 60 km und die nächste Stadt),
+    Auswanderung, monatliche Neuordnung der Blöcke. Die Felder `wachstum_*` entfallen.
+  - Mehrkernberechnung mit eigenem Thread-Pool (`uhrwerk/parallel.hpp`): Orte eines Tages und das
+    Buchen der Wanderung je Zielort laufen parallel; feste Aufteilung und feste Reihenfolge beim
+    Zusammenführen. `SimConfig::threads`.
+  - Bitgleiche Schnellwege in `Fixed` (Knuth-Division, 64-Bit-Multiplikation), Rechentag-Listen,
+    Steuern je Ort: 18 statt 450 ns je Block und Monat mit dem Modell aus M1.
+  - Lasttest-Welt `make_load_test_world` (`uhrwerk/lasttest.hpp`, Zufallsstrom `Lasttest = 5`).
+  - **123 Testfälle** (vorher 101), u. a. Formeln gegen Nachrechnung, exakte Buchführung,
+    gleiche Prüfsummen mit 1–8 Threads, Kalibrierung mit den echten Daten.
+- **CLI:** `uhrwerk-cli lasttest` (`--bloecke`, `--jahre`, `--threads`, `--vergleich`,
+  `--grenze`, `--seed`); `--threads` für `lauf` und `determinismus`; `lauf` zeigt die Bevölkerung
+  und die Jahresbilanz in ‰; `determinismus` rechnet den zweiten Lauf mit einem Thread.
+- **Daten:** 38 Kulturen in `common/kulturen.chron`; Spalte `kultur` in `dateien.csv`
+  (Standard je Landschaft) und `bevoelkerung.csv` (Anteile je Ort); Tragfähigkeit je Geländetyp,
+  Bildungsfaktor je Konfession, Agrar-, Bildungs- und Stadtberuf je Beruf; kalibrierte
+  Regelwerte (1648 → 1700 ×1,29, → 1816 ×2,33).
+- **Archivar:** Kulturen und Kulturanteile mit Prüfungen; **35 Tests** (vorher 33). `orte.py`
+  erhält die Spalte `kultur`.
+- **Brücke und Godot:** `get_location` mit Kultur, Altersgruppen, Lebensstandard,
+  Alphabetisierung und Bilanz des Vorjahres; `get_state` mit Lebensstandard und Bilanz;
+  Kartenmodi 6 „Lebensstandard“ (Taste U) und 7 „Kultur“ (Taste I); Ortspanel mit Kulturen,
+  Gesellschaft, Altersaufbau und Bilanz; Kartenleiste mit Kurznamen. `unit_test.gd` mit
+  **179 Prüfungen** (vorher 170).
+- **CI:** Determinismus vergleicht zusätzlich die Prüfsumme des Lasttests (50.000 Blöcke,
+  2 Jahre); neuer Job „Lasttest (Linux, Release)“ mit 500.000 Blöcken, Grenze 3 s und Vergleich
+  mit einem Thread; CTest `lasttest_threads`.
+- **Referenz-Prüfsumme** nach 100 Jahren jetzt `ed6b14a02cfbfa5d` (vorher `40de8c42e8f7a0ff`),
+  Bevölkerung 642.668; Lasttest-Referenz `a5a4c0d80a2f23ea`.
+
 ### Meilenstein M3 – Karte des Kernraums
 
 Die Karte zeigt den ganzen Kernraum mit **4.542 Orten in 626 Kreisen**. Historische Daten haben

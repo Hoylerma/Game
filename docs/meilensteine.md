@@ -16,7 +16,7 @@ gebaut; Abhängigkeiten stehen jeweils dabei.
 | M1 | Technischer Durchstich | 1 – Vorproduktion | – | **fertig** |
 | M2 | Datenpipeline „Archivar“ | 1 – Vorproduktion | M1 | **fertig** |
 | M3 | Karte des Kernraums | 1 – Vorproduktion | M2 | **fertig** (eine Abnahme nicht messbar, siehe unten) |
-| M4 | Bevölkerung und Lasttest | 1 – Vorproduktion | M3 | offen |
+| M4 | Bevölkerung und Lasttest | 1 – Vorproduktion | M3 | **fertig** |
 | M5 | Wirtschaft und Staatshaushalt | 1 – Vorproduktion | M4 | offen |
 | M6 | Speicherstände und Wiederholungen | 1 – Vorproduktion | M5 | offen |
 | M7 | Lesezeichen 1848 | 2 – Vertical Slice | M6 | offen |
@@ -157,9 +157,10 @@ prüfen und mit Quellen belegen, ohne jede `.chron`-Datei von Hand zu schreiben.
   Orten ergab `5548a5fa80f75c0d`; die Korrekturen nach dem Review (Osterode am Harz neu in
   `goettingen`) verschoben die Indizes von 38 Orten mit Daten um eins.
 - Für M4 vorgemerkt: `step_day` prüft jeden Tag den Rechentag aller 4.542 Orte; 100 Jahre
-  dauern im Release-Build 0,52 s statt 0,225 s mit 60 Orten.
+  dauern im Release-Build 0,52 s statt 0,225 s mit 60 Orten. *In M4 erledigt* (Rechentag-Listen,
+  Schnellwege in `Fixed`): 0,008 s mit dem Modell aus M1.
 
-### M4 – Bevölkerung und Lasttest
+### M4 – Bevölkerung und Lasttest ✅
 
 **Ziel:** Die Bevölkerungssimulation aus [07 Bevölkerung und Gesellschaft](07_bevoelkerung_und_gesellschaft.md)
 im vollen Maßstab, mit dem Lasttest aus der Roadmap.
@@ -173,8 +174,76 @@ im vollen Maßstab, mit dem Lasttest aus der Roadmap.
 
 **Abnahme**
 - **500.000 Bevölkerungsblöcke**; ein Spieljahr rechnet in höchstens 2 Sekunden auf einem
-  Mittelklasse-Rechner (Zielwert, wird mit M4 festgelegt)
+  Mittelklasse-Rechner (festgelegt: Median aus 3 Spieljahren auf 4 Kernen, Release-Build)
 - Prüfsummen bleiben auf GCC, Clang und MSVC bitgleich, auch bei unterschiedlicher Kernanzahl
+
+**Ergebnis**
+- **Modell und Formeln** in [technik/bevoelkerung.md](technik/bevoelkerung.md) (verbindlich):
+  Jeder Block trägt Beruf (Schicht über den Beruf), Konfession, Kultur, einen **Altersaufbau** aus
+  vier Gruppen (Kinder, Junge, Erwerbsfähige, Alte), Lebensstandard 0–100 und Alphabetisierung
+  0–1 (64 Byte). Am Rechentag eines Ortes: Tragfähigkeit und Landreserve aus Fläche und Gelände,
+  Lebensstandard aus dem Netto-Einkommen (Ertrag, Verwüstung, Steuern, Übervölkerung), Geburten
+  und Sterbefälle nach Lebensstandard, Altern, Bildung nach Beruf, Konfession, Stadt und
+  Wohlstand, **Wanderung** der Jungen zu bis zu vier Nachbarorten im Umkreis von 60 km und in die
+  nächste Stadt (Bauern werden dort Landarme), **Auswanderung** bei Not. Jahresbilanz je Ort
+  (Geburten, Sterbefälle, Seuchentote, Zuzug, Wegzug, Auswanderung), bitgenau verbucht.
+- **Mehrkernberechnung:** eigener Thread-Pool ohne neue Abhängigkeit. Die Orte eines Tages
+  rechnen parallel; jede Aufgabe schreibt nur ihren Ort und liest andere Orte nur über deren
+  veröffentlichte Momentaufnahme. Wanderung wird je Zielort in fester Reihenfolge gebucht, ebenfalls
+  parallel. Das Ergebnis hängt nicht von der Zahl der Threads ab.
+- **Leistung:** bitgleiche Schnellwege für Division und Multiplikation in `Fixed`
+  (Knuth-Division statt 128-Bit-Schleife), Rechentag-Listen, Steuern je Ort statt Neuberechnung
+  aller Blöcke. Mit dem Modell aus M1 sank die Zeit je Block und Monat von 450 ns auf 18 ns.
+- **Daten:** 38 Kulturen (`common/kulturen.chron`), Standardkultur je Landschaft und Abweichungen
+  je Ort in den Tabellen; Tragfähigkeit je Geländetyp, Bildungsfaktoren je Konfession und Beruf;
+  die Regelwerte für Demografie, Wanderung und Bildung sind mit den 60 Orten der Testregion
+  kalibriert: **1648 → 1700 ×1,29** (Ziel etwa ×1,32), 1648 → 1816 ×2,33; Geburten 37,8 ‰,
+  Sterbefälle 31,7 ‰ um 1700, Alphabetisierung 31 % (1648) → 38 % (1700) → 53 % (1816).
+- **Lasttest:** `uhrwerk-cli lasttest` baut aus der Karte eine Welt, in der jeder der 4.542 Orte
+  Daten hat (`make_load_test_world`, eigener Zufallsstrom), misst Zeit je Spieljahr, Median und
+  Speicher und vergleicht auf Wunsch mit einer anderen Thread-Zahl (`--vergleich`) und einer
+  Grenze (`--grenze`). CI-Job „Lasttest“ (Release, 500.000 Blöcke).
+- **Brücke und Godot:** Ortspanel mit Kulturen, Gesellschaft (Lebensstandard, Alphabetisierung),
+  Altersaufbau und Bilanz des Vorjahres; Staatspanel mit Bevölkerungsentwicklung; neue
+  Kartenmodi „Lebensstandard“ (Taste U) und „Kultur“ (Taste I), jetzt acht.
+- **Referenz-Prüfsumme** nach 100 Jahren jetzt `ed6b14a02cfbfa5d` (Bevölkerung 642.668); der
+  Lasttest (500.000 Blöcke, 3 Jahre, Seed 1648) endet mit `a5a4c0d80a2f23ea`.
+- Tests: 123 doctest-Fälle im Kern (u. a. Formeln gegen Nachrechnung, exakte Buchführung, 1–8
+  Threads, Kalibrierung mit den echten Daten), CTest `lasttest_threads`, Archivar 35,
+  Kartengenerator 88, Geodaten 96, Godot-Einheitentest 179 Prüfungen, Rauch- und Klicktest; alle
+  in der CI. ThreadSanitizer ohne Befund (lokal).
+
+**Abnahme im Einzelnen**
+
+| Kriterium | Stand |
+|---|---|
+| 500.000 Blöcke, ein Spieljahr in höchstens 2 s | erfüllt: Median **0,33–0,40 s** mit 4 Kernen (Xeon 2,8 GHz, Release, 499.992 Blöcke), 0,64 s mit 2, 0,88 s mit einem Kern; auf dem GitHub-Runner mit nur 2 vCPU 0,52 s. Spitze 42–44 MB Arbeitsspeicher. Messwerte in [bevoelkerung.md, Abschnitt 6.3](technik/bevoelkerung.md#63-schätzung) |
+| Prüfsummen bitgleich auf GCC, Clang und MSVC | erfüllt: CI-Job Determinismus vergleicht die Prüfsumme nach 100 Jahren und die des Lasttests |
+| … auch bei unterschiedlicher Kernanzahl | erfüllt: Unit-Test mit 1, 2, 3, 4 und 8 Threads, `lasttest --vergleich 1` in CTest und CI, `determinismus` mit einem Thread im zweiten Lauf |
+
+**Bekannte Grenzen**
+- **Nur 60 Orte mit echten Daten.** Die Bevölkerung des übrigen Kernraums ist nicht erfasst; den
+  vollen Maßstab prüft der Lasttest mit einer **synthetischen Welt** (Bevölkerung aus der
+  Tragfähigkeit, gleich große Blöcke, zufällige Kulturen). Ihre Zahlen sagen etwas über Rechenzeit
+  und Speicher, nicht über die Geschichte.
+- **Messrechner:** Der Wert für 4 Kerne stammt aus der Entwicklungsumgebung (Cloud-Rechner mit
+  4 Kernen); der GitHub-Runner hat nur 2 vCPU. Eine Messung auf dem Referenz-PC aus Kapitel 02
+  steht aus; er hat mehr Kerne und sollte schneller sein.
+- **Keine Krisen außer Seuchen:** Missernten, Hungerkrisen und Kriegsfolgen für die Bevölkerung
+  kommen mit den Ereignissen (M11) und dem Militär (M10). Die Kurven sind daher glatter als in
+  der Geschichte.
+- **Lebensstandard nur aus dem Einkommen:** Bedürfnisse, Güter und Preise fehlen bis M5; ebenso
+  die 20 Berufsgruppen (bis dahin die 6 Berufe der Epoche).
+- **Bildung ohne Politik:** Die Alphabetisierung folgt Beruf, Konfession, Stadt und
+  Lebensstandard; Schulgesetze und Bildungsstufen kommen mit M8.
+- **Kulturen vereinfacht:** Jüdische Gemeinden haben die Kultur ihres Ortes (die Konfession
+  `juedisch` unterscheidet sie); eine eigene Kultur und Angleichung über die Zeit fehlen.
+- **Auswanderung verlässt die Welt:** Ziele außerhalb des Kernraums (Amerika, Russland, Ungarn)
+  sind nicht modelliert; Binnenwanderung bewegt nur die Gruppe der Jungen.
+- Die Kalibrierung liegt 1700 mit ×1,29 etwas unter dem Ziel (×1,32) und 1816 mit ×2,33 etwas
+  darüber (×2,27 nach Kapitel 07); sie beruht nur auf den 60 Orten der Testregion.
+- Neu im Zustand und damit für die Speicherstände (M6) wichtig: Zugänge je Ort, Momentaufnahmen,
+  Jahresbilanzen und Ortssteuern.
 
 ### M5 – Wirtschaft und Staatshaushalt
 

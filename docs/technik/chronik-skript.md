@@ -98,9 +98,6 @@ Pflichtfelder sind fett. Unbekannte Felder erzeugen eine **Warnung** (nicht fata
 
 ```text
 regeln {
-    wachstum_basis        = 0.004   # jährliches Grundwachstum
-    wachstum_wiederaufbau = 0.025   # zusätzlich je Verwüstungsgrad (Wiederaufbau, Peuplierung)
-    wachstum_steuerdruck  = 0.02    # Abzug je Steuersatz
     verwuestung_abbau     = 0.03    # jährlicher relativer Abbau der Verwüstung
     verwuestung_ertrag    = 0.5     # Produktionsverlust je Verwüstungsgrad
     seuche_chance         = 0.01    # jährlich je Ort
@@ -112,7 +109,7 @@ regeln {
     anteil_kinder             = 0.34    # Altersaufbau beim Start, 0..1
     anteil_jung               = 0.26    # Summe der drei Anteile höchstens 1 (Rest: Alte)
     anteil_erwerb             = 0.33
-    fruchtbarkeit             = 0.095   # 0..1
+    fruchtbarkeit             = 0.088   # 0..1
     anteil_fruchtbar_erwerb   = 0.4     # 0..1
     fruchtbarkeit_landreserve = 0.3     # 0..10
     fruchtbarkeit_wohlstand   = 0.15    # 0..1
@@ -121,7 +118,7 @@ regeln {
     sterblichkeit_erwerb      = 0.018
     sterblichkeit_alt         = 0.11
     sterblichkeit_armut       = 0.3
-    tragfaehigkeit_stadt      = 3       # 0..100
+    tragfaehigkeit_stadt      = 1.75    # 0..100
     lebensstandard_bezug      = 12      # größer als 0
     lebensstandard_anpassung  = 0.25    # 0..1
     bildung_stadt             = 1.25    # 0..10
@@ -139,9 +136,10 @@ regeln {
 }
 ```
 
-Alle Felder sind Pflicht. Abbildung auf `Rules` in derselben Reihenfolge (`growth_base` … `tax_rate_max`, seit M4
-weiter `share_children` … `migration_min_amount`). Die drei Felder `wachstum_*` gehören zum Modell aus M1 und
-entfallen mit dem Bevölkerungsmodell von M4.
+Alle Felder sind Pflicht. Abbildung auf `Rules` in derselben Reihenfolge (`devastation_decay` … `tax_rate_max`,
+seit M4 weiter `share_children` … `migration_min_amount`). Die drei Felder `wachstum_basis`, `wachstum_wiederaufbau`
+und `wachstum_steuerdruck` aus M1 gibt es seit dem Bevölkerungsmodell von M4 nicht mehr; stehen sie noch in einer
+Datei, meldet der Lader sie als unbekannte Felder (Warnung).
 
 ### 3.2 `common/gelaende.chron`
 
@@ -149,7 +147,6 @@ entfallen mit dem Bevölkerungsmodell von M4.
 gelaende flussaue {
     name           = "Flussaue"          # Pflicht
     farbe          = { 128 160 112 }     # Pflicht
-    wachstum       = 1.05                # Pflicht, Faktor (Modell aus M1)
     ertrag         = 1.15                # Pflicht, Faktor
     tragfaehigkeit = 45                  # Pflicht seit M4, Einwohner je km² (0..100000)
 }
