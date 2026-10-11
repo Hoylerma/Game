@@ -2,14 +2,17 @@
 konfession lutherisch {
     name  = "Lutherisch"
     farbe = { 70 110 170 }
+    bildung = 1.2
 }
 
 konfession reformiert {
     name  = "Reformiert"
     farbe = { 120 80 160 }
+    bildung = 1.2
 }
 
 konfession katholisch {
     name  = "Katholisch"
     farbe = { 200 170 60 }
+    bildung = 0.9
 }

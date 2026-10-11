@@ -30,6 +30,7 @@ ort dessau {
         besitzer     = DES
         bevoelkerung = 4200
         konfession   = { reformiert = 85 lutherisch = 15 }
+        kultur       = { obersachsen = 100 }
         verwuestung  = 0.55
     }
 }
@@ -47,6 +48,7 @@ ort bernburg {
         besitzer     = BER
         bevoelkerung = 4000
         konfession   = { reformiert = 85 lutherisch = 15 }
+        kultur       = { obersachsen = 100 }
         verwuestung  = 0.6
     }
 }
@@ -64,6 +66,7 @@ ort koethen {
         besitzer     = KOE
         bevoelkerung = 3600
         konfession   = { reformiert = 85 lutherisch = 15 }
+        kultur       = { obersachsen = 100 }
         verwuestung  = 0.6
     }
 }
@@ -81,6 +84,7 @@ ort zerbst {
         besitzer     = ZER
         bevoelkerung = 4500
         konfession   = { lutherisch = 70 reformiert = 30 }
+        kultur       = { obersachsen = 100 }
         verwuestung  = 0.55
     }
 }

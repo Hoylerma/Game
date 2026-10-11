@@ -1,5 +1,5 @@
-ordner;datei;kommentar
-orte;nord;"Orte im Norden.
+ordner;datei;kultur;kommentar
+orte;nord;nordleute=100;"Orte im Norden.
 Zweite Zeile mit ""Anführungszeichen""."
-staaten;AAA_nordland;Nordland
-kreise;nord;Kreise im Norden
+staaten;AAA_nordland;;Nordland
+kreise;nord;;Kreise im Norden

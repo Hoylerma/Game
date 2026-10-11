@@ -32,6 +32,7 @@ ort erfurt {
         besitzer     = MAI
         bevoelkerung = 16000
         konfession   = { lutherisch = 85 katholisch = 15 }
+        kultur       = { thueringer = 100 }
         verwuestung  = 0.4
     }
 }
@@ -49,6 +50,7 @@ ort heiligenstadt {
         besitzer     = MAI
         bevoelkerung = 6000
         konfession   = { katholisch = 90 lutherisch = 10 }
+        kultur       = { thueringer = 100 }
         verwuestung  = 0.5
     }
 }
@@ -66,6 +68,7 @@ ort gotha {
         besitzer     = GOT
         bevoelkerung = 6500
         konfession   = { lutherisch = 100 }
+        kultur       = { thueringer = 100 }
         verwuestung  = 0.45
     }
 }
@@ -83,6 +86,7 @@ ort weimar {
         besitzer     = WEI
         bevoelkerung = 5500
         konfession   = { lutherisch = 100 }
+        kultur       = { thueringer = 100 }
         verwuestung  = 0.45
     }
 }
@@ -100,6 +104,7 @@ ort eisenach {
         besitzer     = WEI
         bevoelkerung = 5500
         konfession   = { lutherisch = 100 }
+        kultur       = { thueringer = 100 }
         verwuestung  = 0.45
     }
 }
@@ -117,6 +122,7 @@ ort altenburg {
         besitzer     = ALT
         bevoelkerung = 7000
         konfession   = { lutherisch = 100 }
+        kultur       = { thueringer = 100 }
         verwuestung  = 0.45
     }
 }
@@ -134,6 +140,7 @@ ort sangerhausen {
         besitzer     = SAX
         bevoelkerung = 4500
         konfession   = { lutherisch = 100 }
+        kultur       = { thueringer = 100 }
         verwuestung  = 0.5
     }
 }

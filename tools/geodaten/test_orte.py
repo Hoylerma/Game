@@ -658,23 +658,25 @@ class TestDateienZeilen(unittest.TestCase):
             "glatz": orte.Landschaft("glatz", "Grafschaft Glatz", "Glatz", 1.0, "Grafschaft Glatz"),
         }
         self.alt = [
-            {"ordner": "staaten", "datei": "DES", "kommentar": "Staat\nunverändert"},
-            {"ordner": "orte", "datei": "anhalt", "kommentar": "Orte: Anhalt – Stand 24.10.1648."},
+            {"ordner": "staaten", "datei": "DES", "kultur": "", "kommentar": "Staat\nunverändert"},
+            {"ordner": "orte", "datei": "anhalt", "kultur": "obersachsen=100", "kommentar": "Orte: Anhalt – Stand 24.10.1648."},
         ]
 
     def test_m3_absatz_umgebrochen_und_ersetzt(self) -> None:
         erste = orte.dateien_zeilen(self.alt, self.landschaften, {"anhalt"}, {"anhalt", "glatz"})
-        self.assertEqual(erste[0], ("staaten", "DES", "Staat\nunverändert"))
+        self.assertEqual(erste[0], ("staaten", "DES", "", "Staat\nunverändert"))
         reihenfolge = [("orte", "anhalt"), ("orte", "glatz"), ("kreise", "anhalt"), ("kreise", "glatz")]
-        self.assertEqual([(o, d) for o, d, _ in erste[1:]], reihenfolge)
-        anhalt = erste[1][2]
+        self.assertEqual([(o, d) for o, d, _, _ in erste[1:]], reihenfolge)
+        # Die Standardkultur bleibt erhalten, neue Landschaften haben keine.
+        self.assertEqual([k for _, _, k, _ in erste[1:]], ["obersachsen=100", "", "", ""])
+        anhalt = erste[1][3]
         self.assertTrue(anhalt.startswith("Orte: Anhalt – Stand 24.10.1648.\n\n" + orte.M3_ABSATZ))
         self.assertTrue(all(len(z) <= orte.KOMMENTAR_BREITE for z in anhalt.splitlines()))
         # ein zweiter Lauf über die eigene Ausgabe ersetzt den M3-Absatz, statt ihn zu verdoppeln
-        alt2 = self.alt[:1] + [{"ordner": "orte", "datei": "anhalt", "kommentar": anhalt}]
+        alt2 = self.alt[:1] + [{"ordner": "orte", "datei": "anhalt", "kultur": "obersachsen=100", "kommentar": anhalt}]
         zweite = orte.dateien_zeilen(alt2, self.landschaften, {"anhalt"}, {"anhalt", "glatz"})
         self.assertEqual(zweite, erste)
-        self.assertIn("Umfang: Grafschaft Glatz", erste[2][2])
+        self.assertIn("Umfang: Grafschaft Glatz", erste[2][3])
 
     def test_umbrechen(self) -> None:
         self.assertEqual(orte.umbrechen("a b c", 3), "a b\nc")

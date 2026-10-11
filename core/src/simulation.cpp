@@ -30,7 +30,7 @@ Fixed block_production(const World& world, const Location& location, const PopBl
     const Profession& profession = world.professions[static_cast<std::size_t>(pop.profession)];
     const TerrainType& terrain = world.terrains[static_cast<std::size_t>(location.terrain)];
     const Fixed condition = Fixed::one() - location.devastation * world.rules.devastation_yield_loss;
-    return pop.size * profession.yield_per_capita * terrain.yield_factor * condition / Fixed::from_int(12);
+    return pop.size() * profession.yield_per_capita * terrain.yield_factor * condition / Fixed::from_int(12);
 }
 
 bool is_taxable(const World& world, const PopBlock& pop) {
@@ -218,7 +218,13 @@ std::uint64_t Simulation::checksum() const {
         h.i64(p.location);
         h.i64(p.profession);
         h.i64(p.confession);
-        h.fixed(p.size);
+        h.i64(p.culture);
+        h.fixed(p.children);
+        h.fixed(p.young);
+        h.fixed(p.working);
+        h.fixed(p.old);
+        h.fixed(p.living_standard);
+        h.fixed(p.literacy);
     }
 
     h.rng(rng_demography_);
@@ -269,13 +275,20 @@ void Simulation::run_demography(Index location) {
         (rules.growth_base + rules.growth_reconstruction * loc.devastation) * terrain.growth_factor -
         rules.growth_tax_pressure * owner.tax_rate;
     const Fixed twelve = Fixed::from_int(12);
-    for (Index p = loc.first_pop; p < loc.first_pop + loc.pop_count; ++p) {
-        PopBlock& pop = world_.pops[static_cast<std::size_t>(p)];
-        Fixed size = pop.size + pop.size * rate / twelve;
+    // Übergang bis M4, Schritt 3: Wachstum wie in M1, je Altersgruppe.
+    const auto grow = [&](Fixed& group) {
+        Fixed size = group + group * rate / twelve;
         if (size < Fixed::zero()) {
             size = Fixed::zero();
         }
-        pop.size = size;
+        group = size;
+    };
+    for (Index p = loc.first_pop; p < loc.first_pop + loc.pop_count; ++p) {
+        PopBlock& pop = world_.pops[static_cast<std::size_t>(p)];
+        grow(pop.children);
+        grow(pop.young);
+        grow(pop.working);
+        grow(pop.old);
     }
 }
 
@@ -310,13 +323,19 @@ void Simulation::run_yearly() {
         // 1. Seuche
         if (rng_events_.chance(rules.plague_chance)) {
             const Fixed loss = rng_events_.uniform(rules.plague_loss_min, rules.plague_loss_max);
-            for (Index p = loc.first_pop; p < loc.first_pop + loc.pop_count; ++p) {
-                PopBlock& pop = world_.pops[static_cast<std::size_t>(p)];
-                Fixed size = pop.size - pop.size * loss;
+            const auto shrink = [&](Fixed& group) {
+                Fixed size = group - group * loss;
                 if (size < Fixed::zero()) {
                     size = Fixed::zero();
                 }
-                pop.size = size;
+                group = size;
+            };
+            for (Index p = loc.first_pop; p < loc.first_pop + loc.pop_count; ++p) {
+                PopBlock& pop = world_.pops[static_cast<std::size_t>(p)];
+                shrink(pop.children);
+                shrink(pop.young);
+                shrink(pop.working);
+                shrink(pop.old);
             }
             ChronicleEntry entry;
             entry.date = world_.date;

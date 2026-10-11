@@ -94,10 +94,10 @@ World make_small_world() {
     p.location = 0;
     p.confession = 0;
     p.profession = 0;
-    p.size = Fixed::from_int(1200);
+    p.working = Fixed::from_int(1200);
     w.pops.push_back(p);
     p.profession = 1;
-    p.size = Fixed::from_int(100);
+    p.working = Fixed::from_int(100);
     w.pops.push_back(p);
     return w;
 }
@@ -223,7 +223,7 @@ TEST_CASE("Simulation: Prüfsumme erfasst den veränderlichen Zustand") {
     CHECK(Simulation(w).checksum() != reference);
 
     w = base;
-    w.pops[17].size += Fixed::from_raw(1);
+    w.pops[17].working += Fixed::from_raw(1);
     CHECK(Simulation(w).checksum() != reference);
 
     w = base;
@@ -280,14 +280,14 @@ TEST_CASE("Simulation: Staffelung mit mehr als 28 Orten") {
         p.location = i;
         p.profession = 0;
         p.confession = 0;
-        p.size = Fixed::from_int(1000);
+        p.working = Fixed::from_int(1000);
         w.pops.push_back(p);
     }
     Simulation sim(std::move(w));
     check_staggering(sim, 62); // März und April 1650
     // Orte 0 und 28 rechnen beide am 1., Orte 1 und 29 am 2.: gleiche Größe nach zwei Monaten.
-    CHECK(sim.world().pops[0].size == sim.world().pops[28].size);
-    CHECK(sim.world().pops[1].size == sim.world().pops[29].size);
+    CHECK(sim.world().pops[0].size() == sim.world().pops[28].size());
+    CHECK(sim.world().pops[1].size() == sim.world().pops[29].size());
 }
 
 // ─── Befehle ────────────────────────────────────────────────────────────────
@@ -377,8 +377,8 @@ TEST_CASE("Simulation: Wirtschaftsformel exakt gegen Handrechnung") {
     CHECK(s.last_month_expenses == Fixed::from_int(100));
     CHECK(s.treasury == fx("1040.625"));
     // Demografie mit Rate 0 lässt die Blöcke unverändert.
-    CHECK(sim.world().pops[0].size == Fixed::from_int(1200));
-    CHECK(sim.world().pops[1].size == Fixed::from_int(100));
+    CHECK(sim.world().pops[0].size() == Fixed::from_int(1200));
+    CHECK(sim.world().pops[1].size() == Fixed::from_int(100));
 
     // Nur am Rechentag: der Rest des Monats ändert nichts.
     sim.step_days(30); // bis 31.3. einschließlich
@@ -410,7 +410,7 @@ TEST_CASE("Simulation: Wirtschaft auf der Fixture entspricht der Formel") {
             const uhrwerk::PopBlock& pop = snapshot.pops[static_cast<std::size_t>(p)];
             const uhrwerk::Profession& prof = snapshot.professions[static_cast<std::size_t>(pop.profession)];
             const Fixed production =
-                pop.size * prof.yield_per_capita * terrain.yield_factor *
+                pop.size() * prof.yield_per_capita * terrain.yield_factor *
                 (Fixed::one() - loc.devastation * snapshot.rules.devastation_yield_loss) /
                 Fixed::from_int(12);
             if (prof.taxable) {
@@ -446,17 +446,17 @@ TEST_CASE("Simulation: Demografie exakt gegen Handrechnung") {
     Simulation sim(std::move(w));
     sim.step_day();
     // 1200 + 1200 × 1/8 / 12 = 1212,5
-    CHECK(sim.world().pops[0].size == fx("1212.5"));
+    CHECK(sim.world().pops[0].size() == fx("1212.5"));
     // 100 + 12,5 / 12: 819200 / 12 = 68266,67 → abgeschnitten 68266
-    CHECK(sim.world().pops[1].size.raw() == 100 * 65536 + 68266);
+    CHECK(sim.world().pops[1].size().raw() == 100 * 65536 + 68266);
 
     SUBCASE("Bevölkerung fällt nie unter 0") {
         World shrinking = make_small_world();
         shrinking.rules.growth_base = Fixed::from_int(-24); // Rate −24: size + size × (−24) / 12 = −size
         Simulation s2(std::move(shrinking));
         s2.step_day();
-        CHECK(s2.world().pops[0].size == Fixed::zero());
-        CHECK(s2.world().pops[1].size == Fixed::zero());
+        CHECK(s2.world().pops[0].size() == Fixed::zero());
+        CHECK(s2.world().pops[1].size() == Fixed::zero());
     }
     SUBCASE("Gelände und Steuerdruck") {
         World other = make_small_world();
@@ -466,7 +466,7 @@ TEST_CASE("Simulation: Demografie exakt gegen Handrechnung") {
         // rate = (1/4 + 0) × 1/2 − 1/2 × 1/4 = 0 → keine Änderung
         Simulation s3(std::move(other));
         s3.step_day();
-        CHECK(s3.world().pops[0].size == Fixed::from_int(1200));
+        CHECK(s3.world().pops[0].size() == Fixed::from_int(1200));
     }
 }
 
@@ -502,9 +502,14 @@ TEST_CASE("Simulation: Seuche mit Wahrscheinlichkeit 1 und Chronikeintrag") {
         const Fixed loss = events.uniform(before.rules.plague_loss_min, before.rules.plague_loss_max);
         CHECK(loss >= fx("0.04"));
         CHECK(loss < fx("0.12"));
+        // Die Seuche trifft jede Altersgruppe mit demselben Anteil.
         for (Index p = loc.first_pop; p < loc.first_pop + loc.pop_count; ++p) {
-            const Fixed old_size = before.pops[static_cast<std::size_t>(p)].size;
-            CHECK(after.pops[static_cast<std::size_t>(p)].size == old_size - old_size * loss);
+            const uhrwerk::PopBlock& old_pop = before.pops[static_cast<std::size_t>(p)];
+            const uhrwerk::PopBlock& new_pop = after.pops[static_cast<std::size_t>(p)];
+            CHECK(new_pop.children == old_pop.children - old_pop.children * loss);
+            CHECK(new_pop.young == old_pop.young - old_pop.young * loss);
+            CHECK(new_pop.working == old_pop.working - old_pop.working * loss);
+            CHECK(new_pop.old == old_pop.old - old_pop.old * loss);
         }
         const uhrwerk::ChronicleEntry& e = after.chronicle[entry_index++];
         const std::int64_t percent = (loss * Fixed::from_int(100)).round();
@@ -662,7 +667,7 @@ TEST_CASE("Simulation: Orte ohne Daten ändern die Ergebnisse der übrigen Orte 
     REQUIRE(wa.pops.size() == wb.pops.size());
     for (std::size_t p = 0; p < wa.pops.size(); ++p) {
         INFO("Block " << p);
-        CHECK(wa.pops[p].size == wb.pops[p].size);
+        CHECK(wa.pops[p].size() == wb.pops[p].size());
         CHECK(wa.pops[p].location == wb.pops[p].location);
     }
     // Kassen und Monatswerte der Staaten gleich.

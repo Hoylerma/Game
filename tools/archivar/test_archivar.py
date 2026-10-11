@@ -91,7 +91,7 @@ class TestErzeugung(MitKopie):
         self.assertEqual(bloecke, ["1648.10.24", "1701.01.18"])
         erster = heide.find("1648.10.24")
         assert erster is not None
-        self.assertEqual([k.key for k in erster.children], ["besitzer", "bevoelkerung", "konfession", "verwuestung"])
+        self.assertEqual([k.key for k in erster.children], ["besitzer", "bevoelkerung", "konfession", "kultur", "verwuestung"])
 
     def test_escapes_und_kopfkommentar(self) -> None:
         text = (self.daten / "history/staaten/BBB_suedland.chron").read_text(encoding="utf-8")
@@ -152,7 +152,9 @@ class TestFehler(MitKopie):
             ("orte.csv", "burg;sued;Burg;flachland", "burg;sued;Burg;sumpf"): "unbekanntes Gelände 'sumpf'",
             ("staaten_historie.csv", "hauptstadt;burg", "hauptstadt;atlantis"): "unbekannter Ort 'atlantis' als Hauptstadt",
             ("staaten_historie.csv", "konfession;katholisch", "konfession;orthodox"): "unbekannte Konfession 'orthodox'",
-            ("bevoelkerung.csv", "katholisch=100;0.1", "orthodox=100;0.1"): "unbekannte Konfession 'orthodox'",
+            ("bevoelkerung.csv", "katholisch=100;suedleute", "orthodox=100;suedleute"): "unbekannte Konfession 'orthodox'",
+            ("bevoelkerung.csv", "suedleute=80 nordleute=20", "suedleute=80 westleute=20"): "unbekannte Kultur 'westleute'",
+            ("dateien.csv", "orte;nord;nordleute=100", "orte;nord;ostleute=100"): "unbekannte Kultur 'ostleute'",
         }
         for (tabelle, alt, neu), text in faelle.items():
             with self.subTest(text):
@@ -169,9 +171,14 @@ class TestFehler(MitKopie):
             ("besitz.csv", "burg;1648.10.24;BBB;gesichert", "burg;1648.10.24;BBB;sicher"): "ungültige Sicherheit 'sicher'",
             ("besitz.csv", "burg;1648.10.24;BBB;gesichert;Testquelle", "burg;1648.10.24;BBB;gesichert;"): "Spalte 'quelle' darf nicht leer sein",
             ("bevoelkerung.csv", "lutherisch=90 katholisch=10", "lutherisch=90 katholisch=20"): "ergeben 110 %",
-            ("bevoelkerung.csv", "lutherisch=90 katholisch=10", "lutherisch 90"): "ungültige Konfessionsangabe",
+            ("bevoelkerung.csv", "lutherisch=90 katholisch=10", "lutherisch 90"): "ungültige Angabe in Spalte 'konfession'",
+            ("bevoelkerung.csv", "suedleute=80 nordleute=20", "suedleute=80 nordleute=30"): "Anteile in Spalte 'kultur' ergeben 110 %",
+            ("bevoelkerung.csv", "suedleute=80 nordleute=20", "suedleute 80"): "ungültige Angabe in Spalte 'kultur'",
+            ("bevoelkerung.csv", "suedleute=80 nordleute=20", "suedleute=50 suedleute=50"): "eine Kultur ist doppelt angegeben",
+            ("dateien.csv", "orte;nord;nordleute=100", "orte;nord;nordleute=90"): "Anteile in Spalte 'kultur' ergeben 90 %",
+            ("dateien.csv", "staaten;AAA_nordland;", "staaten;AAA_nordland;nordleute=100"): "Spalte 'kultur' gilt nur für Dateien in history/orte",
             ("bevoelkerung.csv", "burg;1648.10.24;5000", "burg;1648.10.24;0"): "ungültige Bevölkerung '0'",
-            ("bevoelkerung.csv", "katholisch=100;0.1", "katholisch=100;1.5"): "außerhalb von 0 bis 1",
+            ("bevoelkerung.csv", "nordleute=20;0.1", "nordleute=20;1.5"): "außerhalb von 0 bis 1",
             ("orte.csv", "11.50;52.40;200;ja", "11,50;52.40;200;ja"): "ungültige Zahl '11,50'",
             ("orte.csv", "200;ja;kr_burg", "200;vielleicht;kr_burg"): "erwartet ja oder nein",
             ("staaten.csv", "10 20 30", "10 20 300"): "ungültige Farbe '10 20 300'",
@@ -189,6 +196,25 @@ class TestFehler(MitKopie):
                 self.setUp()
                 self.ersetze(tabelle, alt, neu)
                 self.erwarte_fehler(text)
+
+    def test_kultur_aus_landschaft_oder_zeile(self) -> None:
+        m = ar.Meldungen()
+        bezug = ar.lade_bezug(self.daten, m)
+        ausgabe = ar.erzeuge(ar.baue_archiv(self.daten / "tabellen", bezug, m))
+        self.assertEqual(m.fehler, [])
+        # nord: Standard der Landschaft aus dateien.csv, in jedem datierten Block
+        self.assertEqual(ausgabe["history/orte/nord.chron"].count("kultur       = { nordleute = 100 }"), 3)
+        # sued: eigene Angabe der Zeile
+        self.assertIn("kultur       = { suedleute = 80 nordleute = 20 }", ausgabe["history/orte/sued.chron"])
+        # Eigene Angabe schlägt den Standard der Landschaft.
+        self.ersetze("bevoelkerung.csv", "heide;1648.10.24;1500;lutherisch=100;", "heide;1648.10.24;1500;lutherisch=100;suedleute=100")
+        m = ar.Meldungen()
+        ausgabe = ar.erzeuge(ar.baue_archiv(self.daten / "tabellen", bezug, m))
+        self.assertIn("kultur       = { suedleute = 100 }", ausgabe["history/orte/nord.chron"])
+
+    def test_kultur_fehlt(self) -> None:
+        self.ersetze("bevoelkerung.csv", "suedleute=80 nordleute=20", "")
+        self.erwarte_fehler("keine Kultur für burg (1648.10.24): Spalte 'kultur' ist leer, und dateien.csv nennt keine Standardkultur für orte/sued")
 
     def test_zeilenumbruch_in_zeichenketten(self) -> None:
         # Zeilenumbrüche (LF wie mit Alt+Enter, auch ein einzelnes CR) sind im CSV erlaubt, in
@@ -258,7 +284,7 @@ class TestOrteOhneDatenUndKreise(MitKopie):
     def test_daten_erst_ab_spaeterem_datum(self) -> None:
         # 1648 ohne Daten, 1701 mit Daten: erlaubt.
         self.anhaengen("besitz.csv", "moor;1690.01.01;AAA;gesichert;Testquelle")
-        self.anhaengen("bevoelkerung.csv", "moor;1690.01.01;800;lutherisch=100;0;schaetzung;Testquelle")
+        self.anhaengen("bevoelkerung.csv", "moor;1690.01.01;800;lutherisch=100;;0;schaetzung;Testquelle")
         code, aus, fehler = _ausfuehren("--daten", str(self.daten), "--bericht")
         self.assertEqual(code, 0, fehler)
         self.assertIn("frieden (1648.10.24): 3 Orte mit Daten, 1 ohne Daten", aus)
@@ -304,7 +330,7 @@ class TestWarnungen(MitKopie):
             ("hofhaltung", "0"),
         ):
             self.anhaengen("staaten_historie.csv", f"CCC;1648.10.24;{feld};{wert};spielwert;Test")
-        self.anhaengen("dateien.csv", "orte;gibt_es_nicht;Kommentar")
+        self.anhaengen("dateien.csv", "orte;gibt_es_nicht;;Kommentar")
         code, _, fehler = _ausfuehren("--daten", str(self.daten), "--bericht")
         # Hauptstadt burg gehört BBB: das ist ein Fehler, die übrigen Befunde sind Warnungen.
         self.assertEqual(code, 2)
@@ -331,10 +357,10 @@ class TestHilfen(unittest.TestCase):
         self.assertEqual(ar.festkomma_roh("0.0000076"), 0)  # 0,498 → 0
         self.assertEqual(ar.festkomma_roh("0.000001"), 0)
 
-    def test_konfession(self) -> None:
-        self.assertEqual(ar.parse_konfession("lutherisch=95 reformiert=5"), [("lutherisch", 95), ("reformiert", 5)])
-        self.assertIsNone(ar.parse_konfession(""))
-        self.assertIsNone(ar.parse_konfession("lutherisch=x"))
+    def test_anteile(self) -> None:
+        self.assertEqual(ar.parse_anteile("lutherisch=95 reformiert=5"), [("lutherisch", 95), ("reformiert", 5)])
+        self.assertIsNone(ar.parse_anteile(""))
+        self.assertIsNone(ar.parse_anteile("lutherisch=x"))
 
     def test_chron_text(self) -> None:
         self.assertEqual(ar.chron_text('a "b" \\ c'), '"a \\"b\\" \\\\ c"')

@@ -1,0 +1,16 @@
+# Test-Fixture: Kulturen (seit M4).
+
+kultur maerker {
+    name  = "Märker"
+    farbe = { 64 104 168 }
+}
+
+kultur obersachsen {
+    name  = "Obersachsen"
+    farbe = { 70 150 90 }
+}
+
+kultur sorben {
+    name  = "Sorben"
+    farbe = { 150 100 180 }
+}

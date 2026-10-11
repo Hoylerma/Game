@@ -1,0 +1,220 @@
+# Kulturen (Landsmannschaften und Minderheiten), seit Meilenstein M4.
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.10.
+#
+# Grundlage: docs/07_bevoelkerung_und_gesellschaft.md, Abschnitt 4 (drei Ebenen der
+# Zugehörigkeit, Minderheiten). Eine Kultur ist hier die Landsmannschaft bzw. Volksgruppe eines
+# Bevölkerungsblocks; sie wird vererbt und wandert mit. Sprache, Angleichung und
+# Nationalbewusstsein folgen in späteren Meilensteinen.
+#
+# Die Liste deckt den Kernraum der Karte ab (Kapitel 05), auch dort, wo es noch keine Orte mit
+# Daten gibt. Die Standardkultur jeder Landschaft steht in data/tabellen/dateien.csv (Spalte
+# "kultur"), Abweichungen je Ort in data/tabellen/bevoelkerung.csv. Die Zuordnung ist eine grobe
+# Spielvereinfachung nach Dialekträumen und Siedlungsgebieten um 1648 (Sicherheit: spielwert).
+#
+# Bekannte Vereinfachung: Jüdische Gemeinden erhalten die Kultur ihres Ortes; eine eigene
+# Zuordnung kommt mit der Sprachdimension (Jiddisch).
+#
+# Farben: niederdeutscher Norden in Blau- und Türkistönen, Mitteldeutschland in Grün,
+# Oberdeutschland in Orange und Braun, Österreich in Rot, slawische Völker in Violett,
+# romanische in Gelb und Ocker, niederländische und skandinavische in eigenen Tönen.
+
+# ─── Niederdeutscher Norden ──────────────────────────────────────────────────
+
+kultur maerker {
+    name  = "Märker"
+    farbe = { 64 104 168 }
+}
+
+kultur pommern {
+    name  = "Pommern"
+    farbe = { 92 140 196 }
+}
+
+kultur mecklenburger {
+    name  = "Mecklenburger"
+    farbe = { 40 120 150 }
+}
+
+kultur holsteiner {
+    name  = "Holsteiner"
+    farbe = { 70 160 180 }
+}
+
+kultur friesen {
+    name  = "Friesen"
+    farbe = { 120 186 200 }
+}
+
+kultur niedersachsen {
+    name  = "Niedersachsen"
+    farbe = { 52 82 132 }
+}
+
+kultur westfalen {
+    name  = "Westfalen"
+    farbe = { 96 120 176 }
+}
+
+kultur altpreussen {
+    name  = "Altpreußen"
+    farbe = { 136 150 200 }
+}
+
+# ─── Mitteldeutschland ───────────────────────────────────────────────────────
+
+kultur obersachsen {
+    name  = "Obersachsen"
+    farbe = { 70 150 90 }
+}
+
+kultur thueringer {
+    name  = "Thüringer"
+    farbe = { 120 170 80 }
+}
+
+kultur hessen {
+    name  = "Hessen"
+    farbe = { 60 130 60 }
+}
+
+kultur rheinlaender {
+    name  = "Rheinländer"
+    farbe = { 150 190 110 }
+}
+
+kultur pfaelzer {
+    name  = "Pfälzer"
+    farbe = { 110 160 130 }
+}
+
+kultur schlesier {
+    name  = "Schlesier"
+    farbe = { 170 200 90 }
+}
+
+kultur luxemburger {
+    name  = "Luxemburger"
+    farbe = { 90 170 150 }
+}
+
+# ─── Oberdeutschland und Österreich ──────────────────────────────────────────
+
+kultur franken {
+    name  = "Franken"
+    farbe = { 220 150 60 }
+}
+
+kultur schwaben {
+    name  = "Schwaben"
+    farbe = { 200 120 50 }
+}
+
+kultur alemannen {
+    name  = "Alemannen"
+    farbe = { 230 180 90 }
+}
+
+kultur bayern {
+    name  = "Bayern"
+    farbe = { 170 110 50 }
+}
+
+kultur elsaesser {
+    name  = "Elsässer"
+    farbe = { 210 170 120 }
+}
+
+kultur lothringer {
+    name  = "Lothringer"
+    farbe = { 190 150 110 }
+}
+
+kultur oesterreicher {
+    name  = "Österreicher"
+    farbe = { 190 60 60 }
+}
+
+kultur tiroler {
+    name  = "Tiroler"
+    farbe = { 220 100 90 }
+}
+
+kultur deutschboehmen {
+    name  = "Deutschböhmen"
+    farbe = { 160 80 70 }
+}
+
+# ─── Slawische Völker ────────────────────────────────────────────────────────
+
+kultur sorben {
+    name  = "Sorben"
+    farbe = { 150 100 180 }
+}
+
+kultur tschechen {
+    name  = "Tschechen"
+    farbe = { 120 70 160 }
+}
+
+kultur polen {
+    name  = "Polen"
+    farbe = { 180 120 200 }
+}
+
+kultur kaschuben {
+    name  = "Kaschuben"
+    farbe = { 200 160 220 }
+}
+
+kultur masuren {
+    name  = "Masuren"
+    farbe = { 160 140 200 }
+}
+
+kultur slowenen {
+    name  = "Slowenen"
+    farbe = { 100 60 130 }
+}
+
+kultur kroaten {
+    name  = "Kroaten"
+    farbe = { 130 90 140 }
+}
+
+# ─── Baltische, skandinavische, niederländische und romanische Völker ───────
+
+kultur litauer {
+    name  = "Litauer"
+    farbe = { 180 180 90 }
+}
+
+kultur daenen {
+    name  = "Dänen"
+    farbe = { 200 80 110 }
+}
+
+kultur niederlaender {
+    name  = "Niederländer"
+    farbe = { 240 140 40 }
+}
+
+kultur flamen {
+    name  = "Flamen"
+    farbe = { 230 200 60 }
+}
+
+kultur wallonen {
+    name  = "Wallonen"
+    farbe = { 210 190 140 }
+}
+
+kultur franzosen {
+    name  = "Franzosen"
+    farbe = { 100 110 190 }
+}
+
+kultur italiener {
+    name  = "Italiener"
+    farbe = { 120 180 120 }
+}

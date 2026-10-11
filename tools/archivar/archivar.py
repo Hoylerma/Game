@@ -38,13 +38,22 @@ KOPFZEILE = "Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand be
 SICHERHEIT = ("gesichert", "schaetzung", "spielwert", "ungeprueft")
 
 SPALTEN: dict[str, tuple[str, ...]] = {
-    "dateien.csv": ("ordner", "datei", "kommentar"),
+    "dateien.csv": ("ordner", "datei", "kultur", "kommentar"),
     "staaten.csv": ("tag", "datei", "name", "kurzname", "farbe", "quelle"),
     "staaten_historie.csv": ("tag", "ab", "feld", "wert", "sicherheit", "quelle"),
     "orte.csv": ("id", "datei", "name", "gelaende", "laenge", "breite", "flaeche", "stadt", "kreis", "quelle"),
     "kreise.csv": ("id", "datei", "name", "quelle"),
     "besitz.csv": ("ort", "ab", "besitzer", "sicherheit", "quelle"),
-    "bevoelkerung.csv": ("ort", "stichtag", "bevoelkerung", "konfession", "verwuestung", "sicherheit", "quelle"),
+    "bevoelkerung.csv": (
+        "ort",
+        "stichtag",
+        "bevoelkerung",
+        "konfession",
+        "kultur",
+        "verwuestung",
+        "sicherheit",
+        "quelle",
+    ),
 }
 
 # Datierbare Felder eines Staates in der Reihenfolge der Ausgabe.
@@ -221,6 +230,7 @@ class Szenario:
 class Bezug:
     gelaende: set[str] = field(default_factory=set)
     konfessionen: set[str] = field(default_factory=set)
+    kulturen: set[str] = field(default_factory=set)
     steuersatz_max: float = 1.0
     szenarien: list[Szenario] = field(default_factory=list)
     karte: tuple[float, float, float, float] | None = None  # laenge_min, laenge_max, breite_min, breite_max
@@ -242,6 +252,8 @@ def lade_bezug(daten: Path, meldungen: Meldungen) -> Bezug:
         bezug.gelaende = {n.value for n in root.children if n.key == "gelaende" and n.is_block}
     if root := _lade_chron(daten / "common/konfessionen.chron", "common/konfessionen.chron", meldungen):
         bezug.konfessionen = {n.value for n in root.children if n.key == "konfession" and n.is_block}
+    if root := _lade_chron(daten / "common/kulturen.chron", "common/kulturen.chron", meldungen):
+        bezug.kulturen = {n.value for n in root.children if n.key == "kultur" and n.is_block}
     if root := _lade_chron(daten / "common/regeln.chron", "common/regeln.chron", meldungen):
         regeln = root.find("regeln")
         wert = regeln.get_zahl("steuersatz_max") if regeln else None
@@ -305,6 +317,7 @@ class Archiv:
     kreise: dict[str, Zeile] = field(default_factory=dict)  # in Tabellenreihenfolge
     staaten: dict[str, Staat] = field(default_factory=dict)
     kommentare: dict[tuple[str, str], str] = field(default_factory=dict)  # (ordner, datei) → Text
+    kulturen: dict[str, str] = field(default_factory=dict)  # Datei in history/orte → Standardkultur
     zeilen: dict[str, list[Zeile]] = field(default_factory=dict)  # alle Tabellen (für den Bericht)
 
 
@@ -358,8 +371,8 @@ def _einmalig(text: str, beschreibung: str, gesehen: dict[str, Zeile], z: Zeile,
     return True
 
 
-def parse_konfession(text: str) -> list[tuple[str, int]] | None:
-    """'lutherisch=95 reformiert=5' → [('lutherisch', 95), ('reformiert', 5)]."""
+def parse_anteile(text: str) -> list[tuple[str, int]] | None:
+    """'lutherisch=95 reformiert=5' → [('lutherisch', 95), ('reformiert', 5)] (Konfession, Kultur)."""
     teile = []
     for paar in text.split():
         name, gleich, prozent = paar.partition("=")
@@ -367,6 +380,29 @@ def parse_konfession(text: str) -> list[tuple[str, int]] | None:
             return None
         teile.append((name, int(prozent)))
     return teile or None
+
+
+def _pruefe_anteile(z: Zeile, spalte: str, art: str, bekannt: set[str], quelle: str, m: Meldungen) -> bool:
+    """Prüft eine Anteilsangabe wie 'lutherisch=95 reformiert=5' (Kennungen bekannt, einmalig, Summe 100)."""
+    anteile = parse_anteile(z[spalte])
+    if anteile is None:
+        beispiel = "lutherisch=95 reformiert=5" if spalte == "konfession" else "maerker=80 sorben=20"
+        m.fehler_bei(z.datei, z.nr, f"ungültige Angabe in Spalte '{spalte}': '{z[spalte]}' (z. B. {beispiel})")
+        return False
+    ok = True
+    namen = [k for k, _ in anteile]
+    for k in namen:
+        if k not in bekannt:
+            m.fehler_bei(z.datei, z.nr, f"unbekannte {art} '{k}' ({quelle})")
+            ok = False
+    if len(set(namen)) != len(namen):
+        m.fehler_bei(z.datei, z.nr, f"eine {art} ist doppelt angegeben")
+        ok = False
+    summe = sum(p for _, p in anteile)
+    if summe != 100:
+        m.fehler_bei(z.datei, z.nr, f"die Anteile in Spalte '{spalte}' ergeben {summe} %, erwartet 100 %")
+        ok = False
+    return ok
 
 
 def baue_archiv(tabellen: Path, bezug: Bezug, m: Meldungen) -> Archiv:
@@ -488,25 +524,11 @@ def baue_archiv(tabellen: Path, bezug: Bezug, m: Meldungen) -> Archiv:
         if not RE_GANZZAHL.fullmatch(z["bevoelkerung"]) or not 1 <= int(z["bevoelkerung"]) <= 100_000_000:
             m.fehler_bei(z.datei, z.nr, f"ungültige Bevölkerung '{z['bevoelkerung']}' (Ganzzahl 1 bis 100000000)")
             ok = False
-        konfession = parse_konfession(z["konfession"])
-        if konfession is None:
-            m.fehler_bei(
-                z.datei, z.nr, f"ungültige Konfessionsangabe '{z['konfession']}' (z. B. lutherisch=95 reformiert=5)"
-            )
+        if not _pruefe_anteile(z, "konfession", "Konfession", bezug.konfessionen, "common/konfessionen.chron", m):
             ok = False
-        else:
-            namen = [k for k, _ in konfession]
-            for k in namen:
-                if k not in bezug.konfessionen:
-                    m.fehler_bei(z.datei, z.nr, f"unbekannte Konfession '{k}' (common/konfessionen.chron)")
-                    ok = False
-            if len(set(namen)) != len(namen):
-                m.fehler_bei(z.datei, z.nr, "eine Konfession ist doppelt angegeben")
-                ok = False
-            summe = sum(p for _, p in konfession)
-            if summe != 100:
-                m.fehler_bei(z.datei, z.nr, f"die Konfessionsanteile ergeben {summe} %, erwartet 100 %")
-                ok = False
+        # Kultur leer: Standardkultur der Landschaft (dateien.csv), geprüft nach den Kopfkommentaren.
+        if z["kultur"] and not _pruefe_anteile(z, "kultur", "Kultur", bezug.kulturen, "common/kulturen.chron", m):
+            ok = False
         if _dezimal(z, "verwuestung", 0, 1, m) is None:
             ok = False
         if ok and _einmalig(f"{z['ort']}@{z['stichtag']}", f"Stichtag {z['stichtag']} für {z['ort']}", gesehen, z, m):
@@ -551,11 +573,32 @@ def baue_archiv(tabellen: Path, bezug: Bezug, m: Meldungen) -> Archiv:
         schluessel = (z["ordner"], z["datei"])
         if not _einmalig("/".join(schluessel), f"Datei {z['ordner']}/{z['datei']}", gesehen, z, m):
             continue
+        if z["kultur"]:
+            if z["ordner"] != "orte":
+                m.fehler_bei(z.datei, z.nr, f"Spalte 'kultur' gilt nur für Dateien in history/orte, nicht für {z['ordner']}")
+            elif _pruefe_anteile(z, "kultur", "Kultur", bezug.kulturen, "common/kulturen.chron", m):
+                archiv.kulturen[z["datei"]] = z["kultur"]
         if schluessel not in benutzt:
             m.warnung_bei(z.datei, z.nr, f"Kommentar für {z['ordner']}/{z['datei']}, aber kein Eintrag nutzt diese Datei")
             continue
         archiv.kommentare[schluessel] = z["kommentar"]
+
+    # Jede Bevölkerungsangabe braucht eine Kultur: aus der Zeile oder als Standard der Landschaft.
+    for kennung, ort in archiv.orte.items():
+        for b in ort.bevoelkerung:
+            if not b["kultur"] and ort.zeile["datei"] not in archiv.kulturen:
+                m.fehler_bei(
+                    b.datei,
+                    b.nr,
+                    f"keine Kultur für {kennung} ({b['stichtag']}): Spalte 'kultur' ist leer, und dateien.csv "
+                    f"nennt keine Standardkultur für orte/{ort.zeile['datei']}",
+                )
     return archiv
+
+
+def kultur_von(archiv: Archiv, ort: Ort, b: Zeile) -> str:
+    """Kulturangabe einer Bevölkerungszeile: eigene Spalte, sonst Standard der Landschaft."""
+    return b["kultur"] or archiv.kulturen.get(ort.zeile["datei"], "")
 
 
 def _pruefe_staatswert(z: Zeile, feld_name: str, wert: str, archiv: Archiv, bezug: Bezug, m: Meldungen) -> bool:
@@ -688,7 +731,7 @@ def _datierte_bloecke(bloecke: dict[Datum, list[tuple[str, str]]]) -> list[str]:
     return zeilen
 
 
-def ort_text(ort: Ort) -> list[str]:
+def ort_text(ort: Ort, archiv: Archiv) -> list[str]:
     z = ort.zeile
     zeilen = [f"ort {z['id']} {{"]
     zeilen += _ausgerichtet(
@@ -709,11 +752,13 @@ def ort_text(ort: Ort) -> list[str]:
     for b in ort.bevoelkerung:
         datum = parse_datum(b["stichtag"])
         assert datum is not None
-        konfession = " ".join(f"{k} = {p}" for k, p in parse_konfession(b["konfession"]) or [])
+        konfession = " ".join(f"{k} = {p}" for k, p in parse_anteile(b["konfession"]) or [])
+        kultur = " ".join(f"{k} = {p}" for k, p in parse_anteile(kultur_von(archiv, ort, b)) or [])
         bloecke.setdefault(datum, []).extend(
             [
                 ("bevoelkerung", b["bevoelkerung"]),
                 ("konfession", f"{{ {konfession} }}"),
+                ("kultur", f"{{ {kultur} }}"),
                 ("verwuestung", b["verwuestung"]),
             ]
         )
@@ -756,7 +801,7 @@ def erzeuge(archiv: Archiv) -> dict[str, str]:
     for kreis in archiv.kreise.values():
         gruppen.setdefault(("kreise", kreis["datei"]), []).append(kreis_text(kreis))
     for ort in archiv.orte.values():
-        gruppen.setdefault(("orte", ort.zeile["datei"]), []).append(ort_text(ort))
+        gruppen.setdefault(("orte", ort.zeile["datei"]), []).append(ort_text(ort, archiv))
     ausgabe: dict[str, str] = {}
     for (ordner, datei), definitionen in sorted(gruppen.items()):
         zeilen = _kopf(archiv.kommentare.get((ordner, datei), ""))

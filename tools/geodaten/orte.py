@@ -188,7 +188,7 @@ KOMMENTAR_BREITE = 92
 
 ORTE_SPALTEN = ("id", "datei", "name", "gelaende", "laenge", "breite", "flaeche", "stadt", "kreis", "quelle")
 KREISE_SPALTEN = ("id", "datei", "name", "quelle")
-DATEIEN_SPALTEN = ("ordner", "datei", "kommentar")
+DATEIEN_SPALTEN = ("ordner", "datei", "kultur", "kommentar")
 
 #: Staaten, deren GeoNames-Namen (nach Bereinigung) deutsch sind; Ausnahmen über exonyme.csv.
 DEUTSCHE_STAATEN = frozenset({"DE", "AT", "LI"})
@@ -1646,13 +1646,17 @@ def umbrechen(text: str, breite: int = KOMMENTAR_BREITE) -> str:
 
 def dateien_zeilen(
     alt: Sequence[dict[str, str]], landschaften: dict[str, Landschaft], m1_dateien: set[str], benutzt: set[str]
-) -> list[tuple[str, str, str]]:
-    """dateien.csv: Staaten unverändert; Orte-Dateien der M1 mit M3-Absatz; neue Orte- und Kreis-Dateien."""
-    zeilen: list[tuple[str, str, str]] = []
+) -> list[tuple[str, str, str, str]]:
+    """dateien.csv: Staaten unverändert; Orte-Dateien der M1 mit M3-Absatz; neue Orte- und Kreis-Dateien.
+
+    Die Standardkultur der Orte-Dateien (Spalte kultur, seit M4) wird von Hand gepflegt und bleibt erhalten.
+    """
+    zeilen: list[tuple[str, str, str, str]] = []
     for z in alt:
         if z["ordner"] == "staaten":
-            zeilen.append((z["ordner"], z["datei"], z["kommentar"]))
+            zeilen.append((z["ordner"], z["datei"], z.get("kultur", ""), z["kommentar"]))
     alt_orte = {z["datei"]: z["kommentar"] for z in alt if z["ordner"] == "orte"}
+    alt_kultur = {z["datei"]: z.get("kultur", "") for z in alt if z["ordner"] == "orte"}
     for datei in sorted(benutzt):
         l = landschaften[datei]
         if datei in m1_dateien:
@@ -1674,13 +1678,14 @@ def dateien_zeilen(
                 "und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).\n\n"
                 f"{umbrechen(f'Umfang: {l.kommentar}')}"
             )
-        zeilen.append(("orte", datei, kommentar))
+        zeilen.append(("orte", datei, alt_kultur.get(datei, ""), kommentar))
     for datei in sorted(benutzt):
         l = landschaften[datei]
         zeilen.append(
             (
                 "kreise",
                 datei,
+                "",
                 f"Kreise: {l.name} (Meilenstein M3).\n\n"
                 "Format: docs/technik/chronik-skript.md, Abschnitt 3.9.\n"
                 f"Erzeugt von tools/geodaten/orte.py: je {KREIS_MIN}–{KREIS_MAX} benachbarte Orte der Landschaft,\n"

@@ -1,7 +1,7 @@
-# Globale Regeln und Balancing-Werte (Meilenstein M1).
+# Globale Regeln und Balancing-Werte (Meilenstein M1, Bevölkerung seit M4).
 #
-# Format und Formeln: docs/technik/chronik-skript.md, Abschnitte 3.1 und 5.
-# Alle Felder sind Pflicht; die Werte entsprechen der Spezifikation.
+# Format und Formeln: docs/technik/chronik-skript.md, Abschnitte 3.1 und 5, sowie
+# docs/technik/bevoelkerung.md, Abschnitt 4. Alle Felder sind Pflicht. Raten sind Jahreswerte.
 
 regeln {
     wachstum_basis        = 0.004   # jährliches Grundwachstum
@@ -13,4 +13,50 @@ regeln {
     seuche_verlust_min    = 0.04    # Bevölkerungsverlust bei einer Seuche, Untergrenze
     seuche_verlust_max    = 0.12    # … Obergrenze
     steuersatz_max        = 0.5     # höchster erlaubter Steuersatz
+
+    # ─── Bevölkerung (seit M4) ───────────────────────────────────────────────
+    # Startwerte aus docs/technik/bevoelkerung.md, Abschnitt 4.9 (Sicherheit: spielwert).
+    # Größenordnungen der Frühen Neuzeit: Geburtenrate 35–42 ‰, Sterberate 30–36 ‰, Kinder unter
+    # 15 Jahren etwa ein Drittel der Bevölkerung.
+
+    # Altersaufbau beim Start (der Rest sind die Alten, 65+)
+    anteil_kinder             = 0.34    # 0–14 Jahre
+    anteil_jung               = 0.26    # 15–29
+    anteil_erwerb             = 0.33    # 30–64
+
+    # Geburten
+    fruchtbarkeit             = 0.095   # Geburten je Person im fruchtbaren Alter und Jahr
+    anteil_fruchtbar_erwerb   = 0.4     # Anteil der 30–64-Jährigen im fruchtbaren Alter
+    fruchtbarkeit_landreserve = 0.3     # Zuschlag bei voller Landreserve (freie Höfe, frühe Heirat)
+    fruchtbarkeit_wohlstand   = 0.15    # Zu-/Abschlag je 50 Punkte Lebensstandard
+
+    # Sterblichkeit (jährlich)
+    sterblichkeit_kinder      = 0.045
+    sterblichkeit_jung        = 0.010
+    sterblichkeit_erwerb      = 0.018
+    sterblichkeit_alt         = 0.11
+    sterblichkeit_armut       = 0.3     # Zu-/Abschlag je 50 Punkte Lebensstandard
+
+    # Tragfähigkeit und Lebensstandard
+    tragfaehigkeit_stadt      = 3       # Faktor für Städte (Markt, Handel, Gewerbe)
+    lebensstandard_bezug      = 12      # Netto-Einkommen (Taler pro Kopf und Jahr) für Lebensstandard 50
+    lebensstandard_anpassung  = 0.25    # Anteil der Lücke zum Ziel je Monat
+
+    # Bildung
+    bildung_stadt             = 1.25    # Faktor der Alphabetisierung in Städten
+    bildung_anpassung         = 0.03    # Anteil der Lücke zum Ziel je Jahr (Generationenwechsel)
+
+    # Wanderung
+    wanderung_ziele           = 4       # nächstgelegene Orte mit Daten
+    wanderung_radius_km       = 60
+    wanderung_rate            = 0.3     # Anteil der Jungen je Jahr bei 100 Punkten Unterschied
+    wanderung_max             = 0.12    # höchstens dieser Anteil der Jungen je Jahr
+    wanderung_landreserve     = 20      # Punkte Anziehung für freies Land (Agrarberufe)
+    wanderung_fremd           = 0.5     # Faktor über Landesgrenzen (Leibeigenschaft, Abzugsgeld)
+    auswanderung_schwelle     = 30      # unter diesem Lebensstandard wird ausgewandert
+    auswanderung_rate         = 0.05    # Anteil der Jungen je Jahr und 100 Punkte unter der Schwelle
+
+    # Blöcke
+    block_mindestgroesse      = 1       # kleinere Blöcke gehen im ähnlichsten Block auf (Personen)
+    wanderung_mindestmenge    = 0.05    # kleinere Wanderungsströme entfallen (Personen)
 }

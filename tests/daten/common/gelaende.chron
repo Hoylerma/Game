@@ -4,6 +4,7 @@ gelaende flussaue {
     farbe    = { 128 160 112 }
     wachstum = 1.05
     ertrag   = 1.15
+    tragfaehigkeit = 45
 }
 
 gelaende ackerland {
@@ -11,6 +12,7 @@ gelaende ackerland {
     farbe    = { 190 180 110 }
     wachstum = 1.0
     ertrag   = 1.0
+    tragfaehigkeit = 40
 }
 
 gelaende sandboden {
@@ -18,4 +20,5 @@ gelaende sandboden {
     farbe    = { 210 200 160 }
     wachstum = 0.9
     ertrag   = 0.75
+    tragfaehigkeit = 20
 }

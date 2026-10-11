@@ -8,6 +8,7 @@ ort berlin_coelln {
     bevoelkerung = 12000
     stadt        = ja
     konfession   = { lutherisch = 90 reformiert = 10 }
+    kultur       = { maerker = 100 }
     verwuestung  = 0.4
     kreis        = kr_berlin
     quelle       = "Testdaten, geschätzt"
@@ -22,6 +23,7 @@ ort potsdam {
     bevoelkerung = 1500
     stadt        = nein
     konfession   = { lutherisch = 100 }
+    kultur       = { maerker = 100 }
     verwuestung  = 0.6
     kreis        = kr_berlin
     quelle       = "Testdaten, geschätzt"

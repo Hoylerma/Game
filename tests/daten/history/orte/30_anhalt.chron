@@ -8,6 +8,7 @@ ort dessau {
     bevoelkerung = 3000
     stadt        = nein
     konfession   = { reformiert = 60 lutherisch = 40 }
+    kultur       = { obersachsen = 100 }
     verwuestung  = 0.5
     kreis        = kr_anhalt
     quelle       = "Testdaten, geschätzt"

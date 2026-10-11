@@ -32,6 +32,7 @@ ort prag {
         besitzer     = BOH
         bevoelkerung = 34000
         konfession   = { katholisch = 74 juedisch = 20 lutherisch = 6 }
+        kultur       = { tschechen = 65 deutschboehmen = 35 }
         verwuestung  = 0.4
     }
 }
@@ -49,6 +50,7 @@ ort leitmeritz {
         besitzer     = BOH
         bevoelkerung = 7000
         konfession   = { katholisch = 80 lutherisch = 20 }
+        kultur       = { deutschboehmen = 60 tschechen = 40 }
         verwuestung  = 0.5
     }
 }
@@ -66,6 +68,7 @@ ort boehmisch_leipa {
         besitzer     = BOH
         bevoelkerung = 5500
         konfession   = { katholisch = 75 lutherisch = 25 }
+        kultur       = { deutschboehmen = 90 tschechen = 10 }
         verwuestung  = 0.45
     }
 }
@@ -83,6 +86,7 @@ ort reichenberg {
         besitzer     = BOH
         bevoelkerung = 5000
         konfession   = { katholisch = 75 lutherisch = 25 }
+        kultur       = { deutschboehmen = 95 tschechen = 5 }
         verwuestung  = 0.45
     }
 }

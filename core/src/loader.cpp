@@ -1,5 +1,6 @@
 #include "uhrwerk/loader.hpp"
 
+#include "uhrwerk/population.hpp"
 #include "uhrwerk/script.hpp"
 
 #include <algorithm>
@@ -107,8 +108,9 @@ std::string quote_list(const std::vector<std::string_view>& keys) {
     return result;
 }
 
-/// Die vier Simulationsfelder eines Ortes: alle oder keines (Abschnitt 3.6).
-constexpr std::string_view kSimulationFields[] = {"besitzer", "bevoelkerung", "konfession", "verwuestung"};
+/// Die fünf Simulationsfelder eines Ortes: alle oder keines (Abschnitt 3.6; kultur seit M4).
+constexpr std::string_view kSimulationFields[] = {"besitzer", "bevoelkerung", "konfession", "kultur",
+                                                  "verwuestung"};
 
 bool is_state_tag(std::string_view tag) {
     if (tag.size() < 2 || tag.size() > 4) {
@@ -445,9 +447,16 @@ struct Definition {
 using Registry = std::map<std::string, Definition, std::less<>>;
 
 struct LocationDraft {
-    bool without_data = false; // keines der vier Simulationsfelder (Ort ohne Daten)
+    bool without_data = false; // keines der fünf Simulationsfelder (Ort ohne Daten)
     std::int64_t population = 0;
     std::vector<std::pair<Index, std::int64_t>> confessions; // Konfession, Prozent (Reihenfolge der Datei)
+    std::vector<std::pair<Index, std::int64_t>> cultures;    // Kultur, Prozent (Reihenfolge der Datei)
+};
+
+struct ProfessionRef {
+    std::string city_profession; // Feld in_stadt, leer = keines
+    std::string file;
+    int line = 0;
 };
 
 struct CapitalRef {
@@ -477,6 +486,7 @@ public:
         process("common/regeln.chron", [&](const SourceFile& f) { load_rules(f); });
         process("common/gelaende.chron", [&](const SourceFile& f) { load_terrains(f); });
         process("common/konfessionen.chron", [&](const SourceFile& f) { load_confessions(f); });
+        process("common/kulturen.chron", [&](const SourceFile& f) { load_cultures(f); });
         process("common/berufe.chron", [&](const SourceFile& f) { load_professions(f); });
 
         // Szenarien vor der Historie: Das Startdatum entscheidet, welche datierten
@@ -513,6 +523,7 @@ public:
         world_.scenario = *selected;
         world_.date = selected->start;
         build_pops();
+        initialize_population(world_);
         return std::move(world_);
     }
 
@@ -666,9 +677,42 @@ private:
         }
 
         Fields f(*found, file.name, "regeln", issues_,
-                 {"wachstum_basis", "wachstum_wiederaufbau", "wachstum_steuerdruck", "verwuestung_abbau",
-                  "verwuestung_ertrag", "seuche_chance", "seuche_verlust_min", "seuche_verlust_max",
-                  "steuersatz_max"});
+                 {"wachstum_basis",
+                  "wachstum_wiederaufbau",
+                  "wachstum_steuerdruck",
+                  "verwuestung_abbau",
+                  "verwuestung_ertrag",
+                  "seuche_chance",
+                  "seuche_verlust_min",
+                  "seuche_verlust_max",
+                  "steuersatz_max",
+                  "anteil_kinder",
+                  "anteil_jung",
+                  "anteil_erwerb",
+                  "fruchtbarkeit",
+                  "anteil_fruchtbar_erwerb",
+                  "fruchtbarkeit_landreserve",
+                  "fruchtbarkeit_wohlstand",
+                  "sterblichkeit_kinder",
+                  "sterblichkeit_jung",
+                  "sterblichkeit_erwerb",
+                  "sterblichkeit_alt",
+                  "sterblichkeit_armut",
+                  "tragfaehigkeit_stadt",
+                  "lebensstandard_bezug",
+                  "lebensstandard_anpassung",
+                  "bildung_stadt",
+                  "bildung_anpassung",
+                  "wanderung_ziele",
+                  "wanderung_radius_km",
+                  "wanderung_rate",
+                  "wanderung_max",
+                  "wanderung_landreserve",
+                  "wanderung_fremd",
+                  "auswanderung_schwelle",
+                  "auswanderung_rate",
+                  "block_mindestgroesse",
+                  "wanderung_mindestmenge"});
         Rules& r = world_.rules;
         const Range unit = between(fx(0), fx(1));
         const auto growth_base = f.fixed("wachstum_basis", between(fx(-1), fx(1)));
@@ -697,18 +741,60 @@ private:
                           "'seuche_verlust_min' (" + show(*plague_loss_min) +
                               ") ist größer als 'seuche_verlust_max' (" + show(*plague_loss_max) + ")");
         }
+
+        // Bevölkerung (seit M4, docs/technik/bevoelkerung.md, Abschnitt 4.9).
+        const auto share_children = f.fixed("anteil_kinder", unit);
+        const auto share_young = f.fixed("anteil_jung", unit);
+        const auto share_working = f.fixed("anteil_erwerb", unit);
+        r.share_children = share_children.value_or(Fixed{});
+        r.share_young = share_young.value_or(Fixed{});
+        r.share_working = share_working.value_or(Fixed{});
+        if (share_children && share_young && share_working &&
+            *share_children + *share_young + *share_working > Fixed::one()) {
+            issues_.error(file.name, found->line,
+                          "'anteil_kinder', 'anteil_jung' und 'anteil_erwerb' ergeben zusammen " +
+                              show(*share_children + *share_young + *share_working) +
+                              ", höchstens 1 ist erlaubt (der Rest sind die Alten)");
+        }
+        r.fertility = f.fixed("fruchtbarkeit", unit).value_or(Fixed{});
+        r.fertile_share_working = f.fixed("anteil_fruchtbar_erwerb", unit).value_or(Fixed{});
+        r.fertility_reserve = f.fixed("fruchtbarkeit_landreserve", between(fx(0), fx(10))).value_or(Fixed{});
+        r.fertility_wealth = f.fixed("fruchtbarkeit_wohlstand", unit).value_or(Fixed{});
+        r.mortality_children = f.fixed("sterblichkeit_kinder", unit).value_or(Fixed{});
+        r.mortality_young = f.fixed("sterblichkeit_jung", unit).value_or(Fixed{});
+        r.mortality_working = f.fixed("sterblichkeit_erwerb", unit).value_or(Fixed{});
+        r.mortality_old = f.fixed("sterblichkeit_alt", unit).value_or(Fixed{});
+        r.mortality_poverty = f.fixed("sterblichkeit_armut", unit).value_or(Fixed{});
+        r.capacity_city = f.fixed("tragfaehigkeit_stadt", between(fx(0), fx(100))).value_or(Fixed::one());
+        r.living_standard_reference =
+            f.fixed("lebensstandard_bezug", above_up_to(fx(0), fx(1'000'000))).value_or(Fixed::one());
+        r.living_standard_adjustment = f.fixed("lebensstandard_anpassung", unit).value_or(Fixed{});
+        r.literacy_city = f.fixed("bildung_stadt", between(fx(0), fx(10))).value_or(Fixed::one());
+        r.literacy_adjustment = f.fixed("bildung_anpassung", unit).value_or(Fixed{});
+        r.migration_targets = static_cast<std::int32_t>(f.integer("wanderung_ziele", 0, 16).value_or(0));
+        r.migration_radius_km = f.fixed("wanderung_radius_km", between(fx(0), fx(2000))).value_or(Fixed{});
+        r.migration_rate = f.fixed("wanderung_rate", between(fx(0), fx(10))).value_or(Fixed{});
+        r.migration_max = f.fixed("wanderung_max", unit).value_or(Fixed{});
+        r.migration_reserve = f.fixed("wanderung_landreserve", between(fx(0), fx(100))).value_or(Fixed{});
+        r.migration_foreign = f.fixed("wanderung_fremd", unit).value_or(Fixed{});
+        r.emigration_threshold = f.fixed("auswanderung_schwelle", between(fx(0), fx(100))).value_or(Fixed{});
+        r.emigration_rate = f.fixed("auswanderung_rate", between(fx(0), fx(10))).value_or(Fixed{});
+        r.block_min_size = f.fixed("block_mindestgroesse", between(fx(0), fx(1'000'000))).value_or(Fixed{});
+        r.migration_min_amount =
+            f.fixed("wanderung_mindestmenge", between(fx(0), fx(1'000'000))).value_or(Fixed{});
     }
 
     void load_terrains(const SourceFile& file) {
         for_each_definition(file, "gelaende", "gelaende <kennung> { … }", [&](const ScriptNode& node) {
             Fields f(node, file.name, "gelaende " + node.value, issues_,
-                     {"name", "farbe", "wachstum", "ertrag"});
+                     {"name", "farbe", "wachstum", "ertrag", "tragfaehigkeit"});
             TerrainType t;
             t.id = node.value;
             t.name = f.text("name").value_or("");
             t.color = f.color("farbe").value_or(Color{});
             t.growth_factor = f.fixed("wachstum", between(fx(0), fx(10))).value_or(Fixed::one());
             t.yield_factor = f.fixed("ertrag", between(fx(0), fx(10))).value_or(Fixed::one());
+            t.capacity = f.fixed("tragfaehigkeit", between(fx(0), fx(100'000))).value_or(Fixed{});
             const auto index = static_cast<Index>(world_.terrains.size());
             if (register_id(terrains_, t.id, index, file.name, node.line, "Gelände")) {
                 world_.terrains.push_back(std::move(t));
@@ -718,11 +804,12 @@ private:
 
     void load_confessions(const SourceFile& file) {
         for_each_definition(file, "konfession", "konfession <kennung> { … }", [&](const ScriptNode& node) {
-            Fields f(node, file.name, "konfession " + node.value, issues_, {"name", "farbe"});
+            Fields f(node, file.name, "konfession " + node.value, issues_, {"name", "farbe", "bildung"});
             Confession c;
             c.id = node.value;
             c.name = f.text("name").value_or("");
             c.color = f.color("farbe").value_or(Color{});
+            c.literacy_factor = f.fixed("bildung", between(fx(0), fx(10))).value_or(Fixed::one());
             const auto index = static_cast<Index>(world_.confessions.size());
             if (register_id(confessions_, c.id, index, file.name, node.line, "Konfession")) {
                 world_.confessions.push_back(std::move(c));
@@ -730,10 +817,33 @@ private:
         });
     }
 
+    void load_cultures(const SourceFile& file) {
+        for_each_definition(file, "kultur", "kultur <kennung> { … }", [&](const ScriptNode& node) {
+            if (!is_location_id(node.value)) {
+                issues_.error(file.name, node.line,
+                              "ungültige Kulturkennung " + quote(node.value) +
+                                  " (nur Kleinbuchstaben a–z, Ziffern und '_')");
+            }
+            Fields f(node, file.name, "kultur " + node.value, issues_, {"name", "farbe"});
+            Culture c;
+            c.id = node.value;
+            c.name = f.text("name").value_or("");
+            c.color = f.color("farbe").value_or(Color{});
+            const auto index = static_cast<Index>(world_.cultures.size());
+            if (register_id(cultures_, c.id, index, file.name, node.line, "Kultur")) {
+                world_.cultures.push_back(std::move(c));
+            }
+        });
+        if (world_.cultures.empty()) {
+            issues_.error(file.name, 0, "keine Kultur definiert (erwartet: kultur <kennung> { … })");
+        }
+    }
+
     void load_professions(const SourceFile& file) {
         for_each_definition(file, "beruf", "beruf <kennung> { … }", [&](const ScriptNode& node) {
             Fields f(node, file.name, "beruf " + node.value, issues_,
-                     {"name", "schicht", "ertrag", "steuerpflichtig", "anteil_stadt", "anteil_land"});
+                     {"name", "schicht", "ertrag", "steuerpflichtig", "anteil_stadt", "anteil_land", "agrar",
+                      "bildung", "in_stadt"});
             Profession p;
             p.id = node.value;
             p.name = f.text("name").value_or("");
@@ -753,11 +863,36 @@ private:
             p.taxable = f.boolean("steuerpflichtig").value_or(true);
             p.share_city = f.fixed("anteil_stadt", between(fx(0), fx(1))).value_or(Fixed{});
             p.share_rural = f.fixed("anteil_land", between(fx(0), fx(1))).value_or(Fixed{});
+            p.agrarian = f.boolean("agrar").value_or(false);
+            p.literacy = f.fixed("bildung", between(fx(0), fx(1))).value_or(Fixed{});
+            ProfessionRef ref{"", file.name, node.line};
+            if (f.has("in_stadt")) {
+                if (const auto city = f.text("in_stadt")) {
+                    ref = ProfessionRef{*city, file.name, node.find("in_stadt")->line};
+                }
+            }
             const auto index = static_cast<Index>(world_.professions.size());
             if (register_id(professions_, p.id, index, file.name, node.line, "Beruf")) {
                 world_.professions.push_back(std::move(p));
+                profession_refs_.push_back(std::move(ref));
             }
         });
+
+        // in_stadt verweist auf einen Beruf derselben Datei (auch einen späteren).
+        for (std::size_t i = 0; i < world_.professions.size(); ++i) {
+            const ProfessionRef& ref = profession_refs_[i];
+            if (ref.city_profession.empty()) {
+                continue;
+            }
+            const Index target = lookup(professions_, ref.city_profession);
+            if (target == kNone) {
+                issues_.error(ref.file, ref.line,
+                              "unbekannter Beruf " + quote(ref.city_profession) +
+                                  " für 'in_stadt' in beruf " + world_.professions[i].id);
+                continue;
+            }
+            world_.professions[i].city_profession = target;
+        }
 
         // Summe der Anteile muss je 1 ergeben (Toleranz ±0,001).
         const Fixed tolerance = Fixed::from_ratio(1, 1000);
@@ -869,13 +1004,13 @@ private:
                 apply_history(node, file.name, "ort " + node.value, {"lage", "flaeche", "kreis"});
             Fields f(merged, file.name, "ort " + node.value, issues_,
                      {"name", "besitzer", "gelaende", "lage", "flaeche", "bevoelkerung", "stadt", "kreis",
-                      "konfession", "verwuestung", "quelle"});
+                      "konfession", "kultur", "verwuestung", "quelle"});
             Location loc;
             LocationDraft draft;
             loc.id = node.value;
             loc.name = f.text("name").value_or("");
 
-            // Simulationsfelder zum Startdatum: alle vier oder keines (Abschnitt 3.6). Ohne alle
+            // Simulationsfelder zum Startdatum: alle fünf oder keines (Abschnitt 3.6). Ohne alle
             // ist der Ort ein Ort ohne Daten: kein Besitzer, keine Blöcke, Verwüstung 0.
             std::vector<std::string_view> present;
             std::vector<std::string_view> missing;
@@ -887,8 +1022,8 @@ private:
                 issues_.error(file.name, node.line,
                               "Ort " + node.value + " hat zum Startdatum " + quote_list(present) +
                                   ", aber nicht " + quote_list(missing) +
-                                  " (ein Ort hat alle vier Simulationsfelder besitzer, bevoelkerung, "
-                                  "konfession und verwuestung oder keines)");
+                                  " (ein Ort hat alle fünf Simulationsfelder besitzer, bevoelkerung, "
+                                  "konfession, kultur und verwuestung oder keines)");
             }
 
             if (f.has("besitzer")) {
@@ -924,7 +1059,13 @@ private:
                 }
             }
             if (f.has("konfession")) {
-                read_confessions(f, draft);
+                read_shares(f, "konfession", confessions_, "Konfession",
+                            "Prozentwerte je Konfession, z. B. { lutherisch = 90 reformiert = 10 }",
+                            draft.confessions);
+            }
+            if (f.has("kultur")) {
+                read_shares(f, "kultur", cultures_, "Kultur",
+                            "Prozentwerte je Kultur, z. B. { maerker = 100 }", draft.cultures);
             }
             if (f.has("verwuestung")) {
                 loc.devastation = f.fixed("verwuestung", between(fx(0), fx(1))).value_or(Fixed{});
@@ -969,33 +1110,37 @@ private:
         loc.latitude = values[1];
     }
 
-    void read_confessions(Fields& f, LocationDraft& draft) {
-        const ScriptNode* node = f.block("konfession", "Prozentwerte je Konfession, z. B. { lutherisch = 90 "
-                                                       "reformiert = 10 }");
+    /// Liest einen Anteilsblock wie konfession = { lutherisch = 90 reformiert = 10 }: Ganzzahlige
+    /// Prozente je bekannter Kennung, jede Kennung höchstens einmal, Summe 100.
+    void read_shares(Fields& f, std::string_view key, const Registry& registry, std::string_view kind,
+                     std::string_view example, std::vector<std::pair<Index, std::int64_t>>& out) {
+        const ScriptNode* node = f.block(key, example);
         if (node == nullptr) {
             return;
         }
+        const std::string lower_kind = key == "konfession" ? "Konfessionsanteile" : "Kulturanteile";
         std::int64_t sum = 0;
         bool ok = true;
         std::set<Index> seen;
         for (const ScriptNode& child : node->children) {
             if (child.key.empty() || child.is_block || child.op != "=") {
-                f.issues().error(
-                    f.file(), child.line,
-                    "ungültiger Eintrag im Block 'konfession' (erwartet <konfession> = <prozent>)");
+                f.issues().error(f.file(), child.line,
+                                 "ungültiger Eintrag im Block " + quote(key) + " (erwartet <" +
+                                     std::string(key) + "> = <prozent>)");
                 ok = false;
                 continue;
             }
-            const Index confession = lookup(confessions_, child.key);
-            if (confession == kNone) {
+            const Index index = lookup(registry, child.key);
+            if (index == kNone) {
                 f.issues().error(f.file(), child.line,
-                                 "unbekannte Konfession " + quote(child.key) + " in " + f.what());
+                                 "unbekannte " + std::string(kind) + " " + quote(child.key) + " in " +
+                                     f.what());
                 ok = false;
                 continue;
             }
-            if (!seen.insert(confession).second) {
+            if (!seen.insert(index).second) {
                 f.issues().error(f.file(), child.line,
-                                 "Konfession " + quote(child.key) + " ist in " + f.what() +
+                                 std::string(kind) + " " + quote(child.key) + " ist in " + f.what() +
                                      " mehrfach angegeben");
                 ok = false;
                 continue;
@@ -1003,17 +1148,18 @@ private:
             const auto percent = parse_int(child.value);
             if (!percent || *percent < 0 || *percent > 100) {
                 f.issues().error(f.file(), child.line,
-                                 "ungültiger Prozentwert " + quote(child.value) + " für Konfession " +
-                                     quote(child.key) + " (erwartet eine Ganzzahl von 0 bis 100)");
+                                 "ungültiger Prozentwert " + quote(child.value) + " für " +
+                                     std::string(kind) + " " + quote(child.key) +
+                                     " (erwartet eine Ganzzahl von 0 bis 100)");
                 ok = false;
                 continue;
             }
             sum += *percent;
-            draft.confessions.emplace_back(confession, *percent);
+            out.emplace_back(index, *percent);
         }
         if (ok && sum != 100) {
             f.issues().error(f.file(), node->line,
-                             "die Konfessionsanteile in " + f.what() + " ergeben " + std::to_string(sum) +
+                             "die " + lower_kind + " in " + f.what() + " ergeben " + std::to_string(sum) +
                                  " %, erwartet 100 %");
         }
     }
@@ -1201,8 +1347,12 @@ private:
 
     // ── Startzustand (Abschnitt 4) ──
 
+    /// Blöcke je Beruf, darin je Konfession, darin je Kultur (Abschnitt 4 bzw.
+    /// bevoelkerung.md, Abschnitt 2.6). Lebensstandard und Alphabetisierung setzt danach
+    /// initialize_population.
     void build_pops() {
         const Fixed hundred = Fixed::from_int(100);
+        const Rules& rules = world_.rules;
         for (std::size_t li = 0; li < world_.locations.size(); ++li) {
             Location& loc = world_.locations[li];
             const LocationDraft& draft = drafts_[li];
@@ -1217,12 +1367,24 @@ private:
                     if (percent == 0) {
                         continue;
                     }
-                    PopBlock pop;
-                    pop.location = static_cast<Index>(li);
-                    pop.profession = static_cast<Index>(pi);
-                    pop.confession = confession;
-                    pop.size = Fixed::from_int(draft.population) * share * Fixed::from_int(percent) / hundred;
-                    world_.pops.push_back(pop);
+                    for (const auto& [culture, culture_percent] : draft.cultures) {
+                        if (culture_percent == 0) {
+                            continue;
+                        }
+                        const Fixed size = Fixed::from_int(draft.population) * share *
+                                           Fixed::from_int(percent) / hundred *
+                                           Fixed::from_int(culture_percent) / hundred;
+                        PopBlock pop;
+                        pop.location = static_cast<Index>(li);
+                        pop.profession = static_cast<Index>(pi);
+                        pop.confession = confession;
+                        pop.culture = culture;
+                        pop.children = size * rules.share_children;
+                        pop.young = size * rules.share_young;
+                        pop.working = size * rules.share_working;
+                        pop.old = size - pop.children - pop.young - pop.working;
+                        world_.pops.push_back(pop);
+                    }
                 }
             }
             loc.pop_count = static_cast<Index>(world_.pops.size()) - loc.first_pop;
@@ -1236,16 +1398,18 @@ private:
 
     Registry terrains_;
     Registry confessions_;
+    Registry cultures_;
     Registry professions_;
     Registry states_;
     Registry districts_;
     Registry locations_;
     Registry scenarios_;
 
-    Date start_{9999, 12, 31};          // Startdatum des gewählten Szenarios
-    std::vector<CapitalRef> capitals_;  // parallel zu world_.states
-    std::vector<PlayerRef> players_;    // parallel zu den Szenarien
-    std::vector<LocationDraft> drafts_; // parallel zu world_.locations
+    Date start_{9999, 12, 31};                   // Startdatum des gewählten Szenarios
+    std::vector<CapitalRef> capitals_;           // parallel zu world_.states
+    std::vector<PlayerRef> players_;             // parallel zu den Szenarien
+    std::vector<LocationDraft> drafts_;          // parallel zu world_.locations
+    std::vector<ProfessionRef> profession_refs_; // parallel zu world_.professions
 };
 
 } // namespace

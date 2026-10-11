@@ -1,5 +1,5 @@
-ordner;datei;kommentar
-staaten;ALT_sachsen_altenburg;"Staat zum Lesezeichen ""Der Westfälische Frieden"" (24.10.1648), Testregion M1.
+ordner;datei;kultur;kommentar
+staaten;ALT_sachsen_altenburg;;"Staat zum Lesezeichen ""Der Westfälische Frieden"" (24.10.1648), Testregion M1.
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.5.
 schatz, steuersatz und hofhaltung sind Spielwerte (Reichstaler), skaliert auf
@@ -7,7 +7,7 @@ die in der Testregion modellierten Orte dieses Staates – keine historischen
 Haushaltszahlen. Kalibrierung: data/README.md, Abschnitt ""Wirtschaftswerte"".
 
 Ernestinisches Herzogtum; in der Testregion mit dem Amt Altenburg modelliert."
-staaten;BER_anhalt_bernburg;"Staat zum Lesezeichen ""Der Westfälische Frieden"" (24.10.1648), Testregion M1.
+staaten;BER_anhalt_bernburg;;"Staat zum Lesezeichen ""Der Westfälische Frieden"" (24.10.1648), Testregion M1.
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.5.
 schatz, steuersatz und hofhaltung sind Spielwerte (Reichstaler), skaliert auf
@@ -15,7 +15,7 @@ die in der Testregion modellierten Orte dieses Staates – keine historischen
 Haushaltszahlen. Kalibrierung: data/README.md, Abschnitt ""Wirtschaftswerte"".
 
 Eine der vier anhaltischen Linien des Jahres 1648."
-staaten;BOH_boehmen;"Staat zum Lesezeichen ""Der Westfälische Frieden"" (24.10.1648), Testregion M1.
+staaten;BOH_boehmen;;"Staat zum Lesezeichen ""Der Westfälische Frieden"" (24.10.1648), Testregion M1.
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.5.
 schatz, steuersatz und hofhaltung sind Spielwerte (Reichstaler), skaliert auf
@@ -24,7 +24,7 @@ Haushaltszahlen. Kalibrierung: data/README.md, Abschnitt ""Wirtschaftswerte"".
 
 Königreich Böhmen in Personalunion mit den habsburgischen Erblanden; nur der Norden liegt in der
 Testregion (Randgebiet). Böhmen ist im Basisspiel Teil der Habsburger Fokus-Nation."
-staaten;BRA_brandenburg;"Staat zum Lesezeichen ""Der Westfälische Frieden"" (24.10.1648), Testregion M1.
+staaten;BRA_brandenburg;;"Staat zum Lesezeichen ""Der Westfälische Frieden"" (24.10.1648), Testregion M1.
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.5.
 schatz, steuersatz und hofhaltung sind Spielwerte (Reichstaler), skaliert auf
@@ -35,7 +35,7 @@ Brandenburg 1648: Kurmark mit Altmark, Prignitz und Uckermark, Neumark, Herrscha
 Halberstadt und Hinterpommern (rechtlich zugesprochen, faktisch bis 1653 schwedisch besetzt).
 Minden, Kleve-Mark-Ravensberg und das Herzogtum Preußen liegen außerhalb der Testregion.
 Regierungsform: Fürst mit Landständen (Landtagsrezess erst 1653; der Absolutismus folgt später)."
-staaten;BWO_braunschweig_wolfenbuettel;"Staat zum Lesezeichen ""Der Westfälische Frieden"" (24.10.1648), Testregion M1.
+staaten;BWO_braunschweig_wolfenbuettel;;"Staat zum Lesezeichen ""Der Westfälische Frieden"" (24.10.1648), Testregion M1.
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.5.
 schatz, steuersatz und hofhaltung sind Spielwerte (Reichstaler), skaliert auf
@@ -43,7 +43,7 @@ die in der Testregion modellierten Orte dieses Staates – keine historischen
 Haushaltszahlen. Kalibrierung: data/README.md, Abschnitt ""Wirtschaftswerte"".
 
 Welfisches Herzogtum (Fürstentum Wolfenbüttel)."
-staaten;DES_anhalt_dessau;"Staat zum Lesezeichen ""Der Westfälische Frieden"" (24.10.1648), Testregion M1.
+staaten;DES_anhalt_dessau;;"Staat zum Lesezeichen ""Der Westfälische Frieden"" (24.10.1648), Testregion M1.
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.5.
 schatz, steuersatz und hofhaltung sind Spielwerte (Reichstaler), skaliert auf
@@ -51,7 +51,7 @@ die in der Testregion modellierten Orte dieses Staates – keine historischen
 Haushaltszahlen. Kalibrierung: data/README.md, Abschnitt ""Wirtschaftswerte"".
 
 Eine der vier anhaltischen Linien des Jahres 1648 (Plötzkau nicht modelliert)."
-staaten;GOT_sachsen_gotha;"Staat zum Lesezeichen ""Der Westfälische Frieden"" (24.10.1648), Testregion M1.
+staaten;GOT_sachsen_gotha;;"Staat zum Lesezeichen ""Der Westfälische Frieden"" (24.10.1648), Testregion M1.
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.5.
 schatz, steuersatz und hofhaltung sind Spielwerte (Reichstaler), skaliert auf
@@ -59,7 +59,7 @@ die in der Testregion modellierten Orte dieses Staates – keine historischen
 Haushaltszahlen. Kalibrierung: data/README.md, Abschnitt ""Wirtschaftswerte"".
 
 Ernestinisches Herzogtum; in der Testregion mit dem Amt Gotha modelliert."
-staaten;KOE_anhalt_koethen;"Staat zum Lesezeichen ""Der Westfälische Frieden"" (24.10.1648), Testregion M1.
+staaten;KOE_anhalt_koethen;;"Staat zum Lesezeichen ""Der Westfälische Frieden"" (24.10.1648), Testregion M1.
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.5.
 schatz, steuersatz und hofhaltung sind Spielwerte (Reichstaler), skaliert auf
@@ -67,7 +67,7 @@ die in der Testregion modellierten Orte dieses Staates – keine historischen
 Haushaltszahlen. Kalibrierung: data/README.md, Abschnitt ""Wirtschaftswerte"".
 
 Eine der vier anhaltischen Linien des Jahres 1648."
-staaten;MAG_erzstift_magdeburg;"Staat zum Lesezeichen ""Der Westfälische Frieden"" (24.10.1648), Testregion M1.
+staaten;MAG_erzstift_magdeburg;;"Staat zum Lesezeichen ""Der Westfälische Frieden"" (24.10.1648), Testregion M1.
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.5.
 schatz, steuersatz und hofhaltung sind Spielwerte (Reichstaler), skaliert auf
@@ -75,7 +75,7 @@ die in der Testregion modellierten Orte dieses Staates – keine historischen
 Haushaltszahlen. Kalibrierung: data/README.md, Abschnitt ""Wirtschaftswerte"".
 
 Geistliches Territorium unter einem lutherischen Administrator aus dem Haus Wettin."
-staaten;MAI_kurmainz;"Staat zum Lesezeichen ""Der Westfälische Frieden"" (24.10.1648), Testregion M1.
+staaten;MAI_kurmainz;;"Staat zum Lesezeichen ""Der Westfälische Frieden"" (24.10.1648), Testregion M1.
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.5.
 schatz, steuersatz und hofhaltung sind Spielwerte (Reichstaler), skaliert auf
@@ -83,7 +83,7 @@ die in der Testregion modellierten Orte dieses Staates – keine historischen
 Haushaltszahlen. Kalibrierung: data/README.md, Abschnitt ""Wirtschaftswerte"".
 
 In der Testregion nur die thüringischen Besitzungen: Erfurt und das Eichsfeld."
-staaten;MGU_mecklenburg_guestrow;"Staat zum Lesezeichen ""Der Westfälische Frieden"" (24.10.1648), Testregion M1.
+staaten;MGU_mecklenburg_guestrow;;"Staat zum Lesezeichen ""Der Westfälische Frieden"" (24.10.1648), Testregion M1.
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.5.
 schatz, steuersatz und hofhaltung sind Spielwerte (Reichstaler), skaliert auf
@@ -91,7 +91,7 @@ die in der Testregion modellierten Orte dieses Staates – keine historischen
 Haushaltszahlen. Kalibrierung: data/README.md, Abschnitt ""Wirtschaftswerte"".
 
 Güstrower Landesteil nach dem Fahrenholzer Vertrag (1621), u. a. mit dem Land Stargard."
-staaten;MSC_mecklenburg_schwerin;"Staat zum Lesezeichen ""Der Westfälische Frieden"" (24.10.1648), Testregion M1.
+staaten;MSC_mecklenburg_schwerin;;"Staat zum Lesezeichen ""Der Westfälische Frieden"" (24.10.1648), Testregion M1.
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.5.
 schatz, steuersatz und hofhaltung sind Spielwerte (Reichstaler), skaliert auf
@@ -99,7 +99,7 @@ die in der Testregion modellierten Orte dieses Staates – keine historischen
 Haushaltszahlen. Kalibrierung: data/README.md, Abschnitt ""Wirtschaftswerte"".
 
 Schweriner Landesteil nach dem Fahrenholzer Vertrag (1621); Rostock (Kondominium) vereinfacht hier."
-staaten;SAX_kursachsen;"Staat zum Lesezeichen ""Der Westfälische Frieden"" (24.10.1648), Testregion M1.
+staaten;SAX_kursachsen;;"Staat zum Lesezeichen ""Der Westfälische Frieden"" (24.10.1648), Testregion M1.
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.5.
 schatz, steuersatz und hofhaltung sind Spielwerte (Reichstaler), skaliert auf
@@ -108,7 +108,7 @@ Haushaltszahlen. Kalibrierung: data/README.md, Abschnitt ""Wirtschaftswerte"".
 
 Kursachsen mit Erblanden, beiden Lausitzen und den magdeburgischen Ämtern. Die Sekundogenituren
 (Weißenfels, Merseburg, Zeitz) entstehen erst nach dem Tod Johann Georgs I. (1656)."
-staaten;SWE_schweden;"Staat zum Lesezeichen ""Der Westfälische Frieden"" (24.10.1648), Testregion M1.
+staaten;SWE_schweden;;"Staat zum Lesezeichen ""Der Westfälische Frieden"" (24.10.1648), Testregion M1.
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.5.
 schatz, steuersatz und hofhaltung sind Spielwerte (Reichstaler), skaliert auf
@@ -117,7 +117,7 @@ Haushaltszahlen. Kalibrierung: data/README.md, Abschnitt ""Wirtschaftswerte"".
 
 Schweden als Reichsstand für seine deutschen Besitzungen; Stockholm und Bremen-Verden liegen
 außerhalb der Testregion. Die Hofhaltung steht hier für die Landesverwaltung und Garnisonen in Pommern."
-staaten;WEI_sachsen_weimar;"Staat zum Lesezeichen ""Der Westfälische Frieden"" (24.10.1648), Testregion M1.
+staaten;WEI_sachsen_weimar;;"Staat zum Lesezeichen ""Der Westfälische Frieden"" (24.10.1648), Testregion M1.
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.5.
 schatz, steuersatz und hofhaltung sind Spielwerte (Reichstaler), skaliert auf
@@ -125,7 +125,7 @@ die in der Testregion modellierten Orte dieses Staates – keine historischen
 Haushaltszahlen. Kalibrierung: data/README.md, Abschnitt ""Wirtschaftswerte"".
 
 Ernestinisches Herzogtum (Weimar, Jena, Eisenach; Jena hier nicht eigens modelliert)."
-staaten;ZER_anhalt_zerbst;"Staat zum Lesezeichen ""Der Westfälische Frieden"" (24.10.1648), Testregion M1.
+staaten;ZER_anhalt_zerbst;;"Staat zum Lesezeichen ""Der Westfälische Frieden"" (24.10.1648), Testregion M1.
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.5.
 schatz, steuersatz und hofhaltung sind Spielwerte (Reichstaler), skaliert auf
@@ -133,7 +133,7 @@ die in der Testregion modellierten Orte dieses Staates – keine historischen
 Haushaltszahlen. Kalibrierung: data/README.md, Abschnitt ""Wirtschaftswerte"".
 
 Eine der vier anhaltischen Linien des Jahres 1648; anders als die übrigen Linien lutherisch."
-orte;anhalt;"Orte: Fürstentümer Anhalt – Stand 24.10.1648.
+orte;anhalt;obersachsen=100;"Orte: Fürstentümer Anhalt – Stand 24.10.1648.
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Ein Ort steht für eine Stadt mit ihrem Amt (Umland); ""bevoelkerung"" umfasst beides.
@@ -149,7 +149,7 @@ Ergänzt in Meilenstein M3 (tools/geodaten/orte.py): weitere Orte ohne Daten (oh
 aus GeoNames, räumlich ausgewählt, Gelände aus dem Höhenmodell, Fläche aus der Karte.
 Umfang der Landschaft Anhalt: Fürstentümer Anhalt (heute Landkreis Anhalt-Bitterfeld und
 Dessau-Roßlau)."
-orte;ardennen;"Orte: Ardennen – Orte ohne Daten (Meilenstein M3).
+orte;ardennen;wallonen=100;"Orte: Ardennen – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -157,7 +157,7 @@ ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem 
 und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 
 Umfang: Französische Ardennen mit Charleville, Sedan und Givet."
-orte;baden;"Orte: Baden – Orte ohne Daten (Meilenstein M3).
+orte;baden;alemannen=100;"Orte: Baden – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -166,7 +166,7 @@ und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 
 Umfang: Markgrafschaften Baden, vorderösterreichischer Breisgau, Ortenau, Schwarzwald und
 Hochrhein (heute Regierungsbezirke Karlsruhe und Freiburg ohne Kurpfalz und Württemberg)."
-orte;bayern;"Orte: Bayern – Orte ohne Daten (Meilenstein M3).
+orte;bayern;bayern=100;"Orte: Bayern – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -174,7 +174,7 @@ ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem 
 und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 
 Umfang: Altbayern (heute Regierungsbezirke Oberbayern und Niederbayern)."
-orte;boehmen;"Orte: Königreich Böhmen, nördlicher Teil (Randgebiet der Testregion) – Stand 24.10.1648.
+orte;boehmen;tschechen=70 deutschboehmen=30;"Orte: Königreich Böhmen, nördlicher Teil (Randgebiet der Testregion) – Stand 24.10.1648.
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Ein Ort steht für eine Stadt mit ihrem Amt bzw. ihrer Herrschaft (Umland).
@@ -192,7 +192,7 @@ aus GeoNames, räumlich ausgewählt, Gelände aus dem Höhenmodell, Fläche aus 
 Umfang der Landschaft Böhmen: Königreich Böhmen (heute Tschechien westlich der Landesgrenze
 zu Mähren, Grenze nach heutigen Bezirken vereinfacht: Bezirke Havlíčkův Brod, Pelhřimov und
 Svitavy zu Böhmen)."
-orte;brabant;"Orte: Brabant – Orte ohne Daten (Meilenstein M3).
+orte;brabant;flamen=100;"Orte: Brabant – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -201,7 +201,7 @@ und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 
 Umfang: Herzogtum Brabant mit Antwerpen und Mecheln (heute Brüssel, Flämisch- und
 Wallonisch-Brabant, Provinz Antwerpen)."
-orte;brandenburg;"Orte: Mark Brandenburg (Kurmark mit Altmark, Prignitz und Uckermark; Neumark) – Stand 24.10.1648.
+orte;brandenburg;maerker=100;"Orte: Mark Brandenburg (Kurmark mit Altmark, Prignitz und Uckermark; Neumark) – Stand 24.10.1648.
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Ein Ort steht für eine Stadt mit ihrem Amt (Umland); ""bevoelkerung"" umfasst beides.
@@ -219,7 +219,7 @@ Umfang der Landschaft Brandenburg: Mark Brandenburg mit Altmark (heute Landkreis
 und Altmarkkreis Salzwedel), Berlin und Neumark (heute Polen: Gorzów, Słubice,
 Strzelce-Drezdenko, Sulęcin, Krosno Odrzańskie, Świebodzin, Myślibórz, Choszczno, Drawsko,
 Świdwin)."
-orte;braunschweig;"Orte: Herzogtum Braunschweig-Wolfenbüttel (östlicher Teil) – Stand 24.10.1648.
+orte;braunschweig;niedersachsen=100;"Orte: Herzogtum Braunschweig-Wolfenbüttel (östlicher Teil) – Stand 24.10.1648.
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Ein Ort steht für eine Stadt mit ihrem Amt (Umland); ""bevoelkerung"" umfasst beides.
@@ -234,7 +234,7 @@ Ergänzt in Meilenstein M3 (tools/geodaten/orte.py): weitere Orte ohne Daten (oh
 aus GeoNames, räumlich ausgewählt, Gelände aus dem Höhenmodell, Fläche aus der Karte.
 Umfang der Landschaft Braunschweig: Herzogtum Braunschweig-Wolfenbüttel und Umgebung (heute
 Braunschweig, Wolfenbüttel, Salzgitter, Wolfsburg, Helmstedt, Peine, Goslar, Holzminden)."
-orte;bremen_verden;"Orte: Bremen-Verden – Orte ohne Daten (Meilenstein M3).
+orte;bremen_verden;niedersachsen=100;"Orte: Bremen-Verden – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -244,7 +244,7 @@ und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 Umfang: Elbe-Weser-Dreieck mit der Stadt Bremen (1648 größtenteils das schwedische Herzogtum
 Bremen-Verden; heute Landkreise Cuxhaven, Stade, Rotenburg, Osterholz und Verden, Bremen und
 Bremerhaven)."
-orte;burgenland;"Orte: Burgenland – Orte ohne Daten (Meilenstein M3).
+orte;burgenland;oesterreicher=80 kroaten=20;"Orte: Burgenland – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -252,7 +252,7 @@ ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem 
 und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 
 Umfang: Burgenland (Deutschwestungarn, bis 1921 Teil des Königreichs Ungarn)."
-orte;burgundische_pforte;"Orte: Burgundische Pforte – Orte ohne Daten (Meilenstein M3).
+orte;burgundische_pforte;franzosen=100;"Orte: Burgundische Pforte – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -261,7 +261,7 @@ und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 
 Umfang: Mömpelgard mit Héricourt (bis 1793 württembergisch) und der Nordrand der
 Freigrafschaft Burgund um Lure und Luxeuil."
-orte;calenberg;"Orte: Calenberg – Orte ohne Daten (Meilenstein M3).
+orte;calenberg;niedersachsen=100;"Orte: Calenberg – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -270,7 +270,7 @@ und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 
 Umfang: Fürstentum Calenberg mit Hannover, Hameln, Schaumburg sowie den Grafschaften Hoya
 und Diepholz."
-orte;elsass;"Orte: Elsass – Orte ohne Daten (Meilenstein M3).
+orte;elsass;elsaesser=100;"Orte: Elsass – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -279,7 +279,7 @@ und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 
 Umfang: Elsass mit Belfort (heute Départements Bas-Rhin, Haut-Rhin und Territoire de
 Belfort)."
-orte;flandern;"Orte: Flandern – Orte ohne Daten (Meilenstein M3).
+orte;flandern;flamen=100;"Orte: Flandern – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -287,7 +287,7 @@ ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem 
 und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 
 Umfang: Grafschaft Flandern (heute Provinzen West- und Ostflandern)."
-orte;franken;"Orte: Franken – Orte ohne Daten (Meilenstein M3).
+orte;franken;franken=100;"Orte: Franken – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -295,7 +295,7 @@ ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem 
 und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 
 Umfang: Ober- und Mittelfranken mit Bamberg, Bayreuth, Ansbach und Nürnberg."
-orte;franzoesisch_flandern;"Orte: Französisch-Flandern – Orte ohne Daten (Meilenstein M3).
+orte;franzoesisch_flandern;flamen=100;"Orte: Französisch-Flandern – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -305,7 +305,7 @@ und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 Umfang: Französisch-Flandern mit Dünkirchen, Lille und Douai sowie das Bergbaugebiet um Lens
 (Artois); im 17. Jahrhundert schrittweise von Frankreich erworben (Pyrenäenfrieden 1659,
 Aachen 1668, Nimwegen 1678)."
-orte;galizien;"Orte: Westgalizien – Orte ohne Daten (Meilenstein M3).
+orte;galizien;polen=100;"Orte: Westgalizien – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -314,7 +314,7 @@ und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 
 Umfang: Polnischer Saum in Westgalizien (Auschwitz, Zator, Saybusch, Chrzanów; 1772–1918
 österreichisch)."
-orte;geldern;"Orte: Geldern – Orte ohne Daten (Meilenstein M3).
+orte;geldern;niederlaender=100;"Orte: Geldern – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -323,7 +323,7 @@ und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 
 Umfang: Geldern mit Arnheim, Nimwegen und Zutphen sowie das Land van Cuijk (niederländischer
 Saum)."
-orte;glatz;"Orte: Grafschaft Glatz – Orte ohne Daten (Meilenstein M3).
+orte;glatz;schlesier=100;"Orte: Grafschaft Glatz – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -331,7 +331,7 @@ ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem 
 und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 
 Umfang: Grafschaft Glatz (bis 1742 böhmisch, danach preußisch; heute Kreis Kłodzko)."
-orte;goettingen;"Orte: Göttingen – Orte ohne Daten (Meilenstein M3).
+orte;goettingen;niedersachsen=100;"Orte: Göttingen – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -340,7 +340,7 @@ und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 
 Umfang: Göttingen und Grubenhagen mit dem Untereichsfeld (heute Landkreise Göttingen und
 Northeim)."
-orte;groningen_drenthe;"Orte: Groningen und Drenthe – Orte ohne Daten (Meilenstein M3).
+orte;groningen_drenthe;niederlaender=100;"Orte: Groningen und Drenthe – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -348,7 +348,7 @@ ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem 
 und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 
 Umfang: Groningen und Drenthe (niederländischer Saum)."
-orte;hennegau;"Orte: Hennegau – Orte ohne Daten (Meilenstein M3).
+orte;hennegau;wallonen=100;"Orte: Hennegau – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -357,7 +357,7 @@ und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 
 Umfang: Hennegau und Cambrésis (heute belgische Provinz Hennegau sowie in Frankreich
 Valenciennes, Cambrai, Avesnes und die Thiérache)."
-orte;hildesheim;"Orte: Hildesheim – Orte ohne Daten (Meilenstein M3).
+orte;hildesheim;niedersachsen=100;"Orte: Hildesheim – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -365,7 +365,7 @@ ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem 
 und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 
 Umfang: Hochstift Hildesheim (heute Landkreis Hildesheim)."
-orte;holstein;"Orte: Holstein – Orte ohne Daten (Meilenstein M3).
+orte;holstein;holsteiner=100;"Orte: Holstein – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -374,7 +374,7 @@ und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 
 Umfang: Holstein mit Dithmarschen, Lauenburg, Lübeck und Hamburg (heute Schleswig-Holstein
 südlich der Eider sowie Hamburg)."
-orte;juetland;"Orte: Jütland – Orte ohne Daten (Meilenstein M3).
+orte;juetland;daenen=100;"Orte: Jütland – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -382,7 +382,7 @@ ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem 
 und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 
 Umfang: Dänischer Saum nördlich der Königsau mit Kolding, Vejen, Esbjerg, Ribe und Fanø."
-orte;kaernten;"Orte: Kärnten – Orte ohne Daten (Meilenstein M3).
+orte;kaernten;oesterreicher=80 slowenen=20;"Orte: Kärnten – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -391,7 +391,7 @@ und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 
 Umfang: Herzogtum Kärnten mit Kanaltal und Mießtal (heute Kärnten, in Italien Tarvis,
 Malborghetto und Pontafel, in Slowenien das Mießtal, Dravograd und Jezersko)."
-orte;kongresspolen;"Orte: Polnischer Saum (Kongresspolen) – Orte ohne Daten (Meilenstein M3).
+orte;kongresspolen;polen=100;"Orte: Polnischer Saum (Kongresspolen) – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -401,7 +401,7 @@ und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 Umfang: Polnischer Saum jenseits der preußischen Grenze von 1815–1918 (Kongresspolen):
 Kujawien, Dobriner Land, Nordmasowien, Kalisch, Konin, Wieluń, Tschenstochau, Dombrowaer
 Becken und Suwałki."
-orte;krain;"Orte: Krain – Orte ohne Daten (Meilenstein M3).
+orte;krain;slowenen=100;"Orte: Krain – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -410,7 +410,7 @@ und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 
 Umfang: Herzogtum Krain mit Laibach (heute Mittel-, Nordwest- und Südslowenien ohne das
 Küstenland)."
-orte;kurhessen;"Orte: Kurhessen – Orte ohne Daten (Meilenstein M3).
+orte;kurhessen;hessen=100;"Orte: Kurhessen – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -418,7 +418,7 @@ ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem 
 und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 
 Umfang: Niederhessen mit Fulda, Hersfeld und Waldeck (heute Regierungsbezirk Kassel)."
-orte;kurpfalz;"Orte: Kurpfalz – Orte ohne Daten (Meilenstein M3).
+orte;kurpfalz;pfaelzer=100;"Orte: Kurpfalz – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -427,7 +427,7 @@ und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 
 Umfang: Pfalz links des Rheins mit Zweibrücken und Speyer sowie die rechtsrheinische
 Kurpfalz um Mannheim und Heidelberg."
-orte;lausitz;"Orte: Markgraftümer Ober- und Niederlausitz mit der brandenburgischen Herrschaft Cottbus – Stand 24.10.1648.
+orte;lausitz;obersachsen=70 sorben=30;"Orte: Markgraftümer Ober- und Niederlausitz mit der brandenburgischen Herrschaft Cottbus – Stand 24.10.1648.
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Ein Ort steht für eine Stadt mit ihrem Amt bzw. Weichbild (Umland).
@@ -445,7 +445,7 @@ aus GeoNames, räumlich ausgewählt, Gelände aus dem Höhenmodell, Fläche aus 
 Umfang der Landschaft Lausitz: Ober- und Niederlausitz, Grenzen vereinfacht (heute
 Landkreise Bautzen und Görlitz, Spree-Neiße, Cottbus, Oberspreewald-Lausitz,
 Dahme-Spreewald, Elbe-Elster sowie in Polen Zgorzelec, Lubań und Żary)."
-orte;limburg;"Orte: Limburg – Orte ohne Daten (Meilenstein M3).
+orte;limburg;niederlaender=100;"Orte: Limburg – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -453,7 +453,7 @@ ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem 
 und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 
 Umfang: Niederländisch-Limburg (1839–1866 als Herzogtum Limburg im Deutschen Bund)."
-orte;lothringen;"Orte: Lothringen – Orte ohne Daten (Meilenstein M3).
+orte;lothringen;lothringer=100;"Orte: Lothringen – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -462,7 +462,7 @@ und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 
 Umfang: Herzogtümer Lothringen und Bar mit den Bistümern Metz, Toul und Verdun (heute
 Départements Moselle, Meurthe-et-Moselle, Meuse und Vosges)."
-orte;lueneburg;"Orte: Lüneburg – Orte ohne Daten (Meilenstein M3).
+orte;lueneburg;niedersachsen=100;"Orte: Lüneburg – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -471,7 +471,7 @@ und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 
 Umfang: Fürstentum Lüneburg mit Lüneburger Heide und Wendland (heute Landkreise Lüneburg,
 Harburg, Uelzen, Lüchow-Dannenberg, Celle, Heidekreis und Gifhorn)."
-orte;luettich;"Orte: Lüttich – Orte ohne Daten (Meilenstein M3).
+orte;luettich;wallonen=100;"Orte: Lüttich – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -480,7 +480,7 @@ und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 
 Umfang: Hochstift Lüttich mit der Grafschaft Loon, das alte Herzogtum Limburg mit Eupen
 sowie Stablo-Malmedy (heute belgische Provinzen Lüttich und Limburg)."
-orte;luxemburg;"Orte: Luxemburg – Orte ohne Daten (Meilenstein M3).
+orte;luxemburg;luxemburger=100;"Orte: Luxemburg – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -488,7 +488,7 @@ ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem 
 und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 
 Umfang: Herzogtum Luxemburg (heute Großherzogtum Luxemburg und belgische Provinz Luxemburg)."
-orte;maehren;"Orte: Mähren – Orte ohne Daten (Meilenstein M3).
+orte;maehren;tschechen=100;"Orte: Mähren – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -497,7 +497,7 @@ und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 
 Umfang: Markgrafschaft Mähren (heute Tschechien östlich der Landesgrenze zu Böhmen ohne den
 schlesischen Teil; Grenze nach heutigen Bezirken vereinfacht)."
-orte;magdeburg;"Orte: Erzstift Magdeburg, Fürstentum Halberstadt und magdeburgische Ämter – Stand 24.10.1648.
+orte;magdeburg;niedersachsen=100;"Orte: Erzstift Magdeburg, Fürstentum Halberstadt und magdeburgische Ämter – Stand 24.10.1648.
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Ein Ort steht für eine Stadt mit ihrem Amt (Umland); ""bevoelkerung"" umfasst beides.
@@ -514,7 +514,7 @@ aus GeoNames, räumlich ausgewählt, Gelände aus dem Höhenmodell, Fläche aus 
 Umfang der Landschaft Magdeburg: Erzstift Magdeburg, Fürstentum Halberstadt und Harzvorland
 (heute Sachsen-Anhalt ohne Altmark, Anhalt, Wittenberg, Burgenlandkreis und
 Mansfeld-Südharz)."
-orte;mainfranken;"Orte: Mainfranken – Orte ohne Daten (Meilenstein M3).
+orte;mainfranken;franken=100;"Orte: Mainfranken – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -523,7 +523,7 @@ und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 
 Umfang: Mainfranken mit Würzburg, Aschaffenburg und Schweinfurt (heute Unterfranken und
 Main-Tauber-Kreis)."
-orte;mark_sauerland;"Orte: Mark und Sauerland – Orte ohne Daten (Meilenstein M3).
+orte;mark_sauerland;westfalen=100;"Orte: Mark und Sauerland – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -532,7 +532,7 @@ und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 
 Umfang: Grafschaft Mark, kurkölnisches Sauerland, Siegerland, Wittgenstein und Dortmund
 (heute Regierungsbezirk Arnsberg)."
-orte;mecklenburg;"Orte: Herzogtümer Mecklenburg-Schwerin und Mecklenburg-Güstrow mit dem schwedischen Wismar – Stand 24.10.1648.
+orte;mecklenburg;mecklenburger=100;"Orte: Herzogtümer Mecklenburg-Schwerin und Mecklenburg-Güstrow mit dem schwedischen Wismar – Stand 24.10.1648.
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Ein Ort steht für eine Stadt mit ihrem Amt (Umland); ""bevoelkerung"" umfasst beides.
@@ -548,7 +548,7 @@ Ergänzt in Meilenstein M3 (tools/geodaten/orte.py): weitere Orte ohne Daten (oh
 aus GeoNames, räumlich ausgewählt, Gelände aus dem Höhenmodell, Fläche aus der Karte.
 Umfang der Landschaft Mecklenburg: Herzogtümer Mecklenburg (heute Mecklenburg-Vorpommern
 ohne die Landkreise Vorpommern-Rügen und Vorpommern-Greifswald)."
-orte;mittelrhein;"Orte: Mittelrhein – Orte ohne Daten (Meilenstein M3).
+orte;mittelrhein;rheinlaender=100;"Orte: Mittelrhein – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -557,7 +557,7 @@ und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 
 Umfang: Mittelrhein mit Koblenz, Neuwied, Ahr, Hunsrück und unterer Mosel (1648 vor allem
 Kurtrier, Kurköln, Wied und Sayn)."
-orte;muensterland;"Orte: Münsterland – Orte ohne Daten (Meilenstein M3).
+orte;muensterland;westfalen=100;"Orte: Münsterland – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -565,7 +565,7 @@ ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem 
 und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 
 Umfang: Münsterland mit dem Vest Recklinghausen (heute Regierungsbezirk Münster)."
-orte;namur;"Orte: Namur – Orte ohne Daten (Meilenstein M3).
+orte;namur;wallonen=100;"Orte: Namur – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -573,7 +573,7 @@ ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem 
 und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 
 Umfang: Grafschaft Namur (heute belgische Provinz Namur)."
-orte;nassau;"Orte: Nassau – Orte ohne Daten (Meilenstein M3).
+orte;nassau;hessen=100;"Orte: Nassau – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -583,7 +583,7 @@ und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 Umfang: Nassauische Lande an Lahn, Taunus und Westerwald (heute Wiesbaden,
 Rheingau-Taunus-Kreis, Main-Taunus-Kreis, Lahn-Dill-Kreis, Limburg-Weilburg,
 Rhein-Lahn-Kreis und Westerwaldkreis)."
-orte;niederoesterreich;"Orte: Österreich unter der Enns – Orte ohne Daten (Meilenstein M3).
+orte;niederoesterreich;oesterreicher=100;"Orte: Österreich unter der Enns – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -591,7 +591,7 @@ ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem 
 und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 
 Umfang: Erzherzogtum Österreich unter der Enns mit Wien (heute Niederösterreich und Wien)."
-orte;niederrhein;"Orte: Niederrhein – Orte ohne Daten (Meilenstein M3).
+orte;niederrhein;rheinlaender=100;"Orte: Niederrhein – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -600,7 +600,7 @@ und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 
 Umfang: Niederrhein und Bergisches Land (heute Regierungsbezirk Düsseldorf: Kleve, Geldern,
 Moers, Duisburg, Essen, Düsseldorf, Wuppertal)."
-orte;niederschlesien;"Orte: Niederschlesien – Orte ohne Daten (Meilenstein M3).
+orte;niederschlesien;schlesier=100;"Orte: Niederschlesien – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -608,7 +608,7 @@ ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem 
 und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 
 Umfang: Niederschlesien mit Brieg und Namslau sowie Grünberg, Sagan und Neusalz."
-orte;oberhessen;"Orte: Oberhessen – Orte ohne Daten (Meilenstein M3).
+orte;oberhessen;hessen=100;"Orte: Oberhessen – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -616,7 +616,7 @@ ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem 
 und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 
 Umfang: Oberhessen (heute Landkreise Gießen, Marburg-Biedenkopf und Vogelsberg)."
-orte;oberoesterreich;"Orte: Österreich ob der Enns – Orte ohne Daten (Meilenstein M3).
+orte;oberoesterreich;oesterreicher=100;"Orte: Österreich ob der Enns – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -625,7 +625,7 @@ und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 
 Umfang: Erzherzogtum Österreich ob der Enns (heute Oberösterreich; das Innviertel gehörte
 bis 1779 zu Bayern)."
-orte;oberpfalz;"Orte: Oberpfalz – Orte ohne Daten (Meilenstein M3).
+orte;oberpfalz;bayern=100;"Orte: Oberpfalz – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -633,7 +633,7 @@ ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem 
 und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 
 Umfang: Oberpfalz (heute Regierungsbezirk Oberpfalz)."
-orte;oberschlesien;"Orte: Oberschlesien – Orte ohne Daten (Meilenstein M3).
+orte;oberschlesien;polen=60 schlesier=40;"Orte: Oberschlesien – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -642,7 +642,7 @@ und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 
 Umfang: Oberschlesien (heute Woiwodschaft Oppeln ohne Brieg und Namslau sowie der preußische
 Teil der Woiwodschaft Schlesien)."
-orte;oesterreichisch_schlesien;"Orte: Österreichisch-Schlesien – Orte ohne Daten (Meilenstein M3).
+orte;oesterreichisch_schlesien;schlesier=100;"Orte: Österreichisch-Schlesien – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -652,7 +652,7 @@ und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 Umfang: Österreichisch-Schlesien mit Troppau, Teschen und Bielitz (heute Bezirke Jeseník,
 Bruntál, Opava mit dem bis 1920 preußischen Hultschiner Ländchen, Karviná und Frýdek-Místek
 sowie in Polen Cieszyn und Bielsko)."
-orte;oldenburg;"Orte: Oldenburg – Orte ohne Daten (Meilenstein M3).
+orte;oldenburg;niedersachsen=100;"Orte: Oldenburg – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -661,7 +661,7 @@ und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 
 Umfang: Oldenburger Land mit Jeverland und Oldenburger Münsterland (Cloppenburg und Vechta
 gehörten 1648 zum Hochstift Münster)."
-orte;osnabrueck;"Orte: Osnabrück und Emsland – Orte ohne Daten (Meilenstein M3).
+orte;osnabrueck;westfalen=100;"Orte: Osnabrück und Emsland – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -669,7 +669,7 @@ ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem 
 und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 
 Umfang: Hochstift Osnabrück, Emsland (Niederstift Münster) und Grafschaft Bentheim."
-orte;ostfriesland;"Orte: Ostfriesland – Orte ohne Daten (Meilenstein M3).
+orte;ostfriesland;friesen=100;"Orte: Ostfriesland – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -677,7 +677,7 @@ ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem 
 und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 
 Umfang: Ostfriesland (heute Landkreise Aurich, Leer, Wittmund und Emden)."
-orte;ostpreussen;"Orte: Ostpreußen – Orte ohne Daten (Meilenstein M3).
+orte;ostpreussen;altpreussen=80 litauer=10 masuren=10;"Orte: Ostpreußen – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -686,7 +686,7 @@ und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 
 Umfang: Herzogtum Preußen mit Ermland (bis 1772 polnisch) und Memelland (heute Woiwodschaft
 Ermland-Masuren, Oblast Kaliningrad und der Westen Litauens um Klaipėda)."
-orte;ostwestfalen;"Orte: Ostwestfalen – Orte ohne Daten (Meilenstein M3).
+orte;ostwestfalen;westfalen=100;"Orte: Ostwestfalen – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -694,7 +694,7 @@ ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem 
 und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 
 Umfang: Minden-Ravensberg, Paderborner Land und Lippe (heute Regierungsbezirk Detmold)."
-orte;overijssel;"Orte: Overijssel – Orte ohne Daten (Meilenstein M3).
+orte;overijssel;niederlaender=100;"Orte: Overijssel – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -702,7 +702,7 @@ ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem 
 und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 
 Umfang: Overijssel mit Twente (niederländischer Saum)."
-orte;pommern;"Orte: Pommern – schwedisches Vorpommern und brandenburgisches Hinterpommern – Stand 24.10.1648.
+orte;pommern;pommern=100;"Orte: Pommern – schwedisches Vorpommern und brandenburgisches Hinterpommern – Stand 24.10.1648.
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Ein Ort steht für eine Stadt mit ihrem Amt (Umland); ""bevoelkerung"" umfasst beides.
@@ -722,7 +722,7 @@ aus GeoNames, räumlich ausgewählt, Gelände aus dem Höhenmodell, Fläche aus 
 Umfang der Landschaft Pommern: Vorpommern mit Rügen und Hinterpommern (heute Landkreise
 Vorpommern-Rügen und Vorpommern-Greifswald, in Polen die Woiwodschaft Westpommern ohne
 Neumark sowie die Kreise Słupsk, Lębork und Bytów)."
-orte;posen;"Orte: Posen – Orte ohne Daten (Meilenstein M3).
+orte;posen;polen=100;"Orte: Posen – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -732,7 +732,7 @@ und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 Umfang: Großpolen und Netzedistrikt, 1815–1920 preußische Provinz Posen (heute Woiwodschaft
 Großpolen ohne Kalisch und Konin sowie Bydgoszcz, Inowrocław, Mogilno, Nakło, Żnin,
 Międzyrzecz und Wschowa)."
-orte;rheinhessen;"Orte: Rheinhessen – Orte ohne Daten (Meilenstein M3).
+orte;rheinhessen;pfaelzer=100;"Orte: Rheinhessen – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -741,7 +741,7 @@ und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 
 Umfang: Rheinhessen und Nahe (heute Mainz, Worms, Alzey-Worms, Mainz-Bingen, Bad Kreuznach
 und Donnersbergkreis)."
-orte;rheinland;"Orte: Rheinland – Orte ohne Daten (Meilenstein M3).
+orte;rheinland;rheinlaender=100;"Orte: Rheinland – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -750,7 +750,7 @@ und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 
 Umfang: Kölner Bucht, Jülicher Land, Aachen und südliches Bergisches Land (heute
 Regierungsbezirk Köln)."
-orte;saar;"Orte: Saar – Orte ohne Daten (Meilenstein M3).
+orte;saar;rheinlaender=100;"Orte: Saar – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -759,7 +759,7 @@ und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 
 Umfang: Land an der Saar (heute Saarland; 1648 u. a. Nassau-Saarbrücken, Pfalz-Zweibrücken,
 Kurtrier und Lothringen)."
-orte;sachsen;"Orte: Kurfürstentum Sachsen – Erblande (Meißnischer, Leipziger, Erzgebirgischer und Kurkreis) – Stand 24.10.1648.
+orte;sachsen;obersachsen=100;"Orte: Kurfürstentum Sachsen – Erblande (Meißnischer, Leipziger, Erzgebirgischer und Kurkreis) – Stand 24.10.1648.
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Ein Ort steht für eine Stadt mit ihrem Amt (Umland); ""bevoelkerung"" umfasst beides.
@@ -775,7 +775,7 @@ Ergänzt in Meilenstein M3 (tools/geodaten/orte.py): weitere Orte ohne Daten (oh
 aus GeoNames, räumlich ausgewählt, Gelände aus dem Höhenmodell, Fläche aus der Karte.
 Umfang der Landschaft Sachsen: Kursachsen (heute Sachsen ohne die Lausitz, dazu der Kurkreis
 um Wittenberg)."
-orte;salzburg;"Orte: Salzburg – Orte ohne Daten (Meilenstein M3).
+orte;salzburg;oesterreicher=100;"Orte: Salzburg – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -783,7 +783,7 @@ ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem 
 und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 
 Umfang: Erzstift Salzburg (heute Land Salzburg)."
-orte;schleswig;"Orte: Schleswig – Orte ohne Daten (Meilenstein M3).
+orte;schleswig;daenen=60 holsteiner=30 friesen=10;"Orte: Schleswig – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -793,7 +793,7 @@ und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 Umfang: Herzogtum Schleswig zwischen Eider und Königsau (heute Kreise Nordfriesland,
 Schleswig-Flensburg, Flensburg und der nördliche Teil von Rendsburg-Eckernförde, in Dänemark
 die Kommunen Tønder, Aabenraa, Sønderborg, Haderslev und Ærø)."
-orte;schwaben;"Orte: Schwaben – Orte ohne Daten (Meilenstein M3).
+orte;schwaben;schwaben=100;"Orte: Schwaben – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -801,7 +801,7 @@ ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem 
 und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 
 Umfang: Bayerisch-Schwaben und Oberschwaben mit Ulm und dem nördlichen Bodensee."
-orte;starkenburg;"Orte: Starkenburg – Orte ohne Daten (Meilenstein M3).
+orte;starkenburg;hessen=100;"Orte: Starkenburg – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -810,7 +810,7 @@ und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 
 Umfang: Starkenburg, Bergstraße und Odenwald (heute Darmstadt, Offenbach und die
 südhessischen Landkreise)."
-orte;steiermark;"Orte: Steiermark – Orte ohne Daten (Meilenstein M3).
+orte;steiermark;oesterreicher=100;"Orte: Steiermark – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -819,7 +819,7 @@ und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 
 Umfang: Herzogtum Steiermark mit der Untersteiermark (heute Steiermark und der Nordosten
 Sloweniens)."
-orte;thueringen;"Orte: Thüringen – ernestinische Herzogtümer, kurmainzisches Erfurt und Eichsfeld, kursächsischer Thüringischer Kreis – Stand 24.10.1648.
+orte;thueringen;thueringer=100;"Orte: Thüringen – ernestinische Herzogtümer, kurmainzisches Erfurt und Eichsfeld, kursächsischer Thüringischer Kreis – Stand 24.10.1648.
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Ein Ort steht für eine Stadt mit ihrem Amt (Umland); ""bevoelkerung"" umfasst beides.
@@ -837,7 +837,7 @@ Ergänzt in Meilenstein M3 (tools/geodaten/orte.py): weitere Orte ohne Daten (oh
 aus GeoNames, räumlich ausgewählt, Gelände aus dem Höhenmodell, Fläche aus der Karte.
 Umfang der Landschaft Thüringen: Thüringen mit dem kursächsischen Thüringischen Kreis (heute
 Thüringen, Burgenlandkreis und Mansfeld-Südharz)."
-orte;tirol;"Orte: Tirol – Orte ohne Daten (Meilenstein M3).
+orte;tirol;tiroler=100;"Orte: Tirol – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -846,7 +846,7 @@ und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 
 Umfang: Grafschaft Tirol mit Südtirol (heute Tirol und die Provinz Bozen, dazu einige Orte
 des oberen Nonsbergs in der Provinz Trient am Rand des Umrisses)."
-orte;trier;"Orte: Trier – Orte ohne Daten (Meilenstein M3).
+orte;trier;rheinlaender=100;"Orte: Trier – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -855,7 +855,7 @@ und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 
 Umfang: Trierer Land mit Mosel, Eifel und Hunsrück (heute Trier, Bernkastel-Wittlich,
 Bitburg-Prüm, Vulkaneifel, Trier-Saarburg und Birkenfeld)."
-orte;vorarlberg;"Orte: Vorarlberg – Orte ohne Daten (Meilenstein M3).
+orte;vorarlberg;alemannen=100;"Orte: Vorarlberg – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -863,7 +863,7 @@ ausgewählte Orte mit deutschem Namen, wo GeoNames ihn führt, Gelände aus dem 
 und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 
 Umfang: Vorarlberg und Liechtenstein."
-orte;westpreussen;"Orte: Westpreußen – Orte ohne Daten (Meilenstein M3).
+orte;westpreussen;polen=50 altpreussen=35 kaschuben=15;"Orte: Westpreußen – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -872,7 +872,7 @@ und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 
 Umfang: Pommerellen, Kulmer Land, Marienburg und Elbing (1466–1772 Preußen Königlichen
 Anteils, danach bis 1920 preußisch)."
-orte;wetterau;"Orte: Wetterau – Orte ohne Daten (Meilenstein M3).
+orte;wetterau;hessen=100;"Orte: Wetterau – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -881,7 +881,7 @@ und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 
 Umfang: Wetterau und Untermain mit Frankfurt und Hanau (heute Frankfurt, Wetteraukreis,
 Main-Kinzig-Kreis und Hochtaunuskreis)."
-orte;wuerttemberg;"Orte: Württemberg – Orte ohne Daten (Meilenstein M3).
+orte;wuerttemberg;schwaben=100;"Orte: Württemberg – Orte ohne Daten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.6.
 Erzeugt von tools/geodaten/orte.py aus GeoNames cities1000 (CC BY 4.0): räumlich
@@ -891,463 +891,463 @@ und Fläche aus der Karte. Noch ohne Historie (Besitz, Bevölkerung).
 Umfang: Herzogtum Württemberg mit Hohenlohe und Hohenzollern-Hechingen (heute
 Regierungsbezirk Stuttgart ohne Main-Tauber-Kreis, Tübingen, Reutlingen, Zollernalbkreis,
 Rottweil, Tuttlingen, Calw und Freudenstadt)."
-kreise;anhalt;"Kreise: Anhalt (Meilenstein M3).
+kreise;anhalt;;"Kreise: Anhalt (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;ardennen;"Kreise: Ardennen (Meilenstein M3).
+kreise;ardennen;;"Kreise: Ardennen (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;baden;"Kreise: Baden (Meilenstein M3).
+kreise;baden;;"Kreise: Baden (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;bayern;"Kreise: Bayern (Meilenstein M3).
+kreise;bayern;;"Kreise: Bayern (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;boehmen;"Kreise: Böhmen (Meilenstein M3).
+kreise;boehmen;;"Kreise: Böhmen (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;brabant;"Kreise: Brabant (Meilenstein M3).
+kreise;brabant;;"Kreise: Brabant (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;brandenburg;"Kreise: Brandenburg (Meilenstein M3).
+kreise;brandenburg;;"Kreise: Brandenburg (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;braunschweig;"Kreise: Braunschweig (Meilenstein M3).
+kreise;braunschweig;;"Kreise: Braunschweig (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;bremen_verden;"Kreise: Bremen-Verden (Meilenstein M3).
+kreise;bremen_verden;;"Kreise: Bremen-Verden (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;burgenland;"Kreise: Burgenland (Meilenstein M3).
+kreise;burgenland;;"Kreise: Burgenland (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;burgundische_pforte;"Kreise: Burgundische Pforte (Meilenstein M3).
+kreise;burgundische_pforte;;"Kreise: Burgundische Pforte (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;calenberg;"Kreise: Calenberg (Meilenstein M3).
+kreise;calenberg;;"Kreise: Calenberg (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;elsass;"Kreise: Elsass (Meilenstein M3).
+kreise;elsass;;"Kreise: Elsass (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;flandern;"Kreise: Flandern (Meilenstein M3).
+kreise;flandern;;"Kreise: Flandern (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;franken;"Kreise: Franken (Meilenstein M3).
+kreise;franken;;"Kreise: Franken (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;franzoesisch_flandern;"Kreise: Französisch-Flandern (Meilenstein M3).
+kreise;franzoesisch_flandern;;"Kreise: Französisch-Flandern (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;galizien;"Kreise: Westgalizien (Meilenstein M3).
+kreise;galizien;;"Kreise: Westgalizien (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;geldern;"Kreise: Geldern (Meilenstein M3).
+kreise;geldern;;"Kreise: Geldern (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;glatz;"Kreise: Grafschaft Glatz (Meilenstein M3).
+kreise;glatz;;"Kreise: Grafschaft Glatz (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;goettingen;"Kreise: Göttingen (Meilenstein M3).
+kreise;goettingen;;"Kreise: Göttingen (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;groningen_drenthe;"Kreise: Groningen und Drenthe (Meilenstein M3).
+kreise;groningen_drenthe;;"Kreise: Groningen und Drenthe (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;hennegau;"Kreise: Hennegau (Meilenstein M3).
+kreise;hennegau;;"Kreise: Hennegau (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;hildesheim;"Kreise: Hildesheim (Meilenstein M3).
+kreise;hildesheim;;"Kreise: Hildesheim (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;holstein;"Kreise: Holstein (Meilenstein M3).
+kreise;holstein;;"Kreise: Holstein (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;juetland;"Kreise: Jütland (Meilenstein M3).
+kreise;juetland;;"Kreise: Jütland (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;kaernten;"Kreise: Kärnten (Meilenstein M3).
+kreise;kaernten;;"Kreise: Kärnten (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;kongresspolen;"Kreise: Polnischer Saum (Kongresspolen) (Meilenstein M3).
+kreise;kongresspolen;;"Kreise: Polnischer Saum (Kongresspolen) (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;krain;"Kreise: Krain (Meilenstein M3).
+kreise;krain;;"Kreise: Krain (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;kurhessen;"Kreise: Kurhessen (Meilenstein M3).
+kreise;kurhessen;;"Kreise: Kurhessen (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;kurpfalz;"Kreise: Kurpfalz (Meilenstein M3).
+kreise;kurpfalz;;"Kreise: Kurpfalz (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;lausitz;"Kreise: Lausitz (Meilenstein M3).
+kreise;lausitz;;"Kreise: Lausitz (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;limburg;"Kreise: Limburg (Meilenstein M3).
+kreise;limburg;;"Kreise: Limburg (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;lothringen;"Kreise: Lothringen (Meilenstein M3).
+kreise;lothringen;;"Kreise: Lothringen (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;lueneburg;"Kreise: Lüneburg (Meilenstein M3).
+kreise;lueneburg;;"Kreise: Lüneburg (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;luettich;"Kreise: Lüttich (Meilenstein M3).
+kreise;luettich;;"Kreise: Lüttich (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;luxemburg;"Kreise: Luxemburg (Meilenstein M3).
+kreise;luxemburg;;"Kreise: Luxemburg (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;maehren;"Kreise: Mähren (Meilenstein M3).
+kreise;maehren;;"Kreise: Mähren (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;magdeburg;"Kreise: Magdeburg (Meilenstein M3).
+kreise;magdeburg;;"Kreise: Magdeburg (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;mainfranken;"Kreise: Mainfranken (Meilenstein M3).
+kreise;mainfranken;;"Kreise: Mainfranken (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;mark_sauerland;"Kreise: Mark und Sauerland (Meilenstein M3).
+kreise;mark_sauerland;;"Kreise: Mark und Sauerland (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;mecklenburg;"Kreise: Mecklenburg (Meilenstein M3).
+kreise;mecklenburg;;"Kreise: Mecklenburg (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;mittelrhein;"Kreise: Mittelrhein (Meilenstein M3).
+kreise;mittelrhein;;"Kreise: Mittelrhein (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;muensterland;"Kreise: Münsterland (Meilenstein M3).
+kreise;muensterland;;"Kreise: Münsterland (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;namur;"Kreise: Namur (Meilenstein M3).
+kreise;namur;;"Kreise: Namur (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;nassau;"Kreise: Nassau (Meilenstein M3).
+kreise;nassau;;"Kreise: Nassau (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;niederoesterreich;"Kreise: Österreich unter der Enns (Meilenstein M3).
+kreise;niederoesterreich;;"Kreise: Österreich unter der Enns (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;niederrhein;"Kreise: Niederrhein (Meilenstein M3).
+kreise;niederrhein;;"Kreise: Niederrhein (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;niederschlesien;"Kreise: Niederschlesien (Meilenstein M3).
+kreise;niederschlesien;;"Kreise: Niederschlesien (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;oberhessen;"Kreise: Oberhessen (Meilenstein M3).
+kreise;oberhessen;;"Kreise: Oberhessen (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;oberoesterreich;"Kreise: Österreich ob der Enns (Meilenstein M3).
+kreise;oberoesterreich;;"Kreise: Österreich ob der Enns (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;oberpfalz;"Kreise: Oberpfalz (Meilenstein M3).
+kreise;oberpfalz;;"Kreise: Oberpfalz (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;oberschlesien;"Kreise: Oberschlesien (Meilenstein M3).
+kreise;oberschlesien;;"Kreise: Oberschlesien (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;oesterreichisch_schlesien;"Kreise: Österreichisch-Schlesien (Meilenstein M3).
+kreise;oesterreichisch_schlesien;;"Kreise: Österreichisch-Schlesien (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;oldenburg;"Kreise: Oldenburg (Meilenstein M3).
+kreise;oldenburg;;"Kreise: Oldenburg (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;osnabrueck;"Kreise: Osnabrück und Emsland (Meilenstein M3).
+kreise;osnabrueck;;"Kreise: Osnabrück und Emsland (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;ostfriesland;"Kreise: Ostfriesland (Meilenstein M3).
+kreise;ostfriesland;;"Kreise: Ostfriesland (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;ostpreussen;"Kreise: Ostpreußen (Meilenstein M3).
+kreise;ostpreussen;;"Kreise: Ostpreußen (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;ostwestfalen;"Kreise: Ostwestfalen (Meilenstein M3).
+kreise;ostwestfalen;;"Kreise: Ostwestfalen (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;overijssel;"Kreise: Overijssel (Meilenstein M3).
+kreise;overijssel;;"Kreise: Overijssel (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;pommern;"Kreise: Pommern (Meilenstein M3).
+kreise;pommern;;"Kreise: Pommern (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;posen;"Kreise: Posen (Meilenstein M3).
+kreise;posen;;"Kreise: Posen (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;rheinhessen;"Kreise: Rheinhessen (Meilenstein M3).
+kreise;rheinhessen;;"Kreise: Rheinhessen (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;rheinland;"Kreise: Rheinland (Meilenstein M3).
+kreise;rheinland;;"Kreise: Rheinland (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;saar;"Kreise: Saar (Meilenstein M3).
+kreise;saar;;"Kreise: Saar (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;sachsen;"Kreise: Sachsen (Meilenstein M3).
+kreise;sachsen;;"Kreise: Sachsen (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;salzburg;"Kreise: Salzburg (Meilenstein M3).
+kreise;salzburg;;"Kreise: Salzburg (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;schleswig;"Kreise: Schleswig (Meilenstein M3).
+kreise;schleswig;;"Kreise: Schleswig (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;schwaben;"Kreise: Schwaben (Meilenstein M3).
+kreise;schwaben;;"Kreise: Schwaben (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;starkenburg;"Kreise: Starkenburg (Meilenstein M3).
+kreise;starkenburg;;"Kreise: Starkenburg (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;steiermark;"Kreise: Steiermark (Meilenstein M3).
+kreise;steiermark;;"Kreise: Steiermark (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;thueringen;"Kreise: Thüringen (Meilenstein M3).
+kreise;thueringen;;"Kreise: Thüringen (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;tirol;"Kreise: Tirol (Meilenstein M3).
+kreise;tirol;;"Kreise: Tirol (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;trier;"Kreise: Trier (Meilenstein M3).
+kreise;trier;;"Kreise: Trier (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;vorarlberg;"Kreise: Vorarlberg (Meilenstein M3).
+kreise;vorarlberg;;"Kreise: Vorarlberg (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;westpreussen;"Kreise: Westpreußen (Meilenstein M3).
+kreise;westpreussen;;"Kreise: Westpreußen (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;wetterau;"Kreise: Wetterau (Meilenstein M3).
+kreise;wetterau;;"Kreise: Wetterau (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
-kreise;wuerttemberg;"Kreise: Württemberg (Meilenstein M3).
+kreise;wuerttemberg;;"Kreise: Württemberg (Meilenstein M3).
 
 Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,

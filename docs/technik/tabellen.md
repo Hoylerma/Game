@@ -12,9 +12,9 @@ data/tabellen/
 ├── kreise.csv             Kreise (seit M3)
 ├── staaten.csv            Stammdaten der Staaten
 ├── besitz.csv             Besitzer je Ort mit Datum
-├── bevoelkerung.csv       Bevölkerung, Konfession und Verwüstung je Ort und Stichtag
+├── bevoelkerung.csv       Bevölkerung, Konfession, Kultur und Verwüstung je Ort und Stichtag
 ├── staaten_historie.csv   datierte Werte der Staaten (Herrscher, Hauptstadt, Kasse …)
-└── dateien.csv            Kopfkommentar je erzeugter Datei
+└── dateien.csv            Kopfkommentar je erzeugter Datei, Standardkultur je Landschaft
 ```
 
 ## Allgemeine Regeln
@@ -97,6 +97,7 @@ Je Ort und Datum höchstens eine Zeile. Ein Besitzwechsel ist eine weitere Zeile
 | `stichtag` | Datum der Angabe |
 | `bevoelkerung` | Einwohner von Stadt und Umland (Ganzzahl ≥ 1) |
 | `konfession` | Prozentanteile, z. B. `lutherisch=95 reformiert=5`; Summe 100, Mehrheit zuerst |
+| `kultur` | seit M4: Prozentanteile wie bei `konfession`, z. B. `obersachsen=50 sorben=50`; leer = Standardkultur der Landschaft aus `dateien.csv` |
 | `verwuestung` | Kriegsverwüstung 0 bis 1 |
 | `sicherheit`, `quelle` | siehe oben |
 
@@ -126,7 +127,11 @@ Je Staat, Datum und Feld höchstens eine Zeile.
 |---|---|
 | `ordner` | `orte`, `staaten` oder `kreise` |
 | `datei` | Dateiname ohne Endung |
+| `kultur` | seit M4, nur für `orte`: Standardkultur der Landschaft, z. B. `maerker=100` oder `obersachsen=70 sorben=30`; sonst leer |
 | `kommentar` | mehrzeiliger Text; erscheint als Kopfkommentar der erzeugten Datei |
+
+Die Spalte `kultur` wird von Hand gepflegt; `tools/geodaten/orte.py` übernimmt sie beim Neuerzeugen
+der Tabelle.
 
 ## Prüfungen des Archivars
 
@@ -140,9 +145,11 @@ Je Staat, Datum und Feld höchstens eine Zeile.
 - Fläche nicht größer als 0, auch so klein, dass sie im Festkomma des Kerns 0 wird (unter
   etwa 0,0000076 km²)
 - doppelte Orte, Staaten und doppelte Einträge je Datum
-- unbekannte Verweise (Orte, Staaten, Gelände, Konfessionen, Felder)
+- unbekannte Verweise (Orte, Staaten, Gelände, Konfessionen, Kulturen, Felder)
 - Wertebereiche (Verwüstung 0–1, Steuersatz bis `steuersatz_max` aus `common/regeln.chron`,
-  Konfessionssumme 100)
+  Konfessions- und Kultursumme 100)
+- seit M4: Bevölkerungsangabe ohne Kultur (Spalte `kultur` leer und keine Standardkultur der
+  Landschaft in `dateien.csv`); Spalte `kultur` in `dateien.csv` bei `staaten` oder `kreise`
 - fehlende Sicherheit oder Quelle
 - **Lücken**: Zu jedem Datum eines Szenarios in `data/szenarien/` hat jeder Ort entweder Besitzer
   und Bevölkerungsangabe oder keines von beiden (Ort ohne Daten); jeder Staat braucht alle Pflichtfelder (`hauptstadt`, `regierungsform`,

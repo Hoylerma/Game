@@ -13,6 +13,7 @@ ort burg {
         besitzer     = BBB
         bevoelkerung = 5000
         konfession   = { katholisch = 100 }
+        kultur       = { suedleute = 80 nordleute = 20 }
         verwuestung  = 0.1
     }
 }

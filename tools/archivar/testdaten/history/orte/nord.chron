@@ -16,12 +16,14 @@ ort hafen {
         besitzer     = AAA
         bevoelkerung = 6000
         konfession   = { lutherisch = 90 katholisch = 10 }
+        kultur       = { nordleute = 100 }
         verwuestung  = 0.2
     }
 
     1700.01.01 = {
         bevoelkerung = 9000
         konfession   = { lutherisch = 100 }
+        kultur       = { nordleute = 100 }
         verwuestung  = 0
     }
 }
@@ -39,6 +41,7 @@ ort heide {
         besitzer     = AAA
         bevoelkerung = 1500
         konfession   = { lutherisch = 100 }
+        kultur       = { nordleute = 100 }
         verwuestung  = 0.5
     }
 

@@ -2,6 +2,7 @@
 
 #include "test_hilfen.hpp"
 #include "uhrwerk/loader.hpp"
+#include "uhrwerk/population.hpp"
 
 #include <cstdint>
 #include <cstdlib>
@@ -75,6 +76,7 @@ TEST_CASE("Lader: Fixture lädt ohne Fehler und Warnungen") {
 
     CHECK(w.terrains.size() == 3);
     CHECK(w.confessions.size() == 3);
+    CHECK(w.cultures.size() == 3);
     CHECK(w.professions.size() == 4);
     CHECK(w.states.size() == 3);
     CHECK(w.districts.size() == 3);
@@ -142,6 +144,29 @@ TEST_CASE("Lader: Werte aus common/") {
     CHECK(w.professions[2].share_rural == Fixed::zero());
     CHECK(w.professions[3].stratum == uhrwerk::Stratum::Oben);
     CHECK_FALSE(w.professions[3].taxable);
+
+    // Bevölkerung (seit M4)
+    CHECK(r.share_children == fx("0.34"));
+    CHECK(r.share_young == fx("0.26"));
+    CHECK(r.share_working == fx("0.33"));
+    CHECK(r.fertility == fx("0.095"));
+    CHECK(r.mortality_old == fx("0.11"));
+    CHECK(r.capacity_city == Fixed::from_int(3));
+    CHECK(r.living_standard_reference == Fixed::from_int(12));
+    CHECK(r.migration_targets == 4);
+    CHECK(r.migration_radius_km == Fixed::from_int(60));
+    CHECK(r.block_min_size == Fixed::one());
+    CHECK(r.migration_min_amount == fx("0.05"));
+    CHECK(aue.capacity == Fixed::from_int(45));
+    CHECK(w.confessions[0].literacy_factor == fx("1.2"));
+    CHECK(w.cultures[0].id == "maerker");
+    CHECK(w.cultures[0].name == "Märker");
+    CHECK(w.cultures[2].color == uhrwerk::Color{150, 100, 180});
+    CHECK(bauern.agrarian);
+    CHECK(bauern.literacy == fx("0.1"));
+    CHECK(bauern.city_profession == w.find_profession("handwerker"));
+    CHECK_FALSE(w.professions[1].agrarian);
+    CHECK(w.professions[1].city_profession == uhrwerk::kNone);
 }
 
 TEST_CASE("Lader: Staaten und Orte") {
@@ -214,7 +239,7 @@ TEST_CASE("Lader: Startzustand der Bevölkerungsblöcke (Abschnitt 4)") {
                 CHECK(pop.confession == w.find_confession(confession));
                 const Fixed size = Fixed::from_int(spec.population) * share * Fixed::from_int(percent) /
                                    Fixed::from_int(100);
-                CHECK(pop.size == size);
+                CHECK(pop.size() == size);
                 ++expected_index;
             }
         }
@@ -229,7 +254,7 @@ TEST_CASE("Lader: Startzustand der Bevölkerungsblöcke (Abschnitt 4)") {
     CHECK(zerbst.pop_count == 0);
 
     // Handgerechnet: 12000 × 0,10 (6554/65536) × 90 / 100, abgerundet bzw. abgeschnitten.
-    CHECK(w.pops[0].size.raw() == 70783200);
+    CHECK(w.pops[0].size().raw() == 70783200);
     // Blockzahlen: Kaufleute fehlen auf dem Land, Reformierte mit 0 % in Leipzig.
     CHECK(w.locations[0].pop_count == 8);
     CHECK(w.locations[1].pop_count == 3);
@@ -421,7 +446,7 @@ TEST_CASE("Lader: ungültige Werte") {
     SUBCASE("Definition ohne Kennung") {
         replace_in_file(dir / "common/konfessionen.chron", "konfession katholisch {", "konfession {");
         expect_error(load(dir), "ungültige Definition, erwartet: konfession <kennung> { … }",
-                     "common/konfessionen.chron", 12);
+                     "common/konfessionen.chron", 14);
     }
 }
 
@@ -474,7 +499,7 @@ TEST_CASE("Lader: unbekannte Verweise") {
     SUBCASE("Besitzer") {
         replace_in_file(dir / kPlacesBra, "    besitzer     = BRA\n    gelaende     = sandboden",
                         "    besitzer     = XYZ\n    gelaende     = sandboden");
-        expect_error(load(dir), "unbekannter Staat 'XYZ' als Besitzer von ort potsdam", kPlacesBra, 18);
+        expect_error(load(dir), "unbekannter Staat 'XYZ' als Besitzer von ort potsdam", kPlacesBra, 19);
     }
     SUBCASE("Gelände") {
         replace_in_file(dir / kPlacesBra, "gelaende     = sandboden", "gelaende     = sumpf");
@@ -551,12 +576,13 @@ TEST_CASE("Lader: Pflichtfeld nur in einem datierten Block") {
     replace_in_file(dir / kPlacesBra, "    besitzer     = BRA\n    gelaende     = sandboden",
                     "    1649.06.01 = { besitzer = BRA }\n    gelaende     = sandboden");
     SUBCASE("vor dem Datum fehlt es") {
-        // Die übrigen Simulationsfelder sind da: Fehler „alle vier oder keines“ (Abschnitt 3.6).
+        // Die übrigen Simulationsfelder sind da: Fehler „alle fünf oder keines“ (Abschnitt 3.6).
         const LoadResult r = load(dir);
-        expect_error(r,
-                     "Ort potsdam hat zum Startdatum 'bevoelkerung', 'konfession' und 'verwuestung', aber "
-                     "nicht 'besitzer'",
-                     kPlacesBra, 16);
+        expect_error(
+            r,
+            "Ort potsdam hat zum Startdatum 'bevoelkerung', 'konfession', 'kultur' und 'verwuestung', "
+            "aber nicht 'besitzer'",
+            kPlacesBra, 17);
         CHECK_FALSE(has_issue(r, "Pflichtfeld 'besitzer' fehlt")); // keine doppelte Meldung
     }
     SUBCASE("ab dem Datum ist es vorhanden") {
@@ -574,7 +600,7 @@ TEST_CASE("Lader: Fehler in datierten Blöcken") {
     };
     SUBCASE("ungültiges Datum") {
         insert("    1648.13.01 = { besitzer = SAX }\n");
-        expect_error(load(dir), "ungültiges Datum '1648.13.01' in ort potsdam", kPlacesBra, 19);
+        expect_error(load(dir), "ungültiges Datum '1648.13.01' in ort potsdam", kPlacesBra, 20);
     }
     SUBCASE("Wert statt Block") {
         insert("    1649.01.01 = SAX\n");
@@ -583,8 +609,8 @@ TEST_CASE("Lader: Fehler in datierten Blöcken") {
     SUBCASE("Datum doppelt") {
         insert("    1649.01.01 = { besitzer = SAX }\n    1649.01.01 = { besitzer = BRA }\n");
         expect_error(load(dir),
-                     "Datum '1649.01.01' ist in ort potsdam mehrfach angegeben (zuerst in Zeile 19)",
-                     kPlacesBra, 20);
+                     "Datum '1649.01.01' ist in ort potsdam mehrfach angegeben (zuerst in Zeile 20)",
+                     kPlacesBra, 21);
     }
     SUBCASE("Feld, das nicht datiert werden kann") {
         insert("    1649.01.01 = { lage = { 13.0 52.0 } }\n");
@@ -670,11 +696,11 @@ TEST_CASE("Lader: fehlende Dateien und Ordner") {
 
 TEST_CASE("Lader: Dateien werden nach Namen sortiert geladen") {
     TempDir dir(true);
-    testhilfen::write_file(
-        dir / "history/orte/05_cottbus.chron",
-        "ort cottbus {\n name = \"Cottbus\" besitzer = BRA gelaende = sandboden\n"
-        " lage = { 14.33 51.76 } flaeche = 160 bevoelkerung = 2000 stadt = ja\n"
-        " konfession = { lutherisch = 100 } verwuestung = 0.5 quelle = \"Testdaten\"\n}\n");
+    testhilfen::write_file(dir / "history/orte/05_cottbus.chron",
+                           "ort cottbus {\n name = \"Cottbus\" besitzer = BRA gelaende = sandboden\n"
+                           " lage = { 14.33 51.76 } flaeche = 160 bevoelkerung = 2000 stadt = ja\n"
+                           " konfession = { lutherisch = 100 } kultur = { maerker = 100 } verwuestung = 0.5\n"
+                           " quelle = \"Testdaten\"\n}\n");
     const LoadResult r = load(dir);
     INFO(issues_text(r));
     REQUIRE(r.ok());
@@ -743,18 +769,18 @@ TEST_CASE("Lader: Simulationsfelder alle oder keines") {
         replace_in_file(dir / kPlacesBra, "    verwuestung  = 0.6\n", "");
         const LoadResult r = load(dir);
         expect_error(r,
-                     "Ort potsdam hat zum Startdatum 'besitzer', 'bevoelkerung' und 'konfession', aber nicht "
-                     "'verwuestung'",
-                     kPlacesBra, 16);
+                     "Ort potsdam hat zum Startdatum 'besitzer', 'bevoelkerung', 'konfession' und 'kultur', "
+                     "aber nicht 'verwuestung'",
+                     kPlacesBra, 17);
         CHECK_FALSE(has_issue(r, "Pflichtfeld 'verwuestung' fehlt"));
     }
     SUBCASE("nur ein Feld vorhanden") {
         add_to_zerbst(dir, "    besitzer = ANH\n");
         const LoadResult r = load(dir);
         expect_error(r,
-                     "Ort zerbst hat zum Startdatum 'besitzer', aber nicht 'bevoelkerung', 'konfession' und "
-                     "'verwuestung'",
-                     kPlacesAnh, 18);
+                     "Ort zerbst hat zum Startdatum 'besitzer', aber nicht 'bevoelkerung', 'konfession', "
+                     "'kultur' und 'verwuestung'",
+                     kPlacesAnh, 19);
         // Nur diese eine Meldung, keine Folgefehler je fehlendem Feld.
         std::size_t errors = 0;
         for (const uhrwerk::LoadIssue& issue : r.issues) {
@@ -762,10 +788,10 @@ TEST_CASE("Lader: Simulationsfelder alle oder keines") {
         }
         CHECK(errors == 1);
     }
-    SUBCASE("alle vier Felder machen einen Ort mit Daten") {
+    SUBCASE("alle fünf Felder machen einen Ort mit Daten") {
         add_to_zerbst(dir,
                       "    besitzer = ANH\n    bevoelkerung = 2000\n    konfession = { lutherisch = 100 }\n"
-                      "    verwuestung = 0.25\n");
+                      "    kultur = { obersachsen = 100 }\n    verwuestung = 0.25\n");
         const LoadResult r = load(dir);
         INFO(issues_text(r));
         REQUIRE(r.ok());
@@ -781,8 +807,8 @@ TEST_CASE("Lader: Simulationsfelder alle oder keines") {
     SUBCASE("Werte werden auch bei Orten mit Daten geprüft") {
         add_to_zerbst(dir,
                       "    besitzer = XYZ\n    bevoelkerung = 2000\n    konfession = { lutherisch = 100 }\n"
-                      "    verwuestung = 0\n");
-        expect_error(load(dir), "unbekannter Staat 'XYZ' als Besitzer von ort zerbst", kPlacesAnh, 25);
+                      "    kultur = { obersachsen = 100 }\n    verwuestung = 0\n");
+        expect_error(load(dir), "unbekannter Staat 'XYZ' als Besitzer von ort zerbst", kPlacesAnh, 26);
     }
 }
 
@@ -791,7 +817,7 @@ TEST_CASE("Lader: Orte ohne Daten und datierte Blöcke") {
     SUBCASE("Daten ab einem späteren Datum") {
         add_to_zerbst(
             dir, "    1649.06.01 = { besitzer = ANH bevoelkerung = 2000 konfession = { lutherisch = 100 } "
-                 "verwuestung = 0.1 }\n");
+                 "kultur = { obersachsen = 100 } verwuestung = 0.1 }\n");
         const LoadResult r1648 = load(dir);
         INFO(issues_text(r1648));
         REQUIRE(r1648.ok());
@@ -813,7 +839,7 @@ TEST_CASE("Lader: Orte ohne Daten und datierte Blöcke") {
         INFO(issues_text(r1648));
         CHECK(r1648.ok());
         expect_error(load(dir, "jahresbeginn_1650"),
-                     "Ort zerbst hat zum Startdatum 'besitzer', aber nicht 'bevoelkerung'", kPlacesAnh, 18);
+                     "Ort zerbst hat zum Startdatum 'besitzer', aber nicht 'bevoelkerung'", kPlacesAnh, 19);
     }
 }
 
@@ -880,15 +906,15 @@ TEST_CASE("Lader: Fehler und Warnungen bei Kreisen") {
         replace_in_file(dir / kPlacesBra,
                         "    kreis        = kr_berlin\n    quelle       = \"Testdaten, geschätzt\"\n}\n",
                         "    kreis        = kr_potsdam\n    quelle       = \"Testdaten, geschätzt\"\n}\n");
-        expect_error(load(dir), "unbekannter Kreis 'kr_potsdam' in ort berlin_coelln", kPlacesBra, 12);
+        expect_error(load(dir), "unbekannter Kreis 'kr_potsdam' in ort berlin_coelln", kPlacesBra, 13);
     }
     SUBCASE("unbekannter Kreis im Ort ohne Daten") {
         replace_in_file(dir / kPlacesAnh, "kreis    = kr_anhalt", "kreis    = kr_zerbst");
-        expect_error(load(dir), "unbekannter Kreis 'kr_zerbst' in ort zerbst", kPlacesAnh, 24);
+        expect_error(load(dir), "unbekannter Kreis 'kr_zerbst' in ort zerbst", kPlacesAnh, 25);
     }
     SUBCASE("kreis kann nicht datiert werden") {
         add_to_zerbst(dir, "    1649.01.01 = { kreis = kr_dresden }\n");
-        expect_error(load(dir), "Feld 'kreis' in ort zerbst kann nicht datiert werden", kPlacesAnh, 25);
+        expect_error(load(dir), "Feld 'kreis' in ort zerbst kann nicht datiert werden", kPlacesAnh, 26);
     }
     SUBCASE("Kreis ohne Orte ist eine Warnung") {
         testhilfen::write_file(
@@ -962,7 +988,7 @@ TEST_CASE("Lader: Ordner history/kreise ist optional") {
 TEST_CASE("Lader: Verweis auf Kreis ohne Ordner history/kreise") {
     TempDir dir(true);
     std::filesystem::remove_all(dir / "history/kreise");
-    expect_error(load(dir), "unbekannter Kreis 'kr_berlin' in ort berlin_coelln", kPlacesBra, 12);
+    expect_error(load(dir), "unbekannter Kreis 'kr_berlin' in ort berlin_coelln", kPlacesBra, 13);
 }
 
 // ─── find_data_dir ──────────────────────────────────────────────────────────
@@ -1035,3 +1061,137 @@ TEST_CASE("find_data_dir: Umgebungsvariable UHRWERK_DATEN hat Vorrang") {
     }
 }
 #endif
+
+// ─── Bevölkerung (seit M4, bevoelkerung.md Abschnitt 2) ──────────────────────
+
+TEST_CASE("Lader: Blöcke je Kultur und Altersaufbau") {
+    TempDir dir(true);
+    replace_in_file(dir / kPlacesBra, "    kultur       = { maerker = 100 }\n    verwuestung  = 0.6",
+                    "    kultur       = { maerker = 70 sorben = 30 }\n    verwuestung  = 0.6");
+    const LoadResult r = load(dir);
+    INFO(issues_text(r));
+    REQUIRE(r.ok());
+    const World& w = *r.world;
+    const Index potsdam = w.find_location("potsdam");
+    const uhrwerk::Location& loc = w.locations[static_cast<std::size_t>(potsdam)];
+    // Land: Bauern, Handwerker, Adel (keine Kaufleute) × lutherisch × zwei Kulturen.
+    REQUIRE(loc.pop_count == 6);
+    const Index maerker = w.find_culture("maerker");
+    const Index sorben = w.find_culture("sorben");
+    const Fixed hundred = Fixed::from_int(100);
+    Index p = loc.first_pop;
+    for (const char* profession : {"bauern", "handwerker", "adel"}) {
+        const Index pi = w.find_profession(profession);
+        const Fixed share = w.professions[static_cast<std::size_t>(pi)].share_rural;
+        for (const auto& [culture, percent] : {std::pair{maerker, 70}, std::pair{sorben, 30}}) {
+            const uhrwerk::PopBlock& pop = w.pops[static_cast<std::size_t>(p++)];
+            INFO(profession << " Kultur " << culture);
+            CHECK(pop.profession == pi);
+            CHECK(pop.culture == culture);
+            const Fixed size = Fixed::from_int(1500) * share * Fixed::from_int(100) / hundred *
+                               Fixed::from_int(percent) / hundred;
+            CHECK(pop.size() == size);
+            CHECK(pop.children == size * w.rules.share_children);
+            CHECK(pop.young == size * w.rules.share_young);
+            CHECK(pop.working == size * w.rules.share_working);
+            CHECK(pop.old >= Fixed::zero());
+        }
+    }
+    CHECK(w.location_majority_culture(potsdam) == maerker);
+    CHECK(w.location_majority_culture(w.find_location("zerbst")) == uhrwerk::kNone);
+}
+
+TEST_CASE("Lader: Startwerte für Lebensstandard und Alphabetisierung") {
+    const World w = testhilfen::load_fixture();
+    uhrwerk::LocationFactors factors;
+    for (const uhrwerk::Location& loc : w.locations) {
+        if (!loc.has_data()) {
+            continue;
+        }
+        INFO("Ort " << loc.id);
+        const Fixed tax = w.states[static_cast<std::size_t>(loc.owner)].tax_rate;
+        uhrwerk::compute_location_factors(w, loc, tax, factors);
+        for (Index p = loc.first_pop; p < loc.first_pop + loc.pop_count; ++p) {
+            const uhrwerk::PopBlock& pop = w.pops[static_cast<std::size_t>(p)];
+            CHECK(pop.living_standard == factors.target[static_cast<std::size_t>(pop.profession)]);
+            CHECK(pop.living_standard > Fixed::zero());
+            CHECK(pop.living_standard < Fixed::from_int(100));
+            CHECK(pop.literacy == uhrwerk::literacy_target(w, loc, pop, pop.living_standard));
+        }
+    }
+    // Adel (steuerfrei, hoher Ertrag) lebt besser als Bauern im selben Ort.
+    const uhrwerk::Location& berlin = w.locations[0];
+    const uhrwerk::PopBlock& bauern = w.pops[static_cast<std::size_t>(berlin.first_pop)];
+    const uhrwerk::PopBlock& adel = w.pops[static_cast<std::size_t>(berlin.first_pop + berlin.pop_count - 1)];
+    REQUIRE(bauern.profession == w.find_profession("bauern"));
+    REQUIRE(adel.profession == w.find_profession("adel"));
+    CHECK(adel.living_standard > bauern.living_standard);
+    CHECK(adel.literacy > bauern.literacy);
+}
+
+TEST_CASE("Lader: zu kleine Blöcke gehen beim Start im ähnlichsten Block auf") {
+    TempDir dir(true);
+    // Potsdam: 1500 Einwohner, Adel 5 % → 75; mit 1 % sorbisch wären das 0,75 Personen.
+    replace_in_file(dir / kPlacesBra, "    kultur       = { maerker = 100 }\n    verwuestung  = 0.6",
+                    "    kultur       = { maerker = 99 sorben = 1 }\n    verwuestung  = 0.6");
+    const LoadResult r = load(dir);
+    INFO(issues_text(r));
+    REQUIRE(r.ok());
+    const World& w = *r.world;
+    const Index potsdam = w.find_location("potsdam");
+    const uhrwerk::Location& loc = w.locations[static_cast<std::size_t>(potsdam)];
+    CHECK(loc.pop_count == 5); // sorbischer Adel aufgelöst, sorbische Bauern und Handwerker bleiben
+    for (Index p = loc.first_pop; p < loc.first_pop + loc.pop_count; ++p) {
+        CHECK(w.pops[static_cast<std::size_t>(p)].size() >= Fixed::one());
+    }
+    CHECK(w.location_population(potsdam).round() == 1500); // niemand geht verloren
+    // Die Blöcke liegen weiter zusammenhängend.
+    Index next = 0;
+    for (const uhrwerk::Location& l : w.locations) {
+        CHECK(l.first_pop == next);
+        next += l.pop_count;
+    }
+    CHECK(next == static_cast<Index>(w.pops.size()));
+}
+
+TEST_CASE("Lader: Fehler bei Kulturen und neuen Feldern") {
+    TempDir dir(true);
+    SUBCASE("unbekannte Kultur im Ort") {
+        replace_in_file(dir / kPlacesBra, "kultur       = { maerker = 100 }\n    verwuestung  = 0.6",
+                        "kultur       = { preussen = 100 }\n    verwuestung  = 0.6");
+        expect_error(load(dir), "unbekannte Kultur 'preussen' in ort potsdam");
+    }
+    SUBCASE("Kulturanteile ergeben nicht 100") {
+        replace_in_file(dir / kPlacesBra, "kultur       = { maerker = 100 }\n    verwuestung  = 0.6",
+                        "kultur       = { maerker = 60 sorben = 30 }\n    verwuestung  = 0.6");
+        expect_error(load(dir), "die Kulturanteile in ort potsdam ergeben 90 %, erwartet 100 %");
+    }
+    SUBCASE("Kultur doppelt") {
+        replace_in_file(dir / kPlacesBra, "kultur       = { maerker = 100 }\n    verwuestung  = 0.6",
+                        "kultur       = { maerker = 50 maerker = 50 }\n    verwuestung  = 0.6");
+        expect_error(load(dir), "Kultur 'maerker' ist in ort potsdam mehrfach angegeben");
+    }
+    SUBCASE("kulturen.chron fehlt") {
+        std::filesystem::remove(dir / "common/kulturen.chron");
+        expect_error(load(dir), "Datei fehlt", "common/kulturen.chron", 0);
+    }
+    SUBCASE("ungültige Kulturkennung") {
+        replace_in_file(dir / "common/kulturen.chron", "kultur sorben {", "kultur Sorben {");
+        expect_error(load(dir), "ungültige Kulturkennung 'Sorben'");
+    }
+    SUBCASE("unbekannter Beruf in in_stadt") {
+        replace_in_file(dir / "common/berufe.chron", "in_stadt        = handwerker",
+                        "in_stadt        = tageloehner");
+        expect_error(load(dir), "unbekannter Beruf 'tageloehner' für 'in_stadt' in beruf bauern",
+                     "common/berufe.chron");
+    }
+    SUBCASE("Altersaufbau größer als 1") {
+        replace_in_file(dir / "common/regeln.chron", "anteil_erwerb             = 0.33",
+                        "anteil_erwerb             = 0.5");
+        expect_error(load(dir), "'anteil_kinder', 'anteil_jung' und 'anteil_erwerb' ergeben zusammen");
+    }
+    SUBCASE("Pflichtfeld tragfaehigkeit fehlt") {
+        replace_in_file(dir / "common/gelaende.chron", "    tragfaehigkeit = 45\n", "");
+        expect_error(load(dir), "Pflichtfeld 'tragfaehigkeit' fehlt in gelaende flussaue");
+    }
+}

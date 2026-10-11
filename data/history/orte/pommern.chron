@@ -34,6 +34,7 @@ ort stettin {
         besitzer     = SWE
         bevoelkerung = 7500
         konfession   = { lutherisch = 100 }
+        kultur       = { pommern = 100 }
         verwuestung  = 0.4
     }
 }
@@ -51,6 +52,7 @@ ort stralsund {
         besitzer     = SWE
         bevoelkerung = 9500
         konfession   = { lutherisch = 100 }
+        kultur       = { pommern = 100 }
         verwuestung  = 0.3
     }
 }
@@ -68,6 +70,7 @@ ort greifswald {
         besitzer     = SWE
         bevoelkerung = 4500
         konfession   = { lutherisch = 100 }
+        kultur       = { pommern = 100 }
         verwuestung  = 0.5
     }
 }
@@ -85,6 +88,7 @@ ort anklam {
         besitzer     = SWE
         bevoelkerung = 4000
         konfession   = { lutherisch = 100 }
+        kultur       = { pommern = 100 }
         verwuestung  = 0.6
     }
 }
@@ -102,6 +106,7 @@ ort stargard {
         besitzer     = BRA
         bevoelkerung = 4800
         konfession   = { lutherisch = 100 }
+        kultur       = { pommern = 100 }
         verwuestung  = 0.6
     }
 }
@@ -119,6 +124,7 @@ ort kolberg {
         besitzer     = BRA
         bevoelkerung = 4500
         konfession   = { lutherisch = 100 }
+        kultur       = { pommern = 100 }
         verwuestung  = 0.5
     }
 }
@@ -136,6 +142,7 @@ ort koeslin {
         besitzer     = BRA
         bevoelkerung = 3600
         konfession   = { lutherisch = 100 }
+        kultur       = { pommern = 100 }
         verwuestung  = 0.5
     }
 }
@@ -153,6 +160,7 @@ ort cammin {
         besitzer     = BRA
         bevoelkerung = 3000
         konfession   = { lutherisch = 100 }
+        kultur       = { pommern = 100 }
         verwuestung  = 0.6
     }
 }

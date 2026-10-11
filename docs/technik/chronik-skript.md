@@ -1,4 +1,4 @@
-# Chronik-Skript und Datenformate (Meilensteine M1 bis M3)
+# Chronik-Skript und Datenformate (Meilensteine M1 bis M4)
 
 Verbindliche Spezifikation für Parser (`core/src/script.cpp`), Lader (`core/src/loader.cpp`), Inhalte (`data/`) und Werkzeuge (`tools/`). Änderungen hier ziehen Änderungen in Code und Tests nach sich.
 
@@ -70,6 +70,7 @@ data/
 │   ├── regeln.chron        globale Regeln und Balancing-Werte
 │   ├── gelaende.chron      Geländetypen
 │   ├── konfessionen.chron  Konfessionen
+│   ├── kulturen.chron      Kulturen bzw. Landsmannschaften (seit M4)
 │   └── berufe.chron        Berufsgruppen
 ├── history/                generiert aus tabellen/ (tools/archivar), nicht von Hand bearbeiten
 │   ├── staaten/*.chron     Staaten (Reichsstände) mit datierter Historie
@@ -85,7 +86,7 @@ data/
     └── definition.csv      generiert: Kartenindex → Ort, Beschriftungspunkt, Fläche
 ```
 
-Ladereihenfolge: `regeln`, `gelaende`, `konfessionen`, `berufe`, dann alle Dateien der Ordner `szenarien`, `history/staaten`, `history/kreise` (seit M3), `history/orte`, jeweils **nach Dateiname sortiert**, Einträge in Dateireihenfolge. Daraus ergeben sich die Indizes in `World`. Die Szenarien kommen vor der Historie, weil das Startdatum des gewählten Szenarios bestimmt, welche datierten Blöcke gelten (Abschnitt 3.8).
+Ladereihenfolge: `regeln`, `gelaende`, `konfessionen`, `kulturen` (seit M4), `berufe`, dann alle Dateien der Ordner `szenarien`, `history/staaten`, `history/kreise` (seit M3), `history/orte`, jeweils **nach Dateiname sortiert**, Einträge in Dateireihenfolge. Daraus ergeben sich die Indizes in `World`. Die Szenarien kommen vor der Historie, weil das Startdatum des gewählten Szenarios bestimmt, welche datierten Blöcke gelten (Abschnitt 3.8).
 
 Die Dateien in `history/` erzeugt das Werkzeug `tools/archivar` aus den Tabellen in `data/tabellen/` (Format: [tabellen.md](tabellen.md)). Änderungen gehören in die Tabellen; die CI prüft mit `archivar.py --pruefen`, dass `history/` aktuell ist.
 
@@ -106,19 +107,51 @@ regeln {
     seuche_verlust_min    = 0.04
     seuche_verlust_max    = 0.12
     steuersatz_max        = 0.5
+
+    # Bevölkerung (seit M4); Bedeutung und Startwerte: bevoelkerung.md, Abschnitt 4.9
+    anteil_kinder             = 0.34    # Altersaufbau beim Start, 0..1
+    anteil_jung               = 0.26    # Summe der drei Anteile höchstens 1 (Rest: Alte)
+    anteil_erwerb             = 0.33
+    fruchtbarkeit             = 0.095   # 0..1
+    anteil_fruchtbar_erwerb   = 0.4     # 0..1
+    fruchtbarkeit_landreserve = 0.3     # 0..10
+    fruchtbarkeit_wohlstand   = 0.15    # 0..1
+    sterblichkeit_kinder      = 0.045   # 0..1, ebenso _jung, _erwerb, _alt, _armut
+    sterblichkeit_jung        = 0.010
+    sterblichkeit_erwerb      = 0.018
+    sterblichkeit_alt         = 0.11
+    sterblichkeit_armut       = 0.3
+    tragfaehigkeit_stadt      = 3       # 0..100
+    lebensstandard_bezug      = 12      # größer als 0
+    lebensstandard_anpassung  = 0.25    # 0..1
+    bildung_stadt             = 1.25    # 0..10
+    bildung_anpassung         = 0.03    # 0..1
+    wanderung_ziele           = 4       # Ganzzahl 0..16
+    wanderung_radius_km       = 60      # 0..2000
+    wanderung_rate            = 0.3     # 0..10
+    wanderung_max             = 0.12    # 0..1
+    wanderung_landreserve     = 20      # 0..100
+    wanderung_fremd           = 0.5     # 0..1
+    auswanderung_schwelle     = 30      # 0..100
+    auswanderung_rate         = 0.05    # 0..10
+    block_mindestgroesse      = 1       # Personen, 0..1000000
+    wanderung_mindestmenge    = 0.05    # Personen, 0..1000000
 }
 ```
 
-Alle Felder sind Pflicht. Abbildung auf `Rules` in derselben Reihenfolge (`growth_base` … `tax_rate_max`).
+Alle Felder sind Pflicht. Abbildung auf `Rules` in derselben Reihenfolge (`growth_base` … `tax_rate_max`, seit M4
+weiter `share_children` … `migration_min_amount`). Die drei Felder `wachstum_*` gehören zum Modell aus M1 und
+entfallen mit dem Bevölkerungsmodell von M4.
 
 ### 3.2 `common/gelaende.chron`
 
 ```text
 gelaende flussaue {
-    name     = "Flussaue"          # Pflicht
-    farbe    = { 128 160 112 }     # Pflicht
-    wachstum = 1.05                # Pflicht, Faktor
-    ertrag   = 1.15                # Pflicht, Faktor
+    name           = "Flussaue"          # Pflicht
+    farbe          = { 128 160 112 }     # Pflicht
+    wachstum       = 1.05                # Pflicht, Faktor (Modell aus M1)
+    ertrag         = 1.15                # Pflicht, Faktor
+    tragfaehigkeit = 45                  # Pflicht seit M4, Einwohner je km² (0..100000)
 }
 ```
 
@@ -126,8 +159,9 @@ gelaende flussaue {
 
 ```text
 konfession lutherisch {
-    name  = "Lutherisch"           # Pflicht
-    farbe = { 70 110 170 }         # Pflicht
+    name    = "Lutherisch"         # Pflicht
+    farbe   = { 70 110 170 }       # Pflicht
+    bildung = 1.2                  # Pflicht seit M4, Faktor auf die Alphabetisierung (0..10)
 }
 ```
 
@@ -141,8 +175,13 @@ beruf bauern {
     steuerpflichtig = ja           # Pflicht
     anteil_stadt    = 0.10         # Pflicht: Anteil an der Bevölkerung städtischer Orte
     anteil_land     = 0.60         # Pflicht: Anteil an der Bevölkerung ländlicher Orte
+    agrar           = ja           # Pflicht seit M4: Ertrag hängt an der Tragfähigkeit
+    bildung         = 0.1          # Pflicht seit M4: Alphabetisierung, Grundwert 0..1
+    in_stadt        = landarme     # optional seit M4: Beruf nach dem Zuzug in eine Stadt
 }
 ```
+
+`in_stadt` verweist auf einen Beruf derselben Datei (auch einen späteren); ein unbekannter Beruf ist fatal.
 
 Die Summe aller `anteil_stadt` und die Summe aller `anteil_land` muss jeweils 1 ergeben (Toleranz ±0,001), sonst fatal.
 
@@ -182,15 +221,16 @@ ort berlin_coelln {
     besitzer     = BRA                             # Staatstag
     bevoelkerung = 12000                           # > 0
     konfession   = { lutherisch = 90 reformiert = 10 }   # Prozentwerte, Summe 100
+    kultur       = { maerker = 100 }               # seit M4: Prozentwerte, Summe 100
     verwuestung  = 0.4                             # 0..1
 }
 ```
 
 Der Ort-Bezeichner ist der Wert hinter `ort` (Kleinbuchstaben, Ziffern, `_`).
 
-**Orte ohne Daten (seit M3).** Die vier Simulationsfelder `besitzer`, `bevoelkerung`,
-`konfession` und `verwuestung` (direkt oder aus datierten Blöcken, Abschnitt 3.8) sind zum
-Startdatum entweder **alle** vorhanden oder **keines**. Fehlen alle, ist der Ort ein *Ort ohne
+**Orte ohne Daten (seit M3).** Die fünf Simulationsfelder `besitzer`, `bevoelkerung`,
+`konfession`, `kultur` (seit M4) und `verwuestung` (direkt oder aus datierten Blöcken, Abschnitt 3.8)
+sind zum Startdatum entweder **alle** vorhanden oder **keines**. Fehlen alle, ist der Ort ein *Ort ohne
 Daten*: Besitzer `kNone`, keine Bevölkerungsblöcke, Verwüstung 0. Er erscheint auf der Karte,
 nimmt aber an der Simulation nicht teil. Fehlen nur einige, ist das ein Fehler
 (`Ort potsdam hat zum Startdatum 'besitzer', aber nicht 'bevoelkerung'`). So lässt sich die Karte
@@ -256,15 +296,35 @@ ist eine Warnung. Im Kern: `World::districts` (`District { id, name, source }`) 
 `Location::district` (`kNone`, wenn der Ort keinen Kreis hat). Der Ordner `history/kreise` darf
 fehlen oder leer sein (ältere Datenstände, Testdaten); dann hat kein Ort einen Kreis.
 
+### 3.10 `common/kulturen.chron` (seit M4)
+
+```text
+kultur maerker {
+    name  = "Märker"             # Pflicht
+    farbe = { 64 104 168 }       # Pflicht (Kartenmodus Kultur)
+}
+```
+
+Kennung: Kleinbuchstaben, Ziffern, `_`, eindeutig; mindestens eine Kultur ist Pflicht. Eine Kultur
+ist die Landsmannschaft bzw. Volksgruppe eines Bevölkerungsblocks ([bevoelkerung.md](bevoelkerung.md),
+Abschnitt 2). Im Kern: `World::cultures` (`Culture { id, name, color }`) und `PopBlock::culture`. Die
+Standardkultur jeder Landschaft und Abweichungen je Ort pflegt der Archivar
+([tabellen.md](tabellen.md)).
+
 ## 4. Startzustand
 
-Für jeden Ort entstehen Bevölkerungsblöcke **in dieser Reihenfolge**: für jeden Beruf (Ladereihenfolge) und darin für jede Konfession des Ortes (Reihenfolge im `konfession`-Block):
+Für jeden Ort entstehen Bevölkerungsblöcke **in dieser Reihenfolge**: für jeden Beruf (Ladereihenfolge), darin für jede Konfession des Ortes (Reihenfolge im `konfession`-Block) und darin für jede Kultur (Reihenfolge im `kultur`-Block, seit M4):
 
 ```
-größe = bevoelkerung × (stadt ? anteil_stadt : anteil_land) × prozent / 100
+größe  = bevoelkerung × (stadt ? anteil_stadt : anteil_land) × prozent / 100 × kulturprozent / 100
+kinder = größe × anteil_kinder,  jung = größe × anteil_jung,  erwerb = größe × anteil_erwerb
+alt    = größe − kinder − jung − erwerb
 ```
 
 Blöcke mit Anteil 0 oder Prozent 0 entfallen. Die Blöcke eines Ortes liegen zusammenhängend in `World::pops`.
+Danach setzt `initialize_population` (seit M4, [bevoelkerung.md](bevoelkerung.md), Abschnitt 2.6) Lebensstandard
+und Alphabetisierung jedes Blocks auf ihre Zielwerte und löst Blöcke unter `block_mindestgroesse` im ähnlichsten
+Block ihres Ortes auf (Abschnitt 4.7 dort).
 
 Das Weltdatum wird auf `szenario.datum` gesetzt; der Zustand von `state.last_month_*` ist 0; die Chronik ist leer.
 

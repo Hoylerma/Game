@@ -6,6 +6,9 @@ beruf bauern {
     steuerpflichtig = ja
     anteil_stadt    = 0.10
     anteil_land     = 0.80
+    agrar           = ja
+    bildung         = 0.1
+    in_stadt        = handwerker
 }
 
 beruf handwerker {
@@ -15,6 +18,8 @@ beruf handwerker {
     steuerpflichtig = ja
     anteil_stadt    = 0.50
     anteil_land     = 0.15
+    agrar           = nein
+    bildung         = 0.3
 }
 
 beruf kaufleute {
@@ -24,6 +29,8 @@ beruf kaufleute {
     steuerpflichtig = yes
     anteil_stadt    = 0.30
     anteil_land     = 0          # auf dem Land keine Kaufleute → kein Block
+    agrar           = nein
+    bildung         = 0.6
 }
 
 beruf adel {
@@ -33,4 +40,6 @@ beruf adel {
     steuerpflichtig = nein       # privilegiert
     anteil_stadt    = 0.10
     anteil_land     = 0.05
+    agrar           = nein
+    bildung         = 0.8
 }

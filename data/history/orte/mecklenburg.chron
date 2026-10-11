@@ -30,6 +30,7 @@ ort schwerin {
         besitzer     = MSC
         bevoelkerung = 4200
         konfession   = { lutherisch = 100 }
+        kultur       = { mecklenburger = 100 }
         verwuestung  = 0.6
     }
 }
@@ -47,6 +48,7 @@ ort wismar {
         besitzer     = SWE
         bevoelkerung = 6000
         konfession   = { lutherisch = 100 }
+        kultur       = { mecklenburger = 100 }
         verwuestung  = 0.45
     }
 }
@@ -64,6 +66,7 @@ ort rostock {
         besitzer     = MSC
         bevoelkerung = 7500
         konfession   = { lutherisch = 100 }
+        kultur       = { mecklenburger = 100 }
         verwuestung  = 0.45
     }
 }
@@ -81,6 +84,7 @@ ort guestrow {
         besitzer     = MGU
         bevoelkerung = 4500
         konfession   = { lutherisch = 100 }
+        kultur       = { mecklenburger = 100 }
         verwuestung  = 0.65
     }
 }
@@ -98,6 +102,7 @@ ort parchim {
         besitzer     = MSC
         bevoelkerung = 3600
         konfession   = { lutherisch = 100 }
+        kultur       = { mecklenburger = 100 }
         verwuestung  = 0.65
     }
 }
@@ -115,6 +120,7 @@ ort neubrandenburg {
         besitzer     = MGU
         bevoelkerung = 3200
         konfession   = { lutherisch = 100 }
+        kultur       = { mecklenburger = 100 }
         verwuestung  = 0.75
     }
 }

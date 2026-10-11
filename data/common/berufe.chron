@@ -9,6 +9,16 @@
 #                     Umland, daher auch Ackerbürger und Bauern)
 #   anteil_land     – Anteil an der Bevölkerung ländlicher Orte
 # Die Summen der Anteile ergeben je genau 1.
+#   agrar           – Ertrag hängt am Boden: Ist ein Ort übervölkert (mehr Einwohner als
+#                     Tragfähigkeit), sinkt der Ertrag je Kopf (seit M4)
+#   bildung         – Alphabetisierung als Grundwert 0..1 (seit M4); wird mit Konfession, Stadt
+#                     und Lebensstandard verrechnet (docs/technik/bevoelkerung.md, Abschnitt 4.4)
+#   in_stadt        – optional: Beruf nach dem Zuzug in eine Stadt (seit M4); ein Bauernsohn,
+#                     der in die Stadt zieht, findet dort keinen Hof, sondern Arbeit als Tagelöhner
+#
+# Alphabetisierung um 1650 (Größenordnung, Spielwerte): insgesamt etwa 10–20 %, in Städten
+# deutlich mehr; Geistliche und Gelehrte fast vollständig, Adel und Kaufleute überwiegend,
+# Handwerksmeister teilweise, Bauern und Gesinde selten.
 #
 # Größenordnungen (Schätzung, Spielwerte): Ein Tagelöhner verdiente um 1650
 # einige Groschen am Tag (1 Reichstaler = 24 Groschen), also wenige Dutzend
@@ -24,6 +34,8 @@ beruf adel {
     steuerpflichtig = nein
     anteil_stadt    = 0.005
     anteil_land     = 0.010
+    agrar           = nein
+    bildung         = 0.8
 }
 
 beruf geistlichkeit {
@@ -33,6 +45,8 @@ beruf geistlichkeit {
     steuerpflichtig = nein
     anteil_stadt    = 0.015
     anteil_land     = 0.010
+    agrar           = nein
+    bildung         = 0.95
 }
 
 beruf buerger {
@@ -42,6 +56,8 @@ beruf buerger {
     steuerpflichtig = ja
     anteil_stadt    = 0.150
     anteil_land     = 0.010
+    agrar           = nein
+    bildung         = 0.6
 }
 
 beruf handwerker {
@@ -51,6 +67,8 @@ beruf handwerker {
     steuerpflichtig = ja
     anteil_stadt    = 0.300
     anteil_land     = 0.060
+    agrar           = nein
+    bildung         = 0.3
 }
 
 beruf bauern {
@@ -60,6 +78,9 @@ beruf bauern {
     steuerpflichtig = ja
     anteil_stadt    = 0.200
     anteil_land     = 0.520
+    agrar           = ja
+    bildung         = 0.1
+    in_stadt        = landarme
 }
 
 beruf landarme {
@@ -69,4 +90,6 @@ beruf landarme {
     steuerpflichtig = ja
     anteil_stadt    = 0.330
     anteil_land     = 0.390
+    agrar           = ja
+    bildung         = 0.05
 }

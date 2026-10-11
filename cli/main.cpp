@@ -447,6 +447,7 @@ int cmd_pruefen(const Options& o, const fs::path& data_dir) {
     const World& w = *result.world;
     std::cout << "Geladen: " << plural(w.terrains.size(), "Geländetyp", "Geländetypen") << ", "
               << plural(w.confessions.size(), "Konfession", "Konfessionen") << ", "
+              << plural(w.cultures.size(), "Kultur", "Kulturen") << ", "
               << plural(w.professions.size(), "Beruf", "Berufe") << ", "
               << plural(w.states.size(), "Staat", "Staaten") << ", "
               << plural(w.districts.size(), "Kreis", "Kreise") << ", " << describe_locations(w) << ", "
@@ -470,6 +471,7 @@ int cmd_info(const Options& o, const fs::path& data_dir) {
               << "Spieler:      " << describe_state(w, w.find_state(w.scenario.player_tag)) << '\n'
               << "Inhalt:       " << plural(w.terrains.size(), "Geländetyp", "Geländetypen") << ", "
               << plural(w.confessions.size(), "Konfession", "Konfessionen") << ", "
+              << plural(w.cultures.size(), "Kultur", "Kulturen") << ", "
               << plural(w.professions.size(), "Beruf", "Berufe") << '\n'
               << "              " << plural(w.states.size(), "Staat", "Staaten") << ", "
               << plural(w.pops.size(), "Bevölkerungsblock", "Bevölkerungsblöcke") << '\n'

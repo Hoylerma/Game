@@ -35,11 +35,13 @@ inline constexpr std::string_view kDefaultScenario = "westfaelischer_frieden";
 /// Lädt alle Inhalte und setzt den Startzustand des Szenarios.
 ///
 /// Reihenfolge (jeweils alle *.chron-Dateien eines Ordners, nach Dateiname sortiert):
-///   common/regeln.chron, common/gelaende.chron, common/konfessionen.chron, common/berufe.chron,
-///   szenarien/, history/staaten/, history/kreise/ (seit M3, darf fehlen), history/orte/
+///   common/regeln.chron, common/gelaende.chron, common/konfessionen.chron, common/kulturen.chron
+///   (seit M4), common/berufe.chron, szenarien/, history/staaten/, history/kreise/ (seit M3, darf
+///   fehlen), history/orte/
 ///
-/// Orte ohne die vier Simulationsfelder sind Orte ohne Daten (chronik-skript.md, Abschnitt 3.6):
-/// Besitzer kNone, keine Bevölkerungsblöcke, Verwüstung 0.
+/// Orte ohne die fünf Simulationsfelder sind Orte ohne Daten (chronik-skript.md, Abschnitt 3.6):
+/// Besitzer kNone, keine Bevölkerungsblöcke, Verwüstung 0. Die Blöcke der übrigen Orte bekommen
+/// Startwerte für Lebensstandard und Alphabetisierung (initialize_population).
 LoadResult load_world(const std::filesystem::path& data_dir, std::string_view scenario_id = kDefaultScenario);
 
 /// Sucht den Datenordner: Umgebungsvariable UHRWERK_DATEN, sonst aufwärts ab

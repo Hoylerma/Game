@@ -29,6 +29,7 @@ ort wolfenbuettel {
         besitzer     = BWO
         bevoelkerung = 6000
         konfession   = { lutherisch = 100 }
+        kultur       = { niedersachsen = 100 }
         verwuestung  = 0.45
     }
 }
@@ -46,6 +47,7 @@ ort braunschweig {
         besitzer     = BWO
         bevoelkerung = 15000
         konfession   = { lutherisch = 100 }
+        kultur       = { niedersachsen = 100 }
         verwuestung  = 0.25
     }
 }
@@ -63,6 +65,7 @@ ort helmstedt {
         besitzer     = BWO
         bevoelkerung = 5000
         konfession   = { lutherisch = 100 }
+        kultur       = { niedersachsen = 100 }
         verwuestung  = 0.4
     }
 }

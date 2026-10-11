@@ -32,6 +32,7 @@ ort bautzen {
         besitzer     = SAX
         bevoelkerung = 7000
         konfession   = { lutherisch = 85 katholisch = 15 }
+        kultur       = { obersachsen = 50 sorben = 50 }
         verwuestung  = 0.5
     }
 }
@@ -49,6 +50,7 @@ ort goerlitz {
         besitzer     = SAX
         bevoelkerung = 8000
         konfession   = { lutherisch = 100 }
+        kultur       = { obersachsen = 90 sorben = 10 }
         verwuestung  = 0.45
     }
 }
@@ -66,6 +68,7 @@ ort zittau {
         besitzer     = SAX
         bevoelkerung = 8500
         konfession   = { lutherisch = 100 }
+        kultur       = { obersachsen = 95 sorben = 5 }
         verwuestung  = 0.4
     }
 }
@@ -83,6 +86,7 @@ ort luebben {
         besitzer     = SAX
         bevoelkerung = 3200
         konfession   = { lutherisch = 100 }
+        kultur       = { sorben = 55 obersachsen = 45 }
         verwuestung  = 0.5
     }
 }
@@ -100,6 +104,7 @@ ort guben {
         besitzer     = SAX
         bevoelkerung = 4200
         konfession   = { lutherisch = 100 }
+        kultur       = { obersachsen = 75 sorben = 25 }
         verwuestung  = 0.5
     }
 }
@@ -117,6 +122,7 @@ ort cottbus {
         besitzer     = BRA
         bevoelkerung = 4000
         konfession   = { lutherisch = 100 }
+        kultur       = { sorben = 60 maerker = 40 }
         verwuestung  = 0.55
     }
 }

@@ -13,7 +13,7 @@ python3 tools/archivar/archivar.py              # prüfen und data/history/ schr
 python3 tools/archivar/archivar.py --pruefen    # ist data/history/ aktuell? (wie in der CI)
 python3 tools/archivar/archivar.py --bericht    # Umfang, Sicherheit der Angaben, Szenarien
 python3 tools/archivar/archivar.py --daten DIR  # anderer Datenordner
-python3 -m unittest discover -s tools/archivar -v   # 33 Tests
+python3 -m unittest discover -s tools/archivar -v   # 35 Tests
 ```
 
 Exitcodes: `0` in Ordnung, `1` `data/history/` ist nicht aktuell (`--pruefen`), `2` Fehler in den
@@ -38,7 +38,7 @@ bearbeiten“. Änderungen dort gehen beim nächsten Lauf verloren.
   `pruefe_ausreisser`), Ausgabe erzeugen (`erzeuge`) und vergleichen bzw. schreiben.
 - Den Parser für das Chronik-Skript teilt sich der Archivar mit dem Kartengenerator
   (`tools/kartengenerator/chron.py`).
-- `testdaten/` – kleiner Datensatz (2 Staaten, 2 Kreise, 4 Orte davon einer ohne Daten, 2 Szenarien,
+- `testdaten/` – kleiner Datensatz (2 Staaten, 2 Kulturen, 2 Kreise, 4 Orte davon einer ohne Daten, 2 Szenarien,
   ein Besitzwechsel); die
   eingecheckten Dateien unter `testdaten/history/` sind die erwartete Ausgabe.
 

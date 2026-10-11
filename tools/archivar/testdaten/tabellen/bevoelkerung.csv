@@ -1,5 +1,5 @@
-ort;stichtag;bevoelkerung;konfession;verwuestung;sicherheit;quelle
-hafen;1648.10.24;6000;lutherisch=90 katholisch=10;0.2;schaetzung;Testquelle
-hafen;1700.01.01;9000;lutherisch=100;0;schaetzung;Testquelle
-heide;1648.10.24;1500;lutherisch=100;0.5;schaetzung;Testquelle
-burg;1648.10.24;5000;katholisch=100;0.1;schaetzung;Testquelle
+ort;stichtag;bevoelkerung;konfession;kultur;verwuestung;sicherheit;quelle
+hafen;1648.10.24;6000;lutherisch=90 katholisch=10;;0.2;schaetzung;Testquelle
+hafen;1700.01.01;9000;lutherisch=100;;0;schaetzung;Testquelle
+heide;1648.10.24;1500;lutherisch=100;;0.5;schaetzung;Testquelle
+burg;1648.10.24;5000;katholisch=100;suedleute=80 nordleute=20;0.1;schaetzung;Testquelle

@@ -18,7 +18,7 @@ uhrwerk::PopBlock pop(Index location, Index profession, Index confession, std::i
     p.location = location;
     p.profession = profession;
     p.confession = confession;
-    p.size = Fixed::from_int(size);
+    p.working = Fixed::from_int(size);
     return p;
 }
 
@@ -131,10 +131,10 @@ TEST_CASE("World: Mehrheitskonfession") {
     CHECK(w.location_majority_confession(4) == kNone);
 
     // Reformierte überholen knapp.
-    w.pops[1].size = Fixed::from_int(150) + Fixed::from_raw(1);
+    w.pops[1].working = Fixed::from_int(150) + Fixed::from_raw(1);
     CHECK(w.location_majority_confession(0) == 1);
     // Genau gleich → wieder lutherisch (kleinerer Index).
-    w.pops[1].size = Fixed::from_int(150);
+    w.pops[1].working = Fixed::from_int(150);
     CHECK(w.location_majority_confession(0) == 0);
 }
 

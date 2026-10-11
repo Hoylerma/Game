@@ -30,6 +30,7 @@ ort dresden {
         besitzer     = SAX
         bevoelkerung = 15000
         konfession   = { lutherisch = 100 }
+        kultur       = { obersachsen = 100 }
         verwuestung  = 0.25
     }
 }
@@ -47,6 +48,7 @@ ort leipzig {
         besitzer     = SAX
         bevoelkerung = 14000
         konfession   = { lutherisch = 100 }
+        kultur       = { obersachsen = 100 }
         verwuestung  = 0.4
     }
 }
@@ -64,6 +66,7 @@ ort wittenberg {
         besitzer     = SAX
         bevoelkerung = 6000
         konfession   = { lutherisch = 100 }
+        kultur       = { obersachsen = 100 }
         verwuestung  = 0.4
     }
 }
@@ -81,6 +84,7 @@ ort torgau {
         besitzer     = SAX
         bevoelkerung = 5500
         konfession   = { lutherisch = 100 }
+        kultur       = { obersachsen = 100 }
         verwuestung  = 0.45
     }
 }
@@ -98,6 +102,7 @@ ort freiberg {
         besitzer     = SAX
         bevoelkerung = 8500
         konfession   = { lutherisch = 100 }
+        kultur       = { obersachsen = 100 }
         verwuestung  = 0.4
     }
 }
@@ -115,6 +120,7 @@ ort chemnitz {
         besitzer     = SAX
         bevoelkerung = 5000
         konfession   = { lutherisch = 100 }
+        kultur       = { obersachsen = 100 }
         verwuestung  = 0.5
     }
 }
@@ -132,6 +138,7 @@ ort zwickau {
         besitzer     = SAX
         bevoelkerung = 7000
         konfession   = { lutherisch = 100 }
+        kultur       = { obersachsen = 100 }
         verwuestung  = 0.45
     }
 }

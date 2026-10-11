@@ -46,6 +46,10 @@ Index World::find_confession(std::string_view id) const {
     return find_by(confessions, id, [](const Confession& c) -> std::string_view { return c.id; });
 }
 
+Index World::find_culture(std::string_view id) const {
+    return find_by(cultures, id, [](const Culture& c) -> std::string_view { return c.id; });
+}
+
 Index World::find_profession(std::string_view id) const {
     return find_by(professions, id, [](const Profession& p) -> std::string_view { return p.id; });
 }
@@ -58,7 +62,7 @@ Fixed World::location_population(Index location) const {
     Fixed total;
     for (Index p = loc.first_pop; p < loc.first_pop + loc.pop_count; ++p) {
         if (in_range(pops, p)) {
-            total += pops[static_cast<std::size_t>(p)].size;
+            total += pops[static_cast<std::size_t>(p)].size();
         }
     }
     return total;
@@ -109,25 +113,34 @@ std::size_t World::locations_with_data() const {
 }
 
 Index World::location_majority_confession(Index location) const {
+    return majority(location, confessions.size(), [](const PopBlock& pop) { return pop.confession; });
+}
+
+Index World::location_majority_culture(Index location) const {
+    return majority(location, cultures.size(), [](const PopBlock& pop) { return pop.culture; });
+}
+
+template <typename Key> Index World::majority(Index location, std::size_t count, Key key) const {
     if (!in_range(locations, location)) {
         return kNone;
     }
     const Location& loc = locations[static_cast<std::size_t>(location)];
-    std::vector<Fixed> sums(confessions.size());
-    std::vector<bool> present(confessions.size(), false);
+    std::vector<Fixed> sums(count);
+    std::vector<bool> present(count, false);
     for (Index p = loc.first_pop; p < loc.first_pop + loc.pop_count; ++p) {
         if (!in_range(pops, p)) {
             continue;
         }
         const PopBlock& pop = pops[static_cast<std::size_t>(p)];
-        if (!in_range(confessions, pop.confession)) {
+        const Index k = key(pop);
+        if (k < 0 || static_cast<std::size_t>(k) >= count) {
             continue;
         }
-        sums[static_cast<std::size_t>(pop.confession)] += pop.size;
-        present[static_cast<std::size_t>(pop.confession)] = true;
+        sums[static_cast<std::size_t>(k)] += pop.size();
+        present[static_cast<std::size_t>(k)] = true;
     }
     Index best = kNone;
-    for (std::size_t c = 0; c < confessions.size(); ++c) {
+    for (std::size_t c = 0; c < count; ++c) {
         if (!present[c]) {
             continue;
         }

@@ -1,6 +1,6 @@
 #pragma once
 
-// Weltmodell des Simulationskerns (Meilenstein M1: technischer Durchstich).
+// Weltmodell des Simulationskerns (seit M1; Bevölkerung seit M4, docs/technik/bevoelkerung.md).
 //
 // Daten sind als flache Vektoren mit Indizes organisiert (datenorientiert);
 // Querverweise sind Indizes, keine Zeiger. Die Reihenfolge aller Vektoren ist
@@ -33,12 +33,21 @@ struct TerrainType {
     std::string id;
     std::string name;
     Color color;
-    Fixed growth_factor = Fixed::one(); // Faktor auf Bevölkerungswachstum
+    Fixed growth_factor = Fixed::one(); // Faktor auf Bevölkerungswachstum (M1, entfällt mit M4)
     Fixed yield_factor = Fixed::one();  // Faktor auf Produktion
+    Fixed capacity;                     // Tragfähigkeit: Einwohner je km² (seit M4)
 };
 
 /// Konfession (data/common/konfessionen.chron).
 struct Confession {
+    std::string id;
+    std::string name;
+    Color color;
+    Fixed literacy_factor = Fixed::one(); // Faktor auf die Alphabetisierung (seit M4)
+};
+
+/// Kultur bzw. Landsmannschaft (data/common/kulturen.chron, seit M4).
+struct Culture {
     std::string id;
     std::string name;
     Color color;
@@ -51,19 +60,36 @@ struct Profession {
     std::string id;
     std::string name;
     Stratum stratum = Stratum::Unten;
-    Fixed yield_per_capita; // Reichstaler pro Kopf und Jahr
-    bool taxable = true;    // privilegierte Stände (Adel, Klerus) zahlen keine Kontribution
-    Fixed share_city;       // Anteil in Städten (0..1)
-    Fixed share_rural;      // Anteil auf dem Land (0..1)
+    Fixed yield_per_capita;        // Reichstaler pro Kopf und Jahr
+    bool taxable = true;           // privilegierte Stände (Adel, Klerus) zahlen keine Kontribution
+    Fixed share_city;              // Anteil in Städten (0..1)
+    Fixed share_rural;             // Anteil auf dem Land (0..1)
+    bool agrarian = false;         // Ertrag hängt am Boden (Tragfähigkeit), seit M4
+    Fixed literacy;                // Alphabetisierung, Grundwert 0..1 (seit M4)
+    Index city_profession = kNone; // Beruf nach dem Zuzug in eine Stadt, kNone = derselbe (seit M4)
 };
 
-/// Bevölkerungsblock: gleichartige Menschen eines Ortes.
+/// Bevölkerungsblock: gleichartige Menschen eines Ortes (seit M4 mit Altersaufbau).
+///
+/// Ein Block ist durch (Ort, Beruf, Konfession, Kultur) bestimmt; in einem Ort gibt es jeden
+/// Schlüssel höchstens einmal. Personenzahlen sind Festkomma, damit langsames Wachstum nicht
+/// verloren geht. 64 Byte, eine Cache-Zeile.
 struct PopBlock {
     Index location = kNone;
     Index profession = kNone;
     Index confession = kNone;
-    Fixed size; // Personen (Festkomma, damit langsames Wachstum nicht verloren geht)
+    Index culture = kNone;
+    Fixed children;        // 0–14 Jahre
+    Fixed young;           // 15–29
+    Fixed working;         // 30–64
+    Fixed old;             // 65+
+    Fixed living_standard; // Lebensstandard 0..100
+    Fixed literacy;        // Alphabetisierung 0..1
+
+    /// Personen insgesamt (Summe der Altersgruppen).
+    Fixed size() const { return children + young + working + old; }
 };
+static_assert(sizeof(PopBlock) == 64, "ein Bevölkerungsblock soll genau eine Cache-Zeile füllen");
 
 /// Ort – kleinste Karteneinheit (data/history/orte/*.chron).
 ///
@@ -125,6 +151,35 @@ struct Rules {
     Fixed plague_loss_min;        // Bevölkerungsverlust bei Seuche, Untergrenze
     Fixed plague_loss_max;        // … Obergrenze
     Fixed tax_rate_max;           // höchster erlaubter Steuersatz
+
+    // Bevölkerung (seit M4, docs/technik/bevoelkerung.md, Abschnitt 4.9). Raten sind Jahreswerte.
+    Fixed share_children;               // Altersaufbau beim Start: Anteil 0–14 Jahre
+    Fixed share_young;                  // … 15–29
+    Fixed share_working;                // … 30–64 (Rest: 65+)
+    Fixed fertility;                    // Geburten je Person im fruchtbaren Alter
+    Fixed fertile_share_working;        // Anteil der 30–64-Jährigen im fruchtbaren Alter
+    Fixed fertility_reserve;            // Zuschlag bei voller Landreserve
+    Fixed fertility_wealth;             // Zu-/Abschlag je 50 Punkte Lebensstandard
+    Fixed mortality_children;           // jährliche Sterblichkeit 0–14
+    Fixed mortality_young;              // … 15–29
+    Fixed mortality_working;            // … 30–64
+    Fixed mortality_old;                // … 65+
+    Fixed mortality_poverty;            // Zu-/Abschlag je 50 Punkte Lebensstandard
+    Fixed capacity_city;                // Faktor der Tragfähigkeit für Städte
+    Fixed living_standard_reference;    // Netto-Einkommen für Lebensstandard 50
+    Fixed living_standard_adjustment;   // Anteil der Lücke zum Ziel je Monat
+    Fixed literacy_city;                // Faktor der Alphabetisierung in Städten
+    Fixed literacy_adjustment;          // Anteil der Lücke zum Ziel je Jahr
+    std::int32_t migration_targets = 0; // Wanderungsziele je Ort
+    Fixed migration_radius_km;          // Umkreis der Wanderungsziele
+    Fixed migration_rate;               // Anteil der Jungen je Jahr bei 100 Punkten Unterschied
+    Fixed migration_max;                // Obergrenze der Abwanderung je Jahr (Anteil der Jungen)
+    Fixed migration_reserve;            // Punkte Anziehung für freies Land (Agrarberufe)
+    Fixed migration_foreign;            // Faktor für Wanderung über Landesgrenzen
+    Fixed emigration_threshold;         // Lebensstandard, unter dem ausgewandert wird
+    Fixed emigration_rate;              // Anteil der Jungen je Jahr und 100 Punkte unter der Schwelle
+    Fixed block_min_size;               // kleinere Blöcke werden aufgelöst (Personen)
+    Fixed migration_min_amount;         // kleinere Wanderungsströme entfallen (Personen)
 };
 
 /// Szenario/Lesezeichen (data/szenarien/*.chron).
@@ -150,6 +205,7 @@ struct World {
 
     std::vector<TerrainType> terrains;
     std::vector<Confession> confessions;
+    std::vector<Culture> cultures;
     std::vector<Profession> professions;
     std::vector<State> states;
     std::vector<District> districts;
@@ -162,6 +218,7 @@ struct World {
     Index find_district(std::string_view id) const;
     Index find_terrain(std::string_view id) const;
     Index find_confession(std::string_view id) const;
+    Index find_culture(std::string_view id) const;
     Index find_profession(std::string_view id) const;
 
     Fixed location_population(Index location) const;
@@ -174,6 +231,11 @@ struct World {
     std::size_t locations_with_data() const;
     /// Konfession mit den meisten Angehörigen im Ort (bei Gleichstand der kleinere Index).
     Index location_majority_confession(Index location) const;
+    /// Kultur mit den meisten Angehörigen im Ort (bei Gleichstand der kleinere Index).
+    Index location_majority_culture(Index location) const;
+
+private:
+    template <typename Key> Index majority(Index location, std::size_t count, Key key) const;
 };
 
 } // namespace uhrwerk

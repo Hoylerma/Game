@@ -8,6 +8,7 @@ ort dresden {
     bevoelkerung = 20000
     stadt        = ja
     konfession   = { lutherisch = 95 katholisch = 5 }
+    kultur       = { obersachsen = 100 }
     verwuestung  = 0.2
     kreis        = kr_dresden
     quelle       = "Testdaten, geschätzt"
@@ -22,6 +23,7 @@ ort leipzig {
     bevoelkerung = 15000
     stadt        = ja
     konfession   = { lutherisch = 100 reformiert = 0 }   # 0 % → kein Block
+    kultur       = { obersachsen = 100 }
     verwuestung  = 0.3
     quelle       = "Testdaten, geschätzt"   # ohne Kreis
 }

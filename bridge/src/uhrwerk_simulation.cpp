@@ -301,7 +301,7 @@ Dictionary UhrwerkSimulation::get_location(std::int64_t index) const {
         }
         const uhrwerk::PopBlock& pop = at(w->pops, p);
         if (valid_index(per_confession, pop.confession)) {
-            per_confession[static_cast<std::size_t>(pop.confession)] += pop.size;
+            per_confession[static_cast<std::size_t>(pop.confession)] += pop.size();
         }
     }
     Dictionary confessions;

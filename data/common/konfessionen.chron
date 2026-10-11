@@ -1,6 +1,12 @@
 # Konfessionen (Meilenstein M1).
 #
 # Format: docs/technik/chronik-skript.md, Abschnitt 3.3.
+#   bildung – Faktor auf die Alphabetisierung (seit M4, docs/technik/bevoelkerung.md,
+#             Abschnitt 4.4). Spielwerte: Die protestantischen Kirchen verlangten das eigene
+#             Lesen von Bibel und Katechismus, daher höhere Lesefähigkeit in protestantischen
+#             Gebieten (Becker/Woessmann, "Was Weber Wrong?", 2009, für Preußen 1871).
+#             Jüdische Gemeinden unterrichteten Jungen im Lesen der Schrift (Cheder); der hohe
+#             Faktor bildet das ab, die Alphabetisierung ist auf 1 begrenzt.
 #
 # Der Westfälische Frieden erkennt im Reich drei Konfessionen an: katholisch,
 # lutherisch (Augsburger Konfession) und – neu seit 1648 – reformiert.
@@ -21,21 +27,25 @@
 # Bevölkerungsmodell ab (siehe data/README.md).
 
 konfession lutherisch {
-    name  = "Lutherisch"
-    farbe = { 70 110 170 }
+    name    = "Lutherisch"
+    farbe   = { 70 110 170 }
+    bildung = 1.2
 }
 
 konfession reformiert {
-    name  = "Reformiert"
-    farbe = { 226 160 52 }
+    name    = "Reformiert"
+    farbe   = { 226 160 52 }
+    bildung = 1.2
 }
 
 konfession katholisch {
-    name  = "Katholisch"
-    farbe = { 176 48 60 }
+    name    = "Katholisch"
+    farbe   = { 176 48 60 }
+    bildung = 0.9
 }
 
 konfession juedisch {
-    name  = "Jüdisch"
-    farbe = { 136 104 176 }
+    name    = "Jüdisch"
+    farbe   = { 136 104 176 }
+    bildung = 2.0
 }

@@ -21,6 +21,7 @@ add_executable(uhrwerk_tests
     test_loader.cpp
     test_simulation.cpp
     test_parallel.cpp
+    test_population.cpp
 )
 target_link_libraries(uhrwerk_tests PRIVATE uhrwerk::core doctest::doctest uhrwerk_warnings)
 target_compile_definitions(uhrwerk_tests PRIVATE
