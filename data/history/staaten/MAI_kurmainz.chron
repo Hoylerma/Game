@@ -25,7 +25,7 @@ staat MAI {
         kontribution   = 0.08
         akzise         = 0.05
         zoll           = 0.04
-        hofhaltung     = 28000
+        hofhaltung     = 12250
         heer           = 4
     }
 }

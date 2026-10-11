@@ -23,8 +23,9 @@ struct LocationFactors {
     std::vector<Fixed> target; // je Beruf: Ziel-Lebensstandard 0..100 (run_location_economy)
 };
 
-/// Berechnet population, capacity, reserve, condition und agrarian eines Ortes mit Daten.
-void compute_location_factors(const World& world, const Location& location, LocationFactors& out);
+/// Berechnet population, capacity, reserve, condition und agrarian eines Ortes mit Daten. Die
+/// Tragfähigkeit enthält seit M5 den Zuschlag des Landesausbaus (wirtschaft.md Abschnitt 4.6).
+void compute_location_factors(const World& world, Index location, LocationFactors& out);
 
 /// Ziel der Alphabetisierung eines Blocks bei Lebensstandard living_standard (Abschnitt 4.4).
 Fixed literacy_target(const World& world, const Location& location, const PopBlock& pop,

@@ -266,6 +266,13 @@ Gewählt ist ein Kompromiss, der zur Nachkriegslage passt:
   Kurmainz (starke Landstände bzw. faktisch autonomes Erfurt).
 - **Hofhaltung** etwa 1,1- bis 1,2-mal die Steuereinnahmen des ersten Jahres: Die Staaten starten mit
   einem **Nachkriegsdefizit** und kommen nach etwa 5–12 Jahren Wiederaufbau in den Überschuss.
+  Seit M5 (Schritt 3) kommen Verwaltung (0,15 Reichstaler je Einwohner) und Heer (`heer` Soldaten je
+  1.000 Einwohner zu 30 Reichstalern) hinzu, und die Steuern treffen die Wertschöpfung aus den Märkten
+  (etwa 0,8 Reichstaler je Einwohner und Jahr). Die Hofhaltung ist deshalb neu bemessen: Hof +
+  Verwaltung + Heer übersteigen die Steuern nach dem Einschwingen um etwa 10 % (Kursachsen 50.000,
+  Brandenburg 25.500, Böhmen 20.500, die anhaltischen Fürstentümer 2.000–2.500 Reichstaler im Jahr;
+  Herleitung in [wirtschaft.md, Abschnitt 4.9](../docs/technik/wirtschaft.md#49-regelwerte-und-kalibrierung)).
+  Die Tabelle unten beschreibt noch den Stand aus M1; der Balancing-Bericht (M5, Schritt 4) ersetzt sie.
 - **Schatz** als Anteil einer Jahreshofhaltung nach Lage des Staates: Brandenburg klamm (0,2),
   Mecklenburg-Güstrow fast leer (0,15), Kursachsen wohlhabender (0,6), Sachsen-Gotha unter Ernst dem
   Frommen gut geordnet (0,9), Braunschweig-Wolfenbüttel sparsam verwaltet (0,5).
@@ -328,8 +335,9 @@ deshalb nur geringfügig ab (Bevölkerung 627.680 statt 627.721). Der erste M3-S
 ergab `5548a5fa80f75c0d` (627.709); mit Osterode am Harz in `goettingen` rückten die 38 Orte mit
 Daten in den Dateien `lausitz` bis `thueringen` um einen Index weiter. Seit M4 (Bevölkerungsmodell:
 Altersaufbau, Kultur, Lebensstandard, Wanderung) lautete sie `ed6b14a02cfbfa5d` (642.668 Menschen nach
-100 Jahren). Seit M5 (Wirtschaft mit Gütern, Märkten und Steuerarten) lautet sie `3ec46b832bdc0d57`, bei
-jeder Zahl von Threads; nach 100 Jahren leben in den 60 Orten 657.627 Menschen (×1,71).
+100 Jahren). Seit M5 (Wirtschaft mit Gütern, Märkten, Steuerarten und Staatshaushalt) lautet sie
+`4eaa36517208399c`, bei jeder Zahl von Threads; nach 100 Jahren leben in den 60 Orten 707.659
+Menschen (×1,84; der Landesausbau erhöht die Tragfähigkeit).
 Alle Angaben tragen seit M2 eine Sicherheit:
 Besitz, Herrscher, Hauptstadt und Konfession der Staaten `ungeprueft` (recherchiert, noch ohne
 Fachprüfung), Bevölkerung, Konfessionsanteile und Verwüstung `schaetzung`, Schatz, Steuersätze,

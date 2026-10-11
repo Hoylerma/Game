@@ -178,7 +178,7 @@ TEST_CASE("Lader: Staaten und Orte") {
     CHECK(bra.confession == w.find_confession("reformiert"));
     CHECK(bra.treasury == Fixed::from_int(20000));
     CHECK(bra.tax_rate(TaxKind::Kontribution) == fx("0.10"));
-    CHECK(bra.court_expenses == Fixed::from_int(30000));
+    CHECK(bra.court_expenses == Fixed::from_int(1500));
     CHECK(bra.last_month_income == Fixed::zero());
     CHECK(bra.last_month_expenses == Fixed::zero());
     CHECK(bra.source == "Testdaten, geschätzt");

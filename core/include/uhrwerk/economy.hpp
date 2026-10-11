@@ -79,7 +79,21 @@ Fixed food_coverage(const World& world, Index location, Index profession);
 /// Einschwingen beim Start (Abschnitt 4.8): months Monate nur Wirtschaft für alle Orte mit Daten.
 void settle_economy(World& world, const EconomyTopology& topology, int months);
 
-/// Staatsnachfrage eines Monats aus der Hofhaltung (bis Schritt 3 von M5 der einzige Posten).
+/// Staatsnachfrage eines Monats aus dem Haushalt des Vormonats (Abschnitt 4.6): Hof wie „oben“,
+/// Verwaltung und Bauten wie „mittel“, Heer wie „unten“, jeweils im Markt der Hauptstadt.
 std::vector<StateSpending> state_spending(const World& world);
+
+/// Zuschlag des Landesausbaus auf die Tragfähigkeit eines Ortes (0 … ausbau_max, Abschnitt 4.6).
+Fixed development_bonus(const World& world, Index location);
+
+/// Haushalt eines Staates an seinem Rechentag (Abschnitt 4.6): Einnahmen aus den zuletzt festgestellten
+/// Steuern seiner Orte (locations, aufsteigend), Ausgaben, Kredit, Tilgung, Bauten (Landesausbau der
+/// Orte), gleitende Jahreseinnahmen. Gibt true zurück, wenn der Staat dabei bankrott geht.
+bool run_state_budget(World& world, Index state, const std::vector<Index>& locations);
+
+/// Ausgaben jedes Staates aus seiner Bevölkerung schätzen (Hof, Verwaltung, Heer, Zinsen) und die
+/// Jahreseinnahmen aus den Steuern seiner Orte setzen, wo sie fehlen – für den Start, damit der Staat
+/// schon im ersten Monat einkauft (Einschwingen, Abschnitt 4.8).
+void estimate_budgets(World& world);
 
 } // namespace uhrwerk

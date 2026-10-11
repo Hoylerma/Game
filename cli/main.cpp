@@ -553,9 +553,11 @@ void print_report(const uhrwerk::Simulation& sim) {
     const World& w = sim.world();
     std::cout << "\nBericht zum " << uhrwerk::format_date_long(w.date) << " (Beträge in Reichstalern)\n";
     std::vector<std::vector<std::string>> rows;
-    rows.push_back({"Staat", "Bevölkerung", "Schatz", "Einnahmen/Monat", "Ausgaben/Monat", "Steuersatz"});
+    rows.push_back(
+        {"Staat", "Bevölkerung", "Schatz", "Schulden", "Einnahmen/Monat", "Ausgaben/Monat", "Kontribution"});
     Fixed population;
     Fixed treasury;
+    Fixed debt;
     Fixed income;
     Fixed expenses;
     for (std::size_t i = 0; i < w.states.size(); ++i) {
@@ -563,16 +565,17 @@ void print_report(const uhrwerk::Simulation& sim) {
         const Fixed pop = w.state_population(static_cast<Index>(i));
         population += pop;
         treasury += s.treasury;
+        debt += s.debt;
         income += s.last_month_income;
         expenses += s.last_month_expenses;
         rows.push_back({s.short_name + " (" + s.tag + ")", format_int(pop.round()),
-                        format_fixed(s.treasury, 2), format_fixed(s.last_month_income, 2),
-                        format_fixed(s.last_month_expenses, 2),
+                        format_fixed(s.treasury, 2), format_fixed(s.debt, 2),
+                        format_fixed(s.last_month_income, 2), format_fixed(s.last_month_expenses, 2),
                         format_percent(s.tax_rate(uhrwerk::TaxKind::Kontribution))});
     }
     rows.push_back({"Gesamt", format_int(population.round()), format_fixed(treasury, 2),
-                    format_fixed(income, 2), format_fixed(expenses, 2), ""});
-    print_table(rows, {false, true, true, true, true, true}, 1);
+                    format_fixed(debt, 2), format_fixed(income, 2), format_fixed(expenses, 2), ""});
+    print_table(rows, {false, true, true, true, true, true, true}, 1);
 }
 
 void print_chronicle(const World& w) {
@@ -776,24 +779,21 @@ int cmd_wirtschaft(const Options& o, const fs::path& data_dir) {
         std::cout << '\n';
     }
 
-    // Staaten: Steuern des letzten Rechentags je Art und Hofhaltung je Monat.
-    std::cout << "\nStaat                            Kontribution     Akzise       Zoll    Summe  Ausgaben   "
-                 "  Schatz\n";
-    for (std::size_t s = 0; s < w.states.size(); ++s) {
-        std::array<Fixed, uhrwerk::kTaxKinds> taxes{};
-        for (const Index li : w.state_locations(static_cast<Index>(s))) {
-            for (std::size_t t = 0; t < uhrwerk::kTaxKinds; ++t) {
-                taxes[t] += w.economy[static_cast<std::size_t>(li)].taxes[t];
-            }
-        }
-        const uhrwerk::State& state = w.states[s];
-        std::cout << pad_right(state.short_name + " (" + state.tag + ")", 30)
-                  << pad_left(format_fixed(taxes[0], 0), 15) << pad_left(format_fixed(taxes[1], 0), 11)
-                  << pad_left(format_fixed(taxes[2], 0), 11)
-                  << pad_left(format_fixed(taxes[0] + taxes[1] + taxes[2], 0), 9)
-                  << pad_left(format_fixed(state.court_expenses / Fixed::from_int(12), 0), 10)
-                  << pad_left(format_fixed(state.treasury, 0), 11) << '\n';
+    // Staaten: Haushalt des letzten Rechentags (vor dem ersten Rechentag: geschätzt) je Monat.
+    std::cout << '\n';
+    std::vector<std::vector<std::string>> rows;
+    rows.push_back({"Staat", "Kontribution", "Akzise", "Zoll", "Hof", "Verwaltung", "Heer", "Zinsen",
+                    "Bauten", "Saldo", "Schatz", "Schulden"});
+    for (const uhrwerk::State& state : w.states) {
+        const uhrwerk::StateBudget& b = state.budget;
+        rows.push_back({state.short_name + " (" + state.tag + ")", format_fixed(b.taxes[0], 0),
+                        format_fixed(b.taxes[1], 0), format_fixed(b.taxes[2], 0), format_fixed(b.court, 0),
+                        format_fixed(b.administration, 0), format_fixed(b.army, 0),
+                        format_fixed(b.interest, 0), format_fixed(b.building, 0),
+                        format_fixed(b.income() - b.expenses(), 0), format_fixed(state.treasury, 0),
+                        format_fixed(state.debt, 0)});
     }
+    print_table(rows, {false, true, true, true, true, true, true, true, true, true, true, true}, 0);
 
     if (o.markets) {
         std::cout << "\nPreise je Markt (Faktor auf den Basispreis; Erntefaktor in Klammern)\n";

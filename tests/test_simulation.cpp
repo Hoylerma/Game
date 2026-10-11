@@ -417,7 +417,7 @@ TEST_CASE("Simulation: Steuerbefehl") {
         CHECK(sim.world().states[0].tax_rate(TaxKind::Kontribution) == Fixed::from_ratio(1, 5));
         REQUIRE(sim.world().chronicle.size() == 1);
         const uhrwerk::ChronicleEntry& e = sim.world().chronicle[0];
-        CHECK(e.text == "Brandenburg legt den Steuersatz auf 20 % fest.");
+        CHECK(e.text == "Brandenburg legt die Kontribution auf 20 % fest.");
         CHECK(e.date == Date{1648, 10, 24});
         CHECK(e.state == 0);
         CHECK(e.location == kNone);
@@ -429,8 +429,8 @@ TEST_CASE("Simulation: Steuerbefehl") {
         CHECK(sim.world().states[1].tax_rate(TaxKind::Kontribution) == Fixed::zero());
         CHECK(sim.world().states[2].tax_rate(TaxKind::Kontribution) == fx("0.5"));
         REQUIRE(sim.world().chronicle.size() == 2);
-        CHECK(sim.world().chronicle[0].text == "Sachsen legt den Steuersatz auf 0 % fest.");
-        CHECK(sim.world().chronicle[1].text == "Anhalt legt den Steuersatz auf 50 % fest.");
+        CHECK(sim.world().chronicle[0].text == "Sachsen legt die Kontribution auf 0 % fest.");
+        CHECK(sim.world().chronicle[1].text == "Anhalt legt die Kontribution auf 50 % fest.");
     }
     SUBCASE("ungültig: wird verworfen und nicht vermerkt") {
         const std::uint64_t untouched_after_step = [] {
@@ -455,7 +455,7 @@ TEST_CASE("Simulation: Steuerbefehl") {
         sim.step_day();
         CHECK(sim.world().states[0].tax_rate(TaxKind::Kontribution) == Fixed::from_ratio(3, 10));
         REQUIRE(sim.world().chronicle.size() == 1);
-        CHECK(sim.world().chronicle[0].text == "Brandenburg legt den Steuersatz auf 30 % fest.");
+        CHECK(sim.world().chronicle[0].text == "Brandenburg legt die Kontribution auf 30 % fest.");
     }
     SUBCASE("unveränderter Steuersatz wird nicht vermerkt") {
         sim.submit(set_tax(0, original));
@@ -483,7 +483,7 @@ TEST_CASE("Wirtschaft: Ortsrechnung exakt gegen Handrechnung (wirtschaft.md 4.2�
     const uhrwerk::EconomyTopology topology = uhrwerk::build_economy_topology(w);
     uhrwerk::ensure_economy_state(w, topology);
     uhrwerk::LocationFactors f;
-    uhrwerk::compute_location_factors(w, w.locations[0], f);
+    uhrwerk::compute_location_factors(w, 0, f);
     CHECK(f.condition == fx("0.75"));
     CHECK(f.agrarian == Fixed::one());
     uhrwerk::EconomyScratch scratch;
@@ -533,7 +533,7 @@ TEST_CASE("Wirtschaft: Ortsrechnung exakt gegen Handrechnung (wirtschaft.md 4.2�
         city.states[0].tax_rates[1] = Fixed::from_ratio(1, 4);
         uhrwerk::ensure_economy_state(city, topology);
         uhrwerk::LocationFactors g;
-        uhrwerk::compute_location_factors(city, city.locations[0], g);
+        uhrwerk::compute_location_factors(city, 0, g);
         uhrwerk::run_location_economy(city, topology, 0, g, scratch);
         // Das Einkommen der Bauern kommt ganz aus dem Hof: Kontribution wie auf dem Land.
         CHECK(city.economy[0].taxes[0] == fx("184.5703125"));
@@ -552,7 +552,7 @@ TEST_CASE("Wirtschaft: Ortsrechnung exakt gegen Handrechnung (wirtschaft.md 4.2�
         free.locations[0].pop_count = 1;
         uhrwerk::ensure_economy_state(free, topology);
         uhrwerk::LocationFactors g;
-        uhrwerk::compute_location_factors(free, free.locations[0], g);
+        uhrwerk::compute_location_factors(free, 0, g);
         uhrwerk::run_location_economy(free, topology, 0, g, scratch);
         CHECK(free.location_income[0] == fx("0.8203125") * fx("0.75"));
     }
@@ -711,6 +711,182 @@ TEST_CASE("Simulation: Staatseinnahmen aus den Ortssteuern") {
     CHECK(sim.location_economy(1).total_taxes() == Fixed::zero());
 }
 
+namespace {
+
+/// Kleine Welt mit Haushaltsregeln (Werte wie data/common/regeln.chron) und einem zweiten Ort des
+/// Staates ohne Bevölkerung (für die Verteilung des Landesausbaus nach Fläche).
+World make_budget_world() {
+    World w = make_small_world();
+    uhrwerk::Rules& r = w.rules;
+    r.administration_per_capita = fx("0.2");
+    r.soldier_pay = Fixed::from_int(30);
+    r.reserve_years = Fixed::from_ratio(1, 2);
+    r.building_share = Fixed::from_ratio(1, 20);
+    r.development_max = fx("0.3");
+    r.development_half = Fixed::from_int(200);
+    r.interest_base = fx("0.05");
+    r.interest_risk = fx("0.02");
+    r.interest_max = fx("0.2");
+    r.bankruptcy_ratio = Fixed::from_int(4);
+    r.bankruptcy_haircut = Fixed::from_ratio(1, 2);
+    r.bankruptcy_premium = fx("0.04");
+    r.bankruptcy_years = 20;
+    w.states[0].army_per_mille = Fixed::from_int(10);
+    w.states[0].yearly_income = Fixed::from_int(4320);
+
+    uhrwerk::Location leer = w.locations[0];
+    leer.id = "leer";
+    leer.area_km2 = Fixed::from_int(300);
+    leer.first_pop = 2;
+    leer.pop_count = 0;
+    w.locations.push_back(leer);
+    w.economy.assign(w.locations.size(), {});
+    w.economy[0].taxes = {Fixed::from_int(300), Fixed::from_int(50), Fixed::from_int(10)};
+    w.location_development.assign(w.locations.size(), Fixed::zero());
+    return w;
+}
+
+} // namespace
+
+TEST_CASE("Simulation: Staatshaushalt exakt (Abschnitt 4.6)") {
+    World w = make_budget_world();
+    const std::vector<Index> locations{0, 1};
+    const Fixed twelve = Fixed::from_int(12);
+    const Fixed income = Fixed::from_int(360);
+    const Fixed people = w.location_population(0);
+    REQUIRE(people == Fixed::from_int(1300));
+    const Fixed court = Fixed::from_int(100); // 1.200 / 12
+    const Fixed admin = fx("0.2") * people / twelve;
+    const Fixed army = Fixed::from_int(10) * people / Fixed::from_int(1000) * Fixed::from_int(30) / twelve;
+    uhrwerk::State& s = w.states[0];
+
+    SUBCASE("Überschuss über der Rücklage: Bauten und Landesausbau nach Fläche") {
+        s.treasury = Fixed::from_int(5000);
+        CHECK_FALSE(uhrwerk::run_state_budget(w, 0, locations));
+        const uhrwerk::StateBudget& b = s.budget;
+        CHECK(b.taxes[0] == Fixed::from_int(300));
+        CHECK(b.taxes[1] == Fixed::from_int(50));
+        CHECK(b.taxes[2] == Fixed::from_int(10));
+        CHECK(b.court == court);
+        CHECK(b.administration == admin);
+        CHECK(b.army == army);
+        CHECK(b.interest == Fixed::zero());
+        const Fixed available = Fixed::from_int(5000) + income - court - admin - army;
+        const Fixed reserve = Fixed::from_ratio(1, 2) * (court + admin + army) * twelve;
+        const Fixed building = (available - reserve) * Fixed::from_ratio(1, 20);
+        CHECK(b.building == building);
+        CHECK(b.expenses() == court + admin + army + building);
+        CHECK(s.treasury == Fixed::from_int(5000) + (income - b.expenses()));
+        CHECK(s.debt == Fixed::zero());
+        CHECK(s.last_month_income == income);
+        CHECK(s.last_month_expenses == b.expenses());
+        CHECK(s.yearly_income == Fixed::from_int(4320)); // 12 × 360, unverändert
+        CHECK(s.interest_rate == fx("0.05"));
+
+        // Landesausbau: ein Viertel der Fläche, ein Viertel der Bauten.
+        const Fixed dev0 = building * Fixed::from_int(100) / Fixed::from_int(400);
+        const Fixed dev1 = building * Fixed::from_int(300) / Fixed::from_int(400);
+        CHECK(w.location_development[0] == dev0);
+        CHECK(w.location_development[1] == dev1);
+        const Fixed per_km2 = dev0 / Fixed::from_int(100);
+        CHECK(uhrwerk::development_bonus(w, 0) == fx("0.3") * per_km2 / (per_km2 + Fixed::from_int(200)));
+        CHECK(uhrwerk::development_bonus(w, 0) > Fixed::zero());
+
+        // Staatsnachfrage im Markt der Hauptstadt: Hof oben, Verwaltung und Bauten mittel, Heer unten.
+        const std::vector<uhrwerk::StateSpending> spending = uhrwerk::state_spending(w);
+        REQUIRE(spending.size() == 3);
+        CHECK(spending[0].market == 0);
+        CHECK(spending[0].stratum == uhrwerk::Stratum::Oben);
+        CHECK(spending[0].amount == court);
+        CHECK(spending[1].stratum == uhrwerk::Stratum::Mittel);
+        CHECK(spending[1].amount == admin + building);
+        CHECK(spending[2].stratum == uhrwerk::Stratum::Unten);
+        CHECK(spending[2].amount == army);
+    }
+
+    SUBCASE("Landesausbau sättigt bei ausbau_max") {
+        w.location_development[0] = Fixed::from_int(1'000'000);
+        CHECK(uhrwerk::development_bonus(w, 0) < fx("0.3"));
+        CHECK(uhrwerk::development_bonus(w, 0) > fx("0.29"));
+        CHECK(uhrwerk::development_bonus(w, 5) == Fixed::zero());
+    }
+
+    SUBCASE("Unter der Rücklage wird nicht gebaut") {
+        s.treasury = Fixed::from_int(200);
+        CHECK_FALSE(uhrwerk::run_state_budget(w, 0, locations));
+        CHECK(s.budget.building == Fixed::zero());
+        CHECK(s.treasury == Fixed::from_int(200) + income - court - admin - army);
+        CHECK(w.location_development[0] == Fixed::zero());
+    }
+
+    SUBCASE("Fehlbetrag wird geliehen") {
+        s.treasury = Fixed::from_int(50);
+        s.court_expenses = Fixed::from_int(12000); // 1.000 je Monat
+        CHECK_FALSE(uhrwerk::run_state_budget(w, 0, locations));
+        const Fixed expenses = Fixed::from_int(1000) + admin + army;
+        CHECK(s.budget.expenses() == expenses);
+        CHECK(s.budget.building == Fixed::zero());
+        CHECK(s.treasury == Fixed::zero());
+        CHECK(s.debt == expenses - income - Fixed::from_int(50));
+    }
+
+    SUBCASE("Überschuss tilgt zuerst die Schulden") {
+        s.treasury = Fixed::zero();
+        s.debt = Fixed::from_int(1000);
+        CHECK_FALSE(uhrwerk::run_state_budget(w, 0, locations));
+        const Fixed interest = Fixed::from_int(1000) * fx("0.05") / twelve; // Schulden unter J
+        CHECK(s.budget.interest == interest);
+        CHECK(s.budget.building == Fixed::zero()); // keine Bauten mit Schulden
+        CHECK(s.debt == Fixed::from_int(1000) - (income - court - admin - army - interest));
+        CHECK(s.treasury == Fixed::zero());
+
+        // Ist alles getilgt, bleibt der Rest im Schatz.
+        s.debt = Fixed::from_int(10);
+        CHECK_FALSE(uhrwerk::run_state_budget(w, 0, locations));
+        const Fixed interest2 = Fixed::from_int(10) * fx("0.05") / twelve;
+        CHECK(s.debt == Fixed::zero());
+        CHECK(s.treasury == income - court - admin - army - interest2 - Fixed::from_int(10));
+    }
+
+    SUBCASE("Risikoaufschlag, Staatsbankrott und Zinsaufschlag danach") {
+        s.treasury = Fixed::zero();
+        s.debt = Fixed::from_int(8000);
+        s.yearly_income = Fixed::from_int(1200);
+        CHECK(uhrwerk::run_state_budget(w, 0, locations));
+        const Fixed rate =
+            fx("0.05") + fx("0.02") * (Fixed::from_int(8000) / Fixed::from_int(1200) - Fixed::one());
+        CHECK(s.interest_rate == rate);
+        const Fixed interest = Fixed::from_int(8000) * rate / twelve;
+        CHECK(s.budget.interest == interest);
+        const Fixed yearly = Fixed::from_int(1200) + (income * twelve - Fixed::from_int(1200)) / twelve;
+        CHECK(s.yearly_income == yearly);
+        const Fixed debt = Fixed::from_int(8000) - (income - court - admin - army - interest);
+        REQUIRE(debt > Fixed::from_int(4) * yearly);
+        CHECK(s.debt == debt - debt * Fixed::from_ratio(1, 2));
+        CHECK(s.premium_months == 240);
+        CHECK(s.bankruptcies == 1);
+
+        // Im nächsten Monat: Zins mit Aufschlag, ein Monat weniger.
+        const Fixed debt_after = s.debt;
+        CHECK_FALSE(uhrwerk::run_state_budget(w, 0, locations));
+        const Fixed excess = debt_after / yearly - Fixed::one();
+        const Fixed expected = Fixed::min(
+            fx("0.05") + (excess > Fixed::zero() ? fx("0.02") * excess : Fixed::zero()) + fx("0.04"),
+            fx("0.2"));
+        CHECK(s.interest_rate == expected);
+        CHECK(s.premium_months == 239);
+        CHECK(s.bankruptcies == 1);
+    }
+
+    SUBCASE("Zins höchstens zins_max") {
+        s.debt = Fixed::from_int(60000); // 0,05 + 0,02 × (60.000 / 4.320 − 1) + 0,04 > 0,2
+        s.yearly_income = Fixed::from_int(4320);
+        s.premium_months = 5;
+        (void)uhrwerk::run_state_budget(w, 0, locations);
+        CHECK(s.interest_rate == fx("0.2"));
+    }
+}
+
 TEST_CASE("Simulation: Wirtschaft auf der Fixture") {
     Simulation sim(fixture_without_plague());
 
@@ -722,20 +898,32 @@ TEST_CASE("Simulation: Wirtschaft auf der Fixture") {
     CHECK(dresden.total_taxes() < Fixed::from_int(10000));
     CHECK(dresden.taxes[1] > Fixed::zero()); // Dresden ist eine Stadt: Akzise
 
-    // Staatseinnahmen = Summe der zuletzt festgestellten Ortssteuern (SAX rechnet am 2.).
+    // Haushalt (Abschnitt 4.6): Einnahmen = Summe der zuletzt festgestellten Ortssteuern, Ausgaben nach
+    // Hof, Verwaltung und Heer; Sachsen hat keine Schulden und baut (SAX rechnet am 2.).
     step_until(sim, Date{1648, 12, 2});
-    const World snapshot = sim.world();
-    const uhrwerk::State& sax = snapshot.states[1];
-    Fixed income;
-    for (const Index li : snapshot.state_locations(1)) {
-        income += snapshot.economy[static_cast<std::size_t>(li)].total_taxes();
-    }
-    const Fixed expenses = sax.court_expenses / Fixed::from_int(12);
+    const uhrwerk::State sax = sim.world().states[1];
     sim.step_day();
-    const uhrwerk::State& after = sim.world().states[1];
+    const World& w = sim.world();
+    Fixed income;
+    Fixed people;
+    for (const Index li : w.state_locations(1)) {
+        income += w.economy[static_cast<std::size_t>(li)].total_taxes();
+        people += w.location_population(li);
+    }
+    const Fixed twelve = Fixed::from_int(12);
+    const uhrwerk::State& after = w.states[1];
+    const uhrwerk::StateBudget& b = after.budget;
+    CHECK(sax.debt == Fixed::zero());
+    CHECK(b.income() == income);
+    CHECK(b.court == sax.court_expenses / twelve);
+    CHECK(b.administration == w.rules.administration_per_capita * people / twelve);
+    CHECK(b.army == sax.army_per_mille * people / Fixed::from_int(1000) * w.rules.soldier_pay / twelve);
+    CHECK(b.interest == Fixed::zero());
+    CHECK(b.building > Fixed::zero());
     CHECK(after.last_month_income == income);
-    CHECK(after.last_month_expenses == expenses);
-    CHECK(after.treasury == sax.treasury + (income - expenses));
+    CHECK(after.last_month_expenses == b.expenses());
+    CHECK(after.treasury == sax.treasury + (income - b.expenses()));
+    CHECK(after.debt == Fixed::zero());
 }
 
 TEST_CASE("Simulation: Bevölkerungsformeln exakt gegen Nachrechnung (Abschnitt 4.2–4.4)") {
@@ -788,7 +976,7 @@ TEST_CASE("Simulation: Bevölkerungsformeln exakt gegen Nachrechnung (Abschnitt 
     const uhrwerk::EconomyTopology topology = uhrwerk::build_economy_topology(economy);
     uhrwerk::update_markets(economy, topology, uhrwerk::state_spending(economy));
     uhrwerk::LocationFactors f;
-    uhrwerk::compute_location_factors(economy, economy.locations[0], f);
+    uhrwerk::compute_location_factors(economy, 0, f);
     uhrwerk::EconomyScratch scratch;
     uhrwerk::run_location_economy(economy, topology, 0, f, scratch);
     CHECK(f.population == Fixed::from_int(1000));

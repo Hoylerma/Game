@@ -26,7 +26,7 @@ staat SWE {
         kontribution   = 0.12
         akzise         = 0.04
         zoll           = 0.06
-        hofhaltung     = 59000
+        hofhaltung     = 10250
         heer           = 15
     }
 }

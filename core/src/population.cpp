@@ -20,8 +20,9 @@ bool same_key(const PopBlock& a, const PopBlock& b) {
 
 } // namespace
 
-void compute_location_factors(const World& world, const Location& location, LocationFactors& out) {
+void compute_location_factors(const World& world, Index location_index, LocationFactors& out) {
     const Rules& rules = world.rules;
+    const Location& location = world.locations[static_cast<std::size_t>(location_index)];
     Fixed n;
     for (Index p = location.first_pop; p < location.first_pop + location.pop_count; ++p) {
         n += world.pops[static_cast<std::size_t>(p)].size();
@@ -35,6 +36,7 @@ void compute_location_factors(const World& world, const Location& location, Loca
     if (location.is_city) {
         capacity = capacity * rules.capacity_city;
     }
+    capacity += capacity * development_bonus(world, location_index);
     out.capacity = capacity;
     out.reserve = capacity > Fixed::zero() && n < capacity ? Fixed::one() - n / capacity : Fixed::zero();
     out.condition = Fixed::one() - location.devastation * rules.devastation_yield_loss;
@@ -216,8 +218,10 @@ void initialize_population(World& world) {
     world.location_coverage.clear();
     world.market_states.clear();
     world.economy.clear();
+    world.location_development.clear();
     const EconomyTopology topology = build_economy_topology(world);
     ensure_economy_state(world, topology);
+    estimate_budgets(world); // Staatsnachfrage schon beim Einschwingen
     settle_economy(world, topology, world.rules.settling_months);
 
     const std::size_t count = world.locations.size();
@@ -230,7 +234,7 @@ void initialize_population(World& world) {
         for (const Index location : list) {
             const auto li = static_cast<std::size_t>(location);
             const Location& loc = world.locations[li];
-            compute_location_factors(world, loc, factors);
+            compute_location_factors(world, location, factors);
             run_location_economy(world, topology, location, factors, scratch);
             world.snapshots[li] = LocationSnapshot{factors.population, factors.reserve};
             std::copy(factors.target.begin(), factors.target.end(),
@@ -244,6 +248,7 @@ void initialize_population(World& world) {
             }
         }
     }
+    estimate_budgets(world); // jetzt mit den Steuern nach dem Einschwingen (Jahreseinnahmen)
 }
 
 } // namespace uhrwerk

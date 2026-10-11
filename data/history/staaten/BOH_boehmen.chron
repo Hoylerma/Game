@@ -26,7 +26,7 @@ staat BOH {
         kontribution   = 0.14
         akzise         = 0.06
         zoll           = 0.04
-        hofhaltung     = 102000
+        hofhaltung     = 20500
         heer           = 10
     }
 }

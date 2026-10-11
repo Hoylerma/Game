@@ -40,7 +40,7 @@ TEST_CASE("Bevölkerung: Kennzahlen eines Ortes (Abschnitt 4.1)") {
     // Potsdam: Land, Sandboden (Tragfähigkeit 20/km²), 120 km², 1500 Einwohner, Verwüstung 0,6.
     const uhrwerk::Location& potsdam = w.locations[1];
     REQUIRE(potsdam.id == "potsdam");
-    uhrwerk::compute_location_factors(w, potsdam, f);
+    uhrwerk::compute_location_factors(w, 1, f);
     CHECK(f.population == w.location_population(1));
     CHECK(f.capacity == potsdam.area_km2 * Fixed::from_int(20));
     CHECK(f.reserve == Fixed::one() - f.population / f.capacity);
@@ -51,7 +51,7 @@ TEST_CASE("Bevölkerung: Kennzahlen eines Ortes (Abschnitt 4.1)") {
         for (Index p = potsdam.first_pop; p < potsdam.first_pop + potsdam.pop_count; ++p) {
             w.pops[static_cast<std::size_t>(p)].working += Fixed::from_int(5000);
         }
-        uhrwerk::compute_location_factors(w, potsdam, f);
+        uhrwerk::compute_location_factors(w, 1, f);
         CHECK(f.population > f.capacity);
         CHECK(f.reserve == Fixed::zero());
         CHECK(f.agrarian == f.capacity / f.population);

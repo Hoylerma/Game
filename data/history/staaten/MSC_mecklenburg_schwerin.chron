@@ -25,7 +25,7 @@ staat MSC {
         kontribution   = 0.08
         akzise         = 0.04
         zoll           = 0.04
-        hofhaltung     = 15500
+        hofhaltung     = 5750
         heer           = 3
     }
 }

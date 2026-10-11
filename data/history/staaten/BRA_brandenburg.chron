@@ -28,7 +28,7 @@ staat BRA {
         kontribution   = 0.12
         akzise         = 0.04
         zoll           = 0.03
-        hofhaltung     = 116000
+        hofhaltung     = 25000
         heer           = 12
     }
 }

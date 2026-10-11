@@ -83,7 +83,7 @@ regeln {
     einschwingen_monate       = 60      # nur Wirtschaft vor dem Start (Preise, Betriebsanteile)
 
     # Staatshaushalt
-    verwaltung_je_einwohner   = 0.3     # Reichstaler je Einwohner und Jahr (Ämter, Justiz, Kirche)
+    verwaltung_je_einwohner   = 0.15    # Reichstaler je Einwohner und Jahr (Ämter, Justiz, Kirche)
     sold                      = 30      # Reichstaler je Soldat und Jahr (Sold, Brot, Montur)
     reserve_jahre             = 0.5     # Rücklage in Jahresausgaben; darüber wird gebaut
     bau_anteil                = 0.05    # Anteil des Überschusses über der Rücklage, der je Monat verbaut wird

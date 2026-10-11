@@ -11,7 +11,7 @@ staat BRA {
     kontribution   = 0.10
     akzise         = 0.05
     zoll           = 0.03
-    hofhaltung     = 30000
+    hofhaltung     = 1500
     heer           = 10
     quelle         = "Testdaten, geschätzt"
 }

@@ -178,6 +178,20 @@ struct District {
     std::string source;
 };
 
+/// Haushalt eines Staates in einem Monat, festgestellt an seinem Rechentag (seit M5,
+/// docs/technik/wirtschaft.md Abschnitt 4.6). Beträge in Reichstalern.
+struct StateBudget {
+    std::array<Fixed, kTaxKinds> taxes{}; // Einnahmen je TaxKind
+    Fixed court;                          // Hof
+    Fixed administration;                 // Verwaltung
+    Fixed army;                           // Heer
+    Fixed interest;                       // Zinsen
+    Fixed building;                       // Bauten (Landesausbau)
+
+    Fixed income() const { return taxes[0] + taxes[1] + taxes[2]; }
+    Fixed expenses() const { return court + administration + army + interest + building; }
+};
+
 /// Staat bzw. Reichsstand (data/history/staaten/*.chron).
 struct State {
     std::string tag; // z. B. "BRA"
@@ -196,6 +210,13 @@ struct State {
     Fixed last_month_income;
     Fixed last_month_expenses;
     std::string source;
+
+    // Haushalt (seit M5, wirtschaft.md Abschnitt 4.6)
+    StateBudget budget;              // Vormonat (am letzten Rechentag)
+    Fixed yearly_income;             // gleitende Jahreseinnahmen
+    Fixed interest_rate;             // Zins des Vormonats (Anzeige)
+    std::int32_t premium_months = 0; // Monate mit Zinsaufschlag nach einem Staatsbankrott
+    std::int32_t bankruptcies = 0;   // Zahl der Staatsbankrotte in dieser Partie
 
     Fixed tax_rate(TaxKind kind) const { return tax_rates[static_cast<std::size_t>(kind)]; }
 };
@@ -363,7 +384,8 @@ struct World {
     std::vector<Fixed> location_income; // Netto-Einkommen je Kopf und Monat: [ort × berufe + beruf]
     std::vector<Fixed>
         location_coverage; // Bedarfsdeckung 0..1: [(ort × berufe + beruf) × bedürfnisse + bedürfnis]
-    std::vector<MarketState> market_states; // parallel zu markets
+    std::vector<Fixed> location_development; // Landesausbau: verbaute Reichstaler je Ort (Abschnitt 4.6)
+    std::vector<MarketState> market_states;  // parallel zu markets
 
     Index find_state(std::string_view tag) const;
     Index find_location(std::string_view id) const;

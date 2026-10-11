@@ -1,12 +1,12 @@
 # Wirtschaft und Staatshaushalt (Meilenstein M5)
 
 > **Status: verbindlich** für Kern (`core/src/economy.cpp`), Daten und Tests, soweit umgesetzt: Datenmodell
-> (Abschnitt 2), Märkte, Ortsrechnung, Ernte und Einschwingen (Abschnitte 4.1–4.5, 4.7, 4.8). Der
-> Staatshaushalt (4.6) und der Balancing-Bericht (7) folgen in den Schritten 3 und 4 von M5
+> (Abschnitt 2), Märkte, Ortsrechnung, Staatshaushalt, Ernte und Einschwingen (Abschnitte 4.1–4.8).
+> Der Balancing-Bericht (7) folgt in Schritt 4 von M5
 > ([meilensteine.md](../meilensteine.md#m5--wirtschaft-und-staatshaushalt)). Das Dokument entstand als
 > Entwurf und wurde vor der Umsetzung freigegeben; Abweichungen der Umsetzung sind eingearbeitet
-> (u. a. Handel bis zur ganzen Menge, Überschuss nicht in Grundnahrung, Hunger quadratisch, Kalibrierung
-> in 4.9).
+> (u. a. Handel bis zur ganzen Menge, Überschuss nicht in Grundnahrung, Hunger quadratisch, Bauten nur
+> ohne Schulden, Kalibrierung in 4.9).
 
 Das Design dahinter steht in [08 Wirtschaft und Finanzen](../08_wirtschaft_und_finanzen.md)
 (Güter, Märkte, Staatsfinanzen) und [07 Bevölkerung und Gesellschaft](../07_bevoelkerung_und_gesellschaft.md),
@@ -354,14 +354,21 @@ Zoll). Gleitende Jahreseinnahmen: `J ← J + (12 × einnahmen − J) / 12`.
 | Verwaltung | `verwaltung_je_einwohner × Einwohner / 12` |
 | Heer | `heer / 1000 × Einwohner × sold / 12` (Soldaten zählen nur als Kosten; das Heer kommt mit M10) |
 | Zinsen | `schulden × zins / 12`, `zins = min(zins_max, zins_basis + zins_risiko × max(0, schulden / J − 1) + aufschlag)` |
-| Bauten | wenn `schatz > reserve`: `(schatz − reserve) × bau_anteil` (0,05 je Monat); `reserve = reserve_jahre × (Hof + Verwaltung + Heer) × 12` |
+| Bauten | nur ohne Schulden, wenn `verfügbar > reserve`: `(verfügbar − reserve) × bau_anteil` (0,05 je Monat); `verfügbar = schatz + einnahmen − Hof − Verwaltung − Heer − Zinsen`, `reserve = reserve_jahre × (Hof + Verwaltung + Heer) × 12` |
+
+Einwohner sind die Menschen in den Orten des Staates am Rechentag (Blöcke und Zugänge). Die Posten
+eines Monats stehen im Haushalt des Staates (`StateBudget`: Steuern je Art, Hof, Verwaltung, Heer,
+Zinsen, Bauten) und gehen in die Prüfsumme ein.
 
 **Kredit:** Reicht der Schatz nicht, leiht der Staat den Fehlbetrag (`schulden += fehlbetrag`, Schatz
-0). Überschüsse tilgen zuerst die Schulden, dann füllen sie den Schatz.
+0). Überschüsse tilgen zuerst die Schulden, dann füllen sie den Schatz. Solange Schulden bestehen,
+wird nicht gebaut.
 
 **Staatsbankrott:** Überschreiten die Schulden `bankrott_quote × J` (4 Jahreseinnahmen), werden sie
 um `bankrott_schnitt` (50 %) gekürzt; der Zins steigt `bankrott_jahre` (20) lang um
-`bankrott_aufschlag` (0,04). Eintrag in der Chronik.
+`bankrott_aufschlag` (0,04). Eintrag in der Chronik („Sachsen-Weimar erklärt den Staatsbankrott: Die
+Gläubiger verlieren 50 % ihrer Forderungen.“). Geprüft wird nach der Buchung des Monats; die
+Jahreseinnahmen sind dabei schon fortgeschrieben.
 
 **Landesausbau:** Die Bauten verbessern die Orte des Staates (nach Fläche verteilt):
 `ausbau_o += bauten × fläche_o / Σ fläche`; die Tragfähigkeit steigt um
@@ -369,8 +376,10 @@ um `bankrott_schnitt` (50 %) gekürzt; der Zins steigt `bankrott_jahre` (20) lan
 höchstens `ausbau_max` = 30 %). Vorbild: Meliorationen und Kolonisten der Peuplierungspolitik.
 
 **Staatsnachfrage:** Hof, Verwaltung und Heer kaufen mit ihrem Betrag nach den Warenkörben „oben“,
-„mittel“ und „unten“, die Bauten Holz und Waren (je zur Hälfte), alles im Markt der Hauptstadt.
-Steuern fließen so in die Wirtschaft zurück; ohne diesen Kreislauf fielen alle Preise.
+„mittel“ und „unten“, die Bauten wie die Verwaltung (Korb „mittel“; im Entwurf Holz und Waren je zur
+Hälfte – ein eigener Korb lohnt erst mit Baustoffen), alles im Markt der Hauptstadt und mit dem
+Haushalt des Vormonats (`state_spending`, am Monatsersten vor den Preisen). Steuern fließen so in die
+Wirtschaft zurück; ohne diesen Kreislauf fielen alle Preise.
 
 Staaten ohne Spieler ändern ihre Steuersätze in M5 nicht. Der Spieler stellt die drei Sätze ein
 (Befehl `SetTaxRate` mit Steuerart); Heer und Bauten folgen den Regeln.
@@ -388,7 +397,8 @@ Markt. Der Faktor wirkt auf alle Agrarbetriebe des Marktes (Abschnitt 4.2).
 Betriebsanteile aus den Gewichten passen nicht genau zur Nachfrage. Damit das Spiel nicht mit
 einem Preissprung beginnt, rechnet der Lader beim Start (`initialize_population`) `einschwingen_monate`
 (60) Monate **nur Wirtschaft** für alle Orte mit Daten: Märkte, Erzeugung, Verbrauch, Betriebsanteile –
-ohne Bevölkerung, ohne Staatshaushalt (die Hofhaltung kauft trotzdem ein), mit Erntefaktor 1. Danach
+ohne Bevölkerung, ohne Buchung im Staatshaushalt, mit Erntefaktor 1. Die Staaten kaufen dabei mit
+geschätzten Ausgaben ein (`estimate_budgets`: Hof, Verwaltung und Heer aus der Bevölkerung). Danach
 werden Lebensstandard und Alphabetisierung der Blöcke wie in M4 auf ihre Zielwerte gesetzt und die
 Momentaufnahmen veröffentlicht. Das ist deterministisch und Teil des Startzustands. Für die 60 Orte
 dauert es wenige Millisekunden, für die Lasttest-Welt (4.542 Orte) etwa 1 s. Eine von Hand gebaute
@@ -410,16 +420,16 @@ Neue Pflichtfelder in `regeln.chron` (vorläufige Werte):
 | `ernte_schwankung_land`, `ernte_schwankung_markt` | 0,08, 0,10 | Erntefaktor |
 | `sterblichkeit_hunger` | 1,5 | Zuschlag auf die Sterblichkeit bei fehlender Grundnahrung |
 | `einschwingen_monate` | 60 | Abschnitt 4.8 |
-| `verwaltung_je_einwohner`, `sold` | 0,3, 30 | Reichstaler je Einwohner bzw. Soldat und Jahr |
+| `verwaltung_je_einwohner`, `sold` | 0,15, 30 | Reichstaler je Einwohner bzw. Soldat und Jahr |
 | `reserve_jahre`, `bau_anteil` | 0,5, 0,05 | Rücklage; Anteil des Überschusses, der monatlich verbaut wird |
 | `ausbau_max`, `ausbau_halb` | 0,3, 200 | Landesausbau |
 | `zins_basis`, `zins_risiko`, `zins_max` | 0,05, 0,02, 0,2 | Zins |
 | `bankrott_quote`, `bankrott_schnitt`, `bankrott_aufschlag`, `bankrott_jahre` | 4, 0,5, 0,04, 20 | Staatsbankrott |
 | `steuersatz_max` | 0,5 | gilt für alle drei Steuerarten |
 
-**Kalibrierung** (Schritte 2 und 4), mit den 60 Orten der Testregion und dem Prüfbefehl
+**Kalibrierung** (Schritte 2 bis 4), mit den 60 Orten der Testregion und dem Prüfbefehl
 `uhrwerk-cli wirtschaft` (Angebot und Nachfrage je Gut, Einkommen, Lebensstandard und Bedarfsdeckung
-je Beruf, Steuern je Staat; mit `--jahre N` nach N Jahren, mit `--maerkte` Preise je Markt):
+je Beruf, Haushalt je Staat; mit `--jahre N` nach N Jahren, mit `--maerkte` Preise je Markt):
 
 1. **Gleichgewicht nach dem Einschwingen:** Nachfrage ÷ Angebot je heimischem Gut 0,7–1,4. Erreicht
    mit drei Eingriffen: Die Berufsanteile der Orte mit Stadtrecht (Stadt mit Amt) aus M1 waren für einen
@@ -435,10 +445,20 @@ je Beruf, Steuern je Staat; mit `--jahre N` nach N Jahren, mit `--maerkte` Preis
    Sterbefälle 32–33 ‰ ([bevoelkerung.md, Abschnitt 4.9](bevoelkerung.md#49-regelwerte-startwerte-und-kalibrierung)).
    Nach 50 Jahren liegen die Preise je Markt bei 0,6–1,4 des Basispreises, Salz im Binnenland bei bis zu
    2,7, Kolonialwaren je nach Entfernung zum Hafen bei 1,9–3,7.
-3. **Staatshaushalt:** Steuersätze und Heer so, dass die Einnahmen des ersten Jahres etwa denen aus
-   M4 entsprechen und Hof + Verwaltung + Heer sie um 0–20 % übersteigen (Nachkriegsdefizit wie in
-   M1, Abschnitt „Wirtschaftswerte“ in [data/README.md](../../data/README.md#wirtschaftswerte)).
-4. **Langlauf:** Zielwerte des Balancing-Berichts (Abschnitt 7) über 100 Jahre und viele Seeds.
+4. **Staatshaushalt** (erster Durchgang in Schritt 3): Die Steuern nach dem Einschwingen liegen bei
+   etwa 0,8 Reichstalern je Einwohner und Jahr, rund 60 % der Einnahmen aus M4 – die Steuer trifft
+   jetzt die Wertschöpfung nach Handelsspanne und Agrarabgabe, nicht mehr den festen Ertrag. Die
+   Steuersätze bleiben wie in M4; stattdessen sind die Ausgaben neu bemessen: `verwaltung_je_einwohner`
+   0,15 statt 0,3 (Ämter waren billig; Hof und Heer trugen die Last) und die **Hofhaltung** je Staat
+   so, dass Hof + Verwaltung + Heer die monatlichen Steuern nach dem Einschwingen um etwa 10 % übersteigen
+   (Nachkriegsdefizit wie in M1, Abschnitt „Wirtschaftswerte“ in
+   [data/README.md](../../data/README.md#wirtschaftswerte)); drei Durchgänge, weil die geringere
+   Staatsnachfrage die Preise und damit die Steuern senkt. Ergebnis mit Seed 1648: kein Staatsbankrott
+   in 100 Jahren; die Staaten zehren in den ersten Jahren vom Schatz, Sachsen-Weimar leiht kurz; nach
+   100 Jahren hält jeder Staat ohne Schulden etwa eine Jahreseinnahme im Schatz, der Rest geht in den
+   Landesausbau. Bevölkerung 1648 → 1700 ×1,34, nach 100 Jahren ×1,84 (Landesausbau erhöht die
+   Tragfähigkeit).
+5. **Langlauf:** Zielwerte des Balancing-Berichts (Abschnitt 7) über 100 Jahre und viele Seeds.
 
 ## 5. Mehrkernberechnung und Determinismus
 

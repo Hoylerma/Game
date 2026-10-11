@@ -25,7 +25,7 @@ staat MGU {
         kontribution   = 0.08
         akzise         = 0.04
         zoll           = 0.03
-        hofhaltung     = 6250
+        hofhaltung     = 2250
         heer           = 3
     }
 }

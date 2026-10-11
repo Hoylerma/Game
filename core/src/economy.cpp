@@ -194,6 +194,9 @@ void ensure_economy_state(World& world, const EconomyTopology& topology) {
     if (world.location_coverage.size() != locations * professions * needs) {
         world.location_coverage.assign(locations * professions * needs, Fixed::one());
     }
+    if (world.location_development.size() != locations) {
+        world.location_development.assign(locations, Fixed{});
+    }
 
     // Betriebsanteile aus den Gewichten (Abschnitt 4.8): je Beruf über die im Ort erlaubten Betriebe.
     if (world.business_shares.size() != locations * businesses) {
@@ -249,15 +252,172 @@ void ensure_economy_state(World& world, const EconomyTopology& topology) {
 
 std::vector<StateSpending> state_spending(const World& world) {
     std::vector<StateSpending> result;
-    const Fixed twelve = Fixed::from_int(12);
     for (const State& state : world.states) {
         if (!in_range(world.locations, state.capital)) {
             continue;
         }
         const Index market = world.locations[at(state.capital)].market;
-        result.push_back(StateSpending{market, Stratum::Oben, state.court_expenses / twelve});
+        const StateBudget& b = state.budget;
+        result.push_back(StateSpending{market, Stratum::Oben, b.court});
+        result.push_back(StateSpending{market, Stratum::Mittel, b.administration + b.building});
+        result.push_back(StateSpending{market, Stratum::Unten, b.army});
     }
     return result;
+}
+
+Fixed development_bonus(const World& world, Index location) {
+    if (!in_range(world.location_development, location) || !in_range(world.locations, location)) {
+        return Fixed::zero();
+    }
+    const Location& loc = world.locations[at(location)];
+    const Fixed invested = world.location_development[at(location)];
+    if (invested <= Fixed::zero() || loc.area_km2 <= Fixed::zero()) {
+        return Fixed::zero();
+    }
+    const Rules& rules = world.rules;
+    const Fixed per_km2 = invested / loc.area_km2;
+    return rules.development_max * per_km2 / (per_km2 + rules.development_half);
+}
+
+namespace {
+
+/// Bevölkerung eines Staates: Summe seiner Orte (Blöcke und Zugänge).
+Fixed population_of(const World& world, const std::vector<Index>& locations) {
+    Fixed people;
+    for (const Index li : locations) {
+        people += world.location_population(li);
+    }
+    return people;
+}
+
+/// Feste Ausgaben eines Monats nach Bevölkerung (Hof, Verwaltung, Heer).
+void base_expenses(const World& world, const State& state, Fixed people, StateBudget& budget) {
+    const Rules& rules = world.rules;
+    const Fixed twelve = Fixed::from_int(12);
+    budget.court = state.court_expenses / twelve;
+    budget.administration = rules.administration_per_capita * people / twelve;
+    budget.army = state.army_per_mille * people / Fixed::from_int(1000) * rules.soldier_pay / twelve;
+}
+
+/// Zins für die Schulden eines Staates (Abschnitt 4.6).
+Fixed interest_rate_of(const World& world, const State& state) {
+    const Rules& rules = world.rules;
+    Fixed rate = rules.interest_base;
+    if (state.debt > Fixed::zero()) {
+        if (state.yearly_income <= Fixed::zero()) {
+            return rules.interest_max;
+        }
+        const Fixed excess = state.debt / state.yearly_income - Fixed::one();
+        if (excess > Fixed::zero()) {
+            rate += rules.interest_risk * excess;
+        }
+    }
+    if (state.premium_months > 0) {
+        rate += rules.bankruptcy_premium;
+    }
+    return Fixed::min(rate, rules.interest_max);
+}
+
+std::vector<Index> locations_of(const World& world, Index state) {
+    std::vector<Index> result;
+    for (std::size_t i = 0; i < world.locations.size(); ++i) {
+        if (world.locations[i].owner == state && world.locations[i].pop_count > 0) {
+            result.push_back(static_cast<Index>(i));
+        }
+    }
+    return result;
+}
+
+} // namespace
+
+bool run_state_budget(World& world, Index state_index, const std::vector<Index>& locations) {
+    const Rules& rules = world.rules;
+    State& state = world.states[at(state_index)];
+    const Fixed twelve = Fixed::from_int(12);
+    StateBudget budget;
+    for (const Index li : locations) {
+        const LocationEconomy& e = world.economy[at(li)];
+        for (std::size_t t = 0; t < kTaxKinds; ++t) {
+            budget.taxes[t] += e.taxes[t];
+        }
+    }
+    base_expenses(world, state, population_of(world, locations), budget);
+    state.interest_rate = interest_rate_of(world, state);
+    budget.interest = state.debt * state.interest_rate / twelve;
+
+    // Bauten: Überschuss über der Rücklage, nur ohne Schulden.
+    const Fixed income = budget.income();
+    const Fixed available =
+        state.treasury + income - budget.court - budget.administration - budget.army - budget.interest;
+    const Fixed reserve = rules.reserve_years * (budget.court + budget.administration + budget.army) * twelve;
+    if (state.debt <= Fixed::zero() && available > reserve) {
+        budget.building = (available - reserve) * rules.building_share;
+    }
+
+    // Kasse, Kredit und Tilgung.
+    state.treasury += income - budget.expenses();
+    if (state.treasury < Fixed::zero()) {
+        state.debt -= state.treasury;
+        state.treasury = Fixed::zero();
+    } else if (state.debt > Fixed::zero()) {
+        const Fixed repay = Fixed::min(state.debt, state.treasury);
+        state.debt -= repay;
+        state.treasury -= repay;
+    }
+
+    // Landesausbau: die Bauten verteilen sich nach Fläche auf die Orte des Staates.
+    if (budget.building > Fixed::zero()) {
+        Fixed area;
+        for (const Index li : locations) {
+            area += world.locations[at(li)].area_km2;
+        }
+        if (area > Fixed::zero() && world.location_development.size() == world.locations.size()) {
+            for (const Index li : locations) {
+                world.location_development[at(li)] +=
+                    budget.building * world.locations[at(li)].area_km2 / area;
+            }
+        }
+    }
+
+    state.yearly_income += (income * twelve - state.yearly_income) / twelve;
+    state.budget = budget;
+    state.last_month_income = income;
+    state.last_month_expenses = budget.expenses();
+    if (state.premium_months > 0) {
+        --state.premium_months;
+    }
+
+    // Staatsbankrott: Schulden über bankrott_quote Jahreseinnahmen.
+    if (state.yearly_income > Fixed::zero() && state.debt > rules.bankruptcy_ratio * state.yearly_income) {
+        state.debt -= state.debt * rules.bankruptcy_haircut;
+        state.premium_months = rules.bankruptcy_years * 12;
+        ++state.bankruptcies;
+        return true;
+    }
+    return false;
+}
+
+void estimate_budgets(World& world) {
+    const Fixed twelve = Fixed::from_int(12);
+    for (std::size_t s = 0; s < world.states.size(); ++s) {
+        State& state = world.states[s];
+        const std::vector<Index> locations = locations_of(world, static_cast<Index>(s));
+        StateBudget budget;
+        for (const Index li : locations) {
+            if (at(li) < world.economy.size()) {
+                for (std::size_t t = 0; t < kTaxKinds; ++t) {
+                    budget.taxes[t] += world.economy[at(li)].taxes[t];
+                }
+            }
+        }
+        base_expenses(world, state, population_of(world, locations), budget);
+        state.interest_rate = interest_rate_of(world, state);
+        budget.interest = state.debt * state.interest_rate / twelve;
+        state.budget = budget;
+        if (state.yearly_income <= Fixed::zero()) {
+            state.yearly_income = budget.income() * twelve;
+        }
+    }
 }
 
 void update_markets(World& world, const EconomyTopology& topology,
@@ -695,7 +855,7 @@ void settle_economy(World& world, const EconomyTopology& topology, int months) {
         update_markets(world, topology, spending);
         for (const std::vector<Index>& list : topology.market_locations) {
             for (const Index o : list) {
-                compute_location_factors(world, world.locations[at(o)], factors);
+                compute_location_factors(world, o, factors);
                 run_location_economy(world, topology, o, factors, scratch);
             }
         }

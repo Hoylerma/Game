@@ -11,7 +11,7 @@ ist (Stand: Meilenstein M3, Karte des Kernraums).
 | [tabellen.md](tabellen.md) | Tabellen der Datenpipeline (`data/tabellen/*.csv`), Sicherheit der Angaben, Prüfungen des Archivars | Archivar, `data/` |
 | [bridge-api.md](bridge-api.md) | GDScript-Schnittstelle der GDExtension (`UhrwerkSimulation`), Kartenmodi, Bibliotheksnamen | Brücke, Godot-Projekt |
 | [bevoelkerung.md](bevoelkerung.md) | Bevölkerungsmodell seit M4 (Altersaufbau, Lebensstandard, Bildung, Kultur, Wanderung), Formeln, Mehrkernberechnung, Lasttest, Abnahme mit Messwerten | Kern, `data/`, Archivar |
-| [wirtschaft.md](wirtschaft.md) | **Entwurf M5:** Güter, Betriebe, Märkte und Handel, Verbrauch nach Warenkorb, Steuerarten, Staatshaushalt mit Kredit und Bankrott, Balancing-Bericht, Abnahme | Kern, `data/`, Archivar (nach Freigabe) |
+| [wirtschaft.md](wirtschaft.md) | **M5 (verbindlich, soweit umgesetzt):** Güter, Betriebe, Märkte und Handel, Verbrauch nach Warenkorb, Steuerarten, Staatshaushalt mit Kredit und Bankrott, Balancing-Bericht, Abnahme | Kern, `data/`, Archivar |
 
 Die öffentlichen Header in [`core/include/uhrwerk/`](../../core/include/uhrwerk/) sind die
 verbindliche Programmierschnittstelle des Kerns. Jede Datei beginnt mit einem Kommentar, der ihre
@@ -73,7 +73,7 @@ werden. Damit gelangt nie eine Gleitkommazahl in den Zustand des Kerns.
 | [`loader.hpp`](../../core/include/uhrwerk/loader.hpp) | `load_world()`: Datenordner → `World`, fatale Fehler und Warnungen |
 | [`world.hpp`](../../core/include/uhrwerk/world.hpp) | Weltmodell: flache Vektoren, Querverweise als Indizes |
 | [`simulation.hpp`](../../core/include/uhrwerk/simulation.hpp) | `Simulation`: Tick-Planer, Systeme, Befehle, Prüfsumme |
-| [`economy.hpp`](../../core/include/uhrwerk/economy.hpp) | Wirtschaft: Märkte, Handel, Ortsrechnung (Erzeugung, Einkommen, Verbrauch, Steuern), Ernte, Einschwingen (seit M5) |
+| [`economy.hpp`](../../core/include/uhrwerk/economy.hpp) | Wirtschaft: Märkte, Handel, Ortsrechnung (Erzeugung, Einkommen, Verbrauch, Steuern), Staatshaushalt (Kredit, Bankrott, Landesausbau), Ernte, Einschwingen (seit M5) |
 | [`population.hpp`](../../core/include/uhrwerk/population.hpp) | Bausteine des Bevölkerungsmodells: Kennzahlen je Ort, Bildungsziel, Zusammenlegen und Neuordnung der Blöcke, Startwerte (seit M4) |
 | [`parallel.hpp`](../../core/include/uhrwerk/parallel.hpp) | Thread-Pool `ThreadPool` für die Mehrkernberechnung (seit M4) |
 | [`lasttest.hpp`](../../core/include/uhrwerk/lasttest.hpp) | `make_load_test_world()`: Lasttest-Welt mit Daten für jeden Ort (seit M4) |
@@ -118,7 +118,7 @@ Reihenfolge ab:
 | 3 | **Neuordnung** der Blöcke: Zugänge werden Blöcke, zu kleine Blöcke aufgelöst, nur wenn nötig (seit M4); dann die **Märkte**: Summen aus den Orten, Handel, Preise (seit M5) | am Monatsersten |
 | 4 | **Wirtschaft und Bevölkerung** eines Ortes: Erzeugung, Einkommen, Verbrauch, Steuern (seit M5), dann Lebensstandard, Geburten, Sterbefälle, Altern, Bildung, Wanderung – **parallel** über die Orte des Tages (seit M4) | Ort *i* am Monatstag `(i % 28) + 1` |
 | 5 | **Zusammenführen**: Momentaufnahmen veröffentlichen, Wanderung je Zielort buchen (parallel über Zielorte) | nach Schritt 4 |
-| 6 | **Wirtschaft** eines Staates: Summe der Ortssteuern, Hofhaltung, Staatskasse | Staat *j* am Monatstag `(j % 28) + 1` |
+| 6 | **Haushalt** eines Staates: Summe der Ortssteuern je Art, Hof, Verwaltung, Heer, Zinsen, Bauten (Landesausbau), Kredit und Tilgung, Staatsbankrott | Staat *j* am Monatstag `(j % 28) + 1` |
 | 7 | **Jahreswechsel**: Seuchen (Zufallsstrom `Ereignisse`), Abbau der Verwüstung, Orte aufsteigend | am 1. Januar |
 | 8 | Datum um einen Tag weiterschalten | jeden Tag |
 
@@ -182,7 +182,7 @@ nicht zur Prüfsumme: Neue oder anders gebildete Kreise in den Daten ändern die
 nicht. Orte ohne Daten gehen über Besitzer (`kNone`) und Blockzahl (0) ein. Kommen Orte hinzu,
 ändert sich die Referenz trotzdem, weil sich die Zahl der Orte und die Rechentage nachfolgender
 Orte verschieben. Referenz nach 100 Jahren mit `data/` (Seed 1648, jede Thread-Zahl): seit M5
-`3ec46b832bdc0d57` (Wirtschaft mit Märkten, Schritt 2), in M4 `ed6b14a02cfbfa5d` (Bevölkerungsmodell), in M3 `40de8c42e8f7a0ff` (erster M3-Stand mit 4.541 Orten
+`4eaa36517208399c` (Wirtschaft mit Märkten und Staatshaushalt, Schritt 3), in M4 `ed6b14a02cfbfa5d` (Bevölkerungsmodell), in M3 `40de8c42e8f7a0ff` (erster M3-Stand mit 4.541 Orten
 `5548a5fa80f75c0d`), vorher `8d44cf792e143bb0` (Begründung in
 [data/README.md](../../data/README.md#prüfung)).
 

@@ -25,7 +25,7 @@ staat MAG {
         kontribution   = 0.10
         akzise         = 0.04
         zoll           = 0.03
-        hofhaltung     = 23000
+        hofhaltung     = 7000
         heer           = 4
     }
 }

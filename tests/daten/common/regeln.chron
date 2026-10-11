@@ -52,7 +52,7 @@ regeln {
     ernte_schwankung_markt    = 0.10
     sterblichkeit_hunger      = 1.5
     einschwingen_monate       = 60
-    verwaltung_je_einwohner   = 0.3
+    verwaltung_je_einwohner   = 0.15
     sold                      = 30
     reserve_jahre             = 0.5
     bau_anteil                = 0.05

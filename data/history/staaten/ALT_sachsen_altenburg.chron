@@ -25,7 +25,7 @@ staat ALT {
         kontribution   = 0.10
         akzise         = 0.04
         zoll           = 0.03
-        hofhaltung     = 12500
+        hofhaltung     = 4500
         heer           = 4
     }
 }
