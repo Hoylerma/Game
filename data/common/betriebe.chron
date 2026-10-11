@@ -26,7 +26,7 @@
 betrieb bauernhof {
     name     = "Bauernhof"        # Hufner und Vollbauern, Dreifelderwirtschaft
     beruf    = bauern
-    erzeugt  = { getreide = 10 vieh = 0.625 faser = 0.35 holz = 0.4 }
+    erzeugt  = { getreide = 12 vieh = 0.8 faser = 0.5 holz = 0.4 }
     agrar    = ja
     gewicht  = 1
 }
@@ -54,7 +54,7 @@ betrieb weinberg {
 betrieb gutsarbeit {
     name     = "Gutsarbeit"       # Kossäten, Häusler und Gesinde auf Rittergütern und Höfen
     beruf    = landarme
-    erzeugt  = { getreide = 6 vieh = 0.2 }
+    erzeugt  = { getreide = 7.5 vieh = 0.25 }
     agrar    = ja
     gewicht  = 1
 }
@@ -83,7 +83,7 @@ betrieb heimweberei {
 betrieb weberei {
     name       = "Weberei"        # Leinen- und Wollweber, Tuchmacher der Zünfte
     beruf      = handwerker
-    erzeugt    = { tuch = 3.2 }
+    erzeugt    = { tuch = 2.8 }
     verbraucht = { faser = 2 }
     agrar      = nein
     gewicht    = 1
@@ -92,10 +92,10 @@ betrieb weberei {
 betrieb werkstatt {
     name       = "Werkstatt"      # Schmiede, Tischler, Böttcher, Töpfer
     beruf      = handwerker
-    erzeugt    = { waren = 5 }
+    erzeugt    = { waren = 4 }
     verbraucht = { holz = 1 }
     agrar      = nein
-    gewicht    = 1.2
+    gewicht    = 0.8
 }
 
 betrieb saline {

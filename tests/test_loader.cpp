@@ -132,7 +132,7 @@ TEST_CASE("Lader: Werte aus common/") {
     const uhrwerk::Profession& bauern = w.professions[0];
     CHECK(bauern.name == "Bauern");
     CHECK(bauern.stratum == uhrwerk::Stratum::Unten);
-    CHECK(bauern.yield_per_capita == Fixed::from_int(6));
+    CHECK(bauern.agrarian);
     CHECK(bauern.taxable);
     CHECK(bauern.share_city == fx("0.10"));
     CHECK(bauern.share_rural == fx("0.80"));
@@ -1117,30 +1117,32 @@ TEST_CASE("Lader: Blöcke je Kultur und Altersaufbau") {
 }
 
 TEST_CASE("Lader: Startwerte für Lebensstandard und Alphabetisierung") {
+    // Seit M5 kommt der Ziel-Lebensstandard aus der Wirtschaft nach dem Einschwingen; er ist als
+    // Momentaufnahme veröffentlicht (wirtschaft.md, Abschnitt 4.8).
     const World w = testhilfen::load_fixture();
-    uhrwerk::LocationFactors factors;
-    for (const uhrwerk::Location& loc : w.locations) {
+    const std::size_t professions = w.professions.size();
+    REQUIRE(w.snapshot_targets.size() == w.locations.size() * professions);
+    for (std::size_t li = 0; li < w.locations.size(); ++li) {
+        const uhrwerk::Location& loc = w.locations[li];
         if (!loc.has_data()) {
             continue;
         }
         INFO("Ort " << loc.id);
-        const Fixed tax = w.states[static_cast<std::size_t>(loc.owner)].tax_rate(TaxKind::Kontribution);
-        uhrwerk::compute_location_factors(w, loc, tax, factors);
         for (Index p = loc.first_pop; p < loc.first_pop + loc.pop_count; ++p) {
             const uhrwerk::PopBlock& pop = w.pops[static_cast<std::size_t>(p)];
-            CHECK(pop.living_standard == factors.target[static_cast<std::size_t>(pop.profession)]);
+            CHECK(pop.living_standard ==
+                  w.snapshot_targets[li * professions + static_cast<std::size_t>(pop.profession)]);
             CHECK(pop.living_standard > Fixed::zero());
             CHECK(pop.living_standard < Fixed::from_int(100));
             CHECK(pop.literacy == uhrwerk::literacy_target(w, loc, pop, pop.living_standard));
         }
     }
-    // Adel (steuerfrei, hoher Ertrag) lebt besser als Bauern im selben Ort.
+    // Der Adel ist gebildeter als die Bauern im selben Ort (Grundwert 0,8 statt 0,1).
     const uhrwerk::Location& berlin = w.locations[0];
     const uhrwerk::PopBlock& bauern = w.pops[static_cast<std::size_t>(berlin.first_pop)];
     const uhrwerk::PopBlock& adel = w.pops[static_cast<std::size_t>(berlin.first_pop + berlin.pop_count - 1)];
     REQUIRE(bauern.profession == w.find_profession("bauern"));
     REQUIRE(adel.profession == w.find_profession("adel"));
-    CHECK(adel.living_standard > bauern.living_standard);
     CHECK(adel.literacy > bauern.literacy);
 }
 
@@ -1254,7 +1256,7 @@ TEST_CASE("Lader: Güter, Bedürfnisse, Betriebe und Märkte") {
     CHECK(hof.agrarian);
     CHECK(hof.siting == uhrwerk::Siting::All);
     REQUIRE(hof.outputs.size() == 1);
-    CHECK(hof.outputs[0].amount == Fixed::from_int(8));
+    CHECK(hof.outputs[0].amount == Fixed::from_int(40));
     CHECK(hof.inputs.empty());
     CHECK(hof.deposit == uhrwerk::kNone);
     const auto& weberei = w.businesses[static_cast<std::size_t>(w.find_business("weberei"))];
@@ -1289,7 +1291,7 @@ TEST_CASE("Lader: Güter, Bedürfnisse, Betriebe und Märkte") {
     CHECK(w.locations[static_cast<std::size_t>(w.find_location("dresden"))].deposits == 0u);
 
     // Berufe und Staaten
-    CHECK(w.professions[static_cast<std::size_t>(w.find_profession("adel"))].agrarian_levy == fx("0.1"));
+    CHECK(w.professions[static_cast<std::size_t>(w.find_profession("adel"))].agrarian_levy == fx("0.3"));
     CHECK(w.professions[static_cast<std::size_t>(w.find_profession("bauern"))].agrarian_levy ==
           Fixed::zero());
     const auto& bra = w.states[static_cast<std::size_t>(w.find_state("BRA"))];
@@ -1311,8 +1313,8 @@ TEST_CASE("Lader: Güter, Bedürfnisse, Betriebe und Märkte") {
 TEST_CASE("Lader: Fehler in den Wirtschaftsdaten") {
     TempDir dir(true);
     SUBCASE("unbekanntes Gut im Warenkorb") {
-        replace_in_file(dir / "common/beduerfnisse.chron", "unten  = { tuch = 0.2 }",
-                        "unten  = { tuche = 0.2 }");
+        replace_in_file(dir / "common/beduerfnisse.chron", "unten  = { tuch = 0.4 }",
+                        "unten  = { tuche = 0.4 }");
         expect_error(load(dir), "unbekanntes Gut 'tuche' in beduerfnis kleidung",
                      "common/beduerfnisse.chron");
     }
@@ -1321,12 +1323,12 @@ TEST_CASE("Lader: Fehler in den Wirtschaftsdaten") {
         expect_error(load(dir), "Pflichtfeld 'unten' fehlt in beduerfnis luxus", "common/beduerfnisse.chron");
     }
     SUBCASE("Gut doppelt im Mengenblock") {
-        replace_in_file(dir / "common/betriebe.chron", "erzeugt  = { getreide = 8 }",
-                        "erzeugt  = { getreide = 8 getreide = 1 }");
+        replace_in_file(dir / "common/betriebe.chron", "erzeugt  = { getreide = 40 }",
+                        "erzeugt  = { getreide = 40 getreide = 1 }");
         expect_error(load(dir), "Gut 'getreide' ist in 'erzeugt' von betrieb hof mehrfach angegeben");
     }
     SUBCASE("negative Menge") {
-        replace_in_file(dir / "common/betriebe.chron", "erzeugt  = { getreide = 8 }",
+        replace_in_file(dir / "common/betriebe.chron", "erzeugt  = { getreide = 40 }",
                         "erzeugt  = { getreide = -8 }");
         expect_error(load(dir), "ungültige Menge '-8' für Gut 'getreide'");
     }
@@ -1335,7 +1337,7 @@ TEST_CASE("Lader: Fehler in den Wirtschaftsdaten") {
         expect_error(load(dir), "unbekannter Beruf 'fischer' in betrieb hof", "common/betriebe.chron");
     }
     SUBCASE("Betrieb ohne Erzeugung") {
-        replace_in_file(dir / "common/betriebe.chron", "    erzeugt  = { getreide = 8 }\n", "");
+        replace_in_file(dir / "common/betriebe.chron", "    erzeugt  = { getreide = 40 }\n", "");
         expect_error(load(dir), "Pflichtfeld 'erzeugt' fehlt in betrieb hof");
     }
     SUBCASE("Handel mit Erzeugung") {
@@ -1388,14 +1390,15 @@ TEST_CASE("Lader: Fehler in den Wirtschaftsdaten") {
         CHECK(has_issue(r, "Landschaft '99_atlantis' hat keine Datei in history/orte", false));
     }
     SUBCASE("Agrarabgaben über 1") {
-        replace_in_file(dir / "common/berufe.chron", "agrarabgabe     = 0.1", "agrarabgabe     = 0.6");
+        replace_in_file(dir / "common/berufe.chron", "agrarabgabe     = 0.3", "agrarabgabe     = 0.6");
         replace_in_file(dir / "common/berufe.chron", "    bildung         = 0.6\n",
                         "    bildung         = 0.6\n    agrarabgabe     = 0.5\n");
         expect_error(load(dir), "die Summe aller 'agrarabgabe' ist 1.1, höchstens 1 ist erlaubt",
                      "common/berufe.chron");
     }
     SUBCASE("Regelfeld fehlt") {
-        replace_in_file(dir / "common/regeln.chron", "    handelsspanne             = 0.05\n", "");
+        replace_in_file(dir / "common/regeln.chron", "    handelsspanne             = 0.25",
+                        "    # ohne Handelsspanne");
         expect_error(load(dir), "Pflichtfeld 'handelsspanne' fehlt in regeln", "common/regeln.chron");
     }
     SUBCASE("Zins: Grundsatz über der Obergrenze") {

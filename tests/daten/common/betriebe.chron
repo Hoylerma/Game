@@ -2,7 +2,7 @@
 betrieb hof {
     name     = "Hof"
     beruf    = bauern
-    erzeugt  = { getreide = 8 }
+    erzeugt  = { getreide = 40 }
     agrar    = ja
     gewicht  = 1
 }
@@ -10,8 +10,8 @@ betrieb hof {
 betrieb weberei {
     name       = "Weberei"
     beruf      = handwerker
-    erzeugt    = { tuch = 2.4 }
-    verbraucht = { getreide = 1 }
+    erzeugt    = { tuch = 1.6 }
+    verbraucht = { getreide = 0.5 }
     agrar      = nein
     gewicht    = 1
     gelaende   = { sandboden = 2 }
@@ -20,7 +20,7 @@ betrieb weberei {
 betrieb saline {
     name       = "Saline"
     beruf      = handwerker
-    erzeugt    = { salz = 3 }
+    erzeugt    = { salz = 0.5 }
     agrar      = nein
     vorkommen  = salz
     ort        = stadt

@@ -162,12 +162,16 @@ n          = Σ größe aller Blöcke des Ortes
 trag       = fläche × gelände.tragfaehigkeit × (stadt ? tragfaehigkeit_stadt : 1)
 reserve    = max(0, 1 − n / trag)                      Landreserve 0..1
 zustand    = 1 − verwüstung × verwuestung_ertrag
-je Beruf b:
-  agrar_b  = b.agrar ? min(1, trag / n) : 1             abnehmender Ertrag bei Übervölkerung
-  ertrag_b = b.ertrag × gelände.ertrag × zustand × agrar_b      (Taler pro Kopf und Jahr)
-  netto_b  = b.steuerpflichtig ? ertrag_b × (1 − staat.steuersatz) : ertrag_b
-  ziel_b   = 100 × netto_b / (netto_b + lebensstandard_bezug)   Ziel-Lebensstandard 0..100
+agrar      = min(1, trag / n)                           abnehmender Ertrag der Agrarbetriebe bei Übervölkerung
+je Beruf b (seit M5 aus der Wirtschaft des Ortes, wirtschaft.md Abschnitte 4.2–4.4):
+  real_b   = Netto-Einkommen je Kopf und Jahr ÷ Preisniveau des Warenkorbs
+  ziel_b   = 100 × real_b / (real_b + lebensstandard_bezug)     Ziel-Lebensstandard 0..100
+  hunger_b = 1 + sterblichkeit_hunger × (1 − Deckung der Grundnahrung)²
 ```
+
+Bis M4 kam das Einkommen aus einem festen Ertrag je Beruf (`ertrag × gelände.ertrag × zustand ×
+agrar`, abzüglich `steuersatz`). Seit M5 entsteht es auf den Märkten; die Formel des Lebensstandards
+bleibt, nur das Einkommen wird durch das Preisniveau geteilt.
 
 Die **Landreserve** ersetzt das „Wiederaufbauwachstum“ aus M1: Ein verwüsteter, entvölkerter Ort
 hat viel freies Land, also mehr und frühere Heiraten und Zuzug von Bauern. Die **Tragfähigkeit**
@@ -181,8 +185,9 @@ Tragfähigkeit durch Agrartechnik (Kartoffel, Agrarreformen).
 L ← L + (ziel_b − L) × lebensstandard_anpassung
 ```
 
-Mit dem Bezugseinkommen 12 Taler ergibt das 1648 ohne Verwüstung und Steuern etwa: Landarme 33,
-Bauern 50, Handwerker 62, Geistlichkeit 71, Bürger 77, Adel 87.
+Mit dem Bezugseinkommen 9 Taler (seit M5, vorher 12) ergibt das nach dem Einschwingen 1648 im Mittel:
+Landarme 29, Handwerker 38, Bauern 44, Geistlichkeit 58, Bürger 61, Adel 83; bis 1700 steigen die
+Werte mit dem Abbau der Verwüstung (Landarme 37, Bauern und Handwerker 50, Adel 80).
 
 ### 4.3 Geburten, Sterbefälle, Altern (je Block)
 
@@ -192,7 +197,7 @@ Erwerbsalter, Alt), mit dem Lebensstandard L nach 4.2:
 ```
 d      = (L − 50) / 50                                          −1 … +1
 s      = clamp(1 − sterblichkeit_armut × d, 1/2, 2)               Sterblichkeit nach Lebensstandard
-s_m    = s / 12
+s_m    = s × hunger_b / 12                                       (hunger_b seit M5, Abschnitt 4.1)
 w      = max(0, 1 + fruchtbarkeit_wohlstand × d)
 f_ort  = fruchtbarkeit × (1 + fruchtbarkeit_landreserve × reserve)          einmal je Ort
 f_m    = f_ort × w / 12
@@ -256,21 +261,10 @@ Abzugsgeld).
 
 ### 4.6 Produktion und Steuern
 
-Am Rechentag des Ortes, mit den Werten aus 4.1:
-
-```
-ertrag_monat_b   = ertrag_b / 12                                   einmal je Ort und Beruf
-produziert       = größe × ertrag_monat_b                          Größe vor diesem Schritt
-produktion_monat = Σ produziert                                     (Blöcke aufsteigend)
-steuern_monat    = Σ produziert × staat.steuersatz                 (nur steuerpflichtige Berufe)
-```
-
-Die Wirtschaft eines Staates summiert an **seinem** Rechentag die zuletzt festgestellten
-`steuern_monat` seiner Orte (aufsteigend), statt alle Blöcke neu zu rechnen. Hofhaltung und Kasse
-wie in M1. Geändert gegenüber M1: der Agrarfaktor `agrar_b`, die Rechenreihenfolge und der
-Zeitpunkt (Steuern werden am Rechentag des Ortes festgestellt). `location_economy()` gibt die
-Werte des letzten Rechentags zurück; beim Start rechnet die Simulation sie einmal aus dem
-Anfangszustand.
+Seit M5 in [wirtschaft.md](wirtschaft.md), Abschnitte 4.2–4.6: Erzeugung in Betrieben, Märkte,
+Steuern je Art (Kontribution, Akzise, Zoll), festgestellt am Rechentag des Ortes; der Staat summiert an
+seinem Rechentag die zuletzt festgestellten Steuern seiner Orte. `location_economy()` gibt die Werte des
+letzten Rechentags zurück.
 
 ### 4.7 Zusammenführen und Neuordnung
 
@@ -313,14 +307,14 @@ Wie in M1 (Seuche mit dem Strom `Ereignisse`, Abbau der Verwüstung, Orte ohne D
 | Feld | Startwert | Bedeutung |
 |---|---|---|
 | `anteil_kinder` / `anteil_jung` / `anteil_erwerb` | 0,34 / 0,26 / 0,33 | Altersaufbau beim Start (Rest: Alte) |
-| `fruchtbarkeit` | 0,088 | Geburten je Person im fruchtbaren Alter und Jahr (kalibriert, Entwurf: 0,095) |
+| `fruchtbarkeit` | 0,093 | Geburten je Person im fruchtbaren Alter und Jahr (kalibriert; M4: 0,088, Entwurf: 0,095) |
 | `anteil_fruchtbar_erwerb` | 0,4 | Anteil der 30–64-Jährigen im fruchtbaren Alter |
 | `fruchtbarkeit_landreserve` | 0,3 | Zuschlag bei voller Landreserve |
 | `fruchtbarkeit_wohlstand` | 0,15 | Zu- oder Abschlag je 50 Punkte Lebensstandard |
 | `sterblichkeit_kinder` / `_jung` / `_erwerb` / `_alt` | 0,045 / 0,010 / 0,018 / 0,11 | jährliche Sterblichkeit je Altersgruppe |
 | `sterblichkeit_armut` | 0,3 | Zu- oder Abschlag je 50 Punkte Lebensstandard |
 | `tragfaehigkeit_stadt` | 1,75 | Faktor der Tragfähigkeit für Städte mit Amt (kalibriert, Entwurf: 3) |
-| `lebensstandard_bezug` | 12 | Netto-Einkommen (Taler pro Kopf und Jahr) für Lebensstandard 50 |
+| `lebensstandard_bezug` | 9 | Realeinkommen (Taler pro Kopf und Jahr) für Lebensstandard 50 (M4: 12, Netto-Einkommen) |
 | `lebensstandard_anpassung` | 0,25 | Anteil der Lücke zum Ziel je Monat |
 | `bildung_stadt` / `bildung_anpassung` | 1,25 / 0,03 | Stadtfaktor; Anteil der Lücke je Jahr |
 | `wanderung_ziele` / `wanderung_radius_km` | 4 / 60 | Ziele je Ort |
@@ -337,15 +331,20 @@ Flussaue 45, Flachland 30, Heide, Bruch und Seenplatte 20.
 Seed 1648) abgestimmt; ein Test prüft den Bereich (Abschnitt 8). Zielwerte aus Kapitel 07,
 Abschnitt 7.3: 1648 → 1700 rund ×1,32 (11 → 14,5 Mio.), 1700 → 1816 rund ×1,72 (→ 25 Mio.).
 
+Stand M5 (Wirtschaft aus [wirtschaft.md](wirtschaft.md), Abschnitt 4.9; die Werte aus M4 stehen in
+der Zeile darunter):
+
 | Jahr | Bevölkerung | Faktor seit 1648 | Geburten | Sterbefälle | Seuchen | Wanderung | Alphabetisierung |
 |---|---|---|---|---|---|---|---|
-| 1648 | 384.000 | ×1,00 | – | – | – | – | 31 % |
-| 1700 | 496.000 | ×1,29 | 37,8 ‰ | 31,7 ‰ | Einzeljahr | 1,1 ‰ | 38 % |
-| 1750 | 646.000 | ×1,68 | 36,8 ‰ | 31,1 ‰ | Einzeljahr | 0,8 ‰ | 44 % |
-| 1816 | 897.000 | ×2,33 | 35,9 ‰ | 30,5 ‰ | Einzeljahr | 0,7 ‰ | 53 % |
+| 1648 | 384.000 | ×1,00 | – | – | – | – | 21 % (M4: 31 %) |
+| 1700 | 511.000 | ×1,33 (M4: ×1,29) | 39,1 ‰ | 32,5 ‰ | Einzeljahr | 2,4 ‰ | 25 % (M4: 38 %) |
+| 1750 | 664.000 | ×1,73 (M4: ×1,68) | 37,7 ‰ | 32,5 ‰ | Einzeljahr | 2,5 ‰ | 28 % (M4: 44 %) |
+| 1816 | 858.000 | ×2,23 (M4: ×2,33) | 36,8 ‰ | 32,5 ‰ | Einzeljahr | 2,1 ‰ | 32 % (M4: 53 %) |
 
-Der Altersaufbau bleibt stabil (Kinder 32–34 %, Alte 7–9 %), der mittlere Lebensstandard steigt
-mit dem Abbau der Kriegsverwüstung von 43 auf 60. Die Abstimmung (Parametervergleich
+Die Alphabetisierung liegt seit M5 niedriger, weil die Orte mit Stadtrecht (Stadt mit Amt) jetzt mehr
+Bauern und Landarme und weniger Bürger und Handwerker haben (berufe.chron, wirtschaft.md
+Abschnitt 4.9). Der Altersaufbau bleibt stabil, der mittlere Lebensstandard steigt mit dem Abbau der
+Kriegsverwüstung von 39 auf 48. Die Abstimmung (Parametervergleich
 Fruchtbarkeit 0,082–0,088 × Stadtfaktor 1,5–2 × Armut 0,3–0,6 × Wohlstand 0,15–0,3) zeigte: Die
 Wachstumsrate hängt vor allem an Fruchtbarkeit und Stadtfaktor; ein höheres Gewicht des
 Lebensstandards beschleunigt das Wachstum, weil der Lebensstandard mit dem Wiederaufbau steigt.
@@ -505,7 +504,7 @@ S Sekunden liegt.
 | Determinismus | Prüfsumme des Lasttests (50.000 Blöcke, 2 Jahre, Debug) unter GCC, Clang und MSVC gleich |
 
 Referenz: Standardlauf (500.000 Blöcke, 3 Jahre, Seed 1648) endet mit der Prüfsumme
-`a5a4c0d80a2f23ea`, bei jeder Zahl von Threads.
+`a5a4c0d80a2f23ea` (M4), seit M5 Schritt 2 `23a8508bd9c34e02`, bei jeder Zahl von Threads.
 
 ## 8. Abnahme
 
@@ -527,7 +526,8 @@ Umsetzung; der neue Wert wird in [README.md](README.md) und [data/README.md](../
 nachgetragen, ebenso eine Referenz für den Lasttest.
 
 Referenz nach 100 Jahren mit `data/` (Seed 1648, jede Thread-Zahl): `ed6b14a02cfbfa5d` (seit M4,
-Schritt 3; vorher `40de8c42e8f7a0ff`).
+Schritt 3; vorher `40de8c42e8f7a0ff`). Seit M5 gehört die Wirtschaft dazu; die aktuelle Referenz steht in
+[README.md, Abschnitt 3](README.md#3-determinismus).
 
 ## 10. Brücke und Oberfläche
 

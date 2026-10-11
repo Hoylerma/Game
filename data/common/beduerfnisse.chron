@@ -18,8 +18,8 @@
 beduerfnis grundnahrung {
     name   = "Grundnahrung"
     hunger = ja
-    unten  = { getreide = 4.2 vieh = 0.2 salz = 0.05 }
-    mittel = { getreide = 4.5 vieh = 0.5 salz = 0.08 }
+    unten  = { getreide = 3.4 vieh = 0.15 salz = 0.04 }
+    mittel = { getreide = 3.8 vieh = 0.3 salz = 0.06 }
     oben   = { getreide = 5 vieh = 1 salz = 0.1 }
 }
 

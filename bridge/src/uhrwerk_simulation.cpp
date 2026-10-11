@@ -418,7 +418,7 @@ Dictionary UhrwerkSimulation::get_location(std::int64_t index) const {
 
     const uhrwerk::LocationEconomy economy = simulation_->location_economy(location_index);
     result["production_month"] = economy.production.to_double();
-    result["taxes_month"] = economy.taxes.to_double();
+    result["taxes_month"] = economy.total_taxes().to_double();
     result["source"] = to_godot(loc.source);
     return result;
 }

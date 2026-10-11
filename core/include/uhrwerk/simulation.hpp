@@ -21,6 +21,7 @@
 // und liest Daten anderer Orte nur aus den veröffentlichten Momentaufnahmen. Das Ergebnis hängt
 // daher nicht von der Zahl der Threads ab.
 
+#include "uhrwerk/economy.hpp"
 #include "uhrwerk/parallel.hpp"
 #include "uhrwerk/population.hpp"
 #include "uhrwerk/rng.hpp"
@@ -103,8 +104,9 @@ private:
     /// Arbeitsspeicher einer parallelen Aufgabe (wird je Paket wiederverwendet).
     struct Scratch {
         LocationFactors factors;
-        std::vector<Fixed> yield_month; // je Beruf: Ertrag je Kopf und Monat
-        std::vector<Fixed> attraction;  // je Beruf: Anziehung des eigenen Ortes
+        EconomyScratch economy;
+        std::vector<Fixed> attraction; // je Beruf: Anziehung des eigenen Ortes
+        std::vector<Fixed> hunger;     // je Beruf: Faktor auf die Sterblichkeit (wirtschaft.md 4.4)
     };
 
     /// Thread-Pool, der beim Kopieren einer Simulation neu angelegt wird (Threads sind kein Zustand).
@@ -152,6 +154,7 @@ private:
     Pcg32 rng_economy_;
     Pcg32 rng_events_;
     std::int64_t days_elapsed_ = 0;
+    EconomyTopology topology_; // abgeleitet: Märkte, Nachbarn, Betriebe je Beruf (seit M5)
 
     std::array<std::vector<Index>, 28> locations_by_day_; // Orte mit Blöcken je Rechentag, aufsteigend
     std::vector<std::vector<Index>> state_locations_;     // Orte je Staat, aufsteigend

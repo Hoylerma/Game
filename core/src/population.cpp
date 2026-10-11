@@ -1,5 +1,7 @@
 #include "uhrwerk/population.hpp"
 
+#include "uhrwerk/economy.hpp"
+
 #include <algorithm>
 #include <cstddef>
 #include <vector>
@@ -18,13 +20,8 @@ bool same_key(const PopBlock& a, const PopBlock& b) {
 
 } // namespace
 
-void compute_location_factors(const World& world, const Location& location, Fixed tax_rate,
-                              LocationFactors& out) {
+void compute_location_factors(const World& world, const Location& location, LocationFactors& out) {
     const Rules& rules = world.rules;
-    const std::size_t professions = world.professions.size();
-    out.yield.assign(professions, Fixed{});
-    out.target.assign(professions, Fixed{});
-
     Fixed n;
     for (Index p = location.first_pop; p < location.first_pop + location.pop_count; ++p) {
         n += world.pops[static_cast<std::size_t>(p)].size();
@@ -41,24 +38,9 @@ void compute_location_factors(const World& world, const Location& location, Fixe
     out.capacity = capacity;
     out.reserve = capacity > Fixed::zero() && n < capacity ? Fixed::one() - n / capacity : Fixed::zero();
     out.condition = Fixed::one() - location.devastation * rules.devastation_yield_loss;
-
-    // Abnehmender Ertrag: Ist der Ort übervölkert, teilen sich die Agrarberufe den Ertrag der
+    // Abnehmender Ertrag: Ist der Ort übervölkert, teilen sich die Agrarbetriebe den Ertrag der
     // Tragfähigkeit.
-    const Fixed agrarian = n > capacity && n > Fixed::zero() ? capacity / n : Fixed::one();
-    const Fixed terrain_yield = terrain != nullptr ? terrain->yield_factor : Fixed::zero();
-    const Fixed hundred = Fixed::from_int(100);
-    for (std::size_t b = 0; b < professions; ++b) {
-        const Profession& profession = world.professions[b];
-        Fixed yield = profession.yield_per_capita * terrain_yield * out.condition;
-        if (profession.agrarian) {
-            yield = yield * agrarian;
-        }
-        out.yield[b] = yield;
-        const Fixed net = profession.taxable ? yield * (Fixed::one() - tax_rate) : yield;
-        const Fixed denominator = net + rules.living_standard_reference;
-        out.target[b] =
-            net > Fixed::zero() && denominator > Fixed::zero() ? hundred * net / denominator : Fixed::zero();
-    }
+    out.agrarian = n > capacity && n > Fixed::zero() ? capacity / n : Fixed::one();
 }
 
 Fixed literacy_target(const World& world, const Location& location, const PopBlock& pop,
@@ -222,23 +204,46 @@ bool reorganize(World& world) {
 }
 
 void initialize_population(World& world) {
+    reorganize(world);
+
+    // Wirtschaft einschwingen (wirtschaft.md, Abschnitt 4.8); danach stehen die Ziel-Lebensstandards.
+    // Der Zustand wird neu angelegt (die Welt kann aus einer anderen abgeleitet sein, z. B. der
+    // Lasttest-Welt).
+    world.business_shares.clear();
+    world.location_supply.clear();
+    world.location_demand.clear();
+    world.location_income.clear();
+    world.location_coverage.clear();
+    world.market_states.clear();
+    world.economy.clear();
+    const EconomyTopology topology = build_economy_topology(world);
+    ensure_economy_state(world, topology);
+    settle_economy(world, topology, world.rules.settling_months);
+
+    const std::size_t count = world.locations.size();
+    const std::size_t professions = world.professions.size();
+    world.snapshots.assign(count, {});
+    world.snapshot_targets.assign(count * professions, Fixed{});
     LocationFactors factors;
-    for (const Location& loc : world.locations) {
-        if (loc.pop_count == 0 || !in_range(world.states, loc.owner)) {
-            continue;
-        }
-        const Fixed tax_rate =
-            world.states[static_cast<std::size_t>(loc.owner)].tax_rate(TaxKind::Kontribution);
-        compute_location_factors(world, loc, tax_rate, factors);
-        for (Index p = loc.first_pop; p < loc.first_pop + loc.pop_count; ++p) {
-            PopBlock& pop = world.pops[static_cast<std::size_t>(p)];
-            pop.living_standard = in_range(world.professions, pop.profession)
-                                      ? factors.target[static_cast<std::size_t>(pop.profession)]
-                                      : Fixed::zero();
-            pop.literacy = literacy_target(world, loc, pop, pop.living_standard);
+    EconomyScratch scratch;
+    for (const std::vector<Index>& list : topology.market_locations) {
+        for (const Index location : list) {
+            const auto li = static_cast<std::size_t>(location);
+            const Location& loc = world.locations[li];
+            compute_location_factors(world, loc, factors);
+            run_location_economy(world, topology, location, factors, scratch);
+            world.snapshots[li] = LocationSnapshot{factors.population, factors.reserve};
+            std::copy(factors.target.begin(), factors.target.end(),
+                      world.snapshot_targets.begin() + static_cast<std::ptrdiff_t>(li * professions));
+            for (Index p = loc.first_pop; p < loc.first_pop + loc.pop_count; ++p) {
+                PopBlock& pop = world.pops[static_cast<std::size_t>(p)];
+                pop.living_standard = in_range(world.professions, pop.profession)
+                                          ? factors.target[static_cast<std::size_t>(pop.profession)]
+                                          : Fixed::zero();
+                pop.literacy = literacy_target(world, loc, pop, pop.living_standard);
+            }
         }
     }
-    reorganize(world);
 }
 
 } // namespace uhrwerk

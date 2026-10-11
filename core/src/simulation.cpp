@@ -1,5 +1,7 @@
 #include "uhrwerk/simulation.hpp"
 
+#include "uhrwerk/economy.hpp"
+
 #include <algorithm>
 #include <array>
 #include <cstddef>
@@ -45,27 +47,6 @@ bool same_key(const PopBlock& pop, Index profession, Index confession, Index cul
     return pop.profession == profession && pop.confession == confession && pop.culture == culture;
 }
 
-/// Produktion und Steuern eines Ortes je Monat aus seinen Kennzahlen (Abschnitt 4.6). Dieselbe
-/// Rechnung wie in run_population, dort in der Blockschleife.
-LocationEconomy economy_of(const World& world, const Location& loc, const LocationFactors& factors,
-                           Fixed tax_rate) {
-    LocationEconomy result;
-    const Fixed twelve = Fixed::from_int(12);
-    for (Index p = loc.first_pop; p < loc.first_pop + loc.pop_count; ++p) {
-        const PopBlock& pop = world.pops[static_cast<std::size_t>(p)];
-        if (!in_range(world.professions, pop.profession)) {
-            continue;
-        }
-        const auto b = static_cast<std::size_t>(pop.profession);
-        const Fixed produced = pop.size() * (factors.yield[b] / twelve);
-        result.production += produced;
-        if (world.professions[b].taxable) {
-            result.taxes += produced * tax_rate;
-        }
-    }
-    return result;
-}
-
 /// FNV-1a, 64 Bit. Ganzzahlen werden bytegenau in Little-Endian-Reihenfolge
 /// eingespeist, damit die Prüfsumme plattformunabhängig ist.
 class Fnv1a {
@@ -108,6 +89,12 @@ public:
         fixed(p.living_standard);
         fixed(p.literacy);
     }
+    void fixeds(const std::vector<Fixed>& values) {
+        u64(values.size());
+        for (const Fixed v : values) {
+            fixed(v);
+        }
+    }
     void balance(const PopulationBalance& b) {
         fixed(b.births);
         fixed(b.deaths);
@@ -127,7 +114,8 @@ private:
 Simulation::Simulation(World world, SimConfig config)
     : world_(std::move(world)), config_(config), rates_(derive_rates(world_.rules)),
       rng_demography_(config.seed, RngStream::Demografie), rng_economy_(config.seed, RngStream::Wirtschaft),
-      rng_events_(config.seed, RngStream::Ereignisse), pool_(ThreadPool::resolve_threads(config.threads)) {
+      rng_events_(config.seed, RngStream::Ereignisse), topology_(build_economy_topology(world_)),
+      pool_(ThreadPool::resolve_threads(config.threads)) {
     build_schedule();
     build_migration_targets();
     prepare_population_state();
@@ -220,34 +208,33 @@ void Simulation::prepare_population_state() {
     next_snapshots_.assign(count, {});
     world_.arrivals.resize(count);
     next_targets_.assign(count * professions, Fixed{});
+    ensure_economy_state(world_, topology_);
 
     const bool fits = world_.snapshots.size() == count &&
                       world_.snapshot_targets.size() == count * professions &&
-                      world_.balance_current.size() == count && world_.balance_previous.size() == count &&
-                      world_.economy.size() == count;
-    if (fits) {
-        return; // Fortsetzung einer laufenden Partie
+                      world_.balance_current.size() == count && world_.balance_previous.size() == count;
+    if (world_.balance_current.size() != count || world_.balance_previous.size() != count) {
+        world_.balance_current.assign(count, {});
+        world_.balance_previous.assign(count, {});
     }
+    if (fits) {
+        return; // Fortsetzung einer laufenden Partie oder Start aus dem Lader (eingeschwungen)
+    }
+    // Welt ohne Startzustand (z. B. von Hand gebaut): Wirtschaft jedes Ortes einmal rechnen, damit
+    // Momentaufnahmen und Ziel-Lebensstandards stehen.
     world_.snapshots.assign(count, {});
     world_.snapshot_targets.assign(count * professions, Fixed{});
-    world_.balance_current.assign(count, {});
-    world_.balance_previous.assign(count, {});
-    world_.economy.assign(count, {});
-
     LocationFactors factors;
-    for (std::size_t i = 0; i < count; ++i) {
-        const Location& loc = world_.locations[i];
-        if (loc.pop_count == 0 || !in_range(world_.states, loc.owner) ||
-            !in_range(world_.terrains, loc.terrain)) {
-            continue;
+    EconomyScratch scratch;
+    for (const std::vector<Index>& list : topology_.market_locations) {
+        for (const Index location : list) {
+            const auto i = static_cast<std::size_t>(location);
+            compute_location_factors(world_, world_.locations[i], factors);
+            run_location_economy(world_, topology_, location, factors, scratch);
+            world_.snapshots[i] = LocationSnapshot{factors.population, factors.reserve};
+            std::copy(factors.target.begin(), factors.target.end(),
+                      world_.snapshot_targets.begin() + static_cast<std::ptrdiff_t>(i * professions));
         }
-        const Fixed tax_rate =
-            world_.states[static_cast<std::size_t>(loc.owner)].tax_rate(TaxKind::Kontribution);
-        compute_location_factors(world_, loc, tax_rate, factors);
-        world_.snapshots[i] = LocationSnapshot{factors.population, factors.reserve};
-        std::copy(factors.target.begin(), factors.target.end(),
-                  world_.snapshot_targets.begin() + static_cast<std::ptrdiff_t>(i * professions));
-        world_.economy[i] = economy_of(world_, loc, factors, tax_rate);
     }
 }
 
@@ -285,15 +272,18 @@ void Simulation::step_day() {
     const std::int32_t day = world_.date.day;
     const bool new_year = world_.date.month == 1 && day == 1;
 
-    // 2. Jahresabschluss.
+    // 2. Jahresabschluss und Ernte des neuen Jahres (wirtschaft.md, Abschnitt 4.7).
     if (new_year) {
         world_.balance_previous = world_.balance_current;
         std::fill(world_.balance_current.begin(), world_.balance_current.end(), PopulationBalance{});
+        draw_harvest(world_, topology_, rng_economy_);
     }
 
-    // 3. Neuordnung am Monatsersten (nur wenn es Zugänge oder zu kleine Blöcke gibt).
+    // 3. Neuordnung am Monatsersten (nur wenn es Zugänge oder zu kleine Blöcke gibt), dann die Märkte
+    //    (wirtschaft.md, Abschnitt 4.1).
     if (day == 1) {
         reorganize(world_);
+        update_markets(world_, topology_, state_spending(world_));
     }
 
     // 4. und 5. Bevölkerung der Orte mit heutigem Rechentag (Tage 29–31 haben keine): parallel
@@ -382,7 +372,9 @@ std::uint64_t Simulation::checksum() const {
     h.u64(world_.states.size());
     for (const State& s : world_.states) {
         h.fixed(s.treasury);
-        h.fixed(s.tax_rate(TaxKind::Kontribution));
+        for (const Fixed rate : s.tax_rates) {
+            h.fixed(rate);
+        }
         h.fixed(s.court_expenses);
         h.fixed(s.last_month_income);
         h.fixed(s.last_month_expenses);
@@ -429,7 +421,30 @@ std::uint64_t Simulation::checksum() const {
     h.u64(world_.economy.size());
     for (const LocationEconomy& e : world_.economy) {
         h.fixed(e.production);
-        h.fixed(e.taxes);
+        for (const Fixed tax : e.taxes) {
+            h.fixed(tax);
+        }
+        h.fixed(e.traders);
+    }
+
+    // Wirtschaft (seit M5)
+    h.fixeds(world_.business_shares);
+    h.fixeds(world_.location_supply);
+    h.fixeds(world_.location_demand);
+    h.fixeds(world_.location_income);
+    h.fixeds(world_.location_coverage);
+    h.u64(world_.market_states.size());
+    for (const MarketState& m : world_.market_states) {
+        h.fixeds(m.price);
+        h.fixeds(m.buy_ratio);
+        h.fixeds(m.sell_ratio);
+        h.fixeds(m.import_share);
+        h.fixeds(m.supply);
+        h.fixeds(m.demand);
+        h.fixeds(m.imports);
+        h.fixeds(m.exports);
+        h.fixed(m.margin_per_trader);
+        h.fixed(m.harvest);
     }
 
     h.rng(rng_demography_);
@@ -480,25 +495,29 @@ void Simulation::run_population(Index location, Scratch& scratch) {
         return;
     }
     const Rules& rules = world_.rules;
-    const State& owner = world_.states[static_cast<std::size_t>(loc.owner)];
     const std::size_t professions = world_.professions.size();
     const Fixed one = Fixed::one();
 
-    // 4.1 Kennzahlen des Ortes; sie werden auch die neue Momentaufnahme.
+    // 4.1 Kennzahlen des Ortes, dann seine Wirtschaft (wirtschaft.md, Abschnitte 4.2–4.5); der
+    // Ziel-Lebensstandard je Beruf kommt aus dem Realeinkommen. Beides wird die neue Momentaufnahme.
     LocationFactors& factors = scratch.factors;
-    compute_location_factors(world_, loc, owner.tax_rate(TaxKind::Kontribution), factors);
+    compute_location_factors(world_, loc, factors);
+    run_location_economy(world_, topology_, location, factors, scratch.economy);
     next_snapshots_[li] = LocationSnapshot{factors.population, factors.reserve};
     std::copy(factors.target.begin(), factors.target.end(),
               next_targets_.begin() + static_cast<std::ptrdiff_t>(li * professions));
 
-    scratch.yield_month.resize(professions);
     scratch.attraction.resize(professions);
+    scratch.hunger.resize(professions);
     for (std::size_t b = 0; b < professions; ++b) {
-        scratch.yield_month[b] = factors.yield[b] / rates_.twelve;
         scratch.attraction[b] = factors.target[b];
         if (world_.professions[b].agrarian) {
             scratch.attraction[b] += rules.migration_reserve * factors.reserve;
         }
+        // Hunger (wirtschaft.md, Abschnitt 4.4): fehlt Grundnahrung, steigt die Sterblichkeit –
+        // quadratisch, damit kleine Lücken (etwas Salz, kein Fleisch) kaum, echte Not stark wirkt.
+        const Fixed gap = one - food_coverage(world_, location, static_cast<Index>(b));
+        scratch.hunger[b] = one + rules.mortality_hunger * gap * gap;
     }
     const Fixed fertility_location = rules.fertility * (one + rules.fertility_reserve * factors.reserve);
     const std::vector<Index>& targets = migration_targets_[li];
@@ -507,7 +526,6 @@ void Simulation::run_population(Index location, Scratch& scratch) {
     std::array<Index, kMaxMigrationTargets> flow_professions{};
 
     PopulationBalance& balance = world_.balance_current[li];
-    LocationEconomy economy;
 
     for (Index p = loc.first_pop; p < loc.first_pop + loc.pop_count; ++p) {
         PopBlock& pop = world_.pops[static_cast<std::size_t>(p)];
@@ -517,13 +535,6 @@ void Simulation::run_population(Index location, Scratch& scratch) {
         const auto b = static_cast<std::size_t>(pop.profession);
         const Profession& profession = world_.professions[b];
 
-        // 4.6 Produktion und Steuern mit der Größe vor diesem Schritt.
-        const Fixed produced = pop.size() * scratch.yield_month[b];
-        economy.production += produced;
-        if (profession.taxable) {
-            economy.taxes += produced * owner.tax_rate(TaxKind::Kontribution);
-        }
-
         // 4.2 Lebensstandard.
         pop.living_standard += (factors.target[b] - pop.living_standard) * rules.living_standard_adjustment;
         const Fixed living = pop.living_standard;
@@ -532,7 +543,7 @@ void Simulation::run_population(Index location, Scratch& scratch) {
         const Fixed deviation = (living - rates_.fifty) / rates_.fifty; // −1 … +1
         const Fixed mortality =
             (one - rules.mortality_poverty * deviation).clamp(Fixed::from_ratio(1, 2), Fixed::from_int(2));
-        const Fixed mortality_month = mortality / rates_.twelve;
+        const Fixed mortality_month = mortality * scratch.hunger[b] / rates_.twelve;
         const Fixed wealth = Fixed::max(Fixed::zero(), one + rules.fertility_wealth * deviation);
         const Fixed fertility_month = fertility_location * wealth / rates_.twelve;
 
@@ -616,7 +627,6 @@ void Simulation::run_population(Index location, Scratch& scratch) {
         balance.moved_out += moved;
         balance.emigrated += emigrated;
     }
-    world_.economy[li] = economy;
 }
 
 // Momentaufnahme eines Ortes nach seinem Rechentag veröffentlichen (nacheinander).
@@ -672,7 +682,7 @@ void Simulation::run_economy(Index state) {
     State& s = world_.states[static_cast<std::size_t>(state)];
     Fixed income;
     for (const Index location : state_locations_[static_cast<std::size_t>(state)]) {
-        income += world_.economy[static_cast<std::size_t>(location)].taxes;
+        income += world_.economy[static_cast<std::size_t>(location)].total_taxes();
     }
     const Fixed expenses = s.court_expenses / Fixed::from_int(12);
     s.treasury += income - expenses;

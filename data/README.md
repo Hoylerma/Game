@@ -327,8 +327,9 @@ in M2; ihre Reihenfolge untereinander ist gleich geblieben. Die Werte nach 100 J
 deshalb nur geringfügig ab (Bevölkerung 627.680 statt 627.721). Der erste M3-Stand (4.541 Orte)
 ergab `5548a5fa80f75c0d` (627.709); mit Osterode am Harz in `goettingen` rückten die 38 Orte mit
 Daten in den Dateien `lausitz` bis `thueringen` um einen Index weiter. Seit M4 (Bevölkerungsmodell:
-Altersaufbau, Kultur, Lebensstandard, Wanderung) lautet sie `ed6b14a02cfbfa5d`, bei jeder Zahl von
-Threads; nach 100 Jahren leben in den 60 Orten 642.668 Menschen (×1,67).
+Altersaufbau, Kultur, Lebensstandard, Wanderung) lautete sie `ed6b14a02cfbfa5d` (642.668 Menschen nach
+100 Jahren). Seit M5 (Wirtschaft mit Gütern, Märkten und Steuerarten) lautet sie `3ec46b832bdc0d57`, bei
+jeder Zahl von Threads; nach 100 Jahren leben in den 60 Orten 657.627 Menschen (×1,71).
 Alle Angaben tragen seit M2 eine Sicherheit:
 Besitz, Herrscher, Hauptstadt und Konfession der Staaten `ungeprueft` (recherchiert, noch ohne
 Fachprüfung), Bevölkerung, Konfessionsanteile und Verwüstung `schaetzung`, Schatz, Steuersätze,

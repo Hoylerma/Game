@@ -1,8 +1,7 @@
 # Berufsgruppen der Epoche 1648–1806 (Meilenstein M1, vereinfacht).
 #
-# Format: docs/technik/chronik-skript.md, Abschnitt 3.4.
-#   ertrag          – Produktion in Reichstalern pro Kopf und Jahr (Kopf = alle
-#                     Angehörigen einschließlich Kinder und Gesinde der Gruppe)
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.4. Seit M5 erzeugen die Berufe in Betrieben
+# (betriebe.chron); das Feld ertrag (fester Ertrag je Kopf) entfällt.
 #   steuerpflichtig – Adel und Geistlichkeit sind von der Kontribution befreit
 #                     (ständische Privilegien)
 #   anteil_stadt    – Anteil an der Bevölkerung städtischer Orte (Stadt mit
@@ -25,14 +24,18 @@
 # Größenordnungen (Schätzung, Spielwerte): Ein Tagelöhner verdiente um 1650
 # einige Groschen am Tag (1 Reichstaler = 24 Groschen), also wenige Dutzend
 # Taler im Jahr für einen ganzen Haushalt; Vollbauern, Handwerksmeister und
-# Kaufleute lagen deutlich darüber. Daraus ergeben sich Pro-Kopf-Werte von etwa
-# 6 (Landarme) bis 40 (Bürger); Adel und hohe Geistlichkeit beziehen Renten
-# aus Grundherrschaft, Pfründen und Ämtern.
+# Kaufleute lagen deutlich darüber. Seit M5 entstehen die Einkommen auf den Märkten
+# (nach dem Einschwingen je Kopf und Jahr etwa: Landarme 4, Bauern 7,5, Handwerker 7,
+# Bürger 18, Geistlichkeit 17, Adel 63 Reichstaler); Adel und Geistlichkeit leben von
+# Grundrente und Zehnt (agrarabgabe).
+#
+# Anteile in Orten mit Stadtrecht (Stadt mit ihrem Amt, also mit Dörfern): seit M5
+# Bürger 8 %, Handwerker 16 %, Bauern 30 %, Landarme 44 % (bis M4 15/30/20/33 %, für
+# einen Markt zu städtisch; docs/technik/wirtschaft.md, Abschnitt 4.9).
 
 beruf adel {
     name            = "Adel"
     schicht         = oben
-    ertrag          = 80      # Rittergüter, Ämter, Grundrenten
     steuerpflichtig = nein
     anteil_stadt    = 0.005
     anteil_land     = 0.010
@@ -44,7 +47,6 @@ beruf adel {
 beruf geistlichkeit {
     name            = "Geistlichkeit"
     schicht         = mittel
-    ertrag          = 30      # Pfarrer, Kirchendiener, Stiftsgeistliche
     steuerpflichtig = nein
     anteil_stadt    = 0.015
     anteil_land     = 0.010
@@ -56,9 +58,8 @@ beruf geistlichkeit {
 beruf buerger {
     name            = "Bürger"
     schicht         = mittel
-    ertrag          = 40      # Kaufleute, Brauer, Ratsfamilien, Gelehrte
     steuerpflichtig = ja
-    anteil_stadt    = 0.150
+    anteil_stadt    = 0.080
     anteil_land     = 0.010
     agrar           = nein
     bildung         = 0.6
@@ -67,9 +68,8 @@ beruf buerger {
 beruf handwerker {
     name            = "Handwerker"
     schicht         = mittel
-    ertrag          = 20      # Zunftmeister, Gesellen, Müller, Dorfhandwerk
     steuerpflichtig = ja
-    anteil_stadt    = 0.300
+    anteil_stadt    = 0.160
     anteil_land     = 0.060
     agrar           = nein
     bildung         = 0.3
@@ -78,9 +78,8 @@ beruf handwerker {
 beruf bauern {
     name            = "Bauern"
     schicht         = unten
-    ertrag          = 12      # Hufner und Vollbauern, in Städten Ackerbürger
     steuerpflichtig = ja
-    anteil_stadt    = 0.200
+    anteil_stadt    = 0.300
     anteil_land     = 0.520
     agrar           = ja
     bildung         = 0.1
@@ -90,9 +89,8 @@ beruf bauern {
 beruf landarme {
     name            = "Landarme"
     schicht         = unten
-    ertrag          = 6       # Kossäten, Häusler, Gesinde, Tagelöhner
     steuerpflichtig = ja
-    anteil_stadt    = 0.330
+    anteil_stadt    = 0.440
     anteil_land     = 0.390
     agrar           = ja
     bildung         = 0.05

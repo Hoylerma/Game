@@ -1,10 +1,12 @@
 # Wirtschaft und Staatshaushalt (Meilenstein M5)
 
-> **Status: Entwurf** zur Freigabe vor der Umsetzung von M5 „Wirtschaft und Staatshaushalt“
-> ([meilensteine.md](../meilensteine.md#m5--wirtschaft-und-staatshaushalt)). Nach der Freigabe wird
-> das Dokument wie [bevoelkerung.md](bevoelkerung.md) verbindlich für Kern, Daten und Tests;
-> Abweichungen der Umsetzung werden eingearbeitet. Abschnitt 12 listet die Entscheidungen, die vor
-> der Umsetzung zu bestätigen sind.
+> **Status: verbindlich** für Kern (`core/src/economy.cpp`), Daten und Tests, soweit umgesetzt: Datenmodell
+> (Abschnitt 2), Märkte, Ortsrechnung, Ernte und Einschwingen (Abschnitte 4.1–4.5, 4.7, 4.8). Der
+> Staatshaushalt (4.6) und der Balancing-Bericht (7) folgen in den Schritten 3 und 4 von M5
+> ([meilensteine.md](../meilensteine.md#m5--wirtschaft-und-staatshaushalt)). Das Dokument entstand als
+> Entwurf und wurde vor der Umsetzung freigegeben; Abweichungen der Umsetzung sind eingearbeitet
+> (u. a. Handel bis zur ganzen Menge, Überschuss nicht in Grundnahrung, Hunger quadratisch, Kalibrierung
+> in 4.9).
 
 Das Design dahinter steht in [08 Wirtschaft und Finanzen](../08_wirtschaft_und_finanzen.md)
 (Güter, Märkte, Staatsfinanzen) und [07 Bevölkerung und Gesellschaft](../07_bevoelkerung_und_gesellschaft.md),
@@ -83,24 +85,24 @@ beim Einkauf). Jedes Bedürfnis hat je Schicht einen Warenkorb: Menge je Kopf un
 beduerfnis grundnahrung {
     name   = "Grundnahrung"
     hunger = ja                                  # optional: fehlt es, steigt die Sterblichkeit (4.4)
-    unten  = { getreide = 4.2 vieh = 0.2 salz = 0.05 }
-    mittel = { getreide = 4.5 vieh = 0.5 salz = 0.08 }
+    unten  = { getreide = 3.4 vieh = 0.15 salz = 0.04 }
+    mittel = { getreide = 3.8 vieh = 0.3 salz = 0.06 }
     oben   = { getreide = 5 vieh = 1 salz = 0.1 }
 }
 ```
 
-Vorläufige Werte des Warenkorbs, umgerechnet in Reichstaler zum Basispreis je Kopf und Jahr
-(kalibriert in Schritt 2):
+Werte des Warenkorbs, umgerechnet in Reichstaler zum Basispreis je Kopf und Jahr (kalibriert,
+Abschnitt 4.9):
 
 | Bedürfnis | unten | mittel | oben |
 |---|---|---|---|
-| Grundnahrung (Getreide, Vieh, Salz) | 5,2 | 6,8 | 9,4 |
+| Grundnahrung (Getreide, Vieh, Salz) | 4,2 | 5,2 | 9,4 |
 | Wärme (Holz) | 0,6 | 1,2 | 2,5 |
 | Kleidung (Tuch) | 1,0 | 2,5 | 8 |
 | Genuss (Bier, Wein) | 0,8 | 2,4 | 4,5 |
 | Haushalt (Waren) | 0,6 | 2 | 5 |
 | Luxus (Luxuswaren, Kolonialwaren, Wein) | 0,2 | 2,8 | 28 |
-| **Summe** | **8,4** | **17,7** | **57,4** |
+| **Summe** | **7,4** | **16,1** | **57,4** |
 
 Die Schicht eines Berufs steht schon in `berufe.chron` (`schicht = unten | mittel | oben`). Der
 Staat kauft mit denselben Körben ein (Abschnitt 4.6): Hof wie „oben“, Verwaltung wie „mittel“,
@@ -118,7 +120,7 @@ Kapital kommen erst, wenn Produktionsmethoden wechseln (Industrialisierung).
 betrieb weberei {
     name       = "Weberei"            # Pflicht
     beruf      = handwerker           # Pflicht
-    erzeugt    = { tuch = 3.2 }       # Pflicht (außer handel = ja): Menge je Kopf und Jahr
+    erzeugt    = { tuch = 2.8 }       # Pflicht (außer handel = ja): Menge je Kopf und Jahr
     verbraucht = { faser = 2 }        # optional: Vorleistungen je Kopf und Jahr
     agrar      = nein                 # Pflicht: Ertrag hängt an Tragfähigkeit und Ernte (4.2)
     ort        = alle                 # optional: alle | stadt | land
@@ -129,19 +131,19 @@ betrieb weberei {
 }
 ```
 
-Vorläufige Betriebe, Werte in Reichstalern zum Basispreis je Kopf und Jahr (Kopf = alle
-Angehörigen, wie bisher beim Ertrag):
+Betriebe, Werte in Reichstalern zum Basispreis je Kopf und Jahr (Kopf = alle Angehörigen, wie bisher
+beim Ertrag; kalibriert, Abschnitt 4.9):
 
 | Betrieb | Beruf | erzeugt | verbraucht | Wertschöpfung | Bedingung, Gewicht |
 |---|---|---|---|---|---|
-| Bauernhof | Bauern | Getreide 10, Vieh 2,5, Faser 0,7, Holz 0,8 | – | 14 | agrar; 1 |
+| Bauernhof | Bauern | Getreide 12, Vieh 3,2, Faser 1, Holz 0,8 | – | 17 | agrar; 1 |
 | Schäferei | Bauern | Faser 7, Vieh 6 | – | 13 | agrar; 0,1, Heide × 3, Hügelland und Mittelgebirge × 2 |
 | Weinberg | Bauern | Wein 15 | – | 15 | agrar; Vorkommen `weinlage`; 1 |
-| Gutsarbeit | Landarme | Getreide 6, Vieh 0,8 | – | 6,8 | agrar; 1 |
+| Gutsarbeit | Landarme | Getreide 7,5, Vieh 1 | – | 8,5 | agrar; 1 |
 | Forst | Landarme | Holz 6,5 | – | 6,5 | 0,6, Wald × 4, Mittelgebirge × 3, Heide/Bruch/Seenplatte × 2 |
 | Heimweberei (Verlag) | Landarme | Tuch 7,5 | Faser 2 | 5,5 | nur Land; 0,3 |
-| Weberei | Handwerker | Tuch 16 | Faser 4 | 12 | 1 |
-| Werkstatt | Handwerker | Waren 15 | Holz 2 | 13 | 1,2 |
+| Weberei | Handwerker | Tuch 14 | Faser 4 | 10 | 1 |
+| Werkstatt | Handwerker | Waren 12 | Holz 2 | 10 | 0,8 |
 | Saline | Handwerker | Salz 20 | Holz 5 | 15 | Vorkommen `salz`; 6 |
 | Brauerei | Bürger | Bier 24 | Getreide 6 | 18 | 0,5 (Braurecht der Bürger) |
 | Manufaktur | Bürger | Luxuswaren 40 | Faser 4, Holz 2 | 34 | nur Stadt; 0,15 |
@@ -166,7 +168,8 @@ Jede Landschaft gehört zu genau einem Markt (Ladefehler sonst). Mehrere Landsch
 erlaubt; damit lassen sich später Handelsräume bilden, ohne das Format zu ändern. In M5 ist jede
 Landschaft ihr eigener Markt.
 
-- **Lage** eines Marktes: Mittelpunkt seiner Orte, nach Fläche gewichtet (beim Laden, fest).
+- **Lage** eines Marktes: Mittelpunkt seiner Orte mit Daten, nach Fläche gewichtet (fest; Orte ohne
+  Daten ändern nichts an der Rechnung, wie seit M3 üblich).
 - **Nachbarn:** die bis zu `handel_nachbarn` (6) nächsten Märkte mit Mittelpunkt im Umkreis von
   `handel_radius_km` (180 km). Abstand wie bei der Wanderung (Grad, Länge mit cos 51° gestaucht).
 - **Hafen:** Ein Markt mit mindestens einem Hafenort (neues Ortsfeld `hafen = ja`) handelt mit dem
@@ -237,13 +240,18 @@ Basispreis *B_g*.
    ```
    fracht   = handel_fracht × abstand_km / 100            (z. B. 0,12 je 100 km)
    lücke    = P_n,g − P_m,g × (1 + fracht)                 (Ware fließt von m nach n, wenn > 0)
-   menge    = handel_rate × lücke / P_n,g × min(A_m,g, N_n,g)
+   menge    = min(1, handel_rate × lücke / P_n,g) × min(Angebot_m,g, Nachfrage_n,g)   (Vormonat, mit Handel)
    ```
 
+   Bei `handel_rate` 5 fließt ab 20 % Preislücke die ganze mögliche Menge; so kann ein Markt ohne
+   eigene Erzeugung (Salz, Kolonialwaren) seinen Bedarf decken. Mengen des **Vormonats** erlauben auch
+   die Weitergabe eingeführter Ware an den nächsten Markt. Jeder Markt gibt höchstens 4/5 seines
+   Angebots des Vormonats ab und nimmt höchstens 4/5 seiner Nachfrage auf; darüber werden alle seine
+   Ströme anteilig gekürzt (Ausfuhr und Einfuhr eines Paars bleiben bitgenau gleich).
    Mit dem Weltmarkt (nur Hafenmärkte) gilt dieselbe Formel mit `fracht = seefracht`, Weltpreis
-   `W_g × B_g` und unbegrenzter Menge auf der Weltseite (statt `min(…)` die eigene Menge).
-   Ausfuhr zählt zur Nachfrage des Herkunftsmarktes, Einfuhr zum Angebot des Zielmarktes:
-   `A'_g = A_g + Einfuhr_g`, `N'_g = N_g + Ausfuhr_g`.
+   `W_g × B_g` und unbegrenzter Menge auf der Weltseite (statt `min(…)` das eigene Angebot bzw. die
+   eigene Nachfrage). Ausfuhr zählt zur Nachfrage des Herkunftsmarktes, Einfuhr zum Angebot des
+   Zielmarktes: `A'_g = A_g + Einfuhr_g`, `N'_g = N_g + Ausfuhr_g`.
 3. **Preis** (gedämpft, begrenzt):
 
    ```
@@ -264,19 +272,22 @@ faktor_b   = gelaende.ertrag × (1 − verwuestung × verwuestung_ertrag)
              × (agrar ? min(1, tragfähigkeit / n) × ernte_m : 1)                (Tragfähigkeit wie M4)
 versorgt_b = min über Vorleistungen g von k_g  (1 ohne Vorleistungen)
 menge_b,g  = n_p × a_b × erzeugt_b,g / 12 × faktor_b × versorgt_b               (Erzeugung, Meldung an den Markt)
-erlös_b    = Σ_g menge_b,g × P_g × v_g × (1 − handelsspanne)
+erlös_b    = Σ_g menge_b,g × P_g × (1 − handelsspanne)
 kosten_b   = Σ_g n_p × a_b × verbraucht_b,g / 12 × faktor_b × versorgt_b × P_g   (Vorleistungen, Nachfrage)
 gewinn_b   = (erlös_b − kosten_b) / (n_p × a_b)                                  (je Kopf, für 4.5)
 ```
 
-Handelshäuser erhalten statt eines Erlöses `spanne_je_kopf` aus Abschnitt 4.1.
+Handelshäuser erhalten statt eines Erlöses `spanne_je_kopf` aus Abschnitt 4.1. Der Preis räumt den
+Markt; die Verkaufsquote mindert den Erlös nicht noch einmal (sie dient der Anzeige).
 
-**Abgaben auf den Agrarertrag:** `agrar = Σ_b (agrar) erlös_b`. Jeder Beruf mit `agrarabgabe > 0`
-und Köpfen im Ort erhält `agrar × agrarabgabe`; die Agrarbetriebe geben diesen Anteil ab. Ohne
-Adel im Ort bleibt die Grundrente bei den Bauern (ebenso der Zehnt ohne Geistlichkeit).
+**Abgaben auf den Agrarertrag:** `abgaben = Σ agrarabgabe` der Berufe mit Köpfen im Ort. Jeder
+Agrarbetrieb gibt `erlös_b × abgaben` ab; die Summe wird nach den Anteilen `agrarabgabe ÷ abgaben`
+auf die Empfänger verteilt. Ohne Adel im Ort bleibt die Grundrente bei den Bauern (ebenso der Zehnt
+ohne Geistlichkeit).
 
-**Kontribution** (nur Orte ohne Stadtrecht, nur steuerpflichtige Berufe):
-`kontribution = einkommen × satz_kontribution`.
+**Kontribution** (nur steuerpflichtige Berufe): in Orten ohne Stadtrecht auf das ganze Einkommen, in
+Orten mit Stadtrecht nur auf das Einkommen aus Agrarbetrieben (das Amt um die Stadt; das städtische
+Gewerbe trägt die Akzise): `kontribution = grundlage × satz_kontribution`.
 
 Ergebnis: Netto-Einkommen je Kopf und Monat `y_p`, Steuern des Ortes je Art.
 
@@ -291,10 +302,11 @@ Ortes: `akzise = Σ Ausgaben × akzise_satz / (1 + akzise_satz)`, entsprechend d
 ```
 kosten_n  = Σ_g korb_s,n,g × Q_g                       (je Kopf und Monat)
 voll      = Σ_n kosten_n
-wenn y ≥ voll: jedes Bedürfnis zu (y / voll) gekauft     (mehr Einkommen = mehr von allem)
+wenn y ≥ voll: Bedürfnisse mit hunger = ja zu 1, die übrigen zu (y − grund) / (voll − grund)
+              (grund = Kosten der Grundnahrung: mehr Einkommen geht in Kleidung, Genuss, Luxus)
 sonst:     Bedürfnisse der Reihe nach; f_n = min(1, rest / kosten_n), rest −= f_n × kosten_n
-nachfrage_g += n_p × korb_s,n,g × f_n                  (Meldung an den Markt)
-deckung_n  = min(1, f_n × k_g)                          (Kaufquote: knappe Ware ist nicht zu haben)
+nachfrage_g += n_p × korb_s,n,g × f_n / 12             (Meldung an den Markt)
+deckung_n  = min(1, f_n) × Σ_g (w_g × k_g) / Σ_g w_g    (w_g = korb × Basispreis; knappe Ware ist nicht zu haben)
 ```
 
 ### 4.4 Lebensstandard und Hunger
@@ -312,8 +324,9 @@ Damit bleibt die Kalibrierung aus M4 erhalten, solange Preise nahe am Basispreis
 senkt den Lebensstandard und damit Geburten und Lebenserwartung.
 
 **Hunger:** Ist die Grundnahrung nicht gedeckt (`deckung < 1`, Bedürfnis mit `hunger = ja`), steigt
-die Sterblichkeit aller Altersgruppen des Berufs: Faktor `1 + sterblichkeit_hunger × (1 − deckung)`
-(z. B. 1,5 → bei halber Deckung 75 % mehr Sterbefälle). So entstehen Hungerjahre aus Missernten.
+die Sterblichkeit aller Altersgruppen des Berufs: Faktor `1 + sterblichkeit_hunger × (1 − deckung)²`
+(bei 1,5: 10 % Lücke → 1,5 % mehr Sterbefälle, halbe Deckung → 37,5 %). Quadratisch, damit ein wenig
+fehlendes Salz oder Fleisch kaum zählt, echte Not aber stark; so entstehen Hungerjahre aus Missernten.
 
 ### 4.5 Betriebsanteile
 
@@ -373,10 +386,13 @@ Markt. Der Faktor wirkt auf alle Agrarbetriebe des Marktes (Abschnitt 4.2).
 ### 4.8 Einschwingen beim Start
 
 Betriebsanteile aus den Gewichten passen nicht genau zur Nachfrage. Damit das Spiel nicht mit
-einem Preissprung beginnt, rechnet die Simulation beim Start `einschwingen_monate` (60) Monate
-**nur Wirtschaft**: Märkte, Erzeugung, Verbrauch, Betriebsanteile – ohne Bevölkerung, ohne Staat,
-mit Erntefaktor 1. Danach werden Lebensstandard und Alphabetisierung der Blöcke wie in M4 auf ihre
-Zielwerte gesetzt. Das ist deterministisch und Teil des Startzustands (Prüfsumme nach dem Start).
+einem Preissprung beginnt, rechnet der Lader beim Start (`initialize_population`) `einschwingen_monate`
+(60) Monate **nur Wirtschaft** für alle Orte mit Daten: Märkte, Erzeugung, Verbrauch, Betriebsanteile –
+ohne Bevölkerung, ohne Staatshaushalt (die Hofhaltung kauft trotzdem ein), mit Erntefaktor 1. Danach
+werden Lebensstandard und Alphabetisierung der Blöcke wie in M4 auf ihre Zielwerte gesetzt und die
+Momentaufnahmen veröffentlicht. Das ist deterministisch und Teil des Startzustands. Für die 60 Orte
+dauert es wenige Millisekunden, für die Lasttest-Welt (4.542 Orte) etwa 1 s. Eine von Hand gebaute
+Welt ohne diesen Zustand (Tests) rechnet beim Start der Simulation einmal die Wirtschaft jedes Ortes.
 
 ### 4.9 Regelwerte und Kalibrierung
 
@@ -387,7 +403,7 @@ Neue Pflichtfelder in `regeln.chron` (vorläufige Werte):
 | `preis_min`, `preis_max` | 0,25, 4 | Grenzen des Preises als Faktor auf den Basispreis |
 | `preis_anpassung` | 0,3 | Anteil der Lücke zum Zielpreis je Monat |
 | `handel_nachbarn`, `handel_radius_km` | 6, 180 | Nachbarmärkte |
-| `handel_rate` | 0,5 | Stärke des Handels je Monat |
+| `handel_rate` | 5 | Handelsmenge je Preislücke (0..100): ab 20 % Lücke die ganze mögliche Menge |
 | `handel_fracht`, `seefracht` | 0,12, 0,10 | Frachtkosten je 100 km bzw. zum Weltmarkt (Anteil am Preis) |
 | `handelsspanne` | 0,05 | Anteil der Händler am Umsatz |
 | `betrieb_anpassung`, `betrieb_min_anteil` | 0,03, 0,02 | Anpassung der Betriebsanteile |
@@ -401,16 +417,24 @@ Neue Pflichtfelder in `regeln.chron` (vorläufige Werte):
 | `bankrott_quote`, `bankrott_schnitt`, `bankrott_aufschlag`, `bankrott_jahre` | 4, 0,5, 0,04, 20 | Staatsbankrott |
 | `steuersatz_max` | 0,5 | gilt für alle drei Steuerarten |
 
-**Kalibrierung** (Schritte 2 und 4), mit den 60 Orten der Testregion:
+**Kalibrierung** (Schritte 2 und 4), mit den 60 Orten der Testregion und dem Prüfbefehl
+`uhrwerk-cli wirtschaft` (Angebot und Nachfrage je Gut, Einkommen, Lebensstandard und Bedarfsdeckung
+je Beruf, Steuern je Staat; mit `--jahre N` nach N Jahren, mit `--maerkte` Preise je Markt):
 
-1. **Gleichgewicht zum Basispreis:** Ein Prüfbefehl rechnet Angebot und Nachfrage je Gut beim Start
-   zu Basispreisen. Ziel: Nachfrage ÷ Angebot 0,8–1,25 für alle heimischen Güter. Die grobe
-   Vorrechnung mit den Werten oben ergibt noch 0,4–1,7 – Handwerksgüter sind zu reichlich, Getreide
-   und Vieh zu knapp. Stellschrauben: Mengen der Betriebe und Warenkörbe, notfalls die Anteile der
-   Berufe aus M1 (30 % Handwerker in Städten mit Amt sind eher viel).
-2. **Einkommen nach dem Einschwingen** je Beruf nahe am bisherigen Ertrag (Adel 80, Bürger 40,
-   Geistlichkeit 30, Handwerker 20, Bauern 12, Landarme 6; ±20 %), damit der Lebensstandard und die
-   Bevölkerungskalibrierung aus M4 halten: 1648 → 1700 weiterhin ×1,20–1,45.
+1. **Gleichgewicht nach dem Einschwingen:** Nachfrage ÷ Angebot je heimischem Gut 0,7–1,4. Erreicht
+   mit drei Eingriffen: Die Berufsanteile der Orte mit Stadtrecht (Stadt mit Amt) aus M1 waren für einen
+   Markt zu städtisch – jetzt Bürger 8 % (vorher 15 %), Handwerker 16 % (30 %), Bauern 30 % (20 %),
+   Landarme 44 % (33 %); Handwerksbetriebe erzeugen etwas weniger; die Grundnahrung der Unterschicht
+   ist kleiner (3,4 statt 4,2 Scheffel Getreide je Kopf).
+2. **Lebensstandard wie in M4:** Die Märkte ergeben niedrigere Einkommen als die festen Erträge aus
+   M4 (Landarme 4, Bauern 7,5, Handwerker 7, Bürger 18, Geistlichkeit 17, Adel 63 Reichstaler je Kopf
+   und Jahr nach dem Einschwingen). Mit `lebensstandard_bezug` 9 statt 12 liegt der Lebensstandard der
+   Schichten wieder bei den Werten aus M4 (Landarme 29, Bauern 44, Adel 83).
+3. **Bevölkerung:** `fruchtbarkeit` 0,093 statt 0,088 gleicht die zusätzliche Sterblichkeit durch
+   Hunger aus: 1648 → 1700 ×1,33 (Ziel ×1,32), 1750 ×1,73, 1816 ×2,23 (Ziel ×2,27); Geburten 37–39 ‰,
+   Sterbefälle 32–33 ‰ ([bevoelkerung.md, Abschnitt 4.9](bevoelkerung.md#49-regelwerte-startwerte-und-kalibrierung)).
+   Nach 50 Jahren liegen die Preise je Markt bei 0,6–1,4 des Basispreises, Salz im Binnenland bei bis zu
+   2,7, Kolonialwaren je nach Entfernung zum Hafen bei 1,9–3,7.
 3. **Staatshaushalt:** Steuersätze und Heer so, dass die Einnahmen des ersten Jahres etwa denen aus
    M4 entsprechen und Hof + Verwaltung + Heer sie um 0–20 % übersteigen (Nachkriegsdefizit wie in
    M1, Abschnitt „Wirtschaftswerte“ in [data/README.md](../../data/README.md#wirtschaftswerte)).

@@ -4,6 +4,7 @@
 // Exitcodes: 0 in Ordnung, 1 Daten-, Determinismus- oder Lasttestfehler, 2 Bedienfehler.
 
 #include "uhrwerk/date.hpp"
+#include "uhrwerk/economy.hpp"
 #include "uhrwerk/fixed.hpp"
 #include "uhrwerk/lasttest.hpp"
 #include "uhrwerk/loader.hpp"
@@ -12,6 +13,7 @@
 #include "uhrwerk/world.hpp"
 
 #include <algorithm>
+#include <array>
 #include <chrono>
 #include <cstdint>
 #include <cstdio>
@@ -59,6 +61,8 @@ Befehle:
   determinismus  Zwei Läufe mit gleichem Seed vergleichen (Prüfsumme nach jedem Jahr; Lauf B
                  mit einem Thread) und einen Lauf mit Seed+1 (Abweichung erwartet)
   lasttest       Lasttest: jeder Ort mit Daten, viele Bevölkerungsblöcke; Zeit je Spieljahr
+  wirtschaft     Wirtschaft im Überblick: Güter, Berufe, Steuern (nach dem Einschwingen oder
+                 nach --jahre/--tage); Werkzeug der Kalibrierung
 
 Optionen:
   --daten DIR    Datenordner. Standard: Umgebungsvariable UHRWERK_DATEN, sonst Suche
@@ -73,6 +77,7 @@ Optionen:
   --grenze S     Lasttest: Exitcode 1, wenn der Median je Spieljahr über S Sekunden liegt
   --bericht      Tabelle je Staat am Ende des Laufs (nur lauf)
   --chronik      Chronik der Partie ausgeben (nur lauf)
+  --maerkte      Preise je Markt (nur wirtschaft)
   --hilfe, -h    Diese Hilfe anzeigen
 
 Exitcodes:
@@ -103,6 +108,7 @@ struct Options {
     std::optional<double> limit_seconds;
     bool report = false;
     bool chronicle = false;
+    bool markets = false;
     bool help = false;
     std::set<std::string> given; // genannte Optionen, z. B. "--bericht"
 };
@@ -143,7 +149,7 @@ Options parse_options(int argc, char** argv) {
     const std::set<std::string_view> with_value = {"--daten",   "--szenario",  "--jahre",
                                                    "--tage",    "--seed",      "--threads",
                                                    "--bloecke", "--vergleich", "--grenze"};
-    const std::set<std::string_view> flags = {"--bericht", "--chronik"};
+    const std::set<std::string_view> flags = {"--bericht", "--chronik", "--maerkte"};
 
     for (int i = 1; i < argc; ++i) {
         const std::string_view arg = argv[i];
@@ -162,7 +168,7 @@ Options parse_options(int argc, char** argv) {
                 if (value) {
                     throw UsageError{"Option " + name + " erwartet keinen Wert"};
                 }
-                (name == "--bericht" ? o.report : o.chronicle) = true;
+                (name == "--bericht" ? o.report : name == "--chronik" ? o.chronicle : o.markets) = true;
             } else if (with_value.count(name) != 0) {
                 if (!value) {
                     if (i + 1 >= argc) {
@@ -301,6 +307,14 @@ std::string pad(const std::string& text, std::size_t width, bool right_align) {
     }
     const std::string fill(width - w, ' ');
     return right_align ? fill + text : text + fill;
+}
+
+std::string pad_right(const std::string& text, std::size_t width) {
+    return pad(text, width, false);
+}
+
+std::string pad_left(const std::string& text, std::size_t width) {
+    return pad(text, width, true);
 }
 
 void print_table(const std::vector<std::vector<std::string>>& rows, const std::vector<bool>& right_align,
@@ -591,6 +605,20 @@ void print_population(const World& w, Fixed start, Fixed end) {
         std::cout << " (×" << format_fixed(end / start, 2) << ")";
     }
     std::cout << '\n';
+    // Mittel über alle Blöcke, nach Personen gewichtet.
+    Fixed people;
+    Fixed living;
+    Fixed literacy;
+    for (const uhrwerk::PopBlock& pop : w.pops) {
+        people += pop.size();
+        living += pop.size() * pop.living_standard;
+        literacy += pop.size() * pop.literacy;
+    }
+    if (people > Fixed::zero()) {
+        std::cout << "Gesellschaft: Lebensstandard " << format_fixed(living / people, 1)
+                  << ", Alphabetisierung " << format_fixed(literacy * Fixed::from_int(100) / people, 1)
+                  << " %\n";
+    }
     uhrwerk::PopulationBalance year;
     for (const uhrwerk::PopulationBalance& b : w.balance_previous) {
         year.births += b.births;
@@ -654,6 +682,137 @@ int cmd_lauf(const Options& o, const fs::path& data_dir) {
         print_chronicle(sim.world());
     }
     std::cout << "\nPrüfsumme: " << hex16(sim.checksum()) << '\n';
+    return kExitOk;
+}
+
+/// Wirtschaft im Überblick (seit M5, docs/technik/wirtschaft.md Abschnitt 4.9): Angebot und Nachfrage je
+/// Gut über alle Märkte, Einkommen und Lebensstandard je Beruf, Steuern je Staat – nach dem Einschwingen
+/// oder nach --jahre/--tage. Werkzeug der Kalibrierung.
+int cmd_wirtschaft(const Options& o, const fs::path& data_dir) {
+    auto world = load(data_dir, o.scenario, true);
+    if (!world) {
+        return kExitDataError;
+    }
+    const Date start = world->date;
+    std::int64_t days = 0;
+    if (o.years || o.days) {
+        const Period period = period_from(o, start);
+        days = days_between(start, add_years(start, period.years)) + period.extra_days;
+    }
+    uhrwerk::Simulation sim(std::move(*world), uhrwerk::SimConfig{o.seed, o.threads});
+    sim.step_days(days);
+    const World& w = sim.world();
+    const std::size_t goods = w.goods.size();
+    const std::size_t professions = w.professions.size();
+    const std::size_t needs = w.needs.size();
+
+    std::cout << "Wirtschaft zum " << uhrwerk::format_date_long(w.date)
+              << (days == 0 ? " (nach dem Einschwingen)" : "") << "\n\n";
+
+    // Güter: Summen über alle Märkte; Preis als Mittel nach Angebot.
+    std::cout << "Gut               Angebot   Nachfrage  Nachfr./Ang.  Preis/Basis    Einfuhr    Ausfuhr\n";
+    for (std::size_t g = 0; g < goods; ++g) {
+        Fixed supply;
+        Fixed demand;
+        Fixed imports;
+        Fixed exports;
+        Fixed weighted;
+        for (const uhrwerk::MarketState& m : w.market_states) {
+            supply += m.supply[g];
+            demand += m.demand[g];
+            imports += m.imports[g];
+            exports += m.exports[g];
+            weighted += m.supply[g] * m.price[g] / w.goods[g].base_price;
+        }
+        const Fixed ratio = supply > Fixed::zero() ? demand / supply : Fixed::zero();
+        const Fixed price = supply > Fixed::zero() ? weighted / supply : Fixed::zero();
+        std::cout << pad_right(w.goods[g].name, 14) << pad_left(format_fixed(supply, 0), 12)
+                  << pad_left(format_fixed(demand, 0), 12) << pad_left(format_fixed(ratio, 2), 14)
+                  << pad_left(format_fixed(price, 2), 13) << pad_left(format_fixed(imports, 0), 11)
+                  << pad_left(format_fixed(exports, 0), 11) << '\n';
+    }
+
+    // Berufe: Mittel über die Orte, nach Köpfen gewichtet.
+    std::vector<Fixed> people(professions);
+    std::vector<Fixed> income(professions);
+    std::vector<Fixed> target(professions);
+    std::vector<Fixed> living(professions);
+    std::vector<Fixed> food(professions);
+    std::vector<Fixed> coverage(professions * needs);
+    for (std::size_t li = 0; li < w.locations.size(); ++li) {
+        const uhrwerk::Location& loc = w.locations[li];
+        std::vector<Fixed> here(professions);
+        for (Index p = loc.first_pop; p < loc.first_pop + loc.pop_count; ++p) {
+            const uhrwerk::PopBlock& pop = w.pops[static_cast<std::size_t>(p)];
+            here[static_cast<std::size_t>(pop.profession)] += pop.size();
+            living[static_cast<std::size_t>(pop.profession)] += pop.size() * pop.living_standard;
+        }
+        for (std::size_t p = 0; p < professions; ++p) {
+            if (here[p] <= Fixed::zero()) {
+                continue;
+            }
+            people[p] += here[p];
+            income[p] += here[p] * w.location_income[li * professions + p];
+            target[p] += here[p] * w.snapshot_targets[li * professions + p];
+            food[p] += here[p] * uhrwerk::food_coverage(w, static_cast<Index>(li), static_cast<Index>(p));
+            for (std::size_t n = 0; n < needs; ++n) {
+                coverage[p * needs + n] += here[p] * w.location_coverage[(li * professions + p) * needs + n];
+            }
+        }
+    }
+    std::cout << "\nBeruf               Köpfe  Einkommen/Jahr  Lebensstandard  Ziel  Bedarfsdeckung je "
+                 "Bedürfnis (%)\n";
+    for (std::size_t p = 0; p < professions; ++p) {
+        if (people[p] <= Fixed::zero()) {
+            continue;
+        }
+        std::cout << pad_right(w.professions[p].name, 14) << pad_left(format_fixed(people[p], 0), 11)
+                  << pad_left(format_fixed(income[p] * Fixed::from_int(12) / people[p], 1), 16)
+                  << pad_left(format_fixed(living[p] / people[p], 1), 16)
+                  << pad_left(format_fixed(target[p] / people[p], 1), 6) << "  ";
+        for (std::size_t n = 0; n < needs; ++n) {
+            std::cout << ' ' << format_fixed(coverage[p * needs + n] * Fixed::from_int(100) / people[p], 0);
+        }
+        std::cout << '\n';
+    }
+
+    // Staaten: Steuern des letzten Rechentags je Art und Hofhaltung je Monat.
+    std::cout << "\nStaat                            Kontribution     Akzise       Zoll    Summe  Ausgaben   "
+                 "  Schatz\n";
+    for (std::size_t s = 0; s < w.states.size(); ++s) {
+        std::array<Fixed, uhrwerk::kTaxKinds> taxes{};
+        for (const Index li : w.state_locations(static_cast<Index>(s))) {
+            for (std::size_t t = 0; t < uhrwerk::kTaxKinds; ++t) {
+                taxes[t] += w.economy[static_cast<std::size_t>(li)].taxes[t];
+            }
+        }
+        const uhrwerk::State& state = w.states[s];
+        std::cout << pad_right(state.short_name + " (" + state.tag + ")", 30)
+                  << pad_left(format_fixed(taxes[0], 0), 15) << pad_left(format_fixed(taxes[1], 0), 11)
+                  << pad_left(format_fixed(taxes[2], 0), 11)
+                  << pad_left(format_fixed(taxes[0] + taxes[1] + taxes[2], 0), 9)
+                  << pad_left(format_fixed(state.court_expenses / Fixed::from_int(12), 0), 10)
+                  << pad_left(format_fixed(state.treasury, 0), 11) << '\n';
+    }
+
+    if (o.markets) {
+        std::cout << "\nPreise je Markt (Faktor auf den Basispreis; Erntefaktor in Klammern)\n";
+        for (std::size_t m = 0; m < w.markets.size(); ++m) {
+            const uhrwerk::MarketState& state = w.market_states[m];
+            Fixed total;
+            for (std::size_t g = 0; g < goods; ++g) {
+                total += state.supply[g] + state.demand[g];
+            }
+            if (total <= Fixed::zero()) {
+                continue;
+            }
+            std::cout << pad_right(w.markets[m].name, 36) << " (" << format_fixed(state.harvest, 2) << ")";
+            for (std::size_t g = 0; g < goods; ++g) {
+                std::cout << ' ' << format_fixed(state.price[g] / w.goods[g].base_price, 2);
+            }
+            std::cout << '\n';
+        }
+    }
     return kExitOk;
 }
 
@@ -862,6 +1021,9 @@ int run(int argc, char** argv) {
         } else if (o.command == "lasttest") {
             check_applicable(o, {"--daten", "--szenario", "--jahre", "--seed", "--threads", "--bloecke",
                                  "--vergleich", "--grenze"});
+        } else if (o.command == "wirtschaft") {
+            check_applicable(
+                o, {"--daten", "--szenario", "--jahre", "--tage", "--seed", "--threads", "--maerkte"});
         } else {
             throw UsageError{"Unbekannter Befehl '" + o.command + "'"};
         }
@@ -878,6 +1040,9 @@ int run(int argc, char** argv) {
         }
         if (o.command == "lasttest") {
             return cmd_lasttest(o, data_dir);
+        }
+        if (o.command == "wirtschaft") {
+            return cmd_wirtschaft(o, data_dir);
         }
         return cmd_determinismus(o, data_dir);
     } catch (const UsageError& e) {

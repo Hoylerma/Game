@@ -9,9 +9,9 @@ beduerfnis nahrung {
 
 beduerfnis kleidung {
     name   = "Kleidung"
-    unten  = { tuch = 0.2 }
-    mittel = { tuch = 0.5 }
-    oben   = { tuch = 1.5 kolonialwaren = 0.5 }
+    unten  = { tuch = 0.4 }
+    mittel = { tuch = 1.2 }
+    oben   = { tuch = 2.5 kolonialwaren = 0.5 }
 }
 
 beduerfnis luxus {

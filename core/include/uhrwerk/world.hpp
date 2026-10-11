@@ -60,7 +60,6 @@ struct Profession {
     std::string id;
     std::string name;
     Stratum stratum = Stratum::Unten;
-    Fixed yield_per_capita;        // Reichstaler pro Kopf und Jahr
     bool taxable = true;           // privilegierte Stände (Adel, Klerus) zahlen keine Kontribution
     Fixed share_city;              // Anteil in Städten (0..1)
     Fixed share_rural;             // Anteil auf dem Land (0..1)
@@ -287,10 +286,28 @@ struct LocationSnapshot {
     Fixed reserve; // Landreserve 0..1
 };
 
-/// Produktion und Steuern eines Ortes je Monat, festgestellt am Rechentag des Ortes.
+/// Wirtschaft eines Ortes je Monat, festgestellt an seinem Rechentag (seit M5 mit Steuern je Art,
+/// docs/technik/wirtschaft.md Abschnitt 4.2).
 struct LocationEconomy {
-    Fixed production; // Reichstaler pro Monat
-    Fixed taxes;      // davon an den Staat
+    Fixed production;                     // Wertschöpfung zu Marktpreisen, Reichstaler pro Monat
+    std::array<Fixed, kTaxKinds> taxes{}; // Steuern je TaxKind an den Besitzer
+    Fixed traders;                        // Köpfe in Handelshäusern (Anteil an der Handelsspanne)
+
+    Fixed total_taxes() const { return taxes[0] + taxes[1] + taxes[2]; }
+};
+
+/// Zustand eines Marktes (seit M5, Abschnitt 4.1), veröffentlicht am Monatsersten. Vektoren je Gut.
+struct MarketState {
+    std::vector<Fixed> price;        // Reichstaler je Einheit
+    std::vector<Fixed> buy_ratio;    // Kaufquote: Anteil der Nachfrage, der zu haben ist (0..1)
+    std::vector<Fixed> sell_ratio;   // Verkaufsquote: Anteil des Angebots, der Käufer findet (0..1)
+    std::vector<Fixed> import_share; // Anteil der Einfuhr am Angebot (0..1)
+    std::vector<Fixed> supply;       // Angebot des Monats mit Einfuhr (Menge)
+    std::vector<Fixed> demand;       // Nachfrage des Monats mit Ausfuhr (Menge)
+    std::vector<Fixed> imports;      // Einfuhr des Monats (Menge, von Nachbarn und Weltmarkt)
+    std::vector<Fixed> exports;      // Ausfuhr des Monats (Menge)
+    Fixed margin_per_trader;         // Handelsspanne je Kopf im Handelshaus und Monat (Reichstaler)
+    Fixed harvest = Fixed::one();    // Erntefaktor des laufenden Jahres (Abschnitt 4.7)
 };
 
 /// Szenario/Lesezeichen (data/szenarien/*.chron).
@@ -337,6 +354,16 @@ struct World {
     std::vector<PopulationBalance> balance_previous; // Vorjahr
     std::vector<LocationEconomy> economy;            // am letzten Rechentag
     std::vector<std::vector<PopBlock>> arrivals; // je Ort: Zugezogene ohne eigenen Block, bis zur Neuordnung
+
+    // Zustand der Wirtschaft (seit M5, wirtschaft.md Abschnitt 2.6). Wie oben füllt der Lader die Vektoren
+    // beim Start (Einschwingen); die Simulation legt fehlende an.
+    std::vector<Fixed> business_shares; // Betriebsanteile: [ort × betriebe + betrieb], je Beruf Summe 1
+    std::vector<Fixed> location_supply; // Erzeugung je Ort und Gut im Monat: [ort × güter + gut]
+    std::vector<Fixed> location_demand; // Nachfrage (Verbrauch und Vorleistungen) je Ort und Gut im Monat
+    std::vector<Fixed> location_income; // Netto-Einkommen je Kopf und Monat: [ort × berufe + beruf]
+    std::vector<Fixed>
+        location_coverage; // Bedarfsdeckung 0..1: [(ort × berufe + beruf) × bedürfnisse + bedürfnis]
+    std::vector<MarketState> market_states; // parallel zu markets
 
     Index find_state(std::string_view tag) const;
     Index find_location(std::string_view id) const;

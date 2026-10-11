@@ -815,7 +815,7 @@ private:
         r.price_adjustment = f.fixed("preis_anpassung", unit).value_or(Fixed{});
         r.trade_neighbors = static_cast<std::int32_t>(f.integer("handel_nachbarn", 0, 16).value_or(0));
         r.trade_radius_km = f.fixed("handel_radius_km", between(fx(0), fx(5000))).value_or(Fixed{});
-        r.trade_rate = f.fixed("handel_rate", unit).value_or(Fixed{});
+        r.trade_rate = f.fixed("handel_rate", between(fx(0), fx(100))).value_or(Fixed{});
         r.freight_land = f.fixed("handel_fracht", between(fx(0), fx(10))).value_or(Fixed{});
         r.freight_sea = f.fixed("seefracht", between(fx(0), fx(10))).value_or(Fixed{});
         r.trade_margin = f.fixed("handelsspanne", between(fx(0), half)).value_or(Fixed{});
@@ -905,8 +905,8 @@ private:
     void load_professions(const SourceFile& file) {
         for_each_definition(file, "beruf", "beruf <kennung> { … }", [&](const ScriptNode& node) {
             Fields f(node, file.name, "beruf " + node.value, issues_,
-                     {"name", "schicht", "ertrag", "steuerpflichtig", "anteil_stadt", "anteil_land", "agrar",
-                      "bildung", "in_stadt", "agrarabgabe"});
+                     {"name", "schicht", "steuerpflichtig", "anteil_stadt", "anteil_land", "agrar", "bildung",
+                      "in_stadt", "agrarabgabe"});
             Profession p;
             p.id = node.value;
             p.name = f.text("name").value_or("");
@@ -922,7 +922,6 @@ private:
                                   "ungültige Schicht " + quote(*stratum) + " (erlaubt: unten, mittel, oben)");
                 }
             }
-            p.yield_per_capita = f.fixed("ertrag", between(fx(0), fx(1000))).value_or(Fixed{});
             p.taxable = f.boolean("steuerpflichtig").value_or(true);
             p.share_city = f.fixed("anteil_stadt", between(fx(0), fx(1))).value_or(Fixed{});
             p.share_rural = f.fixed("anteil_land", between(fx(0), fx(1))).value_or(Fixed{});

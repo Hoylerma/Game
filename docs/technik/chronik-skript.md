@@ -114,7 +114,7 @@ regeln {
     anteil_kinder             = 0.34    # Altersaufbau beim Start, 0..1
     anteil_jung               = 0.26    # Summe der drei Anteile höchstens 1 (Rest: Alte)
     anteil_erwerb             = 0.33
-    fruchtbarkeit             = 0.088   # 0..1
+    fruchtbarkeit             = 0.093   # 0..1
     anteil_fruchtbar_erwerb   = 0.4     # 0..1
     fruchtbarkeit_landreserve = 0.3     # 0..10
     fruchtbarkeit_wohlstand   = 0.15    # 0..1
@@ -124,7 +124,7 @@ regeln {
     sterblichkeit_alt         = 0.11
     sterblichkeit_armut       = 0.3
     tragfaehigkeit_stadt      = 1.75    # 0..100
-    lebensstandard_bezug      = 12      # größer als 0
+    lebensstandard_bezug      = 9       # größer als 0
     lebensstandard_anpassung  = 0.25    # 0..1
     bildung_stadt             = 1.25    # 0..10
     bildung_anpassung         = 0.03    # 0..1
@@ -145,7 +145,7 @@ regeln {
     preis_anpassung           = 0.3     # 0..1
     handel_nachbarn           = 6       # Ganzzahl 0..16
     handel_radius_km          = 180     # 0..5000
-    handel_rate               = 0.5     # 0..1
+    handel_rate               = 5       # 0..100
     handel_fracht             = 0.12    # 0..10, je 100 km
     seefracht                 = 0.10    # 0..10
     handelsspanne             = 0.05    # 0..0.5
@@ -204,7 +204,6 @@ konfession lutherisch {
 beruf bauern {
     name            = "Bauern"     # Pflicht
     schicht         = unten        # Pflicht: unten | mittel | oben
-    ertrag          = 6            # Pflicht: Reichstaler pro Kopf und Jahr
     steuerpflichtig = ja           # Pflicht
     anteil_stadt    = 0.10         # Pflicht: Anteil an der Bevölkerung städtischer Orte
     anteil_land     = 0.60         # Pflicht: Anteil an der Bevölkerung ländlicher Orte
@@ -219,7 +218,8 @@ beruf bauern {
 
 `agrarabgabe` (seit M5, Standard 0): Grundrente bzw. Zehnt – der Beruf erhält diesen Anteil am Erlös der
 Agrarbetriebe seines Ortes ([wirtschaft.md](wirtschaft.md), Abschnitt 4.2). Die Summe über alle Berufe ist
-höchstens 1 (sonst fatal). `ertrag` gilt bis zur Umstellung auf die Betriebe (M5, Schritt 2).
+höchstens 1 (sonst fatal). Das Feld `ertrag` (fester Ertrag je Kopf bis M4) gibt es seit M5 nicht mehr:
+Die Berufe erzeugen in Betrieben (Abschnitt 3.13); steht es noch in einer Datei, ist es eine Warnung.
 
 Die Summe aller `anteil_stadt` und die Summe aller `anteil_land` muss jeweils 1 ergeben (Toleranz ±0,001), sonst fatal.
 
@@ -450,16 +450,10 @@ Das Weltdatum wird auf `szenario.datum` gesetzt; der Zustand von `state.last_mon
 
 Alle Rechnungen in `Fixed`. Reihenfolge der Operationen wie angegeben (wichtig für Bit-Gleichheit).
 Seit M4 stehen die Formeln der Bevölkerung (Lebensstandard, Geburten, Sterbefälle, Altern, Bildung,
-Wanderung, Neuordnung) und der Ortssteuern in [bevoelkerung.md](bevoelkerung.md), Abschnitt 4; das
-feste Wachstum aus M1 (`wachstum_*`) gibt es nicht mehr.
-
-**Produktion und Steuern eines Ortes** (an seinem Rechentag, bevoelkerung.md Abschnitt 4.6):
-
-```
-ertrag_b   = beruf.ertrag × gelände.ertrag × (1 − verwüstung × regeln.verwuestung_ertrag) × agrar_b
-produziert = größe × (ertrag_b / 12)                      je Block, Blöcke aufsteigend
-steuern    = Σ produziert × staat.steuersatz              nur steuerpflichtige Berufe
-```
+Wanderung, Neuordnung) in [bevoelkerung.md](bevoelkerung.md), Abschnitt 4; das feste Wachstum aus M1
+(`wachstum_*`) gibt es nicht mehr. Seit M5 stehen Erzeugung, Märkte, Einkommen, Verbrauch und die
+Steuern eines Ortes (Kontribution, Akzise, Zoll) in [wirtschaft.md](wirtschaft.md), Abschnitt 4; der
+feste Ertrag je Beruf (`ertrag`) und der eine Steuersatz (`steuersatz`) entfallen.
 
 **Wirtschaft eines Staates** (an seinem Rechentag):
 

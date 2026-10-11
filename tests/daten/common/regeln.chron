@@ -42,10 +42,10 @@ regeln {
     preis_anpassung           = 0.3
     handel_nachbarn           = 6
     handel_radius_km          = 180
-    handel_rate               = 0.5
+    handel_rate               = 5
     handel_fracht             = 0.12
     seefracht                 = 0.10
-    handelsspanne             = 0.05
+    handelsspanne             = 0.25    # Testdaten: viele Kaufleute in den Städten
     betrieb_anpassung         = 0.03
     betrieb_min_anteil        = 0.02
     ernte_schwankung_land     = 0.08

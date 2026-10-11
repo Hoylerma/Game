@@ -12,20 +12,19 @@
 
 namespace uhrwerk {
 
-/// Kennzahlen eines Ortes für die Bevölkerung (Abschnitt 4.1).
+/// Kennzahlen eines Ortes für Bevölkerung und Wirtschaft (Abschnitt 4.1; seit M5 kommt der
+/// Ziel-Lebensstandard aus der Wirtschaft, wirtschaft.md Abschnitt 4.4).
 struct LocationFactors {
     Fixed population;          // n: Personen in allen Blöcken
     Fixed capacity;            // Tragfähigkeit (Personen)
     Fixed reserve;             // Landreserve 0..1
     Fixed condition;           // 1 − verwüstung × verwuestung_ertrag
-    std::vector<Fixed> yield;  // je Beruf: Ertrag in Talern pro Kopf und Jahr (mit Agrarfaktor)
-    std::vector<Fixed> target; // je Beruf: Ziel-Lebensstandard 0..100
+    Fixed agrarian;            // Ertragsfaktor der Agrarbetriebe: min(1, Tragfähigkeit / n)
+    std::vector<Fixed> target; // je Beruf: Ziel-Lebensstandard 0..100 (run_location_economy)
 };
 
-/// Berechnet die Kennzahlen eines Ortes mit Daten. tax_rate ist der Steuersatz des Besitzers.
-/// out.yield und out.target haben danach so viele Einträge wie es Berufe gibt.
-void compute_location_factors(const World& world, const Location& location, Fixed tax_rate,
-                              LocationFactors& out);
+/// Berechnet population, capacity, reserve, condition und agrarian eines Ortes mit Daten.
+void compute_location_factors(const World& world, const Location& location, LocationFactors& out);
 
 /// Ziel der Alphabetisierung eines Blocks bei Lebensstandard living_standard (Abschnitt 4.4).
 Fixed literacy_target(const World& world, const Location& location, const PopBlock& pop,
@@ -63,8 +62,9 @@ struct PopulationRates {
 };
 PopulationRates derive_rates(const Rules& rules);
 
-/// Startwerte nach dem Laden (Abschnitt 2.6): Lebensstandard = Ziel des Berufs im Ort,
-/// Alphabetisierung = Zielwert, danach Neuordnung (zu kleine Blöcke auflösen).
+/// Startwerte nach dem Laden (Abschnitt 2.6): Neuordnung (zu kleine Blöcke auflösen), Einschwingen der
+/// Wirtschaft (wirtschaft.md Abschnitt 4.8), dann Lebensstandard = Ziel des Berufs im Ort und
+/// Alphabetisierung = Zielwert; Momentaufnahmen und Ziel-Lebensstandard werden veröffentlicht.
 void initialize_population(World& world);
 
 } // namespace uhrwerk
