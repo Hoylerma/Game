@@ -10,6 +10,7 @@ ist (Stand: Meilenstein M3, Karte des Kernraums).
 | [chronik-skript.md](chronik-skript.md) | Syntax des Chronik-Skripts, Datenordner, Dateischemata (mit Orten ohne Daten und Kreisen), Startzustand, Formeln der Simulation, Kartenformat (Fassung M3) | Parser, Lader, `data/`, Archivar, Geodaten, Kartengenerator |
 | [tabellen.md](tabellen.md) | Tabellen der Datenpipeline (`data/tabellen/*.csv`), Sicherheit der Angaben, Prüfungen des Archivars | Archivar, `data/` |
 | [bridge-api.md](bridge-api.md) | GDScript-Schnittstelle der GDExtension (`UhrwerkSimulation`), Kartenmodi, Bibliotheksnamen | Brücke, Godot-Projekt |
+| [bevoelkerung.md](bevoelkerung.md) | **Entwurf M4:** Bevölkerungsmodell (Altersaufbau, Lebensstandard, Bildung, Kultur, Wanderung), Formeln, Mehrkernberechnung, Lasttest, Abnahme | Kern, `data/`, Archivar (nach Freigabe) |
 
 Die öffentlichen Header in [`core/include/uhrwerk/`](../../core/include/uhrwerk/) sind die
 verbindliche Programmierschnittstelle des Kerns. Jede Datei beginnt mit einem Kommentar, der ihre
