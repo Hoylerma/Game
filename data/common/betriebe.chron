@@ -101,8 +101,8 @@ betrieb werkstatt {
 betrieb saline {
     name       = "Saline"         # Salzsieder (Halloren in Halle), Siedepfannen mit Holzfeuerung
     beruf      = handwerker
-    erzeugt    = { salz = 5 }
-    verbraucht = { holz = 2.5 }
+    erzeugt    = { salz = 9 }
+    verbraucht = { holz = 4.5 }
     agrar      = nein
     vorkommen  = salz
     gewicht    = 6

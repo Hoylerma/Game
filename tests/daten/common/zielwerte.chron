@@ -1,0 +1,36 @@
+# Zielwerte der Test-Fixture: weit gefasst, damit `bilanz` auf der Fixture durchläuft
+# (CTest bilanz_fixture). Format wie data/common/zielwerte.chron.
+
+vermoegen {
+    bereich = { -4 4 }
+    anteil  = 0.9
+    ende    = { -3.5 2 }
+}
+
+bankrotte {
+    median = 1
+    p95    = 5
+}
+
+steuerquote {
+    bereich = { 0.5 2 }
+}
+
+preise {
+    bereich = { 0.25 4 }
+    anteil  = 0.9
+    ausnahme salz {
+        bereich = { 1 4.5 }
+    }
+}
+
+bevoelkerung {
+    jahr   = 1700
+    faktor = { 0.5 2 }
+}
+
+lebensstandard {
+    unten  = { 10 90 }
+    mittel = { 10 90 }
+    oben   = { 10 90 }
+}

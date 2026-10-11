@@ -23,6 +23,7 @@ add_executable(uhrwerk_tests
     test_parallel.cpp
     test_population.cpp
     test_lasttest.cpp
+    test_balance.cpp
 )
 target_link_libraries(uhrwerk_tests PRIVATE uhrwerk::core doctest::doctest uhrwerk_warnings)
 target_compile_definitions(uhrwerk_tests PRIVATE
@@ -44,4 +45,13 @@ if(UHRWERK_BUILD_CLI)
     add_test(NAME lasttest_threads
         COMMAND uhrwerk-cli lasttest --daten ${PROJECT_SOURCE_DIR}/data --bloecke 20000 --jahre 1
                 --threads 3 --vergleich 1)
+    # Balancing-Bericht (seit M5): auf der Fixture mit ihren weiten Zielwerten in Ordnung, mit den
+    # Zielwerten der Spieldaten verfehlt. Der volle Bericht läuft im CI-Job "Balancing".
+    add_test(NAME bilanz_fixture
+        COMMAND uhrwerk-cli bilanz --daten ${CMAKE_CURRENT_SOURCE_DIR}/daten --seeds 3 --jahre 30)
+    add_test(NAME bilanz_verstoss
+        COMMAND uhrwerk-cli bilanz --daten ${CMAKE_CURRENT_SOURCE_DIR}/daten --seeds 3 --jahre 30
+                --ziele ${PROJECT_SOURCE_DIR}/data/common/zielwerte.chron)
+    # Mit PASS_REGULAR_EXPRESSION zählt die Ausgabe statt des Exitcodes: Ein Bedienfehler bestünde nicht.
+    set_tests_properties(bilanz_verstoss PROPERTIES PASS_REGULAR_EXPRESSION "Verstöße \\([0-9]+, mit ! markiert\\)")
 endif()

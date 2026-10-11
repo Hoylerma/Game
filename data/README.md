@@ -252,45 +252,52 @@ Beträge in Reichstalern; „Steuern im 1. Jahr“ nach den Formeln der Spezifik
 
 ## Wirtschaftswerte
 
-Die Formeln (Spezifikation, Abschnitt 5) koppeln die Einnahmen an Bevölkerung und Verwüstung. Mit den
-Regeln wächst die Bevölkerung der Testregion in 50 Jahren um gut 40 % (384.000 → ca. 548.000 im
-Referenzlauf), und weil gleichzeitig die Verwüstung abklingt, steigen die Steuereinnahmen auf das
-1,5- bis 2,3-Fache. Eine **feste** Hofhaltung kann daher nicht über 50 Jahre ausgeglichen sein.
-Gewählt ist ein Kompromiss, der zur Nachkriegslage passt:
+Seit M5 entstehen Einkommen und Steuern aus Gütern und Märkten
+([wirtschaft.md](../docs/technik/wirtschaft.md)); der Staatshaushalt hat Hof, Verwaltung, Heer, Zinsen
+und Bauten. Alle Werte sind Spielwerte, abgestimmt mit `uhrwerk-cli wirtschaft` (Stand nach dem
+Einschwingen) und dem Balancing-Bericht `uhrwerk-cli bilanz` (viele Läufe über 100 Jahre). Herleitung
+im Einzelnen: [wirtschaft.md, Abschnitt 4.9](../docs/technik/wirtschaft.md#49-regelwerte-und-kalibrierung).
 
-- **Berufe:** Pro-Kopf-Erträge von 6 (Landarme) bis 80 Reichstaler (Adel) ergeben etwa 11–17
-  Reichstaler Produktion je Einwohner; Adel und Geistlichkeit sind steuerfrei.
-- **Steuersatz** (seit M5 `kontribution`; Akzise, Zoll und Heer sind bis zur Kalibrierung in M5
-  vorläufige Spielwerte): 0,10 als Regelfall; 0,12 für Brandenburg und Schweden (hohe Kontributionen der
-  Kriegs- und Besatzungszeit), 0,14 für Böhmen (habsburgischer Steuerdruck), 0,08 für Mecklenburg und
-  Kurmainz (starke Landstände bzw. faktisch autonomes Erfurt).
-- **Hofhaltung** etwa 1,1- bis 1,2-mal die Steuereinnahmen des ersten Jahres: Die Staaten starten mit
-  einem **Nachkriegsdefizit** und kommen nach etwa 5–12 Jahren Wiederaufbau in den Überschuss.
-  Seit M5 (Schritt 3) kommen Verwaltung (0,15 Reichstaler je Einwohner) und Heer (`heer` Soldaten je
-  1.000 Einwohner zu 30 Reichstalern) hinzu, und die Steuern treffen die Wertschöpfung aus den Märkten
-  (etwa 0,8 Reichstaler je Einwohner und Jahr). Die Hofhaltung ist deshalb neu bemessen: Hof +
-  Verwaltung + Heer übersteigen die Steuern nach dem Einschwingen um etwa 10 % (Kursachsen 50.000,
-  Brandenburg 25.500, Böhmen 20.500, die anhaltischen Fürstentümer 2.000–2.500 Reichstaler im Jahr;
-  Herleitung in [wirtschaft.md, Abschnitt 4.9](../docs/technik/wirtschaft.md#49-regelwerte-und-kalibrierung)).
-  Die Tabelle unten beschreibt noch den Stand aus M1; der Balancing-Bericht (M5, Schritt 4) ersetzt sie.
-- **Schatz** als Anteil einer Jahreshofhaltung nach Lage des Staates: Brandenburg klamm (0,2),
-  Mecklenburg-Güstrow fast leer (0,15), Kursachsen wohlhabender (0,6), Sachsen-Gotha unter Ernst dem
-  Frommen gut geordnet (0,9), Braunschweig-Wolfenbüttel sparsam verwaltet (0,5).
+- **Steuersätze:** Kontribution 0,10 als Regelfall; 0,12 für Brandenburg und Schweden (hohe
+  Kontributionen der Kriegs- und Besatzungszeit), 0,14 für Böhmen (habsburgischer Steuerdruck), 0,08 für
+  Mecklenburg und Kurmainz (starke Landstände bzw. faktisch autonomes Erfurt). Akzise 0,04–0,06, Zoll
+  0,03–0,06 (Schweden mit den Ostseezöllen am höchsten). Das ergibt nach dem Einschwingen etwa
+  0,8 Reichstaler je Einwohner und Jahr oder 7,5–11 % der Wirtschaftsleistung; Adel und Geistlichkeit
+  sind steuerfrei.
+- **Heer** (`heer`, Soldaten je 1.000 Einwohner, 30 Reichstaler Sold je Soldat und Jahr): 3 für Mecklenburg, 4 für die kleinen
+  Fürstentümer, Magdeburg und Kurmainz, 6 für Kursachsen und Braunschweig-Wolfenbüttel, 10–12 für Böhmen
+  und Brandenburg, 15 für Schweden mit seinen Garnisonen in Pommern.
+- **Verwaltung:** 0,15 Reichstaler je Einwohner und Jahr (Ämter, Justiz, Kirche); Ämter waren billig,
+  Hof und Heer trugen die Last.
+- **Hofhaltung** so, dass Hof + Verwaltung + Heer die Steuern nach dem Einschwingen um etwa 10 %
+  übersteigen: Die Staaten starten mit einem **Nachkriegsdefizit**, zehren einige Jahre vom Schatz und
+  kommen mit dem Wiederaufbau in den Überschuss. Kursachsen 49.000, Brandenburg 25.000, Böhmen 20.500,
+  Kurmainz 12.250, Schweden 10.250, die anhaltischen Fürstentümer 2.000–2.500 Reichstaler im Jahr.
+  (In M1 war die Hofhaltung die einzige Ausgabe und lag beim 1,1- bis 1,2-Fachen der Einnahmen.)
+- **Schatz** unverändert aus M1, als Anteil der damaligen Jahreshofhaltung nach Lage des Staates:
+  Brandenburg klamm (0,2), Mecklenburg-Güstrow fast leer (0,15), Kursachsen wohlhabender (0,6),
+  Sachsen-Gotha unter Ernst dem Frommen gut geordnet (0,9), Braunschweig-Wolfenbüttel sparsam verwaltet
+  (0,5).
+- **Kredit und Bankrott** (`regeln.chron`): 5 % Zins, 2 Prozentpunkte Aufschlag je Jahreseinnahme
+  Schulden über der ersten, höchstens 20 %; Bankrott bei Schulden über 4 Jahreseinnahmen mit
+  Schuldenschnitt 50 % und 20 Jahren Zinsaufschlag.
 
-Ergebnis, geprüft mit Lader und Simulation des Kerns (`core/`, Stand 09.10.2026) über 50 Jahre und
-30 Zufallsstartwerte, ohne Eingriffe des Spielers:
+**Zielwerte** (`common/zielwerte.chron`, gelesen nur vom Balancing-Bericht) und ihre Begründung:
 
-| Kennzahl | Wert |
-|---|---|
-| Tiefster Kassenstand (Median der Läufe) | −0,27 bis +0,37 Jahreshofhaltungen; kein Staat bleibt dauerhaft im Minus |
-| Tiefster Kassenstand (schlechtester Lauf) | −0,92 Jahreshofhaltungen (Braunschweig-Wolfenbüttel nach früher Seuche in der Stadt Braunschweig) |
-| Brandenburg (Referenzlauf, Seed 1648) | Tiefpunkt −34.000 um 1656, Überschuss ab etwa 1656, Kasse 1698 ca. 1,7 Mio. |
-| Kassenstand nach 50 Jahren | etwa 5–13 Jahreseinnahmen bzw. 8–25 Jahreshofhaltungen |
+| Kennzahl | Ziel | Begründung |
+|---|---|---|
+| Vermögen = (Schatz − Schulden) ÷ Jahreseinnahmen | −3 … 3 in 95 % der Staatsjahre; Median am Ende 0 … 1,5 | Ohne Spieler soll kein Staat Schätze horten oder in Schulden versinken; Rücklage und Landesausbau halten den Schatz bei etwa einer Jahreseinnahme |
+| Staatsbankrotte je Jahrhundert | Median 0, 95-%-Wert höchstens 2 | Bankrotte gab es (Kursachsen, Habsburg), aber nicht als Regelfall ohne Krieg |
+| Steuerquote Ende ÷ Start | 0,6 … 1,4 | Einnahmen wachsen mit der Wirtschaft; nach unten großzügiger, weil die Städte schneller wachsen und die Kontribution dort nur Agrareinkommen trifft |
+| Preis ÷ Basispreis | 0,4 … 2,5 in 95 % der Markt-Monate; Kolonialwaren 0,4 … 5 | Teuerungen um das Zwei- bis Dreifache waren in Hungerjahren üblich, dauerhaft höhere Preise wären ein Fehler im Handel; Kolonialwaren kommen über die Häfen |
+| Bevölkerung 1648 → 1700 | ×1,20 … ×1,45 | Kalibrierung aus M4 (Wiederaufbau nach dem Krieg) |
+| Lebensstandard je Schicht | unten 25–55, mittel 45–75, oben 70–95 | Werte aus M4 |
 
-Der Kassenstand nach 50 Jahren ist hoch, weil M1 noch keine weiteren Ausgaben (Heer, Bauten,
-Schuldendienst) kennt; ein höherer Startwert der Hofhaltung würde die Staaten dagegen in den ersten
-Jahren tief ins Minus führen. Die Werte sind neu zu kalibrieren, sobald weitere Ausgaben hinzukommen.
-Staaten mit nur einem oder zwei Orten reagieren stark auf Seuchen in diesem Ort.
+**Ergebnis** (`bilanz` mit 32 Läufen über 100 Jahre, Stand 11.10.2026): alle Zielwerte erfüllt. Kein
+Staatsbankrott; Vermögen am Ende im Median 0,85–1,12 Jahreseinnahmen; tiefster Wert −1,77 (Anhalt-Dessau
+nach einer Seuche); Steuerquote 0,69–0,99; Preise zu 96,5–100 % im Bereich; Bevölkerung 1700 ×1,36;
+Lebensstandard unten 42, mittel 58, oben 78. Staaten mit einem oder zwei Orten reagieren stark auf
+Seuchen in diesen Orten.
 
 ## Bekannte Lücken und Vereinfachungen
 
@@ -336,8 +343,8 @@ ergab `5548a5fa80f75c0d` (627.709); mit Osterode am Harz in `goettingen` rückte
 Daten in den Dateien `lausitz` bis `thueringen` um einen Index weiter. Seit M4 (Bevölkerungsmodell:
 Altersaufbau, Kultur, Lebensstandard, Wanderung) lautete sie `ed6b14a02cfbfa5d` (642.668 Menschen nach
 100 Jahren). Seit M5 (Wirtschaft mit Gütern, Märkten, Steuerarten und Staatshaushalt) lautet sie
-`4eaa36517208399c`, bei jeder Zahl von Threads; nach 100 Jahren leben in den 60 Orten 707.659
-Menschen (×1,84; der Landesausbau erhöht die Tragfähigkeit).
+`5db13a66d63e6079`, bei jeder Zahl von Threads; nach 100 Jahren leben in den 60 Orten 713.456
+Menschen (×1,86; der Landesausbau erhöht die Tragfähigkeit).
 Alle Angaben tragen seit M2 eine Sicherheit:
 Besitz, Herrscher, Hauptstadt und Konfession der Staaten `ungeprueft` (recherchiert, noch ohne
 Fachprüfung), Bevölkerung, Konfessionsanteile und Verwüstung `schaetzung`, Schatz, Steuersätze,

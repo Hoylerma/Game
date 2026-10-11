@@ -246,6 +246,44 @@ jobs:
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
 
+  balancing:
+    name: Balancing (Linux, Release)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Quelltext auschecken
+        uses: actions/checkout@v4
+
+      - name: Ninja installieren (falls nötig)
+        run: |
+          if ! command -v ninja > /dev/null; then
+            sudo apt-get update
+            sudo apt-get install -y --no-install-recommends ninja-build
+          fi
+
+      - name: Bauen (Preset release)
+        run: |
+          cmake --preset release
+          cmake --build --preset release --target uhrwerk-cli
+
+      # Abnahme M5 (docs/technik/wirtschaft.md, Abschnitte 7 und 8): 16 Läufe über 100 Jahre ohne
+      # Spielereingriff gegen die Zielwerte in data/common/zielwerte.chron; Exitcode 1 bei Verstoß.
+      # Der Bericht steht auch bei Verstoß in der Zusammenfassung.
+      - name: Balancing-Bericht (16 Seeds, 100 Jahre)
+        run: |
+          status=0
+          ./build/release/cli/uhrwerk-cli bilanz --daten data --seeds 16 --jahre 100 \
+            > "$RUNNER_TEMP/bilanz.txt" 2>&1 || status=$?
+          cat "$RUNNER_TEMP/bilanz.txt"
+          {
+            echo "### Balancing-Bericht (16 Seeds, 100 Jahre)"
+            echo
+            echo '```'
+            cat "$RUNNER_TEMP/bilanz.txt"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          exit "$status"
+
   formatierung:
     name: Formatierung
     runs-on: ubuntu-24.04

@@ -10,6 +10,7 @@ add_library(uhrwerk_core STATIC
     src/population.cpp
     src/economy.cpp
     src/lasttest.cpp
+    src/balance.cpp
 )
 add_library(uhrwerk::core ALIAS uhrwerk_core)
 

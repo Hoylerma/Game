@@ -1,0 +1,50 @@
+# Zielwerte des Balancing-Berichts (Meilenstein M5), gelesen nur von `uhrwerk-cli bilanz`.
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.15; Bericht: docs/technik/wirtschaft.md,
+# Abschnitt 7; Begründung der Werte: data/README.md, Abschnitt "Wirtschaftswerte".
+#
+# Der Bericht rechnet mehrere Läufe (Seeds) ohne Eingriffe des Spielers und vergleicht Median,
+# 5- und 95-%-Wert über alle Läufe mit diesen Werten. Jeder Verstoß ergibt Exitcode 1.
+# Bereiche stehen als { von bis }, beide Grenzen eingeschlossen.
+
+vermoegen {
+    # (Schatz − Schulden) ÷ Jahreseinnahmen, gemessen am Jahrestag des Starts, je Staat
+    bereich = { -3 3 }      # erlaubter Bereich …
+    anteil  = 0.95          # … in mindestens diesem Anteil der Staatsjahre
+    ende    = { 0 1.5 }     # Median am Ende des Laufs: kein Staat häuft Schulden oder Schätze an
+}
+
+bankrotte {
+    # Staatsbankrotte je Staat und Jahrhundert
+    median = 0              # höchstens
+    p95    = 2              # höchstens (95-%-Wert über die Läufe)
+}
+
+steuerquote {
+    # Steuern ÷ Wirtschaftsleistung der Orte eines Staates am Ende gegen den Start (Median je Staat):
+    # Die Einnahmen wachsen mit der Wirtschaft, nicht darüber hinaus. Nach unten großzügiger, weil die
+    # Kontribution in Städten nur Agrareinkommen trifft und die Städte schneller wachsen als das Land
+    # (Quote nach 100 Jahren etwa 0,7–1,0; der Spieler kann mit der Akzise gegensteuern)
+    bereich = { 0.6 1.4 }
+}
+
+preise {
+    # Preis ÷ Basispreis je Gut, alle Märkte mit Orten und alle Monate
+    bereich = { 0.4 2.5 }
+    anteil  = 0.95          # Getreide darf in Hungerjahren darüber liegen
+    ausnahme kolonialwaren {
+        bereich = { 0.4 5 } # Basispreis gilt am Weltmarkt; im Binnenland kommt die Fracht hinzu
+    }
+}
+
+bevoelkerung {
+    jahr   = 1700           # Bevölkerung am Jahrestag des Starts in diesem Jahr …
+    faktor = { 1.20 1.45 }  # … gegen den Start (Median; Kalibrierung aus M4)
+}
+
+lebensstandard {
+    # Median je Schicht über alle Jahre und Läufe (Mittel über die Köpfe)
+    unten  = { 25 55 }
+    mittel = { 45 75 }
+    oben   = { 70 95 }
+}

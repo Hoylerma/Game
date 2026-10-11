@@ -429,6 +429,45 @@ Jede Landschaft gehört höchstens einem Markt an (sonst fatal); eine Landschaft
 ist eine Warnung. Im Kern: `World::markets` (`Market { id, name, landscapes }`). Bedeutung:
 [wirtschaft.md](wirtschaft.md), Abschnitt 2.4.
 
+### 3.15 `common/zielwerte.chron` (seit M5)
+
+Zielwerte des Balancing-Berichts. Die Datei gehört nicht zum Spielinhalt: Der Lader liest sie nicht,
+nur `uhrwerk-cli bilanz` (und `uhrwerk-cli pruefen` prüft sie, wenn sie vorhanden ist). Bereiche stehen
+als `{ von bis }` (von ≤ bis, beide Grenzen eingeschlossen), Anteile zwischen 0 und 1.
+
+```text
+vermoegen {                 # (Schatz − Schulden) ÷ Jahreseinnahmen, je Staat
+    bereich = { -3 3 }      # Pflicht: erlaubter Bereich …
+    anteil  = 0.95          # Pflicht: … in mindestens diesem Anteil der Staatsjahre
+    ende    = { 0 1.5 }     # Pflicht: Median am Ende des Laufs
+}
+bankrotte {                 # je Staat und Jahrhundert
+    median = 0              # Pflicht: höchstens
+    p95    = 2              # Pflicht: höchstens (95-%-Wert)
+}
+steuerquote {
+    bereich = { 0.6 1.4 }   # Pflicht: Steuerquote am Ende ÷ am Start (Median je Staat)
+}
+preise {                    # Preis ÷ Basispreis je Gut
+    bereich = { 0.4 2.5 }   # Pflicht
+    anteil  = 0.95          # Pflicht: Mindestanteil der Markt-Monate im Bereich
+    ausnahme kolonialwaren { bereich = { 0.4 5 } }   # optional, mehrfach: eigener Bereich je Gut
+}
+bevoelkerung {
+    jahr   = 1700           # Pflicht: Jahrestag des Starts in diesem Jahr …
+    faktor = { 1.20 1.45 }  # Pflicht: … Bevölkerung gegen den Start (Median)
+}
+lebensstandard {            # Median je Schicht über alle Jahre und Läufe
+    unten  = { 25 55 }      # Pflicht
+    mittel = { 45 75 }      # Pflicht
+    oben   = { 70 95 }      # Pflicht
+}
+```
+
+Alle sechs Blöcke sind Pflicht; unbekannte Blöcke und Felder, Bereiche mit von > bis und unbekannte
+Güter in `ausnahme` sind Fehler. Im Kern: `BalanceTargets` (`uhrwerk/balance.hpp`). Bedeutung:
+[wirtschaft.md](wirtschaft.md), Abschnitt 7.
+
 ## 4. Startzustand
 
 Für jeden Ort entstehen Bevölkerungsblöcke **in dieser Reihenfolge**: für jeden Beruf (Ladereihenfolge), darin für jede Konfession des Ortes (Reihenfolge im `konfession`-Block) und darin für jede Kultur (Reihenfolge im `kultur`-Block, seit M4):

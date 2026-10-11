@@ -1,9 +1,9 @@
 # Wirtschaft und Staatshaushalt (Meilenstein M5)
 
 > **Status: verbindlich** für Kern (`core/src/economy.cpp`), Daten und Tests, soweit umgesetzt: Datenmodell
-> (Abschnitt 2), Märkte, Ortsrechnung, Staatshaushalt, Ernte und Einschwingen (Abschnitte 4.1–4.8).
-> Der Balancing-Bericht (7) folgt in Schritt 4 von M5
-> ([meilensteine.md](../meilensteine.md#m5--wirtschaft-und-staatshaushalt)). Das Dokument entstand als
+> (Abschnitt 2), Märkte, Ortsrechnung, Staatshaushalt, Ernte und Einschwingen (Abschnitte 4.1–4.8) und
+> Balancing-Bericht (7); offen sind Brücke und Oberfläche (Schritt 6 von M5,
+> [meilensteine.md](../meilensteine.md#m5--wirtschaft-und-staatshaushalt)). Das Dokument entstand als
 > Entwurf und wurde vor der Umsetzung freigegeben; Abweichungen der Umsetzung sind eingearbeitet
 > (u. a. Handel bis zur ganzen Menge, Überschuss nicht in Grundnahrung, Hunger quadratisch, Bauten nur
 > ohne Schulden, Kalibrierung in 4.9).
@@ -435,7 +435,10 @@ je Beruf, Haushalt je Staat; mit `--jahre N` nach N Jahren, mit `--maerkte` Prei
    mit drei Eingriffen: Die Berufsanteile der Orte mit Stadtrecht (Stadt mit Amt) aus M1 waren für einen
    Markt zu städtisch – jetzt Bürger 8 % (vorher 15 %), Handwerker 16 % (30 %), Bauern 30 % (20 %),
    Landarme 44 % (33 %); Handwerksbetriebe erzeugen etwas weniger; die Grundnahrung der Unterschicht
-   ist kleiner (3,4 statt 4,2 Scheffel Getreide je Kopf).
+   ist kleiner (3,4 statt 4,2 Scheffel Getreide je Kopf). Mit dem Balancing-Bericht (Schritt 4) kam
+   ein vierter hinzu: Nur Halle und Kolberg sieden Salz, und mit 5 Tonnen je Kopf deckten sie 61 % der
+   Nachfrage – Salz kostete im Binnenland bis zum Vierfachen. Die Saline erzeugt jetzt 9 Tonnen je Kopf
+   (Holz 4,5 statt 2,5 Klafter); Nachfrage ÷ Angebot 1,01.
 2. **Lebensstandard wie in M4:** Die Märkte ergeben niedrigere Einkommen als die festen Erträge aus
    M4 (Landarme 4, Bauern 7,5, Handwerker 7, Bürger 18, Geistlichkeit 17, Adel 63 Reichstaler je Kopf
    und Jahr nach dem Einschwingen). Mit `lebensstandard_bezug` 9 statt 12 liegt der Lebensstandard der
@@ -458,7 +461,8 @@ je Beruf, Haushalt je Staat; mit `--jahre N` nach N Jahren, mit `--maerkte` Prei
    100 Jahren hält jeder Staat ohne Schulden etwa eine Jahreseinnahme im Schatz, der Rest geht in den
    Landesausbau. Bevölkerung 1648 → 1700 ×1,34, nach 100 Jahren ×1,84 (Landesausbau erhöht die
    Tragfähigkeit).
-5. **Langlauf:** Zielwerte des Balancing-Berichts (Abschnitt 7) über 100 Jahre und viele Seeds.
+5. **Langlauf:** Der Balancing-Bericht (Abschnitt 7) erfüllt über 32 Seeds und 100 Jahre alle
+   Zielwerte; Ergebnis dort.
 
 ## 5. Mehrkernberechnung und Determinismus
 
@@ -487,29 +491,52 @@ mit 4 Kernen), erwartet höchstens +30 %.
 
 ## 7. Balancing-Bericht
 
-Neuer Befehl:
-
 ```
-uhrwerk-cli bilanz [--seeds N] [--jahre J] [--threads T] [--ziele DATEI]
+uhrwerk-cli bilanz [--seeds N] [--jahre J] [--seed S] [--threads T] [--ziele DATEI]
 ```
 
-Er rechnet N Läufe (Seeds 1648, 1649, …) über J Jahre (Standard 32 Läufe, 100 Jahre) und meldet je
-Staat und Kennzahl Median, 5- und 95-%-Wert über alle Läufe, dazu Verstöße gegen die Zielwerte;
-Exitcode 1 bei Verstoß. Die Zielwerte stehen im Datenordner (`data/common/zielwerte.chron`, nur
-vom Bericht gelesen) und sind in [data/README.md](../../data/README.md) begründet.
+Der Befehl rechnet N Läufe (Seeds S, S+1, …; Standard 32 Läufe ab 1648) über J Jahre (Standard 100)
+ohne Eingriffe des Spielers und misst am Jahrestag des Starts je Staat das Vermögen, nach jedem
+Monatsersten die Preise aller Märkte mit Orten, dazu Bevölkerung und Lebensstandard. Er meldet je Staat
+und Kennzahl Median, 5- und 95-%-Wert über alle Läufe (nächster Rang, in Festkomma: auf jeder Plattform
+gleich), markiert Verstöße mit `!` und listet sie am Ende; Exitcode 1 bei Verstoß. Die Zielwerte stehen
+im Datenordner (`data/common/zielwerte.chron`, Format in
+[chronik-skript.md, Abschnitt 3.15](chronik-skript.md#315-commonzielwertechron-seit-m5)); `pruefen`
+prüft die Datei mit. Umsetzung: `core/include/uhrwerk/balance.hpp` (`record_run`, `summarize`) – kein
+Teil der Simulation, ohne Einfluss auf Zustand und Prüfsumme.
 
-| Kennzahl | Zielwert (vorläufig) |
+| Kennzahl | Zielwert |
 |---|---|
-| Vermögen = (Schatz − Schulden) ÷ Jahreseinnahmen, jedes Jahresende, jeder Staat | −3 … +3 in mindestens 95 % der Staatsjahre; Median nach 100 Jahren 0 … 1,5 |
+| Vermögen = (Schatz − Schulden) ÷ Jahreseinnahmen, jedes Staatsjahr, je Staat | −3 … +3 in mindestens 95 % der Staatsjahre; Median am Ende 0 … 1,5 |
 | Staatsbankrotte je Staat und Jahrhundert | Median 0, höchstens 2 im 95-%-Wert |
-| Einnahmen ÷ Wirtschaftsleistung des Staates (nach 100 Jahren gegen Start) | 0,7 … 1,4 (Einnahmen wachsen mit der Wirtschaft, nicht darüber hinaus) |
-| Preis je Gut und Markt (Monatswerte) | 0,4 … 2,5 × Basispreis in 95 % der Monate (Getreide in Hungerjahren darüber erlaubt) |
-| Bevölkerung 1648 → 1700 | ×1,20 … ×1,45 (Kalibrierung aus M4) |
-| Lebensstandard je Schicht (Median über die Jahre) | unten 25–55, mittel 45–75, oben 70–95 |
+| Steuerquote (Steuern ÷ Wirtschaftsleistung der Orte) am Ende gegen den Start, Median je Staat | 0,6 … 1,4 (Einnahmen wachsen mit der Wirtschaft, nicht darüber hinaus) |
+| Preis je Gut und Markt (Monatswerte) | 0,4 … 2,5 × Basispreis in 95 % der Markt-Monate je Gut; Kolonialwaren 0,4 … 5 |
+| Bevölkerung 1648 → 1700 (Median) | ×1,20 … ×1,45 (Kalibrierung aus M4) |
+| Lebensstandard je Schicht (Median über alle Jahre und Läufe) | unten 25–55, mittel 45–75, oben 70–95 |
 
-**CI:** neuer Job „Balancing (Linux, Release)“: `bilanz --seeds 16 --jahre 100`, Tabelle in der
-Zusammenfassung des Laufs. Dauer: 100 Jahre der Testregion brauchen etwa 0,15 s, 16 Läufe also
-wenige Sekunden.
+Abweichungen vom Entwurf: Die Steuerquote durfte ursprünglich nicht unter 0,7 fallen. Die Kontribution
+trifft in Städten aber nur Agrareinkommen, und die Städte wachsen im Modell schneller als das Land
+(Bürger nach 100 Jahren ×3, Landarme ×1,4); mit festen Sätzen sinkt die Quote daher auf 0,7–1,0, in
+Sachsen-Gotha mit der wachsenden Residenz auf 0,69. Das ist das Steuersystem der Zeit, kein Fehler – der
+Spieler kann mit der Akzise gegensteuern –, deshalb gilt 0,6. Kolonialwaren haben einen eigenen Bereich,
+weil ihr Basispreis am Weltmarkt gilt und im Binnenland die Fracht hinzukommt.
+
+**Ergebnis** mit `data/` (32 Läufe, 100 Jahre, Seeds 1648–1679; 11 s im Release-Build):
+
+| Kennzahl | Ergebnis |
+|---|---|
+| Vermögen je Staatsjahr | Median 0,70–0,97, alle Staatsjahre im Bereich; tiefster Wert −1,77 (Anhalt-Dessau nach einer Seuche) |
+| Vermögen am Ende | Median 0,85–1,12 Jahreseinnahmen: Überschüsse über der Rücklage gehen in den Landesausbau |
+| Staatsbankrotte | keine in 512 Staatsjahrhunderten (16 Staaten × 32 Läufe) |
+| Steuerquote Ende ÷ Start | Median 0,69 (Sachsen-Gotha) bis 0,99 (Böhmen) |
+| Preise im Bereich | 96,5 % (Tuch) bis 100 %; Salz 98,7 %, höchstens 2,95 × Basispreis im Binnenland |
+| Bevölkerung 1700 | ×1,36 (×1,34 … ×1,38) |
+| Lebensstandard | unten 42, mittel 58, oben 78 |
+
+**CI:** Job „Balancing (Linux, Release)“: `bilanz --seeds 16 --jahre 100`, Bericht in der
+Zusammenfassung des Laufs, auch bei Verstoß. Im Kleinen prüfen zwei CTests den Befehl auf der
+Test-Fixture (`bilanz_fixture` mit weiten Zielwerten, `bilanz_verstoss` mit den Zielwerten der
+Spieldaten, die die Fixture verfehlen muss).
 
 ## 8. Abnahme
 

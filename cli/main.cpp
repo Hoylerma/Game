@@ -3,6 +3,7 @@
 // Befehle: pruefen, info, lauf, determinismus, lasttest (Hilfe: uhrwerk-cli --hilfe).
 // Exitcodes: 0 in Ordnung, 1 Daten-, Determinismus- oder Lasttestfehler, 2 Bedienfehler.
 
+#include "uhrwerk/balance.hpp"
 #include "uhrwerk/date.hpp"
 #include "uhrwerk/economy.hpp"
 #include "uhrwerk/fixed.hpp"
@@ -48,6 +49,9 @@ constexpr std::int64_t kMaxThreads = 256;
 constexpr std::int64_t kDefaultLoadTestBlocks = 500'000;
 constexpr std::int64_t kMaxLoadTestBlocks = 10'000'000;
 constexpr std::int64_t kDefaultLoadTestYears = 3;
+constexpr std::int64_t kDefaultBalanceSeeds = 32;
+constexpr std::int64_t kDefaultBalanceYears = 100;
+constexpr std::int64_t kMaxBalanceSeeds = 1000;
 
 constexpr std::string_view kHelp = R"(uhrwerk-cli – Kommandozeile des Simulationskerns Uhrwerk (EINIGKEIT)
 
@@ -61,28 +65,32 @@ Befehle:
   determinismus  Zwei Läufe mit gleichem Seed vergleichen (Prüfsumme nach jedem Jahr; Lauf B
                  mit einem Thread) und einen Lauf mit Seed+1 (Abweichung erwartet)
   lasttest       Lasttest: jeder Ort mit Daten, viele Bevölkerungsblöcke; Zeit je Spieljahr
-  wirtschaft     Wirtschaft im Überblick: Güter, Berufe, Steuern (nach dem Einschwingen oder
-                 nach --jahre/--tage); Werkzeug der Kalibrierung
+  wirtschaft     Wirtschaft im Überblick: Güter, Berufe, Haushalt der Staaten (nach dem
+                 Einschwingen oder nach --jahre/--tage); Werkzeug der Kalibrierung
+  bilanz         Balancing-Bericht: mehrere Läufe ohne Spielereingriff (Seeds ab --seed);
+                 Haushalt, Preise, Bevölkerung und Lebensstandard gegen die Zielwerte
 
 Optionen:
   --daten DIR    Datenordner. Standard: Umgebungsvariable UHRWERK_DATEN, sonst Suche
                  nach data/ ab dem Arbeitsverzeichnis und ab dem Ordner des Programms
   --szenario ID  Szenario (Standard: westfaelischer_frieden)
-  --jahre N      Zu simulierende Jahre (Standard: 10, wenn auch --tage fehlt)
+  --jahre N      Zu simulierende Jahre (Standard: 10, wenn auch --tage fehlt; bilanz: 100)
   --tage N       Zusätzlich zu simulierende Tage
   --seed N       Seed der Partie (Standard: 1648)
-  --threads N    Rechnende Threads, 0 = alle Kerne (Standard: 0; lauf, determinismus, lasttest)
+  --threads N    Rechnende Threads, 0 = alle Kerne (Standard: 0)
   --bloecke N    Lasttest: angestrebte Zahl der Bevölkerungsblöcke (Standard: 500000)
   --vergleich N  Lasttest: zweiter Lauf mit N Threads, Prüfsummen müssen gleich sein
   --grenze S     Lasttest: Exitcode 1, wenn der Median je Spieljahr über S Sekunden liegt
   --bericht      Tabelle je Staat am Ende des Laufs (nur lauf)
   --chronik      Chronik der Partie ausgeben (nur lauf)
   --maerkte      Preise je Markt (nur wirtschaft)
+  --seeds N      Bilanz: Zahl der Läufe (Standard: 32)
+  --ziele DATEI  Bilanz: Zielwerte (Standard: common/zielwerte.chron im Datenordner)
   --hilfe, -h    Diese Hilfe anzeigen
 
 Exitcodes:
   0  in Ordnung
-  1  Datenfehler oder Determinismusfehler
+  1  Datenfehler, Determinismusfehler oder verfehlte Zielwerte (bilanz)
   2  Bedienfehler (unbekannter Befehl, ungültige Option)
 
 Beispiele:
@@ -91,6 +99,7 @@ Beispiele:
   uhrwerk-cli lauf --jahre 50 --bericht --chronik
   uhrwerk-cli determinismus --jahre 100
   uhrwerk-cli lasttest --bloecke 500000 --jahre 3 --vergleich 1 --grenze 2
+  uhrwerk-cli bilanz --seeds 16 --jahre 100
 )";
 
 // ─── Optionen ───────────────────────────────────────────────────────────────
@@ -106,6 +115,8 @@ struct Options {
     std::int64_t blocks = kDefaultLoadTestBlocks;
     std::optional<unsigned> compare_threads;
     std::optional<double> limit_seconds;
+    std::optional<std::int64_t> seeds;
+    std::optional<fs::path> targets_file;
     bool report = false;
     bool chronicle = false;
     bool markets = false;
@@ -146,9 +157,9 @@ std::int64_t parse_count(std::string_view option, std::string_view text, std::in
 
 Options parse_options(int argc, char** argv) {
     Options o;
-    const std::set<std::string_view> with_value = {"--daten",   "--szenario",  "--jahre",
-                                                   "--tage",    "--seed",      "--threads",
-                                                   "--bloecke", "--vergleich", "--grenze"};
+    const std::set<std::string_view> with_value = {"--daten",  "--szenario", "--jahre",   "--tage",
+                                                   "--seed",   "--threads",  "--bloecke", "--vergleich",
+                                                   "--grenze", "--seeds",    "--ziele"};
     const std::set<std::string_view> flags = {"--bericht", "--chronik", "--maerkte"};
 
     for (int i = 1; i < argc; ++i) {
@@ -188,6 +199,16 @@ Options parse_options(int argc, char** argv) {
                     o.scenario = *value;
                 } else if (name == "--jahre") {
                     o.years = parse_count(name, *value, kMaxYears);
+                } else if (name == "--ziele") {
+                    if (value->empty()) {
+                        throw UsageError{"Option --ziele erwartet eine Datei"};
+                    }
+                    o.targets_file = fs::path(*value);
+                } else if (name == "--seeds") {
+                    o.seeds = parse_count(name, *value, kMaxBalanceSeeds);
+                    if (*o.seeds == 0) {
+                        throw UsageError{"Ungültiger Wert für --seeds: '0' (mindestens ein Lauf)"};
+                    }
                 } else if (name == "--tage") {
                     o.days = parse_count(name, *value, kMaxDays);
                 } else if (name == "--threads") {
@@ -484,9 +505,19 @@ int cmd_pruefen(const Options& o, const fs::path& data_dir) {
         (issue.fatal ? errors : warnings) += 1;
         std::cout << issue.to_string() << '\n';
     }
+    // Zielwerte des Balancing-Berichts (seit M5), wenn vorhanden: Nur `bilanz` liest sie, Fehler
+    // sollen aber schon hier auffallen.
+    const fs::path targets = data_dir / "common" / "zielwerte.chron";
+    std::error_code ec;
+    if (result.ok() && fs::exists(targets, ec)) {
+        for (const std::string& error : uhrwerk::load_balance_targets(targets, *result.world).errors) {
+            ++errors;
+            std::cout << error << '\n';
+        }
+    }
     std::cout << "Ergebnis: " << plural(errors, "Fehler", "Fehler") << ", "
               << plural(warnings, "Warnung", "Warnungen") << ".\n";
-    if (!result.ok()) {
+    if (errors > 0) {
         return kExitDataError;
     }
     const World& w = *result.world;
@@ -782,18 +813,30 @@ int cmd_wirtschaft(const Options& o, const fs::path& data_dir) {
     // Staaten: Haushalt des letzten Rechentags (vor dem ersten Rechentag: geschätzt) je Monat.
     std::cout << '\n';
     std::vector<std::vector<std::string>> rows;
-    rows.push_back({"Staat", "Kontribution", "Akzise", "Zoll", "Hof", "Verwaltung", "Heer", "Zinsen",
-                    "Bauten", "Saldo", "Schatz", "Schulden"});
-    for (const uhrwerk::State& state : w.states) {
+    rows.push_back({"Staat", "Leistung", "Quote", "Kontribution", "Akzise", "Zoll", "Hof", "Verwaltung",
+                    "Heer", "Zinsen", "Bauten", "Saldo", "Schatz", "Schulden"});
+    for (std::size_t s = 0; s < w.states.size(); ++s) {
+        const uhrwerk::State& state = w.states[s];
         const uhrwerk::StateBudget& b = state.budget;
-        rows.push_back({state.short_name + " (" + state.tag + ")", format_fixed(b.taxes[0], 0),
-                        format_fixed(b.taxes[1], 0), format_fixed(b.taxes[2], 0), format_fixed(b.court, 0),
-                        format_fixed(b.administration, 0), format_fixed(b.army, 0),
+        // Wirtschaftsleistung (Wertschöpfung der Orte je Monat) und Steuerquote wie im Balancing-Bericht.
+        Fixed production;
+        Fixed taxes;
+        for (const Index li : w.state_locations(static_cast<Index>(s))) {
+            production += w.economy[static_cast<std::size_t>(li)].production;
+            taxes += w.economy[static_cast<std::size_t>(li)].total_taxes();
+        }
+        const std::string quota = production > Fixed::zero()
+                                      ? format_fixed(taxes * Fixed::from_int(100) / production, 1) + " %"
+                                      : "–";
+        rows.push_back({state.short_name + " (" + state.tag + ")", format_fixed(production, 0), quota,
+                        format_fixed(b.taxes[0], 0), format_fixed(b.taxes[1], 0), format_fixed(b.taxes[2], 0),
+                        format_fixed(b.court, 0), format_fixed(b.administration, 0), format_fixed(b.army, 0),
                         format_fixed(b.interest, 0), format_fixed(b.building, 0),
                         format_fixed(b.income() - b.expenses(), 0), format_fixed(state.treasury, 0),
                         format_fixed(state.debt, 0)});
     }
-    print_table(rows, {false, true, true, true, true, true, true, true, true, true, true, true}, 0);
+    print_table(rows, {false, true, true, true, true, true, true, true, true, true, true, true, true, true},
+                0);
 
     if (o.markets) {
         std::cout << "\nPreise je Markt (Faktor auf den Basispreis; Erntefaktor in Klammern)\n";
@@ -814,6 +857,208 @@ int cmd_wirtschaft(const Options& o, const fs::path& data_dir) {
         }
     }
     return kExitOk;
+}
+
+/// Zahl mit höchstens zwei Nachkommastellen ohne Nullen am Ende, z. B. "0,4", "-3", "1,25".
+std::string format_compact(Fixed value) {
+    std::string text = format_fixed(value, 2);
+    if (text.find(',') != std::string::npos) {
+        while (!text.empty() && text.back() == '0') {
+            text.pop_back();
+        }
+        if (!text.empty() && text.back() == ',') {
+            text.pop_back();
+        }
+    }
+    return text;
+}
+
+std::string format_range(const uhrwerk::ValueRange& range, const std::string& prefix = "") {
+    return prefix + format_compact(range.min) + " … " + prefix + format_compact(range.max);
+}
+
+std::string format_share(Fixed share) {
+    return format_fixed(share * Fixed::from_int(100), 1) + " %";
+}
+
+/// "Median (5-%-Wert … 95-%-Wert)".
+std::string format_quantiles(const uhrwerk::Quantiles& q, int decimals, const std::string& prefix = "") {
+    return prefix + format_fixed(q.median, decimals) + " (" + prefix + format_fixed(q.p5, decimals) + " … " +
+           prefix + format_fixed(q.p95, decimals) + ")";
+}
+
+const std::array<std::string_view, 3> kStrata = {"unten", "mittel", "oben"};
+
+std::string describe_violation(const World& w, const uhrwerk::BalanceTargets& t,
+                               const uhrwerk::BalanceViolation& v) {
+    using uhrwerk::BalanceCheck;
+    const auto subject = static_cast<std::size_t>(v.subject);
+    const std::string state = v.subject >= 0 && subject < w.states.size()
+                                  ? w.states[subject].short_name + " (" + w.states[subject].tag + ")"
+                                  : std::string("–");
+    switch (v.check) {
+    case BalanceCheck::WealthShare:
+        return state + ": Vermögen nur in " + format_share(v.value) + " der Staatsjahre im Bereich " +
+               format_range(t.wealth) + " (Ziel mindestens " + format_share(t.wealth_share) + ")";
+    case BalanceCheck::WealthEnd:
+        return state + ": Vermögen am Ende im Median " + format_fixed(v.value, 2) +
+               " Jahreseinnahmen (Ziel " + format_range(t.wealth_end) + ")";
+    case BalanceCheck::BankruptciesMedian:
+        return state + ": im Median " + format_fixed(v.value, 2) +
+               " Staatsbankrotte je Jahrhundert (Ziel höchstens " + format_compact(t.bankruptcies_median) +
+               ")";
+    case BalanceCheck::BankruptciesP95:
+        return state + ": 95-%-Wert " + format_fixed(v.value, 2) +
+               " Staatsbankrotte je Jahrhundert (Ziel höchstens " + format_compact(t.bankruptcies_p95) + ")";
+    case BalanceCheck::TaxRatio:
+        return state + ": Steuerquote am Ende gegen den Start im Median " + format_fixed(v.value, 2) +
+               " (Ziel " + format_range(t.tax_ratio) + ")";
+    case BalanceCheck::PriceShare: {
+        const std::string good = subject < w.goods.size() ? w.goods[subject].name : std::string("–");
+        const uhrwerk::ValueRange range =
+            subject < t.price_by_good.size() ? t.price_by_good[subject] : t.price;
+        return good + ": Preis nur in " + format_share(v.value) + " der Markt-Monate im Bereich " +
+               format_range(range) + " des Basispreises (Ziel mindestens " + format_share(t.price_share) +
+               ")";
+    }
+    case BalanceCheck::Population:
+        return "Bevölkerung " + std::to_string(t.population_year) + " im Median ×" +
+               format_fixed(v.value, 2) + " (Ziel " + format_range(t.population, "×") + ")";
+    case BalanceCheck::LivingStandard:
+        return "Lebensstandard " + std::string(subject < kStrata.size() ? kStrata[subject] : "–") +
+               " im Median " + format_fixed(v.value, 1) + " (Ziel " +
+               format_range(t.living_standard[subject % 3]) + ")";
+    }
+    return "–";
+}
+
+/// Balancing-Bericht (seit M5, docs/technik/wirtschaft.md Abschnitt 7): mehrere Läufe ohne Eingriffe des
+/// Spielers, Kennzahlen je Staat, Gut und Schicht gegen die Zielwerte (data/common/zielwerte.chron).
+int cmd_bilanz(const Options& o, const fs::path& data_dir) {
+    auto world = load(data_dir, o.scenario, false);
+    if (!world) {
+        return kExitDataError;
+    }
+    const fs::path targets_file = o.targets_file ? *o.targets_file : data_dir / "common" / "zielwerte.chron";
+    const uhrwerk::BalanceTargetsResult loaded = uhrwerk::load_balance_targets(targets_file, *world);
+    if (!loaded.targets) {
+        for (const std::string& error : loaded.errors) {
+            std::cerr << error << '\n';
+        }
+        std::cerr << "Zielwerte nicht lesbar: " << uhrwerk::path_to_utf8(targets_file) << '\n';
+        return kExitDataError;
+    }
+    const uhrwerk::BalanceTargets& t = *loaded.targets;
+    const std::int64_t years = o.years.value_or(kDefaultBalanceYears);
+    if (years <= 0) {
+        throw UsageError{"Der Bericht braucht mindestens ein Jahr (--jahre)"};
+    }
+    period_from(o, world->date); // prüft den Zeitraum
+    const std::int64_t seeds = o.seeds.value_or(kDefaultBalanceSeeds);
+
+    const auto t0 = std::chrono::steady_clock::now();
+    std::vector<uhrwerk::BalanceRun> runs;
+    unsigned threads = 0;
+    for (std::int64_t i = 0; i < seeds; ++i) {
+        uhrwerk::Simulation sim(*world,
+                                uhrwerk::SimConfig{o.seed + static_cast<std::uint64_t>(i), o.threads});
+        threads = sim.threads();
+        runs.push_back(uhrwerk::record_run(sim, years, t));
+    }
+    const double seconds = std::chrono::duration<double>(std::chrono::steady_clock::now() - t0).count();
+    const uhrwerk::BalanceSummary summary = uhrwerk::summarize(*world, runs, t);
+    const World& w = *world;
+
+    std::cout << "Balancing-Bericht: " << w.scenario.name << " (" << w.scenario.id << ")\n"
+              << "Läufe:     " << seeds << " (Seeds " << o.seed;
+    if (seeds > 1) {
+        std::cout << "–" << o.seed + static_cast<std::uint64_t>(seeds - 1);
+    }
+    std::cout << "), je " << years << " Jahre ab " << uhrwerk::format_date_long(w.date) << '\n'
+              << "Zielwerte: " << uhrwerk::path_to_utf8(targets_file) << '\n'
+              << "Threads:   " << threads << '\n'
+              << "Laufzeit:  " << format_seconds(seconds) << "\n\n";
+
+    std::set<std::pair<int, Index>> marked;
+    for (const uhrwerk::BalanceViolation& v : summary.violations) {
+        marked.insert({static_cast<int>(v.check), v.subject});
+    }
+    const auto mark = [&marked](uhrwerk::BalanceCheck check, Index subject) {
+        return marked.count({static_cast<int>(check), subject}) != 0 ? std::string(" !") : std::string();
+    };
+    using uhrwerk::BalanceCheck;
+
+    std::cout
+        << "Staaten: Vermögen = (Schatz − Schulden) ÷ Jahreseinnahmen; Median (5 % … 95 %) über alle Läufe\n";
+    std::vector<std::vector<std::string>> rows;
+    rows.push_back({"Staat", "Vermögen je Jahr", "im Bereich", "tiefster", "Vermögen am Ende",
+                    "Bankrotte/Jh.", "Steuerquote Ende/Start"});
+    for (std::size_t s = 0; s < w.states.size(); ++s) {
+        const uhrwerk::BalanceStateSummary& st = summary.states[s];
+        const auto index = static_cast<Index>(s);
+        rows.push_back(
+            {w.states[s].short_name + " (" + w.states[s].tag + ")", format_quantiles(st.wealth, 2),
+             format_share(st.wealth_share) + mark(BalanceCheck::WealthShare, index),
+             format_fixed(st.wealth_min, 2),
+             format_quantiles(st.wealth_end, 2) + mark(BalanceCheck::WealthEnd, index),
+             format_quantiles(st.bankruptcies, 1) + mark(BalanceCheck::BankruptciesMedian, index) +
+                 mark(BalanceCheck::BankruptciesP95, index),
+             st.tax_ratio ? format_quantiles(*st.tax_ratio, 2) + mark(BalanceCheck::TaxRatio, index) : "–"});
+    }
+    print_table(rows, {false, true, true, true, true, true, true}, 0);
+    std::cout << "Ziele: Vermögen " << format_range(t.wealth) << " in mindestens "
+              << format_share(t.wealth_share) << " der Staatsjahre, am Ende " << format_range(t.wealth_end)
+              << "; Bankrotte je Jahrhundert im Median " << "höchstens "
+              << format_compact(t.bankruptcies_median) << ", 95 % höchstens "
+              << format_compact(t.bankruptcies_p95) << "; Steuerquote " << format_range(t.tax_ratio)
+              << "\n\n";
+
+    std::cout << "Preise: Faktor auf den Basispreis, alle Märkte mit Orten, alle Monate\n";
+    rows.clear();
+    rows.push_back({"Gut", "Ziel", "im Bereich", "kleinster", "größter"});
+    for (std::size_t g = 0; g < w.goods.size(); ++g) {
+        const uhrwerk::BalanceGoodSummary& gs = summary.goods[g];
+        if (gs.months == 0) {
+            continue;
+        }
+        rows.push_back({w.goods[g].name,
+                        format_range(g < t.price_by_good.size() ? t.price_by_good[g] : t.price),
+                        format_share(gs.share) + mark(BalanceCheck::PriceShare, static_cast<Index>(g)),
+                        format_fixed(gs.min, 2), format_fixed(gs.max, 2)});
+    }
+    print_table(rows, {false, true, true, true, true}, 0);
+    std::cout << "Ziel: mindestens " << format_share(t.price_share) << " der Markt-Monate im Bereich\n\n";
+
+    std::cout << "Bevölkerung " << w.date.year << " → " << t.population_year << ": ";
+    if (summary.population) {
+        std::cout << format_quantiles(*summary.population, 2, "×")
+                  << mark(BalanceCheck::Population, uhrwerk::kNone);
+    } else {
+        std::cout << "–";
+    }
+    std::cout << "; Ziel " << format_range(t.population, "×") << '\n';
+    std::cout << "Lebensstandard (Median über alle Jahre):";
+    for (std::size_t k = 0; k < 3; ++k) {
+        std::cout << (k == 0 ? " " : "; ") << kStrata[k] << ' ';
+        if (summary.living_standard[k]) {
+            std::cout << format_quantiles(*summary.living_standard[k], 1)
+                      << mark(BalanceCheck::LivingStandard, static_cast<Index>(k));
+        } else {
+            std::cout << "–";
+        }
+        std::cout << ", Ziel " << format_range(t.living_standard[k]);
+    }
+    std::cout << "\n\n";
+
+    if (summary.violations.empty()) {
+        std::cout << "Verstöße: keine – alle Zielwerte erfüllt.\n";
+        return kExitOk;
+    }
+    std::cout << "Verstöße (" << summary.violations.size() << ", mit ! markiert):\n";
+    for (const uhrwerk::BalanceViolation& v : summary.violations) {
+        std::cout << "  " << describe_violation(w, t, v) << '\n';
+    }
+    return kExitDataError;
 }
 
 int cmd_determinismus(const Options& o, const fs::path& data_dir) {
@@ -1024,6 +1269,9 @@ int run(int argc, char** argv) {
         } else if (o.command == "wirtschaft") {
             check_applicable(
                 o, {"--daten", "--szenario", "--jahre", "--tage", "--seed", "--threads", "--maerkte"});
+        } else if (o.command == "bilanz") {
+            check_applicable(
+                o, {"--daten", "--szenario", "--jahre", "--seed", "--threads", "--seeds", "--ziele"});
         } else {
             throw UsageError{"Unbekannter Befehl '" + o.command + "'"};
         }
@@ -1043,6 +1291,9 @@ int run(int argc, char** argv) {
         }
         if (o.command == "wirtschaft") {
             return cmd_wirtschaft(o, data_dir);
+        }
+        if (o.command == "bilanz") {
+            return cmd_bilanz(o, data_dir);
         }
         return cmd_determinismus(o, data_dir);
     } catch (const UsageError& e) {

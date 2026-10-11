@@ -74,6 +74,7 @@ werden. Damit gelangt nie eine Gleitkommazahl in den Zustand des Kerns.
 | [`world.hpp`](../../core/include/uhrwerk/world.hpp) | Weltmodell: flache Vektoren, Querverweise als Indizes |
 | [`simulation.hpp`](../../core/include/uhrwerk/simulation.hpp) | `Simulation`: Tick-Planer, Systeme, Befehle, Prüfsumme |
 | [`economy.hpp`](../../core/include/uhrwerk/economy.hpp) | Wirtschaft: Märkte, Handel, Ortsrechnung (Erzeugung, Einkommen, Verbrauch, Steuern), Staatshaushalt (Kredit, Bankrott, Landesausbau), Ernte, Einschwingen (seit M5) |
+| [`balance.hpp`](../../core/include/uhrwerk/balance.hpp) | Balancing-Bericht: Zielwerte lesen, Läufe messen, Median und Quantile, Verstöße (seit M5; nicht Teil der Simulation) |
 | [`population.hpp`](../../core/include/uhrwerk/population.hpp) | Bausteine des Bevölkerungsmodells: Kennzahlen je Ort, Bildungsziel, Zusammenlegen und Neuordnung der Blöcke, Startwerte (seit M4) |
 | [`parallel.hpp`](../../core/include/uhrwerk/parallel.hpp) | Thread-Pool `ThreadPool` für die Mehrkernberechnung (seit M4) |
 | [`lasttest.hpp`](../../core/include/uhrwerk/lasttest.hpp) | `make_load_test_world()`: Lasttest-Welt mit Daten für jeden Ort (seit M4) |
@@ -182,7 +183,7 @@ nicht zur Prüfsumme: Neue oder anders gebildete Kreise in den Daten ändern die
 nicht. Orte ohne Daten gehen über Besitzer (`kNone`) und Blockzahl (0) ein. Kommen Orte hinzu,
 ändert sich die Referenz trotzdem, weil sich die Zahl der Orte und die Rechentage nachfolgender
 Orte verschieben. Referenz nach 100 Jahren mit `data/` (Seed 1648, jede Thread-Zahl): seit M5
-`4eaa36517208399c` (Wirtschaft mit Märkten und Staatshaushalt, Schritt 3), in M4 `ed6b14a02cfbfa5d` (Bevölkerungsmodell), in M3 `40de8c42e8f7a0ff` (erster M3-Stand mit 4.541 Orten
+`5db13a66d63e6079` (Wirtschaft mit Märkten und Staatshaushalt), in M4 `ed6b14a02cfbfa5d` (Bevölkerungsmodell), in M3 `40de8c42e8f7a0ff` (erster M3-Stand mit 4.541 Orten
 `5548a5fa80f75c0d`), vorher `8d44cf792e143bb0` (Begründung in
 [data/README.md](../../data/README.md#prüfung)).
 

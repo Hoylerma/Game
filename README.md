@@ -205,13 +205,16 @@ Arbeitsverzeichnis), alternativ `--daten DIR`:
 ./build/dev/cli/uhrwerk-cli lauf --jahre 50 --bericht --chronik  # 50 Jahre ab 1648 simulieren
 ./build/dev/cli/uhrwerk-cli lauf --jahre 10 --seed 7           # anderer Seed
 ./build/dev/cli/uhrwerk-cli determinismus --jahre 100          # zwei Läufe vergleichen (Prüfsumme je Jahr)
+./build/dev/cli/uhrwerk-cli wirtschaft --jahre 20 --maerkte    # Güter, Berufe, Haushalt, Preise je Markt
 ./build/dev/cli/uhrwerk-cli --hilfe                            # alle Befehle und Optionen
 
-# Lasttest mit 500.000 Bevölkerungsblöcken (Release-Build: cmake --preset release && cmake --build --preset release)
-./build/release/cli/uhrwerk-cli lasttest --jahre 3 --vergleich 1 --grenze 2
+# Release-Build: cmake --preset release && cmake --build --preset release
+./build/release/cli/uhrwerk-cli lasttest --jahre 3 --vergleich 1 --grenze 2   # 500.000 Bevölkerungsblöcke
+./build/release/cli/uhrwerk-cli bilanz --seeds 16 --jahre 100               # Balancing-Bericht gegen die Zielwerte
 ```
 
-Exitcodes: `0` in Ordnung, `1` Daten- oder Determinismusfehler, `2` Bedienfehler.
+Exitcodes: `0` in Ordnung, `1` Daten- oder Determinismusfehler oder verfehlte Zielwerte (`bilanz`),
+`2` Bedienfehler.
 
 **4. Daten bearbeiten** – Orte und Staaten stehen in `data/tabellen/*.csv` (Format:
 [docs/technik/tabellen.md](docs/technik/tabellen.md)); der Archivar erzeugt daraus `data/history/`:
