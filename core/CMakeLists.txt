@@ -8,6 +8,7 @@ add_library(uhrwerk_core STATIC
     src/simulation.cpp
     src/parallel.cpp
     src/population.cpp
+    src/lasttest.cpp
 )
 add_library(uhrwerk::core ALIAS uhrwerk_core)
 

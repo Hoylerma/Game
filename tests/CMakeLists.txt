@@ -22,6 +22,7 @@ add_executable(uhrwerk_tests
     test_simulation.cpp
     test_parallel.cpp
     test_population.cpp
+    test_lasttest.cpp
 )
 target_link_libraries(uhrwerk_tests PRIVATE uhrwerk::core doctest::doctest uhrwerk_warnings)
 target_compile_definitions(uhrwerk_tests PRIVATE
@@ -39,4 +40,8 @@ if(UHRWERK_BUILD_CLI)
         COMMAND uhrwerk-cli pruefen --daten ${PROJECT_SOURCE_DIR}/data)
     add_test(NAME determinismus_50_jahre
         COMMAND uhrwerk-cli determinismus --daten ${PROJECT_SOURCE_DIR}/data --jahre 50)
+    # Lasttest im Kleinen (seit M4): gleiche Prüfsummen mit 3 Threads und mit einem Thread.
+    add_test(NAME lasttest_threads
+        COMMAND uhrwerk-cli lasttest --daten ${PROJECT_SOURCE_DIR}/data --bloecke 20000 --jahre 1
+                --threads 3 --vergleich 1)
 endif()

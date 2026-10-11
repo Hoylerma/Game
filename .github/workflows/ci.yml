@@ -1,9 +1,11 @@
 # Kontinuierliche Integration für EINIGKEIT.
 #
 # Jobs:
-#   Kern (Linux)        GCC und Clang: Build mit Warnungen als Fehler, Tests, Prüfsumme nach 100 Jahren
+#   Kern (Linux)        GCC und Clang: Build mit Warnungen als Fehler, Tests, Prüfsummen nach 100 Jahren
+#                       und des Lasttests
 #   Kern (Windows)      MSVC mit denselben Presets: Portabilität des Kerns
 #   Determinismus       vergleicht die Prüfsummen von GCC, Clang und MSVC (müssen bitgleich sein)
+#   Lasttest            Release-Build, 500.000 Bevölkerungsblöcke, Zeit je Spieljahr (seit M4)
 #   Formatierung        clang-format 18 über core/, cli/, tests/, bridge/
 #   Python-Werkzeuge    Tests von Archivar, Kartengenerator und Geodaten (mit numpy, ohne Netz);
 #                       sind data/history/ und data/karte/ aktuell?
@@ -31,6 +33,9 @@ concurrency:
 env:
   # Jahre für den plattformübergreifenden Prüfsummenvergleich.
   PRUEFSUMME_JAHRE: 100
+  # Lasttest für den Prüfsummenvergleich (im Debug-Build, daher klein).
+  LASTTEST_BLOECKE: 50000
+  LASTTEST_JAHRE: 2
 
 jobs:
   kern-linux:
@@ -71,7 +76,7 @@ jobs:
       - name: Testen
         run: ctest --preset dev
 
-      - name: Prüfsumme nach ${{ env.PRUEFSUMME_JAHRE }} Jahren festhalten
+      - name: Prüfsummen festhalten (${{ env.PRUEFSUMME_JAHRE }} Jahre, Lasttest)
         run: |
           ./build/dev/cli/uhrwerk-cli lauf --daten data --jahre "$PRUEFSUMME_JAHRE" | tee "$RUNNER_TEMP/lauf.txt"
           summe=$(tr -d '\r' < "$RUNNER_TEMP/lauf.txt" | grep -E 'summe: [0-9a-f]{16}$' | tail -n 1 | grep -oE '[0-9a-f]{16}$' || true)
@@ -79,9 +84,16 @@ jobs:
             echo "::error::Keine Prüfsumme in der Ausgabe von uhrwerk-cli gefunden."
             exit 1
           fi
+          ./build/dev/cli/uhrwerk-cli lasttest --daten data --bloecke "$LASTTEST_BLOECKE" --jahre "$LASTTEST_JAHRE" \
+            | tee "$RUNNER_TEMP/lasttest.txt"
+          last=$(tr -d '\r' < "$RUNNER_TEMP/lasttest.txt" | grep -E 'summe: [0-9a-f]{16}$' | tail -n 1 | grep -oE '[0-9a-f]{16}$' || true)
+          if [ -z "$last" ]; then
+            echo "::error::Keine Prüfsumme in der Ausgabe des Lasttests gefunden."
+            exit 1
+          fi
           mkdir -p pruefsumme
-          echo "$summe" > "pruefsumme/linux-${{ matrix.compiler }}.txt"
-          echo "Prüfsumme (Linux, ${{ matrix.compiler }}): \`$summe\`" >> "$GITHUB_STEP_SUMMARY"
+          printf 'lauf %s\nlasttest %s\n' "$summe" "$last" > "pruefsumme/linux-${{ matrix.compiler }}.txt"
+          echo "Prüfsummen (Linux, ${{ matrix.compiler }}): lauf \`$summe\`, lasttest \`$last\`" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Prüfsumme hochladen
         uses: actions/upload-artifact@v4
@@ -128,7 +140,7 @@ jobs:
       - name: Testen
         run: ctest --preset dev
 
-      - name: Prüfsumme nach ${{ env.PRUEFSUMME_JAHRE }} Jahren festhalten
+      - name: Prüfsummen festhalten (${{ env.PRUEFSUMME_JAHRE }} Jahre, Lasttest)
         shell: bash
         run: |
           ./build/dev/cli/uhrwerk-cli.exe lauf --daten data --jahre "$PRUEFSUMME_JAHRE" | tee "$RUNNER_TEMP/lauf.txt"
@@ -137,9 +149,16 @@ jobs:
             echo "::error::Keine Prüfsumme in der Ausgabe von uhrwerk-cli gefunden."
             exit 1
           fi
+          ./build/dev/cli/uhrwerk-cli.exe lasttest --daten data --bloecke "$LASTTEST_BLOECKE" --jahre "$LASTTEST_JAHRE" \
+            | tee "$RUNNER_TEMP/lasttest.txt"
+          last=$(tr -d '\r' < "$RUNNER_TEMP/lasttest.txt" | grep -E 'summe: [0-9a-f]{16}$' | tail -n 1 | grep -oE '[0-9a-f]{16}$' || true)
+          if [ -z "$last" ]; then
+            echo "::error::Keine Prüfsumme in der Ausgabe des Lasttests gefunden."
+            exit 1
+          fi
           mkdir -p pruefsumme
-          echo "$summe" > pruefsumme/windows-msvc.txt
-          echo "Prüfsumme (Windows, MSVC): \`$summe\`" >> "$GITHUB_STEP_SUMMARY"
+          printf 'lauf %s\nlasttest %s\n' "$summe" "$last" > pruefsumme/windows-msvc.txt
+          echo "Prüfsummen (Windows, MSVC): lauf \`$summe\`, lasttest \`$last\`" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Prüfsumme hochladen
         uses: actions/upload-artifact@v4
@@ -167,23 +186,65 @@ jobs:
           shopt -s nullglob
           dateien=(pruefsummen/*.txt)
           {
-            echo "### Prüfsummen nach $PRUEFSUMME_JAHRE Jahren"
+            echo "### Prüfsummen ($PRUEFSUMME_JAHRE Jahre mit data/; Lasttest $LASTTEST_BLOECKE Blöcke, $LASTTEST_JAHRE Jahre)"
             echo
-            echo "| Plattform | Prüfsumme |"
-            echo "|---|---|"
+            echo "| Plattform | lauf | lasttest |"
+            echo "|---|---|---|"
             for datei in "${dateien[@]}"; do
-              echo "| $(basename "$datei" .txt) | \`$(cat "$datei")\` |"
+              lauf=$(grep '^lauf ' "$datei" | cut -d' ' -f2)
+              last=$(grep '^lasttest ' "$datei" | cut -d' ' -f2)
+              echo "| $(basename "$datei" .txt) | \`$lauf\` | \`$last\` |"
             done
           } | tee -a "$GITHUB_STEP_SUMMARY"
           if [ "${#dateien[@]}" -ne 3 ]; then
-            echo "::error::Erwartet werden 3 Prüfsummen (GCC, Clang, MSVC), gefunden: ${#dateien[@]}."
+            echo "::error::Erwartet werden 3 Prüfsummendateien (GCC, Clang, MSVC), gefunden: ${#dateien[@]}."
             exit 1
           fi
-          if [ "$(cat "${dateien[@]}" | sort -u | wc -l)" -ne 1 ]; then
-            echo "::error::Die Prüfsummen weichen ab – der Kern rechnet nicht auf allen Plattformen bitgleich."
-            exit 1
+          for datei in "${dateien[@]:1}"; do
+            if ! cmp -s "${dateien[0]}" "$datei"; then
+              echo "::error::Die Prüfsummen weichen ab – der Kern rechnet nicht auf allen Plattformen bitgleich."
+              exit 1
+            fi
+          done
+          echo "Alle Plattformen liefern dieselben Prüfsummen."
+
+  lasttest:
+    name: Lasttest (Linux, Release)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Quelltext auschecken
+        uses: actions/checkout@v4
+
+      - name: Ninja installieren (falls nötig)
+        run: |
+          if ! command -v ninja > /dev/null; then
+            sudo apt-get update
+            sudo apt-get install -y --no-install-recommends ninja-build
           fi
-          echo "Alle Plattformen liefern dieselbe Prüfsumme."
+          nproc
+          grep -m1 'model name' /proc/cpuinfo || true
+
+      - name: Bauen (Preset release)
+        run: |
+          cmake --preset release
+          cmake --build --preset release --target uhrwerk-cli
+
+      # Abnahme M4 (docs/technik/bevoelkerung.md, Abschnitt 8): 500.000 Blöcke, Median höchstens
+      # 2 s je Spieljahr. Die CI-Grenze von 3 s lässt Puffer für schwankende Runner; der Messwert
+      # steht in der Zusammenfassung. Der Vergleichslauf mit einem Thread muss bitgleich sein.
+      - name: Lasttest mit 500.000 Blöcken
+        run: |
+          set -o pipefail
+          ./build/release/cli/uhrwerk-cli lasttest --daten data --bloecke 500000 --jahre 3 --vergleich 1 --grenze 3 \
+            | tee "$RUNNER_TEMP/lasttest.txt"
+          {
+            echo "### Lasttest (Release, $(nproc) Kerne)"
+            echo
+            echo '```'
+            cat "$RUNNER_TEMP/lasttest.txt"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
 
   formatierung:
     name: Formatierung

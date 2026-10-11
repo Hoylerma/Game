@@ -19,6 +19,7 @@ enum class RngStream : std::uint64_t {
     Wirtschaft = 2,
     Ereignisse = 3,
     Ki = 4,
+    Lasttest = 5, // seit M4: Aufbau der Lasttest-Welt (uhrwerk/lasttest.hpp), nicht in der Simulation
 };
 
 class Pcg32 {

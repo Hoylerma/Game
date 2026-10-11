@@ -1,10 +1,11 @@
 // uhrwerk-cli – Kommandozeile des Simulationskerns Uhrwerk.
 //
-// Befehle: pruefen, info, lauf, determinismus (Hilfe: uhrwerk-cli --hilfe).
-// Exitcodes: 0 in Ordnung, 1 Daten- oder Determinismusfehler, 2 Bedienfehler.
+// Befehle: pruefen, info, lauf, determinismus, lasttest (Hilfe: uhrwerk-cli --hilfe).
+// Exitcodes: 0 in Ordnung, 1 Daten-, Determinismus- oder Lasttestfehler, 2 Bedienfehler.
 
 #include "uhrwerk/date.hpp"
 #include "uhrwerk/fixed.hpp"
+#include "uhrwerk/lasttest.hpp"
 #include "uhrwerk/loader.hpp"
 #include "uhrwerk/script.hpp"
 #include "uhrwerk/simulation.hpp"
@@ -16,6 +17,7 @@
 #include <cstdio>
 #include <exception>
 #include <filesystem>
+#include <fstream>
 #include <iostream>
 #include <optional>
 #include <set>
@@ -41,6 +43,9 @@ constexpr std::int64_t kDefaultYears = 10;
 constexpr std::int64_t kMaxYears = 2000;
 constexpr std::int64_t kMaxDays = 1'000'000;
 constexpr std::int64_t kMaxThreads = 256;
+constexpr std::int64_t kDefaultLoadTestBlocks = 500'000;
+constexpr std::int64_t kMaxLoadTestBlocks = 10'000'000;
+constexpr std::int64_t kDefaultLoadTestYears = 3;
 
 constexpr std::string_view kHelp = R"(uhrwerk-cli – Kommandozeile des Simulationskerns Uhrwerk (EINIGKEIT)
 
@@ -51,8 +56,9 @@ Befehle:
   pruefen        Spieldaten laden und alle Fehler und Warnungen ausgeben
   info           Überblick über Szenario, Staaten, Orte (mit und ohne Daten) und Kreise
   lauf           Simulation laufen lassen und Ergebnis ausgeben (mit Lade- und Laufzeit)
-  determinismus  Zwei Läufe mit gleichem Seed vergleichen (Prüfsumme nach jedem Jahr)
-                 und einen Lauf mit Seed+1 (Abweichung erwartet)
+  determinismus  Zwei Läufe mit gleichem Seed vergleichen (Prüfsumme nach jedem Jahr; Lauf B
+                 mit einem Thread) und einen Lauf mit Seed+1 (Abweichung erwartet)
+  lasttest       Lasttest: jeder Ort mit Daten, viele Bevölkerungsblöcke; Zeit je Spieljahr
 
 Optionen:
   --daten DIR    Datenordner. Standard: Umgebungsvariable UHRWERK_DATEN, sonst Suche
@@ -61,7 +67,10 @@ Optionen:
   --jahre N      Zu simulierende Jahre (Standard: 10, wenn auch --tage fehlt)
   --tage N       Zusätzlich zu simulierende Tage
   --seed N       Seed der Partie (Standard: 1648)
-  --threads N    Rechnende Threads, 0 = alle Kerne (Standard: 0; lauf, determinismus)
+  --threads N    Rechnende Threads, 0 = alle Kerne (Standard: 0; lauf, determinismus, lasttest)
+  --bloecke N    Lasttest: angestrebte Zahl der Bevölkerungsblöcke (Standard: 500000)
+  --vergleich N  Lasttest: zweiter Lauf mit N Threads, Prüfsummen müssen gleich sein
+  --grenze S     Lasttest: Exitcode 1, wenn der Median je Spieljahr über S Sekunden liegt
   --bericht      Tabelle je Staat am Ende des Laufs (nur lauf)
   --chronik      Chronik der Partie ausgeben (nur lauf)
   --hilfe, -h    Diese Hilfe anzeigen
@@ -76,6 +85,7 @@ Beispiele:
   uhrwerk-cli info --szenario westfaelischer_frieden
   uhrwerk-cli lauf --jahre 50 --bericht --chronik
   uhrwerk-cli determinismus --jahre 100
+  uhrwerk-cli lasttest --bloecke 500000 --jahre 3 --vergleich 1 --grenze 2
 )";
 
 // ─── Optionen ───────────────────────────────────────────────────────────────
@@ -88,6 +98,9 @@ struct Options {
     std::optional<std::int64_t> days;
     std::uint64_t seed = uhrwerk::SimConfig{}.seed;
     unsigned threads = 0;
+    std::int64_t blocks = kDefaultLoadTestBlocks;
+    std::optional<unsigned> compare_threads;
+    std::optional<double> limit_seconds;
     bool report = false;
     bool chronicle = false;
     bool help = false;
@@ -127,8 +140,9 @@ std::int64_t parse_count(std::string_view option, std::string_view text, std::in
 
 Options parse_options(int argc, char** argv) {
     Options o;
-    const std::set<std::string_view> with_value = {"--daten", "--szenario", "--jahre",
-                                                   "--tage",  "--seed",     "--threads"};
+    const std::set<std::string_view> with_value = {"--daten",   "--szenario",  "--jahre",
+                                                   "--tage",    "--seed",      "--threads",
+                                                   "--bloecke", "--vergleich", "--grenze"};
     const std::set<std::string_view> flags = {"--bericht", "--chronik"};
 
     for (int i = 1; i < argc; ++i) {
@@ -172,6 +186,17 @@ Options parse_options(int argc, char** argv) {
                     o.days = parse_count(name, *value, kMaxDays);
                 } else if (name == "--threads") {
                     o.threads = static_cast<unsigned>(parse_count(name, *value, kMaxThreads));
+                } else if (name == "--bloecke") {
+                    o.blocks = parse_count(name, *value, kMaxLoadTestBlocks);
+                } else if (name == "--vergleich") {
+                    o.compare_threads = static_cast<unsigned>(parse_count(name, *value, kMaxThreads));
+                } else if (name == "--grenze") {
+                    const auto limit = Fixed::parse(*value);
+                    if (!limit || *limit <= Fixed::zero()) {
+                        throw UsageError{"Ungültiger Wert für --grenze: '" + *value +
+                                         "' (erwartet Sekunden größer als 0, z. B. 2 oder 1.5)"};
+                    }
+                    o.limit_seconds = limit->to_double(); // nur zum Vergleich mit der gemessenen Zeit
                 } else {
                     const auto seed = parse_unsigned(*value);
                     if (!seed) {
@@ -704,6 +729,109 @@ int cmd_determinismus(const Options& o, const fs::path& data_dir) {
     return kExitOk;
 }
 
+/// Spitzenwert des Arbeitsspeichers in KiB, soweit das Betriebssystem ihn liefert (Linux: VmHWM).
+std::optional<std::int64_t> peak_memory_kib() {
+#if defined(__linux__)
+    std::ifstream status("/proc/self/status");
+    std::string line;
+    while (std::getline(status, line)) {
+        if (line.rfind("VmHWM:", 0) == 0) {
+            std::int64_t value = 0;
+            for (const char c : line) {
+                if (c >= '0' && c <= '9') {
+                    value = value * 10 + (c - '0');
+                }
+            }
+            return value;
+        }
+    }
+#endif
+    return std::nullopt;
+}
+
+int cmd_lasttest(const Options& o, const fs::path& data_dir) {
+    const auto base = load(data_dir, o.scenario, true);
+    if (!base) {
+        return kExitDataError;
+    }
+    const std::int64_t years = o.years.value_or(kDefaultLoadTestYears);
+    const uhrwerk::LoadTestOptions options{o.blocks, o.seed};
+
+    const auto t_build = std::chrono::steady_clock::now();
+    uhrwerk::Simulation sim(uhrwerk::make_load_test_world(*base, options),
+                            uhrwerk::SimConfig{o.seed, o.threads});
+    const double build_seconds =
+        std::chrono::duration<double>(std::chrono::steady_clock::now() - t_build).count();
+
+    std::cout << "Lasttest (docs/technik/bevoelkerung.md, Abschnitt 7)\n"
+              << "Welt:      " << group_digits(std::to_string(sim.world().locations.size())) << " Orte, "
+              << plural(sim.world().pops.size(), "Bevölkerungsblock", "Bevölkerungsblöcke") << ", "
+              << format_int(total_population(sim.world()).round()) << " Einwohner (Ziel "
+              << plural(static_cast<std::size_t>(o.blocks), "Block", "Blöcke") << ", Seed " << o.seed << ")\n"
+              << "Aufbau:    " << format_seconds(build_seconds) << " (Welt und Wanderungsziele)\n"
+              << "Threads:   " << sim.threads() << '\n';
+
+    std::vector<double> times;
+    std::vector<std::uint64_t> checksums;
+    for (std::int64_t year = 1; year <= years; ++year) {
+        const auto t0 = std::chrono::steady_clock::now();
+        sim.step_days(365);
+        const double seconds = std::chrono::duration<double>(std::chrono::steady_clock::now() - t0).count();
+        times.push_back(seconds);
+        checksums.push_back(sim.checksum());
+        std::cout << "Jahr " << year << ":    " << format_seconds(seconds) << "  "
+                  << plural(sim.world().pops.size(), "Block", "Blöcke") << "  Prüfsumme "
+                  << hex16(checksums.back()) << '\n';
+    }
+    double median = 0.0;
+    if (!times.empty()) {
+        std::vector<double> sorted = times;
+        std::sort(sorted.begin(), sorted.end());
+        const std::size_t mid = sorted.size() / 2;
+        median = sorted.size() % 2 == 1 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2.0;
+    }
+    std::cout << "Median:    " << format_seconds(median) << " je Spieljahr (365 Tage)\n";
+    if (const auto memory = peak_memory_kib()) {
+        std::cout << "Speicher:  Spitze " << format_int((*memory + 512) / 1024) << " MB\n";
+    } else {
+        std::cout << "Speicher:  Spitzenwert auf diesem Betriebssystem nicht verfügbar\n";
+    }
+
+    bool ok = true;
+    if (o.compare_threads) {
+        uhrwerk::Simulation other(uhrwerk::make_load_test_world(*base, options),
+                                  uhrwerk::SimConfig{o.seed, *o.compare_threads});
+        bool same = true;
+        for (std::size_t y = 0; y < checksums.size() && same; ++y) {
+            other.step_days(365);
+            same = other.checksum() == checksums[y];
+        }
+        const std::string threads =
+            std::to_string(other.threads()) + (other.threads() == 1 ? " Thread" : " Threads");
+        if (same) {
+            std::cout << "Vergleich: Lauf mit " << threads << " – alle Jahresprüfsummen gleich\n";
+        } else {
+            std::cout << "FEHLER: Lauf mit " << threads << " weicht ab (" << hex16(other.checksum()) << ")\n";
+            ok = false;
+        }
+    }
+    if (o.limit_seconds) {
+        char limit[32];
+        std::snprintf(limit, sizeof limit, "%g", *o.limit_seconds);
+        std::string limit_text = limit;
+        std::replace(limit_text.begin(), limit_text.end(), '.', ',');
+        if (median <= *o.limit_seconds) {
+            std::cout << "Grenze:    " << limit_text << " s je Spieljahr eingehalten\n";
+        } else {
+            std::cout << "FEHLER: Median " << format_seconds(median) << " liegt über der Grenze von "
+                      << limit_text << " s\n";
+            ok = false;
+        }
+    }
+    std::cout << "\nPrüfsumme: " << hex16(sim.checksum()) << '\n';
+    return ok ? kExitOk : kExitDataError;
+}
+
 int run(int argc, char** argv) {
     Options o;
     try {
@@ -722,6 +850,9 @@ int run(int argc, char** argv) {
                                  "--bericht", "--chronik"});
         } else if (o.command == "determinismus") {
             check_applicable(o, {"--daten", "--szenario", "--jahre", "--tage", "--seed", "--threads"});
+        } else if (o.command == "lasttest") {
+            check_applicable(o, {"--daten", "--szenario", "--jahre", "--seed", "--threads", "--bloecke",
+                                 "--vergleich", "--grenze"});
         } else {
             throw UsageError{"Unbekannter Befehl '" + o.command + "'"};
         }
@@ -735,6 +866,9 @@ int run(int argc, char** argv) {
         }
         if (o.command == "lauf") {
             return cmd_lauf(o, data_dir);
+        }
+        if (o.command == "lasttest") {
+            return cmd_lasttest(o, data_dir);
         }
         return cmd_determinismus(o, data_dir);
     } catch (const UsageError& e) {
