@@ -227,7 +227,8 @@ void initialize_population(World& world) {
         if (loc.pop_count == 0 || !in_range(world.states, loc.owner)) {
             continue;
         }
-        const Fixed tax_rate = world.states[static_cast<std::size_t>(loc.owner)].tax_rate;
+        const Fixed tax_rate =
+            world.states[static_cast<std::size_t>(loc.owner)].tax_rate(TaxKind::Kontribution);
         compute_location_factors(world, loc, tax_rate, factors);
         for (Index p = loc.first_pop; p < loc.first_pop + loc.pop_count; ++p) {
             PopBlock& pop = world.pops[static_cast<std::size_t>(p)];

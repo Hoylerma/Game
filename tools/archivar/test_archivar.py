@@ -183,7 +183,14 @@ class TestFehler(MitKopie):
             ("orte.csv", "200;ja;kr_burg", "200;vielleicht;kr_burg"): "erwartet ja oder nein",
             ("staaten.csv", "10 20 30", "10 20 300"): "ungültige Farbe '10 20 300'",
             ("staaten.csv", "AAA;AAA_nordland", "aaa;AAA_nordland"): "ungültiger Staatstag 'aaa'",
-            ("staaten_historie.csv", "steuersatz;0.2", "steuersatz;0.7"): "außerhalb von 0 bis 0.5",
+            ("staaten_historie.csv", "kontribution;0.2", "kontribution;0.7"): "außerhalb von 0 bis 0.5",
+            ("staaten_historie.csv", "akzise;0.04", "akzise;0.51"): "außerhalb von 0 bis 0.5",
+            ("staaten_historie.csv", "heer;8", "heer;1001"): "außerhalb von 0 bis 1000",
+            ("staaten_historie.csv", "schulden;1500", "schulden;-1"): "außerhalb von 0 bis",
+            ("staaten_historie.csv", "kontribution;0.2", "steuersatz;0.2"): "unbekanntes Feld 'steuersatz'",
+            ("orte.csv", "kr_burg;salz;", "kr_burg;gold;"): "unbekanntes Vorkommen 'gold'",
+            ("orte.csv", "kr_burg;salz;", "kr_burg;salz salz;"): "Vorkommen doppelt angegeben",
+            ("orte.csv", "kr_hafen;;ja;", "kr_hafen;;vielleicht;"): "Spalte 'hafen' erwartet ja, nein oder nichts",
             ("staaten_historie.csv", "BBB;1648.10.24;schatz", "BBB;1648.10.24;armee"): "unbekanntes Feld 'armee'",
             ("dateien.csv", "staaten;AAA_nordland", "karten;AAA_nordland"): "erwartet kreise, orte, staaten",
             ("orte.csv", "200;ja;kr_burg", "200;ja;kr_turm"): "unbekannter Kreis 'kr_turm'",
@@ -211,6 +218,12 @@ class TestFehler(MitKopie):
         m = ar.Meldungen()
         ausgabe = ar.erzeuge(ar.baue_archiv(self.daten / "tabellen", bezug, m))
         self.assertIn("kultur       = { suedleute = 100 }", ausgabe["history/orte/nord.chron"])
+        # Seit M5: Hafen und Vorkommen (nur wenn gesetzt), Steuern und Heer der Staaten.
+        self.assertIn("hafen    = ja", ausgabe["history/orte/nord.chron"])
+        self.assertEqual(ausgabe["history/orte/nord.chron"].count("hafen    = "), 1)  # "nein" wird nicht geschrieben
+        self.assertIn("vorkommen = { salz }", ausgabe["history/orte/sued.chron"])
+        self.assertIn("kontribution   = 0.2", ausgabe["history/staaten/BBB_suedland.chron"])
+        self.assertIn("schulden       = 1500", ausgabe["history/staaten/BBB_suedland.chron"])
 
     def test_kultur_fehlt(self) -> None:
         self.ersetze("bevoelkerung.csv", "suedleute=80 nordleute=20", "")
@@ -239,7 +252,7 @@ class TestFehler(MitKopie):
                 self.erwarte_fehler(text)
 
     def test_doppelte_eintraege(self) -> None:
-        self.anhaengen("orte.csv", "burg;sued;Burg 2;flachland;11.5;52.4;200;ja;kr_burg;Testdaten")
+        self.anhaengen("orte.csv", "burg;sued;Burg 2;flachland;11.5;52.4;200;ja;kr_burg;;;Testdaten")
         self.anhaengen("besitz.csv", "burg;1648.10.24;AAA;gesichert;Testquelle")
         self.anhaengen("staaten_historie.csv", "AAA;1648.10.24;schatz;5;spielwert;Spielwert")
         code, _, fehler = self.pruefen()
@@ -326,8 +339,11 @@ class TestWarnungen(MitKopie):
             ("herrscher", "Niemand"),
             ("konfession", "katholisch"),
             ("schatz", "0"),
-            ("steuersatz", "0"),
+            ("kontribution", "0"),
+            ("akzise", "0"),
+            ("zoll", "0"),
             ("hofhaltung", "0"),
+            ("heer", "0"),
         ):
             self.anhaengen("staaten_historie.csv", f"CCC;1648.10.24;{feld};{wert};spielwert;Test")
         self.anhaengen("dateien.csv", "orte;gibt_es_nicht;;Kommentar")

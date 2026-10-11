@@ -1,13 +1,14 @@
 # Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
 
 ort burg {
-    name     = "Burg"
-    gelaende = flachland
-    lage     = { 11.50 52.40 }
-    flaeche  = 200
-    stadt    = ja
-    kreis    = kr_burg
-    quelle   = "Testdaten"
+    name      = "Burg"
+    gelaende  = flachland
+    lage      = { 11.50 52.40 }
+    flaeche   = 200
+    stadt     = ja
+    kreis     = kr_burg
+    vorkommen = { salz }
+    quelle    = "Testdaten"
 
     1648.10.24 = {
         besitzer     = BBB

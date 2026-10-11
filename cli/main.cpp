@@ -480,6 +480,10 @@ int cmd_pruefen(const Options& o, const fs::path& data_dir) {
               << plural(w.confessions.size(), "Konfession", "Konfessionen") << ", "
               << plural(w.cultures.size(), "Kultur", "Kulturen") << ", "
               << plural(w.professions.size(), "Beruf", "Berufe") << ", "
+              << plural(w.goods.size(), "Gut", "Güter") << ", "
+              << plural(w.needs.size(), "Bedürfnis", "Bedürfnisse") << ", "
+              << plural(w.businesses.size(), "Betrieb", "Betriebe") << ", "
+              << plural(w.markets.size(), "Markt", "Märkte") << ", "
               << plural(w.states.size(), "Staat", "Staaten") << ", "
               << plural(w.districts.size(), "Kreis", "Kreise") << ", " << describe_locations(w) << ", "
               << plural(w.pops.size(), "Bevölkerungsblock", "Bevölkerungsblöcke") << ".\n";
@@ -504,6 +508,10 @@ int cmd_info(const Options& o, const fs::path& data_dir) {
               << plural(w.confessions.size(), "Konfession", "Konfessionen") << ", "
               << plural(w.cultures.size(), "Kultur", "Kulturen") << ", "
               << plural(w.professions.size(), "Beruf", "Berufe") << '\n'
+              << "              " << plural(w.goods.size(), "Gut", "Güter") << ", "
+              << plural(w.needs.size(), "Bedürfnis", "Bedürfnisse") << ", "
+              << plural(w.businesses.size(), "Betrieb", "Betriebe") << ", "
+              << plural(w.markets.size(), "Markt", "Märkte") << '\n'
               << "              " << plural(w.states.size(), "Staat", "Staaten") << ", "
               << plural(w.pops.size(), "Bevölkerungsblock", "Bevölkerungsblöcke") << '\n'
               << "Orte:         " << group_digits(std::to_string(w.locations.size())) << " "
@@ -521,7 +529,7 @@ int cmd_info(const Options& o, const fs::path& data_dir) {
             s.capital >= 0 ? w.locations[static_cast<std::size_t>(s.capital)].name : std::string("–");
         rows.push_back({s.tag, s.name, capital, std::to_string(w.state_locations(index).size()),
                         format_int(w.state_population(index).round()), format_fixed(s.treasury, 0),
-                        format_percent(s.tax_rate)});
+                        format_percent(s.tax_rate(uhrwerk::TaxKind::Kontribution))});
     }
     print_table(rows, {false, false, false, true, true, true, true}, 0);
     return kExitOk;
@@ -545,7 +553,8 @@ void print_report(const uhrwerk::Simulation& sim) {
         expenses += s.last_month_expenses;
         rows.push_back({s.short_name + " (" + s.tag + ")", format_int(pop.round()),
                         format_fixed(s.treasury, 2), format_fixed(s.last_month_income, 2),
-                        format_fixed(s.last_month_expenses, 2), format_percent(s.tax_rate)});
+                        format_fixed(s.last_month_expenses, 2),
+                        format_percent(s.tax_rate(uhrwerk::TaxKind::Kontribution))});
     }
     rows.push_back({"Gesamt", format_int(population.round()), format_fixed(treasury, 2),
                     format_fixed(income, 2), format_fixed(expenses, 2), ""});

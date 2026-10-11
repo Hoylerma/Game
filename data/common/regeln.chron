@@ -1,7 +1,7 @@
-# Globale Regeln und Balancing-Werte (Meilenstein M1, Bevölkerung seit M4).
+# Globale Regeln und Balancing-Werte (Meilenstein M1, Bevölkerung seit M4, Wirtschaft seit M5).
 #
 # Format und Formeln: docs/technik/chronik-skript.md, Abschnitte 3.1 und 5, sowie
-# docs/technik/bevoelkerung.md, Abschnitt 4. Alle Felder sind Pflicht. Raten sind Jahreswerte.
+# docs/technik/bevoelkerung.md, Abschnitt 4, und docs/technik/wirtschaft.md, Abschnitt 4. Alle Felder sind Pflicht. Raten sind Jahreswerte.
 
 regeln {
     verwuestung_abbau     = 0.03    # jährlicher relativer Abbau der Verwüstung
@@ -56,4 +56,46 @@ regeln {
     # Blöcke
     block_mindestgroesse      = 1       # kleinere Blöcke gehen im ähnlichsten Block auf (Personen)
     wanderung_mindestmenge    = 0.05    # kleinere Wanderungsströme entfallen (Personen)
+
+    # ─── Wirtschaft und Staatshaushalt (seit M5) ────────────────────────────
+    # Startwerte aus docs/technik/wirtschaft.md, Abschnitt 4.9 (Sicherheit: spielwert); Abstimmung
+    # mit dem Balancing-Bericht, siehe data/README.md, Abschnitt "Wirtschaftswerte".
+
+    # Märkte und Preise
+    preis_min                 = 0.25    # Preis höchstens auf ein Viertel des Basispreises …
+    preis_max                 = 4       # … und höchstens auf das Vierfache
+    preis_anpassung           = 0.3     # Anteil der Lücke zum Zielpreis je Monat
+
+    # Handel
+    handel_nachbarn           = 6       # Nachbarmärkte je Markt …
+    handel_radius_km          = 180     # … im Umkreis
+    handel_rate               = 0.5     # Stärke des Handels je Monat
+    handel_fracht             = 0.12    # Frachtkosten je 100 km Landweg (Anteil am Preis)
+    seefracht                 = 0.10    # Frachtkosten zum Weltmarkt (Anteil am Preis)
+    handelsspanne             = 0.05    # Anteil der Kaufleute am Umsatz eines Marktes
+
+    # Betriebe, Ernte, Hunger
+    betrieb_anpassung         = 0.03    # Wechsel zu gewinnträchtigeren Betrieben je Monat
+    betrieb_min_anteil        = 0.02    # kein erlaubter Betrieb verschwindet ganz
+    ernte_schwankung_land     = 0.08    # Erntefaktor: ein Jahr für alle …
+    ernte_schwankung_markt    = 0.10    # … und je Markt (Wetter, Unwetter, Schädlinge)
+    sterblichkeit_hunger      = 1.5     # Zuschlag auf die Sterblichkeit, wenn Grundnahrung fehlt
+    einschwingen_monate       = 60      # nur Wirtschaft vor dem Start (Preise, Betriebsanteile)
+
+    # Staatshaushalt
+    verwaltung_je_einwohner   = 0.3     # Reichstaler je Einwohner und Jahr (Ämter, Justiz, Kirche)
+    sold                      = 30      # Reichstaler je Soldat und Jahr (Sold, Brot, Montur)
+    reserve_jahre             = 0.5     # Rücklage in Jahresausgaben; darüber wird gebaut
+    bau_anteil                = 0.05    # Anteil des Überschusses über der Rücklage, der je Monat verbaut wird
+    ausbau_max                = 0.3     # Landesausbau: höchstens +30 % Tragfähigkeit …
+    ausbau_halb               = 200     # … die Hälfte davon bei 200 Reichstalern je km²
+
+    # Kredit und Staatsbankrott
+    zins_basis                = 0.05    # Zins für Staaten ohne große Schulden
+    zins_risiko               = 0.02    # Aufschlag je Jahreseinnahme Schulden über der ersten
+    zins_max                  = 0.2
+    bankrott_quote            = 4       # Bankrott bei Schulden über 4 Jahreseinnahmen
+    bankrott_schnitt          = 0.5     # Schuldenschnitt
+    bankrott_aufschlag        = 0.04    # Zinsaufschlag danach …
+    bankrott_jahre            = 20      # … für so viele Jahre
 }

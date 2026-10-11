@@ -3,9 +3,10 @@
 # Staat zum Lesezeichen "Der Westfälische Frieden" (24.10.1648), Testregion M1.
 #
 # Format: docs/technik/chronik-skript.md, Abschnitt 3.5.
-# schatz, steuersatz und hofhaltung sind Spielwerte (Reichstaler), skaliert auf
-# die in der Testregion modellierten Orte dieses Staates – keine historischen
-# Haushaltszahlen. Kalibrierung: data/README.md, Abschnitt "Wirtschaftswerte".
+# schatz, hofhaltung, die Steuersätze (kontribution, akzise, zoll) und heer (Soldaten
+# je 1.000 Einwohner) sind Spielwerte, skaliert auf die in der Testregion modellierten
+# Orte dieses Staates – keine historischen Haushaltszahlen. Kalibrierung: data/README.md,
+# Abschnitt "Wirtschaftswerte".
 #
 # Ernestinisches Herzogtum (Weimar, Jena, Eisenach; Jena hier nicht eigens modelliert).
 
@@ -13,7 +14,7 @@ staat WEI {
     name     = "Herzogtum Sachsen-Weimar"
     kurzname = "Sachsen-Weimar"
     farbe    = { 80 80 190 }
-    quelle   = "Herzog 1620–1662; nach der Teilung 1645 auch im Besitz der Stadt Eisenach mit der Wartburg. Schatz, Steuersatz und Hofhaltung sind Spielwerte"
+    quelle   = "Herzog 1620–1662; nach der Teilung 1645 auch im Besitz der Stadt Eisenach mit der Wartburg. Schatz, Steuersätze, Hofhaltung und Heer sind Spielwerte"
 
     1648.10.24 = {
         hauptstadt     = weimar
@@ -21,7 +22,10 @@ staat WEI {
         herrscher      = "Wilhelm IV."
         konfession     = lutherisch
         schatz         = 4500
-        steuersatz     = 0.10
+        kontribution   = 0.10
+        akzise         = 0.04
+        zoll           = 0.03
         hofhaltung     = 14500
+        heer           = 4
     }
 }

@@ -1,0 +1,36 @@
+# Testdaten: Betriebe (seit M5).
+betrieb hof {
+    name     = "Hof"
+    beruf    = bauern
+    erzeugt  = { getreide = 8 }
+    agrar    = ja
+    gewicht  = 1
+}
+
+betrieb weberei {
+    name       = "Weberei"
+    beruf      = handwerker
+    erzeugt    = { tuch = 2.4 }
+    verbraucht = { getreide = 1 }
+    agrar      = nein
+    gewicht    = 1
+    gelaende   = { sandboden = 2 }
+}
+
+betrieb saline {
+    name       = "Saline"
+    beruf      = handwerker
+    erzeugt    = { salz = 3 }
+    agrar      = nein
+    vorkommen  = salz
+    ort        = stadt
+    gewicht    = 2
+}
+
+betrieb kontor {
+    name     = "Kontor"
+    beruf    = kaufleute
+    agrar    = nein
+    handel   = ja
+    gewicht  = 1
+}

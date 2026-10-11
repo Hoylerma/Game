@@ -331,7 +331,7 @@ Dictionary UhrwerkSimulation::get_state(std::int64_t index) const {
     result["government"] = to_godot(state.government);
     result["capital_index"] = state.capital;
     result["treasury"] = state.treasury.to_double();
-    result["tax_rate_percent"] = to_percent(state.tax_rate);
+    result["tax_rate_percent"] = to_percent(state.tax_rate(uhrwerk::TaxKind::Kontribution));
     result["income_month"] = state.last_month_income.to_double();
     result["expenses_month"] = state.last_month_expenses.to_double();
     result["population"] = w->state_population(state_index).round();

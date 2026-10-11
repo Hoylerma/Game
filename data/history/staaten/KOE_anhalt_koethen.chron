@@ -3,9 +3,10 @@
 # Staat zum Lesezeichen "Der Westfälische Frieden" (24.10.1648), Testregion M1.
 #
 # Format: docs/technik/chronik-skript.md, Abschnitt 3.5.
-# schatz, steuersatz und hofhaltung sind Spielwerte (Reichstaler), skaliert auf
-# die in der Testregion modellierten Orte dieses Staates – keine historischen
-# Haushaltszahlen. Kalibrierung: data/README.md, Abschnitt "Wirtschaftswerte".
+# schatz, hofhaltung, die Steuersätze (kontribution, akzise, zoll) und heer (Soldaten
+# je 1.000 Einwohner) sind Spielwerte, skaliert auf die in der Testregion modellierten
+# Orte dieses Staates – keine historischen Haushaltszahlen. Kalibrierung: data/README.md,
+# Abschnitt "Wirtschaftswerte".
 #
 # Eine der vier anhaltischen Linien des Jahres 1648.
 
@@ -13,7 +14,7 @@ staat KOE {
     name     = "Fürstentum Anhalt-Köthen"
     kurzname = "Anhalt-Köthen"
     farbe    = { 90 190 190 }
-    quelle   = "Fürst 1603–1650 (gest. 7. Januar 1650), Gründer der Fruchtbringenden Gesellschaft (1617). Anhalt seit der Zweiten Reformation (ab 1596) reformiert. Schatz, Steuersatz und Hofhaltung sind Spielwerte"
+    quelle   = "Fürst 1603–1650 (gest. 7. Januar 1650), Gründer der Fruchtbringenden Gesellschaft (1617). Anhalt seit der Zweiten Reformation (ab 1596) reformiert. Schatz, Steuersätze, Hofhaltung und Heer sind Spielwerte"
 
     1648.10.24 = {
         hauptstadt     = koethen
@@ -21,7 +22,10 @@ staat KOE {
         herrscher      = "Ludwig I."
         konfession     = reformiert
         schatz         = 1500
-        steuersatz     = 0.10
+        kontribution   = 0.10
+        akzise         = 0.04
+        zoll           = 0.03
         hofhaltung     = 6250
+        heer           = 4
     }
 }

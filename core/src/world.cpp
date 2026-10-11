@@ -54,6 +54,22 @@ Index World::find_profession(std::string_view id) const {
     return find_by(professions, id, [](const Profession& p) -> std::string_view { return p.id; });
 }
 
+Index World::find_good(std::string_view id) const {
+    return find_by(goods, id, [](const Good& g) -> std::string_view { return g.id; });
+}
+
+Index World::find_need(std::string_view id) const {
+    return find_by(needs, id, [](const Need& n) -> std::string_view { return n.id; });
+}
+
+Index World::find_business(std::string_view id) const {
+    return find_by(businesses, id, [](const BusinessType& b) -> std::string_view { return b.id; });
+}
+
+Index World::find_market(std::string_view id) const {
+    return find_by(markets, id, [](const Market& m) -> std::string_view { return m.id; });
+}
+
 Fixed World::location_population(Index location) const {
     if (!in_range(locations, location)) {
         return Fixed::zero();

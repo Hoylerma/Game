@@ -37,13 +37,14 @@ ort magdeburg {
 }
 
 ort halle {
-    name     = "Halle (Saale)"
-    gelaende = flussaue
-    lage     = { 11.97 51.48 }
-    flaeche  = 174
-    stadt    = ja
-    kreis    = kr_halle
-    quelle   = "Residenz des Administrators August; Salzsiederei. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung nach regionaler Kriegsbetroffenheit geschätzt"
+    name      = "Halle (Saale)"
+    gelaende  = flussaue
+    lage      = { 11.97 51.48 }
+    flaeche   = 174
+    stadt     = ja
+    kreis     = kr_halle
+    vorkommen = { salz }
+    quelle    = "Residenz des Administrators August; Salzsiederei. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung nach regionaler Kriegsbetroffenheit geschätzt"
 
     1648.10.24 = {
         besitzer     = MAG

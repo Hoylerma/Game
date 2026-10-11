@@ -224,12 +224,12 @@ Jeder Datensatz hat ein `quelle`-Feld. Dabei gilt:
   Berlin-Cölln ca. 6.000 Einwohner 1648).
 - **Konfessionsanteile** von Minderheiten und **Verwüstungsgrade** sind geschätzt und als solche
   bezeichnet.
-- **Schatz, Steuersatz und Hofhaltung** sind **Spielwerte** und keine historischen Haushaltszahlen
-  (siehe unten).
+- **Schatz, Steuersätze (seit M5 Kontribution, Akzise, Zoll), Hofhaltung und Heer** sind
+  **Spielwerte** und keine historischen Haushaltszahlen (siehe unten).
 
 ## Staaten
 
-| Tag | Staat | Herrscher | Hauptstadt | Orte | Bevölkerung | Schatz | Steuersatz | Hofhaltung | Steuern im 1. Jahr |
+| Tag | Staat | Herrscher | Hauptstadt | Orte | Bevölkerung | Schatz | Kontribution | Hofhaltung | Steuern im 1. Jahr |
 |---|---|---|---|---:|---:|---:|---:|---:|---:|
 | `ALT` | Herzogtum Sachsen-Altenburg | Friedrich Wilhelm II. | Altenburg | 1 | 7.000 | 5.500 | 0,10 | 12.500 | 11.640 |
 | `BER` | Fürstentum Anhalt-Bernburg | Christian II. | Bernburg | 1 | 4.000 | 2.000 | 0,10 | 7.000 | 6.021 |
@@ -260,7 +260,8 @@ Gewählt ist ein Kompromiss, der zur Nachkriegslage passt:
 
 - **Berufe:** Pro-Kopf-Erträge von 6 (Landarme) bis 80 Reichstaler (Adel) ergeben etwa 11–17
   Reichstaler Produktion je Einwohner; Adel und Geistlichkeit sind steuerfrei.
-- **Steuersatz:** 0,10 als Regelfall; 0,12 für Brandenburg und Schweden (hohe Kontributionen der
+- **Steuersatz** (seit M5 `kontribution`; Akzise, Zoll und Heer sind bis zur Kalibrierung in M5
+  vorläufige Spielwerte): 0,10 als Regelfall; 0,12 für Brandenburg und Schweden (hohe Kontributionen der
   Kriegs- und Besatzungszeit), 0,14 für Böhmen (habsburgischer Steuerdruck), 0,08 für Mecklenburg und
   Kurmainz (starke Landstände bzw. faktisch autonomes Erfurt).
 - **Hofhaltung** etwa 1,1- bis 1,2-mal die Steuereinnahmen des ersten Jahres: Die Staaten starten mit
@@ -330,8 +331,8 @@ Altersaufbau, Kultur, Lebensstandard, Wanderung) lautet sie `ed6b14a02cfbfa5d`, 
 Threads; nach 100 Jahren leben in den 60 Orten 642.668 Menschen (×1,67).
 Alle Angaben tragen seit M2 eine Sicherheit:
 Besitz, Herrscher, Hauptstadt und Konfession der Staaten `ungeprueft` (recherchiert, noch ohne
-Fachprüfung), Bevölkerung, Konfessionsanteile und Verwüstung `schaetzung`, Schatz, Steuersatz und
-Hofhaltung `spielwert`. Die Begründungen stehen weiter in der Quelle des Ortes bzw. Staates.
+Fachprüfung), Bevölkerung, Konfessionsanteile und Verwüstung `schaetzung`, Schatz, Steuersätze,
+Hofhaltung und Heer `spielwert`. Die Begründungen stehen weiter in der Quelle des Ortes bzw. Staates.
 
 ## Quellenhinweise
 

@@ -41,7 +41,20 @@ SPALTEN: dict[str, tuple[str, ...]] = {
     "dateien.csv": ("ordner", "datei", "kultur", "kommentar"),
     "staaten.csv": ("tag", "datei", "name", "kurzname", "farbe", "quelle"),
     "staaten_historie.csv": ("tag", "ab", "feld", "wert", "sicherheit", "quelle"),
-    "orte.csv": ("id", "datei", "name", "gelaende", "laenge", "breite", "flaeche", "stadt", "kreis", "quelle"),
+    "orte.csv": (
+        "id",
+        "datei",
+        "name",
+        "gelaende",
+        "laenge",
+        "breite",
+        "flaeche",
+        "stadt",
+        "kreis",
+        "vorkommen",
+        "hafen",
+        "quelle",
+    ),
     "kreise.csv": ("id", "datei", "name", "quelle"),
     "besitz.csv": ("ort", "ab", "besitzer", "sicherheit", "quelle"),
     "bevoelkerung.csv": (
@@ -65,11 +78,27 @@ STAAT_FELDER = (
     "herrscher",
     "konfession",
     "schatz",
-    "steuersatz",
+    "kontribution",
+    "akzise",
+    "zoll",
     "hofhaltung",
+    "heer",
+    "schulden",
 )
 # Felder, die zu jedem Szenariodatum bekannt sein müssen (name/kurzname kommen aus staaten.csv).
-STAAT_PFLICHT = ("hauptstadt", "regierungsform", "herrscher", "konfession", "schatz", "steuersatz", "hofhaltung")
+STAAT_PFLICHT = (
+    "hauptstadt",
+    "regierungsform",
+    "herrscher",
+    "konfession",
+    "schatz",
+    "kontribution",
+    "akzise",
+    "zoll",
+    "hofhaltung",
+    "heer",
+)
+STEUER_FELDER = frozenset({"kontribution", "akzise", "zoll"})
 TEXT_FELDER = frozenset({"name", "kurzname", "herrscher", "quelle"})
 
 RE_ORT = re.compile(r"[a-z0-9_]+")
@@ -231,6 +260,7 @@ class Bezug:
     gelaende: set[str] = field(default_factory=set)
     konfessionen: set[str] = field(default_factory=set)
     kulturen: set[str] = field(default_factory=set)
+    vorkommen: set[str] = field(default_factory=set)  # aus common/betriebe.chron (seit M5)
     steuersatz_max: float = 1.0
     szenarien: list[Szenario] = field(default_factory=list)
     karte: tuple[float, float, float, float] | None = None  # laenge_min, laenge_max, breite_min, breite_max
@@ -254,6 +284,10 @@ def lade_bezug(daten: Path, meldungen: Meldungen) -> Bezug:
         bezug.konfessionen = {n.value for n in root.children if n.key == "konfession" and n.is_block}
     if root := _lade_chron(daten / "common/kulturen.chron", "common/kulturen.chron", meldungen):
         bezug.kulturen = {n.value for n in root.children if n.key == "kultur" and n.is_block}
+    if root := _lade_chron(daten / "common/betriebe.chron", "common/betriebe.chron", meldungen):
+        bezug.vorkommen = {
+            v for n in root.children if n.key == "betrieb" and n.is_block if (v := n.get_string("vorkommen") or "")
+        }
     if root := _lade_chron(daten / "common/regeln.chron", "common/regeln.chron", meldungen):
         regeln = root.find("regeln")
         wert = regeln.get_zahl("steuersatz_max") if regeln else None
@@ -484,6 +518,14 @@ def baue_archiv(tabellen: Path, bezug: Bezug, m: Meldungen) -> Archiv:
             ohne_kreis.append(z)
         elif z["kreis"] not in archiv.kreise:
             m.fehler_bei(z.datei, z.nr, f"unbekannter Kreis '{z['kreis']}' (kreise.csv)")
+        vorkommen = z["vorkommen"].split()
+        for v in vorkommen:
+            if v not in bezug.vorkommen:
+                m.fehler_bei(z.datei, z.nr, f"unbekanntes Vorkommen '{v}' (Spalte 'vorkommen'; common/betriebe.chron)")
+        if len(set(vorkommen)) != len(vorkommen):
+            m.fehler_bei(z.datei, z.nr, f"Vorkommen doppelt angegeben: '{z['vorkommen']}'")
+        if z["hafen"] not in ("", "ja", "nein"):
+            m.fehler_bei(z.datei, z.nr, f"Spalte 'hafen' erwartet ja, nein oder nichts, nicht '{z['hafen']}'")
         archiv.orte[z["id"]] = Ort(z)
     if ohne_kreis:
         beispiele = ", ".join(z["id"] for z in ohne_kreis[:5]) + (" …" if len(ohne_kreis) > 5 else "")
@@ -616,10 +658,12 @@ def _pruefe_staatswert(z: Zeile, feld_name: str, wert: str, archiv: Archiv, bezu
         return False
     if feld_name == "schatz":
         return _dezimal(z, "wert", -1e12, 1e12, m, wert) is not None
-    if feld_name == "steuersatz":
+    if feld_name in STEUER_FELDER:
         return _dezimal(z, "wert", 0, bezug.steuersatz_max, m, wert) is not None
-    if feld_name == "hofhaltung":
+    if feld_name in ("hofhaltung", "schulden"):
         return _dezimal(z, "wert", 0, 1e12, m, wert) is not None
+    if feld_name == "heer":
+        return _dezimal(z, "wert", 0, 1000, m, wert) is not None
     if feld_name in TEXT_FELDER and hat_zeilenumbruch(wert):
         m.fehler_bei(z.datei, z.nr, f"Zeilenumbruch im Wert für '{feld_name}'")
         return False
@@ -742,6 +786,8 @@ def ort_text(ort: Ort, archiv: Archiv) -> list[str]:
             ("flaeche", z["flaeche"]),
             ("stadt", z["stadt"]),
             *([("kreis", z["kreis"])] if z["kreis"] else []),
+            *([("vorkommen", f"{{ {' '.join(z['vorkommen'].split())} }}")] if z["vorkommen"] else []),
+            *([("hafen", "ja")] if z["hafen"] == "ja" else []),
             ("quelle", chron_text(z["quelle"])),
         ],
         "    ",

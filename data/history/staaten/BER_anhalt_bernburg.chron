@@ -3,9 +3,10 @@
 # Staat zum Lesezeichen "Der Westfälische Frieden" (24.10.1648), Testregion M1.
 #
 # Format: docs/technik/chronik-skript.md, Abschnitt 3.5.
-# schatz, steuersatz und hofhaltung sind Spielwerte (Reichstaler), skaliert auf
-# die in der Testregion modellierten Orte dieses Staates – keine historischen
-# Haushaltszahlen. Kalibrierung: data/README.md, Abschnitt "Wirtschaftswerte".
+# schatz, hofhaltung, die Steuersätze (kontribution, akzise, zoll) und heer (Soldaten
+# je 1.000 Einwohner) sind Spielwerte, skaliert auf die in der Testregion modellierten
+# Orte dieses Staates – keine historischen Haushaltszahlen. Kalibrierung: data/README.md,
+# Abschnitt "Wirtschaftswerte".
 #
 # Eine der vier anhaltischen Linien des Jahres 1648.
 
@@ -13,7 +14,7 @@ staat BER {
     name     = "Fürstentum Anhalt-Bernburg"
     kurzname = "Anhalt-Bernburg"
     farbe    = { 150 95 175 }
-    quelle   = "Fürst 1630–1656 (Regententafel des Landesarchivs Sachsen-Anhalt). Anhalt seit der Zweiten Reformation (ab 1596) reformiert. Schatz, Steuersatz und Hofhaltung sind Spielwerte"
+    quelle   = "Fürst 1630–1656 (Regententafel des Landesarchivs Sachsen-Anhalt). Anhalt seit der Zweiten Reformation (ab 1596) reformiert. Schatz, Steuersätze, Hofhaltung und Heer sind Spielwerte"
 
     1648.10.24 = {
         hauptstadt     = bernburg
@@ -21,7 +22,10 @@ staat BER {
         herrscher      = "Christian II."
         konfession     = reformiert
         schatz         = 2000
-        steuersatz     = 0.10
+        kontribution   = 0.10
+        akzise         = 0.04
+        zoll           = 0.03
         hofhaltung     = 7000
+        heer           = 4
     }
 }

@@ -43,13 +43,14 @@ struct SimConfig {
 };
 
 enum class CommandType : std::uint8_t {
-    SetTaxRate, // state, value = neuer Steuersatz (0..rules.tax_rate_max)
+    SetTaxRate, // state, kind, value = neuer Steuersatz (0..rules.tax_rate_max)
 };
 
 struct Command {
     CommandType type = CommandType::SetTaxRate;
     Index state = kNone;
     Fixed value;
+    TaxKind kind = TaxKind::Kontribution; // SetTaxRate: welche Steuer (seit M5)
 };
 
 class Simulation {

@@ -42,4 +42,5 @@ beruf adel {
     anteil_land     = 0.05
     agrar           = nein
     bildung         = 0.8
+    agrarabgabe     = 0.1        # seit M5
 }

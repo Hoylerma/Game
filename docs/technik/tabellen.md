@@ -55,7 +55,12 @@ data/tabellen/
 | `flaeche` | Fläche in km² (> 0) |
 | `stadt` | `ja` oder `nein` |
 | `kreis` | Kreiskennung aus `kreise.csv` (seit M3); leer = kein Kreis (Warnung) |
+| `vorkommen` | seit M5: Vorkommen mit Leerzeichen getrennt, z. B. `salz` oder `salz weinlage`; Kennungen aus `vorkommen` in `common/betriebe.chron`; leer = keine |
+| `hafen` | seit M5: `ja` (Hafen mit Zugang zum Weltmarkt), `nein` oder leer (= nein) |
 | `quelle` | Quelle bzw. Begründung für den Ort (erscheint im Spiel) |
+
+Die Spalten `vorkommen` und `hafen` werden von Hand gepflegt; `tools/geodaten/orte.py` übernimmt sie
+beim Neuerzeugen der Tabelle (wie die Spalte `kultur` in `dateien.csv`).
 
 ## `kreise.csv` (seit M3)
 
@@ -115,7 +120,7 @@ Bevölkerungsangabe oder keines von beiden.
 |---|---|
 | `tag` | Staatstag |
 | `ab` | Datum, ab dem der Wert gilt |
-| `feld` | `name`, `kurzname`, `hauptstadt`, `regierungsform`, `herrscher`, `konfession`, `schatz`, `steuersatz`, `hofhaltung` |
+| `feld` | `name`, `kurzname`, `hauptstadt`, `regierungsform`, `herrscher`, `konfession`, `schatz`, `kontribution`, `akzise`, `zoll`, `hofhaltung`, `heer`, `schulden` (die letzten fünf und die drei Steuern seit M5; `steuersatz` heißt seit M5 `kontribution`) |
 | `wert` | Wert im Format des Felds (Ortskennung, Konfessionskennung, Zahl, Text) |
 | `sicherheit`, `quelle` | siehe oben |
 
@@ -146,14 +151,15 @@ der Tabelle.
   etwa 0,0000076 km²)
 - doppelte Orte, Staaten und doppelte Einträge je Datum
 - unbekannte Verweise (Orte, Staaten, Gelände, Konfessionen, Kulturen, Felder)
-- Wertebereiche (Verwüstung 0–1, Steuersatz bis `steuersatz_max` aus `common/regeln.chron`,
-  Konfessions- und Kultursumme 100)
+- Wertebereiche (Verwüstung 0–1, Kontribution, Akzise und Zoll bis `steuersatz_max` aus
+  `common/regeln.chron`, Heer 0–1000, Schulden ab 0, Konfessions- und Kultursumme 100)
+- seit M5: unbekanntes oder doppeltes Vorkommen in `orte.csv`, `hafen` weder `ja`, `nein` noch leer
 - seit M4: Bevölkerungsangabe ohne Kultur (Spalte `kultur` leer und keine Standardkultur der
   Landschaft in `dateien.csv`); Spalte `kultur` in `dateien.csv` bei `staaten` oder `kreise`
 - fehlende Sicherheit oder Quelle
 - **Lücken**: Zu jedem Datum eines Szenarios in `data/szenarien/` hat jeder Ort entweder Besitzer
   und Bevölkerungsangabe oder keines von beiden (Ort ohne Daten); jeder Staat braucht alle Pflichtfelder (`hauptstadt`, `regierungsform`,
-  `herrscher`, `konfession`, `schatz`, `steuersatz`, `hofhaltung`), und die Hauptstadt muss zu
+  `herrscher`, `konfession`, `schatz`, `kontribution`, `akzise`, `zoll`, `hofhaltung`, `heer`), und die Hauptstadt muss zu
   diesem Datum dem Staat gehören (also ein Ort mit Daten sein).
 - unbekannter Kreis in `orte.csv`
 

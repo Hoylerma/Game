@@ -86,6 +86,16 @@ inline void replace_in_file(const std::filesystem::path& path, std::string_view 
     write_file(path, text);
 }
 
+/// Hängt einen Markt für eine zusätzliche Landschaft (Datei in history/orte) an
+/// common/maerkte.chron an; ohne Markt ist eine neue Landschaft ein Ladefehler (seit M5).
+inline void add_market(const std::filesystem::path& data_dir, std::string_view landscape) {
+    const std::filesystem::path path = data_dir / "common/maerkte.chron";
+    std::string text = read_file(path);
+    text += "\nmarkt m_" + std::string(landscape) + " {\n    name = \"Testmarkt\"\n    landschaften = { " +
+            std::string(landscape) + " }\n}\n";
+    write_file(path, text);
+}
+
 /// Alle Probleme eines Ladevorgangs, zeilenweise (für Fehlermeldungen der Tests).
 inline std::string issues_text(const uhrwerk::LoadResult& result) {
     std::string text;

@@ -5,13 +5,20 @@ AAA;1648.10.24;herrscher;Herzog Alt;gesichert;Testquelle
 AAA;1700.03.01;herrscher;Herzog Neu;gesichert;Testquelle
 AAA;1648.10.24;konfession;lutherisch;gesichert;Testquelle
 AAA;1648.10.24;schatz;1000;spielwert;Spielwert
-AAA;1648.10.24;steuersatz;0.10;spielwert;Spielwert
+AAA;1648.10.24;kontribution;0.10;spielwert;Spielwert
+AAA;1648.10.24;akzise;0.05;spielwert;Spielwert
+AAA;1648.10.24;zoll;0.03;spielwert;Spielwert
 AAA;1648.10.24;hofhaltung;5000;spielwert;Spielwert
+AAA;1648.10.24;heer;5;spielwert;Spielwert
 BBB;1648.10.24;hauptstadt;burg;gesichert;Testquelle
 BBB;1648.10.24;regierungsform;koenigreich;gesichert;Testquelle
 BBB;1648.10.24;herrscher;König Eins;gesichert;Testquelle
 BBB;1648.10.24;konfession;katholisch;gesichert;Testquelle
 BBB;1648.10.24;schatz;2000;spielwert;Spielwert
-BBB;1648.10.24;steuersatz;0.2;spielwert;Spielwert
+BBB;1648.10.24;kontribution;0.2;spielwert;Spielwert
+BBB;1648.10.24;akzise;0.04;spielwert;Spielwert
+BBB;1648.10.24;zoll;0.02;spielwert;Spielwert
 BBB;1648.10.24;hofhaltung;8000;spielwert;Spielwert
+BBB;1648.10.24;heer;8;spielwert;Spielwert
+BBB;1648.10.24;schulden;1500;spielwert;Spielwert
 BBB;1701.01.18;name;Königreich Groß-Südland;gesichert;Testquelle

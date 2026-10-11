@@ -24,6 +24,7 @@ using uhrwerk::Pcg32;
 using uhrwerk::RngStream;
 using uhrwerk::SimConfig;
 using uhrwerk::Simulation;
+using uhrwerk::TaxKind;
 using uhrwerk::World;
 
 namespace {
@@ -76,7 +77,7 @@ World make_small_world() {
     s.tag = "TST";
     s.short_name = "Test";
     s.treasury = Fixed::from_int(1000);
-    s.tax_rate = Fixed::from_ratio(1, 4);
+    s.tax_rates[0] = Fixed::from_ratio(1, 4);
     s.court_expenses = Fixed::from_int(1200);
     s.capital = 0;
     w.states.push_back(s);
@@ -360,13 +361,13 @@ TEST_CASE("Simulation: Staffelung mit mehr als 28 Orten") {
 
 TEST_CASE("Simulation: Steuerbefehl") {
     Simulation sim(testhilfen::load_fixture());
-    const Fixed original = sim.world().states[0].tax_rate;
+    const Fixed original = sim.world().states[0].tax_rate(TaxKind::Kontribution);
 
     SUBCASE("gültig: wird am nächsten Tag ausgeführt und vermerkt") {
         sim.submit(set_tax(0, Fixed::from_ratio(1, 5)));
-        CHECK(sim.world().states[0].tax_rate == original); // noch nicht ausgeführt
+        CHECK(sim.world().states[0].tax_rate(TaxKind::Kontribution) == original); // noch nicht ausgeführt
         sim.step_day();
-        CHECK(sim.world().states[0].tax_rate == Fixed::from_ratio(1, 5));
+        CHECK(sim.world().states[0].tax_rate(TaxKind::Kontribution) == Fixed::from_ratio(1, 5));
         REQUIRE(sim.world().chronicle.size() == 1);
         const uhrwerk::ChronicleEntry& e = sim.world().chronicle[0];
         CHECK(e.text == "Brandenburg legt den Steuersatz auf 20 % fest.");
@@ -378,8 +379,8 @@ TEST_CASE("Simulation: Steuerbefehl") {
         sim.submit(set_tax(1, Fixed::zero()));
         sim.submit(set_tax(2, sim.world().rules.tax_rate_max));
         sim.step_day();
-        CHECK(sim.world().states[1].tax_rate == Fixed::zero());
-        CHECK(sim.world().states[2].tax_rate == fx("0.5"));
+        CHECK(sim.world().states[1].tax_rate(TaxKind::Kontribution) == Fixed::zero());
+        CHECK(sim.world().states[2].tax_rate(TaxKind::Kontribution) == fx("0.5"));
         REQUIRE(sim.world().chronicle.size() == 2);
         CHECK(sim.world().chronicle[0].text == "Sachsen legt den Steuersatz auf 0 % fest.");
         CHECK(sim.world().chronicle[1].text == "Anhalt legt den Steuersatz auf 50 % fest.");
@@ -397,7 +398,7 @@ TEST_CASE("Simulation: Steuerbefehl") {
         sim.submit(set_tax(0, sim.world().rules.tax_rate_max + Fixed::from_raw(1)));
         sim.submit(set_tax(0, Fixed::from_int(5)));
         sim.step_day();
-        CHECK(sim.world().states[0].tax_rate == original);
+        CHECK(sim.world().states[0].tax_rate(TaxKind::Kontribution) == original);
         CHECK(sim.world().chronicle.empty());
         CHECK(sim.checksum() == untouched_after_step); // als hätte es die Befehle nie gegeben
     }
@@ -405,7 +406,7 @@ TEST_CASE("Simulation: Steuerbefehl") {
         sim.submit(set_tax(0, Fixed::from_ratio(1, 5)));
         sim.submit(set_tax(0, Fixed::from_ratio(3, 10)));
         sim.step_day();
-        CHECK(sim.world().states[0].tax_rate == Fixed::from_ratio(3, 10));
+        CHECK(sim.world().states[0].tax_rate(TaxKind::Kontribution) == Fixed::from_ratio(3, 10));
         REQUIRE(sim.world().chronicle.size() == 1);
         CHECK(sim.world().chronicle[0].text == "Brandenburg legt den Steuersatz auf 30 % fest.");
     }
@@ -470,7 +471,8 @@ TEST_CASE("Simulation: Wirtschaft auf der Fixture entspricht der Formel") {
     const World before = sim.world();
     const uhrwerk::Location& dresden = before.locations[2];
     REQUIRE(dresden.id == "dresden");
-    const Fixed tax_rate = before.states[static_cast<std::size_t>(dresden.owner)].tax_rate;
+    const Fixed tax_rate =
+        before.states[static_cast<std::size_t>(dresden.owner)].tax_rate(TaxKind::Kontribution);
     uhrwerk::LocationFactors factors;
     uhrwerk::compute_location_factors(before, dresden, tax_rate, factors);
     uhrwerk::LocationEconomy expected;
@@ -552,7 +554,8 @@ TEST_CASE("Simulation: Bevölkerungsformeln exakt gegen Nachrechnung (Abschnitt 
     const Fixed fifty = Fixed::from_int(50);
     const Fixed twelve = Fixed::from_int(12);
     uhrwerk::LocationFactors f;
-    uhrwerk::compute_location_factors(before, before.locations[0], before.states[0].tax_rate, f);
+    uhrwerk::compute_location_factors(before, before.locations[0],
+                                      before.states[0].tax_rate(uhrwerk::TaxKind::Kontribution), f);
     CHECK(f.population == Fixed::from_int(1000));
     CHECK(f.capacity == Fixed::from_int(3000));
     const uhrwerk::PopBlock& old = before.pops[0];
@@ -794,6 +797,7 @@ TEST_CASE("Simulation: Orte ohne Daten ändern die Ergebnisse der übrigen Orte 
             "    kreis = kr_anhalt\n    quelle = \"Testdaten\"\n}\n";
     }
     testhilfen::write_file(extended / "history/orte/90_ohne_daten.chron", extra);
+    testhilfen::add_market(extended.path(), "90_ohne_daten");
 
     const uhrwerk::LoadResult loaded_plain = uhrwerk::load_world(plain.path());
     const uhrwerk::LoadResult loaded_extended = uhrwerk::load_world(extended.path());
@@ -835,7 +839,7 @@ TEST_CASE("Simulation: Orte ohne Daten ändern die Ergebnisse der übrigen Orte 
         CHECK(wa.states[s].treasury == wb.states[s].treasury);
         CHECK(wa.states[s].last_month_income == wb.states[s].last_month_income);
         CHECK(wa.states[s].last_month_expenses == wb.states[s].last_month_expenses);
-        CHECK(wa.states[s].tax_rate == wb.states[s].tax_rate);
+        CHECK(wa.states[s].tax_rate(TaxKind::Kontribution) == wb.states[s].tax_rate(TaxKind::Kontribution));
         CHECK(wa.state_population(static_cast<Index>(s)) == wb.state_population(static_cast<Index>(s)));
     }
     // Verwüstung der Orte mit Daten gleich; Orte ohne Daten unverändert.

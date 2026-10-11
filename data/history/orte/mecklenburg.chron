@@ -42,6 +42,7 @@ ort wismar {
     flaeche  = 146
     stadt    = ja
     kreis    = kr_wismar
+    hafen    = ja
     quelle   = "IPO Art. X: Stadt und Hafen Wismar mit Poel und Neukloster an Schweden (Reichslehen); schwedische Festung. Bevölkerung Schätzung (Größenordnung nach Literatur zur Bevölkerungsentwicklung)"
 
     1648.10.24 = {
@@ -60,6 +61,7 @@ ort rostock {
     flaeche  = 218
     stadt    = ja
     kreis    = kr_rostock
+    hafen    = ja
     quelle   = "Hansestadt und Universität; nach dem Fahrenholzer Vertrag (1621) Kondominium beider Herzöge, hier vereinfacht Mecklenburg-Schwerin zugeordnet (Adolf Friedrich I. führte 1648 auch die Güstrower Vormundschaft); Seezoll in Warnemünde in schwedischer Hand. Bevölkerung Schätzung"
 
     1648.10.24 = {

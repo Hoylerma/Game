@@ -38,13 +38,14 @@ ort prag {
 }
 
 ort leitmeritz {
-    name     = "Leitmeritz"
-    gelaende = boerde
-    lage     = { 14.13 50.53 }
-    flaeche  = 212
-    stadt    = nein
-    kreis    = kr_leitmeritz
-    quelle   = "Königliche Stadt an der Elbe im fruchtbaren nordböhmischen Becken. Bevölkerung Schätzung (Stadt mit Umland; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Nichtkatholischer Anteil geschätzt"
+    name      = "Leitmeritz"
+    gelaende  = boerde
+    lage      = { 14.13 50.53 }
+    flaeche   = 212
+    stadt     = nein
+    kreis     = kr_leitmeritz
+    vorkommen = { weinlage }
+    quelle    = "Königliche Stadt an der Elbe im fruchtbaren nordböhmischen Becken. Bevölkerung Schätzung (Stadt mit Umland; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Nichtkatholischer Anteil geschätzt"
 
     1648.10.24 = {
         besitzer     = BOH

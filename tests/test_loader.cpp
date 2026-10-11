@@ -21,6 +21,7 @@ using uhrwerk::Date;
 using uhrwerk::Fixed;
 using uhrwerk::Index;
 using uhrwerk::LoadResult;
+using uhrwerk::TaxKind;
 using uhrwerk::World;
 
 namespace {
@@ -176,7 +177,7 @@ TEST_CASE("Lader: Staaten und Orte") {
     CHECK(bra.ruler == "Friedrich Wilhelm");
     CHECK(bra.confession == w.find_confession("reformiert"));
     CHECK(bra.treasury == Fixed::from_int(20000));
-    CHECK(bra.tax_rate == fx("0.10"));
+    CHECK(bra.tax_rate(TaxKind::Kontribution) == fx("0.10"));
     CHECK(bra.court_expenses == Fixed::from_int(30000));
     CHECK(bra.last_month_income == Fixed::zero());
     CHECK(bra.last_month_expenses == Fixed::zero());
@@ -279,7 +280,7 @@ TEST_CASE("Lader: Szenarioauswahl") {
 TEST_CASE("Lader: unbekannte Felder und Einträge erzeugen Warnungen") {
     TempDir dir(true);
     replace_in_file(dir / kPlacesBra, "    stadt        = ja\n",
-                    "    stadt        = ja\n    hafen        = nein\n");
+                    "    stadt        = ja\n    festung      = nein\n");
     replace_in_file(dir / "common/gelaende.chron", "# Testdaten: Geländetypen\n",
                     "# Testdaten: Geländetypen\nfluss elbe { name = \"Elbe\" }\nlose_angabe\n");
     replace_in_file(dir / kStatesBra, "    quelle", "    { anonym }\n    quelle");
@@ -291,12 +292,12 @@ TEST_CASE("Lader: unbekannte Felder und Einträge erzeugen Warnungen") {
     for (const uhrwerk::LoadIssue& issue : r.issues) {
         CHECK_FALSE(issue.fatal);
     }
-    const uhrwerk::LoadIssue* hafen = testhilfen::find_issue(r, "unbekanntes Feld 'hafen'");
-    REQUIRE(hafen != nullptr);
-    CHECK(hafen->file == kPlacesBra);
-    CHECK(hafen->line == 10);
-    CHECK(hafen->to_string() ==
-          "history/orte/10_brandenburg.chron:10: Warnung: unbekanntes Feld 'hafen' in ort "
+    const uhrwerk::LoadIssue* festung = testhilfen::find_issue(r, "unbekanntes Feld 'festung'");
+    REQUIRE(festung != nullptr);
+    CHECK(festung->file == kPlacesBra);
+    CHECK(festung->line == 10);
+    CHECK(festung->to_string() ==
+          "history/orte/10_brandenburg.chron:10: Warnung: unbekanntes Feld 'festung' in ort "
           "berlin_coelln wird ignoriert");
     CHECK(has_issue(r, "unbekannter Eintrag 'fluss'", false));
     CHECK(has_issue(r, "unerwarteter Eintrag 'lose_angabe'", false));
@@ -333,13 +334,29 @@ TEST_CASE("Lader: fehlende Pflichtfelder") {
 TEST_CASE("Lader: ungültige Werte") {
     TempDir dir(true);
     SUBCASE("Steuersatz über dem Maximum") {
-        replace_in_file(dir / kStatesBra, "steuersatz     = 0.10", "steuersatz     = 0.6");
-        expect_error(load(dir), "'steuersatz' muss zwischen 0 und 0.5 liegen (ist 0.6)", kStatesBra, 11);
+        replace_in_file(dir / kStatesBra, "kontribution   = 0.10", "kontribution   = 0.6");
+        expect_error(load(dir), "'kontribution' muss zwischen 0 und 0.5 liegen (ist 0.6)", kStatesBra, 11);
     }
     SUBCASE("Steuersatz über einem abgesenkten Maximum") {
         replace_in_file(dir / "common/regeln.chron", "steuersatz_max        = 0.5",
                         "steuersatz_max        = 0.1");
-        expect_error(load(dir), "'steuersatz' muss zwischen 0 und 0.1 liegen (ist 0.12)", kStatesMid);
+        expect_error(load(dir), "'kontribution' muss zwischen 0 und 0.1 liegen (ist 0.12)", kStatesMid);
+    }
+    SUBCASE("Akzise und Zoll über dem Maximum, Heer negativ") {
+        replace_in_file(dir / kStatesBra, "akzise         = 0.05", "akzise         = 0.7");
+        expect_error(load(dir), "'akzise' muss zwischen 0 und 0.5 liegen (ist 0.7)", kStatesBra, 12);
+        replace_in_file(dir / kStatesBra, "akzise         = 0.7", "akzise         = 0.05");
+        replace_in_file(dir / kStatesBra, "zoll           = 0.03", "zoll           = 0.51");
+        expect_error(load(dir), "'zoll' muss zwischen 0 und 0.5 liegen (ist 0.51)", kStatesBra, 13);
+        replace_in_file(dir / kStatesBra, "zoll           = 0.51", "zoll           = 0.03");
+        replace_in_file(dir / kStatesBra, "heer           = 10", "heer           = -1");
+        expect_error(load(dir), "'heer' muss zwischen 0 und 1000 liegen (ist -1)", kStatesBra, 15);
+    }
+    SUBCASE("Steuersatz alter Form") {
+        replace_in_file(dir / kStatesBra, "kontribution   = 0.10", "steuersatz     = 0.10");
+        const LoadResult r = load(dir);
+        CHECK(has_issue(r, "Pflichtfeld 'kontribution' fehlt in staat BRA", true));
+        CHECK(has_issue(r, "unbekanntes Feld 'steuersatz' in staat BRA wird ignoriert", false));
     }
     SUBCASE("Bevölkerung 0") {
         replace_in_file(dir / kPlacesBra, "bevoelkerung = 12000", "bevoelkerung = 0");
@@ -467,6 +484,7 @@ TEST_CASE("Lader: Summe der Berufsanteile") {
 TEST_CASE("Lader: doppelte Kennungen") {
     TempDir dir(true);
     SUBCASE("Ort") {
+        testhilfen::add_market(dir.path(), "40_doppelt");
         testhilfen::write_file(dir / "history/orte/40_doppelt.chron",
                                "ort berlin_coelln {\n name = \"B\" besitzer = BRA gelaende = flussaue\n"
                                " lage = { 13 52 } flaeche = 1 bevoelkerung = 1 stadt = ja\n"
@@ -478,7 +496,7 @@ TEST_CASE("Lader: doppelte Kennungen") {
     }
     SUBCASE("Staat") {
         replace_in_file(dir / kStatesMid, "staat ANH {", "staat SAX {");
-        expect_error(load(dir), "doppelte Kennung 'SAX' für Staat", kStatesMid, 16);
+        expect_error(load(dir), "doppelte Kennung 'SAX' für Staat", kStatesMid, 19);
     }
     SUBCASE("Gelände") {
         replace_in_file(dir / "common/gelaende.chron", "gelaende sandboden {", "gelaende ackerland {");
@@ -692,6 +710,7 @@ TEST_CASE("Lader: fehlende Dateien und Ordner") {
 
 TEST_CASE("Lader: Dateien werden nach Namen sortiert geladen") {
     TempDir dir(true);
+    testhilfen::add_market(dir.path(), "05_cottbus");
     testhilfen::write_file(dir / "history/orte/05_cottbus.chron",
                            "ort cottbus {\n name = \"Cottbus\" besitzer = BRA gelaende = sandboden\n"
                            " lage = { 14.33 51.76 } flaeche = 160 bevoelkerung = 2000 stadt = ja\n"
@@ -842,7 +861,7 @@ TEST_CASE("Lader: Orte ohne Daten und datierte Blöcke") {
 TEST_CASE("Lader: Hauptstadt muss ein Ort mit Daten sein") {
     TempDir dir(true);
     replace_in_file(dir / kStatesMid, "hauptstadt     = dessau", "hauptstadt     = zerbst");
-    expect_error(load(dir), "Hauptstadt 'zerbst' von ANH ist ein Ort ohne Daten", kStatesMid, 20);
+    expect_error(load(dir), "Hauptstadt 'zerbst' von ANH ist ein Ort ohne Daten", kStatesMid, 23);
 }
 
 // ─── Kreise (Abschnitt 3.9) ─────────────────────────────────────────────────
@@ -1105,7 +1124,7 @@ TEST_CASE("Lader: Startwerte für Lebensstandard und Alphabetisierung") {
             continue;
         }
         INFO("Ort " << loc.id);
-        const Fixed tax = w.states[static_cast<std::size_t>(loc.owner)].tax_rate;
+        const Fixed tax = w.states[static_cast<std::size_t>(loc.owner)].tax_rate(TaxKind::Kontribution);
         uhrwerk::compute_location_factors(w, loc, tax, factors);
         for (Index p = loc.first_pop; p < loc.first_pop + loc.pop_count; ++p) {
             const uhrwerk::PopBlock& pop = w.pops[static_cast<std::size_t>(p)];
@@ -1189,5 +1208,203 @@ TEST_CASE("Lader: Fehler bei Kulturen und neuen Feldern") {
     SUBCASE("Pflichtfeld tragfaehigkeit fehlt") {
         replace_in_file(dir / "common/gelaende.chron", "    tragfaehigkeit = 45\n", "");
         expect_error(load(dir), "Pflichtfeld 'tragfaehigkeit' fehlt in gelaende flussaue");
+    }
+}
+
+// ─── Wirtschaft (seit M5, docs/technik/wirtschaft.md, Abschnitt 2) ─────────
+
+TEST_CASE("Lader: Güter, Bedürfnisse, Betriebe und Märkte") {
+    TempDir dir(true);
+    const LoadResult r = load(dir);
+    INFO(issues_text(r));
+    REQUIRE(r.ok());
+    const World& w = *r.world;
+
+    REQUIRE(w.goods.size() == 4);
+    const Index grain = w.find_good("getreide");
+    const Index cloth = w.find_good("tuch");
+    const Index salt = w.find_good("salz");
+    const Index colonial = w.find_good("kolonialwaren");
+    CHECK(grain == 0);
+    CHECK(w.goods[0].name == "Getreide");
+    CHECK(w.goods[0].base_price == Fixed::one());
+    CHECK(w.goods[0].world_factor == fx("0.9"));
+    CHECK(w.goods[static_cast<std::size_t>(cloth)].world_factor == Fixed::zero()); // nicht am Weltmarkt
+    CHECK(w.goods[static_cast<std::size_t>(colonial)].base_price == Fixed::from_int(8));
+
+    // Bedürfnisse in Dateireihenfolge, Warenkorb je Schicht.
+    REQUIRE(w.needs.size() == 3);
+    CHECK(w.needs[0].id == "nahrung");
+    CHECK(w.needs[0].hunger);
+    CHECK_FALSE(w.needs[1].hunger);
+    const auto& unten = w.needs[0].basket[static_cast<std::size_t>(uhrwerk::Stratum::Unten)];
+    REQUIRE(unten.size() == 2);
+    CHECK(unten[0].good == grain);
+    CHECK(unten[0].amount == Fixed::from_int(4));
+    CHECK(unten[1].good == salt);
+    CHECK(unten[1].amount == fx("0.05"));
+    CHECK(
+        w.needs[2].basket[static_cast<std::size_t>(uhrwerk::Stratum::Unten)].empty()); // leerer Korb erlaubt
+    CHECK(w.needs[1].basket[static_cast<std::size_t>(uhrwerk::Stratum::Oben)].size() == 2);
+
+    // Betriebe
+    REQUIRE(w.businesses.size() == 4);
+    const auto& hof = w.businesses[static_cast<std::size_t>(w.find_business("hof"))];
+    CHECK(hof.profession == w.find_profession("bauern"));
+    CHECK(hof.agrarian);
+    CHECK(hof.siting == uhrwerk::Siting::All);
+    REQUIRE(hof.outputs.size() == 1);
+    CHECK(hof.outputs[0].amount == Fixed::from_int(8));
+    CHECK(hof.inputs.empty());
+    CHECK(hof.deposit == uhrwerk::kNone);
+    const auto& weberei = w.businesses[static_cast<std::size_t>(w.find_business("weberei"))];
+    REQUIRE(weberei.inputs.size() == 1);
+    CHECK(weberei.inputs[0].good == grain);
+    REQUIRE(weberei.terrain_factors.size() == w.terrains.size());
+    CHECK(weberei.terrain_factors[static_cast<std::size_t>(w.find_terrain("sandboden"))] ==
+          Fixed::from_int(2));
+    CHECK(weberei.terrain_factors[static_cast<std::size_t>(w.find_terrain("flussaue"))] == Fixed::one());
+    const auto& saline = w.businesses[static_cast<std::size_t>(w.find_business("saline"))];
+    CHECK(saline.siting == uhrwerk::Siting::City);
+    REQUIRE(w.deposits.size() == 1);
+    CHECK(w.deposits[0] == "salz");
+    CHECK(saline.deposit == 0);
+    const auto& kontor = w.businesses[static_cast<std::size_t>(w.find_business("kontor"))];
+    CHECK(kontor.trade);
+    CHECK(kontor.outputs.empty());
+
+    // Märkte: ein Markt kann mehrere Landschaften haben; jeder Ort kennt seinen Markt.
+    REQUIRE(w.markets.size() == 2);
+    CHECK(w.markets[1].landscapes == std::vector<std::string>{"20_sachsen", "30_anhalt"});
+    const Index brandenburg = w.find_market("brandenburg");
+    const Index mitte = w.find_market("mitte");
+    CHECK(w.locations[static_cast<std::size_t>(w.find_location("potsdam"))].market == brandenburg);
+    CHECK(w.locations[static_cast<std::size_t>(w.find_location("leipzig"))].market == mitte);
+    CHECK(w.locations[static_cast<std::size_t>(w.find_location("zerbst"))].market == mitte);
+
+    // Orte: Hafen und Vorkommen
+    CHECK(w.locations[static_cast<std::size_t>(w.find_location("potsdam"))].is_port);
+    CHECK_FALSE(w.locations[static_cast<std::size_t>(w.find_location("berlin_coelln"))].is_port);
+    CHECK(w.locations[static_cast<std::size_t>(w.find_location("leipzig"))].deposits == 1u);
+    CHECK(w.locations[static_cast<std::size_t>(w.find_location("dresden"))].deposits == 0u);
+
+    // Berufe und Staaten
+    CHECK(w.professions[static_cast<std::size_t>(w.find_profession("adel"))].agrarian_levy == fx("0.1"));
+    CHECK(w.professions[static_cast<std::size_t>(w.find_profession("bauern"))].agrarian_levy ==
+          Fixed::zero());
+    const auto& bra = w.states[static_cast<std::size_t>(w.find_state("BRA"))];
+    CHECK(bra.tax_rate(TaxKind::Kontribution) == fx("0.10"));
+    CHECK(bra.tax_rate(TaxKind::Akzise) == fx("0.05"));
+    CHECK(bra.tax_rate(TaxKind::Zoll) == fx("0.03"));
+    CHECK(bra.army_per_mille == Fixed::from_int(10));
+    CHECK(bra.debt == Fixed::zero()); // schulden ist optional
+    CHECK(w.states[static_cast<std::size_t>(w.find_state("ANH"))].debt == Fixed::from_int(1500));
+
+    // Regeln
+    CHECK(w.rules.price_max == Fixed::from_int(4));
+    CHECK(w.rules.trade_neighbors == 6);
+    CHECK(w.rules.settling_months == 60);
+    CHECK(w.rules.bankruptcy_years == 20);
+    CHECK(w.rules.development_half == Fixed::from_int(200));
+}
+
+TEST_CASE("Lader: Fehler in den Wirtschaftsdaten") {
+    TempDir dir(true);
+    SUBCASE("unbekanntes Gut im Warenkorb") {
+        replace_in_file(dir / "common/beduerfnisse.chron", "unten  = { tuch = 0.2 }",
+                        "unten  = { tuche = 0.2 }");
+        expect_error(load(dir), "unbekanntes Gut 'tuche' in beduerfnis kleidung",
+                     "common/beduerfnisse.chron");
+    }
+    SUBCASE("Warenkorb einer Schicht fehlt") {
+        replace_in_file(dir / "common/beduerfnisse.chron", "    unten  = { }\n", "");
+        expect_error(load(dir), "Pflichtfeld 'unten' fehlt in beduerfnis luxus", "common/beduerfnisse.chron");
+    }
+    SUBCASE("Gut doppelt im Mengenblock") {
+        replace_in_file(dir / "common/betriebe.chron", "erzeugt  = { getreide = 8 }",
+                        "erzeugt  = { getreide = 8 getreide = 1 }");
+        expect_error(load(dir), "Gut 'getreide' ist in 'erzeugt' von betrieb hof mehrfach angegeben");
+    }
+    SUBCASE("negative Menge") {
+        replace_in_file(dir / "common/betriebe.chron", "erzeugt  = { getreide = 8 }",
+                        "erzeugt  = { getreide = -8 }");
+        expect_error(load(dir), "ungültige Menge '-8' für Gut 'getreide'");
+    }
+    SUBCASE("Betrieb mit unbekanntem Beruf") {
+        replace_in_file(dir / "common/betriebe.chron", "beruf    = bauern", "beruf    = fischer");
+        expect_error(load(dir), "unbekannter Beruf 'fischer' in betrieb hof", "common/betriebe.chron");
+    }
+    SUBCASE("Betrieb ohne Erzeugung") {
+        replace_in_file(dir / "common/betriebe.chron", "    erzeugt  = { getreide = 8 }\n", "");
+        expect_error(load(dir), "Pflichtfeld 'erzeugt' fehlt in betrieb hof");
+    }
+    SUBCASE("Handel mit Erzeugung") {
+        replace_in_file(dir / "common/betriebe.chron", "    handel   = ja\n",
+                        "    handel   = ja\n    erzeugt  = { tuch = 1 }\n");
+        expect_error(load(dir), "betrieb kontor mit 'handel = ja' erzeugt und verbraucht keine Güter");
+    }
+    SUBCASE("ungültiger Standort") {
+        replace_in_file(dir / "common/betriebe.chron", "ort        = stadt", "ort        = dorf");
+        expect_error(load(dir), "ungültiger Wert 'dorf' für 'ort' (erlaubt: alle, stadt, land)");
+    }
+    SUBCASE("unbekanntes Gelände im Betrieb") {
+        replace_in_file(dir / "common/betriebe.chron", "gelaende   = { sandboden = 2 }",
+                        "gelaende   = { moor = 2 }");
+        expect_error(load(dir), "unbekanntes Gelände 'moor' in betrieb weberei");
+    }
+    SUBCASE("unbekanntes Vorkommen im Ort") {
+        replace_in_file(dir / kPlacesSax, "vorkommen    = { salz }", "vorkommen    = { gold }");
+        expect_error(load(dir), "unbekanntes Vorkommen 'gold' in ort leipzig", kPlacesSax);
+    }
+    SUBCASE("Vorkommen ist nicht datierbar") {
+        replace_in_file(dir / kPlacesSax,
+                        "    vorkommen    = { salz }                 # seit M5 (Testdaten)\n",
+                        "    1650.01.01 = { vorkommen = { salz } }\n");
+        expect_error(load(dir), "Feld 'vorkommen' in ort leipzig kann nicht datiert werden", kPlacesSax);
+    }
+    SUBCASE("Hafen erwartet ja oder nein") {
+        replace_in_file(dir / kPlacesBra, "hafen        = ja", "hafen        = vielleicht");
+        expect_error(load(dir), "ungültiger Wert 'vielleicht' für 'hafen' (erwartet ja oder nein)",
+                     kPlacesBra);
+    }
+    SUBCASE("Landschaft ohne Markt") {
+        replace_in_file(dir / "common/maerkte.chron", "landschaften = { 20_sachsen 30_anhalt }",
+                        "landschaften = { 20_sachsen }");
+        expect_error(load(dir), "Landschaft '30_anhalt' gehört zu keinem Markt (common/maerkte.chron)",
+                     "history/orte/30_anhalt.chron", 0);
+    }
+    SUBCASE("Landschaft in zwei Märkten") {
+        replace_in_file(dir / "common/maerkte.chron", "landschaften = { 10_brandenburg }",
+                        "landschaften = { 10_brandenburg 20_sachsen }");
+        expect_error(load(dir), "Landschaft '20_sachsen' gehört schon zu markt brandenburg",
+                     "common/maerkte.chron");
+    }
+    SUBCASE("Landschaft ohne Datei ist eine Warnung") {
+        replace_in_file(dir / "common/maerkte.chron", "landschaften = { 10_brandenburg }",
+                        "landschaften = { 10_brandenburg 99_atlantis }");
+        const LoadResult r = load(dir);
+        INFO(issues_text(r));
+        CHECK(r.ok());
+        CHECK(has_issue(r, "Landschaft '99_atlantis' hat keine Datei in history/orte", false));
+    }
+    SUBCASE("Agrarabgaben über 1") {
+        replace_in_file(dir / "common/berufe.chron", "agrarabgabe     = 0.1", "agrarabgabe     = 0.6");
+        replace_in_file(dir / "common/berufe.chron", "    bildung         = 0.6\n",
+                        "    bildung         = 0.6\n    agrarabgabe     = 0.5\n");
+        expect_error(load(dir), "die Summe aller 'agrarabgabe' ist 1.1, höchstens 1 ist erlaubt",
+                     "common/berufe.chron");
+    }
+    SUBCASE("Regelfeld fehlt") {
+        replace_in_file(dir / "common/regeln.chron", "    handelsspanne             = 0.05\n", "");
+        expect_error(load(dir), "Pflichtfeld 'handelsspanne' fehlt in regeln", "common/regeln.chron");
+    }
+    SUBCASE("Zins: Grundsatz über der Obergrenze") {
+        replace_in_file(dir / "common/regeln.chron", "zins_basis                = 0.05",
+                        "zins_basis                = 0.3");
+        expect_error(load(dir), "'zins_basis' (0.3) ist größer als 'zins_max' (0.2)", "common/regeln.chron");
+    }
+    SUBCASE("Datei fehlt") {
+        std::filesystem::remove(dir / "common/gueter.chron");
+        expect_error(load(dir), "Datei fehlt", "common/gueter.chron", 0);
     }
 }

@@ -27,4 +27,5 @@ ort potsdam {
     verwuestung  = 0.6
     kreis        = kr_berlin
     quelle       = "Testdaten, geschätzt"
+    hafen        = ja                       # seit M5 (Testdaten)
 }

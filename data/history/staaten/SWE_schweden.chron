@@ -3,9 +3,10 @@
 # Staat zum Lesezeichen "Der Westfälische Frieden" (24.10.1648), Testregion M1.
 #
 # Format: docs/technik/chronik-skript.md, Abschnitt 3.5.
-# schatz, steuersatz und hofhaltung sind Spielwerte (Reichstaler), skaliert auf
-# die in der Testregion modellierten Orte dieses Staates – keine historischen
-# Haushaltszahlen. Kalibrierung: data/README.md, Abschnitt "Wirtschaftswerte".
+# schatz, hofhaltung, die Steuersätze (kontribution, akzise, zoll) und heer (Soldaten
+# je 1.000 Einwohner) sind Spielwerte, skaliert auf die in der Testregion modellierten
+# Orte dieses Staates – keine historischen Haushaltszahlen. Kalibrierung: data/README.md,
+# Abschnitt "Wirtschaftswerte".
 #
 # Schweden als Reichsstand für seine deutschen Besitzungen; Stockholm und Bremen-Verden liegen
 # außerhalb der Testregion. Die Hofhaltung steht hier für die Landesverwaltung und Garnisonen in Pommern.
@@ -14,7 +15,7 @@ staat SWE {
     name     = "Königreich Schweden"
     kurzname = "Schweden"
     farbe    = { 236 200 52 }
-    quelle   = "Königin Christina (reg. 1632–1654, volljährig seit 1644). IPO Art. X: Vorpommern mit Stettin, Rügen, Usedom und Wollin, Wismar sowie Bremen und Verden als Reichslehen mit Sitz im Reichstag. Hauptstadt hier Stettin als Sitz der schwedischen Regierung in Pommern. Schatz, Steuersatz und Hofhaltung sind Spielwerte"
+    quelle   = "Königin Christina (reg. 1632–1654, volljährig seit 1644). IPO Art. X: Vorpommern mit Stettin, Rügen, Usedom und Wollin, Wismar sowie Bremen und Verden als Reichslehen mit Sitz im Reichstag. Hauptstadt hier Stettin als Sitz der schwedischen Regierung in Pommern. Schatz, Steuersätze, Hofhaltung und Heer sind Spielwerte"
 
     1648.10.24 = {
         hauptstadt     = stettin
@@ -22,7 +23,10 @@ staat SWE {
         herrscher      = "Christina"
         konfession     = lutherisch
         schatz         = 23500
-        steuersatz     = 0.12
+        kontribution   = 0.12
+        akzise         = 0.04
+        zoll           = 0.06
         hofhaltung     = 59000
+        heer           = 15
     }
 }

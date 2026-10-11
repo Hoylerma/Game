@@ -241,7 +241,8 @@ void Simulation::prepare_population_state() {
             !in_range(world_.terrains, loc.terrain)) {
             continue;
         }
-        const Fixed tax_rate = world_.states[static_cast<std::size_t>(loc.owner)].tax_rate;
+        const Fixed tax_rate =
+            world_.states[static_cast<std::size_t>(loc.owner)].tax_rate(TaxKind::Kontribution);
         compute_location_factors(world_, loc, tax_rate, factors);
         world_.snapshots[i] = LocationSnapshot{factors.population, factors.reserve};
         std::copy(factors.target.begin(), factors.target.end(),
@@ -261,7 +262,7 @@ void Simulation::step_day() {
         std::vector<Fixed> previous_rates;
         previous_rates.reserve(world_.states.size());
         for (const State& state : world_.states) {
-            previous_rates.push_back(state.tax_rate);
+            previous_rates.push_back(state.tax_rate(TaxKind::Kontribution));
         }
         while (!pending_.empty()) {
             const Command command = pending_.front();
@@ -270,11 +271,11 @@ void Simulation::step_day() {
         }
         for (std::size_t i = 0; i < world_.states.size(); ++i) {
             const State& state = world_.states[i];
-            if (state.tax_rate != previous_rates[i]) {
+            if (state.tax_rate(TaxKind::Kontribution) != previous_rates[i]) {
                 ChronicleEntry entry;
                 entry.date = world_.date;
                 entry.text = state.short_name + " legt den Steuersatz auf " +
-                             std::to_string(to_percent(state.tax_rate)) + " % fest.";
+                             std::to_string(to_percent(state.tax_rate(TaxKind::Kontribution))) + " % fest.";
                 entry.state = static_cast<Index>(i);
                 world_.chronicle.push_back(std::move(entry));
             }
@@ -381,7 +382,7 @@ std::uint64_t Simulation::checksum() const {
     h.u64(world_.states.size());
     for (const State& s : world_.states) {
         h.fixed(s.treasury);
-        h.fixed(s.tax_rate);
+        h.fixed(s.tax_rate(TaxKind::Kontribution));
         h.fixed(s.court_expenses);
         h.fixed(s.last_month_income);
         h.fixed(s.last_month_expenses);
@@ -461,7 +462,8 @@ void Simulation::execute(const Command& command) {
         if (command.value < Fixed::zero() || command.value > world_.rules.tax_rate_max) {
             return;
         }
-        world_.states[static_cast<std::size_t>(command.state)].tax_rate = command.value;
+        world_.states[static_cast<std::size_t>(command.state)]
+            .tax_rates[static_cast<std::size_t>(command.kind)] = command.value;
         return;
     }
 }
@@ -484,7 +486,7 @@ void Simulation::run_population(Index location, Scratch& scratch) {
 
     // 4.1 Kennzahlen des Ortes; sie werden auch die neue Momentaufnahme.
     LocationFactors& factors = scratch.factors;
-    compute_location_factors(world_, loc, owner.tax_rate, factors);
+    compute_location_factors(world_, loc, owner.tax_rate(TaxKind::Kontribution), factors);
     next_snapshots_[li] = LocationSnapshot{factors.population, factors.reserve};
     std::copy(factors.target.begin(), factors.target.end(),
               next_targets_.begin() + static_cast<std::ptrdiff_t>(li * professions));
@@ -519,7 +521,7 @@ void Simulation::run_population(Index location, Scratch& scratch) {
         const Fixed produced = pop.size() * scratch.yield_month[b];
         economy.production += produced;
         if (profession.taxable) {
-            economy.taxes += produced * owner.tax_rate;
+            economy.taxes += produced * owner.tax_rate(TaxKind::Kontribution);
         }
 
         // 4.2 Lebensstandard.

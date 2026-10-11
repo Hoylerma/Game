@@ -488,6 +488,11 @@ public:
         process("common/konfessionen.chron", [&](const SourceFile& f) { load_confessions(f); });
         process("common/kulturen.chron", [&](const SourceFile& f) { load_cultures(f); });
         process("common/berufe.chron", [&](const SourceFile& f) { load_professions(f); });
+        // Wirtschaft (seit M5, docs/technik/wirtschaft.md, Abschnitt 2).
+        process("common/gueter.chron", [&](const SourceFile& f) { load_goods(f); });
+        process("common/beduerfnisse.chron", [&](const SourceFile& f) { load_needs(f); });
+        process("common/betriebe.chron", [&](const SourceFile& f) { load_businesses(f); });
+        process("common/maerkte.chron", [&](const SourceFile& f) { load_markets(f); });
 
         // Szenarien vor der Historie: Das Startdatum entscheidet, welche datierten
         // Blöcke gelten (Abschnitt 3.8).
@@ -515,6 +520,7 @@ public:
         check_players(scenarios);
         check_capitals();
         check_districts();
+        check_markets();
 
         if (issues_.has_errors() || selected == nullptr) {
             return std::nullopt;
@@ -709,7 +715,35 @@ private:
                   "auswanderung_schwelle",
                   "auswanderung_rate",
                   "block_mindestgroesse",
-                  "wanderung_mindestmenge"});
+                  "wanderung_mindestmenge",
+                  "preis_min",
+                  "preis_max",
+                  "preis_anpassung",
+                  "handel_nachbarn",
+                  "handel_radius_km",
+                  "handel_rate",
+                  "handel_fracht",
+                  "seefracht",
+                  "handelsspanne",
+                  "betrieb_anpassung",
+                  "betrieb_min_anteil",
+                  "ernte_schwankung_land",
+                  "ernte_schwankung_markt",
+                  "sterblichkeit_hunger",
+                  "einschwingen_monate",
+                  "verwaltung_je_einwohner",
+                  "sold",
+                  "reserve_jahre",
+                  "bau_anteil",
+                  "ausbau_max",
+                  "ausbau_halb",
+                  "zins_basis",
+                  "zins_risiko",
+                  "zins_max",
+                  "bankrott_quote",
+                  "bankrott_schnitt",
+                  "bankrott_aufschlag",
+                  "bankrott_jahre"});
         Rules& r = world_.rules;
         const Range unit = between(fx(0), fx(1));
         const auto devastation_decay = f.fixed("verwuestung_abbau", unit);
@@ -773,6 +807,45 @@ private:
         r.block_min_size = f.fixed("block_mindestgroesse", between(fx(0), fx(1'000'000))).value_or(Fixed{});
         r.migration_min_amount =
             f.fixed("wanderung_mindestmenge", between(fx(0), fx(1'000'000))).value_or(Fixed{});
+
+        // Wirtschaft und Staatshaushalt (seit M5, docs/technik/wirtschaft.md, Abschnitt 4.9).
+        const Fixed half = Fixed::from_ratio(1, 2);
+        r.price_min = f.fixed("preis_min", above_up_to(fx(0), fx(1))).value_or(Fixed::one());
+        r.price_max = f.fixed("preis_max", between(fx(1), fx(100))).value_or(Fixed::one());
+        r.price_adjustment = f.fixed("preis_anpassung", unit).value_or(Fixed{});
+        r.trade_neighbors = static_cast<std::int32_t>(f.integer("handel_nachbarn", 0, 16).value_or(0));
+        r.trade_radius_km = f.fixed("handel_radius_km", between(fx(0), fx(5000))).value_or(Fixed{});
+        r.trade_rate = f.fixed("handel_rate", unit).value_or(Fixed{});
+        r.freight_land = f.fixed("handel_fracht", between(fx(0), fx(10))).value_or(Fixed{});
+        r.freight_sea = f.fixed("seefracht", between(fx(0), fx(10))).value_or(Fixed{});
+        r.trade_margin = f.fixed("handelsspanne", between(fx(0), half)).value_or(Fixed{});
+        r.business_adjustment = f.fixed("betrieb_anpassung", unit).value_or(Fixed{});
+        r.business_min_share = f.fixed("betrieb_min_anteil", between(fx(0), half)).value_or(Fixed{});
+        r.harvest_variation_land = f.fixed("ernte_schwankung_land", between(fx(0), half)).value_or(Fixed{});
+        r.harvest_variation_market =
+            f.fixed("ernte_schwankung_markt", between(fx(0), half)).value_or(Fixed{});
+        r.mortality_hunger = f.fixed("sterblichkeit_hunger", between(fx(0), fx(10))).value_or(Fixed{});
+        r.settling_months = static_cast<std::int32_t>(f.integer("einschwingen_monate", 0, 600).value_or(0));
+        r.administration_per_capita =
+            f.fixed("verwaltung_je_einwohner", between(fx(0), fx(1000))).value_or(Fixed{});
+        r.soldier_pay = f.fixed("sold", between(fx(0), fx(100'000))).value_or(Fixed{});
+        r.reserve_years = f.fixed("reserve_jahre", between(fx(0), fx(100))).value_or(Fixed{});
+        r.building_share = f.fixed("bau_anteil", unit).value_or(Fixed{});
+        r.development_max = f.fixed("ausbau_max", between(fx(0), fx(10))).value_or(Fixed{});
+        r.development_half =
+            f.fixed("ausbau_halb", above_up_to(fx(0), fx(1'000'000'000))).value_or(Fixed::one());
+        r.interest_base = f.fixed("zins_basis", unit).value_or(Fixed{});
+        r.interest_risk = f.fixed("zins_risiko", unit).value_or(Fixed{});
+        r.interest_max = f.fixed("zins_max", unit).value_or(Fixed{});
+        r.bankruptcy_ratio = f.fixed("bankrott_quote", above_up_to(fx(0), fx(1000))).value_or(Fixed::one());
+        r.bankruptcy_haircut = f.fixed("bankrott_schnitt", unit).value_or(Fixed{});
+        r.bankruptcy_premium = f.fixed("bankrott_aufschlag", unit).value_or(Fixed{});
+        r.bankruptcy_years = static_cast<std::int32_t>(f.integer("bankrott_jahre", 0, 200).value_or(0));
+        if (r.interest_base > r.interest_max && f.has("zins_basis") && f.has("zins_max")) {
+            issues_.error(file.name, found->line,
+                          "'zins_basis' (" + show(r.interest_base) + ") ist größer als 'zins_max' (" +
+                              show(r.interest_max) + ")");
+        }
     }
 
     void load_terrains(const SourceFile& file) {
@@ -833,7 +906,7 @@ private:
         for_each_definition(file, "beruf", "beruf <kennung> { … }", [&](const ScriptNode& node) {
             Fields f(node, file.name, "beruf " + node.value, issues_,
                      {"name", "schicht", "ertrag", "steuerpflichtig", "anteil_stadt", "anteil_land", "agrar",
-                      "bildung", "in_stadt"});
+                      "bildung", "in_stadt", "agrarabgabe"});
             Profession p;
             p.id = node.value;
             p.name = f.text("name").value_or("");
@@ -855,6 +928,9 @@ private:
             p.share_rural = f.fixed("anteil_land", between(fx(0), fx(1))).value_or(Fixed{});
             p.agrarian = f.boolean("agrar").value_or(false);
             p.literacy = f.fixed("bildung", between(fx(0), fx(1))).value_or(Fixed{});
+            if (f.has("agrarabgabe")) {
+                p.agrarian_levy = f.fixed("agrarabgabe", between(fx(0), fx(1))).value_or(Fixed{});
+            }
             ProfessionRef ref{"", file.name, node.line};
             if (f.has("in_stadt")) {
                 if (const auto city = f.text("in_stadt")) {
@@ -902,6 +978,286 @@ private:
         };
         check_sum(sum_city, "anteil_stadt");
         check_sum(sum_rural, "anteil_land");
+
+        // Die Agrarabgaben aller Berufe zusammen höchstens 1 (seit M5).
+        Fixed levies;
+        for (const Profession& p : world_.professions) {
+            levies += p.agrarian_levy;
+        }
+        if (levies > Fixed::one()) {
+            issues_.error(file.name, 0,
+                          "die Summe aller 'agrarabgabe' ist " + show(levies) +
+                              ", höchstens 1 ist erlaubt (Anteil am Agrarertrag eines Ortes)");
+        }
+    }
+
+    // ── Wirtschaft (seit M5) ──
+
+    void load_goods(const SourceFile& file) {
+        for_each_definition(file, "gut", "gut <kennung> { … }", [&](const ScriptNode& node) {
+            check_id(file, node, "Gutkennung");
+            Fields f(node, file.name, "gut " + node.value, issues_,
+                     {"name", "farbe", "basispreis", "weltmarkt"});
+            Good g;
+            g.id = node.value;
+            g.name = f.text("name").value_or("");
+            g.color = f.color("farbe").value_or(Color{});
+            g.base_price = f.fixed("basispreis", above_up_to(fx(0), fx(1'000'000))).value_or(Fixed::one());
+            if (f.has("weltmarkt")) {
+                g.world_factor = f.fixed("weltmarkt", above_up_to(fx(0), fx(100))).value_or(Fixed{});
+            }
+            const auto index = static_cast<Index>(world_.goods.size());
+            if (register_id(goods_, g.id, index, file.name, node.line, "Gut")) {
+                world_.goods.push_back(std::move(g));
+            }
+        });
+        if (world_.goods.empty()) {
+            issues_.error(file.name, 0, "kein Gut definiert (erwartet: gut <kennung> { … })");
+        }
+    }
+
+    void load_needs(const SourceFile& file) {
+        for_each_definition(file, "beduerfnis", "beduerfnis <kennung> { … }", [&](const ScriptNode& node) {
+            check_id(file, node, "Bedürfniskennung");
+            Fields f(node, file.name, "beduerfnis " + node.value, issues_,
+                     {"name", "hunger", "unten", "mittel", "oben"});
+            Need n;
+            n.id = node.value;
+            n.name = f.text("name").value_or("");
+            if (f.has("hunger")) {
+                n.hunger = f.boolean("hunger").value_or(false);
+            }
+            constexpr std::string_view strata[] = {"unten", "mittel", "oben"};
+            for (std::size_t s = 0; s < 3; ++s) {
+                read_amounts(f, strata[s], "Warenkorb je Kopf und Jahr, z. B. { getreide = 4.2 vieh = 0.2 }",
+                             n.basket[s]);
+            }
+            const auto index = static_cast<Index>(world_.needs.size());
+            if (register_id(needs_, n.id, index, file.name, node.line, "Bedürfnis")) {
+                world_.needs.push_back(std::move(n));
+            }
+        });
+        if (world_.needs.empty()) {
+            issues_.error(file.name, 0, "kein Bedürfnis definiert (erwartet: beduerfnis <kennung> { … })");
+        }
+    }
+
+    void load_businesses(const SourceFile& file) {
+        for_each_definition(file, "betrieb", "betrieb <kennung> { … }", [&](const ScriptNode& node) {
+            check_id(file, node, "Betriebskennung");
+            Fields f(node, file.name, "betrieb " + node.value, issues_,
+                     {"name", "beruf", "erzeugt", "verbraucht", "agrar", "ort", "vorkommen", "handel",
+                      "gewicht", "gelaende"});
+            BusinessType b;
+            b.id = node.value;
+            b.name = f.text("name").value_or("");
+            if (const auto profession = f.text("beruf")) {
+                b.profession = lookup(professions_, *profession);
+                if (b.profession == kNone) {
+                    issues_.error(file.name, node.find("beruf")->line,
+                                  "unbekannter Beruf " + quote(*profession) + " in betrieb " + node.value);
+                }
+            }
+            if (f.has("handel")) {
+                b.trade = f.boolean("handel").value_or(false);
+            }
+            if (b.trade) {
+                if (f.has("erzeugt") || f.has("verbraucht")) {
+                    issues_.error(
+                        file.name, node.line,
+                        "betrieb " + node.value +
+                            " mit 'handel = ja' erzeugt und verbraucht keine Güter (Einkommen aus der "
+                            "Handelsspanne)");
+                }
+            } else {
+                read_amounts(f, "erzeugt", "Menge je Kopf und Jahr, z. B. { tuch = 3.2 }", b.outputs);
+                if (f.has("erzeugt") && b.outputs.empty()) {
+                    issues_.error(file.name, node.find("erzeugt")->line,
+                                  "betrieb " + node.value + " erzeugt kein Gut ('erzeugt' ist leer)");
+                }
+                if (f.has("verbraucht")) {
+                    read_amounts(f, "verbraucht", "Menge je Kopf und Jahr, z. B. { faser = 2 }", b.inputs);
+                }
+            }
+            b.agrarian = f.boolean("agrar").value_or(false);
+            if (f.has("ort")) {
+                if (const auto siting = f.text("ort")) {
+                    if (*siting == "alle") {
+                        b.siting = Siting::All;
+                    } else if (*siting == "stadt") {
+                        b.siting = Siting::City;
+                    } else if (*siting == "land") {
+                        b.siting = Siting::Rural;
+                    } else {
+                        issues_.error(file.name, node.find("ort")->line,
+                                      "ungültiger Wert " + quote(*siting) +
+                                          " für 'ort' (erlaubt: alle, stadt, land)");
+                    }
+                }
+            }
+            if (f.has("vorkommen")) {
+                if (const auto deposit = f.text("vorkommen")) {
+                    b.deposit = deposit_index(file, node.find("vorkommen")->line, *deposit);
+                }
+            }
+            b.weight = f.fixed("gewicht", above_up_to(fx(0), fx(1000))).value_or(Fixed::one());
+            b.terrain_factors.assign(world_.terrains.size(), Fixed::one());
+            if (f.has("gelaende")) {
+                read_terrain_factors(f, b);
+            }
+            const auto index = static_cast<Index>(world_.businesses.size());
+            if (register_id(businesses_, b.id, index, file.name, node.line, "Betrieb")) {
+                world_.businesses.push_back(std::move(b));
+            }
+        });
+        if (world_.businesses.empty()) {
+            issues_.error(file.name, 0, "kein Betrieb definiert (erwartet: betrieb <kennung> { … })");
+        }
+    }
+
+    void load_markets(const SourceFile& file) {
+        for_each_definition(file, "markt", "markt <kennung> { … }", [&](const ScriptNode& node) {
+            check_id(file, node, "Marktkennung");
+            Fields f(node, file.name, "markt " + node.value, issues_, {"name", "landschaften"});
+            Market m;
+            m.id = node.value;
+            m.name = f.text("name").value_or("");
+            const auto index = static_cast<Index>(world_.markets.size());
+            if (const ScriptNode* list =
+                    f.block("landschaften", "Dateien in history/orte ohne Endung, z. B. { sachsen }")) {
+                for (const ScriptNode& child : list->children) {
+                    if (!child.key.empty() || child.is_block || !is_location_id(child.value)) {
+                        issues_.error(file.name, child.line,
+                                      "ungültiger Eintrag in 'landschaften' von markt " + node.value +
+                                          " (erwartet Dateinamen aus history/orte ohne Endung)");
+                        continue;
+                    }
+                    const auto [it, inserted] =
+                        landscapes_.emplace(child.value, Definition{index, file.name, child.line});
+                    if (!inserted) {
+                        issues_.error(file.name, child.line,
+                                      "Landschaft " + quote(child.value) + " gehört schon zu markt " +
+                                          world_.markets[static_cast<std::size_t>(it->second.index)].id +
+                                          " (" + it->second.file + ":" + std::to_string(it->second.line) +
+                                          ")");
+                        continue;
+                    }
+                    m.landscapes.push_back(child.value);
+                }
+                if (list->children.empty()) {
+                    issues_.error(file.name, list->line, "markt " + node.value + " hat keine Landschaft");
+                }
+            }
+            if (register_id(markets_, m.id, index, file.name, node.line, "Markt")) {
+                world_.markets.push_back(std::move(m));
+            }
+        });
+        if (world_.markets.empty()) {
+            issues_.error(file.name, 0, "kein Markt definiert (erwartet: markt <kennung> { … })");
+        }
+    }
+
+    void check_id(const SourceFile& file, const ScriptNode& node, std::string_view kind) {
+        if (!is_location_id(node.value)) {
+            issues_.error(file.name, node.line,
+                          "ungültige " + std::string(kind) + " " + quote(node.value) +
+                              " (nur Kleinbuchstaben a–z, Ziffern und '_')");
+        }
+    }
+
+    /// Index eines Vorkommens; neue Kennungen werden angelegt (höchstens 32, Bitmaske im Ort).
+    Index deposit_index(const SourceFile& file, int line, const std::string& id) {
+        if (!is_location_id(id)) {
+            issues_.error(file.name, line,
+                          "ungültige Kennung " + quote(id) +
+                              " für 'vorkommen' (nur Kleinbuchstaben a–z, Ziffern und '_')");
+            return kNone;
+        }
+        if (const Index existing = lookup(deposits_, id); existing != kNone) {
+            return existing;
+        }
+        if (world_.deposits.size() >= 32) {
+            issues_.error(file.name, line, "zu viele Vorkommen (höchstens 32)");
+            return kNone;
+        }
+        const auto index = static_cast<Index>(world_.deposits.size());
+        deposits_.emplace(id, Definition{index, file.name, line});
+        world_.deposits.push_back(id);
+        return index;
+    }
+
+    /// Liest einen Mengenblock wie erzeugt = { tuch = 3.2 }: bekannte Güter, jedes höchstens einmal,
+    /// Mengen ≥ 0.
+    void read_amounts(Fields& f, std::string_view key, std::string_view example,
+                      std::vector<GoodAmount>& out) {
+        const ScriptNode* node = f.block(key, example);
+        if (node == nullptr) {
+            return;
+        }
+        std::set<Index> seen;
+        for (const ScriptNode& child : node->children) {
+            if (child.key.empty() || child.is_block || child.op != "=") {
+                f.issues().error(f.file(), child.line,
+                                 "ungültiger Eintrag im Block " + quote(key) + " (erwartet <gut> = <menge>)");
+                continue;
+            }
+            const Index good = lookup(goods_, child.key);
+            if (good == kNone) {
+                f.issues().error(f.file(), child.line,
+                                 "unbekanntes Gut " + quote(child.key) + " in " + f.what() +
+                                     " (common/gueter.chron)");
+                continue;
+            }
+            if (!seen.insert(good).second) {
+                f.issues().error(f.file(), child.line,
+                                 "Gut " + quote(child.key) + " ist in " + quote(key) + " von " + f.what() +
+                                     " mehrfach angegeben");
+                continue;
+            }
+            const auto amount = Fixed::parse(child.value);
+            if (!amount || *amount < Fixed::zero() || *amount > fx(1'000'000)) {
+                f.issues().error(f.file(), child.line,
+                                 "ungültige Menge " + quote(child.value) + " für Gut " + quote(child.key) +
+                                     " (erwartet eine Zahl von 0 bis 1000000)");
+                continue;
+            }
+            out.push_back(GoodAmount{good, *amount});
+        }
+    }
+
+    void read_terrain_factors(Fields& f, BusinessType& b) {
+        const ScriptNode* node = f.block("gelaende", "Faktor je Geländetyp, z. B. { wald = 4 heide = 2 }");
+        if (node == nullptr) {
+            return;
+        }
+        std::set<Index> seen;
+        for (const ScriptNode& child : node->children) {
+            if (child.key.empty() || child.is_block || child.op != "=") {
+                f.issues().error(f.file(), child.line,
+                                 "ungültiger Eintrag im Block 'gelaende' (erwartet <gelaende> = <faktor>)");
+                continue;
+            }
+            const Index terrain = lookup(terrains_, child.key);
+            if (terrain == kNone) {
+                f.issues().error(f.file(), child.line,
+                                 "unbekanntes Gelände " + quote(child.key) + " in " + f.what());
+                continue;
+            }
+            if (!seen.insert(terrain).second) {
+                f.issues().error(f.file(), child.line,
+                                 "Gelände " + quote(child.key) + " ist in " + f.what() +
+                                     " mehrfach angegeben");
+                continue;
+            }
+            const auto factor = Fixed::parse(child.value);
+            if (!factor || *factor < Fixed::zero() || *factor > fx(100)) {
+                f.issues().error(f.file(), child.line,
+                                 "ungültiger Faktor " + quote(child.value) + " für Gelände " +
+                                     quote(child.key) + " (erwartet eine Zahl von 0 bis 100)");
+                continue;
+            }
+            b.terrain_factors[static_cast<std::size_t>(terrain)] = *factor;
+        }
     }
 
     // ── history/ ──
@@ -916,7 +1272,8 @@ private:
             const ScriptNode merged = apply_history(node, file.name, "staat " + node.value, {"farbe"});
             Fields f(merged, file.name, "staat " + node.value, issues_,
                      {"name", "kurzname", "farbe", "hauptstadt", "regierungsform", "herrscher", "konfession",
-                      "schatz", "steuersatz", "hofhaltung", "quelle"});
+                      "schatz", "kontribution", "akzise", "zoll", "hofhaltung", "heer", "schulden",
+                      "quelle"});
             State s;
             s.tag = node.value;
             s.name = f.text("name").value_or("");
@@ -935,8 +1292,15 @@ private:
             s.treasury =
                 f.fixed("schatz", between(fx(-1'000'000'000'000), fx(1'000'000'000'000))).value_or(Fixed{});
             const Fixed max_rate = tax_rate_max_known_ ? world_.rules.tax_rate_max : Fixed::one();
-            s.tax_rate = f.fixed("steuersatz", between(fx(0), max_rate)).value_or(Fixed{});
+            constexpr std::string_view tax_fields[kTaxKinds] = {"kontribution", "akzise", "zoll"};
+            for (std::size_t t = 0; t < kTaxKinds; ++t) {
+                s.tax_rates[t] = f.fixed(tax_fields[t], between(fx(0), max_rate)).value_or(Fixed{});
+            }
             s.court_expenses = f.fixed("hofhaltung", between(fx(0), fx(1'000'000'000'000))).value_or(Fixed{});
+            s.army_per_mille = f.fixed("heer", between(fx(0), fx(1000))).value_or(Fixed{});
+            if (f.has("schulden")) {
+                s.debt = f.fixed("schulden", between(fx(0), fx(1'000'000'000'000))).value_or(Fixed{});
+            }
             s.source = f.text("quelle").value_or("");
 
             const auto index = static_cast<Index>(world_.states.size());
@@ -984,21 +1348,32 @@ private:
     }
 
     void load_locations(const SourceFile& file) {
+        // Markt der Landschaft (seit M5): die Datei ohne Ordner und Endung.
+        std::string landscape = file.name.substr(file.name.find_last_of('/') + 1);
+        landscape = landscape.substr(0, landscape.size() - std::string_view(".chron").size());
+        seen_landscapes_.insert(landscape);
+        const Index market = lookup(landscapes_, landscape);
+        if (market == kNone && !world_.markets.empty()) {
+            issues_.error(file.name, 0,
+                          "Landschaft " + quote(landscape) +
+                              " gehört zu keinem Markt (common/maerkte.chron)");
+        }
         for_each_definition(file, "ort", "ort <kennung> { … }", [&](const ScriptNode& node) {
             if (!is_location_id(node.value)) {
                 issues_.error(file.name, node.line,
                               "ungültige Ortskennung " + quote(node.value) +
                                   " (nur Kleinbuchstaben a–z, Ziffern und '_')");
             }
-            const ScriptNode merged =
-                apply_history(node, file.name, "ort " + node.value, {"lage", "flaeche", "kreis"});
+            const ScriptNode merged = apply_history(node, file.name, "ort " + node.value,
+                                                    {"lage", "flaeche", "kreis", "vorkommen", "hafen"});
             Fields f(merged, file.name, "ort " + node.value, issues_,
                      {"name", "besitzer", "gelaende", "lage", "flaeche", "bevoelkerung", "stadt", "kreis",
-                      "konfession", "kultur", "verwuestung", "quelle"});
+                      "konfession", "kultur", "verwuestung", "vorkommen", "hafen", "quelle"});
             Location loc;
             LocationDraft draft;
             loc.id = node.value;
             loc.name = f.text("name").value_or("");
+            loc.market = market;
 
             // Simulationsfelder zum Startdatum: alle fünf oder keines (Abschnitt 3.6). Ohne alle
             // ist der Ort ein Ort ohne Daten: kein Besitzer, keine Blöcke, Verwüstung 0.
@@ -1060,6 +1435,12 @@ private:
             if (f.has("verwuestung")) {
                 loc.devastation = f.fixed("verwuestung", between(fx(0), fx(1))).value_or(Fixed{});
             }
+            if (f.has("vorkommen")) {
+                read_deposits(f, loc);
+            }
+            if (f.has("hafen")) {
+                loc.is_port = f.boolean("hafen").value_or(false);
+            }
             loc.source = f.text("quelle").value_or("");
 
             const auto index = static_cast<Index>(world_.locations.size());
@@ -1068,6 +1449,29 @@ private:
                 drafts_.push_back(std::move(draft));
             }
         });
+    }
+
+    void read_deposits(Fields& f, Location& loc) {
+        const ScriptNode* node = f.block("vorkommen", "Liste von Vorkommen, z. B. { salz weinlage }");
+        if (node == nullptr) {
+            return;
+        }
+        for (const ScriptNode& child : node->children) {
+            if (!child.key.empty() || child.is_block) {
+                f.issues().error(f.file(), child.line,
+                                 "ungültiger Eintrag in 'vorkommen' von " + f.what() +
+                                     " (erwartet Kennungen)");
+                continue;
+            }
+            const Index deposit = lookup(deposits_, child.value);
+            if (deposit == kNone) {
+                f.issues().error(f.file(), child.line,
+                                 "unbekanntes Vorkommen " + quote(child.value) + " in " + f.what() +
+                                     " (Vorkommen kommen aus 'vorkommen' in common/betriebe.chron)");
+                continue;
+            }
+            loc.deposits |= std::uint32_t{1} << static_cast<unsigned>(deposit);
+        }
     }
 
     void read_position(Fields& f, Location& loc) {
@@ -1318,6 +1722,16 @@ private:
         }
     }
 
+    /// Jede Landschaft eines Marktes braucht eine Datei in history/orte (sonst Warnung).
+    void check_markets() {
+        for (const auto& [landscape, definition] : landscapes_) {
+            if (seen_landscapes_.find(landscape) == seen_landscapes_.end()) {
+                issues_.warning(definition.file, definition.line,
+                                "Landschaft " + quote(landscape) + " hat keine Datei in history/orte");
+            }
+        }
+    }
+
     const Scenario* select_scenario(const std::vector<Scenario>& scenarios, std::string_view id) {
         const Index index = lookup(scenarios_, id);
         if (index != kNone) {
@@ -1390,6 +1804,13 @@ private:
     Registry confessions_;
     Registry cultures_;
     Registry professions_;
+    Registry goods_;
+    Registry needs_;
+    Registry businesses_;
+    Registry markets_;
+    Registry deposits_;
+    Registry landscapes_; // Landschaft → Markt
+    std::set<std::string, std::less<>> seen_landscapes_;
     Registry states_;
     Registry districts_;
     Registry locations_;

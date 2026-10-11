@@ -8,7 +8,10 @@ staat BRA {
     herrscher      = "Friedrich Wilhelm"
     konfession     = reformiert
     schatz         = 20000
-    steuersatz     = 0.10
+    kontribution   = 0.10
+    akzise         = 0.05
+    zoll           = 0.03
     hofhaltung     = 30000
+    heer           = 10
     quelle         = "Testdaten, geschätzt"
 }
