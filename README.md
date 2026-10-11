@@ -115,27 +115,31 @@ Ergänzt durch zwei Querschnittsprinzipien: **Geschichte als lebendiges System**
 
 ### Projektstand
 
-**Meilensteine M1 (technischer Durchstich) und M2 (Datenpipeline) sind abgeschlossen**, siehe
-[Meilensteinplan](docs/meilensteine.md). Der ganze Weg von den Daten bis zum Bild steht, in
-kleinem Maßstab: Tabellen → Archivar → Chronik-Skript → Simulationskern „Uhrwerk“ → GDExtension →
-Godot-Oberfläche mit Karte. Inhaltlich deckt der Stand eine **Testregion um 1648** ab, nicht das
-ganze Spiel aus dem Design-Dokument.
+**Meilensteine M1 (technischer Durchstich), M2 (Datenpipeline) und M3 (Karte des Kernraums) sind
+abgeschlossen**, siehe [Meilensteinplan](docs/meilensteine.md). Der ganze Weg von den Daten bis
+zum Bild steht: Tabellen → Archivar → Chronik-Skript → Simulationskern „Uhrwerk“ → GDExtension →
+Godot-Oberfläche. Die Karte zeigt seit M3 den **ganzen Kernraum mit 4.541 Orten in 627 Kreisen**;
+historische Daten (Besitzer, Bevölkerung, Konfession, Verwüstung) haben aber weiterhin nur die
+**60 Orte der Testregion um 1648**. Die übrigen 4.481 Orte sind *Orte ohne Daten*: Sie stehen auf
+der Karte, nehmen an der Simulation aber nicht teil. Das ganze Spiel aus dem Design-Dokument ist
+das noch nicht.
 
 | Baustein | Stand |
 |---|---|
-| Simulationskern „Uhrwerk“ (`core/`) | Festkomma, Zufallsströme, Kalender, Parser und Lader für das Chronik-Skript, Tagestick mit Demografie, Wirtschaft (Steuern, Staatskasse), Seuchen und Kriegsverwüstung, Steuerbefehl, Chronik, Prüfsumme |
-| Kommandozeile `uhrwerk-cli` (`cli/`) | Daten prüfen, Überblick, Simulationsläufe mit Bericht und Chronik, Determinismusprüfung |
-| Tests (`tests/`) | 91 Testfälle (doctest) und Integrationsläufe mit den echten Daten |
-| Spieldaten (`data/`) | Testregion „Der Westfälische Frieden“ (24.10.1648): 16 Staaten, 60 Orte in Mittel- und Nordostdeutschland; gepflegt in Tabellen mit Quelle und Sicherheit je Angabe |
-| Archivar (`tools/archivar/`) | erzeugt `data/history/` aus den Tabellen mit datierter Historie und prüft Verweise, Lücken und Ausreißer |
-| Kartengenerator (`tools/kartengenerator/`) | erzeugt das Ort-ID-Bild und die Zuordnungstabelle der Karte aus den Ortsdaten |
+| Simulationskern „Uhrwerk“ (`core/`) | Festkomma, Zufallsströme, Kalender, Parser und Lader für das Chronik-Skript mit datierter Historie, Tagestick mit Demografie, Wirtschaft (Steuern, Staatskasse), Seuchen und Kriegsverwüstung, Steuerbefehl, Chronik, Prüfsumme; seit M3 Orte ohne Daten und Kreise |
+| Kommandozeile `uhrwerk-cli` (`cli/`) | Daten prüfen, Überblick (Orte mit und ohne Daten, Kreise), Simulationsläufe mit Bericht und Chronik, Determinismusprüfung |
+| Tests (`tests/`) | 101 Testfälle (doctest) und Integrationsläufe mit den echten Daten |
+| Spieldaten (`data/`) | Lesezeichen „Der Westfälische Frieden“ (24.10.1648): 16 Staaten, 4.541 Orte in 627 Kreisen, davon 60 mit historischen Daten (Mittel- und Nordostdeutschland); gepflegt in Tabellen mit Quelle und Sicherheit je Angabe |
+| Archivar (`tools/archivar/`) | erzeugt `data/history/` (Staaten, Kreise, Orte) aus den Tabellen und prüft Verweise, Lücken und Ausreißer; 31 Tests |
+| Geodaten (`tools/geodaten/`) | lädt und pinnt die offenen Quellen (Natural Earth, GeoNames, Terrain Tiles), schneidet Land, Seen und Flüsse zu und erzeugt mit `orte.py` die Orte und Kreise des Kernraums; 94 Tests |
+| Kartengenerator (`tools/kartengenerator/`) | erzeugt Ort-ID-Bild mit Flächenart (4096 × 3329 Pixel), Flussebene und Zuordnungstabelle aus Geometrie und Orten (Python mit numpy, 13–21 s); 88 Tests |
 | Brücke (`bridge/`) | GDExtension mit der Klasse `UhrwerkSimulation` |
-| Godot-Prototyp (`game/`) | Karte mit fünf Kartenmodi, Staatspanel mit Steuersatz, Ortsinfo, Chronik, Legende |
-| CI (`.github/workflows/`) | Linux (GCC, Clang), Windows (MSVC), Prüfsummenvergleich, Formatierung, Archivar und Kartengenerator, Godot-Rauchtest mit Screenshot |
+| Godot-Prototyp (`game/`) | Großkarte des Kernraums mit sechs Kartenmodi, Zoomstufen mit Staats-, Kreis- und Ortsnamen, Staatspanel mit Steuersatz, Ortsinfo, Chronik, Legende; Einheitentest (162 Prüfungen), Rauchtest, Klicktest (4.541 von 4.541 Orten in drei Zoomstufen) |
+| CI (`.github/workflows/`) | Linux (GCC, Clang), Windows (MSVC), Prüfsummenvergleich, Formatierung, Python-Werkzeuge (Python 3.10 und 3.13 mit numpy), Godot mit Einheiten-, Rauch- und Klicktest und Screenshots |
 
-Noch **nicht** umgesetzt ist alles Weitere aus dem Design-Dokument – Politik, Parteien und Wahlen,
-Diplomatie, Krieg, KI, Speicherstände, Multiplayer und Modding-Werkzeuge. Was sich ändert, steht im
-[Änderungsprotokoll](CHANGELOG.md).
+Noch **nicht** umgesetzt ist alles Weitere aus dem Design-Dokument – historische Daten für den
+übrigen Kernraum, Politik, Parteien und Wahlen, Diplomatie, Krieg, KI, Speicherstände,
+Multiplayer und Modding-Werkzeuge. Was sich ändert, steht im [Änderungsprotokoll](CHANGELOG.md).
 
 ### Repository-Struktur
 
@@ -146,8 +150,8 @@ Diplomatie, Krieg, KI, Speicherstände, Multiplayer und Modding-Werkzeuge. Was s
 | [`tests/`](tests/) | Unit- und Integrationstests des Kerns | `core`, doctest (wird von CMake geladen) |
 | [`bridge/`](bridge/) | GDExtension-Brücke zwischen Uhrwerk und Godot | `core`, `third_party/godot-cpp` |
 | [`game/`](game/) | Godot-4-Projekt (Szenen, Skripte, Shader, Oberfläche) | `bridge` |
-| [`data/`](data/) | Spielinhalte im **Chronik-Skript** (`*.chron`) und Kartendaten | – |
-| [`tools/`](tools/) | Hilfswerkzeuge: Archivar (Datenpipeline), Kartengenerator | Python 3 |
+| [`data/`](data/) | Spielinhalte: Tabellen (`tabellen/*.csv`), daraus erzeugtes **Chronik-Skript** (`*.chron`), Karte (`karte/`) | – |
+| [`tools/`](tools/) | Hilfswerkzeuge: [Archivar](tools/archivar/README.md) (Datenpipeline), [Geodaten](tools/geodaten/README.md) (Quellen, Geometrie, Orte des Kernraums), [Kartengenerator](tools/kartengenerator/README.md) | Python 3.10+; Geodaten und Kartengenerator mit numpy |
 | [`docs/`](docs/) | Game Design Document, technische Dokumentation in [`docs/technik/`](docs/technik/) | – |
 | `third_party/` | Fremdbibliotheken als Git-Submodule (godot-cpp 4.4.1) | – |
 
@@ -160,7 +164,8 @@ Grundregel: **`core/` kennt Godot nicht.** Die Godot-Seite liest nur und schickt
 | C++-Compiler mit C++20 | GCC 13 oder Clang 18 (lokal geprüft), MSVC 2022 (Kern, CLI und Tests in der CI; Brücke unter Windows noch ungeprüft) | Kern, CLI, Tests, Brücke |
 | CMake | 3.25 oder neuer (die Presets haben Version 6) | Build |
 | Ninja | aktuelle Version (geprüft mit 1.11) | Generator aller Presets |
-| Python | 3.10 oder neuer | Kartengenerator; godot-cpp erzeugt damit seine Bindings |
+| Python | 3.10 oder neuer | Archivar, Geodaten, Kartengenerator; godot-cpp erzeugt damit seine Bindings |
+| numpy | 2.x (geprüft mit 2.2.6 unter Python 3.10 und 2.5.3 unter Python 3.13) | Kartengenerator und Geodaten: `python3 -m pip install numpy` |
 | Godot | **4.4.1** (Standard-Build, kein .NET) | Spiel und Editor; [Download](https://godotengine.org/download/archive/4.4.1-stable/), optional abgelegt unter `tools/godot/` (nicht versioniert) |
 | clang-format | 18 | Formatierung des C++-Codes |
 
@@ -212,15 +217,34 @@ python3 tools/archivar/archivar.py --bericht    # Umfang und Sicherheit der Anga
 python3 -m unittest discover -s tools/archivar -v
 ```
 
-**Karte erzeugen** – nach Änderungen an Orten oder an `data/karte/karte.chron`; die erzeugten
-Dateien `data/karte/provinzen.png` und `definition.csv` werden eingecheckt:
+**Karte erzeugen** – nach Änderungen an Orten, an `data/karte/karte.chron` oder an der Geometrie
+in `data/karte/geometrie/`. Der Kartengenerator braucht numpy; die erzeugten Dateien
+`data/karte/provinzen.png`, `fluesse.png` und `definition.csv` werden eingecheckt:
 
 ```bash
-python3 tools/kartengenerator/kartengenerator.py                         # Karte neu erzeugen
-python3 tools/kartengenerator/kartengenerator.py --vorschau /tmp/karte.png  # farbige Vorschau (nicht einchecken)
+python3 -m pip install numpy                                             # einmalig
+python3 tools/kartengenerator/kartengenerator.py                         # Karte neu erzeugen (13–21 s)
 python3 tools/kartengenerator/kartengenerator.py --pruefen               # ist die Karte aktuell? (wie in der CI)
+python3 tools/kartengenerator/kartengenerator.py --pruefen --vorschau /tmp/karte.png --vorschau-breite 2048
+                                                                         # Vorschau zum Ansehen (nicht einchecken)
 python3 -m unittest discover -s tools/kartengenerator -v                # Tests des Generators
 ```
+
+**Geodaten und Orte des Kernraums** – `tools/geodaten/` lädt die offenen Quellen (Natural Earth,
+GeoNames, Terrain Tiles; etwa 50 MB) nur in den Zwischenspeicher `build/geodaten-cache/`, nie ins
+Repository; jede Datei ist mit SHA-256 in `tools/geodaten/quellen.json` gepinnt. Die Tests
+brauchen weder Netz noch Zwischenspeicher:
+
+```bash
+python3 tools/geodaten/geodaten.py holen          # Quellen laden bzw. Prüfwerte vergleichen
+python3 tools/geodaten/geodaten.py pruefen        # passen data/karte/geometrie/*.geojson zu den Quellen?
+python3 tools/geodaten/orte.py --pruefen          # sind orte.csv und kreise.csv aktuell? (1–2 min)
+python3 -m unittest discover -s tools/geodaten -v # Tests ohne Netz (wie in der CI)
+```
+
+Neu erzeugt wird in dieser Reihenfolge: `geodaten.py geometrie` (Land, Seen, Flüsse) →
+`orte.py` (`data/tabellen/orte.csv`, `kreise.csv`) → `archivar.py` → `kartengenerator.py`.
+Einzelheiten, Quellenangaben und Namensregeln: [tools/geodaten/README.md](tools/geodaten/README.md).
 
 **5. Brücke bauen** – baut godot-cpp (beim ersten Mal je nach Rechner 5–15 Minuten) und legt die Bibliothek
 direkt im Godot-Projekt ab (`game/bin/libuhrwerk_bridge.so`, `uhrwerk_bridge.dll` bzw.
@@ -239,8 +263,10 @@ godot --headless --path game --import     # einmalig: Projekt importieren (legt 
 godot --path game                         # Spiel starten
 godot --editor --path game                # im Editor öffnen
 
-# Rauchtest der Brücke und der Kartendaten (wie in der CI)
-godot --headless --path game --script res://tests/smoke_test.gd
+# Tests der Godot-Seite (wie in der CI): Hilfsklassen, Brücke und Kartendaten, Klickerkennung
+godot --headless --path game --script res://tests/unit_test.gd     # „UNIT OK (162 Prüfungen)“
+godot --headless --path game --script res://tests/smoke_test.gd    # „SMOKE OK“
+godot --headless --path game --script res://tests/klick_test.gd    # „KLICK OK 4541/4541“
 
 # Screenshot ohne Bildschirm (Software-Rendering über Xvfb)
 xvfb-run -a -s "-screen 0 1600x900x24" \
@@ -249,12 +275,13 @@ xvfb-run -a -s "-screen 0 1600x900x24" \
 ```
 
 Ohne gebaute Brücke oder ohne Karte startet das Projekt trotzdem und zeigt einen Hinweis, wie
-sie erzeugt werden. Bedienung und Optionen: [`game/README.md`](game/README.md).
+sie erzeugt werden. Bedienung, Optionen (z. B. `--zoom=4` für die mittlere Zoomstufe) und
+Leistungstest: [`game/README.md`](game/README.md), [`game/tests/README.md`](game/tests/README.md).
 
 **Formatierung prüfen** (wie in der CI):
 
 ```bash
-clang-format-18 --dry-run --Werror $(git ls-files 'core/*.[ch]pp' 'cli/*.[ch]pp' 'tests/*.[ch]pp' 'bridge/*.[ch]pp')
+clang-format-18 --dry-run --Werror $(git ls-files 'core/*.[ch]pp' 'cli/*.[ch]pp' 'tests/*.[ch]pp' 'bridge/*.[ch]pp' 'bridge/*.h')
 clang-format-18 -i <datei>                # Datei formatieren
 ```
 
@@ -264,8 +291,11 @@ clang-format-18 -i <datei>                # Datei formatieren
 |---|---|
 | [CONTRIBUTING.md](CONTRIBUTING.md) | Branches, Commit-Nachrichten, Pull Requests, Code-Stil, Regeln für Daten |
 | [docs/technik/](docs/technik/README.md) | Architektur, Tick-Ablauf, Determinismus, Festkomma, Zufallsströme; Spezifikationen [Chronik-Skript](docs/technik/chronik-skript.md), [Tabellen](docs/technik/tabellen.md) und [Brücken-API](docs/technik/bridge-api.md) |
-| [data/README.md](data/README.md) | Inhalt und Aufbau der Testregion 1648 |
-| [game/README.md](game/README.md) | Godot-Projekt: Starten, Bedienung, Aufbau |
-| [tools/kartengenerator/README.md](tools/kartengenerator/README.md) | Kartengenerator: Aufruf, Algorithmus, Determinismus |
+| [data/README.md](data/README.md) | Inhalt und Aufbau der Spieldaten: Kernraum, Orte ohne Daten, Testregion 1648 |
+| [game/README.md](game/README.md) | Godot-Projekt: Starten, Bedienung, Aufbau, Leistung |
+| [game/tests/README.md](game/tests/README.md) | Tests der Godot-Seite: Einheiten-, Rauch-, Klick- und Leistungstest |
+| [tools/archivar/README.md](tools/archivar/README.md) | Archivar: Aufruf, Arbeitsweise, Orte ohne Daten und Kreise |
+| [tools/geodaten/README.md](tools/geodaten/README.md) | Geodaten: Quellen und Lizenzen, Zuschnitt, Kernraum, Orte und Kreise des Kernraums |
+| [tools/kartengenerator/README.md](tools/kartengenerator/README.md) | Kartengenerator: Aufruf, Verfahren, Determinismus |
 | [docs/meilensteine.md](docs/meilensteine.md) | Meilensteine M1–M13 für Vorproduktion und Vertical Slice |
 | [CHANGELOG.md](CHANGELOG.md) | Änderungsprotokoll |

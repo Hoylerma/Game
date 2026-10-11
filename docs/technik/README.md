@@ -2,12 +2,12 @@
 
 Dieser Ordner beschreibt die **Umsetzung** von EINIGKEIT. Das Design dahinter steht in
 [02 Engine & Technik](../02_engine_und_technik.md); hier steht, was im Repository tatsächlich gebaut
-ist (Stand: Meilenstein M1, technischer Durchstich).
+ist (Stand: Meilenstein M3, Karte des Kernraums).
 
 | Dokument | Inhalt | verbindlich für |
 |---|---|---|
 | **README.md** (diese Datei) | Überblick: Schichten, Tick-Ablauf, Determinismus, Festkomma, Zufallsströme, Prüfungen | alle |
-| [chronik-skript.md](chronik-skript.md) | Syntax des Chronik-Skripts, Datenordner, Dateischemata, Startzustand, Formeln der Simulation, Kartenformat | Parser, Lader, `data/`, Kartengenerator |
+| [chronik-skript.md](chronik-skript.md) | Syntax des Chronik-Skripts, Datenordner, Dateischemata (mit Orten ohne Daten und Kreisen), Startzustand, Formeln der Simulation, Kartenformat (Fassung M3) | Parser, Lader, `data/`, Archivar, Geodaten, Kartengenerator |
 | [tabellen.md](tabellen.md) | Tabellen der Datenpipeline (`data/tabellen/*.csv`), Sicherheit der Angaben, Prüfungen des Archivars | Archivar, `data/` |
 | [bridge-api.md](bridge-api.md) | GDScript-Schnittstelle der GDExtension (`UhrwerkSimulation`), Kartenmodi, Bibliotheksnamen | Brücke, Godot-Projekt |
 
@@ -35,13 +35,16 @@ Regeln erklärt.
                 │ load_world()
 ┌───────────────┴────────────────────────────────────────────────────────┐
 │  DATEN          data/            Chronik-Skript (*.chron), Karte       │
-│  common/ · history/staaten/ · history/orte/ · szenarien/ · karte/      │
+│  common/ · szenarien/ · history/{staaten,kreise,orte}/ · karte/        │
 └────────────────────────────────────────────────────────────────────────┘
 
   Weitere Nutzer des Kerns:   cli/   uhrwerk-cli (pruefen, info, lauf, determinismus)
                               tests/ Unit- und Integrationstests (doctest)
-  Werkzeug für die Daten:     tools/kartengenerator/  erzeugt data/karte/provinzen.png
-                                                      und definition.csv
+  Werkzeuge für die Daten:    tools/archivar/         erzeugt data/history/ aus data/tabellen/
+                              tools/geodaten/         Quellen, Geometrie (karte/geometrie/),
+                                                      Orte und Kreise (tabellen/orte.csv, kreise.csv)
+                              tools/kartengenerator/  erzeugt data/karte/provinzen.png,
+                                                      fluesse.png und definition.csv
 ```
 
 **Abhängigkeiten zeigen nur nach unten.**
@@ -72,11 +75,24 @@ werden. Damit gelangt nie eine Gleitkommazahl in den Zustand des Kerns.
 ### Weltmodell
 
 `World` hält alle Objekte in **flachen Vektoren** (`terrains`, `confessions`, `professions`,
-`states`, `locations`, `pops`, `chronicle`). Querverweise sind **Indizes** (`Index` = `int32`,
-`kNone` = −1), keine Zeiger. Die Reihenfolge jedes Vektors ergibt sich aus der Ladereihenfolge
+`states`, `districts`, `locations`, `pops`, `chronicle`). Querverweise sind **Indizes**
+(`Index` = `int32`, `kNone` = −1), keine Zeiger. Die Reihenfolge jedes Vektors ergibt sich aus der Ladereihenfolge
 ([chronik-skript.md, Abschnitt 2](chronik-skript.md#2-datenordner)): Dateien nach Namen sortiert,
 Einträge in Dateireihenfolge. Die Bevölkerungsblöcke eines Ortes liegen zusammenhängend
 (`first_pop`, `pop_count`).
+
+**Orte ohne Daten** (seit M3, [chronik-skript.md, Abschnitt 3.6](chronik-skript.md#36-historyortechron)):
+Ein Ort, der zum Startdatum keines der vier Simulationsfelder (`besitzer`, `bevoelkerung`,
+`konfession`, `verwuestung`) hat, steht nur auf der Karte: Besitzer `kNone`, keine
+Bevölkerungsblöcke (`Location::has_data()` ist `false`), Verwüstung 0. Hat ein Ort nur einen Teil
+der Felder, ist das ein Ladefehler; Hauptstädte müssen Orte mit Daten sein. So lässt sich die
+Karte des ganzen Kernraums (4.541 Orte) laden, obwohl erst 60 Orte historische Daten haben.
+
+**Kreise** (seit M3, [Abschnitt 3.9](chronik-skript.md#39-historykreisechron-seit-m3)):
+`World::districts` (`District { id, name, source }`) aus `history/kreise/`, Verweis
+`Location::district` (`kNone` ohne Kreis). Ein Kreis bündelt 4–12 benachbarte Orte; in M3 dient er
+nur der Kartendarstellung (Grenzen, Namen, Kartenmodus „Kreise“), ist nicht datiert und ändert
+sich während einer Partie nicht.
 
 Der **Kartenindex** (Pixelwert in `provinzen.png`) ist vom **Simulationsindex** unabhängig. Die
 Godot-Seite verbindet beide über die Ort-Kennung (`definition.csv` → `get_location_index`).
@@ -96,8 +112,14 @@ Reihenfolge ab:
 
 Die monatlichen Systeme sind **gestaffelt**: Jeder Ort und jeder Staat hat einen festen Rechentag
 zwischen dem 1. und 28. Das verteilt die Last gleichmäßig über den Monat und funktioniert in
-jedem Monat (auch im Februar). Die Formeln stehen in
-[chronik-skript.md, Abschnitt 5](chronik-skript.md#5-formeln-der-simulation-m1).
+jedem Monat (auch im Februar). Weil der Rechentag am Index hängt, verschieben neu eingefügte Orte
+die Rechentage der folgenden Orte (siehe Prüfsumme in Abschnitt 3).
+
+**Orte ohne Daten** haben keine Bevölkerungsblöcke und tragen deshalb nichts zu Demografie und
+Wirtschaft bei; beim Jahreswechsel werden sie übersprungen und ziehen keine Zufallszahlen. Damit
+ändern angehängte Orte ohne Daten die Ergebnisse der übrigen Orte nicht (Unit-Test).
+
+Die Formeln stehen in [chronik-skript.md, Abschnitt 5](chronik-skript.md#5-formeln-der-simulation-m1).
 
 Ein Befehl, der über `submit()` (bzw. `set_tax_rate_percent` der Brücke) eingereiht wird, wirkt
 **ab dem nächsten simulierten Tag**. Die Oberfläche zeigt bis dahin „gilt ab dem nächsten Tag“.
@@ -131,6 +153,14 @@ Lockstep-Multiplayer, Replays und reproduzierbare Tests.
 Zustand: Datum, vergangene Tage, Seed, Staatskassen, Steuersätze, Verwüstung, Bevölkerung, die
 Zustände aller Zufallsströme, die Chronik und die noch wartenden Befehle. Ganzzahlen gehen
 byteweise in Little-Endian-Reihenfolge ein, daher ist die Prüfsumme plattformunabhängig.
+
+Unveränderlicher Inhalt – Namen, Lage, Gelände, Fläche und **bewusst auch die Kreise** – gehört
+nicht zur Prüfsumme: Neue oder anders gebildete Kreise in den Daten ändern die Referenzprüfsumme
+nicht. Orte ohne Daten gehen über Besitzer (`kNone`) und Blockzahl (0) ein. Kommen Orte hinzu,
+ändert sich die Referenz trotzdem, weil sich die Zahl der Orte und die Rechentage nachfolgender
+Orte verschieben. Referenz nach 100 Jahren mit `data/` (Seed 1648): seit M3
+`5548a5fa80f75c0d`, vorher `8d44cf792e143bb0` (Begründung in
+[data/README.md](../../data/README.md#prüfung)).
 
 **Geprüft wird das an drei Stellen:**
 
@@ -195,13 +225,45 @@ Strom-Kennung:
   `tools/archivar/archivar.py` prüft Verweise, Lücken zu den Szenariodaten und Ausreißer und
   erzeugt `data/history/` ([tabellen.md](tabellen.md)). Die CI prüft mit `--pruefen`, dass beides
   zusammenpasst.
-- **Karte:** `tools/kartengenerator/kartengenerator.py` erzeugt aus `data/karte/karte.chron` und
-  den Lagen der Orte das Ort-ID-Bild `data/karte/provinzen.png` (Pixelwert `R + G × 256` =
-  Kartenindex + 1) und `data/karte/definition.csv`. Beide Dateien sind eingecheckt; die CI prüft
-  mit `--pruefen`, dass sie zum Datenstand passen.
-- **Godot** lädt `provinzen.png` als Bild (für Klicks) und als Textur. Ein Shader holt je Pixel die
-  Farbe des Ortes aus einer Nachschlagetextur, die `get_map_colors(modus)` füllt; Grenzen entstehen
-  im Shader durch Nachbarvergleich.
+- **Geodaten (seit M3):** `tools/geodaten/geodaten.py` lädt die offenen Quellen – Natural Earth
+  1:10 Mio. (gemeinfrei), GeoNames `cities1000` (CC BY 4.0) und AWS Terrain Tiles (Höhen) – nur in
+  den Zwischenspeicher `build/geodaten-cache/` und prüft sie gegen die SHA-256-Werte in
+  `tools/geodaten/quellen.json`. Daraus entstehen `data/karte/geometrie/land.geojson`,
+  `seen.geojson` und `fluesse.geojson` (zugeschnitten, vereinfacht, deterministisch);
+  `kernraum.geojson` ist von Hand gezeichnet. Quellenangaben:
+  [Anhang C](../anhang/c_quellen_und_daten.md#5-verwendete-geodaten-stand-m3).
+- **Orte und Kreise des Kernraums (seit M3):** `tools/geodaten/orte.py` wählt aus GeoNames die
+  Orte des Kernraums, vergibt Namen (deutsche Namen nur mit Beleg), Kennungen, Gelände (aus dem
+  Höhenmodell) und Kreise (räumlich gebildet, 4–12 benachbarte Orte) und schreibt
+  `data/tabellen/orte.csv` und `kreise.csv`; die 60 Orte der Testregion bleiben dabei unverändert
+  vorn. Die Fläche jedes Ortes übernimmt `orte.py` aus der Karte. Alle neuen Orte sind Orte ohne
+  Daten. Reihenfolge der Erzeugung: `geodaten.py geometrie` → `orte.py` → `archivar.py` →
+  `kartengenerator.py` ([tools/geodaten/README.md](../../tools/geodaten/README.md#orte-des-kernraums-ortepy)).
+- **Karte v2 (seit M3,** [chronik-skript.md, Abschnitt 6](chronik-skript.md#6-karte-fassung-m3)**):**
+  `tools/kartengenerator/kartengenerator.py` (Python mit numpy) erzeugt aus `karte.chron`, der
+  Geometrie und den Lagen der Orte drei Dateien:
+  - `provinzen.png` (4096 × 3329 Pixel, Plattkarte mit Bezugsbreite 51 °N, etwa 0,37 km je
+    Pixel): `R + G × 256` = Kartenindex + 1, der Blaukanal die Flächenart (0 Kernraum-Land,
+    1 Meer, 2 Binnengewässer, 3 Ausland). Land und Meer sind damit ins Bild eingebacken; die
+    Küstenlinie aus M1 entfällt.
+  - `fluesse.png`: Deckung durch Flüsse in Graustufen (nur Darstellung).
+  - `definition.csv`: Kartenindex, Ort, Name, Beschriftungspunkt, Pixelzahl, Fläche in km².
+
+  Jedes Kernraum-Land-Pixel gehört dem nächsten Ort (mit deterministischem Rauschen für natürliche
+  Grenzen, höchstens `max_radius_km`), jeder Ort hat genau eine zusammenhängende Fläche. Im
+  Pixelpfad stehen nur Grundrechenarten, daher sind die Bilder auf allen Plattformen pixelgleich.
+  Alle drei Dateien sind eingecheckt; die CI prüft mit `--pruefen`, dass sie zum Datenstand
+  passen. Die Fläche der Orte geht nicht in die Zuordnung ein, sondern wird aus der Karte
+  berechnet. Mit den Daten von M3 sind 99,96 % des Kernraum-Landes Orten zugeordnet; 41 kleine
+  Teilflächen (meist Inseln ohne GeoNames-Ort) gehören zu keinem Ort.
+- **Godot** lädt `provinzen.png` als Bild (für Klicks) und als Textur. Der Shader holt je Pixel
+  Farbe, Besitzer und Kreis des Ortes aus zwei Nachschlagetexturen mit 256 Spalten (eine Zeile
+  wäre für 4.541 Orte zu breit), die `get_map_colors(modus)`, `get_location_owner_indices()` und
+  `get_location_kreis_indices()` füllen. Meer, Binnengewässer und Ausland haben eigene Farben,
+  Orte ohne Daten (Alpha 0 in den datenabhängigen Kartenmodi) eine Schraffur „Keine Daten“.
+  Staats-, Kreis- und Ortsgrenzen entstehen im Shader durch Nachbarvergleich und werden je nach
+  Zoomstufe eingeblendet; die Namen (Staaten fern, Kreise mittel, Orte nah) zeichnet GDScript im
+  Bildschirmraum. Einzelheiten und Leistungsmessung: [game/README.md](../../game/README.md#karte).
 
 ## 7. Bauen und Prüfen
 
@@ -222,5 +284,10 @@ jeden Pull Request:
 | Kern (Windows, MSVC) | dasselbe mit MSVC (`/W4 /WX`) – Portabilität |
 | Determinismus (GCC, Clang, MSVC) | die drei Prüfsummen sind gleich |
 | Formatierung | `clang-format-18 --dry-run --Werror` über `core/`, `cli/`, `tests/`, `bridge/` |
-| Kartengenerator (Python 3.10, 3.13) | Tests des Generators; `data/karte/` ist aktuell |
-| Godot | Brücke bauen, Projekt headless importieren, Rauchtest `game/tests/smoke_test.gd`, Screenshot der Hauptszene (Xvfb, OpenGL 3) als Artefakt |
+| Python-Werkzeuge (Python 3.10 mit numpy 2.2.6, Python 3.13 mit numpy 2.5.3) | Tests von Archivar, Kartengenerator und Geodaten (ohne Netz); `data/history/` und `data/karte/` sind aktuell (`--pruefen`) |
+| Godot | Brücke bauen, Projekt headless importieren, Einheitentest `unit_test.gd`, Rauchtest `smoke_test.gd`, Klicktest `klick_test.gd` (jeder Ort in drei Zoomstufen), alle Protokolle ohne Skriptfehler; zwei Screenshots der Hauptszene (Xvfb, OpenGL 3) als Artefakt |
+
+Nur lokal laufen die Prüfungen, die die Rohdaten im Zwischenspeicher `build/geodaten-cache/`
+brauchen: `python3 tools/geodaten/geodaten.py pruefen` (Geometrie passt zu den Quellen) und
+`python3 tools/geodaten/orte.py --pruefen` (Orte und Kreise sind aktuell). Ebenfalls nur lokal
+und nur mit Grafikausgabe: der Leistungstest `game/tests/leistung_test.gd`.

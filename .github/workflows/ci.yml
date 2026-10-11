@@ -5,8 +5,10 @@
 #   Kern (Windows)      MSVC mit denselben Presets: Portabilität des Kerns
 #   Determinismus       vergleicht die Prüfsummen von GCC, Clang und MSVC (müssen bitgleich sein)
 #   Formatierung        clang-format 18 über core/, cli/, tests/, bridge/
-#   Archivar und Kartengenerator  Python-Tests; sind data/history/ und data/karte/ aktuell?
-#   Godot               GDExtension bauen, Rauchtest headless, Screenshot der Hauptszene als Artefakt
+#   Python-Werkzeuge    Tests von Archivar, Kartengenerator und Geodaten (mit numpy, ohne Netz);
+#                       sind data/history/ und data/karte/ aktuell?
+#   Godot               GDExtension bauen, Einheiten-, Rauch- und Klicktest headless,
+#                       Screenshots der Hauptszene als Artefakt
 #
 # Lokal nachstellen: siehe README.md, Abschnitt „Entwicklung“.
 
@@ -218,14 +220,20 @@ jobs:
           echo "Alle Dateien sind korrekt formatiert."
 
   kartengenerator:
-    name: Archivar und Kartengenerator (Python ${{ matrix.python }})
+    name: Python-Werkzeuge (Python ${{ matrix.python }}, numpy ${{ matrix.numpy }})
     runs-on: ubuntu-24.04
-    timeout-minutes: 10
+    timeout-minutes: 15
     strategy:
       fail-fast: false
       matrix:
-        # Älteste und neueste unterstützte Version: Karte und Historie müssen mit beiden gleich entstehen.
-        python: ['3.10', '3.13']
+        # Älteste und neueste unterstützte Version: Karte und Historie müssen mit beiden gleich
+        # entstehen. numpy ist je Version fest gepinnt (numpy 2.3 und neuer laufen erst ab
+        # Python 3.11); mit genau diesen Paaren ist die Karte auch lokal geprüft.
+        include:
+          - python: '3.10'
+            numpy: '2.2.6'
+          - python: '3.13'
+            numpy: '2.5.3'
     steps:
       - name: Quelltext auschecken
         uses: actions/checkout@v4
@@ -234,6 +242,15 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
+
+      # Kartengenerator und Geodaten rechnen mit numpy; der Archivar braucht nur die
+      # Standardbibliothek.
+      - name: numpy ${{ matrix.numpy }} installieren
+        env:
+          NUMPY_VERSION: ${{ matrix.numpy }}
+        run: |
+          python3 -m pip install --disable-pip-version-check --no-input "numpy==${NUMPY_VERSION}"
+          python3 -c 'import sys, numpy; print("Python", sys.version.split()[0], "· numpy", numpy.__version__)'
 
       - name: Tests des Archivars
         run: python3 -m unittest discover -s tools/archivar -v
@@ -244,13 +261,24 @@ jobs:
       - name: Tests des Kartengenerators
         run: python3 -m unittest discover -s tools/kartengenerator -v
 
-      - name: Karte aktuell? (data/karte/provinzen.png, definition.csv)
-        run: python3 tools/kartengenerator/kartengenerator.py --pruefen
+      - name: Karte aktuell? (data/karte/provinzen.png, fluesse.png, definition.csv)
+        run: python3 tools/kartengenerator/kartengenerator.py --pruefen --zeiten
+
+      # Ohne Netz und ohne Rohdaten: Die Tests nutzen tools/geodaten/testdaten/ und die
+      # eingecheckten Dateien. 'geodaten.py pruefen' und 'orte.py --pruefen' brauchen den
+      # Zwischenspeicher build/geodaten-cache/ und laufen deshalb nur lokal.
+      - name: Tests der Geodaten (tools/geodaten)
+        run: python3 -m unittest discover -s tools/geodaten -v
 
   godot:
-    name: Godot (Brücke, Rauchtest, Screenshot)
+    name: Godot (Brücke, Tests, Screenshots)
     runs-on: ubuntu-24.04
     timeout-minutes: 60
+    # Mit ausdrücklich gesetzter Shell läuft bash mit 'pipefail': Bricht Godot in
+    # 'godot … | tee log' mit einem Fehlercode ab, schlägt auch der Schritt fehl.
+    defaults:
+      run:
+        shell: bash
     env:
       GODOT_VERSION: 4.4.1-stable
       GODOT_BIN: tools/godot/Godot_v4.4.1-stable_linux.x86_64
@@ -351,28 +379,60 @@ jobs:
             exit 1
           fi
 
+      # Ein Skriptfehler bricht im --script-Modus nur die betroffene Funktion ab; deshalb wird
+      # jedes Protokoll zusätzlich auf SCRIPT ERROR und Parse Error geprüft.
       - name: Einheitentests der Godot-Seite (game/tests/unit_test.gd)
         run: |
           "$GODOT_BIN" --headless --path game --script res://tests/unit_test.gd 2>&1 | tee "$RUNNER_TEMP/unit.log"
           grep -q "UNIT OK" "$RUNNER_TEMP/unit.log"
+          if grep -E "SCRIPT ERROR|Parse Error" "$RUNNER_TEMP/unit.log"; then
+            echo "::error::Skriptfehler in den Einheitentests der Godot-Seite."
+            exit 1
+          fi
 
       - name: Rauchtest (game/tests/smoke_test.gd)
         run: |
           "$GODOT_BIN" --headless --path game --script res://tests/smoke_test.gd 2>&1 | tee "$RUNNER_TEMP/smoke.log"
           grep -q "SMOKE OK" "$RUNNER_TEMP/smoke.log"
+          if grep -E "SCRIPT ERROR|Parse Error" "$RUNNER_TEMP/smoke.log"; then
+            echo "::error::Skriptfehler im Rauchtest."
+            exit 1
+          fi
 
-      - name: Screenshot der Hauptszene (Xvfb, OpenGL 3)
+      # Abnahme M3: Jeder Ort der Karte wird bei drei Zoomstufen richtig erkannt.
+      - name: Klicktest (game/tests/klick_test.gd)
+        run: |
+          "$GODOT_BIN" --headless --path game --script res://tests/klick_test.gd 2>&1 | tee "$RUNNER_TEMP/klick.log"
+          grep -q "KLICK OK" "$RUNNER_TEMP/klick.log"
+          if grep -E "SCRIPT ERROR|Parse Error" "$RUNNER_TEMP/klick.log"; then
+            echo "::error::Skriptfehler im Klicktest."
+            exit 1
+          fi
+          grep "KLICK OK" "$RUNNER_TEMP/klick.log" | sed 's/^/Klicktest: /' >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Screenshots der Hauptszene (Xvfb, OpenGL 3)
         run: |
           mkdir -p artefakte
+          # Übersicht im Kartenmodus „Politisch“ mit Ortsinfo Berlin-Cölln
           xvfb-run -a -s "-screen 0 1600x900x24" \
             "$GODOT_BIN" --path game --rendering-driver opengl3 --audio-driver Dummy \
-            -- --screenshot="$PWD/artefakte/einigkeit.png" --tage=60 --kartenmodus=0 --ort=berlin_coelln
+            -- --screenshot="$PWD/artefakte/einigkeit.png" --tage=60 --kartenmodus=0 --ort=berlin_coelln \
+            2>&1 | tee "$RUNNER_TEMP/screenshot.log"
+          # Mittlere Zoomstufe im Kartenmodus „Kreise“ (Kreisnamen, Ort ohne Daten)
+          xvfb-run -a -s "-screen 0 1600x900x24" \
+            "$GODOT_BIN" --path game --rendering-driver opengl3 --audio-driver Dummy \
+            -- --screenshot="$PWD/artefakte/einigkeit_kreise.png" --tage=60 --kartenmodus=5 --ort=nuernberg --zoom=4 \
+            2>&1 | tee -a "$RUNNER_TEMP/screenshot.log"
+          if grep -E "SCRIPT ERROR|Parse Error|SHADER ERROR" "$RUNNER_TEMP/screenshot.log"; then
+            echo "::error::Skript- oder Shaderfehler bei den Screenshots."
+            exit 1
+          fi
 
-      - name: Screenshot hochladen
+      - name: Screenshots hochladen
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v4
         with:
-          name: screenshot-hauptszene
+          name: screenshots-hauptszene
           path: artefakte/
           if-no-files-found: warn
           retention-days: 14

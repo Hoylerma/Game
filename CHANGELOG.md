@@ -8,6 +8,72 @@ Vor Version 1.0 kann sich jede Schnittstelle ändern.
 
 ## [Unveröffentlicht]
 
+### Meilenstein M3 – Karte des Kernraums
+
+Die Karte zeigt den ganzen Kernraum mit **4.541 Orten in 627 Kreisen**. Historische Daten haben
+weiterhin nur die 60 Orte der Testregion; die übrigen 4.481 sind *Orte ohne Daten*. Ergebnis und
+bekannte Grenzen: [docs/meilensteine.md](docs/meilensteine.md#m3--karte-des-kernraums-).
+
+- **Verträge:** [chronik-skript.md](docs/technik/chronik-skript.md) Abschnitt 6 in Fassung M3
+  (Plattkarte mit Bezugsbreite, GeoJSON-Geometrie für Land, Seen, Flüsse und Kernraum,
+  Flächenart im Blaukanal von `provinzen.png`, Flussebene `fluesse.png`, `definition.csv` mit
+  Beschriftungspunkt, Pixelzahl und Fläche), Abschnitt 3.6 *Orte ohne Daten* und 3.9 *Kreise*;
+  [bridge-api.md](docs/technik/bridge-api.md) und [tabellen.md](docs/technik/tabellen.md) ergänzt.
+- **Kern:** Orte ohne Daten – die vier Simulationsfelder (`besitzer`, `bevoelkerung`,
+  `konfession`, `verwuestung`) sind zum Startdatum alle vorhanden oder keines; ohne sie hat ein Ort
+  keinen Besitzer und keine Bevölkerungsblöcke und wird beim Jahreswechsel übersprungen (zieht
+  keine Zufallszahlen). Hauptstädte müssen Orte mit Daten sein. Kreise aus `history/kreise/`
+  (`World::districts`, `Location::district`, Feld `kreis` im Ort, nicht datierbar). `uhrwerk-cli`
+  zeigt Orte mit und ohne Daten, Kreise und die Ladezeit. **101 Testfälle** (vorher 91).
+- **Brücke:** `has_data`, `kreis_index` und `kreis_name` in `get_location`; gepackte Indexarrays
+  `get_location_owner_indices` und `get_location_kreis_indices`; `get_kreis_count`,
+  `get_kreis_index`, `get_kreis`; Kartenmodus 5 „Kreise“ (Palette mit 12 Farben); Alpha 0 für
+  Orte ohne Daten in den Modi Politisch, Dichte, Konfession und Verwüstung.
+- **Archivar:** Spalte `kreis` in `orte.csv`, neue Tabelle `kreise.csv` → `history/kreise/`;
+  Orte ohne Zeilen in `besitz.csv` und `bevoelkerung.csv` sind Orte ohne Daten; Bericht mit Orten
+  mit und ohne Daten und Kreisen. **31 Tests** (vorher 25).
+- **Geodaten** (`tools/geodaten/`, neu, Python mit numpy):
+  - `geodaten.py holen` lädt die offenen Quellen nur in den Zwischenspeicher
+    `build/geodaten-cache/` und prüft sie gegen die SHA-256-Werte in `quellen.json`: Natural Earth
+    5.1.2 (1:10 Mio., gemeinfrei), GeoNames `cities1000` über das npm-Paket
+    `cities-with-1000@1.0.4` (CC BY 4.0), 224 Höhenkacheln der AWS Terrain Tiles (Zoomstufe 8).
+    Quellenangaben: [Anhang C](docs/anhang/c_quellen_und_daten.md#5-verwendete-geodaten-stand-m3).
+  - `geodaten.py geometrie` schneidet Land, Seen und Flüsse auf den Kartenausschnitt zu
+    (`data/karte/geometrie/`, zusammen 0,26 MB; byte-gleich unter Python 3.10 und 3.13);
+    `pruefen` vergleicht mit den Quellen, `vorschau` zeichnet eine Prüfkarte.
+  - `data/karte/geometrie/kernraum.geojson` von Hand: 398 Punkte, jede Grenzentscheidung
+    begründet, 93 Prüforte mit erwarteter Lage.
+  - `orte.py` erzeugt die Orte und Kreise des Kernraums: aus 14.411 Kandidaten 4.481 neue Orte
+    (gewichtete Poisson-Scheibe nach Bedeutung, Inseln, Lückenfüllung), 627 Kreise mit 4–12 Orten
+    (Median 7) in 77 Landschaften; deutsche Namen nur mit Beleg in den GeoNames-Alternativnamen
+    (952 belegte Einträge in `exonyme.csv`), Gelände aus dem Höhenmodell, Fläche aus der Karte.
+  - **94 Tests** ohne Netz und ohne Zwischenspeicher (ein Volltest mit `ORTE_VOLLTEST=1`).
+- **Kartengenerator v2** (jetzt mit numpy): Rasterung der Polygone nach der Pixelmitte,
+  Flächenarten Kernraum-Land, Meer, Binnengewässer und Ausland, Zuordnung zum nächsten Ort mit
+  deterministischem Rauschen (nur Grundrechenarten), genau eine zusammenhängende Fläche je Ort,
+  Flussebene, Beschriftungspunkt, Fläche in Festkomma, Vorschau mit Ausschnitt und Namen. Die
+  volle Karte (4096 × 3329 Pixel, 4.541 Orte) entsteht in 13–21 s; Kernraum-Land ist zu
+  99,96 % Orten zugeordnet. Ausgabe byte-gleich unter Python 3.10 (numpy 2.2.6) und 3.13 (numpy
+  2.5.3). **88 Tests.**
+- **Daten:** 4.541 Orte (60 mit, 4.481 ohne Daten) in 77 Orts- und 77 Kreisdateien; neuer
+  Geländetyp `hochgebirge` (jetzt 11); `karte.chron` in Fassung M3 (1,8–23,5 °O × 45,1–56,2 °N,
+  4096 × 3329 Pixel, etwa 0,37 km je Pixel, `max_radius_km = 32`). `flaeche` aller Orte kommt aus
+  der Karte (1–1.147 km², Median 169 km²); die 60 Orte der Testregion sind sonst unverändert.
+- **Godot:** Großkarte mit Meer, Seen, Ausland und Flüssen, Schraffur „Keine Daten“, Staats-,
+  Kreis- und Ortsgrenzen nach Zoomstufe; Namen nach Zoomstufe (Staaten fern, Kreise mittel, Orte
+  nah) ohne Überlappung; Kartenmodus „Kreise“ (Taste Z); Ortsinfo und Tooltip für Orte ohne
+  Daten; Startoption `--zoom`. Tests: `unit_test.gd` (162 Prüfungen), `smoke_test.gd` mit den
+  Kartendaten v2, neu `klick_test.gd` (jeder der 4.541 Orte in drei Zoomstufen richtig erkannt,
+  dazu rund 120 Klicks über echte Eingabeereignisse) und `leistung_test.gd`.
+- **CI:** Job „Python-Werkzeuge“ mit numpy (2.2.6 unter Python 3.10, 2.5.3 unter 3.13) und den
+  Tests der Geodaten; Godot-Job zusätzlich mit Einheiten- und Klicktest, alle Protokolle werden
+  auf Skriptfehler geprüft; zweiter Screenshot im Kartenmodus „Kreise“ (mittlere Zoomstufe).
+- **Referenz-Prüfsumme** nach 100 Jahren jetzt `5548a5fa80f75c0d` (vorher `8d44cf792e143bb0`):
+  Der Rechentag eines Ortes hängt von seinem Index ab (Index mod 28 + 1), und durch die
+  eingefügten Orte ohne Daten haben 56 der 60 Orte mit Daten einen anderen Rechentag.
+  Bevölkerung nach 100 Jahren 627.709 statt 627.721. GCC, Clang und ASan liefern dieselbe
+  Prüfsumme. Kreise gehören bewusst nicht zur Prüfsumme (unveränderlicher Inhalt).
+
 ### Meilenstein M2 – Datenpipeline „Archivar“
 
 - **Datierte Blöcke** im Chronik-Skript: `JJJJ.MM.TT = { … }` in `staat` und `ort` gilt ab seinem

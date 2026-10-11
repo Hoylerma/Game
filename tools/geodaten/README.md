@@ -45,10 +45,10 @@ python3 tools/geodaten/geodaten.py vorschau --breite 1500 --max-rang 6 --ausschn
 python3 tools/geodaten/staedte.py --min-einwohner 5000 --ausgabe /tmp/kandidaten.tsv
 python3 tools/geodaten/hoehen.py 13.40 52.52 --radius 5
 
-python3 tools/geodaten/orte.py                         # Orte und Kreise erzeugen (≈ 70 s), siehe unten
+python3 tools/geodaten/orte.py                         # Orte und Kreise erzeugen (1–2 min), siehe unten
 python3 tools/geodaten/orte.py --pruefen               # Exitcode 1, wenn die Tabellen veraltet sind
 
-python3 -m unittest discover -s tools/geodaten         # Tests (auch mit Python 3.10)
+python3 -m unittest discover -s tools/geodaten         # 94 Tests ohne Netz (auch mit Python 3.10; läuft in der CI)
 ```
 
 `holen` lädt nur, was fehlt oder einen falschen Prüfwert hat; eine Datei mit abweichendem Prüfwert
@@ -261,7 +261,7 @@ Daten* (chronik-skript.md, Abschnitt 3.6): ohne Besitz und Bevölkerung, ohne Hi
 ### Aufruf und Reihenfolge
 
 ```sh
-python3 tools/geodaten/orte.py                         # Tabellen schreiben (≈ 70 s; Rohdaten im Zwischenspeicher)
+python3 tools/geodaten/orte.py                         # Tabellen schreiben (1–2 min; Rohdaten im Zwischenspeicher)
 python3 tools/archivar/archivar.py                     # data/history/orte/*.chron, kreise/*.chron
 python3 tools/kartengenerator/kartengenerator.py       # provinzen.png, fluesse.png, definition.csv
 python3 tools/archivar/archivar.py --pruefen           # history/ aktuell?

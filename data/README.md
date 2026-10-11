@@ -1,10 +1,20 @@
 # Spieldaten (`data/`)
 
+> **Seit M3: Karte des Kernraums mit 4.541 Orten in 627 Kreisen.** Die Orte decken den Kernraum
+> (`karte/geometrie/kernraum.geojson`) zu 99,96 % ab; ohne Ort bleiben 41 kleine Teilflächen,
+> meist Inseln ohne GeoNames-Ort (zusammen etwa 274 km²). Erzeugt hat die Orte
+> `tools/geodaten/orte.py` aus GeoNames cities1000 (Auswahl, Namen, Kreise und Gelände:
+> [tools/geodaten/README.md](../tools/geodaten/README.md), Abschnitt „Orte des Kernraums“).
+> Historische Daten (Besitzer, Bevölkerung, Konfession, Verwüstung) haben weiterhin nur die 60
+> Orte der Testregion aus M1; die übrigen 4.481 sind *Orte ohne Daten*
+> ([chronik-skript.md](../docs/technik/chronik-skript.md), Abschnitt 3.6): Sie erscheinen auf der
+> Karte (schraffiert), nehmen aber an der Simulation nicht teil.
+
 > **Testregion für Meilenstein M1 (technischer Durchstich).**
-> Dieser Datenstand ist bewusst **unvollständig**: Er deckt nur Mittel- und Nordostdeutschland mit
-> 60 Orten und 16 Staaten ab und dient dazu, Lader, Simulation, Karte und Oberfläche mit
-> historisch plausiblen Werten zu erproben. Er ist kein fertiger Spielinhalt; alle Werte stehen
-> unter Vorbehalt der fachlichen Prüfung (siehe [Anhang C](../docs/anhang/c_quellen_und_daten.md)).
+> Die historischen Daten sind bewusst **unvollständig**: Sie decken nur Mittel- und
+> Nordostdeutschland mit 60 Orten und 16 Staaten ab und dienen dazu, Lader, Simulation, Karte und
+> Oberfläche mit historisch plausiblen Werten zu erproben. Sie sind kein fertiger Spielinhalt; alle
+> Werte stehen unter Vorbehalt der fachlichen Prüfung (siehe [Anhang C](../docs/anhang/c_quellen_und_daten.md)).
 
 Format, Pflichtfelder und Formeln: [docs/technik/chronik-skript.md](../docs/technik/chronik-skript.md).
 
@@ -18,8 +28,9 @@ Format, Pflichtfelder und Formeln: [docs/technik/chronik-skript.md](../docs/tech
 | | |
 |---|---|
 | Lesezeichen | **Der Westfälische Frieden**, 24.10.1648 (`westfaelischer_frieden`), Spieler-Vorauswahl Brandenburg |
-| Gebiet | 9,5–16,5 °O, 50,0–54,8 °N: Mark Brandenburg, Erzstift Magdeburg, Halberstadt, Anhalt, Kursachsen mit beiden Lausitzen, Thüringen (Teile), Braunschweig-Wolfenbüttel (Ostteil), Mecklenburg, Vorpommern, Hinterpommern, Nordböhmen als Randgebiet |
-| Umfang | 60 Orte, 16 Staaten, 10 Geländetypen, 4 Konfessionen, 6 Berufsgruppen |
+| Karte | Kernraum (Design-Dokument 05) im Ausschnitt 1,8–23,5 °O × 45,1–56,2 °N, Bild 4096 × 3329 Pixel (`karte/karte.chron`) |
+| Gebiet mit Daten | 9,5–16,5 °O, 50,0–54,8 °N: Mark Brandenburg, Erzstift Magdeburg, Halberstadt, Anhalt, Kursachsen mit beiden Lausitzen, Thüringen (Teile), Braunschweig-Wolfenbüttel (Ostteil), Mecklenburg, Vorpommern, Hinterpommern, Nordböhmen als Randgebiet |
+| Umfang | 4.541 Orte (60 mit Daten, 4.481 ohne Daten) in 627 Kreisen, 16 Staaten, 11 Geländetypen, 4 Konfessionen, 6 Berufsgruppen |
 | Bevölkerung | 384.000 in den modellierten Orten (Stichprobe der Ämter, nicht die Gesamtbevölkerung der Territorien) |
 
 ## Aufbau
@@ -29,11 +40,12 @@ data/
 ├── README.md                      diese Datei
 ├── common/
 │   ├── regeln.chron               globale Regeln (Werte der Spezifikation)
-│   ├── gelaende.chron             10 Geländetypen
+│   ├── gelaende.chron             11 Geländetypen (seit M3 mit hochgebirge)
 │   ├── konfessionen.chron         lutherisch, reformiert, katholisch, jüdisch
 │   └── berufe.chron               adel, geistlichkeit, buerger, handwerker, bauern, landarme
 ├── tabellen/                      Quelle der Wahrheit für history/ (CSV, siehe docs/technik/tabellen.md)
 │   ├── orte.csv, staaten.csv      Stammdaten
+│   ├── kreise.csv                 Kreise (seit M3; mit orte.csv erzeugt von tools/geodaten/orte.py)
 │   ├── besitz.csv                 Besitzer je Ort mit Datum
 │   ├── bevoelkerung.csv           Bevölkerung, Konfession, Verwüstung je Stichtag
 │   ├── staaten_historie.csv       Herrscher, Hauptstadt, Kasse … mit Datum
@@ -56,8 +68,9 @@ data/
 │   │   ├── SWE_schweden.chron
 │   │   ├── WEI_sachsen_weimar.chron
 │   │   └── ZER_anhalt_zerbst.chron
-│   └── orte/                      Orte je historischer Landschaft
-│       ├── anhalt.chron           4 Orte
+│   ├── kreise/                    Kreise je historischer Landschaft (seit M3, 77 Dateien)
+│   └── orte/                      Orte je historischer Landschaft (seit M3 77 Dateien, anhalt … wuerttemberg)
+│       ├── anhalt.chron           davon mit Daten: 4 Orte
 │       ├── boehmen.chron          4 Orte
 │       ├── brandenburg.chron     11 Orte (Kurmark, Altmark, Prignitz, Uckermark, Neumark)
 │       ├── braunschweig.chron     3 Orte
@@ -69,8 +82,16 @@ data/
 │       └── thueringen.chron       7 Orte
 ├── szenarien/
 │   └── westfaelischer_frieden.chron
-└── karte/                         Kartengenerator-Eingaben und generierte Dateien (eigener Bereich)
+└── karte/                         Karte des Kernraums (Format: chronik-skript.md, Abschnitt 6)
+    ├── karte.chron                Ausschnitt, Projektion, Bildgröße, max_radius_km
+    ├── geometrie/                 land, seen, fluesse (erzeugt von tools/geodaten), kernraum (von Hand)
+    ├── provinzen.png              Ort-ID-Bild mit Flächenart     ┐ erzeugt von
+    ├── fluesse.png                Flussebene (Graustufen)        │ tools/kartengenerator
+    └── definition.csv             Kartenindex, Beschriftungspunkt, Pixel, Fläche ┘
 ```
+
+In den Ortsdateien stehen die Orte mit Daten jeweils vorn; Reihenfolge und Inhalt dieser 60 Orte
+sind seit M1 unverändert bis auf `flaeche` (seit M3 aus der Karte) und `kreis`.
 
 Der Lader liest die Ordner jeweils **nach Dateiname sortiert** und die Einträge in Dateireihenfolge;
 daraus ergeben sich die Indizes in `World`. Neue Dateien verschieben also die Indizes nachfolgender
@@ -81,8 +102,11 @@ Einträge – Verweise im Spiel laufen deshalb immer über Kennungen, nie über 
 ### Kennungen und Dateien
 
 - **Orte:** Kleinbuchstaben, Ziffern und `_`; Umlaute umschrieben (`koethen`, `guestrow`), Namenszusatz
-  nur zur Unterscheidung (`brandenburg_havel`, `frankfurt_oder`, `landsberg_warthe`). Der Anzeigename
-  (`name`) folgt der historischen deutschen Schreibweise der Zeit (`Cammin`, `Berlin-Cölln`).
+  nur zur Unterscheidung (`brandenburg_havel`, `frankfurt_oder`, `landsberg_warthe`). Bei den 60
+  Orten der Testregion folgt der Anzeigename (`name`) der historischen deutschen Schreibweise der
+  Zeit (`Cammin`, `Berlin-Cölln`); für die Orte aus M3 gelten die Namensregeln unten
+  (Abschnitt „Orte des Kernraums“).
+- **Kreise:** Kennung `kr_<Hauptort>` (z. B. `kr_dessau`), Anzeigename nach dem Hauptort.
 - **Staaten:** Tag aus drei Großbuchstaben; Dateiname `<TAG>_<name>.chron`.
 - **Ortsdateien** sind nach historischen Landschaften gegliedert, nicht nach Besitzern: Ein Ort steht
   in der Datei der Landschaft, in der er liegt (z. B. das schwedische Wismar in `mecklenburg.chron`,
@@ -94,11 +118,14 @@ Einträge – Verweise im Spiel laufen deshalb immer über Kennungen, nie über 
 
 ### Orte
 
-- Ein Ort steht für eine **Stadt mit ihrem Amt** bzw. Umland. `flaeche` (100–300 km²) ist die
-  modellierte Fläche dieses Amtes, `bevoelkerung` umfasst Stadt **und** Umland.
+- Ein Ort steht für eine **Stadt mit ihrem Amt** bzw. Umland; `bevoelkerung` umfasst Stadt **und**
+  Umland. `flaeche` ist seit M3 die Fläche des Ortes auf der Karte (`flaeche_km2` aus
+  `karte/definition.csv`, übernommen von `tools/geodaten/orte.py`): 1–1.147 km², Median 169 km²
+  (in M1 waren es geschätzte 150–280 km²).
 - `stadt = ja`, wenn die Stadt den Ort wirtschaftlich prägt (etwa die Hälfte der Bevölkerung oder
   mehr, Residenz-, Handels- oder Bergstadt); kleine Ackerbürgerstädte mit großem Amt sind `nein`.
-- `lage` ist die reale Lage des Hauptortes (WGS84, zwei Nachkommastellen ≈ 1 km).
+- `lage` ist die reale Lage des Hauptortes (WGS84; bei den Orten aus M1 zwei Nachkommastellen
+  ≈ 1 km, bei den übrigen die Koordinate aus GeoNames).
 - `verwuestung` gibt die Kriegsschäden am Stichtag nach regionaler Betroffenheit an:
 
   | Wert | Bedeutung | Beispiele |
@@ -110,6 +137,46 @@ Einträge – Verweise im Spiel laufen deshalb immer über Kennungen, nie über 
 
 - `konfession`: ganzzahlige Prozentwerte, Summe 100. Die Reihenfolge im Block bestimmt die
   Reihenfolge der Bevölkerungsblöcke; die Mehrheitskonfession steht vorn.
+
+### Orte des Kernraums (seit M3)
+
+Die 4.481 Orte ohne Daten und alle 627 Kreise erzeugt `python3 tools/geodaten/orte.py`
+reproduzierbar in `tabellen/orte.csv` und `tabellen/kreise.csv`; Verfahren, Hilfstabellen und
+Kennzahlen stehen in [tools/geodaten/README.md](../tools/geodaten/README.md#orte-des-kernraums-ortepy).
+Diese Zeilen bitte nicht von Hand ändern, sondern die Hilfstabellen in `tools/geodaten/` anpassen
+und danach `orte.py`, den Archivar und den Kartengenerator laufen lassen.
+
+- **Herkunft:** GeoNames `cities1000` (Siedlungen mit heute mindestens 1.000 Einwohnern, Stand
+  2020, CC BY 4.0; Quellenangabe in [Anhang C](../docs/anhang/c_quellen_und_daten.md#5-verwendete-geodaten-stand-m3)).
+  Ausgewählt wird nach heutiger Bedeutung (Einwohner, Verwaltungsrang, Bekanntheit) mit einem
+  Mindestabstand von etwa 4–11 km je nach Bedeutung, dazu Inseln und Lückenfüller; moderne
+  Gründungen und Kunstnamen aus Gemeindereformen sind ausgeschlossen
+  (`tools/geodaten/ausschluesse.csv`). Die `quelle` jedes neuen Ortes nennt die `geonameid` und
+  die Herkunft des Namens.
+- **Lage, Gelände, Stadt:** `lage` ist die GeoNames-Koordinate (Orte knapp im Wasser auf das
+  nächste Landpixel gerückt, in `quelle` vermerkt). `gelaende` kommt aus einem Höhenmodell (AWS
+  Terrain Tiles) mit festen Schwellen, `stadt = ja` heißt heute Haupt-, Landeshaupt- oder
+  Kreisstadt oder mindestens 20.000 Einwohner – eine Näherung, kein historisches Stadtrecht.
+- **Namensregeln:** (1) ein deutscher Name aus `tools/geodaten/exonyme.csv`, aber nur, wenn er
+  wörtlich in den GeoNames-Alternativnamen belegt ist (z. B. Breslau, Königsberg, Straßburg);
+  (2) in Deutschland, Österreich und Liechtenstein der GeoNames-Name ohne moderne Zusätze
+  („Lutherstadt“, „Hansestadt“, „Ostseebad“ …; „Bad“ bleibt stehen); (3) in Südtirol der deutsche
+  Teil des zweisprachigen Namens; (4) sonst der **heutige Name** (917 Orte, z. B. Lubawa statt
+  Löbau, weil GeoNames dort keinen deutschen Namen belegt). Gleichnamige Orte erhalten den
+  Kurznamen ihrer Landschaft in Klammern („Mühlhausen (Böhmen)“, 82 Orte). Namen aus den
+  Umbenennungen 1933–1945 werden nicht übernommen.
+- **Noch zu prüfen:** Viele Namen sind heutige Formen: 92 mit „Bad “ (Titel meist erst im 19.
+  oder 20. Jahrhundert verliehen), 9 mit heutigem Klammerzusatz aus GeoNames (z. B.
+  „Schwedt (Oder)“, „Kempten (Allgäu)“), 3 mit „in Bayern“, Namen aus Zusammenlegungen des
+  20. Jahrhunderts (Wuppertal, Garmisch-Partenkirchen, Castrop-Rauxel). Bei den Kreisnamen sind es 13 mit „Bad “
+  und 27 mit Klammer. Korrekturen bitte mit Beleg über `exonyme.csv` bzw. die Issue-Vorlage
+  „Historischer Fehler“.
+- **Kreise** sind räumlich gebildet (4–12 benachbarte Orte, in der Regel derselben Landschaft,
+  Median 7) und heißen nach ihrem heute größten Ort; sie sind **keine historischen Verwaltungseinheiten**
+  (`quelle`: „räumlich gebildet (M3), keine historische Verwaltungseinheit“).
+- **Ortsdateien:** Die 77 Landschaften (`history/orte/<landschaft>.chron`, ebenso
+  `history/kreise/`) folgen heutigen Verwaltungsgrenzen, die die historischen Landschaften nur
+  annähern; Zuordnung in `tools/geodaten/landschaften.csv`.
 
 ### Staaten
 
@@ -217,11 +284,15 @@ Staaten mit nur einem oder zwei Orten reagieren stark auf Seuchen in diesem Ort.
 
 ## Bekannte Lücken und Vereinfachungen
 
-- **Nicht modelliert** sind u. a. die Reichsstädte Mühlhausen, Nordhausen, Goslar, Lübeck und Hamburg,
-  das Reichsstift Quedlinburg, Schwarzburg, Reuß, Mansfeld, Stolberg, die Henneberger Lande, die
-  Hochstifte Merseburg und Naumburg, Anhalt-Plötzkau, Sachsen-Lauenburg, Braunschweig-Lüneburg (Celle,
-  Calenberg), Holstein, Hessen sowie Franken (Coburg, Bayreuth) im Süden des Kartenrechtecks.
-  Auf der Karte erscheinen diese Gebiete als Nachbarorte oder – jenseits von 42 km – als leere Fläche.
+- **Orte ohne Daten:** 4.481 der 4.541 Orte haben keinen Besitzer, keine Bevölkerung und keine
+  Konfession; sie nehmen an der Simulation nicht teil und erscheinen auf der Karte schraffiert.
+  Ihre Namen, Lagen und Kreise sind aus heutigen Daten abgeleitet (siehe „Orte des Kernraums“).
+- **Ohne historische Daten** sind innerhalb und am Rand der Testregion u. a. die Reichsstädte
+  Mühlhausen, Nordhausen, Goslar, Lübeck und Hamburg, das Reichsstift Quedlinburg, Schwarzburg, Reuß,
+  Mansfeld, Stolberg, die Henneberger Lande, die Hochstifte Merseburg und Naumburg, Anhalt-Plötzkau,
+  Sachsen-Lauenburg, Braunschweig-Lüneburg (Celle, Calenberg), Holstein, Hessen sowie Franken
+  (Coburg, Bayreuth), ebenso der ganze übrige Kernraum. Auf der Karte erscheinen diese Gebiete seit
+  M3 als Orte ohne Daten (schraffiert, ohne Besitzer).
 - **Stichprobe:** Die Orte stehen jeweils für ein Amt; die Territorien sind dazwischen nicht flächig
   erfasst. Bevölkerung und Hofhaltung der Staaten beziehen sich nur auf die modellierten Orte.
 - **Berufe und Konfession** werden unabhängig voneinander verteilt. Historisch waren z. B. Juden von
@@ -240,10 +311,17 @@ python3 tools/archivar/archivar.py --pruefen      # Tabellen prüfen, history/ a
 python3 tools/archivar/archivar.py --bericht      # Sicherheit der Angaben, Abdeckung der Szenarien
 ./build/dev/cli/uhrwerk-cli pruefen               # Laden mit dem Kern: 0 Fehler, 0 Warnungen
 ./build/dev/cli/uhrwerk-cli lauf --jahre 50 --bericht
+python3 tools/kartengenerator/kartengenerator.py --pruefen   # Karte aktuell? (braucht numpy)
+python3 tools/geodaten/orte.py --pruefen          # Orte und Kreise aktuell? (braucht build/geodaten-cache)
 ```
 
 Beim Umzug in die Tabellen (M2) wurden die M1-Daten verlustfrei übernommen: Die Prüfsumme nach
-100 Jahren ist unverändert (`8d44cf792e143bb0`). Alle Angaben tragen seitdem eine Sicherheit:
+100 Jahren blieb unverändert (`8d44cf792e143bb0`). Seit M3 (4.541 Orte) lautet sie
+`5548a5fa80f75c0d`: Die Prüfsumme umfasst alle Orte, und der Rechentag eines Ortes im Monat hängt
+von seinem Index ab (Index mod 28 + 1, `compute_day` in `core/src/simulation.cpp`). Durch die
+eingefügten Orte ohne Daten haben 56 der 60 Orte mit Daten einen anderen Rechentag; ihre
+Reihenfolge untereinander ist gleich geblieben. Die Werte nach 100 Jahren weichen deshalb nur
+geringfügig ab (Bevölkerung 627.709 statt 627.721). Alle Angaben tragen seit M2 eine Sicherheit:
 Besitz, Herrscher, Hauptstadt und Konfession der Staaten `ungeprueft` (recherchiert, noch ohne
 Fachprüfung), Bevölkerung, Konfessionsanteile und Verwüstung `schaetzung`, Schatz, Steuersatz und
 Hofhaltung `spielwert`. Die Begründungen stehen weiter in der Quelle des Ortes bzw. Staates.

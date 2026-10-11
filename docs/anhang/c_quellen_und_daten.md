@@ -64,7 +64,9 @@
 | NS-Verfolgung | Arolsen Archives, Gedenkstätten | Dokumentarische Ebene, Biografien | Kooperation und Genehmigung erforderlich |
 | Historische Grenzen | Historische GIS-Projekte (z. B. HGIS Germany), MPIDR Population History GIS Collection | Grenzen 1820–1990, Verwaltungseinheiten | Nutzungsbedingungen prüfen |
 | Höhen und Landbedeckung | Copernicus DEM, CORINE Land Cover | Gelände, Höhenmodell | Freie Nutzung mit Quellenangabe |
-| Küsten, Flüsse, Grundgeometrie | Natural Earth | Europa-Ebene | Gemeinfrei |
+| Höhen (seit M3 im Einsatz) | AWS Terrain Tiles (Terrarium; zusammengesetzt u. a. aus EU-DEM, SRTM, GMTED2010, ETOPO1) | Geländetyp der Orte im Kernraum | Namensnennung der Quelldaten, siehe Abschnitt 5 |
+| Küsten, Seen, Flüsse, Grundgeometrie | Natural Earth 1:10 Mio. (seit M3: Version 5.1.2) | Karte des Kernraums (seit M3), Europa-Ebene | Gemeinfrei |
+| Orte der Gegenwart (Lage, Namen, Alternativnamen) | GeoNames `cities1000` (seit M3) | Auswahl, Lage und Namen der Orte im Kernraum, Grundlage der Kreise | CC BY 4.0, Namensnennung, siehe Abschnitt 5 |
 | Detailgeometrie Gegenwart | OpenStreetMap | Nur als Referenz oder nach juristischer Prüfung | ODbL – Share-Alike-Pflichten für abgeleitete Datenbanken beachten |
 | Ortsnamen und historische Zugehörigkeit | Historische Ortsverzeichnisse, Genealogisches Ortsverzeichnis | Namensschichten | Lizenzen je Verzeichnis prüfen |
 | Bilder | Deutsche Digitale Bibliothek, Europeana, Archive, Museen | Lexikon, dokumentarische Ebene | Rechte je Objekt; bevorzugt gemeinfreie Werke |
@@ -84,3 +86,81 @@
 - Opferzahlen erscheinen **nur** als historische Information (Lexikon, Chronik), nie als Spielwert.
 - Wirtschafts- und Bevölkerungsdaten früherer Jahrhunderte sind Schätzungen; das Spiel kalibriert gegen **Korridore**, nicht gegen exakte Werte.
 - Gegenwartsdaten sind auf den Stand Mai 2025 eingefroren und werden per Update fortgeschrieben.
+
+## 5. Verwendete Geodaten (Stand M3)
+
+Die Karte des Kernraums (Meilenstein M3) beruht auf drei offenen Quellen. Die **Rohdaten liegen
+nicht im Repository**: `python3 tools/geodaten/geodaten.py holen` lädt sie in den Zwischenspeicher
+`build/geodaten-cache/` und prüft jede Datei gegen ihren SHA-256-Wert in
+[`tools/geodaten/quellen.json`](../../tools/geodaten/quellen.json) (dort auch URL, Lizenz und
+Quellenangabe je Datei). Eingecheckt sind nur abgeleitete Daten: die zugeschnittene Geometrie
+(`data/karte/geometrie/`), die Orte und Kreise (`data/tabellen/orte.csv`, `kreise.csv`) und die
+erzeugte Karte (`data/karte/provinzen.png`, `fluesse.png`, `definition.csv`). Verfahren:
+[tools/geodaten/README.md](../../tools/geodaten/README.md).
+
+| Quelle | Fassung und Bezug | Verwendung | Lizenz |
+|---|---|---|---|
+| **Natural Earth** 1:10 Mio.: `ne_10m_land`, `ne_10m_minor_islands`, `ne_10m_lakes`, `ne_10m_lakes_europe`, `ne_10m_rivers_lake_centerlines`, `ne_10m_rivers_europe`; `ne_10m_admin_0_boundary_lines_land` nur für die Vorschau | Version 5.1.2, GeoJSON-Fassung aus dem Repository `nvkelso/natural-earth-vector` (Tag `v5.1.2`) | Land und Inseln, Seen, Flüsse; heutige Grenzen als Hilfe beim Zeichnen des Kernraums | gemeinfrei (Public Domain) |
+| **GeoNames** `cities1000` (Orte mit mindestens 1.000 Einwohnern) | Stand März 2020, bezogen über das npm-Paket `cities-with-1000@1.0.4` (Datei `cities1000.txt`) | Auswahl und Lage der 4.481 Orte ohne Daten, ihre Namen (deutsche Namen nur, wenn in den Alternativnamen belegt), Grundlage der Kreise | Creative Commons Namensnennung 4.0 International (CC BY 4.0) |
+| **Terrain Tiles** (Terrarium-PNG) auf AWS Open Data (`elevation-tiles-prod`) | Zoomstufe 8, 224 Kacheln (Auflösung etwa 400 m) | Höhen → Geländetyp (`gelaende`) der Orte | Namensnennung der Quelldaten nach tilezen/joerd (siehe unten) |
+
+### Namensnennungen
+
+Die folgenden Angaben gehören in die Spielinformationen (Lizenzregister, Abschnitt 3) jeder
+Fassung, die die Karte, die Orte oder das daraus abgeleitete Gelände enthält.
+
+**GeoNames** – CC BY 4.0 verlangt Namensnennung, einen Hinweis auf die Lizenz und einen Hinweis
+auf Änderungen:
+
+> Ortsdaten: GeoNames (https://www.geonames.org), Auszug „cities1000“, Stand März 2020,
+> lizenziert unter Creative Commons Namensnennung 4.0 International
+> (https://creativecommons.org/licenses/by/4.0/). Für EINIGKEIT verändert: Auswahl der Orte,
+> Namen teils aus den Alternativnamen, Koordinaten gerundet und teils auf das nächste Landpixel
+> verschoben, Zuordnung zu Landschaften und Kreisen.
+
+Jeder Ort aus GeoNames nennt in seiner `quelle` die `geonameid`. Die Testdatei
+`tools/geodaten/testdaten/cities_test.txt` enthält gekürzte Zeilen aus `cities1000` (gleiche
+Lizenz) und eine erfundene Testzeile.
+
+**Natural Earth** – gemeinfrei, eine Namensnennung ist nicht vorgeschrieben, aber erbeten:
+
+> Made with Natural Earth. Free vector and raster map data @ naturalearthdata.com.
+
+**Terrain Tiles** – die Kacheln setzen sich aus vielen Höhenmodellen zusammen, von denen mehrere
+eine Namensnennung verlangen. Nach
+[tilezen/joerd, docs/attribution.md](https://github.com/tilezen/joerd/blob/master/docs/attribution.md)
+(„Required attribution“; die Fassung mit „Mapzen“ gilt nur für den früheren Mapzen-Dienst) lautet
+sie:
+
+> - ArcticDEM terrain data DEM(s) were created from DigitalGlobe, Inc., imagery and funded under
+>   National Science Foundation awards 1043681, 1559691, and 1542736;
+> - Australia terrain data © Commonwealth of Australia (Geoscience Australia) 2017;
+> - Austria terrain data © offene Daten Österreichs – Digitales Geländemodell (DGM) Österreich;
+> - Canada terrain data contains information licensed under the Open Government Licence – Canada;
+> - Europe terrain data produced using Copernicus data and information funded by the European
+>   Union - EU-DEM layers;
+> - Global ETOPO1 terrain data U.S. National Oceanic and Atmospheric Administration
+> - Mexico terrain data source: INEGI, Continental relief, 2016;
+> - New Zealand terrain data Copyright 2011 Crown copyright (c) Land Information New Zealand and
+>   the New Zealand Government (All rights reserved);
+> - Norway terrain data © Kartverket;
+> - United Kingdom terrain data © Environment Agency copyright and/or database right 2015. All
+>   rights reserved;
+> - United States 3DEP (formerly NED) and global GMTED2010 and SRTM terrain data courtesy of the
+>   U.S. Geological Survey.
+
+Übernommen ist die vollständige Liste, wie joerd sie vorgibt; welche dieser Quellen in den 224
+Kacheln des Kartenausschnitts tatsächlich steckt, ist nicht ausgewertet.
+
+### Grenzen der Quellen
+
+- Natural Earth 1:10 Mio. hat an Küsten Lagefehler bis etwa 1 km; Haffe und Bodden sind Meer,
+  das Frische Haff ist als See geführt, und kleinere Flüsse wie Havel, Lahn, Lech und Pregel
+  fehlen.
+- GeoNames `cities1000` beschreibt die **Gegenwart**: heutige Orte ab 1.000 Einwohnern mit
+  heutigen Namen und Verwaltungscodes. Historische Namen und Zugehörigkeiten sind daraus nicht
+  abzulesen; wo deutsche Namen fehlen oder heutige Formen stehen, ist das in
+  [data/README.md](../../data/README.md#orte-des-kernraums-seit-m3) vermerkt. Die Lizenzlage des
+  npm-Pakets selbst (MIT) betrifft nur die Verpackung; für die Daten gilt CC BY 4.0.
+- Die Höhen bei Zoomstufe 8 sind grob (Gipfel 2–8 % zu niedrig); sie genügen für die Einordnung
+  des Geländes, nicht für Einzelhöhen.
