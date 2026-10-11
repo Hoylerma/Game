@@ -510,7 +510,7 @@ Referenz: Standardlauf (500.000 Blöcke, 3 Jahre, Seed 1648) endet mit der Prüf
 
 | Kriterium | Prüfung | Stand (Ende M4) |
 |---|---|---|
-| **500.000 Blöcke, Median ≤ 2,0 s je Spieljahr** auf 4 Kernen | `uhrwerk-cli lasttest` in der CI (Job „Lasttest“, Grenze 3 s als Puffer) und in der Entwicklungsumgebung. Der Referenz-PC aus Kapitel 02 (6 Kerne/12 Threads) ist schneller als beide | **erfüllt:** 0,33–0,40 s mit 4 Kernen, 0,88 s mit einem; auf dem GitHub-Runner (nur 2 vCPU) 0,52 s (Abschnitt 6.3) |
+| **500.000 Blöcke, Median ≤ 2,0 s je Spieljahr** auf 4 Kernen | `uhrwerk-cli lasttest` in der CI (Job „Lasttest“, Grenze 3 s als Puffer) und in der Entwicklungsumgebung. Der Referenz-PC aus Kapitel 02 (6 Kerne/12 Threads) ist schneller als beide | **erfüllt:** 0,33–0,40 s mit 4 Kernen, 0,88 s mit einem; auf dem GitHub-Runner (nur 2 vCPU) 0,52 s (Abschnitt 6.3). Seit M5 mit Wirtschaft etwa doppelt so viel, weiter weit unter der Grenze ([wirtschaft.md, Abschnitt 6](wirtschaft.md#6-leistung)) |
 | Prüfsummen bitgleich unter GCC, Clang, MSVC | CI-Job Determinismus (100 Jahre Testdaten und Lasttest) | **erfüllt** |
 | Prüfsummen gleich bei 1, 2, 3, 4, 8 Threads | Unit-Test, `--vergleich` (CTest und CI-Job Lasttest), `determinismus` (zweiter Lauf mit einem Thread); ThreadSanitizer ohne Befund | **erfüllt** |
 | Exakte Buchführung | Test: Bevölkerungsänderung = Geburten − Sterbefälle − Seuchentote − Auswanderung (bitgenau in `Fixed`); Σ Zuzug = Σ Wegzug | **erfüllt** |

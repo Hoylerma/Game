@@ -489,6 +489,22 @@ also für 4.542 Orte unter 0,1 s je Spieljahr mit einem Thread. Märkte und Staa
 Gewicht. Ziel: **Lasttest mit 500.000 Blöcken bleibt unter 2 s je Spieljahr** (M4: 0,33–0,40 s
 mit 4 Kernen), erwartet höchstens +30 %.
 
+**Messung** (Schritt 5, Release-Build, 4 Kerne, alle 4.542 Orte mit Daten und alle 77 Märkte aktiv):
+Auf derselben Maschine braucht M4 0,29–0,30 s je Spieljahr, M5 0,56–0,64 s (Median 0,58 s; mit einem
+Thread 1,26 s) – **erfüllt**, aber etwa doppelt so viel wie geschätzt. Callgrind zeigt, warum: Die
+Ortsrechnung kostet rund 34.000 Instruktionen je Ort und Monat statt der geschätzten 200
+Festkomma-Operationen, weil jede Multiplikation und Division 128 Bit breit rechnet und der Einkauf die
+Warenkörbe je Beruf mehrfach durchläuft; sie macht etwa 40 % eines Spieljahres aus, verteilt über viele
+Zeilen ohne einzelnen Engpass. Das Einschwingen beim Aufbau (60 Monate für 4.542 Orte, ein Thread)
+dauert 1,0 s statt 0,15 s; mit den 60 Orten der Testregion sind es wenige Millisekunden. Optimierungen
+(Warenkorb je Schicht statt je Beruf, zulässige Betriebe je Ort vorberechnen, Einschwingen parallel)
+lohnen sich erst, wenn die Grenze näher rückt.
+
+Determinismus: gleiche Prüfsummen mit GCC und Clang bei 1–4 Threads (100 Jahre `5db13a66d63e6079`,
+Lasttest 50.000 Blöcke/2 Jahre `6545173879bcb4f9`), MSVC im CI-Job „Determinismus“; Unit-Tests,
+Lasttest und Bilanz laufen ohne Befund unter ThreadSanitizer sowie AddressSanitizer mit
+UndefinedBehaviorSanitizer.
+
 ## 7. Balancing-Bericht
 
 ```
