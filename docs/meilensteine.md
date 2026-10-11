@@ -97,11 +97,11 @@ prüfen und mit Quellen belegen, ohne jede `.chron`-Datei von Hand zu schreiben.
 **Ergebnis**
 - **Kernraum** als von Hand gezeichneter Umriss (`data/karte/geometrie/kernraum.geojson`,
   398 Punkte; jede Grenzentscheidung ist in [tools/geodaten/README.md](../tools/geodaten/README.md)
-  begründet) mit **4.541 Orten in 627 Kreisen** (4–12 Orte je Kreis, Median 7). Die Orte erzeugt
+  begründet) mit **4.542 Orten in 626 Kreisen** (4–12 Orte je Kreis, Median 7). Die Orte erzeugt
   `tools/geodaten/orte.py` reproduzierbar aus GeoNames `cities1000`; Gelände kommt aus einem
   Höhenmodell (AWS Terrain Tiles), die Fläche aus der Karte (1–1.147 km², Median 169 km²).
 - **Orte ohne Daten** in Kern, Brücke und Archivar: Die 60 Orte der Testregion behalten ihre
-  historischen Daten; die übrigen 4.481 stehen auf der Karte, nehmen aber an der Simulation nicht
+  historischen Daten; die übrigen 4.482 stehen auf der Karte, nehmen aber an der Simulation nicht
   teil. **Kreise** als neue Ebene (`history/kreise/`, Kartenmodus „Kreise“).
 - **Geometrie** aus Natural Earth 1:10 Mio. (Land mit Inseln wie Rügen, Fehmarn und den
   Friesischen Inseln, 88 Seen, 177 Flüsse in sechs Rängen), zugeschnitten mit
@@ -112,20 +112,20 @@ prüfen und mit Quellen belegen, ohne jede `.chron`-Datei von Hand zu schreiben.
   pixelgleich unter Python 3.10 und 3.13; Kernraum-Land zu 99,96 % Orten zugeordnet.
 - **Godot:** Großkarte mit drei Zoomstufen (Staatsnamen fern, Kreisnamen mittel, Ortsnamen nah),
   abgestuften Grenzen, Schraffur für Orte ohne Daten und sechs Kartenmodi.
-- Tests: 101 doctest-Fälle im Kern, Archivar 31, Kartengenerator 88, Geodaten 94, Godot-
-  Einheitentest 162 Prüfungen, Rauchtest und Klicktest; alle in der CI.
+- Tests: 101 doctest-Fälle im Kern, Archivar 33, Kartengenerator 88, Geodaten 96, Godot-
+  Einheitentest 170 Prüfungen, Rauchtest und Klicktest; alle in der CI.
 
 **Abnahme im Einzelnen**
 
 | Kriterium | Stand |
 |---|---|
-| Jeder Ort hat eine zusammenhängende Fläche | erfüllt: 4.541 von 4.541 Orten haben genau eine Fläche (4er-Nachbarschaft), vom Generator erzwungen und unabhängig nachgezählt |
+| Jeder Ort hat eine zusammenhängende Fläche | erfüllt: 4.542 von 4.542 Orten haben genau eine Fläche (4er-Nachbarschaft), vom Generator erzwungen und unabhängig nachgezählt |
 | Generator unter einer Minute | erfüllt: 13–21 s für die volle Karte (Python 3.10 und 3.13 mit numpy, 4 Kerne); `orte.py` braucht für Orte und Kreise zusätzlich 70–120 s |
 | 60 Bilder/s auf einem Mittelklasse-Rechner | **nicht nachgewiesen.** Gemessen werden konnte nur mit Software-Rendering (llvmpipe auf 4 Prozessorkernen, ohne Grafikkarte): 16–33 Bilder/s, in der Übersicht 27–33, beim Schwenken und Zoomen in mittlerer und naher Stufe 16–18. Fast die ganze Zeit geht dort in das Rastern des Kartenshaders (etwa 40 ms je Bild). Die Messung auf einem Rechner mit Grafikkarte steht aus (`game/tests/leistung_test.gd`, siehe [game/README.md](../game/README.md#leistung)). |
-| Klickerkennung für alle Orte richtig (automatischer Test) | erfüllt: `game/tests/klick_test.gd` erkennt 4.541 von 4.541 Orten in allen drei Zoomstufen, dazu rund 120 Klicks über echte Eingabeereignisse; läuft in der CI |
+| Klickerkennung für alle Orte richtig (automatischer Test) | erfüllt: `game/tests/klick_test.gd` erkennt 4.542 von 4.542 Orten in allen drei Zoomstufen, dazu rund 120 Klicks über echte Eingabeereignisse; läuft in der CI |
 
 **Bekannte Grenzen**
-- **Neue Orte ohne historische Daten:** 4.481 der 4.541 Orte haben keinen Besitzer, keine
+- **Neue Orte ohne historische Daten:** 4.482 der 4.542 Orte haben keinen Besitzer, keine
   Bevölkerung und keine Konfession. Die Karte des Kernraums steht, die Daten für 1648 gibt es
   nur für die Testregion. Daten für 1848 sind Teil von M7; für den übrigen Kernraum um 1648 ist
   noch kein Meilenstein festgelegt.
@@ -134,25 +134,29 @@ prüfen und mit Quellen belegen, ohne jede `.chron`-Datei von Hand zu schreiben.
   Klammerzusatz (82 Unterscheidungen gleichnamiger Orte wie „Mühlhausen (Böhmen)“, 9 heutige
   Zusätze wie „Schwedt (Oder)“ oder „Kempten (Allgäu)“, 10 Namen der Testregion aus M1 wie
   „Frankfurt (Oder)“), 3 mit „in Bayern“, Namen aus Zusammenlegungen des 20. Jahrhunderts
-  (Wuppertal, Garmisch-Partenkirchen, Castrop-Rauxel, Villingen-Schwenningen). Für 917 Orte
-  außerhalb von Deutschland, Österreich und Liechtenstein belegt GeoNames keinen deutschen Namen;
-  sie tragen den heutigen Namen (etwa Lubawa für Löbau). Bei den Kreisnamen sind es 13 mit „Bad “
+  (Wuppertal, Garmisch-Partenkirchen, Castrop-Rauxel, Villingen-Schwenningen). 896 Orte
+  außerhalb von Deutschland, Österreich und Liechtenstein tragen den heutigen Namen, weil
+  `exonyme.csv` für sie keinen belegten deutschen Namen enthält (etwa Lubawa für Löbau; meist
+  führt GeoNames keinen, manche Alternativnamen sind bewusst nicht übernommen, siehe
+  [tools/geodaten/README.md](../tools/geodaten/README.md#bekannte-grenzen)). Bei den Kreisnamen sind es 13 mit „Bad “
   und 27 mit Klammer. Deutsche Namen werden nur mit Beleg ergänzt (`tools/geodaten/exonyme.csv`).
 - **Auswahl nach heutiger Bedeutung:** GeoNames führt Orte mit heute mindestens 1.000
   Einwohnern (Stand 2020). Industriestädte des 19. und 20. Jahrhunderts sind daher stärker
   vertreten, abgegangene Orte fehlen. Die Kreise sind räumlich gebildet, keine historischen
   Verwaltungseinheiten, und heißen nach dem heute größten Ort.
-- **Kreisfarben:** Die Palette mit 12 Farben trennt benachbarte Kreise nicht überall: 56 von
-  1.750 benachbarten Kreispaaren haben dieselbe Farbe, 55 davon an der Grenze zweier
-  Landschaftsdateien (z. B. Brandenburg an der Havel und Wittenberg). Im Kartenmodus „Kreise“
+- **Kreisfarben:** Die Palette mit 12 Farben trennt benachbarte Kreise nicht überall: 61 von
+  1.747 benachbarten Kreispaaren haben dieselbe Farbe, 60 davon an der Grenze zweier
+  Landschaftsdateien (z. B. Karlsruhe und Mannheim). Im Kartenmodus „Kreise“
   sind die Kreisgrenzen deshalb immer gezeichnet.
 - 41 kleine Teilflächen des Kernraum-Landes (zusammen etwa 274 km², meist Inseln ohne
   GeoNames-Ort wie Rømø, Nordstrand, Poel und Amrum) gehören zu keinem Ort.
-- Die Referenz-Prüfsumme nach 100 Jahren hat sich geändert (`5548a5fa80f75c0d` statt
-  `8d44cf792e143bb0`): Der Rechentag eines Ortes hängt von seinem Index ab, und 56 der 60 Orte
-  mit Daten haben durch die eingefügten Orte einen anderen. Die Ergebnisse weichen nur wenig ab
-  (Bevölkerung nach 100 Jahren 627.709 statt 627.721).
-- Für M4 vorgemerkt: `step_day` prüft jeden Tag den Rechentag aller 4.541 Orte; 100 Jahre
+- Die Referenz-Prüfsumme nach 100 Jahren hat sich geändert (`40de8c42e8f7a0ff` statt
+  `8d44cf792e143bb0`): Der Rechentag eines Ortes hängt von seinem Index ab, und die meisten der
+  60 Orte mit Daten haben durch die eingefügten Orte einen anderen. Die Ergebnisse weichen nur
+  wenig ab (Bevölkerung nach 100 Jahren 627.680 statt 627.721). Der erste M3-Stand mit 4.541
+  Orten ergab `5548a5fa80f75c0d`; die Korrekturen nach dem Review (Osterode am Harz neu in
+  `goettingen`) verschoben die Indizes von 38 Orten mit Daten um eins.
+- Für M4 vorgemerkt: `step_day` prüft jeden Tag den Rechentag aller 4.542 Orte; 100 Jahre
   dauern im Release-Build 0,52 s statt 0,225 s mit 60 Orten.
 
 ### M4 – Bevölkerung und Lasttest

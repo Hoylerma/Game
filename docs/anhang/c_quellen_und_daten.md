@@ -101,7 +101,7 @@ erzeugte Karte (`data/karte/provinzen.png`, `fluesse.png`, `definition.csv`). Ve
 | Quelle | Fassung und Bezug | Verwendung | Lizenz |
 |---|---|---|---|
 | **Natural Earth** 1:10 Mio.: `ne_10m_land`, `ne_10m_minor_islands`, `ne_10m_lakes`, `ne_10m_lakes_europe`, `ne_10m_rivers_lake_centerlines`, `ne_10m_rivers_europe`; `ne_10m_admin_0_boundary_lines_land` nur für die Vorschau | Version 5.1.2, GeoJSON-Fassung aus dem Repository `nvkelso/natural-earth-vector` (Tag `v5.1.2`) | Land und Inseln, Seen, Flüsse; heutige Grenzen als Hilfe beim Zeichnen des Kernraums | gemeinfrei (Public Domain) |
-| **GeoNames** `cities1000` (Orte mit mindestens 1.000 Einwohnern) | Stand März 2020, bezogen über das npm-Paket `cities-with-1000@1.0.4` (Datei `cities1000.txt`) | Auswahl und Lage der 4.481 Orte ohne Daten, ihre Namen (deutsche Namen nur, wenn in den Alternativnamen belegt), Grundlage der Kreise | Creative Commons Namensnennung 4.0 International (CC BY 4.0) |
+| **GeoNames** `cities1000` (Orte mit mindestens 1.000 Einwohnern) | Stand März 2020, bezogen über das npm-Paket `cities-with-1000@1.0.4` (Datei `cities1000.txt`) | Auswahl und Lage der 4.482 Orte ohne Daten, ihre Namen (deutsche Namen nur, wenn in den Alternativnamen belegt), Grundlage der Kreise | Creative Commons Namensnennung 4.0 International (CC BY 4.0) |
 | **Terrain Tiles** (Terrarium-PNG) auf AWS Open Data (`elevation-tiles-prod`) | Zoomstufe 8, 224 Kacheln (Auflösung etwa 400 m) | Höhen → Geländetyp (`gelaende`) der Orte | Namensnennung der Quelldaten nach tilezen/joerd (siehe unten) |
 
 ### Namensnennungen

@@ -10,8 +10,8 @@ Vor Version 1.0 kann sich jede Schnittstelle ändern.
 
 ### Meilenstein M3 – Karte des Kernraums
 
-Die Karte zeigt den ganzen Kernraum mit **4.541 Orten in 627 Kreisen**. Historische Daten haben
-weiterhin nur die 60 Orte der Testregion; die übrigen 4.481 sind *Orte ohne Daten*. Ergebnis und
+Die Karte zeigt den ganzen Kernraum mit **4.542 Orten in 626 Kreisen**. Historische Daten haben
+weiterhin nur die 60 Orte der Testregion; die übrigen 4.482 sind *Orte ohne Daten*. Ergebnis und
 bekannte Grenzen: [docs/meilensteine.md](docs/meilensteine.md#m3--karte-des-kernraums-).
 
 - **Verträge:** [chronik-skript.md](docs/technik/chronik-skript.md) Abschnitt 6 in Fassung M3
@@ -31,7 +31,7 @@ bekannte Grenzen: [docs/meilensteine.md](docs/meilensteine.md#m3--karte-des-kern
   Orte ohne Daten in den Modi Politisch, Dichte, Konfession und Verwüstung.
 - **Archivar:** Spalte `kreis` in `orte.csv`, neue Tabelle `kreise.csv` → `history/kreise/`;
   Orte ohne Zeilen in `besitz.csv` und `bevoelkerung.csv` sind Orte ohne Daten; Bericht mit Orten
-  mit und ohne Daten und Kreisen. **31 Tests** (vorher 25).
+  mit und ohne Daten und Kreisen. **33 Tests** (vorher 25).
 - **Geodaten** (`tools/geodaten/`, neu, Python mit numpy):
   - `geodaten.py holen` lädt die offenen Quellen nur in den Zwischenspeicher
     `build/geodaten-cache/` und prüft sie gegen die SHA-256-Werte in `quellen.json`: Natural Earth
@@ -43,36 +43,60 @@ bekannte Grenzen: [docs/meilensteine.md](docs/meilensteine.md#m3--karte-des-kern
     `pruefen` vergleicht mit den Quellen, `vorschau` zeichnet eine Prüfkarte.
   - `data/karte/geometrie/kernraum.geojson` von Hand: 398 Punkte, jede Grenzentscheidung
     begründet, 93 Prüforte mit erwarteter Lage.
-  - `orte.py` erzeugt die Orte und Kreise des Kernraums: aus 14.411 Kandidaten 4.481 neue Orte
-    (gewichtete Poisson-Scheibe nach Bedeutung, Inseln, Lückenfüllung), 627 Kreise mit 4–12 Orten
+  - `orte.py` erzeugt die Orte und Kreise des Kernraums: aus 14.404 Kandidaten 4.482 neue Orte
+    (gewichtete Poisson-Scheibe nach Bedeutung, Inseln, Lückenfüllung), 626 Kreise mit 4–12 Orten
     (Median 7) in 77 Landschaften; deutsche Namen nur mit Beleg in den GeoNames-Alternativnamen
-    (952 belegte Einträge in `exonyme.csv`), Gelände aus dem Höhenmodell, Fläche aus der Karte.
-  - **94 Tests** ohne Netz und ohne Zwischenspeicher (ein Volltest mit `ORTE_VOLLTEST=1`).
+    (978 belegte Einträge in `exonyme.csv`), Gelände aus dem Höhenmodell, Fläche aus der Karte.
+  - **96 Tests** ohne Netz und ohne Zwischenspeicher (ein Volltest mit `ORTE_VOLLTEST=1`).
 - **Kartengenerator v2** (jetzt mit numpy): Rasterung der Polygone nach der Pixelmitte,
   Flächenarten Kernraum-Land, Meer, Binnengewässer und Ausland, Zuordnung zum nächsten Ort mit
   deterministischem Rauschen (nur Grundrechenarten), genau eine zusammenhängende Fläche je Ort,
   Flussebene, Beschriftungspunkt, Fläche in Festkomma, Vorschau mit Ausschnitt und Namen. Die
-  volle Karte (4096 × 3329 Pixel, 4.541 Orte) entsteht in 13–21 s; Kernraum-Land ist zu
+  volle Karte (4096 × 3329 Pixel, 4.542 Orte) entsteht in 13–21 s; Kernraum-Land ist zu
   99,96 % Orten zugeordnet. Ausgabe byte-gleich unter Python 3.10 (numpy 2.2.6) und 3.13 (numpy
   2.5.3). **88 Tests.**
-- **Daten:** 4.541 Orte (60 mit, 4.481 ohne Daten) in 77 Orts- und 77 Kreisdateien; neuer
+- **Daten:** 4.542 Orte (60 mit, 4.482 ohne Daten) in 77 Orts- und 77 Kreisdateien; neuer
   Geländetyp `hochgebirge` (jetzt 11); `karte.chron` in Fassung M3 (1,8–23,5 °O × 45,1–56,2 °N,
   4096 × 3329 Pixel, etwa 0,37 km je Pixel, `max_radius_km = 32`). `flaeche` aller Orte kommt aus
   der Karte (1–1.147 km², Median 169 km²); die 60 Orte der Testregion sind sonst unverändert.
 - **Godot:** Großkarte mit Meer, Seen, Ausland und Flüssen, Schraffur „Keine Daten“, Staats-,
   Kreis- und Ortsgrenzen nach Zoomstufe; Namen nach Zoomstufe (Staaten fern, Kreise mittel, Orte
   nah) ohne Überlappung; Kartenmodus „Kreise“ (Taste Z); Ortsinfo und Tooltip für Orte ohne
-  Daten; Startoption `--zoom`. Tests: `unit_test.gd` (162 Prüfungen), `smoke_test.gd` mit den
-  Kartendaten v2, neu `klick_test.gd` (jeder der 4.541 Orte in drei Zoomstufen richtig erkannt,
-  dazu rund 120 Klicks über echte Eingabeereignisse) und `leistung_test.gd`.
+  Daten; Startoption `--zoom`. Tests: `unit_test.gd` (170 Prüfungen), `smoke_test.gd` mit den
+  Kartendaten v2, neu `klick_test.gd` (jeder der 4.542 Orte in drei Zoomstufen richtig erkannt,
+  dazu rund 120 Klicks über echte Eingabeereignisse und Prüfungen der Namen an den Panels) und
+  `leistung_test.gd`.
 - **CI:** Job „Python-Werkzeuge“ mit numpy (2.2.6 unter Python 3.10, 2.5.3 unter 3.13) und den
   Tests der Geodaten; Godot-Job zusätzlich mit Einheiten- und Klicktest, alle Protokolle werden
   auf Skriptfehler geprüft; zweiter Screenshot im Kartenmodus „Kreise“ (mittlere Zoomstufe).
-- **Referenz-Prüfsumme** nach 100 Jahren jetzt `5548a5fa80f75c0d` (vorher `8d44cf792e143bb0`):
+- **Referenz-Prüfsumme** nach 100 Jahren jetzt `40de8c42e8f7a0ff` (vorher `8d44cf792e143bb0`):
   Der Rechentag eines Ortes hängt von seinem Index ab (Index mod 28 + 1), und durch die
-  eingefügten Orte ohne Daten haben 56 der 60 Orte mit Daten einen anderen Rechentag.
-  Bevölkerung nach 100 Jahren 627.709 statt 627.721. GCC, Clang und ASan liefern dieselbe
+  eingefügten Orte ohne Daten haben die meisten der 60 Orte mit Daten einen anderen Rechentag.
+  Bevölkerung nach 100 Jahren 627.680 statt 627.721. GCC, Clang und ASan liefern dieselbe
   Prüfsumme. Kreise gehören bewusst nicht zur Prüfsumme (unveränderlicher Inhalt).
+- **Korrekturen nach dem Review von M3:**
+  - Kern: Daten nur noch streng als `JJJJ.MM.TT` (genau 4, 2 und 2 Ziffern), wie im Archivar und
+    in der Spezifikation; `1701.1.18` ist jetzt ein Ladefehler.
+  - Archivar: Zeilenumbruch (LF oder einzelnes CR) in Namen, Kurznamen, Herrschern und Quellen
+    ist ein Fehler (der Kern lehnt ihn in Zeichenketten ab); Jahr `0000` ist ungültig; eine
+    Fläche, die im Festkomma des Kerns 0 wird (unter etwa 0,0000076 km²), ist ein Fehler statt
+    einer Warnung.
+  - Geodaten: neue Hilfstabelle `einwohner.csv` für Verwaltungssitze, die GeoNames mit 0
+    Einwohnern führt (Osterode am Harz und Avesnes-sur-Helpe werden nicht mehr von Gittelde
+    bzw. Avesnelles verdrängt); Orte im Trentino entfallen (`AUSLAND_GEBIETE`, statt
+    Castelfondo jetzt Laurein in Deutschnonsberg); „ Markt“ und „ Stadt“ bleiben, wenn sie zum
+    Namen gehören (Stetten am Kalten Markt); 26 neue belegte Namen in `exonyme.csv` (Meißen,
+    Großarl, Straßwalchen, Großpetersdorf, Laßnitzhöhe sowie deutsche Namen wie Horitz,
+    Eibenschitz, Mariensee, Laurein); die Lückenfüllung bricht auf Land fern von jedem Ort
+    nicht mehr mit `OverflowError` ab; der Fluss Mies/Beraun heißt nicht mehr „Angel“.
+  - Godot: Namen werden neu gesetzt, wenn ein Panel Größe, Lage oder Sichtbarkeit ändert
+    (keine Namen mehr unter Legende und Ortsinfo); der Kreisname bleibt, wenn sein
+    gleichnamiger Hauptort ausgewählt ist; eine ausgewählte Hauptstadt behält ihren Stil; die
+    Legende „Kreise“ zählt nur Kreise mit Orten; ohne Kreisdaten zeigt die mittlere Stufe
+    Ortsnamen.
+  - Die Referenz-Prüfsumme des ersten M3-Stands (`5548a5fa80f75c0d`, 4.541 Orte) ändert sich
+    dadurch auf `40de8c42e8f7a0ff`: Osterode am Harz in `goettingen` verschiebt die Indizes der
+    38 Orte mit Daten in den Dateien `lausitz` bis `thueringen`.
 
 ### Meilenstein M2 – Datenpipeline „Archivar“
 

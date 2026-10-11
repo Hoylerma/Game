@@ -86,7 +86,7 @@ Ein Ort, der zum Startdatum keines der vier Simulationsfelder (`besitzer`, `bevo
 `konfession`, `verwuestung`) hat, steht nur auf der Karte: Besitzer `kNone`, keine
 Bevölkerungsblöcke (`Location::has_data()` ist `false`), Verwüstung 0. Hat ein Ort nur einen Teil
 der Felder, ist das ein Ladefehler; Hauptstädte müssen Orte mit Daten sein. So lässt sich die
-Karte des ganzen Kernraums (4.541 Orte) laden, obwohl erst 60 Orte historische Daten haben.
+Karte des ganzen Kernraums (4.542 Orte) laden, obwohl erst 60 Orte historische Daten haben.
 
 **Kreise** (seit M3, [Abschnitt 3.9](chronik-skript.md#39-historykreisechron-seit-m3)):
 `World::districts` (`District { id, name, source }`) aus `history/kreise/`, Verweis
@@ -159,7 +159,8 @@ nicht zur Prüfsumme: Neue oder anders gebildete Kreise in den Daten ändern die
 nicht. Orte ohne Daten gehen über Besitzer (`kNone`) und Blockzahl (0) ein. Kommen Orte hinzu,
 ändert sich die Referenz trotzdem, weil sich die Zahl der Orte und die Rechentage nachfolgender
 Orte verschieben. Referenz nach 100 Jahren mit `data/` (Seed 1648): seit M3
-`5548a5fa80f75c0d`, vorher `8d44cf792e143bb0` (Begründung in
+`40de8c42e8f7a0ff` (erster M3-Stand mit 4.541 Orten `5548a5fa80f75c0d`), vorher
+`8d44cf792e143bb0` (Begründung in
 [data/README.md](../../data/README.md#prüfung)).
 
 **Geprüft wird das an drei Stellen:**
@@ -258,7 +259,7 @@ Strom-Kennung:
   Teilflächen (meist Inseln ohne GeoNames-Ort) gehören zu keinem Ort.
 - **Godot** lädt `provinzen.png` als Bild (für Klicks) und als Textur. Der Shader holt je Pixel
   Farbe, Besitzer und Kreis des Ortes aus zwei Nachschlagetexturen mit 256 Spalten (eine Zeile
-  wäre für 4.541 Orte zu breit), die `get_map_colors(modus)`, `get_location_owner_indices()` und
+  wäre für 4.542 Orte zu breit), die `get_map_colors(modus)`, `get_location_owner_indices()` und
   `get_location_kreis_indices()` füllen. Meer, Binnengewässer und Ausland haben eigene Farben,
   Orte ohne Daten (Alpha 0 in den datenabhängigen Kartenmodi) eine Schraffur „Keine Daten“.
   Staats-, Kreis- und Ortsgrenzen entstehen im Shader durch Nachbarvergleich und werden je nach

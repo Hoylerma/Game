@@ -118,9 +118,9 @@ Ergänzt durch zwei Querschnittsprinzipien: **Geschichte als lebendiges System**
 **Meilensteine M1 (technischer Durchstich), M2 (Datenpipeline) und M3 (Karte des Kernraums) sind
 abgeschlossen**, siehe [Meilensteinplan](docs/meilensteine.md). Der ganze Weg von den Daten bis
 zum Bild steht: Tabellen → Archivar → Chronik-Skript → Simulationskern „Uhrwerk“ → GDExtension →
-Godot-Oberfläche. Die Karte zeigt seit M3 den **ganzen Kernraum mit 4.541 Orten in 627 Kreisen**;
+Godot-Oberfläche. Die Karte zeigt seit M3 den **ganzen Kernraum mit 4.542 Orten in 626 Kreisen**;
 historische Daten (Besitzer, Bevölkerung, Konfession, Verwüstung) haben aber weiterhin nur die
-**60 Orte der Testregion um 1648**. Die übrigen 4.481 Orte sind *Orte ohne Daten*: Sie stehen auf
+**60 Orte der Testregion um 1648**. Die übrigen 4.482 Orte sind *Orte ohne Daten*: Sie stehen auf
 der Karte, nehmen an der Simulation aber nicht teil. Das ganze Spiel aus dem Design-Dokument ist
 das noch nicht.
 
@@ -129,12 +129,12 @@ das noch nicht.
 | Simulationskern „Uhrwerk“ (`core/`) | Festkomma, Zufallsströme, Kalender, Parser und Lader für das Chronik-Skript mit datierter Historie, Tagestick mit Demografie, Wirtschaft (Steuern, Staatskasse), Seuchen und Kriegsverwüstung, Steuerbefehl, Chronik, Prüfsumme; seit M3 Orte ohne Daten und Kreise |
 | Kommandozeile `uhrwerk-cli` (`cli/`) | Daten prüfen, Überblick (Orte mit und ohne Daten, Kreise), Simulationsläufe mit Bericht und Chronik, Determinismusprüfung |
 | Tests (`tests/`) | 101 Testfälle (doctest) und Integrationsläufe mit den echten Daten |
-| Spieldaten (`data/`) | Lesezeichen „Der Westfälische Frieden“ (24.10.1648): 16 Staaten, 4.541 Orte in 627 Kreisen, davon 60 mit historischen Daten (Mittel- und Nordostdeutschland); gepflegt in Tabellen mit Quelle und Sicherheit je Angabe |
-| Archivar (`tools/archivar/`) | erzeugt `data/history/` (Staaten, Kreise, Orte) aus den Tabellen und prüft Verweise, Lücken und Ausreißer; 31 Tests |
-| Geodaten (`tools/geodaten/`) | lädt und pinnt die offenen Quellen (Natural Earth, GeoNames, Terrain Tiles), schneidet Land, Seen und Flüsse zu und erzeugt mit `orte.py` die Orte und Kreise des Kernraums; 94 Tests |
+| Spieldaten (`data/`) | Lesezeichen „Der Westfälische Frieden“ (24.10.1648): 16 Staaten, 4.542 Orte in 626 Kreisen, davon 60 mit historischen Daten (Mittel- und Nordostdeutschland); gepflegt in Tabellen mit Quelle und Sicherheit je Angabe |
+| Archivar (`tools/archivar/`) | erzeugt `data/history/` (Staaten, Kreise, Orte) aus den Tabellen und prüft Verweise, Lücken und Ausreißer; 33 Tests |
+| Geodaten (`tools/geodaten/`) | lädt und pinnt die offenen Quellen (Natural Earth, GeoNames, Terrain Tiles), schneidet Land, Seen und Flüsse zu und erzeugt mit `orte.py` die Orte und Kreise des Kernraums; 96 Tests |
 | Kartengenerator (`tools/kartengenerator/`) | erzeugt Ort-ID-Bild mit Flächenart (4096 × 3329 Pixel), Flussebene und Zuordnungstabelle aus Geometrie und Orten (Python mit numpy, 13–21 s); 88 Tests |
 | Brücke (`bridge/`) | GDExtension mit der Klasse `UhrwerkSimulation` |
-| Godot-Prototyp (`game/`) | Großkarte des Kernraums mit sechs Kartenmodi, Zoomstufen mit Staats-, Kreis- und Ortsnamen, Staatspanel mit Steuersatz, Ortsinfo, Chronik, Legende; Einheitentest (162 Prüfungen), Rauchtest, Klicktest (4.541 von 4.541 Orten in drei Zoomstufen) |
+| Godot-Prototyp (`game/`) | Großkarte des Kernraums mit sechs Kartenmodi, Zoomstufen mit Staats-, Kreis- und Ortsnamen, Staatspanel mit Steuersatz, Ortsinfo, Chronik, Legende; Einheitentest (170 Prüfungen), Rauchtest, Klicktest (4.542 von 4.542 Orten in drei Zoomstufen, Namen und Panels) |
 | CI (`.github/workflows/`) | Linux (GCC, Clang), Windows (MSVC), Prüfsummenvergleich, Formatierung, Python-Werkzeuge (Python 3.10 und 3.13 mit numpy), Godot mit Einheiten-, Rauch- und Klicktest und Screenshots |
 
 Noch **nicht** umgesetzt ist alles Weitere aus dem Design-Dokument – historische Daten für den
@@ -264,9 +264,9 @@ godot --path game                         # Spiel starten
 godot --editor --path game                # im Editor öffnen
 
 # Tests der Godot-Seite (wie in der CI): Hilfsklassen, Brücke und Kartendaten, Klickerkennung
-godot --headless --path game --script res://tests/unit_test.gd     # „UNIT OK (162 Prüfungen)“
+godot --headless --path game --script res://tests/unit_test.gd     # „UNIT OK (170 Prüfungen)“
 godot --headless --path game --script res://tests/smoke_test.gd    # „SMOKE OK“
-godot --headless --path game --script res://tests/klick_test.gd    # „KLICK OK 4541/4541“
+godot --headless --path game --script res://tests/klick_test.gd    # „KLICK OK 4542/4542“
 
 # Screenshot ohne Bildschirm (Software-Rendering über Xvfb)
 xvfb-run -a -s "-screen 0 1600x900x24" \
