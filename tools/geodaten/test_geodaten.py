@@ -10,6 +10,7 @@ erzeugten Geometriedateien) auf die Regeln aus docs/technik/chronik-skript.md, A
 
 from __future__ import annotations
 
+import dataclasses
 import hashlib
 import io
 import json
@@ -268,6 +269,9 @@ class TestFluesse(unittest.TestCase):
         self.assertEqual(
             geodaten._name({"name": "x", "name_de": "Nysa Kłodzka"}, geodaten.FLUSSNAMEN_DE), "Glatzer Neiße"
         )
+        # Natural Earth benennt den Lauf Mže/Berounka falsch als Úhlava (name_alt Berounka).
+        eigenschaften = {"name": "Uhlava", "name_de": "Úhlava", "name_alt": "Berounka"}
+        self.assertEqual(geodaten._name(eigenschaften, geodaten.FLUSSNAMEN_DE), "Beraun")
         self.assertEqual(
             geodaten._name({"name": "Schweriner See", "name_de": "Schweriner"}, geodaten.SEENAMEN_DE), "Schweriner See"
         )
@@ -612,6 +616,13 @@ class TestStaedte(unittest.TestCase):
         )
         mit_schweiz = staedte.kandidaten(self.liste, kernraum, land, seen, ausland=frozenset())
         self.assertIn("Basel", [x.stadt.name for x in mit_schweiz])
+        # Orte im Trentino (Provinz Trient) entfallen wie Orte aus dem Ausland, auch im Umriss.
+        trient = dataclasses.replace(self.liste[1], name="Fondo", staat="IT", admin1="17", admin2="TN")
+        bozen = dataclasses.replace(trient, geonameid=2, name="Proveis", admin2="BZ")
+        namen = [x.stadt.name for x in staedte.kandidaten([trient, bozen], kernraum, land, seen)]
+        self.assertEqual(namen, ["Proveis"])
+        namen = [x.stadt.name for x in staedte.kandidaten([trient], kernraum, land, seen, ausland_gebiete=frozenset())]
+        self.assertEqual(namen, ["Fondo"])
 
 
 # ─── Eingecheckte Daten ─────────────────────────────────────────────────────

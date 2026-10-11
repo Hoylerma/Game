@@ -191,14 +191,14 @@ ort wuest_pohlom {
     quelle   = "GeoNames (CC BY 4.0), geonameid 3067324; deutscher Name aus den GeoNames-Alternativnamen (heute Pustá Polom); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort dolni_zivotice {
-    name     = "Dolní Životice"
+ort schoenstein {
+    name     = "Schönstein"
     gelaende = huegelland
     lage     = { 17.7797 49.8973 }
     flaeche  = 181
     stadt    = nein
     kreis    = kr_troppau
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3076621; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3076621; deutscher Name aus den GeoNames-Alternativnamen (heute Dolní Životice); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort freistadt_oesterreichisch_schlesien {

@@ -14,10 +14,20 @@ ort northeim {
     name     = "Northeim"
     gelaende = huegelland
     lage     = { 10 51.7066 }
-    flaeche  = 201
+    flaeche  = 195
     stadt    = ja
     kreis    = kr_northeim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2861814; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
+ort osterode_am_harz {
+    name     = "Osterode am Harz"
+    gelaende = huegelland
+    lage     = { 10.2509 51.7269 }
+    flaeche  = 123
+    stadt    = ja
+    kreis    = kr_northeim
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2856405; Name nach GeoNames; Einwohnerzahl für die Auswahl aus einwohner.csv; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort einbeck {
@@ -74,7 +84,7 @@ ort gittelde {
     name     = "Gittelde"
     gelaende = mittelgebirge
     lage     = { 10.1878 51.7984 }
-    flaeche  = 163
+    flaeche  = 115
     stadt    = nein
     kreis    = kr_northeim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2920268; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
@@ -154,7 +164,7 @@ ort herzberg_am_harz {
     name     = "Herzberg am Harz"
     gelaende = mittelgebirge
     lage     = { 10.3394 51.6555 }
-    flaeche  = 170
+    flaeche  = 125
     stadt    = nein
     kreis    = kr_duderstadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2905496; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
@@ -174,7 +184,7 @@ ort gieboldehausen {
     name     = "Gieboldehausen"
     gelaende = flachland
     lage     = { 10.2162 51.6096 }
-    flaeche  = 189
+    flaeche  = 174
     stadt    = nein
     kreis    = kr_duderstadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2920645; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"

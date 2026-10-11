@@ -4,6 +4,10 @@ geonameid;name_de;geprueft;heute
 2761369;Wien;ja;Vienna
 2774326;Klagenfurt;ja;Klagenfurt am Wörthersee
 2778441;Gmünd in Kärnten;ja;Gmünd
+2777627;Großpetersdorf;ja;Grosspetersdorf
+2764172;Straßwalchen;ja;Strasswalchen
+2777905;Großarl;ja;Grossarl
+2772879;Laßnitzhöhe;ja;Lassnitzhöhe
 2803242;Amel;ja;Amblève
 2803073;Arel;ja;Arlon
 2802583;Bastnach;nein;Bastogne
@@ -99,7 +103,7 @@ geonameid;name_de;geprueft;heute
 3074764;Grusbach;ja;Hrušovany nad Jevišovkou
 3074723;Humpoletz;ja;Humpolec
 3074677;Auspitz;ja;Hustopeče
-3074615;Eibenschütz;nein;Ivančice
+3074615;Eibenschitz;ja;Ivančice
 3074603;Gablonz;ja;Jablonec nad Nisou
 3074598;Gabel an der Adler;nein;Jablonné nad Orlicí
 3074597;Deutsch Gabel;ja;Jablonné v Podještědí
@@ -348,6 +352,20 @@ geonameid;name_de;geprueft;heute
 3077543;Chroustowitz;ja;Chroustovice
 3079159;Bohdalau;ja;Bohdalov
 3079203;Blowitz;ja;Blovice
+3075493;Horitz;ja;Hořice
+3061658;Zditz;ja;Zdice
+3075044;Hostomitz;ja;Hostomice
+3064043;Tremoschnitz;ja;Třemošnice
+3077501;Chwaletitz;ja;Chvaletice
+3065033;Straschitz;ja;Strašice
+3074102;Jistebnitz;ja;Jistebnice
+3073059;Kowarow;ja;Kovářov
+3070580;Mirotitz;ja;Mirotice
+3069773;Nezamislitz;ja;Nezamyslice
+3071302;Lissitz;ja;Lysice
+3067398;Protiwanow;ja;Protivanov
+3075091;Hostialkow;ja;Hošťálková
+3076621;Schönstein;ja;Dolní Životice
 2911584;Neuhaldensleben;ja;Haldensleben I
 2906268;Heppenheim;ja;Heppenheim an der Bergstrasse
 2867714;München;ja;Munich
@@ -368,6 +386,7 @@ geonameid;name_de;geprueft;heute
 2929802;Erbach im Odenwald;ja;Erbach
 2954603;Auerbach in der Oberpfalz;ja;Auerbach
 2958533;Alfeld (Leine);ja;Alfeld
+2872155;Meißen;ja;Meissen
 2625070;Apenrade;ja;Aabenraa
 2621258;Gravenstein;ja;Gråsten
 2620964;Hadersleben;ja;Haderslev
@@ -483,6 +502,7 @@ geonameid;name_de;geprueft;heute
 3166777;Mühlwald;ja;Selva dei Molini
 6534789;Schnals;ja;Senales
 3166537;Schlanders;ja;Silandro
+3175038;Laurein;ja;Lauregno
 3165912;Tarvis;ja;Tarvisio
 3165124;Taufers im Münstertal;ja;Tubre
 3164065;Sterzing;ja;Vipiteno
@@ -692,6 +712,8 @@ geonameid;name_de;geprueft;heute
 3094690;Kröben;nein;Krobia
 3094672;Krockow;nein;Krokowa
 3094633;Crossen an der Oder;ja;Krosno Odrzańskie
+3092199;Messow;ja;Maszewo
+3101951;Beutnitz;ja;Bytnica
 3094625;Krotoschin;nein;Krotoszyn
 3094639;Kraschnitz;ja;Krośnice
 767435;Kruglanken;ja;Kruklanki
@@ -839,6 +861,7 @@ geonameid;name_de;geprueft;heute
 3088096;Parchwitz;ja;Prochowice
 3088065;Neustadt in Oberschlesien;ja;Prudnik
 3088034;Praust;ja;Pruszcz Gdański
+3087758;Mariensee;ja;Przywidz
 3088017;Prechlau;ja;Przechlewo
 3087958;Prillwitz;ja;Przelewice
 3087954;Primkenau;ja;Przemków
@@ -1035,6 +1058,7 @@ geonameid;name_de;geprueft;heute
 3084085;Schivelbein;ja;Świdwin
 3084084;Freiburg in Schlesien;ja;Świebodzice
 3084062;Schwiebus;ja;Świebodzin
+3091974;Mittwalde;ja;Międzylesie
 3084055;Bad Flinsberg;ja;Świeradów-Zdrój
 3084020;Schwirsen;ja;Świerzno
 3083955;Swinemünde;ja;Świnoujście
@@ -1097,7 +1121,7 @@ geonameid;name_de;geprueft;heute
 3200016;Oberburg in Steiermark;ja;Gornji Grad
 3199523;Großlupp;nein;Grosuplje
 3199171;Idria;ja;Idrija
-3199162;Igg;nein;Ig
+3199162;Iggdorf;ja;Ig
 3199131;Illyrisch Feistritz;ja;Ilirska Bistrica
 3198647;Assling;ja;Jesenice
 3198365;Stein;ja;Kamnik

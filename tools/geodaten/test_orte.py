@@ -78,6 +78,15 @@ class TestNamen(unittest.TestCase):
         self.assertEqual(orte.bereinige_name("Lutherstadt Wittenberg"), "Wittenberg")
         self.assertEqual(orte.bereinige_name("Ostseebad Kühlungsborn"), "Kühlungsborn")
         self.assertEqual(orte.bereinige_name("Eisleben Lutherstadt"), "Eisleben")
+        self.assertEqual(orte.bereinige_name("Aspang Markt"), "Aspang")
+        self.assertEqual(orte.bereinige_name("Zwettl Stadt"), "Zwettl")
+        self.assertEqual(orte.bereinige_name("Straßburg-Stadt"), "Straßburg")
+        self.assertEqual(orte.bereinige_name("Sankt Peter in der Au Markt"), "Sankt Peter in der Au")
+        # Zusatz gehört zum Namen: nach Artikel oder in einer Fügung mit „am“, „im“ …
+        self.assertEqual(orte.bereinige_name("Weil der Stadt"), "Weil der Stadt")
+        self.assertEqual(orte.bereinige_name("Stetten am Kalten Markt"), "Stetten am Kalten Markt")
+        self.assertEqual(orte.bereinige_name("Neukirchen am Markt"), "Neukirchen am Markt")
+        self.assertEqual(orte.bereinige_name("Markt"), "Markt")
         self.assertEqual(orte.bereinige_name("Neumarkt Stadt"), "Neumarkt")
         # „der Stadt“ bleibt, ein Zusatz allein bleibt, „Bad“ wird nicht entfernt
         self.assertEqual(orte.bereinige_name("Haus der Stadt"), "Haus der Stadt")
@@ -258,6 +267,31 @@ class TestAuswahlhilfen(unittest.TestCase):
         # gleiche Landschaft: voller Radius; andere Landschaft: Radius × Faktor
         self.assertFalse(g.frei(13.1, 52.0, abstand + 0.5, "brandenburg", 0.8))
         self.assertTrue(g.frei(13.1, 52.0, abstand + 0.5, "pommern", 0.8))
+
+    def test_lueckenfuellung_fern_von_jedem_ort(self) -> None:
+        # Land, das weiter als FUELL_KARTE_KM von jedem Ort liegt (Abstand unendlich), bricht die
+        # Lückenfüllung nicht ab: Die Suche ist auf FUELL_SUCHE_MAX_KM begrenzt.
+        from types import SimpleNamespace
+
+        karte = orte.kr.Karte(
+            breite=300,
+            hoehe=100,
+            laenge_min=10.0,
+            laenge_max=11.4,
+            breite_min=50.5,
+            breite_max=51.0,
+            bezugsbreite=50.75,
+            max_radius_km=30,
+        )
+        art = np.full((100, 300), orte.kr.KERNLAND, dtype=np.uint8)
+        grundlage = SimpleNamespace(karte=karte, raster=SimpleNamespace(karte=karte, art=art))
+        raster = orte.Raster(grundlage, np.zeros((100, 300), dtype=np.int64), 0, {0: 7000.0})  # type: ignore[arg-type]
+        a = orte.Kandidat(stadt("A", gid=1), True, "x", 6.0, 2, "10.0500", "50.7500")
+        b = orte.Kandidat(stadt("B", gid=2), True, "x", 3.0, 4, "10.1500", "50.7500")  # 7 km neben A
+        landschaften = {"x": orte.Landschaft("x", "X", "X", 1.0, "Test")}
+        auswahl = orte.waehle_orte([a, b], [], raster, landschaften)
+        self.assertEqual(auswahl.herkunft, {1: "scheibe", 2: "fuellung"})
+        self.assertGreater(auswahl.leere_zellen, 0)  # der Osten bleibt ohne Kandidaten
 
 
 # ─── Gelände ────────────────────────────────────────────────────────────────
@@ -460,6 +494,23 @@ class TestHilfstabellen(unittest.TestCase):
             self.assertTrue(name.strip() == name and heute.strip() == heute, gid)
             self.assertNotIn(gid, self.tabellen.ausschluesse)
 
+    def test_einwohner(self) -> None:
+        # Verwaltungssitze, die GeoNames mit 0 Einwohnern führt (Osterode am Harz, Avesnes-sur-Helpe)
+        einwohner = self.tabellen.einwohner
+        self.assertEqual(einwohner[2856405][:2], ("Osterode am Harz", 20000))
+        self.assertIn(3035698, einwohner)
+        for gid, (name, zahl, beleg) in einwohner.items():
+            self.assertTrue(name and zahl >= 1 and beleg, gid)
+            self.assertNotIn(gid, self.tabellen.ausschluesse)
+        osterode = staedte.Kandidat(stadt("Osterode am Harz", staat="DE", code="PPLA3", einwohner=0, gid=2856405), True, 0.0)
+        andere = staedte.Kandidat(stadt("Gittelde", staat="DE", einwohner=2087, gid=7), True, 0.0)
+        neu = orte.setze_einwohner([osterode, andere], einwohner)
+        self.assertEqual([k.stadt.einwohner for k in neu], [20000, 2087])
+        self.assertGreater(orte.bedeutung(neu[0].stadt), orte.bedeutung(andere.stadt))
+        falsch = staedte.Kandidat(stadt("Osterode", gid=2856405), True, 0.0)
+        with self.assertRaises(orte.OrteFehler):  # Name passt nicht mehr zum GeoNames-Eintrag
+            orte.setze_einwohner([falsch], einwohner)
+
     def test_gelaende_gebiete(self) -> None:
         gebiete = orte.lade_gelaende_gebiete(HIER / "gelaende_gebiete.csv", gelaendetypen())
         self.assertGreater(len(gebiete), 5)
@@ -471,8 +522,14 @@ class TestHilfstabellen(unittest.TestCase):
 
         with tempfile.TemporaryDirectory() as tmp:
             ordner = Path(tmp)
-            for name in ("landschaften.csv", "landschaften_dateien.csv", "exonyme.csv", "ausschluesse.csv"):
+            for name in ("landschaften.csv", "landschaften_dateien.csv", "exonyme.csv", "ausschluesse.csv", "einwohner.csv"):
                 (ordner / name).write_bytes((HIER / name).read_bytes())
+            orte.lade_hilfstabellen(ordner)  # unverändert: in Ordnung
+            text = (ordner / "einwohner.csv").read_text(encoding="utf-8")
+            (ordner / "einwohner.csv").write_text(text + "1;Testdorf;0;Beleg\n", encoding="utf-8")
+            with self.assertRaises(orte.OrteFehler):  # Einwohnerzahl < 1
+                orte.lade_hilfstabellen(ordner)
+            (ordner / "einwohner.csv").write_text(text, encoding="utf-8")
             text = (ordner / "exonyme.csv").read_text(encoding="utf-8")
             (ordner / "exonyme.csv").write_text(text + "2761369;Wien;ja;Vienna\n", encoding="utf-8")
             with self.assertRaises(orte.OrteFehler):  # doppelte geonameid

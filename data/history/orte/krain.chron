@@ -260,14 +260,14 @@ ort borovnica {
     quelle   = "GeoNames (CC BY 4.0), geonameid 3203677; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort ig {
-    name     = "Ig"
+ort iggdorf {
+    name     = "Iggdorf"
     gelaende = mittelgebirge
     lage     = { 14.5289 45.9603 }
     flaeche  = 148
     stadt    = nein
     kreis    = kr_laibach
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3199162; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3199162; deutscher Name aus den GeoNames-Alternativnamen (heute Ig); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort log_pri_brezovici {

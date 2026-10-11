@@ -824,7 +824,7 @@ ort gargazon {
     name     = "Gargazon"
     gelaende = mittelgebirge
     lage     = { 11.2016 46.5846 }
-    flaeche  = 173
+    flaeche  = 183
     stadt    = nein
     kreis    = kr_meran
     quelle   = "GeoNames (CC BY 4.0), geonameid 3176305; deutscher Name aus den GeoNames-Alternativnamen (heute Gargazzone); Gelände aus Höhenmodell; Fläche aus der Karte"
@@ -874,7 +874,7 @@ ort ulten {
     name     = "Ulten"
     gelaende = hochgebirge
     lage     = { 11.0042 46.5483 }
-    flaeche  = 181
+    flaeche  = 177
     stadt    = nein
     kreis    = kr_schlanders
     quelle   = "GeoNames (CC BY 4.0), geonameid 6534791; deutscher Teil des zweisprachigen GeoNames-Namens (Ultimo - Ulten); Gelände aus Höhenmodell; Fläche aus der Karte"
@@ -900,6 +900,16 @@ ort taufers_im_muenstertal {
     quelle   = "GeoNames (CC BY 4.0), geonameid 3165124; deutscher Name aus den GeoNames-Alternativnamen (heute Tubre); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
+ort laurein {
+    name     = "Laurein"
+    gelaende = hochgebirge
+    lage     = { 11.0618 46.4543 }
+    flaeche  = 109
+    stadt    = nein
+    kreis    = kr_schlanders
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3175038; deutscher Name aus den GeoNames-Alternativnamen (heute Lauregno); Gelände aus Höhenmodell; Fläche aus der Karte"
+}
+
 ort martell {
     name     = "Martell"
     gelaende = hochgebirge
@@ -914,7 +924,7 @@ ort bozen {
     name     = "Bozen"
     gelaende = mittelgebirge
     lage     = { 11.3398 46.4907 }
-    flaeche  = 185
+    flaeche  = 186
     stadt    = ja
     kreis    = kr_bozen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3181913; deutscher Name aus den GeoNames-Alternativnamen (heute Bolzano); Gelände aus Höhenmodell; Fläche aus der Karte"
@@ -924,7 +934,7 @@ ort kaltern {
     name     = "Kaltern"
     gelaende = hochgebirge
     lage     = { 11.2462 46.4133 }
-    flaeche  = 132
+    flaeche  = 152
     stadt    = nein
     kreis    = kr_bozen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3181215; deutscher Name aus den GeoNames-Alternativnamen (heute Caldaro sulla Strada del Vino); Gelände aus Höhenmodell; Fläche aus der Karte"
@@ -968,14 +978,4 @@ ort welschnofen {
     stadt    = nein
     kreis    = kr_bozen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3172192; deutscher Name aus den GeoNames-Alternativnamen (heute Nova Levante); Gelände aus Höhenmodell; Fläche aus der Karte"
-}
-
-ort castelfondo {
-    name     = "Castelfondo"
-    gelaende = hochgebirge
-    lage     = { 11.1179 46.4562 }
-    flaeche  = 136
-    stadt    = nein
-    kreis    = kr_bozen
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3179693; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 }

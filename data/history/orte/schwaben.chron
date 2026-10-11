@@ -629,14 +629,14 @@ ort leibertingen {
     quelle   = "GeoNames (CC BY 4.0), geonameid 2879335; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort stetten_am_kalten {
-    name     = "Stetten am Kalten"
+ort stetten_am_kalten_markt {
+    name     = "Stetten am Kalten Markt"
     gelaende = mittelgebirge
     lage     = { 9.0777 48.1242 }
     flaeche  = 97
     stadt    = nein
     kreis    = kr_sigmaringen
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2827216; Name nach GeoNames ohne modernen Zusatz (Stetten am Kalten Markt); Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2827216; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort kaufbeuren {

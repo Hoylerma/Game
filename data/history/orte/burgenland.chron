@@ -280,13 +280,13 @@ ort stegersbach {
 }
 
 ort grosspetersdorf {
-    name     = "Grosspetersdorf"
+    name     = "Großpetersdorf"
     gelaende = huegelland
     lage     = { 16.3178 47.239 }
     flaeche  = 178
     stadt    = nein
     kreis    = kr_guessing
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2777627; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2777627; Name Großpetersdorf aus den GeoNames-Alternativnamen (GeoNames: Grosspetersdorf); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort eberau {

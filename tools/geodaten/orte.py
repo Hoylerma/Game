@@ -10,7 +10,8 @@ erhalten nur einen Kreis und ihre Fläche aus der Karte. Neue Orte sind *Orte oh
 Ablauf (Einzelheiten und Begründungen in README.md, Abschnitt „Orte des Kernraums“):
 
 1. Kandidaten: Siedlungen aus cities1000 im Kernraum (PPL, PPLA … PPLA4, PPLC), ohne die Einträge
-   aus ``ausschluesse.csv`` (moderne Gründungen, Kunstnamen) und ohne die Entsprechungen der M1-Orte.
+   aus ``ausschluesse.csv`` (moderne Gründungen, Kunstnamen) und ohne die Entsprechungen der M1-Orte;
+   Einwohnerzahlen, die GeoNames für Verwaltungssitze nicht führt, aus ``einwohner.csv``.
 2. Landschaft je Kandidat aus ``landschaften.csv`` (Staat und Verwaltungscodes).
 3. Auswahl: gewichtete Poisson-Scheibe (wichtige Orte zuerst, kleinerer Mindestabstand für
    Verwaltungssitze und große Orte, größerer in den Säumen), dann je Insel ohne Ort der wichtigste
@@ -37,12 +38,13 @@ import argparse
 import csv
 import io
 import math
+import re
 import sys
 import textwrap
 import time
 import unicodedata
 from collections.abc import Iterable, Sequence
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from pathlib import Path
 from typing import Any
 
@@ -76,6 +78,7 @@ LANDSCHAFTEN = HIER / "landschaften.csv"
 LANDSCHAFTEN_DATEIEN = HIER / "landschaften_dateien.csv"
 EXONYME = HIER / "exonyme.csv"
 AUSSCHLUESSE = HIER / "ausschluesse.csv"
+EINWOHNER = HIER / "einwohner.csv"
 
 # ─── Parameter ──────────────────────────────────────────────────────────────
 
@@ -129,6 +132,10 @@ FUELL_RADIUS_KM = 15.0
 FUELL_MIN_ABSTAND_KM = 6.0
 #: Auflösung der Abstandskarte für die Lückenfüllung (Blöcke aus N × N Kartenpixeln).
 FUELL_BLOCK = 4
+#: Die Abstandskarte trägt Abstände nur bis FUELL_KARTE_KM um jeden Ort ein (weiter entfernte Blöcke
+#: bleiben unendlich); die Kandidatensuche für einen Block reicht höchstens FUELL_SUCHE_MAX_KM weit.
+FUELL_KARTE_KM = 40.0
+FUELL_SUCHE_MAX_KM = 100.0
 #: Ein Kandidat entspricht einem M1-Ort, wenn er höchstens so weit entfernt liegt und gleich heißt.
 M1_ABSTAND_KM = 5.0
 #: Höchstabstand, um die Lage eines Ortes im Wasser auf das nächste Kernraum-Land-Pixel zu setzen.
@@ -200,6 +207,10 @@ NAMENSZUSAETZE_VORN = (
     "Gemeinde ",
 )
 NAMENSZUSAETZE_HINTEN = (" Lutherstadt", " Stadt", "-Stadt", " Markt", " Kurort")
+#: Ein Zusatz am Ende bleibt, wenn er zum Namen gehört: nach einem Artikel („Weil der Stadt“) oder in
+#: einer Fügung mit zusammengezogener Präposition und höchstens einem Wort („Stetten am Kalten Markt“).
+#: „Sankt Peter in der Au Markt“ verliert den Zusatz dagegen, „in der Au“ ist vollständig.
+_ZUSATZ_GEHOERT_ZUM_NAMEN = re.compile(r"(?:^|\s)(?:(?:am|im|zum|zur|beim|vom)(?:\s+\S+)?|der|dem|den|des)$")
 
 
 class OrteFehler(Exception):
@@ -276,10 +287,11 @@ class Hilfstabellen:
     landschaften: dict[str, Landschaft]
     exonyme: dict[int, tuple[str, bool, str]]  # geonameid → (name_de, geprüft, heutiger Name)
     ausschluesse: dict[int, tuple[str, str, str]]  # geonameid → (Name, Art, Grund)
+    einwohner: dict[int, tuple[str, int, str]] = field(default_factory=dict)  # geonameid → (Name, Einwohner, Beleg)
 
 
 def lade_hilfstabellen(ordner: Path = HIER) -> Hilfstabellen:
-    """Liest landschaften.csv, landschaften_dateien.csv, exonyme.csv und ausschluesse.csv und prüft sie."""
+    """Liest landschaften.csv, landschaften_dateien.csv, exonyme.csv, ausschluesse.csv und einwohner.csv."""
     landschaften: dict[str, Landschaft] = {}
     for z in lies_csv(ordner / LANDSCHAFTEN_DATEIEN.name, ("landschaft", "name", "kurzname", "abstand", "kommentar")):
         kennung = z["landschaft"]
@@ -330,7 +342,37 @@ def lade_hilfstabellen(ordner: Path = HIER) -> Hilfstabellen:
         ):
             raise OrteFehler(f"ausschluesse.csv: geonameid {gid}: doppelt, Art unbekannt oder Grund leer")
         ausschluesse[gid] = (z["name"], z["art"], z["grund"])
-    return Hilfstabellen(regeln, landschaften, exonyme, ausschluesse)
+    einwohner: dict[int, tuple[str, int, str]] = {}
+    for z in lies_csv(ordner / EINWOHNER.name, ("geonameid", "name", "einwohner", "beleg")):
+        try:
+            gid, zahl = int(z["geonameid"]), int(z["einwohner"])
+        except ValueError:
+            raise OrteFehler(f"einwohner.csv: geonameid oder Einwohnerzahl keine Ganzzahl ({z['geonameid']!r})") from None
+        if gid in einwohner or zahl < 1 or not z["name"] or not z["beleg"]:
+            raise OrteFehler(f"einwohner.csv: geonameid {gid}: doppelt, Einwohnerzahl < 1, Name oder Beleg leer")
+        einwohner[gid] = (z["name"], zahl, z["beleg"])
+    return Hilfstabellen(regeln, landschaften, exonyme, ausschluesse, einwohner)
+
+
+def setze_einwohner(
+    kandidaten: Sequence[staedte.Kandidat], einwohner: dict[int, tuple[str, int, str]]
+) -> list[staedte.Kandidat]:
+    """Ersetzt die GeoNames-Einwohnerzahl nach einwohner.csv (Verwaltungssitze, die GeoNames mit 0 führt).
+
+    Die Zahl wirkt auf Bedeutung, Stadt-Näherung und Hauptort eines Kreises. Fehler, wenn der Name in
+    der Tabelle nicht mehr zum GeoNames-Eintrag passt.
+    """
+    ergebnis = []
+    for k in kandidaten:
+        eintrag = einwohner.get(k.stadt.geonameid)
+        if eintrag is not None:
+            if eintrag[0] != k.stadt.name:
+                raise OrteFehler(
+                    f"einwohner.csv: {k.stadt.geonameid}: Name {eintrag[0]!r}, GeoNames-Name ist {k.stadt.name!r}"
+                )
+            k = replace(k, stadt=replace(k.stadt, einwohner=eintrag[1]))
+        ergebnis.append(k)
+    return ergebnis
 
 
 def landschaft_nach_regeln(regeln: Sequence[Zuordnungsregel], staat: str, admin: Sequence[str]) -> str | None:
@@ -367,14 +409,19 @@ def kennung_aus_name(name: str) -> str:
 
 
 def bereinige_name(name: str) -> str:
-    """Entfernt moderne Namenszusätze („Lutherstadt “, „Ostseebad “ …) und „ Stadt“ am Ende (nicht bei „der Stadt“)."""
+    """Entfernt moderne Namenszusätze („Lutherstadt “, „Ostseebad “ …, „ Stadt“, „ Markt“ am Ende).
+
+    Ein Zusatz am Ende bleibt, wenn er Teil des Namens ist (``_ZUSATZ_GEHOERT_ZUM_NAMEN``): „Weil der
+    Stadt“, „Stetten am Kalten Markt“.
+    """
     ergebnis = name
     for zusatz in NAMENSZUSAETZE_VORN:
         if ergebnis.startswith(zusatz) and len(ergebnis) > len(zusatz):
             ergebnis = ergebnis[len(zusatz) :]
     for zusatz in NAMENSZUSAETZE_HINTEN:
-        if ergebnis.endswith(zusatz) and not ergebnis.endswith(" der Stadt") and len(ergebnis) > len(zusatz):
-            ergebnis = ergebnis[: -len(zusatz)]
+        rest = ergebnis[: -len(zusatz)]
+        if ergebnis.endswith(zusatz) and rest.strip() and not _ZUSATZ_GEHOERT_ZUM_NAMEN.search(rest):
+            ergebnis = rest
     return ergebnis.strip()
 
 
@@ -724,7 +771,7 @@ class Abstandskarte:
         self.karte = karte
         self.abstand = np.full((self.h2, self.b2), np.inf)
 
-    def setze(self, laenge: float, breite: float, radius_km: float = 40.0) -> None:
+    def setze(self, laenge: float, breite: float, radius_km: float = FUELL_KARTE_KM) -> None:
         """Berücksichtigt einen Ort (bis ``radius_km`` um ihn herum)."""
         karte = self.karte
         cx = (laenge - karte.laenge_min) / self.grad_x
@@ -838,7 +885,8 @@ def waehle_orte(
             break
         l0, b0 = float(karte.laengen[x]), float(karte.breiten[y])
         beste: tuple[tuple[float, float, int], Kandidat] | None = None
-        for j in kgitter.nahe(l0, b0, dmax):
+        # dmax ist unendlich, wenn kein Ort bis FUELL_KARTE_KM entfernt liegt: Suche begrenzen.
+        for j in kgitter.nahe(l0, b0, min(dmax, FUELL_SUCHE_MAX_KM)):
             k = kandidaten[j]
             s = k.stadt
             if s.geonameid in gewaehlt_ids:
@@ -1332,7 +1380,7 @@ def erzeuge(melde: Any = print) -> Ergebnis:
             raise OrteFehler(f"Datei {d!r} der M1-Orte fehlt in landschaften_dateien.csv")
 
     # Kandidaten
-    alle = staedte.kandidaten()
+    alle = setze_einwohner(staedte.kandidaten(), tabellen.einwohner)
     staedte_nach_id = {k.stadt.geonameid: k.stadt for k in alle}
     fehler = pruefe_exonyme(tabellen.exonyme, staedte_nach_id)
     if fehler:
@@ -1462,6 +1510,7 @@ def erzeuge(melde: Any = print) -> Ergebnis:
         quelle = (
             f"{QUELLE_PRAEFIX}{s.geonameid}; {wahl.herkunft}"
             + ("; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte" if name != wahl.name else "")
+            + ("; Einwohnerzahl für die Auswahl aus einwohner.csv" if s.geonameid in tabellen.einwohner else "")
             + ("; Lage auf das nächste Landpixel gesetzt" if verschoben else "")
             + "; Gelände aus Höhenmodell; Fläche aus der Karte"
         )

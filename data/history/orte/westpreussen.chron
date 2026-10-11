@@ -350,14 +350,14 @@ ort kolbudy {
     quelle   = "GeoNames (CC BY 4.0), geonameid 3095833; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort przywidz {
-    name     = "Przywidz"
+ort mariensee {
+    name     = "Mariensee"
     gelaende = huegelland
     lage     = { 18.3212 54.1952 }
     flaeche  = 164
     stadt    = nein
     kreis    = kr_koscierzyna
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3087758; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3087758; deutscher Name aus den GeoNames-Alternativnamen (heute Przywidz); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort stara_kiszewa {

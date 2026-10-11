@@ -631,13 +631,13 @@ ort gleisdorf {
 }
 
 ort lassnitzhoehe {
-    name     = "Lassnitzhöhe"
+    name     = "Laßnitzhöhe"
     gelaende = huegelland
     lage     = { 15.5833 47.0667 }
     flaeche  = 138
     stadt    = nein
     kreis    = kr_graz
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2772879; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2772879; Name Laßnitzhöhe aus den GeoNames-Alternativnamen (GeoNames: Lassnitzhöhe); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort passail {

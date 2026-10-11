@@ -7,8 +7,8 @@
 # benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 # historischen Verwaltungseinheiten.
 
-kreis kr_ath {
-    name   = "Ath"
+kreis kr_tournai {
+    name   = "Tournai"
     quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
 }
 
@@ -24,11 +24,6 @@ kreis kr_charleroi {
 
 kreis kr_maubeuge {
     name   = "Maubeuge"
-    quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
-}
-
-kreis kr_cambrai {
-    name   = "Cambrai"
     quelle = "räumlich gebildet (M3), keine historische Verwaltungseinheit"
 }
 

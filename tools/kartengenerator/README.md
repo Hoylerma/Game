@@ -179,7 +179,7 @@ numpy 2.2 im selben Bereich):
 
 | Datensatz | Wandzeit | Spitzenspeicher |
 |---|---|---|
-| volle Karte 4096 × 3329 mit den Daten von M3 (4.541 Orte), `--pruefen` | 13–21 s | ≈ 610 MB |
+| volle Karte 4096 × 3329 mit den Daten von M3 (4.542 Orte), `--pruefen` | 13–21 s | ≈ 610 MB |
 | davon: Geometrie / Zuordnung / Bereinigung / Beschriftungspunkte | ≈ 5–10 / 2–4 / 2,7–5 / 1,7–3,7 s | |
 | volle Karte 4096 × 3329 (echte Geometrie), 4.500 synthetische Orte | ≈ 10 s | ≈ 620 MB |
 | davon: Geometrie rastern + Rauschen + Flüsse | ≈ 3 s | |

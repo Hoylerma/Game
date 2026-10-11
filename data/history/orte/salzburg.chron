@@ -60,13 +60,13 @@ ort mattsee {
 }
 
 ort strasswalchen {
-    name     = "Strasswalchen"
+    name     = "Straßwalchen"
     gelaende = mittelgebirge
     lage     = { 13.2553 47.9795 }
     flaeche  = 215
     stadt    = nein
     kreis    = kr_salzburg
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2764172; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2764172; Name Straßwalchen aus den GeoNames-Alternativnamen (GeoNames: Strasswalchen); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort hof_bei_salzburg {
@@ -190,13 +190,13 @@ ort bad_gastein {
 }
 
 ort grossarl {
-    name     = "Grossarl"
+    name     = "Großarl"
     gelaende = hochgebirge
     lage     = { 13.2 47.2333 }
     flaeche  = 90
     stadt    = nein
     kreis    = kr_bischofshofen
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2777905; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2777905; Name Großarl aus den GeoNames-Alternativnamen (GeoNames: Grossarl); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort rauris {

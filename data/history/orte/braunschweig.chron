@@ -201,7 +201,7 @@ ort clausthal_zellerfeld {
     name     = "Clausthal-Zellerfeld"
     gelaende = mittelgebirge
     lage     = { 10.3382 51.8095 }
-    flaeche  = 185
+    flaeche  = 175
     stadt    = nein
     kreis    = kr_wolfenbuettel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2939995; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"

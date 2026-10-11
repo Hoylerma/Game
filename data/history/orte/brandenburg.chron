@@ -1626,14 +1626,14 @@ ort koenigswalde {
     quelle   = "GeoNames (CC BY 4.0), geonameid 3092894; deutscher Name aus den GeoNames-Alternativnamen (heute Lubniewice); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort miedzylesie {
-    name     = "Międzylesie"
+ort mittwalde {
+    name     = "Mittwalde"
     gelaende = flachland
     lage     = { 15.3828 52.1449 }
     flaeche  = 244
     stadt    = nein
     kreis    = kr_schwiebus
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3091974; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3091974; deutscher Name aus den GeoNames-Alternativnamen (heute Międzylesie); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort lagow {
@@ -1716,14 +1716,14 @@ ort ziebingen {
     quelle   = "GeoNames (CC BY 4.0), geonameid 3101255; deutscher Name aus den GeoNames-Alternativnamen (heute Cybinka); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort bytnica {
-    name     = "Bytnica"
+ort beutnitz {
+    name     = "Beutnitz"
     gelaende = flachland
     lage     = { 15.1695 52.1507 }
     flaeche  = 291
     stadt    = nein
     kreis    = kr_crossen_an_der_oder
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3101951; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3101951; deutscher Name aus den GeoNames-Alternativnamen (heute Bytnica); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort bobersberg {
@@ -1736,12 +1736,12 @@ ort bobersberg {
     quelle   = "GeoNames (CC BY 4.0), geonameid 3103162; deutscher Name aus den GeoNames-Alternativnamen (heute Bobrowice); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort maszewo {
-    name     = "Maszewo"
+ort messow {
+    name     = "Messow"
     gelaende = flussaue
     lage     = { 14.9055 52.069 }
     flaeche  = 244
     stadt    = nein
     kreis    = kr_crossen_an_der_oder
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3092199; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3092199; deutscher Name aus den GeoNames-Alternativnamen (heute Maszewo); Gelände aus Höhenmodell; Fläche aus der Karte"
 }

@@ -317,14 +317,14 @@ ort hohenelbe {
     quelle   = "GeoNames (CC BY 4.0), geonameid 3062439; deutscher Name aus den GeoNames-Alternativnamen (heute Vrchlabí); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort horice {
-    name     = "Hořice"
+ort horitz {
+    name     = "Horitz"
     gelaende = huegelland
     lage     = { 15.6318 50.3661 }
     flaeche  = 263
     stadt    = nein
     kreis    = kr_trautenau
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3075493; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3075493; deutscher Name aus den GeoNames-Alternativnamen (heute Hořice); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort neu_paka {
@@ -1397,14 +1397,14 @@ ort mnisek_pod_brdy {
     quelle   = "GeoNames (CC BY 4.0), geonameid 3070446; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort zdice {
-    name     = "Zdice"
+ort zditz {
+    name     = "Zditz"
     gelaende = huegelland
     lage     = { 13.9775 49.9121 }
     flaeche  = 140
     stadt    = nein
     kreis    = kr_beraun
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3061658; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3061658; deutscher Name aus den GeoNames-Alternativnamen (heute Zdice); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort cernosice {
@@ -1417,14 +1417,14 @@ ort cernosice {
     quelle   = "GeoNames (CC BY 4.0), geonameid 3078029; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort hostomice {
-    name     = "Hostomice"
+ort hostomitz {
+    name     = "Hostomitz"
     gelaende = mittelgebirge
     lage     = { 14.0456 49.8253 }
     flaeche  = 157
     stadt    = nein
     kreis    = kr_beraun
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3075044; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3075044; deutscher Name aus den GeoNames-Alternativnamen (heute Hostomice); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort roztoky {
@@ -1467,24 +1467,24 @@ ort prelouc {
     quelle   = "GeoNames (CC BY 4.0), geonameid 3067594; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort tremosnice {
-    name     = "Třemošnice"
+ort tremoschnitz {
+    name     = "Tremoschnitz"
     gelaende = huegelland
     lage     = { 15.58 49.8691 }
     flaeche  = 148
     stadt    = nein
     kreis    = kr_kuttenberg
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3064043; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3064043; deutscher Name aus den GeoNames-Alternativnamen (heute Třemošnice); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort chvaletice {
-    name     = "Chvaletice"
+ort chwaletitz {
+    name     = "Chwaletitz"
     gelaende = flussaue
     lage     = { 15.4185 50.0344 }
     flaeche  = 190
     stadt    = nein
     kreis    = kr_kuttenberg
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3077501; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3077501; deutscher Name aus den GeoNames-Alternativnamen (heute Chvaletice); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort goltsch_jenikau {
@@ -1877,14 +1877,14 @@ ort radnitz {
     quelle   = "GeoNames (CC BY 4.0), geonameid 3067174; deutscher Name aus den GeoNames-Alternativnamen (heute Radnice); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort strasice {
-    name     = "Strašice"
+ort straschitz {
+    name     = "Straschitz"
     gelaende = mittelgebirge
     lage     = { 13.7576 49.7355 }
     flaeche  = 270
     stadt    = nein
     kreis    = kr_pribram
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3065033; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3065033; deutscher Name aus den GeoNames-Alternativnamen (heute Strašice); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort deutsch_brod {
@@ -1987,14 +1987,14 @@ ort sedlcany {
     quelle   = "GeoNames (CC BY 4.0), geonameid 3066333; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort jistebnice {
-    name     = "Jistebnice"
+ort jistebnitz {
+    name     = "Jistebnitz"
     gelaende = mittelgebirge
     lage     = { 14.5276 49.4855 }
     flaeche  = 213
     stadt    = nein
     kreis    = kr_muehlhausen_boehmen
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3074102; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3074102; deutscher Name aus den GeoNames-Alternativnamen (heute Jistebnice); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort oparany {
@@ -2007,14 +2007,14 @@ ort oparany {
     quelle   = "GeoNames (CC BY 4.0), geonameid 3068950; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort kovarov {
-    name     = "Kovářov"
+ort kowarow {
+    name     = "Kowarow"
     gelaende = huegelland
     lage     = { 14.2781 49.5176 }
     flaeche  = 181
     stadt    = nein
     kreis    = kr_muehlhausen_boehmen
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3073059; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3073059; deutscher Name aus den GeoNames-Alternativnamen (heute Kovářov); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort schoenberg {
@@ -2387,14 +2387,14 @@ ort netolitz {
     quelle   = "GeoNames (CC BY 4.0), geonameid 3069808; deutscher Name aus den GeoNames-Alternativnamen (heute Netolice); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort mirotice {
-    name     = "Mirotice"
+ort mirotitz {
+    name     = "Mirotitz"
     gelaende = huegelland
     lage     = { 14.037 49.4291 }
     flaeche  = 226
     stadt    = nein
     kreis    = kr_pisek
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3070580; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3070580; deutscher Name aus den GeoNames-Alternativnamen (heute Mirotice); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort zirnau {

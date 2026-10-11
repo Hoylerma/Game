@@ -340,14 +340,14 @@ ort otaslavice {
     quelle   = "GeoNames (CC BY 4.0), geonameid 3068727; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort nezamyslice {
-    name     = "Nezamyslice"
+ort nezamislitz {
+    name     = "Nezamislitz"
     gelaende = huegelland
     lage     = { 17.1733 49.3254 }
     flaeche  = 183
     stadt    = nein
     kreis    = kr_prossnitz
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3069773; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3069773; deutscher Name aus den GeoNames-Alternativnamen (heute Nezamyslice); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort prerau {
@@ -560,14 +560,14 @@ ort konitz_maehren {
     quelle   = "GeoNames (CC BY 4.0), geonameid 3073299; deutscher Name aus den GeoNames-Alternativnamen (heute Konice); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort lysice {
-    name     = "Lysice"
+ort lissitz {
+    name     = "Lissitz"
     gelaende = huegelland
     lage     = { 16.5372 49.4516 }
     flaeche  = 156
     stadt    = nein
     kreis    = kr_blansko
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3071302; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3071302; deutscher Name aus den GeoNames-Alternativnamen (heute Lysice); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort pteni {
@@ -580,14 +580,14 @@ ort pteni {
     quelle   = "GeoNames (CC BY 4.0), geonameid 3067351; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort protivanov {
-    name     = "Protivanov"
+ort protiwanow {
+    name     = "Protiwanow"
     gelaende = mittelgebirge
     lage     = { 16.8359 49.4835 }
     flaeche  = 135
     stadt    = nein
     kreis    = kr_blansko
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3067398; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3067398; deutscher Name aus den GeoNames-Alternativnamen (heute Protivanov); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort lipovec {
@@ -650,14 +650,14 @@ ort trojanowitz {
     quelle   = "GeoNames (CC BY 4.0), geonameid 3063955; deutscher Name aus den GeoNames-Alternativnamen (heute Trojanovice); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort hostalkova {
-    name     = "Hošťálková"
+ort hostialkow {
+    name     = "Hostialkow"
     gelaende = mittelgebirge
     lage     = { 17.8694 49.3547 }
     flaeche  = 189
     stadt    = nein
     kreis    = kr_wsetin
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3075091; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3075091; deutscher Name aus den GeoNames-Alternativnamen (heute Hošťálková); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort horni_becva {
@@ -850,14 +850,14 @@ ort schlappanitz {
     quelle   = "GeoNames (CC BY 4.0), geonameid 3065901; deutscher Name aus den GeoNames-Alternativnamen (heute Šlapanice); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
-ort ivancice {
-    name     = "Ivančice"
+ort eibenschitz {
+    name     = "Eibenschitz"
     gelaende = huegelland
     lage     = { 16.3775 49.1014 }
     flaeche  = 171
     stadt    = nein
     kreis    = kr_bruenn
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3074615; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 3074615; deutscher Name aus den GeoNames-Alternativnamen (heute Ivančice); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort gross_bittesch {

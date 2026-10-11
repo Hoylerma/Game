@@ -453,7 +453,9 @@ FLUSSNAMEN_DE: dict[str, str] = {
     "Svitava": "Zwittawa",
     "Svratka": "Schwarzawa",
     "Sázava": "Sasau",
-    "Úhlava": "Angel",
+    # Natural Earth führt die Linie Mže/Berounka (Quelle bei Mähring bis zur Mündung in die Moldau
+    # bei Prag) als „Úhlava“ (name_alt Berounka); die Úhlava (Angel) ist nur ein Zufluss bei Pilsen.
+    "Úhlava": "Beraun",
     "Hron": "Gran",
     "Ipeľ": "Eipel",
     "Hornád": "Kundert",

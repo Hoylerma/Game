@@ -1,12 +1,12 @@
 # Spieldaten (`data/`)
 
-> **Seit M3: Karte des Kernraums mit 4.541 Orten in 627 Kreisen.** Die Orte decken den Kernraum
+> **Seit M3: Karte des Kernraums mit 4.542 Orten in 626 Kreisen.** Die Orte decken den Kernraum
 > (`karte/geometrie/kernraum.geojson`) zu 99,96 % ab; ohne Ort bleiben 41 kleine Teilflächen,
 > meist Inseln ohne GeoNames-Ort (zusammen etwa 274 km²). Erzeugt hat die Orte
 > `tools/geodaten/orte.py` aus GeoNames cities1000 (Auswahl, Namen, Kreise und Gelände:
 > [tools/geodaten/README.md](../tools/geodaten/README.md), Abschnitt „Orte des Kernraums“).
 > Historische Daten (Besitzer, Bevölkerung, Konfession, Verwüstung) haben weiterhin nur die 60
-> Orte der Testregion aus M1; die übrigen 4.481 sind *Orte ohne Daten*
+> Orte der Testregion aus M1; die übrigen 4.482 sind *Orte ohne Daten*
 > ([chronik-skript.md](../docs/technik/chronik-skript.md), Abschnitt 3.6): Sie erscheinen auf der
 > Karte (schraffiert), nehmen aber an der Simulation nicht teil.
 
@@ -30,7 +30,7 @@ Format, Pflichtfelder und Formeln: [docs/technik/chronik-skript.md](../docs/tech
 | Lesezeichen | **Der Westfälische Frieden**, 24.10.1648 (`westfaelischer_frieden`), Spieler-Vorauswahl Brandenburg |
 | Karte | Kernraum (Design-Dokument 05) im Ausschnitt 1,8–23,5 °O × 45,1–56,2 °N, Bild 4096 × 3329 Pixel (`karte/karte.chron`) |
 | Gebiet mit Daten | 9,5–16,5 °O, 50,0–54,8 °N: Mark Brandenburg, Erzstift Magdeburg, Halberstadt, Anhalt, Kursachsen mit beiden Lausitzen, Thüringen (Teile), Braunschweig-Wolfenbüttel (Ostteil), Mecklenburg, Vorpommern, Hinterpommern, Nordböhmen als Randgebiet |
-| Umfang | 4.541 Orte (60 mit Daten, 4.481 ohne Daten) in 627 Kreisen, 16 Staaten, 11 Geländetypen, 4 Konfessionen, 6 Berufsgruppen |
+| Umfang | 4.542 Orte (60 mit Daten, 4.482 ohne Daten) in 626 Kreisen, 16 Staaten, 11 Geländetypen, 4 Konfessionen, 6 Berufsgruppen |
 | Bevölkerung | 384.000 in den modellierten Orten (Stichprobe der Ämter, nicht die Gesamtbevölkerung der Territorien) |
 
 ## Aufbau
@@ -140,7 +140,7 @@ Einträge – Verweise im Spiel laufen deshalb immer über Kennungen, nie über 
 
 ### Orte des Kernraums (seit M3)
 
-Die 4.481 Orte ohne Daten und alle 627 Kreise erzeugt `python3 tools/geodaten/orte.py`
+Die 4.482 Orte ohne Daten und alle 626 Kreise erzeugt `python3 tools/geodaten/orte.py`
 reproduzierbar in `tabellen/orte.csv` und `tabellen/kreise.csv`; Verfahren, Hilfstabellen und
 Kennzahlen stehen in [tools/geodaten/README.md](../tools/geodaten/README.md#orte-des-kernraums-ortepy).
 Diese Zeilen bitte nicht von Hand ändern, sondern die Hilfstabellen in `tools/geodaten/` anpassen
@@ -151,7 +151,8 @@ und danach `orte.py`, den Archivar und den Kartengenerator laufen lassen.
   Ausgewählt wird nach heutiger Bedeutung (Einwohner, Verwaltungsrang, Bekanntheit) mit einem
   Mindestabstand von etwa 4–11 km je nach Bedeutung, dazu Inseln und Lückenfüller; moderne
   Gründungen und Kunstnamen aus Gemeindereformen sind ausgeschlossen
-  (`tools/geodaten/ausschluesse.csv`). Die `quelle` jedes neuen Ortes nennt die `geonameid` und
+  (`tools/geodaten/ausschluesse.csv`); fehlt in GeoNames die Einwohnerzahl eines
+  Verwaltungssitzes, gilt eine belegte Untergrenze (`tools/geodaten/einwohner.csv`). Die `quelle` jedes neuen Ortes nennt die `geonameid` und
   die Herkunft des Namens.
 - **Lage, Gelände, Stadt:** `lage` ist die GeoNames-Koordinate (Orte knapp im Wasser auf das
   nächste Landpixel gerückt, in `quelle` vermerkt). `gelaende` kommt aus einem Höhenmodell (AWS
@@ -161,8 +162,9 @@ und danach `orte.py`, den Archivar und den Kartengenerator laufen lassen.
   wörtlich in den GeoNames-Alternativnamen belegt ist (z. B. Breslau, Königsberg, Straßburg);
   (2) in Deutschland, Österreich und Liechtenstein der GeoNames-Name ohne moderne Zusätze
   („Lutherstadt“, „Hansestadt“, „Ostseebad“ …; „Bad“ bleibt stehen); (3) in Südtirol der deutsche
-  Teil des zweisprachigen Namens; (4) sonst der **heutige Name** (917 Orte, z. B. Lubawa statt
-  Löbau, weil GeoNames dort keinen deutschen Namen belegt). Gleichnamige Orte erhalten den
+  Teil des zweisprachigen Namens; (4) sonst der **heutige Name** (896 Orte, für die
+  `exonyme.csv` keinen belegten deutschen Namen enthält, z. B. Lubawa statt Löbau, weil GeoNames
+  dort keinen deutschen Namen führt). Gleichnamige Orte erhalten den
   Kurznamen ihrer Landschaft in Klammern („Mühlhausen (Böhmen)“, 82 Orte). Namen aus den
   Umbenennungen 1933–1945 werden nicht übernommen.
 - **Noch zu prüfen:** Viele Namen sind heutige Formen: 92 mit „Bad “ (Titel meist erst im 19.
@@ -284,7 +286,7 @@ Staaten mit nur einem oder zwei Orten reagieren stark auf Seuchen in diesem Ort.
 
 ## Bekannte Lücken und Vereinfachungen
 
-- **Orte ohne Daten:** 4.481 der 4.541 Orte haben keinen Besitzer, keine Bevölkerung und keine
+- **Orte ohne Daten:** 4.482 der 4.542 Orte haben keinen Besitzer, keine Bevölkerung und keine
   Konfession; sie nehmen an der Simulation nicht teil und erscheinen auf der Karte schraffiert.
   Ihre Namen, Lagen und Kreise sind aus heutigen Daten abgeleitet (siehe „Orte des Kernraums“).
 - **Ohne historische Daten** sind innerhalb und am Rand der Testregion u. a. die Reichsstädte
@@ -316,12 +318,14 @@ python3 tools/geodaten/orte.py --pruefen          # Orte und Kreise aktuell? (br
 ```
 
 Beim Umzug in die Tabellen (M2) wurden die M1-Daten verlustfrei übernommen: Die Prüfsumme nach
-100 Jahren blieb unverändert (`8d44cf792e143bb0`). Seit M3 (4.541 Orte) lautet sie
-`5548a5fa80f75c0d`: Die Prüfsumme umfasst alle Orte, und der Rechentag eines Ortes im Monat hängt
+100 Jahren blieb unverändert (`8d44cf792e143bb0`). Seit M3 (4.542 Orte) lautet sie
+`40de8c42e8f7a0ff`: Die Prüfsumme umfasst alle Orte, und der Rechentag eines Ortes im Monat hängt
 von seinem Index ab (Index mod 28 + 1, `compute_day` in `core/src/simulation.cpp`). Durch die
-eingefügten Orte ohne Daten haben 56 der 60 Orte mit Daten einen anderen Rechentag; ihre
-Reihenfolge untereinander ist gleich geblieben. Die Werte nach 100 Jahren weichen deshalb nur
-geringfügig ab (Bevölkerung 627.709 statt 627.721). Alle Angaben tragen seit M2 eine Sicherheit:
+eingefügten Orte ohne Daten haben die meisten der 60 Orte mit Daten einen anderen Rechentag als
+in M2; ihre Reihenfolge untereinander ist gleich geblieben. Die Werte nach 100 Jahren weichen
+deshalb nur geringfügig ab (Bevölkerung 627.680 statt 627.721). Der erste M3-Stand (4.541 Orte)
+ergab `5548a5fa80f75c0d` (627.709); mit Osterode am Harz in `goettingen` rückten die 38 Orte mit
+Daten in den Dateien `lausitz` bis `thueringen` um einen Index weiter. Alle Angaben tragen seit M2 eine Sicherheit:
 Besitz, Herrscher, Hauptstadt und Konfession der Staaten `ungeprueft` (recherchiert, noch ohne
 Fachprüfung), Bevölkerung, Konfessionsanteile und Verwüstung `schaetzung`, Schatz, Steuersatz und
 Hofhaltung `spielwert`. Die Begründungen stehen weiter in der Quelle des Ortes bzw. Staates.

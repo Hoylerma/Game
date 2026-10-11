@@ -42,6 +42,7 @@ except ImportError:  # Aufruf als Modul von außerhalb des Werkzeugordners
     import geodaten
 
 __all__ = [
+    "AUSLAND_GEBIETE",
     "AUSLAND_STAATEN",
     "LAND_TOLERANZ_KM",
     "SPALTEN",
@@ -82,6 +83,10 @@ SPALTEN = (
 #: wenn sie wegen der vereinfachten Grenzlinie (Genauigkeit 1–5 km) knapp im Umriss liegen, z. B.
 #: Schweizer Dörfer am Alpenrhein oder bei Schaffhausen.
 AUSLAND_STAATEN: frozenset[str] = frozenset({"CH", "HR", "HU", "SK"})
+#: Gebiete heutiger Staaten (Staat, admin1, admin2), die ebenfalls ganz außerhalb liegen: die Provinz
+#: Trient (Trentino, Welschtirol). Der Umriss folgt der Provinz Bozen und ragt am Nonsberg einige
+#: Kilometer ins Trentino (Fondo, Castelfondo, Brez); deren Orte entfallen wie die der Staaten oben.
+AUSLAND_GEBIETE: frozenset[tuple[str, str, str]] = frozenset({("IT", "17", "TN")})
 #: Orte im Wasser (Meer oder See), die höchstens so weit vom Ufer entfernt liegen, bleiben Kandidaten.
 LAND_TOLERANZ_KM = 2.0
 
@@ -227,6 +232,7 @@ def kandidaten(
     min_einwohner: int = 0,
     ausland: frozenset[str] = AUSLAND_STAATEN,
     land_toleranz_km: float = LAND_TOLERANZ_KM,
+    ausland_gebiete: frozenset[tuple[str, str, str]] = AUSLAND_GEBIETE,
 ) -> list[Kandidat]:
     """Orte im Kernraum auf Land, sortiert nach Einwohnern (absteigend), dann geonameid.
 
@@ -234,7 +240,8 @@ def kandidaten(
     ``land.geojson`` und ``seen.geojson`` aus ``data/karte/geometrie/`` gelesen. Punkte genau auf
     einem Rand zählen als außen (Abschnitt 6.2); exakte Punkt-in-Polygon-Prüfung (kein Raster).
     Orte im Wasser bleiben, wenn sie höchstens ``land_toleranz_km`` vom Ufer entfernt sind
-    (``auf_land = False``). Orte aus Staaten in ``ausland`` (heutiger Staatscode) entfallen immer.
+    (``auf_land = False``). Orte aus Staaten in ``ausland`` (heutiger Staatscode) und aus Gebieten in
+    ``ausland_gebiete`` (Staat, admin1, admin2) entfallen immer.
     """
     ordner = geodaten.GEOMETRIE_ORDNER
     kernraum = geo.lade_flaechen(ordner / "kernraum.geojson") if kernraum is None else kernraum
@@ -260,6 +267,8 @@ def kandidaten(
     for stadt in staedte:
         x, y = stadt.laenge, stadt.breite
         if stadt.einwohner < min_einwohner or stadt.staat in ausland:
+            continue
+        if (stadt.staat, stadt.admin1, stadt.admin2) in ausland_gebiete:
             continue
         if not (rahmen[0] <= x <= rahmen[2] and rahmen[1] <= y <= rahmen[3]) or not kern_index.enthaelt(x, y):
             continue

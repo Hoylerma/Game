@@ -567,13 +567,13 @@ ort waldheim {
 }
 
 ort meissen {
-    name     = "Meissen"
+    name     = "Meißen"
     gelaende = huegelland
     lage     = { 13.4737 51.1616 }
     flaeche  = 182
     stadt    = ja
     kreis    = kr_dresden
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2872155; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    quelle   = "GeoNames (CC BY 4.0), geonameid 2872155; Name Meißen aus den GeoNames-Alternativnamen (GeoNames: Meissen); Gelände aus Höhenmodell; Fläche aus der Karte"
 }
 
 ort freital {
