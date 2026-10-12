@@ -1,4 +1,4 @@
-# EINIGKEIT – Godot-Projekt (Prototyp der Spieloberfläche, Meilensteine M1 bis M5)
+# EINIGKEIT – Godot-Projekt (Prototyp der Spieloberfläche, Meilensteine M1 bis M6)
 
 Das Projekt zeigt die Simulation des Kerns **Uhrwerk** auf der Karte des **Kernraums**
 (Meilenstein M3: rund 4.500 Orte in rund 620 Kreisen): Kartenansicht mit zehn Kartenmodi
@@ -6,7 +6,8 @@ Das Projekt zeigt die Simulation des Kerns **Uhrwerk** auf der Karte des **Kernr
 Staats-, Kreis- und Ortsnamen, obere Leiste, Staatspanel mit Reglern für Kontribution, Akzise und
 Zoll und einem Haushaltsfenster (seit M5), Ortsinfo mit Wirtschaft (Markt, Einkommen und
 Bedarfsdeckung je Beruf, Betriebe, Güter; seit M5) und Bevölkerung (Kulturen, Lebensstandard,
-Alphabetisierung, Altersaufbau, Bilanz des Vorjahres), Chronik und Legende. Die Simulation selbst läuft in C++ und wird über die
+Alphabetisierung, Altersaufbau, Bilanz des Vorjahres), Chronik und Legende, seit M6 ein Spielmenü
+mit Speichern und Laden, Schnellspeichern (F5/F9) und automatischem Spielstand am 1. Januar. Die Simulation selbst läuft in C++ und wird über die
 GDExtension `uhrwerk_bridge` angesprochen (Schnittstelle:
 [docs/technik/bridge-api.md](../docs/technik/bridge-api.md)). Die Godot-Seite **liest** nur
 und schickt **Befehle**; sie rechnet nichts selbst.
@@ -64,6 +65,7 @@ Optionen stehen nach `--` (Benutzerargumente):
 | `--ort=<ort_id>` | Ort auswählen, Ortsinfo geöffnet (z. B. `berlin_coelln`) |
 | `--zoom=<faktor>` | Vergrößerung gegenüber der Übersicht (1 = ganze Karte), zentriert auf `--ort`, sonst auf die Kartenmitte (bis zum Faktor 1 bleibt die Bildmitte der Übersicht); gilt auch ohne `--screenshot` |
 | `--haushalt` | Haushaltsfenster des Spielerstaates vor dem Screenshot öffnen (seit M5) |
+| `--spielmenue` | Spielmenü vor dem Screenshot öffnen (seit M6) |
 
 Auf der Kernraum-Karte bei 1600 × 900 Pixeln reicht die ferne Stufe (Staatsnamen) bis etwa
 `--zoom=2,7`, die mittlere (Kreisnamen) bis etwa `--zoom=6,3`, darüber folgt die nahe
@@ -99,13 +101,16 @@ Modus `--headless` gibt es kein Bild; ohne Bildschirm hilft `xvfb-run`.
 | Steuerregler | Kontribution, Akzise und Zoll des Spielerstaates (wirksam ab dem nächsten simulierten Tag) |
 | „Haushalt im Einzelnen …“ | Haushaltsfenster: Einnahmen je Steuerart, Ausgaben je Posten (Hof, Verwaltung, Heer, Zinsen, Bauten), Schatz, Schulden, Zins, Staatsbankrotte |
 | Klick auf einen Chronikeintrag | Ort des Ereignisses auswählen und anfahren |
+| F10, Knopf „Menü“ | Spielmenü: Speichern unter einem Namen, Laden aus der Liste, Schnellspeichern und -laden; die Zeit hält an, Esc oder F10 schließt es (seit M6) |
+| F5 | Schnellspeichern (`schnellspeicher.einigkeit`) |
+| F9 | Schnellladen |
 
 **Doppelbelegung von W:** W gehört sowohl zur Kamerasteuerung (WASD) als auch zum
 Kartenmodus „Bevölkerungsdichte“. Kurz getippt (unter 0,18 s) schaltet W den Kartenmodus um,
 gehalten bewegt es die Karte nach oben. Die Pfeiltaste nach oben bewegt immer sofort.
 
 Die Tastenbelegung steht als Aktionen in `project.godot` (`kamera_*`, `kartenmodus_*`,
-`tempo_*`, `auswahl_aufheben`) und lässt sich im Editor unter *Projekteinstellungen →
+`tempo_*`, `auswahl_aufheben`, `spielmenue`, `schnellspeichern`, `schnellladen`) und lässt sich im Editor unter *Projekteinstellungen →
 Eingabebelegung* ändern. Es werden physische Tasten verwendet, die Belegung gilt also auf
 jeder Tastatur an derselben Stelle: „Z“ ist die Taste rechts neben T (auf englischen
 Tastaturen beschriftet mit „Y“).
@@ -133,6 +138,7 @@ game/
 │   │   ├── map_config.gd          MapConfig: karte.chron (Ausschnitt, Projektion)
 │   │   ├── map_modes.gd           MapModes: Kartenmodi, Namen, Tasten
 │   │   ├── german_format.gd       GermanFormat: Tausenderpunkt, Dezimalkomma, Einheiten
+│   │   ├── save_slots.gd          SaveSlots: Ordner, Dateinamen und Liste der Spielstände, Autosave (seit M6)
 │   │   └── launch_options.gd      LaunchOptions: --screenshot, --tage, --kartenmodus, --ort, --zoom
 │   ├── map/
 │   │   ├── map_view.gd            MapView: Darstellung, Nachschlagetexturen, Auswahl, Rahmen
@@ -146,16 +152,32 @@ game/
 └── tests/                     Einheiten-, Rauch-, Klick- und Leistungstest, siehe tests/README.md
 ```
 
+### Spielstände (seit M6)
+
+Spielstände liegen in `user://spielstaende/` (unter Linux
+`~/.local/share/godot/app_userdata/EINIGKEIT/spielstaende/`), Format und Prüfungen in
+[docs/technik/speicherstaende.md](../docs/technik/speicherstaende.md). Das **Spielmenü**
+(`scripts/ui/game_menu.gd`, im Code aufgebaut) öffnet sich über den Knopf „Menü“ rechts in der
+oberen Leiste oder F10 und hält die Zeit an: Name des Spielstands (vorbelegt mit Staat und Datum),
+Liste der Spielstände (zuletzt geänderte zuerst, mit Datum, Staat und Änderungszeit; Dateien, die
+nicht zu den Spieldaten passen oder keine Spielstände sind, erscheinen ausgegraut mit dem Grund
+als Tooltip), Laden, Schnellspeichern, Schnellladen, Weiterspielen. F5 und F9 wirken auch ohne
+Menü. Am **1. Januar** speichert das Spiel automatisch; `autosave_1` ist der neueste, die drei
+letzten bleiben. Nach dem Laden steht die Zeit, die Auswahl ist aufgehoben, und Grenzen, Namen,
+Panels, Legende und Chronik zeigen den geladenen Stand. Rückmeldungen („Schnellgespeichert“,
+„Geladen: …“) erscheinen drei Sekunden lang unter dem Datum.
+
 ### Simulation
 
 `SimulationClient` spricht die Klasse `UhrwerkSimulation` nur über `ClassDB` an. Ein direkter
 Verweis auf den Klassennamen wäre ohne gebaute Erweiterung ein Parse-Fehler; so startet das
 Projekt in jedem Fall. Beim Start prüft die Hülle, ob alle Methoden der Schnittstelle vorhanden
-sind (seit M3 auch `get_location_owner_indices`, `get_location_kreis_indices`, `get_kreis*`; seit M5 `set_tax_percent`, `get_market*`, `get_location_market_indices`),
+sind (seit M3 auch `get_location_owner_indices`, `get_location_kreis_indices`, `get_kreis*`; seit M5 `set_tax_percent`, `get_market*`, `get_location_market_indices`; seit M6 `save_game`, `load_game`, `get_save_info`, `get_save_format_version`),
 und meldet eine veraltete Erweiterung verständlich.
 
 Die Zeit läuft in `main.gd`: Je Bild werden die fälligen ganzen Tage mit `advance_days`
-simuliert (höchstens 30 je Bild), danach liest die Oberfläche Datum, Staat, Ort, Kartenfarben und
+simuliert (höchstens 30 je Bild und seit M6 höchstens bis zum nächsten 1. Januar, damit der
+automatische Spielstand den Jahreswechsel trifft), danach liest die Oberfläche Datum, Staat, Ort, Kartenfarben und
 neue Chronikeinträge. Die Steuerregler schicken `set_tax_percent` mit der Steuerart (seit M5;
 vorher `set_tax_rate_percent` für den einen Steuersatz); der Kern führt den Befehl am nächsten Tag
 aus, bis dahin zeigt das Panel „gilt ab dem nächsten Tag“.

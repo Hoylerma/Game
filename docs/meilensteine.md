@@ -18,7 +18,7 @@ gebaut; Abhängigkeiten stehen jeweils dabei.
 | M3 | Karte des Kernraums | 1 – Vorproduktion | M2 | **fertig** (eine Abnahme nicht messbar, siehe unten) |
 | M4 | Bevölkerung und Lasttest | 1 – Vorproduktion | M3 | **fertig** |
 | M5 | Wirtschaft und Staatshaushalt | 1 – Vorproduktion | M4 | **fertig** |
-| M6 | Speicherstände und Wiederholungen | 1 – Vorproduktion | M5 | offen |
+| M6 | Speicherstände und Wiederholungen | 1 – Vorproduktion | M5 | **fertig** |
 | M7 | Lesezeichen 1848 | 2 – Vertical Slice | M6 | offen |
 | M8 | Politik, Parteien und Wahlen | 2 – Vertical Slice | M7 | offen |
 | M9 | Diplomatie und Zollverein | 2 – Vertical Slice | M7 | offen |
@@ -320,7 +320,7 @@ das über Jahrzehnte im Gleichgewicht bleibt.
   Nachfrage, Einkommen und Bedarfsdeckung je Ort, Landesausbau, Marktzustand, Haushalt und
   Schulden der Staaten.
 
-### M6 – Speicherstände und Wiederholungen
+### M6 – Speicherstände und Wiederholungen ✅
 
 **Ziel:** Partien speichern, laden und exakt nachspielen – Grundlage für Multiplayer und
 Fehlersuche ([02 Engine und Technik](02_engine_und_technik.md), [23 Multiplayer und Modding](23_multiplayer_und_modding.md)).
@@ -333,6 +333,46 @@ Fehlersuche ([02 Engine und Technik](02_engine_und_technik.md), [23 Multiplayer 
 **Abnahme**
 - Speichern → Laden → Weiterspielen ergibt dieselbe Prüfsumme wie ohne Unterbrechung
 - Wiederholung aus Befehlsprotokoll ist bitgleich (CI-Test über 50 Jahre)
+
+**Ergebnis**
+- **Vertrag** in [technik/speicherstaende.md](technik/speicherstaende.md) (verbindlich).
+- **Ein Zustandsverzeichnis** für Prüfsumme, Textexport, Schreiben und Lesen: Was gespeichert
+  wird, steht in der Prüfsumme, und umgekehrt. Die Referenzprüfsummen blieben unverändert.
+- **Spielstand v1:** Kopf, lesbare Metadaten, Nutzdaten mit zstd. Ein Spielstand der Spieldaten
+  hat nach 100 Jahren 38 KB (3,8 MB roh) und lädt in 0,03 s (0,5 s mit den Spieldaten); die
+  Lasttest-Welt mit 500.000 Blöcken hat 2,9 MB (41,9 MB roh), Speichern 0,4 s, Laden 0,5 s.
+  Laden nur in Spieldaten mit passendem Inhaltsfingerabdruck (Meldung je Bereich), mit Prüfung
+  aller Indizes und Größen und Gegenprobe der Prüfsumme; gleicher Zustand ergibt dieselben Bytes,
+  unter GCC, Clang und MSVC derselbe Prüfwert der Nutzdaten.
+- **Befehlsprotokoll und Wiederholung:** Jeder Spielstand enthält alle Befehle seit Partiebeginn
+  und die Startprüfsumme; Protokolldateien tragen zusätzlich jährliche Kontrollpunkte, die
+  Wiederholung meldet den ersten abweichenden.
+- **Kommandozeile:** `lauf --speichern/--laden/--protokoll/--testbefehle`, `speichertest`,
+  `wiederholung`, `spielstand [--text]`, `lasttest --speichern`.
+- **Godot:** Spielmenü (Knopf „Menü“, F10) mit Speichern unter einem Namen und Laden aus der
+  Liste, F5/F9, automatischer Spielstand am 1. Januar (drei bleiben).
+- **Tests:** 146 Testfälle (u. a. 17 Speicherpunkte mit 1 und 4 Threads, beschädigte Dateien,
+  Formatwache); CTests `speichertest_50_jahre`, `protokoll_50_jahre`, `wiederholung_50_jahre`,
+  `wiederholung_spielstand`, `spielstand_laden`, `spielstand_fremder_inhalt`; Godot-Einheitentest
+  212 Prüfungen, Rauch- und Klicktest mit Spielständen; alle in der CI. Ein Fuzz-Lauf mit 3.000
+  verfälschten Nutzdaten unter AddressSanitizer und UndefinedBehaviorSanitizer ohne Befund (lokal).
+
+**Abnahme im Einzelnen**
+
+| Kriterium | Stand |
+|---|---|
+| Speichern → Laden → Weiterspielen ergibt dieselbe Prüfsumme wie ohne Unterbrechung | erfüllt: `speichertest_50_jahre` mit den Spieldaten speichert an 11 Tagen (5 mit wartenden Befehlen, einer mit Zugängen) in eine Datei, lädt mit frischen Spieldaten und 1 bzw. 3 Threads und trifft alle 50 Jahresprüfsummen und den Endstand; Unit-Test mit 17 Speicherpunkten, Godot-Rauch- und Klicktest über die Brücke |
+| Wiederholung aus Befehlsprotokoll ist bitgleich (CI-Test über 50 Jahre) | erfüllt: `protokoll_50_jahre` und `wiederholung_50_jahre` (200 Testbefehle, 50 Kontrollpunkte und Endstand) sowie `wiederholung_spielstand` in den Jobs GCC, Clang und MSVC |
+| Speicherformat mit Versionsnummer und Migration | Formatversion im Kopf, neuere werden abgelehnt, Formatwache im Test; Lesen älterer Versionen entsteht mit Version 2 |
+
+**Bekannte Grenzen**
+- **Spieldaten müssen passen:** Jede Änderung an Regeln, Berufen, Gütern oder Orten macht alte
+  Spielstände unbrauchbar; das Laden über Kennungen kommt vor einer öffentlichen Version.
+- **Keine Migration bisher:** Version 1 ist die erste; der Versionsschalter im Lesebesucher
+  entsteht mit Version 2.
+- **Wiederholung ab Szenariostart:** Partien aus der Lasttest-Welt lassen sich nicht wiederholen.
+- **Oberfläche:** kein Überschreiben-Dialog; ein offenes Haushaltsfenster nimmt F10 entgegen, bis
+  Escape es schließt; der automatische Spielstand lässt sich noch nicht abschalten.
 
 ---
 

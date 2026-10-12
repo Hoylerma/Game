@@ -8,6 +8,46 @@ Vor Version 1.0 kann sich jede Schnittstelle ändern.
 
 ## [Unveröffentlicht]
 
+### Meilenstein M6 – Speicherstände und Wiederholungen
+
+Partien lassen sich speichern, laden und **bitgleich fortsetzen**, und aus Startzustand und
+Befehlsprotokoll lässt sich jede Partie **exakt wiederholen** – geprüft über 50 Jahre mit 200
+Testbefehlen in allen drei Compiler-Jobs. Damit ist die Vorproduktion (Phase 1) abgeschlossen.
+Ergebnis und bekannte Grenzen:
+[docs/meilensteine.md](docs/meilensteine.md#m6--speicherstände-und-wiederholungen-).
+
+- **Vertrag:** [technik/speicherstaende.md](docs/technik/speicherstaende.md) (neu, verbindlich):
+  Zustandsverzeichnis, Inhaltsfingerabdruck, Prüfungen beim Laden, Dateiformat v1,
+  Befehlsprotokoll und Wiederholung, Versionen, Kommandozeile, Godot, Abnahme mit Messwerten.
+  [bridge-api.md](docs/technik/bridge-api.md) ergänzt.
+- **Kern:**
+  - Zustandsverzeichnis (`core/src/state_access.hpp`): eine Liste aller veränderlichen Felder für
+    Prüfsumme, Textexport (`Simulation::state_text`), Schreiben und Lesen; Referenzprüfsummen
+    unverändert.
+  - Spielstände (`uhrwerk/savegame.hpp`): 48-Byte-Kopf, Metadaten als Text, Nutzdaten mit zstd
+    1.5.6 (per `FetchContent`, statisch); Inhaltsfingerabdruck je Bereich; Laden in frisch
+    geladene Spieldaten mit Prüfung aller Indizes und Größen und Gegenprobe der Prüfsumme;
+    gleicher Zustand ergibt dieselben Bytes; atomares Schreiben über eine Nebendatei.
+  - Befehlsprotokoll (`Simulation::command_log`, beim Einreihen, mit wartenden Befehlen) und
+    Startprüfsumme; Wiederholung mit jährlichen Kontrollpunkten, die den ersten abweichenden Tag
+    meldet; Protokolldatei `.protokoll`.
+  - Neuer Zufallsstrom `Testbefehle = 6` (nur Kommandozeile).
+  - **146 Testfälle** (vorher 136), u. a. Weiterspielen an 17 Speicherpunkten mit 1 und 4 Threads,
+    beschädigte und fremde Dateien, Formatwache, Wiederholung mit abweichendem Befehl.
+- **CLI:** `lauf --speichern/--laden/--protokoll/--testbefehle`, `speichertest`, `wiederholung`,
+  `spielstand [--text]`, `lasttest --speichern`.
+- **Brücke und Godot:** `save_game`, `load_game`, `get_save_info`, `get_save_format_version`;
+  Spielmenü (Knopf „Menü“, F10) mit Speichern unter einem Namen und Laden aus der Liste,
+  Schnellspeichern (F5) und -laden (F9), automatischer Spielstand am 1. Januar (drei bleiben),
+  Startoption `--spielmenue`. `unit_test.gd` mit **212 Prüfungen** (vorher 187); Rauch- und
+  Klicktest mit Spielständen.
+- **CI:** CTests `speichertest_50_jahre`, `protokoll_50_jahre`, `wiederholung_50_jahre`,
+  `wiederholung_spielstand`, `spielstand_laden`, `spielstand_fremder_inhalt`; der
+  Determinismus-Job vergleicht zusätzlich den Prüfwert eines Spielstands nach 100 Jahren
+  (`17078dcdeecde792`); Lasttest-Job mit Spielstand; vierter Screenshot (Spielmenü).
+- **Behoben:** MSVC brach mit `/WX` an unerreichbarem Code im Zustandsverzeichnis ab (C4702); das
+  Datum der Metadaten wird ohne `sscanf` gelesen.
+
 ### Meilenstein M5 – Wirtschaft und Staatshaushalt
 
 Einkommen, Preise und Steuern entstehen jetzt aus einem Wirtschaftskreislauf mit Gütern, Betrieben

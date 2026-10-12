@@ -116,7 +116,8 @@ Ergänzt durch zwei Querschnittsprinzipien: **Geschichte als lebendiges System**
 ### Projektstand
 
 **Meilensteine M1 (technischer Durchstich), M2 (Datenpipeline), M3 (Karte des Kernraums), M4
-(Bevölkerung und Lasttest) und M5 (Wirtschaft und Staatshaushalt) sind abgeschlossen**, siehe
+(Bevölkerung und Lasttest), M5 (Wirtschaft und Staatshaushalt) und M6 (Speicherstände und
+Wiederholungen) sind abgeschlossen – damit ist die Vorproduktion (Phase 1) fertig**, siehe
 [Meilensteinplan](docs/meilensteine.md). Der ganze Weg von den Daten bis
 zum Bild steht: Tabellen → Archivar → Chronik-Skript → Simulationskern „Uhrwerk“ → GDExtension →
 Godot-Oberfläche. Die Karte zeigt seit M3 den **ganzen Kernraum mit 4.542 Orten in 626 Kreisen**;
@@ -128,20 +129,22 @@ der Kern rechnet im Lasttest 500.000 Bevölkerungsblöcke in 0,6 s je Spieljahr 
 mit gleicher Prüfsumme bei jeder Zahl von Threads. Seit M5 entstehen Einkommen, Preise und Steuern
 aus Gütern, Betrieben und regionalen Märkten, und die Staaten führen einen Haushalt mit Kredit und
 Staatsbankrott; ein Balancing-Bericht prüft in der CI, dass die Kassen über 100 Jahre plausibel
-bleiben. Das ganze Spiel aus dem Design-Dokument ist das noch nicht.
+bleiben. Seit M6 lassen sich Partien speichern, laden und bitgleich fortsetzen (zstd-komprimiert,
+38 KB nach 100 Jahren), und aus Startzustand und Befehlsprotokoll lässt sich jede Partie exakt
+wiederholen. Das ganze Spiel aus dem Design-Dokument ist das noch nicht.
 
 | Baustein | Stand |
 |---|---|
-| Simulationskern „Uhrwerk“ (`core/`) | Festkomma, Zufallsströme, Kalender, Parser und Lader für das Chronik-Skript mit datierter Historie, Tagestick, Seuchen und Kriegsverwüstung, Steuerbefehl, Chronik, Prüfsumme; seit M3 Orte ohne Daten und Kreise; seit M4 Bevölkerungsmodell (Altersaufbau, Kultur, Lebensstandard, Bildung, Wanderung), Mehrkernberechnung und Lasttest-Welt; seit M5 Wirtschaft (Güter, Betriebe, Märkte, Handel, Verbrauch) und Staatshaushalt (drei Steuerarten, Kredit, Bankrott, Landesausbau), Balancing-Bericht |
-| Kommandozeile `uhrwerk-cli` (`cli/`) | Daten prüfen, Überblick (Orte mit und ohne Daten, Kreise), Simulationsläufe mit Bericht, Bevölkerungsbilanz und Chronik, Determinismusprüfung, Lasttest, Wirtschaft im Überblick, Balancing-Bericht über viele Seeds |
-| Tests (`tests/`) | 136 Testfälle (doctest) und Integrationsläufe mit den echten Daten, Lasttest mit 3 Threads gegen 1 Thread, Balancing-Bericht auf der Test-Fixture |
+| Simulationskern „Uhrwerk“ (`core/`) | Festkomma, Zufallsströme, Kalender, Parser und Lader für das Chronik-Skript mit datierter Historie, Tagestick, Seuchen und Kriegsverwüstung, Steuerbefehl, Chronik, Prüfsumme; seit M3 Orte ohne Daten und Kreise; seit M4 Bevölkerungsmodell (Altersaufbau, Kultur, Lebensstandard, Bildung, Wanderung), Mehrkernberechnung und Lasttest-Welt; seit M5 Wirtschaft (Güter, Betriebe, Märkte, Handel, Verbrauch) und Staatshaushalt (drei Steuerarten, Kredit, Bankrott, Landesausbau), Balancing-Bericht; seit M6 Zustandsverzeichnis, Spielstände (zstd), Inhaltsfingerabdruck, Befehlsprotokoll und Wiederholung, Textexport des Zustands |
+| Kommandozeile `uhrwerk-cli` (`cli/`) | Daten prüfen, Überblick (Orte mit und ohne Daten, Kreise), Simulationsläufe mit Bericht, Bevölkerungsbilanz und Chronik, Determinismusprüfung, Lasttest, Wirtschaft im Überblick, Balancing-Bericht über viele Seeds; seit M6 Speichern, Laden, Protokoll, Wiederholung, Speichertest und Spielstandinfo mit Textexport |
+| Tests (`tests/`) | 146 Testfälle (doctest) und Integrationsläufe mit den echten Daten, Lasttest mit 3 Threads gegen 1 Thread, Balancing-Bericht auf der Test-Fixture, Speichertest und Wiederholung über 50 Jahre |
 | Spieldaten (`data/`) | Lesezeichen „Der Westfälische Frieden“ (24.10.1648): 16 Staaten, 4.542 Orte in 626 Kreisen, davon 60 mit historischen Daten (Mittel- und Nordostdeutschland); seit M5 Güter, Bedürfnisse, Betriebe, 77 Märkte und Zielwerte des Balancing-Berichts; gepflegt in Tabellen mit Quelle und Sicherheit je Angabe |
 | Archivar (`tools/archivar/`) | erzeugt `data/history/` (Staaten, Kreise, Orte) aus den Tabellen und prüft Verweise, Lücken und Ausreißer; 35 Tests |
 | Geodaten (`tools/geodaten/`) | lädt und pinnt die offenen Quellen (Natural Earth, GeoNames, Terrain Tiles), schneidet Land, Seen und Flüsse zu und erzeugt mit `orte.py` die Orte und Kreise des Kernraums; 96 Tests |
 | Kartengenerator (`tools/kartengenerator/`) | erzeugt Ort-ID-Bild mit Flächenart (4096 × 3329 Pixel), Flussebene und Zuordnungstabelle aus Geometrie und Orten (Python mit numpy, 13–21 s); 88 Tests |
 | Brücke (`bridge/`) | GDExtension mit der Klasse `UhrwerkSimulation` |
-| Godot-Prototyp (`game/`) | Großkarte des Kernraums mit zehn Kartenmodi (u. a. Lebensstandard, Kultur, Wirtschaft und Märkte), Zoomstufen mit Staats-, Kreis- und Ortsnamen, Staatspanel mit drei Steuerreglern und Haushaltsfenster, Ortsinfo mit Wirtschaft, Kulturen, Altersaufbau und Bevölkerungsbilanz, Chronik, Legende; Einheitentest (187 Prüfungen), Rauchtest, Klicktest (4.542 von 4.542 Orten in drei Zoomstufen, Namen und Panels, Wirtschaft) |
-| CI (`.github/workflows/`) | Linux (GCC, Clang), Windows (MSVC), Prüfsummenvergleich (100 Jahre und Lasttest), Lasttest mit 500.000 Blöcken (Release), Balancing-Bericht (16 Seeds, 100 Jahre), Formatierung, Python-Werkzeuge (Python 3.10 und 3.13 mit numpy), Godot mit Einheiten-, Rauch- und Klicktest und Screenshots |
+| Godot-Prototyp (`game/`) | Großkarte des Kernraums mit zehn Kartenmodi (u. a. Lebensstandard, Kultur, Wirtschaft und Märkte), Zoomstufen mit Staats-, Kreis- und Ortsnamen, Staatspanel mit drei Steuerreglern und Haushaltsfenster, Ortsinfo mit Wirtschaft, Kulturen, Altersaufbau und Bevölkerungsbilanz, Chronik, Legende, Spielmenü mit Speichern und Laden, F5/F9, Autosave; Einheitentest (212 Prüfungen), Rauchtest, Klicktest (4.542 von 4.542 Orten in drei Zoomstufen, Namen und Panels, Wirtschaft, Spielstände) |
+| CI (`.github/workflows/`) | Linux (GCC, Clang), Windows (MSVC), Prüfsummenvergleich (100 Jahre, Lasttest und Prüfwert eines Spielstands), Lasttest mit 500.000 Blöcken (Release), Balancing-Bericht (16 Seeds, 100 Jahre), Formatierung, Python-Werkzeuge (Python 3.10 und 3.13 mit numpy), Godot mit Einheiten-, Rauch- und Klicktest und Screenshots |
 
 Noch **nicht** umgesetzt ist alles Weitere aus dem Design-Dokument – historische Daten für den
 übrigen Kernraum, Politik, Parteien und Wahlen, Diplomatie, Krieg, KI, Speicherstände,
@@ -209,6 +212,11 @@ Arbeitsverzeichnis), alternativ `--daten DIR`:
 ./build/dev/cli/uhrwerk-cli lauf --jahre 10 --seed 7           # anderer Seed
 ./build/dev/cli/uhrwerk-cli determinismus --jahre 100          # zwei Läufe vergleichen (Prüfsumme je Jahr)
 ./build/dev/cli/uhrwerk-cli wirtschaft --jahre 20 --maerkte    # Güter, Berufe, Haushalt, Preise je Markt
+./build/dev/cli/uhrwerk-cli lauf --jahre 50 --testbefehle 200 --speichern partie.einigkeit --protokoll partie.protokoll
+./build/dev/cli/uhrwerk-cli lauf --laden partie.einigkeit --jahre 10   # Spielstand laden und weiterrechnen
+./build/dev/cli/uhrwerk-cli wiederholung partie.protokoll      # Partie vom Start bitgleich nachrechnen
+./build/dev/cli/uhrwerk-cli spielstand partie.einigkeit --text # Zustand als Text (für diff)
+./build/dev/cli/uhrwerk-cli speichertest --jahre 50 --testbefehle 200   # Abnahme: Speichern ändert nichts
 ./build/dev/cli/uhrwerk-cli --hilfe                            # alle Befehle und Optionen
 
 # Release-Build: cmake --preset release && cmake --build --preset release
