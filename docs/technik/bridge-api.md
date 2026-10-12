@@ -1,4 +1,4 @@
-# GDExtension-Brücke: Schnittstelle für GDScript (Meilensteine M1 und M3)
+# GDExtension-Brücke: Schnittstelle für GDScript (Meilensteine M1 bis M5)
 
 Die Brücke (`bridge/`) stellt dem Godot-Projekt genau eine Klasse bereit: **`UhrwerkSimulation`** (erbt von `RefCounted`). Sie besitzt einen `uhrwerk::Simulation`-Kern und übersetzt zwischen Godot-Typen und Kern-Typen.
 
@@ -25,18 +25,22 @@ Die Brücke (`bridge/`) stellt dem Godot-Projekt genau eine Klasse bereit: **`Uh
 | `get_player_state_index()` | `int` | Index des vorausgewählten Spielerstaates oder -1 |
 | `get_state_count()` | `int` | |
 | `get_state_index(tag: String)` | `int` | -1, wenn unbekannt |
-| `get_state(index: int)` | `Dictionary` | `tag`, `name`, `short_name`, `color` (Color), `ruler`, `government`, `capital_index` (int), `treasury` (float), `tax_rate_percent` (int, gerundet), `income_month` (float), `expenses_month` (float), `population` (int), `location_count` (int); seit M4 `living_standard` (float 0–100, nach Einwohnern gemittelt) und `balance_previous` (Dictionary wie bei `get_location`, Summe der Orte) |
+| `get_state(index: int)` | `Dictionary` | `tag`, `name`, `short_name`, `color` (Color), `ruler`, `government`, `capital_index` (int), `treasury` (float), `tax_rate_percent` (int, gerundet), `income_month` (float), `expenses_month` (float), `population` (int), `location_count` (int); seit M4 `living_standard` (float 0–100, nach Einwohnern gemittelt) und `balance_previous` (Dictionary wie bei `get_location`, Summe der Orte); seit M5 der Haushalt: `tax_rates_percent` (Array mit 3 int, Index = Steuerart), `taxes_month` (Array mit 3 float), `court_month`, `administration_month`, `army_month`, `interest_month`, `building_month` (float, Ausgaben je Posten), `debt`, `interest_percent`, `yearly_income` (gleitende Jahreseinnahmen), `army_per_mille` (float), `soldiers`, `bankruptcies`, `premium_months` (int, Monate mit Zinsaufschlag nach einem Bankrott). `tax_rate_percent` ist die Kontribution. `income_month` und `expenses_month` sind seit M5 Summe der Steuern bzw. der Posten des Haushalts vom letzten Rechentag; vor dem ersten Rechentag die beim Start geschätzten Werte (vorher 0) |
 | `get_location_count()` | `int` | |
 | `get_location_index(id: String)` | `int` | -1, wenn unbekannt |
-| `get_location(index: int)` | `Dictionary` | `id`, `name`, `owner_index` (int), `owner_name`, `terrain`, `is_city` (bool), `population` (int), `area_km2` (float), `density` (float, Einwohner je km²), `devastation_percent` (int), `majority_confession`, `confessions` (Dictionary Name → Prozent als float), `production_month` (float), `taxes_month` (float), `source`; seit M3 zusätzlich `has_data` (bool), `kreis_index` (int, −1 ohne Kreis), `kreis_name` (String); seit M4 `majority_culture` (String), `cultures` (Dictionary Name → Prozent als float), `children`, `young`, `working`, `old` (int: 0–14, 15–29, 30–64, 65+ Jahre), `living_standard` (float 0–100), `literacy_percent` (float), `balance_previous` (Dictionary `births`, `deaths`, `plague_deaths`, `moved_in`, `moved_out`, `emigrated` als int, Bilanz des Vorjahres; im ersten Jahr 0). Bevölkerung, Anteile und Mittelwerte umfassen auch die Zugänge, die noch keinen eigenen Block haben (bevoelkerung.md, Abschnitt 4.7). `production_month` und `taxes_month` sind die Werte vom letzten Rechentag des Ortes. Für Orte ohne Daten: `has_data = false`, `owner_index = -1`, `owner_name = ""`, Simulationszahlen (`population`, `density`, `devastation_percent`, `production_month`, `taxes_month`) 0, `majority_confession = ""`, `confessions` leer; Kartenfelder (`terrain`, `is_city`, `area_km2`, Kreis) wie in den Daten |
+| `get_location(index: int)` | `Dictionary` | `id`, `name`, `owner_index` (int), `owner_name`, `terrain`, `is_city` (bool), `population` (int), `area_km2` (float), `density` (float, Einwohner je km²), `devastation_percent` (int), `majority_confession`, `confessions` (Dictionary Name → Prozent als float), `production_month` (float), `taxes_month` (float), `source`; seit M3 zusätzlich `has_data` (bool), `kreis_index` (int, −1 ohne Kreis), `kreis_name` (String); seit M4 `majority_culture` (String), `cultures` (Dictionary Name → Prozent als float), `children`, `young`, `working`, `old` (int: 0–14, 15–29, 30–64, 65+ Jahre), `living_standard` (float 0–100), `literacy_percent` (float), `balance_previous` (Dictionary `births`, `deaths`, `plague_deaths`, `moved_in`, `moved_out`, `emigrated` als int, Bilanz des Vorjahres; im ersten Jahr 0); seit M5 `market_index` (int, −1 ohne Markt), `market_name`, `is_port` (bool), `development_percent` (float, Zuschlag des Landesausbaus auf die Tragfähigkeit), `production_per_capita` (float, Reichstaler je Einwohner und Jahr), `professions` (Array von `{ name, stratum (0 unten, 1 mittel, 2 oben), people, income_year (je Kopf), coverage_percent (Mittel über die Bedürfnisse), food_percent (Grundnahrung) }`), `businesses` (Array von `{ name, profession, people }`), `goods` (Array von `{ name, color, supply, demand (je Monat), price, price_factor (zum Basispreis) }`, nur Güter mit Angebot oder Nachfrage im Ort); für Orte ohne Daten sind die drei Arrays leer. Bevölkerung, Anteile und Mittelwerte umfassen auch die Zugänge, die noch keinen eigenen Block haben (bevoelkerung.md, Abschnitt 4.7). `production_month` und `taxes_month` sind die Werte vom letzten Rechentag des Ortes. Für Orte ohne Daten: `has_data = false`, `owner_index = -1`, `owner_name = ""`, Simulationszahlen (`population`, `density`, `devastation_percent`, `production_month`, `taxes_month`) 0, `majority_confession = ""`, `confessions` leer; Kartenfelder (`terrain`, `is_city`, `area_km2`, Kreis) wie in den Daten |
 | `get_location_owner_indices()` | `PackedInt32Array` | seit M3: Besitzer-Staatsindex je Ort (−1 ohne Daten), Länge = `get_location_count()` – für Grenzen im Shader ohne 4.500 Einzelabfragen |
 | `get_location_kreis_indices()` | `PackedInt32Array` | seit M3: Kreisindex je Ort (−1 ohne Kreis) |
+| `get_location_market_indices()` | `PackedInt32Array` | seit M5: Marktindex je Ort (−1 ohne Markt), Länge = `get_location_count()`; Grundlage der Marktgrenzen |
+| `get_market_count()` | `int` | seit M5 |
+| `get_market(index: int)` | `Dictionary` | seit M5: `id`, `name`, `location_count` (Orte mit Daten), `active` (bool, mindestens ein Ort mit Daten), `is_port` (bool), `harvest` (float, Erntefaktor des Jahres), `goods` (Array je Gut: `id`, `name`, `color`, `base_price`, `price`, `price_factor`, `supply`, `demand`, `imports`, `exports`, `buy_percent`) |
 | `get_kreis_count()` | `int` | seit M3 |
 | `get_kreis_index(id: String)` | `int` | seit M3; −1, wenn unbekannt |
 | `get_kreis(index: int)` | `Dictionary` | seit M3: `id`, `name`, `location_count` (int), `source` |
 | `get_map_colors(mode: int)` | `PackedColorArray` | Eine Farbe je Simulations-Ortsindex (Länge = `get_location_count()`), siehe Kartenmodi |
-| `set_tax_rate_percent(state_index: int, percent: int)` | `bool` | Reiht einen `SetTaxRate`-Befehl ein; `false`, wenn Index ungültig oder Prozent außerhalb 0..Maximum |
-| `get_max_tax_rate_percent()` | `int` | |
+| `set_tax_rate_percent(state_index: int, percent: int)` | `bool` | Reiht einen `SetTaxRate`-Befehl für die Kontribution ein; `false`, wenn Index ungültig oder Prozent außerhalb 0..Maximum |
+| `set_tax_percent(state_index: int, kind: int, percent: int)` | `bool` | seit M5: wie oben für eine Steuerart (`TAX_KONTRIBUTION` 0, `TAX_AKZISE` 1, `TAX_ZOLL` 2); `false` auch bei unbekannter Art |
+| `get_max_tax_rate_percent()` | `int` | Höchstsatz, gilt für alle drei Steuerarten |
 | `get_chronicle_size()` | `int` | |
 | `get_chronicle(from_index: int)` | `Array` | Einträge ab `from_index` als Dictionaries `{ "date_text": String, "text": String, "location_index": int, "state_index": int }` |
 | `get_checksum()` | `String` | Prüfsumme als 16-stellige Hexadezimalzahl |
@@ -53,10 +57,15 @@ Die Brücke (`bridge/`) stellt dem Godot-Projekt genau eine Klasse bereit: **`Uh
 | 5 | `MAP_KREISE` | seit M3: Farbe je Kreis aus einer festen Palette (`palette[kreisindex % n]`, benachbarte Kreisindizes unterschiedlich); Orte ohne Kreis grau |
 | 6 | `MAP_LEBENSSTANDARD` | seit M4: linearer Verlauf nach mittlerem Lebensstandard (0 → rot, 100 → grün) |
 | 7 | `MAP_KULTUR` | seit M4: Farbe der Mehrheitskultur (`common/kulturen.chron`) |
+| 8 | `MAP_WIRTSCHAFT` | seit M5: linearer Verlauf nach Wirtschaftsleistung je Einwohner und Jahr (0 → hell, ≥ 16 Reichstaler → dunkelbraun) |
+| 9 | `MAP_MAERKTE` | seit M5: Farbe je Markt aus der Palette von `MAP_KREISE`; die aktiven Märkte laufen nacheinander durch die Palette, damit sich Nachbarn unterscheiden |
 
-**Orte ohne Daten** (seit M3) erhalten in den Modi 0, 1, 2, 4, 6 und 7 eine Farbe mit **Alpha 0**;
+**Orte ohne Daten** (seit M3) erhalten in den Modi 0, 1, 2, 4, 6, 7 und 8 eine Farbe mit **Alpha 0**;
 die Godot-Seite zeichnet dort eine Schraffur „keine Daten“. In den Modi 3 und 5 haben sie normale
-Farben (Alpha 1).
+Farben (Alpha 1), im Modus 9 dann, wenn ihr Markt Orte mit Daten hat.
+
+**Steuerarten** (seit M5) sind als Konstanten `TAX_KONTRIBUTION` (0), `TAX_AKZISE` (1) und
+`TAX_ZOLL` (2) gebunden, die Kartenmodi als `MAP_*`.
 
 **Threads (seit M4):** Die Brücke legt die Simulation mit `SimConfig::threads = 0` an, rechnet
 also auf allen Kernen. Das Ergebnis ist bei jeder Thread-Zahl gleich (bevoelkerung.md,

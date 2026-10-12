@@ -2,8 +2,8 @@
 
 > **Status: verbindlich** für Kern (`core/src/economy.cpp`), Daten und Tests, soweit umgesetzt: Datenmodell
 > (Abschnitt 2), Märkte, Ortsrechnung, Staatshaushalt, Ernte und Einschwingen (Abschnitte 4.1–4.8) und
-> Balancing-Bericht (7); offen sind Brücke und Oberfläche (Schritt 6 von M5,
-> [meilensteine.md](../meilensteine.md#m5--wirtschaft-und-staatshaushalt)). Das Dokument entstand als
+> Balancing-Bericht (7), Brücke und Oberfläche (10)
+> ([meilensteine.md](../meilensteine.md#m5--wirtschaft-und-staatshaushalt)). Das Dokument entstand als
 > Entwurf und wurde vor der Umsetzung freigegeben; Abweichungen der Umsetzung sind eingearbeitet
 > (u. a. Handel bis zur ganzen Menge, Überschuss nicht in Grundnahrung, Hunger quadratisch, Bauten nur
 > ohne Schulden, Kalibrierung in 4.9).
@@ -593,6 +593,19 @@ Referenzprüfsumme nach 100 Jahren ändert sich (M4: `ed6b14a02cfbfa5d`).
 - Ortspanel: Abschnitt **Wirtschaft** (Markt, Betriebe, wichtigste Güter mit Preis gegenüber dem
   Basispreis, Bedarfsdeckung).
 - Zwei Kartenmodi mit Legende (Tasten O und P), damit zehn.
+
+**Umgesetzt** (Schritt 6) wie oben, mit diesen Abweichungen:
+- Der Steuerbefehl heißt `set_tax_percent(staat, art, prozent)`; `set_tax_rate_percent` bleibt für
+  die Kontribution. `get_state` liefert `income_month`/`expenses_month` jetzt aus dem Haushalt, vor
+  dem ersten Rechentag also die Schätzung vom Start statt 0.
+- Das Haushaltsfenster ist ein Popup am Staatspanel („Haushalt im Einzelnen …“), Startoption
+  `--haushalt` für Screenshots.
+- Marktgrenzen nutzen die Ebene der Kreisgrenzen im Shader; die Farben der aktiven Märkte laufen
+  nacheinander durch die Palette, die Legende zeigt Kurznamen ohne Klammerzusatz.
+- Die Modusleiste verliert ihren Titel und bekommt schmalere Knöpfe, damit zehn Modi bei 1.600
+  Pixeln Breite zwischen die Spalten passen.
+- Statt „Bedarfsdeckung je Schicht“ zeigt die Ortsinfo Einkommen und Bedarfsdeckung je Beruf (rot,
+  wenn die Grundnahrung unter 90 % liegt).
 
 ## 11. Umsetzungsschritte
 
