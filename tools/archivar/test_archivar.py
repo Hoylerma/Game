@@ -68,7 +68,7 @@ class TestErzeugung(MitKopie):
         # Die eingecheckte Ausgabe unter testdaten/history ist die Referenz.
         code, aus, fehler = self.pruefen()
         self.assertEqual((code, fehler), (0, ""), aus)
-        self.assertIn("history/ ist aktuell (6 Dateien, 4 Orte, 2 Kreise, 2 Staaten)", aus)
+        self.assertIn("history/ ist aktuell (7 Dateien, 4 Orte, 2 Kreise, 2 Staaten)", aus)
 
     def test_deterministisch(self) -> None:
         m = ar.Meldungen()
@@ -126,7 +126,8 @@ class TestErzeugung(MitKopie):
         self.assertEqual(code, 0)
         self.assertIn("besitz.csv                 4 Zeilen  (gesichert 3, ungeprueft 1)", aus)
         self.assertIn("krone (1701.01.18): 3 Orte mit Daten, 1 ohne Daten, 2 Staaten mit Orten", aus)
-        self.assertIn("Orte: 4, Kreise: 2, Staaten: 2", aus)
+        self.assertIn("Orte: 4, Kreise: 2, Staaten: 2, Verwaltungseinheiten: 2", aus)
+        self.assertIn("verwaltung.csv             2 Zeilen  (gesichert 1, schaetzung 1)", aus)
 
 
 # ─── Prüfungen ──────────────────────────────────────────────────────────────
@@ -139,7 +140,7 @@ class TestFehler(MitKopie):
 
     def test_spaltenzahl(self) -> None:
         self.anhaengen("besitz.csv", "burg;1700.01.01;AAA")
-        self.erwarte_fehler("tabellen/besitz.csv:6: erwartet 5 Spalten, gefunden 3")
+        self.erwarte_fehler("tabellen/besitz.csv:6: erwartet 7 Spalten, gefunden 3")
 
     def test_tabelle_fehlt(self) -> None:
         self.tabelle("besitz.csv").unlink()
@@ -168,8 +169,8 @@ class TestFehler(MitKopie):
             ("besitz.csv", "burg;1648.10.24", "burg;1648.13.24"): "ungültiges Datum '1648.13.24' in Spalte 'ab'",
             ("besitz.csv", "burg;1648.10.24", "burg;0000.01.01"): "ungültiges Datum '0000.01.01' in Spalte 'ab'",
             ("orte.csv", "11.00;53.50;250", "11.00;53.50;0.000001"): "Fläche 0.000001 km² ist für den Kern zu klein",
-            ("besitz.csv", "burg;1648.10.24;BBB;gesichert", "burg;1648.10.24;BBB;sicher"): "ungültige Sicherheit 'sicher'",
-            ("besitz.csv", "burg;1648.10.24;BBB;gesichert;Testquelle", "burg;1648.10.24;BBB;gesichert;"): "Spalte 'quelle' darf nicht leer sein",
+            ("besitz.csv", "burg;1648.10.24;BBB;sl_burg;ja;gesichert", "burg;1648.10.24;BBB;sl_burg;ja;sicher"): "ungültige Sicherheit 'sicher'",
+            ("besitz.csv", "burg;1648.10.24;BBB;sl_burg;ja;gesichert;Testquelle", "burg;1648.10.24;BBB;sl_burg;ja;gesichert;"): "Spalte 'quelle' darf nicht leer sein",
             ("bevoelkerung.csv", "lutherisch=90 katholisch=10", "lutherisch=90 katholisch=20"): "ergeben 110 %",
             ("bevoelkerung.csv", "lutherisch=90 katholisch=10", "lutherisch 90"): "ungültige Angabe in Spalte 'konfession'",
             ("bevoelkerung.csv", "suedleute=80 nordleute=20", "suedleute=80 nordleute=30"): "Anteile in Spalte 'kultur' ergeben 110 %",
@@ -253,7 +254,7 @@ class TestFehler(MitKopie):
 
     def test_doppelte_eintraege(self) -> None:
         self.anhaengen("orte.csv", "burg;sued;Burg 2;flachland;11.5;52.4;200;ja;kr_burg;;;Testdaten")
-        self.anhaengen("besitz.csv", "burg;1648.10.24;AAA;gesichert;Testquelle")
+        self.anhaengen("besitz.csv", "burg;1648.10.24;AAA;;;gesichert;Testquelle")
         self.anhaengen("staaten_historie.csv", "AAA;1648.10.24;schatz;5;spielwert;Spielwert")
         code, _, fehler = self.pruefen()
         self.assertEqual(code, 2)
@@ -289,14 +290,14 @@ class TestOrteOhneDatenUndKreise(MitKopie):
         self.assertEqual([(n.key, n.value, n.get_string("name")) for n in root.children], [("kreis", "kr_burg", "Burg")])
 
     def test_halbe_daten(self) -> None:
-        self.anhaengen("besitz.csv", "moor;1690.01.01;AAA;gesichert;Testquelle")
+        self.anhaengen("besitz.csv", "moor;1690.01.01;AAA;;;gesichert;Testquelle")
         self.erwarte_fehler(
             "Ort moor hat zum Szenario krone (1701.01.18) einen Besitzer, aber keine Bevölkerungsangabe"
         )
 
     def test_daten_erst_ab_spaeterem_datum(self) -> None:
         # 1648 ohne Daten, 1701 mit Daten: erlaubt.
-        self.anhaengen("besitz.csv", "moor;1690.01.01;AAA;gesichert;Testquelle")
+        self.anhaengen("besitz.csv", "moor;1690.01.01;AAA;;;gesichert;Testquelle")
         self.anhaengen("bevoelkerung.csv", "moor;1690.01.01;800;lutherisch=100;;0;schaetzung;Testquelle")
         code, aus, fehler = _ausfuehren("--daten", str(self.daten), "--bericht")
         self.assertEqual(code, 0, fehler)
@@ -313,6 +314,85 @@ class TestOrteOhneDatenUndKreise(MitKopie):
         self.assertEqual(code, 0, fehler)
         self.assertIn("Warnung: tabellen/orte.csv:4: 1 Orte ohne Kreis (Spalte 'kreis' leer): burg", fehler)
         self.assertIn("Warnung: tabellen/kreise.csv:3: Kreis kr_burg hat keine Orte", fehler)
+
+
+class TestStaatenbestandUndVerwaltung(MitKopie):
+    """Seit M7: Staaten bestehen nur zu Szenarien, in denen sie Orte besitzen; Verwaltungseinheiten."""
+
+    def test_staat_erst_im_spaeteren_szenario(self) -> None:
+        # CCC besitzt moor erst ab 1690: Für frieden (1648) braucht CCC keine Pflichtfelder.
+        self.anhaengen("staaten.csv", "CCC;CCC_neu;Neuland;Neuland;1 2 3;Testdaten")
+        for feld, wert in (
+            ("hauptstadt", "moor"),
+            ("regierungsform", "grafschaft"),
+            ("herrscher", "Graf"),
+            ("konfession", "lutherisch"),
+            ("schatz", "0"),
+            ("kontribution", "0"),
+            ("akzise", "0"),
+            ("zoll", "0"),
+            ("hofhaltung", "0"),
+            ("heer", "0"),
+        ):
+            self.anhaengen("staaten_historie.csv", f"CCC;1690.01.01;{feld};{wert};spielwert;Test")
+        self.anhaengen("besitz.csv", "moor;1690.01.01;CCC;;;gesichert;Testquelle")
+        self.anhaengen("bevoelkerung.csv", "moor;1690.01.01;800;lutherisch=100;;0;schaetzung;Testquelle")
+        code, aus, fehler = _ausfuehren("--daten", str(self.daten), "--bericht")
+        self.assertEqual(code, 0, fehler)
+        self.assertNotIn("CCC", fehler)
+        self.assertIn("krone (1701.01.18): 4 Orte mit Daten, 0 ohne Daten, 3 Staaten mit Orten", aus)
+
+    def test_pflichtfelder_nur_fuer_bestehende_staaten(self) -> None:
+        # BBB besitzt 1648 burg und braucht daher alle Pflichtfelder.
+        self.ersetze("staaten_historie.csv", "BBB;1648.10.24;heer", "BBB;1690.01.01;heer")
+        self.erwarte_fehler("Staat BBB hat zum Szenario frieden (1648.10.24) keinen Wert für 'heer'")
+
+    def test_spieler_ohne_land(self) -> None:
+        self.ersetze("besitz.csv", "hafen;1648.10.24;AAA", "hafen;1648.10.24;BBB")
+        self.ersetze("besitz.csv", "heide;1648.10.24;AAA", "heide;1648.10.24;BBB")
+        self.ersetze("staaten_historie.csv", "AAA;1648.10.24;hauptstadt;hafen", "AAA;1648.10.24;hauptstadt;moor")
+        self.erwarte_fehler("szenarien/szenarien.chron: Spielerstaat AAA besitzt zum Szenario frieden (1648.10.24) keinen Ort")
+
+    def test_verwaltung_in_der_ausgabe(self) -> None:
+        root = chron.parse_script((self.daten / "history/verwaltung/sued.chron").read_text(encoding="utf-8")).root
+        self.assertEqual(
+            [(n.value, n.get_string("art"), n.get_string("ueber")) for n in root.children],
+            [("sl_land", "land", None), ("sl_burg", "kreis", "sl_land")],
+        )
+
+    def test_verwaltung_nur_bei_aenderung(self) -> None:
+        # Eine spätere Besitzzeile ohne Verwaltung hebt die Einheit auf (verwaltung = keine, bund = nein);
+        # eine mit unveränderten Werten wiederholt sie nicht.
+        self.anhaengen("besitz.csv", "burg;1680.01.01;BBB;sl_burg;ja;gesichert;Testquelle")
+        self.anhaengen("besitz.csv", "burg;1690.01.01;BBB;;;gesichert;Testquelle")
+        m = ar.Meldungen()
+        bezug = ar.lade_bezug(self.daten, m)
+        ausgabe = ar.erzeuge(ar.baue_archiv(self.daten / "tabellen", bezug, m))
+        self.assertEqual(m.fehler, [])
+        burg = chron.parse_script(ausgabe["history/orte/sued.chron"]).root.children[0]
+        bloecke = {k.key: [(c.key, c.value) for c in k.children] for k in burg.children if k.is_block}
+        self.assertEqual(bloecke["1680.01.01"], [("besitzer", "BBB")])
+        self.assertEqual(bloecke["1690.01.01"], [("besitzer", "BBB"), ("verwaltung", "keine"), ("bund", "nein")])
+
+    def test_fehler_der_verwaltung(self) -> None:
+        faelle = {
+            ("besitz.csv", "burg;1648.10.24;BBB;sl_burg", "burg;1648.10.24;BBB;sl_gibtsnicht"): "unbekannte Verwaltungseinheit 'sl_gibtsnicht' für burg",
+            ("besitz.csv", "heide;1701.01.18;BBB;sl_land", "heide;1701.01.18;AAA;sl_land"): "Verwaltungseinheit sl_land gehört zu BBB, heide aber zu AAA",
+            ("besitz.csv", "BBB;sl_burg;ja", "BBB;sl_burg;vielleicht"): "Spalte 'bund' erwartet ja, nein oder nichts, nicht 'vielleicht'",
+            ("verwaltung.csv", "sl_land;sued;Land Südland;land;;", "sl_land;sued;Land Südland;land;sl_burg;"): "Verwaltungseinheit sl_burg liegt (über 'ueber') in sich selbst",
+            ("verwaltung.csv", "kreis;sl_land;BBB", "kreis;sl_oben;BBB"): "unbekannte Verwaltungseinheit 'sl_oben' als 'ueber' von sl_burg",
+            ("verwaltung.csv", "kreis;sl_land;BBB", "kreis;sl_land;AAA"): "Verwaltungseinheit sl_burg (AAA) liegt in sl_land eines anderen Staates (BBB)",
+            ("verwaltung.csv", ";land;;BBB", ";land;;XYZ"): "unbekannter Staat 'XYZ' für Verwaltungseinheit sl_land",
+            ("verwaltung.csv", "Kreis Burg;kreis", "Kreis Burg;Kreis"): "ungültige Art 'Kreis'",
+            ("verwaltung.csv", "sl_burg;sued", "keine;sued"): "ungültige Kennung 'keine' für eine Verwaltungseinheit",
+            ("staaten_historie.csv", "zollverein;ja", "zollverein;1"): "'zollverein' erwartet ja oder nein, nicht '1'",
+        }
+        for (tabelle, alt, neu), text in faelle.items():
+            with self.subTest(text):
+                self.tearDown()
+                self.setUp()
+                self.ersetze(tabelle, alt, neu)
+                self.erwarte_fehler(text)
 
 
 class TestWarnungen(MitKopie):
@@ -332,24 +412,14 @@ class TestWarnungen(MitKopie):
         self.assertIn("ungewöhnliche Fläche 5 km² für Ort hafen", fehler)
 
     def test_staat_ohne_ort_und_unbenutzter_kommentar(self) -> None:
+        # Ein Staat ohne Ort besteht in keinem Szenario (der Kern lässt ihn weg): Pflichtfelder und
+        # Hauptstadt werden nicht geprüft, es bleibt eine Warnung.
         self.anhaengen("staaten.csv", "CCC;CCC_leer;Leer;Leer;1 2 3;Testdaten")
-        for feld, wert in (
-            ("hauptstadt", "burg"),
-            ("regierungsform", "x"),
-            ("herrscher", "Niemand"),
-            ("konfession", "katholisch"),
-            ("schatz", "0"),
-            ("kontribution", "0"),
-            ("akzise", "0"),
-            ("zoll", "0"),
-            ("hofhaltung", "0"),
-            ("heer", "0"),
-        ):
-            self.anhaengen("staaten_historie.csv", f"CCC;1648.10.24;{feld};{wert};spielwert;Test")
+        self.anhaengen("staaten_historie.csv", "CCC;1648.10.24;hauptstadt;burg;spielwert;Test")
         self.anhaengen("dateien.csv", "orte;gibt_es_nicht;;Kommentar")
         code, _, fehler = _ausfuehren("--daten", str(self.daten), "--bericht")
-        # Hauptstadt burg gehört BBB: das ist ein Fehler, die übrigen Befunde sind Warnungen.
-        self.assertEqual(code, 2)
+        self.assertEqual(code, 0, fehler)
+        self.assertIn("Warnung: tabellen/staaten.csv:4: Staat CCC besitzt in keinem Szenario einen Ort", fehler)
         self.assertIn("Warnung: tabellen/dateien.csv:6: Kommentar für orte/gibt_es_nicht", fehler)
 
 

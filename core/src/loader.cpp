@@ -465,6 +465,12 @@ struct CapitalRef {
     int line = 0;
 };
 
+struct AdminParentRef {
+    std::string id; // leer = oberste Einheit
+    std::string file;
+    int line = 0;
+};
+
 struct PlayerRef {
     std::string tag;
     std::string file;
@@ -513,11 +519,17 @@ public:
         for (const std::string& name : list_folder("history/kreise", Folder::Optional)) {
             process(name, [&](const SourceFile& f) { load_districts(f); });
         }
+        // Verwaltungseinheiten (seit M7) vor den Orten, die auf sie verweisen; der Ordner darf fehlen.
+        for (const std::string& name : list_folder("history/verwaltung", Folder::Optional)) {
+            process(name, [&](const SourceFile& f) { load_admin_units(f); });
+        }
+        resolve_admin_parents();
         for (const std::string& name : list_folder("history/orte")) {
             process(name, [&](const SourceFile& f) { load_locations(f); });
         }
 
-        check_players(scenarios);
+        drop_states_without_land();
+        check_players(scenarios, selected);
         check_capitals();
         check_districts();
         check_markets();
@@ -1272,7 +1284,7 @@ private:
             Fields f(merged, file.name, "staat " + node.value, issues_,
                      {"name", "kurzname", "farbe", "hauptstadt", "regierungsform", "herrscher", "konfession",
                       "schatz", "kontribution", "akzise", "zoll", "hofhaltung", "heer", "schulden",
-                      "quelle"});
+                      "zollverein", "quelle"});
             State s;
             s.tag = node.value;
             s.name = f.text("name").value_or("");
@@ -1299,6 +1311,9 @@ private:
             s.army_per_mille = f.fixed("heer", between(fx(0), fx(1000))).value_or(Fixed{});
             if (f.has("schulden")) {
                 s.debt = f.fixed("schulden", between(fx(0), fx(1'000'000'000'000))).value_or(Fixed{});
+            }
+            if (f.has("zollverein")) {
+                s.customs_union = f.boolean("zollverein").value_or(false);
             }
             s.source = f.text("quelle").value_or("");
 
@@ -1346,6 +1361,81 @@ private:
         });
     }
 
+    /// Verwaltungseinheiten (seit M7, Abschnitt 3.16): einheit <kennung> { name art ueber quelle }.
+    void load_admin_units(const SourceFile& file) {
+        for_each_definition(file, "einheit", "einheit <kennung> { … }", [&](const ScriptNode& node) {
+            if (!is_location_id(node.value)) {
+                issues_.error(file.name, node.line,
+                              "ungültige Kennung " + quote(node.value) +
+                                  " für eine Verwaltungseinheit (nur Kleinbuchstaben a–z, Ziffern und '_')");
+            } else if (node.value == "keine") {
+                issues_.error(
+                    file.name, node.line,
+                    "„keine“ ist als Kennung einer Verwaltungseinheit reserviert (verwaltung = keine)");
+            }
+            ScriptNode plain = node;
+            plain.children.clear();
+            for (const ScriptNode& child : node.children) {
+                if (looks_dated(child.key)) {
+                    issues_.error(file.name, child.line,
+                                  "datierter Eintrag " + quote(child.key) + " in einheit " + node.value +
+                                      ": Verwaltungseinheiten können (noch) nicht datiert werden");
+                    continue;
+                }
+                plain.children.push_back(child);
+            }
+            Fields f(plain, file.name, "einheit " + node.value, issues_, {"name", "art", "ueber", "quelle"});
+            AdminUnit u;
+            u.id = node.value;
+            u.name = f.text("name").value_or("");
+            u.kind = f.text("art").value_or("");
+            u.source = f.text("quelle").value_or("");
+            AdminParentRef ref;
+            if (f.has("ueber")) {
+                ref.id = f.text("ueber").value_or("");
+                ref.file = file.name;
+                ref.line = plain.find("ueber")->line;
+            }
+            const auto index = static_cast<Index>(world_.admin_units.size());
+            if (register_id(admin_units_, u.id, index, file.name, node.line, "Verwaltungseinheit")) {
+                world_.admin_units.push_back(std::move(u));
+                admin_parents_.push_back(std::move(ref));
+            }
+        });
+    }
+
+    /// Übergeordnete Einheiten auflösen; unbekannte Verweise und Kreise im Baum sind Fehler.
+    void resolve_admin_parents() {
+        for (std::size_t i = 0; i < world_.admin_units.size(); ++i) {
+            const AdminParentRef& ref = admin_parents_[i];
+            if (ref.id.empty()) {
+                continue;
+            }
+            const Index parent = lookup(admin_units_, ref.id);
+            if (parent == kNone) {
+                issues_.error(ref.file, ref.line,
+                              "unbekannte Verwaltungseinheit " + quote(ref.id) + " als 'ueber' von einheit " +
+                                  world_.admin_units[i].id);
+                continue;
+            }
+            world_.admin_units[i].parent = parent;
+        }
+        for (std::size_t i = 0; i < world_.admin_units.size(); ++i) {
+            Index current = world_.admin_units[i].parent;
+            for (std::size_t steps = 0; current != kNone; ++steps) {
+                if (current == static_cast<Index>(i) || steps > world_.admin_units.size()) {
+                    const AdminParentRef& ref = admin_parents_[i];
+                    issues_.error(ref.file, ref.line,
+                                  "Verwaltungseinheit " + world_.admin_units[i].id +
+                                      " liegt (über 'ueber') in sich selbst");
+                    world_.admin_units[i].parent = kNone;
+                    break;
+                }
+                current = world_.admin_units[static_cast<std::size_t>(current)].parent;
+            }
+        }
+    }
+
     void load_locations(const SourceFile& file) {
         // Markt der Landschaft (seit M5): die Datei ohne Ordner und Endung.
         std::string landscape = file.name.substr(file.name.find_last_of('/') + 1);
@@ -1367,7 +1457,8 @@ private:
                                                     {"lage", "flaeche", "kreis", "vorkommen", "hafen"});
             Fields f(merged, file.name, "ort " + node.value, issues_,
                      {"name", "besitzer", "gelaende", "lage", "flaeche", "bevoelkerung", "stadt", "kreis",
-                      "konfession", "kultur", "verwuestung", "vorkommen", "hafen", "quelle"});
+                      "konfession", "kultur", "verwuestung", "vorkommen", "hafen", "verwaltung", "bund",
+                      "quelle"});
             Location loc;
             LocationDraft draft;
             loc.id = node.value;
@@ -1439,6 +1530,20 @@ private:
             }
             if (f.has("hafen")) {
                 loc.is_port = f.boolean("hafen").value_or(false);
+            }
+            if (f.has("verwaltung")) {
+                // „keine“ hebt eine frühere Zuordnung auf (der Ort liegt nicht mehr in einer Einheit).
+                if (const auto unit = f.text("verwaltung"); unit && *unit != "keine") {
+                    loc.admin = lookup(admin_units_, *unit);
+                    if (loc.admin == kNone) {
+                        issues_.error(file.name, merged.find("verwaltung")->line,
+                                      "unbekannte Verwaltungseinheit " + quote(*unit) + " in ort " +
+                                          node.value);
+                    }
+                }
+            }
+            if (f.has("bund")) {
+                loc.federal = f.boolean("bund").value_or(false);
             }
             loc.source = f.text("quelle").value_or("");
 
@@ -1658,13 +1763,62 @@ private:
 
     // ── Querprüfungen ──
 
-    void check_players(const std::vector<Scenario>& scenarios) {
+    /// Staaten, die zum Startdatum keinen Ort besitzen, bestehen nicht (seit M7, Abschnitt 3.5): Sie
+    /// fallen aus der Welt; ihre Hauptstadt wird nicht geprüft. So lädt jedes Szenario nur die
+    /// Staaten seiner Zeit, auch wenn die Daten alle Epochen enthalten.
+    void drop_states_without_land() {
+        std::vector<bool> owns(world_.states.size(), false);
+        for (const Location& loc : world_.locations) {
+            if (loc.owner >= 0 && static_cast<std::size_t>(loc.owner) < owns.size()) {
+                owns[static_cast<std::size_t>(loc.owner)] = true;
+            }
+        }
+        std::vector<Index> remap(world_.states.size(), kNone);
+        std::vector<State> kept;
+        std::vector<CapitalRef> kept_capitals;
+        for (std::size_t i = 0; i < world_.states.size(); ++i) {
+            if (!owns[i]) {
+                dropped_states_.insert(world_.states[i].tag);
+                continue;
+            }
+            remap[i] = static_cast<Index>(kept.size());
+            kept.push_back(std::move(world_.states[i]));
+            kept_capitals.push_back(std::move(capitals_[i]));
+        }
+        world_.states = std::move(kept);
+        capitals_ = std::move(kept_capitals);
+        for (Location& loc : world_.locations) {
+            if (loc.owner != kNone) {
+                loc.owner = remap[static_cast<std::size_t>(loc.owner)];
+            }
+        }
+        for (auto it = states_.begin(); it != states_.end();) {
+            const Index index = remap[static_cast<std::size_t>(it->second.index)];
+            if (index == kNone) {
+                it = states_.erase(it);
+            } else {
+                it->second.index = index;
+                ++it;
+            }
+        }
+    }
+
+    /// Der Spieler des gewählten Szenarios muss zum Startdatum bestehen; die Spieler der übrigen
+    /// Szenarien müssen nur bekannte Staaten sein (sie bestehen zu einem anderen Datum).
+    void check_players(const std::vector<Scenario>& scenarios, const Scenario* selected) {
         for (std::size_t i = 0; i < scenarios.size() && i < players_.size(); ++i) {
             const PlayerRef& ref = players_[i];
-            if (!ref.tag.empty() && lookup(states_, ref.tag) == kNone) {
+            if (ref.tag.empty() || lookup(states_, ref.tag) != kNone) {
+                continue;
+            }
+            if (dropped_states_.count(ref.tag) == 0) {
                 issues_.error(ref.file, ref.line,
                               "unbekannter Staat " + quote(ref.tag) + " als Spieler in szenario " +
                                   scenarios[i].id);
+            } else if (selected == &scenarios[i]) {
+                issues_.error(ref.file, ref.line,
+                              "Spielerstaat " + quote(ref.tag) + " von szenario " + scenarios[i].id +
+                                  " besitzt zum Startdatum keinen Ort");
             }
         }
     }
@@ -1811,7 +1965,10 @@ private:
     Registry landscapes_; // Landschaft → Markt
     std::set<std::string, std::less<>> seen_landscapes_;
     Registry states_;
+    std::set<std::string, std::less<>> dropped_states_; // zum Startdatum ohne Orte (seit M7)
     Registry districts_;
+    Registry admin_units_;
+    std::vector<AdminParentRef> admin_parents_; // parallel zu world_.admin_units
     Registry locations_;
     Registry scenarios_;
 

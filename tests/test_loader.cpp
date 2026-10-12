@@ -1006,6 +1006,198 @@ TEST_CASE("Lader: Verweis auf Kreis ohne Ordner history/kreise") {
     expect_error(load(dir), "unbekannter Kreis 'kr_berlin' in ort berlin_coelln", kPlacesBra, 13);
 }
 
+// ─── Verwaltung, Bundesgebiet, Zollverein und Staatenbestand (seit M7) ──────
+
+namespace {
+
+const char* const kAdminFile = "history/verwaltung/10_sachsen.chron";
+const char* const kDresdenDistrict = "    kreis        = kr_dresden\n";
+
+void write_admin_units(const TempDir& dir) {
+    testhilfen::write_file(dir / kAdminFile, "# Testdaten\n"
+                                             "\n"
+                                             "einheit sx_land {\n"
+                                             "    name   = \"Kurfürstentum Sachsen\"\n"
+                                             "    art    = land\n"
+                                             "    quelle = \"Testdaten\"\n"
+                                             "}\n"
+                                             "\n"
+                                             "einheit sx_meissen {\n"
+                                             "    name   = \"Meißnischer Kreis\"\n"
+                                             "    art    = kreis\n"
+                                             "    ueber  = sx_land\n"
+                                             "    quelle = \"Testdaten\"\n"
+                                             "}\n");
+}
+
+/// Ein weiterer Staat NEU mit Hauptstadt Dessau, der zunächst keinen Ort besitzt.
+void add_state_neu(const TempDir& dir) {
+    testhilfen::write_file(dir / "history/staaten/30_neu.chron", "staat NEU {\n"
+                                                                 "    name           = \"Neuland\"\n"
+                                                                 "    kurzname       = \"Neuland\"\n"
+                                                                 "    farbe          = { 1 2 3 }\n"
+                                                                 "    hauptstadt     = dessau\n"
+                                                                 "    regierungsform = republik\n"
+                                                                 "    herrscher      = \"Rat\"\n"
+                                                                 "    konfession     = lutherisch\n"
+                                                                 "    schatz         = 0\n"
+                                                                 "    kontribution   = 0.1\n"
+                                                                 "    akzise         = 0.05\n"
+                                                                 "    zoll           = 0.02\n"
+                                                                 "    hofhaltung     = 100\n"
+                                                                 "    heer           = 2\n"
+                                                                 "    quelle         = \"Testdaten\"\n"
+                                                                 "}\n");
+}
+
+} // namespace
+
+TEST_CASE("Lader: Verwaltung, Bundesgebiet und Zollverein") {
+    TempDir dir(true);
+    write_admin_units(dir);
+    replace_in_file(dir / kPlacesSax, kDresdenDistrict,
+                    std::string(kDresdenDistrict) + "    verwaltung   = sx_meissen\n    bund         = ja\n"
+                                                    "    1649.06.01 = { verwaltung = sx_land }\n");
+    replace_in_file(dir / "history/orte/30_anhalt.chron", "    kreis        = kr_anhalt\n",
+                    "    kreis        = kr_anhalt\n    verwaltung   = sx_land\n"
+                    "    1649.06.01 = { verwaltung = keine bund = ja }\n");
+    replace_in_file(dir / kStatesMid, "    heer           = 6\n",
+                    "    heer           = 6\n    zollverein     = ja\n");
+
+    const LoadResult before = load(dir, "westfaelischer_frieden");
+    INFO(issues_text(before));
+    REQUIRE(before.ok());
+    CHECK(before.issues.empty());
+    const World& w = *before.world;
+    REQUIRE(w.admin_units.size() == 2);
+    CHECK(w.admin_units[0].id == "sx_land");
+    CHECK(w.admin_units[0].name == "Kurfürstentum Sachsen");
+    CHECK(w.admin_units[0].kind == "land");
+    CHECK(w.admin_units[0].parent == uhrwerk::kNone);
+    CHECK(w.admin_units[0].source == "Testdaten");
+    CHECK(w.admin_units[1].parent == 0);
+    CHECK(w.find_admin_unit("sx_meissen") == 1);
+    CHECK(w.find_admin_unit("sx_gibtsnicht") == uhrwerk::kNone);
+
+    const uhrwerk::Location& dresden = w.locations[static_cast<std::size_t>(w.find_location("dresden"))];
+    CHECK(dresden.admin == 1);
+    CHECK(dresden.federal);
+    const uhrwerk::Location& dessau = w.locations[static_cast<std::size_t>(w.find_location("dessau"))];
+    CHECK(dessau.admin == 0);
+    CHECK_FALSE(dessau.federal);
+    CHECK(w.locations[static_cast<std::size_t>(w.find_location("leipzig"))].admin == uhrwerk::kNone);
+    CHECK(w.states[static_cast<std::size_t>(w.find_state("SAX"))].customs_union);
+    CHECK_FALSE(w.states[static_cast<std::size_t>(w.find_state("ANH"))].customs_union);
+
+    // Datierte Blöcke: ab 1649.06.01 liegt Dresden direkt im Land, Dessau in keiner Einheit, aber im Bund.
+    const LoadResult after = load(dir, "jahresbeginn_1650");
+    INFO(issues_text(after));
+    REQUIRE(after.ok());
+    const World& w2 = *after.world;
+    CHECK(w2.locations[static_cast<std::size_t>(w2.find_location("dresden"))].admin == 0);
+    const uhrwerk::Location& dessau2 = w2.locations[static_cast<std::size_t>(w2.find_location("dessau"))];
+    CHECK(dessau2.admin == uhrwerk::kNone);
+    CHECK(dessau2.federal);
+}
+
+TEST_CASE("Lader: Fehler bei Verwaltungseinheiten") {
+    TempDir dir(true);
+    write_admin_units(dir);
+    SUBCASE("unbekannte Einheit im Ort") {
+        replace_in_file(dir / kPlacesSax, kDresdenDistrict,
+                        std::string(kDresdenDistrict) + "    verwaltung   = sx_dresden\n");
+        expect_error(load(dir), "unbekannte Verwaltungseinheit 'sx_dresden' in ort dresden", kPlacesSax, 14);
+    }
+    SUBCASE("unbekannte übergeordnete Einheit") {
+        replace_in_file(dir / kAdminFile, "ueber  = sx_land", "ueber  = sx_reich");
+        expect_error(load(dir), "unbekannte Verwaltungseinheit 'sx_reich' als 'ueber' von einheit sx_meissen",
+                     kAdminFile, 12);
+    }
+    SUBCASE("Einheit in sich selbst") {
+        replace_in_file(dir / kAdminFile, "    art    = land\n",
+                        "    art    = land\n    ueber  = sx_meissen\n");
+        expect_error(load(dir), "Verwaltungseinheit sx_land liegt (über 'ueber') in sich selbst", kAdminFile,
+                     6);
+    }
+    SUBCASE("datierter Eintrag") {
+        replace_in_file(dir / kAdminFile, "    art    = land\n",
+                        "    art    = land\n    1700.01.01 = { name = \"Kurfürstentum\" }\n");
+        expect_error(load(dir), "datierter Eintrag '1700.01.01' in einheit sx_land", kAdminFile, 6);
+    }
+    SUBCASE("doppelte Kennung") {
+        replace_in_file(dir / kAdminFile, "einheit sx_meissen {", "einheit sx_land {");
+        expect_error(load(dir), "doppelte Kennung 'sx_land' für Verwaltungseinheit", kAdminFile, 9);
+    }
+    SUBCASE("ungültige und reservierte Kennung") {
+        replace_in_file(dir / kAdminFile, "einheit sx_meissen {", "einheit Sx-Meissen {");
+        replace_in_file(dir / kAdminFile, "einheit sx_land {", "einheit keine {");
+        const LoadResult r = load(dir);
+        expect_error(r, "ungültige Kennung 'Sx-Meissen' für eine Verwaltungseinheit", kAdminFile, 9);
+        expect_error(r, "„keine“ ist als Kennung einer Verwaltungseinheit reserviert", kAdminFile, 3);
+    }
+    SUBCASE("Pflichtfeld fehlt") {
+        replace_in_file(dir / kAdminFile, "    art    = kreis\n", "");
+        expect_error(load(dir), "Pflichtfeld 'art' fehlt in einheit sx_meissen", kAdminFile, 9);
+    }
+    SUBCASE("bund und zollverein erwarten ja oder nein") {
+        replace_in_file(dir / kPlacesSax, kDresdenDistrict,
+                        std::string(kDresdenDistrict) + "    bund         = 1\n");
+        replace_in_file(dir / kStatesMid, "    heer           = 6\n",
+                        "    heer           = 6\n    zollverein     = 1\n");
+        const LoadResult r = load(dir);
+        INFO(issues_text(r));
+        CHECK_FALSE(r.ok());
+        CHECK(has_issue(r, "'bund'"));
+        CHECK(has_issue(r, "'zollverein'"));
+    }
+}
+
+TEST_CASE("Lader: Staaten ohne Ort zum Startdatum bestehen nicht") {
+    TempDir dir(true);
+    add_state_neu(dir);
+    replace_in_file(dir / "history/orte/30_anhalt.chron", "    kreis        = kr_anhalt\n",
+                    "    kreis        = kr_anhalt\n    1649.06.01 = { besitzer = NEU }\n");
+    SUBCASE("1648: NEU besitzt nichts und fällt weg") {
+        const LoadResult r = load(dir, "westfaelischer_frieden");
+        INFO(issues_text(r));
+        REQUIRE(r.ok());
+        CHECK(r.issues.empty());
+        const World& w = *r.world;
+        CHECK(w.states.size() == 3);
+        CHECK(w.find_state("NEU") == uhrwerk::kNone);
+        CHECK(w.find_state("ANH") == 2);
+    }
+    SUBCASE("1650: Anhalt besitzt nichts mehr, NEU rückt nach") {
+        const LoadResult r = load(dir, "jahresbeginn_1650");
+        INFO(issues_text(r));
+        REQUIRE(r.ok());
+        const World& w = *r.world;
+        REQUIRE(w.states.size() == 3);
+        CHECK(w.find_state("ANH") == uhrwerk::kNone);
+        const Index neu = w.find_state("NEU");
+        CHECK(neu == 2);
+        CHECK(w.states[2].tag == "NEU");
+        CHECK(w.states[2].capital == w.find_location("dessau"));
+        CHECK(w.locations[static_cast<std::size_t>(w.find_location("dessau"))].owner == neu);
+        CHECK(w.locations[static_cast<std::size_t>(w.find_location("dresden"))].owner == w.find_state("SAX"));
+    }
+    SUBCASE("Spieler ohne Ort im gewählten Szenario") {
+        replace_in_file(dir / "szenarien/jahresbeginn.chron", "spieler = SAX", "spieler = ANH");
+        expect_error(load(dir, "jahresbeginn_1650"),
+                     "Spielerstaat 'ANH' von szenario jahresbeginn_1650 besitzt zum Startdatum keinen Ort",
+                     "szenarien/jahresbeginn.chron");
+        // Im anderen Szenario besteht Anhalt; dort ist der Spieler des ersten kein Fehler.
+        const LoadResult other = load(dir, "westfaelischer_frieden");
+        INFO(issues_text(other));
+        CHECK(other.ok());
+    }
+    SUBCASE("unbekannter Spieler bleibt ein Fehler") {
+        replace_in_file(dir / "szenarien/jahresbeginn.chron", "spieler = SAX", "spieler = XYZ");
+        expect_error(load(dir, "westfaelischer_frieden"),
+                     "unbekannter Staat 'XYZ' als Spieler in szenario jahresbeginn_1650");
+    }
+}
+
 // ─── find_data_dir ──────────────────────────────────────────────────────────
 
 #ifndef _WIN32

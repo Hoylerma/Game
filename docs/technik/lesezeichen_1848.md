@@ -85,8 +85,10 @@ Kongresspolen (Russland), Ungarn, Lombardei-Venetien. Siehe Entscheidung 4.
 
 **Je Staat:** Name, Kurzname, Farbe, Hauptstadt, Regierungsform, Herrscher, Konfession des
 Herrscherhauses; Kasse, Steuersätze, Heer, Schulden und Hofhaltung als `spielwert` (Kalibrierung in
-M7b). **Mitgliedschaft im Deutschen Bund und im Zollverein** als neue Staatsfelder (`bund`,
-`zollverein`), damit M8/M9 darauf aufbauen. Die Staatskennungen aus 1648 bleiben, wo der Staat
+M7b). **Mitgliedschaft im Deutschen Bund und im Zollverein**, damit M8/M9 darauf aufbauen: der
+Zollverein als datiertes Staatsfeld `zollverein`, der Bund über das Ortsfeld `bund` (Bundesgebiet;
+ein Staat ist Mitglied, wenn er mindestens einen Ort im Bundesgebiet besitzt – so sind Preußen und
+Österreich Mitglieder, ohne dass Posen oder Ungarn zum Bund gehören). Die Staatskennungen aus 1648 bleiben, wo der Staat
 fortbesteht (z. B. `SAX`, `BAV`); neue Staaten (z. B. `PRU` für das Königreich Preußen statt `BRA`)
 bekommen neue Kennungen, alte enden am Datum ihres Untergangs.
 
@@ -120,15 +122,19 @@ Abschnitt 2.1) und bleiben. Neu ist eine **datierte politische Ebene** darüber
 (Abschnitt 2.2), unabhängig von den räumlichen Kreisen:
 
 ```
-verwaltung.csv   id;name;art;ueber;staat;ab;bis;sicherheit;quelle
-                 pr_rb_potsdam;Regierungsbezirk Potsdam;regierungsbezirk;pr_prov_brandenburg;PRU;1815.04.30;;…
-ort_verwaltung   Spalte in besitz.csv (Einheit der untersten Ebene, die der Ort zum Stichtag angehört)
+verwaltung.csv   id;datei;name;art;ueber;staat;sicherheit;quelle
+                 pr_rb_potsdam;preussen;Regierungsbezirk Potsdam;regierungsbezirk;pr_prov_brandenburg;PRU;gesichert;…
+besitz.csv       neue Spalten verwaltung (Einheit der untersten Ebene ab dem Datum) und bund (ja/leer)
 ```
 
 - `art`: `provinz`, `regierungsbezirk`, `kreis`, `kronland`, `landdrostei`, … – frei, je Staat
   verschieden; `ueber` verweist auf die nächsthöhere Einheit, die oberste hängt am Staat.
-- Kern: `World::admin_units` (Inhalt), `Location::admin` (Zustand: Einheit zum aktuellen Datum;
-  gehört zur Prüfsumme und zum Spielstand, weil sie sich mit Eroberungen ändern wird). Brücke und
+- Kern: `World::admin_units` (Inhalt), `Location::admin` und `Location::federal`. **Umgesetzt als
+  Inhalt** wie die Kreise: Fingerabdruck der Spieldaten statt Prüfsumme und Spielstand, damit sich
+  Referenzprüfsumme und Speicherformat in M7 nicht ändern. Die Einheiten sind (noch) nicht datiert;
+  datiert ist die Zuordnung im Ort. In den Zustand wandern die Felder, sobald Gebietswechsel im Spiel
+  die Zuordnung ändern (Formatversion 2). Format: [chronik-skript.md](chronik-skript.md), Abschnitte
+  3.6 und 3.16; Tabelle: [tabellen.md](tabellen.md). Brücke und
   Godot: Kartenmodus „Verwaltung“ mit Grenzen der gewählten Ebene, Ortsinfo mit der Kette
   „Kreis Teltow · Regierungsbezirk Potsdam · Provinz Brandenburg“.
 - **Tiefe (Entscheidung 2):** Preußen mit Provinzen (8), Regierungsbezirken (25) und Kreisen (rund
@@ -223,7 +229,7 @@ Szenarien; Klicktest mit der Staatswahl.
 |---|---|---|
 | a1 | **Staaten 1848** in den Tabellen, Szenario `voelkerfruehling`, Felder `bund` und `zollverein`, Währungsname | `pruefen` für beide Szenarien |
 | a2 | **Zuordnung der Orte** (`territorien_1848.csv`, Ausnahmen, Werkzeug, Vorschau) | Fläche je Staat, Hauptstädte, Sichtprüfung |
-| a3 | **Verwaltung** (Tabelle, Archivar, Lader, Kern, Prüfsumme/Spielstand) | Unit-Tests, `pruefen` |
+| a3 | **Verwaltung** (Tabelle, Archivar, Lader, Kern, Fingerabdruck) | Unit-Tests, `pruefen` |
 | a4 | **Bevölkerung 1846** mit Konfession, Kultur, Berufen | Summen je Staat und Einheit, Lauf über 50 Jahre ohne Ausreißer |
 | a5 | **Brücke und Godot:** Staatswahl, Kartenmodus „Verwaltung“, Ortsinfo | Godot-Tests, Screenshots |
 | a6 | **Doku, Stichprobe, Review** (Abschluss M7a) | CI grün, `stichprobe_1848.md` |

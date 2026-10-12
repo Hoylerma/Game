@@ -161,6 +161,8 @@ struct Location {
     Index market = kNone;       // Markt (seit M5), aus der Landschaft des Ortes; unveränderlich
     std::uint32_t deposits = 0; // Vorkommen als Bitmaske über World::deposits (seit M5)
     bool is_port = false;       // Hafen mit Zugang zum Weltmarkt (seit M5)
+    Index admin = kNone;        // Verwaltungseinheit der untersten Ebene (seit M7), kNone ohne
+    bool federal = false;       // liegt im Gebiet des Deutschen Bundes (seit M7)
     Fixed devastation;          // Kriegsverwüstung 0..1
     std::string source;         // Quellenangabe oder "Testdaten"
     Index first_pop = 0; // Bevölkerungsblöcke liegen zusammenhängend: [first_pop, first_pop + pop_count)
@@ -175,6 +177,18 @@ struct Location {
 struct District {
     std::string id; // z. B. "kr_berlin"
     std::string name;
+    std::string source;
+};
+
+/// Verwaltungseinheit (data/history/verwaltung/*.chron, seit M7, docs/technik/lesezeichen_1848.md
+/// Abschnitt 6): Provinz, Regierungsbezirk, Kreis, Kronland … eines Staates. Die Einheiten bilden
+/// je Staat einen Baum über parent; ein Ort verweist auf die Einheit der untersten Ebene
+/// (Location::admin). In M7 Inhalt (zum Startdatum aus den Daten), keine Simulationsgröße.
+struct AdminUnit {
+    std::string id; // z. B. "pr_rb_potsdam"
+    std::string name;
+    std::string kind;     // Bezeichner, z. B. "regierungsbezirk"
+    Index parent = kNone; // übergeordnete Einheit, kNone für die oberste
     std::string source;
 };
 
@@ -217,6 +231,7 @@ struct State {
     Fixed interest_rate;             // Zins des Vormonats (Anzeige)
     std::int32_t premium_months = 0; // Monate mit Zinsaufschlag nach einem Staatsbankrott
     std::int32_t bankruptcies = 0;   // Zahl der Staatsbankrotte in dieser Partie
+    bool customs_union = false;      // Mitglied des Zollvereins (seit M7; Inhalt, bis M9 ohne Wirkung)
 
     Fixed tax_rate(TaxKind kind) const { return tax_rates[static_cast<std::size_t>(kind)]; }
 };
@@ -363,6 +378,7 @@ struct World {
     std::vector<std::string> deposits;    // Vorkommen (Kennungen aus betriebe.chron), seit M5
     std::vector<State> states;
     std::vector<District> districts;
+    std::vector<AdminUnit> admin_units; // seit M7
     std::vector<Location> locations;
     std::vector<PopBlock> pops;
     std::vector<ChronicleEntry> chronicle;
@@ -390,6 +406,7 @@ struct World {
     Index find_state(std::string_view tag) const;
     Index find_location(std::string_view id) const;
     Index find_district(std::string_view id) const;
+    Index find_admin_unit(std::string_view id) const;
     Index find_terrain(std::string_view id) const;
     Index find_confession(std::string_view id) const;
     Index find_culture(std::string_view id) const;

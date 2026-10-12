@@ -47,7 +47,9 @@ ort heide {
     }
 
     1701.01.18 = {
-        besitzer = BBB
+        besitzer   = BBB
+        verwaltung = sl_land
+        bund       = ja
     }
 }
 

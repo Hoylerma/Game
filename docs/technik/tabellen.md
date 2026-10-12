@@ -1,17 +1,18 @@
-# Tabellen der Datenpipeline (Meilensteine M2 und M3)
+# Tabellen der Datenpipeline (Meilensteine M2 bis M7)
 
 Orte und Staaten samt ihrer Geschichte werden in **Tabellen** gepflegt, nicht direkt im
 Chronik-Skript. Das Werkzeug **Archivar** (`tools/archivar/archivar.py`) prüft die Tabellen und
-erzeugt daraus `data/history/` (Format: [chronik-skript.md](chronik-skript.md), Abschnitte 3.5, 3.6
-und 3.8). Die erzeugten Dateien werden eingecheckt; die CI prüft mit `--pruefen`, dass sie zu den
+erzeugt daraus `data/history/` (Format: [chronik-skript.md](chronik-skript.md), Abschnitte 3.5, 3.6,
+3.8, 3.9 und 3.16). Die erzeugten Dateien werden eingecheckt; die CI prüft mit `--pruefen`, dass sie zu den
 Tabellen passen.
 
 ```
 data/tabellen/
 ├── orte.csv               Stammdaten der Orte
 ├── kreise.csv             Kreise (seit M3)
+├── verwaltung.csv         Verwaltungseinheiten der Staaten (seit M7)
 ├── staaten.csv            Stammdaten der Staaten
-├── besitz.csv             Besitzer je Ort mit Datum
+├── besitz.csv             Besitzer, Verwaltung und Bundesgebiet je Ort mit Datum
 ├── bevoelkerung.csv       Bevölkerung, Konfession, Kultur und Verwüstung je Ort und Stichtag
 ├── staaten_historie.csv   datierte Werte der Staaten (Herrscher, Hauptstadt, Kasse …)
 └── dateien.csv            Kopfkommentar je erzeugter Datei, Standardkultur je Landschaft
@@ -73,6 +74,21 @@ beim Neuerzeugen der Tabelle (wie die Spalte `kultur` in `dateien.csv`).
 
 Ein Kreis ohne Orte ist eine Warnung.
 
+## `verwaltung.csv` (seit M7)
+
+| Spalte | Inhalt |
+|---|---|
+| `id` | Kennung (a–z, 0–9, `_`), eindeutig, nicht `keine`; üblich mit Staatskürzel, z. B. `pr_rb_potsdam` |
+| `datei` | Zieldatei ohne Endung in `history/verwaltung/` |
+| `name` | Anzeigename, z. B. „Regierungsbezirk Potsdam“ |
+| `art` | Bezeichner der Ebene, z. B. `provinz`, `regierungsbezirk`, `kreis`, `kronland` |
+| `ueber` | übergeordnete Einheit; leer bei der obersten |
+| `staat` | Staatstag, zu dem die Einheit gehört (nur zur Prüfung, geht nicht ins Chronik-Skript) |
+| `sicherheit`, `quelle` | siehe oben |
+
+Eine Einheit liegt im selben Staat wie die übergeordnete; der Baum hat keinen Zyklus. Die
+Einheiten sind nicht datiert; welche gilt, steht datiert in `besitz.csv`.
+
 ## `staaten.csv`
 
 | Spalte | Inhalt |
@@ -90,9 +106,14 @@ Ein Kreis ohne Orte ist eine Warnung.
 | `ort` | Ortskennung |
 | `ab` | Datum, ab dem der Besitzer gilt |
 | `besitzer` | Staatstag |
+| `verwaltung` | seit M7: Verwaltungseinheit der untersten Ebene aus `verwaltung.csv`, die zum Besitzer gehört; leer = keine |
+| `bund` | seit M7: `ja`, wenn der Ort im Gebiet des Deutschen Bundes liegt; leer oder `nein` = nicht |
 | `sicherheit`, `quelle` | siehe oben |
 
 Je Ort und Datum höchstens eine Zeile. Ein Besitzwechsel ist eine weitere Zeile mit späterem Datum.
+Jede Zeile beschreibt den Ort vollständig ab ihrem Datum: Eine spätere Zeile ohne `verwaltung` hebt
+die frühere Einheit auf (der Archivar schreibt dann `verwaltung = keine`). Ins Chronik-Skript gehen
+`verwaltung` und `bund` nur, wenn sie sich gegenüber der vorigen Zeile ändern.
 
 ## `bevoelkerung.csv`
 
@@ -120,7 +141,7 @@ Bevölkerungsangabe oder keines von beiden.
 |---|---|
 | `tag` | Staatstag |
 | `ab` | Datum, ab dem der Wert gilt |
-| `feld` | `name`, `kurzname`, `hauptstadt`, `regierungsform`, `herrscher`, `konfession`, `schatz`, `kontribution`, `akzise`, `zoll`, `hofhaltung`, `heer`, `schulden` (die letzten fünf und die drei Steuern seit M5; `steuersatz` heißt seit M5 `kontribution`) |
+| `feld` | `name`, `kurzname`, `hauptstadt`, `regierungsform`, `herrscher`, `konfession`, `schatz`, `kontribution`, `akzise`, `zoll`, `hofhaltung`, `heer`, `schulden` (die letzten fünf und die drei Steuern seit M5; `steuersatz` heißt seit M5 `kontribution`), `zollverein` (seit M7, `ja`/`nein`) |
 | `wert` | Wert im Format des Felds (Ortskennung, Konfessionskennung, Zahl, Text) |
 | `sicherheit`, `quelle` | siehe oben |
 
@@ -130,7 +151,7 @@ Je Staat, Datum und Feld höchstens eine Zeile.
 
 | Spalte | Inhalt |
 |---|---|
-| `ordner` | `orte`, `staaten` oder `kreise` |
+| `ordner` | `orte`, `staaten`, `kreise` oder `verwaltung` (seit M7) |
 | `datei` | Dateiname ohne Endung |
 | `kultur` | seit M4, nur für `orte`: Standardkultur der Landschaft, z. B. `maerker=100` oder `obersachsen=70 sorben=30`; sonst leer |
 | `kommentar` | mehrzeiliger Text; erscheint als Kopfkommentar der erzeugten Datei |
@@ -158,14 +179,20 @@ der Tabelle.
   Landschaft in `dateien.csv`); Spalte `kultur` in `dateien.csv` bei `staaten` oder `kreise`
 - fehlende Sicherheit oder Quelle
 - **Lücken**: Zu jedem Datum eines Szenarios in `data/szenarien/` hat jeder Ort entweder Besitzer
-  und Bevölkerungsangabe oder keines von beiden (Ort ohne Daten); jeder Staat braucht alle Pflichtfelder (`hauptstadt`, `regierungsform`,
-  `herrscher`, `konfession`, `schatz`, `kontribution`, `akzise`, `zoll`, `hofhaltung`, `heer`), und die Hauptstadt muss zu
-  diesem Datum dem Staat gehören (also ein Ort mit Daten sein).
+  und Bevölkerungsangabe oder keines von beiden (Ort ohne Daten); jeder Staat, der zu diesem Datum
+  mindestens einen Ort besitzt (seit M7; die übrigen bestehen in diesem Szenario nicht), braucht alle
+  Pflichtfelder (`hauptstadt`, `regierungsform`, `herrscher`, `konfession`, `schatz`, `kontribution`,
+  `akzise`, `zoll`, `hofhaltung`, `heer`), und die Hauptstadt muss zu diesem Datum dem Staat gehören
+  (also ein Ort mit Daten sein).
+- seit M7: Spielerstaat eines Szenarios ohne Ort zu dessen Datum
 - unbekannter Kreis in `orte.csv`
+- seit M7: unbekannte Verwaltungseinheit (in `besitz.csv` oder als `ueber`), Einheit eines anderen
+  Staates als der Besitzer bzw. die übergeordnete Einheit, Zyklus über `ueber`, `bund` und
+  `zollverein` weder `ja`, `nein` noch leer
 
 **Warnungen** (Ausreißer, vermutlich Tippfehler):
 
 - Lage außerhalb der Karte (`karte/karte.chron`), Fläche unter 10 oder über 5.000 km²
 - Bevölkerungsdichte über 150 Einwohner/km² (Land) bzw. 5.000 Einwohner/km² (Stadt)
 - Änderung zwischen zwei Stichtagen über +5 % oder unter −10 % je Jahr
-- Staat ohne Ort zu einem Szenariodatum, Kommentar für eine unbenutzte Datei
+- Staat, der in keinem Szenario einen Ort besitzt; Kommentar für eine unbenutzte Datei

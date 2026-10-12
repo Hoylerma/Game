@@ -1,5 +1,5 @@
-ort;ab;besitzer;sicherheit;quelle
-hafen;1648.10.24;AAA;gesichert;Testquelle
-heide;1648.10.24;AAA;gesichert;Testquelle
-heide;1701.01.18;BBB;ungeprueft;Testquelle
-burg;1648.10.24;BBB;gesichert;Testquelle
+ort;ab;besitzer;verwaltung;bund;sicherheit;quelle
+hafen;1648.10.24;AAA;;;gesichert;Testquelle
+heide;1648.10.24;AAA;;;gesichert;Testquelle
+heide;1701.01.18;BBB;sl_land;ja;ungeprueft;Testquelle
+burg;1648.10.24;BBB;sl_burg;ja;gesichert;Testquelle

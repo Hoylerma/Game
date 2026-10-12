@@ -38,6 +38,10 @@ Index World::find_district(std::string_view id) const {
     return find_by(districts, id, [](const District& d) -> std::string_view { return d.id; });
 }
 
+Index World::find_admin_unit(std::string_view id) const {
+    return find_by(admin_units, id, [](const AdminUnit& u) -> std::string_view { return u.id; });
+}
+
 Index World::find_terrain(std::string_view id) const {
     return find_by(terrains, id, [](const TerrainType& t) -> std::string_view { return t.id; });
 }

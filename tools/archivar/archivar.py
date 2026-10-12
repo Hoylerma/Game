@@ -56,7 +56,8 @@ SPALTEN: dict[str, tuple[str, ...]] = {
         "quelle",
     ),
     "kreise.csv": ("id", "datei", "name", "quelle"),
-    "besitz.csv": ("ort", "ab", "besitzer", "sicherheit", "quelle"),
+    "verwaltung.csv": ("id", "datei", "name", "art", "ueber", "staat", "sicherheit", "quelle"),
+    "besitz.csv": ("ort", "ab", "besitzer", "verwaltung", "bund", "sicherheit", "quelle"),
     "bevoelkerung.csv": (
         "ort",
         "stichtag",
@@ -84,6 +85,7 @@ STAAT_FELDER = (
     "hofhaltung",
     "heer",
     "schulden",
+    "zollverein",
 )
 # Felder, die zu jedem Szenariodatum bekannt sein müssen (name/kurzname kommen aus staaten.csv).
 STAAT_PFLICHT = (
@@ -102,7 +104,7 @@ STEUER_FELDER = frozenset({"kontribution", "akzise", "zoll"})
 TEXT_FELDER = frozenset({"name", "kurzname", "herrscher", "quelle"})
 
 RE_ORT = re.compile(r"[a-z0-9_]+")
-ORDNER = ("kreise", "orte", "staaten")  # Unterordner von history/, die der Archivar erzeugt
+ORDNER = ("kreise", "orte", "staaten", "verwaltung")  # Unterordner von history/, die der Archivar erzeugt
 RE_TAG = re.compile(r"[A-Z0-9]{2,4}")
 RE_DATEI = re.compile(r"[A-Za-z0-9_]+")
 RE_KENNUNG = re.compile(r"[a-z][a-z0-9_]*")
@@ -263,6 +265,7 @@ class Bezug:
     vorkommen: set[str] = field(default_factory=set)  # aus common/betriebe.chron (seit M5)
     steuersatz_max: float = 1.0
     szenarien: list[Szenario] = field(default_factory=list)
+    spieler: dict[str, str] = field(default_factory=dict)  # Szenario → Spielerstaat (seit M7)
     karte: tuple[float, float, float, float] | None = None  # laenge_min, laenge_max, breite_min, breite_max
 
 
@@ -306,6 +309,7 @@ def lade_bezug(daten: Path, meldungen: Meldungen) -> Bezug:
                 meldungen.fehler_bei(anzeige, node.line, f"szenario {node.value}: 'datum' fehlt oder ist ungültig")
                 continue
             bezug.szenarien.append(Szenario(node.value, datum, anzeige))
+            bezug.spieler[node.value] = node.get_string("spieler") or ""
     if not bezug.szenarien:
         meldungen.fehler_bei("szenarien", 0, "keine Szenarien gefunden")
 
@@ -349,6 +353,7 @@ class Staat:
 class Archiv:
     orte: dict[str, Ort] = field(default_factory=dict)  # in Tabellenreihenfolge
     kreise: dict[str, Zeile] = field(default_factory=dict)  # in Tabellenreihenfolge
+    verwaltung: dict[str, Zeile] = field(default_factory=dict)  # Verwaltungseinheiten (seit M7)
     staaten: dict[str, Staat] = field(default_factory=dict)
     kommentare: dict[tuple[str, str], str] = field(default_factory=dict)  # (ordner, datei) → Text
     kulturen: dict[str, str] = field(default_factory=dict)  # Datei in history/orte → Standardkultur
@@ -477,6 +482,45 @@ def baue_archiv(tabellen: Path, bezug: Bezug, m: Meldungen) -> Archiv:
                 _einzeilig(z, spalte, m)
         archiv.kreise[z["id"]] = z
 
+    # Verwaltungseinheiten (seit M7): Baum über 'ueber', die oberste Einheit hängt am Staat.
+    gesehen = {}
+    for z in archiv.zeilen["verwaltung.csv"]:
+        _herkunft(z, m)
+        if not RE_ORT.fullmatch(z["id"]) or z["id"] == "keine":
+            m.fehler_bei(z.datei, z.nr, f"ungültige Kennung '{z['id']}' für eine Verwaltungseinheit (a–z, 0–9, _; nicht 'keine')")
+            continue
+        if not _einmalig(z["id"], f"Verwaltungseinheit {z['id']}", gesehen, z, m):
+            continue
+        if not RE_ORT.fullmatch(z["datei"]):
+            m.fehler_bei(z.datei, z.nr, f"ungültiger Dateiname '{z['datei']}' (a–z, 0–9, _)")
+        for spalte in ("name", "quelle"):
+            if _pflicht(z, spalte, m):
+                _einzeilig(z, spalte, m)
+        if not RE_KENNUNG.fullmatch(z["art"]):
+            m.fehler_bei(z.datei, z.nr, f"ungültige Art '{z['art']}' (a–z, 0–9, _; z. B. provinz, kreis)")
+        if z["staat"] not in archiv.staaten:
+            m.fehler_bei(z.datei, z.nr, f"unbekannter Staat '{z['staat']}' für Verwaltungseinheit {z['id']}")
+        archiv.verwaltung[z["id"]] = z
+    for kennung, z in archiv.verwaltung.items():
+        ueber = z["ueber"]
+        if not ueber:
+            continue
+        oben = archiv.verwaltung.get(ueber)
+        if oben is None:
+            m.fehler_bei(z.datei, z.nr, f"unbekannte Verwaltungseinheit '{ueber}' als 'ueber' von {kennung}")
+            continue
+        if oben["staat"] != z["staat"]:
+            m.fehler_bei(
+                z.datei, z.nr, f"Verwaltungseinheit {kennung} ({z['staat']}) liegt in {ueber} eines anderen Staates ({oben['staat']})"
+            )
+        besucht = {kennung}
+        while oben is not None and oben["ueber"]:
+            if oben["id"] in besucht:
+                m.fehler_bei(z.datei, z.nr, f"Verwaltungseinheit {kennung} liegt (über 'ueber') in sich selbst")
+                break
+            besucht.add(oben["id"])
+            oben = archiv.verwaltung.get(oben["ueber"])
+
     # Stammdaten der Orte
     gesehen = {}
     ohne_kreis: list[Zeile] = []
@@ -549,6 +593,21 @@ def baue_archiv(tabellen: Path, bezug: Bezug, m: Meldungen) -> Archiv:
         if z["besitzer"] not in archiv.staaten:
             m.fehler_bei(z.datei, z.nr, f"unbekannter Staat '{z['besitzer']}' als Besitzer von {z['ort']}")
             continue
+        if z["verwaltung"]:
+            einheit = archiv.verwaltung.get(z["verwaltung"])
+            if einheit is None:
+                m.fehler_bei(z.datei, z.nr, f"unbekannte Verwaltungseinheit '{z['verwaltung']}' für {z['ort']}")
+                continue
+            if einheit["staat"] != z["besitzer"]:
+                m.fehler_bei(
+                    z.datei,
+                    z.nr,
+                    f"Verwaltungseinheit {z['verwaltung']} gehört zu {einheit['staat']}, {z['ort']} aber zu {z['besitzer']}",
+                )
+                continue
+        if z["bund"] not in ("", "ja", "nein"):
+            m.fehler_bei(z.datei, z.nr, f"Spalte 'bund' erwartet ja, nein oder nichts, nicht '{z['bund']}'")
+            continue
         if datum is None or not _einmalig(f"{z['ort']}@{z['ab']}", f"Besitz von {z['ort']} ab {z['ab']}", gesehen, z, m):
             continue
         ort.besitz.append(Eintrag(datum, z["besitzer"], z))
@@ -606,6 +665,7 @@ def baue_archiv(tabellen: Path, bezug: Bezug, m: Meldungen) -> Archiv:
     benutzt = {("orte", o.zeile["datei"]) for o in archiv.orte.values()}
     benutzt |= {("staaten", s.zeile["datei"]) for s in archiv.staaten.values()}
     benutzt |= {("kreise", k["datei"]) for k in archiv.kreise.values()}
+    benutzt |= {("verwaltung", v["datei"]) for v in archiv.verwaltung.values()}
     for z in archiv.zeilen["dateien.csv"]:
         if z["ordner"] not in ORDNER:
             m.fehler_bei(
@@ -664,6 +724,9 @@ def _pruefe_staatswert(z: Zeile, feld_name: str, wert: str, archiv: Archiv, bezu
         return _dezimal(z, "wert", 0, 1e12, m, wert) is not None
     if feld_name == "heer":
         return _dezimal(z, "wert", 0, 1000, m, wert) is not None
+    if feld_name == "zollverein" and wert not in ("ja", "nein"):
+        m.fehler_bei(z.datei, z.nr, f"'zollverein' erwartet ja oder nein, nicht '{wert}'")
+        return False
     if feld_name in TEXT_FELDER and hat_zeilenumbruch(wert):
         m.fehler_bei(z.datei, z.nr, f"Zeilenumbruch im Wert für '{feld_name}'")
         return False
@@ -684,6 +747,9 @@ def gueltig(eintraege: list[Eintrag], stichtag: Datum) -> Eintrag | None:
 
 
 def pruefe_zeitraeume(archiv: Archiv, bezug: Bezug, m: Meldungen) -> None:
+    # Ein Staat besteht zu einem Szenario, wenn er zum Datum mindestens einen Ort besitzt (seit M7;
+    # der Kern lässt die übrigen Staaten weg). Pflichtfelder und Hauptstadt gelten nur dann.
+    jemals_besitzer: set[str] = set()
     for szenario in bezug.szenarien:
         wann = f"zum Szenario {szenario.kennung} ({datum_text(szenario.datum)})"
         besitzer_am: dict[str, str] = {}
@@ -702,8 +768,12 @@ def pruefe_zeitraeume(archiv: Archiv, bezug: Bezug, m: Meldungen) -> None:
                     )
             elif hat_bevoelkerung:
                 m.fehler_bei(z.datei, z.nr, f"Ort {kennung} hat {wann} eine Bevölkerungsangabe, aber keinen Besitzer")
+        bestehend = set(besitzer_am.values())
+        jemals_besitzer |= bestehend
         for tag, staat in archiv.staaten.items():
             z = staat.zeile
+            if tag not in bestehend:
+                continue
             for feld_name in STAAT_PFLICHT:
                 if gueltig(staat.historie.get(feld_name, []), szenario.datum) is None:
                     m.fehler_bei(z.datei, z.nr, f"Staat {tag} hat {wann} keinen Wert für '{feld_name}' (staaten_historie.csv)")
@@ -715,8 +785,12 @@ def pruefe_zeitraeume(archiv: Archiv, bezug: Bezug, m: Meldungen) -> None:
                     m.fehler_bei(hz.datei, hz.nr, f"Hauptstadt {hauptstadt.wert} von {tag} ist {wann} ein Ort ohne Daten")
                 elif besitzer != tag:
                     m.fehler_bei(hz.datei, hz.nr, f"Hauptstadt {hauptstadt.wert} von {tag} gehört {wann} zu {besitzer}")
-            if tag not in besitzer_am.values():
-                m.warnung_bei(z.datei, z.nr, f"Staat {tag} besitzt {wann} keinen Ort")
+        spieler = bezug.spieler.get(szenario.kennung, "")
+        if spieler and spieler not in bestehend:
+            m.fehler_bei(szenario.datei, 0, f"Spielerstaat {spieler} besitzt {wann} keinen Ort")
+    for tag, staat in archiv.staaten.items():
+        if tag not in jemals_besitzer:
+            m.warnung_bei(staat.zeile.datei, staat.zeile.nr, f"Staat {tag} besitzt in keinem Szenario einen Ort")
 
 
 def pruefe_ausreisser(archiv: Archiv, m: Meldungen) -> None:
@@ -793,8 +867,18 @@ def ort_text(ort: Ort, archiv: Archiv) -> list[str]:
         "    ",
     )
     bloecke: dict[Datum, list[tuple[str, str]]] = {}
+    # Verwaltung und Bundesgebiet (seit M7) beschreiben den Ort ab dem Datum der Besitzzeile; leer
+    # heißt keine Einheit bzw. nicht im Bund. Ausgegeben wird nur, was sich gegenüber vorher ändert.
+    verwaltung, bund = "keine", "nein"
     for e in ort.besitz:
-        bloecke.setdefault(e.datum, []).append(("besitzer", e.wert))
+        block = bloecke.setdefault(e.datum, [])
+        block.append(("besitzer", e.wert))
+        if (neu := e.zeile["verwaltung"] or "keine") != verwaltung:
+            block.append(("verwaltung", neu))
+            verwaltung = neu
+        if (neu := e.zeile["bund"] or "nein") != bund:
+            block.append(("bund", neu))
+            bund = neu
     for b in ort.bevoelkerung:
         datum = parse_datum(b["stichtag"])
         assert datum is not None
@@ -839,6 +923,14 @@ def kreis_text(z: Zeile) -> list[str]:
     return [f"kreis {z['id']} {{", *_ausgerichtet([("name", chron_text(z["name"])), ("quelle", chron_text(z["quelle"]))], "    "), "}"]
 
 
+def verwaltung_text(z: Zeile) -> list[str]:
+    paare = [("name", chron_text(z["name"])), ("art", z["art"])]
+    if z["ueber"]:
+        paare.append(("ueber", z["ueber"]))
+    paare.append(("quelle", chron_text(z["quelle"])))
+    return [f"einheit {z['id']} {{", *_ausgerichtet(paare, "    "), "}"]
+
+
 def erzeuge(archiv: Archiv) -> dict[str, str]:
     """Alle Ausgabedateien: relativer Pfad (z. B. history/orte/anhalt.chron) → Inhalt."""
     gruppen: dict[tuple[str, str], list[list[str]]] = {}
@@ -846,6 +938,8 @@ def erzeuge(archiv: Archiv) -> dict[str, str]:
         gruppen.setdefault(("staaten", staat.zeile["datei"]), []).append(staat_text(staat))
     for kreis in archiv.kreise.values():
         gruppen.setdefault(("kreise", kreis["datei"]), []).append(kreis_text(kreis))
+    for einheit in archiv.verwaltung.values():
+        gruppen.setdefault(("verwaltung", einheit["datei"]), []).append(verwaltung_text(einheit))
     for ort in archiv.orte.values():
         gruppen.setdefault(("orte", ort.zeile["datei"]), []).append(ort_text(ort, archiv))
     ausgabe: dict[str, str] = {}
@@ -905,11 +999,14 @@ def schreibe(daten: Path, ausgabe: dict[str, str]) -> tuple[int, int]:
 
 def bericht(archiv: Archiv, bezug: Bezug) -> str:
     zeilen = [
-        f"Orte: {len(archiv.orte)}, Kreise: {len(archiv.kreise)}, Staaten: {len(archiv.staaten)}",
+        (
+            f"Orte: {len(archiv.orte)}, Kreise: {len(archiv.kreise)}, Staaten: {len(archiv.staaten)}, "
+            f"Verwaltungseinheiten: {len(archiv.verwaltung)}"
+        ),
         "",
         "Sicherheit der Angaben je Tabelle:",
     ]
-    for name in ("besitz.csv", "bevoelkerung.csv", "staaten_historie.csv"):
+    for name in ("besitz.csv", "bevoelkerung.csv", "staaten_historie.csv", "verwaltung.csv"):
         zaehler = Counter(z["sicherheit"] for z in archiv.zeilen.get(name, []))
         teile = ", ".join(f"{s} {zaehler[s]}" for s in SICHERHEIT if zaehler[s])
         zeilen.append(f"  {name:<22} {len(archiv.zeilen.get(name, [])):>5} Zeilen  ({teile or '–'})")

@@ -277,6 +277,18 @@ TEST_CASE("Spielstand: Inhaltsfingerabdruck") {
         const auto parts = uhrwerk::content_differences(fp, changed);
         CHECK(parts == std::vector<std::string_view>{"regeln", "berufe", "orte"});
     }
+    SUBCASE("Verwaltung, Bundesgebiet und Zollverein (seit M7)") {
+        World w = base;
+        w.admin_units.push_back(uhrwerk::AdminUnit{"sx_land", "Sachsen", "land", uhrwerk::kNone, "Test"});
+        CHECK(uhrwerk::content_differences(fp, uhrwerk::content_fingerprint(w)) ==
+              std::vector<std::string_view>{"kreise"});
+        const auto with_unit = uhrwerk::content_fingerprint(w);
+        w.locations[2].admin = 0;
+        w.locations[3].federal = true;
+        w.states[1].customs_union = true;
+        CHECK(uhrwerk::content_differences(with_unit, uhrwerk::content_fingerprint(w)) ==
+              std::vector<std::string_view>{"staaten", "orte"});
+    }
     SUBCASE("Laden in anderen Inhalt wird mit den Bereichen abgelehnt") {
         const Bytes bytes = uhrwerk::save_game(Simulation(base), SaveMeta{});
         World other = base;

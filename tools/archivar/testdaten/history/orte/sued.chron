@@ -12,6 +12,8 @@ ort burg {
 
     1648.10.24 = {
         besitzer     = BBB
+        verwaltung   = sl_burg
+        bund         = ja
         bevoelkerung = 5000
         konfession   = { katholisch = 100 }
         kultur       = { suedleute = 80 nordleute = 20 }
