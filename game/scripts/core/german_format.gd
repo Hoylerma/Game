@@ -20,6 +20,8 @@ const _GOVERNMENT_NAMES := {
 	"wahlmonarchie": "Wahlmonarchie",
 	"reichsstadt": "Reichsstadt",
 	"republik": "Republik",
+	"konstitutionelle_monarchie": "Konstitutionelle Monarchie",
+	"stadtrepublik": "Stadtrepublik",
 }
 
 

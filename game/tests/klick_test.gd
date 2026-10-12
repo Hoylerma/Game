@@ -113,6 +113,7 @@ func _run() -> void:
 	await _check_click_into_sea()
 	await _check_economy_ui(sim)
 	await _check_save_ui(sim)
+	await _check_new_game()
 
 	if _failure_count == 0 and all_levels == testable.size() and event_ok == event_total:
 		print("KLICK OK %d/%d" % [all_levels, testable.size()])
@@ -448,6 +449,50 @@ func _check_save_ui(sim: SimulationClient) -> void:
 		_fail("Spielstände: kein automatischer Spielstand am 1. Januar %d (%s)" % [year + 1, date])
 	_clear_saves(dir)
 	print("  Spielstände: Menü, Speichern, Escape, F5, F9, Liste, automatischer Spielstand")
+
+
+## Neues Spiel 1848 über das Spielmenü, Modus Verwaltung (Taste Ü), Staatswechsel über die
+## Ortsinfo (seit M7).
+func _check_new_game() -> void:
+	var menu: GameMenu = _main.call("game_menu")
+	_main.call("open_game_menu")
+	if not menu.scenario_ids().has("voelkerfruehling"):
+		_fail("Neues Spiel: Szenarien im Menü %s" % ", ".join(menu.scenario_ids()))
+		return
+	menu.start_new_game("voelkerfruehling")
+	await _frames(2)
+	var sim: SimulationClient = _main.call("simulation")
+	if (
+		menu.is_open()
+		or sim.get_scenario_name() != "Völkerfrühling"
+		or int(sim.get_date().get("year", 0)) != 1848
+		or str(sim.get_state(sim.get_player_state_index()).get("tag", "")) != "PRU"
+	):
+		_fail(
+			"Neues Spiel: %s, %s, Menü offen %s" % [
+				sim.get_scenario_name(), sim.get_date_text(), menu.is_open()
+			]
+		)
+	await _key(KEY_BRACKETLEFT)
+	if int(_main.call("map_mode")) != MapModes.MAP_VERWALTUNG:
+		_fail("Taste Ü schaltet nicht in den Modus Verwaltung (%d)" % int(_main.call("map_mode")))
+	var munich := sim.get_location_index("muenchen")
+	_main.call("select_location", munich)
+	await _frames(1)
+	var panel: LocationPanel = _main.call("location_panel")
+	var play := panel.find_child("PlayState", true, false) as Button
+	if play == null or not play.visible:
+		_fail("Ortsinfo München: Knopf „Diesen Staat spielen“ fehlt")
+		return
+	play.pressed.emit()
+	await _frames(1)
+	var bavaria := sim.get_state_index("BAV")
+	var bar: TopBar = _main.call("top_bar")
+	if sim.get_player_state_index() != bavaria or play.visible:
+		_fail("Staatswechsel: Spieler %d statt Bayern (%d)" % [sim.get_player_state_index(), bavaria])
+	if not bar.speed_line_text().contains("Bayern"):
+		_fail("Staatswechsel: keine Meldung (%s)" % bar.speed_line_text())
+	print("  Neues Spiel 1848, Modus Verwaltung, Staatswechsel nach Bayern")
 
 
 ## Taste drücken und loslassen (echtes Eingabeereignis mit physischem Tastencode).

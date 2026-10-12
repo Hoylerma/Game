@@ -48,6 +48,12 @@ func _add_swatch_grid(entries: Array[Dictionary]) -> void:
 		label.text = str(entry.get("text", ""))
 		label.theme_type_variation = &"MutedLabel"
 		label.add_theme_color_override(&"font_color", UiPalette.INK)
+		# Lange Namen (1848: „Sachsen-Weimar-Eisenach“) kürzen statt die Spalte zu verbreitern;
+		# der volle Name steht im Tooltip (seit M7).
+		label.custom_minimum_size = Vector2(1, 0)
+		label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+		row.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		row.add_child(label)
 		var detail := str(entry.get("detail", ""))
 		if not detail.is_empty():
