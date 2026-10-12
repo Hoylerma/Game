@@ -1,0 +1,49 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+einheit by_oberbayern {
+    name   = "Kreis Oberbayern"
+    art    = kreis
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit by_niederbayern {
+    name   = "Kreis Niederbayern"
+    art    = kreis
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit by_oberpfalz {
+    name   = "Kreis Oberpfalz und Regensburg"
+    art    = kreis
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit by_oberfranken {
+    name   = "Kreis Oberfranken"
+    art    = kreis
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit by_mittelfranken {
+    name   = "Kreis Mittelfranken"
+    art    = kreis
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit by_unterfranken {
+    name   = "Kreis Unterfranken und Aschaffenburg"
+    art    = kreis
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit by_schwaben {
+    name   = "Kreis Schwaben und Neuburg"
+    art    = kreis
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit by_pfalz {
+    name   = "Kreis Pfalz"
+    art    = kreis
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}

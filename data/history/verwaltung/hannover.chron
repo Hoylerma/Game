@@ -1,0 +1,43 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+einheit hn_hannover {
+    name   = "Landdrostei Hannover"
+    art    = landdrostei
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit hn_hildesheim {
+    name   = "Landdrostei Hildesheim"
+    art    = landdrostei
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit hn_lueneburg {
+    name   = "Landdrostei Lüneburg"
+    art    = landdrostei
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit hn_stade {
+    name   = "Landdrostei Stade"
+    art    = landdrostei
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit hn_osnabrueck {
+    name   = "Landdrostei Osnabrück"
+    art    = landdrostei
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit hn_aurich {
+    name   = "Landdrostei Aurich"
+    art    = landdrostei
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit hn_clausthal {
+    name   = "Berghauptmannschaft Clausthal"
+    art    = berghauptmannschaft
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}

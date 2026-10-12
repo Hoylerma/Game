@@ -18,6 +18,18 @@ ort wilhelmshaven {
     stadt    = ja
     kreis    = kr_wilhelmshaven
     quelle   = "GeoNames (CC BY 4.0), geonameid 2808720; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 4668
+        konfession   = { lutherisch = 75 katholisch = 24 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
 }
 
 ort jever {
@@ -28,6 +40,18 @@ ort jever {
     stadt    = ja
     kreis    = kr_wilhelmshaven
     quelle   = "GeoNames (CC BY 4.0), geonameid 2894897; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8452
+        konfession   = { lutherisch = 75 katholisch = 24 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
 }
 
 ort nordenham {
@@ -38,6 +62,18 @@ ort nordenham {
     stadt    = ja
     kreis    = kr_wilhelmshaven
     quelle   = "GeoNames (CC BY 4.0), geonameid 2862104; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7219
+        konfession   = { lutherisch = 75 katholisch = 24 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
 }
 
 ort varel {
@@ -48,6 +84,18 @@ ort varel {
     stadt    = ja
     kreis    = kr_wilhelmshaven
     quelle   = "GeoNames (CC BY 4.0), geonameid 2817873; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8704
+        konfession   = { lutherisch = 75 katholisch = 24 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
 }
 
 ort zetel {
@@ -58,6 +106,18 @@ ort zetel {
     stadt    = nein
     kreis    = kr_wilhelmshaven
     quelle   = "GeoNames (CC BY 4.0), geonameid 2804697; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7945
+        konfession   = { lutherisch = 75 katholisch = 24 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
 }
 
 ort butjadingen {
@@ -68,6 +128,18 @@ ort butjadingen {
     stadt    = nein
     kreis    = kr_wilhelmshaven
     quelle   = "GeoNames (CC BY 4.0), geonameid 3336894; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 3668
+        konfession   = { lutherisch = 75 katholisch = 24 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
 }
 
 ort schillig {
@@ -78,6 +150,18 @@ ort schillig {
     stadt    = nein
     kreis    = kr_wilhelmshaven
     quelle   = "GeoNames (CC BY 4.0), geonameid 2839229; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 2373
+        konfession   = { lutherisch = 75 katholisch = 24 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
 }
 
 ort wangerooge {
@@ -88,6 +172,18 @@ ort wangerooge {
     stadt    = nein
     kreis    = kr_wilhelmshaven
     quelle   = "GeoNames (CC BY 4.0), geonameid 2814266; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 185
+        konfession   = { lutherisch = 75 katholisch = 24 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
 }
 
 ort oldenburg {
@@ -98,6 +194,18 @@ ort oldenburg {
     stadt    = ja
     kreis    = kr_oldenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2857458; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 14753
+        konfession   = { lutherisch = 75 katholisch = 24 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
 }
 
 ort westerstede {
@@ -108,6 +216,18 @@ ort westerstede {
     stadt    = ja
     kreis    = kr_oldenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2810188; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11414
+        konfession   = { lutherisch = 75 katholisch = 24 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
 }
 
 ort bad_zwischenahn {
@@ -118,6 +238,18 @@ ort bad_zwischenahn {
     stadt    = ja
     kreis    = kr_oldenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953310; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9190
+        konfession   = { lutherisch = 75 katholisch = 24 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
 }
 
 ort rastede {
@@ -128,6 +260,18 @@ ort rastede {
     stadt    = ja
     kreis    = kr_oldenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2850253; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9731
+        konfession   = { lutherisch = 75 katholisch = 24 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
 }
 
 ort barssel {
@@ -138,6 +282,18 @@ ort barssel {
     stadt    = nein
     kreis    = kr_oldenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2952398; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8322
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
 }
 
 ort wardenburg {
@@ -148,6 +304,18 @@ ort wardenburg {
     stadt    = nein
     kreis    = kr_oldenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2814146; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6267
+        konfession   = { lutherisch = 75 katholisch = 24 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
 }
 
 ort delmenhorst {
@@ -158,6 +326,18 @@ ort delmenhorst {
     stadt    = ja
     kreis    = kr_delmenhorst
     quelle   = "GeoNames (CC BY 4.0), geonameid 2938323; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7616
+        konfession   = { lutherisch = 75 katholisch = 24 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
 }
 
 ort brake_unterweser {
@@ -168,6 +348,18 @@ ort brake_unterweser {
     stadt    = ja
     kreis    = kr_delmenhorst
     quelle   = "GeoNames (CC BY 4.0), geonameid 2945545; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8933
+        konfession   = { lutherisch = 75 katholisch = 24 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
 }
 
 ort hude {
@@ -178,6 +370,18 @@ ort hude {
     stadt    = nein
     kreis    = kr_delmenhorst
     quelle   = "GeoNames (CC BY 4.0), geonameid 2898079; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 5137
+        konfession   = { lutherisch = 75 katholisch = 24 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
 }
 
 ort elsfleth {
@@ -188,6 +392,18 @@ ort elsfleth {
     stadt    = nein
     kreis    = kr_delmenhorst
     quelle   = "GeoNames (CC BY 4.0), geonameid 2930726; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8102
+        konfession   = { lutherisch = 75 katholisch = 24 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
 }
 
 ort lemwerder {
@@ -198,6 +414,18 @@ ort lemwerder {
     stadt    = nein
     kreis    = kr_delmenhorst
     quelle   = "GeoNames (CC BY 4.0), geonameid 2878912; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6366
+        konfession   = { lutherisch = 75 katholisch = 24 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
 }
 
 ort hatten {
@@ -208,6 +436,18 @@ ort hatten {
     stadt    = nein
     kreis    = kr_delmenhorst
     quelle   = "GeoNames (CC BY 4.0), geonameid 2909268; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 5205
+        konfession   = { lutherisch = 75 katholisch = 24 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
 }
 
 ort cloppenburg {
@@ -218,6 +458,18 @@ ort cloppenburg {
     stadt    = ja
     kreis    = kr_cloppenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2939969; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11054
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
 }
 
 ort friesoythe {
@@ -228,6 +480,18 @@ ort friesoythe {
     stadt    = ja
     kreis    = kr_cloppenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2924360; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10813
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
 }
 
 ort loeningen {
@@ -238,6 +502,18 @@ ort loeningen {
     stadt    = nein
     kreis    = kr_cloppenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2875987; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6746
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
 }
 
 ort garrel {
@@ -248,6 +524,18 @@ ort garrel {
     stadt    = nein
     kreis    = kr_cloppenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2922511; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6712
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
 }
 
 ort molbergen {
@@ -258,6 +546,18 @@ ort molbergen {
     stadt    = nein
     kreis    = kr_cloppenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2870094; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6712
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
 }
 
 ort vechta {
@@ -268,6 +568,18 @@ ort vechta {
     stadt    = ja
     kreis    = kr_vechta
     quelle   = "GeoNames (CC BY 4.0), geonameid 2817812; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8317
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
 }
 
 ort wildeshausen {
@@ -278,6 +590,18 @@ ort wildeshausen {
     stadt    = ja
     kreis    = kr_vechta
     quelle   = "GeoNames (CC BY 4.0), geonameid 2808893; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7012
+        konfession   = { lutherisch = 75 katholisch = 24 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
 }
 
 ort lohne {
@@ -288,6 +612,18 @@ ort lohne {
     stadt    = ja
     kreis    = kr_vechta
     quelle   = "GeoNames (CC BY 4.0), geonameid 2876185; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7234
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
 }
 
 ort grossenkneten {
@@ -298,6 +634,18 @@ ort grossenkneten {
     stadt    = nein
     kreis    = kr_vechta
     quelle   = "GeoNames (CC BY 4.0), geonameid 2916611; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6027
+        konfession   = { lutherisch = 75 katholisch = 24 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
 }
 
 ort damme {
@@ -308,6 +656,18 @@ ort damme {
     stadt    = nein
     kreis    = kr_vechta
     quelle   = "GeoNames (CC BY 4.0), geonameid 2939167; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6438
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
 }
 
 ort goldenstedt {
@@ -318,6 +678,18 @@ ort goldenstedt {
     stadt    = nein
     kreis    = kr_vechta
     quelle   = "GeoNames (CC BY 4.0), geonameid 2919310; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 3596
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
 }
 
 ort visbek {
@@ -328,6 +700,18 @@ ort visbek {
     stadt    = nein
     kreis    = kr_vechta
     quelle   = "GeoNames (CC BY 4.0), geonameid 2817139; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 4794
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
 }
 
 ort holdorf {
@@ -338,6 +722,18 @@ ort holdorf {
     stadt    = nein
     kreis    = kr_vechta
     quelle   = "GeoNames (CC BY 4.0), geonameid 2900740; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 4452
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
 }
 
 ort harpstedt {
@@ -348,4 +744,17 @@ ort harpstedt {
     stadt    = nein
     kreis    = kr_vechta
     quelle   = "GeoNames (CC BY 4.0), geonameid 2910344; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 5263
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HAN
+        verwaltung = hn_hannover
+        bund       = ja
+    }
 }

@@ -28,4 +28,26 @@ staat MSC {
         hofhaltung     = 5750
         heer           = 3
     }
+
+    1815.06.17 = {
+        name     = "Großherzogtum Mecklenburg-Schwerin"
+        kurzname = "Mecklenburg-Schwerin"
+    }
+
+    1842.03.07 = {
+        herrscher = "Friedrich Franz II."
+    }
+
+    1848.03.01 = {
+        hauptstadt     = schwerin
+        regierungsform = staendische_monarchie
+        konfession     = lutherisch
+        schatz         = 159000
+        kontribution   = 0.10
+        akzise         = 0.05
+        zoll           = 0.03
+        hofhaltung     = 132500
+        heer           = 6
+        zollverein     = nein
+    }
 }

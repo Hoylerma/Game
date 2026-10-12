@@ -1,0 +1,13 @@
+# Lesezeichen "Völkerfrühling" (Meilenstein M7).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.7.
+# Am 1. März 1848 erreicht die Nachricht von der Februarrevolution in Paris
+# (24. Februar) die deutschen Staaten; am 27. Februar hatte die Mannheimer
+# Volksversammlung die "Märzforderungen" erhoben. Planung und Entscheidungen:
+# docs/technik/lesezeichen_1848.md.
+
+szenario voelkerfruehling {
+    name    = "Völkerfrühling"
+    datum   = 1848.03.01
+    spieler = PRU
+}

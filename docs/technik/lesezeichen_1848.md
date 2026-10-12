@@ -1,6 +1,7 @@
 # Lesezeichen 1848 „Völkerfrühling“ (Meilenstein M7)
 
-> **Status: Entwurf** zur Freigabe vor der Umsetzung
+> **Status: in Umsetzung** – Entscheidungen 1–7 wie empfohlen freigegeben; M7a Schritte a1–a4
+> umgesetzt, Stand in Abschnitt 13
 > ([meilensteine.md](../meilensteine.md#m7--lesezeichen-1848)). Grundlage sind
 > [04 Zeitrahmen, Epochen, Startdaten](../04_zeitrahmen_epochen_startdaten.md) (Lesezeichen 6),
 > [05 Karte und Geographie](../05_karte_und_geographie.md) (Abschnitte 2 und 8),
@@ -85,8 +86,10 @@ Kongresspolen (Russland), Ungarn, Lombardei-Venetien. Siehe Entscheidung 4.
 
 **Je Staat:** Name, Kurzname, Farbe, Hauptstadt, Regierungsform, Herrscher, Konfession des
 Herrscherhauses; Kasse, Steuersätze, Heer, Schulden und Hofhaltung als `spielwert` (Kalibrierung in
-M7b). **Mitgliedschaft im Deutschen Bund und im Zollverein** als neue Staatsfelder (`bund`,
-`zollverein`), damit M8/M9 darauf aufbauen. Die Staatskennungen aus 1648 bleiben, wo der Staat
+M7b). **Mitgliedschaft im Deutschen Bund und im Zollverein**, damit M8/M9 darauf aufbauen: der
+Zollverein als datiertes Staatsfeld `zollverein`, der Bund über das Ortsfeld `bund` (Bundesgebiet;
+ein Staat ist Mitglied, wenn er mindestens einen Ort im Bundesgebiet besitzt – so sind Preußen und
+Österreich Mitglieder, ohne dass Posen oder Ungarn zum Bund gehören). Die Staatskennungen aus 1648 bleiben, wo der Staat
 fortbesteht (z. B. `SAX`, `BAV`); neue Staaten (z. B. `PRU` für das Königreich Preußen statt `BRA`)
 bekommen neue Kennungen, alte enden am Datum ihres Untergangs.
 
@@ -120,15 +123,19 @@ Abschnitt 2.1) und bleiben. Neu ist eine **datierte politische Ebene** darüber
 (Abschnitt 2.2), unabhängig von den räumlichen Kreisen:
 
 ```
-verwaltung.csv   id;name;art;ueber;staat;ab;bis;sicherheit;quelle
-                 pr_rb_potsdam;Regierungsbezirk Potsdam;regierungsbezirk;pr_prov_brandenburg;PRU;1815.04.30;;…
-ort_verwaltung   Spalte in besitz.csv (Einheit der untersten Ebene, die der Ort zum Stichtag angehört)
+verwaltung.csv   id;datei;name;art;ueber;staat;sicherheit;quelle
+                 pr_rb_potsdam;preussen;Regierungsbezirk Potsdam;regierungsbezirk;pr_prov_brandenburg;PRU;gesichert;…
+besitz.csv       neue Spalten verwaltung (Einheit der untersten Ebene ab dem Datum) und bund (ja/leer)
 ```
 
 - `art`: `provinz`, `regierungsbezirk`, `kreis`, `kronland`, `landdrostei`, … – frei, je Staat
   verschieden; `ueber` verweist auf die nächsthöhere Einheit, die oberste hängt am Staat.
-- Kern: `World::admin_units` (Inhalt), `Location::admin` (Zustand: Einheit zum aktuellen Datum;
-  gehört zur Prüfsumme und zum Spielstand, weil sie sich mit Eroberungen ändern wird). Brücke und
+- Kern: `World::admin_units` (Inhalt), `Location::admin` und `Location::federal`. **Umgesetzt als
+  Inhalt** wie die Kreise: Fingerabdruck der Spieldaten statt Prüfsumme und Spielstand, damit sich
+  Referenzprüfsumme und Speicherformat in M7 nicht ändern. Die Einheiten sind (noch) nicht datiert;
+  datiert ist die Zuordnung im Ort. In den Zustand wandern die Felder, sobald Gebietswechsel im Spiel
+  die Zuordnung ändern (Formatversion 2). Format: [chronik-skript.md](chronik-skript.md), Abschnitte
+  3.6 und 3.16; Tabelle: [tabellen.md](tabellen.md). Brücke und
   Godot: Kartenmodus „Verwaltung“ mit Grenzen der gewählten Ebene, Ortsinfo mit der Kette
   „Kreis Teltow · Regierungsbezirk Potsdam · Provinz Brandenburg“.
 - **Tiefe (Entscheidung 2):** Preußen mit Provinzen (8), Regierungsbezirken (25) und Kreisen (rund
@@ -155,6 +162,11 @@ ort_verwaltung   Spalte in besitz.csv (Einheit der untersten Ebene, die der Ort 
   Fabrikarbeiter kommen mit M7b.
 - Umfang: rund 3.800 Orte im Bund und in den preußischen Ostprovinzen und Schleswig; zusammen etwa
   45 Millionen Einwohner (Größenordnung, zu prüfen).
+- **Umgesetzt** (`tools/geodaten/bevoelkerung_1846.py`): Statt der heutigen Gemeindezahlen allein
+  verteilt das Werkzeug die Summe je Raum (Provinz, Kronland oder Staat) nach Fläche, ländlichem
+  Dichtefaktor je Landschaft, Gelände und – für Städte ohne feste Zahl – einem gedämpften
+  Stadtgewicht aus der heutigen Einwohnerzahl; 167 Städte haben feste Werte (auch die damals
+  kleinen Industriestädte). Die neuen Kulturen waren schon seit M4 vorhanden. Berufe wie in M5.
 
 ## 8. Eisenbahnen und Industrie (M7b)
 
@@ -179,6 +191,8 @@ ort_verwaltung   Spalte in besitz.csv (Einheit der untersten Ebene, die der Ort 
   ohnehin. Kartenmodi „Verwaltung“ (M7a) und „Eisenbahnen“ (M7b).
 - **Leistung:** Etwa 3.800 Orte mit Daten statt 60 (rund 60.000 Blöcke) liegen weit unter dem
   Lasttest mit 500.000 Blöcken; das Einschwingen beim Laden wird länger (Messung in M7a).
+  Gemessen: 3.967 Orte, 82.491 Blöcke; Laden im Release-Build unter 1 s (Debug 12 s), 10 Spieljahre
+  im Debug-Build mit 4 Threads 20 s.
 
 ## 10. Tests und Abnahme
 
@@ -223,7 +237,7 @@ Szenarien; Klicktest mit der Staatswahl.
 |---|---|---|
 | a1 | **Staaten 1848** in den Tabellen, Szenario `voelkerfruehling`, Felder `bund` und `zollverein`, Währungsname | `pruefen` für beide Szenarien |
 | a2 | **Zuordnung der Orte** (`territorien_1848.csv`, Ausnahmen, Werkzeug, Vorschau) | Fläche je Staat, Hauptstädte, Sichtprüfung |
-| a3 | **Verwaltung** (Tabelle, Archivar, Lader, Kern, Prüfsumme/Spielstand) | Unit-Tests, `pruefen` |
+| a3 | **Verwaltung** (Tabelle, Archivar, Lader, Kern, Fingerabdruck) | Unit-Tests, `pruefen` |
 | a4 | **Bevölkerung 1846** mit Konfession, Kultur, Berufen | Summen je Staat und Einheit, Lauf über 50 Jahre ohne Ausreißer |
 | a5 | **Brücke und Godot:** Staatswahl, Kartenmodus „Verwaltung“, Ortsinfo | Godot-Tests, Screenshots |
 | a6 | **Doku, Stichprobe, Review** (Abschluss M7a) | CI grün, `stichprobe_1848.md` |
@@ -231,3 +245,19 @@ Szenarien; Klicktest mit der Staatswahl.
 | b2 | **Industrie und Haushalte 1848** | `wirtschaft --szenario voelkerfruehling` |
 | b3 | **Kalibrierung**, Zielwerte 1848, Balancing-Job | Bericht in der CI |
 | b4 | **Doku und Review** (Abschluss M7) | CI grün |
+
+## 13. Umsetzungsstand M7a
+
+| Schritt | Stand |
+|---|---|
+| a1 Staaten | 38 Staaten zum 1. März 1848 (31 neu, 7 aus 1648 fortgeführt mit datiertem Namen); Hauptstadt, Regierungsform, Herrscher (Wechsel 1848 datiert), Konfession, Zollverein. Staaten ohne Ort zum Startdatum bestehen nicht (Lader und Archivar). Spielwerte aus der Bevölkerung (Hofhaltung 0,25, Schatz 0,3 Taler je Einwohner), Kalibrierung in b3. |
+| a2 Zuordnung | `tools/geodaten/zuordnung.py` mit 476 Regeln: 3.967 Orte mit Besitzer, 575 Orte ohne Daten. Flächen nahe der Literatur (Preußen 275.000 km², Österreich im Bund 185.000, Bayern 77.600, Hannover 37.400, Württemberg 19.700, Sachsen 15.100, Baden 15.000). |
+| a3 Verwaltung | Modell, Lader, Archivar, Fingerabdruck und Brücke fertig; Daten: 8 preußische Provinzen, 11 Kronländer bzw. Kreise Österreichs, die oberste Ebene der Mittelstaaten, die drei Herzogtümer unter Dänemark (57 Einheiten). **Offen:** preußische Regierungsbezirke und Kreise, österreichische Kreise (Entscheidung 2 sieht sie vor). |
+| a4 Bevölkerung | `tools/geodaten/bevoelkerung_1846.py`: 45,0 Millionen Einwohner, Summen je Provinz, Kronland oder Staat. Ein Lauf über 10 Jahre verliert ohne Kalibrierung 1 % (Geburten 36,5 ‰, Sterbefälle 34,9 ‰); Zielwerte 1848 folgen in b3. |
+| a5 Godot | offen |
+| a6 Doku, Stichprobe | Doku der Werkzeuge und Tabellen fertig; Stichprobe und Review offen |
+
+**Quellen:** Die Domains der Quellen (Wikipedia, Wikidata, GenWiki/GOV, OpenHistoricalMap) waren in
+der Umgebung der Umsetzung trotz Freigabe nicht erreichbar. Alle historischen Angaben stammen daher
+aus dem Wissensstand ohne Quellenzugang und tragen `ungeprueft` (Staaten, Regeln, Summen, Städte)
+bzw. `schaetzung` (verteilte Einwohner); die Prüfung gegen Quellen steht vor der Abnahme an.

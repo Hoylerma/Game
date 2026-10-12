@@ -35,6 +35,19 @@ ort berlin_coelln {
         kultur       = { maerker = 100 }
         verwuestung  = 0.45
     }
+
+    1846.12.03 = {
+        bevoelkerung = 422636
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort brandenburg_havel {
@@ -52,6 +65,19 @@ ort brandenburg_havel {
         konfession   = { lutherisch = 100 }
         kultur       = { maerker = 100 }
         verwuestung  = 0.6
+    }
+
+    1846.12.03 = {
+        bevoelkerung = 15627
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
     }
 }
 
@@ -71,6 +97,19 @@ ort neuruppin {
         kultur       = { maerker = 100 }
         verwuestung  = 0.6
     }
+
+    1846.12.03 = {
+        bevoelkerung = 8412
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort perleberg {
@@ -88,6 +127,19 @@ ort perleberg {
         konfession   = { lutherisch = 100 }
         kultur       = { maerker = 100 }
         verwuestung  = 0.7
+    }
+
+    1846.12.03 = {
+        bevoelkerung = 6148
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
     }
 }
 
@@ -107,6 +159,19 @@ ort prenzlau {
         kultur       = { maerker = 100 }
         verwuestung  = 0.65
     }
+
+    1846.12.03 = {
+        bevoelkerung = 14799
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort frankfurt_oder {
@@ -124,6 +189,19 @@ ort frankfurt_oder {
         konfession   = { lutherisch = 96 reformiert = 4 }
         kultur       = { maerker = 100 }
         verwuestung  = 0.55
+    }
+
+    1846.12.03 = {
+        bevoelkerung = 11251
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
     }
 }
 
@@ -143,6 +221,19 @@ ort stendal {
         kultur       = { maerker = 100 }
         verwuestung  = 0.6
     }
+
+    1846.12.03 = {
+        bevoelkerung = 12201
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
+    }
 }
 
 ort salzwedel {
@@ -160,6 +251,19 @@ ort salzwedel {
         konfession   = { lutherisch = 100 }
         kultur       = { maerker = 100 }
         verwuestung  = 0.55
+    }
+
+    1846.12.03 = {
+        bevoelkerung = 9935
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }
 
@@ -179,6 +283,19 @@ ort kuestrin {
         kultur       = { maerker = 100 }
         verwuestung  = 0.5
     }
+
+    1846.12.03 = {
+        bevoelkerung = 3647
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort landsberg_warthe {
@@ -196,6 +313,19 @@ ort landsberg_warthe {
         konfession   = { lutherisch = 100 }
         kultur       = { maerker = 100 }
         verwuestung  = 0.55
+    }
+
+    1846.12.03 = {
+        bevoelkerung = 25733
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
     }
 }
 
@@ -215,6 +345,19 @@ ort dramburg {
         kultur       = { maerker = 100 }
         verwuestung  = 0.6
     }
+
+    1846.12.03 = {
+        bevoelkerung = 8996
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort schivelbein {
@@ -225,6 +368,19 @@ ort schivelbein {
     stadt    = nein
     kreis    = kr_schivelbein
     quelle   = "GeoNames (CC BY 4.0), geonameid 3084085; deutscher Name aus den GeoNames-Alternativnamen (heute Świdwin); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10941
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort falkenburg {
@@ -235,6 +391,19 @@ ort falkenburg {
     stadt    = nein
     kreis    = kr_schivelbein
     quelle   = "GeoNames (CC BY 4.0), geonameid 3080102; deutscher Name aus den GeoNames-Alternativnamen (heute Złocieniec); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8822
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort bad_polzin {
@@ -245,6 +414,19 @@ ort bad_polzin {
     stadt    = nein
     kreis    = kr_schivelbein
     quelle   = "GeoNames (CC BY 4.0), geonameid 3088477; deutscher Name aus den GeoNames-Alternativnamen (heute Połczyn-Zdrój); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11775
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort tempelburg {
@@ -255,6 +437,19 @@ ort tempelburg {
     stadt    = nein
     kreis    = kr_schivelbein
     quelle   = "GeoNames (CC BY 4.0), geonameid 3101204; deutscher Name aus den GeoNames-Alternativnamen (heute Czaplinek); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6127
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort stolzenberg {
@@ -265,6 +460,19 @@ ort stolzenberg {
     stadt    = nein
     kreis    = kr_schivelbein
     quelle   = "GeoNames (CC BY 4.0), geonameid 3085609; deutscher Name aus den GeoNames-Alternativnamen (heute Sławoborze); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9274
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort virchow {
@@ -275,6 +483,19 @@ ort virchow {
     stadt    = nein
     kreis    = kr_schivelbein
     quelle   = "GeoNames (CC BY 4.0), geonameid 3082110; deutscher Name aus den GeoNames-Alternativnamen (heute Wierzchowo); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8822
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort rabino {
@@ -285,6 +506,19 @@ ort rabino {
     stadt    = nein
     kreis    = kr_schivelbein
     quelle   = "GeoNames (CC BY 4.0), geonameid 3087603; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8371
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort arnswalde {
@@ -295,6 +529,19 @@ ort arnswalde {
     stadt    = nein
     kreis    = kr_arnswalde
     quelle   = "GeoNames (CC BY 4.0), geonameid 3101613; deutscher Name aus den GeoNames-Alternativnamen (heute Choszczno); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6773
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort kallies {
@@ -305,6 +552,19 @@ ort kallies {
     stadt    = nein
     kreis    = kr_arnswalde
     quelle   = "GeoNames (CC BY 4.0), geonameid 3096873; deutscher Name aus den GeoNames-Alternativnamen (heute Kalisz Pomorski); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12400
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort reetz {
@@ -315,6 +575,19 @@ ort reetz {
     stadt    = nein
     kreis    = kr_arnswalde
     quelle   = "GeoNames (CC BY 4.0), geonameid 3087287; deutscher Name aus den GeoNames-Alternativnamen (heute Recz); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8649
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort neuwedell {
@@ -325,6 +598,19 @@ ort neuwedell {
     stadt    = nein
     kreis    = kr_arnswalde
     quelle   = "GeoNames (CC BY 4.0), geonameid 3100148; deutscher Name aus den GeoNames-Alternativnamen (heute Drawno); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12574
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort krzecin {
@@ -335,6 +621,19 @@ ort krzecin {
     stadt    = nein
     kreis    = kr_arnswalde
     quelle   = "GeoNames (CC BY 4.0), geonameid 3094542; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8510
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort wittstock {
@@ -345,6 +644,19 @@ ort wittstock {
     stadt    = nein
     kreis    = kr_wittstock
     quelle   = "GeoNames (CC BY 4.0), geonameid 2807201; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 14658
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort pritzwalk {
@@ -355,6 +667,19 @@ ort pritzwalk {
     stadt    = nein
     kreis    = kr_wittstock
     quelle   = "GeoNames (CC BY 4.0), geonameid 2851962; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7051
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort kyritz {
@@ -365,6 +690,19 @@ ort kyritz {
     stadt    = nein
     kreis    = kr_wittstock
     quelle   = "GeoNames (CC BY 4.0), geonameid 2882161; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12608
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort havelberg {
@@ -375,6 +713,19 @@ ort havelberg {
     stadt    = nein
     kreis    = kr_wittstock
     quelle   = "GeoNames (CC BY 4.0), geonameid 2908644; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 16041
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
+    }
 }
 
 ort heiligengrabe {
@@ -385,6 +736,19 @@ ort heiligengrabe {
     stadt    = nein
     kreis    = kr_wittstock
     quelle   = "GeoNames (CC BY 4.0), geonameid 2907594; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8822
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort plattenburg {
@@ -395,6 +759,19 @@ ort plattenburg {
     stadt    = nein
     kreis    = kr_wittstock
     quelle   = "GeoNames (CC BY 4.0), geonameid 2853332; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8614
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort gumtow {
@@ -405,6 +782,19 @@ ort gumtow {
     stadt    = nein
     kreis    = kr_wittstock
     quelle   = "GeoNames (CC BY 4.0), geonameid 2913721; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6704
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort gross_pankow {
@@ -415,6 +805,19 @@ ort gross_pankow {
     stadt    = nein
     kreis    = kr_wittstock
     quelle   = "GeoNames (CC BY 4.0), geonameid 2915191; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6877
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort putlitz {
@@ -425,6 +828,19 @@ ort putlitz {
     stadt    = nein
     kreis    = kr_wittstock
     quelle   = "GeoNames (CC BY 4.0), geonameid 2851611; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 13581
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort breddin {
@@ -435,6 +851,19 @@ ort breddin {
     stadt    = nein
     kreis    = kr_wittstock
     quelle   = "GeoNames (CC BY 4.0), geonameid 2944945; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 5592
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort schwedt_oder {
@@ -445,6 +874,19 @@ ort schwedt_oder {
     stadt    = ja
     kreis    = kr_schwedt_oder
     quelle   = "GeoNames (CC BY 4.0), geonameid 2834629; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12199
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort gartz {
@@ -455,6 +897,19 @@ ort gartz {
     stadt    = nein
     kreis    = kr_schwedt_oder
     quelle   = "GeoNames (CC BY 4.0), geonameid 2922432; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 5328
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort casekow {
@@ -465,6 +920,19 @@ ort casekow {
     stadt    = nein
     kreis    = kr_schwedt_oder
     quelle   = "GeoNames (CC BY 4.0), geonameid 2940246; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 5314
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort bruessow {
@@ -475,6 +943,19 @@ ort bruessow {
     stadt    = nein
     kreis    = kr_schwedt_oder
     quelle   = "GeoNames (CC BY 4.0), geonameid 2942986; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10976
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort gramzow {
@@ -485,6 +966,19 @@ ort gramzow {
     stadt    = nein
     kreis    = kr_schwedt_oder
     quelle   = "GeoNames (CC BY 4.0), geonameid 2918133; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10003
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort wittenberge {
@@ -495,6 +989,19 @@ ort wittenberge {
     stadt    = ja
     kreis    = kr_wittenberge
     quelle   = "GeoNames (CC BY 4.0), geonameid 2807344; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11762
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort karstaedt {
@@ -505,6 +1012,19 @@ ort karstaedt {
     stadt    = nein
     kreis    = kr_wittenberge
     quelle   = "GeoNames (CC BY 4.0), geonameid 2892648; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10212
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort osterburg {
@@ -515,6 +1035,19 @@ ort osterburg {
     stadt    = nein
     kreis    = kr_wittenberge
     quelle   = "GeoNames (CC BY 4.0), geonameid 2856639; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10103
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
+    }
 }
 
 ort seehausen {
@@ -525,6 +1058,19 @@ ort seehausen {
     stadt    = nein
     kreis    = kr_wittenberge
     quelle   = "GeoNames (CC BY 4.0), geonameid 2833800; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8778
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
+    }
 }
 
 ort arendsee {
@@ -535,6 +1081,19 @@ ort arendsee {
     stadt    = nein
     kreis    = kr_wittenberge
     quelle   = "GeoNames (CC BY 4.0), geonameid 2955651; Name nach GeoNames ohne modernen Zusatz (Luftkurort Arendsee); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 15238
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
+    }
 }
 
 ort lenzen {
@@ -545,6 +1104,19 @@ ort lenzen {
     stadt    = nein
     kreis    = kr_wittenberge
     quelle   = "GeoNames (CC BY 4.0), geonameid 2878731; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10927
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort goldbeck {
@@ -555,6 +1127,19 @@ ort goldbeck {
     stadt    = nein
     kreis    = kr_wittenberge
     quelle   = "GeoNames (CC BY 4.0), geonameid 2919415; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7163
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
+    }
 }
 
 ort zehdenick {
@@ -565,6 +1150,19 @@ ort zehdenick {
     stadt    = nein
     kreis    = kr_neuruppin
     quelle   = "GeoNames (CC BY 4.0), geonameid 2805075; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9100
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort rheinsberg {
@@ -575,6 +1173,19 @@ ort rheinsberg {
     stadt    = nein
     kreis    = kr_neuruppin
     quelle   = "GeoNames (CC BY 4.0), geonameid 2847612; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 14588
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort gransee {
@@ -585,6 +1196,19 @@ ort gransee {
     stadt    = nein
     kreis    = kr_neuruppin
     quelle   = "GeoNames (CC BY 4.0), geonameid 2918088; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9413
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort fuerstenberg {
@@ -595,6 +1219,18 @@ ort fuerstenberg {
     stadt    = nein
     kreis    = kr_neuruppin
     quelle   = "GeoNames (CC BY 4.0), geonameid 2923637; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 15095
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = MST
+        bund     = ja
+    }
 }
 
 ort liebenwalde {
@@ -605,6 +1241,19 @@ ort liebenwalde {
     stadt    = nein
     kreis    = kr_neuruppin
     quelle   = "GeoNames (CC BY 4.0), geonameid 2877942; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9586
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort lychen {
@@ -615,6 +1264,19 @@ ort lychen {
     stadt    = nein
     kreis    = kr_neuruppin
     quelle   = "GeoNames (CC BY 4.0), geonameid 2874695; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10316
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort lindow {
@@ -625,6 +1287,19 @@ ort lindow {
     stadt    = nein
     kreis    = kr_neuruppin
     quelle   = "GeoNames (CC BY 4.0), geonameid 2877126; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8162
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort gardelegen {
@@ -635,6 +1310,19 @@ ort gardelegen {
     stadt    = nein
     kreis    = kr_salzwedel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2922580; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6335
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
+    }
 }
 
 ort kloetze {
@@ -645,6 +1333,19 @@ ort kloetze {
     stadt    = nein
     kreis    = kr_salzwedel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2887380; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8613
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
+    }
 }
 
 ort kalbe {
@@ -655,6 +1356,19 @@ ort kalbe {
     stadt    = nein
     kreis    = kr_salzwedel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2893939; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11387
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
+    }
 }
 
 ort beetzendorf {
@@ -665,6 +1379,19 @@ ort beetzendorf {
     stadt    = nein
     kreis    = kr_salzwedel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2951522; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9689
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
+    }
 }
 
 ort bismark {
@@ -675,6 +1402,19 @@ ort bismark {
     stadt    = nein
     kreis    = kr_salzwedel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2948229; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12629
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
+    }
 }
 
 ort letzlingen {
@@ -685,6 +1425,19 @@ ort letzlingen {
     stadt    = nein
     kreis    = kr_salzwedel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2878410; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7660
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
+    }
 }
 
 ort mieste {
@@ -695,6 +1448,19 @@ ort mieste {
     stadt    = nein
     kreis    = kr_salzwedel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2871183; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8571
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
+    }
 }
 
 ort uchtspringe {
@@ -705,6 +1471,19 @@ ort uchtspringe {
     stadt    = nein
     kreis    = kr_salzwedel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2820529; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9482
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
+    }
 }
 
 ort driesen {
@@ -715,6 +1494,19 @@ ort driesen {
     stadt    = nein
     kreis    = kr_driesen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3100127; deutscher Name aus den GeoNames-Alternativnamen (heute Drezdenko); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10767
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort friedeberg_in_neumark {
@@ -725,6 +1517,19 @@ ort friedeberg_in_neumark {
     stadt    = ja
     kreis    = kr_driesen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3084421; deutscher Name aus den GeoNames-Alternativnamen (heute Strzelce Krajeńskie); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 13117
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort woldenberg {
@@ -735,6 +1540,19 @@ ort woldenberg {
     stadt    = nein
     kreis    = kr_driesen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3100400; deutscher Name aus den GeoNames-Alternativnamen (heute Dobiegniew); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8822
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort stare_kurowo {
@@ -745,6 +1563,19 @@ ort stare_kurowo {
     stadt    = nein
     kreis    = kr_driesen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3084876; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6634
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort bierzwnik {
@@ -755,6 +1586,19 @@ ort bierzwnik {
     stadt    = nein
     kreis    = kr_driesen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3103351; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8579
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort eberswalde {
@@ -765,6 +1609,19 @@ ort eberswalde {
     stadt    = ja
     kreis    = kr_eberswalde
     quelle   = "GeoNames (CC BY 4.0), geonameid 2933882; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12981
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort angermuende {
@@ -775,6 +1632,19 @@ ort angermuende {
     stadt    = nein
     kreis    = kr_eberswalde
     quelle   = "GeoNames (CC BY 4.0), geonameid 2956093; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11184
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort templin {
@@ -785,6 +1655,19 @@ ort templin {
     stadt    = nein
     kreis    = kr_eberswalde
     quelle   = "GeoNames (CC BY 4.0), geonameid 2823533; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9586
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort joachimsthal {
@@ -795,6 +1678,19 @@ ort joachimsthal {
     stadt    = nein
     kreis    = kr_eberswalde
     quelle   = "GeoNames (CC BY 4.0), geonameid 2894884; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10837
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort milmersdorf {
@@ -805,6 +1701,19 @@ ort milmersdorf {
     stadt    = nein
     kreis    = kr_eberswalde
     quelle   = "GeoNames (CC BY 4.0), geonameid 2871100; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6217
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort gerswalde {
@@ -815,6 +1724,19 @@ ort gerswalde {
     stadt    = nein
     kreis    = kr_eberswalde
     quelle   = "GeoNames (CC BY 4.0), geonameid 2920881; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11184
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort bad_freienwalde {
@@ -825,6 +1747,19 @@ ort bad_freienwalde {
     stadt    = nein
     kreis    = kr_bad_freienwalde
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953458; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 4793
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort seelow {
@@ -835,6 +1770,19 @@ ort seelow {
     stadt    = ja
     kreis    = kr_bad_freienwalde
     quelle   = "GeoNames (CC BY 4.0), geonameid 2833651; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9527
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort wriezen {
@@ -845,6 +1793,19 @@ ort wriezen {
     stadt    = nein
     kreis    = kr_bad_freienwalde
     quelle   = "GeoNames (CC BY 4.0), geonameid 2805999; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 4759
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort letschin {
@@ -855,6 +1816,19 @@ ort letschin {
     stadt    = nein
     kreis    = kr_bad_freienwalde
     quelle   = "GeoNames (CC BY 4.0), geonameid 2878471; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 5766
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort neuhardenberg {
@@ -865,6 +1839,19 @@ ort neuhardenberg {
     stadt    = nein
     kreis    = kr_bad_freienwalde
     quelle   = "GeoNames (CC BY 4.0), geonameid 2865223; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 5106
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort oderberg {
@@ -875,6 +1862,19 @@ ort oderberg {
     stadt    = nein
     kreis    = kr_bad_freienwalde
     quelle   = "GeoNames (CC BY 4.0), geonameid 2858092; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7051
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort neulewin {
@@ -885,6 +1885,19 @@ ort neulewin {
     stadt    = nein
     kreis    = kr_bad_freienwalde
     quelle   = "GeoNames (CC BY 4.0), geonameid 2864613; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6322
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort oranienburg {
@@ -895,6 +1908,19 @@ ort oranienburg {
     stadt    = ja
     kreis    = kr_oranienburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2857129; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12973
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort falkensee {
@@ -905,6 +1931,19 @@ ort falkensee {
     stadt    = ja
     kreis    = kr_oranienburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2927930; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11260
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort hennigsdorf {
@@ -915,6 +1954,19 @@ ort hennigsdorf {
     stadt    = ja
     kreis    = kr_oranienburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2906331; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11093
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort nauen {
@@ -925,6 +1977,19 @@ ort nauen {
     stadt    = nein
     kreis    = kr_oranienburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2866930; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7294
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort wustermark {
@@ -935,6 +2000,19 @@ ort wustermark {
     stadt    = nein
     kreis    = kr_oranienburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2805480; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 3578
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort kremmen {
@@ -945,6 +2023,19 @@ ort kremmen {
     stadt    = nein
     kreis    = kr_oranienburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2884403; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10976
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort soldin {
@@ -955,6 +2046,19 @@ ort soldin {
     stadt    = ja
     kreis    = kr_landsberg_warthe
     quelle   = "GeoNames (CC BY 4.0), geonameid 3091253; deutscher Name aus den GeoNames-Alternativnamen (heute Myślibórz); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9280
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort berlinchen {
@@ -965,6 +2069,19 @@ ort berlinchen {
     stadt    = nein
     kreis    = kr_landsberg_warthe
     quelle   = "GeoNames (CC BY 4.0), geonameid 3103824; deutscher Name aus den GeoNames-Alternativnamen (heute Barlinek); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10663
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort neudamm {
@@ -975,6 +2092,19 @@ ort neudamm {
     stadt    = nein
     kreis    = kr_landsberg_warthe
     quelle   = "GeoNames (CC BY 4.0), geonameid 3100545; deutscher Name aus den GeoNames-Alternativnamen (heute Dębno); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10212
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort vietz {
@@ -985,6 +2115,19 @@ ort vietz {
     stadt    = nein
     kreis    = kr_landsberg_warthe
     quelle   = "GeoNames (CC BY 4.0), geonameid 3081818; deutscher Name aus den GeoNames-Alternativnamen (heute Witnica); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 5175
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort kriescht {
@@ -995,6 +2138,19 @@ ort kriescht {
     stadt    = nein
     kreis    = kr_landsberg_warthe
     quelle   = "GeoNames (CC BY 4.0), geonameid 3094488; deutscher Name aus den GeoNames-Alternativnamen (heute Krzeszyce); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6599
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort duehringshof {
@@ -1005,6 +2161,19 @@ ort duehringshof {
     stadt    = nein
     kreis    = kr_landsberg_warthe
     quelle   = "GeoNames (CC BY 4.0), geonameid 3103091; deutscher Name aus den GeoNames-Alternativnamen (heute Bogdaniec); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6947
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort ludwigsruh {
@@ -1015,6 +2184,19 @@ ort ludwigsruh {
     stadt    = nein
     kreis    = kr_landsberg_warthe
     quelle   = "GeoNames (CC BY 4.0), geonameid 3092913; deutscher Name aus den GeoNames-Alternativnamen (heute Lubiszyn); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8301
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort zantoch {
@@ -1025,6 +2207,19 @@ ort zantoch {
     stadt    = nein
     kreis    = kr_landsberg_warthe
     quelle   = "GeoNames (CC BY 4.0), geonameid 3086283; deutscher Name aus den GeoNames-Alternativnamen (heute Santok); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 13952
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort neuenburg {
@@ -1035,6 +2230,19 @@ ort neuenburg {
     stadt    = nein
     kreis    = kr_landsberg_warthe
     quelle   = "GeoNames (CC BY 4.0), geonameid 3090552; deutscher Name aus den GeoNames-Alternativnamen (heute Nowogródek Pomorski); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8058
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort bernau_bei_berlin {
@@ -1045,6 +2253,19 @@ ort bernau_bei_berlin {
     stadt    = ja
     kreis    = kr_bernau_bei_berlin
     quelle   = "GeoNames (CC BY 4.0), geonameid 2950096; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10042
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort strausberg {
@@ -1055,6 +2276,19 @@ ort strausberg {
     stadt    = ja
     kreis    = kr_bernau_bei_berlin
     quelle   = "GeoNames (CC BY 4.0), geonameid 2826082; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8527
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort wandlitz {
@@ -1065,6 +2299,19 @@ ort wandlitz {
     stadt    = nein
     kreis    = kr_bernau_bei_berlin
     quelle   = "GeoNames (CC BY 4.0), geonameid 2814305; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7607
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort altlandsberg {
@@ -1075,6 +2322,19 @@ ort altlandsberg {
     stadt    = nein
     kreis    = kr_bernau_bei_berlin
     quelle   = "GeoNames (CC BY 4.0), geonameid 2957051; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7850
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort biesenthal {
@@ -1085,6 +2345,19 @@ ort biesenthal {
     stadt    = nein
     kreis    = kr_bernau_bei_berlin
     quelle   = "GeoNames (CC BY 4.0), geonameid 2949046; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8128
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort proetzel {
@@ -1095,6 +2368,19 @@ ort proetzel {
     stadt    = nein
     kreis    = kr_bernau_bei_berlin
     quelle   = "GeoNames (CC BY 4.0), geonameid 2851850; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7364
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort werftpfuhl {
@@ -1105,6 +2391,19 @@ ort werftpfuhl {
     stadt    = nein
     kreis    = kr_bernau_bei_berlin
     quelle   = "GeoNames (CC BY 4.0), geonameid 2810898; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6009
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort rathenow {
@@ -1115,6 +2414,19 @@ ort rathenow {
     stadt    = ja
     kreis    = kr_rathenow
     quelle   = "GeoNames (CC BY 4.0), geonameid 2850213; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9498
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort fehrbellin {
@@ -1125,6 +2437,19 @@ ort fehrbellin {
     stadt    = nein
     kreis    = kr_rathenow
     quelle   = "GeoNames (CC BY 4.0), geonameid 2927564; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8440
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort premnitz {
@@ -1135,6 +2460,19 @@ ort premnitz {
     stadt    = nein
     kreis    = kr_rathenow
     quelle   = "GeoNames (CC BY 4.0), geonameid 2852233; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7572
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort friesack {
@@ -1145,6 +2483,19 @@ ort friesack {
     stadt    = nein
     kreis    = kr_rathenow
     quelle   = "GeoNames (CC BY 4.0), geonameid 2924406; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6426
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort nennhausen {
@@ -1155,6 +2506,19 @@ ort nennhausen {
     stadt    = nein
     kreis    = kr_rathenow
     quelle   = "GeoNames (CC BY 4.0), geonameid 2866523; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10455
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort rhinow {
@@ -1165,6 +2529,19 @@ ort rhinow {
     stadt    = nein
     kreis    = kr_rathenow
     quelle   = "GeoNames (CC BY 4.0), geonameid 2847574; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7294
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort paulinenaue {
@@ -1175,6 +2552,19 @@ ort paulinenaue {
     stadt    = nein
     kreis    = kr_rathenow
     quelle   = "GeoNames (CC BY 4.0), geonameid 2855215; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7398
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort dreetz {
@@ -1185,6 +2575,19 @@ ort dreetz {
     stadt    = nein
     kreis    = kr_rathenow
     quelle   = "GeoNames (CC BY 4.0), geonameid 2935266; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6773
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort tangermuende {
@@ -1195,6 +2598,19 @@ ort tangermuende {
     stadt    = nein
     kreis    = kr_stendal
     quelle   = "GeoNames (CC BY 4.0), geonameid 2824254; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 15557
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
+    }
 }
 
 ort tangerhuette {
@@ -1205,6 +2621,19 @@ ort tangerhuette {
     stadt    = nein
     kreis    = kr_stendal
     quelle   = "GeoNames (CC BY 4.0), geonameid 2824255; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10228
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
+    }
 }
 
 ort arneburg {
@@ -1215,6 +2644,19 @@ ort arneburg {
     stadt    = nein
     kreis    = kr_stendal
     quelle   = "GeoNames (CC BY 4.0), geonameid 2955519; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12704
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
+    }
 }
 
 ort reppen {
@@ -1225,6 +2667,19 @@ ort reppen {
     stadt    = nein
     kreis    = kr_kuestrin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3086435; deutscher Name aus den GeoNames-Alternativnamen (heute Rzepin); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8406
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort drossen {
@@ -1235,6 +2690,19 @@ ort drossen {
     stadt    = nein
     kreis    = kr_kuestrin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3089832; deutscher Name aus den GeoNames-Alternativnamen (heute Ośno Lubuskie); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6843
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort sonnenburg {
@@ -1245,6 +2713,19 @@ ort sonnenburg {
     stadt    = nein
     kreis    = kr_kuestrin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3085520; deutscher Name aus den GeoNames-Alternativnamen (heute Słońsk); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6078
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort goeritz {
@@ -1255,6 +2736,19 @@ ort goeritz {
     stadt    = nein
     kreis    = kr_kuestrin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3098712; deutscher Name aus den GeoNames-Alternativnamen (heute Górzyca); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6638
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort potsdam {
@@ -1265,6 +2759,19 @@ ort potsdam {
     stadt    = ja
     kreis    = kr_berlin_coelln
     quelle   = "GeoNames (CC BY 4.0), geonameid 2852458; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 42623
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort ludwigsfelde {
@@ -1275,6 +2782,19 @@ ort ludwigsfelde {
     stadt    = ja
     kreis    = kr_berlin_coelln
     quelle   = "GeoNames (CC BY 4.0), geonameid 2875379; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7128
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort kleinmachnow {
@@ -1285,6 +2805,19 @@ ort kleinmachnow {
     stadt    = nein
     kreis    = kr_berlin_coelln
     quelle   = "GeoNames (CC BY 4.0), geonameid 2888523; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6808
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort werder {
@@ -1295,6 +2828,19 @@ ort werder {
     stadt    = ja
     kreis    = kr_berlin_coelln
     quelle   = "GeoNames (CC BY 4.0), geonameid 2810945; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 5285
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort zossen {
@@ -1305,6 +2851,19 @@ ort zossen {
     stadt    = nein
     kreis    = kr_berlin_coelln
     quelle   = "GeoNames (CC BY 4.0), geonameid 2803870; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 5766
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort beelitz {
@@ -1315,6 +2874,19 @@ ort beelitz {
     stadt    = nein
     kreis    = kr_berlin_coelln
     quelle   = "GeoNames (CC BY 4.0), geonameid 2951595; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7780
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort michendorf {
@@ -1325,6 +2897,19 @@ ort michendorf {
     stadt    = nein
     kreis    = kr_berlin_coelln
     quelle   = "GeoNames (CC BY 4.0), geonameid 2871279; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 4168
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort rangsdorf {
@@ -1335,6 +2920,19 @@ ort rangsdorf {
     stadt    = nein
     kreis    = kr_berlin_coelln
     quelle   = "GeoNames (CC BY 4.0), geonameid 2850490; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 4654
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort trebbin {
@@ -1345,6 +2943,19 @@ ort trebbin {
     stadt    = nein
     kreis    = kr_berlin_coelln
     quelle   = "GeoNames (CC BY 4.0), geonameid 2821465; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6217
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort gross_kreutz {
@@ -1355,6 +2966,19 @@ ort gross_kreutz {
     stadt    = nein
     kreis    = kr_berlin_coelln
     quelle   = "GeoNames (CC BY 4.0), geonameid 2915375; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6356
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort ketzin {
@@ -1365,6 +2989,19 @@ ort ketzin {
     stadt    = nein
     kreis    = kr_berlin_coelln
     quelle   = "GeoNames (CC BY 4.0), geonameid 2891282; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6078
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort bad_belzig {
@@ -1375,6 +3012,19 @@ ort bad_belzig {
     stadt    = ja
     kreis    = kr_brandenburg_havel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2951134; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7118
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort treuenbrietzen {
@@ -1385,6 +3035,19 @@ ort treuenbrietzen {
     stadt    = nein
     kreis    = kr_brandenburg_havel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2821248; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8197
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort wusterwitz {
@@ -1395,6 +3058,19 @@ ort wusterwitz {
     stadt    = nein
     kreis    = kr_brandenburg_havel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2805475; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 4279
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort wiesenburg {
@@ -1405,6 +3081,19 @@ ort wiesenburg {
     stadt    = nein
     kreis    = kr_brandenburg_havel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2809259; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12990
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort ziesar {
@@ -1415,6 +3104,19 @@ ort ziesar {
     stadt    = nein
     kreis    = kr_brandenburg_havel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2804279; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7537
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort brueck {
@@ -1425,6 +3127,19 @@ ort brueck {
     stadt    = nein
     kreis    = kr_brandenburg_havel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2943516; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6460
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort niemegk {
@@ -1435,6 +3150,19 @@ ort niemegk {
     stadt    = nein
     kreis    = kr_brandenburg_havel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2862640; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7746
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort golzow {
@@ -1445,6 +3173,19 @@ ort golzow {
     stadt    = nein
     kreis    = kr_brandenburg_havel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2919156; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9031
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort fuerstenwalde {
@@ -1455,6 +3196,19 @@ ort fuerstenwalde {
     stadt    = ja
     kreis    = kr_fuerstenwalde
     quelle   = "GeoNames (CC BY 4.0), geonameid 2923588; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7138
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort erkner {
@@ -1465,6 +3219,19 @@ ort erkner {
     stadt    = nein
     kreis    = kr_fuerstenwalde
     quelle   = "GeoNames (CC BY 4.0), geonameid 2929602; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8892
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort storkow {
@@ -1475,6 +3242,19 @@ ort storkow {
     stadt    = nein
     kreis    = kr_fuerstenwalde
     quelle   = "GeoNames (CC BY 4.0), geonameid 2826403; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6217
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort muencheberg {
@@ -1485,6 +3265,19 @@ ort muencheberg {
     stadt    = nein
     kreis    = kr_fuerstenwalde
     quelle   = "GeoNames (CC BY 4.0), geonameid 2867723; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7676
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort steinhoefel {
@@ -1495,6 +3288,19 @@ ort steinhoefel {
     stadt    = nein
     kreis    = kr_fuerstenwalde
     quelle   = "GeoNames (CC BY 4.0), geonameid 2827965; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 5696
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort bad_saarow {
@@ -1505,6 +3311,19 @@ ort bad_saarow {
     stadt    = nein
     kreis    = kr_fuerstenwalde
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953366; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 4724
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort spreenhagen {
@@ -1515,6 +3334,19 @@ ort spreenhagen {
     stadt    = nein
     kreis    = kr_fuerstenwalde
     quelle   = "GeoNames (CC BY 4.0), geonameid 2830100; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7676
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort wendisch_rietz {
@@ -1525,6 +3357,19 @@ ort wendisch_rietz {
     stadt    = nein
     kreis    = kr_fuerstenwalde
     quelle   = "GeoNames (CC BY 4.0), geonameid 2811218; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8336
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort beeskow {
@@ -1535,6 +3380,19 @@ ort beeskow {
     stadt    = ja
     kreis    = kr_frankfurt_oder
     quelle   = "GeoNames (CC BY 4.0), geonameid 2951528; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7521
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort muellrose {
@@ -1545,6 +3403,19 @@ ort muellrose {
     stadt    = nein
     kreis    = kr_frankfurt_oder
     quelle   = "GeoNames (CC BY 4.0), geonameid 2867763; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6287
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort lebus {
@@ -1555,6 +3426,19 @@ ort lebus {
     stadt    = nein
     kreis    = kr_frankfurt_oder
     quelle   = "GeoNames (CC BY 4.0), geonameid 2879795; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7360
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort friedland_brandenburg {
@@ -1565,6 +3449,19 @@ ort friedland_brandenburg {
     stadt    = nein
     kreis    = kr_frankfurt_oder
     quelle   = "GeoNames (CC BY 4.0), geonameid 2924680; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 5665
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort brieskow_finkenheerd {
@@ -1575,6 +3472,19 @@ ort brieskow_finkenheerd {
     stadt    = nein
     kreis    = kr_frankfurt_oder
     quelle   = "GeoNames (CC BY 4.0), geonameid 2944103; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7780
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort jacobsdorf {
@@ -1585,6 +3495,19 @@ ort jacobsdorf {
     stadt    = nein
     kreis    = kr_frankfurt_oder
     quelle   = "GeoNames (CC BY 4.0), geonameid 2895248; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6843
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort schwiebus {
@@ -1595,6 +3518,19 @@ ort schwiebus {
     stadt    = ja
     kreis    = kr_schwiebus
     quelle   = "GeoNames (CC BY 4.0), geonameid 3084062; deutscher Name aus den GeoNames-Alternativnamen (heute Świebodzin); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10593
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort zielenzig {
@@ -1605,6 +3541,19 @@ ort zielenzig {
     stadt    = ja
     kreis    = kr_schwiebus
     quelle   = "GeoNames (CC BY 4.0), geonameid 3084237; deutscher Name aus den GeoNames-Alternativnamen (heute Sulęcin); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8439
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort neu_bentschen {
@@ -1615,6 +3564,19 @@ ort neu_bentschen {
     stadt    = nein
     kreis    = kr_schwiebus
     quelle   = "GeoNames (CC BY 4.0), geonameid 3080494; deutscher Name aus den GeoNames-Alternativnamen (heute Zbąszynek); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 4863
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort sternberg_brandenburg {
@@ -1625,6 +3587,19 @@ ort sternberg_brandenburg {
     stadt    = nein
     kreis    = kr_schwiebus
     quelle   = "GeoNames (CC BY 4.0), geonameid 3083264; deutscher Name aus den GeoNames-Alternativnamen (heute Torzym); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9135
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort koenigswalde {
@@ -1635,6 +3610,19 @@ ort koenigswalde {
     stadt    = nein
     kreis    = kr_schwiebus
     quelle   = "GeoNames (CC BY 4.0), geonameid 3092894; deutscher Name aus den GeoNames-Alternativnamen (heute Lubniewice); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7954
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort mittwalde {
@@ -1645,6 +3633,19 @@ ort mittwalde {
     stadt    = nein
     kreis    = kr_schwiebus
     quelle   = "GeoNames (CC BY 4.0), geonameid 3091974; deutscher Name aus den GeoNames-Alternativnamen (heute Międzylesie); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8475
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort lagow {
@@ -1655,6 +3656,19 @@ ort lagow {
     stadt    = nein
     kreis    = kr_schwiebus
     quelle   = "GeoNames (CC BY 4.0), geonameid 3093979; deutscher Name aus den GeoNames-Alternativnamen (heute Łagów); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12365
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort luckenwalde {
@@ -1665,6 +3679,19 @@ ort luckenwalde {
     stadt    = ja
     kreis    = kr_luckenwalde
     quelle   = "GeoNames (CC BY 4.0), geonameid 2875484; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11381
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort dahme {
@@ -1675,6 +3702,19 @@ ort dahme {
     stadt    = nein
     kreis    = kr_luckenwalde
     quelle   = "GeoNames (CC BY 4.0), geonameid 2939388; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12782
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort baruth {
@@ -1685,6 +3725,19 @@ ort baruth {
     stadt    = nein
     kreis    = kr_luckenwalde
     quelle   = "GeoNames (CC BY 4.0), geonameid 2952335; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8718
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort sperenberg {
@@ -1695,6 +3748,19 @@ ort sperenberg {
     stadt    = nein
     kreis    = kr_luckenwalde
     quelle   = "GeoNames (CC BY 4.0), geonameid 2830622; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 5245
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort crossen_an_der_oder {
@@ -1705,6 +3771,19 @@ ort crossen_an_der_oder {
     stadt    = ja
     kreis    = kr_crossen_an_der_oder
     quelle   = "GeoNames (CC BY 4.0), geonameid 3094633; deutscher Name aus den GeoNames-Alternativnamen (heute Krosno Odrzańskie); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10965
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort neuzelle {
@@ -1715,6 +3794,19 @@ ort neuzelle {
     stadt    = nein
     kreis    = kr_crossen_an_der_oder
     quelle   = "GeoNames (CC BY 4.0), geonameid 2863782; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11809
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort ziebingen {
@@ -1725,6 +3817,19 @@ ort ziebingen {
     stadt    = nein
     kreis    = kr_crossen_an_der_oder
     quelle   = "GeoNames (CC BY 4.0), geonameid 3101255; deutscher Name aus den GeoNames-Alternativnamen (heute Cybinka); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10490
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort beutnitz {
@@ -1735,6 +3840,19 @@ ort beutnitz {
     stadt    = nein
     kreis    = kr_crossen_an_der_oder
     quelle   = "GeoNames (CC BY 4.0), geonameid 3101951; deutscher Name aus den GeoNames-Alternativnamen (heute Bytnica); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10107
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort bobersberg {
@@ -1745,6 +3863,19 @@ ort bobersberg {
     stadt    = nein
     kreis    = kr_crossen_an_der_oder
     quelle   = "GeoNames (CC BY 4.0), geonameid 3103162; deutscher Name aus den GeoNames-Alternativnamen (heute Bobrowice); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11636
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort messow {
@@ -1755,4 +3886,17 @@ ort messow {
     stadt    = nein
     kreis    = kr_crossen_an_der_oder
     quelle   = "GeoNames (CC BY 4.0), geonameid 3092199; deutscher Name aus den GeoNames-Alternativnamen (heute Maszewo); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11017
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { maerker = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }

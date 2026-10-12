@@ -1,0 +1,49 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+einheit pr_preussen {
+    name   = "Provinz Preußen"
+    art    = provinz
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_posen {
+    name   = "Provinz Posen"
+    art    = provinz
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_pommern {
+    name   = "Provinz Pommern"
+    art    = provinz
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_brandenburg {
+    name   = "Provinz Brandenburg"
+    art    = provinz
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_schlesien {
+    name   = "Provinz Schlesien"
+    art    = provinz
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_sachsen {
+    name   = "Provinz Sachsen"
+    art    = provinz
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_westfalen {
+    name   = "Provinz Westfalen"
+    art    = provinz
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_rheinprovinz {
+    name   = "Rheinprovinz"
+    art    = provinz
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}

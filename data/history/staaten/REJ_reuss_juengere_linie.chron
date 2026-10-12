@@ -1,0 +1,25 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+staat REJ {
+    name     = "Fürstentum Reuß jüngerer Linie"
+    kurzname = "Reuß j. L."
+    farbe    = { 130 110 180 }
+    quelle   = "Hier vereinfacht schon als ein Staat: Reuß-Schleiz und Reuß-Lobenstein-Ebersdorf wurden am 1. Oktober 1848 vereinigt; Gera gemeinsamer Besitz. Schatz, Steuersätze, Hofhaltung und Heer sind Spielwerte"
+
+    1818.08.17 = {
+        herrscher = "Heinrich LXII."
+    }
+
+    1848.03.01 = {
+        hauptstadt     = schleiz
+        regierungsform = absolute_monarchie
+        konfession     = lutherisch
+        schatz         = 24000
+        kontribution   = 0.10
+        akzise         = 0.05
+        zoll           = 0.03
+        hofhaltung     = 20000
+        heer           = 6
+        zollverein     = ja
+    }
+}

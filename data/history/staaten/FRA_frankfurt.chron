@@ -1,0 +1,22 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+staat FRA {
+    name     = "Freie Stadt Frankfurt"
+    kurzname = "Frankfurt"
+    farbe    = { 210 80 80 }
+    quelle   = "Sitz des Bundestages; Zollverein seit 1836. Ab Mai 1848 Tagungsort der Nationalversammlung. Schatz, Steuersätze, Hofhaltung und Heer sind Spielwerte"
+
+    1848.03.01 = {
+        hauptstadt     = frankfurt_am_main
+        regierungsform = stadtrepublik
+        herrscher      = "Senat"
+        konfession     = lutherisch
+        schatz         = 20400
+        kontribution   = 0.10
+        akzise         = 0.05
+        zoll           = 0.03
+        hofhaltung     = 17000
+        heer           = 4
+        zollverein     = ja
+    }
+}

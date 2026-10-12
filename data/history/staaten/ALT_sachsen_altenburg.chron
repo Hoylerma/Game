@@ -28,4 +28,30 @@ staat ALT {
         hofhaltung     = 4500
         heer           = 4
     }
+
+    1826.11.12 = {
+        name     = "Herzogtum Sachsen-Altenburg"
+        kurzname = "Sachsen-Altenburg"
+    }
+
+    1834.08.29 = {
+        herrscher = "Joseph"
+    }
+
+    1848.03.01 = {
+        hauptstadt     = altenburg
+        regierungsform = konstitutionelle_monarchie
+        konfession     = lutherisch
+        schatz         = 39300
+        kontribution   = 0.10
+        akzise         = 0.05
+        zoll           = 0.03
+        hofhaltung     = 32800
+        heer           = 6
+        zollverein     = ja
+    }
+
+    1848.11.30 = {
+        herrscher = "Georg"
+    }
 }

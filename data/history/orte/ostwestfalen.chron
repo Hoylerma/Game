@@ -17,6 +17,19 @@ ort minden {
     stadt    = ja
     kreis    = kr_minden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2871039; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 20548
+        konfession   = { lutherisch = 55 katholisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
+    }
 }
 
 ort herford {
@@ -27,6 +40,19 @@ ort herford {
     stadt    = ja
     kreis    = kr_minden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2906121; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12605
+        konfession   = { lutherisch = 55 katholisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
+    }
 }
 
 ort bad_oeynhausen {
@@ -37,6 +63,19 @@ ort bad_oeynhausen {
     stadt    = ja
     kreis    = kr_minden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953386; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 13465
+        konfession   = { lutherisch = 55 katholisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
+    }
 }
 
 ort buende {
@@ -47,6 +86,19 @@ ort buende {
     stadt    = ja
     kreis    = kr_minden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2941694; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10087
+        konfession   = { lutherisch = 55 katholisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
+    }
 }
 
 ort loehne {
@@ -57,6 +109,19 @@ ort loehne {
     stadt    = ja
     kreis    = kr_minden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2876187; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8946
+        konfession   = { lutherisch = 55 katholisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
+    }
 }
 
 ort petershagen {
@@ -67,6 +132,19 @@ ort petershagen {
     stadt    = ja
     kreis    = kr_minden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2854655; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 16043
+        konfession   = { lutherisch = 55 katholisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
+    }
 }
 
 ort luebbecke {
@@ -77,6 +155,19 @@ ort luebbecke {
     stadt    = ja
     kreis    = kr_minden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2875626; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8713
+        konfession   = { lutherisch = 55 katholisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
+    }
 }
 
 ort rahden {
@@ -87,6 +178,19 @@ ort rahden {
     stadt    = nein
     kreis    = kr_minden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2850887; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12572
+        konfession   = { lutherisch = 55 katholisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
+    }
 }
 
 ort preussisch_oldendorf {
@@ -97,6 +201,19 @@ ort preussisch_oldendorf {
     stadt    = nein
     kreis    = kr_minden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2852144; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7259
+        konfession   = { lutherisch = 55 katholisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
+    }
 }
 
 ort hille {
@@ -107,6 +224,19 @@ ort hille {
     stadt    = nein
     kreis    = kr_minden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2904725; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8837
+        konfession   = { lutherisch = 55 katholisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
+    }
 }
 
 ort bielefeld {
@@ -117,6 +247,19 @@ ort bielefeld {
     stadt    = ja
     kreis    = kr_bielefeld
     quelle   = "GeoNames (CC BY 4.0), geonameid 2949186; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 20468
+        konfession   = { lutherisch = 55 katholisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
+    }
 }
 
 ort harsewinkel {
@@ -127,6 +270,19 @@ ort harsewinkel {
     stadt    = ja
     kreis    = kr_bielefeld
     quelle   = "GeoNames (CC BY 4.0), geonameid 2910278; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9869
+        konfession   = { lutherisch = 55 katholisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
+    }
 }
 
 ort halle_westfalen {
@@ -137,6 +293,19 @@ ort halle_westfalen {
     stadt    = ja
     kreis    = kr_bielefeld
     quelle   = "GeoNames (CC BY 4.0), geonameid 2911520; Name Halle (Westfalen) aus den GeoNames-Alternativnamen (GeoNames: Halle); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12136
+        konfession   = { lutherisch = 55 katholisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
+    }
 }
 
 ort versmold {
@@ -147,6 +316,19 @@ ort versmold {
     stadt    = ja
     kreis    = kr_bielefeld
     quelle   = "GeoNames (CC BY 4.0), geonameid 2817537; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9605
+        konfession   = { lutherisch = 55 katholisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
+    }
 }
 
 ort spenge {
@@ -157,6 +339,19 @@ ort spenge {
     stadt    = nein
     kreis    = kr_bielefeld
     quelle   = "GeoNames (CC BY 4.0), geonameid 2830637; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7154
+        konfession   = { lutherisch = 55 katholisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
+    }
 }
 
 ort detmold {
@@ -167,6 +362,18 @@ ort detmold {
     stadt    = ja
     kreis    = kr_detmold
     quelle   = "GeoNames (CC BY 4.0), geonameid 2937936; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 21366
+        konfession   = { lutherisch = 55 katholisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = LIP
+        bund     = ja
+    }
 }
 
 ort lemgo {
@@ -177,6 +384,18 @@ ort lemgo {
     stadt    = ja
     kreis    = kr_detmold
     quelle   = "GeoNames (CC BY 4.0), geonameid 2878943; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 29215
+        konfession   = { lutherisch = 55 katholisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = LIP
+        bund     = ja
+    }
 }
 
 ort lage {
@@ -187,6 +406,18 @@ ort lage {
     stadt    = ja
     kreis    = kr_detmold
     quelle   = "GeoNames (CC BY 4.0), geonameid 2881956; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 17144
+        konfession   = { lutherisch = 55 katholisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = LIP
+        bund     = ja
+    }
 }
 
 ort oerlinghausen {
@@ -197,6 +428,18 @@ ort oerlinghausen {
     stadt    = nein
     kreis    = kr_detmold
     quelle   = "GeoNames (CC BY 4.0), geonameid 2857900; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 17512
+        konfession   = { lutherisch = 55 katholisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = LIP
+        bund     = ja
+    }
 }
 
 ort blomberg {
@@ -207,6 +450,18 @@ ort blomberg {
     stadt    = nein
     kreis    = kr_detmold
     quelle   = "GeoNames (CC BY 4.0), geonameid 2947641; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 18763
+        konfession   = { lutherisch = 55 katholisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = LIP
+        bund     = ja
+    }
 }
 
 ort steinheim {
@@ -217,6 +472,19 @@ ort steinheim {
     stadt    = nein
     kreis    = kr_detmold
     quelle   = "GeoNames (CC BY 4.0), geonameid 2827990; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12309
+        konfession   = { lutherisch = 55 katholisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
+    }
 }
 
 ort guetersloh {
@@ -227,6 +495,19 @@ ort guetersloh {
     stadt    = ja
     kreis    = kr_guetersloh
     quelle   = "GeoNames (CC BY 4.0), geonameid 2913366; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10102
+        konfession   = { lutherisch = 55 katholisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
+    }
 }
 
 ort rheda_wiedenbrueck {
@@ -237,6 +518,19 @@ ort rheda_wiedenbrueck {
     stadt    = ja
     kreis    = kr_guetersloh
     quelle   = "GeoNames (CC BY 4.0), geonameid 2847690; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11387
+        konfession   = { lutherisch = 55 katholisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
+    }
 }
 
 ort verl {
@@ -247,6 +541,19 @@ ort verl {
     stadt    = ja
     kreis    = kr_guetersloh
     quelle   = "GeoNames (CC BY 4.0), geonameid 2817576; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8795
+        konfession   = { lutherisch = 55 katholisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
+    }
 }
 
 ort rietberg {
@@ -257,6 +564,19 @@ ort rietberg {
     stadt    = ja
     kreis    = kr_guetersloh
     quelle   = "GeoNames (CC BY 4.0), geonameid 2846843; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12813
+        konfession   = { lutherisch = 55 katholisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
+    }
 }
 
 ort hoexter {
@@ -267,6 +587,19 @@ ort hoexter {
     stadt    = ja
     kreis    = kr_hoexter
     quelle   = "GeoNames (CC BY 4.0), geonameid 2898321; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12141
+        konfession   = { lutherisch = 55 katholisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
+    }
 }
 
 ort warburg {
@@ -277,6 +610,19 @@ ort warburg {
     stadt    = ja
     kreis    = kr_hoexter
     quelle   = "GeoNames (CC BY 4.0), geonameid 2814153; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11503
+        konfession   = { lutherisch = 55 katholisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
+    }
 }
 
 ort bad_driburg {
@@ -287,6 +633,19 @@ ort bad_driburg {
     stadt    = nein
     kreis    = kr_hoexter
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953525; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10363
+        konfession   = { lutherisch = 55 katholisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
+    }
 }
 
 ort beverungen {
@@ -297,6 +656,19 @@ ort beverungen {
     stadt    = nein
     kreis    = kr_hoexter
     quelle   = "GeoNames (CC BY 4.0), geonameid 2949475; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8837
+        konfession   = { lutherisch = 55 katholisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
+    }
 }
 
 ort brakel {
@@ -307,6 +679,19 @@ ort brakel {
     stadt    = nein
     kreis    = kr_hoexter
     quelle   = "GeoNames (CC BY 4.0), geonameid 2945542; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9573
+        konfession   = { lutherisch = 55 katholisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
+    }
 }
 
 ort borgentreich {
@@ -317,6 +702,19 @@ ort borgentreich {
     stadt    = nein
     kreis    = kr_hoexter
     quelle   = "GeoNames (CC BY 4.0), geonameid 2946291; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9416
+        konfession   = { lutherisch = 55 katholisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
+    }
 }
 
 ort willebadessen {
@@ -327,6 +725,19 @@ ort willebadessen {
     stadt    = nein
     kreis    = kr_hoexter
     quelle   = "GeoNames (CC BY 4.0), geonameid 2808619; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8784
+        konfession   = { lutherisch = 55 katholisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
+    }
 }
 
 ort lichtenau_ostwestfalen {
@@ -337,6 +748,19 @@ ort lichtenau_ostwestfalen {
     stadt    = nein
     kreis    = kr_hoexter
     quelle   = "GeoNames (CC BY 4.0), geonameid 2878133; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10889
+        konfession   = { lutherisch = 55 katholisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
+    }
 }
 
 ort paderborn {
@@ -347,6 +771,19 @@ ort paderborn {
     stadt    = ja
     kreis    = kr_paderborn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2855745; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 18101
+        konfession   = { lutherisch = 55 katholisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
+    }
 }
 
 ort delbrueck {
@@ -357,6 +794,19 @@ ort delbrueck {
     stadt    = ja
     kreis    = kr_paderborn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2938389; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8723
+        konfession   = { lutherisch = 55 katholisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
+    }
 }
 
 ort salzkotten {
@@ -367,6 +817,19 @@ ort salzkotten {
     stadt    = ja
     kreis    = kr_paderborn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2842131; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9629
+        konfession   = { lutherisch = 55 katholisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
+    }
 }
 
 ort bueren {
@@ -377,6 +840,19 @@ ort bueren {
     stadt    = ja
     kreis    = kr_paderborn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2941570; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9182
+        konfession   = { lutherisch = 55 katholisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
+    }
 }
 
 ort hoevelhof {
@@ -387,6 +863,19 @@ ort hoevelhof {
     stadt    = nein
     kreis    = kr_paderborn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2898364; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 3866
+        konfession   = { lutherisch = 55 katholisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
+    }
 }
 
 ort bad_lippspringe {
@@ -397,6 +886,19 @@ ort bad_lippspringe {
     stadt    = nein
     kreis    = kr_paderborn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953405; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9889
+        konfession   = { lutherisch = 55 katholisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
+    }
 }
 
 ort wuennenberg {
@@ -407,4 +909,17 @@ ort wuennenberg {
     stadt    = nein
     kreis    = kr_paderborn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2805785; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9784
+        konfession   = { lutherisch = 55 katholisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
+    }
 }

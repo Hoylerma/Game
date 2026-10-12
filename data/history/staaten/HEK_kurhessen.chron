@@ -1,0 +1,25 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+staat HEK {
+    name     = "Kurfürstentum Hessen"
+    kurzname = "Kurhessen"
+    farbe    = { 150 70 110 }
+    quelle   = "Verfassung von 1831; Kurfürst Wilhelm II. starb am 20. November 1847, sein Sohn war seit 1831 Mitregent. Schatz, Steuersätze, Hofhaltung und Heer sind Spielwerte"
+
+    1847.11.20 = {
+        herrscher = "Friedrich Wilhelm I."
+    }
+
+    1848.03.01 = {
+        hauptstadt     = kassel
+        regierungsform = konstitutionelle_monarchie
+        konfession     = reformiert
+        schatz         = 226200
+        kontribution   = 0.10
+        akzise         = 0.05
+        zoll           = 0.03
+        hofhaltung     = 188500
+        heer           = 7
+        zollverein     = ja
+    }
+}

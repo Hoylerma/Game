@@ -35,6 +35,7 @@ concurrency:
 env:
   # Jahre für den plattformübergreifenden Prüfsummenvergleich.
   PRUEFSUMME_JAHRE: 100
+  PRUEFSUMME_JAHRE_1848: 2 # Lesezeichen 1848 (seit M7): rund 2 s je Spieljahr im Debug-Build
   # Lasttest für den Prüfsummenvergleich (im Debug-Build, daher klein).
   LASTTEST_BLOECKE: 50000
   LASTTEST_JAHRE: 2
@@ -87,6 +88,13 @@ jobs:
             echo "::error::Keine Prüfsumme in der Ausgabe von uhrwerk-cli gefunden."
             exit 1
           fi
+          ./build/dev/cli/uhrwerk-cli lauf --daten data --szenario voelkerfruehling --jahre "$PRUEFSUMME_JAHRE_1848" \
+            | tee "$RUNNER_TEMP/lauf1848.txt"
+          summe1848=$(tr -d '\r' < "$RUNNER_TEMP/lauf1848.txt" | grep -E 'summe: [0-9a-f]{16}$' | tail -n 1 | grep -oE '[0-9a-f]{16}$' || true)
+          if [ -z "$summe1848" ]; then
+            echo "::error::Keine Prüfsumme im Lauf des Lesezeichens 1848 gefunden."
+            exit 1
+          fi
           ./build/dev/cli/uhrwerk-cli lasttest --daten data --bloecke "$LASTTEST_BLOECKE" --jahre "$LASTTEST_JAHRE" \
             | tee "$RUNNER_TEMP/lasttest.txt"
           last=$(tr -d '\r' < "$RUNNER_TEMP/lasttest.txt" | grep -E 'summe: [0-9a-f]{16}$' | tail -n 1 | grep -oE '[0-9a-f]{16}$' || true)
@@ -100,8 +108,8 @@ jobs:
             exit 1
           fi
           mkdir -p pruefsumme
-          printf 'lauf %s\nlasttest %s\nspielstand %s\n' "$summe" "$last" "$wert" > "pruefsumme/linux-${{ matrix.compiler }}.txt"
-          echo "Prüfsummen (Linux, ${{ matrix.compiler }}): lauf \`$summe\`, lasttest \`$last\`, Spielstand \`$wert\`" >> "$GITHUB_STEP_SUMMARY"
+          printf 'lauf %s\nlauf1848 %s\nlasttest %s\nspielstand %s\n' "$summe" "$summe1848" "$last" "$wert" > "pruefsumme/linux-${{ matrix.compiler }}.txt"
+          echo "Prüfsummen (Linux, ${{ matrix.compiler }}): lauf \`$summe\`, 1848 \`$summe1848\`, lasttest \`$last\`, Spielstand \`$wert\`" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Prüfsumme hochladen
         uses: actions/upload-artifact@v4
@@ -158,6 +166,13 @@ jobs:
             echo "::error::Keine Prüfsumme in der Ausgabe von uhrwerk-cli gefunden."
             exit 1
           fi
+          ./build/dev/cli/uhrwerk-cli.exe lauf --daten data --szenario voelkerfruehling --jahre "$PRUEFSUMME_JAHRE_1848" \
+            | tee "$RUNNER_TEMP/lauf1848.txt"
+          summe1848=$(tr -d '\r' < "$RUNNER_TEMP/lauf1848.txt" | grep -E 'summe: [0-9a-f]{16}$' | tail -n 1 | grep -oE '[0-9a-f]{16}$' || true)
+          if [ -z "$summe1848" ]; then
+            echo "::error::Keine Prüfsumme im Lauf des Lesezeichens 1848 gefunden."
+            exit 1
+          fi
           ./build/dev/cli/uhrwerk-cli.exe lasttest --daten data --bloecke "$LASTTEST_BLOECKE" --jahre "$LASTTEST_JAHRE" \
             | tee "$RUNNER_TEMP/lasttest.txt"
           last=$(tr -d '\r' < "$RUNNER_TEMP/lasttest.txt" | grep -E 'summe: [0-9a-f]{16}$' | tail -n 1 | grep -oE '[0-9a-f]{16}$' || true)
@@ -171,8 +186,8 @@ jobs:
             exit 1
           fi
           mkdir -p pruefsumme
-          printf 'lauf %s\nlasttest %s\nspielstand %s\n' "$summe" "$last" "$wert" > pruefsumme/windows-msvc.txt
-          echo "Prüfsummen (Windows, MSVC): lauf \`$summe\`, lasttest \`$last\`, Spielstand \`$wert\`" >> "$GITHUB_STEP_SUMMARY"
+          printf 'lauf %s\nlauf1848 %s\nlasttest %s\nspielstand %s\n' "$summe" "$summe1848" "$last" "$wert" > pruefsumme/windows-msvc.txt
+          echo "Prüfsummen (Windows, MSVC): lauf \`$summe\`, 1848 \`$summe1848\`, lasttest \`$last\`, Spielstand \`$wert\`" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Prüfsumme hochladen
         uses: actions/upload-artifact@v4
@@ -204,13 +219,14 @@ jobs:
             echo
             echo "Spielstand: Prüfwert der Nutzdaten des Spielstands nach $PRUEFSUMME_JAHRE Jahren."
             echo
-            echo "| Plattform | lauf | lasttest | Spielstand |"
-            echo "|---|---|---|---|"
+            echo "| Plattform | lauf | 1848 ($PRUEFSUMME_JAHRE_1848 Jahre) | lasttest | Spielstand |"
+            echo "|---|---|---|---|---|"
             for datei in "${dateien[@]}"; do
               lauf=$(grep '^lauf ' "$datei" | cut -d' ' -f2)
+              lauf1848=$(grep '^lauf1848 ' "$datei" | cut -d' ' -f2)
               last=$(grep '^lasttest ' "$datei" | cut -d' ' -f2)
               wert=$(grep '^spielstand ' "$datei" | cut -d' ' -f2)
-              echo "| $(basename "$datei" .txt) | \`$lauf\` | \`$last\` | \`$wert\` |"
+              echo "| $(basename "$datei" .txt) | \`$lauf\` | \`$lauf1848\` | \`$last\` | \`$wert\` |"
             done
           } | tee -a "$GITHUB_STEP_SUMMARY"
           if [ "${#dateien[@]}" -ne 3 ]; then

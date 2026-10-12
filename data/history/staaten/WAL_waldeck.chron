@@ -1,0 +1,25 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+staat WAL {
+    name     = "Fürstentum Waldeck und Pyrmont"
+    kurzname = "Waldeck"
+    farbe    = { 190 140 100 }
+    quelle   = "Fürst minderjährig, Vormundschaft der Mutter Emma bis 1852; Zollverein seit 1831. Schatz, Steuersätze, Hofhaltung und Heer sind Spielwerte"
+
+    1845.05.15 = {
+        herrscher = "Georg Victor"
+    }
+
+    1848.03.01 = {
+        hauptstadt     = bad_arolsen
+        regierungsform = konstitutionelle_monarchie
+        konfession     = lutherisch
+        schatz         = 17400
+        kontribution   = 0.10
+        akzise         = 0.05
+        zoll           = 0.03
+        hofhaltung     = 14500
+        heer           = 6
+        zollverein     = ja
+    }
+}

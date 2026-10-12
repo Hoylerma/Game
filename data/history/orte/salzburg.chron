@@ -17,6 +17,19 @@ ort salzburg {
     stadt    = ja
     kreis    = kr_salzburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2766824; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 22210
+        konfession   = { katholisch = 100 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_salzburg
+        bund       = ja
+    }
 }
 
 ort hallein {
@@ -27,6 +40,19 @@ ort hallein {
     stadt    = nein
     kreis    = kr_salzburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2776951; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6125
+        konfession   = { katholisch = 100 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_salzburg
+        bund       = ja
+    }
 }
 
 ort oberndorf_bei_salzburg {
@@ -37,6 +63,19 @@ ort oberndorf_bei_salzburg {
     stadt    = nein
     kreis    = kr_salzburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2769874; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 5914
+        konfession   = { katholisch = 100 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_salzburg
+        bund       = ja
+    }
 }
 
 ort henndorf_am_wallersee {
@@ -47,6 +86,19 @@ ort henndorf_am_wallersee {
     stadt    = nein
     kreis    = kr_salzburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2776513; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 3484
+        konfession   = { katholisch = 100 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_salzburg
+        bund       = ja
+    }
 }
 
 ort mattsee {
@@ -57,6 +109,19 @@ ort mattsee {
     stadt    = nein
     kreis    = kr_salzburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2771811; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 5135
+        konfession   = { katholisch = 100 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_salzburg
+        bund       = ja
+    }
 }
 
 ort strasswalchen {
@@ -67,6 +132,19 @@ ort strasswalchen {
     stadt    = nein
     kreis    = kr_salzburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2764172; Name Straßwalchen aus den GeoNames-Alternativnamen (GeoNames: Strasswalchen); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7886
+        konfession   = { katholisch = 100 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_salzburg
+        bund       = ja
+    }
 }
 
 ort hof_bei_salzburg {
@@ -77,6 +155,19 @@ ort hof_bei_salzburg {
     stadt    = nein
     kreis    = kr_salzburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2775848; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 4768
+        konfession   = { katholisch = 100 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_salzburg
+        bund       = ja
+    }
 }
 
 ort golling_an_der_salzach {
@@ -87,6 +178,19 @@ ort golling_an_der_salzach {
     stadt    = nein
     kreis    = kr_salzburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2778361; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 3370
+        konfession   = { katholisch = 100 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_salzburg
+        bund       = ja
+    }
 }
 
 ort hintersee {
@@ -97,6 +201,19 @@ ort hintersee {
     stadt    = nein
     kreis    = kr_salzburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2776240; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7226
+        konfession   = { katholisch = 100 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_salzburg
+        bund       = ja
+    }
 }
 
 ort saalfelden_am_steinernen_meer {
@@ -107,6 +224,19 @@ ort saalfelden_am_steinernen_meer {
     stadt    = nein
     kreis    = kr_saalfelden_am_steinernen_meer
     quelle   = "GeoNames (CC BY 4.0), geonameid 2766922; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 3782
+        konfession   = { katholisch = 100 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_salzburg
+        bund       = ja
+    }
 }
 
 ort zell_am_see {
@@ -117,6 +247,19 @@ ort zell_am_see {
     stadt    = nein
     kreis    = kr_saalfelden_am_steinernen_meer
     quelle   = "GeoNames (CC BY 4.0), geonameid 2760634; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 2132
+        konfession   = { katholisch = 100 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_salzburg
+        bund       = ja
+    }
 }
 
 ort kaprun {
@@ -127,6 +270,19 @@ ort kaprun {
     stadt    = nein
     kreis    = kr_saalfelden_am_steinernen_meer
     quelle   = "GeoNames (CC BY 4.0), geonameid 2774758; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 2998
+        konfession   = { katholisch = 100 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_salzburg
+        bund       = ja
+    }
 }
 
 ort lofer {
@@ -137,6 +293,19 @@ ort lofer {
     stadt    = nein
     kreis    = kr_saalfelden_am_steinernen_meer
     quelle   = "GeoNames (CC BY 4.0), geonameid 2772330; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 3727
+        konfession   = { katholisch = 100 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_salzburg
+        bund       = ja
+    }
 }
 
 ort dienten_am_hochkoenig {
@@ -147,6 +316,19 @@ ort dienten_am_hochkoenig {
     stadt    = nein
     kreis    = kr_saalfelden_am_steinernen_meer
     quelle   = "GeoNames (CC BY 4.0), geonameid 2780988; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 3205
+        konfession   = { katholisch = 100 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_salzburg
+        bund       = ja
+    }
 }
 
 ort bischofshofen {
@@ -157,6 +339,19 @@ ort bischofshofen {
     stadt    = nein
     kreis    = kr_bischofshofen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2781735; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 3205
+        konfession   = { katholisch = 100 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_salzburg
+        bund       = ja
+    }
 }
 
 ort schwarzach_im_pongau {
@@ -167,6 +362,19 @@ ort schwarzach_im_pongau {
     stadt    = nein
     kreis    = kr_bischofshofen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2765495; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 2077
+        konfession   = { katholisch = 100 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_salzburg
+        bund       = ja
+    }
 }
 
 ort bad_hofgastein {
@@ -177,6 +385,19 @@ ort bad_hofgastein {
     stadt    = nein
     kreis    = kr_bischofshofen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2782053; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 1595
+        konfession   = { katholisch = 100 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_salzburg
+        bund       = ja
+    }
 }
 
 ort bad_gastein {
@@ -187,6 +408,19 @@ ort bad_gastein {
     stadt    = nein
     kreis    = kr_bischofshofen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2782058; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 3328
+        konfession   = { katholisch = 100 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_salzburg
+        bund       = ja
+    }
 }
 
 ort grossarl {
@@ -197,6 +431,19 @@ ort grossarl {
     stadt    = nein
     kreis    = kr_bischofshofen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2777905; Name Großarl aus den GeoNames-Alternativnamen (GeoNames: Grossarl); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 1238
+        konfession   = { katholisch = 100 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_salzburg
+        bund       = ja
+    }
 }
 
 ort rauris {
@@ -207,6 +454,19 @@ ort rauris {
     stadt    = nein
     kreis    = kr_bischofshofen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2767852; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 3562
+        konfession   = { katholisch = 100 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_salzburg
+        bund       = ja
+    }
 }
 
 ort kleinarl {
@@ -217,6 +477,19 @@ ort kleinarl {
     stadt    = nein
     kreis    = kr_bischofshofen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2606026; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 2421
+        konfession   = { katholisch = 100 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_salzburg
+        bund       = ja
+    }
 }
 
 ort huettschlag {
@@ -227,6 +500,19 @@ ort huettschlag {
     stadt    = nein
     kreis    = kr_bischofshofen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2775352; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 2489
+        konfession   = { katholisch = 100 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_salzburg
+        bund       = ja
+    }
 }
 
 ort altenmarkt_im_pongau {
@@ -237,6 +523,19 @@ ort altenmarkt_im_pongau {
     stadt    = nein
     kreis    = kr_altenmarkt_im_pongau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2782673; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 1926
+        konfession   = { katholisch = 100 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_salzburg
+        bund       = ja
+    }
 }
 
 ort abtenau {
@@ -247,6 +546,19 @@ ort abtenau {
     stadt    = nein
     kreis    = kr_altenmarkt_im_pongau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2783050; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 2586
+        konfession   = { katholisch = 100 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_salzburg
+        bund       = ja
+    }
 }
 
 ort sankt_martin_am_tennengebirge {
@@ -257,6 +569,19 @@ ort sankt_martin_am_tennengebirge {
     stadt    = nein
     kreis    = kr_altenmarkt_im_pongau
     quelle   = "GeoNames (CC BY 4.0), geonameid 6692414; Name Sankt Martin am Tennengebirge aus den GeoNames-Alternativnamen (GeoNames: St. Martin of Tennengebirge); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 2104
+        konfession   = { katholisch = 100 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_salzburg
+        bund       = ja
+    }
 }
 
 ort forstau {
@@ -267,6 +592,19 @@ ort forstau {
     stadt    = nein
     kreis    = kr_altenmarkt_im_pongau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2779414; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 2104
+        konfession   = { katholisch = 100 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_salzburg
+        bund       = ja
+    }
 }
 
 ort untertauern {
@@ -277,6 +615,19 @@ ort untertauern {
     stadt    = nein
     kreis    = kr_altenmarkt_im_pongau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2762619; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 2242
+        konfession   = { katholisch = 100 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_salzburg
+        bund       = ja
+    }
 }
 
 ort bramberg_am_wildkogel {
@@ -287,6 +638,19 @@ ort bramberg_am_wildkogel {
     stadt    = nein
     kreis    = kr_bramberg_am_wildkogel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2781587; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 3769
+        konfession   = { katholisch = 100 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_salzburg
+        bund       = ja
+    }
 }
 
 ort mittersill {
@@ -297,6 +661,19 @@ ort mittersill {
     stadt    = nein
     kreis    = kr_bramberg_am_wildkogel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2771385; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 2641
+        konfession   = { katholisch = 100 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_salzburg
+        bund       = ja
+    }
 }
 
 ort krimml {
@@ -307,6 +684,19 @@ ort krimml {
     stadt    = nein
     kreis    = kr_bramberg_am_wildkogel
     quelle   = "GeoNames (CC BY 4.0), geonameid 3323923; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 3892
+        konfession   = { katholisch = 100 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_salzburg
+        bund       = ja
+    }
 }
 
 ort uttendorf {
@@ -317,6 +707,19 @@ ort uttendorf {
     stadt    = nein
     kreis    = kr_bramberg_am_wildkogel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2762493; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 2269
+        konfession   = { katholisch = 100 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_salzburg
+        bund       = ja
+    }
 }
 
 ort saalbach {
@@ -327,6 +730,19 @@ ort saalbach {
     stadt    = nein
     kreis    = kr_bramberg_am_wildkogel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2766924; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 2407
+        konfession   = { katholisch = 100 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_salzburg
+        bund       = ja
+    }
 }
 
 ort niedernsill {
@@ -337,6 +753,19 @@ ort niedernsill {
     stadt    = nein
     kreis    = kr_bramberg_am_wildkogel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2770544; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 1664
+        konfession   = { katholisch = 100 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_salzburg
+        bund       = ja
+    }
 }
 
 ort tamsweg {
@@ -347,6 +776,19 @@ ort tamsweg {
     stadt    = nein
     kreis    = kr_tamsweg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2763929; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 3136
+        konfession   = { katholisch = 100 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_salzburg
+        bund       = ja
+    }
 }
 
 ort sankt_michael_im_lungau {
@@ -357,6 +799,19 @@ ort sankt_michael_im_lungau {
     stadt    = nein
     kreis    = kr_tamsweg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2766496; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 1279
+        konfession   = { katholisch = 100 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_salzburg
+        bund       = ja
+    }
 }
 
 ort zederhaus {
@@ -367,6 +822,19 @@ ort zederhaus {
     stadt    = nein
     kreis    = kr_tamsweg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2760704; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 1843
+        konfession   = { katholisch = 100 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_salzburg
+        bund       = ja
+    }
 }
 
 ort ramingstein {
@@ -377,6 +845,19 @@ ort ramingstein {
     stadt    = nein
     kreis    = kr_tamsweg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2768021; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 1788
+        konfession   = { katholisch = 100 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_salzburg
+        bund       = ja
+    }
 }
 
 ort thomatal {
@@ -387,6 +868,19 @@ ort thomatal {
     stadt    = nein
     kreis    = kr_tamsweg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2763677; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 2036
+        konfession   = { katholisch = 100 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_salzburg
+        bund       = ja
+    }
 }
 
 ort muhr {
@@ -397,6 +891,19 @@ ort muhr {
     stadt    = nein
     kreis    = kr_tamsweg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2771053; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 3672
+        konfession   = { katholisch = 100 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_salzburg
+        bund       = ja
+    }
 }
 
 ort tweng {
@@ -407,4 +914,17 @@ ort tweng {
     stadt    = nein
     kreis    = kr_tamsweg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2763215; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 2765
+        konfession   = { katholisch = 100 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_salzburg
+        bund       = ja
+    }
 }

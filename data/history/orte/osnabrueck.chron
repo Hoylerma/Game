@@ -17,6 +17,19 @@ ort papenburg {
     stadt    = ja
     kreis    = kr_papenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2855525; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11757
+        konfession   = { katholisch = 55 lutherisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HAN
+        verwaltung = hn_osnabrueck
+        bund       = ja
+    }
 }
 
 ort haren {
@@ -27,6 +40,19 @@ ort haren {
     stadt    = ja
     kreis    = kr_papenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2910514; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 14248
+        konfession   = { katholisch = 55 lutherisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HAN
+        verwaltung = hn_osnabrueck
+        bund       = ja
+    }
 }
 
 ort werlte {
@@ -37,6 +63,19 @@ ort werlte {
     stadt    = nein
     kreis    = kr_papenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2810860; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11355
+        konfession   = { katholisch = 55 lutherisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HAN
+        verwaltung = hn_osnabrueck
+        bund       = ja
+    }
 }
 
 ort soegel {
@@ -47,6 +86,19 @@ ort soegel {
     stadt    = nein
     kreis    = kr_papenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2831699; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10681
+        konfession   = { katholisch = 55 lutherisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HAN
+        verwaltung = hn_osnabrueck
+        bund       = ja
+    }
 }
 
 ort lathen {
@@ -57,6 +109,19 @@ ort lathen {
     stadt    = nein
     kreis    = kr_papenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2880351; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11121
+        konfession   = { katholisch = 55 lutherisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HAN
+        verwaltung = hn_osnabrueck
+        bund       = ja
+    }
 }
 
 ort esterwegen {
@@ -67,6 +132,19 @@ ort esterwegen {
     stadt    = nein
     kreis    = kr_papenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2928717; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12962
+        konfession   = { katholisch = 55 lutherisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HAN
+        verwaltung = hn_osnabrueck
+        bund       = ja
+    }
 }
 
 ort doerpen {
@@ -77,6 +155,19 @@ ort doerpen {
     stadt    = nein
     kreis    = kr_papenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2935597; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 13009
+        konfession   = { katholisch = 55 lutherisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HAN
+        verwaltung = hn_osnabrueck
+        bund       = ja
+    }
 }
 
 ort rhede {
@@ -87,6 +178,19 @@ ort rhede {
     stadt    = nein
     kreis    = kr_papenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2847688; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10852
+        konfession   = { katholisch = 55 lutherisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HAN
+        verwaltung = hn_osnabrueck
+        bund       = ja
+    }
 }
 
 ort lingen {
@@ -97,6 +201,19 @@ ort lingen {
     stadt    = ja
     kreis    = kr_lingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2877088; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 13923
+        konfession   = { katholisch = 55 lutherisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HAN
+        verwaltung = hn_osnabrueck
+        bund       = ja
+    }
 }
 
 ort meppen {
@@ -107,6 +224,19 @@ ort meppen {
     stadt    = ja
     kreis    = kr_lingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2871845; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 15999
+        konfession   = { katholisch = 55 lutherisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HAN
+        verwaltung = hn_osnabrueck
+        bund       = ja
+    }
 }
 
 ort haseluenne {
@@ -117,6 +247,19 @@ ort haseluenne {
     stadt    = nein
     kreis    = kr_lingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2909761; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8244
+        konfession   = { katholisch = 55 lutherisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HAN
+        verwaltung = hn_osnabrueck
+        bund       = ja
+    }
 }
 
 ort fuerstenau {
@@ -127,6 +270,19 @@ ort fuerstenau {
     stadt    = nein
     kreis    = kr_lingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2923658; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9436
+        konfession   = { katholisch = 55 lutherisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HAN
+        verwaltung = hn_osnabrueck
+        bund       = ja
+    }
 }
 
 ort geeste {
@@ -137,6 +293,19 @@ ort geeste {
     stadt    = nein
     kreis    = kr_lingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2922112; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8830
+        konfession   = { katholisch = 55 lutherisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HAN
+        verwaltung = hn_osnabrueck
+        bund       = ja
+    }
 }
 
 ort laehden {
@@ -147,6 +316,19 @@ ort laehden {
     stadt    = nein
     kreis    = kr_lingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2881921; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7674
+        konfession   = { katholisch = 55 lutherisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HAN
+        verwaltung = hn_osnabrueck
+        bund       = ja
+    }
 }
 
 ort freren {
@@ -157,6 +339,19 @@ ort freren {
     stadt    = nein
     kreis    = kr_lingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2924967; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9385
+        konfession   = { katholisch = 55 lutherisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HAN
+        verwaltung = hn_osnabrueck
+        bund       = ja
+    }
 }
 
 ort bawinkel {
@@ -167,6 +362,19 @@ ort bawinkel {
     stadt    = nein
     kreis    = kr_lingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2951863; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7414
+        konfession   = { katholisch = 55 lutherisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HAN
+        verwaltung = hn_osnabrueck
+        bund       = ja
+    }
 }
 
 ort nordhorn {
@@ -177,6 +385,19 @@ ort nordhorn {
     stadt    = ja
     kreis    = kr_nordhorn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2861934; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12915
+        konfession   = { katholisch = 55 lutherisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HAN
+        verwaltung = hn_osnabrueck
+        bund       = ja
+    }
 }
 
 ort bad_bentheim {
@@ -187,6 +408,19 @@ ort bad_bentheim {
     stadt    = nein
     kreis    = kr_nordhorn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953552; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10007
+        konfession   = { katholisch = 55 lutherisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HAN
+        verwaltung = hn_osnabrueck
+        bund       = ja
+    }
 }
 
 ort emsbueren {
@@ -197,6 +431,19 @@ ort emsbueren {
     stadt    = nein
     kreis    = kr_nordhorn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2930454; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11526
+        konfession   = { katholisch = 55 lutherisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HAN
+        verwaltung = hn_osnabrueck
+        bund       = ja
+    }
 }
 
 ort wietmarschen {
@@ -207,6 +454,19 @@ ort wietmarschen {
     stadt    = nein
     kreis    = kr_nordhorn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2809100; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10888
+        konfession   = { katholisch = 55 lutherisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HAN
+        verwaltung = hn_osnabrueck
+        bund       = ja
+    }
 }
 
 ort spelle {
@@ -217,6 +477,19 @@ ort spelle {
     stadt    = nein
     kreis    = kr_nordhorn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2830652; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6688
+        konfession   = { katholisch = 55 lutherisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HAN
+        verwaltung = hn_osnabrueck
+        bund       = ja
+    }
 }
 
 ort salzbergen {
@@ -227,6 +500,19 @@ ort salzbergen {
     stadt    = nein
     kreis    = kr_nordhorn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2842175; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7145
+        konfession   = { katholisch = 55 lutherisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HAN
+        verwaltung = hn_osnabrueck
+        bund       = ja
+    }
 }
 
 ort emlichheim {
@@ -237,6 +523,19 @@ ort emlichheim {
     stadt    = nein
     kreis    = kr_nordhorn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2930546; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8399
+        konfession   = { katholisch = 55 lutherisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HAN
+        verwaltung = hn_osnabrueck
+        bund       = ja
+    }
 }
 
 ort uelsen {
@@ -247,6 +546,19 @@ ort uelsen {
     stadt    = nein
     kreis    = kr_nordhorn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2820458; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10007
+        konfession   = { katholisch = 55 lutherisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HAN
+        verwaltung = hn_osnabrueck
+        bund       = ja
+    }
 }
 
 ort bramsche {
@@ -257,6 +569,19 @@ ort bramsche {
     stadt    = ja
     kreis    = kr_bramsche
     quelle   = "GeoNames (CC BY 4.0), geonameid 2945474; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12597
+        konfession   = { katholisch = 55 lutherisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HAN
+        verwaltung = hn_osnabrueck
+        bund       = ja
+    }
 }
 
 ort quakenbrueck {
@@ -267,6 +592,19 @@ ort quakenbrueck {
     stadt    = nein
     kreis    = kr_bramsche
     quelle   = "GeoNames (CC BY 4.0), geonameid 2851523; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10162
+        konfession   = { katholisch = 55 lutherisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HAN
+        verwaltung = hn_osnabrueck
+        bund       = ja
+    }
 }
 
 ort bersenbrueck {
@@ -277,6 +615,19 @@ ort bersenbrueck {
     stadt    = nein
     kreis    = kr_bramsche
     quelle   = "GeoNames (CC BY 4.0), geonameid 2949906; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6118
+        konfession   = { katholisch = 55 lutherisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HAN
+        verwaltung = hn_osnabrueck
+        bund       = ja
+    }
 }
 
 ort merzen {
@@ -287,6 +638,19 @@ ort merzen {
     stadt    = nein
     kreis    = kr_bramsche
     quelle   = "GeoNames (CC BY 4.0), geonameid 2871690; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 5703
+        konfession   = { katholisch = 55 lutherisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HAN
+        verwaltung = hn_osnabrueck
+        bund       = ja
+    }
 }
 
 ort rieste {
@@ -297,6 +661,19 @@ ort rieste {
     stadt    = nein
     kreis    = kr_bramsche
     quelle   = "GeoNames (CC BY 4.0), geonameid 2846853; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7881
+        konfession   = { katholisch = 55 lutherisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HAN
+        verwaltung = hn_osnabrueck
+        bund       = ja
+    }
 }
 
 ort nortrup {
@@ -307,6 +684,19 @@ ort nortrup {
     stadt    = nein
     kreis    = kr_bramsche
     quelle   = "GeoNames (CC BY 4.0), geonameid 2861802; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9747
+        konfession   = { katholisch = 55 lutherisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HAN
+        verwaltung = hn_osnabrueck
+        bund       = ja
+    }
 }
 
 ort osnabrueck {
@@ -317,6 +707,19 @@ ort osnabrueck {
     stadt    = ja
     kreis    = kr_osnabrueck
     quelle   = "GeoNames (CC BY 4.0), geonameid 2856883; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 19829
+        konfession   = { katholisch = 55 lutherisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HAN
+        verwaltung = hn_osnabrueck
+        bund       = ja
+    }
 }
 
 ort melle {
@@ -327,6 +730,19 @@ ort melle {
     stadt    = ja
     kreis    = kr_osnabrueck
     quelle   = "GeoNames (CC BY 4.0), geonameid 2872079; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 13179
+        konfession   = { katholisch = 55 lutherisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HAN
+        verwaltung = hn_osnabrueck
+        bund       = ja
+    }
 }
 
 ort georgsmarienhuette {
@@ -337,6 +753,19 @@ ort georgsmarienhuette {
     stadt    = ja
     kreis    = kr_osnabrueck
     quelle   = "GeoNames (CC BY 4.0), geonameid 2921242; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7447
+        konfession   = { katholisch = 55 lutherisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HAN
+        verwaltung = hn_osnabrueck
+        bund       = ja
+    }
 }
 
 ort bad_essen {
@@ -347,6 +776,19 @@ ort bad_essen {
     stadt    = nein
     kreis    = kr_osnabrueck
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953464; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10473
+        konfession   = { katholisch = 55 lutherisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HAN
+        verwaltung = hn_osnabrueck
+        bund       = ja
+    }
 }
 
 ort bissendorf {
@@ -357,6 +799,19 @@ ort bissendorf {
     stadt    = nein
     kreis    = kr_osnabrueck
     quelle   = "GeoNames (CC BY 4.0), geonameid 2948212; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7674
+        konfession   = { katholisch = 55 lutherisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HAN
+        verwaltung = hn_osnabrueck
+        bund       = ja
+    }
 }
 
 ort bad_laer {
@@ -367,4 +822,17 @@ ort bad_laer {
     stadt    = nein
     kreis    = kr_osnabrueck
     quelle   = "GeoNames (CC BY 4.0), geonameid 2881972; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7570
+        konfession   = { katholisch = 55 lutherisch = 44 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HAN
+        verwaltung = hn_osnabrueck
+        bund       = ja
+    }
 }

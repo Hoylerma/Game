@@ -1,0 +1,25 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+staat REA {
+    name     = "Fürstentum Reuß älterer Linie"
+    kurzname = "Reuß ä. L."
+    farbe    = { 170 150 200 }
+    quelle   = "Residenz Greiz. Schatz, Steuersätze, Hofhaltung und Heer sind Spielwerte"
+
+    1836.10.31 = {
+        herrscher = "Heinrich XX."
+    }
+
+    1848.03.01 = {
+        hauptstadt     = greiz
+        regierungsform = absolute_monarchie
+        konfession     = lutherisch
+        schatz         = 10500
+        kontribution   = 0.10
+        akzise         = 0.05
+        zoll           = 0.03
+        hofhaltung     = 8800
+        heer           = 6
+        zollverein     = ja
+    }
+}

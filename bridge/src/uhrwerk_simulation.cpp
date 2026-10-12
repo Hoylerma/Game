@@ -477,6 +477,7 @@ Dictionary UhrwerkSimulation::get_state(std::int64_t index) const {
     result["ruler"] = to_godot(state.ruler);
     result["government"] = to_godot(state.government);
     result["capital_index"] = state.capital;
+    result["zollverein"] = state.customs_union; // seit M7
     result["treasury"] = state.treasury.to_double();
     result["tax_rate_percent"] = to_percent(state.tax_rate(uhrwerk::TaxKind::Kontribution));
     // Haushalt des letzten Rechentags (gleich last_month_*); vor dem ersten Rechentag die Schätzung
@@ -486,6 +487,12 @@ Dictionary UhrwerkSimulation::get_state(std::int64_t index) const {
     result["population"] = w->state_population(state_index).round();
     const std::vector<uhrwerk::Index> locations = w->state_locations(state_index);
     result["location_count"] = static_cast<std::int64_t>(locations.size());
+    // Mitglied des Deutschen Bundes (seit M7): mindestens ein Ort im Bundesgebiet.
+    bool federal = false;
+    for (const uhrwerk::Index li : locations) {
+        federal = federal || at(w->locations, li).federal;
+    }
+    result["bund"] = federal;
     // Bilanz des Vorjahres und mittlerer Lebensstandard (seit M4).
     uhrwerk::PopulationBalance balance;
     double living = 0.0;
@@ -557,6 +564,23 @@ Dictionary UhrwerkSimulation::get_location(std::int64_t index) const {
     result["owner_index"] = loc.owner;
     result["owner_name"] =
         valid_index(w->states, loc.owner) ? to_godot(at(w->states, loc.owner).name) : String();
+    // Verwaltung (seit M7): Kette der Einheiten von oben nach unten, z. B. Provinz, Regierungsbezirk,
+    // Kreis; leer ohne Zuordnung. Bundesgebiet: liegt im Deutschen Bund.
+    Array admin_chain;
+    for (uhrwerk::Index a = loc.admin; valid_index(w->admin_units, a); a = at(w->admin_units, a).parent) {
+        const uhrwerk::AdminUnit& unit = at(w->admin_units, a);
+        Dictionary entry;
+        entry["index"] = a;
+        entry["id"] = to_godot(unit.id);
+        entry["name"] = to_godot(unit.name);
+        entry["kind"] = to_godot(unit.kind);
+        admin_chain.push_front(entry);
+        if (admin_chain.size() > static_cast<std::int64_t>(w->admin_units.size())) {
+            break; // Der Lader schließt Zyklen aus; Schutz gegen eine Endlosschleife.
+        }
+    }
+    result["verwaltung"] = admin_chain;
+    result["bundesgebiet"] = loc.federal;
     result["terrain"] =
         valid_index(w->terrains, loc.terrain) ? to_godot(at(w->terrains, loc.terrain).name) : String();
     result["is_city"] = loc.is_city;

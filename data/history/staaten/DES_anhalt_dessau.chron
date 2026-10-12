@@ -28,4 +28,26 @@ staat DES {
         hofhaltung     = 2500
         heer           = 4
     }
+
+    1807.04.18 = {
+        name     = "Herzogtum Anhalt-Dessau"
+        kurzname = "Anhalt-Dessau"
+    }
+
+    1817.08.09 = {
+        herrscher = "Leopold IV. Friedrich"
+    }
+
+    1848.03.01 = {
+        hauptstadt     = dessau
+        regierungsform = absolute_monarchie
+        konfession     = reformiert
+        schatz         = 32100
+        kontribution   = 0.10
+        akzise         = 0.05
+        zoll           = 0.03
+        hofhaltung     = 26800
+        heer           = 6
+        zollverein     = ja
+    }
 }

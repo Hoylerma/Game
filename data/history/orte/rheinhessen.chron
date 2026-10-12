@@ -18,6 +18,19 @@ ort mainz {
     stadt    = ja
     kreis    = kr_mainz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2874225; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 49861
+        konfession   = { katholisch = 50 lutherisch = 46 juedisch = 4 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HED
+        verwaltung = hd_rheinhessen
+        bund       = ja
+    }
 }
 
 ort worms {
@@ -28,6 +41,19 @@ ort worms {
     stadt    = ja
     kreis    = kr_mainz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2806142; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 18000
+        konfession   = { katholisch = 50 lutherisch = 46 juedisch = 4 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HED
+        verwaltung = hd_rheinhessen
+        bund       = ja
+    }
 }
 
 ort alzey {
@@ -38,6 +64,19 @@ ort alzey {
     stadt    = ja
     kreis    = kr_mainz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2956710; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 20862
+        konfession   = { katholisch = 50 lutherisch = 46 juedisch = 4 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HED
+        verwaltung = hd_rheinhessen
+        bund       = ja
+    }
 }
 
 ort nieder_olm {
@@ -48,6 +87,19 @@ ort nieder_olm {
     stadt    = nein
     kreis    = kr_mainz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2863014; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8901
+        konfession   = { katholisch = 50 lutherisch = 46 juedisch = 4 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HED
+        verwaltung = hd_rheinhessen
+        bund       = ja
+    }
 }
 
 ort woerrstadt {
@@ -58,6 +110,19 @@ ort woerrstadt {
     stadt    = nein
     kreis    = kr_mainz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2806105; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11958
+        konfession   = { katholisch = 50 lutherisch = 46 juedisch = 4 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HED
+        verwaltung = hd_rheinhessen
+        bund       = ja
+    }
 }
 
 ort osthofen {
@@ -68,6 +133,19 @@ ort osthofen {
     stadt    = nein
     kreis    = kr_mainz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2856278; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 13576
+        konfession   = { katholisch = 50 lutherisch = 46 juedisch = 4 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HED
+        verwaltung = hd_rheinhessen
+        bund       = ja
+    }
 }
 
 ort oppenheim {
@@ -78,6 +156,19 @@ ort oppenheim {
     stadt    = nein
     kreis    = kr_mainz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2857167; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 21623
+        konfession   = { katholisch = 50 lutherisch = 46 juedisch = 4 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HED
+        verwaltung = hd_rheinhessen
+        bund       = ja
+    }
 }
 
 ort monsheim {
@@ -88,6 +179,19 @@ ort monsheim {
     stadt    = nein
     kreis    = kr_mainz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2869751; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11239
+        konfession   = { katholisch = 50 lutherisch = 46 juedisch = 4 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HED
+        verwaltung = hd_rheinhessen
+        bund       = ja
+    }
 }
 
 ort bad_kreuznach {
@@ -98,6 +202,19 @@ ort bad_kreuznach {
     stadt    = ja
     kreis    = kr_bad_kreuznach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953416; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 16817
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
+    }
 }
 
 ort ingelheim_am_rhein {
@@ -108,6 +225,19 @@ ort ingelheim_am_rhein {
     stadt    = ja
     kreis    = kr_bad_kreuznach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2896020; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 13801
+        konfession   = { katholisch = 50 lutherisch = 46 juedisch = 4 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HED
+        verwaltung = hd_rheinhessen
+        bund       = ja
+    }
 }
 
 ort bingen_am_rhein {
@@ -118,6 +248,19 @@ ort bingen_am_rhein {
     stadt    = ja
     kreis    = kr_bad_kreuznach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2948825; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 21231
+        konfession   = { katholisch = 50 lutherisch = 46 juedisch = 4 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HED
+        verwaltung = hd_rheinhessen
+        bund       = ja
+    }
 }
 
 ort kirn {
@@ -128,6 +271,19 @@ ort kirn {
     stadt    = nein
     kreis    = kr_bad_kreuznach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2890314; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 16036
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
+    }
 }
 
 ort sprendlingen {
@@ -138,6 +294,19 @@ ort sprendlingen {
     stadt    = nein
     kreis    = kr_bad_kreuznach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2830080; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11958
+        konfession   = { katholisch = 50 lutherisch = 46 juedisch = 4 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HED
+        verwaltung = hd_rheinhessen
+        bund       = ja
+    }
 }
 
 ort meisenheim {
@@ -148,6 +317,18 @@ ort meisenheim {
     stadt    = nein
     kreis    = kr_bad_kreuznach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2872173; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9661
+        konfession   = { lutherisch = 55 reformiert = 40 katholisch = 5 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = HHO
+        bund     = ja
+    }
 }
 
 ort waldboeckelheim {
@@ -158,6 +339,19 @@ ort waldboeckelheim {
     stadt    = nein
     kreis    = kr_bad_kreuznach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2815139; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9988
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
+    }
 }
 
 ort monzingen {
@@ -168,6 +362,19 @@ ort monzingen {
     stadt    = nein
     kreis    = kr_bad_kreuznach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2869732; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 13379
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
+    }
 }
 
 ort spabruecken {
@@ -178,6 +385,19 @@ ort spabruecken {
     stadt    = nein
     kreis    = kr_bad_kreuznach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2830869; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 15120
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
+    }
 }
 
 ort kirchheimbolanden {
@@ -188,6 +408,19 @@ ort kirchheimbolanden {
     stadt    = ja
     kreis    = kr_kirchheimbolanden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2890478; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12596
+        konfession   = { lutherisch = 55 katholisch = 43 juedisch = 2 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_pfalz
+        bund       = ja
+    }
 }
 
 ort rockenhausen {
@@ -198,6 +431,19 @@ ort rockenhausen {
     stadt    = nein
     kreis    = kr_kirchheimbolanden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2846229; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9176
+        konfession   = { lutherisch = 55 katholisch = 43 juedisch = 2 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_pfalz
+        bund       = ja
+    }
 }
 
 ort kerzenheim {
@@ -208,6 +454,19 @@ ort kerzenheim {
     stadt    = nein
     kreis    = kr_kirchheimbolanden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2891480; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7633
+        konfession   = { lutherisch = 55 katholisch = 43 juedisch = 2 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_pfalz
+        bund       = ja
+    }
 }
 
 ort alsenz {
@@ -218,6 +477,19 @@ ort alsenz {
     stadt    = nein
     kreis    = kr_kirchheimbolanden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2958134; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 13317
+        konfession   = { lutherisch = 55 katholisch = 43 juedisch = 2 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_pfalz
+        bund       = ja
+    }
 }
 
 ort muenchweiler_an_der_alsenz {
@@ -228,4 +500,17 @@ ort muenchweiler_an_der_alsenz {
     stadt    = nein
     kreis    = kr_kirchheimbolanden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2867627; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12830
+        konfession   = { lutherisch = 55 katholisch = 43 juedisch = 2 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_pfalz
+        bund       = ja
+    }
 }

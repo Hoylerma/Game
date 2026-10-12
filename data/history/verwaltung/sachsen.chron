@@ -1,0 +1,25 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+einheit sx_dresden {
+    name   = "Kreisdirektion Dresden"
+    art    = kreisdirektion
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit sx_leipzig {
+    name   = "Kreisdirektion Leipzig"
+    art    = kreisdirektion
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit sx_zwickau {
+    name   = "Kreisdirektion Zwickau"
+    art    = kreisdirektion
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit sx_bautzen {
+    name   = "Kreisdirektion Bautzen"
+    art    = kreisdirektion
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}

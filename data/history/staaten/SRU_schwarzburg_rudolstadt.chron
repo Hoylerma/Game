@@ -1,0 +1,25 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+staat SRU {
+    name     = "Fürstentum Schwarzburg-Rudolstadt"
+    kurzname = "Schwarzburg-Rudolstadt"
+    farbe    = { 70 160 200 }
+    quelle   = "Ober- und Unterherrschaft; landständische Verfassung von 1816. Schatz, Steuersätze, Hofhaltung und Heer sind Spielwerte"
+
+    1807.04.28 = {
+        herrscher = "Friedrich Günther"
+    }
+
+    1848.03.01 = {
+        hauptstadt     = rudolstadt
+        regierungsform = konstitutionelle_monarchie
+        konfession     = lutherisch
+        schatz         = 20400
+        kontribution   = 0.10
+        akzise         = 0.05
+        zoll           = 0.03
+        hofhaltung     = 17000
+        heer           = 6
+        zollverein     = ja
+    }
+}

@@ -18,6 +18,19 @@ ort mannheim {
     stadt    = ja
     kreis    = kr_mannheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2873891; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 40567
+        konfession   = { lutherisch = 50 katholisch = 47 juedisch = 3 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAD
+        verwaltung = bd_unterrheinkreis
+        bund       = ja
+    }
 }
 
 ort speyer {
@@ -28,6 +41,19 @@ ort speyer {
     stadt    = ja
     kreis    = kr_mannheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2830582; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 16274
+        konfession   = { lutherisch = 55 katholisch = 43 juedisch = 2 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_pfalz
+        bund       = ja
+    }
 }
 
 ort neustadt_an_der_haardt {
@@ -38,6 +64,19 @@ ort neustadt_an_der_haardt {
     stadt    = ja
     kreis    = kr_mannheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2864054; Name Neustadt an der Haardt aus den GeoNames-Alternativnamen (GeoNames: Neustadt); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 16959
+        konfession   = { lutherisch = 55 katholisch = 43 juedisch = 2 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_pfalz
+        bund       = ja
+    }
 }
 
 ort frankenthal {
@@ -48,6 +87,19 @@ ort frankenthal {
     stadt    = ja
     kreis    = kr_mannheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2925550; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 13756
+        konfession   = { lutherisch = 55 katholisch = 43 juedisch = 2 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_pfalz
+        bund       = ja
+    }
 }
 
 ort bad_duerkheim {
@@ -58,6 +110,19 @@ ort bad_duerkheim {
     stadt    = ja
     kreis    = kr_mannheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953522; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9984
+        konfession   = { lutherisch = 55 katholisch = 43 juedisch = 2 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_pfalz
+        bund       = ja
+    }
 }
 
 ort hassloch {
@@ -68,6 +133,19 @@ ort hassloch {
     stadt    = ja
     kreis    = kr_mannheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2909313; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12091
+        konfession   = { lutherisch = 55 katholisch = 43 juedisch = 2 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_pfalz
+        bund       = ja
+    }
 }
 
 ort schifferstadt {
@@ -78,6 +156,19 @@ ort schifferstadt {
     stadt    = nein
     kreis    = kr_mannheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2839335; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8283
+        konfession   = { lutherisch = 55 katholisch = 43 juedisch = 2 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_pfalz
+        bund       = ja
+    }
 }
 
 ort gruenstadt {
@@ -88,6 +179,19 @@ ort gruenstadt {
     stadt    = nein
     kreis    = kr_mannheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2914101; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9176
+        konfession   = { lutherisch = 55 katholisch = 43 juedisch = 2 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_pfalz
+        bund       = ja
+    }
 }
 
 ort fussgoenheim {
@@ -98,6 +202,19 @@ ort fussgoenheim {
     stadt    = nein
     kreis    = kr_mannheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2923503; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7471
+        konfession   = { lutherisch = 55 katholisch = 43 juedisch = 2 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_pfalz
+        bund       = ja
+    }
 }
 
 ort carlsberg {
@@ -108,6 +225,19 @@ ort carlsberg {
     stadt    = nein
     kreis    = kr_mannheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2940309; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10313
+        konfession   = { lutherisch = 55 katholisch = 43 juedisch = 2 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_pfalz
+        bund       = ja
+    }
 }
 
 ort kaiserslautern {
@@ -118,6 +248,19 @@ ort kaiserslautern {
     stadt    = ja
     kreis    = kr_kaiserslautern
     quelle   = "GeoNames (CC BY 4.0), geonameid 2894003; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 17851
+        konfession   = { lutherisch = 55 katholisch = 43 juedisch = 2 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_pfalz
+        bund       = ja
+    }
 }
 
 ort hochspeyer {
@@ -128,6 +271,19 @@ ort hochspeyer {
     stadt    = nein
     kreis    = kr_kaiserslautern
     quelle   = "GeoNames (CC BY 4.0), geonameid 2903026; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7877
+        konfession   = { lutherisch = 55 katholisch = 43 juedisch = 2 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_pfalz
+        bund       = ja
+    }
 }
 
 ort trippstadt {
@@ -138,6 +294,19 @@ ort trippstadt {
     stadt    = nein
     kreis    = kr_kaiserslautern
     quelle   = "GeoNames (CC BY 4.0), geonameid 2821099; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12911
+        konfession   = { lutherisch = 55 katholisch = 43 juedisch = 2 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_pfalz
+        bund       = ja
+    }
 }
 
 ort elmstein {
@@ -148,6 +317,19 @@ ort elmstein {
     stadt    = nein
     kreis    = kr_kaiserslautern
     quelle   = "GeoNames (CC BY 4.0), geonameid 2930820; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 16322
+        konfession   = { lutherisch = 55 katholisch = 43 juedisch = 2 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_pfalz
+        bund       = ja
+    }
 }
 
 ort landstuhl {
@@ -158,6 +340,19 @@ ort landstuhl {
     stadt    = nein
     kreis    = kr_landstuhl
     quelle   = "GeoNames (CC BY 4.0), geonameid 2881477; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 13723
+        konfession   = { lutherisch = 55 katholisch = 43 juedisch = 2 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_pfalz
+        bund       = ja
+    }
 }
 
 ort kusel {
@@ -168,6 +363,19 @@ ort kusel {
     stadt    = ja
     kreis    = kr_landstuhl
     quelle   = "GeoNames (CC BY 4.0), geonameid 2882265; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 15415
+        konfession   = { lutherisch = 55 katholisch = 43 juedisch = 2 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_pfalz
+        bund       = ja
+    }
 }
 
 ort bruchmuehlbach_miesau {
@@ -178,6 +386,19 @@ ort bruchmuehlbach_miesau {
     stadt    = nein
     kreis    = kr_landstuhl
     quelle   = "GeoNames (CC BY 4.0), geonameid 3207512; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11450
+        konfession   = { lutherisch = 55 katholisch = 43 juedisch = 2 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_pfalz
+        bund       = ja
+    }
 }
 
 ort weilerbach {
@@ -188,6 +409,19 @@ ort weilerbach {
     stadt    = nein
     kreis    = kr_landstuhl
     quelle   = "GeoNames (CC BY 4.0), geonameid 2812568; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12099
+        konfession   = { lutherisch = 55 katholisch = 43 juedisch = 2 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_pfalz
+        bund       = ja
+    }
 }
 
 ort lauterecken {
@@ -198,6 +432,19 @@ ort lauterecken {
     stadt    = nein
     kreis    = kr_landstuhl
     quelle   = "GeoNames (CC BY 4.0), geonameid 2879895; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 14616
+        konfession   = { lutherisch = 55 katholisch = 43 juedisch = 2 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_pfalz
+        bund       = ja
+    }
 }
 
 ort altenkirchen_kurpfalz {
@@ -208,6 +455,19 @@ ort altenkirchen_kurpfalz {
     stadt    = nein
     kreis    = kr_landstuhl
     quelle   = "GeoNames (CC BY 4.0), geonameid 2957570; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11368
+        konfession   = { lutherisch = 55 katholisch = 43 juedisch = 2 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_pfalz
+        bund       = ja
+    }
 }
 
 ort niederkirchen {
@@ -218,6 +478,19 @@ ort niederkirchen {
     stadt    = nein
     kreis    = kr_landstuhl
     quelle   = "GeoNames (CC BY 4.0), geonameid 2863214; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10881
+        konfession   = { lutherisch = 55 katholisch = 43 juedisch = 2 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_pfalz
+        bund       = ja
+    }
 }
 
 ort heidelberg {
@@ -228,6 +501,19 @@ ort heidelberg {
     stadt    = ja
     kreis    = kr_heidelberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2907911; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 19948
+        konfession   = { lutherisch = 50 katholisch = 47 juedisch = 3 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAD
+        verwaltung = bd_unterrheinkreis
+        bund       = ja
+    }
 }
 
 ort weinheim {
@@ -238,6 +524,19 @@ ort weinheim {
     stadt    = ja
     kreis    = kr_heidelberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2812174; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 13288
+        konfession   = { lutherisch = 50 katholisch = 47 juedisch = 3 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAD
+        verwaltung = bd_unterrheinkreis
+        bund       = ja
+    }
 }
 
 ort sinsheim {
@@ -248,6 +547,19 @@ ort sinsheim {
     stadt    = ja
     kreis    = kr_heidelberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2831872; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 18626
+        konfession   = { lutherisch = 50 katholisch = 47 juedisch = 3 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAD
+        verwaltung = bd_unterrheinkreis
+        bund       = ja
+    }
 }
 
 ort wiesloch {
@@ -258,6 +570,19 @@ ort wiesloch {
     stadt    = ja
     kreis    = kr_heidelberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2809138; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 17010
+        konfession   = { lutherisch = 50 katholisch = 47 juedisch = 3 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAD
+        verwaltung = bd_unterrheinkreis
+        bund       = ja
+    }
 }
 
 ort schwetzingen {
@@ -268,6 +593,19 @@ ort schwetzingen {
     stadt    = ja
     kreis    = kr_heidelberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2834240; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11288
+        konfession   = { lutherisch = 50 katholisch = 47 juedisch = 3 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAD
+        verwaltung = bd_unterrheinkreis
+        bund       = ja
+    }
 }
 
 ort edingen_neckarhausen {
@@ -278,6 +616,19 @@ ort edingen_neckarhausen {
     stadt    = nein
     kreis    = kr_heidelberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2933345; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8014
+        konfession   = { lutherisch = 50 katholisch = 47 juedisch = 3 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAD
+        verwaltung = bd_unterrheinkreis
+        bund       = ja
+    }
 }
 
 ort neckargemuend {
@@ -288,6 +639,19 @@ ort neckargemuend {
     stadt    = nein
     kreis    = kr_heidelberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2866774; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8342
+        konfession   = { lutherisch = 50 katholisch = 47 juedisch = 3 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAD
+        verwaltung = bd_unterrheinkreis
+        bund       = ja
+    }
 }
 
 ort reilingen {
@@ -298,6 +662,19 @@ ort reilingen {
     stadt    = nein
     kreis    = kr_heidelberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2848867; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11394
+        konfession   = { lutherisch = 50 katholisch = 47 juedisch = 3 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAD
+        verwaltung = bd_unterrheinkreis
+        bund       = ja
+    }
 }
 
 ort heiligkreuzsteinach {
@@ -308,6 +685,19 @@ ort heiligkreuzsteinach {
     stadt    = nein
     kreis    = kr_heidelberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2907501; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10718
+        konfession   = { lutherisch = 50 katholisch = 47 juedisch = 3 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAD
+        verwaltung = bd_unterrheinkreis
+        bund       = ja
+    }
 }
 
 ort mosbach {
@@ -318,6 +708,19 @@ ort mosbach {
     stadt    = ja
     kreis    = kr_mosbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2869120; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 19177
+        konfession   = { lutherisch = 50 katholisch = 47 juedisch = 3 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAD
+        verwaltung = bd_unterrheinkreis
+        bund       = ja
+    }
 }
 
 ort buchen_in_odenwald {
@@ -328,6 +731,19 @@ ort buchen_in_odenwald {
     stadt    = nein
     kreis    = kr_mosbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2942634; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 17090
+        konfession   = { lutherisch = 50 katholisch = 47 juedisch = 3 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAD
+        verwaltung = bd_unterrheinkreis
+        bund       = ja
+    }
 }
 
 ort eberbach {
@@ -338,6 +754,19 @@ ort eberbach {
     stadt    = nein
     kreis    = kr_mosbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2934020; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9115
+        konfession   = { lutherisch = 50 katholisch = 47 juedisch = 3 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAD
+        verwaltung = bd_unterrheinkreis
+        bund       = ja
+    }
 }
 
 ort hardheim {
@@ -348,6 +777,19 @@ ort hardheim {
     stadt    = nein
     kreis    = kr_mosbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2910633; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 17670
+        konfession   = { lutherisch = 50 katholisch = 47 juedisch = 3 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAD
+        verwaltung = bd_unterrheinkreis
+        bund       = ja
+    }
 }
 
 ort aglasterhausen {
@@ -358,6 +800,19 @@ ort aglasterhausen {
     stadt    = nein
     kreis    = kr_mosbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2959296; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 15545
+        konfession   = { lutherisch = 50 katholisch = 47 juedisch = 3 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAD
+        verwaltung = bd_unterrheinkreis
+        bund       = ja
+    }
 }
 
 ort osterburken {
@@ -368,6 +823,19 @@ ort osterburken {
     stadt    = nein
     kreis    = kr_mosbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2856637; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 19794
+        konfession   = { lutherisch = 50 katholisch = 47 juedisch = 3 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAD
+        verwaltung = bd_unterrheinkreis
+        bund       = ja
+    }
 }
 
 ort mudau {
@@ -378,6 +846,19 @@ ort mudau {
     stadt    = nein
     kreis    = kr_mosbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2868867; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9965
+        konfession   = { lutherisch = 50 katholisch = 47 juedisch = 3 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAD
+        verwaltung = bd_unterrheinkreis
+        bund       = ja
+    }
 }
 
 ort fahrenbach {
@@ -388,6 +869,19 @@ ort fahrenbach {
     stadt    = nein
     kreis    = kr_mosbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2928163; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 13614
+        konfession   = { lutherisch = 50 katholisch = 47 juedisch = 3 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAD
+        verwaltung = bd_unterrheinkreis
+        bund       = ja
+    }
 }
 
 ort pirmasens {
@@ -398,6 +892,19 @@ ort pirmasens {
     stadt    = ja
     kreis    = kr_pirmasens
     quelle   = "GeoNames (CC BY 4.0), geonameid 2853574; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 18747
+        konfession   = { lutherisch = 55 katholisch = 43 juedisch = 2 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_pfalz
+        bund       = ja
+    }
 }
 
 ort zweibruecken {
@@ -408,6 +915,19 @@ ort zweibruecken {
     stadt    = ja
     kreis    = kr_pirmasens
     quelle   = "GeoNames (CC BY 4.0), geonameid 2803620; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 19238
+        konfession   = { lutherisch = 55 katholisch = 43 juedisch = 2 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_pfalz
+        bund       = ja
+    }
 }
 
 ort waldfischbach_burgalben {
@@ -418,6 +938,19 @@ ort waldfischbach_burgalben {
     stadt    = nein
     kreis    = kr_pirmasens
     quelle   = "GeoNames (CC BY 4.0), geonameid 2815032; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 17702
+        konfession   = { lutherisch = 55 katholisch = 43 juedisch = 2 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_pfalz
+        bund       = ja
+    }
 }
 
 ort dahn {
@@ -428,6 +961,19 @@ ort dahn {
     stadt    = nein
     kreis    = kr_pirmasens
     quelle   = "GeoNames (CC BY 4.0), geonameid 2939370; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 18758
+        konfession   = { lutherisch = 55 katholisch = 43 juedisch = 2 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_pfalz
+        bund       = ja
+    }
 }
 
 ort eppenbrunn {
@@ -438,6 +984,19 @@ ort eppenbrunn {
     stadt    = nein
     kreis    = kr_pirmasens
     quelle   = "GeoNames (CC BY 4.0), geonameid 2929858; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 15510
+        konfession   = { lutherisch = 55 katholisch = 43 juedisch = 2 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_pfalz
+        bund       = ja
+    }
 }
 
 ort landau_in_der_pfalz {
@@ -448,6 +1007,19 @@ ort landau_in_der_pfalz {
     stadt    = ja
     kreis    = kr_landau_in_der_pfalz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2881646; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 19897
+        konfession   = { lutherisch = 55 katholisch = 43 juedisch = 2 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_pfalz
+        bund       = ja
+    }
 }
 
 ort germersheim {
@@ -458,6 +1030,19 @@ ort germersheim {
     stadt    = ja
     kreis    = kr_landau_in_der_pfalz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2921034; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 17623
+        konfession   = { lutherisch = 55 katholisch = 43 juedisch = 2 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_pfalz
+        bund       = ja
+    }
 }
 
 ort woerth_am_rhein {
@@ -468,6 +1053,19 @@ ort woerth_am_rhein {
     stadt    = nein
     kreis    = kr_landau_in_der_pfalz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2806081; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9907
+        konfession   = { lutherisch = 55 katholisch = 43 juedisch = 2 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_pfalz
+        bund       = ja
+    }
 }
 
 ort bad_bergzabern {
@@ -478,6 +1076,19 @@ ort bad_bergzabern {
     stadt    = nein
     kreis    = kr_landau_in_der_pfalz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953549; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10150
+        konfession   = { lutherisch = 55 katholisch = 43 juedisch = 2 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_pfalz
+        bund       = ja
+    }
 }
 
 ort annweiler_am_trifels {
@@ -488,6 +1099,19 @@ ort annweiler_am_trifels {
     stadt    = nein
     kreis    = kr_landau_in_der_pfalz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2955951; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 14373
+        konfession   = { lutherisch = 55 katholisch = 43 juedisch = 2 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_pfalz
+        bund       = ja
+    }
 }
 
 ort ruelzheim {
@@ -498,6 +1122,19 @@ ort ruelzheim {
     stadt    = nein
     kreis    = kr_landau_in_der_pfalz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2843146; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9663
+        konfession   = { lutherisch = 55 katholisch = 43 juedisch = 2 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_pfalz
+        bund       = ja
+    }
 }
 
 ort freckenfeld {
@@ -508,4 +1145,17 @@ ort freckenfeld {
     stadt    = nein
     kreis    = kr_landau_in_der_pfalz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2925249; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11125
+        konfession   = { lutherisch = 55 katholisch = 43 juedisch = 2 }
+        kultur       = { pfaelzer = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_pfalz
+        bund       = ja
+    }
 }

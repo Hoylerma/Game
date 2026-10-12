@@ -29,4 +29,26 @@ staat SAX {
         hofhaltung     = 49000
         heer           = 6
     }
+
+    1806.12.20 = {
+        name     = "Königreich Sachsen"
+        kurzname = "Sachsen"
+    }
+
+    1836.06.06 = {
+        herrscher = "Friedrich August II."
+    }
+
+    1848.03.01 = {
+        hauptstadt     = dresden
+        regierungsform = konstitutionelle_monarchie
+        konfession     = katholisch
+        schatz         = 550800
+        kontribution   = 0.10
+        akzise         = 0.05
+        zoll           = 0.03
+        hofhaltung     = 459000
+        heer           = 7
+        zollverein     = ja
+    }
 }

@@ -33,6 +33,18 @@ ort dessau {
         kultur       = { obersachsen = 100 }
         verwuestung  = 0.55
     }
+
+    1846.12.03 = {
+        bevoelkerung = 21902
+        konfession   = { reformiert = 60 lutherisch = 38 juedisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = DES
+        bund     = ja
+    }
 }
 
 ort bernburg {
@@ -50,6 +62,18 @@ ort bernburg {
         konfession   = { reformiert = 85 lutherisch = 15 }
         kultur       = { obersachsen = 100 }
         verwuestung  = 0.6
+    }
+
+    1846.12.03 = {
+        bevoelkerung = 21815
+        konfession   = { reformiert = 60 lutherisch = 38 juedisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = BER
+        bund     = ja
     }
 }
 
@@ -69,6 +93,18 @@ ort koethen {
         kultur       = { obersachsen = 100 }
         verwuestung  = 0.6
     }
+
+    1846.12.03 = {
+        bevoelkerung = 11137
+        konfession   = { reformiert = 60 lutherisch = 38 juedisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = DES
+        bund     = ja
+    }
 }
 
 ort zerbst {
@@ -87,6 +123,18 @@ ort zerbst {
         kultur       = { obersachsen = 100 }
         verwuestung  = 0.55
     }
+
+    1846.12.03 = {
+        bevoelkerung = 6849
+        konfession   = { reformiert = 60 lutherisch = 38 juedisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = DES
+        bund     = ja
+    }
 }
 
 ort aken {
@@ -97,6 +145,18 @@ ort aken {
     stadt    = nein
     kreis    = kr_dessau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2958781; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10660
+        konfession   = { reformiert = 60 lutherisch = 38 juedisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = DES
+        bund     = ja
+    }
 }
 
 ort groebzig {
@@ -107,6 +167,18 @@ ort groebzig {
     stadt    = nein
     kreis    = kr_dessau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2917206; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8108
+        konfession   = { reformiert = 60 lutherisch = 38 juedisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = DES
+        bund     = ja
+    }
 }
 
 ort rodleben {
@@ -117,6 +189,18 @@ ort rodleben {
     stadt    = nein
     kreis    = kr_dessau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2845914; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10206
+        konfession   = { reformiert = 60 lutherisch = 38 juedisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = DES
+        bund     = ja
+    }
 }
 
 ort lindau_anhalt {
@@ -127,6 +211,18 @@ ort lindau_anhalt {
     stadt    = nein
     kreis    = kr_dessau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2877546; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9116
+        konfession   = { reformiert = 60 lutherisch = 38 juedisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = DES
+        bund     = ja
+    }
 }
 
 ort quellendorf {
@@ -137,6 +233,18 @@ ort quellendorf {
     stadt    = nein
     kreis    = kr_dessau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2851450; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6542
+        konfession   = { reformiert = 60 lutherisch = 38 juedisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = DES
+        bund     = ja
+    }
 }
 
 ort wolfen {
@@ -147,6 +255,19 @@ ort wolfen {
     stadt    = ja
     kreis    = kr_wolfen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2806919; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11125
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
+    }
 }
 
 ort zoerbig {
@@ -157,6 +278,19 @@ ort zoerbig {
     stadt    = nein
     kreis    = kr_wolfen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2803891; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10115
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
+    }
 }
 
 ort roitzsch {
@@ -167,6 +301,19 @@ ort roitzsch {
     stadt    = nein
     kreis    = kr_wolfen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2845475; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 4969
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
+    }
 }
 
 ort pouch {
@@ -177,4 +324,17 @@ ort pouch {
     stadt    = nein
     kreis    = kr_wolfen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2852400; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8400
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
+    }
 }

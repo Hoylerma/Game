@@ -801,8 +801,23 @@ ContentFingerprint content_fingerprint(const World& w) {
         h.text(s.tag);
         h.text(s.short_name);
         h.i64(s.confession);
+        h.flag(s.customs_union);
     });
-    p[11] = hash_list(w.districts, [](Fnv& h, const District& d) { h.text(d.id); });
+    // Verwaltungseinheiten (seit M7) gehören zur politischen Gliederung wie die Kreise.
+    {
+        Fnv h;
+        h.u64(w.districts.size());
+        for (const District& d : w.districts) {
+            h.text(d.id);
+        }
+        h.u64(w.admin_units.size());
+        for (const AdminUnit& a : w.admin_units) {
+            h.text(a.id);
+            h.text(a.kind);
+            h.i64(a.parent);
+        }
+        p[11] = h.value();
+    }
     p[12] = hash_list(w.locations, [](Fnv& h, const Location& l) {
         h.text(l.id);
         h.text(l.name);
@@ -815,6 +830,8 @@ ContentFingerprint content_fingerprint(const World& w) {
         h.i64(l.market);
         h.u64(l.deposits);
         h.flag(l.is_port);
+        h.i64(l.admin);
+        h.flag(l.federal);
     });
     fp.total = MetaReader::content_fingerprint_total(fp.parts);
     return fp;

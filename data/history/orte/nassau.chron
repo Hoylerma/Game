@@ -19,6 +19,19 @@ ort wetzlar {
     stadt    = ja
     kreis    = kr_wetzlar
     quelle   = "GeoNames (CC BY 4.0), geonameid 2809889; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 15114
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
+    }
 }
 
 ort dillenburg {
@@ -29,6 +42,18 @@ ort dillenburg {
     stadt    = ja
     kreis    = kr_wetzlar
     quelle   = "GeoNames (CC BY 4.0), geonameid 2936985; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 27274
+        konfession   = { lutherisch = 52 katholisch = 46 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = NAS
+        bund     = ja
+    }
 }
 
 ort weilburg {
@@ -39,6 +64,18 @@ ort weilburg {
     stadt    = nein
     kreis    = kr_wetzlar
     quelle   = "GeoNames (CC BY 4.0), geonameid 2812626; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 14505
+        konfession   = { lutherisch = 52 katholisch = 46 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = NAS
+        bund     = ja
+    }
 }
 
 ort braunfels {
@@ -49,6 +86,19 @@ ort braunfels {
     stadt    = nein
     kreis    = kr_wetzlar
     quelle   = "GeoNames (CC BY 4.0), geonameid 2945073; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6938
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
+    }
 }
 
 ort ehringshausen {
@@ -59,6 +109,19 @@ ort ehringshausen {
     stadt    = nein
     kreis    = kr_wetzlar
     quelle   = "GeoNames (CC BY 4.0), geonameid 2932788; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8051
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
+    }
 }
 
 ort weilmuenster {
@@ -69,6 +132,18 @@ ort weilmuenster {
     stadt    = nein
     kreis    = kr_wetzlar
     quelle   = "GeoNames (CC BY 4.0), geonameid 2812497; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9152
+        konfession   = { lutherisch = 52 katholisch = 46 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = NAS
+        bund     = ja
+    }
 }
 
 ort bischoffen {
@@ -79,6 +154,19 @@ ort bischoffen {
     stadt    = nein
     kreis    = kr_wetzlar
     quelle   = "GeoNames (CC BY 4.0), geonameid 2948307; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11367
+        konfession   = { lutherisch = 68 katholisch = 29 juedisch = 3 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HED
+        verwaltung = hd_oberhessen
+        bund       = ja
+    }
 }
 
 ort westerburg {
@@ -89,6 +177,18 @@ ort westerburg {
     stadt    = nein
     kreis    = kr_westerburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2810413; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 16145
+        konfession   = { lutherisch = 52 katholisch = 46 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = NAS
+        bund     = ja
+    }
 }
 
 ort bad_marienberg {
@@ -99,6 +199,18 @@ ort bad_marienberg {
     stadt    = nein
     kreis    = kr_westerburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953404; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7460
+        konfession   = { lutherisch = 52 katholisch = 46 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = NAS
+        bund     = ja
+    }
 }
 
 ort driedorf {
@@ -109,6 +221,18 @@ ort driedorf {
     stadt    = nein
     kreis    = kr_westerburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2934965; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 14160
+        konfession   = { lutherisch = 52 katholisch = 46 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = NAS
+        bund     = ja
+    }
 }
 
 ort hachenburg {
@@ -119,6 +243,18 @@ ort hachenburg {
     stadt    = nein
     kreis    = kr_westerburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2912921; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 13555
+        konfession   = { lutherisch = 52 katholisch = 46 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = NAS
+        bund     = ja
+    }
 }
 
 ort rennerod {
@@ -129,6 +265,18 @@ ort rennerod {
     stadt    = nein
     kreis    = kr_westerburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2848187; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8427
+        konfession   = { lutherisch = 52 katholisch = 46 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = NAS
+        bund     = ja
+    }
 }
 
 ort lahnstein {
@@ -139,6 +287,18 @@ ort lahnstein {
     stadt    = nein
     kreis    = kr_lahnstein
     quelle   = "GeoNames (CC BY 4.0), geonameid 2881889; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8202
+        konfession   = { lutherisch = 52 katholisch = 46 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = NAS
+        bund     = ja
+    }
 }
 
 ort montabaur {
@@ -149,6 +309,18 @@ ort montabaur {
     stadt    = ja
     kreis    = kr_lahnstein
     quelle   = "GeoNames (CC BY 4.0), geonameid 2869746; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 15997
+        konfession   = { lutherisch = 52 katholisch = 46 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = NAS
+        bund     = ja
+    }
 }
 
 ort bad_ems {
@@ -159,6 +331,18 @@ ort bad_ems {
     stadt    = ja
     kreis    = kr_lahnstein
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953507; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 13080
+        konfession   = { lutherisch = 52 katholisch = 46 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = NAS
+        bund     = ja
+    }
 }
 
 ort hoehr_grenzhausen {
@@ -169,6 +353,18 @@ ort hoehr_grenzhausen {
     stadt    = nein
     kreis    = kr_lahnstein
     quelle   = "GeoNames (CC BY 4.0), geonameid 2900825; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8548
+        konfession   = { lutherisch = 52 katholisch = 46 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = NAS
+        bund     = ja
+    }
 }
 
 ort nastaetten {
@@ -179,6 +375,18 @@ ort nastaetten {
     stadt    = nein
     kreis    = kr_lahnstein
     quelle   = "GeoNames (CC BY 4.0), geonameid 2866990; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 21585
+        konfession   = { lutherisch = 52 katholisch = 46 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = NAS
+        bund     = ja
+    }
 }
 
 ort selters {
@@ -189,6 +397,18 @@ ort selters {
     stadt    = nein
     kreis    = kr_lahnstein
     quelle   = "GeoNames (CC BY 4.0), geonameid 2833138; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12174
+        konfession   = { lutherisch = 52 katholisch = 46 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = NAS
+        bund     = ja
+    }
 }
 
 ort holzappel {
@@ -199,6 +419,18 @@ ort holzappel {
     stadt    = nein
     kreis    = kr_lahnstein
     quelle   = "GeoNames (CC BY 4.0), geonameid 2900027; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 14850
+        konfession   = { lutherisch = 52 katholisch = 46 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = NAS
+        bund     = ja
+    }
 }
 
 ort wiesbaden {
@@ -209,6 +441,18 @@ ort wiesbaden {
     stadt    = ja
     kreis    = kr_wiesbaden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2809346; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 30713
+        konfession   = { lutherisch = 52 katholisch = 46 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = NAS
+        bund     = ja
+    }
 }
 
 ort limburg_an_der_lahn {
@@ -219,6 +463,18 @@ ort limburg_an_der_lahn {
     stadt    = ja
     kreis    = kr_wiesbaden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2877648; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 17902
+        konfession   = { lutherisch = 52 katholisch = 46 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = NAS
+        bund     = ja
+    }
 }
 
 ort hofheim_am_taunus {
@@ -229,6 +485,18 @@ ort hofheim_am_taunus {
     stadt    = ja
     kreis    = kr_wiesbaden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2902533; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 15257
+        konfession   = { lutherisch = 52 katholisch = 46 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = NAS
+        bund     = ja
+    }
 }
 
 ort bad_schwalbach {
@@ -239,6 +507,18 @@ ort bad_schwalbach {
     stadt    = ja
     kreis    = kr_wiesbaden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953348; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 24525
+        konfession   = { lutherisch = 52 katholisch = 46 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = NAS
+        bund     = ja
+    }
 }
 
 ort idstein {
@@ -249,6 +529,18 @@ ort idstein {
     stadt    = ja
     kreis    = kr_wiesbaden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2896736; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 19634
+        konfession   = { lutherisch = 52 katholisch = 46 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = NAS
+        bund     = ja
+    }
 }
 
 ort eschborn {
@@ -259,6 +551,18 @@ ort eschborn {
     stadt    = ja
     kreis    = kr_wiesbaden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2929134; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10589
+        konfession   = { lutherisch = 52 katholisch = 46 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = NAS
+        bund     = ja
+    }
 }
 
 ort bad_camberg {
@@ -269,6 +573,18 @@ ort bad_camberg {
     stadt    = nein
     kreis    = kr_wiesbaden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2940381; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11742
+        konfession   = { lutherisch = 52 katholisch = 46 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = NAS
+        bund     = ja
+    }
 }
 
 ort eltville {
@@ -279,6 +595,18 @@ ort eltville {
     stadt    = nein
     kreis    = kr_wiesbaden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2930646; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12174
+        konfession   = { lutherisch = 52 katholisch = 46 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = NAS
+        bund     = ja
+    }
 }
 
 ort villmar {
@@ -289,6 +617,18 @@ ort villmar {
     stadt    = nein
     kreis    = kr_wiesbaden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2817217; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12864
+        konfession   = { lutherisch = 52 katholisch = 46 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = NAS
+        bund     = ja
+    }
 }
 
 ort hahnstaetten {
@@ -299,4 +639,16 @@ ort hahnstaetten {
     stadt    = nein
     kreis    = kr_wiesbaden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2912168; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 16577
+        konfession   = { lutherisch = 52 katholisch = 46 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = NAS
+        bund     = ja
+    }
 }

@@ -1,0 +1,25 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+staat LUX {
+    name     = "Großherzogtum Luxemburg"
+    kurzname = "Luxemburg"
+    farbe    = { 110 175 175 }
+    quelle   = "In Personalunion mit den Niederlanden; seit der Teilung von 1839 ohne den wallonischen Westteil. Bundesfestung Luxemburg, Zollverein seit 1842. Schatz, Steuersätze, Hofhaltung und Heer sind Spielwerte"
+
+    1840.10.07 = {
+        herrscher = "Wilhelm II."
+    }
+
+    1848.03.01 = {
+        hauptstadt     = luxemburg
+        regierungsform = staendische_monarchie
+        konfession     = reformiert
+        schatz         = 57000
+        kontribution   = 0.10
+        akzise         = 0.05
+        zoll           = 0.03
+        hofhaltung     = 47500
+        heer           = 6
+        zollverein     = ja
+    }
+}

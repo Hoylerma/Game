@@ -18,6 +18,18 @@ ort jaworzno {
     stadt    = ja
     kreis    = kr_jaworzno
     quelle   = "GeoNames (CC BY 4.0), geonameid 3097333; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 20492
+        konfession   = { katholisch = 88 juedisch = 12 }
+        kultur       = { polen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_galizien
+    }
 }
 
 ort krenau {
@@ -28,6 +40,18 @@ ort krenau {
     stadt    = ja
     kreis    = kr_jaworzno
     quelle   = "GeoNames (CC BY 4.0), geonameid 3101547; deutscher Name aus den GeoNames-Alternativnamen (heute Chrzanów); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 35570
+        konfession   = { katholisch = 88 juedisch = 12 }
+        kultur       = { polen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_galizien
+    }
 }
 
 ort auschwitz {
@@ -38,6 +62,19 @@ ort auschwitz {
     stadt    = ja
     kreis    = kr_jaworzno
     quelle   = "GeoNames (CC BY 4.0), geonameid 3089658; deutscher Name aus den GeoNames-Alternativnamen (heute Oświęcim); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 33013
+        konfession   = { katholisch = 88 juedisch = 12 }
+        kultur       = { polen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_galizien
+        bund       = ja
+    }
 }
 
 ort alwernia {
@@ -48,6 +85,18 @@ ort alwernia {
     stadt    = nein
     kreis    = kr_jaworzno
     quelle   = "GeoNames (CC BY 4.0), geonameid 3104127; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9121
+        konfession   = { katholisch = 88 juedisch = 12 }
+        kultur       = { polen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_galizien
+    }
 }
 
 ort zator {
@@ -58,6 +107,19 @@ ort zator {
     stadt    = nein
     kreis    = kr_jaworzno
     quelle   = "GeoNames (CC BY 4.0), geonameid 3080590; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 24989
+        konfession   = { katholisch = 88 juedisch = 12 }
+        kultur       = { polen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_galizien
+        bund       = ja
+    }
 }
 
 ort saybusch {
@@ -68,6 +130,19 @@ ort saybusch {
     stadt    = ja
     kreis    = kr_saybusch
     quelle   = "GeoNames (CC BY 4.0), geonameid 3079855; deutscher Name aus den GeoNames-Alternativnamen (heute Żywiec); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 30362
+        konfession   = { katholisch = 88 juedisch = 12 }
+        kultur       = { polen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_galizien
+        bund       = ja
+    }
 }
 
 ort wadowice {
@@ -78,6 +153,19 @@ ort wadowice {
     stadt    = ja
     kreis    = kr_saybusch
     quelle   = "GeoNames (CC BY 4.0), geonameid 3082722; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 20221
+        konfession   = { katholisch = 88 juedisch = 12 }
+        kultur       = { polen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_galizien
+        bund       = ja
+    }
 }
 
 ort andrychow {
@@ -88,6 +176,19 @@ ort andrychow {
     stadt    = ja
     kreis    = kr_saybusch
     quelle   = "GeoNames (CC BY 4.0), geonameid 3104115; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 24001
+        konfession   = { katholisch = 88 juedisch = 12 }
+        kultur       = { polen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_galizien
+        bund       = ja
+    }
 }
 
 ort kenty {
@@ -98,6 +199,19 @@ ort kenty {
     stadt    = nein
     kreis    = kr_saybusch
     quelle   = "GeoNames (CC BY 4.0), geonameid 3096328; deutscher Name aus den GeoNames-Alternativnamen (heute Kęty); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 17368
+        konfession   = { katholisch = 88 juedisch = 12 }
+        kultur       = { polen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_galizien
+        bund       = ja
+    }
 }
 
 ort milowka {
@@ -108,6 +222,19 @@ ort milowka {
     stadt    = nein
     kreis    = kr_saybusch
     quelle   = "GeoNames (CC BY 4.0), geonameid 3091743; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 29387
+        konfession   = { katholisch = 88 juedisch = 12 }
+        kultur       = { polen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_galizien
+        bund       = ja
+    }
 }
 
 ort jelesnia {
@@ -118,6 +245,19 @@ ort jelesnia {
     stadt    = nein
     kreis    = kr_saybusch
     quelle   = "GeoNames (CC BY 4.0), geonameid 3097241; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 25989
+        konfession   = { katholisch = 88 juedisch = 12 }
+        kultur       = { polen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_galizien
+        bund       = ja
+    }
 }
 
 ort lachowice {
@@ -128,6 +268,19 @@ ort lachowice {
     stadt    = nein
     kreis    = kr_saybusch
     quelle   = "GeoNames (CC BY 4.0), geonameid 3094045; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 14194
+        konfession   = { katholisch = 88 juedisch = 12 }
+        kultur       = { polen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_galizien
+        bund       = ja
+    }
 }
 
 ort rycerka_gorna {
@@ -138,4 +291,17 @@ ort rycerka_gorna {
     stadt    = nein
     kreis    = kr_saybusch
     quelle   = "GeoNames (CC BY 4.0), geonameid 3086565; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 15293
+        konfession   = { katholisch = 88 juedisch = 12 }
+        kultur       = { polen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_galizien
+        bund       = ja
+    }
 }

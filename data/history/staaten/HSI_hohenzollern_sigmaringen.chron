@@ -1,0 +1,29 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+staat HSI {
+    name     = "Fürstentum Hohenzollern-Sigmaringen"
+    kurzname = "Hohenzollern-Sigmaringen"
+    farbe    = { 130 130 130 }
+    quelle   = "Verfassung von 1833; 1850 an Preußen abgetreten. Schatz, Steuersätze, Hofhaltung und Heer sind Spielwerte"
+
+    1831.10.17 = {
+        herrscher = "Karl"
+    }
+
+    1848.03.01 = {
+        hauptstadt     = sigmaringen
+        regierungsform = konstitutionelle_monarchie
+        konfession     = katholisch
+        schatz         = 13800
+        kontribution   = 0.10
+        akzise         = 0.05
+        zoll           = 0.03
+        hofhaltung     = 11500
+        heer           = 6
+        zollverein     = ja
+    }
+
+    1848.08.27 = {
+        herrscher = "Karl Anton"
+    }
+}

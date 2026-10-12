@@ -1,0 +1,25 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+staat MST {
+    name     = "Großherzogtum Mecklenburg-Strelitz"
+    kurzname = "Mecklenburg-Strelitz"
+    farbe    = { 95 150 120 }
+    quelle   = "Mit dem Fürstentum Ratzeburg; landständische Verfassung (Landesgrundgesetzlicher Erbvergleich 1755) gemeinsam mit Mecklenburg-Schwerin. Schatz, Steuersätze, Hofhaltung und Heer sind Spielwerte"
+
+    1816.11.06 = {
+        herrscher = "Georg"
+    }
+
+    1848.03.01 = {
+        hauptstadt     = neustrelitz
+        regierungsform = staendische_monarchie
+        konfession     = lutherisch
+        schatz         = 28800
+        kontribution   = 0.10
+        akzise         = 0.05
+        zoll           = 0.03
+        hofhaltung     = 24000
+        heer           = 6
+        zollverein     = nein
+    }
+}

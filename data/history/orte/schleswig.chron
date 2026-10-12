@@ -19,6 +19,18 @@ ort hadersleben {
     stadt    = ja
     kreis    = kr_hadersleben
     quelle   = "GeoNames (CC BY 4.0), geonameid 2620964; deutscher Name aus den GeoNames-Alternativnamen (heute Haderslev); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12604
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { daenen = 60 holsteiner = 30 friesen = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = DEN
+        verwaltung = dk_schleswig
+    }
 }
 
 ort vojens {
@@ -29,6 +41,18 @@ ort vojens {
     stadt    = nein
     kreis    = kr_hadersleben
     quelle   = "GeoNames (CC BY 4.0), geonameid 2610075; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9832
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { daenen = 60 holsteiner = 30 friesen = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = DEN
+        verwaltung = dk_schleswig
+    }
 }
 
 ort loegumkloster {
@@ -39,6 +63,18 @@ ort loegumkloster {
     stadt    = nein
     kreis    = kr_hadersleben
     quelle   = "GeoNames (CC BY 4.0), geonameid 2617457; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11969
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { daenen = 60 holsteiner = 30 friesen = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = DEN
+        verwaltung = dk_schleswig
+    }
 }
 
 ort scherrebek {
@@ -49,6 +85,18 @@ ort scherrebek {
     stadt    = nein
     kreis    = kr_hadersleben
     quelle   = "GeoNames (CC BY 4.0), geonameid 2613539; deutscher Name aus den GeoNames-Alternativnamen (heute Skaerbaek); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10598
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { daenen = 60 holsteiner = 30 friesen = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = DEN
+        verwaltung = dk_schleswig
+    }
 }
 
 ort toftlund {
@@ -59,6 +107,18 @@ ort toftlund {
     stadt    = nein
     kreis    = kr_hadersleben
     quelle   = "GeoNames (CC BY 4.0), geonameid 2611565; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10454
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { daenen = 60 holsteiner = 30 friesen = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = DEN
+        verwaltung = dk_schleswig
+    }
 }
 
 ort gram {
@@ -69,6 +129,18 @@ ort gram {
     stadt    = nein
     kreis    = kr_hadersleben
     quelle   = "GeoNames (CC BY 4.0), geonameid 2621279; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6451
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { daenen = 60 holsteiner = 30 friesen = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = DEN
+        verwaltung = dk_schleswig
+    }
 }
 
 ort sonderburg {
@@ -79,6 +151,18 @@ ort sonderburg {
     stadt    = ja
     kreis    = kr_sonderburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2613102; deutscher Name aus den GeoNames-Alternativnamen (heute Sønderborg); Lage auf das nächste Landpixel gesetzt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 3028
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { daenen = 60 holsteiner = 30 friesen = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = DEN
+        verwaltung = dk_schleswig
+    }
 }
 
 ort nordborg {
@@ -89,6 +173,18 @@ ort nordborg {
     stadt    = nein
     kreis    = kr_sonderburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2616176; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 2553
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { daenen = 60 holsteiner = 30 friesen = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = DEN
+        verwaltung = dk_schleswig
+    }
 }
 
 ort aeroeskoebing {
@@ -99,6 +195,18 @@ ort aeroeskoebing {
     stadt    = ja
     kreis    = kr_sonderburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2625001; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Lage auf das nächste Landpixel gesetzt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 3524
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { daenen = 60 holsteiner = 30 friesen = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = DEN
+        verwaltung = dk_schleswig
+    }
 }
 
 ort hoeruphav {
@@ -109,6 +217,18 @@ ort hoeruphav {
     stadt    = nein
     kreis    = kr_sonderburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2619845; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Lage auf das nächste Landpixel gesetzt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 3603
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { daenen = 60 holsteiner = 30 friesen = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = DEN
+        verwaltung = dk_schleswig
+    }
 }
 
 ort guderup {
@@ -119,6 +239,18 @@ ort guderup {
     stadt    = nein
     kreis    = kr_sonderburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2621072; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 3288
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { daenen = 60 holsteiner = 30 friesen = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = DEN
+        verwaltung = dk_schleswig
+    }
 }
 
 ort westerland {
@@ -129,6 +261,18 @@ ort westerland {
     stadt    = nein
     kreis    = kr_westerland
     quelle   = "GeoNames (CC BY 4.0), geonameid 2810284; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 2763
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { daenen = 60 holsteiner = 30 friesen = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = DEN
+        verwaltung = dk_schleswig
+    }
 }
 
 ort tondern {
@@ -139,6 +283,18 @@ ort tondern {
     stadt    = ja
     kreis    = kr_westerland
     quelle   = "GeoNames (CC BY 4.0), geonameid 2611497; deutscher Name aus den GeoNames-Alternativnamen (heute Tønder); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12740
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { daenen = 60 holsteiner = 30 friesen = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = DEN
+        verwaltung = dk_schleswig
+    }
 }
 
 ort niebuell {
@@ -149,6 +305,18 @@ ort niebuell {
     stadt    = nein
     kreis    = kr_westerland
     quelle   = "GeoNames (CC BY 4.0), geonameid 2863696; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7695
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { daenen = 60 holsteiner = 30 friesen = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = DEN
+        verwaltung = dk_schleswig
+    }
 }
 
 ort bredstedt {
@@ -159,6 +327,18 @@ ort bredstedt {
     stadt    = nein
     kreis    = kr_westerland
     quelle   = "GeoNames (CC BY 4.0), geonameid 2944879; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8044
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { daenen = 60 holsteiner = 30 friesen = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = DEN
+        verwaltung = dk_schleswig
+    }
 }
 
 ort wyk_auf_foehr {
@@ -169,6 +349,18 @@ ort wyk_auf_foehr {
     stadt    = nein
     kreis    = kr_westerland
     quelle   = "GeoNames (CC BY 4.0), geonameid 2805396; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 2553
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { daenen = 60 holsteiner = 30 friesen = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = DEN
+        verwaltung = dk_schleswig
+    }
 }
 
 ort leck {
@@ -179,6 +371,18 @@ ort leck {
     stadt    = nein
     kreis    = kr_westerland
     quelle   = "GeoNames (CC BY 4.0), geonameid 2879758; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12164
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { daenen = 60 holsteiner = 30 friesen = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = DEN
+        verwaltung = dk_schleswig
+    }
 }
 
 ort list {
@@ -189,6 +393,18 @@ ort list {
     stadt    = nein
     kreis    = kr_westerland
     quelle   = "GeoNames (CC BY 4.0), geonameid 2876837; Name nach GeoNames; Lage auf das nächste Landpixel gesetzt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 734
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { daenen = 60 holsteiner = 30 friesen = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = DEN
+        verwaltung = dk_schleswig
+    }
 }
 
 ort pellworm {
@@ -199,6 +415,18 @@ ort pellworm {
     stadt    = nein
     kreis    = kr_westerland
     quelle   = "GeoNames (CC BY 4.0), geonameid 2854996; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 1049
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { daenen = 60 holsteiner = 30 friesen = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = DEN
+        verwaltung = dk_schleswig
+    }
 }
 
 ort neukirchen_schleswig {
@@ -209,6 +437,18 @@ ort neukirchen_schleswig {
     stadt    = nein
     kreis    = kr_westerland
     quelle   = "GeoNames (CC BY 4.0), geonameid 2864735; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6296
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { daenen = 60 holsteiner = 30 friesen = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = DEN
+        verwaltung = dk_schleswig
+    }
 }
 
 ort flensburg {
@@ -219,6 +459,18 @@ ort flensburg {
     stadt    = ja
     kreis    = kr_flensburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2926271; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 24930
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { daenen = 60 holsteiner = 30 friesen = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = DEN
+        verwaltung = dk_schleswig
+    }
 }
 
 ort apenrade {
@@ -229,6 +481,18 @@ ort apenrade {
     stadt    = ja
     kreis    = kr_flensburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2625070; deutscher Name aus den GeoNames-Alternativnamen (heute Aabenraa); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 13490
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { daenen = 60 holsteiner = 30 friesen = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = DEN
+        verwaltung = dk_schleswig
+    }
 }
 
 ort gluecksburg {
@@ -239,6 +503,18 @@ ort gluecksburg {
     stadt    = nein
     kreis    = kr_flensburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2919765; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 2487
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { daenen = 60 holsteiner = 30 friesen = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = DEN
+        verwaltung = dk_schleswig
+    }
 }
 
 ort gravenstein {
@@ -249,6 +525,18 @@ ort gravenstein {
     stadt    = nein
     kreis    = kr_flensburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2621258; deutscher Name aus den GeoNames-Alternativnamen (heute Gråsten); Lage auf das nächste Landpixel gesetzt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11542
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { daenen = 60 holsteiner = 30 friesen = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = DEN
+        verwaltung = dk_schleswig
+    }
 }
 
 ort tinglev {
@@ -259,6 +547,18 @@ ort tinglev {
     stadt    = nein
     kreis    = kr_flensburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2611684; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 16011
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { daenen = 60 holsteiner = 30 friesen = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = DEN
+        verwaltung = dk_schleswig
+    }
 }
 
 ort schleswig {
@@ -269,6 +569,18 @@ ort schleswig {
     stadt    = ja
     kreis    = kr_schleswig
     quelle   = "GeoNames (CC BY 4.0), geonameid 2838634; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11557
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { daenen = 60 holsteiner = 30 friesen = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = DEN
+        verwaltung = dk_schleswig
+    }
 }
 
 ort husum_schleswig {
@@ -279,6 +591,18 @@ ort husum_schleswig {
     stadt    = ja
     kreis    = kr_schleswig
     quelle   = "GeoNames (CC BY 4.0), geonameid 2897132; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6127
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { daenen = 60 holsteiner = 30 friesen = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = DEN
+        verwaltung = dk_schleswig
+    }
 }
 
 ort kropp {
@@ -289,6 +613,18 @@ ort kropp {
     stadt    = nein
     kreis    = kr_schleswig
     quelle   = "GeoNames (CC BY 4.0), geonameid 2883591; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8938
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { daenen = 60 holsteiner = 30 friesen = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = DEN
+        verwaltung = dk_schleswig
+    }
 }
 
 ort tarp {
@@ -299,6 +635,18 @@ ort tarp {
     stadt    = nein
     kreis    = kr_schleswig
     quelle   = "GeoNames (CC BY 4.0), geonameid 2823978; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6840
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { daenen = 60 holsteiner = 30 friesen = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = DEN
+        verwaltung = dk_schleswig
+    }
 }
 
 ort grossenwiehe {
@@ -309,6 +657,18 @@ ort grossenwiehe {
     stadt    = nein
     kreis    = kr_schleswig
     quelle   = "GeoNames (CC BY 4.0), geonameid 2916570; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10376
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { daenen = 60 holsteiner = 30 friesen = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = DEN
+        verwaltung = dk_schleswig
+    }
 }
 
 ort juebek {
@@ -319,6 +679,18 @@ ort juebek {
     stadt    = nein
     kreis    = kr_schleswig
     quelle   = "GeoNames (CC BY 4.0), geonameid 2894644; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6684
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { daenen = 60 holsteiner = 30 friesen = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = DEN
+        verwaltung = dk_schleswig
+    }
 }
 
 ort vioel {
@@ -329,6 +701,18 @@ ort vioel {
     stadt    = nein
     kreis    = kr_schleswig
     quelle   = "GeoNames (CC BY 4.0), geonameid 2817154; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6062
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { daenen = 60 holsteiner = 30 friesen = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = DEN
+        verwaltung = dk_schleswig
+    }
 }
 
 ort elsdorf_westermuehlen {
@@ -339,6 +723,18 @@ ort elsdorf_westermuehlen {
     stadt    = nein
     kreis    = kr_schleswig
     quelle   = "GeoNames (CC BY 4.0), geonameid 2930771; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9016
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { daenen = 60 holsteiner = 30 friesen = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = DEN
+        verwaltung = dk_schleswig
+    }
 }
 
 ort erfde {
@@ -349,6 +745,18 @@ ort erfde {
     stadt    = nein
     kreis    = kr_schleswig
     quelle   = "GeoNames (CC BY 4.0), geonameid 2929685; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6257
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { daenen = 60 holsteiner = 30 friesen = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = DEN
+        verwaltung = dk_schleswig
+    }
 }
 
 ort ostenfeld {
@@ -359,6 +767,18 @@ ort ostenfeld {
     stadt    = nein
     kreis    = kr_schleswig
     quelle   = "GeoNames (CC BY 4.0), geonameid 2856765; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8044
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { daenen = 60 holsteiner = 30 friesen = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = DEN
+        verwaltung = dk_schleswig
+    }
 }
 
 ort eckernfoerde {
@@ -369,6 +789,18 @@ ort eckernfoerde {
     stadt    = ja
     kreis    = kr_eckernfoerde
     quelle   = "GeoNames (CC BY 4.0), geonameid 2933627; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9917
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { daenen = 60 holsteiner = 30 friesen = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = DEN
+        verwaltung = dk_schleswig
+    }
 }
 
 ort altenholz {
@@ -379,6 +811,18 @@ ort altenholz {
     stadt    = nein
     kreis    = kr_eckernfoerde
     quelle   = "GeoNames (CC BY 4.0), geonameid 2957588; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 3777
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { daenen = 60 holsteiner = 30 friesen = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = DEN
+        verwaltung = dk_schleswig
+    }
 }
 
 ort kappeln {
@@ -389,6 +833,18 @@ ort kappeln {
     stadt    = nein
     kreis    = kr_eckernfoerde
     quelle   = "GeoNames (CC BY 4.0), geonameid 2893023; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 4687
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { daenen = 60 holsteiner = 30 friesen = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = DEN
+        verwaltung = dk_schleswig
+    }
 }
 
 ort gettorf {
@@ -399,6 +855,18 @@ ort gettorf {
     stadt    = nein
     kreis    = kr_eckernfoerde
     quelle   = "GeoNames (CC BY 4.0), geonameid 2920776; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6412
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { daenen = 60 holsteiner = 30 friesen = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = DEN
+        verwaltung = dk_schleswig
+    }
 }
 
 ort soerup {
@@ -409,6 +877,18 @@ ort soerup {
     stadt    = nein
     kreis    = kr_eckernfoerde
     quelle   = "GeoNames (CC BY 4.0), geonameid 2830919; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8511
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { daenen = 60 holsteiner = 30 friesen = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = DEN
+        verwaltung = dk_schleswig
+    }
 }
 
 ort suederbrarup {
@@ -419,6 +899,18 @@ ort suederbrarup {
     stadt    = nein
     kreis    = kr_eckernfoerde
     quelle   = "GeoNames (CC BY 4.0), geonameid 2825186; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8044
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { daenen = 60 holsteiner = 30 friesen = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = DEN
+        verwaltung = dk_schleswig
+    }
 }
 
 ort gelting {
@@ -429,6 +921,18 @@ ort gelting {
     stadt    = nein
     kreis    = kr_eckernfoerde
     quelle   = "GeoNames (CC BY 4.0), geonameid 2921444; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 3218
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { daenen = 60 holsteiner = 30 friesen = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = DEN
+        verwaltung = dk_schleswig
+    }
 }
 
 ort waabs {
@@ -439,6 +943,18 @@ ort waabs {
     stadt    = nein
     kreis    = kr_eckernfoerde
     quelle   = "GeoNames (CC BY 4.0), geonameid 2815812; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 3742
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { daenen = 60 holsteiner = 30 friesen = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = DEN
+        verwaltung = dk_schleswig
+    }
 }
 
 ort toenning {
@@ -449,6 +965,18 @@ ort toenning {
     stadt    = nein
     kreis    = kr_toenning
     quelle   = "GeoNames (CC BY 4.0), geonameid 2821878; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 5176
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { daenen = 60 holsteiner = 30 friesen = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = DEN
+        verwaltung = dk_schleswig
+    }
 }
 
 ort sankt_peter_ording {
@@ -459,6 +987,18 @@ ort sankt_peter_ording {
     stadt    = nein
     kreis    = kr_toenning
     quelle   = "GeoNames (CC BY 4.0), geonameid 2841484; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 1959
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { daenen = 60 holsteiner = 30 friesen = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = DEN
+        verwaltung = dk_schleswig
+    }
 }
 
 ort garding {
@@ -469,6 +1009,18 @@ ort garding {
     stadt    = nein
     kreis    = kr_toenning
     quelle   = "GeoNames (CC BY 4.0), geonameid 2922571; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 5491
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { daenen = 60 holsteiner = 30 friesen = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = DEN
+        verwaltung = dk_schleswig
+    }
 }
 
 ort friedrichstadt {
@@ -479,4 +1031,16 @@ ort friedrichstadt {
     stadt    = nein
     kreis    = kr_toenning
     quelle   = "GeoNames (CC BY 4.0), geonameid 2924477; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6568
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { daenen = 60 holsteiner = 30 friesen = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = DEN
+        verwaltung = dk_schleswig
+    }
 }

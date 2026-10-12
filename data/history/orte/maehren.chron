@@ -18,6 +18,19 @@ ort maehrisch_schoenberg {
     stadt    = ja
     kreis    = kr_maehrisch_schoenberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 3064673; deutscher Name aus den GeoNames-Alternativnamen (heute Šumperk); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 15736
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort hohenstadt {
@@ -28,6 +41,19 @@ ort hohenstadt {
     stadt    = nein
     kreis    = kr_maehrisch_schoenberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 3062111; deutscher Name aus den GeoNames-Alternativnamen (heute Zábřeh); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12847
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort hannsdorf {
@@ -38,6 +64,19 @@ ort hannsdorf {
     stadt    = nein
     kreis    = kr_maehrisch_schoenberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 3075958; deutscher Name aus den GeoNames-Alternativnamen (heute Hanušovice); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10852
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort gross_ullersdorf {
@@ -48,6 +87,19 @@ ort gross_ullersdorf {
     stadt    = nein
     kreis    = kr_maehrisch_schoenberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 3063197; deutscher Name aus den GeoNames-Alternativnamen (heute Velké Losiny); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 13916
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort stepanov {
@@ -58,6 +110,19 @@ ort stepanov {
     stadt    = nein
     kreis    = kr_maehrisch_schoenberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 3065180; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 16342
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort schildberg {
@@ -68,6 +133,19 @@ ort schildberg {
     stadt    = nein
     kreis    = kr_maehrisch_schoenberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 3065118; deutscher Name aus den GeoNames-Alternativnamen (heute Štíty); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10916
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort oskau {
@@ -78,6 +156,19 @@ ort oskau {
     stadt    = nein
     kreis    = kr_maehrisch_schoenberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 3068837; deutscher Name aus den GeoNames-Alternativnamen (heute Oskava); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12320
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort ostrava {
@@ -88,6 +179,19 @@ ort ostrava {
     stadt    = ja
     kreis    = kr_ostrava
     quelle   = "GeoNames (CC BY 4.0), geonameid 3068799; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 15137
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort nesselsdorf {
@@ -98,6 +202,19 @@ ort nesselsdorf {
     stadt    = ja
     kreis    = kr_ostrava
     quelle   = "GeoNames (CC BY 4.0), geonameid 3073254; deutscher Name aus den GeoNames-Alternativnamen (heute Kopřivnice); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 16121
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort neutitschein {
@@ -108,6 +225,19 @@ ort neutitschein {
     stadt    = ja
     kreis    = kr_ostrava
     quelle   = "GeoNames (CC BY 4.0), geonameid 3069305; deutscher Name aus den GeoNames-Alternativnamen (heute Nový Jičín); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 19332
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort wagstadt {
@@ -118,6 +248,19 @@ ort wagstadt {
     stadt    = nein
     kreis    = kr_ostrava
     quelle   = "GeoNames (CC BY 4.0), geonameid 3079336; deutscher Name aus den GeoNames-Alternativnamen (heute Bílovec); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11969
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort fulnek {
@@ -128,6 +271,19 @@ ort fulnek {
     stadt    = nein
     kreis    = kr_ostrava
     quelle   = "GeoNames (CC BY 4.0), geonameid 3076116; deutscher Name nach GeoNames (dort Hauptname des Eintrags); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 15321
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort vresina {
@@ -138,6 +294,19 @@ ort vresina {
     stadt    = nein
     kreis    = kr_ostrava
     quelle   = "GeoNames (CC BY 4.0), geonameid 3062417; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9336
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort vaclavovice {
@@ -148,6 +317,19 @@ ort vaclavovice {
     stadt    = nein
     kreis    = kr_ostrava
     quelle   = "GeoNames (CC BY 4.0), geonameid 3063471; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6623
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort olmuetz {
@@ -158,6 +340,19 @@ ort olmuetz {
     stadt    = ja
     kreis    = kr_olmuetz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3069011; deutscher Name aus den GeoNames-Alternativnamen (heute Olomouc); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 31324
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort sternberg_maehren {
@@ -168,6 +363,19 @@ ort sternberg_maehren {
     stadt    = nein
     kreis    = kr_olmuetz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3065166; deutscher Name aus den GeoNames-Alternativnamen (heute Šternberk); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12065
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort maehrisch_neustadt {
@@ -178,6 +386,19 @@ ort maehrisch_neustadt {
     stadt    = nein
     kreis    = kr_olmuetz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3063596; deutscher Name aus den GeoNames-Alternativnamen (heute Uničov); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 14842
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort littau {
@@ -188,6 +409,19 @@ ort littau {
     stadt    = nein
     kreis    = kr_olmuetz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3071669; deutscher Name aus den GeoNames-Alternativnamen (heute Litovel); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 19917
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort mueglitz {
@@ -198,6 +432,19 @@ ort mueglitz {
     stadt    = nein
     kreis    = kr_olmuetz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3070409; deutscher Name aus den GeoNames-Alternativnamen (heute Mohelnice); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 20587
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort hlubocky {
@@ -208,6 +455,19 @@ ort hlubocky {
     stadt    = nein
     kreis    = kr_olmuetz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3075744; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12703
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort baern {
@@ -218,6 +478,19 @@ ort baern {
     stadt    = nein
     kreis    = kr_olmuetz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3070314; deutscher Name aus den GeoNames-Alternativnamen (heute Moravský Beroun); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 14603
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort lutin {
@@ -228,6 +501,19 @@ ort lutin {
     stadt    = nein
     kreis    = kr_olmuetz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3071350; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 17531
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort stadt_liebau {
@@ -238,6 +524,19 @@ ort stadt_liebau {
     stadt    = nein
     kreis    = kr_olmuetz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3070816; deutscher Name aus den GeoNames-Alternativnamen (heute Město Libavá); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9958
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort saar {
@@ -248,6 +547,19 @@ ort saar {
     stadt    = ja
     kreis    = kr_saar
     quelle   = "GeoNames (CC BY 4.0), geonameid 3061695; deutscher Name aus den GeoNames-Alternativnamen (heute Žďár nad Sázavou); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 19664
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort bystritz_am_pernstein {
@@ -258,6 +570,19 @@ ort bystritz_am_pernstein {
     stadt    = nein
     kreis    = kr_saar
     quelle   = "GeoNames (CC BY 4.0), geonameid 3078288; deutscher Name aus den GeoNames-Alternativnamen (heute Bystřice nad Pernštejnem); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 17044
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort neustadtl {
@@ -268,6 +593,19 @@ ort neustadtl {
     stadt    = nein
     kreis    = kr_saar
     quelle   = "GeoNames (CC BY 4.0), geonameid 3069465; deutscher Name aus den GeoNames-Alternativnamen (heute Nové Město na Moravě); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12193
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort olesnice {
@@ -278,6 +616,19 @@ ort olesnice {
     stadt    = nein
     kreis    = kr_saar
     quelle   = "GeoNames (CC BY 4.0), geonameid 3069029; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8682
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort svratka {
@@ -288,6 +639,19 @@ ort svratka {
     stadt    = nein
     kreis    = kr_saar
     quelle   = "GeoNames (CC BY 4.0), geonameid 3064415; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11682
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort ingrowitz {
@@ -298,6 +662,19 @@ ort ingrowitz {
     stadt    = nein
     kreis    = kr_saar
     quelle   = "GeoNames (CC BY 4.0), geonameid 3074170; deutscher Name aus den GeoNames-Alternativnamen (heute Jimramov); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8299
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort prossnitz {
@@ -308,6 +685,19 @@ ort prossnitz {
     stadt    = ja
     kreis    = kr_prossnitz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3067421; deutscher Name aus den GeoNames-Alternativnamen (heute Prostějov); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 19309
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort kojetein {
@@ -318,6 +708,19 @@ ort kojetein {
     stadt    = nein
     kreis    = kr_prossnitz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3073407; deutscher Name aus den GeoNames-Alternativnamen (heute Kojetín); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10270
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort tobitschau {
@@ -328,6 +731,19 @@ ort tobitschau {
     stadt    = nein
     kreis    = kr_prossnitz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3064143; deutscher Name aus den GeoNames-Alternativnamen (heute Tovačov); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 16494
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort otaslavice {
@@ -338,6 +754,19 @@ ort otaslavice {
     stadt    = nein
     kreis    = kr_prossnitz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3068727; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 13406
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort nezamislitz {
@@ -348,6 +777,19 @@ ort nezamislitz {
     stadt    = nein
     kreis    = kr_prossnitz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3069773; deutscher Name aus den GeoNames-Alternativnamen (heute Nezamyslice); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 14603
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort prerau {
@@ -358,6 +800,19 @@ ort prerau {
     stadt    = ja
     kreis    = kr_prerau
     quelle   = "GeoNames (CC BY 4.0), geonameid 3067580; deutscher Name aus den GeoNames-Alternativnamen (heute Přerov); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 20420
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort maehrisch_weisskirchen {
@@ -368,6 +823,19 @@ ort maehrisch_weisskirchen {
     stadt    = nein
     kreis    = kr_prerau
     quelle   = "GeoNames (CC BY 4.0), geonameid 3074893; deutscher Name aus den GeoNames-Alternativnamen (heute Hranice); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 13805
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort holleschau {
@@ -378,6 +846,19 @@ ort holleschau {
     stadt    = nein
     kreis    = kr_prerau
     quelle   = "GeoNames (CC BY 4.0), geonameid 3075606; deutscher Name aus den GeoNames-Alternativnamen (heute Holešov); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 15002
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort lipnik_nad_becvou {
@@ -388,6 +869,19 @@ ort lipnik_nad_becvou {
     stadt    = nein
     kreis    = kr_prerau
     quelle   = "GeoNames (CC BY 4.0), geonameid 3071791; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 14204
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort bystritz_am_hostein {
@@ -398,6 +892,19 @@ ort bystritz_am_hostein {
     stadt    = nein
     kreis    = kr_prerau
     quelle   = "GeoNames (CC BY 4.0), geonameid 3078286; deutscher Name aus den GeoNames-Alternativnamen (heute Bystřice pod Hostýnem); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12576
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort kelc {
@@ -408,6 +915,19 @@ ort kelc {
     stadt    = nein
     kreis    = kr_prerau
     quelle   = "GeoNames (CC BY 4.0), geonameid 3073731; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9655
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort bodenstadt {
@@ -418,6 +938,19 @@ ort bodenstadt {
     stadt    = nein
     kreis    = kr_prerau
     quelle   = "GeoNames (CC BY 4.0), geonameid 3067752; deutscher Name aus den GeoNames-Alternativnamen (heute Potštát); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 13278
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort iglau {
@@ -428,6 +961,19 @@ ort iglau {
     stadt    = ja
     kreis    = kr_iglau
     quelle   = "GeoNames (CC BY 4.0), geonameid 3074199; deutscher Name aus den GeoNames-Alternativnamen (heute Jihlava); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 24665
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort maehrisch_budwitz {
@@ -438,6 +984,19 @@ ort maehrisch_budwitz {
     stadt    = nein
     kreis    = kr_iglau
     quelle   = "GeoNames (CC BY 4.0), geonameid 3070323; deutscher Name aus den GeoNames-Alternativnamen (heute Moravské Budějovice); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 20507
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort teltsch {
@@ -448,6 +1007,19 @@ ort teltsch {
     stadt    = nein
     kreis    = kr_iglau
     quelle   = "GeoNames (CC BY 4.0), geonameid 3064316; deutscher Name aus den GeoNames-Alternativnamen (heute Telč); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 16039
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort jamnitz {
@@ -458,6 +1030,19 @@ ort jamnitz {
     stadt    = nein
     kreis    = kr_iglau
     quelle   = "GeoNames (CC BY 4.0), geonameid 3074331; deutscher Name aus den GeoNames-Alternativnamen (heute Jemnice); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 21305
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort pirnitz {
@@ -468,6 +1053,19 @@ ort pirnitz {
     stadt    = nein
     kreis    = kr_iglau
     quelle   = "GeoNames (CC BY 4.0), geonameid 3078561; deutscher Name aus den GeoNames-Alternativnamen (heute Brtnice); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 14874
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort triesch {
@@ -478,6 +1076,19 @@ ort triesch {
     stadt    = nein
     kreis    = kr_iglau
     quelle   = "GeoNames (CC BY 4.0), geonameid 3064029; deutscher Name aus den GeoNames-Alternativnamen (heute Třešť); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 14523
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort scheletau {
@@ -488,6 +1099,19 @@ ort scheletau {
     stadt    = nein
     kreis    = kr_iglau
     quelle   = "GeoNames (CC BY 4.0), geonameid 3061577; deutscher Name aus den GeoNames-Alternativnamen (heute Želetava); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 18433
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort blansko {
@@ -498,6 +1122,19 @@ ort blansko {
     stadt    = ja
     kreis    = kr_blansko
     quelle   = "GeoNames (CC BY 4.0), geonameid 3079273; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 16579
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort boskowitz {
@@ -508,6 +1145,19 @@ ort boskowitz {
     stadt    = nein
     kreis    = kr_blansko
     quelle   = "GeoNames (CC BY 4.0), geonameid 3078910; deutscher Name aus den GeoNames-Alternativnamen (heute Boskovice); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7852
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort gurein {
@@ -518,6 +1168,19 @@ ort gurein {
     stadt    = nein
     kreis    = kr_blansko
     quelle   = "GeoNames (CC BY 4.0), geonameid 3072476; deutscher Name aus den GeoNames-Alternativnamen (heute Kuřim); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12927
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort tischnowitz {
@@ -528,6 +1191,19 @@ ort tischnowitz {
     stadt    = nein
     kreis    = kr_blansko
     quelle   = "GeoNames (CC BY 4.0), geonameid 3064211; deutscher Name aus den GeoNames-Alternativnamen (heute Tišnov); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 17555
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort lettowitz {
@@ -538,6 +1214,19 @@ ort lettowitz {
     stadt    = nein
     kreis    = kr_blansko
     quelle   = "GeoNames (CC BY 4.0), geonameid 3072130; deutscher Name aus den GeoNames-Alternativnamen (heute Letovice); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9017
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort gross_opatowitz {
@@ -548,6 +1237,19 @@ ort gross_opatowitz {
     stadt    = nein
     kreis    = kr_blansko
     quelle   = "GeoNames (CC BY 4.0), geonameid 3063193; deutscher Name aus den GeoNames-Alternativnamen (heute Velké Opatovice); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 15959
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort konitz_maehren {
@@ -558,6 +1260,19 @@ ort konitz_maehren {
     stadt    = nein
     kreis    = kr_blansko
     quelle   = "GeoNames (CC BY 4.0), geonameid 3073299; deutscher Name aus den GeoNames-Alternativnamen (heute Konice); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 13406
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort lissitz {
@@ -568,6 +1283,19 @@ ort lissitz {
     stadt    = nein
     kreis    = kr_blansko
     quelle   = "GeoNames (CC BY 4.0), geonameid 3071302; deutscher Name aus den GeoNames-Alternativnamen (heute Lysice); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12448
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort pteni {
@@ -578,6 +1306,19 @@ ort pteni {
     stadt    = nein
     kreis    = kr_blansko
     quelle   = "GeoNames (CC BY 4.0), geonameid 3067351; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10294
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort protiwanow {
@@ -588,6 +1329,19 @@ ort protiwanow {
     stadt    = nein
     kreis    = kr_blansko
     quelle   = "GeoNames (CC BY 4.0), geonameid 3067398; deutscher Name aus den GeoNames-Alternativnamen (heute Protivanov); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8618
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort lipovec {
@@ -598,6 +1352,19 @@ ort lipovec {
     stadt    = nein
     kreis    = kr_blansko
     quelle   = "GeoNames (CC BY 4.0), geonameid 3071771; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 18672
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort wsetin {
@@ -608,6 +1375,19 @@ ort wsetin {
     stadt    = ja
     kreis    = kr_wsetin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3062339; deutscher Name aus den GeoNames-Alternativnamen (heute Vsetín); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 15923
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort wallachisch_meseritsch {
@@ -618,6 +1398,19 @@ ort wallachisch_meseritsch {
     stadt    = ja
     kreis    = kr_wsetin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3063447; deutscher Name aus den GeoNames-Alternativnamen (heute Valašské Meziříčí); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 18793
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort roznau {
@@ -628,6 +1421,19 @@ ort roznau {
     stadt    = nein
     kreis    = kr_wsetin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3066651; deutscher Name aus den GeoNames-Alternativnamen (heute Rožnov pod Radhoštěm); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9192
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort karolinka {
@@ -638,6 +1444,19 @@ ort karolinka {
     stadt    = nein
     kreis    = kr_wsetin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3073792; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12640
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort trojanowitz {
@@ -648,6 +1467,19 @@ ort trojanowitz {
     stadt    = nein
     kreis    = kr_wsetin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3063955; deutscher Name aus den GeoNames-Alternativnamen (heute Trojanovice); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6767
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort hostialkow {
@@ -658,6 +1490,19 @@ ort hostialkow {
     stadt    = nein
     kreis    = kr_wsetin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3075091; deutscher Name aus den GeoNames-Alternativnamen (heute Hošťálková); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12065
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort horni_becva {
@@ -668,6 +1513,19 @@ ort horni_becva {
     stadt    = nein
     kreis    = kr_wsetin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3075454; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12640
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort wischau {
@@ -678,6 +1536,19 @@ ort wischau {
     stadt    = ja
     kreis    = kr_wischau
     quelle   = "GeoNames (CC BY 4.0), geonameid 3062283; deutscher Name aus den GeoNames-Alternativnamen (heute Vyškov); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 20781
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort gaya {
@@ -688,6 +1559,19 @@ ort gaya {
     stadt    = nein
     kreis    = kr_wischau
     quelle   = "GeoNames (CC BY 4.0), geonameid 3072407; deutscher Name aus den GeoNames-Alternativnamen (heute Kyjov); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 14283
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort austerlitz {
@@ -698,6 +1582,19 @@ ort austerlitz {
     stadt    = nein
     kreis    = kr_wischau
     quelle   = "GeoNames (CC BY 4.0), geonameid 3065824; deutscher Name aus den GeoNames-Alternativnamen (heute Slavkov u Brna); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 13565
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort butschowitz {
@@ -708,6 +1605,19 @@ ort butschowitz {
     stadt    = nein
     kreis    = kr_wischau
     quelle   = "GeoNames (CC BY 4.0), geonameid 3078503; deutscher Name aus den GeoNames-Alternativnamen (heute Bučovice); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10693
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort korycany {
@@ -718,6 +1628,19 @@ ort korycany {
     stadt    = nein
     kreis    = kr_wischau
     quelle   = "GeoNames (CC BY 4.0), geonameid 3073222; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 14204
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort steinitz {
@@ -728,6 +1651,19 @@ ort steinitz {
     stadt    = nein
     kreis    = kr_wischau
     quelle   = "GeoNames (CC BY 4.0), geonameid 3061729; deutscher Name aus den GeoNames-Alternativnamen (heute Ždánice); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10852
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort zlin {
@@ -738,6 +1674,19 @@ ort zlin {
     stadt    = ja
     kreis    = kr_zlin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3061370; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 16124
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort kremsier {
@@ -748,6 +1697,19 @@ ort kremsier {
     stadt    = ja
     kreis    = kr_zlin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3072649; deutscher Name aus den GeoNames-Alternativnamen (heute Kroměříž); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 17321
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort otrokovice {
@@ -758,6 +1720,19 @@ ort otrokovice {
     stadt    = nein
     kreis    = kr_zlin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3068690; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11650
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort zdounky {
@@ -768,6 +1743,19 @@ ort zdounky {
     stadt    = nein
     kreis    = kr_zlin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3061637; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 16039
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort brezolupy {
@@ -778,6 +1766,19 @@ ort brezolupy {
     stadt    = nein
     kreis    = kr_zlin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3078672; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10852
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort trebic {
@@ -788,6 +1789,19 @@ ort trebic {
     stadt    = ja
     kreis    = kr_trebic
     quelle   = "GeoNames (CC BY 4.0), geonameid 3064104; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 32222
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort grossmeseritsch {
@@ -798,6 +1812,19 @@ ort grossmeseritsch {
     stadt    = nein
     kreis    = kr_trebic
     quelle   = "GeoNames (CC BY 4.0), geonameid 3063196; deutscher Name aus den GeoNames-Alternativnamen (heute Velké Meziříčí); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 21385
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort polna {
@@ -808,6 +1835,19 @@ ort polna {
     stadt    = nein
     kreis    = kr_trebic
     quelle   = "GeoNames (CC BY 4.0), geonameid 3067870; deutscher Name aus den GeoNames-Alternativnamen (heute Polná); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9974
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort merin {
@@ -818,6 +1858,19 @@ ort merin {
     stadt    = nein
     kreis    = kr_trebic
     quelle   = "GeoNames (CC BY 4.0), geonameid 3070847; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 14204
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort bohdalau {
@@ -828,6 +1881,19 @@ ort bohdalau {
     stadt    = nein
     kreis    = kr_trebic
     quelle   = "GeoNames (CC BY 4.0), geonameid 3079159; deutscher Name aus den GeoNames-Alternativnamen (heute Bohdalov); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11331
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort bruenn {
@@ -838,6 +1904,19 @@ ort bruenn {
     stadt    = ja
     kreis    = kr_bruenn
     quelle   = "GeoNames (CC BY 4.0), geonameid 3078610; deutscher Name aus den GeoNames-Alternativnamen (heute Brno); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 56332
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort schlappanitz {
@@ -848,6 +1927,19 @@ ort schlappanitz {
     stadt    = nein
     kreis    = kr_bruenn
     quelle   = "GeoNames (CC BY 4.0), geonameid 3065901; deutscher Name aus den GeoNames-Alternativnamen (heute Šlapanice); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 15480
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort eibenschitz {
@@ -858,6 +1950,19 @@ ort eibenschitz {
     stadt    = nein
     kreis    = kr_bruenn
     quelle   = "GeoNames (CC BY 4.0), geonameid 3074615; deutscher Name aus den GeoNames-Alternativnamen (heute Ivančice); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 13645
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort gross_bittesch {
@@ -868,6 +1973,19 @@ ort gross_bittesch {
     stadt    = nein
     kreis    = kr_bruenn
     quelle   = "GeoNames (CC BY 4.0), geonameid 3063276; deutscher Name aus den GeoNames-Alternativnamen (heute Velká Bíteš); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 18991
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort auspitz {
@@ -878,6 +1996,19 @@ ort auspitz {
     stadt    = nein
     kreis    = kr_bruenn
     quelle   = "GeoNames (CC BY 4.0), geonameid 3074677; deutscher Name aus den GeoNames-Alternativnamen (heute Hustopeče); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11730
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort rossitz {
@@ -888,6 +2019,19 @@ ort rossitz {
     stadt    = nein
     kreis    = kr_bruenn
     quelle   = "GeoNames (CC BY 4.0), geonameid 3066759; deutscher Name aus den GeoNames-Alternativnamen (heute Rosice); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 15401
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort pohrlitz {
@@ -898,6 +2042,19 @@ ort pohrlitz {
     stadt    = nein
     kreis    = kr_bruenn
     quelle   = "GeoNames (CC BY 4.0), geonameid 3067953; deutscher Name aus den GeoNames-Alternativnamen (heute Pohořelice); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 17794
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort gross_seelowitz {
@@ -908,6 +2065,19 @@ ort gross_seelowitz {
     stadt    = nein
     kreis    = kr_bruenn
     quelle   = "GeoNames (CC BY 4.0), geonameid 3061472; deutscher Name aus den GeoNames-Alternativnamen (heute Židlochovice); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12049
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort namiest {
@@ -918,6 +2088,19 @@ ort namiest {
     stadt    = nein
     kreis    = kr_bruenn
     quelle   = "GeoNames (CC BY 4.0), geonameid 3070055; deutscher Name aus den GeoNames-Alternativnamen (heute Náměšť nad Oslavou); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 15560
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort strelitz {
@@ -928,6 +2111,19 @@ ort strelitz {
     stadt    = nein
     kreis    = kr_bruenn
     quelle   = "GeoNames (CC BY 4.0), geonameid 3064962; deutscher Name aus den GeoNames-Alternativnamen (heute Střelice); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9416
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort tesany {
@@ -938,6 +2134,19 @@ ort tesany {
     stadt    = nein
     kreis    = kr_bruenn
     quelle   = "GeoNames (CC BY 4.0), geonameid 3064260; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 13645
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort slavicin {
@@ -948,6 +2157,19 @@ ort slavicin {
     stadt    = nein
     kreis    = kr_slavicin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3065843; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 15480
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort luhatschowitz {
@@ -958,6 +2180,19 @@ ort luhatschowitz {
     stadt    = nein
     kreis    = kr_slavicin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3071407; deutscher Name aus den GeoNames-Alternativnamen (heute Luhačovice); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10533
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort valasske_klobouky {
@@ -968,6 +2203,19 @@ ort valasske_klobouky {
     stadt    = nein
     kreis    = kr_slavicin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3063448; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11810
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort wisowitz {
@@ -978,6 +2226,19 @@ ort wisowitz {
     stadt    = nein
     kreis    = kr_slavicin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3062783; deutscher Name aus den GeoNames-Alternativnamen (heute Vizovice); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 13023
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort francova_lhota {
@@ -988,6 +2249,19 @@ ort francova_lhota {
     stadt    = nein
     kreis    = kr_slavicin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3076153; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7597
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort ungarisch_hradisch {
@@ -998,6 +2272,19 @@ ort ungarisch_hradisch {
     stadt    = ja
     kreis    = kr_ungarisch_hradisch
     quelle   = "GeoNames (CC BY 4.0), geonameid 3063739; deutscher Name aus den GeoNames-Alternativnamen (heute Uherské Hradiště); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 15377
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort ungarisch_brod {
@@ -1008,6 +2295,19 @@ ort ungarisch_brod {
     stadt    = nein
     kreis    = kr_ungarisch_hradisch
     quelle   = "GeoNames (CC BY 4.0), geonameid 3063736; deutscher Name aus den GeoNames-Alternativnamen (heute Uherský Brod); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10054
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort veseli_nad_moravou {
@@ -1018,6 +2318,19 @@ ort veseli_nad_moravou {
     stadt    = nein
     kreis    = kr_ungarisch_hradisch
     quelle   = "GeoNames (CC BY 4.0), geonameid 3063032; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 19398
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort hluk {
@@ -1028,6 +2341,19 @@ ort hluk {
     stadt    = nein
     kreis    = kr_ungarisch_hradisch
     quelle   = "GeoNames (CC BY 4.0), geonameid 3075715; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9416
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort buchlowitz {
@@ -1038,6 +2364,19 @@ ort buchlowitz {
     stadt    = nein
     kreis    = kr_ungarisch_hradisch
     quelle   = "GeoNames (CC BY 4.0), geonameid 3078513; deutscher Name aus den GeoNames-Alternativnamen (heute Buchlovice); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 13166
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort velka_nad_velickou {
@@ -1048,6 +2387,19 @@ ort velka_nad_velickou {
     stadt    = nein
     kreis    = kr_ungarisch_hradisch
     quelle   = "GeoNames (CC BY 4.0), geonameid 3063240; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 14523
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort strani {
@@ -1058,6 +2410,19 @@ ort strani {
     stadt    = nein
     kreis    = kr_ungarisch_hradisch
     quelle   = "GeoNames (CC BY 4.0), geonameid 3065051; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 14682
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort petrov {
@@ -1068,6 +2433,19 @@ ort petrov {
     stadt    = nein
     kreis    = kr_ungarisch_hradisch
     quelle   = "GeoNames (CC BY 4.0), geonameid 3068383; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10453
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort znaim {
@@ -1078,6 +2456,19 @@ ort znaim {
     stadt    = ja
     kreis    = kr_znaim
     quelle   = "GeoNames (CC BY 4.0), geonameid 3061344; deutscher Name aus den GeoNames-Alternativnamen (heute Znojmo); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 23341
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort grusbach {
@@ -1088,6 +2479,19 @@ ort grusbach {
     stadt    = nein
     kreis    = kr_znaim
     quelle   = "GeoNames (CC BY 4.0), geonameid 3074764; deutscher Name aus den GeoNames-Alternativnamen (heute Hrušovany nad Jevišovkou); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 15959
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort misslitz {
@@ -1098,6 +2502,19 @@ ort misslitz {
     stadt    = nein
     kreis    = kr_znaim
     quelle   = "GeoNames (CC BY 4.0), geonameid 3070593; deutscher Name aus den GeoNames-Alternativnamen (heute Miroslav); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 18034
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort hrottowitz {
@@ -1108,6 +2525,19 @@ ort hrottowitz {
     stadt    = nein
     kreis    = kr_znaim
     quelle   = "GeoNames (CC BY 4.0), geonameid 3074803; deutscher Name aus den GeoNames-Alternativnamen (heute Hrotovice); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 18034
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort jevisovice {
@@ -1118,6 +2548,19 @@ ort jevisovice {
     stadt    = nein
     kreis    = kr_znaim
     quelle   = "GeoNames (CC BY 4.0), geonameid 3074239; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 15321
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort visnove {
@@ -1128,6 +2571,19 @@ ort visnove {
     stadt    = nein
     kreis    = kr_znaim
     quelle   = "GeoNames (CC BY 4.0), geonameid 3062835; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 18513
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort joslowitz {
@@ -1138,6 +2594,19 @@ ort joslowitz {
     stadt    = nein
     kreis    = kr_znaim
     quelle   = "GeoNames (CC BY 4.0), geonameid 3074452; deutscher Name aus den GeoNames-Alternativnamen (heute Jaroslavice); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 15241
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort goeding {
@@ -1148,6 +2617,19 @@ ort goeding {
     stadt    = ja
     kreis    = kr_goeding
     quelle   = "GeoNames (CC BY 4.0), geonameid 3075654; deutscher Name aus den GeoNames-Alternativnamen (heute Hodonín); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 13501
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort lundenburg {
@@ -1158,6 +2640,19 @@ ort lundenburg {
     stadt    = ja
     kreis    = kr_goeding
     quelle   = "GeoNames (CC BY 4.0), geonameid 3078773; deutscher Name aus den GeoNames-Alternativnamen (heute Břeclav); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11032
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort nikolsburg {
@@ -1168,6 +2663,19 @@ ort nikolsburg {
     stadt    = nein
     kreis    = kr_goeding
     quelle   = "GeoNames (CC BY 4.0), geonameid 3070720; deutscher Name aus den GeoNames-Alternativnamen (heute Mikulov); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 19390
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort feldsberg {
@@ -1178,6 +2686,19 @@ ort feldsberg {
     stadt    = nein
     kreis    = kr_goeding
     quelle   = "GeoNames (CC BY 4.0), geonameid 3063409; deutscher Name aus den GeoNames-Alternativnamen (heute Valtice); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11171
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort mutenice {
@@ -1188,6 +2709,19 @@ ort mutenice {
     stadt    = nein
     kreis    = kr_goeding
     quelle   = "GeoNames (CC BY 4.0), geonameid 3070190; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9177
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort velke_bilovice {
@@ -1198,6 +2732,19 @@ ort velke_bilovice {
     stadt    = nein
     kreis    = kr_goeding
     quelle   = "GeoNames (CC BY 4.0), geonameid 3063217; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12209
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort kobyli {
@@ -1208,6 +2755,19 @@ ort kobyli {
     stadt    = nein
     kreis    = kr_goeding
     quelle   = "GeoNames (CC BY 4.0), geonameid 3073483; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 13086
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }
 
 ort moravska_nova_ves {
@@ -1218,4 +2778,17 @@ ort moravska_nova_ves {
     stadt    = nein
     kreis    = kr_goeding
     quelle   = "GeoNames (CC BY 4.0), geonameid 3070329; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8379
+        konfession   = { katholisch = 95 juedisch = 3 lutherisch = 1 reformiert = 1 }
+        kultur       = { tschechen = 70 deutschboehmen = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = AUT
+        verwaltung = au_maehren
+        bund       = ja
+    }
 }

@@ -35,6 +35,19 @@ ort bautzen {
         kultur       = { obersachsen = 50 sorben = 50 }
         verwuestung  = 0.5
     }
+
+    1846.12.03 = {
+        bevoelkerung = 15746
+        konfession   = { lutherisch = 88 katholisch = 12 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = SAX
+        verwaltung = sx_bautzen
+        bund       = ja
+    }
 }
 
 ort goerlitz {
@@ -52,6 +65,19 @@ ort goerlitz {
         konfession   = { lutherisch = 100 }
         kultur       = { obersachsen = 90 sorben = 10 }
         verwuestung  = 0.45
+    }
+
+    1846.12.03 = {
+        bevoelkerung = 16841
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_schlesien
+        bund       = ja
     }
 }
 
@@ -71,6 +97,19 @@ ort zittau {
         kultur       = { obersachsen = 95 sorben = 5 }
         verwuestung  = 0.4
     }
+
+    1846.12.03 = {
+        bevoelkerung = 16161
+        konfession   = { lutherisch = 88 katholisch = 12 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = SAX
+        verwaltung = sx_bautzen
+        bund       = ja
+    }
 }
 
 ort luebben {
@@ -88,6 +127,19 @@ ort luebben {
         konfession   = { lutherisch = 100 }
         kultur       = { sorben = 55 obersachsen = 45 }
         verwuestung  = 0.5
+    }
+
+    1846.12.03 = {
+        bevoelkerung = 6629
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
     }
 }
 
@@ -108,6 +160,19 @@ ort guben {
         kultur       = { obersachsen = 75 sorben = 25 }
         verwuestung  = 0.5
     }
+
+    1846.12.03 = {
+        bevoelkerung = 21459
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort cottbus {
@@ -126,6 +191,19 @@ ort cottbus {
         kultur       = { sorben = 60 maerker = 40 }
         verwuestung  = 0.55
     }
+
+    1846.12.03 = {
+        bevoelkerung = 15478
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort koenigs_wusterhausen {
@@ -136,6 +214,19 @@ ort koenigs_wusterhausen {
     stadt    = ja
     kreis    = kr_koenigs_wusterhausen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2885732; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12014
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort schoenefeld {
@@ -146,6 +237,19 @@ ort schoenefeld {
     stadt    = nein
     kreis    = kr_koenigs_wusterhausen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2836761; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9170
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort golssen {
@@ -156,6 +260,19 @@ ort golssen {
     stadt    = nein
     kreis    = kr_koenigs_wusterhausen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2919177; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9011
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort halbe {
@@ -166,6 +283,19 @@ ort halbe {
     stadt    = nein
     kreis    = kr_koenigs_wusterhausen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2911691; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 13933
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort luebbenau {
@@ -176,6 +306,19 @@ ort luebbenau {
     stadt    = nein
     kreis    = kr_cottbus
     quelle   = "GeoNames (CC BY 4.0), geonameid 2875623; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6113
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort calau {
@@ -186,6 +329,19 @@ ort calau {
     stadt    = nein
     kreis    = kr_cottbus
     quelle   = "GeoNames (CC BY 4.0), geonameid 2940424; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 5557
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort vetschau {
@@ -196,6 +352,19 @@ ort vetschau {
     stadt    = nein
     kreis    = kr_cottbus
     quelle   = "GeoNames (CC BY 4.0), geonameid 2817517; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7741
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort drebkau {
@@ -206,6 +375,19 @@ ort drebkau {
     stadt    = nein
     kreis    = kr_cottbus
     quelle   = "GeoNames (CC BY 4.0), geonameid 2935298; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8892
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort peitz {
@@ -216,6 +398,19 @@ ort peitz {
     stadt    = nein
     kreis    = kr_cottbus
     quelle   = "GeoNames (CC BY 4.0), geonameid 2855024; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 13258
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort welzow {
@@ -226,6 +421,19 @@ ort welzow {
     stadt    = nein
     kreis    = kr_cottbus
     quelle   = "GeoNames (CC BY 4.0), geonameid 2811348; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7304
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort altdoebern {
@@ -236,6 +444,19 @@ ort altdoebern {
     stadt    = nein
     kreis    = kr_cottbus
     quelle   = "GeoNames (CC BY 4.0), geonameid 2958036; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6312
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort lieberose {
@@ -246,6 +467,19 @@ ort lieberose {
     stadt    = nein
     kreis    = kr_cottbus
     quelle   = "GeoNames (CC BY 4.0), geonameid 2877932; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10757
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort neu_zauche {
@@ -256,6 +490,19 @@ ort neu_zauche {
     stadt    = nein
     kreis    = kr_cottbus
     quelle   = "GeoNames (CC BY 4.0), geonameid 2863786; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12544
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort herzberg {
@@ -266,6 +513,19 @@ ort herzberg {
     stadt    = ja
     kreis    = kr_herzberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2905504; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9258
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
+    }
 }
 
 ort bad_liebenwerda {
@@ -276,6 +536,19 @@ ort bad_liebenwerda {
     stadt    = nein
     kreis    = kr_herzberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953408; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8755
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
+    }
 }
 
 ort elsterwerda {
@@ -286,6 +559,19 @@ ort elsterwerda {
     stadt    = nein
     kreis    = kr_herzberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2930680; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6956
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
+    }
 }
 
 ort muehlberg {
@@ -296,6 +582,19 @@ ort muehlberg {
     stadt    = nein
     kreis    = kr_herzberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2868531; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7505
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
+    }
 }
 
 ort falkenberg_lausitz {
@@ -306,6 +605,19 @@ ort falkenberg_lausitz {
     stadt    = nein
     kreis    = kr_herzberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2928011; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9323
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
+    }
 }
 
 ort schlieben {
@@ -316,6 +628,19 @@ ort schlieben {
     stadt    = nein
     kreis    = kr_herzberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2838547; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 13203
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
+    }
 }
 
 ort sorau {
@@ -326,6 +651,19 @@ ort sorau {
     stadt    = ja
     kreis    = kr_sorau
     quelle   = "GeoNames (CC BY 4.0), geonameid 3080644; deutscher Name aus den GeoNames-Alternativnamen (heute Żary); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11486
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort forst {
@@ -336,6 +674,19 @@ ort forst {
     stadt    = ja
     kreis    = kr_sorau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2925832; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12626
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort sommerfeld {
@@ -346,6 +697,19 @@ ort sommerfeld {
     stadt    = nein
     kreis    = kr_sorau
     quelle   = "GeoNames (CC BY 4.0), geonameid 3092813; deutscher Name aus den GeoNames-Alternativnamen (heute Lubsko); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10599
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort triebel {
@@ -356,6 +720,19 @@ ort triebel {
     stadt    = nein
     kreis    = kr_sorau
     quelle   = "GeoNames (CC BY 4.0), geonameid 3083134; deutscher Name aus den GeoNames-Alternativnamen (heute Trzebiel); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11313
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort lipinki_luzyckie {
@@ -366,6 +743,19 @@ ort lipinki_luzyckie {
     stadt    = nein
     kreis    = kr_sorau
     quelle   = "GeoNames (CC BY 4.0), geonameid 3093315; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8257
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort pfoerten {
@@ -376,6 +766,19 @@ ort pfoerten {
     stadt    = nein
     kreis    = kr_sorau
     quelle   = "GeoNames (CC BY 4.0), geonameid 3102615; deutscher Name aus den GeoNames-Alternativnamen (heute Brody); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9051
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort senftenberg_lausitz {
@@ -386,6 +789,19 @@ ort senftenberg_lausitz {
     stadt    = ja
     kreis    = kr_senftenberg_lausitz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2833073; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11330
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort lauchhammer {
@@ -396,6 +812,19 @@ ort lauchhammer {
     stadt    = nein
     kreis    = kr_senftenberg_lausitz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2880221; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8058
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort finsterwalde {
@@ -406,6 +835,19 @@ ort finsterwalde {
     stadt    = nein
     kreis    = kr_senftenberg_lausitz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2926670; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6073
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort doberlug_kirchhain {
@@ -416,6 +858,19 @@ ort doberlug_kirchhain {
     stadt    = nein
     kreis    = kr_senftenberg_lausitz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2936631; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9448
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort luckau {
@@ -426,6 +881,19 @@ ort luckau {
     stadt    = nein
     kreis    = kr_senftenberg_lausitz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2875509; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10400
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort ortrand {
@@ -436,6 +904,19 @@ ort ortrand {
     stadt    = nein
     kreis    = kr_senftenberg_lausitz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2856975; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8802
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
+    }
 }
 
 ort sallgast {
@@ -446,6 +927,19 @@ ort sallgast {
     stadt    = nein
     kreis    = kr_senftenberg_lausitz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2842258; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7066
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort crinitz {
@@ -456,6 +950,19 @@ ort crinitz {
     stadt    = nein
     kreis    = kr_senftenberg_lausitz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2939745; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9130
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
+    }
 }
 
 ort hirschfeld {
@@ -466,6 +973,19 @@ ort hirschfeld {
     stadt    = nein
     kreis    = kr_senftenberg_lausitz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2903659; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7098
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
+    }
 }
 
 ort weisswasser {
@@ -476,6 +996,19 @@ ort weisswasser {
     stadt    = ja
     kreis    = kr_weisswasser
     quelle   = "GeoNames (CC BY 4.0), geonameid 2811698; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12442
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_schlesien
+        bund       = ja
+    }
 }
 
 ort niesky {
@@ -486,6 +1019,19 @@ ort niesky {
     stadt    = nein
     kreis    = kr_weisswasser
     quelle   = "GeoNames (CC BY 4.0), geonameid 2862460; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10256
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_schlesien
+        bund       = ja
+    }
 }
 
 ort penzig {
@@ -496,6 +1042,19 @@ ort penzig {
     stadt    = nein
     kreis    = kr_weisswasser
     quelle   = "GeoNames (CC BY 4.0), geonameid 3089098; deutscher Name aus den GeoNames-Alternativnamen (heute Pieńsk); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9435
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_schlesien
+        bund       = ja
+    }
 }
 
 ort kohlfurt {
@@ -506,6 +1065,19 @@ ort kohlfurt {
     stadt    = nein
     kreis    = kr_weisswasser
     quelle   = "GeoNames (CC BY 4.0), geonameid 3082500; deutscher Name aus den GeoNames-Alternativnamen (heute Węgliniec); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 18512
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_schlesien
+        bund       = ja
+    }
 }
 
 ort rietschen {
@@ -516,6 +1088,19 @@ ort rietschen {
     stadt    = nein
     kreis    = kr_weisswasser
     quelle   = "GeoNames (CC BY 4.0), geonameid 2846806; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10307
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_schlesien
+        bund       = ja
+    }
 }
 
 ort rothenburg {
@@ -526,6 +1111,19 @@ ort rothenburg {
     stadt    = nein
     kreis    = kr_weisswasser
     quelle   = "GeoNames (CC BY 4.0), geonameid 2844062; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9333
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_schlesien
+        bund       = ja
+    }
 }
 
 ort boxberg_lausitz {
@@ -536,6 +1134,19 @@ ort boxberg_lausitz {
     stadt    = nein
     kreis    = kr_weisswasser
     quelle   = "GeoNames (CC BY 4.0), geonameid 2945698; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9230
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_schlesien
+        bund       = ja
+    }
 }
 
 ort gross_dueben {
@@ -546,6 +1157,19 @@ ort gross_dueben {
     stadt    = nein
     kreis    = kr_weisswasser
     quelle   = "GeoNames (CC BY 4.0), geonameid 2916840; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 15538
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_schlesien
+        bund       = ja
+    }
 }
 
 ort priebus {
@@ -556,6 +1180,19 @@ ort priebus {
     stadt    = nein
     kreis    = kr_weisswasser
     quelle   = "GeoNames (CC BY 4.0), geonameid 3087917; deutscher Name aus den GeoNames-Alternativnamen (heute Przewóz); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11589
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_schlesien
+        bund       = ja
+    }
 }
 
 ort hoyerswerda {
@@ -566,6 +1203,19 @@ ort hoyerswerda {
     stadt    = ja
     kreis    = kr_hoyerswerda
     quelle   = "GeoNames (CC BY 4.0), geonameid 2898304; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 19149
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_schlesien
+        bund       = ja
+    }
 }
 
 ort kamenz {
@@ -576,6 +1226,19 @@ ort kamenz {
     stadt    = nein
     kreis    = kr_hoyerswerda
     quelle   = "GeoNames (CC BY 4.0), geonameid 2893437; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9700
+        konfession   = { lutherisch = 88 katholisch = 12 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = SAX
+        verwaltung = sx_bautzen
+        bund       = ja
+    }
 }
 
 ort radeberg {
@@ -586,6 +1249,19 @@ ort radeberg {
     stadt    = nein
     kreis    = kr_hoyerswerda
     quelle   = "GeoNames (CC BY 4.0), geonameid 2851079; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9979
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = SAX
+        verwaltung = sx_dresden
+        bund       = ja
+    }
 }
 
 ort bischofswerda {
@@ -596,6 +1272,19 @@ ort bischofswerda {
     stadt    = nein
     kreis    = kr_hoyerswerda
     quelle   = "GeoNames (CC BY 4.0), geonameid 2948267; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10956
+        konfession   = { lutherisch = 88 katholisch = 12 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = SAX
+        verwaltung = sx_bautzen
+        bund       = ja
+    }
 }
 
 ort ottendorf_okrilla {
@@ -606,6 +1295,19 @@ ort ottendorf_okrilla {
     stadt    = nein
     kreis    = kr_hoyerswerda
     quelle   = "GeoNames (CC BY 4.0), geonameid 2856107; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8165
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = SAX
+        verwaltung = sx_dresden
+        bund       = ja
+    }
 }
 
 ort grossroehrsdorf {
@@ -616,6 +1318,19 @@ ort grossroehrsdorf {
     stadt    = nein
     kreis    = kr_hoyerswerda
     quelle   = "GeoNames (CC BY 4.0), geonameid 2915124; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8723
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = SAX
+        verwaltung = sx_dresden
+        bund       = ja
+    }
 }
 
 ort koenigsbrueck {
@@ -626,6 +1341,19 @@ ort koenigsbrueck {
     stadt    = nein
     kreis    = kr_hoyerswerda
     quelle   = "GeoNames (CC BY 4.0), geonameid 2885910; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10747
+        konfession   = { lutherisch = 88 katholisch = 12 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = SAX
+        verwaltung = sx_bautzen
+        bund       = ja
+    }
 }
 
 ort lohsa {
@@ -636,6 +1364,19 @@ ort lohsa {
     stadt    = nein
     kreis    = kr_hoyerswerda
     quelle   = "GeoNames (CC BY 4.0), geonameid 2876117; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10205
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_schlesien
+        bund       = ja
+    }
 }
 
 ort koenigswartha {
@@ -646,6 +1387,19 @@ ort koenigswartha {
     stadt    = nein
     kreis    = kr_hoyerswerda
     quelle   = "GeoNames (CC BY 4.0), geonameid 2885742; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9840
+        konfession   = { lutherisch = 88 katholisch = 12 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = SAX
+        verwaltung = sx_bautzen
+        bund       = ja
+    }
 }
 
 ort bernsdorf {
@@ -656,6 +1410,19 @@ ort bernsdorf {
     stadt    = nein
     kreis    = kr_hoyerswerda
     quelle   = "GeoNames (CC BY 4.0), geonameid 2949961; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12512
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_schlesien
+        bund       = ja
+    }
 }
 
 ort raeckelwitz {
@@ -666,6 +1433,19 @@ ort raeckelwitz {
     stadt    = nein
     kreis    = kr_hoyerswerda
     quelle   = "GeoNames (CC BY 4.0), geonameid 2851132; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10049
+        konfession   = { lutherisch = 88 katholisch = 12 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = SAX
+        verwaltung = sx_bautzen
+        bund       = ja
+    }
 }
 
 ort loebau {
@@ -676,6 +1456,19 @@ ort loebau {
     stadt    = nein
     kreis    = kr_bautzen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2876755; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7537
+        konfession   = { lutherisch = 88 katholisch = 12 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = SAX
+        verwaltung = sx_bautzen
+        bund       = ja
+    }
 }
 
 ort wilthen {
@@ -686,6 +1479,19 @@ ort wilthen {
     stadt    = nein
     kreis    = kr_bautzen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2808406; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10049
+        konfession   = { lutherisch = 88 katholisch = 12 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = SAX
+        verwaltung = sx_bautzen
+        bund       = ja
+    }
 }
 
 ort cunewalde {
@@ -696,6 +1502,19 @@ ort cunewalde {
     stadt    = nein
     kreis    = kr_bautzen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2939687; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7537
+        konfession   = { lutherisch = 88 katholisch = 12 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = SAX
+        verwaltung = sx_bautzen
+        bund       = ja
+    }
 }
 
 ort ebersbach {
@@ -706,6 +1525,19 @@ ort ebersbach {
     stadt    = nein
     kreis    = kr_bautzen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2933965; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7467
+        konfession   = { lutherisch = 88 katholisch = 12 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = SAX
+        verwaltung = sx_bautzen
+        bund       = ja
+    }
 }
 
 ort grossdubrau {
@@ -716,6 +1548,19 @@ ort grossdubrau {
     stadt    = nein
     kreis    = kr_bautzen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2916839; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12003
+        konfession   = { lutherisch = 88 katholisch = 12 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = SAX
+        verwaltung = sx_bautzen
+        bund       = ja
+    }
 }
 
 ort weissenberg {
@@ -726,6 +1571,19 @@ ort weissenberg {
     stadt    = nein
     kreis    = kr_bautzen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2811941; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12980
+        konfession   = { lutherisch = 88 katholisch = 12 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = SAX
+        verwaltung = sx_bautzen
+        bund       = ja
+    }
 }
 
 ort herrnhut {
@@ -736,6 +1594,19 @@ ort herrnhut {
     stadt    = nein
     kreis    = kr_bautzen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2905643; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10886
+        konfession   = { lutherisch = 88 katholisch = 12 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = SAX
+        verwaltung = sx_bautzen
+        bund       = ja
+    }
 }
 
 ort reichenbach {
@@ -746,6 +1617,19 @@ ort reichenbach {
     stadt    = nein
     kreis    = kr_bautzen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2849145; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8512
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_schlesien
+        bund       = ja
+    }
 }
 
 ort lauban {
@@ -756,6 +1640,19 @@ ort lauban {
     stadt    = ja
     kreis    = kr_goerlitz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3093040; deutscher Name aus den GeoNames-Alternativnamen (heute Lubań); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 13329
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_schlesien
+        bund       = ja
+    }
 }
 
 ort reichenau {
@@ -766,6 +1663,19 @@ ort reichenau {
     stadt    = nein
     kreis    = kr_goerlitz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3103096; deutscher Name aus den GeoNames-Alternativnamen (heute Bogatynia); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8653
+        konfession   = { lutherisch = 88 katholisch = 12 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = SAX
+        verwaltung = sx_bautzen
+        bund       = ja
+    }
 }
 
 ort bad_flinsberg {
@@ -776,6 +1686,19 @@ ort bad_flinsberg {
     stadt    = nein
     kreis    = kr_goerlitz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3084055; deutscher Name aus den GeoNames-Alternativnamen (heute Świeradów-Zdrój); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7343
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_schlesien
+        bund       = ja
+    }
 }
 
 ort marklissa {
@@ -786,6 +1709,19 @@ ort marklissa {
     stadt    = nein
     kreis    = kr_goerlitz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3093589; deutscher Name aus den GeoNames-Alternativnamen (heute Leśna); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 5743
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_schlesien
+        bund       = ja
+    }
 }
 
 ort seidenberg {
@@ -796,6 +1732,19 @@ ort seidenberg {
     stadt    = nein
     kreis    = kr_goerlitz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3080533; deutscher Name aus den GeoNames-Alternativnamen (heute Zawidów); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8512
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_schlesien
+        bund       = ja
+    }
 }
 
 ort ostritz {
@@ -806,4 +1755,17 @@ ort ostritz {
     stadt    = nein
     kreis    = kr_goerlitz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2856205; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9979
+        konfession   = { lutherisch = 88 katholisch = 12 }
+        kultur       = { obersachsen = 70 sorben = 30 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = SAX
+        verwaltung = sx_bautzen
+        bund       = ja
+    }
 }

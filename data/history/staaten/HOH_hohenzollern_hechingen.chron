@@ -1,0 +1,25 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+staat HOH {
+    name     = "Fürstentum Hohenzollern-Hechingen"
+    kurzname = "Hohenzollern-Hechingen"
+    farbe    = { 90 90 90 }
+    quelle   = "Katholische Linie der Hohenzollern; 1850 an Preußen abgetreten. Schatz, Steuersätze, Hofhaltung und Heer sind Spielwerte"
+
+    1838.09.13 = {
+        herrscher = "Friedrich Wilhelm Konstantin"
+    }
+
+    1848.03.01 = {
+        hauptstadt     = hechingen
+        regierungsform = absolute_monarchie
+        konfession     = katholisch
+        schatz         = 6300
+        kontribution   = 0.10
+        akzise         = 0.05
+        zoll           = 0.03
+        hofhaltung     = 5200
+        heer           = 6
+        zollverein     = ja
+    }
+}

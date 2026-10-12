@@ -1,0 +1,25 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+staat SLI {
+    name     = "Fürstentum Schaumburg-Lippe"
+    kurzname = "Schaumburg-Lippe"
+    farbe    = { 160 90 70 }
+    quelle   = "Residenz Bückeburg; Zollverein erst 1854. Schatz, Steuersätze, Hofhaltung und Heer sind Spielwerte"
+
+    1807.02.18 = {
+        herrscher = "Georg Wilhelm"
+    }
+
+    1848.03.01 = {
+        hauptstadt     = bueckeburg
+        regierungsform = absolute_monarchie
+        konfession     = lutherisch
+        schatz         = 8700
+        kontribution   = 0.10
+        akzise         = 0.05
+        zoll           = 0.03
+        hofhaltung     = 7200
+        heer           = 6
+        zollverein     = nein
+    }
+}

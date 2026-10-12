@@ -18,6 +18,19 @@ ort northeim {
     stadt    = ja
     kreis    = kr_northeim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2861814; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 13131
+        konfession   = { lutherisch = 75 katholisch = 24 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HAN
+        verwaltung = hn_hildesheim
+        bund       = ja
+    }
 }
 
 ort osterode_am_harz {
@@ -28,6 +41,19 @@ ort osterode_am_harz {
     stadt    = ja
     kreis    = kr_northeim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2856405; Name nach GeoNames; Einwohnerzahl für die Auswahl aus einwohner.csv; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6377
+        konfession   = { lutherisch = 75 katholisch = 24 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HAN
+        verwaltung = hn_hildesheim
+        bund       = ja
+    }
 }
 
 ort einbeck {
@@ -38,6 +64,19 @@ ort einbeck {
     stadt    = ja
     kreis    = kr_northeim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2931804; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11667
+        konfession   = { lutherisch = 75 katholisch = 24 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HAN
+        verwaltung = hn_hildesheim
+        bund       = ja
+    }
 }
 
 ort bad_gandersheim {
@@ -48,6 +87,18 @@ ort bad_gandersheim {
     stadt    = nein
     kreis    = kr_northeim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953456; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 5680
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = BWO
+        bund     = ja
+    }
 }
 
 ort dassel {
@@ -58,6 +109,19 @@ ort dassel {
     stadt    = nein
     kreis    = kr_northeim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2938813; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10214
+        konfession   = { lutherisch = 75 katholisch = 24 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HAN
+        verwaltung = hn_hildesheim
+        bund       = ja
+    }
 }
 
 ort hardegsen {
@@ -68,6 +132,19 @@ ort hardegsen {
     stadt    = nein
     kreis    = kr_northeim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2910663; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8399
+        konfession   = { lutherisch = 75 katholisch = 24 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HAN
+        verwaltung = hn_hildesheim
+        bund       = ja
+    }
 }
 
 ort kalefeld {
@@ -78,6 +155,19 @@ ort kalefeld {
     stadt    = nein
     kreis    = kr_northeim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2893868; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 5029
+        konfession   = { lutherisch = 75 katholisch = 24 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HAN
+        verwaltung = hn_hildesheim
+        bund       = ja
+    }
 }
 
 ort gittelde {
@@ -88,6 +178,18 @@ ort gittelde {
     stadt    = nein
     kreis    = kr_northeim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2920268; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 4838
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = BWO
+        bund     = ja
+    }
 }
 
 ort goettingen {
@@ -98,6 +200,19 @@ ort goettingen {
     stadt    = ja
     kreis    = kr_goettingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2918632; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 19762
+        konfession   = { lutherisch = 75 katholisch = 24 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HAN
+        verwaltung = hn_hildesheim
+        bund       = ja
+    }
 }
 
 ort hannoversch_muenden {
@@ -108,6 +223,19 @@ ort hannoversch_muenden {
     stadt    = ja
     kreis    = kr_goettingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2867613; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 13263
+        konfession   = { lutherisch = 75 katholisch = 24 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HAN
+        verwaltung = hn_hildesheim
+        bund       = ja
+    }
 }
 
 ort uslar {
@@ -118,6 +246,19 @@ ort uslar {
     stadt    = nein
     kreis    = kr_goettingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2818094; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 13688
+        konfession   = { lutherisch = 75 katholisch = 24 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HAN
+        verwaltung = hn_hildesheim
+        bund       = ja
+    }
 }
 
 ort adelebsen {
@@ -128,6 +269,19 @@ ort adelebsen {
     stadt    = nein
     kreis    = kr_goettingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2959548; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6896
+        konfession   = { lutherisch = 75 katholisch = 24 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HAN
+        verwaltung = hn_hildesheim
+        bund       = ja
+    }
 }
 
 ort friedland_goettingen {
@@ -138,6 +292,19 @@ ort friedland_goettingen {
     stadt    = nein
     kreis    = kr_goettingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2924681; Name nach GeoNames ohne modernen Zusatz (Gemeinde Friedland); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9696
+        konfession   = { lutherisch = 75 katholisch = 24 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HAN
+        verwaltung = hn_hildesheim
+        bund       = ja
+    }
 }
 
 ort dransfeld {
@@ -148,6 +315,19 @@ ort dransfeld {
     stadt    = nein
     kreis    = kr_goettingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2935326; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8399
+        konfession   = { lutherisch = 75 katholisch = 24 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HAN
+        verwaltung = hn_hildesheim
+        bund       = ja
+    }
 }
 
 ort duderstadt {
@@ -158,6 +338,19 @@ ort duderstadt {
     stadt    = ja
     kreis    = kr_duderstadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2934728; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11124
+        konfession   = { lutherisch = 75 katholisch = 24 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HAN
+        verwaltung = hn_hildesheim
+        bund       = ja
+    }
 }
 
 ort herzberg_am_harz {
@@ -168,6 +361,19 @@ ort herzberg_am_harz {
     stadt    = nein
     kreis    = kr_duderstadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2905496; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 5185
+        konfession   = { lutherisch = 75 katholisch = 24 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HAN
+        verwaltung = hn_hildesheim
+        bund       = ja
+    }
 }
 
 ort bad_lauterberg_im_harz {
@@ -178,6 +384,19 @@ ort bad_lauterberg_im_harz {
     stadt    = nein
     kreis    = kr_duderstadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953410; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6968
+        konfession   = { lutherisch = 75 katholisch = 24 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HAN
+        verwaltung = hn_hildesheim
+        bund       = ja
+    }
 }
 
 ort gieboldehausen {
@@ -188,6 +407,19 @@ ort gieboldehausen {
     stadt    = nein
     kreis    = kr_duderstadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2920645; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9022
+        konfession   = { lutherisch = 75 katholisch = 24 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HAN
+        verwaltung = hn_hildesheim
+        bund       = ja
+    }
 }
 
 ort landolfshausen {
@@ -198,4 +430,17 @@ ort landolfshausen {
     stadt    = nein
     kreis    = kr_duderstadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2881526; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7725
+        konfession   = { lutherisch = 75 katholisch = 24 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = HAN
+        verwaltung = hn_hildesheim
+        bund       = ja
+    }
 }

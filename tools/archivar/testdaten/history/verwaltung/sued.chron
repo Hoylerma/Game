@@ -1,0 +1,14 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+einheit sl_land {
+    name   = "Land Südland"
+    art    = land
+    quelle = "Testquelle"
+}
+
+einheit sl_burg {
+    name   = "Kreis Burg"
+    art    = kreis
+    ueber  = sl_land
+    quelle = "Testquelle"
+}

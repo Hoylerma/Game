@@ -1,0 +1,25 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+staat SCG {
+    name     = "Herzogtum Sachsen-Coburg und Gotha"
+    kurzname = "Sachsen-Coburg und Gotha"
+    farbe    = { 165 200 110 }
+    quelle   = "Seit 1826; zwei Herzogtümer in Personalunion mit Residenzen in Coburg und Gotha. Schatz, Steuersätze, Hofhaltung und Heer sind Spielwerte"
+
+    1844.01.29 = {
+        herrscher = "Ernst II."
+    }
+
+    1848.03.01 = {
+        hauptstadt     = coburg
+        regierungsform = konstitutionelle_monarchie
+        konfession     = lutherisch
+        schatz         = 43800
+        kontribution   = 0.10
+        akzise         = 0.05
+        zoll           = 0.03
+        hofhaltung     = 36500
+        heer           = 6
+        zollverein     = ja
+    }
+}

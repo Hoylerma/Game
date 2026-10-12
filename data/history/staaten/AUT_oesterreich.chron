@@ -1,0 +1,30 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+staat AUT {
+    name     = "Kaisertum Österreich"
+    kurzname = "Österreich"
+    farbe    = { 222 200 120 }
+    quelle   = "Präsidialmacht des Bundes; Galizien (mit Krakau seit 1846), Ungarn und Lombardo-Venetien liegen außerhalb des Bundesgebiets. Staatskanzler Metternich bis zum 13. März 1848. Schatz, Steuersätze, Hofhaltung und Heer sind Spielwerte"
+
+    1835.03.02 = {
+        herrscher = "Ferdinand I."
+    }
+
+    1848.03.01 = {
+        hauptstadt     = wien
+        regierungsform = absolute_monarchie
+        konfession     = katholisch
+        schatz         = 1157100
+        kontribution   = 0.12
+        akzise         = 0.05
+        zoll           = 0.03
+        hofhaltung     = 2892800
+        heer           = 10
+        schulden       = 17356000
+        zollverein     = nein
+    }
+
+    1848.12.02 = {
+        herrscher = "Franz Joseph I."
+    }
+}

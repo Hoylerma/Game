@@ -18,6 +18,19 @@ ort daun {
     stadt    = ja
     kreis    = kr_daun
     quelle   = "GeoNames (CC BY 4.0), geonameid 2938714; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8070
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
+    }
 }
 
 ort gerolstein {
@@ -28,6 +41,19 @@ ort gerolstein {
     stadt    = nein
     kreis    = kr_daun
     quelle   = "GeoNames (CC BY 4.0), geonameid 2920963; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10054
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
+    }
 }
 
 ort kelberg {
@@ -38,6 +64,19 @@ ort kelberg {
     stadt    = nein
     kreis    = kr_daun
     quelle   = "GeoNames (CC BY 4.0), geonameid 2891846; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6451
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
+    }
 }
 
 ort uexheim {
@@ -48,6 +87,19 @@ ort uexheim {
     stadt    = nein
     kreis    = kr_daun
     quelle   = "GeoNames (CC BY 4.0), geonameid 2817980; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10263
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
+    }
 }
 
 ort gillenfeld {
@@ -58,6 +110,19 @@ ort gillenfeld {
     stadt    = nein
     kreis    = kr_daun
     quelle   = "GeoNames (CC BY 4.0), geonameid 2920413; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6336
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
+    }
 }
 
 ort lissendorf {
@@ -68,6 +133,19 @@ ort lissendorf {
     stadt    = nein
     kreis    = kr_daun
     quelle   = "GeoNames (CC BY 4.0), geonameid 2876842; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 5278
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
+    }
 }
 
 ort bitburg {
@@ -78,6 +156,19 @@ ort bitburg {
     stadt    = nein
     kreis    = kr_bitburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2948184; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9530
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
+    }
 }
 
 ort pruem {
@@ -88,6 +179,19 @@ ort pruem {
     stadt    = nein
     kreis    = kr_bitburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2851826; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 15028
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
+    }
 }
 
 ort arzfeld {
@@ -98,6 +202,19 @@ ort arzfeld {
     stadt    = nein
     kreis    = kr_bitburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2955363; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12096
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
+    }
 }
 
 ort bleialf {
@@ -108,6 +225,19 @@ ort bleialf {
     stadt    = nein
     kreis    = kr_bitburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2947874; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11154
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
+    }
 }
 
 ort kyllburg {
@@ -118,6 +248,19 @@ ort kyllburg {
     stadt    = nein
     kreis    = kr_bitburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2882167; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 15447
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
+    }
 }
 
 ort mettendorf {
@@ -128,6 +271,19 @@ ort mettendorf {
     stadt    = nein
     kreis    = kr_bitburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2871559; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9583
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
+    }
 }
 
 ort trier {
@@ -138,6 +294,19 @@ ort trier {
     stadt    = ja
     kreis    = kr_trier
     quelle   = "GeoNames (CC BY 4.0), geonameid 2821164; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 26488
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
+    }
 }
 
 ort konz {
@@ -148,6 +317,19 @@ ort konz {
     stadt    = nein
     kreis    = kr_trier
     quelle   = "GeoNames (CC BY 4.0), geonameid 2885672; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6336
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
+    }
 }
 
 ort saarburg_trier {
@@ -158,6 +340,19 @@ ort saarburg_trier {
     stadt    = nein
     kreis    = kr_trier
     quelle   = "GeoNames (CC BY 4.0), geonameid 2842644; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6388
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
+    }
 }
 
 ort schweich {
@@ -168,6 +363,19 @@ ort schweich {
     stadt    = nein
     kreis    = kr_trier
     quelle   = "GeoNames (CC BY 4.0), geonameid 2834594; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7645
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
+    }
 }
 
 ort welschbillig {
@@ -178,6 +386,19 @@ ort welschbillig {
     stadt    = nein
     kreis    = kr_trier
     quelle   = "GeoNames (CC BY 4.0), geonameid 2811420; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7855
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
+    }
 }
 
 ort zemmer {
@@ -188,6 +409,19 @@ ort zemmer {
     stadt    = nein
     kreis    = kr_trier
     quelle   = "GeoNames (CC BY 4.0), geonameid 2804791; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8116
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
+    }
 }
 
 ort zerf {
@@ -198,6 +432,19 @@ ort zerf {
     stadt    = nein
     kreis    = kr_trier
     quelle   = "GeoNames (CC BY 4.0), geonameid 2804745; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6535
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
+    }
 }
 
 ort idar_oberstein {
@@ -208,6 +455,18 @@ ort idar_oberstein {
     stadt    = ja
     kreis    = kr_idar_oberstein
     quelle   = "GeoNames (CC BY 4.0), geonameid 2896753; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9318
+        konfession   = { lutherisch = 75 katholisch = 24 juedisch = 1 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
 }
 
 ort wittlich {
@@ -218,6 +477,19 @@ ort wittlich {
     stadt    = ja
     kreis    = kr_idar_oberstein
     quelle   = "GeoNames (CC BY 4.0), geonameid 2807240; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 13056
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
+    }
 }
 
 ort birkenfeld {
@@ -228,6 +500,18 @@ ort birkenfeld {
     stadt    = ja
     kreis    = kr_idar_oberstein
     quelle   = "GeoNames (CC BY 4.0), geonameid 2948595; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6879
+        konfession   = { lutherisch = 75 katholisch = 24 juedisch = 1 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
 }
 
 ort bernkastel_kues {
@@ -238,6 +522,19 @@ ort bernkastel_kues {
     stadt    = nein
     kreis    = kr_idar_oberstein
     quelle   = "GeoNames (CC BY 4.0), geonameid 2949998; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6200
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
+    }
 }
 
 ort morbach {
@@ -248,6 +545,19 @@ ort morbach {
     stadt    = nein
     kreis    = kr_idar_oberstein
     quelle   = "GeoNames (CC BY 4.0), geonameid 2869306; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7917
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
+    }
 }
 
 ort baumholder {
@@ -258,6 +568,18 @@ ort baumholder {
     stadt    = nein
     kreis    = kr_idar_oberstein
     quelle   = "GeoNames (CC BY 4.0), geonameid 2951950; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 4603
+        konfession   = { lutherisch = 75 katholisch = 24 juedisch = 1 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
 }
 
 ort neumagen_dhron {
@@ -268,6 +590,19 @@ ort neumagen_dhron {
     stadt    = nein
     kreis    = kr_idar_oberstein
     quelle   = "GeoNames (CC BY 4.0), geonameid 3207532; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10211
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
+    }
 }
 
 ort reinsfeld {
@@ -278,6 +613,19 @@ ort reinsfeld {
     stadt    = nein
     kreis    = kr_idar_oberstein
     quelle   = "GeoNames (CC BY 4.0), geonameid 2848710; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8085
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
+    }
 }
 
 ort rhaunen {
@@ -288,6 +636,19 @@ ort rhaunen {
     stadt    = nein
     kreis    = kr_idar_oberstein
     quelle   = "GeoNames (CC BY 4.0), geonameid 2847695; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7279
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
+    }
 }
 
 ort thalfang {
@@ -298,6 +659,19 @@ ort thalfang {
     stadt    = nein
     kreis    = kr_idar_oberstein
     quelle   = "GeoNames (CC BY 4.0), geonameid 3204961; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7038
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
+    }
 }
 
 ort kinderbeuern {
@@ -308,4 +682,17 @@ ort kinderbeuern {
     stadt    = nein
     kreis    = kr_idar_oberstein
     quelle   = "GeoNames (CC BY 4.0), geonameid 2890873; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6964
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
+    }
 }

@@ -17,6 +17,19 @@ ort noerdlingen {
     stadt    = nein
     kreis    = kr_noerdlingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2861914; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11119
+        konfession   = { katholisch = 86 lutherisch = 13 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_schwaben
+        bund       = ja
+    }
 }
 
 ort donauwoerth {
@@ -27,6 +40,19 @@ ort donauwoerth {
     stadt    = ja
     kreis    = kr_noerdlingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2936253; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8760
+        konfession   = { katholisch = 86 lutherisch = 13 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_schwaben
+        bund       = ja
+    }
 }
 
 ort oettingen_in_bayern {
@@ -37,6 +63,19 @@ ort oettingen_in_bayern {
     stadt    = nein
     kreis    = kr_noerdlingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2857847; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7099
+        konfession   = { katholisch = 86 lutherisch = 13 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_schwaben
+        bund       = ja
+    }
 }
 
 ort wemding {
@@ -47,6 +86,19 @@ ort wemding {
     stadt    = nein
     kreis    = kr_noerdlingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2811342; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6316
+        konfession   = { katholisch = 86 lutherisch = 13 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_schwaben
+        bund       = ja
+    }
 }
 
 ort monheim {
@@ -57,6 +109,19 @@ ort monheim {
     stadt    = nein
     kreis    = kr_noerdlingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2869792; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8613
+        konfession   = { katholisch = 86 lutherisch = 13 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_schwaben
+        bund       = ja
+    }
 }
 
 ort harburg {
@@ -67,6 +132,19 @@ ort harburg {
     stadt    = nein
     kreis    = kr_noerdlingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2910686; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8874
+        konfession   = { katholisch = 86 lutherisch = 13 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_schwaben
+        bund       = ja
+    }
 }
 
 ort tapfheim {
@@ -77,6 +155,19 @@ ort tapfheim {
     stadt    = nein
     kreis    = kr_noerdlingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2824005; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10519
+        konfession   = { katholisch = 86 lutherisch = 13 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_schwaben
+        bund       = ja
+    }
 }
 
 ort rain {
@@ -87,6 +178,19 @@ ort rain {
     stadt    = nein
     kreis    = kr_noerdlingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2850808; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10754
+        konfession   = { katholisch = 86 lutherisch = 13 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_schwaben
+        bund       = ja
+    }
 }
 
 ort fremdingen {
@@ -97,6 +201,19 @@ ort fremdingen {
     stadt    = nein
     kreis    = kr_noerdlingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2924999; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6108
+        konfession   = { katholisch = 86 lutherisch = 13 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_schwaben
+        bund       = ja
+    }
 }
 
 ort aichach {
@@ -107,6 +224,19 @@ ort aichach {
     stadt    = ja
     kreis    = kr_aichach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2958975; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10416
+        konfession   = { katholisch = 86 lutherisch = 13 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_schwaben
+        bund       = ja
+    }
 }
 
 ort poettmes {
@@ -117,6 +247,19 @@ ort poettmes {
     stadt    = nein
     kreis    = kr_aichach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2852422; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11798
+        konfession   = { katholisch = 86 lutherisch = 13 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_schwaben
+        bund       = ja
+    }
 }
 
 ort affing {
@@ -127,6 +270,19 @@ ort affing {
     stadt    = nein
     kreis    = kr_aichach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2959343; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7256
+        konfession   = { katholisch = 86 lutherisch = 13 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_schwaben
+        bund       = ja
+    }
 }
 
 ort dasing {
@@ -137,6 +293,19 @@ ort dasing {
     stadt    = nein
     kreis    = kr_aichach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2938837; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6995
+        konfession   = { katholisch = 86 lutherisch = 13 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_schwaben
+        bund       = ja
+    }
 }
 
 ort guenzburg {
@@ -147,6 +316,19 @@ ort guenzburg {
     stadt    = ja
     kreis    = kr_guenzburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2913555; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10015
+        konfession   = { katholisch = 86 lutherisch = 13 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_schwaben
+        bund       = ja
+    }
 }
 
 ort dillingen_an_der_donau {
@@ -157,6 +339,19 @@ ort dillingen_an_der_donau {
     stadt    = ja
     kreis    = kr_guenzburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2936974; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 14130
+        konfession   = { katholisch = 86 lutherisch = 13 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_schwaben
+        bund       = ja
+    }
 }
 
 ort burgau {
@@ -167,6 +362,19 @@ ort burgau {
     stadt    = nein
     kreis    = kr_guenzburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2941485; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7047
+        konfession   = { katholisch = 86 lutherisch = 13 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_schwaben
+        bund       = ja
+    }
 }
 
 ort ichenhausen {
@@ -177,6 +385,19 @@ ort ichenhausen {
     stadt    = nein
     kreis    = kr_guenzburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2896776; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6995
+        konfession   = { katholisch = 86 lutherisch = 13 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_schwaben
+        bund       = ja
+    }
 }
 
 ort gundelfingen {
@@ -187,6 +408,19 @@ ort gundelfingen {
     stadt    = nein
     kreis    = kr_guenzburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2913711; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8890
+        konfession   = { katholisch = 86 lutherisch = 13 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_schwaben
+        bund       = ja
+    }
 }
 
 ort ziertheim {
@@ -197,6 +431,19 @@ ort ziertheim {
     stadt    = nein
     kreis    = kr_guenzburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2804283; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7465
+        konfession   = { katholisch = 86 lutherisch = 13 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_schwaben
+        bund       = ja
+    }
 }
 
 ort ulm {
@@ -207,6 +454,19 @@ ort ulm {
     stadt    = ja
     kreis    = kr_ulm
     quelle   = "GeoNames (CC BY 4.0), geonameid 2820256; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 24319
+        konfession   = { katholisch = 70 lutherisch = 29 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = WUE
+        verwaltung = wu_donaukreis
+        bund       = ja
+    }
 }
 
 ort langenau {
@@ -217,6 +477,19 @@ ort langenau {
     stadt    = nein
     kreis    = kr_ulm
     quelle   = "GeoNames (CC BY 4.0), geonameid 2881259; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10273
+        konfession   = { katholisch = 70 lutherisch = 29 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = WUE
+        verwaltung = wu_donaukreis
+        bund       = ja
+    }
 }
 
 ort laichingen {
@@ -227,6 +500,19 @@ ort laichingen {
     stadt    = nein
     kreis    = kr_ulm
     quelle   = "GeoNames (CC BY 4.0), geonameid 2881857; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11849
+        konfession   = { katholisch = 70 lutherisch = 29 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = WUE
+        verwaltung = wu_donaukreis
+        bund       = ja
+    }
 }
 
 ort dornstadt {
@@ -237,6 +523,19 @@ ort dornstadt {
     stadt    = nein
     kreis    = kr_ulm
     quelle   = "GeoNames (CC BY 4.0), geonameid 2935647; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7878
+        konfession   = { katholisch = 70 lutherisch = 29 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = WUE
+        verwaltung = wu_donaukreis
+        bund       = ja
+    }
 }
 
 ort blaubeuren {
@@ -247,6 +546,19 @@ ort blaubeuren {
     stadt    = nein
     kreis    = kr_ulm
     quelle   = "GeoNames (CC BY 4.0), geonameid 2947949; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8017
+        konfession   = { katholisch = 70 lutherisch = 29 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = WUE
+        verwaltung = wu_donaukreis
+        bund       = ja
+    }
 }
 
 ort lonsee {
@@ -257,6 +569,19 @@ ort lonsee {
     stadt    = nein
     kreis    = kr_ulm
     quelle   = "GeoNames (CC BY 4.0), geonameid 2875978; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7374
+        konfession   = { katholisch = 70 lutherisch = 29 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = WUE
+        verwaltung = wu_donaukreis
+        bund       = ja
+    }
 }
 
 ort nellingen {
@@ -267,6 +592,19 @@ ort nellingen {
     stadt    = nein
     kreis    = kr_ulm
     quelle   = "GeoNames (CC BY 4.0), geonameid 2866561; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 5483
+        konfession   = { katholisch = 70 lutherisch = 29 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = WUE
+        verwaltung = wu_donaukreis
+        bund       = ja
+    }
 }
 
 ort augsburg {
@@ -277,6 +615,19 @@ ort augsburg {
     stadt    = ja
     kreis    = kr_augsburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2954172; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 44577
+        konfession   = { katholisch = 86 lutherisch = 13 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_schwaben
+        bund       = ja
+    }
 }
 
 ort koenigsbrunn {
@@ -287,6 +638,19 @@ ort koenigsbrunn {
     stadt    = ja
     kreis    = kr_augsburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2885908; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10457
+        konfession   = { katholisch = 86 lutherisch = 13 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_schwaben
+        bund       = ja
+    }
 }
 
 ort schwabmuenchen {
@@ -297,6 +661,19 @@ ort schwabmuenchen {
     stadt    = nein
     kreis    = kr_augsburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2835477; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7674
+        konfession   = { katholisch = 86 lutherisch = 13 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_schwaben
+        bund       = ja
+    }
 }
 
 ort meitingen {
@@ -307,6 +684,19 @@ ort meitingen {
     stadt    = nein
     kreis    = kr_augsburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2872126; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8822
+        konfession   = { katholisch = 86 lutherisch = 13 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_schwaben
+        bund       = ja
+    }
 }
 
 ort diedorf {
@@ -317,6 +707,19 @@ ort diedorf {
     stadt    = nein
     kreis    = kr_augsburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2937553; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6682
+        konfession   = { katholisch = 86 lutherisch = 13 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_schwaben
+        bund       = ja
+    }
 }
 
 ort wertingen {
@@ -327,6 +730,19 @@ ort wertingen {
     stadt    = nein
     kreis    = kr_augsburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2810702; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8979
+        konfession   = { katholisch = 86 lutherisch = 13 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_schwaben
+        bund       = ja
+    }
 }
 
 ort dinkelscherben {
@@ -337,6 +753,19 @@ ort dinkelscherben {
     stadt    = nein
     kreis    = kr_augsburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2936885; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6786
+        konfession   = { katholisch = 86 lutherisch = 13 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_schwaben
+        bund       = ja
+    }
 }
 
 ort altenmuenster {
@@ -347,6 +776,19 @@ ort altenmuenster {
     stadt    = nein
     kreis    = kr_augsburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2957528; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8457
+        konfession   = { katholisch = 86 lutherisch = 13 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_schwaben
+        bund       = ja
+    }
 }
 
 ort gablingen {
@@ -357,6 +799,19 @@ ort gablingen {
     stadt    = nein
     kreis    = kr_augsburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2923439; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6316
+        konfession   = { katholisch = 86 lutherisch = 13 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_schwaben
+        bund       = ja
+    }
 }
 
 ort horgau {
@@ -367,6 +822,19 @@ ort horgau {
     stadt    = nein
     kreis    = kr_augsburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2899048; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 5011
+        konfession   = { katholisch = 86 lutherisch = 13 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_schwaben
+        bund       = ja
+    }
 }
 
 ort langenneufnach {
@@ -377,6 +845,19 @@ ort langenneufnach {
     stadt    = nein
     kreis    = kr_augsburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2880965; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7360
+        konfession   = { katholisch = 86 lutherisch = 13 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_schwaben
+        bund       = ja
+    }
 }
 
 ort krumbach {
@@ -387,6 +868,19 @@ ort krumbach {
     stadt    = nein
     kreis    = kr_krumbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2883410; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7882
+        konfession   = { katholisch = 86 lutherisch = 13 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_schwaben
+        bund       = ja
+    }
 }
 
 ort babenhausen_schwaben {
@@ -397,6 +891,19 @@ ort babenhausen_schwaben {
     stadt    = nein
     kreis    = kr_krumbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953771; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9083
+        konfession   = { katholisch = 86 lutherisch = 13 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_schwaben
+        bund       = ja
+    }
 }
 
 ort thannhausen {
@@ -407,6 +914,19 @@ ort thannhausen {
     stadt    = nein
     kreis    = kr_krumbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2822958; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7152
+        konfession   = { katholisch = 86 lutherisch = 13 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_schwaben
+        bund       = ja
+    }
 }
 
 ort eppishausen {
@@ -417,6 +937,19 @@ ort eppishausen {
     stadt    = nein
     kreis    = kr_krumbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2929827; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7047
+        konfession   = { katholisch = 86 lutherisch = 13 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_schwaben
+        bund       = ja
+    }
 }
 
 ort breitenbrunn {
@@ -427,6 +960,19 @@ ort breitenbrunn {
     stadt    = nein
     kreis    = kr_krumbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2944638; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6160
+        konfession   = { katholisch = 86 lutherisch = 13 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_schwaben
+        bund       = ja
+    }
 }
 
 ort riedlingen {
@@ -437,6 +983,19 @@ ort riedlingen {
     stadt    = nein
     kreis    = kr_riedlingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2847080; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8218
+        konfession   = { katholisch = 70 lutherisch = 29 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = WUE
+        verwaltung = wu_donaukreis
+        bund       = ja
+    }
 }
 
 ort gammertingen {
@@ -447,6 +1006,18 @@ ort gammertingen {
     stadt    = nein
     kreis    = kr_riedlingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2922747; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 17164
+        konfession   = { katholisch = 98 lutherisch = 2 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = HSI
+        bund     = ja
+    }
 }
 
 ort uttenweiler {
@@ -457,6 +1028,19 @@ ort uttenweiler {
     stadt    = nein
     kreis    = kr_riedlingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2818025; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9643
+        konfession   = { katholisch = 70 lutherisch = 29 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = WUE
+        verwaltung = wu_donaukreis
+        bund       = ja
+    }
 }
 
 ort obermarchtal {
@@ -467,6 +1051,19 @@ ort obermarchtal {
     stadt    = nein
     kreis    = kr_riedlingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2859826; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7866
+        konfession   = { katholisch = 70 lutherisch = 29 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = WUE
+        verwaltung = wu_donaukreis
+        bund       = ja
+    }
 }
 
 ort biberach_an_der_riss {
@@ -477,6 +1074,19 @@ ort biberach_an_der_riss {
     stadt    = ja
     kreis    = kr_biberach_an_der_riss
     quelle   = "GeoNames (CC BY 4.0), geonameid 2949423; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 14494
+        konfession   = { katholisch = 70 lutherisch = 29 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = WUE
+        verwaltung = wu_donaukreis
+        bund       = ja
+    }
 }
 
 ort ehingen {
@@ -487,6 +1097,19 @@ ort ehingen {
     stadt    = ja
     kreis    = kr_biberach_an_der_riss
     quelle   = "GeoNames (CC BY 4.0), geonameid 2932924; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 13326
+        konfession   = { katholisch = 70 lutherisch = 29 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = WUE
+        verwaltung = wu_donaukreis
+        bund       = ja
+    }
 }
 
 ort laupheim {
@@ -497,6 +1120,19 @@ ort laupheim {
     stadt    = nein
     kreis    = kr_biberach_an_der_riss
     quelle   = "GeoNames (CC BY 4.0), geonameid 2880077; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9643
+        konfession   = { katholisch = 70 lutherisch = 29 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = WUE
+        verwaltung = wu_donaukreis
+        bund       = ja
+    }
 }
 
 ort illertissen {
@@ -507,6 +1143,19 @@ ort illertissen {
     stadt    = nein
     kreis    = kr_biberach_an_der_riss
     quelle   = "GeoNames (CC BY 4.0), geonameid 2896546; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8143
+        konfession   = { katholisch = 86 lutherisch = 13 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_schwaben
+        bund       = ja
+    }
 }
 
 ort weissenhorn {
@@ -517,6 +1166,19 @@ ort weissenhorn {
     stadt    = nein
     kreis    = kr_biberach_an_der_riss
     quelle   = "GeoNames (CC BY 4.0), geonameid 2811879; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7569
+        konfession   = { katholisch = 86 lutherisch = 13 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_schwaben
+        bund       = ja
+    }
 }
 
 ort senden_schwaben {
@@ -527,6 +1189,19 @@ ort senden_schwaben {
     stadt    = ja
     kreis    = kr_biberach_an_der_riss
     quelle   = "GeoNames (CC BY 4.0), geonameid 2833080; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9117
+        konfession   = { katholisch = 86 lutherisch = 13 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_schwaben
+        bund       = ja
+    }
 }
 
 ort ochsenhausen {
@@ -537,6 +1212,19 @@ ort ochsenhausen {
     stadt    = nein
     kreis    = kr_biberach_an_der_riss
     quelle   = "GeoNames (CC BY 4.0), geonameid 2858326; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10084
+        konfession   = { katholisch = 70 lutherisch = 29 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = WUE
+        verwaltung = wu_donaukreis
+        bund       = ja
+    }
 }
 
 ort erbach {
@@ -547,6 +1235,19 @@ ort erbach {
     stadt    = nein
     kreis    = kr_biberach_an_der_riss
     quelle   = "GeoNames (CC BY 4.0), geonameid 2929804; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7626
+        konfession   = { katholisch = 70 lutherisch = 29 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = WUE
+        verwaltung = wu_donaukreis
+        bund       = ja
+    }
 }
 
 ort erolzheim {
@@ -557,6 +1258,19 @@ ort erolzheim {
     stadt    = nein
     kreis    = kr_biberach_an_der_riss
     quelle   = "GeoNames (CC BY 4.0), geonameid 2929305; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8508
+        konfession   = { katholisch = 70 lutherisch = 29 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = WUE
+        verwaltung = wu_donaukreis
+        bund       = ja
+    }
 }
 
 ort schwendi {
@@ -567,6 +1281,19 @@ ort schwendi {
     stadt    = nein
     kreis    = kr_biberach_an_der_riss
     quelle   = "GeoNames (CC BY 4.0), geonameid 2834334; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9076
+        konfession   = { katholisch = 70 lutherisch = 29 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = WUE
+        verwaltung = wu_donaukreis
+        bund       = ja
+    }
 }
 
 ort sigmaringen {
@@ -577,6 +1304,18 @@ ort sigmaringen {
     stadt    = ja
     kreis    = kr_sigmaringen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2832232; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10510
+        konfession   = { katholisch = 98 lutherisch = 2 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = HSI
+        bund     = ja
+    }
 }
 
 ort pfullendorf {
@@ -587,6 +1326,19 @@ ort pfullendorf {
     stadt    = nein
     kreis    = kr_sigmaringen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2853930; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9559
+        konfession   = { katholisch = 95 lutherisch = 5 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAD
+        verwaltung = bd_seekreis
+        bund       = ja
+    }
 }
 
 ort messkirch {
@@ -597,6 +1349,19 @@ ort messkirch {
     stadt    = nein
     kreis    = kr_sigmaringen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2871609; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10180
+        konfession   = { katholisch = 95 lutherisch = 5 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAD
+        verwaltung = bd_seekreis
+        bund       = ja
+    }
 }
 
 ort mengen {
@@ -607,6 +1372,19 @@ ort mengen {
     stadt    = nein
     kreis    = kr_sigmaringen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2871964; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10651
+        konfession   = { katholisch = 70 lutherisch = 29 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = WUE
+        verwaltung = wu_donaukreis
+        bund       = ja
+    }
 }
 
 ort ostrach {
@@ -617,6 +1395,18 @@ ort ostrach {
     stadt    = nein
     kreis    = kr_sigmaringen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2856222; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7102
+        konfession   = { katholisch = 98 lutherisch = 2 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer = HSI
+        bund     = ja
+    }
 }
 
 ort leibertingen {
@@ -627,6 +1417,19 @@ ort leibertingen {
     stadt    = nein
     kreis    = kr_sigmaringen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2879335; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 5860
+        konfession   = { katholisch = 95 lutherisch = 5 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAD
+        verwaltung = bd_seekreis
+        bund       = ja
+    }
 }
 
 ort stetten_am_kalten_markt {
@@ -637,6 +1440,19 @@ ort stetten_am_kalten_markt {
     stadt    = nein
     kreis    = kr_sigmaringen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2827216; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 4817
+        konfession   = { katholisch = 95 lutherisch = 5 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAD
+        verwaltung = bd_seekreis
+        bund       = ja
+    }
 }
 
 ort kaufbeuren {
@@ -647,6 +1463,19 @@ ort kaufbeuren {
     stadt    = ja
     kreis    = kr_kaufbeuren
     quelle   = "GeoNames (CC BY 4.0), geonameid 2892080; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10891
+        konfession   = { katholisch = 86 lutherisch = 13 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_schwaben
+        bund       = ja
+    }
 }
 
 ort marktoberdorf {
@@ -657,6 +1486,19 @@ ort marktoberdorf {
     stadt    = ja
     kreis    = kr_kaufbeuren
     quelle   = "GeoNames (CC BY 4.0), geonameid 2873291; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12428
+        konfession   = { katholisch = 86 lutherisch = 13 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_schwaben
+        bund       = ja
+    }
 }
 
 ort mindelheim {
@@ -667,6 +1509,19 @@ ort mindelheim {
     stadt    = ja
     kreis    = kr_kaufbeuren
     quelle   = "GeoNames (CC BY 4.0), geonameid 2871045; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8717
+        konfession   = { katholisch = 86 lutherisch = 13 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_schwaben
+        bund       = ja
+    }
 }
 
 ort bad_woerishofen {
@@ -677,6 +1532,19 @@ ort bad_woerishofen {
     stadt    = nein
     kreis    = kr_kaufbeuren
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953313; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8665
+        konfession   = { katholisch = 86 lutherisch = 13 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_schwaben
+        bund       = ja
+    }
 }
 
 ort buchloe {
@@ -687,6 +1555,19 @@ ort buchloe {
     stadt    = nein
     kreis    = kr_kaufbeuren
     quelle   = "GeoNames (CC BY 4.0), geonameid 2942281; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 5533
+        konfession   = { katholisch = 86 lutherisch = 13 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_schwaben
+        bund       = ja
+    }
 }
 
 ort ettringen {
@@ -697,6 +1578,19 @@ ort ettringen {
     stadt    = nein
     kreis    = kr_kaufbeuren
     quelle   = "GeoNames (CC BY 4.0), geonameid 3208331; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6891
+        konfession   = { katholisch = 86 lutherisch = 13 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_schwaben
+        bund       = ja
+    }
 }
 
 ort bidingen {
@@ -707,6 +1601,19 @@ ort bidingen {
     stadt    = nein
     kreis    = kr_kaufbeuren
     quelle   = "GeoNames (CC BY 4.0), geonameid 2949279; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6598
+        konfession   = { katholisch = 86 lutherisch = 13 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_schwaben
+        bund       = ja
+    }
 }
 
 ort oberostendorf {
@@ -717,6 +1624,19 @@ ort oberostendorf {
     stadt    = nein
     kreis    = kr_kaufbeuren
     quelle   = "GeoNames (CC BY 4.0), geonameid 2859465; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7152
+        konfession   = { katholisch = 86 lutherisch = 13 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_schwaben
+        bund       = ja
+    }
 }
 
 ort ravensburg {
@@ -727,6 +1647,19 @@ ort ravensburg {
     stadt    = ja
     kreis    = kr_ravensburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2849802; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10187
+        konfession   = { katholisch = 70 lutherisch = 29 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = WUE
+        verwaltung = wu_donaukreis
+        bund       = ja
+    }
 }
 
 ort ueberlingen {
@@ -737,6 +1670,19 @@ ort ueberlingen {
     stadt    = ja
     kreis    = kr_ravensburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2820577; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 5197
+        konfession   = { katholisch = 95 lutherisch = 5 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAD
+        verwaltung = bd_seekreis
+        bund       = ja
+    }
 }
 
 ort markdorf {
@@ -747,6 +1693,19 @@ ort markdorf {
     stadt    = nein
     kreis    = kr_ravensburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2873427; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 5264
+        konfession   = { katholisch = 95 lutherisch = 5 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAD
+        verwaltung = bd_seekreis
+        bund       = ja
+    }
 }
 
 ort saulgau {
@@ -757,6 +1716,19 @@ ort saulgau {
     stadt    = nein
     kreis    = kr_ravensburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2841125; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8571
+        konfession   = { katholisch = 70 lutherisch = 29 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = WUE
+        verwaltung = wu_donaukreis
+        bund       = ja
+    }
 }
 
 ort salem {
@@ -767,6 +1739,19 @@ ort salem {
     stadt    = nein
     kreis    = kr_ravensburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 6639586; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6157
+        konfession   = { katholisch = 95 lutherisch = 5 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAD
+        verwaltung = bd_seekreis
+        bund       = ja
+    }
 }
 
 ort bad_schussenried {
@@ -777,6 +1762,19 @@ ort bad_schussenried {
     stadt    = nein
     kreis    = kr_ravensburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2835635; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9076
+        konfession   = { katholisch = 70 lutherisch = 29 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = WUE
+        verwaltung = wu_donaukreis
+        bund       = ja
+    }
 }
 
 ort altshausen {
@@ -787,6 +1785,19 @@ ort altshausen {
     stadt    = nein
     kreis    = kr_ravensburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2956847; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7563
+        konfession   = { katholisch = 70 lutherisch = 29 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = WUE
+        verwaltung = wu_donaukreis
+        bund       = ja
+    }
 }
 
 ort horgenzell {
@@ -797,6 +1808,19 @@ ort horgenzell {
     stadt    = nein
     kreis    = kr_ravensburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2899040; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 4840
+        konfession   = { katholisch = 70 lutherisch = 29 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = WUE
+        verwaltung = wu_donaukreis
+        bund       = ja
+    }
 }
 
 ort baindt {
@@ -807,6 +1831,19 @@ ort baindt {
     stadt    = nein
     kreis    = kr_ravensburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953178; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6303
+        konfession   = { katholisch = 70 lutherisch = 29 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = WUE
+        verwaltung = wu_donaukreis
+        bund       = ja
+    }
 }
 
 ort herdwangen_schoenach {
@@ -817,6 +1854,19 @@ ort herdwangen_schoenach {
     stadt    = nein
     kreis    = kr_ravensburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 3205658; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7151
+        konfession   = { katholisch = 95 lutherisch = 5 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAD
+        verwaltung = bd_seekreis
+        bund       = ja
+    }
 }
 
 ort wilhelmsdorf {
@@ -827,6 +1877,19 @@ ort wilhelmsdorf {
     stadt    = nein
     kreis    = kr_ravensburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2808746; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 5748
+        konfession   = { katholisch = 70 lutherisch = 29 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = WUE
+        verwaltung = wu_donaukreis
+        bund       = ja
+    }
 }
 
 ort kempten_allgaeu {
@@ -837,6 +1900,19 @@ ort kempten_allgaeu {
     stadt    = ja
     kreis    = kr_kempten_allgaeu
     quelle   = "GeoNames (CC BY 4.0), geonameid 2891621; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 13966
+        konfession   = { katholisch = 86 lutherisch = 13 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_schwaben
+        bund       = ja
+    }
 }
 
 ort memmingen {
@@ -847,6 +1923,19 @@ ort memmingen {
     stadt    = ja
     kreis    = kr_kempten_allgaeu
     quelle   = "GeoNames (CC BY 4.0), geonameid 2871992; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11288
+        konfession   = { katholisch = 86 lutherisch = 13 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_schwaben
+        bund       = ja
+    }
 }
 
 ort altusried {
@@ -857,6 +1946,19 @@ ort altusried {
     stadt    = nein
     kreis    = kr_kempten_allgaeu
     quelle   = "GeoNames (CC BY 4.0), geonameid 2956787; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8728
+        konfession   = { katholisch = 86 lutherisch = 13 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_schwaben
+        bund       = ja
+    }
 }
 
 ort ottobeuren {
@@ -867,6 +1969,19 @@ ort ottobeuren {
     stadt    = nein
     kreis    = kr_kempten_allgaeu
     quelle   = "GeoNames (CC BY 4.0), geonameid 2855937; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8822
+        konfession   = { katholisch = 86 lutherisch = 13 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_schwaben
+        bund       = ja
+    }
 }
 
 ort oberguenzburg {
@@ -877,6 +1992,19 @@ ort oberguenzburg {
     stadt    = nein
     kreis    = kr_kempten_allgaeu
     quelle   = "GeoNames (CC BY 4.0), geonameid 2860540; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10336
+        konfession   = { katholisch = 86 lutherisch = 13 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_schwaben
+        bund       = ja
+    }
 }
 
 ort erkheim {
@@ -887,6 +2015,19 @@ ort erkheim {
     stadt    = nein
     kreis    = kr_kempten_allgaeu
     quelle   = "GeoNames (CC BY 4.0), geonameid 2929605; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7674
+        konfession   = { katholisch = 86 lutherisch = 13 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_schwaben
+        bund       = ja
+    }
 }
 
 ort aitrach {
@@ -897,6 +2038,19 @@ ort aitrach {
     stadt    = nein
     kreis    = kr_kempten_allgaeu
     quelle   = "GeoNames (CC BY 4.0), geonameid 2958798; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10903
+        konfession   = { katholisch = 70 lutherisch = 29 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = WUE
+        verwaltung = wu_donaukreis
+        bund       = ja
+    }
 }
 
 ort wangen {
@@ -907,6 +2061,19 @@ ort wangen {
     stadt    = ja
     kreis    = kr_wangen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2814270; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12390
+        konfession   = { katholisch = 70 lutherisch = 29 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = WUE
+        verwaltung = wu_donaukreis
+        bund       = ja
+    }
 }
 
 ort leutkirch {
@@ -917,6 +2084,19 @@ ort leutkirch {
     stadt    = ja
     kreis    = kr_wangen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2878270; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 13285
+        konfession   = { katholisch = 70 lutherisch = 29 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = WUE
+        verwaltung = wu_donaukreis
+        bund       = ja
+    }
 }
 
 ort bad_waldsee {
@@ -927,6 +2107,19 @@ ort bad_waldsee {
     stadt    = nein
     kreis    = kr_wangen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953320; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7626
+        konfession   = { katholisch = 70 lutherisch = 29 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = WUE
+        verwaltung = wu_donaukreis
+        bund       = ja
+    }
 }
 
 ort bad_wurzach {
@@ -937,6 +2130,19 @@ ort bad_wurzach {
     stadt    = nein
     kreis    = kr_wangen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953312; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10084
+        konfession   = { katholisch = 70 lutherisch = 29 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = WUE
+        verwaltung = wu_donaukreis
+        bund       = ja
+    }
 }
 
 ort kisslegg {
@@ -947,6 +2153,19 @@ ort kisslegg {
     stadt    = nein
     kreis    = kr_wangen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2890199; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9391
+        konfession   = { katholisch = 70 lutherisch = 29 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = WUE
+        verwaltung = wu_donaukreis
+        bund       = ja
+    }
 }
 
 ort eberhardzell {
@@ -957,6 +2176,19 @@ ort eberhardzell {
     stadt    = nein
     kreis    = kr_wangen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2934000; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8887
+        konfession   = { katholisch = 70 lutherisch = 29 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = WUE
+        verwaltung = wu_donaukreis
+        bund       = ja
+    }
 }
 
 ort bodnegg {
@@ -967,6 +2199,19 @@ ort bodnegg {
     stadt    = nein
     kreis    = kr_wangen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2947069; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 5546
+        konfession   = { katholisch = 70 lutherisch = 29 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = WUE
+        verwaltung = wu_donaukreis
+        bund       = ja
+    }
 }
 
 ort vogt {
@@ -977,6 +2222,19 @@ ort vogt {
     stadt    = nein
     kreis    = kr_wangen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2816796; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 5483
+        konfession   = { katholisch = 70 lutherisch = 29 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = WUE
+        verwaltung = wu_donaukreis
+        bund       = ja
+    }
 }
 
 ort friedrichshafen {
@@ -987,6 +2245,19 @@ ort friedrichshafen {
     stadt    = ja
     kreis    = kr_friedrichshafen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2924585; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10170
+        konfession   = { katholisch = 70 lutherisch = 29 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = WUE
+        verwaltung = wu_donaukreis
+        bund       = ja
+    }
 }
 
 ort lindau_schwaben {
@@ -997,6 +2268,19 @@ ort lindau_schwaben {
     stadt    = ja
     kreis    = kr_friedrichshafen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2877550; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Lage auf das nächste Landpixel gesetzt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6808
+        konfession   = { katholisch = 86 lutherisch = 13 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_schwaben
+        bund       = ja
+    }
 }
 
 ort meckenbeuren {
@@ -1007,6 +2291,19 @@ ort meckenbeuren {
     stadt    = nein
     kreis    = kr_friedrichshafen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2872585; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 5987
+        konfession   = { katholisch = 70 lutherisch = 29 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = WUE
+        verwaltung = wu_donaukreis
+        bund       = ja
+    }
 }
 
 ort kressbronn_am_bodensee {
@@ -1017,6 +2314,19 @@ ort kressbronn_am_bodensee {
     stadt    = nein
     kreis    = kr_friedrichshafen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2884344; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 4664
+        konfession   = { katholisch = 70 lutherisch = 29 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = WUE
+        verwaltung = wu_donaukreis
+        bund       = ja
+    }
 }
 
 ort fuessen {
@@ -1027,6 +2337,19 @@ ort fuessen {
     stadt    = nein
     kreis    = kr_fuessen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2923507; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7266
+        konfession   = { katholisch = 86 lutherisch = 13 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_schwaben
+        bund       = ja
+    }
 }
 
 ort pfronten {
@@ -1037,6 +2360,19 @@ ort pfronten {
     stadt    = nein
     kreis    = kr_fuessen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2853949; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 1942
+        konfession   = { katholisch = 86 lutherisch = 13 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_schwaben
+        bund       = ja
+    }
 }
 
 ort oy_mittelberg {
@@ -1047,6 +2383,19 @@ ort oy_mittelberg {
     stadt    = nein
     kreis    = kr_fuessen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3205561; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6974
+        konfession   = { katholisch = 86 lutherisch = 13 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_schwaben
+        bund       = ja
+    }
 }
 
 ort halblech {
@@ -1057,6 +2406,19 @@ ort halblech {
     stadt    = nein
     kreis    = kr_fuessen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2911648; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7517
+        konfession   = { katholisch = 86 lutherisch = 13 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_schwaben
+        bund       = ja
+    }
 }
 
 ort goerisried {
@@ -1067,6 +2429,19 @@ ort goerisried {
     stadt    = nein
     kreis    = kr_fuessen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2919008; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9918
+        konfession   = { katholisch = 86 lutherisch = 13 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_schwaben
+        bund       = ja
+    }
 }
 
 ort sonthofen {
@@ -1077,6 +2452,19 @@ ort sonthofen {
     stadt    = ja
     kreis    = kr_sonthofen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2831088; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 13831
+        konfession   = { katholisch = 86 lutherisch = 13 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_schwaben
+        bund       = ja
+    }
 }
 
 ort isny {
@@ -1087,6 +2475,19 @@ ort isny {
     stadt    = nein
     kreis    = kr_sonthofen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2895638; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9277
+        konfession   = { katholisch = 70 lutherisch = 29 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = WUE
+        verwaltung = wu_donaukreis
+        bund       = ja
+    }
 }
 
 ort oberstdorf {
@@ -1097,6 +2498,19 @@ ort oberstdorf {
     stadt    = nein
     kreis    = kr_sonthofen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2858964; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 3273
+        konfession   = { katholisch = 86 lutherisch = 13 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_schwaben
+        bund       = ja
+    }
 }
 
 ort oberstaufen {
@@ -1107,6 +2521,19 @@ ort oberstaufen {
     stadt    = nein
     kreis    = kr_sonthofen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2858966; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8394
+        konfession   = { katholisch = 86 lutherisch = 13 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_schwaben
+        bund       = ja
+    }
 }
 
 ort weitnau {
@@ -1117,6 +2544,19 @@ ort weitnau {
     stadt    = nein
     kreis    = kr_sonthofen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2811614; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7183
+        konfession   = { katholisch = 86 lutherisch = 13 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_schwaben
+        bund       = ja
+    }
 }
 
 ort scheidegg {
@@ -1127,4 +2567,17 @@ ort scheidegg {
     stadt    = nein
     kreis    = kr_sonthofen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2839980; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 4928
+        konfession   = { katholisch = 86 lutherisch = 13 juedisch = 1 }
+        kultur       = { schwaben = 100 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = BAV
+        verwaltung = by_schwaben
+        bund       = ja
+    }
 }

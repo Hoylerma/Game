@@ -28,4 +28,26 @@ staat BWO {
         hofhaltung     = 8000
         heer           = 6
     }
+
+    1815.06.08 = {
+        name     = "Herzogtum Braunschweig"
+        kurzname = "Braunschweig"
+    }
+
+    1831.04.20 = {
+        herrscher = "Wilhelm"
+    }
+
+    1848.03.01 = {
+        hauptstadt     = braunschweig
+        regierungsform = konstitutionelle_monarchie
+        konfession     = lutherisch
+        schatz         = 80400
+        kontribution   = 0.10
+        akzise         = 0.05
+        zoll           = 0.03
+        hofhaltung     = 67000
+        heer           = 6
+        zollverein     = ja
+    }
 }

@@ -18,6 +18,18 @@ ort memel {
     stadt    = ja
     kreis    = kr_memel
     quelle   = "GeoNames (CC BY 4.0), geonameid 598098; deutscher Name aus den GeoNames-Alternativnamen (heute Klaipėda); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 19099
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort heydekrug {
@@ -28,6 +40,18 @@ ort heydekrug {
     stadt    = ja
     kreis    = kr_memel
     quelle   = "GeoNames (CC BY 4.0), geonameid 594656; deutscher Name aus den GeoNames-Alternativnamen (heute Silute); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12659
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort russ {
@@ -38,6 +62,18 @@ ort russ {
     stadt    = nein
     kreis    = kr_memel
     quelle   = "GeoNames (CC BY 4.0), geonameid 595087; deutscher Name aus den GeoNames-Alternativnamen (heute Rusnė); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 14036
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort proekuls {
@@ -48,6 +84,18 @@ ort proekuls {
     stadt    = nein
     kreis    = kr_memel
     quelle   = "GeoNames (CC BY 4.0), geonameid 595598; deutscher Name aus den GeoNames-Alternativnamen (heute Priekulė); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 14951
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort tilsit {
@@ -58,6 +106,18 @@ ort tilsit {
     stadt    = ja
     kreis    = kr_tilsit
     quelle   = "GeoNames (CC BY 4.0), geonameid 490068; deutscher Name aus den GeoNames-Alternativnamen (heute Sovetsk); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10070
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort ragnit {
@@ -68,6 +128,18 @@ ort ragnit {
     stadt    = ja
     kreis    = kr_tilsit
     quelle   = "GeoNames (CC BY 4.0), geonameid 522742; deutscher Name aus den GeoNames-Alternativnamen (heute Neman); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 39467
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort heinrichswalde {
@@ -78,6 +150,18 @@ ort heinrichswalde {
     stadt    = ja
     kreis    = kr_tilsit
     quelle   = "GeoNames (CC BY 4.0), geonameid 492112; deutscher Name aus den GeoNames-Alternativnamen (heute Slavsk); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 38853
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort pogegen {
@@ -88,6 +172,18 @@ ort pogegen {
     stadt    = ja
     kreis    = kr_tilsit
     quelle   = "GeoNames (CC BY 4.0), geonameid 596399; deutscher Name aus den GeoNames-Alternativnamen (heute Pagėgiai); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 18548
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort koenigsberg {
@@ -98,6 +194,18 @@ ort koenigsberg {
     stadt    = ja
     kreis    = kr_koenigsberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 554234; deutscher Name aus den GeoNames-Alternativnamen (heute Kaliningrad); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 83457
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort cranz {
@@ -108,6 +216,18 @@ ort cranz {
     stadt    = ja
     kreis    = kr_koenigsberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 463828; deutscher Name aus den GeoNames-Alternativnamen (heute Zelenogradsk); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8437
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort tapiau {
@@ -118,6 +238,18 @@ ort tapiau {
     stadt    = ja
     kreis    = kr_koenigsberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 557710; deutscher Name aus den GeoNames-Alternativnamen (heute Gvardeysk); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 15992
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort neuhausen_ostpreussen {
@@ -128,6 +260,18 @@ ort neuhausen_ostpreussen {
     stadt    = ja
     kreis    = kr_koenigsberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 557906; deutscher Name aus den GeoNames-Alternativnamen (heute Gur’yevsk); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10530
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort labiau {
@@ -138,6 +282,18 @@ ort labiau {
     stadt    = ja
     kreis    = kr_koenigsberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 507291; deutscher Name aus den GeoNames-Alternativnamen (heute Polessk); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 24686
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort nidden {
@@ -148,6 +304,18 @@ ort nidden {
     stadt    = ja
     kreis    = kr_koenigsberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 596612; deutscher Name aus den GeoNames-Alternativnamen (heute Nida); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 5928
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort wehlau {
@@ -158,6 +326,18 @@ ort wehlau {
     stadt    = nein
     kreis    = kr_koenigsberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 462322; deutscher Name aus den GeoNames-Alternativnamen (heute Znamensk); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 21663
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort bol_shoe_isakovo {
@@ -168,6 +348,18 @@ ort bol_shoe_isakovo {
     stadt    = nein
     kreis    = kr_koenigsberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 825122; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8035
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort jesau {
@@ -178,6 +370,18 @@ ort jesau {
     stadt    = nein
     kreis    = kr_koenigsberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 825760; deutscher Name aus den GeoNames-Alternativnamen (heute Yuzhnyy); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 18680
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort powunden {
@@ -188,6 +392,18 @@ ort powunden {
     stadt    = nein
     kreis    = kr_koenigsberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 549302; deutscher Name aus den GeoNames-Alternativnamen (heute Khrabrovo); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8818
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort pillau {
@@ -198,6 +414,18 @@ ort pillau {
     stadt    = ja
     kreis    = kr_pillau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2609906; deutscher Name aus den GeoNames-Alternativnamen (heute Baltiysk); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 5722
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort rauschen {
@@ -208,6 +436,18 @@ ort rauschen {
     stadt    = ja
     kreis    = kr_pillau
     quelle   = "GeoNames (CC BY 4.0), geonameid 485699; deutscher Name aus den GeoNames-Alternativnamen (heute Svetlogorsk); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10386
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort zimmerbude {
@@ -218,6 +458,18 @@ ort zimmerbude {
     stadt    = ja
     kreis    = kr_pillau
     quelle   = "GeoNames (CC BY 4.0), geonameid 485660; deutscher Name aus den GeoNames-Alternativnamen (heute Svetlyy); Lage auf das nächste Landpixel gesetzt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 3844
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort palmnicken {
@@ -228,6 +480,18 @@ ort palmnicken {
     stadt    = nein
     kreis    = kr_pillau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2609894; deutscher Name aus den GeoNames-Alternativnamen (heute Yantarnyy); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 4441
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort fischhausen {
@@ -238,6 +502,18 @@ ort fischhausen {
     stadt    = nein
     kreis    = kr_pillau
     quelle   = "GeoNames (CC BY 4.0), geonameid 505270; deutscher Name aus den GeoNames-Alternativnamen (heute Primorsk); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 4089
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort vzmorye {
@@ -248,6 +524,18 @@ ort vzmorye {
     stadt    = nein
     kreis    = kr_pillau
     quelle   = "GeoNames (CC BY 4.0), geonameid 6930743; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 5004
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort insterburg {
@@ -258,6 +546,18 @@ ort insterburg {
     stadt    = ja
     kreis    = kr_insterburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 568595; deutscher Name aus den GeoNames-Alternativnamen (heute Chernyakhovsk); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 42638
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort gumbinnen {
@@ -268,6 +568,18 @@ ort gumbinnen {
     stadt    = ja
     kreis    = kr_insterburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 557882; deutscher Name aus den GeoNames-Alternativnamen (heute Gusev); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 30028
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort stallupoenen {
@@ -278,6 +590,18 @@ ort stallupoenen {
     stadt    = ja
     kreis    = kr_insterburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 522508; deutscher Name aus den GeoNames-Alternativnamen (heute Nesterov); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 28256
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort lasdehnen {
@@ -288,6 +612,18 @@ ort lasdehnen {
     stadt    = ja
     kreis    = kr_insterburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 541947; deutscher Name aus den GeoNames-Alternativnamen (heute Krasnoznamensk); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 37836
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort braunsberg_ostpreussen {
@@ -298,6 +634,18 @@ ort braunsberg_ostpreussen {
     stadt    = ja
     kreis    = kr_braunsberg_ostpreussen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3102677; deutscher Name aus den GeoNames-Alternativnamen (dort mit Ortszusatz als Braunsberg Ostpreussen, heute Braniewo); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9605
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort preussisch_holland {
@@ -308,6 +656,18 @@ ort preussisch_holland {
     stadt    = nein
     kreis    = kr_braunsberg_ostpreussen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3089392; deutscher Name aus den GeoNames-Alternativnamen (heute Pasłęk); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10883
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort tolkemit {
@@ -318,6 +678,18 @@ ort tolkemit {
     stadt    = nein
     kreis    = kr_braunsberg_ostpreussen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3083334; deutscher Name aus den GeoNames-Alternativnamen (heute Tolkmicko); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 5085
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort frauenburg {
@@ -328,6 +700,18 @@ ort frauenburg {
     stadt    = nein
     kreis    = kr_braunsberg_ostpreussen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3099634; deutscher Name aus den GeoNames-Alternativnamen (heute Frombork); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 3448
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort muehlhausen_ostpreussen {
@@ -338,6 +722,18 @@ ort muehlhausen_ostpreussen {
     stadt    = nein
     kreis    = kr_braunsberg_ostpreussen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3091641; deutscher Name aus den GeoNames-Alternativnamen (heute Młynary); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 14103
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort heilsberg {
@@ -348,6 +744,18 @@ ort heilsberg {
     stadt    = nein
     kreis    = kr_heilsberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 766307; deutscher Name aus den GeoNames-Alternativnamen (heute Lidzbark Warmiński); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12544
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort preussisch_eylau {
@@ -358,6 +766,18 @@ ort preussisch_eylau {
     stadt    = ja
     kreis    = kr_heilsberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 579760; deutscher Name aus den GeoNames-Alternativnamen (heute Bagrationovsk); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 13772
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort guttstadt {
@@ -368,6 +788,18 @@ ort guttstadt {
     stadt    = nein
     kreis    = kr_heilsberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 773148; deutscher Name aus den GeoNames-Alternativnamen (heute Dobre Miasto); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11900
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort wormditt {
@@ -378,6 +810,18 @@ ort wormditt {
     stadt    = nein
     kreis    = kr_heilsberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 763066; deutscher Name aus den GeoNames-Alternativnamen (heute Orneta); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8238
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort heiligenbeil {
@@ -388,6 +832,18 @@ ort heiligenbeil {
     stadt    = nein
     kreis    = kr_heilsberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2609901; deutscher Name aus den GeoNames-Alternativnamen (heute Mamonovo); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7933
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort landsberg {
@@ -398,6 +854,18 @@ ort landsberg {
     stadt    = nein
     kreis    = kr_heilsberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 771779; deutscher Name aus den GeoNames-Alternativnamen (heute Górowo Iławeckie); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10849
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort ludwigsort {
@@ -408,6 +876,18 @@ ort ludwigsort {
     stadt    = nein
     kreis    = kr_heilsberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 537229; deutscher Name aus den GeoNames-Alternativnamen (heute Ladushkin); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11656
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort mehlsack {
@@ -418,6 +898,18 @@ ort mehlsack {
     stadt    = nein
     kreis    = kr_heilsberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 762311; deutscher Name aus den GeoNames-Alternativnamen (heute Pieniężno); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9696
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort liebstadt {
@@ -428,6 +920,18 @@ ort liebstadt {
     stadt    = nein
     kreis    = kr_heilsberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 764752; deutscher Name aus den GeoNames-Alternativnamen (heute Miłakowo); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9154
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort arnsdorf {
@@ -438,6 +942,18 @@ ort arnsdorf {
     stadt    = nein
     kreis    = kr_heilsberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 765854; deutscher Name aus den GeoNames-Alternativnamen (heute Lubomino); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7526
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort lichtenfeld {
@@ -448,6 +964,18 @@ ort lichtenfeld {
     stadt    = nein
     kreis    = kr_heilsberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 766507; deutscher Name aus den GeoNames-Alternativnamen (heute Lelkowo); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12408
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort rastenburg {
@@ -458,6 +986,18 @@ ort rastenburg {
     stadt    = ja
     kreis    = kr_rastenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 769274; deutscher Name aus den GeoNames-Alternativnamen (heute Kętrzyn); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12973
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort bartenstein {
@@ -468,6 +1008,18 @@ ort bartenstein {
     stadt    = ja
     kreis    = kr_rastenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 776337; deutscher Name aus den GeoNames-Alternativnamen (heute Bartoszyce); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 14015
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort friedland_ostpreussen {
@@ -478,6 +1030,18 @@ ort friedland_ostpreussen {
     stadt    = ja
     kreis    = kr_rastenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 505599; deutscher Name aus den GeoNames-Alternativnamen (heute Pravdinsk); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 17550
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort bischofsburg {
@@ -488,6 +1052,18 @@ ort bischofsburg {
     stadt    = nein
     kreis    = kr_rastenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 775890; deutscher Name aus den GeoNames-Alternativnamen (heute Biskupiec); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 13493
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort roessel {
@@ -498,6 +1074,18 @@ ort roessel {
     stadt    = nein
     kreis    = kr_rastenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 760488; deutscher Name aus den GeoNames-Alternativnamen (heute Reszel); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10306
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort seeburg {
@@ -508,6 +1096,18 @@ ort seeburg {
     stadt    = nein
     kreis    = kr_rastenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 770078; deutscher Name aus den GeoNames-Alternativnamen (heute Jeziorany); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10069
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort korschen {
@@ -518,6 +1118,18 @@ ort korschen {
     stadt    = nein
     kreis    = kr_rastenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 768116; deutscher Name aus den GeoNames-Alternativnamen (heute Korsze); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7119
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort bischofstein {
@@ -528,6 +1140,18 @@ ort bischofstein {
     stadt    = nein
     kreis    = kr_rastenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 775886; deutscher Name aus den GeoNames-Alternativnamen (heute Bisztynek); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10374
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort gerdauen {
@@ -538,6 +1162,18 @@ ort gerdauen {
     stadt    = nein
     kreis    = kr_rastenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 463356; deutscher Name aus den GeoNames-Alternativnamen (heute Zheleznodorozhnyy); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 21257
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort schippenbeil {
@@ -548,6 +1184,18 @@ ort schippenbeil {
     stadt    = nein
     kreis    = kr_rastenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 759482; deutscher Name aus den GeoNames-Alternativnamen (heute Sępopol); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9391
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort drengfurth {
@@ -558,6 +1206,18 @@ ort drengfurth {
     stadt    = nein
     kreis    = kr_rastenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 758467; deutscher Name aus den GeoNames-Alternativnamen (heute Srokowo); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 13018
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort barten {
@@ -568,6 +1228,18 @@ ort barten {
     stadt    = nein
     kreis    = kr_rastenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 776393; deutscher Name aus den GeoNames-Alternativnamen (heute Barciany); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7052
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort loetzen {
@@ -578,6 +1250,18 @@ ort loetzen {
     stadt    = ja
     kreis    = kr_loetzen
     quelle   = "GeoNames (CC BY 4.0), geonameid 772195; deutscher Name aus den GeoNames-Alternativnamen (heute Giżycko); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7789
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort darkehmen {
@@ -588,6 +1272,18 @@ ort darkehmen {
     stadt    = ja
     kreis    = kr_loetzen
     quelle   = "GeoNames (CC BY 4.0), geonameid 513406; deutscher Name aus den GeoNames-Alternativnamen (heute Ozërsk); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 22119
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort angerburg {
@@ -598,6 +1294,18 @@ ort angerburg {
     stadt    = nein
     kreis    = kr_loetzen
     quelle   = "GeoNames (CC BY 4.0), geonameid 756048; deutscher Name aus den GeoNames-Alternativnamen (heute Węgorzewo); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6977
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort goldap {
@@ -608,6 +1316,18 @@ ort goldap {
     stadt    = nein
     kreis    = kr_loetzen
     quelle   = "GeoNames (CC BY 4.0), geonameid 771953; deutscher Name aus den GeoNames-Alternativnamen (heute Gołdap); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 21867
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort kowahlen {
@@ -618,6 +1338,18 @@ ort kowahlen {
     stadt    = nein
     kreis    = kr_loetzen
     quelle   = "GeoNames (CC BY 4.0), geonameid 767883; deutscher Name aus den GeoNames-Alternativnamen (heute Kowale Oleckie); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9764
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort benkheim {
@@ -628,6 +1360,18 @@ ort benkheim {
     stadt    = nein
     kreis    = kr_loetzen
     quelle   = "GeoNames (CC BY 4.0), geonameid 776441; deutscher Name aus den GeoNames-Alternativnamen (heute Banie Mazurskie); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12646
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort possessern {
@@ -638,6 +1382,18 @@ ort possessern {
     stadt    = nein
     kreis    = kr_loetzen
     quelle   = "GeoNames (CC BY 4.0), geonameid 761331; deutscher Name aus den GeoNames-Alternativnamen (heute Pozezdrze); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 3678
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort kruglanken {
@@ -648,6 +1404,18 @@ ort kruglanken {
     stadt    = nein
     kreis    = kr_loetzen
     quelle   = "GeoNames (CC BY 4.0), geonameid 767435; deutscher Name aus den GeoNames-Alternativnamen (heute Kruklanki); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6882
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort sensburg {
@@ -658,6 +1426,18 @@ ort sensburg {
     stadt    = ja
     kreis    = kr_sensburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 764312; deutscher Name aus den GeoNames-Alternativnamen (heute Mrągowo); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 13237
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort johannisburg {
@@ -668,6 +1448,18 @@ ort johannisburg {
     stadt    = nein
     kreis    = kr_sensburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 762120; deutscher Name aus den GeoNames-Alternativnamen (heute Pisz); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8852
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort ruciane_nida {
@@ -678,6 +1470,18 @@ ort ruciane_nida {
     stadt    = nein
     kreis    = kr_sensburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 760166; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12442
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort bialla {
@@ -688,6 +1492,18 @@ ort bialla {
     stadt    = nein
     kreis    = kr_sensburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 776178; deutscher Name aus den GeoNames-Alternativnamen (heute Biała Piska); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 13629
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort nikolaiken {
@@ -698,6 +1514,18 @@ ort nikolaiken {
     stadt    = nein
     kreis    = kr_sensburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 764777; deutscher Name aus den GeoNames-Alternativnamen (heute Mikołajki); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 5909
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort rhein {
@@ -708,6 +1536,18 @@ ort rhein {
     stadt    = nein
     kreis    = kr_sensburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 759839; deutscher Name aus den GeoNames-Alternativnamen (heute Ryn); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7642
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort peitschendorf {
@@ -718,6 +1558,18 @@ ort peitschendorf {
     stadt    = nein
     kreis    = kr_sensburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 762361; deutscher Name aus den GeoNames-Alternativnamen (heute Piecki); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10713
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort schwentainen {
@@ -728,6 +1580,18 @@ ort schwentainen {
     stadt    = nein
     kreis    = kr_sensburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 757610; deutscher Name aus den GeoNames-Alternativnamen (heute Świętajno); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11052
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort friedrichshof {
@@ -738,6 +1602,18 @@ ort friedrichshof {
     stadt    = nein
     kreis    = kr_sensburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 760203; deutscher Name aus den GeoNames-Alternativnamen (heute Rozogi); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9594
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort lyck {
@@ -748,6 +1624,18 @@ ort lyck {
     stadt    = ja
     kreis    = kr_lyck
     quelle   = "GeoNames (CC BY 4.0), geonameid 772621; deutscher Name aus den GeoNames-Alternativnamen (heute Ełk); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 19718
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort marggrabowa {
@@ -758,6 +1646,18 @@ ort marggrabowa {
     stadt    = nein
     kreis    = kr_lyck
     quelle   = "GeoNames (CC BY 4.0), geonameid 763291; deutscher Name aus den GeoNames-Alternativnamen (heute Olecko); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11357
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort arys {
@@ -768,6 +1668,18 @@ ort arys {
     stadt    = nein
     kreis    = kr_lyck
     quelle   = "GeoNames (CC BY 4.0), geonameid 763028; deutscher Name aus den GeoNames-Alternativnamen (heute Orzysz); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 15629
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort widminnen {
@@ -778,6 +1690,18 @@ ort widminnen {
     stadt    = nein
     kreis    = kr_lyck
     quelle   = "GeoNames (CC BY 4.0), geonameid 754652; deutscher Name aus den GeoNames-Alternativnamen (heute Wydminy); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10171
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort alt_jucha {
@@ -788,6 +1712,18 @@ ort alt_jucha {
     stadt    = nein
     kreis    = kr_lyck
     quelle   = "GeoNames (CC BY 4.0), geonameid 758332; deutscher Name aus den GeoNames-Alternativnamen (heute Stare Juchy); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7764
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort swietajno {
@@ -798,6 +1734,18 @@ ort swietajno {
     stadt    = nein
     kreis    = kr_lyck
     quelle   = "GeoNames (CC BY 4.0), geonameid 757608; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9357
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort allenstein {
@@ -808,6 +1756,18 @@ ort allenstein {
     stadt    = ja
     kreis    = kr_allenstein
     quelle   = "GeoNames (CC BY 4.0), geonameid 763166; deutscher Name aus den GeoNames-Alternativnamen (heute Olsztyn); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12781
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort osterode {
@@ -818,6 +1778,18 @@ ort osterode {
     stadt    = ja
     kreis    = kr_allenstein
     quelle   = "GeoNames (CC BY 4.0), geonameid 3089779; deutscher Name aus den GeoNames-Alternativnamen (heute Ostróda); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 14425
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort mohrungen {
@@ -828,6 +1800,18 @@ ort mohrungen {
     stadt    = nein
     kreis    = kr_allenstein
     quelle   = "GeoNames (CC BY 4.0), geonameid 3091462; deutscher Name aus den GeoNames-Alternativnamen (heute Morąg); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10442
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort hohenstein_ostpreussen {
@@ -838,6 +1822,18 @@ ort hohenstein_ostpreussen {
     stadt    = nein
     kreis    = kr_allenstein
     quelle   = "GeoNames (CC BY 4.0), geonameid 763165; deutscher Name aus den GeoNames-Alternativnamen (heute Olsztynek); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10544
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort wartenburg {
@@ -848,6 +1844,18 @@ ort wartenburg {
     stadt    = nein
     kreis    = kr_allenstein
     quelle   = "GeoNames (CC BY 4.0), geonameid 776384; deutscher Name aus den GeoNames-Alternativnamen (heute Barczewo); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10306
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort liebemuehl {
@@ -858,6 +1866,18 @@ ort liebemuehl {
     stadt    = nein
     kreis    = kr_allenstein
     quelle   = "GeoNames (CC BY 4.0), geonameid 3091763; deutscher Name aus den GeoNames-Alternativnamen (heute Miłomłyn); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10069
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort jonkendorf {
@@ -868,6 +1888,18 @@ ort jonkendorf {
     stadt    = nein
     kreis    = kr_allenstein
     quelle   = "GeoNames (CC BY 4.0), geonameid 770025; deutscher Name aus den GeoNames-Alternativnamen (heute Jonkowo); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8611
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort stabigotten {
@@ -878,6 +1910,18 @@ ort stabigotten {
     stadt    = nein
     kreis    = kr_allenstein
     quelle   = "GeoNames (CC BY 4.0), geonameid 758242; deutscher Name aus den GeoNames-Alternativnamen (heute Stawiguda); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9628
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort maldeuten {
@@ -888,6 +1932,18 @@ ort maldeuten {
     stadt    = nein
     kreis    = kr_allenstein
     quelle   = "GeoNames (CC BY 4.0), geonameid 3092467; deutscher Name aus den GeoNames-Alternativnamen (heute Małdyty); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7764
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort dietrichswalde {
@@ -898,6 +1954,18 @@ ort dietrichswalde {
     stadt    = nein
     kreis    = kr_allenstein
     quelle   = "GeoNames (CC BY 4.0), geonameid 772218; deutscher Name aus den GeoNames-Alternativnamen (heute Gietrzwałd); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9018
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort geierswalde {
@@ -908,6 +1976,18 @@ ort geierswalde {
     stadt    = nein
     kreis    = kr_allenstein
     quelle   = "GeoNames (CC BY 4.0), geonameid 772220; deutscher Name aus den GeoNames-Alternativnamen (heute Gierzwałd); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12137
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort ortelsburg {
@@ -918,6 +1998,18 @@ ort ortelsburg {
     stadt    = ja
     kreis    = kr_ortelsburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 757357; deutscher Name aus den GeoNames-Alternativnamen (heute Szczytno); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11399
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort passenheim {
@@ -928,6 +2020,18 @@ ort passenheim {
     stadt    = nein
     kreis    = kr_ortelsburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 762588; deutscher Name aus den GeoNames-Alternativnamen (heute Pasym); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9560
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort willenberg {
@@ -938,6 +2042,18 @@ ort willenberg {
     stadt    = nein
     kreis    = kr_ortelsburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 755907; deutscher Name aus den GeoNames-Alternativnamen (heute Wielbark); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 13425
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort mensguth {
@@ -948,6 +2064,18 @@ ort mensguth {
     stadt    = nein
     kreis    = kr_ortelsburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 772644; deutscher Name aus den GeoNames-Alternativnamen (heute Dźwierzuty); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10205
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort gedwangen {
@@ -958,6 +2086,18 @@ ort gedwangen {
     stadt    = nein
     kreis    = kr_ortelsburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 770148; deutscher Name aus den GeoNames-Alternativnamen (heute Jedwabno); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 16137
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort soldau {
@@ -968,6 +2108,18 @@ ort soldau {
     stadt    = ja
     kreis    = kr_soldau
     quelle   = "GeoNames (CC BY 4.0), geonameid 772748; deutscher Name aus den GeoNames-Alternativnamen (heute Działdowo); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11479
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort neidenburg {
@@ -978,6 +2130,18 @@ ort neidenburg {
     stadt    = nein
     kreis    = kr_soldau
     quelle   = "GeoNames (CC BY 4.0), geonameid 764039; deutscher Name aus den GeoNames-Alternativnamen (heute Nidzica); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 13968
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort lautenburg {
@@ -988,6 +2152,18 @@ ort lautenburg {
     stadt    = nein
     kreis    = kr_soldau
     quelle   = "GeoNames (CC BY 4.0), geonameid 3093439; deutscher Name aus den GeoNames-Alternativnamen (heute Lidzbark); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10917
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort gross_koslau {
@@ -998,6 +2174,18 @@ ort gross_koslau {
     stadt    = nein
     kreis    = kr_soldau
     quelle   = "GeoNames (CC BY 4.0), geonameid 767763; deutscher Name aus den GeoNames-Alternativnamen (heute Kozłowo); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8882
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort rybno {
@@ -1008,6 +2196,18 @@ ort rybno {
     stadt    = nein
     kreis    = kr_soldau
     quelle   = "GeoNames (CC BY 4.0), geonameid 3086574; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12340
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }
 
 ort ilowo_osada {
@@ -1018,4 +2218,16 @@ ort ilowo_osada {
     stadt    = nein
     kreis    = kr_soldau
     quelle   = "GeoNames (CC BY 4.0), geonameid 7534560; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 5763
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
+        verwuestung  = 0
+    }
+
+    1848.03.01 = {
+        besitzer   = PRU
+        verwaltung = pr_preussen
+    }
 }

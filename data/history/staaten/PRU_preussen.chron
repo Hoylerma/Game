@@ -1,0 +1,25 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+staat PRU {
+    name     = "Königreich Preußen"
+    kurzname = "Preußen"
+    farbe    = { 58 95 143 }
+    quelle   = "Größter Staat des Bundes; die Provinzen Preußen und Posen liegen außerhalb des Bundesgebiets. Vereinigter Landtag 1847, Verfassung erst im Dezember 1848. Schatz, Steuersätze, Hofhaltung und Heer sind Spielwerte"
+
+    1840.06.07 = {
+        herrscher = "Friedrich Wilhelm IV."
+    }
+
+    1848.03.01 = {
+        hauptstadt     = berlin_coelln
+        regierungsform = absolute_monarchie
+        konfession     = reformiert
+        schatz         = 9583800
+        kontribution   = 0.10
+        akzise         = 0.05
+        zoll           = 0.03
+        hofhaltung     = 3993200
+        heer           = 9
+        zollverein     = ja
+    }
+}

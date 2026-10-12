@@ -1,0 +1,68 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+einheit au_niederoesterreich {
+    name   = "Erzherzogtum Österreich unter der Enns"
+    art    = kronland
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit au_oberoesterreich {
+    name   = "Erzherzogtum Österreich ob der Enns"
+    art    = kronland
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit au_salzburg {
+    name   = "Salzburgkreis"
+    art    = kreis
+    ueber  = au_oberoesterreich
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit au_steiermark {
+    name   = "Herzogtum Steiermark"
+    art    = kronland
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit au_kaernten {
+    name   = "Herzogtum Kärnten"
+    art    = kronland
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit au_krain {
+    name   = "Herzogtum Krain"
+    art    = kronland
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit au_tirol {
+    name   = "Gefürstete Grafschaft Tirol mit Vorarlberg"
+    art    = kronland
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit au_boehmen {
+    name   = "Königreich Böhmen"
+    art    = kronland
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit au_maehren {
+    name   = "Markgrafschaft Mähren"
+    art    = kronland
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit au_schlesien {
+    name   = "Herzogtum Schlesien"
+    art    = kronland
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit au_galizien {
+    name   = "Königreich Galizien und Lodomerien"
+    art    = kronland
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}

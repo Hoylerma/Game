@@ -1,4 +1,4 @@
-# Chronik-Skript und Datenformate (Meilensteine M1 bis M4)
+# Chronik-Skript und Datenformate (Meilensteine M1 bis M7)
 
 Verbindliche Spezifikation für Parser (`core/src/script.cpp`), Lader (`core/src/loader.cpp`), Inhalte (`data/`) und Werkzeuge (`tools/`). Änderungen hier ziehen Änderungen in Code und Tests nach sich.
 
@@ -79,6 +79,7 @@ data/
 ├── history/                generiert aus tabellen/ (tools/archivar), nicht von Hand bearbeiten
 │   ├── staaten/*.chron     Staaten (Reichsstände) mit datierter Historie
 │   ├── kreise/*.chron      Kreise: Gruppen von 4–12 Orten (seit M3)
+│   ├── verwaltung/*.chron  Verwaltungseinheiten der Staaten (seit M7, optional)
 │   └── orte/*.chron        Orte mit datierter Historie (Besitz, Bevölkerung …)
 ├── tabellen/*.csv          Quelle der Wahrheit für history/ (siehe tabellen.md)
 ├── szenarien/*.chron       Lesezeichen
@@ -91,7 +92,7 @@ data/
 ```
 
 Ladereihenfolge: `regeln`, `gelaende`, `konfessionen`, `kulturen` (seit M4), `berufe`, `gueter`, `beduerfnisse`,
-`betriebe`, `maerkte` (seit M5), dann alle Dateien der Ordner `szenarien`, `history/staaten`, `history/kreise` (seit M3), `history/orte`, jeweils **nach Dateiname sortiert**, Einträge in Dateireihenfolge. Daraus ergeben sich die Indizes in `World`. Die Szenarien kommen vor der Historie, weil das Startdatum des gewählten Szenarios bestimmt, welche datierten Blöcke gelten (Abschnitt 3.8).
+`betriebe`, `maerkte` (seit M5), dann alle Dateien der Ordner `szenarien`, `history/staaten`, `history/kreise` (seit M3), `history/verwaltung` (seit M7), `history/orte`, jeweils **nach Dateiname sortiert**, Einträge in Dateireihenfolge. Daraus ergeben sich die Indizes in `World`. Die Szenarien kommen vor der Historie, weil das Startdatum des gewählten Szenarios bestimmt, welche datierten Blöcke gelten (Abschnitt 3.8).
 
 Die Dateien in `history/` erzeugt das Werkzeug `tools/archivar` aus den Tabellen in `data/tabellen/` (Format: [tabellen.md](tabellen.md)). Änderungen gehören in die Tabellen; die CI prüft mit `archivar.py --pruefen`, dass `history/` aktuell ist.
 
@@ -241,6 +242,7 @@ staat BRA {
     hofhaltung     = 30000                         # Pflicht, Ausgaben pro Jahr
     heer           = 10                            # Pflicht seit M5: Soldaten je 1.000 Einwohner, 0..1000
     schulden       = 0                             # optional seit M5: Reichstaler, Standard 0
+    zollverein     = nein                          # optional seit M7: ja/nein, Standard nein, datierbar
     quelle         = "…"                           # Pflicht (oder "Testdaten, geschätzt")
 }
 ```
@@ -251,6 +253,17 @@ die Erzeugung steuerpflichtiger Berufe in Orten ohne Stadtrecht, **Akzise** auf 
 Das alte Feld `steuersatz` ist seit M5 unbekannt (Warnung) und `kontribution` fehlt dann (fatal).
 
 Der Tag ist der Wert hinter `staat` (Großbuchstaben und Ziffern, 2–4 Zeichen). Die Hauptstadt wird nach dem Laden der Orte geprüft.
+
+**Staatenbestand (seit M7).** Ein Staat **besteht** zu einem Szenario, wenn er zum Startdatum
+mindestens einen Ort besitzt. Staaten ohne Ort fallen nach dem Laden der Orte aus der Welt (die
+übrigen rücken in ihrer Reihenfolge nach); ihre Hauptstadt wird nicht geprüft. So enthalten die Daten
+die Staaten aller Epochen, und jedes Szenario lädt nur die seiner Zeit. Der Spieler des gewählten
+Szenarios muss bestehen (sonst fatal: `Spielerstaat 'BRA' von szenario … besitzt zum Startdatum keinen
+Ort`); die Spieler der übrigen Szenarien müssen nur bekannte Staaten sein.
+
+**Zollverein (seit M7).** `zollverein = ja` markiert die Mitgliedschaft im Deutschen Zollverein
+(`State::customs_union`). In M7 ist das Feld Inhalt ohne Wirkung auf die Simulation; der Zoll
+zwischen Mitgliedern entfällt mit M9.
 
 ### 3.6 `history/orte/*.chron`
 
@@ -264,6 +277,8 @@ ort berlin_coelln {
     kreis        = kr_berlin                       # optional (seit M3), Kreiskennung, nicht datierbar
     vorkommen    = { salz }                        # optional (seit M5), nicht datierbar
     hafen        = ja                              # optional (seit M5), Standard nein, nicht datierbar
+    verwaltung   = pr_kr_teltow                    # optional (seit M7), Verwaltungseinheit, datierbar
+    bund         = ja                              # optional (seit M7), im Deutschen Bund, datierbar
     quelle       = "Testdaten, geschätzt"          # Pflicht
 
     # Simulationsfelder: alle vier oder keines (siehe unten)
@@ -282,6 +297,12 @@ Landschaft) über `common/maerkte.chron` (Abschnitt 3.14); eine Datei, deren Lan
 gehört, ist ein Fehler. `vorkommen` nennt Kennungen, die in `common/betriebe.chron` als `vorkommen` eines
 Betriebs vorkommen (sonst fatal); höchstens 32 verschiedene. `hafen = ja` gibt dem Markt des Ortes Zugang
 zum Weltmarkt. Im Kern: `Location::market`, `deposits` (Bitmaske über `World::deposits`), `is_port`.
+
+**Verwaltung und Bundesgebiet (seit M7).** `verwaltung` nennt die Einheit der untersten Ebene
+(Abschnitt 3.16), der der Ort zum Startdatum angehört; `verwaltung = keine` hebt eine frühere
+Zuordnung in einem datierten Block auf. `bund = ja` heißt: Der Ort liegt im Gebiet des Deutschen
+Bundes. Beide Felder sind datierbar und unabhängig von den Simulationsfeldern (auch Orte ohne Daten
+dürfen sie tragen). Im Kern: `Location::admin` (`kNone` ohne Einheit) und `Location::federal`.
 
 **Orte ohne Daten (seit M3).** Die fünf Simulationsfelder `besitzer`, `bevoelkerung`,
 `konfession`, `kultur` (seit M4) und `verwuestung` (direkt oder aus datierten Blöcken, Abschnitt 3.8)
@@ -467,6 +488,29 @@ lebensstandard {            # Median je Schicht über alle Jahre und Läufe
 Alle sechs Blöcke sind Pflicht; unbekannte Blöcke und Felder, Bereiche mit von > bis und unbekannte
 Güter in `ausnahme` sind Fehler. Im Kern: `BalanceTargets` (`uhrwerk/balance.hpp`). Bedeutung:
 [wirtschaft.md](wirtschaft.md), Abschnitt 7.
+
+### 3.16 `history/verwaltung/*.chron` (seit M7)
+
+```text
+einheit pr_rb_potsdam {
+    name   = "Regierungsbezirk Potsdam"   # Pflicht, Anzeigename
+    art    = regierungsbezirk             # Pflicht, Bezeichner (provinz, kreis, kronland, …)
+    ueber  = pr_prov_brandenburg          # optional, übergeordnete Einheit; fehlt bei der obersten
+    quelle = "…"                          # Pflicht
+}
+```
+
+Die politische Gliederung der Staaten ([lesezeichen_1848.md](lesezeichen_1848.md), Abschnitt 6),
+unabhängig von den räumlichen Kreisen aus Abschnitt 3.9. Kennung: Kleinbuchstaben, Ziffern, `_`,
+eindeutig; `keine` ist reserviert. `ueber` muss auf eine bekannte Einheit verweisen, der Baum darf
+keinen Zyklus enthalten (beides fatal). Einheiten sind **nicht datiert** (datierte Einträge sind
+fatal); welche Einheit gilt, steht datiert im Ort (`verwaltung`, Abschnitt 3.6). Der Ordner darf
+fehlen. Im Kern: `World::admin_units` (`AdminUnit { id, name, kind, parent, source }`).
+
+Verwaltung, Bundesgebiet und Zollverein sind in M7 **Inhalt** wie die Kreise: Sie stehen im
+Fingerabdruck der Spieldaten (Bereiche `kreise`, `orte`, `staaten`), nicht in der Prüfsumme und nicht
+im Spielstand. Sobald Gebietswechsel im Spiel die Zuordnung ändern, wandern `Location::admin` und
+`Location::federal` in den Zustand.
 
 ## 4. Startzustand
 
