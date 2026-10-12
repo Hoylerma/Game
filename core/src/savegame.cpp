@@ -1176,6 +1176,16 @@ ReplayResult run_replay(const Replay& replay, World start, unsigned threads) {
 
 // ─── Dateien ────────────────────────────────────────────────────────────────
 
+FileKind file_kind(std::span<const std::uint8_t> bytes) {
+    if (bytes.size() >= 8 && std::equal(kSaveMagic.begin(), kSaveMagic.end(), bytes.begin())) {
+        return FileKind::Save;
+    }
+    if (bytes.size() >= 8 && std::equal(kReplayMagic.begin(), kReplayMagic.end(), bytes.begin())) {
+        return FileKind::Replay;
+    }
+    return FileKind::Unknown;
+}
+
 bool write_file(const std::filesystem::path& path, std::span<const std::uint8_t> bytes, std::string* error) {
     // Erst in eine Nebendatei schreiben, dann umbenennen: Ein Absturz beim Speichern lässt den alten
     // Spielstand heil.

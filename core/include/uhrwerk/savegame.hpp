@@ -139,6 +139,10 @@ ReplayResult run_replay(const Replay& replay, World start, unsigned threads = 0)
 
 // ─── Dateien ────────────────────────────────────────────────────────────────
 
+/// Art einer Datei nach ihrer Magie (Spielstand oder Protokoll), ohne sie weiter zu prüfen.
+enum class FileKind { Unknown, Save, Replay };
+FileKind file_kind(std::span<const std::uint8_t> bytes);
+
 bool write_file(const std::filesystem::path& path, std::span<const std::uint8_t> bytes,
                 std::string* error = nullptr);
 std::optional<std::vector<std::uint8_t>> read_file(const std::filesystem::path& path,
