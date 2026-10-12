@@ -7,6 +7,7 @@
 // schickt Befehle; Werte in die Simulation gehen als Ganzzahlen hinein,
 // Werte aus der Simulation dürfen float sein (nur Anzeige).
 
+#include "uhrwerk/savegame.hpp"
 #include "uhrwerk/simulation.hpp"
 
 #include <cstdint>
@@ -95,6 +96,12 @@ public:
 
     godot::String get_checksum() const;
 
+    // Spielstände (seit M6, docs/technik/speicherstaende.md Abschnitt 9)
+    godot::String save_game(const godot::String& path, std::int64_t player_state_index) const;
+    godot::String load_game(const godot::String& data_path, const godot::String& path);
+    godot::Dictionary get_save_info(const godot::String& path) const;
+    std::int64_t get_save_format_version() const;
+
 protected:
     static void _bind_methods();
 
@@ -106,6 +113,8 @@ private:
 
     std::unique_ptr<uhrwerk::Simulation> simulation_;
     godot::PackedStringArray load_warnings_;
+    std::string player_tag_;              // Spielerstaat: aus dem Szenario oder dem Spielstand (seit M6)
+    uhrwerk::ContentFingerprint content_; // Inhalt der geladenen Spieldaten (Vergleich mit Spielständen)
     std::unordered_map<std::string, std::int64_t> location_lookup_;
     std::unordered_map<std::string, std::int64_t> kreis_lookup_;
     std::vector<std::int64_t> kreis_location_counts_;
