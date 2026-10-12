@@ -1,0 +1,19 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+staat SMG {
+    name     = "Herzogtum Sachsen-Meiningen"
+    kurzname = "Sachsen-Meiningen"
+    farbe    = { 120 160 90 }
+    quelle   = "Seit 1826 mit Hildburghausen und Saalfeld; Grundgesetz von 1829. Schatz, Steuersätze, Hofhaltung und Heer sind Spielwerte"
+
+    1803.12.24 = {
+        herrscher = "Bernhard II."
+    }
+
+    1848.03.01 = {
+        hauptstadt     = meiningen
+        regierungsform = konstitutionelle_monarchie
+        konfession     = lutherisch
+        zollverein     = ja
+    }
+}

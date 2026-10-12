@@ -1,0 +1,19 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+staat SSH {
+    name     = "Fürstentum Schwarzburg-Sondershausen"
+    kurzname = "Schwarzburg-Sondershausen"
+    farbe    = { 100 130 160 }
+    quelle   = "Ober- und Unterherrschaft; Landesgrundgesetz von 1841. Schatz, Steuersätze, Hofhaltung und Heer sind Spielwerte"
+
+    1835.08.19 = {
+        herrscher = "Günther Friedrich Carl II."
+    }
+
+    1848.03.01 = {
+        hauptstadt     = sondershausen
+        regierungsform = konstitutionelle_monarchie
+        konfession     = lutherisch
+        zollverein     = ja
+    }
+}

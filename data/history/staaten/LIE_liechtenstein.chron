@@ -1,0 +1,19 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+staat LIE {
+    name     = "Fürstentum Liechtenstein"
+    kurzname = "Liechtenstein"
+    farbe    = { 60 90 180 }
+    quelle   = "Kleinstes Bundesmitglied mit Gebiet am Rhein; der Fürst residierte in Wien. Schatz, Steuersätze, Hofhaltung und Heer sind Spielwerte"
+
+    1836.04.20 = {
+        herrscher = "Alois II."
+    }
+
+    1848.03.01 = {
+        hauptstadt     = vaduz
+        regierungsform = absolute_monarchie
+        konfession     = katholisch
+        zollverein     = nein
+    }
+}

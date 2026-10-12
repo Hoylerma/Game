@@ -28,4 +28,20 @@ staat BER {
         hofhaltung     = 2500
         heer           = 4
     }
+
+    1806.04.18 = {
+        name     = "Herzogtum Anhalt-Bernburg"
+        kurzname = "Anhalt-Bernburg"
+    }
+
+    1834.03.24 = {
+        herrscher = "Alexander Carl"
+    }
+
+    1848.03.01 = {
+        hauptstadt     = ballenstedt
+        regierungsform = absolute_monarchie
+        konfession     = reformiert
+        zollverein     = ja
+    }
 }

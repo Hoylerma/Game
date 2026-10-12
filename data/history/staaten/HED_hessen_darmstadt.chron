@@ -1,0 +1,23 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+staat HED {
+    name     = "Großherzogtum Hessen"
+    kurzname = "Hessen-Darmstadt"
+    farbe    = { 175 110 165 }
+    quelle   = "Provinzen Starkenburg, Oberhessen und Rheinhessen; Verfassung von 1820. Am 5. März 1848 Erbgroßherzog Ludwig Mitregent, Großherzog ab 16. Juni 1848. Schatz, Steuersätze, Hofhaltung und Heer sind Spielwerte"
+
+    1830.04.06 = {
+        herrscher = "Ludwig II."
+    }
+
+    1848.03.01 = {
+        hauptstadt     = darmstadt
+        regierungsform = konstitutionelle_monarchie
+        konfession     = lutherisch
+        zollverein     = ja
+    }
+
+    1848.06.16 = {
+        herrscher = "Ludwig III."
+    }
+}

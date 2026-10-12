@@ -1191,6 +1191,14 @@ TEST_CASE("Lader: Staaten ohne Ort zum Startdatum bestehen nicht") {
         INFO(issues_text(other));
         CHECK(other.ok());
     }
+    SUBCASE("Pflichtfelder nur für bestehende Staaten") {
+        replace_in_file(dir / "history/staaten/30_neu.chron", "    heer           = 2\n", "");
+        const LoadResult r = load(dir, "westfaelischer_frieden");
+        INFO(issues_text(r));
+        CHECK(r.ok());
+        expect_error(load(dir, "jahresbeginn_1650"), "Pflichtfeld 'heer' fehlt in staat NEU",
+                     "history/staaten/30_neu.chron", 1);
+    }
     SUBCASE("unbekannter Spieler bleibt ein Fehler") {
         replace_in_file(dir / "szenarien/jahresbeginn.chron", "spieler = SAX", "spieler = XYZ");
         expect_error(load(dir, "westfaelischer_frieden"),

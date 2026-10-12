@@ -1,0 +1,16 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+staat LUE {
+    name     = "Freie und Hansestadt Lübeck"
+    kurzname = "Lübeck"
+    farbe    = { 160 60 50 }
+    quelle   = "Stadtrepublik. Schatz, Steuersätze, Hofhaltung und Heer sind Spielwerte"
+
+    1848.03.01 = {
+        hauptstadt     = luebeck
+        regierungsform = stadtrepublik
+        herrscher      = "Senat"
+        konfession     = lutherisch
+        zollverein     = nein
+    }
+}

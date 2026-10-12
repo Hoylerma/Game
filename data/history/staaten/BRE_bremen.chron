@@ -1,0 +1,16 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+staat BRE {
+    name     = "Freie Hansestadt Bremen"
+    kurzname = "Bremen"
+    farbe    = { 180 40 60 }
+    quelle   = "Stadtrepublik mit Bremerhaven (seit 1827). Schatz, Steuersätze, Hofhaltung und Heer sind Spielwerte"
+
+    1848.03.01 = {
+        hauptstadt     = bremen
+        regierungsform = stadtrepublik
+        herrscher      = "Senat"
+        konfession     = reformiert
+        zollverein     = nein
+    }
+}

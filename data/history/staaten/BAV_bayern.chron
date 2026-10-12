@@ -1,0 +1,23 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+staat BAV {
+    name     = "Königreich Bayern"
+    kurzname = "Bayern"
+    farbe    = { 115 165 215 }
+    quelle   = "Mit der linksrheinischen Pfalz; Verfassung von 1818. König Ludwig I. dankte am 20. März 1848 ab. Schatz, Steuersätze, Hofhaltung und Heer sind Spielwerte"
+
+    1825.10.13 = {
+        herrscher = "Ludwig I."
+    }
+
+    1848.03.01 = {
+        hauptstadt     = muenchen
+        regierungsform = konstitutionelle_monarchie
+        konfession     = katholisch
+        zollverein     = ja
+    }
+
+    1848.03.20 = {
+        herrscher = "Maximilian II."
+    }
+}

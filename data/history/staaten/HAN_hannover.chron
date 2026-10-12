@@ -1,0 +1,19 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+staat HAN {
+    name     = "Königreich Hannover"
+    kurzname = "Hannover"
+    farbe    = { 205 125 60 }
+    quelle   = "Personalunion mit Großbritannien bis 1837; Staatsgrundgesetz 1833, 1837 aufgehoben (Göttinger Sieben), Landesverfassungsgesetz 1840. Nicht im Zollverein (Steuerverein). Schatz, Steuersätze, Hofhaltung und Heer sind Spielwerte"
+
+    1837.06.20 = {
+        herrscher = "Ernst August"
+    }
+
+    1848.03.01 = {
+        hauptstadt     = hannover
+        regierungsform = konstitutionelle_monarchie
+        konfession     = lutherisch
+        zollverein     = nein
+    }
+}

@@ -1,0 +1,19 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+staat LIP {
+    name     = "Fürstentum Lippe"
+    kurzname = "Lippe"
+    farbe    = { 220 110 110 }
+    quelle   = "Residenz Detmold; Zollverein seit 1842. Schatz, Steuersätze, Hofhaltung und Heer sind Spielwerte"
+
+    1802.04.05 = {
+        herrscher = "Leopold II."
+    }
+
+    1848.03.01 = {
+        hauptstadt     = detmold
+        regierungsform = staendische_monarchie
+        konfession     = reformiert
+        zollverein     = ja
+    }
+}

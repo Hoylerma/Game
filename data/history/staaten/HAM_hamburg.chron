@@ -1,0 +1,16 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+staat HAM {
+    name     = "Freie und Hansestadt Hamburg"
+    kurzname = "Hamburg"
+    farbe    = { 200 40 40 }
+    quelle   = "Stadtrepublik; Senat und Erbgesessene Bürgerschaft. Bergedorf gemeinsam mit Lübeck verwaltet. Schatz, Steuersätze, Hofhaltung und Heer sind Spielwerte"
+
+    1848.03.01 = {
+        hauptstadt     = hamburg
+        regierungsform = stadtrepublik
+        herrscher      = "Senat"
+        konfession     = lutherisch
+        zollverein     = nein
+    }
+}

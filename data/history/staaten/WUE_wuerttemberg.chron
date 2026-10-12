@@ -1,0 +1,19 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+staat WUE {
+    name     = "Königreich Württemberg"
+    kurzname = "Württemberg"
+    farbe    = { 185 70 65 }
+    quelle   = "Verfassung von 1819. Schatz, Steuersätze, Hofhaltung und Heer sind Spielwerte"
+
+    1816.10.30 = {
+        herrscher = "Wilhelm I."
+    }
+
+    1848.03.01 = {
+        hauptstadt     = stuttgart
+        regierungsform = konstitutionelle_monarchie
+        konfession     = lutherisch
+        zollverein     = ja
+    }
+}

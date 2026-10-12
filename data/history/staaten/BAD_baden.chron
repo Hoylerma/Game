@@ -1,0 +1,19 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+staat BAD {
+    name     = "Großherzogtum Baden"
+    kurzname = "Baden"
+    farbe    = { 205 170 70 }
+    quelle   = "Verfassung von 1818, liberalste Kammer des Bundes; Zentrum der Revolution 1848/49. Schatz, Steuersätze, Hofhaltung und Heer sind Spielwerte"
+
+    1830.03.30 = {
+        herrscher = "Leopold"
+    }
+
+    1848.03.01 = {
+        hauptstadt     = karlsruhe
+        regierungsform = konstitutionelle_monarchie
+        konfession     = lutherisch
+        zollverein     = ja
+    }
+}

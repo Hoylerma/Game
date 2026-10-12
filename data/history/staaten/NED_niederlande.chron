@@ -1,0 +1,19 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+staat NED {
+    name     = "Königreich der Niederlande"
+    kurzname = "Niederlande"
+    farbe    = { 230 140 50 }
+    quelle   = "Hier nur das Herzogtum Limburg (seit 1839 im Bund, ohne die Festungen Maastricht und Venlo); die übrigen Niederlande sind Orte ohne Daten. Schatz, Steuersätze, Hofhaltung und Heer sind Spielwerte"
+
+    1840.10.07 = {
+        herrscher = "Wilhelm II."
+    }
+
+    1848.03.01 = {
+        hauptstadt     = maestricht
+        regierungsform = konstitutionelle_monarchie
+        konfession     = reformiert
+        zollverein     = nein
+    }
+}

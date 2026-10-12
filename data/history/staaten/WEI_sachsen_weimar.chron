@@ -28,4 +28,20 @@ staat WEI {
         hofhaltung     = 4000
         heer           = 4
     }
+
+    1815.04.21 = {
+        name     = "Großherzogtum Sachsen-Weimar-Eisenach"
+        kurzname = "Sachsen-Weimar-Eisenach"
+    }
+
+    1828.06.14 = {
+        herrscher = "Carl Friedrich"
+    }
+
+    1848.03.01 = {
+        hauptstadt     = weimar
+        regierungsform = konstitutionelle_monarchie
+        konfession     = lutherisch
+        zollverein     = ja
+    }
 }

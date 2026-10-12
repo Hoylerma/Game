@@ -1,0 +1,19 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+staat DEN {
+    name     = "Königreich Dänemark"
+    kurzname = "Dänemark"
+    farbe    = { 200 80 80 }
+    quelle   = "Hier die Herzogtümer Schleswig (außerhalb des Bundes), Holstein und Lauenburg (im Bund) unter dem dänischen König; Erhebung in Kiel am 24. März 1848. Hauptstadt hier Schleswig, weil Kopenhagen außerhalb der Karte liegt. Schatz, Steuersätze, Hofhaltung und Heer sind Spielwerte"
+
+    1848.01.20 = {
+        herrscher = "Friedrich VII."
+    }
+
+    1848.03.01 = {
+        hauptstadt     = schleswig
+        regierungsform = absolute_monarchie
+        konfession     = lutherisch
+        zollverein     = nein
+    }
+}

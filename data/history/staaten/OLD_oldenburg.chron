@@ -1,0 +1,19 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+staat OLD {
+    name     = "Großherzogtum Oldenburg"
+    kurzname = "Oldenburg"
+    farbe    = { 70 120 170 }
+    quelle   = "Mit den Fürstentümern Lübeck (Eutin) und Birkenfeld; Verfassung erst 1849. Nicht im Zollverein. Schatz, Steuersätze, Hofhaltung und Heer sind Spielwerte"
+
+    1829.05.21 = {
+        herrscher = "Paul Friedrich August"
+    }
+
+    1848.03.01 = {
+        hauptstadt     = oldenburg
+        regierungsform = absolute_monarchie
+        konfession     = lutherisch
+        zollverein     = nein
+    }
+}

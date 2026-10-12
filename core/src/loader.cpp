@@ -151,6 +151,7 @@ public:
     void warning(const std::string& file, int line, std::string message) {
         out_.push_back(LoadIssue{file, line, std::move(message), false});
     }
+    void add(LoadIssue issue) { out_.push_back(std::move(issue)); }
     bool has_errors() const {
         return std::any_of(out_.begin(), out_.end(), [](const LoadIssue& i) { return i.fatal; });
     }
@@ -1281,7 +1282,11 @@ private:
                                   " (2–4 Zeichen, nur Großbuchstaben A–Z und Ziffern)");
             }
             const ScriptNode merged = apply_history(node, file.name, "staat " + node.value, {"farbe"});
-            Fields f(merged, file.name, "staat " + node.value, issues_,
+            // Fehlende Pflichtfelder zählen nur für Staaten, die zum Startdatum bestehen (seit M7,
+            // drop_states_without_land); die übrigen Meldungen gelten sofort.
+            std::vector<LoadIssue> field_issues;
+            Issues state_issues(field_issues);
+            Fields f(merged, file.name, "staat " + node.value, state_issues,
                      {"name", "kurzname", "farbe", "hauptstadt", "regierungsform", "herrscher", "konfession",
                       "schatz", "kontribution", "akzise", "zoll", "hofhaltung", "heer", "schulden",
                       "zollverein", "quelle"});
@@ -1317,8 +1322,17 @@ private:
             }
             s.source = f.text("quelle").value_or("");
 
+            std::vector<LoadIssue> missing;
+            for (LoadIssue& issue : field_issues) {
+                if (issue.message.rfind("Pflichtfeld ", 0) == 0) {
+                    missing.push_back(std::move(issue));
+                } else {
+                    issues_.add(std::move(issue));
+                }
+            }
             const auto index = static_cast<Index>(world_.states.size());
             if (register_id(states_, s.tag, index, file.name, node.line, "Staat")) {
+                missing_state_fields_.push_back(std::move(missing));
                 if (capital) {
                     const ScriptNode* capital_node = merged.find("hauptstadt");
                     capitals_.push_back(CapitalRef{*capital, file.name, capital_node->line});
@@ -1781,6 +1795,9 @@ private:
                 dropped_states_.insert(world_.states[i].tag);
                 continue;
             }
+            for (LoadIssue& issue : missing_state_fields_[i]) {
+                issues_.add(std::move(issue));
+            }
             remap[i] = static_cast<Index>(kept.size());
             kept.push_back(std::move(world_.states[i]));
             kept_capitals.push_back(std::move(capitals_[i]));
@@ -1965,7 +1982,8 @@ private:
     Registry landscapes_; // Landschaft → Markt
     std::set<std::string, std::less<>> seen_landscapes_;
     Registry states_;
-    std::set<std::string, std::less<>> dropped_states_; // zum Startdatum ohne Orte (seit M7)
+    std::set<std::string, std::less<>> dropped_states_;        // zum Startdatum ohne Orte (seit M7)
+    std::vector<std::vector<LoadIssue>> missing_state_fields_; // parallel zu world_.states bis zum Wegfall
     Registry districts_;
     Registry admin_units_;
     std::vector<AdminParentRef> admin_parents_; // parallel zu world_.admin_units
