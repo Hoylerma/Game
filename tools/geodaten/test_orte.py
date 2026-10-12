@@ -595,11 +595,11 @@ class TestErzeugteTabellen(unittest.TestCase):
     def test_m1_orte_vorn_und_nur_sie_mit_historie(self) -> None:
         m1 = [z["id"] for z in self.orte if not z["quelle"].startswith(orte.QUELLE_PRAEFIX)]
         self.assertEqual(m1, [z["id"] for z in self.orte[:60]])  # Reihenfolge: M1-Orte unverändert vorn
-        # Vor dem Lesezeichen 1848 (Meilenstein M7, tools/geodaten/zuordnung.py) haben nur die M1-Orte
-        # Historie; die übrigen sind 1648 Orte ohne Daten.
+        # Bis 1800 haben nur die M1-Orte Historie; die übrigen sind 1648 Orte ohne Daten. Das Lesezeichen
+        # 1848 (Meilenstein M7: zuordnung.py, bevoelkerung_1846.py) gibt fast allen Orten Daten.
         mit_historie = set()
         for name, spalte in (("besitz.csv", "ab"), ("bevoelkerung.csv", "stichtag")):
-            mit_historie |= {z["ort"] for z in orte.lies_csv(TABELLEN / name) if z[spalte] < "1848"}
+            mit_historie |= {z["ort"] for z in orte.lies_csv(TABELLEN / name) if z[spalte] < "1800"}
         self.assertEqual(mit_historie, set(m1))
 
     def test_flaeche_wie_karte(self) -> None:
