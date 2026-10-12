@@ -2,7 +2,6 @@
 
 > **Status: in Umsetzung** – Entscheidungen 1–7 wie empfohlen freigegeben; M7a Schritte a1–a4
 > umgesetzt, Stand in Abschnitt 13
-> 
 > ([meilensteine.md](../meilensteine.md#m7--lesezeichen-1848)). Grundlage sind
 > [04 Zeitrahmen, Epochen, Startdaten](../04_zeitrahmen_epochen_startdaten.md) (Lesezeichen 6),
 > [05 Karte und Geographie](../05_karte_und_geographie.md) (Abschnitte 2 und 8),
