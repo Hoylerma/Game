@@ -11,7 +11,7 @@ ist (Stand: Meilenstein M3, Karte des Kernraums).
 | [tabellen.md](tabellen.md) | Tabellen der Datenpipeline (`data/tabellen/*.csv`), Sicherheit der Angaben, Prüfungen des Archivars | Archivar, `data/` |
 | [bridge-api.md](bridge-api.md) | GDScript-Schnittstelle der GDExtension (`UhrwerkSimulation`), Kartenmodi, Bibliotheksnamen | Brücke, Godot-Projekt |
 | [bevoelkerung.md](bevoelkerung.md) | Bevölkerungsmodell seit M4 (Altersaufbau, Lebensstandard, Bildung, Kultur, Wanderung), Formeln, Mehrkernberechnung, Lasttest, Abnahme mit Messwerten | Kern, `data/`, Archivar |
-| [wirtschaft.md](wirtschaft.md) | **M5 (verbindlich, soweit umgesetzt):** Güter, Betriebe, Märkte und Handel, Verbrauch nach Warenkorb, Steuerarten, Staatshaushalt mit Kredit und Bankrott, Balancing-Bericht, Abnahme | Kern, `data/`, Archivar |
+| [wirtschaft.md](wirtschaft.md) | **M5 (verbindlich):** Güter, Betriebe, Märkte und Handel, Verbrauch nach Warenkorb, Steuerarten, Staatshaushalt mit Kredit und Bankrott, Balancing-Bericht, Abnahme | Kern, `data/`, Archivar |
 
 Die öffentlichen Header in [`core/include/uhrwerk/`](../../core/include/uhrwerk/) sind die
 verbindliche Programmierschnittstelle des Kerns. Jede Datei beginnt mit einem Kommentar, der ihre

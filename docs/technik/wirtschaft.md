@@ -1,9 +1,9 @@
 # Wirtschaft und Staatshaushalt (Meilenstein M5)
 
-> **Status: verbindlich** für Kern (`core/src/economy.cpp`), Daten und Tests, soweit umgesetzt: Datenmodell
-> (Abschnitt 2), Märkte, Ortsrechnung, Staatshaushalt, Ernte und Einschwingen (Abschnitte 4.1–4.8) und
-> Balancing-Bericht (7), Brücke und Oberfläche (10)
-> ([meilensteine.md](../meilensteine.md#m5--wirtschaft-und-staatshaushalt)). Das Dokument entstand als
+> **Status: verbindlich** für Kern (`core/src/economy.cpp`, `core/src/balance.cpp`), Daten, Tests, Brücke
+> und Oberfläche – M5 ist abgeschlossen: Datenmodell (Abschnitt 2), Märkte, Ortsrechnung,
+> Staatshaushalt, Ernte und Einschwingen (4.1–4.8), Balancing-Bericht (7), Brücke und Oberfläche (10)
+> ([meilensteine.md](../meilensteine.md#m5--wirtschaft-und-staatshaushalt-)). Das Dokument entstand als
 > Entwurf und wurde vor der Umsetzung freigegeben; Abweichungen der Umsetzung sind eingearbeitet
 > (u. a. Handel bis zur ganzen Menge, Überschuss nicht in Grundnahrung, Hunger quadratisch, Bauten nur
 > ohne Schulden, Kalibrierung in 4.9).
@@ -556,15 +556,15 @@ Spieldaten, die die Fixture verfehlen muss).
 
 ## 8. Abnahme
 
-| Kriterium | Prüfung |
-|---|---|
-| Über 100 Spieljahre ohne Spielereingriff bleiben die Kassen in einer plausiblen Spanne; kein Staat wächst ins Unendliche | Balancing-Bericht mit den Zielwerten aus Abschnitt 7, in der CI |
-| Balancing-Bericht über mehrere Seeds in der CI | Job „Balancing“ |
-| Prüfsummen bitgleich unter GCC, Clang, MSVC und bei jeder Zahl von Threads | wie M4 (Determinismus-Job, Unit-Test, Lasttest-Vergleich) |
-| Lasttest bleibt unter 2 s je Spieljahr | Job „Lasttest“ |
-| Buchführung der Wirtschaft | Test: Ausfuhr eines Marktes = Einfuhr seiner Nachbarn (je Gut, bitgenau); Haushalt: Schatz und Schulden ändern sich genau um Einnahmen − Ausgaben |
-| Formeln | Tests rechnen Markt, Ort und Haushalt für kleine Fixturen nach (wie M4) |
-| Oberfläche | Haushaltsfenster, Kartenmodi Wirtschaft und Märkte; Godot-Tests in der CI |
+| Kriterium | Prüfung | Stand |
+|---|---|---|
+| Über 100 Spieljahre ohne Spielereingriff bleiben die Kassen in einer plausiblen Spanne; kein Staat wächst ins Unendliche | Balancing-Bericht mit den Zielwerten aus Abschnitt 7, in der CI | **erfüllt:** 32 Läufe über 100 Jahre ohne Staatsbankrott, Vermögen am Ende im Median 0,85–1,12 Jahreseinnahmen, alle Staatsjahre zwischen −3 und +3 (Abschnitt 7) |
+| Balancing-Bericht über mehrere Seeds in der CI | Job „Balancing“ | **erfüllt:** 16 Seeds × 100 Jahre in 4 s auf dem Runner, Bericht in der Zusammenfassung |
+| Prüfsummen bitgleich unter GCC, Clang, MSVC und bei jeder Zahl von Threads | wie M4 (Determinismus-Job, Unit-Test, Lasttest-Vergleich) | **erfüllt:** Determinismus-Job grün; lokal GCC = Clang bei 1–4 Threads; ThreadSanitizer ohne Befund (Abschnitt 6) |
+| Lasttest bleibt unter 2 s je Spieljahr | Job „Lasttest“ | **erfüllt:** 0,58 s mit 4 Kernen (Entwicklungsumgebung), 0,67 s auf dem Runner (2 vCPU) |
+| Buchführung der Wirtschaft | Test: Ausfuhr eines Marktes = Einfuhr seiner Nachbarn (je Gut, bitgenau); Haushalt: Schatz und Schulden ändern sich genau um Einnahmen − Ausgaben | **erfüllt:** doctest „Wirtschaft: Handel zwischen Märkten und mit dem Weltmarkt“ (Ausfuhr = Einfuhr bitgenau) und „Simulation: Staatshaushalt exakt“ (Bauten, Kredit, Tilgung, Zinsaufschlag, Bankrott, Landesausbau) |
+| Formeln | Tests rechnen Markt, Ort und Haushalt für kleine Fixturen nach (wie M4) | **erfüllt:** „Wirtschaft: Ortsrechnung exakt gegen Handrechnung“, „Wirtschaft: Markt am Monatsersten“, „Simulation: Bevölkerungsformeln exakt gegen Nachrechnung“ |
+| Oberfläche | Haushaltsfenster, Kartenmodi Wirtschaft und Märkte; Godot-Tests in der CI | **erfüllt:** Einheiten-, Rauch- und Klicktest prüfen Regler, Haushaltsfenster, Ortsinfo und beide Modi; Screenshot in der CI |
 
 ## 9. Prüfsumme
 
