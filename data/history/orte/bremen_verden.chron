@@ -20,9 +20,17 @@ ort stade {
     kreis    = kr_stade
     quelle   = "GeoNames (CC BY 4.0), geonameid 2829901; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8555
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_stade
+        bund       = ja
     }
 }
 
@@ -35,9 +43,17 @@ ort drochtersen {
     kreis    = kr_stade
     quelle   = "GeoNames (CC BY 4.0), geonameid 2934915; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 2772
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_stade
+        bund       = ja
     }
 }
 
@@ -50,9 +66,17 @@ ort hemmoor {
     kreis    = kr_stade
     quelle   = "GeoNames (CC BY 4.0), geonameid 2906524; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7933
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_stade
+        bund       = ja
     }
 }
 
@@ -65,9 +89,17 @@ ort himmelpforten {
     kreis    = kr_stade
     quelle   = "GeoNames (CC BY 4.0), geonameid 2904543; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5133
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_stade
+        bund       = ja
     }
 }
 
@@ -80,9 +112,17 @@ ort wischhafen {
     kreis    = kr_stade
     quelle   = "GeoNames (CC BY 4.0), geonameid 2807484; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 4228
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_stade
+        bund       = ja
     }
 }
 
@@ -95,9 +135,17 @@ ort cadenberge {
     kreis    = kr_stade
     quelle   = "GeoNames (CC BY 4.0), geonameid 2940430; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7155
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_stade
+        bund       = ja
     }
 }
 
@@ -109,6 +157,13 @@ ort bremerhaven {
     stadt    = ja
     kreis    = kr_bremerhaven
     quelle   = "GeoNames (CC BY 4.0), geonameid 2944368; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11843
+        konfession   = { reformiert = 70 lutherisch = 28 katholisch = 2 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
 
     1848.03.01 = {
         besitzer = BRE
@@ -125,6 +180,13 @@ ort cuxhaven {
     kreis    = kr_bremerhaven
     quelle   = "GeoNames (CC BY 4.0), geonameid 2939658; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8726
+        konfession   = { lutherisch = 91 reformiert = 2 katholisch = 2 juedisch = 5 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
         besitzer = HAM
         bund     = ja
@@ -140,9 +202,17 @@ ort loxstedt {
     kreis    = kr_bremerhaven
     quelle   = "GeoNames (CC BY 4.0), geonameid 2875645; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5102
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_stade
+        bund       = ja
     }
 }
 
@@ -155,9 +225,17 @@ ort nordholz {
     kreis    = kr_bremerhaven
     quelle   = "GeoNames (CC BY 4.0), geonameid 2861939; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 3556
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_stade
+        bund       = ja
     }
 }
 
@@ -170,9 +248,17 @@ ort otterndorf {
     kreis    = kr_bremerhaven
     quelle   = "GeoNames (CC BY 4.0), geonameid 2856024; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 3108
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_stade
+        bund       = ja
     }
 }
 
@@ -185,9 +271,17 @@ ort dorum {
     kreis    = kr_bremerhaven
     quelle   = "GeoNames (CC BY 4.0), geonameid 2935494; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 4284
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_stade
+        bund       = ja
     }
 }
 
@@ -200,9 +294,17 @@ ort drangstedt {
     kreis    = kr_bremerhaven
     quelle   = "GeoNames (CC BY 4.0), geonameid 2935334; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8959
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_stade
+        bund       = ja
     }
 }
 
@@ -215,9 +317,17 @@ ort wanna {
     kreis    = kr_bremerhaven
     quelle   = "GeoNames (CC BY 4.0), geonameid 2814241; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5475
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_stade
+        bund       = ja
     }
 }
 
@@ -230,9 +340,17 @@ ort bremervoerde {
     kreis    = kr_bremervoerde
     quelle   = "GeoNames (CC BY 4.0), geonameid 2944354; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5693
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_stade
+        bund       = ja
     }
 }
 
@@ -245,9 +363,17 @@ ort gnarrenburg {
     kreis    = kr_bremervoerde
     quelle   = "GeoNames (CC BY 4.0), geonameid 2919692; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5444
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_stade
+        bund       = ja
     }
 }
 
@@ -260,9 +386,17 @@ ort kutenholz {
     kreis    = kr_bremervoerde
     quelle   = "GeoNames (CC BY 4.0), geonameid 2882224; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5911
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_stade
+        bund       = ja
     }
 }
 
@@ -275,9 +409,17 @@ ort beverstedt {
     kreis    = kr_bremervoerde
     quelle   = "GeoNames (CC BY 4.0), geonameid 2949482; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 4511
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_stade
+        bund       = ja
     }
 }
 
@@ -290,9 +432,17 @@ ort selsingen {
     kreis    = kr_bremervoerde
     quelle   = "GeoNames (CC BY 4.0), geonameid 2833154; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5755
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_stade
+        bund       = ja
     }
 }
 
@@ -305,9 +455,17 @@ ort hipstedt {
     kreis    = kr_bremervoerde
     quelle   = "GeoNames (CC BY 4.0), geonameid 2903841; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6813
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_stade
+        bund       = ja
     }
 }
 
@@ -320,9 +478,17 @@ ort buxtehude {
     kreis    = kr_buxtehude
     quelle   = "GeoNames (CC BY 4.0), geonameid 2940451; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9950
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_stade
+        bund       = ja
     }
 }
 
@@ -335,9 +501,17 @@ ort zeven {
     kreis    = kr_buxtehude
     quelle   = "GeoNames (CC BY 4.0), geonameid 2804642; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5351
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_stade
+        bund       = ja
     }
 }
 
@@ -350,9 +524,17 @@ ort harsefeld {
     kreis    = kr_buxtehude
     quelle   = "GeoNames (CC BY 4.0), geonameid 2910280; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5257
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_stade
+        bund       = ja
     }
 }
 
@@ -365,9 +547,17 @@ ort sittensen {
     kreis    = kr_buxtehude
     quelle   = "GeoNames (CC BY 4.0), geonameid 2831802; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5662
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_stade
+        bund       = ja
     }
 }
 
@@ -380,9 +570,17 @@ ort sauensiek {
     kreis    = kr_buxtehude
     quelle   = "GeoNames (CC BY 4.0), geonameid 2841204; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 3266
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_stade
+        bund       = ja
     }
 }
 
@@ -395,9 +593,17 @@ ort gyhum {
     kreis    = kr_buxtehude
     quelle   = "GeoNames (CC BY 4.0), geonameid 2913280; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 4884
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_stade
+        bund       = ja
     }
 }
 
@@ -409,6 +615,13 @@ ort bremen {
     stadt    = ja
     kreis    = kr_bremen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2944388; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 63157
+        konfession   = { reformiert = 70 lutherisch = 28 katholisch = 2 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
 
     1848.03.01 = {
         besitzer = BRE
@@ -425,9 +638,17 @@ ort osterholz_scharmbeck {
     kreis    = kr_bremen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2856500; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7071
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_stade
+        bund       = ja
     }
 }
 
@@ -440,9 +661,17 @@ ort achim {
     kreis    = kr_bremen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2959681; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10478
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_stade
+        bund       = ja
     }
 }
 
@@ -455,9 +684,17 @@ ort schwanewede {
     kreis    = kr_bremen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2835260; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5137
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_stade
+        bund       = ja
     }
 }
 
@@ -470,9 +707,17 @@ ort lilienthal {
     kreis    = kr_bremen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2877709; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 4075
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_stade
+        bund       = ja
     }
 }
 
@@ -485,9 +730,17 @@ ort ottersberg {
     kreis    = kr_bremen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2856014; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6004
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_stade
+        bund       = ja
     }
 }
 
@@ -500,9 +753,17 @@ ort hambergen {
     kreis    = kr_bremen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2911322; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 4511
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_stade
+        bund       = ja
     }
 }
 
@@ -515,9 +776,17 @@ ort worpswede {
     kreis    = kr_bremen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2806108; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 3266
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_stade
+        bund       = ja
     }
 }
 
@@ -530,9 +799,17 @@ ort hagen_im_bremischen {
     kreis    = kr_bremen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2912496; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5195
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_stade
+        bund       = ja
     }
 }
 
@@ -545,9 +822,17 @@ ort tarmstedt {
     kreis    = kr_bremen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2823989; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5537
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_stade
+        bund       = ja
     }
 }
 
@@ -559,6 +844,13 @@ ort emtinghausen {
     stadt    = nein
     kreis    = kr_bremen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2930417; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 4165
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
 
     1848.03.01 = {
         besitzer = BWO
@@ -575,9 +867,17 @@ ort verden {
     kreis    = kr_verden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2817599; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10004
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_stade
+        bund       = ja
     }
 }
 
@@ -590,9 +890,17 @@ ort rotenburg {
     kreis    = kr_verden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2844437; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7361
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_stade
+        bund       = ja
     }
 }
 
@@ -605,9 +913,17 @@ ort scheessel {
     kreis    = kr_verden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2840070; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 3609
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_stade
+        bund       = ja
     }
 }
 
@@ -620,9 +936,17 @@ ort doerverden {
     kreis    = kr_verden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2935491; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 4934
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_stade
+        bund       = ja
     }
 }
 
@@ -635,9 +959,17 @@ ort visselhoevede {
     kreis    = kr_verden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2817130; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 2489
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_stade
+        bund       = ja
     }
 }
 
@@ -650,9 +982,17 @@ ort fintel {
     kreis    = kr_verden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2926667; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 2131
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_stade
+        bund       = ja
     }
 }
 
@@ -665,9 +1005,17 @@ ort kirchwalsede {
     kreis    = kr_verden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2890344; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6782
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_stade
+        bund       = ja
     }
 }
 
@@ -680,8 +1028,16 @@ ort hemslingen {
     kreis    = kr_verden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2906500; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 1820
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_stade
+        bund       = ja
     }
 }

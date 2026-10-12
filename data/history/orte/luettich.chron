@@ -259,9 +259,17 @@ ort eupen {
     kreis    = kr_verviers
     quelle   = "GeoNames (CC BY 4.0), geonameid 2798573; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10276
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
     }
 }
 
@@ -394,9 +402,17 @@ ort malmedy {
     kreis    = kr_malmedy
     quelle   = "GeoNames (CC BY 4.0), geonameid 2791834; deutscher Name aus den GeoNames-Alternativnamen (heute Malmédy); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11520
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { wallonen = 70 rheinlaender = 30 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
     }
 }
 
@@ -419,9 +435,17 @@ ort sankt_vith {
     kreis    = kr_malmedy
     quelle   = "GeoNames (CC BY 4.0), geonameid 2787315; deutscher Name aus den GeoNames-Alternativnamen (heute Saint-Vith); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11586
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
     }
 }
 
@@ -434,9 +458,17 @@ ort buellingen {
     kreis    = kr_malmedy
     quelle   = "GeoNames (CC BY 4.0), geonameid 2800782; deutscher Name aus den GeoNames-Alternativnamen (heute Bullange); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 17673
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
     }
 }
 
@@ -449,9 +481,17 @@ ort amel {
     kreis    = kr_malmedy
     quelle   = "GeoNames (CC BY 4.0), geonameid 2803242; deutscher Name aus den GeoNames-Alternativnamen (heute Amblève); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8509
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
     }
 }
 

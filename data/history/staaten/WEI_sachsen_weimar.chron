@@ -42,6 +42,12 @@ staat WEI {
         hauptstadt     = weimar
         regierungsform = konstitutionelle_monarchie
         konfession     = lutherisch
+        schatz         = 78300
+        kontribution   = 0.10
+        akzise         = 0.05
+        zoll           = 0.03
+        hofhaltung     = 65200
+        heer           = 6
         zollverein     = ja
     }
 }

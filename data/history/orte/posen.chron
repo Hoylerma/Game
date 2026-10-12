@@ -20,8 +20,16 @@ ort schneidemuehl {
     kreis    = kr_schneidemuehl
     quelle   = "GeoNames (CC BY 4.0), geonameid 3089033; deutscher Name aus den GeoNames-Alternativnamen (heute Piła); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 16316
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -34,8 +42,16 @@ ort kolmar_posen {
     kreis    = kr_schneidemuehl
     quelle   = "GeoNames (CC BY 4.0), geonameid 3101680; deutscher Name aus den GeoNames-Alternativnamen (heute Chodzież); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7744
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -48,8 +64,16 @@ ort schoenlanke {
     kreis    = kr_schneidemuehl
     quelle   = "GeoNames (CC BY 4.0), geonameid 3083185; deutscher Name aus den GeoNames-Alternativnamen (heute Trzcianka); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 17535
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -62,8 +86,16 @@ ort czarnkow {
     kreis    = kr_schneidemuehl
     quelle   = "GeoNames (CC BY 4.0), geonameid 3101145; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 17294
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -76,8 +108,16 @@ ort ujscie {
     kreis    = kr_schneidemuehl
     quelle   = "GeoNames (CC BY 4.0), geonameid 3082838; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8707
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -90,8 +130,16 @@ ort margonin {
     kreis    = kr_schneidemuehl
     quelle   = "GeoNames (CC BY 4.0), geonameid 3092312; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10192
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -104,8 +152,16 @@ ort budzyn {
     kreis    = kr_schneidemuehl
     quelle   = "GeoNames (CC BY 4.0), geonameid 3102162; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6621
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -118,8 +174,16 @@ ort kaczory {
     kreis    = kr_schneidemuehl
     quelle   = "GeoNames (CC BY 4.0), geonameid 3096966; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7423
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -132,8 +196,16 @@ ort nakel {
     kreis    = kr_nakel
     quelle   = "GeoNames (CC BY 4.0), geonameid 3091150; deutscher Name aus den GeoNames-Alternativnamen (heute Nakło nad Notecią); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7343
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -146,8 +218,16 @@ ort krone {
     kreis    = kr_nakel
     quelle   = "GeoNames (CC BY 4.0), geonameid 3095192; deutscher Name aus den GeoNames-Alternativnamen (heute Koronowo); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10192
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -160,8 +240,16 @@ ort wirsitz {
     kreis    = kr_nakel
     quelle   = "GeoNames (CC BY 4.0), geonameid 3081158; deutscher Name aus den GeoNames-Alternativnamen (heute Wyrzysk); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9389
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -174,8 +262,16 @@ ort mrotschen {
     kreis    = kr_nakel
     quelle   = "GeoNames (CC BY 4.0), geonameid 3091351; deutscher Name aus den GeoNames-Alternativnamen (heute Mrocza); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8426
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -188,8 +284,16 @@ ort lobsens {
     kreis    = kr_nakel
     quelle   = "GeoNames (CC BY 4.0), geonameid 3093150; deutscher Name aus den GeoNames-Alternativnamen (heute Łobżenica); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7504
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -202,8 +306,16 @@ ort wissek {
     kreis    = kr_nakel
     quelle   = "GeoNames (CC BY 4.0), geonameid 3081128; deutscher Name aus den GeoNames-Alternativnamen (heute Wysoka); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11075
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -216,8 +328,16 @@ ort sadki {
     kreis    = kr_nakel
     quelle   = "GeoNames (CC BY 4.0), geonameid 3086377; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8587
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -230,8 +350,16 @@ ort sicienko {
     kreis    = kr_nakel
     quelle   = "GeoNames (CC BY 4.0), geonameid 3086118; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9590
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -244,8 +372,16 @@ ort bromberg {
     kreis    = kr_bromberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 3102014; deutscher Name aus den GeoNames-Alternativnamen (heute Bydgoszcz); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 23714
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -258,8 +394,16 @@ ort fordon {
     kreis    = kr_bromberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 3099654; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 14838
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -272,8 +416,16 @@ ort schulitz {
     kreis    = kr_bromberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 3085172; deutscher Name aus den GeoNames-Alternativnamen (heute Solec Kujawski); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 14502
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -286,8 +438,16 @@ ort schubin {
     kreis    = kr_bromberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 3083611; deutscher Name aus den GeoNames-Alternativnamen (heute Szubin); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11075
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -300,8 +460,16 @@ ort barcin {
     kreis    = kr_bromberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 3103856; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6661
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -314,8 +482,16 @@ ort labischin {
     kreis    = kr_bromberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 3094052; deutscher Name aus den GeoNames-Alternativnamen (heute Łabiszyn); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9430
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -328,8 +504,16 @@ ort znin {
     kreis    = kr_znin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3080047; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10322
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -342,8 +526,16 @@ ort janowiec_wielkopolski {
     kreis    = kr_znin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3097594; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5939
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -356,8 +548,16 @@ ort kcynia {
     kreis    = kr_znin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3096385; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10874
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -370,8 +570,16 @@ ort golancz {
     kreis    = kr_znin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3099016; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8948
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -384,8 +592,16 @@ ort damaslawek {
     kreis    = kr_znin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3100677; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8226
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -398,8 +614,16 @@ ort rogowo {
     kreis    = kr_znin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3087097; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11115
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -412,8 +636,16 @@ ort wagrowiec {
     kreis    = kr_wagrowiec
     quelle   = "GeoNames (CC BY 4.0), geonameid 3082712; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10515
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -426,8 +658,16 @@ ort obornik {
     kreis    = kr_wagrowiec
     quelle   = "GeoNames (CC BY 4.0), geonameid 3090403; deutscher Name aus den GeoNames-Alternativnamen (heute Oborniki); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11737
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -440,8 +680,16 @@ ort rogasen {
     kreis    = kr_wagrowiec
     quelle   = "GeoNames (CC BY 4.0), geonameid 3087072; deutscher Name aus den GeoNames-Alternativnamen (heute Rogoźno); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8426
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -454,8 +702,16 @@ ort murowana_goslina {
     kreis    = kr_wagrowiec
     quelle   = "GeoNames (CC BY 4.0), geonameid 3091293; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 13197
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -468,8 +724,16 @@ ort schokken {
     kreis    = kr_wagrowiec
     quelle   = "GeoNames (CC BY 4.0), geonameid 3085781; deutscher Name aus den GeoNames-Alternativnamen (heute Skoki); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7664
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -482,8 +746,16 @@ ort ryczywol {
     kreis    = kr_wagrowiec
     quelle   = "GeoNames (CC BY 4.0), geonameid 3086533; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12439
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -496,8 +768,16 @@ ort kiszkowo {
     kreis    = kr_wagrowiec
     quelle   = "GeoNames (CC BY 4.0), geonameid 3096200; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6982
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -510,8 +790,16 @@ ort miescisko {
     kreis    = kr_wagrowiec
     quelle   = "GeoNames (CC BY 4.0), geonameid 3091874; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7062
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -524,8 +812,16 @@ ort inowroclaw {
     kreis    = kr_inowroclaw
     quelle   = "GeoNames (CC BY 4.0), geonameid 3097872; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 15589
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -538,8 +834,16 @@ ort mogilno {
     kreis    = kr_inowroclaw
     quelle   = "GeoNames (CC BY 4.0), geonameid 3091523; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8306
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -552,8 +856,16 @@ ort kruszwica {
     kreis    = kr_inowroclaw
     quelle   = "GeoNames (CC BY 4.0), geonameid 3094585; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11633
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -566,8 +878,16 @@ ort gniewkowo {
     kreis    = kr_inowroclaw
     quelle   = "GeoNames (CC BY 4.0), geonameid 3099120; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 16901
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -580,8 +900,16 @@ ort janikowo {
     kreis    = kr_inowroclaw
     quelle   = "GeoNames (CC BY 4.0), geonameid 3097688; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9389
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -594,8 +922,16 @@ ort strelno {
     kreis    = kr_inowroclaw
     quelle   = "GeoNames (CC BY 4.0), geonameid 3084396; deutscher Name aus den GeoNames-Alternativnamen (heute Strzelno); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11111
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -608,8 +944,16 @@ ort zlotniki_kujawskie {
     kreis    = kr_inowroclaw
     quelle   = "GeoNames (CC BY 4.0), geonameid 3080083; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12311
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -622,8 +966,16 @@ ort dabrowa {
     kreis    = kr_inowroclaw
     quelle   = "GeoNames (CC BY 4.0), geonameid 3100820; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7022
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -636,8 +988,16 @@ ort samter {
     kreis    = kr_samter
     quelle   = "GeoNames (CC BY 4.0), geonameid 3083878; deutscher Name aus den GeoNames-Alternativnamen (heute Szamotuły); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9781
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -650,8 +1010,16 @@ ort wronki {
     kreis    = kr_samter
     quelle   = "GeoNames (CC BY 4.0), geonameid 3081350; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 14658
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -664,8 +1032,16 @@ ort obrzycko {
     kreis    = kr_samter
     quelle   = "GeoNames (CC BY 4.0), geonameid 3090364; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11163
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -678,8 +1054,16 @@ ort tarnowo_podgorne {
     kreis    = kr_samter
     quelle   = "GeoNames (CC BY 4.0), geonameid 3083442; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9309
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -692,8 +1076,16 @@ ort pamiatkowo {
     kreis    = kr_samter
     quelle   = "GeoNames (CC BY 4.0), geonameid 3089507; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5136
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -706,8 +1098,16 @@ ort zlotniki {
     kreis    = kr_samter
     quelle   = "GeoNames (CC BY 4.0), geonameid 3080084; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7504
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -720,8 +1120,16 @@ ort gnesen {
     kreis    = kr_gnesen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3099112; deutscher Name aus den GeoNames-Alternativnamen (heute Gniezno); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 14561
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -734,8 +1142,16 @@ ort wreschen {
     kreis    = kr_gnesen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3081324; deutscher Name aus den GeoNames-Alternativnamen (heute Września); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 13679
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -748,8 +1164,16 @@ ort trzemeszno {
     kreis    = kr_gnesen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3083077; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9751
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -762,8 +1186,16 @@ ort witkowo {
     kreis    = kr_gnesen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3081826; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9109
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -776,8 +1208,16 @@ ort czerniejewo {
     kreis    = kr_gnesen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3101006; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8346
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -790,8 +1230,16 @@ ort klecko {
     kreis    = kr_gnesen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3096165; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7624
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -804,8 +1252,16 @@ ort pinne {
     kreis    = kr_pinne
     quelle   = "GeoNames (CC BY 4.0), geonameid 3088759; deutscher Name aus den GeoNames-Alternativnamen (heute Pniewy); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7504
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -818,8 +1274,16 @@ ort kreuz {
     kreis    = kr_pinne
     quelle   = "GeoNames (CC BY 4.0), geonameid 3094408; deutscher Name aus den GeoNames-Alternativnamen (heute Krzyż Wielkopolski); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11958
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -832,8 +1296,16 @@ ort filehne {
     kreis    = kr_pinne
     quelle   = "GeoNames (CC BY 4.0), geonameid 3082319; deutscher Name aus den GeoNames-Alternativnamen (heute Wieleń); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 16973
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -846,8 +1318,16 @@ ort sierakow {
     kreis    = kr_pinne
     quelle   = "GeoNames (CC BY 4.0), geonameid 3085974; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 13980
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -860,8 +1340,16 @@ ort neustadt_bei_pinne {
     kreis    = kr_pinne
     quelle   = "GeoNames (CC BY 4.0), geonameid 3092639; deutscher Name aus den GeoNames-Alternativnamen (heute Lwówek); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8747
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -874,8 +1362,16 @@ ort duszniki {
     kreis    = kr_pinne
     quelle   = "GeoNames (CC BY 4.0), geonameid 3099993; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9189
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -888,8 +1384,16 @@ ort kwilcz {
     kreis    = kr_pinne
     quelle   = "GeoNames (CC BY 4.0), geonameid 3094072; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7463
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -902,8 +1406,16 @@ ort chrzypsko_wielkie {
     kreis    = kr_pinne
     quelle   = "GeoNames (CC BY 4.0), geonameid 3101513; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6460
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -916,8 +1428,16 @@ ort meseritz {
     kreis    = kr_meseritz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3091969; deutscher Name aus den GeoNames-Alternativnamen (heute Międzyrzecz); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11713
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -930,8 +1450,16 @@ ort birnbaum {
     kreis    = kr_meseritz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3091983; deutscher Name aus den GeoNames-Alternativnamen (heute Międzychód); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 16109
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -944,8 +1472,16 @@ ort schwerin_posen {
     kreis    = kr_meseritz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3085656; deutscher Name aus den GeoNames-Alternativnamen (heute Skwierzyna); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11372
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -958,8 +1494,16 @@ ort betsche {
     kreis    = kr_meseritz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3087710; deutscher Name aus den GeoNames-Alternativnamen (heute Pszczew); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8587
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -972,8 +1516,16 @@ ort przytoczna {
     kreis    = kr_meseritz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3087769; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9831
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -986,8 +1538,16 @@ ort blesen {
     kreis    = kr_meseritz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3103247; deutscher Name aus den GeoNames-Alternativnamen (heute Bledzew); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7825
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1000,8 +1560,16 @@ ort braetz {
     kreis    = kr_meseritz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3102598; deutscher Name aus den GeoNames-Alternativnamen (heute Brójce); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8667
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1014,8 +1582,16 @@ ort posen {
     kreis    = kr_posen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3088171; deutscher Name aus den GeoNames-Alternativnamen (heute Poznań); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 50049
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1028,8 +1604,16 @@ ort schrimm {
     kreis    = kr_posen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3085056; deutscher Name aus den GeoNames-Alternativnamen (heute Śrem); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 14259
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1042,8 +1626,16 @@ ort schroda {
     kreis    = kr_posen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3085045; deutscher Name aus den GeoNames-Alternativnamen (heute Środa Wielkopolska); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11235
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1056,8 +1648,16 @@ ort swarzedz {
     kreis    = kr_posen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3084130; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10130
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1070,8 +1670,16 @@ ort lubon {
     kreis    = kr_posen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3092856; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9798
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1084,8 +1692,16 @@ ort mosina {
     kreis    = kr_posen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3091407; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6420
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1098,8 +1714,16 @@ ort pudewitz {
     kreis    = kr_posen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3088749; deutscher Name aus den GeoNames-Alternativnamen (heute Pobiedziska); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7704
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1112,8 +1736,16 @@ ort kostrzyn {
     kreis    = kr_posen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3095058; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8146
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1126,8 +1758,16 @@ ort kurnik {
     kreis    = kr_posen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3095194; deutscher Name aus den GeoNames-Alternativnamen (heute Kórnik); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8908
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1140,8 +1780,16 @@ ort steszew {
     kreis    = kr_posen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3084647; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8306
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1154,8 +1802,16 @@ ort ksiaz_wielkopolski {
     kreis    = kr_posen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3094355; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7343
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1168,8 +1824,16 @@ ort zaniemysl {
     kreis    = kr_posen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3080705; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5899
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1182,8 +1846,16 @@ ort nowy_tomysl {
     kreis    = kr_nowy_tomysl
     quelle   = "GeoNames (CC BY 4.0), geonameid 3090452; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11075
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1196,8 +1868,16 @@ ort wolsztyn {
     kreis    = kr_nowy_tomysl
     quelle   = "GeoNames (CC BY 4.0), geonameid 3081419; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 13023
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1210,8 +1890,16 @@ ort zbaszyn {
     kreis    = kr_nowy_tomysl
     quelle   = "GeoNames (CC BY 4.0), geonameid 3080495; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7744
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1224,8 +1912,16 @@ ort rakoniewice {
     kreis    = kr_nowy_tomysl
     quelle   = "GeoNames (CC BY 4.0), geonameid 3087383; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8988
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1238,8 +1934,16 @@ ort tirschtiegel {
     kreis    = kr_nowy_tomysl
     quelle   = "GeoNames (CC BY 4.0), geonameid 3083177; deutscher Name aus den GeoNames-Alternativnamen (heute Trzciel); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7945
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1252,8 +1956,16 @@ ort kosten {
     kreis    = kr_kosten
     quelle   = "GeoNames (CC BY 4.0), geonameid 3095151; deutscher Name aus den GeoNames-Alternativnamen (heute Kościan); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10250
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1266,8 +1978,16 @@ ort graetz {
     kreis    = kr_kosten
     quelle   = "GeoNames (CC BY 4.0), geonameid 3098288; deutscher Name aus den GeoNames-Alternativnamen (heute Grodzisk Wielkopolski); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6862
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1280,8 +2000,16 @@ ort opalenica {
     kreis    = kr_kosten
     quelle   = "GeoNames (CC BY 4.0), geonameid 3090076; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5939
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1294,8 +2022,16 @@ ort smigiel {
     kreis    = kr_kosten
     quelle   = "GeoNames (CC BY 4.0), geonameid 3085391; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8226
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1308,8 +2044,16 @@ ort czempin {
     kreis    = kr_kosten
     quelle   = "GeoNames (CC BY 4.0), geonameid 3101053; deutscher Name aus den GeoNames-Alternativnamen (heute Czempiń); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6862
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1322,8 +2066,16 @@ ort buk {
     kreis    = kr_kosten
     quelle   = "GeoNames (CC BY 4.0), geonameid 3102138; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6220
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1336,8 +2088,16 @@ ort granowo {
     kreis    = kr_kosten
     quelle   = "GeoNames (CC BY 4.0), geonameid 3098394; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8627
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1350,8 +2110,16 @@ ort jarocin {
     kreis    = kr_jarocin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3097528; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11049
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1364,8 +2132,16 @@ ort pleszew {
     kreis    = kr_jarocin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3088848; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10266
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1378,8 +2154,16 @@ ort miloslaw {
     kreis    = kr_jarocin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3091757; deutscher Name aus den GeoNames-Alternativnamen (heute Miłosław); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7784
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1402,8 +2186,16 @@ ort zerkow {
     kreis    = kr_jarocin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3080275; deutscher Name aus den GeoNames-Alternativnamen (heute Żerków); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6420
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1416,8 +2208,16 @@ ort goluchow {
     kreis    = kr_jarocin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3098923; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7624
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1430,8 +2230,16 @@ ort nowe_miasto_nad_warta {
     kreis    = kr_jarocin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3090612; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8972
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1464,8 +2272,16 @@ ort lissa {
     kreis    = kr_lissa
     quelle   = "GeoNames (CC BY 4.0), geonameid 3093524; deutscher Name aus den GeoNames-Alternativnamen (heute Leszno); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12644
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1478,8 +2294,16 @@ ort rawitsch {
     kreis    = kr_lissa
     quelle   = "GeoNames (CC BY 4.0), geonameid 3087307; deutscher Name aus den GeoNames-Alternativnamen (heute Rawicz); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10122
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1492,8 +2316,16 @@ ort krobia {
     kreis    = kr_lissa
     quelle   = "GeoNames (CC BY 4.0), geonameid 3094690; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7263
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1506,8 +2338,16 @@ ort miejska_gorka {
     kreis    = kr_lissa
     quelle   = "GeoNames (CC BY 4.0), geonameid 3091957; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8507
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1520,8 +2360,16 @@ ort poniec {
     kreis    = kr_lissa
     quelle   = "GeoNames (CC BY 4.0), geonameid 3088345; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7744
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1534,8 +2382,16 @@ ort rydzyna {
     kreis    = kr_lissa
     quelle   = "GeoNames (CC BY 4.0), geonameid 3086527; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5618
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1548,8 +2404,16 @@ ort krzemieniewo {
     kreis    = kr_lissa
     quelle   = "GeoNames (CC BY 4.0), geonameid 3094525; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5417
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1562,8 +2426,16 @@ ort osieczna {
     kreis    = kr_lissa
     quelle   = "GeoNames (CC BY 4.0), geonameid 3089934; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6460
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1576,8 +2448,16 @@ ort krzywin {
     kreis    = kr_lissa
     quelle   = "GeoNames (CC BY 4.0), geonameid 3094423; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8707
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1590,8 +2470,16 @@ ort fraustadt {
     kreis    = kr_fraustadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 3081300; deutscher Name aus den GeoNames-Alternativnamen (heute Wschowa); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11243
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1604,8 +2492,16 @@ ort schlawa {
     kreis    = kr_fraustadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 3085637; deutscher Name aus den GeoNames-Alternativnamen (heute Sława); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8065
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1618,8 +2514,16 @@ ort wloszakowice {
     kreis    = kr_fraustadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 3081701; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5899
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1632,8 +2536,16 @@ ort schlichtingsheim {
     kreis    = kr_fraustadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 3083664; deutscher Name aus den GeoNames-Alternativnamen (heute Szlichtyngowa); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12102
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1646,8 +2558,16 @@ ort przemet {
     kreis    = kr_fraustadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 3087956; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7102
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1660,8 +2580,16 @@ ort brenno {
     kreis    = kr_fraustadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 3102650; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6460
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1674,8 +2602,16 @@ ort krotoszyn {
     kreis    = kr_krotoszyn
     quelle   = "GeoNames (CC BY 4.0), geonameid 3094625; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9745
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1688,8 +2624,16 @@ ort gostyn {
     kreis    = kr_krotoszyn
     quelle   = "GeoNames (CC BY 4.0), geonameid 3098625; deutscher Name aus den GeoNames-Alternativnamen (heute Gostyń); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8670
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1702,8 +2646,16 @@ ort koschmin {
     kreis    = kr_krotoszyn
     quelle   = "GeoNames (CC BY 4.0), geonameid 3094852; deutscher Name aus den GeoNames-Alternativnamen (heute Koźmin Wielkopolski); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8025
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1716,8 +2668,16 @@ ort kobylin {
     kreis    = kr_krotoszyn
     quelle   = "GeoNames (CC BY 4.0), geonameid 3095931; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9149
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1730,8 +2690,16 @@ ort pogorzela {
     kreis    = kr_krotoszyn
     quelle   = "GeoNames (CC BY 4.0), geonameid 3088548; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6741
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1744,8 +2712,16 @@ ort dobrzyca {
     kreis    = kr_krotoszyn
     quelle   = "GeoNames (CC BY 4.0), geonameid 3100280; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8627
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1758,8 +2734,16 @@ ort borek_wielkopolski {
     kreis    = kr_krotoszyn
     quelle   = "GeoNames (CC BY 4.0), geonameid 3102909; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8507
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1772,8 +2756,16 @@ ort dolsk {
     kreis    = kr_krotoszyn
     quelle   = "GeoNames (CC BY 4.0), geonameid 3100231; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7022
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1786,8 +2778,16 @@ ort ostrow_wielkopolski {
     kreis    = kr_ostrow_wielkopolski
     quelle   = "GeoNames (CC BY 4.0), geonameid 3089684; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 13227
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1800,8 +2800,16 @@ ort nowe_skalmierzyce {
     kreis    = kr_ostrow_wielkopolski
     quelle   = "GeoNames (CC BY 4.0), geonameid 3090597; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9189
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1814,8 +2822,16 @@ ort adelnau {
     kreis    = kr_ostrow_wielkopolski
     quelle   = "GeoNames (CC BY 4.0), geonameid 3090315; deutscher Name aus den GeoNames-Alternativnamen (heute Odolanów); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6500
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1828,8 +2844,16 @@ ort raszkow {
     kreis    = kr_ostrow_wielkopolski
     quelle   = "GeoNames (CC BY 4.0), geonameid 3087333; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9349
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1842,8 +2866,16 @@ ort sulmierzyce {
     kreis    = kr_ostrow_wielkopolski
     quelle   = "GeoNames (CC BY 4.0), geonameid 3084184; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7945
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1856,8 +2888,16 @@ ort sosnie {
     kreis    = kr_ostrow_wielkopolski
     quelle   = "GeoNames (CC BY 4.0), geonameid 3085138; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6661
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1870,8 +2910,16 @@ ort kempen_in_posen {
     kreis    = kr_kempen_in_posen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3096338; deutscher Name aus den GeoNames-Alternativnamen (heute Kępno); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9629
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1884,8 +2932,16 @@ ort ostrzeszow {
     kreis    = kr_kempen_in_posen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3089670; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10600
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1898,8 +2954,16 @@ ort grabow_nad_prosna {
     kreis    = kr_kempen_in_posen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3098470; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9389
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1912,8 +2976,16 @@ ort mikstat {
     kreis    = kr_kempen_in_posen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3091817; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9349
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1926,8 +2998,16 @@ ort doruchow {
     kreis    = kr_kempen_in_posen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3100162; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6942
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1940,8 +3020,16 @@ ort rychtal {
     kreis    = kr_kempen_in_posen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3086544; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7584
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1954,8 +3042,16 @@ ort trzcinica {
     kreis    = kr_kempen_in_posen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3083169; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6942
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }
 
@@ -1968,7 +3064,15 @@ ort czajkow {
     kreis    = kr_kempen_in_posen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3101224; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11917
+        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        kultur       = { polen = 60 maerker = 40 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_posen
     }
 }

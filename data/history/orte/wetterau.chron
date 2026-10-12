@@ -19,9 +19,17 @@ ort nidda {
     kreis    = kr_nidda
     quelle   = "GeoNames (CC BY 4.0), geonameid 2863716; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 15182
+        konfession   = { lutherisch = 68 katholisch = 29 juedisch = 3 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HED
-        bund     = ja
+        besitzer   = HED
+        verwaltung = hd_oberhessen
+        bund       = ja
     }
 }
 
@@ -34,9 +42,17 @@ ort schluechtern {
     kreis    = kr_nidda
     quelle   = "GeoNames (CC BY 4.0), geonameid 2838201; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 13738
+        konfession   = { reformiert = 55 lutherisch = 29 katholisch = 14 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HEK
-        bund     = ja
+        besitzer   = HEK
+        verwaltung = hk_hanau
+        bund       = ja
     }
 }
 
@@ -49,9 +65,17 @@ ort bad_soden_salmuenster {
     kreis    = kr_nidda
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953338; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 16818
+        konfession   = { reformiert = 55 lutherisch = 29 katholisch = 14 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HEK
-        bund     = ja
+        besitzer   = HEK
+        verwaltung = hk_hanau
+        bund       = ja
     }
 }
 
@@ -64,9 +88,17 @@ ort birstein {
     kreis    = kr_nidda
     quelle   = "GeoNames (CC BY 4.0), geonameid 2948351; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10324
+        konfession   = { reformiert = 55 lutherisch = 29 katholisch = 14 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HEK
-        bund     = ja
+        besitzer   = HEK
+        verwaltung = hk_hanau
+        bund       = ja
     }
 }
 
@@ -79,9 +111,17 @@ ort gedern {
     kreis    = kr_nidda
     quelle   = "GeoNames (CC BY 4.0), geonameid 2922124; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10173
+        konfession   = { lutherisch = 68 katholisch = 29 juedisch = 3 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HED
-        bund     = ja
+        besitzer   = HED
+        verwaltung = hd_oberhessen
+        bund       = ja
     }
 }
 
@@ -94,9 +134,17 @@ ort hanau_am_main {
     kreis    = kr_hanau_am_main
     quelle   = "GeoNames (CC BY 4.0), geonameid 2911007; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 29612
+        konfession   = { reformiert = 55 lutherisch = 29 katholisch = 14 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HEK
-        bund     = ja
+        besitzer   = HEK
+        verwaltung = hk_hanau
+        bund       = ja
     }
 }
 
@@ -109,9 +157,17 @@ ort gelnhausen {
     kreis    = kr_hanau_am_main
     quelle   = "GeoNames (CC BY 4.0), geonameid 2921473; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 15193
+        konfession   = { reformiert = 55 lutherisch = 29 katholisch = 14 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HEK
-        bund     = ja
+        besitzer   = HEK
+        verwaltung = hk_hanau
+        bund       = ja
     }
 }
 
@@ -124,9 +180,17 @@ ort buedingen {
     kreis    = kr_hanau_am_main
     quelle   = "GeoNames (CC BY 4.0), geonameid 2942073; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 17501
+        konfession   = { lutherisch = 68 katholisch = 29 juedisch = 3 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HED
-        bund     = ja
+        besitzer   = HED
+        verwaltung = hd_oberhessen
+        bund       = ja
     }
 }
 
@@ -139,9 +203,17 @@ ort langenselbold {
     kreis    = kr_hanau_am_main
     quelle   = "GeoNames (CC BY 4.0), geonameid 2880913; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12655
+        konfession   = { reformiert = 55 lutherisch = 29 katholisch = 14 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HEK
-        bund     = ja
+        besitzer   = HEK
+        verwaltung = hk_hanau
+        bund       = ja
     }
 }
 
@@ -153,6 +225,13 @@ ort frankfurt_am_main {
     stadt    = ja
     kreis    = kr_frankfurt_am_main
     quelle   = "GeoNames (CC BY 4.0), geonameid 2925533; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 68000
+        konfession   = { lutherisch = 65 katholisch = 25 reformiert = 3 juedisch = 7 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
 
     1848.03.01 = {
         besitzer = FRA
@@ -169,6 +248,13 @@ ort bad_homburg_vor_der_hoehe {
     kreis    = kr_frankfurt_am_main
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953436; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 14339
+        konfession   = { lutherisch = 55 reformiert = 40 katholisch = 5 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
         besitzer = HHO
         bund     = ja
@@ -184,9 +270,17 @@ ort friedberg {
     kreis    = kr_frankfurt_am_main
     quelle   = "GeoNames (CC BY 4.0), geonameid 2924802; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 17052
+        konfession   = { lutherisch = 68 katholisch = 29 juedisch = 3 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HED
-        bund     = ja
+        besitzer   = HED
+        verwaltung = hd_oberhessen
+        bund       = ja
     }
 }
 
@@ -199,9 +293,17 @@ ort bad_vilbel {
     kreis    = kr_frankfurt_am_main
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953321; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 15210
+        konfession   = { lutherisch = 68 katholisch = 29 juedisch = 3 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HED
-        bund     = ja
+        besitzer   = HED
+        verwaltung = hd_oberhessen
+        bund       = ja
     }
 }
 
@@ -214,9 +316,17 @@ ort butzbach {
     kreis    = kr_frankfurt_am_main
     quelle   = "GeoNames (CC BY 4.0), geonameid 2940512; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12763
+        konfession   = { lutherisch = 68 katholisch = 29 juedisch = 3 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HED
-        bund     = ja
+        besitzer   = HED
+        verwaltung = hd_oberhessen
+        bund       = ja
     }
 }
 
@@ -228,6 +338,13 @@ ort koenigstein_im_taunus {
     stadt    = nein
     kreis    = kr_frankfurt_am_main
     quelle   = "GeoNames (CC BY 4.0), geonameid 2885760; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7791
+        konfession   = { lutherisch = 52 katholisch = 46 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
 
     1848.03.01 = {
         besitzer = NAS
@@ -244,6 +361,13 @@ ort usingen {
     kreis    = kr_frankfurt_am_main
     quelle   = "GeoNames (CC BY 4.0), geonameid 2818097; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 13780
+        konfession   = { lutherisch = 52 katholisch = 46 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
         besitzer = NAS
         bund     = ja
@@ -259,9 +383,17 @@ ort woelfersheim {
     kreis    = kr_frankfurt_am_main
     quelle   = "GeoNames (CC BY 4.0), geonameid 2806852; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12623
+        konfession   = { lutherisch = 68 katholisch = 29 juedisch = 3 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HED
-        bund     = ja
+        besitzer   = HED
+        verwaltung = hd_oberhessen
+        bund       = ja
     }
 }
 
@@ -274,9 +406,17 @@ ort florstadt {
     kreis    = kr_frankfurt_am_main
     quelle   = "GeoNames (CC BY 4.0), geonameid 3208053; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 19937
+        konfession   = { lutherisch = 68 katholisch = 29 juedisch = 3 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HED
-        bund     = ja
+        besitzer   = HED
+        verwaltung = hd_oberhessen
+        bund       = ja
     }
 }
 
@@ -288,6 +428,13 @@ ort schmitten {
     stadt    = nein
     kreis    = kr_frankfurt_am_main
     quelle   = "GeoNames (CC BY 4.0), geonameid 2837706; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10112
+        konfession   = { lutherisch = 52 katholisch = 46 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
 
     1848.03.01 = {
         besitzer = NAS
@@ -303,6 +450,13 @@ ort graevenwiesbach {
     stadt    = nein
     kreis    = kr_frankfurt_am_main
     quelle   = "GeoNames (CC BY 4.0), geonameid 2917868; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12226
+        konfession   = { lutherisch = 52 katholisch = 46 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
 
     1848.03.01 = {
         besitzer = NAS

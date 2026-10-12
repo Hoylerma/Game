@@ -18,9 +18,17 @@ ort glatz {
     kreis    = kr_glatz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3096053; deutscher Name aus den GeoNames-Alternativnamen (heute Kłodzko); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 13975
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { schlesier = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_schlesien
+        bund       = ja
     }
 }
 
@@ -33,9 +41,17 @@ ort neurode {
     kreis    = kr_glatz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3090768; deutscher Name aus den GeoNames-Alternativnamen (heute Nowa Ruda); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 15572
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { schlesier = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_schlesien
+        bund       = ja
     }
 }
 
@@ -48,9 +64,17 @@ ort bad_kudowa {
     kreis    = kr_glatz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3094303; deutscher Name aus den GeoNames-Alternativnamen (heute Kudowa-Zdrój); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5128
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { schlesier = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_schlesien
+        bund       = ja
     }
 }
 
@@ -63,9 +87,17 @@ ort habelschwerdt {
     kreis    = kr_glatz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3101968; deutscher Name aus den GeoNames-Alternativnamen (heute Bystrzyca Kłodzka); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 19871
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { schlesier = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_schlesien
+        bund       = ja
     }
 }
 
@@ -78,9 +110,17 @@ ort bad_altheide {
     kreis    = kr_glatz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3088496; deutscher Name aus den GeoNames-Alternativnamen (heute Polanica-Zdrój); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8205
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { schlesier = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_schlesien
+        bund       = ja
     }
 }
 
@@ -93,9 +133,17 @@ ort bad_landeck {
     kreis    = kr_glatz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3094016; deutscher Name aus den GeoNames-Alternativnamen (heute Lądek-Zdrój); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9794
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { schlesier = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_schlesien
+        bund       = ja
     }
 }
 
@@ -108,9 +156,17 @@ ort bad_reinerz {
     kreis    = kr_glatz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3099992; deutscher Name aus den GeoNames-Alternativnamen (heute Duszniki-Zdrój); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8820
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { schlesier = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_schlesien
+        bund       = ja
     }
 }
 
@@ -123,9 +179,17 @@ ort mittelwalde {
     kreis    = kr_glatz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3091979; deutscher Name aus den GeoNames-Alternativnamen (heute Międzylesie); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11435
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { schlesier = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_schlesien
+        bund       = ja
     }
 }
 
@@ -138,8 +202,16 @@ ort wuenschelburg {
     kreis    = kr_glatz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3087535; deutscher Name aus den GeoNames-Alternativnamen (heute Radków); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6307
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { schlesier = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_schlesien
+        bund       = ja
     }
 }

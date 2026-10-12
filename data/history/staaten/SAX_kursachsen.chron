@@ -43,6 +43,12 @@ staat SAX {
         hauptstadt     = dresden
         regierungsform = konstitutionelle_monarchie
         konfession     = katholisch
+        schatz         = 550800
+        kontribution   = 0.10
+        akzise         = 0.05
+        zoll           = 0.03
+        hofhaltung     = 459000
+        heer           = 7
         zollverein     = ja
     }
 }

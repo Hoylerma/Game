@@ -18,9 +18,17 @@ ort dornbirn {
     kreis    = kr_dornbirn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2780741; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 15220
+        konfession   = { katholisch = 100 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_tirol
+        bund       = ja
     }
 }
 
@@ -33,9 +41,17 @@ ort bregenz {
     kreis    = kr_dornbirn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2781503; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10846
+        konfession   = { katholisch = 100 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_tirol
+        bund       = ja
     }
 }
 
@@ -48,9 +64,17 @@ ort goetzis {
     kreis    = kr_dornbirn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2778218; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7481
+        konfession   = { katholisch = 100 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_tirol
+        bund       = ja
     }
 }
 
@@ -63,9 +87,17 @@ ort hoechst {
     kreis    = kr_dornbirn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2775950; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 3557
+        konfession   = { katholisch = 100 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_tirol
+        bund       = ja
     }
 }
 
@@ -78,9 +110,17 @@ ort andelsbuch {
     kreis    = kr_dornbirn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2782551; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9260
+        konfession   = { katholisch = 100 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_tirol
+        bund       = ja
     }
 }
 
@@ -93,9 +133,17 @@ ort sulzberg {
     kreis    = kr_dornbirn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2764010; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7113
+        konfession   = { katholisch = 100 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_tirol
+        bund       = ja
     }
 }
 
@@ -108,9 +156,17 @@ ort sibratsgfaell {
     kreis    = kr_dornbirn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2765139; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 3587
+        konfession   = { katholisch = 100 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_tirol
+        bund       = ja
     }
 }
 
@@ -123,9 +179,17 @@ ort mittelberg {
     kreis    = kr_mittelberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2771533; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 3495
+        konfession   = { katholisch = 100 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_tirol
+        bund       = ja
     }
 }
 
@@ -138,9 +202,17 @@ ort lech {
     kreis    = kr_mittelberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2772798; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5059
+        konfession   = { katholisch = 100 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_tirol
+        bund       = ja
     }
 }
 
@@ -153,9 +225,17 @@ ort schoppernau {
     kreis    = kr_mittelberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2765650; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 3794
+        konfession   = { katholisch = 100 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_tirol
+        bund       = ja
     }
 }
 
@@ -168,9 +248,17 @@ ort damuels {
     kreis    = kr_mittelberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 6949508; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5565
+        konfession   = { katholisch = 100 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_tirol
+        bund       = ja
     }
 }
 
@@ -183,9 +271,17 @@ ort feldkirch {
     kreis    = kr_feldkirch
     quelle   = "GeoNames (CC BY 4.0), geonameid 2779674; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 13709
+        konfession   = { katholisch = 100 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_tirol
+        bund       = ja
     }
 }
 
@@ -197,6 +293,13 @@ ort vaduz {
     stadt    = ja
     kreis    = kr_feldkirch
     quelle   = "GeoNames (CC BY 4.0), geonameid 3042030; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6500
+        konfession   = { katholisch = 100 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
 
     1848.03.01 = {
         besitzer = LIE
@@ -213,9 +316,17 @@ ort bludenz {
     kreis    = kr_feldkirch
     quelle   = "GeoNames (CC BY 4.0), geonameid 2781680; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6156
+        konfession   = { katholisch = 100 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_tirol
+        bund       = ja
     }
 }
 
@@ -228,9 +339,17 @@ ort nenzing {
     kreis    = kr_feldkirch
     quelle   = "GeoNames (CC BY 4.0), geonameid 2770885; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 3196
+        konfession   = { katholisch = 100 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_tirol
+        bund       = ja
     }
 }
 
@@ -243,9 +362,17 @@ ort schruns {
     kreis    = kr_feldkirch
     quelle   = "GeoNames (CC BY 4.0), geonameid 2765581; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5910
+        konfession   = { katholisch = 100 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_tirol
+        bund       = ja
     }
 }
 
@@ -258,9 +385,17 @@ ort gaschurn {
     kreis    = kr_feldkirch
     quelle   = "GeoNames (CC BY 4.0), geonameid 2778834; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6508
+        konfession   = { katholisch = 100 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_tirol
+        bund       = ja
     }
 }
 
@@ -273,8 +408,16 @@ ort brand {
     kreis    = kr_feldkirch
     quelle   = "GeoNames (CC BY 4.0), geonameid 3324292; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 4024
+        konfession   = { katholisch = 100 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_tirol
+        bund       = ja
     }
 }

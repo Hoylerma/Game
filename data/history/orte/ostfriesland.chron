@@ -18,9 +18,17 @@ ort wittmund {
     kreis    = kr_wittmund
     quelle   = "GeoNames (CC BY 4.0), geonameid 2807218; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 14008
+        konfession   = { reformiert = 55 lutherisch = 43 juedisch = 2 }
+        kultur       = { friesen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_aurich
+        bund       = ja
     }
 }
 
@@ -33,9 +41,17 @@ ort esens {
     kreis    = kr_wittmund
     quelle   = "GeoNames (CC BY 4.0), geonameid 2928911; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10686
+        konfession   = { reformiert = 55 lutherisch = 43 juedisch = 2 }
+        kultur       = { friesen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_aurich
+        bund       = ja
     }
 }
 
@@ -48,9 +64,17 @@ ort dornum {
     kreis    = kr_wittmund
     quelle   = "GeoNames (CC BY 4.0), geonameid 2935633; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7186
+        konfession   = { reformiert = 55 lutherisch = 43 juedisch = 2 }
+        kultur       = { friesen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_aurich
+        bund       = ja
     }
 }
 
@@ -63,9 +87,17 @@ ort langeoog {
     kreis    = kr_wittmund
     quelle   = "GeoNames (CC BY 4.0), geonameid 2880861; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 933
+        konfession   = { reformiert = 55 lutherisch = 43 juedisch = 2 }
+        kultur       = { friesen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_aurich
+        bund       = ja
     }
 }
 
@@ -78,9 +110,17 @@ ort aurich {
     kreis    = kr_aurich
     quelle   = "GeoNames (CC BY 4.0), geonameid 2954006; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 17687
+        konfession   = { reformiert = 55 lutherisch = 43 juedisch = 2 }
+        kultur       = { friesen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_aurich
+        bund       = ja
     }
 }
 
@@ -93,9 +133,17 @@ ort leer {
     kreis    = kr_aurich
     quelle   = "GeoNames (CC BY 4.0), geonameid 2879697; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 16314
+        konfession   = { reformiert = 55 lutherisch = 43 juedisch = 2 }
+        kultur       = { friesen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_aurich
+        bund       = ja
     }
 }
 
@@ -108,9 +156,17 @@ ort wiesmoor {
     kreis    = kr_aurich
     quelle   = "GeoNames (CC BY 4.0), geonameid 2809134; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10992
+        konfession   = { reformiert = 55 lutherisch = 43 juedisch = 2 }
+        kultur       = { friesen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_aurich
+        bund       = ja
     }
 }
 
@@ -123,9 +179,17 @@ ort weener {
     kreis    = kr_aurich
     quelle   = "GeoNames (CC BY 4.0), geonameid 2813433; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 15435
+        konfession   = { reformiert = 55 lutherisch = 43 juedisch = 2 }
+        kultur       = { friesen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_aurich
+        bund       = ja
     }
 }
 
@@ -138,9 +202,17 @@ ort ostrhauderfehn {
     kreis    = kr_aurich
     quelle   = "GeoNames (CC BY 4.0), geonameid 2856213; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10370
+        konfession   = { reformiert = 55 lutherisch = 43 juedisch = 2 }
+        kultur       = { friesen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_aurich
+        bund       = ja
     }
 }
 
@@ -153,9 +225,17 @@ ort mittegrossefehn {
     kreis    = kr_aurich
     quelle   = "GeoNames (CC BY 4.0), geonameid 2870911; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9385
+        konfession   = { reformiert = 55 lutherisch = 43 juedisch = 2 }
+        kultur       = { friesen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_aurich
+        bund       = ja
     }
 }
 
@@ -168,9 +248,17 @@ ort hesel {
     kreis    = kr_aurich
     quelle   = "GeoNames (CC BY 4.0), geonameid 2905421; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11147
+        konfession   = { reformiert = 55 lutherisch = 43 juedisch = 2 }
+        kultur       = { friesen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_aurich
+        bund       = ja
     }
 }
 
@@ -183,9 +271,17 @@ ort emden {
     kreis    = kr_emden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2930596; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 13906
+        konfession   = { reformiert = 55 lutherisch = 43 juedisch = 2 }
+        kultur       = { friesen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_aurich
+        bund       = ja
     }
 }
 
@@ -198,9 +294,17 @@ ort norden {
     kreis    = kr_emden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2862118; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10144
+        konfession   = { reformiert = 55 lutherisch = 43 juedisch = 2 }
+        kultur       = { friesen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_aurich
+        bund       = ja
     }
 }
 
@@ -213,9 +317,17 @@ ort borkum {
     kreis    = kr_emden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2946206; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 1167
+        konfession   = { reformiert = 55 lutherisch = 43 juedisch = 2 }
+        kultur       = { friesen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_aurich
+        bund       = ja
     }
 }
 
@@ -228,9 +340,17 @@ ort norderney {
     kreis    = kr_emden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2862041; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 1260
+        konfession   = { reformiert = 55 lutherisch = 43 juedisch = 2 }
+        kultur       = { friesen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_aurich
+        bund       = ja
     }
 }
 
@@ -243,9 +363,17 @@ ort upgant_schott {
     kreis    = kr_emden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2818297; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7570
+        konfession   = { reformiert = 55 lutherisch = 43 juedisch = 2 }
+        kultur       = { friesen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_aurich
+        bund       = ja
     }
 }
 
@@ -258,9 +386,17 @@ ort juist {
     kreis    = kr_emden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2894569; Name nach GeoNames; Lage auf das nächste Landpixel gesetzt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 560
+        konfession   = { reformiert = 55 lutherisch = 43 juedisch = 2 }
+        kultur       = { friesen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_aurich
+        bund       = ja
     }
 }
 
@@ -273,8 +409,16 @@ ort wirdum {
     kreis    = kr_emden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2807558; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10370
+        konfession   = { reformiert = 55 lutherisch = 43 juedisch = 2 }
+        kultur       = { friesen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_aurich
+        bund       = ja
     }
 }

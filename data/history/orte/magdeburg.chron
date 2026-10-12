@@ -35,9 +35,17 @@ ort magdeburg {
         verwuestung  = 0.8
     }
 
+    1846.12.03 = {
+        bevoelkerung = 67611
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }
 
@@ -59,9 +67,17 @@ ort halle {
         verwuestung  = 0.45
     }
 
+    1846.12.03 = {
+        bevoelkerung = 46381
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }
 
@@ -82,9 +98,17 @@ ort halberstadt {
         verwuestung  = 0.55
     }
 
+    1846.12.03 = {
+        bevoelkerung = 16619
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }
 
@@ -105,9 +129,17 @@ ort jueterbog {
         verwuestung  = 0.55
     }
 
+    1846.12.03 = {
+        bevoelkerung = 9105
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
     }
 }
 
@@ -120,9 +152,17 @@ ort neuhaldensleben {
     kreis    = kr_neuhaldensleben
     quelle   = "GeoNames (CC BY 4.0), geonameid 2911584; Name Neuhaldensleben aus den GeoNames-Alternativnamen (GeoNames: Haldensleben I); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 26815
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }
 
@@ -135,9 +175,17 @@ ort oebisfelde {
     kreis    = kr_neuhaldensleben
     quelle   = "GeoNames (CC BY 4.0), geonameid 2857985; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9583
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }
 
@@ -149,6 +197,13 @@ ort calvoerde {
     stadt    = nein
     kreis    = kr_neuhaldensleben
     quelle   = "GeoNames (CC BY 4.0), geonameid 2940386; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11938
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
 
     1848.03.01 = {
         besitzer = BWO
@@ -165,9 +220,17 @@ ort weferlingen {
     kreis    = kr_neuhaldensleben
     quelle   = "GeoNames (CC BY 4.0), geonameid 2813405; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12186
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }
 
@@ -180,9 +243,17 @@ ort burg_bei_magdeburg {
     kreis    = kr_burg_bei_magdeburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2941501; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 18198
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }
 
@@ -195,9 +266,17 @@ ort genthin {
     kreis    = kr_burg_bei_magdeburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2921309; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 18219
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }
 
@@ -210,9 +289,17 @@ ort moeckern {
     kreis    = kr_burg_bei_magdeburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2870278; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12126
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }
 
@@ -225,9 +312,17 @@ ort loburg {
     kreis    = kr_burg_bei_magdeburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2876682; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12067
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }
 
@@ -240,9 +335,17 @@ ort tucheim {
     kreis    = kr_burg_bei_magdeburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2820856; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 13842
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }
 
@@ -255,9 +358,17 @@ ort schoenebeck {
     kreis    = kr_magdeburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2836809; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 16954
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }
 
@@ -270,9 +381,17 @@ ort calbe {
     kreis    = kr_magdeburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2940419; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10648
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }
 
@@ -285,9 +404,17 @@ ort wolmirstedt {
     kreis    = kr_magdeburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2806342; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9819
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }
 
@@ -300,9 +427,17 @@ ort gommern {
     kreis    = kr_magdeburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2919138; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7335
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }
 
@@ -315,9 +450,17 @@ ort niederndodeleben {
     kreis    = kr_magdeburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2863083; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11689
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }
 
@@ -330,9 +473,17 @@ ort barby {
     kreis    = kr_magdeburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 3205000; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11381
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }
 
@@ -345,9 +496,17 @@ ort gerwisch {
     kreis    = kr_magdeburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2920850; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8459
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }
 
@@ -360,9 +519,17 @@ ort angern {
     kreis    = kr_magdeburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2956090; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11239
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }
 
@@ -375,9 +542,17 @@ ort oschersleben {
     kreis    = kr_oschersleben
     quelle   = "GeoNames (CC BY 4.0), geonameid 2856930; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 13842
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }
 
@@ -390,9 +565,17 @@ ort groeningen {
     kreis    = kr_oschersleben
     quelle   = "GeoNames (CC BY 4.0), geonameid 2917107; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11458
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }
 
@@ -405,9 +588,17 @@ ort egeln {
     kreis    = kr_oschersleben
     quelle   = "GeoNames (CC BY 4.0), geonameid 2933256; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 16149
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }
 
@@ -420,9 +611,17 @@ ort wanzleben {
     kreis    = kr_oschersleben
     quelle   = "GeoNames (CC BY 4.0), geonameid 2814181; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 13842
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }
 
@@ -435,9 +634,17 @@ ort eilsleben {
     kreis    = kr_oschersleben
     quelle   = "GeoNames (CC BY 4.0), geonameid 2931838; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 16841
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }
 
@@ -450,9 +657,17 @@ ort ausleben {
     kreis    = kr_oschersleben
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953970; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11458
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }
 
@@ -465,9 +680,17 @@ ort wernigerode {
     kreis    = kr_halberstadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2810808; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12590
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }
 
@@ -479,6 +702,13 @@ ort blankenburg {
     stadt    = nein
     kreis    = kr_halberstadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2948071; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6269
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
 
     1848.03.01 = {
         besitzer = BWO
@@ -495,9 +725,17 @@ ort huy_neinstedt {
     kreis    = kr_halberstadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2896834; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 17994
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }
 
@@ -510,9 +748,17 @@ ort osterwieck {
     kreis    = kr_halberstadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2856330; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12659
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }
 
@@ -524,6 +770,13 @@ ort hasselfelde {
     stadt    = nein
     kreis    = kr_halberstadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2909386; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11412
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
 
     1848.03.01 = {
         besitzer = BWO
@@ -540,9 +793,17 @@ ort benneckenstein {
     kreis    = kr_halberstadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2951040; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6329
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }
 
@@ -555,9 +816,17 @@ ort derenburg {
     kreis    = kr_halberstadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2938136; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7844
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }
 
@@ -570,9 +839,17 @@ ort aschersleben {
     kreis    = kr_aschersleben
     quelle   = "GeoNames (CC BY 4.0), geonameid 2955168; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 14998
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }
 
@@ -585,9 +862,17 @@ ort quedlinburg {
     kreis    = kr_aschersleben
     quelle   = "GeoNames (CC BY 4.0), geonameid 2851465; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11441
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }
 
@@ -600,9 +885,17 @@ ort stassfurt {
     kreis    = kr_aschersleben
     quelle   = "GeoNames (CC BY 4.0), geonameid 2829422; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 14707
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }
 
@@ -614,6 +907,13 @@ ort ballenstedt {
     stadt    = nein
     kreis    = kr_aschersleben
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953060; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 12443
+        konfession   = { reformiert = 60 lutherisch = 38 juedisch = 2 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
 
     1848.03.01 = {
         besitzer = BER
@@ -630,6 +930,13 @@ ort harzgerode {
     kreis    = kr_aschersleben
     quelle   = "GeoNames (CC BY 4.0), geonameid 2909944; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 14742
+        konfession   = { reformiert = 60 lutherisch = 38 juedisch = 2 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
         besitzer = BER
         bund     = ja
@@ -645,9 +952,17 @@ ort gatersleben {
     kreis    = kr_aschersleben
     quelle   = "GeoNames (CC BY 4.0), geonameid 2922342; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10707
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }
 
@@ -660,9 +975,17 @@ ort merseburg {
     kreis    = kr_halle
     quelle   = "GeoNames (CC BY 4.0), geonameid 2871736; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10983
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }
 
@@ -675,9 +998,17 @@ ort bad_duerrenberg {
     kreis    = kr_halle
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953521; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6507
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }
 
@@ -690,9 +1021,17 @@ ort querfurt {
     kreis    = kr_halle
     quelle   = "GeoNames (CC BY 4.0), geonameid 2851393; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11594
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }
 
@@ -705,9 +1044,17 @@ ort teutschenthal {
     kreis    = kr_halle
     quelle   = "GeoNames (CC BY 4.0), geonameid 2823230; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6803
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }
 
@@ -720,9 +1067,17 @@ ort muecheln {
     kreis    = kr_halle
     quelle   = "GeoNames (CC BY 4.0), geonameid 2868933; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11653
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }
 
@@ -735,9 +1090,17 @@ ort bad_lauchstaedt {
     kreis    = kr_halle
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953412; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6448
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }
 
@@ -750,9 +1113,17 @@ ort koennern {
     kreis    = kr_halle
     quelle   = "GeoNames (CC BY 4.0), geonameid 2885716; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10305
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }
 
@@ -765,9 +1136,17 @@ ort landsberg_bei_halle {
     kreis    = kr_halle
     quelle   = "GeoNames (CC BY 4.0), geonameid 2881508; Name Landsberg bei Halle aus den GeoNames-Alternativnamen (GeoNames: Landsberg); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8696
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }
 
@@ -780,9 +1159,17 @@ ort wettin {
     kreis    = kr_halle
     quelle   = "GeoNames (CC BY 4.0), geonameid 2809939; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12245
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }
 
@@ -795,8 +1182,16 @@ ort groebers {
     kreis    = kr_halle
     quelle   = "GeoNames (CC BY 4.0), geonameid 2917217; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6034
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }

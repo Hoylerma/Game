@@ -14,6 +14,12 @@ staat MST {
         hauptstadt     = neustrelitz
         regierungsform = staendische_monarchie
         konfession     = lutherisch
+        schatz         = 28800
+        kontribution   = 0.10
+        akzise         = 0.05
+        zoll           = 0.03
+        hofhaltung     = 24000
+        heer           = 6
         zollverein     = nein
     }
 }

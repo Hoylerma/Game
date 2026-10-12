@@ -1,0 +1,25 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+einheit bd_seekreis {
+    name   = "Seekreis"
+    art    = kreis
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit bd_oberrheinkreis {
+    name   = "Oberrheinkreis"
+    art    = kreis
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit bd_mittelrheinkreis {
+    name   = "Mittelrheinkreis"
+    art    = kreis
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit bd_unterrheinkreis {
+    name   = "Unterrheinkreis"
+    art    = kreis
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}

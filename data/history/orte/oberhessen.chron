@@ -18,9 +18,17 @@ ort marburg_an_der_lahn {
     kreis    = kr_marburg_an_der_lahn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2873759; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 19587
+        konfession   = { reformiert = 55 lutherisch = 29 katholisch = 14 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HEK
-        bund     = ja
+        besitzer   = HEK
+        verwaltung = hk_oberhessen
+        bund       = ja
     }
 }
 
@@ -33,9 +41,17 @@ ort stadtallendorf {
     kreis    = kr_marburg_an_der_lahn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2829804; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9487
+        konfession   = { reformiert = 55 lutherisch = 29 katholisch = 14 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HEK
-        bund     = ja
+        besitzer   = HEK
+        verwaltung = hk_oberhessen
+        bund       = ja
     }
 }
 
@@ -48,9 +64,17 @@ ort alsfeld {
     kreis    = kr_marburg_an_der_lahn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2958128; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11175
+        konfession   = { lutherisch = 68 katholisch = 29 juedisch = 3 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HED
-        bund     = ja
+        besitzer   = HED
+        verwaltung = hd_oberhessen
+        bund       = ja
     }
 }
 
@@ -63,9 +87,17 @@ ort biedenkopf {
     kreis    = kr_marburg_an_der_lahn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2949229; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9119
+        konfession   = { lutherisch = 68 katholisch = 29 juedisch = 3 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HED
-        bund     = ja
+        besitzer   = HED
+        verwaltung = hd_oberhessen
+        bund       = ja
     }
 }
 
@@ -78,9 +110,17 @@ ort gladenbach {
     kreis    = kr_marburg_an_der_lahn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2920229; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12973
+        konfession   = { lutherisch = 68 katholisch = 29 juedisch = 3 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HED
-        bund     = ja
+        besitzer   = HED
+        verwaltung = hd_oberhessen
+        bund       = ja
     }
 }
 
@@ -93,9 +133,17 @@ ort wetter {
     kreis    = kr_marburg_an_der_lahn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2809985; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10199
+        konfession   = { reformiert = 55 lutherisch = 29 katholisch = 14 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HEK
-        bund     = ja
+        besitzer   = HEK
+        verwaltung = hk_oberhessen
+        bund       = ja
     }
 }
 
@@ -108,9 +156,17 @@ ort homberg_an_der_ohm {
     kreis    = kr_marburg_an_der_lahn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2899479; Name Homberg an der Ohm aus den GeoNames-Alternativnamen (GeoNames: Homberg); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11175
+        konfession   = { lutherisch = 68 katholisch = 29 juedisch = 3 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HED
-        bund     = ja
+        besitzer   = HED
+        verwaltung = hd_oberhessen
+        bund       = ja
     }
 }
 
@@ -123,9 +179,17 @@ ort fronhausen {
     kreis    = kr_marburg_an_der_lahn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2924201; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12211
+        konfession   = { reformiert = 55 lutherisch = 29 katholisch = 14 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HEK
-        bund     = ja
+        besitzer   = HEK
+        verwaltung = hk_oberhessen
+        bund       = ja
     }
 }
 
@@ -138,9 +202,17 @@ ort kirtorf {
     kreis    = kr_marburg_an_der_lahn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2890222; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8734
+        konfession   = { lutherisch = 68 katholisch = 29 juedisch = 3 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HED
-        bund     = ja
+        besitzer   = HED
+        verwaltung = hd_oberhessen
+        bund       = ja
     }
 }
 
@@ -153,9 +225,17 @@ ort rauschenberg {
     kreis    = kr_marburg_an_der_lahn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2849875; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9505
+        konfession   = { reformiert = 55 lutherisch = 29 katholisch = 14 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HEK
-        bund     = ja
+        besitzer   = HEK
+        verwaltung = hk_oberhessen
+        bund       = ja
     }
 }
 
@@ -168,9 +248,17 @@ ort lauterbach {
     kreis    = kr_lauterbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2879929; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 13744
+        konfession   = { lutherisch = 68 katholisch = 29 juedisch = 3 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HED
-        bund     = ja
+        besitzer   = HED
+        verwaltung = hd_oberhessen
+        bund       = ja
     }
 }
 
@@ -183,9 +271,17 @@ ort schotten {
     kreis    = kr_lauterbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2836251; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7141
+        konfession   = { lutherisch = 68 katholisch = 29 juedisch = 3 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HED
-        bund     = ja
+        besitzer   = HED
+        verwaltung = hd_oberhessen
+        bund       = ja
     }
 }
 
@@ -198,9 +294,17 @@ ort schlitz {
     kreis    = kr_lauterbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2838459; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9312
+        konfession   = { lutherisch = 68 katholisch = 29 juedisch = 3 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HED
-        bund     = ja
+        besitzer   = HED
+        verwaltung = hd_oberhessen
+        bund       = ja
     }
 }
 
@@ -213,9 +317,17 @@ ort grebenhain {
     kreis    = kr_lauterbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2917850; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6525
+        konfession   = { lutherisch = 68 katholisch = 29 juedisch = 3 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HED
-        bund     = ja
+        besitzer   = HED
+        verwaltung = hd_oberhessen
+        bund       = ja
     }
 }
 
@@ -228,9 +340,17 @@ ort freiensteinau {
     kreis    = kr_lauterbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2925141; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6551
+        konfession   = { lutherisch = 68 katholisch = 29 juedisch = 3 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HED
-        bund     = ja
+        besitzer   = HED
+        verwaltung = hd_oberhessen
+        bund       = ja
     }
 }
 
@@ -243,9 +363,17 @@ ort grebenau {
     kreis    = kr_lauterbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2917858; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7899
+        konfession   = { lutherisch = 68 katholisch = 29 juedisch = 3 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HED
-        bund     = ja
+        besitzer   = HED
+        verwaltung = hd_oberhessen
+        bund       = ja
     }
 }
 
@@ -258,9 +386,17 @@ ort ulrichstein {
     kreis    = kr_lauterbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2820217; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10532
+        konfession   = { lutherisch = 68 katholisch = 29 juedisch = 3 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HED
-        bund     = ja
+        besitzer   = HED
+        verwaltung = hd_oberhessen
+        bund       = ja
     }
 }
 
@@ -273,9 +409,17 @@ ort giessen {
     kreis    = kr_giessen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2920512; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 15963
+        konfession   = { lutherisch = 68 katholisch = 29 juedisch = 3 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HED
-        bund     = ja
+        besitzer   = HED
+        verwaltung = hd_oberhessen
+        bund       = ja
     }
 }
 
@@ -288,9 +432,17 @@ ort langgoens {
     kreis    = kr_giessen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2880672; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7707
+        konfession   = { lutherisch = 68 katholisch = 29 juedisch = 3 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HED
-        bund     = ja
+        besitzer   = HED
+        verwaltung = hd_oberhessen
+        bund       = ja
     }
 }
 
@@ -303,9 +455,17 @@ ort gruenberg_in_hessen {
     kreis    = kr_giessen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2914432; Name Grünberg in Hessen aus den GeoNames-Alternativnamen (GeoNames: Grünberg); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10789
+        konfession   = { lutherisch = 68 katholisch = 29 juedisch = 3 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HED
-        bund     = ja
+        besitzer   = HED
+        verwaltung = hd_oberhessen
+        bund       = ja
     }
 }
 
@@ -318,9 +478,17 @@ ort reiskirchen {
     kreis    = kr_giessen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2848543; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5716
+        konfession   = { lutherisch = 68 katholisch = 29 juedisch = 3 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HED
-        bund     = ja
+        besitzer   = HED
+        verwaltung = hd_oberhessen
+        bund       = ja
     }
 }
 
@@ -333,9 +501,17 @@ ort lich {
     kreis    = kr_giessen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2878166; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9954
+        konfession   = { lutherisch = 68 katholisch = 29 juedisch = 3 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HED
-        bund     = ja
+        besitzer   = HED
+        verwaltung = hd_oberhessen
+        bund       = ja
     }
 }
 
@@ -348,8 +524,16 @@ ort rabenau {
     kreis    = kr_giessen
     quelle   = "GeoNames (CC BY 4.0), geonameid 7576812; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8092
+        konfession   = { lutherisch = 68 katholisch = 29 juedisch = 3 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HED
-        bund     = ja
+        besitzer   = HED
+        verwaltung = hd_oberhessen
+        bund       = ja
     }
 }

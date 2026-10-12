@@ -18,9 +18,17 @@ ort hildesheim {
     kreis    = kr_hildesheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2904789; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 23358
+        konfession   = { lutherisch = 75 katholisch = 24 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_hildesheim
+        bund       = ja
     }
 }
 
@@ -33,9 +41,17 @@ ort sarstedt {
     kreis    = kr_hildesheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2841386; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6673
+        konfession   = { lutherisch = 75 katholisch = 24 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_hildesheim
+        bund       = ja
     }
 }
 
@@ -48,9 +64,17 @@ ort bad_salzdetfurth {
     kreis    = kr_hildesheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953362; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6948
+        konfession   = { lutherisch = 75 katholisch = 24 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_hildesheim
+        bund       = ja
     }
 }
 
@@ -63,9 +87,17 @@ ort bockenem {
     kreis    = kr_hildesheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2947359; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5081
+        konfession   = { lutherisch = 75 katholisch = 24 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_hildesheim
+        bund       = ja
     }
 }
 
@@ -78,9 +110,17 @@ ort algermissen {
     kreis    = kr_hildesheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2958509; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6134
+        konfession   = { lutherisch = 75 katholisch = 24 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_hildesheim
+        bund       = ja
     }
 }
 
@@ -93,9 +133,17 @@ ort soehlde {
     kreis    = kr_hildesheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2831671; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6740
+        konfession   = { lutherisch = 75 katholisch = 24 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_hildesheim
+        bund       = ja
     }
 }
 
@@ -108,9 +156,17 @@ ort schellerten {
     kreis    = kr_hildesheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2839819; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6740
+        konfession   = { lutherisch = 75 katholisch = 24 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_hildesheim
+        bund       = ja
     }
 }
 
@@ -123,9 +179,17 @@ ort holle {
     kreis    = kr_hildesheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2900623; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5444
+        konfession   = { lutherisch = 75 katholisch = 24 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_hildesheim
+        bund       = ja
     }
 }
 
@@ -138,9 +202,17 @@ ort lamspringe {
     kreis    = kr_hildesheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2881661; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6014
+        konfession   = { lutherisch = 75 katholisch = 24 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_hildesheim
+        bund       = ja
     }
 }
 
@@ -153,9 +225,17 @@ ort alfeld_leine {
     kreis    = kr_alfeld_leine
     quelle   = "GeoNames (CC BY 4.0), geonameid 2958533; Name Alfeld (Leine) aus den GeoNames-Alternativnamen (GeoNames: Alfeld); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6740
+        konfession   = { lutherisch = 75 katholisch = 24 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_hildesheim
+        bund       = ja
     }
 }
 
@@ -168,9 +248,17 @@ ort nordstemmen {
     kreis    = kr_alfeld_leine
     quelle   = "GeoNames (CC BY 4.0), geonameid 2861866; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7362
+        konfession   = { lutherisch = 75 katholisch = 24 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_hildesheim
+        bund       = ja
     }
 }
 
@@ -183,9 +271,17 @@ ort gronau_hildesheim {
     kreis    = kr_alfeld_leine
     quelle   = "GeoNames (CC BY 4.0), geonameid 2917139; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5911
+        konfession   = { lutherisch = 75 katholisch = 24 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_hildesheim
+        bund       = ja
     }
 }
 
@@ -198,8 +294,16 @@ ort duingen {
     kreis    = kr_alfeld_leine
     quelle   = "GeoNames (CC BY 4.0), geonameid 2934697; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5963
+        konfession   = { lutherisch = 75 katholisch = 24 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_hildesheim
+        bund       = ja
     }
 }

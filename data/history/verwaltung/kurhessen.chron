@@ -1,0 +1,25 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+einheit hk_niederhessen {
+    name   = "Provinz Niederhessen"
+    art    = provinz
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit hk_oberhessen {
+    name   = "Provinz Oberhessen"
+    art    = provinz
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit hk_fulda {
+    name   = "Provinz Fulda"
+    art    = provinz
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit hk_hanau {
+    name   = "Provinz Hanau"
+    art    = provinz
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}

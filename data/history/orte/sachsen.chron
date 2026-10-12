@@ -35,9 +35,17 @@ ort dresden {
         verwuestung  = 0.25
     }
 
+    1846.12.03 = {
+        bevoelkerung = 114346
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_dresden
+        bund       = ja
     }
 }
 
@@ -58,9 +66,17 @@ ort leipzig {
         verwuestung  = 0.4
     }
 
+    1846.12.03 = {
+        bevoelkerung = 83081
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_leipzig
+        bund       = ja
     }
 }
 
@@ -81,9 +97,17 @@ ort wittenberg {
         verwuestung  = 0.4
     }
 
+    1846.12.03 = {
+        bevoelkerung = 23365
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }
 
@@ -104,9 +128,17 @@ ort torgau {
         verwuestung  = 0.45
     }
 
+    1846.12.03 = {
+        bevoelkerung = 18964
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }
 
@@ -127,9 +159,17 @@ ort freiberg {
         verwuestung  = 0.4
     }
 
+    1846.12.03 = {
+        bevoelkerung = 21284
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_dresden
+        bund       = ja
     }
 }
 
@@ -150,9 +190,17 @@ ort chemnitz {
         verwuestung  = 0.5
     }
 
+    1846.12.03 = {
+        bevoelkerung = 46969
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_zwickau
+        bund       = ja
     }
 }
 
@@ -173,9 +221,17 @@ ort zwickau {
         verwuestung  = 0.45
     }
 
+    1846.12.03 = {
+        bevoelkerung = 22247
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_zwickau
+        bund       = ja
     }
 }
 
@@ -188,9 +244,17 @@ ort graefenhainichen {
     kreis    = kr_wittenberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2918321; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 16687
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }
 
@@ -202,6 +266,13 @@ ort coswig {
     stadt    = nein
     kreis    = kr_wittenberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2939819; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 22480
+        konfession   = { reformiert = 60 lutherisch = 38 juedisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
 
     1848.03.01 = {
         besitzer = DES
@@ -218,9 +289,17 @@ ort zahna {
     kreis    = kr_wittenberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2805313; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 16995
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }
 
@@ -233,9 +312,17 @@ ort kemberg {
     kreis    = kr_wittenberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2891718; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12381
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }
 
@@ -248,9 +335,17 @@ ort elster {
     kreis    = kr_wittenberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2930695; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 17295
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }
 
@@ -263,9 +358,17 @@ ort bad_dueben {
     kreis    = kr_torgau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953524; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 16610
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }
 
@@ -278,9 +381,17 @@ ort jessen {
     kreis    = kr_torgau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2894962; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 13304
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }
 
@@ -293,9 +404,17 @@ ort mockrehna {
     kreis    = kr_torgau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2870266; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 15841
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }
 
@@ -308,9 +427,17 @@ ort belgern {
     kreis    = kr_torgau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2951258; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 13696
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }
 
@@ -323,9 +450,17 @@ ort bad_schmiedeberg {
     kreis    = kr_torgau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953350; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 13457
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }
 
@@ -338,9 +473,17 @@ ort schildau {
     kreis    = kr_torgau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2839303; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11535
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }
 
@@ -353,9 +496,17 @@ ort dommitzsch {
     kreis    = kr_torgau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2936280; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 16795
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }
 
@@ -368,9 +519,17 @@ ort annaburg {
     kreis    = kr_torgau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2955999; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10305
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }
 
@@ -383,9 +542,17 @@ ort holzdorf {
     kreis    = kr_torgau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2899961; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 19379
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }
 
@@ -398,9 +565,17 @@ ort delitzsch {
     kreis    = kr_delitzsch
     quelle   = "GeoNames (CC BY 4.0), geonameid 2938376; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12399
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }
 
@@ -413,9 +588,17 @@ ort eilenburg {
     kreis    = kr_delitzsch
     quelle   = "GeoNames (CC BY 4.0), geonameid 2931871; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11381
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }
 
@@ -428,9 +611,17 @@ ort grimma {
     kreis    = kr_delitzsch
     quelle   = "GeoNames (CC BY 4.0), geonameid 2917325; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 17010
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_leipzig
+        bund       = ja
     }
 }
 
@@ -443,9 +634,17 @@ ort wurzen {
     kreis    = kr_delitzsch
     quelle   = "GeoNames (CC BY 4.0), geonameid 2805597; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 23133
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_leipzig
+        bund       = ja
     }
 }
 
@@ -458,9 +657,17 @@ ort taucha {
     kreis    = kr_delitzsch
     quelle   = "GeoNames (CC BY 4.0), geonameid 2823836; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 15422
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_leipzig
+        bund       = ja
     }
 }
 
@@ -473,9 +680,17 @@ ort naunhof {
     kreis    = kr_delitzsch
     quelle   = "GeoNames (CC BY 4.0), geonameid 2866861; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 22453
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_leipzig
+        bund       = ja
     }
 }
 
@@ -488,9 +703,17 @@ ort krostitz {
     kreis    = kr_delitzsch
     quelle   = "GeoNames (CC BY 4.0), geonameid 2883552; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11612
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }
 
@@ -503,9 +726,17 @@ ort borna {
     kreis    = kr_leipzig
     quelle   = "GeoNames (CC BY 4.0), geonameid 2946172; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 21306
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_leipzig
+        bund       = ja
     }
 }
 
@@ -518,9 +749,17 @@ ort schkeuditz {
     kreis    = kr_leipzig
     quelle   = "GeoNames (CC BY 4.0), geonameid 2839050; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9843
+        konfession   = { lutherisch = 92 katholisch = 7 juedisch = 1 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_sachsen
+        bund       = ja
     }
 }
 
@@ -533,9 +772,17 @@ ort markranstaedt {
     kreis    = kr_leipzig
     quelle   = "GeoNames (CC BY 4.0), geonameid 2873331; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12020
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_leipzig
+        bund       = ja
     }
 }
 
@@ -548,9 +795,17 @@ ort bad_lausick {
     kreis    = kr_leipzig
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953411; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 16783
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_leipzig
+        bund       = ja
     }
 }
 
@@ -563,9 +818,17 @@ ort zwenkau {
     kreis    = kr_leipzig
     quelle   = "GeoNames (CC BY 4.0), geonameid 2803588; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 19164
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_leipzig
+        bund       = ja
     }
 }
 
@@ -578,9 +841,17 @@ ort frohburg {
     kreis    = kr_leipzig
     quelle   = "GeoNames (CC BY 4.0), geonameid 2924313; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 15082
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_leipzig
+        bund       = ja
     }
 }
 
@@ -593,9 +864,17 @@ ort elstertrebnitz {
     kreis    = kr_leipzig
     quelle   = "GeoNames (CC BY 4.0), geonameid 2930682; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12134
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_leipzig
+        bund       = ja
     }
 }
 
@@ -608,9 +887,17 @@ ort riesa {
     kreis    = kr_riesa
     quelle   = "GeoNames (CC BY 4.0), geonameid 2846939; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 26327
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_dresden
+        bund       = ja
     }
 }
 
@@ -623,9 +910,17 @@ ort oschatz {
     kreis    = kr_riesa
     quelle   = "GeoNames (CC BY 4.0), geonameid 2856944; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10093
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_leipzig
+        bund       = ja
     }
 }
 
@@ -638,9 +933,17 @@ ort lommatzsch {
     kreis    = kr_riesa
     quelle   = "GeoNames (CC BY 4.0), geonameid 2876009; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 24324
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_dresden
+        bund       = ja
     }
 }
 
@@ -653,9 +956,17 @@ ort wermsdorf {
     kreis    = kr_riesa
     quelle   = "GeoNames (CC BY 4.0), geonameid 2810848; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 17010
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_leipzig
+        bund       = ja
     }
 }
 
@@ -668,9 +979,17 @@ ort muegeln {
     kreis    = kr_riesa
     quelle   = "GeoNames (CC BY 4.0), geonameid 2868842; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12247
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_leipzig
+        bund       = ja
     }
 }
 
@@ -683,9 +1002,17 @@ ort stauchitz {
     kreis    = kr_riesa
     quelle   = "GeoNames (CC BY 4.0), geonameid 2829402; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12383
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_dresden
+        bund       = ja
     }
 }
 
@@ -698,9 +1025,17 @@ ort dahlen {
     kreis    = kr_riesa
     quelle   = "GeoNames (CC BY 4.0), geonameid 2939434; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 13721
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_leipzig
+        bund       = ja
     }
 }
 
@@ -713,9 +1048,17 @@ ort cavertitz {
     kreis    = kr_riesa
     quelle   = "GeoNames (CC BY 4.0), geonameid 2940218; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11000
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_leipzig
+        bund       = ja
     }
 }
 
@@ -728,9 +1071,17 @@ ort wuelknitz {
     kreis    = kr_riesa
     quelle   = "GeoNames (CC BY 4.0), geonameid 2805861; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 16897
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_dresden
+        bund       = ja
     }
 }
 
@@ -743,9 +1094,17 @@ ort doebeln {
     kreis    = kr_doebeln
     quelle   = "GeoNames (CC BY 4.0), geonameid 2936658; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 16551
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_leipzig
+        bund       = ja
     }
 }
 
@@ -758,9 +1117,17 @@ ort rosswein {
     kreis    = kr_doebeln
     quelle   = "GeoNames (CC BY 4.0), geonameid 2844604; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 19278
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_leipzig
+        bund       = ja
     }
 }
 
@@ -773,9 +1140,17 @@ ort leisnig {
     kreis    = kr_doebeln
     quelle   = "GeoNames (CC BY 4.0), geonameid 2879109; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 15422
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_leipzig
+        bund       = ja
     }
 }
 
@@ -788,9 +1163,17 @@ ort rochlitz {
     kreis    = kr_doebeln
     quelle   = "GeoNames (CC BY 4.0), geonameid 2846261; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 17123
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_leipzig
+        bund       = ja
     }
 }
 
@@ -803,9 +1186,17 @@ ort colditz {
     kreis    = kr_doebeln
     quelle   = "GeoNames (CC BY 4.0), geonameid 2939927; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12814
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_leipzig
+        bund       = ja
     }
 }
 
@@ -818,9 +1209,17 @@ ort waldheim {
     kreis    = kr_doebeln
     quelle   = "GeoNames (CC BY 4.0), geonameid 2814956; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12701
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_leipzig
+        bund       = ja
     }
 }
 
@@ -833,9 +1232,17 @@ ort meissen {
     kreis    = kr_dresden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2872155; Name Meißen aus den GeoNames-Alternativnamen (GeoNames: Meissen); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 25421
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_dresden
+        bund       = ja
     }
 }
 
@@ -848,9 +1255,17 @@ ort freital {
     kreis    = kr_dresden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2925017; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 19890
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_dresden
+        bund       = ja
     }
 }
 
@@ -863,9 +1278,17 @@ ort radebeul {
     kreis    = kr_dresden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2851077; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 19358
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_dresden
+        bund       = ja
     }
 }
 
@@ -878,9 +1301,17 @@ ort grossenhain {
     kreis    = kr_dresden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2916630; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 19958
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_dresden
+        bund       = ja
     }
 }
 
@@ -893,9 +1324,17 @@ ort wilsdruff {
     kreis    = kr_dresden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2808436; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 15763
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_dresden
+        bund       = ja
     }
 }
 
@@ -908,9 +1347,17 @@ ort radeburg {
     kreis    = kr_dresden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2851074; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 15876
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_dresden
+        bund       = ja
     }
 }
 
@@ -923,9 +1370,17 @@ ort thiendorf {
     kreis    = kr_dresden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2822786; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10773
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_dresden
+        bund       = ja
     }
 }
 
@@ -938,9 +1393,17 @@ ort pirna {
     kreis    = kr_pirna
     quelle   = "GeoNames (CC BY 4.0), geonameid 2853572; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 28091
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_dresden
+        bund       = ja
     }
 }
 
@@ -953,9 +1416,17 @@ ort neustadt_in_sachsen {
     kreis    = kr_pirna
     quelle   = "GeoNames (CC BY 4.0), geonameid 2864089; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 24041
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_dresden
+        bund       = ja
     }
 }
 
@@ -968,9 +1439,17 @@ ort stolpen {
     kreis    = kr_pirna
     quelle   = "GeoNames (CC BY 4.0), geonameid 2826532; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 14969
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_dresden
+        bund       = ja
     }
 }
 
@@ -983,9 +1462,17 @@ ort koenigstein {
     kreis    = kr_pirna
     quelle   = "GeoNames (CC BY 4.0), geonameid 2885764; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 31298
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_dresden
+        bund       = ja
     }
 }
 
@@ -998,9 +1485,17 @@ ort olbernhau {
     kreis    = kr_freiberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2857484; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 19233
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_zwickau
+        bund       = ja
     }
 }
 
@@ -1013,9 +1508,17 @@ ort dippoldiswalde {
     kreis    = kr_freiberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2936842; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 17577
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_dresden
+        bund       = ja
     }
 }
 
@@ -1028,9 +1531,17 @@ ort glashuette {
     kreis    = kr_freiberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2920104; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 16965
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_dresden
+        bund       = ja
     }
 }
 
@@ -1043,9 +1554,17 @@ ort altenberg {
     kreis    = kr_freiberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2957834; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 20865
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_dresden
+        bund       = ja
     }
 }
 
@@ -1058,9 +1577,17 @@ ort pretzschendorf {
     kreis    = kr_freiberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2852154; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 27556
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_dresden
+        bund       = ja
     }
 }
 
@@ -1073,9 +1600,17 @@ ort grosshartmannsdorf {
     kreis    = kr_freiberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2915550; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 25288
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_dresden
+        bund       = ja
     }
 }
 
@@ -1088,9 +1623,17 @@ ort neuhausen_sachsen {
     kreis    = kr_freiberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2865098; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 20049
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_dresden
+        bund       = ja
     }
 }
 
@@ -1103,9 +1646,17 @@ ort reinsberg {
     kreis    = kr_freiberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2848737; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 21546
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_dresden
+        bund       = ja
     }
 }
 
@@ -1118,9 +1669,17 @@ ort limbach_oberfrohna {
     kreis    = kr_chemnitz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2877673; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 18775
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_zwickau
+        bund       = ja
     }
 }
 
@@ -1133,9 +1692,17 @@ ort mittweida {
     kreis    = kr_chemnitz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2870318; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11453
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_leipzig
+        bund       = ja
     }
 }
 
@@ -1148,9 +1715,17 @@ ort frankenberg_sachsen {
     kreis    = kr_chemnitz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2925630; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 13041
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_dresden
+        bund       = ja
     }
 }
 
@@ -1163,9 +1738,17 @@ ort marienberg {
     kreis    = kr_chemnitz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2873632; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 14152
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_zwickau
+        bund       = ja
     }
 }
 
@@ -1178,9 +1761,17 @@ ort zschopau {
     kreis    = kr_chemnitz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2803798; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 15059
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_zwickau
+        bund       = ja
     }
 }
 
@@ -1193,9 +1784,17 @@ ort penig {
     kreis    = kr_chemnitz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2854967; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 23927
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_leipzig
+        bund       = ja
     }
 }
 
@@ -1208,9 +1807,17 @@ ort oederan {
     kreis    = kr_chemnitz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2857970; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 16897
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_dresden
+        bund       = ja
     }
 }
 
@@ -1223,9 +1830,17 @@ ort burkhardtsdorf {
     kreis    = kr_chemnitz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2940993; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11249
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_zwickau
+        bund       = ja
     }
 }
 
@@ -1238,9 +1853,17 @@ ort hainichen {
     kreis    = kr_chemnitz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2911795; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 14855
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_dresden
+        bund       = ja
     }
 }
 
@@ -1253,9 +1876,17 @@ ort claussnitz {
     kreis    = kr_chemnitz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2939997; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 13154
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_dresden
+        bund       = ja
     }
 }
 
@@ -1268,9 +1899,17 @@ ort drebach {
     kreis    = kr_chemnitz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2935303; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9344
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_zwickau
+        bund       = ja
     }
 }
 
@@ -1283,9 +1922,17 @@ ort glauchau {
     kreis    = kr_zwickau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2920020; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 19835
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_zwickau
+        bund       = ja
     }
 }
 
@@ -1298,9 +1945,17 @@ ort crimmitschau {
     kreis    = kr_zwickau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2939747; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 15905
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_zwickau
+        bund       = ja
     }
 }
 
@@ -1313,9 +1968,17 @@ ort werdau {
     kreis    = kr_zwickau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2810969; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 17528
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_zwickau
+        bund       = ja
     }
 }
 
@@ -1328,9 +1991,17 @@ ort reichenbach_vogtland {
     kreis    = kr_zwickau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2849156; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 22381
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_zwickau
+        bund       = ja
     }
 }
 
@@ -1343,9 +2014,17 @@ ort lichtenstein {
     kreis    = kr_zwickau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2878037; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 16670
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_zwickau
+        bund       = ja
     }
 }
 
@@ -1358,9 +2037,17 @@ ort kirchberg {
     kreis    = kr_zwickau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2890659; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 18938
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_zwickau
+        bund       = ja
     }
 }
 
@@ -1373,9 +2060,17 @@ ort annaberg_buchholz {
     kreis    = kr_annaberg_buchholz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2956005; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 17693
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_zwickau
+        bund       = ja
     }
 }
 
@@ -1388,9 +2083,17 @@ ort aue {
     kreis    = kr_annaberg_buchholz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2954695; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11340
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_zwickau
+        bund       = ja
     }
 }
 
@@ -1403,9 +2106,17 @@ ort schwarzenberg {
     kreis    = kr_annaberg_buchholz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2834978; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 13971
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_zwickau
+        bund       = ja
     }
 }
 
@@ -1418,9 +2129,17 @@ ort stollberg {
     kreis    = kr_annaberg_buchholz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2826584; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12429
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_zwickau
+        bund       = ja
     }
 }
 
@@ -1433,9 +2152,17 @@ ort zwoenitz {
     kreis    = kr_annaberg_buchholz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2803476; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11884
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_zwickau
+        bund       = ja
     }
 }
 
@@ -1448,9 +2175,17 @@ ort eibenstock {
     kreis    = kr_annaberg_buchholz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2932738; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 16692
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_zwickau
+        bund       = ja
     }
 }
 
@@ -1463,9 +2198,17 @@ ort johanngeorgenstadt {
     kreis    = kr_annaberg_buchholz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2894814; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 14969
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_zwickau
+        bund       = ja
     }
 }
 
@@ -1478,9 +2221,17 @@ ort joehstadt {
     kreis    = kr_annaberg_buchholz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2894737; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 20684
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_zwickau
+        bund       = ja
     }
 }
 
@@ -1493,9 +2244,17 @@ ort oberwiesenthal {
     kreis    = kr_annaberg_buchholz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2882332; Name nach GeoNames ohne modernen Zusatz (Kurort Oberwiesenthal); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 16330
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_zwickau
+        bund       = ja
     }
 }
 
@@ -1508,9 +2267,17 @@ ort plauen {
     kreis    = kr_plauen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2853292; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 27959
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_zwickau
+        bund       = ja
     }
 }
 
@@ -1523,9 +2290,17 @@ ort auerbach {
     kreis    = kr_plauen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2954602; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 19729
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_zwickau
+        bund       = ja
     }
 }
 
@@ -1538,9 +2313,17 @@ ort klingenthal {
     kreis    = kr_plauen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2887713; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 13245
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_zwickau
+        bund       = ja
     }
 }
 
@@ -1553,9 +2336,17 @@ ort oelsnitz {
     kreis    = kr_plauen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2857919; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 18824
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_zwickau
+        bund       = ja
     }
 }
 
@@ -1568,9 +2359,17 @@ ort markneukirchen {
     kreis    = kr_plauen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2873340; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10523
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_zwickau
+        bund       = ja
     }
 }
 
@@ -1583,9 +2382,17 @@ ort schoeneck {
     kreis    = kr_plauen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2836772; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9435
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_zwickau
+        bund       = ja
     }
 }
 
@@ -1598,9 +2405,17 @@ ort pausa {
     kreis    = kr_plauen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2855175; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 17350
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_zwickau
+        bund       = ja
     }
 }
 
@@ -1613,9 +2428,17 @@ ort bad_brambach {
     kreis    = kr_plauen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953538; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7258
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_zwickau
+        bund       = ja
     }
 }
 
@@ -1628,8 +2451,16 @@ ort bergen_sachsen {
     kreis    = kr_plauen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2950626; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10523
+        konfession   = { lutherisch = 98 katholisch = 2 }
+        kultur       = { obersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = SAX
-        bund     = ja
+        besitzer   = SAX
+        verwaltung = sx_zwickau
+        bund       = ja
     }
 }

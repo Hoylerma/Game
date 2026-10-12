@@ -33,6 +33,13 @@ ort wolfenbuettel {
         verwuestung  = 0.45
     }
 
+    1846.12.03 = {
+        bevoelkerung = 17900
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
         besitzer = BWO
         bund     = ja
@@ -54,6 +61,13 @@ ort braunschweig {
         konfession   = { lutherisch = 100 }
         kultur       = { niedersachsen = 100 }
         verwuestung  = 0.25
+    }
+
+    1846.12.03 = {
+        bevoelkerung = 44888
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
     }
 
     1848.03.01 = {
@@ -79,6 +93,13 @@ ort helmstedt {
         verwuestung  = 0.4
     }
 
+    1846.12.03 = {
+        bevoelkerung = 12384
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
         besitzer = BWO
         bund     = ja
@@ -94,9 +115,17 @@ ort peine {
     kreis    = kr_peine
     quelle   = "GeoNames (CC BY 4.0), geonameid 2855047; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 13197
+        konfession   = { lutherisch = 75 katholisch = 24 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_hildesheim
+        bund       = ja
     }
 }
 
@@ -108,6 +137,13 @@ ort vechelde {
     stadt    = nein
     kreis    = kr_peine
     quelle   = "GeoNames (CC BY 4.0), geonameid 2817813; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6784
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
 
     1848.03.01 = {
         besitzer = BWO
@@ -124,9 +160,17 @@ ort hohenhameln {
     kreis    = kr_peine
     quelle   = "GeoNames (CC BY 4.0), geonameid 2901731; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6673
+        konfession   = { lutherisch = 75 katholisch = 24 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_hildesheim
+        bund       = ja
     }
 }
 
@@ -138,6 +182,13 @@ ort wendeburg {
     stadt    = nein
     kreis    = kr_peine
     quelle   = "GeoNames (CC BY 4.0), geonameid 2811317; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 5312
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
 
     1848.03.01 = {
         besitzer = BWO
@@ -154,6 +205,13 @@ ort koenigslutter_am_elm {
     kreis    = kr_braunschweig
     quelle   = "GeoNames (CC BY 4.0), geonameid 2885800; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8362
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
         besitzer = BWO
         bund     = ja
@@ -168,6 +226,13 @@ ort schoeningen {
     stadt    = nein
     kreis    = kr_braunschweig
     quelle   = "GeoNames (CC BY 4.0), geonameid 2836543; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8467
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
 
     1848.03.01 = {
         besitzer = BWO
@@ -184,6 +249,13 @@ ort cremlingen {
     kreis    = kr_braunschweig
     quelle   = "GeoNames (CC BY 4.0), geonameid 2939763; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5890
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
         besitzer = BWO
         bund     = ja
@@ -198,6 +270,13 @@ ort schoeppenstedt {
     stadt    = nein
     kreis    = kr_braunschweig
     quelle   = "GeoNames (CC BY 4.0), geonameid 2836396; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9624
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
 
     1848.03.01 = {
         besitzer = BWO
@@ -214,6 +293,13 @@ ort lehre {
     kreis    = kr_braunschweig
     quelle   = "GeoNames (CC BY 4.0), geonameid 2879378; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7100
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
         besitzer = BWO
         bund     = ja
@@ -228,6 +314,13 @@ ort gross_twuelpstedt {
     stadt    = nein
     kreis    = kr_braunschweig
     quelle   = "GeoNames (CC BY 4.0), geonameid 2914932; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7468
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
 
     1848.03.01 = {
         besitzer = BWO
@@ -244,9 +337,17 @@ ort goslar {
     kreis    = kr_wolfenbuettel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2918840; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10172
+        konfession   = { lutherisch = 75 katholisch = 24 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_hildesheim
+        bund       = ja
     }
 }
 
@@ -258,6 +359,13 @@ ort bad_harzburg {
     stadt    = ja
     kreis    = kr_wolfenbuettel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953449; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10993
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
 
     1848.03.01 = {
         besitzer = BWO
@@ -274,6 +382,13 @@ ort seesen {
     kreis    = kr_wolfenbuettel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2833592; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7795
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
         besitzer = BWO
         bund     = ja
@@ -289,9 +404,17 @@ ort clausthal_zellerfeld {
     kreis    = kr_wolfenbuettel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2939995; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7259
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_clausthal
+        bund       = ja
     }
 }
 
@@ -304,9 +427,17 @@ ort liebenburg {
     kreis    = kr_wolfenbuettel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2877969; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9125
+        konfession   = { lutherisch = 75 katholisch = 24 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_hildesheim
+        bund       = ja
     }
 }
 
@@ -318,6 +449,13 @@ ort braunlage {
     stadt    = nein
     kreis    = kr_wolfenbuettel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2945055; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9088
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
 
     1848.03.01 = {
         besitzer = BWO
@@ -334,6 +472,13 @@ ort lutter_am_barenberge {
     kreis    = kr_wolfenbuettel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2874832; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6784
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
         besitzer = BWO
         bund     = ja
@@ -348,6 +493,13 @@ ort boerssum {
     stadt    = nein
     kreis    = kr_wolfenbuettel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2946007; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8257
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
 
     1848.03.01 = {
         besitzer = BWO
@@ -364,6 +516,13 @@ ort elbe {
     kreis    = kr_wolfenbuettel
     quelle   = "GeoNames (CC BY 4.0), geonameid 3208598; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6837
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
         besitzer = BWO
         bund     = ja
@@ -378,6 +537,13 @@ ort holzminden {
     stadt    = ja
     kreis    = kr_holzminden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2899601; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11076
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
 
     1848.03.01 = {
         besitzer = BWO
@@ -394,6 +560,13 @@ ort stadtoldendorf {
     kreis    = kr_holzminden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2829753; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7047
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
         besitzer = BWO
         bund     = ja
@@ -409,6 +582,13 @@ ort bodenwerder {
     kreis    = kr_holzminden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2947092; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11991
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
         besitzer = BWO
         bund     = ja
@@ -423,6 +603,13 @@ ort eimen {
     stadt    = nein
     kreis    = kr_holzminden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2931825; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 5943
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
 
     1848.03.01 = {
         besitzer = BWO

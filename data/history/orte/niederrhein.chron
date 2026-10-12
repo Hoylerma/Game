@@ -19,9 +19,17 @@ ort kleve {
     kreis    = kr_kleve
     quelle   = "GeoNames (CC BY 4.0), geonameid 2887835; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 18591
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
     }
 }
 
@@ -34,9 +42,17 @@ ort emmerich {
     kreis    = kr_kleve
     quelle   = "GeoNames (CC BY 4.0), geonameid 2930509; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 21056
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
     }
 }
 
@@ -49,9 +65,17 @@ ort goch {
     kreis    = kr_kleve
     quelle   = "GeoNames (CC BY 4.0), geonameid 2919625; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 18641
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
     }
 }
 
@@ -64,9 +88,17 @@ ort kevelaer {
     kreis    = kr_kleve
     quelle   = "GeoNames (CC BY 4.0), geonameid 2891258; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 14545
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
     }
 }
 
@@ -79,9 +111,17 @@ ort rees {
     kreis    = kr_kleve
     quelle   = "GeoNames (CC BY 4.0), geonameid 2849548; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 14090
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
     }
 }
 
@@ -94,9 +134,17 @@ ort kalkar {
     kreis    = kr_kleve
     quelle   = "GeoNames (CC BY 4.0), geonameid 2893837; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8339
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
     }
 }
 
@@ -109,9 +157,17 @@ ort uedem {
     kreis    = kr_kleve
     quelle   = "GeoNames (CC BY 4.0), geonameid 2820465; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9439
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
     }
 }
 
@@ -124,9 +180,17 @@ ort essen_niederrhein {
     kreis    = kr_essen_niederrhein
     quelle   = "GeoNames (CC BY 4.0), geonameid 2928810; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 20913
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
     }
 }
 
@@ -139,9 +203,17 @@ ort duisburg {
     kreis    = kr_essen_niederrhein
     quelle   = "GeoNames (CC BY 4.0), geonameid 2934691; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 27346
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
     }
 }
 
@@ -154,9 +226,17 @@ ort wuppertal {
     kreis    = kr_essen_niederrhein
     quelle   = "GeoNames (CC BY 4.0), geonameid 2805753; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 85080
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
     }
 }
 
@@ -169,9 +249,17 @@ ort oberhausen {
     kreis    = kr_essen_niederrhein
     quelle   = "GeoNames (CC BY 4.0), geonameid 2860410; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11397
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
     }
 }
 
@@ -184,9 +272,17 @@ ort solingen {
     kreis    = kr_essen_niederrhein
     quelle   = "GeoNames (CC BY 4.0), geonameid 2831580; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 14339
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
     }
 }
 
@@ -199,9 +295,17 @@ ort remscheid {
     kreis    = kr_essen_niederrhein
     quelle   = "GeoNames (CC BY 4.0), geonameid 2848273; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 19630
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
     }
 }
 
@@ -214,9 +318,17 @@ ort mettmann {
     kreis    = kr_essen_niederrhein
     quelle   = "GeoNames (CC BY 4.0), geonameid 2871535; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 14303
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
     }
 }
 
@@ -229,9 +341,17 @@ ort velbert {
     kreis    = kr_essen_niederrhein
     quelle   = "GeoNames (CC BY 4.0), geonameid 2817724; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 16646
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
     }
 }
 
@@ -244,9 +364,17 @@ ort ratingen {
     kreis    = kr_essen_niederrhein
     quelle   = "GeoNames (CC BY 4.0), geonameid 2850174; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 21503
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
     }
 }
 
@@ -259,9 +387,17 @@ ort dinslaken {
     kreis    = kr_essen_niederrhein
     quelle   = "GeoNames (CC BY 4.0), geonameid 2936871; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 26329
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
     }
 }
 
@@ -274,9 +410,17 @@ ort moers {
     kreis    = kr_moers
     quelle   = "GeoNames (CC BY 4.0), geonameid 2870221; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 14538
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
     }
 }
 
@@ -289,9 +433,17 @@ ort wesel {
     kreis    = kr_moers
     quelle   = "GeoNames (CC BY 4.0), geonameid 2810678; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 26657
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
     }
 }
 
@@ -304,9 +456,17 @@ ort kamp_lintfort {
     kreis    = kr_moers
     quelle   = "GeoNames (CC BY 4.0), geonameid 2893264; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 16772
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
     }
 }
 
@@ -319,9 +479,17 @@ ort geldern {
     kreis    = kr_moers
     quelle   = "GeoNames (CC BY 4.0), geonameid 2921528; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 13720
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
     }
 }
 
@@ -334,9 +502,17 @@ ort hamminkeln {
     kreis    = kr_moers
     quelle   = "GeoNames (CC BY 4.0), geonameid 2911051; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 18700
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
     }
 }
 
@@ -349,9 +525,17 @@ ort xanten {
     kreis    = kr_moers
     quelle   = "GeoNames (CC BY 4.0), geonameid 2805385; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 21856
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
     }
 }
 
@@ -364,9 +548,17 @@ ort straelen {
     kreis    = kr_moers
     quelle   = "GeoNames (CC BY 4.0), geonameid 2826304; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9530
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
     }
 }
 
@@ -379,9 +571,17 @@ ort schermbeck {
     kreis    = kr_moers
     quelle   = "GeoNames (CC BY 4.0), geonameid 2839674; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10080
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
     }
 }
 
@@ -394,9 +594,17 @@ ort issum {
     kreis    = kr_moers
     quelle   = "GeoNames (CC BY 4.0), geonameid 2895617; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12188
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
     }
 }
 
@@ -409,9 +617,17 @@ ort duesseldorf {
     kreis    = kr_duesseldorf
     quelle   = "GeoNames (CC BY 4.0), geonameid 2934246; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 45866
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
     }
 }
 
@@ -424,9 +640,17 @@ ort neuss {
     kreis    = kr_duesseldorf
     quelle   = "GeoNames (CC BY 4.0), geonameid 2864118; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 24368
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
     }
 }
 
@@ -439,9 +663,17 @@ ort grevenbroich {
     kreis    = kr_duesseldorf
     quelle   = "GeoNames (CC BY 4.0), geonameid 2917540; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 21856
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
     }
 }
 
@@ -454,9 +686,17 @@ ort dormagen {
     kreis    = kr_duesseldorf
     quelle   = "GeoNames (CC BY 4.0), geonameid 2935825; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 19775
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
     }
 }
 
@@ -469,9 +709,17 @@ ort hilden {
     kreis    = kr_duesseldorf
     quelle   = "GeoNames (CC BY 4.0), geonameid 2904795; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 14616
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
     }
 }
 
@@ -484,9 +732,17 @@ ort langenfeld {
     kreis    = kr_duesseldorf
     quelle   = "GeoNames (CC BY 4.0), geonameid 2881085; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12364
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
     }
 }
 
@@ -499,9 +755,17 @@ ort rommerskirchen {
     kreis    = kr_duesseldorf
     quelle   = "GeoNames (CC BY 4.0), geonameid 2845273; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9530
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
     }
 }
 
@@ -514,9 +778,17 @@ ort moenchengladbach {
     kreis    = kr_moenchengladbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2869894; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 20845
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
     }
 }
 
@@ -529,9 +801,17 @@ ort krefeld {
     kreis    = kr_moenchengladbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2884509; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 55845
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
     }
 }
 
@@ -544,9 +824,17 @@ ort viersen {
     kreis    = kr_moenchengladbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2817311; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 19781
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
     }
 }
 
@@ -559,9 +847,17 @@ ort willich {
     kreis    = kr_moenchengladbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2808559; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 15611
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
     }
 }
 
@@ -574,9 +870,17 @@ ort kempen {
     kreis    = kr_moenchengladbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2891643; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 18417
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
     }
 }
 
@@ -589,8 +893,16 @@ ort niederkruechten {
     kreis    = kr_moenchengladbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2863199; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 15120
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
     }
 }

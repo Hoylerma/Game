@@ -18,6 +18,13 @@ ort bad_arolsen {
     kreis    = kr_bad_arolsen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2955421; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9700
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
         besitzer = WAL
         bund     = ja
@@ -33,9 +40,17 @@ ort hofgeismar {
     kreis    = kr_bad_arolsen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2902559; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9575
+        konfession   = { reformiert = 55 lutherisch = 29 katholisch = 14 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HEK
-        bund     = ja
+        besitzer   = HEK
+        verwaltung = hk_niederhessen
+        bund       = ja
     }
 }
 
@@ -48,9 +63,17 @@ ort wolfhagen {
     kreis    = kr_bad_arolsen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2806799; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7910
+        konfession   = { reformiert = 55 lutherisch = 29 katholisch = 14 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HEK
-        bund     = ja
+        besitzer   = HEK
+        verwaltung = hk_niederhessen
+        bund       = ja
     }
 }
 
@@ -63,9 +86,17 @@ ort calden {
     kreis    = kr_bad_arolsen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2940412; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10546
+        konfession   = { reformiert = 55 lutherisch = 29 katholisch = 14 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HEK
-        bund     = ja
+        besitzer   = HEK
+        verwaltung = hk_niederhessen
+        bund       = ja
     }
 }
 
@@ -78,9 +109,17 @@ ort zierenberg {
     kreis    = kr_bad_arolsen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2804297; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8812
+        konfession   = { reformiert = 55 lutherisch = 29 katholisch = 14 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HEK
-        bund     = ja
+        besitzer   = HEK
+        verwaltung = hk_niederhessen
+        bund       = ja
     }
 }
 
@@ -93,9 +132,17 @@ ort trendelburg {
     kreis    = kr_bad_arolsen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2821336; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12003
+        konfession   = { reformiert = 55 lutherisch = 29 katholisch = 14 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HEK
-        bund     = ja
+        besitzer   = HEK
+        verwaltung = hk_niederhessen
+        bund       = ja
     }
 }
 
@@ -108,9 +155,17 @@ ort niedenstein {
     kreis    = kr_bad_arolsen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2863685; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9922
+        konfession   = { reformiert = 55 lutherisch = 29 katholisch = 14 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HEK
-        bund     = ja
+        besitzer   = HEK
+        verwaltung = hk_niederhessen
+        bund       = ja
     }
 }
 
@@ -123,9 +178,17 @@ ort naumburg {
     kreis    = kr_bad_arolsen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2866905; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7008
+        konfession   = { reformiert = 55 lutherisch = 29 katholisch = 14 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HEK
-        bund     = ja
+        besitzer   = HEK
+        verwaltung = hk_niederhessen
+        bund       = ja
     }
 }
 
@@ -138,9 +201,17 @@ ort breuna {
     kreis    = kr_bad_arolsen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2944169; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7632
+        konfession   = { reformiert = 55 lutherisch = 29 katholisch = 14 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HEK
-        bund     = ja
+        besitzer   = HEK
+        verwaltung = hk_niederhessen
+        bund       = ja
     }
 }
 
@@ -153,9 +224,17 @@ ort kassel {
     kreis    = kr_kassel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2892518; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 45100
+        konfession   = { reformiert = 55 lutherisch = 29 katholisch = 14 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HEK
-        bund     = ja
+        besitzer   = HEK
+        verwaltung = hk_niederhessen
+        bund       = ja
     }
 }
 
@@ -168,9 +247,17 @@ ort eschwege {
     kreis    = kr_kassel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2928967; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 13523
+        konfession   = { reformiert = 55 lutherisch = 29 katholisch = 14 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HEK
-        bund     = ja
+        besitzer   = HEK
+        verwaltung = hk_niederhessen
+        bund       = ja
     }
 }
 
@@ -183,9 +270,17 @@ ort witzenhausen {
     kreis    = kr_kassel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2807184; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10685
+        konfession   = { reformiert = 55 lutherisch = 29 katholisch = 14 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HEK
-        bund     = ja
+        besitzer   = HEK
+        verwaltung = hk_niederhessen
+        bund       = ja
     }
 }
 
@@ -198,9 +293,17 @@ ort hessisch_lichtenau {
     kreis    = kr_kassel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2905293; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10269
+        konfession   = { reformiert = 55 lutherisch = 29 katholisch = 14 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HEK
-        bund     = ja
+        besitzer   = HEK
+        verwaltung = hk_niederhessen
+        bund       = ja
     }
 }
 
@@ -213,9 +316,17 @@ ort kaufungen {
     kreis    = kr_kassel
     quelle   = "GeoNames (CC BY 4.0), geonameid 3336895; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7160
+        konfession   = { reformiert = 55 lutherisch = 29 katholisch = 14 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HEK
-        bund     = ja
+        besitzer   = HEK
+        verwaltung = hk_niederhessen
+        bund       = ja
     }
 }
 
@@ -228,9 +339,17 @@ ort bad_sooden_allendorf {
     kreis    = kr_kassel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953336; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11587
+        konfession   = { reformiert = 55 lutherisch = 29 katholisch = 14 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HEK
-        bund     = ja
+        besitzer   = HEK
+        verwaltung = hk_niederhessen
+        bund       = ja
     }
 }
 
@@ -243,9 +362,17 @@ ort grossalmerode {
     kreis    = kr_kassel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2917053; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8395
+        konfession   = { reformiert = 55 lutherisch = 29 katholisch = 14 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HEK
-        bund     = ja
+        besitzer   = HEK
+        verwaltung = hk_niederhessen
+        bund       = ja
     }
 }
 
@@ -257,6 +384,13 @@ ort korbach {
     stadt    = ja
     kreis    = kr_korbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2885536; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11792
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
 
     1848.03.01 = {
         besitzer = WAL
@@ -273,9 +407,17 @@ ort voehl {
     kreis    = kr_korbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2816769; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10275
+        konfession   = { lutherisch = 68 katholisch = 29 juedisch = 3 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HED
-        bund     = ja
+        besitzer   = HED
+        verwaltung = hd_oberhessen
+        bund       = ja
     }
 }
 
@@ -287,6 +429,13 @@ ort waldeck {
     stadt    = nein
     kreis    = kr_korbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2815101; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 5264
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
 
     1848.03.01 = {
         besitzer = WAL
@@ -303,6 +452,13 @@ ort willingen {
     kreis    = kr_korbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2808544; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7916
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
         besitzer = WAL
         bund     = ja
@@ -317,6 +473,13 @@ ort bad_wildungen {
     stadt    = nein
     kreis    = kr_bad_wildungen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953317; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7701
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
 
     1848.03.01 = {
         besitzer = WAL
@@ -333,9 +496,17 @@ ort homberg_efze {
     kreis    = kr_bad_wildungen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2899478; Name Homberg (Efze) aus den GeoNames-Alternativnamen (GeoNames: Homberg); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 16285
+        konfession   = { reformiert = 55 lutherisch = 29 katholisch = 14 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HEK
-        bund     = ja
+        besitzer   = HEK
+        verwaltung = hk_niederhessen
+        bund       = ja
     }
 }
 
@@ -348,9 +519,17 @@ ort fritzlar {
     kreis    = kr_bad_wildungen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2924326; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7979
+        konfession   = { reformiert = 55 lutherisch = 29 katholisch = 14 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HEK
-        bund     = ja
+        besitzer   = HEK
+        verwaltung = hk_niederhessen
+        bund       = ja
     }
 }
 
@@ -363,9 +542,17 @@ ort melsungen {
     kreis    = kr_bad_wildungen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2872028; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11587
+        konfession   = { reformiert = 55 lutherisch = 29 katholisch = 14 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HEK
-        bund     = ja
+        besitzer   = HEK
+        verwaltung = hk_niederhessen
+        bund       = ja
     }
 }
 
@@ -378,9 +565,17 @@ ort borken_kurhessen {
     kreis    = kr_bad_wildungen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2946230; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7771
+        konfession   = { reformiert = 55 lutherisch = 29 katholisch = 14 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HEK
-        bund     = ja
+        besitzer   = HEK
+        verwaltung = hk_niederhessen
+        bund       = ja
     }
 }
 
@@ -393,9 +588,17 @@ ort felsberg {
     kreis    = kr_bad_wildungen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2927226; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6869
+        konfession   = { reformiert = 55 lutherisch = 29 katholisch = 14 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HEK
-        bund     = ja
+        besitzer   = HEK
+        verwaltung = hk_niederhessen
+        bund       = ja
     }
 }
 
@@ -408,9 +611,17 @@ ort frielendorf {
     kreis    = kr_bad_wildungen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2924428; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10199
+        konfession   = { reformiert = 55 lutherisch = 29 katholisch = 14 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HEK
-        bund     = ja
+        besitzer   = HEK
+        verwaltung = hk_niederhessen
+        bund       = ja
     }
 }
 
@@ -423,9 +634,17 @@ ort guxhagen {
     kreis    = kr_bad_wildungen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2913286; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8395
+        konfession   = { reformiert = 55 lutherisch = 29 katholisch = 14 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HEK
-        bund     = ja
+        besitzer   = HEK
+        verwaltung = hk_niederhessen
+        bund       = ja
     }
 }
 
@@ -438,9 +657,17 @@ ort frankenberg_kurhessen {
     kreis    = kr_frankenberg_kurhessen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2925629; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11517
+        konfession   = { reformiert = 55 lutherisch = 29 katholisch = 14 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HEK
-        bund     = ja
+        besitzer   = HEK
+        verwaltung = hk_oberhessen
+        bund       = ja
     }
 }
 
@@ -453,9 +680,17 @@ ort allendorf {
     kreis    = kr_frankenberg_kurhessen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2958438; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8256
+        konfession   = { reformiert = 55 lutherisch = 29 katholisch = 14 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HEK
-        bund     = ja
+        besitzer   = HEK
+        verwaltung = hk_oberhessen
+        bund       = ja
     }
 }
 
@@ -468,9 +703,17 @@ ort gilserberg {
     kreis    = kr_frankenberg_kurhessen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2920389; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12489
+        konfession   = { reformiert = 55 lutherisch = 29 katholisch = 14 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HEK
-        bund     = ja
+        besitzer   = HEK
+        verwaltung = hk_niederhessen
+        bund       = ja
     }
 }
 
@@ -483,9 +726,17 @@ ort hatzfeld {
     kreis    = kr_frankenberg_kurhessen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2909194; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6628
+        konfession   = { lutherisch = 68 katholisch = 29 juedisch = 3 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HED
-        bund     = ja
+        besitzer   = HED
+        verwaltung = hd_oberhessen
+        bund       = ja
     }
 }
 
@@ -498,9 +749,17 @@ ort haina_kurhessen {
     kreis    = kr_frankenberg_kurhessen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2911909; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11864
+        konfession   = { reformiert = 55 lutherisch = 29 katholisch = 14 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HEK
-        bund     = ja
+        besitzer   = HEK
+        verwaltung = hk_oberhessen
+        bund       = ja
     }
 }
 
@@ -513,9 +772,17 @@ ort rosenthal {
     kreis    = kr_frankenberg_kurhessen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2844924; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8048
+        konfession   = { reformiert = 55 lutherisch = 29 katholisch = 14 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HEK
-        bund     = ja
+        besitzer   = HEK
+        verwaltung = hk_oberhessen
+        bund       = ja
     }
 }
 
@@ -528,9 +795,17 @@ ort rotenburg_an_der_fulda {
     kreis    = kr_rotenburg_an_der_fulda
     quelle   = "GeoNames (CC BY 4.0), geonameid 2844434; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 20815
+        konfession   = { katholisch = 90 reformiert = 6 juedisch = 4 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HEK
-        bund     = ja
+        besitzer   = HEK
+        verwaltung = hk_fulda
+        bund       = ja
     }
 }
 
@@ -543,9 +818,17 @@ ort sontra {
     kreis    = kr_rotenburg_an_der_fulda
     quelle   = "GeoNames (CC BY 4.0), geonameid 2831083; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 13252
+        konfession   = { reformiert = 55 lutherisch = 29 katholisch = 14 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HEK
-        bund     = ja
+        besitzer   = HEK
+        verwaltung = hk_niederhessen
+        bund       = ja
     }
 }
 
@@ -558,9 +841,17 @@ ort heringen {
     kreis    = kr_rotenburg_an_der_fulda
     quelle   = "GeoNames (CC BY 4.0), geonameid 2906088; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9852
+        konfession   = { katholisch = 90 reformiert = 6 juedisch = 4 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HEK
-        bund     = ja
+        besitzer   = HEK
+        verwaltung = hk_fulda
+        bund       = ja
     }
 }
 
@@ -573,9 +864,17 @@ ort waldkappel {
     kreis    = kr_rotenburg_an_der_fulda
     quelle   = "GeoNames (CC BY 4.0), geonameid 2814888; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11726
+        konfession   = { reformiert = 55 lutherisch = 29 katholisch = 14 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HEK
-        bund     = ja
+        besitzer   = HEK
+        verwaltung = hk_niederhessen
+        bund       = ja
     }
 }
 
@@ -588,9 +887,17 @@ ort herleshausen {
     kreis    = kr_rotenburg_an_der_fulda
     quelle   = "GeoNames (CC BY 4.0), geonameid 2906050; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7077
+        konfession   = { reformiert = 55 lutherisch = 29 katholisch = 14 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HEK
-        bund     = ja
+        besitzer   = HEK
+        verwaltung = hk_niederhessen
+        bund       = ja
     }
 }
 
@@ -603,9 +910,17 @@ ort friedewald {
     kreis    = kr_rotenburg_an_der_fulda
     quelle   = "GeoNames (CC BY 4.0), geonameid 2924703; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9644
+        konfession   = { katholisch = 90 reformiert = 6 juedisch = 4 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HEK
-        bund     = ja
+        besitzer   = HEK
+        verwaltung = hk_fulda
+        bund       = ja
     }
 }
 
@@ -618,9 +933,17 @@ ort bad_hersfeld {
     kreis    = kr_bad_hersfeld
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953439; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 15890
+        konfession   = { katholisch = 90 reformiert = 6 juedisch = 4 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HEK
-        bund     = ja
+        besitzer   = HEK
+        verwaltung = hk_fulda
+        bund       = ja
     }
 }
 
@@ -633,9 +956,17 @@ ort huenfeld {
     kreis    = kr_bad_hersfeld
     quelle   = "GeoNames (CC BY 4.0), geonameid 2897436; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11101
+        konfession   = { katholisch = 90 reformiert = 6 juedisch = 4 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HEK
-        bund     = ja
+        besitzer   = HEK
+        verwaltung = hk_fulda
+        bund       = ja
     }
 }
 
@@ -648,9 +979,17 @@ ort willingshausen {
     kreis    = kr_bad_hersfeld
     quelle   = "GeoNames (CC BY 4.0), geonameid 2808533; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11517
+        konfession   = { reformiert = 55 lutherisch = 29 katholisch = 14 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HEK
-        bund     = ja
+        besitzer   = HEK
+        verwaltung = hk_niederhessen
+        bund       = ja
     }
 }
 
@@ -663,9 +1002,17 @@ ort niederaula {
     kreis    = kr_bad_hersfeld
     quelle   = "GeoNames (CC BY 4.0), geonameid 2863638; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9228
+        konfession   = { katholisch = 90 reformiert = 6 juedisch = 4 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HEK
-        bund     = ja
+        besitzer   = HEK
+        verwaltung = hk_fulda
+        bund       = ja
     }
 }
 
@@ -678,9 +1025,17 @@ ort eiterfeld {
     kreis    = kr_bad_hersfeld
     quelle   = "GeoNames (CC BY 4.0), geonameid 2931372; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8881
+        konfession   = { katholisch = 90 reformiert = 6 juedisch = 4 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HEK
-        bund     = ja
+        besitzer   = HEK
+        verwaltung = hk_fulda
+        bund       = ja
     }
 }
 
@@ -693,9 +1048,17 @@ ort neukirchen_kurhessen {
     kreis    = kr_bad_hersfeld
     quelle   = "GeoNames (CC BY 4.0), geonameid 2864748; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9020
+        konfession   = { reformiert = 55 lutherisch = 29 katholisch = 14 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HEK
-        bund     = ja
+        besitzer   = HEK
+        verwaltung = hk_niederhessen
+        bund       = ja
     }
 }
 
@@ -708,9 +1071,17 @@ ort oberaula {
     kreis    = kr_bad_hersfeld
     quelle   = "GeoNames (CC BY 4.0), geonameid 2861358; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12836
+        konfession   = { reformiert = 55 lutherisch = 29 katholisch = 14 juedisch = 2 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HEK
-        bund     = ja
+        besitzer   = HEK
+        verwaltung = hk_niederhessen
+        bund       = ja
     }
 }
 
@@ -723,9 +1094,17 @@ ort fulda {
     kreis    = kr_fulda
     quelle   = "GeoNames (CC BY 4.0), geonameid 2923822; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 19934
+        konfession   = { katholisch = 90 reformiert = 6 juedisch = 4 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HEK
-        bund     = ja
+        besitzer   = HEK
+        verwaltung = hk_fulda
+        bund       = ja
     }
 }
 
@@ -738,9 +1117,17 @@ ort grossenlueder {
     kreis    = kr_fulda
     quelle   = "GeoNames (CC BY 4.0), geonameid 2916606; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8465
+        konfession   = { katholisch = 90 reformiert = 6 juedisch = 4 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HEK
-        bund     = ja
+        besitzer   = HEK
+        verwaltung = hk_fulda
+        bund       = ja
     }
 }
 
@@ -753,9 +1140,17 @@ ort flieden {
     kreis    = kr_fulda
     quelle   = "GeoNames (CC BY 4.0), geonameid 2926226; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8881
+        konfession   = { katholisch = 90 reformiert = 6 juedisch = 4 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HEK
-        bund     = ja
+        besitzer   = HEK
+        verwaltung = hk_fulda
+        bund       = ja
     }
 }
 
@@ -768,9 +1163,17 @@ ort hofbieber {
     kreis    = kr_fulda
     quelle   = "GeoNames (CC BY 4.0), geonameid 2902731; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12350
+        konfession   = { katholisch = 90 reformiert = 6 juedisch = 4 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HEK
-        bund     = ja
+        besitzer   = HEK
+        verwaltung = hk_fulda
+        bund       = ja
     }
 }
 
@@ -783,9 +1186,17 @@ ort gersfeld {
     kreis    = kr_fulda
     quelle   = "GeoNames (CC BY 4.0), geonameid 2920926; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7053
+        konfession   = { katholisch = 82 lutherisch = 15 juedisch = 3 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_unterfranken
+        bund       = ja
     }
 }
 
@@ -798,9 +1209,17 @@ ort hilders {
     kreis    = kr_fulda
     quelle   = "GeoNames (CC BY 4.0), geonameid 2904791; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8306
+        konfession   = { katholisch = 82 lutherisch = 15 juedisch = 3 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_unterfranken
+        bund       = ja
     }
 }
 
@@ -813,8 +1232,16 @@ ort hosenfeld {
     kreis    = kr_fulda
     quelle   = "GeoNames (CC BY 4.0), geonameid 2898483; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8187
+        konfession   = { katholisch = 90 reformiert = 6 juedisch = 4 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HEK
-        bund     = ja
+        besitzer   = HEK
+        verwaltung = hk_fulda
+        bund       = ja
     }
 }

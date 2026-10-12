@@ -19,9 +19,17 @@ ort sankt_wendel {
     kreis    = kr_sankt_wendel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2841463; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11934
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
     }
 }
 
@@ -34,9 +42,17 @@ ort wadern {
     kreis    = kr_sankt_wendel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2815565; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9936
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
     }
 }
 
@@ -49,9 +65,17 @@ ort tholey {
     kreis    = kr_sankt_wendel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2822713; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9936
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
     }
 }
 
@@ -63,6 +87,13 @@ ort nohfelden {
     stadt    = nein
     kreis    = kr_sankt_wendel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2862294; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 5597
+        konfession   = { lutherisch = 75 katholisch = 24 juedisch = 1 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
 
     1848.03.01 = {
         besitzer = OLD
@@ -79,9 +110,17 @@ ort nonnweiler {
     kreis    = kr_sankt_wendel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2862174; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7776
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
     }
 }
 
@@ -94,9 +133,17 @@ ort freisen {
     kreis    = kr_sankt_wendel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2925038; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7488
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
     }
 }
 
@@ -109,9 +156,17 @@ ort neunkirchen {
     kreis    = kr_neunkirchen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2864435; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 14387
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
     }
 }
 
@@ -124,9 +179,17 @@ ort homburg {
     kreis    = kr_neunkirchen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2899449; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10448
+        konfession   = { lutherisch = 55 katholisch = 43 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_pfalz
+        bund       = ja
     }
 }
 
@@ -139,9 +202,17 @@ ort blieskastel {
     kreis    = kr_neunkirchen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2947739; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10128
+        konfession   = { lutherisch = 55 katholisch = 43 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_pfalz
+        bund       = ja
     }
 }
 
@@ -154,9 +225,17 @@ ort sankt_ingbert {
     kreis    = kr_neunkirchen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2841590; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11147
+        konfession   = { lutherisch = 55 katholisch = 43 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_pfalz
+        bund       = ja
     }
 }
 
@@ -169,9 +248,17 @@ ort gersheim {
     kreis    = kr_neunkirchen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2920921; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10527
+        konfession   = { lutherisch = 55 katholisch = 43 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_pfalz
+        bund       = ja
     }
 }
 
@@ -184,9 +271,17 @@ ort saarbruecken {
     kreis    = kr_saarbruecken
     quelle   = "GeoNames (CC BY 4.0), geonameid 2842647; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 20712
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
     }
 }
 
@@ -199,9 +294,17 @@ ort saarlouis {
     kreis    = kr_saarbruecken
     quelle   = "GeoNames (CC BY 4.0), geonameid 2842632; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 13987
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
     }
 }
 
@@ -214,9 +317,17 @@ ort merzig {
     kreis    = kr_saarbruecken
     quelle   = "GeoNames (CC BY 4.0), geonameid 2871675; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 17298
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
     }
 }
 
@@ -229,9 +340,17 @@ ort voelklingen {
     kreis    = kr_saarbruecken
     quelle   = "GeoNames (CC BY 4.0), geonameid 2816630; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11710
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
     }
 }
 
@@ -244,9 +363,17 @@ ort heusweiler {
     kreis    = kr_saarbruecken
     quelle   = "GeoNames (CC BY 4.0), geonameid 2904985; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9449
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
     }
 }
 
@@ -259,9 +386,17 @@ ort eppelborn {
     kreis    = kr_saarbruecken
     quelle   = "GeoNames (CC BY 4.0), geonameid 2929865; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8928
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
     }
 }
 
@@ -274,9 +409,17 @@ ort nalbach {
     kreis    = kr_saarbruecken
     quelle   = "GeoNames (CC BY 4.0), geonameid 2867127; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9072
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
     }
 }
 
@@ -289,9 +432,17 @@ ort merchweiler {
     kreis    = kr_saarbruecken
     quelle   = "GeoNames (CC BY 4.0), geonameid 2871832; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6048
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
     }
 }
 
@@ -304,9 +455,17 @@ ort losheim {
     kreis    = kr_saarbruecken
     quelle   = "GeoNames (CC BY 4.0), geonameid 2875831; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10224
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
     }
 }
 
@@ -319,8 +478,16 @@ ort orscholz {
     kreis    = kr_saarbruecken
     quelle   = "GeoNames (CC BY 4.0), geonameid 2857044; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11232
+        konfession   = { katholisch = 75 lutherisch = 15 reformiert = 8 juedisch = 2 }
+        kultur       = { rheinlaender = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+        bund       = ja
     }
 }

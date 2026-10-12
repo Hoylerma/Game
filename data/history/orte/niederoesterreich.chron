@@ -18,9 +18,17 @@ ort gmuend {
     kreis    = kr_gmuend
     quelle   = "GeoNames (CC BY 4.0), geonameid 2778439; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9291
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -33,9 +41,17 @@ ort zwettl {
     kreis    = kr_gmuend
     quelle   = "GeoNames (CC BY 4.0), geonameid 2760416; Name nach GeoNames ohne modernen Zusatz (Zwettl Stadt); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9081
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -48,9 +64,17 @@ ort waidhofen_an_der_thaya {
     kreis    = kr_gmuend
     quelle   = "GeoNames (CC BY 4.0), geonameid 2762079; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6538
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -63,9 +87,17 @@ ort heidenreichstein {
     kreis    = kr_gmuend
     quelle   = "GeoNames (CC BY 4.0), geonameid 2776603; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9922
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -78,9 +110,17 @@ ort weitra {
     kreis    = kr_gmuend
     quelle   = "GeoNames (CC BY 4.0), geonameid 2761538; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10370
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -93,9 +133,17 @@ ort litschau {
     kreis    = kr_gmuend
     quelle   = "GeoNames (CC BY 4.0), geonameid 2772385; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10496
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -108,9 +156,17 @@ ort allentsteig {
     kreis    = kr_gmuend
     quelle   = "GeoNames (CC BY 4.0), geonameid 2782800; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9119
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -123,9 +179,17 @@ ort gross_siegharts {
     kreis    = kr_gmuend
     quelle   = "GeoNames (CC BY 4.0), geonameid 2777590; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5735
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -138,9 +202,17 @@ ort dobersberg {
     kreis    = kr_gmuend
     quelle   = "GeoNames (CC BY 4.0), geonameid 2780901; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9005
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -153,9 +225,17 @@ ort raabs_an_der_thaya {
     kreis    = kr_gmuend
     quelle   = "GeoNames (CC BY 4.0), geonameid 2768177; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 13306
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -168,9 +248,17 @@ ort schweiggers {
     kreis    = kr_gmuend
     quelle   = "GeoNames (CC BY 4.0), geonameid 2765383; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8546
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -183,9 +271,17 @@ ort vitis {
     kreis    = kr_gmuend
     quelle   = "GeoNames (CC BY 4.0), geonameid 2762348; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8833
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -198,9 +294,17 @@ ort laa_an_der_thaya {
     kreis    = kr_laa_an_der_thaya
     quelle   = "GeoNames (CC BY 4.0), geonameid 2773229; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10152
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -213,9 +317,17 @@ ort ernstbrunn {
     kreis    = kr_laa_an_der_thaya
     quelle   = "GeoNames (CC BY 4.0), geonameid 2779947; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8603
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -228,9 +340,17 @@ ort grossmugl {
     kreis    = kr_laa_an_der_thaya
     quelle   = "GeoNames (CC BY 4.0), geonameid 2777641; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10037
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -243,9 +363,17 @@ ort mailberg {
     kreis    = kr_laa_an_der_thaya
     quelle   = "GeoNames (CC BY 4.0), geonameid 2772083; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10209
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -258,9 +386,17 @@ ort gnadendorf {
     kreis    = kr_laa_an_der_thaya
     quelle   = "GeoNames (CC BY 4.0), geonameid 2778431; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9119
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -273,9 +409,17 @@ ort eggenburg {
     kreis    = kr_eggenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2780360; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 14281
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -288,9 +432,17 @@ ort retz {
     kreis    = kr_eggenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2767521; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12102
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -303,9 +455,17 @@ ort langau {
     kreis    = kr_eggenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2773032; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 14339
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -318,9 +478,17 @@ ort sitzendorf_an_der_schmida {
     kreis    = kr_eggenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2764981; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8144
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -333,9 +501,17 @@ ort guntersdorf {
     kreis    = kr_eggenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2777252; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6997
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -348,9 +524,17 @@ ort hardegg {
     kreis    = kr_eggenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2776872; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12446
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -363,9 +547,17 @@ ort mistelbach {
     kreis    = kr_mistelbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2771557; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8775
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -378,9 +570,17 @@ ort zistersdorf {
     kreis    = kr_mistelbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2760510; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10783
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -393,9 +593,17 @@ ort poysdorf {
     kreis    = kr_mistelbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2768450; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12159
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -408,9 +616,17 @@ ort gaweinstal {
     kreis    = kr_mistelbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2778772; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11586
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -423,9 +639,17 @@ ort hohenau {
     kreis    = kr_mistelbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2775768; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7227
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -438,9 +662,17 @@ ort duernkrut {
     kreis    = kr_mistelbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2780607; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6561
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -453,9 +685,17 @@ ort bernhardsthal {
     kreis    = kr_mistelbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2781827; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7341
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -468,9 +708,17 @@ ort krems_an_der_donau {
     kreis    = kr_krems_an_der_donau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2773549; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12102
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -483,9 +731,17 @@ ort horn {
     kreis    = kr_krems_an_der_donau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2775516; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10611
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -498,9 +754,17 @@ ort gfoehl {
     kreis    = kr_krems_an_der_donau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2778599; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8947
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -513,9 +777,17 @@ ort weissenkirchen_in_der_wachau {
     kreis    = kr_krems_an_der_donau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2761593; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11746
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -528,9 +800,17 @@ ort rastenfeld {
     kreis    = kr_krems_an_der_donau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2767915; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9681
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -543,9 +823,17 @@ ort sankt_leonhard_am_hornerwald {
     kreis    = kr_krems_an_der_donau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2766598; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7708
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -558,9 +846,17 @@ ort brunn_an_der_wild {
     kreis    = kr_krems_an_der_donau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2781317; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7387
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -573,9 +869,17 @@ ort gaenserndorf {
     kreis    = kr_gaenserndorf
     quelle   = "GeoNames (CC BY 4.0), geonameid 2778877; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10668
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -588,9 +892,17 @@ ort hainburg_an_der_donau {
     kreis    = kr_gaenserndorf
     quelle   = "GeoNames (CC BY 4.0), geonameid 2776988; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7915
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -603,9 +915,17 @@ ort leopoldsdorf_im_marchfelde {
     kreis    = kr_gaenserndorf
     quelle   = "GeoNames (CC BY 4.0), geonameid 2772618; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10496
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -618,9 +938,17 @@ ort marchegg {
     kreis    = kr_gaenserndorf
     quelle   = "GeoNames (CC BY 4.0), geonameid 2771970; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8127
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -633,9 +961,17 @@ ort angern_an_der_march {
     kreis    = kr_gaenserndorf
     quelle   = "GeoNames (CC BY 4.0), geonameid 2782511; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7829
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -648,9 +984,17 @@ ort eckartsau {
     kreis    = kr_gaenserndorf
     quelle   = "GeoNames (CC BY 4.0), geonameid 2780490; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11557
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -663,9 +1007,17 @@ ort tulln {
     kreis    = kr_tulln
     quelle   = "GeoNames (CC BY 4.0), geonameid 2763266; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12871
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -678,9 +1030,17 @@ ort hollabrunn {
     kreis    = kr_tulln
     quelle   = "GeoNames (CC BY 4.0), geonameid 2775636; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9635
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -693,9 +1053,17 @@ ort grossweikersdorf {
     kreis    = kr_tulln
     quelle   = "GeoNames (CC BY 4.0), geonameid 2777547; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11184
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -708,9 +1076,17 @@ ort fels_am_wagram {
     kreis    = kr_tulln
     quelle   = "GeoNames (CC BY 4.0), geonameid 2779651; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 18715
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -723,9 +1099,17 @@ ort erpersdorf {
     kreis    = kr_tulln
     quelle   = "GeoNames (CC BY 4.0), geonameid 2779942; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 13495
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -738,9 +1122,17 @@ ort ysper {
     kreis    = kr_ysper
     quelle   = "GeoNames (CC BY 4.0), geonameid 2775177; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8580
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -753,9 +1145,17 @@ ort poeggstall {
     kreis    = kr_ysper
     quelle   = "GeoNames (CC BY 4.0), geonameid 2768616; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6928
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -768,9 +1168,17 @@ ort gross_gerungs {
     kreis    = kr_ysper
     quelle   = "GeoNames (CC BY 4.0), geonameid 2777701; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8259
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -783,9 +1191,17 @@ ort ottenschlag {
     kreis    = kr_ysper
     quelle   = "GeoNames (CC BY 4.0), geonameid 2769347; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12446
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -798,9 +1214,17 @@ ort rappottenstein {
     kreis    = kr_ysper
     quelle   = "GeoNames (CC BY 4.0), geonameid 2767936; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8121
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -813,9 +1237,17 @@ ort altmelon {
     kreis    = kr_ysper
     quelle   = "GeoNames (CC BY 4.0), geonameid 2782628; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9177
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -828,9 +1260,17 @@ ort wien {
     kreis    = kr_wien
     quelle   = "GeoNames (CC BY 4.0), geonameid 2761369; Name Wien aus den GeoNames-Alternativnamen (GeoNames: Vienna); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 417004
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -843,9 +1283,17 @@ ort stockerau {
     kreis    = kr_wien
     quelle   = "GeoNames (CC BY 4.0), geonameid 2764279; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12377
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -858,9 +1306,17 @@ ort klosterneuburg {
     kreis    = kr_wien
     quelle   = "GeoNames (CC BY 4.0), geonameid 2773913; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8087
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -873,9 +1329,17 @@ ort schwechat {
     kreis    = kr_wien
     quelle   = "GeoNames (CC BY 4.0), geonameid 2765388; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6137
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -888,9 +1352,17 @@ ort gerasdorf_bei_wien {
     kreis    = kr_wien
     quelle   = "GeoNames (CC BY 4.0), geonameid 2778690; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6825
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -903,9 +1375,17 @@ ort gross_enzersdorf {
     kreis    = kr_wien
     quelle   = "GeoNames (CC BY 4.0), geonameid 2777836; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7571
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -918,9 +1398,17 @@ ort wolkersdorf_im_weinviertel {
     kreis    = kr_wien
     quelle   = "GeoNames (CC BY 4.0), geonameid 2760887; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8718
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -933,9 +1421,17 @@ ort harmannsdorf {
     kreis    = kr_wien
     quelle   = "GeoNames (CC BY 4.0), geonameid 2776855; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8890
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -948,9 +1444,17 @@ ort sankt_poelten {
     kreis    = kr_sankt_poelten
     quelle   = "GeoNames (CC BY 4.0), geonameid 2766429; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9522
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -963,9 +1467,17 @@ ort melk {
     kreis    = kr_sankt_poelten
     quelle   = "GeoNames (CC BY 4.0), geonameid 2771682; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12159
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -978,9 +1490,17 @@ ort wilhelmsburg {
     kreis    = kr_sankt_poelten
     quelle   = "GeoNames (CC BY 4.0), geonameid 2761186; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8030
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -993,9 +1513,17 @@ ort herzogenburg {
     kreis    = kr_sankt_poelten
     quelle   = "GeoNames (CC BY 4.0), geonameid 2776470; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11758
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -1008,9 +1536,17 @@ ort kirchberg_an_der_pielach {
     kreis    = kr_sankt_poelten
     quelle   = "GeoNames (CC BY 4.0), geonameid 2774404; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8030
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -1023,9 +1559,17 @@ ort boeheimkirchen {
     kreis    = kr_sankt_poelten
     quelle   = "GeoNames (CC BY 4.0), geonameid 2781612; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6882
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -1038,9 +1582,17 @@ ort mank {
     kreis    = kr_sankt_poelten
     quelle   = "GeoNames (CC BY 4.0), geonameid 2772012; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10553
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -1053,9 +1605,17 @@ ort hainfeld {
     kreis    = kr_sankt_poelten
     quelle   = "GeoNames (CC BY 4.0), geonameid 2776981; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11976
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -1068,9 +1628,17 @@ ort markersdorf_an_der_pielach {
     kreis    = kr_sankt_poelten
     quelle   = "GeoNames (CC BY 4.0), geonameid 2771882; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11069
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -1083,9 +1651,17 @@ ort lilienfeld {
     kreis    = kr_sankt_poelten
     quelle   = "GeoNames (CC BY 4.0), geonameid 2772470; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6332
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -1098,9 +1674,17 @@ ort ybbs_an_der_donau {
     kreis    = kr_ybbs_an_der_donau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2760772; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10209
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -1113,9 +1697,17 @@ ort poechlarn {
     kreis    = kr_ybbs_an_der_donau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2768627; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9119
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -1128,9 +1720,17 @@ ort scheibbs {
     kreis    = kr_ybbs_an_der_donau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2766080; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6378
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -1143,9 +1743,17 @@ ort gaming {
     kreis    = kr_ybbs_an_der_donau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2778949; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11884
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -1158,9 +1766,17 @@ ort steinakirchen_am_forst {
     kreis    = kr_ybbs_an_der_donau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2764556; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8397
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -1173,9 +1789,17 @@ ort puchenstuben {
     kreis    = kr_ybbs_an_der_donau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2768274; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9406
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -1188,9 +1812,17 @@ ort amstetten {
     kreis    = kr_amstetten
     quelle   = "GeoNames (CC BY 4.0), geonameid 2782555; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12962
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -1203,9 +1835,17 @@ ort sankt_valentin {
     kreis    = kr_amstetten
     quelle   = "GeoNames (CC BY 4.0), geonameid 2766365; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9406
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -1218,9 +1858,17 @@ ort waidhofen_an_der_ybbs {
     kreis    = kr_amstetten
     quelle   = "GeoNames (CC BY 4.0), geonameid 2762077; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 13398
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -1233,9 +1881,17 @@ ort seitenstetten {
     kreis    = kr_amstetten
     quelle   = "GeoNames (CC BY 4.0), geonameid 2765196; Name nach GeoNames ohne modernen Zusatz (Seitenstetten Markt); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 13134
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -1248,9 +1904,17 @@ ort wallsee {
     kreis    = kr_amstetten
     quelle   = "GeoNames (CC BY 4.0), geonameid 2761945; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12824
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -1263,9 +1927,17 @@ ort goestling_an_der_ybbs {
     kreis    = kr_amstetten
     quelle   = "GeoNames (CC BY 4.0), geonameid 2778252; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 13673
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -1278,9 +1950,17 @@ ort hollenstein_an_der_ybbs {
     kreis    = kr_amstetten
     quelle   = "GeoNames (CC BY 4.0), geonameid 2775613; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6102
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -1293,9 +1973,17 @@ ort bruck_an_der_leitha {
     kreis    = kr_bruck_an_der_leitha
     quelle   = "GeoNames (CC BY 4.0), geonameid 2781373; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9578
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -1308,9 +1996,17 @@ ort ebreichsdorf {
     kreis    = kr_bruck_an_der_leitha
     quelle   = "GeoNames (CC BY 4.0), geonameid 2780501; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8718
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -1323,9 +2019,17 @@ ort mannersdorf_am_leithagebirge {
     kreis    = kr_bruck_an_der_leitha
     quelle   = "GeoNames (CC BY 4.0), geonameid 2772003; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7628
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -1338,9 +2042,17 @@ ort gramatneusiedl {
     kreis    = kr_bruck_an_der_leitha
     quelle   = "GeoNames (CC BY 4.0), geonameid 2778131; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6768
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -1353,9 +2065,17 @@ ort enzersdorf_an_der_fischa {
     kreis    = kr_bruck_an_der_leitha
     quelle   = "GeoNames (CC BY 4.0), geonameid 2780017; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8775
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -1368,9 +2088,17 @@ ort baden {
     kreis    = kr_baden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2782067; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9980
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -1383,9 +2111,17 @@ ort moedling {
     kreis    = kr_baden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2771335; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10353
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -1398,9 +2134,17 @@ ort purkersdorf {
     kreis    = kr_baden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2768232; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9693
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -1413,9 +2157,17 @@ ort breitenfurt_bei_wien {
     kreis    = kr_baden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2781463; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7858
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -1428,9 +2180,17 @@ ort berndorf {
     kreis    = kr_baden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2781837; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9750
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -1443,9 +2203,17 @@ ort sollenau {
     kreis    = kr_baden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2764951; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7341
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -1458,9 +2226,17 @@ ort klausen_leopoldsdorf {
     kreis    = kr_baden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2774279; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10691
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -1473,9 +2249,17 @@ ort neulengbach {
     kreis    = kr_baden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2770730; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12159
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -1488,9 +2272,17 @@ ort tuernitz {
     kreis    = kr_tuernitz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2763235; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8993
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -1503,9 +2295,17 @@ ort sankt_aegyd_am_neuwalde {
     kreis    = kr_tuernitz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2766778; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8351
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -1518,9 +2318,17 @@ ort rohr_im_gebirge {
     kreis    = kr_tuernitz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2767264; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9131
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -1533,9 +2341,17 @@ ort schwarzau_im_gebirge {
     kreis    = kr_tuernitz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2765488; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10415
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -1548,9 +2364,17 @@ ort wiener_neustadt {
     kreis    = kr_wiener_neustadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2761353; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 14282
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -1563,9 +2387,17 @@ ort ternitz {
     kreis    = kr_wiener_neustadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2763795; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7433
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -1578,9 +2410,17 @@ ort gloggnitz {
     kreis    = kr_wiener_neustadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2778455; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7984
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -1593,9 +2433,17 @@ ort puchberg_am_schneeberg {
     kreis    = kr_wiener_neustadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2768279; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8488
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -1608,9 +2456,17 @@ ort bad_erlach {
     kreis    = kr_wiener_neustadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2779973; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10381
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -1623,9 +2479,17 @@ ort pernitz {
     kreis    = kr_wiener_neustadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2769068; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11379
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -1638,9 +2502,17 @@ ort kirchschlag_in_der_buckligen_welt {
     kreis    = kr_wiener_neustadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2774368; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7984
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -1653,9 +2525,17 @@ ort aspang {
     kreis    = kr_wiener_neustadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2782321; Name nach GeoNames ohne modernen Zusatz (Aspang Markt); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10324
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -1668,9 +2548,17 @@ ort wiesmath {
     kreis    = kr_wiener_neustadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2761272; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7112
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }
 
@@ -1683,8 +2571,16 @@ ort trattenbach {
     kreis    = kr_wiener_neustadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2763439; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8351
+        konfession   = { katholisch = 97 lutherisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { oesterreicher = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_niederoesterreich
+        bund       = ja
     }
 }

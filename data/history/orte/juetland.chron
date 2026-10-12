@@ -88,8 +88,16 @@ ort christiansfeld {
     kreis    = kr_esbjerg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2623183; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8006
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { daenen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = DEN
+        besitzer   = DEN
+        verwaltung = dk_schleswig
     }
 }
 
@@ -102,8 +110,16 @@ ort roedding {
     kreis    = kr_esbjerg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2614623; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7189
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { daenen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = DEN
+        besitzer   = DEN
+        verwaltung = dk_schleswig
     }
 }
 

@@ -19,9 +19,17 @@ ort offenbach {
     kreis    = kr_offenbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2857807; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 18814
+        konfession   = { lutherisch = 68 katholisch = 29 juedisch = 3 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HED
-        bund     = ja
+        besitzer   = HED
+        verwaltung = hd_starkenburg
+        bund       = ja
     }
 }
 
@@ -34,9 +42,17 @@ ort dietzenbach {
     kreis    = kr_offenbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2937040; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12277
+        konfession   = { lutherisch = 68 katholisch = 29 juedisch = 3 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HED
-        bund     = ja
+        besitzer   = HED
+        verwaltung = hd_starkenburg
+        bund       = ja
     }
 }
 
@@ -49,9 +65,17 @@ ort neu_isenburg {
     kreis    = kr_offenbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2864820; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9914
+        konfession   = { lutherisch = 68 katholisch = 29 juedisch = 3 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HED
-        bund     = ja
+        besitzer   = HED
+        verwaltung = hd_starkenburg
+        bund       = ja
     }
 }
 
@@ -64,9 +88,17 @@ ort gross_umstadt {
     kreis    = kr_offenbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2914929; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 13897
+        konfession   = { lutherisch = 68 katholisch = 29 juedisch = 3 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HED
-        bund     = ja
+        besitzer   = HED
+        verwaltung = hd_starkenburg
+        bund       = ja
     }
 }
 
@@ -79,9 +111,17 @@ ort seligenstadt {
     kreis    = kr_offenbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2833242; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 13625
+        konfession   = { lutherisch = 68 katholisch = 29 juedisch = 3 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HED
-        bund     = ja
+        besitzer   = HED
+        verwaltung = hd_starkenburg
+        bund       = ja
     }
 }
 
@@ -94,9 +134,17 @@ ort reinheim {
     kreis    = kr_offenbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2848762; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9248
+        konfession   = { lutherisch = 68 katholisch = 29 juedisch = 3 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HED
-        bund     = ja
+        besitzer   = HED
+        verwaltung = hd_starkenburg
+        bund       = ja
     }
 }
 
@@ -109,9 +157,17 @@ ort babenhausen_starkenburg {
     kreis    = kr_offenbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953770; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8323
+        konfession   = { lutherisch = 68 katholisch = 29 juedisch = 3 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HED
-        bund     = ja
+        besitzer   = HED
+        verwaltung = hd_starkenburg
+        bund       = ja
     }
 }
 
@@ -124,9 +180,17 @@ ort messel {
     kreis    = kr_offenbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2871636; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8863
+        konfession   = { lutherisch = 68 katholisch = 29 juedisch = 3 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HED
-        bund     = ja
+        besitzer   = HED
+        verwaltung = hd_starkenburg
+        bund       = ja
     }
 }
 
@@ -139,9 +203,17 @@ ort ruesselsheim {
     kreis    = kr_ruesselsheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2842884; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 18457
+        konfession   = { lutherisch = 68 katholisch = 29 juedisch = 3 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HED
-        bund     = ja
+        besitzer   = HED
+        verwaltung = hd_starkenburg
+        bund       = ja
     }
 }
 
@@ -154,9 +226,17 @@ ort gross_gerau {
     kreis    = kr_ruesselsheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2915613; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12617
+        konfession   = { lutherisch = 68 katholisch = 29 juedisch = 3 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HED
-        bund     = ja
+        besitzer   = HED
+        verwaltung = hd_starkenburg
+        bund       = ja
     }
 }
 
@@ -169,9 +249,17 @@ ort moerfelden_walldorf {
     kreis    = kr_ruesselsheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 3272460; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11693
+        konfession   = { lutherisch = 68 katholisch = 29 juedisch = 3 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HED
-        bund     = ja
+        besitzer   = HED
+        verwaltung = hd_starkenburg
+        bund       = ja
     }
 }
 
@@ -184,9 +272,17 @@ ort kelsterbach {
     kreis    = kr_ruesselsheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2891742; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8015
+        konfession   = { lutherisch = 68 katholisch = 29 juedisch = 3 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HED
-        bund     = ja
+        besitzer   = HED
+        verwaltung = hd_starkenburg
+        bund       = ja
     }
 }
 
@@ -199,9 +295,17 @@ ort darmstadt {
     kreis    = kr_darmstadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2938913; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 37171
+        konfession   = { lutherisch = 68 katholisch = 29 juedisch = 3 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HED
-        bund     = ja
+        besitzer   = HED
+        verwaltung = hd_starkenburg
+        bund       = ja
     }
 }
 
@@ -214,9 +318,17 @@ ort heppenheim {
     kreis    = kr_darmstadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2906268; Name Heppenheim aus den GeoNames-Alternativnamen (GeoNames: Heppenheim an der Bergstrasse); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11172
+        konfession   = { lutherisch = 68 katholisch = 29 juedisch = 3 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HED
-        bund     = ja
+        besitzer   = HED
+        verwaltung = hd_starkenburg
+        bund       = ja
     }
 }
 
@@ -229,9 +341,17 @@ ort viernheim {
     kreis    = kr_darmstadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2817324; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10602
+        konfession   = { lutherisch = 68 katholisch = 29 juedisch = 3 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HED
-        bund     = ja
+        besitzer   = HED
+        verwaltung = hd_starkenburg
+        bund       = ja
     }
 }
 
@@ -244,9 +364,17 @@ ort lampertheim {
     kreis    = kr_darmstadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2881695; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10590
+        konfession   = { lutherisch = 68 katholisch = 29 juedisch = 3 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HED
-        bund     = ja
+        besitzer   = HED
+        verwaltung = hd_starkenburg
+        bund       = ja
     }
 }
 
@@ -259,9 +387,17 @@ ort pfungstadt {
     kreis    = kr_darmstadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2853924; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 13835
+        konfession   = { lutherisch = 68 katholisch = 29 juedisch = 3 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HED
-        bund     = ja
+        besitzer   = HED
+        verwaltung = hd_starkenburg
+        bund       = ja
     }
 }
 
@@ -274,9 +410,17 @@ ort biblis {
     kreis    = kr_darmstadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2949367; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7475
+        konfession   = { lutherisch = 68 katholisch = 29 juedisch = 3 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HED
-        bund     = ja
+        besitzer   = HED
+        verwaltung = hd_starkenburg
+        bund       = ja
     }
 }
 
@@ -289,9 +433,17 @@ ort zwingenberg {
     kreis    = kr_darmstadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2803515; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8169
+        konfession   = { lutherisch = 68 katholisch = 29 juedisch = 3 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HED
-        bund     = ja
+        besitzer   = HED
+        verwaltung = hd_starkenburg
+        bund       = ja
     }
 }
 
@@ -304,9 +456,17 @@ ort biebesheim {
     kreis    = kr_darmstadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2949240; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12423
+        konfession   = { lutherisch = 68 katholisch = 29 juedisch = 3 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HED
-        bund     = ja
+        besitzer   = HED
+        verwaltung = hd_starkenburg
+        bund       = ja
     }
 }
 
@@ -319,9 +479,17 @@ ort erbach_im_odenwald {
     kreis    = kr_erbach_im_odenwald
     quelle   = "GeoNames (CC BY 4.0), geonameid 2929802; Name Erbach im Odenwald aus den GeoNames-Alternativnamen (GeoNames: Erbach); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 13139
+        konfession   = { lutherisch = 68 katholisch = 29 juedisch = 3 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HED
-        bund     = ja
+        besitzer   = HED
+        verwaltung = hd_starkenburg
+        bund       = ja
     }
 }
 
@@ -334,9 +502,17 @@ ort wald_michelbach {
     kreis    = kr_erbach_im_odenwald
     quelle   = "GeoNames (CC BY 4.0), geonameid 2814853; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9171
+        konfession   = { lutherisch = 68 katholisch = 29 juedisch = 3 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HED
-        bund     = ja
+        besitzer   = HED
+        verwaltung = hd_starkenburg
+        bund       = ja
     }
 }
 
@@ -349,9 +525,17 @@ ort moerlenbach {
     kreis    = kr_erbach_im_odenwald
     quelle   = "GeoNames (CC BY 4.0), geonameid 2869221; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5626
+        konfession   = { lutherisch = 68 katholisch = 29 juedisch = 3 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HED
-        bund     = ja
+        besitzer   = HED
+        verwaltung = hd_starkenburg
+        bund       = ja
     }
 }
 
@@ -364,9 +548,17 @@ ort bad_koenig {
     kreis    = kr_erbach_im_odenwald
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953419; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10712
+        konfession   = { lutherisch = 68 katholisch = 29 juedisch = 3 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HED
-        bund     = ja
+        besitzer   = HED
+        verwaltung = hd_starkenburg
+        bund       = ja
     }
 }
 
@@ -379,9 +571,17 @@ ort beerfelden {
     kreis    = kr_erbach_im_odenwald
     quelle   = "GeoNames (CC BY 4.0), geonameid 2951556; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9864
+        konfession   = { lutherisch = 68 katholisch = 29 juedisch = 3 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HED
-        bund     = ja
+        besitzer   = HED
+        verwaltung = hd_starkenburg
+        bund       = ja
     }
 }
 
@@ -394,9 +594,17 @@ ort lindenfels {
     kreis    = kr_erbach_im_odenwald
     quelle   = "GeoNames (CC BY 4.0), geonameid 2877315; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7090
+        konfession   = { lutherisch = 68 katholisch = 29 juedisch = 3 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HED
-        bund     = ja
+        besitzer   = HED
+        verwaltung = hd_starkenburg
+        bund       = ja
     }
 }
 
@@ -409,9 +617,17 @@ ort fraenkisch_crumbach {
     kreis    = kr_erbach_im_odenwald
     quelle   = "GeoNames (CC BY 4.0), geonameid 2925507; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8477
+        konfession   = { lutherisch = 68 katholisch = 29 juedisch = 3 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HED
-        bund     = ja
+        besitzer   = HED
+        verwaltung = hd_starkenburg
+        bund       = ja
     }
 }
 
@@ -424,8 +640,16 @@ ort hirschhorn {
     kreis    = kr_erbach_im_odenwald
     quelle   = "GeoNames (CC BY 4.0), geonameid 2903625; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5919
+        konfession   = { lutherisch = 68 katholisch = 29 juedisch = 3 }
+        kultur       = { hessen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HED
-        bund     = ja
+        besitzer   = HED
+        verwaltung = hd_starkenburg
+        bund       = ja
     }
 }

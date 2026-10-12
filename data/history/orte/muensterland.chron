@@ -18,9 +18,17 @@ ort rheine {
     kreis    = kr_rheine
     quelle   = "GeoNames (CC BY 4.0), geonameid 2847645; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12340
+        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
     }
 }
 
@@ -33,9 +41,17 @@ ort ibbenbueren {
     kreis    = kr_rheine
     quelle   = "GeoNames (CC BY 4.0), geonameid 2896817; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10789
+        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
     }
 }
 
@@ -48,9 +64,17 @@ ort hoerstel {
     kreis    = kr_rheine
     quelle   = "GeoNames (CC BY 4.0), geonameid 2898603; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5555
+        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
     }
 }
 
@@ -63,9 +87,17 @@ ort westerkappeln {
     kreis    = kr_rheine
     quelle   = "GeoNames (CC BY 4.0), geonameid 2810289; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6102
+        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
     }
 }
 
@@ -78,9 +110,17 @@ ort recke {
     kreis    = kr_rheine
     quelle   = "GeoNames (CC BY 4.0), geonameid 2849689; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7995
+        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
     }
 }
 
@@ -93,9 +133,17 @@ ort gronau_muensterland {
     kreis    = kr_gronau_muensterland
     quelle   = "GeoNames (CC BY 4.0), geonameid 2917138; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10454
+        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
     }
 }
 
@@ -108,9 +156,17 @@ ort steinfurt {
     kreis    = kr_gronau_muensterland
     quelle   = "GeoNames (CC BY 4.0), geonameid 2828105; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9733
+        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
     }
 }
 
@@ -123,9 +179,17 @@ ort ahaus {
     kreis    = kr_gronau_muensterland
     quelle   = "GeoNames (CC BY 4.0), geonameid 2959279; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11628
+        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
     }
 }
 
@@ -138,9 +202,17 @@ ort stadtlohn {
     kreis    = kr_gronau_muensterland
     quelle   = "GeoNames (CC BY 4.0), geonameid 2829758; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8447
+        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
     }
 }
 
@@ -153,9 +225,17 @@ ort vreden {
     kreis    = kr_gronau_muensterland
     quelle   = "GeoNames (CC BY 4.0), geonameid 2815824; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8048
+        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
     }
 }
 
@@ -168,9 +248,17 @@ ort ochtrup {
     kreis    = kr_gronau_muensterland
     quelle   = "GeoNames (CC BY 4.0), geonameid 2858245; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6060
+        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
     }
 }
 
@@ -183,9 +271,17 @@ ort schoeppingen {
     kreis    = kr_gronau_muensterland
     quelle   = "GeoNames (CC BY 4.0), geonameid 2836390; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7785
+        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
     }
 }
 
@@ -198,9 +294,17 @@ ort muenster {
     kreis    = kr_muenster
     quelle   = "GeoNames (CC BY 4.0), geonameid 2867543; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 31575
+        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
     }
 }
 
@@ -213,9 +317,17 @@ ort emsdetten {
     kreis    = kr_muenster
     quelle   = "GeoNames (CC BY 4.0), geonameid 2930449; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11667
+        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
     }
 }
 
@@ -228,9 +340,17 @@ ort greven {
     kreis    = kr_muenster
     quelle   = "GeoNames (CC BY 4.0), geonameid 2917544; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10701
+        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
     }
 }
 
@@ -243,9 +363,17 @@ ort telgte {
     kreis    = kr_muenster
     quelle   = "GeoNames (CC BY 4.0), geonameid 2823590; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8425
+        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
     }
 }
 
@@ -258,9 +386,17 @@ ort lengerich {
     kreis    = kr_muenster
     quelle   = "GeoNames (CC BY 4.0), geonameid 2878840; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8155
+        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
     }
 }
 
@@ -273,9 +409,17 @@ ort ostbevern {
     kreis    = kr_muenster
     quelle   = "GeoNames (CC BY 4.0), geonameid 2856816; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6018
+        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
     }
 }
 
@@ -288,9 +432,17 @@ ort altenberge {
     kreis    = kr_muenster
     quelle   = "GeoNames (CC BY 4.0), geonameid 2957829; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8416
+        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
     }
 }
 
@@ -303,9 +455,17 @@ ort lienen {
     kreis    = kr_muenster
     quelle   = "GeoNames (CC BY 4.0), geonameid 2877843; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 4461
+        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
     }
 }
 
@@ -318,9 +478,17 @@ ort ladbergen {
     kreis    = kr_muenster
     quelle   = "GeoNames (CC BY 4.0), geonameid 2881991; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6018
+        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
     }
 }
 
@@ -333,9 +501,17 @@ ort luedinghausen {
     kreis    = kr_luedinghausen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2875417; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7593
+        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
     }
 }
 
@@ -348,9 +524,17 @@ ort ascheberg {
     kreis    = kr_luedinghausen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2955224; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6817
+        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
     }
 }
 
@@ -363,9 +547,17 @@ ort drensteinfurt {
     kreis    = kr_luedinghausen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2935042; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 4587
+        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
     }
 }
 
@@ -378,9 +570,17 @@ ort senden_muensterland {
     kreis    = kr_luedinghausen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2833079; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9143
+        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
     }
 }
 
@@ -393,9 +593,17 @@ ort sendenhorst {
     kreis    = kr_luedinghausen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2833076; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5807
+        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
     }
 }
 
@@ -408,9 +616,17 @@ ort ahlen {
     kreis    = kr_ahlen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2959223; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10001
+        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
     }
 }
 
@@ -423,9 +639,17 @@ ort warendorf {
     kreis    = kr_ahlen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2814127; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12820
+        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
     }
 }
 
@@ -438,9 +662,17 @@ ort beckum {
     kreis    = kr_ahlen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2951654; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9584
+        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
     }
 }
 
@@ -453,9 +685,17 @@ ort oelde {
     kreis    = kr_ahlen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2857943; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7490
+        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
     }
 }
 
@@ -468,9 +708,17 @@ ort ennigerloh {
     kreis    = kr_ahlen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2930030; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6857
+        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
     }
 }
 
@@ -483,9 +731,17 @@ ort wadersloh {
     kreis    = kr_ahlen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2815563; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7953
+        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
     }
 }
 
@@ -498,9 +754,17 @@ ort beelen {
     kreis    = kr_ahlen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2951596; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 4587
+        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
     }
 }
 
@@ -513,9 +777,17 @@ ort marl {
     kreis    = kr_marl
     quelle   = "GeoNames (CC BY 4.0), geonameid 2873263; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6545
+        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
     }
 }
 
@@ -528,9 +800,17 @@ ort coesfeld {
     kreis    = kr_marl
     quelle   = "GeoNames (CC BY 4.0), geonameid 2939945; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10720
+        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
     }
 }
 
@@ -543,9 +823,17 @@ ort borken_muensterland {
     kreis    = kr_marl
     quelle   = "GeoNames (CC BY 4.0), geonameid 2946228; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9419
+        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
     }
 }
 
@@ -558,9 +846,17 @@ ort bocholt {
     kreis    = kr_marl
     quelle   = "GeoNames (CC BY 4.0), geonameid 2947421; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12461
+        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
     }
 }
 
@@ -573,9 +869,17 @@ ort dorsten {
     kreis    = kr_marl
     quelle   = "GeoNames (CC BY 4.0), geonameid 2935530; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7376
+        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
     }
 }
 
@@ -588,9 +892,17 @@ ort duelmen {
     kreis    = kr_marl
     quelle   = "GeoNames (CC BY 4.0), geonameid 2934662; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10880
+        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
     }
 }
 
@@ -603,9 +915,17 @@ ort haltern_am_see {
     kreis    = kr_marl
     quelle   = "GeoNames (CC BY 4.0), geonameid 2911395; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10129
+        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
     }
 }
 
@@ -618,9 +938,17 @@ ort nottuln {
     kreis    = kr_marl
     quelle   = "GeoNames (CC BY 4.0), geonameid 2861733; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9779
+        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
     }
 }
 
@@ -633,9 +961,17 @@ ort velen {
     kreis    = kr_marl
     quelle   = "GeoNames (CC BY 4.0), geonameid 2817704; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6859
+        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
     }
 }
 
@@ -648,9 +984,17 @@ ort raesfeld {
     kreis    = kr_marl
     quelle   = "GeoNames (CC BY 4.0), geonameid 2850942; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6060
+        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
     }
 }
 
@@ -663,9 +1007,17 @@ ort isselburg {
     kreis    = kr_marl
     quelle   = "GeoNames (CC BY 4.0), geonameid 2895630; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 4082
+        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
     }
 }
 
@@ -678,9 +1030,17 @@ ort klein_reken {
     kreis    = kr_marl
     quelle   = "GeoNames (CC BY 4.0), geonameid 2888344; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7533
+        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
     }
 }
 
@@ -693,9 +1053,17 @@ ort gelsenkirchen {
     kreis    = kr_gelsenkirchen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2921466; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 4703
+        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
     }
 }
 
@@ -708,9 +1076,17 @@ ort recklinghausen {
     kreis    = kr_gelsenkirchen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2849647; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7540
+        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
     }
 }
 
@@ -723,9 +1099,17 @@ ort bottrop {
     kreis    = kr_gelsenkirchen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2945756; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6282
+        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
     }
 }
 
@@ -738,9 +1122,17 @@ ort castrop_rauxel {
     kreis    = kr_gelsenkirchen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2940231; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6124
+        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
     }
 }
 
@@ -753,9 +1145,17 @@ ort gladbeck {
     kreis    = kr_gelsenkirchen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2920236; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5961
+        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
     }
 }
 
@@ -768,8 +1168,16 @@ ort datteln {
     kreis    = kr_gelsenkirchen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2938784; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8974
+        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        kultur       = { westfalen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_westfalen
+        bund       = ja
     }
 }

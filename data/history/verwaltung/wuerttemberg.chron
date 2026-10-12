@@ -1,0 +1,25 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+einheit wu_neckarkreis {
+    name   = "Neckarkreis"
+    art    = kreis
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit wu_schwarzwaldkreis {
+    name   = "Schwarzwaldkreis"
+    art    = kreis
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit wu_jagstkreis {
+    name   = "Jagstkreis"
+    art    = kreis
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit wu_donaukreis {
+    name   = "Donaukreis"
+    art    = kreis
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}

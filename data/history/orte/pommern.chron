@@ -39,9 +39,17 @@ ort stettin {
         verwuestung  = 0.4
     }
 
+    1846.12.03 = {
+        bevoelkerung = 57935
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -63,9 +71,17 @@ ort stralsund {
         verwuestung  = 0.3
     }
 
+    1846.12.03 = {
+        bevoelkerung = 11818
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -87,9 +103,17 @@ ort greifswald {
         verwuestung  = 0.5
     }
 
+    1846.12.03 = {
+        bevoelkerung = 15482
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -111,9 +135,17 @@ ort anklam {
         verwuestung  = 0.6
     }
 
+    1846.12.03 = {
+        bevoelkerung = 14289
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -134,9 +166,17 @@ ort stargard {
         verwuestung  = 0.6
     }
 
+    1846.12.03 = {
+        bevoelkerung = 12998
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -159,9 +199,17 @@ ort kolberg {
         verwuestung  = 0.5
     }
 
+    1846.12.03 = {
+        bevoelkerung = 8935
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -182,9 +230,17 @@ ort koeslin {
         verwuestung  = 0.5
     }
 
+    1846.12.03 = {
+        bevoelkerung = 10954
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -206,9 +262,17 @@ ort cammin {
         verwuestung  = 0.6
     }
 
+    1846.12.03 = {
+        bevoelkerung = 8547
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -221,8 +285,16 @@ ort lauenburg_in_pommern {
     kreis    = kr_lauenburg_in_pommern
     quelle   = "GeoNames (CC BY 4.0), geonameid 3093739; deutscher Name aus den GeoNames-Alternativnamen (heute Lębork); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 13085
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_pommern
     }
 }
 
@@ -235,8 +307,16 @@ ort leba {
     kreis    = kr_lauenburg_in_pommern
     quelle   = "GeoNames (CC BY 4.0), geonameid 3093749; deutscher Name aus den GeoNames-Alternativnamen (heute Łeba); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7167
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_pommern
     }
 }
 
@@ -249,9 +329,17 @@ ort glowitz {
     kreis    = kr_lauenburg_in_pommern
     quelle   = "GeoNames (CC BY 4.0), geonameid 3099192; deutscher Name aus den GeoNames-Alternativnamen (heute Główczyce); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9235
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -264,9 +352,17 @@ ort potegowo {
     kreis    = kr_lauenburg_in_pommern
     quelle   = "GeoNames (CC BY 4.0), geonameid 3088220; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9347
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -279,8 +375,16 @@ ort zewitz {
     kreis    = kr_lauenburg_in_pommern
     quelle   = "GeoNames (CC BY 4.0), geonameid 3101869; deutscher Name aus den GeoNames-Alternativnamen (heute Cewice); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6954
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_pommern
     }
 }
 
@@ -293,8 +397,16 @@ ort czarna_dabrowka {
     kreis    = kr_lauenburg_in_pommern
     quelle   = "GeoNames (CC BY 4.0), geonameid 7535732; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 13086
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_pommern
     }
 }
 
@@ -307,9 +419,17 @@ ort damnica {
     kreis    = kr_lauenburg_in_pommern
     quelle   = "GeoNames (CC BY 4.0), geonameid 3100671; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8636
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -322,9 +442,17 @@ ort schmolsin {
     kreis    = kr_lauenburg_in_pommern
     quelle   = "GeoNames (CC BY 4.0), geonameid 3085360; deutscher Name aus den GeoNames-Alternativnamen (heute Smołdzino); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7335
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -337,9 +465,17 @@ ort stolp {
     kreis    = kr_stolp
     quelle   = "GeoNames (CC BY 4.0), geonameid 3085450; deutscher Name aus den GeoNames-Alternativnamen (heute Słupsk); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 21702
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -352,9 +488,17 @@ ort schlawe {
     kreis    = kr_stolp
     quelle   = "GeoNames (CC BY 4.0), geonameid 3085610; deutscher Name aus den GeoNames-Alternativnamen (heute Sławno); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 20710
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -367,9 +511,17 @@ ort stolpmuende {
     kreis    = kr_stolp
     quelle   = "GeoNames (CC BY 4.0), geonameid 3082756; deutscher Name aus den GeoNames-Alternativnamen (heute Ustka); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9624
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -382,9 +534,17 @@ ort ruegenwalde {
     kreis    = kr_stolp
     quelle   = "GeoNames (CC BY 4.0), geonameid 3100637; deutscher Name aus den GeoNames-Alternativnamen (heute Darłowo); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10431
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -397,9 +557,17 @@ ort rathsdamnitz {
     kreis    = kr_stolp
     quelle   = "GeoNames (CC BY 4.0), geonameid 3100553; deutscher Name aus den GeoNames-Alternativnamen (heute Dębnica Kaszubska); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10768
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -412,9 +580,17 @@ ort bergen_auf_ruegen {
     kreis    = kr_bergen_auf_ruegen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2950620; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 4161
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -427,9 +603,17 @@ ort sassnitz {
     kreis    = kr_bergen_auf_ruegen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2841333; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 3290
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -442,9 +626,17 @@ ort binz {
     kreis    = kr_bergen_auf_ruegen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2856198; Name nach GeoNames ohne modernen Zusatz (Ostseebad Binz); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 3197
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -457,9 +649,17 @@ ort samtens {
     kreis    = kr_bergen_auf_ruegen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2842059; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8446
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -472,9 +672,17 @@ ort gingst {
     kreis    = kr_bergen_auf_ruegen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2920342; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5552
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -487,9 +695,17 @@ ort dranske {
     kreis    = kr_bergen_auf_ruegen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2935325; Name nach GeoNames; Lage auf das nächste Landpixel gesetzt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 2961
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -502,9 +718,17 @@ ort goehren {
     kreis    = kr_bergen_auf_ruegen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2856195; Name nach GeoNames ohne modernen Zusatz (Ostseebad Göhren); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 1279
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -517,9 +741,17 @@ ort glowe {
     kreis    = kr_bergen_auf_ruegen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2919782; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 1413
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -532,9 +764,17 @@ ort hiddensee {
     kreis    = kr_bergen_auf_ruegen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3209281; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 707
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -546,6 +786,13 @@ ort ribnitz_damgarten {
     stadt    = nein
     kreis    = kr_stralsund
     quelle   = "GeoNames (CC BY 4.0), geonameid 2847524; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6853
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
 
     1848.03.01 = {
         besitzer = MSC
@@ -562,9 +809,17 @@ ort grimmen {
     kreis    = kr_stralsund
     quelle   = "GeoNames (CC BY 4.0), geonameid 2917309; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 14357
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -577,9 +832,17 @@ ort barth {
     kreis    = kr_stralsund
     quelle   = "GeoNames (CC BY 4.0), geonameid 2952372; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 4475
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -592,9 +855,17 @@ ort tribsees {
     kreis    = kr_stralsund
     quelle   = "GeoNames (CC BY 4.0), geonameid 2821211; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8936
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -606,6 +877,13 @@ ort marlow {
     stadt    = nein
     kreis    = kr_stralsund
     quelle   = "GeoNames (CC BY 4.0), geonameid 2873250; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7382
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
 
     1848.03.01 = {
         besitzer = MSC
@@ -622,9 +900,17 @@ ort velgast {
     kreis    = kr_stralsund
     quelle   = "GeoNames (CC BY 4.0), geonameid 2817703; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 4711
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -637,9 +923,17 @@ ort franzburg {
     kreis    = kr_stralsund
     quelle   = "GeoNames (CC BY 4.0), geonameid 2925488; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6468
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -652,9 +946,17 @@ ort prerow {
     kreis    = kr_stralsund
     quelle   = "GeoNames (CC BY 4.0), geonameid 2856191; Name nach GeoNames ohne modernen Zusatz (Ostseebad Prerow); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 4744
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -667,9 +969,17 @@ ort trinwillershagen {
     kreis    = kr_stralsund
     quelle   = "GeoNames (CC BY 4.0), geonameid 2821106; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7141
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -682,9 +992,17 @@ ort altenpleen {
     kreis    = kr_stralsund
     quelle   = "GeoNames (CC BY 4.0), geonameid 2957516; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5485
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -697,9 +1015,17 @@ ort belgard {
     kreis    = kr_koeslin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3103556; deutscher Name aus den GeoNames-Alternativnamen (heute Białogard); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 18133
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -712,9 +1038,17 @@ ort zanow {
     kreis    = kr_koeslin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3086134; deutscher Name aus den GeoNames-Alternativnamen (heute Sianów); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 14918
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -727,9 +1061,17 @@ ort gross_jestin {
     kreis    = kr_koeslin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3098665; deutscher Name aus den GeoNames-Alternativnamen (heute Gościno); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10431
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -742,9 +1084,17 @@ ort gross_tychow {
     kreis    = kr_koeslin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3082916; deutscher Name aus den GeoNames-Alternativnamen (heute Tychowo); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 15890
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -757,9 +1107,17 @@ ort grossmoellen {
     kreis    = kr_koeslin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3091913; deutscher Name aus den GeoNames-Alternativnamen (heute Mielno); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 3971
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -772,9 +1130,17 @@ ort henkenhagen {
     kreis    = kr_koeslin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3082745; deutscher Name aus den GeoNames-Alternativnamen (heute Ustronie Morskie); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 4845
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -787,9 +1153,17 @@ ort degow {
     kreis    = kr_koeslin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3099966; deutscher Name aus den GeoNames-Alternativnamen (heute Dygowo); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6206
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -802,8 +1176,16 @@ ort buetow {
     kreis    = kr_buetow
     quelle   = "GeoNames (CC BY 4.0), geonameid 3101943; deutscher Name aus den GeoNames-Alternativnamen (heute Bytów); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10741
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_pommern
     }
 }
 
@@ -816,9 +1198,17 @@ ort rummelsburg {
     kreis    = kr_buetow
     quelle   = "GeoNames (CC BY 4.0), geonameid 3092080; deutscher Name aus den GeoNames-Alternativnamen (heute Miastko); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12674
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -831,9 +1221,17 @@ ort bobolice {
     kreis    = kr_buetow
     quelle   = "GeoNames (CC BY 4.0), geonameid 3103179; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 14432
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -846,9 +1244,17 @@ ort hammermuehle {
     kreis    = kr_buetow
     quelle   = "GeoNames (CC BY 4.0), geonameid 3096353; deutscher Name aus den GeoNames-Alternativnamen (heute Kępice); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 14058
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -861,9 +1267,17 @@ ort pollnow {
     kreis    = kr_buetow
     quelle   = "GeoNames (CC BY 4.0), geonameid 3088492; deutscher Name aus den GeoNames-Alternativnamen (heute Polanów); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 17759
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -876,9 +1290,17 @@ ort baldenburg {
     kreis    = kr_buetow
     quelle   = "GeoNames (CC BY 4.0), geonameid 3103531; deutscher Name aus den GeoNames-Alternativnamen (heute Biały Bór); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12226
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -891,8 +1313,16 @@ ort gross_tuchen {
     kreis    = kr_buetow
     quelle   = "GeoNames (CC BY 4.0), geonameid 3083039; deutscher Name aus den GeoNames-Alternativnamen (heute Tuchomie); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10431
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_pommern
     }
 }
 
@@ -905,9 +1335,17 @@ ort alt_kolziglow {
     kreis    = kr_buetow
     quelle   = "GeoNames (CC BY 4.0), geonameid 3095827; deutscher Name aus den GeoNames-Alternativnamen (heute Kołczygłowy); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8487
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -920,8 +1358,16 @@ ort studzienice {
     kreis    = kr_buetow
     quelle   = "GeoNames (CC BY 4.0), geonameid 3084334; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8076
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_pommern
     }
 }
 
@@ -934,9 +1380,17 @@ ort treblin {
     kreis    = kr_buetow
     quelle   = "GeoNames (CC BY 4.0), geonameid 3083133; deutscher Name aus den GeoNames-Alternativnamen (heute Trzebielino); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9870
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -949,8 +1403,16 @@ ort lipnica {
     kreis    = kr_buetow
     quelle   = "GeoNames (CC BY 4.0), geonameid 3093285; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10207
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
+        besitzer   = PRU
+        verwaltung = pr_pommern
     }
 }
 
@@ -963,9 +1425,17 @@ ort wolgast {
     kreis    = kr_greifswald
     quelle   = "GeoNames (CC BY 4.0), geonameid 2806501; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 4980
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -978,9 +1448,17 @@ ort jarmen {
     kreis    = kr_greifswald
     quelle   = "GeoNames (CC BY 4.0), geonameid 2895162; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 13123
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -993,9 +1471,17 @@ ort alt_sanitz {
     kreis    = kr_greifswald
     quelle   = "GeoNames (CC BY 4.0), geonameid 2841684; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9010
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -1008,9 +1494,17 @@ ort ducherow {
     kreis    = kr_greifswald
     quelle   = "GeoNames (CC BY 4.0), geonameid 2934766; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7627
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -1023,9 +1517,17 @@ ort lubmin {
     kreis    = kr_greifswald
     quelle   = "GeoNames (CC BY 4.0), geonameid 2875585; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 4004
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -1038,9 +1540,17 @@ ort gross_kiesow {
     kreis    = kr_greifswald
     quelle   = "GeoNames (CC BY 4.0), geonameid 2915427; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9534
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -1053,9 +1563,17 @@ ort greifenberg {
     kreis    = kr_greifenberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 3098201; deutscher Name aus den GeoNames-Alternativnamen (heute Gryfice); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11264
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -1068,9 +1586,17 @@ ort treptow {
     kreis    = kr_greifenberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 3083145; deutscher Name aus den GeoNames-Alternativnamen (heute Trzebiatów); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9683
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -1083,9 +1609,17 @@ ort plathe {
     kreis    = kr_greifenberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 3088788; deutscher Name aus den GeoNames-Alternativnamen (heute Płoty); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7365
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -1098,9 +1632,17 @@ ort regenwalde {
     kreis    = kr_greifenberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 3087195; deutscher Name aus den GeoNames-Alternativnamen (heute Resko); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9235
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -1113,9 +1655,17 @@ ort rewahl {
     kreis    = kr_greifenberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 3087176; deutscher Name aus den GeoNames-Alternativnamen (heute Rewal); Lage auf das nächste Landpixel gesetzt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 3264
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -1128,9 +1678,17 @@ ort roman {
     kreis    = kr_greifenberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 3086523; deutscher Name aus den GeoNames-Alternativnamen (heute Rymań); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7440
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -1143,9 +1701,17 @@ ort brojce {
     kreis    = kr_greifenberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 3102597; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6431
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -1158,9 +1724,17 @@ ort swinemuende {
     kreis    = kr_swinemuende
     quelle   = "GeoNames (CC BY 4.0), geonameid 3083955; deutscher Name aus den GeoNames-Alternativnamen (heute Świnoujście); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8419
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -1173,9 +1747,17 @@ ort zinnowitz {
     kreis    = kr_swinemuende
     quelle   = "GeoNames (CC BY 4.0), geonameid 2804109; Name nach GeoNames ohne modernen Zusatz (Ostseebad Zinnowitz); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 3937
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -1188,9 +1770,17 @@ ort bansin {
     kreis    = kr_swinemuende
     quelle   = "GeoNames (CC BY 4.0), geonameid 2833989; Name nach GeoNames ohne modernen Zusatz (Seebad Bansin); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 3903
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -1203,9 +1793,17 @@ ort usedom {
     kreis    = kr_swinemuende
     quelle   = "GeoNames (CC BY 4.0), geonameid 2818107; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 4105
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -1218,9 +1816,17 @@ ort wollin {
     kreis    = kr_wollin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3081471; deutscher Name aus den GeoNames-Alternativnamen (heute Wolin); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6158
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -1233,9 +1839,17 @@ ort misdroy {
     kreis    = kr_wollin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3091961; deutscher Name aus den GeoNames-Alternativnamen (heute Międzyzdroje); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 4561
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -1248,9 +1862,17 @@ ort guelzow {
     kreis    = kr_wollin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3098991; deutscher Name aus den GeoNames-Alternativnamen (heute Golczewo); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9609
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -1263,9 +1885,17 @@ ort pribbernow {
     kreis    = kr_wollin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3087905; deutscher Name aus den GeoNames-Alternativnamen (heute Przybiernów); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10842
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -1278,9 +1908,17 @@ ort schwirsen {
     kreis    = kr_wollin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3084020; deutscher Name aus den GeoNames-Alternativnamen (heute Świerzno); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6954
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -1293,9 +1931,17 @@ ort neustettin {
     kreis    = kr_neustettin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3083826; deutscher Name aus den GeoNames-Alternativnamen (heute Szczecinek); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 18750
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -1308,9 +1954,17 @@ ort baerwalde {
     kreis    = kr_neustettin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3103780; deutscher Name aus den GeoNames-Alternativnamen (heute Barwice); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11366
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -1323,9 +1977,17 @@ ort gramenz {
     kreis    = kr_neustettin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3098163; deutscher Name aus den GeoNames-Alternativnamen (heute Grzmiąca); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11029
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -1338,9 +2000,17 @@ ort lubowo {
     kreis    = kr_neustettin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3092820; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11179
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -1353,9 +2023,17 @@ ort labes {
     kreis    = kr_labes
     quelle   = "GeoNames (CC BY 4.0), geonameid 3093158; deutscher Name aus den GeoNames-Alternativnamen (heute Łobez); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8225
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -1368,9 +2046,17 @@ ort freienwalde_in_pommern {
     kreis    = kr_labes
     quelle   = "GeoNames (CC BY 4.0), geonameid 3101697; deutscher Name aus den GeoNames-Alternativnamen (heute Chociwel); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7477
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -1383,9 +2069,17 @@ ort wangerin {
     kreis    = kr_labes
     quelle   = "GeoNames (CC BY 4.0), geonameid 3082485; deutscher Name aus den GeoNames-Alternativnamen (heute Węgorzyno); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6991
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -1398,9 +2092,17 @@ ort jacobshagen {
     kreis    = kr_labes
     quelle   = "GeoNames (CC BY 4.0), geonameid 3100297; deutscher Name aus den GeoNames-Alternativnamen (heute Dobrzany); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6618
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -1413,9 +2115,17 @@ ort daber {
     kreis    = kr_labes
     quelle   = "GeoNames (CC BY 4.0), geonameid 3100363; deutscher Name aus den GeoNames-Alternativnamen (heute Dobra); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8749
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -1428,9 +2138,17 @@ ort noerenberg {
     kreis    = kr_labes
     quelle   = "GeoNames (CC BY 4.0), geonameid 3097871; deutscher Name aus den GeoNames-Alternativnamen (heute Ińsko); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8524
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -1443,9 +2161,17 @@ ort zachan {
     kreis    = kr_labes
     quelle   = "GeoNames (CC BY 4.0), geonameid 3084289; deutscher Name aus den GeoNames-Alternativnamen (heute Suchań); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6842
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -1458,9 +2184,17 @@ ort radowo_male {
     kreis    = kr_labes
     quelle   = "GeoNames (CC BY 4.0), geonameid 3087462; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6281
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -1473,9 +2207,17 @@ ort poelitz {
     kreis    = kr_poelitz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3088461; deutscher Name aus den GeoNames-Alternativnamen (heute Police); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11804
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -1488,9 +2230,17 @@ ort gollnow {
     kreis    = kr_poelitz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3098966; deutscher Name aus den GeoNames-Alternativnamen (heute Goleniów); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 13106
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -1503,9 +2253,17 @@ ort naugard {
     kreis    = kr_poelitz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3090558; deutscher Name aus den GeoNames-Alternativnamen (heute Nowogard); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9683
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -1518,9 +2276,17 @@ ort massow {
     kreis    = kr_poelitz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3092197; deutscher Name aus den GeoNames-Alternativnamen (heute Maszewo); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7328
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -1533,9 +2299,17 @@ ort stepenitz {
     kreis    = kr_poelitz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3084660; deutscher Name aus den GeoNames-Alternativnamen (heute Stepnica); Lage auf das nächste Landpixel gesetzt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6023
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -1548,9 +2322,17 @@ ort osina {
     kreis    = kr_poelitz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3089876; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6767
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -1563,9 +2345,17 @@ ort alt_damerow {
     kreis    = kr_poelitz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3084965; deutscher Name aus den GeoNames-Alternativnamen (heute Stara Dąbrowa); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5832
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -1578,9 +2368,17 @@ ort pasewalk {
     kreis    = kr_pasewalk
     quelle   = "GeoNames (CC BY 4.0), geonameid 2855337; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11889
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -1593,9 +2391,17 @@ ort ueckermuende {
     kreis    = kr_pasewalk
     quelle   = "GeoNames (CC BY 4.0), geonameid 2820471; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 4105
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -1608,9 +2414,17 @@ ort torgelow {
     kreis    = kr_pasewalk
     quelle   = "GeoNames (CC BY 4.0), geonameid 2821802; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5159
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -1623,9 +2437,17 @@ ort strasburg {
     kreis    = kr_pasewalk
     quelle   = "GeoNames (CC BY 4.0), geonameid 2826258; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9259
+        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_brandenburg
+        bund       = ja
     }
 }
 
@@ -1638,9 +2460,17 @@ ort ferdinandshof {
     kreis    = kr_pasewalk
     quelle   = "GeoNames (CC BY 4.0), geonameid 2927142; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7291
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -1653,9 +2483,17 @@ ort ahlbeck {
     kreis    = kr_pasewalk
     quelle   = "GeoNames (CC BY 4.0), geonameid 2959244; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7840
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -1668,9 +2506,17 @@ ort neuwarp {
     kreis    = kr_pasewalk
     quelle   = "GeoNames (CC BY 4.0), geonameid 3090590; deutscher Name aus den GeoNames-Alternativnamen (heute Nowe Warpno); Lage auf das nächste Landpixel gesetzt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 2456
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -1683,9 +2529,17 @@ ort greifenhagen {
     kreis    = kr_stettin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3098200; deutscher Name aus den GeoNames-Alternativnamen (heute Gryfino); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11006
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -1698,9 +2552,17 @@ ort penkun {
     kreis    = kr_stettin
     quelle   = "GeoNames (CC BY 4.0), geonameid 2854957; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6954
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -1713,9 +2575,17 @@ ort dobra {
     kreis    = kr_stettin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3100364; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11366
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -1728,9 +2598,17 @@ ort kolbitzow {
     kreis    = kr_stettin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3095834; deutscher Name aus den GeoNames-Alternativnamen (heute Kołbaskowo); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9867
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -1743,9 +2621,17 @@ ort pyritz {
     kreis    = kr_stargard
     quelle   = "GeoNames (CC BY 4.0), geonameid 3087630; deutscher Name aus den GeoNames-Alternativnamen (heute Pyrzyce); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9759
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -1758,9 +2644,17 @@ ort lippehne {
     kreis    = kr_stargard
     quelle   = "GeoNames (CC BY 4.0), geonameid 3093350; deutscher Name aus den GeoNames-Alternativnamen (heute Lipiany); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8300
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -1773,9 +2667,17 @@ ort bahn {
     kreis    = kr_stargard
     quelle   = "GeoNames (CC BY 4.0), geonameid 3103884; deutscher Name aus den GeoNames-Alternativnamen (heute Banie); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10095
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -1788,9 +2690,17 @@ ort doelitz {
     kreis    = kr_stargard
     quelle   = "GeoNames (CC BY 4.0), geonameid 3100247; deutscher Name aus den GeoNames-Alternativnamen (heute Dolice); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8263
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -1803,9 +2713,17 @@ ort prillwitz {
     kreis    = kr_stargard
     quelle   = "GeoNames (CC BY 4.0), geonameid 3087958; deutscher Name aus den GeoNames-Alternativnamen (heute Przelewice); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9186
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -1818,9 +2736,17 @@ ort beelitz_in_pommern {
     kreis    = kr_stargard
     quelle   = "GeoNames (CC BY 4.0), geonameid 3103432; deutscher Name aus den GeoNames-Alternativnamen (heute Bielice); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9272
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -1833,9 +2759,17 @@ ort kublank {
     kreis    = kr_stargard
     quelle   = "GeoNames (CC BY 4.0), geonameid 3095947; deutscher Name aus den GeoNames-Alternativnamen (heute Kobylanka); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8008
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -1848,9 +2782,17 @@ ort warnitz {
     kreis    = kr_stargard
     quelle   = "GeoNames (CC BY 4.0), geonameid 3082607; deutscher Name aus den GeoNames-Alternativnamen (heute Warnice); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7971
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -1863,9 +2805,17 @@ ort koenigsberg_in_neumark {
     kreis    = kr_koenigsberg_in_neumark
     quelle   = "GeoNames (CC BY 4.0), geonameid 3101675; deutscher Name aus den GeoNames-Alternativnamen (heute Chojna); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7403
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -1878,9 +2828,17 @@ ort baerwalde_in_neumark {
     kreis    = kr_koenigsberg_in_neumark
     quelle   = "GeoNames (CC BY 4.0), geonameid 3091861; deutscher Name aus den GeoNames-Alternativnamen (heute Mieszkowice); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9085
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -1893,9 +2851,17 @@ ort bad_schoenfliess {
     kreis    = kr_koenigsberg_in_neumark
     quelle   = "GeoNames (CC BY 4.0), geonameid 3083158; deutscher Name aus den GeoNames-Alternativnamen (heute Trzcińsko Zdrój); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10057
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -1908,9 +2874,17 @@ ort mohrin {
     kreis    = kr_koenigsberg_in_neumark
     quelle   = "GeoNames (CC BY 4.0), geonameid 3091435; deutscher Name aus den GeoNames-Alternativnamen (heute Moryń); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6206
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -1923,9 +2897,17 @@ ort zehden {
     kreis    = kr_koenigsberg_in_neumark
     quelle   = "GeoNames (CC BY 4.0), geonameid 3101918; deutscher Name aus den GeoNames-Alternativnamen (heute Cedynia); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11179
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -1938,8 +2920,16 @@ ort fiddichow {
     kreis    = kr_koenigsberg_in_neumark
     quelle   = "GeoNames (CC BY 4.0), geonameid 3082376; deutscher Name aus den GeoNames-Alternativnamen (heute Widuchowa); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8068
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { pommern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }

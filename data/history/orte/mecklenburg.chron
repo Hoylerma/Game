@@ -34,6 +34,13 @@ ort schwerin {
         verwuestung  = 0.6
     }
 
+    1846.12.03 = {
+        bevoelkerung = 22868
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
         besitzer = MSC
         bund     = ja
@@ -56,6 +63,13 @@ ort wismar {
         konfession   = { lutherisch = 100 }
         kultur       = { mecklenburger = 100 }
         verwuestung  = 0.45
+    }
+
+    1846.12.03 = {
+        bevoelkerung = 10076
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
     }
 
     1848.03.01 = {
@@ -82,6 +96,13 @@ ort rostock {
         verwuestung  = 0.45
     }
 
+    1846.12.03 = {
+        bevoelkerung = 29585
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
         besitzer = MSC
         bund     = ja
@@ -103,6 +124,13 @@ ort guestrow {
         konfession   = { lutherisch = 100 }
         kultur       = { mecklenburger = 100 }
         verwuestung  = 0.65
+    }
+
+    1846.12.03 = {
+        bevoelkerung = 13020
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
     }
 
     1848.03.01 = {
@@ -128,6 +156,13 @@ ort parchim {
         verwuestung  = 0.65
     }
 
+    1846.12.03 = {
+        bevoelkerung = 10977
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
         besitzer = MSC
         bund     = ja
@@ -151,6 +186,13 @@ ort neubrandenburg {
         verwuestung  = 0.75
     }
 
+    1846.12.03 = {
+        bevoelkerung = 6922
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
         besitzer = MST
         bund     = ja
@@ -165,6 +207,13 @@ ort bad_doberan {
     stadt    = nein
     kreis    = kr_rostock
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953528; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 4677
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
 
     1848.03.01 = {
         besitzer = MSC
@@ -181,6 +230,13 @@ ort buetzow {
     kreis    = kr_rostock
     quelle   = "GeoNames (CC BY 4.0), geonameid 2940476; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8967
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
         besitzer = MSC
         bund     = ja
@@ -195,6 +251,13 @@ ort kuehlungsborn {
     stadt    = nein
     kreis    = kr_rostock
     quelle   = "GeoNames (CC BY 4.0), geonameid 2856193; Name nach GeoNames ohne modernen Zusatz (Ostseebad Kühlungsborn); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 2706
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
 
     1848.03.01 = {
         besitzer = MSC
@@ -211,6 +274,13 @@ ort schwaan {
     kreis    = kr_rostock
     quelle   = "GeoNames (CC BY 4.0), geonameid 2835542; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7614
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
         besitzer = MSC
         bund     = ja
@@ -225,6 +295,13 @@ ort laage {
     stadt    = nein
     kreis    = kr_rostock
     quelle   = "GeoNames (CC BY 4.0), geonameid 2882141; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9585
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
 
     1848.03.01 = {
         besitzer = MSC
@@ -241,6 +318,13 @@ ort satow_oberhagen {
     kreis    = kr_rostock
     quelle   = "GeoNames (CC BY 4.0), geonameid 2841321; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9276
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
         besitzer = MSC
         bund     = ja
@@ -255,6 +339,13 @@ ort graal_mueritz {
     stadt    = nein
     kreis    = kr_rostock
     quelle   = "GeoNames (CC BY 4.0), geonameid 2856194; Name nach GeoNames ohne modernen Zusatz (Seeheilbad Graal-Müritz); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 5322
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
 
     1848.03.01 = {
         besitzer = MSC
@@ -271,6 +362,13 @@ ort elmenhorst {
     kreis    = kr_rostock
     quelle   = "GeoNames (CC BY 4.0), geonameid 2930850; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 2852
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
         besitzer = MSC
         bund     = ja
@@ -285,6 +383,13 @@ ort dummerstorf {
     stadt    = nein
     kreis    = kr_rostock
     quelle   = "GeoNames (CC BY 4.0), geonameid 2934635; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 5759
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
 
     1848.03.01 = {
         besitzer = MSC
@@ -301,6 +406,13 @@ ort tessin {
     kreis    = kr_rostock
     quelle   = "GeoNames (CC BY 4.0), geonameid 2823418; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10745
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
         besitzer = MSC
         bund     = ja
@@ -316,9 +428,17 @@ ort demmin {
     kreis    = kr_demmin
     quelle   = "GeoNames (CC BY 4.0), geonameid 2938284; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10506
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -330,6 +450,13 @@ ort malchin {
     stadt    = nein
     kreis    = kr_demmin
     quelle   = "GeoNames (CC BY 4.0), geonameid 2874131; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7769
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
 
     1848.03.01 = {
         besitzer = MSC
@@ -346,6 +473,13 @@ ort teterow {
     kreis    = kr_demmin
     quelle   = "GeoNames (CC BY 4.0), geonameid 2823398; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7691
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
         besitzer = MSC
         bund     = ja
@@ -360,6 +494,13 @@ ort gnoien {
     stadt    = nein
     kreis    = kr_demmin
     quelle   = "GeoNames (CC BY 4.0), geonameid 2919657; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6416
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
 
     1848.03.01 = {
         besitzer = MSC
@@ -376,6 +517,13 @@ ort dargun {
     kreis    = kr_demmin
     quelle   = "GeoNames (CC BY 4.0), geonameid 2938924; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 4951
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
         besitzer = MSC
         bund     = ja
@@ -390,6 +538,13 @@ ort neukalen {
     stadt    = nein
     kreis    = kr_demmin
     quelle   = "GeoNames (CC BY 4.0), geonameid 2864806; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 2570
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
 
     1848.03.01 = {
         besitzer = MSC
@@ -406,6 +561,13 @@ ort joerdenstorf {
     kreis    = kr_demmin
     quelle   = "GeoNames (CC BY 4.0), geonameid 2894707; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7189
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
         besitzer = MSC
         bund     = ja
@@ -421,9 +583,17 @@ ort borrentin {
     kreis    = kr_demmin
     quelle   = "GeoNames (CC BY 4.0), geonameid 2946034; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 4004
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -435,6 +605,13 @@ ort neubukow {
     stadt    = nein
     kreis    = kr_wismar
     quelle   = "GeoNames (CC BY 4.0), geonameid 2866087; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7769
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
 
     1848.03.01 = {
         besitzer = MSC
@@ -451,6 +628,13 @@ ort neukloster {
     kreis    = kr_wismar
     quelle   = "GeoNames (CC BY 4.0), geonameid 2864705; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11325
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
         besitzer = MSC
         bund     = ja
@@ -465,6 +649,13 @@ ort bad_kleinen {
     stadt    = nein
     kreis    = kr_wismar
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953422; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7548
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
 
     1848.03.01 = {
         besitzer = MSC
@@ -481,6 +672,13 @@ ort blowatz {
     kreis    = kr_wismar
     quelle   = "GeoNames (CC BY 4.0), geonameid 2947604; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 3131
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
         besitzer = MSC
         bund     = ja
@@ -495,6 +693,13 @@ ort gramkow {
     stadt    = nein
     kreis    = kr_wismar
     quelle   = "GeoNames (CC BY 4.0), geonameid 2918168; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 3440
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
 
     1848.03.01 = {
         besitzer = MSC
@@ -511,6 +716,13 @@ ort grevesmuehlen {
     kreis    = kr_grevesmuehlen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2917520; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6725
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
         besitzer = MSC
         bund     = ja
@@ -525,6 +737,13 @@ ort gadebusch {
     stadt    = nein
     kreis    = kr_grevesmuehlen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2923410; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7421
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
 
     1848.03.01 = {
         besitzer = MSC
@@ -541,6 +760,13 @@ ort kluetz {
     kreis    = kr_grevesmuehlen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2887290; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 4522
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
         besitzer = MSC
         bund     = ja
@@ -555,6 +781,13 @@ ort dassow {
     stadt    = nein
     kreis    = kr_grevesmuehlen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2938798; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 5492
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
 
     1848.03.01 = {
         besitzer = MSC
@@ -571,6 +804,13 @@ ort rehna {
     kreis    = kr_grevesmuehlen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2849263; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8155
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
         besitzer = MSC
         bund     = ja
@@ -585,6 +825,13 @@ ort bruesewitz {
     stadt    = nein
     kreis    = kr_grevesmuehlen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2942992; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6339
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
 
     1848.03.01 = {
         besitzer = MSC
@@ -601,6 +848,13 @@ ort krakow_am_see {
     kreis    = kr_guestrow
     quelle   = "GeoNames (CC BY 4.0), geonameid 2884850; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12214
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
         besitzer = MSC
         bund     = ja
@@ -615,6 +869,13 @@ ort goldberg {
     stadt    = nein
     kreis    = kr_guestrow
     quelle   = "GeoNames (CC BY 4.0), geonameid 2919366; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 11943
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
 
     1848.03.01 = {
         besitzer = MSC
@@ -631,6 +892,13 @@ ort lalendorf {
     kreis    = kr_guestrow
     quelle   = "GeoNames (CC BY 4.0), geonameid 2881789; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8233
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
         besitzer = MSC
         bund     = ja
@@ -645,6 +913,13 @@ ort ludwigslust {
     stadt    = nein
     kreis    = kr_schwerin
     quelle   = "GeoNames (CC BY 4.0), geonameid 2875343; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10049
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
 
     1848.03.01 = {
         besitzer = MSC
@@ -661,6 +936,13 @@ ort neustadt_glewe {
     kreis    = kr_schwerin
     quelle   = "GeoNames (CC BY 4.0), geonameid 2864036; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7228
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
         besitzer = MSC
         bund     = ja
@@ -675,6 +957,13 @@ ort luebz {
     stadt    = nein
     kreis    = kr_schwerin
     quelle   = "GeoNames (CC BY 4.0), geonameid 2875558; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10745
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
 
     1848.03.01 = {
         besitzer = MSC
@@ -691,6 +980,13 @@ ort crivitz {
     kreis    = kr_schwerin
     quelle   = "GeoNames (CC BY 4.0), geonameid 2939739; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9431
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
         besitzer = MSC
         bund     = ja
@@ -705,6 +1001,13 @@ ort sternberg_mecklenburg {
     stadt    = nein
     kreis    = kr_schwerin
     quelle   = "GeoNames (CC BY 4.0), geonameid 2827336; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10552
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
 
     1848.03.01 = {
         besitzer = MSC
@@ -721,6 +1024,13 @@ ort plate {
     kreis    = kr_schwerin
     quelle   = "GeoNames (CC BY 4.0), geonameid 2853406; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6261
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
         besitzer = MSC
         bund     = ja
@@ -735,6 +1045,13 @@ ort loecknitz {
     stadt    = nein
     kreis    = kr_schwerin
     quelle   = "GeoNames (CC BY 4.0), geonameid 2876539; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10242
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
 
     1848.03.01 = {
         besitzer = MSC
@@ -751,6 +1068,13 @@ ort rastow {
     kreis    = kr_schwerin
     quelle   = "GeoNames (CC BY 4.0), geonameid 2850238; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7498
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
         besitzer = MSC
         bund     = ja
@@ -765,6 +1089,13 @@ ort stralendorf {
     stadt    = nein
     kreis    = kr_schwerin
     quelle   = "GeoNames (CC BY 4.0), geonameid 2826290; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7691
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
 
     1848.03.01 = {
         besitzer = MSC
@@ -781,6 +1112,13 @@ ort demen {
     kreis    = kr_schwerin
     quelle   = "GeoNames (CC BY 4.0), geonameid 2938304; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8812
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
         besitzer = MSC
         bund     = ja
@@ -796,9 +1134,17 @@ ort altentreptow {
     kreis    = kr_neubrandenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2957437; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9795
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -810,6 +1156,13 @@ ort woldegk {
     stadt    = nein
     kreis    = kr_neubrandenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2806963; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 15295
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
 
     1848.03.01 = {
         besitzer = MST
@@ -826,6 +1179,13 @@ ort friedland_mecklenburg {
     kreis    = kr_neubrandenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2924679; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 17375
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
         besitzer = MST
         bund     = ja
@@ -840,6 +1200,13 @@ ort penzlin {
     stadt    = nein
     kreis    = kr_neubrandenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2854906; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7228
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
 
     1848.03.01 = {
         besitzer = MSC
@@ -856,9 +1223,17 @@ ort loitz {
     kreis    = kr_neubrandenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2876044; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9833
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -870,6 +1245,13 @@ ort moellenhagen {
     stadt    = nein
     kreis    = kr_neubrandenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2870025; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10281
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
 
     1848.03.01 = {
         besitzer = MSC
@@ -886,9 +1268,17 @@ ort guetzkow {
     kreis    = kr_neubrandenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2913290; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7291
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -900,6 +1290,13 @@ ort gross_nemerow {
     stadt    = nein
     kreis    = kr_neubrandenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2915236; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 6516
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
 
     1848.03.01 = {
         besitzer = MST
@@ -916,9 +1313,17 @@ ort wackerow {
     kreis    = kr_neubrandenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2815604; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9048
+        konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_pommern
+        bund       = ja
     }
 }
 
@@ -930,6 +1335,13 @@ ort hagenow {
     stadt    = nein
     kreis    = kr_hagenow
     quelle   = "GeoNames (CC BY 4.0), geonameid 2912481; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 8464
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
 
     1848.03.01 = {
         besitzer = MSC
@@ -946,6 +1358,13 @@ ort boizenburg {
     kreis    = kr_hagenow
     quelle   = "GeoNames (CC BY 4.0), geonameid 2946821; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11104
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
         besitzer = MSC
         bund     = ja
@@ -960,6 +1379,13 @@ ort wittenburg {
     stadt    = nein
     kreis    = kr_hagenow
     quelle   = "GeoNames (CC BY 4.0), geonameid 2807335; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9044
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
 
     1848.03.01 = {
         besitzer = MSC
@@ -976,6 +1402,13 @@ ort luebtheen {
     kreis    = kr_hagenow
     quelle   = "GeoNames (CC BY 4.0), geonameid 2875559; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12832
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
         besitzer = MSC
         bund     = ja
@@ -990,6 +1423,13 @@ ort doemitz {
     stadt    = nein
     kreis    = kr_hagenow
     quelle   = "GeoNames (CC BY 4.0), geonameid 2936292; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 10602
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
 
     1848.03.01 = {
         besitzer = MSC
@@ -1006,6 +1446,13 @@ ort zarrentin {
     kreis    = kr_hagenow
     quelle   = "GeoNames (CC BY 4.0), geonameid 2805193; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7819
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
         besitzer = MSC
         bund     = ja
@@ -1020,6 +1467,13 @@ ort malliss {
     stadt    = nein
     kreis    = kr_hagenow
     quelle   = "GeoNames (CC BY 4.0), geonameid 2874070; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 9353
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
 
     1848.03.01 = {
         besitzer = MSC
@@ -1036,6 +1490,13 @@ ort neustrelitz {
     kreis    = kr_neustrelitz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2864005; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11923
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
         besitzer = MST
         bund     = ja
@@ -1050,6 +1511,13 @@ ort waren {
     stadt    = ja
     kreis    = kr_neustrelitz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2814131; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7970
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
 
     1848.03.01 = {
         besitzer = MSC
@@ -1066,6 +1534,13 @@ ort malchow {
     kreis    = kr_neustrelitz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2874122; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6899
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
         besitzer = MSC
         bund     = ja
@@ -1080,6 +1555,13 @@ ort plau_am_see {
     stadt    = nein
     kreis    = kr_neustrelitz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2853297; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7981
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
 
     1848.03.01 = {
         besitzer = MSC
@@ -1096,6 +1578,13 @@ ort wesenberg {
     kreis    = kr_neustrelitz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2810662; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12153
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
         besitzer = MST
         bund     = ja
@@ -1110,6 +1599,13 @@ ort roebel {
     stadt    = nein
     kreis    = kr_neustrelitz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2846286; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7494
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
 
     1848.03.01 = {
         besitzer = MSC
@@ -1126,6 +1622,13 @@ ort rechlin {
     kreis    = kr_neustrelitz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2849717; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7467
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
         besitzer = MSC
         bund     = ja
@@ -1141,6 +1644,13 @@ ort carpin {
     kreis    = kr_neustrelitz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2940259; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10721
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
         besitzer = MST
         bund     = ja
@@ -1155,6 +1665,13 @@ ort grabowhoefe {
     stadt    = nein
     kreis    = kr_neustrelitz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2918398; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 7846
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { mecklenburger = 100 }
+        verwuestung  = 0
+    }
 
     1848.03.01 = {
         besitzer = MSC

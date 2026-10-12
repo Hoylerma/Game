@@ -20,9 +20,17 @@ ort jaegerndorf {
     kreis    = kr_jaegerndorf
     quelle   = "GeoNames (CC BY 4.0), geonameid 3072656; deutscher Name aus den GeoNames-Alternativnamen (heute Krnov); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 15148
+        konfession   = { katholisch = 85 lutherisch = 13 juedisch = 2 }
+        kultur       = { schlesier = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_schlesien
+        bund       = ja
     }
 }
 
@@ -35,9 +43,17 @@ ort freudenthal {
     kreis    = kr_jaegerndorf
     quelle   = "GeoNames (CC BY 4.0), geonameid 3078545; deutscher Name aus den GeoNames-Alternativnamen (heute Bruntál); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 17915
+        konfession   = { katholisch = 85 lutherisch = 13 juedisch = 2 }
+        kultur       = { schlesier = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_schlesien
+        bund       = ja
     }
 }
 
@@ -50,9 +66,17 @@ ort freiwaldau_oesterreichisch_schlesien {
     kreis    = kr_jaegerndorf
     quelle   = "GeoNames (CC BY 4.0), geonameid 3074281; deutscher Name aus den GeoNames-Alternativnamen (heute Jeseník); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 15373
+        konfession   = { katholisch = 85 lutherisch = 13 juedisch = 2 }
+        kultur       = { schlesier = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_schlesien
+        bund       = ja
     }
 }
 
@@ -65,9 +89,17 @@ ort roemerstadt {
     kreis    = kr_jaegerndorf
     quelle   = "GeoNames (CC BY 4.0), geonameid 3066483; deutscher Name aus den GeoNames-Alternativnamen (heute Rýmařov); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 15679
+        konfession   = { katholisch = 85 lutherisch = 13 juedisch = 2 }
+        kultur       = { schlesier = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_schlesien
+        bund       = ja
     }
 }
 
@@ -80,9 +112,17 @@ ort wuerbenthal {
     kreis    = kr_jaegerndorf
     quelle   = "GeoNames (CC BY 4.0), geonameid 3062446; deutscher Name aus den GeoNames-Alternativnamen (heute Vrbno pod Pradědem); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 20457
+        konfession   = { katholisch = 85 lutherisch = 13 juedisch = 2 }
+        kultur       = { schlesier = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_schlesien
+        bund       = ja
     }
 }
 
@@ -95,9 +135,17 @@ ort olbersdorf {
     kreis    = kr_jaegerndorf
     quelle   = "GeoNames (CC BY 4.0), geonameid 3070819; deutscher Name aus den GeoNames-Alternativnamen (heute Město Albrechtice); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11269
+        konfession   = { katholisch = 85 lutherisch = 13 juedisch = 2 }
+        kultur       = { schlesier = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_schlesien
+        bund       = ja
     }
 }
 
@@ -110,9 +158,17 @@ ort jauernig {
     kreis    = kr_jaegerndorf
     quelle   = "GeoNames (CC BY 4.0), geonameid 3074398; deutscher Name aus den GeoNames-Alternativnamen (heute Javorník); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5941
+        konfession   = { katholisch = 85 lutherisch = 13 juedisch = 2 }
+        kultur       = { schlesier = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_schlesien
+        bund       = ja
     }
 }
 
@@ -125,9 +181,17 @@ ort bennisch {
     kreis    = kr_jaegerndorf
     quelle   = "GeoNames (CC BY 4.0), geonameid 3075451; deutscher Name aus den GeoNames-Alternativnamen (heute Horní Benešov); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 13474
+        konfession   = { katholisch = 85 lutherisch = 13 juedisch = 2 }
+        kultur       = { schlesier = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_schlesien
+        bund       = ja
     }
 }
 
@@ -140,9 +204,17 @@ ort friedeberg {
     kreis    = kr_jaegerndorf
     quelle   = "GeoNames (CC BY 4.0), geonameid 3061321; deutscher Name aus den GeoNames-Alternativnamen (heute Žulová); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9861
+        konfession   = { katholisch = 85 lutherisch = 13 juedisch = 2 }
+        kultur       = { schlesier = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_schlesien
+        bund       = ja
     }
 }
 
@@ -155,9 +227,17 @@ ort weidenau {
     kreis    = kr_jaegerndorf
     quelle   = "GeoNames (CC BY 4.0), geonameid 3062924; deutscher Name aus den GeoNames-Alternativnamen (heute Vidnava); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11867
+        konfession   = { katholisch = 85 lutherisch = 13 juedisch = 2 }
+        kultur       = { schlesier = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_schlesien
+        bund       = ja
     }
 }
 
@@ -170,9 +250,17 @@ ort hotzenplotz {
     kreis    = kr_jaegerndorf
     quelle   = "GeoNames (CC BY 4.0), geonameid 3068818; deutscher Name aus den GeoNames-Alternativnamen (heute Osoblaha); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12479
+        konfession   = { katholisch = 85 lutherisch = 13 juedisch = 2 }
+        kultur       = { schlesier = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_schlesien
+        bund       = ja
     }
 }
 
@@ -185,9 +273,17 @@ ort hennersdorf {
     kreis    = kr_jaegerndorf
     quelle   = "GeoNames (CC BY 4.0), geonameid 3074161; deutscher Name aus den GeoNames-Alternativnamen (heute Jindřichov); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8207
+        konfession   = { katholisch = 85 lutherisch = 13 juedisch = 2 }
+        kultur       = { schlesier = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_schlesien
+        bund       = ja
     }
 }
 
@@ -200,9 +296,17 @@ ort troppau {
     kreis    = kr_troppau
     quelle   = "GeoNames (CC BY 4.0), geonameid 3068927; deutscher Name aus den GeoNames-Alternativnamen (heute Opava); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 25707
+        konfession   = { katholisch = 85 lutherisch = 13 juedisch = 2 }
+        kultur       = { schlesier = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_schlesien
+        bund       = ja
     }
 }
 
@@ -215,9 +319,17 @@ ort hultschin {
     kreis    = kr_troppau
     quelle   = "GeoNames (CC BY 4.0), geonameid 3075716; deutscher Name aus den GeoNames-Alternativnamen (heute Hlučín); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8333
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { tschechen = 80 schlesier = 20 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_schlesien
+        bund       = ja
     }
 }
 
@@ -230,9 +342,17 @@ ort wigstadtl {
     kreis    = kr_troppau
     quelle   = "GeoNames (CC BY 4.0), geonameid 3062811; deutscher Name aus den GeoNames-Alternativnamen (heute Vítkov); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10167
+        konfession   = { katholisch = 85 lutherisch = 13 juedisch = 2 }
+        kultur       = { schlesier = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_schlesien
+        bund       = ja
     }
 }
 
@@ -245,9 +365,17 @@ ort bolatitz {
     kreis    = kr_troppau
     quelle   = "GeoNames (CC BY 4.0), geonameid 3079078; deutscher Name aus den GeoNames-Alternativnamen (heute Bolatice); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9166
+        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        kultur       = { tschechen = 80 schlesier = 20 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = PRU
-        bund     = ja
+        besitzer   = PRU
+        verwaltung = pr_schlesien
+        bund       = ja
     }
 }
 
@@ -260,9 +388,17 @@ ort bautsch {
     kreis    = kr_troppau
     quelle   = "GeoNames (CC BY 4.0), geonameid 3078469; deutscher Name aus den GeoNames-Alternativnamen (heute Budišov nad Budišovkou); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10106
+        konfession   = { katholisch = 85 lutherisch = 13 juedisch = 2 }
+        kultur       = { schlesier = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_schlesien
+        bund       = ja
     }
 }
 
@@ -275,9 +411,17 @@ ort wuest_pohlom {
     kreis    = kr_troppau
     quelle   = "GeoNames (CC BY 4.0), geonameid 3067324; deutscher Name aus den GeoNames-Alternativnamen (heute Pustá Polom); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11484
+        konfession   = { katholisch = 85 lutherisch = 13 juedisch = 2 }
+        kultur       = { schlesier = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_schlesien
+        bund       = ja
     }
 }
 
@@ -290,9 +434,17 @@ ort schoenstein {
     kreis    = kr_troppau
     quelle   = "GeoNames (CC BY 4.0), geonameid 3076621; deutscher Name aus den GeoNames-Alternativnamen (heute Dolní Životice); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 13857
+        konfession   = { katholisch = 85 lutherisch = 13 juedisch = 2 }
+        kultur       = { schlesier = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_schlesien
+        bund       = ja
     }
 }
 
@@ -305,9 +457,17 @@ ort freistadt_oesterreichisch_schlesien {
     kreis    = kr_freistadt_oesterreichisch_schlesien
     quelle   = "GeoNames (CC BY 4.0), geonameid 3073789; deutscher Name aus den GeoNames-Alternativnamen (heute Karviná); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 15012
+        konfession   = { katholisch = 85 lutherisch = 13 juedisch = 2 }
+        kultur       = { polen = 70 schlesier = 30 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_schlesien
+        bund       = ja
     }
 }
 
@@ -320,9 +480,17 @@ ort friedeck {
     kreis    = kr_freistadt_oesterreichisch_schlesien
     quelle   = "GeoNames (CC BY 4.0), geonameid 3076127; deutscher Name aus den GeoNames-Alternativnamen (heute Frýdek-Místek); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 13718
+        konfession   = { katholisch = 85 lutherisch = 13 juedisch = 2 }
+        kultur       = { tschechen = 80 schlesier = 20 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_schlesien
+        bund       = ja
     }
 }
 
@@ -335,9 +503,17 @@ ort teschen {
     kreis    = kr_freistadt_oesterreichisch_schlesien
     quelle   = "GeoNames (CC BY 4.0), geonameid 3101321; deutscher Name aus den GeoNames-Alternativnamen (heute Cieszyn); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 13078
+        konfession   = { katholisch = 85 lutherisch = 13 juedisch = 2 }
+        kultur       = { polen = 70 schlesier = 30 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_schlesien
+        bund       = ja
     }
 }
 
@@ -350,9 +526,17 @@ ort trinec {
     kreis    = kr_freistadt_oesterreichisch_schlesien
     quelle   = "GeoNames (CC BY 4.0), geonameid 3064000; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12538
+        konfession   = { katholisch = 85 lutherisch = 13 juedisch = 2 }
+        kultur       = { polen = 70 schlesier = 30 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_schlesien
+        bund       = ja
     }
 }
 
@@ -365,9 +549,17 @@ ort orlau {
     kreis    = kr_freistadt_oesterreichisch_schlesien
     quelle   = "GeoNames (CC BY 4.0), geonameid 3068873; deutscher Name aus den GeoNames-Alternativnamen (heute Orlová); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11136
+        konfession   = { katholisch = 85 lutherisch = 13 juedisch = 2 }
+        kultur       = { polen = 70 schlesier = 30 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_schlesien
+        bund       = ja
     }
 }
 
@@ -380,9 +572,17 @@ ort bohumin {
     kreis    = kr_freistadt_oesterreichisch_schlesien
     quelle   = "GeoNames (CC BY 4.0), geonameid 3079129; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11515
+        konfession   = { katholisch = 85 lutherisch = 13 juedisch = 2 }
+        kultur       = { polen = 70 schlesier = 30 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_schlesien
+        bund       = ja
     }
 }
 
@@ -395,9 +595,17 @@ ort frydlant_nad_ostravici {
     kreis    = kr_freistadt_oesterreichisch_schlesien
     quelle   = "GeoNames (CC BY 4.0), geonameid 3076123; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10718
+        konfession   = { katholisch = 85 lutherisch = 13 juedisch = 2 }
+        kultur       = { tschechen = 80 schlesier = 20 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_schlesien
+        bund       = ja
     }
 }
 
@@ -410,9 +618,17 @@ ort horni_terlicko {
     kreis    = kr_freistadt_oesterreichisch_schlesien
     quelle   = "GeoNames (CC BY 4.0), geonameid 3075179; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7732
+        konfession   = { katholisch = 85 lutherisch = 13 juedisch = 2 }
+        kultur       = { polen = 70 schlesier = 30 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_schlesien
+        bund       = ja
     }
 }
 
@@ -425,9 +641,17 @@ ort braunsberg_oesterreichisch_schlesien {
     kreis    = kr_freistadt_oesterreichisch_schlesien
     quelle   = "GeoNames (CC BY 4.0), geonameid 3078536; deutscher Name aus den GeoNames-Alternativnamen (heute Brušperk); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11101
+        konfession   = { katholisch = 85 lutherisch = 13 juedisch = 2 }
+        kultur       = { tschechen = 80 schlesier = 20 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_schlesien
+        bund       = ja
     }
 }
 
@@ -440,9 +664,17 @@ ort komorni_lhotka {
     kreis    = kr_freistadt_oesterreichisch_schlesien
     quelle   = "GeoNames (CC BY 4.0), geonameid 3073322; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5696
+        konfession   = { katholisch = 85 lutherisch = 13 juedisch = 2 }
+        kultur       = { polen = 70 schlesier = 30 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_schlesien
+        bund       = ja
     }
 }
 
@@ -455,9 +687,17 @@ ort moravka {
     kreis    = kr_freistadt_oesterreichisch_schlesien
     quelle   = "GeoNames (CC BY 4.0), geonameid 3070339; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 15067
+        konfession   = { katholisch = 85 lutherisch = 13 juedisch = 2 }
+        kultur       = { tschechen = 80 schlesier = 20 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_schlesien
+        bund       = ja
     }
 }
 
@@ -470,9 +710,17 @@ ort bielsko_biala {
     kreis    = kr_bielsko_biala
     quelle   = "GeoNames (CC BY 4.0), geonameid 3103402; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 18417
+        konfession   = { katholisch = 85 lutherisch = 13 juedisch = 2 }
+        kultur       = { schlesier = 70 polen = 30 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_schlesien
+        bund       = ja
     }
 }
 
@@ -485,9 +733,17 @@ ort czechowice_dziedzice {
     kreis    = kr_bielsko_biala
     quelle   = "GeoNames (CC BY 4.0), geonameid 3101076; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 14890
+        konfession   = { katholisch = 85 lutherisch = 13 juedisch = 2 }
+        kultur       = { polen = 70 schlesier = 30 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_schlesien
+        bund       = ja
     }
 }
 
@@ -500,9 +756,17 @@ ort skoczow {
     kreis    = kr_bielsko_biala
     quelle   = "GeoNames (CC BY 4.0), geonameid 3085786; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8360
+        konfession   = { katholisch = 85 lutherisch = 13 juedisch = 2 }
+        kultur       = { polen = 70 schlesier = 30 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_schlesien
+        bund       = ja
     }
 }
 
@@ -515,9 +779,17 @@ ort jasienica {
     kreis    = kr_bielsko_biala
     quelle   = "GeoNames (CC BY 4.0), geonameid 3097472; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7717
+        konfession   = { katholisch = 85 lutherisch = 13 juedisch = 2 }
+        kultur       = { polen = 70 schlesier = 30 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_schlesien
+        bund       = ja
     }
 }
 
@@ -530,9 +802,17 @@ ort porabka {
     kreis    = kr_bielsko_biala
     quelle   = "GeoNames (CC BY 4.0), geonameid 3088290; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8330
+        konfession   = { katholisch = 85 lutherisch = 13 juedisch = 2 }
+        kultur       = { polen = 70 schlesier = 30 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_schlesien
+        bund       = ja
     }
 }
 
@@ -545,9 +825,17 @@ ort chybie {
     kreis    = kr_bielsko_biala
     quelle   = "GeoNames (CC BY 4.0), geonameid 3101467; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7886
+        konfession   = { katholisch = 85 lutherisch = 13 juedisch = 2 }
+        kultur       = { polen = 70 schlesier = 30 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_schlesien
+        bund       = ja
     }
 }
 
@@ -560,9 +848,17 @@ ort pruchna {
     kreis    = kr_bielsko_biala
     quelle   = "GeoNames (CC BY 4.0), geonameid 3088067; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8039
+        konfession   = { katholisch = 85 lutherisch = 13 juedisch = 2 }
+        kultur       = { polen = 70 schlesier = 30 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_schlesien
+        bund       = ja
     }
 }
 
@@ -575,9 +871,17 @@ ort ustron {
     kreis    = kr_ustron
     quelle   = "GeoNames (CC BY 4.0), geonameid 3082751; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6676
+        konfession   = { katholisch = 85 lutherisch = 13 juedisch = 2 }
+        kultur       = { polen = 70 schlesier = 30 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_schlesien
+        bund       = ja
     }
 }
 
@@ -590,9 +894,17 @@ ort wisla {
     kreis    = kr_ustron
     quelle   = "GeoNames (CC BY 4.0), geonameid 3081874; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7962
+        konfession   = { katholisch = 85 lutherisch = 13 juedisch = 2 }
+        kultur       = { polen = 70 schlesier = 30 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_schlesien
+        bund       = ja
     }
 }
 
@@ -605,9 +917,17 @@ ort szczyrk {
     kreis    = kr_ustron
     quelle   = "GeoNames (CC BY 4.0), geonameid 3083752; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9555
+        konfession   = { katholisch = 85 lutherisch = 13 juedisch = 2 }
+        kultur       = { polen = 70 schlesier = 30 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_schlesien
+        bund       = ja
     }
 }
 
@@ -620,9 +940,17 @@ ort jablunkau {
     kreis    = kr_ustron
     quelle   = "GeoNames (CC BY 4.0), geonameid 3074593; deutscher Name aus den GeoNames-Alternativnamen (heute Jablunkov); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12556
+        konfession   = { katholisch = 85 lutherisch = 13 juedisch = 2 }
+        kultur       = { polen = 70 schlesier = 30 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_schlesien
+        bund       = ja
     }
 }
 
@@ -635,8 +963,16 @@ ort istebna {
     kreis    = kr_ustron
     quelle   = "GeoNames (CC BY 4.0), geonameid 3097865; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9310
+        konfession   = { katholisch = 85 lutherisch = 13 juedisch = 2 }
+        kultur       = { polen = 70 schlesier = 30 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = AUT
-        bund     = ja
+        besitzer   = AUT
+        verwaltung = au_schlesien
+        bund       = ja
     }
 }

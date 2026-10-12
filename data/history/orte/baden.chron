@@ -19,9 +19,17 @@ ort karlsruhe {
     kreis    = kr_karlsruhe
     quelle   = "GeoNames (CC BY 4.0), geonameid 2892794; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 31035
+        konfession   = { katholisch = 65 lutherisch = 33 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_mittelrheinkreis
+        bund       = ja
     }
 }
 
@@ -34,9 +42,17 @@ ort bruchsal {
     kreis    = kr_karlsruhe
     quelle   = "GeoNames (CC BY 4.0), geonameid 2943560; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 17461
+        konfession   = { katholisch = 65 lutherisch = 33 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_mittelrheinkreis
+        bund       = ja
     }
 }
 
@@ -49,9 +65,17 @@ ort ettlingen {
     kreis    = kr_karlsruhe
     quelle   = "GeoNames (CC BY 4.0), geonameid 2928615; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 16449
+        konfession   = { katholisch = 65 lutherisch = 33 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_mittelrheinkreis
+        bund       = ja
     }
 }
 
@@ -64,9 +88,17 @@ ort eggenstein_leopoldshafen {
     kreis    = kr_karlsruhe
     quelle   = "GeoNames (CC BY 4.0), geonameid 2933101; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8856
+        konfession   = { katholisch = 65 lutherisch = 33 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_mittelrheinkreis
+        bund       = ja
     }
 }
 
@@ -79,9 +111,17 @@ ort oestringen {
     kreis    = kr_karlsruhe
     quelle   = "GeoNames (CC BY 4.0), geonameid 2856207; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12166
+        konfession   = { katholisch = 65 lutherisch = 33 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_mittelrheinkreis
+        bund       = ja
     }
 }
 
@@ -94,9 +134,17 @@ ort philippsburg {
     kreis    = kr_karlsruhe
     quelle   = "GeoNames (CC BY 4.0), geonameid 2853907; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10097
+        konfession   = { katholisch = 65 lutherisch = 33 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_mittelrheinkreis
+        bund       = ja
     }
 }
 
@@ -109,9 +157,17 @@ ort weingarten {
     kreis    = kr_karlsruhe
     quelle   = "GeoNames (CC BY 4.0), geonameid 2812197; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9518
+        konfession   = { katholisch = 65 lutherisch = 33 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_mittelrheinkreis
+        bund       = ja
     }
 }
 
@@ -124,9 +180,17 @@ ort zaisenhausen {
     kreis    = kr_karlsruhe
     quelle   = "GeoNames (CC BY 4.0), geonameid 2805283; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9766
+        konfession   = { katholisch = 65 lutherisch = 33 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_mittelrheinkreis
+        bund       = ja
     }
 }
 
@@ -139,9 +203,17 @@ ort pforzheim {
     kreis    = kr_pforzheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2853969; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 16856
+        konfession   = { katholisch = 65 lutherisch = 33 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_mittelrheinkreis
+        bund       = ja
     }
 }
 
@@ -154,9 +226,17 @@ ort muehlacker {
     kreis    = kr_pforzheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2868788; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 15640
+        konfession   = { lutherisch = 70 katholisch = 29 juedisch = 1 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = WUE
-        bund     = ja
+        besitzer   = WUE
+        verwaltung = wu_schwarzwaldkreis
+        bund       = ja
     }
 }
 
@@ -169,9 +249,17 @@ ort bretten {
     kreis    = kr_pforzheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2944200; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 15664
+        konfession   = { katholisch = 65 lutherisch = 33 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_mittelrheinkreis
+        bund       = ja
     }
 }
 
@@ -184,9 +272,17 @@ ort koenigsbach_stein {
     kreis    = kr_pforzheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 3206188; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12166
+        konfession   = { katholisch = 65 lutherisch = 33 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_mittelrheinkreis
+        bund       = ja
     }
 }
 
@@ -199,9 +295,17 @@ ort neuenbuerg {
     kreis    = kr_pforzheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2865812; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10286
+        konfession   = { lutherisch = 70 katholisch = 29 juedisch = 1 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = WUE
-        bund     = ja
+        besitzer   = WUE
+        verwaltung = wu_schwarzwaldkreis
+        bund       = ja
     }
 }
 
@@ -214,9 +318,17 @@ ort tiefenbronn {
     kreis    = kr_pforzheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2822401; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9352
+        konfession   = { katholisch = 65 lutherisch = 33 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_mittelrheinkreis
+        bund       = ja
     }
 }
 
@@ -229,9 +341,17 @@ ort baden_baden {
     kreis    = kr_baden_baden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953504; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 13279
+        konfession   = { katholisch = 65 lutherisch = 33 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_mittelrheinkreis
+        bund       = ja
     }
 }
 
@@ -244,9 +364,17 @@ ort rastatt {
     kreis    = kr_baden_baden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2850257; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12866
+        konfession   = { katholisch = 65 lutherisch = 33 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_mittelrheinkreis
+        bund       = ja
     }
 }
 
@@ -259,9 +387,17 @@ ort buehl {
     kreis    = kr_baden_baden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2941976; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10869
+        konfession   = { katholisch = 65 lutherisch = 33 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_mittelrheinkreis
+        bund       = ja
     }
 }
 
@@ -274,9 +410,17 @@ ort gaggenau {
     kreis    = kr_baden_baden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2923362; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10435
+        konfession   = { katholisch = 65 lutherisch = 33 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_mittelrheinkreis
+        bund       = ja
     }
 }
 
@@ -289,9 +433,17 @@ ort achern {
     kreis    = kr_baden_baden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2959686; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 14961
+        konfession   = { katholisch = 65 lutherisch = 33 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_mittelrheinkreis
+        bund       = ja
     }
 }
 
@@ -304,9 +456,17 @@ ort durmersheim {
     kreis    = kr_baden_baden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2934462; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9931
+        konfession   = { katholisch = 65 lutherisch = 33 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_mittelrheinkreis
+        bund       = ja
     }
 }
 
@@ -319,9 +479,17 @@ ort huegelsheim {
     kreis    = kr_baden_baden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2898004; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10221
+        konfession   = { katholisch = 65 lutherisch = 33 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_mittelrheinkreis
+        bund       = ja
     }
 }
 
@@ -334,9 +502,17 @@ ort forbach_baden {
     kreis    = kr_baden_baden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2925924; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6621
+        konfession   = { katholisch = 65 lutherisch = 33 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_mittelrheinkreis
+        bund       = ja
     }
 }
 
@@ -349,9 +525,17 @@ ort lichtenau_baden {
     kreis    = kr_baden_baden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2878140; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8442
+        konfession   = { katholisch = 65 lutherisch = 33 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_mittelrheinkreis
+        bund       = ja
     }
 }
 
@@ -364,9 +548,17 @@ ort biberach {
     kreis    = kr_baden_baden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2949426; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12977
+        konfession   = { katholisch = 65 lutherisch = 33 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_mittelrheinkreis
+        bund       = ja
     }
 }
 
@@ -379,9 +571,17 @@ ort offenburg {
     kreis    = kr_offenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2857798; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 16478
+        konfession   = { katholisch = 65 lutherisch = 33 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_mittelrheinkreis
+        bund       = ja
     }
 }
 
@@ -394,9 +594,17 @@ ort lahr {
     kreis    = kr_offenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2881885; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 14578
+        konfession   = { katholisch = 65 lutherisch = 33 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_mittelrheinkreis
+        bund       = ja
     }
 }
 
@@ -409,9 +617,17 @@ ort oberkirch {
     kreis    = kr_offenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2860080; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 13335
+        konfession   = { katholisch = 65 lutherisch = 33 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_mittelrheinkreis
+        bund       = ja
     }
 }
 
@@ -424,9 +640,17 @@ ort ettenheim {
     kreis    = kr_offenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2928659; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10842
+        konfession   = { katholisch = 65 lutherisch = 33 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_mittelrheinkreis
+        bund       = ja
     }
 }
 
@@ -439,9 +663,17 @@ ort willstaett {
     kreis    = kr_offenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2808493; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12994
+        konfession   = { katholisch = 65 lutherisch = 33 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_mittelrheinkreis
+        bund       = ja
     }
 }
 
@@ -454,9 +686,17 @@ ort gengenbach {
     kreis    = kr_offenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2921355; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8011
+        konfession   = { katholisch = 65 lutherisch = 33 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_mittelrheinkreis
+        bund       = ja
     }
 }
 
@@ -469,9 +709,17 @@ ort oppenau {
     kreis    = kr_offenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2857172; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10262
+        konfession   = { katholisch = 65 lutherisch = 33 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_mittelrheinkreis
+        bund       = ja
     }
 }
 
@@ -484,9 +732,17 @@ ort meissenheim {
     kreis    = kr_offenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2872149; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 13126
+        konfession   = { katholisch = 65 lutherisch = 33 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_mittelrheinkreis
+        bund       = ja
     }
 }
 
@@ -499,9 +755,17 @@ ort schuttertal {
     kreis    = kr_offenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2835597; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12183
+        konfession   = { katholisch = 65 lutherisch = 33 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_mittelrheinkreis
+        bund       = ja
     }
 }
 
@@ -514,9 +778,17 @@ ort oberharmersbach {
     kreis    = kr_offenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2860477; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10660
+        konfession   = { katholisch = 65 lutherisch = 33 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_mittelrheinkreis
+        bund       = ja
     }
 }
 
@@ -529,9 +801,17 @@ ort emmendingen {
     kreis    = kr_emmendingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2930523; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 14016
+        konfession   = { katholisch = 75 lutherisch = 23 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_oberrheinkreis
+        bund       = ja
     }
 }
 
@@ -544,9 +824,17 @@ ort waldkirch {
     kreis    = kr_emmendingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2814883; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11855
+        konfession   = { katholisch = 75 lutherisch = 23 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_oberrheinkreis
+        bund       = ja
     }
 }
 
@@ -559,9 +847,17 @@ ort furtwangen {
     kreis    = kr_emmendingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2923521; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12447
+        konfession   = { katholisch = 95 lutherisch = 5 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_seekreis
+        bund       = ja
     }
 }
 
@@ -574,9 +870,17 @@ ort elzach {
     kreis    = kr_emmendingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2930626; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11454
+        konfession   = { katholisch = 75 lutherisch = 23 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_oberrheinkreis
+        bund       = ja
     }
 }
 
@@ -589,9 +893,17 @@ ort sankt_maergen {
     kreis    = kr_emmendingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2841521; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10329
+        konfession   = { katholisch = 75 lutherisch = 23 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_oberrheinkreis
+        bund       = ja
     }
 }
 
@@ -604,9 +916,17 @@ ort villingen_schwenningen {
     kreis    = kr_villingen_schwenningen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2817220; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 20669
+        konfession   = { katholisch = 95 lutherisch = 5 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_seekreis
+        bund       = ja
     }
 }
 
@@ -619,9 +939,17 @@ ort sankt_georgen_im_schwarzwald {
     kreis    = kr_villingen_schwenningen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2841619; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10726
+        konfession   = { katholisch = 95 lutherisch = 5 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_seekreis
+        bund       = ja
     }
 }
 
@@ -634,9 +962,17 @@ ort niedereschach {
     kreis    = kr_villingen_schwenningen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2863457; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7862
+        konfession   = { katholisch = 95 lutherisch = 5 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_seekreis
+        bund       = ja
     }
 }
 
@@ -649,9 +985,17 @@ ort wolfach {
     kreis    = kr_villingen_schwenningen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2806946; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10991
+        konfession   = { katholisch = 65 lutherisch = 33 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_mittelrheinkreis
+        bund       = ja
     }
 }
 
@@ -664,9 +1008,17 @@ ort hornberg {
     kreis    = kr_villingen_schwenningen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2898876; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9667
+        konfession   = { katholisch = 65 lutherisch = 33 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_mittelrheinkreis
+        bund       = ja
     }
 }
 
@@ -679,9 +1031,17 @@ ort freiburg_im_breisgau {
     kreis    = kr_freiburg_im_breisgau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2925177; Name Freiburg im Breisgau aus den GeoNames-Alternativnamen (GeoNames: Freiburg); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 22753
+        konfession   = { katholisch = 75 lutherisch = 23 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_oberrheinkreis
+        bund       = ja
     }
 }
 
@@ -694,9 +1054,17 @@ ort breisach_am_rhein {
     kreis    = kr_freiburg_im_breisgau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2944800; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 20227
+        konfession   = { katholisch = 75 lutherisch = 23 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_oberrheinkreis
+        bund       = ja
     }
 }
 
@@ -709,9 +1077,17 @@ ort kirchzarten {
     kreis    = kr_freiburg_im_breisgau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2890328; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9600
+        konfession   = { katholisch = 75 lutherisch = 23 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_oberrheinkreis
+        bund       = ja
     }
 }
 
@@ -724,9 +1100,17 @@ ort schallstadt {
     kreis    = kr_freiburg_im_breisgau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2840526; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9518
+        konfession   = { katholisch = 75 lutherisch = 23 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_oberrheinkreis
+        bund       = ja
     }
 }
 
@@ -739,9 +1123,17 @@ ort boetzingen {
     kreis    = kr_freiburg_im_breisgau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2945740; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11338
+        konfession   = { katholisch = 75 lutherisch = 23 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_oberrheinkreis
+        bund       = ja
     }
 }
 
@@ -754,9 +1146,17 @@ ort muenstertal_schwarzwald {
     kreis    = kr_freiburg_im_breisgau
     quelle   = "GeoNames (CC BY 4.0), geonameid 6559224; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11256
+        konfession   = { katholisch = 75 lutherisch = 23 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_oberrheinkreis
+        bund       = ja
     }
 }
 
@@ -769,9 +1169,17 @@ ort hartheim {
     kreis    = kr_freiburg_im_breisgau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2910108; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8193
+        konfession   = { katholisch = 75 lutherisch = 23 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_oberrheinkreis
+        bund       = ja
     }
 }
 
@@ -784,9 +1192,17 @@ ort weisweil {
     kreis    = kr_freiburg_im_breisgau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2811691; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 17214
+        konfession   = { katholisch = 75 lutherisch = 23 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_oberrheinkreis
+        bund       = ja
     }
 }
 
@@ -799,9 +1215,17 @@ ort donaueschingen {
     kreis    = kr_donaueschingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2936267; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 24053
+        konfession   = { katholisch = 95 lutherisch = 5 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_seekreis
+        bund       = ja
     }
 }
 
@@ -814,9 +1238,17 @@ ort titisee_neustadt {
     kreis    = kr_donaueschingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2822083; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 15030
+        konfession   = { katholisch = 75 lutherisch = 23 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_oberrheinkreis
+        bund       = ja
     }
 }
 
@@ -829,9 +1261,17 @@ ort engen {
     kreis    = kr_donaueschingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2930201; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8938
+        konfession   = { katholisch = 95 lutherisch = 5 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_seekreis
+        bund       = ja
     }
 }
 
@@ -844,9 +1284,17 @@ ort loeffingen {
     kreis    = kr_donaueschingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2876461; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 14566
+        konfession   = { katholisch = 75 lutherisch = 23 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_oberrheinkreis
+        bund       = ja
     }
 }
 
@@ -859,9 +1307,17 @@ ort blumberg {
     kreis    = kr_donaueschingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2947584; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9336
+        konfession   = { katholisch = 95 lutherisch = 5 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_seekreis
+        bund       = ja
     }
 }
 
@@ -874,9 +1330,17 @@ ort wutoeschingen {
     kreis    = kr_donaueschingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2805419; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9733
+        konfession   = { katholisch = 75 lutherisch = 23 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_oberrheinkreis
+        bund       = ja
     }
 }
 
@@ -889,9 +1353,17 @@ ort jestetten {
     kreis    = kr_donaueschingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2894944; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 2715
+        konfession   = { katholisch = 75 lutherisch = 23 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_oberrheinkreis
+        bund       = ja
     }
 }
 
@@ -904,9 +1376,17 @@ ort stuehlingen {
     kreis    = kr_donaueschingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2825429; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6422
+        konfession   = { katholisch = 75 lutherisch = 23 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_oberrheinkreis
+        bund       = ja
     }
 }
 
@@ -919,9 +1399,17 @@ ort hohentengen {
     kreis    = kr_donaueschingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2901406; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 3443
+        konfession   = { katholisch = 75 lutherisch = 23 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_oberrheinkreis
+        bund       = ja
     }
 }
 
@@ -934,9 +1422,17 @@ ort tengen {
     kreis    = kr_donaueschingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2823515; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7813
+        konfession   = { katholisch = 95 lutherisch = 5 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_seekreis
+        bund       = ja
     }
 }
 
@@ -949,9 +1445,17 @@ ort konstanz {
     kreis    = kr_konstanz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2885679; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8400
+        konfession   = { katholisch = 95 lutherisch = 5 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_seekreis
+        bund       = ja
     }
 }
 
@@ -964,9 +1468,17 @@ ort singen {
     kreis    = kr_konstanz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2831924; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 14195
+        konfession   = { katholisch = 95 lutherisch = 5 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_seekreis
+        bund       = ja
     }
 }
 
@@ -979,9 +1491,17 @@ ort radolfzell {
     kreis    = kr_konstanz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2850954; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11223
+        konfession   = { katholisch = 95 lutherisch = 5 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_seekreis
+        bund       = ja
     }
 }
 
@@ -994,9 +1514,17 @@ ort stockach {
     kreis    = kr_konstanz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2826909; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12911
+        konfession   = { katholisch = 95 lutherisch = 5 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_seekreis
+        bund       = ja
     }
 }
 
@@ -1009,9 +1537,17 @@ ort allensbach {
     kreis    = kr_konstanz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2958429; Name nach GeoNames; Lage auf das nächste Landpixel gesetzt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6124
+        konfession   = { katholisch = 95 lutherisch = 5 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_seekreis
+        bund       = ja
     }
 }
 
@@ -1024,9 +1560,17 @@ ort oehningen {
     kreis    = kr_konstanz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2857610; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 2516
+        konfession   = { katholisch = 95 lutherisch = 5 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_seekreis
+        bund       = ja
     }
 }
 
@@ -1039,9 +1583,17 @@ ort gailingen {
     kreis    = kr_konstanz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2923315; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 2400
+        konfession   = { katholisch = 95 lutherisch = 5 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_seekreis
+        bund       = ja
     }
 }
 
@@ -1054,9 +1606,17 @@ ort waldshut_tiengen {
     kreis    = kr_waldshut_tiengen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2814791; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9182
+        konfession   = { katholisch = 75 lutherisch = 23 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_oberrheinkreis
+        bund       = ja
     }
 }
 
@@ -1069,9 +1629,17 @@ ort bad_saeckingen {
     kreis    = kr_waldshut_tiengen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953363; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 4039
+        konfession   = { katholisch = 75 lutherisch = 23 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_oberrheinkreis
+        bund       = ja
     }
 }
 
@@ -1084,9 +1652,17 @@ ort laufenburg {
     kreis    = kr_waldshut_tiengen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2880121; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 3112
+        konfession   = { katholisch = 75 lutherisch = 23 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_oberrheinkreis
+        bund       = ja
     }
 }
 
@@ -1099,9 +1675,17 @@ ort goerwihl {
     kreis    = kr_waldshut_tiengen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2918911; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9137
+        konfession   = { katholisch = 75 lutherisch = 23 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_oberrheinkreis
+        bund       = ja
     }
 }
 
@@ -1114,9 +1698,17 @@ ort todtnau {
     kreis    = kr_waldshut_tiengen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2821975; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 13176
+        konfession   = { katholisch = 75 lutherisch = 23 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_oberrheinkreis
+        bund       = ja
     }
 }
 
@@ -1129,9 +1721,17 @@ ort staufen {
     kreis    = kr_waldshut_tiengen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2829333; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 15824
+        konfession   = { katholisch = 75 lutherisch = 23 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_oberrheinkreis
+        bund       = ja
     }
 }
 
@@ -1144,9 +1744,17 @@ ort todtmoos {
     kreis    = kr_waldshut_tiengen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2821980; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12778
+        konfession   = { katholisch = 75 lutherisch = 23 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_oberrheinkreis
+        bund       = ja
     }
 }
 
@@ -1159,9 +1767,17 @@ ort loerrach {
     kreis    = kr_loerrach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2875881; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12870
+        konfession   = { katholisch = 75 lutherisch = 23 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_oberrheinkreis
+        bund       = ja
     }
 }
 
@@ -1174,9 +1790,17 @@ ort rheinfelden {
     kreis    = kr_loerrach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2847639; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7901
+        konfession   = { katholisch = 75 lutherisch = 23 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_oberrheinkreis
+        bund       = ja
     }
 }
 
@@ -1189,9 +1813,17 @@ ort schopfheim {
     kreis    = kr_loerrach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2836413; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 13639
+        konfession   = { katholisch = 75 lutherisch = 23 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_oberrheinkreis
+        bund       = ja
     }
 }
 
@@ -1204,9 +1836,17 @@ ort muellheim {
     kreis    = kr_loerrach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2867770; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10130
+        konfession   = { katholisch = 75 lutherisch = 23 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_oberrheinkreis
+        bund       = ja
     }
 }
 
@@ -1219,9 +1859,17 @@ ort efringen_kirchen {
     kreis    = kr_loerrach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2933274; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5628
+        konfession   = { katholisch = 75 lutherisch = 23 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_oberrheinkreis
+        bund       = ja
     }
 }
 
@@ -1234,8 +1882,16 @@ ort kandern {
     kreis    = kr_loerrach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2893237; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11388
+        konfession   = { katholisch = 75 lutherisch = 23 juedisch = 2 }
+        kultur       = { alemannen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAD
-        bund     = ja
+        besitzer   = BAD
+        verwaltung = bd_oberrheinkreis
+        bund       = ja
     }
 }

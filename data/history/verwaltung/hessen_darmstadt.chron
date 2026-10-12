@@ -1,0 +1,19 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+einheit hd_starkenburg {
+    name   = "Provinz Starkenburg"
+    art    = provinz
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit hd_oberhessen {
+    name   = "Provinz Oberhessen"
+    art    = provinz
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit hd_rheinhessen {
+    name   = "Provinz Rheinhessen"
+    art    = provinz
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}

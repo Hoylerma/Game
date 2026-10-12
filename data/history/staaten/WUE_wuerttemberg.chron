@@ -14,6 +14,12 @@ staat WUE {
         hauptstadt     = stuttgart
         regierungsform = konstitutionelle_monarchie
         konfession     = lutherisch
+        schatz         = 517800
+        kontribution   = 0.10
+        akzise         = 0.05
+        zoll           = 0.03
+        hofhaltung     = 431500
+        heer           = 7
         zollverein     = ja
     }
 }

@@ -19,9 +19,17 @@ ort buchholz_in_der_nordheide {
     kreis    = kr_buchholz_in_der_nordheide
     quelle   = "GeoNames (CC BY 4.0), geonameid 2942323; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7945
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_lueneburg
+        bund       = ja
     }
 }
 
@@ -34,9 +42,17 @@ ort winsen_luhe {
     kreis    = kr_buchholz_in_der_nordheide
     quelle   = "GeoNames (CC BY 4.0), geonameid 2807845; Name Winsen (Luhe) aus den GeoNames-Alternativnamen (GeoNames: Winsen); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10227
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_lueneburg
+        bund       = ja
     }
 }
 
@@ -49,9 +65,17 @@ ort neu_wulmstorf {
     kreis    = kr_buchholz_in_der_nordheide
     quelle   = "GeoNames (CC BY 4.0), geonameid 2863795; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7092
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_lueneburg
+        bund       = ja
     }
 }
 
@@ -64,9 +88,17 @@ ort tostedt {
     kreis    = kr_buchholz_in_der_nordheide
     quelle   = "GeoNames (CC BY 4.0), geonameid 2821736; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 2981
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_lueneburg
+        bund       = ja
     }
 }
 
@@ -79,9 +111,17 @@ ort salzhausen {
     kreis    = kr_buchholz_in_der_nordheide
     quelle   = "GeoNames (CC BY 4.0), geonameid 2842144; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 2217
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_lueneburg
+        bund       = ja
     }
 }
 
@@ -94,9 +134,17 @@ ort amelinghausen {
     kreis    = kr_buchholz_in_der_nordheide
     quelle   = "GeoNames (CC BY 4.0), geonameid 2956584; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 2359
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_lueneburg
+        bund       = ja
     }
 }
 
@@ -109,9 +157,17 @@ ort hollenstedt {
     kreis    = kr_buchholz_in_der_nordheide
     quelle   = "GeoNames (CC BY 4.0), geonameid 2900520; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 2644
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_lueneburg
+        bund       = ja
     }
 }
 
@@ -124,9 +180,17 @@ ort handeloh {
     kreis    = kr_buchholz_in_der_nordheide
     quelle   = "GeoNames (CC BY 4.0), geonameid 2910992; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 1802
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_lueneburg
+        bund       = ja
     }
 }
 
@@ -139,9 +203,17 @@ ort embsen {
     kreis    = kr_buchholz_in_der_nordheide
     quelle   = "GeoNames (CC BY 4.0), geonameid 2930602; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 3603
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_lueneburg
+        bund       = ja
     }
 }
 
@@ -154,9 +226,17 @@ ort hanstedt {
     kreis    = kr_buchholz_in_der_nordheide
     quelle   = "GeoNames (CC BY 4.0), geonameid 2910762; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 2320
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_lueneburg
+        bund       = ja
     }
 }
 
@@ -169,9 +249,17 @@ ort lueneburg {
     kreis    = kr_lueneburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2875115; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8738
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_lueneburg
+        bund       = ja
     }
 }
 
@@ -184,9 +272,17 @@ ort bad_bevensen {
     kreis    = kr_lueneburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2949511; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 3266
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_lueneburg
+        bund       = ja
     }
 }
 
@@ -199,9 +295,17 @@ ort bleckede {
     kreis    = kr_lueneburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2947894; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 4954
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_lueneburg
+        bund       = ja
     }
 }
 
@@ -214,9 +318,17 @@ ort bienenbuettel {
     kreis    = kr_lueneburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2949150; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 3111
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_lueneburg
+        bund       = ja
     }
 }
 
@@ -229,9 +341,17 @@ ort brietlingen {
     kreis    = kr_lueneburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2944093; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 3292
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_lueneburg
+        bund       = ja
     }
 }
 
@@ -244,9 +364,17 @@ ort dahlenburg {
     kreis    = kr_lueneburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2939426; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 3474
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_lueneburg
+        bund       = ja
     }
 }
 
@@ -259,9 +387,17 @@ ort neu_darchau {
     kreis    = kr_lueneburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2866046; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7920
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_lueneburg
+        bund       = ja
     }
 }
 
@@ -274,9 +410,17 @@ ort himbergen {
     kreis    = kr_lueneburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2904574; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 3422
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_lueneburg
+        bund       = ja
     }
 }
 
@@ -289,9 +433,17 @@ ort reinstorf {
     kreis    = kr_lueneburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2848689; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 3733
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_lueneburg
+        bund       = ja
     }
 }
 
@@ -304,9 +456,17 @@ ort soltau {
     kreis    = kr_soltau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2831486; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 4592
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_lueneburg
+        bund       = ja
     }
 }
 
@@ -319,9 +479,17 @@ ort schneverdingen {
     kreis    = kr_soltau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2837291; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 1776
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_lueneburg
+        bund       = ja
     }
 }
 
@@ -334,9 +502,17 @@ ort munster_lueneburg {
     kreis    = kr_soltau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2867542; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 2346
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_lueneburg
+        bund       = ja
     }
 }
 
@@ -349,9 +525,17 @@ ort bispingen {
     kreis    = kr_soltau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2948222; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 3163
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_lueneburg
+        bund       = ja
     }
 }
 
@@ -364,9 +548,17 @@ ort wietzendorf {
     kreis    = kr_soltau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2809085; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 1983
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_lueneburg
+        bund       = ja
     }
 }
 
@@ -379,9 +571,17 @@ ort neuenkirchen {
     kreis    = kr_soltau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2865637; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 1581
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_lueneburg
+        bund       = ja
     }
 }
 
@@ -394,9 +594,17 @@ ort luechow {
     kreis    = kr_luechow
     quelle   = "GeoNames (CC BY 4.0), geonameid 2875542; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7590
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_lueneburg
+        bund       = ja
     }
 }
 
@@ -409,9 +617,17 @@ ort dannenberg {
     kreis    = kr_luechow
     quelle   = "GeoNames (CC BY 4.0), geonameid 2938991; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5651
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_lueneburg
+        bund       = ja
     }
 }
 
@@ -424,9 +640,17 @@ ort clenze {
     kreis    = kr_luechow
     quelle   = "GeoNames (CC BY 4.0), geonameid 2939983; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6766
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_lueneburg
+        bund       = ja
     }
 }
 
@@ -439,9 +663,17 @@ ort rosche {
     kreis    = kr_luechow
     quelle   = "GeoNames (CC BY 4.0), geonameid 2845146; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 4122
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_lueneburg
+        bund       = ja
     }
 }
 
@@ -454,9 +686,17 @@ ort zernien {
     kreis    = kr_luechow
     quelle   = "GeoNames (CC BY 4.0), geonameid 2804729; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 4407
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_lueneburg
+        bund       = ja
     }
 }
 
@@ -469,9 +709,17 @@ ort gartow {
     kreis    = kr_luechow
     quelle   = "GeoNames (CC BY 4.0), geonameid 2922438; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5781
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_lueneburg
+        bund       = ja
     }
 }
 
@@ -484,9 +732,17 @@ ort uelzen {
     kreis    = kr_uelzen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2820456; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6868
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_lueneburg
+        bund       = ja
     }
 }
 
@@ -499,9 +755,17 @@ ort ebstorf {
     kreis    = kr_uelzen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2933817; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 3344
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_lueneburg
+        bund       = ja
     }
 }
 
@@ -514,9 +778,17 @@ ort suderburg {
     kreis    = kr_uelzen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2825180; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 4563
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_lueneburg
+        bund       = ja
     }
 }
 
@@ -529,9 +801,17 @@ ort wieren {
     kreis    = kr_uelzen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2809415; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6196
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_lueneburg
+        bund       = ja
     }
 }
 
@@ -544,9 +824,17 @@ ort eimke {
     kreis    = kr_uelzen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2931818; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 2126
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_lueneburg
+        bund       = ja
     }
 }
 
@@ -559,9 +847,17 @@ ort bad_fallingbostel {
     kreis    = kr_bad_fallingbostel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2927871; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 4550
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_lueneburg
+        bund       = ja
     }
 }
 
@@ -574,9 +870,17 @@ ort schwarmstedt {
     kreis    = kr_bad_fallingbostel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2835220; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5574
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_lueneburg
+        bund       = ja
     }
 }
 
@@ -589,9 +893,17 @@ ort hodenhagen {
     kreis    = kr_bad_fallingbostel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2902818; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5055
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_lueneburg
+        bund       = ja
     }
 }
 
@@ -604,9 +916,17 @@ ort rethem {
     kreis    = kr_bad_fallingbostel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2848051; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5314
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_lueneburg
+        bund       = ja
     }
 }
 
@@ -619,9 +939,17 @@ ort celle {
     kreis    = kr_celle
     quelle   = "GeoNames (CC BY 4.0), geonameid 2940213; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10823
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_lueneburg
+        bund       = ja
     }
 }
 
@@ -634,9 +962,17 @@ ort bergen_lueneburg {
     kreis    = kr_celle
     quelle   = "GeoNames (CC BY 4.0), geonameid 2950622; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 2463
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_lueneburg
+        bund       = ja
     }
 }
 
@@ -649,9 +985,17 @@ ort winsen_aller {
     kreis    = kr_celle
     quelle   = "GeoNames (CC BY 4.0), geonameid 2807846; Name Winsen (Aller) aus den GeoNames-Alternativnamen (GeoNames: Winsen); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6818
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_lueneburg
+        bund       = ja
     }
 }
 
@@ -664,9 +1008,17 @@ ort hermannsburg {
     kreis    = kr_celle
     quelle   = "GeoNames (CC BY 4.0), geonameid 2906015; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 2307
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_lueneburg
+        bund       = ja
     }
 }
 
@@ -679,9 +1031,17 @@ ort wathlingen {
     kreis    = kr_celle
     quelle   = "GeoNames (CC BY 4.0), geonameid 2813660; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 3396
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_lueneburg
+        bund       = ja
     }
 }
 
@@ -694,9 +1054,17 @@ ort lachendorf {
     kreis    = kr_celle
     quelle   = "GeoNames (CC BY 4.0), geonameid 2882028; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 3889
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_lueneburg
+        bund       = ja
     }
 }
 
@@ -709,9 +1077,17 @@ ort unterluess {
     kreis    = kr_celle
     quelle   = "GeoNames (CC BY 4.0), geonameid 2819117; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5263
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_lueneburg
+        bund       = ja
     }
 }
 
@@ -724,9 +1100,17 @@ ort eschede {
     kreis    = kr_celle
     quelle   = "GeoNames (CC BY 4.0), geonameid 2929122; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 4770
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_lueneburg
+        bund       = ja
     }
 }
 
@@ -739,9 +1123,17 @@ ort gifhorn {
     kreis    = kr_gifhorn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2920478; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8381
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_lueneburg
+        bund       = ja
     }
 }
 
@@ -754,9 +1146,17 @@ ort wittingen {
     kreis    = kr_gifhorn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2807257; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8788
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_lueneburg
+        bund       = ja
     }
 }
 
@@ -769,9 +1169,17 @@ ort meinersen {
     kreis    = kr_gifhorn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2872244; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5237
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_lueneburg
+        bund       = ja
     }
 }
 
@@ -784,9 +1192,17 @@ ort hankensbuettel {
     kreis    = kr_gifhorn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2910863; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5211
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_lueneburg
+        bund       = ja
     }
 }
 
@@ -799,9 +1215,17 @@ ort ruehen {
     kreis    = kr_gifhorn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2843272; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 4563
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_lueneburg
+        bund       = ja
     }
 }
 
@@ -814,9 +1238,17 @@ ort wesendorf {
     kreis    = kr_gifhorn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2810659; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7077
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_lueneburg
+        bund       = ja
     }
 }
 
@@ -829,9 +1261,17 @@ ort weyhausen {
     kreis    = kr_gifhorn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2809837; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 4926
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_lueneburg
+        bund       = ja
     }
 }
 
@@ -844,9 +1284,17 @@ ort brome {
     kreis    = kr_gifhorn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2943795; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6974
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_lueneburg
+        bund       = ja
     }
 }
 
@@ -858,6 +1306,13 @@ ort vordorf {
     stadt    = nein
     kreis    = kr_gifhorn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2816127; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1846.12.03 = {
+        bevoelkerung = 3708
+        konfession   = { lutherisch = 99 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
 
     1848.03.01 = {
         besitzer = BWO
@@ -874,8 +1329,16 @@ ort steinhorst {
     kreis    = kr_gifhorn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2827951; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5029
+        konfession   = { lutherisch = 85 katholisch = 12 reformiert = 2 juedisch = 1 }
+        kultur       = { niedersachsen = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = HAN
-        bund     = ja
+        besitzer   = HAN
+        verwaltung = hn_lueneburg
+        bund       = ja
     }
 }

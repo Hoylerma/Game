@@ -14,6 +14,13 @@ staat AUT {
         hauptstadt     = wien
         regierungsform = absolute_monarchie
         konfession     = katholisch
+        schatz         = 1157100
+        kontribution   = 0.12
+        akzise         = 0.05
+        zoll           = 0.03
+        hofhaltung     = 2892800
+        heer           = 10
+        schulden       = 17356000
         zollverein     = nein
     }
 

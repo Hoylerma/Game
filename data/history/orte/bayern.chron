@@ -18,9 +18,17 @@ ort straubing {
     kreis    = kr_straubing
     quelle   = "GeoNames (CC BY 4.0), geonameid 2826099; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12833
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -33,9 +41,17 @@ ort bogen {
     kreis    = kr_straubing
     quelle   = "GeoNames (CC BY 4.0), geonameid 2947026; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10798
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -48,9 +64,17 @@ ort wiesenfelden {
     kreis    = kr_straubing
     quelle   = "GeoNames (CC BY 4.0), geonameid 2809241; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 4677
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -63,9 +87,17 @@ ort oberschneiding {
     kreis    = kr_straubing
     quelle   = "GeoNames (CC BY 4.0), geonameid 2859129; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10375
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -78,9 +110,17 @@ ort aholfing {
     kreis    = kr_straubing
     quelle   = "GeoNames (CC BY 4.0), geonameid 2959143; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7118
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -93,9 +133,17 @@ ort deggendorf {
     kreis    = kr_deggendorf
     quelle   = "GeoNames (CC BY 4.0), geonameid 2938540; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7960
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -108,9 +156,17 @@ ort regen {
     kreis    = kr_deggendorf
     quelle   = "GeoNames (CC BY 4.0), geonameid 2849495; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 4663
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -123,9 +179,17 @@ ort plattling {
     kreis    = kr_deggendorf
     quelle   = "GeoNames (CC BY 4.0), geonameid 2853310; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6682
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -138,9 +202,17 @@ ort zwiesel {
     kreis    = kr_deggendorf
     quelle   = "GeoNames (CC BY 4.0), geonameid 2803537; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7573
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -153,9 +225,17 @@ ort viechtach {
     kreis    = kr_deggendorf
     quelle   = "GeoNames (CC BY 4.0), geonameid 2817483; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 4046
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -168,9 +248,17 @@ ort bodenmais {
     kreis    = kr_deggendorf
     quelle   = "GeoNames (CC BY 4.0), geonameid 2947120; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5048
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -183,9 +271,17 @@ ort bernried {
     kreis    = kr_deggendorf
     quelle   = "GeoNames (CC BY 4.0), geonameid 2949975; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5048
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -198,9 +294,17 @@ ort kirchberg_im_wald {
     kreis    = kr_deggendorf
     quelle   = "GeoNames (CC BY 4.0), geonameid 2890662; Name Kirchberg im Wald aus den GeoNames-Alternativnamen (GeoNames: Kirchberg); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6756
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -213,9 +317,17 @@ ort zachenberg {
     kreis    = kr_deggendorf
     quelle   = "GeoNames (CC BY 4.0), geonameid 2805354; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 4826
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -228,9 +340,17 @@ ort arnbruck {
     kreis    = kr_deggendorf
     quelle   = "GeoNames (CC BY 4.0), geonameid 2955527; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 3935
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -243,9 +363,17 @@ ort konzell {
     kreis    = kr_deggendorf
     quelle   = "GeoNames (CC BY 4.0), geonameid 2885671; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5160
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -258,9 +386,17 @@ ort sankt_englmar {
     kreis    = kr_deggendorf
     quelle   = "GeoNames (CC BY 4.0), geonameid 2930109; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 4789
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -273,9 +409,17 @@ ort ingolstadt {
     kreis    = kr_ingolstadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2895992; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 18445
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -288,9 +432,17 @@ ort neuburg_an_der_donau {
     kreis    = kr_ingolstadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2866070; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12520
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -303,9 +455,17 @@ ort kelheim {
     kreis    = kr_ingolstadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2891834; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11827
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -318,9 +478,17 @@ ort eichstaett {
     kreis    = kr_ingolstadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2932069; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12914
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -333,9 +501,17 @@ ort bad_abbach {
     kreis    = kr_ingolstadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953559; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6821
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -348,9 +524,17 @@ ort gaimersheim {
     kreis    = kr_ingolstadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2923305; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10812
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -363,9 +547,17 @@ ort karlshuld {
     kreis    = kr_ingolstadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2892810; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7424
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -378,9 +570,17 @@ ort riedenburg {
     kreis    = kr_ingolstadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2847231; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8872
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -393,9 +593,17 @@ ort rennertshofen {
     kreis    = kr_ingolstadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2848181; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8399
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -408,9 +616,17 @@ ort landau_an_der_isar {
     kreis    = kr_landau_an_der_isar
     quelle   = "GeoNames (CC BY 4.0), geonameid 2881650; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6682
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -423,9 +639,17 @@ ort reisbach {
     kreis    = kr_landau_an_der_isar
     quelle   = "GeoNames (CC BY 4.0), geonameid 2848621; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9002
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -438,9 +662,17 @@ ort eichendorf {
     kreis    = kr_landau_an_der_isar
     quelle   = "GeoNames (CC BY 4.0), geonameid 2932321; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6450
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -453,9 +685,17 @@ ort wallersdorf {
     kreis    = kr_landau_an_der_isar
     quelle   = "GeoNames (CC BY 4.0), geonameid 2814599; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5568
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -468,9 +708,17 @@ ort arnstorf {
     kreis    = kr_landau_an_der_isar
     quelle   = "GeoNames (CC BY 4.0), geonameid 2955429; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7935
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -483,9 +731,17 @@ ort hauzenberg {
     kreis    = kr_hauzenberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2908661; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 4826
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -498,9 +754,17 @@ ort freyung {
     kreis    = kr_hauzenberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2924850; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6305
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -513,9 +777,17 @@ ort waldkirchen {
     kreis    = kr_hauzenberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2814880; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 3935
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -528,9 +800,17 @@ ort grafenau {
     kreis    = kr_hauzenberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2918365; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5605
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -543,9 +823,17 @@ ort untergriesbach {
     kreis    = kr_hauzenberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2819497; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 4529
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -558,9 +846,17 @@ ort spiegelau {
     kreis    = kr_hauzenberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2835164; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7016
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -573,9 +869,17 @@ ort wegscheid {
     kreis    = kr_hauzenberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2813344; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5531
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -588,9 +892,17 @@ ort neureichenau {
     kreis    = kr_hauzenberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2864324; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8389
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -603,9 +915,17 @@ ort mauth {
     kreis    = kr_hauzenberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2872697; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7610
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -618,9 +938,17 @@ ort dingolfing {
     kreis    = kr_dingolfing
     quelle   = "GeoNames (CC BY 4.0), geonameid 2936909; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9382
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -633,9 +961,17 @@ ort essenbach {
     kreis    = kr_dingolfing
     quelle   = "GeoNames (CC BY 4.0), geonameid 2928804; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5754
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -648,9 +984,17 @@ ort ergoldsbach {
     kreis    = kr_dingolfing
     quelle   = "GeoNames (CC BY 4.0), geonameid 2929649; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5893
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -663,9 +1007,17 @@ ort geiselhoering {
     kreis    = kr_dingolfing
     quelle   = "GeoNames (CC BY 4.0), geonameid 2921736; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9531
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -678,9 +1030,17 @@ ort mengkofen {
     kreis    = kr_dingolfing
     quelle   = "GeoNames (CC BY 4.0), geonameid 2871950; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7331
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -693,9 +1053,17 @@ ort mallersdorf_pfaffenberg {
     kreis    = kr_dingolfing
     quelle   = "GeoNames (CC BY 4.0), geonameid 3206682; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5568
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -708,9 +1076,17 @@ ort woerth_an_der_isar {
     kreis    = kr_dingolfing
     quelle   = "GeoNames (CC BY 4.0), geonameid 2806079; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8027
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -723,9 +1099,17 @@ ort mainburg {
     kreis    = kr_mainburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2874252; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5754
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -738,9 +1122,17 @@ ort neustadt_an_der_donau {
     kreis    = kr_mainburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2864056; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8770
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -753,9 +1145,17 @@ ort wolnzach {
     kreis    = kr_mainburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2806339; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6171
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -768,9 +1168,17 @@ ort geisenfeld {
     kreis    = kr_mainburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2921713; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 4965
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -783,9 +1191,17 @@ ort rottenburg_an_der_laaber {
     kreis    = kr_mainburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2843728; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9234
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -798,9 +1214,17 @@ ort vohburg_an_der_donau {
     kreis    = kr_mainburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2816776; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11461
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -813,9 +1237,17 @@ ort reichertshofen {
     kreis    = kr_mainburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2849017; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7981
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -828,9 +1260,17 @@ ort au_in_der_hallertau {
     kreis    = kr_mainburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2954088; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 3991
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -843,9 +1283,17 @@ ort hoergertshausen {
     kreis    = kr_mainburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2899033; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5336
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -858,9 +1306,17 @@ ort obersuessbach {
     kreis    = kr_mainburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2858852; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7842
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -873,9 +1329,17 @@ ort train {
     kreis    = kr_mainburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2821633; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8027
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -888,9 +1352,17 @@ ort passau {
     kreis    = kr_passau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2855328; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12638
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -903,9 +1375,17 @@ ort osterhofen {
     kreis    = kr_passau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2856530; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8928
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -918,9 +1398,17 @@ ort vilshofen {
     kreis    = kr_passau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2817202; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8027
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -933,9 +1421,17 @@ ort fuerstenzell {
     kreis    = kr_passau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2923584; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6635
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -948,9 +1444,17 @@ ort hengersberg {
     kreis    = kr_passau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2906464; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7359
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -963,9 +1467,17 @@ ort hutthurm {
     kreis    = kr_passau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2896898; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6543
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -978,9 +1490,17 @@ ort aldersbach {
     kreis    = kr_passau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2958577; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7239
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -993,9 +1513,17 @@ ort schoellnach {
     kreis    = kr_passau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2837134; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6682
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -1008,9 +1536,17 @@ ort fuerstenstein {
     kreis    = kr_passau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2923595; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6682
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -1023,9 +1559,17 @@ ort landshut {
     kreis    = kr_landshut
     quelle   = "GeoNames (CC BY 4.0), geonameid 2881485; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12460
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -1038,9 +1582,17 @@ ort erding {
     kreis    = kr_landshut
     quelle   = "GeoNames (CC BY 4.0), geonameid 2929715; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12408
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -1053,9 +1605,17 @@ ort moosburg {
     kreis    = kr_landshut
     quelle   = "GeoNames (CC BY 4.0), geonameid 2869449; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6357
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -1068,9 +1628,17 @@ ort vilsheim {
     kreis    = kr_landshut
     quelle   = "GeoNames (CC BY 4.0), geonameid 2817204; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6775
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -1083,9 +1651,17 @@ ort berglern {
     kreis    = kr_landshut
     quelle   = "GeoNames (CC BY 4.0), geonameid 2950318; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6125
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -1098,9 +1674,17 @@ ort freising {
     kreis    = kr_freising
     quelle   = "GeoNames (CC BY 4.0), geonameid 2925034; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10330
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -1113,9 +1697,17 @@ ort unterschleissheim {
     kreis    = kr_freising
     quelle   = "GeoNames (CC BY 4.0), geonameid 2818766; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7015
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -1128,9 +1720,17 @@ ort neufahrn_bei_freising {
     kreis    = kr_freising
     quelle   = "GeoNames (CC BY 4.0), geonameid 2865376; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 4640
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -1143,9 +1743,17 @@ ort ismaning {
     kreis    = kr_freising
     quelle   = "GeoNames (CC BY 4.0), geonameid 2895643; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6357
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -1158,9 +1766,17 @@ ort allershausen {
     kreis    = kr_freising
     quelle   = "GeoNames (CC BY 4.0), geonameid 2958376; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5939
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -1173,9 +1789,17 @@ ort fahrenzhausen {
     kreis    = kr_freising
     quelle   = "GeoNames (CC BY 4.0), geonameid 2928116; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 3991
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -1188,9 +1812,17 @@ ort wolfersdorf {
     kreis    = kr_freising
     quelle   = "GeoNames (CC BY 4.0), geonameid 2806870; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5429
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -1203,9 +1835,17 @@ ort pocking {
     kreis    = kr_pocking
     quelle   = "GeoNames (CC BY 4.0), geonameid 2853065; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6543
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -1218,9 +1858,17 @@ ort pfarrkirchen {
     kreis    = kr_pocking
     quelle   = "GeoNames (CC BY 4.0), geonameid 2854179; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7869
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -1233,9 +1881,17 @@ ort eggenfelden {
     kreis    = kr_pocking
     quelle   = "GeoNames (CC BY 4.0), geonameid 2933115; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10904
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -1248,9 +1904,17 @@ ort simbach_am_inn {
     kreis    = kr_pocking
     quelle   = "GeoNames (CC BY 4.0), geonameid 2832043; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9466
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -1263,9 +1927,17 @@ ort bad_birnbach {
     kreis    = kr_pocking
     quelle   = "GeoNames (CC BY 4.0), geonameid 2948384; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9744
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -1278,9 +1950,17 @@ ort rotthalmuenster {
     kreis    = kr_pocking
     quelle   = "GeoNames (CC BY 4.0), geonameid 2843682; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6079
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -1293,9 +1973,17 @@ ort tann {
     kreis    = kr_pocking
     quelle   = "GeoNames (CC BY 4.0), geonameid 2824230; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10348
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -1308,9 +1996,17 @@ ort johanniskirchen {
     kreis    = kr_pocking
     quelle   = "GeoNames (CC BY 4.0), geonameid 2894771; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6728
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -1323,9 +2019,17 @@ ort dorfen {
     kreis    = kr_dorfen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2936103; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5290
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -1338,9 +2042,17 @@ ort vilsbiburg {
     kreis    = kr_dorfen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2817209; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10765
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -1353,9 +2065,17 @@ ort taufkirchen {
     kreis    = kr_dorfen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2823810; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5661
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -1368,9 +2088,17 @@ ort neumarkt_sankt_veit {
     kreis    = kr_dorfen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2864547; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5661
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -1383,9 +2111,17 @@ ort gangkofen {
     kreis    = kr_dorfen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2922716; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8677
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -1398,9 +2134,17 @@ ort velden {
     kreis    = kr_dorfen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2817719; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6960
+        konfession   = { katholisch = 100 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_niederbayern
+        bund       = ja
     }
 }
 
@@ -1413,9 +2157,17 @@ ort obertaufkirchen {
     kreis    = kr_dorfen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2858827; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5104
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -1428,9 +2180,17 @@ ort oberbergkirchen {
     kreis    = kr_dorfen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2861285; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5058
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -1443,9 +2203,17 @@ ort dachau {
     kreis    = kr_dachau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2939623; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12202
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -1458,9 +2226,17 @@ ort pfaffenhofen_an_der_ilm {
     kreis    = kr_dachau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2854386; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9825
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -1473,9 +2249,17 @@ ort schrobenhausen {
     kreis    = kr_dachau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2836084; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8027
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -1488,9 +2272,17 @@ ort markt_indersdorf {
     kreis    = kr_dachau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2873300; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6589
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -1503,9 +2295,17 @@ ort petershausen {
     kreis    = kr_dachau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2854646; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 4037
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -1518,9 +2318,17 @@ ort altomuenster {
     kreis    = kr_dachau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2956951; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6450
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -1533,9 +2341,17 @@ ort odelzhausen {
     kreis    = kr_dachau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2858149; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7007
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -1548,9 +2364,17 @@ ort gerolsbach {
     kreis    = kr_dachau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2920967; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6032
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -1563,9 +2387,17 @@ ort burghausen {
     kreis    = kr_burghausen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2941279; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7981
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -1578,9 +2410,17 @@ ort altoetting {
     kreis    = kr_burghausen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2956940; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9180
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -1593,9 +2433,17 @@ ort muehldorf {
     kreis    = kr_burghausen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2868506; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8914
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -1608,9 +2456,17 @@ ort garching_an_der_alz {
     kreis    = kr_burghausen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2922583; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7239
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -1623,9 +2479,17 @@ ort tittmoning {
     kreis    = kr_burghausen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2822075; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7981
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -1638,9 +2502,17 @@ ort fridolfing {
     kreis    = kr_burghausen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2924819; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5151
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -1653,9 +2525,17 @@ ort kraiburg_am_inn {
     kreis    = kr_burghausen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2884885; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7239
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -1668,9 +2548,17 @@ ort pleiskirchen {
     kreis    = kr_burghausen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2853253; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5800
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -1683,9 +2571,17 @@ ort muenchen {
     kreis    = kr_muenchen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2867714; Name München aus den GeoNames-Alternativnamen (GeoNames: Munich); Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 102819
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -1698,9 +2594,17 @@ ort ebersberg {
     kreis    = kr_muenchen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2933945; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9543
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -1713,9 +2617,17 @@ ort unterhaching {
     kreis    = kr_muenchen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2819465; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9523
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -1728,9 +2640,17 @@ ort vaterstetten {
     kreis    = kr_muenchen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2817818; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9166
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -1743,9 +2663,17 @@ ort hoehenkirchen_siegertsbrunn {
     kreis    = kr_muenchen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3205535; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7192
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -1758,9 +2686,17 @@ ort markt_schwaben {
     kreis    = kr_muenchen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2873285; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8074
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -1773,9 +2709,17 @@ ort altdorf {
     kreis    = kr_muenchen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2958032; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8352
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -1788,9 +2732,17 @@ ort assling_bayern {
     kreis    = kr_muenchen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2955007; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6171
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -1803,9 +2755,17 @@ ort isen {
     kreis    = kr_muenchen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2895702; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7239
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -1818,9 +2778,17 @@ ort glonn {
     kreis    = kr_muenchen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2919812; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6821
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -1833,9 +2801,17 @@ ort germering {
     kreis    = kr_germering
     quelle   = "GeoNames (CC BY 4.0), geonameid 2921039; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11465
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -1848,9 +2824,17 @@ ort fuerstenfeldbruck {
     kreis    = kr_germering
     quelle   = "GeoNames (CC BY 4.0), geonameid 2923625; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11110
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -1863,9 +2847,17 @@ ort starnberg {
     kreis    = kr_germering
     quelle   = "GeoNames (CC BY 4.0), geonameid 2829457; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7402
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -1878,9 +2870,17 @@ ort herrsching_am_ammersee {
     kreis    = kr_germering
     quelle   = "GeoNames (CC BY 4.0), geonameid 2905604; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5568
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -1893,9 +2893,17 @@ ort schaeftlarn {
     kreis    = kr_germering
     quelle   = "GeoNames (CC BY 4.0), geonameid 2840634; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7007
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -1908,9 +2916,17 @@ ort wessling {
     kreis    = kr_germering
     quelle   = "GeoNames (CC BY 4.0), geonameid 2810587; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6450
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -1923,9 +2939,17 @@ ort wasserburg_am_inn {
     kreis    = kr_wasserburg_am_inn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2813755; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7146
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -1938,9 +2962,17 @@ ort prien_am_chiemsee {
     kreis    = kr_wasserburg_am_inn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2852101; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5615
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -1953,9 +2985,17 @@ ort trostberg_an_der_alz {
     kreis    = kr_wasserburg_am_inn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2820964; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6728
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -1968,9 +3008,17 @@ ort aschau_im_chiemgau {
     kreis    = kr_wasserburg_am_inn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2863652; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5494
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -1983,9 +3031,17 @@ ort seeon_seebruck {
     kreis    = kr_wasserburg_am_inn
     quelle   = "GeoNames (CC BY 4.0), geonameid 3205634; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5986
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -1998,9 +3054,17 @@ ort grassau {
     kreis    = kr_wasserburg_am_inn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2917978; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5977
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -2013,9 +3077,17 @@ ort schnaitsee {
     kreis    = kr_wasserburg_am_inn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2837575; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7471
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -2028,9 +3100,17 @@ ort amerang {
     kreis    = kr_wasserburg_am_inn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2956570; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 4343
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -2043,9 +3123,17 @@ ort vogtareuth {
     kreis    = kr_wasserburg_am_inn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2816795; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9109
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -2058,9 +3146,17 @@ ort landsberg_am_lech {
     kreis    = kr_landsberg_am_lech
     quelle   = "GeoNames (CC BY 4.0), geonameid 2881509; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9691
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -2073,9 +3169,17 @@ ort geltendorf {
     kreis    = kr_landsberg_am_lech
     quelle   = "GeoNames (CC BY 4.0), geonameid 2921449; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 9837
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -2088,9 +3192,17 @@ ort vilgertshofen {
     kreis    = kr_landsberg_am_lech
     quelle   = "GeoNames (CC BY 4.0), geonameid 2817239; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8955
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -2103,9 +3215,17 @@ ort prittriching {
     kreis    = kr_landsberg_am_lech
     quelle   = "GeoNames (CC BY 4.0), geonameid 2851977; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5290
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -2118,9 +3238,17 @@ ort althegnenberg {
     kreis    = kr_landsberg_am_lech
     quelle   = "GeoNames (CC BY 4.0), geonameid 2957153; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6960
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -2133,9 +3261,17 @@ ort hurlach {
     kreis    = kr_landsberg_am_lech
     quelle   = "GeoNames (CC BY 4.0), geonameid 2897245; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 4269
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -2148,9 +3284,17 @@ ort traunstein {
     kreis    = kr_traunstein
     quelle   = "GeoNames (CC BY 4.0), geonameid 2821515; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10738
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -2163,9 +3307,17 @@ ort bad_reichenhall {
     kreis    = kr_traunstein
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953371; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10837
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -2178,9 +3330,17 @@ ort freilassing {
     kreis    = kr_traunstein
     quelle   = "GeoNames (CC BY 4.0), geonameid 2925080; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6543
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -2193,9 +3353,17 @@ ort bischofswiesen {
     kreis    = kr_traunstein
     quelle   = "GeoNames (CC BY 4.0), geonameid 2948265; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10468
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -2208,9 +3376,17 @@ ort teisendorf {
     kreis    = kr_traunstein
     quelle   = "GeoNames (CC BY 4.0), geonameid 2823611; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6608
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -2223,9 +3399,17 @@ ort ruhpolding {
     kreis    = kr_traunstein
     quelle   = "GeoNames (CC BY 4.0), geonameid 2843203; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8575
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -2238,9 +3422,17 @@ ort waging_am_see {
     kreis    = kr_traunstein
     quelle   = "GeoNames (CC BY 4.0), geonameid 2815484; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 4752
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -2253,9 +3445,17 @@ ort geretsried {
     kreis    = kr_geretsried
     quelle   = "GeoNames (CC BY 4.0), geonameid 2921139; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8262
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -2268,9 +3468,17 @@ ort wolfratshausen {
     kreis    = kr_geretsried
     quelle   = "GeoNames (CC BY 4.0), geonameid 2806768; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5104
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -2283,9 +3491,17 @@ ort penzberg {
     kreis    = kr_geretsried
     quelle   = "GeoNames (CC BY 4.0), geonameid 2854923; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6496
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -2298,9 +3514,17 @@ ort murnau_am_staffelsee {
     kreis    = kr_geretsried
     quelle   = "GeoNames (CC BY 4.0), geonameid 2867445; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 11136
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -2313,9 +3537,17 @@ ort tutzing {
     kreis    = kr_geretsried
     quelle   = "GeoNames (CC BY 4.0), geonameid 2820692; Name nach GeoNames; Lage auf das nächste Landpixel gesetzt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 3666
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -2328,9 +3560,17 @@ ort seeshaupt {
     kreis    = kr_geretsried
     quelle   = "GeoNames (CC BY 4.0), geonameid 2833590; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 4965
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -2343,9 +3583,17 @@ ort kochel {
     kreis    = kr_geretsried
     quelle   = "GeoNames (CC BY 4.0), geonameid 2886924; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8464
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -2358,9 +3606,17 @@ ort rosenheim {
     kreis    = kr_rosenheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2844988; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 12870
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -2373,9 +3629,17 @@ ort bad_aibling {
     kreis    = kr_rosenheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953558; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 4872
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -2388,9 +3652,17 @@ ort bruckmuehl {
     kreis    = kr_rosenheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2943408; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 4120
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -2403,9 +3675,17 @@ ort bad_feilnbach {
     kreis    = kr_rosenheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953460; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5011
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -2418,9 +3698,17 @@ ort oberaudorf {
     kreis    = kr_rosenheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2861374; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5717
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -2433,9 +3721,17 @@ ort neubeuern {
     kreis    = kr_rosenheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2866175; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 4900
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -2448,9 +3744,17 @@ ort bayrischzell {
     kreis    = kr_rosenheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2951824; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 3216
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -2463,9 +3767,17 @@ ort weilheim {
     kreis    = kr_weilheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2812515; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 10779
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -2478,9 +3790,17 @@ ort peiting {
     kreis    = kr_weilheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2855025; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8863
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -2493,9 +3813,17 @@ ort steingaden {
     kreis    = kr_weilheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2828089; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6979
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -2508,9 +3836,17 @@ ort wessobrunn {
     kreis    = kr_weilheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2810581; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5011
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -2523,9 +3859,17 @@ ort bad_toelz {
     kreis    = kr_bad_toelz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953324; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6172
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -2538,9 +3882,17 @@ ort miesbach {
     kreis    = kr_bad_toelz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2871198; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 7386
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -2553,9 +3905,17 @@ ort holzkirchen {
     kreis    = kr_bad_toelz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2899676; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6589
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -2568,9 +3928,17 @@ ort lenggries {
     kreis    = kr_bad_toelz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2878824; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8575
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -2583,9 +3951,17 @@ ort waakirchen {
     kreis    = kr_bad_toelz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2815804; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 4566
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -2598,9 +3974,17 @@ ort dietramszell {
     kreis    = kr_bad_toelz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2937073; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 5290
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -2613,9 +3997,17 @@ ort rottach_egern {
     kreis    = kr_bad_toelz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2843775; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8723
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -2628,9 +4020,17 @@ ort garmisch_partenkirchen {
     kreis    = kr_garmisch_partenkirchen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2922530; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 6117
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -2643,9 +4043,17 @@ ort mittenwald {
     kreis    = kr_garmisch_partenkirchen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2870482; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 2701
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -2658,9 +4066,17 @@ ort oberammergau {
     kreis    = kr_garmisch_partenkirchen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2861422; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 8464
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
 
@@ -2673,8 +4089,16 @@ ort kruen {
     kreis    = kr_garmisch_partenkirchen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2883236; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
+    1846.12.03 = {
+        bevoelkerung = 4580
+        konfession   = { katholisch = 99 lutherisch = 1 }
+        kultur       = { bayern = 100 }
+        verwuestung  = 0
+    }
+
     1848.03.01 = {
-        besitzer = BAV
-        bund     = ja
+        besitzer   = BAV
+        verwaltung = by_oberbayern
+        bund       = ja
     }
 }
