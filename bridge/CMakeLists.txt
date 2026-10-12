@@ -19,6 +19,10 @@ if(MSVC)
     endif()
     if(_uhrwerk_runtime)
         set_property(TARGET uhrwerk_core PROPERTY MSVC_RUNTIME_LIBRARY "${_uhrwerk_runtime}")
+        # zstd (seit M6) wird mit dem Kern gelinkt und braucht dieselbe Laufzeit.
+        if(TARGET libzstd_static)
+            set_property(TARGET libzstd_static PROPERTY MSVC_RUNTIME_LIBRARY "${_uhrwerk_runtime}")
+        endif()
     endif()
 endif()
 

@@ -34,6 +34,14 @@ struct StateAccess {
     /// Alle Felder des Zustands; Sim ist Simulation oder const Simulation.
     template <typename Sim, typename V> static void visit(Sim& sim, V& v);
 
+    /// Nach dem Lesen eines Spielstands (savegame.cpp): Protokoll und Startprüfsumme setzen,
+    /// abgeleitete Hilfsdaten aus dem gelesenen Zustand neu aufbauen.
+    static void finish_load(Simulation& sim, std::vector<LoggedCommand> log, std::uint64_t start_checksum) {
+        sim.command_log_ = std::move(log);
+        sim.start_checksum_ = start_checksum;
+        sim.rebuild_derived();
+    }
+
 private:
     /// Vektor: Länge, dann je Element enter/fn/leave.
     template <typename V, typename Vec, typename Fn>
@@ -185,8 +193,9 @@ public:
             d.prim_i64(name, year);
             d.prim_i64(name, month);
             d.prim_i64(name, day);
-            assign(x, Date{static_cast<std::int32_t>(year), static_cast<std::int32_t>(month),
-                           static_cast<std::int32_t>(day)});
+            narrow(name, x.year, year);
+            narrow(name, x.month, month);
+            narrow(name, x.day, day);
         } else if constexpr (std::is_same_v<U, std::string>) {
             std::string text = x;
             d.prim_text(name, text);
@@ -202,15 +211,15 @@ public:
         } else if constexpr (std::is_enum_v<U>) {
             auto raw = static_cast<std::uint64_t>(x);
             d.prim_u64(name, raw);
-            assign(x, static_cast<U>(raw));
+            narrow(name, x, raw);
         } else if constexpr (std::is_integral_v<U> && std::is_signed_v<U>) {
             auto raw = static_cast<std::int64_t>(x);
             d.prim_i64(name, raw);
-            assign(x, static_cast<U>(raw));
+            narrow(name, x, raw);
         } else if constexpr (std::is_integral_v<U>) {
             auto raw = static_cast<std::uint64_t>(x);
             d.prim_u64(name, raw);
-            assign(x, static_cast<U>(raw));
+            narrow(name, x, raw);
         } else {
             // std::array: Elemente ohne Längenangabe.
             for (auto& element : x) {
@@ -221,6 +230,8 @@ public:
 
     void enter(std::string_view, std::size_t) {}
     void leave() {}
+    /// Gelesener Wert passt nicht in den Feldtyp (nur Lesebesucher).
+    void out_of_range(std::string_view) {}
 
     template <typename Vec> bool size(std::string_view name, Vec& items, Extent extent) {
         std::uint64_t n = items.size();
@@ -236,6 +247,15 @@ private:
     template <typename T, typename U> static void assign(T& target, U&& value) {
         if constexpr (!std::is_const_v<T>) {
             target = std::forward<U>(value);
+        }
+    }
+    /// Ganzzahl in den Feldtyp übernehmen; Werte, die dabei nicht erhalten bleiben, meldet der Lesebesucher.
+    template <typename T, typename R> void narrow(std::string_view name, T& target, R raw) {
+        if constexpr (!std::is_const_v<T>) {
+            target = static_cast<T>(raw);
+            if (static_cast<R>(target) != raw) {
+                static_cast<Derived&>(*this).out_of_range(name);
+            }
         }
     }
 };

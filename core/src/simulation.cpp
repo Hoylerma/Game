@@ -58,6 +58,13 @@ Simulation::Simulation(World world, SimConfig config)
     build_schedule();
     build_migration_targets();
     prepare_population_state();
+    start_checksum_ = checksum();
+}
+
+void Simulation::rebuild_derived() {
+    topology_ = build_economy_topology(world_);
+    build_schedule();
+    build_migration_targets();
 }
 
 void Simulation::build_schedule() {
@@ -179,6 +186,8 @@ void Simulation::prepare_population_state() {
 }
 
 void Simulation::submit(const Command& command) {
+    // Ein eingereihter Befehl wird beim nächsten Schritt ausgeführt, also am heutigen days_elapsed.
+    command_log_.push_back(LoggedCommand{days_elapsed_, command});
     pending_.push_back(command);
 }
 

@@ -53,6 +53,18 @@ struct Command {
     Index state = kNone;
     Fixed value;
     TaxKind kind = TaxKind::Kontribution; // SetTaxRate: welche Steuer (seit M5)
+
+    friend bool operator==(const Command&, const Command&) = default;
+};
+
+/// Eingereihter Befehl mit dem Tag, an dem er ausgeführt wird (days_elapsed beim Einreihen = vor dem
+/// Schritt), auch ungültige (seit M6, Befehlsprotokoll für Wiederholungen). Das Protokoll enthält
+/// damit auch die noch wartenden Befehle.
+struct LoggedCommand {
+    std::int64_t day = 0;
+    Command command;
+
+    friend bool operator==(const LoggedCommand&, const LoggedCommand&) = default;
 };
 
 class Simulation {
@@ -93,6 +105,14 @@ public:
     /// Textexport des Zustands (seit M6): eine Zeile je Feld des Zustandsverzeichnisses,
     /// "pfad = wert", in derselben Reihenfolge wie die Prüfsumme. Zum Vergleichen zweier Läufe (diff).
     std::string state_text() const;
+
+    /// Alle seit Partiebeginn eingereihten Befehle (seit M6), auch die noch wartenden. Kein
+    /// Simulationszustand: nicht in der Prüfsumme, aber im Spielstand.
+    const std::vector<LoggedCommand>& command_log() const { return command_log_; }
+
+    /// Prüfsumme des Startzustands der Partie (beim Laden aus dem Spielstand); Grundlage der
+    /// Wiederholung.
+    std::uint64_t start_checksum() const { return start_checksum_; }
 
 private:
     /// Zustandsverzeichnis (core/src/state_access.hpp): Prüfsumme, Textexport und Spielstände lesen
@@ -154,6 +174,9 @@ private:
     /// Füllt Momentaufnahmen, Bilanzen und Ortssteuern, wenn sie nicht zur Welt passen (Start
     /// aus dem Lader).
     void prepare_population_state();
+    /// Abgeleitete Hilfsdaten (Markttopologie, Rechentage, Wanderungsziele) neu aufbauen, z. B. nach
+    /// dem Laden eines Spielstands.
+    void rebuild_derived();
 
     World world_;
     SimConfig config_;
@@ -163,6 +186,8 @@ private:
     Pcg32 rng_economy_;
     Pcg32 rng_events_;
     std::int64_t days_elapsed_ = 0;
+    std::vector<LoggedCommand> command_log_;
+    std::uint64_t start_checksum_ = 0;
     EconomyTopology topology_; // abgeleitet: Märkte, Nachbarn, Betriebe je Beruf (seit M5)
 
     std::array<std::vector<Index>, 28> locations_by_day_; // Orte mit Blöcken je Rechentag, aufsteigend
