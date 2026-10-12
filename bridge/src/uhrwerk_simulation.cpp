@@ -12,6 +12,7 @@
 #include <godot_cpp/core/class_db.hpp>
 #include <godot_cpp/core/error_macros.hpp>
 #include <godot_cpp/variant/color.hpp>
+#include <optional>
 #include <string>
 #include <string_view>
 #include <unordered_map>
@@ -401,6 +402,8 @@ String UhrwerkSimulation::load_scenario(const String& data_path, const String& s
     uhrwerk::SimConfig config;
     config.seed = static_cast<std::uint64_t>(seed);
     simulation_ = std::make_unique<uhrwerk::Simulation>(std::move(*result.world), config);
+    player_tag_ = simulation_->world().scenario.player_tag;
+    content_ = uhrwerk::content_fingerprint(simulation_->world());
     build_lookups();
     return String();
 }
@@ -446,7 +449,7 @@ String UhrwerkSimulation::get_scenario_name() const {
 
 std::int64_t UhrwerkSimulation::get_player_state_index() const {
     const uhrwerk::World* w = world();
-    return w ? w->find_state(w->scenario.player_tag) : uhrwerk::kNone;
+    return w ? w->find_state(player_tag_) : uhrwerk::kNone;
 }
 
 std::int64_t UhrwerkSimulation::get_state_count() const {
@@ -862,6 +865,118 @@ String UhrwerkSimulation::get_checksum() const {
     return to_godot(text);
 }
 
+String UhrwerkSimulation::save_game(const String& path, std::int64_t player_state_index) const {
+    const uhrwerk::World* w = world();
+    if (!w) {
+        return "Keine Simulation geladen.";
+    }
+    const std::string tag =
+        valid_index(w->states, player_state_index) ? at(w->states, player_state_index).tag : player_tag_;
+    const std::filesystem::path file = to_path(path);
+    std::error_code ignored;
+    if (file.has_parent_path()) {
+        std::filesystem::create_directories(file.parent_path(), ignored);
+    }
+    std::string error;
+    if (!uhrwerk::write_file(file, uhrwerk::save_game(*simulation_, uhrwerk::SaveMeta{tag}), &error)) {
+        return to_godot(error);
+    }
+    return String();
+}
+
+String UhrwerkSimulation::load_game(const String& data_path, const String& path) {
+    std::string error;
+    const auto bytes = uhrwerk::read_file(to_path(path), &error);
+    if (!bytes) {
+        return to_godot(error);
+    }
+    const auto info = uhrwerk::read_save_info(*bytes, &error);
+    if (!info) {
+        return to_godot(error);
+    }
+    uhrwerk::LoadResult result = uhrwerk::load_world(to_path(data_path), info->scenario);
+    if (!result.ok()) {
+        String errors = "Die Spieldaten konnten nicht geladen werden.";
+        for (const uhrwerk::LoadIssue& issue : result.issues) {
+            if (issue.fatal) {
+                errors += "\n" + to_godot(issue.to_string());
+            }
+        }
+        return errors;
+    }
+    PackedStringArray warnings;
+    for (const uhrwerk::LoadIssue& issue : result.issues) {
+        if (!issue.fatal) {
+            warnings.push_back(to_godot(issue.to_string()));
+        }
+    }
+    uhrwerk::LoadedGame game = uhrwerk::load_game(*bytes, std::move(*result.world));
+    if (!game.ok()) {
+        return to_godot(game.error); // die laufende Simulation bleibt unverändert
+    }
+    simulation_ = std::make_unique<uhrwerk::Simulation>(std::move(*game.simulation));
+    load_warnings_ = warnings;
+    const uhrwerk::World& w = simulation_->world();
+    player_tag_ = w.find_state(info->player_tag) != uhrwerk::kNone ? info->player_tag : w.scenario.player_tag;
+    content_ = info->content;
+    build_lookups();
+    return String();
+}
+
+Dictionary UhrwerkSimulation::get_save_info(const String& path) const {
+    Dictionary result;
+    std::string error;
+    const auto bytes = uhrwerk::read_file(to_path(path), &error);
+    const auto info = bytes ? uhrwerk::read_save_info(*bytes, &error) : std::nullopt;
+    if (!info) {
+        result["ok"] = false;
+        result["compatible"] = false;
+        result["reason"] = to_godot(error);
+        return result;
+    }
+    result["ok"] = true;
+    result["format_version"] = static_cast<std::int64_t>(info->format_version);
+    result["game_version"] = to_godot(info->game_version);
+    result["scenario"] = to_godot(info->scenario);
+    Dictionary date;
+    date["year"] = info->date.year;
+    date["month"] = info->date.month;
+    date["day"] = info->date.day;
+    result["date"] = date;
+    result["date_text"] = to_godot(uhrwerk::format_date_long(info->date));
+    result["days"] = info->days;
+    result["player_tag"] = to_godot(info->player_tag);
+    String player_name = to_godot(info->player_tag);
+    if (const uhrwerk::World* w = world()) {
+        const uhrwerk::Index state = w->find_state(info->player_tag);
+        if (state != uhrwerk::kNone) {
+            player_name = to_godot(at(w->states, state).name);
+        }
+    }
+    result["player_name"] = player_name;
+    result["checksum"] = to_godot(uhrwerk::hex16(info->checksum));
+    if (!simulation_) {
+        result["compatible"] = false;
+        result["reason"] = "Keine Spieldaten geladen.";
+    } else if (info->content != content_) {
+        std::string parts;
+        for (const std::string_view part : uhrwerk::content_differences(info->content, content_)) {
+            parts += parts.empty() ? "" : ", ";
+            parts += part;
+        }
+        result["compatible"] = false;
+        result["reason"] = to_godot("Passt nicht zu den Spieldaten (abweichend: " + parts + ").");
+    } else {
+        result["compatible"] = true;
+        result["reason"] = String();
+    }
+    return result;
+}
+
+std::int64_t UhrwerkSimulation::get_save_format_version() const {
+    return uhrwerk::kSaveFormatVersion;
+}
+
 void UhrwerkSimulation::_bind_methods() {
     using godot::ClassDB;
 
@@ -911,6 +1026,11 @@ void UhrwerkSimulation::_bind_methods() {
     ClassDB::bind_method(D_METHOD("get_chronicle", "from_index"), &UhrwerkSimulation::get_chronicle);
 
     ClassDB::bind_method(D_METHOD("get_checksum"), &UhrwerkSimulation::get_checksum);
+
+    ClassDB::bind_method(D_METHOD("save_game", "path", "player_state_index"), &UhrwerkSimulation::save_game);
+    ClassDB::bind_method(D_METHOD("load_game", "data_path", "path"), &UhrwerkSimulation::load_game);
+    ClassDB::bind_method(D_METHOD("get_save_info", "path"), &UhrwerkSimulation::get_save_info);
+    ClassDB::bind_method(D_METHOD("get_save_format_version"), &UhrwerkSimulation::get_save_format_version);
 
     BIND_ENUM_CONSTANT(MAP_POLITICAL);
     BIND_ENUM_CONSTANT(MAP_DENSITY);

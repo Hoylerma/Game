@@ -209,7 +209,7 @@ TEST_CASE("Spielstand: beschädigte und fremde Dateien werden abgelehnt") {
     SUBCASE("ein Byte der Nutzdaten verändert") {
         for (const std::size_t from_end : {std::size_t{1}, std::size_t{100}, good.size() / 3}) {
             Bytes bytes = good;
-            bytes[bytes.size() - from_end] ^= 0x10;
+            bytes[bytes.size() - from_end] = static_cast<std::uint8_t>(bytes[bytes.size() - from_end] ^ 0x10);
             CHECK(contains(error_of(bytes), "beschädigt"));
         }
     }

@@ -237,10 +237,12 @@ public:
         std::uint64_t n = items.size();
         Derived& d = static_cast<Derived&>(*this);
         d.prim_u64(name, n);
+        // else statt eines zweiten return: MSVC meldet sonst unerreichbaren Code (C4702).
         if constexpr (!std::is_const_v<Vec>) {
             return d.resize(items, n, extent);
+        } else {
+            return true;
         }
-        return true;
     }
 
 private:
