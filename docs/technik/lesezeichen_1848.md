@@ -1,6 +1,8 @@
 # Lesezeichen 1848 „Völkerfrühling“ (Meilenstein M7)
 
-> **Status: Entwurf** zur Freigabe vor der Umsetzung
+> **Status: in Umsetzung** – Entscheidungen 1–7 wie empfohlen freigegeben; M7a Schritte a1–a4
+> umgesetzt, Stand in Abschnitt 13
+> 
 > ([meilensteine.md](../meilensteine.md#m7--lesezeichen-1848)). Grundlage sind
 > [04 Zeitrahmen, Epochen, Startdaten](../04_zeitrahmen_epochen_startdaten.md) (Lesezeichen 6),
 > [05 Karte und Geographie](../05_karte_und_geographie.md) (Abschnitte 2 und 8),
@@ -161,6 +163,11 @@ besitz.csv       neue Spalten verwaltung (Einheit der untersten Ebene ab dem Dat
   Fabrikarbeiter kommen mit M7b.
 - Umfang: rund 3.800 Orte im Bund und in den preußischen Ostprovinzen und Schleswig; zusammen etwa
   45 Millionen Einwohner (Größenordnung, zu prüfen).
+- **Umgesetzt** (`tools/geodaten/bevoelkerung_1846.py`): Statt der heutigen Gemeindezahlen allein
+  verteilt das Werkzeug die Summe je Raum (Provinz, Kronland oder Staat) nach Fläche, ländlichem
+  Dichtefaktor je Landschaft, Gelände und – für Städte ohne feste Zahl – einem gedämpften
+  Stadtgewicht aus der heutigen Einwohnerzahl; 167 Städte haben feste Werte (auch die damals
+  kleinen Industriestädte). Die neuen Kulturen waren schon seit M4 vorhanden. Berufe wie in M5.
 
 ## 8. Eisenbahnen und Industrie (M7b)
 
@@ -185,6 +192,8 @@ besitz.csv       neue Spalten verwaltung (Einheit der untersten Ebene ab dem Dat
   ohnehin. Kartenmodi „Verwaltung“ (M7a) und „Eisenbahnen“ (M7b).
 - **Leistung:** Etwa 3.800 Orte mit Daten statt 60 (rund 60.000 Blöcke) liegen weit unter dem
   Lasttest mit 500.000 Blöcken; das Einschwingen beim Laden wird länger (Messung in M7a).
+  Gemessen: 3.967 Orte, 82.491 Blöcke; Laden im Release-Build unter 1 s (Debug 12 s), 10 Spieljahre
+  im Debug-Build mit 4 Threads 20 s.
 
 ## 10. Tests und Abnahme
 
@@ -237,3 +246,19 @@ Szenarien; Klicktest mit der Staatswahl.
 | b2 | **Industrie und Haushalte 1848** | `wirtschaft --szenario voelkerfruehling` |
 | b3 | **Kalibrierung**, Zielwerte 1848, Balancing-Job | Bericht in der CI |
 | b4 | **Doku und Review** (Abschluss M7) | CI grün |
+
+## 13. Umsetzungsstand M7a
+
+| Schritt | Stand |
+|---|---|
+| a1 Staaten | 38 Staaten zum 1. März 1848 (31 neu, 7 aus 1648 fortgeführt mit datiertem Namen); Hauptstadt, Regierungsform, Herrscher (Wechsel 1848 datiert), Konfession, Zollverein. Staaten ohne Ort zum Startdatum bestehen nicht (Lader und Archivar). Spielwerte aus der Bevölkerung (Hofhaltung 0,25, Schatz 0,3 Taler je Einwohner), Kalibrierung in b3. |
+| a2 Zuordnung | `tools/geodaten/zuordnung.py` mit 476 Regeln: 3.967 Orte mit Besitzer, 575 Orte ohne Daten. Flächen nahe der Literatur (Preußen 275.000 km², Österreich im Bund 185.000, Bayern 77.600, Hannover 37.400, Württemberg 19.700, Sachsen 15.100, Baden 15.000). |
+| a3 Verwaltung | Modell, Lader, Archivar, Fingerabdruck und Brücke fertig; Daten: 8 preußische Provinzen, 11 Kronländer bzw. Kreise Österreichs, die oberste Ebene der Mittelstaaten, die drei Herzogtümer unter Dänemark (57 Einheiten). **Offen:** preußische Regierungsbezirke und Kreise, österreichische Kreise (Entscheidung 2 sieht sie vor). |
+| a4 Bevölkerung | `tools/geodaten/bevoelkerung_1846.py`: 45,0 Millionen Einwohner, Summen je Provinz, Kronland oder Staat. Ein Lauf über 10 Jahre verliert ohne Kalibrierung 1 % (Geburten 36,5 ‰, Sterbefälle 34,9 ‰); Zielwerte 1848 folgen in b3. |
+| a5 Godot | offen |
+| a6 Doku, Stichprobe | Doku der Werkzeuge und Tabellen fertig; Stichprobe und Review offen |
+
+**Quellen:** Die Domains der Quellen (Wikipedia, Wikidata, GenWiki/GOV, OpenHistoricalMap) waren in
+der Umgebung der Umsetzung trotz Freigabe nicht erreichbar. Alle historischen Angaben stammen daher
+aus dem Wissensstand ohne Quellenzugang und tragen `ungeprueft` (Staaten, Regeln, Summen, Städte)
+bzw. `schaetzung` (verteilte Einwohner); die Prüfung gegen Quellen steht vor der Abnahme an.

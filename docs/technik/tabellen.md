@@ -159,6 +159,20 @@ Je Staat, Datum und Feld höchstens eine Zeile.
 Die Spalte `kultur` wird von Hand gepflegt; `tools/geodaten/orte.py` übernimmt sie beim Neuerzeugen
 der Tabelle.
 
+## Eingaben für das Lesezeichen 1848 (seit M7)
+
+Diese Tabellen liest nicht der Archivar, sondern die Werkzeuge `tools/geodaten/zuordnung.py` und
+`bevoelkerung_1846.py` ([README](../../tools/geodaten/README.md#lesezeichen-1848-zuordnungpy-bevoelkerung_1846py)).
+Sie erzeugen daraus die Zeilen von `besitz.csv` zum 1848.03.01 und von `bevoelkerung.csv` zum
+1846.12.03; diese Zeilen nie von Hand ändern, sondern die Eingaben.
+
+| Tabelle | Spalten | Inhalt |
+|---|---|---|
+| `territorien_1848.csv` | `gebiet;staat;bund;verwaltung;sicherheit;quelle` | Regeln für Besitzer, Bundesgebiet und Verwaltung. `gebiet`: `ort:<kennung>`, heutiger Kreis `DE.15.00.16066`, Bezirk `DE.02.094`, `landschaft:<datei>`, Bundesland `DE.02`, Staat `DE`. Leere Felder setzen nichts; `staat = -` macht einen Ort ohne Daten, `verwaltung = -` hebt die Einheit auf. |
+| `einwohner_1846.csv` | `raum;einwohner;sicherheit;quelle` | Einwohnersumme je Raum: Verwaltungseinheit (`pr_rheinprovinz`) oder Staat (`BAV`). Ein Ort gehört zum ersten Raum seiner Verwaltungskette, sonst zu seinem Staat. |
+| `staedte_1846.csv` | `ort;einwohner;sicherheit;quelle` | feste Einwohnerzahl der Stadt; die Umgebung des Ortes kommt dazu |
+| `merkmale_1846.csv` | `gebiet;konfession;kultur;dichte;sicherheit;quelle` | Konfession und Kultur (Anteile wie in `bevoelkerung.csv`) und ländlicher Dichtefaktor; `gebiet` wie oben, dazu `verwaltung:<id>` und `staat:<TAG>`. Rang: Ort > Kreis > Bezirk > Landschaft > Verwaltung > Staat > Bundesland > Staat heute. Ohne Kultur gilt die Standardkultur der Landschaft. |
+
 ## Prüfungen des Archivars
 
 **Fehler** (Abbruch, Exitcode 2):
