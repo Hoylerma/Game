@@ -17,6 +17,11 @@ ort bad_arolsen {
     stadt    = nein
     kreis    = kr_bad_arolsen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2955421; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = WAL
+        bund     = ja
+    }
 }
 
 ort hofgeismar {
@@ -27,6 +32,11 @@ ort hofgeismar {
     stadt    = nein
     kreis    = kr_bad_arolsen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2902559; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HEK
+        bund     = ja
+    }
 }
 
 ort wolfhagen {
@@ -37,6 +47,11 @@ ort wolfhagen {
     stadt    = nein
     kreis    = kr_bad_arolsen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2806799; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HEK
+        bund     = ja
+    }
 }
 
 ort calden {
@@ -47,6 +62,11 @@ ort calden {
     stadt    = nein
     kreis    = kr_bad_arolsen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2940412; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HEK
+        bund     = ja
+    }
 }
 
 ort zierenberg {
@@ -57,6 +77,11 @@ ort zierenberg {
     stadt    = nein
     kreis    = kr_bad_arolsen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2804297; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HEK
+        bund     = ja
+    }
 }
 
 ort trendelburg {
@@ -67,6 +92,11 @@ ort trendelburg {
     stadt    = nein
     kreis    = kr_bad_arolsen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2821336; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HEK
+        bund     = ja
+    }
 }
 
 ort niedenstein {
@@ -77,6 +107,11 @@ ort niedenstein {
     stadt    = nein
     kreis    = kr_bad_arolsen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2863685; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HEK
+        bund     = ja
+    }
 }
 
 ort naumburg {
@@ -87,6 +122,11 @@ ort naumburg {
     stadt    = nein
     kreis    = kr_bad_arolsen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2866905; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HEK
+        bund     = ja
+    }
 }
 
 ort breuna {
@@ -97,6 +137,11 @@ ort breuna {
     stadt    = nein
     kreis    = kr_bad_arolsen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2944169; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HEK
+        bund     = ja
+    }
 }
 
 ort kassel {
@@ -107,6 +152,11 @@ ort kassel {
     stadt    = ja
     kreis    = kr_kassel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2892518; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HEK
+        bund     = ja
+    }
 }
 
 ort eschwege {
@@ -117,6 +167,11 @@ ort eschwege {
     stadt    = ja
     kreis    = kr_kassel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2928967; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HEK
+        bund     = ja
+    }
 }
 
 ort witzenhausen {
@@ -127,6 +182,11 @@ ort witzenhausen {
     stadt    = nein
     kreis    = kr_kassel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2807184; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HEK
+        bund     = ja
+    }
 }
 
 ort hessisch_lichtenau {
@@ -137,6 +197,11 @@ ort hessisch_lichtenau {
     stadt    = nein
     kreis    = kr_kassel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2905293; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HEK
+        bund     = ja
+    }
 }
 
 ort kaufungen {
@@ -147,6 +212,11 @@ ort kaufungen {
     stadt    = nein
     kreis    = kr_kassel
     quelle   = "GeoNames (CC BY 4.0), geonameid 3336895; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HEK
+        bund     = ja
+    }
 }
 
 ort bad_sooden_allendorf {
@@ -157,6 +227,11 @@ ort bad_sooden_allendorf {
     stadt    = nein
     kreis    = kr_kassel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953336; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HEK
+        bund     = ja
+    }
 }
 
 ort grossalmerode {
@@ -167,6 +242,11 @@ ort grossalmerode {
     stadt    = nein
     kreis    = kr_kassel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2917053; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HEK
+        bund     = ja
+    }
 }
 
 ort korbach {
@@ -177,6 +257,11 @@ ort korbach {
     stadt    = ja
     kreis    = kr_korbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2885536; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = WAL
+        bund     = ja
+    }
 }
 
 ort voehl {
@@ -187,6 +272,11 @@ ort voehl {
     stadt    = nein
     kreis    = kr_korbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2816769; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort waldeck {
@@ -197,6 +287,11 @@ ort waldeck {
     stadt    = nein
     kreis    = kr_korbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2815101; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = WAL
+        bund     = ja
+    }
 }
 
 ort willingen {
@@ -207,6 +302,11 @@ ort willingen {
     stadt    = nein
     kreis    = kr_korbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2808544; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = WAL
+        bund     = ja
+    }
 }
 
 ort bad_wildungen {
@@ -217,6 +317,11 @@ ort bad_wildungen {
     stadt    = nein
     kreis    = kr_bad_wildungen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953317; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = WAL
+        bund     = ja
+    }
 }
 
 ort homberg_efze {
@@ -227,6 +332,11 @@ ort homberg_efze {
     stadt    = ja
     kreis    = kr_bad_wildungen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2899478; Name Homberg (Efze) aus den GeoNames-Alternativnamen (GeoNames: Homberg); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HEK
+        bund     = ja
+    }
 }
 
 ort fritzlar {
@@ -237,6 +347,11 @@ ort fritzlar {
     stadt    = nein
     kreis    = kr_bad_wildungen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2924326; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HEK
+        bund     = ja
+    }
 }
 
 ort melsungen {
@@ -247,6 +362,11 @@ ort melsungen {
     stadt    = nein
     kreis    = kr_bad_wildungen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2872028; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HEK
+        bund     = ja
+    }
 }
 
 ort borken_kurhessen {
@@ -257,6 +377,11 @@ ort borken_kurhessen {
     stadt    = nein
     kreis    = kr_bad_wildungen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2946230; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HEK
+        bund     = ja
+    }
 }
 
 ort felsberg {
@@ -267,6 +392,11 @@ ort felsberg {
     stadt    = nein
     kreis    = kr_bad_wildungen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2927226; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HEK
+        bund     = ja
+    }
 }
 
 ort frielendorf {
@@ -277,6 +407,11 @@ ort frielendorf {
     stadt    = nein
     kreis    = kr_bad_wildungen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2924428; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HEK
+        bund     = ja
+    }
 }
 
 ort guxhagen {
@@ -287,6 +422,11 @@ ort guxhagen {
     stadt    = nein
     kreis    = kr_bad_wildungen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2913286; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HEK
+        bund     = ja
+    }
 }
 
 ort frankenberg_kurhessen {
@@ -297,6 +437,11 @@ ort frankenberg_kurhessen {
     stadt    = nein
     kreis    = kr_frankenberg_kurhessen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2925629; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HEK
+        bund     = ja
+    }
 }
 
 ort allendorf {
@@ -307,6 +452,11 @@ ort allendorf {
     stadt    = nein
     kreis    = kr_frankenberg_kurhessen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2958438; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HEK
+        bund     = ja
+    }
 }
 
 ort gilserberg {
@@ -317,6 +467,11 @@ ort gilserberg {
     stadt    = nein
     kreis    = kr_frankenberg_kurhessen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2920389; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HEK
+        bund     = ja
+    }
 }
 
 ort hatzfeld {
@@ -327,6 +482,11 @@ ort hatzfeld {
     stadt    = nein
     kreis    = kr_frankenberg_kurhessen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2909194; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort haina_kurhessen {
@@ -337,6 +497,11 @@ ort haina_kurhessen {
     stadt    = nein
     kreis    = kr_frankenberg_kurhessen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2911909; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HEK
+        bund     = ja
+    }
 }
 
 ort rosenthal {
@@ -347,6 +512,11 @@ ort rosenthal {
     stadt    = nein
     kreis    = kr_frankenberg_kurhessen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2844924; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HEK
+        bund     = ja
+    }
 }
 
 ort rotenburg_an_der_fulda {
@@ -357,6 +527,11 @@ ort rotenburg_an_der_fulda {
     stadt    = nein
     kreis    = kr_rotenburg_an_der_fulda
     quelle   = "GeoNames (CC BY 4.0), geonameid 2844434; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HEK
+        bund     = ja
+    }
 }
 
 ort sontra {
@@ -367,6 +542,11 @@ ort sontra {
     stadt    = nein
     kreis    = kr_rotenburg_an_der_fulda
     quelle   = "GeoNames (CC BY 4.0), geonameid 2831083; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HEK
+        bund     = ja
+    }
 }
 
 ort heringen {
@@ -377,6 +557,11 @@ ort heringen {
     stadt    = nein
     kreis    = kr_rotenburg_an_der_fulda
     quelle   = "GeoNames (CC BY 4.0), geonameid 2906088; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HEK
+        bund     = ja
+    }
 }
 
 ort waldkappel {
@@ -387,6 +572,11 @@ ort waldkappel {
     stadt    = nein
     kreis    = kr_rotenburg_an_der_fulda
     quelle   = "GeoNames (CC BY 4.0), geonameid 2814888; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HEK
+        bund     = ja
+    }
 }
 
 ort herleshausen {
@@ -397,6 +587,11 @@ ort herleshausen {
     stadt    = nein
     kreis    = kr_rotenburg_an_der_fulda
     quelle   = "GeoNames (CC BY 4.0), geonameid 2906050; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HEK
+        bund     = ja
+    }
 }
 
 ort friedewald {
@@ -407,6 +602,11 @@ ort friedewald {
     stadt    = nein
     kreis    = kr_rotenburg_an_der_fulda
     quelle   = "GeoNames (CC BY 4.0), geonameid 2924703; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HEK
+        bund     = ja
+    }
 }
 
 ort bad_hersfeld {
@@ -417,6 +617,11 @@ ort bad_hersfeld {
     stadt    = ja
     kreis    = kr_bad_hersfeld
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953439; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HEK
+        bund     = ja
+    }
 }
 
 ort huenfeld {
@@ -427,6 +632,11 @@ ort huenfeld {
     stadt    = nein
     kreis    = kr_bad_hersfeld
     quelle   = "GeoNames (CC BY 4.0), geonameid 2897436; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HEK
+        bund     = ja
+    }
 }
 
 ort willingshausen {
@@ -437,6 +647,11 @@ ort willingshausen {
     stadt    = nein
     kreis    = kr_bad_hersfeld
     quelle   = "GeoNames (CC BY 4.0), geonameid 2808533; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HEK
+        bund     = ja
+    }
 }
 
 ort niederaula {
@@ -447,6 +662,11 @@ ort niederaula {
     stadt    = nein
     kreis    = kr_bad_hersfeld
     quelle   = "GeoNames (CC BY 4.0), geonameid 2863638; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HEK
+        bund     = ja
+    }
 }
 
 ort eiterfeld {
@@ -457,6 +677,11 @@ ort eiterfeld {
     stadt    = nein
     kreis    = kr_bad_hersfeld
     quelle   = "GeoNames (CC BY 4.0), geonameid 2931372; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HEK
+        bund     = ja
+    }
 }
 
 ort neukirchen_kurhessen {
@@ -467,6 +692,11 @@ ort neukirchen_kurhessen {
     stadt    = nein
     kreis    = kr_bad_hersfeld
     quelle   = "GeoNames (CC BY 4.0), geonameid 2864748; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HEK
+        bund     = ja
+    }
 }
 
 ort oberaula {
@@ -477,6 +707,11 @@ ort oberaula {
     stadt    = nein
     kreis    = kr_bad_hersfeld
     quelle   = "GeoNames (CC BY 4.0), geonameid 2861358; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HEK
+        bund     = ja
+    }
 }
 
 ort fulda {
@@ -487,6 +722,11 @@ ort fulda {
     stadt    = ja
     kreis    = kr_fulda
     quelle   = "GeoNames (CC BY 4.0), geonameid 2923822; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HEK
+        bund     = ja
+    }
 }
 
 ort grossenlueder {
@@ -497,6 +737,11 @@ ort grossenlueder {
     stadt    = nein
     kreis    = kr_fulda
     quelle   = "GeoNames (CC BY 4.0), geonameid 2916606; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HEK
+        bund     = ja
+    }
 }
 
 ort flieden {
@@ -507,6 +752,11 @@ ort flieden {
     stadt    = nein
     kreis    = kr_fulda
     quelle   = "GeoNames (CC BY 4.0), geonameid 2926226; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HEK
+        bund     = ja
+    }
 }
 
 ort hofbieber {
@@ -517,6 +767,11 @@ ort hofbieber {
     stadt    = nein
     kreis    = kr_fulda
     quelle   = "GeoNames (CC BY 4.0), geonameid 2902731; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HEK
+        bund     = ja
+    }
 }
 
 ort gersfeld {
@@ -527,6 +782,11 @@ ort gersfeld {
     stadt    = nein
     kreis    = kr_fulda
     quelle   = "GeoNames (CC BY 4.0), geonameid 2920926; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort hilders {
@@ -537,6 +797,11 @@ ort hilders {
     stadt    = nein
     kreis    = kr_fulda
     quelle   = "GeoNames (CC BY 4.0), geonameid 2904791; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort hosenfeld {
@@ -547,4 +812,9 @@ ort hosenfeld {
     stadt    = nein
     kreis    = kr_fulda
     quelle   = "GeoNames (CC BY 4.0), geonameid 2898483; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HEK
+        bund     = ja
+    }
 }

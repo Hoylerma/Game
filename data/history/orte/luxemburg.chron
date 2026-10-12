@@ -37,6 +37,11 @@ ort clerf {
     stadt    = ja
     kreis    = kr_vielsalm
     quelle   = "GeoNames (CC BY 4.0), geonameid 2960684; deutscher Name aus den GeoNames-Alternativnamen (heute Clervaux); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = LUX
+        bund     = ja
+    }
 }
 
 ort weiswampach {
@@ -47,6 +52,11 @@ ort weiswampach {
     stadt    = nein
     kreis    = kr_vielsalm
     quelle   = "GeoNames (CC BY 4.0), geonameid 2959989; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = LUX
+        bund     = ja
+    }
 }
 
 ort marche_en_famenne {
@@ -237,6 +247,11 @@ ort diekirch {
     stadt    = ja
     kreis    = kr_arel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2960657; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = LUX
+        bund     = ja
+    }
 }
 
 ort echternach {
@@ -247,6 +262,11 @@ ort echternach {
     stadt    = ja
     kreis    = kr_arel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2960630; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = LUX
+        bund     = ja
+    }
 }
 
 ort grevenmacher {
@@ -257,6 +277,11 @@ ort grevenmacher {
     stadt    = ja
     kreis    = kr_arel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2960515; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = LUX
+        bund     = ja
+    }
 }
 
 ort wiltz {
@@ -267,6 +292,11 @@ ort wiltz {
     stadt    = ja
     kreis    = kr_arel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2959977; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = LUX
+        bund     = ja
+    }
 }
 
 ort mersch {
@@ -277,6 +307,11 @@ ort mersch {
     stadt    = ja
     kreis    = kr_arel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2960276; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = LUX
+        bund     = ja
+    }
 }
 
 ort vianden {
@@ -287,6 +322,11 @@ ort vianden {
     stadt    = ja
     kreis    = kr_arel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2960021; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = LUX
+        bund     = ja
+    }
 }
 
 ort redingen {
@@ -297,6 +337,11 @@ ort redingen {
     stadt    = ja
     kreis    = kr_arel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2960160; deutscher Name aus den GeoNames-Alternativnamen (heute Redange-sur-Attert); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = LUX
+        bund     = ja
+    }
 }
 
 ort befort {
@@ -307,6 +352,11 @@ ort befort {
     stadt    = nein
     kreis    = kr_arel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2960809; deutscher Name aus den GeoNames-Alternativnamen (heute Beaufort); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = LUX
+        bund     = ja
+    }
 }
 
 ort mertzig {
@@ -317,6 +367,11 @@ ort mertzig {
     stadt    = nein
     kreis    = kr_arel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2960270; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = LUX
+        bund     = ja
+    }
 }
 
 ort bauschleiden {
@@ -327,6 +382,11 @@ ort bauschleiden {
     stadt    = nein
     kreis    = kr_arel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2960737; deutscher Name aus den GeoNames-Alternativnamen (heute Boulaide); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = LUX
+        bund     = ja
+    }
 }
 
 ort luxemburg {
@@ -337,6 +397,11 @@ ort luxemburg {
     stadt    = ja
     kreis    = kr_luxemburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2960316; deutscher Name aus den GeoNames-Alternativnamen (heute Luxembourg); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = LUX
+        bund     = ja
+    }
 }
 
 ort esch_an_der_alzette {
@@ -347,6 +412,11 @@ ort esch_an_der_alzette {
     stadt    = ja
     kreis    = kr_luxemburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2960596; deutscher Name aus den GeoNames-Alternativnamen (heute Esch-sur-Alzette); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = LUX
+        bund     = ja
+    }
 }
 
 ort duedelingen {
@@ -357,6 +427,11 @@ ort duedelingen {
     stadt    = nein
     kreis    = kr_luxemburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2960634; deutscher Name aus den GeoNames-Alternativnamen (heute Dudelange); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = LUX
+        bund     = ja
+    }
 }
 
 ort remich {
@@ -367,6 +442,11 @@ ort remich {
     stadt    = ja
     kreis    = kr_luxemburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2960154; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = LUX
+        bund     = ja
+    }
 }
 
 ort petingen {
@@ -377,6 +457,11 @@ ort petingen {
     stadt    = nein
     kreis    = kr_luxemburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2960187; deutscher Name aus den GeoNames-Alternativnamen (heute Pétange); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = LUX
+        bund     = ja
+    }
 }
 
 ort capellen {
@@ -387,6 +472,11 @@ ort capellen {
     stadt    = ja
     kreis    = kr_luxemburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2960697; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = LUX
+        bund     = ja
+    }
 }
 
 ort niederanven {
@@ -397,6 +487,11 @@ ort niederanven {
     stadt    = nein
     kreis    = kr_luxemburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2960231; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = LUX
+        bund     = ja
+    }
 }
 
 ort aspelt {
@@ -407,6 +502,11 @@ ort aspelt {
     stadt    = nein
     kreis    = kr_luxemburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2960823; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = LUX
+        bund     = ja
+    }
 }
 
 ort virton {

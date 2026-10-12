@@ -35,6 +35,11 @@ ort erfurt {
         kultur       = { thueringer = 100 }
         verwuestung  = 0.4
     }
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort heiligenstadt {
@@ -52,6 +57,11 @@ ort heiligenstadt {
         konfession   = { katholisch = 90 lutherisch = 10 }
         kultur       = { thueringer = 100 }
         verwuestung  = 0.5
+    }
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -71,6 +81,11 @@ ort gotha {
         kultur       = { thueringer = 100 }
         verwuestung  = 0.45
     }
+
+    1848.03.01 = {
+        besitzer = SCG
+        bund     = ja
+    }
 }
 
 ort weimar {
@@ -88,6 +103,11 @@ ort weimar {
         konfession   = { lutherisch = 100 }
         kultur       = { thueringer = 100 }
         verwuestung  = 0.45
+    }
+
+    1848.03.01 = {
+        besitzer = WEI
+        bund     = ja
     }
 }
 
@@ -107,6 +127,11 @@ ort eisenach {
         kultur       = { thueringer = 100 }
         verwuestung  = 0.45
     }
+
+    1848.03.01 = {
+        besitzer = WEI
+        bund     = ja
+    }
 }
 
 ort altenburg {
@@ -124,6 +149,11 @@ ort altenburg {
         konfession   = { lutherisch = 100 }
         kultur       = { thueringer = 100 }
         verwuestung  = 0.45
+    }
+
+    1848.03.01 = {
+        besitzer = ALT
+        bund     = ja
     }
 }
 
@@ -143,6 +173,11 @@ ort sangerhausen {
         kultur       = { thueringer = 100 }
         verwuestung  = 0.5
     }
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort eisleben {
@@ -153,6 +188,11 @@ ort eisleben {
     stadt    = ja
     kreis    = kr_eisleben
     quelle   = "GeoNames (CC BY 4.0), geonameid 7284571; Name nach GeoNames ohne modernen Zusatz (Eisleben Lutherstadt); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort hettstedt {
@@ -163,6 +203,11 @@ ort hettstedt {
     stadt    = nein
     kreis    = kr_eisleben
     quelle   = "GeoNames (CC BY 4.0), geonameid 2905206; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort roeblingen_am_see {
@@ -173,6 +218,11 @@ ort roeblingen_am_see {
     stadt    = nein
     kreis    = kr_eisleben
     quelle   = "GeoNames (CC BY 4.0), geonameid 2846274; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort wippra {
@@ -183,6 +233,11 @@ ort wippra {
     stadt    = nein
     kreis    = kr_eisleben
     quelle   = "GeoNames (CC BY 4.0), geonameid 2807579; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort nordhausen {
@@ -193,6 +248,11 @@ ort nordhausen {
     stadt    = ja
     kreis    = kr_nordhausen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2861982; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort sondershausen {
@@ -203,6 +263,11 @@ ort sondershausen {
     stadt    = ja
     kreis    = kr_nordhausen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2831276; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = SSH
+        bund     = ja
+    }
 }
 
 ort bad_frankenhausen {
@@ -213,6 +278,11 @@ ort bad_frankenhausen {
     stadt    = nein
     kreis    = kr_nordhausen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953459; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = SRU
+        bund     = ja
+    }
 }
 
 ort ellrich {
@@ -223,6 +293,11 @@ ort ellrich {
     stadt    = nein
     kreis    = kr_nordhausen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2930900; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort bleicherode {
@@ -233,6 +308,11 @@ ort bleicherode {
     stadt    = nein
     kreis    = kr_nordhausen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2947837; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort kelbra {
@@ -243,6 +323,11 @@ ort kelbra {
     stadt    = nein
     kreis    = kr_nordhausen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2891844; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort weissenborn_luederode {
@@ -253,6 +338,11 @@ ort weissenborn_luederode {
     stadt    = nein
     kreis    = kr_nordhausen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2811927; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort wolkramshausen {
@@ -263,6 +353,11 @@ ort wolkramshausen {
     stadt    = nein
     kreis    = kr_nordhausen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2806453; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort rottleberode {
@@ -273,6 +368,11 @@ ort rottleberode {
     stadt    = nein
     kreis    = kr_nordhausen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2843667; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort leinefelde_worbis {
@@ -283,6 +383,11 @@ ort leinefelde_worbis {
     stadt    = nein
     kreis    = kr_heiligenstadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2879193; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort kuellstedt {
@@ -293,6 +398,11 @@ ort kuellstedt {
     stadt    = nein
     kreis    = kr_heiligenstadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2882597; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort geismar {
@@ -303,6 +413,11 @@ ort geismar {
     stadt    = nein
     kreis    = kr_heiligenstadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2921642; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort muehlhausen_thueringen {
@@ -313,6 +428,11 @@ ort muehlhausen_thueringen {
     stadt    = ja
     kreis    = kr_muehlhausen_thueringen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2867996; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort bad_langensalza {
@@ -323,6 +443,11 @@ ort bad_langensalza {
     stadt    = nein
     kreis    = kr_muehlhausen_thueringen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953413; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort schlotheim {
@@ -333,6 +458,11 @@ ort schlotheim {
     stadt    = nein
     kreis    = kr_muehlhausen_thueringen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2838240; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = SRU
+        bund     = ja
+    }
 }
 
 ort bad_tennstedt {
@@ -343,6 +473,11 @@ ort bad_tennstedt {
     stadt    = nein
     kreis    = kr_muehlhausen_thueringen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953325; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort menteroda {
@@ -353,6 +488,11 @@ ort menteroda {
     stadt    = nein
     kreis    = kr_muehlhausen_thueringen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2871884; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort soemmerda {
@@ -363,6 +503,11 @@ ort soemmerda {
     stadt    = ja
     kreis    = kr_soemmerda
     quelle   = "GeoNames (CC BY 4.0), geonameid 2831403; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort koelleda {
@@ -373,6 +518,11 @@ ort koelleda {
     stadt    = nein
     kreis    = kr_soemmerda
     quelle   = "GeoNames (CC BY 4.0), geonameid 2886363; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort artern {
@@ -383,6 +533,11 @@ ort artern {
     stadt    = nein
     kreis    = kr_soemmerda
     quelle   = "GeoNames (CC BY 4.0), geonameid 2955394; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort rossleben {
@@ -393,6 +548,11 @@ ort rossleben {
     stadt    = nein
     kreis    = kr_soemmerda
     quelle   = "GeoNames (CC BY 4.0), geonameid 2844651; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort greussen {
@@ -403,6 +563,11 @@ ort greussen {
     stadt    = nein
     kreis    = kr_soemmerda
     quelle   = "GeoNames (CC BY 4.0), geonameid 2917579; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = SSH
+        bund     = ja
+    }
 }
 
 ort nebra {
@@ -413,6 +578,11 @@ ort nebra {
     stadt    = nein
     kreis    = kr_soemmerda
     quelle   = "GeoNames (CC BY 4.0), geonameid 2866793; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort rastenberg {
@@ -423,6 +593,11 @@ ort rastenberg {
     stadt    = nein
     kreis    = kr_soemmerda
     quelle   = "GeoNames (CC BY 4.0), geonameid 2850248; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = WEI
+        bund     = ja
+    }
 }
 
 ort bad_bibra {
@@ -433,6 +608,11 @@ ort bad_bibra {
     stadt    = nein
     kreis    = kr_soemmerda
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953542; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort kindelbrueck {
@@ -443,6 +623,11 @@ ort kindelbrueck {
     stadt    = nein
     kreis    = kr_soemmerda
     quelle   = "GeoNames (CC BY 4.0), geonameid 2890880; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort treffurt {
@@ -453,6 +638,11 @@ ort treffurt {
     stadt    = nein
     kreis    = kr_eisenach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2821395; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort marksuhl {
@@ -463,6 +653,11 @@ ort marksuhl {
     stadt    = nein
     kreis    = kr_eisenach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2873318; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = WEI
+        bund     = ja
+    }
 }
 
 ort gerstungen {
@@ -473,6 +668,11 @@ ort gerstungen {
     stadt    = nein
     kreis    = kr_eisenach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2920883; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = WEI
+        bund     = ja
+    }
 }
 
 ort creuzburg {
@@ -483,6 +683,11 @@ ort creuzburg {
     stadt    = nein
     kreis    = kr_eisenach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2939754; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = WEI
+        bund     = ja
+    }
 }
 
 ort arnstadt {
@@ -493,6 +698,11 @@ ort arnstadt {
     stadt    = ja
     kreis    = kr_erfurt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2955439; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = SSH
+        bund     = ja
+    }
 }
 
 ort bad_berka {
@@ -503,6 +713,11 @@ ort bad_berka {
     stadt    = nein
     kreis    = kr_erfurt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953548; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = WEI
+        bund     = ja
+    }
 }
 
 ort berlstedt {
@@ -513,6 +728,11 @@ ort berlstedt {
     stadt    = nein
     kreis    = kr_erfurt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2950132; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = WEI
+        bund     = ja
+    }
 }
 
 ort elxleben {
@@ -523,6 +743,11 @@ ort elxleben {
     stadt    = nein
     kreis    = kr_erfurt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2930630; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort klettbach {
@@ -533,6 +758,11 @@ ort klettbach {
     stadt    = nein
     kreis    = kr_erfurt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2887857; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = SCG
+        bund     = ja
+    }
 }
 
 ort wandersleben {
@@ -543,6 +773,11 @@ ort wandersleben {
     stadt    = nein
     kreis    = kr_erfurt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2814313; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = SCG
+        bund     = ja
+    }
 }
 
 ort meiningen {
@@ -553,6 +788,11 @@ ort meiningen {
     stadt    = ja
     kreis    = kr_gotha
     quelle   = "GeoNames (CC BY 4.0), geonameid 2872225; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = SMG
+        bund     = ja
+    }
 }
 
 ort bad_salzungen {
@@ -563,6 +803,11 @@ ort bad_salzungen {
     stadt    = ja
     kreis    = kr_gotha
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953357; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = SMG
+        bund     = ja
+    }
 }
 
 ort schmalkalden {
@@ -573,6 +818,11 @@ ort schmalkalden {
     stadt    = nein
     kreis    = kr_gotha
     quelle   = "GeoNames (CC BY 4.0), geonameid 2838059; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HEK
+        bund     = ja
+    }
 }
 
 ort waltershausen {
@@ -583,6 +833,11 @@ ort waltershausen {
     stadt    = nein
     kreis    = kr_gotha
     quelle   = "GeoNames (CC BY 4.0), geonameid 2814392; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = SCG
+        bund     = ja
+    }
 }
 
 ort ruhla {
@@ -593,6 +848,11 @@ ort ruhla {
     stadt    = nein
     kreis    = kr_gotha
     quelle   = "GeoNames (CC BY 4.0), geonameid 2843258; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = WEI
+        bund     = ja
+    }
 }
 
 ort steinbach_hallenberg {
@@ -603,6 +863,11 @@ ort steinbach_hallenberg {
     stadt    = nein
     kreis    = kr_gotha
     quelle   = "GeoNames (CC BY 4.0), geonameid 2828723; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HEK
+        bund     = ja
+    }
 }
 
 ort breitungen {
@@ -613,6 +878,11 @@ ort breitungen {
     stadt    = nein
     kreis    = kr_gotha
     quelle   = "GeoNames (CC BY 4.0), geonameid 2944440; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HEK
+        bund     = ja
+    }
 }
 
 ort tambach_dietharz {
@@ -623,6 +893,11 @@ ort tambach_dietharz {
     stadt    = nein
     kreis    = kr_gotha
     quelle   = "GeoNames (CC BY 4.0), geonameid 2824285; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = SCG
+        bund     = ja
+    }
 }
 
 ort brotterode {
@@ -633,6 +908,11 @@ ort brotterode {
     stadt    = nein
     kreis    = kr_gotha
     quelle   = "GeoNames (CC BY 4.0), geonameid 2943697; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HEK
+        bund     = ja
+    }
 }
 
 ort haina_thueringen {
@@ -643,6 +923,11 @@ ort haina_thueringen {
     stadt    = nein
     kreis    = kr_gotha
     quelle   = "GeoNames (CC BY 4.0), geonameid 2911910; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = SCG
+        bund     = ja
+    }
 }
 
 ort jena {
@@ -653,6 +938,11 @@ ort jena {
     stadt    = ja
     kreis    = kr_jena
     quelle   = "GeoNames (CC BY 4.0), geonameid 2895044; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = WEI
+        bund     = ja
+    }
 }
 
 ort naumburg_an_der_saale {
@@ -663,6 +953,11 @@ ort naumburg_an_der_saale {
     stadt    = ja
     kreis    = kr_jena
     quelle   = "GeoNames (CC BY 4.0), geonameid 2866906; Name Naumburg an der Saale aus den GeoNames-Alternativnamen (GeoNames: Naumburg); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort apolda {
@@ -673,6 +968,11 @@ ort apolda {
     stadt    = ja
     kreis    = kr_jena
     quelle   = "GeoNames (CC BY 4.0), geonameid 2955770; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = WEI
+        bund     = ja
+    }
 }
 
 ort eisenberg {
@@ -683,6 +983,11 @@ ort eisenberg {
     stadt    = ja
     kreis    = kr_jena
     quelle   = "GeoNames (CC BY 4.0), geonameid 2931521; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = ALT
+        bund     = ja
+    }
 }
 
 ort hermsdorf {
@@ -693,6 +998,11 @@ ort hermsdorf {
     stadt    = nein
     kreis    = kr_jena
     quelle   = "GeoNames (CC BY 4.0), geonameid 2905916; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = ALT
+        bund     = ja
+    }
 }
 
 ort stadtroda {
@@ -703,6 +1013,11 @@ ort stadtroda {
     stadt    = nein
     kreis    = kr_jena
     quelle   = "GeoNames (CC BY 4.0), geonameid 2829750; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = ALT
+        bund     = ja
+    }
 }
 
 ort kahla {
@@ -713,6 +1028,11 @@ ort kahla {
     stadt    = nein
     kreis    = kr_jena
     quelle   = "GeoNames (CC BY 4.0), geonameid 2894247; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = ALT
+        bund     = ja
+    }
 }
 
 ort schkoelen {
@@ -723,6 +1043,11 @@ ort schkoelen {
     stadt    = nein
     kreis    = kr_jena
     quelle   = "GeoNames (CC BY 4.0), geonameid 2839049; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort bad_sulza {
@@ -733,6 +1058,11 @@ ort bad_sulza {
     stadt    = nein
     kreis    = kr_jena
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953330; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = WEI
+        bund     = ja
+    }
 }
 
 ort magdala {
@@ -743,6 +1073,11 @@ ort magdala {
     stadt    = nein
     kreis    = kr_jena
     quelle   = "GeoNames (CC BY 4.0), geonameid 2874556; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = WEI
+        bund     = ja
+    }
 }
 
 ort gera {
@@ -753,6 +1088,11 @@ ort gera {
     stadt    = ja
     kreis    = kr_gera
     quelle   = "GeoNames (CC BY 4.0), geonameid 2921232; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = REJ
+        bund     = ja
+    }
 }
 
 ort weissenfels {
@@ -763,6 +1103,11 @@ ort weissenfels {
     stadt    = ja
     kreis    = kr_gera
     quelle   = "GeoNames (CC BY 4.0), geonameid 2811899; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort zeitz {
@@ -773,6 +1118,11 @@ ort zeitz {
     stadt    = ja
     kreis    = kr_gera
     quelle   = "GeoNames (CC BY 4.0), geonameid 2804922; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort schmoelln {
@@ -783,6 +1133,11 @@ ort schmoelln {
     stadt    = nein
     kreis    = kr_gera
     quelle   = "GeoNames (CC BY 4.0), geonameid 2837652; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = ALT
+        bund     = ja
+    }
 }
 
 ort hohenmoelsen {
@@ -793,6 +1148,11 @@ ort hohenmoelsen {
     stadt    = nein
     kreis    = kr_gera
     quelle   = "GeoNames (CC BY 4.0), geonameid 2901601; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort meuselwitz {
@@ -803,6 +1163,11 @@ ort meuselwitz {
     stadt    = nein
     kreis    = kr_gera
     quelle   = "GeoNames (CC BY 4.0), geonameid 2871437; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = ALT
+        bund     = ja
+    }
 }
 
 ort luetzen {
@@ -813,6 +1178,11 @@ ort luetzen {
     stadt    = nein
     kreis    = kr_gera
     quelle   = "GeoNames (CC BY 4.0), geonameid 2874747; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort poelzig {
@@ -823,6 +1193,11 @@ ort poelzig {
     stadt    = nein
     kreis    = kr_gera
     quelle   = "GeoNames (CC BY 4.0), geonameid 2852789; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = ALT
+        bund     = ja
+    }
 }
 
 ort unterbreizbach {
@@ -833,6 +1208,11 @@ ort unterbreizbach {
     stadt    = nein
     kreis    = kr_unterbreizbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2819892; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = WEI
+        bund     = ja
+    }
 }
 
 ort geisa {
@@ -843,6 +1223,11 @@ ort geisa {
     stadt    = nein
     kreis    = kr_unterbreizbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2921816; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = WEI
+        bund     = ja
+    }
 }
 
 ort dermbach {
@@ -853,6 +1238,11 @@ ort dermbach {
     stadt    = nein
     kreis    = kr_unterbreizbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2938075; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = WEI
+        bund     = ja
+    }
 }
 
 ort kaltennordheim {
@@ -863,6 +1253,11 @@ ort kaltennordheim {
     stadt    = nein
     kreis    = kr_unterbreizbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2893534; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = WEI
+        bund     = ja
+    }
 }
 
 ort greiz {
@@ -873,6 +1268,11 @@ ort greiz {
     stadt    = ja
     kreis    = kr_greiz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2917737; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = REA
+        bund     = ja
+    }
 }
 
 ort zeulenroda {
@@ -883,6 +1283,11 @@ ort zeulenroda {
     stadt    = nein
     kreis    = kr_greiz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2804654; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = REA
+        bund     = ja
+    }
 }
 
 ort weida {
@@ -893,6 +1298,11 @@ ort weida {
     stadt    = nein
     kreis    = kr_greiz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2813110; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = WEI
+        bund     = ja
+    }
 }
 
 ort neustadt_an_der_orla {
@@ -903,6 +1313,11 @@ ort neustadt_an_der_orla {
     stadt    = nein
     kreis    = kr_greiz
     quelle   = "GeoNames (CC BY 4.0), geonameid 8354429; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = WEI
+        bund     = ja
+    }
 }
 
 ort triptis {
@@ -913,6 +1328,11 @@ ort triptis {
     stadt    = nein
     kreis    = kr_greiz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2821094; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = WEI
+        bund     = ja
+    }
 }
 
 ort muenchenbernsdorf {
@@ -923,6 +1343,11 @@ ort muenchenbernsdorf {
     stadt    = nein
     kreis    = kr_greiz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2867707; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = WEI
+        bund     = ja
+    }
 }
 
 ort seelingstaedt {
@@ -933,6 +1358,11 @@ ort seelingstaedt {
     stadt    = nein
     kreis    = kr_greiz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2833657; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = ALT
+        bund     = ja
+    }
 }
 
 ort saalfeld_thueringen {
@@ -943,6 +1373,11 @@ ort saalfeld_thueringen {
     stadt    = ja
     kreis    = kr_saalfeld_thueringen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2842688; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = SMG
+        bund     = ja
+    }
 }
 
 ort schleiz {
@@ -953,6 +1388,11 @@ ort schleiz {
     stadt    = ja
     kreis    = kr_saalfeld_thueringen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2838673; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = REJ
+        bund     = ja
+    }
 }
 
 ort rudolstadt {
@@ -963,6 +1403,11 @@ ort rudolstadt {
     stadt    = ja
     kreis    = kr_saalfeld_thueringen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2843355; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = SRU
+        bund     = ja
+    }
 }
 
 ort poessneck {
@@ -973,6 +1418,11 @@ ort poessneck {
     stadt    = nein
     kreis    = kr_saalfeld_thueringen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2852512; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = SMG
+        bund     = ja
+    }
 }
 
 ort bad_lobenstein {
@@ -983,6 +1433,11 @@ ort bad_lobenstein {
     stadt    = nein
     kreis    = kr_saalfeld_thueringen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2876721; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = REJ
+        bund     = ja
+    }
 }
 
 ort remptendorf {
@@ -993,6 +1448,11 @@ ort remptendorf {
     stadt    = nein
     kreis    = kr_saalfeld_thueringen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2848277; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = REJ
+        bund     = ja
+    }
 }
 
 ort leutenberg {
@@ -1003,6 +1463,11 @@ ort leutenberg {
     stadt    = nein
     kreis    = kr_saalfeld_thueringen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2878308; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = SRU
+        bund     = ja
+    }
 }
 
 ort tanna {
@@ -1013,6 +1478,11 @@ ort tanna {
     stadt    = nein
     kreis    = kr_saalfeld_thueringen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2824227; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = REJ
+        bund     = ja
+    }
 }
 
 ort suhl {
@@ -1023,6 +1493,11 @@ ort suhl {
     stadt    = ja
     kreis    = kr_suhl
     quelle   = "GeoNames (CC BY 4.0), geonameid 2824948; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort ilmenau {
@@ -1033,6 +1508,11 @@ ort ilmenau {
     stadt    = ja
     kreis    = kr_suhl
     quelle   = "GeoNames (CC BY 4.0), geonameid 2896514; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = WEI
+        bund     = ja
+    }
 }
 
 ort koenigsee {
@@ -1043,6 +1523,11 @@ ort koenigsee {
     stadt    = nein
     kreis    = kr_suhl
     quelle   = "GeoNames (CC BY 4.0), geonameid 2885895; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = SRU
+        bund     = ja
+    }
 }
 
 ort stadtilm {
@@ -1053,6 +1538,11 @@ ort stadtilm {
     stadt    = nein
     kreis    = kr_suhl
     quelle   = "GeoNames (CC BY 4.0), geonameid 2829765; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = SRU
+        bund     = ja
+    }
 }
 
 ort graefenroda {
@@ -1063,6 +1553,11 @@ ort graefenroda {
     stadt    = nein
     kreis    = kr_suhl
     quelle   = "GeoNames (CC BY 4.0), geonameid 2918282; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = SSH
+        bund     = ja
+    }
 }
 
 ort barchfeld {
@@ -1073,6 +1568,11 @@ ort barchfeld {
     stadt    = nein
     kreis    = kr_suhl
     quelle   = "GeoNames (CC BY 4.0), geonameid 2952833; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HEK
+        bund     = ja
+    }
 }
 
 ort sonneberg {
@@ -1083,6 +1583,11 @@ ort sonneberg {
     stadt    = ja
     kreis    = kr_sonneberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2831250; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = SMG
+        bund     = ja
+    }
 }
 
 ort hildburghausen {
@@ -1093,6 +1598,11 @@ ort hildburghausen {
     stadt    = nein
     kreis    = kr_sonneberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2904804; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = SMG
+        bund     = ja
+    }
 }
 
 ort neuhaus_am_rennweg {
@@ -1103,6 +1613,11 @@ ort neuhaus_am_rennweg {
     stadt    = nein
     kreis    = kr_sonneberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2865133; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = SMG
+        bund     = ja
+    }
 }
 
 ort eisfeld {
@@ -1113,6 +1628,11 @@ ort eisfeld {
     stadt    = nein
     kreis    = kr_sonneberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2931433; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = SMG
+        bund     = ja
+    }
 }
 
 ort schleusingen {
@@ -1123,6 +1643,11 @@ ort schleusingen {
     stadt    = nein
     kreis    = kr_sonneberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2838600; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort masserberg {
@@ -1133,6 +1658,11 @@ ort masserberg {
     stadt    = nein
     kreis    = kr_sonneberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2872980; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = SMG
+        bund     = ja
+    }
 }
 
 ort themar {
@@ -1143,6 +1673,11 @@ ort themar {
     stadt    = nein
     kreis    = kr_sonneberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2822868; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = SMG
+        bund     = ja
+    }
 }
 
 ort gleichamberg {
@@ -1153,6 +1688,11 @@ ort gleichamberg {
     stadt    = nein
     kreis    = kr_sonneberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2920002; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = SMG
+        bund     = ja
+    }
 }
 
 ort frauenwald {
@@ -1163,4 +1703,9 @@ ort frauenwald {
     stadt    = nein
     kreis    = kr_sonneberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2925286; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }

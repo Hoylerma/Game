@@ -17,6 +17,10 @@ ort venlo {
     stadt    = ja
     kreis    = kr_venlo
     quelle   = "GeoNames (CC BY 4.0), geonameid 2745641; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = NED
+    }
 }
 
 ort roermond {
@@ -27,6 +31,11 @@ ort roermond {
     stadt    = ja
     kreis    = kr_venlo
     quelle   = "GeoNames (CC BY 4.0), geonameid 2748000; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = NED
+        bund     = ja
+    }
 }
 
 ort weert {
@@ -37,6 +46,11 @@ ort weert {
     stadt    = ja
     kreis    = kr_venlo
     quelle   = "GeoNames (CC BY 4.0), geonameid 2744911; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = NED
+        bund     = ja
+    }
 }
 
 ort venray {
@@ -47,6 +61,11 @@ ort venray {
     stadt    = ja
     kreis    = kr_venlo
     quelle   = "GeoNames (CC BY 4.0), geonameid 2745634; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = NED
+        bund     = ja
+    }
 }
 
 ort gennep {
@@ -57,6 +76,11 @@ ort gennep {
     stadt    = nein
     kreis    = kr_venlo
     quelle   = "GeoNames (CC BY 4.0), geonameid 2755584; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = NED
+        bund     = ja
+    }
 }
 
 ort arcen {
@@ -67,6 +91,11 @@ ort arcen {
     stadt    = nein
     kreis    = kr_venlo
     quelle   = "GeoNames (CC BY 4.0), geonameid 2759684; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = NED
+        bund     = ja
+    }
 }
 
 ort heythuysen {
@@ -77,6 +106,11 @@ ort heythuysen {
     stadt    = nein
     kreis    = kr_venlo
     quelle   = "GeoNames (CC BY 4.0), geonameid 2754111; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = NED
+        bund     = ja
+    }
 }
 
 ort maasbracht {
@@ -87,6 +121,11 @@ ort maasbracht {
     stadt    = nein
     kreis    = kr_venlo
     quelle   = "GeoNames (CC BY 4.0), geonameid 2751303; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = NED
+        bund     = ja
+    }
 }
 
 ort meijel {
@@ -97,6 +136,11 @@ ort meijel {
     stadt    = nein
     kreis    = kr_venlo
     quelle   = "GeoNames (CC BY 4.0), geonameid 2750995; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = NED
+        bund     = ja
+    }
 }
 
 ort sevenum {
@@ -107,6 +151,11 @@ ort sevenum {
     stadt    = nein
     kreis    = kr_venlo
     quelle   = "GeoNames (CC BY 4.0), geonameid 2747382; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = NED
+        bund     = ja
+    }
 }
 
 ort offenbeek {
@@ -117,6 +166,11 @@ ort offenbeek {
     stadt    = nein
     kreis    = kr_venlo
     quelle   = "GeoNames (CC BY 4.0), geonameid 2749696; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = NED
+        bund     = ja
+    }
 }
 
 ort maestricht {
@@ -127,6 +181,10 @@ ort maestricht {
     stadt    = ja
     kreis    = kr_maestricht
     quelle   = "GeoNames (CC BY 4.0), geonameid 2751283; deutscher Name aus den GeoNames-Alternativnamen (heute Maastricht); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = NED
+    }
 }
 
 ort heerlen {
@@ -137,6 +195,11 @@ ort heerlen {
     stadt    = ja
     kreis    = kr_maestricht
     quelle   = "GeoNames (CC BY 4.0), geonameid 2754652; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = NED
+        bund     = ja
+    }
 }
 
 ort sittard {
@@ -147,6 +210,11 @@ ort sittard {
     stadt    = ja
     kreis    = kr_maestricht
     quelle   = "GeoNames (CC BY 4.0), geonameid 2747203; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = NED
+        bund     = ja
+    }
 }
 
 ort gulpen {
@@ -157,6 +225,11 @@ ort gulpen {
     stadt    = nein
     kreis    = kr_maestricht
     quelle   = "GeoNames (CC BY 4.0), geonameid 2755045; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = NED
+        bund     = ja
+    }
 }
 
 ort schimmert {
@@ -167,4 +240,9 @@ ort schimmert {
     stadt    = nein
     kreis    = kr_maestricht
     quelle   = "GeoNames (CC BY 4.0), geonameid 2747561; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = NED
+        bund     = ja
+    }
 }

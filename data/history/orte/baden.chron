@@ -18,6 +18,11 @@ ort karlsruhe {
     stadt    = ja
     kreis    = kr_karlsruhe
     quelle   = "GeoNames (CC BY 4.0), geonameid 2892794; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort bruchsal {
@@ -28,6 +33,11 @@ ort bruchsal {
     stadt    = ja
     kreis    = kr_karlsruhe
     quelle   = "GeoNames (CC BY 4.0), geonameid 2943560; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort ettlingen {
@@ -38,6 +48,11 @@ ort ettlingen {
     stadt    = ja
     kreis    = kr_karlsruhe
     quelle   = "GeoNames (CC BY 4.0), geonameid 2928615; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort eggenstein_leopoldshafen {
@@ -48,6 +63,11 @@ ort eggenstein_leopoldshafen {
     stadt    = nein
     kreis    = kr_karlsruhe
     quelle   = "GeoNames (CC BY 4.0), geonameid 2933101; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort oestringen {
@@ -58,6 +78,11 @@ ort oestringen {
     stadt    = nein
     kreis    = kr_karlsruhe
     quelle   = "GeoNames (CC BY 4.0), geonameid 2856207; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort philippsburg {
@@ -68,6 +93,11 @@ ort philippsburg {
     stadt    = nein
     kreis    = kr_karlsruhe
     quelle   = "GeoNames (CC BY 4.0), geonameid 2853907; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort weingarten {
@@ -78,6 +108,11 @@ ort weingarten {
     stadt    = nein
     kreis    = kr_karlsruhe
     quelle   = "GeoNames (CC BY 4.0), geonameid 2812197; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort zaisenhausen {
@@ -88,6 +123,11 @@ ort zaisenhausen {
     stadt    = nein
     kreis    = kr_karlsruhe
     quelle   = "GeoNames (CC BY 4.0), geonameid 2805283; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort pforzheim {
@@ -98,6 +138,11 @@ ort pforzheim {
     stadt    = ja
     kreis    = kr_pforzheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2853969; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort muehlacker {
@@ -108,6 +153,11 @@ ort muehlacker {
     stadt    = ja
     kreis    = kr_pforzheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2868788; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = WUE
+        bund     = ja
+    }
 }
 
 ort bretten {
@@ -118,6 +168,11 @@ ort bretten {
     stadt    = ja
     kreis    = kr_pforzheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2944200; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort koenigsbach_stein {
@@ -128,6 +183,11 @@ ort koenigsbach_stein {
     stadt    = nein
     kreis    = kr_pforzheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 3206188; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort neuenbuerg {
@@ -138,6 +198,11 @@ ort neuenbuerg {
     stadt    = nein
     kreis    = kr_pforzheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2865812; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = WUE
+        bund     = ja
+    }
 }
 
 ort tiefenbronn {
@@ -148,6 +213,11 @@ ort tiefenbronn {
     stadt    = nein
     kreis    = kr_pforzheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2822401; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort baden_baden {
@@ -158,6 +228,11 @@ ort baden_baden {
     stadt    = ja
     kreis    = kr_baden_baden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953504; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort rastatt {
@@ -168,6 +243,11 @@ ort rastatt {
     stadt    = ja
     kreis    = kr_baden_baden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2850257; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort buehl {
@@ -178,6 +258,11 @@ ort buehl {
     stadt    = ja
     kreis    = kr_baden_baden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2941976; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort gaggenau {
@@ -188,6 +273,11 @@ ort gaggenau {
     stadt    = ja
     kreis    = kr_baden_baden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2923362; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort achern {
@@ -198,6 +288,11 @@ ort achern {
     stadt    = ja
     kreis    = kr_baden_baden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2959686; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort durmersheim {
@@ -208,6 +303,11 @@ ort durmersheim {
     stadt    = nein
     kreis    = kr_baden_baden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2934462; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort huegelsheim {
@@ -218,6 +318,11 @@ ort huegelsheim {
     stadt    = nein
     kreis    = kr_baden_baden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2898004; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort forbach_baden {
@@ -228,6 +333,11 @@ ort forbach_baden {
     stadt    = nein
     kreis    = kr_baden_baden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2925924; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort lichtenau_baden {
@@ -238,6 +348,11 @@ ort lichtenau_baden {
     stadt    = nein
     kreis    = kr_baden_baden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2878140; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort biberach {
@@ -248,6 +363,11 @@ ort biberach {
     stadt    = nein
     kreis    = kr_baden_baden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2949426; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort offenburg {
@@ -258,6 +378,11 @@ ort offenburg {
     stadt    = ja
     kreis    = kr_offenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2857798; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort lahr {
@@ -268,6 +393,11 @@ ort lahr {
     stadt    = ja
     kreis    = kr_offenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2881885; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort oberkirch {
@@ -278,6 +408,11 @@ ort oberkirch {
     stadt    = ja
     kreis    = kr_offenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2860080; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort ettenheim {
@@ -288,6 +423,11 @@ ort ettenheim {
     stadt    = nein
     kreis    = kr_offenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2928659; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort willstaett {
@@ -298,6 +438,11 @@ ort willstaett {
     stadt    = nein
     kreis    = kr_offenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2808493; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort gengenbach {
@@ -308,6 +453,11 @@ ort gengenbach {
     stadt    = nein
     kreis    = kr_offenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2921355; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort oppenau {
@@ -318,6 +468,11 @@ ort oppenau {
     stadt    = nein
     kreis    = kr_offenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2857172; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort meissenheim {
@@ -328,6 +483,11 @@ ort meissenheim {
     stadt    = nein
     kreis    = kr_offenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2872149; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort schuttertal {
@@ -338,6 +498,11 @@ ort schuttertal {
     stadt    = nein
     kreis    = kr_offenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2835597; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort oberharmersbach {
@@ -348,6 +513,11 @@ ort oberharmersbach {
     stadt    = nein
     kreis    = kr_offenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2860477; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort emmendingen {
@@ -358,6 +528,11 @@ ort emmendingen {
     stadt    = ja
     kreis    = kr_emmendingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2930523; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort waldkirch {
@@ -368,6 +543,11 @@ ort waldkirch {
     stadt    = ja
     kreis    = kr_emmendingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2814883; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort furtwangen {
@@ -378,6 +558,11 @@ ort furtwangen {
     stadt    = nein
     kreis    = kr_emmendingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2923521; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort elzach {
@@ -388,6 +573,11 @@ ort elzach {
     stadt    = nein
     kreis    = kr_emmendingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2930626; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort sankt_maergen {
@@ -398,6 +588,11 @@ ort sankt_maergen {
     stadt    = nein
     kreis    = kr_emmendingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2841521; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort villingen_schwenningen {
@@ -408,6 +603,11 @@ ort villingen_schwenningen {
     stadt    = ja
     kreis    = kr_villingen_schwenningen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2817220; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort sankt_georgen_im_schwarzwald {
@@ -418,6 +618,11 @@ ort sankt_georgen_im_schwarzwald {
     stadt    = nein
     kreis    = kr_villingen_schwenningen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2841619; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort niedereschach {
@@ -428,6 +633,11 @@ ort niedereschach {
     stadt    = nein
     kreis    = kr_villingen_schwenningen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2863457; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort wolfach {
@@ -438,6 +648,11 @@ ort wolfach {
     stadt    = nein
     kreis    = kr_villingen_schwenningen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2806946; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort hornberg {
@@ -448,6 +663,11 @@ ort hornberg {
     stadt    = nein
     kreis    = kr_villingen_schwenningen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2898876; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort freiburg_im_breisgau {
@@ -458,6 +678,11 @@ ort freiburg_im_breisgau {
     stadt    = ja
     kreis    = kr_freiburg_im_breisgau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2925177; Name Freiburg im Breisgau aus den GeoNames-Alternativnamen (GeoNames: Freiburg); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort breisach_am_rhein {
@@ -468,6 +693,11 @@ ort breisach_am_rhein {
     stadt    = nein
     kreis    = kr_freiburg_im_breisgau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2944800; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort kirchzarten {
@@ -478,6 +708,11 @@ ort kirchzarten {
     stadt    = nein
     kreis    = kr_freiburg_im_breisgau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2890328; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort schallstadt {
@@ -488,6 +723,11 @@ ort schallstadt {
     stadt    = nein
     kreis    = kr_freiburg_im_breisgau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2840526; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort boetzingen {
@@ -498,6 +738,11 @@ ort boetzingen {
     stadt    = nein
     kreis    = kr_freiburg_im_breisgau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2945740; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort muenstertal_schwarzwald {
@@ -508,6 +753,11 @@ ort muenstertal_schwarzwald {
     stadt    = nein
     kreis    = kr_freiburg_im_breisgau
     quelle   = "GeoNames (CC BY 4.0), geonameid 6559224; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort hartheim {
@@ -518,6 +768,11 @@ ort hartheim {
     stadt    = nein
     kreis    = kr_freiburg_im_breisgau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2910108; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort weisweil {
@@ -528,6 +783,11 @@ ort weisweil {
     stadt    = nein
     kreis    = kr_freiburg_im_breisgau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2811691; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort donaueschingen {
@@ -538,6 +798,11 @@ ort donaueschingen {
     stadt    = ja
     kreis    = kr_donaueschingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2936267; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort titisee_neustadt {
@@ -548,6 +813,11 @@ ort titisee_neustadt {
     stadt    = nein
     kreis    = kr_donaueschingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2822083; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort engen {
@@ -558,6 +828,11 @@ ort engen {
     stadt    = nein
     kreis    = kr_donaueschingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2930201; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort loeffingen {
@@ -568,6 +843,11 @@ ort loeffingen {
     stadt    = nein
     kreis    = kr_donaueschingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2876461; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort blumberg {
@@ -578,6 +858,11 @@ ort blumberg {
     stadt    = nein
     kreis    = kr_donaueschingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2947584; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort wutoeschingen {
@@ -588,6 +873,11 @@ ort wutoeschingen {
     stadt    = nein
     kreis    = kr_donaueschingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2805419; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort jestetten {
@@ -598,6 +888,11 @@ ort jestetten {
     stadt    = nein
     kreis    = kr_donaueschingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2894944; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort stuehlingen {
@@ -608,6 +903,11 @@ ort stuehlingen {
     stadt    = nein
     kreis    = kr_donaueschingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2825429; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort hohentengen {
@@ -618,6 +918,11 @@ ort hohentengen {
     stadt    = nein
     kreis    = kr_donaueschingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2901406; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort tengen {
@@ -628,6 +933,11 @@ ort tengen {
     stadt    = nein
     kreis    = kr_donaueschingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2823515; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort konstanz {
@@ -638,6 +948,11 @@ ort konstanz {
     stadt    = ja
     kreis    = kr_konstanz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2885679; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort singen {
@@ -648,6 +963,11 @@ ort singen {
     stadt    = ja
     kreis    = kr_konstanz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2831924; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort radolfzell {
@@ -658,6 +978,11 @@ ort radolfzell {
     stadt    = ja
     kreis    = kr_konstanz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2850954; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort stockach {
@@ -668,6 +993,11 @@ ort stockach {
     stadt    = nein
     kreis    = kr_konstanz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2826909; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort allensbach {
@@ -678,6 +1008,11 @@ ort allensbach {
     stadt    = nein
     kreis    = kr_konstanz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2958429; Name nach GeoNames; Lage auf das nächste Landpixel gesetzt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort oehningen {
@@ -688,6 +1023,11 @@ ort oehningen {
     stadt    = nein
     kreis    = kr_konstanz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2857610; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort gailingen {
@@ -698,6 +1038,11 @@ ort gailingen {
     stadt    = nein
     kreis    = kr_konstanz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2923315; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort waldshut_tiengen {
@@ -708,6 +1053,11 @@ ort waldshut_tiengen {
     stadt    = ja
     kreis    = kr_waldshut_tiengen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2814791; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort bad_saeckingen {
@@ -718,6 +1068,11 @@ ort bad_saeckingen {
     stadt    = nein
     kreis    = kr_waldshut_tiengen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953363; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort laufenburg {
@@ -728,6 +1083,11 @@ ort laufenburg {
     stadt    = nein
     kreis    = kr_waldshut_tiengen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2880121; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort goerwihl {
@@ -738,6 +1098,11 @@ ort goerwihl {
     stadt    = nein
     kreis    = kr_waldshut_tiengen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2918911; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort todtnau {
@@ -748,6 +1113,11 @@ ort todtnau {
     stadt    = nein
     kreis    = kr_waldshut_tiengen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2821975; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort staufen {
@@ -758,6 +1128,11 @@ ort staufen {
     stadt    = nein
     kreis    = kr_waldshut_tiengen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2829333; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort todtmoos {
@@ -768,6 +1143,11 @@ ort todtmoos {
     stadt    = nein
     kreis    = kr_waldshut_tiengen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2821980; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort loerrach {
@@ -778,6 +1158,11 @@ ort loerrach {
     stadt    = ja
     kreis    = kr_loerrach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2875881; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort rheinfelden {
@@ -788,6 +1173,11 @@ ort rheinfelden {
     stadt    = ja
     kreis    = kr_loerrach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2847639; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort schopfheim {
@@ -798,6 +1188,11 @@ ort schopfheim {
     stadt    = nein
     kreis    = kr_loerrach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2836413; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort muellheim {
@@ -808,6 +1203,11 @@ ort muellheim {
     stadt    = nein
     kreis    = kr_loerrach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2867770; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort efringen_kirchen {
@@ -818,6 +1218,11 @@ ort efringen_kirchen {
     stadt    = nein
     kreis    = kr_loerrach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2933274; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort kandern {
@@ -828,4 +1233,9 @@ ort kandern {
     stadt    = nein
     kreis    = kr_loerrach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2893237; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }

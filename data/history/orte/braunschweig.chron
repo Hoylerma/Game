@@ -32,6 +32,11 @@ ort wolfenbuettel {
         kultur       = { niedersachsen = 100 }
         verwuestung  = 0.45
     }
+
+    1848.03.01 = {
+        besitzer = BWO
+        bund     = ja
+    }
 }
 
 ort braunschweig {
@@ -49,6 +54,11 @@ ort braunschweig {
         konfession   = { lutherisch = 100 }
         kultur       = { niedersachsen = 100 }
         verwuestung  = 0.25
+    }
+
+    1848.03.01 = {
+        besitzer = BWO
+        bund     = ja
     }
 }
 
@@ -68,6 +78,11 @@ ort helmstedt {
         kultur       = { niedersachsen = 100 }
         verwuestung  = 0.4
     }
+
+    1848.03.01 = {
+        besitzer = BWO
+        bund     = ja
+    }
 }
 
 ort peine {
@@ -78,6 +93,11 @@ ort peine {
     stadt    = ja
     kreis    = kr_peine
     quelle   = "GeoNames (CC BY 4.0), geonameid 2855047; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort vechelde {
@@ -88,6 +108,11 @@ ort vechelde {
     stadt    = nein
     kreis    = kr_peine
     quelle   = "GeoNames (CC BY 4.0), geonameid 2817813; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BWO
+        bund     = ja
+    }
 }
 
 ort hohenhameln {
@@ -98,6 +123,11 @@ ort hohenhameln {
     stadt    = nein
     kreis    = kr_peine
     quelle   = "GeoNames (CC BY 4.0), geonameid 2901731; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort wendeburg {
@@ -108,6 +138,11 @@ ort wendeburg {
     stadt    = nein
     kreis    = kr_peine
     quelle   = "GeoNames (CC BY 4.0), geonameid 2811317; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BWO
+        bund     = ja
+    }
 }
 
 ort koenigslutter_am_elm {
@@ -118,6 +153,11 @@ ort koenigslutter_am_elm {
     stadt    = nein
     kreis    = kr_braunschweig
     quelle   = "GeoNames (CC BY 4.0), geonameid 2885800; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BWO
+        bund     = ja
+    }
 }
 
 ort schoeningen {
@@ -128,6 +168,11 @@ ort schoeningen {
     stadt    = nein
     kreis    = kr_braunschweig
     quelle   = "GeoNames (CC BY 4.0), geonameid 2836543; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BWO
+        bund     = ja
+    }
 }
 
 ort cremlingen {
@@ -138,6 +183,11 @@ ort cremlingen {
     stadt    = nein
     kreis    = kr_braunschweig
     quelle   = "GeoNames (CC BY 4.0), geonameid 2939763; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BWO
+        bund     = ja
+    }
 }
 
 ort schoeppenstedt {
@@ -148,6 +198,11 @@ ort schoeppenstedt {
     stadt    = nein
     kreis    = kr_braunschweig
     quelle   = "GeoNames (CC BY 4.0), geonameid 2836396; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BWO
+        bund     = ja
+    }
 }
 
 ort lehre {
@@ -158,6 +213,11 @@ ort lehre {
     stadt    = nein
     kreis    = kr_braunschweig
     quelle   = "GeoNames (CC BY 4.0), geonameid 2879378; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BWO
+        bund     = ja
+    }
 }
 
 ort gross_twuelpstedt {
@@ -168,6 +228,11 @@ ort gross_twuelpstedt {
     stadt    = nein
     kreis    = kr_braunschweig
     quelle   = "GeoNames (CC BY 4.0), geonameid 2914932; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BWO
+        bund     = ja
+    }
 }
 
 ort goslar {
@@ -178,6 +243,11 @@ ort goslar {
     stadt    = ja
     kreis    = kr_wolfenbuettel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2918840; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort bad_harzburg {
@@ -188,6 +258,11 @@ ort bad_harzburg {
     stadt    = ja
     kreis    = kr_wolfenbuettel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953449; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BWO
+        bund     = ja
+    }
 }
 
 ort seesen {
@@ -198,6 +273,11 @@ ort seesen {
     stadt    = ja
     kreis    = kr_wolfenbuettel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2833592; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BWO
+        bund     = ja
+    }
 }
 
 ort clausthal_zellerfeld {
@@ -208,6 +288,11 @@ ort clausthal_zellerfeld {
     stadt    = nein
     kreis    = kr_wolfenbuettel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2939995; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort liebenburg {
@@ -218,6 +303,11 @@ ort liebenburg {
     stadt    = nein
     kreis    = kr_wolfenbuettel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2877969; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort braunlage {
@@ -228,6 +318,11 @@ ort braunlage {
     stadt    = nein
     kreis    = kr_wolfenbuettel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2945055; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BWO
+        bund     = ja
+    }
 }
 
 ort lutter_am_barenberge {
@@ -238,6 +333,11 @@ ort lutter_am_barenberge {
     stadt    = nein
     kreis    = kr_wolfenbuettel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2874832; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BWO
+        bund     = ja
+    }
 }
 
 ort boerssum {
@@ -248,6 +348,11 @@ ort boerssum {
     stadt    = nein
     kreis    = kr_wolfenbuettel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2946007; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BWO
+        bund     = ja
+    }
 }
 
 ort elbe {
@@ -258,6 +363,11 @@ ort elbe {
     stadt    = nein
     kreis    = kr_wolfenbuettel
     quelle   = "GeoNames (CC BY 4.0), geonameid 3208598; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BWO
+        bund     = ja
+    }
 }
 
 ort holzminden {
@@ -268,6 +378,11 @@ ort holzminden {
     stadt    = ja
     kreis    = kr_holzminden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2899601; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BWO
+        bund     = ja
+    }
 }
 
 ort stadtoldendorf {
@@ -278,6 +393,11 @@ ort stadtoldendorf {
     stadt    = nein
     kreis    = kr_holzminden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2829753; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BWO
+        bund     = ja
+    }
 }
 
 ort bodenwerder {
@@ -288,6 +408,11 @@ ort bodenwerder {
     stadt    = nein
     kreis    = kr_holzminden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2947092; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BWO
+        bund     = ja
+    }
 }
 
 ort eimen {
@@ -298,4 +423,9 @@ ort eimen {
     stadt    = nein
     kreis    = kr_holzminden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2931825; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BWO
+        bund     = ja
+    }
 }

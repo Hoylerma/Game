@@ -18,6 +18,11 @@ ort bad_neustadt_an_der_saale {
     stadt    = nein
     kreis    = kr_bad_neustadt_an_der_saale
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953389; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort bad_koenigshofen_im_grabfeld {
@@ -28,6 +33,11 @@ ort bad_koenigshofen_im_grabfeld {
     stadt    = nein
     kreis    = kr_bad_neustadt_an_der_saale
     quelle   = "GeoNames (CC BY 4.0), geonameid 2885829; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort muennerstadt {
@@ -38,6 +48,11 @@ ort muennerstadt {
     stadt    = nein
     kreis    = kr_bad_neustadt_an_der_saale
     quelle   = "GeoNames (CC BY 4.0), geonameid 2867571; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort mellrichstadt {
@@ -48,6 +63,11 @@ ort mellrichstadt {
     stadt    = nein
     kreis    = kr_bad_neustadt_an_der_saale
     quelle   = "GeoNames (CC BY 4.0), geonameid 2872047; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort bischofsheim_an_der_rhoen {
@@ -58,6 +78,11 @@ ort bischofsheim_an_der_rhoen {
     stadt    = nein
     kreis    = kr_bad_neustadt_an_der_saale
     quelle   = "GeoNames (CC BY 4.0), geonameid 2948287; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort massbach {
@@ -68,6 +93,11 @@ ort massbach {
     stadt    = nein
     kreis    = kr_bad_neustadt_an_der_saale
     quelle   = "GeoNames (CC BY 4.0), geonameid 2873011; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort oberelsbach {
@@ -78,6 +108,11 @@ ort oberelsbach {
     stadt    = nein
     kreis    = kr_bad_neustadt_an_der_saale
     quelle   = "GeoNames (CC BY 4.0), geonameid 2860932; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort fladungen {
@@ -88,6 +123,11 @@ ort fladungen {
     stadt    = nein
     kreis    = kr_bad_neustadt_an_der_saale
     quelle   = "GeoNames (CC BY 4.0), geonameid 2926402; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort wuelfershausen {
@@ -98,6 +138,11 @@ ort wuelfershausen {
     stadt    = nein
     kreis    = kr_bad_neustadt_an_der_saale
     quelle   = "GeoNames (CC BY 4.0), geonameid 2805928; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort bad_kissingen {
@@ -108,6 +153,11 @@ ort bad_kissingen {
     stadt    = ja
     kreis    = kr_bad_kissingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953424; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort karlstadt {
@@ -118,6 +168,11 @@ ort karlstadt {
     stadt    = ja
     kreis    = kr_bad_kissingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2892786; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort hammelburg {
@@ -128,6 +183,11 @@ ort hammelburg {
     stadt    = nein
     kreis    = kr_bad_kissingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2911214; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort gemuenden_am_main {
@@ -138,6 +198,11 @@ ort gemuenden_am_main {
     stadt    = nein
     kreis    = kr_bad_kissingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2921379; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort bad_brueckenau {
@@ -148,6 +213,11 @@ ort bad_brueckenau {
     stadt    = nein
     kreis    = kr_bad_kissingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953535; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort burkardroth {
@@ -158,6 +228,11 @@ ort burkardroth {
     stadt    = nein
     kreis    = kr_bad_kissingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2941034; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort oberthulba {
@@ -168,6 +243,11 @@ ort oberthulba {
     stadt    = nein
     kreis    = kr_bad_kissingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2858787; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort burgsinn {
@@ -178,6 +258,11 @@ ort burgsinn {
     stadt    = nein
     kreis    = kr_bad_kissingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2941159; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort wartmannsroth {
@@ -188,6 +273,11 @@ ort wartmannsroth {
     stadt    = nein
     kreis    = kr_bad_kissingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2813888; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort zeitlofs {
@@ -198,6 +288,11 @@ ort zeitlofs {
     stadt    = nein
     kreis    = kr_bad_kissingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2804925; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort motten {
@@ -208,6 +303,11 @@ ort motten {
     stadt    = nein
     kreis    = kr_bad_kissingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2868992; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort schweinfurt {
@@ -218,6 +318,11 @@ ort schweinfurt {
     stadt    = ja
     kreis    = kr_schweinfurt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2834498; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort werneck {
@@ -228,6 +333,11 @@ ort werneck {
     stadt    = nein
     kreis    = kr_schweinfurt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2810832; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort arnstein {
@@ -238,6 +348,11 @@ ort arnstein {
     stadt    = nein
     kreis    = kr_schweinfurt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2955431; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort bergtheim {
@@ -248,6 +363,11 @@ ort bergtheim {
     stadt    = nein
     kreis    = kr_schweinfurt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2950249; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort wasserlosen {
@@ -258,6 +378,11 @@ ort wasserlosen {
     stadt    = nein
     kreis    = kr_schweinfurt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2813723; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort hassfurt {
@@ -268,6 +393,11 @@ ort hassfurt {
     stadt    = ja
     kreis    = kr_hassfurt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2909335; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort eltmann {
@@ -278,6 +408,11 @@ ort eltmann {
     stadt    = nein
     kreis    = kr_hassfurt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2930650; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort hofheim_in_unterfranken {
@@ -288,6 +423,11 @@ ort hofheim_in_unterfranken {
     stadt    = nein
     kreis    = kr_hassfurt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2902531; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort maroldsweisach {
@@ -298,6 +438,11 @@ ort maroldsweisach {
     stadt    = nein
     kreis    = kr_hassfurt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2873228; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort rentweinsdorf {
@@ -308,6 +453,11 @@ ort rentweinsdorf {
     stadt    = nein
     kreis    = kr_hassfurt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2848143; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort aschaffenburg {
@@ -318,6 +468,11 @@ ort aschaffenburg {
     stadt    = ja
     kreis    = kr_aschaffenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2955272; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort grossostheim {
@@ -328,6 +483,11 @@ ort grossostheim {
     stadt    = nein
     kreis    = kr_aschaffenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2915196; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort lohr_am_main {
@@ -338,6 +498,11 @@ ort lohr_am_main {
     stadt    = nein
     kreis    = kr_aschaffenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2876147; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort moembris {
@@ -348,6 +513,11 @@ ort moembris {
     stadt    = nein
     kreis    = kr_aschaffenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2869936; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort erlenbach_am_main {
@@ -358,6 +528,11 @@ ort erlenbach_am_main {
     stadt    = nein
     kreis    = kr_aschaffenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2929484; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort laufach {
@@ -368,6 +543,11 @@ ort laufach {
     stadt    = nein
     kreis    = kr_aschaffenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2880146; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort leidersbach {
@@ -378,6 +558,11 @@ ort leidersbach {
     stadt    = nein
     kreis    = kr_aschaffenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2879299; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort frammersbach {
@@ -388,6 +573,11 @@ ort frammersbach {
     stadt    = nein
     kreis    = kr_aschaffenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2925665; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort weibersbrunn {
@@ -398,6 +588,11 @@ ort weibersbrunn {
     stadt    = nein
     kreis    = kr_aschaffenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2813176; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort kleinkahl {
@@ -408,6 +603,11 @@ ort kleinkahl {
     stadt    = nein
     kreis    = kr_aschaffenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2888684; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort wuerzburg {
@@ -418,6 +618,11 @@ ort wuerzburg {
     stadt    = ja
     kreis    = kr_wuerzburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2805615; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort marktheidenfeld {
@@ -428,6 +633,11 @@ ort marktheidenfeld {
     stadt    = nein
     kreis    = kr_wuerzburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2873301; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort guentersleben {
@@ -438,6 +648,11 @@ ort guentersleben {
     stadt    = nein
     kreis    = kr_wuerzburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2913587; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort hettstadt {
@@ -448,6 +663,11 @@ ort hettstadt {
     stadt    = nein
     kreis    = kr_wuerzburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2905208; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort helmstadt {
@@ -458,6 +678,11 @@ ort helmstadt {
     stadt    = nein
     kreis    = kr_wuerzburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2906680; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort wertheim {
@@ -468,6 +693,11 @@ ort wertheim {
     stadt    = ja
     kreis    = kr_wertheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2810716; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort tauberbischofsheim {
@@ -478,6 +708,11 @@ ort tauberbischofsheim {
     stadt    = ja
     kreis    = kr_wertheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2823854; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort miltenberg {
@@ -488,6 +723,11 @@ ort miltenberg {
     stadt    = ja
     kreis    = kr_wertheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2871079; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort kuelsheim {
@@ -498,6 +738,11 @@ ort kuelsheim {
     stadt    = nein
     kreis    = kr_wertheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2882575; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort kirchzell {
@@ -508,6 +753,11 @@ ort kirchzell {
     stadt    = nein
     kreis    = kr_wertheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2890327; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort dorfprozelten {
@@ -518,6 +768,11 @@ ort dorfprozelten {
     stadt    = nein
     kreis    = kr_wertheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2936040; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort kitzingen {
@@ -528,6 +783,11 @@ ort kitzingen {
     stadt    = ja
     kreis    = kr_kitzingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2890158; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort ochsenfurt {
@@ -538,6 +798,11 @@ ort ochsenfurt {
     stadt    = nein
     kreis    = kr_kitzingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2858333; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort volkach {
@@ -548,6 +813,11 @@ ort volkach {
     stadt    = nein
     kreis    = kr_kitzingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2816702; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort gerolzhofen {
@@ -558,6 +828,11 @@ ort gerolzhofen {
     stadt    = nein
     kreis    = kr_kitzingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2920959; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort grettstadt {
@@ -568,6 +843,11 @@ ort grettstadt {
     stadt    = nein
     kreis    = kr_kitzingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2917586; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort wiesentheid {
@@ -578,6 +858,11 @@ ort wiesentheid {
     stadt    = nein
     kreis    = kr_kitzingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2809191; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort giebelstadt {
@@ -588,6 +873,11 @@ ort giebelstadt {
     stadt    = nein
     kreis    = kr_kitzingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2920652; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort iphofen {
@@ -598,6 +888,11 @@ ort iphofen {
     stadt    = nein
     kreis    = kr_kitzingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2895882; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort geiselwind {
@@ -608,6 +903,11 @@ ort geiselwind {
     stadt    = nein
     kreis    = kr_kitzingen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2921724; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort bad_mergentheim {
@@ -618,6 +918,11 @@ ort bad_mergentheim {
     stadt    = ja
     kreis    = kr_bad_mergentheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953402; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = WUE
+        bund     = ja
+    }
 }
 
 ort weikersheim {
@@ -628,6 +933,11 @@ ort weikersheim {
     stadt    = nein
     kreis    = kr_bad_mergentheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2812655; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = WUE
+        bund     = ja
+    }
 }
 
 ort niederstetten {
@@ -638,6 +948,11 @@ ort niederstetten {
     stadt    = nein
     kreis    = kr_bad_mergentheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2862831; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = WUE
+        bund     = ja
+    }
 }
 
 ort creglingen {
@@ -648,6 +963,11 @@ ort creglingen {
     stadt    = nein
     kreis    = kr_bad_mergentheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2939767; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = WUE
+        bund     = ja
+    }
 }
 
 ort boxberg_mainfranken {
@@ -658,6 +978,11 @@ ort boxberg_mainfranken {
     stadt    = nein
     kreis    = kr_bad_mergentheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2945703; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAD
+        bund     = ja
+    }
 }
 
 ort aub {
@@ -668,4 +993,9 @@ ort aub {
     stadt    = nein
     kreis    = kr_bad_mergentheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2954774; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }

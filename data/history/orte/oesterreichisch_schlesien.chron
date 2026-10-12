@@ -19,6 +19,11 @@ ort jaegerndorf {
     stadt    = ja
     kreis    = kr_jaegerndorf
     quelle   = "GeoNames (CC BY 4.0), geonameid 3072656; deutscher Name aus den GeoNames-Alternativnamen (heute Krnov); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort freudenthal {
@@ -29,6 +34,11 @@ ort freudenthal {
     stadt    = nein
     kreis    = kr_jaegerndorf
     quelle   = "GeoNames (CC BY 4.0), geonameid 3078545; deutscher Name aus den GeoNames-Alternativnamen (heute Bruntál); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort freiwaldau_oesterreichisch_schlesien {
@@ -39,6 +49,11 @@ ort freiwaldau_oesterreichisch_schlesien {
     stadt    = nein
     kreis    = kr_jaegerndorf
     quelle   = "GeoNames (CC BY 4.0), geonameid 3074281; deutscher Name aus den GeoNames-Alternativnamen (heute Jeseník); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort roemerstadt {
@@ -49,6 +64,11 @@ ort roemerstadt {
     stadt    = nein
     kreis    = kr_jaegerndorf
     quelle   = "GeoNames (CC BY 4.0), geonameid 3066483; deutscher Name aus den GeoNames-Alternativnamen (heute Rýmařov); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort wuerbenthal {
@@ -59,6 +79,11 @@ ort wuerbenthal {
     stadt    = nein
     kreis    = kr_jaegerndorf
     quelle   = "GeoNames (CC BY 4.0), geonameid 3062446; deutscher Name aus den GeoNames-Alternativnamen (heute Vrbno pod Pradědem); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort olbersdorf {
@@ -69,6 +94,11 @@ ort olbersdorf {
     stadt    = nein
     kreis    = kr_jaegerndorf
     quelle   = "GeoNames (CC BY 4.0), geonameid 3070819; deutscher Name aus den GeoNames-Alternativnamen (heute Město Albrechtice); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort jauernig {
@@ -79,6 +109,11 @@ ort jauernig {
     stadt    = nein
     kreis    = kr_jaegerndorf
     quelle   = "GeoNames (CC BY 4.0), geonameid 3074398; deutscher Name aus den GeoNames-Alternativnamen (heute Javorník); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort bennisch {
@@ -89,6 +124,11 @@ ort bennisch {
     stadt    = nein
     kreis    = kr_jaegerndorf
     quelle   = "GeoNames (CC BY 4.0), geonameid 3075451; deutscher Name aus den GeoNames-Alternativnamen (heute Horní Benešov); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort friedeberg {
@@ -99,6 +139,11 @@ ort friedeberg {
     stadt    = nein
     kreis    = kr_jaegerndorf
     quelle   = "GeoNames (CC BY 4.0), geonameid 3061321; deutscher Name aus den GeoNames-Alternativnamen (heute Žulová); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort weidenau {
@@ -109,6 +154,11 @@ ort weidenau {
     stadt    = nein
     kreis    = kr_jaegerndorf
     quelle   = "GeoNames (CC BY 4.0), geonameid 3062924; deutscher Name aus den GeoNames-Alternativnamen (heute Vidnava); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort hotzenplotz {
@@ -119,6 +169,11 @@ ort hotzenplotz {
     stadt    = nein
     kreis    = kr_jaegerndorf
     quelle   = "GeoNames (CC BY 4.0), geonameid 3068818; deutscher Name aus den GeoNames-Alternativnamen (heute Osoblaha); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort hennersdorf {
@@ -129,6 +184,11 @@ ort hennersdorf {
     stadt    = nein
     kreis    = kr_jaegerndorf
     quelle   = "GeoNames (CC BY 4.0), geonameid 3074161; deutscher Name aus den GeoNames-Alternativnamen (heute Jindřichov); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort troppau {
@@ -139,6 +199,11 @@ ort troppau {
     stadt    = ja
     kreis    = kr_troppau
     quelle   = "GeoNames (CC BY 4.0), geonameid 3068927; deutscher Name aus den GeoNames-Alternativnamen (heute Opava); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort hultschin {
@@ -149,6 +214,11 @@ ort hultschin {
     stadt    = nein
     kreis    = kr_troppau
     quelle   = "GeoNames (CC BY 4.0), geonameid 3075716; deutscher Name aus den GeoNames-Alternativnamen (heute Hlučín); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort wigstadtl {
@@ -159,6 +229,11 @@ ort wigstadtl {
     stadt    = nein
     kreis    = kr_troppau
     quelle   = "GeoNames (CC BY 4.0), geonameid 3062811; deutscher Name aus den GeoNames-Alternativnamen (heute Vítkov); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort bolatitz {
@@ -169,6 +244,11 @@ ort bolatitz {
     stadt    = nein
     kreis    = kr_troppau
     quelle   = "GeoNames (CC BY 4.0), geonameid 3079078; deutscher Name aus den GeoNames-Alternativnamen (heute Bolatice); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort bautsch {
@@ -179,6 +259,11 @@ ort bautsch {
     stadt    = nein
     kreis    = kr_troppau
     quelle   = "GeoNames (CC BY 4.0), geonameid 3078469; deutscher Name aus den GeoNames-Alternativnamen (heute Budišov nad Budišovkou); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort wuest_pohlom {
@@ -189,6 +274,11 @@ ort wuest_pohlom {
     stadt    = nein
     kreis    = kr_troppau
     quelle   = "GeoNames (CC BY 4.0), geonameid 3067324; deutscher Name aus den GeoNames-Alternativnamen (heute Pustá Polom); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort schoenstein {
@@ -199,6 +289,11 @@ ort schoenstein {
     stadt    = nein
     kreis    = kr_troppau
     quelle   = "GeoNames (CC BY 4.0), geonameid 3076621; deutscher Name aus den GeoNames-Alternativnamen (heute Dolní Životice); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort freistadt_oesterreichisch_schlesien {
@@ -209,6 +304,11 @@ ort freistadt_oesterreichisch_schlesien {
     stadt    = ja
     kreis    = kr_freistadt_oesterreichisch_schlesien
     quelle   = "GeoNames (CC BY 4.0), geonameid 3073789; deutscher Name aus den GeoNames-Alternativnamen (heute Karviná); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort friedeck {
@@ -219,6 +319,11 @@ ort friedeck {
     stadt    = ja
     kreis    = kr_freistadt_oesterreichisch_schlesien
     quelle   = "GeoNames (CC BY 4.0), geonameid 3076127; deutscher Name aus den GeoNames-Alternativnamen (heute Frýdek-Místek); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort teschen {
@@ -229,6 +334,11 @@ ort teschen {
     stadt    = ja
     kreis    = kr_freistadt_oesterreichisch_schlesien
     quelle   = "GeoNames (CC BY 4.0), geonameid 3101321; deutscher Name aus den GeoNames-Alternativnamen (heute Cieszyn); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort trinec {
@@ -239,6 +349,11 @@ ort trinec {
     stadt    = ja
     kreis    = kr_freistadt_oesterreichisch_schlesien
     quelle   = "GeoNames (CC BY 4.0), geonameid 3064000; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort orlau {
@@ -249,6 +364,11 @@ ort orlau {
     stadt    = ja
     kreis    = kr_freistadt_oesterreichisch_schlesien
     quelle   = "GeoNames (CC BY 4.0), geonameid 3068873; deutscher Name aus den GeoNames-Alternativnamen (heute Orlová); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort bohumin {
@@ -259,6 +379,11 @@ ort bohumin {
     stadt    = ja
     kreis    = kr_freistadt_oesterreichisch_schlesien
     quelle   = "GeoNames (CC BY 4.0), geonameid 3079129; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort frydlant_nad_ostravici {
@@ -269,6 +394,11 @@ ort frydlant_nad_ostravici {
     stadt    = nein
     kreis    = kr_freistadt_oesterreichisch_schlesien
     quelle   = "GeoNames (CC BY 4.0), geonameid 3076123; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort horni_terlicko {
@@ -279,6 +409,11 @@ ort horni_terlicko {
     stadt    = nein
     kreis    = kr_freistadt_oesterreichisch_schlesien
     quelle   = "GeoNames (CC BY 4.0), geonameid 3075179; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort braunsberg_oesterreichisch_schlesien {
@@ -289,6 +424,11 @@ ort braunsberg_oesterreichisch_schlesien {
     stadt    = nein
     kreis    = kr_freistadt_oesterreichisch_schlesien
     quelle   = "GeoNames (CC BY 4.0), geonameid 3078536; deutscher Name aus den GeoNames-Alternativnamen (heute Brušperk); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort komorni_lhotka {
@@ -299,6 +439,11 @@ ort komorni_lhotka {
     stadt    = nein
     kreis    = kr_freistadt_oesterreichisch_schlesien
     quelle   = "GeoNames (CC BY 4.0), geonameid 3073322; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort moravka {
@@ -309,6 +454,11 @@ ort moravka {
     stadt    = nein
     kreis    = kr_freistadt_oesterreichisch_schlesien
     quelle   = "GeoNames (CC BY 4.0), geonameid 3070339; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort bielsko_biala {
@@ -319,6 +469,11 @@ ort bielsko_biala {
     stadt    = ja
     kreis    = kr_bielsko_biala
     quelle   = "GeoNames (CC BY 4.0), geonameid 3103402; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort czechowice_dziedzice {
@@ -329,6 +484,11 @@ ort czechowice_dziedzice {
     stadt    = ja
     kreis    = kr_bielsko_biala
     quelle   = "GeoNames (CC BY 4.0), geonameid 3101076; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort skoczow {
@@ -339,6 +499,11 @@ ort skoczow {
     stadt    = nein
     kreis    = kr_bielsko_biala
     quelle   = "GeoNames (CC BY 4.0), geonameid 3085786; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort jasienica {
@@ -349,6 +514,11 @@ ort jasienica {
     stadt    = nein
     kreis    = kr_bielsko_biala
     quelle   = "GeoNames (CC BY 4.0), geonameid 3097472; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort porabka {
@@ -359,6 +529,11 @@ ort porabka {
     stadt    = nein
     kreis    = kr_bielsko_biala
     quelle   = "GeoNames (CC BY 4.0), geonameid 3088290; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort chybie {
@@ -369,6 +544,11 @@ ort chybie {
     stadt    = nein
     kreis    = kr_bielsko_biala
     quelle   = "GeoNames (CC BY 4.0), geonameid 3101467; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort pruchna {
@@ -379,6 +559,11 @@ ort pruchna {
     stadt    = nein
     kreis    = kr_bielsko_biala
     quelle   = "GeoNames (CC BY 4.0), geonameid 3088067; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort ustron {
@@ -389,6 +574,11 @@ ort ustron {
     stadt    = nein
     kreis    = kr_ustron
     quelle   = "GeoNames (CC BY 4.0), geonameid 3082751; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort wisla {
@@ -399,6 +589,11 @@ ort wisla {
     stadt    = nein
     kreis    = kr_ustron
     quelle   = "GeoNames (CC BY 4.0), geonameid 3081874; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort szczyrk {
@@ -409,6 +604,11 @@ ort szczyrk {
     stadt    = nein
     kreis    = kr_ustron
     quelle   = "GeoNames (CC BY 4.0), geonameid 3083752; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort jablunkau {
@@ -419,6 +619,11 @@ ort jablunkau {
     stadt    = nein
     kreis    = kr_ustron
     quelle   = "GeoNames (CC BY 4.0), geonameid 3074593; deutscher Name aus den GeoNames-Alternativnamen (heute Jablunkov); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort istebna {
@@ -429,4 +634,9 @@ ort istebna {
     stadt    = nein
     kreis    = kr_ustron
     quelle   = "GeoNames (CC BY 4.0), geonameid 3097865; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }

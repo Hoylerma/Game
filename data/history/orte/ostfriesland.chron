@@ -17,6 +17,11 @@ ort wittmund {
     stadt    = ja
     kreis    = kr_wittmund
     quelle   = "GeoNames (CC BY 4.0), geonameid 2807218; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort esens {
@@ -27,6 +32,11 @@ ort esens {
     stadt    = nein
     kreis    = kr_wittmund
     quelle   = "GeoNames (CC BY 4.0), geonameid 2928911; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort dornum {
@@ -37,6 +47,11 @@ ort dornum {
     stadt    = nein
     kreis    = kr_wittmund
     quelle   = "GeoNames (CC BY 4.0), geonameid 2935633; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort langeoog {
@@ -47,6 +62,11 @@ ort langeoog {
     stadt    = nein
     kreis    = kr_wittmund
     quelle   = "GeoNames (CC BY 4.0), geonameid 2880861; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort aurich {
@@ -57,6 +77,11 @@ ort aurich {
     stadt    = ja
     kreis    = kr_aurich
     quelle   = "GeoNames (CC BY 4.0), geonameid 2954006; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort leer {
@@ -67,6 +92,11 @@ ort leer {
     stadt    = ja
     kreis    = kr_aurich
     quelle   = "GeoNames (CC BY 4.0), geonameid 2879697; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort wiesmoor {
@@ -77,6 +107,11 @@ ort wiesmoor {
     stadt    = nein
     kreis    = kr_aurich
     quelle   = "GeoNames (CC BY 4.0), geonameid 2809134; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort weener {
@@ -87,6 +122,11 @@ ort weener {
     stadt    = nein
     kreis    = kr_aurich
     quelle   = "GeoNames (CC BY 4.0), geonameid 2813433; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort ostrhauderfehn {
@@ -97,6 +137,11 @@ ort ostrhauderfehn {
     stadt    = nein
     kreis    = kr_aurich
     quelle   = "GeoNames (CC BY 4.0), geonameid 2856213; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort mittegrossefehn {
@@ -107,6 +152,11 @@ ort mittegrossefehn {
     stadt    = nein
     kreis    = kr_aurich
     quelle   = "GeoNames (CC BY 4.0), geonameid 2870911; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort hesel {
@@ -117,6 +167,11 @@ ort hesel {
     stadt    = nein
     kreis    = kr_aurich
     quelle   = "GeoNames (CC BY 4.0), geonameid 2905421; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort emden {
@@ -127,6 +182,11 @@ ort emden {
     stadt    = ja
     kreis    = kr_emden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2930596; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort norden {
@@ -137,6 +197,11 @@ ort norden {
     stadt    = ja
     kreis    = kr_emden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2862118; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort borkum {
@@ -147,6 +212,11 @@ ort borkum {
     stadt    = nein
     kreis    = kr_emden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2946206; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort norderney {
@@ -157,6 +227,11 @@ ort norderney {
     stadt    = nein
     kreis    = kr_emden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2862041; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort upgant_schott {
@@ -167,6 +242,11 @@ ort upgant_schott {
     stadt    = nein
     kreis    = kr_emden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2818297; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort juist {
@@ -177,6 +257,11 @@ ort juist {
     stadt    = nein
     kreis    = kr_emden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2894569; Name nach GeoNames; Lage auf das nächste Landpixel gesetzt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort wirdum {
@@ -187,4 +272,9 @@ ort wirdum {
     stadt    = nein
     kreis    = kr_emden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2807558; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }

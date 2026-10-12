@@ -17,6 +17,11 @@ ort hof {
     stadt    = ja
     kreis    = kr_hof
     quelle   = "GeoNames (CC BY 4.0), geonameid 2902768; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort wunsiedel {
@@ -27,6 +32,11 @@ ort wunsiedel {
     stadt    = ja
     kreis    = kr_hof
     quelle   = "GeoNames (CC BY 4.0), geonameid 2805762; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort selb {
@@ -37,6 +47,11 @@ ort selb {
     stadt    = nein
     kreis    = kr_hof
     quelle   = "GeoNames (CC BY 4.0), geonameid 2833296; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort muenchberg {
@@ -47,6 +62,11 @@ ort muenchberg {
     stadt    = nein
     kreis    = kr_hof
     quelle   = "GeoNames (CC BY 4.0), geonameid 2867726; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort schwarzenbach_an_der_saale {
@@ -57,6 +77,11 @@ ort schwarzenbach_an_der_saale {
     stadt    = nein
     kreis    = kr_hof
     quelle   = "GeoNames (CC BY 4.0), geonameid 2835018; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort naila {
@@ -67,6 +92,11 @@ ort naila {
     stadt    = nein
     kreis    = kr_hof
     quelle   = "GeoNames (CC BY 4.0), geonameid 2867138; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort marktleuthen {
@@ -77,6 +107,11 @@ ort marktleuthen {
     stadt    = nein
     kreis    = kr_hof
     quelle   = "GeoNames (CC BY 4.0), geonameid 2873295; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort weissenstadt {
@@ -87,6 +122,11 @@ ort weissenstadt {
     stadt    = nein
     kreis    = kr_hof
     quelle   = "GeoNames (CC BY 4.0), geonameid 2811852; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort arzberg {
@@ -97,6 +137,11 @@ ort arzberg {
     stadt    = nein
     kreis    = kr_hof
     quelle   = "GeoNames (CC BY 4.0), geonameid 2955368; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort regnitzlosau {
@@ -107,6 +152,11 @@ ort regnitzlosau {
     stadt    = nein
     kreis    = kr_hof
     quelle   = "GeoNames (CC BY 4.0), geonameid 2849455; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort toepen {
@@ -117,6 +167,11 @@ ort toepen {
     stadt    = nein
     kreis    = kr_hof
     quelle   = "GeoNames (CC BY 4.0), geonameid 2821864; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort coburg {
@@ -127,6 +182,11 @@ ort coburg {
     stadt    = ja
     kreis    = kr_coburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2939951; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = SCG
+        bund     = ja
+    }
 }
 
 ort lichtenfels {
@@ -137,6 +197,11 @@ ort lichtenfels {
     stadt    = ja
     kreis    = kr_coburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2878074; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort burgkunstadt {
@@ -147,6 +212,11 @@ ort burgkunstadt {
     stadt    = nein
     kreis    = kr_coburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2941207; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort sonnefeld {
@@ -157,6 +227,11 @@ ort sonnefeld {
     stadt    = nein
     kreis    = kr_coburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2831239; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = SCG
+        bund     = ja
+    }
 }
 
 ort sesslach {
@@ -167,6 +242,11 @@ ort sesslach {
     stadt    = nein
     kreis    = kr_coburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2832921; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort kronach {
@@ -177,6 +257,11 @@ ort kronach {
     stadt    = ja
     kreis    = kr_kronach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2883784; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort wilhelmsthal {
@@ -187,6 +272,11 @@ ort wilhelmsthal {
     stadt    = nein
     kreis    = kr_kronach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2808657; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort ludwigsstadt {
@@ -197,6 +287,11 @@ ort ludwigsstadt {
     stadt    = nein
     kreis    = kr_kronach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2875330; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort marktleugast {
@@ -207,6 +302,11 @@ ort marktleugast {
     stadt    = nein
     kreis    = kr_kronach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2873296; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort tettau {
@@ -217,6 +317,11 @@ ort tettau {
     stadt    = nein
     kreis    = kr_kronach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2823395; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort teuschnitz {
@@ -227,6 +332,11 @@ ort teuschnitz {
     stadt    = nein
     kreis    = kr_kronach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2823245; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort nordhalben {
@@ -237,6 +347,11 @@ ort nordhalben {
     stadt    = nein
     kreis    = kr_kronach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2861990; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort rugendorf {
@@ -247,6 +362,11 @@ ort rugendorf {
     stadt    = nein
     kreis    = kr_kronach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2843318; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort kulmbach {
@@ -257,6 +377,11 @@ ort kulmbach {
     stadt    = ja
     kreis    = kr_kulmbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2882588; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort ebermannstadt {
@@ -267,6 +392,11 @@ ort ebermannstadt {
     stadt    = nein
     kreis    = kr_kulmbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2933986; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort hollfeld {
@@ -277,6 +407,11 @@ ort hollfeld {
     stadt    = nein
     kreis    = kr_kulmbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2900453; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort goessweinstein {
@@ -287,6 +422,11 @@ ort goessweinstein {
     stadt    = nein
     kreis    = kr_kulmbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2918767; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort neudrossenfeld {
@@ -297,6 +437,11 @@ ort neudrossenfeld {
     stadt    = nein
     kreis    = kr_kulmbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2865906; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort waischenfeld {
@@ -307,6 +452,11 @@ ort waischenfeld {
     stadt    = nein
     kreis    = kr_kulmbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2815297; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort kasendorf {
@@ -317,6 +467,11 @@ ort kasendorf {
     stadt    = nein
     kreis    = kr_kulmbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2892563; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort heiligenstadt_franken {
@@ -327,6 +482,11 @@ ort heiligenstadt_franken {
     stadt    = nein
     kreis    = kr_kulmbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2907546; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort stadelhofen {
@@ -337,6 +497,11 @@ ort stadelhofen {
     stadt    = nein
     kreis    = kr_kulmbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2829876; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort bayreuth {
@@ -347,6 +512,11 @@ ort bayreuth {
     stadt    = ja
     kreis    = kr_bayreuth
     quelle   = "GeoNames (CC BY 4.0), geonameid 2951825; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort speichersdorf {
@@ -357,6 +527,11 @@ ort speichersdorf {
     stadt    = nein
     kreis    = kr_bayreuth
     quelle   = "GeoNames (CC BY 4.0), geonameid 2830670; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort bad_berneck_im_fichtelgebirge {
@@ -367,6 +542,11 @@ ort bad_berneck_im_fichtelgebirge {
     stadt    = nein
     kreis    = kr_bayreuth
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953544; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort creussen {
@@ -377,6 +557,11 @@ ort creussen {
     stadt    = nein
     kreis    = kr_bayreuth
     quelle   = "GeoNames (CC BY 4.0), geonameid 2939756; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort mistelgau {
@@ -387,6 +572,11 @@ ort mistelgau {
     stadt    = nein
     kreis    = kr_bayreuth
     quelle   = "GeoNames (CC BY 4.0), geonameid 2870936; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort warmensteinach {
@@ -397,6 +587,11 @@ ort warmensteinach {
     stadt    = nein
     kreis    = kr_bayreuth
     quelle   = "GeoNames (CC BY 4.0), geonameid 2814077; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort bamberg {
@@ -407,6 +602,11 @@ ort bamberg {
     stadt    = ja
     kreis    = kr_bamberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2952984; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort ebensfeld {
@@ -417,6 +617,11 @@ ort ebensfeld {
     stadt    = nein
     kreis    = kr_bamberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2934033; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort breitenguessbach {
@@ -427,6 +632,11 @@ ort breitenguessbach {
     stadt    = nein
     kreis    = kr_bamberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2944599; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort viereth_trunstadt {
@@ -437,6 +647,11 @@ ort viereth_trunstadt {
     stadt    = nein
     kreis    = kr_bamberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 3207000; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort schesslitz {
@@ -447,6 +662,11 @@ ort schesslitz {
     stadt    = nein
     kreis    = kr_bamberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2839613; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort forchheim {
@@ -457,6 +677,11 @@ ort forchheim {
     stadt    = ja
     kreis    = kr_forchheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2925910; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort hoechstadt_an_der_aisch {
@@ -467,6 +692,11 @@ ort hoechstadt_an_der_aisch {
     stadt    = nein
     kreis    = kr_forchheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2903016; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort hirschaid {
@@ -477,6 +707,11 @@ ort hirschaid {
     stadt    = nein
     kreis    = kr_forchheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2903810; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort schluesselfeld {
@@ -487,6 +722,11 @@ ort schluesselfeld {
     stadt    = nein
     kreis    = kr_forchheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2838167; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort hemhofen {
@@ -497,6 +737,11 @@ ort hemhofen {
     stadt    = nein
     kreis    = kr_forchheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2906583; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort burgebrach {
@@ -507,6 +752,11 @@ ort burgebrach {
     stadt    = nein
     kreis    = kr_forchheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2941403; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort frensdorf {
@@ -517,6 +767,11 @@ ort frensdorf {
     stadt    = nein
     kreis    = kr_forchheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2924983; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort scheinfeld {
@@ -527,6 +782,11 @@ ort scheinfeld {
     stadt    = nein
     kreis    = kr_forchheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2839916; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort neustadt_an_der_aisch {
@@ -537,6 +797,11 @@ ort neustadt_an_der_aisch {
     stadt    = ja
     kreis    = kr_neustadt_an_der_aisch
     quelle   = "GeoNames (CC BY 4.0), geonameid 2864057; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort heilsbronn {
@@ -547,6 +812,11 @@ ort heilsbronn {
     stadt    = nein
     kreis    = kr_neustadt_an_der_aisch
     quelle   = "GeoNames (CC BY 4.0), geonameid 2907488; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort langenzenn {
@@ -557,6 +827,11 @@ ort langenzenn {
     stadt    = nein
     kreis    = kr_neustadt_an_der_aisch
     quelle   = "GeoNames (CC BY 4.0), geonameid 2880862; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort rosstal {
@@ -567,6 +842,11 @@ ort rosstal {
     stadt    = nein
     kreis    = kr_neustadt_an_der_aisch
     quelle   = "GeoNames (CC BY 4.0), geonameid 2844616; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort windsbach {
@@ -577,6 +857,11 @@ ort windsbach {
     stadt    = nein
     kreis    = kr_neustadt_an_der_aisch
     quelle   = "GeoNames (CC BY 4.0), geonameid 2808101; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort dietenhofen {
@@ -587,6 +872,11 @@ ort dietenhofen {
     stadt    = nein
     kreis    = kr_neustadt_an_der_aisch
     quelle   = "GeoNames (CC BY 4.0), geonameid 2937160; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort markt_erlbach {
@@ -597,6 +887,11 @@ ort markt_erlbach {
     stadt    = nein
     kreis    = kr_neustadt_an_der_aisch
     quelle   = "GeoNames (CC BY 4.0), geonameid 2873304; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort lauf_an_der_pegnitz {
@@ -607,6 +902,11 @@ ort lauf_an_der_pegnitz {
     stadt    = ja
     kreis    = kr_lauf_an_der_pegnitz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2880144; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort pegnitz {
@@ -617,6 +917,11 @@ ort pegnitz {
     stadt    = nein
     kreis    = kr_lauf_an_der_pegnitz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2855065; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort hersbruck {
@@ -627,6 +932,11 @@ ort hersbruck {
     stadt    = nein
     kreis    = kr_lauf_an_der_pegnitz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2905599; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort neuhaus_an_der_pegnitz {
@@ -637,6 +947,11 @@ ort neuhaus_an_der_pegnitz {
     stadt    = nein
     kreis    = kr_lauf_an_der_pegnitz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2865129; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort alfeld {
@@ -647,6 +962,11 @@ ort alfeld {
     stadt    = nein
     kreis    = kr_lauf_an_der_pegnitz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2958534; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort bad_windsheim {
@@ -657,6 +977,11 @@ ort bad_windsheim {
     stadt    = nein
     kreis    = kr_bad_windsheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953314; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort uffenheim {
@@ -667,6 +992,11 @@ ort uffenheim {
     stadt    = nein
     kreis    = kr_bad_windsheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2820423; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort burgbernheim {
@@ -677,6 +1007,11 @@ ort burgbernheim {
     stadt    = nein
     kreis    = kr_bad_windsheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2941416; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort markt_nordheim {
@@ -687,6 +1022,11 @@ ort markt_nordheim {
     stadt    = nein
     kreis    = kr_bad_windsheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2873292; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort nuernberg {
@@ -697,6 +1037,11 @@ ort nuernberg {
     stadt    = ja
     kreis    = kr_nuernberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2861650; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort erlangen {
@@ -707,6 +1052,11 @@ ort erlangen {
     stadt    = ja
     kreis    = kr_nuernberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2929567; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort fuerth {
@@ -717,6 +1067,11 @@ ort fuerth {
     stadt    = ja
     kreis    = kr_nuernberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2923544; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort herzogenaurach {
@@ -727,6 +1082,11 @@ ort herzogenaurach {
     stadt    = ja
     kreis    = kr_nuernberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2905457; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort neunkirchen_am_brand {
@@ -737,6 +1097,11 @@ ort neunkirchen_am_brand {
     stadt    = nein
     kreis    = kr_nuernberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 6694210; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort heroldsberg {
@@ -747,6 +1112,11 @@ ort heroldsberg {
     stadt    = nein
     kreis    = kr_nuernberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2905878; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort graefenberg {
@@ -757,6 +1127,11 @@ ort graefenberg {
     stadt    = nein
     kreis    = kr_nuernberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2918350; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort schwabach {
@@ -767,6 +1142,11 @@ ort schwabach {
     stadt    = ja
     kreis    = kr_schwabach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2835537; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort roth {
@@ -777,6 +1157,11 @@ ort roth {
     stadt    = ja
     kreis    = kr_schwabach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2844265; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort wendelstein {
@@ -787,6 +1172,11 @@ ort wendelstein {
     stadt    = nein
     kreis    = kr_schwabach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2811292; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort hilpoltstein {
@@ -797,6 +1187,11 @@ ort hilpoltstein {
     stadt    = nein
     kreis    = kr_schwabach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2904638; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort burgthann {
@@ -807,6 +1202,11 @@ ort burgthann {
     stadt    = nein
     kreis    = kr_schwabach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2941090; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort georgensgmuend {
@@ -817,6 +1217,11 @@ ort georgensgmuend {
     stadt    = nein
     kreis    = kr_schwabach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2921267; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort ansbach {
@@ -827,6 +1232,11 @@ ort ansbach {
     stadt    = ja
     kreis    = kr_ansbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2955936; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort rothenburg_ob_der_tauber {
@@ -837,6 +1247,11 @@ ort rothenburg_ob_der_tauber {
     stadt    = nein
     kreis    = kr_ansbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2844056; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort dinkelsbuehl {
@@ -847,6 +1262,11 @@ ort dinkelsbuehl {
     stadt    = nein
     kreis    = kr_ansbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2936886; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort feuchtwangen {
@@ -857,6 +1277,11 @@ ort feuchtwangen {
     stadt    = nein
     kreis    = kr_ansbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2927048; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort herrieden {
@@ -867,6 +1292,11 @@ ort herrieden {
     stadt    = nein
     kreis    = kr_ansbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2905706; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort leutershausen {
@@ -877,6 +1307,11 @@ ort leutershausen {
     stadt    = nein
     kreis    = kr_ansbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2878289; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort schnelldorf {
@@ -887,6 +1322,11 @@ ort schnelldorf {
     stadt    = nein
     kreis    = kr_ansbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2837368; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort langfurth {
@@ -897,6 +1337,11 @@ ort langfurth {
     stadt    = nein
     kreis    = kr_ansbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2859970; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort flachslanden {
@@ -907,6 +1352,11 @@ ort flachslanden {
     stadt    = nein
     kreis    = kr_ansbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2926426; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort schillingsfuerst {
@@ -917,6 +1367,11 @@ ort schillingsfuerst {
     stadt    = nein
     kreis    = kr_ansbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2839212; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort geslau {
@@ -927,6 +1382,11 @@ ort geslau {
     stadt    = nein
     kreis    = kr_ansbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2920830; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort gunzenhausen {
@@ -937,6 +1397,11 @@ ort gunzenhausen {
     stadt    = ja
     kreis    = kr_gunzenhausen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2913537; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort wassertruedingen {
@@ -947,6 +1412,11 @@ ort wassertruedingen {
     stadt    = nein
     kreis    = kr_gunzenhausen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2813700; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort merkendorf {
@@ -957,6 +1427,11 @@ ort merkendorf {
     stadt    = nein
     kreis    = kr_gunzenhausen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2871803; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort heidenheim {
@@ -967,6 +1442,11 @@ ort heidenheim {
     stadt    = nein
     kreis    = kr_gunzenhausen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2907852; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort arberg {
@@ -977,6 +1457,11 @@ ort arberg {
     stadt    = nein
     kreis    = kr_gunzenhausen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2955697; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort weissenburg_in_bayern {
@@ -987,6 +1472,11 @@ ort weissenburg_in_bayern {
     stadt    = nein
     kreis    = kr_weissenburg_in_bayern
     quelle   = "GeoNames (CC BY 4.0), geonameid 2811909; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort treuchtlingen {
@@ -997,6 +1487,11 @@ ort treuchtlingen {
     stadt    = nein
     kreis    = kr_weissenburg_in_bayern
     quelle   = "GeoNames (CC BY 4.0), geonameid 2821254; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort pleinfeld {
@@ -1007,6 +1502,11 @@ ort pleinfeld {
     stadt    = nein
     kreis    = kr_weissenburg_in_bayern
     quelle   = "GeoNames (CC BY 4.0), geonameid 2853260; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort greding {
@@ -1017,6 +1517,11 @@ ort greding {
     stadt    = nein
     kreis    = kr_weissenburg_in_bayern
     quelle   = "GeoNames (CC BY 4.0), geonameid 2917833; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort thalmaessing {
@@ -1027,6 +1532,11 @@ ort thalmaessing {
     stadt    = nein
     kreis    = kr_weissenburg_in_bayern
     quelle   = "GeoNames (CC BY 4.0), geonameid 2823044; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort solnhofen {
@@ -1037,6 +1547,11 @@ ort solnhofen {
     stadt    = nein
     kreis    = kr_weissenburg_in_bayern
     quelle   = "GeoNames (CC BY 4.0), geonameid 2831493; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }
 
 ort burgsalach {
@@ -1047,4 +1562,9 @@ ort burgsalach {
     stadt    = nein
     kreis    = kr_weissenburg_in_bayern
     quelle   = "GeoNames (CC BY 4.0), geonameid 2941172; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BAV
+        bund     = ja
+    }
 }

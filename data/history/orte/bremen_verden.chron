@@ -19,6 +19,11 @@ ort stade {
     stadt    = ja
     kreis    = kr_stade
     quelle   = "GeoNames (CC BY 4.0), geonameid 2829901; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort drochtersen {
@@ -29,6 +34,11 @@ ort drochtersen {
     stadt    = nein
     kreis    = kr_stade
     quelle   = "GeoNames (CC BY 4.0), geonameid 2934915; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort hemmoor {
@@ -39,6 +49,11 @@ ort hemmoor {
     stadt    = nein
     kreis    = kr_stade
     quelle   = "GeoNames (CC BY 4.0), geonameid 2906524; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort himmelpforten {
@@ -49,6 +64,11 @@ ort himmelpforten {
     stadt    = nein
     kreis    = kr_stade
     quelle   = "GeoNames (CC BY 4.0), geonameid 2904543; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort wischhafen {
@@ -59,6 +79,11 @@ ort wischhafen {
     stadt    = nein
     kreis    = kr_stade
     quelle   = "GeoNames (CC BY 4.0), geonameid 2807484; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort cadenberge {
@@ -69,6 +94,11 @@ ort cadenberge {
     stadt    = nein
     kreis    = kr_stade
     quelle   = "GeoNames (CC BY 4.0), geonameid 2940430; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort bremerhaven {
@@ -79,6 +109,11 @@ ort bremerhaven {
     stadt    = ja
     kreis    = kr_bremerhaven
     quelle   = "GeoNames (CC BY 4.0), geonameid 2944368; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BRE
+        bund     = ja
+    }
 }
 
 ort cuxhaven {
@@ -89,6 +124,11 @@ ort cuxhaven {
     stadt    = ja
     kreis    = kr_bremerhaven
     quelle   = "GeoNames (CC BY 4.0), geonameid 2939658; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAM
+        bund     = ja
+    }
 }
 
 ort loxstedt {
@@ -99,6 +139,11 @@ ort loxstedt {
     stadt    = nein
     kreis    = kr_bremerhaven
     quelle   = "GeoNames (CC BY 4.0), geonameid 2875645; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort nordholz {
@@ -109,6 +154,11 @@ ort nordholz {
     stadt    = nein
     kreis    = kr_bremerhaven
     quelle   = "GeoNames (CC BY 4.0), geonameid 2861939; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort otterndorf {
@@ -119,6 +169,11 @@ ort otterndorf {
     stadt    = nein
     kreis    = kr_bremerhaven
     quelle   = "GeoNames (CC BY 4.0), geonameid 2856024; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort dorum {
@@ -129,6 +184,11 @@ ort dorum {
     stadt    = nein
     kreis    = kr_bremerhaven
     quelle   = "GeoNames (CC BY 4.0), geonameid 2935494; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort drangstedt {
@@ -139,6 +199,11 @@ ort drangstedt {
     stadt    = nein
     kreis    = kr_bremerhaven
     quelle   = "GeoNames (CC BY 4.0), geonameid 2935334; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort wanna {
@@ -149,6 +214,11 @@ ort wanna {
     stadt    = nein
     kreis    = kr_bremerhaven
     quelle   = "GeoNames (CC BY 4.0), geonameid 2814241; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort bremervoerde {
@@ -159,6 +229,11 @@ ort bremervoerde {
     stadt    = nein
     kreis    = kr_bremervoerde
     quelle   = "GeoNames (CC BY 4.0), geonameid 2944354; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort gnarrenburg {
@@ -169,6 +244,11 @@ ort gnarrenburg {
     stadt    = nein
     kreis    = kr_bremervoerde
     quelle   = "GeoNames (CC BY 4.0), geonameid 2919692; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort kutenholz {
@@ -179,6 +259,11 @@ ort kutenholz {
     stadt    = nein
     kreis    = kr_bremervoerde
     quelle   = "GeoNames (CC BY 4.0), geonameid 2882224; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort beverstedt {
@@ -189,6 +274,11 @@ ort beverstedt {
     stadt    = nein
     kreis    = kr_bremervoerde
     quelle   = "GeoNames (CC BY 4.0), geonameid 2949482; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort selsingen {
@@ -199,6 +289,11 @@ ort selsingen {
     stadt    = nein
     kreis    = kr_bremervoerde
     quelle   = "GeoNames (CC BY 4.0), geonameid 2833154; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort hipstedt {
@@ -209,6 +304,11 @@ ort hipstedt {
     stadt    = nein
     kreis    = kr_bremervoerde
     quelle   = "GeoNames (CC BY 4.0), geonameid 2903841; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort buxtehude {
@@ -219,6 +319,11 @@ ort buxtehude {
     stadt    = ja
     kreis    = kr_buxtehude
     quelle   = "GeoNames (CC BY 4.0), geonameid 2940451; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort zeven {
@@ -229,6 +334,11 @@ ort zeven {
     stadt    = nein
     kreis    = kr_buxtehude
     quelle   = "GeoNames (CC BY 4.0), geonameid 2804642; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort harsefeld {
@@ -239,6 +349,11 @@ ort harsefeld {
     stadt    = nein
     kreis    = kr_buxtehude
     quelle   = "GeoNames (CC BY 4.0), geonameid 2910280; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort sittensen {
@@ -249,6 +364,11 @@ ort sittensen {
     stadt    = nein
     kreis    = kr_buxtehude
     quelle   = "GeoNames (CC BY 4.0), geonameid 2831802; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort sauensiek {
@@ -259,6 +379,11 @@ ort sauensiek {
     stadt    = nein
     kreis    = kr_buxtehude
     quelle   = "GeoNames (CC BY 4.0), geonameid 2841204; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort gyhum {
@@ -269,6 +394,11 @@ ort gyhum {
     stadt    = nein
     kreis    = kr_buxtehude
     quelle   = "GeoNames (CC BY 4.0), geonameid 2913280; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort bremen {
@@ -279,6 +409,11 @@ ort bremen {
     stadt    = ja
     kreis    = kr_bremen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2944388; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BRE
+        bund     = ja
+    }
 }
 
 ort osterholz_scharmbeck {
@@ -289,6 +424,11 @@ ort osterholz_scharmbeck {
     stadt    = ja
     kreis    = kr_bremen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2856500; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort achim {
@@ -299,6 +439,11 @@ ort achim {
     stadt    = ja
     kreis    = kr_bremen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2959681; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort schwanewede {
@@ -309,6 +454,11 @@ ort schwanewede {
     stadt    = ja
     kreis    = kr_bremen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2835260; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort lilienthal {
@@ -319,6 +469,11 @@ ort lilienthal {
     stadt    = nein
     kreis    = kr_bremen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2877709; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort ottersberg {
@@ -329,6 +484,11 @@ ort ottersberg {
     stadt    = nein
     kreis    = kr_bremen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2856014; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort hambergen {
@@ -339,6 +499,11 @@ ort hambergen {
     stadt    = nein
     kreis    = kr_bremen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2911322; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort worpswede {
@@ -349,6 +514,11 @@ ort worpswede {
     stadt    = nein
     kreis    = kr_bremen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2806108; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort hagen_im_bremischen {
@@ -359,6 +529,11 @@ ort hagen_im_bremischen {
     stadt    = nein
     kreis    = kr_bremen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2912496; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort tarmstedt {
@@ -369,6 +544,11 @@ ort tarmstedt {
     stadt    = nein
     kreis    = kr_bremen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2823989; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort emtinghausen {
@@ -379,6 +559,11 @@ ort emtinghausen {
     stadt    = nein
     kreis    = kr_bremen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2930417; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BWO
+        bund     = ja
+    }
 }
 
 ort verden {
@@ -389,6 +574,11 @@ ort verden {
     stadt    = ja
     kreis    = kr_verden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2817599; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort rotenburg {
@@ -399,6 +589,11 @@ ort rotenburg {
     stadt    = ja
     kreis    = kr_verden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2844437; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort scheessel {
@@ -409,6 +604,11 @@ ort scheessel {
     stadt    = nein
     kreis    = kr_verden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2840070; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort doerverden {
@@ -419,6 +619,11 @@ ort doerverden {
     stadt    = nein
     kreis    = kr_verden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2935491; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort visselhoevede {
@@ -429,6 +634,11 @@ ort visselhoevede {
     stadt    = nein
     kreis    = kr_verden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2817130; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort fintel {
@@ -439,6 +649,11 @@ ort fintel {
     stadt    = nein
     kreis    = kr_verden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2926667; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort kirchwalsede {
@@ -449,6 +664,11 @@ ort kirchwalsede {
     stadt    = nein
     kreis    = kr_verden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2890344; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort hemslingen {
@@ -459,4 +679,9 @@ ort hemslingen {
     stadt    = nein
     kreis    = kr_verden
     quelle   = "GeoNames (CC BY 4.0), geonameid 2906500; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }

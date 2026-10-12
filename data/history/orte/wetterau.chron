@@ -18,6 +18,11 @@ ort nidda {
     stadt    = nein
     kreis    = kr_nidda
     quelle   = "GeoNames (CC BY 4.0), geonameid 2863716; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort schluechtern {
@@ -28,6 +33,11 @@ ort schluechtern {
     stadt    = nein
     kreis    = kr_nidda
     quelle   = "GeoNames (CC BY 4.0), geonameid 2838201; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HEK
+        bund     = ja
+    }
 }
 
 ort bad_soden_salmuenster {
@@ -38,6 +48,11 @@ ort bad_soden_salmuenster {
     stadt    = nein
     kreis    = kr_nidda
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953338; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HEK
+        bund     = ja
+    }
 }
 
 ort birstein {
@@ -48,6 +63,11 @@ ort birstein {
     stadt    = nein
     kreis    = kr_nidda
     quelle   = "GeoNames (CC BY 4.0), geonameid 2948351; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HEK
+        bund     = ja
+    }
 }
 
 ort gedern {
@@ -58,6 +78,11 @@ ort gedern {
     stadt    = nein
     kreis    = kr_nidda
     quelle   = "GeoNames (CC BY 4.0), geonameid 2922124; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort hanau_am_main {
@@ -68,6 +93,11 @@ ort hanau_am_main {
     stadt    = ja
     kreis    = kr_hanau_am_main
     quelle   = "GeoNames (CC BY 4.0), geonameid 2911007; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HEK
+        bund     = ja
+    }
 }
 
 ort gelnhausen {
@@ -78,6 +108,11 @@ ort gelnhausen {
     stadt    = ja
     kreis    = kr_hanau_am_main
     quelle   = "GeoNames (CC BY 4.0), geonameid 2921473; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HEK
+        bund     = ja
+    }
 }
 
 ort buedingen {
@@ -88,6 +123,11 @@ ort buedingen {
     stadt    = ja
     kreis    = kr_hanau_am_main
     quelle   = "GeoNames (CC BY 4.0), geonameid 2942073; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort langenselbold {
@@ -98,6 +138,11 @@ ort langenselbold {
     stadt    = nein
     kreis    = kr_hanau_am_main
     quelle   = "GeoNames (CC BY 4.0), geonameid 2880913; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HEK
+        bund     = ja
+    }
 }
 
 ort frankfurt_am_main {
@@ -108,6 +153,11 @@ ort frankfurt_am_main {
     stadt    = ja
     kreis    = kr_frankfurt_am_main
     quelle   = "GeoNames (CC BY 4.0), geonameid 2925533; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = FRA
+        bund     = ja
+    }
 }
 
 ort bad_homburg_vor_der_hoehe {
@@ -118,6 +168,11 @@ ort bad_homburg_vor_der_hoehe {
     stadt    = ja
     kreis    = kr_frankfurt_am_main
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953436; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HHO
+        bund     = ja
+    }
 }
 
 ort friedberg {
@@ -128,6 +183,11 @@ ort friedberg {
     stadt    = ja
     kreis    = kr_frankfurt_am_main
     quelle   = "GeoNames (CC BY 4.0), geonameid 2924802; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort bad_vilbel {
@@ -138,6 +198,11 @@ ort bad_vilbel {
     stadt    = ja
     kreis    = kr_frankfurt_am_main
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953321; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort butzbach {
@@ -148,6 +213,11 @@ ort butzbach {
     stadt    = ja
     kreis    = kr_frankfurt_am_main
     quelle   = "GeoNames (CC BY 4.0), geonameid 2940512; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort koenigstein_im_taunus {
@@ -158,6 +228,11 @@ ort koenigstein_im_taunus {
     stadt    = nein
     kreis    = kr_frankfurt_am_main
     quelle   = "GeoNames (CC BY 4.0), geonameid 2885760; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = NAS
+        bund     = ja
+    }
 }
 
 ort usingen {
@@ -168,6 +243,11 @@ ort usingen {
     stadt    = nein
     kreis    = kr_frankfurt_am_main
     quelle   = "GeoNames (CC BY 4.0), geonameid 2818097; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = NAS
+        bund     = ja
+    }
 }
 
 ort woelfersheim {
@@ -178,6 +258,11 @@ ort woelfersheim {
     stadt    = nein
     kreis    = kr_frankfurt_am_main
     quelle   = "GeoNames (CC BY 4.0), geonameid 2806852; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort florstadt {
@@ -188,6 +273,11 @@ ort florstadt {
     stadt    = nein
     kreis    = kr_frankfurt_am_main
     quelle   = "GeoNames (CC BY 4.0), geonameid 3208053; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort schmitten {
@@ -198,6 +288,11 @@ ort schmitten {
     stadt    = nein
     kreis    = kr_frankfurt_am_main
     quelle   = "GeoNames (CC BY 4.0), geonameid 2837706; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = NAS
+        bund     = ja
+    }
 }
 
 ort graevenwiesbach {
@@ -208,4 +303,9 @@ ort graevenwiesbach {
     stadt    = nein
     kreis    = kr_frankfurt_am_main
     quelle   = "GeoNames (CC BY 4.0), geonameid 2917868; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = NAS
+        bund     = ja
+    }
 }

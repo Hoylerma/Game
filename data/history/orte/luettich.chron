@@ -258,6 +258,11 @@ ort eupen {
     stadt    = nein
     kreis    = kr_verviers
     quelle   = "GeoNames (CC BY 4.0), geonameid 2798573; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort bleyberg {
@@ -388,6 +393,11 @@ ort malmedy {
     stadt    = nein
     kreis    = kr_malmedy
     quelle   = "GeoNames (CC BY 4.0), geonameid 2791834; deutscher Name aus den GeoNames-Alternativnamen (heute Malmédy); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort spa {
@@ -408,6 +418,11 @@ ort sankt_vith {
     stadt    = nein
     kreis    = kr_malmedy
     quelle   = "GeoNames (CC BY 4.0), geonameid 2787315; deutscher Name aus den GeoNames-Alternativnamen (heute Saint-Vith); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort buellingen {
@@ -418,6 +433,11 @@ ort buellingen {
     stadt    = nein
     kreis    = kr_malmedy
     quelle   = "GeoNames (CC BY 4.0), geonameid 2800782; deutscher Name aus den GeoNames-Alternativnamen (heute Bullange); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort amel {
@@ -428,6 +448,11 @@ ort amel {
     stadt    = nein
     kreis    = kr_malmedy
     quelle   = "GeoNames (CC BY 4.0), geonameid 2803242; deutscher Name aus den GeoNames-Alternativnamen (heute Amblève); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort lierneux {

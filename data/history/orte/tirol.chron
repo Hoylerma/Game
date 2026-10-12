@@ -18,6 +18,11 @@ ort sankt_johann_in_tirol {
     stadt    = nein
     kreis    = kr_sankt_johann_in_tirol
     quelle   = "GeoNames (CC BY 4.0), geonameid 2766636; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort kitzbuehel {
@@ -28,6 +33,11 @@ ort kitzbuehel {
     stadt    = nein
     kreis    = kr_sankt_johann_in_tirol
     quelle   = "GeoNames (CC BY 4.0), geonameid 2774347; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort koessen {
@@ -38,6 +48,11 @@ ort koessen {
     stadt    = nein
     kreis    = kr_sankt_johann_in_tirol
     quelle   = "GeoNames (CC BY 4.0), geonameid 2773691; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort fieberbrunn {
@@ -48,6 +63,11 @@ ort fieberbrunn {
     stadt    = nein
     kreis    = kr_sankt_johann_in_tirol
     quelle   = "GeoNames (CC BY 4.0), geonameid 2779595; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort westendorf {
@@ -58,6 +78,11 @@ ort westendorf {
     stadt    = nein
     kreis    = kr_sankt_johann_in_tirol
     quelle   = "GeoNames (CC BY 4.0), geonameid 2761457; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort ellmau {
@@ -68,6 +93,11 @@ ort ellmau {
     stadt    = nein
     kreis    = kr_sankt_johann_in_tirol
     quelle   = "GeoNames (CC BY 4.0), geonameid 2780135; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort waidring {
@@ -78,6 +108,11 @@ ort waidring {
     stadt    = nein
     kreis    = kr_sankt_johann_in_tirol
     quelle   = "GeoNames (CC BY 4.0), geonameid 2762070; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort woergl {
@@ -88,6 +123,11 @@ ort woergl {
     stadt    = nein
     kreis    = kr_woergl
     quelle   = "GeoNames (CC BY 4.0), geonameid 2760854; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort schwaz {
@@ -98,6 +138,11 @@ ort schwaz {
     stadt    = ja
     kreis    = kr_woergl
     quelle   = "GeoNames (CC BY 4.0), geonameid 2765390; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort kufstein {
@@ -108,6 +153,11 @@ ort kufstein {
     stadt    = nein
     kreis    = kr_woergl
     quelle   = "GeoNames (CC BY 4.0), geonameid 2773300; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort alpbach {
@@ -118,6 +168,11 @@ ort alpbach {
     stadt    = nein
     kreis    = kr_woergl
     quelle   = "GeoNames (CC BY 4.0), geonameid 3323982; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort fuegen {
@@ -128,6 +183,11 @@ ort fuegen {
     stadt    = nein
     kreis    = kr_woergl
     quelle   = "GeoNames (CC BY 4.0), geonameid 2779154; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort achenkirch {
@@ -138,6 +198,11 @@ ort achenkirch {
     stadt    = nein
     kreis    = kr_woergl
     quelle   = "GeoNames (CC BY 4.0), geonameid 2783035; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort brandenberg {
@@ -148,6 +213,11 @@ ort brandenberg {
     stadt    = nein
     kreis    = kr_woergl
     quelle   = "GeoNames (CC BY 4.0), geonameid 2781567; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort reutte {
@@ -158,6 +228,11 @@ ort reutte {
     stadt    = nein
     kreis    = kr_reutte
     quelle   = "GeoNames (CC BY 4.0), geonameid 2767511; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort tannheim {
@@ -168,6 +243,11 @@ ort tannheim {
     stadt    = nein
     kreis    = kr_reutte
     quelle   = "GeoNames (CC BY 4.0), geonameid 2763915; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort elbigenalp {
@@ -178,6 +258,11 @@ ort elbigenalp {
     stadt    = nein
     kreis    = kr_reutte
     quelle   = "GeoNames (CC BY 4.0), geonameid 2780153; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort elmen {
@@ -188,6 +273,11 @@ ort elmen {
     stadt    = nein
     kreis    = kr_reutte
     quelle   = "GeoNames (CC BY 4.0), geonameid 2780123; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort innsbruck {
@@ -198,6 +288,11 @@ ort innsbruck {
     stadt    = ja
     kreis    = kr_innsbruck
     quelle   = "GeoNames (CC BY 4.0), geonameid 2775220; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort hall_in_tirol {
@@ -208,6 +303,11 @@ ort hall_in_tirol {
     stadt    = nein
     kreis    = kr_innsbruck
     quelle   = "GeoNames (CC BY 4.0), geonameid 2764958; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort telfs {
@@ -218,6 +318,11 @@ ort telfs {
     stadt    = nein
     kreis    = kr_innsbruck
     quelle   = "GeoNames (CC BY 4.0), geonameid 2763810; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort zirl {
@@ -228,6 +333,11 @@ ort zirl {
     stadt    = nein
     kreis    = kr_innsbruck
     quelle   = "GeoNames (CC BY 4.0), geonameid 2760523; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort leutasch {
@@ -238,6 +348,11 @@ ort leutasch {
     stadt    = nein
     kreis    = kr_innsbruck
     quelle   = "GeoNames (CC BY 4.0), geonameid 3319549; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort fritzens {
@@ -248,6 +363,11 @@ ort fritzens {
     stadt    = nein
     kreis    = kr_innsbruck
     quelle   = "GeoNames (CC BY 4.0), geonameid 2779214; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort gries_im_sellrain {
@@ -258,6 +378,11 @@ ort gries_im_sellrain {
     stadt    = nein
     kreis    = kr_innsbruck
     quelle   = "GeoNames (CC BY 4.0), geonameid 2777974; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort imst {
@@ -268,6 +393,11 @@ ort imst {
     stadt    = nein
     kreis    = kr_imst
     quelle   = "GeoNames (CC BY 4.0), geonameid 2775307; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort laengenfeld {
@@ -278,6 +408,11 @@ ort laengenfeld {
     stadt    = nein
     kreis    = kr_imst
     quelle   = "GeoNames (CC BY 4.0), geonameid 8740442; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort soelden {
@@ -288,6 +423,11 @@ ort soelden {
     stadt    = nein
     kreis    = kr_imst
     quelle   = "GeoNames (CC BY 4.0), geonameid 2764957; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort oetz {
@@ -298,6 +438,11 @@ ort oetz {
     stadt    = nein
     kreis    = kr_imst
     quelle   = "GeoNames (CC BY 4.0), geonameid 2769324; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort ehrwald {
@@ -308,6 +453,11 @@ ort ehrwald {
     stadt    = nein
     kreis    = kr_imst
     quelle   = "GeoNames (CC BY 4.0), geonameid 3319581; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort nassereith {
@@ -318,6 +468,11 @@ ort nassereith {
     stadt    = nein
     kreis    = kr_imst
     quelle   = "GeoNames (CC BY 4.0), geonameid 2770927; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort jerzens {
@@ -328,6 +483,11 @@ ort jerzens {
     stadt    = nein
     kreis    = kr_imst
     quelle   = "GeoNames (CC BY 4.0), geonameid 2775086; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort mayrhofen {
@@ -338,6 +498,11 @@ ort mayrhofen {
     stadt    = nein
     kreis    = kr_mayrhofen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2771725; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort tux {
@@ -348,6 +513,11 @@ ort tux {
     stadt    = nein
     kreis    = kr_mayrhofen
     quelle   = "GeoNames (CC BY 4.0), geonameid 11903603; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort aschau_im_zillertal {
@@ -358,6 +528,11 @@ ort aschau_im_zillertal {
     stadt    = nein
     kreis    = kr_mayrhofen
     quelle   = "GeoNames (CC BY 4.0), geonameid 11592193; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort gerlos {
@@ -368,6 +543,11 @@ ort gerlos {
     stadt    = nein
     kreis    = kr_mayrhofen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3323921; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort landeck {
@@ -378,6 +558,11 @@ ort landeck {
     stadt    = nein
     kreis    = kr_landeck
     quelle   = "GeoNames (CC BY 4.0), geonameid 2773070; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort pfunds {
@@ -388,6 +573,11 @@ ort pfunds {
     stadt    = nein
     kreis    = kr_landeck
     quelle   = "GeoNames (CC BY 4.0), geonameid 2768905; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort sankt_anton_am_arlberg {
@@ -398,6 +588,11 @@ ort sankt_anton_am_arlberg {
     stadt    = nein
     kreis    = kr_landeck
     quelle   = "GeoNames (CC BY 4.0), geonameid 2766757; Name Sankt Anton am Arlberg aus den GeoNames-Alternativnamen (GeoNames: St Anton am Arlberg); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort ischgl {
@@ -408,6 +603,11 @@ ort ischgl {
     stadt    = nein
     kreis    = kr_landeck
     quelle   = "GeoNames (CC BY 4.0), geonameid 2775183; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort nauders {
@@ -418,6 +618,11 @@ ort nauders {
     stadt    = nein
     kreis    = kr_landeck
     quelle   = "GeoNames (CC BY 4.0), geonameid 2770910; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort kappl {
@@ -428,6 +633,11 @@ ort kappl {
     stadt    = nein
     kreis    = kr_landeck
     quelle   = "GeoNames (CC BY 4.0), geonameid 2774761; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort serfaus {
@@ -438,6 +648,11 @@ ort serfaus {
     stadt    = nein
     kreis    = kr_landeck
     quelle   = "GeoNames (CC BY 4.0), geonameid 2765150; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort prutz {
@@ -448,6 +663,11 @@ ort prutz {
     stadt    = nein
     kreis    = kr_landeck
     quelle   = "GeoNames (CC BY 4.0), geonameid 2768291; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort flirsch {
@@ -458,6 +678,11 @@ ort flirsch {
     stadt    = nein
     kreis    = kr_landeck
     quelle   = "GeoNames (CC BY 4.0), geonameid 2779480; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort galtuer {
@@ -468,6 +693,11 @@ ort galtuer {
     stadt    = nein
     kreis    = kr_landeck
     quelle   = "GeoNames (CC BY 4.0), geonameid 2778953; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort graun_im_vinschgau {
@@ -478,6 +708,11 @@ ort graun_im_vinschgau {
     stadt    = nein
     kreis    = kr_landeck
     quelle   = "GeoNames (CC BY 4.0), geonameid 3177670; deutscher Name aus den GeoNames-Alternativnamen (heute Curon Venosta); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort steeg {
@@ -488,6 +723,11 @@ ort steeg {
     stadt    = nein
     kreis    = kr_landeck
     quelle   = "GeoNames (CC BY 4.0), geonameid 2764605; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort sterzing {
@@ -498,6 +738,11 @@ ort sterzing {
     stadt    = nein
     kreis    = kr_sterzing
     quelle   = "GeoNames (CC BY 4.0), geonameid 3164065; deutscher Name aus den GeoNames-Alternativnamen (heute Vipiteno); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort neustift_im_stubaital {
@@ -508,6 +753,11 @@ ort neustift_im_stubaital {
     stadt    = nein
     kreis    = kr_sterzing
     quelle   = "GeoNames (CC BY 4.0), geonameid 2770651; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort steinach_am_brenner {
@@ -518,6 +768,11 @@ ort steinach_am_brenner {
     stadt    = nein
     kreis    = kr_sterzing
     quelle   = "GeoNames (CC BY 4.0), geonameid 2764557; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort ried {
@@ -528,6 +783,11 @@ ort ried {
     stadt    = nein
     kreis    = kr_sterzing
     quelle   = "GeoNames (CC BY 4.0), geonameid 7645253; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort vals {
@@ -538,6 +798,11 @@ ort vals {
     stadt    = nein
     kreis    = kr_sterzing
     quelle   = "GeoNames (CC BY 4.0), geonameid 11903709; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort gschnitz {
@@ -548,6 +813,11 @@ ort gschnitz {
     stadt    = nein
     kreis    = kr_sterzing
     quelle   = "GeoNames (CC BY 4.0), geonameid 3319569; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort lienz {
@@ -558,6 +828,11 @@ ort lienz {
     stadt    = nein
     kreis    = kr_lienz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2772505; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort toblach {
@@ -568,6 +843,11 @@ ort toblach {
     stadt    = nein
     kreis    = kr_lienz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3177571; deutscher Name aus den GeoNames-Alternativnamen (heute Dobbiaco); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort matrei_in_osttirol {
@@ -578,6 +858,11 @@ ort matrei_in_osttirol {
     stadt    = nein
     kreis    = kr_lienz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2771828; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort sillian {
@@ -588,6 +873,11 @@ ort sillian {
     stadt    = nein
     kreis    = kr_lienz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2765044; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort nikolsdorf {
@@ -598,6 +888,11 @@ ort nikolsdorf {
     stadt    = nein
     kreis    = kr_lienz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2770479; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort obertilliach {
@@ -608,6 +903,11 @@ ort obertilliach {
     stadt    = nein
     kreis    = kr_lienz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2769662; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort schlaiten {
@@ -618,6 +918,11 @@ ort schlaiten {
     stadt    = nein
     kreis    = kr_lienz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3217367; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort san_martino {
@@ -628,6 +933,11 @@ ort san_martino {
     stadt    = nein
     kreis    = kr_lienz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3168014; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort sankt_veit_in_defereggen {
@@ -638,6 +948,11 @@ ort sankt_veit_in_defereggen {
     stadt    = nein
     kreis    = kr_lienz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2766350; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort praegraten {
@@ -648,6 +963,11 @@ ort praegraten {
     stadt    = nein
     kreis    = kr_lienz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2768437; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort kals_am_grossglockner {
@@ -658,6 +978,11 @@ ort kals_am_grossglockner {
     stadt    = nein
     kreis    = kr_lienz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3323885; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort bruneck {
@@ -668,6 +993,11 @@ ort bruneck {
     stadt    = nein
     kreis    = kr_bruneck
     quelle   = "GeoNames (CC BY 4.0), geonameid 3181480; deutscher Name aus den GeoNames-Alternativnamen (heute Brunico); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort ahrntal {
@@ -678,6 +1008,11 @@ ort ahrntal {
     stadt    = nein
     kreis    = kr_bruneck
     quelle   = "GeoNames (CC BY 4.0), geonameid 6534793; deutscher Teil des zweisprachigen GeoNames-Namens (Valle Aurina - Ahrntal); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort sand_in_taufers {
@@ -688,6 +1023,11 @@ ort sand_in_taufers {
     stadt    = nein
     kreis    = kr_bruneck
     quelle   = "GeoNames (CC BY 4.0), geonameid 3180908; deutscher Name aus den GeoNames-Alternativnamen (heute Campo Tures); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort rasen_antholz {
@@ -698,6 +1038,11 @@ ort rasen_antholz {
     stadt    = nein
     kreis    = kr_bruneck
     quelle   = "GeoNames (CC BY 4.0), geonameid 6534785; deutscher Teil des zweisprachigen GeoNames-Namens (Rasun Anterselva - Rasen-Antholz); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort muehlwald {
@@ -708,6 +1053,11 @@ ort muehlwald {
     stadt    = nein
     kreis    = kr_bruneck
     quelle   = "GeoNames (CC BY 4.0), geonameid 3166777; deutscher Name aus den GeoNames-Alternativnamen (heute Selva dei Molini); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort prettau {
@@ -718,6 +1068,11 @@ ort prettau {
     stadt    = nein
     kreis    = kr_bruneck
     quelle   = "GeoNames (CC BY 4.0), geonameid 3169874; deutscher Name aus den GeoNames-Alternativnamen (heute Predoi); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort brixen {
@@ -728,6 +1083,11 @@ ort brixen {
     stadt    = nein
     kreis    = kr_brixen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3181550; deutscher Name aus den GeoNames-Alternativnamen (heute Bressanone); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort st_ulrich_in_groeden {
@@ -738,6 +1098,11 @@ ort st_ulrich_in_groeden {
     stadt    = nein
     kreis    = kr_brixen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3171891; deutscher Name aus den GeoNames-Alternativnamen (heute Ortisei); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort klausen {
@@ -748,6 +1113,11 @@ ort klausen {
     stadt    = nein
     kreis    = kr_brixen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3178764; deutscher Name aus den GeoNames-Alternativnamen (heute Chiusa); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort vintl {
@@ -758,6 +1128,11 @@ ort vintl {
     stadt    = nein
     kreis    = kr_brixen
     quelle   = "GeoNames (CC BY 4.0), geonameid 6534795; deutscher Teil des zweisprachigen GeoNames-Namens (Vandoies - Vintl); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort sankt_vigil {
@@ -768,6 +1143,11 @@ ort sankt_vigil {
     stadt    = nein
     kreis    = kr_brixen
     quelle   = "GeoNames (CC BY 4.0), geonameid 8643247; deutscher Name aus den GeoNames-Alternativnamen (heute San Vigilio); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort abtei {
@@ -778,6 +1158,11 @@ ort abtei {
     stadt    = nein
     kreis    = kr_brixen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3182585; deutscher Name aus den GeoNames-Alternativnamen (heute Badia); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort meran {
@@ -788,6 +1173,11 @@ ort meran {
     stadt    = ja
     kreis    = kr_meran
     quelle   = "GeoNames (CC BY 4.0), geonameid 3173577; deutscher Name aus den GeoNames-Alternativnamen (heute Merano); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort ratschings {
@@ -798,6 +1188,11 @@ ort ratschings {
     stadt    = nein
     kreis    = kr_meran
     quelle   = "GeoNames (CC BY 4.0), geonameid 3169646; deutscher Name aus den GeoNames-Alternativnamen (heute Racines); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort sarnthein {
@@ -808,6 +1203,11 @@ ort sarnthein {
     stadt    = nein
     kreis    = kr_meran
     quelle   = "GeoNames (CC BY 4.0), geonameid 3167131; deutscher Name aus den GeoNames-Alternativnamen (heute Sarentino); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort sankt_martin_in_passeier {
@@ -818,6 +1218,11 @@ ort sankt_martin_in_passeier {
     stadt    = nein
     kreis    = kr_meran
     quelle   = "GeoNames (CC BY 4.0), geonameid 3168043; deutscher Name aus den GeoNames-Alternativnamen (heute San Martino in Passiria); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort gargazon {
@@ -828,6 +1233,11 @@ ort gargazon {
     stadt    = nein
     kreis    = kr_meran
     quelle   = "GeoNames (CC BY 4.0), geonameid 3176305; deutscher Name aus den GeoNames-Alternativnamen (heute Gargazzone); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort moos_in_passeier {
@@ -838,6 +1248,11 @@ ort moos_in_passeier {
     stadt    = nein
     kreis    = kr_meran
     quelle   = "GeoNames (CC BY 4.0), geonameid 3172526; deutscher Name aus den GeoNames-Alternativnamen (heute Moso in Passiria); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort schlanders {
@@ -848,6 +1263,11 @@ ort schlanders {
     stadt    = nein
     kreis    = kr_schlanders
     quelle   = "GeoNames (CC BY 4.0), geonameid 3166537; deutscher Name aus den GeoNames-Alternativnamen (heute Silandro); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort naturns {
@@ -858,6 +1278,11 @@ ort naturns {
     stadt    = nein
     kreis    = kr_schlanders
     quelle   = "GeoNames (CC BY 4.0), geonameid 3172367; deutscher Name aus den GeoNames-Alternativnamen (heute Naturno); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort prad_am_stilfser_joch {
@@ -868,6 +1293,11 @@ ort prad_am_stilfser_joch {
     stadt    = nein
     kreis    = kr_schlanders
     quelle   = "GeoNames (CC BY 4.0), geonameid 3169914; deutscher Name aus den GeoNames-Alternativnamen (heute Prato Allo Stelvio); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort ulten {
@@ -878,6 +1308,11 @@ ort ulten {
     stadt    = nein
     kreis    = kr_schlanders
     quelle   = "GeoNames (CC BY 4.0), geonameid 6534791; deutscher Teil des zweisprachigen GeoNames-Namens (Ultimo - Ulten); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort schnals {
@@ -888,6 +1323,11 @@ ort schnals {
     stadt    = nein
     kreis    = kr_schlanders
     quelle   = "GeoNames (CC BY 4.0), geonameid 6534789; deutscher Name aus den GeoNames-Alternativnamen (heute Senales); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort taufers_im_muenstertal {
@@ -898,6 +1338,11 @@ ort taufers_im_muenstertal {
     stadt    = nein
     kreis    = kr_schlanders
     quelle   = "GeoNames (CC BY 4.0), geonameid 3165124; deutscher Name aus den GeoNames-Alternativnamen (heute Tubre); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort laurein {
@@ -908,6 +1353,11 @@ ort laurein {
     stadt    = nein
     kreis    = kr_schlanders
     quelle   = "GeoNames (CC BY 4.0), geonameid 3175038; deutscher Name aus den GeoNames-Alternativnamen (heute Lauregno); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort martell {
@@ -918,6 +1368,11 @@ ort martell {
     stadt    = nein
     kreis    = kr_schlanders
     quelle   = "GeoNames (CC BY 4.0), geonameid 3176331; deutscher Name aus den GeoNames-Alternativnamen (heute Ganda); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort bozen {
@@ -928,6 +1383,11 @@ ort bozen {
     stadt    = ja
     kreis    = kr_bozen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3181913; deutscher Name aus den GeoNames-Alternativnamen (heute Bolzano); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort kaltern {
@@ -938,6 +1398,11 @@ ort kaltern {
     stadt    = nein
     kreis    = kr_bozen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3181215; deutscher Name aus den GeoNames-Alternativnamen (heute Caldaro sulla Strada del Vino); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort ritten {
@@ -948,6 +1413,11 @@ ort ritten {
     stadt    = nein
     kreis    = kr_bozen
     quelle   = "GeoNames (CC BY 4.0), geonameid 6534786; deutscher Teil des zweisprachigen GeoNames-Namens (Renon - Ritten); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort neumarkt_tirol {
@@ -958,6 +1428,11 @@ ort neumarkt_tirol {
     stadt    = nein
     kreis    = kr_bozen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3177431; deutscher Name aus den GeoNames-Alternativnamen (heute Egna); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort salurn {
@@ -968,6 +1443,11 @@ ort salurn {
     stadt    = nein
     kreis    = kr_bozen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3168632; deutscher Name aus den GeoNames-Alternativnamen (heute Salorno); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort welschnofen {
@@ -978,4 +1458,9 @@ ort welschnofen {
     stadt    = nein
     kreis    = kr_bozen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3172192; deutscher Name aus den GeoNames-Alternativnamen (heute Nova Levante); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }

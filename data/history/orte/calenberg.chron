@@ -18,6 +18,11 @@ ort stuhr {
     stadt    = ja
     kreis    = kr_stuhr
     quelle   = "GeoNames (CC BY 4.0), geonameid 2825422; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort syke {
@@ -28,6 +33,11 @@ ort syke {
     stadt    = ja
     kreis    = kr_stuhr
     quelle   = "GeoNames (CC BY 4.0), geonameid 2824461; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort bassum {
@@ -38,6 +48,11 @@ ort bassum {
     stadt    = nein
     kreis    = kr_stuhr
     quelle   = "GeoNames (CC BY 4.0), geonameid 2952252; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort twistringen {
@@ -48,6 +63,11 @@ ort twistringen {
     stadt    = nein
     kreis    = kr_stuhr
     quelle   = "GeoNames (CC BY 4.0), geonameid 2820643; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort sudwalde {
@@ -58,6 +78,11 @@ ort sudwalde {
     stadt    = nein
     kreis    = kr_stuhr
     quelle   = "GeoNames (CC BY 4.0), geonameid 2824967; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort nienburg {
@@ -68,6 +93,11 @@ ort nienburg {
     stadt    = ja
     kreis    = kr_nienburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2862620; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort sulingen {
@@ -78,6 +108,11 @@ ort sulingen {
     stadt    = nein
     kreis    = kr_nienburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2824902; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort stolzenau {
@@ -88,6 +123,11 @@ ort stolzenau {
     stadt    = nein
     kreis    = kr_nienburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2826503; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort bruchhausen_vilsen {
@@ -98,6 +138,11 @@ ort bruchhausen_vilsen {
     stadt    = nein
     kreis    = kr_nienburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2943587; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort uchte {
@@ -108,6 +153,11 @@ ort uchte {
     stadt    = nein
     kreis    = kr_nienburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2820537; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort hoya {
@@ -118,6 +168,11 @@ ort hoya {
     stadt    = nein
     kreis    = kr_nienburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2898316; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort liebenau {
@@ -128,6 +183,11 @@ ort liebenau {
     stadt    = nein
     kreis    = kr_nienburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2877979; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort steimbke {
@@ -138,6 +198,11 @@ ort steimbke {
     stadt    = nein
     kreis    = kr_nienburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2828993; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort wietzen {
@@ -148,6 +213,11 @@ ort wietzen {
     stadt    = nein
     kreis    = kr_nienburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2809089; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort husum_calenberg {
@@ -158,6 +228,11 @@ ort husum_calenberg {
     stadt    = nein
     kreis    = kr_nienburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2897136; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort kirchdorf {
@@ -168,6 +243,11 @@ ort kirchdorf {
     stadt    = nein
     kreis    = kr_nienburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2890609; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort hassbergen {
@@ -178,6 +258,11 @@ ort hassbergen {
     stadt    = nein
     kreis    = kr_nienburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2909460; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort diepholz {
@@ -188,6 +273,11 @@ ort diepholz {
     stadt    = ja
     kreis    = kr_diepholz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2937317; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort wagenfeld {
@@ -198,6 +288,11 @@ ort wagenfeld {
     stadt    = nein
     kreis    = kr_diepholz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2815523; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort barnstorf {
@@ -208,6 +303,11 @@ ort barnstorf {
     stadt    = nein
     kreis    = kr_diepholz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2952452; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort lemfoerde {
@@ -218,6 +318,11 @@ ort lemfoerde {
     stadt    = nein
     kreis    = kr_diepholz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2878944; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort neustadt_am_ruebenberge {
@@ -228,6 +333,11 @@ ort neustadt_am_ruebenberge {
     stadt    = ja
     kreis    = kr_neustadt_am_ruebenberge
     quelle   = "GeoNames (CC BY 4.0), geonameid 2864058; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort stadthagen {
@@ -238,6 +348,11 @@ ort stadthagen {
     stadt    = ja
     kreis    = kr_neustadt_am_ruebenberge
     quelle   = "GeoNames (CC BY 4.0), geonameid 2829777; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = SLI
+        bund     = ja
+    }
 }
 
 ort wunstorf {
@@ -248,6 +363,11 @@ ort wunstorf {
     stadt    = ja
     kreis    = kr_neustadt_am_ruebenberge
     quelle   = "GeoNames (CC BY 4.0), geonameid 2805761; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort rehburg_loccum {
@@ -258,6 +378,11 @@ ort rehburg_loccum {
     stadt    = nein
     kreis    = kr_neustadt_am_ruebenberge
     quelle   = "GeoNames (CC BY 4.0), geonameid 2849371; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort sachsenhagen {
@@ -268,6 +393,11 @@ ort sachsenhagen {
     stadt    = nein
     kreis    = kr_neustadt_am_ruebenberge
     quelle   = "GeoNames (CC BY 4.0), geonameid 2842531; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = SLI
+        bund     = ja
+    }
 }
 
 ort hannover {
@@ -278,6 +408,11 @@ ort hannover {
     stadt    = ja
     kreis    = kr_hannover
     quelle   = "GeoNames (CC BY 4.0), geonameid 2910831; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort garbsen {
@@ -288,6 +423,11 @@ ort garbsen {
     stadt    = ja
     kreis    = kr_hannover
     quelle   = "GeoNames (CC BY 4.0), geonameid 2922586; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort langenhagen {
@@ -298,6 +438,11 @@ ort langenhagen {
     stadt    = ja
     kreis    = kr_hannover
     quelle   = "GeoNames (CC BY 4.0), geonameid 2881062; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort lehrte {
@@ -308,6 +453,11 @@ ort lehrte {
     stadt    = ja
     kreis    = kr_hannover
     quelle   = "GeoNames (CC BY 4.0), geonameid 2879367; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort laatzen {
@@ -318,6 +468,11 @@ ort laatzen {
     stadt    = ja
     kreis    = kr_hannover
     quelle   = "GeoNames (CC BY 4.0), geonameid 2882087; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort burgdorf {
@@ -328,6 +483,11 @@ ort burgdorf {
     stadt    = ja
     kreis    = kr_hannover
     quelle   = "GeoNames (CC BY 4.0), geonameid 2941405; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort ronnenberg {
@@ -338,6 +498,11 @@ ort ronnenberg {
     stadt    = ja
     kreis    = kr_hannover
     quelle   = "GeoNames (CC BY 4.0), geonameid 2845222; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort uetze {
@@ -348,6 +513,11 @@ ort uetze {
     stadt    = nein
     kreis    = kr_hannover
     quelle   = "GeoNames (CC BY 4.0), geonameid 2820436; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort elze {
@@ -358,6 +528,11 @@ ort elze {
     stadt    = nein
     kreis    = kr_hannover
     quelle   = "GeoNames (CC BY 4.0), geonameid 2930622; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort hameln {
@@ -368,6 +543,11 @@ ort hameln {
     stadt    = ja
     kreis    = kr_hameln
     quelle   = "GeoNames (CC BY 4.0), geonameid 2911271; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort springe {
@@ -378,6 +558,11 @@ ort springe {
     stadt    = ja
     kreis    = kr_hameln
     quelle   = "GeoNames (CC BY 4.0), geonameid 2830035; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort rinteln {
@@ -388,6 +573,11 @@ ort rinteln {
     stadt    = ja
     kreis    = kr_hameln
     quelle   = "GeoNames (CC BY 4.0), geonameid 2846523; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HEK
+        bund     = ja
+    }
 }
 
 ort bueckeburg {
@@ -398,6 +588,11 @@ ort bueckeburg {
     stadt    = ja
     kreis    = kr_hameln
     quelle   = "GeoNames (CC BY 4.0), geonameid 2942159; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = SLI
+        bund     = ja
+    }
 }
 
 ort bad_pyrmont {
@@ -408,6 +603,11 @@ ort bad_pyrmont {
     stadt    = ja
     kreis    = kr_hameln
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953379; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = WAL
+        bund     = ja
+    }
 }
 
 ort hessisch_oldendorf {
@@ -418,6 +618,11 @@ ort hessisch_oldendorf {
     stadt    = ja
     kreis    = kr_hameln
     quelle   = "GeoNames (CC BY 4.0), geonameid 2905290; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HEK
+        bund     = ja
+    }
 }
 
 ort barsinghausen {
@@ -428,6 +633,11 @@ ort barsinghausen {
     stadt    = nein
     kreis    = kr_hameln
     quelle   = "GeoNames (CC BY 4.0), geonameid 2952406; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort salzhemmendorf {
@@ -438,4 +648,9 @@ ort salzhemmendorf {
     stadt    = nein
     kreis    = kr_hameln
     quelle   = "GeoNames (CC BY 4.0), geonameid 2842143; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }

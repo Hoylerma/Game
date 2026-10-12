@@ -87,6 +87,10 @@ ort christiansfeld {
     stadt    = nein
     kreis    = kr_esbjerg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2623183; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = DEN
+    }
 }
 
 ort roedding {
@@ -97,6 +101,10 @@ ort roedding {
     stadt    = nein
     kreis    = kr_esbjerg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2614623; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = DEN
+    }
 }
 
 ort holsted {

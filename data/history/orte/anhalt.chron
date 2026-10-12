@@ -33,6 +33,11 @@ ort dessau {
         kultur       = { obersachsen = 100 }
         verwuestung  = 0.55
     }
+
+    1848.03.01 = {
+        besitzer = DES
+        bund     = ja
+    }
 }
 
 ort bernburg {
@@ -50,6 +55,11 @@ ort bernburg {
         konfession   = { reformiert = 85 lutherisch = 15 }
         kultur       = { obersachsen = 100 }
         verwuestung  = 0.6
+    }
+
+    1848.03.01 = {
+        besitzer = BER
+        bund     = ja
     }
 }
 
@@ -69,6 +79,11 @@ ort koethen {
         kultur       = { obersachsen = 100 }
         verwuestung  = 0.6
     }
+
+    1848.03.01 = {
+        besitzer = DES
+        bund     = ja
+    }
 }
 
 ort zerbst {
@@ -87,6 +102,11 @@ ort zerbst {
         kultur       = { obersachsen = 100 }
         verwuestung  = 0.55
     }
+
+    1848.03.01 = {
+        besitzer = DES
+        bund     = ja
+    }
 }
 
 ort aken {
@@ -97,6 +117,11 @@ ort aken {
     stadt    = nein
     kreis    = kr_dessau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2958781; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = DES
+        bund     = ja
+    }
 }
 
 ort groebzig {
@@ -107,6 +132,11 @@ ort groebzig {
     stadt    = nein
     kreis    = kr_dessau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2917206; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = DES
+        bund     = ja
+    }
 }
 
 ort rodleben {
@@ -117,6 +147,11 @@ ort rodleben {
     stadt    = nein
     kreis    = kr_dessau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2845914; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = DES
+        bund     = ja
+    }
 }
 
 ort lindau_anhalt {
@@ -127,6 +162,11 @@ ort lindau_anhalt {
     stadt    = nein
     kreis    = kr_dessau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2877546; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = DES
+        bund     = ja
+    }
 }
 
 ort quellendorf {
@@ -137,6 +177,11 @@ ort quellendorf {
     stadt    = nein
     kreis    = kr_dessau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2851450; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = DES
+        bund     = ja
+    }
 }
 
 ort wolfen {
@@ -147,6 +192,11 @@ ort wolfen {
     stadt    = ja
     kreis    = kr_wolfen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2806919; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort zoerbig {
@@ -157,6 +207,11 @@ ort zoerbig {
     stadt    = nein
     kreis    = kr_wolfen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2803891; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort roitzsch {
@@ -167,6 +222,11 @@ ort roitzsch {
     stadt    = nein
     kreis    = kr_wolfen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2845475; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort pouch {
@@ -177,4 +237,9 @@ ort pouch {
     stadt    = nein
     kreis    = kr_wolfen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2852400; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }

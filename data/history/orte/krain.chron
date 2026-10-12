@@ -18,6 +18,11 @@ ort assling_krain {
     stadt    = nein
     kreis    = kr_assling_krain
     quelle   = "GeoNames (CC BY 4.0), geonameid 3198647; deutscher Name aus den GeoNames-Alternativnamen (heute Jesenice); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort radmannsdorf {
@@ -28,6 +33,11 @@ ort radmannsdorf {
     stadt    = nein
     kreis    = kr_assling_krain
     quelle   = "GeoNames (CC BY 4.0), geonameid 3192063; deutscher Name aus den GeoNames-Alternativnamen (heute Radovljica); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort neumarktl {
@@ -38,6 +48,11 @@ ort neumarktl {
     stadt    = nein
     kreis    = kr_assling_krain
     quelle   = "GeoNames (CC BY 4.0), geonameid 3188688; deutscher Name aus den GeoNames-Alternativnamen (heute Tržič); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort zelezniki {
@@ -48,6 +63,11 @@ ort zelezniki {
     stadt    = nein
     kreis    = kr_assling_krain
     quelle   = "GeoNames (CC BY 4.0), geonameid 3186607; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort kronau {
@@ -58,6 +78,11 @@ ort kronau {
     stadt    = nein
     kreis    = kr_assling_krain
     quelle   = "GeoNames (CC BY 4.0), geonameid 3197373; deutscher Name aus den GeoNames-Alternativnamen (heute Kranjska Gora); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort wochein_feistritz {
@@ -68,6 +93,11 @@ ort wochein_feistritz {
     stadt    = nein
     kreis    = kr_assling_krain
     quelle   = "GeoNames (CC BY 4.0), geonameid 3203808; deutscher Name aus den GeoNames-Alternativnamen (heute Bohinjska Bistrica); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort gorenja_vas {
@@ -78,6 +108,11 @@ ort gorenja_vas {
     stadt    = nein
     kreis    = kr_assling_krain
     quelle   = "GeoNames (CC BY 4.0), geonameid 3200379; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort krainburg {
@@ -88,6 +123,11 @@ ort krainburg {
     stadt    = ja
     kreis    = kr_krainburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 3197378; deutscher Name aus den GeoNames-Alternativnamen (heute Kranj); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort stein {
@@ -98,6 +138,11 @@ ort stein {
     stadt    = nein
     kreis    = kr_krainburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 3198365; deutscher Name aus den GeoNames-Alternativnamen (heute Kamnik); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort bischoflack {
@@ -108,6 +153,11 @@ ort bischoflack {
     stadt    = nein
     kreis    = kr_krainburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 3190717; deutscher Name aus den GeoNames-Alternativnamen (heute Škofja Loka); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort domzale {
@@ -118,6 +168,11 @@ ort domzale {
     stadt    = nein
     kreis    = kr_krainburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 3201730; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort medvode {
@@ -128,6 +183,11 @@ ort medvode {
     stadt    = nein
     kreis    = kr_krainburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 3195281; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort zirklach {
@@ -138,6 +198,11 @@ ort zirklach {
     stadt    = nein
     kreis    = kr_krainburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 3202711; deutscher Name aus den GeoNames-Alternativnamen (heute Cerklje na Gorenjskem); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort littai {
@@ -148,6 +213,11 @@ ort littai {
     stadt    = nein
     kreis    = kr_littai
     quelle   = "GeoNames (CC BY 4.0), geonameid 3196425; deutscher Name aus den GeoNames-Alternativnamen (heute Litija); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort trebnje {
@@ -158,6 +228,11 @@ ort trebnje {
     stadt    = nein
     kreis    = kr_littai
     quelle   = "GeoNames (CC BY 4.0), geonameid 3188886; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort radece {
@@ -168,6 +243,11 @@ ort radece {
     stadt    = nein
     kreis    = kr_littai
     quelle   = "GeoNames (CC BY 4.0), geonameid 3192144; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort ivancna_gorica {
@@ -178,6 +258,11 @@ ort ivancna_gorica {
     stadt    = nein
     kreis    = kr_littai
     quelle   = "GeoNames (CC BY 4.0), geonameid 3199078; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort seisenberg {
@@ -188,6 +273,11 @@ ort seisenberg {
     stadt    = nein
     kreis    = kr_littai
     quelle   = "GeoNames (CC BY 4.0), geonameid 3186270; deutscher Name aus den GeoNames-Alternativnamen (heute Žužemberk); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort moravce {
@@ -198,6 +288,11 @@ ort moravce {
     stadt    = nein
     kreis    = kr_littai
     quelle   = "GeoNames (CC BY 4.0), geonameid 3194873; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort izlake {
@@ -208,6 +303,11 @@ ort izlake {
     stadt    = nein
     kreis    = kr_littai
     quelle   = "GeoNames (CC BY 4.0), geonameid 3199020; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort nassenfuss {
@@ -218,6 +318,11 @@ ort nassenfuss {
     stadt    = nein
     kreis    = kr_littai
     quelle   = "GeoNames (CC BY 4.0), geonameid 3194904; deutscher Name aus den GeoNames-Alternativnamen (heute Mokronog); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort laibach {
@@ -228,6 +333,11 @@ ort laibach {
     stadt    = ja
     kreis    = kr_laibach
     quelle   = "GeoNames (CC BY 4.0), geonameid 3196359; deutscher Name aus den GeoNames-Alternativnamen (heute Ljubljana); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort grosuplje {
@@ -238,6 +348,11 @@ ort grosuplje {
     stadt    = nein
     kreis    = kr_laibach
     quelle   = "GeoNames (CC BY 4.0), geonameid 3199523; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort logatec {
@@ -248,6 +363,11 @@ ort logatec {
     stadt    = nein
     kreis    = kr_laibach
     quelle   = "GeoNames (CC BY 4.0), geonameid 3218907; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort borovnica {
@@ -258,6 +378,11 @@ ort borovnica {
     stadt    = nein
     kreis    = kr_laibach
     quelle   = "GeoNames (CC BY 4.0), geonameid 3203677; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort iggdorf {
@@ -268,6 +393,11 @@ ort iggdorf {
     stadt    = nein
     kreis    = kr_laibach
     quelle   = "GeoNames (CC BY 4.0), geonameid 3199162; deutscher Name aus den GeoNames-Alternativnamen (heute Ig); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort log_pri_brezovici {
@@ -278,6 +408,11 @@ ort log_pri_brezovici {
     stadt    = nein
     kreis    = kr_laibach
     quelle   = "GeoNames (CC BY 4.0), geonameid 3196281; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort rudolfswert {
@@ -288,6 +423,11 @@ ort rudolfswert {
     stadt    = ja
     kreis    = kr_rudolfswert
     quelle   = "GeoNames (CC BY 4.0), geonameid 3194351; deutscher Name aus den GeoNames-Alternativnamen (heute Novo Mesto); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort gurkfeld {
@@ -298,6 +438,11 @@ ort gurkfeld {
     stadt    = nein
     kreis    = kr_rudolfswert
     quelle   = "GeoNames (CC BY 4.0), geonameid 3197147; deutscher Name aus den GeoNames-Alternativnamen (heute Krško); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort tschernembl {
@@ -308,6 +453,11 @@ ort tschernembl {
     stadt    = nein
     kreis    = kr_rudolfswert
     quelle   = "GeoNames (CC BY 4.0), geonameid 3202333; deutscher Name aus den GeoNames-Alternativnamen (heute Črnomelj); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort moettling {
@@ -318,6 +468,11 @@ ort moettling {
     stadt    = nein
     kreis    = kr_rudolfswert
     quelle   = "GeoNames (CC BY 4.0), geonameid 3195214; deutscher Name aus den GeoNames-Alternativnamen (heute Metlika); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort sankt_bartlmae {
@@ -328,6 +483,11 @@ ort sankt_bartlmae {
     stadt    = nein
     kreis    = kr_rudolfswert
     quelle   = "GeoNames (CC BY 4.0), geonameid 3191033; deutscher Name aus den GeoNames-Alternativnamen (heute Šentjernej); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort dolenjske_toplice {
@@ -338,6 +498,11 @@ ort dolenjske_toplice {
     stadt    = nein
     kreis    = kr_rudolfswert
     quelle   = "GeoNames (CC BY 4.0), geonameid 3201817; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort adelsberg {
@@ -348,6 +513,11 @@ ort adelsberg {
     stadt    = nein
     kreis    = kr_adelsberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 3192673; deutscher Name aus den GeoNames-Alternativnamen (heute Postojna); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort zirknitz {
@@ -358,6 +528,11 @@ ort zirknitz {
     stadt    = nein
     kreis    = kr_adelsberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 3202709; deutscher Name aus den GeoNames-Alternativnamen (heute Cerknica); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort illyrisch_feistritz {
@@ -368,6 +543,11 @@ ort illyrisch_feistritz {
     stadt    = nein
     kreis    = kr_adelsberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 3199131; deutscher Name aus den GeoNames-Alternativnamen (heute Ilirska Bistrica); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort idria {
@@ -378,6 +558,11 @@ ort idria {
     stadt    = nein
     kreis    = kr_adelsberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 3199171; deutscher Name aus den GeoNames-Alternativnamen (heute Idrija); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort pivka {
@@ -388,6 +573,11 @@ ort pivka {
     stadt    = nein
     kreis    = kr_adelsberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 3193299; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort vipava {
@@ -398,6 +588,11 @@ ort vipava {
     stadt    = nein
     kreis    = kr_adelsberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 3187706; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Lage auf das nächste Landpixel gesetzt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort gottschee {
@@ -408,6 +603,11 @@ ort gottschee {
     stadt    = nein
     kreis    = kr_gottschee
     quelle   = "GeoNames (CC BY 4.0), geonameid 3197943; deutscher Name aus den GeoNames-Alternativnamen (heute Kočevje); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort reifnitz {
@@ -418,6 +618,11 @@ ort reifnitz {
     stadt    = nein
     kreis    = kr_gottschee
     quelle   = "GeoNames (CC BY 4.0), geonameid 3191685; deutscher Name aus den GeoNames-Alternativnamen (heute Ribnica); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort grosslaschitz {
@@ -428,6 +633,11 @@ ort grosslaschitz {
     stadt    = nein
     kreis    = kr_gottschee
     quelle   = "GeoNames (CC BY 4.0), geonameid 3188128; deutscher Name aus den GeoNames-Alternativnamen (heute Velike Lašče); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort leskova_dolina {
@@ -438,6 +648,11 @@ ort leskova_dolina {
     stadt    = nein
     kreis    = kr_gottschee
     quelle   = "GeoNames (CC BY 4.0), geonameid 3218745; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort kostel {
@@ -448,6 +663,11 @@ ort kostel {
     stadt    = nein
     kreis    = kr_gottschee
     quelle   = "GeoNames (CC BY 4.0), geonameid 8358613; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort laserbach {
@@ -458,6 +678,11 @@ ort laserbach {
     stadt    = nein
     kreis    = kr_gottschee
     quelle   = "GeoNames (CC BY 4.0), geonameid 3196192; deutscher Name aus den GeoNames-Alternativnamen (heute Loški Potok); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort osilnica {
@@ -468,6 +693,11 @@ ort osilnica {
     stadt    = nein
     kreis    = kr_gottschee
     quelle   = "GeoNames (CC BY 4.0), geonameid 3193930; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }
 
 ort nova_vas {
@@ -478,4 +708,9 @@ ort nova_vas {
     stadt    = nein
     kreis    = kr_gottschee
     quelle   = "GeoNames (CC BY 4.0), geonameid 3194403; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = AUT
+        bund     = ja
+    }
 }

@@ -1,0 +1,321 @@
+gebiet;staat;bund;verwaltung;sicherheit;quelle
+DE;;ja;;ungeprueft;heutiges Deutschland: Gebiet des Deutschen Bundes, Ausnahmen einzeln
+AT;AUT;ja;;ungeprueft;heutiges Österreich: Erblande im Bund
+AT.01;-;;;ungeprueft;Burgenland: Königreich Ungarn (Ausland, Ort ohne Daten)
+CZ;AUT;ja;;ungeprueft;Böhmen, Mähren und Österreichisch-Schlesien im Bund
+SI;AUT;ja;;ungeprueft;Krain und Untersteiermark im Bund (Herzogtum Krain, Steiermark)
+IT;AUT;ja;;ungeprueft;Tirol und Kärnten (Kanaltal) im Bund
+LI;LIE;ja;;ungeprueft;Fürstentum Liechtenstein
+LU;LUX;ja;;ungeprueft;Großherzogtum Luxemburg nach der Teilung von 1839
+FR;-;;;ungeprueft;Frankreich (mit Elsass und Lothringen): Ausland, Ort ohne Daten
+BE;-;;;ungeprueft;Belgien: Ausland, Ort ohne Daten
+NL;-;;;ungeprueft;Niederlande ohne Limburg: Ausland, Ort ohne Daten
+RU;PRU;nein;;ungeprueft;heutige Oblast Kaliningrad: Provinz Preußen (Ostpreußen), nicht im Bund
+LT;PRU;nein;;ungeprueft;Memelland: Provinz Preußen, nicht im Bund
+DK;-;;;ungeprueft;Königreich Dänemark nördlich der Königsau: Ausland, Ort ohne Daten
+PL;PRU;ja;;ungeprueft;heutiges Polen: Grundregel Preußen, Landschaften und Ausnahmen einzeln
+landschaft:limburg;NED;ja;;ungeprueft;Herzogtum Limburg (seit 1839 im Bund)
+landschaft:schleswig;DEN;nein;;ungeprueft;Herzogtum Schleswig unter dem dänischen König, nicht im Bund
+landschaft:holstein;DEN;ja;;ungeprueft;Herzogtum Holstein unter dem dänischen König, im Bund
+landschaft:pommern;PRU;ja;;ungeprueft;Provinz Pommern
+landschaft:mecklenburg;MSC;ja;;ungeprueft;Großherzogtum Mecklenburg-Schwerin, Strelitzer Gebiete einzeln
+landschaft:posen;PRU;nein;;ungeprueft;Provinz Posen, nicht im Bund
+landschaft:westpreussen;PRU;nein;;ungeprueft;Provinz Preußen (Westpreußen), nicht im Bund
+landschaft:ostpreussen;PRU;nein;;ungeprueft;Provinz Preußen (Ostpreußen), nicht im Bund
+landschaft:kongresspolen;-;;;ungeprueft;Königreich Polen (Russland): Ausland, Ort ohne Daten
+landschaft:galizien;AUT;ja;;ungeprueft;"Herzogtümer Auschwitz und Zator (Galizien, im Bund); Krakauer Gebiet einzeln"
+landschaft:oesterreichisch_schlesien;AUT;ja;;ungeprueft;Herzogtum Schlesien (Österreichisch-Schlesien)
+landschaft:oberschlesien;PRU;ja;;ungeprueft;Provinz Schlesien (Oberschlesien)
+landschaft:niederschlesien;PRU;ja;;ungeprueft;Provinz Schlesien (Niederschlesien)
+landschaft:glatz;PRU;ja;;ungeprueft;Grafschaft Glatz (Provinz Schlesien)
+DE.01;WUE;;;ungeprueft;Baden-Württemberg: Grundregel Württemberg, Baden nach Bezirken und Kreisen
+DE.01.082;BAD;;;ungeprueft;heutiger Regierungsbezirk Karlsruhe: Baden
+DE.01.083;BAD;;;ungeprueft;heutiger Regierungsbezirk Freiburg: Baden
+DE.01.082.08235;WUE;;;ungeprueft;Kreis Calw: württembergisch
+DE.01.082.08237;WUE;;;ungeprueft;Kreis Freudenstadt: württembergisch
+DE.01.083.08325;WUE;;;ungeprueft;Kreis Rottweil: württembergisch
+DE.01.083.08327;WUE;;;ungeprueft;Kreis Tuttlingen: württembergisch
+ort:wertheim;BAD;;;ungeprueft;badisch seit 1803/1806
+ort:tauberbischofsheim;BAD;;;ungeprueft;badisch seit 1803/1806
+ort:kuelsheim;BAD;;;ungeprueft;badisch seit 1803/1806
+ort:boxberg_mainfranken;BAD;;;ungeprueft;badisch seit 1803/1806
+ort:eppingen;BAD;;;ungeprueft;badisch seit 1803/1806
+ort:bad_rappenau;BAD;;;ungeprueft;badisch seit 1803/1806
+ort:kirchardt;BAD;;;ungeprueft;badisch seit 1803/1806
+ort:krautheim;BAD;;;ungeprueft;badisch seit 1803/1806
+ort:muehlacker;WUE;;;ungeprueft;württembergisch
+ort:neuenbuerg;WUE;;;ungeprueft;württembergisch
+ort:immendingen;BAD;;;ungeprueft;badisch seit 1803/1806
+ort:pfullendorf;BAD;;;ungeprueft;badisch seit 1803/1806
+ort:messkirch;BAD;;;ungeprueft;badisch seit 1803/1806
+ort:leibertingen;BAD;;;ungeprueft;badisch seit 1803/1806
+ort:stetten_am_kalten_markt;BAD;;;ungeprueft;badisch seit 1803/1806
+ort:herdwangen_schoenach;BAD;;;ungeprueft;badisch seit 1803/1806
+ort:ueberlingen;BAD;;;ungeprueft;badisch seit 1803/1806
+ort:markdorf;BAD;;;ungeprueft;badisch seit 1803/1806
+ort:salem;BAD;;;ungeprueft;badisch seit 1803/1806
+ort:hechingen;HOH;;;ungeprueft;Fürstentum Hohenzollern-Hechingen
+ort:burladingen;HOH;;;ungeprueft;Fürstentum Hohenzollern-Hechingen
+ort:haigerloch;HSI;;;ungeprueft;Fürstentum Hohenzollern-Sigmaringen
+ort:gammertingen;HSI;;;ungeprueft;Fürstentum Hohenzollern-Sigmaringen
+ort:sigmaringen;HSI;;;ungeprueft;Fürstentum Hohenzollern-Sigmaringen
+ort:ostrach;HSI;;;ungeprueft;Fürstentum Hohenzollern-Sigmaringen
+DE.02;BAV;;;ungeprueft;Bayern rechts des Rheins
+ort:coburg;SCG;;;ungeprueft;Herzogtum Coburg (Sachsen-Coburg und Gotha)
+ort:sonnefeld;SCG;;;ungeprueft;Herzogtum Coburg (Sachsen-Coburg und Gotha)
+ort:gersfeld;BAV;;;ungeprueft;bayerische Rhön bis 1866
+ort:hilders;BAV;;;ungeprueft;bayerische Rhön bis 1866
+DE.03;BRE;;;ungeprueft;Freie Hansestadt Bremen mit Bremerhaven
+DE.04;HAM;;;ungeprueft;Freie und Hansestadt Hamburg
+DE.05;HED;;;ungeprueft;Hessen: Grundregel Großherzogtum Hessen, Kurhessen und Nassau nach Kreisen
+DE.05.064.06412;FRA;;;ungeprueft;Freie Stadt Frankfurt
+DE.05.064.06414;NAS;;;ungeprueft;Herzogtum Nassau (Wiesbaden)
+DE.05.064.06434;NAS;;;ungeprueft;Hochtaunus: nassauisch, Homburg einzeln
+DE.05.064.06435;HEK;;;ungeprueft;Main-Kinzig: Provinz Hanau (Kurhessen)
+DE.05.064.06436;NAS;;;ungeprueft;Main-Taunus: nassauisch
+DE.05.064.06439;NAS;;;ungeprueft;Rheingau-Taunus: nassauisch
+DE.05.065.06532;NAS;;;ungeprueft;Lahn-Dill: Dillenburg und Herborn nassauisch, Wetzlar und Solms einzeln
+DE.05.065.06533;NAS;;;ungeprueft;Limburg-Weilburg: nassauisch
+DE.05.065.06534;HEK;;;ungeprueft;Marburg-Biedenkopf: Provinz Oberhessen (Kurhessen), Hinterland einzeln
+DE.05.066;HEK;;;ungeprueft;heutiger Regierungsbezirk Kassel: Kurhessen
+DE.05.066.06635;WAL;;;ungeprueft;Waldeck-Frankenberg: Fürstentum Waldeck, Frankenberg einzeln
+ort:bad_homburg_vor_der_hoehe;HHO;;;ungeprueft;Landgrafschaft Hessen-Homburg
+ort:wetzlar;PRU;;;ungeprueft;Kreis Wetzlar (Rheinprovinz)
+ort:braunfels;PRU;;;ungeprueft;Kreis Wetzlar (Rheinprovinz)
+ort:ehringshausen;PRU;;;ungeprueft;Kreis Wetzlar (Rheinprovinz)
+ort:bischoffen;HED;;;ungeprueft;hessen-darmstädtisch (Hinterland, Amt Itter)
+ort:biedenkopf;HED;;;ungeprueft;hessen-darmstädtisch (Hinterland, Amt Itter)
+ort:gladenbach;HED;;;ungeprueft;hessen-darmstädtisch (Hinterland, Amt Itter)
+ort:voehl;HED;;;ungeprueft;hessen-darmstädtisch (Hinterland, Amt Itter)
+ort:hatzfeld;HED;;;ungeprueft;hessen-darmstädtisch (Hinterland, Amt Itter)
+ort:frankenberg_kurhessen;HEK;;;ungeprueft;Kurhessen (Kreis Frankenberg)
+ort:allendorf;HEK;;;ungeprueft;Kurhessen (Kreis Frankenberg)
+ort:haina_kurhessen;HEK;;;ungeprueft;Kurhessen (Kreis Frankenberg)
+ort:rosenthal;HEK;;;ungeprueft;Kurhessen (Kreis Frankenberg)
+DE.06;HAN;;;ungeprueft;Niedersachsen: Grundregel Königreich Hannover
+DE.06.00.03101;BWO;;;ungeprueft;Herzogtum Braunschweig
+DE.06.00.03154;BWO;;;ungeprueft;Kreis Helmstedt: braunschweigisch
+DE.06.00.03158;BWO;;;ungeprueft;Kreis Wolfenbüttel: braunschweigisch
+DE.06.00.03255;BWO;;;ungeprueft;Kreis Holzminden: braunschweigisch
+ort:bad_harzburg;BWO;;;ungeprueft;braunschweigisch
+ort:seesen;BWO;;;ungeprueft;braunschweigisch
+ort:braunlage;BWO;;;ungeprueft;braunschweigisch
+ort:lutter_am_barenberge;BWO;;;ungeprueft;braunschweigisch
+ort:bad_gandersheim;BWO;;;ungeprueft;braunschweigisch
+ort:vechelde;BWO;;;ungeprueft;braunschweigisch
+ort:wendeburg;BWO;;;ungeprueft;braunschweigisch
+ort:vordorf;BWO;;;ungeprueft;braunschweigisch
+ort:gittelde;BWO;;;ungeprueft;braunschweigisch
+ort:emtinghausen;BWO;;;ungeprueft;braunschweigisch
+DE.06.00.03401;OLD;;;ungeprueft;Delmenhorst: Großherzogtum Oldenburg
+DE.06.00.03403;OLD;;;ungeprueft;Oldenburg: Großherzogtum Oldenburg
+DE.06.00.03405;OLD;;;ungeprueft;Wilhelmshaven (Amt Rüstringen): Großherzogtum Oldenburg
+DE.06.00.03451;OLD;;;ungeprueft;Ammerland: Großherzogtum Oldenburg
+DE.06.00.03453;OLD;;;ungeprueft;Cloppenburg: Großherzogtum Oldenburg
+DE.06.00.03455;OLD;;;ungeprueft;Friesland (Jever seit 1818): Großherzogtum Oldenburg
+DE.06.00.03458;OLD;;;ungeprueft;Kreis Oldenburg: Großherzogtum Oldenburg
+DE.06.00.03460;OLD;;;ungeprueft;Vechta: Großherzogtum Oldenburg
+DE.06.00.03461;OLD;;;ungeprueft;Wesermarsch: Großherzogtum Oldenburg
+ort:harpstedt;HAN;;;ungeprueft;Amt Harpstedt: hannoversch
+ort:bad_pyrmont;WAL;;;ungeprueft;Fürstentum Pyrmont (Waldeck)
+ort:hessisch_oldendorf;HEK;;;ungeprueft;Grafschaft Schaumburg, hessischer Teil (Kurhessen)
+ort:rinteln;HEK;;;ungeprueft;Grafschaft Schaumburg, hessischer Teil (Kurhessen)
+ort:stadthagen;SLI;;;ungeprueft;Fürstentum Schaumburg-Lippe
+ort:sachsenhagen;SLI;;;ungeprueft;Fürstentum Schaumburg-Lippe
+ort:bueckeburg;SLI;;;ungeprueft;Fürstentum Schaumburg-Lippe
+ort:cuxhaven;HAM;;;ungeprueft;Amt Ritzebüttel (Hamburg)
+DE.07;PRU;;;ungeprueft;Provinzen Westfalen und Rheinprovinz
+DE.07.057.05766;LIP;;;ungeprueft;Fürstentum Lippe
+DE.08;PRU;;;ungeprueft;Rheinland-Pfalz: Grundregel Rheinprovinz
+DE.08.00.07311;BAV;;;ungeprueft;Rheinkreis (bayerische Pfalz)
+DE.08.00.07312;BAV;;;ungeprueft;Rheinkreis (bayerische Pfalz)
+DE.08.00.07313;BAV;;;ungeprueft;Rheinkreis (bayerische Pfalz)
+DE.08.00.07316;BAV;;;ungeprueft;Rheinkreis (bayerische Pfalz)
+DE.08.00.07317;BAV;;;ungeprueft;Rheinkreis (bayerische Pfalz)
+DE.08.00.07318;BAV;;;ungeprueft;Rheinkreis (bayerische Pfalz)
+DE.08.00.07320;BAV;;;ungeprueft;Rheinkreis (bayerische Pfalz)
+DE.08.00.07332;BAV;;;ungeprueft;Rheinkreis (bayerische Pfalz)
+DE.08.00.07333;BAV;;;ungeprueft;Rheinkreis (bayerische Pfalz)
+DE.08.00.07334;BAV;;;ungeprueft;Rheinkreis (bayerische Pfalz)
+DE.08.00.07335;BAV;;;ungeprueft;Rheinkreis (bayerische Pfalz)
+DE.08.00.07336;BAV;;;ungeprueft;Rheinkreis (bayerische Pfalz)
+DE.08.00.07337;BAV;;;ungeprueft;Rheinkreis (bayerische Pfalz)
+DE.08.00.07338;BAV;;;ungeprueft;Rheinkreis (bayerische Pfalz)
+DE.08.00.07340;BAV;;;ungeprueft;Rheinkreis (bayerische Pfalz)
+DE.08.00.07315;HED;;;ungeprueft;Provinz Rheinhessen (Großherzogtum Hessen)
+DE.08.00.07319;HED;;;ungeprueft;Provinz Rheinhessen (Großherzogtum Hessen)
+DE.08.00.07331;HED;;;ungeprueft;Provinz Rheinhessen (Großherzogtum Hessen)
+DE.08.00.07339;HED;;;ungeprueft;Provinz Rheinhessen (Großherzogtum Hessen)
+DE.08.00.07141;NAS;;;ungeprueft;Rhein-Lahn: nassauisch
+DE.08.00.07143;NAS;;;ungeprueft;Westerwald: nassauisch
+ort:idar_oberstein;OLD;;;ungeprueft;Fürstentum Birkenfeld (Oldenburg)
+ort:birkenfeld;OLD;;;ungeprueft;Fürstentum Birkenfeld (Oldenburg)
+ort:baumholder;OLD;;;ungeprueft;Fürstentum Birkenfeld (Oldenburg)
+ort:nohfelden;OLD;;;ungeprueft;Fürstentum Birkenfeld (Oldenburg)
+ort:meisenheim;HHO;;;ungeprueft;Oberamt Meisenheim (Hessen-Homburg)
+DE.09;PRU;;;ungeprueft;Saarland: Grundregel Rheinprovinz (Regierungsbezirk Trier)
+DE.09.00.10045;BAV;;;ungeprueft;Saarpfalz: bayerischer Rheinkreis
+DE.10.00.01003;LUE;;;ungeprueft;Freie und Hansestadt Lübeck
+DE.10.00.01053;DEN;ja;;ungeprueft;Herzogtum Lauenburg unter dem dänischen König, im Bund
+ort:geesthacht;HAM;;;ungeprueft;Vierlande und Bergedorf (beiderstädtisch Hamburg und Lübeck)
+ort:eutin;OLD;;;ungeprueft;Fürstentum Lübeck (Oldenburg)
+ort:ratekau;OLD;;;ungeprueft;Fürstentum Lübeck (Oldenburg)
+ort:scharbeutz;OLD;;;ungeprueft;Fürstentum Lübeck (Oldenburg)
+ort:helgoland;-;;;ungeprueft;britisch seit 1814: Ausland, Ort ohne Daten
+DE.11;PRU;;;ungeprueft;Provinz Brandenburg (Niederlausitz und sächsische Ämter seit 1815)
+DE.16;PRU;;;ungeprueft;Berlin (Provinz Brandenburg)
+ort:fuerstenberg;MST;;;ungeprueft;Mecklenburg-Strelitz
+ort:neubrandenburg;MST;;;ungeprueft;Herrschaft Stargard (Mecklenburg-Strelitz)
+ort:woldegk;MST;;;ungeprueft;Herrschaft Stargard (Mecklenburg-Strelitz)
+ort:friedland_mecklenburg;MST;;;ungeprueft;Herrschaft Stargard (Mecklenburg-Strelitz)
+ort:neustrelitz;MST;;;ungeprueft;Herrschaft Stargard (Mecklenburg-Strelitz)
+ort:wesenberg;MST;;;ungeprueft;Herrschaft Stargard (Mecklenburg-Strelitz)
+ort:gross_nemerow;MST;;;ungeprueft;Herrschaft Stargard (Mecklenburg-Strelitz)
+ort:carpin;MST;;;ungeprueft;Herrschaft Stargard (Mecklenburg-Strelitz)
+ort:altentreptow;PRU;;;ungeprueft;Provinz Pommern bzw. Uckermark
+ort:demmin;PRU;;;ungeprueft;Provinz Pommern bzw. Uckermark
+ort:loitz;PRU;;;ungeprueft;Provinz Pommern bzw. Uckermark
+ort:guetzkow;PRU;;;ungeprueft;Provinz Pommern bzw. Uckermark
+ort:borrentin;PRU;;;ungeprueft;Provinz Pommern bzw. Uckermark
+ort:wackerow;PRU;;;ungeprueft;Provinz Pommern bzw. Uckermark
+ort:strasburg;PRU;;;ungeprueft;Provinz Pommern bzw. Uckermark
+DE.13;SAX;;;ungeprueft;Königreich Sachsen
+ort:hoyerswerda;PRU;;;ungeprueft;preußische Oberlausitz seit 1815
+ort:lohsa;PRU;;;ungeprueft;preußische Oberlausitz seit 1815
+ort:bernsdorf;PRU;;;ungeprueft;preußische Oberlausitz seit 1815
+ort:weisswasser;PRU;;;ungeprueft;preußische Oberlausitz seit 1815
+ort:niesky;PRU;;;ungeprueft;preußische Oberlausitz seit 1815
+ort:rietschen;PRU;;;ungeprueft;preußische Oberlausitz seit 1815
+ort:rothenburg;PRU;;;ungeprueft;preußische Oberlausitz seit 1815
+ort:boxberg_lausitz;PRU;;;ungeprueft;preußische Oberlausitz seit 1815
+ort:gross_dueben;PRU;;;ungeprueft;preußische Oberlausitz seit 1815
+ort:goerlitz;PRU;;;ungeprueft;preußische Oberlausitz seit 1815
+ort:reichenbach;PRU;;;ungeprueft;preußische Oberlausitz seit 1815
+ort:torgau;PRU;;;ungeprueft;seit 1815 preußisch (Regierungsbezirk Merseburg)
+ort:bad_dueben;PRU;;;ungeprueft;seit 1815 preußisch (Regierungsbezirk Merseburg)
+ort:mockrehna;PRU;;;ungeprueft;seit 1815 preußisch (Regierungsbezirk Merseburg)
+ort:belgern;PRU;;;ungeprueft;seit 1815 preußisch (Regierungsbezirk Merseburg)
+ort:schildau;PRU;;;ungeprueft;seit 1815 preußisch (Regierungsbezirk Merseburg)
+ort:dommitzsch;PRU;;;ungeprueft;seit 1815 preußisch (Regierungsbezirk Merseburg)
+ort:delitzsch;PRU;;;ungeprueft;seit 1815 preußisch (Regierungsbezirk Merseburg)
+ort:eilenburg;PRU;;;ungeprueft;seit 1815 preußisch (Regierungsbezirk Merseburg)
+ort:krostitz;PRU;;;ungeprueft;seit 1815 preußisch (Regierungsbezirk Merseburg)
+ort:schkeuditz;PRU;;;ungeprueft;seit 1815 preußisch (Regierungsbezirk Merseburg)
+DE.14;PRU;;;ungeprueft;Provinz Sachsen
+ort:dessau;DES;;;ungeprueft;Herzogtum Anhalt-Dessau (Köthen seit 1847 mitregiert)
+ort:rodleben;DES;;;ungeprueft;Herzogtum Anhalt-Dessau (Köthen seit 1847 mitregiert)
+ort:koethen;DES;;;ungeprueft;Herzogtum Anhalt-Dessau (Köthen seit 1847 mitregiert)
+ort:zerbst;DES;;;ungeprueft;Herzogtum Anhalt-Dessau (Köthen seit 1847 mitregiert)
+ort:aken;DES;;;ungeprueft;Herzogtum Anhalt-Dessau (Köthen seit 1847 mitregiert)
+ort:groebzig;DES;;;ungeprueft;Herzogtum Anhalt-Dessau (Köthen seit 1847 mitregiert)
+ort:lindau_anhalt;DES;;;ungeprueft;Herzogtum Anhalt-Dessau (Köthen seit 1847 mitregiert)
+ort:quellendorf;DES;;;ungeprueft;Herzogtum Anhalt-Dessau (Köthen seit 1847 mitregiert)
+ort:coswig;DES;;;ungeprueft;Herzogtum Anhalt-Dessau (Köthen seit 1847 mitregiert)
+ort:bernburg;BER;;;ungeprueft;Herzogtum Anhalt-Bernburg
+ort:ballenstedt;BER;;;ungeprueft;Herzogtum Anhalt-Bernburg
+ort:harzgerode;BER;;;ungeprueft;Herzogtum Anhalt-Bernburg
+ort:calvoerde;BWO;;;ungeprueft;braunschweigisch (Fürstentum Blankenburg, Amt Calvörde)
+ort:blankenburg;BWO;;;ungeprueft;braunschweigisch (Fürstentum Blankenburg, Amt Calvörde)
+ort:hasselfelde;BWO;;;ungeprueft;braunschweigisch (Fürstentum Blankenburg, Amt Calvörde)
+DE.15;PRU;;;ungeprueft;Thüringen: Grundregel Regierungsbezirk Erfurt, Kleinstaaten einzeln
+ort:jena;WEI;;;ungeprueft;Großherzogtum Sachsen-Weimar-Eisenach
+ort:weimar;WEI;;;ungeprueft;Großherzogtum Sachsen-Weimar-Eisenach
+ort:eisenach;WEI;;;ungeprueft;Großherzogtum Sachsen-Weimar-Eisenach
+ort:marksuhl;WEI;;;ungeprueft;Großherzogtum Sachsen-Weimar-Eisenach
+ort:gerstungen;WEI;;;ungeprueft;Großherzogtum Sachsen-Weimar-Eisenach
+ort:creuzburg;WEI;;;ungeprueft;Großherzogtum Sachsen-Weimar-Eisenach
+ort:ruhla;WEI;;;ungeprueft;Großherzogtum Sachsen-Weimar-Eisenach
+ort:unterbreizbach;WEI;;;ungeprueft;Großherzogtum Sachsen-Weimar-Eisenach
+ort:geisa;WEI;;;ungeprueft;Großherzogtum Sachsen-Weimar-Eisenach
+ort:dermbach;WEI;;;ungeprueft;Großherzogtum Sachsen-Weimar-Eisenach
+ort:kaltennordheim;WEI;;;ungeprueft;Großherzogtum Sachsen-Weimar-Eisenach
+ort:rastenberg;WEI;;;ungeprueft;Großherzogtum Sachsen-Weimar-Eisenach
+ort:ilmenau;WEI;;;ungeprueft;Großherzogtum Sachsen-Weimar-Eisenach
+ort:bad_berka;WEI;;;ungeprueft;Großherzogtum Sachsen-Weimar-Eisenach
+ort:berlstedt;WEI;;;ungeprueft;Großherzogtum Sachsen-Weimar-Eisenach
+ort:apolda;WEI;;;ungeprueft;Großherzogtum Sachsen-Weimar-Eisenach
+ort:bad_sulza;WEI;;;ungeprueft;Großherzogtum Sachsen-Weimar-Eisenach
+ort:magdala;WEI;;;ungeprueft;Großherzogtum Sachsen-Weimar-Eisenach
+ort:neustadt_an_der_orla;WEI;;;ungeprueft;Großherzogtum Sachsen-Weimar-Eisenach
+ort:triptis;WEI;;;ungeprueft;Großherzogtum Sachsen-Weimar-Eisenach
+ort:weida;WEI;;;ungeprueft;Großherzogtum Sachsen-Weimar-Eisenach
+ort:muenchenbernsdorf;WEI;;;ungeprueft;Großherzogtum Sachsen-Weimar-Eisenach
+ort:bad_salzungen;SMG;;;ungeprueft;Herzogtum Sachsen-Meiningen
+ort:meiningen;SMG;;;ungeprueft;Herzogtum Sachsen-Meiningen
+ort:hildburghausen;SMG;;;ungeprueft;Herzogtum Sachsen-Meiningen
+ort:eisfeld;SMG;;;ungeprueft;Herzogtum Sachsen-Meiningen
+ort:masserberg;SMG;;;ungeprueft;Herzogtum Sachsen-Meiningen
+ort:themar;SMG;;;ungeprueft;Herzogtum Sachsen-Meiningen
+ort:gleichamberg;SMG;;;ungeprueft;Herzogtum Sachsen-Meiningen
+ort:sonneberg;SMG;;;ungeprueft;Herzogtum Sachsen-Meiningen
+ort:neuhaus_am_rennweg;SMG;;;ungeprueft;Herzogtum Sachsen-Meiningen
+ort:saalfeld_thueringen;SMG;;;ungeprueft;Herzogtum Sachsen-Meiningen
+ort:poessneck;SMG;;;ungeprueft;Herzogtum Sachsen-Meiningen
+ort:gotha;SCG;;;ungeprueft;Herzogtum Gotha (Sachsen-Coburg und Gotha)
+ort:wandersleben;SCG;;;ungeprueft;Herzogtum Gotha (Sachsen-Coburg und Gotha)
+ort:waltershausen;SCG;;;ungeprueft;Herzogtum Gotha (Sachsen-Coburg und Gotha)
+ort:tambach_dietharz;SCG;;;ungeprueft;Herzogtum Gotha (Sachsen-Coburg und Gotha)
+ort:haina_thueringen;SCG;;;ungeprueft;Herzogtum Gotha (Sachsen-Coburg und Gotha)
+ort:klettbach;SCG;;;ungeprueft;Herzogtum Gotha (Sachsen-Coburg und Gotha)
+ort:altenburg;ALT;;;ungeprueft;Herzogtum Sachsen-Altenburg
+ort:schmoelln;ALT;;;ungeprueft;Herzogtum Sachsen-Altenburg
+ort:meuselwitz;ALT;;;ungeprueft;Herzogtum Sachsen-Altenburg
+ort:eisenberg;ALT;;;ungeprueft;Herzogtum Sachsen-Altenburg
+ort:hermsdorf;ALT;;;ungeprueft;Herzogtum Sachsen-Altenburg
+ort:stadtroda;ALT;;;ungeprueft;Herzogtum Sachsen-Altenburg
+ort:kahla;ALT;;;ungeprueft;Herzogtum Sachsen-Altenburg
+ort:poelzig;ALT;;;ungeprueft;Herzogtum Sachsen-Altenburg
+ort:seelingstaedt;ALT;;;ungeprueft;Herzogtum Sachsen-Altenburg
+ort:schmalkalden;HEK;;;ungeprueft;Herrschaft Schmalkalden (Kurhessen)
+ort:steinbach_hallenberg;HEK;;;ungeprueft;Herrschaft Schmalkalden (Kurhessen)
+ort:breitungen;HEK;;;ungeprueft;Herrschaft Schmalkalden (Kurhessen)
+ort:brotterode;HEK;;;ungeprueft;Herrschaft Schmalkalden (Kurhessen)
+ort:barchfeld;HEK;;;ungeprueft;Herrschaft Schmalkalden (Kurhessen)
+ort:sondershausen;SSH;;;ungeprueft;Fürstentum Schwarzburg-Sondershausen
+ort:greussen;SSH;;;ungeprueft;Fürstentum Schwarzburg-Sondershausen
+ort:arnstadt;SSH;;;ungeprueft;Fürstentum Schwarzburg-Sondershausen
+ort:graefenroda;SSH;;;ungeprueft;Fürstentum Schwarzburg-Sondershausen
+ort:bad_frankenhausen;SRU;;;ungeprueft;Fürstentum Schwarzburg-Rudolstadt
+ort:schlotheim;SRU;;;ungeprueft;Fürstentum Schwarzburg-Rudolstadt
+ort:stadtilm;SRU;;;ungeprueft;Fürstentum Schwarzburg-Rudolstadt
+ort:rudolstadt;SRU;;;ungeprueft;Fürstentum Schwarzburg-Rudolstadt
+ort:leutenberg;SRU;;;ungeprueft;Fürstentum Schwarzburg-Rudolstadt
+ort:koenigsee;SRU;;;ungeprueft;Fürstentum Schwarzburg-Rudolstadt
+ort:greiz;REA;;;ungeprueft;Fürstentum Reuß älterer Linie
+ort:zeulenroda;REA;;;ungeprueft;Fürstentum Reuß älterer Linie
+ort:gera;REJ;;;ungeprueft;Fürstentum Reuß jüngerer Linie
+ort:schleiz;REJ;;;ungeprueft;Fürstentum Reuß jüngerer Linie
+ort:bad_lobenstein;REJ;;;ungeprueft;Fürstentum Reuß jüngerer Linie
+ort:remptendorf;REJ;;;ungeprueft;Fürstentum Reuß jüngerer Linie
+ort:tanna;REJ;;;ungeprueft;Fürstentum Reuß jüngerer Linie
+DE.12;MSC;ja;;ungeprueft;Mecklenburg-Vorpommern: Landschaften entscheiden
+ort:ribnitz_damgarten;MSC;;;ungeprueft;mecklenburgisch (Ribnitz)
+ort:marlow;MSC;;;ungeprueft;mecklenburgisch (Ribnitz)
+ort:krenau;AUT;nein;;ungeprueft;Krakauer Gebiet, seit 1846 österreichisch (Galizien), nicht im Bund
+ort:alwernia;AUT;nein;;ungeprueft;Krakauer Gebiet, seit 1846 österreichisch (Galizien), nicht im Bund
+ort:jaworzno;AUT;nein;;ungeprueft;Krakauer Gebiet, seit 1846 österreichisch (Galizien), nicht im Bund
+ort:hultschin;PRU;ja;;ungeprueft;Hultschiner Ländchen (Kreis Ratibor, Provinz Schlesien)
+ort:bolatitz;PRU;ja;;ungeprueft;Hultschiner Ländchen (Kreis Ratibor, Provinz Schlesien)
+ort:praszka;-;;;ungeprueft;Königreich Polen (Russland): Ausland, Ort ohne Daten
+ort:pyzdry;-;;;ungeprueft;Königreich Polen (Russland): Ausland, Ort ohne Daten
+ort:chocz;-;;;ungeprueft;Königreich Polen (Russland): Ausland, Ort ohne Daten
+ort:gizalki;-;;;ungeprueft;Königreich Polen (Russland): Ausland, Ort ohne Daten
+ort:lauenburg_in_pommern;PRU;nein;;ungeprueft;Lande Lauenburg und Bütow (Provinz Pommern), nicht im Bund
+ort:leba;PRU;nein;;ungeprueft;Lande Lauenburg und Bütow (Provinz Pommern), nicht im Bund
+ort:zewitz;PRU;nein;;ungeprueft;Lande Lauenburg und Bütow (Provinz Pommern), nicht im Bund
+ort:czarna_dabrowka;PRU;nein;;ungeprueft;Lande Lauenburg und Bütow (Provinz Pommern), nicht im Bund
+ort:buetow;PRU;nein;;ungeprueft;Lande Lauenburg und Bütow (Provinz Pommern), nicht im Bund
+ort:gross_tuchen;PRU;nein;;ungeprueft;Lande Lauenburg und Bütow (Provinz Pommern), nicht im Bund
+ort:studzienice;PRU;nein;;ungeprueft;Lande Lauenburg und Bütow (Provinz Pommern), nicht im Bund
+ort:lipnica;PRU;nein;;ungeprueft;Lande Lauenburg und Bütow (Provinz Pommern), nicht im Bund
+ort:eupen;PRU;ja;;ungeprueft;Kreise Eupen und Malmedy (Rheinprovinz) seit 1815
+ort:malmedy;PRU;ja;;ungeprueft;Kreise Eupen und Malmedy (Rheinprovinz) seit 1815
+ort:sankt_vith;PRU;ja;;ungeprueft;Kreise Eupen und Malmedy (Rheinprovinz) seit 1815
+ort:buellingen;PRU;ja;;ungeprueft;Kreise Eupen und Malmedy (Rheinprovinz) seit 1815
+ort:amel;PRU;ja;;ungeprueft;Kreise Eupen und Malmedy (Rheinprovinz) seit 1815
+ort:christiansfeld;DEN;nein;;ungeprueft;Herzogtum Schleswig, nicht im Bund
+ort:roedding;DEN;nein;;ungeprueft;Herzogtum Schleswig, nicht im Bund
+ort:maestricht;NED;nein;;ungeprueft;Festungen Maastricht und Venlo: niederländisch, nicht im Bund
+ort:venlo;NED;nein;;ungeprueft;Festungen Maastricht und Venlo: niederländisch, nicht im Bund
+ort:seidenberg;PRU;;;ungeprueft;preußische Oberlausitz bzw. Neumark
+ort:zielenzig;PRU;;;ungeprueft;preußische Oberlausitz bzw. Neumark

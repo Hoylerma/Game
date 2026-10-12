@@ -18,6 +18,11 @@ ort kleve {
     stadt    = ja
     kreis    = kr_kleve
     quelle   = "GeoNames (CC BY 4.0), geonameid 2887835; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort emmerich {
@@ -28,6 +33,11 @@ ort emmerich {
     stadt    = ja
     kreis    = kr_kleve
     quelle   = "GeoNames (CC BY 4.0), geonameid 2930509; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort goch {
@@ -38,6 +48,11 @@ ort goch {
     stadt    = ja
     kreis    = kr_kleve
     quelle   = "GeoNames (CC BY 4.0), geonameid 2919625; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort kevelaer {
@@ -48,6 +63,11 @@ ort kevelaer {
     stadt    = ja
     kreis    = kr_kleve
     quelle   = "GeoNames (CC BY 4.0), geonameid 2891258; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort rees {
@@ -58,6 +78,11 @@ ort rees {
     stadt    = ja
     kreis    = kr_kleve
     quelle   = "GeoNames (CC BY 4.0), geonameid 2849548; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort kalkar {
@@ -68,6 +93,11 @@ ort kalkar {
     stadt    = nein
     kreis    = kr_kleve
     quelle   = "GeoNames (CC BY 4.0), geonameid 2893837; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort uedem {
@@ -78,6 +108,11 @@ ort uedem {
     stadt    = nein
     kreis    = kr_kleve
     quelle   = "GeoNames (CC BY 4.0), geonameid 2820465; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort essen_niederrhein {
@@ -88,6 +123,11 @@ ort essen_niederrhein {
     stadt    = ja
     kreis    = kr_essen_niederrhein
     quelle   = "GeoNames (CC BY 4.0), geonameid 2928810; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort duisburg {
@@ -98,6 +138,11 @@ ort duisburg {
     stadt    = ja
     kreis    = kr_essen_niederrhein
     quelle   = "GeoNames (CC BY 4.0), geonameid 2934691; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort wuppertal {
@@ -108,6 +153,11 @@ ort wuppertal {
     stadt    = ja
     kreis    = kr_essen_niederrhein
     quelle   = "GeoNames (CC BY 4.0), geonameid 2805753; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort oberhausen {
@@ -118,6 +168,11 @@ ort oberhausen {
     stadt    = ja
     kreis    = kr_essen_niederrhein
     quelle   = "GeoNames (CC BY 4.0), geonameid 2860410; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort solingen {
@@ -128,6 +183,11 @@ ort solingen {
     stadt    = ja
     kreis    = kr_essen_niederrhein
     quelle   = "GeoNames (CC BY 4.0), geonameid 2831580; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort remscheid {
@@ -138,6 +198,11 @@ ort remscheid {
     stadt    = ja
     kreis    = kr_essen_niederrhein
     quelle   = "GeoNames (CC BY 4.0), geonameid 2848273; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort mettmann {
@@ -148,6 +213,11 @@ ort mettmann {
     stadt    = ja
     kreis    = kr_essen_niederrhein
     quelle   = "GeoNames (CC BY 4.0), geonameid 2871535; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort velbert {
@@ -158,6 +228,11 @@ ort velbert {
     stadt    = ja
     kreis    = kr_essen_niederrhein
     quelle   = "GeoNames (CC BY 4.0), geonameid 2817724; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort ratingen {
@@ -168,6 +243,11 @@ ort ratingen {
     stadt    = ja
     kreis    = kr_essen_niederrhein
     quelle   = "GeoNames (CC BY 4.0), geonameid 2850174; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort dinslaken {
@@ -178,6 +258,11 @@ ort dinslaken {
     stadt    = ja
     kreis    = kr_essen_niederrhein
     quelle   = "GeoNames (CC BY 4.0), geonameid 2936871; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort moers {
@@ -188,6 +273,11 @@ ort moers {
     stadt    = ja
     kreis    = kr_moers
     quelle   = "GeoNames (CC BY 4.0), geonameid 2870221; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort wesel {
@@ -198,6 +288,11 @@ ort wesel {
     stadt    = ja
     kreis    = kr_moers
     quelle   = "GeoNames (CC BY 4.0), geonameid 2810678; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort kamp_lintfort {
@@ -208,6 +303,11 @@ ort kamp_lintfort {
     stadt    = ja
     kreis    = kr_moers
     quelle   = "GeoNames (CC BY 4.0), geonameid 2893264; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort geldern {
@@ -218,6 +318,11 @@ ort geldern {
     stadt    = ja
     kreis    = kr_moers
     quelle   = "GeoNames (CC BY 4.0), geonameid 2921528; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort hamminkeln {
@@ -228,6 +333,11 @@ ort hamminkeln {
     stadt    = ja
     kreis    = kr_moers
     quelle   = "GeoNames (CC BY 4.0), geonameid 2911051; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort xanten {
@@ -238,6 +348,11 @@ ort xanten {
     stadt    = ja
     kreis    = kr_moers
     quelle   = "GeoNames (CC BY 4.0), geonameid 2805385; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort straelen {
@@ -248,6 +363,11 @@ ort straelen {
     stadt    = nein
     kreis    = kr_moers
     quelle   = "GeoNames (CC BY 4.0), geonameid 2826304; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort schermbeck {
@@ -258,6 +378,11 @@ ort schermbeck {
     stadt    = nein
     kreis    = kr_moers
     quelle   = "GeoNames (CC BY 4.0), geonameid 2839674; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort issum {
@@ -268,6 +393,11 @@ ort issum {
     stadt    = nein
     kreis    = kr_moers
     quelle   = "GeoNames (CC BY 4.0), geonameid 2895617; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort duesseldorf {
@@ -278,6 +408,11 @@ ort duesseldorf {
     stadt    = ja
     kreis    = kr_duesseldorf
     quelle   = "GeoNames (CC BY 4.0), geonameid 2934246; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort neuss {
@@ -288,6 +423,11 @@ ort neuss {
     stadt    = ja
     kreis    = kr_duesseldorf
     quelle   = "GeoNames (CC BY 4.0), geonameid 2864118; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort grevenbroich {
@@ -298,6 +438,11 @@ ort grevenbroich {
     stadt    = ja
     kreis    = kr_duesseldorf
     quelle   = "GeoNames (CC BY 4.0), geonameid 2917540; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort dormagen {
@@ -308,6 +453,11 @@ ort dormagen {
     stadt    = ja
     kreis    = kr_duesseldorf
     quelle   = "GeoNames (CC BY 4.0), geonameid 2935825; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort hilden {
@@ -318,6 +468,11 @@ ort hilden {
     stadt    = ja
     kreis    = kr_duesseldorf
     quelle   = "GeoNames (CC BY 4.0), geonameid 2904795; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort langenfeld {
@@ -328,6 +483,11 @@ ort langenfeld {
     stadt    = ja
     kreis    = kr_duesseldorf
     quelle   = "GeoNames (CC BY 4.0), geonameid 2881085; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort rommerskirchen {
@@ -338,6 +498,11 @@ ort rommerskirchen {
     stadt    = nein
     kreis    = kr_duesseldorf
     quelle   = "GeoNames (CC BY 4.0), geonameid 2845273; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort moenchengladbach {
@@ -348,6 +513,11 @@ ort moenchengladbach {
     stadt    = ja
     kreis    = kr_moenchengladbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2869894; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort krefeld {
@@ -358,6 +528,11 @@ ort krefeld {
     stadt    = ja
     kreis    = kr_moenchengladbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2884509; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort viersen {
@@ -368,6 +543,11 @@ ort viersen {
     stadt    = ja
     kreis    = kr_moenchengladbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2817311; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort willich {
@@ -378,6 +558,11 @@ ort willich {
     stadt    = ja
     kreis    = kr_moenchengladbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2808559; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort kempen {
@@ -388,6 +573,11 @@ ort kempen {
     stadt    = ja
     kreis    = kr_moenchengladbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2891643; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort niederkruechten {
@@ -398,4 +588,9 @@ ort niederkruechten {
     stadt    = nein
     kreis    = kr_moenchengladbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2863199; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }

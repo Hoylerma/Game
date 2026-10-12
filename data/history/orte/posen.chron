@@ -19,6 +19,10 @@ ort schneidemuehl {
     stadt    = ja
     kreis    = kr_schneidemuehl
     quelle   = "GeoNames (CC BY 4.0), geonameid 3089033; deutscher Name aus den GeoNames-Alternativnamen (heute Piła); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort kolmar_posen {
@@ -29,6 +33,10 @@ ort kolmar_posen {
     stadt    = nein
     kreis    = kr_schneidemuehl
     quelle   = "GeoNames (CC BY 4.0), geonameid 3101680; deutscher Name aus den GeoNames-Alternativnamen (heute Chodzież); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort schoenlanke {
@@ -39,6 +47,10 @@ ort schoenlanke {
     stadt    = nein
     kreis    = kr_schneidemuehl
     quelle   = "GeoNames (CC BY 4.0), geonameid 3083185; deutscher Name aus den GeoNames-Alternativnamen (heute Trzcianka); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort czarnkow {
@@ -49,6 +61,10 @@ ort czarnkow {
     stadt    = nein
     kreis    = kr_schneidemuehl
     quelle   = "GeoNames (CC BY 4.0), geonameid 3101145; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort ujscie {
@@ -59,6 +75,10 @@ ort ujscie {
     stadt    = nein
     kreis    = kr_schneidemuehl
     quelle   = "GeoNames (CC BY 4.0), geonameid 3082838; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort margonin {
@@ -69,6 +89,10 @@ ort margonin {
     stadt    = nein
     kreis    = kr_schneidemuehl
     quelle   = "GeoNames (CC BY 4.0), geonameid 3092312; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort budzyn {
@@ -79,6 +103,10 @@ ort budzyn {
     stadt    = nein
     kreis    = kr_schneidemuehl
     quelle   = "GeoNames (CC BY 4.0), geonameid 3102162; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort kaczory {
@@ -89,6 +117,10 @@ ort kaczory {
     stadt    = nein
     kreis    = kr_schneidemuehl
     quelle   = "GeoNames (CC BY 4.0), geonameid 3096966; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort nakel {
@@ -99,6 +131,10 @@ ort nakel {
     stadt    = nein
     kreis    = kr_nakel
     quelle   = "GeoNames (CC BY 4.0), geonameid 3091150; deutscher Name aus den GeoNames-Alternativnamen (heute Nakło nad Notecią); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort krone {
@@ -109,6 +145,10 @@ ort krone {
     stadt    = nein
     kreis    = kr_nakel
     quelle   = "GeoNames (CC BY 4.0), geonameid 3095192; deutscher Name aus den GeoNames-Alternativnamen (heute Koronowo); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort wirsitz {
@@ -119,6 +159,10 @@ ort wirsitz {
     stadt    = nein
     kreis    = kr_nakel
     quelle   = "GeoNames (CC BY 4.0), geonameid 3081158; deutscher Name aus den GeoNames-Alternativnamen (heute Wyrzysk); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort mrotschen {
@@ -129,6 +173,10 @@ ort mrotschen {
     stadt    = nein
     kreis    = kr_nakel
     quelle   = "GeoNames (CC BY 4.0), geonameid 3091351; deutscher Name aus den GeoNames-Alternativnamen (heute Mrocza); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort lobsens {
@@ -139,6 +187,10 @@ ort lobsens {
     stadt    = nein
     kreis    = kr_nakel
     quelle   = "GeoNames (CC BY 4.0), geonameid 3093150; deutscher Name aus den GeoNames-Alternativnamen (heute Łobżenica); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort wissek {
@@ -149,6 +201,10 @@ ort wissek {
     stadt    = nein
     kreis    = kr_nakel
     quelle   = "GeoNames (CC BY 4.0), geonameid 3081128; deutscher Name aus den GeoNames-Alternativnamen (heute Wysoka); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort sadki {
@@ -159,6 +215,10 @@ ort sadki {
     stadt    = nein
     kreis    = kr_nakel
     quelle   = "GeoNames (CC BY 4.0), geonameid 3086377; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort sicienko {
@@ -169,6 +229,10 @@ ort sicienko {
     stadt    = nein
     kreis    = kr_nakel
     quelle   = "GeoNames (CC BY 4.0), geonameid 3086118; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort bromberg {
@@ -179,6 +243,10 @@ ort bromberg {
     stadt    = ja
     kreis    = kr_bromberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 3102014; deutscher Name aus den GeoNames-Alternativnamen (heute Bydgoszcz); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort fordon {
@@ -189,6 +257,10 @@ ort fordon {
     stadt    = ja
     kreis    = kr_bromberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 3099654; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort schulitz {
@@ -199,6 +271,10 @@ ort schulitz {
     stadt    = nein
     kreis    = kr_bromberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 3085172; deutscher Name aus den GeoNames-Alternativnamen (heute Solec Kujawski); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort schubin {
@@ -209,6 +285,10 @@ ort schubin {
     stadt    = nein
     kreis    = kr_bromberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 3083611; deutscher Name aus den GeoNames-Alternativnamen (heute Szubin); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort barcin {
@@ -219,6 +299,10 @@ ort barcin {
     stadt    = nein
     kreis    = kr_bromberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 3103856; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort labischin {
@@ -229,6 +313,10 @@ ort labischin {
     stadt    = nein
     kreis    = kr_bromberg
     quelle   = "GeoNames (CC BY 4.0), geonameid 3094052; deutscher Name aus den GeoNames-Alternativnamen (heute Łabiszyn); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort znin {
@@ -239,6 +327,10 @@ ort znin {
     stadt    = ja
     kreis    = kr_znin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3080047; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort janowiec_wielkopolski {
@@ -249,6 +341,10 @@ ort janowiec_wielkopolski {
     stadt    = nein
     kreis    = kr_znin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3097594; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort kcynia {
@@ -259,6 +355,10 @@ ort kcynia {
     stadt    = nein
     kreis    = kr_znin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3096385; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort golancz {
@@ -269,6 +369,10 @@ ort golancz {
     stadt    = nein
     kreis    = kr_znin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3099016; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort damaslawek {
@@ -279,6 +383,10 @@ ort damaslawek {
     stadt    = nein
     kreis    = kr_znin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3100677; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort rogowo {
@@ -289,6 +397,10 @@ ort rogowo {
     stadt    = nein
     kreis    = kr_znin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3087097; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort wagrowiec {
@@ -299,6 +411,10 @@ ort wagrowiec {
     stadt    = ja
     kreis    = kr_wagrowiec
     quelle   = "GeoNames (CC BY 4.0), geonameid 3082712; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort obornik {
@@ -309,6 +425,10 @@ ort obornik {
     stadt    = nein
     kreis    = kr_wagrowiec
     quelle   = "GeoNames (CC BY 4.0), geonameid 3090403; deutscher Name aus den GeoNames-Alternativnamen (heute Oborniki); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort rogasen {
@@ -319,6 +439,10 @@ ort rogasen {
     stadt    = nein
     kreis    = kr_wagrowiec
     quelle   = "GeoNames (CC BY 4.0), geonameid 3087072; deutscher Name aus den GeoNames-Alternativnamen (heute Rogoźno); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort murowana_goslina {
@@ -329,6 +453,10 @@ ort murowana_goslina {
     stadt    = nein
     kreis    = kr_wagrowiec
     quelle   = "GeoNames (CC BY 4.0), geonameid 3091293; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort schokken {
@@ -339,6 +467,10 @@ ort schokken {
     stadt    = nein
     kreis    = kr_wagrowiec
     quelle   = "GeoNames (CC BY 4.0), geonameid 3085781; deutscher Name aus den GeoNames-Alternativnamen (heute Skoki); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort ryczywol {
@@ -349,6 +481,10 @@ ort ryczywol {
     stadt    = nein
     kreis    = kr_wagrowiec
     quelle   = "GeoNames (CC BY 4.0), geonameid 3086533; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort kiszkowo {
@@ -359,6 +495,10 @@ ort kiszkowo {
     stadt    = nein
     kreis    = kr_wagrowiec
     quelle   = "GeoNames (CC BY 4.0), geonameid 3096200; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort miescisko {
@@ -369,6 +509,10 @@ ort miescisko {
     stadt    = nein
     kreis    = kr_wagrowiec
     quelle   = "GeoNames (CC BY 4.0), geonameid 3091874; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort inowroclaw {
@@ -379,6 +523,10 @@ ort inowroclaw {
     stadt    = ja
     kreis    = kr_inowroclaw
     quelle   = "GeoNames (CC BY 4.0), geonameid 3097872; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort mogilno {
@@ -389,6 +537,10 @@ ort mogilno {
     stadt    = nein
     kreis    = kr_inowroclaw
     quelle   = "GeoNames (CC BY 4.0), geonameid 3091523; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort kruszwica {
@@ -399,6 +551,10 @@ ort kruszwica {
     stadt    = nein
     kreis    = kr_inowroclaw
     quelle   = "GeoNames (CC BY 4.0), geonameid 3094585; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort gniewkowo {
@@ -409,6 +565,10 @@ ort gniewkowo {
     stadt    = nein
     kreis    = kr_inowroclaw
     quelle   = "GeoNames (CC BY 4.0), geonameid 3099120; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort janikowo {
@@ -419,6 +579,10 @@ ort janikowo {
     stadt    = nein
     kreis    = kr_inowroclaw
     quelle   = "GeoNames (CC BY 4.0), geonameid 3097688; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort strelno {
@@ -429,6 +593,10 @@ ort strelno {
     stadt    = nein
     kreis    = kr_inowroclaw
     quelle   = "GeoNames (CC BY 4.0), geonameid 3084396; deutscher Name aus den GeoNames-Alternativnamen (heute Strzelno); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort zlotniki_kujawskie {
@@ -439,6 +607,10 @@ ort zlotniki_kujawskie {
     stadt    = nein
     kreis    = kr_inowroclaw
     quelle   = "GeoNames (CC BY 4.0), geonameid 3080083; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort dabrowa {
@@ -449,6 +621,10 @@ ort dabrowa {
     stadt    = nein
     kreis    = kr_inowroclaw
     quelle   = "GeoNames (CC BY 4.0), geonameid 3100820; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort samter {
@@ -459,6 +635,10 @@ ort samter {
     stadt    = ja
     kreis    = kr_samter
     quelle   = "GeoNames (CC BY 4.0), geonameid 3083878; deutscher Name aus den GeoNames-Alternativnamen (heute Szamotuły); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort wronki {
@@ -469,6 +649,10 @@ ort wronki {
     stadt    = nein
     kreis    = kr_samter
     quelle   = "GeoNames (CC BY 4.0), geonameid 3081350; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort obrzycko {
@@ -479,6 +663,10 @@ ort obrzycko {
     stadt    = nein
     kreis    = kr_samter
     quelle   = "GeoNames (CC BY 4.0), geonameid 3090364; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort tarnowo_podgorne {
@@ -489,6 +677,10 @@ ort tarnowo_podgorne {
     stadt    = nein
     kreis    = kr_samter
     quelle   = "GeoNames (CC BY 4.0), geonameid 3083442; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort pamiatkowo {
@@ -499,6 +691,10 @@ ort pamiatkowo {
     stadt    = nein
     kreis    = kr_samter
     quelle   = "GeoNames (CC BY 4.0), geonameid 3089507; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort zlotniki {
@@ -509,6 +705,10 @@ ort zlotniki {
     stadt    = nein
     kreis    = kr_samter
     quelle   = "GeoNames (CC BY 4.0), geonameid 3080084; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort gnesen {
@@ -519,6 +719,10 @@ ort gnesen {
     stadt    = ja
     kreis    = kr_gnesen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3099112; deutscher Name aus den GeoNames-Alternativnamen (heute Gniezno); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort wreschen {
@@ -529,6 +733,10 @@ ort wreschen {
     stadt    = ja
     kreis    = kr_gnesen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3081324; deutscher Name aus den GeoNames-Alternativnamen (heute Września); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort trzemeszno {
@@ -539,6 +747,10 @@ ort trzemeszno {
     stadt    = nein
     kreis    = kr_gnesen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3083077; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort witkowo {
@@ -549,6 +761,10 @@ ort witkowo {
     stadt    = nein
     kreis    = kr_gnesen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3081826; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort czerniejewo {
@@ -559,6 +775,10 @@ ort czerniejewo {
     stadt    = nein
     kreis    = kr_gnesen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3101006; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort klecko {
@@ -569,6 +789,10 @@ ort klecko {
     stadt    = nein
     kreis    = kr_gnesen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3096165; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort pinne {
@@ -579,6 +803,10 @@ ort pinne {
     stadt    = nein
     kreis    = kr_pinne
     quelle   = "GeoNames (CC BY 4.0), geonameid 3088759; deutscher Name aus den GeoNames-Alternativnamen (heute Pniewy); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort kreuz {
@@ -589,6 +817,10 @@ ort kreuz {
     stadt    = nein
     kreis    = kr_pinne
     quelle   = "GeoNames (CC BY 4.0), geonameid 3094408; deutscher Name aus den GeoNames-Alternativnamen (heute Krzyż Wielkopolski); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort filehne {
@@ -599,6 +831,10 @@ ort filehne {
     stadt    = nein
     kreis    = kr_pinne
     quelle   = "GeoNames (CC BY 4.0), geonameid 3082319; deutscher Name aus den GeoNames-Alternativnamen (heute Wieleń); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort sierakow {
@@ -609,6 +845,10 @@ ort sierakow {
     stadt    = nein
     kreis    = kr_pinne
     quelle   = "GeoNames (CC BY 4.0), geonameid 3085974; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort neustadt_bei_pinne {
@@ -619,6 +859,10 @@ ort neustadt_bei_pinne {
     stadt    = nein
     kreis    = kr_pinne
     quelle   = "GeoNames (CC BY 4.0), geonameid 3092639; deutscher Name aus den GeoNames-Alternativnamen (heute Lwówek); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort duszniki {
@@ -629,6 +873,10 @@ ort duszniki {
     stadt    = nein
     kreis    = kr_pinne
     quelle   = "GeoNames (CC BY 4.0), geonameid 3099993; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort kwilcz {
@@ -639,6 +887,10 @@ ort kwilcz {
     stadt    = nein
     kreis    = kr_pinne
     quelle   = "GeoNames (CC BY 4.0), geonameid 3094072; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort chrzypsko_wielkie {
@@ -649,6 +901,10 @@ ort chrzypsko_wielkie {
     stadt    = nein
     kreis    = kr_pinne
     quelle   = "GeoNames (CC BY 4.0), geonameid 3101513; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort meseritz {
@@ -659,6 +915,10 @@ ort meseritz {
     stadt    = ja
     kreis    = kr_meseritz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3091969; deutscher Name aus den GeoNames-Alternativnamen (heute Międzyrzecz); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort birnbaum {
@@ -669,6 +929,10 @@ ort birnbaum {
     stadt    = ja
     kreis    = kr_meseritz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3091983; deutscher Name aus den GeoNames-Alternativnamen (heute Międzychód); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort schwerin_posen {
@@ -679,6 +943,10 @@ ort schwerin_posen {
     stadt    = nein
     kreis    = kr_meseritz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3085656; deutscher Name aus den GeoNames-Alternativnamen (heute Skwierzyna); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort betsche {
@@ -689,6 +957,10 @@ ort betsche {
     stadt    = nein
     kreis    = kr_meseritz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3087710; deutscher Name aus den GeoNames-Alternativnamen (heute Pszczew); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort przytoczna {
@@ -699,6 +971,10 @@ ort przytoczna {
     stadt    = nein
     kreis    = kr_meseritz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3087769; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort blesen {
@@ -709,6 +985,10 @@ ort blesen {
     stadt    = nein
     kreis    = kr_meseritz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3103247; deutscher Name aus den GeoNames-Alternativnamen (heute Bledzew); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort braetz {
@@ -719,6 +999,10 @@ ort braetz {
     stadt    = nein
     kreis    = kr_meseritz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3102598; deutscher Name aus den GeoNames-Alternativnamen (heute Brójce); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort posen {
@@ -729,6 +1013,10 @@ ort posen {
     stadt    = ja
     kreis    = kr_posen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3088171; deutscher Name aus den GeoNames-Alternativnamen (heute Poznań); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort schrimm {
@@ -739,6 +1027,10 @@ ort schrimm {
     stadt    = ja
     kreis    = kr_posen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3085056; deutscher Name aus den GeoNames-Alternativnamen (heute Śrem); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort schroda {
@@ -749,6 +1041,10 @@ ort schroda {
     stadt    = ja
     kreis    = kr_posen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3085045; deutscher Name aus den GeoNames-Alternativnamen (heute Środa Wielkopolska); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort swarzedz {
@@ -759,6 +1055,10 @@ ort swarzedz {
     stadt    = ja
     kreis    = kr_posen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3084130; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort lubon {
@@ -769,6 +1069,10 @@ ort lubon {
     stadt    = ja
     kreis    = kr_posen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3092856; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort mosina {
@@ -779,6 +1083,10 @@ ort mosina {
     stadt    = nein
     kreis    = kr_posen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3091407; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort pudewitz {
@@ -789,6 +1097,10 @@ ort pudewitz {
     stadt    = nein
     kreis    = kr_posen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3088749; deutscher Name aus den GeoNames-Alternativnamen (heute Pobiedziska); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort kostrzyn {
@@ -799,6 +1111,10 @@ ort kostrzyn {
     stadt    = nein
     kreis    = kr_posen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3095058; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort kurnik {
@@ -809,6 +1125,10 @@ ort kurnik {
     stadt    = nein
     kreis    = kr_posen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3095194; deutscher Name aus den GeoNames-Alternativnamen (heute Kórnik); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort steszew {
@@ -819,6 +1139,10 @@ ort steszew {
     stadt    = nein
     kreis    = kr_posen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3084647; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort ksiaz_wielkopolski {
@@ -829,6 +1153,10 @@ ort ksiaz_wielkopolski {
     stadt    = nein
     kreis    = kr_posen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3094355; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort zaniemysl {
@@ -839,6 +1167,10 @@ ort zaniemysl {
     stadt    = nein
     kreis    = kr_posen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3080705; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort nowy_tomysl {
@@ -849,6 +1181,10 @@ ort nowy_tomysl {
     stadt    = nein
     kreis    = kr_nowy_tomysl
     quelle   = "GeoNames (CC BY 4.0), geonameid 3090452; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort wolsztyn {
@@ -859,6 +1195,10 @@ ort wolsztyn {
     stadt    = ja
     kreis    = kr_nowy_tomysl
     quelle   = "GeoNames (CC BY 4.0), geonameid 3081419; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort zbaszyn {
@@ -869,6 +1209,10 @@ ort zbaszyn {
     stadt    = nein
     kreis    = kr_nowy_tomysl
     quelle   = "GeoNames (CC BY 4.0), geonameid 3080495; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort rakoniewice {
@@ -879,6 +1223,10 @@ ort rakoniewice {
     stadt    = nein
     kreis    = kr_nowy_tomysl
     quelle   = "GeoNames (CC BY 4.0), geonameid 3087383; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort tirschtiegel {
@@ -889,6 +1237,10 @@ ort tirschtiegel {
     stadt    = nein
     kreis    = kr_nowy_tomysl
     quelle   = "GeoNames (CC BY 4.0), geonameid 3083177; deutscher Name aus den GeoNames-Alternativnamen (heute Trzciel); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort kosten {
@@ -899,6 +1251,10 @@ ort kosten {
     stadt    = ja
     kreis    = kr_kosten
     quelle   = "GeoNames (CC BY 4.0), geonameid 3095151; deutscher Name aus den GeoNames-Alternativnamen (heute Kościan); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort graetz {
@@ -909,6 +1265,10 @@ ort graetz {
     stadt    = nein
     kreis    = kr_kosten
     quelle   = "GeoNames (CC BY 4.0), geonameid 3098288; deutscher Name aus den GeoNames-Alternativnamen (heute Grodzisk Wielkopolski); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort opalenica {
@@ -919,6 +1279,10 @@ ort opalenica {
     stadt    = nein
     kreis    = kr_kosten
     quelle   = "GeoNames (CC BY 4.0), geonameid 3090076; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort smigiel {
@@ -929,6 +1293,10 @@ ort smigiel {
     stadt    = nein
     kreis    = kr_kosten
     quelle   = "GeoNames (CC BY 4.0), geonameid 3085391; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort czempin {
@@ -939,6 +1307,10 @@ ort czempin {
     stadt    = nein
     kreis    = kr_kosten
     quelle   = "GeoNames (CC BY 4.0), geonameid 3101053; deutscher Name aus den GeoNames-Alternativnamen (heute Czempiń); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort buk {
@@ -949,6 +1321,10 @@ ort buk {
     stadt    = nein
     kreis    = kr_kosten
     quelle   = "GeoNames (CC BY 4.0), geonameid 3102138; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort granowo {
@@ -959,6 +1335,10 @@ ort granowo {
     stadt    = nein
     kreis    = kr_kosten
     quelle   = "GeoNames (CC BY 4.0), geonameid 3098394; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort jarocin {
@@ -969,6 +1349,10 @@ ort jarocin {
     stadt    = ja
     kreis    = kr_jarocin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3097528; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort pleszew {
@@ -979,6 +1363,10 @@ ort pleszew {
     stadt    = ja
     kreis    = kr_jarocin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3088848; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort miloslaw {
@@ -989,6 +1377,10 @@ ort miloslaw {
     stadt    = nein
     kreis    = kr_jarocin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3091757; deutscher Name aus den GeoNames-Alternativnamen (heute Miłosław); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort pyzdry {
@@ -1009,6 +1401,10 @@ ort zerkow {
     stadt    = nein
     kreis    = kr_jarocin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3080275; deutscher Name aus den GeoNames-Alternativnamen (heute Żerków); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort goluchow {
@@ -1019,6 +1415,10 @@ ort goluchow {
     stadt    = nein
     kreis    = kr_jarocin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3098923; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort nowe_miasto_nad_warta {
@@ -1029,6 +1429,10 @@ ort nowe_miasto_nad_warta {
     stadt    = nein
     kreis    = kr_jarocin
     quelle   = "GeoNames (CC BY 4.0), geonameid 3090612; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort chocz {
@@ -1059,6 +1463,10 @@ ort lissa {
     stadt    = ja
     kreis    = kr_lissa
     quelle   = "GeoNames (CC BY 4.0), geonameid 3093524; deutscher Name aus den GeoNames-Alternativnamen (heute Leszno); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort rawitsch {
@@ -1069,6 +1477,10 @@ ort rawitsch {
     stadt    = ja
     kreis    = kr_lissa
     quelle   = "GeoNames (CC BY 4.0), geonameid 3087307; deutscher Name aus den GeoNames-Alternativnamen (heute Rawicz); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort krobia {
@@ -1079,6 +1491,10 @@ ort krobia {
     stadt    = nein
     kreis    = kr_lissa
     quelle   = "GeoNames (CC BY 4.0), geonameid 3094690; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort miejska_gorka {
@@ -1089,6 +1505,10 @@ ort miejska_gorka {
     stadt    = nein
     kreis    = kr_lissa
     quelle   = "GeoNames (CC BY 4.0), geonameid 3091957; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort poniec {
@@ -1099,6 +1519,10 @@ ort poniec {
     stadt    = nein
     kreis    = kr_lissa
     quelle   = "GeoNames (CC BY 4.0), geonameid 3088345; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort rydzyna {
@@ -1109,6 +1533,10 @@ ort rydzyna {
     stadt    = nein
     kreis    = kr_lissa
     quelle   = "GeoNames (CC BY 4.0), geonameid 3086527; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort krzemieniewo {
@@ -1119,6 +1547,10 @@ ort krzemieniewo {
     stadt    = nein
     kreis    = kr_lissa
     quelle   = "GeoNames (CC BY 4.0), geonameid 3094525; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort osieczna {
@@ -1129,6 +1561,10 @@ ort osieczna {
     stadt    = nein
     kreis    = kr_lissa
     quelle   = "GeoNames (CC BY 4.0), geonameid 3089934; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort krzywin {
@@ -1139,6 +1575,10 @@ ort krzywin {
     stadt    = nein
     kreis    = kr_lissa
     quelle   = "GeoNames (CC BY 4.0), geonameid 3094423; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort fraustadt {
@@ -1149,6 +1589,10 @@ ort fraustadt {
     stadt    = ja
     kreis    = kr_fraustadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 3081300; deutscher Name aus den GeoNames-Alternativnamen (heute Wschowa); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort schlawa {
@@ -1159,6 +1603,10 @@ ort schlawa {
     stadt    = nein
     kreis    = kr_fraustadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 3085637; deutscher Name aus den GeoNames-Alternativnamen (heute Sława); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort wloszakowice {
@@ -1169,6 +1617,10 @@ ort wloszakowice {
     stadt    = nein
     kreis    = kr_fraustadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 3081701; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort schlichtingsheim {
@@ -1179,6 +1631,10 @@ ort schlichtingsheim {
     stadt    = nein
     kreis    = kr_fraustadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 3083664; deutscher Name aus den GeoNames-Alternativnamen (heute Szlichtyngowa); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort przemet {
@@ -1189,6 +1645,10 @@ ort przemet {
     stadt    = nein
     kreis    = kr_fraustadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 3087956; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort brenno {
@@ -1199,6 +1659,10 @@ ort brenno {
     stadt    = nein
     kreis    = kr_fraustadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 3102650; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort krotoszyn {
@@ -1209,6 +1673,10 @@ ort krotoszyn {
     stadt    = ja
     kreis    = kr_krotoszyn
     quelle   = "GeoNames (CC BY 4.0), geonameid 3094625; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort gostyn {
@@ -1219,6 +1687,10 @@ ort gostyn {
     stadt    = ja
     kreis    = kr_krotoszyn
     quelle   = "GeoNames (CC BY 4.0), geonameid 3098625; deutscher Name aus den GeoNames-Alternativnamen (heute Gostyń); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort koschmin {
@@ -1229,6 +1701,10 @@ ort koschmin {
     stadt    = nein
     kreis    = kr_krotoszyn
     quelle   = "GeoNames (CC BY 4.0), geonameid 3094852; deutscher Name aus den GeoNames-Alternativnamen (heute Koźmin Wielkopolski); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort kobylin {
@@ -1239,6 +1715,10 @@ ort kobylin {
     stadt    = nein
     kreis    = kr_krotoszyn
     quelle   = "GeoNames (CC BY 4.0), geonameid 3095931; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort pogorzela {
@@ -1249,6 +1729,10 @@ ort pogorzela {
     stadt    = nein
     kreis    = kr_krotoszyn
     quelle   = "GeoNames (CC BY 4.0), geonameid 3088548; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort dobrzyca {
@@ -1259,6 +1743,10 @@ ort dobrzyca {
     stadt    = nein
     kreis    = kr_krotoszyn
     quelle   = "GeoNames (CC BY 4.0), geonameid 3100280; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort borek_wielkopolski {
@@ -1269,6 +1757,10 @@ ort borek_wielkopolski {
     stadt    = nein
     kreis    = kr_krotoszyn
     quelle   = "GeoNames (CC BY 4.0), geonameid 3102909; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort dolsk {
@@ -1279,6 +1771,10 @@ ort dolsk {
     stadt    = nein
     kreis    = kr_krotoszyn
     quelle   = "GeoNames (CC BY 4.0), geonameid 3100231; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort ostrow_wielkopolski {
@@ -1289,6 +1785,10 @@ ort ostrow_wielkopolski {
     stadt    = ja
     kreis    = kr_ostrow_wielkopolski
     quelle   = "GeoNames (CC BY 4.0), geonameid 3089684; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort nowe_skalmierzyce {
@@ -1299,6 +1799,10 @@ ort nowe_skalmierzyce {
     stadt    = nein
     kreis    = kr_ostrow_wielkopolski
     quelle   = "GeoNames (CC BY 4.0), geonameid 3090597; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort adelnau {
@@ -1309,6 +1813,10 @@ ort adelnau {
     stadt    = nein
     kreis    = kr_ostrow_wielkopolski
     quelle   = "GeoNames (CC BY 4.0), geonameid 3090315; deutscher Name aus den GeoNames-Alternativnamen (heute Odolanów); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort raszkow {
@@ -1319,6 +1827,10 @@ ort raszkow {
     stadt    = nein
     kreis    = kr_ostrow_wielkopolski
     quelle   = "GeoNames (CC BY 4.0), geonameid 3087333; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort sulmierzyce {
@@ -1329,6 +1841,10 @@ ort sulmierzyce {
     stadt    = nein
     kreis    = kr_ostrow_wielkopolski
     quelle   = "GeoNames (CC BY 4.0), geonameid 3084184; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort sosnie {
@@ -1339,6 +1855,10 @@ ort sosnie {
     stadt    = nein
     kreis    = kr_ostrow_wielkopolski
     quelle   = "GeoNames (CC BY 4.0), geonameid 3085138; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort kempen_in_posen {
@@ -1349,6 +1869,10 @@ ort kempen_in_posen {
     stadt    = ja
     kreis    = kr_kempen_in_posen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3096338; deutscher Name aus den GeoNames-Alternativnamen (heute Kępno); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort ostrzeszow {
@@ -1359,6 +1883,10 @@ ort ostrzeszow {
     stadt    = ja
     kreis    = kr_kempen_in_posen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3089670; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort grabow_nad_prosna {
@@ -1369,6 +1897,10 @@ ort grabow_nad_prosna {
     stadt    = nein
     kreis    = kr_kempen_in_posen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3098470; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort mikstat {
@@ -1379,6 +1911,10 @@ ort mikstat {
     stadt    = nein
     kreis    = kr_kempen_in_posen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3091817; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort doruchow {
@@ -1389,6 +1925,10 @@ ort doruchow {
     stadt    = nein
     kreis    = kr_kempen_in_posen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3100162; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort rychtal {
@@ -1399,6 +1939,10 @@ ort rychtal {
     stadt    = nein
     kreis    = kr_kempen_in_posen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3086544; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort trzcinica {
@@ -1409,6 +1953,10 @@ ort trzcinica {
     stadt    = nein
     kreis    = kr_kempen_in_posen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3083169; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }
 
 ort czajkow {
@@ -1419,4 +1967,8 @@ ort czajkow {
     stadt    = nein
     kreis    = kr_kempen_in_posen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3101224; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+    }
 }

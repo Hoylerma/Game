@@ -18,6 +18,11 @@ ort offenbach {
     stadt    = ja
     kreis    = kr_offenbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2857807; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort dietzenbach {
@@ -28,6 +33,11 @@ ort dietzenbach {
     stadt    = ja
     kreis    = kr_offenbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2937040; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort neu_isenburg {
@@ -38,6 +48,11 @@ ort neu_isenburg {
     stadt    = ja
     kreis    = kr_offenbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2864820; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort gross_umstadt {
@@ -48,6 +63,11 @@ ort gross_umstadt {
     stadt    = ja
     kreis    = kr_offenbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2914929; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort seligenstadt {
@@ -58,6 +78,11 @@ ort seligenstadt {
     stadt    = nein
     kreis    = kr_offenbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2833242; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort reinheim {
@@ -68,6 +93,11 @@ ort reinheim {
     stadt    = nein
     kreis    = kr_offenbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2848762; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort babenhausen_starkenburg {
@@ -78,6 +108,11 @@ ort babenhausen_starkenburg {
     stadt    = nein
     kreis    = kr_offenbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953770; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort messel {
@@ -88,6 +123,11 @@ ort messel {
     stadt    = nein
     kreis    = kr_offenbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2871636; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort ruesselsheim {
@@ -98,6 +138,11 @@ ort ruesselsheim {
     stadt    = ja
     kreis    = kr_ruesselsheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2842884; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort gross_gerau {
@@ -108,6 +153,11 @@ ort gross_gerau {
     stadt    = ja
     kreis    = kr_ruesselsheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2915613; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort moerfelden_walldorf {
@@ -118,6 +168,11 @@ ort moerfelden_walldorf {
     stadt    = ja
     kreis    = kr_ruesselsheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 3272460; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort kelsterbach {
@@ -128,6 +183,11 @@ ort kelsterbach {
     stadt    = nein
     kreis    = kr_ruesselsheim
     quelle   = "GeoNames (CC BY 4.0), geonameid 2891742; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort darmstadt {
@@ -138,6 +198,11 @@ ort darmstadt {
     stadt    = ja
     kreis    = kr_darmstadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2938913; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort heppenheim {
@@ -148,6 +213,11 @@ ort heppenheim {
     stadt    = ja
     kreis    = kr_darmstadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2906268; Name Heppenheim aus den GeoNames-Alternativnamen (GeoNames: Heppenheim an der Bergstrasse); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort viernheim {
@@ -158,6 +228,11 @@ ort viernheim {
     stadt    = ja
     kreis    = kr_darmstadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2817324; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort lampertheim {
@@ -168,6 +243,11 @@ ort lampertheim {
     stadt    = ja
     kreis    = kr_darmstadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2881695; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort pfungstadt {
@@ -178,6 +258,11 @@ ort pfungstadt {
     stadt    = ja
     kreis    = kr_darmstadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2853924; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort biblis {
@@ -188,6 +273,11 @@ ort biblis {
     stadt    = nein
     kreis    = kr_darmstadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2949367; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort zwingenberg {
@@ -198,6 +288,11 @@ ort zwingenberg {
     stadt    = nein
     kreis    = kr_darmstadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2803515; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort biebesheim {
@@ -208,6 +303,11 @@ ort biebesheim {
     stadt    = nein
     kreis    = kr_darmstadt
     quelle   = "GeoNames (CC BY 4.0), geonameid 2949240; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort erbach_im_odenwald {
@@ -218,6 +318,11 @@ ort erbach_im_odenwald {
     stadt    = ja
     kreis    = kr_erbach_im_odenwald
     quelle   = "GeoNames (CC BY 4.0), geonameid 2929802; Name Erbach im Odenwald aus den GeoNames-Alternativnamen (GeoNames: Erbach); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort wald_michelbach {
@@ -228,6 +333,11 @@ ort wald_michelbach {
     stadt    = nein
     kreis    = kr_erbach_im_odenwald
     quelle   = "GeoNames (CC BY 4.0), geonameid 2814853; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort moerlenbach {
@@ -238,6 +348,11 @@ ort moerlenbach {
     stadt    = nein
     kreis    = kr_erbach_im_odenwald
     quelle   = "GeoNames (CC BY 4.0), geonameid 2869221; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort bad_koenig {
@@ -248,6 +363,11 @@ ort bad_koenig {
     stadt    = nein
     kreis    = kr_erbach_im_odenwald
     quelle   = "GeoNames (CC BY 4.0), geonameid 2953419; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort beerfelden {
@@ -258,6 +378,11 @@ ort beerfelden {
     stadt    = nein
     kreis    = kr_erbach_im_odenwald
     quelle   = "GeoNames (CC BY 4.0), geonameid 2951556; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort lindenfels {
@@ -268,6 +393,11 @@ ort lindenfels {
     stadt    = nein
     kreis    = kr_erbach_im_odenwald
     quelle   = "GeoNames (CC BY 4.0), geonameid 2877315; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort fraenkisch_crumbach {
@@ -278,6 +408,11 @@ ort fraenkisch_crumbach {
     stadt    = nein
     kreis    = kr_erbach_im_odenwald
     quelle   = "GeoNames (CC BY 4.0), geonameid 2925507; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort hirschhorn {
@@ -288,4 +423,9 @@ ort hirschhorn {
     stadt    = nein
     kreis    = kr_erbach_im_odenwald
     quelle   = "GeoNames (CC BY 4.0), geonameid 2903625; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }

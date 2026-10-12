@@ -17,6 +17,11 @@ ort glatz {
     stadt    = ja
     kreis    = kr_glatz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3096053; deutscher Name aus den GeoNames-Alternativnamen (heute Kłodzko); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort neurode {
@@ -27,6 +32,11 @@ ort neurode {
     stadt    = ja
     kreis    = kr_glatz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3090768; deutscher Name aus den GeoNames-Alternativnamen (heute Nowa Ruda); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort bad_kudowa {
@@ -37,6 +47,11 @@ ort bad_kudowa {
     stadt    = nein
     kreis    = kr_glatz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3094303; deutscher Name aus den GeoNames-Alternativnamen (heute Kudowa-Zdrój); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort habelschwerdt {
@@ -47,6 +62,11 @@ ort habelschwerdt {
     stadt    = nein
     kreis    = kr_glatz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3101968; deutscher Name aus den GeoNames-Alternativnamen (heute Bystrzyca Kłodzka); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort bad_altheide {
@@ -57,6 +77,11 @@ ort bad_altheide {
     stadt    = nein
     kreis    = kr_glatz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3088496; deutscher Name aus den GeoNames-Alternativnamen (heute Polanica-Zdrój); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort bad_landeck {
@@ -67,6 +92,11 @@ ort bad_landeck {
     stadt    = nein
     kreis    = kr_glatz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3094016; deutscher Name aus den GeoNames-Alternativnamen (heute Lądek-Zdrój); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort bad_reinerz {
@@ -77,6 +107,11 @@ ort bad_reinerz {
     stadt    = nein
     kreis    = kr_glatz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3099992; deutscher Name aus den GeoNames-Alternativnamen (heute Duszniki-Zdrój); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort mittelwalde {
@@ -87,6 +122,11 @@ ort mittelwalde {
     stadt    = nein
     kreis    = kr_glatz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3091979; deutscher Name aus den GeoNames-Alternativnamen (heute Międzylesie); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort wuenschelburg {
@@ -97,4 +137,9 @@ ort wuenschelburg {
     stadt    = nein
     kreis    = kr_glatz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3087535; deutscher Name aus den GeoNames-Alternativnamen (heute Radków); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }

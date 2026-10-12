@@ -17,6 +17,11 @@ ort marburg_an_der_lahn {
     stadt    = ja
     kreis    = kr_marburg_an_der_lahn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2873759; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HEK
+        bund     = ja
+    }
 }
 
 ort stadtallendorf {
@@ -27,6 +32,11 @@ ort stadtallendorf {
     stadt    = ja
     kreis    = kr_marburg_an_der_lahn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2829804; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HEK
+        bund     = ja
+    }
 }
 
 ort alsfeld {
@@ -37,6 +47,11 @@ ort alsfeld {
     stadt    = nein
     kreis    = kr_marburg_an_der_lahn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2958128; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort biedenkopf {
@@ -47,6 +62,11 @@ ort biedenkopf {
     stadt    = nein
     kreis    = kr_marburg_an_der_lahn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2949229; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort gladenbach {
@@ -57,6 +77,11 @@ ort gladenbach {
     stadt    = nein
     kreis    = kr_marburg_an_der_lahn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2920229; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort wetter {
@@ -67,6 +92,11 @@ ort wetter {
     stadt    = nein
     kreis    = kr_marburg_an_der_lahn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2809985; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HEK
+        bund     = ja
+    }
 }
 
 ort homberg_an_der_ohm {
@@ -77,6 +107,11 @@ ort homberg_an_der_ohm {
     stadt    = nein
     kreis    = kr_marburg_an_der_lahn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2899479; Name Homberg an der Ohm aus den GeoNames-Alternativnamen (GeoNames: Homberg); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort fronhausen {
@@ -87,6 +122,11 @@ ort fronhausen {
     stadt    = nein
     kreis    = kr_marburg_an_der_lahn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2924201; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HEK
+        bund     = ja
+    }
 }
 
 ort kirtorf {
@@ -97,6 +137,11 @@ ort kirtorf {
     stadt    = nein
     kreis    = kr_marburg_an_der_lahn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2890222; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort rauschenberg {
@@ -107,6 +152,11 @@ ort rauschenberg {
     stadt    = nein
     kreis    = kr_marburg_an_der_lahn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2849875; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HEK
+        bund     = ja
+    }
 }
 
 ort lauterbach {
@@ -117,6 +167,11 @@ ort lauterbach {
     stadt    = ja
     kreis    = kr_lauterbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2879929; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort schotten {
@@ -127,6 +182,11 @@ ort schotten {
     stadt    = nein
     kreis    = kr_lauterbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2836251; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort schlitz {
@@ -137,6 +197,11 @@ ort schlitz {
     stadt    = nein
     kreis    = kr_lauterbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2838459; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort grebenhain {
@@ -147,6 +212,11 @@ ort grebenhain {
     stadt    = nein
     kreis    = kr_lauterbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2917850; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort freiensteinau {
@@ -157,6 +227,11 @@ ort freiensteinau {
     stadt    = nein
     kreis    = kr_lauterbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2925141; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort grebenau {
@@ -167,6 +242,11 @@ ort grebenau {
     stadt    = nein
     kreis    = kr_lauterbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2917858; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort ulrichstein {
@@ -177,6 +257,11 @@ ort ulrichstein {
     stadt    = nein
     kreis    = kr_lauterbach
     quelle   = "GeoNames (CC BY 4.0), geonameid 2820217; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort giessen {
@@ -187,6 +272,11 @@ ort giessen {
     stadt    = ja
     kreis    = kr_giessen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2920512; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort langgoens {
@@ -197,6 +287,11 @@ ort langgoens {
     stadt    = nein
     kreis    = kr_giessen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2880672; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort gruenberg_in_hessen {
@@ -207,6 +302,11 @@ ort gruenberg_in_hessen {
     stadt    = nein
     kreis    = kr_giessen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2914432; Name Grünberg in Hessen aus den GeoNames-Alternativnamen (GeoNames: Grünberg); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort reiskirchen {
@@ -217,6 +317,11 @@ ort reiskirchen {
     stadt    = nein
     kreis    = kr_giessen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2848543; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort lich {
@@ -227,6 +332,11 @@ ort lich {
     stadt    = nein
     kreis    = kr_giessen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2878166; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort rabenau {
@@ -237,4 +347,9 @@ ort rabenau {
     stadt    = nein
     kreis    = kr_giessen
     quelle   = "GeoNames (CC BY 4.0), geonameid 7576812; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }

@@ -18,6 +18,11 @@ ort buchholz_in_der_nordheide {
     stadt    = ja
     kreis    = kr_buchholz_in_der_nordheide
     quelle   = "GeoNames (CC BY 4.0), geonameid 2942323; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort winsen_luhe {
@@ -28,6 +33,11 @@ ort winsen_luhe {
     stadt    = ja
     kreis    = kr_buchholz_in_der_nordheide
     quelle   = "GeoNames (CC BY 4.0), geonameid 2807845; Name Winsen (Luhe) aus den GeoNames-Alternativnamen (GeoNames: Winsen); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort neu_wulmstorf {
@@ -38,6 +48,11 @@ ort neu_wulmstorf {
     stadt    = ja
     kreis    = kr_buchholz_in_der_nordheide
     quelle   = "GeoNames (CC BY 4.0), geonameid 2863795; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort tostedt {
@@ -48,6 +63,11 @@ ort tostedt {
     stadt    = nein
     kreis    = kr_buchholz_in_der_nordheide
     quelle   = "GeoNames (CC BY 4.0), geonameid 2821736; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort salzhausen {
@@ -58,6 +78,11 @@ ort salzhausen {
     stadt    = nein
     kreis    = kr_buchholz_in_der_nordheide
     quelle   = "GeoNames (CC BY 4.0), geonameid 2842144; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort amelinghausen {
@@ -68,6 +93,11 @@ ort amelinghausen {
     stadt    = nein
     kreis    = kr_buchholz_in_der_nordheide
     quelle   = "GeoNames (CC BY 4.0), geonameid 2956584; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort hollenstedt {
@@ -78,6 +108,11 @@ ort hollenstedt {
     stadt    = nein
     kreis    = kr_buchholz_in_der_nordheide
     quelle   = "GeoNames (CC BY 4.0), geonameid 2900520; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort handeloh {
@@ -88,6 +123,11 @@ ort handeloh {
     stadt    = nein
     kreis    = kr_buchholz_in_der_nordheide
     quelle   = "GeoNames (CC BY 4.0), geonameid 2910992; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort embsen {
@@ -98,6 +138,11 @@ ort embsen {
     stadt    = nein
     kreis    = kr_buchholz_in_der_nordheide
     quelle   = "GeoNames (CC BY 4.0), geonameid 2930602; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort hanstedt {
@@ -108,6 +153,11 @@ ort hanstedt {
     stadt    = nein
     kreis    = kr_buchholz_in_der_nordheide
     quelle   = "GeoNames (CC BY 4.0), geonameid 2910762; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort lueneburg {
@@ -118,6 +168,11 @@ ort lueneburg {
     stadt    = ja
     kreis    = kr_lueneburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2875115; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort bad_bevensen {
@@ -128,6 +183,11 @@ ort bad_bevensen {
     stadt    = nein
     kreis    = kr_lueneburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2949511; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort bleckede {
@@ -138,6 +198,11 @@ ort bleckede {
     stadt    = nein
     kreis    = kr_lueneburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2947894; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort bienenbuettel {
@@ -148,6 +213,11 @@ ort bienenbuettel {
     stadt    = nein
     kreis    = kr_lueneburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2949150; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort brietlingen {
@@ -158,6 +228,11 @@ ort brietlingen {
     stadt    = nein
     kreis    = kr_lueneburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2944093; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort dahlenburg {
@@ -168,6 +243,11 @@ ort dahlenburg {
     stadt    = nein
     kreis    = kr_lueneburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2939426; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort neu_darchau {
@@ -178,6 +258,11 @@ ort neu_darchau {
     stadt    = nein
     kreis    = kr_lueneburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2866046; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort himbergen {
@@ -188,6 +273,11 @@ ort himbergen {
     stadt    = nein
     kreis    = kr_lueneburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2904574; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort reinstorf {
@@ -198,6 +288,11 @@ ort reinstorf {
     stadt    = nein
     kreis    = kr_lueneburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2848689; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort soltau {
@@ -208,6 +303,11 @@ ort soltau {
     stadt    = ja
     kreis    = kr_soltau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2831486; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort schneverdingen {
@@ -218,6 +318,11 @@ ort schneverdingen {
     stadt    = nein
     kreis    = kr_soltau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2837291; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort munster_lueneburg {
@@ -228,6 +333,11 @@ ort munster_lueneburg {
     stadt    = nein
     kreis    = kr_soltau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2867542; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort bispingen {
@@ -238,6 +348,11 @@ ort bispingen {
     stadt    = nein
     kreis    = kr_soltau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2948222; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort wietzendorf {
@@ -248,6 +363,11 @@ ort wietzendorf {
     stadt    = nein
     kreis    = kr_soltau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2809085; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort neuenkirchen {
@@ -258,6 +378,11 @@ ort neuenkirchen {
     stadt    = nein
     kreis    = kr_soltau
     quelle   = "GeoNames (CC BY 4.0), geonameid 2865637; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort luechow {
@@ -268,6 +393,11 @@ ort luechow {
     stadt    = ja
     kreis    = kr_luechow
     quelle   = "GeoNames (CC BY 4.0), geonameid 2875542; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort dannenberg {
@@ -278,6 +408,11 @@ ort dannenberg {
     stadt    = nein
     kreis    = kr_luechow
     quelle   = "GeoNames (CC BY 4.0), geonameid 2938991; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort clenze {
@@ -288,6 +423,11 @@ ort clenze {
     stadt    = nein
     kreis    = kr_luechow
     quelle   = "GeoNames (CC BY 4.0), geonameid 2939983; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort rosche {
@@ -298,6 +438,11 @@ ort rosche {
     stadt    = nein
     kreis    = kr_luechow
     quelle   = "GeoNames (CC BY 4.0), geonameid 2845146; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort zernien {
@@ -308,6 +453,11 @@ ort zernien {
     stadt    = nein
     kreis    = kr_luechow
     quelle   = "GeoNames (CC BY 4.0), geonameid 2804729; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort gartow {
@@ -318,6 +468,11 @@ ort gartow {
     stadt    = nein
     kreis    = kr_luechow
     quelle   = "GeoNames (CC BY 4.0), geonameid 2922438; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort uelzen {
@@ -328,6 +483,11 @@ ort uelzen {
     stadt    = ja
     kreis    = kr_uelzen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2820456; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort ebstorf {
@@ -338,6 +498,11 @@ ort ebstorf {
     stadt    = nein
     kreis    = kr_uelzen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2933817; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort suderburg {
@@ -348,6 +513,11 @@ ort suderburg {
     stadt    = nein
     kreis    = kr_uelzen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2825180; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort wieren {
@@ -358,6 +528,11 @@ ort wieren {
     stadt    = nein
     kreis    = kr_uelzen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2809415; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort eimke {
@@ -368,6 +543,11 @@ ort eimke {
     stadt    = nein
     kreis    = kr_uelzen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2931818; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort bad_fallingbostel {
@@ -378,6 +558,11 @@ ort bad_fallingbostel {
     stadt    = ja
     kreis    = kr_bad_fallingbostel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2927871; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort schwarmstedt {
@@ -388,6 +573,11 @@ ort schwarmstedt {
     stadt    = nein
     kreis    = kr_bad_fallingbostel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2835220; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort hodenhagen {
@@ -398,6 +588,11 @@ ort hodenhagen {
     stadt    = nein
     kreis    = kr_bad_fallingbostel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2902818; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort rethem {
@@ -408,6 +603,11 @@ ort rethem {
     stadt    = nein
     kreis    = kr_bad_fallingbostel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2848051; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort celle {
@@ -418,6 +618,11 @@ ort celle {
     stadt    = ja
     kreis    = kr_celle
     quelle   = "GeoNames (CC BY 4.0), geonameid 2940213; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort bergen_lueneburg {
@@ -428,6 +633,11 @@ ort bergen_lueneburg {
     stadt    = nein
     kreis    = kr_celle
     quelle   = "GeoNames (CC BY 4.0), geonameid 2950622; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort winsen_aller {
@@ -438,6 +648,11 @@ ort winsen_aller {
     stadt    = nein
     kreis    = kr_celle
     quelle   = "GeoNames (CC BY 4.0), geonameid 2807846; Name Winsen (Aller) aus den GeoNames-Alternativnamen (GeoNames: Winsen); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort hermannsburg {
@@ -448,6 +663,11 @@ ort hermannsburg {
     stadt    = nein
     kreis    = kr_celle
     quelle   = "GeoNames (CC BY 4.0), geonameid 2906015; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort wathlingen {
@@ -458,6 +678,11 @@ ort wathlingen {
     stadt    = nein
     kreis    = kr_celle
     quelle   = "GeoNames (CC BY 4.0), geonameid 2813660; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort lachendorf {
@@ -468,6 +693,11 @@ ort lachendorf {
     stadt    = nein
     kreis    = kr_celle
     quelle   = "GeoNames (CC BY 4.0), geonameid 2882028; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort unterluess {
@@ -478,6 +708,11 @@ ort unterluess {
     stadt    = nein
     kreis    = kr_celle
     quelle   = "GeoNames (CC BY 4.0), geonameid 2819117; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort eschede {
@@ -488,6 +723,11 @@ ort eschede {
     stadt    = nein
     kreis    = kr_celle
     quelle   = "GeoNames (CC BY 4.0), geonameid 2929122; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort gifhorn {
@@ -498,6 +738,11 @@ ort gifhorn {
     stadt    = ja
     kreis    = kr_gifhorn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2920478; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort wittingen {
@@ -508,6 +753,11 @@ ort wittingen {
     stadt    = nein
     kreis    = kr_gifhorn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2807257; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort meinersen {
@@ -518,6 +768,11 @@ ort meinersen {
     stadt    = nein
     kreis    = kr_gifhorn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2872244; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort hankensbuettel {
@@ -528,6 +783,11 @@ ort hankensbuettel {
     stadt    = nein
     kreis    = kr_gifhorn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2910863; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort ruehen {
@@ -538,6 +798,11 @@ ort ruehen {
     stadt    = nein
     kreis    = kr_gifhorn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2843272; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort wesendorf {
@@ -548,6 +813,11 @@ ort wesendorf {
     stadt    = nein
     kreis    = kr_gifhorn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2810659; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort weyhausen {
@@ -558,6 +828,11 @@ ort weyhausen {
     stadt    = nein
     kreis    = kr_gifhorn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2809837; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort brome {
@@ -568,6 +843,11 @@ ort brome {
     stadt    = nein
     kreis    = kr_gifhorn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2943795; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
 
 ort vordorf {
@@ -578,6 +858,11 @@ ort vordorf {
     stadt    = nein
     kreis    = kr_gifhorn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2816127; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = BWO
+        bund     = ja
+    }
 }
 
 ort steinhorst {
@@ -588,4 +873,9 @@ ort steinhorst {
     stadt    = nein
     kreis    = kr_gifhorn
     quelle   = "GeoNames (CC BY 4.0), geonameid 2827951; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1848.03.01 = {
+        besitzer = HAN
+        bund     = ja
+    }
 }
