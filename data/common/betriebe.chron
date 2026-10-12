@@ -1,0 +1,138 @@
+# Betriebe der Epoche 1648–1806 (Meilenstein M5, vereinfacht).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.13; Modell: docs/technik/wirtschaft.md,
+# Abschnitte 2.3, 4.2 und 4.5.
+#
+# Ein Betrieb ist die Arbeitsstätte eines Berufs. Jeder Ort verteilt die Köpfe eines Berufs auf
+# die dort möglichen Betriebe (Betriebsanteile); die Verteilung folgt langsam dem Gewinn.
+#   beruf      – wer dort arbeitet
+#   erzeugt    – Menge je Kopf und Jahr (Kopf = alle Angehörigen, wie beim Warenkorb)
+#   verbraucht – optional: Vorleistungen je Kopf und Jahr
+#   agrar      – Ertrag hängt an Tragfähigkeit und Ernte; Adel und Geistlichkeit erhalten davon
+#                ihre Agrarabgabe (Grundrente, Zehnt; berufe.chron)
+#   ort        – optional: alle (Standard), stadt oder land
+#   vorkommen  – optional: nur in Orten mit diesem Vorkommen (Spalte vorkommen in orte.csv)
+#   handel     – optional: Einkommen aus der Handelsspanne des Marktes statt aus Gütern
+#   gewicht    – Anteil beim Start im Verhältnis zu den anderen Betrieben des Berufs im Ort
+#   gelaende   – optional: Faktor auf das Gewicht je Geländetyp (Standard 1)
+#
+# Größenordnungen (Spielwerte): Die Wertschöpfung je Kopf zum Basispreis liegt nahe dem Ertrag
+# je Beruf aus M1/M4 (Bauern 12–14, Landarme 6–7, Handwerker 12–15, Bürger 18–34 Reichstaler im
+# Jahr). Die Werte werden mit dem Balancing-Bericht abgestimmt (data/README.md,
+# Abschnitt "Wirtschaftswerte").
+
+# ─── Bauern ─────────────────────────────────────────────────────────────────
+
+betrieb bauernhof {
+    name     = "Bauernhof"        # Hufner und Vollbauern, Dreifelderwirtschaft
+    beruf    = bauern
+    erzeugt  = { getreide = 12 vieh = 0.8 faser = 0.5 holz = 0.4 }
+    agrar    = ja
+    gewicht  = 1
+}
+
+betrieb schaeferei {
+    name     = "Schäferei"        # Wolle und Hammel; auf Heide und im Bergland verbreitet
+    beruf    = bauern
+    erzeugt  = { faser = 3.5 vieh = 1.5 }
+    agrar    = ja
+    gewicht  = 0.1
+    gelaende = { heide = 3 huegelland = 2 mittelgebirge = 2 }
+}
+
+betrieb weinberg {
+    name      = "Weinberg"        # Elbtal, Böhmisches Mittelgebirge, Gubener Land
+    beruf     = bauern
+    erzeugt   = { wein = 2.5 }
+    agrar     = ja
+    vorkommen = weinlage
+    gewicht   = 1
+}
+
+# ─── Landarme ───────────────────────────────────────────────────────────────
+
+betrieb gutsarbeit {
+    name     = "Gutsarbeit"       # Kossäten, Häusler und Gesinde auf Rittergütern und Höfen
+    beruf    = landarme
+    erzeugt  = { getreide = 7.5 vieh = 0.25 }
+    agrar    = ja
+    gewicht  = 1
+}
+
+betrieb forst {
+    name     = "Forst"            # Holzschlag, Köhlerei, Teerschwelerei
+    beruf    = landarme
+    erzeugt  = { holz = 3.25 }
+    agrar    = nein
+    gewicht  = 0.6
+    gelaende = { wald = 4 mittelgebirge = 3 heide = 2 bruch = 2 seenplatte = 2 }
+}
+
+betrieb heimweberei {
+    name       = "Heimweberei"    # Verlagssystem: Spinnen und Weben im Nebenerwerb
+    beruf      = landarme
+    erzeugt    = { tuch = 1.5 }
+    verbraucht = { faser = 1 }
+    agrar      = nein
+    ort        = land
+    gewicht    = 0.3
+}
+
+# ─── Handwerker ─────────────────────────────────────────────────────────────
+
+betrieb weberei {
+    name       = "Weberei"        # Leinen- und Wollweber, Tuchmacher der Zünfte
+    beruf      = handwerker
+    erzeugt    = { tuch = 2.8 }
+    verbraucht = { faser = 2 }
+    agrar      = nein
+    gewicht    = 1
+}
+
+betrieb werkstatt {
+    name       = "Werkstatt"      # Schmiede, Tischler, Böttcher, Töpfer
+    beruf      = handwerker
+    erzeugt    = { waren = 4 }
+    verbraucht = { holz = 1 }
+    agrar      = nein
+    gewicht    = 0.8
+}
+
+betrieb saline {
+    name       = "Saline"         # Salzsieder (Halloren in Halle), Siedepfannen mit Holzfeuerung
+    beruf      = handwerker
+    erzeugt    = { salz = 9 }
+    verbraucht = { holz = 4.5 }
+    agrar      = nein
+    vorkommen  = salz
+    gewicht    = 6
+}
+
+# ─── Bürger ─────────────────────────────────────────────────────────────────
+
+betrieb brauerei {
+    name       = "Brauerei"       # Braurecht der Bürgerhäuser
+    beruf      = buerger
+    erzeugt    = { bier = 12 }
+    verbraucht = { getreide = 6 }
+    agrar      = nein
+    gewicht    = 0.5
+}
+
+betrieb manufaktur {
+    name       = "Manufaktur"     # Seiden-, Spitzen- und Fayencemanufakturen, Buchdruck
+    beruf      = buerger
+    erzeugt    = { luxuswaren = 4 }
+    verbraucht = { faser = 2 holz = 1 }
+    agrar      = nein
+    ort        = stadt
+    gewicht    = 0.15
+}
+
+betrieb handelshaus {
+    name     = "Handelshaus"      # Kaufleute und Krämer: Anteil an der Handelsspanne des Marktes
+    beruf    = buerger
+    agrar    = nein
+    handel   = ja
+    gewicht  = 1
+}

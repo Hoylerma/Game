@@ -3,9 +3,10 @@
 # Staat zum Lesezeichen "Der Westfälische Frieden" (24.10.1648), Testregion M1.
 #
 # Format: docs/technik/chronik-skript.md, Abschnitt 3.5.
-# schatz, steuersatz und hofhaltung sind Spielwerte (Reichstaler), skaliert auf
-# die in der Testregion modellierten Orte dieses Staates – keine historischen
-# Haushaltszahlen. Kalibrierung: data/README.md, Abschnitt "Wirtschaftswerte".
+# schatz, hofhaltung, die Steuersätze (kontribution, akzise, zoll) und heer (Soldaten
+# je 1.000 Einwohner) sind Spielwerte, skaliert auf die in der Testregion modellierten
+# Orte dieses Staates – keine historischen Haushaltszahlen. Kalibrierung: data/README.md,
+# Abschnitt "Wirtschaftswerte".
 #
 # Ernestinisches Herzogtum; in der Testregion mit dem Amt Gotha modelliert.
 
@@ -13,7 +14,7 @@ staat GOT {
     name     = "Herzogtum Sachsen-Gotha"
     kurzname = "Sachsen-Gotha"
     farbe    = { 150 200 90 }
-    quelle   = "Herzog seit der ernestinischen Teilung 1640 (bis 1675); Schulmethodus 1642, vorbildliche Verwaltung und Finanzen, daher vergleichsweise hoher Startschatz; 1645 Anteile am Eisenacher Erbe. Schatz, Steuersatz und Hofhaltung sind Spielwerte"
+    quelle   = "Herzog seit der ernestinischen Teilung 1640 (bis 1675); Schulmethodus 1642, vorbildliche Verwaltung und Finanzen, daher vergleichsweise hoher Startschatz; 1645 Anteile am Eisenacher Erbe. Schatz, Steuersätze, Hofhaltung und Heer sind Spielwerte"
 
     1648.10.24 = {
         hauptstadt     = gotha
@@ -21,7 +22,10 @@ staat GOT {
         herrscher      = "Ernst I. der Fromme"
         konfession     = lutherisch
         schatz         = 11000
-        steuersatz     = 0.10
-        hofhaltung     = 12500
+        kontribution   = 0.10
+        akzise         = 0.04
+        zoll           = 0.03
+        hofhaltung     = 4250
+        heer           = 4
     }
 }

@@ -71,7 +71,11 @@ data/
 │   ├── gelaende.chron      Geländetypen
 │   ├── konfessionen.chron  Konfessionen
 │   ├── kulturen.chron      Kulturen bzw. Landsmannschaften (seit M4)
-│   └── berufe.chron        Berufsgruppen
+│   ├── berufe.chron        Berufsgruppen
+│   ├── gueter.chron        Güter (seit M5)
+│   ├── beduerfnisse.chron  Bedürfnisse mit Warenkorb je Schicht (seit M5)
+│   ├── betriebe.chron      Betriebe: Arbeitsstätten der Berufe (seit M5)
+│   └── maerkte.chron       Märkte aus Landschaften (seit M5)
 ├── history/                generiert aus tabellen/ (tools/archivar), nicht von Hand bearbeiten
 │   ├── staaten/*.chron     Staaten (Reichsstände) mit datierter Historie
 │   ├── kreise/*.chron      Kreise: Gruppen von 4–12 Orten (seit M3)
@@ -86,7 +90,8 @@ data/
     └── definition.csv      generiert: Kartenindex → Ort, Beschriftungspunkt, Fläche
 ```
 
-Ladereihenfolge: `regeln`, `gelaende`, `konfessionen`, `kulturen` (seit M4), `berufe`, dann alle Dateien der Ordner `szenarien`, `history/staaten`, `history/kreise` (seit M3), `history/orte`, jeweils **nach Dateiname sortiert**, Einträge in Dateireihenfolge. Daraus ergeben sich die Indizes in `World`. Die Szenarien kommen vor der Historie, weil das Startdatum des gewählten Szenarios bestimmt, welche datierten Blöcke gelten (Abschnitt 3.8).
+Ladereihenfolge: `regeln`, `gelaende`, `konfessionen`, `kulturen` (seit M4), `berufe`, `gueter`, `beduerfnisse`,
+`betriebe`, `maerkte` (seit M5), dann alle Dateien der Ordner `szenarien`, `history/staaten`, `history/kreise` (seit M3), `history/orte`, jeweils **nach Dateiname sortiert**, Einträge in Dateireihenfolge. Daraus ergeben sich die Indizes in `World`. Die Szenarien kommen vor der Historie, weil das Startdatum des gewählten Szenarios bestimmt, welche datierten Blöcke gelten (Abschnitt 3.8).
 
 Die Dateien in `history/` erzeugt das Werkzeug `tools/archivar` aus den Tabellen in `data/tabellen/` (Format: [tabellen.md](tabellen.md)). Änderungen gehören in die Tabellen; die CI prüft mit `archivar.py --pruefen`, dass `history/` aktuell ist.
 
@@ -109,7 +114,7 @@ regeln {
     anteil_kinder             = 0.34    # Altersaufbau beim Start, 0..1
     anteil_jung               = 0.26    # Summe der drei Anteile höchstens 1 (Rest: Alte)
     anteil_erwerb             = 0.33
-    fruchtbarkeit             = 0.088   # 0..1
+    fruchtbarkeit             = 0.093   # 0..1
     anteil_fruchtbar_erwerb   = 0.4     # 0..1
     fruchtbarkeit_landreserve = 0.3     # 0..10
     fruchtbarkeit_wohlstand   = 0.15    # 0..1
@@ -119,7 +124,7 @@ regeln {
     sterblichkeit_alt         = 0.11
     sterblichkeit_armut       = 0.3
     tragfaehigkeit_stadt      = 1.75    # 0..100
-    lebensstandard_bezug      = 12      # größer als 0
+    lebensstandard_bezug      = 9       # größer als 0
     lebensstandard_anpassung  = 0.25    # 0..1
     bildung_stadt             = 1.25    # 0..10
     bildung_anpassung         = 0.03    # 0..1
@@ -133,11 +138,42 @@ regeln {
     auswanderung_rate         = 0.05    # 0..10
     block_mindestgroesse      = 1       # Personen, 0..1000000
     wanderung_mindestmenge    = 0.05    # Personen, 0..1000000
+
+    # Wirtschaft und Staatshaushalt (seit M5); Bedeutung und Startwerte: wirtschaft.md, Abschnitt 4.9
+    preis_min                 = 0.25    # größer als 0, höchstens 1
+    preis_max                 = 4       # 1..100
+    preis_anpassung           = 0.3     # 0..1
+    handel_nachbarn           = 6       # Ganzzahl 0..16
+    handel_radius_km          = 180     # 0..5000
+    handel_rate               = 5       # 0..100
+    handel_fracht             = 0.12    # 0..10, je 100 km
+    seefracht                 = 0.10    # 0..10
+    handelsspanne             = 0.05    # 0..0.5
+    betrieb_anpassung         = 0.03    # 0..1
+    betrieb_min_anteil        = 0.02    # 0..0.5
+    ernte_schwankung_land     = 0.08    # 0..0.5
+    ernte_schwankung_markt    = 0.10    # 0..0.5
+    sterblichkeit_hunger      = 1.5     # 0..10
+    einschwingen_monate       = 60      # Ganzzahl 0..600
+    verwaltung_je_einwohner   = 0.3     # 0..1000 Reichstaler
+    sold                      = 30      # 0..100000 Reichstaler
+    reserve_jahre             = 0.5     # 0..100
+    bau_anteil                = 0.05    # 0..1
+    ausbau_max                = 0.3     # 0..10
+    ausbau_halb               = 200     # größer als 0, Reichstaler je km²
+    zins_basis                = 0.05    # 0..1, höchstens zins_max
+    zins_risiko               = 0.02    # 0..1
+    zins_max                  = 0.2     # 0..1
+    bankrott_quote            = 4       # größer als 0, höchstens 1000
+    bankrott_schnitt          = 0.5     # 0..1
+    bankrott_aufschlag        = 0.04    # 0..1
+    bankrott_jahre            = 20      # Ganzzahl 0..200
 }
 ```
 
 Alle Felder sind Pflicht. Abbildung auf `Rules` in derselben Reihenfolge (`devastation_decay` … `tax_rate_max`,
-seit M4 weiter `share_children` … `migration_min_amount`). Die drei Felder `wachstum_basis`, `wachstum_wiederaufbau`
+seit M4 weiter `share_children` … `migration_min_amount`, seit M5 weiter `price_min` … `bankruptcy_years`).
+`steuersatz_max` gilt seit M5 für alle drei Steuerarten der Staaten (Abschnitt 3.5). Die drei Felder `wachstum_basis`, `wachstum_wiederaufbau`
 und `wachstum_steuerdruck` aus M1 gibt es seit dem Bevölkerungsmodell von M4 nicht mehr; stehen sie noch in einer
 Datei, meldet der Lader sie als unbekannte Felder (Warnung).
 
@@ -168,17 +204,22 @@ konfession lutherisch {
 beruf bauern {
     name            = "Bauern"     # Pflicht
     schicht         = unten        # Pflicht: unten | mittel | oben
-    ertrag          = 6            # Pflicht: Reichstaler pro Kopf und Jahr
     steuerpflichtig = ja           # Pflicht
     anteil_stadt    = 0.10         # Pflicht: Anteil an der Bevölkerung städtischer Orte
     anteil_land     = 0.60         # Pflicht: Anteil an der Bevölkerung ländlicher Orte
     agrar           = ja           # Pflicht seit M4: Ertrag hängt an der Tragfähigkeit
     bildung         = 0.1          # Pflicht seit M4: Alphabetisierung, Grundwert 0..1
     in_stadt        = landarme     # optional seit M4: Beruf nach dem Zuzug in eine Stadt
+    agrarabgabe     = 0.08         # optional seit M5: Anteil am Agrarertrag des Ortes (0..1)
 }
 ```
 
 `in_stadt` verweist auf einen Beruf derselben Datei (auch einen späteren); ein unbekannter Beruf ist fatal.
+
+`agrarabgabe` (seit M5, Standard 0): Grundrente bzw. Zehnt – der Beruf erhält diesen Anteil am Erlös der
+Agrarbetriebe seines Ortes ([wirtschaft.md](wirtschaft.md), Abschnitt 4.2). Die Summe über alle Berufe ist
+höchstens 1 (sonst fatal). Das Feld `ertrag` (fester Ertrag je Kopf bis M4) gibt es seit M5 nicht mehr:
+Die Berufe erzeugen in Betrieben (Abschnitt 3.13); steht es noch in einer Datei, ist es eine Warnung.
 
 Die Summe aller `anteil_stadt` und die Summe aller `anteil_land` muss jeweils 1 ergeben (Toleranz ±0,001), sonst fatal.
 
@@ -194,11 +235,20 @@ staat BRA {
     herrscher      = "Friedrich Wilhelm"           # Pflicht
     konfession     = reformiert                    # Pflicht, Konfession des Herrscherhauses
     schatz         = 20000                         # Pflicht, Reichstaler
-    steuersatz     = 0.10                          # Pflicht, 0..steuersatz_max
+    kontribution   = 0.10                          # Pflicht seit M5 (vorher steuersatz), 0..steuersatz_max
+    akzise         = 0.05                          # Pflicht seit M5, 0..steuersatz_max
+    zoll           = 0.03                          # Pflicht seit M5, 0..steuersatz_max
     hofhaltung     = 30000                         # Pflicht, Ausgaben pro Jahr
+    heer           = 10                            # Pflicht seit M5: Soldaten je 1.000 Einwohner, 0..1000
+    schulden       = 0                             # optional seit M5: Reichstaler, Standard 0
     quelle         = "…"                           # Pflicht (oder "Testdaten, geschätzt")
 }
 ```
+
+Die drei Steuerarten (seit M5, [wirtschaft.md](wirtschaft.md), Abschnitte 4.2 und 4.3): **Kontribution** auf
+die Erzeugung steuerpflichtiger Berufe in Orten ohne Stadtrecht, **Akzise** auf den Verbrauch in Städten,
+**Zoll** auf eingeführte Waren. Im Kern: `State::tax_rates` (Index `TaxKind`), `army_per_mille`, `debt`.
+Das alte Feld `steuersatz` ist seit M5 unbekannt (Warnung) und `kontribution` fehlt dann (fatal).
 
 Der Tag ist der Wert hinter `staat` (Großbuchstaben und Ziffern, 2–4 Zeichen). Die Hauptstadt wird nach dem Laden der Orte geprüft.
 
@@ -212,6 +262,8 @@ ort berlin_coelln {
     flaeche      = 150                             # Pflicht, km²
     stadt        = ja                              # Pflicht
     kreis        = kr_berlin                       # optional (seit M3), Kreiskennung, nicht datierbar
+    vorkommen    = { salz }                        # optional (seit M5), nicht datierbar
+    hafen        = ja                              # optional (seit M5), Standard nein, nicht datierbar
     quelle       = "Testdaten, geschätzt"          # Pflicht
 
     # Simulationsfelder: alle vier oder keines (siehe unten)
@@ -224,6 +276,12 @@ ort berlin_coelln {
 ```
 
 Der Ort-Bezeichner ist der Wert hinter `ort` (Kleinbuchstaben, Ziffern, `_`).
+
+**Markt, Vorkommen und Hafen (seit M5).** Der Markt eines Ortes ergibt sich aus seiner Datei (der
+Landschaft) über `common/maerkte.chron` (Abschnitt 3.14); eine Datei, deren Landschaft zu keinem Markt
+gehört, ist ein Fehler. `vorkommen` nennt Kennungen, die in `common/betriebe.chron` als `vorkommen` eines
+Betriebs vorkommen (sonst fatal); höchstens 32 verschiedene. `hafen = ja` gibt dem Markt des Ortes Zugang
+zum Weltmarkt. Im Kern: `Location::market`, `deposits` (Bitmaske über `World::deposits`), `is_port`.
 
 **Orte ohne Daten (seit M3).** Die fünf Simulationsfelder `besitzer`, `bevoelkerung`,
 `konfession`, `kultur` (seit M4) und `verwuestung` (direkt oder aus datierten Blöcken, Abschnitt 3.8)
@@ -308,6 +366,108 @@ Abschnitt 2). Im Kern: `World::cultures` (`Culture { id, name, color }`) und `Po
 Standardkultur jeder Landschaft und Abweichungen je Ort pflegt der Archivar
 ([tabellen.md](tabellen.md)).
 
+### 3.11 `common/gueter.chron` (seit M5)
+
+```text
+gut getreide {
+    name       = "Getreide"        # Pflicht
+    farbe      = { 214 180 90 }    # Pflicht
+    basispreis = 1                 # Pflicht: Reichstaler je Einheit, größer als 0
+    weltmarkt  = 0.9               # optional: Preis am Weltmarkt als Faktor auf den Basispreis (> 0)
+}
+```
+
+Mindestens ein Gut ist Pflicht. Im Kern: `World::goods` (`Good { id, name, color, base_price, world_factor }`;
+`world_factor` 0 = nicht am Weltmarkt).
+
+### 3.12 `common/beduerfnisse.chron` (seit M5)
+
+```text
+beduerfnis grundnahrung {
+    name   = "Grundnahrung"                              # Pflicht
+    hunger = ja                                          # optional, Standard nein
+    unten  = { getreide = 4.2 vieh = 0.2 salz = 0.05 }   # Pflicht: Menge je Kopf und Jahr
+    mittel = { getreide = 4.5 vieh = 0.5 salz = 0.08 }   # Pflicht
+    oben   = { getreide = 5 vieh = 1 salz = 0.1 }        # Pflicht (ein leerer Block { } ist erlaubt)
+}
+```
+
+Die Dateireihenfolge ist der Rang beim Einkauf ([wirtschaft.md](wirtschaft.md), Abschnitt 4.3). In
+Mengenblöcken stehen nur bekannte Güter, jedes höchstens einmal, Mengen 0..1000000. Im Kern: `World::needs`
+(`Need { id, name, hunger, basket[schicht] }`).
+
+### 3.13 `common/betriebe.chron` (seit M5)
+
+```text
+betrieb weberei {
+    name       = "Weberei"            # Pflicht
+    beruf      = handwerker           # Pflicht
+    erzeugt    = { tuch = 3.2 }       # Pflicht, nicht leer (außer bei handel = ja): Menge je Kopf und Jahr
+    verbraucht = { faser = 2 }        # optional: Vorleistungen je Kopf und Jahr
+    agrar      = nein                 # Pflicht
+    ort        = alle                 # optional: alle (Standard) | stadt | land
+    vorkommen  = salz                 # optional: nur in Orten mit diesem Vorkommen
+    handel     = nein                 # optional: Einkommen aus der Handelsspanne; dann ohne erzeugt/verbraucht
+    gewicht    = 1                    # Pflicht, größer als 0, höchstens 1000
+    gelaende   = { wald = 4 }         # optional: Faktor 0..100 je Geländetyp auf das Gewicht (Standard 1)
+}
+```
+
+Die Kennungen unter `vorkommen` bilden die Liste `World::deposits` (in Ladereihenfolge). Im Kern:
+`World::businesses` (`BusinessType`). Bedeutung: [wirtschaft.md](wirtschaft.md), Abschnitt 2.3.
+
+### 3.14 `common/maerkte.chron` (seit M5)
+
+```text
+markt sachsen {
+    name         = "Kursachsen (Leipzig, Dresden)"   # Pflicht
+    landschaften = { sachsen }                       # Pflicht, nicht leer: Dateien in history/orte ohne Endung
+}
+```
+
+Jede Landschaft gehört höchstens einem Markt an (sonst fatal); eine Landschaft ohne Datei in `history/orte`
+ist eine Warnung. Im Kern: `World::markets` (`Market { id, name, landscapes }`). Bedeutung:
+[wirtschaft.md](wirtschaft.md), Abschnitt 2.4.
+
+### 3.15 `common/zielwerte.chron` (seit M5)
+
+Zielwerte des Balancing-Berichts. Die Datei gehört nicht zum Spielinhalt: Der Lader liest sie nicht,
+nur `uhrwerk-cli bilanz` (und `uhrwerk-cli pruefen` prüft sie, wenn sie vorhanden ist). Bereiche stehen
+als `{ von bis }` (von ≤ bis, beide Grenzen eingeschlossen), Anteile zwischen 0 und 1.
+
+```text
+vermoegen {                 # (Schatz − Schulden) ÷ Jahreseinnahmen, je Staat
+    bereich = { -3 3 }      # Pflicht: erlaubter Bereich …
+    anteil  = 0.95          # Pflicht: … in mindestens diesem Anteil der Staatsjahre
+    ende    = { 0 1.5 }     # Pflicht: Median am Ende des Laufs
+}
+bankrotte {                 # je Staat und Jahrhundert
+    median = 0              # Pflicht: höchstens
+    p95    = 2              # Pflicht: höchstens (95-%-Wert)
+}
+steuerquote {
+    bereich = { 0.6 1.4 }   # Pflicht: Steuerquote am Ende ÷ am Start (Median je Staat)
+}
+preise {                    # Preis ÷ Basispreis je Gut
+    bereich = { 0.4 2.5 }   # Pflicht
+    anteil  = 0.95          # Pflicht: Mindestanteil der Markt-Monate im Bereich
+    ausnahme kolonialwaren { bereich = { 0.4 5 } }   # optional, mehrfach: eigener Bereich je Gut
+}
+bevoelkerung {
+    jahr   = 1700           # Pflicht: Jahrestag des Starts in diesem Jahr …
+    faktor = { 1.20 1.45 }  # Pflicht: … Bevölkerung gegen den Start (Median)
+}
+lebensstandard {            # Median je Schicht über alle Jahre und Läufe
+    unten  = { 25 55 }      # Pflicht
+    mittel = { 45 75 }      # Pflicht
+    oben   = { 70 95 }      # Pflicht
+}
+```
+
+Alle sechs Blöcke sind Pflicht; unbekannte Blöcke und Felder, Bereiche mit von > bis und unbekannte
+Güter in `ausnahme` sind Fehler. Im Kern: `BalanceTargets` (`uhrwerk/balance.hpp`). Bedeutung:
+[wirtschaft.md](wirtschaft.md), Abschnitt 7.
+
 ## 4. Startzustand
 
 Für jeden Ort entstehen Bevölkerungsblöcke **in dieser Reihenfolge**: für jeden Beruf (Ladereihenfolge), darin für jede Konfession des Ortes (Reihenfolge im `konfession`-Block) und darin für jede Kultur (Reihenfolge im `kultur`-Block, seit M4):
@@ -329,16 +489,10 @@ Das Weltdatum wird auf `szenario.datum` gesetzt; der Zustand von `state.last_mon
 
 Alle Rechnungen in `Fixed`. Reihenfolge der Operationen wie angegeben (wichtig für Bit-Gleichheit).
 Seit M4 stehen die Formeln der Bevölkerung (Lebensstandard, Geburten, Sterbefälle, Altern, Bildung,
-Wanderung, Neuordnung) und der Ortssteuern in [bevoelkerung.md](bevoelkerung.md), Abschnitt 4; das
-feste Wachstum aus M1 (`wachstum_*`) gibt es nicht mehr.
-
-**Produktion und Steuern eines Ortes** (an seinem Rechentag, bevoelkerung.md Abschnitt 4.6):
-
-```
-ertrag_b   = beruf.ertrag × gelände.ertrag × (1 − verwüstung × regeln.verwuestung_ertrag) × agrar_b
-produziert = größe × (ertrag_b / 12)                      je Block, Blöcke aufsteigend
-steuern    = Σ produziert × staat.steuersatz              nur steuerpflichtige Berufe
-```
+Wanderung, Neuordnung) in [bevoelkerung.md](bevoelkerung.md), Abschnitt 4; das feste Wachstum aus M1
+(`wachstum_*`) gibt es nicht mehr. Seit M5 stehen Erzeugung, Märkte, Einkommen, Verbrauch und die
+Steuern eines Ortes (Kontribution, Akzise, Zoll) in [wirtschaft.md](wirtschaft.md), Abschnitt 4; der
+feste Ertrag je Beruf (`ertrag`) und der eine Steuersatz (`steuersatz`) entfallen.
 
 **Wirtschaft eines Staates** (an seinem Rechentag):
 

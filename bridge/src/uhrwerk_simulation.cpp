@@ -1,6 +1,7 @@
 #include "uhrwerk_simulation.h"
 
 #include "uhrwerk/date.hpp"
+#include "uhrwerk/economy.hpp"
 #include "uhrwerk/loader.hpp"
 
 #include <algorithm>
@@ -69,9 +70,12 @@ const Color kDensityLow(0.96f, 0.93f, 0.84f);
 const Color kDensityHigh(0.36f, 0.16f, 0.12f);
 const Color kDevastationNone(0.90f, 0.88f, 0.80f);
 const Color kDevastationFull(0.72f, 0.08f, 0.06f);
-const Color kLivingLow(0.66f, 0.22f, 0.16f);  // Lebensstandard 0
-const Color kLivingHigh(0.24f, 0.52f, 0.30f); // Lebensstandard 100
-constexpr double kDensityMax = 120.0;         // Einwohner je km², ab hier dunkelste Stufe
+const Color kLivingLow(0.66f, 0.22f, 0.16f);   // Lebensstandard 0
+const Color kLivingHigh(0.24f, 0.52f, 0.30f);  // Lebensstandard 100
+const Color kEconomyLow(0.95f, 0.92f, 0.80f);  // Wirtschaftsleistung 0
+const Color kEconomyHigh(0.55f, 0.36f, 0.08f); // Wirtschaftsleistung ab kEconomyMax
+constexpr double kDensityMax = 120.0;          // Einwohner je km², ab hier dunkelste Stufe
+constexpr double kEconomyMax = 16.0;           // Reichstaler je Einwohner und Jahr, dunkelste Stufe
 
 // Feste Palette für MAP_KREISE: palette[kreisindex % n]. Gedämpfte, gut unterscheidbare Töne;
 // aufeinanderfolgende Einträge liegen weit auseinander (CIELAB ΔE ≥ 37), alle mindestens
@@ -190,6 +194,127 @@ std::int64_t to_percent(uhrwerk::Fixed share) {
     return (share * uhrwerk::Fixed::from_int(100)).round();
 }
 
+/// Köpfe je Beruf in einem Ort (Blöcke und Zugänge).
+std::vector<uhrwerk::Fixed> people_by_profession(const uhrwerk::World& world, std::int64_t location) {
+    std::vector<uhrwerk::Fixed> result(world.professions.size());
+    const auto add = [&](const uhrwerk::PopBlock& pop) {
+        if (valid_index(result, pop.profession)) {
+            result[static_cast<std::size_t>(pop.profession)] += pop.size();
+        }
+    };
+    const uhrwerk::Location& loc = at(world.locations, location);
+    for (uhrwerk::Index p = loc.first_pop; p < loc.first_pop + loc.pop_count; ++p) {
+        if (valid_index(world.pops, p)) {
+            add(at(world.pops, p));
+        }
+    }
+    if (valid_index(world.arrivals, location)) {
+        for (const uhrwerk::PopBlock& arrival : at(world.arrivals, location)) {
+            add(arrival);
+        }
+    }
+    return result;
+}
+
+/// Wirtschaftsleistung je Einwohner und Jahr (Reichstaler); 0 ohne Einwohner.
+double production_per_capita(const uhrwerk::World& world, std::int64_t location) {
+    const double people = world.location_population(static_cast<uhrwerk::Index>(location)).to_double();
+    if (people <= 0.0 || !valid_index(world.economy, location)) {
+        return 0.0;
+    }
+    return at(world.economy, location).production.to_double() * 12.0 / people;
+}
+
+/// Wirtschaft eines Ortes für get_location (seit M5): Berufe, Betriebe und Güter.
+void add_location_economy(const uhrwerk::World& w, std::int64_t index, Dictionary& result) {
+    const uhrwerk::Location& loc = at(w.locations, index);
+    const auto li = static_cast<std::size_t>(index);
+    result["market_index"] = valid_index(w.markets, loc.market) ? loc.market : uhrwerk::kNone;
+    result["market_name"] =
+        valid_index(w.markets, loc.market) ? to_godot(at(w.markets, loc.market).name) : String();
+    result["is_port"] = loc.is_port;
+    result["development_percent"] =
+        uhrwerk::development_bonus(w, static_cast<uhrwerk::Index>(index)).to_double() * 100.0;
+
+    const std::vector<uhrwerk::Fixed> people = people_by_profession(w, index);
+    const std::size_t professions = w.professions.size();
+    const std::size_t needs = w.needs.size();
+    Array profession_rows;
+    for (std::size_t p = 0; p < professions && loc.has_data(); ++p) {
+        if (people[p] <= uhrwerk::Fixed::zero()) {
+            continue;
+        }
+        Dictionary row;
+        row["name"] = to_godot(w.professions[p].name);
+        row["stratum"] = static_cast<std::int64_t>(w.professions[p].stratum);
+        row["people"] = people[p].round();
+        const std::size_t slot = li * professions + p;
+        row["income_year"] =
+            slot < w.location_income.size() ? w.location_income[slot].to_double() * 12.0 : 0.0;
+        double coverage = 0.0;
+        double food = 1.0;
+        bool any_food = false;
+        for (std::size_t n = 0; n < needs; ++n) {
+            const std::size_t c = slot * needs + n;
+            const double value = c < w.location_coverage.size() ? w.location_coverage[c].to_double() : 0.0;
+            coverage += value;
+            if (w.needs[n].hunger) {
+                food = any_food ? std::min(food, value) : value;
+                any_food = true;
+            }
+        }
+        row["coverage_percent"] = needs > 0 ? coverage * 100.0 / static_cast<double>(needs) : 0.0;
+        row["food_percent"] = food * 100.0;
+        profession_rows.push_back(row);
+    }
+    result["professions"] = profession_rows;
+
+    Array business_rows;
+    const std::size_t businesses = w.businesses.size();
+    for (std::size_t b = 0; b < businesses && loc.has_data(); ++b) {
+        const uhrwerk::BusinessType& business = w.businesses[b];
+        const std::size_t slot = li * businesses + b;
+        if (slot >= w.business_shares.size() || !valid_index(people, business.profession)) {
+            continue;
+        }
+        const uhrwerk::Fixed heads = w.business_shares[slot] * at(people, business.profession);
+        if (heads.round() <= 0) {
+            continue;
+        }
+        Dictionary row;
+        row["name"] = to_godot(business.name);
+        row["profession"] = to_godot(at(w.professions, business.profession).name);
+        row["people"] = heads.round();
+        business_rows.push_back(row);
+    }
+    result["businesses"] = business_rows;
+
+    Array good_rows;
+    const std::size_t goods = w.goods.size();
+    const uhrwerk::MarketState* market =
+        valid_index(w.market_states, loc.market) ? &at(w.market_states, loc.market) : nullptr;
+    for (std::size_t g = 0; g < goods && loc.has_data(); ++g) {
+        const std::size_t slot = li * goods + g;
+        const double supply = slot < w.location_supply.size() ? w.location_supply[slot].to_double() : 0.0;
+        const double demand = slot < w.location_demand.size() ? w.location_demand[slot].to_double() : 0.0;
+        if (supply <= 0.0 && demand <= 0.0) {
+            continue;
+        }
+        const uhrwerk::Good& good = w.goods[g];
+        const double price = market && g < market->price.size() ? market->price[g].to_double() : 0.0;
+        const double base = good.base_price.to_double();
+        Dictionary row;
+        row["name"] = to_godot(good.name);
+        row["color"] = to_godot(good.color);
+        row["supply"] = supply;
+        row["demand"] = demand;
+        row["price"] = price;
+        row["price_factor"] = base > 0.0 ? price / base : 0.0;
+        good_rows.push_back(row);
+    }
+    result["goods"] = good_rows;
+}
+
 std::int64_t find_in(const std::unordered_map<std::string, std::int64_t>& lookup, const String& id) {
     const auto it = lookup.find(to_std(id));
     return it == lookup.end() ? uhrwerk::kNone : it->second;
@@ -208,6 +333,9 @@ void UhrwerkSimulation::build_lookups() {
     location_lookup_.clear();
     kreis_lookup_.clear();
     kreis_location_counts_.clear();
+    market_location_counts_.clear();
+    market_ports_.clear();
+    market_colors_.clear();
     const uhrwerk::World* w = world();
     if (!w) {
         return;
@@ -221,10 +349,26 @@ void UhrwerkSimulation::build_lookups() {
         kreis_lookup_.emplace(w->districts[i].id, static_cast<std::int64_t>(i));
     }
     kreis_location_counts_.assign(w->districts.size(), 0);
+    market_location_counts_.assign(w->markets.size(), 0);
+    market_ports_.assign(w->markets.size(), false);
     for (const uhrwerk::Location& loc : w->locations) {
         if (valid_index(kreis_location_counts_, loc.district)) {
             ++kreis_location_counts_[static_cast<std::size_t>(loc.district)];
         }
+        // Märkte (seit M5): Nur Orte mit Daten rechnen; ein Hafen öffnet den Weltmarkt.
+        if (loc.has_data() && valid_index(market_location_counts_, loc.market)) {
+            ++market_location_counts_[static_cast<std::size_t>(loc.market)];
+            if (loc.is_port) {
+                market_ports_[static_cast<std::size_t>(loc.market)] = true;
+            }
+        }
+    }
+    // Farben für MAP_MAERKTE: die aktiven Märkte (mit Orten mit Daten) nacheinander durch die
+    // Palette, damit sie sich unterscheiden; Märkte ohne Daten erscheinen ohnehin schraffiert.
+    market_colors_.assign(w->markets.size(), 0);
+    std::size_t active = 0;
+    for (std::size_t m = 0; m < w->markets.size(); ++m) {
+        market_colors_[m] = (market_location_counts_[m] > 0 ? active++ : m) % kKreisPalette.size();
     }
 }
 
@@ -331,9 +475,11 @@ Dictionary UhrwerkSimulation::get_state(std::int64_t index) const {
     result["government"] = to_godot(state.government);
     result["capital_index"] = state.capital;
     result["treasury"] = state.treasury.to_double();
-    result["tax_rate_percent"] = to_percent(state.tax_rate);
-    result["income_month"] = state.last_month_income.to_double();
-    result["expenses_month"] = state.last_month_expenses.to_double();
+    result["tax_rate_percent"] = to_percent(state.tax_rate(uhrwerk::TaxKind::Kontribution));
+    // Haushalt des letzten Rechentags (gleich last_month_*); vor dem ersten Rechentag die Schätzung
+    // aus dem Start (estimate_budgets) statt 0.
+    result["income_month"] = state.budget.income().to_double();
+    result["expenses_month"] = state.budget.expenses().to_double();
     result["population"] = w->state_population(state_index).round();
     const std::vector<uhrwerk::Index> locations = w->state_locations(state_index);
     result["location_count"] = static_cast<std::int64_t>(locations.size());
@@ -351,6 +497,30 @@ Dictionary UhrwerkSimulation::get_state(std::int64_t index) const {
     }
     result["balance_previous"] = balance_to_godot(balance);
     result["living_standard"] = people > 0.0 ? living / people : 0.0;
+
+    // Haushalt (seit M5): Sätze und Steuern je Art, Ausgaben je Posten (Monat), Schulden, Zins, Heer.
+    const uhrwerk::StateBudget& budget = state.budget;
+    Array rates;
+    Array taxes;
+    for (std::size_t k = 0; k < uhrwerk::kTaxKinds; ++k) {
+        rates.push_back(to_percent(state.tax_rates[k]));
+        taxes.push_back(budget.taxes[k].to_double());
+    }
+    result["tax_rates_percent"] = rates;
+    result["taxes_month"] = taxes;
+    result["court_month"] = budget.court.to_double();
+    result["administration_month"] = budget.administration.to_double();
+    result["army_month"] = budget.army.to_double();
+    result["interest_month"] = budget.interest.to_double();
+    result["building_month"] = budget.building.to_double();
+    result["debt"] = state.debt.to_double();
+    result["interest_percent"] = state.interest_rate.to_double() * 100.0;
+    result["yearly_income"] = state.yearly_income.to_double();
+    result["army_per_mille"] = state.army_per_mille.to_double();
+    result["soldiers"] =
+        (state.army_per_mille * w->state_population(state_index) / uhrwerk::Fixed::from_int(1000)).round();
+    result["bankruptcies"] = static_cast<std::int64_t>(state.bankruptcies);
+    result["premium_months"] = static_cast<std::int64_t>(state.premium_months);
     return result;
 }
 
@@ -418,8 +588,10 @@ Dictionary UhrwerkSimulation::get_location(std::int64_t index) const {
 
     const uhrwerk::LocationEconomy economy = simulation_->location_economy(location_index);
     result["production_month"] = economy.production.to_double();
-    result["taxes_month"] = economy.taxes.to_double();
+    result["taxes_month"] = economy.total_taxes().to_double();
+    result["production_per_capita"] = production_per_capita(*w, index);
     result["source"] = to_godot(loc.source);
+    add_location_economy(*w, index, result);
     return result;
 }
 
@@ -453,6 +625,69 @@ PackedInt32Array UhrwerkSimulation::get_location_kreis_indices() const {
     return result;
 }
 
+PackedInt32Array UhrwerkSimulation::get_location_market_indices() const {
+    PackedInt32Array result;
+    const uhrwerk::World* w = world();
+    if (!w) {
+        return result;
+    }
+    const auto count = static_cast<std::int64_t>(w->locations.size());
+    result.resize(count);
+    for (std::int64_t i = 0; i < count; ++i) {
+        const uhrwerk::Index market = at(w->locations, i).market;
+        result.set(i, valid_index(w->markets, market) ? market : uhrwerk::kNone);
+    }
+    return result;
+}
+
+std::int64_t UhrwerkSimulation::get_market_count() const {
+    const uhrwerk::World* w = world();
+    return w ? static_cast<std::int64_t>(w->markets.size()) : 0;
+}
+
+Dictionary UhrwerkSimulation::get_market(std::int64_t index) const {
+    Dictionary result;
+    const uhrwerk::World* w = world();
+    if (!w || !valid_index(w->markets, index)) {
+        return result;
+    }
+    const uhrwerk::Market& market = at(w->markets, index);
+    result["id"] = to_godot(market.id);
+    result["name"] = to_godot(market.name);
+    const std::int64_t locations =
+        valid_index(market_location_counts_, index) ? at(market_location_counts_, index) : std::int64_t{0};
+    result["location_count"] = locations;
+    result["active"] = locations > 0;
+    result["is_port"] = valid_index(market_ports_, index) && market_ports_[static_cast<std::size_t>(index)];
+    Array goods;
+    if (valid_index(w->market_states, index)) {
+        const uhrwerk::MarketState& state = at(w->market_states, index);
+        result["harvest"] = state.harvest.to_double();
+        for (std::size_t g = 0; g < w->goods.size() && g < state.price.size(); ++g) {
+            const uhrwerk::Good& good = w->goods[g];
+            const double base = good.base_price.to_double();
+            const double price = state.price[g].to_double();
+            Dictionary row;
+            row["id"] = to_godot(good.id);
+            row["name"] = to_godot(good.name);
+            row["color"] = to_godot(good.color);
+            row["base_price"] = base;
+            row["price"] = price;
+            row["price_factor"] = base > 0.0 ? price / base : 0.0;
+            row["supply"] = state.supply[g].to_double();
+            row["demand"] = state.demand[g].to_double();
+            row["imports"] = state.imports[g].to_double();
+            row["exports"] = state.exports[g].to_double();
+            row["buy_percent"] = state.buy_ratio[g].to_double() * 100.0;
+            goods.push_back(row);
+        }
+    } else {
+        result["harvest"] = 1.0;
+    }
+    result["goods"] = goods;
+    return result;
+}
+
 std::int64_t UhrwerkSimulation::get_kreis_count() const {
     const uhrwerk::World* w = world();
     return w ? static_cast<std::int64_t>(w->districts.size()) : 0;
@@ -483,7 +718,7 @@ PackedColorArray UhrwerkSimulation::get_map_colors(std::int64_t mode) const {
     if (!w) {
         return colors;
     }
-    ERR_FAIL_COND_V_MSG(mode < MAP_POLITICAL || mode > MAP_KULTUR, colors,
+    ERR_FAIL_COND_V_MSG(mode < MAP_POLITICAL || mode > MAP_MAERKTE, colors,
                         "get_map_colors: unbekannter Kartenmodus.");
 
     const auto count = static_cast<std::int64_t>(w->locations.size());
@@ -532,12 +767,28 @@ PackedColorArray UhrwerkSimulation::get_map_colors(std::int64_t mode) const {
             }
             break;
         }
+        case MAP_WIRTSCHAFT:
+            if (loc.has_data()) {
+                color = blend(kEconomyLow, kEconomyHigh, production_per_capita(*w, i) / kEconomyMax);
+            }
+            break;
+        case MAP_MAERKTE:
+            if (valid_index(market_colors_, loc.market)) {
+                color = kKreisPalette[at(market_colors_, loc.market)];
+            }
+            break;
         default:
             break;
         }
         // Orte ohne Daten: in den datenabhängigen Modi Alpha 0, die Godot-Seite zeichnet dort
-        // eine Schraffur „keine Daten“. Gelände und Kreise sind auch ohne Daten bekannt.
-        if (!loc.has_data() && mode != MAP_TERRAIN && mode != MAP_KREISE) {
+        // eine Schraffur „keine Daten“. Gelände und Kreise sind auch ohne Daten bekannt, Märkte
+        // dort, wo der Markt Orte mit Daten hat (sonst rechnet er nicht).
+        bool known = mode == MAP_TERRAIN || mode == MAP_KREISE;
+        if (mode == MAP_MAERKTE) {
+            known = valid_index(market_location_counts_, loc.market) &&
+                    at(market_location_counts_, loc.market) > 0;
+        }
+        if (!loc.has_data() && !known) {
             color.a = 0.0f;
         }
         colors.set(i, color);
@@ -546,16 +797,21 @@ PackedColorArray UhrwerkSimulation::get_map_colors(std::int64_t mode) const {
 }
 
 bool UhrwerkSimulation::set_tax_rate_percent(std::int64_t state_index, std::int64_t percent) {
+    return set_tax_percent(state_index, TAX_KONTRIBUTION, percent);
+}
+
+bool UhrwerkSimulation::set_tax_percent(std::int64_t state_index, std::int64_t kind, std::int64_t percent) {
     const uhrwerk::World* w = world();
     if (!w || !valid_index(w->states, state_index)) {
         return false;
     }
-    if (percent < 0 || percent > get_max_tax_rate_percent()) {
+    if (kind < TAX_KONTRIBUTION || kind > TAX_ZOLL || percent < 0 || percent > get_max_tax_rate_percent()) {
         return false;
     }
     uhrwerk::Command command;
     command.type = uhrwerk::CommandType::SetTaxRate;
     command.state = static_cast<uhrwerk::Index>(state_index);
+    command.kind = static_cast<uhrwerk::TaxKind>(kind);
     command.value = uhrwerk::Fixed::from_ratio(percent, 100);
     simulation_->submit(command);
     return true;
@@ -633,15 +889,22 @@ void UhrwerkSimulation::_bind_methods() {
                          &UhrwerkSimulation::get_location_owner_indices);
     ClassDB::bind_method(D_METHOD("get_location_kreis_indices"),
                          &UhrwerkSimulation::get_location_kreis_indices);
+    ClassDB::bind_method(D_METHOD("get_location_market_indices"),
+                         &UhrwerkSimulation::get_location_market_indices);
 
     ClassDB::bind_method(D_METHOD("get_kreis_count"), &UhrwerkSimulation::get_kreis_count);
     ClassDB::bind_method(D_METHOD("get_kreis_index", "id"), &UhrwerkSimulation::get_kreis_index);
     ClassDB::bind_method(D_METHOD("get_kreis", "index"), &UhrwerkSimulation::get_kreis);
 
+    ClassDB::bind_method(D_METHOD("get_market_count"), &UhrwerkSimulation::get_market_count);
+    ClassDB::bind_method(D_METHOD("get_market", "index"), &UhrwerkSimulation::get_market);
+
     ClassDB::bind_method(D_METHOD("get_map_colors", "mode"), &UhrwerkSimulation::get_map_colors);
 
     ClassDB::bind_method(D_METHOD("set_tax_rate_percent", "state_index", "percent"),
                          &UhrwerkSimulation::set_tax_rate_percent);
+    ClassDB::bind_method(D_METHOD("set_tax_percent", "state_index", "kind", "percent"),
+                         &UhrwerkSimulation::set_tax_percent);
     ClassDB::bind_method(D_METHOD("get_max_tax_rate_percent"), &UhrwerkSimulation::get_max_tax_rate_percent);
 
     ClassDB::bind_method(D_METHOD("get_chronicle_size"), &UhrwerkSimulation::get_chronicle_size);
@@ -657,6 +920,11 @@ void UhrwerkSimulation::_bind_methods() {
     BIND_ENUM_CONSTANT(MAP_KREISE);
     BIND_ENUM_CONSTANT(MAP_LEBENSSTANDARD);
     BIND_ENUM_CONSTANT(MAP_KULTUR);
+    BIND_ENUM_CONSTANT(MAP_WIRTSCHAFT);
+    BIND_ENUM_CONSTANT(MAP_MAERKTE);
+    BIND_ENUM_CONSTANT(TAX_KONTRIBUTION);
+    BIND_ENUM_CONSTANT(TAX_AKZISE);
+    BIND_ENUM_CONSTANT(TAX_ZOLL);
 }
 
 } // namespace uhrwerk_bridge

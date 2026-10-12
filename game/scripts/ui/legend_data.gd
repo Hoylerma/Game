@@ -124,6 +124,35 @@ static func kreis_palette(sim: SimulationClient, catalog: LocationCatalog) -> Pa
 	return palette
 
 
+## Märkte mit Orten mit Daten (seit M5), Farbe aus dem Marktmodus der Brücke, in der
+## Reihenfolge der Marktindizes; market_indices ist get_location_market_indices().
+static func market_entries(
+	sim: SimulationClient, market_indices: PackedInt32Array
+) -> Array[Dictionary]:
+	var colors := sim.get_map_colors(MapModes.MAP_MAERKTE)
+	var color_of := {}
+	for index in mini(colors.size(), market_indices.size()):
+		var market := market_indices[index]
+		if market >= 0 and colors[index].a > 0.0 and not color_of.has(market):
+			color_of[market] = colors[index]
+	var entries: Array[Dictionary] = []
+	for market in sim.get_market_count():
+		var info := sim.get_market(market)
+		if not bool(info.get("active", false)) or not color_of.has(market):
+			continue
+		# Kurzname ohne Klammerzusatz („Kursachsen (Leipzig, Dresden)“ → „Kursachsen“), damit die
+		# Legende schmal bleibt; der volle Name steht im Tooltip.
+		var full_name := str(info.get("name", ""))
+		var short_name := full_name.get_slice(" (", 0)
+		var detail := "%s – %s mit Daten" % [
+			full_name, count_text(int(info.get("location_count", 0)))
+		]
+		if bool(info.get("is_port", false)):
+			detail += ", Hafen"
+		entries.append({"color": color_of[market], "text": short_name, "detail": detail})
+	return entries
+
+
 ## Verlauf für einen Kartenmodus mit Zahlenwerten im Ortsfeld field (0..scale_max).
 static func gradient_for(
 	sim: SimulationClient, mode: int, field: String, scale_max: float

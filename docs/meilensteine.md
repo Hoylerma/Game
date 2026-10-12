@@ -17,7 +17,7 @@ gebaut; Abhängigkeiten stehen jeweils dabei.
 | M2 | Datenpipeline „Archivar“ | 1 – Vorproduktion | M1 | **fertig** |
 | M3 | Karte des Kernraums | 1 – Vorproduktion | M2 | **fertig** (eine Abnahme nicht messbar, siehe unten) |
 | M4 | Bevölkerung und Lasttest | 1 – Vorproduktion | M3 | **fertig** |
-| M5 | Wirtschaft und Staatshaushalt | 1 – Vorproduktion | M4 | offen |
+| M5 | Wirtschaft und Staatshaushalt | 1 – Vorproduktion | M4 | **fertig** |
 | M6 | Speicherstände und Wiederholungen | 1 – Vorproduktion | M5 | offen |
 | M7 | Lesezeichen 1848 | 2 – Vertical Slice | M6 | offen |
 | M8 | Politik, Parteien und Wahlen | 2 – Vertical Slice | M7 | offen |
@@ -245,7 +245,7 @@ im vollen Maßstab, mit dem Lasttest aus der Roadmap.
 - Neu im Zustand und damit für die Speicherstände (M6) wichtig: Zugänge je Ort, Momentaufnahmen,
   Jahresbilanzen und Ortssteuern.
 
-### M5 – Wirtschaft und Staatshaushalt
+### M5 – Wirtschaft und Staatshaushalt ✅
 
 **Ziel:** Ein Wirtschaftssystem nach [08 Wirtschaft und Finanzen](08_wirtschaft_und_finanzen.md),
 das über Jahrzehnte im Gleichgewicht bleibt.
@@ -261,6 +261,64 @@ das über Jahrzehnte im Gleichgewicht bleibt.
 - Über 100 Spieljahre ohne Spielereingriff bleiben Kassen in einer plausiblen Spanne
   (Zielwerte im Datenordner dokumentiert); kein Staat wächst ins Unendliche
 - Balancing-Bericht über mehrere Seeds in der CI
+
+**Ergebnis**
+- **Modell und Formeln** in [technik/wirtschaft.md](technik/wirtschaft.md) (verbindlich):
+  11 Güter, 6 Bedürfnisse mit Warenkorb je Schicht, 12 Betriebe als Arbeitsstätten der Berufe,
+  ein Markt je Landschaft (77, davon 10 mit Orten mit Daten). Am Monatsersten bilden die Märkte
+  Preise aus Angebot und Nachfrage und handeln mit Nachbarmärkten und über die Ostseehäfen mit dem
+  Weltmarkt; am Rechentag erzeugt jeder Ort, zahlt Grundrente, Zehnt und Steuern, kauft nach
+  Warenkorb ein und verschiebt seine Betriebe langsam zum Gewinn. Der Lebensstandard folgt dem
+  Realeinkommen, fehlende Grundnahrung erhöht die Sterblichkeit, die Ernte schwankt je Markt und
+  Jahr. Beim Start schwingt die Wirtschaft 60 Monate ein.
+- **Staatshaushalt:** Kontribution, Akzise und Zoll statt eines Steuersatzes; Ausgaben für Hof,
+  Verwaltung und Heer nach Einwohnern, Zinsen nach Verschuldung, Bauten aus dem Überschuss über
+  der Rücklage (Landesausbau erhöht die Tragfähigkeit); Kredit, Tilgung, Staatsbankrott mit
+  Schuldenschnitt. Die Staatsausgaben kaufen auf dem Markt der Hauptstadt ein.
+- **Balancing-Bericht** `uhrwerk-cli bilanz` mit Zielwerten in `data/common/zielwerte.chron`
+  (Begründung in [data/README.md](../data/README.md#wirtschaftswerte)); CI-Job „Balancing“ mit
+  16 Seeds über 100 Jahre.
+- **Kalibrierung** mit den 60 Orten der Testregion: Berufsanteile der Städte, Warenkörbe,
+  Betriebe (u. a. Saline), Bezugseinkommen, Fruchtbarkeit, Verwaltung je Einwohner und Hofhaltung
+  je Staat. Bevölkerung 1648 → 1700 ×1,36, nach 100 Jahren ×1,86.
+- **Brücke und Godot:** drei Steuerregler und Haushaltsfenster im Staatspanel, Abschnitt
+  Wirtschaft in der Ortsinfo, Kartenmodi „Wirtschaft“ (Taste O) und „Märkte“ (Taste P, mit
+  Marktgrenzen), jetzt zehn.
+- **Referenz-Prüfsumme** nach 100 Jahren jetzt `5db13a66d63e6079` (Bevölkerung 713.456); der
+  Lasttest (500.000 Blöcke, 3 Jahre, Seed 1648) endet mit `8602a1273080ee9e`.
+- Tests: 136 doctest-Fälle im Kern (u. a. Ortsrechnung, Markt, Handel und Haushalt exakt gegen
+  Handrechnung, Balancing-Bericht), CTests `bilanz_fixture` und `bilanz_verstoss`,
+  Godot-Einheitentest 187 Prüfungen, Rauch- und Klicktest mit Wirtschaft; alle in der CI.
+  ThreadSanitizer und AddressSanitizer mit UndefinedBehaviorSanitizer ohne Befund (lokal).
+
+**Abnahme im Einzelnen**
+
+| Kriterium | Stand |
+|---|---|
+| Kassen über 100 Jahre in plausibler Spanne, kein Staat wächst ins Unendliche | erfüllt: 32 Läufe ohne Staatsbankrott; Vermögen ((Schatz − Schulden) ÷ Jahreseinnahmen) am Ende im Median 0,85–1,12, tiefster Wert −1,77; alle Zielwerte erfüllt ([wirtschaft.md, Abschnitt 7](technik/wirtschaft.md#7-balancing-bericht)) |
+| Balancing-Bericht über mehrere Seeds in der CI | erfüllt: Job „Balancing (Linux, Release)“, 16 Seeds × 100 Jahre in 4 s |
+| Weiter aus M4: Lasttest höchstens 2 s, Prüfsummen bitgleich | erfüllt: 0,58 s je Spieljahr mit 4 Kernen (0,67 s auf dem Runner), etwa doppelt so viel wie in M4; Determinismus-Job (GCC, Clang, MSVC) grün |
+
+**Bekannte Grenzen**
+- **Nur 10 von 77 Märkten rechnen**, weil nur die 60 Orte der Testregion Daten haben; Handel gibt
+  es nur zwischen diesen Märkten und über die Häfen der Testregion.
+- **Staaten ohne Spieler ändern ihre Steuern nicht;** das Heer ist nur ein Kostenposten (bis M10
+  bzw. M12). Die Kalibrierung gilt für Läufe ohne Eingriff.
+- **Steuerquote sinkt mit der Verstädterung:** Die Kontribution trifft in Städten nur
+  Agrareinkommen, und Bürger und Adel wachsen mit den Formeln aus M4 schneller als die Landarme
+  (nach 100 Jahren ×3 bzw. ×4 gegen ×1,4; einen Abstieg in andere Berufe gibt es nicht). Die
+  Zielspanne der Steuerquote beginnt deshalb bei 0,6 statt 0,7.
+- **Kein Geld:** Preise in Reichstalern ohne Geldmenge, Inflation oder Münzverschlechterung;
+  keine Staatsbetriebe, keine Zollgrenzen zwischen den Staaten (Zollverein mit M9).
+- **Rechenzeit:** Die Ortsrechnung verdoppelt die Zeit je Spieljahr gegenüber M4, das Einschwingen
+  der Lasttest-Welt dauert 1 s; Optimierungen sind notiert
+  ([wirtschaft.md, Abschnitt 6](technik/wirtschaft.md#6-leistung)).
+- **Startkassen aus M1:** Der Schatz zum Start ist noch als Anteil der damaligen Hofhaltung
+  bemessen; mit der neuen Hofhaltung sind manche Staaten dadurch zu Beginn reicher als ihre
+  Ausgaben nahelegen.
+- Neu im Zustand und damit für die Speicherstände (M6) wichtig: Betriebsanteile, Angebot,
+  Nachfrage, Einkommen und Bedarfsdeckung je Ort, Landesausbau, Marktzustand, Haushalt und
+  Schulden der Staaten.
 
 ### M6 – Speicherstände und Wiederholungen
 

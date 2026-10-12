@@ -181,49 +181,31 @@ text = "–"
 horizontal_alignment = 2
 text_overrun_behavior = 3
 
+[node name="DebtCaption" type="Label" parent="Content/Facts"]
+layout_mode = 2
+theme_type_variation = &"MutedLabel"
+text = "Schulden"
+
+[node name="Debt" type="Label" parent="Content/Facts"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "–"
+horizontal_alignment = 2
+text_overrun_behavior = 3
+
 [node name="Separator2" type="HSeparator" parent="Content"]
 layout_mode = 2
 
-[node name="TaxRow" type="HBoxContainer" parent="Content"]
+[node name="TaxHeader" type="Label" parent="Content"]
 layout_mode = 2
-
-[node name="TaxCaption" type="Label" parent="Content/TaxRow"]
-layout_mode = 2
-size_flags_horizontal = 3
 theme_type_variation = &"HeaderLabel"
-text = "STEUERSATZ"
+text = "STEUERSÄTZE"
 
-[node name="TaxValue" type="Label" parent="Content/TaxRow"]
+[node name="Taxes" type="VBoxContainer" parent="Content"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_type_variation = &"ValueLabel"
-text = "–"
-horizontal_alignment = 2
-
-[node name="TaxSlider" type="HSlider" parent="Content"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 24)
-layout_mode = 2
-tooltip_text = "Kontribution: Anteil der steuerpflichtigen Produktion, der an den Staat geht"
-max_value = 50.0
-editable = false
-
-[node name="TaxScale" type="HBoxContainer" parent="Content"]
-layout_mode = 2
-
-[node name="TaxMin" type="Label" parent="Content/TaxScale"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"CaptionLabel"
-text = "0 %"
-
-[node name="TaxMax" type="Label" parent="Content/TaxScale"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_type_variation = &"CaptionLabel"
-text = "50 %"
-horizontal_alignment = 2
 
 [node name="TaxHint" type="Label" parent="Content"]
 unique_name_in_owner = true
@@ -232,3 +214,10 @@ layout_mode = 2
 theme_type_variation = &"MutedLabel"
 text = "Ohne geladene Simulation nicht verfügbar."
 autowrap_mode = 3
+
+[node name="BudgetButton" type="Button" parent="Content"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+tooltip_text = "Einnahmen nach Steuerart, Ausgaben nach Posten, Schulden und Zins"
+text = "Haushalt im Einzelnen …"

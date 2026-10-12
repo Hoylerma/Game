@@ -23,6 +23,8 @@ add_executable(uhrwerk_tests
     test_parallel.cpp
     test_population.cpp
     test_lasttest.cpp
+    test_balance.cpp
+    test_savegame.cpp
 )
 target_link_libraries(uhrwerk_tests PRIVATE uhrwerk::core doctest::doctest uhrwerk_warnings)
 target_compile_definitions(uhrwerk_tests PRIVATE
@@ -43,5 +45,40 @@ if(UHRWERK_BUILD_CLI)
     # Lasttest im Kleinen (seit M4): gleiche Prüfsummen mit 3 Threads und mit einem Thread.
     add_test(NAME lasttest_threads
         COMMAND uhrwerk-cli lasttest --daten ${PROJECT_SOURCE_DIR}/data --bloecke 20000 --jahre 1
-                --threads 3 --vergleich 1)
+                --threads 3 --vergleich 1 --speichern ${CMAKE_CURRENT_BINARY_DIR}/lasttest.einigkeit)
+    # Balancing-Bericht (seit M5): auf der Fixture mit ihren weiten Zielwerten in Ordnung, mit den
+    # Zielwerten der Spieldaten verfehlt. Der volle Bericht läuft im CI-Job "Balancing".
+    add_test(NAME bilanz_fixture
+        COMMAND uhrwerk-cli bilanz --daten ${CMAKE_CURRENT_SOURCE_DIR}/daten --seeds 3 --jahre 30)
+    add_test(NAME bilanz_verstoss
+        COMMAND uhrwerk-cli bilanz --daten ${CMAKE_CURRENT_SOURCE_DIR}/daten --seeds 3 --jahre 30
+                --ziele ${PROJECT_SOURCE_DIR}/data/common/zielwerte.chron)
+    # Mit PASS_REGULAR_EXPRESSION zählt die Ausgabe statt des Exitcodes: Ein Bedienfehler bestünde nicht.
+    set_tests_properties(bilanz_verstoss PROPERTIES PASS_REGULAR_EXPRESSION "Verstöße \\([0-9]+, mit ! markiert\\)")
+
+    # Spielstände und Wiederholungen (seit M6, docs/technik/speicherstaende.md Abschnitt 10): Abnahme
+    # mit den echten Daten über die Datei; Wiederholung eines Protokolls und eines Spielstands über
+    # 50 Jahre mit Testbefehlen.
+    add_test(NAME speichertest_50_jahre
+        COMMAND uhrwerk-cli speichertest --daten ${PROJECT_SOURCE_DIR}/data --jahre 50 --testbefehle 200
+                --punkte 10 --threads 3)
+    set(partie ${CMAKE_CURRENT_BINARY_DIR}/partie_50_jahre)
+    add_test(NAME protokoll_50_jahre
+        COMMAND uhrwerk-cli lauf --daten ${PROJECT_SOURCE_DIR}/data --jahre 50 --testbefehle 200
+                --protokoll ${partie}.protokoll --speichern ${partie}.einigkeit)
+    add_test(NAME wiederholung_50_jahre
+        COMMAND uhrwerk-cli wiederholung ${partie}.protokoll --daten ${PROJECT_SOURCE_DIR}/data --threads 1)
+    add_test(NAME wiederholung_spielstand
+        COMMAND uhrwerk-cli wiederholung ${partie}.einigkeit --daten ${PROJECT_SOURCE_DIR}/data)
+    add_test(NAME spielstand_laden
+        COMMAND uhrwerk-cli spielstand ${partie}.einigkeit --daten ${PROJECT_SOURCE_DIR}/data)
+    set_tests_properties(protokoll_50_jahre PROPERTIES FIXTURES_SETUP partie_50_jahre)
+    set_tests_properties(wiederholung_50_jahre wiederholung_spielstand spielstand_laden
+        PROPERTIES FIXTURES_REQUIRED partie_50_jahre)
+    # Die Fixture-Daten sind ein anderer Inhalt: Der Spielstand muss abgelehnt werden.
+    add_test(NAME spielstand_fremder_inhalt
+        COMMAND uhrwerk-cli spielstand ${partie}.einigkeit --daten ${CMAKE_CURRENT_SOURCE_DIR}/daten)
+    set_tests_properties(spielstand_fremder_inhalt PROPERTIES
+        FIXTURES_REQUIRED partie_50_jahre
+        PASS_REGULAR_EXPRESSION "passt nicht zu den Spieldaten \\(abweichend: ")
 endif()

@@ -10,6 +10,7 @@ ort hafen {
     flaeche  = 150
     stadt    = ja
     kreis    = kr_hafen
+    hafen    = ja
     quelle   = "Testdaten"
 
     1648.10.24 = {

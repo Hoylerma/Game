@@ -26,4 +26,5 @@ ort leipzig {
     kultur       = { obersachsen = 100 }
     verwuestung  = 0.3
     quelle       = "Testdaten, geschätzt"   # ohne Kreis
+    vorkommen    = { salz }                 # seit M5 (Testdaten)
 }

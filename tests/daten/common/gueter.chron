@@ -1,0 +1,26 @@
+# Testdaten: Güter (seit M5).
+gut getreide {
+    name       = "Getreide"
+    farbe      = { 214 180 90 }
+    basispreis = 1
+    weltmarkt  = 0.9
+}
+
+gut tuch {
+    name       = "Tuch"
+    farbe      = { 90 120 170 }
+    basispreis = 5
+}
+
+gut salz {
+    name       = "Salz"
+    farbe      = { 225 225 230 }
+    basispreis = 4
+}
+
+gut kolonialwaren {
+    name       = "Kolonialwaren"
+    farbe      = { 100 70 40 }
+    basispreis = 8
+    weltmarkt  = 1
+}

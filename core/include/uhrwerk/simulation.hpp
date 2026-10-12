@@ -21,6 +21,7 @@
 // und liest Daten anderer Orte nur aus den veröffentlichten Momentaufnahmen. Das Ergebnis hängt
 // daher nicht von der Zahl der Threads ab.
 
+#include "uhrwerk/economy.hpp"
 #include "uhrwerk/parallel.hpp"
 #include "uhrwerk/population.hpp"
 #include "uhrwerk/rng.hpp"
@@ -30,6 +31,7 @@
 #include <cstdint>
 #include <deque>
 #include <memory>
+#include <string>
 #include <utility>
 #include <vector>
 
@@ -43,13 +45,26 @@ struct SimConfig {
 };
 
 enum class CommandType : std::uint8_t {
-    SetTaxRate, // state, value = neuer Steuersatz (0..rules.tax_rate_max)
+    SetTaxRate, // state, kind, value = neuer Steuersatz (0..rules.tax_rate_max)
 };
 
 struct Command {
     CommandType type = CommandType::SetTaxRate;
     Index state = kNone;
     Fixed value;
+    TaxKind kind = TaxKind::Kontribution; // SetTaxRate: welche Steuer (seit M5)
+
+    friend bool operator==(const Command&, const Command&) = default;
+};
+
+/// Eingereihter Befehl mit dem Tag, an dem er ausgeführt wird (days_elapsed beim Einreihen = vor dem
+/// Schritt), auch ungültige (seit M6, Befehlsprotokoll für Wiederholungen). Das Protokoll enthält
+/// damit auch die noch wartenden Befehle.
+struct LoggedCommand {
+    std::int64_t day = 0;
+    Command command;
+
+    friend bool operator==(const LoggedCommand&, const LoggedCommand&) = default;
 };
 
 class Simulation {
@@ -87,7 +102,23 @@ public:
     /// Wanderungsziele).
     std::uint64_t checksum() const;
 
+    /// Textexport des Zustands (seit M6): eine Zeile je Feld des Zustandsverzeichnisses,
+    /// "pfad = wert", in derselben Reihenfolge wie die Prüfsumme. Zum Vergleichen zweier Läufe (diff).
+    std::string state_text() const;
+
+    /// Alle seit Partiebeginn eingereihten Befehle (seit M6), auch die noch wartenden. Kein
+    /// Simulationszustand: nicht in der Prüfsumme, aber im Spielstand.
+    const std::vector<LoggedCommand>& command_log() const { return command_log_; }
+
+    /// Prüfsumme des Startzustands der Partie (beim Laden aus dem Spielstand); Grundlage der
+    /// Wiederholung.
+    std::uint64_t start_checksum() const { return start_checksum_; }
+
 private:
+    /// Zustandsverzeichnis (core/src/state_access.hpp): Prüfsumme, Textexport und Spielstände lesen
+    /// alle Felder über dieselbe Liste.
+    friend struct StateAccess;
+
     /// Ein Wanderungsstrom aus dem Ausgang eines Ortes (Abschnitt 4.5).
     struct Migration {
         Index target = kNone;
@@ -102,8 +133,9 @@ private:
     /// Arbeitsspeicher einer parallelen Aufgabe (wird je Paket wiederverwendet).
     struct Scratch {
         LocationFactors factors;
-        std::vector<Fixed> yield_month; // je Beruf: Ertrag je Kopf und Monat
-        std::vector<Fixed> attraction;  // je Beruf: Anziehung des eigenen Ortes
+        EconomyScratch economy;
+        std::vector<Fixed> attraction; // je Beruf: Anziehung des eigenen Ortes
+        std::vector<Fixed> hunger;     // je Beruf: Faktor auf die Sterblichkeit (wirtschaft.md 4.4)
     };
 
     /// Thread-Pool, der beim Kopieren einer Simulation neu angelegt wird (Threads sind kein Zustand).
@@ -142,6 +174,9 @@ private:
     /// Füllt Momentaufnahmen, Bilanzen und Ortssteuern, wenn sie nicht zur Welt passen (Start
     /// aus dem Lader).
     void prepare_population_state();
+    /// Abgeleitete Hilfsdaten (Markttopologie, Rechentage, Wanderungsziele) neu aufbauen, z. B. nach
+    /// dem Laden eines Spielstands.
+    void rebuild_derived();
 
     World world_;
     SimConfig config_;
@@ -151,6 +186,9 @@ private:
     Pcg32 rng_economy_;
     Pcg32 rng_events_;
     std::int64_t days_elapsed_ = 0;
+    std::vector<LoggedCommand> command_log_;
+    std::uint64_t start_checksum_ = 0;
+    EconomyTopology topology_; // abgeleitet: Märkte, Nachbarn, Betriebe je Beruf (seit M5)
 
     std::array<std::vector<Index>, 28> locations_by_day_; // Orte mit Blöcken je Rechentag, aufsteigend
     std::vector<std::vector<Index>> state_locations_;     // Orte je Staat, aufsteigend

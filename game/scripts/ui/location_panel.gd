@@ -6,6 +6,9 @@ extends PanelContainer
 ## Gelände, Fläche) und einen Hinweis; Bevölkerung, Wirtschaft, Verwüstung,
 ## Konfessionen, Kulturen und Gesellschaft sind dort ausgeblendet.
 
+## Höchstzahl der Güter im Abschnitt Wirtschaft (nach Wert der Erzeugung, seit M5).
+const MAX_GOODS := 6
+
 ## Altersgruppen der Bevölkerung (Feldname in get_location, Anzeigename), seit M4.
 const AGE_GROUPS: Array[Array] = [
 	["children", "0–14 Jahre"],
@@ -48,6 +51,7 @@ var _max_height := 100000.0
 @onready var _taxes: Label = %Taxes
 @onready var _devastation_bar: ProgressBar = %DevastationBar
 @onready var _devastation: Label = %Devastation
+@onready var _economy: VBoxContainer = %Economy
 @onready var _majority: Label = %Majority
 @onready var _confessions: VBoxContainer = %Confessions
 @onready var _majority_culture: Label = %MajorityCulture
@@ -72,6 +76,9 @@ var _max_height := 100000.0
 	$Scroll/Margin/Content/Facts/TaxesCaption,
 	%Taxes,
 	$Scroll/Margin/Content/DevastationRow,
+	$Scroll/Margin/Content/EconomySeparator,
+	$Scroll/Margin/Content/EconomyHeader,
+	%Economy,
 	$Scroll/Margin/Content/Separator2,
 	$Scroll/Margin/Content/ConfessionRow,
 	%Confessions,
@@ -143,6 +150,7 @@ func show_location(location: Dictionary, owner_color: Color) -> void:
 	var devastation := int(location.get("devastation_percent", 0))
 	_devastation_bar.value = devastation
 	_devastation.text = GermanFormat.percent(devastation)
+	_show_economy(location)
 	_majority.text = "Mehrheit: %s" % GermanFormat.humanize(
 		str(location.get("majority_confession", ""))
 	)
@@ -172,6 +180,97 @@ func _show_shares(container: VBoxContainer, shares: Dictionary, colors: Dictiona
 		var text := GermanFormat.humanize(str(share_name))
 		var color: Color = colors.get(str(share_name), UiPalette.BAR_NEUTRAL)
 		container.add_child(_share_row(text, float(shares[share_name]), color))
+
+
+## Wirtschaft (seit M5): Markt, Landesausbau, Berufe mit Einkommen und Bedarfsdeckung,
+## Betriebe und die wichtigsten Güter mit Preis gegenüber dem Basispreis.
+func _show_economy(location: Dictionary) -> void:
+	_clear(_economy)
+	var facts := GridContainer.new()
+	facts.columns = 2
+	var market := str(location.get("market_name", ""))
+	if bool(location.get("is_port", false)):
+		market += " · Hafen"
+	_add_fact(facts, "Markt", market if not market.is_empty() else "–")
+	var development := float(location.get("development_percent", 0.0))
+	if development > 0.05:
+		_add_fact(
+			facts, "Landesausbau", "+%s Tragfähigkeit" % GermanFormat.percent(development, 1)
+		)
+	_economy.add_child(facts)
+
+	var professions: Array = location.get("professions", [])
+	if not professions.is_empty():
+		_economy.add_child(_caption("Einkommen je Kopf und Jahr · Bedarfsdeckung"))
+		var grid := GridContainer.new()
+		grid.columns = 3
+		for row: Dictionary in professions:
+			var name_label := Label.new()
+			name_label.text = str(row.get("name", ""))
+			name_label.theme_type_variation = &"MutedLabel"
+			name_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			grid.add_child(name_label)
+			grid.add_child(_right(GermanFormat.money(float(row.get("income_year", 0.0)))))
+			var coverage := _right(GermanFormat.percent(float(row.get("coverage_percent", 0.0))))
+			coverage.custom_minimum_size = Vector2(52, 0)
+			var food := float(row.get("food_percent", 100.0))
+			if food < 90.0:
+				coverage.add_theme_color_override(&"font_color", UiPalette.NEGATIVE)
+				coverage.tooltip_text = "Grundnahrung nur zu %s gedeckt" % GermanFormat.percent(food)
+				coverage.mouse_filter = Control.MOUSE_FILTER_PASS
+			grid.add_child(coverage)
+		_economy.add_child(grid)
+
+	var businesses: Array = location.get("businesses", [])
+	if not businesses.is_empty():
+		_economy.add_child(_caption("Betriebe (Köpfe)"))
+		var grid := GridContainer.new()
+		grid.columns = 2
+		for row: Dictionary in businesses:
+			_add_fact(
+				grid,
+				"%s (%s)" % [str(row.get("name", "")), str(row.get("profession", ""))],
+				GermanFormat.integer(int(row.get("people", 0)))
+			)
+		_economy.add_child(grid)
+
+	var goods: Array = location.get("goods", []).duplicate()
+	goods.sort_custom(
+		func(a: Dictionary, b: Dictionary) -> bool:
+			return (
+				float(a.get("supply", 0.0)) * float(a.get("price", 0.0))
+				> float(b.get("supply", 0.0)) * float(b.get("price", 0.0))
+			)
+	)
+	if not goods.is_empty():
+		_economy.add_child(_caption("Erzeugung je Monat · Preis zum Basispreis"))
+		var grid := GridContainer.new()
+		grid.columns = 3
+		for row: Dictionary in goods.slice(0, MAX_GOODS):
+			var name_label := Label.new()
+			name_label.text = str(row.get("name", ""))
+			name_label.theme_type_variation = &"MutedLabel"
+			name_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			grid.add_child(name_label)
+			grid.add_child(_right(GermanFormat.number(float(row.get("supply", 0.0)), 1)))
+			var factor := _right("×" + GermanFormat.number(float(row.get("price_factor", 0.0)), 2))
+			factor.custom_minimum_size = Vector2(52, 0)
+			grid.add_child(factor)
+		_economy.add_child(grid)
+
+
+func _caption(text: String) -> Label:
+	var label := Label.new()
+	label.text = text
+	label.theme_type_variation = &"CaptionLabel"
+	return label
+
+
+func _right(text: String) -> Label:
+	var label := Label.new()
+	label.text = text
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	return label
 
 
 ## Altersaufbau: Anteile der vier Altersgruppen an der Bevölkerung.

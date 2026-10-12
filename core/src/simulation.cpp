@@ -1,5 +1,8 @@
 #include "uhrwerk/simulation.hpp"
 
+#include "state_access.hpp"
+#include "uhrwerk/economy.hpp"
+
 #include <algorithm>
 #include <array>
 #include <cstddef>
@@ -45,92 +48,23 @@ bool same_key(const PopBlock& pop, Index profession, Index confession, Index cul
     return pop.profession == profession && pop.confession == confession && pop.culture == culture;
 }
 
-/// Produktion und Steuern eines Ortes je Monat aus seinen Kennzahlen (Abschnitt 4.6). Dieselbe
-/// Rechnung wie in run_population, dort in der Blockschleife.
-LocationEconomy economy_of(const World& world, const Location& loc, const LocationFactors& factors,
-                           Fixed tax_rate) {
-    LocationEconomy result;
-    const Fixed twelve = Fixed::from_int(12);
-    for (Index p = loc.first_pop; p < loc.first_pop + loc.pop_count; ++p) {
-        const PopBlock& pop = world.pops[static_cast<std::size_t>(p)];
-        if (!in_range(world.professions, pop.profession)) {
-            continue;
-        }
-        const auto b = static_cast<std::size_t>(pop.profession);
-        const Fixed produced = pop.size() * (factors.yield[b] / twelve);
-        result.production += produced;
-        if (world.professions[b].taxable) {
-            result.taxes += produced * tax_rate;
-        }
-    }
-    return result;
-}
-
-/// FNV-1a, 64 Bit. Ganzzahlen werden bytegenau in Little-Endian-Reihenfolge
-/// eingespeist, damit die Prüfsumme plattformunabhängig ist.
-class Fnv1a {
-public:
-    void byte(std::uint8_t b) {
-        hash_ ^= b;
-        hash_ *= 0x100000001b3ULL;
-    }
-    void u64(std::uint64_t v) {
-        for (int i = 0; i < 8; ++i) {
-            byte(static_cast<std::uint8_t>(v >> (8 * i)));
-        }
-    }
-    void i64(std::int64_t v) { u64(static_cast<std::uint64_t>(v)); }
-    void fixed(Fixed v) { i64(v.raw()); }
-    void date(const Date& d) {
-        i64(d.year);
-        i64(d.month);
-        i64(d.day);
-    }
-    void text(std::string_view s) {
-        u64(s.size());
-        for (const char c : s) {
-            byte(static_cast<std::uint8_t>(c));
-        }
-    }
-    void rng(const Pcg32& r) {
-        u64(r.state());
-        u64(r.increment());
-    }
-    void pop(const PopBlock& p) {
-        i64(p.location);
-        i64(p.profession);
-        i64(p.confession);
-        i64(p.culture);
-        fixed(p.children);
-        fixed(p.young);
-        fixed(p.working);
-        fixed(p.old);
-        fixed(p.living_standard);
-        fixed(p.literacy);
-    }
-    void balance(const PopulationBalance& b) {
-        fixed(b.births);
-        fixed(b.deaths);
-        fixed(b.plague_deaths);
-        fixed(b.moved_in);
-        fixed(b.moved_out);
-        fixed(b.emigrated);
-    }
-    std::uint64_t value() const { return hash_; }
-
-private:
-    std::uint64_t hash_ = 0xcbf29ce484222325ULL;
-};
-
 } // namespace
 
 Simulation::Simulation(World world, SimConfig config)
     : world_(std::move(world)), config_(config), rates_(derive_rates(world_.rules)),
       rng_demography_(config.seed, RngStream::Demografie), rng_economy_(config.seed, RngStream::Wirtschaft),
-      rng_events_(config.seed, RngStream::Ereignisse), pool_(ThreadPool::resolve_threads(config.threads)) {
+      rng_events_(config.seed, RngStream::Ereignisse), topology_(build_economy_topology(world_)),
+      pool_(ThreadPool::resolve_threads(config.threads)) {
     build_schedule();
     build_migration_targets();
     prepare_population_state();
+    start_checksum_ = checksum();
+}
+
+void Simulation::rebuild_derived() {
+    topology_ = build_economy_topology(world_);
+    build_schedule();
+    build_migration_targets();
 }
 
 void Simulation::build_schedule() {
@@ -220,37 +154,40 @@ void Simulation::prepare_population_state() {
     next_snapshots_.assign(count, {});
     world_.arrivals.resize(count);
     next_targets_.assign(count * professions, Fixed{});
+    ensure_economy_state(world_, topology_);
 
     const bool fits = world_.snapshots.size() == count &&
                       world_.snapshot_targets.size() == count * professions &&
-                      world_.balance_current.size() == count && world_.balance_previous.size() == count &&
-                      world_.economy.size() == count;
-    if (fits) {
-        return; // Fortsetzung einer laufenden Partie
+                      world_.balance_current.size() == count && world_.balance_previous.size() == count;
+    if (world_.balance_current.size() != count || world_.balance_previous.size() != count) {
+        world_.balance_current.assign(count, {});
+        world_.balance_previous.assign(count, {});
     }
+    if (fits) {
+        return; // Fortsetzung einer laufenden Partie oder Start aus dem Lader (eingeschwungen)
+    }
+    // Welt ohne Startzustand (z. B. von Hand gebaut): Wirtschaft jedes Ortes einmal rechnen, damit
+    // Momentaufnahmen und Ziel-Lebensstandards stehen.
     world_.snapshots.assign(count, {});
     world_.snapshot_targets.assign(count * professions, Fixed{});
-    world_.balance_current.assign(count, {});
-    world_.balance_previous.assign(count, {});
-    world_.economy.assign(count, {});
-
     LocationFactors factors;
-    for (std::size_t i = 0; i < count; ++i) {
-        const Location& loc = world_.locations[i];
-        if (loc.pop_count == 0 || !in_range(world_.states, loc.owner) ||
-            !in_range(world_.terrains, loc.terrain)) {
-            continue;
+    EconomyScratch scratch;
+    for (const std::vector<Index>& list : topology_.market_locations) {
+        for (const Index location : list) {
+            const auto i = static_cast<std::size_t>(location);
+            compute_location_factors(world_, location, factors);
+            run_location_economy(world_, topology_, location, factors, scratch);
+            world_.snapshots[i] = LocationSnapshot{factors.population, factors.reserve};
+            std::copy(factors.target.begin(), factors.target.end(),
+                      world_.snapshot_targets.begin() + static_cast<std::ptrdiff_t>(i * professions));
         }
-        const Fixed tax_rate = world_.states[static_cast<std::size_t>(loc.owner)].tax_rate;
-        compute_location_factors(world_, loc, tax_rate, factors);
-        world_.snapshots[i] = LocationSnapshot{factors.population, factors.reserve};
-        std::copy(factors.target.begin(), factors.target.end(),
-                  world_.snapshot_targets.begin() + static_cast<std::ptrdiff_t>(i * professions));
-        world_.economy[i] = economy_of(world_, loc, factors, tax_rate);
     }
+    estimate_budgets(world_);
 }
 
 void Simulation::submit(const Command& command) {
+    // Ein eingereihter Befehl wird beim nächsten Schritt ausgeführt, also am heutigen days_elapsed.
+    command_log_.push_back(LoggedCommand{days_elapsed_, command});
     pending_.push_back(command);
 }
 
@@ -258,23 +195,28 @@ void Simulation::step_day() {
     // 1. Befehle in Eingangsreihenfolge. Geänderte Steuersätze werden je Staat
     //    einmal pro Tag in der Chronik vermerkt (nicht je Befehl).
     if (!pending_.empty()) {
-        std::vector<Fixed> previous_rates;
+        std::vector<std::array<Fixed, kTaxKinds>> previous_rates;
         previous_rates.reserve(world_.states.size());
         for (const State& state : world_.states) {
-            previous_rates.push_back(state.tax_rate);
+            previous_rates.push_back(state.tax_rates);
         }
         while (!pending_.empty()) {
             const Command command = pending_.front();
             pending_.pop_front();
             execute(command);
         }
+        constexpr std::array<std::string_view, kTaxKinds> names = {"die Kontribution", "die Akzise",
+                                                                   "den Zoll"};
         for (std::size_t i = 0; i < world_.states.size(); ++i) {
             const State& state = world_.states[i];
-            if (state.tax_rate != previous_rates[i]) {
+            for (std::size_t t = 0; t < kTaxKinds; ++t) {
+                if (state.tax_rates[t] == previous_rates[i][t]) {
+                    continue;
+                }
                 ChronicleEntry entry;
                 entry.date = world_.date;
-                entry.text = state.short_name + " legt den Steuersatz auf " +
-                             std::to_string(to_percent(state.tax_rate)) + " % fest.";
+                entry.text = state.short_name + " legt " + std::string(names[t]) + " auf " +
+                             std::to_string(to_percent(state.tax_rates[t])) + " % fest.";
                 entry.state = static_cast<Index>(i);
                 world_.chronicle.push_back(std::move(entry));
             }
@@ -284,15 +226,18 @@ void Simulation::step_day() {
     const std::int32_t day = world_.date.day;
     const bool new_year = world_.date.month == 1 && day == 1;
 
-    // 2. Jahresabschluss.
+    // 2. Jahresabschluss und Ernte des neuen Jahres (wirtschaft.md, Abschnitt 4.7).
     if (new_year) {
         world_.balance_previous = world_.balance_current;
         std::fill(world_.balance_current.begin(), world_.balance_current.end(), PopulationBalance{});
+        draw_harvest(world_, topology_, rng_economy_);
     }
 
-    // 3. Neuordnung am Monatsersten (nur wenn es Zugänge oder zu kleine Blöcke gibt).
+    // 3. Neuordnung am Monatsersten (nur wenn es Zugänge oder zu kleine Blöcke gibt), dann die Märkte
+    //    (wirtschaft.md, Abschnitt 4.1).
     if (day == 1) {
         reorganize(world_);
+        update_markets(world_, topology_, state_spending(world_));
     }
 
     // 4. und 5. Bevölkerung der Orte mit heutigem Rechentag (Tage 29–31 haben keine): parallel
@@ -373,83 +318,15 @@ const std::vector<Index>& Simulation::migration_targets(Index location) const {
 }
 
 std::uint64_t Simulation::checksum() const {
-    Fnv1a h;
-    h.date(world_.date);
-    h.i64(days_elapsed_);
-    h.u64(config_.seed);
-
-    h.u64(world_.states.size());
-    for (const State& s : world_.states) {
-        h.fixed(s.treasury);
-        h.fixed(s.tax_rate);
-        h.fixed(s.court_expenses);
-        h.fixed(s.last_month_income);
-        h.fixed(s.last_month_expenses);
-        h.i64(s.capital);
-    }
-
-    h.u64(world_.locations.size());
-    for (const Location& l : world_.locations) {
-        h.i64(l.owner);
-        h.fixed(l.devastation);
-        h.i64(l.first_pop);
-        h.i64(l.pop_count);
-    }
-
-    h.u64(world_.pops.size());
-    for (const PopBlock& p : world_.pops) {
-        h.pop(p);
-    }
-    h.u64(world_.arrivals.size());
-    for (const std::vector<PopBlock>& list : world_.arrivals) {
-        h.u64(list.size());
-        for (const PopBlock& p : list) {
-            h.pop(p);
-        }
-    }
-
-    h.u64(world_.snapshots.size());
-    for (const LocationSnapshot& s : world_.snapshots) {
-        h.fixed(s.population);
-        h.fixed(s.reserve);
-    }
-    h.u64(world_.snapshot_targets.size());
-    for (const Fixed target : world_.snapshot_targets) {
-        h.fixed(target);
-    }
-    h.u64(world_.balance_current.size());
-    for (const PopulationBalance& b : world_.balance_current) {
-        h.balance(b);
-    }
-    h.u64(world_.balance_previous.size());
-    for (const PopulationBalance& b : world_.balance_previous) {
-        h.balance(b);
-    }
-    h.u64(world_.economy.size());
-    for (const LocationEconomy& e : world_.economy) {
-        h.fixed(e.production);
-        h.fixed(e.taxes);
-    }
-
-    h.rng(rng_demography_);
-    h.rng(rng_economy_);
-    h.rng(rng_events_);
-
-    h.u64(world_.chronicle.size());
-    for (const ChronicleEntry& e : world_.chronicle) {
-        h.date(e.date);
-        h.text(e.text);
-        h.i64(e.location);
-        h.i64(e.state);
-    }
-
-    h.u64(pending_.size());
-    for (const Command& c : pending_) {
-        h.u64(static_cast<std::uint64_t>(c.type));
-        h.i64(c.state);
-        h.fixed(c.value);
-    }
+    HashVisitor h;
+    StateAccess::visit(*this, h);
     return h.value();
+}
+
+std::string Simulation::state_text() const {
+    TextVisitor t;
+    StateAccess::visit(*this, t);
+    return t.text();
 }
 
 void Simulation::execute(const Command& command) {
@@ -458,10 +335,12 @@ void Simulation::execute(const Command& command) {
         if (!in_range(world_.states, command.state)) {
             return;
         }
-        if (command.value < Fixed::zero() || command.value > world_.rules.tax_rate_max) {
+        if (command.value < Fixed::zero() || command.value > world_.rules.tax_rate_max ||
+            static_cast<std::size_t>(command.kind) >= kTaxKinds) {
             return;
         }
-        world_.states[static_cast<std::size_t>(command.state)].tax_rate = command.value;
+        world_.states[static_cast<std::size_t>(command.state)]
+            .tax_rates[static_cast<std::size_t>(command.kind)] = command.value;
         return;
     }
 }
@@ -478,25 +357,29 @@ void Simulation::run_population(Index location, Scratch& scratch) {
         return;
     }
     const Rules& rules = world_.rules;
-    const State& owner = world_.states[static_cast<std::size_t>(loc.owner)];
     const std::size_t professions = world_.professions.size();
     const Fixed one = Fixed::one();
 
-    // 4.1 Kennzahlen des Ortes; sie werden auch die neue Momentaufnahme.
+    // 4.1 Kennzahlen des Ortes, dann seine Wirtschaft (wirtschaft.md, Abschnitte 4.2–4.5); der
+    // Ziel-Lebensstandard je Beruf kommt aus dem Realeinkommen. Beides wird die neue Momentaufnahme.
     LocationFactors& factors = scratch.factors;
-    compute_location_factors(world_, loc, owner.tax_rate, factors);
+    compute_location_factors(world_, location, factors);
+    run_location_economy(world_, topology_, location, factors, scratch.economy);
     next_snapshots_[li] = LocationSnapshot{factors.population, factors.reserve};
     std::copy(factors.target.begin(), factors.target.end(),
               next_targets_.begin() + static_cast<std::ptrdiff_t>(li * professions));
 
-    scratch.yield_month.resize(professions);
     scratch.attraction.resize(professions);
+    scratch.hunger.resize(professions);
     for (std::size_t b = 0; b < professions; ++b) {
-        scratch.yield_month[b] = factors.yield[b] / rates_.twelve;
         scratch.attraction[b] = factors.target[b];
         if (world_.professions[b].agrarian) {
             scratch.attraction[b] += rules.migration_reserve * factors.reserve;
         }
+        // Hunger (wirtschaft.md, Abschnitt 4.4): fehlt Grundnahrung, steigt die Sterblichkeit –
+        // quadratisch, damit kleine Lücken (etwas Salz, kein Fleisch) kaum, echte Not stark wirkt.
+        const Fixed gap = one - food_coverage(world_, location, static_cast<Index>(b));
+        scratch.hunger[b] = one + rules.mortality_hunger * gap * gap;
     }
     const Fixed fertility_location = rules.fertility * (one + rules.fertility_reserve * factors.reserve);
     const std::vector<Index>& targets = migration_targets_[li];
@@ -505,7 +388,6 @@ void Simulation::run_population(Index location, Scratch& scratch) {
     std::array<Index, kMaxMigrationTargets> flow_professions{};
 
     PopulationBalance& balance = world_.balance_current[li];
-    LocationEconomy economy;
 
     for (Index p = loc.first_pop; p < loc.first_pop + loc.pop_count; ++p) {
         PopBlock& pop = world_.pops[static_cast<std::size_t>(p)];
@@ -515,13 +397,6 @@ void Simulation::run_population(Index location, Scratch& scratch) {
         const auto b = static_cast<std::size_t>(pop.profession);
         const Profession& profession = world_.professions[b];
 
-        // 4.6 Produktion und Steuern mit der Größe vor diesem Schritt.
-        const Fixed produced = pop.size() * scratch.yield_month[b];
-        economy.production += produced;
-        if (profession.taxable) {
-            economy.taxes += produced * owner.tax_rate;
-        }
-
         // 4.2 Lebensstandard.
         pop.living_standard += (factors.target[b] - pop.living_standard) * rules.living_standard_adjustment;
         const Fixed living = pop.living_standard;
@@ -530,7 +405,7 @@ void Simulation::run_population(Index location, Scratch& scratch) {
         const Fixed deviation = (living - rates_.fifty) / rates_.fifty; // −1 … +1
         const Fixed mortality =
             (one - rules.mortality_poverty * deviation).clamp(Fixed::from_ratio(1, 2), Fixed::from_int(2));
-        const Fixed mortality_month = mortality / rates_.twelve;
+        const Fixed mortality_month = mortality * scratch.hunger[b] / rates_.twelve;
         const Fixed wealth = Fixed::max(Fixed::zero(), one + rules.fertility_wealth * deviation);
         const Fixed fertility_month = fertility_location * wealth / rates_.twelve;
 
@@ -614,7 +489,6 @@ void Simulation::run_population(Index location, Scratch& scratch) {
         balance.moved_out += moved;
         balance.emigrated += emigrated;
     }
-    world_.economy[li] = economy;
 }
 
 // Momentaufnahme eines Ortes nach seinem Rechentag veröffentlichen (nacheinander).
@@ -666,16 +540,17 @@ void Simulation::book_migration(const Migration& migration) {
     arrivals.push_back(incoming);
 }
 
+// Haushalt eines Staates an seinem Rechentag (wirtschaft.md, Abschnitt 4.6).
 void Simulation::run_economy(Index state) {
-    State& s = world_.states[static_cast<std::size_t>(state)];
-    Fixed income;
-    for (const Index location : state_locations_[static_cast<std::size_t>(state)]) {
-        income += world_.economy[static_cast<std::size_t>(location)].taxes;
+    if (run_state_budget(world_, state, state_locations_[static_cast<std::size_t>(state)])) {
+        const State& s = world_.states[static_cast<std::size_t>(state)];
+        ChronicleEntry entry;
+        entry.date = world_.date;
+        entry.text = s.short_name + " erklärt den Staatsbankrott: Die Gläubiger verlieren " +
+                     std::to_string(to_percent(world_.rules.bankruptcy_haircut)) + " % ihrer Forderungen.";
+        entry.state = state;
+        world_.chronicle.push_back(std::move(entry));
     }
-    const Fixed expenses = s.court_expenses / Fixed::from_int(12);
-    s.treasury += income - expenses;
-    s.last_month_income = income;
-    s.last_month_expenses = expenses;
 }
 
 void Simulation::run_yearly() {

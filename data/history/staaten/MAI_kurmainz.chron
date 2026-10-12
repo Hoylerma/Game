@@ -3,9 +3,10 @@
 # Staat zum Lesezeichen "Der Westfälische Frieden" (24.10.1648), Testregion M1.
 #
 # Format: docs/technik/chronik-skript.md, Abschnitt 3.5.
-# schatz, steuersatz und hofhaltung sind Spielwerte (Reichstaler), skaliert auf
-# die in der Testregion modellierten Orte dieses Staates – keine historischen
-# Haushaltszahlen. Kalibrierung: data/README.md, Abschnitt "Wirtschaftswerte".
+# schatz, hofhaltung, die Steuersätze (kontribution, akzise, zoll) und heer (Soldaten
+# je 1.000 Einwohner) sind Spielwerte, skaliert auf die in der Testregion modellierten
+# Orte dieses Staates – keine historischen Haushaltszahlen. Kalibrierung: data/README.md,
+# Abschnitt "Wirtschaftswerte".
 #
 # In der Testregion nur die thüringischen Besitzungen: Erfurt und das Eichsfeld.
 
@@ -13,7 +14,7 @@ staat MAI {
     name     = "Kurfürstentum Mainz"
     kurzname = "Kurmainz"
     farbe    = { 200 50 140 }
-    quelle   = "Erzbischof und Kurfürst seit 1647, Reichserzkanzler. Residenz Mainz liegt außerhalb der Testregion, daher Erfurt als Hauptort der thüringischen Besitzungen; Erfurt bis 1664 faktisch weitgehend selbständig und bis 1650 schwedisch besetzt. Schatz, Steuersatz und Hofhaltung sind Spielwerte"
+    quelle   = "Erzbischof und Kurfürst seit 1647, Reichserzkanzler. Residenz Mainz liegt außerhalb der Testregion, daher Erfurt als Hauptort der thüringischen Besitzungen; Erfurt bis 1664 faktisch weitgehend selbständig und bis 1650 schwedisch besetzt. Schatz, Steuersätze, Hofhaltung und Heer sind Spielwerte"
 
     1648.10.24 = {
         hauptstadt     = erfurt
@@ -21,7 +22,10 @@ staat MAI {
         herrscher      = "Johann Philipp von Schönborn"
         konfession     = katholisch
         schatz         = 9000
-        steuersatz     = 0.08
-        hofhaltung     = 28000
+        kontribution   = 0.08
+        akzise         = 0.05
+        zoll           = 0.04
+        hofhaltung     = 12250
+        heer           = 4
     }
 }

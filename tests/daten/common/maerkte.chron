@@ -1,0 +1,10 @@
+# Testdaten: Märkte (seit M5). Ein Markt mit zwei Landschaften.
+markt brandenburg {
+    name         = "Brandenburg"
+    landschaften = { 10_brandenburg }
+}
+
+markt mitte {
+    name         = "Mitteldeutschland"
+    landschaften = { 20_sachsen 30_anhalt }
+}

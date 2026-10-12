@@ -18,6 +18,12 @@ const LIBRARY_NAMES := {
 ## Größte Anzahl Tage je Aufruf von advance_days (Vertrag der Brücke).
 const MAX_DAYS_PER_CALL := 3660
 
+## Steuerarten für set_tax_percent (seit M5, wie TAX_* der Brücke).
+const TAX_KONTRIBUTION := 0
+const TAX_AKZISE := 1
+const TAX_ZOLL := 2
+const TAX_KIND_COUNT := 3
+
 ## Alle Methoden, die die Oberfläche benutzt.
 const REQUIRED_METHODS: Array[StringName] = [
 	&"load_scenario",
@@ -37,11 +43,15 @@ const REQUIRED_METHODS: Array[StringName] = [
 	&"get_location",
 	&"get_location_owner_indices",
 	&"get_location_kreis_indices",
+	&"get_location_market_indices",
 	&"get_kreis_count",
 	&"get_kreis_index",
 	&"get_kreis",
+	&"get_market_count",
+	&"get_market",
 	&"get_map_colors",
 	&"set_tax_rate_percent",
+	&"set_tax_percent",
 	&"get_max_tax_rate_percent",
 	&"get_chronicle_size",
 	&"get_chronicle",
@@ -176,6 +186,14 @@ func get_location_kreis_indices() -> PackedInt32Array:
 	return PackedInt32Array()
 
 
+## Marktindex je Ort, −1 ohne Markt; Länge = get_location_count() (seit M5).
+func get_location_market_indices() -> PackedInt32Array:
+	var result: Variant = _native.call(&"get_location_market_indices")
+	if result is PackedInt32Array:
+		return result
+	return PackedInt32Array()
+
+
 func get_kreis_count() -> int:
 	return int(_native.call(&"get_kreis_count"))
 
@@ -189,6 +207,16 @@ func get_kreis(index: int) -> Dictionary:
 	return _as_dictionary(_native.call(&"get_kreis", index))
 
 
+func get_market_count() -> int:
+	return int(_native.call(&"get_market_count"))
+
+
+## Markt als Dictionary { id, name, location_count, active, is_port, harvest, goods } (seit M5);
+## leer bei ungültigem Index.
+func get_market(index: int) -> Dictionary:
+	return _as_dictionary(_native.call(&"get_market", index))
+
+
 ## Eine Farbe je Simulations-Ortsindex für den Kartenmodus mode (MapModes).
 func get_map_colors(mode: int) -> PackedColorArray:
 	var result: Variant = _native.call(&"get_map_colors", mode)
@@ -200,6 +228,11 @@ func get_map_colors(mode: int) -> PackedColorArray:
 ## Reiht einen Steuerbefehl ein; wirksam am nächsten simulierten Tag.
 func set_tax_rate_percent(state_index: int, percent: int) -> bool:
 	return bool(_native.call(&"set_tax_rate_percent", state_index, percent))
+
+
+## Reiht einen Steuerbefehl für eine Steuerart ein (TAX_KONTRIBUTION, TAX_AKZISE, TAX_ZOLL; seit M5).
+func set_tax_percent(state_index: int, kind: int, percent: int) -> bool:
+	return bool(_native.call(&"set_tax_percent", state_index, kind, percent))
 
 
 func get_max_tax_rate_percent() -> int:

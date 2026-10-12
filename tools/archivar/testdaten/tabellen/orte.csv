@@ -1,5 +1,5 @@
-id;datei;name;gelaende;laenge;breite;flaeche;stadt;kreis;quelle
-hafen;nord;Hafen;flachland;10.30;53.80;150;ja;kr_hafen;Testdaten
-heide;nord;Heide-Süd;heide;11.20;53.10;300;nein;kr_hafen;Testdaten
-burg;sued;Burg;flachland;11.50;52.40;200;ja;kr_burg;Testdaten
-moor;nord;Moor;heide;11.00;53.50;250;nein;kr_hafen;Testdaten, Ort ohne Daten
+id;datei;name;gelaende;laenge;breite;flaeche;stadt;kreis;vorkommen;hafen;quelle
+hafen;nord;Hafen;flachland;10.30;53.80;150;ja;kr_hafen;;ja;Testdaten
+heide;nord;Heide-Süd;heide;11.20;53.10;300;nein;kr_hafen;;;Testdaten
+burg;sued;Burg;flachland;11.50;52.40;200;ja;kr_burg;salz;;Testdaten
+moor;nord;Moor;heide;11.00;53.50;250;nein;kr_hafen;;nein;Testdaten, Ort ohne Daten

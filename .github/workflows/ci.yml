@@ -2,10 +2,12 @@
 #
 # Jobs:
 #   Kern (Linux)        GCC und Clang: Build mit Warnungen als Fehler, Tests, Prüfsummen nach 100 Jahren
-#                       und des Lasttests
+#                       und des Lasttests, Prüfwert eines Spielstands nach 100 Jahren (seit M6)
 #   Kern (Windows)      MSVC mit denselben Presets: Portabilität des Kerns
-#   Determinismus       vergleicht die Prüfsummen von GCC, Clang und MSVC (müssen bitgleich sein)
-#   Lasttest            Release-Build, 500.000 Bevölkerungsblöcke, Zeit je Spieljahr (seit M4)
+#   Determinismus       vergleicht die Prüfsummen und den Prüfwert des Spielstands von GCC, Clang und MSVC
+#                       (müssen bitgleich sein: jede Plattform liest die Spielstände der anderen)
+#   Lasttest            Release-Build, 500.000 Bevölkerungsblöcke, Zeit je Spieljahr (seit M4), Größe
+#                       sowie Schreib- und Ladezeit des Spielstands (seit M6)
 #   Formatierung        clang-format 18 über core/, cli/, tests/, bridge/
 #   Python-Werkzeuge    Tests von Archivar, Kartengenerator und Geodaten (mit numpy, ohne Netz);
 #                       sind data/history/ und data/karte/ aktuell?
@@ -78,7 +80,8 @@ jobs:
 
       - name: Prüfsummen festhalten (${{ env.PRUEFSUMME_JAHRE }} Jahre, Lasttest)
         run: |
-          ./build/dev/cli/uhrwerk-cli lauf --daten data --jahre "$PRUEFSUMME_JAHRE" | tee "$RUNNER_TEMP/lauf.txt"
+          ./build/dev/cli/uhrwerk-cli lauf --daten data --jahre "$PRUEFSUMME_JAHRE" --speichern "$RUNNER_TEMP/lauf.einigkeit" \
+            | tee "$RUNNER_TEMP/lauf.txt"
           summe=$(tr -d '\r' < "$RUNNER_TEMP/lauf.txt" | grep -E 'summe: [0-9a-f]{16}$' | tail -n 1 | grep -oE '[0-9a-f]{16}$' || true)
           if [ -z "$summe" ]; then
             echo "::error::Keine Prüfsumme in der Ausgabe von uhrwerk-cli gefunden."
@@ -91,9 +94,14 @@ jobs:
             echo "::error::Keine Prüfsumme in der Ausgabe des Lasttests gefunden."
             exit 1
           fi
+          wert=$(tr -d '\r' < "$RUNNER_TEMP/lauf.txt" | grep -E '^Prüfwert: +[0-9a-f]{16}' | grep -oE '[0-9a-f]{16}' | head -n 1 || true)
+          if [ -z "$wert" ]; then
+            echo "::error::Kein Prüfwert des Spielstands in der Ausgabe von uhrwerk-cli gefunden."
+            exit 1
+          fi
           mkdir -p pruefsumme
-          printf 'lauf %s\nlasttest %s\n' "$summe" "$last" > "pruefsumme/linux-${{ matrix.compiler }}.txt"
-          echo "Prüfsummen (Linux, ${{ matrix.compiler }}): lauf \`$summe\`, lasttest \`$last\`" >> "$GITHUB_STEP_SUMMARY"
+          printf 'lauf %s\nlasttest %s\nspielstand %s\n' "$summe" "$last" "$wert" > "pruefsumme/linux-${{ matrix.compiler }}.txt"
+          echo "Prüfsummen (Linux, ${{ matrix.compiler }}): lauf \`$summe\`, lasttest \`$last\`, Spielstand \`$wert\`" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Prüfsumme hochladen
         uses: actions/upload-artifact@v4
@@ -143,7 +151,8 @@ jobs:
       - name: Prüfsummen festhalten (${{ env.PRUEFSUMME_JAHRE }} Jahre, Lasttest)
         shell: bash
         run: |
-          ./build/dev/cli/uhrwerk-cli.exe lauf --daten data --jahre "$PRUEFSUMME_JAHRE" | tee "$RUNNER_TEMP/lauf.txt"
+          ./build/dev/cli/uhrwerk-cli.exe lauf --daten data --jahre "$PRUEFSUMME_JAHRE" --speichern "$RUNNER_TEMP/lauf.einigkeit" \
+            | tee "$RUNNER_TEMP/lauf.txt"
           summe=$(tr -d '\r' < "$RUNNER_TEMP/lauf.txt" | grep -E 'summe: [0-9a-f]{16}$' | tail -n 1 | grep -oE '[0-9a-f]{16}$' || true)
           if [ -z "$summe" ]; then
             echo "::error::Keine Prüfsumme in der Ausgabe von uhrwerk-cli gefunden."
@@ -156,9 +165,14 @@ jobs:
             echo "::error::Keine Prüfsumme in der Ausgabe des Lasttests gefunden."
             exit 1
           fi
+          wert=$(tr -d '\r' < "$RUNNER_TEMP/lauf.txt" | grep -E '^Prüfwert: +[0-9a-f]{16}' | grep -oE '[0-9a-f]{16}' | head -n 1 || true)
+          if [ -z "$wert" ]; then
+            echo "::error::Kein Prüfwert des Spielstands in der Ausgabe von uhrwerk-cli gefunden."
+            exit 1
+          fi
           mkdir -p pruefsumme
-          printf 'lauf %s\nlasttest %s\n' "$summe" "$last" > pruefsumme/windows-msvc.txt
-          echo "Prüfsummen (Windows, MSVC): lauf \`$summe\`, lasttest \`$last\`" >> "$GITHUB_STEP_SUMMARY"
+          printf 'lauf %s\nlasttest %s\nspielstand %s\n' "$summe" "$last" "$wert" > pruefsumme/windows-msvc.txt
+          echo "Prüfsummen (Windows, MSVC): lauf \`$summe\`, lasttest \`$last\`, Spielstand \`$wert\`" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Prüfsumme hochladen
         uses: actions/upload-artifact@v4
@@ -188,12 +202,15 @@ jobs:
           {
             echo "### Prüfsummen ($PRUEFSUMME_JAHRE Jahre mit data/; Lasttest $LASTTEST_BLOECKE Blöcke, $LASTTEST_JAHRE Jahre)"
             echo
-            echo "| Plattform | lauf | lasttest |"
-            echo "|---|---|---|"
+            echo "Spielstand: Prüfwert der Nutzdaten des Spielstands nach $PRUEFSUMME_JAHRE Jahren."
+            echo
+            echo "| Plattform | lauf | lasttest | Spielstand |"
+            echo "|---|---|---|---|"
             for datei in "${dateien[@]}"; do
               lauf=$(grep '^lauf ' "$datei" | cut -d' ' -f2)
               last=$(grep '^lasttest ' "$datei" | cut -d' ' -f2)
-              echo "| $(basename "$datei" .txt) | \`$lauf\` | \`$last\` |"
+              wert=$(grep '^spielstand ' "$datei" | cut -d' ' -f2)
+              echo "| $(basename "$datei" .txt) | \`$lauf\` | \`$last\` | \`$wert\` |"
             done
           } | tee -a "$GITHUB_STEP_SUMMARY"
           if [ "${#dateien[@]}" -ne 3 ]; then
@@ -233,11 +250,12 @@ jobs:
       # Abnahme M4 (docs/technik/bevoelkerung.md, Abschnitt 8): 500.000 Blöcke, Median höchstens
       # 2 s je Spieljahr. Die CI-Grenze von 3 s lässt Puffer für schwankende Runner; der Messwert
       # steht in der Zusammenfassung. Der Vergleichslauf mit einem Thread muss bitgleich sein.
+      # Seit M6 zusätzlich Größe sowie Schreib- und Ladezeit des Spielstands.
       - name: Lasttest mit 500.000 Blöcken
         run: |
           set -o pipefail
           ./build/release/cli/uhrwerk-cli lasttest --daten data --bloecke 500000 --jahre 3 --vergleich 1 --grenze 3 \
-            | tee "$RUNNER_TEMP/lasttest.txt"
+            --speichern "$RUNNER_TEMP/lasttest.einigkeit" | tee "$RUNNER_TEMP/lasttest.txt"
           {
             echo "### Lasttest (Release, $(nproc) Kerne)"
             echo
@@ -245,6 +263,44 @@ jobs:
             cat "$RUNNER_TEMP/lasttest.txt"
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
+
+  balancing:
+    name: Balancing (Linux, Release)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Quelltext auschecken
+        uses: actions/checkout@v4
+
+      - name: Ninja installieren (falls nötig)
+        run: |
+          if ! command -v ninja > /dev/null; then
+            sudo apt-get update
+            sudo apt-get install -y --no-install-recommends ninja-build
+          fi
+
+      - name: Bauen (Preset release)
+        run: |
+          cmake --preset release
+          cmake --build --preset release --target uhrwerk-cli
+
+      # Abnahme M5 (docs/technik/wirtschaft.md, Abschnitte 7 und 8): 16 Läufe über 100 Jahre ohne
+      # Spielereingriff gegen die Zielwerte in data/common/zielwerte.chron; Exitcode 1 bei Verstoß.
+      # Der Bericht steht auch bei Verstoß in der Zusammenfassung.
+      - name: Balancing-Bericht (16 Seeds, 100 Jahre)
+        run: |
+          status=0
+          ./build/release/cli/uhrwerk-cli bilanz --daten data --seeds 16 --jahre 100 \
+            > "$RUNNER_TEMP/bilanz.txt" 2>&1 || status=$?
+          cat "$RUNNER_TEMP/bilanz.txt"
+          {
+            echo "### Balancing-Bericht (16 Seeds, 100 Jahre)"
+            echo
+            echo '```'
+            cat "$RUNNER_TEMP/bilanz.txt"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          exit "$status"
 
   formatierung:
     name: Formatierung
@@ -483,6 +539,11 @@ jobs:
           xvfb-run -a -s "-screen 0 1600x900x24" \
             "$GODOT_BIN" --path game --rendering-driver opengl3 --audio-driver Dummy \
             -- --screenshot="$PWD/artefakte/einigkeit_kreise.png" --tage=60 --kartenmodus=5 --ort=nuernberg --zoom=4 \
+            2>&1 | tee -a "$RUNNER_TEMP/screenshot.log"
+          # Kartenmodus „Märkte“ mit Ortsinfo Leipzig und Haushaltsfenster (seit M5)
+          xvfb-run -a -s "-screen 0 1600x900x24" \
+            "$GODOT_BIN" --path game --rendering-driver opengl3 --audio-driver Dummy \
+            -- --screenshot="$PWD/artefakte/einigkeit_wirtschaft.png" --tage=400 --kartenmodus=9 --ort=leipzig --haushalt \
             2>&1 | tee -a "$RUNNER_TEMP/screenshot.log"
           if grep -E "SCRIPT ERROR|Parse Error|SHADER ERROR" "$RUNNER_TEMP/screenshot.log"; then
             echo "::error::Skript- oder Shaderfehler bei den Screenshots."

@@ -80,11 +80,14 @@ func _test_launch_options() -> void:
 	_equal(defaults.map_mode, -1, "Standard --kartenmodus")
 	_true(not defaults.wants_screenshot(), "ohne --screenshot kein Screenshot")
 	var bad_args := PackedStringArray(
-		["--tage=-3", "--kartenmodus=8", "--unbekannt", "--zoom=0", "--zoom=viel"]
+		["--tage=-3", "--kartenmodus=10", "--unbekannt", "--zoom=0", "--zoom=viel"]
 	)
 	var bad := LaunchOptions.parse(bad_args)
 	_equal(bad.problems.size(), 5, "fehlerhafte Optionen gemeldet")
 	_equal(bad.zoom_factor, 0.0, "fehlerhaftes --zoom ignoriert")
+	var budget := LaunchOptions.parse(PackedStringArray(["--haushalt"]))
+	_equal(budget.show_budget and budget.problems.is_empty(), true, "Option --haushalt")
+	_equal(defaults.show_budget, false, "Standard ohne --haushalt")
 	var zoomed := LaunchOptions.parse(PackedStringArray(["--zoom=4.5", "--kartenmodus=5"]))
 	_equal(zoomed.zoom_factor, 4.5, "Option --zoom")
 	_equal(zoomed.map_mode, MapModes.MAP_KREISE, "Option --kartenmodus=5 (Kreise)")
@@ -177,10 +180,17 @@ func _test_legend_entries() -> void:
 
 
 func _test_map_modes() -> void:
-	_equal(MapModes.COUNT, 8, "acht Kartenmodi")
+	_equal(MapModes.COUNT, 10, "zehn Kartenmodi")
 	_equal(MapModes.MAP_KREISE, 5, "Kartenmodus Kreise = 5 (bridge-api.md)")
 	_equal(MapModes.MAP_LEBENSSTANDARD, 6, "Kartenmodus Lebensstandard = 6 (bridge-api.md)")
 	_equal(MapModes.MAP_KULTUR, 7, "Kartenmodus Kultur = 7 (bridge-api.md)")
+	_equal(MapModes.MAP_WIRTSCHAFT, 8, "Kartenmodus Wirtschaft = 8 (bridge-api.md)")
+	_equal(MapModes.MAP_MAERKTE, 9, "Kartenmodus Märkte = 9 (bridge-api.md)")
+	_equal(MapModes.KEY_HINTS[8] + MapModes.KEY_HINTS[9], "OP", "Tasten O und P für Wirtschaft und Märkte")
+	_true(
+		InputMap.has_action(&"kartenmodus_wirtschaft") and InputMap.has_action(&"kartenmodus_maerkte"),
+		"Aktionen für die Kartenmodi Wirtschaft und Märkte"
+	)
 	_true(MapModes.DATA_MODES.has(MapModes.MAP_LEBENSSTANDARD), "Lebensstandard mit Schraffur")
 	_true(MapModes.DATA_MODES.has(MapModes.MAP_KULTUR), "Kultur mit Schraffur")
 	_equal(MapModes.NAMES.size(), MapModes.COUNT, "Namen je Kartenmodus")

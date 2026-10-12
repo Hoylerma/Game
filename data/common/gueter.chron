@@ -1,0 +1,89 @@
+# Güter der Epoche 1648–1806 (Meilenstein M5, vereinfacht).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.11; Modell: docs/technik/wirtschaft.md.
+#   basispreis – Reichstaler je Einheit; Bezugspunkt der Preisbildung (Preis = Basispreis, wenn
+#                Angebot und Nachfrage gleich sind) und der Warenkörbe
+#   weltmarkt  – optional: Preis am Weltmarkt als Faktor auf den Basispreis. Märkte mit Hafen
+#                handeln das Gut dort in unbegrenzter Menge; ohne Angabe gibt es das Gut am
+#                Weltmarkt nicht.
+#
+# Die Einheiten dienen nur der Anzeige. Die Basispreise sind Spielwerte in der Größenordnung der
+# Preise um 1650–1700 (ein Scheffel Roggen kostete meist knapp einen Reichstaler, in Teuerungen
+# ein Mehrfaches; 1 Reichstaler = 24 Groschen). Die Weltmarktpreise bilden grob ab, was über die
+# Ostseehäfen ging: Getreide- und Holzausfuhr nach Westen, Einfuhr von Salz (Baiensalz),
+# Wein, feinem Tuch und Kolonialwaren.
+#
+# Bewusst noch nicht dabei: Eisen, Kohle und Bergbau (kommen mit Industrialisierung und Heer).
+
+gut getreide {
+    name       = "Getreide"
+    farbe      = { 214 180 90 }
+    basispreis = 1           # Scheffel Roggen
+    weltmarkt  = 0.9         # Ausfuhr über die Ostsee nach Amsterdam
+}
+
+gut vieh {
+    name       = "Vieh"      # Fleisch, Milch, Butter, Käse, Leder
+    farbe      = { 170 110 80 }
+    basispreis = 4           # Zentner
+}
+
+gut salz {
+    name       = "Salz"
+    farbe      = { 225 225 230 }
+    basispreis = 4           # Tonne
+    weltmarkt  = 1.2         # Baiensalz aus Frankreich und Portugal
+}
+
+gut holz {
+    name       = "Holz"      # Brenn- und Bauholz
+    farbe      = { 120 90 50 }
+    basispreis = 2           # Klafter
+    weltmarkt  = 1.0
+}
+
+gut faser {
+    name       = "Faser"     # Flachs, Hanf, Wolle
+    farbe      = { 200 190 150 }
+    basispreis = 2           # Stein
+}
+
+gut tuch {
+    name       = "Tuch"      # Leinen, Wollzeug
+    farbe      = { 90 120 170 }
+    basispreis = 5           # Stück
+    weltmarkt  = 1.1         # englisches und niederländisches Tuch
+}
+
+gut bier {
+    name       = "Bier"      # Bier und Branntwein
+    farbe      = { 190 140 40 }
+    basispreis = 2           # Tonne
+}
+
+gut wein {
+    name       = "Wein"
+    farbe      = { 130 40 70 }
+    basispreis = 6           # Eimer
+    weltmarkt  = 1.3         # Rhein- und Franzwein
+}
+
+gut waren {
+    name       = "Waren"     # Werkzeug, Hausrat, Geschirr
+    farbe      = { 110 110 110 }
+    basispreis = 3           # Kiste
+}
+
+gut luxuswaren {
+    name       = "Luxuswaren" # Porzellan, Seide, Spitzen, Bücher
+    farbe      = { 180 100 170 }
+    basispreis = 10          # Kiste
+    weltmarkt  = 1.2
+}
+
+gut kolonialwaren {
+    name       = "Kolonialwaren" # Zucker, Tabak, Kaffee, Tee, Gewürze
+    farbe      = { 100 70 40 }
+    basispreis = 8           # Pfund
+    weltmarkt  = 1.0         # nur über den Weltmarkt zu haben
+}

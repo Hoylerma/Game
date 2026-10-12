@@ -12,8 +12,12 @@ staat BBB {
         herrscher      = "König Eins"
         konfession     = katholisch
         schatz         = 2000
-        steuersatz     = 0.2
+        kontribution   = 0.2
+        akzise         = 0.04
+        zoll           = 0.02
         hofhaltung     = 8000
+        heer           = 8
+        schulden       = 1500
     }
 
     1701.01.18 = {

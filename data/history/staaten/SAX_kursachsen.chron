@@ -3,9 +3,10 @@
 # Staat zum Lesezeichen "Der Westfälische Frieden" (24.10.1648), Testregion M1.
 #
 # Format: docs/technik/chronik-skript.md, Abschnitt 3.5.
-# schatz, steuersatz und hofhaltung sind Spielwerte (Reichstaler), skaliert auf
-# die in der Testregion modellierten Orte dieses Staates – keine historischen
-# Haushaltszahlen. Kalibrierung: data/README.md, Abschnitt "Wirtschaftswerte".
+# schatz, hofhaltung, die Steuersätze (kontribution, akzise, zoll) und heer (Soldaten
+# je 1.000 Einwohner) sind Spielwerte, skaliert auf die in der Testregion modellierten
+# Orte dieses Staates – keine historischen Haushaltszahlen. Kalibrierung: data/README.md,
+# Abschnitt "Wirtschaftswerte".
 #
 # Kursachsen mit Erblanden, beiden Lausitzen und den magdeburgischen Ämtern. Die Sekundogenituren
 # (Weißenfels, Merseburg, Zeitz) entstehen erst nach dem Tod Johann Georgs I. (1656).
@@ -14,7 +15,7 @@ staat SAX {
     name     = "Kurfürstentum Sachsen"
     kurzname = "Kursachsen"
     farbe    = { 60 145 75 }
-    quelle   = "Kurfürst 1611–1656, führender evangelischer Reichsstand. Ober- und Niederlausitz seit dem Prager Frieden 1635 (Traditionsrezess 1636) als böhmisches Lehen; magdeburgische Ämter seit 1635. Wirtschaftlich stärker als Brandenburg (Bergbau, Leipziger Messe), aber ebenfalls kriegsbelastet. Schatz, Steuersatz und Hofhaltung sind Spielwerte"
+    quelle   = "Kurfürst 1611–1656, führender evangelischer Reichsstand. Ober- und Niederlausitz seit dem Prager Frieden 1635 (Traditionsrezess 1636) als böhmisches Lehen; magdeburgische Ämter seit 1635. Wirtschaftlich stärker als Brandenburg (Bergbau, Leipziger Messe), aber ebenfalls kriegsbelastet. Schatz, Steuersätze, Hofhaltung und Heer sind Spielwerte"
 
     1648.10.24 = {
         hauptstadt     = dresden
@@ -22,7 +23,10 @@ staat SAX {
         herrscher      = "Johann Georg I."
         konfession     = lutherisch
         schatz         = 92000
-        steuersatz     = 0.10
-        hofhaltung     = 153000
+        kontribution   = 0.10
+        akzise         = 0.05
+        zoll           = 0.04
+        hofhaltung     = 49000
+        heer           = 6
     }
 }

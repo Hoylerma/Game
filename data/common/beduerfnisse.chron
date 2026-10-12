@@ -1,0 +1,59 @@
+# Bedürfnisse und Warenkörbe (Meilenstein M5), nach Kapitel 07, Abschnitt 3.
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.12; Modell: docs/technik/wirtschaft.md,
+# Abschnitte 2.2 und 4.3.
+#   unten, mittel, oben – Warenkorb der Schicht: Menge je Kopf und Jahr (Kopf = alle Angehörigen
+#                         eines Haushalts, auch Kinder und Gesinde)
+#   hunger              – optional: fehlt dieses Bedürfnis, steigt die Sterblichkeit
+#
+# Die Reihenfolge der Bedürfnisse ist der Rang beim Einkauf: Wer wenig hat, kauft zuerst Brot,
+# dann Brennholz, dann Kleidung. Reicht das Einkommen für den ganzen Korb, wird von allem
+# entsprechend mehr gekauft.
+#
+# Größenordnungen (Spielwerte): Ein Erwachsener aß um 1700 etwa 2–3 Scheffel Brotgetreide im Jahr;
+# je Kopf eines Haushalts mit Kindern rund 3–4 Scheffel, dazu Getreide für Brei und Bier. Fleisch
+# war bei den Unterschichten selten. Umgerechnet zum Basispreis kostet der Korb je Kopf und Jahr
+# etwa 8 (unten), 18 (mittel) und 57 Reichstaler (oben).
+
+beduerfnis grundnahrung {
+    name   = "Grundnahrung"
+    hunger = ja
+    unten  = { getreide = 3.4 vieh = 0.15 salz = 0.04 }
+    mittel = { getreide = 3.8 vieh = 0.3 salz = 0.06 }
+    oben   = { getreide = 5 vieh = 1 salz = 0.1 }
+}
+
+beduerfnis waerme {
+    name   = "Wärme"
+    unten  = { holz = 0.3 }
+    mittel = { holz = 0.6 }
+    oben   = { holz = 1.25 }
+}
+
+beduerfnis kleidung {
+    name   = "Kleidung"
+    unten  = { tuch = 0.2 }
+    mittel = { tuch = 0.5 }
+    oben   = { tuch = 1.6 }
+}
+
+beduerfnis genuss {
+    name   = "Genuss"
+    unten  = { bier = 0.4 }
+    mittel = { bier = 1 wein = 0.07 }
+    oben   = { bier = 0.75 wein = 0.5 }
+}
+
+beduerfnis haushalt {
+    name   = "Haushalt"
+    unten  = { waren = 0.2 }
+    mittel = { waren = 0.67 }
+    oben   = { waren = 1.67 }
+}
+
+beduerfnis luxus {
+    name   = "Luxus"
+    unten  = { kolonialwaren = 0.025 }
+    mittel = { luxuswaren = 0.15 kolonialwaren = 0.125 wein = 0.05 }
+    oben   = { luxuswaren = 2 kolonialwaren = 0.75 wein = 0.33 }
+}

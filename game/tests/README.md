@@ -54,20 +54,26 @@ Prüft die GDExtension und die Kartendaten ohne Szene und ohne Grafikausgabe:
 3. Daten laden; Anzahl Staaten und Orte, Spielerstaat, Bevölkerung und Fläche > 0; alle
    Felder von `get_state` und `get_location` (seit M3 mit `has_data`, `kreis_index`,
    `kreis_name`, seit M4 mit Kultur, Altersgruppen, Lebensstandard, Alphabetisierung und
-   Vorjahresbilanz); `get_location_index` passt zu jedem Ort
+   Vorjahresbilanz, seit M5 mit Haushalt je Posten und Wirtschaft des Ortes);
+   `get_location_index` passt zu jedem Ort
 4. ungültige Indizes und Befehle werden abgewiesen (leere Rückgabe bzw. `false`, auch
-   `get_kreis` und `get_kreis_index`)
-5. `get_map_colors` liefert für alle acht Kartenmodi eine Farbe je Ort
+   `get_kreis`, `get_kreis_index`, `get_market` und `set_tax_percent` mit ungültiger Steuerart)
+5. `get_map_colors` liefert für alle zehn Kartenmodi eine Farbe je Ort
 6. Orte ohne Daten und Kreise: `get_location_owner_indices` und `get_location_kreis_indices`
    passen zu `get_location`; Orte ohne Daten haben keinen Besitzer und keine Bevölkerung;
    `get_kreis` hat alle Felder, `get_kreis_index` passt, `location_count` stimmt; Alpha der
-   Kartenfarben ist 0 genau für Orte ohne Daten in den Modi 0, 1, 2, 4, 6 und 7, sonst 1
-7. Steuerbefehl: `set_tax_rate_percent` wird angenommen und ist nach einem Tag wirksam
-8. 365 Tage simulieren; Datum (Kalenderrechnung im Test), `get_days_elapsed`, Datumstext
-9. Einnahmen, Ausgaben und Produktion > 0
-10. Chronik: Größe, Einträge mit allen Feldern, leere Abfrage hinter dem Ende
-11. Prüfsumme 16-stellig hexadezimal; ein zweiter Lauf mit denselben Befehlen ergibt dieselbe
-12. Karte (Fassung M3): `provinzen.png`, `fluesse.png` (Graustufen, gleiche Größe) und
+   Kartenfarben ist 0 genau für Orte ohne Daten in den Modi 0, 1, 2, 4, 6, 7 und 8, im Modus 9
+   (Märkte) nur für Orte ohne Daten in Märkten ohne Orte mit Daten, sonst 1
+7. Wirtschaft (seit M5): Märkte mit allen Feldern und Preisen, Marktindex je Ort, jeder Ort mit
+   Daten in einem aktiven Markt; Steuern je Art ergeben die Einnahmen, die Posten die Ausgaben;
+   die Hauptstadt des Spielerstaates hat Markt, Berufe mit Einkommen, Betriebe und Güter
+8. Steuerbefehle: `set_tax_rate_percent` (Kontribution) und `set_tax_percent` (Akzise) werden
+   angenommen und sind nach einem Tag wirksam; die Chronik meldet die neue Akzise
+9. 365 Tage simulieren; Datum (Kalenderrechnung im Test), `get_days_elapsed`, Datumstext
+10. Einnahmen, Ausgaben und Produktion > 0
+11. Chronik: Größe, Einträge mit allen Feldern, leere Abfrage hinter dem Ende
+12. Prüfsumme 16-stellig hexadezimal; ein zweiter Lauf mit denselben Befehlen ergibt dieselbe
+13. Karte (Fassung M3): `provinzen.png`, `fluesse.png` (Graustufen, gleiche Größe) und
     `definition.csv` (neue Kopfzeile) vorhanden; jeder Eintrag der CSV über
     `get_location_index` auflösbar, jeder Ort der Simulation in der CSV, keine Lücken;
     Bildgröße wie in `karte.chron`; Blaukanal ist eine Flächenart 0..3, bei B ≠ 0 kein Ort;
@@ -112,6 +118,10 @@ echten Daten und prüft:
    Linksklick (die Ortsinfo erscheint) liegt ohne Kamerabewegung kein Name unter einem Panel;
    in der mittleren Stufe bleibt der Kreisname Wilhelmshaven stehen, wenn der gleichnamige Ort
    ausgewählt ist; die ausgewählte Hauptstadt Berlin-Cölln steht im Hauptstadt-Stil.
+4. **Wirtschaft** (seit M5): Das Staatspanel hat drei Steuerregler; das Haushaltsfenster öffnet
+   sich und nennt alle Steuerarten und Posten; ein bewegter Akzise-Regler meldet „gilt ab dem
+   nächsten Tag“; die Ortsinfo der Hauptstadt zeigt Markt, Einkommen und Preise; der Wechsel in
+   den Kartenmodus „Märkte“ läuft ohne Fehler.
 
 ```bash
 godot --headless --path game --script res://tests/klick_test.gd
@@ -130,6 +140,7 @@ Ausgabe mit den echten Daten (4.542 Orte) unter xvfb:
   nah (Zoom 1.838, 48 Kacheln): 4542/4542 Orte richtig
   Eingabeereignisse: 122/122 Klicks richtig (1 Stichproben unter Panels übersprungen)
   Klick ins Meer hebt die Auswahl auf
+  Wirtschaft: 5 Prüfungen
 KLICK OK 4542/4542
 ```
 

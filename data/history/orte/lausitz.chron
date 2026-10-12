@@ -92,13 +92,14 @@ ort luebben {
 }
 
 ort guben {
-    name     = "Guben"
-    gelaende = flussaue
-    lage     = { 14.72 51.95 }
-    flaeche  = 373
-    stadt    = ja
-    kreis    = kr_sorau
-    quelle   = "Größte Stadt der Niederlausitz an der Neiße, Tuchmacherei und Weinbau. Bevölkerung Schätzung (Stadt mit Umland; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung nach regionaler Kriegsbetroffenheit geschätzt"
+    name      = "Guben"
+    gelaende  = flussaue
+    lage      = { 14.72 51.95 }
+    flaeche   = 373
+    stadt     = ja
+    kreis     = kr_sorau
+    vorkommen = { weinlage }
+    quelle    = "Größte Stadt der Niederlausitz an der Neiße, Tuchmacherei und Weinbau. Bevölkerung Schätzung (Stadt mit Umland; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung nach regionaler Kriegsbetroffenheit geschätzt"
 
     1648.10.24 = {
         besitzer     = SAX

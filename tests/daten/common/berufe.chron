@@ -2,7 +2,6 @@
 beruf bauern {
     name            = "Bauern"
     schicht         = unten
-    ertrag          = 6
     steuerpflichtig = ja
     anteil_stadt    = 0.10
     anteil_land     = 0.80
@@ -14,7 +13,6 @@ beruf bauern {
 beruf handwerker {
     name            = "Handwerker"
     schicht         = mittel
-    ertrag          = 12
     steuerpflichtig = ja
     anteil_stadt    = 0.50
     anteil_land     = 0.15
@@ -25,7 +23,6 @@ beruf handwerker {
 beruf kaufleute {
     name            = "Kaufleute"
     schicht         = oben
-    ertrag          = 30
     steuerpflichtig = yes
     anteil_stadt    = 0.30
     anteil_land     = 0          # auf dem Land keine Kaufleute → kein Block
@@ -36,10 +33,10 @@ beruf kaufleute {
 beruf adel {
     name            = "Adel"
     schicht         = oben
-    ertrag          = 20
     steuerpflichtig = nein       # privilegiert
     anteil_stadt    = 0.10
     anteil_land     = 0.05
     agrar           = nein
     bildung         = 0.8
+    agrarabgabe     = 0.3        # seit M5
 }

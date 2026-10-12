@@ -19,7 +19,8 @@ enum class RngStream : std::uint64_t {
     Wirtschaft = 2,
     Ereignisse = 3,
     Ki = 4,
-    Lasttest = 5, // seit M4: Aufbau der Lasttest-Welt (uhrwerk/lasttest.hpp), nicht in der Simulation
+    Lasttest = 5,    // seit M4: Aufbau der Lasttest-Welt (uhrwerk/lasttest.hpp), nicht in der Simulation
+    Testbefehle = 6, // seit M6: Testbefehle der Kommandozeile (--testbefehle), nicht in der Simulation
 };
 
 class Pcg32 {
@@ -79,6 +80,13 @@ public:
 
     constexpr std::uint64_t state() const { return state_; }
     constexpr std::uint64_t increment() const { return inc_; }
+
+    /// Zustand wiederherstellen, wie ihn state() und increment() geliefert haben (Spielstände,
+    /// seit M6). Ein Strom mit geradem increment ist ungültig; der Aufrufer prüft das.
+    constexpr void restore(std::uint64_t state, std::uint64_t increment) {
+        state_ = state;
+        inc_ = increment;
+    }
 
 private:
     std::uint64_t state_ = 0;

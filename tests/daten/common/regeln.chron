@@ -35,4 +35,34 @@ regeln {
     auswanderung_rate         = 0.05
     block_mindestgroesse      = 1
     wanderung_mindestmenge    = 0.05
+
+    # Wirtschaft und Staatshaushalt (seit M5), Werte wie in data/common/regeln.chron
+    preis_min                 = 0.25
+    preis_max                 = 4
+    preis_anpassung           = 0.3
+    handel_nachbarn           = 6
+    handel_radius_km          = 180
+    handel_rate               = 5
+    handel_fracht             = 0.12
+    seefracht                 = 0.10
+    handelsspanne             = 0.25    # Testdaten: viele Kaufleute in den Städten
+    betrieb_anpassung         = 0.03
+    betrieb_min_anteil        = 0.02
+    ernte_schwankung_land     = 0.08
+    ernte_schwankung_markt    = 0.10
+    sterblichkeit_hunger      = 1.5
+    einschwingen_monate       = 60
+    verwaltung_je_einwohner   = 0.15
+    sold                      = 30
+    reserve_jahre             = 0.5
+    bau_anteil                = 0.05
+    ausbau_max                = 0.3
+    ausbau_halb               = 200
+    zins_basis                = 0.05
+    zins_risiko               = 0.02
+    zins_max                  = 0.2
+    bankrott_quote            = 4
+    bankrott_schnitt          = 0.5
+    bankrott_aufschlag        = 0.04
+    bankrott_jahre            = 20
 }

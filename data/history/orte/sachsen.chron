@@ -18,13 +18,14 @@
 # um Wittenberg).
 
 ort dresden {
-    name     = "Dresden"
-    gelaende = flussaue
-    lage     = { 13.74 51.05 }
-    flaeche  = 138
-    stadt    = ja
-    kreis    = kr_dresden
-    quelle   = "Residenz und Festung des Kurfürsten Johann Georg I.; im Krieg nicht eingenommen. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung)"
+    name      = "Dresden"
+    gelaende  = flussaue
+    lage      = { 13.74 51.05 }
+    flaeche   = 138
+    stadt     = ja
+    kreis     = kr_dresden
+    vorkommen = { weinlage }
+    quelle    = "Residenz und Festung des Kurfürsten Johann Georg I.; im Krieg nicht eingenommen. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung)"
 
     1648.10.24 = {
         besitzer     = SAX

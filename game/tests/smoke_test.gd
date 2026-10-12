@@ -1,5 +1,5 @@
 extends SceneTree
-## Rauchtest der Brücke und der Kartendaten (Godot-Seite, Fassung M3).
+## Rauchtest der Brücke und der Kartendaten (Godot-Seite, Fassung M5).
 ##
 ## Aufruf aus dem Repository-Hauptordner (nach einem Import des Projekts):
 ##   godot --headless --path game --script res://tests/smoke_test.gd
@@ -24,6 +24,20 @@ const STATE_FIELDS: PackedStringArray = [
 	"location_count",
 	"balance_previous",
 	"living_standard",
+	"tax_rates_percent",
+	"taxes_month",
+	"court_month",
+	"administration_month",
+	"army_month",
+	"interest_month",
+	"building_month",
+	"debt",
+	"interest_percent",
+	"yearly_income",
+	"army_per_mille",
+	"soldiers",
+	"bankruptcies",
+	"premium_months",
 ]
 const LOCATION_FIELDS: PackedStringArray = [
 	"id",
@@ -53,10 +67,26 @@ const LOCATION_FIELDS: PackedStringArray = [
 	"living_standard",
 	"literacy_percent",
 	"balance_previous",
+	"market_index",
+	"market_name",
+	"is_port",
+	"development_percent",
+	"production_per_capita",
+	"professions",
+	"businesses",
+	"goods",
+]
+const MARKET_FIELDS: PackedStringArray = [
+	"id", "name", "location_count", "active", "is_port", "harvest", "goods"
+]
+const MARKET_GOOD_FIELDS: PackedStringArray = [
+	"id", "name", "color", "base_price", "price", "price_factor", "supply", "demand", "imports",
+	"exports", "buy_percent"
 ]
 const KREIS_FIELDS: PackedStringArray = ["id", "name", "location_count", "source"]
-## Kartenmodi, in denen Orte ohne Daten Alpha 0 haben (bridge-api.md).
-const NO_DATA_ALPHA_MODES: PackedInt32Array = [0, 1, 2, 4, 6, 7]
+## Kartenmodi, in denen Orte ohne Daten Alpha 0 haben (bridge-api.md); im Marktmodus (9)
+## nur Orte ohne Daten in Märkten ohne Orte mit Daten.
+const NO_DATA_ALPHA_MODES: PackedInt32Array = [0, 1, 2, 4, 6, 7, 8]
 const CHRONICLE_FIELDS: PackedStringArray = ["date_text", "text", "location_index", "state_index"]
 
 var _failures := PackedStringArray()
@@ -120,14 +150,23 @@ func _run() -> void:
 	_check_invalid_indices(sim, max_tax, player)
 	_check_map_colors(sim)
 	_check_data_and_kreise(sim)
+	_check_economy(sim, player)
 
-	# Steuerbefehl: wirksam am nächsten Tag.
+	# Steuerbefehle: wirksam am nächsten Tag; Kontribution über den alten Befehl, Akzise über
+	# set_tax_percent (seit M5).
 	var old_tax := int(sim.get_state(player).get("tax_rate_percent", -1))
 	var new_tax := old_tax + 2 if old_tax + 2 <= max_tax else maxi(old_tax - 2, 0)
 	_check(
 		sim.set_tax_rate_percent(player, new_tax),
 		"Steuerbefehl angenommen",
 		"set_tax_rate_percent(%d, %d) lieferte false" % [player, new_tax]
+	)
+	var old_rates: Array = sim.get_state(player).get("tax_rates_percent", [0, 0, 0])
+	var new_excise := int(old_rates[SimulationClient.TAX_AKZISE]) + 1
+	_check(
+		sim.set_tax_percent(player, SimulationClient.TAX_AKZISE, new_excise),
+		"Akzise-Befehl angenommen",
+		"set_tax_percent(%d, Akzise, %d) lieferte false" % [player, new_excise]
 	)
 	sim.advance_days(1)
 	var tax_after := int(sim.get_state(player).get("tax_rate_percent", -1))
@@ -136,12 +175,27 @@ func _run() -> void:
 		"Steuersatz nach einem Tag %d %% (vorher %d %%)" % [tax_after, old_tax],
 		"Steuersatz nach einem Tag %d statt %d" % [tax_after, new_tax]
 	)
+	var rates_after: Array = sim.get_state(player).get("tax_rates_percent", [])
+	_check(
+		rates_after.size() == 3
+		and int(rates_after[SimulationClient.TAX_KONTRIBUTION]) == new_tax
+		and int(rates_after[SimulationClient.TAX_AKZISE]) == new_excise
+		and int(rates_after[SimulationClient.TAX_ZOLL]) == int(old_rates[SimulationClient.TAX_ZOLL]),
+		"Sätze nach einem Tag %s" % str(rates_after),
+		"Sätze nach einem Tag %s, erwartet Kontribution %d und Akzise %d" % [
+			str(rates_after), new_tax, new_excise
+		]
+	)
+	var excise_entry := false
+	for entry in sim.get_chronicle(0):
+		excise_entry = excise_entry or str(entry["text"]).contains("legt die Akzise auf")
+	_check(excise_entry, "Chronik meldet die neue Akzise", "kein Chronikeintrag zur Akzise")
 
 	sim.advance_days(DAYS_TO_SIMULATE - 1)
 	_check_date(sim, start)
 	_check_after_simulation(sim, player)
 	_check_chronicle(sim)
-	_check_determinism(sim, player, new_tax)
+	_check_determinism(sim, player, new_tax, new_excise)
 	if _check_map:
 		_check_map_files(sim)
 	else:
@@ -240,6 +294,11 @@ func _check_invalid_indices(sim: SimulationClient, max_tax: int, player: int) ->
 		and not sim.set_tax_rate_percent(sim.get_state_count(), 10)
 		and not sim.set_tax_rate_percent(player, max_tax + 1)
 		and not sim.set_tax_rate_percent(player, -1)
+		and not sim.set_tax_percent(player, -1, 10)
+		and not sim.set_tax_percent(player, SimulationClient.TAX_KIND_COUNT, 10)
+		and not sim.set_tax_percent(player, SimulationClient.TAX_ZOLL, max_tax + 1)
+		and sim.get_market(-1).is_empty()
+		and sim.get_market(sim.get_market_count()).is_empty()
 	)
 	_check(
 		rejected,
@@ -333,11 +392,18 @@ func _check_data_and_kreise(sim: SimulationClient) -> void:
 		"%d Kreise, %d Orte ohne Kreis; location_count stimmt" % [kreis_count, without_kreis],
 		"location_count der Kreise passt nicht zu den Orten"
 	)
+	var market_of := sim.get_location_market_indices()
+	var active_market := {}
+	for market in sim.get_market_count():
+		if bool(sim.get_market(market).get("active", false)):
+			active_market[market] = true
 	for mode in MapModes.COUNT:
 		var colors := sim.get_map_colors(mode)
 		var wrong := 0
 		for index in mini(colors.size(), count):
 			var expect_clear := NO_DATA_ALPHA_MODES.has(mode) and owners[index] < 0
+			if mode == MapModes.MAP_MAERKTE:
+				expect_clear = owners[index] < 0 and not active_market.has(market_of[index])
 			if expect_clear != (colors[index].a == 0.0) or (
 				not expect_clear and colors[index].a != 1.0
 			):
@@ -345,9 +411,92 @@ func _check_data_and_kreise(sim: SimulationClient) -> void:
 		_check(
 			wrong == 0,
 			"",
-			"Kartenmodus %d: %d Orte mit falschem Alpha (0 nur für Orte ohne Daten in 0, 1, 2, 4, 6, 7)"
+			"Kartenmodus %d: %d Orte mit falschem Alpha (0 nur für Orte ohne Daten, Märkte: ohne aktiven Markt)"
 			% [mode, wrong]
 		)
+
+
+## Wirtschaft (seit M5): Märkte, Haushalt und Wirtschaft der Orte.
+func _check_economy(sim: SimulationClient, player: int) -> void:
+	var market_count := sim.get_market_count()
+	var market_of := sim.get_location_market_indices()
+	_check(
+		market_count > 0 and market_of.size() == sim.get_location_count(),
+		"%d Märkte, Marktindex je Ort" % market_count,
+		"keine Märkte oder Marktindizes passen nicht zu den Orten"
+	)
+	var active := 0
+	var fields_ok := true
+	var prices_ok := true
+	for market in market_count:
+		var info := sim.get_market(market)
+		for key in MARKET_FIELDS:
+			fields_ok = fields_ok and info.has(key)
+		if not bool(info.get("active", false)):
+			continue
+		active += 1
+		for good: Dictionary in info.get("goods", []):
+			for key in MARKET_GOOD_FIELDS:
+				fields_ok = fields_ok and good.has(key)
+			prices_ok = prices_ok and float(good.get("price", 0.0)) > 0.0
+	_check(fields_ok, "", "get_market liefert nicht alle Felder")
+	_check(active > 0 and prices_ok, "%d aktive Märkte mit Preisen" % active, "Märkte ohne Preise")
+	var with_data_ok := true
+	for index in sim.get_location_count():
+		var location := sim.get_location(index)
+		if bool(location.get("has_data", false)):
+			var market := int(location.get("market_index", -1))
+			with_data_ok = (
+				with_data_ok and market >= 0 and market == market_of[index]
+				and bool(sim.get_market(market).get("active", false))
+			)
+	_check(with_data_ok, "", "ein Ort mit Daten liegt in keinem aktiven Markt")
+
+	var state := sim.get_state(player)
+	var taxes: Array = state.get("taxes_month", [])
+	var tax_sum := 0.0
+	for amount: Variant in taxes:
+		tax_sum += float(amount)
+	_check(
+		taxes.size() == 3 and absf(tax_sum - float(state.get("income_month", 0.0))) < 0.01,
+		"Haushalt: Steuern je Art ergeben die Einnahmen (%s)" % GermanFormat.money(tax_sum),
+		"Steuern je Art %s passen nicht zu den Einnahmen %s" % [
+			str(taxes), str(state.get("income_month", 0.0))
+		]
+	)
+	var expenses := 0.0
+	for key in ["court_month", "administration_month", "army_month", "interest_month", "building_month"]:
+		expenses += float(state.get(key, 0.0))
+	_check(
+		absf(expenses - float(state.get("expenses_month", 0.0))) < 0.01
+		and int(state.get("soldiers", 0)) > 0,
+		"Haushalt: Posten ergeben die Ausgaben, %s Soldaten" % GermanFormat.integer(
+			int(state.get("soldiers", 0))
+		),
+		"Posten %s passen nicht zu den Ausgaben %s" % [
+			str(expenses), str(state.get("expenses_month", 0.0))
+		]
+	)
+
+	var capital := sim.get_location(int(state.get("capital_index", -1)))
+	var professions: Array = capital.get("professions", [])
+	var businesses: Array = capital.get("businesses", [])
+	var goods: Array = capital.get("goods", [])
+	var income_ok := true
+	for row: Dictionary in professions:
+		income_ok = income_ok and float(row.get("income_year", 0.0)) > 0.0
+	_check(
+		not professions.is_empty() and not businesses.is_empty() and not goods.is_empty() and income_ok
+		and not str(capital.get("market_name", "")).is_empty(),
+		(
+			"Hauptstadt %s: Markt %s, %d Berufe, %d Betriebe, %d Güter"
+			% [
+				str(capital.get("name", "")), str(capital.get("market_name", "")),
+				professions.size(), businesses.size(), goods.size()
+			]
+		),
+		"Hauptstadt ohne Wirtschaftsdaten"
+	)
 
 
 func _check_date(sim: SimulationClient, start: Dictionary) -> void:
@@ -428,10 +577,13 @@ func _check_chronicle(sim: SimulationClient) -> void:
 	)
 
 
-func _check_determinism(sim: SimulationClient, player: int, new_tax: int) -> void:
+func _check_determinism(
+	sim: SimulationClient, player: int, new_tax: int, new_excise: int
+) -> void:
 	var twin := SimulationClient.create()
 	twin.load_scenario(UhrwerkPaths.data_dir())
 	twin.set_tax_rate_percent(player, new_tax)
+	twin.set_tax_percent(player, SimulationClient.TAX_AKZISE, new_excise)
 	twin.advance_days(DAYS_TO_SIMULATE)
 	var checksum := sim.get_checksum()
 	_check(

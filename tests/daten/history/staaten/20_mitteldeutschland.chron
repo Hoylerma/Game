@@ -8,8 +8,11 @@ staat SAX {
     herrscher      = "Johann Georg I."
     konfession     = lutherisch
     schatz         = 50000
-    steuersatz     = 0.12
-    hofhaltung     = 60000
+    kontribution   = 0.12
+    akzise         = 0.06
+    zoll           = 0.04
+    hofhaltung     = 5000
+    heer           = 6
     quelle         = "Testdaten, geschätzt"
 }
 
@@ -22,7 +25,11 @@ staat ANH {
     herrscher      = "Johann Kasimir"
     konfession     = reformiert
     schatz         = 3000
-    steuersatz     = 0.08
-    hofhaltung     = 4000
+    kontribution   = 0.08
+    akzise         = 0.04
+    zoll           = 0.02
+    hofhaltung     = 2000
+    heer           = 4
+    schulden       = 1500
     quelle         = "Testdaten, geschätzt"
 }

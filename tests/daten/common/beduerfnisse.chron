@@ -1,0 +1,22 @@
+# Testdaten: Bedürfnisse (seit M5). Reihenfolge = Rang beim Einkauf.
+beduerfnis nahrung {
+    name   = "Nahrung"
+    hunger = ja
+    unten  = { getreide = 4 salz = 0.05 }
+    mittel = { getreide = 4.5 salz = 0.08 }
+    oben   = { getreide = 5 salz = 0.1 }
+}
+
+beduerfnis kleidung {
+    name   = "Kleidung"
+    unten  = { tuch = 0.4 }
+    mittel = { tuch = 1.2 }
+    oben   = { tuch = 2.5 kolonialwaren = 0.5 }
+}
+
+beduerfnis luxus {
+    name   = "Luxus"
+    unten  = { }
+    mittel = { kolonialwaren = 0.1 }
+    oben   = { kolonialwaren = 1 }
+}

@@ -28,6 +28,7 @@ ort stettin {
     flaeche  = 225
     stadt    = ja
     kreis    = kr_stettin
+    hafen    = ja
     quelle   = "Seit 1630 schwedisch besetzt, 1648 an Schweden; Sitz der schwedischen Regierung in Pommern, Oderhandel. Bevölkerung Schätzung (Stadt mit Umland; Größenordnung nach Literatur zur Bevölkerungsentwicklung)"
 
     1648.10.24 = {
@@ -46,6 +47,7 @@ ort stralsund {
     flaeche  = 176
     stadt    = ja
     kreis    = kr_stralsund
+    hafen    = ja
     quelle   = "Hansestadt am Strelasund, 1628 erfolgreich gegen Wallenstein verteidigt, seither mit Schweden verbündet und schwedisch besetzt. Bevölkerung Schätzung (Größenordnung nach Literatur zur Bevölkerungsentwicklung)"
 
     1648.10.24 = {
@@ -64,6 +66,7 @@ ort greifswald {
     flaeche  = 299
     stadt    = ja
     kreis    = kr_greifswald
+    hafen    = ja
     quelle   = "Hansestadt und Universität (gegründet 1456). Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung nach regionaler Kriegsbetroffenheit geschätzt"
 
     1648.10.24 = {
@@ -82,6 +85,7 @@ ort anklam {
     flaeche  = 294
     stadt    = nein
     kreis    = kr_greifswald
+    hafen    = ja
     quelle   = "Hansestadt an der Peene. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung nach regionaler Kriegsbetroffenheit geschätzt"
 
     1648.10.24 = {
@@ -112,13 +116,15 @@ ort stargard {
 }
 
 ort kolberg {
-    name     = "Kolberg"
-    gelaende = kueste
-    lage     = { 15.58 54.18 }
-    flaeche  = 124
-    stadt    = ja
-    kreis    = kr_koeslin
-    quelle   = "Hafen- und Salzstadt im weltlichen Gebiet des Stifts Cammin; 1648 an Brandenburg zugesprochen, bis 1653 schwedisch besetzt. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung)"
+    name      = "Kolberg"
+    gelaende  = kueste
+    lage      = { 15.58 54.18 }
+    flaeche   = 124
+    stadt     = ja
+    kreis     = kr_koeslin
+    vorkommen = { salz }
+    hafen     = ja
+    quelle    = "Hafen- und Salzstadt im weltlichen Gebiet des Stifts Cammin; 1648 an Brandenburg zugesprochen, bis 1653 schwedisch besetzt. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung)"
 
     1648.10.24 = {
         besitzer     = BRA
@@ -154,6 +160,7 @@ ort cammin {
     flaeche  = 254
     stadt    = nein
     kreis    = kr_wollin
+    hafen    = ja
     quelle   = "Bischofsstadt des 1648 säkularisierten Stifts Cammin an der Dievenow; an Brandenburg zugesprochen, bis 1653 schwedisch besetzt. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung)"
 
     1648.10.24 = {

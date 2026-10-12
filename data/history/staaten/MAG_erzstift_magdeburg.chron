@@ -3,9 +3,10 @@
 # Staat zum Lesezeichen "Der Westfälische Frieden" (24.10.1648), Testregion M1.
 #
 # Format: docs/technik/chronik-skript.md, Abschnitt 3.5.
-# schatz, steuersatz und hofhaltung sind Spielwerte (Reichstaler), skaliert auf
-# die in der Testregion modellierten Orte dieses Staates – keine historischen
-# Haushaltszahlen. Kalibrierung: data/README.md, Abschnitt "Wirtschaftswerte".
+# schatz, hofhaltung, die Steuersätze (kontribution, akzise, zoll) und heer (Soldaten
+# je 1.000 Einwohner) sind Spielwerte, skaliert auf die in der Testregion modellierten
+# Orte dieses Staates – keine historischen Haushaltszahlen. Kalibrierung: data/README.md,
+# Abschnitt "Wirtschaftswerte".
 #
 # Geistliches Territorium unter einem lutherischen Administrator aus dem Haus Wettin.
 
@@ -13,7 +14,7 @@ staat MAG {
     name     = "Erzstift Magdeburg"
     kurzname = "Magdeburg"
     farbe    = { 165 40 55 }
-    quelle   = "Administrator August, Herzog zu Sachsen (postuliert 1628, im Besitz seit 1638, ab 1656 Herzog von Sachsen-Weißenfels), Residenz Halle. IPO Art. XI: Anwartschaft Brandenburgs, Übergang als Herzogtum nach Augusts Tod 1680. Ämter Jüterbog, Dahme, Querfurt und Burg seit 1635 kursächsisch. Schatz, Steuersatz und Hofhaltung sind Spielwerte"
+    quelle   = "Administrator August, Herzog zu Sachsen (postuliert 1628, im Besitz seit 1638, ab 1656 Herzog von Sachsen-Weißenfels), Residenz Halle. IPO Art. XI: Anwartschaft Brandenburgs, Übergang als Herzogtum nach Augusts Tod 1680. Ämter Jüterbog, Dahme, Querfurt und Burg seit 1635 kursächsisch. Schatz, Steuersätze, Hofhaltung und Heer sind Spielwerte"
 
     1648.10.24 = {
         hauptstadt     = halle
@@ -21,7 +22,10 @@ staat MAG {
         herrscher      = "August von Sachsen (Administrator)"
         konfession     = lutherisch
         schatz         = 4500
-        steuersatz     = 0.10
-        hofhaltung     = 23000
+        kontribution   = 0.10
+        akzise         = 0.04
+        zoll           = 0.03
+        hofhaltung     = 7000
+        heer           = 4
     }
 }

@@ -13,6 +13,8 @@ extends SceneTree
 ##    auf den Beschriftungspunkt an einer freien Stelle der Karte (nicht unter Panels);
 ##    danach muss die Hauptszene genau diesen Ort ausgewählt haben. Ein Klick ins Meer
 ##    hebt die Auswahl auf.
+## 4. Wirtschaft (seit M5): drei Steuerregler, Haushaltsfenster, Abschnitt Wirtschaft im
+##    Ortspanel, Kartenmodus „Märkte“.
 ## 3. Namen und Panels (MapLabels.record_drawn, vor 1. und 2.): Nach einem Moduswechsel
 ##    und nach der ersten Auswahl per Klick liegt ohne Kamerabewegung kein Name unter
 ##    einem Panel;
@@ -106,6 +108,7 @@ func _run() -> void:
 	print("  Eingabeereignisse: %d/%d Klicks richtig (%d Stichproben unter Panels übersprungen)"
 		% [event_ok, event_total, skipped])
 	await _check_click_into_sea()
+	await _check_economy_ui(sim)
 
 	if _failure_count == 0 and all_levels == testable.size() and event_ok == event_total:
 		print("KLICK OK %d/%d" % [all_levels, testable.size()])
@@ -321,6 +324,51 @@ func _check_labels() -> void:
 	_main.call("select_location", -1)
 	labels.record_drawn = false
 	print("  Namen und Panels: %d Prüfungen" % checks)
+
+
+## Wirtschaft in der Oberfläche (seit M5).
+func _check_economy_ui(sim: SimulationClient) -> void:
+	var checks := 0
+	var panel: StatePanel = _main.call("state_panel")
+	var sliders := panel.find_children("*", "HSlider", true, false)
+	if sliders.size() != 3:
+		_fail("Wirtschaft: %d statt 3 Steuerregler im Staatspanel" % sliders.size())
+	checks += 1
+	panel.show_budget()
+	await _frames(2)
+	var budget := panel.budget_text()
+	for part in ["Kontribution", "Akzise", "Zoll", "Hof", "Verwaltung", "Heer (", "Zinsen", "Schulden"]:
+		if not budget.contains(part):
+			_fail("Wirtschaft: Haushaltsfenster ohne „%s“" % part)
+	if not panel.is_budget_visible():
+		_fail("Wirtschaft: Haushaltsfenster nicht sichtbar")
+	checks += 2
+	# Ein Regler (ohne Ziehen) schickt sofort einen Befehl; der Hinweis nennt die Steuerart.
+	var excise: HSlider = sliders[1]
+	excise.value = excise.value + 1.0
+	var hint := panel.find_child("TaxHint", true, false) as Label
+	if hint == null or not hint.text.contains("Akzise"):
+		_fail("Wirtschaft: kein Hinweis zur neuen Akzise (%s)" % (hint.text if hint else "–"))
+	checks += 1
+
+	var player := sim.get_player_state_index()
+	var capital := int(sim.get_state(player).get("capital_index", -1))
+	_main.call("select_location", capital)
+	await _frames(2)
+	var location: LocationPanel = _main.call("location_panel")
+	var economy := location.find_child("Economy", true, false) as VBoxContainer
+	var texts := PackedStringArray()
+	for label: Node in economy.find_children("*", "Label", true, false):
+		texts.append((label as Label).text)
+	var joined := " | ".join(texts)
+	if not (joined.contains("Markt") and joined.contains("Taler") and joined.contains("×")):
+		_fail("Wirtschaft: Ortspanel ohne Markt, Einkommen oder Preise (%s)" % joined.left(120))
+	checks += 1
+	_main.call("set_map_mode", MapModes.MAP_MAERKTE)
+	await _frames(2)
+	_main.call("set_map_mode", MapModes.MAP_POLITICAL)
+	_main.call("select_location", -1)
+	print("  Wirtschaft: %d Prüfungen" % checks)
 
 
 ## Kein gezeichneter Name liegt unter einem sichtbaren Bedienelement.

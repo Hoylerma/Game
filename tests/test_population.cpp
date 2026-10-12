@@ -37,35 +37,24 @@ PopBlock block(Index location, Index profession, Index confession, Index culture
 TEST_CASE("Bevölkerung: Kennzahlen eines Ortes (Abschnitt 4.1)") {
     World w = testhilfen::load_fixture();
     uhrwerk::LocationFactors f;
-    // Potsdam: Land, Sandboden (Tragfähigkeit 20/km², Ertrag 0,75), 120 km², 1500 Einwohner,
-    // Verwüstung 0,6, Brandenburg 10 % Steuern.
+    // Potsdam: Land, Sandboden (Tragfähigkeit 20/km²), 120 km², 1500 Einwohner, Verwüstung 0,6.
     const uhrwerk::Location& potsdam = w.locations[1];
     REQUIRE(potsdam.id == "potsdam");
-    uhrwerk::compute_location_factors(w, potsdam, fx("0.10"), f);
+    uhrwerk::compute_location_factors(w, 1, f);
     CHECK(f.population == w.location_population(1));
     CHECK(f.capacity == potsdam.area_km2 * Fixed::from_int(20));
     CHECK(f.reserve == Fixed::one() - f.population / f.capacity);
     CHECK(f.condition == Fixed::one() - fx("0.6") * fx("0.5"));
-    REQUIRE(f.yield.size() == w.professions.size());
-    // Bauern: 6 × 0,75 × 0,7, nicht übervölkert → Agrarfaktor 1.
-    CHECK(f.yield[0] == Fixed::from_int(6) * w.terrains[2].yield_factor * f.condition);
-    const Fixed net = f.yield[0] * (Fixed::one() - fx("0.10"));
-    CHECK(f.target[0] == Fixed::from_int(100) * net / (net + Fixed::from_int(12)));
-    // Adel ist steuerfrei.
-    const Fixed noble = f.yield[3];
-    CHECK(f.target[3] == Fixed::from_int(100) * noble / (noble + Fixed::from_int(12)));
+    CHECK(f.agrarian == Fixed::one()); // nicht übervölkert
 
-    SUBCASE("übervölkert: Agrarberufe teilen sich die Tragfähigkeit") {
+    SUBCASE("übervölkert: Agrarbetriebe teilen sich die Tragfähigkeit") {
         for (Index p = potsdam.first_pop; p < potsdam.first_pop + potsdam.pop_count; ++p) {
             w.pops[static_cast<std::size_t>(p)].working += Fixed::from_int(5000);
         }
-        uhrwerk::compute_location_factors(w, potsdam, fx("0.10"), f);
+        uhrwerk::compute_location_factors(w, 1, f);
         CHECK(f.population > f.capacity);
         CHECK(f.reserve == Fixed::zero());
-        const Fixed agrarian = f.capacity / f.population;
-        CHECK(f.yield[0] == Fixed::from_int(6) * w.terrains[2].yield_factor * f.condition * agrarian);
-        // Handwerker sind kein Agrarberuf.
-        CHECK(f.yield[1] == Fixed::from_int(12) * w.terrains[2].yield_factor * f.condition);
+        CHECK(f.agrarian == f.capacity / f.population);
     }
 }
 

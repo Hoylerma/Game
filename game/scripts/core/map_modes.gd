@@ -11,7 +11,9 @@ const MAP_DEVASTATION := 4
 const MAP_KREISE := 5
 const MAP_LEBENSSTANDARD := 6
 const MAP_KULTUR := 7
-const COUNT := 8
+const MAP_WIRTSCHAFT := 8
+const MAP_MAERKTE := 9
+const COUNT := 10
 
 ## Anzeigenamen der Modi (Index = Modus).
 const NAMES: PackedStringArray = [
@@ -23,9 +25,11 @@ const NAMES: PackedStringArray = [
 	"Kreise",
 	"Lebensstandard",
 	"Kultur",
+	"Wirtschaftsleistung",
+	"Märkte",
 ]
 
-## Kurznamen für die Knöpfe der Modusleiste (Index = Modus); seit M4 mit acht Modi,
+## Kurznamen für die Knöpfe der Modusleiste (Index = Modus); seit M4 kurz gehalten,
 ## damit die Leiste zwischen die Spalten passt.
 const SHORT_NAMES: PackedStringArray = [
 	"Politisch",
@@ -36,6 +40,8 @@ const SHORT_NAMES: PackedStringArray = [
 	"Kreise",
 	"Lebensstandard",
 	"Kultur",
+	"Wirtschaft",
+	"Märkte",
 ]
 
 ## Kurze Erklärung für Tooltips der Modusleiste.
@@ -48,6 +54,8 @@ const DESCRIPTIONS: PackedStringArray = [
 	"Kreise (je 4–12 Orte)",
 	"Mittlerer Lebensstandard der Einwohner (0–100)",
 	"Mehrheitskultur (Landsmannschaft) der Orte",
+	"Wirtschaftsleistung je Einwohner und Jahr (Reichstaler)",
+	"Märkte: Orte, die gemeinsam handeln und Preise bilden",
 ]
 
 ## Aktionen der Eingabebelegung (project.godot), Index = Modus.
@@ -60,20 +68,32 @@ const ACTIONS: Array[StringName] = [
 	&"kartenmodus_kreise",
 	&"kartenmodus_lebensstandard",
 	&"kartenmodus_kultur",
+	&"kartenmodus_wirtschaft",
+	&"kartenmodus_maerkte",
 ]
 
 ## Tastenbezeichnung für die Anzeige, Index = Modus. Die Belegung nutzt physische
 ## Tasten: „Z“ ist die Taste rechts neben T (auf englischen Tastaturen „Y“).
-const KEY_HINTS: PackedStringArray = ["Q", "W", "E", "R", "T", "Z", "U", "I"]
+const KEY_HINTS: PackedStringArray = ["Q", "W", "E", "R", "T", "Z", "U", "I", "O", "P"]
 
 ## Modi, deren Farben von der Simulation abhängen; dort erhalten Orte ohne Daten
-## Alpha 0 (Schraffur „keine Daten“, bridge-api.md).
+## Alpha 0 (Schraffur „keine Daten“, bridge-api.md). Im Marktmodus gilt das nur für
+## Märkte ohne Orte mit Daten.
 const DATA_MODES: PackedInt32Array = [
-	MAP_POLITICAL, MAP_DENSITY, MAP_CONFESSION, MAP_DEVASTATION, MAP_LEBENSSTANDARD, MAP_KULTUR
+	MAP_POLITICAL,
+	MAP_DENSITY,
+	MAP_CONFESSION,
+	MAP_DEVASTATION,
+	MAP_LEBENSSTANDARD,
+	MAP_KULTUR,
+	MAP_WIRTSCHAFT,
+	MAP_MAERKTE,
 ]
 
 ## Obergrenze der Dichteskala der Brücke (≥ 120 Einwohner je km² → dunkelste Farbe).
 const DENSITY_SCALE_MAX := 120.0
+## Obergrenze der Wirtschaftsskala der Brücke (≥ 16 Reichstaler je Einwohner und Jahr).
+const ECONOMY_SCALE_MAX := 16.0
 
 
 static func is_valid(mode: int) -> bool:

@@ -8,6 +8,51 @@ Vor Version 1.0 kann sich jede Schnittstelle ändern.
 
 ## [Unveröffentlicht]
 
+### Meilenstein M5 – Wirtschaft und Staatshaushalt
+
+Einkommen, Preise und Steuern entstehen jetzt aus einem Wirtschaftskreislauf mit Gütern, Betrieben
+und regionalen Märkten, und die Staaten führen einen Haushalt mit Hof, Verwaltung, Heer, Zinsen und
+Bauten, mit Kredit und Staatsbankrott. **Über 100 Jahre und 32 Seeds bleibt jeder Staat ohne
+Bankrott bei etwa einer Jahreseinnahme Vermögen.** Ergebnis und bekannte Grenzen:
+[docs/meilensteine.md](docs/meilensteine.md#m5--wirtschaft-und-staatshaushalt-).
+
+- **Vertrag:** [technik/wirtschaft.md](docs/technik/wirtschaft.md) (neu, verbindlich): Güter,
+  Bedürfnisse, Betriebe, Märkte und Handel, Ortsrechnung, Staatshaushalt, Ernte, Einschwingen,
+  Balancing-Bericht, Abnahme mit Messwerten. [chronik-skript.md](docs/technik/chronik-skript.md)
+  Abschnitte 3.11–3.15, [bridge-api.md](docs/technik/bridge-api.md),
+  [tabellen.md](docs/technik/tabellen.md) ergänzt.
+- **Kern:**
+  - Wirtschaft (`uhrwerk/economy.hpp`): Märkte am Monatsersten mit Preisen aus Angebot und
+    Nachfrage, Handel mit Nachbarmärkten und über Häfen mit dem Weltmarkt; Ortsrechnung am
+    Rechentag (parallel) mit Erzeugung, Grundrente und Zehnt, Kontribution, Verbrauch nach
+    Warenkorb, Akzise und Zoll, Bedarfsdeckung und Betriebsanteilen; Erntefaktor je Markt und
+    Jahr (Strom Wirtschaft); Einschwingen über 60 Monate beim Laden. Hunger erhöht die
+    Sterblichkeit, der Lebensstandard folgt dem Realeinkommen.
+  - Staatshaushalt am Rechentag mit Kredit, Tilgung, Zins nach Verschuldung, Staatsbankrott
+    (Chronik), Bauten und Landesausbau; Staatsnachfrage auf dem Markt der Hauptstadt.
+    Steuerbefehl mit Steuerart (`Command::kind`, ungültige Arten werden verworfen).
+  - Balancing-Bericht (`uhrwerk/balance.hpp`): Zielwerte lesen, Läufe messen, Median und
+    Quantile in Festkomma, Verstöße.
+  - **136 Testfälle** (vorher 123), u. a. Ortsrechnung, Markt, Handel und Haushalt exakt gegen
+    Handrechnung, Bericht und Zielwerte.
+- **CLI:** `uhrwerk-cli wirtschaft` (Güter, Berufe, Haushalt je Staat, `--maerkte`, `--jahre`),
+  `uhrwerk-cli bilanz` (`--seeds`, `--jahre`, `--ziele`; Exitcode 1 bei Verstoß); `pruefen` prüft
+  die Zielwerte mit; `lauf` zeigt Lebensstandard und Alphabetisierung, `--bericht` die Schulden.
+- **Daten:** `common/gueter.chron` (11), `beduerfnisse.chron` (6), `betriebe.chron` (12),
+  `maerkte.chron` (77), `zielwerte.chron`; Agrarabgaben der Berufe; Kontribution, Akzise, Zoll,
+  Heer und Schulden je Staat; Vorkommen und Häfen je Ort; Hofhaltung neu bemessen; Regelwerte
+  für Preise, Handel, Ernte, Hunger, Haushalt und Kredit. Das Feld `ertrag` der Berufe entfällt.
+- **Archivar:** neue Spalten und Felder mit Prüfungen; `orte.py` behält die Spalten `vorkommen`
+  und `hafen`.
+- **Brücke und Godot:** `set_tax_percent` mit Steuerart, Haushalt in `get_state`, Wirtschaft in
+  `get_location`, `get_market*`, Kartenmodi 8 „Wirtschaft“ (Taste O) und 9 „Märkte“ (Taste P) mit
+  Marktgrenzen; drei Steuerregler und Haushaltsfenster im Staatspanel, Abschnitt Wirtschaft in der
+  Ortsinfo, Startoption `--haushalt`. `unit_test.gd` mit **187 Prüfungen** (vorher 179).
+- **CI:** neuer Job „Balancing (Linux, Release)“ (16 Seeds, 100 Jahre); CTests `bilanz_fixture`
+  und `bilanz_verstoss`; dritter Screenshot (Märkte mit Haushaltsfenster).
+- **Referenz-Prüfsumme** nach 100 Jahren jetzt `5db13a66d63e6079` (vorher `ed6b14a02cfbfa5d`),
+  Bevölkerung 713.456; Lasttest-Referenz `8602a1273080ee9e` (vorher `a5a4c0d80a2f23ea`).
+
 ### Meilenstein M4 – Bevölkerung und Lasttest
 
 Die Bevölkerung entsteht jetzt aus Geburten, Sterbefällen, Altern und Wanderung statt aus einem

@@ -1,0 +1,396 @@
+# Märkte (Meilenstein M5): ein Markt je Landschaft.
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.14; Modell: docs/technik/wirtschaft.md,
+# Abschnitte 2.4 und 4.1.
+#   landschaften – Dateien in history/orte/ (ohne .chron), deren Orte zu diesem Markt gehören.
+#                  Jede Landschaft gehört zu genau einem Markt.
+#
+# In M5 ist jede Landschaft ihr eigener Markt; das entspricht etwa der Größe der Handelsräume um
+# Messeplätze, Häfen und Binnenzentren aus Kapitel 08, Abschnitt 5.1. Größere Handelsräume
+# (Leipziger Messe, Hamburg, Frankfurt am Main) lassen sich später bilden, indem ein Markt mehrere
+# Landschaften aufnimmt. Märkte ohne Orte mit Daten nehmen nicht teil.
+
+markt anhalt {
+    name         = "Anhalt (Dessau, Zerbst)"
+    landschaften = { anhalt }
+}
+
+markt ardennen {
+    name         = "Ardennen"
+    landschaften = { ardennen }
+}
+
+markt baden {
+    name         = "Baden"
+    landschaften = { baden }
+}
+
+markt bayern {
+    name         = "Bayern"
+    landschaften = { bayern }
+}
+
+markt boehmen {
+    name         = "Nordböhmen (Prag, Leitmeritz)"
+    landschaften = { boehmen }
+}
+
+markt brabant {
+    name         = "Brabant"
+    landschaften = { brabant }
+}
+
+markt brandenburg {
+    name         = "Mark Brandenburg (Berlin, Frankfurt an der Oder)"
+    landschaften = { brandenburg }
+}
+
+markt braunschweig {
+    name         = "Braunschweig"
+    landschaften = { braunschweig }
+}
+
+markt bremen_verden {
+    name         = "Bremen-Verden"
+    landschaften = { bremen_verden }
+}
+
+markt burgenland {
+    name         = "Burgenland"
+    landschaften = { burgenland }
+}
+
+markt burgundische_pforte {
+    name         = "Burgundische Pforte"
+    landschaften = { burgundische_pforte }
+}
+
+markt calenberg {
+    name         = "Calenberg"
+    landschaften = { calenberg }
+}
+
+markt elsass {
+    name         = "Elsass"
+    landschaften = { elsass }
+}
+
+markt flandern {
+    name         = "Flandern"
+    landschaften = { flandern }
+}
+
+markt franken {
+    name         = "Franken"
+    landschaften = { franken }
+}
+
+markt franzoesisch_flandern {
+    name         = "Französisch-Flandern"
+    landschaften = { franzoesisch_flandern }
+}
+
+markt galizien {
+    name         = "Westgalizien"
+    landschaften = { galizien }
+}
+
+markt geldern {
+    name         = "Geldern"
+    landschaften = { geldern }
+}
+
+markt glatz {
+    name         = "Grafschaft Glatz"
+    landschaften = { glatz }
+}
+
+markt goettingen {
+    name         = "Göttingen"
+    landschaften = { goettingen }
+}
+
+markt groningen_drenthe {
+    name         = "Groningen und Drenthe"
+    landschaften = { groningen_drenthe }
+}
+
+markt hennegau {
+    name         = "Hennegau"
+    landschaften = { hennegau }
+}
+
+markt hildesheim {
+    name         = "Hildesheim"
+    landschaften = { hildesheim }
+}
+
+markt holstein {
+    name         = "Holstein"
+    landschaften = { holstein }
+}
+
+markt juetland {
+    name         = "Jütland"
+    landschaften = { juetland }
+}
+
+markt kaernten {
+    name         = "Kärnten"
+    landschaften = { kaernten }
+}
+
+markt kongresspolen {
+    name         = "Polnischer Saum"
+    landschaften = { kongresspolen }
+}
+
+markt krain {
+    name         = "Krain"
+    landschaften = { krain }
+}
+
+markt kurhessen {
+    name         = "Kurhessen"
+    landschaften = { kurhessen }
+}
+
+markt kurpfalz {
+    name         = "Kurpfalz"
+    landschaften = { kurpfalz }
+}
+
+markt lausitz {
+    name         = "Lausitz (Görlitz, Bautzen)"
+    landschaften = { lausitz }
+}
+
+markt limburg {
+    name         = "Limburg"
+    landschaften = { limburg }
+}
+
+markt lothringen {
+    name         = "Lothringen"
+    landschaften = { lothringen }
+}
+
+markt lueneburg {
+    name         = "Lüneburg"
+    landschaften = { lueneburg }
+}
+
+markt luettich {
+    name         = "Lüttich"
+    landschaften = { luettich }
+}
+
+markt luxemburg {
+    name         = "Luxemburg"
+    landschaften = { luxemburg }
+}
+
+markt maehren {
+    name         = "Mähren"
+    landschaften = { maehren }
+}
+
+markt magdeburg {
+    name         = "Magdeburg und Halle"
+    landschaften = { magdeburg }
+}
+
+markt mainfranken {
+    name         = "Mainfranken"
+    landschaften = { mainfranken }
+}
+
+markt mark_sauerland {
+    name         = "Mark und Sauerland"
+    landschaften = { mark_sauerland }
+}
+
+markt mecklenburg {
+    name         = "Mecklenburg (Rostock, Wismar)"
+    landschaften = { mecklenburg }
+}
+
+markt mittelrhein {
+    name         = "Mittelrhein"
+    landschaften = { mittelrhein }
+}
+
+markt muensterland {
+    name         = "Münsterland"
+    landschaften = { muensterland }
+}
+
+markt namur {
+    name         = "Namur"
+    landschaften = { namur }
+}
+
+markt nassau {
+    name         = "Nassau"
+    landschaften = { nassau }
+}
+
+markt niederoesterreich {
+    name         = "Österreich unter der Enns"
+    landschaften = { niederoesterreich }
+}
+
+markt niederrhein {
+    name         = "Niederrhein"
+    landschaften = { niederrhein }
+}
+
+markt niederschlesien {
+    name         = "Niederschlesien"
+    landschaften = { niederschlesien }
+}
+
+markt oberhessen {
+    name         = "Oberhessen"
+    landschaften = { oberhessen }
+}
+
+markt oberoesterreich {
+    name         = "Österreich ob der Enns"
+    landschaften = { oberoesterreich }
+}
+
+markt oberpfalz {
+    name         = "Oberpfalz"
+    landschaften = { oberpfalz }
+}
+
+markt oberschlesien {
+    name         = "Oberschlesien"
+    landschaften = { oberschlesien }
+}
+
+markt oesterreichisch_schlesien {
+    name         = "Österreichisch-Schlesien"
+    landschaften = { oesterreichisch_schlesien }
+}
+
+markt oldenburg {
+    name         = "Oldenburg"
+    landschaften = { oldenburg }
+}
+
+markt osnabrueck {
+    name         = "Osnabrück und Emsland"
+    landschaften = { osnabrueck }
+}
+
+markt ostfriesland {
+    name         = "Ostfriesland"
+    landschaften = { ostfriesland }
+}
+
+markt ostpreussen {
+    name         = "Ostpreußen"
+    landschaften = { ostpreussen }
+}
+
+markt ostwestfalen {
+    name         = "Ostwestfalen"
+    landschaften = { ostwestfalen }
+}
+
+markt overijssel {
+    name         = "Overijssel"
+    landschaften = { overijssel }
+}
+
+markt pommern {
+    name         = "Pommern (Stettin, Stralsund)"
+    landschaften = { pommern }
+}
+
+markt posen {
+    name         = "Posen"
+    landschaften = { posen }
+}
+
+markt rheinhessen {
+    name         = "Rheinhessen"
+    landschaften = { rheinhessen }
+}
+
+markt rheinland {
+    name         = "Rheinland"
+    landschaften = { rheinland }
+}
+
+markt saar {
+    name         = "Saar"
+    landschaften = { saar }
+}
+
+markt sachsen {
+    name         = "Kursachsen (Leipzig, Dresden)"
+    landschaften = { sachsen }
+}
+
+markt salzburg {
+    name         = "Salzburg"
+    landschaften = { salzburg }
+}
+
+markt schleswig {
+    name         = "Schleswig"
+    landschaften = { schleswig }
+}
+
+markt schwaben {
+    name         = "Schwaben"
+    landschaften = { schwaben }
+}
+
+markt starkenburg {
+    name         = "Starkenburg"
+    landschaften = { starkenburg }
+}
+
+markt steiermark {
+    name         = "Steiermark"
+    landschaften = { steiermark }
+}
+
+markt thueringen {
+    name         = "Thüringen (Erfurt)"
+    landschaften = { thueringen }
+}
+
+markt tirol {
+    name         = "Tirol"
+    landschaften = { tirol }
+}
+
+markt trier {
+    name         = "Trier"
+    landschaften = { trier }
+}
+
+markt vorarlberg {
+    name         = "Vorarlberg"
+    landschaften = { vorarlberg }
+}
+
+markt westpreussen {
+    name         = "Westpreußen"
+    landschaften = { westpreussen }
+}
+
+markt wetterau {
+    name         = "Wetterau"
+    landschaften = { wetterau }
+}
+
+markt wuerttemberg {
+    name         = "Württemberg"
+    landschaften = { wuerttemberg }
+}

@@ -186,7 +186,22 @@ M3_ABSATZ = "Ergänzt in Meilenstein M3 (tools/geodaten/orte.py):"
 #: Zeilenbreite der erzeugten Absätze in dateien.csv (wie die übrigen Kopfkommentare, etwa 90 Zeichen).
 KOMMENTAR_BREITE = 92
 
-ORTE_SPALTEN = ("id", "datei", "name", "gelaende", "laenge", "breite", "flaeche", "stadt", "kreis", "quelle")
+ORTE_SPALTEN = (
+    "id",
+    "datei",
+    "name",
+    "gelaende",
+    "laenge",
+    "breite",
+    "flaeche",
+    "stadt",
+    "kreis",
+    "vorkommen",
+    "hafen",
+    "quelle",
+)
+#: Spalten von orte.csv, die von Hand gepflegt werden und beim Neuerzeugen erhalten bleiben (seit M5).
+ORTE_HANDSPALTEN = ("vorkommen", "hafen")
 KREISE_SPALTEN = ("id", "datei", "name", "quelle")
 DATEIEN_SPALTEN = ("ordner", "datei", "kultur", "kommentar")
 
@@ -1621,11 +1636,24 @@ def erzeuge(melde: Any = print) -> Ergebnis:
             raise OrteFehler(f"Ort {o.kennung} erhält auf der Karte keine Fläche")
         o.flaeche = str(f.flaeche_km2)
 
-    # Tabellentexte
+    # Tabellentexte; Vorkommen und Hafen (von Hand gepflegt, seit M5) bleiben je Ort erhalten.
+    hand = {z["id"]: tuple(z.get(s, "") for s in ORTE_HANDSPALTEN) for z in orte_alt}
     zeilen_orte = []
     for o in orte:
         zeilen_orte.append(
-            (o.kennung, o.datei, o.name, o.gelaende, o.laenge, o.breite, o.flaeche, o.stadt, o.kreis, o.quelle)
+            (
+                o.kennung,
+                o.datei,
+                o.name,
+                o.gelaende,
+                o.laenge,
+                o.breite,
+                o.flaeche,
+                o.stadt,
+                o.kreis,
+                *hand.get(o.kennung, ("",) * len(ORTE_HANDSPALTEN)),
+                o.quelle,
+            )
         )
     zeilen_kreise = [(k, l, n, KREIS_QUELLE) for k, l, n in kreise]
     texte = {

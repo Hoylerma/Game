@@ -1,0 +1,9 @@
+# Testdaten: Betriebe (der Archivar liest nur die Vorkommen).
+betrieb saline {
+    name       = "Saline"
+    beruf      = handwerker
+    erzeugt    = { salz = 5 }
+    agrar      = nein
+    vorkommen  = salz
+    gewicht    = 1
+}
