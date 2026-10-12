@@ -44,9 +44,11 @@ autowrap_mode = 3
 
 [node name="StateShort" type="Label" parent="Content/Identity/Names"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(1, 0)
 layout_mode = 2
 theme_type_variation = &"MutedLabel"
 text = "–"
+autowrap_mode = 3
 
 [node name="Separator1" type="HSeparator" parent="Content"]
 layout_mode = 2

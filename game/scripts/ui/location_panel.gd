@@ -28,11 +28,20 @@ const BALANCE_FIELDS: Array[Array] = [
 
 ## Schließen-Schaltfläche gedrückt.
 signal close_requested
+## „Diesen Staat spielen“ gedrückt (seit M7): Besitzer des Ortes als Spielerstaat.
+signal play_state_requested(state_index: int)
 
 ## Farben bekannter Konfessionen, solange keine Kartenfarbe vorliegt.
 var confession_colors := {}
 ## Farben der Kulturen (aus dem Kartenmodus Kultur), seit M4.
 var culture_colors := {}
+## Zeile „Deutscher Bund“ zeigen (seit M7: nur in Szenarien mit Bundesgebiet, main.gd).
+var show_federation := false
+## Spielerstaat; der Knopf „Diesen Staat spielen“ erscheint bei Orten anderer Staaten (seit M7).
+var player_index := -1
+
+var _play_button: Button = null
+var _owner_index := -1
 
 ## Höchste Höhe des Panels (fit_height); unbegrenzt, solange nicht gesetzt.
 var _max_height := 100000.0
@@ -42,6 +51,10 @@ var _max_height := 100000.0
 @onready var _owner: Label = %Owner
 @onready var _kind: Label = %Kind
 @onready var _kreis: Label = %Kreis
+@onready var _admin_caption: Label = %AdminCaption
+@onready var _admin: Label = %Admin
+@onready var _federal_caption: Label = %FederalCaption
+@onready var _federal: Label = %Federal
 @onready var _no_data_note: Label = %NoDataNote
 @onready var _terrain: Label = %Terrain
 @onready var _population: Label = %Population
@@ -103,6 +116,15 @@ func _ready() -> void:
 	fill.set_corner_radius_all(2)
 	_devastation_bar.add_theme_stylebox_override(&"fill", fill)
 	_content.minimum_size_changed.connect(_apply_height, CONNECT_DEFERRED)
+	_play_button = Button.new()
+	_play_button.name = "PlayState"
+	_play_button.text = "Diesen Staat spielen"
+	_play_button.focus_mode = Control.FOCUS_NONE
+	_play_button.tooltip_text = "Den Besitzer dieses Ortes als eigenen Staat übernehmen"
+	_play_button.pressed.connect(func() -> void: play_state_requested.emit(_owner_index))
+	var facts := $Scroll/Margin/Content/Facts
+	facts.get_parent().add_child(_play_button)
+	facts.get_parent().move_child(_play_button, facts.get_index() + 1)
 
 
 ## Begrenzt die Höhe des Panels; überzähliger Inhalt wird scrollbar.
@@ -134,10 +156,24 @@ func show_location(location: Dictionary, owner_color: Color) -> void:
 	_name.text = str(location.get("name", "–"))
 	_coat.shield_color = owner_color if has_data else UiPalette.PAPER_DEEP
 	_owner.text = str(location.get("owner_name", "–")) if has_data else "Keine Daten"
+	_owner_index = int(location.get("owner_index", -1))
+	_play_button.visible = has_data and _owner_index >= 0 and _owner_index != player_index
 	var is_city := bool(location.get("is_city", false))
 	_kind.text = "Stadt mit Umland" if is_city else "Ländlicher Ort"
 	var kreis_name := str(location.get("kreis_name", ""))
 	_kreis.text = kreis_name if not kreis_name.is_empty() else "–"
+	# Verwaltung (seit M7): unterste Einheit zuerst, z. B. „Salzburgkreis · Österreich ob der Enns“.
+	var chain := PackedStringArray()
+	for unit: Variant in location.get("verwaltung", []):
+		if unit is Dictionary:
+			chain.insert(0, str((unit as Dictionary).get("name", "")))
+	_admin.text = " · ".join(chain)
+	_admin_caption.visible = not chain.is_empty()
+	_admin.visible = not chain.is_empty()
+	var federal := bool(location.get("bundesgebiet", false))
+	_federal.text = "Bundesgebiet" if federal else "außerhalb"
+	_federal_caption.visible = show_federation and has_data
+	_federal.visible = show_federation and has_data
 	_terrain.text = GermanFormat.humanize(str(location.get("terrain", "")))
 	_no_data_note.visible = not has_data
 	for node in _data_only:

@@ -452,6 +452,50 @@ std::int64_t UhrwerkSimulation::get_player_state_index() const {
     return w ? w->find_state(player_tag_) : uhrwerk::kNone;
 }
 
+namespace {
+
+Dictionary scenario_to_godot(const uhrwerk::Scenario& scenario) {
+    Dictionary result;
+    result["id"] = to_godot(scenario.id);
+    result["name"] = to_godot(scenario.name);
+    result["date_text"] = to_godot(uhrwerk::format_date_long(scenario.start));
+    result["year"] = scenario.start.year;
+    result["player_tag"] = to_godot(scenario.player_tag);
+    PackedStringArray playable;
+    for (const std::string& tag : scenario.playable) {
+        playable.push_back(to_godot(tag));
+    }
+    result["playable"] = playable;
+    result["currency"] = to_godot(scenario.currency.empty() ? std::string("Reichstaler") : scenario.currency);
+    return result;
+}
+
+} // namespace
+
+Array UhrwerkSimulation::get_scenarios(const String& data_path) const {
+    std::vector<uhrwerk::LoadIssue> issues;
+    Array result;
+    for (const uhrwerk::Scenario& scenario : uhrwerk::list_scenarios(to_path(data_path), issues)) {
+        result.push_back(scenario_to_godot(scenario));
+    }
+    return result;
+}
+
+Dictionary UhrwerkSimulation::get_scenario() const {
+    const uhrwerk::World* w = world();
+    return w ? scenario_to_godot(w->scenario) : Dictionary();
+}
+
+bool UhrwerkSimulation::set_player_state(std::int64_t state_index) {
+    const uhrwerk::World* w = world();
+    if (!w || !valid_index(w->states, state_index)) {
+        return false;
+    }
+    // Nur die Wahl der Oberfläche (Spielstand, Panels); die Simulation kennt keinen Spieler.
+    player_tag_ = at(w->states, state_index).tag;
+    return true;
+}
+
 std::int64_t UhrwerkSimulation::get_state_count() const {
     const uhrwerk::World* w = world();
     return w ? static_cast<std::int64_t>(w->states.size()) : 0;
@@ -652,6 +696,46 @@ PackedInt32Array UhrwerkSimulation::get_location_kreis_indices() const {
     return result;
 }
 
+PackedInt32Array UhrwerkSimulation::get_location_admin_indices() const {
+    PackedInt32Array result;
+    const uhrwerk::World* w = world();
+    if (!w) {
+        return result;
+    }
+    const auto count = static_cast<std::int64_t>(w->locations.size());
+    result.resize(count);
+    for (std::int64_t i = 0; i < count; ++i) {
+        const uhrwerk::Index admin = at(w->locations, i).admin;
+        result.set(i, valid_index(w->admin_units, admin) ? admin : uhrwerk::kNone);
+    }
+    return result;
+}
+
+std::int64_t UhrwerkSimulation::get_admin_unit_count() const {
+    const uhrwerk::World* w = world();
+    return w ? static_cast<std::int64_t>(w->admin_units.size()) : 0;
+}
+
+Dictionary UhrwerkSimulation::get_admin_unit(std::int64_t index) const {
+    Dictionary result;
+    const uhrwerk::World* w = world();
+    if (!w || !valid_index(w->admin_units, index)) {
+        return result;
+    }
+    const uhrwerk::AdminUnit& unit = at(w->admin_units, index);
+    result["id"] = to_godot(unit.id);
+    result["name"] = to_godot(unit.name);
+    result["kind"] = to_godot(unit.kind);
+    result["parent_index"] = valid_index(w->admin_units, unit.parent) ? unit.parent : uhrwerk::kNone;
+    result["source"] = to_godot(unit.source);
+    std::int64_t locations = 0;
+    for (const uhrwerk::Location& loc : w->locations) {
+        locations += loc.admin == static_cast<uhrwerk::Index>(index) ? 1 : 0;
+    }
+    result["location_count"] = locations;
+    return result;
+}
+
 PackedInt32Array UhrwerkSimulation::get_location_market_indices() const {
     PackedInt32Array result;
     const uhrwerk::World* w = world();
@@ -745,7 +829,7 @@ PackedColorArray UhrwerkSimulation::get_map_colors(std::int64_t mode) const {
     if (!w) {
         return colors;
     }
-    ERR_FAIL_COND_V_MSG(mode < MAP_POLITICAL || mode > MAP_MAERKTE, colors,
+    ERR_FAIL_COND_V_MSG(mode < MAP_POLITICAL || mode > MAP_VERWALTUNG, colors,
                         "get_map_colors: unbekannter Kartenmodus.");
 
     const auto count = static_cast<std::int64_t>(w->locations.size());
@@ -802,6 +886,15 @@ PackedColorArray UhrwerkSimulation::get_map_colors(std::int64_t mode) const {
         case MAP_MAERKTE:
             if (valid_index(market_colors_, loc.market)) {
                 color = kKreisPalette[at(market_colors_, loc.market)];
+            }
+            break;
+        case MAP_VERWALTUNG:
+            // Unterste Verwaltungseinheit aus der Palette; Staaten ohne Unterteilung in ihrer
+            // aufgehellten Staatsfarbe (seit M7).
+            if (valid_index(w->admin_units, loc.admin)) {
+                color = kKreisPalette[static_cast<std::size_t>(loc.admin) % kKreisPalette.size()];
+            } else if (valid_index(w->states, loc.owner)) {
+                color = blend(to_godot(at(w->states, loc.owner).color), Color(1.0f, 1.0f, 1.0f), 0.45);
             }
             break;
         default:
@@ -1010,6 +1103,9 @@ void UhrwerkSimulation::_bind_methods() {
     ClassDB::bind_method(D_METHOD("get_days_elapsed"), &UhrwerkSimulation::get_days_elapsed);
     ClassDB::bind_method(D_METHOD("get_scenario_name"), &UhrwerkSimulation::get_scenario_name);
     ClassDB::bind_method(D_METHOD("get_player_state_index"), &UhrwerkSimulation::get_player_state_index);
+    ClassDB::bind_method(D_METHOD("get_scenarios", "data_path"), &UhrwerkSimulation::get_scenarios);
+    ClassDB::bind_method(D_METHOD("get_scenario"), &UhrwerkSimulation::get_scenario);
+    ClassDB::bind_method(D_METHOD("set_player_state", "state_index"), &UhrwerkSimulation::set_player_state);
 
     ClassDB::bind_method(D_METHOD("get_state_count"), &UhrwerkSimulation::get_state_count);
     ClassDB::bind_method(D_METHOD("get_state_index", "tag"), &UhrwerkSimulation::get_state_index);
@@ -1024,6 +1120,10 @@ void UhrwerkSimulation::_bind_methods() {
                          &UhrwerkSimulation::get_location_kreis_indices);
     ClassDB::bind_method(D_METHOD("get_location_market_indices"),
                          &UhrwerkSimulation::get_location_market_indices);
+    ClassDB::bind_method(D_METHOD("get_location_admin_indices"),
+                         &UhrwerkSimulation::get_location_admin_indices);
+    ClassDB::bind_method(D_METHOD("get_admin_unit_count"), &UhrwerkSimulation::get_admin_unit_count);
+    ClassDB::bind_method(D_METHOD("get_admin_unit", "index"), &UhrwerkSimulation::get_admin_unit);
 
     ClassDB::bind_method(D_METHOD("get_kreis_count"), &UhrwerkSimulation::get_kreis_count);
     ClassDB::bind_method(D_METHOD("get_kreis_index", "id"), &UhrwerkSimulation::get_kreis_index);
@@ -1060,6 +1160,7 @@ void UhrwerkSimulation::_bind_methods() {
     BIND_ENUM_CONSTANT(MAP_KULTUR);
     BIND_ENUM_CONSTANT(MAP_WIRTSCHAFT);
     BIND_ENUM_CONSTANT(MAP_MAERKTE);
+    BIND_ENUM_CONSTANT(MAP_VERWALTUNG);
     BIND_ENUM_CONSTANT(TAX_KONTRIBUTION);
     BIND_ENUM_CONSTANT(TAX_AKZISE);
     BIND_ENUM_CONSTANT(TAX_ZOLL);

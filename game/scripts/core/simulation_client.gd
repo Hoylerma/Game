@@ -44,6 +44,12 @@ const REQUIRED_METHODS: Array[StringName] = [
 	&"get_location_owner_indices",
 	&"get_location_kreis_indices",
 	&"get_location_market_indices",
+	&"get_location_admin_indices",
+	&"get_admin_unit_count",
+	&"get_admin_unit",
+	&"get_scenarios",
+	&"get_scenario",
+	&"set_player_state",
 	&"get_kreis_count",
 	&"get_kreis_index",
 	&"get_kreis",
@@ -148,6 +154,28 @@ func get_player_state_index() -> int:
 	return int(_native.call(&"get_player_state_index"))
 
 
+## Szenarien eines Datenordners ohne sie zu laden (seit M7): je { id, name, date_text, year,
+## player_tag, playable (PackedStringArray), currency }.
+func get_scenarios(data_path: String) -> Array[Dictionary]:
+	var result: Array[Dictionary] = []
+	var raw: Variant = _native.call(&"get_scenarios", data_path)
+	if raw is Array:
+		for entry: Variant in raw:
+			if entry is Dictionary:
+				result.append(entry)
+	return result
+
+
+## Geladenes Szenario wie ein Eintrag von get_scenarios (seit M7).
+func get_scenario() -> Dictionary:
+	return _as_dictionary(_native.call(&"get_scenario"))
+
+
+## Spielerstaat wählen (seit M7); false bei ungültigem Index.
+func set_player_state(state_index: int) -> bool:
+	return bool(_native.call(&"set_player_state", state_index))
+
+
 func get_state_count() -> int:
 	return int(_native.call(&"get_state_count"))
 
@@ -196,6 +224,23 @@ func get_location_market_indices() -> PackedInt32Array:
 	if result is PackedInt32Array:
 		return result
 	return PackedInt32Array()
+
+
+## Index der untersten Verwaltungseinheit je Ort, −1 ohne Einheit (seit M7).
+func get_location_admin_indices() -> PackedInt32Array:
+	var result: Variant = _native.call(&"get_location_admin_indices")
+	if result is PackedInt32Array:
+		return result
+	return PackedInt32Array()
+
+
+func get_admin_unit_count() -> int:
+	return int(_native.call(&"get_admin_unit_count"))
+
+
+## Verwaltungseinheit { id, name, kind, parent_index, source, location_count } (seit M7).
+func get_admin_unit(index: int) -> Dictionary:
+	return _as_dictionary(_native.call(&"get_admin_unit", index))
 
 
 func get_kreis_count() -> int:

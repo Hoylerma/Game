@@ -41,6 +41,7 @@ public:
         MAP_KULTUR = 7,         // seit M4
         MAP_WIRTSCHAFT = 8,     // seit M5
         MAP_MAERKTE = 9,        // seit M5
+        MAP_VERWALTUNG = 10,    // seit M7
     };
 
     /// Steuerarten für set_tax_percent (seit M5, wie uhrwerk::TaxKind).
@@ -66,6 +67,10 @@ public:
     std::int64_t get_days_elapsed() const;
     godot::String get_scenario_name() const;
     std::int64_t get_player_state_index() const;
+    // Szenarien und Staatswahl (seit M7)
+    godot::Array get_scenarios(const godot::String& data_path) const;
+    godot::Dictionary get_scenario() const;
+    bool set_player_state(std::int64_t state_index);
 
     std::int64_t get_state_count() const;
     std::int64_t get_state_index(const godot::String& tag) const;
@@ -77,10 +82,14 @@ public:
     godot::PackedInt32Array get_location_owner_indices() const;
     godot::PackedInt32Array get_location_kreis_indices() const;
     godot::PackedInt32Array get_location_market_indices() const;
+    godot::PackedInt32Array get_location_admin_indices() const;
 
     std::int64_t get_kreis_count() const;
     std::int64_t get_kreis_index(const godot::String& id) const;
     godot::Dictionary get_kreis(std::int64_t index) const;
+
+    std::int64_t get_admin_unit_count() const;
+    godot::Dictionary get_admin_unit(std::int64_t index) const;
 
     std::int64_t get_market_count() const;
     godot::Dictionary get_market(std::int64_t index) const;

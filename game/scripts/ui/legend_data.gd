@@ -11,10 +11,15 @@ extends RefCounted
 
 ## Höchste Abweichung (je Farbkanal), bis zu der ein linearer Verlauf gilt.
 const LINEAR_TOLERANCE := 0.02
+## Höchstzahl der Zeilen in der politischen Legende (seit M7).
+const MAX_POLITICAL_ENTRIES := 16
 
 
-## Staaten mit mindestens einem Ort, alphabetisch nach Kurzname.
-static func political_entries(sim: SimulationClient) -> Array[Dictionary]:
+## Staaten mit mindestens einem Ort, alphabetisch nach Kurzname; bei mehr als max_entries
+## Staaten nur die größten, die übrigen in einer Zeile „N weitere Staaten“.
+static func political_entries(
+	sim: SimulationClient, max_entries: int = MAX_POLITICAL_ENTRIES
+) -> Array[Dictionary]:
 	var entries: Array[Dictionary] = []
 	for index in sim.get_state_count():
 		var state := sim.get_state(index)
@@ -26,11 +31,27 @@ static func political_entries(sim: SimulationClient) -> Array[Dictionary]:
 			"color": state.get("color", Color.GRAY),
 			"text": str(state.get("short_name", state.get("tag", ""))),
 			"detail": detail,
+			"count": count,
 		})
+	# Viele Staaten (1848: 38): nur die größten, der Rest als eine Zeile (seit M7).
+	var rest: Array[Dictionary] = []
+	if entries.size() > max_entries:
+		entries.sort_custom(func(a: Dictionary, b: Dictionary) -> bool: return a["count"] > b["count"])
+		rest = entries.slice(max_entries - 1)
+		entries = entries.slice(0, max_entries - 1)
 	entries.sort_custom(
 		func(a: Dictionary, b: Dictionary) -> bool:
 			return str(a["text"]).naturalnocasecmp_to(str(b["text"])) < 0
 	)
+	if not rest.is_empty():
+		var names := PackedStringArray()
+		for entry in rest:
+			names.append(str(entry["text"]))
+		entries.append({
+			"color": UiPalette.INK_FAINT,
+			"text": "%d weitere Staaten" % rest.size(),
+			"detail": ", ".join(names),
+		})
 	return entries
 
 
@@ -150,6 +171,37 @@ static func market_entries(
 		if bool(info.get("is_port", false)):
 			detail += ", Hafen"
 		entries.append({"color": color_of[market], "text": short_name, "detail": detail})
+	return entries
+
+
+## Verwaltungseinheiten des Staates state_index mit Orten (seit M7), Farbe aus dem Modus
+## „Verwaltung“; admin_indices ist get_location_admin_indices(). Leer, wenn der Staat keine
+## Gliederung hat.
+static func admin_entries(
+	sim: SimulationClient, admin_indices: PackedInt32Array, state_index: int
+) -> Array[Dictionary]:
+	var colors := sim.get_map_colors(MapModes.MAP_VERWALTUNG)
+	var owners := sim.get_location_owner_indices()
+	var color_of := {}
+	var count_of := {}
+	for index in mini(colors.size(), mini(admin_indices.size(), owners.size())):
+		var unit := admin_indices[index]
+		if unit < 0 or owners[index] != state_index:
+			continue
+		if not color_of.has(unit):
+			color_of[unit] = colors[index]
+		count_of[unit] = int(count_of.get(unit, 0)) + 1
+	var units: Array = color_of.keys()
+	units.sort()
+	var entries: Array[Dictionary] = []
+	for unit: int in units:
+		var info := sim.get_admin_unit(unit)
+		var detail := "%s (%s) – %s" % [
+			str(info.get("name", "")),
+			GermanFormat.humanize(str(info.get("kind", ""))),
+			count_text(int(count_of[unit])),
+		]
+		entries.append({"color": color_of[unit], "text": str(info.get("name", "")), "detail": detail})
 	return entries
 
 

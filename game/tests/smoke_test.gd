@@ -38,6 +38,8 @@ const STATE_FIELDS: PackedStringArray = [
 	"soldiers",
 	"bankruptcies",
 	"premium_months",
+	"zollverein",
+	"bund",
 ]
 const LOCATION_FIELDS: PackedStringArray = [
 	"id",
@@ -75,6 +77,8 @@ const LOCATION_FIELDS: PackedStringArray = [
 	"professions",
 	"businesses",
 	"goods",
+	"verwaltung",
+	"bundesgebiet",
 ]
 const MARKET_FIELDS: PackedStringArray = [
 	"id", "name", "location_count", "active", "is_port", "harvest", "goods"
@@ -86,7 +90,7 @@ const MARKET_GOOD_FIELDS: PackedStringArray = [
 const KREIS_FIELDS: PackedStringArray = ["id", "name", "location_count", "source"]
 ## Kartenmodi, in denen Orte ohne Daten Alpha 0 haben (bridge-api.md); im Marktmodus (9)
 ## nur Orte ohne Daten in Märkten ohne Orte mit Daten.
-const NO_DATA_ALPHA_MODES: PackedInt32Array = [0, 1, 2, 4, 6, 7, 8]
+const NO_DATA_ALPHA_MODES: PackedInt32Array = [0, 1, 2, 4, 6, 7, 8, 10]
 const CHRONICLE_FIELDS: PackedStringArray = ["date_text", "text", "location_index", "state_index"]
 
 var _failures := PackedStringArray()
@@ -197,10 +201,76 @@ func _run() -> void:
 	_check_chronicle(sim)
 	_check_determinism(sim, player, new_tax, new_excise)
 	_check_savegames(sim, player)
+	_check_scenario_1848()
 	if _check_map:
 		_check_map_files(sim)
 	else:
 		print("  –   Kartenprüfung übersprungen (--ohne-karte)")
+
+
+## Lesezeichen 1848 (seit M7): Szenarioliste, Staatswahl, Verwaltung, Bundesgebiet, Zollverein.
+func _check_scenario_1848() -> void:
+	var sim := SimulationClient.create()
+	var scenarios := sim.get_scenarios(UhrwerkPaths.data_dir())
+	var ids := PackedStringArray()
+	for scenario in scenarios:
+		ids.append(str(scenario.get("id", "")))
+	_check(
+		ids.has("westfaelischer_frieden") and ids.has("voelkerfruehling"),
+		"Szenarien ohne Laden gelesen: %s" % ", ".join(ids),
+		"get_scenarios lieferte %s" % ", ".join(ids)
+	)
+	var errors := sim.load_scenario(UhrwerkPaths.data_dir(), "voelkerfruehling")
+	if not _check(errors.is_empty(), "Szenario 1848 geladen", "Szenario 1848: " + errors):
+		return
+	var scenario := sim.get_scenario()
+	_check(
+		str(scenario.get("currency", "")) == "Taler"
+		and PackedStringArray(scenario.get("playable", PackedStringArray())).has("BAD"),
+		"Szenario 1848: Währung Taler, Baden spielbar",
+		"Szenario 1848: %s" % str(scenario)
+	)
+	var prussia := sim.get_state_index("PRU")
+	var state := sim.get_state(prussia)
+	_check(
+		bool(state.get("zollverein", false)) and bool(state.get("bund", false)),
+		"Preußen im Zollverein und im Deutschen Bund",
+		"Preußen: zollverein %s, bund %s" % [state.get("zollverein"), state.get("bund")]
+	)
+	var berlin := sim.get_location(sim.get_location_index("berlin_coelln"))
+	var chain: Array = berlin.get("verwaltung", [])
+	_check(
+		not chain.is_empty() and str(chain[0].get("id", "")) == "pr_brandenburg"
+		and bool(berlin.get("bundesgebiet", false)),
+		"Berlin: Provinz Brandenburg, Bundesgebiet",
+		"Berlin: verwaltung %s, bundesgebiet %s" % [str(chain), berlin.get("bundesgebiet")]
+	)
+	var posen := sim.get_location(sim.get_location_index("posen"))
+	_check(
+		not bool(posen.get("bundesgebiet", true)),
+		"Posen außerhalb des Bundesgebiets",
+		"Posen im Bundesgebiet"
+	)
+	var units := sim.get_admin_unit_count()
+	var admin := sim.get_location_admin_indices()
+	_check(
+		units > 0 and admin.size() == sim.get_location_count(),
+		"%d Verwaltungseinheiten, Index je Ort" % units,
+		"Verwaltung: %d Einheiten, %d Indizes" % [units, admin.size()]
+	)
+	var unit := sim.get_admin_unit(admin[sim.get_location_index("berlin_coelln")])
+	_check(
+		str(unit.get("kind", "")) == "provinz" and int(unit.get("location_count", 0)) > 100,
+		"get_admin_unit: %s (%d Orte)" % [unit.get("name"), unit.get("location_count")],
+		"get_admin_unit: %s" % str(unit)
+	)
+	var bavaria := sim.get_state_index("BAV")
+	_check(
+		sim.set_player_state(bavaria) and sim.get_player_state_index() == bavaria
+		and not sim.set_player_state(-1),
+		"Spielerstaat gewechselt (Bayern)",
+		"set_player_state hat den Spieler nicht gewechselt"
+	)
 
 
 func _check_before_load(sim: SimulationClient) -> void:

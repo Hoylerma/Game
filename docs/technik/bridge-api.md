@@ -23,6 +23,9 @@ Die Brücke (`bridge/`) stellt dem Godot-Projekt genau eine Klasse bereit: **`Uh
 | `get_days_elapsed()` | `int` | |
 | `get_scenario_name()` | `String` | |
 | `get_player_state_index()` | `int` | Index des Spielerstaates oder -1: aus dem Szenario, nach `load_game` aus dem Spielstand |
+| `get_scenarios(data_path: String)` | `Array` | seit M7: Szenarien des Datenordners, ohne sie zu laden (auch ohne geladene Simulation); je Dictionary `id`, `name`, `date_text`, `year` (int), `player_tag`, `playable` (PackedStringArray der Staatstags), `currency` („Reichstaler“, wenn das Szenario keine nennt) |
+| `get_scenario()` | `Dictionary` | seit M7: das geladene Szenario wie ein Eintrag von `get_scenarios`; leer ohne Simulation |
+| `set_player_state(state_index: int)` | `bool` | seit M7: Spielerstaat wählen (nur Oberfläche und Spielstand, die Simulation kennt keinen Spieler); `false` bei ungültigem Index |
 | `get_state_count()` | `int` | |
 | `get_state_index(tag: String)` | `int` | -1, wenn unbekannt |
 | `get_state(index: int)` | `Dictionary` | `tag`, `name`, `short_name`, `color` (Color), `ruler`, `government`, `capital_index` (int), `treasury` (float), `tax_rate_percent` (int, gerundet), `income_month` (float), `expenses_month` (float), `population` (int), `location_count` (int); seit M4 `living_standard` (float 0–100, nach Einwohnern gemittelt) und `balance_previous` (Dictionary wie bei `get_location`, Summe der Orte); seit M5 der Haushalt: `tax_rates_percent` (Array mit 3 int, Index = Steuerart), `taxes_month` (Array mit 3 float), `court_month`, `administration_month`, `army_month`, `interest_month`, `building_month` (float, Ausgaben je Posten), `debt`, `interest_percent`, `yearly_income` (gleitende Jahreseinnahmen), `army_per_mille` (float), `soldiers`, `bankruptcies`, `premium_months` (int, Monate mit Zinsaufschlag nach einem Bankrott). `tax_rate_percent` ist die Kontribution. `income_month` und `expenses_month` sind seit M5 Summe der Steuern bzw. der Posten des Haushalts vom letzten Rechentag; vor dem ersten Rechentag die beim Start geschätzten Werte (vorher 0); seit M7 `zollverein` (bool) und `bund` (bool, mindestens ein Ort im Bundesgebiet) |
@@ -32,6 +35,9 @@ Die Brücke (`bridge/`) stellt dem Godot-Projekt genau eine Klasse bereit: **`Uh
 | `get_location_owner_indices()` | `PackedInt32Array` | seit M3: Besitzer-Staatsindex je Ort (−1 ohne Daten), Länge = `get_location_count()` – für Grenzen im Shader ohne 4.500 Einzelabfragen |
 | `get_location_kreis_indices()` | `PackedInt32Array` | seit M3: Kreisindex je Ort (−1 ohne Kreis) |
 | `get_location_market_indices()` | `PackedInt32Array` | seit M5: Marktindex je Ort (−1 ohne Markt), Länge = `get_location_count()`; Grundlage der Marktgrenzen |
+| `get_location_admin_indices()` | `PackedInt32Array` | seit M7: unterste Verwaltungseinheit je Ort (−1 ohne Einheit); Grenzen im Modus „Verwaltung“ |
+| `get_admin_unit_count()` | `int` | seit M7 |
+| `get_admin_unit(index: int)` | `Dictionary` | seit M7: `id`, `name`, `kind` (z. B. `provinz`), `parent_index` (int, −1 bei der obersten), `source`, `location_count` (Orte, deren unterste Einheit sie ist) |
 | `get_market_count()` | `int` | seit M5 |
 | `get_market(index: int)` | `Dictionary` | seit M5: `id`, `name`, `location_count` (Orte mit Daten), `active` (bool, mindestens ein Ort mit Daten), `is_port` (bool), `harvest` (float, Erntefaktor des Jahres), `goods` (Array je Gut: `id`, `name`, `color`, `base_price`, `price`, `price_factor`, `supply`, `demand`, `imports`, `exports`, `buy_percent`) |
 | `get_kreis_count()` | `int` | seit M3 |
@@ -71,8 +77,9 @@ Dateipfade des Betriebssystems (in GDScript `ProjectSettings.globalize_path("use
 | 7 | `MAP_KULTUR` | seit M4: Farbe der Mehrheitskultur (`common/kulturen.chron`) |
 | 8 | `MAP_WIRTSCHAFT` | seit M5: linearer Verlauf nach Wirtschaftsleistung je Einwohner und Jahr (0 → hell, ≥ 16 Reichstaler → dunkelbraun) |
 | 9 | `MAP_MAERKTE` | seit M5: Farbe je Markt aus der Palette von `MAP_KREISE`; die aktiven Märkte laufen nacheinander durch die Palette, damit sich Nachbarn unterscheiden |
+| 10 | `MAP_VERWALTUNG` | seit M7: Farbe der untersten Verwaltungseinheit aus der Palette von `MAP_KREISE` (`palette[einheitsindex % n]`); Orte von Staaten ohne Gliederung in der aufgehellten Staatsfarbe |
 
-**Orte ohne Daten** (seit M3) erhalten in den Modi 0, 1, 2, 4, 6, 7 und 8 eine Farbe mit **Alpha 0**;
+**Orte ohne Daten** (seit M3) erhalten in den Modi 0, 1, 2, 4, 6, 7, 8 und 10 eine Farbe mit **Alpha 0**;
 die Godot-Seite zeichnet dort eine Schraffur „keine Daten“. In den Modi 3 und 5 haben sie normale
 Farben (Alpha 1), im Modus 9 dann, wenn ihr Markt Orte mit Daten hat.
 

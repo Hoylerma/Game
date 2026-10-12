@@ -81,10 +81,19 @@ func _test_launch_options() -> void:
 	_equal(defaults.map_mode, -1, "Standard --kartenmodus")
 	_true(not defaults.wants_screenshot(), "ohne --screenshot kein Screenshot")
 	var bad_args := PackedStringArray(
-		["--tage=-3", "--kartenmodus=10", "--unbekannt", "--zoom=0", "--zoom=viel"]
+		[
+			"--tage=-3", "--kartenmodus=11", "--unbekannt", "--zoom=0", "--zoom=viel", "--szenario",
+			"--staat="
+		]
 	)
 	var bad := LaunchOptions.parse(bad_args)
-	_equal(bad.problems.size(), 5, "fehlerhafte Optionen gemeldet")
+	_equal(bad.problems.size(), 7, "fehlerhafte Optionen gemeldet")
+	var chosen := LaunchOptions.parse(
+		PackedStringArray(["--szenario=voelkerfruehling", "--staat=bav"])
+	)
+	_equal(chosen.scenario_id, "voelkerfruehling", "Option --szenario")
+	_equal(chosen.state_tag, "BAV", "Option --staat (Großbuchstaben)")
+	_equal(chosen.problems.size(), 0, "--szenario und --staat ohne Probleme")
 	_equal(bad.zoom_factor, 0.0, "fehlerhaftes --zoom ignoriert")
 	var budget := LaunchOptions.parse(PackedStringArray(["--haushalt"]))
 	_equal(budget.show_budget and budget.problems.is_empty(), true, "Option --haushalt")
@@ -181,7 +190,8 @@ func _test_legend_entries() -> void:
 
 
 func _test_map_modes() -> void:
-	_equal(MapModes.COUNT, 10, "zehn Kartenmodi")
+	_equal(MapModes.COUNT, 11, "elf Kartenmodi (Verwaltung seit M7)")
+	_equal(MapModes.name_of(MapModes.MAP_VERWALTUNG), "Verwaltung", "Name des Modus Verwaltung")
 	_equal(MapModes.MAP_KREISE, 5, "Kartenmodus Kreise = 5 (bridge-api.md)")
 	_equal(MapModes.MAP_LEBENSSTANDARD, 6, "Kartenmodus Lebensstandard = 6 (bridge-api.md)")
 	_equal(MapModes.MAP_KULTUR, 7, "Kartenmodus Kultur = 7 (bridge-api.md)")

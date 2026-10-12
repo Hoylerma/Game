@@ -10,6 +10,8 @@ signal load_requested(path: String)
 signal quick_save_requested
 signal quick_load_requested
 signal close_requested
+## Neues Spiel mit dem Szenario scenario_id (seit M7).
+signal new_game_requested(scenario_id: String)
 
 const PANEL_WIDTH := 680.0
 const LIST_HEIGHT := 250.0
@@ -21,6 +23,8 @@ var _empty_label: Label = null
 var _load_button: Button = null
 var _quick_load_button: Button = null
 var _status: Label = null
+var _scenario_select: OptionButton = null
+var _scenario_ids := PackedStringArray()
 var _group := ButtonGroup.new()
 var _selected_path := ""
 
@@ -63,6 +67,37 @@ func show_saves(saves: Array[Dictionary], quicksave_exists: bool) -> void:
 	_empty_label.visible = saves.is_empty()
 	_load_button.disabled = true
 	_quick_load_button.disabled = not quicksave_exists
+
+
+## Szenarien für „Neues Spiel“ (SimulationClient.get_scenarios), current vorgewählt (seit M7).
+func show_scenarios(scenarios: Array[Dictionary], current: String) -> void:
+	_scenario_select.clear()
+	_scenario_ids.clear()
+	for scenario in scenarios:
+		var id := str(scenario.get("id", ""))
+		_scenario_select.add_item("%s (%s)" % [str(scenario.get("name", id)), str(scenario.get("date_text", ""))])
+		_scenario_select.set_item_tooltip(
+			_scenario_select.item_count - 1,
+			"Spielbare Staaten: %s" % ", ".join(scenario.get("playable", PackedStringArray()))
+		)
+		_scenario_ids.append(id)
+		if id == current:
+			_scenario_select.select(_scenario_ids.size() - 1)
+
+
+## Kennungen der angebotenen Szenarien (Tests).
+func scenario_ids() -> PackedStringArray:
+	return _scenario_ids
+
+
+## Neues Spiel mit dem Szenario id starten wie per Knopf (Klicktest); false, wenn unbekannt.
+func start_new_game(id: String) -> bool:
+	var index := _scenario_ids.find(id)
+	if index < 0:
+		return false
+	_scenario_select.select(index)
+	_on_new_game_pressed()
+	return true
 
 
 ## Rückmeldung unter den Knöpfen (Fehler in Rot).
@@ -137,6 +172,18 @@ func _build() -> void:
 	title.text = "SPIELMENÜ"
 	title.theme_type_variation = &"HeaderLabel"
 	box.add_child(title)
+
+	box.add_child(_caption("Neues Spiel"))
+	var new_row := HBoxContainer.new()
+	new_row.add_theme_constant_override(&"separation", 6)
+	_scenario_select = OptionButton.new()
+	_scenario_select.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_scenario_select.focus_mode = Control.FOCUS_NONE
+	_scenario_select.fit_to_longest_item = false
+	_scenario_select.tooltip_text = "Lesezeichen; den Staat wählt danach „Diesen Staat spielen“ in der Ortsinfo"
+	new_row.add_child(_scenario_select)
+	new_row.add_child(_button("Starten", _on_new_game_pressed))
+	box.add_child(new_row)
 
 	box.add_child(_caption("Speichern"))
 	var save_row := HBoxContainer.new()
@@ -271,6 +318,12 @@ func _on_save_pressed() -> void:
 		)
 		return
 	save_requested.emit(file_name)
+
+
+func _on_new_game_pressed() -> void:
+	var index := _scenario_select.selected
+	if index >= 0 and index < _scenario_ids.size():
+		new_game_requested.emit(_scenario_ids[index])
 
 
 func _on_load_pressed() -> void:

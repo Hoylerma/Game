@@ -13,7 +13,8 @@ const MAP_LEBENSSTANDARD := 6
 const MAP_KULTUR := 7
 const MAP_WIRTSCHAFT := 8
 const MAP_MAERKTE := 9
-const COUNT := 10
+const MAP_VERWALTUNG := 10
+const COUNT := 11
 
 ## Anzeigenamen der Modi (Index = Modus).
 const NAMES: PackedStringArray = [
@@ -27,6 +28,7 @@ const NAMES: PackedStringArray = [
 	"Kultur",
 	"Wirtschaftsleistung",
 	"Märkte",
+	"Verwaltung",
 ]
 
 ## Kurznamen für die Knöpfe der Modusleiste (Index = Modus); seit M4 kurz gehalten,
@@ -42,6 +44,7 @@ const SHORT_NAMES: PackedStringArray = [
 	"Kultur",
 	"Wirtschaft",
 	"Märkte",
+	"Verwaltung",
 ]
 
 ## Kurze Erklärung für Tooltips der Modusleiste.
@@ -56,6 +59,7 @@ const DESCRIPTIONS: PackedStringArray = [
 	"Mehrheitskultur (Landsmannschaft) der Orte",
 	"Wirtschaftsleistung je Einwohner und Jahr (Reichstaler)",
 	"Märkte: Orte, die gemeinsam handeln und Preise bilden",
+	"Verwaltungseinheiten der Staaten (Provinzen, Kronländer, Kreise); seit 1848",
 ]
 
 ## Aktionen der Eingabebelegung (project.godot), Index = Modus.
@@ -70,11 +74,13 @@ const ACTIONS: Array[StringName] = [
 	&"kartenmodus_kultur",
 	&"kartenmodus_wirtschaft",
 	&"kartenmodus_maerkte",
+	&"kartenmodus_verwaltung",
 ]
 
 ## Tastenbezeichnung für die Anzeige, Index = Modus. Die Belegung nutzt physische
-## Tasten: „Z“ ist die Taste rechts neben T (auf englischen Tastaturen „Y“).
-const KEY_HINTS: PackedStringArray = ["Q", "W", "E", "R", "T", "Z", "U", "I", "O", "P"]
+## Tasten: „Z“ ist die Taste rechts neben T (auf englischen Tastaturen „Y“), „Ü“ die rechts
+## neben P (englisch „[“).
+const KEY_HINTS: PackedStringArray = ["Q", "W", "E", "R", "T", "Z", "U", "I", "O", "P", "Ü"]
 
 ## Modi, deren Farben von der Simulation abhängen; dort erhalten Orte ohne Daten
 ## Alpha 0 (Schraffur „keine Daten“, bridge-api.md). Im Marktmodus gilt das nur für
@@ -88,6 +94,7 @@ const DATA_MODES: PackedInt32Array = [
 	MAP_KULTUR,
 	MAP_WIRTSCHAFT,
 	MAP_MAERKTE,
+	MAP_VERWALTUNG,
 ]
 
 ## Obergrenze der Dichteskala der Brücke (≥ 120 Einwohner je km² → dunkelste Farbe).

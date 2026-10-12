@@ -4,13 +4,15 @@ extends RefCounted
 ##
 ##   --screenshot=<pfad>    nach dem Laden simulieren, Bild speichern, beenden
 ##   --tage=<n>             Tage vor dem Screenshot (Standard 60)
-##   --kartenmodus=<0..9>   Kartenmodus (0 Politisch … 5 Kreise, 6 Lebensstandard, 7 Kultur,
-##                          8 Wirtschaft, 9 Märkte)
+##   --kartenmodus=<0..10>  Kartenmodus (0 Politisch … 5 Kreise, 6 Lebensstandard, 7 Kultur,
+##                          8 Wirtschaft, 9 Märkte, 10 Verwaltung)
 ##   --ort=<ort_id>         Ort auswählen und Ortsinfo öffnen
 ##   --zoom=<faktor>        Vergrößerung gegenüber der Übersicht (1 = ganze Karte);
 ##                          zentriert auf --ort, sonst auf die Kartenmitte (bis 1: Übersicht)
 ##   --haushalt             Haushaltsfenster des Spielerstaates öffnen (seit M5)
 ##   --spielmenue           Spielmenü öffnen (seit M6)
+##   --szenario=<id>        Szenario beim Start (seit M7; Standard westfaelischer_frieden)
+##   --staat=<TAG>          Spielerstaat beim Start (seit M7; Standard: Spieler des Szenarios)
 
 const DEFAULT_SCREENSHOT_DAYS := 60
 
@@ -23,6 +25,9 @@ var zoom_factor := 0.0
 ## Haushaltsfenster vor dem Screenshot öffnen (seit M5).
 var show_budget := false
 var show_game_menu := false
+## Szenario und Spielerstaat beim Start (seit M7); leer = Standard.
+var scenario_id := ""
+var state_tag := ""
 ## Unbekannte oder fehlerhafte Angaben (deutsche Meldungen).
 var problems := PackedStringArray()
 
@@ -80,6 +85,18 @@ static func parse(args: PackedStringArray) -> LaunchOptions:
 					options.show_game_menu = true
 				else:
 					options.problems.append("--spielmenue erwartet keinen Wert, nicht „%s“." % value)
+			"--szenario":
+				if value.is_empty():
+					options.problems.append(
+						"--szenario braucht eine Kennung (--szenario=voelkerfruehling)."
+					)
+				else:
+					options.scenario_id = value
+			"--staat":
+				if value.is_empty():
+					options.problems.append("--staat braucht einen Staatstag (--staat=BAV).")
+				else:
+					options.state_tag = value.to_upper()
 			"--ort":
 				if value.is_empty():
 					options.problems.append("--ort braucht eine Ort-Kennung (--ort=berlin_coelln).")

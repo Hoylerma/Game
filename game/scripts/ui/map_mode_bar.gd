@@ -1,14 +1,14 @@
 class_name MapModeBar
 extends PanelContainer
-## Leiste der Kartenmodi (Tasten Q W E R T Z U I O P). Die Knöpfe zeigen Kurznamen; Taste und
-## Erklärung stehen im Tooltip. Seit M5 mit zehn Modi: schmalere Knöpfe ohne Titel „Karte“,
-## damit die Leiste bei 1.600 Pixeln Fensterbreite zwischen die Spalten passt.
+## Leiste der Kartenmodi (Tasten Q W E R T Z U I O P Ü). Die Knöpfe zeigen Kurznamen; Taste und
+## Erklärung stehen im Tooltip. Seit M5 schmalere Knöpfe ohne Titel „Karte“, seit M7 mit elf
+## Modi noch schmaler, damit die Leiste bei 1.600 Pixeln Fensterbreite zwischen die Spalten passt.
 
 ## Kartenmodus gewählt (MapModes).
 signal mode_selected(mode: int)
 
 ## Innenabstand links und rechts je Knopf (Theme: 10).
-const BUTTON_MARGIN := 6.0
+const BUTTON_MARGIN := 4.0
 const BUTTON_STYLES: Array[StringName] = [
 	&"normal", &"hover", &"pressed", &"hover_pressed", &"disabled"
 ]
