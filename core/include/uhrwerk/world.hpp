@@ -352,6 +352,8 @@ struct Scenario {
     std::string name;
     Date start;
     std::string player_tag;
+    std::vector<std::string> playable; // hervorgehobene Staaten der Staatswahl (seit M7), Tags
+    std::string currency; // Name der Rechnungseinheit, z. B. „Taler“ (seit M7); leer = „Reichstaler“
 };
 
 /// Eintrag der Chronik (Geschichtsbuch der Partie).

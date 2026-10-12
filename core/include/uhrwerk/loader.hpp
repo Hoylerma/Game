@@ -44,6 +44,11 @@ inline constexpr std::string_view kDefaultScenario = "westfaelischer_frieden";
 /// Startwerte für Lebensstandard und Alphabetisierung (initialize_population).
 LoadResult load_world(const std::filesystem::path& data_dir, std::string_view scenario_id = kDefaultScenario);
 
+/// Liest nur die Szenarien (szenarien/*.chron) für die Auswahl vor dem Laden (seit M7): Kennung,
+/// Name, Datum, Spieler, spielbare Staaten und Währung, in Dateireihenfolge. Probleme kommen nach
+/// issues; Verweise auf Staaten prüft erst load_world.
+std::vector<Scenario> list_scenarios(const std::filesystem::path& data_dir, std::vector<LoadIssue>& issues);
+
 /// Sucht den Datenordner: Umgebungsvariable UHRWERK_DATEN, sonst aufwärts ab
 /// start nach einem Ordner "data" mit Unterordner "szenarien".
 std::optional<std::filesystem::path> find_data_dir(const std::filesystem::path& start);

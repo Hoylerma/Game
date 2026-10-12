@@ -7,7 +7,9 @@
 # docs/technik/lesezeichen_1848.md.
 
 szenario voelkerfruehling {
-    name    = "Völkerfrühling"
-    datum   = 1848.03.01
-    spieler = PRU
+    name     = "Völkerfrühling"
+    datum    = 1848.03.01
+    spieler  = PRU
+    spielbar = { PRU AUT BAV SAX BAD }   # Entscheidung 3; alle anderen Staaten sind ebenfalls wählbar
+    waehrung = "Taler"                   # Rechnungseinheit (preußischer Taler), Abschnitt 4
 }

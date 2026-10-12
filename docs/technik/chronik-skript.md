@@ -319,8 +319,15 @@ szenario westfaelischer_frieden {
     name    = "Der Westfälische Frieden"   # Pflicht
     datum   = 1648.10.24                   # Pflicht
     spieler = BRA                          # Pflicht, Staatstag (Vorauswahl)
+    spielbar = { BRA SAX }                 # optional (seit M7): hervorgehobene Staaten der Staatswahl
+    waehrung = "Reichstaler"               # optional (seit M7): Name der Rechnungseinheit
 }
 ```
+
+Spieler und spielbare Staaten müssen bekannte Staaten sein; im gewählten Szenario müssen sie zum
+Startdatum bestehen (Abschnitt 3.5, sonst fatal). `spielbar` und `waehrung` betreffen nur die
+Oberfläche; im Kern `Scenario::playable` und `Scenario::currency`. `list_scenarios` liest nur die
+Szenarien, ohne die übrigen Daten zu laden (für die Wahl vor dem Spielstart).
 
 ### 3.8 Datierte Blöcke (seit M2)
 

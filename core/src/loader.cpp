@@ -483,6 +483,15 @@ public:
     Loader(fs::path data_dir, std::vector<LoadIssue>& issues)
         : data_dir_(std::move(data_dir)), issues_(issues) {}
 
+    /// Nur die Szenarien (list_scenarios, seit M7).
+    std::vector<Scenario> read_scenarios() {
+        std::vector<Scenario> scenarios;
+        for (const std::string& name : list_folder("szenarien")) {
+            process(name, [&](const SourceFile& f) { load_scenarios(f, scenarios); });
+        }
+        return scenarios;
+    }
+
     std::optional<World> run(std::string_view scenario_id) {
         std::error_code ec;
         if (!fs::is_directory(data_dir_, ec)) {
@@ -1680,11 +1689,31 @@ private:
 
     void load_scenarios(const SourceFile& file, std::vector<Scenario>& scenarios) {
         for_each_definition(file, "szenario", "szenario <kennung> { … }", [&](const ScriptNode& node) {
-            Fields f(node, file.name, "szenario " + node.value, issues_, {"name", "datum", "spieler"});
+            Fields f(node, file.name, "szenario " + node.value, issues_,
+                     {"name", "datum", "spieler", "spielbar", "waehrung"});
             Scenario s;
             s.id = node.value;
             s.name = f.text("name").value_or("");
             s.start = f.date("datum").value_or(Date{});
+            if (f.has("waehrung")) {
+                s.currency = f.text("waehrung").value_or("");
+            }
+            std::vector<PlayerRef> playable_refs;
+            if (f.has("spielbar")) {
+                if (const ScriptNode* list =
+                        f.block("spielbar", "Liste von Staatstags, z. B. { PRU AUT BAV }")) {
+                    for (const ScriptNode& child : list->children) {
+                        if (!child.key.empty() || child.is_block || !is_state_tag(child.value)) {
+                            issues_.error(file.name, child.line,
+                                          "ungültiger Eintrag in 'spielbar' von szenario " + node.value +
+                                              " (erwartet Staatstags)");
+                            continue;
+                        }
+                        s.playable.push_back(child.value);
+                        playable_refs.push_back(PlayerRef{child.value, file.name, child.line});
+                    }
+                }
+            }
             PlayerRef player_ref;
             if (const auto player = f.text("spieler")) {
                 s.player_tag = *player;
@@ -1694,6 +1723,7 @@ private:
             if (register_id(scenarios_, s.id, index, file.name, node.line, "Szenario")) {
                 scenarios.push_back(std::move(s));
                 players_.push_back(std::move(player_ref));
+                playable_.push_back(std::move(playable_refs));
             }
         });
     }
@@ -1823,19 +1853,27 @@ private:
     /// Der Spieler des gewählten Szenarios muss zum Startdatum bestehen; die Spieler der übrigen
     /// Szenarien müssen nur bekannte Staaten sein (sie bestehen zu einem anderen Datum).
     void check_players(const std::vector<Scenario>& scenarios, const Scenario* selected) {
-        for (std::size_t i = 0; i < scenarios.size() && i < players_.size(); ++i) {
-            const PlayerRef& ref = players_[i];
+        // Spieler und spielbare Staaten (seit M7) müssen bekannte Staaten sein; im gewählten
+        // Szenario müssen sie zum Startdatum bestehen.
+        const auto check = [&](const PlayerRef& ref, const Scenario& scenario, std::string_view role) {
             if (ref.tag.empty() || lookup(states_, ref.tag) != kNone) {
-                continue;
+                return;
             }
             if (dropped_states_.count(ref.tag) == 0) {
                 issues_.error(ref.file, ref.line,
-                              "unbekannter Staat " + quote(ref.tag) + " als Spieler in szenario " +
-                                  scenarios[i].id);
-            } else if (selected == &scenarios[i]) {
+                              "unbekannter Staat " + quote(ref.tag) + " als " + std::string(role) +
+                                  " in szenario " + scenario.id);
+            } else if (selected == &scenario) {
                 issues_.error(ref.file, ref.line,
-                              "Spielerstaat " + quote(ref.tag) + " von szenario " + scenarios[i].id +
+                              std::string(role == "Spieler" ? "Spielerstaat " : "Spielbarer Staat ") +
+                                  quote(ref.tag) + " von szenario " + scenario.id +
                                   " besitzt zum Startdatum keinen Ort");
+            }
+        };
+        for (std::size_t i = 0; i < scenarios.size() && i < players_.size(); ++i) {
+            check(players_[i], scenarios[i], "Spieler");
+            for (const PlayerRef& ref : playable_[i]) {
+                check(ref, scenarios[i], "spielbarer Staat");
             }
         }
     }
@@ -1990,14 +2028,20 @@ private:
     Registry locations_;
     Registry scenarios_;
 
-    Date start_{9999, 12, 31};                   // Startdatum des gewählten Szenarios
-    std::vector<CapitalRef> capitals_;           // parallel zu world_.states
-    std::vector<PlayerRef> players_;             // parallel zu den Szenarien
-    std::vector<LocationDraft> drafts_;          // parallel zu world_.locations
-    std::vector<ProfessionRef> profession_refs_; // parallel zu world_.professions
+    Date start_{9999, 12, 31};                     // Startdatum des gewählten Szenarios
+    std::vector<CapitalRef> capitals_;             // parallel zu world_.states
+    std::vector<PlayerRef> players_;               // parallel zu den Szenarien
+    std::vector<std::vector<PlayerRef>> playable_; // spielbare Staaten, parallel zu den Szenarien
+    std::vector<LocationDraft> drafts_;            // parallel zu world_.locations
+    std::vector<ProfessionRef> profession_refs_;   // parallel zu world_.professions
 };
 
 } // namespace
+
+std::vector<Scenario> list_scenarios(const std::filesystem::path& data_dir, std::vector<LoadIssue>& issues) {
+    Loader loader(data_dir, issues);
+    return loader.read_scenarios();
+}
 
 LoadResult load_world(const std::filesystem::path& data_dir, std::string_view scenario_id) {
     LoadResult result;

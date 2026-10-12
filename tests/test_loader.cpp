@@ -1206,6 +1206,47 @@ TEST_CASE("Lader: Staaten ohne Ort zum Startdatum bestehen nicht") {
     }
 }
 
+TEST_CASE("Lader: spielbare Staaten und Währung des Szenarios") {
+    TempDir dir(true);
+    const char* const scenario_file = "szenarien/jahresbeginn.chron";
+    replace_in_file(dir / scenario_file, "spieler = SAX",
+                    "spieler = SAX\n    spielbar = { SAX BRA }\n    waehrung = \"Taler\"");
+    SUBCASE("gelesen") {
+        const LoadResult r = load(dir, "jahresbeginn_1650");
+        INFO(issues_text(r));
+        REQUIRE(r.ok());
+        CHECK(r.issues.empty());
+        CHECK(r.world->scenario.playable == std::vector<std::string>{"SAX", "BRA"});
+        CHECK(r.world->scenario.currency == "Taler");
+        const LoadResult other = load(dir, "westfaelischer_frieden");
+        REQUIRE(other.ok());
+        CHECK(other.world->scenario.playable.empty());
+        CHECK(other.world->scenario.currency.empty());
+    }
+    SUBCASE("unbekannter spielbarer Staat") {
+        replace_in_file(dir / scenario_file, "{ SAX BRA }", "{ SAX XYZ }");
+        expect_error(load(dir), "unbekannter Staat 'XYZ' als spielbarer Staat in szenario jahresbeginn_1650",
+                     scenario_file);
+    }
+    SUBCASE("ungültiger Eintrag") {
+        replace_in_file(dir / scenario_file, "{ SAX BRA }", "{ SAX bra }");
+        expect_error(load(dir), "ungültiger Eintrag in 'spielbar' von szenario jahresbeginn_1650",
+                     scenario_file);
+    }
+    SUBCASE("Szenarien ohne die übrigen Daten lesen") {
+        std::vector<uhrwerk::LoadIssue> issues;
+        const std::vector<uhrwerk::Scenario> list = uhrwerk::list_scenarios(dir.path(), issues);
+        CHECK(issues.empty());
+        REQUIRE(list.size() == 2);
+        CHECK(list[0].id == "jahresbeginn_1650");
+        CHECK(list[0].start == Date{1650, 1, 1});
+        CHECK(list[0].player_tag == "SAX");
+        CHECK(list[0].playable.size() == 2);
+        CHECK(list[1].id == "westfaelischer_frieden");
+        CHECK(list[1].name == "Der Westfälische Frieden");
+    }
+}
+
 // ─── find_data_dir ──────────────────────────────────────────────────────────
 
 #ifndef _WIN32

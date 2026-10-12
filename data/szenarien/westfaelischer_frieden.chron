@@ -7,7 +7,9 @@
 # julianisch (14. Oktober 1648 alten Stils).
 
 szenario westfaelischer_frieden {
-    name    = "Der Westfälische Frieden"
-    datum   = 1648.10.24
-    spieler = BRA
+    name     = "Der Westfälische Frieden"
+    datum    = 1648.10.24
+    spieler  = BRA
+    spielbar = { BRA SAX }   # seit M7: hervorgehoben in der Staatswahl
+    waehrung = "Reichstaler"
 }
