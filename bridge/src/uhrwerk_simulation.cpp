@@ -854,15 +854,7 @@ String UhrwerkSimulation::get_checksum() const {
     if (!simulation_) {
         return String();
     }
-    static constexpr std::array<char, 16> kHex = {'0', '1', '2', '3', '4', '5', '6', '7',
-                                                  '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
-    std::uint64_t value = simulation_->checksum();
-    std::string text(16, '0');
-    for (int i = 15; i >= 0; --i) {
-        text[static_cast<std::size_t>(i)] = kHex[value & 0xF];
-        value >>= 4;
-    }
-    return to_godot(text);
+    return to_godot(uhrwerk::hex16(simulation_->checksum()));
 }
 
 String UhrwerkSimulation::save_game(const String& path, std::int64_t player_state_index) const {

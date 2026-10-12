@@ -39,7 +39,7 @@ Ergebnis und bekannte Grenzen:
 - **Brücke und Godot:** `save_game`, `load_game`, `get_save_info`, `get_save_format_version`;
   Spielmenü (Knopf „Menü“, F10) mit Speichern unter einem Namen und Laden aus der Liste,
   Schnellspeichern (F5) und -laden (F9), automatischer Spielstand am 1. Januar (drei bleiben),
-  Startoption `--spielmenue`. `unit_test.gd` mit **212 Prüfungen** (vorher 187); Rauch- und
+  Startoption `--spielmenue`. `unit_test.gd` mit **217 Prüfungen** (vorher 187); Rauch- und
   Klicktest mit Spielständen.
 - **CI:** CTests `speichertest_50_jahre`, `protokoll_50_jahre`, `wiederholung_50_jahre`,
   `wiederholung_spielstand`, `spielstand_laden`, `spielstand_fremder_inhalt`; der
@@ -47,6 +47,11 @@ Ergebnis und bekannte Grenzen:
   (`17078dcdeecde792`); Lasttest-Job mit Spielstand; vierter Screenshot (Spielmenü).
 - **Behoben:** MSVC brach mit `/WX` an unerreichbarem Code im Zustandsverzeichnis ab (C4702); das
   Datum der Metadaten wird ohne `sscanf` gelesen.
+- **Review M6:** Kurzname der Staaten und Ortsname gehören zum Inhaltsfingerabdruck (sie stehen in
+  der Chronik und damit in der Prüfsumme); Feldzahl statt Größe von `Rules` als Erinnerung an den
+  Fingerabdruck; Laden prüft ungerade Inkremente der Zufallsströme; Wiederholung lehnt fremde
+  Formatversionen ab; reservierte Namen im Spielmenü; am Jahreswechsel gehen keine Tage mehr
+  verloren; je eine Umsetzung von FNV-1a, ISO-Datum und Hex-Darstellung.
 
 ### Meilenstein M5 – Wirtschaft und Staatshaushalt
 

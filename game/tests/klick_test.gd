@@ -390,6 +390,9 @@ func _check_save_ui(sim: SimulationClient) -> void:
 	await _key(KEY_F10)
 	if not menu.is_open() or int(_main.call("speed")) != 0:
 		_fail("Spielstände: F10 öffnet das Menü nicht oder die Zeit läuft weiter")
+	menu.save_as("autosave_1")
+	if FileAccess.file_exists(SaveSlots.autosave_path(dir)):
+		_fail("Spielstände: reservierter Name „autosave_1“ wurde angenommen")
 	menu.save_as("Klicktest")
 	var saved_checksum := sim.get_checksum()
 	if not FileAccess.file_exists(SaveSlots.file_path(dir, "Klicktest")):

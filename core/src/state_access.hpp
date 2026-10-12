@@ -13,6 +13,7 @@
 // Bytes, Zufallsströme als zwei u64. Vektoren beginnen mit ihrer Länge (u64), feste Felder
 // (std::array) nicht.
 
+#include "uhrwerk/savegame.hpp"
 #include "uhrwerk/simulation.hpp"
 
 #include <array>
@@ -40,6 +41,12 @@ struct StateAccess {
         sim.command_log_ = std::move(log);
         sim.start_checksum_ = start_checksum;
         sim.rebuild_derived();
+    }
+
+    /// Zufallsströme mit ungeradem Inkrement (Pcg32::restore überlässt die Prüfung dem Aufrufer).
+    static bool streams_valid(const Simulation& sim) {
+        return (sim.rng_demography_.increment() & 1U) != 0 && (sim.rng_economy_.increment() & 1U) != 0 &&
+               (sim.rng_events_.increment() & 1U) != 0;
     }
 
 private:
@@ -262,20 +269,10 @@ private:
     }
 };
 
-/// Prüfsumme: FNV-1a-64, Ganzzahlen bytegenau in Little-Endian-Reihenfolge (plattformunabhängig).
-class HashVisitor : public PrimitiveVisitor<HashVisitor> {
+/// FNV-1a-64, Ganzzahlen bytegenau in Little-Endian-Reihenfolge (plattformunabhängig). Grundlage der
+/// Prüfsumme, des Prüfwerts der Nutzdaten und des Inhaltsfingerabdrucks.
+class Fnv1a {
 public:
-    void prim_i64(std::string_view, std::int64_t v) { u64(static_cast<std::uint64_t>(v)); }
-    void prim_u64(std::string_view, std::uint64_t v) { u64(v); }
-    void prim_text(std::string_view, const std::string& s) {
-        u64(s.size());
-        for (const char c : s) {
-            byte(static_cast<std::uint8_t>(c));
-        }
-    }
-    std::uint64_t value() const { return hash_; }
-
-private:
     void byte(std::uint8_t b) {
         hash_ ^= b;
         hash_ *= 0x100000001b3ULL;
@@ -285,8 +282,40 @@ private:
             byte(static_cast<std::uint8_t>(v >> (8 * i)));
         }
     }
+    void i64(std::int64_t v) { u64(static_cast<std::uint64_t>(v)); }
+    /// Länge (u64), dann die Bytes.
+    void text(std::string_view s) {
+        u64(s.size());
+        for (const char c : s) {
+            byte(static_cast<std::uint8_t>(c));
+        }
+    }
+    std::uint64_t value() const { return hash_; }
 
+private:
     std::uint64_t hash_ = 0xcbf29ce484222325ULL;
+};
+
+/// Datum als JJJJ-MM-TT (Textexport, Metadaten der Spielstände).
+inline std::string iso_date(const Date& d) {
+    std::string s = std::to_string(d.year);
+    s += d.month < 10 ? "-0" : "-";
+    s += std::to_string(d.month);
+    s += d.day < 10 ? "-0" : "-";
+    s += std::to_string(d.day);
+    return s;
+}
+
+/// Prüfsumme über das Zustandsverzeichnis.
+class HashVisitor : public PrimitiveVisitor<HashVisitor> {
+public:
+    void prim_i64(std::string_view, std::int64_t v) { hash_.i64(v); }
+    void prim_u64(std::string_view, std::uint64_t v) { hash_.u64(v); }
+    void prim_text(std::string_view, const std::string& s) { hash_.text(s); }
+    std::uint64_t value() const { return hash_.value(); }
+
+private:
+    Fnv1a hash_;
 };
 
 /// Textexport: eine Zeile je Feld, "pfad = wert" (z. B. "staaten[3].schatz = 1234.567890").
@@ -302,7 +331,7 @@ public:
         } else if constexpr (std::is_same_v<T, std::string>) {
             line(name, quoted(x));
         } else if constexpr (std::is_same_v<T, Pcg32>) {
-            line(name, hex(x.state()) + " " + hex(x.increment()));
+            line(name, hex16(x.state()) + " " + hex16(x.increment()));
         } else if constexpr (std::is_enum_v<T>) {
             line(name, std::to_string(static_cast<std::uint64_t>(x)));
         } else if constexpr (std::is_integral_v<T>) {
@@ -342,14 +371,6 @@ private:
         text_ += value;
         text_ += '\n';
     }
-    static std::string iso_date(const Date& d) {
-        std::string s = std::to_string(d.year);
-        s += d.month < 10 ? "-0" : "-";
-        s += std::to_string(d.month);
-        s += d.day < 10 ? "-0" : "-";
-        s += std::to_string(d.day);
-        return s;
-    }
     static std::string quoted(const std::string& s) {
         std::string out = "\"";
         for (const char c : s) {
@@ -363,15 +384,6 @@ private:
             }
         }
         return out + "\"";
-    }
-    static std::string hex(std::uint64_t v) {
-        static constexpr char kDigits[] = "0123456789abcdef";
-        std::string s(16, '0');
-        for (int i = 15; i >= 0; --i) {
-            s[static_cast<std::size_t>(i)] = kDigits[v & 0xF];
-            v >>= 4;
-        }
-        return s;
     }
 
     std::vector<std::string> path_;

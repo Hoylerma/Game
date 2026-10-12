@@ -161,7 +161,8 @@ Spielstände liegen in `user://spielstaende/` (unter Linux
 oberen Leiste oder F10 und hält die Zeit an: Name des Spielstands (vorbelegt mit Staat und Datum),
 Liste der Spielstände (zuletzt geänderte zuerst, mit Datum, Staat und Änderungszeit; Dateien, die
 nicht zu den Spieldaten passen oder keine Spielstände sind, erscheinen ausgegraut mit dem Grund
-als Tooltip), Laden, Schnellspeichern, Schnellladen, Weiterspielen. F5 und F9 wirken auch ohne
+als Tooltip), Laden, Schnellspeichern, Schnellladen, Weiterspielen. Die Namen `schnellspeicher`
+und `autosave_…` sind reserviert. F5 und F9 wirken auch ohne
 Menü. Am **1. Januar** speichert das Spiel automatisch; `autosave_1` ist der neueste, die drei
 letzten bleiben. Nach dem Laden steht die Zeit, die Auswahl ist aufgehoben, und Grenzen, Namen,
 Panels, Legende und Chronik zeigen den geladenen Stand. Rückmeldungen („Schnellgespeichert“,

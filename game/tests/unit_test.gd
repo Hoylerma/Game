@@ -425,6 +425,9 @@ func _test_save_slots() -> void:
 	var date := {"year": 1650, "month": 3, "day": 12}
 	_equal(SaveSlots.default_name("Brandenburg", date), "Brandenburg 1650-03-12", "default_name")
 	_equal(SaveSlots.default_name("", date), "1650-03-12", "default_name ohne Staat")
+	for reserved: String in ["schnellspeicher", "Schnellspeicher", "autosave_1", "AUTOSAVE_3"]:
+		_true(SaveSlots.is_reserved(reserved), "reservierter Name %s" % reserved)
+	_true(not SaveSlots.is_reserved("Brandenburg 1650-03-12"), "freier Name")
 	_true(SaveSlots.is_leap_year(1648) and SaveSlots.is_leap_year(1600), "Schaltjahre 1648, 1600")
 	_true(not SaveSlots.is_leap_year(1700) and not SaveSlots.is_leap_year(1649), "keine Schaltjahre")
 	_equal(SaveSlots.days_until_new_year({"year": 1648, "month": 10, "day": 24}), 69, "bis 1649 (Start)")

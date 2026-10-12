@@ -354,7 +354,7 @@ Fehlersuche ([02 Engine und Technik](02_engine_und_technik.md), [23 Multiplayer 
 - **Tests:** 146 Testfälle (u. a. 17 Speicherpunkte mit 1 und 4 Threads, beschädigte Dateien,
   Formatwache); CTests `speichertest_50_jahre`, `protokoll_50_jahre`, `wiederholung_50_jahre`,
   `wiederholung_spielstand`, `spielstand_laden`, `spielstand_fremder_inhalt`; Godot-Einheitentest
-  212 Prüfungen, Rauch- und Klicktest mit Spielständen; alle in der CI. Ein Fuzz-Lauf mit 3.000
+  217 Prüfungen, Rauch- und Klicktest mit Spielständen; alle in der CI. Ein Fuzz-Lauf mit 3.000
   verfälschten Nutzdaten unter AddressSanitizer und UndefinedBehaviorSanitizer ohne Befund (lokal).
 
 **Abnahme im Einzelnen**

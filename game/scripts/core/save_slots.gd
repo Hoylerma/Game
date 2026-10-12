@@ -54,6 +54,14 @@ static func sanitize(input: String) -> String:
 	return result
 
 
+## Namen, die Schnellspeicher und automatische Spielstände belegen (auch in anderer Schreibweise:
+## Windows und macOS unterscheiden sie im Dateinamen nicht). Ein Spielstand unter diesem Namen würde
+## von F5 überschrieben oder von der Rotation gelöscht.
+static func is_reserved(file_name: String) -> bool:
+	var lower := file_name.to_lower()
+	return lower == QUICKSAVE or lower.begins_with(AUTOSAVE_PREFIX)
+
+
 ## Vorschlag für den Namen eines Spielstands: Staat und Datum, z. B. „Brandenburg 1650-03-12“.
 static func default_name(state_name: String, date: Dictionary) -> String:
 	var text := "%04d-%02d-%02d" % [

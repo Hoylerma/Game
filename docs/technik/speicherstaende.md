@@ -73,17 +73,20 @@ Simulation beeinflusst, und ein Gesamtwert über die 13 Bereiche:
 
 | Bereich | Inhalt |
 |---|---|
-| `regeln` | alle 61 Regelwerte (ein `static_assert` auf die Größe von `Rules` erinnert an neue Felder) |
+| `regeln` | alle 61 Regelwerte (ein `static_assert` auf die Zahl der Felder von `Rules` erinnert an neue Felder, auch wenn sie in eine Ausrichtungslücke passen) |
 | `gelaende`, `konfessionen`, `kulturen` | Kennungen; Ertragsfaktor und Tragfähigkeit bzw. Alphabetisierungsfaktor |
 | `berufe` | Kennung, Schicht, steuerpflichtig, Anteile Stadt/Land, Agrarberuf, Alphabetisierung, Stadtberuf, Agrarabgabe |
 | `gueter`, `beduerfnisse` | Kennung, Basispreis, Weltmarktfaktor; Hunger und Warenkörbe je Schicht |
 | `betriebe` | Kennung, Beruf, Erzeugung, Vorleistungen, Agrar, Standort, Vorkommen, Handel, Gewicht, Geländefaktoren |
 | `maerkte`, `vorkommen` | Kennungen und Landschaften; Kennungen der Vorkommen |
-| `staaten`, `kreise` | Kennung und Konfession des Herrscherhauses; Kennungen der Kreise |
-| `orte` | Kennung, Gelände, Kreis, Lage, Fläche, Stadt, Markt, Vorkommen, Hafen; die Zahl der Orte |
+| `staaten`, `kreise` | Kennung, Kurzname und Konfession des Herrscherhauses; Kennungen der Kreise |
+| `orte` | Kennung, Name, Gelände, Kreis, Lage, Fläche, Stadt, Markt, Vorkommen, Hafen; die Zahl der Orte |
 
-**Nicht** dazu gehören Namen, Farben, Quellen und Beschreibungen: Eine korrigierte Quelle oder ein
-umbenannter Ort macht alte Spielstände nicht unbrauchbar. Passt der Fingerabdruck nicht, lehnt der
+**Nicht** dazu gehören volle Staatsnamen, Farben, Quellen und Beschreibungen: Eine korrigierte
+Quelle macht alte Spielstände nicht unbrauchbar. Der **Kurzname der Staaten und der Name der Orte
+zählen dagegen mit**: Sie stehen in Chronikeinträgen („Sachsen legt die Akzise …“, „Seuche in
+Stendal …“), und die Chronik gehört zur Prüfsumme – ein umbenannter Ort ergäbe sonst bei der
+Wiederholung eine scheinbare Abweichung. Passt der Fingerabdruck nicht, lehnt der
 Kern den Spielstand mit den abweichenden Bereichen ab („Spielstand passt nicht zu den Spieldaten
 (abweichend: berufe, orte)“). Vor Version 1.0 ändern sich die Spieldaten mit fast jedem
 Meilenstein; alte Spielstände laufen dann nicht mehr (Abschnitt 11, Entscheidung 2).
@@ -100,7 +103,8 @@ Spielstand lädt daher in die frisch geladenen Spieldaten.
 5. Zustand lesen; keine überzähligen Bytes.
 6. **Zustand prüfen:** alle Indizes (Blöcke, Zugänge, Besitzer, Hauptstädte, Chronik) im Bereich,
    Blöcke je Ort zusammenhängend und ohne Überschneidung (die parallele Rechnung verlässt sich
-   darauf), alle Vektoren der Wirtschaft und Märkte in der richtigen Größe, gültiges Datum.
+   darauf), alle Vektoren der Wirtschaft und Märkte in der richtigen Größe, gültiges Datum,
+   Zufallsströme mit ungeradem Inkrement.
 7. Metadaten passen zum Zustand (Tage, Datum, Seed, Zahl der Befehle, Startprüfsumme).
 8. **Gegenprobe:** abgeleitete Hilfsdaten neu aufbauen, Prüfsumme nachrechnen und mit der
    gespeicherten vergleichen.
@@ -252,7 +256,9 @@ den alten Spielstand heil. In der Simulation kamen `command_log()`, `start_check
 
 **Godot:**
 - **Spielmenü** über den Knopf „Menü“ in der oberen Leiste oder F10: Speichern unter einem Namen
-  (vorbelegt mit Staat und Datum, z. B. „Brandenburg 1649-05-12“; verbotene Zeichen werden zu „_“),
+  (vorbelegt mit Staat und Datum, z. B. „Brandenburg 1649-05-12“; verbotene Zeichen werden zu „_“;
+  `schnellspeicher` und `autosave_…` sind in jeder Schreibweise reserviert, weil F5 und die
+  Rotation sie überschreiben bzw. löschen),
   Laden aus der Liste der Spielstände in `user://spielstaende/` (zuletzt geänderte zuerst, mit Datum,
   Staat und Änderungszeit; unpassende ausgegraut, der Grund steht im Tooltip), Schnellspeichern,
   Schnellladen, Weiterspielen. Die Zeit hält an, solange das Menü offen ist; Escape, F10 oder ein
@@ -260,7 +266,8 @@ den alten Spielstand heil. In der Simulation kamen `command_log()`, `start_check
 - **F5** speichert in `schnellspeicher.einigkeit`, **F9** lädt ihn. Rückmeldungen erscheinen
   drei Sekunden lang in der oberen Leiste unter dem Datum.
 - **Autosave** am 1. Januar jedes Jahres, die letzten drei bleiben (`autosave_1.einigkeit` ist der
-  neueste). Die Zeit läuft dazu je Bild höchstens bis zum Jahreswechsel.
+  neueste). Die Zeit läuft dazu je Bild höchstens bis zum Jahreswechsel; die übrigen Tage folgen im
+  nächsten Bild.
 - Nach dem Laden bauen Spieler, Grenzen, Namen, Panels, Legende und Chronik neu auf; die Auswahl
   wird aufgehoben, die Zeit steht.
 - Startoption `--spielmenue` öffnet das Menü (Screenshots).

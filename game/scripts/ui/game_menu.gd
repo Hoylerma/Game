@@ -265,6 +265,11 @@ func _on_save_pressed() -> void:
 	if file_name.is_empty():
 		show_status("Bitte einen Namen für den Spielstand eingeben.", true)
 		return
+	if SaveSlots.is_reserved(file_name):
+		show_status(
+			"„%s“ ist für Schnellspeicher und automatische Spielstände reserviert." % file_name, true
+		)
+		return
 	save_requested.emit(file_name)
 
 

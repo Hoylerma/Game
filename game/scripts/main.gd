@@ -129,9 +129,12 @@ func _process(delta: float) -> void:
 	if days < 1:
 		return
 	_day_accumulator -= days
-	# Höchstens bis zum 1. Januar, damit der automatische Spielstand genau den Jahreswechsel trifft.
-	var date := _sim.get_date()
-	_sim.advance_days(mini(mini(days, MAX_DAYS_PER_FRAME), SaveSlots.days_until_new_year(date)))
+	# Höchstens bis zum 1. Januar, damit der automatische Spielstand genau den Jahreswechsel trifft;
+	# die übrigen Tage kommen im nächsten Bild (verworfen wird nur, was über MAX_DAYS_PER_FRAME geht).
+	var capped := mini(days, MAX_DAYS_PER_FRAME)
+	var step := mini(capped, SaveSlots.days_until_new_year(_sim.get_date()))
+	_day_accumulator += capped - step
+	_sim.advance_days(step)
 	_after_time_passed()
 	var now := _sim.get_date()
 	if int(now.get("month", 0)) == 1 and int(now.get("day", 0)) == 1:
