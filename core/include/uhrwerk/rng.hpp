@@ -80,6 +80,13 @@ public:
     constexpr std::uint64_t state() const { return state_; }
     constexpr std::uint64_t increment() const { return inc_; }
 
+    /// Zustand wiederherstellen, wie ihn state() und increment() geliefert haben (Spielstände,
+    /// seit M6). Ein Strom mit geradem increment ist ungültig; der Aufrufer prüft das.
+    constexpr void restore(std::uint64_t state, std::uint64_t increment) {
+        state_ = state;
+        inc_ = increment;
+    }
+
 private:
     std::uint64_t state_ = 0;
     std::uint64_t inc_ = 0;

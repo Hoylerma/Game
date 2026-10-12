@@ -1,5 +1,6 @@
 #include "uhrwerk/simulation.hpp"
 
+#include "state_access.hpp"
 #include "uhrwerk/economy.hpp"
 
 #include <algorithm>
@@ -46,68 +47,6 @@ std::int64_t to_percent(Fixed rate) {
 bool same_key(const PopBlock& pop, Index profession, Index confession, Index culture) {
     return pop.profession == profession && pop.confession == confession && pop.culture == culture;
 }
-
-/// FNV-1a, 64 Bit. Ganzzahlen werden bytegenau in Little-Endian-Reihenfolge
-/// eingespeist, damit die Prüfsumme plattformunabhängig ist.
-class Fnv1a {
-public:
-    void byte(std::uint8_t b) {
-        hash_ ^= b;
-        hash_ *= 0x100000001b3ULL;
-    }
-    void u64(std::uint64_t v) {
-        for (int i = 0; i < 8; ++i) {
-            byte(static_cast<std::uint8_t>(v >> (8 * i)));
-        }
-    }
-    void i64(std::int64_t v) { u64(static_cast<std::uint64_t>(v)); }
-    void fixed(Fixed v) { i64(v.raw()); }
-    void date(const Date& d) {
-        i64(d.year);
-        i64(d.month);
-        i64(d.day);
-    }
-    void text(std::string_view s) {
-        u64(s.size());
-        for (const char c : s) {
-            byte(static_cast<std::uint8_t>(c));
-        }
-    }
-    void rng(const Pcg32& r) {
-        u64(r.state());
-        u64(r.increment());
-    }
-    void pop(const PopBlock& p) {
-        i64(p.location);
-        i64(p.profession);
-        i64(p.confession);
-        i64(p.culture);
-        fixed(p.children);
-        fixed(p.young);
-        fixed(p.working);
-        fixed(p.old);
-        fixed(p.living_standard);
-        fixed(p.literacy);
-    }
-    void fixeds(const std::vector<Fixed>& values) {
-        u64(values.size());
-        for (const Fixed v : values) {
-            fixed(v);
-        }
-    }
-    void balance(const PopulationBalance& b) {
-        fixed(b.births);
-        fixed(b.deaths);
-        fixed(b.plague_deaths);
-        fixed(b.moved_in);
-        fixed(b.moved_out);
-        fixed(b.emigrated);
-    }
-    std::uint64_t value() const { return hash_; }
-
-private:
-    std::uint64_t hash_ = 0xcbf29ce484222325ULL;
-};
 
 } // namespace
 
@@ -370,125 +309,15 @@ const std::vector<Index>& Simulation::migration_targets(Index location) const {
 }
 
 std::uint64_t Simulation::checksum() const {
-    Fnv1a h;
-    h.date(world_.date);
-    h.i64(days_elapsed_);
-    h.u64(config_.seed);
-
-    h.u64(world_.states.size());
-    for (const State& s : world_.states) {
-        h.fixed(s.treasury);
-        for (const Fixed rate : s.tax_rates) {
-            h.fixed(rate);
-        }
-        // Haushalt (seit M5)
-        h.fixed(s.army_per_mille);
-        h.fixed(s.debt);
-        for (const Fixed tax : s.budget.taxes) {
-            h.fixed(tax);
-        }
-        h.fixed(s.budget.court);
-        h.fixed(s.budget.administration);
-        h.fixed(s.budget.army);
-        h.fixed(s.budget.interest);
-        h.fixed(s.budget.building);
-        h.fixed(s.yearly_income);
-        h.fixed(s.interest_rate);
-        h.i64(s.premium_months);
-        h.i64(s.bankruptcies);
-        h.fixed(s.court_expenses);
-        h.fixed(s.last_month_income);
-        h.fixed(s.last_month_expenses);
-        h.i64(s.capital);
-    }
-
-    h.u64(world_.locations.size());
-    for (const Location& l : world_.locations) {
-        h.i64(l.owner);
-        h.fixed(l.devastation);
-        h.i64(l.first_pop);
-        h.i64(l.pop_count);
-    }
-
-    h.u64(world_.pops.size());
-    for (const PopBlock& p : world_.pops) {
-        h.pop(p);
-    }
-    h.u64(world_.arrivals.size());
-    for (const std::vector<PopBlock>& list : world_.arrivals) {
-        h.u64(list.size());
-        for (const PopBlock& p : list) {
-            h.pop(p);
-        }
-    }
-
-    h.u64(world_.snapshots.size());
-    for (const LocationSnapshot& s : world_.snapshots) {
-        h.fixed(s.population);
-        h.fixed(s.reserve);
-    }
-    h.u64(world_.snapshot_targets.size());
-    for (const Fixed target : world_.snapshot_targets) {
-        h.fixed(target);
-    }
-    h.u64(world_.balance_current.size());
-    for (const PopulationBalance& b : world_.balance_current) {
-        h.balance(b);
-    }
-    h.u64(world_.balance_previous.size());
-    for (const PopulationBalance& b : world_.balance_previous) {
-        h.balance(b);
-    }
-    h.u64(world_.economy.size());
-    for (const LocationEconomy& e : world_.economy) {
-        h.fixed(e.production);
-        for (const Fixed tax : e.taxes) {
-            h.fixed(tax);
-        }
-        h.fixed(e.traders);
-    }
-
-    // Wirtschaft (seit M5)
-    h.fixeds(world_.business_shares);
-    h.fixeds(world_.location_supply);
-    h.fixeds(world_.location_demand);
-    h.fixeds(world_.location_income);
-    h.fixeds(world_.location_coverage);
-    h.fixeds(world_.location_development);
-    h.u64(world_.market_states.size());
-    for (const MarketState& m : world_.market_states) {
-        h.fixeds(m.price);
-        h.fixeds(m.buy_ratio);
-        h.fixeds(m.sell_ratio);
-        h.fixeds(m.import_share);
-        h.fixeds(m.supply);
-        h.fixeds(m.demand);
-        h.fixeds(m.imports);
-        h.fixeds(m.exports);
-        h.fixed(m.margin_per_trader);
-        h.fixed(m.harvest);
-    }
-
-    h.rng(rng_demography_);
-    h.rng(rng_economy_);
-    h.rng(rng_events_);
-
-    h.u64(world_.chronicle.size());
-    for (const ChronicleEntry& e : world_.chronicle) {
-        h.date(e.date);
-        h.text(e.text);
-        h.i64(e.location);
-        h.i64(e.state);
-    }
-
-    h.u64(pending_.size());
-    for (const Command& c : pending_) {
-        h.u64(static_cast<std::uint64_t>(c.type));
-        h.i64(c.state);
-        h.fixed(c.value);
-        h.u64(static_cast<std::uint64_t>(c.kind));
-    }
+    HashVisitor h;
+    StateAccess::visit(*this, h);
     return h.value();
+}
+
+std::string Simulation::state_text() const {
+    TextVisitor t;
+    StateAccess::visit(*this, t);
+    return t.text();
 }
 
 void Simulation::execute(const Command& command) {

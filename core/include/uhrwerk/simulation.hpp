@@ -31,6 +31,7 @@
 #include <cstdint>
 #include <deque>
 #include <memory>
+#include <string>
 #include <utility>
 #include <vector>
 
@@ -89,7 +90,15 @@ public:
     /// Wanderungsziele).
     std::uint64_t checksum() const;
 
+    /// Textexport des Zustands (seit M6): eine Zeile je Feld des Zustandsverzeichnisses,
+    /// "pfad = wert", in derselben Reihenfolge wie die Prüfsumme. Zum Vergleichen zweier Läufe (diff).
+    std::string state_text() const;
+
 private:
+    /// Zustandsverzeichnis (core/src/state_access.hpp): Prüfsumme, Textexport und Spielstände lesen
+    /// alle Felder über dieselbe Liste.
+    friend struct StateAccess;
+
     /// Ein Wanderungsstrom aus dem Ausgang eines Ortes (Abschnitt 4.5).
     struct Migration {
         Index target = kNone;

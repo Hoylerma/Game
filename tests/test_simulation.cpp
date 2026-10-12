@@ -1532,3 +1532,32 @@ TEST_CASE("Simulation: Kalibrierung mit den echten Daten (1648 bis 1700)") {
     CHECK(year.deaths > end * *Fixed::parse("0.025"));
     CHECK(year.deaths < end * *Fixed::parse("0.040"));
 }
+
+TEST_CASE("Simulation: Textexport des Zustandsverzeichnisses") {
+    Simulation sim(fixture_without_plague());
+    const std::string start = sim.state_text();
+    CHECK(start.find("datum = 1648-10-24\n") != std::string::npos);
+    CHECK(start.find("tage = 0\n") != std::string::npos);
+    CHECK(start.find("seed = 1648\n") != std::string::npos);
+    CHECK(start.find("staaten.anzahl = 3\n") != std::string::npos);
+    CHECK(start.find("staaten[1].steuersaetze[0] = ") != std::string::npos);
+    CHECK(start.find("staaten[1].haushalt.steuern[2] = ") != std::string::npos);
+    CHECK(start.find("bloecke[0].lebensstandard = ") != std::string::npos);
+    CHECK(start.find("maerkte[0].preis[0] = ") != std::string::npos);
+    CHECK(start.find("zufall.ereignisse = ") != std::string::npos);
+    CHECK(start.find("befehle_wartend.anzahl = 0\n") != std::string::npos);
+
+    // Gleicher Zustand, gleicher Text; ein Tag später unterscheiden sich Datum und Tage.
+    Simulation twin(fixture_without_plague());
+    CHECK(twin.state_text() == start);
+    sim.submit(set_tax(1, Fixed::from_ratio(1, 5)));
+    const std::string waiting = sim.state_text();
+    CHECK(waiting.find("befehle_wartend.anzahl = 1\n") != std::string::npos);
+    CHECK(waiting.find("befehle_wartend[0].wert = 0.199997\n") != std::string::npos); // Rohwert 13107
+    sim.step_day();
+    const std::string next = sim.state_text();
+    CHECK(next.find("datum = 1648-10-25\n") != std::string::npos);
+    CHECK(next.find("tage = 1\n") != std::string::npos);
+    CHECK(next.find("chronik[0].text = \"Sachsen legt die Kontribution auf 20 % fest.\"\n") !=
+          std::string::npos);
+}
