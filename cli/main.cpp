@@ -38,6 +38,7 @@ namespace {
 namespace fs = std::filesystem;
 using uhrwerk::Date;
 using uhrwerk::Fixed;
+using uhrwerk::hex16;
 using uhrwerk::Index;
 using uhrwerk::World;
 
@@ -358,16 +359,6 @@ std::string format_seconds(double seconds) {
     std::string text = buffer;
     std::replace(text.begin(), text.end(), '.', ',');
     return text + " s";
-}
-
-std::string hex16(std::uint64_t value) {
-    constexpr std::string_view digits = "0123456789abcdef";
-    std::string text(16, '0');
-    for (int i = 15; i >= 0; --i) {
-        text[static_cast<std::size_t>(i)] = digits[value & 0xFu];
-        value >>= 4;
-    }
-    return text;
 }
 
 /// Anzeigebreite eines UTF-8-Textes (Anzahl Codepunkte).

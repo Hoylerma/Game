@@ -12,7 +12,8 @@ ist (Stand: Meilenstein M3, Karte des Kernraums).
 | [bridge-api.md](bridge-api.md) | GDScript-Schnittstelle der GDExtension (`UhrwerkSimulation`), Kartenmodi, Bibliotheksnamen | Brücke, Godot-Projekt |
 | [bevoelkerung.md](bevoelkerung.md) | Bevölkerungsmodell seit M4 (Altersaufbau, Lebensstandard, Bildung, Kultur, Wanderung), Formeln, Mehrkernberechnung, Lasttest, Abnahme mit Messwerten | Kern, `data/`, Archivar |
 | [wirtschaft.md](wirtschaft.md) | **M5 (verbindlich):** Güter, Betriebe, Märkte und Handel, Verbrauch nach Warenkorb, Steuerarten, Staatshaushalt mit Kredit und Bankrott, Balancing-Bericht, Abnahme | Kern, `data/`, Archivar |
-| [speicherstaende.md](speicherstaende.md) | **Entwurf M6:** Spielstände (Zustandsverzeichnis für Prüfsumme, Speichern, Laden und Textexport; Format mit zstd; Inhaltsfingerabdruck; Versionen), Befehlsprotokoll und Wiederholung, Kommandozeile, Spielmenü in Godot, Abnahme | Kern, Brücke, Godot-Projekt (nach Freigabe) |
+| [speicherstaende.md](speicherstaende.md) | **Verbindlich seit M6:** Spielstände (Zustandsverzeichnis für Prüfsumme, Speichern, Laden und Textexport; Format mit zstd; Inhaltsfingerabdruck; Prüfungen beim Laden; Versionen), Befehlsprotokoll und Wiederholung, Kommandozeile, Spielmenü in Godot, Abnahme mit Messwerten | Kern, Kommandozeile, Brücke, Godot-Projekt |
+| [lesezeichen_1848.md](lesezeichen_1848.md) | **Entwurf M7:** Lesezeichen „Völkerfrühling“ (1.3.1848): Quellen und Netzzugang, Staaten des Deutschen Bundes, Zuordnung der Orte, Verwaltungsgliederung, Bevölkerung 1846, Eisenbahnen und Industrie, Staatswahl, Abnahme, offene Entscheidungen | Daten, Werkzeuge, Kern, Godot-Projekt (nach Freigabe) |
 
 Die öffentlichen Header in [`core/include/uhrwerk/`](../../core/include/uhrwerk/) sind die
 verbindliche Programmierschnittstelle des Kerns. Jede Datei beginnt mit einem Kommentar, der ihre
@@ -230,19 +231,21 @@ Der Generator ist **PCG32** (XSH-RR, 64 Bit Zustand, 32 Bit Ausgabe). Jedes Syst
 eigenen Strom, abgeleitet aus dem Partie-Seed (`SimConfig::seed`, Standard 1648) und einer festen
 Strom-Kennung:
 
-| `RngStream` | Wert | Verwendung in M1 |
+| `RngStream` | Wert | Verwendung |
 |---|---|---|
 | `Demografie` | 1 | angelegt, noch nicht gezogen |
-| `Wirtschaft` | 2 | angelegt, noch nicht gezogen |
+| `Wirtschaft` | 2 | Erntefaktor je Markt und Jahr (seit M5) |
 | `Ereignisse` | 3 | Seuchen am Jahreswechsel (`chance`, `uniform`) |
 | `Ki` | 4 | reserviert |
+| `Lasttest` | 5 | Aufbau der Lasttest-Welt (seit M4), nicht in der Simulation |
+| `Testbefehle` | 6 | Testbefehle der Kommandozeile (`--testbefehle`, seit M6), nicht in der Simulation |
 
 - Neue Inhalte in einem System verändern die Zufallsfolge der anderen Systeme **nicht**.
 - Die Werte der Kennungen ändern sich **nie**; neue Ströme werden hinten angefügt. Sonst wären
   Spielstände und Referenz-Prüfsummen ungültig.
 - `below(n)` ist frei von Modulo-Verzerrung, `unit()` liefert `Fixed` in [0, 1) aus den oberen
   16 Bit, `uniform(lo, hi)` und `chance(p)` bauen darauf auf – alles ohne Gleitkomma.
-- Die Zustände aller Ströme gehören zur Prüfsumme.
+- Die Zustände aller Ströme gehören zur Prüfsumme und zum Spielstand (seit M6).
 
 ## 6. Daten und Karte
 

@@ -215,3 +215,17 @@ theme_type_variation = &"SpeedButton"
 disabled = true
 toggle_mode = true
 text = "5"
+
+[node name="MenuSeparator" type="VSeparator" parent="Row"]
+layout_mode = 2
+
+[node name="GameMenuButton" type="Button" parent="Row"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 30)
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Spielmenü: Speichern und Laden (F10)"
+focus_mode = 0
+theme_type_variation = &"SpeedButton"
+disabled = true
+text = "Menü"

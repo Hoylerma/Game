@@ -545,6 +545,11 @@ jobs:
             "$GODOT_BIN" --path game --rendering-driver opengl3 --audio-driver Dummy \
             -- --screenshot="$PWD/artefakte/einigkeit_wirtschaft.png" --tage=400 --kartenmodus=9 --ort=leipzig --haushalt \
             2>&1 | tee -a "$RUNNER_TEMP/screenshot.log"
+          # Spielmenü mit Speichern und Laden (seit M6)
+          xvfb-run -a -s "-screen 0 1600x900x24" \
+            "$GODOT_BIN" --path game --rendering-driver opengl3 --audio-driver Dummy \
+            -- --screenshot="$PWD/artefakte/einigkeit_spielmenue.png" --tage=200 --spielmenue \
+            2>&1 | tee -a "$RUNNER_TEMP/screenshot.log"
           if grep -E "SCRIPT ERROR|Parse Error|SHADER ERROR" "$RUNNER_TEMP/screenshot.log"; then
             echo "::error::Skript- oder Shaderfehler bei den Screenshots."
             exit 1

@@ -73,7 +73,12 @@ Prüft die GDExtension und die Kartendaten ohne Szene und ohne Grafikausgabe:
 10. Einnahmen, Ausgaben und Produktion > 0
 11. Chronik: Größe, Einträge mit allen Feldern, leere Abfrage hinter dem Ende
 12. Prüfsumme 16-stellig hexadezimal; ein zweiter Lauf mit denselben Befehlen ergibt dieselbe
-13. Karte (Fassung M3): `provinzen.png`, `fluesse.png` (Graustufen, gleiche Größe) und
+13. Spielstände (seit M6): `save_game` schreibt, `get_save_info` nennt Datum, Spielerstaat, Tage,
+    Prüfsumme und Formatversion und meldet `compatible`; nach 30 weiteren Tagen stellt
+    `load_game` die gespeicherte Prüfsumme wieder her, und 30 Tage danach stimmt sie mit dem
+    Lauf ohne Unterbrechung überein; eine fehlende, eine fremde und eine abgeschnittene Datei
+    werden mit Meldung abgelehnt, die laufende Simulation bleibt dabei unverändert
+14. Karte (Fassung M3): `provinzen.png`, `fluesse.png` (Graustufen, gleiche Größe) und
     `definition.csv` (neue Kopfzeile) vorhanden; jeder Eintrag der CSV über
     `get_location_index` auflösbar, jeder Ort der Simulation in der CSV, keine Lücken;
     Bildgröße wie in `karte.chron`; Blaukanal ist eine Flächenart 0..3, bei B ≠ 0 kein Ort;
@@ -122,6 +127,12 @@ echten Daten und prüft:
    sich und nennt alle Steuerarten und Posten; ein bewegter Akzise-Regler meldet „gilt ab dem
    nächsten Tag“; die Ortsinfo der Hauptstadt zeigt Markt, Einkommen und Preise; der Wechsel in
    den Kartenmodus „Märkte“ läuft ohne Fehler.
+5. **Spielstände** (seit M6, in einem eigenen Ordner `user://klick_test_spielstaende`, der danach
+   gelöscht wird): F10 öffnet das Spielmenü und hält die Zeit an; Speichern im Menü legt die Datei
+   an, die Liste zeigt sie, die obere Leiste meldet es; Escape schließt das Menü und setzt die
+   Geschwindigkeit fort; F5 legt den Schnellspeicher an, F9 stellt seine Prüfsumme wieder her; eine
+   fremde Datei steht ausgegraut in der Liste und lässt sich nicht laden, der eigene Spielstand
+   schon; mit Stufe 5 entsteht am nächsten 1. Januar `autosave_1`.
 
 ```bash
 godot --headless --path game --script res://tests/klick_test.gd
@@ -141,6 +152,7 @@ Ausgabe mit den echten Daten (4.542 Orte) unter xvfb:
   Eingabeereignisse: 122/122 Klicks richtig (1 Stichproben unter Panels übersprungen)
   Klick ins Meer hebt die Auswahl auf
   Wirtschaft: 5 Prüfungen
+  Spielstände: Menü, Speichern, Escape, F5, F9, Liste, automatischer Spielstand
 KLICK OK 4542/4542
 ```
 

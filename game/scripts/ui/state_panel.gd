@@ -136,6 +136,12 @@ func show_unavailable() -> void:
 		_budget_popup.hide()
 
 
+## Noch nicht bestätigte Regler vergessen (nach dem Laden eines Spielstands, seit M6).
+func clear_pending() -> void:
+	for kind in _pending.size():
+		_pending[kind] = -1
+
+
 ## Ein Befehl wurde abgelehnt: Regler auf den Wert der Simulation zurücksetzen.
 func reject_pending(kind: int, message: String) -> void:
 	if kind < 0 or kind >= _sliders.size():

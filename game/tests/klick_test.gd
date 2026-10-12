@@ -15,6 +15,9 @@ extends SceneTree
 ##    hebt die Auswahl auf.
 ## 4. Wirtschaft (seit M5): drei Steuerregler, Haushaltsfenster, Abschnitt Wirtschaft im
 ##    Ortspanel, Kartenmodus „Märkte“.
+## 5. Spielstände (seit M6): F10 öffnet das Spielmenü und hält die Zeit an, Speichern unter
+##    einem Namen, Escape schließt, F5/F9 schnellspeichern und -laden, Laden aus der Liste,
+##    unpassende Dateien ausgegraut, automatischer Spielstand am 1. Januar.
 ## 3. Namen und Panels (MapLabels.record_drawn, vor 1. und 2.): Nach einem Moduswechsel
 ##    und nach der ersten Auswahl per Klick liegt ohne Kamerabewegung kein Name unter
 ##    einem Panel;
@@ -109,6 +112,7 @@ func _run() -> void:
 		% [event_ok, event_total, skipped])
 	await _check_click_into_sea()
 	await _check_economy_ui(sim)
+	await _check_save_ui(sim)
 
 	if _failure_count == 0 and all_levels == testable.size() and event_ok == event_total:
 		print("KLICK OK %d/%d" % [all_levels, testable.size()])
@@ -369,6 +373,103 @@ func _check_economy_ui(sim: SimulationClient) -> void:
 	_main.call("set_map_mode", MapModes.MAP_POLITICAL)
 	_main.call("select_location", -1)
 	print("  Wirtschaft: %d Prüfungen" % checks)
+
+
+## Spielmenü, Schnellspeichern und -laden, automatischer Spielstand (seit M6).
+func _check_save_ui(sim: SimulationClient) -> void:
+	var dir := "user://klick_test_spielstaende"
+	_clear_saves(dir)
+	_main.set("save_dir", dir)
+	var menu: GameMenu = _main.call("game_menu")
+	var bar: TopBar = _main.call("top_bar")
+	_main.call("set_speed", 3)
+	# Das Haushaltsfenster aus der Wirtschaftsprüfung ist ein eigenes Fenster und nimmt Tasten
+	# entgegen; Escape schließt es (wie im Spiel), danach erreicht F10 die Hauptszene.
+	await _key(KEY_ESCAPE)
+
+	await _key(KEY_F10)
+	if not menu.is_open() or int(_main.call("speed")) != 0:
+		_fail("Spielstände: F10 öffnet das Menü nicht oder die Zeit läuft weiter")
+	menu.save_as("autosave_1")
+	if FileAccess.file_exists(SaveSlots.autosave_path(dir)):
+		_fail("Spielstände: reservierter Name „autosave_1“ wurde angenommen")
+	menu.save_as("Klicktest")
+	var saved_checksum := sim.get_checksum()
+	if not FileAccess.file_exists(SaveSlots.file_path(dir, "Klicktest")):
+		_fail("Spielstände: „Klicktest“ wurde nicht gespeichert")
+	if not menu.entry_names().has("Klicktest"):
+		_fail("Spielstände: Liste ohne „Klicktest“ (%s)" % ", ".join(menu.entry_names()))
+	if not bar.speed_line_text().contains("Gespeichert"):
+		_fail("Spielstände: keine Meldung nach dem Speichern (%s)" % bar.speed_line_text())
+	await _key(KEY_ESCAPE)
+	if menu.is_open() or int(_main.call("speed")) != 3:
+		_fail("Spielstände: Escape schließt das Menü nicht oder setzt die Zeit nicht fort")
+	_main.call("set_speed", 0)
+
+	sim.advance_days(15)
+	await _key(KEY_F5)
+	var quick_checksum := sim.get_checksum()
+	if not FileAccess.file_exists(SaveSlots.quicksave_path(dir)):
+		_fail("Spielstände: F5 legt keinen Schnellspeicher an")
+	sim.advance_days(20)
+	await _key(KEY_F9)
+	if sim.get_checksum() != quick_checksum:
+		_fail(
+			"Spielstände: F9 lädt nicht den Schnellspeicher (%s statt %s)"
+			% [sim.get_checksum(), quick_checksum]
+		)
+
+	# Laden aus der Liste; eine fremde Datei erscheint ausgegraut.
+	var garbage := FileAccess.open(SaveSlots.file_path(dir, "kaputt"), FileAccess.WRITE)
+	garbage.store_string("kein Spielstand")
+	garbage.close()
+	_main.call("open_game_menu")
+	if not menu.entry_names().has("kaputt") or menu.load_entry("kaputt"):
+		_fail("Spielstände: fremde Datei fehlt in der Liste oder lässt sich laden")
+	if not menu.load_entry("Klicktest") or sim.get_checksum() != saved_checksum or menu.is_open():
+		_fail(
+			"Spielstände: Laden aus der Liste (%s statt %s)" % [sim.get_checksum(), saved_checksum]
+		)
+
+	# Automatischer Spielstand: mit Stufe 5 bis zum nächsten Jahreswechsel.
+	var year := int(sim.get_date().get("year", 0))
+	var autosave := SaveSlots.autosave_path(dir)
+	_main.call("set_speed", 5)
+	var deadline := Time.get_ticks_msec() + 15000
+	while not FileAccess.file_exists(autosave) and Time.get_ticks_msec() < deadline:
+		await process_frame
+	_main.call("set_speed", 0)
+	var date: Dictionary = sim.get_save_info(autosave).get("date", {})
+	if (
+		int(date.get("year", 0)) != year + 1
+		or int(date.get("month", 0)) != 1
+		or int(date.get("day", 0)) != 1
+	):
+		_fail("Spielstände: kein automatischer Spielstand am 1. Januar %d (%s)" % [year + 1, date])
+	_clear_saves(dir)
+	print("  Spielstände: Menü, Speichern, Escape, F5, F9, Liste, automatischer Spielstand")
+
+
+## Taste drücken und loslassen (echtes Eingabeereignis mit physischem Tastencode).
+func _key(code: Key) -> void:
+	for pressed: bool in [true, false]:
+		var event := InputEventKey.new()
+		event.physical_keycode = code
+		event.keycode = code
+		event.pressed = pressed
+		Input.parse_input_event(event)
+		await process_frame
+	await process_frame
+
+
+func _clear_saves(dir: String) -> void:
+	var absolute := SaveSlots.absolute_dir(dir)
+	var access := DirAccess.open(absolute)
+	if access == null:
+		return
+	for file in access.get_files():
+		access.remove(file)
+	DirAccess.remove_absolute(absolute)
 
 
 ## Kein gezeichneter Name liegt unter einem sichtbaren Bedienelement.

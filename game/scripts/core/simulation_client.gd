@@ -56,6 +56,10 @@ const REQUIRED_METHODS: Array[StringName] = [
 	&"get_chronicle_size",
 	&"get_chronicle",
 	&"get_checksum",
+	&"save_game",
+	&"load_game",
+	&"get_save_info",
+	&"get_save_format_version",
 ]
 
 var _native: Object = null
@@ -257,6 +261,28 @@ func get_chronicle(from_index: int) -> Array[Dictionary]:
 
 func get_checksum() -> String:
 	return str(_native.call(&"get_checksum"))
+
+
+## Spielstand in die Datei path (absoluter Pfad) schreiben; player_state_index ist der Spielerstaat.
+## Leer bei Erfolg, sonst die Meldung (seit M6).
+func save_game(path: String, player_state_index: int) -> String:
+	return str(_native.call(&"save_game", path, player_state_index))
+
+
+## Spielstand laden: Spieldaten aus data_path frisch laden, Zustand hinein. Ersetzt die laufende
+## Simulation nur bei Erfolg; leer bei Erfolg, sonst die Meldung (seit M6).
+func load_game(data_path: String, path: String) -> String:
+	return str(_native.call(&"load_game", data_path, path))
+
+
+## Angaben zu einem Spielstand ohne ihn zu laden: { ok, compatible, reason, scenario, date,
+## date_text, days, player_tag, player_name, format_version, game_version, checksum } (seit M6).
+func get_save_info(path: String) -> Dictionary:
+	return _as_dictionary(_native.call(&"get_save_info", path))
+
+
+func get_save_format_version() -> int:
+	return int(_native.call(&"get_save_format_version"))
 
 
 static func _as_dictionary(value: Variant) -> Dictionary:

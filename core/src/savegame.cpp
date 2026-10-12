@@ -40,26 +40,11 @@ bool fail(std::string* error, std::string message) {
 
 // ─── FNV-1a-64 ──────────────────────────────────────────────────────────────
 
-class Fnv {
+/// FNV-1a mit den Feldtypen des Inhaltsfingerabdrucks.
+class Fnv : public Fnv1a {
 public:
-    void byte(std::uint8_t b) {
-        hash_ ^= b;
-        hash_ *= 0x100000001b3ULL;
-    }
-    void u64(std::uint64_t v) {
-        for (int i = 0; i < 8; ++i) {
-            byte(static_cast<std::uint8_t>(v >> (8 * i)));
-        }
-    }
-    void i64(std::int64_t v) { u64(static_cast<std::uint64_t>(v)); }
     void fixed(Fixed f) { i64(f.raw()); }
     void flag(bool b) { u64(b ? 1 : 0); }
-    void text(std::string_view s) {
-        u64(s.size());
-        for (const char c : s) {
-            byte(static_cast<std::uint8_t>(c));
-        }
-    }
     void amounts(const std::vector<GoodAmount>& list) {
         u64(list.size());
         for (const GoodAmount& a : list) {
@@ -67,10 +52,6 @@ public:
             fixed(a.amount);
         }
     }
-    std::uint64_t value() const { return hash_; }
-
-private:
-    std::uint64_t hash_ = 0xcbf29ce484222325ULL;
 };
 
 std::uint64_t fnv1a(std::span<const std::uint8_t> bytes) {
@@ -247,8 +228,24 @@ private:
 
 // ─── Inhaltsfingerabdruck (Abschnitt 3) ─────────────────────────────────────
 
+/// Zahl der Felder eines Aggregats: größtes N, mit dem T{x1, …, xN} gültig ist. Anders als sizeof
+/// fällt so auch ein neues Feld auf, das in eine Ausrichtungslücke passt.
+struct AnyField {
+    template <typename T> constexpr operator T() const noexcept { return T{}; }
+};
+template <typename T, std::size_t... I> constexpr bool brace_constructible(std::index_sequence<I...>) {
+    return requires { T{(static_cast<void>(I), AnyField{})...}; };
+}
+template <typename T, std::size_t N = 0> constexpr std::size_t field_count() {
+    if constexpr (brace_constructible<T>(std::make_index_sequence<N + 1>{})) {
+        return field_count<T, N + 1>();
+    } else {
+        return N;
+    }
+}
+
 void hash_rules(Fnv& h, const Rules& r) {
-    static_assert(sizeof(Rules) == 488,
+    static_assert(field_count<Rules>() == 61,
                   "Rules hat sich geändert: neue Felder auch in hash_rules (Inhaltsfingerabdruck) aufnehmen");
     h.fixed(r.devastation_decay);
     h.fixed(r.devastation_yield_loss);
@@ -349,13 +346,6 @@ void add_content_meta(std::string& out, const ContentFingerprint& content) {
     for (std::size_t i = 0; i < kContentParts.size(); ++i) {
         add_meta(out, "inhalt." + std::string(kContentParts[i]), hex16(content.parts[i]));
     }
-}
-
-std::string iso_date(const Date& d) {
-    char buffer[32];
-    const int n = std::snprintf(buffer, sizeof buffer, "%04d-%02d-%02d", static_cast<int>(d.year),
-                                static_cast<int>(d.month), static_cast<int>(d.day));
-    return std::string(buffer, static_cast<std::size_t>(std::max(0, n)));
 }
 
 std::optional<Meta> parse_meta(std::string_view text, std::string* error) {
@@ -655,6 +645,9 @@ std::string validate_state(const Simulation& sim) {
     if (!is_valid(w.date) || sim.days_elapsed() < 0) {
         return "Datum ungültig";
     }
+    if (!StateAccess::streams_valid(sim)) {
+        return "Zufallsstrom ungültig";
+    }
     for (const State& s : w.states) {
         if (!none_or_in(s.capital, L)) {
             return "Hauptstadt von " + s.tag + " ungültig";
@@ -803,13 +796,16 @@ ContentFingerprint content_fingerprint(const World& w) {
         }
     });
     p[9] = hash_list(w.deposits, [](Fnv& h, const std::string& d) { h.text(d); });
+    // Kurzname der Staaten und Name der Orte stehen in Chronikeinträgen und damit in der Prüfsumme.
     p[10] = hash_list(w.states, [](Fnv& h, const State& s) {
         h.text(s.tag);
+        h.text(s.short_name);
         h.i64(s.confession);
     });
     p[11] = hash_list(w.districts, [](Fnv& h, const District& d) { h.text(d.id); });
     p[12] = hash_list(w.locations, [](Fnv& h, const Location& l) {
         h.text(l.id);
+        h.text(l.name);
         h.i64(l.terrain);
         h.i64(l.district);
         h.fixed(l.longitude);
@@ -1037,6 +1033,10 @@ std::optional<Replay> read_replay(std::span<const std::uint8_t> bytes, std::stri
     if (!container) {
         return std::nullopt;
     }
+    if (container->version != kSaveFormatVersion) {
+        fail(error, "Protokoll im Format " + std::to_string(container->version) + " wird nicht unterstützt");
+        return std::nullopt;
+    }
     MetaReader m(container->meta);
     Replay r;
     r.game_version = m.text("spiel");
@@ -1090,6 +1090,11 @@ std::optional<Replay> replay_from_save(std::span<const std::uint8_t> bytes, std:
     }
     const auto info = info_from(*container, error);
     if (!info) {
+        return std::nullopt;
+    }
+    if (info->format_version != kSaveFormatVersion) {
+        fail(error,
+             "Spielstand im Format " + std::to_string(info->format_version) + " wird nicht unterstützt");
         return std::nullopt;
     }
     const auto payload = unpack(*container, error);

@@ -25,6 +25,7 @@ func _initialize() -> void:
 	_test_map_detail()
 	_test_map_data_and_layout()
 	_test_location_catalog()
+	_test_save_slots()
 	if _failures.is_empty():
 		print("UNIT OK (%d Prüfungen)" % _count)
 		quit(0)
@@ -410,6 +411,69 @@ func _any_contains(lines: PackedStringArray, part: String) -> bool:
 		if line.contains(part):
 			return true
 	return false
+
+
+## Spielstände (seit M6): Dateinamen, Jahreswechsel, Rotation, Tastenbelegung.
+func _test_save_slots() -> void:
+	_equal(SaveSlots.sanitize("  Brandenburg 1650-03-12  "), "Brandenburg 1650-03-12", "sanitize Rand")
+	_equal(SaveSlots.sanitize("a/b:c*d?e\"f<g>h|i\\j"), "a_b_c_d_e_f_g_h_i_j", "sanitize verbotene Zeichen")
+	_equal(SaveSlots.sanitize("Zeile\nzwei\t"), "Zeile_zwei_", "sanitize Steuerzeichen")
+	_equal(SaveSlots.sanitize("partie.einigkeit"), "partie", "sanitize Endung")
+	_equal(SaveSlots.sanitize(" ..versteckt.. "), "versteckt", "sanitize Punkte am Rand")
+	_equal(SaveSlots.sanitize(" . "), "", "sanitize leer")
+	_equal(SaveSlots.sanitize("Ä".repeat(80)).length(), SaveSlots.MAX_NAME_LENGTH, "sanitize Länge")
+	var date := {"year": 1650, "month": 3, "day": 12}
+	_equal(SaveSlots.default_name("Brandenburg", date), "Brandenburg 1650-03-12", "default_name")
+	_equal(SaveSlots.default_name("", date), "1650-03-12", "default_name ohne Staat")
+	for reserved: String in ["schnellspeicher", "Schnellspeicher", "autosave_1", "AUTOSAVE_3"]:
+		_true(SaveSlots.is_reserved(reserved), "reservierter Name %s" % reserved)
+	_true(not SaveSlots.is_reserved("Brandenburg 1650-03-12"), "freier Name")
+	_true(SaveSlots.is_leap_year(1648) and SaveSlots.is_leap_year(1600), "Schaltjahre 1648, 1600")
+	_true(not SaveSlots.is_leap_year(1700) and not SaveSlots.is_leap_year(1649), "keine Schaltjahre")
+	_equal(SaveSlots.days_until_new_year({"year": 1648, "month": 10, "day": 24}), 69, "bis 1649 (Start)")
+	_equal(SaveSlots.days_until_new_year({"year": 1649, "month": 12, "day": 31}), 1, "31. Dezember")
+	_equal(SaveSlots.days_until_new_year({"year": 1649, "month": 1, "day": 1}), 365, "1. Januar 1649")
+	_equal(SaveSlots.days_until_new_year({"year": 1648, "month": 1, "day": 1}), 366, "1. Januar 1648")
+	_equal(SaveSlots.days_until_new_year({"year": 1700, "month": 2, "day": 28}), 307, "28. Februar 1700")
+	_true(
+		SaveSlots.format_modified(0).length() == 17
+		and SaveSlots.format_modified(0).substr(2, 1) == ".",
+		"format_modified %s" % SaveSlots.format_modified(0)
+	)
+
+	# Rotation der automatischen Spielstände in einem eigenen Ordner.
+	var dir := "user://unit_test_spielstaende"
+	var absolute := SaveSlots.absolute_dir(dir)
+	DirAccess.make_dir_recursive_absolute(absolute)
+	for n in [1, 2, 3]:
+		var file := FileAccess.open(SaveSlots.file_path(dir, "autosave_%d" % n), FileAccess.WRITE)
+		file.store_string(str(n))
+		file.close()
+	SaveSlots.rotate_autosaves(dir, 3)
+	_true(not FileAccess.file_exists(SaveSlots.autosave_path(dir)), "Rotation: autosave_1 frei")
+	_equal(
+		FileAccess.get_file_as_string(SaveSlots.file_path(dir, "autosave_2")), "1", "Rotation 1 → 2"
+	)
+	_equal(
+		FileAccess.get_file_as_string(SaveSlots.file_path(dir, "autosave_3")), "2", "Rotation 2 → 3"
+	)
+	var listed := SaveSlots.list(null, dir)
+	_equal(listed.size(), 2, "Liste der Spielstände")
+	var names := PackedStringArray()
+	for entry in listed:
+		names.append(str(entry["name"]))
+	names.sort()
+	_equal(names, PackedStringArray(["autosave_2", "autosave_3"]), "Namen in der Liste")
+	var access := DirAccess.open(absolute)
+	for file in access.get_files():
+		access.remove(file)
+	DirAccess.remove_absolute(absolute)
+
+	# Tasten (project.godot): F10 Spielmenü, F5 Schnellspeichern, F9 Schnellladen.
+	for pair: Array in [[&"spielmenue", KEY_F10], [&"schnellspeichern", KEY_F5], [&"schnellladen", KEY_F9]]:
+		var events := InputMap.action_get_events(pair[0]) if InputMap.has_action(pair[0]) else []
+		var key := events[0] as InputEventKey if not events.is_empty() else null
+		_true(key != null and key.physical_keycode == pair[1], "Taste für %s" % pair[0])
 
 
 func _equal(actual: Variant, expected: Variant, what: String) -> void:

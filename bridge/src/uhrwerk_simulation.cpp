@@ -854,15 +854,7 @@ String UhrwerkSimulation::get_checksum() const {
     if (!simulation_) {
         return String();
     }
-    static constexpr std::array<char, 16> kHex = {'0', '1', '2', '3', '4', '5', '6', '7',
-                                                  '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
-    std::uint64_t value = simulation_->checksum();
-    std::string text(16, '0');
-    for (int i = 15; i >= 0; --i) {
-        text[static_cast<std::size_t>(i)] = kHex[value & 0xF];
-        value >>= 4;
-    }
-    return to_godot(text);
+    return to_godot(uhrwerk::hex16(simulation_->checksum()));
 }
 
 String UhrwerkSimulation::save_game(const String& path, std::int64_t player_state_index) const {
@@ -946,11 +938,13 @@ Dictionary UhrwerkSimulation::get_save_info(const String& path) const {
     result["date_text"] = to_godot(uhrwerk::format_date_long(info->date));
     result["days"] = info->days;
     result["player_tag"] = to_godot(info->player_tag);
+    // Kurzname für Listen (z. B. „Brandenburg“), sonst der volle Name oder die Kennung.
     String player_name = to_godot(info->player_tag);
     if (const uhrwerk::World* w = world()) {
         const uhrwerk::Index state = w->find_state(info->player_tag);
         if (state != uhrwerk::kNone) {
-            player_name = to_godot(at(w->states, state).name);
+            const uhrwerk::State& s = at(w->states, state);
+            player_name = to_godot(s.short_name.empty() ? s.name : s.short_name);
         }
     }
     result["player_name"] = player_name;

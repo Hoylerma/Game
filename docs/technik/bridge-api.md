@@ -1,4 +1,4 @@
-# GDExtension-Brücke: Schnittstelle für GDScript (Meilensteine M1 bis M5)
+# GDExtension-Brücke: Schnittstelle für GDScript (Meilensteine M1 bis M6)
 
 Die Brücke (`bridge/`) stellt dem Godot-Projekt genau eine Klasse bereit: **`UhrwerkSimulation`** (erbt von `RefCounted`). Sie besitzt einen `uhrwerk::Simulation`-Kern und übersetzt zwischen Godot-Typen und Kern-Typen.
 
@@ -22,7 +22,7 @@ Die Brücke (`bridge/`) stellt dem Godot-Projekt genau eine Klasse bereit: **`Uh
 | `get_date_text()` | `String` | `"24. Oktober 1648"` |
 | `get_days_elapsed()` | `int` | |
 | `get_scenario_name()` | `String` | |
-| `get_player_state_index()` | `int` | Index des vorausgewählten Spielerstaates oder -1 |
+| `get_player_state_index()` | `int` | Index des Spielerstaates oder -1: aus dem Szenario, nach `load_game` aus dem Spielstand |
 | `get_state_count()` | `int` | |
 | `get_state_index(tag: String)` | `int` | -1, wenn unbekannt |
 | `get_state(index: int)` | `Dictionary` | `tag`, `name`, `short_name`, `color` (Color), `ruler`, `government`, `capital_index` (int), `treasury` (float), `tax_rate_percent` (int, gerundet), `income_month` (float), `expenses_month` (float), `population` (int), `location_count` (int); seit M4 `living_standard` (float 0–100, nach Einwohnern gemittelt) und `balance_previous` (Dictionary wie bei `get_location`, Summe der Orte); seit M5 der Haushalt: `tax_rates_percent` (Array mit 3 int, Index = Steuerart), `taxes_month` (Array mit 3 float), `court_month`, `administration_month`, `army_month`, `interest_month`, `building_month` (float, Ausgaben je Posten), `debt`, `interest_percent`, `yearly_income` (gleitende Jahreseinnahmen), `army_per_mille` (float), `soldiers`, `bankruptcies`, `premium_months` (int, Monate mit Zinsaufschlag nach einem Bankrott). `tax_rate_percent` ist die Kontribution. `income_month` und `expenses_month` sind seit M5 Summe der Steuern bzw. der Posten des Haushalts vom letzten Rechentag; vor dem ersten Rechentag die beim Start geschätzten Werte (vorher 0) |
@@ -44,6 +44,18 @@ Die Brücke (`bridge/`) stellt dem Godot-Projekt genau eine Klasse bereit: **`Uh
 | `get_chronicle_size()` | `int` | |
 | `get_chronicle(from_index: int)` | `Array` | Einträge ab `from_index` als Dictionaries `{ "date_text": String, "text": String, "location_index": int, "state_index": int }` |
 | `get_checksum()` | `String` | Prüfsumme als 16-stellige Hexadezimalzahl |
+
+### Spielstände (seit M6)
+
+Format, Prüfungen und Godot-Seite: [speicherstaende.md](speicherstaende.md). Pfade sind
+Dateipfade des Betriebssystems (in GDScript `ProjectSettings.globalize_path("user://…")`).
+
+| Methode | Rückgabe | Beschreibung |
+|---|---|---|
+| `save_game(path: String, player_state_index: int)` | `String` | Schreibt den Spielstand (Spielerstaat für die Metadaten; ungültiger Index = bisheriger Spielerstaat), legt den Ordner an. Leer bei Erfolg, sonst die Meldung |
+| `load_game(data_path: String, path: String)` | `String` | Lädt die Spieldaten des Szenarios aus dem Spielstand frisch und den Zustand hinein. Ersetzt die laufende Simulation **nur bei Erfolg**; danach gelten Spielerstaat und Ladehinweise aus diesem Ladevorgang. Leer bei Erfolg, sonst die Meldung (z. B. „Spielstand passt nicht zu den Spieldaten (abweichend: orte)“) |
+| `get_save_info(path: String)` | `Dictionary` | Ohne zu laden: `ok` (bool, Datei lesbar), `compatible` (bool, passt zum Inhalt der geladenen Spieldaten), `reason` (String, leer wenn passend), `scenario`, `date` (`{ year, month, day }`), `date_text`, `days` (int), `player_tag`, `player_name` (Kurzname, sonst Kennung), `format_version` (int), `game_version`, `checksum` (16-stellig hex). Bei `ok == false` nur `ok`, `compatible` und `reason` |
+| `get_save_format_version()` | `int` | Formatversion, die diese Brücke schreibt (1) |
 
 ## Kartenmodi (`get_map_colors`)
 

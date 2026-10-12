@@ -1,5 +1,5 @@
 extends SceneTree
-## Rauchtest der Brücke und der Kartendaten (Godot-Seite, Fassung M5).
+## Rauchtest der Brücke und der Kartendaten (Godot-Seite, Fassung M6).
 ##
 ## Aufruf aus dem Repository-Hauptordner (nach einem Import des Projekts):
 ##   godot --headless --path game --script res://tests/smoke_test.gd
@@ -196,6 +196,7 @@ func _run() -> void:
 	_check_after_simulation(sim, player)
 	_check_chronicle(sim)
 	_check_determinism(sim, player, new_tax, new_excise)
+	_check_savegames(sim, player)
 	if _check_map:
 		_check_map_files(sim)
 	else:
@@ -596,6 +597,90 @@ func _check_determinism(
 		"zweiter Lauf mit gleicher Prüfsumme",
 		"zweiter Lauf: %s statt %s" % [twin.get_checksum(), checksum]
 	)
+
+
+## Spielstände über die Brücke (seit M6): Speichern, Angaben, Laden, Weiterrechnen, Fehlerfälle.
+func _check_savegames(sim: SimulationClient, player: int) -> void:
+	var dir := OS.get_user_data_dir().path_join("smoke_test_spielstaende")
+	_remove_dir(dir)
+	DirAccess.make_dir_recursive_absolute(dir)
+	var path := dir.path_join("rauchtest.einigkeit")
+	var version := sim.get_save_format_version()
+	_check(version >= 1, "Formatversion %d" % version, "Formatversion %d" % version)
+	var error := sim.save_game(path, player)
+	if not _check(
+		error.is_empty() and FileAccess.file_exists(path),
+		"Spielstand geschrieben (%d Byte)" % FileAccess.get_file_as_bytes(path).size(),
+		"Speichern fehlgeschlagen: " + error
+	):
+		return
+	var checksum := sim.get_checksum()
+	var days := sim.get_days_elapsed()
+	var info := sim.get_save_info(path)
+	var tag := str(sim.get_state(player).get("tag", ""))
+	_check(
+		bool(info.get("ok", false)) and bool(info.get("compatible", false))
+		and str(info.get("checksum", "")) == checksum and int(info.get("days", -1)) == days
+		and str(info.get("player_tag", "")) == tag
+		and str(info.get("date_text", "")) == sim.get_date_text()
+		and int(info.get("format_version", 0)) == version,
+		"Angaben zum Spielstand: %s, %s" % [str(info.get("date_text", "")), tag],
+		"Angaben zum Spielstand passen nicht: %s" % str(info)
+	)
+
+	sim.advance_days(30)
+	var continued := sim.get_checksum()
+	error = sim.load_game(UhrwerkPaths.data_dir(), path)
+	_check(
+		error.is_empty() and sim.get_checksum() == checksum and sim.get_days_elapsed() == days
+		and sim.get_player_state_index() == player,
+		"Spielstand geladen, Prüfsumme %s" % checksum,
+		"Laden: „%s“, Prüfsumme %s statt %s" % [error, sim.get_checksum(), checksum]
+	)
+	sim.advance_days(30)
+	_check(
+		sim.get_checksum() == continued,
+		"nach dem Laden 30 Tage weiter wie ohne Unterbrechung",
+		"nach dem Laden %s statt %s" % [sim.get_checksum(), continued]
+	)
+
+	# Fehlerfälle: Die laufende Simulation bleibt unverändert.
+	var before := sim.get_checksum()
+	var garbage := dir.path_join("kaputt.einigkeit")
+	var file := FileAccess.open(garbage, FileAccess.WRITE)
+	file.store_string("kein Spielstand")
+	file.close()
+	var bytes := FileAccess.get_file_as_bytes(path)
+	var truncated := dir.path_join("abgeschnitten.einigkeit")
+	file = FileAccess.open(truncated, FileAccess.WRITE)
+	file.store_buffer(bytes.slice(0, bytes.size() - 10))
+	file.close()
+	for bad: String in [dir.path_join("fehlt.einigkeit"), garbage, truncated]:
+		error = sim.load_game(UhrwerkPaths.data_dir(), bad)
+		_check(
+			not error.is_empty() and sim.get_checksum() == before,
+			"%s abgelehnt: %s" % [bad.get_file(), error.get_slice("\n", 0)],
+			"%s: Fehler „%s“, Prüfsumme %s statt %s" % [
+				bad.get_file(), error, sim.get_checksum(), before
+			]
+		)
+	var bad_info := sim.get_save_info(garbage)
+	_check(
+		not bool(bad_info.get("ok", true)) and not bool(bad_info.get("compatible", true))
+		and not str(bad_info.get("reason", "")).is_empty(),
+		"Angaben zu einer fremden Datei: %s" % str(bad_info.get("reason", "")),
+		"Angaben zu einer fremden Datei: %s" % str(bad_info)
+	)
+	_remove_dir(dir)
+
+
+func _remove_dir(dir: String) -> void:
+	var access := DirAccess.open(dir)
+	if access == null:
+		return
+	for file in access.get_files():
+		access.remove(file)
+	DirAccess.remove_absolute(dir)
 
 
 func _check_map_files(sim: SimulationClient) -> void:

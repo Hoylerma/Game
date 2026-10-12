@@ -10,6 +10,7 @@ extends RefCounted
 ##   --zoom=<faktor>        Vergrößerung gegenüber der Übersicht (1 = ganze Karte);
 ##                          zentriert auf --ort, sonst auf die Kartenmitte (bis 1: Übersicht)
 ##   --haushalt             Haushaltsfenster des Spielerstaates öffnen (seit M5)
+##   --spielmenue           Spielmenü öffnen (seit M6)
 
 const DEFAULT_SCREENSHOT_DAYS := 60
 
@@ -21,6 +22,7 @@ var location_id := ""
 var zoom_factor := 0.0
 ## Haushaltsfenster vor dem Screenshot öffnen (seit M5).
 var show_budget := false
+var show_game_menu := false
 ## Unbekannte oder fehlerhafte Angaben (deutsche Meldungen).
 var problems := PackedStringArray()
 
@@ -73,6 +75,11 @@ static func parse(args: PackedStringArray) -> LaunchOptions:
 					options.show_budget = true
 				else:
 					options.problems.append("--haushalt erwartet keinen Wert, nicht „%s“." % value)
+			"--spielmenue":
+				if value.is_empty():
+					options.show_game_menu = true
+				else:
+					options.problems.append("--spielmenue erwartet keinen Wert, nicht „%s“." % value)
 			"--ort":
 				if value.is_empty():
 					options.problems.append("--ort braucht eine Ort-Kennung (--ort=berlin_coelln).")

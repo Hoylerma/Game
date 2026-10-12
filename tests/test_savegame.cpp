@@ -250,15 +250,22 @@ TEST_CASE("Spielstand: Inhaltsfingerabdruck") {
     const World base = testhilfen::load_fixture();
     const auto fp = uhrwerk::content_fingerprint(base);
 
-    SUBCASE("Namen, Farben, Quellen und Zustand zählen nicht") {
+    SUBCASE("Anzeigenamen, Farben, Quellen und Zustand zählen nicht") {
         World w = base;
         w.states[0].name = "Kurbrandenburg";
         w.states[0].color = uhrwerk::Color{1, 2, 3};
         w.states[0].treasury += Fixed::from_int(1000);
-        w.locations[0].name = "Anderswo";
         w.locations[0].source = "andere Quelle";
         w.goods[0].name = "Korn";
         CHECK(uhrwerk::content_fingerprint(w) == fp);
+    }
+    SUBCASE("Namen aus Chronikeinträgen zählen: Kurzname der Staaten, Ortsname") {
+        // Die Chronik steht in der Prüfsumme; ein anderer Name ergäbe eine andere Wiederholung.
+        World w = base;
+        w.states[0].short_name = "Kurbrandenburg";
+        w.locations[0].name = "Anderswo";
+        const auto parts = uhrwerk::content_differences(fp, uhrwerk::content_fingerprint(w));
+        CHECK(parts == std::vector<std::string_view>{"staaten", "orte"});
     }
     SUBCASE("Änderungen werden ihrem Bereich zugeordnet") {
         World w = base;
