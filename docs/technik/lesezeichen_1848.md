@@ -1,6 +1,6 @@
 # Lesezeichen 1848 „Völkerfrühling“ (Meilenstein M7)
 
-> **Status: in Umsetzung** – Entscheidungen 1–7 wie empfohlen freigegeben; M7a Schritte a1–a4
+> **Status: in Umsetzung** – Entscheidungen 1–7 wie empfohlen freigegeben; M7a Schritte a1–a5
 > umgesetzt, Stand in Abschnitt 13
 > ([meilensteine.md](../meilensteine.md#m7--lesezeichen-1848)). Grundlage sind
 > [04 Zeitrahmen, Epochen, Startdaten](../04_zeitrahmen_epochen_startdaten.md) (Lesezeichen 6),
@@ -254,7 +254,7 @@ Szenarien; Klicktest mit der Staatswahl.
 | a2 Zuordnung | `tools/geodaten/zuordnung.py` mit 476 Regeln: 3.967 Orte mit Besitzer, 575 Orte ohne Daten. Flächen nahe der Literatur (Preußen 275.000 km², Österreich im Bund 185.000, Bayern 77.600, Hannover 37.400, Württemberg 19.700, Sachsen 15.100, Baden 15.000). |
 | a3 Verwaltung | Modell, Lader, Archivar, Fingerabdruck und Brücke fertig; Daten: 8 preußische Provinzen, 11 Kronländer bzw. Kreise Österreichs, die oberste Ebene der Mittelstaaten, die drei Herzogtümer unter Dänemark (57 Einheiten). **Offen:** preußische Regierungsbezirke und Kreise, österreichische Kreise (Entscheidung 2 sieht sie vor). |
 | a4 Bevölkerung | `tools/geodaten/bevoelkerung_1846.py`: 45,0 Millionen Einwohner, Summen je Provinz, Kronland oder Staat. Ein Lauf über 10 Jahre verliert ohne Kalibrierung 1 % (Geburten 36,5 ‰, Sterbefälle 34,9 ‰); Zielwerte 1848 folgen in b3. |
-| a5 Godot | offen |
+| a5 Godot | Spielmenü „Neues Spiel“ mit Wahl des Lesezeichens, Knopf „Diesen Staat spielen“ in der Ortsinfo (jeder Staat wählbar, die spielbaren nennt ein Hinweis), Kartenmodus „Verwaltung“ (Taste Ü), Ortsinfo mit Verwaltungskette und Bundesgebiet, Staatsinfo mit Bund und Zollverein, Startoptionen `--szenario` und `--staat`. Statt eines eigenen Startbildschirms startet das Spiel wie bisher mit 1648. |
 | a6 Doku, Stichprobe | Doku der Werkzeuge und Tabellen fertig; Stichprobe und Review offen |
 
 **Quellen:** Die Domains der Quellen (Wikipedia, Wikidata, GenWiki/GOV, OpenHistoricalMap) waren in
