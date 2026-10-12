@@ -12,6 +12,7 @@ ist (Stand: Meilenstein M3, Karte des Kernraums).
 | [bridge-api.md](bridge-api.md) | GDScript-Schnittstelle der GDExtension (`UhrwerkSimulation`), Kartenmodi, Bibliotheksnamen | Brücke, Godot-Projekt |
 | [bevoelkerung.md](bevoelkerung.md) | Bevölkerungsmodell seit M4 (Altersaufbau, Lebensstandard, Bildung, Kultur, Wanderung), Formeln, Mehrkernberechnung, Lasttest, Abnahme mit Messwerten | Kern, `data/`, Archivar |
 | [wirtschaft.md](wirtschaft.md) | **M5 (verbindlich):** Güter, Betriebe, Märkte und Handel, Verbrauch nach Warenkorb, Steuerarten, Staatshaushalt mit Kredit und Bankrott, Balancing-Bericht, Abnahme | Kern, `data/`, Archivar |
+| [speicherstaende.md](speicherstaende.md) | **Entwurf M6:** Spielstände (Zustandsverzeichnis für Prüfsumme, Speichern, Laden und Textexport; Format mit zstd; Inhaltsfingerabdruck; Versionen), Befehlsprotokoll und Wiederholung, Kommandozeile, Spielmenü in Godot, Abnahme | Kern, Brücke, Godot-Projekt (nach Freigabe) |
 
 Die öffentlichen Header in [`core/include/uhrwerk/`](../../core/include/uhrwerk/) sind die
 verbindliche Programmierschnittstelle des Kerns. Jede Datei beginnt mit einem Kommentar, der ihre
