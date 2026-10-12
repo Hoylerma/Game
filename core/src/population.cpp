@@ -219,6 +219,9 @@ void initialize_population(World& world) {
     world.market_states.clear();
     world.economy.clear();
     world.location_development.clear();
+    for (State& state : world.states) {
+        state.yearly_income = Fixed{}; // neu schätzen (estimate_budgets), auch für kopierte Welten
+    }
     const EconomyTopology topology = build_economy_topology(world);
     ensure_economy_state(world, topology);
     estimate_budgets(world); // Staatsnachfrage schon beim Einschwingen

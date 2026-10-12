@@ -387,8 +387,13 @@ bool run_state_budget(World& world, Index state_index, const std::vector<Index>&
         --state.premium_months;
     }
 
-    // Staatsbankrott: Schulden über bankrott_quote Jahreseinnahmen.
-    if (state.yearly_income > Fixed::zero() && state.debt > rules.bankruptcy_ratio * state.yearly_income) {
+    // Staatsbankrott: Schulden über bankrott_quote Jahreseinnahmen. Als Jahreseinnahmen zählen dabei
+    // mindestens die laufenden Ausgaben eines Jahres (Hof, Verwaltung, Heer): Ohne Steuern sänken die
+    // gleitenden Jahreseinnahmen gegen null, und jede Schuld löste Monat für Monat einen neuen
+    // Bankrott aus.
+    const Fixed solvency =
+        Fixed::max(state.yearly_income, (budget.court + budget.administration + budget.army) * twelve);
+    if (solvency > Fixed::zero() && state.debt > rules.bankruptcy_ratio * solvency) {
         state.debt -= state.debt * rules.bankruptcy_haircut;
         state.premium_months = rules.bankruptcy_years * 12;
         ++state.bankruptcies;

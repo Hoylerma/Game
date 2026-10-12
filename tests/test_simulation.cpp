@@ -444,6 +444,9 @@ TEST_CASE("Simulation: Steuerbefehl") {
         sim.submit(set_tax(0, -Fixed::from_raw(1)));
         sim.submit(set_tax(0, sim.world().rules.tax_rate_max + Fixed::from_raw(1)));
         sim.submit(set_tax(0, Fixed::from_int(5)));
+        Command bad_kind = set_tax(0, Fixed::from_ratio(1, 5));
+        bad_kind.kind = static_cast<TaxKind>(7); // keine Steuerart
+        sim.submit(bad_kind);
         sim.step_day();
         CHECK(sim.world().states[0].tax_rate(TaxKind::Kontribution) == original);
         CHECK(sim.world().chronicle.empty());
@@ -748,6 +751,20 @@ World make_budget_world() {
 
 } // namespace
 
+TEST_CASE("Simulation: Start schätzt die Jahreseinnahmen neu, auch für eine kopierte Welt") {
+    World fresh = testhilfen::load_fixture();
+    World copy = fresh;
+    for (uhrwerk::State& state : copy.states) {
+        state.yearly_income = Fixed::from_int(1'000'000); // veralteter Wert aus einer anderen Welt
+    }
+    uhrwerk::initialize_population(copy);
+    REQUIRE(copy.states.size() == fresh.states.size());
+    for (std::size_t s = 0; s < fresh.states.size(); ++s) {
+        CHECK(fresh.states[s].yearly_income > Fixed::zero());
+        CHECK(copy.states[s].yearly_income == fresh.states[s].yearly_income);
+    }
+}
+
 TEST_CASE("Simulation: Staatshaushalt exakt (Abschnitt 4.6)") {
     World w = make_budget_world();
     const std::vector<Index> locations{0, 1};
@@ -861,7 +878,9 @@ TEST_CASE("Simulation: Staatshaushalt exakt (Abschnitt 4.6)") {
         const Fixed yearly = Fixed::from_int(1200) + (income * twelve - Fixed::from_int(1200)) / twelve;
         CHECK(s.yearly_income == yearly);
         const Fixed debt = Fixed::from_int(8000) - (income - court - admin - army - interest);
-        REQUIRE(debt > Fixed::from_int(4) * yearly);
+        // Schwelle: 4 × max(Jahreseinnahmen, laufende Ausgaben eines Jahres).
+        const Fixed solvency = Fixed::max(yearly, (court + admin + army) * twelve);
+        REQUIRE(debt > Fixed::from_int(4) * solvency);
         CHECK(s.debt == debt - debt * Fixed::from_ratio(1, 2));
         CHECK(s.premium_months == 240);
         CHECK(s.bankruptcies == 1);
@@ -876,6 +895,24 @@ TEST_CASE("Simulation: Staatshaushalt exakt (Abschnitt 4.6)") {
         CHECK(s.interest_rate == expected);
         CHECK(s.premium_months == 239);
         CHECK(s.bankruptcies == 1);
+    }
+
+    SUBCASE("Ohne Steuern kein Bankrott Monat für Monat") {
+        // Ohne Einnahmen sinken die gleitenden Jahreseinnahmen gegen null; die Schwelle bemisst sich
+        // dann an den laufenden Ausgaben (Hof, Verwaltung, Heer) eines Jahres.
+        w.economy[0].taxes = {};
+        s.treasury = Fixed::zero();
+        s.yearly_income = Fixed::from_raw(5);
+        s.debt = Fixed::from_int(2000);
+        const Fixed threshold = Fixed::from_int(4) * (court + admin + army) * twelve;
+        int bankruptcies = 0;
+        for (int month = 0; month < 120; ++month) {
+            bankruptcies += uhrwerk::run_state_budget(w, 0, locations) ? 1 : 0;
+            CHECK(s.debt <= threshold + court + admin + army + s.budget.interest);
+        }
+        CHECK(s.bankruptcies == bankruptcies);
+        CHECK(bankruptcies >= 1);
+        CHECK(bankruptcies <= 10); // etwa alle anderthalb Jahre (7), vorher jeden Monat (über 100)
     }
 
     SUBCASE("Zins höchstens zins_max") {

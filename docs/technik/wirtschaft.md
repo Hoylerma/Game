@@ -364,11 +364,15 @@ Zinsen, Bauten) und gehen in die Prüfsumme ein.
 0). Überschüsse tilgen zuerst die Schulden, dann füllen sie den Schatz. Solange Schulden bestehen,
 wird nicht gebaut.
 
-**Staatsbankrott:** Überschreiten die Schulden `bankrott_quote × J` (4 Jahreseinnahmen), werden sie
+**Staatsbankrott:** Überschreiten die Schulden `bankrott_quote × max(J, 12 × (Hof + Verwaltung + Heer))`
+(4 Jahreseinnahmen, mindestens 4 Jahresausgaben ohne Zinsen und Bauten), werden sie
 um `bankrott_schnitt` (50 %) gekürzt; der Zins steigt `bankrott_jahre` (20) lang um
 `bankrott_aufschlag` (0,04). Eintrag in der Chronik („Sachsen-Weimar erklärt den Staatsbankrott: Die
 Gläubiger verlieren 50 % ihrer Forderungen.“). Geprüft wird nach der Buchung des Monats; die
-Jahreseinnahmen sind dabei schon fortgeschrieben.
+Jahreseinnahmen sind dabei schon fortgeschrieben. Die Untergrenze aus den Ausgaben kam mit dem Review
+hinzu: Senkt der Spieler alle Steuern auf 0, fallen die gleitenden Jahreseinnahmen gegen null, und
+ohne Untergrenze löste jede Schuld Monat für Monat einen neuen Bankrott aus (120 in 10 Jahren);
+jetzt etwa einer in anderthalb Jahren.
 
 **Landesausbau:** Die Bauten verbessern die Orte des Staates (nach Fläche verteilt):
 `ausbau_o += bauten × fläche_o / Σ fläche`; die Tragfähigkeit steigt um
@@ -501,7 +505,7 @@ dauert 1,0 s statt 0,15 s; mit den 60 Orten der Testregion sind es wenige Millis
 lohnen sich erst, wenn die Grenze näher rückt.
 
 Determinismus: gleiche Prüfsummen mit GCC und Clang bei 1–4 Threads (100 Jahre `5db13a66d63e6079`,
-Lasttest 50.000 Blöcke/2 Jahre `6545173879bcb4f9`), MSVC im CI-Job „Determinismus“; Unit-Tests,
+Lasttest 50.000 Blöcke/2 Jahre `73873d6adfe7fc29`), MSVC im CI-Job „Determinismus“; Unit-Tests,
 Lasttest und Bilanz laufen ohne Befund unter ThreadSanitizer sowie AddressSanitizer mit
 UndefinedBehaviorSanitizer.
 

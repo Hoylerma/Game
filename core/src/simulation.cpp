@@ -497,7 +497,8 @@ void Simulation::execute(const Command& command) {
         if (!in_range(world_.states, command.state)) {
             return;
         }
-        if (command.value < Fixed::zero() || command.value > world_.rules.tax_rate_max) {
+        if (command.value < Fixed::zero() || command.value > world_.rules.tax_rate_max ||
+            static_cast<std::size_t>(command.kind) >= kTaxKinds) {
             return;
         }
         world_.states[static_cast<std::size_t>(command.state)]

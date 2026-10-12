@@ -285,8 +285,8 @@ das über Jahrzehnte im Gleichgewicht bleibt.
   Wirtschaft in der Ortsinfo, Kartenmodi „Wirtschaft“ (Taste O) und „Märkte“ (Taste P, mit
   Marktgrenzen), jetzt zehn.
 - **Referenz-Prüfsumme** nach 100 Jahren jetzt `5db13a66d63e6079` (Bevölkerung 713.456); der
-  Lasttest (500.000 Blöcke, 3 Jahre, Seed 1648) endet mit `3d0d1ce2215dba7c`.
-- Tests: 135 doctest-Fälle im Kern (u. a. Ortsrechnung, Markt, Handel und Haushalt exakt gegen
+  Lasttest (500.000 Blöcke, 3 Jahre, Seed 1648) endet mit `8602a1273080ee9e`.
+- Tests: 136 doctest-Fälle im Kern (u. a. Ortsrechnung, Markt, Handel und Haushalt exakt gegen
   Handrechnung, Balancing-Bericht), CTests `bilanz_fixture` und `bilanz_verstoss`,
   Godot-Einheitentest 187 Prüfungen, Rauch- und Klicktest mit Wirtschaft; alle in der CI.
   ThreadSanitizer und AddressSanitizer mit UndefinedBehaviorSanitizer ohne Befund (lokal).

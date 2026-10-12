@@ -30,10 +30,10 @@ Bankrott bei etwa einer Jahreseinnahme Vermögen.** Ergebnis und bekannte Grenze
     Sterblichkeit, der Lebensstandard folgt dem Realeinkommen.
   - Staatshaushalt am Rechentag mit Kredit, Tilgung, Zins nach Verschuldung, Staatsbankrott
     (Chronik), Bauten und Landesausbau; Staatsnachfrage auf dem Markt der Hauptstadt.
-    Steuerbefehl mit Steuerart (`Command::kind`).
+    Steuerbefehl mit Steuerart (`Command::kind`, ungültige Arten werden verworfen).
   - Balancing-Bericht (`uhrwerk/balance.hpp`): Zielwerte lesen, Läufe messen, Median und
     Quantile in Festkomma, Verstöße.
-  - **135 Testfälle** (vorher 123), u. a. Ortsrechnung, Markt, Handel und Haushalt exakt gegen
+  - **136 Testfälle** (vorher 123), u. a. Ortsrechnung, Markt, Handel und Haushalt exakt gegen
     Handrechnung, Bericht und Zielwerte.
 - **CLI:** `uhrwerk-cli wirtschaft` (Güter, Berufe, Haushalt je Staat, `--maerkte`, `--jahre`),
   `uhrwerk-cli bilanz` (`--seeds`, `--jahre`, `--ziele`; Exitcode 1 bei Verstoß); `pruefen` prüft
@@ -51,7 +51,7 @@ Bankrott bei etwa einer Jahreseinnahme Vermögen.** Ergebnis und bekannte Grenze
 - **CI:** neuer Job „Balancing (Linux, Release)“ (16 Seeds, 100 Jahre); CTests `bilanz_fixture`
   und `bilanz_verstoss`; dritter Screenshot (Märkte mit Haushaltsfenster).
 - **Referenz-Prüfsumme** nach 100 Jahren jetzt `5db13a66d63e6079` (vorher `ed6b14a02cfbfa5d`),
-  Bevölkerung 713.456; Lasttest-Referenz `3d0d1ce2215dba7c` (vorher `a5a4c0d80a2f23ea`).
+  Bevölkerung 713.456; Lasttest-Referenz `8602a1273080ee9e` (vorher `a5a4c0d80a2f23ea`).
 
 ### Meilenstein M4 – Bevölkerung und Lasttest
 

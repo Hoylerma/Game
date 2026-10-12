@@ -279,8 +279,9 @@ im Einzelnen: [wirtschaft.md, Abschnitt 4.9](../docs/technik/wirtschaft.md#49-re
   Sachsen-Gotha unter Ernst dem Frommen gut geordnet (0,9), Braunschweig-Wolfenbüttel sparsam verwaltet
   (0,5).
 - **Kredit und Bankrott** (`regeln.chron`): 5 % Zins, 2 Prozentpunkte Aufschlag je Jahreseinnahme
-  Schulden über der ersten, höchstens 20 %; Bankrott bei Schulden über 4 Jahreseinnahmen mit
-  Schuldenschnitt 50 % und 20 Jahren Zinsaufschlag.
+  Schulden über der ersten, höchstens 20 %; Bankrott bei Schulden über 4 Jahreseinnahmen (mindestens
+  4 Jahresausgaben für Hof, Verwaltung und Heer) mit Schuldenschnitt 50 % und 20 Jahren
+  Zinsaufschlag.
 
 **Zielwerte** (`common/zielwerte.chron`, gelesen nur vom Balancing-Bericht) und ihre Begründung:
 
