@@ -418,8 +418,22 @@ public:
         int year = 0;
         int month = 0;
         int day = 0;
-        char tail = 0;
-        if (std::sscanf(value.c_str(), "%d-%d-%d%c", &year, &month, &day, &tail) != 3) {
+        const auto parse_int = [&](const std::size_t begin, const std::size_t end, int& out) {
+            if (begin >= end) {
+                return false;
+            }
+            const char* first = value.data() + static_cast<std::ptrdiff_t>(begin);
+            const char* last = value.data() + static_cast<std::ptrdiff_t>(end);
+            const auto [ptr, ec] = std::from_chars(first, last, out);
+            return ec == std::errc() && ptr == last;
+        };
+        const std::size_t first_dash = value.find('-');
+        const std::size_t second_dash =
+            first_dash == std::string::npos ? std::string::npos : value.find('-', first_dash + 1);
+        if (first_dash == std::string::npos || second_dash == std::string::npos ||
+            value.find('-', second_dash + 1) != std::string::npos || !parse_int(0, first_dash, year) ||
+            !parse_int(first_dash + 1, second_dash, month) ||
+            !parse_int(second_dash + 1, value.size(), day)) {
             bad(key);
             return d;
         }
