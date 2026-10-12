@@ -33,6 +33,10 @@ const MAX_LISTED_IDS := 20
 
 ## true, sobald view_ready gesendet wurde.
 var view_is_ready := false
+## Ordner der Spielstände (seit M6); Tests setzen einen eigenen, bevor sie speichern.
+var save_dir := SaveSlots.DEFAULT_DIR
+## Automatischer Spielstand am 1. Januar (seit M6).
+var autosave_enabled := true
 
 var _sim: SimulationClient = null
 var _map: MapData = null
@@ -53,6 +57,9 @@ var _chronicle_read := 0
 var _legend_month := -1
 ## Kartenmodus → Zeitpunkt (ms), zu dem eine doppelt belegte Taste gedrückt wurde.
 var _mode_key_down_at := {}
+## Spielmenü (seit M6) und die Geschwindigkeit, die beim Schließen wieder gilt.
+var _game_menu: GameMenu = null
+var _speed_before_menu := 0
 
 @onready var _map_view: MapView = $MapView
 @onready var _top_bar: TopBar = %TopBar
@@ -78,6 +85,8 @@ func _ready() -> void:
 
 	_top_bar.configure_speeds(SPEED_DAYS_PER_SECOND)
 	_top_bar.speed_selected.connect(_set_speed)
+	_top_bar.menu_requested.connect(toggle_game_menu)
+	_build_game_menu()
 	_state_panel.tax_rate_requested.connect(_on_tax_rate_requested)
 	_chronicle_panel.location_requested.connect(_on_chronicle_location_requested)
 	_location_panel.close_requested.connect(_select_location.bind(-1))
@@ -120,11 +129,21 @@ func _process(delta: float) -> void:
 	if days < 1:
 		return
 	_day_accumulator -= days
-	_sim.advance_days(mini(days, MAX_DAYS_PER_FRAME))
+	# Höchstens bis zum 1. Januar, damit der automatische Spielstand genau den Jahreswechsel trifft.
+	var date := _sim.get_date()
+	_sim.advance_days(mini(mini(days, MAX_DAYS_PER_FRAME), SaveSlots.days_until_new_year(date)))
 	_after_time_passed()
+	var now := _sim.get_date()
+	if int(now.get("month", 0)) == 1 and int(now.get("day", 0)) == 1:
+		_autosave()
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if _handle_save_keys(event):
+		get_viewport().set_input_as_handled()
+		return
+	if _game_menu != null and _game_menu.is_open():
+		return # Solange das Menü offen ist, ruhen Karte und Zeit (Escape schließt es, GameMenu).
 	for speed in SPEED_ACTIONS.size():
 		if event.is_action_pressed(SPEED_ACTIONS[speed], false, true):
 			if speed == 0:
@@ -192,6 +211,21 @@ func state_panel() -> StatePanel:
 ## Ortspanel (Klicktest: Abschnitt Wirtschaft, seit M5).
 func location_panel() -> LocationPanel:
 	return _location_panel
+
+
+## Spielmenü (Klicktest, seit M6).
+func game_menu() -> GameMenu:
+	return _game_menu
+
+
+## Obere Leiste (Klicktest: Meldungen nach dem Speichern, seit M6).
+func top_bar() -> TopBar:
+	return _top_bar
+
+
+## Geschwindigkeitsstufe 0 (Pause) bis 5.
+func speed() -> int:
+	return _speed
 
 
 # --- Laden -------------------------------------------------------------------
@@ -803,6 +837,167 @@ func _on_tax_rate_requested(kind: int, percent: int) -> void:
 		)
 
 
+# --- Spielstände (seit M6, docs/technik/speicherstaende.md Abschnitt 9) ----------
+
+
+func _build_game_menu() -> void:
+	_game_menu = GameMenu.new()
+	$UI.add_child(_game_menu)
+	_game_menu.save_requested.connect(save_game_as)
+	_game_menu.load_requested.connect(load_game_file)
+	_game_menu.quick_save_requested.connect(quick_save)
+	_game_menu.quick_load_requested.connect(quick_load)
+	_game_menu.close_requested.connect(close_game_menu)
+
+
+## F10, F5 und F9; true, wenn das Ereignis eine dieser Tasten war.
+func _handle_save_keys(event: InputEvent) -> bool:
+	if event.is_action_pressed(&"spielmenue", false, true):
+		toggle_game_menu()
+		return true
+	if event.is_action_pressed(&"schnellspeichern", false, true):
+		quick_save()
+		return true
+	if event.is_action_pressed(&"schnellladen", false, true):
+		quick_load()
+		return true
+	return false
+
+
+## Spielmenü öffnen oder schließen (Knopf „Menü“, F10).
+func toggle_game_menu() -> void:
+	if _game_menu.is_open():
+		close_game_menu()
+	else:
+		open_game_menu()
+
+
+## Öffnet das Spielmenü und hält die Zeit an.
+func open_game_menu() -> void:
+	if _sim == null or _game_menu.is_open():
+		return
+	_speed_before_menu = _speed
+	_set_speed(0)
+	_tooltip.hide_tooltip()
+	var state := _sim.get_state(_player)
+	var state_name := str(state.get("short_name", ""))
+	if state_name.is_empty():
+		state_name = str(state.get("name", ""))
+	_game_menu.open(
+		SaveSlots.default_name(state_name, _sim.get_date()),
+		SaveSlots.list(_sim, save_dir),
+		FileAccess.file_exists(SaveSlots.quicksave_path(save_dir))
+	)
+
+
+## Schließt das Spielmenü; resume setzt die Geschwindigkeit von vorher fort.
+func close_game_menu(resume: bool = true) -> void:
+	if not _game_menu.is_open():
+		return
+	_game_menu.close()
+	if resume:
+		_set_speed(_speed_before_menu)
+
+
+## Speichert unter file_name (ohne Endung) im Ordner der Spielstände; leer bei Erfolg.
+func save_game_as(file_name: String) -> String:
+	if _sim == null:
+		return "Keine Simulation geladen."
+	var error := _sim.save_game(SaveSlots.file_path(save_dir, file_name), _player)
+	_report_save(error, "Gespeichert als „%s“" % file_name)
+	return error
+
+
+## F5: Schnellspeicher überschreiben.
+func quick_save() -> void:
+	if _sim != null:
+		_report_save(_sim.save_game(SaveSlots.quicksave_path(save_dir), _player), "Schnellgespeichert")
+
+
+## F9: Schnellspeicher laden.
+func quick_load() -> void:
+	if _sim == null:
+		return
+	if not FileAccess.file_exists(SaveSlots.quicksave_path(save_dir)):
+		_report_load_error("Noch kein Schnellspeicher vorhanden (F5 legt ihn an).")
+		return
+	load_game_file(SaveSlots.quicksave_path(save_dir))
+
+
+## Lädt einen Spielstand (absoluter Pfad); die laufende Partie bleibt bei einem Fehler erhalten.
+## Danach ist die Zeit angehalten und das Menü geschlossen.
+func load_game_file(path: String) -> bool:
+	if _sim == null:
+		return false
+	var error := _sim.load_game(_data_dir, path)
+	if not error.is_empty():
+		_report_load_error(error)
+		return false
+	_after_load()
+	close_game_menu(false)
+	_set_speed(0)
+	_top_bar.show_notice("Geladen: %s (%s)" % [path.get_file().get_basename(), _sim.get_date_text()])
+	print("EINIGKEIT: Spielstand geladen: %s, Prüfsumme %s" % [path, _sim.get_checksum()])
+	return true
+
+
+## Nach dem Laden: Spieler, Besitz, Namen, Chronik, Legende und Panels neu aufbauen.
+func _after_load() -> void:
+	_player = _sim.get_player_state_index()
+	_market_indices = _sim.get_location_market_indices()
+	_day_accumulator = 0.0
+	_select_location(-1)
+	_state_panel.clear_pending()
+	_owners = PackedInt32Array()
+	_update_place_labels()
+	_update_owners()
+	_chronicle_panel.clear()
+	_chronicle_read = 0
+	_legend_month = int(_sim.get_date().get("month", 0))
+	_rebuild_legend()
+	_refresh_all()
+
+
+## Automatischer Spielstand am 1. Januar: die letzten SaveSlots.AUTOSAVE_KEEP bleiben.
+func _autosave() -> void:
+	if not autosave_enabled or _sim == null:
+		return
+	SaveSlots.rotate_autosaves(save_dir)
+	var error := _sim.save_game(SaveSlots.autosave_path(save_dir), _player)
+	if error.is_empty():
+		_top_bar.show_notice("Automatisch gespeichert (%s)" % _sim.get_date_text())
+	else:
+		printerr("EINIGKEIT: Automatischer Spielstand fehlgeschlagen: ", error)
+		_top_bar.show_notice("Automatischer Spielstand fehlgeschlagen")
+
+
+func _report_save(error: String, success: String) -> void:
+	if error.is_empty():
+		_top_bar.show_notice(success)
+		if _game_menu.is_open():
+			_game_menu.show_status(success + ".")
+			_game_menu.show_saves(
+				SaveSlots.list(_sim, save_dir),
+				FileAccess.file_exists(SaveSlots.quicksave_path(save_dir))
+			)
+		return
+	printerr("EINIGKEIT: Speichern fehlgeschlagen: ", error)
+	if _game_menu.is_open():
+		_game_menu.show_status("Speichern fehlgeschlagen: " + error, true)
+	else:
+		_notices.add_notice("Speichern fehlgeschlagen", "Der Spielstand wurde nicht geschrieben.", error)
+
+
+func _report_load_error(error: String) -> void:
+	printerr("EINIGKEIT: Laden fehlgeschlagen: ", error)
+	if _game_menu.is_open():
+		_game_menu.show_status("Laden fehlgeschlagen: " + error, true)
+	else:
+		_notices.add_notice(
+			"Spielstand nicht geladen", "Die laufende Partie geht unverändert weiter.", error
+		)
+
+
 # --- Screenshot ----------------------------------------------------------------
 
 
@@ -825,6 +1020,8 @@ func _run_screenshot() -> void:
 		_after_time_passed()
 	if _options.show_budget:
 		_state_panel.show_budget()
+	if _options.show_game_menu:
+		open_game_menu()
 
 	if DisplayServer.get_name() == "headless":
 		# Ohne Grafikausgabe gibt es kein Bild (und kein frame_post_draw).
