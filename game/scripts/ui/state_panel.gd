@@ -1,19 +1,34 @@
 class_name StatePanel
 extends PanelContainer
-## Staatspanel des Spielerstaates mit Steuersatz-Regler.
+## Staatspanel des Spielerstaates mit Reglern für Kontribution, Akzise und Zoll und einem
+## Haushaltsfenster (seit M5).
 ##
-## Der Regler schickt einen Befehl an die Simulation; wirksam wird er erst am
-## nächsten simulierten Tag. Bis dahin zeigt das Panel den Wunschwert an.
-## Beim Ziehen geht der Befehl erst beim Loslassen hinaus – sonst würde jeder
-## Zwischenschritt als eigener Befehl (und Chronikeintrag) ausgeführt.
+## Ein Regler schickt einen Befehl an die Simulation; wirksam wird er erst am nächsten
+## simulierten Tag. Bis dahin zeigt das Panel den Wunschwert an. Beim Ziehen geht der Befehl
+## erst beim Loslassen hinaus – sonst würde jeder Zwischenschritt als eigener Befehl (und
+## Chronikeintrag) ausgeführt.
 
-## Neuer Steuersatz in Prozent gewünscht.
-signal tax_rate_requested(percent: int)
+## Neuer Satz in Prozent für eine Steuerart (SimulationClient.TAX_*) gewünscht.
+signal tax_rate_requested(kind: int, percent: int)
 
-var _state_tax := -1
-var _pending_tax := -1
+## Namen der Steuerarten, Index = SimulationClient.TAX_*.
+const TAX_NAMES: PackedStringArray = ["Kontribution", "Akzise", "Zoll"]
+const TAX_TOOLTIPS: PackedStringArray = [
+	"Kontribution: direkte Steuer auf die Einkommen auf dem Land und auf Agrareinkommen in Städten",
+	"Akzise: Verbrauchssteuer auf alle Käufe in Städten",
+	"Zoll: Abgabe auf eingeführte Waren (nach ihrem Anteil am Angebot des Marktes)",
+]
+const DEFAULT_HINT := "Höhere Steuern füllen die Kasse, verteuern aber Waren und bremsen das Wachstum."
+
+var _state_rates: Array[int] = [-1, -1, -1]
+var _pending: Array[int] = [-1, -1, -1]
+var _dragging := -1
 var _updating := false
-var _dragging := false
+var _sliders: Array[HSlider] = []
+var _values: Array[Label] = []
+var _state := {}
+var _budget_popup: PopupPanel = null
+var _budget_grid: GridContainer = null
 
 @onready var _coat: CoatOfArms = %Coat
 @onready var _name: Label = %StateName
@@ -27,31 +42,27 @@ var _dragging := false
 @onready var _income: Label = %Income
 @onready var _expenses: Label = %Expenses
 @onready var _balance: Label = %Balance
-@onready var _tax_value: Label = %TaxValue
-@onready var _tax_slider: HSlider = %TaxSlider
-@onready var _tax_min: Label = %TaxMin
-@onready var _tax_max: Label = %TaxMax
+@onready var _debt: Label = %Debt
+@onready var _taxes: VBoxContainer = %Taxes
 @onready var _tax_hint: Label = %TaxHint
+@onready var _budget_button: Button = %BudgetButton
 
 
 func _ready() -> void:
-	_tax_slider.focus_mode = Control.FOCUS_NONE
-	_tax_slider.step = 1.0
-	_tax_slider.value_changed.connect(_on_tax_slider_changed)
-	_tax_slider.drag_started.connect(_on_tax_drag_started)
-	_tax_slider.drag_ended.connect(_on_tax_drag_ended)
+	for kind in TAX_NAMES.size():
+		_add_tax_row(kind)
+	_build_budget_popup()
+	_budget_button.pressed.connect(show_budget)
 	show_unavailable()
 
 
-## Obergrenze des Steuersatzes (get_max_tax_rate_percent).
+## Obergrenze der Steuersätze (get_max_tax_rate_percent), gilt für alle drei Arten.
 func set_max_tax_rate(max_percent: int) -> void:
 	_updating = true
-	_tax_slider.min_value = 0
-	_tax_slider.max_value = maxi(max_percent, 0)
-	_tax_slider.tick_count = 0
+	for slider in _sliders:
+		slider.min_value = 0
+		slider.max_value = maxi(max_percent, 0)
 	_updating = false
-	_tax_min.text = GermanFormat.percent(0)
-	_tax_max.text = GermanFormat.percent(max_percent)
 
 
 ## Daten des Staates (get_state) und Name der Hauptstadt anzeigen.
@@ -59,6 +70,7 @@ func show_state(state: Dictionary, capital_name: String) -> void:
 	if state.is_empty():
 		show_unavailable()
 		return
+	_state = state
 	_coat.shield_color = state.get("color", UiPalette.INK_FAINT)
 	_name.text = str(state.get("name", "–"))
 	_short.text = "%s · %s" % [str(state.get("short_name", "")), str(state.get("tag", ""))]
@@ -84,74 +96,240 @@ func show_state(state: Dictionary, capital_name: String) -> void:
 	_balance.add_theme_color_override(
 		&"font_color", UiPalette.NEGATIVE if balance < 0.0 else UiPalette.POSITIVE
 	)
-	_state_tax = int(state.get("tax_rate_percent", 0))
-	if _pending_tax == _state_tax:
-		_pending_tax = -1
-	_tax_slider.editable = true
-	if not _dragging:
-		_show_tax(_pending_tax if _pending_tax >= 0 else _state_tax)
+	var debt := float(state.get("debt", 0.0))
+	_debt.text = GermanFormat.money(debt)
+	_debt.add_theme_color_override(
+		&"font_color", UiPalette.NEGATIVE if debt > 0.0 else UiPalette.INK
+	)
+	var rates: Array = state.get("tax_rates_percent", [])
+	for kind in _sliders.size():
+		_state_rates[kind] = int(rates[kind]) if kind < rates.size() else -1
+		if _pending[kind] == _state_rates[kind]:
+			_pending[kind] = -1
+		_sliders[kind].editable = _state_rates[kind] >= 0
+		if _dragging != kind:
+			_show_rate(kind, _pending[kind] if _pending[kind] >= 0 else _state_rates[kind])
+	_update_hint()
+	_budget_button.disabled = false
+	if _budget_popup.visible:
+		_fill_budget()
 
 
 func show_unavailable() -> void:
+	_state = {}
 	_coat.shield_color = UiPalette.INK_FAINT
 	_name.text = "Kein Spielerstaat"
 	_short.text = "–"
 	for label: Label in [
 		_ruler, _government, _capital, _locations, _population, _treasury, _income, _expenses,
-		_balance
+		_balance, _debt
 	]:
 		label.text = "–"
-	_state_tax = -1
-	_pending_tax = -1
-	_tax_slider.editable = false
-	_tax_value.text = "–"
+	for kind in _sliders.size():
+		_state_rates[kind] = -1
+		_pending[kind] = -1
+		_sliders[kind].editable = false
+		_values[kind].text = "–"
 	_tax_hint.text = "Ohne geladene Simulation nicht verfügbar."
+	_budget_button.disabled = true
+	if _budget_popup != null:
+		_budget_popup.hide()
 
 
 ## Ein Befehl wurde abgelehnt: Regler auf den Wert der Simulation zurücksetzen.
-func reject_pending(message: String) -> void:
-	_pending_tax = -1
-	if _state_tax >= 0:
-		_show_tax(_state_tax)
+func reject_pending(kind: int, message: String) -> void:
+	if kind < 0 or kind >= _sliders.size():
+		return
+	_pending[kind] = -1
+	if _state_rates[kind] >= 0:
+		_show_rate(kind, _state_rates[kind])
 	_tax_hint.text = message
 
 
-func _show_tax(percent: int) -> void:
+## Haushaltsfenster neben dem Panel öffnen.
+func show_budget() -> void:
+	if _state.is_empty():
+		return
+	_fill_budget()
+	var rect := get_global_rect()
+	_budget_popup.popup(Rect2i(Vector2i(rect.end.x + 8.0, rect.position.y), Vector2i(330, 0)))
+
+
+## true, solange das Haushaltsfenster offen ist (für Tests).
+func is_budget_visible() -> bool:
+	return _budget_popup != null and _budget_popup.visible
+
+
+## Text des Haushaltsfensters, zeilenweise „Bezeichnung: Wert“ (für Tests).
+func budget_text() -> String:
+	var lines := PackedStringArray()
+	var children := _budget_grid.get_children()
+	for i in range(0, children.size() - 1, 2):
+		lines.append("%s: %s" % [(children[i] as Label).text, (children[i + 1] as Label).text])
+	return "\n".join(lines)
+
+
+func _add_tax_row(kind: int) -> void:
+	var row := HBoxContainer.new()
+	row.tooltip_text = TAX_TOOLTIPS[kind]
+	row.mouse_filter = Control.MOUSE_FILTER_PASS
+	var caption := Label.new()
+	caption.text = TAX_NAMES[kind]
+	caption.theme_type_variation = &"MutedLabel"
+	caption.custom_minimum_size = Vector2(96, 0)
+	caption.mouse_filter = Control.MOUSE_FILTER_PASS
+	caption.tooltip_text = TAX_TOOLTIPS[kind]
+	var slider := HSlider.new()
+	slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	slider.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	slider.custom_minimum_size = Vector2(0, 22)
+	slider.focus_mode = Control.FOCUS_NONE
+	slider.step = 1.0
+	slider.max_value = 50.0
+	slider.editable = false
+	slider.tooltip_text = TAX_TOOLTIPS[kind]
+	slider.value_changed.connect(_on_slider_changed.bind(kind))
+	slider.drag_started.connect(_on_drag_started.bind(kind))
+	slider.drag_ended.connect(_on_drag_ended.bind(kind))
+	var value := Label.new()
+	value.text = "–"
+	value.theme_type_variation = &"ValueLabel"
+	value.custom_minimum_size = Vector2(46, 0)
+	value.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	row.add_child(caption)
+	row.add_child(slider)
+	row.add_child(value)
+	_taxes.add_child(row)
+	_sliders.append(slider)
+	_values.append(value)
+
+
+func _show_rate(kind: int, percent: int) -> void:
 	_updating = true
-	_tax_slider.value = percent
+	_sliders[kind].value = percent
 	_updating = false
-	_tax_value.text = GermanFormat.percent(percent)
-	if _pending_tax >= 0 and _pending_tax != _state_tax:
-		_tax_hint.text = "Neuer Satz gilt ab dem nächsten Tag (bisher %s)." % GermanFormat.percent(
-			_state_tax
-		)
-	else:
-		_tax_hint.text = "Höhere Steuern füllen die Kasse, bremsen aber das Wachstum."
+	_values[kind].text = GermanFormat.percent(percent) if percent >= 0 else "–"
 
 
-func _on_tax_slider_changed(value: float) -> void:
+func _update_hint() -> void:
+	for kind in _sliders.size():
+		if _pending[kind] >= 0 and _pending[kind] != _state_rates[kind]:
+			_tax_hint.text = (
+				"Neue %s gilt ab dem nächsten Tag (bisher %s)."
+				% [TAX_NAMES[kind], GermanFormat.percent(_state_rates[kind])]
+			)
+			return
+	_tax_hint.text = DEFAULT_HINT
+
+
+func _on_slider_changed(value: float, kind: int) -> void:
 	if _updating:
 		return
-	if _dragging:
-		_tax_value.text = GermanFormat.percent(roundi(value))
+	if _dragging == kind:
+		_values[kind].text = GermanFormat.percent(roundi(value))
 		return
-	_request_tax(roundi(value))
+	_request(kind, roundi(value))
 
 
-func _on_tax_drag_started() -> void:
-	_dragging = true
+func _on_drag_started(kind: int) -> void:
+	_dragging = kind
 
 
-func _on_tax_drag_ended(value_changed: bool) -> void:
-	_dragging = false
-	if value_changed and _tax_slider.editable:
-		_request_tax(roundi(_tax_slider.value))
+func _on_drag_ended(value_changed: bool, kind: int) -> void:
+	_dragging = -1
+	if value_changed and _sliders[kind].editable:
+		_request(kind, roundi(_sliders[kind].value))
 
 
-func _request_tax(percent: int) -> void:
-	_pending_tax = percent
-	_show_tax(percent)
-	tax_rate_requested.emit(percent)
+func _request(kind: int, percent: int) -> void:
+	_pending[kind] = percent
+	_show_rate(kind, percent)
+	_update_hint()
+	tax_rate_requested.emit(kind, percent)
+
+
+func _build_budget_popup() -> void:
+	_budget_popup = PopupPanel.new()
+	_budget_popup.name = "BudgetPopup"
+	var box := VBoxContainer.new()
+	var header := Label.new()
+	header.text = "HAUSHALT"
+	header.theme_type_variation = &"HeaderLabel"
+	box.add_child(header)
+	_budget_grid = GridContainer.new()
+	_budget_grid.columns = 2
+	_budget_grid.add_theme_constant_override(&"h_separation", 18)
+	box.add_child(_budget_grid)
+	var note := Label.new()
+	note.text = "Beträge je Monat (Rechentag des Staates)."
+	note.theme_type_variation = &"CaptionLabel"
+	box.add_child(note)
+	_budget_popup.add_child(box)
+	add_child(_budget_popup)
+	# Ein Popup ist ein eigenes Fenster und übernimmt den Panel-Stil des Themes nicht: Stil
+	# des Staatspanels verwenden.
+	_budget_popup.add_theme_stylebox_override(&"panel", get_theme_stylebox(&"panel"))
+
+
+func _fill_budget() -> void:
+	for child in _budget_grid.get_children():
+		_budget_grid.remove_child(child)
+		child.queue_free()
+	var state := _state
+	var rates: Array = state.get("tax_rates_percent", [])
+	var taxes: Array = state.get("taxes_month", [])
+	var income := 0.0
+	_budget_line("Einnahmen", "", true)
+	for kind in TAX_NAMES.size():
+		var amount := float(taxes[kind]) if kind < taxes.size() else 0.0
+		income += amount
+		var rate := int(rates[kind]) if kind < rates.size() else 0
+		_budget_line(
+			"%s (%s)" % [TAX_NAMES[kind], GermanFormat.percent(rate)],
+			GermanFormat.signed_money(amount)
+		)
+	_budget_line("Summe", GermanFormat.signed_money(income))
+	var soldiers := int(state.get("soldiers", 0))
+	var interest_percent := float(state.get("interest_percent", 0.0))
+	var items: Array = [
+		["Hof", "court_month"],
+		["Verwaltung", "administration_month"],
+		["Heer (%s Soldaten)" % GermanFormat.integer(soldiers), "army_month"],
+		["Zinsen (%s)" % GermanFormat.percent(interest_percent, 1), "interest_month"],
+		["Bauten (Landesausbau)", "building_month"],
+	]
+	var expenses := 0.0
+	_budget_line("Ausgaben", "", true)
+	for item: Array in items:
+		var amount := float(state.get(str(item[1]), 0.0))
+		expenses += amount
+		_budget_line(str(item[0]), GermanFormat.signed_money(-amount))
+	_budget_line("Summe", GermanFormat.signed_money(-expenses))
+	_budget_line("Stand", "", true)
+	_budget_line("Saldo", GermanFormat.signed_money(income - expenses))
+	_budget_line("Schatz", GermanFormat.money(float(state.get("treasury", 0.0))))
+	_budget_line("Schulden", GermanFormat.money(float(state.get("debt", 0.0))))
+	_budget_line(
+		"Jahreseinnahmen (gleitend)", GermanFormat.money(float(state.get("yearly_income", 0.0)))
+	)
+	var bankruptcies := int(state.get("bankruptcies", 0))
+	var bankrupt_text := GermanFormat.integer(bankruptcies)
+	var premium := int(state.get("premium_months", 0))
+	if premium > 0:
+		bankrupt_text += " (Zinsaufschlag noch %s Monate)" % GermanFormat.integer(premium)
+	_budget_line("Staatsbankrotte", bankrupt_text)
+
+
+func _budget_line(caption: String, value: String, header: bool = false) -> void:
+	var left := Label.new()
+	left.text = caption
+	left.theme_type_variation = &"HeaderLabel" if header else &"MutedLabel"
+	var right := Label.new()
+	right.text = value
+	right.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	right.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_budget_grid.add_child(left)
+	_budget_grid.add_child(right)
 
 
 ## Tooltip zur Bevölkerung: Lebensstandard und Bilanz des Vorjahres (seit M4).

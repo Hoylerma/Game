@@ -1,9 +1,11 @@
-# EINIGKEIT – Godot-Projekt (Prototyp der Spieloberfläche, Meilensteine M1 bis M4)
+# EINIGKEIT – Godot-Projekt (Prototyp der Spieloberfläche, Meilensteine M1 bis M5)
 
 Das Projekt zeigt die Simulation des Kerns **Uhrwerk** auf der Karte des **Kernraums**
-(Meilenstein M3: rund 4.500 Orte in rund 620 Kreisen): Kartenansicht mit acht Kartenmodi
-(seit M4 auch Lebensstandard und Kultur), Zoomstufen mit Staats-, Kreis- und Ortsnamen, obere
-Leiste, Staatspanel mit Steuersatz, Ortsinfo mit Bevölkerung (Kulturen, Lebensstandard,
+(Meilenstein M3: rund 4.500 Orte in rund 620 Kreisen): Kartenansicht mit zehn Kartenmodi
+(seit M4 auch Lebensstandard und Kultur, seit M5 Wirtschaftsleistung und Märkte), Zoomstufen mit
+Staats-, Kreis- und Ortsnamen, obere Leiste, Staatspanel mit Reglern für Kontribution, Akzise und
+Zoll und einem Haushaltsfenster (seit M5), Ortsinfo mit Wirtschaft (Markt, Einkommen und
+Bedarfsdeckung je Beruf, Betriebe, Güter; seit M5) und Bevölkerung (Kulturen, Lebensstandard,
 Alphabetisierung, Altersaufbau, Bilanz des Vorjahres), Chronik und Legende. Die Simulation selbst läuft in C++ und wird über die
 GDExtension `uhrwerk_bridge` angesprochen (Schnittstelle:
 [docs/technik/bridge-api.md](../docs/technik/bridge-api.md)). Die Godot-Seite **liest** nur
@@ -58,9 +60,10 @@ Optionen stehen nach `--` (Benutzerargumente):
 |---|---|
 | `--screenshot=<pfad>` | Nach dem Laden simulieren, etwa 20 Bilder warten, den Viewport als PNG speichern und beenden |
 | `--tage=<n>` | Simulierte Tage vor dem Screenshot (Standard 60) |
-| `--kartenmodus=<0..7>` | 0 Politisch, 1 Bevölkerungsdichte, 2 Konfession, 3 Gelände, 4 Verwüstung, 5 Kreise, 6 Lebensstandard, 7 Kultur (6 und 7 seit M4) |
+| `--kartenmodus=<0..9>` | 0 Politisch, 1 Bevölkerungsdichte, 2 Konfession, 3 Gelände, 4 Verwüstung, 5 Kreise, 6 Lebensstandard, 7 Kultur (6 und 7 seit M4), 8 Wirtschaft, 9 Märkte (seit M5) |
 | `--ort=<ort_id>` | Ort auswählen, Ortsinfo geöffnet (z. B. `berlin_coelln`) |
 | `--zoom=<faktor>` | Vergrößerung gegenüber der Übersicht (1 = ganze Karte), zentriert auf `--ort`, sonst auf die Kartenmitte (bis zum Faktor 1 bleibt die Bildmitte der Übersicht); gilt auch ohne `--screenshot` |
+| `--haushalt` | Haushaltsfenster des Spielerstaates vor dem Screenshot öffnen (seit M5) |
 
 Auf der Kernraum-Karte bei 1600 × 900 Pixeln reicht die ferne Stufe (Staatsnamen) bis etwa
 `--zoom=2,7`, die mittlere (Kreisnamen) bis etwa `--zoom=6,3`, darüber folgt die nahe
@@ -92,8 +95,9 @@ Modus `--headless` gibt es kein Bild; ohne Bildschirm hilft `xvfb-run`.
 | H | Zur Hauptstadt des Spielerstaates (mittlere Zoomstufe) |
 | Leertaste | Pause / weiter |
 | 1 – 5 | Geschwindigkeit: 2, 5, 15, 40 oder 120 Tage je Sekunde |
-| Q W E R T Z U I | Kartenmodus Politisch, Bevölkerungsdichte, Konfession, Gelände, Verwüstung, Kreise, Lebensstandard, Kultur (die Leiste zeigt Kurznamen, die Taste steht im Tooltip) |
-| Steuersatz-Regler | Steuersatz des Spielerstaates (wirksam ab dem nächsten simulierten Tag) |
+| Q W E R T Z U I O P | Kartenmodus Politisch, Bevölkerungsdichte, Konfession, Gelände, Verwüstung, Kreise, Lebensstandard, Kultur, Wirtschaft, Märkte (die Leiste zeigt Kurznamen, die Taste steht im Tooltip) |
+| Steuerregler | Kontribution, Akzise und Zoll des Spielerstaates (wirksam ab dem nächsten simulierten Tag) |
+| „Haushalt im Einzelnen …“ | Haushaltsfenster: Einnahmen je Steuerart, Ausgaben je Posten (Hof, Verwaltung, Heer, Zinsen, Bauten), Schatz, Schulden, Zins, Staatsbankrotte |
 | Klick auf einen Chronikeintrag | Ort des Ereignisses auswählen und anfahren |
 
 **Doppelbelegung von W:** W gehört sowohl zur Kamerasteuerung (WASD) als auch zum
@@ -147,13 +151,20 @@ game/
 `SimulationClient` spricht die Klasse `UhrwerkSimulation` nur über `ClassDB` an. Ein direkter
 Verweis auf den Klassennamen wäre ohne gebaute Erweiterung ein Parse-Fehler; so startet das
 Projekt in jedem Fall. Beim Start prüft die Hülle, ob alle Methoden der Schnittstelle vorhanden
-sind (seit M3 auch `get_location_owner_indices`, `get_location_kreis_indices`, `get_kreis*`),
+sind (seit M3 auch `get_location_owner_indices`, `get_location_kreis_indices`, `get_kreis*`; seit M5 `set_tax_percent`, `get_market*`, `get_location_market_indices`),
 und meldet eine veraltete Erweiterung verständlich.
 
 Die Zeit läuft in `main.gd`: Je Bild werden die fälligen ganzen Tage mit `advance_days`
 simuliert (höchstens 30 je Bild), danach liest die Oberfläche Datum, Staat, Ort, Kartenfarben und
-neue Chronikeinträge. Der Steuersatz-Regler schickt `set_tax_rate_percent`; der Kern führt den
-Befehl am nächsten Tag aus, bis dahin zeigt das Panel „gilt ab dem nächsten Tag“.
+neue Chronikeinträge. Die Steuerregler schicken `set_tax_percent` mit der Steuerart (seit M5;
+vorher `set_tax_rate_percent` für den einen Steuersatz); der Kern führt den Befehl am nächsten Tag
+aus, bis dahin zeigt das Panel „gilt ab dem nächsten Tag“.
+
+Im Kartenmodus **Märkte** zeichnet die Karte statt der Kreis- die Marktgrenzen (dieselbe Ebene des
+Shaders, gefüttert mit `get_location_market_indices`); die Farben der aktiven Märkte folgen
+nacheinander der Palette, damit sich Nachbarn unterscheiden. Die Modusleiste hat seit M5 keinen
+Titel mehr und schmalere Knöpfe, damit zehn Modi bei 1.600 Pixeln Breite zwischen die Spalten
+passen.
 
 Abfragen über alle Orte sind gebündelt, damit nichts je Bild 4.500-mal die Brücke ruft:
 `LocationCatalog` liest Name, Stadt, Gelände, Kreis und „hat Daten“ einmal nach dem Laden

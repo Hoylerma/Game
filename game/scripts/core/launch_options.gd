@@ -4,10 +4,12 @@ extends RefCounted
 ##
 ##   --screenshot=<pfad>    nach dem Laden simulieren, Bild speichern, beenden
 ##   --tage=<n>             Tage vor dem Screenshot (Standard 60)
-##   --kartenmodus=<0..7>   Kartenmodus (0 Politisch … 5 Kreise, 6 Lebensstandard, 7 Kultur)
+##   --kartenmodus=<0..9>   Kartenmodus (0 Politisch … 5 Kreise, 6 Lebensstandard, 7 Kultur,
+##                          8 Wirtschaft, 9 Märkte)
 ##   --ort=<ort_id>         Ort auswählen und Ortsinfo öffnen
 ##   --zoom=<faktor>        Vergrößerung gegenüber der Übersicht (1 = ganze Karte);
 ##                          zentriert auf --ort, sonst auf die Kartenmitte (bis 1: Übersicht)
+##   --haushalt             Haushaltsfenster des Spielerstaates öffnen (seit M5)
 
 const DEFAULT_SCREENSHOT_DAYS := 60
 
@@ -17,6 +19,8 @@ var map_mode := -1
 var location_id := ""
 ## Vergrößerung gegenüber der Übersicht; 0 = Übersicht ohne Zentrierung.
 var zoom_factor := 0.0
+## Haushaltsfenster vor dem Screenshot öffnen (seit M5).
+var show_budget := false
 ## Unbekannte oder fehlerhafte Angaben (deutsche Meldungen).
 var problems := PackedStringArray()
 
@@ -64,6 +68,11 @@ static func parse(args: PackedStringArray) -> LaunchOptions:
 					options.problems.append(
 						"--zoom erwartet eine positive Zahl (z. B. --zoom=4), nicht „%s“." % value
 					)
+			"--haushalt":
+				if value.is_empty():
+					options.show_budget = true
+				else:
+					options.problems.append("--haushalt erwartet keinen Wert, nicht „%s“." % value)
 			"--ort":
 				if value.is_empty():
 					options.problems.append("--ort braucht eine Ort-Kennung (--ort=berlin_coelln).")

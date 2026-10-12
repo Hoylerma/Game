@@ -25,7 +25,8 @@ const OVERVIEW_MARGIN := 28.0
 ## Kartenmodi, deren Legende sich mit der Zeit ändert (monatlich neu aufbauen).
 const DYNAMIC_LEGEND_MODES: PackedInt32Array = [
 	MapModes.MAP_POLITICAL, MapModes.MAP_DENSITY, MapModes.MAP_CONFESSION,
-	MapModes.MAP_DEVASTATION, MapModes.MAP_LEBENSSTANDARD, MapModes.MAP_KULTUR
+	MapModes.MAP_DEVASTATION, MapModes.MAP_LEBENSSTANDARD, MapModes.MAP_KULTUR,
+	MapModes.MAP_WIRTSCHAFT
 ]
 ## Höchstzahl der Kennungen in einer Hinweismeldung.
 const MAX_LISTED_IDS := 20
@@ -38,6 +39,8 @@ var _map: MapData = null
 var _catalog := LocationCatalog.new()
 ## Besitzer je Simulationsindex beim letzten Abgleich (Grenzen, Staatsnamen).
 var _owners := PackedInt32Array()
+## Markt je Simulationsindex (seit M5, unveränderlich): Grenzen im Kartenmodus „Märkte“.
+var _market_indices := PackedInt32Array()
 var _options: LaunchOptions = null
 var _data_dir := ""
 var _player := -1
@@ -181,6 +184,16 @@ func select_location(sim_index: int) -> void:
 	_select_location(sim_index)
 
 
+## Staatspanel (Klicktest: Steuerregler und Haushaltsfenster, seit M5).
+func state_panel() -> StatePanel:
+	return _state_panel
+
+
+## Ortspanel (Klicktest: Abschnitt Wirtschaft, seit M5).
+func location_panel() -> LocationPanel:
+	return _location_panel
+
+
 # --- Laden -------------------------------------------------------------------
 
 
@@ -259,6 +272,7 @@ func _load_simulation() -> void:
 		print("EINIGKEIT: Hinweis zu den Daten: ", warning)
 	_sim = sim
 	_player = _sim.get_player_state_index()
+	_market_indices = _sim.get_location_market_indices()
 	_state_panel.set_max_tax_rate(_sim.get_max_tax_rate_percent())
 	_location_panel.confession_colors = LegendData.category_colors(
 		_sim, MapModes.MAP_CONFESSION, "majority_confession"
@@ -367,8 +381,15 @@ func _update_owners() -> void:
 	if owners == _owners and not _owners.is_empty():
 		return
 	_owners = owners
-	_map_view.set_location_info(owners, _catalog.kreis_indices)
+	_map_view.set_location_info(owners, _border_groups())
 	_update_state_labels()
+
+
+## Gruppen für die feinen Grenzlinien: Märkte im Marktmodus, sonst Kreise.
+func _border_groups() -> PackedInt32Array:
+	if _map_mode == MapModes.MAP_MAERKTE and not _market_indices.is_empty():
+		return _market_indices
+	return _catalog.kreis_indices
 
 
 ## Kartenindex → Gruppe (Besitzer bzw. Kreis) aus einem Array je Simulationsindex.
@@ -576,6 +597,27 @@ func _rebuild_legend() -> void:
 			if kreis_count == 0:
 				text = "Die Daten enthalten keine Kreise (history/kreise fehlt oder ist leer)."
 			_legend.show_palette(title, LegendData.kreis_palette(_sim, _catalog), text)
+		MapModes.MAP_WIRTSCHAFT:
+			var economy_max := MapModes.ECONOMY_SCALE_MAX
+			var economy_labels := PackedStringArray(
+				[
+					"0",
+					GermanFormat.number(economy_max * 0.5),
+					"≥ " + GermanFormat.number(economy_max),
+				]
+			)
+			_legend.show_gradient(
+				title,
+				LegendData.gradient_for(
+					_sim, MapModes.MAP_WIRTSCHAFT, "production_per_capita", economy_max
+				),
+				economy_labels,
+				"Reichstaler je Einwohner und Jahr",
+				no_data
+			)
+		MapModes.MAP_MAERKTE:
+			var markets := LegendData.market_entries(_sim, _market_indices)
+			_legend.show_swatches(title, markets)
 	if _selected >= 0:
 		_fit_location_panel.call_deferred()
 
@@ -648,7 +690,9 @@ func _set_map_mode(mode: int) -> void:
 		return
 	_map_mode = mode
 	_mode_bar.show_mode(mode)
-	_map_view.set_kreis_mode(mode == MapModes.MAP_KREISE)
+	_map_view.set_kreis_mode(mode == MapModes.MAP_KREISE or mode == MapModes.MAP_MAERKTE)
+	if not _owners.is_empty():
+		_map_view.set_location_info(_owners, _border_groups())
 	_refresh_map()
 	_rebuild_legend()
 	var hovered := _map_view.get_hovered()
@@ -738,17 +782,24 @@ func _tooltip_detail(location: Dictionary) -> String:
 			second = "%s verwüstet" % GermanFormat.percent(
 				int(location.get("devastation_percent", 0))
 			)
+		MapModes.MAP_WIRTSCHAFT when bool(location.get("has_data", true)):
+			second = "%s Rt je Einwohner und Jahr" % GermanFormat.number(
+				float(location.get("production_per_capita", 0.0)), 1
+			)
+		MapModes.MAP_MAERKTE:
+			var market := str(location.get("market_name", ""))
+			second = "Markt %s" % market if not market.is_empty() else "ohne Markt"
 		_ when not bool(location.get("has_data", true)):
 			second = "%s · %s" % [kreis_text, second]
 	return "%s · %s" % [first, second]
 
 
-func _on_tax_rate_requested(percent: int) -> void:
+func _on_tax_rate_requested(kind: int, percent: int) -> void:
 	if _sim == null:
 		return
-	if not _sim.set_tax_rate_percent(_player, percent):
+	if not _sim.set_tax_percent(_player, kind, percent):
 		_state_panel.reject_pending(
-			"Der Steuersatz %s wurde nicht angenommen." % GermanFormat.percent(percent)
+			kind, "Der Satz %s wurde nicht angenommen." % GermanFormat.percent(percent)
 		)
 
 
@@ -772,6 +823,8 @@ func _run_screenshot() -> void:
 			printerr("EINIGKEIT: Ort „%s“ ist unbekannt und wird nicht ausgewählt." % unknown)
 	if _sim != null:
 		_after_time_passed()
+	if _options.show_budget:
+		_state_panel.show_budget()
 
 	if DisplayServer.get_name() == "headless":
 		# Ohne Grafikausgabe gibt es kein Bild (und kein frame_post_draw).

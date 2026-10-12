@@ -225,6 +225,18 @@ layout_mode = 2
 text = "–"
 horizontal_alignment = 2
 
+[node name="EconomySeparator" type="HSeparator" parent="Scroll/Margin/Content"]
+layout_mode = 2
+
+[node name="EconomyHeader" type="Label" parent="Scroll/Margin/Content"]
+layout_mode = 2
+theme_type_variation = &"HeaderLabel"
+text = "WIRTSCHAFT"
+
+[node name="Economy" type="VBoxContainer" parent="Scroll/Margin/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+
 [node name="Separator2" type="HSeparator" parent="Scroll/Margin/Content"]
 layout_mode = 2
 

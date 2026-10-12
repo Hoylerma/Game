@@ -38,6 +38,15 @@ public:
         MAP_KREISE = 5,         // seit M3
         MAP_LEBENSSTANDARD = 6, // seit M4
         MAP_KULTUR = 7,         // seit M4
+        MAP_WIRTSCHAFT = 8,     // seit M5
+        MAP_MAERKTE = 9,        // seit M5
+    };
+
+    /// Steuerarten für set_tax_percent (seit M5, wie uhrwerk::TaxKind).
+    enum TaxKind : std::int64_t {
+        TAX_KONTRIBUTION = 0,
+        TAX_AKZISE = 1,
+        TAX_ZOLL = 2,
     };
 
     static constexpr std::int64_t kMaxAdvanceDays = 3660;
@@ -66,14 +75,19 @@ public:
     godot::Dictionary get_location(std::int64_t index) const;
     godot::PackedInt32Array get_location_owner_indices() const;
     godot::PackedInt32Array get_location_kreis_indices() const;
+    godot::PackedInt32Array get_location_market_indices() const;
 
     std::int64_t get_kreis_count() const;
     std::int64_t get_kreis_index(const godot::String& id) const;
     godot::Dictionary get_kreis(std::int64_t index) const;
 
+    std::int64_t get_market_count() const;
+    godot::Dictionary get_market(std::int64_t index) const;
+
     godot::PackedColorArray get_map_colors(std::int64_t mode) const;
 
     bool set_tax_rate_percent(std::int64_t state_index, std::int64_t percent);
+    bool set_tax_percent(std::int64_t state_index, std::int64_t kind, std::int64_t percent);
     std::int64_t get_max_tax_rate_percent() const;
 
     std::int64_t get_chronicle_size() const;
@@ -95,8 +109,12 @@ private:
     std::unordered_map<std::string, std::int64_t> location_lookup_;
     std::unordered_map<std::string, std::int64_t> kreis_lookup_;
     std::vector<std::int64_t> kreis_location_counts_;
+    std::vector<std::int64_t> market_location_counts_; // Orte mit Daten je Markt
+    std::vector<bool> market_ports_;                   // Markt mit Hafenort (mit Daten)
+    std::vector<std::size_t> market_colors_;           // Farbe je Markt (Index in die Palette)
 };
 
 } // namespace uhrwerk_bridge
 
 VARIANT_ENUM_CAST(uhrwerk_bridge::UhrwerkSimulation::MapMode);
+VARIANT_ENUM_CAST(uhrwerk_bridge::UhrwerkSimulation::TaxKind);
