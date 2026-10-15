@@ -1119,6 +1119,17 @@ TEST_CASE("Lader: Fehler bei Verwaltungseinheiten") {
         expect_error(load(dir), "Verwaltungseinheit sx_land liegt (über 'ueber') in sich selbst", kAdminFile,
                      6);
     }
+    SUBCASE("Kette in einen Kreis") {
+        // sx_vorort führt in den Kreis sx_land ↔ sx_meissen, gehört aber nicht dazu.
+        replace_in_file(dir / kAdminFile, "einheit sx_land {",
+                        "einheit sx_vorort {\n    name   = \"Vorort\"\n    art    = kreis\n"
+                        "    ueber  = sx_land\n    quelle = \"Testdaten\"\n}\n\neinheit sx_land {");
+        replace_in_file(dir / kAdminFile, "    art    = land\n",
+                        "    art    = land\n    ueber  = sx_meissen\n");
+        const LoadResult r = load(dir);
+        expect_error(r, "Verwaltungseinheit sx_land liegt (über 'ueber') in sich selbst", kAdminFile);
+        CHECK(testhilfen::find_issue(r, "sx_vorort") == nullptr);
+    }
     SUBCASE("datierter Eintrag") {
         replace_in_file(dir / kAdminFile, "    art    = land\n",
                         "    art    = land\n    1700.01.01 = { name = \"Kurfürstentum\" }\n");
@@ -1190,6 +1201,12 @@ TEST_CASE("Lader: Staaten ohne Ort zum Startdatum bestehen nicht") {
         const LoadResult other = load(dir, "westfaelischer_frieden");
         INFO(issues_text(other));
         CHECK(other.ok());
+    }
+    SUBCASE("spielbarer Staat ohne Ort im gewählten Szenario") {
+        replace_in_file(dir / "szenarien/jahresbeginn.chron", "spieler = SAX", "spieler = SAX\n    spielbar = { SAX ANH }");
+        expect_error(load(dir, "jahresbeginn_1650"),
+                     "Spielbarer Staat 'ANH' von szenario jahresbeginn_1650 besitzt zum Startdatum keinen Ort",
+                     "szenarien/jahresbeginn.chron");
     }
     SUBCASE("Pflichtfelder nur für bestehende Staaten") {
         replace_in_file(dir / "history/staaten/30_neu.chron", "    heer           = 2\n", "");

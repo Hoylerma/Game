@@ -78,6 +78,10 @@ if(UHRWERK_BUILD_CLI)
         COMMAND uhrwerk-cli wiederholung ${partie}.einigkeit --daten ${PROJECT_SOURCE_DIR}/data)
     add_test(NAME spielstand_laden
         COMMAND uhrwerk-cli spielstand ${partie}.einigkeit --daten ${PROJECT_SOURCE_DIR}/data)
+    # Lesezeichen 1848 (seit M7): Verwaltung und Bundesgebiet stehen im Fingerabdruck; ein Jahr genügt.
+    add_test(NAME speichertest_1848
+        COMMAND uhrwerk-cli speichertest --daten ${PROJECT_SOURCE_DIR}/data --szenario voelkerfruehling
+                --jahre 1 --testbefehle 20 --punkte 1)
     set_tests_properties(protokoll_50_jahre PROPERTIES FIXTURES_SETUP partie_50_jahre)
     set_tests_properties(wiederholung_50_jahre wiederholung_spielstand spielstand_laden
         PROPERTIES FIXTURES_REQUIRED partie_50_jahre)
