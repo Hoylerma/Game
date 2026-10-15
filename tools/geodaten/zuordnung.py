@@ -22,6 +22,10 @@ Land/Bundesland heute     ``DE.02`` (Land.admin1)                             2
 Staat heute               ``DE``                                              1
 ========================  ==================================================  =====
 
+``verwaltung = naechste:<einheit>`` wählt unter den untersten Einheiten unterhalb von ``<einheit>``
+die mit dem nächstgelegenen Sitz (Spalte ``sitz`` in verwaltung.csv) – die Näherung für Kreise ohne
+Grenzgeometrie (lesezeichen_1848.md, Abschnitt 6).
+
 Jedes der drei Felder wird für sich aufgelöst: Es gilt der Wert der stärksten passenden Regel, die
 das Feld setzt (leer = setzt es nicht). ``staat = -`` macht den Ort zum Ort ohne Daten,
 ``verwaltung = -`` hebt eine Einheit auf. Erbt ein Ort die Verwaltungseinheit aus einer
@@ -202,21 +206,60 @@ class Ergebnis:
     warnungen: list[str]
 
 
+NAECHSTE = "naechste:"
+
+
+def naechste_einheiten(
+    orte: list[dict[str, str]], ueber: dict[str, str], sitze: dict[str, str]
+) -> dict[str, list[tuple[str, float, float]]]:
+    """Je Einheit X die untersten Einheiten mit Sitz unterhalb von X: (Einheit, Breite, Länge des Sitzes)."""
+    if not sitze:
+        return {}
+    lage = {o["id"]: (float(o["breite"]), float(o["laenge"])) for o in orte if o.get("breite") and o.get("laenge")}
+    hat_unter = {u for u in ueber.values() if u}
+    ergebnis: dict[str, list[tuple[str, float, float]]] = defaultdict(list)
+    for einheit, sitz in sorted(sitze.items()):
+        if not sitz or einheit in hat_unter or sitz not in lage:
+            continue
+        breite, laenge = lage[sitz]
+        oben, schritte = ueber.get(einheit, ""), 0
+        while oben and schritte <= len(ueber):
+            ergebnis[oben].append((einheit, breite, laenge))
+            oben, schritte = ueber.get(oben, ""), schritte + 1
+    return ergebnis
+
+
+def naechster_sitz(kandidaten: list[tuple[str, float, float]], breite: float, laenge: float) -> str:
+    """Einheit mit dem nächsten Sitz (ebene Näherung, Längengrade mit dem Kosinus der Breite)."""
+    faktor = math.cos(math.radians(breite))
+    return min(kandidaten, key=lambda k: ((k[1] - breite) ** 2 + ((k[2] - laenge) * faktor) ** 2, k[0]))[0]
+
+
 def aufloesen(
     orte: list[dict[str, str]],
     codes: dict[str, dict[str, str]],
     regeln: list[Regel],
     staaten: set[str],
     einheiten: dict[str, str],
+    ueber: dict[str, str] | None = None,
+    sitze: dict[str, str] | None = None,
 ) -> Ergebnis:
-    """Löst die Regeln für alle Orte auf. ``einheiten``: Verwaltungseinheit → Staat."""
+    """Löst die Regeln für alle Orte auf. ``einheiten``: Verwaltungseinheit → Staat; ``ueber``:
+    Einheit → übergeordnete Einheit, ``sitze``: Einheit → Ort des Sitzes (für ``naechste:``)."""
     nach_gebiet = {r.gebiet: r for r in regeln}
     fehler: list[str] = []
     warnungen: list[str] = []
+    unter = naechste_einheiten(orte, ueber or {}, sitze or {})
     for r in regeln:
         if r.staat not in ("", "-") and r.staat not in staaten:
             fehler.append(f"Zeile {r.zeile}: unbekannter Staat {r.staat!r} (staaten.csv)")
-        if r.verwaltung not in ("", "-") and r.verwaltung not in einheiten:
+        if r.verwaltung.startswith(NAECHSTE):
+            oben = r.verwaltung.removeprefix(NAECHSTE)
+            if oben not in einheiten:
+                fehler.append(f"Zeile {r.zeile}: unbekannte Verwaltungseinheit {oben!r} (verwaltung.csv)")
+            elif not unter.get(oben):
+                fehler.append(f"Zeile {r.zeile}: unter {oben} gibt es keine Einheit mit Sitz (Spalte 'sitz')")
+        elif r.verwaltung not in ("", "-") and r.verwaltung not in einheiten:
             fehler.append(f"Zeile {r.zeile}: unbekannte Verwaltungseinheit {r.verwaltung!r} (verwaltung.csv)")
     benutzt: set[str] = set()
     ergebnis: dict[str, Zuordnung] = {}
@@ -246,18 +289,29 @@ def aufloesen(
         verwaltung = None
         v_regel = wahl["verwaltung"]
         if v_regel is not None and v_regel.verwaltung != "-":
-            einheit_staat = einheiten.get(v_regel.verwaltung)
+            gewaehlt = v_regel.verwaltung
+            if gewaehlt.startswith(NAECHSTE):
+                kandidaten = unter.get(gewaehlt.removeprefix(NAECHSTE), [])
+                gewaehlt = naechster_sitz(kandidaten, float(ort["breite"]), float(ort["laenge"])) if kandidaten else ""
+            einheit_staat = einheiten.get(gewaehlt)
             if einheit_staat == staat:
-                verwaltung = v_regel.verwaltung
+                verwaltung = gewaehlt
             elif v_regel.rang >= staat_regel.rang and einheit_staat is not None:
                 fehler.append(
-                    f"Ort {kennung}: Verwaltungseinheit {v_regel.verwaltung} ({einheit_staat}, Regel {v_regel.gebiet}) "
+                    f"Ort {kennung}: Verwaltungseinheit {gewaehlt} ({einheit_staat}, Regel {v_regel.gebiet}) "
                     f"passt nicht zum Staat {staat} (Regel {staat_regel.gebiet})"
                 )
         ergebnis[kennung] = Zuordnung(staat, bund_regel.bund == "ja", verwaltung, staat_regel)
     for r in regeln:
         if r.gebiet not in benutzt:
             warnungen.append(f"Zeile {r.zeile}: Regel für {r.gebiet} passt auf keinen Ort")
+    # Ein Sitz muss in seiner eigenen Einheit liegen (sonst ist Sitz oder Regel falsch).
+    for einheit, sitz in sorted((sitze or {}).items()):
+        z = ergebnis.get(sitz)
+        if sitz and z is not None and z.verwaltung is not None and z.verwaltung != einheit and einheit in {
+            k[0] for liste in unter.values() for k in liste
+        }:
+            warnungen.append(f"Sitz {sitz} von {einheit} liegt in {z.verwaltung}")
     return Ergebnis(ergebnis, fehler, warnungen)
 
 
@@ -340,8 +394,11 @@ def lade(tabellen: Path, regeln_pfad: Path, codes_pfad: Path) -> tuple[list[dict
     codes = {z["ort"]: {k: z[k] for k in CODE_SPALTEN[1:]} for z in lies_csv(codes_pfad, CODE_SPALTEN)}
     regeln, fehler = lies_regeln(lies_csv(regeln_pfad, REGEL_SPALTEN), regeln_pfad.name)
     staaten = {z["tag"]: z["name"] for z in lies_csv(tabellen / "staaten.csv")}
-    einheiten = {z["id"]: z["staat"] for z in lies_csv(tabellen / "verwaltung.csv")}
-    ergebnis = aufloesen(orte, codes, regeln, set(staaten), einheiten)
+    verwaltung = lies_csv(tabellen / "verwaltung.csv")
+    einheiten = {z["id"]: z["staat"] for z in verwaltung}
+    ueber = {z["id"]: z["ueber"] for z in verwaltung}
+    sitze = {z["id"]: z.get("sitz", "") for z in verwaltung}
+    ergebnis = aufloesen(orte, codes, regeln, set(staaten), einheiten, ueber, sitze)
     ergebnis.fehler[:0] = fehler
     return orte, ergebnis, staaten
 

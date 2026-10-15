@@ -383,6 +383,7 @@ class TestStaatenbestandUndVerwaltung(MitKopie):
             ("verwaltung.csv", "kreis;sl_land;BBB", "kreis;sl_oben;BBB"): "unbekannte Verwaltungseinheit 'sl_oben' als 'ueber' von sl_burg",
             ("verwaltung.csv", "kreis;sl_land;BBB", "kreis;sl_land;AAA"): "Verwaltungseinheit sl_burg (AAA) liegt in sl_land eines anderen Staates (BBB)",
             ("verwaltung.csv", ";land;;BBB", ";land;;XYZ"): "unbekannter Staat 'XYZ' für Verwaltungseinheit sl_land",
+            ("verwaltung.csv", "BBB;burg;", "BBB;turm;"): "unbekannter Ort 'turm' als Sitz von sl_burg",
             ("verwaltung.csv", "Kreis Burg;kreis", "Kreis Burg;Kreis"): "ungültige Art 'Kreis'",
             ("verwaltung.csv", "sl_burg;sued", "keine;sued"): "ungültige Kennung 'keine' für eine Verwaltungseinheit",
             ("staaten_historie.csv", "zollverein;ja", "zollverein;1"): "'zollverein' erwartet ja oder nein, nicht '1'",

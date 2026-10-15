@@ -84,6 +84,7 @@ Ein Kreis ohne Orte ist eine Warnung.
 | `art` | Bezeichner der Ebene, z. B. `provinz`, `regierungsbezirk`, `kreis`, `kronland` |
 | `ueber` | übergeordnete Einheit; leer bei der obersten |
 | `staat` | Staatstag, zu dem die Einheit gehört (nur zur Prüfung, geht nicht ins Chronik-Skript) |
+| `sitz` | Ort des Verwaltungssitzes (Kreisstadt), leer erlaubt; nutzt `tools/geodaten/zuordnung.py` für die Zuordnung nach dem nächsten Sitz, geht nicht ins Chronik-Skript |
 | `sicherheit`, `quelle` | siehe oben |
 
 Eine Einheit liegt im selben Staat wie die übergeordnete; der Baum hat keinen Zyklus. Die

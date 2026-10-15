@@ -115,6 +115,48 @@ class TestAufloesen(unittest.TestCase):
         self.assertIn("Zeile 4: Regel für ort:gibtsnicht passt auf keinen Ort", e.warnungen)
 
 
+class TestNaechsterSitz(unittest.TestCase):
+    """verwaltung = naechste:<einheit>: unterste Einheit mit dem nächsten Sitz (seit M7)."""
+
+    ORTE = [
+        {"id": "a_stadt", "datei": "land", "breite": "52.0", "laenge": "13.0"},
+        {"id": "a_dorf", "datei": "land", "breite": "52.1", "laenge": "13.3"},
+        {"id": "b_stadt", "datei": "land", "breite": "52.0", "laenge": "14.0"},
+        {"id": "b_dorf", "datei": "land", "breite": "51.9", "laenge": "13.7"},
+    ]
+    CODES = {o["id"]: {"land": "DE", "admin1": "11", "admin2": "", "admin3": ""} for o in ORTE}
+    EINHEITEN = {"prov": "PRU", "rb": "PRU", "kr_a": "PRU", "kr_b": "PRU"}
+    UEBER = {"prov": "", "rb": "prov", "kr_a": "rb", "kr_b": "rb"}
+    SITZE = {"prov": "", "rb": "a_stadt", "kr_a": "a_stadt", "kr_b": "b_stadt"}
+
+    def test_naechster_kreissitz_unterhalb_der_provinz(self) -> None:
+        r = regeln(("DE.11", "PRU", "ja", "naechste:prov", "ungeprueft", "Brandenburg"))
+        e = zu.aufloesen(self.ORTE, self.CODES, r, {"PRU"}, self.EINHEITEN, self.UEBER, self.SITZE)
+        self.assertEqual((e.fehler, e.warnungen), ([], []))
+        # Nur die untersten Einheiten (Kreise) kommen in Frage, nicht der Regierungsbezirk.
+        self.assertEqual(
+            [e.zuordnung[o["id"]].verwaltung for o in self.ORTE], ["kr_a", "kr_a", "kr_b", "kr_b"]
+        )
+
+    def test_fehler(self) -> None:
+        r = regeln(
+            ("DE.11", "PRU", "ja", "naechste:gibtsnicht", "ungeprueft", "q"),
+            ("ort:a_dorf", "", "", "naechste:kr_a", "ungeprueft", "q"),
+        )
+        e = zu.aufloesen(self.ORTE, self.CODES, r, {"PRU"}, self.EINHEITEN, self.UEBER, self.SITZE)
+        self.assertIn("Zeile 2: unbekannte Verwaltungseinheit 'gibtsnicht' (verwaltung.csv)", e.fehler)
+        self.assertIn("Zeile 3: unter kr_a gibt es keine Einheit mit Sitz (Spalte 'sitz')", e.fehler)
+
+    def test_sitz_in_fremder_einheit(self) -> None:
+        sitze = dict(self.SITZE, kr_b="a_dorf")  # Sitz von kr_b liegt näher an kr_a
+        r = regeln(
+            ("DE.11", "PRU", "ja", "naechste:prov", "ungeprueft", "q"),
+            ("ort:a_dorf", "", "", "kr_a", "ungeprueft", "q"),
+        )
+        e = zu.aufloesen(self.ORTE, self.CODES, r, {"PRU"}, self.EINHEITEN, self.UEBER, sitze)
+        self.assertIn("Sitz a_dorf von kr_b liegt in kr_a", e.warnungen)
+
+
 class TestBesitz(unittest.TestCase):
     def test_zeilen_zum_stichtag_ersetzen(self) -> None:
         e = zu.aufloesen(ORTE, CODES, regeln(*GRUND), STAATEN, EINHEITEN)

@@ -56,7 +56,7 @@ SPALTEN: dict[str, tuple[str, ...]] = {
         "quelle",
     ),
     "kreise.csv": ("id", "datei", "name", "quelle"),
-    "verwaltung.csv": ("id", "datei", "name", "art", "ueber", "staat", "sicherheit", "quelle"),
+    "verwaltung.csv": ("id", "datei", "name", "art", "ueber", "staat", "sitz", "sicherheit", "quelle"),
     "besitz.csv": ("ort", "ab", "besitzer", "verwaltung", "bund", "sicherheit", "quelle"),
     "bevoelkerung.csv": (
         "ort",
@@ -580,6 +580,11 @@ def baue_archiv(tabellen: Path, bezug: Bezug, m: Meldungen) -> Archiv:
     for kennung, z in archiv.kreise.items():
         if kennung not in belegt:
             m.warnung_bei(z.datei, z.nr, f"Kreis {kennung} hat keine Orte")
+
+    # Sitz der Verwaltungseinheiten (seit M7), nach den Orten
+    for kennung, z in archiv.verwaltung.items():
+        if z["sitz"] and z["sitz"] not in archiv.orte:
+            m.fehler_bei(z.datei, z.nr, f"unbekannter Ort '{z['sitz']}' als Sitz von {kennung}")
 
     # Besitz
     gesehen = {}
