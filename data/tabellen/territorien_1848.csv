@@ -10,24 +10,24 @@ LU;LUX;ja;;ungeprueft;Großherzogtum Luxemburg nach der Teilung von 1839
 FR;-;;;ungeprueft;Frankreich (mit Elsass und Lothringen): Ausland, Ort ohne Daten
 BE;-;;;ungeprueft;Belgien: Ausland, Ort ohne Daten
 NL;-;;;ungeprueft;Niederlande ohne Limburg: Ausland, Ort ohne Daten
-RU;PRU;nein;pr_preussen;ungeprueft;heutige Oblast Kaliningrad: Provinz Preußen (Ostpreußen), nicht im Bund
-LT;PRU;nein;pr_preussen;ungeprueft;Memelland: Provinz Preußen, nicht im Bund
+RU;PRU;nein;naechste:pr_preussen;ungeprueft;heutige Oblast Kaliningrad: Provinz Preußen (Ostpreußen), nicht im Bund
+LT;PRU;nein;naechste:pr_preussen;ungeprueft;Memelland: Provinz Preußen, nicht im Bund
 DK;-;;;ungeprueft;Königreich Dänemark nördlich der Königsau: Ausland, Ort ohne Daten
 PL;PRU;ja;;ungeprueft;heutiges Polen: Grundregel Preußen, Landschaften und Ausnahmen einzeln
 landschaft:limburg;NED;ja;;ungeprueft;Herzogtum Limburg (seit 1839 im Bund)
 landschaft:schleswig;DEN;nein;dk_schleswig;ungeprueft;Herzogtum Schleswig unter dem dänischen König, nicht im Bund
 landschaft:holstein;DEN;ja;dk_holstein;ungeprueft;Herzogtum Holstein unter dem dänischen König, im Bund
-landschaft:pommern;PRU;ja;pr_pommern;ungeprueft;Provinz Pommern
+landschaft:pommern;PRU;ja;naechste:pr_pommern;ungeprueft;Provinz Pommern
 landschaft:mecklenburg;MSC;ja;;ungeprueft;Großherzogtum Mecklenburg-Schwerin, Strelitzer Gebiete einzeln
-landschaft:posen;PRU;nein;pr_posen;ungeprueft;Provinz Posen, nicht im Bund
-landschaft:westpreussen;PRU;nein;pr_preussen;ungeprueft;Provinz Preußen (Westpreußen), nicht im Bund
-landschaft:ostpreussen;PRU;nein;pr_preussen;ungeprueft;Provinz Preußen (Ostpreußen), nicht im Bund
+landschaft:posen;PRU;nein;naechste:pr_posen;ungeprueft;Provinz Posen, nicht im Bund
+landschaft:westpreussen;PRU;nein;naechste:pr_preussen;ungeprueft;Provinz Preußen (Westpreußen), nicht im Bund
+landschaft:ostpreussen;PRU;nein;naechste:pr_preussen;ungeprueft;Provinz Preußen (Ostpreußen), nicht im Bund
 landschaft:kongresspolen;-;;;ungeprueft;Königreich Polen (Russland): Ausland, Ort ohne Daten
-landschaft:galizien;AUT;ja;au_galizien;ungeprueft;"Herzogtümer Auschwitz und Zator (Galizien, im Bund); Krakauer Gebiet einzeln"
-landschaft:oesterreichisch_schlesien;AUT;ja;au_schlesien;ungeprueft;Herzogtum Schlesien (Österreichisch-Schlesien)
-landschaft:oberschlesien;PRU;ja;pr_schlesien;ungeprueft;Provinz Schlesien (Oberschlesien)
-landschaft:niederschlesien;PRU;ja;pr_schlesien;ungeprueft;Provinz Schlesien (Niederschlesien)
-landschaft:glatz;PRU;ja;pr_schlesien;ungeprueft;Grafschaft Glatz (Provinz Schlesien)
+landschaft:galizien;AUT;ja;naechste:au_galizien;ungeprueft;"Herzogtümer Auschwitz und Zator (Galizien, im Bund); Krakauer Gebiet einzeln"
+landschaft:oesterreichisch_schlesien;AUT;ja;naechste:au_schlesien;ungeprueft;Herzogtum Schlesien (Österreichisch-Schlesien)
+landschaft:oberschlesien;PRU;ja;naechste:pr_schlesien;ungeprueft;Provinz Schlesien (Oberschlesien)
+landschaft:niederschlesien;PRU;ja;naechste:pr_schlesien;ungeprueft;Provinz Schlesien (Niederschlesien)
+landschaft:glatz;PRU;ja;naechste:pr_schlesien;ungeprueft;Grafschaft Glatz (Provinz Schlesien)
 DE.01;WUE;;;ungeprueft;Baden-Württemberg: Grundregel Württemberg, Baden nach Bezirken und Kreisen
 DE.01.082;BAD;;bd_mittelrheinkreis;ungeprueft;heutiger Regierungsbezirk Karlsruhe: Baden
 DE.01.083;BAD;;bd_oberrheinkreis;ungeprueft;heutiger Regierungsbezirk Freiburg: Baden
@@ -81,9 +81,9 @@ DE.05.065.06534;HEK;;hk_oberhessen;ungeprueft;Marburg-Biedenkopf: Provinz Oberhe
 DE.05.066;HEK;;hk_niederhessen;ungeprueft;heutiger Regierungsbezirk Kassel: Kurhessen
 DE.05.066.06635;WAL;;;ungeprueft;Waldeck-Frankenberg: Fürstentum Waldeck, Frankenberg einzeln
 ort:bad_homburg_vor_der_hoehe;HHO;;;ungeprueft;Landgrafschaft Hessen-Homburg
-ort:wetzlar;PRU;;pr_rheinprovinz;ungeprueft;Kreis Wetzlar (Rheinprovinz)
-ort:braunfels;PRU;;pr_rheinprovinz;ungeprueft;Kreis Wetzlar (Rheinprovinz)
-ort:ehringshausen;PRU;;pr_rheinprovinz;ungeprueft;Kreis Wetzlar (Rheinprovinz)
+ort:wetzlar;PRU;;naechste:pr_rheinprovinz;ungeprueft;Kreis Wetzlar (Rheinprovinz)
+ort:braunfels;PRU;;naechste:pr_rheinprovinz;ungeprueft;Kreis Wetzlar (Rheinprovinz)
+ort:ehringshausen;PRU;;naechste:pr_rheinprovinz;ungeprueft;Kreis Wetzlar (Rheinprovinz)
 ort:bischoffen;HED;;hd_oberhessen;ungeprueft;hessen-darmstädtisch (Hinterland, Amt Itter)
 ort:biedenkopf;HED;;hd_oberhessen;ungeprueft;hessen-darmstädtisch (Hinterland, Amt Itter)
 ort:gladenbach;HED;;hd_oberhessen;ungeprueft;hessen-darmstädtisch (Hinterland, Amt Itter)
@@ -127,7 +127,7 @@ ort:bueckeburg;SLI;;;ungeprueft;Fürstentum Schaumburg-Lippe
 ort:cuxhaven;HAM;;;ungeprueft;Amt Ritzebüttel (Hamburg)
 DE.07;PRU;;;ungeprueft;Provinzen Westfalen und Rheinprovinz
 DE.07.057.05766;LIP;;;ungeprueft;Fürstentum Lippe
-DE.08;PRU;;pr_rheinprovinz;ungeprueft;Rheinland-Pfalz: Grundregel Rheinprovinz
+DE.08;PRU;;naechste:pr_rheinprovinz;ungeprueft;Rheinland-Pfalz: Grundregel Rheinprovinz
 DE.08.00.07311;BAV;;by_pfalz;ungeprueft;Rheinkreis (bayerische Pfalz)
 DE.08.00.07312;BAV;;by_pfalz;ungeprueft;Rheinkreis (bayerische Pfalz)
 DE.08.00.07313;BAV;;by_pfalz;ungeprueft;Rheinkreis (bayerische Pfalz)
@@ -154,7 +154,7 @@ ort:birkenfeld;OLD;;;ungeprueft;Fürstentum Birkenfeld (Oldenburg)
 ort:baumholder;OLD;;;ungeprueft;Fürstentum Birkenfeld (Oldenburg)
 ort:nohfelden;OLD;;;ungeprueft;Fürstentum Birkenfeld (Oldenburg)
 ort:meisenheim;HHO;;;ungeprueft;Oberamt Meisenheim (Hessen-Homburg)
-DE.09;PRU;;pr_rheinprovinz;ungeprueft;Saarland: Grundregel Rheinprovinz (Regierungsbezirk Trier)
+DE.09;PRU;;naechste:pr_rheinprovinz;ungeprueft;Saarland: Grundregel Rheinprovinz (Regierungsbezirk Trier)
 DE.09.00.10045;BAV;;by_pfalz;ungeprueft;Saarpfalz: bayerischer Rheinkreis
 DE.10.00.01003;LUE;;;ungeprueft;Freie und Hansestadt Lübeck
 DE.10.00.01053;DEN;ja;dk_lauenburg;ungeprueft;Herzogtum Lauenburg unter dem dänischen König, im Bund
@@ -164,7 +164,7 @@ ort:ratekau;OLD;;;ungeprueft;Fürstentum Lübeck (Oldenburg)
 ort:scharbeutz;OLD;;;ungeprueft;Fürstentum Lübeck (Oldenburg)
 ort:helgoland;-;;;ungeprueft;britisch seit 1814: Ausland, Ort ohne Daten
 DE.11;PRU;;;ungeprueft;Provinz Brandenburg (Niederlausitz und sächsische Ämter seit 1815)
-DE.16;PRU;;pr_brandenburg;ungeprueft;Berlin (Provinz Brandenburg)
+DE.16;PRU;;naechste:pr_brandenburg;ungeprueft;Berlin (Provinz Brandenburg)
 ort:fuerstenberg;MST;;;ungeprueft;Mecklenburg-Strelitz
 ort:neubrandenburg;MST;;;ungeprueft;Herrschaft Stargard (Mecklenburg-Strelitz)
 ort:woldegk;MST;;;ungeprueft;Herrschaft Stargard (Mecklenburg-Strelitz)
@@ -173,35 +173,35 @@ ort:neustrelitz;MST;;;ungeprueft;Herrschaft Stargard (Mecklenburg-Strelitz)
 ort:wesenberg;MST;;;ungeprueft;Herrschaft Stargard (Mecklenburg-Strelitz)
 ort:gross_nemerow;MST;;;ungeprueft;Herrschaft Stargard (Mecklenburg-Strelitz)
 ort:carpin;MST;;;ungeprueft;Herrschaft Stargard (Mecklenburg-Strelitz)
-ort:altentreptow;PRU;;pr_pommern;ungeprueft;Provinz Pommern bzw. Uckermark
-ort:demmin;PRU;;pr_pommern;ungeprueft;Provinz Pommern bzw. Uckermark
-ort:loitz;PRU;;pr_pommern;ungeprueft;Provinz Pommern bzw. Uckermark
-ort:guetzkow;PRU;;pr_pommern;ungeprueft;Provinz Pommern bzw. Uckermark
-ort:borrentin;PRU;;pr_pommern;ungeprueft;Provinz Pommern bzw. Uckermark
-ort:wackerow;PRU;;pr_pommern;ungeprueft;Provinz Pommern bzw. Uckermark
-ort:strasburg;PRU;;pr_brandenburg;ungeprueft;Provinz Pommern bzw. Uckermark
+ort:altentreptow;PRU;;naechste:pr_pommern;ungeprueft;Provinz Pommern bzw. Uckermark
+ort:demmin;PRU;;naechste:pr_pommern;ungeprueft;Provinz Pommern bzw. Uckermark
+ort:loitz;PRU;;naechste:pr_pommern;ungeprueft;Provinz Pommern bzw. Uckermark
+ort:guetzkow;PRU;;naechste:pr_pommern;ungeprueft;Provinz Pommern bzw. Uckermark
+ort:borrentin;PRU;;naechste:pr_pommern;ungeprueft;Provinz Pommern bzw. Uckermark
+ort:wackerow;PRU;;naechste:pr_pommern;ungeprueft;Provinz Pommern bzw. Uckermark
+ort:strasburg;PRU;;naechste:pr_brandenburg;ungeprueft;Provinz Pommern bzw. Uckermark
 DE.13;SAX;;;ungeprueft;Königreich Sachsen
-ort:hoyerswerda;PRU;;pr_schlesien;ungeprueft;preußische Oberlausitz seit 1815
-ort:lohsa;PRU;;pr_schlesien;ungeprueft;preußische Oberlausitz seit 1815
-ort:bernsdorf;PRU;;pr_schlesien;ungeprueft;preußische Oberlausitz seit 1815
-ort:weisswasser;PRU;;pr_schlesien;ungeprueft;preußische Oberlausitz seit 1815
-ort:niesky;PRU;;pr_schlesien;ungeprueft;preußische Oberlausitz seit 1815
-ort:rietschen;PRU;;pr_schlesien;ungeprueft;preußische Oberlausitz seit 1815
-ort:rothenburg;PRU;;pr_schlesien;ungeprueft;preußische Oberlausitz seit 1815
-ort:boxberg_lausitz;PRU;;pr_schlesien;ungeprueft;preußische Oberlausitz seit 1815
-ort:gross_dueben;PRU;;pr_schlesien;ungeprueft;preußische Oberlausitz seit 1815
-ort:goerlitz;PRU;;pr_schlesien;ungeprueft;preußische Oberlausitz seit 1815
-ort:reichenbach;PRU;;pr_schlesien;ungeprueft;preußische Oberlausitz seit 1815
-ort:torgau;PRU;;pr_sachsen;ungeprueft;seit 1815 preußisch (Regierungsbezirk Merseburg)
-ort:bad_dueben;PRU;;pr_sachsen;ungeprueft;seit 1815 preußisch (Regierungsbezirk Merseburg)
-ort:mockrehna;PRU;;pr_sachsen;ungeprueft;seit 1815 preußisch (Regierungsbezirk Merseburg)
-ort:belgern;PRU;;pr_sachsen;ungeprueft;seit 1815 preußisch (Regierungsbezirk Merseburg)
-ort:schildau;PRU;;pr_sachsen;ungeprueft;seit 1815 preußisch (Regierungsbezirk Merseburg)
-ort:dommitzsch;PRU;;pr_sachsen;ungeprueft;seit 1815 preußisch (Regierungsbezirk Merseburg)
-ort:delitzsch;PRU;;pr_sachsen;ungeprueft;seit 1815 preußisch (Regierungsbezirk Merseburg)
-ort:eilenburg;PRU;;pr_sachsen;ungeprueft;seit 1815 preußisch (Regierungsbezirk Merseburg)
-ort:krostitz;PRU;;pr_sachsen;ungeprueft;seit 1815 preußisch (Regierungsbezirk Merseburg)
-ort:schkeuditz;PRU;;pr_sachsen;ungeprueft;seit 1815 preußisch (Regierungsbezirk Merseburg)
+ort:hoyerswerda;PRU;;naechste:pr_schlesien;ungeprueft;preußische Oberlausitz seit 1815
+ort:lohsa;PRU;;naechste:pr_schlesien;ungeprueft;preußische Oberlausitz seit 1815
+ort:bernsdorf;PRU;;naechste:pr_schlesien;ungeprueft;preußische Oberlausitz seit 1815
+ort:weisswasser;PRU;;naechste:pr_schlesien;ungeprueft;preußische Oberlausitz seit 1815
+ort:niesky;PRU;;naechste:pr_schlesien;ungeprueft;preußische Oberlausitz seit 1815
+ort:rietschen;PRU;;naechste:pr_schlesien;ungeprueft;preußische Oberlausitz seit 1815
+ort:rothenburg;PRU;;naechste:pr_schlesien;ungeprueft;preußische Oberlausitz seit 1815
+ort:boxberg_lausitz;PRU;;naechste:pr_schlesien;ungeprueft;preußische Oberlausitz seit 1815
+ort:gross_dueben;PRU;;naechste:pr_schlesien;ungeprueft;preußische Oberlausitz seit 1815
+ort:goerlitz;PRU;;naechste:pr_schlesien;ungeprueft;preußische Oberlausitz seit 1815
+ort:reichenbach;PRU;;naechste:pr_schlesien;ungeprueft;preußische Oberlausitz seit 1815
+ort:torgau;PRU;;naechste:pr_sachsen;ungeprueft;seit 1815 preußisch (Regierungsbezirk Merseburg)
+ort:bad_dueben;PRU;;naechste:pr_sachsen;ungeprueft;seit 1815 preußisch (Regierungsbezirk Merseburg)
+ort:mockrehna;PRU;;naechste:pr_sachsen;ungeprueft;seit 1815 preußisch (Regierungsbezirk Merseburg)
+ort:belgern;PRU;;naechste:pr_sachsen;ungeprueft;seit 1815 preußisch (Regierungsbezirk Merseburg)
+ort:schildau;PRU;;naechste:pr_sachsen;ungeprueft;seit 1815 preußisch (Regierungsbezirk Merseburg)
+ort:dommitzsch;PRU;;naechste:pr_sachsen;ungeprueft;seit 1815 preußisch (Regierungsbezirk Merseburg)
+ort:delitzsch;PRU;;naechste:pr_sachsen;ungeprueft;seit 1815 preußisch (Regierungsbezirk Merseburg)
+ort:eilenburg;PRU;;naechste:pr_sachsen;ungeprueft;seit 1815 preußisch (Regierungsbezirk Merseburg)
+ort:krostitz;PRU;;naechste:pr_sachsen;ungeprueft;seit 1815 preußisch (Regierungsbezirk Merseburg)
+ort:schkeuditz;PRU;;naechste:pr_sachsen;ungeprueft;seit 1815 preußisch (Regierungsbezirk Merseburg)
 DE.14;PRU;;;ungeprueft;Provinz Sachsen
 ort:dessau;DES;;;ungeprueft;Herzogtum Anhalt-Dessau (Köthen seit 1847 mitregiert)
 ort:rodleben;DES;;;ungeprueft;Herzogtum Anhalt-Dessau (Köthen seit 1847 mitregiert)
@@ -218,7 +218,7 @@ ort:harzgerode;BER;;;ungeprueft;Herzogtum Anhalt-Bernburg
 ort:calvoerde;BWO;;;ungeprueft;braunschweigisch (Fürstentum Blankenburg, Amt Calvörde)
 ort:blankenburg;BWO;;;ungeprueft;braunschweigisch (Fürstentum Blankenburg, Amt Calvörde)
 ort:hasselfelde;BWO;;;ungeprueft;braunschweigisch (Fürstentum Blankenburg, Amt Calvörde)
-DE.15;PRU;;pr_sachsen;ungeprueft;Thüringen: Grundregel Regierungsbezirk Erfurt, Kleinstaaten einzeln
+DE.15;PRU;;naechste:pr_sachsen;ungeprueft;Thüringen: Grundregel Regierungsbezirk Erfurt, Kleinstaaten einzeln
 ort:jena;WEI;;;ungeprueft;Großherzogtum Sachsen-Weimar-Eisenach
 ort:weimar;WEI;;;ungeprueft;Großherzogtum Sachsen-Weimar-Eisenach
 ort:eisenach;WEI;;;ungeprueft;Großherzogtum Sachsen-Weimar-Eisenach
@@ -295,8 +295,8 @@ ort:marlow;MSC;;;ungeprueft;mecklenburgisch (Ribnitz)
 ort:krenau;AUT;nein;;ungeprueft;Krakauer Gebiet, seit 1846 österreichisch (Galizien), nicht im Bund
 ort:alwernia;AUT;nein;;ungeprueft;Krakauer Gebiet, seit 1846 österreichisch (Galizien), nicht im Bund
 ort:jaworzno;AUT;nein;;ungeprueft;Krakauer Gebiet, seit 1846 österreichisch (Galizien), nicht im Bund
-ort:hultschin;PRU;ja;pr_schlesien;ungeprueft;Hultschiner Ländchen (Kreis Ratibor, Provinz Schlesien)
-ort:bolatitz;PRU;ja;pr_schlesien;ungeprueft;Hultschiner Ländchen (Kreis Ratibor, Provinz Schlesien)
+ort:hultschin;PRU;ja;naechste:pr_schlesien;ungeprueft;Hultschiner Ländchen (Kreis Ratibor, Provinz Schlesien)
+ort:bolatitz;PRU;ja;naechste:pr_schlesien;ungeprueft;Hultschiner Ländchen (Kreis Ratibor, Provinz Schlesien)
 ort:praszka;-;;;ungeprueft;Königreich Polen (Russland): Ausland, Ort ohne Daten
 ort:pyzdry;-;;;ungeprueft;Königreich Polen (Russland): Ausland, Ort ohne Daten
 ort:chocz;-;;;ungeprueft;Königreich Polen (Russland): Ausland, Ort ohne Daten
@@ -309,59 +309,78 @@ ort:buetow;PRU;nein;;ungeprueft;Lande Lauenburg und Bütow (Provinz Pommern), ni
 ort:gross_tuchen;PRU;nein;;ungeprueft;Lande Lauenburg und Bütow (Provinz Pommern), nicht im Bund
 ort:studzienice;PRU;nein;;ungeprueft;Lande Lauenburg und Bütow (Provinz Pommern), nicht im Bund
 ort:lipnica;PRU;nein;;ungeprueft;Lande Lauenburg und Bütow (Provinz Pommern), nicht im Bund
-ort:eupen;PRU;ja;pr_rheinprovinz;ungeprueft;Kreise Eupen und Malmedy (Rheinprovinz) seit 1815
-ort:malmedy;PRU;ja;pr_rheinprovinz;ungeprueft;Kreise Eupen und Malmedy (Rheinprovinz) seit 1815
-ort:sankt_vith;PRU;ja;pr_rheinprovinz;ungeprueft;Kreise Eupen und Malmedy (Rheinprovinz) seit 1815
-ort:buellingen;PRU;ja;pr_rheinprovinz;ungeprueft;Kreise Eupen und Malmedy (Rheinprovinz) seit 1815
-ort:amel;PRU;ja;pr_rheinprovinz;ungeprueft;Kreise Eupen und Malmedy (Rheinprovinz) seit 1815
+ort:eupen;PRU;ja;naechste:pr_rheinprovinz;ungeprueft;Kreise Eupen und Malmedy (Rheinprovinz) seit 1815
+ort:malmedy;PRU;ja;naechste:pr_rheinprovinz;ungeprueft;Kreise Eupen und Malmedy (Rheinprovinz) seit 1815
+ort:sankt_vith;PRU;ja;naechste:pr_rheinprovinz;ungeprueft;Kreise Eupen und Malmedy (Rheinprovinz) seit 1815
+ort:buellingen;PRU;ja;naechste:pr_rheinprovinz;ungeprueft;Kreise Eupen und Malmedy (Rheinprovinz) seit 1815
+ort:amel;PRU;ja;naechste:pr_rheinprovinz;ungeprueft;Kreise Eupen und Malmedy (Rheinprovinz) seit 1815
 ort:christiansfeld;DEN;nein;dk_schleswig;ungeprueft;Herzogtum Schleswig, nicht im Bund
 ort:roedding;DEN;nein;dk_schleswig;ungeprueft;Herzogtum Schleswig, nicht im Bund
 ort:maestricht;NED;nein;;ungeprueft;Festungen Maastricht und Venlo: niederländisch, nicht im Bund
 ort:venlo;NED;nein;;ungeprueft;Festungen Maastricht und Venlo: niederländisch, nicht im Bund
-ort:seidenberg;PRU;;pr_schlesien;ungeprueft;preußische Oberlausitz bzw. Neumark
-ort:zielenzig;PRU;;pr_brandenburg;ungeprueft;preußische Oberlausitz bzw. Neumark
-landschaft:brandenburg;;;pr_brandenburg;ungeprueft;Verwaltung 1848
-DE.11.00;;;pr_brandenburg;ungeprueft;Verwaltung 1848
-DE.14.00;;;pr_sachsen;ungeprueft;Verwaltung 1848
-ort:herzberg;;;pr_sachsen;ungeprueft;Verwaltung 1848
-ort:bad_liebenwerda;;;pr_sachsen;ungeprueft;Verwaltung 1848
-ort:elsterwerda;;;pr_sachsen;ungeprueft;Verwaltung 1848
-ort:muehlberg;;;pr_sachsen;ungeprueft;Verwaltung 1848
-ort:falkenberg_lausitz;;;pr_sachsen;ungeprueft;Verwaltung 1848
-ort:schlieben;;;pr_sachsen;ungeprueft;Verwaltung 1848
-ort:hirschfeld;;;pr_sachsen;ungeprueft;Verwaltung 1848
-ort:ortrand;;;pr_sachsen;ungeprueft;Verwaltung 1848
-DE.07.055;;;pr_westfalen;ungeprueft;Verwaltung 1848
-DE.07.057;;;pr_westfalen;ungeprueft;Verwaltung 1848
-DE.07.059;;;pr_westfalen;ungeprueft;Verwaltung 1848
-DE.07.051;;;pr_rheinprovinz;ungeprueft;Verwaltung 1848
-DE.07.053;;;pr_rheinprovinz;ungeprueft;Verwaltung 1848
-ort:sorau;;;pr_brandenburg;ungeprueft;Niederlausitz (Provinz Brandenburg)
-ort:sommerfeld;;;pr_brandenburg;ungeprueft;Niederlausitz (Provinz Brandenburg)
-ort:triebel;;;pr_brandenburg;ungeprueft;Niederlausitz (Provinz Brandenburg)
-ort:lipinki_luzyckie;;;pr_brandenburg;ungeprueft;Niederlausitz (Provinz Brandenburg)
-ort:pfoerten;;;pr_brandenburg;ungeprueft;Niederlausitz (Provinz Brandenburg)
-ort:penzig;;;pr_schlesien;ungeprueft;preußische Oberlausitz (Provinz Schlesien)
-ort:kohlfurt;;;pr_schlesien;ungeprueft;preußische Oberlausitz (Provinz Schlesien)
-ort:priebus;;;pr_schlesien;ungeprueft;preußische Oberlausitz (Provinz Schlesien)
-ort:lauban;;;pr_schlesien;ungeprueft;preußische Oberlausitz (Provinz Schlesien)
-ort:bad_flinsberg;;;pr_schlesien;ungeprueft;preußische Oberlausitz (Provinz Schlesien)
-ort:marklissa;;;pr_schlesien;ungeprueft;preußische Oberlausitz (Provinz Schlesien)
+ort:seidenberg;PRU;;naechste:pr_schlesien;ungeprueft;preußische Oberlausitz bzw. Neumark
+ort:zielenzig;PRU;;naechste:pr_brandenburg;ungeprueft;preußische Oberlausitz bzw. Neumark
+landschaft:brandenburg;;;naechste:pr_brandenburg;ungeprueft;Verwaltung 1848
+DE.11.00;;;naechste:pr_brandenburg;ungeprueft;Verwaltung 1848
+DE.14.00;;;naechste:pr_sachsen;ungeprueft;Verwaltung 1848
+ort:herzberg;;;naechste:pr_sachsen;ungeprueft;Verwaltung 1848
+ort:bad_liebenwerda;;;naechste:pr_sachsen;ungeprueft;Verwaltung 1848
+ort:elsterwerda;;;naechste:pr_sachsen;ungeprueft;Verwaltung 1848
+ort:muehlberg;;;naechste:pr_sachsen;ungeprueft;Verwaltung 1848
+ort:falkenberg_lausitz;;;naechste:pr_sachsen;ungeprueft;Verwaltung 1848
+ort:schlieben;;;naechste:pr_sachsen;ungeprueft;Verwaltung 1848
+ort:hirschfeld;;;naechste:pr_sachsen;ungeprueft;Verwaltung 1848
+ort:ortrand;;;naechste:pr_sachsen;ungeprueft;Verwaltung 1848
+DE.07.055;;;naechste:pr_westfalen;ungeprueft;Verwaltung 1848
+DE.07.057;;;naechste:pr_westfalen;ungeprueft;Verwaltung 1848
+DE.07.059;;;naechste:pr_westfalen;ungeprueft;Verwaltung 1848
+DE.07.051;;;naechste:pr_rheinprovinz;ungeprueft;Verwaltung 1848
+DE.07.053;;;naechste:pr_rheinprovinz;ungeprueft;Verwaltung 1848
+ort:sorau;;;naechste:pr_brandenburg;ungeprueft;Niederlausitz (Provinz Brandenburg)
+ort:sommerfeld;;;naechste:pr_brandenburg;ungeprueft;Niederlausitz (Provinz Brandenburg)
+ort:triebel;;;naechste:pr_brandenburg;ungeprueft;Niederlausitz (Provinz Brandenburg)
+ort:lipinki_luzyckie;;;naechste:pr_brandenburg;ungeprueft;Niederlausitz (Provinz Brandenburg)
+ort:pfoerten;;;naechste:pr_brandenburg;ungeprueft;Niederlausitz (Provinz Brandenburg)
+ort:penzig;;;naechste:pr_schlesien;ungeprueft;preußische Oberlausitz (Provinz Schlesien)
+ort:kohlfurt;;;naechste:pr_schlesien;ungeprueft;preußische Oberlausitz (Provinz Schlesien)
+ort:priebus;;;naechste:pr_schlesien;ungeprueft;preußische Oberlausitz (Provinz Schlesien)
+ort:lauban;;;naechste:pr_schlesien;ungeprueft;preußische Oberlausitz (Provinz Schlesien)
+ort:bad_flinsberg;;;naechste:pr_schlesien;ungeprueft;preußische Oberlausitz (Provinz Schlesien)
+ort:marklissa;;;naechste:pr_schlesien;ungeprueft;preußische Oberlausitz (Provinz Schlesien)
 ort:reichenau;SAX;;sx_bautzen;ungeprueft;Oberlausitz östlich der Neiße, sächsisch (Amtshauptmannschaft Zittau)
-AT.03;;;au_niederoesterreich;ungeprueft;Verwaltung 1848
-AT.09;;;au_niederoesterreich;ungeprueft;Verwaltung 1848
-AT.04;;;au_oberoesterreich;ungeprueft;Verwaltung 1848
+ort:dramburg;;;naechste:pr_pommern;ungeprueft;Kreise Dramburg, Schivelbein, Belgard und Neustettin (Provinz Pommern)
+ort:schivelbein;;;naechste:pr_pommern;ungeprueft;Kreise Dramburg, Schivelbein, Belgard und Neustettin (Provinz Pommern)
+ort:falkenburg;;;naechste:pr_pommern;ungeprueft;Kreise Dramburg, Schivelbein, Belgard und Neustettin (Provinz Pommern)
+ort:bad_polzin;;;naechste:pr_pommern;ungeprueft;Kreise Dramburg, Schivelbein, Belgard und Neustettin (Provinz Pommern)
+ort:tempelburg;;;naechste:pr_pommern;ungeprueft;Kreise Dramburg, Schivelbein, Belgard und Neustettin (Provinz Pommern)
+ort:stolzenberg;;;naechste:pr_pommern;ungeprueft;Kreise Dramburg, Schivelbein, Belgard und Neustettin (Provinz Pommern)
+ort:virchow;;;naechste:pr_pommern;ungeprueft;Kreise Dramburg, Schivelbein, Belgard und Neustettin (Provinz Pommern)
+ort:rabino;;;naechste:pr_pommern;ungeprueft;Kreise Dramburg, Schivelbein, Belgard und Neustettin (Provinz Pommern)
+ort:kallies;;;naechste:pr_pommern;ungeprueft;Kreise Dramburg, Schivelbein, Belgard und Neustettin (Provinz Pommern)
+ort:koenigsberg_in_neumark;;;naechste:pr_brandenburg;ungeprueft;Neumark bzw. Kreis Züllichau-Schwiebus (Provinz Brandenburg)
+ort:baerwalde_in_neumark;;;naechste:pr_brandenburg;ungeprueft;Neumark bzw. Kreis Züllichau-Schwiebus (Provinz Brandenburg)
+ort:bad_schoenfliess;;;naechste:pr_brandenburg;ungeprueft;Neumark bzw. Kreis Züllichau-Schwiebus (Provinz Brandenburg)
+ort:mohrin;;;naechste:pr_brandenburg;ungeprueft;Neumark bzw. Kreis Züllichau-Schwiebus (Provinz Brandenburg)
+ort:zehden;;;naechste:pr_brandenburg;ungeprueft;Neumark bzw. Kreis Züllichau-Schwiebus (Provinz Brandenburg)
+ort:lippehne;;;naechste:pr_brandenburg;ungeprueft;Neumark bzw. Kreis Züllichau-Schwiebus (Provinz Brandenburg)
+ort:zuellichau;;;naechste:pr_brandenburg;ungeprueft;Neumark bzw. Kreis Züllichau-Schwiebus (Provinz Brandenburg)
+ort:bomst;;nein;naechste:pr_posen;ungeprueft;Kreis Bomst (Provinz Posen), nicht im Bund
+ort:unruhstadt;;nein;naechste:pr_posen;ungeprueft;Kreis Bomst (Provinz Posen), nicht im Bund
+ort:neu_bentschen;;nein;naechste:pr_posen;ungeprueft;Kreis Bomst (Provinz Posen), nicht im Bund
+AT.03;;;naechste:au_niederoesterreich;ungeprueft;Verwaltung 1848
+AT.09;;;naechste:au_niederoesterreich;ungeprueft;Verwaltung 1848
+AT.04;;;naechste:au_oberoesterreich;ungeprueft;Verwaltung 1848
 AT.05;;;au_salzburg;ungeprueft;Verwaltung 1848
-AT.06;;;au_steiermark;ungeprueft;Verwaltung 1848
-landschaft:steiermark;;;au_steiermark;ungeprueft;Verwaltung 1848
-AT.02;;;au_kaernten;ungeprueft;Verwaltung 1848
-landschaft:kaernten;;;au_kaernten;ungeprueft;Verwaltung 1848
-landschaft:krain;;;au_krain;ungeprueft;Verwaltung 1848
-AT.07;;;au_tirol;ungeprueft;Verwaltung 1848
-AT.08;;;au_tirol;ungeprueft;Verwaltung 1848
-landschaft:tirol;;;au_tirol;ungeprueft;Verwaltung 1848
-landschaft:boehmen;;;au_boehmen;ungeprueft;Verwaltung 1848
-landschaft:maehren;;;au_maehren;ungeprueft;Verwaltung 1848
+AT.06;;;naechste:au_steiermark;ungeprueft;Verwaltung 1848
+landschaft:steiermark;;;naechste:au_steiermark;ungeprueft;Verwaltung 1848
+AT.02;;;naechste:au_kaernten;ungeprueft;Verwaltung 1848
+landschaft:kaernten;;;naechste:au_kaernten;ungeprueft;Verwaltung 1848
+landschaft:krain;;;naechste:au_krain;ungeprueft;Verwaltung 1848
+AT.07;;;naechste:au_tirol;ungeprueft;Verwaltung 1848
+AT.08;;;naechste:au_tirol;ungeprueft;Verwaltung 1848
+landschaft:tirol;;;naechste:au_tirol;ungeprueft;Verwaltung 1848
+landschaft:boehmen;;;naechste:au_boehmen;ungeprueft;Verwaltung 1848
+landschaft:maehren;;;naechste:au_maehren;ungeprueft;Verwaltung 1848
 DE.02.091;;;by_oberbayern;ungeprueft;Verwaltung 1848
 DE.02.092;;;by_niederbayern;ungeprueft;Verwaltung 1848
 DE.02.093;;;by_oberpfalz;ungeprueft;Verwaltung 1848

@@ -259,10 +259,14 @@ func _check_scenario_1848() -> void:
 		"Verwaltung: %d Einheiten, %d Indizes" % [units, admin.size()]
 	)
 	var unit := sim.get_admin_unit(admin[sim.get_location_index("berlin_coelln")])
+	var district := sim.get_admin_unit(int(unit.get("parent_index", -1)))
 	_check(
-		str(unit.get("kind", "")) == "provinz" and int(unit.get("location_count", 0)) > 100,
-		"get_admin_unit: %s (%d Orte)" % [unit.get("name"), unit.get("location_count")],
-		"get_admin_unit: %s" % str(unit)
+		str(unit.get("kind", "")) == "kreis" and int(unit.get("location_count", 0)) > 0
+		and str(district.get("id", "")) == "pr_rb_potsdam" and chain.size() == 3,
+		"get_admin_unit: %s im %s (%d Orte)" % [
+			unit.get("name"), district.get("name"), unit.get("location_count")
+		],
+		"get_admin_unit: %s, darüber %s, Kette %s" % [str(unit), str(district), str(chain)]
 	)
 	var bavaria := sim.get_state_index("BAV")
 	_check(

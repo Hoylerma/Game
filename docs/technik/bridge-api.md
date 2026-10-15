@@ -77,7 +77,7 @@ Dateipfade des Betriebssystems (in GDScript `ProjectSettings.globalize_path("use
 | 7 | `MAP_KULTUR` | seit M4: Farbe der Mehrheitskultur (`common/kulturen.chron`) |
 | 8 | `MAP_WIRTSCHAFT` | seit M5: linearer Verlauf nach Wirtschaftsleistung je Einwohner und Jahr (0 → hell, ≥ 16 Reichstaler → dunkelbraun) |
 | 9 | `MAP_MAERKTE` | seit M5: Farbe je Markt aus der Palette von `MAP_KREISE`; die aktiven Märkte laufen nacheinander durch die Palette, damit sich Nachbarn unterscheiden |
-| 10 | `MAP_VERWALTUNG` | seit M7: Farbe der untersten Verwaltungseinheit aus der Palette von `MAP_KREISE` (`palette[einheitsindex % n]`); Orte von Staaten ohne Gliederung in der aufgehellten Staatsfarbe |
+| 10 | `MAP_VERWALTUNG` | seit M7: Farbe der obersten Verwaltungseinheit (Provinz, Kronland …) aus der Palette von `MAP_KREISE` (`palette[einheitsindex % n]`); die Grenzen der untersten Einheiten zeichnet Godot aus `get_location_admin_indices`; Orte von Staaten ohne Gliederung in der aufgehellten Staatsfarbe |
 
 **Orte ohne Daten** (seit M3) erhalten in den Modi 0, 1, 2, 4, 6, 7, 8 und 10 eine Farbe mit **Alpha 0**;
 die Godot-Seite zeichnet dort eine Schraffur „keine Daten“. In den Modi 3 und 5 haben sie normale

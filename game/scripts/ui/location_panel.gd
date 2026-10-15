@@ -170,6 +170,9 @@ func show_location(location: Dictionary, owner_color: Color) -> void:
 	_admin.text = " · ".join(chain)
 	_admin_caption.visible = not chain.is_empty()
 	_admin.visible = not chain.is_empty()
+	# Die Kreise aus M3 sind räumliche Gruppen der Karte, keine historischen Kreise: neben der
+	# Verwaltung heißen sie deshalb „Kartenkreis“.
+	$Scroll/Margin/Content/Facts/KreisCaption.text = "Kartenkreis" if not chain.is_empty() else "Kreis"
 	var federal := bool(location.get("bundesgebiet", false))
 	_federal.text = "Bundesgebiet" if federal else "außerhalb"
 	_federal_caption.visible = show_federation and has_data
@@ -352,6 +355,9 @@ func _add_fact(grid: GridContainer, caption: String, value: String) -> void:
 	value_label.text = value
 	value_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	value_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	# Lange Werte (Marktnamen) umbrechen statt das Panel zu verbreitern.
+	value_label.custom_minimum_size = Vector2(1, 0)
+	value_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	grid.add_child(value_label)
 
 

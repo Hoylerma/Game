@@ -889,10 +889,18 @@ PackedColorArray UhrwerkSimulation::get_map_colors(std::int64_t mode) const {
             }
             break;
         case MAP_VERWALTUNG:
-            // Unterste Verwaltungseinheit aus der Palette; Staaten ohne Unterteilung in ihrer
-            // aufgehellten Staatsfarbe (seit M7).
+            // Oberste Verwaltungseinheit (Provinz, Kronland …) aus der Palette, die Grenzen der
+            // untersten zeichnet Godot; Staaten ohne Gliederung in aufgehellter Staatsfarbe (seit M7).
             if (valid_index(w->admin_units, loc.admin)) {
-                color = kKreisPalette[static_cast<std::size_t>(loc.admin) % kKreisPalette.size()];
+                uhrwerk::Index top = loc.admin;
+                for (std::size_t step = 0; step < w->admin_units.size(); ++step) {
+                    const uhrwerk::Index parent = at(w->admin_units, top).parent;
+                    if (!valid_index(w->admin_units, parent)) {
+                        break;
+                    }
+                    top = parent;
+                }
+                color = kKreisPalette[static_cast<std::size_t>(top) % kKreisPalette.size()];
             } else if (valid_index(w->states, loc.owner)) {
                 color = blend(to_godot(at(w->states, loc.owner).color), Color(1.0f, 1.0f, 1.0f), 0.45);
             }

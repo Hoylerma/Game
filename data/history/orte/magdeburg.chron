@@ -44,7 +44,7 @@ ort magdeburg {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_magdeburg
         bund       = ja
     }
 }
@@ -76,7 +76,7 @@ ort halle {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_halle
         bund       = ja
     }
 }
@@ -107,7 +107,7 @@ ort halberstadt {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_halberstadt
         bund       = ja
     }
 }
@@ -130,7 +130,7 @@ ort jueterbog {
     }
 
     1846.12.03 = {
-        bevoelkerung = 9105
+        bevoelkerung = 9309
         konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
         kultur       = { niedersachsen = 100 }
         verwuestung  = 0
@@ -138,7 +138,7 @@ ort jueterbog {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_brandenburg
+        verwaltung = pr_kr_jueterbog_luckenwalde
         bund       = ja
     }
 }
@@ -161,7 +161,7 @@ ort neuhaldensleben {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_neuhaldensleben
         bund       = ja
     }
 }
@@ -184,7 +184,7 @@ ort oebisfelde {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_gardelegen
         bund       = ja
     }
 }
@@ -229,7 +229,7 @@ ort weferlingen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_neuhaldensleben
         bund       = ja
     }
 }
@@ -252,7 +252,7 @@ ort burg_bei_magdeburg {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_jerichow_i
         bund       = ja
     }
 }
@@ -275,7 +275,7 @@ ort genthin {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_jerichow_ii
         bund       = ja
     }
 }
@@ -298,7 +298,7 @@ ort moeckern {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_jerichow_i
         bund       = ja
     }
 }
@@ -321,7 +321,7 @@ ort loburg {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_jerichow_i
         bund       = ja
     }
 }
@@ -344,7 +344,7 @@ ort tucheim {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_jerichow_ii
         bund       = ja
     }
 }
@@ -367,7 +367,7 @@ ort schoenebeck {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_calbe
         bund       = ja
     }
 }
@@ -390,7 +390,7 @@ ort calbe {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_calbe
         bund       = ja
     }
 }
@@ -413,7 +413,7 @@ ort wolmirstedt {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_wolmirstedt
         bund       = ja
     }
 }
@@ -436,7 +436,7 @@ ort gommern {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_magdeburg
         bund       = ja
     }
 }
@@ -459,7 +459,7 @@ ort niederndodeleben {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_magdeburg
         bund       = ja
     }
 }
@@ -482,7 +482,7 @@ ort barby {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_calbe
         bund       = ja
     }
 }
@@ -505,7 +505,7 @@ ort gerwisch {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_magdeburg
         bund       = ja
     }
 }
@@ -528,7 +528,7 @@ ort angern {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_jerichow_i
         bund       = ja
     }
 }
@@ -551,7 +551,7 @@ ort oschersleben {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_oschersleben
         bund       = ja
     }
 }
@@ -574,7 +574,7 @@ ort groeningen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_oschersleben
         bund       = ja
     }
 }
@@ -597,7 +597,7 @@ ort egeln {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_wanzleben
         bund       = ja
     }
 }
@@ -620,7 +620,7 @@ ort wanzleben {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_wanzleben
         bund       = ja
     }
 }
@@ -643,7 +643,7 @@ ort eilsleben {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_oschersleben
         bund       = ja
     }
 }
@@ -666,7 +666,7 @@ ort ausleben {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_oschersleben
         bund       = ja
     }
 }
@@ -689,7 +689,7 @@ ort wernigerode {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_wernigerode
         bund       = ja
     }
 }
@@ -734,7 +734,7 @@ ort huy_neinstedt {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_halberstadt
         bund       = ja
     }
 }
@@ -757,7 +757,7 @@ ort osterwieck {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_wernigerode
         bund       = ja
     }
 }
@@ -802,7 +802,7 @@ ort benneckenstein {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_wernigerode
         bund       = ja
     }
 }
@@ -825,7 +825,7 @@ ort derenburg {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_wernigerode
         bund       = ja
     }
 }
@@ -848,7 +848,7 @@ ort aschersleben {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_aschersleben
         bund       = ja
     }
 }
@@ -871,7 +871,7 @@ ort quedlinburg {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_halberstadt
         bund       = ja
     }
 }
@@ -894,7 +894,7 @@ ort stassfurt {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_aschersleben
         bund       = ja
     }
 }
@@ -961,7 +961,7 @@ ort gatersleben {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_aschersleben
         bund       = ja
     }
 }
@@ -984,7 +984,7 @@ ort merseburg {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_merseburg
         bund       = ja
     }
 }
@@ -1007,7 +1007,7 @@ ort bad_duerrenberg {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_merseburg
         bund       = ja
     }
 }
@@ -1030,7 +1030,7 @@ ort querfurt {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_querfurt
         bund       = ja
     }
 }
@@ -1053,7 +1053,7 @@ ort teutschenthal {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_halle
         bund       = ja
     }
 }
@@ -1076,7 +1076,7 @@ ort muecheln {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_merseburg
         bund       = ja
     }
 }
@@ -1099,7 +1099,7 @@ ort bad_lauchstaedt {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_merseburg
         bund       = ja
     }
 }
@@ -1122,7 +1122,7 @@ ort koennern {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_mansfelder_gebirgskreis
         bund       = ja
     }
 }
@@ -1145,7 +1145,7 @@ ort landsberg_bei_halle {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_delitzsch
         bund       = ja
     }
 }
@@ -1168,7 +1168,7 @@ ort wettin {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_halle
         bund       = ja
     }
 }
@@ -1191,7 +1191,7 @@ ort groebers {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_halle
         bund       = ja
     }
 }

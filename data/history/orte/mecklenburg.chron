@@ -429,7 +429,7 @@ ort demmin {
     quelle   = "GeoNames (CC BY 4.0), geonameid 2938284; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
-        bevoelkerung = 10506
+        bevoelkerung = 10007
         konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
         kultur       = { mecklenburger = 100 }
         verwuestung  = 0
@@ -437,7 +437,7 @@ ort demmin {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_pommern
+        verwaltung = pr_kr_demmin
         bund       = ja
     }
 }
@@ -584,7 +584,7 @@ ort borrentin {
     quelle   = "GeoNames (CC BY 4.0), geonameid 2946034; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
-        bevoelkerung = 4004
+        bevoelkerung = 3814
         konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
         kultur       = { mecklenburger = 100 }
         verwuestung  = 0
@@ -592,7 +592,7 @@ ort borrentin {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_pommern
+        verwaltung = pr_kr_demmin
         bund       = ja
     }
 }
@@ -1135,7 +1135,7 @@ ort altentreptow {
     quelle   = "GeoNames (CC BY 4.0), geonameid 2957437; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
-        bevoelkerung = 9795
+        bevoelkerung = 9331
         konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
         kultur       = { mecklenburger = 100 }
         verwuestung  = 0
@@ -1143,7 +1143,7 @@ ort altentreptow {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_pommern
+        verwaltung = pr_kr_demmin
         bund       = ja
     }
 }
@@ -1224,7 +1224,7 @@ ort loitz {
     quelle   = "GeoNames (CC BY 4.0), geonameid 2876044; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
-        bevoelkerung = 9833
+        bevoelkerung = 9366
         konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
         kultur       = { mecklenburger = 100 }
         verwuestung  = 0
@@ -1232,7 +1232,7 @@ ort loitz {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_pommern
+        verwaltung = pr_kr_anklam
         bund       = ja
     }
 }
@@ -1269,7 +1269,7 @@ ort guetzkow {
     quelle   = "GeoNames (CC BY 4.0), geonameid 2913290; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
-        bevoelkerung = 7291
+        bevoelkerung = 6945
         konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
         kultur       = { mecklenburger = 100 }
         verwuestung  = 0
@@ -1277,7 +1277,7 @@ ort guetzkow {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_pommern
+        verwaltung = pr_kr_demmin
         bund       = ja
     }
 }
@@ -1314,7 +1314,7 @@ ort wackerow {
     quelle   = "GeoNames (CC BY 4.0), geonameid 2815604; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
-        bevoelkerung = 9048
+        bevoelkerung = 8619
         konfession   = { lutherisch = 97 katholisch = 1 reformiert = 1 juedisch = 1 }
         kultur       = { mecklenburger = 100 }
         verwuestung  = 0
@@ -1322,7 +1322,7 @@ ort wackerow {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_pommern
+        verwaltung = pr_kr_demmin
         bund       = ja
     }
 }

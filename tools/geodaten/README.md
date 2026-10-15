@@ -475,7 +475,10 @@ auf die heutigen Verwaltungseinheiten der Orte (GeoNames: Land, admin1–admin3)
 und einzelne Orte zurück. Jedes Feld (Staat, Bund, Verwaltung) wird für sich aufgelöst; es gilt die
 stärkste Regel (Ort > Kreis heute > Bezirk heute > Landschaft > Bundesland heute > Staat heute).
 Eine Verwaltungseinheit aus einer schwächeren Regel als der Staat entfällt, wenn sie zu einem
-anderen Staat gehört (Coburg erbt nicht den bayerischen Kreis Oberfranken). Fehlende Regeln,
+anderen Staat gehört (Coburg erbt nicht den bayerischen Kreis Oberfranken). `verwaltung =
+naechste:<einheit>` wählt den Kreis mit dem nächsten Sitz (Spalte `sitz` in `verwaltung.csv`)
+unterhalb der Provinz bzw. des Kronlands; landet ein Sitz in einem fremden Kreis, warnt das
+Werkzeug. Fehlende Regeln,
 unbekannte Staaten und Einheiten sind Fehler (Exitcode 2), Regeln ohne Treffer Warnungen.
 
 **Bevölkerung.** `einwohner_i = feste_stadt_i + f_raum × (60 × Fläche_i × Dichte_i × Gelände_i +
@@ -484,7 +487,8 @@ unbekannte Staaten und Einheiten sind Fehler (Exitcode 2), Regeln ohne Treffer W
 festen Städte (`staedte_1846.csv`) schützen vor dem heutigen Gewicht der Industriestädte (Essen
 1846 rund 9.000, heute 590.000). Das Ergebnis ist eine `schaetzung`, die Summen sind `ungeprueft`.
 
-Kennzahlen dieses Laufs: 476 Regeln, 3.967 Orte mit Besitzer (Preußen 1.330, Österreich 983,
+Kennzahlen dieses Laufs: 495 Regeln, 458 Verwaltungseinheiten (davon 378 Kreise in Preußen und
+Österreich), 3.967 Orte mit Besitzer (Preußen 1.330, Österreich 983,
 Bayern 508), 575 Orte ohne Daten (Ausland); 45,0 Millionen Einwohner in 57 Räumen. Tests
 (`test_zuordnung.py`, `test_bevoelkerung_1846.py`): Rang und Prüfung der Regeln, Auflösung je
 Feld, Verwaltungseinheit eines anderen Staates, Zeilen zum Stichtag ersetzen, Summen und feste

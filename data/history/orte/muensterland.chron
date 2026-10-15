@@ -27,7 +27,7 @@ ort rheine {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_steinfurt
         bund       = ja
     }
 }
@@ -50,7 +50,7 @@ ort ibbenbueren {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_tecklenburg
         bund       = ja
     }
 }
@@ -73,7 +73,7 @@ ort hoerstel {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_tecklenburg
         bund       = ja
     }
 }
@@ -96,7 +96,7 @@ ort westerkappeln {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_tecklenburg
         bund       = ja
     }
 }
@@ -119,7 +119,7 @@ ort recke {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_tecklenburg
         bund       = ja
     }
 }
@@ -142,7 +142,7 @@ ort gronau_muensterland {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_ahaus
         bund       = ja
     }
 }
@@ -165,7 +165,7 @@ ort steinfurt {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_steinfurt
         bund       = ja
     }
 }
@@ -188,7 +188,7 @@ ort ahaus {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_ahaus
         bund       = ja
     }
 }
@@ -211,7 +211,7 @@ ort stadtlohn {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_ahaus
         bund       = ja
     }
 }
@@ -234,7 +234,7 @@ ort vreden {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_ahaus
         bund       = ja
     }
 }
@@ -257,7 +257,7 @@ ort ochtrup {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_steinfurt
         bund       = ja
     }
 }
@@ -280,7 +280,7 @@ ort schoeppingen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_steinfurt
         bund       = ja
     }
 }
@@ -303,7 +303,7 @@ ort muenster {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_muenster
         bund       = ja
     }
 }
@@ -326,7 +326,7 @@ ort emsdetten {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_steinfurt
         bund       = ja
     }
 }
@@ -349,7 +349,7 @@ ort greven {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_muenster
         bund       = ja
     }
 }
@@ -372,7 +372,7 @@ ort telgte {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_muenster
         bund       = ja
     }
 }
@@ -395,7 +395,7 @@ ort lengerich {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_tecklenburg
         bund       = ja
     }
 }
@@ -418,7 +418,7 @@ ort ostbevern {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_warendorf
         bund       = ja
     }
 }
@@ -441,7 +441,7 @@ ort altenberge {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_steinfurt
         bund       = ja
     }
 }
@@ -464,7 +464,7 @@ ort lienen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_tecklenburg
         bund       = ja
     }
 }
@@ -487,7 +487,7 @@ ort ladbergen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_tecklenburg
         bund       = ja
     }
 }
@@ -510,7 +510,7 @@ ort luedinghausen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_luedinghausen
         bund       = ja
     }
 }
@@ -533,7 +533,7 @@ ort ascheberg {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_luedinghausen
         bund       = ja
     }
 }
@@ -556,7 +556,7 @@ ort drensteinfurt {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_hamm
         bund       = ja
     }
 }
@@ -579,7 +579,7 @@ ort senden_muensterland {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_luedinghausen
         bund       = ja
     }
 }
@@ -602,7 +602,7 @@ ort sendenhorst {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_warendorf
         bund       = ja
     }
 }
@@ -625,7 +625,7 @@ ort ahlen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_hamm
         bund       = ja
     }
 }
@@ -648,7 +648,7 @@ ort warendorf {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_warendorf
         bund       = ja
     }
 }
@@ -671,7 +671,7 @@ ort beckum {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_beckum
         bund       = ja
     }
 }
@@ -694,7 +694,7 @@ ort oelde {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_wiedenbrueck
         bund       = ja
     }
 }
@@ -717,7 +717,7 @@ ort ennigerloh {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_beckum
         bund       = ja
     }
 }
@@ -740,7 +740,7 @@ ort wadersloh {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_lippstadt
         bund       = ja
     }
 }
@@ -763,7 +763,7 @@ ort beelen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_warendorf
         bund       = ja
     }
 }
@@ -786,7 +786,7 @@ ort marl {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_recklinghausen
         bund       = ja
     }
 }
@@ -809,7 +809,7 @@ ort coesfeld {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_coesfeld
         bund       = ja
     }
 }
@@ -832,7 +832,7 @@ ort borken_muensterland {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_borken
         bund       = ja
     }
 }
@@ -855,7 +855,7 @@ ort bocholt {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_borken
         bund       = ja
     }
 }
@@ -878,7 +878,7 @@ ort dorsten {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_recklinghausen
         bund       = ja
     }
 }
@@ -901,7 +901,7 @@ ort duelmen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_luedinghausen
         bund       = ja
     }
 }
@@ -924,7 +924,7 @@ ort haltern_am_see {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_recklinghausen
         bund       = ja
     }
 }
@@ -947,7 +947,7 @@ ort nottuln {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_coesfeld
         bund       = ja
     }
 }
@@ -970,7 +970,7 @@ ort velen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_borken
         bund       = ja
     }
 }
@@ -993,7 +993,7 @@ ort raesfeld {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_borken
         bund       = ja
     }
 }
@@ -1016,7 +1016,7 @@ ort isselburg {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_borken
         bund       = ja
     }
 }
@@ -1039,7 +1039,7 @@ ort klein_reken {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_borken
         bund       = ja
     }
 }
@@ -1062,7 +1062,7 @@ ort gelsenkirchen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_bochum
         bund       = ja
     }
 }
@@ -1085,7 +1085,7 @@ ort recklinghausen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_recklinghausen
         bund       = ja
     }
 }
@@ -1108,7 +1108,7 @@ ort bottrop {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_bochum
         bund       = ja
     }
 }
@@ -1131,7 +1131,7 @@ ort castrop_rauxel {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_recklinghausen
         bund       = ja
     }
 }
@@ -1154,7 +1154,7 @@ ort gladbeck {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_recklinghausen
         bund       = ja
     }
 }
@@ -1177,7 +1177,7 @@ ort datteln {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_recklinghausen
         bund       = ja
     }
 }

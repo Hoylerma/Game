@@ -28,7 +28,7 @@ ort hamm {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_hamm
         bund       = ja
     }
 }
@@ -51,7 +51,7 @@ ort unna {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_dortmund
         bund       = ja
     }
 }
@@ -74,7 +74,7 @@ ort soest {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_soest
         bund       = ja
     }
 }
@@ -97,7 +97,7 @@ ort luenen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_dortmund
         bund       = ja
     }
 }
@@ -120,7 +120,7 @@ ort bergkamen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_hamm
         bund       = ja
     }
 }
@@ -143,7 +143,7 @@ ort werl {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_soest
         bund       = ja
     }
 }
@@ -166,7 +166,7 @@ ort selm {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_luedinghausen
         bund       = ja
     }
 }
@@ -189,7 +189,7 @@ ort boenen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_hamm
         bund       = ja
     }
 }
@@ -212,7 +212,7 @@ ort welver {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_soest
         bund       = ja
     }
 }
@@ -235,7 +235,7 @@ ort lippstadt {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_lippstadt
         bund       = ja
     }
 }
@@ -258,7 +258,7 @@ ort meschede {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_meschede
         bund       = ja
     }
 }
@@ -281,7 +281,7 @@ ort warstein {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_meschede
         bund       = ja
     }
 }
@@ -304,7 +304,7 @@ ort brilon {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_brilon
         bund       = ja
     }
 }
@@ -327,7 +327,7 @@ ort geseke {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_bueren
         bund       = ja
     }
 }
@@ -350,7 +350,7 @@ ort marsberg {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_brilon
         bund       = ja
     }
 }
@@ -373,7 +373,7 @@ ort anroechte {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_lippstadt
         bund       = ja
     }
 }
@@ -396,7 +396,7 @@ ort bestwig {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_meschede
         bund       = ja
     }
 }
@@ -419,7 +419,7 @@ ort ruethen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_bueren
         bund       = ja
     }
 }
@@ -442,7 +442,7 @@ ort dortmund {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_dortmund
         bund       = ja
     }
 }
@@ -465,7 +465,7 @@ ort bochum {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_bochum
         bund       = ja
     }
 }
@@ -488,7 +488,7 @@ ort herne {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_bochum
         bund       = ja
     }
 }
@@ -511,7 +511,7 @@ ort hagen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_hagen
         bund       = ja
     }
 }
@@ -534,7 +534,7 @@ ort witten {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_bochum
         bund       = ja
     }
 }
@@ -557,7 +557,7 @@ ort schwelm {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_hagen
         bund       = ja
     }
 }
@@ -580,7 +580,7 @@ ort hattingen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_bochum
         bund       = ja
     }
 }
@@ -603,7 +603,7 @@ ort schwerte {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_dortmund
         bund       = ja
     }
 }
@@ -626,7 +626,7 @@ ort halver {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_altena
         bund       = ja
     }
 }
@@ -649,7 +649,7 @@ ort breckerfeld {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_hagen
         bund       = ja
     }
 }
@@ -672,7 +672,7 @@ ort arnsberg {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_arnsberg
         bund       = ja
     }
 }
@@ -695,7 +695,7 @@ ort schmallenberg {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_wittgenstein
         bund       = ja
     }
 }
@@ -718,7 +718,7 @@ ort sundern {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_arnsberg
         bund       = ja
     }
 }
@@ -741,7 +741,7 @@ ort eslohe {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_meschede
         bund       = ja
     }
 }
@@ -764,7 +764,7 @@ ort iserlohn {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_iserlohn
         bund       = ja
     }
 }
@@ -787,7 +787,7 @@ ort luedenscheid {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_altena
         bund       = ja
     }
 }
@@ -810,7 +810,7 @@ ort menden {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_iserlohn
         bund       = ja
     }
 }
@@ -833,7 +833,7 @@ ort plettenberg {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_altena
         bund       = ja
     }
 }
@@ -856,7 +856,7 @@ ort lennestadt {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_olpe
         bund       = ja
     }
 }
@@ -879,7 +879,7 @@ ort attendorn {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_olpe
         bund       = ja
     }
 }
@@ -902,7 +902,7 @@ ort meinerzhagen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_olpe
         bund       = ja
     }
 }
@@ -925,7 +925,7 @@ ort altena {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_altena
         bund       = ja
     }
 }
@@ -948,7 +948,7 @@ ort werdohl {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_altena
         bund       = ja
     }
 }
@@ -971,7 +971,7 @@ ort balve {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_iserlohn
         bund       = ja
     }
 }
@@ -994,7 +994,7 @@ ort herscheid {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_altena
         bund       = ja
     }
 }
@@ -1017,7 +1017,7 @@ ort bad_berleburg {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_wittgenstein
         bund       = ja
     }
 }
@@ -1040,7 +1040,7 @@ ort bad_laasphe {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_wittgenstein
         bund       = ja
     }
 }
@@ -1063,7 +1063,7 @@ ort winterberg_sauerland {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_wittgenstein
         bund       = ja
     }
 }
@@ -1086,7 +1086,7 @@ ort erndtebrueck {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_wittgenstein
         bund       = ja
     }
 }
@@ -1109,7 +1109,7 @@ ort medebach {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_brilon
         bund       = ja
     }
 }
@@ -1132,7 +1132,7 @@ ort hallenberg {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_wittgenstein
         bund       = ja
     }
 }
@@ -1155,7 +1155,7 @@ ort siegen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_siegen
         bund       = ja
     }
 }
@@ -1178,7 +1178,7 @@ ort olpe {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_olpe
         bund       = ja
     }
 }
@@ -1201,7 +1201,7 @@ ort kreuztal {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_siegen
         bund       = ja
     }
 }
@@ -1224,7 +1224,7 @@ ort wilnsdorf {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_siegen
         bund       = ja
     }
 }
@@ -1247,7 +1247,7 @@ ort hilchenbach {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_siegen
         bund       = ja
     }
 }
@@ -1270,7 +1270,7 @@ ort freudenberg {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_siegen
         bund       = ja
     }
 }

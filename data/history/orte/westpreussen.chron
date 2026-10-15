@@ -28,7 +28,7 @@ ort gniewino {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_neustadt_in_westpreussen
     }
 }
 
@@ -50,7 +50,7 @@ ort leczyce {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_neustadt_in_westpreussen
     }
 }
 
@@ -72,7 +72,7 @@ ort krokowa {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_neustadt_in_westpreussen
     }
 }
 
@@ -94,7 +94,7 @@ ort choczewo {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_neustadt_in_westpreussen
     }
 }
 
@@ -116,7 +116,7 @@ ort gdingen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_danzig
     }
 }
 
@@ -138,7 +138,7 @@ ort neustadt {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_neustadt_in_westpreussen
     }
 }
 
@@ -160,7 +160,7 @@ ort rumia {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_neustadt_in_westpreussen
     }
 }
 
@@ -182,7 +182,7 @@ ort zoppot {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_danzig
     }
 }
 
@@ -204,7 +204,7 @@ ort putzig {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_neustadt_in_westpreussen
     }
 }
 
@@ -226,7 +226,7 @@ ort wladyslawowo {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_neustadt_in_westpreussen
     }
 }
 
@@ -248,7 +248,7 @@ ort hela {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_danzig
     }
 }
 
@@ -270,7 +270,7 @@ ort luzino {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_neustadt_in_westpreussen
     }
 }
 
@@ -292,7 +292,7 @@ ort heisternest {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_neustadt_in_westpreussen
     }
 }
 
@@ -314,7 +314,7 @@ ort szemud {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_neustadt_in_westpreussen
     }
 }
 
@@ -336,7 +336,7 @@ ort bojano {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_neustadt_in_westpreussen
     }
 }
 
@@ -358,7 +358,7 @@ ort danzig {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_danzig
     }
 }
 
@@ -380,7 +380,7 @@ ort dirschau {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_marienburg
     }
 }
 
@@ -402,7 +402,7 @@ ort praust {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_danzig
     }
 }
 
@@ -424,7 +424,7 @@ ort hohenstein_westpreussen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_danzig
     }
 }
 
@@ -446,7 +446,7 @@ ort gross_trampken {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_danzig
     }
 }
 
@@ -468,7 +468,7 @@ ort gross_zuender {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_danzig
     }
 }
 
@@ -490,7 +490,7 @@ ort elbing {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_elbing
     }
 }
 
@@ -512,7 +512,7 @@ ort marienburg {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_marienburg
     }
 }
 
@@ -534,7 +534,7 @@ ort tiegenhof {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_elbing
     }
 }
 
@@ -556,7 +556,7 @@ ort neuteich {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_marienburg
     }
 }
 
@@ -578,7 +578,7 @@ ort sztutowo {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_elbing
     }
 }
 
@@ -600,7 +600,7 @@ ort krynica_morska {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_braunsberg
     }
 }
 
@@ -622,7 +622,7 @@ ort altfelde {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_marienburg
     }
 }
 
@@ -644,7 +644,7 @@ ort koscierzyna {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_berent
     }
 }
 
@@ -666,7 +666,7 @@ ort kartuzy {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_karthaus
     }
 }
 
@@ -688,7 +688,7 @@ ort sierakowice {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_karthaus
     }
 }
 
@@ -710,7 +710,7 @@ ort zukowo {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_karthaus
     }
 }
 
@@ -732,7 +732,7 @@ ort stezyca {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_berent
     }
 }
 
@@ -754,7 +754,7 @@ ort kolbudy {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_danzig
     }
 }
 
@@ -776,7 +776,7 @@ ort mariensee {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_karthaus
     }
 }
 
@@ -798,7 +798,7 @@ ort stara_kiszewa {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_berent
     }
 }
 
@@ -820,7 +820,7 @@ ort suleczyno {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_berent
     }
 }
 
@@ -842,7 +842,7 @@ ort grabowo_koscierskie {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_berent
     }
 }
 
@@ -864,7 +864,7 @@ ort linia {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_karthaus
     }
 }
 
@@ -886,7 +886,7 @@ ort liniewo {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_berent
     }
 }
 
@@ -908,7 +908,7 @@ ort starogard_gdanski {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_preussisch_stargard
     }
 }
 
@@ -930,7 +930,7 @@ ort pelplin {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_preussisch_stargard
     }
 }
 
@@ -952,7 +952,7 @@ ort skarszewy {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_preussisch_stargard
     }
 }
 
@@ -974,7 +974,7 @@ ort skorcz {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_preussisch_stargard
     }
 }
 
@@ -996,7 +996,7 @@ ort hoch_stueblau {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_preussisch_stargard
     }
 }
 
@@ -1018,7 +1018,7 @@ ort subkowy {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_preussisch_stargard
     }
 }
 
@@ -1040,7 +1040,7 @@ ort smetowo_graniczne {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_marienwerder
     }
 }
 
@@ -1062,7 +1062,7 @@ ort lubichowo {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_preussisch_stargard
     }
 }
 
@@ -1084,7 +1084,7 @@ ort stuhm {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_stuhm
     }
 }
 
@@ -1106,7 +1106,7 @@ ort gniew {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_marienwerder
     }
 }
 
@@ -1128,7 +1128,7 @@ ort christburg {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_stuhm
     }
 }
 
@@ -1150,7 +1150,7 @@ ort saalfeld_westpreussen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_mohrungen
     }
 }
 
@@ -1172,7 +1172,7 @@ ort rehhof {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_stuhm
     }
 }
 
@@ -1194,7 +1194,7 @@ ort niklaskirchen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_stuhm
     }
 }
 
@@ -1216,7 +1216,7 @@ ort czersk {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_konitz
     }
 }
 
@@ -1238,7 +1238,7 @@ ort sliwice {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_schwetz
     }
 }
 
@@ -1260,7 +1260,7 @@ ort brusy {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_konitz
     }
 }
 
@@ -1282,7 +1282,7 @@ ort czarna_woda {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_preussisch_stargard
     }
 }
 
@@ -1304,7 +1304,7 @@ ort lipusz {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_berent
     }
 }
 
@@ -1326,7 +1326,7 @@ ort dziemiany {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_berent
     }
 }
 
@@ -1348,7 +1348,7 @@ ort karsin {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_berent
     }
 }
 
@@ -1370,7 +1370,7 @@ ort konitz_westpreussen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_konitz
     }
 }
 
@@ -1392,7 +1392,7 @@ ort schlochau {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_schlochau
     }
 }
 
@@ -1414,7 +1414,7 @@ ort hammerstein {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_schlochau
     }
 }
 
@@ -1436,7 +1436,7 @@ ort preussisch_friedland {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_schlochau
     }
 }
 
@@ -1458,7 +1458,7 @@ ort ratzebuhr {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_flatow
     }
 }
 
@@ -1480,7 +1480,7 @@ ort prechlau {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_schlochau
     }
 }
 
@@ -1502,7 +1502,7 @@ ort floetenstein {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_schlochau
     }
 }
 
@@ -1524,7 +1524,7 @@ ort rzeczenica {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_schlochau
     }
 }
 
@@ -1546,7 +1546,7 @@ ort deutsch_eylau {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_loebau
     }
 }
 
@@ -1568,7 +1568,7 @@ ort riesenburg {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_rosenberg_in_westpreussen
     }
 }
 
@@ -1590,7 +1590,7 @@ ort lubawa {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_loebau
     }
 }
 
@@ -1612,7 +1612,7 @@ ort rosenberg_westpreussen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_rosenberg_in_westpreussen
     }
 }
 
@@ -1634,7 +1634,7 @@ ort freystadt_westpreussen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_rosenberg_in_westpreussen
     }
 }
 
@@ -1656,7 +1656,7 @@ ort biskupiec {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_rosenberg_in_westpreussen
     }
 }
 
@@ -1678,7 +1678,7 @@ ort tuchola {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_konitz
     }
 }
 
@@ -1700,7 +1700,7 @@ ort zempelburg {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_schlochau
     }
 }
 
@@ -1722,7 +1722,7 @@ ort vandsburg {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_flatow
     }
 }
 
@@ -1744,7 +1744,7 @@ ort kamien_krajenski {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_konitz
     }
 }
 
@@ -1766,7 +1766,7 @@ ort gostycyn {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_konitz
     }
 }
 
@@ -1788,7 +1788,7 @@ ort cekcyn {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_schwetz
     }
 }
 
@@ -1810,7 +1810,7 @@ ort sypniewo {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_flatow
     }
 }
 
@@ -1832,7 +1832,7 @@ ort sosno {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_konitz
     }
 }
 
@@ -1854,7 +1854,7 @@ ort kesowo {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_konitz
     }
 }
 
@@ -1876,7 +1876,7 @@ ort graudenz {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_graudenz
     }
 }
 
@@ -1898,7 +1898,7 @@ ort marienwerder {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_marienwerder
     }
 }
 
@@ -1920,7 +1920,7 @@ ort briesen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_graudenz
     }
 }
 
@@ -1942,7 +1942,7 @@ ort nowe {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_marienwerder
     }
 }
 
@@ -1964,7 +1964,7 @@ ort jablonowo_pomorskie {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_strasburg
     }
 }
 
@@ -1986,7 +1986,7 @@ ort lasin {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_graudenz
     }
 }
 
@@ -2008,7 +2008,7 @@ ort radzyn_chelminski {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_graudenz
     }
 }
 
@@ -2030,7 +2030,7 @@ ort garnsee {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_marienwerder
     }
 }
 
@@ -2052,7 +2052,7 @@ ort warlubie {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_schwetz
     }
 }
 
@@ -2074,7 +2074,7 @@ ort debowa_laka {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_strasburg
     }
 }
 
@@ -2096,7 +2096,7 @@ ort kulm {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_culm
     }
 }
 
@@ -2118,7 +2118,7 @@ ort pruszcz {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_culm
     }
 }
 
@@ -2140,7 +2140,7 @@ ort jezewo {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_schwetz
     }
 }
 
@@ -2162,7 +2162,7 @@ ort osie {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_schwetz
     }
 }
 
@@ -2184,7 +2184,7 @@ ort bukowiec {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_culm
     }
 }
 
@@ -2206,7 +2206,7 @@ ort lubiewo {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_culm
     }
 }
 
@@ -2228,7 +2228,7 @@ ort lniano {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_schwetz
     }
 }
 
@@ -2250,7 +2250,7 @@ ort deutsch_krone {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_deutsch_krone
     }
 }
 
@@ -2272,7 +2272,7 @@ ort flatow_i_westpr {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_flatow
     }
 }
 
@@ -2294,7 +2294,7 @@ ort jastrow {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_flatow
     }
 }
 
@@ -2316,7 +2316,7 @@ ort maerkisch_friedland {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_deutsch_krone
     }
 }
 
@@ -2338,7 +2338,7 @@ ort schloppe {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_deutsch_krone
     }
 }
 
@@ -2360,7 +2360,7 @@ ort tuetz {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_deutsch_krone
     }
 }
 
@@ -2382,7 +2382,7 @@ ort tarnowka {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_flatow
     }
 }
 
@@ -2404,7 +2404,7 @@ ort zippnow {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_deutsch_krone
     }
 }
 
@@ -2426,7 +2426,7 @@ ort brodnica {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_strasburg
     }
 }
 
@@ -2448,7 +2448,7 @@ ort nowe_miasto_lubawskie {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_loebau
     }
 }
 
@@ -2470,7 +2470,7 @@ ort gorzno {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_strasburg
     }
 }
 
@@ -2492,7 +2492,7 @@ ort brzozie {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_strasburg
     }
 }
 
@@ -2514,7 +2514,7 @@ ort thorn {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_thorn
     }
 }
 
@@ -2536,7 +2536,7 @@ ort chelmza {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_thorn
     }
 }
 
@@ -2558,7 +2558,7 @@ ort golub_dobrzyn {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_strasburg
     }
 }
 
@@ -2580,7 +2580,7 @@ ort kowalewo_pomorskie {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_thorn
     }
 }
 
@@ -2602,7 +2602,7 @@ ort unislaw {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_culm
     }
 }
 
@@ -2624,7 +2624,7 @@ ort czernikowo {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_thorn
     }
 }
 
@@ -2646,7 +2646,7 @@ ort lubicz_gorny {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_thorn
     }
 }
 
@@ -2668,7 +2668,7 @@ ort lisewo {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_culm
     }
 }
 
@@ -2690,7 +2690,7 @@ ort zbojno {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_strasburg
     }
 }
 
@@ -2712,7 +2712,7 @@ ort lubianka {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_thorn
     }
 }
 
@@ -2734,6 +2734,6 @@ ort ciechocin {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_thorn
     }
 }

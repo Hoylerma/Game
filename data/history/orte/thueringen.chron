@@ -45,7 +45,7 @@ ort erfurt {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_erfurt
         bund       = ja
     }
 }
@@ -76,7 +76,7 @@ ort heiligenstadt {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_heiligenstadt
         bund       = ja
     }
 }
@@ -227,7 +227,7 @@ ort sangerhausen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_sangerhausen
         bund       = ja
     }
 }
@@ -250,7 +250,7 @@ ort eisleben {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_mansfelder_seekreis
         bund       = ja
     }
 }
@@ -273,7 +273,7 @@ ort hettstedt {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_mansfelder_gebirgskreis
         bund       = ja
     }
 }
@@ -296,7 +296,7 @@ ort roeblingen_am_see {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_querfurt
         bund       = ja
     }
 }
@@ -319,7 +319,7 @@ ort wippra {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_sangerhausen
         bund       = ja
     }
 }
@@ -342,7 +342,7 @@ ort nordhausen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_nordhausen
         bund       = ja
     }
 }
@@ -409,7 +409,7 @@ ort ellrich {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_nordhausen
         bund       = ja
     }
 }
@@ -432,7 +432,7 @@ ort bleicherode {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_nordhausen
         bund       = ja
     }
 }
@@ -455,7 +455,7 @@ ort kelbra {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_sangerhausen
         bund       = ja
     }
 }
@@ -478,7 +478,7 @@ ort weissenborn_luederode {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_worbis
         bund       = ja
     }
 }
@@ -501,7 +501,7 @@ ort wolkramshausen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_nordhausen
         bund       = ja
     }
 }
@@ -524,7 +524,7 @@ ort rottleberode {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_nordhausen
         bund       = ja
     }
 }
@@ -547,7 +547,7 @@ ort leinefelde_worbis {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_worbis
         bund       = ja
     }
 }
@@ -570,7 +570,7 @@ ort kuellstedt {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_worbis
         bund       = ja
     }
 }
@@ -593,7 +593,7 @@ ort geismar {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_heiligenstadt
         bund       = ja
     }
 }
@@ -616,7 +616,7 @@ ort muehlhausen_thueringen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_muehlhausen
         bund       = ja
     }
 }
@@ -639,7 +639,7 @@ ort bad_langensalza {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_langensalza
         bund       = ja
     }
 }
@@ -684,7 +684,7 @@ ort bad_tennstedt {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_langensalza
         bund       = ja
     }
 }
@@ -707,7 +707,7 @@ ort menteroda {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_muehlhausen
         bund       = ja
     }
 }
@@ -730,7 +730,7 @@ ort soemmerda {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_weissensee
         bund       = ja
     }
 }
@@ -753,7 +753,7 @@ ort koelleda {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_weissensee
         bund       = ja
     }
 }
@@ -776,7 +776,7 @@ ort artern {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_sangerhausen
         bund       = ja
     }
 }
@@ -799,7 +799,7 @@ ort rossleben {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_eckartsberga
         bund       = ja
     }
 }
@@ -844,7 +844,7 @@ ort nebra {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_eckartsberga
         bund       = ja
     }
 }
@@ -889,7 +889,7 @@ ort bad_bibra {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_eckartsberga
         bund       = ja
     }
 }
@@ -912,7 +912,7 @@ ort kindelbrueck {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_weissensee
         bund       = ja
     }
 }
@@ -935,7 +935,7 @@ ort treffurt {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_muehlhausen
         bund       = ja
     }
 }
@@ -1090,7 +1090,7 @@ ort elxleben {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_erfurt
         bund       = ja
     }
 }
@@ -1403,7 +1403,7 @@ ort naumburg_an_der_saale {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_naumburg
         bund       = ja
     }
 }
@@ -1536,7 +1536,7 @@ ort schkoelen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_naumburg
         bund       = ja
     }
 }
@@ -1625,7 +1625,7 @@ ort weissenfels {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_weissenfels
         bund       = ja
     }
 }
@@ -1648,7 +1648,7 @@ ort zeitz {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_zeitz
         bund       = ja
     }
 }
@@ -1693,7 +1693,7 @@ ort hohenmoelsen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_weissenfels
         bund       = ja
     }
 }
@@ -1738,7 +1738,7 @@ ort luetzen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_weissenfels
         bund       = ja
     }
 }
@@ -2201,7 +2201,7 @@ ort suhl {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_schleusingen
         bund       = ja
     }
 }
@@ -2423,7 +2423,7 @@ ort schleusingen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_schleusingen
         bund       = ja
     }
 }
@@ -2512,7 +2512,7 @@ ort frauenwald {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_schleusingen
         bund       = ja
     }
 }

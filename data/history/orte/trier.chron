@@ -28,7 +28,7 @@ ort daun {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_daun
         bund       = ja
     }
 }
@@ -51,7 +51,7 @@ ort gerolstein {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_daun
         bund       = ja
     }
 }
@@ -74,7 +74,7 @@ ort kelberg {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_adenau
         bund       = ja
     }
 }
@@ -97,7 +97,7 @@ ort uexheim {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_adenau
         bund       = ja
     }
 }
@@ -120,7 +120,7 @@ ort gillenfeld {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_daun
         bund       = ja
     }
 }
@@ -143,7 +143,7 @@ ort lissendorf {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_pruem
         bund       = ja
     }
 }
@@ -166,7 +166,7 @@ ort bitburg {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_bitburg
         bund       = ja
     }
 }
@@ -189,7 +189,7 @@ ort pruem {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_pruem
         bund       = ja
     }
 }
@@ -212,7 +212,7 @@ ort arzfeld {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_pruem
         bund       = ja
     }
 }
@@ -235,7 +235,7 @@ ort bleialf {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_pruem
         bund       = ja
     }
 }
@@ -258,7 +258,7 @@ ort kyllburg {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_bitburg
         bund       = ja
     }
 }
@@ -281,7 +281,7 @@ ort mettendorf {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_bitburg
         bund       = ja
     }
 }
@@ -304,7 +304,7 @@ ort trier {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_trier
         bund       = ja
     }
 }
@@ -327,7 +327,7 @@ ort konz {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_trier
         bund       = ja
     }
 }
@@ -350,7 +350,7 @@ ort saarburg_trier {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_saarburg
         bund       = ja
     }
 }
@@ -373,7 +373,7 @@ ort schweich {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_trier
         bund       = ja
     }
 }
@@ -396,7 +396,7 @@ ort welschbillig {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_trier
         bund       = ja
     }
 }
@@ -419,7 +419,7 @@ ort zemmer {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_bitburg
         bund       = ja
     }
 }
@@ -442,7 +442,7 @@ ort zerf {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_saarburg
         bund       = ja
     }
 }
@@ -487,7 +487,7 @@ ort wittlich {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_wittlich
         bund       = ja
     }
 }
@@ -532,7 +532,7 @@ ort bernkastel_kues {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_bernkastel
         bund       = ja
     }
 }
@@ -555,7 +555,7 @@ ort morbach {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_bernkastel
         bund       = ja
     }
 }
@@ -600,7 +600,7 @@ ort neumagen_dhron {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_bernkastel
         bund       = ja
     }
 }
@@ -623,7 +623,7 @@ ort reinsfeld {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_trier
         bund       = ja
     }
 }
@@ -646,7 +646,7 @@ ort rhaunen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_simmern
         bund       = ja
     }
 }
@@ -669,7 +669,7 @@ ort thalfang {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_bernkastel
         bund       = ja
     }
 }
@@ -692,7 +692,7 @@ ort kinderbeuern {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_wittlich
         bund       = ja
     }
 }

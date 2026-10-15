@@ -28,7 +28,7 @@ ort kirchen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_waldbroel
         bund       = ja
     }
 }
@@ -51,7 +51,7 @@ ort altenkirchen_mittelrhein {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_altenkirchen
         bund       = ja
     }
 }
@@ -74,7 +74,7 @@ ort asbach {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_altenkirchen
         bund       = ja
     }
 }
@@ -97,7 +97,7 @@ ort dierdorf {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_altenkirchen
         bund       = ja
     }
 }
@@ -120,7 +120,7 @@ ort daaden {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_altenkirchen
         bund       = ja
     }
 }
@@ -143,7 +143,7 @@ ort wissen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_altenkirchen
         bund       = ja
     }
 }
@@ -166,7 +166,7 @@ ort sankt_katharinen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_neuwied
         bund       = ja
     }
 }
@@ -189,7 +189,7 @@ ort horhausen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_altenkirchen
         bund       = ja
     }
 }
@@ -212,7 +212,7 @@ ort bad_neuenahr_ahrweiler {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_ahrweiler
         bund       = ja
     }
 }
@@ -235,7 +235,7 @@ ort sinzig {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_ahrweiler
         bund       = ja
     }
 }
@@ -258,7 +258,7 @@ ort burgbrohl {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_neuwied
         bund       = ja
     }
 }
@@ -281,7 +281,7 @@ ort adenau {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_adenau
         bund       = ja
     }
 }
@@ -304,7 +304,7 @@ ort altenahr {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_ahrweiler
         bund       = ja
     }
 }
@@ -327,7 +327,7 @@ ort kempenich {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_mayen
         bund       = ja
     }
 }
@@ -350,7 +350,7 @@ ort koblenz {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_koblenz
         bund       = ja
     }
 }
@@ -373,7 +373,7 @@ ort neuwied {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_neuwied
         bund       = ja
     }
 }
@@ -396,7 +396,7 @@ ort mayen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_mayen
         bund       = ja
     }
 }
@@ -419,7 +419,7 @@ ort bendorf {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_koblenz
         bund       = ja
     }
 }
@@ -442,7 +442,7 @@ ort ochtendung {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_neuwied
         bund       = ja
     }
 }
@@ -465,7 +465,7 @@ ort muenstermaifeld {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_mayen
         bund       = ja
     }
 }
@@ -488,7 +488,7 @@ ort treis_karden {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_cochem
         bund       = ja
     }
 }
@@ -511,7 +511,7 @@ ort boppard {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_koblenz
         bund       = ja
     }
 }
@@ -534,7 +534,7 @@ ort simmern {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_simmern
         bund       = ja
     }
 }
@@ -557,7 +557,7 @@ ort emmelshausen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_sankt_goar
         bund       = ja
     }
 }
@@ -580,7 +580,7 @@ ort rheinboellen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_simmern
         bund       = ja
     }
 }
@@ -603,7 +603,7 @@ ort kastellaun {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_simmern
         bund       = ja
     }
 }
@@ -626,7 +626,7 @@ ort kirchberg_hunsrueck {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_simmern
         bund       = ja
     }
 }
@@ -649,7 +649,7 @@ ort oberwesel {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_sankt_goar
         bund       = ja
     }
 }
@@ -672,7 +672,7 @@ ort zell {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_zell
         bund       = ja
     }
 }
@@ -695,7 +695,7 @@ ort buechenbeuren {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_zell
         bund       = ja
     }
 }
@@ -718,7 +718,7 @@ ort cochem {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_cochem
         bund       = ja
     }
 }
@@ -741,7 +741,7 @@ ort ulmen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_daun
         bund       = ja
     }
 }
@@ -764,7 +764,7 @@ ort kaisersesch {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_cochem
         bund       = ja
     }
 }
@@ -787,7 +787,7 @@ ort lutzerath {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_cochem
         bund       = ja
     }
 }

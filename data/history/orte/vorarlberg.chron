@@ -27,7 +27,7 @@ ort dornbirn {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_vorarlberg
         bund       = ja
     }
 }
@@ -50,7 +50,7 @@ ort bregenz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_vorarlberg
         bund       = ja
     }
 }
@@ -73,7 +73,7 @@ ort goetzis {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_vorarlberg
         bund       = ja
     }
 }
@@ -96,7 +96,7 @@ ort hoechst {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_vorarlberg
         bund       = ja
     }
 }
@@ -119,7 +119,7 @@ ort andelsbuch {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_vorarlberg
         bund       = ja
     }
 }
@@ -142,7 +142,7 @@ ort sulzberg {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_vorarlberg
         bund       = ja
     }
 }
@@ -165,7 +165,7 @@ ort sibratsgfaell {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_vorarlberg
         bund       = ja
     }
 }
@@ -188,7 +188,7 @@ ort mittelberg {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_vorarlberg
         bund       = ja
     }
 }
@@ -211,7 +211,7 @@ ort lech {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_vorarlberg
         bund       = ja
     }
 }
@@ -234,7 +234,7 @@ ort schoppernau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_vorarlberg
         bund       = ja
     }
 }
@@ -257,7 +257,7 @@ ort damuels {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_vorarlberg
         bund       = ja
     }
 }
@@ -280,7 +280,7 @@ ort feldkirch {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_vorarlberg
         bund       = ja
     }
 }
@@ -325,7 +325,7 @@ ort bludenz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_vorarlberg
         bund       = ja
     }
 }
@@ -348,7 +348,7 @@ ort nenzing {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_vorarlberg
         bund       = ja
     }
 }
@@ -371,7 +371,7 @@ ort schruns {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_vorarlberg
         bund       = ja
     }
 }
@@ -394,7 +394,7 @@ ort gaschurn {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_oberinntal
         bund       = ja
     }
 }
@@ -417,7 +417,7 @@ ort brand {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_vorarlberg
         bund       = ja
     }
 }

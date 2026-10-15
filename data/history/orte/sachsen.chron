@@ -106,7 +106,7 @@ ort wittenberg {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_wittenberg
         bund       = ja
     }
 }
@@ -137,7 +137,7 @@ ort torgau {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_torgau
         bund       = ja
     }
 }
@@ -253,7 +253,7 @@ ort graefenhainichen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_bitterfeld
         bund       = ja
     }
 }
@@ -298,7 +298,7 @@ ort zahna {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_wittenberg
         bund       = ja
     }
 }
@@ -321,7 +321,7 @@ ort kemberg {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_wittenberg
         bund       = ja
     }
 }
@@ -344,7 +344,7 @@ ort elster {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_wittenberg
         bund       = ja
     }
 }
@@ -367,7 +367,7 @@ ort bad_dueben {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_delitzsch
         bund       = ja
     }
 }
@@ -390,7 +390,7 @@ ort jessen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_schweinitz
         bund       = ja
     }
 }
@@ -413,7 +413,7 @@ ort mockrehna {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_torgau
         bund       = ja
     }
 }
@@ -436,7 +436,7 @@ ort belgern {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_torgau
         bund       = ja
     }
 }
@@ -459,7 +459,7 @@ ort bad_schmiedeberg {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_wittenberg
         bund       = ja
     }
 }
@@ -482,7 +482,7 @@ ort schildau {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_torgau
         bund       = ja
     }
 }
@@ -505,7 +505,7 @@ ort dommitzsch {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_torgau
         bund       = ja
     }
 }
@@ -528,7 +528,7 @@ ort annaburg {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_schweinitz
         bund       = ja
     }
 }
@@ -551,7 +551,7 @@ ort holzdorf {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_schweinitz
         bund       = ja
     }
 }
@@ -574,7 +574,7 @@ ort delitzsch {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_delitzsch
         bund       = ja
     }
 }
@@ -597,7 +597,7 @@ ort eilenburg {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_delitzsch
         bund       = ja
     }
 }
@@ -712,7 +712,7 @@ ort krostitz {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_delitzsch
         bund       = ja
     }
 }
@@ -758,7 +758,7 @@ ort schkeuditz {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_delitzsch
         bund       = ja
     }
 }

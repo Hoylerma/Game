@@ -66,3 +66,353 @@ einheit au_galizien {
     art    = kronland
     quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
 }
+
+einheit au_kr_prag {
+    name   = "Kreis Prag"
+    art    = kreis
+    ueber  = au_boehmen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit au_kr_kaurzim {
+    name   = "Kreis Kaurzim"
+    art    = kreis
+    ueber  = au_boehmen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit au_kr_beraun {
+    name   = "Kreis Beraun"
+    art    = kreis
+    ueber  = au_boehmen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit au_kr_rakonitz {
+    name   = "Kreis Rakonitz"
+    art    = kreis
+    ueber  = au_boehmen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit au_kr_leitmeritz {
+    name   = "Kreis Leitmeritz"
+    art    = kreis
+    ueber  = au_boehmen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit au_kr_bunzlau {
+    name   = "Kreis Bunzlau"
+    art    = kreis
+    ueber  = au_boehmen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit au_kr_bidschow {
+    name   = "Kreis Bidschow"
+    art    = kreis
+    ueber  = au_boehmen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit au_kr_koeniggraetz {
+    name   = "Kreis Königgrätz"
+    art    = kreis
+    ueber  = au_boehmen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit au_kr_chrudim {
+    name   = "Kreis Chrudim"
+    art    = kreis
+    ueber  = au_boehmen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit au_kr_czaslau {
+    name   = "Kreis Czaslau"
+    art    = kreis
+    ueber  = au_boehmen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit au_kr_tabor {
+    name   = "Kreis Tabor"
+    art    = kreis
+    ueber  = au_boehmen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit au_kr_budweis {
+    name   = "Kreis Budweis"
+    art    = kreis
+    ueber  = au_boehmen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit au_kr_prachin {
+    name   = "Kreis Prachin"
+    art    = kreis
+    ueber  = au_boehmen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit au_kr_klattau {
+    name   = "Kreis Klattau"
+    art    = kreis
+    ueber  = au_boehmen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit au_kr_pilsen {
+    name   = "Kreis Pilsen"
+    art    = kreis
+    ueber  = au_boehmen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit au_kr_saaz {
+    name   = "Kreis Saaz"
+    art    = kreis
+    ueber  = au_boehmen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit au_kr_elbogen {
+    name   = "Kreis Elbogen"
+    art    = kreis
+    ueber  = au_boehmen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit au_kr_bruenn {
+    name   = "Kreis Brünn"
+    art    = kreis
+    ueber  = au_maehren
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit au_kr_olmuetz {
+    name   = "Kreis Olmütz"
+    art    = kreis
+    ueber  = au_maehren
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit au_kr_prerau {
+    name   = "Kreis Prerau"
+    art    = kreis
+    ueber  = au_maehren
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit au_kr_hradisch {
+    name   = "Kreis Hradisch"
+    art    = kreis
+    ueber  = au_maehren
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit au_kr_iglau {
+    name   = "Kreis Iglau"
+    art    = kreis
+    ueber  = au_maehren
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit au_kr_znaim {
+    name   = "Kreis Znaim"
+    art    = kreis
+    ueber  = au_maehren
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit au_kr_troppau {
+    name   = "Kreis Troppau"
+    art    = kreis
+    ueber  = au_schlesien
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit au_kr_teschen {
+    name   = "Kreis Teschen"
+    art    = kreis
+    ueber  = au_schlesien
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit au_kr_muehlkreis {
+    name   = "Kreis Mühlkreis"
+    art    = kreis
+    ueber  = au_oberoesterreich
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit au_kr_traunkreis {
+    name   = "Kreis Traunkreis"
+    art    = kreis
+    ueber  = au_oberoesterreich
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit au_kr_hausruckkreis {
+    name   = "Kreis Hausruckkreis"
+    art    = kreis
+    ueber  = au_oberoesterreich
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit au_kr_innkreis {
+    name   = "Kreis Innkreis"
+    art    = kreis
+    ueber  = au_oberoesterreich
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit au_kr_viertel_unter_dem_wienerwald {
+    name   = "Viertel unter dem Wienerwald"
+    art    = kreis
+    ueber  = au_niederoesterreich
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit au_kr_viertel_ober_dem_wienerwald {
+    name   = "Viertel ober dem Wienerwald"
+    art    = kreis
+    ueber  = au_niederoesterreich
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit au_kr_viertel_unter_dem_manhartsberg {
+    name   = "Viertel unter dem Manhartsberg"
+    art    = kreis
+    ueber  = au_niederoesterreich
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit au_kr_viertel_ober_dem_manhartsberg {
+    name   = "Viertel ober dem Manhartsberg"
+    art    = kreis
+    ueber  = au_niederoesterreich
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit au_kr_grazer_kreis {
+    name   = "Grazer Kreis"
+    art    = kreis
+    ueber  = au_steiermark
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit au_kr_brucker_kreis {
+    name   = "Brucker Kreis"
+    art    = kreis
+    ueber  = au_steiermark
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit au_kr_judenburger_kreis {
+    name   = "Judenburger Kreis"
+    art    = kreis
+    ueber  = au_steiermark
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit au_kr_marburger_kreis {
+    name   = "Marburger Kreis"
+    art    = kreis
+    ueber  = au_steiermark
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit au_kr_cillier_kreis {
+    name   = "Cillier Kreis"
+    art    = kreis
+    ueber  = au_steiermark
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit au_kr_klagenfurter_kreis {
+    name   = "Klagenfurter Kreis"
+    art    = kreis
+    ueber  = au_kaernten
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit au_kr_villacher_kreis {
+    name   = "Villacher Kreis"
+    art    = kreis
+    ueber  = au_kaernten
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit au_kr_laibacher_kreis {
+    name   = "Laibacher Kreis"
+    art    = kreis
+    ueber  = au_krain
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit au_kr_neustaedtler_kreis {
+    name   = "Neustädtler Kreis"
+    art    = kreis
+    ueber  = au_krain
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit au_kr_adelsberger_kreis {
+    name   = "Adelsberger Kreis"
+    art    = kreis
+    ueber  = au_krain
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit au_kr_kreis_unterinntal {
+    name   = "Kreis Unterinntal"
+    art    = kreis
+    ueber  = au_tirol
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit au_kr_kreis_oberinntal {
+    name   = "Kreis Oberinntal"
+    art    = kreis
+    ueber  = au_tirol
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit au_kr_kreis_pustertal {
+    name   = "Kreis Pustertal"
+    art    = kreis
+    ueber  = au_tirol
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit au_kr_kreis_an_der_etsch {
+    name   = "Kreis an der Etsch"
+    art    = kreis
+    ueber  = au_tirol
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit au_kr_kreis_vorarlberg {
+    name   = "Kreis Vorarlberg"
+    art    = kreis
+    ueber  = au_tirol
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit au_kr_wadowicer_kreis {
+    name   = "Wadowicer Kreis"
+    art    = kreis
+    ueber  = au_galizien
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit au_kr_krakauer_kreis {
+    name   = "Krakauer Kreis"
+    art    = kreis
+    ueber  = au_galizien
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}

@@ -47,3 +47,2467 @@ einheit pr_rheinprovinz {
     art    = provinz
     quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
 }
+
+einheit pr_rb_koenigsberg {
+    name   = "Regierungsbezirk Königsberg"
+    art    = regierungsbezirk
+    ueber  = pr_preussen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_memel {
+    name   = "Kreis Memel"
+    art    = kreis
+    ueber  = pr_rb_koenigsberg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_labiau {
+    name   = "Kreis Labiau"
+    art    = kreis
+    ueber  = pr_rb_koenigsberg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_koenigsberg {
+    name   = "Kreis Königsberg"
+    art    = kreis
+    ueber  = pr_rb_koenigsberg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_fischhausen {
+    name   = "Kreis Fischhausen"
+    art    = kreis
+    ueber  = pr_rb_koenigsberg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_wehlau {
+    name   = "Kreis Wehlau"
+    art    = kreis
+    ueber  = pr_rb_koenigsberg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_friedland {
+    name   = "Kreis Friedland"
+    art    = kreis
+    ueber  = pr_rb_koenigsberg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_gerdauen {
+    name   = "Kreis Gerdauen"
+    art    = kreis
+    ueber  = pr_rb_koenigsberg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_rastenburg {
+    name   = "Kreis Rastenburg"
+    art    = kreis
+    ueber  = pr_rb_koenigsberg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_preussisch_eylau {
+    name   = "Kreis Preußisch Eylau"
+    art    = kreis
+    ueber  = pr_rb_koenigsberg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_heiligenbeil {
+    name   = "Kreis Heiligenbeil"
+    art    = kreis
+    ueber  = pr_rb_koenigsberg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_braunsberg {
+    name   = "Kreis Braunsberg"
+    art    = kreis
+    ueber  = pr_rb_koenigsberg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_heilsberg {
+    name   = "Kreis Heilsberg"
+    art    = kreis
+    ueber  = pr_rb_koenigsberg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_roessel {
+    name   = "Kreis Rößel"
+    art    = kreis
+    ueber  = pr_rb_koenigsberg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_allenstein {
+    name   = "Kreis Allenstein"
+    art    = kreis
+    ueber  = pr_rb_koenigsberg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_ortelsburg {
+    name   = "Kreis Ortelsburg"
+    art    = kreis
+    ueber  = pr_rb_koenigsberg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_neidenburg {
+    name   = "Kreis Neidenburg"
+    art    = kreis
+    ueber  = pr_rb_koenigsberg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_osterode {
+    name   = "Kreis Osterode"
+    art    = kreis
+    ueber  = pr_rb_koenigsberg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_mohrungen {
+    name   = "Kreis Mohrungen"
+    art    = kreis
+    ueber  = pr_rb_koenigsberg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_preussisch_holland {
+    name   = "Kreis Preußisch Holland"
+    art    = kreis
+    ueber  = pr_rb_koenigsberg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_rb_gumbinnen {
+    name   = "Regierungsbezirk Gumbinnen"
+    art    = regierungsbezirk
+    ueber  = pr_preussen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_heydekrug {
+    name   = "Kreis Heydekrug"
+    art    = kreis
+    ueber  = pr_rb_gumbinnen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_tilsit {
+    name   = "Kreis Tilsit"
+    art    = kreis
+    ueber  = pr_rb_gumbinnen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_niederung {
+    name   = "Kreis Niederung"
+    art    = kreis
+    ueber  = pr_rb_gumbinnen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_ragnit {
+    name   = "Kreis Ragnit"
+    art    = kreis
+    ueber  = pr_rb_gumbinnen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_pillkallen {
+    name   = "Kreis Pillkallen"
+    art    = kreis
+    ueber  = pr_rb_gumbinnen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_stallupoenen {
+    name   = "Kreis Stallupönen"
+    art    = kreis
+    ueber  = pr_rb_gumbinnen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_gumbinnen {
+    name   = "Kreis Gumbinnen"
+    art    = kreis
+    ueber  = pr_rb_gumbinnen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_insterburg {
+    name   = "Kreis Insterburg"
+    art    = kreis
+    ueber  = pr_rb_gumbinnen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_darkehmen {
+    name   = "Kreis Darkehmen"
+    art    = kreis
+    ueber  = pr_rb_gumbinnen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_goldap {
+    name   = "Kreis Goldap"
+    art    = kreis
+    ueber  = pr_rb_gumbinnen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_angerburg {
+    name   = "Kreis Angerburg"
+    art    = kreis
+    ueber  = pr_rb_gumbinnen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_oletzko {
+    name   = "Kreis Oletzko"
+    art    = kreis
+    ueber  = pr_rb_gumbinnen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_lyck {
+    name   = "Kreis Lyck"
+    art    = kreis
+    ueber  = pr_rb_gumbinnen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_loetzen {
+    name   = "Kreis Lötzen"
+    art    = kreis
+    ueber  = pr_rb_gumbinnen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_sensburg {
+    name   = "Kreis Sensburg"
+    art    = kreis
+    ueber  = pr_rb_gumbinnen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_johannisburg {
+    name   = "Kreis Johannisburg"
+    art    = kreis
+    ueber  = pr_rb_gumbinnen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_rb_danzig {
+    name   = "Regierungsbezirk Danzig"
+    art    = regierungsbezirk
+    ueber  = pr_preussen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_danzig {
+    name   = "Kreis Danzig"
+    art    = kreis
+    ueber  = pr_rb_danzig
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_elbing {
+    name   = "Kreis Elbing"
+    art    = kreis
+    ueber  = pr_rb_danzig
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_marienburg {
+    name   = "Kreis Marienburg"
+    art    = kreis
+    ueber  = pr_rb_danzig
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_preussisch_stargard {
+    name   = "Kreis Preußisch Stargard"
+    art    = kreis
+    ueber  = pr_rb_danzig
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_berent {
+    name   = "Kreis Berent"
+    art    = kreis
+    ueber  = pr_rb_danzig
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_karthaus {
+    name   = "Kreis Karthaus"
+    art    = kreis
+    ueber  = pr_rb_danzig
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_neustadt_in_westpreussen {
+    name   = "Kreis Neustadt in Westpreußen"
+    art    = kreis
+    ueber  = pr_rb_danzig
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_rb_marienwerder {
+    name   = "Regierungsbezirk Marienwerder"
+    art    = regierungsbezirk
+    ueber  = pr_preussen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_marienwerder {
+    name   = "Kreis Marienwerder"
+    art    = kreis
+    ueber  = pr_rb_marienwerder
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_stuhm {
+    name   = "Kreis Stuhm"
+    art    = kreis
+    ueber  = pr_rb_marienwerder
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_rosenberg_in_westpreussen {
+    name   = "Kreis Rosenberg in Westpreußen"
+    art    = kreis
+    ueber  = pr_rb_marienwerder
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_loebau {
+    name   = "Kreis Löbau"
+    art    = kreis
+    ueber  = pr_rb_marienwerder
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_strasburg {
+    name   = "Kreis Strasburg"
+    art    = kreis
+    ueber  = pr_rb_marienwerder
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_thorn {
+    name   = "Kreis Thorn"
+    art    = kreis
+    ueber  = pr_rb_marienwerder
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_culm {
+    name   = "Kreis Culm"
+    art    = kreis
+    ueber  = pr_rb_marienwerder
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_graudenz {
+    name   = "Kreis Graudenz"
+    art    = kreis
+    ueber  = pr_rb_marienwerder
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_schwetz {
+    name   = "Kreis Schwetz"
+    art    = kreis
+    ueber  = pr_rb_marienwerder
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_konitz {
+    name   = "Kreis Konitz"
+    art    = kreis
+    ueber  = pr_rb_marienwerder
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_schlochau {
+    name   = "Kreis Schlochau"
+    art    = kreis
+    ueber  = pr_rb_marienwerder
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_flatow {
+    name   = "Kreis Flatow"
+    art    = kreis
+    ueber  = pr_rb_marienwerder
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_deutsch_krone {
+    name   = "Kreis Deutsch Krone"
+    art    = kreis
+    ueber  = pr_rb_marienwerder
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_rb_posen {
+    name   = "Regierungsbezirk Posen"
+    art    = regierungsbezirk
+    ueber  = pr_posen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_posen {
+    name   = "Kreis Posen"
+    art    = kreis
+    ueber  = pr_rb_posen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_obornik {
+    name   = "Kreis Obornik"
+    art    = kreis
+    ueber  = pr_rb_posen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_samter {
+    name   = "Kreis Samter"
+    art    = kreis
+    ueber  = pr_rb_posen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_birnbaum {
+    name   = "Kreis Birnbaum"
+    art    = kreis
+    ueber  = pr_rb_posen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_meseritz {
+    name   = "Kreis Meseritz"
+    art    = kreis
+    ueber  = pr_rb_posen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_bomst {
+    name   = "Kreis Bomst"
+    art    = kreis
+    ueber  = pr_rb_posen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_buk {
+    name   = "Kreis Buk"
+    art    = kreis
+    ueber  = pr_rb_posen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_kosten {
+    name   = "Kreis Kosten"
+    art    = kreis
+    ueber  = pr_rb_posen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_fraustadt {
+    name   = "Kreis Fraustadt"
+    art    = kreis
+    ueber  = pr_rb_posen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_kroeben {
+    name   = "Kreis Kröben"
+    art    = kreis
+    ueber  = pr_rb_posen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_krotoschin {
+    name   = "Kreis Krotoschin"
+    art    = kreis
+    ueber  = pr_rb_posen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_adelnau {
+    name   = "Kreis Adelnau"
+    art    = kreis
+    ueber  = pr_rb_posen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_schildberg {
+    name   = "Kreis Schildberg"
+    art    = kreis
+    ueber  = pr_rb_posen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_pleschen {
+    name   = "Kreis Pleschen"
+    art    = kreis
+    ueber  = pr_rb_posen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_schrimm {
+    name   = "Kreis Schrimm"
+    art    = kreis
+    ueber  = pr_rb_posen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_schroda {
+    name   = "Kreis Schroda"
+    art    = kreis
+    ueber  = pr_rb_posen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_wreschen {
+    name   = "Kreis Wreschen"
+    art    = kreis
+    ueber  = pr_rb_posen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_rb_bromberg {
+    name   = "Regierungsbezirk Bromberg"
+    art    = regierungsbezirk
+    ueber  = pr_posen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_bromberg {
+    name   = "Kreis Bromberg"
+    art    = kreis
+    ueber  = pr_rb_bromberg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_wirsitz {
+    name   = "Kreis Wirsitz"
+    art    = kreis
+    ueber  = pr_rb_bromberg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_schubin {
+    name   = "Kreis Schubin"
+    art    = kreis
+    ueber  = pr_rb_bromberg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_inowrazlaw {
+    name   = "Kreis Inowrazlaw"
+    art    = kreis
+    ueber  = pr_rb_bromberg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_mogilno {
+    name   = "Kreis Mogilno"
+    art    = kreis
+    ueber  = pr_rb_bromberg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_wongrowitz {
+    name   = "Kreis Wongrowitz"
+    art    = kreis
+    ueber  = pr_rb_bromberg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_gnesen {
+    name   = "Kreis Gnesen"
+    art    = kreis
+    ueber  = pr_rb_bromberg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_czarnikau {
+    name   = "Kreis Czarnikau"
+    art    = kreis
+    ueber  = pr_rb_bromberg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_chodziesen {
+    name   = "Kreis Chodziesen"
+    art    = kreis
+    ueber  = pr_rb_bromberg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_rb_stettin {
+    name   = "Regierungsbezirk Stettin"
+    art    = regierungsbezirk
+    ueber  = pr_pommern
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_randow {
+    name   = "Kreis Randow"
+    art    = kreis
+    ueber  = pr_rb_stettin
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_ueckermuende {
+    name   = "Kreis Ueckermünde"
+    art    = kreis
+    ueber  = pr_rb_stettin
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_usedom_wollin {
+    name   = "Kreis Usedom-Wollin"
+    art    = kreis
+    ueber  = pr_rb_stettin
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_anklam {
+    name   = "Kreis Anklam"
+    art    = kreis
+    ueber  = pr_rb_stettin
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_demmin {
+    name   = "Kreis Demmin"
+    art    = kreis
+    ueber  = pr_rb_stettin
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_greifenhagen {
+    name   = "Kreis Greifenhagen"
+    art    = kreis
+    ueber  = pr_rb_stettin
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_pyritz {
+    name   = "Kreis Pyritz"
+    art    = kreis
+    ueber  = pr_rb_stettin
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_saatzig {
+    name   = "Kreis Saatzig"
+    art    = kreis
+    ueber  = pr_rb_stettin
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_naugard {
+    name   = "Kreis Naugard"
+    art    = kreis
+    ueber  = pr_rb_stettin
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_cammin {
+    name   = "Kreis Cammin"
+    art    = kreis
+    ueber  = pr_rb_stettin
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_greifenberg {
+    name   = "Kreis Greifenberg"
+    art    = kreis
+    ueber  = pr_rb_stettin
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_regenwalde {
+    name   = "Kreis Regenwalde"
+    art    = kreis
+    ueber  = pr_rb_stettin
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_rb_koeslin {
+    name   = "Regierungsbezirk Köslin"
+    art    = regierungsbezirk
+    ueber  = pr_pommern
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_fuerstenthum {
+    name   = "Kreis Fürstenthum"
+    art    = kreis
+    ueber  = pr_rb_koeslin
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_belgard {
+    name   = "Kreis Belgard"
+    art    = kreis
+    ueber  = pr_rb_koeslin
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_neustettin {
+    name   = "Kreis Neustettin"
+    art    = kreis
+    ueber  = pr_rb_koeslin
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_dramburg {
+    name   = "Kreis Dramburg"
+    art    = kreis
+    ueber  = pr_rb_koeslin
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_schivelbein {
+    name   = "Kreis Schivelbein"
+    art    = kreis
+    ueber  = pr_rb_koeslin
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_schlawe {
+    name   = "Kreis Schlawe"
+    art    = kreis
+    ueber  = pr_rb_koeslin
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_stolp {
+    name   = "Kreis Stolp"
+    art    = kreis
+    ueber  = pr_rb_koeslin
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_rummelsburg {
+    name   = "Kreis Rummelsburg"
+    art    = kreis
+    ueber  = pr_rb_koeslin
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_buetow {
+    name   = "Kreis Bütow"
+    art    = kreis
+    ueber  = pr_rb_koeslin
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_lauenburg {
+    name   = "Kreis Lauenburg"
+    art    = kreis
+    ueber  = pr_rb_koeslin
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_rb_stralsund {
+    name   = "Regierungsbezirk Stralsund"
+    art    = regierungsbezirk
+    ueber  = pr_pommern
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_franzburg {
+    name   = "Kreis Franzburg"
+    art    = kreis
+    ueber  = pr_rb_stralsund
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_grimmen {
+    name   = "Kreis Grimmen"
+    art    = kreis
+    ueber  = pr_rb_stralsund
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_greifswald {
+    name   = "Kreis Greifswald"
+    art    = kreis
+    ueber  = pr_rb_stralsund
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_ruegen {
+    name   = "Kreis Rügen"
+    art    = kreis
+    ueber  = pr_rb_stralsund
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_rb_potsdam {
+    name   = "Regierungsbezirk Potsdam"
+    art    = regierungsbezirk
+    ueber  = pr_brandenburg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_prenzlau {
+    name   = "Kreis Prenzlau"
+    art    = kreis
+    ueber  = pr_rb_potsdam
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_templin {
+    name   = "Kreis Templin"
+    art    = kreis
+    ueber  = pr_rb_potsdam
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_angermuende {
+    name   = "Kreis Angermünde"
+    art    = kreis
+    ueber  = pr_rb_potsdam
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_oberbarnim {
+    name   = "Kreis Oberbarnim"
+    art    = kreis
+    ueber  = pr_rb_potsdam
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_niederbarnim {
+    name   = "Kreis Niederbarnim"
+    art    = kreis
+    ueber  = pr_rb_potsdam
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_teltow {
+    name   = "Kreis Teltow"
+    art    = kreis
+    ueber  = pr_rb_potsdam
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_ruppin {
+    name   = "Kreis Ruppin"
+    art    = kreis
+    ueber  = pr_rb_potsdam
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_ostprignitz {
+    name   = "Kreis Ostprignitz"
+    art    = kreis
+    ueber  = pr_rb_potsdam
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_westprignitz {
+    name   = "Kreis Westprignitz"
+    art    = kreis
+    ueber  = pr_rb_potsdam
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_westhavelland {
+    name   = "Kreis Westhavelland"
+    art    = kreis
+    ueber  = pr_rb_potsdam
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_osthavelland {
+    name   = "Kreis Osthavelland"
+    art    = kreis
+    ueber  = pr_rb_potsdam
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_zauch_belzig {
+    name   = "Kreis Zauch-Belzig"
+    art    = kreis
+    ueber  = pr_rb_potsdam
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_jueterbog_luckenwalde {
+    name   = "Kreis Jüterbog-Luckenwalde"
+    art    = kreis
+    ueber  = pr_rb_potsdam
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_beeskow_storkow {
+    name   = "Kreis Beeskow-Storkow"
+    art    = kreis
+    ueber  = pr_rb_potsdam
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_potsdam {
+    name   = "Kreis Potsdam"
+    art    = kreis
+    ueber  = pr_rb_potsdam
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_brandenburg {
+    name   = "Kreis Brandenburg"
+    art    = kreis
+    ueber  = pr_rb_potsdam
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_rb_frankfurt {
+    name   = "Regierungsbezirk Frankfurt"
+    art    = regierungsbezirk
+    ueber  = pr_brandenburg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_arnswalde {
+    name   = "Kreis Arnswalde"
+    art    = kreis
+    ueber  = pr_rb_frankfurt
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_friedeberg {
+    name   = "Kreis Friedeberg"
+    art    = kreis
+    ueber  = pr_rb_frankfurt
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_landsberg {
+    name   = "Kreis Landsberg"
+    art    = kreis
+    ueber  = pr_rb_frankfurt
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_soldin {
+    name   = "Kreis Soldin"
+    art    = kreis
+    ueber  = pr_rb_frankfurt
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_koenigsberg_in_der_neumark {
+    name   = "Kreis Königsberg in der Neumark"
+    art    = kreis
+    ueber  = pr_rb_frankfurt
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_lebus {
+    name   = "Kreis Lebus"
+    art    = kreis
+    ueber  = pr_rb_frankfurt
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_sternberg {
+    name   = "Kreis Sternberg"
+    art    = kreis
+    ueber  = pr_rb_frankfurt
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_crossen {
+    name   = "Kreis Crossen"
+    art    = kreis
+    ueber  = pr_rb_frankfurt
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_zuellichau_schwiebus {
+    name   = "Kreis Züllichau-Schwiebus"
+    art    = kreis
+    ueber  = pr_rb_frankfurt
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_guben {
+    name   = "Kreis Guben"
+    art    = kreis
+    ueber  = pr_rb_frankfurt
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_luebben {
+    name   = "Kreis Lübben"
+    art    = kreis
+    ueber  = pr_rb_frankfurt
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_luckau {
+    name   = "Kreis Luckau"
+    art    = kreis
+    ueber  = pr_rb_frankfurt
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_calau {
+    name   = "Kreis Calau"
+    art    = kreis
+    ueber  = pr_rb_frankfurt
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_cottbus {
+    name   = "Kreis Cottbus"
+    art    = kreis
+    ueber  = pr_rb_frankfurt
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_spremberg {
+    name   = "Kreis Spremberg"
+    art    = kreis
+    ueber  = pr_rb_frankfurt
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_sorau {
+    name   = "Kreis Sorau"
+    art    = kreis
+    ueber  = pr_rb_frankfurt
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_frankfurt {
+    name   = "Kreis Frankfurt"
+    art    = kreis
+    ueber  = pr_rb_frankfurt
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_rb_breslau {
+    name   = "Regierungsbezirk Breslau"
+    art    = regierungsbezirk
+    ueber  = pr_schlesien
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_breslau {
+    name   = "Kreis Breslau"
+    art    = kreis
+    ueber  = pr_rb_breslau
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_brieg {
+    name   = "Kreis Brieg"
+    art    = kreis
+    ueber  = pr_rb_breslau
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_frankenstein {
+    name   = "Kreis Frankenstein"
+    art    = kreis
+    ueber  = pr_rb_breslau
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_glatz {
+    name   = "Kreis Glatz"
+    art    = kreis
+    ueber  = pr_rb_breslau
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_guhrau {
+    name   = "Kreis Guhrau"
+    art    = kreis
+    ueber  = pr_rb_breslau
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_habelschwerdt {
+    name   = "Kreis Habelschwerdt"
+    art    = kreis
+    ueber  = pr_rb_breslau
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_militsch {
+    name   = "Kreis Militsch"
+    art    = kreis
+    ueber  = pr_rb_breslau
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_muensterberg {
+    name   = "Kreis Münsterberg"
+    art    = kreis
+    ueber  = pr_rb_breslau
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_namslau {
+    name   = "Kreis Namslau"
+    art    = kreis
+    ueber  = pr_rb_breslau
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_neumarkt {
+    name   = "Kreis Neumarkt"
+    art    = kreis
+    ueber  = pr_rb_breslau
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_nimptsch {
+    name   = "Kreis Nimptsch"
+    art    = kreis
+    ueber  = pr_rb_breslau
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_oels {
+    name   = "Kreis Oels"
+    art    = kreis
+    ueber  = pr_rb_breslau
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_ohlau {
+    name   = "Kreis Ohlau"
+    art    = kreis
+    ueber  = pr_rb_breslau
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_reichenbach {
+    name   = "Kreis Reichenbach"
+    art    = kreis
+    ueber  = pr_rb_breslau
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_schweidnitz {
+    name   = "Kreis Schweidnitz"
+    art    = kreis
+    ueber  = pr_rb_breslau
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_steinau {
+    name   = "Kreis Steinau"
+    art    = kreis
+    ueber  = pr_rb_breslau
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_strehlen {
+    name   = "Kreis Strehlen"
+    art    = kreis
+    ueber  = pr_rb_breslau
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_trebnitz {
+    name   = "Kreis Trebnitz"
+    art    = kreis
+    ueber  = pr_rb_breslau
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_waldenburg {
+    name   = "Kreis Waldenburg"
+    art    = kreis
+    ueber  = pr_rb_breslau
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_gross_wartenberg {
+    name   = "Kreis Groß Wartenberg"
+    art    = kreis
+    ueber  = pr_rb_breslau
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_wohlau {
+    name   = "Kreis Wohlau"
+    art    = kreis
+    ueber  = pr_rb_breslau
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_striegau {
+    name   = "Kreis Striegau"
+    art    = kreis
+    ueber  = pr_rb_breslau
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_rb_liegnitz {
+    name   = "Regierungsbezirk Liegnitz"
+    art    = regierungsbezirk
+    ueber  = pr_schlesien
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_bolkenhain {
+    name   = "Kreis Bolkenhain"
+    art    = kreis
+    ueber  = pr_rb_liegnitz
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_bunzlau {
+    name   = "Kreis Bunzlau"
+    art    = kreis
+    ueber  = pr_rb_liegnitz
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_freystadt {
+    name   = "Kreis Freystadt"
+    art    = kreis
+    ueber  = pr_rb_liegnitz
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_glogau {
+    name   = "Kreis Glogau"
+    art    = kreis
+    ueber  = pr_rb_liegnitz
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_goldberg_haynau {
+    name   = "Kreis Goldberg-Haynau"
+    art    = kreis
+    ueber  = pr_rb_liegnitz
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_goerlitz {
+    name   = "Kreis Görlitz"
+    art    = kreis
+    ueber  = pr_rb_liegnitz
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_gruenberg {
+    name   = "Kreis Grünberg"
+    art    = kreis
+    ueber  = pr_rb_liegnitz
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_hirschberg {
+    name   = "Kreis Hirschberg"
+    art    = kreis
+    ueber  = pr_rb_liegnitz
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_hoyerswerda {
+    name   = "Kreis Hoyerswerda"
+    art    = kreis
+    ueber  = pr_rb_liegnitz
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_jauer {
+    name   = "Kreis Jauer"
+    art    = kreis
+    ueber  = pr_rb_liegnitz
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_landeshut {
+    name   = "Kreis Landeshut"
+    art    = kreis
+    ueber  = pr_rb_liegnitz
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_lauban {
+    name   = "Kreis Lauban"
+    art    = kreis
+    ueber  = pr_rb_liegnitz
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_liegnitz {
+    name   = "Kreis Liegnitz"
+    art    = kreis
+    ueber  = pr_rb_liegnitz
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_loewenberg {
+    name   = "Kreis Löwenberg"
+    art    = kreis
+    ueber  = pr_rb_liegnitz
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_lueben {
+    name   = "Kreis Lüben"
+    art    = kreis
+    ueber  = pr_rb_liegnitz
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_rothenburg {
+    name   = "Kreis Rothenburg"
+    art    = kreis
+    ueber  = pr_rb_liegnitz
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_sagan {
+    name   = "Kreis Sagan"
+    art    = kreis
+    ueber  = pr_rb_liegnitz
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_schoenau {
+    name   = "Kreis Schönau"
+    art    = kreis
+    ueber  = pr_rb_liegnitz
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_sprottau {
+    name   = "Kreis Sprottau"
+    art    = kreis
+    ueber  = pr_rb_liegnitz
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_rb_oppeln {
+    name   = "Regierungsbezirk Oppeln"
+    art    = regierungsbezirk
+    ueber  = pr_schlesien
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_beuthen {
+    name   = "Kreis Beuthen"
+    art    = kreis
+    ueber  = pr_rb_oppeln
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_cosel {
+    name   = "Kreis Cosel"
+    art    = kreis
+    ueber  = pr_rb_oppeln
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_falkenberg {
+    name   = "Kreis Falkenberg"
+    art    = kreis
+    ueber  = pr_rb_oppeln
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_grottkau {
+    name   = "Kreis Grottkau"
+    art    = kreis
+    ueber  = pr_rb_oppeln
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_kreuzburg {
+    name   = "Kreis Kreuzburg"
+    art    = kreis
+    ueber  = pr_rb_oppeln
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_leobschuetz {
+    name   = "Kreis Leobschütz"
+    art    = kreis
+    ueber  = pr_rb_oppeln
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_lublinitz {
+    name   = "Kreis Lublinitz"
+    art    = kreis
+    ueber  = pr_rb_oppeln
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_neisse {
+    name   = "Kreis Neisse"
+    art    = kreis
+    ueber  = pr_rb_oppeln
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_neustadt_in_oberschlesien {
+    name   = "Kreis Neustadt in Oberschlesien"
+    art    = kreis
+    ueber  = pr_rb_oppeln
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_oppeln {
+    name   = "Kreis Oppeln"
+    art    = kreis
+    ueber  = pr_rb_oppeln
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_pless {
+    name   = "Kreis Pleß"
+    art    = kreis
+    ueber  = pr_rb_oppeln
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_ratibor {
+    name   = "Kreis Ratibor"
+    art    = kreis
+    ueber  = pr_rb_oppeln
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_rosenberg {
+    name   = "Kreis Rosenberg"
+    art    = kreis
+    ueber  = pr_rb_oppeln
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_rybnik {
+    name   = "Kreis Rybnik"
+    art    = kreis
+    ueber  = pr_rb_oppeln
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_gross_strehlitz {
+    name   = "Kreis Groß Strehlitz"
+    art    = kreis
+    ueber  = pr_rb_oppeln
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_tost_gleiwitz {
+    name   = "Kreis Tost-Gleiwitz"
+    art    = kreis
+    ueber  = pr_rb_oppeln
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_rb_magdeburg {
+    name   = "Regierungsbezirk Magdeburg"
+    art    = regierungsbezirk
+    ueber  = pr_sachsen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_magdeburg {
+    name   = "Kreis Magdeburg"
+    art    = kreis
+    ueber  = pr_rb_magdeburg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_jerichow_i {
+    name   = "Kreis Jerichow I"
+    art    = kreis
+    ueber  = pr_rb_magdeburg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_jerichow_ii {
+    name   = "Kreis Jerichow II"
+    art    = kreis
+    ueber  = pr_rb_magdeburg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_wolmirstedt {
+    name   = "Kreis Wolmirstedt"
+    art    = kreis
+    ueber  = pr_rb_magdeburg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_neuhaldensleben {
+    name   = "Kreis Neuhaldensleben"
+    art    = kreis
+    ueber  = pr_rb_magdeburg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_gardelegen {
+    name   = "Kreis Gardelegen"
+    art    = kreis
+    ueber  = pr_rb_magdeburg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_salzwedel {
+    name   = "Kreis Salzwedel"
+    art    = kreis
+    ueber  = pr_rb_magdeburg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_osterburg {
+    name   = "Kreis Osterburg"
+    art    = kreis
+    ueber  = pr_rb_magdeburg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_stendal {
+    name   = "Kreis Stendal"
+    art    = kreis
+    ueber  = pr_rb_magdeburg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_calbe {
+    name   = "Kreis Calbe"
+    art    = kreis
+    ueber  = pr_rb_magdeburg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_wanzleben {
+    name   = "Kreis Wanzleben"
+    art    = kreis
+    ueber  = pr_rb_magdeburg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_oschersleben {
+    name   = "Kreis Oschersleben"
+    art    = kreis
+    ueber  = pr_rb_magdeburg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_halberstadt {
+    name   = "Kreis Halberstadt"
+    art    = kreis
+    ueber  = pr_rb_magdeburg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_aschersleben {
+    name   = "Kreis Aschersleben"
+    art    = kreis
+    ueber  = pr_rb_magdeburg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_wernigerode {
+    name   = "Kreis Wernigerode"
+    art    = kreis
+    ueber  = pr_rb_magdeburg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_rb_merseburg {
+    name   = "Regierungsbezirk Merseburg"
+    art    = regierungsbezirk
+    ueber  = pr_sachsen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_halle {
+    name   = "Kreis Halle"
+    art    = kreis
+    ueber  = pr_rb_merseburg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_mansfelder_gebirgskreis {
+    name   = "Kreis Mansfelder Gebirgskreis"
+    art    = kreis
+    ueber  = pr_rb_merseburg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_mansfelder_seekreis {
+    name   = "Kreis Mansfelder Seekreis"
+    art    = kreis
+    ueber  = pr_rb_merseburg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_sangerhausen {
+    name   = "Kreis Sangerhausen"
+    art    = kreis
+    ueber  = pr_rb_merseburg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_querfurt {
+    name   = "Kreis Querfurt"
+    art    = kreis
+    ueber  = pr_rb_merseburg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_merseburg {
+    name   = "Kreis Merseburg"
+    art    = kreis
+    ueber  = pr_rb_merseburg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_weissenfels {
+    name   = "Kreis Weißenfels"
+    art    = kreis
+    ueber  = pr_rb_merseburg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_naumburg {
+    name   = "Kreis Naumburg"
+    art    = kreis
+    ueber  = pr_rb_merseburg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_eckartsberga {
+    name   = "Kreis Eckartsberga"
+    art    = kreis
+    ueber  = pr_rb_merseburg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_zeitz {
+    name   = "Kreis Zeitz"
+    art    = kreis
+    ueber  = pr_rb_merseburg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_delitzsch {
+    name   = "Kreis Delitzsch"
+    art    = kreis
+    ueber  = pr_rb_merseburg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_bitterfeld {
+    name   = "Kreis Bitterfeld"
+    art    = kreis
+    ueber  = pr_rb_merseburg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_wittenberg {
+    name   = "Kreis Wittenberg"
+    art    = kreis
+    ueber  = pr_rb_merseburg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_torgau {
+    name   = "Kreis Torgau"
+    art    = kreis
+    ueber  = pr_rb_merseburg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_schweinitz {
+    name   = "Kreis Schweinitz"
+    art    = kreis
+    ueber  = pr_rb_merseburg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_liebenwerda {
+    name   = "Kreis Liebenwerda"
+    art    = kreis
+    ueber  = pr_rb_merseburg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_rb_erfurt {
+    name   = "Regierungsbezirk Erfurt"
+    art    = regierungsbezirk
+    ueber  = pr_sachsen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_erfurt {
+    name   = "Kreis Erfurt"
+    art    = kreis
+    ueber  = pr_rb_erfurt
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_weissensee {
+    name   = "Kreis Weißensee"
+    art    = kreis
+    ueber  = pr_rb_erfurt
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_langensalza {
+    name   = "Kreis Langensalza"
+    art    = kreis
+    ueber  = pr_rb_erfurt
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_muehlhausen {
+    name   = "Kreis Mühlhausen"
+    art    = kreis
+    ueber  = pr_rb_erfurt
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_heiligenstadt {
+    name   = "Kreis Heiligenstadt"
+    art    = kreis
+    ueber  = pr_rb_erfurt
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_worbis {
+    name   = "Kreis Worbis"
+    art    = kreis
+    ueber  = pr_rb_erfurt
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_nordhausen {
+    name   = "Kreis Nordhausen"
+    art    = kreis
+    ueber  = pr_rb_erfurt
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_schleusingen {
+    name   = "Kreis Schleusingen"
+    art    = kreis
+    ueber  = pr_rb_erfurt
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_rb_muenster {
+    name   = "Regierungsbezirk Münster"
+    art    = regierungsbezirk
+    ueber  = pr_westfalen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_muenster {
+    name   = "Kreis Münster"
+    art    = kreis
+    ueber  = pr_rb_muenster
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_ahaus {
+    name   = "Kreis Ahaus"
+    art    = kreis
+    ueber  = pr_rb_muenster
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_borken {
+    name   = "Kreis Borken"
+    art    = kreis
+    ueber  = pr_rb_muenster
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_coesfeld {
+    name   = "Kreis Coesfeld"
+    art    = kreis
+    ueber  = pr_rb_muenster
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_recklinghausen {
+    name   = "Kreis Recklinghausen"
+    art    = kreis
+    ueber  = pr_rb_muenster
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_steinfurt {
+    name   = "Kreis Steinfurt"
+    art    = kreis
+    ueber  = pr_rb_muenster
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_tecklenburg {
+    name   = "Kreis Tecklenburg"
+    art    = kreis
+    ueber  = pr_rb_muenster
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_warendorf {
+    name   = "Kreis Warendorf"
+    art    = kreis
+    ueber  = pr_rb_muenster
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_beckum {
+    name   = "Kreis Beckum"
+    art    = kreis
+    ueber  = pr_rb_muenster
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_luedinghausen {
+    name   = "Kreis Lüdinghausen"
+    art    = kreis
+    ueber  = pr_rb_muenster
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_rb_minden {
+    name   = "Regierungsbezirk Minden"
+    art    = regierungsbezirk
+    ueber  = pr_westfalen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_minden {
+    name   = "Kreis Minden"
+    art    = kreis
+    ueber  = pr_rb_minden
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_luebbecke {
+    name   = "Kreis Lübbecke"
+    art    = kreis
+    ueber  = pr_rb_minden
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_herford {
+    name   = "Kreis Herford"
+    art    = kreis
+    ueber  = pr_rb_minden
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_bielefeld {
+    name   = "Kreis Bielefeld"
+    art    = kreis
+    ueber  = pr_rb_minden
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_halle_minden {
+    name   = "Kreis Halle"
+    art    = kreis
+    ueber  = pr_rb_minden
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_wiedenbrueck {
+    name   = "Kreis Wiedenbrück"
+    art    = kreis
+    ueber  = pr_rb_minden
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_paderborn {
+    name   = "Kreis Paderborn"
+    art    = kreis
+    ueber  = pr_rb_minden
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_bueren {
+    name   = "Kreis Büren"
+    art    = kreis
+    ueber  = pr_rb_minden
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_warburg {
+    name   = "Kreis Warburg"
+    art    = kreis
+    ueber  = pr_rb_minden
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_hoexter {
+    name   = "Kreis Höxter"
+    art    = kreis
+    ueber  = pr_rb_minden
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_rb_arnsberg {
+    name   = "Regierungsbezirk Arnsberg"
+    art    = regierungsbezirk
+    ueber  = pr_westfalen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_arnsberg {
+    name   = "Kreis Arnsberg"
+    art    = kreis
+    ueber  = pr_rb_arnsberg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_meschede {
+    name   = "Kreis Meschede"
+    art    = kreis
+    ueber  = pr_rb_arnsberg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_brilon {
+    name   = "Kreis Brilon"
+    art    = kreis
+    ueber  = pr_rb_arnsberg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_lippstadt {
+    name   = "Kreis Lippstadt"
+    art    = kreis
+    ueber  = pr_rb_arnsberg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_soest {
+    name   = "Kreis Soest"
+    art    = kreis
+    ueber  = pr_rb_arnsberg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_hamm {
+    name   = "Kreis Hamm"
+    art    = kreis
+    ueber  = pr_rb_arnsberg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_dortmund {
+    name   = "Kreis Dortmund"
+    art    = kreis
+    ueber  = pr_rb_arnsberg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_bochum {
+    name   = "Kreis Bochum"
+    art    = kreis
+    ueber  = pr_rb_arnsberg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_hagen {
+    name   = "Kreis Hagen"
+    art    = kreis
+    ueber  = pr_rb_arnsberg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_iserlohn {
+    name   = "Kreis Iserlohn"
+    art    = kreis
+    ueber  = pr_rb_arnsberg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_altena {
+    name   = "Kreis Altena"
+    art    = kreis
+    ueber  = pr_rb_arnsberg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_olpe {
+    name   = "Kreis Olpe"
+    art    = kreis
+    ueber  = pr_rb_arnsberg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_siegen {
+    name   = "Kreis Siegen"
+    art    = kreis
+    ueber  = pr_rb_arnsberg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_wittgenstein {
+    name   = "Kreis Wittgenstein"
+    art    = kreis
+    ueber  = pr_rb_arnsberg
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_rb_koeln {
+    name   = "Regierungsbezirk Köln"
+    art    = regierungsbezirk
+    ueber  = pr_rheinprovinz
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_koeln {
+    name   = "Kreis Köln"
+    art    = kreis
+    ueber  = pr_rb_koeln
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_bergheim {
+    name   = "Kreis Bergheim"
+    art    = kreis
+    ueber  = pr_rb_koeln
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_euskirchen {
+    name   = "Kreis Euskirchen"
+    art    = kreis
+    ueber  = pr_rb_koeln
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_rheinbach {
+    name   = "Kreis Rheinbach"
+    art    = kreis
+    ueber  = pr_rb_koeln
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_bonn {
+    name   = "Kreis Bonn"
+    art    = kreis
+    ueber  = pr_rb_koeln
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_sieg {
+    name   = "Kreis Sieg"
+    art    = kreis
+    ueber  = pr_rb_koeln
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_muelheim {
+    name   = "Kreis Mülheim"
+    art    = kreis
+    ueber  = pr_rb_koeln
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_wipperfuerth {
+    name   = "Kreis Wipperfürth"
+    art    = kreis
+    ueber  = pr_rb_koeln
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_gummersbach {
+    name   = "Kreis Gummersbach"
+    art    = kreis
+    ueber  = pr_rb_koeln
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_waldbroel {
+    name   = "Kreis Waldbröl"
+    art    = kreis
+    ueber  = pr_rb_koeln
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_rb_duesseldorf {
+    name   = "Regierungsbezirk Düsseldorf"
+    art    = regierungsbezirk
+    ueber  = pr_rheinprovinz
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_duesseldorf {
+    name   = "Kreis Düsseldorf"
+    art    = kreis
+    ueber  = pr_rb_duesseldorf
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_elberfeld {
+    name   = "Kreis Elberfeld"
+    art    = kreis
+    ueber  = pr_rb_duesseldorf
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_lennep {
+    name   = "Kreis Lennep"
+    art    = kreis
+    ueber  = pr_rb_duesseldorf
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_solingen {
+    name   = "Kreis Solingen"
+    art    = kreis
+    ueber  = pr_rb_duesseldorf
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_duisburg {
+    name   = "Kreis Duisburg"
+    art    = kreis
+    ueber  = pr_rb_duesseldorf
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_rees {
+    name   = "Kreis Rees"
+    art    = kreis
+    ueber  = pr_rb_duesseldorf
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_kleve {
+    name   = "Kreis Kleve"
+    art    = kreis
+    ueber  = pr_rb_duesseldorf
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_geldern {
+    name   = "Kreis Geldern"
+    art    = kreis
+    ueber  = pr_rb_duesseldorf
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_kempen {
+    name   = "Kreis Kempen"
+    art    = kreis
+    ueber  = pr_rb_duesseldorf
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_krefeld {
+    name   = "Kreis Krefeld"
+    art    = kreis
+    ueber  = pr_rb_duesseldorf
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_gladbach {
+    name   = "Kreis Gladbach"
+    art    = kreis
+    ueber  = pr_rb_duesseldorf
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_neuss {
+    name   = "Kreis Neuss"
+    art    = kreis
+    ueber  = pr_rb_duesseldorf
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_grevenbroich {
+    name   = "Kreis Grevenbroich"
+    art    = kreis
+    ueber  = pr_rb_duesseldorf
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_rb_koblenz {
+    name   = "Regierungsbezirk Koblenz"
+    art    = regierungsbezirk
+    ueber  = pr_rheinprovinz
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_koblenz {
+    name   = "Kreis Koblenz"
+    art    = kreis
+    ueber  = pr_rb_koblenz
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_sankt_goar {
+    name   = "Kreis Sankt Goar"
+    art    = kreis
+    ueber  = pr_rb_koblenz
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_kreuznach {
+    name   = "Kreis Kreuznach"
+    art    = kreis
+    ueber  = pr_rb_koblenz
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_simmern {
+    name   = "Kreis Simmern"
+    art    = kreis
+    ueber  = pr_rb_koblenz
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_zell {
+    name   = "Kreis Zell"
+    art    = kreis
+    ueber  = pr_rb_koblenz
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_cochem {
+    name   = "Kreis Cochem"
+    art    = kreis
+    ueber  = pr_rb_koblenz
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_mayen {
+    name   = "Kreis Mayen"
+    art    = kreis
+    ueber  = pr_rb_koblenz
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_adenau {
+    name   = "Kreis Adenau"
+    art    = kreis
+    ueber  = pr_rb_koblenz
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_ahrweiler {
+    name   = "Kreis Ahrweiler"
+    art    = kreis
+    ueber  = pr_rb_koblenz
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_neuwied {
+    name   = "Kreis Neuwied"
+    art    = kreis
+    ueber  = pr_rb_koblenz
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_altenkirchen {
+    name   = "Kreis Altenkirchen"
+    art    = kreis
+    ueber  = pr_rb_koblenz
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_wetzlar {
+    name   = "Kreis Wetzlar"
+    art    = kreis
+    ueber  = pr_rb_koblenz
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_rb_trier {
+    name   = "Regierungsbezirk Trier"
+    art    = regierungsbezirk
+    ueber  = pr_rheinprovinz
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_trier {
+    name   = "Kreis Trier"
+    art    = kreis
+    ueber  = pr_rb_trier
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_saarburg {
+    name   = "Kreis Saarburg"
+    art    = kreis
+    ueber  = pr_rb_trier
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_merzig {
+    name   = "Kreis Merzig"
+    art    = kreis
+    ueber  = pr_rb_trier
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_saarlouis {
+    name   = "Kreis Saarlouis"
+    art    = kreis
+    ueber  = pr_rb_trier
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_saarbruecken {
+    name   = "Kreis Saarbrücken"
+    art    = kreis
+    ueber  = pr_rb_trier
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_ottweiler {
+    name   = "Kreis Ottweiler"
+    art    = kreis
+    ueber  = pr_rb_trier
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_sankt_wendel {
+    name   = "Kreis Sankt Wendel"
+    art    = kreis
+    ueber  = pr_rb_trier
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_bernkastel {
+    name   = "Kreis Bernkastel"
+    art    = kreis
+    ueber  = pr_rb_trier
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_wittlich {
+    name   = "Kreis Wittlich"
+    art    = kreis
+    ueber  = pr_rb_trier
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_daun {
+    name   = "Kreis Daun"
+    art    = kreis
+    ueber  = pr_rb_trier
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_pruem {
+    name   = "Kreis Prüm"
+    art    = kreis
+    ueber  = pr_rb_trier
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_bitburg {
+    name   = "Kreis Bitburg"
+    art    = kreis
+    ueber  = pr_rb_trier
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_rb_aachen {
+    name   = "Regierungsbezirk Aachen"
+    art    = regierungsbezirk
+    ueber  = pr_rheinprovinz
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_aachen {
+    name   = "Kreis Aachen"
+    art    = kreis
+    ueber  = pr_rb_aachen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_eupen {
+    name   = "Kreis Eupen"
+    art    = kreis
+    ueber  = pr_rb_aachen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_montjoie {
+    name   = "Kreis Montjoie"
+    art    = kreis
+    ueber  = pr_rb_aachen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_malmedy {
+    name   = "Kreis Malmedy"
+    art    = kreis
+    ueber  = pr_rb_aachen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_schleiden {
+    name   = "Kreis Schleiden"
+    art    = kreis
+    ueber  = pr_rb_aachen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_dueren {
+    name   = "Kreis Düren"
+    art    = kreis
+    ueber  = pr_rb_aachen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_juelich {
+    name   = "Kreis Jülich"
+    art    = kreis
+    ueber  = pr_rb_aachen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_geilenkirchen {
+    name   = "Kreis Geilenkirchen"
+    art    = kreis
+    ueber  = pr_rb_aachen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_erkelenz {
+    name   = "Kreis Erkelenz"
+    art    = kreis
+    ueber  = pr_rb_aachen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_kr_heinsberg {
+    name   = "Kreis Heinsberg"
+    art    = kreis
+    ueber  = pr_rb_aachen
+    quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
+}
