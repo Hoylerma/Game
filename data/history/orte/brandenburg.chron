@@ -1596,7 +1596,7 @@ ort bierzwnik {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_kr_friedeberg
+        verwaltung = pr_kr_arnswalde
         bund       = ja
     }
 }

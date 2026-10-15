@@ -189,7 +189,7 @@ ort grein {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kr_traunkreis
+        verwaltung = au_kr_muehlkreis
         bund       = ja
     }
 }
@@ -511,7 +511,7 @@ ort neuhofen_an_der_krems {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kr_hausruckkreis
+        verwaltung = au_kr_traunkreis
         bund       = ja
     }
 }
@@ -534,7 +534,7 @@ ort traun {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kr_muehlkreis
+        verwaltung = au_kr_traunkreis
         bund       = ja
     }
 }
@@ -626,7 +626,7 @@ ort sankt_florian {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kr_muehlkreis
+        verwaltung = au_kr_traunkreis
         bund       = ja
     }
 }
@@ -695,7 +695,7 @@ ort peuerbach {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kr_innkreis
+        verwaltung = au_kr_hausruckkreis
         bund       = ja
     }
 }
@@ -718,7 +718,7 @@ ort frankenburg {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kr_innkreis
+        verwaltung = au_kr_hausruckkreis
         bund       = ja
     }
 }
@@ -741,7 +741,7 @@ ort haag_am_hausruck {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kr_innkreis
+        verwaltung = au_kr_hausruckkreis
         bund       = ja
     }
 }
@@ -764,7 +764,7 @@ ort ottnang_am_hausruck {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kr_innkreis
+        verwaltung = au_kr_hausruckkreis
         bund       = ja
     }
 }
@@ -948,7 +948,7 @@ ort kremsmuenster {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kr_hausruckkreis
+        verwaltung = au_kr_traunkreis
         bund       = ja
     }
 }
@@ -1155,7 +1155,7 @@ ort gmunden {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kr_hausruckkreis
+        verwaltung = au_kr_traunkreis
         bund       = ja
     }
 }
@@ -1178,7 +1178,7 @@ ort attnang_puchheim {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kr_innkreis
+        verwaltung = au_kr_hausruckkreis
         bund       = ja
     }
 }
@@ -1201,7 +1201,7 @@ ort vorchdorf {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kr_hausruckkreis
+        verwaltung = au_kr_traunkreis
         bund       = ja
     }
 }
@@ -1224,7 +1224,7 @@ ort ebensee {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kr_hausruckkreis
+        verwaltung = au_kr_traunkreis
         bund       = ja
     }
 }
@@ -1270,7 +1270,7 @@ ort gruenau_im_almtal {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kr_hausruckkreis
+        verwaltung = au_kr_traunkreis
         bund       = ja
     }
 }
@@ -1293,7 +1293,7 @@ ort mondsee {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kr_innkreis
+        verwaltung = au_kr_hausruckkreis
         bund       = ja
     }
 }
@@ -1316,7 +1316,7 @@ ort sankt_georgen_im_attergau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kr_innkreis
+        verwaltung = au_kr_hausruckkreis
         bund       = ja
     }
 }
@@ -1339,7 +1339,7 @@ ort bad_ischl {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kr_innkreis
+        verwaltung = au_kr_traunkreis
         bund       = ja
     }
 }
@@ -1362,7 +1362,7 @@ ort sankt_wolfgang_im_salzkammergut {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kr_innkreis
+        verwaltung = au_kr_traunkreis
         bund       = ja
     }
 }
@@ -1385,7 +1385,7 @@ ort gosau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kr_innkreis
+        verwaltung = au_kr_traunkreis
         bund       = ja
     }
 }
@@ -1408,7 +1408,7 @@ ort steinbach_am_attersee {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kr_innkreis
+        verwaltung = au_kr_hausruckkreis
         bund       = ja
     }
 }

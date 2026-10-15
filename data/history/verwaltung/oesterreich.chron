@@ -243,28 +243,28 @@ einheit au_kr_teschen {
 }
 
 einheit au_kr_muehlkreis {
-    name   = "Kreis Mühlkreis"
+    name   = "Mühlkreis"
     art    = kreis
     ueber  = au_oberoesterreich
     quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
 }
 
 einheit au_kr_traunkreis {
-    name   = "Kreis Traunkreis"
+    name   = "Traunkreis"
     art    = kreis
     ueber  = au_oberoesterreich
     quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
 }
 
 einheit au_kr_hausruckkreis {
-    name   = "Kreis Hausruckkreis"
+    name   = "Hausruckkreis"
     art    = kreis
     ueber  = au_oberoesterreich
     quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
 }
 
 einheit au_kr_innkreis {
-    name   = "Kreis Innkreis"
+    name   = "Innkreis"
     art    = kreis
     ueber  = au_oberoesterreich
     quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"

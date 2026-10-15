@@ -441,7 +441,7 @@ ort retz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kr_viertel_ober_dem_manhartsberg
+        verwaltung = au_kr_viertel_unter_dem_manhartsberg
         bund       = ja
     }
 }
@@ -487,7 +487,7 @@ ort sitzendorf_an_der_schmida {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kr_viertel_ober_dem_manhartsberg
+        verwaltung = au_kr_viertel_unter_dem_manhartsberg
         bund       = ja
     }
 }
@@ -510,7 +510,7 @@ ort guntersdorf {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kr_viertel_ober_dem_manhartsberg
+        verwaltung = au_kr_viertel_unter_dem_manhartsberg
         bund       = ja
     }
 }
@@ -533,7 +533,7 @@ ort hardegg {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kr_viertel_ober_dem_manhartsberg
+        verwaltung = au_kr_viertel_unter_dem_manhartsberg
         bund       = ja
     }
 }
@@ -924,7 +924,7 @@ ort leopoldsdorf_im_marchfelde {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kr_viertel_unter_dem_wienerwald
+        verwaltung = au_kr_viertel_unter_dem_manhartsberg
         bund       = ja
     }
 }
@@ -947,7 +947,7 @@ ort marchegg {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kr_viertel_unter_dem_wienerwald
+        verwaltung = au_kr_viertel_unter_dem_manhartsberg
         bund       = ja
     }
 }
@@ -993,7 +993,7 @@ ort eckartsau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kr_viertel_unter_dem_wienerwald
+        verwaltung = au_kr_viertel_unter_dem_manhartsberg
         bund       = ja
     }
 }
@@ -1016,7 +1016,7 @@ ort tulln {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kr_viertel_unter_dem_manhartsberg
+        verwaltung = au_kr_viertel_ober_dem_wienerwald
         bund       = ja
     }
 }
@@ -1062,7 +1062,7 @@ ort grossweikersdorf {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kr_viertel_ober_dem_manhartsberg
+        verwaltung = au_kr_viertel_unter_dem_manhartsberg
         bund       = ja
     }
 }
@@ -1085,7 +1085,7 @@ ort fels_am_wagram {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kr_viertel_ober_dem_manhartsberg
+        verwaltung = au_kr_viertel_unter_dem_manhartsberg
         bund       = ja
     }
 }
@@ -1108,7 +1108,7 @@ ort erpersdorf {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kr_viertel_ober_dem_manhartsberg
+        verwaltung = au_kr_viertel_ober_dem_wienerwald
         bund       = ja
     }
 }
@@ -1315,7 +1315,7 @@ ort klosterneuburg {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kr_viertel_unter_dem_manhartsberg
+        verwaltung = au_kr_viertel_unter_dem_wienerwald
         bund       = ja
     }
 }
@@ -1384,7 +1384,7 @@ ort gross_enzersdorf {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kr_viertel_unter_dem_wienerwald
+        verwaltung = au_kr_viertel_unter_dem_manhartsberg
         bund       = ja
     }
 }
@@ -2327,7 +2327,7 @@ ort rohr_im_gebirge {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kr_viertel_ober_dem_wienerwald
+        verwaltung = au_kr_viertel_unter_dem_wienerwald
         bund       = ja
     }
 }
@@ -2350,7 +2350,7 @@ ort schwarzau_im_gebirge {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kr_viertel_ober_dem_wienerwald
+        verwaltung = au_kr_viertel_unter_dem_wienerwald
         bund       = ja
     }
 }
@@ -2419,7 +2419,7 @@ ort gloggnitz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kr_viertel_ober_dem_wienerwald
+        verwaltung = au_kr_viertel_unter_dem_wienerwald
         bund       = ja
     }
 }
@@ -2442,7 +2442,7 @@ ort puchberg_am_schneeberg {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kr_viertel_ober_dem_wienerwald
+        verwaltung = au_kr_viertel_unter_dem_wienerwald
         bund       = ja
     }
 }
@@ -2488,7 +2488,7 @@ ort pernitz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kr_viertel_ober_dem_wienerwald
+        verwaltung = au_kr_viertel_unter_dem_wienerwald
         bund       = ja
     }
 }
@@ -2580,7 +2580,7 @@ ort trattenbach {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kr_viertel_ober_dem_wienerwald
+        verwaltung = au_kr_viertel_unter_dem_wienerwald
         bund       = ja
     }
 }
