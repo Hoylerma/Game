@@ -20,7 +20,7 @@ ort gruenberg {
 
     1846.12.03 = {
         bevoelkerung = 27254
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -43,7 +43,7 @@ ort zuellichau {
 
     1846.12.03 = {
         bevoelkerung = 14956
-        konfession   = { lutherisch = 96 reformiert = 2 katholisch = 1 juedisch = 1 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -66,7 +66,7 @@ ort naumburg_am_bober {
 
     1846.12.03 = {
         bevoelkerung = 22268
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -89,7 +89,7 @@ ort rothenburg_an_der_oder {
 
     1846.12.03 = {
         bevoelkerung = 17041
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -112,7 +112,7 @@ ort bomst {
 
     1846.12.03 = {
         bevoelkerung = 8556
-        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { polen = 60 maerker = 40 }
         verwuestung  = 0
     }
@@ -134,7 +134,7 @@ ort unruhstadt {
 
     1846.12.03 = {
         bevoelkerung = 10560
-        konfession   = { katholisch = 65 lutherisch = 29 juedisch = 6 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { polen = 60 maerker = 40 }
         verwuestung  = 0
     }
@@ -156,7 +156,7 @@ ort schweinitz {
 
     1846.12.03 = {
         bevoelkerung = 16110
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -179,7 +179,7 @@ ort boyadel {
 
     1846.12.03 = {
         bevoelkerung = 23550
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -202,7 +202,7 @@ ort kolzig {
 
     1846.12.03 = {
         bevoelkerung = 13390
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -225,7 +225,7 @@ ort guhrau {
 
     1846.12.03 = {
         bevoelkerung = 21839
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -248,7 +248,7 @@ ort trachenberg {
 
     1846.12.03 = {
         bevoelkerung = 24416
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -271,7 +271,7 @@ ort herrnstadt {
 
     1846.12.03 = {
         bevoelkerung = 15323
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -294,7 +294,7 @@ ort winzig {
 
     1846.12.03 = {
         bevoelkerung = 18473
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -317,7 +317,7 @@ ort glogau {
 
     1846.12.03 = {
         bevoelkerung = 22996
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -340,7 +340,7 @@ ort neusalz {
 
     1846.12.03 = {
         bevoelkerung = 25949
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -363,7 +363,7 @@ ort polkwitz {
 
     1846.12.03 = {
         bevoelkerung = 18434
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -386,7 +386,7 @@ ort freystadt_niederschlesien {
 
     1846.12.03 = {
         bevoelkerung = 23414
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -409,7 +409,7 @@ ort kotzenau {
 
     1846.12.03 = {
         bevoelkerung = 15394
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -432,7 +432,7 @@ ort primkenau {
 
     1846.12.03 = {
         bevoelkerung = 20908
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -455,7 +455,7 @@ ort beuthen_an_der_oder {
 
     1846.12.03 = {
         bevoelkerung = 21781
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -478,7 +478,7 @@ ort gromadka {
 
     1846.12.03 = {
         bevoelkerung = 20836
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -501,7 +501,7 @@ ort radwanice {
 
     1846.12.03 = {
         bevoelkerung = 12888
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -524,7 +524,7 @@ ort kuttlau {
 
     1846.12.03 = {
         bevoelkerung = 15681
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -547,7 +547,7 @@ ort sagan {
 
     1846.12.03 = {
         bevoelkerung = 17820
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -570,7 +570,7 @@ ort sprottau {
 
     1846.12.03 = {
         bevoelkerung = 18115
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -593,7 +593,7 @@ ort halbau {
 
     1846.12.03 = {
         bevoelkerung = 16468
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -616,7 +616,7 @@ ort freiwaldau_niederschlesien {
 
     1846.12.03 = {
         bevoelkerung = 12172
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -639,7 +639,7 @@ ort mallmitz {
 
     1846.12.03 = {
         bevoelkerung = 20263
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -662,7 +662,7 @@ ort bunzlau {
 
     1846.12.03 = {
         bevoelkerung = 28648
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -685,7 +685,7 @@ ort haynau {
 
     1846.12.03 = {
         bevoelkerung = 18115
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -708,7 +708,7 @@ ort goldberg_in_schlesien {
 
     1846.12.03 = {
         bevoelkerung = 17900
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -731,7 +731,7 @@ ort loewenberg {
 
     1846.12.03 = {
         bevoelkerung = 16683
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -754,7 +754,7 @@ ort greiffenberg {
 
     1846.12.03 = {
         bevoelkerung = 14607
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -777,7 +777,7 @@ ort naumburg_am_queis {
 
     1846.12.03 = {
         bevoelkerung = 13962
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -800,7 +800,7 @@ ort laehn {
 
     1846.12.03 = {
         bevoelkerung = 16254
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -823,7 +823,7 @@ ort olszanica {
 
     1846.12.03 = {
         bevoelkerung = 15036
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -846,7 +846,7 @@ ort oels {
 
     1846.12.03 = {
         bevoelkerung = 28825
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -869,7 +869,7 @@ ort militsch {
 
     1846.12.03 = {
         bevoelkerung = 21194
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -892,7 +892,7 @@ ort gross_wartenberg {
 
     1846.12.03 = {
         bevoelkerung = 23127
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -915,7 +915,7 @@ ort festenberg {
 
     1846.12.03 = {
         bevoelkerung = 19476
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -938,7 +938,7 @@ ort bernstadt {
 
     1846.12.03 = {
         bevoelkerung = 23987
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -961,7 +961,7 @@ ort neumittelwalde {
 
     1846.12.03 = {
         bevoelkerung = 10812
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -984,7 +984,7 @@ ort kraschnitz {
 
     1846.12.03 = {
         bevoelkerung = 18259
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -1007,7 +1007,7 @@ ort freyhan {
 
     1846.12.03 = {
         bevoelkerung = 11958
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -1030,7 +1030,7 @@ ort liegnitz {
 
     1846.12.03 = {
         bevoelkerung = 35982
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -1053,7 +1053,7 @@ ort lueben {
 
     1846.12.03 = {
         bevoelkerung = 19325
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -1076,7 +1076,7 @@ ort neumarkt_niederschlesien {
 
     1846.12.03 = {
         bevoelkerung = 12806
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -1099,7 +1099,7 @@ ort dyhernfurth {
 
     1846.12.03 = {
         bevoelkerung = 13311
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -1122,7 +1122,7 @@ ort wohlau {
 
     1846.12.03 = {
         bevoelkerung = 17256
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -1145,7 +1145,7 @@ ort steinau {
 
     1846.12.03 = {
         bevoelkerung = 25412
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -1168,7 +1168,7 @@ ort parchwitz {
 
     1846.12.03 = {
         bevoelkerung = 15251
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -1191,7 +1191,7 @@ ort miekinia {
 
     1846.12.03 = {
         bevoelkerung = 11600
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -1214,7 +1214,7 @@ ort maltsch {
 
     1846.12.03 = {
         bevoelkerung = 16010
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -1237,7 +1237,7 @@ ort raudten {
 
     1846.12.03 = {
         bevoelkerung = 20979
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -1260,7 +1260,7 @@ ort breslau {
 
     1846.12.03 = {
         bevoelkerung = 122077
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -1283,7 +1283,7 @@ ort ohlau {
 
     1846.12.03 = {
         bevoelkerung = 20733
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -1306,7 +1306,7 @@ ort trebnitz {
 
     1846.12.03 = {
         bevoelkerung = 23199
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -1329,7 +1329,7 @@ ort obernigk {
 
     1846.12.03 = {
         bevoelkerung = 17900
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -1352,7 +1352,7 @@ ort jelcz_laskowice {
 
     1846.12.03 = {
         bevoelkerung = 19640
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -1375,7 +1375,7 @@ ort kanth {
 
     1846.12.03 = {
         bevoelkerung = 19118
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -1398,7 +1398,7 @@ ort tschechnitz {
 
     1846.12.03 = {
         bevoelkerung = 11915
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -1421,7 +1421,7 @@ ort rothsuerben {
 
     1846.12.03 = {
         bevoelkerung = 17900
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -1444,7 +1444,7 @@ ort kielczow {
 
     1846.12.03 = {
         bevoelkerung = 14535
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -1467,7 +1467,7 @@ ort schmolz {
 
     1846.12.03 = {
         bevoelkerung = 9881
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -1490,7 +1490,7 @@ ort psary {
 
     1846.12.03 = {
         bevoelkerung = 11385
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -1513,7 +1513,7 @@ ort jauer {
 
     1846.12.03 = {
         bevoelkerung = 25751
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -1536,7 +1536,7 @@ ort striegau {
 
     1846.12.03 = {
         bevoelkerung = 12101
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -1559,7 +1559,7 @@ ort saarau {
 
     1846.12.03 = {
         bevoelkerung = 10669
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -1582,7 +1582,7 @@ ort bolkenhain {
 
     1846.12.03 = {
         bevoelkerung = 18259
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -1605,7 +1605,7 @@ ort kauffung {
 
     1846.12.03 = {
         bevoelkerung = 16841
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -1628,7 +1628,7 @@ ort udanin {
 
     1846.12.03 = {
         bevoelkerung = 17686
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -1651,7 +1651,7 @@ ort hirschberg_in_schlesien {
 
     1846.12.03 = {
         bevoelkerung = 21390
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -1674,7 +1674,7 @@ ort schmiedeberg {
 
     1846.12.03 = {
         bevoelkerung = 11685
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -1697,7 +1697,7 @@ ort schreiberhau {
 
     1846.12.03 = {
         bevoelkerung = 10082
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -1720,7 +1720,7 @@ ort stara_kamienica {
 
     1846.12.03 = {
         bevoelkerung = 9795
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -1743,7 +1743,7 @@ ort brieg {
 
     1846.12.03 = {
         bevoelkerung = 36658
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -1766,7 +1766,7 @@ ort namslau {
 
     1846.12.03 = {
         bevoelkerung = 20972
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -1789,7 +1789,7 @@ ort strehlen {
 
     1846.12.03 = {
         bevoelkerung = 16612
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -1812,7 +1812,7 @@ ort grottkau {
 
     1846.12.03 = {
         bevoelkerung = 15609
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -1835,7 +1835,7 @@ ort loewen_niederschlesien {
 
     1846.12.03 = {
         bevoelkerung = 13246
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -1858,7 +1858,7 @@ ort wansen {
 
     1846.12.03 = {
         bevoelkerung = 14535
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -1881,7 +1881,7 @@ ort carlsruhe {
 
     1846.12.03 = {
         bevoelkerung = 13318
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -1904,7 +1904,7 @@ ort noldau {
 
     1846.12.03 = {
         bevoelkerung = 12029
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -1927,7 +1927,7 @@ ort prieborn {
 
     1846.12.03 = {
         bevoelkerung = 14464
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -1950,7 +1950,7 @@ ort waldenburg_in_schlesien {
 
     1846.12.03 = {
         bevoelkerung = 17425
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -1973,7 +1973,7 @@ ort schweidnitz {
 
     1846.12.03 = {
         bevoelkerung = 20873
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -1996,7 +1996,7 @@ ort freiburg_in_schlesien {
 
     1846.12.03 = {
         bevoelkerung = 13731
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -2019,7 +2019,7 @@ ort landeshut {
 
     1846.12.03 = {
         bevoelkerung = 14313
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -2042,7 +2042,7 @@ ort wuestegiersdorf {
 
     1846.12.03 = {
         bevoelkerung = 11284
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -2065,7 +2065,7 @@ ort liebau {
 
     1846.12.03 = {
         bevoelkerung = 7275
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -2088,7 +2088,7 @@ ort friedland_in_schlesien {
 
     1846.12.03 = {
         bevoelkerung = 8249
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -2111,7 +2111,7 @@ ort reichenbach_in_schlesien {
 
     1846.12.03 = {
         bevoelkerung = 19341
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -2134,7 +2134,7 @@ ort frankenstein {
 
     1846.12.03 = {
         bevoelkerung = 13032
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -2157,7 +2157,7 @@ ort muensterberg {
 
     1846.12.03 = {
         bevoelkerung = 11743
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -2180,7 +2180,7 @@ ort gnadenfrei {
 
     1846.12.03 = {
         bevoelkerung = 9022
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -2203,7 +2203,7 @@ ort zobten {
 
     1846.12.03 = {
         bevoelkerung = 20335
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -2226,7 +2226,7 @@ ort reichenstein {
 
     1846.12.03 = {
         bevoelkerung = 7447
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -2249,7 +2249,7 @@ ort wartha {
 
     1846.12.03 = {
         bevoelkerung = 8535
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -2272,7 +2272,7 @@ ort heidersdorf {
 
     1846.12.03 = {
         bevoelkerung = 16612
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }
@@ -2295,7 +2295,7 @@ ort tepliwoda {
 
     1846.12.03 = {
         bevoelkerung = 10096
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 65 katholisch = 34 juedisch = 1 }
         kultur       = { schlesier = 100 }
         verwuestung  = 0
     }

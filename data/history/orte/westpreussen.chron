@@ -21,7 +21,7 @@ ort gniewino {
 
     1846.12.03 = {
         bevoelkerung = 6713
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -43,7 +43,7 @@ ort leczyce {
 
     1846.12.03 = {
         bevoelkerung = 7865
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -65,7 +65,7 @@ ort krokowa {
 
     1846.12.03 = {
         bevoelkerung = 7255
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -87,7 +87,7 @@ ort choczewo {
 
     1846.12.03 = {
         bevoelkerung = 8238
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -109,7 +109,7 @@ ort gdingen {
 
     1846.12.03 = {
         bevoelkerung = 2941
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -131,7 +131,7 @@ ort neustadt {
 
     1846.12.03 = {
         bevoelkerung = 9109
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -153,7 +153,7 @@ ort rumia {
 
     1846.12.03 = {
         bevoelkerung = 9220
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -175,7 +175,7 @@ ort zoppot {
 
     1846.12.03 = {
         bevoelkerung = 7197
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -197,7 +197,7 @@ ort putzig {
 
     1846.12.03 = {
         bevoelkerung = 5548
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -219,7 +219,7 @@ ort wladyslawowo {
 
     1846.12.03 = {
         bevoelkerung = 2441
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -241,7 +241,7 @@ ort hela {
 
     1846.12.03 = {
         bevoelkerung = 580
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -263,7 +263,7 @@ ort luzino {
 
     1846.12.03 = {
         bevoelkerung = 6408
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -285,7 +285,7 @@ ort heisternest {
 
     1846.12.03 = {
         bevoelkerung = 519
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -307,7 +307,7 @@ ort szemud {
 
     1846.12.03 = {
         bevoelkerung = 5255
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -329,7 +329,7 @@ ort bojano {
 
     1846.12.03 = {
         bevoelkerung = 4441
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -351,7 +351,7 @@ ort danzig {
 
     1846.12.03 = {
         bevoelkerung = 69004
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -373,7 +373,7 @@ ort dirschau {
 
     1846.12.03 = {
         bevoelkerung = 12715
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -395,7 +395,7 @@ ort praust {
 
     1846.12.03 = {
         bevoelkerung = 7223
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -417,7 +417,7 @@ ort hohenstein_westpreussen {
 
     1846.12.03 = {
         bevoelkerung = 4136
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -439,7 +439,7 @@ ort gross_trampken {
 
     1846.12.03 = {
         bevoelkerung = 4780
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -461,7 +461,7 @@ ort gross_zuender {
 
     1846.12.03 = {
         bevoelkerung = 9221
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -483,7 +483,7 @@ ort elbing {
 
     1846.12.03 = {
         bevoelkerung = 35612
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -505,7 +505,7 @@ ort marienburg {
 
     1846.12.03 = {
         bevoelkerung = 9644
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -527,7 +527,7 @@ ort tiegenhof {
 
     1846.12.03 = {
         bevoelkerung = 6916
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -549,7 +549,7 @@ ort neuteich {
 
     1846.12.03 = {
         bevoelkerung = 6102
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -571,7 +571,7 @@ ort sztutowo {
 
     1846.12.03 = {
         bevoelkerung = 5065
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -593,7 +593,7 @@ ort krynica_morska {
 
     1846.12.03 = {
         bevoelkerung = 1007
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -615,7 +615,7 @@ ort altfelde {
 
     1846.12.03 = {
         bevoelkerung = 8543
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -637,7 +637,7 @@ ort koscierzyna {
 
     1846.12.03 = {
         bevoelkerung = 8526
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -659,7 +659,7 @@ ort kartuzy {
 
     1846.12.03 = {
         bevoelkerung = 7831
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -681,7 +681,7 @@ ort sierakowice {
 
     1846.12.03 = {
         bevoelkerung = 7492
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -703,7 +703,7 @@ ort zukowo {
 
     1846.12.03 = {
         bevoelkerung = 5153
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -725,7 +725,7 @@ ort stezyca {
 
     1846.12.03 = {
         bevoelkerung = 6611
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -747,7 +747,7 @@ ort kolbudy {
 
     1846.12.03 = {
         bevoelkerung = 4441
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -769,7 +769,7 @@ ort mariensee {
 
     1846.12.03 = {
         bevoelkerung = 5560
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -791,7 +791,7 @@ ort stara_kiszewa {
 
     1846.12.03 = {
         bevoelkerung = 7831
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -813,7 +813,7 @@ ort suleczyno {
 
     1846.12.03 = {
         bevoelkerung = 7391
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -835,7 +835,7 @@ ort grabowo_koscierskie {
 
     1846.12.03 = {
         bevoelkerung = 5323
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -857,7 +857,7 @@ ort linia {
 
     1846.12.03 = {
         bevoelkerung = 7764
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -879,7 +879,7 @@ ort liniewo {
 
     1846.12.03 = {
         bevoelkerung = 6204
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -901,7 +901,7 @@ ort starogard_gdanski {
 
     1846.12.03 = {
         bevoelkerung = 10007
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -923,7 +923,7 @@ ort pelplin {
 
     1846.12.03 = {
         bevoelkerung = 5187
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -945,7 +945,7 @@ ort skarszewy {
 
     1846.12.03 = {
         bevoelkerung = 6747
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -967,7 +967,7 @@ ort skorcz {
 
     1846.12.03 = {
         bevoelkerung = 8408
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -989,7 +989,7 @@ ort hoch_stueblau {
 
     1846.12.03 = {
         bevoelkerung = 6035
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -1011,7 +1011,7 @@ ort subkowy {
 
     1846.12.03 = {
         bevoelkerung = 5763
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -1033,7 +1033,7 @@ ort smetowo_graniczne {
 
     1846.12.03 = {
         bevoelkerung = 6984
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -1055,7 +1055,7 @@ ort lubichowo {
 
     1846.12.03 = {
         bevoelkerung = 6374
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -1077,7 +1077,7 @@ ort stuhm {
 
     1846.12.03 = {
         bevoelkerung = 5594
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -1099,7 +1099,7 @@ ort gniew {
 
     1846.12.03 = {
         bevoelkerung = 7096
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -1121,7 +1121,7 @@ ort christburg {
 
     1846.12.03 = {
         bevoelkerung = 11764
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -1143,7 +1143,7 @@ ort saalfeld_westpreussen {
 
     1846.12.03 = {
         bevoelkerung = 6835
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -1165,7 +1165,7 @@ ort rehhof {
 
     1846.12.03 = {
         bevoelkerung = 4848
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -1187,7 +1187,7 @@ ort niklaskirchen {
 
     1846.12.03 = {
         bevoelkerung = 5967
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -1209,7 +1209,7 @@ ort czersk {
 
     1846.12.03 = {
         bevoelkerung = 10035
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -1231,7 +1231,7 @@ ort sliwice {
 
     1846.12.03 = {
         bevoelkerung = 8848
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -1253,7 +1253,7 @@ ort brusy {
 
     1846.12.03 = {
         bevoelkerung = 12578
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -1275,7 +1275,7 @@ ort czarna_woda {
 
     1846.12.03 = {
         bevoelkerung = 7052
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -1297,7 +1297,7 @@ ort lipusz {
 
     1846.12.03 = {
         bevoelkerung = 5289
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -1319,7 +1319,7 @@ ort dziemiany {
 
     1846.12.03 = {
         bevoelkerung = 7526
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -1341,7 +1341,7 @@ ort karsin {
 
     1846.12.03 = {
         bevoelkerung = 6882
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -1363,7 +1363,7 @@ ort konitz_westpreussen {
 
     1846.12.03 = {
         bevoelkerung = 15557
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -1385,7 +1385,7 @@ ort schlochau {
 
     1846.12.03 = {
         bevoelkerung = 9154
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -1407,7 +1407,7 @@ ort hammerstein {
 
     1846.12.03 = {
         bevoelkerung = 9933
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -1429,7 +1429,7 @@ ort preussisch_friedland {
 
     1846.12.03 = {
         bevoelkerung = 14408
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -1451,7 +1451,7 @@ ort ratzebuhr {
 
     1846.12.03 = {
         bevoelkerung = 9866
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -1473,7 +1473,7 @@ ort prechlau {
 
     1846.12.03 = {
         bevoelkerung = 11188
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -1495,7 +1495,7 @@ ort floetenstein {
 
     1846.12.03 = {
         bevoelkerung = 9221
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -1517,7 +1517,7 @@ ort rzeczenica {
 
     1846.12.03 = {
         bevoelkerung = 8408
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -1539,7 +1539,7 @@ ort deutsch_eylau {
 
     1846.12.03 = {
         bevoelkerung = 15919
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -1561,7 +1561,7 @@ ort riesenburg {
 
     1846.12.03 = {
         bevoelkerung = 7458
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -1583,7 +1583,7 @@ ort lubawa {
 
     1846.12.03 = {
         bevoelkerung = 10035
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -1605,7 +1605,7 @@ ort rosenberg_westpreussen {
 
     1846.12.03 = {
         bevoelkerung = 8950
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -1627,7 +1627,7 @@ ort freystadt_westpreussen {
 
     1846.12.03 = {
         bevoelkerung = 7526
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -1649,7 +1649,7 @@ ort biskupiec {
 
     1846.12.03 = {
         bevoelkerung = 9357
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -1671,7 +1671,7 @@ ort tuchola {
 
     1846.12.03 = {
         bevoelkerung = 9262
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -1693,7 +1693,7 @@ ort zempelburg {
 
     1846.12.03 = {
         bevoelkerung = 5899
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -1715,7 +1715,7 @@ ort vandsburg {
 
     1846.12.03 = {
         bevoelkerung = 5696
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -1737,7 +1737,7 @@ ort kamien_krajenski {
 
     1846.12.03 = {
         bevoelkerung = 7458
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -1759,7 +1759,7 @@ ort gostycyn {
 
     1846.12.03 = {
         bevoelkerung = 5594
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -1781,7 +1781,7 @@ ort cekcyn {
 
     1846.12.03 = {
         bevoelkerung = 7458
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -1803,7 +1803,7 @@ ort sypniewo {
 
     1846.12.03 = {
         bevoelkerung = 6780
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -1825,7 +1825,7 @@ ort sosno {
 
     1846.12.03 = {
         bevoelkerung = 7492
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -1847,7 +1847,7 @@ ort kesowo {
 
     1846.12.03 = {
         bevoelkerung = 6068
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -1869,7 +1869,7 @@ ort graudenz {
 
     1846.12.03 = {
         bevoelkerung = 20856
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -1891,7 +1891,7 @@ ort marienwerder {
 
     1846.12.03 = {
         bevoelkerung = 10287
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -1913,7 +1913,7 @@ ort briesen {
 
     1846.12.03 = {
         bevoelkerung = 7382
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -1935,7 +1935,7 @@ ort nowe {
 
     1846.12.03 = {
         bevoelkerung = 6875
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -1957,7 +1957,7 @@ ort jablonowo_pomorskie {
 
     1846.12.03 = {
         bevoelkerung = 8848
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -1979,7 +1979,7 @@ ort lasin {
 
     1846.12.03 = {
         bevoelkerung = 7764
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -2001,7 +2001,7 @@ ort radzyn_chelminski {
 
     1846.12.03 = {
         bevoelkerung = 7289
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -2023,7 +2023,7 @@ ort garnsee {
 
     1846.12.03 = {
         bevoelkerung = 8272
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -2045,7 +2045,7 @@ ort warlubie {
 
     1846.12.03 = {
         bevoelkerung = 6170
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -2067,7 +2067,7 @@ ort debowa_laka {
 
     1846.12.03 = {
         bevoelkerung = 6306
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -2089,7 +2089,7 @@ ort kulm {
 
     1846.12.03 = {
         bevoelkerung = 12966
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -2111,7 +2111,7 @@ ort pruszcz {
 
     1846.12.03 = {
         bevoelkerung = 9255
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -2133,7 +2133,7 @@ ort jezewo {
 
     1846.12.03 = {
         bevoelkerung = 9221
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -2155,7 +2155,7 @@ ort osie {
 
     1846.12.03 = {
         bevoelkerung = 9187
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -2177,7 +2177,7 @@ ort bukowiec {
 
     1846.12.03 = {
         bevoelkerung = 6170
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -2199,7 +2199,7 @@ ort lubiewo {
 
     1846.12.03 = {
         bevoelkerung = 6780
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -2221,7 +2221,7 @@ ort lniano {
 
     1846.12.03 = {
         bevoelkerung = 6577
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -2243,7 +2243,7 @@ ort deutsch_krone {
 
     1846.12.03 = {
         bevoelkerung = 21022
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -2265,7 +2265,7 @@ ort flatow_i_westpr {
 
     1846.12.03 = {
         bevoelkerung = 11323
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -2287,7 +2287,7 @@ ort jastrow {
 
     1846.12.03 = {
         bevoelkerung = 6848
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -2309,7 +2309,7 @@ ort maerkisch_friedland {
 
     1846.12.03 = {
         bevoelkerung = 9425
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -2331,7 +2331,7 @@ ort schloppe {
 
     1846.12.03 = {
         bevoelkerung = 14036
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -2353,7 +2353,7 @@ ort tuetz {
 
     1846.12.03 = {
         bevoelkerung = 10442
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -2375,7 +2375,7 @@ ort tarnowka {
 
     1846.12.03 = {
         bevoelkerung = 8509
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -2397,7 +2397,7 @@ ort zippnow {
 
     1846.12.03 = {
         bevoelkerung = 14951
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -2419,7 +2419,7 @@ ort brodnica {
 
     1846.12.03 = {
         bevoelkerung = 13389
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -2441,7 +2441,7 @@ ort nowe_miasto_lubawskie {
 
     1846.12.03 = {
         bevoelkerung = 8713
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -2463,7 +2463,7 @@ ort gorzno {
 
     1846.12.03 = {
         bevoelkerung = 9832
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -2485,7 +2485,7 @@ ort brzozie {
 
     1846.12.03 = {
         bevoelkerung = 6848
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -2507,7 +2507,7 @@ ort thorn {
 
     1846.12.03 = {
         bevoelkerung = 24062
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -2529,7 +2529,7 @@ ort chelmza {
 
     1846.12.03 = {
         bevoelkerung = 7865
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -2551,7 +2551,7 @@ ort golub_dobrzyn {
 
     1846.12.03 = {
         bevoelkerung = 5628
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -2573,7 +2573,7 @@ ort kowalewo_pomorskie {
 
     1846.12.03 = {
         bevoelkerung = 6814
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -2595,7 +2595,7 @@ ort unislaw {
 
     1846.12.03 = {
         bevoelkerung = 6374
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -2617,7 +2617,7 @@ ort czernikowo {
 
     1846.12.03 = {
         bevoelkerung = 6272
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -2639,7 +2639,7 @@ ort lubicz_gorny {
 
     1846.12.03 = {
         bevoelkerung = 7221
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -2661,7 +2661,7 @@ ort lisewo {
 
     1846.12.03 = {
         bevoelkerung = 9967
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -2683,7 +2683,7 @@ ort zbojno {
 
     1846.12.03 = {
         bevoelkerung = 8306
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -2705,7 +2705,7 @@ ort lubianka {
 
     1846.12.03 = {
         bevoelkerung = 6814
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }
@@ -2727,7 +2727,7 @@ ort ciechocin {
 
     1846.12.03 = {
         bevoelkerung = 4645
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { katholisch = 50 lutherisch = 47 juedisch = 3 }
         kultur       = { polen = 50 altpreussen = 35 kaschuben = 15 }
         verwuestung  = 0
     }

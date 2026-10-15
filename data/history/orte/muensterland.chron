@@ -20,7 +20,7 @@ ort rheine {
 
     1846.12.03 = {
         bevoelkerung = 12340
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
@@ -43,7 +43,7 @@ ort ibbenbueren {
 
     1846.12.03 = {
         bevoelkerung = 10789
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
@@ -66,7 +66,7 @@ ort hoerstel {
 
     1846.12.03 = {
         bevoelkerung = 5555
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
@@ -89,7 +89,7 @@ ort westerkappeln {
 
     1846.12.03 = {
         bevoelkerung = 6102
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
@@ -112,7 +112,7 @@ ort recke {
 
     1846.12.03 = {
         bevoelkerung = 7995
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
@@ -135,7 +135,7 @@ ort gronau_muensterland {
 
     1846.12.03 = {
         bevoelkerung = 10454
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
@@ -158,7 +158,7 @@ ort steinfurt {
 
     1846.12.03 = {
         bevoelkerung = 9733
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
@@ -181,7 +181,7 @@ ort ahaus {
 
     1846.12.03 = {
         bevoelkerung = 11628
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
@@ -204,7 +204,7 @@ ort stadtlohn {
 
     1846.12.03 = {
         bevoelkerung = 8447
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
@@ -227,7 +227,7 @@ ort vreden {
 
     1846.12.03 = {
         bevoelkerung = 8048
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
@@ -250,7 +250,7 @@ ort ochtrup {
 
     1846.12.03 = {
         bevoelkerung = 6060
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
@@ -273,7 +273,7 @@ ort schoeppingen {
 
     1846.12.03 = {
         bevoelkerung = 7785
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
@@ -296,7 +296,7 @@ ort muenster {
 
     1846.12.03 = {
         bevoelkerung = 31575
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
@@ -319,7 +319,7 @@ ort emsdetten {
 
     1846.12.03 = {
         bevoelkerung = 11667
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
@@ -342,7 +342,7 @@ ort greven {
 
     1846.12.03 = {
         bevoelkerung = 10701
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
@@ -365,7 +365,7 @@ ort telgte {
 
     1846.12.03 = {
         bevoelkerung = 8425
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
@@ -388,7 +388,7 @@ ort lengerich {
 
     1846.12.03 = {
         bevoelkerung = 8155
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
@@ -411,7 +411,7 @@ ort ostbevern {
 
     1846.12.03 = {
         bevoelkerung = 6018
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
@@ -434,7 +434,7 @@ ort altenberge {
 
     1846.12.03 = {
         bevoelkerung = 8416
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
@@ -457,7 +457,7 @@ ort lienen {
 
     1846.12.03 = {
         bevoelkerung = 4461
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
@@ -480,7 +480,7 @@ ort ladbergen {
 
     1846.12.03 = {
         bevoelkerung = 6018
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
@@ -503,7 +503,7 @@ ort luedinghausen {
 
     1846.12.03 = {
         bevoelkerung = 7593
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
@@ -526,7 +526,7 @@ ort ascheberg {
 
     1846.12.03 = {
         bevoelkerung = 6817
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
@@ -549,7 +549,7 @@ ort drensteinfurt {
 
     1846.12.03 = {
         bevoelkerung = 4587
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
@@ -572,7 +572,7 @@ ort senden_muensterland {
 
     1846.12.03 = {
         bevoelkerung = 9143
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
@@ -595,7 +595,7 @@ ort sendenhorst {
 
     1846.12.03 = {
         bevoelkerung = 5807
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
@@ -618,7 +618,7 @@ ort ahlen {
 
     1846.12.03 = {
         bevoelkerung = 10001
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
@@ -641,7 +641,7 @@ ort warendorf {
 
     1846.12.03 = {
         bevoelkerung = 12820
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
@@ -664,7 +664,7 @@ ort beckum {
 
     1846.12.03 = {
         bevoelkerung = 9584
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
@@ -687,7 +687,7 @@ ort oelde {
 
     1846.12.03 = {
         bevoelkerung = 7490
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
@@ -710,7 +710,7 @@ ort ennigerloh {
 
     1846.12.03 = {
         bevoelkerung = 6857
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
@@ -733,7 +733,7 @@ ort wadersloh {
 
     1846.12.03 = {
         bevoelkerung = 7953
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
@@ -756,7 +756,7 @@ ort beelen {
 
     1846.12.03 = {
         bevoelkerung = 4587
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
@@ -779,7 +779,7 @@ ort marl {
 
     1846.12.03 = {
         bevoelkerung = 6545
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
@@ -802,7 +802,7 @@ ort coesfeld {
 
     1846.12.03 = {
         bevoelkerung = 10720
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
@@ -825,7 +825,7 @@ ort borken_muensterland {
 
     1846.12.03 = {
         bevoelkerung = 9419
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
@@ -848,7 +848,7 @@ ort bocholt {
 
     1846.12.03 = {
         bevoelkerung = 12461
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
@@ -871,7 +871,7 @@ ort dorsten {
 
     1846.12.03 = {
         bevoelkerung = 7376
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
@@ -894,7 +894,7 @@ ort duelmen {
 
     1846.12.03 = {
         bevoelkerung = 10880
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
@@ -917,7 +917,7 @@ ort haltern_am_see {
 
     1846.12.03 = {
         bevoelkerung = 10129
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
@@ -940,7 +940,7 @@ ort nottuln {
 
     1846.12.03 = {
         bevoelkerung = 9779
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
@@ -963,7 +963,7 @@ ort velen {
 
     1846.12.03 = {
         bevoelkerung = 6859
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
@@ -986,7 +986,7 @@ ort raesfeld {
 
     1846.12.03 = {
         bevoelkerung = 6060
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
@@ -1009,7 +1009,7 @@ ort isselburg {
 
     1846.12.03 = {
         bevoelkerung = 4082
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
@@ -1032,7 +1032,7 @@ ort klein_reken {
 
     1846.12.03 = {
         bevoelkerung = 7533
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
@@ -1055,7 +1055,7 @@ ort gelsenkirchen {
 
     1846.12.03 = {
         bevoelkerung = 4703
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
@@ -1078,7 +1078,7 @@ ort recklinghausen {
 
     1846.12.03 = {
         bevoelkerung = 7540
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
@@ -1101,7 +1101,7 @@ ort bottrop {
 
     1846.12.03 = {
         bevoelkerung = 6282
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
@@ -1124,7 +1124,7 @@ ort castrop_rauxel {
 
     1846.12.03 = {
         bevoelkerung = 6124
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
@@ -1147,7 +1147,7 @@ ort gladbeck {
 
     1846.12.03 = {
         bevoelkerung = 5961
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
@@ -1170,7 +1170,7 @@ ort datteln {
 
     1846.12.03 = {
         bevoelkerung = 8974
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }

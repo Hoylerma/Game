@@ -63,6 +63,7 @@ class TestSchaetzen(unittest.TestCase):
         daten = [
             dict(zip(bv.MERKMAL_SPALTEN, ("staat:AAA", "lutherisch 100", "", "x", "ungeprueft", "q")), _zeile="2"),
             dict(zip(bv.MERKMAL_SPALTEN, ("irgendwo", "", "", "", "ungeprueft", "q")), _zeile="3"),
+            dict(zip(bv.MERKMAL_SPALTEN, ("staat:AAA", "", "", "1.2", "ungeprueft", "q")), _zeile="4"),
         ]
         _, fehler = bv.lies_merkmale(daten)
         self.assertEqual(
@@ -71,6 +72,7 @@ class TestSchaetzen(unittest.TestCase):
                 "merkmale_1846.csv:2: ungültige Anteile in Spalte 'konfession': 'lutherisch 100'",
                 "merkmale_1846.csv:2: ungültige Dichte 'x'",
                 "merkmale_1846.csv:3: ungültiges Gebiet 'irgendwo'",
+                "merkmale_1846.csv:4: Gebiet 'staat:AAA' schon in Zeile 2",
             ],
         )
 

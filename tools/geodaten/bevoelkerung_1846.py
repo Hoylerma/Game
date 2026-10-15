@@ -113,12 +113,18 @@ class Ort:
 
 def lies_merkmale(zeilen: list[dict[str, str]]) -> tuple[list[Merkmal], list[str]]:
     merkmale, fehler = [], []
+    erste: dict[str, int] = {}
     for z in zeilen:
         nr = int(z["_zeile"])
         rang = rang_merkmal(z["gebiet"])
         if rang == 0:
             fehler.append(f"merkmale_1846.csv:{nr}: ungültiges Gebiet {z['gebiet']!r}")
             continue
+        # Eine Zeile je Gebiet; eine zweite würde die erste beim Nachschlagen ganz verdecken.
+        if z["gebiet"] in erste:
+            fehler.append(f"merkmale_1846.csv:{nr}: Gebiet {z['gebiet']!r} schon in Zeile {erste[z['gebiet']]}")
+            continue
+        erste[z["gebiet"]] = nr
         for spalte in ("konfession", "kultur"):
             if z[spalte] and not RE_ANTEILE.fullmatch(z[spalte]):
                 fehler.append(f"merkmale_1846.csv:{nr}: ungültige Anteile in Spalte {spalte!r}: {z[spalte]!r}")
