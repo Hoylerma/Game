@@ -1,3 +1,3 @@
-id;datei;name;art;ueber;staat;sicherheit;quelle
-sl_land;sued;Land Südland;land;;BBB;gesichert;Testquelle
-sl_burg;sued;Kreis Burg;kreis;sl_land;BBB;schaetzung;Testquelle
+id;datei;name;art;ueber;staat;sitz;sicherheit;quelle
+sl_land;sued;Land Südland;land;;BBB;;gesichert;Testquelle
+sl_burg;sued;Kreis Burg;kreis;sl_land;BBB;burg;schaetzung;Testquelle

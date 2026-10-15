@@ -212,7 +212,7 @@ ort bad_kreuznach {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_kreuznach
         bund       = ja
     }
 }
@@ -281,7 +281,7 @@ ort kirn {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_simmern
         bund       = ja
     }
 }
@@ -349,7 +349,7 @@ ort waldboeckelheim {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_kreuznach
         bund       = ja
     }
 }
@@ -372,7 +372,7 @@ ort monzingen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_kreuznach
         bund       = ja
     }
 }
@@ -395,7 +395,7 @@ ort spabruecken {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_kreuznach
         bund       = ja
     }
 }

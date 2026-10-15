@@ -20,14 +20,14 @@ ort rheine {
 
     1846.12.03 = {
         bevoelkerung = 12340
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_steinfurt
         bund       = ja
     }
 }
@@ -43,14 +43,14 @@ ort ibbenbueren {
 
     1846.12.03 = {
         bevoelkerung = 10789
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_tecklenburg
         bund       = ja
     }
 }
@@ -66,14 +66,14 @@ ort hoerstel {
 
     1846.12.03 = {
         bevoelkerung = 5555
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_tecklenburg
         bund       = ja
     }
 }
@@ -89,14 +89,14 @@ ort westerkappeln {
 
     1846.12.03 = {
         bevoelkerung = 6102
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_tecklenburg
         bund       = ja
     }
 }
@@ -112,14 +112,14 @@ ort recke {
 
     1846.12.03 = {
         bevoelkerung = 7995
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_tecklenburg
         bund       = ja
     }
 }
@@ -135,14 +135,14 @@ ort gronau_muensterland {
 
     1846.12.03 = {
         bevoelkerung = 10454
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_ahaus
         bund       = ja
     }
 }
@@ -158,14 +158,14 @@ ort steinfurt {
 
     1846.12.03 = {
         bevoelkerung = 9733
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_steinfurt
         bund       = ja
     }
 }
@@ -181,14 +181,14 @@ ort ahaus {
 
     1846.12.03 = {
         bevoelkerung = 11628
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_ahaus
         bund       = ja
     }
 }
@@ -204,14 +204,14 @@ ort stadtlohn {
 
     1846.12.03 = {
         bevoelkerung = 8447
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_ahaus
         bund       = ja
     }
 }
@@ -227,14 +227,14 @@ ort vreden {
 
     1846.12.03 = {
         bevoelkerung = 8048
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_ahaus
         bund       = ja
     }
 }
@@ -250,14 +250,14 @@ ort ochtrup {
 
     1846.12.03 = {
         bevoelkerung = 6060
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_steinfurt
         bund       = ja
     }
 }
@@ -273,14 +273,14 @@ ort schoeppingen {
 
     1846.12.03 = {
         bevoelkerung = 7785
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_steinfurt
         bund       = ja
     }
 }
@@ -296,14 +296,14 @@ ort muenster {
 
     1846.12.03 = {
         bevoelkerung = 31575
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_muenster
         bund       = ja
     }
 }
@@ -319,14 +319,14 @@ ort emsdetten {
 
     1846.12.03 = {
         bevoelkerung = 11667
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_steinfurt
         bund       = ja
     }
 }
@@ -342,14 +342,14 @@ ort greven {
 
     1846.12.03 = {
         bevoelkerung = 10701
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_muenster
         bund       = ja
     }
 }
@@ -365,14 +365,14 @@ ort telgte {
 
     1846.12.03 = {
         bevoelkerung = 8425
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_muenster
         bund       = ja
     }
 }
@@ -388,14 +388,14 @@ ort lengerich {
 
     1846.12.03 = {
         bevoelkerung = 8155
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_tecklenburg
         bund       = ja
     }
 }
@@ -411,14 +411,14 @@ ort ostbevern {
 
     1846.12.03 = {
         bevoelkerung = 6018
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_warendorf
         bund       = ja
     }
 }
@@ -434,14 +434,14 @@ ort altenberge {
 
     1846.12.03 = {
         bevoelkerung = 8416
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_steinfurt
         bund       = ja
     }
 }
@@ -457,14 +457,14 @@ ort lienen {
 
     1846.12.03 = {
         bevoelkerung = 4461
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_tecklenburg
         bund       = ja
     }
 }
@@ -480,14 +480,14 @@ ort ladbergen {
 
     1846.12.03 = {
         bevoelkerung = 6018
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_tecklenburg
         bund       = ja
     }
 }
@@ -503,14 +503,14 @@ ort luedinghausen {
 
     1846.12.03 = {
         bevoelkerung = 7593
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_luedinghausen
         bund       = ja
     }
 }
@@ -526,14 +526,14 @@ ort ascheberg {
 
     1846.12.03 = {
         bevoelkerung = 6817
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_luedinghausen
         bund       = ja
     }
 }
@@ -549,14 +549,14 @@ ort drensteinfurt {
 
     1846.12.03 = {
         bevoelkerung = 4587
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_hamm
         bund       = ja
     }
 }
@@ -572,14 +572,14 @@ ort senden_muensterland {
 
     1846.12.03 = {
         bevoelkerung = 9143
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_luedinghausen
         bund       = ja
     }
 }
@@ -595,14 +595,14 @@ ort sendenhorst {
 
     1846.12.03 = {
         bevoelkerung = 5807
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_warendorf
         bund       = ja
     }
 }
@@ -618,14 +618,14 @@ ort ahlen {
 
     1846.12.03 = {
         bevoelkerung = 10001
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_hamm
         bund       = ja
     }
 }
@@ -641,14 +641,14 @@ ort warendorf {
 
     1846.12.03 = {
         bevoelkerung = 12820
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_warendorf
         bund       = ja
     }
 }
@@ -664,14 +664,14 @@ ort beckum {
 
     1846.12.03 = {
         bevoelkerung = 9584
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_beckum
         bund       = ja
     }
 }
@@ -687,14 +687,14 @@ ort oelde {
 
     1846.12.03 = {
         bevoelkerung = 7490
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_wiedenbrueck
         bund       = ja
     }
 }
@@ -710,14 +710,14 @@ ort ennigerloh {
 
     1846.12.03 = {
         bevoelkerung = 6857
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_beckum
         bund       = ja
     }
 }
@@ -733,14 +733,14 @@ ort wadersloh {
 
     1846.12.03 = {
         bevoelkerung = 7953
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_lippstadt
         bund       = ja
     }
 }
@@ -756,14 +756,14 @@ ort beelen {
 
     1846.12.03 = {
         bevoelkerung = 4587
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_warendorf
         bund       = ja
     }
 }
@@ -779,14 +779,14 @@ ort marl {
 
     1846.12.03 = {
         bevoelkerung = 6545
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_recklinghausen
         bund       = ja
     }
 }
@@ -802,14 +802,14 @@ ort coesfeld {
 
     1846.12.03 = {
         bevoelkerung = 10720
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_coesfeld
         bund       = ja
     }
 }
@@ -825,14 +825,14 @@ ort borken_muensterland {
 
     1846.12.03 = {
         bevoelkerung = 9419
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_borken
         bund       = ja
     }
 }
@@ -848,14 +848,14 @@ ort bocholt {
 
     1846.12.03 = {
         bevoelkerung = 12461
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_borken
         bund       = ja
     }
 }
@@ -871,14 +871,14 @@ ort dorsten {
 
     1846.12.03 = {
         bevoelkerung = 7376
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_recklinghausen
         bund       = ja
     }
 }
@@ -894,14 +894,14 @@ ort duelmen {
 
     1846.12.03 = {
         bevoelkerung = 10880
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_luedinghausen
         bund       = ja
     }
 }
@@ -917,14 +917,14 @@ ort haltern_am_see {
 
     1846.12.03 = {
         bevoelkerung = 10129
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_recklinghausen
         bund       = ja
     }
 }
@@ -940,14 +940,14 @@ ort nottuln {
 
     1846.12.03 = {
         bevoelkerung = 9779
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_coesfeld
         bund       = ja
     }
 }
@@ -963,14 +963,14 @@ ort velen {
 
     1846.12.03 = {
         bevoelkerung = 6859
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_borken
         bund       = ja
     }
 }
@@ -986,14 +986,14 @@ ort raesfeld {
 
     1846.12.03 = {
         bevoelkerung = 6060
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_borken
         bund       = ja
     }
 }
@@ -1009,14 +1009,14 @@ ort isselburg {
 
     1846.12.03 = {
         bevoelkerung = 4082
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_borken
         bund       = ja
     }
 }
@@ -1032,14 +1032,14 @@ ort klein_reken {
 
     1846.12.03 = {
         bevoelkerung = 7533
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_borken
         bund       = ja
     }
 }
@@ -1055,14 +1055,14 @@ ort gelsenkirchen {
 
     1846.12.03 = {
         bevoelkerung = 4703
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_bochum
         bund       = ja
     }
 }
@@ -1078,14 +1078,14 @@ ort recklinghausen {
 
     1846.12.03 = {
         bevoelkerung = 7540
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_recklinghausen
         bund       = ja
     }
 }
@@ -1101,14 +1101,14 @@ ort bottrop {
 
     1846.12.03 = {
         bevoelkerung = 6282
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_bochum
         bund       = ja
     }
 }
@@ -1124,14 +1124,14 @@ ort castrop_rauxel {
 
     1846.12.03 = {
         bevoelkerung = 6124
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_recklinghausen
         bund       = ja
     }
 }
@@ -1147,14 +1147,14 @@ ort gladbeck {
 
     1846.12.03 = {
         bevoelkerung = 5961
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_recklinghausen
         bund       = ja
     }
 }
@@ -1170,14 +1170,14 @@ ort datteln {
 
     1846.12.03 = {
         bevoelkerung = 8974
-        konfession   = { katholisch = 56 lutherisch = 40 reformiert = 3 juedisch = 1 }
+        konfession   = { katholisch = 95 lutherisch = 4 juedisch = 1 }
         kultur       = { westfalen = 100 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_westfalen
+        verwaltung = pr_kr_recklinghausen
         bund       = ja
     }
 }

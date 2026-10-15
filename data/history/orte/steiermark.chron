@@ -28,7 +28,7 @@ ort muerzzuschlag {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_brucker_kreis
         bund       = ja
     }
 }
@@ -51,7 +51,7 @@ ort kindberg {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_brucker_kreis
         bund       = ja
     }
 }
@@ -74,7 +74,7 @@ ort krieglach {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_brucker_kreis
         bund       = ja
     }
 }
@@ -97,7 +97,7 @@ ort birkfeld {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_brucker_kreis
         bund       = ja
     }
 }
@@ -120,7 +120,7 @@ ort mariazell {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_brucker_kreis
         bund       = ja
     }
 }
@@ -143,7 +143,7 @@ ort fischbach {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_brucker_kreis
         bund       = ja
     }
 }
@@ -166,7 +166,7 @@ ort rettenegg {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_brucker_kreis
         bund       = ja
     }
 }
@@ -189,7 +189,7 @@ ort muerzsteg {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_brucker_kreis
         bund       = ja
     }
 }
@@ -212,7 +212,7 @@ ort liezen {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_judenburger_kreis
         bund       = ja
     }
 }
@@ -235,7 +235,7 @@ ort trieben {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_judenburger_kreis
         bund       = ja
     }
 }
@@ -258,7 +258,7 @@ ort rottenmann {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_judenburger_kreis
         bund       = ja
     }
 }
@@ -281,7 +281,7 @@ ort admont {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_judenburger_kreis
         bund       = ja
     }
 }
@@ -304,7 +304,7 @@ ort stainach {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_judenburger_kreis
         bund       = ja
     }
 }
@@ -327,7 +327,7 @@ ort oppenberg {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_judenburger_kreis
         bund       = ja
     }
 }
@@ -350,7 +350,7 @@ ort eisenerz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_brucker_kreis
         bund       = ja
     }
 }
@@ -373,7 +373,7 @@ ort altenmarkt_bei_sankt_gallen {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_brucker_kreis
         bund       = ja
     }
 }
@@ -396,7 +396,7 @@ ort hieflau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_brucker_kreis
         bund       = ja
     }
 }
@@ -419,7 +419,7 @@ ort wildalpen {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_brucker_kreis
         bund       = ja
     }
 }
@@ -442,7 +442,7 @@ ort palfau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_brucker_kreis
         bund       = ja
     }
 }
@@ -465,7 +465,7 @@ ort bruck_an_der_mur {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_brucker_kreis
         bund       = ja
     }
 }
@@ -488,7 +488,7 @@ ort frohnleiten {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_brucker_kreis
         bund       = ja
     }
 }
@@ -511,7 +511,7 @@ ort aflenz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_brucker_kreis
         bund       = ja
     }
 }
@@ -534,7 +534,7 @@ ort sankt_jakob_breitenau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_brucker_kreis
         bund       = ja
     }
 }
@@ -557,7 +557,7 @@ ort sankt_katharein_an_der_laming {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_brucker_kreis
         bund       = ja
     }
 }
@@ -580,7 +580,7 @@ ort schladming {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_judenburger_kreis
         bund       = ja
     }
 }
@@ -603,7 +603,7 @@ ort groebming {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_judenburger_kreis
         bund       = ja
     }
 }
@@ -626,7 +626,7 @@ ort bad_aussee {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_judenburger_kreis
         bund       = ja
     }
 }
@@ -649,7 +649,7 @@ ort mitterndorf_im_steirischen_salzkammergut {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_judenburger_kreis
         bund       = ja
     }
 }
@@ -672,7 +672,7 @@ ort tauplitz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_judenburger_kreis
         bund       = ja
     }
 }
@@ -695,7 +695,7 @@ ort kleinsoelk {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_judenburger_kreis
         bund       = ja
     }
 }
@@ -718,7 +718,7 @@ ort haus {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_judenburger_kreis
         bund       = ja
     }
 }
@@ -741,7 +741,7 @@ ort sankt_nikolai_im_soelktal {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_judenburger_kreis
         bund       = ja
     }
 }
@@ -764,7 +764,7 @@ ort leoben {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_brucker_kreis
         bund       = ja
     }
 }
@@ -787,7 +787,7 @@ ort trofaiach {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_brucker_kreis
         bund       = ja
     }
 }
@@ -810,7 +810,7 @@ ort mautern_in_steiermark {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_judenburger_kreis
         bund       = ja
     }
 }
@@ -833,7 +833,7 @@ ort kraubath_an_der_mur {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_judenburger_kreis
         bund       = ja
     }
 }
@@ -856,7 +856,7 @@ ort wald_am_schoberpass {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_judenburger_kreis
         bund       = ja
     }
 }
@@ -879,7 +879,7 @@ ort poellau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_grazer_kreis
         bund       = ja
     }
 }
@@ -902,7 +902,7 @@ ort hartberg {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_grazer_kreis
         bund       = ja
     }
 }
@@ -925,7 +925,7 @@ ort pinggau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_brucker_kreis
         bund       = ja
     }
 }
@@ -948,7 +948,7 @@ ort vorau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_brucker_kreis
         bund       = ja
     }
 }
@@ -971,7 +971,7 @@ ort knittelfeld {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_judenburger_kreis
         bund       = ja
     }
 }
@@ -994,7 +994,7 @@ ort judenburg {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_judenburger_kreis
         bund       = ja
     }
 }
@@ -1017,7 +1017,7 @@ ort voitsberg {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_grazer_kreis
         bund       = ja
     }
 }
@@ -1040,7 +1040,7 @@ ort obdach {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_judenburger_kreis
         bund       = ja
     }
 }
@@ -1063,7 +1063,7 @@ ort kainach_bei_voitsberg {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_grazer_kreis
         bund       = ja
     }
 }
@@ -1086,7 +1086,7 @@ ort pack {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_judenburger_kreis
         bund       = ja
     }
 }
@@ -1109,7 +1109,7 @@ ort salla {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_judenburger_kreis
         bund       = ja
     }
 }
@@ -1132,7 +1132,7 @@ ort gaal {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_judenburger_kreis
         bund       = ja
     }
 }
@@ -1155,7 +1155,7 @@ ort murau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_judenburger_kreis
         bund       = ja
     }
 }
@@ -1178,7 +1178,7 @@ ort neumarkt_in_steiermark {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_judenburger_kreis
         bund       = ja
     }
 }
@@ -1201,7 +1201,7 @@ ort sankt_lambrecht {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_judenburger_kreis
         bund       = ja
     }
 }
@@ -1224,7 +1224,7 @@ ort oberzeiring {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_judenburger_kreis
         bund       = ja
     }
 }
@@ -1247,7 +1247,7 @@ ort krakaudorf {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_judenburger_kreis
         bund       = ja
     }
 }
@@ -1270,7 +1270,7 @@ ort oberwoelz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_judenburger_kreis
         bund       = ja
     }
 }
@@ -1293,7 +1293,7 @@ ort stadl_an_der_mur {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_judenburger_kreis
         bund       = ja
     }
 }
@@ -1316,7 +1316,7 @@ ort pusterwald {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_judenburger_kreis
         bund       = ja
     }
 }
@@ -1339,7 +1339,7 @@ ort graz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_grazer_kreis
         bund       = ja
     }
 }
@@ -1362,7 +1362,7 @@ ort weiz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_grazer_kreis
         bund       = ja
     }
 }
@@ -1385,7 +1385,7 @@ ort seiersberg {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_grazer_kreis
         bund       = ja
     }
 }
@@ -1408,7 +1408,7 @@ ort gratkorn {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_grazer_kreis
         bund       = ja
     }
 }
@@ -1431,7 +1431,7 @@ ort gleisdorf {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_grazer_kreis
         bund       = ja
     }
 }
@@ -1454,7 +1454,7 @@ ort lassnitzhoehe {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_grazer_kreis
         bund       = ja
     }
 }
@@ -1477,7 +1477,7 @@ ort passail {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_brucker_kreis
         bund       = ja
     }
 }
@@ -1500,7 +1500,7 @@ ort pischelsdorf_in_der_steiermark {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_grazer_kreis
         bund       = ja
     }
 }
@@ -1523,7 +1523,7 @@ ort sankt_radegund_bei_graz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_grazer_kreis
         bund       = ja
     }
 }
@@ -1546,7 +1546,7 @@ ort fuerstenfeld {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_grazer_kreis
         bund       = ja
     }
 }
@@ -1569,7 +1569,7 @@ ort sankt_stefan_im_rosental {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_grazer_kreis
         bund       = ja
     }
 }
@@ -1592,7 +1592,7 @@ ort feldbach {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_grazer_kreis
         bund       = ja
     }
 }
@@ -1615,7 +1615,7 @@ ort wildon {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_grazer_kreis
         bund       = ja
     }
 }
@@ -1638,7 +1638,7 @@ ort fehring {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_grazer_kreis
         bund       = ja
     }
 }
@@ -1661,7 +1661,7 @@ ort heiligenkreuz_am_waasen {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_grazer_kreis
         bund       = ja
     }
 }
@@ -1684,7 +1684,7 @@ ort ilz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_grazer_kreis
         bund       = ja
     }
 }
@@ -1707,7 +1707,7 @@ ort kirchberg_an_der_raab {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_grazer_kreis
         bund       = ja
     }
 }
@@ -1730,7 +1730,7 @@ ort bad_waltersdorf {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_grazer_kreis
         bund       = ja
     }
 }
@@ -1753,7 +1753,7 @@ ort bairisch_koelldorf {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_marburger_kreis
         bund       = ja
     }
 }
@@ -1776,7 +1776,7 @@ ort leibnitz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_marburger_kreis
         bund       = ja
     }
 }
@@ -1799,7 +1799,7 @@ ort deutschlandsberg {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_grazer_kreis
         bund       = ja
     }
 }
@@ -1822,7 +1822,7 @@ ort stainz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_grazer_kreis
         bund       = ja
     }
 }
@@ -1845,7 +1845,7 @@ ort gleinstaetten {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_marburger_kreis
         bund       = ja
     }
 }
@@ -1868,7 +1868,7 @@ ort leutschach {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_marburger_kreis
         bund       = ja
     }
 }
@@ -1891,7 +1891,7 @@ ort osterwitz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_grazer_kreis
         bund       = ja
     }
 }
@@ -1914,7 +1914,7 @@ ort soboth {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_marburger_kreis
         bund       = ja
     }
 }
@@ -1937,7 +1937,7 @@ ort pitschgau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_marburger_kreis
         bund       = ja
     }
 }
@@ -1960,7 +1960,7 @@ ort garanas {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_grazer_kreis
         bund       = ja
     }
 }
@@ -1983,7 +1983,7 @@ ort marburg_an_der_drau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_marburger_kreis
         bund       = ja
     }
 }
@@ -2006,7 +2006,7 @@ ort gornja_radgona {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_marburger_kreis
         bund       = ja
     }
 }
@@ -2029,7 +2029,7 @@ ort sankt_leonhard {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_marburger_kreis
         bund       = ja
     }
 }
@@ -2052,7 +2052,7 @@ ort sentilj_v_slov_goricah {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_marburger_kreis
         bund       = ja
     }
 }
@@ -2075,7 +2075,7 @@ ort mureck {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_marburger_kreis
         bund       = ja
     }
 }
@@ -2098,7 +2098,7 @@ ort sankt_peter_am_ottersbach {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_marburger_kreis
         bund       = ja
     }
 }
@@ -2121,7 +2121,7 @@ ort kloech {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_marburger_kreis
         bund       = ja
     }
 }
@@ -2144,7 +2144,7 @@ ort windischgraz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_cillier_kreis
         bund       = ja
     }
 }
@@ -2167,7 +2167,7 @@ ort maria_rast {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_marburger_kreis
         bund       = ja
     }
 }
@@ -2190,7 +2190,7 @@ ort marenberg {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_marburger_kreis
         bund       = ja
     }
 }
@@ -2213,7 +2213,7 @@ ort missling {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_cillier_kreis
         bund       = ja
     }
 }
@@ -2236,7 +2236,7 @@ ort lovrenc_na_pohorju {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_marburger_kreis
         bund       = ja
     }
 }
@@ -2259,7 +2259,7 @@ ort weitenstein {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_cillier_kreis
         bund       = ja
     }
 }
@@ -2282,7 +2282,7 @@ ort pettau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_marburger_kreis
         bund       = ja
     }
 }
@@ -2305,7 +2305,7 @@ ort windisch_feistritz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_marburger_kreis
         bund       = ja
     }
 }
@@ -2328,7 +2328,7 @@ ort luttenberg {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_marburger_kreis
         bund       = ja
     }
 }
@@ -2351,7 +2351,7 @@ ort kranichsfeld {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_marburger_kreis
         bund       = ja
     }
 }
@@ -2374,7 +2374,7 @@ ort friedau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_marburger_kreis
         bund       = ja
     }
 }
@@ -2397,7 +2397,7 @@ ort majsperk {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_marburger_kreis
         bund       = ja
     }
 }
@@ -2420,7 +2420,7 @@ ort gorisnica {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_marburger_kreis
         bund       = ja
     }
 }
@@ -2443,7 +2443,7 @@ ort sveti_jurij {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_marburger_kreis
         bund       = ja
     }
 }
@@ -2466,7 +2466,7 @@ ort zetale {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_marburger_kreis
         bund       = ja
     }
 }
@@ -2489,7 +2489,7 @@ ort woellan {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_cillier_kreis
         bund       = ja
     }
 }
@@ -2512,7 +2512,7 @@ ort polzela {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_cillier_kreis
         bund       = ja
     }
 }
@@ -2535,7 +2535,7 @@ ort prassberg {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_cillier_kreis
         bund       = ja
     }
 }
@@ -2558,7 +2558,7 @@ ort oberburg_in_steiermark {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_cillier_kreis
         bund       = ja
     }
 }
@@ -2581,7 +2581,7 @@ ort franz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_cillier_kreis
         bund       = ja
     }
 }
@@ -2604,7 +2604,7 @@ ort sulzbach {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_cillier_kreis
         bund       = ja
     }
 }
@@ -2627,7 +2627,7 @@ ort cilli {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_cillier_kreis
         bund       = ja
     }
 }
@@ -2650,7 +2650,7 @@ ort trbovlje {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_cillier_kreis
         bund       = ja
     }
 }
@@ -2673,7 +2673,7 @@ ort rann {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_cillier_kreis
         bund       = ja
     }
 }
@@ -2696,7 +2696,7 @@ ort sankt_georgen {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_cillier_kreis
         bund       = ja
     }
 }
@@ -2719,7 +2719,7 @@ ort gonobitz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_cillier_kreis
         bund       = ja
     }
 }
@@ -2742,7 +2742,7 @@ ort rogaska_slatina {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_cillier_kreis
         bund       = ja
     }
 }
@@ -2765,7 +2765,7 @@ ort tueffer {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_cillier_kreis
         bund       = ja
     }
 }
@@ -2788,7 +2788,7 @@ ort sevnica {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_cillier_kreis
         bund       = ja
     }
 }
@@ -2811,7 +2811,7 @@ ort smarje_pri_jelsah {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_cillier_kreis
         bund       = ja
     }
 }
@@ -2834,7 +2834,7 @@ ort drachenburg {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_steiermark
+        verwaltung = au_kr_cillier_kreis
         bund       = ja
     }
 }

@@ -455,13 +455,28 @@ func _check_save_ui(sim: SimulationClient) -> void:
 ## Ortsinfo (seit M7).
 func _check_new_game() -> void:
 	var menu: GameMenu = _main.call("game_menu")
+	var dir := "user://klick_test_spielstaende"
+	_clear_saves(dir)
+	_main.set("save_dir", dir)
 	_main.call("open_game_menu")
 	if not menu.scenario_ids().has("voelkerfruehling"):
 		_fail("Neues Spiel: Szenarien im Menü %s" % ", ".join(menu.scenario_ids()))
 		return
+	menu.save_as("Stand1648")
+	# „Starten“ verlangt einen zweiten Klick; der erste beendet die Partie nicht.
+	menu.call("_on_new_game_pressed")
+	if not menu.is_open() or str(_main.call("simulation").get_scenario().get("id", "")) != "westfaelischer_frieden":
+		_fail("Neues Spiel: ein Klick auf „Starten“ beendet die Partie ohne Rückfrage")
 	menu.start_new_game("voelkerfruehling")
 	await _frames(2)
 	var sim: SimulationClient = _main.call("simulation")
+	var catalog: LocationCatalog = _main.get("_catalog")
+	var cultures: Dictionary = (_main.call("location_panel") as LocationPanel).culture_colors
+	if catalog.no_data_count() > 1000 or cultures.size() <= 9:
+		_fail(
+			"Neues Spiel: Ortskatalog oder Farben vom alten Szenario (%d Orte ohne Daten, %d Kulturen)"
+			% [catalog.no_data_count(), cultures.size()]
+		)
 	if (
 		menu.is_open()
 		or sim.get_scenario_name() != "Völkerfrühling"
@@ -492,7 +507,25 @@ func _check_new_game() -> void:
 		_fail("Staatswechsel: Spieler %d statt Bayern (%d)" % [sim.get_player_state_index(), bavaria])
 	if not bar.speed_line_text().contains("Bayern"):
 		_fail("Staatswechsel: keine Meldung (%s)" % bar.speed_line_text())
-	print("  Neues Spiel 1848, Modus Verwaltung, Staatswechsel nach Bayern")
+	# Ein kleiner Spielerstaat bleibt in der politischen Legende sichtbar.
+	var luebeck := sim.get_state_index("LUE")
+	var listed := LegendData.political_entries(sim, LegendData.MAX_POLITICAL_ENTRIES, luebeck)
+	if not listed.any(func(entry: Dictionary) -> bool: return bool(entry.get("player", false))):
+		_fail("Politische Legende: Spielerstaat Lübeck fehlt")
+
+	# Ein Spielstand von 1648 lässt sich im Spiel von 1848 aus der Liste laden.
+	_main.call("open_game_menu")
+	if not menu.load_entry("Stand1648"):
+		_fail("Neues Spiel: Spielstand von 1648 im Menü von 1848 gesperrt")
+	sim = _main.call("simulation")
+	catalog = _main.get("_catalog")
+	if sim.get_scenario().get("id", "") != "westfaelischer_frieden" or catalog.no_data_count() < 4000:
+		_fail(
+			"Zurück nach 1648: %s, %d Orte ohne Daten"
+			% [sim.get_scenario_name(), catalog.no_data_count()]
+		)
+	_clear_saves(dir)
+	print("  Neues Spiel 1848, Modus Verwaltung, Staatswechsel, Spielstand von 1648 geladen")
 
 
 ## Taste drücken und loslassen (echtes Eingabeereignis mit physischem Tastencode).

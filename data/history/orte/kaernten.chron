@@ -28,7 +28,7 @@ ort spittal_an_der_drau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kaernten
+        verwaltung = au_kr_villacher_kreis
         bund       = ja
     }
 }
@@ -51,7 +51,7 @@ ort sachsenburg {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kaernten
+        verwaltung = au_kr_villacher_kreis
         bund       = ja
     }
 }
@@ -74,7 +74,7 @@ ort gmuend_in_kaernten {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kaernten
+        verwaltung = au_kr_villacher_kreis
         bund       = ja
     }
 }
@@ -97,7 +97,7 @@ ort obervellach {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kaernten
+        verwaltung = au_kr_villacher_kreis
         bund       = ja
     }
 }
@@ -120,7 +120,7 @@ ort rennweg_am_katschberg {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kaernten
+        verwaltung = au_kr_villacher_kreis
         bund       = ja
     }
 }
@@ -143,7 +143,7 @@ ort sankt_veit_an_der_glan {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kaernten
+        verwaltung = au_kr_klagenfurter_kreis
         bund       = ja
     }
 }
@@ -166,7 +166,7 @@ ort althofen {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kaernten
+        verwaltung = au_kr_klagenfurter_kreis
         bund       = ja
     }
 }
@@ -189,7 +189,7 @@ ort friesach {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kaernten
+        verwaltung = au_kr_klagenfurter_kreis
         bund       = ja
     }
 }
@@ -212,7 +212,7 @@ ort gurk {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kaernten
+        verwaltung = au_kr_klagenfurter_kreis
         bund       = ja
     }
 }
@@ -235,7 +235,7 @@ ort metnitz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kaernten
+        verwaltung = au_kr_klagenfurter_kreis
         bund       = ja
     }
 }
@@ -258,7 +258,7 @@ ort gloednitz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kaernten
+        verwaltung = au_kr_klagenfurter_kreis
         bund       = ja
     }
 }
@@ -281,7 +281,7 @@ ort koetschach {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kaernten
+        verwaltung = au_kr_villacher_kreis
         bund       = ja
     }
 }
@@ -304,7 +304,7 @@ ort heiligenblut {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kaernten
+        verwaltung = au_kr_villacher_kreis
         bund       = ja
     }
 }
@@ -327,7 +327,7 @@ ort greifenburg {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kaernten
+        verwaltung = au_kr_villacher_kreis
         bund       = ja
     }
 }
@@ -350,7 +350,7 @@ ort winklern {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kaernten
+        verwaltung = au_kr_villacher_kreis
         bund       = ja
     }
 }
@@ -373,7 +373,7 @@ ort kirchbach {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kaernten
+        verwaltung = au_kr_villacher_kreis
         bund       = ja
     }
 }
@@ -396,7 +396,7 @@ ort oberdrauburg {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kaernten
+        verwaltung = au_kr_villacher_kreis
         bund       = ja
     }
 }
@@ -419,7 +419,7 @@ ort stall {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kaernten
+        verwaltung = au_kr_villacher_kreis
         bund       = ja
     }
 }
@@ -442,7 +442,7 @@ ort klagenfurt {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kaernten
+        verwaltung = au_kr_klagenfurter_kreis
         bund       = ja
     }
 }
@@ -465,7 +465,7 @@ ort ferlach {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kaernten
+        verwaltung = au_kr_klagenfurter_kreis
         bund       = ja
     }
 }
@@ -488,7 +488,7 @@ ort poggersdorf {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kaernten
+        verwaltung = au_kr_klagenfurter_kreis
         bund       = ja
     }
 }
@@ -511,7 +511,7 @@ ort zgornje_jezersko {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kaernten
+        verwaltung = au_kr_klagenfurter_kreis
         bund       = ja
     }
 }
@@ -534,7 +534,7 @@ ort sittersdorf {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kaernten
+        verwaltung = au_kr_klagenfurter_kreis
         bund       = ja
     }
 }
@@ -557,7 +557,7 @@ ort sankt_margareten_im_rosental {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kaernten
+        verwaltung = au_kr_klagenfurter_kreis
         bund       = ja
     }
 }
@@ -580,7 +580,7 @@ ort villach {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kaernten
+        verwaltung = au_kr_villacher_kreis
         bund       = ja
     }
 }
@@ -603,7 +603,7 @@ ort feldkirchen_in_kaernten {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kaernten
+        verwaltung = au_kr_klagenfurter_kreis
         bund       = ja
     }
 }
@@ -626,7 +626,7 @@ ort poertschach_am_woerthersee {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kaernten
+        verwaltung = au_kr_klagenfurter_kreis
         bund       = ja
     }
 }
@@ -649,7 +649,7 @@ ort velden_am_woerthersee {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kaernten
+        verwaltung = au_kr_villacher_kreis
         bund       = ja
     }
 }
@@ -672,7 +672,7 @@ ort radenthein {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kaernten
+        verwaltung = au_kr_villacher_kreis
         bund       = ja
     }
 }
@@ -695,7 +695,7 @@ ort feistritz_an_der_drau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kaernten
+        verwaltung = au_kr_villacher_kreis
         bund       = ja
     }
 }
@@ -718,7 +718,7 @@ ort feistritz_im_rosental {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kaernten
+        verwaltung = au_kr_klagenfurter_kreis
         bund       = ja
     }
 }
@@ -741,7 +741,7 @@ ort bodensdorf {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kaernten
+        verwaltung = au_kr_villacher_kreis
         bund       = ja
     }
 }
@@ -764,7 +764,7 @@ ort arriach {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kaernten
+        verwaltung = au_kr_villacher_kreis
         bund       = ja
     }
 }
@@ -787,7 +787,7 @@ ort gnesau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kaernten
+        verwaltung = au_kr_villacher_kreis
         bund       = ja
     }
 }
@@ -810,7 +810,7 @@ ort mauer {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kaernten
+        verwaltung = au_kr_klagenfurter_kreis
         bund       = ja
     }
 }
@@ -833,7 +833,7 @@ ort gutenstein {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kaernten
+        verwaltung = au_kr_klagenfurter_kreis
         bund       = ja
     }
 }
@@ -856,7 +856,7 @@ ort voelkermarkt {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kaernten
+        verwaltung = au_kr_klagenfurter_kreis
         bund       = ja
     }
 }
@@ -879,7 +879,7 @@ ort mezica {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kaernten
+        verwaltung = au_kr_klagenfurter_kreis
         bund       = ja
     }
 }
@@ -902,7 +902,7 @@ ort bad_sankt_leonhard_im_lavanttal {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kaernten
+        verwaltung = au_kr_klagenfurter_kreis
         bund       = ja
     }
 }
@@ -925,7 +925,7 @@ ort sankt_andrae {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kaernten
+        verwaltung = au_kr_klagenfurter_kreis
         bund       = ja
     }
 }
@@ -948,7 +948,7 @@ ort brueckl {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kaernten
+        verwaltung = au_kr_klagenfurter_kreis
         bund       = ja
     }
 }
@@ -971,7 +971,7 @@ ort lavamuend {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kaernten
+        verwaltung = au_kr_klagenfurter_kreis
         bund       = ja
     }
 }
@@ -994,7 +994,7 @@ ort ruden {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kaernten
+        verwaltung = au_kr_klagenfurter_kreis
         bund       = ja
     }
 }
@@ -1017,7 +1017,7 @@ ort tarvis {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kaernten
+        verwaltung = au_kr_villacher_kreis
         bund       = ja
     }
 }
@@ -1040,7 +1040,7 @@ ort hermagor {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kaernten
+        verwaltung = au_kr_villacher_kreis
         bund       = ja
     }
 }
@@ -1063,7 +1063,7 @@ ort arnoldstein {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kaernten
+        verwaltung = au_kr_villacher_kreis
         bund       = ja
     }
 }
@@ -1086,7 +1086,7 @@ ort pontebba {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kaernten
+        verwaltung = au_kr_villacher_kreis
         bund       = ja
     }
 }
@@ -1109,7 +1109,7 @@ ort malborghetto {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kaernten
+        verwaltung = au_kr_villacher_kreis
         bund       = ja
     }
 }

@@ -28,7 +28,7 @@ ort kleve {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_kleve
         bund       = ja
     }
 }
@@ -51,7 +51,7 @@ ort emmerich {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_kleve
         bund       = ja
     }
 }
@@ -74,7 +74,7 @@ ort goch {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_kleve
         bund       = ja
     }
 }
@@ -97,7 +97,7 @@ ort kevelaer {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_geldern
         bund       = ja
     }
 }
@@ -120,7 +120,7 @@ ort rees {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_rees
         bund       = ja
     }
 }
@@ -143,7 +143,7 @@ ort kalkar {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_rees
         bund       = ja
     }
 }
@@ -166,7 +166,7 @@ ort uedem {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_rees
         bund       = ja
     }
 }
@@ -189,7 +189,7 @@ ort essen_niederrhein {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_duisburg
         bund       = ja
     }
 }
@@ -212,7 +212,7 @@ ort duisburg {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_duisburg
         bund       = ja
     }
 }
@@ -235,7 +235,7 @@ ort wuppertal {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_elberfeld
         bund       = ja
     }
 }
@@ -258,7 +258,7 @@ ort oberhausen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_duisburg
         bund       = ja
     }
 }
@@ -281,7 +281,7 @@ ort solingen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_solingen
         bund       = ja
     }
 }
@@ -304,7 +304,7 @@ ort remscheid {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_lennep
         bund       = ja
     }
 }
@@ -327,7 +327,7 @@ ort mettmann {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_solingen
         bund       = ja
     }
 }
@@ -350,7 +350,7 @@ ort velbert {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_elberfeld
         bund       = ja
     }
 }
@@ -373,7 +373,7 @@ ort ratingen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_duesseldorf
         bund       = ja
     }
 }
@@ -396,7 +396,7 @@ ort dinslaken {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_duisburg
         bund       = ja
     }
 }
@@ -419,7 +419,7 @@ ort moers {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_duisburg
         bund       = ja
     }
 }
@@ -442,7 +442,7 @@ ort wesel {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_rees
         bund       = ja
     }
 }
@@ -465,7 +465,7 @@ ort kamp_lintfort {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_geldern
         bund       = ja
     }
 }
@@ -488,7 +488,7 @@ ort geldern {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_geldern
         bund       = ja
     }
 }
@@ -511,7 +511,7 @@ ort hamminkeln {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_rees
         bund       = ja
     }
 }
@@ -534,7 +534,7 @@ ort xanten {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_rees
         bund       = ja
     }
 }
@@ -557,7 +557,7 @@ ort straelen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_geldern
         bund       = ja
     }
 }
@@ -580,7 +580,7 @@ ort schermbeck {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_duisburg
         bund       = ja
     }
 }
@@ -603,7 +603,7 @@ ort issum {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_geldern
         bund       = ja
     }
 }
@@ -626,7 +626,7 @@ ort duesseldorf {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_duesseldorf
         bund       = ja
     }
 }
@@ -649,7 +649,7 @@ ort neuss {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_neuss
         bund       = ja
     }
 }
@@ -672,7 +672,7 @@ ort grevenbroich {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_grevenbroich
         bund       = ja
     }
 }
@@ -695,7 +695,7 @@ ort dormagen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_muelheim
         bund       = ja
     }
 }
@@ -718,7 +718,7 @@ ort hilden {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_solingen
         bund       = ja
     }
 }
@@ -741,7 +741,7 @@ ort langenfeld {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_muelheim
         bund       = ja
     }
 }
@@ -764,7 +764,7 @@ ort rommerskirchen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_bergheim
         bund       = ja
     }
 }
@@ -787,7 +787,7 @@ ort moenchengladbach {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_gladbach
         bund       = ja
     }
 }
@@ -810,7 +810,7 @@ ort krefeld {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_krefeld
         bund       = ja
     }
 }
@@ -833,7 +833,7 @@ ort viersen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_gladbach
         bund       = ja
     }
 }
@@ -856,7 +856,7 @@ ort willich {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_krefeld
         bund       = ja
     }
 }
@@ -879,7 +879,7 @@ ort kempen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_kempen
         bund       = ja
     }
 }
@@ -902,7 +902,7 @@ ort niederkruechten {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_erkelenz
         bund       = ja
     }
 }

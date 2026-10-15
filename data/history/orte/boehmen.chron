@@ -45,7 +45,7 @@ ort prag {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_prag
         bund       = ja
     }
 }
@@ -77,7 +77,7 @@ ort leitmeritz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_leitmeritz
         bund       = ja
     }
 }
@@ -108,7 +108,7 @@ ort boehmisch_leipa {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_leitmeritz
         bund       = ja
     }
 }
@@ -139,7 +139,7 @@ ort reichenberg {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_bunzlau
         bund       = ja
     }
 }
@@ -162,7 +162,7 @@ ort gablonz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_bidschow
         bund       = ja
     }
 }
@@ -185,7 +185,7 @@ ort turnau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_bidschow
         bund       = ja
     }
 }
@@ -208,7 +208,7 @@ ort friedland_in_boehmen {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_bidschow
         bund       = ja
     }
 }
@@ -231,7 +231,7 @@ ort tannwald {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_bidschow
         bund       = ja
     }
 }
@@ -254,7 +254,7 @@ ort semil {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_bidschow
         bund       = ja
     }
 }
@@ -277,7 +277,7 @@ ort neustadt_an_der_tafelfichte {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_bidschow
         bund       = ja
     }
 }
@@ -300,7 +300,7 @@ ort boehmisch_aicha {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_bunzlau
         bund       = ja
     }
 }
@@ -323,7 +323,7 @@ ort rochlitz_an_der_iser {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_bidschow
         bund       = ja
     }
 }
@@ -346,7 +346,7 @@ ort warnsdorf {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_leitmeritz
         bund       = ja
     }
 }
@@ -369,7 +369,7 @@ ort boehmisch_kamnitz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_leitmeritz
         bund       = ja
     }
 }
@@ -392,7 +392,7 @@ ort schluckenau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_leitmeritz
         bund       = ja
     }
 }
@@ -415,7 +415,7 @@ ort deutsch_gabel {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_bunzlau
         bund       = ja
     }
 }
@@ -438,7 +438,7 @@ ort zwickau_boehmen {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_leitmeritz
         bund       = ja
     }
 }
@@ -461,7 +461,7 @@ ort sandau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_leitmeritz
         bund       = ja
     }
 }
@@ -484,7 +484,7 @@ ort aussig {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_leitmeritz
         bund       = ja
     }
 }
@@ -507,7 +507,7 @@ ort tetschen {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_leitmeritz
         bund       = ja
     }
 }
@@ -530,7 +530,7 @@ ort poemmerle {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_leitmeritz
         bund       = ja
     }
 }
@@ -553,7 +553,7 @@ ort koenigswald {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_leitmeritz
         bund       = ja
     }
 }
@@ -576,7 +576,7 @@ ort trautenau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_koeniggraetz
         bund       = ja
     }
 }
@@ -599,7 +599,7 @@ ort koeniginhof_an_der_elbe {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_koeniggraetz
         bund       = ja
     }
 }
@@ -622,7 +622,7 @@ ort jitschin {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_bidschow
         bund       = ja
     }
 }
@@ -645,7 +645,7 @@ ort jaromer {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_koeniggraetz
         bund       = ja
     }
 }
@@ -668,7 +668,7 @@ ort hohenelbe {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_bidschow
         bund       = ja
     }
 }
@@ -691,7 +691,7 @@ ort horitz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_bidschow
         bund       = ja
     }
 }
@@ -714,7 +714,7 @@ ort neu_paka {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_bidschow
         bund       = ja
     }
 }
@@ -737,7 +737,7 @@ ort arnau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_bidschow
         bund       = ja
     }
 }
@@ -760,7 +760,7 @@ ort schatzlar {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_bidschow
         bund       = ja
     }
 }
@@ -783,7 +783,7 @@ ort spindlermuehle {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_bidschow
         bund       = ja
     }
 }
@@ -806,7 +806,7 @@ ort laun {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_saaz
         bund       = ja
     }
 }
@@ -829,7 +829,7 @@ ort raudnitz_a_d_elbe {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_leitmeritz
         bund       = ja
     }
 }
@@ -852,7 +852,7 @@ ort wegstaedtl {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_leitmeritz
         bund       = ja
     }
 }
@@ -875,7 +875,7 @@ ort libochowitz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_leitmeritz
         bund       = ja
     }
 }
@@ -898,7 +898,7 @@ ort auscha {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_leitmeritz
         bund       = ja
     }
 }
@@ -921,7 +921,7 @@ ort peruc {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_leitmeritz
         bund       = ja
     }
 }
@@ -944,7 +944,7 @@ ort wellemin {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_leitmeritz
         bund       = ja
     }
 }
@@ -967,7 +967,7 @@ ort bruex {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_saaz
         bund       = ja
     }
 }
@@ -990,7 +990,7 @@ ort teplitz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_leitmeritz
         bund       = ja
     }
 }
@@ -1013,7 +1013,7 @@ ort oberleutensdorf {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_saaz
         bund       = ja
     }
 }
@@ -1036,7 +1036,7 @@ ort bilin {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_leitmeritz
         bund       = ja
     }
 }
@@ -1059,7 +1059,7 @@ ort rothkosteletz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_koeniggraetz
         bund       = ja
     }
 }
@@ -1082,7 +1082,7 @@ ort braunau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_koeniggraetz
         bund       = ja
     }
 }
@@ -1105,7 +1105,7 @@ ort politz_an_der_mettau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_koeniggraetz
         bund       = ja
     }
 }
@@ -1128,7 +1128,7 @@ ort radowenz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_koeniggraetz
         bund       = ja
     }
 }
@@ -1151,7 +1151,7 @@ ort komotau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_saaz
         bund       = ja
     }
 }
@@ -1174,7 +1174,7 @@ ort saaz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_saaz
         bund       = ja
     }
 }
@@ -1197,7 +1197,7 @@ ort kaaden {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_saaz
         bund       = ja
     }
 }
@@ -1220,7 +1220,7 @@ ort podersam {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_saaz
         bund       = ja
     }
 }
@@ -1243,7 +1243,7 @@ ort radonitz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_saaz
         bund       = ja
     }
 }
@@ -1266,7 +1266,7 @@ ort puerstein {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_elbogen
         bund       = ja
     }
 }
@@ -1289,7 +1289,7 @@ ort jungbunzlau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_bunzlau
         bund       = ja
     }
 }
@@ -1312,7 +1312,7 @@ ort muenchengraetz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_bunzlau
         bund       = ja
     }
 }
@@ -1335,7 +1335,7 @@ ort niemes {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_bunzlau
         bund       = ja
     }
 }
@@ -1358,7 +1358,7 @@ ort hirschberg_in_boehmen {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_bunzlau
         bund       = ja
     }
 }
@@ -1381,7 +1381,7 @@ ort weisswasser_in_boehmen {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_bunzlau
         bund       = ja
     }
 }
@@ -1404,7 +1404,7 @@ ort dolni_bousov {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_bidschow
         bund       = ja
     }
 }
@@ -1427,7 +1427,7 @@ ort mseno {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_bunzlau
         bund       = ja
     }
 }
@@ -1450,7 +1450,7 @@ ort neubidschow {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_bidschow
         bund       = ja
     }
 }
@@ -1473,7 +1473,7 @@ ort chlumec_nad_cidlinou {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_koeniggraetz
         bund       = ja
     }
 }
@@ -1496,7 +1496,7 @@ ort koenigstadtl {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_bidschow
         bund       = ja
     }
 }
@@ -1519,7 +1519,7 @@ ort nechanitz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_koeniggraetz
         bund       = ja
     }
 }
@@ -1542,7 +1542,7 @@ ort kopidlno {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_bidschow
         bund       = ja
     }
 }
@@ -1565,7 +1565,7 @@ ort krinec {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_bunzlau
         bund       = ja
     }
 }
@@ -1588,7 +1588,7 @@ ort karlsbad {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_elbogen
         bund       = ja
     }
 }
@@ -1611,7 +1611,7 @@ ort schlackenwerth {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_elbogen
         bund       = ja
     }
 }
@@ -1634,7 +1634,7 @@ ort chodau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_elbogen
         bund       = ja
     }
 }
@@ -1657,7 +1657,7 @@ ort neudek_in_boehmen {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_elbogen
         bund       = ja
     }
 }
@@ -1680,7 +1680,7 @@ ort schlaggenwald {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_elbogen
         bund       = ja
     }
 }
@@ -1703,7 +1703,7 @@ ort rothau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_elbogen
         bund       = ja
     }
 }
@@ -1726,7 +1726,7 @@ ort koeniggraetz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_koeniggraetz
         bund       = ja
     }
 }
@@ -1749,7 +1749,7 @@ ort nachod {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_koeniggraetz
         bund       = ja
     }
 }
@@ -1772,7 +1772,7 @@ ort reichenau_an_der_knieschna {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_koeniggraetz
         bund       = ja
     }
 }
@@ -1795,7 +1795,7 @@ ort neustadt_an_der_mettau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_koeniggraetz
         bund       = ja
     }
 }
@@ -1818,7 +1818,7 @@ ort boehmisch_skalitz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_koeniggraetz
         bund       = ja
     }
 }
@@ -1841,7 +1841,7 @@ ort tinischt {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_koeniggraetz
         bund       = ja
     }
 }
@@ -1864,7 +1864,7 @@ ort holitz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_chrudim
         bund       = ja
     }
 }
@@ -1887,7 +1887,7 @@ ort opotschno {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_koeniggraetz
         bund       = ja
     }
 }
@@ -1910,7 +1910,7 @@ ort dolni_cernilov {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_koeniggraetz
         bund       = ja
     }
 }
@@ -1933,7 +1933,7 @@ ort skuhrov_nad_belou {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_koeniggraetz
         bund       = ja
     }
 }
@@ -1956,7 +1956,7 @@ ort kladno {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_beraun
         bund       = ja
     }
 }
@@ -1979,7 +1979,7 @@ ort kralupy_nad_vltavou {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_prag
         bund       = ja
     }
 }
@@ -2002,7 +2002,7 @@ ort melnik {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_prag
         bund       = ja
     }
 }
@@ -2025,7 +2025,7 @@ ort neratowitz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_prag
         bund       = ja
     }
 }
@@ -2048,7 +2048,7 @@ ort schlan {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_prag
         bund       = ja
     }
 }
@@ -2071,7 +2071,7 @@ ort hostiwitz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_prag
         bund       = ja
     }
 }
@@ -2094,7 +2094,7 @@ ort klecany {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_prag
         bund       = ja
     }
 }
@@ -2117,7 +2117,7 @@ ort eger {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_elbogen
         bund       = ja
     }
 }
@@ -2140,7 +2140,7 @@ ort falkenau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_elbogen
         bund       = ja
     }
 }
@@ -2163,7 +2163,7 @@ ort asch {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_elbogen
         bund       = ja
     }
 }
@@ -2186,7 +2186,7 @@ ort koenigsberg_an_der_eger {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_elbogen
         bund       = ja
     }
 }
@@ -2209,7 +2209,7 @@ ort schoenbach {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_elbogen
         bund       = ja
     }
 }
@@ -2232,7 +2232,7 @@ ort haslau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_elbogen
         bund       = ja
     }
 }
@@ -2255,7 +2255,7 @@ ort unter_sandau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_elbogen
         bund       = ja
     }
 }
@@ -2278,7 +2278,7 @@ ort theusing {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_elbogen
         bund       = ja
     }
 }
@@ -2301,7 +2301,7 @@ ort kralowitz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_rakonitz
         bund       = ja
     }
 }
@@ -2324,7 +2324,7 @@ ort luditz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_elbogen
         bund       = ja
     }
 }
@@ -2347,7 +2347,7 @@ ort buchau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_elbogen
         bund       = ja
     }
 }
@@ -2370,7 +2370,7 @@ ort manetin {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_pilsen
         bund       = ja
     }
 }
@@ -2393,7 +2393,7 @@ ort jechnitz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_rakonitz
         bund       = ja
     }
 }
@@ -2416,7 +2416,7 @@ ort lubenz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_saaz
         bund       = ja
     }
 }
@@ -2439,7 +2439,7 @@ ort pardubitz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_chrudim
         bund       = ja
     }
 }
@@ -2462,7 +2462,7 @@ ort chrudim {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_chrudim
         bund       = ja
     }
 }
@@ -2485,7 +2485,7 @@ ort hohenmauth {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_chrudim
         bund       = ja
     }
 }
@@ -2508,7 +2508,7 @@ ort chotebor {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_chrudim
         bund       = ja
     }
 }
@@ -2531,7 +2531,7 @@ ort hlinsko {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_chrudim
         bund       = ja
     }
 }
@@ -2554,7 +2554,7 @@ ort skutsch {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_chrudim
         bund       = ja
     }
 }
@@ -2577,7 +2577,7 @@ ort hermannstaedtel {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_chrudim
         bund       = ja
     }
 }
@@ -2600,7 +2600,7 @@ ort prosec {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_chrudim
         bund       = ja
     }
 }
@@ -2623,7 +2623,7 @@ ort nassaberg {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_chrudim
         bund       = ja
     }
 }
@@ -2646,7 +2646,7 @@ ort chroustowitz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_chrudim
         bund       = ja
     }
 }
@@ -2669,7 +2669,7 @@ ort kolin {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_kaurzim
         bund       = ja
     }
 }
@@ -2692,7 +2692,7 @@ ort podebrady {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_kaurzim
         bund       = ja
     }
 }
@@ -2715,7 +2715,7 @@ ort brandys_nad_labem_stara_boleslav {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_prag
         bund       = ja
     }
 }
@@ -2738,7 +2738,7 @@ ort neu_benatek {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_bunzlau
         bund       = ja
     }
 }
@@ -2761,7 +2761,7 @@ ort lissa_an_der_elbe {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_bunzlau
         bund       = ja
     }
 }
@@ -2784,7 +2784,7 @@ ort boehmisch_brod {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_kaurzim
         bund       = ja
     }
 }
@@ -2807,7 +2807,7 @@ ort uvaly {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_kaurzim
         bund       = ja
     }
 }
@@ -2830,7 +2830,7 @@ ort sadska {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_kaurzim
         bund       = ja
     }
 }
@@ -2853,7 +2853,7 @@ ort kourim {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_kaurzim
         bund       = ja
     }
 }
@@ -2876,7 +2876,7 @@ ort marienbad {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_elbogen
         bund       = ja
     }
 }
@@ -2899,7 +2899,7 @@ ort tachau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_elbogen
         bund       = ja
     }
 }
@@ -2922,7 +2922,7 @@ ort mies {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_pilsen
         bund       = ja
     }
 }
@@ -2945,7 +2945,7 @@ ort plan {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_elbogen
         bund       = ja
     }
 }
@@ -2968,7 +2968,7 @@ ort haid {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_pilsen
         bund       = ja
     }
 }
@@ -2991,7 +2991,7 @@ ort tepl {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_elbogen
         bund       = ja
     }
 }
@@ -3014,7 +3014,7 @@ ort tschernoschin {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_pilsen
         bund       = ja
     }
 }
@@ -3037,7 +3037,7 @@ ort weseritz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_pilsen
         bund       = ja
     }
 }
@@ -3060,7 +3060,7 @@ ort beraun {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_beraun
         bund       = ja
     }
 }
@@ -3083,7 +3083,7 @@ ort rakonitz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_rakonitz
         bund       = ja
     }
 }
@@ -3106,7 +3106,7 @@ ort dobris {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_beraun
         bund       = ja
     }
 }
@@ -3129,7 +3129,7 @@ ort neustraschitz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_rakonitz
         bund       = ja
     }
 }
@@ -3152,7 +3152,7 @@ ort mnisek_pod_brdy {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_beraun
         bund       = ja
     }
 }
@@ -3175,7 +3175,7 @@ ort zditz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_beraun
         bund       = ja
     }
 }
@@ -3198,7 +3198,7 @@ ort cernosice {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_prag
         bund       = ja
     }
 }
@@ -3221,7 +3221,7 @@ ort hostomitz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_beraun
         bund       = ja
     }
 }
@@ -3244,7 +3244,7 @@ ort roztoky {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_rakonitz
         bund       = ja
     }
 }
@@ -3267,7 +3267,7 @@ ort kuttenberg {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_czaslau
         bund       = ja
     }
 }
@@ -3290,7 +3290,7 @@ ort tschaslau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_czaslau
         bund       = ja
     }
 }
@@ -3313,7 +3313,7 @@ ort prelouc {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_czaslau
         bund       = ja
     }
 }
@@ -3336,7 +3336,7 @@ ort tremoschnitz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_czaslau
         bund       = ja
     }
 }
@@ -3359,7 +3359,7 @@ ort chwaletitz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_czaslau
         bund       = ja
     }
 }
@@ -3382,7 +3382,7 @@ ort goltsch_jenikau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_czaslau
         bund       = ja
     }
 }
@@ -3405,7 +3405,7 @@ ort boehmisch_truebau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_chrudim
         bund       = ja
     }
 }
@@ -3428,7 +3428,7 @@ ort wildenschwert {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_chrudim
         bund       = ja
     }
 }
@@ -3451,7 +3451,7 @@ ort leitomischl {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_chrudim
         bund       = ja
     }
 }
@@ -3474,7 +3474,7 @@ ort landskron {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_chrudim
         bund       = ja
     }
 }
@@ -3497,7 +3497,7 @@ ort senftenberg_boehmen {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_koeniggraetz
         bund       = ja
     }
 }
@@ -3520,7 +3520,7 @@ ort grulich {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_koeniggraetz
         bund       = ja
     }
 }
@@ -3543,7 +3543,7 @@ ort jablonne_nad_orlici {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_chrudim
         bund       = ja
     }
 }
@@ -3566,7 +3566,7 @@ ort beneschau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_kaurzim
         bund       = ja
     }
 }
@@ -3589,7 +3589,7 @@ ort ricany {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_prag
         bund       = ja
     }
 }
@@ -3612,7 +3612,7 @@ ort tynec_nad_sazavou {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_prag
         bund       = ja
     }
 }
@@ -3635,7 +3635,7 @@ ort wotitz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_tabor
         bund       = ja
     }
 }
@@ -3658,7 +3658,7 @@ ort eule {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_prag
         bund       = ja
     }
 }
@@ -3681,7 +3681,7 @@ ort neweklau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_prag
         bund       = ja
     }
 }
@@ -3704,7 +3704,7 @@ ort zwittau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_chrudim
         bund       = ja
     }
 }
@@ -3727,7 +3727,7 @@ ort maehrisch_truebau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_chrudim
         bund       = ja
     }
 }
@@ -3750,7 +3750,7 @@ ort policka {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_chrudim
         bund       = ja
     }
 }
@@ -3773,7 +3773,7 @@ ort bistrau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_chrudim
         bund       = ja
     }
 }
@@ -3796,7 +3796,7 @@ ort bruesau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_chrudim
         bund       = ja
     }
 }
@@ -3819,7 +3819,7 @@ ort pilsen {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_pilsen
         bund       = ja
     }
 }
@@ -3842,7 +3842,7 @@ ort prestice {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_pilsen
         bund       = ja
     }
 }
@@ -3865,7 +3865,7 @@ ort dobrzan {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_pilsen
         bund       = ja
     }
 }
@@ -3888,7 +3888,7 @@ ort nuerschan {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_pilsen
         bund       = ja
     }
 }
@@ -3911,7 +3911,7 @@ ort alt_pilsenetz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_pilsen
         bund       = ja
     }
 }
@@ -3934,7 +3934,7 @@ ort holysov {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_klattau
         bund       = ja
     }
 }
@@ -3957,7 +3957,7 @@ ort ober_bris {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_pilsen
         bund       = ja
     }
 }
@@ -3980,7 +3980,7 @@ ort wlaschim {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_kaurzim
         bund       = ja
     }
 }
@@ -4003,7 +4003,7 @@ ort zruc_nad_sazavou {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_czaslau
         bund       = ja
     }
 }
@@ -4026,7 +4026,7 @@ ort sazau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_kaurzim
         bund       = ja
     }
 }
@@ -4049,7 +4049,7 @@ ort kohljanowitz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_kaurzim
         bund       = ja
     }
 }
@@ -4072,7 +4072,7 @@ ort cechtice {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_tabor
         bund       = ja
     }
 }
@@ -4095,7 +4095,7 @@ ort zbraslawitz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_czaslau
         bund       = ja
     }
 }
@@ -4118,7 +4118,7 @@ ort naceradec {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_tabor
         bund       = ja
     }
 }
@@ -4141,7 +4141,7 @@ ort pribram {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_beraun
         bund       = ja
     }
 }
@@ -4164,7 +4164,7 @@ ort rokitzan {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_pilsen
         bund       = ja
     }
 }
@@ -4187,7 +4187,7 @@ ort horowitz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_beraun
         bund       = ja
     }
 }
@@ -4210,7 +4210,7 @@ ort breznitz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_prachin
         bund       = ja
     }
 }
@@ -4233,7 +4233,7 @@ ort zbirow {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_beraun
         bund       = ja
     }
 }
@@ -4256,7 +4256,7 @@ ort radnitz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_pilsen
         bund       = ja
     }
 }
@@ -4279,7 +4279,7 @@ ort straschitz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_pilsen
         bund       = ja
     }
 }
@@ -4302,7 +4302,7 @@ ort deutsch_brod {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_czaslau
         bund       = ja
     }
 }
@@ -4325,7 +4325,7 @@ ort humpoletz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_czaslau
         bund       = ja
     }
 }
@@ -4348,7 +4348,7 @@ ort pilgram {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_tabor
         bund       = ja
     }
 }
@@ -4371,7 +4371,7 @@ ort svetla_nad_sazavou {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_czaslau
         bund       = ja
     }
 }
@@ -4394,7 +4394,7 @@ ort ledec_nad_sazavou {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_czaslau
         bund       = ja
     }
 }
@@ -4417,7 +4417,7 @@ ort pribislau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_chrudim
         bund       = ja
     }
 }
@@ -4440,7 +4440,7 @@ ort stecken {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_czaslau
         bund       = ja
     }
 }
@@ -4463,7 +4463,7 @@ ort seelau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_tabor
         bund       = ja
     }
 }
@@ -4486,7 +4486,7 @@ ort muehlhausen_boehmen {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_tabor
         bund       = ja
     }
 }
@@ -4509,7 +4509,7 @@ ort sedlcany {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_tabor
         bund       = ja
     }
 }
@@ -4532,7 +4532,7 @@ ort jistebnitz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_tabor
         bund       = ja
     }
 }
@@ -4555,7 +4555,7 @@ ort oparany {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_tabor
         bund       = ja
     }
 }
@@ -4578,7 +4578,7 @@ ort kowarow {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_prachin
         bund       = ja
     }
 }
@@ -4601,7 +4601,7 @@ ort schoenberg {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_prachin
         bund       = ja
     }
 }
@@ -4624,7 +4624,7 @@ ort taus {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_klattau
         bund       = ja
     }
 }
@@ -4647,7 +4647,7 @@ ort neugedein {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_klattau
         bund       = ja
     }
 }
@@ -4670,7 +4670,7 @@ ort bischofteinitz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_klattau
         bund       = ja
     }
 }
@@ -4693,7 +4693,7 @@ ort ronsperg {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_klattau
         bund       = ja
     }
 }
@@ -4716,7 +4716,7 @@ ort weissensulz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_klattau
         bund       = ja
     }
 }
@@ -4739,7 +4739,7 @@ ort blatna {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_prachin
         bund       = ja
     }
 }
@@ -4762,7 +4762,7 @@ ort horazdovice {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_klattau
         bund       = ja
     }
 }
@@ -4785,7 +4785,7 @@ ort nepomuk {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_klattau
         bund       = ja
     }
 }
@@ -4808,7 +4808,7 @@ ort blowitz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_pilsen
         bund       = ja
     }
 }
@@ -4831,7 +4831,7 @@ ort kasejowitz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_klattau
         bund       = ja
     }
 }
@@ -4854,7 +4854,7 @@ ort tabor {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_tabor
         bund       = ja
     }
 }
@@ -4877,7 +4877,7 @@ ort neuhaus {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_tabor
         bund       = ja
     }
 }
@@ -4900,7 +4900,7 @@ ort sobeslau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_tabor
         bund       = ja
     }
 }
@@ -4923,7 +4923,7 @@ ort veseli_nad_luznici {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_tabor
         bund       = ja
     }
 }
@@ -4946,7 +4946,7 @@ ort patzau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_tabor
         bund       = ja
     }
 }
@@ -4969,7 +4969,7 @@ ort kamenitz_an_der_linde {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_tabor
         bund       = ja
     }
 }
@@ -4992,7 +4992,7 @@ ort pocatky {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_tabor
         bund       = ja
     }
 }
@@ -5015,7 +5015,7 @@ ort jungwoschitz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_tabor
         bund       = ja
     }
 }
@@ -5038,7 +5038,7 @@ ort kardasova_recice {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_tabor
         bund       = ja
     }
 }
@@ -5061,7 +5061,7 @@ ort cernovice {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_tabor
         bund       = ja
     }
 }
@@ -5084,7 +5084,7 @@ ort chejnow {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_tabor
         bund       = ja
     }
 }
@@ -5107,7 +5107,7 @@ ort horni_cerekev {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_tabor
         bund       = ja
     }
 }
@@ -5130,7 +5130,7 @@ ort klattau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_klattau
         bund       = ja
     }
 }
@@ -5153,7 +5153,7 @@ ort schuettenhofen {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_klattau
         bund       = ja
     }
 }
@@ -5176,7 +5176,7 @@ ort neuern {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_klattau
         bund       = ja
     }
 }
@@ -5199,7 +5199,7 @@ ort markt_eisenstein {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_klattau
         bund       = ja
     }
 }
@@ -5222,7 +5222,7 @@ ort schwihau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_klattau
         bund       = ja
     }
 }
@@ -5245,7 +5245,7 @@ ort planitz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_klattau
         bund       = ja
     }
 }
@@ -5268,7 +5268,7 @@ ort kolinetz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_klattau
         bund       = ja
     }
 }
@@ -5291,7 +5291,7 @@ ort pisek {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_prachin
         bund       = ja
     }
 }
@@ -5314,7 +5314,7 @@ ort strakonitz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_prachin
         bund       = ja
     }
 }
@@ -5337,7 +5337,7 @@ ort moldauthein {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_prachin
         bund       = ja
     }
 }
@@ -5360,7 +5360,7 @@ ort vodnany {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_prachin
         bund       = ja
     }
 }
@@ -5383,7 +5383,7 @@ ort bechyne {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_tabor
         bund       = ja
     }
 }
@@ -5406,7 +5406,7 @@ ort wolin {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_prachin
         bund       = ja
     }
 }
@@ -5429,7 +5429,7 @@ ort netolitz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_budweis
         bund       = ja
     }
 }
@@ -5452,7 +5452,7 @@ ort mirotitz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_prachin
         bund       = ja
     }
 }
@@ -5475,7 +5475,7 @@ ort zirnau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_budweis
         bund       = ja
     }
 }
@@ -5498,7 +5498,7 @@ ort datschitz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_tabor
         bund       = ja
     }
 }
@@ -5521,7 +5521,7 @@ ort neu_bistritz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_budweis
         bund       = ja
     }
 }
@@ -5544,7 +5544,7 @@ ort zlabings {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_budweis
         bund       = ja
     }
 }
@@ -5567,7 +5567,7 @@ ort koenigseck {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_tabor
         bund       = ja
     }
 }
@@ -5590,7 +5590,7 @@ ort prachatitz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_prachin
         bund       = ja
     }
 }
@@ -5613,7 +5613,7 @@ ort winterberg_boehmen {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_prachin
         bund       = ja
     }
 }
@@ -5636,7 +5636,7 @@ ort wallern {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_budweis
         bund       = ja
     }
 }
@@ -5659,7 +5659,7 @@ ort bergreichenstein {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_klattau
         bund       = ja
     }
 }
@@ -5682,7 +5682,7 @@ ort vacov {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_prachin
         bund       = ja
     }
 }
@@ -5705,7 +5705,7 @@ ort ferchenhaid {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_prachin
         bund       = ja
     }
 }
@@ -5728,7 +5728,7 @@ ort budweis {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_budweis
         bund       = ja
     }
 }
@@ -5751,7 +5751,7 @@ ort wittingau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_budweis
         bund       = ja
     }
 }
@@ -5774,7 +5774,7 @@ ort frauenberg {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_budweis
         bund       = ja
     }
 }
@@ -5797,7 +5797,7 @@ ort trhove_sviny {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_budweis
         bund       = ja
     }
 }
@@ -5820,7 +5820,7 @@ ort lischau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_budweis
         bund       = ja
     }
 }
@@ -5843,7 +5843,7 @@ ort gratzen {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_budweis
         bund       = ja
     }
 }
@@ -5866,7 +5866,7 @@ ort suchenthal_an_der_lainsitz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_budweis
         bund       = ja
     }
 }
@@ -5889,7 +5889,7 @@ ort lomnitz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_budweis
         bund       = ja
     }
 }
@@ -5912,7 +5912,7 @@ ort sevetin {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_budweis
         bund       = ja
     }
 }
@@ -5935,7 +5935,7 @@ ort krumau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_budweis
         bund       = ja
     }
 }
@@ -5958,7 +5958,7 @@ ort kaplitz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_budweis
         bund       = ja
     }
 }
@@ -5981,7 +5981,7 @@ ort velesin {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_budweis
         bund       = ja
     }
 }
@@ -6004,7 +6004,7 @@ ort hohenfurth {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_budweis
         bund       = ja
     }
 }
@@ -6027,7 +6027,7 @@ ort oberplan {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_budweis
         bund       = ja
     }
 }
@@ -6050,7 +6050,7 @@ ort kremze {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_budweis
         bund       = ja
     }
 }
@@ -6073,7 +6073,7 @@ ort friedberg_in_boehmen {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_budweis
         bund       = ja
     }
 }
@@ -6096,7 +6096,7 @@ ort deutsch_beneschau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_budweis
         bund       = ja
     }
 }
@@ -6119,7 +6119,7 @@ ort unter_haid {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_boehmen
+        verwaltung = au_kr_budweis
         bund       = ja
     }
 }

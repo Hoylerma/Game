@@ -889,10 +889,18 @@ PackedColorArray UhrwerkSimulation::get_map_colors(std::int64_t mode) const {
             }
             break;
         case MAP_VERWALTUNG:
-            // Unterste Verwaltungseinheit aus der Palette; Staaten ohne Unterteilung in ihrer
-            // aufgehellten Staatsfarbe (seit M7).
+            // Oberste Verwaltungseinheit (Provinz, Kronland …) aus der Palette, die Grenzen der
+            // untersten zeichnet Godot; Staaten ohne Gliederung in aufgehellter Staatsfarbe (seit M7).
             if (valid_index(w->admin_units, loc.admin)) {
-                color = kKreisPalette[static_cast<std::size_t>(loc.admin) % kKreisPalette.size()];
+                uhrwerk::Index top = loc.admin;
+                for (std::size_t step = 0; step < w->admin_units.size(); ++step) {
+                    const uhrwerk::Index parent = at(w->admin_units, top).parent;
+                    if (!valid_index(w->admin_units, parent)) {
+                        break;
+                    }
+                    top = parent;
+                }
+                color = kKreisPalette[static_cast<std::size_t>(top) % kKreisPalette.size()];
             } else if (valid_index(w->states, loc.owner)) {
                 color = blend(to_godot(at(w->states, loc.owner).color), Color(1.0f, 1.0f, 1.0f), 0.45);
             }
@@ -1055,9 +1063,10 @@ Dictionary UhrwerkSimulation::get_save_info(const String& path) const {
     result["date_text"] = to_godot(uhrwerk::format_date_long(info->date));
     result["days"] = info->days;
     result["player_tag"] = to_godot(info->player_tag);
-    // Kurzname für Listen (z. B. „Brandenburg“), sonst der volle Name oder die Kennung.
+    // Kurzname für Listen (z. B. „Brandenburg“), sonst der volle Name oder die Kennung. Nur im
+    // laufenden Szenario nachschlagen: ein anderes kennt andere Staaten (seit M7).
     String player_name = to_godot(info->player_tag);
-    if (const uhrwerk::World* w = world()) {
+    if (const uhrwerk::World* w = world(); w != nullptr && w->scenario.id == info->scenario) {
         const uhrwerk::Index state = w->find_state(info->player_tag);
         if (state != uhrwerk::kNone) {
             const uhrwerk::State& s = at(w->states, state);

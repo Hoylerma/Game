@@ -28,7 +28,7 @@ ort sankt_wendel {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_sankt_wendel
         bund       = ja
     }
 }
@@ -51,7 +51,7 @@ ort wadern {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_merzig
         bund       = ja
     }
 }
@@ -74,7 +74,7 @@ ort tholey {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_sankt_wendel
         bund       = ja
     }
 }
@@ -119,7 +119,7 @@ ort nonnweiler {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_sankt_wendel
         bund       = ja
     }
 }
@@ -142,7 +142,7 @@ ort freisen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_sankt_wendel
         bund       = ja
     }
 }
@@ -165,7 +165,7 @@ ort neunkirchen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_ottweiler
         bund       = ja
     }
 }
@@ -280,7 +280,7 @@ ort saarbruecken {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_saarbruecken
         bund       = ja
     }
 }
@@ -303,7 +303,7 @@ ort saarlouis {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_saarlouis
         bund       = ja
     }
 }
@@ -326,7 +326,7 @@ ort merzig {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_merzig
         bund       = ja
     }
 }
@@ -349,7 +349,7 @@ ort voelklingen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_saarlouis
         bund       = ja
     }
 }
@@ -372,7 +372,7 @@ ort heusweiler {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_saarbruecken
         bund       = ja
     }
 }
@@ -395,7 +395,7 @@ ort eppelborn {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_sankt_wendel
         bund       = ja
     }
 }
@@ -418,7 +418,7 @@ ort nalbach {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_saarlouis
         bund       = ja
     }
 }
@@ -441,7 +441,7 @@ ort merchweiler {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_ottweiler
         bund       = ja
     }
 }
@@ -464,7 +464,7 @@ ort losheim {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_merzig
         bund       = ja
     }
 }
@@ -487,7 +487,7 @@ ort orscholz {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_merzig
         bund       = ja
     }
 }

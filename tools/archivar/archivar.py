@@ -56,7 +56,7 @@ SPALTEN: dict[str, tuple[str, ...]] = {
         "quelle",
     ),
     "kreise.csv": ("id", "datei", "name", "quelle"),
-    "verwaltung.csv": ("id", "datei", "name", "art", "ueber", "staat", "sicherheit", "quelle"),
+    "verwaltung.csv": ("id", "datei", "name", "art", "ueber", "staat", "sitz", "sicherheit", "quelle"),
     "besitz.csv": ("ort", "ab", "besitzer", "verwaltung", "bund", "sicherheit", "quelle"),
     "bevoelkerung.csv": (
         "ort",
@@ -266,6 +266,7 @@ class Bezug:
     steuersatz_max: float = 1.0
     szenarien: list[Szenario] = field(default_factory=list)
     spieler: dict[str, str] = field(default_factory=dict)  # Szenario → Spielerstaat (seit M7)
+    spielbar: dict[str, list[str]] = field(default_factory=dict)  # Szenario → spielbare Staaten (seit M7)
     karte: tuple[float, float, float, float] | None = None  # laenge_min, laenge_max, breite_min, breite_max
 
 
@@ -310,6 +311,8 @@ def lade_bezug(daten: Path, meldungen: Meldungen) -> Bezug:
                 continue
             bezug.szenarien.append(Szenario(node.value, datum, anzeige))
             bezug.spieler[node.value] = node.get_string("spieler") or ""
+            spielbar = node.find("spielbar")
+            bezug.spielbar[node.value] = spielbar.bare_values() if spielbar is not None and spielbar.is_block else []
     if not bezug.szenarien:
         meldungen.fehler_bei("szenarien", 0, "keine Szenarien gefunden")
 
@@ -581,6 +584,11 @@ def baue_archiv(tabellen: Path, bezug: Bezug, m: Meldungen) -> Archiv:
         if kennung not in belegt:
             m.warnung_bei(z.datei, z.nr, f"Kreis {kennung} hat keine Orte")
 
+    # Sitz der Verwaltungseinheiten (seit M7), nach den Orten
+    for kennung, z in archiv.verwaltung.items():
+        if z["sitz"] and z["sitz"] not in archiv.orte:
+            m.fehler_bei(z.datei, z.nr, f"unbekannter Ort '{z['sitz']}' als Sitz von {kennung}")
+
     # Besitz
     gesehen = {}
     for z in archiv.zeilen["besitz.csv"]:
@@ -788,6 +796,9 @@ def pruefe_zeitraeume(archiv: Archiv, bezug: Bezug, m: Meldungen) -> None:
         spieler = bezug.spieler.get(szenario.kennung, "")
         if spieler and spieler not in bestehend:
             m.fehler_bei(szenario.datei, 0, f"Spielerstaat {spieler} besitzt {wann} keinen Ort")
+        for tag in bezug.spielbar.get(szenario.kennung, []):
+            if tag not in bestehend:
+                m.fehler_bei(szenario.datei, 0, f"Spielbarer Staat {tag} besitzt {wann} keinen Ort")
     for tag, staat in archiv.staaten.items():
         if tag not in jemals_besitzer:
             m.warnung_bei(staat.zeile.datei, staat.zeile.nr, f"Staat {tag} besitzt in keinem Szenario einen Ort")

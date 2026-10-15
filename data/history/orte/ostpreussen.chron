@@ -21,14 +21,14 @@ ort memel {
 
     1846.12.03 = {
         bevoelkerung = 19099
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_memel
     }
 }
 
@@ -43,14 +43,14 @@ ort heydekrug {
 
     1846.12.03 = {
         bevoelkerung = 12659
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_heydekrug
     }
 }
 
@@ -65,14 +65,14 @@ ort russ {
 
     1846.12.03 = {
         bevoelkerung = 14036
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_heydekrug
     }
 }
 
@@ -87,14 +87,14 @@ ort proekuls {
 
     1846.12.03 = {
         bevoelkerung = 14951
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_memel
     }
 }
 
@@ -109,14 +109,14 @@ ort tilsit {
 
     1846.12.03 = {
         bevoelkerung = 10070
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_tilsit
     }
 }
 
@@ -131,14 +131,14 @@ ort ragnit {
 
     1846.12.03 = {
         bevoelkerung = 39467
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_ragnit
     }
 }
 
@@ -153,14 +153,14 @@ ort heinrichswalde {
 
     1846.12.03 = {
         bevoelkerung = 38853
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_niederung
     }
 }
 
@@ -175,14 +175,14 @@ ort pogegen {
 
     1846.12.03 = {
         bevoelkerung = 18548
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_tilsit
     }
 }
 
@@ -197,14 +197,14 @@ ort koenigsberg {
 
     1846.12.03 = {
         bevoelkerung = 83457
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_koenigsberg
     }
 }
 
@@ -219,14 +219,14 @@ ort cranz {
 
     1846.12.03 = {
         bevoelkerung = 8437
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_koenigsberg
     }
 }
 
@@ -241,14 +241,14 @@ ort tapiau {
 
     1846.12.03 = {
         bevoelkerung = 15992
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_wehlau
     }
 }
 
@@ -263,14 +263,14 @@ ort neuhausen_ostpreussen {
 
     1846.12.03 = {
         bevoelkerung = 10530
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_koenigsberg
     }
 }
 
@@ -285,14 +285,14 @@ ort labiau {
 
     1846.12.03 = {
         bevoelkerung = 24686
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_labiau
     }
 }
 
@@ -307,14 +307,14 @@ ort nidden {
 
     1846.12.03 = {
         bevoelkerung = 5928
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_heydekrug
     }
 }
 
@@ -329,14 +329,14 @@ ort wehlau {
 
     1846.12.03 = {
         bevoelkerung = 21663
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_wehlau
     }
 }
 
@@ -351,14 +351,14 @@ ort bol_shoe_isakovo {
 
     1846.12.03 = {
         bevoelkerung = 8035
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_koenigsberg
     }
 }
 
@@ -373,14 +373,14 @@ ort jesau {
 
     1846.12.03 = {
         bevoelkerung = 18680
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_preussisch_eylau
     }
 }
 
@@ -395,14 +395,14 @@ ort powunden {
 
     1846.12.03 = {
         bevoelkerung = 8818
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_koenigsberg
     }
 }
 
@@ -417,14 +417,14 @@ ort pillau {
 
     1846.12.03 = {
         bevoelkerung = 5722
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_fischhausen
     }
 }
 
@@ -439,14 +439,14 @@ ort rauschen {
 
     1846.12.03 = {
         bevoelkerung = 10386
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_fischhausen
     }
 }
 
@@ -461,14 +461,14 @@ ort zimmerbude {
 
     1846.12.03 = {
         bevoelkerung = 3844
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_fischhausen
     }
 }
 
@@ -483,14 +483,14 @@ ort palmnicken {
 
     1846.12.03 = {
         bevoelkerung = 4441
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_fischhausen
     }
 }
 
@@ -505,14 +505,14 @@ ort fischhausen {
 
     1846.12.03 = {
         bevoelkerung = 4089
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_fischhausen
     }
 }
 
@@ -527,14 +527,14 @@ ort vzmorye {
 
     1846.12.03 = {
         bevoelkerung = 5004
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_fischhausen
     }
 }
 
@@ -549,14 +549,14 @@ ort insterburg {
 
     1846.12.03 = {
         bevoelkerung = 42638
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_insterburg
     }
 }
 
@@ -571,14 +571,14 @@ ort gumbinnen {
 
     1846.12.03 = {
         bevoelkerung = 30028
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_gumbinnen
     }
 }
 
@@ -593,14 +593,14 @@ ort stallupoenen {
 
     1846.12.03 = {
         bevoelkerung = 28256
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_stallupoenen
     }
 }
 
@@ -615,14 +615,14 @@ ort lasdehnen {
 
     1846.12.03 = {
         bevoelkerung = 37836
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_pillkallen
     }
 }
 
@@ -637,14 +637,14 @@ ort braunsberg_ostpreussen {
 
     1846.12.03 = {
         bevoelkerung = 9605
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_braunsberg
     }
 }
 
@@ -659,14 +659,14 @@ ort preussisch_holland {
 
     1846.12.03 = {
         bevoelkerung = 10883
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_preussisch_holland
     }
 }
 
@@ -681,14 +681,14 @@ ort tolkemit {
 
     1846.12.03 = {
         bevoelkerung = 5085
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_braunsberg
     }
 }
 
@@ -703,14 +703,14 @@ ort frauenburg {
 
     1846.12.03 = {
         bevoelkerung = 3448
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_braunsberg
     }
 }
 
@@ -725,14 +725,14 @@ ort muehlhausen_ostpreussen {
 
     1846.12.03 = {
         bevoelkerung = 14103
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_preussisch_holland
     }
 }
 
@@ -747,14 +747,14 @@ ort heilsberg {
 
     1846.12.03 = {
         bevoelkerung = 12544
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_heilsberg
     }
 }
 
@@ -769,14 +769,14 @@ ort preussisch_eylau {
 
     1846.12.03 = {
         bevoelkerung = 13772
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_preussisch_eylau
     }
 }
 
@@ -791,14 +791,14 @@ ort guttstadt {
 
     1846.12.03 = {
         bevoelkerung = 11900
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_heilsberg
     }
 }
 
@@ -813,14 +813,14 @@ ort wormditt {
 
     1846.12.03 = {
         bevoelkerung = 8238
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_mohrungen
     }
 }
 
@@ -835,14 +835,14 @@ ort heiligenbeil {
 
     1846.12.03 = {
         bevoelkerung = 7933
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_heiligenbeil
     }
 }
 
@@ -857,14 +857,14 @@ ort landsberg {
 
     1846.12.03 = {
         bevoelkerung = 10849
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_preussisch_eylau
     }
 }
 
@@ -879,14 +879,14 @@ ort ludwigsort {
 
     1846.12.03 = {
         bevoelkerung = 11656
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_heiligenbeil
     }
 }
 
@@ -901,14 +901,14 @@ ort mehlsack {
 
     1846.12.03 = {
         bevoelkerung = 9696
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_braunsberg
     }
 }
 
@@ -923,14 +923,14 @@ ort liebstadt {
 
     1846.12.03 = {
         bevoelkerung = 9154
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_mohrungen
     }
 }
 
@@ -945,14 +945,14 @@ ort arnsdorf {
 
     1846.12.03 = {
         bevoelkerung = 7526
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_heilsberg
     }
 }
 
@@ -967,14 +967,14 @@ ort lichtenfeld {
 
     1846.12.03 = {
         bevoelkerung = 12408
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_heiligenbeil
     }
 }
 
@@ -989,14 +989,14 @@ ort rastenburg {
 
     1846.12.03 = {
         bevoelkerung = 12973
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_rastenburg
     }
 }
 
@@ -1011,14 +1011,14 @@ ort bartenstein {
 
     1846.12.03 = {
         bevoelkerung = 14015
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_preussisch_eylau
     }
 }
 
@@ -1033,14 +1033,14 @@ ort friedland_ostpreussen {
 
     1846.12.03 = {
         bevoelkerung = 17550
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_friedland
     }
 }
 
@@ -1055,14 +1055,14 @@ ort bischofsburg {
 
     1846.12.03 = {
         bevoelkerung = 13493
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_sensburg
     }
 }
 
@@ -1077,14 +1077,14 @@ ort roessel {
 
     1846.12.03 = {
         bevoelkerung = 10306
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_roessel
     }
 }
 
@@ -1099,14 +1099,14 @@ ort seeburg {
 
     1846.12.03 = {
         bevoelkerung = 10069
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_heilsberg
     }
 }
 
@@ -1121,14 +1121,14 @@ ort korschen {
 
     1846.12.03 = {
         bevoelkerung = 7119
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_roessel
     }
 }
 
@@ -1143,14 +1143,14 @@ ort bischofstein {
 
     1846.12.03 = {
         bevoelkerung = 10374
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_roessel
     }
 }
 
@@ -1165,14 +1165,14 @@ ort gerdauen {
 
     1846.12.03 = {
         bevoelkerung = 21257
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_gerdauen
     }
 }
 
@@ -1187,14 +1187,14 @@ ort schippenbeil {
 
     1846.12.03 = {
         bevoelkerung = 9391
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_friedland
     }
 }
 
@@ -1209,14 +1209,14 @@ ort drengfurth {
 
     1846.12.03 = {
         bevoelkerung = 13018
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_angerburg
     }
 }
 
@@ -1231,14 +1231,14 @@ ort barten {
 
     1846.12.03 = {
         bevoelkerung = 7052
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_gerdauen
     }
 }
 
@@ -1253,14 +1253,14 @@ ort loetzen {
 
     1846.12.03 = {
         bevoelkerung = 7789
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_loetzen
     }
 }
 
@@ -1275,14 +1275,14 @@ ort darkehmen {
 
     1846.12.03 = {
         bevoelkerung = 22119
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_darkehmen
     }
 }
 
@@ -1297,14 +1297,14 @@ ort angerburg {
 
     1846.12.03 = {
         bevoelkerung = 6977
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_angerburg
     }
 }
 
@@ -1319,14 +1319,14 @@ ort goldap {
 
     1846.12.03 = {
         bevoelkerung = 21867
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_goldap
     }
 }
 
@@ -1341,14 +1341,14 @@ ort kowahlen {
 
     1846.12.03 = {
         bevoelkerung = 9764
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_oletzko
     }
 }
 
@@ -1363,14 +1363,14 @@ ort benkheim {
 
     1846.12.03 = {
         bevoelkerung = 12646
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_darkehmen
     }
 }
 
@@ -1385,14 +1385,14 @@ ort possessern {
 
     1846.12.03 = {
         bevoelkerung = 3678
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_angerburg
     }
 }
 
@@ -1407,14 +1407,14 @@ ort kruglanken {
 
     1846.12.03 = {
         bevoelkerung = 6882
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_loetzen
     }
 }
 
@@ -1429,14 +1429,14 @@ ort sensburg {
 
     1846.12.03 = {
         bevoelkerung = 13237
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_sensburg
     }
 }
 
@@ -1451,14 +1451,14 @@ ort johannisburg {
 
     1846.12.03 = {
         bevoelkerung = 8852
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_johannisburg
     }
 }
 
@@ -1473,14 +1473,14 @@ ort ruciane_nida {
 
     1846.12.03 = {
         bevoelkerung = 12442
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_johannisburg
     }
 }
 
@@ -1495,14 +1495,14 @@ ort bialla {
 
     1846.12.03 = {
         bevoelkerung = 13629
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_johannisburg
     }
 }
 
@@ -1517,14 +1517,14 @@ ort nikolaiken {
 
     1846.12.03 = {
         bevoelkerung = 5909
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_sensburg
     }
 }
 
@@ -1539,14 +1539,14 @@ ort rhein {
 
     1846.12.03 = {
         bevoelkerung = 7642
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_sensburg
     }
 }
 
@@ -1561,14 +1561,14 @@ ort peitschendorf {
 
     1846.12.03 = {
         bevoelkerung = 10713
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_sensburg
     }
 }
 
@@ -1583,14 +1583,14 @@ ort schwentainen {
 
     1846.12.03 = {
         bevoelkerung = 11052
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_ortelsburg
     }
 }
 
@@ -1605,14 +1605,14 @@ ort friedrichshof {
 
     1846.12.03 = {
         bevoelkerung = 9594
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_ortelsburg
     }
 }
 
@@ -1627,14 +1627,14 @@ ort lyck {
 
     1846.12.03 = {
         bevoelkerung = 19718
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_lyck
     }
 }
 
@@ -1649,14 +1649,14 @@ ort marggrabowa {
 
     1846.12.03 = {
         bevoelkerung = 11357
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_oletzko
     }
 }
 
@@ -1671,14 +1671,14 @@ ort arys {
 
     1846.12.03 = {
         bevoelkerung = 15629
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_johannisburg
     }
 }
 
@@ -1693,14 +1693,14 @@ ort widminnen {
 
     1846.12.03 = {
         bevoelkerung = 10171
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_loetzen
     }
 }
 
@@ -1715,14 +1715,14 @@ ort alt_jucha {
 
     1846.12.03 = {
         bevoelkerung = 7764
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_lyck
     }
 }
 
@@ -1737,14 +1737,14 @@ ort swietajno {
 
     1846.12.03 = {
         bevoelkerung = 9357
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_oletzko
     }
 }
 
@@ -1759,14 +1759,14 @@ ort allenstein {
 
     1846.12.03 = {
         bevoelkerung = 12781
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_allenstein
     }
 }
 
@@ -1781,14 +1781,14 @@ ort osterode {
 
     1846.12.03 = {
         bevoelkerung = 14425
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_osterode
     }
 }
 
@@ -1803,14 +1803,14 @@ ort mohrungen {
 
     1846.12.03 = {
         bevoelkerung = 10442
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_mohrungen
     }
 }
 
@@ -1825,14 +1825,14 @@ ort hohenstein_ostpreussen {
 
     1846.12.03 = {
         bevoelkerung = 10544
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_osterode
     }
 }
 
@@ -1847,14 +1847,14 @@ ort wartenburg {
 
     1846.12.03 = {
         bevoelkerung = 10306
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_allenstein
     }
 }
 
@@ -1869,14 +1869,14 @@ ort liebemuehl {
 
     1846.12.03 = {
         bevoelkerung = 10069
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_osterode
     }
 }
 
@@ -1891,14 +1891,14 @@ ort jonkendorf {
 
     1846.12.03 = {
         bevoelkerung = 8611
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_allenstein
     }
 }
 
@@ -1913,14 +1913,14 @@ ort stabigotten {
 
     1846.12.03 = {
         bevoelkerung = 9628
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_allenstein
     }
 }
 
@@ -1935,14 +1935,14 @@ ort maldeuten {
 
     1846.12.03 = {
         bevoelkerung = 7764
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_mohrungen
     }
 }
 
@@ -1957,14 +1957,14 @@ ort dietrichswalde {
 
     1846.12.03 = {
         bevoelkerung = 9018
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_allenstein
     }
 }
 
@@ -1979,14 +1979,14 @@ ort geierswalde {
 
     1846.12.03 = {
         bevoelkerung = 12137
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_osterode
     }
 }
 
@@ -2001,14 +2001,14 @@ ort ortelsburg {
 
     1846.12.03 = {
         bevoelkerung = 11399
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_ortelsburg
     }
 }
 
@@ -2023,14 +2023,14 @@ ort passenheim {
 
     1846.12.03 = {
         bevoelkerung = 9560
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_ortelsburg
     }
 }
 
@@ -2045,14 +2045,14 @@ ort willenberg {
 
     1846.12.03 = {
         bevoelkerung = 13425
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_ortelsburg
     }
 }
 
@@ -2067,14 +2067,14 @@ ort mensguth {
 
     1846.12.03 = {
         bevoelkerung = 10205
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_ortelsburg
     }
 }
 
@@ -2089,14 +2089,14 @@ ort gedwangen {
 
     1846.12.03 = {
         bevoelkerung = 16137
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_ortelsburg
     }
 }
 
@@ -2111,14 +2111,14 @@ ort soldau {
 
     1846.12.03 = {
         bevoelkerung = 11479
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_neidenburg
     }
 }
 
@@ -2133,14 +2133,14 @@ ort neidenburg {
 
     1846.12.03 = {
         bevoelkerung = 13968
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_neidenburg
     }
 }
 
@@ -2155,14 +2155,14 @@ ort lautenburg {
 
     1846.12.03 = {
         bevoelkerung = 10917
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_loebau
     }
 }
 
@@ -2177,14 +2177,14 @@ ort gross_koslau {
 
     1846.12.03 = {
         bevoelkerung = 8882
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_neidenburg
     }
 }
 
@@ -2199,14 +2199,14 @@ ort rybno {
 
     1846.12.03 = {
         bevoelkerung = 12340
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_loebau
     }
 }
 
@@ -2221,13 +2221,13 @@ ort ilowo_osada {
 
     1846.12.03 = {
         bevoelkerung = 5763
-        konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
+        konfession   = { lutherisch = 85 katholisch = 13 juedisch = 2 }
         kultur       = { altpreussen = 80 litauer = 10 masuren = 10 }
         verwuestung  = 0
     }
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_preussen
+        verwaltung = pr_kr_neidenburg
     }
 }

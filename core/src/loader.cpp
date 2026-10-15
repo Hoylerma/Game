@@ -1446,13 +1446,16 @@ private:
         for (std::size_t i = 0; i < world_.admin_units.size(); ++i) {
             Index current = world_.admin_units[i].parent;
             for (std::size_t steps = 0; current != kNone; ++steps) {
-                if (current == static_cast<Index>(i) || steps > world_.admin_units.size()) {
+                if (current == static_cast<Index>(i)) {
                     const AdminParentRef& ref = admin_parents_[i];
                     issues_.error(ref.file, ref.line,
                                   "Verwaltungseinheit " + world_.admin_units[i].id +
                                       " liegt (über 'ueber') in sich selbst");
                     world_.admin_units[i].parent = kNone;
                     break;
+                }
+                if (steps > world_.admin_units.size()) {
+                    break; // führt in einen Kreis, zu dem i nicht gehört; gemeldet wird ein Glied des Kreises
                 }
                 current = world_.admin_units[static_cast<std::size_t>(current)].parent;
             }

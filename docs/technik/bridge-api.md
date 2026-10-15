@@ -60,7 +60,7 @@ Dateipfade des Betriebssystems (in GDScript `ProjectSettings.globalize_path("use
 |---|---|---|
 | `save_game(path: String, player_state_index: int)` | `String` | Schreibt den Spielstand (Spielerstaat für die Metadaten; ungültiger Index = bisheriger Spielerstaat), legt den Ordner an. Leer bei Erfolg, sonst die Meldung |
 | `load_game(data_path: String, path: String)` | `String` | Lädt die Spieldaten des Szenarios aus dem Spielstand frisch und den Zustand hinein. Ersetzt die laufende Simulation **nur bei Erfolg**; danach gelten Spielerstaat und Ladehinweise aus diesem Ladevorgang. Leer bei Erfolg, sonst die Meldung (z. B. „Spielstand passt nicht zu den Spieldaten (abweichend: orte)“) |
-| `get_save_info(path: String)` | `Dictionary` | Ohne zu laden: `ok` (bool, Datei lesbar), `compatible` (bool, passt zum Inhalt der geladenen Spieldaten), `reason` (String, leer wenn passend), `scenario`, `date` (`{ year, month, day }`), `date_text`, `days` (int), `player_tag`, `player_name` (Kurzname, sonst Kennung), `format_version` (int), `game_version`, `checksum` (16-stellig hex). Bei `ok == false` nur `ok`, `compatible` und `reason` |
+| `get_save_info(path: String)` | `Dictionary` | Ohne zu laden: `ok` (bool, Datei lesbar), `compatible` (bool, passt zum Inhalt der geladenen Spieldaten; ein Spielstand eines anderen Szenarios passt nie, `load_game` prüft ihn gegen sein eigenes), `reason` (String, leer wenn passend), `scenario`, `date` (`{ year, month, day }`), `date_text`, `days` (int), `player_tag`, `player_name` (Kurzname, sonst Kennung; nachgeschlagen nur im laufenden Szenario), `format_version` (int), `game_version`, `checksum` (16-stellig hex). Bei `ok == false` nur `ok`, `compatible` und `reason` |
 | `get_save_format_version()` | `int` | Formatversion, die diese Brücke schreibt (1) |
 
 ## Kartenmodi (`get_map_colors`)
@@ -77,7 +77,7 @@ Dateipfade des Betriebssystems (in GDScript `ProjectSettings.globalize_path("use
 | 7 | `MAP_KULTUR` | seit M4: Farbe der Mehrheitskultur (`common/kulturen.chron`) |
 | 8 | `MAP_WIRTSCHAFT` | seit M5: linearer Verlauf nach Wirtschaftsleistung je Einwohner und Jahr (0 → hell, ≥ 16 Reichstaler → dunkelbraun) |
 | 9 | `MAP_MAERKTE` | seit M5: Farbe je Markt aus der Palette von `MAP_KREISE`; die aktiven Märkte laufen nacheinander durch die Palette, damit sich Nachbarn unterscheiden |
-| 10 | `MAP_VERWALTUNG` | seit M7: Farbe der untersten Verwaltungseinheit aus der Palette von `MAP_KREISE` (`palette[einheitsindex % n]`); Orte von Staaten ohne Gliederung in der aufgehellten Staatsfarbe |
+| 10 | `MAP_VERWALTUNG` | seit M7: Farbe der obersten Verwaltungseinheit (Provinz, Kronland …) aus der Palette von `MAP_KREISE` (`palette[einheitsindex % n]`); die Grenzen der untersten Einheiten zeichnet Godot aus `get_location_admin_indices`; Orte von Staaten ohne Gliederung in der aufgehellten Staatsfarbe |
 
 **Orte ohne Daten** (seit M3) erhalten in den Modi 0, 1, 2, 4, 6, 7, 8 und 10 eine Farbe mit **Alpha 0**;
 die Godot-Seite zeichnet dort eine Schraffur „keine Daten“. In den Modi 3 und 5 haben sie normale

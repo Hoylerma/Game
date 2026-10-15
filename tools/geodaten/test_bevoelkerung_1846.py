@@ -53,16 +53,18 @@ class TestSchaetzen(unittest.TestCase):
         self.assertEqual((nach["berg"].kultur, nach["dorf"].kultur), ("tiroler=100", ""))
 
     def test_fehler(self) -> None:
-        m = merkmale(("staat:AAA", "lutherisch=100", "", ""))
+        m = merkmale(("staat:AAA", "lutherisch=100", "", ""), ("verwaltung:aa_lnad", "katholisch=100", "", ""))
         _, fehler = bv.schaetzen(ORTE, CODES, ZUORDNUNG, UEBER, {"aa_land": 1000}, {"stadt": 5000, "fremd": 10}, m)
         self.assertIn("Ort berg: keine Einwohnersumme für AAA oder seine Verwaltung (einwohner_1846.csv)", fehler)
         self.assertIn("staedte_1846.csv: fremd ist kein Ort mit Besitzer 1848", fehler)
         self.assertIn("Raum aa_land: Summe 1000 reicht nicht für die festen Städte (5000)", fehler)
+        self.assertIn("merkmale_1846.csv:3: Gebiet 'verwaltung:aa_lnad' trifft keinen Ort", fehler)
 
     def test_ungueltige_merkmale(self) -> None:
         daten = [
             dict(zip(bv.MERKMAL_SPALTEN, ("staat:AAA", "lutherisch 100", "", "x", "ungeprueft", "q")), _zeile="2"),
             dict(zip(bv.MERKMAL_SPALTEN, ("irgendwo", "", "", "", "ungeprueft", "q")), _zeile="3"),
+            dict(zip(bv.MERKMAL_SPALTEN, ("staat:AAA", "", "", "1.2", "ungeprueft", "q")), _zeile="4"),
         ]
         _, fehler = bv.lies_merkmale(daten)
         self.assertEqual(
@@ -71,6 +73,7 @@ class TestSchaetzen(unittest.TestCase):
                 "merkmale_1846.csv:2: ungültige Anteile in Spalte 'konfession': 'lutherisch 100'",
                 "merkmale_1846.csv:2: ungültige Dichte 'x'",
                 "merkmale_1846.csv:3: ungültiges Gebiet 'irgendwo'",
+                "merkmale_1846.csv:4: Gebiet 'staat:AAA' schon in Zeile 2",
             ],
         )
 

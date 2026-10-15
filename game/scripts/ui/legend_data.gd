@@ -16,9 +16,10 @@ const MAX_POLITICAL_ENTRIES := 16
 
 
 ## Staaten mit mindestens einem Ort, alphabetisch nach Kurzname; bei mehr als max_entries
-## Staaten nur die größten, die übrigen in einer Zeile „N weitere Staaten“.
+## Staaten nur die größten und der Spielerstaat (player), die übrigen in einer Zeile
+## „N weitere Staaten“.
 static func political_entries(
-	sim: SimulationClient, max_entries: int = MAX_POLITICAL_ENTRIES
+	sim: SimulationClient, max_entries: int = MAX_POLITICAL_ENTRIES, player: int = -1
 ) -> Array[Dictionary]:
 	var entries: Array[Dictionary] = []
 	for index in sim.get_state_count():
@@ -32,11 +33,18 @@ static func political_entries(
 			"text": str(state.get("short_name", state.get("tag", ""))),
 			"detail": detail,
 			"count": count,
+			"player": index == player,
 		})
-	# Viele Staaten (1848: 38): nur die größten, der Rest als eine Zeile (seit M7).
+	# Viele Staaten (1848: 38): nur die größten und der Spielerstaat, der Rest als eine Zeile
+	# (seit M7).
 	var rest: Array[Dictionary] = []
 	if entries.size() > max_entries:
-		entries.sort_custom(func(a: Dictionary, b: Dictionary) -> bool: return a["count"] > b["count"])
+		entries.sort_custom(
+			func(a: Dictionary, b: Dictionary) -> bool:
+				if a["player"] != b["player"]:
+					return a["player"]
+				return a["count"] > b["count"]
+		)
 		rest = entries.slice(max_entries - 1)
 		entries = entries.slice(0, max_entries - 1)
 	entries.sort_custom(
@@ -174,34 +182,52 @@ static func market_entries(
 	return entries
 
 
-## Verwaltungseinheiten des Staates state_index mit Orten (seit M7), Farbe aus dem Modus
-## „Verwaltung“; admin_indices ist get_location_admin_indices(). Leer, wenn der Staat keine
-## Gliederung hat.
+## Oberste Verwaltungseinheiten des Staates state_index mit Orten (seit M7), Farbe aus dem Modus
+## „Verwaltung“ (die Karte färbt nach der obersten Einheit und zeichnet die Grenzen der untersten);
+## admin_indices ist get_location_admin_indices(). Leer, wenn der Staat keine Gliederung hat.
 static func admin_entries(
 	sim: SimulationClient, admin_indices: PackedInt32Array, state_index: int
 ) -> Array[Dictionary]:
 	var colors := sim.get_map_colors(MapModes.MAP_VERWALTUNG)
 	var owners := sim.get_location_owner_indices()
+	var top_of := {}
 	var color_of := {}
 	var count_of := {}
+	var lowest_of := {}
 	for index in mini(colors.size(), mini(admin_indices.size(), owners.size())):
 		var unit := admin_indices[index]
 		if unit < 0 or owners[index] != state_index:
 			continue
-		if not color_of.has(unit):
-			color_of[unit] = colors[index]
-		count_of[unit] = int(count_of.get(unit, 0)) + 1
-	var units: Array = color_of.keys()
-	units.sort()
+		if not top_of.has(unit):
+			var top := unit
+			for step in sim.get_admin_unit_count():
+				var parent := int(sim.get_admin_unit(top).get("parent_index", -1))
+				if parent < 0:
+					break
+				top = parent
+			top_of[unit] = top
+		var top_unit: int = top_of[unit]
+		if not color_of.has(top_unit):
+			color_of[top_unit] = colors[index]
+			lowest_of[top_unit] = {}
+		count_of[top_unit] = int(count_of.get(top_unit, 0)) + 1
+		(lowest_of[top_unit] as Dictionary)[unit] = true
+	var tops: Array = color_of.keys()
+	tops.sort()
 	var entries: Array[Dictionary] = []
-	for unit: int in units:
-		var info := sim.get_admin_unit(unit)
+	for top_unit: int in tops:
+		var info := sim.get_admin_unit(top_unit)
+		var parts := (lowest_of[top_unit] as Dictionary).size()
 		var detail := "%s (%s) – %s" % [
 			str(info.get("name", "")),
 			GermanFormat.humanize(str(info.get("kind", ""))),
-			count_text(int(count_of[unit])),
+			count_text(int(count_of[top_unit])),
 		]
-		entries.append({"color": color_of[unit], "text": str(info.get("name", "")), "detail": detail})
+		if parts > 1:
+			detail += ", %d Untereinheiten" % parts
+		entries.append(
+			{"color": color_of[top_unit], "text": str(info.get("name", "")), "detail": detail}
+		)
 	return entries
 
 

@@ -268,7 +268,7 @@ ort eupen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_eupen
         bund       = ja
     }
 }
@@ -411,7 +411,7 @@ ort malmedy {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_malmedy
         bund       = ja
     }
 }
@@ -444,7 +444,7 @@ ort sankt_vith {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_malmedy
         bund       = ja
     }
 }
@@ -467,7 +467,7 @@ ort buellingen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_malmedy
         bund       = ja
     }
 }
@@ -490,7 +490,7 @@ ort amel {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_malmedy
         bund       = ja
     }
 }

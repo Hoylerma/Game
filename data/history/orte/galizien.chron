@@ -28,7 +28,7 @@ ort jaworzno {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_galizien
+        verwaltung = au_kr_krakauer_kreis
     }
 }
 
@@ -50,7 +50,7 @@ ort krenau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_galizien
+        verwaltung = au_kr_krakauer_kreis
     }
 }
 
@@ -72,7 +72,7 @@ ort auschwitz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_galizien
+        verwaltung = au_kr_wadowicer_kreis
         bund       = ja
     }
 }
@@ -95,7 +95,7 @@ ort alwernia {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_galizien
+        verwaltung = au_kr_krakauer_kreis
     }
 }
 
@@ -117,7 +117,7 @@ ort zator {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_galizien
+        verwaltung = au_kr_wadowicer_kreis
         bund       = ja
     }
 }
@@ -140,7 +140,7 @@ ort saybusch {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_galizien
+        verwaltung = au_kr_wadowicer_kreis
         bund       = ja
     }
 }
@@ -163,7 +163,7 @@ ort wadowice {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_galizien
+        verwaltung = au_kr_wadowicer_kreis
         bund       = ja
     }
 }
@@ -186,7 +186,7 @@ ort andrychow {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_galizien
+        verwaltung = au_kr_wadowicer_kreis
         bund       = ja
     }
 }
@@ -209,7 +209,7 @@ ort kenty {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_galizien
+        verwaltung = au_kr_wadowicer_kreis
         bund       = ja
     }
 }
@@ -232,7 +232,7 @@ ort milowka {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_galizien
+        verwaltung = au_kr_wadowicer_kreis
         bund       = ja
     }
 }
@@ -255,7 +255,7 @@ ort jelesnia {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_galizien
+        verwaltung = au_kr_wadowicer_kreis
         bund       = ja
     }
 }
@@ -278,7 +278,7 @@ ort lachowice {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_galizien
+        verwaltung = au_kr_wadowicer_kreis
         bund       = ja
     }
 }
@@ -301,7 +301,7 @@ ort rycerka_gorna {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_galizien
+        verwaltung = au_kr_wadowicer_kreis
         bund       = ja
     }
 }

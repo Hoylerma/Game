@@ -265,7 +265,7 @@ ort wolfen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_bitterfeld
         bund       = ja
     }
 }
@@ -288,7 +288,7 @@ ort zoerbig {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_bitterfeld
         bund       = ja
     }
 }
@@ -311,7 +311,7 @@ ort roitzsch {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_delitzsch
         bund       = ja
     }
 }
@@ -334,7 +334,7 @@ ort pouch {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_sachsen
+        verwaltung = pr_kr_bitterfeld
         bund       = ja
     }
 }

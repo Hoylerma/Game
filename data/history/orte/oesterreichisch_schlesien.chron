@@ -29,7 +29,7 @@ ort jaegerndorf {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_schlesien
+        verwaltung = au_kr_troppau
         bund       = ja
     }
 }
@@ -52,7 +52,7 @@ ort freudenthal {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_schlesien
+        verwaltung = au_kr_troppau
         bund       = ja
     }
 }
@@ -75,7 +75,7 @@ ort freiwaldau_oesterreichisch_schlesien {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_schlesien
+        verwaltung = au_kr_troppau
         bund       = ja
     }
 }
@@ -98,7 +98,7 @@ ort roemerstadt {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_schlesien
+        verwaltung = au_kr_troppau
         bund       = ja
     }
 }
@@ -121,7 +121,7 @@ ort wuerbenthal {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_schlesien
+        verwaltung = au_kr_troppau
         bund       = ja
     }
 }
@@ -144,7 +144,7 @@ ort olbersdorf {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_schlesien
+        verwaltung = au_kr_troppau
         bund       = ja
     }
 }
@@ -167,7 +167,7 @@ ort jauernig {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_schlesien
+        verwaltung = au_kr_troppau
         bund       = ja
     }
 }
@@ -190,7 +190,7 @@ ort bennisch {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_schlesien
+        verwaltung = au_kr_troppau
         bund       = ja
     }
 }
@@ -213,7 +213,7 @@ ort friedeberg {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_schlesien
+        verwaltung = au_kr_troppau
         bund       = ja
     }
 }
@@ -236,7 +236,7 @@ ort weidenau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_schlesien
+        verwaltung = au_kr_troppau
         bund       = ja
     }
 }
@@ -259,7 +259,7 @@ ort hotzenplotz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_schlesien
+        verwaltung = au_kr_troppau
         bund       = ja
     }
 }
@@ -282,7 +282,7 @@ ort hennersdorf {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_schlesien
+        verwaltung = au_kr_troppau
         bund       = ja
     }
 }
@@ -305,7 +305,7 @@ ort troppau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_schlesien
+        verwaltung = au_kr_troppau
         bund       = ja
     }
 }
@@ -320,7 +320,7 @@ ort hultschin {
     quelle   = "GeoNames (CC BY 4.0), geonameid 3075716; deutscher Name aus den GeoNames-Alternativnamen (heute Hlučín); Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
-        bevoelkerung = 8333
+        bevoelkerung = 8462
         konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
         kultur       = { tschechen = 80 schlesier = 20 }
         verwuestung  = 0
@@ -328,7 +328,7 @@ ort hultschin {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_schlesien
+        verwaltung = pr_kr_ratibor
         bund       = ja
     }
 }
@@ -351,7 +351,7 @@ ort wigstadtl {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_schlesien
+        verwaltung = au_kr_troppau
         bund       = ja
     }
 }
@@ -366,7 +366,7 @@ ort bolatitz {
     quelle   = "GeoNames (CC BY 4.0), geonameid 3079078; deutscher Name aus den GeoNames-Alternativnamen (heute Bolatice); Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
-        bevoelkerung = 9166
+        bevoelkerung = 9308
         konfession   = { lutherisch = 95 katholisch = 3 juedisch = 2 }
         kultur       = { tschechen = 80 schlesier = 20 }
         verwuestung  = 0
@@ -374,7 +374,7 @@ ort bolatitz {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_schlesien
+        verwaltung = pr_kr_ratibor
         bund       = ja
     }
 }
@@ -397,7 +397,7 @@ ort bautsch {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_schlesien
+        verwaltung = au_kr_troppau
         bund       = ja
     }
 }
@@ -420,7 +420,7 @@ ort wuest_pohlom {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_schlesien
+        verwaltung = au_kr_troppau
         bund       = ja
     }
 }
@@ -443,7 +443,7 @@ ort schoenstein {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_schlesien
+        verwaltung = au_kr_troppau
         bund       = ja
     }
 }
@@ -466,7 +466,7 @@ ort freistadt_oesterreichisch_schlesien {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_schlesien
+        verwaltung = au_kr_teschen
         bund       = ja
     }
 }
@@ -489,7 +489,7 @@ ort friedeck {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_schlesien
+        verwaltung = au_kr_teschen
         bund       = ja
     }
 }
@@ -512,7 +512,7 @@ ort teschen {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_schlesien
+        verwaltung = au_kr_teschen
         bund       = ja
     }
 }
@@ -535,7 +535,7 @@ ort trinec {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_schlesien
+        verwaltung = au_kr_teschen
         bund       = ja
     }
 }
@@ -558,7 +558,7 @@ ort orlau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_schlesien
+        verwaltung = au_kr_teschen
         bund       = ja
     }
 }
@@ -581,7 +581,7 @@ ort bohumin {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_schlesien
+        verwaltung = au_kr_teschen
         bund       = ja
     }
 }
@@ -604,7 +604,7 @@ ort frydlant_nad_ostravici {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_schlesien
+        verwaltung = au_kr_teschen
         bund       = ja
     }
 }
@@ -627,7 +627,7 @@ ort horni_terlicko {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_schlesien
+        verwaltung = au_kr_teschen
         bund       = ja
     }
 }
@@ -650,7 +650,7 @@ ort braunsberg_oesterreichisch_schlesien {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_schlesien
+        verwaltung = au_kr_teschen
         bund       = ja
     }
 }
@@ -673,7 +673,7 @@ ort komorni_lhotka {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_schlesien
+        verwaltung = au_kr_teschen
         bund       = ja
     }
 }
@@ -696,7 +696,7 @@ ort moravka {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_schlesien
+        verwaltung = au_kr_teschen
         bund       = ja
     }
 }
@@ -719,7 +719,7 @@ ort bielsko_biala {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_schlesien
+        verwaltung = au_kr_teschen
         bund       = ja
     }
 }
@@ -742,7 +742,7 @@ ort czechowice_dziedzice {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_schlesien
+        verwaltung = au_kr_teschen
         bund       = ja
     }
 }
@@ -765,7 +765,7 @@ ort skoczow {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_schlesien
+        verwaltung = au_kr_teschen
         bund       = ja
     }
 }
@@ -788,7 +788,7 @@ ort jasienica {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_schlesien
+        verwaltung = au_kr_teschen
         bund       = ja
     }
 }
@@ -811,7 +811,7 @@ ort porabka {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_schlesien
+        verwaltung = au_kr_teschen
         bund       = ja
     }
 }
@@ -834,7 +834,7 @@ ort chybie {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_schlesien
+        verwaltung = au_kr_teschen
         bund       = ja
     }
 }
@@ -857,7 +857,7 @@ ort pruchna {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_schlesien
+        verwaltung = au_kr_teschen
         bund       = ja
     }
 }
@@ -880,7 +880,7 @@ ort ustron {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_schlesien
+        verwaltung = au_kr_teschen
         bund       = ja
     }
 }
@@ -903,7 +903,7 @@ ort wisla {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_schlesien
+        verwaltung = au_kr_teschen
         bund       = ja
     }
 }
@@ -926,7 +926,7 @@ ort szczyrk {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_schlesien
+        verwaltung = au_kr_teschen
         bund       = ja
     }
 }
@@ -949,7 +949,7 @@ ort jablunkau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_schlesien
+        verwaltung = au_kr_teschen
         bund       = ja
     }
 }
@@ -972,7 +972,7 @@ ort istebna {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_schlesien
+        verwaltung = au_kr_teschen
         bund       = ja
     }
 }

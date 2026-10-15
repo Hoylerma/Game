@@ -28,7 +28,7 @@ ort assling_krain {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_krain
+        verwaltung = au_kr_laibacher_kreis
         bund       = ja
     }
 }
@@ -51,7 +51,7 @@ ort radmannsdorf {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_krain
+        verwaltung = au_kr_laibacher_kreis
         bund       = ja
     }
 }
@@ -74,7 +74,7 @@ ort neumarktl {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_krain
+        verwaltung = au_kr_laibacher_kreis
         bund       = ja
     }
 }
@@ -97,7 +97,7 @@ ort zelezniki {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_krain
+        verwaltung = au_kr_laibacher_kreis
         bund       = ja
     }
 }
@@ -120,7 +120,7 @@ ort kronau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_krain
+        verwaltung = au_kr_laibacher_kreis
         bund       = ja
     }
 }
@@ -143,7 +143,7 @@ ort wochein_feistritz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_krain
+        verwaltung = au_kr_laibacher_kreis
         bund       = ja
     }
 }
@@ -166,7 +166,7 @@ ort gorenja_vas {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_krain
+        verwaltung = au_kr_laibacher_kreis
         bund       = ja
     }
 }
@@ -189,7 +189,7 @@ ort krainburg {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_krain
+        verwaltung = au_kr_laibacher_kreis
         bund       = ja
     }
 }
@@ -212,7 +212,7 @@ ort stein {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_krain
+        verwaltung = au_kr_laibacher_kreis
         bund       = ja
     }
 }
@@ -235,7 +235,7 @@ ort bischoflack {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_krain
+        verwaltung = au_kr_laibacher_kreis
         bund       = ja
     }
 }
@@ -258,7 +258,7 @@ ort domzale {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_krain
+        verwaltung = au_kr_laibacher_kreis
         bund       = ja
     }
 }
@@ -281,7 +281,7 @@ ort medvode {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_krain
+        verwaltung = au_kr_laibacher_kreis
         bund       = ja
     }
 }
@@ -304,7 +304,7 @@ ort zirklach {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_krain
+        verwaltung = au_kr_laibacher_kreis
         bund       = ja
     }
 }
@@ -327,7 +327,7 @@ ort littai {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_krain
+        verwaltung = au_kr_laibacher_kreis
         bund       = ja
     }
 }
@@ -350,7 +350,7 @@ ort trebnje {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_krain
+        verwaltung = au_kr_neustaedtler_kreis
         bund       = ja
     }
 }
@@ -373,7 +373,7 @@ ort radece {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_krain
+        verwaltung = au_kr_neustaedtler_kreis
         bund       = ja
     }
 }
@@ -396,7 +396,7 @@ ort ivancna_gorica {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_krain
+        verwaltung = au_kr_laibacher_kreis
         bund       = ja
     }
 }
@@ -419,7 +419,7 @@ ort seisenberg {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_krain
+        verwaltung = au_kr_neustaedtler_kreis
         bund       = ja
     }
 }
@@ -442,7 +442,7 @@ ort moravce {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_krain
+        verwaltung = au_kr_laibacher_kreis
         bund       = ja
     }
 }
@@ -465,7 +465,7 @@ ort izlake {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_krain
+        verwaltung = au_kr_laibacher_kreis
         bund       = ja
     }
 }
@@ -488,7 +488,7 @@ ort nassenfuss {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_krain
+        verwaltung = au_kr_neustaedtler_kreis
         bund       = ja
     }
 }
@@ -511,7 +511,7 @@ ort laibach {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_krain
+        verwaltung = au_kr_laibacher_kreis
         bund       = ja
     }
 }
@@ -534,7 +534,7 @@ ort grosuplje {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_krain
+        verwaltung = au_kr_laibacher_kreis
         bund       = ja
     }
 }
@@ -557,7 +557,7 @@ ort logatec {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_krain
+        verwaltung = au_kr_adelsberger_kreis
         bund       = ja
     }
 }
@@ -580,7 +580,7 @@ ort borovnica {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_krain
+        verwaltung = au_kr_laibacher_kreis
         bund       = ja
     }
 }
@@ -603,7 +603,7 @@ ort iggdorf {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_krain
+        verwaltung = au_kr_laibacher_kreis
         bund       = ja
     }
 }
@@ -626,7 +626,7 @@ ort log_pri_brezovici {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_krain
+        verwaltung = au_kr_laibacher_kreis
         bund       = ja
     }
 }
@@ -649,7 +649,7 @@ ort rudolfswert {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_krain
+        verwaltung = au_kr_neustaedtler_kreis
         bund       = ja
     }
 }
@@ -672,7 +672,7 @@ ort gurkfeld {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_krain
+        verwaltung = au_kr_neustaedtler_kreis
         bund       = ja
     }
 }
@@ -695,7 +695,7 @@ ort tschernembl {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_krain
+        verwaltung = au_kr_neustaedtler_kreis
         bund       = ja
     }
 }
@@ -718,7 +718,7 @@ ort moettling {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_krain
+        verwaltung = au_kr_neustaedtler_kreis
         bund       = ja
     }
 }
@@ -741,7 +741,7 @@ ort sankt_bartlmae {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_krain
+        verwaltung = au_kr_neustaedtler_kreis
         bund       = ja
     }
 }
@@ -764,7 +764,7 @@ ort dolenjske_toplice {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_krain
+        verwaltung = au_kr_neustaedtler_kreis
         bund       = ja
     }
 }
@@ -787,7 +787,7 @@ ort adelsberg {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_krain
+        verwaltung = au_kr_adelsberger_kreis
         bund       = ja
     }
 }
@@ -810,7 +810,7 @@ ort zirknitz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_krain
+        verwaltung = au_kr_adelsberger_kreis
         bund       = ja
     }
 }
@@ -833,7 +833,7 @@ ort illyrisch_feistritz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_krain
+        verwaltung = au_kr_adelsberger_kreis
         bund       = ja
     }
 }
@@ -856,7 +856,7 @@ ort idria {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_krain
+        verwaltung = au_kr_adelsberger_kreis
         bund       = ja
     }
 }
@@ -879,7 +879,7 @@ ort pivka {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_krain
+        verwaltung = au_kr_adelsberger_kreis
         bund       = ja
     }
 }
@@ -902,7 +902,7 @@ ort vipava {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_krain
+        verwaltung = au_kr_adelsberger_kreis
         bund       = ja
     }
 }
@@ -925,7 +925,7 @@ ort gottschee {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_krain
+        verwaltung = au_kr_neustaedtler_kreis
         bund       = ja
     }
 }
@@ -948,7 +948,7 @@ ort reifnitz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_krain
+        verwaltung = au_kr_neustaedtler_kreis
         bund       = ja
     }
 }
@@ -971,7 +971,7 @@ ort grosslaschitz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_krain
+        verwaltung = au_kr_laibacher_kreis
         bund       = ja
     }
 }
@@ -994,7 +994,7 @@ ort leskova_dolina {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_krain
+        verwaltung = au_kr_adelsberger_kreis
         bund       = ja
     }
 }
@@ -1017,7 +1017,7 @@ ort kostel {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_krain
+        verwaltung = au_kr_neustaedtler_kreis
         bund       = ja
     }
 }
@@ -1040,7 +1040,7 @@ ort laserbach {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_krain
+        verwaltung = au_kr_adelsberger_kreis
         bund       = ja
     }
 }
@@ -1063,7 +1063,7 @@ ort osilnica {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_krain
+        verwaltung = au_kr_adelsberger_kreis
         bund       = ja
     }
 }
@@ -1086,7 +1086,7 @@ ort nova_vas {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_krain
+        verwaltung = au_kr_adelsberger_kreis
         bund       = ja
     }
 }

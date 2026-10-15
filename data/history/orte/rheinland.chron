@@ -28,7 +28,7 @@ ort erkelenz {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_erkelenz
         bund       = ja
     }
 }
@@ -51,7 +51,7 @@ ort heinsberg {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_heinsberg
         bund       = ja
     }
 }
@@ -74,7 +74,7 @@ ort geilenkirchen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_geilenkirchen
         bund       = ja
     }
 }
@@ -97,7 +97,7 @@ ort wegberg {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_erkelenz
         bund       = ja
     }
 }
@@ -120,7 +120,7 @@ ort gangelt {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_geilenkirchen
         bund       = ja
     }
 }
@@ -143,7 +143,7 @@ ort leverkusen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_muelheim
         bund       = ja
     }
 }
@@ -166,7 +166,7 @@ ort bergisch_gladbach {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_muelheim
         bund       = ja
     }
 }
@@ -189,7 +189,7 @@ ort roesrath {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_sieg
         bund       = ja
     }
 }
@@ -212,7 +212,7 @@ ort wipperfuerth {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_wipperfuerth
         bund       = ja
     }
 }
@@ -235,7 +235,7 @@ ort overath {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_sieg
         bund       = ja
     }
 }
@@ -258,7 +258,7 @@ ort radevormwald {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_wipperfuerth
         bund       = ja
     }
 }
@@ -281,7 +281,7 @@ ort kuerten {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_wipperfuerth
         bund       = ja
     }
 }
@@ -304,7 +304,7 @@ ort burscheid {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_solingen
         bund       = ja
     }
 }
@@ -327,7 +327,7 @@ ort gummersbach {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_gummersbach
         bund       = ja
     }
 }
@@ -350,7 +350,7 @@ ort wiehl {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_gummersbach
         bund       = ja
     }
 }
@@ -373,7 +373,7 @@ ort engelskirchen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_gummersbach
         bund       = ja
     }
 }
@@ -396,7 +396,7 @@ ort eitorf {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_altenkirchen
         bund       = ja
     }
 }
@@ -419,7 +419,7 @@ ort waldbroel {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_waldbroel
         bund       = ja
     }
 }
@@ -442,7 +442,7 @@ ort ruppichteroth {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_waldbroel
         bund       = ja
     }
 }
@@ -465,7 +465,7 @@ ort morsbach {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_waldbroel
         bund       = ja
     }
 }
@@ -488,7 +488,7 @@ ort much {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_waldbroel
         bund       = ja
     }
 }
@@ -511,7 +511,7 @@ ort koeln {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_koeln
         bund       = ja
     }
 }
@@ -534,7 +534,7 @@ ort bonn {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_bonn
         bund       = ja
     }
 }
@@ -557,7 +557,7 @@ ort siegburg {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_sieg
         bund       = ja
     }
 }
@@ -580,7 +580,7 @@ ort huerth {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_koeln
         bund       = ja
     }
 }
@@ -603,7 +603,7 @@ ort koenigswinter {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_bonn
         bund       = ja
     }
 }
@@ -626,7 +626,7 @@ ort bornheim {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_bonn
         bund       = ja
     }
 }
@@ -649,7 +649,7 @@ ort wesseling {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_koeln
         bund       = ja
     }
 }
@@ -672,7 +672,7 @@ ort meckenheim {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_rheinbach
         bund       = ja
     }
 }
@@ -695,7 +695,7 @@ ort weilerswist {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_euskirchen
         bund       = ja
     }
 }
@@ -718,7 +718,7 @@ ort porz_am_rhein {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_koeln
         bund       = ja
     }
 }
@@ -741,7 +741,7 @@ ort kerpen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_bergheim
         bund       = ja
     }
 }
@@ -764,7 +764,7 @@ ort bergheim {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_bergheim
         bund       = ja
     }
 }
@@ -787,7 +787,7 @@ ort pulheim {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_koeln
         bund       = ja
     }
 }
@@ -810,7 +810,7 @@ ort noervenich {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_dueren
         bund       = ja
     }
 }
@@ -833,7 +833,7 @@ ort dueren {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_dueren
         bund       = ja
     }
 }
@@ -856,7 +856,7 @@ ort simmerath {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_montjoie
         bund       = ja
     }
 }
@@ -879,7 +879,7 @@ ort nideggen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_dueren
         bund       = ja
     }
 }
@@ -902,7 +902,7 @@ ort roetgen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_montjoie
         bund       = ja
     }
 }
@@ -925,7 +925,7 @@ ort aachen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_aachen
         bund       = ja
     }
 }
@@ -948,7 +948,7 @@ ort eschweiler {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_juelich
         bund       = ja
     }
 }
@@ -971,7 +971,7 @@ ort herzogenrath {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_aachen
         bund       = ja
     }
 }
@@ -994,7 +994,7 @@ ort juelich {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_juelich
         bund       = ja
     }
 }
@@ -1017,7 +1017,7 @@ ort baesweiler {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_geilenkirchen
         bund       = ja
     }
 }
@@ -1040,7 +1040,7 @@ ort niederzier {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_juelich
         bund       = ja
     }
 }
@@ -1063,7 +1063,7 @@ ort linnich {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_juelich
         bund       = ja
     }
 }
@@ -1086,7 +1086,7 @@ ort titz {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_juelich
         bund       = ja
     }
 }
@@ -1109,7 +1109,7 @@ ort euskirchen {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_euskirchen
         bund       = ja
     }
 }
@@ -1132,7 +1132,7 @@ ort mechernich {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_euskirchen
         bund       = ja
     }
 }
@@ -1155,7 +1155,7 @@ ort bad_muenstereifel {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_euskirchen
         bund       = ja
     }
 }
@@ -1178,7 +1178,7 @@ ort zuelpich {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_euskirchen
         bund       = ja
     }
 }
@@ -1201,7 +1201,7 @@ ort schleiden {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_schleiden
         bund       = ja
     }
 }
@@ -1224,7 +1224,7 @@ ort nettersheim {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_schleiden
         bund       = ja
     }
 }
@@ -1247,7 +1247,7 @@ ort dahlem {
 
     1848.03.01 = {
         besitzer   = PRU
-        verwaltung = pr_rheinprovinz
+        verwaltung = pr_kr_schleiden
         bund       = ja
     }
 }

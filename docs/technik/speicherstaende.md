@@ -79,8 +79,8 @@ Simulation beeinflusst, und ein Gesamtwert über die 13 Bereiche:
 | `gueter`, `beduerfnisse` | Kennung, Basispreis, Weltmarktfaktor; Hunger und Warenkörbe je Schicht |
 | `betriebe` | Kennung, Beruf, Erzeugung, Vorleistungen, Agrar, Standort, Vorkommen, Handel, Gewicht, Geländefaktoren |
 | `maerkte`, `vorkommen` | Kennungen und Landschaften; Kennungen der Vorkommen |
-| `staaten`, `kreise` | Kennung, Kurzname und Konfession des Herrscherhauses; Kennungen der Kreise |
-| `orte` | Kennung, Name, Gelände, Kreis, Lage, Fläche, Stadt, Markt, Vorkommen, Hafen; die Zahl der Orte |
+| `staaten`, `kreise` | Kennung, Kurzname, Konfession des Herrscherhauses und Zollverein (seit M7) der Staaten, die zum Startdatum bestehen; Kennungen der Kreise; Verwaltungseinheiten mit Kennung, Art und übergeordneter Einheit (seit M7) |
+| `orte` | Kennung, Name, Gelände, Kreis, Lage, Fläche, Stadt, Markt, Vorkommen, Hafen, Verwaltungseinheit und Bundesgebiet (seit M7); die Zahl der Orte |
 
 **Nicht** dazu gehören volle Staatsnamen, Farben, Quellen und Beschreibungen: Eine korrigierte
 Quelle macht alte Spielstände nicht unbrauchbar. Der **Kurzname der Staaten und der Name der Orte

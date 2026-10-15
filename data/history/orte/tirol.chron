@@ -28,7 +28,7 @@ ort sankt_johann_in_tirol {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_unterinntal
         bund       = ja
     }
 }
@@ -51,7 +51,7 @@ ort kitzbuehel {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_unterinntal
         bund       = ja
     }
 }
@@ -74,7 +74,7 @@ ort koessen {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_unterinntal
         bund       = ja
     }
 }
@@ -97,7 +97,7 @@ ort fieberbrunn {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_unterinntal
         bund       = ja
     }
 }
@@ -120,7 +120,7 @@ ort westendorf {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_unterinntal
         bund       = ja
     }
 }
@@ -143,7 +143,7 @@ ort ellmau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_unterinntal
         bund       = ja
     }
 }
@@ -166,7 +166,7 @@ ort waidring {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_unterinntal
         bund       = ja
     }
 }
@@ -189,7 +189,7 @@ ort woergl {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_unterinntal
         bund       = ja
     }
 }
@@ -212,7 +212,7 @@ ort schwaz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_unterinntal
         bund       = ja
     }
 }
@@ -235,7 +235,7 @@ ort kufstein {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_unterinntal
         bund       = ja
     }
 }
@@ -258,7 +258,7 @@ ort alpbach {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_unterinntal
         bund       = ja
     }
 }
@@ -281,7 +281,7 @@ ort fuegen {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_unterinntal
         bund       = ja
     }
 }
@@ -304,7 +304,7 @@ ort achenkirch {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_unterinntal
         bund       = ja
     }
 }
@@ -327,7 +327,7 @@ ort brandenberg {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_unterinntal
         bund       = ja
     }
 }
@@ -350,7 +350,7 @@ ort reutte {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_oberinntal
         bund       = ja
     }
 }
@@ -373,7 +373,7 @@ ort tannheim {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_oberinntal
         bund       = ja
     }
 }
@@ -396,7 +396,7 @@ ort elbigenalp {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_oberinntal
         bund       = ja
     }
 }
@@ -419,7 +419,7 @@ ort elmen {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_oberinntal
         bund       = ja
     }
 }
@@ -442,7 +442,7 @@ ort innsbruck {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_unterinntal
         bund       = ja
     }
 }
@@ -465,7 +465,7 @@ ort hall_in_tirol {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_unterinntal
         bund       = ja
     }
 }
@@ -488,7 +488,7 @@ ort telfs {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_oberinntal
         bund       = ja
     }
 }
@@ -511,7 +511,7 @@ ort zirl {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_unterinntal
         bund       = ja
     }
 }
@@ -534,7 +534,7 @@ ort leutasch {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_oberinntal
         bund       = ja
     }
 }
@@ -557,7 +557,7 @@ ort fritzens {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_unterinntal
         bund       = ja
     }
 }
@@ -580,7 +580,7 @@ ort gries_im_sellrain {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_oberinntal
         bund       = ja
     }
 }
@@ -603,7 +603,7 @@ ort imst {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_oberinntal
         bund       = ja
     }
 }
@@ -626,7 +626,7 @@ ort laengenfeld {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_oberinntal
         bund       = ja
     }
 }
@@ -649,7 +649,7 @@ ort soelden {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_oberinntal
         bund       = ja
     }
 }
@@ -672,7 +672,7 @@ ort oetz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_oberinntal
         bund       = ja
     }
 }
@@ -695,7 +695,7 @@ ort ehrwald {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_oberinntal
         bund       = ja
     }
 }
@@ -718,7 +718,7 @@ ort nassereith {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_oberinntal
         bund       = ja
     }
 }
@@ -741,7 +741,7 @@ ort jerzens {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_oberinntal
         bund       = ja
     }
 }
@@ -764,7 +764,7 @@ ort mayrhofen {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_unterinntal
         bund       = ja
     }
 }
@@ -787,7 +787,7 @@ ort tux {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_unterinntal
         bund       = ja
     }
 }
@@ -810,7 +810,7 @@ ort aschau_im_zillertal {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_unterinntal
         bund       = ja
     }
 }
@@ -833,7 +833,7 @@ ort gerlos {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_unterinntal
         bund       = ja
     }
 }
@@ -856,7 +856,7 @@ ort landeck {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_oberinntal
         bund       = ja
     }
 }
@@ -879,7 +879,7 @@ ort pfunds {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_oberinntal
         bund       = ja
     }
 }
@@ -902,7 +902,7 @@ ort sankt_anton_am_arlberg {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_oberinntal
         bund       = ja
     }
 }
@@ -925,7 +925,7 @@ ort ischgl {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_oberinntal
         bund       = ja
     }
 }
@@ -948,7 +948,7 @@ ort nauders {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_oberinntal
         bund       = ja
     }
 }
@@ -971,7 +971,7 @@ ort kappl {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_oberinntal
         bund       = ja
     }
 }
@@ -994,7 +994,7 @@ ort serfaus {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_oberinntal
         bund       = ja
     }
 }
@@ -1017,7 +1017,7 @@ ort prutz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_oberinntal
         bund       = ja
     }
 }
@@ -1040,7 +1040,7 @@ ort flirsch {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_oberinntal
         bund       = ja
     }
 }
@@ -1063,7 +1063,7 @@ ort galtuer {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_oberinntal
         bund       = ja
     }
 }
@@ -1086,7 +1086,7 @@ ort graun_im_vinschgau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_oberinntal
         bund       = ja
     }
 }
@@ -1109,7 +1109,7 @@ ort steeg {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_oberinntal
         bund       = ja
     }
 }
@@ -1132,7 +1132,7 @@ ort sterzing {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_pustertal
         bund       = ja
     }
 }
@@ -1155,7 +1155,7 @@ ort neustift_im_stubaital {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_unterinntal
         bund       = ja
     }
 }
@@ -1178,7 +1178,7 @@ ort steinach_am_brenner {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_unterinntal
         bund       = ja
     }
 }
@@ -1201,7 +1201,7 @@ ort ried {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_pustertal
         bund       = ja
     }
 }
@@ -1224,7 +1224,7 @@ ort vals {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_unterinntal
         bund       = ja
     }
 }
@@ -1247,7 +1247,7 @@ ort gschnitz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_unterinntal
         bund       = ja
     }
 }
@@ -1270,7 +1270,7 @@ ort lienz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_pustertal
         bund       = ja
     }
 }
@@ -1293,7 +1293,7 @@ ort toblach {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_pustertal
         bund       = ja
     }
 }
@@ -1316,7 +1316,7 @@ ort matrei_in_osttirol {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_pustertal
         bund       = ja
     }
 }
@@ -1339,7 +1339,7 @@ ort sillian {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_pustertal
         bund       = ja
     }
 }
@@ -1362,7 +1362,7 @@ ort nikolsdorf {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_pustertal
         bund       = ja
     }
 }
@@ -1385,7 +1385,7 @@ ort obertilliach {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_pustertal
         bund       = ja
     }
 }
@@ -1408,7 +1408,7 @@ ort schlaiten {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_pustertal
         bund       = ja
     }
 }
@@ -1431,7 +1431,7 @@ ort san_martino {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_pustertal
         bund       = ja
     }
 }
@@ -1454,7 +1454,7 @@ ort sankt_veit_in_defereggen {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_pustertal
         bund       = ja
     }
 }
@@ -1477,7 +1477,7 @@ ort praegraten {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_pustertal
         bund       = ja
     }
 }
@@ -1500,7 +1500,7 @@ ort kals_am_grossglockner {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_pustertal
         bund       = ja
     }
 }
@@ -1523,7 +1523,7 @@ ort bruneck {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_pustertal
         bund       = ja
     }
 }
@@ -1546,7 +1546,7 @@ ort ahrntal {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_pustertal
         bund       = ja
     }
 }
@@ -1569,7 +1569,7 @@ ort sand_in_taufers {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_pustertal
         bund       = ja
     }
 }
@@ -1592,7 +1592,7 @@ ort rasen_antholz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_pustertal
         bund       = ja
     }
 }
@@ -1615,7 +1615,7 @@ ort muehlwald {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_pustertal
         bund       = ja
     }
 }
@@ -1638,7 +1638,7 @@ ort prettau {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_pustertal
         bund       = ja
     }
 }
@@ -1661,7 +1661,7 @@ ort brixen {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_pustertal
         bund       = ja
     }
 }
@@ -1684,7 +1684,7 @@ ort st_ulrich_in_groeden {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_an_der_etsch
         bund       = ja
     }
 }
@@ -1707,7 +1707,7 @@ ort klausen {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_an_der_etsch
         bund       = ja
     }
 }
@@ -1730,7 +1730,7 @@ ort vintl {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_pustertal
         bund       = ja
     }
 }
@@ -1753,7 +1753,7 @@ ort sankt_vigil {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_pustertal
         bund       = ja
     }
 }
@@ -1776,7 +1776,7 @@ ort abtei {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_pustertal
         bund       = ja
     }
 }
@@ -1799,7 +1799,7 @@ ort meran {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_an_der_etsch
         bund       = ja
     }
 }
@@ -1822,7 +1822,7 @@ ort ratschings {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_an_der_etsch
         bund       = ja
     }
 }
@@ -1845,7 +1845,7 @@ ort sarnthein {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_an_der_etsch
         bund       = ja
     }
 }
@@ -1868,7 +1868,7 @@ ort sankt_martin_in_passeier {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_an_der_etsch
         bund       = ja
     }
 }
@@ -1891,7 +1891,7 @@ ort gargazon {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_an_der_etsch
         bund       = ja
     }
 }
@@ -1914,7 +1914,7 @@ ort moos_in_passeier {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_an_der_etsch
         bund       = ja
     }
 }
@@ -1937,7 +1937,7 @@ ort schlanders {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_an_der_etsch
         bund       = ja
     }
 }
@@ -1960,7 +1960,7 @@ ort naturns {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_an_der_etsch
         bund       = ja
     }
 }
@@ -1983,7 +1983,7 @@ ort prad_am_stilfser_joch {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_an_der_etsch
         bund       = ja
     }
 }
@@ -2006,7 +2006,7 @@ ort ulten {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_an_der_etsch
         bund       = ja
     }
 }
@@ -2029,7 +2029,7 @@ ort schnals {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_an_der_etsch
         bund       = ja
     }
 }
@@ -2052,7 +2052,7 @@ ort taufers_im_muenstertal {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_an_der_etsch
         bund       = ja
     }
 }
@@ -2075,7 +2075,7 @@ ort laurein {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_an_der_etsch
         bund       = ja
     }
 }
@@ -2098,7 +2098,7 @@ ort martell {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_an_der_etsch
         bund       = ja
     }
 }
@@ -2121,7 +2121,7 @@ ort bozen {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_an_der_etsch
         bund       = ja
     }
 }
@@ -2144,7 +2144,7 @@ ort kaltern {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_an_der_etsch
         bund       = ja
     }
 }
@@ -2167,7 +2167,7 @@ ort ritten {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_an_der_etsch
         bund       = ja
     }
 }
@@ -2190,7 +2190,7 @@ ort neumarkt_tirol {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_an_der_etsch
         bund       = ja
     }
 }
@@ -2213,7 +2213,7 @@ ort salurn {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_an_der_etsch
         bund       = ja
     }
 }
@@ -2236,7 +2236,7 @@ ort welschnofen {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_tirol
+        verwaltung = au_kr_kreis_an_der_etsch
         bund       = ja
     }
 }
