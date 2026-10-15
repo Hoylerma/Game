@@ -40,8 +40,8 @@ def zahl(wert: float) -> str:
 
 def kette(einheit: str, einheiten: dict[str, dict[str, str]]) -> str:
     """Verwaltungskette von unten nach oben, z. B. „Kreis Teltow · Regierungsbezirk Potsdam · …“."""
-    namen = []
-    while einheit:
+    namen: list[str] = []
+    while einheit and len(namen) <= len(einheiten):  # Schranke gegen Kreise in 'ueber'
         namen.append(einheiten[einheit]["name"])
         einheit = einheiten[einheit]["ueber"]
     return " · ".join(namen)
@@ -155,9 +155,9 @@ def summen_verwaltung(tabellen: Path, staaten: tuple[str, ...] = ("PRU", "AUT"))
     for z in zu.lies_csv(tabellen / "besitz.csv"):
         if z["ab"] != STICHTAG_BESITZ or z["besitzer"] not in staaten or not z["verwaltung"]:
             continue
-        oben = z["verwaltung"]
-        while einheiten[oben]["ueber"]:
-            oben = einheiten[oben]["ueber"]
+        oben, schritte = z["verwaltung"], 0
+        while einheiten[oben]["ueber"] and schritte <= len(einheiten):  # Schranke gegen Kreise
+            oben, schritte = einheiten[oben]["ueber"], schritte + 1
         anzahl[oben] += 1
         flaeche[oben] += float(orte[z["ort"]]["flaeche"])
         summe[oben] += einwohner.get(z["ort"], 0)

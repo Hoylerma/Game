@@ -209,6 +209,45 @@ class Ergebnis:
 NAECHSTE = "naechste:"
 
 
+def eindeutig(zeilen: list[dict[str, str]], spalte: str, anzeige: str) -> list[str]:
+    """Fehler für doppelte Schlüssel: Eine zweite Zeile würde die erste beim Nachschlagen still ersetzen."""
+    fehler: list[str] = []
+    erste: dict[str, str] = {}
+    for z in zeilen:
+        if z[spalte] in erste:
+            fehler.append(f"{anzeige}:{z['_zeile']}: {spalte} {z[spalte]!r} schon in Zeile {erste[z[spalte]]}")
+        else:
+            erste[z[spalte]] = z["_zeile"]
+    return fehler
+
+
+def pruefe_verwaltung(verwaltung: list[dict[str, str]]) -> list[str]:
+    """Fehler in verwaltung.csv, an denen die Werkzeuge scheitern würden: doppelte Kennungen, Kreise in
+    'ueber' (Ketten liefen endlos) und unterste Einheiten mit gleichem Sitz (der nächste Sitz wählte stets
+    dieselbe)."""
+    fehler = eindeutig(verwaltung, "id", "verwaltung.csv")
+    ueber = {z["id"]: z["ueber"] for z in verwaltung}
+    zeile = {z["id"]: z["_zeile"] for z in verwaltung}
+    for einheit in sorted(ueber):
+        gesehen, oben = {einheit}, ueber[einheit]
+        while oben and oben not in gesehen:
+            gesehen.add(oben)
+            oben = ueber.get(oben, "")
+        if oben == einheit:
+            fehler.append(f"verwaltung.csv:{zeile[einheit]}: Einheit {einheit!r} liegt (über 'ueber') in sich selbst")
+    hat_unter = {u for u in ueber.values() if u}
+    sitz_von: dict[str, str] = {}
+    for z in verwaltung:
+        sitz = z.get("sitz", "")
+        if not sitz or z["id"] in hat_unter:
+            continue
+        if sitz in sitz_von:
+            fehler.append(f"verwaltung.csv:{z['_zeile']}: Sitz {sitz!r} schon für {sitz_von[sitz]!r}")
+        else:
+            sitz_von[sitz] = z["id"]
+    return fehler
+
+
 def naechste_einheiten(
     orte: list[dict[str, str]], ueber: dict[str, str], sitze: dict[str, str]
 ) -> dict[str, list[tuple[str, float, float]]]:
@@ -395,6 +434,8 @@ def lade(tabellen: Path, regeln_pfad: Path, codes_pfad: Path) -> tuple[list[dict
     regeln, fehler = lies_regeln(lies_csv(regeln_pfad, REGEL_SPALTEN), regeln_pfad.name)
     staaten = {z["tag"]: z["name"] for z in lies_csv(tabellen / "staaten.csv")}
     verwaltung = lies_csv(tabellen / "verwaltung.csv")
+    if fehler_verwaltung := pruefe_verwaltung(verwaltung):
+        raise ZuordnungFehler("\n".join(fehler_verwaltung))
     einheiten = {z["id"]: z["staat"] for z in verwaltung}
     ueber = {z["id"]: z["ueber"] for z in verwaltung}
     sitze = {z["id"]: z.get("sitz", "") for z in verwaltung}
@@ -445,8 +486,12 @@ def main(argv: Sequence[str] | None = None) -> int:
                 print(f"{ort['id']:<32} {ort['name']:<32} {ort['datei']:<24} {'Bund' if z.bund else '':<4} {z.verwaltung or '':<24} {regel}")
         return 0
     pfad = args.tabellen / "besitz.csv"
-    alt = pfad.read_text(encoding="utf-8")
-    neu = neue_besitz_tabelle(alt, besitz_zeilen(orte, ergebnis))
+    try:
+        alt = pfad.read_text(encoding="utf-8-sig")
+        neu = neue_besitz_tabelle(alt, besitz_zeilen(orte, ergebnis))
+    except (OSError, ZuordnungFehler) as fehler:
+        print(f"Fehler: {fehler}", file=sys.stderr)
+        return 2
     if args.pruefen:
         if alt != neu:
             print("besitz.csv ist nicht aktuell – bitte python3 tools/geodaten/zuordnung.py ausführen.")

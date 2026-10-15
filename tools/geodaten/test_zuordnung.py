@@ -157,6 +157,32 @@ class TestNaechsterSitz(unittest.TestCase):
         self.assertIn("Sitz a_dorf von kr_b liegt in kr_a", e.warnungen)
 
 
+class TestVerwaltung(unittest.TestCase):
+    @staticmethod
+    def einheiten(*zeilen: tuple[str, str, str]) -> list[dict[str, str]]:
+        return [{"id": i, "ueber": u, "sitz": s, "_zeile": str(nr)} for nr, (i, u, s) in enumerate(zeilen, start=2)]
+
+    def test_gueltig(self) -> None:
+        self.assertEqual(zu.pruefe_verwaltung(self.einheiten(("land", "", "a"), ("k1", "land", "b"), ("k2", "land", "c"))), [])
+
+    def test_doppelte_kennung_und_kreis(self) -> None:
+        fehler = zu.pruefe_verwaltung(
+            self.einheiten(("vorort", "land", "x"), ("land", "kreis", ""), ("kreis", "land", ""), ("d", "", ""), ("d", "", ""))
+        )
+        self.assertEqual(
+            fehler,
+            [
+                "verwaltung.csv:6: id 'd' schon in Zeile 5",
+                "verwaltung.csv:4: Einheit 'kreis' liegt (über 'ueber') in sich selbst",
+                "verwaltung.csv:3: Einheit 'land' liegt (über 'ueber') in sich selbst",
+            ],
+        )  # vorort führt nur in den Kreis und wird nicht gemeldet
+
+    def test_gleicher_sitz(self) -> None:
+        fehler = zu.pruefe_verwaltung(self.einheiten(("land", "", "y"), ("k1", "land", "y"), ("k2", "land", "y")))
+        self.assertEqual(fehler, ["verwaltung.csv:4: Sitz 'y' schon für 'k1'"])  # land hat Untereinheiten
+
+
 class TestBesitz(unittest.TestCase):
     def test_zeilen_zum_stichtag_ersetzen(self) -> None:
         e = zu.aufloesen(ORTE, CODES, regeln(*GRUND), STAATEN, EINHEITEN)

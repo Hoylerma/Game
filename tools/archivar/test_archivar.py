@@ -353,6 +353,12 @@ class TestStaatenbestandUndVerwaltung(MitKopie):
         self.ersetze("staaten_historie.csv", "AAA;1648.10.24;hauptstadt;hafen", "AAA;1648.10.24;hauptstadt;moor")
         self.erwarte_fehler("szenarien/szenarien.chron: Spielerstaat AAA besitzt zum Szenario frieden (1648.10.24) keinen Ort")
 
+    def test_spielbarer_staat_ohne_land(self) -> None:
+        pfad = self.daten / "szenarien" / "szenarien.chron"
+        text = pfad.read_text(encoding="utf-8")
+        pfad.write_text(text.replace("spieler = AAA }", "spieler = AAA spielbar = { AAA CCC } }"), encoding="utf-8")
+        self.erwarte_fehler("szenarien/szenarien.chron: Spielbarer Staat CCC besitzt zum Szenario frieden (1648.10.24) keinen Ort")
+
     def test_verwaltung_in_der_ausgabe(self) -> None:
         root = chron.parse_script((self.daten / "history/verwaltung/sued.chron").read_text(encoding="utf-8")).root
         self.assertEqual(

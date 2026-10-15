@@ -150,6 +150,7 @@ def schaetzen(
     """Schätzt die Einwohner aller Orte mit Besitzer. ``ueber``: Einheit → übergeordnete Einheit."""
     fehler: list[str] = []
     nach_gebiet = {m.gebiet: m for m in merkmale}
+    getroffen: set[str] = set()
     ergebnis: list[Ort] = []
     for ort in orte:
         z = zuordnung.get(ort["id"])
@@ -166,6 +167,7 @@ def schaetzen(
             continue
         gebiete = zu.gebiete_des_orts(ort, codes[ort["id"]]) + [f"verwaltung:{e}" for e in kette] + [f"staat:{z.staat}"]
         passend = sorted((nach_gebiet[g] for g in gebiete if g in nach_gebiet), key=lambda m: m.rang, reverse=True)
+        getroffen.update(m.gebiet for m in passend)
         konfession = next((m.konfession for m in passend if m.konfession), "")
         kultur = next((m.kultur for m in passend if m.kultur), "")
         dichte = next((m.dichte for m in passend if m.dichte is not None), 1.0)
@@ -179,6 +181,10 @@ def schaetzen(
         if stadt and not fest:
             gewicht += STADT_FAKTOR * float(codes[ort["id"]]["einwohner_heute"] or 0) ** STADT_EXPONENT
         ergebnis.append(Ort(ort["id"], ort["datei"], flaeche, stadt, ort["gelaende"], raum, konfession, kultur, gewicht, fest))
+    # Ein Gebiet ohne Treffer ist meist verschrieben (verwaltung:pr_rheinprovnz); still gälte eine schwächere Zeile.
+    for m in merkmale:
+        if m.gebiet not in getroffen:
+            fehler.append(f"merkmale_1846.csv:{m.zeile}: Gebiet {m.gebiet!r} trifft keinen Ort")
     for kennung in staedte:
         if not any(o.kennung == kennung for o in ergebnis):
             fehler.append(f"staedte_1846.csv: {kennung} ist kein Ort mit Besitzer 1848")
@@ -226,11 +232,21 @@ def lade(tabellen: Path) -> tuple[list[Ort], dict[str, str], list[str]]:
     fehler = list(ergebnis.fehler)
     codes = {z["ort"]: z for z in zu.lies_csv(zu.GEBIETSCODES, zu.CODE_SPALTEN)}
     ueber = {z["id"]: z["ueber"] for z in zu.lies_csv(tabellen / "verwaltung.csv")}
-    summen, quellen = {}, {}
-    for z in zu.lies_csv(tabellen / EINWOHNER.name, EINWOHNER_SPALTEN):
-        summen[z["raum"]] = int(z["einwohner"])
-        quellen[z["raum"]] = z["quelle"]
-    staedte = {z["ort"]: int(z["einwohner"]) for z in zu.lies_csv(tabellen / STAEDTE.name, STAEDTE_SPALTEN)}
+    einwohner = zu.lies_csv(tabellen / EINWOHNER.name, EINWOHNER_SPALTEN)
+    staedte_zeilen = zu.lies_csv(tabellen / STAEDTE.name, STAEDTE_SPALTEN)
+    fehler += zu.eindeutig(einwohner, "raum", EINWOHNER.name) + zu.eindeutig(staedte_zeilen, "ort", STAEDTE.name)
+    summen: dict[str, int] = {}
+    staedte: dict[str, int] = {}
+    for zeilen, name, schluessel, ziel in (
+        (einwohner, EINWOHNER.name, "raum", summen),
+        (staedte_zeilen, STAEDTE.name, "ort", staedte),
+    ):
+        for z in zeilen:
+            try:
+                ziel[z[schluessel]] = int(z["einwohner"])
+            except ValueError:
+                fehler.append(f"{name}:{z['_zeile']}: ungültige Einwohnerzahl {z['einwohner']!r}")
+    quellen = {z["raum"]: z["quelle"] for z in einwohner}
     merkmale, f = lies_merkmale(zu.lies_csv(tabellen / MERKMALE.name, MERKMAL_SPALTEN))
     fehler += f
     geschaetzt, f = schaetzen(orte, codes, ergebnis.zuordnung, ueber, summen, staedte, merkmale)
@@ -276,8 +292,12 @@ def main(argv: Sequence[str] | None = None) -> int:
         print(bericht(orte))
         return 0
     pfad = args.tabellen / "bevoelkerung.csv"
-    alt = pfad.read_text(encoding="utf-8")
-    neu = neue_tabelle(alt, bevoelkerung_zeilen(orte, quellen))
+    try:
+        alt = pfad.read_text(encoding="utf-8-sig")
+        neu = neue_tabelle(alt, bevoelkerung_zeilen(orte, quellen))
+    except (OSError, zu.ZuordnungFehler) as f:
+        print(f"Fehler: {f}", file=sys.stderr)
+        return 2
     if args.pruefen:
         if alt != neu:
             print("bevoelkerung.csv ist nicht aktuell – bitte python3 tools/geodaten/bevoelkerung_1846.py ausführen.")

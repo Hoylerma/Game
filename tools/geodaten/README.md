@@ -482,15 +482,19 @@ naechste:<einheit>` wählt den Kreis mit dem nächsten Sitz (Spalte `sitz` in `v
 unterhalb der Provinz bzw. des Kronlands; landet ein Sitz in einem fremden Kreis, warnt das
 Werkzeug. In Ober- und Niederösterreich versagt der nächste Sitz an Donau und Wienerwald; dort
 legen Regeln je heutigem Bezirk den Kreis (das Viertel) fest. Fehlende Regeln, unbekannte Staaten
-und Einheiten sind Fehler (Exitcode 2), Regeln ohne Treffer Warnungen.
+und Einheiten sind Fehler (Exitcode 2), Regeln ohne Treffer Warnungen. In `verwaltung.csv` sind
+doppelte Kennungen, Kreise in `ueber` und zwei unterste Einheiten mit demselben Sitz Fehler.
+`sicherheit` und `quelle` einer Zeile in `besitz.csv` stammen von der Regel, die den Staat festlegt
+(alle Regeln sind derzeit `ungeprueft`).
 
 **Bevölkerung.** `einwohner_i = feste_stadt_i + f_raum × (60 × Fläche_i × Dichte_i × Gelände_i +
 1,5 × Einwohner_heute_i^0,75)` (der Stadtanteil nur für Orte mit Stadtrecht ohne feste Zahl).
 `f_raum` macht die Summe je Raum (Provinz, Kronland oder Staat aus `einwohner_1846.csv`) genau. Die
 festen Städte (`staedte_1846.csv`) schützen vor dem heutigen Gewicht der Industriestädte (Essen
 1846 rund 9.000, heute 590.000). Das Ergebnis ist eine `schaetzung`, die Summen sind `ungeprueft`.
-Jedes Gebiet hat in `merkmale_1846.csv` höchstens eine Zeile; eine zweite wäre beim Nachschlagen
-verdeckt und ist ein Fehler.
+Jedes Gebiet hat in `merkmale_1846.csv` höchstens eine Zeile, und jede Zeile muss mindestens einen
+Ort treffen (sonst ist sie meist verschrieben); doppelte Räume in `einwohner_1846.csv` und
+doppelte Städte in `staedte_1846.csv` sind ebenfalls Fehler.
 
 Kennzahlen dieses Laufs: 545 Regeln, 458 Verwaltungseinheiten (davon 378 Kreise in Preußen und
 Österreich), 3.967 Orte mit Besitzer (Preußen 1.329, Österreich 983,

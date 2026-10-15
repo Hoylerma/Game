@@ -55,3 +55,13 @@ Werte werden als Text aus der Tabelle übernommen (keine Gleitkomma-Umwandlung).
   Sammelwarnung).
 - Leistung: Mit den Daten von M3 (4.542 Orte, 626 Kreise, 170 Dateien) dauert `--pruefen` etwa
   0,2 s.
+
+## Lesezeichen 1848 (seit M7)
+
+- `verwaltung.csv` erzeugt `history/verwaltung/<datei>.chron` (Verwaltungseinheiten mit Art,
+  übergeordneter Einheit und Sitz); `besitz.csv` setzt je Ort und Datum auch `verwaltung` und
+  `bund`, `staaten_historie.csv` das Feld `zollverein`. Unbekannte Einheiten, Kreise in `ueber` und
+  eine Einheit eines anderen Staates sind Fehler.
+- Ein Staat ohne Ort zum Szenariodatum besteht in diesem Szenario nicht; seine Pflichtfelder werden
+  dort nicht verlangt. Spielerstaat und spielbare Staaten (`spielbar`) müssen zum Szenariodatum
+  bestehen.
