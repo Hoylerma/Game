@@ -72,7 +72,7 @@ ort auschwitz {
 
     1848.03.01 = {
         besitzer   = AUT
-        verwaltung = au_kr_krakauer_kreis
+        verwaltung = au_kr_wadowicer_kreis
         bund       = ja
     }
 }

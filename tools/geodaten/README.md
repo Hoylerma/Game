@@ -19,7 +19,8 @@ Rasterregel, Dateien unter `data/karte/geometrie/`); Inhalt des Kernraums:
 | `landschaften.csv`, `landschaften_dateien.csv`, `exonyme.csv`, `ausschluesse.csv`, `einwohner.csv`, `gelaende_gebiete.csv` | Hilfstabellen von `orte.py` (von Hand gepflegt) |
 | `zuordnung.py`, `gebietscodes.csv` | Lesezeichen 1848 (M7): Besitzer, Bundesgebiet und Verwaltung der Orte aus Regeln (siehe [Lesezeichen 1848](#lesezeichen-1848-zuordnungpy-bevoelkerung_1846py)); `gebietscodes.csv` = heutige Verwaltungscodes und Einwohner je Ort aus GeoNames (erzeugt) |
 | `bevoelkerung_1846.py` | Lesezeichen 1848 (M7): Bevölkerung der Orte zum 3. Dezember 1846 (Schätzung aus Summen) |
-| `test_geodaten.py`, `test_orte.py`, `test_zuordnung.py`, `test_bevoelkerung_1846.py`, `testdaten/` | Tests ohne Netz und ohne Zwischenspeicher |
+| `stichprobe_1848.py` | Lesezeichen 1848 (M7): reproduzierbare Stichprobe und Flächensummen für die Prüfung ([stichprobe_1848.md](../../docs/pruefung/stichprobe_1848.md)) |
+| `test_geodaten.py`, `test_orte.py`, `test_zuordnung.py`, `test_bevoelkerung_1846.py`, `test_stichprobe_1848.py`, `testdaten/` | Tests ohne Netz und ohne Zwischenspeicher |
 
 Erzeugt bzw. gepflegt in `data/karte/`:
 
@@ -468,6 +469,7 @@ python3 tools/geodaten/zuordnung.py --bericht         # Orte und Fläche je Staa
 python3 tools/geodaten/zuordnung.py --liste SAX       # Orte eines Staates zur Sichtprüfung ('-' = ohne Daten)
 python3 tools/geodaten/bevoelkerung_1846.py --bericht # Einwohner und Dichte je Raum, größte Orte
 python3 tools/geodaten/zuordnung.py codes             # gebietscodes.csv aus GeoNames neu (Zwischenspeicher)
+python3 tools/geodaten/stichprobe_1848.py             # Stichprobe (Seed 1848) und Flächensummen als Markdown
 ```
 
 **Zuordnung.** Es gibt keine Grenzgeometrie von 1848; die Regeln in `territorien_1848.csv` greifen
@@ -478,19 +480,22 @@ Eine Verwaltungseinheit aus einer schwächeren Regel als der Staat entfällt, we
 anderen Staat gehört (Coburg erbt nicht den bayerischen Kreis Oberfranken). `verwaltung =
 naechste:<einheit>` wählt den Kreis mit dem nächsten Sitz (Spalte `sitz` in `verwaltung.csv`)
 unterhalb der Provinz bzw. des Kronlands; landet ein Sitz in einem fremden Kreis, warnt das
-Werkzeug. Fehlende Regeln,
-unbekannte Staaten und Einheiten sind Fehler (Exitcode 2), Regeln ohne Treffer Warnungen.
+Werkzeug. In Ober- und Niederösterreich versagt der nächste Sitz an Donau und Wienerwald; dort
+legen Regeln je heutigem Bezirk den Kreis (das Viertel) fest. Fehlende Regeln, unbekannte Staaten
+und Einheiten sind Fehler (Exitcode 2), Regeln ohne Treffer Warnungen.
 
 **Bevölkerung.** `einwohner_i = feste_stadt_i + f_raum × (60 × Fläche_i × Dichte_i × Gelände_i +
 1,5 × Einwohner_heute_i^0,75)` (der Stadtanteil nur für Orte mit Stadtrecht ohne feste Zahl).
 `f_raum` macht die Summe je Raum (Provinz, Kronland oder Staat aus `einwohner_1846.csv`) genau. Die
 festen Städte (`staedte_1846.csv`) schützen vor dem heutigen Gewicht der Industriestädte (Essen
 1846 rund 9.000, heute 590.000). Das Ergebnis ist eine `schaetzung`, die Summen sind `ungeprueft`.
+Jedes Gebiet hat in `merkmale_1846.csv` höchstens eine Zeile; eine zweite wäre beim Nachschlagen
+verdeckt und ist ein Fehler.
 
-Kennzahlen dieses Laufs: 495 Regeln, 458 Verwaltungseinheiten (davon 378 Kreise in Preußen und
-Österreich), 3.967 Orte mit Besitzer (Preußen 1.330, Österreich 983,
+Kennzahlen dieses Laufs: 545 Regeln, 458 Verwaltungseinheiten (davon 378 Kreise in Preußen und
+Österreich), 3.967 Orte mit Besitzer (Preußen 1.329, Österreich 983,
 Bayern 508), 575 Orte ohne Daten (Ausland); 45,0 Millionen Einwohner in 57 Räumen. Tests
-(`test_zuordnung.py`, `test_bevoelkerung_1846.py`): Rang und Prüfung der Regeln, Auflösung je
-Feld, Verwaltungseinheit eines anderen Staates, Zeilen zum Stichtag ersetzen, Summen und feste
-Städte, Merkmale; dazu je ein Test, dass `besitz.csv` und `bevoelkerung.csv` zu den eingecheckten
+(`test_zuordnung.py`, `test_bevoelkerung_1846.py`, `test_stichprobe_1848.py`): Rang und Prüfung
+der Regeln, Auflösung je Feld, Verwaltungseinheit eines anderen Staates, Zeilen zum Stichtag
+ersetzen, Summen und feste Städte, Merkmale, reproduzierbare Stichprobe; dazu je ein Test, dass `besitz.csv` und `bevoelkerung.csv` zu den eingecheckten
 Eingaben passen (wie `--pruefen`).

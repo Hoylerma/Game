@@ -1019,7 +1019,7 @@ solnhofen;1848.03.01;BAV;by_mittelfranken;ja;ungeprueft;Bayern rechts des Rheins
 burgsalach;1848.03.01;BAV;by_mittelfranken;ja;ungeprueft;Bayern rechts des Rheins (Regel DE.02, territorien_1848.csv)
 jaworzno;1848.03.01;AUT;au_kr_krakauer_kreis;;ungeprueft;Krakauer Gebiet, seit 1846 österreichisch (Galizien), nicht im Bund (Regel ort:jaworzno, territorien_1848.csv)
 krenau;1848.03.01;AUT;au_kr_krakauer_kreis;;ungeprueft;Krakauer Gebiet, seit 1846 österreichisch (Galizien), nicht im Bund (Regel ort:krenau, territorien_1848.csv)
-auschwitz;1848.03.01;AUT;au_kr_krakauer_kreis;ja;ungeprueft;"Herzogtümer Auschwitz und Zator (Galizien, im Bund); Krakauer Gebiet einzeln (Regel landschaft:galizien, territorien_1848.csv)"
+auschwitz;1848.03.01;AUT;au_kr_wadowicer_kreis;ja;ungeprueft;"Herzogtümer Auschwitz und Zator (Galizien, im Bund); Krakauer Gebiet einzeln (Regel landschaft:galizien, territorien_1848.csv)"
 alwernia;1848.03.01;AUT;au_kr_krakauer_kreis;;ungeprueft;Krakauer Gebiet, seit 1846 österreichisch (Galizien), nicht im Bund (Regel ort:alwernia, territorien_1848.csv)
 zator;1848.03.01;AUT;au_kr_wadowicer_kreis;ja;ungeprueft;"Herzogtümer Auschwitz und Zator (Galizien, im Bund); Krakauer Gebiet einzeln (Regel landschaft:galizien, territorien_1848.csv)"
 saybusch;1848.03.01;AUT;au_kr_wadowicer_kreis;ja;ungeprueft;"Herzogtümer Auschwitz und Zator (Galizien, im Bund); Krakauer Gebiet einzeln (Regel landschaft:galizien, territorien_1848.csv)"
