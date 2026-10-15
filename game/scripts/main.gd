@@ -47,6 +47,8 @@ var _owners := PackedInt32Array()
 var _market_indices := PackedInt32Array()
 ## Unterste Verwaltungseinheit je Simulationsindex (seit M7): Grenzen im Modus „Verwaltung“.
 var _admin_indices := PackedInt32Array()
+## Szenario, zu dem Ortskatalog und Farben gehören (seit M7).
+var _scenario_id := ""
 var _options: LaunchOptions = null
 var _data_dir := ""
 var _player := -1
@@ -101,7 +103,6 @@ func _ready() -> void:
 	_load_map()
 	_load_simulation()
 	_connect_map_and_simulation()
-	_catalog = LocationCatalog.build(_sim)
 	_map_labels.camera = _map_view.camera
 	_map_labels.location_diameter = _map_view.location_diameter()
 	_map_labels.set_covering_controls([
@@ -302,6 +303,16 @@ func _load_simulation() -> void:
 	if scenario_id.is_empty():
 		scenario_id = UhrwerkPaths.DEFAULT_SCENARIO
 	var errors := sim.load_scenario(_data_dir, scenario_id)
+	if (not errors.is_empty() or not sim.is_loaded()) and scenario_id != UhrwerkPaths.DEFAULT_SCENARIO:
+		# Unbekanntes --szenario: mit dem Standardszenario weiter, damit das Menü erreichbar bleibt.
+		printerr("EINIGKEIT: --szenario=%s ließ sich nicht laden:\n" % scenario_id, errors)
+		_notices.add_notice(
+			"Szenario nicht geladen",
+			"--szenario=%s ließ sich nicht laden; es gilt das Standardszenario." % scenario_id,
+			errors
+		)
+		sim = SimulationClient.create()
+		errors = sim.load_scenario(_data_dir, UhrwerkPaths.DEFAULT_SCENARIO)
 	if not errors.is_empty() or not sim.is_loaded():
 		printerr("EINIGKEIT: Spieldaten konnten nicht geladen werden:\n", errors)
 		_notices.add_notice(
@@ -323,15 +334,14 @@ func _load_simulation() -> void:
 		var chosen := _sim.get_state_index(_options.state_tag)
 		if chosen < 0 or not _sim.set_player_state(chosen):
 			printerr("EINIGKEIT: --staat=%s besteht im Szenario nicht." % _options.state_tag)
+			_notices.add_notice(
+				"Unbekannter Staat",
+				"--staat=%s besteht im Szenario nicht; Ihr spielt den vorgesehenen Staat."
+				% _options.state_tag,
+				""
+			)
 	_player = _sim.get_player_state_index()
 	_read_scenario_constants()
-	_state_panel.set_max_tax_rate(_sim.get_max_tax_rate_percent())
-	_location_panel.confession_colors = LegendData.category_colors(
-		_sim, MapModes.MAP_CONFESSION, "majority_confession"
-	)
-	_location_panel.culture_colors = LegendData.category_colors(
-		_sim, MapModes.MAP_KULTUR, "majority_culture"
-	)
 	print(
 		(
 			"EINIGKEIT: %s geladen – %s, %d Staaten, %d Orte"
@@ -452,8 +462,10 @@ func _currency() -> String:
 	return str(_sim.get_scenario().get("currency", "Reichstaler")) if _sim != null else "Reichstaler"
 
 
-## Was sich nur mit dem Szenario ändert (seit M7): Märkte, Verwaltung, Bundesgebiet.
-func _read_scenario_constants() -> void:
+## Was sich nur mit dem Szenario ändert (seit M7): Märkte, Verwaltung, Bundesgebiet; bei einem
+## anderen Szenario als bisher auch Ortskatalog, Farben der Ortsinfo und Steuergrenze. True, wenn
+## das Szenario gewechselt hat.
+func _read_scenario_constants() -> bool:
 	_market_indices = _sim.get_location_market_indices()
 	_admin_indices = _sim.get_location_admin_indices()
 	var federation := false
@@ -461,6 +473,27 @@ func _read_scenario_constants() -> void:
 		federation = federation or bool(_sim.get_state(state).get("bund", false))
 	_location_panel.show_federation = federation
 	_location_panel.player_index = _player
+	var scenario_id := str(_sim.get_scenario().get("id", ""))
+	if scenario_id == _scenario_id:
+		return false
+	_scenario_id = scenario_id
+	_catalog = LocationCatalog.build(_sim)
+	_state_panel.set_max_tax_rate(_sim.get_max_tax_rate_percent())
+	_location_panel.confession_colors = LegendData.category_colors(
+		_sim, MapModes.MAP_CONFESSION, "majority_confession"
+	)
+	_location_panel.culture_colors = LegendData.category_colors(
+		_sim, MapModes.MAP_KULTUR, "majority_culture"
+	)
+	return true
+
+
+## Ob ein Ort des Szenarios zu einer Verwaltungseinheit gehört (1648: keiner).
+func _has_admin_units() -> bool:
+	for unit in _admin_indices:
+		if unit >= 0:
+			return true
+	return false
 
 
 ## Kartenindex → Gruppe (Besitzer bzw. Kreis) aus einem Array je Simulationsindex.
@@ -594,7 +627,9 @@ func _rebuild_legend() -> void:
 		no_data.append(LegendData.no_data_entry(_catalog.no_data_count()))
 	match _map_mode:
 		MapModes.MAP_POLITICAL:
-			var states := LegendData.political_entries(_sim)
+			var states := LegendData.political_entries(
+				_sim, LegendData.MAX_POLITICAL_ENTRIES, _player
+			)
 			states.append_array(no_data)
 			_legend.show_swatches(title, states)
 		MapModes.MAP_DENSITY:
@@ -698,7 +733,7 @@ func _rebuild_legend() -> void:
 						"Euer Staat hat keine Verwaltungsgliederung in den Daten. Staaten ohne "
 						+ "Gliederung erscheinen in ihrer aufgehellten Farbe."
 					)
-					if _sim.get_admin_unit_count() > 0
+					if _has_admin_units()
 					else "Dieses Szenario enthält keine Verwaltungseinheiten."
 				)
 			else:
@@ -943,12 +978,12 @@ func open_game_menu() -> void:
 	var state_name := str(state.get("short_name", ""))
 	if state_name.is_empty():
 		state_name = str(state.get("name", ""))
+	_game_menu.show_scenarios(_sim.get_scenarios(_data_dir), str(_sim.get_scenario().get("id", "")))
 	_game_menu.open(
 		SaveSlots.default_name(state_name, _sim.get_date()),
 		SaveSlots.list(_sim, save_dir),
 		FileAccess.file_exists(SaveSlots.quicksave_path(save_dir))
 	)
-	_game_menu.show_scenarios(_sim.get_scenarios(_data_dir), str(_sim.get_scenario().get("id", "")))
 
 
 ## Schließt das Spielmenü; resume setzt die Geschwindigkeit von vorher fort.
@@ -1002,10 +1037,13 @@ func load_game_file(path: String) -> bool:
 	return true
 
 
-## Nach dem Laden: Spieler, Besitz, Namen, Chronik, Legende und Panels neu aufbauen.
-func _after_load() -> void:
+## Nach dem Laden: Spieler, Besitz, Namen, Chronik, Legende und Panels neu aufbauen. Ein
+## Spielstand kann ein anderes Szenario mitbringen; dann wird die Karte neu zugeordnet (new_client:
+## immer, weil ein neuer Simulationsclient gebunden werden muss).
+func _after_load(new_client: bool = false) -> void:
 	_player = _sim.get_player_state_index()
-	_read_scenario_constants()
+	if _read_scenario_constants() or new_client:
+		_connect_map_and_simulation()
 	_day_accumulator = 0.0
 	_select_location(-1)
 	_state_panel.clear_pending()
@@ -1032,8 +1070,7 @@ func start_new_game(scenario_id: String, state_tag: String = "") -> String:
 	_sim = sim
 	if not state_tag.is_empty() and _sim.get_state_index(state_tag) >= 0:
 		_sim.set_player_state(_sim.get_state_index(state_tag))
-	_connect_map_and_simulation()
-	_after_load()
+	_after_load(true)
 	close_game_menu(false)
 	_set_speed(0)
 	var scenario := _sim.get_scenario()

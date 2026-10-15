@@ -25,6 +25,12 @@ var _quick_load_button: Button = null
 var _status: Label = null
 var _scenario_select: OptionButton = null
 var _scenario_ids := PackedStringArray()
+## Laufendes Szenario und Namen der Szenarien (seit M7, aus show_scenarios).
+var _current_scenario := ""
+var _scenario_names := {}
+var _new_game_button: Button = null
+## „Starten“ verlangt einen zweiten Klick, weil die laufende Partie endet.
+var _confirm_new_game := false
 var _group := ButtonGroup.new()
 var _selected_path := ""
 
@@ -42,6 +48,7 @@ func open(default_name: String, saves: Array[Dictionary], quicksave_exists: bool
 	_name_edit.text = default_name
 	show_saves(saves, quicksave_exists)
 	_status.text = ""
+	_reset_new_game_confirmation()
 	visible = true
 	_name_edit.grab_focus()
 	_name_edit.select_all()
@@ -49,6 +56,7 @@ func open(default_name: String, saves: Array[Dictionary], quicksave_exists: bool
 
 func close() -> void:
 	visible = false
+	_reset_new_game_confirmation()
 	_name_edit.release_focus()
 
 
@@ -70,11 +78,15 @@ func show_saves(saves: Array[Dictionary], quicksave_exists: bool) -> void:
 
 
 ## Szenarien für „Neues Spiel“ (SimulationClient.get_scenarios), current vorgewählt (seit M7).
+## Vor open() aufrufen: Spielstände anderer Szenarien bleiben dann ladbar.
 func show_scenarios(scenarios: Array[Dictionary], current: String) -> void:
 	_scenario_select.clear()
 	_scenario_ids.clear()
+	_scenario_names.clear()
+	_current_scenario = current
 	for scenario in scenarios:
 		var id := str(scenario.get("id", ""))
+		_scenario_names[id] = str(scenario.get("name", id))
 		_scenario_select.add_item("%s (%s)" % [str(scenario.get("name", id)), str(scenario.get("date_text", ""))])
 		_scenario_select.set_item_tooltip(
 			_scenario_select.item_count - 1,
@@ -96,7 +108,7 @@ func start_new_game(id: String) -> bool:
 	if index < 0:
 		return false
 	_scenario_select.select(index)
-	_on_new_game_pressed()
+	new_game_requested.emit(id)
 	return true
 
 
@@ -181,8 +193,10 @@ func _build() -> void:
 	_scenario_select.focus_mode = Control.FOCUS_NONE
 	_scenario_select.fit_to_longest_item = false
 	_scenario_select.tooltip_text = "Lesezeichen; den Staat wählt danach „Diesen Staat spielen“ in der Ortsinfo"
+	_scenario_select.item_selected.connect(func(_index: int) -> void: _reset_new_game_confirmation())
 	new_row.add_child(_scenario_select)
-	new_row.add_child(_button("Starten", _on_new_game_pressed))
+	_new_game_button = _button("Starten", _on_new_game_pressed)
+	new_row.add_child(_new_game_button)
 	box.add_child(new_row)
 
 	box.add_child(_caption("Speichern"))
@@ -290,7 +304,14 @@ func _save_entry(save: Dictionary) -> Button:
 	]
 	button.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 	button.clip_text = true
-	if not bool(info.get("compatible", false)):
+	# Ein Spielstand eines anderen Szenarios bringt dieses mit; die Prüfung gegen dessen Daten
+	# übernimmt das Laden (seit M7).
+	var scenario := str(info.get("scenario", ""))
+	if bool(info.get("ok", false)) and not _current_scenario.is_empty() and scenario != _current_scenario:
+		button.tooltip_text = "Spielstand aus „%s“ (%s); Laden wechselt das Lesezeichen" % [
+			str(_scenario_names.get(scenario, scenario)), str(info.get("date_text", ""))
+		]
+	elif not bool(info.get("compatible", false)):
 		button.disabled = true
 		button.tooltip_text = str(info.get("reason", "Spielstand lässt sich nicht laden."))
 	else:
@@ -322,8 +343,21 @@ func _on_save_pressed() -> void:
 
 func _on_new_game_pressed() -> void:
 	var index := _scenario_select.selected
-	if index >= 0 and index < _scenario_ids.size():
-		new_game_requested.emit(_scenario_ids[index])
+	if index < 0 or index >= _scenario_ids.size():
+		return
+	if not _confirm_new_game:
+		_confirm_new_game = true
+		_new_game_button.text = "Wirklich starten"
+		show_status("Noch einmal klicken: Die laufende Partie endet ohne Speichern.")
+		return
+	_reset_new_game_confirmation()
+	new_game_requested.emit(_scenario_ids[index])
+
+
+func _reset_new_game_confirmation() -> void:
+	_confirm_new_game = false
+	if _new_game_button != null:
+		_new_game_button.text = "Starten"
 
 
 func _on_load_pressed() -> void:

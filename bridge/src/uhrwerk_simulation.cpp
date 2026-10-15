@@ -1063,9 +1063,10 @@ Dictionary UhrwerkSimulation::get_save_info(const String& path) const {
     result["date_text"] = to_godot(uhrwerk::format_date_long(info->date));
     result["days"] = info->days;
     result["player_tag"] = to_godot(info->player_tag);
-    // Kurzname für Listen (z. B. „Brandenburg“), sonst der volle Name oder die Kennung.
+    // Kurzname für Listen (z. B. „Brandenburg“), sonst der volle Name oder die Kennung. Nur im
+    // laufenden Szenario nachschlagen: ein anderes kennt andere Staaten (seit M7).
     String player_name = to_godot(info->player_tag);
-    if (const uhrwerk::World* w = world()) {
+    if (const uhrwerk::World* w = world(); w != nullptr && w->scenario.id == info->scenario) {
         const uhrwerk::Index state = w->find_state(info->player_tag);
         if (state != uhrwerk::kNone) {
             const uhrwerk::State& s = at(w->states, state);

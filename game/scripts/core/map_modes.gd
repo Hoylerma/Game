@@ -57,7 +57,7 @@ const DESCRIPTIONS: PackedStringArray = [
 	"Kreise (je 4–12 Orte)",
 	"Mittlerer Lebensstandard der Einwohner (0–100)",
 	"Mehrheitskultur (Landsmannschaft) der Orte",
-	"Wirtschaftsleistung je Einwohner und Jahr (Reichstaler)",
+	"Wirtschaftsleistung je Einwohner und Jahr (in der Währung des Szenarios)",
 	"Märkte: Orte, die gemeinsam handeln und Preise bilden",
 	"Verwaltungseinheiten der Staaten (Provinzen, Kronländer, Kreise); seit 1848",
 ]

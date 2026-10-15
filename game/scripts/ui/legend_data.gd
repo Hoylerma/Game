@@ -16,9 +16,10 @@ const MAX_POLITICAL_ENTRIES := 16
 
 
 ## Staaten mit mindestens einem Ort, alphabetisch nach Kurzname; bei mehr als max_entries
-## Staaten nur die größten, die übrigen in einer Zeile „N weitere Staaten“.
+## Staaten nur die größten und der Spielerstaat (player), die übrigen in einer Zeile
+## „N weitere Staaten“.
 static func political_entries(
-	sim: SimulationClient, max_entries: int = MAX_POLITICAL_ENTRIES
+	sim: SimulationClient, max_entries: int = MAX_POLITICAL_ENTRIES, player: int = -1
 ) -> Array[Dictionary]:
 	var entries: Array[Dictionary] = []
 	for index in sim.get_state_count():
@@ -32,11 +33,18 @@ static func political_entries(
 			"text": str(state.get("short_name", state.get("tag", ""))),
 			"detail": detail,
 			"count": count,
+			"player": index == player,
 		})
-	# Viele Staaten (1848: 38): nur die größten, der Rest als eine Zeile (seit M7).
+	# Viele Staaten (1848: 38): nur die größten und der Spielerstaat, der Rest als eine Zeile
+	# (seit M7).
 	var rest: Array[Dictionary] = []
 	if entries.size() > max_entries:
-		entries.sort_custom(func(a: Dictionary, b: Dictionary) -> bool: return a["count"] > b["count"])
+		entries.sort_custom(
+			func(a: Dictionary, b: Dictionary) -> bool:
+				if a["player"] != b["player"]:
+					return a["player"]
+				return a["count"] > b["count"]
+		)
 		rest = entries.slice(max_entries - 1)
 		entries = entries.slice(0, max_entries - 1)
 	entries.sort_custom(

@@ -1203,10 +1203,12 @@ TEST_CASE("Lader: Staaten ohne Ort zum Startdatum bestehen nicht") {
         CHECK(other.ok());
     }
     SUBCASE("spielbarer Staat ohne Ort im gewählten Szenario") {
-        replace_in_file(dir / "szenarien/jahresbeginn.chron", "spieler = SAX", "spieler = SAX\n    spielbar = { SAX ANH }");
-        expect_error(load(dir, "jahresbeginn_1650"),
-                     "Spielbarer Staat 'ANH' von szenario jahresbeginn_1650 besitzt zum Startdatum keinen Ort",
-                     "szenarien/jahresbeginn.chron");
+        replace_in_file(dir / "szenarien/jahresbeginn.chron", "spieler = SAX",
+                        "spieler = SAX\n    spielbar = { SAX ANH }");
+        expect_error(
+            load(dir, "jahresbeginn_1650"),
+            "Spielbarer Staat 'ANH' von szenario jahresbeginn_1650 besitzt zum Startdatum keinen Ort",
+            "szenarien/jahresbeginn.chron");
     }
     SUBCASE("Pflichtfelder nur für bestehende Staaten") {
         replace_in_file(dir / "history/staaten/30_neu.chron", "    heer           = 2\n", "");
