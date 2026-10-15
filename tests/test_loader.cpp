@@ -1100,6 +1100,69 @@ TEST_CASE("Lader: Verwaltung, Bundesgebiet und Zollverein") {
     CHECK(dessau2.federal);
 }
 
+constexpr const char* kRailFile = "history/eisenbahnen/test.chron";
+
+void write_railway(const TempDir& dir) {
+    testhilfen::write_file(dir / kRailFile,
+                           "strecke leipzig_dresden {\n"
+                           "    name      = \"Leipzig-Dresdner Eisenbahn\"\n"
+                           "    quelle    = \"Testdaten\"\n"
+                           "    abschnitt = { von = leipzig bis = dresden eroeffnet = 1839.04.07 }\n"
+                           "    abschnitt = { von = dresden bis = zerbst eroeffnet = 1840.01.01 }\n"
+                           "}\n");
+}
+
+TEST_CASE("Lader: Eisenbahnen") {
+    TempDir dir(true);
+    write_railway(dir);
+    SUBCASE("gelesen") {
+        const LoadResult r = load(dir);
+        INFO(issues_text(r));
+        REQUIRE(r.ok());
+        CHECK(r.issues.empty());
+        const World& w = *r.world;
+        REQUIRE(w.railways.size() == 1);
+        const uhrwerk::Railway& line = w.railways[0];
+        CHECK(line.id == "leipzig_dresden");
+        CHECK(line.name == "Leipzig-Dresdner Eisenbahn");
+        REQUIRE(line.sections.size() == 2);
+        CHECK(line.sections[0].from == w.find_location("leipzig"));
+        CHECK(line.sections[0].to == w.find_location("dresden"));
+        CHECK(line.sections[0].opened == Date{1839, 4, 7});
+        CHECK(line.sections[1].to == w.find_location("zerbst"));
+    }
+    SUBCASE("ohne Ordner keine Strecken") {
+        std::filesystem::remove_all(dir / "history/eisenbahnen");
+        const LoadResult r = load(dir);
+        REQUIRE(r.ok());
+        CHECK(r.world->railways.empty());
+    }
+    SUBCASE("unbekannter Ort") {
+        replace_in_file(dir / kRailFile, "bis = zerbst", "bis = meissen");
+        expect_error(load(dir), "unbekannter Ort 'meissen' in strecke leipzig_dresden", kRailFile, 5);
+    }
+    SUBCASE("gleicher Anfang und gleiches Ende") {
+        replace_in_file(dir / kRailFile, "von = dresden bis = zerbst", "von = dresden bis = dresden");
+        expect_error(load(dir), "Abschnitt der strecke leipzig_dresden beginnt und endet in dresden",
+                     kRailFile, 5);
+    }
+    SUBCASE("fehlendes Datum") {
+        replace_in_file(dir / kRailFile, " eroeffnet = 1840.01.01", "");
+        expect_error(load(dir), "Pflichtfeld 'eroeffnet' fehlt in abschnitt der strecke leipzig_dresden",
+                     kRailFile);
+    }
+    SUBCASE("ohne Abschnitt") {
+        testhilfen::write_file(dir / kRailFile,
+                               "strecke leer {\n    name = \"Leer\"\n    quelle = \"Test\"\n}\n");
+        expect_error(load(dir), "strecke leer hat keinen Abschnitt", kRailFile, 1);
+    }
+    SUBCASE("doppelte Kennung") {
+        const std::string text = testhilfen::read_file(dir / kRailFile);
+        testhilfen::write_file(dir / kRailFile, text + "\n" + text);
+        expect_error(load(dir), "doppelte Kennung 'leipzig_dresden' für Strecke", kRailFile, 8);
+    }
+}
+
 TEST_CASE("Lader: Fehler bei Verwaltungseinheiten") {
     TempDir dir(true);
     write_admin_units(dir);

@@ -658,6 +658,56 @@ TEST_CASE("Wirtschaft: Handel zwischen Märkten und mit dem Weltmarkt") {
     CHECK(w.market_states[1].import_share[0] == Fixed::one()); // ohne eigenes Angebot diesen Monat
     CHECK(w.market_states[0].imports[0] == Fixed::zero());
 
+    SUBCASE("Eisenbahn: Bahnfracht ab dem Tag der Verbindung (seit M7)") {
+        World rail = w;
+        rail.rules.freight_rail = Fixed::from_ratio(1, 30);
+        uhrwerk::Railway line;
+        line.id = "west_ost";
+        line.sections.push_back(
+            uhrwerk::RailSection{0, 0, Date{1700, 1, 1}}); // innerhalb eines Marktes: ohne Wirkung
+        line.sections.push_back(uhrwerk::RailSection{0, 1, Date{1840, 6, 1}});
+        rail.railways.push_back(line);
+        const uhrwerk::EconomyTopology t2 = uhrwerk::build_economy_topology(rail);
+        const uhrwerk::MarketLink& link = t2.neighbors[0][0];
+        REQUIRE(link.rail_from.has_value());
+        CHECK(*link.rail_from == Date{1840, 6, 1});
+        CHECK(link.freight == freight); // Landfracht unverändert
+        CHECK(link.rail_freight * Fixed::from_int(3) <= link.freight);
+        CHECK(link.freight_on(Date{1840, 5, 31}) == link.freight);
+        CHECK(link.freight_on(Date{1840, 6, 1}) == link.rail_freight);
+        CHECK(t2.neighbors[1][0].rail_from == link.rail_from); // beide Richtungen gleich
+
+        // Kleine Preislücke (1 zu 1,2, Abstand etwa 105 km): vor der Eröffnung lohnt wenig Handel, danach
+        // mehr.
+        const auto trade_on = [&](Date date) {
+            World x = rail;
+            x.date = date;
+            x.market_states[0].supply[0] = Fixed::from_int(1000);
+            x.market_states[0].demand[0] = Fixed::from_int(600);
+            x.market_states[0].price[0] = Fixed::one();
+            x.market_states[1].supply[0] = Fixed::from_int(300);
+            x.market_states[1].demand[0] = Fixed::from_int(900);
+            x.market_states[1].price[0] = fx("1.2");
+            uhrwerk::update_markets(x, t2, {});
+            return x.market_states[0].exports[0];
+        };
+        const auto expected = [&](Fixed f) {
+            const Fixed lead = fx("1.2") - (Fixed::one() + f);
+            return Fixed::min(Fixed::one(), Fixed::from_int(5) * lead / fx("1.2")) * Fixed::from_int(900);
+        };
+        const Fixed by_land = trade_on(Date{1840, 5, 1});
+        const Fixed by_rail = trade_on(Date{1840, 6, 1});
+        CHECK(by_land == expected(link.freight));
+        CHECK(by_rail == expected(link.rail_freight));
+        CHECK(by_rail > by_land);
+
+        // Ohne Strecke zwischen den Märkten bleibt rail_from leer.
+        World none = w;
+        none.railways.push_back(
+            uhrwerk::Railway{"nur_west", "", {uhrwerk::RailSection{0, 0, Date{1700, 1, 1}}}, ""});
+        CHECK_FALSE(uhrwerk::build_economy_topology(none).neighbors[0][0].rail_from.has_value());
+    }
+
     SUBCASE("Weltmarkt: Hafenmarkt kauft Kolonialwaren zum Weltpreis") {
         World port = w;
         uhrwerk::Good kolonial;

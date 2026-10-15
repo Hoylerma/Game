@@ -537,6 +537,10 @@ public:
         for (const std::string& name : list_folder("history/orte")) {
             process(name, [&](const SourceFile& f) { load_locations(f); });
         }
+        // Eisenbahnen (seit M7) nach den Orten, die sie verbinden; der Ordner darf fehlen.
+        for (const std::string& name : list_folder("history/eisenbahnen", Folder::Optional)) {
+            process(name, [&](const SourceFile& f) { load_railways(f); });
+        }
 
         drop_states_without_land();
         check_players(scenarios, selected);
@@ -746,6 +750,7 @@ private:
                   "handel_rate",
                   "handel_fracht",
                   "seefracht",
+                  "bahnfracht",
                   "handelsspanne",
                   "betrieb_anpassung",
                   "betrieb_min_anteil",
@@ -840,6 +845,7 @@ private:
         r.trade_rate = f.fixed("handel_rate", between(fx(0), fx(100))).value_or(Fixed{});
         r.freight_land = f.fixed("handel_fracht", between(fx(0), fx(10))).value_or(Fixed{});
         r.freight_sea = f.fixed("seefracht", between(fx(0), fx(10))).value_or(Fixed{});
+        r.freight_rail = f.fixed("bahnfracht", between(fx(0), fx(10))).value_or(Fixed{});
         r.trade_margin = f.fixed("handelsspanne", between(fx(0), half)).value_or(Fixed{});
         r.business_adjustment = f.fixed("betrieb_anpassung", unit).value_or(Fixed{});
         r.business_min_share = f.fixed("betrieb_min_anteil", between(fx(0), half)).value_or(Fixed{});
@@ -1380,6 +1386,76 @@ private:
             const auto index = static_cast<Index>(world_.districts.size());
             if (register_id(districts_, d.id, index, file.name, node.line, "Kreis")) {
                 world_.districts.push_back(std::move(d));
+            }
+        });
+    }
+
+    /// Eisenbahnstrecken (seit M7, Abschnitt 3.17): strecke <kennung> { name quelle abschnitt = { von bis
+    /// eroeffnet } … }; ein Abschnitt verbindet zwei Orte (mit oder ohne Daten).
+    void load_railways(const SourceFile& file) {
+        for_each_definition(file, "strecke", "strecke <kennung> { … }", [&](const ScriptNode& node) {
+            if (!is_location_id(node.value)) {
+                issues_.error(file.name, node.line,
+                              "ungültige Kennung " + quote(node.value) +
+                                  " für eine Strecke (nur Kleinbuchstaben a–z, Ziffern und '_')");
+            }
+            ScriptNode plain = node;
+            plain.children.clear();
+            std::vector<const ScriptNode*> parts;
+            for (const ScriptNode& child : node.children) {
+                if (child.key == "abschnitt") {
+                    parts.push_back(&child);
+                } else {
+                    plain.children.push_back(child);
+                }
+            }
+            Fields f(plain, file.name, "strecke " + node.value, issues_, {"name", "quelle"});
+            Railway railway;
+            railway.id = node.value;
+            railway.name = f.text("name").value_or("");
+            railway.source = f.text("quelle").value_or("");
+            if (parts.empty()) {
+                issues_.error(file.name, node.line,
+                              "strecke " + node.value +
+                                  " hat keinen Abschnitt (abschnitt = { von = … bis = … eroeffnet = … })");
+            }
+            for (const ScriptNode* part : parts) {
+                if (!part->is_block || part->op != "=") {
+                    issues_.error(file.name, part->line,
+                                  "'abschnitt' in strecke " + node.value +
+                                      " erwartet einen Block { von = … bis = … eroeffnet = … }");
+                    continue;
+                }
+                Fields fs(*part, file.name, "abschnitt der strecke " + node.value, issues_,
+                          {"von", "bis", "eroeffnet"});
+                RailSection section;
+                const auto from = fs.text("von");
+                const auto to = fs.text("bis");
+                const auto opened = fs.date("eroeffnet");
+                const auto resolve = [&](const std::optional<std::string>& id, std::string_view key) {
+                    const Index index = id ? lookup(locations_, *id) : kNone;
+                    if (id && index == kNone) {
+                        issues_.error(file.name, part->find(key)->line,
+                                      "unbekannter Ort " + quote(*id) + " in strecke " + node.value);
+                    }
+                    return index;
+                };
+                section.from = resolve(from, "von");
+                section.to = resolve(to, "bis");
+                if (section.from == kNone || section.to == kNone || !opened) {
+                    continue;
+                }
+                if (section.from == section.to) {
+                    issues_.error(file.name, part->line,
+                                  "Abschnitt der strecke " + node.value + " beginnt und endet in " + *from);
+                    continue;
+                }
+                section.opened = *opened;
+                railway.sections.push_back(section);
+            }
+            const auto index = static_cast<Index>(world_.railways.size());
+            if (register_id(railways_, railway.id, index, file.name, node.line, "Strecke")) {
+                world_.railways.push_back(std::move(railway));
             }
         });
     }
@@ -2027,6 +2103,7 @@ private:
     std::vector<std::vector<LoadIssue>> missing_state_fields_; // parallel zu world_.states bis zum Wegfall
     Registry districts_;
     Registry admin_units_;
+    Registry railways_;
     std::vector<AdminParentRef> admin_parents_; // parallel zu world_.admin_units
     Registry locations_;
     Registry scenarios_;

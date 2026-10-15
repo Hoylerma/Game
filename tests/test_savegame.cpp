@@ -289,6 +289,19 @@ TEST_CASE("Spielstand: Inhaltsfingerabdruck") {
         CHECK(uhrwerk::content_differences(with_unit, uhrwerk::content_fingerprint(w)) ==
               std::vector<std::string_view>{"staaten", "orte"});
     }
+    SUBCASE("Eisenbahnen und Bahnfracht (seit M7)") {
+        World w = base;
+        w.railways.push_back(
+            uhrwerk::Railway{"strecke", "Strecke", {uhrwerk::RailSection{0, 1, Date{1839, 4, 7}}}, ""});
+        const auto with_line = uhrwerk::content_fingerprint(w);
+        CHECK(uhrwerk::content_differences(fp, with_line) == std::vector<std::string_view>{"maerkte"});
+        w.railways[0].sections[0].opened = Date{1839, 4, 8};
+        CHECK(uhrwerk::content_differences(with_line, uhrwerk::content_fingerprint(w)) ==
+              std::vector<std::string_view>{"maerkte"});
+        w.rules.freight_rail += Fixed::from_ratio(1, 100);
+        CHECK(uhrwerk::content_differences(with_line, uhrwerk::content_fingerprint(w)) ==
+              std::vector<std::string_view>{"regeln", "maerkte"});
+    }
     SUBCASE("Laden in anderen Inhalt wird mit den Bereichen abgelehnt") {
         const Bytes bytes = uhrwerk::save_game(Simulation(base), SaveMeta{});
         World other = base;

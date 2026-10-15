@@ -72,6 +72,7 @@ regeln {
     handel_rate               = 5       # Handelsmenge je Preislücke: bei 20 % Lücke die ganze mögliche Menge
     handel_fracht             = 0.12    # Frachtkosten je 100 km Landweg (Anteil am Preis)
     seefracht                 = 0.10    # Frachtkosten zum Weltmarkt (Anteil am Preis)
+    bahnfracht                = 0.04    # je 100 km zwischen Märkten mit Bahnverbindung (seit M7, ein Drittel der Landfracht)
     handelsspanne             = 0.05    # Anteil der Kaufleute am Umsatz eines Marktes
 
     # Betriebe, Ernte, Hunger

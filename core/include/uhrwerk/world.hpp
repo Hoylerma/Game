@@ -192,6 +192,21 @@ struct AdminUnit {
     std::string source;
 };
 
+/// Abschnitt einer Eisenbahnstrecke von Ort zu Ort mit Eröffnungstag (seit M7, chronik-skript.md 3.17).
+struct RailSection {
+    Index from = kNone;
+    Index to = kNone;
+    Date opened;
+};
+
+/// Eisenbahnstrecke (seit M7): Inhalt, kein Zustand; ob ein Abschnitt befahren wird, folgt aus dem Datum.
+struct Railway {
+    std::string id; // z. B. "leipzig_dresden"
+    std::string name;
+    std::vector<RailSection> sections; // in der Reihenfolge der Datei
+    std::string source;
+};
+
 /// Haushalt eines Staates in einem Monat, festgestellt an seinem Rechentag (seit M5,
 /// docs/technik/wirtschaft.md Abschnitt 4.6). Beträge in Reichstalern.
 struct StateBudget {
@@ -277,31 +292,32 @@ struct Rules {
     // Wirtschaft und Staatshaushalt (seit M5, docs/technik/wirtschaft.md, Abschnitt 4.9).
     Fixed price_min; // Preisgrenzen als Faktor auf den Basispreis
     Fixed price_max;
-    Fixed price_adjustment;            // Anteil der Lücke zum Zielpreis je Monat
-    std::int32_t trade_neighbors = 0;  // Nachbarmärkte je Markt
-    Fixed trade_radius_km;             // Umkreis der Nachbarmärkte
-    Fixed trade_rate;                  // Stärke des Handels je Monat
-    Fixed freight_land;                // Frachtkosten je 100 km (Anteil am Preis)
-    Fixed freight_sea;                 // Frachtkosten zum Weltmarkt
-    Fixed trade_margin;                // Handelsspanne (Anteil am Umsatz)
-    Fixed business_adjustment;         // Anpassung der Betriebsanteile je Monat
-    Fixed business_min_share;          // Mindestanteil eines erlaubten Betriebs
-    Fixed harvest_variation_land;      // Erntefaktor: landesweite Schwankung
-    Fixed harvest_variation_market;    // … Schwankung je Markt
-    Fixed mortality_hunger;            // Zuschlag auf die Sterblichkeit ohne Grundnahrung
-    std::int32_t settling_months = 0;  // Einschwingen beim Start (Monate)
-    Fixed administration_per_capita;   // Verwaltung: Reichstaler je Einwohner und Jahr
-    Fixed soldier_pay;                 // Sold: Reichstaler je Soldat und Jahr
-    Fixed reserve_years;               // Rücklage in Jahresausgaben
-    Fixed building_share;              // Anteil des Überschusses, der je Monat verbaut wird
-    Fixed development_max;             // Landesausbau: höchster Zuschlag auf die Tragfähigkeit
-    Fixed development_half;            // … Reichstaler je km² für den halben Zuschlag
-    Fixed interest_base;               // Zins: Grundsatz
-    Fixed interest_risk;               // … Aufschlag je Jahreseinnahme Schulden über der ersten
-    Fixed interest_max;                // … Obergrenze
-    Fixed bankruptcy_ratio;            // Bankrott bei Schulden über so vielen Jahreseinnahmen
-    Fixed bankruptcy_haircut;          // Schuldenschnitt beim Bankrott
-    Fixed bankruptcy_premium;          // Zinsaufschlag nach dem Bankrott
+    Fixed price_adjustment;           // Anteil der Lücke zum Zielpreis je Monat
+    std::int32_t trade_neighbors = 0; // Nachbarmärkte je Markt
+    Fixed trade_radius_km;            // Umkreis der Nachbarmärkte
+    Fixed trade_rate;                 // Stärke des Handels je Monat
+    Fixed freight_land;               // Frachtkosten je 100 km (Anteil am Preis)
+    Fixed freight_sea;                // Frachtkosten zum Weltmarkt
+    Fixed freight_rail;               // Frachtkosten je 100 km zwischen Märkten mit Bahnverbindung (seit M7)
+    Fixed trade_margin;               // Handelsspanne (Anteil am Umsatz)
+    Fixed business_adjustment;        // Anpassung der Betriebsanteile je Monat
+    Fixed business_min_share;         // Mindestanteil eines erlaubten Betriebs
+    Fixed harvest_variation_land;     // Erntefaktor: landesweite Schwankung
+    Fixed harvest_variation_market;   // … Schwankung je Markt
+    Fixed mortality_hunger;           // Zuschlag auf die Sterblichkeit ohne Grundnahrung
+    std::int32_t settling_months = 0; // Einschwingen beim Start (Monate)
+    Fixed administration_per_capita;  // Verwaltung: Reichstaler je Einwohner und Jahr
+    Fixed soldier_pay;                // Sold: Reichstaler je Soldat und Jahr
+    Fixed reserve_years;              // Rücklage in Jahresausgaben
+    Fixed building_share;             // Anteil des Überschusses, der je Monat verbaut wird
+    Fixed development_max;            // Landesausbau: höchster Zuschlag auf die Tragfähigkeit
+    Fixed development_half;           // … Reichstaler je km² für den halben Zuschlag
+    Fixed interest_base;              // Zins: Grundsatz
+    Fixed interest_risk;              // … Aufschlag je Jahreseinnahme Schulden über der ersten
+    Fixed interest_max;               // … Obergrenze
+    Fixed bankruptcy_ratio;           // Bankrott bei Schulden über so vielen Jahreseinnahmen
+    Fixed bankruptcy_haircut;         // Schuldenschnitt beim Bankrott
+    Fixed bankruptcy_premium;         // Zinsaufschlag nach dem Bankrott
     std::int32_t bankruptcy_years = 0; // … für so viele Jahre
 };
 
@@ -381,6 +397,7 @@ struct World {
     std::vector<State> states;
     std::vector<District> districts;
     std::vector<AdminUnit> admin_units; // seit M7
+    std::vector<Railway> railways;      // seit M7
     std::vector<Location> locations;
     std::vector<PopBlock> pops;
     std::vector<ChronicleEntry> chronicle;

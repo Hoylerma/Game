@@ -80,7 +80,8 @@ data/
 │   ├── staaten/*.chron     Staaten (Reichsstände) mit datierter Historie
 │   ├── kreise/*.chron      Kreise: Gruppen von 4–12 Orten (seit M3)
 │   ├── verwaltung/*.chron  Verwaltungseinheiten der Staaten (seit M7, optional)
-│   └── orte/*.chron        Orte mit datierter Historie (Besitz, Bevölkerung …)
+│   ├── orte/*.chron        Orte mit datierter Historie (Besitz, Bevölkerung …)
+│   └── eisenbahnen/*.chron Eisenbahnstrecken mit Abschnitten (seit M7, optional)
 ├── tabellen/*.csv          Quelle der Wahrheit für history/ (siehe tabellen.md)
 ├── szenarien/*.chron       Lesezeichen
 └── karte/
@@ -92,7 +93,7 @@ data/
 ```
 
 Ladereihenfolge: `regeln`, `gelaende`, `konfessionen`, `kulturen` (seit M4), `berufe`, `gueter`, `beduerfnisse`,
-`betriebe`, `maerkte` (seit M5), dann alle Dateien der Ordner `szenarien`, `history/staaten`, `history/kreise` (seit M3), `history/verwaltung` (seit M7), `history/orte`, jeweils **nach Dateiname sortiert**, Einträge in Dateireihenfolge. Daraus ergeben sich die Indizes in `World`. Die Szenarien kommen vor der Historie, weil das Startdatum des gewählten Szenarios bestimmt, welche datierten Blöcke gelten (Abschnitt 3.8).
+`betriebe`, `maerkte` (seit M5), dann alle Dateien der Ordner `szenarien`, `history/staaten`, `history/kreise` (seit M3), `history/verwaltung` (seit M7), `history/orte`, `history/eisenbahnen` (seit M7), jeweils **nach Dateiname sortiert**, Einträge in Dateireihenfolge. Daraus ergeben sich die Indizes in `World`. Die Szenarien kommen vor der Historie, weil das Startdatum des gewählten Szenarios bestimmt, welche datierten Blöcke gelten (Abschnitt 3.8).
 
 Die Dateien in `history/` erzeugt das Werkzeug `tools/archivar` aus den Tabellen in `data/tabellen/` (Format: [tabellen.md](tabellen.md)). Änderungen gehören in die Tabellen; die CI prüft mit `archivar.py --pruefen`, dass `history/` aktuell ist.
 
@@ -149,6 +150,7 @@ regeln {
     handel_rate               = 5       # 0..100
     handel_fracht             = 0.12    # 0..10, je 100 km
     seefracht                 = 0.10    # 0..10
+    bahnfracht                = 0.04    # 0..10, je 100 km mit Bahnverbindung (seit M7)
     handelsspanne             = 0.05    # 0..0.5
     betrieb_anpassung         = 0.03    # 0..1
     betrieb_min_anteil        = 0.02    # 0..0.5
@@ -518,6 +520,29 @@ Verwaltung, Bundesgebiet und Zollverein sind in M7 **Inhalt** wie die Kreise: Si
 Fingerabdruck der Spieldaten (Bereiche `kreise`, `orte`, `staaten`), nicht in der Prüfsumme und nicht
 im Spielstand. Sobald Gebietswechsel im Spiel die Zuordnung ändern, wandern `Location::admin` und
 `Location::federal` in den Zustand.
+
+### 3.17 `history/eisenbahnen/*.chron` (seit M7)
+
+```text
+strecke leipzig_dresden {
+    name      = "Leipzig-Dresdner Eisenbahn"                              # Pflicht
+    quelle    = "…"                                                       # Pflicht
+    abschnitt = { von = leipzig bis = wurzen eroeffnet = 1837.07.31 }     # mindestens einer
+    abschnitt = { von = wurzen bis = riesa eroeffnet = 1838.09.21 }
+}
+```
+
+Eine Strecke besteht aus Abschnitten von Ort zu Ort (mit oder ohne Daten) mit dem Tag der
+Eröffnung; `abschnitt` darf sich wiederholen, alle drei Felder sind Pflicht. Kennung wie bei Orten,
+eindeutig. Fatal: unbekannter Ort, gleicher Anfang und gleiches Ende, ungültiges Datum, Strecke ohne
+Abschnitt. Der Ordner darf fehlen. Im Kern: `World::railways`
+(`Railway { id, name, sections, source }`, `RailSection { from, to, opened }`).
+
+Strecken sind **Inhalt**: Ob ein Abschnitt befahren wird, folgt aus dem Datum. Sie stehen im
+Fingerabdruck (Bereich `maerkte`), nicht in der Prüfsumme und nicht im Spielstand. Wirkung: Zwei
+Nachbarmärkte, die über eröffnete Abschnitte verbunden sind, handeln mit `bahnfracht` statt
+`handel_fracht` ([wirtschaft.md](wirtschaft.md), Abschnitt 4.1). Der Bau neuer Strecken im Spiel
+kommt mit einem späteren Meilenstein.
 
 ## 4. Startzustand
 

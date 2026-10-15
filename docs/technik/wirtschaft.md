@@ -239,6 +239,8 @@ Basispreis *B_g*.
 
    ```
    fracht   = handel_fracht × abstand_km / 100            (z. B. 0,12 je 100 km)
+              bahnfracht × abstand_km / 100                (seit M7, ab dem Tag, an dem beide Märkte über
+                                                            eröffnete Eisenbahnabschnitte verbunden sind)
    lücke    = P_n,g − P_m,g × (1 + fracht)                 (Ware fließt von m nach n, wenn > 0)
    menge    = min(1, handel_rate × lücke / P_n,g) × min(Angebot_m,g, Nachfrage_n,g)   (Vormonat, mit Handel)
    ```
@@ -419,6 +421,7 @@ Neue Pflichtfelder in `regeln.chron` (vorläufige Werte):
 | `handel_nachbarn`, `handel_radius_km` | 6, 180 | Nachbarmärkte |
 | `handel_rate` | 5 | Handelsmenge je Preislücke (0..100): ab 20 % Lücke die ganze mögliche Menge |
 | `handel_fracht`, `seefracht` | 0,12, 0,10 | Frachtkosten je 100 km bzw. zum Weltmarkt (Anteil am Preis) |
+| `bahnfracht` | 0,04 | Frachtkosten je 100 km zwischen Nachbarmärkten mit Bahnverbindung (seit M7) |
 | `handelsspanne` | 0,05 | Anteil der Händler am Umsatz |
 | `betrieb_anpassung`, `betrieb_min_anteil` | 0,03, 0,02 | Anpassung der Betriebsanteile |
 | `ernte_schwankung_land`, `ernte_schwankung_markt` | 0,08, 0,10 | Erntefaktor |

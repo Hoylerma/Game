@@ -174,7 +174,7 @@ besitz.csv       neue Spalten verwaltung (Einheit der untersten Ebene ab dem Dat
   Quelle). Bis März 1848 rund 4.000–5.000 km im Bund (Leipzig–Dresden, Berlin–Potsdam, Köln–Minden,
   Berlin–Hamburg, Berlin–Breslau und weiter nach Oberschlesien, Nordbahn Wien–Olmütz, Badische
   Hauptbahn, Ludwig-Süd-Nord-Bahn u. a.). Modell: Märkte, die über eine Strecke verbunden sind,
-  handeln mit niedrigerer Fracht (neuer Regelwert `fracht_bahn`); Godot zeigt die Strecken als
+  handeln mit niedrigerer Fracht (neuer Regelwert `bahnfracht`); Godot zeigt die Strecken als
   Linien (eigene Ebene des Kartenshaders).
 - **Industrie:** neue Güter `kohle` und `eisen`, Betriebe `zeche`, `huette`, `fabrik` (Textil und
   Maschinen zusammen), Beruf `fabrikarbeiter`; Vorkommen `kohle` und `erz` an den Orten der Reviere
