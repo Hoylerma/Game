@@ -26,7 +26,7 @@ const OVERVIEW_MARGIN := 28.0
 const DYNAMIC_LEGEND_MODES: PackedInt32Array = [
 	MapModes.MAP_POLITICAL, MapModes.MAP_DENSITY, MapModes.MAP_CONFESSION,
 	MapModes.MAP_DEVASTATION, MapModes.MAP_LEBENSSTANDARD, MapModes.MAP_KULTUR,
-	MapModes.MAP_WIRTSCHAFT
+	MapModes.MAP_WIRTSCHAFT, MapModes.MAP_EISENBAHNEN
 ]
 ## Höchstzahl der Kennungen in einer Hinweismeldung.
 const MAX_LISTED_IDS := 20
@@ -423,6 +423,7 @@ func _after_time_passed() -> void:
 		if DYNAMIC_LEGEND_MODES.has(_map_mode):
 			_rebuild_legend()
 		_update_owners()
+		_update_railways()
 	var hovered := _map_view.get_hovered()
 	if hovered >= 0:
 		_on_location_hovered(hovered)
@@ -447,10 +448,29 @@ func _update_owners() -> void:
 	_update_state_labels()
 
 
-## Gruppen für die feinen Grenzlinien: Märkte im Marktmodus, Verwaltungseinheiten im Modus
-## „Verwaltung“, sonst Kreise.
+## Eisenbahnen auf der Karte (seit M7): Abschnitte zum aktuellen Datum, sichtbar nur im Modus
+## „Eisenbahnen“.
+func _update_railways() -> void:
+	var shown := _sim != null and _map.is_valid() and _map_mode == MapModes.MAP_EISENBAHNEN
+	_map_view.set_railways_visible(shown)
+	if not shown:
+		return
+	var sections := PackedInt32Array()
+	var open: Array[bool] = []
+	for line: Variant in _sim.get_railways():
+		for section: Variant in (line as Dictionary).get("sections", []):
+			var entry := section as Dictionary
+			sections.append(int(entry.get("from", -1)))
+			sections.append(int(entry.get("to", -1)))
+			open.append(bool(entry.get("open", false)))
+	_map_view.set_railways(sections, open)
+
+
+## Gruppen für die feinen Grenzlinien: Märkte in den Modi „Märkte“ und „Eisenbahnen“,
+## Verwaltungseinheiten im Modus „Verwaltung“, sonst Kreise.
 func _border_groups() -> PackedInt32Array:
-	if _map_mode == MapModes.MAP_MAERKTE and not _market_indices.is_empty():
+	var market_mode := _map_mode == MapModes.MAP_MAERKTE or _map_mode == MapModes.MAP_EISENBAHNEN
+	if market_mode and not _market_indices.is_empty():
 		return _market_indices
 	if _map_mode == MapModes.MAP_VERWALTUNG and not _admin_indices.is_empty():
 		return _admin_indices
@@ -738,6 +758,12 @@ func _rebuild_legend() -> void:
 				)
 			else:
 				_legend.show_swatches(title, units)
+		MapModes.MAP_EISENBAHNEN:
+			var rail := LegendData.railway_entries(_sim, _market_indices)
+			if rail.is_empty():
+				_legend.show_message(title, "Dieses Szenario enthält keine Eisenbahnen.")
+			else:
+				_legend.show_swatches(title, rail)
 	if _selected >= 0:
 		_fit_location_panel.call_deferred()
 
@@ -811,11 +837,14 @@ func _set_map_mode(mode: int) -> void:
 	_map_mode = mode
 	_mode_bar.show_mode(mode)
 	_map_view.set_kreis_mode(
-		mode == MapModes.MAP_KREISE or mode == MapModes.MAP_MAERKTE or mode == MapModes.MAP_VERWALTUNG
+		mode in [
+			MapModes.MAP_KREISE, MapModes.MAP_MAERKTE, MapModes.MAP_VERWALTUNG, MapModes.MAP_EISENBAHNEN
+		]
 	)
 	if not _owners.is_empty():
 		_map_view.set_location_info(_owners, _border_groups())
 	_refresh_map()
+	_update_railways()
 	_rebuild_legend()
 	var hovered := _map_view.get_hovered()
 	if hovered >= 0:
@@ -917,6 +946,9 @@ func _tooltip_detail(location: Dictionary) -> String:
 				if unit is Dictionary:
 					chain.insert(0, str((unit as Dictionary).get("name", "")))
 			second = " · ".join(chain) if not chain.is_empty() else "ohne Gliederung"
+		MapModes.MAP_EISENBAHNEN when bool(location.get("has_data", true)):
+			var lines: PackedStringArray = location.get("eisenbahnen", PackedStringArray())
+			second = "Bahnhof: %s" % ", ".join(lines) if not lines.is_empty() else "ohne Bahnhof"
 		_ when not bool(location.get("has_data", true)):
 			second = "%s · %s" % [kreis_text, second]
 	return "%s · %s" % [first, second]
@@ -1055,6 +1087,7 @@ func _after_load(new_client: bool = false) -> void:
 	_legend_month = int(_sim.get_date().get("month", 0))
 	_rebuild_legend()
 	_refresh_all()
+	_update_railways()
 
 
 ## Neues Spiel (seit M7): lädt das Szenario frisch mit seinem Spielerstaat; die laufende Partie

@@ -14,7 +14,8 @@ const MAP_KULTUR := 7
 const MAP_WIRTSCHAFT := 8
 const MAP_MAERKTE := 9
 const MAP_VERWALTUNG := 10
-const COUNT := 11
+const MAP_EISENBAHNEN := 11
+const COUNT := 12
 
 ## Anzeigenamen der Modi (Index = Modus).
 const NAMES: PackedStringArray = [
@@ -29,6 +30,7 @@ const NAMES: PackedStringArray = [
 	"Wirtschaftsleistung",
 	"Märkte",
 	"Verwaltung",
+	"Eisenbahnen",
 ]
 
 ## Kurznamen für die Knöpfe der Modusleiste (Index = Modus); seit M4 kurz gehalten,
@@ -45,6 +47,7 @@ const SHORT_NAMES: PackedStringArray = [
 	"Wirtschaft",
 	"Märkte",
 	"Verwaltung",
+	"Bahn",
 ]
 
 ## Kurze Erklärung für Tooltips der Modusleiste.
@@ -60,6 +63,7 @@ const DESCRIPTIONS: PackedStringArray = [
 	"Wirtschaftsleistung je Einwohner und Jahr (in der Währung des Szenarios)",
 	"Märkte: Orte, die gemeinsam handeln und Preise bilden",
 	"Verwaltungseinheiten der Staaten (Provinzen, Kronländer, Kreise); seit 1848",
+	"Eisenbahnstrecken und Bahnhöfe; Märkte mit Bahnanschluss handeln mit geringerer Fracht",
 ]
 
 ## Aktionen der Eingabebelegung (project.godot), Index = Modus.
@@ -75,12 +79,13 @@ const ACTIONS: Array[StringName] = [
 	&"kartenmodus_wirtschaft",
 	&"kartenmodus_maerkte",
 	&"kartenmodus_verwaltung",
+	&"kartenmodus_eisenbahnen",
 ]
 
 ## Tastenbezeichnung für die Anzeige, Index = Modus. Die Belegung nutzt physische
 ## Tasten: „Z“ ist die Taste rechts neben T (auf englischen Tastaturen „Y“), „Ü“ die rechts
-## neben P (englisch „[“).
-const KEY_HINTS: PackedStringArray = ["Q", "W", "E", "R", "T", "Z", "U", "I", "O", "P", "Ü"]
+## neben P (englisch „[“), „+“ die rechts neben Ü (englisch „]“).
+const KEY_HINTS: PackedStringArray = ["Q", "W", "E", "R", "T", "Z", "U", "I", "O", "P", "Ü", "+"]
 
 ## Modi, deren Farben von der Simulation abhängen; dort erhalten Orte ohne Daten
 ## Alpha 0 (Schraffur „keine Daten“, bridge-api.md). Im Marktmodus gilt das nur für
@@ -95,6 +100,7 @@ const DATA_MODES: PackedInt32Array = [
 	MAP_WIRTSCHAFT,
 	MAP_MAERKTE,
 	MAP_VERWALTUNG,
+	MAP_EISENBAHNEN,
 ]
 
 ## Obergrenze der Dichteskala der Brücke (≥ 120 Einwohner je km² → dunkelste Farbe).

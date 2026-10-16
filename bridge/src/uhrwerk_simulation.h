@@ -42,6 +42,7 @@ public:
         MAP_WIRTSCHAFT = 8,     // seit M5
         MAP_MAERKTE = 9,        // seit M5
         MAP_VERWALTUNG = 10,    // seit M7
+        MAP_EISENBAHNEN = 11,   // seit M7
     };
 
     /// Steuerarten für set_tax_percent (seit M5, wie uhrwerk::TaxKind).
@@ -90,6 +91,7 @@ public:
 
     std::int64_t get_admin_unit_count() const;
     godot::Dictionary get_admin_unit(std::int64_t index) const;
+    godot::Array get_railways() const;
 
     std::int64_t get_market_count() const;
     godot::Dictionary get_market(std::int64_t index) const;

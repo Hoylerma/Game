@@ -75,6 +75,9 @@ const Color kLivingLow(0.66f, 0.22f, 0.16f);   // Lebensstandard 0
 const Color kLivingHigh(0.24f, 0.52f, 0.30f);  // Lebensstandard 100
 const Color kEconomyLow(0.95f, 0.92f, 0.80f);  // Wirtschaftsleistung 0
 const Color kEconomyHigh(0.55f, 0.36f, 0.08f); // Wirtschaftsleistung ab kEconomyMax
+const Color kRailStation(0.45f, 0.13f, 0.08f); // Bahnhof: Endpunkt eines eröffneten Abschnitts (seit M7)
+const Color kRailMarket(0.85f, 0.70f, 0.50f);  // Ort in einem Markt mit Bahnhof
+const Color kRailNone(0.94f, 0.91f, 0.83f);    // ohne Bahn
 constexpr double kDensityMax = 120.0;          // Einwohner je km², ab hier dunkelste Stufe
 constexpr double kEconomyMax = 16.0;           // Reichstaler je Einwohner und Jahr, dunkelste Stufe
 
@@ -95,6 +98,37 @@ const std::array<Color, 12> kKreisPalette = {
     Color(0.74f, 0.58f, 0.40f), // Hellbraun
     Color(0.62f, 0.84f, 0.88f), // Eisblau
 };
+
+/// Bahnanschluss zum aktuellen Datum (seit M7): 2 = Bahnhof (Endpunkt eines eröffneten Abschnitts),
+/// 1 = Ort in einem Markt mit Bahnhof, 0 = ohne Bahn.
+std::vector<std::uint8_t> rail_access(const uhrwerk::World& world) {
+    std::vector<std::uint8_t> access(world.locations.size(), 0);
+    std::vector<bool> market_on_rail(world.markets.size(), false);
+    for (const uhrwerk::Railway& railway : world.railways) {
+        for (const uhrwerk::RailSection& section : railway.sections) {
+            if (section.opened > world.date) {
+                continue;
+            }
+            for (const uhrwerk::Index end : {section.from, section.to}) {
+                if (valid_index(world.locations, end)) {
+                    access[static_cast<std::size_t>(end)] = 2;
+                    const uhrwerk::Index market = at(world.locations, end).market;
+                    if (valid_index(world.markets, market)) {
+                        market_on_rail[static_cast<std::size_t>(market)] = true;
+                    }
+                }
+            }
+        }
+    }
+    for (std::size_t i = 0; i < world.locations.size(); ++i) {
+        const uhrwerk::Index market = world.locations[i].market;
+        if (access[i] == 0 && valid_index(world.markets, market) &&
+            market_on_rail[static_cast<std::size_t>(market)]) {
+            access[i] = 1;
+        }
+    }
+    return access;
+}
 
 double density_of(const uhrwerk::World& world, std::int64_t location) {
     const uhrwerk::Location& loc = at(world.locations, location);
@@ -625,6 +659,21 @@ Dictionary UhrwerkSimulation::get_location(std::int64_t index) const {
     }
     result["verwaltung"] = admin_chain;
     result["bundesgebiet"] = loc.federal;
+    // Strecken mit einem eröffneten Abschnitt an diesem Ort (seit M7), mit dem Jahr der Eröffnung.
+    PackedStringArray railways;
+    for (const uhrwerk::Railway& railway : w->railways) {
+        const uhrwerk::RailSection* first = nullptr;
+        for (const uhrwerk::RailSection& section : railway.sections) {
+            if ((section.from == index || section.to == index) && section.opened <= w->date &&
+                (first == nullptr || section.opened < first->opened)) {
+                first = &section;
+            }
+        }
+        if (first != nullptr) {
+            railways.append(to_godot(railway.name + " (" + std::to_string(first->opened.year) + ")"));
+        }
+    }
+    result["eisenbahnen"] = railways;
     result["terrain"] =
         valid_index(w->terrains, loc.terrain) ? to_godot(at(w->terrains, loc.terrain).name) : String();
     result["is_city"] = loc.is_city;
@@ -736,6 +785,36 @@ Dictionary UhrwerkSimulation::get_admin_unit(std::int64_t index) const {
     return result;
 }
 
+Array UhrwerkSimulation::get_railways() const {
+    Array result;
+    const uhrwerk::World* w = world();
+    if (!w) {
+        return result;
+    }
+    for (const uhrwerk::Railway& railway : w->railways) {
+        Dictionary line;
+        line["id"] = to_godot(railway.id);
+        line["name"] = to_godot(railway.name);
+        line["source"] = to_godot(railway.source);
+        Array sections;
+        for (const uhrwerk::RailSection& section : railway.sections) {
+            Dictionary entry;
+            entry["from"] = section.from;
+            entry["to"] = section.to;
+            Dictionary opened;
+            opened["year"] = section.opened.year;
+            opened["month"] = section.opened.month;
+            opened["day"] = section.opened.day;
+            entry["opened"] = opened;
+            entry["open"] = section.opened <= w->date;
+            sections.append(entry);
+        }
+        line["sections"] = sections;
+        result.append(line);
+    }
+    return result;
+}
+
 PackedInt32Array UhrwerkSimulation::get_location_market_indices() const {
     PackedInt32Array result;
     const uhrwerk::World* w = world();
@@ -829,10 +908,12 @@ PackedColorArray UhrwerkSimulation::get_map_colors(std::int64_t mode) const {
     if (!w) {
         return colors;
     }
-    ERR_FAIL_COND_V_MSG(mode < MAP_POLITICAL || mode > MAP_VERWALTUNG, colors,
+    ERR_FAIL_COND_V_MSG(mode < MAP_POLITICAL || mode > MAP_EISENBAHNEN, colors,
                         "get_map_colors: unbekannter Kartenmodus.");
 
     const auto count = static_cast<std::int64_t>(w->locations.size());
+    const std::vector<std::uint8_t> rail =
+        mode == MAP_EISENBAHNEN ? rail_access(*w) : std::vector<std::uint8_t>{};
     colors.resize(count);
     for (std::int64_t i = 0; i < count; ++i) {
         const uhrwerk::Location& loc = at(w->locations, i);
@@ -905,6 +986,11 @@ PackedColorArray UhrwerkSimulation::get_map_colors(std::int64_t mode) const {
                 color = blend(to_godot(at(w->states, loc.owner).color), Color(1.0f, 1.0f, 1.0f), 0.45);
             }
             break;
+        case MAP_EISENBAHNEN: {
+            const std::uint8_t access = rail[static_cast<std::size_t>(i)];
+            color = access == 2 ? kRailStation : (access == 1 ? kRailMarket : kRailNone);
+            break;
+        }
         default:
             break;
         }
@@ -1133,6 +1219,7 @@ void UhrwerkSimulation::_bind_methods() {
                          &UhrwerkSimulation::get_location_admin_indices);
     ClassDB::bind_method(D_METHOD("get_admin_unit_count"), &UhrwerkSimulation::get_admin_unit_count);
     ClassDB::bind_method(D_METHOD("get_admin_unit", "index"), &UhrwerkSimulation::get_admin_unit);
+    ClassDB::bind_method(D_METHOD("get_railways"), &UhrwerkSimulation::get_railways);
 
     ClassDB::bind_method(D_METHOD("get_kreis_count"), &UhrwerkSimulation::get_kreis_count);
     ClassDB::bind_method(D_METHOD("get_kreis_index", "id"), &UhrwerkSimulation::get_kreis_index);
@@ -1170,6 +1257,7 @@ void UhrwerkSimulation::_bind_methods() {
     BIND_ENUM_CONSTANT(MAP_WIRTSCHAFT);
     BIND_ENUM_CONSTANT(MAP_MAERKTE);
     BIND_ENUM_CONSTANT(MAP_VERWALTUNG);
+    BIND_ENUM_CONSTANT(MAP_EISENBAHNEN);
     BIND_ENUM_CONSTANT(TAX_KONTRIBUTION);
     BIND_ENUM_CONSTANT(TAX_AKZISE);
     BIND_ENUM_CONSTANT(TAX_ZOLL);

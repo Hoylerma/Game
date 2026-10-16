@@ -82,7 +82,7 @@ func _test_launch_options() -> void:
 	_true(not defaults.wants_screenshot(), "ohne --screenshot kein Screenshot")
 	var bad_args := PackedStringArray(
 		[
-			"--tage=-3", "--kartenmodus=11", "--unbekannt", "--zoom=0", "--zoom=viel", "--szenario",
+			"--tage=-3", "--kartenmodus=12", "--unbekannt", "--zoom=0", "--zoom=viel", "--szenario",
 			"--staat="
 		]
 	)
@@ -190,7 +190,7 @@ func _test_legend_entries() -> void:
 
 
 func _test_map_modes() -> void:
-	_equal(MapModes.COUNT, 11, "elf Kartenmodi (Verwaltung seit M7)")
+	_equal(MapModes.COUNT, 12, "zwölf Kartenmodi (Verwaltung und Eisenbahnen seit M7)")
 	_equal(MapModes.name_of(MapModes.MAP_VERWALTUNG), "Verwaltung", "Name des Modus Verwaltung")
 	_equal(MapModes.MAP_KREISE, 5, "Kartenmodus Kreise = 5 (bridge-api.md)")
 	_equal(MapModes.MAP_LEBENSSTANDARD, 6, "Kartenmodus Lebensstandard = 6 (bridge-api.md)")

@@ -231,6 +231,62 @@ static func admin_entries(
 	return entries
 
 
+## Legende „Eisenbahnen“ (seit M7): Bahnhöfe (Endpunkte eröffneter Abschnitte), Orte in einem
+## Markt mit Bahnhof, Orte ohne Bahn; leer, wenn das Szenario keine Strecken hat.
+static func railway_entries(sim: SimulationClient, market_indices: PackedInt32Array) -> Array[Dictionary]:
+	var railways := sim.get_railways()
+	if railways.is_empty():
+		return []
+	var stations := {}
+	var open_sections := 0
+	var later_sections := 0
+	for line: Variant in railways:
+		for section: Variant in (line as Dictionary).get("sections", []):
+			var entry := section as Dictionary
+			if bool(entry.get("open", false)):
+				open_sections += 1
+				stations[int(entry.get("from", -1))] = true
+				stations[int(entry.get("to", -1))] = true
+			else:
+				later_sections += 1
+	var markets := {}
+	for index: int in stations:
+		if index >= 0 and index < market_indices.size():
+			markets[market_indices[index]] = true
+	var colors := sim.get_map_colors(MapModes.MAP_EISENBAHNEN)
+	var counts := [0, 0, 0]
+	var samples: Array[Color] = [Color.TRANSPARENT, Color.TRANSPARENT, Color.TRANSPARENT]
+	var without_data := 0
+	for index in colors.size():
+		if colors[index].a <= 0.0:
+			without_data += 1
+			continue
+		var kind := 0
+		if stations.has(index):
+			kind = 2
+		elif index < market_indices.size() and markets.has(market_indices[index]):
+			kind = 1
+		counts[kind] += 1
+		samples[kind] = colors[index]
+	var texts := ["ohne Bahn", "im Markt mit Bahnhof", "Bahnhof"]
+	var details := [
+		"",
+		"handelt mit Nachbarmärkten am Netz zur Bahnfracht",
+		"%d Abschnitte eröffnet, %d später (gestrichelt)" % [open_sections, later_sections],
+	]
+	var entries: Array[Dictionary] = []
+	for kind in [2, 1, 0]:
+		if counts[kind] == 0:
+			continue
+		var detail := count_text(counts[kind])
+		if not str(details[kind]).is_empty():
+			detail += " – " + str(details[kind])
+		entries.append({"color": samples[kind], "text": texts[kind], "detail": detail})
+	if without_data > 0:
+		entries.append(no_data_entry(without_data))
+	return entries
+
+
 ## Verlauf für einen Kartenmodus mit Zahlenwerten im Ortsfeld field (0..scale_max).
 static func gradient_for(
 	sim: SimulationClient, mode: int, field: String, scale_max: float
