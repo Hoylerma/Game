@@ -1,0 +1,10 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+strecke braunschweigische {
+    name      = "Herzoglich Braunschweigische Staatseisenbahn"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M7, Schritt b1)"
+    abschnitt = { von = braunschweig bis = wolfenbuettel eroeffnet = 1838.12.01 }
+    abschnitt = { von = wolfenbuettel bis = bad_harzburg eroeffnet = 1841.08.31 }
+    abschnitt = { von = wolfenbuettel bis = oschersleben eroeffnet = 1843.07.15 }
+    abschnitt = { von = braunschweig bis = peine eroeffnet = 1844.05.19 }
+}

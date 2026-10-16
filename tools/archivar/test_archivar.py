@@ -68,7 +68,7 @@ class TestErzeugung(MitKopie):
         # Die eingecheckte Ausgabe unter testdaten/history ist die Referenz.
         code, aus, fehler = self.pruefen()
         self.assertEqual((code, fehler), (0, ""), aus)
-        self.assertIn("history/ ist aktuell (7 Dateien, 4 Orte, 2 Kreise, 2 Staaten)", aus)
+        self.assertIn("history/ ist aktuell (8 Dateien, 4 Orte, 2 Kreise, 2 Staaten)", aus)
 
     def test_deterministisch(self) -> None:
         m = ar.Meldungen()
@@ -193,10 +193,17 @@ class TestFehler(MitKopie):
             ("orte.csv", "kr_burg;salz;", "kr_burg;salz salz;"): "Vorkommen doppelt angegeben",
             ("orte.csv", "kr_hafen;;ja;", "kr_hafen;;vielleicht;"): "Spalte 'hafen' erwartet ja, nein oder nichts",
             ("staaten_historie.csv", "BBB;1648.10.24;schatz", "BBB;1648.10.24;armee"): "unbekanntes Feld 'armee'",
-            ("dateien.csv", "staaten;AAA_nordland", "karten;AAA_nordland"): "erwartet kreise, orte, staaten",
+            ("dateien.csv", "staaten;AAA_nordland", "karten;AAA_nordland"): "erwartet eisenbahnen, kreise, orte, staaten",
             ("orte.csv", "200;ja;kr_burg", "200;ja;kr_turm"): "unbekannter Kreis 'kr_turm'",
             ("kreise.csv", "kr_burg;sued;Burg;Testdaten", "kr_burg;sued;;Testdaten"): "Spalte 'name' darf nicht leer sein",
             ("kreise.csv", "kr_burg;sued", "Kr_burg;sued"): "ungültige Kreiskennung 'Kr_burg'",
+            ("eisenbahnen.csv", "hafen;moor;1840", "hafen;sumpf;1840"): "unbekannter Ort 'sumpf' in Spalte 'bis' (Strecke nordbahn)",
+            ("eisenbahnen.csv", "hafen;moor;1840", "hafen;hafen;1840"): "Abschnitt der Strecke nordbahn beginnt und endet in hafen",
+            ("eisenbahnen.csv", "1840.05.01", "1840.13.01"): "ungültiges Datum '1840.13.01' in Spalte 'eroeffnet'",
+            ("eisenbahnen.csv", "nord;;moor", "sued;;moor"): "Strecke nordbahn steht schon in Datei 'nord'",
+            ("eisenbahnen.csv", "nord;;moor", "nord;Südbahn;moor"): "Strecke nordbahn heißt schon 'Nordbahn'",
+            ("eisenbahnen.csv", "moor;heide;1842", "hafen;moor;1842"): "Abschnitt hafen–moor der Strecke nordbahn ist doppelt",
+            ("eisenbahnen.csv", "nord;Nordbahn;", "nord;;"): "Spalte 'name' darf nicht leer sein",
         }
         for (tabelle, alt, neu), text in faelle.items():
             with self.subTest(text):
@@ -204,6 +211,10 @@ class TestFehler(MitKopie):
                 self.setUp()
                 self.ersetze(tabelle, alt, neu)
                 self.erwarte_fehler(text)
+
+    def test_langer_bahnabschnitt_warnt(self) -> None:
+        self.ersetze("orte.csv", "heide;nord;Heide-Süd;heide;11.20;53.10", "heide;nord;Heide-Süd;heide;14.20;53.10")
+        self.erwarte_warnung("tabellen/eisenbahnen.csv:3: Abschnitt moor–heide der Strecke nordbahn ist")
 
     def test_kultur_aus_landschaft_oder_zeile(self) -> None:
         m = ar.Meldungen()

@@ -1,0 +1,8 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+strecke pfaelzische_ludwigsbahn {
+    name      = "Pfälzische Ludwigsbahn"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M7, Schritt b1)"
+    abschnitt = { von = frankenthal bis = neustadt_an_der_haardt eroeffnet = 1847.06.11 }
+    abschnitt = { von = frankenthal bis = speyer eroeffnet = 1847.06.11 }
+}

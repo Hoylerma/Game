@@ -1,0 +1,27 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+strecke ludwigsbahn {
+    name      = "Bayerische Ludwigsbahn (Nürnberg–Fürth)"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M7, Schritt b1)"
+    abschnitt = { von = nuernberg bis = fuerth eroeffnet = 1835.12.07 }
+}
+
+strecke muenchen_augsburg {
+    name      = "München-Augsburger Eisenbahn"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M7, Schritt b1)"
+    abschnitt = { von = muenchen bis = augsburg eroeffnet = 1840.10.04 }
+}
+
+strecke ludwig_sued_nord {
+    name      = "Ludwig-Süd-Nord-Bahn"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M7, Schritt b1)"
+    abschnitt = { von = nuernberg bis = erlangen eroeffnet = 1844.08.25 }
+    abschnitt = { von = erlangen bis = forchheim eroeffnet = 1844.08.25 }
+    abschnitt = { von = forchheim bis = bamberg eroeffnet = 1844.08.25 }
+    abschnitt = { von = bamberg bis = lichtenfels eroeffnet = 1846.01.15 }
+    abschnitt = { von = lichtenfels bis = kulmbach eroeffnet = 1846.10.15 }
+    abschnitt = { von = kulmbach bis = hof eroeffnet = 1848.11.01 }
+    abschnitt = { von = augsburg bis = donauwoerth eroeffnet = 1844.10.01 }
+    abschnitt = { von = augsburg bis = buchloe eroeffnet = 1847.09.01 }
+    abschnitt = { von = buchloe bis = kaufbeuren eroeffnet = 1847.09.01 }
+}

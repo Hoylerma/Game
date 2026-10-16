@@ -1,0 +1,8 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+strecke nordbahn {
+    name      = "Nordbahn"
+    quelle    = "Testdaten"
+    abschnitt = { von = hafen bis = moor eroeffnet = 1840.05.01 }
+    abschnitt = { von = moor bis = heide eroeffnet = 1842.10.15 }
+}

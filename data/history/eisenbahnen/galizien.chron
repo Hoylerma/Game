@@ -1,0 +1,8 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+strecke krakau_oberschlesische {
+    name      = "Krakau-Oberschlesische Eisenbahn"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M7, Schritt b1)"
+    abschnitt = { von = myslowice bis = jaworzno eroeffnet = 1847.10.13 }
+    abschnitt = { von = jaworzno bis = krenau eroeffnet = 1847.10.13 }
+}

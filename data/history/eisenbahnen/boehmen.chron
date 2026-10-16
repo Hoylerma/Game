@@ -1,0 +1,11 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+strecke noerdliche_staatsbahn {
+    name      = "Nördliche Staatsbahn (Olmütz–Prag)"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M7, Schritt b1)"
+    abschnitt = { von = olmuetz bis = hohenstadt eroeffnet = 1845.08.20 }
+    abschnitt = { von = hohenstadt bis = boehmisch_truebau eroeffnet = 1845.08.20 }
+    abschnitt = { von = boehmisch_truebau bis = pardubitz eroeffnet = 1845.08.20 }
+    abschnitt = { von = pardubitz bis = kolin eroeffnet = 1845.08.20 }
+    abschnitt = { von = kolin bis = prag eroeffnet = 1845.08.20 }
+}

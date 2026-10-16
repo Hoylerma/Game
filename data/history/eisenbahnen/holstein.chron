@@ -1,0 +1,11 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+strecke altona_kiel {
+    name      = "Christian VIII. Ostseebahn (Altona–Kiel)"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M7, Schritt b1)"
+    abschnitt = { von = hamburg bis = elmshorn eroeffnet = 1844.09.18 }
+    abschnitt = { von = elmshorn bis = neumuenster eroeffnet = 1844.09.18 }
+    abschnitt = { von = neumuenster bis = kiel eroeffnet = 1844.09.18 }
+    abschnitt = { von = elmshorn bis = glueckstadt eroeffnet = 1845.07.20 }
+    abschnitt = { von = neumuenster bis = rendsburg eroeffnet = 1845.09.18 }
+}

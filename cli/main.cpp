@@ -433,6 +433,29 @@ std::string describe_locations(const World& w) {
     return plural(w.locations.size(), "Ort", "Orte") + " " + location_data_split(w);
 }
 
+/// Strecken, Abschnitte und Märkte mit Bahnfracht zum Startdatum (seit M7).
+std::string railway_summary(const World& w) {
+    std::size_t sections = 0;
+    std::size_t open = 0;
+    for (const uhrwerk::Railway& r : w.railways) {
+        sections += r.sections.size();
+        for (const uhrwerk::RailSection& s : r.sections) {
+            open += s.opened <= w.date ? 1 : 0;
+        }
+    }
+    std::size_t pairs = 0;
+    const uhrwerk::EconomyTopology topology = uhrwerk::build_economy_topology(w);
+    for (std::size_t m = 0; m < topology.neighbors.size(); ++m) {
+        for (const uhrwerk::MarketLink& link : topology.neighbors[m]) {
+            pairs += link.rail_from && *link.rail_from <= w.date ? 1 : 0;
+        }
+    }
+    return plural(w.railways.size(), "Strecke", "Strecken") + ", " +
+           plural(sections, "Abschnitt", "Abschnitte") + " (" + std::to_string(open) +
+           " zum Startdatum eröffnet); " + std::to_string(pairs) +
+           " Verbindungen zu Nachbarmärkten mit Bahnfracht";
+}
+
 /// "(5 Orte mit Kreis, 1 ohne Kreis)"
 std::string location_district_split(const World& w) {
     const auto without = static_cast<std::size_t>(std::count_if(
@@ -728,6 +751,7 @@ int cmd_info(const Options& o, const fs::path& data_dir) {
               << location_data_split(w) << '\n'
               << "Kreise:       " << group_digits(std::to_string(w.districts.size())) << " "
               << location_district_split(w) << '\n'
+              << "Eisenbahnen:  " << railway_summary(w) << '\n'
               << "Bevölkerung:  " << format_int(total.round()) << "\n\n";
 
     std::vector<std::vector<std::string>> rows;

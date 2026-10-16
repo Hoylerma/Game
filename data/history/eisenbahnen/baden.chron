@@ -1,0 +1,16 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+strecke badische_hauptbahn {
+    name      = "Badische Hauptbahn"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M7, Schritt b1)"
+    abschnitt = { von = mannheim bis = heidelberg eroeffnet = 1840.09.12 }
+    abschnitt = { von = heidelberg bis = bruchsal eroeffnet = 1843.04.10 }
+    abschnitt = { von = bruchsal bis = karlsruhe eroeffnet = 1843.04.10 }
+    abschnitt = { von = karlsruhe bis = rastatt eroeffnet = 1844.05.01 }
+    abschnitt = { von = rastatt bis = baden_baden eroeffnet = 1844.05.01 }
+    abschnitt = { von = baden_baden bis = offenburg eroeffnet = 1844.06.01 }
+    abschnitt = { von = offenburg bis = lahr eroeffnet = 1845.07.30 }
+    abschnitt = { von = lahr bis = emmendingen eroeffnet = 1845.07.30 }
+    abschnitt = { von = emmendingen bis = freiburg_im_breisgau eroeffnet = 1845.07.30 }
+    abschnitt = { von = freiburg_im_breisgau bis = muellheim eroeffnet = 1847.06.01 }
+}
