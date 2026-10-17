@@ -14,12 +14,13 @@ staat WAL {
         hauptstadt     = bad_arolsen
         regierungsform = konstitutionelle_monarchie
         konfession     = lutherisch
-        schatz         = 17400
+        schatz         = 0
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 14500
+        hofhaltung     = 8000
         heer           = 6
+        schulden       = 54000
         zollverein     = ja
     }
 }

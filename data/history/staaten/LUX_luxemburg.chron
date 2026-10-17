@@ -14,12 +14,13 @@ staat LUX {
         hauptstadt     = luxemburg
         regierungsform = staendische_monarchie
         konfession     = reformiert
-        schatz         = 57000
+        schatz         = 0
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 47500
+        hofhaltung     = 12800
         heer           = 6
+        schulden       = 170000
         zollverein     = ja
     }
 }

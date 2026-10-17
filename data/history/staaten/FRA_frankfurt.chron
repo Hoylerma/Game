@@ -11,12 +11,13 @@ staat FRA {
         regierungsform = stadtrepublik
         herrscher      = "Senat"
         konfession     = lutherisch
-        schatz         = 20400
+        schatz         = 0
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 17000
+        hofhaltung     = 700
         heer           = 4
+        schulden       = 18000
         zollverein     = ja
     }
 }

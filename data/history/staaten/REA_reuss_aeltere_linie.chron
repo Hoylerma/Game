@@ -14,12 +14,13 @@ staat REA {
         hauptstadt     = greiz
         regierungsform = absolute_monarchie
         konfession     = lutherisch
-        schatz         = 10500
+        schatz         = 0
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 8800
+        hofhaltung     = 3400
         heer           = 6
+        schulden       = 23000
         zollverein     = ja
     }
 }

@@ -14,12 +14,13 @@ staat LIP {
         hauptstadt     = detmold
         regierungsform = staendische_monarchie
         konfession     = reformiert
-        schatz         = 31200
+        schatz         = 0
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 26000
+        hofhaltung     = 9900
         heer           = 6
+        schulden       = 66000
         zollverein     = ja
     }
 }

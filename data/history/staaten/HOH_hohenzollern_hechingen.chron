@@ -14,12 +14,13 @@ staat HOH {
         hauptstadt     = hechingen
         regierungsform = absolute_monarchie
         konfession     = katholisch
-        schatz         = 6300
+        schatz         = 0
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 5200
+        hofhaltung     = 1800
         heer           = 6
+        schulden       = 12000
         zollverein     = ja
     }
 }

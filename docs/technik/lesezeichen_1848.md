@@ -188,6 +188,15 @@ besitz.csv       neue Spalten verwaltung (Einheit der untersten Ebene ab dem Dat
   `erz` an 19 Orten.
 - **Haushalte** in Talern für die Staaten von 1848 (Steuern, Hof, Verwaltung, Heer, Schulden) und
   **Zielwerte 1848** für den Balancing-Bericht (eigene Datei je Szenario).
+  **Umgesetzt (b2):** Das Modell erwirtschaftet 1848 weniger als die historischen Staaten (Preußen
+  rund 13,7 Mio. Taler Steuern im Jahr gegen gut 60 Mio. um 1847). Hof, Schatz und Schulden stehen
+  deshalb im Maßstab des Modells, als Anteil bzw. Vielfaches der Jahreseinnahmen zum Start, nach den
+  Verhältnissen um 1847: Hof 4 % (Preußen, Österreich) bis 12 % (kleine Fürstentümer); Schulden
+  abzüglich Schatz in Jahreseinnahmen, etwa Preußen 1,5, Bayern 2,9, Österreich 3,45 (unter der
+  Bankrottgrenze von 4), Kurhessen schuldenfrei mit Schatz. Heer wie in a1 (Soldaten je 1.000
+  Einwohner). Werkzeug: ein einmaliges Skript; die Werte sind `spielwert`. Der Bericht `wirtschaft
+  --szenario voelkerfruehling` zeigt danach Überschüsse in allen Staaten (Preußen rund ein Drittel der
+  Einnahmen); Ausgleich und Zielwerte folgen in b3.
 
 ## 9. Szenario, Kommandozeile, Godot
 
@@ -264,6 +273,7 @@ Szenarien; Klicktest mit der Staatswahl.
 | a5 Godot | Spielmenü „Neues Spiel“ mit Wahl des Lesezeichens, Knopf „Diesen Staat spielen“ in der Ortsinfo (jeder Staat wählbar, die spielbaren nennt ein Hinweis), Kartenmodus „Verwaltung“ (Taste Ü), Ortsinfo mit Verwaltungskette und Bundesgebiet, Staatsinfo mit Bund und Zollverein, Startoptionen `--szenario` und `--staat`. Statt eines eigenen Startbildschirms startet das Spiel wie bisher mit 1648. |
 | a6 Doku, Stichprobe | Doku der Werkzeuge und Tabellen fertig. Stichprobe in [stichprobe_1848.md](../pruefung/stichprobe_1848.md): 60 Datensätze, davon 46 plausibel, 6 Vereinfachungen, 6 Fehler (behoben, darunter die Konfession in sieben Landschaften und die Viertel in Ober- und Niederösterreich) und 2 zweifelhaft; Flächen der großen Staaten und aller preußischen Provinzen innerhalb ±5 % der Richtwerte. Die Fachprüfung mit Quellen steht aus (Entscheidung 7). Review des M7a-Codes erledigt: Szenariowechsel in Godot (Ortskatalog, Farben, Ladeliste mit Spielständen des anderen Lesezeichens, Rückfrage vor „Neues Spiel“), Kreise in `ueber`, doppelte Schlüssel und Gebiete ohne Treffer in den Werkzeugen, `spielbar` im Archivar; neue Tests, darunter `speichertest_1848`. |
 | b1 Eisenbahnen | Inhalt `history/eisenbahnen/` aus `eisenbahnen.csv`: 42 Strecken, 176 Abschnitte, zum 1. März 1848 165 eröffnet (rund 4.700 km Luftlinie), einzelne Abschnitte aus dem Rest von 1848; ungeprüft. Regel `bahnfracht` 0,04 je 100 km: Nachbarmärkte im selben Netz handeln ab dem Tag der Verbindung zur Bahnfracht (1848: 101 Verbindungen). Godot: Kartenmodus „Eisenbahnen“ (Taste +) mit Strecken über der Karte, Bahnhof in der Ortsinfo. 1648 unverändert. |
+| b2 Industrie und Haushalte | Inhalt ab einem Datum (`seit`, `anteil_aus`) im Lader; Kohle, Eisen, Zeche, Hütte, Spinnerei, Maschinenbau und Fabrikarbeiter ab 1800 (1648 unverändert); Vorkommen an 34 Kohle- und 19 Erzorten; Haushalte 1848 im Maßstab des Modells. Ein Lauf über 10 Jahre verliert 2 % der Bevölkerung, keine Staatsbankrotte. |
 
 **Quellen:** Die Domains der Quellen (Wikipedia, Wikidata, GenWiki/GOV, OpenHistoricalMap) waren in
 der Umgebung der Umsetzung trotz Freigabe nicht erreichbar. Alle historischen Angaben stammen daher

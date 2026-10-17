@@ -11,12 +11,13 @@ staat BRE {
         regierungsform = stadtrepublik
         herrscher      = "Senat"
         konfession     = reformiert
-        schatz         = 22500
+        schatz         = 0
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 18800
+        hofhaltung     = 900
         heer           = 4
+        schulden       = 39000
         zollverein     = nein
     }
 }

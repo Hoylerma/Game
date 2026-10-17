@@ -42,12 +42,13 @@ staat DES {
         hauptstadt     = dessau
         regierungsform = absolute_monarchie
         konfession     = reformiert
-        schatz         = 32100
+        schatz         = 0
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 26800
+        hofhaltung     = 16600
         heer           = 6
+        schulden       = 111000
         zollverein     = ja
     }
 }

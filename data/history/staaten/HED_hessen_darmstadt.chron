@@ -14,12 +14,13 @@ staat HED {
         hauptstadt     = darmstadt
         regierungsform = konstitutionelle_monarchie
         konfession     = lutherisch
-        schatz         = 255600
+        schatz         = 0
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 213000
+        hofhaltung     = 52200
         heer           = 7
+        schulden       = 1343000
         zollverein     = ja
     }
 

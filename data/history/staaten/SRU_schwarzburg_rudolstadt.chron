@@ -14,12 +14,13 @@ staat SRU {
         hauptstadt     = rudolstadt
         regierungsform = konstitutionelle_monarchie
         konfession     = lutherisch
-        schatz         = 20400
+        schatz         = 0
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 17000
+        hofhaltung     = 8800
         heer           = 6
+        schulden       = 59000
         zollverein     = ja
     }
 }

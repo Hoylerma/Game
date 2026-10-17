@@ -11,12 +11,13 @@ staat LUE {
         regierungsform = stadtrepublik
         herrscher      = "Senat"
         konfession     = lutherisch
-        schatz         = 14100
+        schatz         = 0
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 11800
+        hofhaltung     = 600
         heer           = 4
+        schulden       = 33000
         zollverein     = nein
     }
 }

@@ -14,12 +14,13 @@ staat HEK {
         hauptstadt     = kassel
         regierungsform = konstitutionelle_monarchie
         konfession     = reformiert
-        schatz         = 226200
+        schatz         = 338100
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 188500
+        hofhaltung     = 67600
         heer           = 7
+        schulden       = 0
         zollverein     = ja
     }
 }

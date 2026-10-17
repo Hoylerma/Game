@@ -14,12 +14,13 @@ staat HAN {
         hauptstadt     = hannover
         regierungsform = konstitutionelle_monarchie
         konfession     = lutherisch
-        schatz         = 531900
+        schatz         = 0
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 443200
+        hofhaltung     = 148700
         heer           = 7
+        schulden       = 3347000
         zollverein     = nein
     }
 }
