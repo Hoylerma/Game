@@ -172,13 +172,14 @@ ort uedem {
 }
 
 ort essen_niederrhein {
-    name     = "Essen (Niederrhein)"
-    gelaende = flachland
-    lage     = { 7.0123 51.4566 }
-    flaeche  = 130
-    stadt    = ja
-    kreis    = kr_essen_niederrhein
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2928810; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Essen (Niederrhein)"
+    gelaende  = flachland
+    lage      = { 7.0123 51.4566 }
+    flaeche   = 130
+    stadt     = ja
+    kreis     = kr_essen_niederrhein
+    vorkommen = { kohle }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2928810; Name nach GeoNames; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 20913
@@ -241,13 +242,14 @@ ort wuppertal {
 }
 
 ort oberhausen {
-    name     = "Oberhausen"
-    gelaende = flachland
-    lage     = { 6.8625 51.4781 }
-    flaeche  = 108
-    stadt    = ja
-    kreis    = kr_essen_niederrhein
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2860410; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Oberhausen"
+    gelaende  = flachland
+    lage      = { 6.8625 51.4781 }
+    flaeche   = 108
+    stadt     = ja
+    kreis     = kr_essen_niederrhein
+    vorkommen = { kohle }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2860410; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 11397

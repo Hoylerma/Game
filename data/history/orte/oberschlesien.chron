@@ -780,13 +780,14 @@ ort kamnig {
 }
 
 ort tarnowitz {
-    name     = "Tarnowitz"
-    gelaende = huegelland
-    lage     = { 18.8615 50.4455 }
-    flaeche  = 185
-    stadt    = ja
-    kreis    = kr_tarnowitz
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3083440; deutscher Name aus den GeoNames-Alternativnamen (heute Tarnowskie Góry); Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Tarnowitz"
+    gelaende  = huegelland
+    lage      = { 18.8615 50.4455 }
+    flaeche   = 185
+    stadt     = ja
+    kreis     = kr_tarnowitz
+    vorkommen = { erz }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 3083440; deutscher Name aus den GeoNames-Alternativnamen (heute Tarnowskie Góry); Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 18354
@@ -1125,13 +1126,14 @@ ort kieferstaedtel {
 }
 
 ort kattowitz {
-    name     = "Kattowitz"
-    gelaende = huegelland
-    lage     = { 19.0275 50.2584 }
-    flaeche  = 116
-    stadt    = ja
-    kreis    = kr_kattowitz
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3096472; deutscher Name aus den GeoNames-Alternativnamen (heute Katowice); Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Kattowitz"
+    gelaende  = huegelland
+    lage      = { 19.0275 50.2584 }
+    flaeche   = 116
+    stadt     = ja
+    kreis     = kr_kattowitz
+    vorkommen = { kohle }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 3096472; deutscher Name aus den GeoNames-Alternativnamen (heute Katowice); Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 8551
@@ -1148,13 +1150,14 @@ ort kattowitz {
 }
 
 ort zabrze {
-    name     = "Zabrze"
-    gelaende = huegelland
-    lage     = { 18.7858 50.3249 }
-    flaeche  = 107
-    stadt    = ja
-    kreis    = kr_kattowitz
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3080985; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Zabrze"
+    gelaende  = huegelland
+    lage      = { 18.7858 50.3249 }
+    flaeche   = 107
+    stadt     = ja
+    kreis     = kr_kattowitz
+    vorkommen = { kohle }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 3080985; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 8965
@@ -1171,13 +1174,14 @@ ort zabrze {
 }
 
 ort gleiwitz {
-    name     = "Gleiwitz"
-    gelaende = flachland
-    lage     = { 18.6766 50.2976 }
-    flaeche  = 97
-    stadt    = ja
-    kreis    = kr_kattowitz
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3099230; deutscher Name aus den GeoNames-Alternativnamen (heute Gliwice); Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Gleiwitz"
+    gelaende  = flachland
+    lage      = { 18.6766 50.2976 }
+    flaeche   = 97
+    stadt     = ja
+    kreis     = kr_kattowitz
+    vorkommen = { kohle erz }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 3099230; deutscher Name aus den GeoNames-Alternativnamen (heute Gliwice); Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 15314
@@ -1194,13 +1198,14 @@ ort gleiwitz {
 }
 
 ort beuthen {
-    name     = "Beuthen"
-    gelaende = flachland
-    lage     = { 18.9328 50.348 }
-    flaeche  = 98
-    stadt    = ja
-    kreis    = kr_kattowitz
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3101950; deutscher Name aus den GeoNames-Alternativnamen (heute Bytom); Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Beuthen"
+    gelaende  = flachland
+    lage      = { 18.9328 50.348 }
+    flaeche   = 98
+    stadt     = ja
+    kreis     = kr_kattowitz
+    vorkommen = { kohle }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 3101950; deutscher Name aus den GeoNames-Alternativnamen (heute Bytom); Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 14379
@@ -1332,13 +1337,14 @@ ort tichau {
 }
 
 ort myslowice {
-    name     = "Mysłowice"
-    gelaende = huegelland
-    lage     = { 19.1667 50.2075 }
-    flaeche  = 133
-    stadt    = ja
-    kreis    = kr_tichau
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3091232; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Mysłowice"
+    gelaende  = huegelland
+    lage      = { 19.1667 50.2075 }
+    flaeche   = 133
+    stadt     = ja
+    kreis     = kr_tichau
+    vorkommen = { kohle }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 3091232; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 11657
@@ -1470,13 +1476,14 @@ ort gora {
 }
 
 ort rybnik {
-    name     = "Rybnik"
-    gelaende = huegelland
-    lage     = { 18.5418 50.0971 }
-    flaeche  = 120
-    stadt    = ja
-    kreis    = kr_rybnik
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3086586; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Rybnik"
+    gelaende  = huegelland
+    lage      = { 18.5418 50.0971 }
+    flaeche   = 120
+    stadt     = ja
+    kreis     = kr_rybnik
+    vorkommen = { kohle }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 3086586; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 10811

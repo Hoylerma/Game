@@ -179,6 +179,13 @@ besitz.csv       neue Spalten verwaltung (Einheit der untersten Ebene ab dem Dat
 - **Industrie:** neue Güter `kohle` und `eisen`, Betriebe `zeche`, `huette`, `fabrik` (Textil und
   Maschinen zusammen), Beruf `fabrikarbeiter`; Vorkommen `kohle` und `erz` an den Orten der Reviere
   (Ruhr, Saar, Aachen, Oberschlesien, Zwickau, Ostrau, Kladno, Siegerland).
+  **Umgesetzt (b2):** alles mit `seit = 1800.01.01` (chronik-skript.md 3.18), daher im Szenario 1648
+  nicht vorhanden. Zeche und Hütte beschäftigen die Landarmen der Reviere (Berg- und Hüttenleute);
+  die Fabrik ist geteilt in `spinnerei` (Faser → Tuch, überall, ohne Kohle: die frühen Spinnereien
+  liefen meist mit Wasserkraft) und `maschinenbau` (Eisen und Kohle → Waren, Städte), weil Fabriken
+  ohne Kohle sonst überall stillständen. `fabrikarbeiter` nimmt 5 % der Städter und 1 % der
+  Landbevölkerung aus den Landarmen (`anteil_aus`): rund 1,1 Mio. Köpfe. Vorkommen `kohle` an 34,
+  `erz` an 19 Orten.
 - **Haushalte** in Talern für die Staaten von 1848 (Steuern, Hof, Verwaltung, Heer, Schulden) und
   **Zielwerte 1848** für den Balancing-Bericht (eigene Datei je Szenario).
 

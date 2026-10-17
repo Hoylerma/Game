@@ -333,13 +333,14 @@ ort oppenberg {
 }
 
 ort eisenerz {
-    name     = "Eisenerz"
-    gelaende = hochgebirge
-    lage     = { 14.8833 47.5333 }
-    flaeche  = 213
-    stadt    = nein
-    kreis    = kr_eisenerz
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2780207; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Eisenerz"
+    gelaende  = hochgebirge
+    lage      = { 14.8833 47.5333 }
+    flaeche   = 213
+    stadt     = nein
+    kreis     = kr_eisenerz
+    vorkommen = { erz }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2780207; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 3700
@@ -747,13 +748,14 @@ ort sankt_nikolai_im_soelktal {
 }
 
 ort leoben {
-    name     = "Leoben"
-    gelaende = mittelgebirge
-    lage     = { 15.0914 47.3765 }
-    flaeche  = 189
-    stadt    = nein
-    kreis    = kr_leoben
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2772649; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Leoben"
+    gelaende  = mittelgebirge
+    lage      = { 15.0914 47.3765 }
+    flaeche   = 189
+    stadt     = nein
+    kreis     = kr_leoben
+    vorkommen = { kohle erz }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2772649; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 8754
@@ -1000,13 +1002,14 @@ ort judenburg {
 }
 
 ort voitsberg {
-    name     = "Voitsberg"
-    gelaende = mittelgebirge
-    lage     = { 15.1531 47.0444 }
-    flaeche  = 222
-    stadt    = nein
-    kreis    = kr_knittelfeld
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2762327; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Voitsberg"
+    gelaende  = mittelgebirge
+    lage      = { 15.1531 47.0444 }
+    flaeche   = 222
+    stadt     = nein
+    kreis     = kr_knittelfeld
+    vorkommen = { kohle }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2762327; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 10283

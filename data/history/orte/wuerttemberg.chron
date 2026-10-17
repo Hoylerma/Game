@@ -173,13 +173,14 @@ ort krautheim {
 }
 
 ort waldenburg {
-    name     = "Waldenburg"
-    gelaende = huegelland
-    lage     = { 9.6399 49.1847 }
-    flaeche  = 120
-    stadt    = nein
-    kreis    = kr_oehringen
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2815075; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Waldenburg"
+    gelaende  = huegelland
+    lage      = { 9.6399 49.1847 }
+    flaeche   = 120
+    stadt     = nein
+    kreis     = kr_oehringen
+    vorkommen = { kohle }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2815075; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 10084
@@ -748,13 +749,14 @@ ort weissach {
 }
 
 ort aalen {
-    name     = "Aalen"
-    gelaende = mittelgebirge
-    lage     = { 10.0933 48.8378 }
-    flaeche  = 185
-    stadt    = ja
-    kreis    = kr_aalen
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2959927; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Aalen"
+    gelaende  = mittelgebirge
+    lage      = { 10.0933 48.8378 }
+    flaeche   = 185
+    stadt     = ja
+    kreis     = kr_aalen
+    vorkommen = { erz }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2959927; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 19735

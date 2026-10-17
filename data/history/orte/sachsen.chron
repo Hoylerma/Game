@@ -205,13 +205,14 @@ ort chemnitz {
 }
 
 ort zwickau {
-    name     = "Zwickau"
-    gelaende = huegelland
-    lage     = { 12.50 50.72 }
-    flaeche  = 108
-    stadt    = ja
-    kreis    = kr_zwickau
-    quelle   = "Tuch- und Handelsstadt an der Mulde. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung nach regionaler Kriegsbetroffenheit geschätzt"
+    name      = "Zwickau"
+    gelaende  = huegelland
+    lage      = { 12.50 50.72 }
+    flaeche   = 108
+    stadt     = ja
+    kreis     = kr_zwickau
+    vorkommen = { kohle }
+    quelle    = "Tuch- und Handelsstadt an der Mulde. Bevölkerung Schätzung (Stadt mit Amt; Größenordnung nach Literatur zur Bevölkerungsentwicklung). Verwüstung nach regionaler Kriegsbetroffenheit geschätzt"
 
     1648.10.24 = {
         besitzer     = SAX
@@ -1247,13 +1248,14 @@ ort meissen {
 }
 
 ort freital {
-    name     = "Freital"
-    gelaende = huegelland
-    lage     = { 13.6488 51.0017 }
-    flaeche  = 122
-    stadt    = ja
-    kreis    = kr_dresden
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2925017; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Freital"
+    gelaende  = huegelland
+    lage      = { 13.6488 51.0017 }
+    flaeche   = 122
+    stadt     = ja
+    kreis     = kr_dresden
+    vorkommen = { kohle }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2925017; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 19890
@@ -2328,13 +2330,14 @@ ort klingenthal {
 }
 
 ort oelsnitz {
-    name     = "Oelsnitz"
-    gelaende = huegelland
-    lage     = { 12.1695 50.4147 }
-    flaeche  = 166
-    stadt    = nein
-    kreis    = kr_plauen
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2857919; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Oelsnitz"
+    gelaende  = huegelland
+    lage      = { 12.1695 50.4147 }
+    flaeche   = 166
+    stadt     = nein
+    kreis     = kr_plauen
+    vorkommen = { kohle }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2857919; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 18824

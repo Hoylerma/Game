@@ -95,3 +95,19 @@ beruf landarme {
     agrar           = ja
     bildung         = 0.05
 }
+
+# ─── Frühe Industrie (seit M7) ──────────────────────────────────────────────
+# Erst ab 1800 (seit, chronik-skript.md Abschnitt 3.18); die Anteile kommen aus den Landarmen
+# (anteil_aus), so bleibt die Summe 1 und das Szenario 1648 unverändert.
+
+beruf fabrikarbeiter {
+    name            = "Fabrikarbeiter"   # Fabrik-, Hütten- und Bergarbeiter
+    schicht         = unten
+    steuerpflichtig = ja
+    anteil_stadt    = 0.050
+    anteil_land     = 0.010
+    agrar           = nein
+    bildung         = 0.15
+    seit            = 1800.01.01
+    anteil_aus      = landarme
+}

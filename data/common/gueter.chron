@@ -87,3 +87,22 @@ gut kolonialwaren {
     basispreis = 8           # Pfund
     weltmarkt  = 1.0         # nur über den Weltmarkt zu haben
 }
+
+# ─── Frühe Industrie (seit M7) ──────────────────────────────────────────────
+# Erst ab 1800 (seit, chronik-skript.md Abschnitt 3.18): im Szenario 1648 gibt es sie nicht.
+
+gut kohle {
+    name       = "Kohle"     # Stein- und Braunkohle
+    farbe      = { 60 60 66 }
+    basispreis = 1.5         # Tonne (Spielwert)
+    weltmarkt  = 1.1         # englische Kohle über Hamburg und die Ostseehäfen
+    seit       = 1800.01.01
+}
+
+gut eisen {
+    name       = "Eisen"     # Roh-, Stab- und Walzeisen
+    farbe      = { 128 84 70 }
+    basispreis = 5           # Zentner (Spielwert)
+    weltmarkt  = 0.9         # englisches Eisen war billiger als das deutsche
+    seit       = 1800.01.01
+}

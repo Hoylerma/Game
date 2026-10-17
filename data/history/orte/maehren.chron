@@ -172,13 +172,14 @@ ort oskau {
 }
 
 ort ostrava {
-    name     = "Ostrava"
-    gelaende = flussaue
-    lage     = { 18.282 49.8347 }
-    flaeche  = 117
-    stadt    = ja
-    kreis    = kr_ostrava
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3068799; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Ostrava"
+    gelaende  = flussaue
+    lage      = { 18.282 49.8347 }
+    flaeche   = 117
+    stadt     = ja
+    kreis     = kr_ostrava
+    vorkommen = { kohle }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 3068799; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 15137

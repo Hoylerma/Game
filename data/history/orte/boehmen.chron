@@ -1939,13 +1939,14 @@ ort skuhrov_nad_belou {
 }
 
 ort kladno {
-    name     = "Kladno"
-    gelaende = huegelland
-    lage     = { 14.1029 50.1473 }
-    flaeche  = 165
-    stadt    = ja
-    kreis    = kr_prag
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3073699; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Kladno"
+    gelaende  = huegelland
+    lage      = { 14.1029 50.1473 }
+    flaeche   = 165
+    stadt     = ja
+    kreis     = kr_prag
+    vorkommen = { kohle }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 3073699; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 22148
@@ -2123,13 +2124,14 @@ ort eger {
 }
 
 ort falkenau {
-    name     = "Falkenau"
-    gelaende = mittelgebirge
-    lage     = { 12.6401 50.1813 }
-    flaeche  = 144
-    stadt    = ja
-    kreis    = kr_eger
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3065617; deutscher Name aus den GeoNames-Alternativnamen (heute Sokolov); Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Falkenau"
+    gelaende  = mittelgebirge
+    lage      = { 12.6401 50.1813 }
+    flaeche   = 144
+    stadt     = ja
+    kreis     = kr_eger
+    vorkommen = { kohle }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 3065617; deutscher Name aus den GeoNames-Alternativnamen (heute Sokolov); Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 13505
@@ -3043,13 +3045,14 @@ ort weseritz {
 }
 
 ort beraun {
-    name     = "Beraun"
-    gelaende = huegelland
-    lage     = { 14.072 49.9638 }
-    flaeche  = 224
-    stadt    = nein
-    kreis    = kr_beraun
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3079467; deutscher Name aus den GeoNames-Alternativnamen (heute Beroun); Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Beraun"
+    gelaende  = huegelland
+    lage      = { 14.072 49.9638 }
+    flaeche   = 224
+    stadt     = nein
+    kreis     = kr_beraun
+    vorkommen = { erz }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 3079467; deutscher Name aus den GeoNames-Alternativnamen (heute Beroun); Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 18877
@@ -3802,13 +3805,14 @@ ort bruesau {
 }
 
 ort pilsen {
-    name     = "Pilsen"
-    gelaende = huegelland
-    lage     = { 13.3776 49.7475 }
-    flaeche  = 132
-    stadt    = ja
-    kreis    = kr_pilsen
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3068160; deutscher Name nach GeoNames (dort Hauptname des Eintrags); Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Pilsen"
+    gelaende  = huegelland
+    lage      = { 13.3776 49.7475 }
+    flaeche   = 132
+    stadt     = ja
+    kreis     = kr_pilsen
+    vorkommen = { kohle }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 3068160; deutscher Name nach GeoNames (dort Hauptname des Eintrags); Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 22124

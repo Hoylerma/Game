@@ -136,3 +136,53 @@ betrieb handelshaus {
     handel   = ja
     gewicht  = 1
 }
+
+# ─── Frühe Industrie (seit M7) ──────────────────────────────────────────────
+# Erst ab 1800 (seit, chronik-skript.md Abschnitt 3.18). Zeche und Hütte nur an den Revieren
+# (Vorkommen kohle und erz in orte.csv); dort arbeiten die Landarmen als Berg- und Hüttenleute, so
+# reicht die Kohle für die Fabriken. Die Fabrikarbeiter arbeiten in Spinnereien (überall, ohne Kohle)
+# und im Maschinenbau (Städte, mit Eisen und Kohle); Wertschöpfung je Kopf zum Basispreis 11–13
+# Taler, etwa wie im Handwerk.
+
+betrieb zeche {
+    name       = "Zeche"          # Steinkohle an Ruhr, Saar, Inde und Wurm, in Ober- und Niederschlesien,
+    beruf      = landarme         # Zwickau, Plauenscher Grund, Kladno, Ostrau; Braunkohle in der Steiermark
+    erzeugt    = { kohle = 5 }
+    verbraucht = { holz = 0.3 }   # Grubenholz
+    agrar      = nein
+    vorkommen  = kohle
+    gewicht    = 3
+    seit       = 1800.01.01
+}
+
+betrieb huette {
+    name       = "Hütte"          # Hochöfen und Puddelwerke: Siegerland, Lahn-Dill, Oberpfalz,
+    beruf      = landarme         # Steiermark, Oberschlesien
+    erzeugt    = { eisen = 2 }
+    verbraucht = { kohle = 1.5 }
+    agrar      = nein
+    vorkommen  = erz
+    gewicht    = 3
+    seit       = 1800.01.01
+}
+
+betrieb spinnerei {
+    name       = "Spinnerei"      # Baumwoll-, Flachs- und Kammgarnspinnereien, mechanische Webereien;
+    beruf      = fabrikarbeiter   # meist mit Wasserkraft, daher ohne Kohle
+    erzeugt    = { tuch = 3.5 }
+    verbraucht = { faser = 2.5 }
+    agrar      = nein
+    gewicht    = 1
+    seit       = 1800.01.01
+}
+
+betrieb maschinenbau {
+    name       = "Maschinenbau"   # Maschinenfabriken, Eisengießereien, Werkzeug (Borsig, Hartmann, Egestorff)
+    beruf      = fabrikarbeiter
+    erzeugt    = { waren = 5 }
+    verbraucht = { eisen = 0.6 kohle = 0.8 }
+    agrar      = nein
+    ort        = stadt
+    gewicht    = 0.3
+    seit       = 1800.01.01
+}

@@ -356,13 +356,14 @@ ort koblenz {
 }
 
 ort neuwied {
-    name     = "Neuwied"
-    gelaende = huegelland
-    lage     = { 7.4706 50.4336 }
-    flaeche  = 133
-    stadt    = ja
-    kreis    = kr_koblenz
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2863840; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Neuwied"
+    gelaende  = huegelland
+    lage      = { 7.4706 50.4336 }
+    flaeche   = 133
+    stadt     = ja
+    kreis     = kr_koblenz
+    vorkommen = { erz }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2863840; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 15505
@@ -402,13 +403,14 @@ ort mayen {
 }
 
 ort bendorf {
-    name     = "Bendorf"
-    gelaende = huegelland
-    lage     = { 7.5792 50.4229 }
-    flaeche  = 82
-    stadt    = nein
-    kreis    = kr_koblenz
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2951111; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Bendorf"
+    gelaende  = huegelland
+    lage      = { 7.5792 50.4229 }
+    flaeche   = 82
+    stadt     = nein
+    kreis     = kr_koblenz
+    vorkommen = { erz }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2951111; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 5367

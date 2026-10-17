@@ -33,13 +33,14 @@ ort rheine {
 }
 
 ort ibbenbueren {
-    name     = "Ibbenbüren"
-    gelaende = huegelland
-    lage     = { 7.7146 52.2796 }
-    flaeche  = 151
-    stadt    = ja
-    kreis    = kr_rheine
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2896817; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Ibbenbüren"
+    gelaende  = huegelland
+    lage      = { 7.7146 52.2796 }
+    flaeche   = 151
+    stadt     = ja
+    kreis     = kr_rheine
+    vorkommen = { kohle }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2896817; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 10789
@@ -1045,13 +1046,14 @@ ort klein_reken {
 }
 
 ort gelsenkirchen {
-    name     = "Gelsenkirchen"
-    gelaende = flachland
-    lage     = { 7.0965 51.5051 }
-    flaeche  = 88
-    stadt    = ja
-    kreis    = kr_gelsenkirchen
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2921466; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Gelsenkirchen"
+    gelaende  = flachland
+    lage      = { 7.0965 51.5051 }
+    flaeche   = 88
+    stadt     = ja
+    kreis     = kr_gelsenkirchen
+    vorkommen = { kohle }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2921466; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 4703

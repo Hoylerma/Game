@@ -378,13 +378,14 @@ ort neualbenreuth {
 }
 
 ort amberg {
-    name     = "Amberg"
-    gelaende = huegelland
-    lage     = { 11.8627 49.4429 }
-    flaeche  = 180
-    stadt    = ja
-    kreis    = kr_amberg
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2956656; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Amberg"
+    gelaende  = huegelland
+    lage      = { 11.8627 49.4429 }
+    flaeche   = 180
+    stadt     = ja
+    kreis     = kr_amberg
+    vorkommen = { erz }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2956656; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 12813
@@ -401,13 +402,14 @@ ort amberg {
 }
 
 ort sulzbach_rosenberg {
-    name     = "Sulzbach-Rosenberg"
-    gelaende = huegelland
-    lage     = { 11.746 49.5013 }
-    flaeche  = 148
-    stadt    = ja
-    kreis    = kr_amberg
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2824801; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Sulzbach-Rosenberg"
+    gelaende  = huegelland
+    lage      = { 11.746 49.5013 }
+    flaeche   = 148
+    stadt     = ja
+    kreis     = kr_amberg
+    vorkommen = { erz }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2824801; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 9377
