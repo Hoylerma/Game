@@ -4,6 +4,7 @@
 #include "uhrwerk/loader.hpp"
 #include "uhrwerk/population.hpp"
 
+#include <algorithm>
 #include <cstdint>
 #include <cstdlib>
 #include <doctest/doctest.h>
@@ -1110,6 +1111,81 @@ void write_railway(const TempDir& dir) {
                            "    abschnitt = { von = leipzig bis = dresden eroeffnet = 1839.04.07 }\n"
                            "    abschnitt = { von = dresden bis = zerbst eroeffnet = 1840.01.01 }\n"
                            "}\n");
+}
+
+/// Industrie ab 1649 (seit M7): ein Gut, ein Beruf und ein Betrieb mit 'seit'.
+void add_later_industry(const TempDir& dir) {
+    const auto append = [&](const char* file, std::string_view text) {
+        testhilfen::write_file(dir / file, testhilfen::read_file(dir / file) + std::string(text));
+    };
+    append("common/gueter.chron", "\ngut kohle {\n    name       = \"Kohle\"\n    farbe      = { 40 40 40 }\n"
+                                  "    basispreis = 2\n    seit       = 1649.01.01\n}\n");
+    append("common/berufe.chron",
+           "\nberuf fabrikarbeiter {\n    name            = \"Fabrikarbeiter\"\n"
+           "    schicht         = unten\n    steuerpflichtig = ja\n"
+           "    anteil_stadt    = 0.10\n    anteil_land     = 0.05\n    agrar           = nein\n"
+           "    bildung         = 0.1\n    seit            = 1649.01.01\n"
+           "    anteil_aus      = handwerker\n}\n");
+    append("common/betriebe.chron",
+           "\nbetrieb zeche {\n    name      = \"Zeche\"\n    beruf     = fabrikarbeiter\n"
+           "    erzeugt   = { kohle = 5 }\n    agrar     = nein\n    vorkommen = kohle\n"
+           "    gewicht   = 1\n    seit      = 1649.01.01\n}\n");
+}
+
+TEST_CASE("Lader: Inhalt ab einem Datum (seit)") {
+    TempDir dir(true);
+    add_later_industry(dir);
+    SUBCASE("vor dem Datum gibt es Gut, Beruf und Betrieb nicht") {
+        TempDir plain(true);
+        const LoadResult base = load(plain);
+        REQUIRE(base.ok());
+        const LoadResult r = load(dir);
+        INFO(issues_text(r));
+        REQUIRE(r.ok());
+        CHECK(r.issues.empty());
+        const World& w = *r.world;
+        CHECK(w.goods.size() == base.world->goods.size());
+        CHECK(w.professions.size() == base.world->professions.size());
+        CHECK(w.businesses.size() == base.world->businesses.size());
+        CHECK(w.pops.size() == base.world->pops.size());
+        for (std::size_t i = 0; i < w.professions.size(); ++i) {
+            CHECK(w.professions[i].share_city == base.world->professions[i].share_city);
+        }
+        // Das Vorkommen bleibt bekannt, damit Orte es tragen dürfen.
+        CHECK(std::find(w.deposits.begin(), w.deposits.end(), "kohle") != w.deposits.end());
+    }
+    SUBCASE("ab dem Datum mit Anteilen aus dem Handwerk") {
+        const LoadResult r = load(dir, "jahresbeginn_1650");
+        INFO(issues_text(r));
+        REQUIRE(r.ok());
+        const World& w = *r.world;
+        REQUIRE(w.find_profession("fabrikarbeiter") != uhrwerk::kNone);
+        const uhrwerk::Profession& craft =
+            w.professions[static_cast<std::size_t>(w.find_profession("handwerker"))];
+        CHECK(craft.share_city == fx("0.50") - fx("0.10"));
+        CHECK(craft.share_rural == fx("0.15") - fx("0.05"));
+        CHECK(std::any_of(w.goods.begin(), w.goods.end(),
+                          [](const uhrwerk::Good& g) { return g.id == "kohle"; }));
+        CHECK(std::any_of(w.businesses.begin(), w.businesses.end(),
+                          [](const uhrwerk::BusinessType& b) { return b.id == "zeche"; }));
+    }
+    SUBCASE("ein geltender Betrieb kann kein späteres Gut verwenden") {
+        replace_in_file(dir / "common/betriebe.chron", "    seit      = 1649.01.01\n", "");
+        expect_error(load(dir),
+                     "Gut 'kohle' gibt es erst seit 1649.01.01 ('seit'); betrieb zeche gilt schon vorher",
+                     "common/betriebe.chron");
+    }
+    SUBCASE("ungültiges Datum") {
+        replace_in_file(dir / "common/gueter.chron", "seit       = 1649.01.01", "seit       = bald");
+        expect_error(load(dir), "ungültiges Datum 'bald' für 'seit' in gut kohle", "common/gueter.chron");
+    }
+    SUBCASE("zu kleine Anteile für anteil_aus") {
+        replace_in_file(dir / "common/berufe.chron", "anteil_aus      = handwerker",
+                        "anteil_aus      = kaufleute");
+        expect_error(load(dir, "jahresbeginn_1650"),
+                     "beruf kaufleute hat zu kleine Anteile für 'anteil_aus' von beruf fabrikarbeiter",
+                     "common/berufe.chron");
+    }
 }
 
 TEST_CASE("Lader: Eisenbahnen") {

@@ -93,7 +93,8 @@ data/
 ```
 
 Ladereihenfolge: `regeln`, `gelaende`, `konfessionen`, `kulturen` (seit M4), `berufe`, `gueter`, `beduerfnisse`,
-`betriebe`, `maerkte` (seit M5), dann alle Dateien der Ordner `szenarien`, `history/staaten`, `history/kreise` (seit M3), `history/verwaltung` (seit M7), `history/orte`, `history/eisenbahnen` (seit M7), jeweils **nach Dateiname sortiert**, Einträge in Dateireihenfolge. Daraus ergeben sich die Indizes in `World`. Die Szenarien kommen vor der Historie, weil das Startdatum des gewählten Szenarios bestimmt, welche datierten Blöcke gelten (Abschnitt 3.8).
+`betriebe`, `maerkte` (seit M5), dann alle Dateien der Ordner `szenarien` (seit M7 vor `common/`, weil das
+Startdatum bestimmt, welche Güter, Berufe und Betriebe gelten), `history/staaten`, `history/kreise` (seit M3), `history/verwaltung` (seit M7), `history/orte`, `history/eisenbahnen` (seit M7), jeweils **nach Dateiname sortiert**, Einträge in Dateireihenfolge. Daraus ergeben sich die Indizes in `World`. Die Szenarien kommen vor der Historie, weil das Startdatum des gewählten Szenarios bestimmt, welche datierten Blöcke gelten (Abschnitt 3.8).
 
 Die Dateien in `history/` erzeugt das Werkzeug `tools/archivar` aus den Tabellen in `data/tabellen/` (Format: [tabellen.md](tabellen.md)). Änderungen gehören in die Tabellen; die CI prüft mit `archivar.py --pruefen`, dass `history/` aktuell ist.
 
@@ -214,8 +215,14 @@ beruf bauern {
     bildung         = 0.1          # Pflicht seit M4: Alphabetisierung, Grundwert 0..1
     in_stadt        = landarme     # optional seit M4: Beruf nach dem Zuzug in eine Stadt
     agrarabgabe     = 0.08         # optional seit M5: Anteil am Agrarertrag des Ortes (0..1)
+    seit            = 1800.01.01   # optional seit M7: erst ab diesem Datum (Abschnitt 3.18)
+    anteil_aus      = landarme     # optional seit M7: Anteile werden diesem Beruf abgezogen
 }
 ```
+
+`anteil_aus` (seit M7): Der Beruf nimmt seine `anteil_stadt` und `anteil_land` dem genannten Beruf ab, so
+bleibt die Summe 1, auch wenn es ihn erst ab einem Datum gibt (Fabrikarbeiter aus den Landarmen). Reichen
+die Anteile des anderen Berufs nicht oder ist er unbekannt, ist das fatal.
 
 `in_stadt` verweist auf einen Beruf derselben Datei (auch einen späteren); ein unbekannter Beruf ist fatal.
 
@@ -543,6 +550,18 @@ Fingerabdruck (Bereich `maerkte`), nicht in der Prüfsumme und nicht im Spielsta
 Nachbarmärkte, die über eröffnete Abschnitte verbunden sind, handeln mit `bahnfracht` statt
 `handel_fracht` ([wirtschaft.md](wirtschaft.md), Abschnitt 4.1). Der Bau neuer Strecken im Spiel
 kommt mit einem späteren Meilenstein.
+
+### 3.18 Inhalt ab einem Datum: `seit` (seit M7)
+
+`gut`, `beruf` und `betrieb` dürfen `seit = JJJJ.MM.TT` tragen. Liegt das Datum nach dem Startdatum des
+gewählten Szenarios, wird die Definition gelesen und geprüft, gehört aber nicht zur Welt: Sie fehlt in
+den Indizes, im Fingerabdruck und in der Prüfsumme. So bringt die frühe Industrie von 1848 (Kohle, Eisen,
+Zeche, Hütte, Fabrik, Fabrikarbeiter) nichts in das Szenario 1648; dessen Ergebnisse bleiben bitgleich.
+Spätere Definitionen dürfen aufeinander verweisen; ein Verweis aus einer geltenden Definition auf eine
+spätere ist fatal („Gut 'kohle' gibt es erst seit 1800.01.01 …“). Das Vorkommen eines späteren Betriebs
+bleibt bekannt, damit Orte es tragen dürfen. Ohne gültiges Szenario (Prüfung aller Daten) gilt alles.
+Fortschritt im Spiel – Inhalt, der während einer Partie hinzukommt – gibt es damit noch nicht: Eine Partie
+ab 1648 erreicht die Industrie nicht.
 
 ## 4. Startzustand
 

@@ -458,6 +458,8 @@ struct ProfessionRef {
     std::string city_profession; // Feld in_stadt, leer = keines
     std::string file;
     int line = 0;
+    std::string share_from; // Feld anteil_aus (seit M7), leer = keines
+    int share_line = 0;
 };
 
 struct CapitalRef {
@@ -499,6 +501,18 @@ public:
             return std::nullopt;
         }
 
+        // Szenarien zuerst: Das Startdatum entscheidet, welche datierten Blöcke der Historie
+        // gelten (Abschnitt 3.8) und seit M7 auch, welche Güter, Berufe und Betriebe es gibt
+        // ('seit', Abschnitt 3.18).
+        std::vector<Scenario> scenarios;
+        for (const std::string& name : list_folder("szenarien")) {
+            process(name, [&](const SourceFile& f) { load_scenarios(f, scenarios); });
+        }
+        const Scenario* selected = select_scenario(scenarios, scenario_id);
+        // Ohne gültiges Szenario werden alle datierten Blöcke angewendet, damit die
+        // Prüfung trotzdem alle Felder sieht.
+        start_ = selected != nullptr ? selected->start : Date{9999, 12, 31};
+
         process("common/regeln.chron", [&](const SourceFile& f) { load_rules(f); });
         process("common/gelaende.chron", [&](const SourceFile& f) { load_terrains(f); });
         process("common/konfessionen.chron", [&](const SourceFile& f) { load_confessions(f); });
@@ -509,17 +523,6 @@ public:
         process("common/beduerfnisse.chron", [&](const SourceFile& f) { load_needs(f); });
         process("common/betriebe.chron", [&](const SourceFile& f) { load_businesses(f); });
         process("common/maerkte.chron", [&](const SourceFile& f) { load_markets(f); });
-
-        // Szenarien vor der Historie: Das Startdatum entscheidet, welche datierten
-        // Blöcke gelten (Abschnitt 3.8).
-        std::vector<Scenario> scenarios;
-        for (const std::string& name : list_folder("szenarien")) {
-            process(name, [&](const SourceFile& f) { load_scenarios(f, scenarios); });
-        }
-        const Scenario* selected = select_scenario(scenarios, scenario_id);
-        // Ohne gültiges Szenario werden alle datierten Blöcke angewendet, damit die
-        // Prüfung trotzdem alle Felder sieht.
-        start_ = selected != nullptr ? selected->start : Date{9999, 12, 31};
 
         for (const std::string& name : list_folder("history/staaten")) {
             process(name, [&](const SourceFile& f) { load_states(f); });
@@ -638,6 +641,53 @@ private:
 
     // Ruft handler für jede Definition "typ kennung { … }" auf; alles andere
     // auf oberster Ebene wird mit einer Warnung übergangen.
+    /// 'seit' einer Definition (seit M7, Abschnitt 3.18): true, wenn sie zum Startdatum noch nicht gilt; sie
+    /// wird dann gelesen und geprüft, aber nicht übernommen.
+    bool is_later(const SourceFile& file, const ScriptNode& node, std::string_view kind) {
+        const ScriptNode* since = node.find("seit");
+        if (since == nullptr) {
+            return false;
+        }
+        const auto date = since->is_block ? std::nullopt : parse_date(since->value);
+        if (!date) {
+            issues_.error(file.name, since->line,
+                          "ungültiges Datum " + quote(since->value) + " für 'seit' in " + std::string(kind) +
+                              " " + node.value + " (erwartet JJJJ.MM.TT)");
+            return false;
+        }
+        if (*date <= start_) {
+            return false;
+        }
+        later_.emplace(std::string(kind) + ":" + node.value, *date);
+        return true;
+    }
+
+    /// Verweis auf eine unbekannte Kennung: true, wenn es sie erst nach dem Startdatum gibt. Aus einer
+    /// ebenfalls späteren Definition ist das in Ordnung, sonst fatal.
+    bool later_reference(std::string_view kind, std::string_view label, const std::string& id,
+                         const std::string& file, int line, const std::string& what) {
+        const auto it = later_.find(std::string(kind) + ":" + id);
+        if (it == later_.end()) {
+            return false;
+        }
+        if (!in_later_) {
+            issues_.error(file, line,
+                          std::string(label) + " " + quote(id) + " gibt es erst seit " +
+                              format_script_date(it->second) + " ('seit'); " + what +
+                              " gilt schon vorher und kann darauf nicht verweisen");
+        }
+        return true;
+    }
+
+    /// Setzt in_later_ für die Dauer einer Definition.
+    struct LaterScope {
+        bool& flag;
+        LaterScope(bool& f, bool value) : flag(f) { flag = value; }
+        ~LaterScope() { flag = false; }
+        LaterScope(const LaterScope&) = delete;
+        LaterScope& operator=(const LaterScope&) = delete;
+    };
+
     void for_each_definition(const SourceFile& file, std::string_view type, std::string_view example,
                              const std::function<void(const ScriptNode&)>& handler) {
         for (const ScriptNode& node : file.root.children) {
@@ -932,9 +982,11 @@ private:
 
     void load_professions(const SourceFile& file) {
         for_each_definition(file, "beruf", "beruf <kennung> { … }", [&](const ScriptNode& node) {
+            const bool later = is_later(file, node, "beruf");
+            const LaterScope scope(in_later_, later);
             Fields f(node, file.name, "beruf " + node.value, issues_,
                      {"name", "schicht", "steuerpflichtig", "anteil_stadt", "anteil_land", "agrar", "bildung",
-                      "in_stadt", "agrarabgabe"});
+                      "in_stadt", "agrarabgabe", "seit", "anteil_aus"});
             Profession p;
             p.id = node.value;
             p.name = f.text("name").value_or("");
@@ -958,11 +1010,23 @@ private:
             if (f.has("agrarabgabe")) {
                 p.agrarian_levy = f.fixed("agrarabgabe", between(fx(0), fx(1))).value_or(Fixed{});
             }
-            ProfessionRef ref{"", file.name, node.line};
+            ProfessionRef ref;
+            ref.file = file.name;
+            ref.line = node.line;
             if (f.has("in_stadt")) {
                 if (const auto city = f.text("in_stadt")) {
-                    ref = ProfessionRef{*city, file.name, node.find("in_stadt")->line};
+                    ref.city_profession = *city;
+                    ref.line = node.find("in_stadt")->line;
                 }
+            }
+            if (f.has("anteil_aus")) {
+                if (const auto from = f.text("anteil_aus")) {
+                    ref.share_from = *from;
+                    ref.share_line = node.find("anteil_aus")->line;
+                }
+            }
+            if (later) {
+                return;
             }
             const auto index = static_cast<Index>(world_.professions.size());
             if (register_id(professions_, p.id, index, file.name, node.line, "Beruf")) {
@@ -979,12 +1043,44 @@ private:
             }
             const Index target = lookup(professions_, ref.city_profession);
             if (target == kNone) {
-                issues_.error(ref.file, ref.line,
-                              "unbekannter Beruf " + quote(ref.city_profession) +
-                                  " für 'in_stadt' in beruf " + world_.professions[i].id);
+                if (!later_reference("beruf", "Beruf", ref.city_profession, ref.file, ref.line,
+                                     "beruf " + world_.professions[i].id)) {
+                    issues_.error(ref.file, ref.line,
+                                  "unbekannter Beruf " + quote(ref.city_profession) +
+                                      " für 'in_stadt' in beruf " + world_.professions[i].id);
+                }
                 continue;
             }
             world_.professions[i].city_profession = target;
+        }
+
+        // anteil_aus (seit M7): Ein Beruf nimmt seine Anteile einem anderen ab; so bleibt die Summe 1, auch
+        // wenn es ihn erst ab einem Datum gibt (Fabrikarbeiter aus den Landarmen).
+        for (std::size_t i = 0; i < world_.professions.size(); ++i) {
+            const ProfessionRef& ref = profession_refs_[i];
+            if (ref.share_from.empty()) {
+                continue;
+            }
+            const Index source = lookup(professions_, ref.share_from);
+            const Profession& p = world_.professions[i];
+            if (source == kNone || static_cast<std::size_t>(source) == i) {
+                if (!later_reference("beruf", "Beruf", ref.share_from, ref.file, ref.share_line,
+                                     "beruf " + p.id)) {
+                    issues_.error(ref.file, ref.share_line,
+                                  "unbekannter oder eigener Beruf " + quote(ref.share_from) +
+                                      " für 'anteil_aus' in beruf " + p.id);
+                }
+                continue;
+            }
+            Profession& from = world_.professions[static_cast<std::size_t>(source)];
+            if (from.share_city < p.share_city || from.share_rural < p.share_rural) {
+                issues_.error(ref.file, ref.share_line,
+                              "beruf " + from.id + " hat zu kleine Anteile für 'anteil_aus' von beruf " +
+                                  p.id);
+                continue;
+            }
+            from.share_city -= p.share_city;
+            from.share_rural -= p.share_rural;
         }
 
         // Summe der Anteile muss je 1 ergeben (Toleranz ±0,001).
@@ -1023,8 +1119,9 @@ private:
     void load_goods(const SourceFile& file) {
         for_each_definition(file, "gut", "gut <kennung> { … }", [&](const ScriptNode& node) {
             check_id(file, node, "Gutkennung");
+            const bool later = is_later(file, node, "gut");
             Fields f(node, file.name, "gut " + node.value, issues_,
-                     {"name", "farbe", "basispreis", "weltmarkt"});
+                     {"name", "farbe", "basispreis", "weltmarkt", "seit"});
             Good g;
             g.id = node.value;
             g.name = f.text("name").value_or("");
@@ -1032,6 +1129,9 @@ private:
             g.base_price = f.fixed("basispreis", above_up_to(fx(0), fx(1'000'000))).value_or(Fixed::one());
             if (f.has("weltmarkt")) {
                 g.world_factor = f.fixed("weltmarkt", above_up_to(fx(0), fx(100))).value_or(Fixed{});
+            }
+            if (later) {
+                return;
             }
             const auto index = static_cast<Index>(world_.goods.size());
             if (register_id(goods_, g.id, index, file.name, node.line, "Gut")) {
@@ -1072,15 +1172,19 @@ private:
     void load_businesses(const SourceFile& file) {
         for_each_definition(file, "betrieb", "betrieb <kennung> { … }", [&](const ScriptNode& node) {
             check_id(file, node, "Betriebskennung");
+            const bool later = is_later(file, node, "betrieb");
+            const LaterScope scope(in_later_, later);
             Fields f(node, file.name, "betrieb " + node.value, issues_,
                      {"name", "beruf", "erzeugt", "verbraucht", "agrar", "ort", "vorkommen", "handel",
-                      "gewicht", "gelaende"});
+                      "gewicht", "gelaende", "seit"});
             BusinessType b;
             b.id = node.value;
             b.name = f.text("name").value_or("");
             if (const auto profession = f.text("beruf")) {
                 b.profession = lookup(professions_, *profession);
-                if (b.profession == kNone) {
+                if (b.profession == kNone &&
+                    !later_reference("beruf", "Beruf", *profession, file.name, node.find("beruf")->line,
+                                     "betrieb " + node.value)) {
                     issues_.error(file.name, node.find("beruf")->line,
                                   "unbekannter Beruf " + quote(*profession) + " in betrieb " + node.value);
                 }
@@ -1098,7 +1202,7 @@ private:
                 }
             } else {
                 read_amounts(f, "erzeugt", "Menge je Kopf und Jahr, z. B. { tuch = 3.2 }", b.outputs);
-                if (f.has("erzeugt") && b.outputs.empty()) {
+                if (f.has("erzeugt") && b.outputs.empty() && !later) {
                     issues_.error(file.name, node.find("erzeugt")->line,
                                   "betrieb " + node.value + " erzeugt kein Gut ('erzeugt' ist leer)");
                 }
@@ -1131,6 +1235,10 @@ private:
             b.terrain_factors.assign(world_.terrains.size(), Fixed::one());
             if (f.has("gelaende")) {
                 read_terrain_factors(f, b);
+            }
+            // Ein späterer Betrieb ist geprüft; sein Vorkommen bleibt bekannt (Orte dürfen es tragen).
+            if (later) {
+                return;
             }
             const auto index = static_cast<Index>(world_.businesses.size());
             if (register_id(businesses_, b.id, index, file.name, node.line, "Betrieb")) {
@@ -1230,9 +1338,11 @@ private:
             }
             const Index good = lookup(goods_, child.key);
             if (good == kNone) {
-                f.issues().error(f.file(), child.line,
-                                 "unbekanntes Gut " + quote(child.key) + " in " + f.what() +
-                                     " (common/gueter.chron)");
+                if (!later_reference("gut", "Gut", child.key, f.file(), child.line, f.what())) {
+                    f.issues().error(f.file(), child.line,
+                                     "unbekanntes Gut " + quote(child.key) + " in " + f.what() +
+                                         " (common/gueter.chron)");
+                }
                 continue;
             }
             if (!seen.insert(good).second) {
@@ -2104,6 +2214,9 @@ private:
     Registry districts_;
     Registry admin_units_;
     Registry railways_;
+    // Inhalt ab einem Datum (seit M7): spätere Definitionen als „gut:kohle“ → 'seit'.
+    std::map<std::string, Date, std::less<>> later_;
+    bool in_later_ = false;                     // gerade wird eine spätere Definition gelesen
     std::vector<AdminParentRef> admin_parents_; // parallel zu world_.admin_units
     Registry locations_;
     Registry scenarios_;
