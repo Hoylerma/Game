@@ -14,6 +14,7 @@
 #include <godot_cpp/classes/ref_counted.hpp>
 #include <godot_cpp/variant/array.hpp>
 #include <godot_cpp/variant/dictionary.hpp>
+#include <godot_cpp/variant/packed_byte_array.hpp>
 #include <godot_cpp/variant/packed_color_array.hpp>
 #include <godot_cpp/variant/packed_int32_array.hpp>
 #include <godot_cpp/variant/packed_string_array.hpp>
@@ -92,6 +93,7 @@ public:
     std::int64_t get_admin_unit_count() const;
     godot::Dictionary get_admin_unit(std::int64_t index) const;
     godot::Array get_railways() const;
+    godot::PackedByteArray get_rail_access() const;
 
     std::int64_t get_market_count() const;
     godot::Dictionary get_market(std::int64_t index) const;

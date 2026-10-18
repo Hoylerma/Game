@@ -99,7 +99,7 @@ Modus `--headless` gibt es kein Bild; ohne Bildschirm hilft `xvfb-run`.
 | H | Zur Hauptstadt des Spielerstaates (mittlere Zoomstufe) |
 | Leertaste | Pause / weiter |
 | 1 – 5 | Geschwindigkeit: 2, 5, 15, 40 oder 120 Tage je Sekunde |
-| Q W E R T Z U I O P Ü + | Kartenmodus Politisch, Bevölkerungsdichte, Konfession, Gelände, Verwüstung, Kreise, Lebensstandard, Kultur, Wirtschaft, Märkte, Verwaltung und Eisenbahnen (beide seit M7; „+“ ist die Taste rechts neben Ü, englisch „]“) (die Leiste zeigt Kurznamen, die Taste steht im Tooltip). Im Modus Eisenbahnen zeichnet die Karte die Strecken: eröffnete durchgezogen, spätere gestrichelt |
+| Q W E R T Z U I O P Ü + | Kartenmodus Politisch, Bevölkerungsdichte, Konfession, Gelände, Verwüstung, Kreise, Lebensstandard, Kultur, Wirtschaft, Märkte, Verwaltung und Eisenbahnen (beide seit M7; „+“ ist die Taste rechts neben Ü, englisch „]“) (die Leiste zeigt Kurznamen, die Taste steht im Tooltip). Im Modus Eisenbahnen zeichnet die Karte die Strecken: eröffnete durchgezogen, die der nächsten fünf Jahre gestrichelt |
 | Steuerregler | Kontribution, Akzise und Zoll des Spielerstaates (wirksam ab dem nächsten simulierten Tag) |
 | „Haushalt im Einzelnen …“ | Haushaltsfenster: Einnahmen je Steuerart, Ausgaben je Posten (Hof, Verwaltung, Heer, Zinsen, Bauten), Schatz, Schulden, Zins, Staatsbankrotte |
 | Klick auf einen Chronikeintrag | Ort des Ereignisses auswählen und anfahren |

@@ -444,17 +444,21 @@ std::string railway_summary(const World& w) {
             open += s.opened <= w.date ? 1 : 0;
         }
     }
-    std::size_t pairs = 0;
+    // Marktpaare, nicht Richtungen: Der Nachbar des einen Marktes hat ihn meist auch als Nachbarn.
+    std::set<std::pair<std::size_t, std::size_t>> pairs;
     const uhrwerk::EconomyTopology topology = uhrwerk::build_economy_topology(w);
     for (std::size_t m = 0; m < topology.neighbors.size(); ++m) {
         for (const uhrwerk::MarketLink& link : topology.neighbors[m]) {
-            pairs += link.rail_from && *link.rail_from <= w.date ? 1 : 0;
+            if (link.rail_from && *link.rail_from <= w.date) {
+                const auto n = static_cast<std::size_t>(link.market);
+                pairs.emplace(std::min(m, n), std::max(m, n));
+            }
         }
     }
     return plural(w.railways.size(), "Strecke", "Strecken") + ", " +
            plural(sections, "Abschnitt", "Abschnitte") + " (" + std::to_string(open) +
-           " zum Startdatum eröffnet); " + std::to_string(pairs) +
-           " Verbindungen zu Nachbarmärkten mit Bahnfracht";
+           " zum Startdatum eröffnet); " + plural(pairs.size(), "Paar", "Paare") +
+           " von Nachbarmärkten mit Bahnfracht";
 }
 
 /// "(5 Orte mit Kreis, 1 ohne Kreis)"

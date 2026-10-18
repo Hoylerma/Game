@@ -48,6 +48,7 @@ const REQUIRED_METHODS: Array[StringName] = [
 	&"get_admin_unit_count",
 	&"get_admin_unit",
 	&"get_railways",
+	&"get_rail_access",
 	&"get_scenarios",
 	&"get_scenario",
 	&"set_player_state",
@@ -249,6 +250,13 @@ func get_admin_unit(index: int) -> Dictionary:
 func get_railways() -> Array:
 	var result: Variant = _native.call(&"get_railways")
 	return result if result is Array else []
+
+
+## Bahnanschluss je Ort zum aktuellen Datum (seit M7): 2 Bahnhof, 1 Markt mit Bahnfracht zu einem
+## Nachbarmarkt, 0 ohne Bahn; dieselben Stufen wie die Farben im Modus „Eisenbahnen“.
+func get_rail_access() -> PackedByteArray:
+	var result: Variant = _native.call(&"get_rail_access")
+	return result if result is PackedByteArray else PackedByteArray()
 
 
 func get_kreis_count() -> int:

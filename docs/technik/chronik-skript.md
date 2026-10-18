@@ -557,8 +557,10 @@ Abschnitt. Der Ordner darf fehlen. Im Kern: `World::railways`
 
 Strecken sind **Inhalt**: Ob ein Abschnitt befahren wird, folgt aus dem Datum. Sie stehen im
 Fingerabdruck (Bereich `maerkte`), nicht in der Prüfsumme und nicht im Spielstand. Wirkung: Zwei
-Nachbarmärkte, die über eröffnete Abschnitte verbunden sind, handeln mit `bahnfracht` statt
-`handel_fracht` ([wirtschaft.md](wirtschaft.md), Abschnitt 4.1). Der Bau neuer Strecken im Spiel
+Nachbarmärkte handeln mit `bahnfracht` statt `handel_fracht`, sobald ein Bahnhof im einen und einer
+im anderen über eröffnete Abschnitte verbunden sind ([wirtschaft.md](wirtschaft.md), Abschnitt 4.1).
+Zwei Strecken, die nur im selben Markt enden, verbinden nichts; ein Abschnitt zwischen Märkten, die
+keine Nachbarn sind, schafft keinen Handel, kann aber ein Netz schließen. Der Bau neuer Strecken im Spiel
 kommt mit einem späteren Meilenstein.
 
 ### 3.18 Inhalt ab einem Datum: `seit` (seit M7)
@@ -568,8 +570,11 @@ gewählten Szenarios, wird die Definition gelesen und geprüft, gehört aber nic
 den Indizes, im Fingerabdruck und in der Prüfsumme. So bringt die frühe Industrie von 1848 (Kohle, Eisen,
 Zeche, Hütte, Fabrik, Fabrikarbeiter) nichts in das Szenario 1648; dessen Ergebnisse bleiben bitgleich.
 Spätere Definitionen dürfen aufeinander verweisen; ein Verweis aus einer geltenden Definition auf eine
-spätere ist fatal („Gut 'kohle' gibt es erst seit 1800.01.01 …“). Das Vorkommen eines späteren Betriebs
-bleibt bekannt, damit Orte es tragen dürfen. Ohne gültiges Szenario (Prüfung aller Daten) gilt alles.
+spätere ist fatal („Gut 'kohle' gibt es erst seit 1800.01.01 …“). Auch spätere Definitionen brauchen eine
+freie Kennung, und ihre Verweise (`in_stadt`, `anteil_aus`, Beruf und Güter eines Betriebs) müssen auf
+geltende oder spätere Definitionen zeigen. `anteil_aus` zieht die angegebenen Anteile ab, unabhängig von
+der Reihenfolge in der Datei; ein Kreis (A aus B, B aus A) ist fatal. Das Vorkommen eines späteren
+Betriebs bleibt bekannt, damit Orte es tragen dürfen. Ohne gültiges Szenario (Prüfung aller Daten) gilt alles.
 Fortschritt im Spiel – Inhalt, der während einer Partie hinzukommt – gibt es damit noch nicht: Eine Partie
 ab 1648 erreicht die Industrie nicht.
 

@@ -708,6 +708,51 @@ TEST_CASE("Wirtschaft: Handel zwischen Märkten und mit dem Weltmarkt") {
         CHECK_FALSE(uhrwerk::build_economy_topology(none).neighbors[0][0].rail_from.has_value());
     }
 
+    SUBCASE("Eisenbahn: ein Markt ist kein Drehkreuz (Review M7)") {
+        // Nord – West und West – Ost enden beide im Markt West, aber an verschiedenen Bahnhöfen.
+        World hub = w;
+        hub.rules.freight_rail = Fixed::from_ratio(1, 30);
+        uhrwerk::Market nord;
+        nord.id = "nord";
+        nord.landscapes = {"nord"};
+        hub.markets.push_back(nord);
+        uhrwerk::Location n = hub.locations[1];
+        n.id = "ort_nord";
+        n.market = 2;
+        n.longitude = hub.locations[0].longitude;
+        n.latitude = hub.locations[0].latitude + fx("0.6"); // etwa 67 km nördlich
+        hub.locations.push_back(n);                         // Ort 2
+        uhrwerk::Location station = hub.locations[0];
+        station.id = "bahnhof_west";
+        station.pop_count = 0;            // Ort ohne Daten, aber im Markt West
+        hub.locations.push_back(station); // Ort 3
+        hub.railways.push_back(
+            uhrwerk::Railway{"nord_west", "", {uhrwerk::RailSection{2, 0, Date{1840, 1, 1}}}, ""});
+        hub.railways.push_back(
+            uhrwerk::Railway{"west_ost", "", {uhrwerk::RailSection{3, 1, Date{1841, 1, 1}}}, ""});
+        const auto rail_from = [](const uhrwerk::EconomyTopology& t, std::size_t from, Index to) {
+            for (const uhrwerk::MarketLink& link : t.neighbors[from]) {
+                if (link.market == to) {
+                    return link.rail_from;
+                }
+            }
+            FAIL("kein Nachbar");
+            return std::optional<Date>{};
+        };
+        const uhrwerk::EconomyTopology split = uhrwerk::build_economy_topology(hub);
+        CHECK(rail_from(split, 2, 0) == Date{1840, 1, 1});
+        CHECK(rail_from(split, 0, 1) == Date{1841, 1, 1});
+        CHECK_FALSE(rail_from(split, 2, 1).has_value());
+        CHECK_FALSE(rail_from(split, 1, 2).has_value());
+        // Ein Abschnitt zwischen den beiden Bahnhöfen schließt das Netz.
+        hub.railways.push_back(
+            uhrwerk::Railway{"verbindung", "", {uhrwerk::RailSection{0, 3, Date{1845, 1, 1}}}, ""});
+        const uhrwerk::EconomyTopology joined = uhrwerk::build_economy_topology(hub);
+        CHECK(rail_from(joined, 2, 1) == Date{1845, 1, 1});
+        CHECK(rail_from(joined, 1, 2) == Date{1845, 1, 1});
+        CHECK(rail_from(joined, 0, 1) == Date{1841, 1, 1});
+    }
+
     SUBCASE("Weltmarkt: Hafenmarkt kauft Kolonialwaren zum Weltpreis") {
         World port = w;
         uhrwerk::Good kolonial;

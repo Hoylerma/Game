@@ -160,8 +160,9 @@ Je Staat, Datum und Feld höchstens eine Zeile.
 | `eroeffnet` | Tag der Eröffnung des Abschnitts (`JJJJ.MM.TT`) |
 | `sicherheit`, `quelle` | siehe oben; in `history/` steht die Quelle der ersten Zeile |
 
-Ein Abschnitt darf je Strecke nur einmal vorkommen (in beiden Richtungen). Ein Abschnitt über
-120 km Luftlinie ist eine Warnung (meist ein falsch aufgelöster Ort). Eine Station ohne eigenen
+Ein Abschnitt darf nur einmal vorkommen (in beiden Richtungen, auch auf verschiedenen Strecken).
+Ein Abschnitt über 120 km Luftlinie ist eine Warnung (meist ein falsch aufgelöster Ort), ebenso
+zwei Strecken mit gleichem Namen. Eine Station ohne eigenen
 Ort fällt weg, oder ein Nachbarort steht für sie (Altona durch Hamburg, Harburg durch Neu
 Wulmstorf, Ludwigshafen durch Frankenthal). Wirkung im Spiel: [chronik-skript.md](chronik-skript.md),
 Abschnitt 3.17.

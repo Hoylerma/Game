@@ -252,8 +252,9 @@ Basispreis *B_g*.
 
    ```
    fracht   = handel_fracht × abstand_km / 100            (z. B. 0,12 je 100 km)
-              bahnfracht × abstand_km / 100                (seit M7, ab dem Tag, an dem beide Märkte über
-                                                            eröffnete Eisenbahnabschnitte verbunden sind)
+              bahnfracht × abstand_km / 100                (seit M7, ab dem Tag, an dem ein Bahnhof in m
+                                                            und einer in n über eröffnete Abschnitte
+                                                            verbunden sind; ein Markt ist kein Drehkreuz)
    lücke    = P_n,g − P_m,g × (1 + fracht)                 (Ware fließt von m nach n, wenn > 0)
    menge    = min(1, handel_rate × lücke / P_n,g) × min(Angebot_m,g, Nachfrage_n,g)   (Vormonat, mit Handel)
    ```

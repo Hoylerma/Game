@@ -181,7 +181,6 @@ func set_location_info(owners: PackedInt32Array, kreise: PackedInt32Array) -> vo
 	_info_texture.update(Image.create_from_data(lut.x, lut.y, false, Image.FORMAT_RGBA8, bytes))
 
 
-## Im Kartenmodus „Kreise“ bleiben Kreisgrenzen auch beim Herauszoomen sichtbar.
 ## Eisenbahnabschnitte als Paare von Simulationsindizes (seit M7); open je Abschnitt.
 func set_railways(sections: PackedInt32Array, open: Array[bool]) -> void:
 	if _railways == null:
@@ -210,6 +209,7 @@ func railway_layer() -> RailwayLayer:
 	return _railways
 
 
+## Im Kartenmodus „Kreise“ bleiben Kreisgrenzen auch beim Herauszoomen sichtbar.
 func set_kreis_mode(enabled: bool) -> void:
 	_kreis_mode = enabled
 	_detail_size = -1.0

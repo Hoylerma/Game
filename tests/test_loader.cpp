@@ -1186,6 +1186,58 @@ TEST_CASE("Lader: Inhalt ab einem Datum (seit)") {
                      "beruf kaufleute hat zu kleine Anteile für 'anteil_aus' von beruf fabrikarbeiter",
                      "common/berufe.chron");
     }
+    // Review M7: Eine Kette zieht die angegebenen Anteile ab, unabhängig von der Reihenfolge der Datei.
+    const std::string foreman =
+        "\nberuf vorarbeiter {\n    name            = \"Vorarbeiter\"\n"
+        "    schicht         = unten\n    steuerpflichtig = ja\n"
+        "    anteil_stadt    = 0.02\n    anteil_land     = 0.01\n    agrar           = nein\n"
+        "    bildung         = 0.2\n    seit            = 1649.01.01\n"
+        "    anteil_aus      = fabrikarbeiter\n}\n";
+    SUBCASE("Kette in anteil_aus, der abgebende Beruf steht später") {
+        replace_in_file(dir / "common/berufe.chron", "\nberuf fabrikarbeiter {",
+                        foreman + "\nberuf fabrikarbeiter {");
+        const LoadResult r = load(dir, "jahresbeginn_1650");
+        INFO(issues_text(r));
+        REQUIRE(r.ok());
+        const World& w = *r.world;
+        const auto share = [&](const char* id) {
+            return w.professions[static_cast<std::size_t>(w.find_profession(id))].share_city;
+        };
+        CHECK(share("vorarbeiter") == fx("0.02"));
+        CHECK(share("fabrikarbeiter") == fx("0.10") - fx("0.02"));
+        CHECK(share("handwerker") == fx("0.50") - fx("0.10"));
+    }
+    SUBCASE("Kreis in anteil_aus") {
+        replace_in_file(dir / "common/berufe.chron", "anteil_aus      = handwerker",
+                        "anteil_aus      = vorarbeiter");
+        testhilfen::write_file(dir / "common/berufe.chron",
+                               testhilfen::read_file(dir / "common/berufe.chron") + foreman);
+        expect_error(load(dir, "jahresbeginn_1650"), "Kreis in 'anteil_aus' über beruf",
+                     "common/berufe.chron");
+    }
+    SUBCASE("spätere Definitionen: Kennung schon vergeben") {
+        testhilfen::write_file(dir / "common/gueter.chron",
+                               testhilfen::read_file(dir / "common/gueter.chron") +
+                                   "\ngut salz {\n    name       = \"Salz\"\n    farbe      = { 1 2 3 }\n"
+                                   "    basispreis = 2\n    seit       = 1700.01.01\n}\n");
+        expect_error(load(dir), "doppelte Kennung 'salz' für Gut", "common/gueter.chron");
+    }
+    SUBCASE("spätere Definitionen: Kennung doppelt") {
+        testhilfen::write_file(
+            dir / "common/betriebe.chron",
+            testhilfen::read_file(dir / "common/betriebe.chron") +
+                "\nbetrieb zeche {\n    name      = \"Zeche\"\n    beruf     = fabrikarbeiter\n"
+                "    erzeugt   = { kohle = 4 }\n    agrar     = nein\n    gewicht   = 1\n"
+                "    seit      = 1700.01.01\n}\n");
+        expect_error(load(dir), "doppelte Kennung 'zeche' für Betrieb", "common/betriebe.chron");
+    }
+    SUBCASE("spätere Definitionen: unbekannter Beruf in anteil_aus") {
+        replace_in_file(dir / "common/berufe.chron", "anteil_aus      = handwerker",
+                        "anteil_aus      = gibtsnicht");
+        expect_error(load(dir),
+                     "unbekannter oder eigener Beruf 'gibtsnicht' für 'anteil_aus' in beruf fabrikarbeiter",
+                     "common/berufe.chron");
+    }
 }
 
 TEST_CASE("Lader: Eisenbahnen") {
@@ -1236,6 +1288,12 @@ TEST_CASE("Lader: Eisenbahnen") {
         const std::string text = testhilfen::read_file(dir / kRailFile);
         testhilfen::write_file(dir / kRailFile, text + "\n" + text);
         expect_error(load(dir), "doppelte Kennung 'leipzig_dresden' für Strecke", kRailFile, 8);
+    }
+    SUBCASE("Bahnfracht teurer als die Landfracht") {
+        replace_in_file(dir / "common/regeln.chron", "bahnfracht                = 0.04",
+                        "bahnfracht                = 0.2");
+        expect_error(load(dir), "'bahnfracht' (0.2) ist größer als 'handel_fracht' (0.12)",
+                     "common/regeln.chron");
     }
 }
 

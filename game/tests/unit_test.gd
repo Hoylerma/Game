@@ -22,6 +22,7 @@ func _initialize() -> void:
 	_test_legend_gradient()
 	_test_legend_entries()
 	_test_map_modes()
+	_test_railway_layer()
 	_test_map_detail()
 	_test_map_data_and_layout()
 	_test_location_catalog()
@@ -238,6 +239,21 @@ func _test_map_modes() -> void:
 	e.physical_keycode = KEY_E
 	_equal(MapModes.mode_for_event(e), MapModes.MAP_CONFESSION, "E gehört zum Modus Konfession")
 	_true(not MapCamera.is_pan_event(e), "E bewegt die Kamera nicht")
+
+
+## Gestrichelt nur, was in den nächsten Jahren eröffnet (Review M7): 1648 zeigt keine Strecken.
+func _test_railway_layer() -> void:
+	var date := {"year": 1848, "month": 3, "day": 1}
+	var section := {"open": false, "opened": {"year": 1853, "month": 3, "day": 1}}
+	_true(RailwayLayer.is_shown(section, date), "Abschnitt genau fünf Jahre später gestrichelt")
+	section["opened"] = {"year": 1853, "month": 3, "day": 2}
+	_true(not RailwayLayer.is_shown(section, date), "Abschnitt später als fünf Jahre ausgeblendet")
+	_true(
+		not RailwayLayer.is_shown(section, {"year": 1648, "month": 10, "day": 24}),
+		"1648 keine gestrichelten Strecken"
+	)
+	_true(RailwayLayer.is_shown({"open": true}, date), "eröffneter Abschnitt immer sichtbar")
+	_true(not RailwayLayer.is_shown({"open": false}, date), "Abschnitt ohne Datum ausgeblendet")
 
 
 func _test_map_detail() -> void:

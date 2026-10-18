@@ -467,8 +467,12 @@ def abstand_km(a: Zeile, b: Zeile) -> float:
 
 
 def pruefe_eisenbahnen(archiv: Archiv, m: Meldungen) -> None:
-    """Eisenbahnen (seit M7): je Zeile ein Abschnitt; Name, Datei und Quelle der Strecke aus ihrer ersten Zeile."""
-    paare: dict[str, dict[frozenset[str], Zeile]] = {}
+    """Eisenbahnen (seit M7): je Zeile ein Abschnitt; Name, Datei und Quelle der Strecke aus ihrer ersten Zeile.
+
+    Ein Abschnitt (in beiden Richtungen) darf nur einmal vorkommen, auch über Strecken hinweg; gleiche
+    Namen verschiedener Strecken sind eine Warnung (die Ortsinfo nennt sonst zweimal dieselbe Bahn).
+    """
+    paare: dict[frozenset[str], tuple[str, Zeile]] = {}
     for z in archiv.zeilen["eisenbahnen.csv"]:
         _herkunft(z, m)
         kennung = z["strecke"]
@@ -500,10 +504,14 @@ def pruefe_eisenbahnen(archiv: Archiv, m: Meldungen) -> None:
             m.fehler_bei(z.datei, z.nr, f"Abschnitt der Strecke {kennung} beginnt und endet in {z['von']}")
             continue
         paar = frozenset((z["von"], z["bis"]))
-        if (frueher := paare.setdefault(kennung, {}).get(paar)) is not None:
-            m.fehler_bei(z.datei, z.nr, f"Abschnitt {z['von']}–{z['bis']} der Strecke {kennung} ist doppelt (zuerst in Zeile {frueher.nr})")
+        if (frueher := paare.get(paar)) is not None:
+            andere, zeile = frueher
+            if andere == kennung:
+                m.fehler_bei(z.datei, z.nr, f"Abschnitt {z['von']}–{z['bis']} der Strecke {kennung} ist doppelt (zuerst in Zeile {zeile.nr})")
+            else:
+                m.fehler_bei(z.datei, z.nr, f"Abschnitt {z['von']}–{z['bis']} der Strecke {kennung} liegt schon auf Strecke {andere} (Zeile {zeile.nr})")
             continue
-        paare[kennung][paar] = z
+        paare[paar] = (kennung, z)
         a, b = archiv.orte[z["von"]].zeile, archiv.orte[z["bis"]].zeile
         try:
             km = abstand_km(a, b)
@@ -512,9 +520,13 @@ def pruefe_eisenbahnen(archiv: Archiv, m: Meldungen) -> None:
         if km > ABSCHNITT_MAX_KM:
             m.warnung_bei(z.datei, z.nr, f"Abschnitt {z['von']}–{z['bis']} der Strecke {kennung} ist {km:.0f} km lang")
         strecke.abschnitte.append(z)
+    namen: dict[str, str] = {}
     for kennung, strecke in archiv.eisenbahnen.items():
         if not strecke.abschnitte:
             m.fehler_bei(strecke.zeile.datei, strecke.zeile.nr, f"Strecke {kennung} hat keinen gültigen Abschnitt")
+        name = strecke.zeile["name"]
+        if (andere := namen.setdefault(name, kennung)) != kennung:
+            m.warnung_bei(strecke.zeile.datei, strecke.zeile.nr, f"Strecke {kennung} heißt wie Strecke {andere} ('{name}')")
 
 
 def baue_archiv(tabellen: Path, bezug: Bezug, m: Meldungen) -> Archiv:

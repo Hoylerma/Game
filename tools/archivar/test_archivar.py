@@ -204,6 +204,9 @@ class TestFehler(MitKopie):
             ("eisenbahnen.csv", "nord;;moor", "nord;Südbahn;moor"): "Strecke nordbahn heißt schon 'Nordbahn'",
             ("eisenbahnen.csv", "moor;heide;1842", "hafen;moor;1842"): "Abschnitt hafen–moor der Strecke nordbahn ist doppelt",
             ("eisenbahnen.csv", "nord;Nordbahn;", "nord;;"): "Spalte 'name' darf nicht leer sein",
+            ("eisenbahnen.csv", "nordbahn;nord;;moor;heide", "zweitbahn;nord;Zweitbahn;moor;hafen"): (
+                "Abschnitt moor–hafen der Strecke zweitbahn liegt schon auf Strecke nordbahn (Zeile 2)"
+            ),
         }
         for (tabelle, alt, neu), text in faelle.items():
             with self.subTest(text):
@@ -211,6 +214,10 @@ class TestFehler(MitKopie):
                 self.setUp()
                 self.ersetze(tabelle, alt, neu)
                 self.erwarte_fehler(text)
+
+    def test_gleicher_streckenname_warnt(self) -> None:
+        self.ersetze("eisenbahnen.csv", "nordbahn;nord;;moor;heide", "zweitbahn;nord;Nordbahn;moor;heide")
+        self.erwarte_warnung("tabellen/eisenbahnen.csv:3: Strecke zweitbahn heißt wie Strecke nordbahn ('Nordbahn')")
 
     def test_langer_bahnabschnitt_warnt(self) -> None:
         self.ersetze("orte.csv", "heide;nord;Heide-Süd;heide;11.20;53.10", "heide;nord;Heide-Süd;heide;14.20;53.10")

@@ -63,8 +63,9 @@ Werte werden als Text aus der Tabelle übernommen (keine Gleitkomma-Umwandlung).
   `bund`, `staaten_historie.csv` das Feld `zollverein`. Unbekannte Einheiten, Kreise in `ueber` und
   eine Einheit eines anderen Staates sind Fehler.
 - `eisenbahnen.csv` erzeugt `history/eisenbahnen/<datei>.chron`: je Zeile ein Abschnitt einer
-  Strecke. Unbekannte Orte, gleicher Anfang und gleiches Ende und doppelte Abschnitte sind Fehler,
-  Abschnitte über 120 km Warnungen.
+  Strecke. Unbekannte Orte, gleicher Anfang und gleiches Ende und doppelte Abschnitte (auch auf
+  verschiedenen Strecken) sind Fehler, Abschnitte über 120 km und gleiche Namen verschiedener
+  Strecken Warnungen.
 - Ein Staat ohne Ort zum Szenariodatum besteht in diesem Szenario nicht; seine Pflichtfelder werden
   dort nicht verlangt. Spielerstaat und spielbare Staaten (`spielbar`) müssen zum Szenariodatum
   bestehen.

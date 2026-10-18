@@ -423,6 +423,8 @@ func _after_time_passed() -> void:
 		if DYNAMIC_LEGEND_MODES.has(_map_mode):
 			_rebuild_legend()
 		_update_owners()
+	# Eröffnungen fallen nicht auf Monatserste; die Linien folgen den Farben jeden Tag.
+	if _map_mode == MapModes.MAP_EISENBAHNEN:
 		_update_railways()
 	var hovered := _map_view.get_hovered()
 	if hovered >= 0:
@@ -448,18 +450,21 @@ func _update_owners() -> void:
 	_update_state_labels()
 
 
-## Eisenbahnen auf der Karte (seit M7): Abschnitte zum aktuellen Datum, sichtbar nur im Modus
-## „Eisenbahnen“.
+## Eisenbahnen auf der Karte (seit M7): eröffnete Abschnitte und die der nächsten Jahre
+## (RailwayLayer.is_shown), sichtbar nur im Modus „Eisenbahnen“.
 func _update_railways() -> void:
 	var shown := _sim != null and _map.is_valid() and _map_mode == MapModes.MAP_EISENBAHNEN
 	_map_view.set_railways_visible(shown)
 	if not shown:
 		return
+	var date := _sim.get_date()
 	var sections := PackedInt32Array()
 	var open: Array[bool] = []
 	for line: Variant in _sim.get_railways():
 		for section: Variant in (line as Dictionary).get("sections", []):
 			var entry := section as Dictionary
+			if not RailwayLayer.is_shown(entry, date):
+				continue
 			sections.append(int(entry.get("from", -1)))
 			sections.append(int(entry.get("to", -1)))
 			open.append(bool(entry.get("open", false)))
@@ -759,7 +764,7 @@ func _rebuild_legend() -> void:
 			else:
 				_legend.show_swatches(title, units)
 		MapModes.MAP_EISENBAHNEN:
-			var rail := LegendData.railway_entries(_sim, _market_indices)
+			var rail := LegendData.railway_entries(_sim)
 			if rail.is_empty():
 				_legend.show_message(title, "Dieses Szenario enthält keine Eisenbahnen.")
 			else:

@@ -659,8 +659,37 @@ private:
         if (*date <= start_) {
             return false;
         }
-        later_.emplace(std::string(kind) + ":" + node.value, *date);
+        const auto [it, inserted] = later_.emplace(std::string(kind) + ":" + node.value,
+                                                   LaterDefinition{*date, file.name, node.line});
+        if (!inserted) {
+            const std::string label = kind == "gut" ? "Gut" : kind == "beruf" ? "Beruf" : "Betrieb";
+            issues_.error(file.name, node.line,
+                          "doppelte Kennung " + quote(node.value) + " für " + label +
+                              " (bereits definiert in " + it->second.file + ":" +
+                              std::to_string(it->second.line) + ")");
+        }
         return true;
+    }
+
+    /// Eine spätere Definition darf keine Kennung tragen, die schon gilt (seit M7).
+    void check_later_ids(std::string_view kind, const Registry& registry, std::string_view label) {
+        const std::string prefix = std::string(kind) + ":";
+        for (const auto& [key, later] : later_) {
+            if (key.compare(0, prefix.size(), prefix) != 0) {
+                continue;
+            }
+            const auto it = registry.find(std::string_view(key).substr(prefix.size()));
+            if (it != registry.end()) {
+                issues_.error(later.file, later.line,
+                              "doppelte Kennung " + quote(key.substr(prefix.size())) + " für " +
+                                  std::string(label) + " (bereits definiert in " + it->second.file + ":" +
+                                  std::to_string(it->second.line) + ")");
+            }
+        }
+    }
+
+    bool is_later_id(std::string_view kind, const std::string& id) const {
+        return later_.count(std::string(kind) + ":" + id) != 0;
     }
 
     /// Verweis auf eine unbekannte Kennung: true, wenn es sie erst nach dem Startdatum gibt. Aus einer
@@ -674,7 +703,7 @@ private:
         if (!in_later_) {
             issues_.error(file, line,
                           std::string(label) + " " + quote(id) + " gibt es erst seit " +
-                              format_script_date(it->second) + " ('seit'); " + what +
+                              format_script_date(it->second.date) + " ('seit'); " + what +
                               " gilt schon vorher und kann darauf nicht verweisen");
         }
         return true;
@@ -925,6 +954,12 @@ private:
                           "'zins_basis' (" + show(r.interest_base) + ") ist größer als 'zins_max' (" +
                               show(r.interest_max) + ")");
         }
+        // Die Bahn verbilligt den Handel (seit M7); teurer als die Landfracht wäre ein Datenfehler.
+        if (r.freight_rail > r.freight_land && f.has("bahnfracht") && f.has("handel_fracht")) {
+            issues_.error(file.name, found->line,
+                          "'bahnfracht' (" + show(r.freight_rail) + ") ist größer als 'handel_fracht' (" +
+                              show(r.freight_land) + ")");
+        }
     }
 
     void load_terrains(const SourceFile& file) {
@@ -1029,6 +1064,7 @@ private:
                 }
             }
             if (later) {
+                later_profession_refs_.emplace_back(p.id, std::move(ref));
                 return;
             }
             const auto index = static_cast<Index>(world_.professions.size());
@@ -1056,34 +1092,81 @@ private:
             }
             world_.professions[i].city_profession = target;
         }
+        // Spätere Berufe: Verweise auf geltende oder ebenfalls spätere Berufe, Kennung noch frei.
+        check_later_ids("beruf", professions_, "Beruf");
+        for (const auto& [id, ref] : later_profession_refs_) {
+            const auto known = [&](const std::string& other) {
+                return lookup(professions_, other) != kNone || is_later_id("beruf", other);
+            };
+            if (!ref.city_profession.empty() && !known(ref.city_profession)) {
+                issues_.error(ref.file, ref.line,
+                              "unbekannter Beruf " + quote(ref.city_profession) +
+                                  " für 'in_stadt' in beruf " + id);
+            }
+            if (!ref.share_from.empty() && (ref.share_from == id || !known(ref.share_from))) {
+                issues_.error(ref.file, ref.share_line,
+                              "unbekannter oder eigener Beruf " + quote(ref.share_from) +
+                                  " für 'anteil_aus' in beruf " + id);
+            }
+        }
 
         // anteil_aus (seit M7): Ein Beruf nimmt seine Anteile einem anderen ab; so bleibt die Summe 1, auch
-        // wenn es ihn erst ab einem Datum gibt (Fabrikarbeiter aus den Landarmen).
-        for (std::size_t i = 0; i < world_.professions.size(); ++i) {
+        // wenn es ihn erst ab einem Datum gibt (Fabrikarbeiter aus den Landarmen). Abgezogen werden die
+        // angegebenen Anteile, daher hängt das Ergebnis einer Kette nicht von der Reihenfolge ab.
+        const std::size_t profession_count = world_.professions.size();
+        std::vector<Index> share_source(profession_count, kNone);
+        for (std::size_t i = 0; i < profession_count; ++i) {
             const ProfessionRef& ref = profession_refs_[i];
             if (ref.share_from.empty()) {
                 continue;
             }
             const Index source = lookup(professions_, ref.share_from);
-            const Profession& p = world_.professions[i];
             if (source == kNone || static_cast<std::size_t>(source) == i) {
                 if (!later_reference("beruf", "Beruf", ref.share_from, ref.file, ref.share_line,
-                                     "beruf " + p.id)) {
+                                     "beruf " + world_.professions[i].id)) {
                     issues_.error(ref.file, ref.share_line,
                                   "unbekannter oder eigener Beruf " + quote(ref.share_from) +
-                                      " für 'anteil_aus' in beruf " + p.id);
+                                      " für 'anteil_aus' in beruf " + world_.professions[i].id);
                 }
                 continue;
             }
-            Profession& from = world_.professions[static_cast<std::size_t>(source)];
-            if (from.share_city < p.share_city || from.share_rural < p.share_rural) {
-                issues_.error(ref.file, ref.share_line,
-                              "beruf " + from.id + " hat zu kleine Anteile für 'anteil_aus' von beruf " +
-                                  p.id);
+            share_source[i] = source;
+        }
+        for (std::size_t i = 0; i < profession_count; ++i) {
+            std::size_t steps = 0;
+            for (Index s = share_source[i]; s != kNone && steps <= profession_count;
+                 s = share_source[static_cast<std::size_t>(s)], ++steps) {
+                if (static_cast<std::size_t>(s) == i) {
+                    const ProfessionRef& ref = profession_refs_[i];
+                    issues_.error(ref.file, ref.share_line,
+                                  "Kreis in 'anteil_aus' über beruf " + world_.professions[i].id);
+                    share_source[i] = kNone;
+                    break;
+                }
+            }
+        }
+        std::vector<std::pair<Fixed, Fixed>> given(profession_count);
+        for (std::size_t i = 0; i < profession_count; ++i) {
+            given[i] = {world_.professions[i].share_city, world_.professions[i].share_rural};
+        }
+        for (std::size_t i = 0; i < profession_count; ++i) {
+            if (share_source[i] != kNone) {
+                Profession& from = world_.professions[static_cast<std::size_t>(share_source[i])];
+                from.share_city -= given[i].first;
+                from.share_rural -= given[i].second;
+            }
+        }
+        for (std::size_t i = 0; i < profession_count; ++i) {
+            if (share_source[i] == kNone) {
                 continue;
             }
-            from.share_city -= p.share_city;
-            from.share_rural -= p.share_rural;
+            const Profession& from = world_.professions[static_cast<std::size_t>(share_source[i])];
+            if (from.share_city < Fixed::zero() || from.share_rural < Fixed::zero()) {
+                const ProfessionRef& ref = profession_refs_[i];
+                issues_.error(ref.file, ref.share_line,
+                              "beruf " + from.id + " hat zu kleine Anteile für 'anteil_aus' von beruf " +
+                                  world_.professions[i].id);
+            }
         }
 
         // Summe der Anteile muss je 1 ergeben (Toleranz ±0,001).
@@ -1141,6 +1224,7 @@ private:
                 world_.goods.push_back(std::move(g));
             }
         });
+        check_later_ids("gut", goods_, "Gut");
         if (world_.goods.empty()) {
             issues_.error(file.name, 0, "kein Gut definiert (erwartet: gut <kennung> { … })");
         }
@@ -1248,6 +1332,7 @@ private:
                 world_.businesses.push_back(std::move(b));
             }
         });
+        check_later_ids("betrieb", businesses_, "Betrieb");
         if (world_.businesses.empty()) {
             issues_.error(file.name, 0, "kein Betrieb definiert (erwartet: betrieb <kennung> { … })");
         }
@@ -2223,7 +2308,13 @@ private:
     Registry admin_units_;
     Registry railways_;
     // Inhalt ab einem Datum (seit M7): spätere Definitionen als „gut:kohle“ → 'seit'.
-    std::map<std::string, Date, std::less<>> later_;
+    struct LaterDefinition {
+        Date date;
+        std::string file;
+        int line = 0;
+    };
+    std::map<std::string, LaterDefinition, std::less<>> later_;
+    std::vector<std::pair<std::string, ProfessionRef>> later_profession_refs_; // spätere Berufe (seit M7)
     bool in_later_ = false;                     // gerade wird eine spätere Definition gelesen
     Fixed capacity_factor_ = Fixed::one();      // tragfaehigkeit_faktor des gewählten Szenarios (seit M7)
     std::vector<AdminParentRef> admin_parents_; // parallel zu world_.admin_units

@@ -25,6 +25,7 @@ using godot::Array;
 using godot::Color;
 using godot::D_METHOD;
 using godot::Dictionary;
+using godot::PackedByteArray;
 using godot::PackedColorArray;
 using godot::PackedInt32Array;
 using godot::PackedStringArray;
@@ -100,10 +101,10 @@ const std::array<Color, 12> kKreisPalette = {
 };
 
 /// Bahnanschluss zum aktuellen Datum (seit M7): 2 = Bahnhof (Endpunkt eines eröffneten Abschnitts),
-/// 1 = Ort in einem Markt mit Bahnhof, 0 = ohne Bahn.
-std::vector<std::uint8_t> rail_access(const uhrwerk::World& world) {
+/// 1 = Ort in einem Markt, der mit einem Nachbarmarkt zur Bahnfracht handelt (wie im Kern,
+/// wirtschaft.md 4.1), 0 = ohne Bahn.
+std::vector<std::uint8_t> rail_access(const uhrwerk::World& world, const uhrwerk::EconomyTopology& topology) {
     std::vector<std::uint8_t> access(world.locations.size(), 0);
-    std::vector<bool> market_on_rail(world.markets.size(), false);
     for (const uhrwerk::Railway& railway : world.railways) {
         for (const uhrwerk::RailSection& section : railway.sections) {
             if (section.opened > world.date) {
@@ -112,11 +113,15 @@ std::vector<std::uint8_t> rail_access(const uhrwerk::World& world) {
             for (const uhrwerk::Index end : {section.from, section.to}) {
                 if (valid_index(world.locations, end)) {
                     access[static_cast<std::size_t>(end)] = 2;
-                    const uhrwerk::Index market = at(world.locations, end).market;
-                    if (valid_index(world.markets, market)) {
-                        market_on_rail[static_cast<std::size_t>(market)] = true;
-                    }
                 }
+            }
+        }
+    }
+    std::vector<bool> market_on_rail(world.markets.size(), false);
+    for (std::size_t m = 0; m < topology.neighbors.size() && m < market_on_rail.size(); ++m) {
+        for (const uhrwerk::MarketLink& link : topology.neighbors[m]) {
+            if (link.rail_from && *link.rail_from <= world.date) {
+                market_on_rail[m] = true;
             }
         }
     }
@@ -670,7 +675,13 @@ Dictionary UhrwerkSimulation::get_location(std::int64_t index) const {
             }
         }
         if (first != nullptr) {
-            railways.append(to_godot(railway.name + " (" + std::to_string(first->opened.year) + ")"));
+            // „Name (1839)“; trägt der Name schon eine Klammer, kommt das Jahr hinein: „Ludwigsbahn
+            // (Nürnberg–Fürth, 1835)“.
+            const std::string year = std::to_string(first->opened.year);
+            const std::string& name = railway.name;
+            railways.append(to_godot(!name.empty() && name.back() == ')'
+                                         ? name.substr(0, name.size() - 1) + ", " + year + ")"
+                                         : name + " (" + year + ")"));
         }
     }
     result["eisenbahnen"] = railways;
@@ -782,6 +793,20 @@ Dictionary UhrwerkSimulation::get_admin_unit(std::int64_t index) const {
         locations += loc.admin == static_cast<uhrwerk::Index>(index) ? 1 : 0;
     }
     result["location_count"] = locations;
+    return result;
+}
+
+PackedByteArray UhrwerkSimulation::get_rail_access() const {
+    PackedByteArray result;
+    const uhrwerk::World* w = world();
+    if (!w) {
+        return result;
+    }
+    const std::vector<std::uint8_t> access = rail_access(*w, simulation_->economy_topology());
+    result.resize(static_cast<std::int64_t>(access.size()));
+    for (std::size_t i = 0; i < access.size(); ++i) {
+        result[static_cast<std::int64_t>(i)] = access[i];
+    }
     return result;
 }
 
@@ -912,8 +937,9 @@ PackedColorArray UhrwerkSimulation::get_map_colors(std::int64_t mode) const {
                         "get_map_colors: unbekannter Kartenmodus.");
 
     const auto count = static_cast<std::int64_t>(w->locations.size());
-    const std::vector<std::uint8_t> rail =
-        mode == MAP_EISENBAHNEN ? rail_access(*w) : std::vector<std::uint8_t>{};
+    const std::vector<std::uint8_t> rail = mode == MAP_EISENBAHNEN
+                                               ? rail_access(*w, simulation_->economy_topology())
+                                               : std::vector<std::uint8_t>{};
     colors.resize(count);
     for (std::int64_t i = 0; i < count; ++i) {
         const uhrwerk::Location& loc = at(w->locations, i);
@@ -1220,6 +1246,7 @@ void UhrwerkSimulation::_bind_methods() {
     ClassDB::bind_method(D_METHOD("get_admin_unit_count"), &UhrwerkSimulation::get_admin_unit_count);
     ClassDB::bind_method(D_METHOD("get_admin_unit", "index"), &UhrwerkSimulation::get_admin_unit);
     ClassDB::bind_method(D_METHOD("get_railways"), &UhrwerkSimulation::get_railways);
+    ClassDB::bind_method(D_METHOD("get_rail_access"), &UhrwerkSimulation::get_rail_access);
 
     ClassDB::bind_method(D_METHOD("get_kreis_count"), &UhrwerkSimulation::get_kreis_count);
     ClassDB::bind_method(D_METHOD("get_kreis_index", "id"), &UhrwerkSimulation::get_kreis_index);
