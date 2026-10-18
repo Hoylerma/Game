@@ -1,8 +1,8 @@
 # Lesezeichen 1848 „Völkerfrühling“ (Meilenstein M7)
 
-> **Status: in Umsetzung** – Entscheidungen 1–7 wie empfohlen freigegeben; M7a Schritte a1–a5
-> umgesetzt, Stand in Abschnitt 13
-> ([meilensteine.md](../meilensteine.md#m7--lesezeichen-1848)). Grundlage sind
+> **Status: verbindlich** – umgesetzt in M7 (M7a und M7b, Stand in Abschnitt 13); die Fachprüfung
+> der Daten steht aus (Entscheidung 7)
+> ([meilensteine.md](../meilensteine.md#m7--lesezeichen-1848-)). Grundlage sind
 > [04 Zeitrahmen, Epochen, Startdaten](../04_zeitrahmen_epochen_startdaten.md) (Lesezeichen 6),
 > [05 Karte und Geographie](../05_karte_und_geographie.md) (Abschnitte 2 und 8),
 > [06 Staaten und Nationen](../06_staaten_und_nationen.md),
@@ -219,6 +219,8 @@ besitz.csv       neue Spalten verwaltung (Einheit der untersten Ebene ab dem Dat
   Lasttest mit 500.000 Blöcken; das Einschwingen beim Laden wird länger (Messung in M7a).
   Gemessen: 3.967 Orte, 82.491 Blöcke; Laden im Release-Build unter 1 s (Debug 12 s), 10 Spieljahre
   im Debug-Build mit 4 Threads 20 s.
+  Mit den Fabrikarbeitern (b2) 97.257 Blöcke; Laden im Release-Build 0,6 s, 10 Spieljahre 2,7 s
+  (4 Threads).
 
 ## 10. Tests und Abnahme
 
@@ -272,7 +274,7 @@ Szenarien; Klicktest mit der Staatswahl.
 | b3 | **Kalibrierung**, Zielwerte 1848, Balancing-Job | Bericht in der CI |
 | b4 | **Doku und Review** (Abschluss M7) | CI grün |
 
-## 13. Umsetzungsstand M7a
+## 13. Umsetzungsstand
 
 | Schritt | Stand |
 |---|---|

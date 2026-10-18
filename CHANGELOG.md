@@ -8,6 +8,72 @@ Vor Version 1.0 kann sich jede Schnittstelle ändern.
 
 ## [Unveröffentlicht]
 
+### Meilenstein M7 – Lesezeichen 1848
+
+Das zweite Lesezeichen **„Völkerfrühling“ (1. März 1848)** ist spielbar. Es umfasst den Deutschen
+Bund mit 38 Staaten, 3.967 Orte mit Besitzer, Verwaltung und Bevölkerung 1846 (45,0 Mio.
+Einwohner), 42 Eisenbahnstrecken, frühe Industrie und Haushalte in Talern. Der Balancing-Bericht
+1848 erfüllt alle Zielwerte. Das Szenario 1648 bleibt bitgleich (`5db13a66d63e6079`).
+
+Technisch ist M7 fertig, **die Fachprüfung der Daten mit Quellen steht noch aus** (Entscheidung 7).
+Die Quellen waren in der Umgebung nicht erreichbar, deshalb tragen alle historischen Angaben
+`ungeprueft` oder `schaetzung`. Ergebnis und Grenzen:
+[docs/meilensteine.md](docs/meilensteine.md#m7--lesezeichen-1848-).
+
+- **Vertrag:** [technik/lesezeichen_1848.md](docs/technik/lesezeichen_1848.md) (neu) mit
+  Umsetzungsstand je Schritt; [chronik-skript.md](docs/technik/chronik-skript.md) Abschnitte
+  3.16–3.18 (Verwaltung, Eisenbahnen, `seit`) sowie Ergänzungen in 3.4, 3.7 und 3.15.
+- **Daten (M7a):**
+  - 31 neue Staaten und 7 aus 1648 fortgeführte, mit Hauptstadt, Regierungsform, Herrscher,
+    Konfession und Zollverein.
+  - Zuordnung der Orte über `territorien_1848.csv` (476 Regeln), mit Bundesgebiet.
+  - 458 Verwaltungseinheiten: Preußen mit 8 Provinzen, 25 Regierungsbezirken und 327 Kreisen;
+    Österreich mit 11 Kronländern und 51 Kreisen; die oberste Ebene der Mittelstaaten.
+  - Bevölkerung 1846 mit Konfession, Kultur und Berufen aus Summen je Staat, Provinz und Kronland
+    (`einwohner_1846.csv`, `staedte_1846.csv`, `merkmale_1846.csv`).
+- **Daten (M7b):**
+  - `eisenbahnen.csv`: 176 Abschnitte, zum Start 165 eröffnet (rund 4.700 km).
+  - Ab 1800 Kohle und Eisen; Betriebe Zeche, Hütte, Spinnerei, Maschinenbau, Brennerei und
+    Salzwerk; Beruf Fabrikarbeiter.
+  - Vorkommen an 34 Kohle-, 19 Erz-, 30 Salz- und 43 Weinorten.
+  - Hof, Schatz und Schulden 1848 im Maßstab des Modells.
+  - Zielwerte `zielwerte_voelkerfruehling.chron`.
+- **Werkzeuge:**
+  - `tools/geodaten/zuordnung.py`, `bevoelkerung_1846.py` und `stichprobe_1848.py`.
+  - Archivar mit `verwaltung.csv` und `eisenbahnen.csv` (Bahnhöfe über den nächsten passenden Ort
+    oder eine Kennung) und mit `spielbar`; Staaten ohne Ort zum Startdatum bestehen nicht.
+  - `--bericht` mit Verwaltungseinheiten, Strecken und Szenarien.
+- **Kern:**
+  - Verwaltung (Einheiten, Kette, Sitz), Bundesgebiet und Zollverein je Ort und Staat;
+    spielbare Staaten, Währung und Szenarioliste.
+  - Eisenbahnen mit Regel `bahnfracht`: Nachbarmärkte im selben Netz handeln ab dem Tag der
+    Verbindung zur Bahnfracht.
+  - `seit` für Güter, Berufe und Betriebe: Späterer Inhalt fehlt in Welt, Fingerabdruck und
+    Prüfsumme.
+  - `anteil_aus` für Berufe.
+  - Szenariofeld `tragfaehigkeit_faktor` (Agrartechnik; 1848: 2,5).
+  - Szenarien werden vor `common/` gelesen.
+  - **153 Testfälle** (vorher 146).
+- **CLI:**
+  - `--szenario voelkerfruehling` in allen Befehlen.
+  - `info` mit Eisenbahnen (Strecken, Abschnitte, Verbindungen mit Bahnfracht).
+  - `bilanz` und `pruefen` mit Zielwerten je Szenario (`zielwerte_<szenario>.chron`).
+- **Brücke und Godot:**
+  - „Neues Spiel“ mit Wahl des Lesezeichens; „Diesen Staat spielen“ in der Ortsinfo.
+  - Kartenmodi „Verwaltung“ (Taste Ü) und „Eisenbahnen“ (Taste +, Strecken über der Karte).
+  - Ortsinfo mit Verwaltungskette, Bundesgebiet und Bahnhof; Staatsinfo mit Bund und Zollverein.
+  - Startoptionen `--szenario` und `--staat`.
+  - Beim Szenariowechsel werden Ortskatalog, Farben und Ladeliste neu aufgebaut.
+  - `unit_test.gd` mit **223 Prüfungen** (vorher 217).
+- **CI:**
+  - CTests `daten_pruefen_1848`, `determinismus_1848` und `speichertest_1848`.
+  - Der Determinismus-Job vergleicht auch die Prüfsumme 1848.
+  - Der Balancing-Job hat einen zweiten Bericht für 1848 (8 Seeds, 30 Jahre).
+  - Screenshot 1848.
+- **Stichprobe:** [pruefung/stichprobe_1848.md](docs/pruefung/stichprobe_1848.md) mit 60
+  Datensätzen. Davon sind 46 plausibel, 6 Vereinfachungen und 2 zweifelhaft; 6 Fehler sind behoben.
+  Die Flächen der großen Staaten liegen innerhalb ±5 % der Richtwerte.
+
 ### Meilenstein M6 – Speicherstände und Wiederholungen
 
 Partien lassen sich speichern, laden und **bitgleich fortsetzen**, und aus Startzustand und

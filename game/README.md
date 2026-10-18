@@ -61,7 +61,7 @@ Optionen stehen nach `--` (Benutzerargumente):
 |---|---|
 | `--screenshot=<pfad>` | Nach dem Laden simulieren, etwa 20 Bilder warten, den Viewport als PNG speichern und beenden |
 | `--tage=<n>` | Simulierte Tage vor dem Screenshot (Standard 60) |
-| `--kartenmodus=<0..10>` | 0 Politisch, 1 Bevölkerungsdichte, 2 Konfession, 3 Gelände, 4 Verwüstung, 5 Kreise, 6 Lebensstandard, 7 Kultur (6 und 7 seit M4), 8 Wirtschaft, 9 Märkte (seit M5), 10 Verwaltung, 11 Eisenbahnen (beide seit M7) |
+| `--kartenmodus=<0..11>` | 0 Politisch, 1 Bevölkerungsdichte, 2 Konfession, 3 Gelände, 4 Verwüstung, 5 Kreise, 6 Lebensstandard, 7 Kultur (6 und 7 seit M4), 8 Wirtschaft, 9 Märkte (seit M5), 10 Verwaltung, 11 Eisenbahnen (beide seit M7) |
 | `--ort=<ort_id>` | Ort auswählen, Ortsinfo geöffnet (z. B. `berlin_coelln`) |
 | `--zoom=<faktor>` | Vergrößerung gegenüber der Übersicht (1 = ganze Karte), zentriert auf `--ort`, sonst auf die Kartenmitte (bis zum Faktor 1 bleibt die Bildmitte der Übersicht); gilt auch ohne `--screenshot` |
 | `--haushalt` | Haushaltsfenster des Spielerstaates vor dem Screenshot öffnen (seit M5) |

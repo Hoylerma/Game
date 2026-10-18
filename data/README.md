@@ -337,9 +337,15 @@ Zielwerte erfüllt. Kein Staatsbankrott; Vermögen am Ende im Median 1,06 (Frank
 
 ## Bekannte Lücken und Vereinfachungen
 
-- **Orte ohne Daten:** 4.482 der 4.542 Orte haben keinen Besitzer, keine Bevölkerung und keine
-  Konfession; sie nehmen an der Simulation nicht teil und erscheinen auf der Karte schraffiert.
-  Ihre Namen, Lagen und Kreise sind aus heutigen Daten abgeleitet (siehe „Orte des Kernraums“).
+- **Orte ohne Daten:** Im Lesezeichen 1648 haben 4.482 der 4.542 Orte keinen Besitzer, keine
+  Bevölkerung und keine Konfession; sie nehmen an der Simulation nicht teil und erscheinen auf der
+  Karte schraffiert. 1848 sind es 575 Orte im Ausland (Lothringen, Elsass, Belgien, Niederlande
+  außer Limburg, Kongresspolen, Jütland, Burgenland). Namen, Lagen und Kreise der Orte sind aus
+  heutigen Daten abgeleitet (siehe „Orte des Kernraums“).
+- **Lesezeichen 1848 ungeprüft:** Die Quellen waren bei der Umsetzung nicht erreichbar. Besitz,
+  Verwaltung, Staaten und Eisenbahnen tragen `ungeprueft`, die Bevölkerung je Ort `schaetzung`
+  (aus Summen je Staat, Provinz und Kronland verteilt), die Haushalte `spielwert`. Die Fachprüfung
+  steht aus; vorbereitet ist [stichprobe_1848.md](../docs/pruefung/stichprobe_1848.md).
 - **Ohne historische Daten** sind innerhalb und am Rand der Testregion u. a. die Reichsstädte
   Mühlhausen, Nordhausen, Goslar, Lübeck und Hamburg, das Reichsstift Quedlinburg, Schwarzburg, Reuß,
   Mansfeld, Stolberg, die Henneberger Lande, die Hochstifte Merseburg und Naumburg, Anhalt-Plötzkau,
