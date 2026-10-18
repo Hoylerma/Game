@@ -57,13 +57,14 @@ ort speyer {
 }
 
 ort neustadt_an_der_haardt {
-    name     = "Neustadt an der Haardt"
-    gelaende = mittelgebirge
-    lage     = { 8.1389 49.3501 }
-    flaeche  = 182
-    stadt    = ja
-    kreis    = kr_mannheim
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2864054; Name Neustadt an der Haardt aus den GeoNames-Alternativnamen (GeoNames: Neustadt); Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Neustadt an der Haardt"
+    gelaende  = mittelgebirge
+    lage      = { 8.1389 49.3501 }
+    flaeche   = 182
+    stadt     = ja
+    kreis     = kr_mannheim
+    vorkommen = { weinlage }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2864054; Name Neustadt an der Haardt aus den GeoNames-Alternativnamen (GeoNames: Neustadt); Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 16959
@@ -103,13 +104,14 @@ ort frankenthal {
 }
 
 ort bad_duerkheim {
-    name     = "Bad Dürkheim"
-    gelaende = mittelgebirge
-    lage     = { 8.1724 49.4618 }
-    flaeche  = 118
-    stadt    = ja
-    kreis    = kr_mannheim
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2953522; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Bad Dürkheim"
+    gelaende  = mittelgebirge
+    lage      = { 8.1724 49.4618 }
+    flaeche   = 118
+    stadt     = ja
+    kreis     = kr_mannheim
+    vorkommen = { salz weinlage }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2953522; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 9984
@@ -1000,13 +1002,14 @@ ort eppenbrunn {
 }
 
 ort landau_in_der_pfalz {
-    name     = "Landau in der Pfalz"
-    gelaende = flachland
-    lage     = { 8.1169 49.1984 }
-    flaeche  = 193
-    stadt    = ja
-    kreis    = kr_landau_in_der_pfalz
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2881646; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Landau in der Pfalz"
+    gelaende  = flachland
+    lage      = { 8.1169 49.1984 }
+    flaeche   = 193
+    stadt     = ja
+    kreis     = kr_landau_in_der_pfalz
+    vorkommen = { weinlage }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2881646; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 19897

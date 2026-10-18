@@ -46,9 +46,9 @@ staat WEI {
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 29100
+        hofhaltung     = 35600
         heer           = 6
-        schulden       = 194000
+        schulden       = 237000
         zollverein     = ja
     }
 }

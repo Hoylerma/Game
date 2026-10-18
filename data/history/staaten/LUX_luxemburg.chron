@@ -18,9 +18,9 @@ staat LUX {
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 12800
+        hofhaltung     = 11400
         heer           = 6
-        schulden       = 170000
+        schulden       = 152000
         zollverein     = ja
     }
 }

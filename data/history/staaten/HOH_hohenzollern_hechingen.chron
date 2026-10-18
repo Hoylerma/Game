@@ -18,9 +18,9 @@ staat HOH {
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 1800
+        hofhaltung     = 2300
         heer           = 6
-        schulden       = 12000
+        schulden       = 15000
         zollverein     = ja
     }
 }

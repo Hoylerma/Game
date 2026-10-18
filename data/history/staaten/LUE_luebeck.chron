@@ -15,9 +15,9 @@ staat LUE {
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 600
+        hofhaltung     = 800
         heer           = 4
-        schulden       = 33000
+        schulden       = 45000
         zollverein     = nein
     }
 }

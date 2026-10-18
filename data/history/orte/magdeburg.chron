@@ -350,13 +350,14 @@ ort tucheim {
 }
 
 ort schoenebeck {
-    name     = "Schönebeck"
-    gelaende = flussaue
-    lage     = { 11.7307 52.0168 }
-    flaeche  = 172
-    stadt    = ja
-    kreis    = kr_magdeburg
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2836809; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Schönebeck"
+    gelaende  = flussaue
+    lage      = { 11.7307 52.0168 }
+    flaeche   = 172
+    stadt     = ja
+    kreis     = kr_magdeburg
+    vorkommen = { salz }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2836809; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 16954
@@ -877,13 +878,14 @@ ort quedlinburg {
 }
 
 ort stassfurt {
-    name     = "Staßfurt"
-    gelaende = flachland
-    lage     = { 11.5851 51.8519 }
-    flaeche  = 202
-    stadt    = ja
-    kreis    = kr_aschersleben
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2829422; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Staßfurt"
+    gelaende  = flachland
+    lage      = { 11.5851 51.8519 }
+    flaeche   = 202
+    stadt     = ja
+    kreis     = kr_aschersleben
+    vorkommen = { salz }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2829422; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 14707
@@ -990,13 +992,14 @@ ort merseburg {
 }
 
 ort bad_duerrenberg {
-    name     = "Bad Dürrenberg"
-    gelaende = flachland
-    lage     = { 12.0658 51.2955 }
-    flaeche  = 110
-    stadt    = nein
-    kreis    = kr_halle
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2953521; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Bad Dürrenberg"
+    gelaende  = flachland
+    lage      = { 12.0658 51.2955 }
+    flaeche   = 110
+    stadt     = nein
+    kreis     = kr_halle
+    vorkommen = { salz }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2953521; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 6507

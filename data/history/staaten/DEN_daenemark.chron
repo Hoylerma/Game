@@ -18,9 +18,9 @@ staat DEN {
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 38600
+        hofhaltung     = 49900
         heer           = 8
-        schulden       = 2278000
+        schulden       = 2946000
         zollverein     = nein
     }
 }

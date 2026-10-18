@@ -18,9 +18,9 @@ staat SLI {
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 3700
+        hofhaltung     = 3900
         heer           = 6
-        schulden       = 25000
+        schulden       = 26000
         zollverein     = nein
     }
 }

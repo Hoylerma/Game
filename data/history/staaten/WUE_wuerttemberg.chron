@@ -18,9 +18,9 @@ staat WUE {
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 109700
+        hofhaltung     = 134600
         heer           = 7
-        schulden       = 2469000
+        schulden       = 3029000
         zollverein     = ja
     }
 }

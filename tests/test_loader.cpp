@@ -1405,6 +1405,28 @@ TEST_CASE("Lader: spielbare Staaten und Währung des Szenarios") {
     }
 }
 
+TEST_CASE("Lader: Tragfähigkeitsfaktor des Szenarios") {
+    TempDir dir(true);
+    const char* const scenario_file = "szenarien/jahresbeginn.chron";
+    replace_in_file(dir / scenario_file, "spieler = SAX", "spieler = SAX\n    tragfaehigkeit_faktor = 2.5");
+    SUBCASE("gilt nur im eigenen Szenario") {
+        const LoadResult r = load(dir, "jahresbeginn_1650");
+        INFO(issues_text(r));
+        REQUIRE(r.ok());
+        CHECK(r.world->scenario.capacity_factor == fx("2.5"));
+        CHECK(r.world->terrains[0].capacity == fx("112.5")); // 45 × 2,5
+        const LoadResult other = load(dir, "westfaelischer_frieden");
+        REQUIRE(other.ok());
+        CHECK(other.world->scenario.capacity_factor == Fixed::one());
+        CHECK(other.world->terrains[0].capacity == Fixed::from_int(45));
+    }
+    SUBCASE("außerhalb des Bereichs") {
+        replace_in_file(dir / scenario_file, "= 2.5", "= 12");
+        expect_error(load(dir), "'tragfaehigkeit_faktor' muss zwischen 0.1 und 10 liegen (ist 12)",
+                     scenario_file);
+    }
+}
+
 // ─── find_data_dir ──────────────────────────────────────────────────────────
 
 #ifndef _WIN32

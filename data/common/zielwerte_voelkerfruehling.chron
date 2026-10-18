@@ -1,0 +1,67 @@
+# Zielwerte des Balancing-Berichts für das Lesezeichen 1848 (Szenario voelkerfruehling, Meilenstein
+# M7), gelesen nur von `uhrwerk-cli bilanz` und `uhrwerk-cli pruefen`. Gibt es zu einem Szenario
+# eine Datei zielwerte_<szenario>.chron, gilt sie statt zielwerte.chron.
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.15; Bericht: docs/technik/wirtschaft.md,
+# Abschnitt 7; Begründung der Werte: data/README.md, Abschnitt "Wirtschaftswerte".
+#
+# Haushalt, Steuern und Lebensstandard folgen denselben Zielen wie 1648. Abweichend: das Wachstum
+# der Bevölkerung im Zeitalter der Agrarreformen und die Preise der Güter, die das Modell 1848 nur
+# regional erzeugt.
+
+vermoegen {
+    # (Schatz − Schulden) ÷ Jahreseinnahmen, gemessen am Jahrestag des Starts, je Staat
+    bereich = { -3 3 }      # erlaubter Bereich …
+    anteil  = 0.95          # … in mindestens diesem Anteil der Staatsjahre
+    ende    = { 0 1.5 }     # Median am Ende des Laufs: kein Staat häuft Schulden oder Schätze an
+}
+
+bankrotte {
+    # Staatsbankrotte je Staat und Jahrhundert
+    median = 0              # höchstens
+    p95    = 2              # höchstens (95-%-Wert über die Läufe)
+}
+
+steuerquote {
+    # Steuern ÷ Wirtschaftsleistung der Orte eines Staates am Ende gegen den Start (Median je Staat)
+    bereich = { 0.6 1.4 }
+}
+
+preise {
+    # Preis ÷ Basispreis je Gut, alle Märkte mit Orten und alle Monate
+    bereich = { 0.4 2.5 }
+    anteil  = 0.95
+    ausnahme kolonialwaren {
+        bereich = { 0.4 5 } # Basispreis gilt am Weltmarkt; im Binnenland kommt die Fracht hinzu
+    }
+    ausnahme salz {
+        bereich = { 0.4 4 } # Salinen liegen an wenigen Orten; das Salzregal hielt die Preise im
+                            # Binnenland hoch (Abgabe, Fracht)
+    }
+    ausnahme wein {
+        bereich = { 0.4 4 } # nur in den Weinbaugebieten erzeugt; im Norden ein Gut der Oberschicht
+    }
+    ausnahme waren {
+        bereich = { 0.4 3 } # Manufakturen und Maschinenbau nur in größeren Städten; die Einfuhr
+                            # englischer Waren bildet das Modell nicht ab
+    }
+    ausnahme kohle {
+        bereich = { 0.25 3 } # 1848 regionale Märkte: billig an der Ruhr und in Oberschlesien,
+                             # teuer, wo die Bahn noch fehlt
+    }
+    ausnahme eisen {
+        bereich = { 0.25 3 } # wie Kohle: Hütten an wenigen Erzlagern
+    }
+}
+
+bevoelkerung {
+    jahr   = 1878           # Bevölkerung am Jahrestag des Starts in diesem Jahr …
+    faktor = { 1.10 1.45 }  # … gegen den Start (Median); Deutscher Bund 1850–1880 etwa ×1,25
+}
+
+lebensstandard {
+    # Median je Schicht über alle Jahre und Läufe (Mittel über die Köpfe)
+    unten  = { 25 55 }
+    mittel = { 45 75 }
+    oben   = { 70 95 }
+}

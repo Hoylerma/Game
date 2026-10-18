@@ -11,5 +11,6 @@ szenario voelkerfruehling {
     datum    = 1848.03.01
     spieler  = PRU
     spielbar = { PRU AUT BAV SAX BAD }   # Entscheidung 3; alle anderen Staaten sind ebenfalls wählbar
-    waehrung = "Taler"                   # Rechnungseinheit (preußischer Taler), Abschnitt 4
+    waehrung = "Taler"
+    tragfaehigkeit_faktor = 2.5   # Agrartechnik 1848: Kartoffel, Klee, Agrarreformen (chronik-skript.md 3.7)
 }

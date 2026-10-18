@@ -370,6 +370,8 @@ struct Scenario {
     std::string player_tag;
     std::vector<std::string> playable; // hervorgehobene Staaten der Staatswahl (seit M7), Tags
     std::string currency; // Name der Rechnungseinheit, z. B. „Taler“ (seit M7); leer = „Reichstaler“
+    Fixed capacity_factor =
+        Fixed::one(); // Faktor auf die Tragfähigkeit aller Gelände (Agrartechnik, seit M7)
 };
 
 /// Eintrag der Chronik (Geschichtsbuch der Partie).

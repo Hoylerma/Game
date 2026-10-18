@@ -18,9 +18,9 @@ staat SCG {
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 14900
+        hofhaltung     = 20100
         heer           = 6
-        schulden       = 100000
+        schulden       = 134000
         zollverein     = ja
     }
 }

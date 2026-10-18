@@ -18,9 +18,9 @@ staat SSH {
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 8300
+        hofhaltung     = 8000
         heer           = 6
-        schulden       = 55000
+        schulden       = 53000
         zollverein     = ja
     }
 }

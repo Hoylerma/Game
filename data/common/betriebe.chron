@@ -169,7 +169,7 @@ betrieb huette {
 betrieb spinnerei {
     name       = "Spinnerei"      # Baumwoll-, Flachs- und Kammgarnspinnereien, mechanische Webereien;
     beruf      = fabrikarbeiter   # meist mit Wasserkraft, daher ohne Kohle
-    erzeugt    = { tuch = 3.5 }
+    erzeugt    = { tuch = 3 waren = 1.5 }
     verbraucht = { faser = 2.5 }
     agrar      = nein
     gewicht    = 1
@@ -184,5 +184,27 @@ betrieb maschinenbau {
     agrar      = nein
     ort        = stadt
     gewicht    = 0.3
+    seit       = 1800.01.01
+}
+
+betrieb brennerei {
+    name       = "Brennerei"      # Branntwein aus Kartoffeln und Korn auf den Gütern, vor allem östlich
+    beruf      = landarme         # der Elbe (Branntweinsteuer 1820)
+    erzeugt    = { bier = 4.5 }
+    verbraucht = { getreide = 3 }
+    agrar      = nein
+    ort        = land
+    gewicht    = 0.2
+    seit       = 1800.01.01
+}
+
+betrieb salzwerk {
+    name       = "Salzwerk"       # Gradierwerke und erste Steinsalzbergwerke an den Salinen
+    beruf      = landarme
+    erzeugt    = { salz = 12 }
+    verbraucht = { holz = 2 }
+    agrar      = nein
+    vorkommen  = salz
+    gewicht    = 3
     seit       = 1800.01.01
 }

@@ -330,8 +330,15 @@ szenario westfaelischer_frieden {
     spieler = BRA                          # Pflicht, Staatstag (Vorauswahl)
     spielbar = { BRA SAX }                 # optional (seit M7): hervorgehobene Staaten der Staatswahl
     waehrung = "Reichstaler"               # optional (seit M7): Name der Rechnungseinheit
+    tragfaehigkeit_faktor = 1              # optional (seit M7): Agrartechnik, Faktor 0,1–10 auf die
+                                           # Tragfähigkeit aller Gelände (Standard 1)
 }
 ```
+
+`tragfaehigkeit_faktor` (seit M7) gibt den Stand der Landwirtschaft zum Startdatum wieder: Kartoffel,
+Klee- und Fruchtwechselwirtschaft und die Agrarreformen ernähren 1848 weit mehr Menschen je km² als 1648
+(bevoelkerung.md, Abschnitt 4.1). Der Lader multipliziert `tragfaehigkeit` jedes Geländes damit; der
+Wert steht so im Fingerabdruck (Bereich `gelaende`).
 
 Spieler und spielbare Staaten müssen bekannte Staaten sein; im gewählten Szenario müssen sie zum
 Startdatum bestehen (Abschnitt 3.5, sonst fatal). `spielbar` und `waehrung` betreffen nur die

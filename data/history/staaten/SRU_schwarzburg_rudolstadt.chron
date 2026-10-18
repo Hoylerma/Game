@@ -18,9 +18,9 @@ staat SRU {
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 8800
+        hofhaltung     = 9900
         heer           = 6
-        schulden       = 59000
+        schulden       = 66000
         zollverein     = ja
     }
 }

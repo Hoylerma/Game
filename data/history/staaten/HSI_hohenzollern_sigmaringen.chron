@@ -18,9 +18,9 @@ staat HSI {
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 5000
+        hofhaltung     = 5500
         heer           = 6
-        schulden       = 34000
+        schulden       = 37000
         zollverein     = ja
     }
 

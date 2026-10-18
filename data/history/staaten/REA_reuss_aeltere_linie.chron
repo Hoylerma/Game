@@ -18,9 +18,9 @@ staat REA {
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 3400
+        hofhaltung     = 4400
         heer           = 6
-        schulden       = 23000
+        schulden       = 29000
         zollverein     = ja
     }
 }

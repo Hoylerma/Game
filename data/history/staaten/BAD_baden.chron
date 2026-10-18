@@ -18,9 +18,9 @@ staat BAD {
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 59400
+        hofhaltung     = 78700
         heer           = 7
-        schulden       = 1783000
+        schulden       = 2361000
         zollverein     = ja
     }
 }

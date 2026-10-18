@@ -18,9 +18,9 @@ staat SMG {
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 18400
+        hofhaltung     = 19900
         heer           = 6
-        schulden       = 122000
+        schulden       = 132000
         zollverein     = ja
     }
 }

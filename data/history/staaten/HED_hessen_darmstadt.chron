@@ -18,9 +18,9 @@ staat HED {
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 52200
+        hofhaltung     = 65600
         heer           = 7
-        schulden       = 1343000
+        schulden       = 1687000
         zollverein     = ja
     }
 

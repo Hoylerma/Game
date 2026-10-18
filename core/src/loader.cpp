@@ -512,6 +512,7 @@ public:
         // Ohne gültiges Szenario werden alle datierten Blöcke angewendet, damit die
         // Prüfung trotzdem alle Felder sieht.
         start_ = selected != nullptr ? selected->start : Date{9999, 12, 31};
+        capacity_factor_ = selected != nullptr ? selected->capacity_factor : Fixed::one();
 
         process("common/regeln.chron", [&](const SourceFile& f) { load_rules(f); });
         process("common/gelaende.chron", [&](const SourceFile& f) { load_terrains(f); });
@@ -935,7 +936,9 @@ private:
             t.name = f.text("name").value_or("");
             t.color = f.color("farbe").value_or(Color{});
             t.yield_factor = f.fixed("ertrag", between(fx(0), fx(10))).value_or(Fixed::one());
-            t.capacity = f.fixed("tragfaehigkeit", between(fx(0), fx(100'000))).value_or(Fixed{});
+            // Stand der Agrartechnik zum Startdatum (seit M7): Faktor des Szenarios.
+            t.capacity =
+                f.fixed("tragfaehigkeit", between(fx(0), fx(100'000))).value_or(Fixed{}) * capacity_factor_;
             const auto index = static_cast<Index>(world_.terrains.size());
             if (register_id(terrains_, t.id, index, file.name, node.line, "Gelände")) {
                 world_.terrains.push_back(std::move(t));
@@ -1879,13 +1882,18 @@ private:
     void load_scenarios(const SourceFile& file, std::vector<Scenario>& scenarios) {
         for_each_definition(file, "szenario", "szenario <kennung> { … }", [&](const ScriptNode& node) {
             Fields f(node, file.name, "szenario " + node.value, issues_,
-                     {"name", "datum", "spieler", "spielbar", "waehrung"});
+                     {"name", "datum", "spieler", "spielbar", "waehrung", "tragfaehigkeit_faktor"});
             Scenario s;
             s.id = node.value;
             s.name = f.text("name").value_or("");
             s.start = f.date("datum").value_or(Date{});
             if (f.has("waehrung")) {
                 s.currency = f.text("waehrung").value_or("");
+            }
+            if (f.has("tragfaehigkeit_faktor")) {
+                s.capacity_factor =
+                    f.fixed("tragfaehigkeit_faktor", between(Fixed::from_ratio(1, 10), fx(10)))
+                        .value_or(Fixed::one());
             }
             std::vector<PlayerRef> playable_refs;
             if (f.has("spielbar")) {
@@ -2217,6 +2225,7 @@ private:
     // Inhalt ab einem Datum (seit M7): spätere Definitionen als „gut:kohle“ → 'seit'.
     std::map<std::string, Date, std::less<>> later_;
     bool in_later_ = false;                     // gerade wird eine spätere Definition gelesen
+    Fixed capacity_factor_ = Fixed::one();      // tragfaehigkeit_faktor des gewählten Szenarios (seit M7)
     std::vector<AdminParentRef> admin_parents_; // parallel zu world_.admin_units
     Registry locations_;
     Registry scenarios_;

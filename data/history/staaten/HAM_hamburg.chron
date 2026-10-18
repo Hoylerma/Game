@@ -15,9 +15,9 @@ staat HAM {
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 2700
+        hofhaltung     = 3600
         heer           = 4
-        schulden       = 265000
+        schulden       = 354000
         zollverein     = nein
     }
 }

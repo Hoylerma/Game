@@ -104,8 +104,8 @@ beruf fabrikarbeiter {
     name            = "Fabrikarbeiter"   # Fabrik-, Hütten- und Bergarbeiter
     schicht         = unten
     steuerpflichtig = ja
-    anteil_stadt    = 0.050
-    anteil_land     = 0.010
+    anteil_stadt    = 0.060
+    anteil_land     = 0.015
     agrar           = nein
     bildung         = 0.15
     seit            = 1800.01.01

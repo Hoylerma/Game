@@ -46,9 +46,9 @@ staat MSC {
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 72800
+        hofhaltung     = 80600
         heer           = 6
-        schulden       = 789000
+        schulden       = 873000
         zollverein     = nein
     }
 }

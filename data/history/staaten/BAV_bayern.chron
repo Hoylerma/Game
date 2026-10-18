@@ -18,9 +18,9 @@ staat BAV {
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 307700
+        hofhaltung     = 313700
         heer           = 8
-        schulden       = 12749000
+        schulden       = 12998000
         zollverein     = ja
     }
 

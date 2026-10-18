@@ -10,13 +10,14 @@
 # Umfang: Niederschlesien mit Brieg und Namslau sowie Grünberg, Sagan und Neusalz.
 
 ort gruenberg {
-    name     = "Grünberg"
-    gelaende = huegelland
-    lage     = { 15.5064 51.9355 }
-    flaeche  = 227
-    stadt    = ja
-    kreis    = kr_gruenberg
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3080165; deutscher Name aus den GeoNames-Alternativnamen (heute Zielona Góra); Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Grünberg"
+    gelaende  = huegelland
+    lage      = { 15.5064 51.9355 }
+    flaeche   = 227
+    stadt     = ja
+    kreis     = kr_gruenberg
+    vorkommen = { weinlage }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 3080165; deutscher Name aus den GeoNames-Alternativnamen (heute Zielona Góra); Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 27254

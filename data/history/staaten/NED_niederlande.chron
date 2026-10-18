@@ -18,9 +18,9 @@ staat NED {
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 7800
+        hofhaltung     = 9500
         heer           = 6
-        schulden       = 155000
+        schulden       = 189000
         zollverein     = nein
     }
 }

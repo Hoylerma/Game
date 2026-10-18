@@ -18,9 +18,9 @@ staat WAL {
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 8000
+        hofhaltung     = 7700
         heer           = 6
-        schulden       = 54000
+        schulden       = 52000
         zollverein     = ja
     }
 }

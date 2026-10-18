@@ -15,9 +15,9 @@ staat FRA {
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 700
+        hofhaltung     = 1100
         heer           = 4
-        schulden       = 18000
+        schulden       = 28000
         zollverein     = ja
     }
 }

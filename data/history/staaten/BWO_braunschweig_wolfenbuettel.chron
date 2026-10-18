@@ -46,9 +46,9 @@ staat BWO {
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 33200
+        hofhaltung     = 37000
         heer           = 6
-        schulden       = 221000
+        schulden       = 247000
         zollverein     = ja
     }
 }

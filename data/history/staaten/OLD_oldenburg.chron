@@ -18,9 +18,9 @@ staat OLD {
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 38200
+        hofhaltung     = 39100
         heer           = 6
-        schulden       = 96000
+        schulden       = 98000
         zollverein     = nein
     }
 }

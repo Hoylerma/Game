@@ -34,13 +34,14 @@ ort mainz {
 }
 
 ort worms {
-    name     = "Worms"
-    gelaende = flussaue
-    lage     = { 8.3592 49.6328 }
-    flaeche  = 77
-    stadt    = ja
-    kreis    = kr_mainz
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2806142; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Worms"
+    gelaende  = flussaue
+    lage      = { 8.3592 49.6328 }
+    flaeche   = 77
+    stadt     = ja
+    kreis     = kr_mainz
+    vorkommen = { weinlage }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2806142; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 18000
@@ -57,13 +58,14 @@ ort worms {
 }
 
 ort alzey {
-    name     = "Alzey"
-    gelaende = huegelland
-    lage     = { 8.1151 49.7466 }
-    flaeche  = 204
-    stadt    = ja
-    kreis    = kr_mainz
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2956710; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Alzey"
+    gelaende  = huegelland
+    lage      = { 8.1151 49.7466 }
+    flaeche   = 204
+    stadt     = ja
+    kreis     = kr_mainz
+    vorkommen = { weinlage }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2956710; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 20862
@@ -149,13 +151,14 @@ ort osthofen {
 }
 
 ort oppenheim {
-    name     = "Oppenheim"
-    gelaende = flussaue
-    lage     = { 8.3597 49.8547 }
-    flaeche  = 185
-    stadt    = nein
-    kreis    = kr_mainz
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2857167; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Oppenheim"
+    gelaende  = flussaue
+    lage      = { 8.3597 49.8547 }
+    flaeche   = 185
+    stadt     = nein
+    kreis     = kr_mainz
+    vorkommen = { weinlage }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2857167; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 21623
@@ -195,13 +198,14 @@ ort monsheim {
 }
 
 ort bad_kreuznach {
-    name     = "Bad Kreuznach"
-    gelaende = huegelland
-    lage     = { 7.8671 49.8414 }
-    flaeche  = 130
-    stadt    = ja
-    kreis    = kr_bad_kreuznach
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2953416; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Bad Kreuznach"
+    gelaende  = huegelland
+    lage      = { 7.8671 49.8414 }
+    flaeche   = 130
+    stadt     = ja
+    kreis     = kr_bad_kreuznach
+    vorkommen = { salz weinlage }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2953416; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 16817
@@ -241,13 +245,14 @@ ort ingelheim_am_rhein {
 }
 
 ort bingen_am_rhein {
-    name     = "Bingen am Rhein"
-    gelaende = huegelland
-    lage     = { 7.8992 49.9667 }
-    flaeche  = 201
-    stadt    = ja
-    kreis    = kr_bad_kreuznach
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2948825; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Bingen am Rhein"
+    gelaende  = huegelland
+    lage      = { 7.8992 49.9667 }
+    flaeche   = 201
+    stadt     = ja
+    kreis     = kr_bad_kreuznach
+    vorkommen = { weinlage }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2948825; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 21231

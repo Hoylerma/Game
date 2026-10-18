@@ -47,9 +47,9 @@ staat SAX {
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 84900
+        hofhaltung     = 127700
         heer           = 7
-        schulden       = 1577000
+        schulden       = 2372000
         zollverein     = ja
     }
 }

@@ -1225,13 +1225,14 @@ ort waldheim {
 }
 
 ort meissen {
-    name     = "Meißen"
-    gelaende = huegelland
-    lage     = { 13.4737 51.1616 }
-    flaeche  = 182
-    stadt    = ja
-    kreis    = kr_dresden
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2872155; Name Meißen aus den GeoNames-Alternativnamen (GeoNames: Meissen); Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Meißen"
+    gelaende  = huegelland
+    lage      = { 13.4737 51.1616 }
+    flaeche   = 182
+    stadt     = ja
+    kreis     = kr_dresden
+    vorkommen = { weinlage }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2872155; Name Meißen aus den GeoNames-Alternativnamen (GeoNames: Meissen); Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 25421
@@ -1272,13 +1273,14 @@ ort freital {
 }
 
 ort radebeul {
-    name     = "Radebeul"
-    gelaende = huegelland
-    lage     = { 13.6605 51.1065 }
-    flaeche  = 124
-    stadt    = ja
-    kreis    = kr_dresden
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2851077; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Radebeul"
+    gelaende  = huegelland
+    lage      = { 13.6605 51.1065 }
+    flaeche   = 124
+    stadt     = ja
+    kreis     = kr_dresden
+    vorkommen = { weinlage }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2851077; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 19358

@@ -18,9 +18,9 @@ staat HAN {
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 148700
+        hofhaltung     = 170900
         heer           = 7
-        schulden       = 3347000
+        schulden       = 3845000
         zollverein     = nein
     }
 }

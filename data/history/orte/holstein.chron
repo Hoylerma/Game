@@ -1076,13 +1076,14 @@ ort luebeck {
 }
 
 ort bad_oldesloe {
-    name     = "Bad Oldesloe"
-    gelaende = flachland
-    lage     = { 10.3742 53.8117 }
-    flaeche  = 147
-    stadt    = ja
-    kreis    = kr_luebeck
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2953385; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Bad Oldesloe"
+    gelaende  = flachland
+    lage      = { 10.3742 53.8117 }
+    flaeche   = 147
+    stadt     = ja
+    kreis     = kr_luebeck
+    vorkommen = { salz }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2953385; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 9661

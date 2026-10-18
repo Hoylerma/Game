@@ -15,9 +15,9 @@ staat BRE {
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 900
+        hofhaltung     = 1700
         heer           = 4
-        schulden       = 39000
+        schulden       = 74000
         zollverein     = nein
     }
 }

@@ -18,9 +18,9 @@ staat NAS {
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 42900
+        hofhaltung     = 56900
         heer           = 6
-        schulden       = 286000
+        schulden       = 379000
         zollverein     = ja
     }
 }

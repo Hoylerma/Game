@@ -99,7 +99,8 @@ Optionen:
   --chronik      Chronik der Partie ausgeben (nur lauf)
   --maerkte      Preise je Markt (nur wirtschaft)
   --seeds N      Bilanz: Zahl der Läufe (Standard: 32)
-  --ziele DATEI  Bilanz: Zielwerte (Standard: common/zielwerte.chron im Datenordner)
+  --ziele DATEI  Bilanz: Zielwerte (Standard: common/zielwerte_<szenario>.chron, sonst
+                 common/zielwerte.chron im Datenordner)
   --speichern F  lauf, lasttest: am Ende einen Spielstand in die Datei F schreiben
   --laden F      lauf: Spielstand F laden und weiterrechnen (Szenario und Seed aus dem
                  Spielstand; --jahre/--tage ab seinem Datum)
@@ -677,6 +678,14 @@ bool save_and_report(const uhrwerk::Simulation& sim, const fs::path& path, const
     return true;
 }
 
+/// Zielwerte des Balancing-Berichts für ein Szenario: common/zielwerte_<szenario>.chron, wenn es die
+/// Datei gibt (seit M7, eigene Ziele für 1848), sonst die allgemeinen common/zielwerte.chron.
+fs::path default_targets_file(const fs::path& data_dir, const std::string& scenario) {
+    const fs::path own = data_dir / "common" / ("zielwerte_" + scenario + ".chron");
+    std::error_code ec;
+    return fs::exists(own, ec) ? own : data_dir / "common" / "zielwerte.chron";
+}
+
 // ─── Befehle ────────────────────────────────────────────────────────────────
 
 int cmd_pruefen(const Options& o, const fs::path& data_dir) {
@@ -695,7 +704,7 @@ int cmd_pruefen(const Options& o, const fs::path& data_dir) {
     }
     // Zielwerte des Balancing-Berichts (seit M5), wenn vorhanden: Nur `bilanz` liest sie, Fehler
     // sollen aber schon hier auffallen.
-    const fs::path targets = data_dir / "common" / "zielwerte.chron";
+    const fs::path targets = default_targets_file(data_dir, o.scenario);
     std::error_code ec;
     if (result.ok() && fs::exists(targets, ec)) {
         for (const std::string& error : uhrwerk::load_balance_targets(targets, *result.world).errors) {
@@ -1170,13 +1179,14 @@ std::string describe_violation(const World& w, const uhrwerk::BalanceTargets& t,
 }
 
 /// Balancing-Bericht (seit M5, docs/technik/wirtschaft.md Abschnitt 7): mehrere Läufe ohne Eingriffe des
-/// Spielers, Kennzahlen je Staat, Gut und Schicht gegen die Zielwerte (data/common/zielwerte.chron).
+/// Spielers, Kennzahlen je Staat, Gut und Schicht gegen die Zielwerte (data/common/zielwerte*.chron).
 int cmd_bilanz(const Options& o, const fs::path& data_dir) {
     auto world = load(data_dir, o.scenario, false);
     if (!world) {
         return kExitDataError;
     }
-    const fs::path targets_file = o.targets_file ? *o.targets_file : data_dir / "common" / "zielwerte.chron";
+    const fs::path targets_file =
+        o.targets_file ? *o.targets_file : default_targets_file(data_dir, o.scenario);
     const uhrwerk::BalanceTargetsResult loaded = uhrwerk::load_balance_targets(targets_file, *world);
     if (!loaded.targets) {
         for (const std::string& error : loaded.errors) {

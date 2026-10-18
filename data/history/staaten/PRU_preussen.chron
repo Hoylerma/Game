@@ -18,9 +18,9 @@ staat PRU {
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 546800
+        hofhaltung     = 645200
         heer           = 9
-        schulden       = 20506000
+        schulden       = 24197000
         zollverein     = ja
     }
 }

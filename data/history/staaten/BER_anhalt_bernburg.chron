@@ -46,9 +46,9 @@ staat BER {
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 8100
+        hofhaltung     = 7400
         heer           = 6
-        schulden       = 54000
+        schulden       = 49000
         zollverein     = ja
     }
 }
