@@ -804,13 +804,14 @@ ort miescisko {
 }
 
 ort inowroclaw {
-    name     = "Inowrocław"
-    gelaende = boerde
-    lage     = { 18.2639 52.7989 }
-    flaeche  = 203
-    stadt    = ja
-    kreis    = kr_inowroclaw
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3097872; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Inowrocław"
+    gelaende  = boerde
+    lage      = { 18.2639 52.7989 }
+    flaeche   = 203
+    stadt     = ja
+    kreis     = kr_inowroclaw
+    vorkommen = { salz }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 3097872; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 15394

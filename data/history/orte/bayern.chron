@@ -3276,13 +3276,14 @@ ort hurlach {
 }
 
 ort traunstein {
-    name     = "Traunstein"
-    gelaende = huegelland
-    lage     = { 12.6433 47.8683 }
-    flaeche  = 182
-    stadt    = ja
-    kreis    = kr_traunstein
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2821515; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Traunstein"
+    gelaende  = huegelland
+    lage      = { 12.6433 47.8683 }
+    flaeche   = 182
+    stadt     = ja
+    kreis     = kr_traunstein
+    vorkommen = { salz }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2821515; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 10738
@@ -3299,13 +3300,14 @@ ort traunstein {
 }
 
 ort bad_reichenhall {
-    name     = "Bad Reichenhall"
-    gelaende = mittelgebirge
-    lage     = { 12.8782 47.7295 }
-    flaeche  = 234
-    stadt    = ja
-    kreis    = kr_traunstein
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2953371; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Bad Reichenhall"
+    gelaende  = mittelgebirge
+    lage      = { 12.8782 47.7295 }
+    flaeche   = 234
+    stadt     = ja
+    kreis     = kr_traunstein
+    vorkommen = { salz }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2953371; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 10837
@@ -3483,13 +3485,14 @@ ort wolfratshausen {
 }
 
 ort penzberg {
-    name     = "Penzberg"
-    gelaende = huegelland
-    lage     = { 11.377 47.7529 }
-    flaeche  = 140
-    stadt    = nein
-    kreis    = kr_geretsried
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2854923; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Penzberg"
+    gelaende  = huegelland
+    lage      = { 11.377 47.7529 }
+    flaeche   = 140
+    stadt     = nein
+    kreis     = kr_geretsried
+    vorkommen = { kohle }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2854923; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 6496
@@ -3598,13 +3601,14 @@ ort kochel {
 }
 
 ort rosenheim {
-    name     = "Rosenheim"
-    gelaende = flussaue
-    lage     = { 12.1225 47.8564 }
-    flaeche  = 121
-    stadt    = ja
-    kreis    = kr_rosenheim
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2844988; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Rosenheim"
+    gelaende  = flussaue
+    lage      = { 12.1225 47.8564 }
+    flaeche   = 121
+    stadt     = ja
+    kreis     = kr_rosenheim
+    vorkommen = { salz }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2844988; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 12870

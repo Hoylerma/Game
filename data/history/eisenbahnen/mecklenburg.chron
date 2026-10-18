@@ -1,0 +1,8 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+strecke mecklenburgische {
+    name      = "Mecklenburgische Eisenbahn"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M7, Schritt b1)"
+    abschnitt = { von = hagenow bis = schwerin eroeffnet = 1847.05.01 }
+    abschnitt = { von = schwerin bis = wismar eroeffnet = 1848.07.12 }
+}

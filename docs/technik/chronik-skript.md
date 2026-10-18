@@ -80,7 +80,8 @@ data/
 │   ├── staaten/*.chron     Staaten (Reichsstände) mit datierter Historie
 │   ├── kreise/*.chron      Kreise: Gruppen von 4–12 Orten (seit M3)
 │   ├── verwaltung/*.chron  Verwaltungseinheiten der Staaten (seit M7, optional)
-│   └── orte/*.chron        Orte mit datierter Historie (Besitz, Bevölkerung …)
+│   ├── orte/*.chron        Orte mit datierter Historie (Besitz, Bevölkerung …)
+│   └── eisenbahnen/*.chron Eisenbahnstrecken mit Abschnitten (seit M7, optional)
 ├── tabellen/*.csv          Quelle der Wahrheit für history/ (siehe tabellen.md)
 ├── szenarien/*.chron       Lesezeichen
 └── karte/
@@ -92,7 +93,8 @@ data/
 ```
 
 Ladereihenfolge: `regeln`, `gelaende`, `konfessionen`, `kulturen` (seit M4), `berufe`, `gueter`, `beduerfnisse`,
-`betriebe`, `maerkte` (seit M5), dann alle Dateien der Ordner `szenarien`, `history/staaten`, `history/kreise` (seit M3), `history/verwaltung` (seit M7), `history/orte`, jeweils **nach Dateiname sortiert**, Einträge in Dateireihenfolge. Daraus ergeben sich die Indizes in `World`. Die Szenarien kommen vor der Historie, weil das Startdatum des gewählten Szenarios bestimmt, welche datierten Blöcke gelten (Abschnitt 3.8).
+`betriebe`, `maerkte` (seit M5), dann alle Dateien der Ordner `szenarien` (seit M7 vor `common/`, weil das
+Startdatum bestimmt, welche Güter, Berufe und Betriebe gelten), `history/staaten`, `history/kreise` (seit M3), `history/verwaltung` (seit M7), `history/orte`, `history/eisenbahnen` (seit M7), jeweils **nach Dateiname sortiert**, Einträge in Dateireihenfolge. Daraus ergeben sich die Indizes in `World`. Die Szenarien kommen vor der Historie, weil das Startdatum des gewählten Szenarios bestimmt, welche datierten Blöcke gelten (Abschnitt 3.8).
 
 Die Dateien in `history/` erzeugt das Werkzeug `tools/archivar` aus den Tabellen in `data/tabellen/` (Format: [tabellen.md](tabellen.md)). Änderungen gehören in die Tabellen; die CI prüft mit `archivar.py --pruefen`, dass `history/` aktuell ist.
 
@@ -149,6 +151,7 @@ regeln {
     handel_rate               = 5       # 0..100
     handel_fracht             = 0.12    # 0..10, je 100 km
     seefracht                 = 0.10    # 0..10
+    bahnfracht                = 0.04    # 0..10, je 100 km mit Bahnverbindung (seit M7)
     handelsspanne             = 0.05    # 0..0.5
     betrieb_anpassung         = 0.03    # 0..1
     betrieb_min_anteil        = 0.02    # 0..0.5
@@ -212,8 +215,14 @@ beruf bauern {
     bildung         = 0.1          # Pflicht seit M4: Alphabetisierung, Grundwert 0..1
     in_stadt        = landarme     # optional seit M4: Beruf nach dem Zuzug in eine Stadt
     agrarabgabe     = 0.08         # optional seit M5: Anteil am Agrarertrag des Ortes (0..1)
+    seit            = 1800.01.01   # optional seit M7: erst ab diesem Datum (Abschnitt 3.18)
+    anteil_aus      = landarme     # optional seit M7: Anteile werden diesem Beruf abgezogen
 }
 ```
+
+`anteil_aus` (seit M7): Der Beruf nimmt seine `anteil_stadt` und `anteil_land` dem genannten Beruf ab, so
+bleibt die Summe 1, auch wenn es ihn erst ab einem Datum gibt (Fabrikarbeiter aus den Landarmen). Reichen
+die Anteile des anderen Berufs nicht oder ist er unbekannt, ist das fatal.
 
 `in_stadt` verweist auf einen Beruf derselben Datei (auch einen späteren); ein unbekannter Beruf ist fatal.
 
@@ -321,8 +330,15 @@ szenario westfaelischer_frieden {
     spieler = BRA                          # Pflicht, Staatstag (Vorauswahl)
     spielbar = { BRA SAX }                 # optional (seit M7): hervorgehobene Staaten der Staatswahl
     waehrung = "Reichstaler"               # optional (seit M7): Name der Rechnungseinheit
+    tragfaehigkeit_faktor = 1              # optional (seit M7): Agrartechnik, Faktor 0,1–10 auf die
+                                           # Tragfähigkeit aller Gelände (Standard 1)
 }
 ```
+
+`tragfaehigkeit_faktor` (seit M7) gibt den Stand der Landwirtschaft zum Startdatum wieder: Kartoffel,
+Klee- und Fruchtwechselwirtschaft und die Agrarreformen ernähren 1848 weit mehr Menschen je km² als 1648
+(bevoelkerung.md, Abschnitt 4.1). Der Lader multipliziert `tragfaehigkeit` jedes Geländes damit; der
+Wert steht so im Fingerabdruck (Bereich `gelaende`).
 
 Spieler und spielbare Staaten müssen bekannte Staaten sein; im gewählten Szenario müssen sie zum
 Startdatum bestehen (Abschnitt 3.5, sonst fatal). `spielbar` und `waehrung` betreffen nur die
@@ -461,7 +477,10 @@ ist eine Warnung. Im Kern: `World::markets` (`Market { id, name, landscapes }`).
 
 Zielwerte des Balancing-Berichts. Die Datei gehört nicht zum Spielinhalt: Der Lader liest sie nicht,
 nur `uhrwerk-cli bilanz` (und `uhrwerk-cli pruefen` prüft sie, wenn sie vorhanden ist). Bereiche stehen
-als `{ von bis }` (von ≤ bis, beide Grenzen eingeschlossen), Anteile zwischen 0 und 1.
+als `{ von bis }` (von ≤ bis, beide Grenzen eingeschlossen), Anteile zwischen 0 und 1. Seit M7 kann ein
+Szenario eigene Zielwerte haben: Gibt es `common/zielwerte_<szenario>.chron` (etwa
+`zielwerte_voelkerfruehling.chron`), nehmen `bilanz` und `pruefen` für dieses Szenario diese Datei statt
+`zielwerte.chron`; Güter in `ausnahme` prüft der Bericht gegen den Inhalt dieses Szenarios.
 
 ```text
 vermoegen {                 # (Schatz − Schulden) ÷ Jahreseinnahmen, je Staat
@@ -518,6 +537,46 @@ Verwaltung, Bundesgebiet und Zollverein sind in M7 **Inhalt** wie die Kreise: Si
 Fingerabdruck der Spieldaten (Bereiche `kreise`, `orte`, `staaten`), nicht in der Prüfsumme und nicht
 im Spielstand. Sobald Gebietswechsel im Spiel die Zuordnung ändern, wandern `Location::admin` und
 `Location::federal` in den Zustand.
+
+### 3.17 `history/eisenbahnen/*.chron` (seit M7)
+
+```text
+strecke leipzig_dresden {
+    name      = "Leipzig-Dresdner Eisenbahn"                              # Pflicht
+    quelle    = "…"                                                       # Pflicht
+    abschnitt = { von = leipzig bis = wurzen eroeffnet = 1837.07.31 }     # mindestens einer
+    abschnitt = { von = wurzen bis = riesa eroeffnet = 1838.09.21 }
+}
+```
+
+Eine Strecke besteht aus Abschnitten von Ort zu Ort (mit oder ohne Daten) mit dem Tag der
+Eröffnung; `abschnitt` darf sich wiederholen, alle drei Felder sind Pflicht. Kennung wie bei Orten,
+eindeutig. Fatal: unbekannter Ort, gleicher Anfang und gleiches Ende, ungültiges Datum, Strecke ohne
+Abschnitt. Der Ordner darf fehlen. Im Kern: `World::railways`
+(`Railway { id, name, sections, source }`, `RailSection { from, to, opened }`).
+
+Strecken sind **Inhalt**: Ob ein Abschnitt befahren wird, folgt aus dem Datum. Sie stehen im
+Fingerabdruck (Bereich `maerkte`), nicht in der Prüfsumme und nicht im Spielstand. Wirkung: Zwei
+Nachbarmärkte handeln mit `bahnfracht` statt `handel_fracht`, sobald ein Bahnhof im einen und einer
+im anderen über eröffnete Abschnitte verbunden sind ([wirtschaft.md](wirtschaft.md), Abschnitt 4.1).
+Zwei Strecken, die nur im selben Markt enden, verbinden nichts; ein Abschnitt zwischen Märkten, die
+keine Nachbarn sind, schafft keinen Handel, kann aber ein Netz schließen. Der Bau neuer Strecken im Spiel
+kommt mit einem späteren Meilenstein.
+
+### 3.18 Inhalt ab einem Datum: `seit` (seit M7)
+
+`gut`, `beruf` und `betrieb` dürfen `seit = JJJJ.MM.TT` tragen. Liegt das Datum nach dem Startdatum des
+gewählten Szenarios, wird die Definition gelesen und geprüft, gehört aber nicht zur Welt: Sie fehlt in
+den Indizes, im Fingerabdruck und in der Prüfsumme. So bringt die frühe Industrie von 1848 (Kohle, Eisen,
+Zeche, Hütte, Fabrik, Fabrikarbeiter) nichts in das Szenario 1648; dessen Ergebnisse bleiben bitgleich.
+Spätere Definitionen dürfen aufeinander verweisen; ein Verweis aus einer geltenden Definition auf eine
+spätere ist fatal („Gut 'kohle' gibt es erst seit 1800.01.01 …“). Auch spätere Definitionen brauchen eine
+freie Kennung, und ihre Verweise (`in_stadt`, `anteil_aus`, Beruf und Güter eines Betriebs) müssen auf
+geltende oder spätere Definitionen zeigen. `anteil_aus` zieht die angegebenen Anteile ab, unabhängig von
+der Reihenfolge in der Datei; ein Kreis (A aus B, B aus A) ist fatal. Das Vorkommen eines späteren
+Betriebs bleibt bekannt, damit Orte es tragen dürfen. Ohne gültiges Szenario (Prüfung aller Daten) gilt alles.
+Fortschritt im Spiel – Inhalt, der während einer Partie hinzukommt – gibt es damit noch nicht: Eine Partie
+ab 1648 erreicht die Industrie nicht.
 
 ## 4. Startzustand
 

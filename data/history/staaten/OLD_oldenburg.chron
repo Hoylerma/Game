@@ -14,12 +14,13 @@ staat OLD {
         hauptstadt     = oldenburg
         regierungsform = absolute_monarchie
         konfession     = lutherisch
-        schatz         = 84000
+        schatz         = 0
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 70000
+        hofhaltung     = 39100
         heer           = 6
+        schulden       = 98000
         zollverein     = nein
     }
 }

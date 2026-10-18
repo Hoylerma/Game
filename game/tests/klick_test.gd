@@ -491,6 +491,20 @@ func _check_new_game() -> void:
 	await _key(KEY_BRACKETLEFT)
 	if int(_main.call("map_mode")) != MapModes.MAP_VERWALTUNG:
 		_fail("Taste Ü schaltet nicht in den Modus Verwaltung (%d)" % int(_main.call("map_mode")))
+	# Taste „+“ (physisch rechts neben Ü): Eisenbahnen mit Linien und Bahnhof in der Ortsinfo.
+	await _key(KEY_BRACKETRIGHT)
+	var view: MapView = _main.call("map_view")
+	var rail := view.railway_layer()
+	if int(_main.call("map_mode")) != MapModes.MAP_EISENBAHNEN or rail == null or not rail.visible:
+		_fail("Taste + schaltet nicht in den Modus Eisenbahnen mit sichtbaren Strecken")
+	elif rail.open_count() < 100:
+		_fail("Eisenbahnen 1848: nur %d eröffnete Abschnitte gezeichnet" % rail.open_count())
+	var leipzig_info := sim.get_location(sim.get_location_index("leipzig"))
+	if not ", ".join(leipzig_info.get("eisenbahnen", PackedStringArray())).contains("Leipzig-Dresdner Eisenbahn"):
+		_fail("Ortsinfo Leipzig: keine Leipzig-Dresdner Eisenbahn (%s)" % leipzig_info.get("eisenbahnen"))
+	await _key(KEY_BRACKETLEFT)
+	if rail != null and rail.visible:
+		_fail("Strecken bleiben außerhalb des Modus Eisenbahnen sichtbar")
 	var munich := sim.get_location_index("muenchen")
 	_main.call("select_location", munich)
 	await _frames(1)

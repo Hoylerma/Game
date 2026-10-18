@@ -1,0 +1,45 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+strecke kaiser_ferdinands_nordbahn {
+    name      = "Kaiser-Ferdinands-Nordbahn"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M7, Schritt b1)"
+    abschnitt = { von = wien bis = gaenserndorf eroeffnet = 1838.07.01 }
+    abschnitt = { von = gaenserndorf bis = lundenburg eroeffnet = 1839.06.06 }
+    abschnitt = { von = lundenburg bis = bruenn eroeffnet = 1839.07.07 }
+    abschnitt = { von = lundenburg bis = goeding eroeffnet = 1841.09.01 }
+    abschnitt = { von = goeding bis = prerau eroeffnet = 1841.09.01 }
+    abschnitt = { von = prerau bis = olmuetz eroeffnet = 1841.10.17 }
+    abschnitt = { von = prerau bis = lipnik_nad_becvou eroeffnet = 1842.04.01 }
+    abschnitt = { von = lipnik_nad_becvou bis = maehrisch_weisskirchen eroeffnet = 1847.05.01 }
+    abschnitt = { von = maehrisch_weisskirchen bis = ostrava eroeffnet = 1847.05.01 }
+    abschnitt = { von = ostrava bis = bohumin eroeffnet = 1847.05.01 }
+}
+
+strecke suedbahn {
+    name      = "Wien-Gloggnitzer Bahn und Südliche Staatsbahn"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M7, Schritt b1)"
+    abschnitt = { von = wien bis = moedling eroeffnet = 1841.06.16 }
+    abschnitt = { von = moedling bis = baden eroeffnet = 1841.06.16 }
+    abschnitt = { von = baden bis = wiener_neustadt eroeffnet = 1841.06.16 }
+    abschnitt = { von = wiener_neustadt bis = gloggnitz eroeffnet = 1842.05.05 }
+    abschnitt = { von = muerzzuschlag bis = bruck_an_der_mur eroeffnet = 1844.10.21 }
+    abschnitt = { von = bruck_an_der_mur bis = graz eroeffnet = 1844.10.21 }
+    abschnitt = { von = graz bis = leibnitz eroeffnet = 1846.06.02 }
+    abschnitt = { von = leibnitz bis = marburg_an_der_drau eroeffnet = 1846.06.02 }
+    abschnitt = { von = marburg_an_der_drau bis = cilli eroeffnet = 1846.06.02 }
+}
+
+strecke wien_bruck {
+    name      = "Wien-Raaber Bahn (Wien–Bruck an der Leitha)"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M7, Schritt b1)"
+    abschnitt = { von = wien bis = bruck_an_der_leitha eroeffnet = 1846.09.12 }
+}
+
+strecke budweis_linz_gmunden {
+    name      = "Pferdeeisenbahn Budweis–Linz–Gmunden"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M7, Schritt b1)"
+    abschnitt = { von = budweis bis = freistadt_oberoesterreich eroeffnet = 1832.08.01 }
+    abschnitt = { von = freistadt_oberoesterreich bis = linz eroeffnet = 1832.08.01 }
+    abschnitt = { von = linz bis = wels eroeffnet = 1836.05.01 }
+    abschnitt = { von = wels bis = gmunden eroeffnet = 1836.05.01 }
+}

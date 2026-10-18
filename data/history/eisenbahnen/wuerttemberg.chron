@@ -1,0 +1,11 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+strecke wuerttembergische_zentralbahn {
+    name      = "Württembergische Zentralbahn"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M7, Schritt b1)"
+    abschnitt = { von = stuttgart bis = esslingen eroeffnet = 1845.12.07 }
+    abschnitt = { von = esslingen bis = goeppingen eroeffnet = 1847.10.11 }
+    abschnitt = { von = stuttgart bis = ludwigsburg eroeffnet = 1846.10.15 }
+    abschnitt = { von = ludwigsburg bis = bietigheim_bissingen eroeffnet = 1847.10.11 }
+    abschnitt = { von = bietigheim_bissingen bis = heilbronn eroeffnet = 1848.07.25 }
+}

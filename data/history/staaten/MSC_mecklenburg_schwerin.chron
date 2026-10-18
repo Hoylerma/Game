@@ -42,12 +42,13 @@ staat MSC {
         hauptstadt     = schwerin
         regierungsform = staendische_monarchie
         konfession     = lutherisch
-        schatz         = 159000
+        schatz         = 0
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 132500
+        hofhaltung     = 80600
         heer           = 6
+        schulden       = 873000
         zollverein     = nein
     }
 }

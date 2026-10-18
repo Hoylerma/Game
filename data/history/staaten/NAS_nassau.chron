@@ -14,12 +14,13 @@ staat NAS {
         hauptstadt     = wiesbaden
         regierungsform = konstitutionelle_monarchie
         konfession     = lutherisch
-        schatz         = 126300
+        schatz         = 0
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 105200
+        hofhaltung     = 56900
         heer           = 6
+        schulden       = 379000
         zollverein     = ja
     }
 }

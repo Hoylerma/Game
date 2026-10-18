@@ -195,13 +195,14 @@ ort horhausen {
 }
 
 ort bad_neuenahr_ahrweiler {
-    name     = "Bad Neuenahr-Ahrweiler"
-    gelaende = mittelgebirge
-    lage     = { 7.1113 50.5432 }
-    flaeche  = 116
-    stadt    = ja
-    kreis    = kr_bad_neuenahr_ahrweiler
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2953391; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Bad Neuenahr-Ahrweiler"
+    gelaende  = mittelgebirge
+    lage      = { 7.1113 50.5432 }
+    flaeche   = 116
+    stadt     = ja
+    kreis     = kr_bad_neuenahr_ahrweiler
+    vorkommen = { weinlage }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2953391; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 9599
@@ -333,13 +334,14 @@ ort kempenich {
 }
 
 ort koblenz {
-    name     = "Koblenz"
-    gelaende = huegelland
-    lage     = { 7.5788 50.3536 }
-    flaeche  = 111
-    stadt    = ja
-    kreis    = kr_koblenz
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2886946; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Koblenz"
+    gelaende  = huegelland
+    lage      = { 7.5788 50.3536 }
+    flaeche   = 111
+    stadt     = ja
+    kreis     = kr_koblenz
+    vorkommen = { weinlage }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2886946; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 29265
@@ -356,13 +358,14 @@ ort koblenz {
 }
 
 ort neuwied {
-    name     = "Neuwied"
-    gelaende = huegelland
-    lage     = { 7.4706 50.4336 }
-    flaeche  = 133
-    stadt    = ja
-    kreis    = kr_koblenz
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2863840; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Neuwied"
+    gelaende  = huegelland
+    lage      = { 7.4706 50.4336 }
+    flaeche   = 133
+    stadt     = ja
+    kreis     = kr_koblenz
+    vorkommen = { erz }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2863840; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 15505
@@ -402,13 +405,14 @@ ort mayen {
 }
 
 ort bendorf {
-    name     = "Bendorf"
-    gelaende = huegelland
-    lage     = { 7.5792 50.4229 }
-    flaeche  = 82
-    stadt    = nein
-    kreis    = kr_koblenz
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2951111; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Bendorf"
+    gelaende  = huegelland
+    lage      = { 7.5792 50.4229 }
+    flaeche   = 82
+    stadt     = nein
+    kreis     = kr_koblenz
+    vorkommen = { erz }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2951111; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 5367
@@ -494,13 +498,14 @@ ort treis_karden {
 }
 
 ort boppard {
-    name     = "Boppard"
-    gelaende = mittelgebirge
-    lage     = { 7.5899 50.2308 }
-    flaeche  = 129
-    stadt    = nein
-    kreis    = kr_boppard
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2946366; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Boppard"
+    gelaende  = mittelgebirge
+    lage      = { 7.5899 50.2308 }
+    flaeche   = 129
+    stadt     = nein
+    kreis     = kr_boppard
+    vorkommen = { weinlage }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2946366; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 6755
@@ -701,13 +706,14 @@ ort buechenbeuren {
 }
 
 ort cochem {
-    name     = "Cochem"
-    gelaende = mittelgebirge
-    lage     = { 7.1638 50.1451 }
-    flaeche  = 128
-    stadt    = ja
-    kreis    = kr_cochem
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2939949; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Cochem"
+    gelaende  = mittelgebirge
+    lage      = { 7.1638 50.1451 }
+    flaeche   = 128
+    stadt     = ja
+    kreis     = kr_cochem
+    vorkommen = { weinlage }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2939949; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 7707

@@ -241,13 +241,14 @@ ort hanstedt {
 }
 
 ort lueneburg {
-    name     = "Lüneburg"
-    gelaende = flachland
-    lage     = { 10.4141 53.2509 }
-    flaeche  = 119
-    stadt    = ja
-    kreis    = kr_lueneburg
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2875115; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Lüneburg"
+    gelaende  = flachland
+    lage      = { 10.4141 53.2509 }
+    flaeche   = 119
+    stadt     = ja
+    kreis     = kr_lueneburg
+    vorkommen = { salz }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2875115; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 8738

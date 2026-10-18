@@ -1,0 +1,30 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+strecke taunusbahn {
+    name      = "Taunus-Eisenbahn"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M7, Schritt b1)"
+    abschnitt = { von = frankfurt_am_main bis = wiesbaden eroeffnet = 1840.04.19 }
+}
+
+strecke frankfurt_offenbach_hanau {
+    name      = "Frankfurt-Offenbacher und Frankfurt-Hanauer Eisenbahn"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M7, Schritt b1)"
+    abschnitt = { von = frankfurt_am_main bis = offenbach eroeffnet = 1848.04.16 }
+    abschnitt = { von = frankfurt_am_main bis = hanau_am_main eroeffnet = 1848.09.10 }
+}
+
+strecke main_neckar {
+    name      = "Main-Neckar-Eisenbahn"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M7, Schritt b1)"
+    abschnitt = { von = frankfurt_am_main bis = darmstadt eroeffnet = 1846.08.01 }
+    abschnitt = { von = darmstadt bis = heppenheim eroeffnet = 1846.08.01 }
+    abschnitt = { von = heppenheim bis = weinheim eroeffnet = 1846.08.01 }
+    abschnitt = { von = weinheim bis = heidelberg eroeffnet = 1846.08.01 }
+    abschnitt = { von = weinheim bis = mannheim eroeffnet = 1846.08.01 }
+}
+
+strecke carlsbahn {
+    name      = "Friedrich-Wilhelms-Nordbahn (Kassel–Karlshafen)"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M7, Schritt b1)"
+    abschnitt = { von = kassel bis = hofgeismar eroeffnet = 1848.03.30 }
+}

@@ -90,7 +90,7 @@ const MARKET_GOOD_FIELDS: PackedStringArray = [
 const KREIS_FIELDS: PackedStringArray = ["id", "name", "location_count", "source"]
 ## Kartenmodi, in denen Orte ohne Daten Alpha 0 haben (bridge-api.md); im Marktmodus (9)
 ## nur Orte ohne Daten in Märkten ohne Orte mit Daten.
-const NO_DATA_ALPHA_MODES: PackedInt32Array = [0, 1, 2, 4, 6, 7, 8, 10]
+const NO_DATA_ALPHA_MODES: PackedInt32Array = [0, 1, 2, 4, 6, 7, 8, 10, 11]
 const CHRONICLE_FIELDS: PackedStringArray = ["date_text", "text", "location_index", "state_index"]
 
 var _failures := PackedStringArray()
@@ -155,6 +155,7 @@ func _run() -> void:
 	_check_map_colors(sim)
 	_check_data_and_kreise(sim)
 	_check_economy(sim, player)
+	_check_railways_1648(sim)
 
 	# Steuerbefehle: wirksam am nächsten Tag; Kontribution über den alten Befehl, Akzise über
 	# set_tax_percent (seit M5).
@@ -274,6 +275,49 @@ func _check_scenario_1848() -> void:
 		and not sim.set_player_state(-1),
 		"Spielerstaat gewechselt (Bayern)",
 		"set_player_state hat den Spieler nicht gewechselt"
+	)
+	_check_railways_1848(sim)
+
+
+## 1648 gibt es die Strecken als Inhalt, aber noch keine Eröffnung (Review M7).
+func _check_railways_1648(sim: SimulationClient) -> void:
+	var access := sim.get_rail_access()
+	var any := false
+	for value in access:
+		any = any or value != 0
+	var legend := LegendData.railway_entries(sim)
+	var detail := str(legend[0].get("detail", "")) if not legend.is_empty() else ""
+	_check(
+		access.size() == sim.get_location_count() and not any and detail.contains("noch keine Eisenbahn"),
+		"Eisenbahnen 1648: kein Bahnhof, Legende „%s“" % detail,
+		"Eisenbahnen 1648: %d Orte, Bahn %s, Legende %s" % [access.size(), str(any), str(legend)]
+	)
+
+
+## Eisenbahnen 1848 (seit M7): Strecken, Stufen je Ort wie die Farben, Legende, Ortsinfo.
+func _check_railways_1848(sim: SimulationClient) -> void:
+	var railways := sim.get_railways()
+	var access := sim.get_rail_access()
+	var counts := [0, 0, 0]
+	for value in access:
+		counts[clampi(value, 0, 2)] += 1
+	var sections: Array = (railways[0] as Dictionary).get("sections", []) if not railways.is_empty() else []
+	_check(
+		access.size() == sim.get_location_count() and counts[2] > 0 and counts[1] > 0
+		and not sections.is_empty() and (sections[0] as Dictionary).has("opened"),
+		"Eisenbahnen 1848: %d Strecken, %d Bahnhöfe, %d Orte mit Bahnfracht" % [
+			railways.size(), counts[2], counts[1]
+		],
+		"Eisenbahnen 1848: %d Strecken, Stufen %s" % [railways.size(), str(counts)]
+	)
+	var legend := LegendData.railway_entries(sim)
+	var leipzig: PackedStringArray = sim.get_location(sim.get_location_index("leipzig")).get(
+		"eisenbahnen", PackedStringArray()
+	)
+	_check(
+		not legend.is_empty() and str(legend[0].get("text", "")) == "Bahnhof" and not leipzig.is_empty(),
+		"Legende Eisenbahnen, Leipzig: %s" % ", ".join(leipzig),
+		"Legende %s, Leipzig %s" % [str(legend), str(leipzig)]
 	)
 
 

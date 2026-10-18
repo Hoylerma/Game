@@ -905,13 +905,14 @@ ort bueckeburg {
 }
 
 ort bad_pyrmont {
-    name     = "Bad Pyrmont"
-    gelaende = huegelland
-    lage     = { 9.2525 51.9859 }
-    flaeche  = 276
-    stadt    = ja
-    kreis    = kr_hameln
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2953379; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Bad Pyrmont"
+    gelaende  = huegelland
+    lage      = { 9.2525 51.9859 }
+    flaeche   = 276
+    stadt     = ja
+    kreis     = kr_hameln
+    vorkommen = { salz }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2953379; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 15627
@@ -950,13 +951,14 @@ ort hessisch_oldendorf {
 }
 
 ort barsinghausen {
-    name     = "Barsinghausen"
-    gelaende = huegelland
-    lage     = { 9.45 52.3 }
-    flaeche  = 183
-    stadt    = nein
-    kreis    = kr_hameln
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2952406; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Barsinghausen"
+    gelaende  = huegelland
+    lage      = { 9.45 52.3 }
+    flaeche   = 183
+    stadt     = nein
+    kreis     = kr_hameln
+    vorkommen = { kohle }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2952406; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 9488

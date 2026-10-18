@@ -148,13 +148,14 @@ ort freisen {
 }
 
 ort neunkirchen {
-    name     = "Neunkirchen"
-    gelaende = huegelland
-    lage     = { 7.1805 49.3445 }
-    flaeche  = 124
-    stadt    = ja
-    kreis    = kr_neunkirchen
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2864435; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Neunkirchen"
+    gelaende  = huegelland
+    lage      = { 7.1805 49.3445 }
+    flaeche   = 124
+    stadt     = ja
+    kreis     = kr_neunkirchen
+    vorkommen = { kohle }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2864435; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 14387
@@ -263,13 +264,14 @@ ort gersheim {
 }
 
 ort saarbruecken {
-    name     = "Saarbrücken"
-    gelaende = huegelland
-    lage     = { 7.0098 49.2326 }
-    flaeche  = 121
-    stadt    = ja
-    kreis    = kr_saarbruecken
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2842647; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Saarbrücken"
+    gelaende  = huegelland
+    lage      = { 7.0098 49.2326 }
+    flaeche   = 121
+    stadt     = ja
+    kreis     = kr_saarbruecken
+    vorkommen = { kohle }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2842647; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 20712
@@ -332,13 +334,14 @@ ort merzig {
 }
 
 ort voelklingen {
-    name     = "Völklingen"
-    gelaende = huegelland
-    lage     = { 6.8587 49.2516 }
-    flaeche  = 97
-    stadt    = ja
-    kreis    = kr_saarbruecken
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2816630; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Völklingen"
+    gelaende  = huegelland
+    lage      = { 6.8587 49.2516 }
+    flaeche   = 97
+    stadt     = ja
+    kreis     = kr_saarbruecken
+    vorkommen = { kohle }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2816630; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 11710

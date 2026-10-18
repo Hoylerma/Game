@@ -287,13 +287,14 @@ ort mettendorf {
 }
 
 ort trier {
-    name     = "Trier"
-    gelaende = huegelland
-    lage     = { 6.6394 49.7557 }
-    flaeche  = 143
-    stadt    = ja
-    kreis    = kr_trier
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2821164; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Trier"
+    gelaende  = huegelland
+    lage      = { 6.6394 49.7557 }
+    flaeche   = 143
+    stadt     = ja
+    kreis     = kr_trier
+    vorkommen = { weinlage }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2821164; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 26488
@@ -515,13 +516,14 @@ ort birkenfeld {
 }
 
 ort bernkastel_kues {
-    name     = "Bernkastel-Kues"
-    gelaende = mittelgebirge
-    lage     = { 7.0766 49.916 }
-    flaeche  = 148
-    stadt    = nein
-    kreis    = kr_idar_oberstein
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2949998; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Bernkastel-Kues"
+    gelaende  = mittelgebirge
+    lage      = { 7.0766 49.916 }
+    flaeche   = 148
+    stadt     = nein
+    kreis     = kr_idar_oberstein
+    vorkommen = { weinlage }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2949998; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 6200

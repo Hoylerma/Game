@@ -563,13 +563,14 @@ ort biberach {
 }
 
 ort offenburg {
-    name     = "Offenburg"
-    gelaende = huegelland
-    lage     = { 7.945 48.4738 }
-    flaeche  = 120
-    stadt    = ja
-    kreis    = kr_offenburg
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2857798; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Offenburg"
+    gelaende  = huegelland
+    lage      = { 7.945 48.4738 }
+    flaeche   = 120
+    stadt     = ja
+    kreis     = kr_offenburg
+    vorkommen = { weinlage }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2857798; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 16478
@@ -1023,13 +1024,14 @@ ort hornberg {
 }
 
 ort freiburg_im_breisgau {
-    name     = "Freiburg im Breisgau"
-    gelaende = mittelgebirge
-    lage     = { 7.8522 47.9959 }
-    flaeche  = 102
-    stadt    = ja
-    kreis    = kr_freiburg_im_breisgau
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2925177; Name Freiburg im Breisgau aus den GeoNames-Alternativnamen (GeoNames: Freiburg); Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Freiburg im Breisgau"
+    gelaende  = mittelgebirge
+    lage      = { 7.8522 47.9959 }
+    flaeche   = 102
+    stadt     = ja
+    kreis     = kr_freiburg_im_breisgau
+    vorkommen = { weinlage }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2925177; Name Freiburg im Breisgau aus den GeoNames-Alternativnamen (GeoNames: Freiburg); Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 22753
@@ -1046,13 +1048,14 @@ ort freiburg_im_breisgau {
 }
 
 ort breisach_am_rhein {
-    name     = "Breisach am Rhein"
-    gelaende = flussaue
-    lage     = { 7.5829 48.0328 }
-    flaeche  = 188
-    stadt    = nein
-    kreis    = kr_freiburg_im_breisgau
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2944800; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Breisach am Rhein"
+    gelaende  = flussaue
+    lage      = { 7.5829 48.0328 }
+    flaeche   = 188
+    stadt     = nein
+    kreis     = kr_freiburg_im_breisgau
+    vorkommen = { weinlage }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2944800; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 20227
@@ -1759,13 +1762,14 @@ ort todtmoos {
 }
 
 ort loerrach {
-    name     = "Lörrach"
-    gelaende = huegelland
-    lage     = { 7.6646 47.615 }
-    flaeche  = 89
-    stadt    = ja
-    kreis    = kr_loerrach
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2875881; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Lörrach"
+    gelaende  = huegelland
+    lage      = { 7.6646 47.615 }
+    flaeche   = 89
+    stadt     = ja
+    kreis     = kr_loerrach
+    vorkommen = { weinlage }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2875881; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 12870
@@ -1782,13 +1786,14 @@ ort loerrach {
 }
 
 ort rheinfelden {
-    name     = "Rheinfelden"
-    gelaende = huegelland
-    lage     = { 7.7871 47.5601 }
-    flaeche  = 45
-    stadt    = ja
-    kreis    = kr_loerrach
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2847639; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Rheinfelden"
+    gelaende  = huegelland
+    lage      = { 7.7871 47.5601 }
+    flaeche   = 45
+    stadt     = ja
+    kreis     = kr_loerrach
+    vorkommen = { salz }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2847639; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 7901
@@ -1828,13 +1833,14 @@ ort schopfheim {
 }
 
 ort muellheim {
-    name     = "Müllheim"
-    gelaende = mittelgebirge
-    lage     = { 7.6303 47.8082 }
-    flaeche  = 153
-    stadt    = nein
-    kreis    = kr_loerrach
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2867770; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Müllheim"
+    gelaende  = mittelgebirge
+    lage      = { 7.6303 47.8082 }
+    flaeche   = 153
+    stadt     = nein
+    kreis     = kr_loerrach
+    vorkommen = { weinlage }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2867770; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 10130

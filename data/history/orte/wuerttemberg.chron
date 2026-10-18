@@ -173,13 +173,14 @@ ort krautheim {
 }
 
 ort waldenburg {
-    name     = "Waldenburg"
-    gelaende = huegelland
-    lage     = { 9.6399 49.1847 }
-    flaeche  = 120
-    stadt    = nein
-    kreis    = kr_oehringen
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2815075; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Waldenburg"
+    gelaende  = huegelland
+    lage      = { 9.6399 49.1847 }
+    flaeche   = 120
+    stadt     = nein
+    kreis     = kr_oehringen
+    vorkommen = { kohle }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2815075; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 10084
@@ -196,13 +197,14 @@ ort waldenburg {
 }
 
 ort heilbronn {
-    name     = "Heilbronn"
-    gelaende = huegelland
-    lage     = { 9.2205 49.1399 }
-    flaeche  = 160
-    stadt    = ja
-    kreis    = kr_heilbronn
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2907669; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Heilbronn"
+    gelaende  = huegelland
+    lage      = { 9.2205 49.1399 }
+    flaeche   = 160
+    stadt     = ja
+    kreis     = kr_heilbronn
+    vorkommen = { weinlage }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2907669; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 25445
@@ -242,13 +244,14 @@ ort eppingen {
 }
 
 ort bad_rappenau {
-    name     = "Bad Rappenau"
-    gelaende = huegelland
-    lage     = { 9.1018 49.2385 }
-    flaeche  = 156
-    stadt    = ja
-    kreis    = kr_heilbronn
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2953374; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Bad Rappenau"
+    gelaende  = huegelland
+    lage      = { 9.1018 49.2385 }
+    flaeche   = 156
+    stadt     = ja
+    kreis     = kr_heilbronn
+    vorkommen = { salz }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2953374; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 15874
@@ -357,13 +360,14 @@ ort zaberfeld {
 }
 
 ort schwaebisch_hall {
-    name     = "Schwäbisch Hall"
-    gelaende = huegelland
-    lage     = { 9.7391 49.1113 }
-    flaeche  = 165
-    stadt    = ja
-    kreis    = kr_schwaebisch_hall
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2835481; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Schwäbisch Hall"
+    gelaende  = huegelland
+    lage      = { 9.7391 49.1113 }
+    flaeche   = 165
+    stadt     = ja
+    kreis     = kr_schwaebisch_hall
+    vorkommen = { salz }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2835481; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 18493
@@ -633,13 +637,14 @@ ort leonberg {
 }
 
 ort bietigheim_bissingen {
-    name     = "Bietigheim-Bissingen"
-    gelaende = huegelland
-    lage     = { 9.1175 48.9441 }
-    flaeche  = 121
-    stadt    = ja
-    kreis    = kr_ludwigsburg
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2949012; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Bietigheim-Bissingen"
+    gelaende  = huegelland
+    lage      = { 9.1175 48.9441 }
+    flaeche   = 121
+    stadt     = ja
+    kreis     = kr_ludwigsburg
+    vorkommen = { weinlage }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2949012; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 15283
@@ -748,13 +753,14 @@ ort weissach {
 }
 
 ort aalen {
-    name     = "Aalen"
-    gelaende = mittelgebirge
-    lage     = { 10.0933 48.8378 }
-    flaeche  = 185
-    stadt    = ja
-    kreis    = kr_aalen
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2959927; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Aalen"
+    gelaende  = mittelgebirge
+    lage      = { 10.0933 48.8378 }
+    flaeche   = 185
+    stadt     = ja
+    kreis     = kr_aalen
+    vorkommen = { erz }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2959927; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 19735
@@ -1254,13 +1260,14 @@ ort spraitbach {
 }
 
 ort stuttgart {
-    name     = "Stuttgart"
-    gelaende = huegelland
-    lage     = { 9.177 48.7823 }
-    flaeche  = 127
-    stadt    = ja
-    kreis    = kr_stuttgart
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2825297; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Stuttgart"
+    gelaende  = huegelland
+    lage      = { 9.177 48.7823 }
+    flaeche   = 127
+    stadt     = ja
+    kreis     = kr_stuttgart
+    vorkommen = { weinlage }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2825297; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 58669
@@ -1277,13 +1284,14 @@ ort stuttgart {
 }
 
 ort esslingen {
-    name     = "Esslingen"
-    gelaende = huegelland
-    lage     = { 9.3047 48.7396 }
-    flaeche  = 127
-    stadt    = ja
-    kreis    = kr_stuttgart
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2928751; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Esslingen"
+    gelaende  = huegelland
+    lage      = { 9.3047 48.7396 }
+    flaeche   = 127
+    stadt     = ja
+    kreis     = kr_stuttgart
+    vorkommen = { weinlage }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2928751; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 19950
@@ -2149,13 +2157,14 @@ ort horb_am_neckar {
 }
 
 ort sulz_am_neckar {
-    name     = "Sulz am Neckar"
-    gelaende = mittelgebirge
-    lage     = { 8.6331 48.3624 }
-    flaeche  = 113
-    stadt    = nein
-    kreis    = kr_balingen
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2824855; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Sulz am Neckar"
+    gelaende  = mittelgebirge
+    lage      = { 8.6331 48.3624 }
+    flaeche   = 113
+    stadt     = nein
+    kreis     = kr_balingen
+    vorkommen = { salz }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2824855; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 7597

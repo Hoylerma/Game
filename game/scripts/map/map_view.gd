@@ -46,6 +46,8 @@ var _mouse_in_window := true
 var _location_diameter := 1.0
 var _detail_size := -1.0
 var _kreis_mode := false
+## Eisenbahnen über der Karte (seit M7), nur im Kartenmodus „Eisenbahnen“ sichtbar.
+var _railways: RailwayLayer = null
 ## Maßstab des Rahmens (1 bei 1024 Pixeln Kartenbreite).
 var _frame_unit := 1.0
 
@@ -92,6 +94,12 @@ func setup(map: MapData) -> void:
 	_material.set_shader_parameter(&"selected_index", -1)
 	_material.set_shader_parameter(&"hovered_index", -1)
 	_sprite.material = _material
+	if _railways == null:
+		_railways = RailwayLayer.new()
+		_railways.name = "Railways"
+		_railways.visible = false
+		add_child(_railways)
+		move_child(_railways, _sprite.get_index() + 1)
 	_detail_size = -1.0
 	_update_detail()
 	queue_redraw()
@@ -171,6 +179,34 @@ func set_location_info(owners: PackedInt32Array, kreise: PackedInt32Array) -> vo
 		bytes[offset + 2] = kreis & 0xFF
 		bytes[offset + 3] = (kreis >> 8) & 0xFF
 	_info_texture.update(Image.create_from_data(lut.x, lut.y, false, Image.FORMAT_RGBA8, bytes))
+
+
+## Eisenbahnabschnitte als Paare von Simulationsindizes (seit M7); open je Abschnitt.
+func set_railways(sections: PackedInt32Array, open: Array[bool]) -> void:
+	if _railways == null:
+		return
+	var open_points := PackedVector2Array()
+	var planned_points := PackedVector2Array()
+	for i in range(0, sections.size() - 1, 2):
+		var a := location_center(sections[i])
+		var b := location_center(sections[i + 1])
+		if a.x < 0.0 or b.x < 0.0:
+			continue
+		# Gepackte Arrays sind Werttypen: getrennt anhängen statt über eine Variable.
+		if open[i / 2]:
+			open_points.append_array([a, b])
+		else:
+			planned_points.append_array([a, b])
+	_railways.set_sections(open_points, planned_points, _location_diameter)
+
+
+func set_railways_visible(enabled: bool) -> void:
+	if _railways != null:
+		_railways.visible = enabled
+
+
+func railway_layer() -> RailwayLayer:
+	return _railways
 
 
 ## Im Kartenmodus „Kreise“ bleiben Kreisgrenzen auch beim Herauszoomen sichtbar.

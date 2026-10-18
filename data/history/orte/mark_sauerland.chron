@@ -34,13 +34,14 @@ ort hamm {
 }
 
 ort unna {
-    name     = "Unna"
-    gelaende = huegelland
-    lage     = { 7.6897 51.538 }
-    flaeche  = 124
-    stadt    = ja
-    kreis    = kr_hamm
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2820087; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Unna"
+    gelaende  = huegelland
+    lage      = { 7.6897 51.538 }
+    flaeche   = 124
+    stadt     = ja
+    kreis     = kr_hamm
+    vorkommen = { salz }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2820087; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 12635
@@ -126,13 +127,14 @@ ort bergkamen {
 }
 
 ort werl {
-    name     = "Werl"
-    gelaende = boerde
-    lage     = { 7.914 51.5549 }
-    flaeche  = 159
-    stadt    = ja
-    kreis    = kr_hamm
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2810878; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Werl"
+    gelaende  = boerde
+    lage      = { 7.914 51.5549 }
+    flaeche   = 159
+    stadt     = ja
+    kreis     = kr_hamm
+    vorkommen = { salz }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2810878; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 15117
@@ -287,13 +289,14 @@ ort warstein {
 }
 
 ort brilon {
-    name     = "Brilon"
-    gelaende = mittelgebirge
-    lage     = { 8.5715 51.3946 }
-    flaeche  = 200
-    stadt    = ja
-    kreis    = kr_lippstadt
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2944079; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Brilon"
+    gelaende  = mittelgebirge
+    lage      = { 8.5715 51.3946 }
+    flaeche   = 200
+    stadt     = ja
+    kreis     = kr_lippstadt
+    vorkommen = { erz }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2944079; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 12030
@@ -425,13 +428,14 @@ ort ruethen {
 }
 
 ort dortmund {
-    name     = "Dortmund"
-    gelaende = flachland
-    lage     = { 7.466 51.5149 }
-    flaeche  = 129
-    stadt    = ja
-    kreis    = kr_dortmund
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2935517; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Dortmund"
+    gelaende  = flachland
+    lage      = { 7.466 51.5149 }
+    flaeche   = 129
+    stadt     = ja
+    kreis     = kr_dortmund
+    vorkommen = { kohle }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2935517; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 16464
@@ -448,13 +452,14 @@ ort dortmund {
 }
 
 ort bochum {
-    name     = "Bochum"
-    gelaende = flachland
-    lage     = { 7.2165 51.4817 }
-    flaeche  = 87
-    stadt    = ja
-    kreis    = kr_dortmund
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2947416; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Bochum"
+    gelaende  = flachland
+    lage      = { 7.2165 51.4817 }
+    flaeche   = 87
+    stadt     = ja
+    kreis     = kr_dortmund
+    vorkommen = { kohle }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2947416; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 10034
@@ -471,13 +476,14 @@ ort bochum {
 }
 
 ort herne {
-    name     = "Herne"
-    gelaende = flachland
-    lage     = { 7.2257 51.5388 }
-    flaeche  = 65
-    stadt    = ja
-    kreis    = kr_dortmund
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2905891; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Herne"
+    gelaende  = flachland
+    lage      = { 7.2257 51.5388 }
+    flaeche   = 65
+    stadt     = ja
+    kreis     = kr_dortmund
+    vorkommen = { kohle }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2905891; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 5261
@@ -517,13 +523,14 @@ ort hagen {
 }
 
 ort witten {
-    name     = "Witten"
-    gelaende = huegelland
-    lage     = { 7.3526 51.4436 }
-    flaeche  = 132
-    stadt    = ja
-    kreis    = kr_dortmund
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2807363; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Witten"
+    gelaende  = huegelland
+    lage      = { 7.3526 51.4436 }
+    flaeche   = 132
+    stadt     = ja
+    kreis     = kr_dortmund
+    vorkommen = { kohle }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2807363; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 11638
@@ -563,13 +570,14 @@ ort schwelm {
 }
 
 ort hattingen {
-    name     = "Hattingen"
-    gelaende = huegelland
-    lage     = { 7.1856 51.3989 }
-    flaeche  = 144
-    stadt    = ja
-    kreis    = kr_dortmund
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2909230; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Hattingen"
+    gelaende  = huegelland
+    lage      = { 7.1856 51.3989 }
+    flaeche   = 144
+    stadt     = ja
+    kreis     = kr_dortmund
+    vorkommen = { kohle }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2909230; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 13175
@@ -1138,13 +1146,14 @@ ort hallenberg {
 }
 
 ort siegen {
-    name     = "Siegen"
-    gelaende = huegelland
-    lage     = { 8.0243 50.8748 }
-    flaeche  = 121
-    stadt    = ja
-    kreis    = kr_siegen
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2832495; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Siegen"
+    gelaende  = huegelland
+    lage      = { 8.0243 50.8748 }
+    flaeche   = 121
+    stadt     = ja
+    kreis     = kr_siegen
+    vorkommen = { erz }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2832495; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 13001
@@ -1207,13 +1216,14 @@ ort kreuztal {
 }
 
 ort wilnsdorf {
-    name     = "Wilnsdorf"
-    gelaende = huegelland
-    lage     = { 8.1 50.8167 }
-    flaeche  = 218
-    stadt    = ja
-    kreis    = kr_siegen
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2808461; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Wilnsdorf"
+    gelaende  = huegelland
+    lage      = { 8.1 50.8167 }
+    flaeche   = 218
+    stadt     = ja
+    kreis     = kr_siegen
+    vorkommen = { erz }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2808461; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 14949

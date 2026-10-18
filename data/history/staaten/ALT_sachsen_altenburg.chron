@@ -42,12 +42,13 @@ staat ALT {
         hauptstadt     = altenburg
         regierungsform = konstitutionelle_monarchie
         konfession     = lutherisch
-        schatz         = 39300
+        schatz         = 0
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 32800
+        hofhaltung     = 19300
         heer           = 6
+        schulden       = 129000
         zollverein     = ja
     }
 

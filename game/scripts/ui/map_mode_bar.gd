@@ -1,14 +1,16 @@
 class_name MapModeBar
 extends PanelContainer
-## Leiste der Kartenmodi (Tasten Q W E R T Z U I O P Ü). Die Knöpfe zeigen Kurznamen; Taste und
-## Erklärung stehen im Tooltip. Seit M5 schmalere Knöpfe ohne Titel „Karte“, seit M7 mit elf
+## Leiste der Kartenmodi (Tasten Q W E R T Z U I O P Ü +). Die Knöpfe zeigen Kurznamen; Taste und
+## Erklärung stehen im Tooltip. Seit M5 schmalere Knöpfe ohne Titel „Karte“, seit M7 mit zwölf
 ## Modi noch schmaler, damit die Leiste bei 1.600 Pixeln Fensterbreite zwischen die Spalten passt.
 
 ## Kartenmodus gewählt (MapModes).
 signal mode_selected(mode: int)
 
 ## Innenabstand links und rechts je Knopf (Theme: 10).
-const BUTTON_MARGIN := 4.0
+const BUTTON_MARGIN := 3.0
+## Abstand zwischen den Knöpfen (seit M7 mit zwölf Modi).
+const BUTTON_SEPARATION := 3
 const BUTTON_STYLES: Array[StringName] = [
 	&"normal", &"hover", &"pressed", &"hover_pressed", &"disabled"
 ]
@@ -21,6 +23,7 @@ var _buttons: Array[Button] = []
 func _ready() -> void:
 	var group := ButtonGroup.new()
 	group.allow_unpress = false
+	_row.add_theme_constant_override(&"separation", BUTTON_SEPARATION)
 	for mode in MapModes.COUNT:
 		var button := Button.new()
 		button.text = MapModes.SHORT_NAMES[mode]

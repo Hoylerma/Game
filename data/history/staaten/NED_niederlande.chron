@@ -14,12 +14,13 @@ staat NED {
         hauptstadt     = maestricht
         regierungsform = konstitutionelle_monarchie
         konfession     = reformiert
-        schatz         = 63000
+        schatz         = 0
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 52500
+        hofhaltung     = 9500
         heer           = 6
+        schulden       = 189000
         zollverein     = nein
     }
 }

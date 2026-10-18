@@ -12,14 +12,23 @@
 #include "uhrwerk/world.hpp"
 
 #include <array>
+#include <optional>
 #include <vector>
 
 namespace uhrwerk {
 
-/// Nachbarmarkt mit Frachtaufschlag (Anteil am Preis).
+/// Nachbarmarkt mit Frachtaufschlag (Anteil am Preis). Ab rail_from (seit M7) sind beide Märkte über
+/// eröffnete Eisenbahnabschnitte verbunden, und es gilt rail_freight; ohne Verbindung bleibt rail_from leer.
 struct MarketLink {
     Index market = kNone;
     Fixed freight;
+    Fixed rail_freight;
+    std::optional<Date> rail_from;
+
+    /// Fracht am Tag date.
+    Fixed freight_on(const Date& date) const {
+        return rail_from && date >= *rail_from ? rail_freight : freight;
+    }
 };
 
 /// Abgeleitete Wirtschaftsdaten aus dem unveränderlichen Inhalt (kein Zustand, nicht in der Prüfsumme).

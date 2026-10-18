@@ -55,6 +55,8 @@ var _max_height := 100000.0
 @onready var _admin: Label = %Admin
 @onready var _federal_caption: Label = %FederalCaption
 @onready var _federal: Label = %Federal
+@onready var _rail_caption: Label = %RailCaption
+@onready var _rail: Label = %Rail
 @onready var _no_data_note: Label = %NoDataNote
 @onready var _terrain: Label = %Terrain
 @onready var _population: Label = %Population
@@ -177,6 +179,11 @@ func show_location(location: Dictionary, owner_color: Color) -> void:
 	_federal.text = "Bundesgebiet" if federal else "außerhalb"
 	_federal_caption.visible = show_federation and has_data
 	_federal.visible = show_federation and has_data
+	# Eisenbahn (seit M7): Strecken mit eröffnetem Abschnitt an diesem Ort, mit Jahr.
+	var lines: PackedStringArray = location.get("eisenbahnen", PackedStringArray())
+	_rail.text = ", ".join(lines)
+	_rail_caption.visible = not lines.is_empty()
+	_rail.visible = not lines.is_empty()
 	_terrain.text = GermanFormat.humanize(str(location.get("terrain", "")))
 	_no_data_note.visible = not has_data
 	for node in _data_only:

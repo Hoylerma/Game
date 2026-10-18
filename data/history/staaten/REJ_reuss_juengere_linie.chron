@@ -14,12 +14,13 @@ staat REJ {
         hauptstadt     = schleiz
         regierungsform = absolute_monarchie
         konfession     = lutherisch
-        schatz         = 24000
+        schatz         = 0
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 20000
+        hofhaltung     = 9700
         heer           = 6
+        schulden       = 65000
         zollverein     = ja
     }
 }

@@ -91,6 +91,81 @@ bool business_allowed(const World& world, const Location& location, const Busine
     return true;
 }
 
+namespace {
+
+/// Eisenbahnen (seit M7, wirtschaft.md Abschnitt 4.1): Die Abschnitte verbinden Orte, in der Reihenfolge
+/// ihrer Eröffnung, zu Netzen. Sobald ein Netz Bahnhöfe in zwei Nachbarmärkten hat, gilt zwischen ihnen ab
+/// diesem Tag die Bahnfracht. Ein Markt ist kein Drehkreuz: Zwei Strecken, die im selben Markt enden, sind
+/// erst verbunden, wenn ein Abschnitt ihre Bahnhöfe verbindet. Die Netze wachsen nur, daher genügt ein
+/// Durchlauf (Union-Find über Orte, je Netz die Menge seiner Märkte).
+void connect_by_rail(const World& world, EconomyTopology& t) {
+    struct Edge {
+        Date opened;
+        std::size_t a = 0;
+        std::size_t b = 0;
+    };
+    std::vector<Edge> edges;
+    for (const Railway& railway : world.railways) {
+        for (const RailSection& section : railway.sections) {
+            if (in_range(world.locations, section.from) && in_range(world.locations, section.to)) {
+                edges.push_back(Edge{section.opened, at(section.from), at(section.to)});
+            }
+        }
+    }
+    std::stable_sort(edges.begin(), edges.end(),
+                     [](const Edge& x, const Edge& y) { return x.opened < y.opened; });
+    const std::size_t markets = world.markets.size();
+    std::vector<std::size_t> parent(world.locations.size());
+    for (std::size_t l = 0; l < parent.size(); ++l) {
+        parent[l] = l;
+    }
+    std::vector<std::vector<bool>> markets_of(
+        world.locations.size()); // je Wurzel, angelegt beim ersten Abschnitt
+    const auto find = [&](std::size_t l) {
+        while (parent[l] != l) {
+            parent[l] = parent[parent[l]];
+            l = parent[l];
+        }
+        return l;
+    };
+    const auto touch = [&](std::size_t l) {
+        if (markets_of[l].empty()) {
+            markets_of[l].assign(markets, false);
+            const Index m = world.locations[l].market;
+            if (in_range(world.markets, m)) {
+                markets_of[l][at(m)] = true;
+            }
+        }
+    };
+    for (const Edge& edge : edges) {
+        const std::size_t ra = find(edge.a);
+        const std::size_t rb = find(edge.b);
+        if (ra == rb) {
+            continue;
+        }
+        touch(ra);
+        touch(rb);
+        parent[ra] = rb;
+        std::vector<bool>& merged = markets_of[rb];
+        for (std::size_t m = 0; m < markets; ++m) {
+            merged[m] = merged[m] || markets_of[ra][m];
+        }
+        markets_of[ra] = {};
+        for (std::size_t m = 0; m < t.neighbors.size() && m < markets; ++m) {
+            if (!merged[m]) {
+                continue;
+            }
+            for (MarketLink& link : t.neighbors[m]) {
+                if (!link.rail_from && in_range(world.markets, link.market) && merged[at(link.market)]) {
+                    link.rail_from = edge.opened;
+                }
+            }
+        }
+    }
+}
+
+} // namespace
+
 EconomyTopology build_economy_topology(const World& world) {
     EconomyTopology t;
     const std::size_t markets = world.markets.size();
@@ -150,9 +225,14 @@ EconomyTopology build_economy_topology(const World& world) {
             near.resize(max_neighbors);
         }
         for (const auto& [d, n] : near) {
-            t.neighbors[m].push_back(MarketLink{n, rules.freight_land * d / Fixed::from_int(100)});
+            // Reihenfolge wie in wirtschaft.md 4.1: erst mit dem Abstand malnehmen, dann teilen.
+            t.neighbors[m].push_back(MarketLink{n,
+                                                rules.freight_land * d / Fixed::from_int(100),
+                                                rules.freight_rail * d / Fixed::from_int(100),
+                                                {}});
         }
     }
+    connect_by_rail(world, t);
 
     t.business_by_profession.assign(world.professions.size(), {});
     for (std::size_t b = 0; b < world.businesses.size(); ++b) {
@@ -486,18 +566,19 @@ void update_markets(World& world, const EconomyTopology& topology,
             }
             const MarketState& sa = world.market_states[a];
             const MarketState& sb = world.market_states[b];
+            const Fixed freight = link.freight_on(world.date); // Bahnfracht ab der Verbindung (seit M7)
             for (std::size_t g = 0; g < goods; ++g) {
                 const Fixed pa = sa.price[g];
                 const Fixed pb = sb.price[g];
-                if (pb > pa * (one + link.freight)) {
-                    const Fixed gap = pb - pa * (one + link.freight);
+                if (pb > pa * (one + freight)) {
+                    const Fixed gap = pb - pa * (one + freight);
                     const Fixed amount =
                         trade_share(rules.trade_rate, gap, pb) * Fixed::min(sa.supply[g], sb.demand[g]);
                     if (amount > Fixed::zero()) {
                         flows.push_back(Flow{static_cast<Index>(a), static_cast<Index>(b), g, amount});
                     }
-                } else if (pa > pb * (one + link.freight)) {
-                    const Fixed gap = pa - pb * (one + link.freight);
+                } else if (pa > pb * (one + freight)) {
+                    const Fixed gap = pa - pb * (one + freight);
                     const Fixed amount =
                         trade_share(rules.trade_rate, gap, pa) * Fixed::min(sb.supply[g], sa.demand[g]);
                     if (amount > Fixed::zero()) {

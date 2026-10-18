@@ -4,6 +4,7 @@
 #include "uhrwerk/loader.hpp"
 #include "uhrwerk/population.hpp"
 
+#include <algorithm>
 #include <cstdint>
 #include <cstdlib>
 #include <doctest/doctest.h>
@@ -1100,6 +1101,202 @@ TEST_CASE("Lader: Verwaltung, Bundesgebiet und Zollverein") {
     CHECK(dessau2.federal);
 }
 
+constexpr const char* kRailFile = "history/eisenbahnen/test.chron";
+
+void write_railway(const TempDir& dir) {
+    testhilfen::write_file(dir / kRailFile,
+                           "strecke leipzig_dresden {\n"
+                           "    name      = \"Leipzig-Dresdner Eisenbahn\"\n"
+                           "    quelle    = \"Testdaten\"\n"
+                           "    abschnitt = { von = leipzig bis = dresden eroeffnet = 1839.04.07 }\n"
+                           "    abschnitt = { von = dresden bis = zerbst eroeffnet = 1840.01.01 }\n"
+                           "}\n");
+}
+
+/// Industrie ab 1649 (seit M7): ein Gut, ein Beruf und ein Betrieb mit 'seit'.
+void add_later_industry(const TempDir& dir) {
+    const auto append = [&](const char* file, std::string_view text) {
+        testhilfen::write_file(dir / file, testhilfen::read_file(dir / file) + std::string(text));
+    };
+    append("common/gueter.chron", "\ngut kohle {\n    name       = \"Kohle\"\n    farbe      = { 40 40 40 }\n"
+                                  "    basispreis = 2\n    seit       = 1649.01.01\n}\n");
+    append("common/berufe.chron",
+           "\nberuf fabrikarbeiter {\n    name            = \"Fabrikarbeiter\"\n"
+           "    schicht         = unten\n    steuerpflichtig = ja\n"
+           "    anteil_stadt    = 0.10\n    anteil_land     = 0.05\n    agrar           = nein\n"
+           "    bildung         = 0.1\n    seit            = 1649.01.01\n"
+           "    anteil_aus      = handwerker\n}\n");
+    append("common/betriebe.chron",
+           "\nbetrieb zeche {\n    name      = \"Zeche\"\n    beruf     = fabrikarbeiter\n"
+           "    erzeugt   = { kohle = 5 }\n    agrar     = nein\n    vorkommen = kohle\n"
+           "    gewicht   = 1\n    seit      = 1649.01.01\n}\n");
+}
+
+TEST_CASE("Lader: Inhalt ab einem Datum (seit)") {
+    TempDir dir(true);
+    add_later_industry(dir);
+    SUBCASE("vor dem Datum gibt es Gut, Beruf und Betrieb nicht") {
+        TempDir plain(true);
+        const LoadResult base = load(plain);
+        REQUIRE(base.ok());
+        const LoadResult r = load(dir);
+        INFO(issues_text(r));
+        REQUIRE(r.ok());
+        CHECK(r.issues.empty());
+        const World& w = *r.world;
+        CHECK(w.goods.size() == base.world->goods.size());
+        CHECK(w.professions.size() == base.world->professions.size());
+        CHECK(w.businesses.size() == base.world->businesses.size());
+        CHECK(w.pops.size() == base.world->pops.size());
+        for (std::size_t i = 0; i < w.professions.size(); ++i) {
+            CHECK(w.professions[i].share_city == base.world->professions[i].share_city);
+        }
+        // Das Vorkommen bleibt bekannt, damit Orte es tragen dürfen.
+        CHECK(std::find(w.deposits.begin(), w.deposits.end(), "kohle") != w.deposits.end());
+    }
+    SUBCASE("ab dem Datum mit Anteilen aus dem Handwerk") {
+        const LoadResult r = load(dir, "jahresbeginn_1650");
+        INFO(issues_text(r));
+        REQUIRE(r.ok());
+        const World& w = *r.world;
+        REQUIRE(w.find_profession("fabrikarbeiter") != uhrwerk::kNone);
+        const uhrwerk::Profession& craft =
+            w.professions[static_cast<std::size_t>(w.find_profession("handwerker"))];
+        CHECK(craft.share_city == fx("0.50") - fx("0.10"));
+        CHECK(craft.share_rural == fx("0.15") - fx("0.05"));
+        CHECK(std::any_of(w.goods.begin(), w.goods.end(),
+                          [](const uhrwerk::Good& g) { return g.id == "kohle"; }));
+        CHECK(std::any_of(w.businesses.begin(), w.businesses.end(),
+                          [](const uhrwerk::BusinessType& b) { return b.id == "zeche"; }));
+    }
+    SUBCASE("ein geltender Betrieb kann kein späteres Gut verwenden") {
+        replace_in_file(dir / "common/betriebe.chron", "    seit      = 1649.01.01\n", "");
+        expect_error(load(dir),
+                     "Gut 'kohle' gibt es erst seit 1649.01.01 ('seit'); betrieb zeche gilt schon vorher",
+                     "common/betriebe.chron");
+    }
+    SUBCASE("ungültiges Datum") {
+        replace_in_file(dir / "common/gueter.chron", "seit       = 1649.01.01", "seit       = bald");
+        expect_error(load(dir), "ungültiges Datum 'bald' für 'seit' in gut kohle", "common/gueter.chron");
+    }
+    SUBCASE("zu kleine Anteile für anteil_aus") {
+        replace_in_file(dir / "common/berufe.chron", "anteil_aus      = handwerker",
+                        "anteil_aus      = kaufleute");
+        expect_error(load(dir, "jahresbeginn_1650"),
+                     "beruf kaufleute hat zu kleine Anteile für 'anteil_aus' von beruf fabrikarbeiter",
+                     "common/berufe.chron");
+    }
+    // Review M7: Eine Kette zieht die angegebenen Anteile ab, unabhängig von der Reihenfolge der Datei.
+    const std::string foreman =
+        "\nberuf vorarbeiter {\n    name            = \"Vorarbeiter\"\n"
+        "    schicht         = unten\n    steuerpflichtig = ja\n"
+        "    anteil_stadt    = 0.02\n    anteil_land     = 0.01\n    agrar           = nein\n"
+        "    bildung         = 0.2\n    seit            = 1649.01.01\n"
+        "    anteil_aus      = fabrikarbeiter\n}\n";
+    SUBCASE("Kette in anteil_aus, der abgebende Beruf steht später") {
+        replace_in_file(dir / "common/berufe.chron", "\nberuf fabrikarbeiter {",
+                        foreman + "\nberuf fabrikarbeiter {");
+        const LoadResult r = load(dir, "jahresbeginn_1650");
+        INFO(issues_text(r));
+        REQUIRE(r.ok());
+        const World& w = *r.world;
+        const auto share = [&](const char* id) {
+            return w.professions[static_cast<std::size_t>(w.find_profession(id))].share_city;
+        };
+        CHECK(share("vorarbeiter") == fx("0.02"));
+        CHECK(share("fabrikarbeiter") == fx("0.10") - fx("0.02"));
+        CHECK(share("handwerker") == fx("0.50") - fx("0.10"));
+    }
+    SUBCASE("Kreis in anteil_aus") {
+        replace_in_file(dir / "common/berufe.chron", "anteil_aus      = handwerker",
+                        "anteil_aus      = vorarbeiter");
+        testhilfen::write_file(dir / "common/berufe.chron",
+                               testhilfen::read_file(dir / "common/berufe.chron") + foreman);
+        expect_error(load(dir, "jahresbeginn_1650"), "Kreis in 'anteil_aus' über beruf",
+                     "common/berufe.chron");
+    }
+    SUBCASE("spätere Definitionen: Kennung schon vergeben") {
+        testhilfen::write_file(dir / "common/gueter.chron",
+                               testhilfen::read_file(dir / "common/gueter.chron") +
+                                   "\ngut salz {\n    name       = \"Salz\"\n    farbe      = { 1 2 3 }\n"
+                                   "    basispreis = 2\n    seit       = 1700.01.01\n}\n");
+        expect_error(load(dir), "doppelte Kennung 'salz' für Gut", "common/gueter.chron");
+    }
+    SUBCASE("spätere Definitionen: Kennung doppelt") {
+        testhilfen::write_file(
+            dir / "common/betriebe.chron",
+            testhilfen::read_file(dir / "common/betriebe.chron") +
+                "\nbetrieb zeche {\n    name      = \"Zeche\"\n    beruf     = fabrikarbeiter\n"
+                "    erzeugt   = { kohle = 4 }\n    agrar     = nein\n    gewicht   = 1\n"
+                "    seit      = 1700.01.01\n}\n");
+        expect_error(load(dir), "doppelte Kennung 'zeche' für Betrieb", "common/betriebe.chron");
+    }
+    SUBCASE("spätere Definitionen: unbekannter Beruf in anteil_aus") {
+        replace_in_file(dir / "common/berufe.chron", "anteil_aus      = handwerker",
+                        "anteil_aus      = gibtsnicht");
+        expect_error(load(dir),
+                     "unbekannter oder eigener Beruf 'gibtsnicht' für 'anteil_aus' in beruf fabrikarbeiter",
+                     "common/berufe.chron");
+    }
+}
+
+TEST_CASE("Lader: Eisenbahnen") {
+    TempDir dir(true);
+    write_railway(dir);
+    SUBCASE("gelesen") {
+        const LoadResult r = load(dir);
+        INFO(issues_text(r));
+        REQUIRE(r.ok());
+        CHECK(r.issues.empty());
+        const World& w = *r.world;
+        REQUIRE(w.railways.size() == 1);
+        const uhrwerk::Railway& line = w.railways[0];
+        CHECK(line.id == "leipzig_dresden");
+        CHECK(line.name == "Leipzig-Dresdner Eisenbahn");
+        REQUIRE(line.sections.size() == 2);
+        CHECK(line.sections[0].from == w.find_location("leipzig"));
+        CHECK(line.sections[0].to == w.find_location("dresden"));
+        CHECK(line.sections[0].opened == Date{1839, 4, 7});
+        CHECK(line.sections[1].to == w.find_location("zerbst"));
+    }
+    SUBCASE("ohne Ordner keine Strecken") {
+        std::filesystem::remove_all(dir / "history/eisenbahnen");
+        const LoadResult r = load(dir);
+        REQUIRE(r.ok());
+        CHECK(r.world->railways.empty());
+    }
+    SUBCASE("unbekannter Ort") {
+        replace_in_file(dir / kRailFile, "bis = zerbst", "bis = meissen");
+        expect_error(load(dir), "unbekannter Ort 'meissen' in strecke leipzig_dresden", kRailFile, 5);
+    }
+    SUBCASE("gleicher Anfang und gleiches Ende") {
+        replace_in_file(dir / kRailFile, "von = dresden bis = zerbst", "von = dresden bis = dresden");
+        expect_error(load(dir), "Abschnitt der strecke leipzig_dresden beginnt und endet in dresden",
+                     kRailFile, 5);
+    }
+    SUBCASE("fehlendes Datum") {
+        replace_in_file(dir / kRailFile, " eroeffnet = 1840.01.01", "");
+        expect_error(load(dir), "Pflichtfeld 'eroeffnet' fehlt in abschnitt der strecke leipzig_dresden",
+                     kRailFile);
+    }
+    SUBCASE("ohne Abschnitt") {
+        testhilfen::write_file(dir / kRailFile,
+                               "strecke leer {\n    name = \"Leer\"\n    quelle = \"Test\"\n}\n");
+        expect_error(load(dir), "strecke leer hat keinen Abschnitt", kRailFile, 1);
+    }
+    SUBCASE("doppelte Kennung") {
+        const std::string text = testhilfen::read_file(dir / kRailFile);
+        testhilfen::write_file(dir / kRailFile, text + "\n" + text);
+        expect_error(load(dir), "doppelte Kennung 'leipzig_dresden' für Strecke", kRailFile, 8);
+    }
+    SUBCASE("Bahnfracht teurer als die Landfracht") {
+        replace_in_file(dir / "common/regeln.chron", "bahnfracht                = 0.04",
+                        "bahnfracht                = 0.2");
+        expect_error(load(dir), "'bahnfracht' (0.2) ist größer als 'handel_fracht' (0.12)",
+                     "common/regeln.chron");
+    }
+}
+
 TEST_CASE("Lader: Fehler bei Verwaltungseinheiten") {
     TempDir dir(true);
     write_admin_units(dir);
@@ -1263,6 +1460,28 @@ TEST_CASE("Lader: spielbare Staaten und Währung des Szenarios") {
         CHECK(list[0].playable.size() == 2);
         CHECK(list[1].id == "westfaelischer_frieden");
         CHECK(list[1].name == "Der Westfälische Frieden");
+    }
+}
+
+TEST_CASE("Lader: Tragfähigkeitsfaktor des Szenarios") {
+    TempDir dir(true);
+    const char* const scenario_file = "szenarien/jahresbeginn.chron";
+    replace_in_file(dir / scenario_file, "spieler = SAX", "spieler = SAX\n    tragfaehigkeit_faktor = 2.5");
+    SUBCASE("gilt nur im eigenen Szenario") {
+        const LoadResult r = load(dir, "jahresbeginn_1650");
+        INFO(issues_text(r));
+        REQUIRE(r.ok());
+        CHECK(r.world->scenario.capacity_factor == fx("2.5"));
+        CHECK(r.world->terrains[0].capacity == fx("112.5")); // 45 × 2,5
+        const LoadResult other = load(dir, "westfaelischer_frieden");
+        REQUIRE(other.ok());
+        CHECK(other.world->scenario.capacity_factor == Fixed::one());
+        CHECK(other.world->terrains[0].capacity == Fixed::from_int(45));
+    }
+    SUBCASE("außerhalb des Bereichs") {
+        replace_in_file(dir / scenario_file, "= 2.5", "= 12");
+        expect_error(load(dir), "'tragfaehigkeit_faktor' muss zwischen 0.1 und 10 liegen (ist 12)",
+                     scenario_file);
     }
 }
 

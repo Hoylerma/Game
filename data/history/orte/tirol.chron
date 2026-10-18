@@ -448,13 +448,14 @@ ort innsbruck {
 }
 
 ort hall_in_tirol {
-    name     = "Hall in Tirol"
-    gelaende = hochgebirge
-    lage     = { 11.5167 47.2833 }
-    flaeche  = 190
-    stadt    = nein
-    kreis    = kr_innsbruck
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2764958; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Hall in Tirol"
+    gelaende  = hochgebirge
+    lage      = { 11.5167 47.2833 }
+    flaeche   = 190
+    stadt     = nein
+    kreis     = kr_innsbruck
+    vorkommen = { salz }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2764958; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 3277
@@ -1782,13 +1783,14 @@ ort abtei {
 }
 
 ort meran {
-    name     = "Meran"
-    gelaende = hochgebirge
-    lage     = { 11.1595 46.6682 }
-    flaeche  = 176
-    stadt    = ja
-    kreis    = kr_meran
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3173577; deutscher Name aus den GeoNames-Alternativnamen (heute Merano); Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Meran"
+    gelaende  = hochgebirge
+    lage      = { 11.1595 46.6682 }
+    flaeche   = 176
+    stadt     = ja
+    kreis     = kr_meran
+    vorkommen = { weinlage }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 3173577; deutscher Name aus den GeoNames-Alternativnamen (heute Merano); Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 8961
@@ -2104,13 +2106,14 @@ ort martell {
 }
 
 ort bozen {
-    name     = "Bozen"
-    gelaende = mittelgebirge
-    lage     = { 11.3398 46.4907 }
-    flaeche  = 186
-    stadt    = ja
-    kreis    = kr_bozen
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3181913; deutscher Name aus den GeoNames-Alternativnamen (heute Bolzano); Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Bozen"
+    gelaende  = mittelgebirge
+    lage      = { 11.3398 46.4907 }
+    flaeche   = 186
+    stadt     = ja
+    kreis     = kr_bozen
+    vorkommen = { weinlage }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 3181913; deutscher Name aus den GeoNames-Alternativnamen (heute Bolzano); Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 17553

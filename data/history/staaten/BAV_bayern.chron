@@ -14,12 +14,13 @@ staat BAV {
         hauptstadt     = muenchen
         regierungsform = konstitutionelle_monarchie
         konfession     = katholisch
-        schatz         = 1351200
+        schatz         = 0
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 1126000
+        hofhaltung     = 313700
         heer           = 8
+        schulden       = 12998000
         zollverein     = ja
     }
 

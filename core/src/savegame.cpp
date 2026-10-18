@@ -245,7 +245,7 @@ template <typename T, std::size_t N = 0> constexpr std::size_t field_count() {
 }
 
 void hash_rules(Fnv& h, const Rules& r) {
-    static_assert(field_count<Rules>() == 61,
+    static_assert(field_count<Rules>() == 62,
                   "Rules hat sich geändert: neue Felder auch in hash_rules (Inhaltsfingerabdruck) aufnehmen");
     h.fixed(r.devastation_decay);
     h.fixed(r.devastation_yield_loss);
@@ -288,6 +288,7 @@ void hash_rules(Fnv& h, const Rules& r) {
     h.fixed(r.trade_rate);
     h.fixed(r.freight_land);
     h.fixed(r.freight_sea);
+    h.fixed(r.freight_rail);
     h.fixed(r.trade_margin);
     h.fixed(r.business_adjustment);
     h.fixed(r.business_min_share);
@@ -795,6 +796,22 @@ ContentFingerprint content_fingerprint(const World& w) {
             h.text(landscape);
         }
     });
+    // Eisenbahnen (seit M7) bestimmen die Fracht zwischen Märkten und gehören deshalb zu den Märkten.
+    {
+        Fnv h;
+        h.u64(p[8]);
+        h.u64(w.railways.size());
+        for (const Railway& r : w.railways) {
+            h.text(r.id);
+            h.u64(r.sections.size());
+            for (const RailSection& s : r.sections) {
+                h.i64(s.from);
+                h.i64(s.to);
+                h.i64(to_day_number(s.opened));
+            }
+        }
+        p[8] = h.value();
+    }
     p[9] = hash_list(w.deposits, [](Fnv& h, const std::string& d) { h.text(d); });
     // Kurzname der Staaten und Name der Orte stehen in Chronikeinträgen und damit in der Prüfsumme.
     p[10] = hash_list(w.states, [](Fnv& h, const State& s) {

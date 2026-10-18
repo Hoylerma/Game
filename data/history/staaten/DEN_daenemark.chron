@@ -14,12 +14,13 @@ staat DEN {
         hauptstadt     = schleswig
         regierungsform = absolute_monarchie
         konfession     = lutherisch
-        schatz         = 266700
+        schatz         = 0
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 222200
+        hofhaltung     = 49900
         heer           = 8
+        schulden       = 2946000
         zollverein     = nein
     }
 }

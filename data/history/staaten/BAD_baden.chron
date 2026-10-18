@@ -14,12 +14,13 @@ staat BAD {
         hauptstadt     = karlsruhe
         regierungsform = konstitutionelle_monarchie
         konfession     = lutherisch
-        schatz         = 410100
+        schatz         = 0
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 341800
+        hofhaltung     = 78700
         heer           = 7
+        schulden       = 2361000
         zollverein     = ja
     }
 }

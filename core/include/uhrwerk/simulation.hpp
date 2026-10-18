@@ -79,6 +79,8 @@ public:
     void step_days(std::int64_t days);
 
     const World& world() const { return world_; }
+    /// Märkte, Nachbarn und Bahnverbindungen (seit M7 auch für die Anzeige der Bahnfracht).
+    const EconomyTopology& economy_topology() const { return topology_; }
     const SimConfig& config() const { return config_; }
     std::int64_t days_elapsed() const { return days_elapsed_; }
     /// Zahl der rechnenden Threads (aufgelöst, mindestens 1).

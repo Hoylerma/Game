@@ -14,12 +14,13 @@ staat SMG {
         hauptstadt     = meiningen
         regierungsform = konstitutionelle_monarchie
         konfession     = lutherisch
-        schatz         = 48000
+        schatz         = 0
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 40000
+        hofhaltung     = 19900
         heer           = 6
+        schulden       = 132000
         zollverein     = ja
     }
 }

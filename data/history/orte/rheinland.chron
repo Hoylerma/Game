@@ -931,13 +931,14 @@ ort aachen {
 }
 
 ort eschweiler {
-    name     = "Eschweiler"
-    gelaende = boerde
-    lage     = { 6.2718 50.8185 }
-    flaeche  = 232
-    stadt    = ja
-    kreis    = kr_aachen
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2928963; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Eschweiler"
+    gelaende  = boerde
+    lage      = { 6.2718 50.8185 }
+    flaeche   = 232
+    stadt     = ja
+    kreis     = kr_aachen
+    vorkommen = { kohle }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2928963; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 33577
@@ -954,13 +955,14 @@ ort eschweiler {
 }
 
 ort herzogenrath {
-    name     = "Herzogenrath"
-    gelaende = flachland
-    lage     = { 6.0932 50.8687 }
-    flaeche  = 94
-    stadt    = ja
-    kreis    = kr_aachen
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2905455; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Herzogenrath"
+    gelaende  = flachland
+    lage      = { 6.0932 50.8687 }
+    flaeche   = 94
+    stadt     = ja
+    kreis     = kr_aachen
+    vorkommen = { kohle }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2905455; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 13869

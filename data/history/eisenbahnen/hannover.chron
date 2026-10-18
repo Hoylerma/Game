@@ -1,0 +1,30 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+strecke hannoversche_sued {
+    name      = "Hannoversche Staatsbahn (Hannover–Braunschweig, Hildesheim)"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M7, Schritt b1)"
+    abschnitt = { von = hannover bis = lehrte eroeffnet = 1843.10.22 }
+    abschnitt = { von = lehrte bis = peine eroeffnet = 1844.05.19 }
+    abschnitt = { von = lehrte bis = hildesheim eroeffnet = 1846.06.12 }
+}
+
+strecke hannoversche_nord {
+    name      = "Hannoversche Staatsbahn (Lehrte–Harburg)"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M7, Schritt b1)"
+    abschnitt = { von = lehrte bis = celle eroeffnet = 1845.10.15 }
+    abschnitt = { von = celle bis = uelzen eroeffnet = 1847.05.01 }
+    abschnitt = { von = uelzen bis = lueneburg eroeffnet = 1847.05.01 }
+    abschnitt = { von = lueneburg bis = neu_wulmstorf eroeffnet = 1847.05.01 }
+}
+
+strecke hannoversche_west {
+    name      = "Hannoversche Staatsbahn (Hannover–Minden, Bremen)"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M7, Schritt b1)"
+    abschnitt = { von = hannover bis = wunstorf eroeffnet = 1847.10.15 }
+    abschnitt = { von = wunstorf bis = stadthagen eroeffnet = 1847.10.15 }
+    abschnitt = { von = stadthagen bis = bueckeburg eroeffnet = 1847.10.15 }
+    abschnitt = { von = bueckeburg bis = minden eroeffnet = 1847.10.15 }
+    abschnitt = { von = wunstorf bis = nienburg eroeffnet = 1847.12.12 }
+    abschnitt = { von = nienburg bis = verden eroeffnet = 1847.12.12 }
+    abschnitt = { von = verden bis = bremen eroeffnet = 1847.12.12 }
+}

@@ -23,6 +23,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import math
 import re
 import sys
 from collections import Counter
@@ -57,6 +58,7 @@ SPALTEN: dict[str, tuple[str, ...]] = {
     ),
     "kreise.csv": ("id", "datei", "name", "quelle"),
     "verwaltung.csv": ("id", "datei", "name", "art", "ueber", "staat", "sitz", "sicherheit", "quelle"),
+    "eisenbahnen.csv": ("strecke", "datei", "name", "von", "bis", "eroeffnet", "sicherheit", "quelle"),
     "besitz.csv": ("ort", "ab", "besitzer", "verwaltung", "bund", "sicherheit", "quelle"),
     "bevoelkerung.csv": (
         "ort",
@@ -104,7 +106,7 @@ STEUER_FELDER = frozenset({"kontribution", "akzise", "zoll"})
 TEXT_FELDER = frozenset({"name", "kurzname", "herrscher", "quelle"})
 
 RE_ORT = re.compile(r"[a-z0-9_]+")
-ORDNER = ("kreise", "orte", "staaten", "verwaltung")  # Unterordner von history/, die der Archivar erzeugt
+ORDNER = ("eisenbahnen", "kreise", "orte", "staaten", "verwaltung")  # Unterordner von history/, die der Archivar erzeugt
 RE_TAG = re.compile(r"[A-Z0-9]{2,4}")
 RE_DATEI = re.compile(r"[A-Za-z0-9_]+")
 RE_KENNUNG = re.compile(r"[a-z][a-z0-9_]*")
@@ -118,6 +120,7 @@ FLAECHE_MIN_KM2 = 10.0
 FLAECHE_MAX_KM2 = 5000.0
 DICHTE_MAX_LAND = 150.0  # Einwohner je km² ohne Stadt
 DICHTE_MAX = 5000.0
+ABSCHNITT_MAX_KM = 120.0  # längere Eisenbahnabschnitte sind meist ein falscher Ort
 WACHSTUM_MAX = 0.05  # +5 % je Jahr zwischen zwei Stichtagen
 SCHWUND_MAX = 0.10  # −10 % je Jahr
 
@@ -353,10 +356,17 @@ class Staat:
 
 
 @dataclass
+class Strecke:
+    zeile: Zeile  # erste Zeile: Name, Datei, Quelle der Strecke
+    abschnitte: list[Zeile] = field(default_factory=list)  # in Tabellenreihenfolge
+
+
+@dataclass
 class Archiv:
     orte: dict[str, Ort] = field(default_factory=dict)  # in Tabellenreihenfolge
     kreise: dict[str, Zeile] = field(default_factory=dict)  # in Tabellenreihenfolge
     verwaltung: dict[str, Zeile] = field(default_factory=dict)  # Verwaltungseinheiten (seit M7)
+    eisenbahnen: dict[str, Strecke] = field(default_factory=dict)  # Eisenbahnstrecken (seit M7)
     staaten: dict[str, Staat] = field(default_factory=dict)
     kommentare: dict[tuple[str, str], str] = field(default_factory=dict)  # (ordner, datei) → Text
     kulturen: dict[str, str] = field(default_factory=dict)  # Datei in history/orte → Standardkultur
@@ -445,6 +455,78 @@ def _pruefe_anteile(z: Zeile, spalte: str, art: str, bekannt: set[str], quelle: 
         m.fehler_bei(z.datei, z.nr, f"die Anteile in Spalte '{spalte}' ergeben {summe} %, erwartet 100 %")
         ok = False
     return ok
+
+
+def abstand_km(a: Zeile, b: Zeile) -> float:
+    """Großkreisabstand zweier Orte aus orte.csv (Kugel mit 6371 km)."""
+    breite_a, breite_b = math.radians(float(a["breite"])), math.radians(float(b["breite"]))
+    d_breite = breite_b - breite_a
+    d_laenge = math.radians(float(b["laenge"]) - float(a["laenge"]))
+    h = math.sin(d_breite / 2) ** 2 + math.cos(breite_a) * math.cos(breite_b) * math.sin(d_laenge / 2) ** 2
+    return 2 * 6371.0 * math.asin(math.sqrt(h))
+
+
+def pruefe_eisenbahnen(archiv: Archiv, m: Meldungen) -> None:
+    """Eisenbahnen (seit M7): je Zeile ein Abschnitt; Name, Datei und Quelle der Strecke aus ihrer ersten Zeile.
+
+    Ein Abschnitt (in beiden Richtungen) darf nur einmal vorkommen, auch über Strecken hinweg; gleiche
+    Namen verschiedener Strecken sind eine Warnung (die Ortsinfo nennt sonst zweimal dieselbe Bahn).
+    """
+    paare: dict[frozenset[str], tuple[str, Zeile]] = {}
+    for z in archiv.zeilen["eisenbahnen.csv"]:
+        _herkunft(z, m)
+        kennung = z["strecke"]
+        if not RE_ORT.fullmatch(kennung):
+            m.fehler_bei(z.datei, z.nr, f"ungültige Kennung '{kennung}' für eine Strecke (a–z, 0–9, _)")
+            continue
+        strecke = archiv.eisenbahnen.get(kennung)
+        if strecke is None:
+            if not RE_ORT.fullmatch(z["datei"]):
+                m.fehler_bei(z.datei, z.nr, f"ungültiger Dateiname '{z['datei']}' (a–z, 0–9, _)")
+                continue
+            if not (_pflicht(z, "name", m) and _einzeilig(z, "name", m) and _einzeilig(z, "quelle", m)):
+                continue
+            strecke = archiv.eisenbahnen[kennung] = Strecke(z)
+        else:
+            erste = strecke.zeile
+            if z["datei"] != erste["datei"]:
+                m.fehler_bei(z.datei, z.nr, f"Strecke {kennung} steht schon in Datei '{erste['datei']}' (Zeile {erste.nr})")
+            if z["name"] and z["name"] != erste["name"]:
+                m.fehler_bei(z.datei, z.nr, f"Strecke {kennung} heißt schon '{erste['name']}' (Zeile {erste.nr})")
+        ok = _datum(z, "eroeffnet", m) is not None
+        for spalte in ("von", "bis"):
+            if z[spalte] not in archiv.orte:
+                m.fehler_bei(z.datei, z.nr, f"unbekannter Ort '{z[spalte]}' in Spalte '{spalte}' (Strecke {kennung})")
+                ok = False
+        if not ok:
+            continue
+        if z["von"] == z["bis"]:
+            m.fehler_bei(z.datei, z.nr, f"Abschnitt der Strecke {kennung} beginnt und endet in {z['von']}")
+            continue
+        paar = frozenset((z["von"], z["bis"]))
+        if (frueher := paare.get(paar)) is not None:
+            andere, zeile = frueher
+            if andere == kennung:
+                m.fehler_bei(z.datei, z.nr, f"Abschnitt {z['von']}–{z['bis']} der Strecke {kennung} ist doppelt (zuerst in Zeile {zeile.nr})")
+            else:
+                m.fehler_bei(z.datei, z.nr, f"Abschnitt {z['von']}–{z['bis']} der Strecke {kennung} liegt schon auf Strecke {andere} (Zeile {zeile.nr})")
+            continue
+        paare[paar] = (kennung, z)
+        a, b = archiv.orte[z["von"]].zeile, archiv.orte[z["bis"]].zeile
+        try:
+            km = abstand_km(a, b)
+        except ValueError:
+            km = 0.0  # ungültige Lage meldet schon die Prüfung der Orte
+        if km > ABSCHNITT_MAX_KM:
+            m.warnung_bei(z.datei, z.nr, f"Abschnitt {z['von']}–{z['bis']} der Strecke {kennung} ist {km:.0f} km lang")
+        strecke.abschnitte.append(z)
+    namen: dict[str, str] = {}
+    for kennung, strecke in archiv.eisenbahnen.items():
+        if not strecke.abschnitte:
+            m.fehler_bei(strecke.zeile.datei, strecke.zeile.nr, f"Strecke {kennung} hat keinen gültigen Abschnitt")
+        name = strecke.zeile["name"]
+        if (andere := namen.setdefault(name, kennung)) != kennung:
+            m.warnung_bei(strecke.zeile.datei, strecke.zeile.nr, f"Strecke {kennung} heißt wie Strecke {andere} ('{name}')")
 
 
 def baue_archiv(tabellen: Path, bezug: Bezug, m: Meldungen) -> Archiv:
@@ -668,12 +750,15 @@ def baue_archiv(tabellen: Path, bezug: Bezug, m: Meldungen) -> Archiv:
         for eintraege in staat.historie.values():
             eintraege.sort(key=lambda e: e.datum)
 
+    pruefe_eisenbahnen(archiv, m)
+
     # Kopfkommentare
     gesehen = {}
     benutzt = {("orte", o.zeile["datei"]) for o in archiv.orte.values()}
     benutzt |= {("staaten", s.zeile["datei"]) for s in archiv.staaten.values()}
     benutzt |= {("kreise", k["datei"]) for k in archiv.kreise.values()}
     benutzt |= {("verwaltung", v["datei"]) for v in archiv.verwaltung.values()}
+    benutzt |= {("eisenbahnen", s.zeile["datei"]) for s in archiv.eisenbahnen.values()}
     for z in archiv.zeilen["dateien.csv"]:
         if z["ordner"] not in ORDNER:
             m.fehler_bei(
@@ -942,6 +1027,13 @@ def verwaltung_text(z: Zeile) -> list[str]:
     return [f"einheit {z['id']} {{", *_ausgerichtet(paare, "    "), "}"]
 
 
+def strecke_text(strecke: Strecke) -> list[str]:
+    erste = strecke.zeile
+    paare = [("name", chron_text(erste["name"])), ("quelle", chron_text(erste["quelle"]))]
+    paare += [("abschnitt", f"{{ von = {z['von']} bis = {z['bis']} eroeffnet = {z['eroeffnet']} }}") for z in strecke.abschnitte]
+    return [f"strecke {erste['strecke']} {{", *_ausgerichtet(paare, "    "), "}"]
+
+
 def erzeuge(archiv: Archiv) -> dict[str, str]:
     """Alle Ausgabedateien: relativer Pfad (z. B. history/orte/anhalt.chron) → Inhalt."""
     gruppen: dict[tuple[str, str], list[list[str]]] = {}
@@ -951,6 +1043,9 @@ def erzeuge(archiv: Archiv) -> dict[str, str]:
         gruppen.setdefault(("kreise", kreis["datei"]), []).append(kreis_text(kreis))
     for einheit in archiv.verwaltung.values():
         gruppen.setdefault(("verwaltung", einheit["datei"]), []).append(verwaltung_text(einheit))
+    for strecke in archiv.eisenbahnen.values():
+        if strecke.abschnitte:
+            gruppen.setdefault(("eisenbahnen", strecke.zeile["datei"]), []).append(strecke_text(strecke))
     for ort in archiv.orte.values():
         gruppen.setdefault(("orte", ort.zeile["datei"]), []).append(ort_text(ort, archiv))
     ausgabe: dict[str, str] = {}
@@ -1012,12 +1107,14 @@ def bericht(archiv: Archiv, bezug: Bezug) -> str:
     zeilen = [
         (
             f"Orte: {len(archiv.orte)}, Kreise: {len(archiv.kreise)}, Staaten: {len(archiv.staaten)}, "
-            f"Verwaltungseinheiten: {len(archiv.verwaltung)}"
+            f"Verwaltungseinheiten: {len(archiv.verwaltung)}, "
+            f"Eisenbahnstrecken: {len(archiv.eisenbahnen)} "
+            f"({sum(len(s.abschnitte) for s in archiv.eisenbahnen.values())} Abschnitte)"
         ),
         "",
         "Sicherheit der Angaben je Tabelle:",
     ]
-    for name in ("besitz.csv", "bevoelkerung.csv", "staaten_historie.csv", "verwaltung.csv"):
+    for name in ("besitz.csv", "bevoelkerung.csv", "staaten_historie.csv", "verwaltung.csv", "eisenbahnen.csv"):
         zaehler = Counter(z["sicherheit"] for z in archiv.zeilen.get(name, []))
         teile = ", ".join(f"{s} {zaehler[s]}" for s in SICHERHEIT if zaehler[s])
         zeilen.append(f"  {name:<22} {len(archiv.zeilen.get(name, [])):>5} Zeilen  ({teile or '–'})")

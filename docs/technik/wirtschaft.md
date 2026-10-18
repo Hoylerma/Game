@@ -152,6 +152,19 @@ beim Ertrag; kalibriert, Abschnitt 4.9):
 Adel und Geistlichkeit arbeiten in keinem Betrieb. Sie leben von **Abgaben auf den Agrarertrag**
 ihres Ortes (Grundrente, Zehnt; neues Berufsfeld `agrarabgabe`, Abschnitt 4.2).
 
+**Seit M7** kommen Betriebe, Güter (`kohle` 1,5, `eisen` 5) und der Beruf `fabrikarbeiter` mit
+`seit = 1800.01.01` hinzu (chronik-skript.md, Abschnitt 3.18; im Szenario 1648 nicht vorhanden). Werte
+wie in `data/common/betriebe.chron` (Mengen je Kopf und Jahr):
+
+| Betrieb | Beruf | erzeugt | verbraucht | Bedingung, Gewicht |
+|---|---|---|---|---|
+| Zeche | Landarme | Kohle 5 | Holz 0,3 | Vorkommen `kohle`; 3 |
+| Hütte | Landarme | Eisen 2 | Kohle 1,5 | Vorkommen `erz`; 3 |
+| Spinnerei | Fabrikarbeiter | Tuch 3, Waren 1,5 | Faser 2,5 | 1 (Wasserkraft, ohne Kohle) |
+| Maschinenbau | Fabrikarbeiter | Waren 5 | Eisen 0,6, Kohle 0,8 | nur Stadt; 0,3 |
+| Brennerei | Landarme | Bier 4,5 (Branntwein) | Getreide 3 | nur Land; 0,2 |
+| Salzwerk | Landarme | Salz 12 | Holz 2 | Vorkommen `salz`; 3 (Siedesalinen des 19. Jahrhunderts) |
+
 ### 2.4 Märkte (`common/maerkte.chron`, neu)
 
 Ein **Markt je Landschaft** (Datei in `history/orte/`, 77 Stück). Das passt zur Größe der
@@ -239,6 +252,9 @@ Basispreis *B_g*.
 
    ```
    fracht   = handel_fracht × abstand_km / 100            (z. B. 0,12 je 100 km)
+              bahnfracht × abstand_km / 100                (seit M7, ab dem Tag, an dem ein Bahnhof in m
+                                                            und einer in n über eröffnete Abschnitte
+                                                            verbunden sind; ein Markt ist kein Drehkreuz)
    lücke    = P_n,g − P_m,g × (1 + fracht)                 (Ware fließt von m nach n, wenn > 0)
    menge    = min(1, handel_rate × lücke / P_n,g) × min(Angebot_m,g, Nachfrage_n,g)   (Vormonat, mit Handel)
    ```
@@ -419,6 +435,7 @@ Neue Pflichtfelder in `regeln.chron` (vorläufige Werte):
 | `handel_nachbarn`, `handel_radius_km` | 6, 180 | Nachbarmärkte |
 | `handel_rate` | 5 | Handelsmenge je Preislücke (0..100): ab 20 % Lücke die ganze mögliche Menge |
 | `handel_fracht`, `seefracht` | 0,12, 0,10 | Frachtkosten je 100 km bzw. zum Weltmarkt (Anteil am Preis) |
+| `bahnfracht` | 0,04 | Frachtkosten je 100 km zwischen Nachbarmärkten mit Bahnverbindung (seit M7) |
 | `handelsspanne` | 0,05 | Anteil der Händler am Umsatz |
 | `betrieb_anpassung`, `betrieb_min_anteil` | 0,03, 0,02 | Anpassung der Betriebsanteile |
 | `ernte_schwankung_land`, `ernte_schwankung_markt` | 0,08, 0,10 | Erntefaktor |
@@ -512,7 +529,7 @@ UndefinedBehaviorSanitizer.
 ## 7. Balancing-Bericht
 
 ```
-uhrwerk-cli bilanz [--seeds N] [--jahre J] [--seed S] [--threads T] [--ziele DATEI]
+uhrwerk-cli bilanz [--szenario ID] [--seeds N] [--jahre J] [--seed S] [--threads T] [--ziele DATEI]
 ```
 
 Der Befehl rechnet N Läufe (Seeds S, S+1, …; Standard 32 Läufe ab 1648) über J Jahre (Standard 100)
@@ -520,7 +537,8 @@ ohne Eingriffe des Spielers und misst am Jahrestag des Starts je Staat das Verm�
 Monatsersten die Preise aller Märkte mit Orten, dazu Bevölkerung und Lebensstandard. Er meldet je Staat
 und Kennzahl Median, 5- und 95-%-Wert über alle Läufe (nächster Rang, in Festkomma: auf jeder Plattform
 gleich), markiert Verstöße mit `!` und listet sie am Ende; Exitcode 1 bei Verstoß. Die Zielwerte stehen
-im Datenordner (`data/common/zielwerte.chron`, Format in
+im Datenordner (`data/common/zielwerte.chron`, seit M7 je Szenario `zielwerte_<szenario>.chron`, wenn
+vorhanden; Format in
 [chronik-skript.md, Abschnitt 3.15](chronik-skript.md#315-commonzielwertechron-seit-m5)); `pruefen`
 prüft die Datei mit. Umsetzung: `core/include/uhrwerk/balance.hpp` (`record_run`, `summarize`) – kein
 Teil der Simulation, ohne Einfluss auf Zustand und Prüfsumme.
@@ -553,8 +571,16 @@ weil ihr Basispreis am Weltmarkt gilt und im Binnenland die Fracht hinzukommt.
 | Bevölkerung 1700 | ×1,36 (×1,34 … ×1,38) |
 | Lebensstandard | unten 42, mittel 58, oben 78 |
 
-**CI:** Job „Balancing (Linux, Release)“: `bilanz --seeds 16 --jahre 100`, Bericht in der
-Zusammenfassung des Laufs, auch bei Verstoß. Im Kleinen prüfen zwei CTests den Befehl auf der
+**Lesezeichen 1848** (seit M7): eigene Zielwerte in `data/common/zielwerte_voelkerfruehling.chron` –
+Bevölkerung 1848 → 1878 ×1,10 … ×1,45, eigene Preisbereiche für Salz und Wein (0,4 … 4), Waren
+(0,4 … 3), Kohle und Eisen (0,25 … 3), sonst wie 1648. Kalibrierung und Begründung:
+[data/README.md, „Wirtschaftswerte“](../../data/README.md#wirtschaftswerte). Ergebnis mit 8 Läufen über
+30 Jahre (64 s im Release-Build): alle Ziele erfüllt, kein Staatsbankrott, Vermögen am Ende im Median
+1,05–1,26, Preise zu 95,3 % (Tuch) bis 100 % im Bereich, Bevölkerung ×1,17.
+
+**CI:** Job „Balancing (Linux, Release)“: `bilanz --seeds 16 --jahre 100` und seit M7
+`bilanz --szenario voelkerfruehling --seeds 8 --jahre 30`, Berichte in der Zusammenfassung des Laufs,
+auch bei Verstoß. Im Kleinen prüfen zwei CTests den Befehl auf der
 Test-Fixture (`bilanz_fixture` mit weiten Zielwerten, `bilanz_verstoss` mit den Zielwerten der
 Spieldaten, die die Fixture verfehlen muss).
 

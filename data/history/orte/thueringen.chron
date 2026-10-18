@@ -370,13 +370,14 @@ ort sondershausen {
 }
 
 ort bad_frankenhausen {
-    name     = "Bad Frankenhausen"
-    gelaende = huegelland
-    lage     = { 11.0998 51.3561 }
-    flaeche  = 132
-    stadt    = nein
-    kreis    = kr_nordhausen
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2953459; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Bad Frankenhausen"
+    gelaende  = huegelland
+    lage      = { 11.0998 51.3561 }
+    flaeche   = 132
+    stadt     = nein
+    kreis     = kr_nordhausen
+    vorkommen = { salz }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2953459; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 8145
@@ -759,13 +760,14 @@ ort koelleda {
 }
 
 ort artern {
-    name     = "Artern"
-    gelaende = flachland
-    lage     = { 11.2917 51.3643 }
-    flaeche  = 186
-    stadt    = nein
-    kreis    = kr_soemmerda
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2955394; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Artern"
+    gelaende  = flachland
+    lage      = { 11.2917 51.3643 }
+    flaeche   = 186
+    stadt     = nein
+    kreis     = kr_soemmerda
+    vorkommen = { salz }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2955394; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 12103
@@ -1162,13 +1164,14 @@ ort meiningen {
 }
 
 ort bad_salzungen {
-    name     = "Bad Salzungen"
-    gelaende = huegelland
-    lage     = { 10.2361 50.8134 }
-    flaeche  = 124
-    stadt    = ja
-    kreis    = kr_gotha
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2953357; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Bad Salzungen"
+    gelaende  = huegelland
+    lage      = { 10.2361 50.8134 }
+    flaeche   = 124
+    stadt     = ja
+    kreis     = kr_gotha
+    vorkommen = { salz }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2953357; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 11638
@@ -1184,13 +1187,14 @@ ort bad_salzungen {
 }
 
 ort schmalkalden {
-    name     = "Schmalkalden"
-    gelaende = huegelland
-    lage     = { 10.4439 50.7214 }
-    flaeche  = 144
-    stadt    = nein
-    kreis    = kr_gotha
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2838059; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Schmalkalden"
+    gelaende  = huegelland
+    lage      = { 10.4439 50.7214 }
+    flaeche   = 144
+    stadt     = nein
+    kreis     = kr_gotha
+    vorkommen = { erz }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2838059; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 10990
@@ -1386,13 +1390,14 @@ ort jena {
 }
 
 ort naumburg_an_der_saale {
-    name     = "Naumburg an der Saale"
-    gelaende = huegelland
-    lage     = { 11.8098 51.1499 }
-    flaeche  = 190
-    stadt    = ja
-    kreis    = kr_jena
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2866906; Name Naumburg an der Saale aus den GeoNames-Alternativnamen (GeoNames: Naumburg); Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Naumburg an der Saale"
+    gelaende  = huegelland
+    lage      = { 11.8098 51.1499 }
+    flaeche   = 190
+    stadt     = ja
+    kreis     = kr_jena
+    vorkommen = { weinlage }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2866906; Name Naumburg an der Saale aus den GeoNames-Alternativnamen (GeoNames: Naumburg); Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 15711
@@ -1542,13 +1547,14 @@ ort schkoelen {
 }
 
 ort bad_sulza {
-    name     = "Bad Sulza"
-    gelaende = huegelland
-    lage     = { 11.6247 51.0893 }
-    flaeche  = 161
-    stadt    = nein
-    kreis    = kr_jena
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2953330; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Bad Sulza"
+    gelaende  = huegelland
+    lage      = { 11.6247 51.0893 }
+    flaeche   = 161
+    stadt     = nein
+    kreis     = kr_jena
+    vorkommen = { salz }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2953330; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 11710
@@ -2184,13 +2190,14 @@ ort tanna {
 }
 
 ort suhl {
-    name     = "Suhl"
-    gelaende = mittelgebirge
-    lage     = { 10.694 50.6091 }
-    flaeche  = 172
-    stadt    = ja
-    kreis    = kr_suhl
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2824948; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Suhl"
+    gelaende  = mittelgebirge
+    lage      = { 10.694 50.6091 }
+    flaeche   = 172
+    stadt     = ja
+    kreis     = kr_suhl
+    vorkommen = { erz }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2824948; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 13409

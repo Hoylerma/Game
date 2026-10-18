@@ -14,12 +14,13 @@ staat HHO {
         hauptstadt     = bad_homburg_vor_der_hoehe
         regierungsform = absolute_monarchie
         konfession     = reformiert
-        schatz         = 7200
+        schatz         = 0
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 6000
+        hofhaltung     = 3100
         heer           = 6
+        schulden       = 20000
         zollverein     = ja
     }
 }

@@ -3,7 +3,7 @@
 Orte und Staaten samt ihrer Geschichte werden in **Tabellen** gepflegt, nicht direkt im
 Chronik-Skript. Das Werkzeug **Archivar** (`tools/archivar/archivar.py`) prüft die Tabellen und
 erzeugt daraus `data/history/` (Format: [chronik-skript.md](chronik-skript.md), Abschnitte 3.5, 3.6,
-3.8, 3.9 und 3.16). Die erzeugten Dateien werden eingecheckt; die CI prüft mit `--pruefen`, dass sie zu den
+3.8, 3.9, 3.16 und 3.17). Die erzeugten Dateien werden eingecheckt; die CI prüft mit `--pruefen`, dass sie zu den
 Tabellen passen.
 
 ```
@@ -11,6 +11,7 @@ data/tabellen/
 ├── orte.csv               Stammdaten der Orte
 ├── kreise.csv             Kreise (seit M3)
 ├── verwaltung.csv         Verwaltungseinheiten der Staaten (seit M7)
+├── eisenbahnen.csv        Eisenbahnstrecken: Abschnitte von Ort zu Ort mit Eröffnung (seit M7)
 ├── staaten.csv            Stammdaten der Staaten
 ├── besitz.csv             Besitzer, Verwaltung und Bundesgebiet je Ort mit Datum
 ├── bevoelkerung.csv       Bevölkerung, Konfession, Kultur und Verwüstung je Ort und Stichtag
@@ -148,11 +149,29 @@ Bevölkerungsangabe oder keines von beiden.
 
 Je Staat, Datum und Feld höchstens eine Zeile.
 
+## `eisenbahnen.csv` (seit M7)
+
+| Spalte | Inhalt |
+|---|---|
+| `strecke` | Kennung der Strecke (a–z, 0–9, `_`); eine Zeile je Abschnitt |
+| `datei` | Datei in `history/eisenbahnen/`; für alle Zeilen einer Strecke gleich |
+| `name` | Name der Strecke; Pflicht in der ersten Zeile, danach leer oder gleich |
+| `von`, `bis` | Orte (Kennungen aus `orte.csv`, mit oder ohne Daten), verschieden |
+| `eroeffnet` | Tag der Eröffnung des Abschnitts (`JJJJ.MM.TT`) |
+| `sicherheit`, `quelle` | siehe oben; in `history/` steht die Quelle der ersten Zeile |
+
+Ein Abschnitt darf nur einmal vorkommen (in beiden Richtungen, auch auf verschiedenen Strecken).
+Ein Abschnitt über 120 km Luftlinie ist eine Warnung (meist ein falsch aufgelöster Ort), ebenso
+zwei Strecken mit gleichem Namen. Eine Station ohne eigenen
+Ort fällt weg, oder ein Nachbarort steht für sie (Altona durch Hamburg, Harburg durch Neu
+Wulmstorf, Ludwigshafen durch Frankenthal). Wirkung im Spiel: [chronik-skript.md](chronik-skript.md),
+Abschnitt 3.17.
+
 ## `dateien.csv`
 
 | Spalte | Inhalt |
 |---|---|
-| `ordner` | `orte`, `staaten`, `kreise` oder `verwaltung` (seit M7) |
+| `ordner` | `orte`, `staaten`, `kreise`, `verwaltung` oder `eisenbahnen` (beide seit M7) |
 | `datei` | Dateiname ohne Endung |
 | `kultur` | seit M4, nur für `orte`: Standardkultur der Landschaft, z. B. `maerker=100` oder `obersachsen=70 sorben=30`; sonst leer |
 | `kommentar` | mehrzeiliger Text; erscheint als Kopfkommentar der erzeugten Datei |

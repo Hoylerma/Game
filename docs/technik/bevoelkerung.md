@@ -176,8 +176,9 @@ bleibt, nur das Einkommen wird durch das Preisniveau geteilt.
 Die **Landreserve** ersetzt das „Wiederaufbauwachstum“ aus M1: Ein verwüsteter, entvölkerter Ort
 hat viel freies Land, also mehr und frühere Heiraten und Zuzug von Bauern. Die **Tragfähigkeit**
 bremst das Wachstum, wenn der Boden ausgeschöpft ist: Der Ertrag je Kopf der Agrarberufe sinkt,
-damit Lebensstandard und Geburten, und die Abwanderung steigt. Spätere Meilensteine heben die
-Tragfähigkeit durch Agrartechnik (Kartoffel, Agrarreformen).
+damit Lebensstandard und Geburten, und die Abwanderung steigt. Spätere Lesezeichen heben die
+Tragfähigkeit durch Agrartechnik (Kartoffel, Agrarreformen): seit M7 mit dem Szenariofeld
+`tragfaehigkeit_faktor` (chronik-skript.md, Abschnitt 3.7), 1848 das 2,5-Fache.
 
 ### 4.2 Lebensstandard (je Block)
 

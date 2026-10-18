@@ -172,13 +172,14 @@ ort oskau {
 }
 
 ort ostrava {
-    name     = "Ostrava"
-    gelaende = flussaue
-    lage     = { 18.282 49.8347 }
-    flaeche  = 117
-    stadt    = ja
-    kreis    = kr_ostrava
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3068799; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Ostrava"
+    gelaende  = flussaue
+    lage      = { 18.282 49.8347 }
+    flaeche   = 117
+    stadt     = ja
+    kreis     = kr_ostrava
+    vorkommen = { kohle }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 3068799; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 15137
@@ -2449,13 +2450,14 @@ ort petrov {
 }
 
 ort znaim {
-    name     = "Znaim"
-    gelaende = huegelland
-    lage     = { 16.0488 48.8555 }
-    flaeche  = 234
-    stadt    = ja
-    kreis    = kr_znaim
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3061344; deutscher Name aus den GeoNames-Alternativnamen (heute Znojmo); Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Znaim"
+    gelaende  = huegelland
+    lage      = { 16.0488 48.8555 }
+    flaeche   = 234
+    stadt     = ja
+    kreis     = kr_znaim
+    vorkommen = { weinlage }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 3061344; deutscher Name aus den GeoNames-Alternativnamen (heute Znojmo); Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 23341
@@ -2656,13 +2658,14 @@ ort lundenburg {
 }
 
 ort nikolsburg {
-    name     = "Nikolsburg"
-    gelaende = huegelland
-    lage     = { 16.6378 48.8056 }
-    flaeche  = 243
-    stadt    = nein
-    kreis    = kr_goeding
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3070720; deutscher Name aus den GeoNames-Alternativnamen (heute Mikulov); Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Nikolsburg"
+    gelaende  = huegelland
+    lage      = { 16.6378 48.8056 }
+    flaeche   = 243
+    stadt     = nein
+    kreis     = kr_goeding
+    vorkommen = { weinlage }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 3070720; deutscher Name aus den GeoNames-Alternativnamen (heute Mikulov); Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 19390

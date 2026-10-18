@@ -14,12 +14,13 @@ staat PRU {
         hauptstadt     = berlin_coelln
         regierungsform = absolute_monarchie
         konfession     = reformiert
-        schatz         = 9583800
+        schatz         = 0
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 3993200
+        hofhaltung     = 645200
         heer           = 9
+        schulden       = 24197000
         zollverein     = ja
     }
 }

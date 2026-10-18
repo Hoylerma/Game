@@ -1,0 +1,12 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+strecke thueringische {
+    name      = "Thüringische Eisenbahn"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M7, Schritt b1)"
+    abschnitt = { von = halle bis = weissenfels eroeffnet = 1846.06.20 }
+    abschnitt = { von = weissenfels bis = naumburg_an_der_saale eroeffnet = 1846.12.19 }
+    abschnitt = { von = naumburg_an_der_saale bis = weimar eroeffnet = 1846.12.19 }
+    abschnitt = { von = weimar bis = erfurt eroeffnet = 1847.04.01 }
+    abschnitt = { von = erfurt bis = gotha eroeffnet = 1847.05.10 }
+    abschnitt = { von = gotha bis = eisenach eroeffnet = 1847.06.24 }
+}

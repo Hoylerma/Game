@@ -33,13 +33,14 @@ ort glatz {
 }
 
 ort neurode {
-    name     = "Neurode"
-    gelaende = mittelgebirge
-    lage     = { 16.5016 50.5801 }
-    flaeche  = 242
-    stadt    = ja
-    kreis    = kr_glatz
-    quelle   = "GeoNames (CC BY 4.0), geonameid 3090768; deutscher Name aus den GeoNames-Alternativnamen (heute Nowa Ruda); Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Neurode"
+    gelaende  = mittelgebirge
+    lage      = { 16.5016 50.5801 }
+    flaeche   = 242
+    stadt     = ja
+    kreis     = kr_glatz
+    vorkommen = { kohle }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 3090768; deutscher Name aus den GeoNames-Alternativnamen (heute Nowa Ruda); Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 15813

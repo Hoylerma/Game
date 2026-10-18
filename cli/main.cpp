@@ -99,7 +99,8 @@ Optionen:
   --chronik      Chronik der Partie ausgeben (nur lauf)
   --maerkte      Preise je Markt (nur wirtschaft)
   --seeds N      Bilanz: Zahl der Läufe (Standard: 32)
-  --ziele DATEI  Bilanz: Zielwerte (Standard: common/zielwerte.chron im Datenordner)
+  --ziele DATEI  Bilanz: Zielwerte (Standard: common/zielwerte_<szenario>.chron, sonst
+                 common/zielwerte.chron im Datenordner)
   --speichern F  lauf, lasttest: am Ende einen Spielstand in die Datei F schreiben
   --laden F      lauf: Spielstand F laden und weiterrechnen (Szenario und Seed aus dem
                  Spielstand; --jahre/--tage ab seinem Datum)
@@ -433,6 +434,33 @@ std::string describe_locations(const World& w) {
     return plural(w.locations.size(), "Ort", "Orte") + " " + location_data_split(w);
 }
 
+/// Strecken, Abschnitte und Märkte mit Bahnfracht zum Startdatum (seit M7).
+std::string railway_summary(const World& w) {
+    std::size_t sections = 0;
+    std::size_t open = 0;
+    for (const uhrwerk::Railway& r : w.railways) {
+        sections += r.sections.size();
+        for (const uhrwerk::RailSection& s : r.sections) {
+            open += s.opened <= w.date ? 1 : 0;
+        }
+    }
+    // Marktpaare, nicht Richtungen: Der Nachbar des einen Marktes hat ihn meist auch als Nachbarn.
+    std::set<std::pair<std::size_t, std::size_t>> pairs;
+    const uhrwerk::EconomyTopology topology = uhrwerk::build_economy_topology(w);
+    for (std::size_t m = 0; m < topology.neighbors.size(); ++m) {
+        for (const uhrwerk::MarketLink& link : topology.neighbors[m]) {
+            if (link.rail_from && *link.rail_from <= w.date) {
+                const auto n = static_cast<std::size_t>(link.market);
+                pairs.emplace(std::min(m, n), std::max(m, n));
+            }
+        }
+    }
+    return plural(w.railways.size(), "Strecke", "Strecken") + ", " +
+           plural(sections, "Abschnitt", "Abschnitte") + " (" + std::to_string(open) +
+           " zum Startdatum eröffnet); " + plural(pairs.size(), "Paar", "Paare") +
+           " von Nachbarmärkten mit Bahnfracht";
+}
+
 /// "(5 Orte mit Kreis, 1 ohne Kreis)"
 std::string location_district_split(const World& w) {
     const auto without = static_cast<std::size_t>(std::count_if(
@@ -654,6 +682,14 @@ bool save_and_report(const uhrwerk::Simulation& sim, const fs::path& path, const
     return true;
 }
 
+/// Zielwerte des Balancing-Berichts für ein Szenario: common/zielwerte_<szenario>.chron, wenn es die
+/// Datei gibt (seit M7, eigene Ziele für 1848), sonst die allgemeinen common/zielwerte.chron.
+fs::path default_targets_file(const fs::path& data_dir, const std::string& scenario) {
+    const fs::path own = data_dir / "common" / ("zielwerte_" + scenario + ".chron");
+    std::error_code ec;
+    return fs::exists(own, ec) ? own : data_dir / "common" / "zielwerte.chron";
+}
+
 // ─── Befehle ────────────────────────────────────────────────────────────────
 
 int cmd_pruefen(const Options& o, const fs::path& data_dir) {
@@ -672,7 +708,7 @@ int cmd_pruefen(const Options& o, const fs::path& data_dir) {
     }
     // Zielwerte des Balancing-Berichts (seit M5), wenn vorhanden: Nur `bilanz` liest sie, Fehler
     // sollen aber schon hier auffallen.
-    const fs::path targets = data_dir / "common" / "zielwerte.chron";
+    const fs::path targets = default_targets_file(data_dir, o.scenario);
     std::error_code ec;
     if (result.ok() && fs::exists(targets, ec)) {
         for (const std::string& error : uhrwerk::load_balance_targets(targets, *result.world).errors) {
@@ -728,6 +764,7 @@ int cmd_info(const Options& o, const fs::path& data_dir) {
               << location_data_split(w) << '\n'
               << "Kreise:       " << group_digits(std::to_string(w.districts.size())) << " "
               << location_district_split(w) << '\n'
+              << "Eisenbahnen:  " << railway_summary(w) << '\n'
               << "Bevölkerung:  " << format_int(total.round()) << "\n\n";
 
     std::vector<std::vector<std::string>> rows;
@@ -1146,13 +1183,14 @@ std::string describe_violation(const World& w, const uhrwerk::BalanceTargets& t,
 }
 
 /// Balancing-Bericht (seit M5, docs/technik/wirtschaft.md Abschnitt 7): mehrere Läufe ohne Eingriffe des
-/// Spielers, Kennzahlen je Staat, Gut und Schicht gegen die Zielwerte (data/common/zielwerte.chron).
+/// Spielers, Kennzahlen je Staat, Gut und Schicht gegen die Zielwerte (data/common/zielwerte*.chron).
 int cmd_bilanz(const Options& o, const fs::path& data_dir) {
     auto world = load(data_dir, o.scenario, false);
     if (!world) {
         return kExitDataError;
     }
-    const fs::path targets_file = o.targets_file ? *o.targets_file : data_dir / "common" / "zielwerte.chron";
+    const fs::path targets_file =
+        o.targets_file ? *o.targets_file : default_targets_file(data_dir, o.scenario);
     const uhrwerk::BalanceTargetsResult loaded = uhrwerk::load_balance_targets(targets_file, *world);
     if (!loaded.targets) {
         for (const std::string& error : loaded.errors) {

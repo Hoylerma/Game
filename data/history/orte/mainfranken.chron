@@ -218,13 +218,14 @@ ort wuelfershausen {
 }
 
 ort bad_kissingen {
-    name     = "Bad Kissingen"
-    gelaende = huegelland
-    lage     = { 10.0778 50.2023 }
-    flaeche  = 108
-    stadt    = ja
-    kreis    = kr_bad_kissingen
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2953424; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Bad Kissingen"
+    gelaende  = huegelland
+    lage      = { 10.0778 50.2023 }
+    flaeche   = 108
+    stadt     = ja
+    kreis     = kr_bad_kissingen
+    vorkommen = { salz }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2953424; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 8823
@@ -931,13 +932,14 @@ ort kleinkahl {
 }
 
 ort wuerzburg {
-    name     = "Würzburg"
-    gelaende = huegelland
-    lage     = { 9.9512 49.7939 }
-    flaeche  = 168
-    stadt    = ja
-    kreis    = kr_wuerzburg
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2805615; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Würzburg"
+    gelaende  = huegelland
+    lage      = { 9.9512 49.7939 }
+    flaeche   = 168
+    stadt     = ja
+    kreis     = kr_wuerzburg
+    vorkommen = { weinlage }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2805615; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 35744
@@ -1184,13 +1186,14 @@ ort dorfprozelten {
 }
 
 ort kitzingen {
-    name     = "Kitzingen"
-    gelaende = huegelland
-    lage     = { 10.1507 49.7397 }
-    flaeche  = 147
-    stadt    = ja
-    kreis    = kr_kitzingen
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2890158; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Kitzingen"
+    gelaende  = huegelland
+    lage      = { 10.1507 49.7397 }
+    flaeche   = 147
+    stadt     = ja
+    kreis     = kr_kitzingen
+    vorkommen = { weinlage }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2890158; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 11091
@@ -1230,13 +1233,14 @@ ort ochsenfurt {
 }
 
 ort volkach {
-    name     = "Volkach"
-    gelaende = huegelland
-    lage     = { 10.2281 49.8635 }
-    flaeche  = 132
-    stadt    = nein
-    kreis    = kr_kitzingen
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2816702; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Volkach"
+    gelaende  = huegelland
+    lage      = { 10.2281 49.8635 }
+    flaeche   = 132
+    stadt     = nein
+    kreis     = kr_kitzingen
+    vorkommen = { weinlage }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2816702; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 7656
@@ -1345,13 +1349,14 @@ ort giebelstadt {
 }
 
 ort iphofen {
-    name     = "Iphofen"
-    gelaende = huegelland
-    lage     = { 10.2604 49.7024 }
-    flaeche  = 133
-    stadt    = nein
-    kreis    = kr_kitzingen
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2895882; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Iphofen"
+    gelaende  = huegelland
+    lage      = { 10.2604 49.7024 }
+    flaeche   = 133
+    stadt     = nein
+    kreis     = kr_kitzingen
+    vorkommen = { weinlage }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2895882; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 7714

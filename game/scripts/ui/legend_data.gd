@@ -231,6 +231,63 @@ static func admin_entries(
 	return entries
 
 
+## Legende „Eisenbahnen“ (seit M7): Bahnhöfe (Endpunkte eröffneter Abschnitte), Orte in einem
+## Markt mit Bahnfracht zu einem Nachbarmarkt, Orte ohne Bahn; gezählt nach get_rail_access, also
+## nach denselben Stufen wie die Farben. Leer, wenn das Szenario keine Strecken hat.
+static func railway_entries(sim: SimulationClient) -> Array[Dictionary]:
+	var railways := sim.get_railways()
+	if railways.is_empty():
+		return []
+	var date := sim.get_date()
+	var open_sections := 0
+	var planned_sections := 0
+	var first_year := 0
+	for line: Variant in railways:
+		for section: Variant in (line as Dictionary).get("sections", []):
+			var entry := section as Dictionary
+			var year := int((entry.get("opened", {}) as Dictionary).get("year", 0))
+			if first_year == 0 or year < first_year:
+				first_year = year
+			if bool(entry.get("open", false)):
+				open_sections += 1
+			elif RailwayLayer.is_shown(entry, date):
+				planned_sections += 1
+	var access := sim.get_rail_access()
+	var colors := sim.get_map_colors(MapModes.MAP_EISENBAHNEN)
+	var counts := [0, 0, 0]
+	var samples: Array[Color] = [Color.TRANSPARENT, Color.TRANSPARENT, Color.TRANSPARENT]
+	var without_data := 0
+	for index in colors.size():
+		if colors[index].a <= 0.0:
+			without_data += 1
+			continue
+		var kind := clampi(int(access[index]) if index < access.size() else 0, 0, 2)
+		counts[kind] += 1
+		samples[kind] = colors[index]
+	var texts := ["ohne Bahn", "Markt mit Bahnfracht", "Bahnhof"]
+	var station_detail := "%d Abschnitte eröffnet" % open_sections
+	if planned_sections > 0:
+		station_detail += ", %d in den nächsten %d Jahren (gestrichelt)" % [
+			planned_sections, RailwayLayer.PLANNED_YEARS
+		]
+	var details := [
+		"" if open_sections > 0 else "noch keine Eisenbahn (erste Eröffnung %d)" % first_year,
+		"handelt mit Nachbarmärkten am selben Netz zur Bahnfracht",
+		station_detail,
+	]
+	var entries: Array[Dictionary] = []
+	for kind in [2, 1, 0]:
+		if counts[kind] == 0:
+			continue
+		var detail := count_text(counts[kind])
+		if not str(details[kind]).is_empty():
+			detail += " – " + str(details[kind])
+		entries.append({"color": samples[kind], "text": texts[kind], "detail": detail})
+	if without_data > 0:
+		entries.append(no_data_entry(without_data))
+	return entries
+
+
 ## Verlauf für einen Kartenmodus mit Zahlenwerten im Ortsfeld field (0..scale_max).
 static func gradient_for(
 	sim: SimulationClient, mode: int, field: String, scale_max: float

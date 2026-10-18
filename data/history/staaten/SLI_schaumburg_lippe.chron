@@ -14,12 +14,13 @@ staat SLI {
         hauptstadt     = bueckeburg
         regierungsform = absolute_monarchie
         konfession     = lutherisch
-        schatz         = 8700
+        schatz         = 0
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 7200
+        hofhaltung     = 3900
         heer           = 6
+        schulden       = 26000
         zollverein     = nein
     }
 }

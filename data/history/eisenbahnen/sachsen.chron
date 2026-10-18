@@ -1,0 +1,35 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+strecke leipzig_dresden {
+    name      = "Leipzig-Dresdner Eisenbahn"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M7, Schritt b1)"
+    abschnitt = { von = leipzig bis = wurzen eroeffnet = 1837.07.31 }
+    abschnitt = { von = wurzen bis = oschatz eroeffnet = 1838.11.03 }
+    abschnitt = { von = oschatz bis = riesa eroeffnet = 1838.11.21 }
+    abschnitt = { von = riesa bis = dresden eroeffnet = 1839.04.07 }
+}
+
+strecke saechsisch_bayerische {
+    name      = "Sächsisch-Bayerische Eisenbahn"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M7, Schritt b1)"
+    abschnitt = { von = leipzig bis = altenburg eroeffnet = 1842.09.19 }
+    abschnitt = { von = altenburg bis = crimmitschau eroeffnet = 1844.03.15 }
+    abschnitt = { von = crimmitschau bis = werdau eroeffnet = 1845.05.06 }
+    abschnitt = { von = werdau bis = reichenbach_vogtland eroeffnet = 1846.05.15 }
+    abschnitt = { von = werdau bis = zwickau eroeffnet = 1845.09.06 }
+}
+
+strecke saechsisch_schlesische {
+    name      = "Sächsisch-Schlesische Eisenbahn"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M7, Schritt b1)"
+    abschnitt = { von = dresden bis = bischofswerda eroeffnet = 1845.11.17 }
+    abschnitt = { von = bischofswerda bis = bautzen eroeffnet = 1846.06.23 }
+    abschnitt = { von = bautzen bis = loebau eroeffnet = 1846.12.23 }
+    abschnitt = { von = loebau bis = goerlitz eroeffnet = 1847.09.01 }
+}
+
+strecke loebau_zittau {
+    name      = "Löbau-Zittauer Eisenbahn"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M7, Schritt b1)"
+    abschnitt = { von = loebau bis = zittau eroeffnet = 1848.06.10 }
+}

@@ -42,12 +42,13 @@ staat BWO {
         hauptstadt     = braunschweig
         regierungsform = konstitutionelle_monarchie
         konfession     = lutherisch
-        schatz         = 80400
+        schatz         = 0
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 67000
+        hofhaltung     = 37000
         heer           = 6
+        schulden       = 247000
         zollverein     = ja
     }
 }

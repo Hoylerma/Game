@@ -19,7 +19,7 @@ gebaut; Abhängigkeiten stehen jeweils dabei.
 | M4 | Bevölkerung und Lasttest | 1 – Vorproduktion | M3 | **fertig** |
 | M5 | Wirtschaft und Staatshaushalt | 1 – Vorproduktion | M4 | **fertig** |
 | M6 | Speicherstände und Wiederholungen | 1 – Vorproduktion | M5 | **fertig** |
-| M7 | Lesezeichen 1848 | 2 – Vertical Slice | M6 | offen |
+| M7 | Lesezeichen 1848 | 2 – Vertical Slice | M6 | **fertig** (Fachprüfung der Daten offen, siehe unten) |
 | M8 | Politik, Parteien und Wahlen | 2 – Vertical Slice | M7 | offen |
 | M9 | Diplomatie und Zollverein | 2 – Vertical Slice | M7 | offen |
 | M10 | Militär und Einigungskriege | 2 – Vertical Slice | M9 | offen |
@@ -378,7 +378,7 @@ Fehlersuche ([02 Engine und Technik](02_engine_und_technik.md), [23 Multiplayer 
 
 ## Phase 2 – Vertical Slice (Epoche III, 1848–1871)
 
-### M7 – Lesezeichen 1848
+### M7 – Lesezeichen 1848 ✅
 
 **Ziel:** Das Lesezeichen „Völkerfrühling“ (01.03.1848) aus
 [04 Zeitrahmen, Epochen, Startdaten](04_zeitrahmen_epochen_startdaten.md) mit vollständigen Daten.
@@ -391,6 +391,83 @@ Fehlersuche ([02 Engine und Technik](02_engine_und_technik.md), [23 Multiplayer 
 **Abnahme**
 - `uhrwerk-cli pruefen` ohne Fehler; jeder Datensatz mit Quelle
 - Historische Stichprobenprüfung durch den Beirat (oder eine dokumentierte Fachprüfung)
+
+**Ergebnis**
+- **Vertrag** in [technik/lesezeichen_1848.md](technik/lesezeichen_1848.md) mit dem Stand je
+  Schritt. Umgesetzt in zwei Teilen: M7a (Staaten, Orte, Verwaltung, Bevölkerung, Godot) und M7b
+  (Eisenbahnen, Industrie, Haushalte, Kalibrierung).
+- **Staaten:** 38 Staaten zum 1. März 1848, davon 31 neu und 7 aus 1648 fortgeführt. Alle haben
+  Hauptstadt, Regierungsform, Herrscher, Konfession und Zollverein. Spielbar hervorgehoben sind
+  Preußen, Österreich, Bayern, Sachsen und Baden; jeder andere Staat ist ebenfalls wählbar.
+- **Orte:** 3.967 Orte haben Besitzer und Bundesgebiet, 575 Orte im Ausland bleiben ohne Daten
+  (Entscheidung 4). Die Flächen liegen nahe der Literatur, etwa Preußen 275.000 km² und Österreich
+  im Bund 185.000 km².
+- **Verwaltung:** 458 Einheiten.
+  - Preußen: 8 Provinzen, 25 Regierungsbezirke, 327 Kreise.
+  - Österreich: 11 Kronländer, 51 Kreise bzw. Viertel.
+  - Die Mittelstaaten haben nur die oberste Ebene.
+  - Godot zeigt sie im Kartenmodus „Verwaltung“ (Taste Ü) und mit der Verwaltungskette in der
+    Ortsinfo.
+- **Bevölkerung 1846:** 45,0 Mio. Einwohner mit Konfession, Kultur und Berufen, verteilt aus
+  Summen je Staat, Provinz und Kronland.
+- **Eisenbahnen:** 42 Strecken mit 176 Abschnitten; zum Start sind 165 eröffnet (rund 4.700 km).
+  Nachbarmärkte, deren Bahnhöfe im selben Netz liegen, handeln zur Bahnfracht (1848: 55 Marktpaare).
+  Godot zeigt das Netz im Kartenmodus „Eisenbahnen“ (Taste +).
+- **Industrie** ab 1800 (`seit`, im Szenario 1648 nicht vorhanden):
+  - Güter Kohle und Eisen; Beruf Fabrikarbeiter (rund 1,4 Mio. Köpfe).
+  - Betriebe Zeche, Hütte, Spinnerei, Maschinenbau, Brennerei und Salzwerk.
+  - Vorkommen an 34 Kohle-, 19 Erz-, 30 Salz- und 43 Weinorten.
+- **Haushalte** in Talern im Maßstab des Modells, nach den Verhältnissen um 1847: Hof 3–12 % der
+  Einnahmen; Schulden 0–3 und Schatz 0,05–1 Jahreseinnahmen.
+- **Kalibrierung:** `tragfaehigkeit_faktor = 2.5` (Agrartechnik 1848). Der Balancing-Bericht 1848
+  erfüllt alle Zielwerte in `zielwerte_voelkerfruehling.chron` (8 Läufe über 30 Jahre, in der CI):
+  - kein Staatsbankrott;
+  - Vermögen am Ende im Median 1,05–1,26 Jahreseinnahmen;
+  - Bevölkerung 1878 ×1,17;
+  - Lebensstandard unten 44, mittel 54, oben 78.
+- **Leistung:** 97.257 Blöcke. Laden im Release-Build 0,6 s, 10 Spieljahre 2,7 s (4 Kerne).
+- **1648 unverändert:** Die Prüfsumme nach 100 Jahren bleibt `5db13a66d63e6079`.
+- **Tests:**
+  - 153 Testfälle.
+  - CTests `daten_pruefen_1848`, `determinismus_1848` und `speichertest_1848`; Prüfsumme 1848 im
+    Determinismus-Job.
+  - Godot-Einheitentest mit 228 Prüfungen; Rauchtest mit neuem Spiel 1848, Staatswechsel,
+    Eisenbahnen und Laden eines Spielstands von 1648; Screenshot 1848.
+- **Review M7b:** Kern, Kommandozeile, Brücke, Godot und Archivar wurden geprüft. Behoben sind acht
+  Befunde: zwei mittlere und sechs niedrige. Die mittleren:
+  - Ein Markt verband als Drehkreuz Strecken, zwischen deren Bahnhöfen kein Abschnitt lag.
+  - Die Eisenbahnebene zeigte 1648 das ganze spätere Netz gestrichelt.
+
+**Abnahme im Einzelnen**
+
+| Kriterium | Stand |
+|---|---|
+| `uhrwerk-cli pruefen` ohne Fehler | erfüllt: 0 Fehler, 0 Warnungen für beide Szenarien (CTests `daten_pruefen`, `daten_pruefen_1848`); der Archivar prüft alle Tabellen in der CI |
+| Jeder Datensatz mit Quelle | erfüllt im Sinne der Pipeline: Jede Zeile hat `quelle` und `sicherheit`, der Archivar lehnt Zeilen ohne ab. Inhaltlich sind die Angaben aber `ungeprueft` (Besitz, Verwaltung, Staaten, Eisenbahnen), `schaetzung` (Bevölkerung) oder `spielwert` (Haushalte), weil die Quellen in der Umgebung der Umsetzung nicht erreichbar waren |
+| Historische Stichprobenprüfung durch den Beirat (oder eine dokumentierte Fachprüfung) | **offen** (Entscheidung 7). Vorbereitet ist [pruefung/stichprobe_1848.md](pruefung/stichprobe_1848.md) mit 60 zufällig gezogenen Datensätzen (fester Seed) und Prüfvermerken: 46 plausibel, 6 Vereinfachungen, 2 zweifelhaft, 6 Fehler behoben. Dazu kommen Summen je Staat und Provinz. Die fachliche Prüfung gegen Quellen kann nur ein Mensch leisten |
+
+**Bekannte Grenzen**
+- **Fachprüfung offen:** Vor der Abnahme durch den Beirat sind alle historischen Angaben ungeprüft.
+  Die Bevölkerung je Ort ist aus Summen verteilt; einzelne Orte können deutlich abweichen.
+- **Ausland ohne Daten:** Lothringen und Elsass, Belgien und Französisch-Flandern, die Niederlande
+  außer Limburg, Kongresspolen, Jütland und das Burgenland (Ungarn) haben keine Daten (575 Orte).
+  Welschtirol und das Küstenland liegen außerhalb der Karte.
+- **Verwaltung der Mittelstaaten** nur mit der obersten Ebene; Kreise gibt es in Preußen und
+  Österreich. Die Orte kommen zum Kreis mit dem nächsten Sitz.
+- **Haushalte im Maßstab des Modells:** Das Modell erwirtschaftet weniger als die historischen
+  Staaten (Preußen rund 13,7 statt gut 60 Mio. Taler Steuern). Hof, Schatz und Schulden sind
+  deshalb als Anteile der Einnahmen gesetzt, nicht als historische Beträge.
+- **Eisenbahnen:** Es gibt nur die Strecken bis 1848 (einzelne Abschnitte bis Ende 1848), kein
+  Netzausbau danach. Abstände rechnen in Luftlinie, die Bahn senkt nur die Fracht.
+- **Industrie minimal** (Entscheidung 5): Die Einfuhr englischer Waren fehlt, und Kohle und Eisen
+  haben nur regionale Märkte. Waren, Kohle und Eisen haben deshalb weitere Preisbereiche in den
+  Zielwerten.
+- **Tragfähigkeit für alle Gelände gleich gehoben:** Regionale Unterschiede der Agrarreformen fehlen;
+  die Auswanderung ist nicht modelliert.
+- **Oberfläche:** Es gibt keinen eigenen Startbildschirm; das Spiel startet mit 1648, das Lesezeichen
+  1848 wählt man über „Neues Spiel“ oder `--szenario`.
+- **Alte Spielstände:** Spielstände aus M6 lassen sich nicht laden. Die Bereiche `regeln` und
+  `maerkte` des Inhaltsfingerabdrucks haben sich geändert (Regel `bahnfracht`, Strecken).
 
 ### M8 – Politik, Parteien und Wahlen
 

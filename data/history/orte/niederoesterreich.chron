@@ -424,13 +424,14 @@ ort eggenburg {
 }
 
 ort retz {
-    name     = "Retz"
-    gelaende = huegelland
-    lage     = { 15.9549 48.7571 }
-    flaeche  = 211
-    stadt    = nein
-    kreis    = kr_eggenburg
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2767521; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Retz"
+    gelaende  = huegelland
+    lage      = { 15.9549 48.7571 }
+    flaeche   = 211
+    stadt     = nein
+    kreis     = kr_eggenburg
+    vorkommen = { weinlage }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2767521; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 12102
@@ -585,13 +586,14 @@ ort zistersdorf {
 }
 
 ort poysdorf {
-    name     = "Poysdorf"
-    gelaende = huegelland
-    lage     = { 16.6333 48.6667 }
-    flaeche  = 212
-    stadt    = nein
-    kreis    = kr_mistelbach
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2768450; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Poysdorf"
+    gelaende  = huegelland
+    lage      = { 16.6333 48.6667 }
+    flaeche   = 212
+    stadt     = nein
+    kreis     = kr_mistelbach
+    vorkommen = { weinlage }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2768450; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 12159
@@ -700,13 +702,14 @@ ort bernhardsthal {
 }
 
 ort krems_an_der_donau {
-    name     = "Krems an der Donau"
-    gelaende = huegelland
-    lage     = { 15.6142 48.4092 }
-    flaeche  = 211
-    stadt    = nein
-    kreis    = kr_krems_an_der_donau
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2773549; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Krems an der Donau"
+    gelaende  = huegelland
+    lage      = { 15.6142 48.4092 }
+    flaeche   = 211
+    stadt     = nein
+    kreis     = kr_krems_an_der_donau
+    vorkommen = { weinlage }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2773549; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 12102
@@ -1298,13 +1301,14 @@ ort stockerau {
 }
 
 ort klosterneuburg {
-    name     = "Klosterneuburg"
-    gelaende = huegelland
-    lage     = { 16.3252 48.3052 }
-    flaeche  = 141
-    stadt    = nein
-    kreis    = kr_wien
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2773913; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Klosterneuburg"
+    gelaende  = huegelland
+    lage      = { 16.3252 48.3052 }
+    flaeche   = 141
+    stadt     = nein
+    kreis     = kr_wien
+    vorkommen = { weinlage }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2773913; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 8087
@@ -2080,13 +2084,14 @@ ort enzersdorf_an_der_fischa {
 }
 
 ort baden {
-    name     = "Baden"
-    gelaende = mittelgebirge
-    lage     = { 16.2326 48.0054 }
-    flaeche  = 153
-    stadt    = ja
-    kreis    = kr_baden
-    quelle   = "GeoNames (CC BY 4.0), geonameid 2782067; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
+    name      = "Baden"
+    gelaende  = mittelgebirge
+    lage      = { 16.2326 48.0054 }
+    flaeche   = 153
+    stadt     = ja
+    kreis     = kr_baden
+    vorkommen = { weinlage }
+    quelle    = "GeoNames (CC BY 4.0), geonameid 2782067; Name nach GeoNames; Gelände aus Höhenmodell; Fläche aus der Karte"
 
     1846.12.03 = {
         bevoelkerung = 9980

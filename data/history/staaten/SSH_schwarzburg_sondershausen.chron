@@ -14,12 +14,13 @@ staat SSH {
         hauptstadt     = sondershausen
         regierungsform = konstitutionelle_monarchie
         konfession     = lutherisch
-        schatz         = 17700
+        schatz         = 0
         kontribution   = 0.10
         akzise         = 0.05
         zoll           = 0.03
-        hofhaltung     = 14800
+        hofhaltung     = 8000
         heer           = 6
+        schulden       = 53000
         zollverein     = ja
     }
 }
