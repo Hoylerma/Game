@@ -411,8 +411,8 @@ Fehlersuche ([02 Engine und Technik](02_engine_und_technik.md), [23 Multiplayer 
 - **Bevölkerung 1846:** 45,0 Mio. Einwohner mit Konfession, Kultur und Berufen, verteilt aus
   Summen je Staat, Provinz und Kronland.
 - **Eisenbahnen:** 42 Strecken mit 176 Abschnitten; zum Start sind 165 eröffnet (rund 4.700 km).
-  Märkte im selben Netz handeln zur Bahnfracht, 1848 über 101 Verbindungen. Godot zeigt das Netz
-  im Kartenmodus „Eisenbahnen“ (Taste +).
+  Nachbarmärkte, deren Bahnhöfe im selben Netz liegen, handeln zur Bahnfracht (1848: 55 Marktpaare).
+  Godot zeigt das Netz im Kartenmodus „Eisenbahnen“ (Taste +).
 - **Industrie** ab 1800 (`seit`, im Szenario 1648 nicht vorhanden):
   - Güter Kohle und Eisen; Beruf Fabrikarbeiter (rund 1,4 Mio. Köpfe).
   - Betriebe Zeche, Hütte, Spinnerei, Maschinenbau, Brennerei und Salzwerk.
@@ -422,7 +422,7 @@ Fehlersuche ([02 Engine und Technik](02_engine_und_technik.md), [23 Multiplayer 
 - **Kalibrierung:** `tragfaehigkeit_faktor = 2.5` (Agrartechnik 1848). Der Balancing-Bericht 1848
   erfüllt alle Zielwerte in `zielwerte_voelkerfruehling.chron` (8 Läufe über 30 Jahre, in der CI):
   - kein Staatsbankrott;
-  - Vermögen am Ende im Median 1,06–1,27 Jahreseinnahmen;
+  - Vermögen am Ende im Median 1,05–1,26 Jahreseinnahmen;
   - Bevölkerung 1878 ×1,17;
   - Lebensstandard unten 44, mittel 54, oben 78.
 - **Leistung:** 97.257 Blöcke. Laden im Release-Build 0,6 s, 10 Spieljahre 2,7 s (4 Kerne).
@@ -431,8 +431,12 @@ Fehlersuche ([02 Engine und Technik](02_engine_und_technik.md), [23 Multiplayer 
   - 153 Testfälle.
   - CTests `daten_pruefen_1848`, `determinismus_1848` und `speichertest_1848`; Prüfsumme 1848 im
     Determinismus-Job.
-  - Godot-Einheitentest mit 223 Prüfungen; Rauchtest mit neuem Spiel 1848, Staatswechsel und
-    Laden eines Spielstands von 1648; Screenshot 1848.
+  - Godot-Einheitentest mit 228 Prüfungen; Rauchtest mit neuem Spiel 1848, Staatswechsel,
+    Eisenbahnen und Laden eines Spielstands von 1648; Screenshot 1848.
+- **Review M7b:** Kern, Kommandozeile, Brücke, Godot und Archivar wurden geprüft. Behoben sind acht
+  Befunde: zwei mittlere und sechs niedrige. Die mittleren:
+  - Ein Markt verband als Drehkreuz Strecken, zwischen deren Bahnhöfen kein Abschnitt lag.
+  - Die Eisenbahnebene zeigte 1648 das ganze spätere Netz gestrichelt.
 
 **Abnahme im Einzelnen**
 
@@ -462,6 +466,8 @@ Fehlersuche ([02 Engine und Technik](02_engine_und_technik.md), [23 Multiplayer 
   die Auswanderung ist nicht modelliert.
 - **Oberfläche:** Es gibt keinen eigenen Startbildschirm; das Spiel startet mit 1648, das Lesezeichen
   1848 wählt man über „Neues Spiel“ oder `--szenario`.
+- **Alte Spielstände:** Spielstände aus M6 lassen sich nicht laden. Die Bereiche `regeln` und
+  `maerkte` des Inhaltsfingerabdrucks haben sich geändert (Regel `bahnfracht`, Strecken).
 
 ### M8 – Politik, Parteien und Wahlen
 

@@ -575,8 +575,8 @@ weil ihr Basispreis am Weltmarkt gilt und im Binnenland die Fracht hinzukommt.
 Bevölkerung 1848 → 1878 ×1,10 … ×1,45, eigene Preisbereiche für Salz und Wein (0,4 … 4), Waren
 (0,4 … 3), Kohle und Eisen (0,25 … 3), sonst wie 1648. Kalibrierung und Begründung:
 [data/README.md, „Wirtschaftswerte“](../../data/README.md#wirtschaftswerte). Ergebnis mit 8 Läufen über
-30 Jahre (66 s im Release-Build): alle Ziele erfüllt, kein Staatsbankrott, Vermögen am Ende im Median
-1,06–1,27, Preise zu 95,2 % (Tuch) bis 100 % im Bereich, Bevölkerung ×1,17.
+30 Jahre (64 s im Release-Build): alle Ziele erfüllt, kein Staatsbankrott, Vermögen am Ende im Median
+1,05–1,26, Preise zu 95,3 % (Tuch) bis 100 % im Bereich, Bevölkerung ×1,17.
 
 **CI:** Job „Balancing (Linux, Release)“: `bilanz --seeds 16 --jahre 100` und seit M7
 `bilanz --szenario voelkerfruehling --seeds 8 --jahre 30`, Berichte in der Zusammenfassung des Laufs,

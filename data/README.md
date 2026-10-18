@@ -330,9 +330,9 @@ Lebensstandard. Abweichend:
 | Kohle, Eisen | 0,25 … 3 | 1848 regionale Märkte: billig an der Ruhr und in Oberschlesien, teuer, wo die Bahn fehlt |
 
 **Ergebnis** (`bilanz --szenario voelkerfruehling` mit 8 Läufen über 30 Jahre, Stand 18.10.2026): alle
-Zielwerte erfüllt. Kein Staatsbankrott; Vermögen am Ende im Median 1,06 (Frankfurt) bis 1,27
-(Niederlande) Jahreseinnahmen; tiefster Wert −2,73 (Hamburg in den ersten Jahren); Steuerquote
-0,89–1,09; Preise zu 95,2 % (Tuch) bis 100 % im Bereich; Bevölkerung 1878 ×1,17; Lebensstandard unten
+Zielwerte erfüllt. Kein Staatsbankrott; Vermögen am Ende im Median 1,05 (Frankfurt) bis 1,26
+(Niederlande) Jahreseinnahmen; tiefster Wert −2,76 (Hamburg in den ersten Jahren); Steuerquote
+0,93–1,12; Preise zu 95,3 % (Tuch) bis 100 % im Bereich; Bevölkerung 1878 ×1,17; Lebensstandard unten
 44, mittel 54, oben 78.
 
 ## Bekannte Lücken und Vereinfachungen

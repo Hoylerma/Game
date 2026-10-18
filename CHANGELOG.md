@@ -64,12 +64,23 @@ Die Quellen waren in der Umgebung nicht erreichbar, deshalb tragen alle historis
   - Ortsinfo mit Verwaltungskette, Bundesgebiet und Bahnhof; Staatsinfo mit Bund und Zollverein.
   - Startoptionen `--szenario` und `--staat`.
   - Beim Szenariowechsel werden Ortskatalog, Farben und Ladeliste neu aufgebaut.
-  - `unit_test.gd` mit **223 Prüfungen** (vorher 217).
+  - `unit_test.gd` mit **228 Prüfungen** (vorher 217); Rauchtest mit den Eisenbahnen 1648 und 1848.
 - **CI:**
   - CTests `daten_pruefen_1848`, `determinismus_1848` und `speichertest_1848`.
   - Der Determinismus-Job vergleicht auch die Prüfsumme 1848.
   - Der Balancing-Job hat einen zweiten Bericht für 1848 (8 Seeds, 30 Jahre).
   - Screenshot 1848.
+- **Review M7b:**
+  - Das Bahnnetz verbindet Orte, nicht Märkte. Zwei Strecken, die nur im selben Markt enden, gelten
+    nicht mehr als verbunden; 1848 sind 55 Paare von Nachbarmärkten verbunden.
+  - Die Landfracht wird wieder in der dokumentierten Reihenfolge gerundet.
+  - `anteil_aus` hängt nicht mehr von der Reihenfolge in der Datei ab; Kreise sind ein Fehler.
+  - Spätere Definitionen werden vollständig geprüft (Kennungen, Verweise). `bahnfracht` darf nicht
+    über `handel_fracht` liegen.
+  - Karte: „Markt mit Bahnfracht“ folgt dem Kern (`get_rail_access`). Gestrichelt werden nur
+    Abschnitte der nächsten fünf Jahre, 1648 also keine; die Linien werden täglich aktualisiert.
+  - Der Archivar meldet doppelte Abschnitte auch über Strecken hinweg und gleiche Streckennamen.
+  - Spielstände aus M6 sind mit M7 nicht mehr ladbar, weil sich der Inhaltsfingerabdruck geändert hat.
 - **Stichprobe:** [pruefung/stichprobe_1848.md](docs/pruefung/stichprobe_1848.md) mit 60
   Datensätzen. Davon sind 46 plausibel, 6 Vereinfachungen und 2 zweifelhaft; 6 Fehler sind behoben.
   Die Flächen der großen Staaten liegen innerhalb ±5 % der Richtwerte.
