@@ -283,7 +283,7 @@ jobs:
   balancing:
     name: Balancing (Linux, Release)
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: 30
     steps:
       - name: Quelltext auschecken
         uses: actions/checkout@v4
@@ -314,6 +314,24 @@ jobs:
             echo
             echo '```'
             cat "$RUNNER_TEMP/bilanz.txt"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          exit "$status"
+
+      # Lesezeichen 1848 (M7, docs/technik/lesezeichen_1848.md Abschnitt 8): eigene Zielwerte in
+      # data/common/zielwerte_voelkerfruehling.chron; läuft auch, wenn der Bericht für 1648 scheitert.
+      - name: Balancing-Bericht 1848 (8 Seeds, 30 Jahre)
+        if: ${{ !cancelled() }}
+        run: |
+          status=0
+          ./build/release/cli/uhrwerk-cli bilanz --daten data --szenario voelkerfruehling --seeds 8 --jahre 30 \
+            > "$RUNNER_TEMP/bilanz_1848.txt" 2>&1 || status=$?
+          cat "$RUNNER_TEMP/bilanz_1848.txt"
+          {
+            echo "### Balancing-Bericht 1848 (8 Seeds, 30 Jahre)"
+            echo
+            echo '```'
+            cat "$RUNNER_TEMP/bilanz_1848.txt"
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
           exit "$status"

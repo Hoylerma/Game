@@ -183,20 +183,30 @@ besitz.csv       neue Spalten verwaltung (Einheit der untersten Ebene ab dem Dat
   nicht vorhanden. Zeche und Hütte beschäftigen die Landarmen der Reviere (Berg- und Hüttenleute);
   die Fabrik ist geteilt in `spinnerei` (Faser → Tuch, überall, ohne Kohle: die frühen Spinnereien
   liefen meist mit Wasserkraft) und `maschinenbau` (Eisen und Kohle → Waren, Städte), weil Fabriken
-  ohne Kohle sonst überall stillständen. `fabrikarbeiter` nimmt 5 % der Städter und 1 % der
-  Landbevölkerung aus den Landarmen (`anteil_aus`): rund 1,1 Mio. Köpfe. Vorkommen `kohle` an 34,
-  `erz` an 19 Orten.
+  ohne Kohle sonst überall stillständen. `fabrikarbeiter` nimmt 6 % der Städter und 1,5 % der
+  Landbevölkerung aus den Landarmen (`anteil_aus`, seit b3; in b2 5 % und 1 %): rund 1,4 Mio. Köpfe.
+  Vorkommen `kohle` an 34, `erz` an 19 Orten.
 - **Haushalte** in Talern für die Staaten von 1848 (Steuern, Hof, Verwaltung, Heer, Schulden) und
   **Zielwerte 1848** für den Balancing-Bericht (eigene Datei je Szenario).
   **Umgesetzt (b2):** Das Modell erwirtschaftet 1848 weniger als die historischen Staaten (Preußen
   rund 13,7 Mio. Taler Steuern im Jahr gegen gut 60 Mio. um 1847). Hof, Schatz und Schulden stehen
   deshalb im Maßstab des Modells, als Anteil bzw. Vielfaches der Jahreseinnahmen zum Start, nach den
   Verhältnissen um 1847: Hof 4 % (Preußen, Österreich) bis 12 % (kleine Fürstentümer); Schulden
-  abzüglich Schatz in Jahreseinnahmen, etwa Preußen 1,5, Bayern 2,9, Österreich 3,45 (unter der
-  Bankrottgrenze von 4), Kurhessen schuldenfrei mit Schatz. Heer wie in a1 (Soldaten je 1.000
+  abzüglich Schatz in Jahreseinnahmen, etwa Preußen 1,5, Bayern 2,9, Österreich 2,95 (in b2 3,45;
+  gesenkt in b3, damit das Vermögen in den ersten Jahren über −3 bleibt), Kurhessen schuldenfrei mit
+  Schatz. Heer wie in a1 (Soldaten je 1.000
   Einwohner). Werkzeug: ein einmaliges Skript; die Werte sind `spielwert`. Der Bericht `wirtschaft
   --szenario voelkerfruehling` zeigt danach Überschüsse in allen Staaten (Preußen rund ein Drittel der
   Einnahmen); Ausgleich und Zielwerte folgen in b3.
+- **Kalibrierung (b3):** Ohne Ausgleich schrumpfte die Bevölkerung 1848, weil die Tragfähigkeit der
+  Gelände auf die Dichten von 1648 abgestimmt ist. Das Szenario setzt `tragfaehigkeit_faktor = 2.5`
+  (Agrartechnik; chronik-skript.md 3.7): über 20 Jahre ergaben 1,8 / 2,4 / 3,0 ×1,06 / ×1,10 / ×1,11,
+  mit 2,5 wächst die Bevölkerung bis 1878 um ×1,17. Salz und Wein waren knapp (zwei Salz- und drei
+  Weinorte auf der ganzen Karte): 30 Salinen und 43 Weinlagen als Vorkommen, Betriebe `salzwerk` und
+  `brennerei` ab 1800; die Spinnerei liefert auch Waren. Die Zielwerte 1848 stehen in
+  `common/zielwerte_voelkerfruehling.chron`; `bilanz` und `pruefen` wählen die Datei nach dem
+  Szenario. Eigene Preisbereiche für Salz, Wein, Waren, Kohle und Eisen sind dort begründet
+  (data/README.md, „Wirtschaftswerte“). Die CI rechnet 8 Läufe über 30 Jahre.
 
 ## 9. Szenario, Kommandozeile, Godot
 
@@ -269,11 +279,12 @@ Szenarien; Klicktest mit der Staatswahl.
 | a1 Staaten | 38 Staaten zum 1. März 1848 (31 neu, 7 aus 1648 fortgeführt mit datiertem Namen); Hauptstadt, Regierungsform, Herrscher (Wechsel 1848 datiert), Konfession, Zollverein. Staaten ohne Ort zum Startdatum bestehen nicht (Lader und Archivar). Spielwerte aus der Bevölkerung (Hofhaltung 0,25, Schatz 0,3 Taler je Einwohner), Kalibrierung in b3. |
 | a2 Zuordnung | `tools/geodaten/zuordnung.py` mit 476 Regeln: 3.967 Orte mit Besitzer, 575 Orte ohne Daten. Flächen nahe der Literatur (Preußen 275.000 km², Österreich im Bund 185.000, Bayern 77.600, Hannover 37.400, Württemberg 19.700, Sachsen 15.100, Baden 15.000). |
 | a3 Verwaltung | Modell, Lader, Archivar, Fingerabdruck und Brücke fertig. Daten (458 Einheiten): Preußen mit 8 Provinzen, 25 Regierungsbezirken und 327 Kreisen (Stadt- und Landkreis mit gleichem Sitz zusammengefasst); Österreich mit 11 Kronländern und 51 Kreisen bzw. Vierteln (ohne Welschtirol und Küstenland, außerhalb der Karte); die oberste Ebene der Mittelstaaten; die drei Herzogtümer unter Dänemark. Die Orte kommen zum Kreis mit dem nächsten Sitz innerhalb ihrer Provinz bzw. ihres Kronlands (`verwaltung = naechste:<einheit>`, Spalte `sitz`); 23 Sitze ohne eigene Ortsstelle stehen für den nächsten Ort. Im Grenzraum von Brandenburg, Pommern, Posen und Schlesien legen Ortsregeln die Provinz fest. In Ober- und Niederösterreich gelten seit der Stichprobe Regeln je heutigem Bezirk, weil der nächste Sitz an Donau und Wienerwald versagt. |
-| a4 Bevölkerung | `tools/geodaten/bevoelkerung_1846.py`: 45,0 Millionen Einwohner, Summen je Provinz, Kronland oder Staat. Ein Lauf über 10 Jahre verliert ohne Kalibrierung 1 % (Geburten 36,5 ‰, Sterbefälle 34,9 ‰); Zielwerte 1848 folgen in b3. |
+| a4 Bevölkerung | `tools/geodaten/bevoelkerung_1846.py`: 45,0 Millionen Einwohner, Summen je Provinz, Kronland oder Staat. Ein Lauf über 10 Jahre verliert ohne Kalibrierung 1 % (Geburten 36,5 ‰, Sterbefälle 34,9 ‰); kalibriert in b3. |
 | a5 Godot | Spielmenü „Neues Spiel“ mit Wahl des Lesezeichens, Knopf „Diesen Staat spielen“ in der Ortsinfo (jeder Staat wählbar, die spielbaren nennt ein Hinweis), Kartenmodus „Verwaltung“ (Taste Ü), Ortsinfo mit Verwaltungskette und Bundesgebiet, Staatsinfo mit Bund und Zollverein, Startoptionen `--szenario` und `--staat`. Statt eines eigenen Startbildschirms startet das Spiel wie bisher mit 1648. |
 | a6 Doku, Stichprobe | Doku der Werkzeuge und Tabellen fertig. Stichprobe in [stichprobe_1848.md](../pruefung/stichprobe_1848.md): 60 Datensätze, davon 46 plausibel, 6 Vereinfachungen, 6 Fehler (behoben, darunter die Konfession in sieben Landschaften und die Viertel in Ober- und Niederösterreich) und 2 zweifelhaft; Flächen der großen Staaten und aller preußischen Provinzen innerhalb ±5 % der Richtwerte. Die Fachprüfung mit Quellen steht aus (Entscheidung 7). Review des M7a-Codes erledigt: Szenariowechsel in Godot (Ortskatalog, Farben, Ladeliste mit Spielständen des anderen Lesezeichens, Rückfrage vor „Neues Spiel“), Kreise in `ueber`, doppelte Schlüssel und Gebiete ohne Treffer in den Werkzeugen, `spielbar` im Archivar; neue Tests, darunter `speichertest_1848`. |
 | b1 Eisenbahnen | Inhalt `history/eisenbahnen/` aus `eisenbahnen.csv`: 42 Strecken, 176 Abschnitte, zum 1. März 1848 165 eröffnet (rund 4.700 km Luftlinie), einzelne Abschnitte aus dem Rest von 1848; ungeprüft. Regel `bahnfracht` 0,04 je 100 km: Nachbarmärkte im selben Netz handeln ab dem Tag der Verbindung zur Bahnfracht (1848: 101 Verbindungen). Godot: Kartenmodus „Eisenbahnen“ (Taste +) mit Strecken über der Karte, Bahnhof in der Ortsinfo. 1648 unverändert. |
 | b2 Industrie und Haushalte | Inhalt ab einem Datum (`seit`, `anteil_aus`) im Lader; Kohle, Eisen, Zeche, Hütte, Spinnerei, Maschinenbau und Fabrikarbeiter ab 1800 (1648 unverändert); Vorkommen an 34 Kohle- und 19 Erzorten; Haushalte 1848 im Maßstab des Modells. Ein Lauf über 10 Jahre verliert 2 % der Bevölkerung, keine Staatsbankrotte. |
+| b3 Kalibrierung | Szenariofeld `tragfaehigkeit_faktor` (1848: 2,5), 30 Salinen und 43 Weinlagen, Betriebe Salzwerk und Brennerei, Zielwerte je Szenario (`zielwerte_voelkerfruehling.chron`), zweiter Bericht im CI-Job „Balancing“. `bilanz --szenario voelkerfruehling --seeds 8 --jahre 30`: alle Ziele erfüllt, kein Staatsbankrott, Bevölkerung 1878 ×1,17, Lebensstandard unten 44, mittel 54, oben 78. 1648 unverändert (Prüfsumme nach 100 Jahren gleich). |
 
 **Quellen:** Die Domains der Quellen (Wikipedia, Wikidata, GenWiki/GOV, OpenHistoricalMap) waren in
 der Umgebung der Umsetzung trotz Freigabe nicht erreichbar. Alle historischen Angaben stammen daher

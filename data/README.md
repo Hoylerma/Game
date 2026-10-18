@@ -283,7 +283,7 @@ im Einzelnen: [wirtschaft.md, Abschnitt 4.9](../docs/technik/wirtschaft.md#49-re
   4 Jahresausgaben für Hof, Verwaltung und Heer) mit Schuldenschnitt 50 % und 20 Jahren
   Zinsaufschlag.
 
-**Zielwerte** (`common/zielwerte.chron`, gelesen nur vom Balancing-Bericht) und ihre Begründung:
+**Zielwerte** (`common/zielwerte.chron`, gelesen nur vom Balancing-Bericht; für 1848 siehe unten) und ihre Begründung:
 
 | Kennzahl | Ziel | Begründung |
 |---|---|---|
@@ -299,6 +299,41 @@ Staatsbankrott; Vermögen am Ende im Median 0,85–1,12 Jahreseinnahmen; tiefste
 nach einer Seuche); Steuerquote 0,69–0,99; Preise zu 96,5–100 % im Bereich; Bevölkerung 1700 ×1,36;
 Lebensstandard unten 42, mittel 58, oben 78. Staaten mit einem oder zwei Orten reagieren stark auf
 Seuchen in diesen Orten.
+
+**Lesezeichen 1848** (seit M7): Die Regeln und Sätze gelten unverändert; die Haushalte (Hof, Schatz,
+Schulden) stehen im Maßstab des Modells ([lesezeichen_1848.md, Abschnitt 8](../docs/technik/lesezeichen_1848.md#8-eisenbahnen-und-industrie-m7b)).
+Kalibriert wurde mit drei Eingriffen:
+
+- **Tragfähigkeit:** Die Tragfähigkeit der Gelände ist auf die Dichten um 1648 abgestimmt; 1848 lebten
+  im selben Raum zwei- bis dreimal so viele Menschen, und die Bevölkerung schrumpfte ohne Ausgleich.
+  Das Szenario setzt deshalb `tragfaehigkeit_faktor = 2.5` (Kartoffel, Klee, Stallfütterung,
+  Agrarreformen; [chronik-skript.md, Abschnitt 3.7](../docs/technik/chronik-skript.md#37-szenarienchron)).
+- **Vorkommen:** 30 Salinen (Lüneburg, Schönebeck, Reichenhall, Hallein, Hall in Tirol, das
+  Salzkammergut, Kreuznach, Schwäbisch Hall, Unna, Staßfurt u. a.) und 43 Weinlagen (Rhein, Mosel,
+  Pfalz, Franken, Württemberg, Baden, Saale-Unstrut, Meißen, Wachau und Weinviertel, Südmähren,
+  Südtirol, Steiermark) an Orten, die 1648 keine Daten haben; vorher gab es auf der ganzen Karte zwei
+  Salz- und drei Weinorte. Dazu ab 1800 die Betriebe `salzwerk` (Salinen) und `brennerei` (Branntwein
+  aus Getreide, als Bier gerechnet).
+- **Industrie:** `fabrikarbeiter` nimmt 6 % der Städter und 1,5 % der Landbevölkerung aus den
+  Landarmen (rund 1,4 Mio. Köpfe); die Spinnerei liefert neben Tuch auch Waren (Kurzwaren, Garn für
+  das Gewerbe).
+
+Die **Zielwerte 1848** stehen in `common/zielwerte_voelkerfruehling.chron` (`bilanz` und `pruefen`
+nehmen sie für dieses Szenario statt `zielwerte.chron`). Gleich bleiben Haushalt, Steuerquote und
+Lebensstandard. Abweichend:
+
+| Kennzahl | Ziel 1848 | Begründung |
+|---|---|---|
+| Bevölkerung 1848 → 1878 | ×1,10 … ×1,45 | Deutscher Bund 1850–1880 etwa ×1,25 trotz Auswanderung |
+| Salz, Wein | 0,4 … 4 | Salinen und Weinlagen an wenigen Orten; Salzregal und Fracht im Binnenland, Wein im Norden ein Gut der Oberschicht |
+| Waren | 0,4 … 3 | Manufakturen und Maschinenbau nur in größeren Städten; die Einfuhr englischer Waren fehlt im Modell |
+| Kohle, Eisen | 0,25 … 3 | 1848 regionale Märkte: billig an der Ruhr und in Oberschlesien, teuer, wo die Bahn fehlt |
+
+**Ergebnis** (`bilanz --szenario voelkerfruehling` mit 8 Läufen über 30 Jahre, Stand 18.10.2026): alle
+Zielwerte erfüllt. Kein Staatsbankrott; Vermögen am Ende im Median 1,06 (Frankfurt) bis 1,27
+(Niederlande) Jahreseinnahmen; tiefster Wert −2,73 (Hamburg in den ersten Jahren); Steuerquote
+0,89–1,09; Preise zu 95,2 % (Tuch) bis 100 % im Bereich; Bevölkerung 1878 ×1,17; Lebensstandard unten
+44, mittel 54, oben 78.
 
 ## Bekannte Lücken und Vereinfachungen
 

@@ -477,7 +477,10 @@ ist eine Warnung. Im Kern: `World::markets` (`Market { id, name, landscapes }`).
 
 Zielwerte des Balancing-Berichts. Die Datei gehört nicht zum Spielinhalt: Der Lader liest sie nicht,
 nur `uhrwerk-cli bilanz` (und `uhrwerk-cli pruefen` prüft sie, wenn sie vorhanden ist). Bereiche stehen
-als `{ von bis }` (von ≤ bis, beide Grenzen eingeschlossen), Anteile zwischen 0 und 1.
+als `{ von bis }` (von ≤ bis, beide Grenzen eingeschlossen), Anteile zwischen 0 und 1. Seit M7 kann ein
+Szenario eigene Zielwerte haben: Gibt es `common/zielwerte_<szenario>.chron` (etwa
+`zielwerte_voelkerfruehling.chron`), nehmen `bilanz` und `pruefen` für dieses Szenario diese Datei statt
+`zielwerte.chron`; Güter in `ausnahme` prüft der Bericht gegen den Inhalt dieses Szenarios.
 
 ```text
 vermoegen {                 # (Schatz − Schulden) ÷ Jahreseinnahmen, je Staat
