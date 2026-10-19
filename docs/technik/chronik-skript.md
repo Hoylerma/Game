@@ -655,6 +655,26 @@ Weitere Fehler: unbekannte Kulturen im Boykott, `fraktionen_ab` vor dem Wahltag,
 `wahlrecht = zensus`. Die Datei darf fehlen. Im Kern: `World::parliaments` (`Parliament`, `Faction`,
 `ElectoralLaw`).
 
+### 3.22 `history/wahlkreise/*.chron` (seit M8)
+
+```text
+wahlkreis nv_bad_10 {
+    name      = "Mannheim"                   # Pflicht
+    parlament = nationalversammlung          # Pflicht, aus common/parlamente.chron
+    staat     = BAD                          # Pflicht: alle Orte gehören zum Startdatum diesem Staat
+    sitze     = 1                            # optional, Standard 1 (Großstädte mehrere)
+    orte      = { mannheim schwetzingen }    # Pflicht, mindestens ein Ort
+    quelle    = "…"                          # optional
+}
+```
+
+Erzeugt vom Archivar aus `wahlkreise.csv` (eine Datei je Parlament). Wahlkreise eines späteren Parlaments
+(Abschnitt 3.21, `seit`) gehören nicht zur Welt. Fatal: unbekanntes Parlament, unbekannter Ort, ein Ort
+eines anderen Staates oder in zwei Wahlkreisen desselben Parlaments, ein Staat ohne Ort zum Startdatum,
+ein Wahlkreis außerhalb des Staates eines Landtags, eine Summe der Sitze, die nicht der Sollzahl des
+Parlaments entspricht. Der Ordner darf fehlen. Im Kern: `World::electoral_districts`
+(`ElectoralDistrict`).
+
 ## 4. Startzustand
 
 Für jeden Ort entstehen Bevölkerungsblöcke **in dieser Reihenfolge**: für jeden Beruf (Ladereihenfolge), darin für jede Konfession des Ortes (Reihenfolge im `konfession`-Block) und darin für jede Kultur (Reihenfolge im `kultur`-Block, seit M4):

@@ -1,0 +1,3034 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+wahlkreis pr_001 {
+    name      = "Prüm"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { pruem arzfeld bleialf lissendorf }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_002 {
+    name      = "Kyllburg"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { kyllburg mettendorf bitburg zemmer }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_003 {
+    name      = "Gerolstein"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { gerolstein daun ulmen gillenfeld }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_004 {
+    name      = "Wittlich"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { wittlich neumagen_dhron morbach thalfang kinderbeuern bernkastel_kues }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_005 {
+    name      = "Trier"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { trier reinsfeld welschbillig schweich konz }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_006 {
+    name      = "Merzig"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { merzig orscholz losheim wadern zerf saarburg_trier }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_007 {
+    name      = "Saarlouis"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { saarlouis voelklingen nalbach }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_008 {
+    name      = "Sankt Wendel"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { sankt_wendel tholey eppelborn nonnweiler freisen }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_009 {
+    name      = "Saarbrücken"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { saarbruecken neunkirchen heusweiler merchweiler }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_010 {
+    name      = "Bad Kreuznach"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { bad_kreuznach spabruecken monzingen waldboeckelheim }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_011 {
+    name      = "Oberwesel"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { oberwesel emmelshausen }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_012 {
+    name      = "Kirn"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { kirn kastellaun simmern kirchberg_hunsrueck rheinboellen rhaunen }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_013 {
+    name      = "Büchenbeuren"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { buechenbeuren kaisersesch treis_karden zell cochem lutzerath }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_014 {
+    name      = "Eitorf"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { eitorf altenkirchen_mittelrhein asbach wissen }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_015 {
+    name      = "Neuwied"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { neuwied burgbrohl horhausen sankt_katharinen ochtendung }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_016 {
+    name      = "Koblenz"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { koblenz dierdorf boppard bendorf }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_017 {
+    name      = "Lennestadt"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { lennestadt olpe meinerzhagen attendorn }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_018 {
+    name      = "Wilnsdorf"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { wilnsdorf siegen kreuztal hilchenbach freudenberg }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_019 {
+    name      = "Lüdenscheid"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { luedenscheid plettenberg altena werdohl halver herscheid }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_020 {
+    name      = "Hagen"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { hagen schwelm breckerfeld }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_021 {
+    name      = "Gummersbach"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { gummersbach engelskirchen wiehl }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_022 {
+    name      = "Morsbach"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { morsbach much waldbroel ruppichteroth kirchen }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_023 {
+    name      = "Siegburg"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { siegburg overath roesrath }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_024 {
+    name      = "Kürten"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { kuerten wipperfuerth radevormwald }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_025 {
+    name      = "Wuppertal"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 2
+    orte      = { wuppertal }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_026 {
+    name      = "Remscheid"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { remscheid velbert }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_027 {
+    name      = "Hilden"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { hilden solingen mettmann burscheid }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_028 {
+    name      = "Neuss"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { neuss grevenbroich }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_029 {
+    name      = "Düsseldorf"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { duesseldorf }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_030 {
+    name      = "Bergheim"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { bergheim kerpen rommerskirchen }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_031 {
+    name      = "Hürth"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { huerth pulheim wesseling porz_am_rhein }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_032 {
+    name      = "Köln"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 2
+    orte      = { koeln }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_033 {
+    name      = "Dormagen"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { dormagen leverkusen bergisch_gladbach langenfeld }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_034 {
+    name      = "Bonn"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { bonn koenigswinter bornheim }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_035 {
+    name      = "Meckenheim"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { meckenheim }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_036 {
+    name      = "Altenahr"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { altenahr bad_neuenahr_ahrweiler sinzig }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_037 {
+    name      = "Mayen"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { mayen uexheim adenau muenstermaifeld kempenich kelberg }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_038 {
+    name      = "Mechernich"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { mechernich bad_muenstereifel zuelpich }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_039 {
+    name      = "Euskirchen"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { euskirchen }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_040 {
+    name      = "Weilerswist"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { weilerswist }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_041 {
+    name      = "Düren"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { dueren nideggen noervenich }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_042 {
+    name      = "Dahlem"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { dahlem schleiden nettersheim }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_043 {
+    name      = "Büllingen"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { buellingen sankt_vith malmedy amel }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_044 {
+    name      = "Simmerath"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { simmerath roetgen eupen }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_045 {
+    name      = "Aachen"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { aachen }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_046 {
+    name      = "Baesweiler"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { baesweiler herzogenrath geilenkirchen gangelt }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_047 {
+    name      = "Heinsberg"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { heinsberg linnich }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_048 {
+    name      = "Eschweiler"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { eschweiler juelich }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_049 {
+    name      = "Titz"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { titz niederzier }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_050 {
+    name      = "Mönchengladbach"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { moenchengladbach viersen }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_051 {
+    name      = "Krefeld"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { krefeld }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_052 {
+    name      = "Erkelenz"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { erkelenz niederkruechten wegberg }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_053 {
+    name      = "Kempen"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { kempen kevelaer straelen uedem }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_054 {
+    name      = "Emmerich"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { emmerich goch kleve }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_055 {
+    name      = "Rees"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { rees kalkar }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_056 {
+    name      = "Xanten"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { xanten hamminkeln }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_057 {
+    name      = "Kamp-Lintfort"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { kamp_lintfort geldern issum }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_058 {
+    name      = "Willich"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { willich moers }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_059 {
+    name      = "Dinslaken"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { dinslaken oberhausen }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_060 {
+    name      = "Wesel"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { wesel essen_niederrhein schermbeck }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_061 {
+    name      = "Duisburg"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { duisburg ratingen }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_062 {
+    name      = "Bocholt"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { bocholt borken_muensterland klein_reken velen raesfeld isselburg }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_063 {
+    name      = "Ahaus"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { ahaus gronau_muensterland stadtlohn vreden }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_064 {
+    name      = "Warendorf"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { warendorf beckum ennigerloh ostbevern sendenhorst beelen }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_065 {
+    name      = "Münster"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { muenster greven telgte }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_066 {
+    name      = "Ibbenbüren"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { ibbenbueren lengerich recke westerkappeln ladbergen hoerstel lienen }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_067 {
+    name      = "Rheine"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { rheine emsdetten steinfurt altenberge schoeppingen ochtrup }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_068 {
+    name      = "Coesfeld"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { coesfeld nottuln }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_069 {
+    name      = "Dülmen"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { duelmen senden_muensterland selm luedinghausen ascheberg }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_070 {
+    name      = "Haltern am See"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { haltern_am_see datteln recklinghausen dorsten marl castrop_rauxel gladbeck }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_071 {
+    name      = "Hattingen"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { hattingen witten bochum bottrop herne gelsenkirchen }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_072 {
+    name      = "Dortmund"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { dortmund schwerte unna luenen }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_073 {
+    name      = "Iserlohn"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { iserlohn menden balve }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_074 {
+    name      = "Hamm"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { hamm bergkamen ahlen boenen drensteinfurt }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_075 {
+    name      = "Soest"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { soest werl welver }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_076 {
+    name      = "Arnsberg"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { arnsberg sundern }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_077 {
+    name      = "Lippstadt"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { lippstadt anroechte wadersloh }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_078 {
+    name      = "Salzkotten"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { salzkotten delbrueck hoevelhof }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_079 {
+    name      = "Paderborn"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { paderborn wuennenberg bueren geseke ruethen }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_080 {
+    name      = "Marsberg"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { marsberg brilon medebach }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_081 {
+    name      = "Warburg"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { warburg borgentreich willebadessen }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_082 {
+    name      = "Steinheim"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { steinheim hoexter lichtenau_ostwestfalen bad_lippspringe brakel beverungen }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_083 {
+    name      = "Minden"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { minden petershagen bad_oeynhausen bad_driburg }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_084 {
+    name      = "Rahden"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { rahden hille luebbecke preussisch_oldendorf }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_085 {
+    name      = "Herford"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { herford buende loehne }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_086 {
+    name      = "Bielefeld"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { bielefeld halle_westfalen versmold spenge }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_087 {
+    name      = "Rietberg"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { rietberg rheda_wiedenbrueck guetersloh harsewinkel verl oelde }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_088 {
+    name      = "Meschede"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { meschede eslohe warstein bestwig }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_089 {
+    name      = "Schmallenberg"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { schmallenberg bad_berleburg bad_laasphe winterberg_sauerland erndtebrueck hallenberg }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_090 {
+    name      = "Wetzlar"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { wetzlar daaden ehringshausen braunfels }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_091 {
+    name      = "Mühlhausen (Thüringen)"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { muehlhausen_thueringen menteroda treffurt }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_092 {
+    name      = "Bad Langensalza"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { bad_langensalza bad_tennstedt }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_093 {
+    name      = "Sömmerda"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { soemmerda koelleda kindelbrueck }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_094 {
+    name      = "Erfurt"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { erfurt elxleben }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_095 {
+    name      = "Suhl"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { suhl frauenwald schleusingen }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_096 {
+    name      = "Roßleben"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { rossleben bad_bibra nebra teutschenthal }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_097 {
+    name      = "Naumburg an der Saale"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { naumburg_an_der_saale schkoelen muecheln merseburg bad_duerrenberg bad_lauchstaedt }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_098 {
+    name      = "Weißenfels"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { weissenfels hohenmoelsen luetzen }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_099 {
+    name      = "Zeitz"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { zeitz delitzsch schkeuditz groebers roitzsch }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_100 {
+    name      = "Bad Düben"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { bad_dueben krostitz schildau }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_101 {
+    name      = "Wittenberg"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { wittenberg bad_schmiedeberg kemberg }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_102 {
+    name      = "Wiesenburg"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { wiesenburg golzow niemegk bad_belzig brueck }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_103 {
+    name      = "Brandenburg an der Havel"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { brandenburg_havel ziesar gross_kreutz wusterwitz }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_104 {
+    name      = "Potsdam"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { potsdam beelitz werder michendorf }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_105 {
+    name      = "Luckenwalde"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { luckenwalde jueterbog treuenbrietzen sperenberg }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_106 {
+    name      = "Holzdorf"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { holzdorf schlieben herzberg }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_107 {
+    name      = "Zahna"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { zahna jessen annaburg }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_108 {
+    name      = "Elster"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { elster dommitzsch mockrehna }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_109 {
+    name      = "Torgau"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { torgau belgern eilenburg }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_110 {
+    name      = "Falkenberg (Lausitz)"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { falkenberg_lausitz ortrand bad_liebenwerda muehlberg hirschfeld elsterwerda }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_111 {
+    name      = "Hoyerswerda"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { hoyerswerda bernsdorf lohsa }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_112 {
+    name      = "Senftenberg (Lausitz)"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { senftenberg_lausitz drebkau welzow }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_113 {
+    name      = "Crinitz"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { crinitz lauchhammer vetschau sallgast altdoebern finsterwalde calau }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_114 {
+    name      = "Halbe"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { halbe neu_zauche luebben luebbenau }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_115 {
+    name      = "Lieberose"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { lieberose wendisch_rietz spreenhagen beeskow fuerstenwalde muellrose storkow friedland_brandenburg bad_saarow }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_116 {
+    name      = "Dahme"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { dahme luckau doberlug_kirchhain golssen baruth }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_117 {
+    name      = "Königs Wusterhausen"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { koenigs_wusterhausen schoenefeld erkner ludwigsfelde kleinmachnow trebbin zossen rangsdorf }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_118 {
+    name      = "Berlin-Cölln"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 9
+    orte      = { berlin_coelln }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_119 {
+    name      = "Wandlitz"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { wandlitz }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_120 {
+    name      = "Bernau bei Berlin"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { bernau_bei_berlin strausberg biesenthal altlandsberg werftpfuhl }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_121 {
+    name      = "Seelow"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { seelow muencheberg letschin steinhoefel neuhardenberg kuestrin }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_122 {
+    name      = "Prötzel"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { proetzel neulewin wriezen }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_123 {
+    name      = "Angermünde"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { angermuende joachimsthal oderberg casekow bad_freienwalde }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_124 {
+    name      = "Prenzlau (Uckermark)"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { prenzlau bruessow gramzow strasburg zehden }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_125 {
+    name      = "Gerswalde"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { gerswalde lychen liebenwalde templin zehdenick milmersdorf }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_126 {
+    name      = "Rheinsberg"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { rheinsberg eberswalde gransee fehrbellin neuruppin lindow }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_127 {
+    name      = "Oranienburg"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { oranienburg hennigsdorf }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_128 {
+    name      = "Falkensee"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { falkensee kremmen paulinenaue nauen ketzin wustermark }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_129 {
+    name      = "Nennhausen"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { nennhausen rathenow premnitz rhinow friesack }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_130 {
+    name      = "Wittstock"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { wittstock kyritz heiligengrabe dreetz gumtow breddin }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_131 {
+    name      = "Putlitz"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { putlitz plattenburg pritzwalk gross_pankow perleberg }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_132 {
+    name      = "Wittenberge"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { wittenberge lenzen karstaedt }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_133 {
+    name      = "Kalbe"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { kalbe salzwedel beetzendorf kloetze gardelegen }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_134 {
+    name      = "Bismark"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { bismark uchtspringe }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_135 {
+    name      = "Havelberg"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { havelberg arendsee osterburg seehausen goldbeck }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_136 {
+    name      = "Genthin"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { genthin tangermuende tucheim arneburg stendal }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_137 {
+    name      = "Burg bei Magdeburg"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { burg_bei_magdeburg moeckern loburg angern tangerhuette }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_138 {
+    name      = "Schönebeck"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { schoenebeck barby calbe gommern }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_139 {
+    name      = "Gräfenhainichen"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { graefenhainichen wettin wolfen zoerbig pouch }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_140 {
+    name      = "Halle (Saale)"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { halle landsberg_bei_halle }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_141 {
+    name      = "Hettstedt"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { hettstedt koennern }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_142 {
+    name      = "Eisleben"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { eisleben querfurt roeblingen_am_see }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_143 {
+    name      = "Sangerhausen"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { sangerhausen wippra artern kelbra }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_144 {
+    name      = "Aschersleben"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { aschersleben stassfurt gatersleben }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_145 {
+    name      = "Egeln"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { egeln wanzleben }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_146 {
+    name      = "Niederndodeleben"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { niederndodeleben }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_147 {
+    name      = "Magdeburg"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { magdeburg gerwisch }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_148 {
+    name      = "Wolmirstedt"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { wolmirstedt letzlingen }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_149 {
+    name      = "Neuhaldensleben"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { neuhaldensleben weferlingen oebisfelde mieste }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_150 {
+    name      = "Huy-Neinstedt"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { huy_neinstedt halberstadt quedlinburg }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_151 {
+    name      = "Eilsleben"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { eilsleben oschersleben ausleben groeningen }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_152 {
+    name      = "Nordhausen"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { nordhausen rottleberode bleicherode wolkramshausen ellrich }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_153 {
+    name      = "Osterwieck"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { osterwieck wernigerode derenburg benneckenstein }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_154 {
+    name      = "Leinefelde-Worbis"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { leinefelde_worbis heiligenstadt weissenborn_luederode kuellstedt geismar }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_155 {
+    name      = "Grimmen"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { grimmen tribsees franzburg }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_156 {
+    name      = "Stralsund"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { stralsund samtens trinwillershagen gingst altenpleen prerow velgast barth bergen_auf_ruegen sassnitz binz dranske glowe goehren hiddensee }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_157 {
+    name      = "Demmin"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { demmin altentreptow wackerow guetzkow borrentin }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_158 {
+    name      = "Anklam"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { anklam loitz alt_sanitz ducherow wolgast usedom zinnowitz }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_159 {
+    name      = "Pasewalk"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { pasewalk swinemuende ahlbeck ferdinandshof torgelow misdroy ueckermuende bansin neuwarp }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_160 {
+    name      = "Greifswald"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { greifswald jarmen gross_kiesow lubmin }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_161 {
+    name      = "Memel"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { memel proekuls }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_162 {
+    name      = "Ragnit"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { ragnit }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_163 {
+    name      = "Heinrichswalde"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { heinrichswalde pogegen tilsit }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_164 {
+    name      = "Insterburg"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { insterburg }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_165 {
+    name      = "Gumbinnen"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { gumbinnen }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_166 {
+    name      = "Lasdehnen"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { lasdehnen stallupoenen }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_167 {
+    name      = "Goldap"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { goldap }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_168 {
+    name      = "Lyck"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { lyck marggrabowa kowahlen swietajno alt_jucha }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_169 {
+    name      = "Arys"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { arys bialla ruciane_nida johannisburg }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_170 {
+    name      = "Widminnen"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { widminnen loetzen kruglanken }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_171 {
+    name      = "Darkehmen"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { darkehmen drengfurth benkheim angerburg possessern }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_172 {
+    name      = "Gerdauen"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { gerdauen friedland_ostpreussen schippenbeil barten }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_173 {
+    name      = "Rastenburg"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { rastenburg bischofstein roessel mensguth korschen }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_174 {
+    name      = "Bischofsburg"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { bischofsburg sensburg peitschendorf rhein nikolaiken }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_175 {
+    name      = "Willenberg"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { willenberg ortelsburg schwentainen friedrichshof }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_176 {
+    name      = "Gedwangen"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { gedwangen allenstein wartenburg stabigotten passenheim dietrichswalde jonkendorf }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_177 {
+    name      = "Heilsberg"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { heilsberg guttstadt seeburg arnsdorf }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_178 {
+    name      = "Jesau"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { jesau bartenstein preussisch_eylau landsberg }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_179 {
+    name      = "Königsberg"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 2
+    orte      = { koenigsberg }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_180 {
+    name      = "Neuhausen (Ostpreußen)"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { neuhausen_ostpreussen powunden cranz bol_shoe_isakovo }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_181 {
+    name      = "Labiau"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { labiau wehlau tapiau }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_182 {
+    name      = "Ruß"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { russ heydekrug nidden }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_183 {
+    name      = "Lichtenfeld"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { lichtenfeld ludwigsort heiligenbeil }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_184 {
+    name      = "Rauschen"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { rauschen pillau vzmorye palmnicken fischhausen zimmerbude }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_185 {
+    name      = "Osterode"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { osterode geierswalde hohenstein_ostpreussen liebemuehl }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_186 {
+    name      = "Deutsch Eylau"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { deutsch_eylau rybno lautenburg lubawa nowe_miasto_lubawskie }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_187 {
+    name      = "Mohrungen"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { mohrungen liebstadt wormditt maldeuten saalfeld_westpreussen }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_188 {
+    name      = "Mühlhausen (Ostpreußen)"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { muehlhausen_ostpreussen preussisch_holland mehlsack braunsberg_ostpreussen tolkemit frauenburg krynica_morska }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_189 {
+    name      = "Elbing"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { elbing tiegenhof sztutowo }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_190 {
+    name      = "Biskupiec"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { biskupiec rosenberg_westpreussen freystadt_westpreussen riesenburg }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_191 {
+    name      = "Christburg"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { christburg niklaskirchen stuhm rehhof }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_192 {
+    name      = "Marienwerder"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { marienwerder garnsee gniew smetowo_graniczne nowe }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_193 {
+    name      = "Graudenz"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { graudenz lasin briesen radzyn_chelminski }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_194 {
+    name      = "Starogard Gdański"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { starogard_gdanski skorcz czarna_woda skarszewy lubichowo hoch_stueblau subkowy pelplin }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_195 {
+    name      = "Dirschau"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { dirschau marienburg altfelde praust neuteich hohenstein_westpreussen }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_196 {
+    name      = "Gross Zünder"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { gross_zuender }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_197 {
+    name      = "Danzig"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { danzig putzig wladyslawowo hela heisternest }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_198 {
+    name      = "Zoppot"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { zoppot gross_trampken bojano kolbudy }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_199 {
+    name      = "Pribbernow"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { pribbernow cammin schwirsen wollin stepenitz rewahl }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_200 {
+    name      = "Pölitz"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { poelitz dobra }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_201 {
+    name      = "Stettin"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { stettin }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_202 {
+    name      = "Gollnow"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { gollnow naugard daber osina }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_203 {
+    name      = "Greifenberg"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { greifenberg treptow guelzow roman plathe brojce }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_204 {
+    name      = "Regenwalde"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { regenwalde labes wangerin radowo_male }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_205 {
+    name      = "Bad Polzin"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { bad_polzin schivelbein dramburg noerenberg }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_206 {
+    name      = "Belgard"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { belgard stolzenberg rabino gross_jestin kolberg }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_207 {
+    name      = "Zanow"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { zanow bobolice koeslin grossmoellen }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_208 {
+    name      = "Gross Tychow"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { gross_tychow baerwalde lubowo gramenz }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_209 {
+    name      = "Kallies"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { kallies falkenburg virchow tempelburg }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_210 {
+    name      = "Zippnow"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { zippnow maerkisch_friedland }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_211 {
+    name      = "Neustettin"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { neustettin rummelsburg baldenburg }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_212 {
+    name      = "Flatow i. Westpr."
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { flatow_i_westpr ratzebuhr tarnowka sosno kamien_krajenski jastrow sypniewo vandsburg gostycyn }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_213 {
+    name      = "Preussisch Friedland"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { preussisch_friedland prechlau hammerstein floetenstein schlochau rzeczenica zempelburg }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_214 {
+    name      = "Rathsdamnitz"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { rathsdamnitz gross_tuchen lipnica treblin alt_kolziglow }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_215 {
+    name      = "Schlawe"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { schlawe pollnow hammermuehle }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_216 {
+    name      = "Stolp"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { stolp ruegenwalde stolpmuende degow henkenhagen }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_217 {
+    name      = "Potęgowo"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { potegowo glowitz damnica schmolsin leba }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_218 {
+    name      = "Choczewo"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { choczewo leczyce kartuzy linia sierakowice krokowa gniewino mariensee zukowo }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_219 {
+    name      = "Rumia"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { rumia neustadt luzino szemud gdingen }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_220 {
+    name      = "Kościerzyna"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { koscierzyna stara_kiszewa dziemiany suleczyno karsin stezyca liniewo grabowo_koscierskie lipusz }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_221 {
+    name      = "Czarna Dąbrówka"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { czarna_dabrowka lauenburg_in_pommern buetow studzienice zewitz }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_222 {
+    name      = "Konitz (Westpreußen)"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { konitz_westpreussen brusy tuchola kesowo }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_223 {
+    name      = "Czersk"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { czersk }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_224 {
+    name      = "Jeżewo"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { jezewo osie sliwice cekcyn lniano warlubie }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_225 {
+    name      = "Kulm"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { kulm lisewo pruszcz lubiewo unislaw bukowiec }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_226 {
+    name      = "Schulitz"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { schulitz }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_227 {
+    name      = "Bromberg"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { bromberg fordon krone }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_228 {
+    name      = "Sicienko"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { sicienko }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_229 {
+    name      = "Schubin"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { schubin kcynia znin labischin nakel barcin }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_230 {
+    name      = "Gnesen"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { gnesen rogowo witkowo pudewitz klecko kiszkowo }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_231 {
+    name      = "Strelno"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { strelno trzemeszno mogilno dabrowa }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_232 {
+    name      = "Gniewkowo"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { gniewkowo inowroclaw zlotniki_kujawskie kruszwica janikowo }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_233 {
+    name      = "Czajków"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { czajkow grabow_nad_prosna mikstat doruchow trzcinica }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_234 {
+    name      = "Ostrów Wielkopolski"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { ostrow_wielkopolski ostrzeszow raszkow sulmierzyce sosnie adelnau }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_235 {
+    name      = "Krotoszyn"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { krotoszyn kempen_in_posen kobylin koschmin rychtal pogorzela }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_236 {
+    name      = "Jarocin"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { jarocin pleszew nowe_skalmierzyce dobrzyca goluchow zerkow }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_237 {
+    name      = "Wreschen"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { wreschen swarzedz czerniejewo miloslaw }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_238 {
+    name      = "Schroda"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { schroda nowe_miasto_nad_warta kurnik kostrzyn zaniemysl }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_239 {
+    name      = "Schrimm"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { schrimm gostyn borek_wielkopolski ksiaz_wielkopolski dolsk }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_240 {
+    name      = "Militsch"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { militsch kraschnitz freyhan }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_241 {
+    name      = "Trachenberg"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { trachenberg trebnitz obernigk }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_242 {
+    name      = "Rawitsch"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { rawitsch miejska_gorka poniec krobia rydzyna krzemieniewo }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_243 {
+    name      = "Steinau"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { steinau winzig }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_244 {
+    name      = "Guhrau"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { guhrau herrnstadt }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_245 {
+    name      = "Kosten"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { kosten krzywin smigiel czempin osieczna }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_246 {
+    name      = "Luboń"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { lubon steszew mosina }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_247 {
+    name      = "Wronki"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { wronki obrzycko samter tarnowo_podgorne duszniki pinne pamiatkowo }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_248 {
+    name      = "Posen"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { posen zlotniki }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_249 {
+    name      = "Wągrowiec"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { wagrowiec golancz rogasen damaslawek schokken miescisko janowiec_wielkopolski }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_250 {
+    name      = "Murowana Goślina"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { murowana_goslina ryczywol obornik }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_251 {
+    name      = "Schneidemühl"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { schneidemuehl margonin ujscie kolmar_posen kaczory budzyn }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_252 {
+    name      = "Wissek"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { wissek wirsitz sadki mrotschen lobsens }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_253 {
+    name      = "Schönlanke"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { schoenlanke czarnkow filehne }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_254 {
+    name      = "Deutsch Krone"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { deutsch_krone schloppe tuetz }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_255 {
+    name      = "Sieraków"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { sierakow kreuz kwilcz chrzypsko_wielkie }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_256 {
+    name      = "Friedeberg in Neumark"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { friedeberg_in_neumark driesen woldenberg stare_kurowo }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_257 {
+    name      = "Birnbaum"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { birnbaum przytoczna }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_258 {
+    name      = "Meseritz"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { meseritz schwerin_posen braetz betsche tirschtiegel blesen }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_259 {
+    name      = "Neuwedell"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { neuwedell berlinchen reetz bierzwnik krzecin arnswalde }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_260 {
+    name      = "Stargard in Pommern"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { stargard doelitz kublank warnitz freienwalde_in_pommern massow zachan jacobshagen alt_damerow }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_261 {
+    name      = "Greifenhagen"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { greifenhagen bahn kolbitzow pyritz beelitz_in_pommern prillwitz fiddichow penkun }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_262 {
+    name      = "Schwedt (Oder)"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { schwedt_oder bad_schoenfliess baerwalde_in_neumark koenigsberg_in_neumark gartz mohrin }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_263 {
+    name      = "Neudamm"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { neudamm soldin ludwigsruh neuenburg lippehne }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_264 {
+    name      = "Landsberg an der Warthe"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { landsberg_warthe zantoch duehringshof vietz }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_265 {
+    name      = "Lagow"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { lagow sternberg_brandenburg zielenzig koenigswalde drossen kriescht sonnenburg }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_266 {
+    name      = "Bobersberg"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { bobersberg messow crossen_an_der_oder beutnitz }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_267 {
+    name      = "Frankfurt (Oder)"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { frankfurt_oder ziebingen reppen brieskow_finkenheerd lebus jacobsdorf goeritz }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_268 {
+    name      = "Guben"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { guben neuzelle pfoerten }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_269 {
+    name      = "Cottbus"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { cottbus peitz forst }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_270 {
+    name      = "Groß Düben"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { gross_dueben freiwaldau_niederschlesien priebus boxberg_lausitz }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_271 {
+    name      = "Weißwasser"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { weisswasser rietschen niesky rothenburg }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_272 {
+    name      = "Sorau"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { sorau triebel sommerfeld lipinki_luzyckie }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_273 {
+    name      = "Naumburg am Bober"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { naumburg_am_bober sagan halbau }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_274 {
+    name      = "Primkenau"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { primkenau mallmitz sprottau }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_275 {
+    name      = "Neusalz"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { neusalz beuthen_an_der_oder }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_276 {
+    name      = "Freystadt (Niederschlesien)"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { freystadt_niederschlesien }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_277 {
+    name      = "Rothenburg an der Oder"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { rothenburg_an_der_oder schweinitz }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_278 {
+    name      = "Züllichau"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { zuellichau schwiebus mittwalde }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_279 {
+    name      = "Grünberg"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { gruenberg boyadel }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_280 {
+    name      = "Wolsztyn"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { wolsztyn unruhstadt rakoniewice bomst zbaszyn przemet neu_bentschen }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_281 {
+    name      = "Nowy Tomyśl"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { nowy_tomysl neustadt_bei_pinne granowo graetz buk opalenica }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_282 {
+    name      = "Lissa"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { lissa schlichtingsheim fraustadt schlawa brenno wloszakowice }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_283 {
+    name      = "Glogau"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { glogau kuttlau kolzig radwanice }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_284 {
+    name      = "Lüben"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { lueben polkwitz kotzenau }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_285 {
+    name      = "Raudten"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { raudten }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_286 {
+    name      = "Liegnitz"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { liegnitz parchwitz }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_287 {
+    name      = "Haynau"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { haynau goldberg_in_schlesien olszanica }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_288 {
+    name      = "Kauffung"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { kauffung }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_289 {
+    name      = "Jauer"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { jauer bolkenhain }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_290 {
+    name      = "Waldenburg in Schlesien"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { waldenburg_in_schlesien freiburg_in_schlesien wuestegiersdorf friedland_in_schlesien }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_291 {
+    name      = "Hirschberg in Schlesien"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { hirschberg_in_schlesien landeshut schmiedeberg schreiberhau stara_kamienica liebau }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_292 {
+    name      = "Greiffenberg"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { greiffenberg naumburg_am_queis lauban bad_flinsberg marklissa }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_293 {
+    name      = "Löwenberg"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { loewenberg laehn }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_294 {
+    name      = "Bunzlau"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { bunzlau gromadka }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_295 {
+    name      = "Kohlfurt"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { kohlfurt }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_296 {
+    name      = "Görlitz"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { goerlitz penzig reichenbach seidenberg }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_297 {
+    name      = "Habelschwerdt"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { habelschwerdt mittelwalde bad_landeck }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_298 {
+    name      = "Glatz"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { glatz bad_reinerz wartha bad_altheide reichenstein wuenschelburg bad_kudowa }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_299 {
+    name      = "Schweidnitz"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { schweidnitz zobten heidersdorf gnadenfrei }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_300 {
+    name      = "Reichenbach in Schlesien"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { reichenbach_in_schlesien neurode }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_301 {
+    name      = "Udanin"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { udanin striegau saarau }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_302 {
+    name      = "Kanth"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { kanth maltsch neumarkt_niederschlesien miekinia }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_303 {
+    name      = "Wohlau"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { wohlau dyhernfurth }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_304 {
+    name      = "Rothsürben"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { rothsuerben kielczow tschechnitz psary schmolz }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_305 {
+    name      = "Breslau"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 3
+    orte      = { breslau }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_306 {
+    name      = "Ohlau"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { ohlau jelcz_laskowice }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_307 {
+    name      = "Strehlen"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { strehlen wansen prieborn }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_308 {
+    name      = "Frankenstein"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { frankenstein muensterberg tepliwoda patschkau kamnig }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_309 {
+    name      = "Neisse"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { neisse lamsdorf loewen_niederschlesien falkenberg_oberschlesien ottmachau dambrau }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_310 {
+    name      = "Zülz"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { zuelz ziegenhals neustadt_in_oberschlesien }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_311 {
+    name      = "Proskau"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { proskau }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_312 {
+    name      = "Oppeln"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { oppeln gross_doebern }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_313 {
+    name      = "Grottkau"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { grottkau friedewalde murow }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_314 {
+    name      = "Brieg"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { brieg poppelau }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_315 {
+    name      = "Oels"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { oels festenberg }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_316 {
+    name      = "Bernstadt"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { bernstadt }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_317 {
+    name      = "Gross Wartenberg"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { gross_wartenberg neumittelwalde }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_318 {
+    name      = "Namslau"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { namslau carlsruhe noldau }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_319 {
+    name      = "Kreuzburg"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { kreuzburg bierdzany konstadt pitschen }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_320 {
+    name      = "Krappitz"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { krappitz tarnau lugnian chrzastowice }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_321 {
+    name      = "Kędzierzyn-Koźle"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { kedzierzyn_kozle polnisch_neukirch ujest deschowitz walce }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_322 {
+    name      = "Groß Strehlitz"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { gross_strehlitz tost malapane peiskretscham kolonowskie }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_323 {
+    name      = "Ratiborhammer"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { ratiborhammer kreuzenort czernica rauden }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_324 {
+    name      = "Ratibor"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { ratibor katscher bolatitz hultschin kranowitz }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_325 {
+    name      = "Leobschütz"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { leobschuetz oberglogau branitz bauerwitz }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_326 {
+    name      = "Sohrau"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { sohrau wodzislaw_slaski rybnik jastrzebie_zdroj }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_327 {
+    name      = "Gleiwitz"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { gleiwitz knurow kieferstaedtel czerwionka_leszczyny }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_328 {
+    name      = "Beuthen"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { beuthen laziska_gorne ruda_slaska zabrze }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_329 {
+    name      = "Berun"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { berun pless tichau gora kobior pawlowice }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_330 {
+    name      = "Siemianowitz"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { siemianowitz myslowice kattowitz }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_331 {
+    name      = "Ożarowice"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { ozarowice wozniki }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_332 {
+    name      = "Tarnowitz"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { tarnowitz tworog koszecin kalety }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_333 {
+    name      = "Lublinitz"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { lublinitz zawadzkie }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_334 {
+    name      = "Schierokau"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { schierokau rosenberg_oberschlesien guttentag }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_335 {
+    name      = "Thorn"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { thorn chelmza lubicz_gorny kowalewo_pomorskie lubianka czernikowo ciechocin }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_336 {
+    name      = "Brodnica"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { brodnica gorzno jablonowo_pomorskie zbojno brzozie debowa_laka golub_dobrzyn }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}
+
+wahlkreis pr_337 {
+    name      = "Neidenburg"
+    parlament = pr_abgeordnetenhaus
+    staat     = PRU
+    sitze     = 1
+    orte      = { neidenburg soldau gross_koslau ilowo_osada }
+    quelle    = "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, Wahlkreise aus Kreisen in räumlicher Reihenfolge; keine historischen Wahlkreisgrenzen"
+}

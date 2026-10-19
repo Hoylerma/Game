@@ -903,6 +903,18 @@ ContentFingerprint content_fingerprint(const World& w) {
             h.u64(static_cast<std::uint64_t>(s.constitution));
             law(h, s.law);
         }
+        h.u64(w.electoral_districts.size());
+        for (const ElectoralDistrict& d : w.electoral_districts) {
+            h.text(d.id);
+            h.text(d.name); // steht in der Chronik der Wahl
+            h.i64(d.parliament);
+            h.i64(d.state);
+            h.i64(d.seats);
+            h.u64(d.locations.size());
+            for (const Index l : d.locations) {
+                h.i64(l);
+            }
+        }
         p[13] = h.value();
     }
     fp.total = MetaReader::content_fingerprint_total(fp.parts);

@@ -439,9 +439,14 @@ std::string politics_summary(const World& w) {
     std::string text = plural(w.currents.size(), "Strömung", "Strömungen") + ", " +
                        plural(w.interest_groups.size(), "Interessengruppe", "Interessengruppen") + ", " +
                        plural(w.parliaments.size(), "Parlament", "Parlamente");
-    for (const uhrwerk::Parliament& p : w.parliaments) {
+    for (std::size_t i = 0; i < w.parliaments.size(); ++i) {
+        const uhrwerk::Parliament& p = w.parliaments[i];
+        const auto districts = static_cast<std::size_t>(std::count_if(
+            w.electoral_districts.begin(), w.electoral_districts.end(),
+            [&](const uhrwerk::ElectoralDistrict& d) { return d.parliament == static_cast<Index>(i); }));
         text += "\n              " + p.name + ": " +
-                plural(static_cast<std::size_t>(p.seats), "Sitz", "Sitze") + ", Wahl am " +
+                plural(static_cast<std::size_t>(p.seats), "Sitz", "Sitze") + " in " +
+                plural(districts, "Wahlkreis", "Wahlkreisen") + ", Wahl am " +
                 uhrwerk::format_date_long(p.election_day) + ", " +
                 plural(p.factions.size(), "Fraktion", "Fraktionen");
     }

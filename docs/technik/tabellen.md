@@ -12,6 +12,7 @@ data/tabellen/
 ├── kreise.csv             Kreise (seit M3)
 ├── verwaltung.csv         Verwaltungseinheiten der Staaten (seit M7)
 ├── eisenbahnen.csv        Eisenbahnstrecken: Abschnitte von Ort zu Ort mit Eröffnung (seit M7)
+├── wahlkreise.csv         Wahlkreise der Parlamente mit Staat, Sitzen und Orten (seit M8)
 ├── staaten.csv            Stammdaten der Staaten
 ├── besitz.csv             Besitzer, Verwaltung und Bundesgebiet je Ort mit Datum
 ├── bevoelkerung.csv       Bevölkerung, Konfession, Kultur und Verwüstung je Ort und Stichtag
@@ -167,11 +168,26 @@ Ort fällt weg, oder ein Nachbarort steht für sie (Altona durch Hamburg, Harbur
 Wulmstorf, Ludwigshafen durch Frankenthal). Wirkung im Spiel: [chronik-skript.md](chronik-skript.md),
 Abschnitt 3.17.
 
+## `wahlkreise.csv` (seit M8)
+
+| Spalte | Inhalt |
+|---|---|
+| `wahlkreis` | Kennung (a–z, 0–9, `_`), eindeutig, z. B. `nv_bad_10` |
+| `parlament` | Kennung aus `common/parlamente.chron`; zugleich die Datei in `history/wahlkreise/` |
+| `staat` | Staatstag; alle Orte gehören zum Startdatum diesem Staat (prüft der Kern) |
+| `name` | Name, meist der einwohnerstärkste Ort |
+| `sitze` | Zahl der Abgeordneten, ab 1 (Großstädte mehrere) |
+| `orte` | Ortskennungen, durch Leerzeichen getrennt; je Parlament jeder Ort höchstens einmal |
+| `sicherheit`, `quelle` | siehe oben |
+
+Erzeugt von `tools/geodaten/wahlkreise_1848.py` ([politik.md](politik.md), Abschnitt 5.3); die Summe der
+Sitze eines Parlaments muss seiner Sollzahl entsprechen (prüft der Kern).
+
 ## `dateien.csv`
 
 | Spalte | Inhalt |
 |---|---|
-| `ordner` | `orte`, `staaten`, `kreise`, `verwaltung` oder `eisenbahnen` (beide seit M7) |
+| `ordner` | `orte`, `staaten`, `kreise`, `verwaltung` oder `eisenbahnen` (beide seit M7), `wahlkreise` (seit M8) |
 | `datei` | Dateiname ohne Endung |
 | `kultur` | seit M4, nur für `orte`: Standardkultur der Landschaft, z. B. `maerker=100` oder `obersachsen=70 sorben=30`; sonst leer |
 | `kommentar` | mehrzeiliger Text; erscheint als Kopfkommentar der erzeugten Datei |

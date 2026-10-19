@@ -200,25 +200,42 @@ im Bund) ergäben bei 50.000 je Sitz über 800.
 ### 5.3 Wahlkreise (Werkzeug `tools/geodaten/wahlkreise_1848.py`)
 
 Wahlkreise werden **Inhalt** wie Kreise und Verwaltung: eine Tabelle `wahlkreise.csv` mit
-Wahlkreis, Parlament, Staat, Name und Orten. Der Archivar macht daraus `history/wahlkreise/`.
+Wahlkreis, Parlament, Staat, Name, Sitzen und Orten ([tabellen.md](tabellen.md)). Der Archivar macht
+daraus `history/wahlkreise/<parlament>.chron` ([chronik-skript.md](chronik-skript.md), Abschnitt 3.22).
 
 Bildung:
-1. Je Staat die Orte mit Daten im Bundesgebiet. Bausteine sind die Kreise der Verwaltung
-   (Preußen, Österreich), sonst die räumlichen Kreise aus M3. Zu große Bausteine werden geteilt
-   (z. B. Wien, Berlin).
-2. Die Bausteine werden in einer festen räumlichen Reihenfolge (Hilbert-Kurve über Länge und
-   Breite) zu zusammenhängenden Wahlkreisen mit annähernd gleicher Einwohnerzahl verbunden;
-   Abweichung höchstens ±35 %.
-3. Name nach dem einwohnerstärksten Ort („Wahlkreis Mannheim“), Kennung `nv_<staat>_<nr>`.
-4. Prüfungen: jeder Ort mit Daten im Bundesgebiet in genau einem Wahlkreis, Zusammenhang,
-   Einwohnerspanne; Stichprobe gegen bekannte Wahlkreise (Mannheim, Köln, Berlin).
+1. **Wahlgebiet:** Die Nationalversammlung wählt im Bundesgebiet und in den im April 1848
+   zugelassenen Gebieten: Ost- und Westpreußen, Posen und Schleswig, im Werkzeug alle Orte Preußens
+   und Dänemarks. Ein Landtag wählt in seinem Staat. Es zählen nur Orte mit Bevölkerung 1846.
+2. **Sitze je Staat** nach Einwohnern 1846 (Hare-Niemeyer, mindestens ein Sitz); dann je Region des
+   Staates: in Preußen die Regierungsbezirke, in Österreich die Kronländer, sonst die Landschaften
+   der Karte. Eine Region ohne eigenen Sitz kommt zur nächsten Region desselben Staates.
+3. **Großstädte:** Ein Ort mit mindestens dem 1,5-Fachen der Zielgröße (Einwohner je Sitz) ist ein
+   eigener Wahlkreis mit mehreren Sitzen, z. B. Berlin und Wien mit je 6 Sitzen in der
+   Nationalversammlung. Hamburg bekommt so alle drei Sitze; Geesthacht und Cuxhaven gehören dann
+   zum nächsten Wahlkreis.
+4. **Übrige Orte:** Bausteine sind die Kreise der Verwaltung (Preußen, Österreich), sonst die
+   räumlichen Kreise aus M3; zu große Bausteine zerfallen in Orte. Die Bausteine werden entlang einer
+   Hilbert-Kurve über ihre Lage in Gruppen gleicher Einwohnerzahl geschnitten.
+5. **Name** nach dem einwohnerstärksten Ort, Kennung `nv_<staat>_<nr>` bzw. `pr_<nr>`.
 
-Die Tabelle ist reproduzierbar und bleibt editierbar (Ausnahmen per Hand wie in
-`territorien_1848.csv`). Für Preußen 1849 gelten dieselben Wahlkreise für die preußischen Sitze;
-1849 waren es Wahlbezirke mit zwei bis drei Abgeordneten, das Modell vereinfacht auf einen.
+Ergebnis:
+- **Nationalversammlung:** 633 Wahlkreise mit 649 Sitzen. Einwohner je Sitz im Median rund 70.000
+  (Liechtenstein 6.500 als eigener Staat, höchstens 125.000).
+- **Preußisches Abgeordnetenhaus:** 337 Wahlkreise mit 350 Sitzen, rund 46.000 je Sitz. Kein
+  Wahlkreis reicht weiter als 66 km vom Mittelpunkt.
+- **Weit gestreckt** sind nur Kleinstaaten mit Exklaven: Oldenburg mit Eutin (Cloppenburg 232 km)
+  und Braunschweig (Bodenwerder 119 km). Ihre Exklaven sind für einen eigenen Sitz zu klein.
+- **Zusammenhang:** Den prüft das Werkzeug nicht (es gibt keine Nachbarschaft der Orte). Ein
+  Maß dafür ist die Ausdehnung, die der Bericht nennt.
+- Die Tabelle ist reproduzierbar, die CI prüft sie mit `--pruefen`. Ausnahmen per Hand wären eine
+  spätere Erweiterung des Werkzeugs.
+- Für Preußen 1849 gelten eigene Wahlkreise. 1849 waren es Wahlbezirke mit zwei bis drei
+  Abgeordneten; das Modell nimmt meist einen, Großstädte mehrere.
 
-**Boykott (Entscheidung 3):** Wahlkreise mit tschechischer Mehrheit (Kultur `tschechen` über 50 %)
-wählen nicht; ihre Sitze bleiben leer.
+**Boykott (Entscheidung 3):** Wahlkreise mit Mehrheit einer Kultur aus `boykott` wählen nicht, ihre
+Sitze bleiben leer. Für die Nationalversammlung sind das `tschechen` (Palacký), `polen` (Posen) und
+`daenen` (Nordschleswig).
 
 ## 6. Gesetze und Verfassungen in M8
 
@@ -486,3 +503,4 @@ Weitere Tests:
 | Schritt | Stand |
 |---|---|
 | a1 Datenmodell | `common/stroemungen.chron` (5 Strömungen), `common/interessengruppen.chron` (11 Gruppen, davon 10 im Lesezeichen 1848; die Arbeiterbewegung erst ab August 1848), `common/parlamente.chron` (Nationalversammlung 1848 mit 8 Fraktionen, Preußisches Abgeordnetenhaus 1849 mit 3), `selbststaendig` bei Landarmen (0,6) und Fabrikarbeitern (0,7); Verfassung und Wahlrecht der Landtage für die 38 Staaten von 1848 in `staaten_historie.csv` (aus der Regierungsform abgeleitet, Zensus in Baden, Württemberg, Hessen-Darmstadt und den Niederlanden). Lader (chronik-skript.md 3.19–3.21), Archivar, Inhaltsfingerabdruck (Bereich `politik`), `info` und `pruefen`. 1648 ohne Parlament, Prüfsumme unverändert. |
+| a2 Wahlkreise | `tools/geodaten/wahlkreise_1848.py` (mit Tests, CI prüft die Tabelle), `wahlkreise.csv` mit 633 Wahlkreisen der Nationalversammlung (649 Sitze) und 337 des Preußischen Abgeordnetenhauses (350 Sitze), Archivar (`history/wahlkreise/`), Lader mit Prüfungen (Sitze = Sollzahl, Orte des Staates, jeder Ort einmal), Fingerabdruck, `info`. Boykott um Polen und Dänen ergänzt. |

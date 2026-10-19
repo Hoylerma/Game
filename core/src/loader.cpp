@@ -480,6 +480,13 @@ struct PlayerRef {
     int line = 0;
 };
 
+/// Staat eines Wahlkreises (seit M8), aufgelöst nach dem Staatenbestand.
+struct DistrictRef {
+    std::string state_tag;
+    std::string file;
+    int line = 0;
+};
+
 /// Ebene eines Parlaments (seit M8): Staatstag, leer für den Deutschen Bund.
 struct ParliamentRef {
     std::string state_tag;
@@ -556,6 +563,10 @@ public:
         // Eisenbahnen (seit M7) nach den Orten, die sie verbinden; der Ordner darf fehlen.
         for (const std::string& name : list_folder("history/eisenbahnen", Folder::Optional)) {
             process(name, [&](const SourceFile& f) { load_railways(f); });
+        }
+        // Wahlkreise (seit M8) nach den Orten und Parlamenten; der Ordner darf fehlen.
+        for (const std::string& name : list_folder("history/wahlkreise", Folder::Optional)) {
+            process(name, [&](const SourceFile& f) { load_electoral_districts(f); });
         }
 
         drop_states_without_land();
@@ -1880,6 +1891,59 @@ private:
         return factions;
     }
 
+    /// Wahlkreise (Abschnitt 3.22): wahlkreis <kennung> { name parlament staat sitze orte quelle }.
+    void load_electoral_districts(const SourceFile& file) {
+        for_each_definition(file, "wahlkreis", "wahlkreis <kennung> { … }", [&](const ScriptNode& node) {
+            check_id(file, node, "Kennung eines Wahlkreises");
+            const std::string what = "wahlkreis " + node.value;
+            Fields f(node, file.name, what, issues_,
+                     {"name", "parlament", "staat", "sitze", "orte", "quelle"});
+            ElectoralDistrict d;
+            d.id = node.value;
+            d.name = f.text("name").value_or("");
+            const auto parliament = f.text("parlament");
+            const auto state = f.text("staat");
+            d.seats = static_cast<std::int32_t>(f.has("sitze") ? f.integer("sitze", 1, 1000).value_or(1) : 1);
+            if (const ScriptNode* list =
+                    f.block("orte", "Liste von Orten, z. B. { mannheim schwetzingen }")) {
+                for (const ScriptNode& child : list->children) {
+                    const Index loc =
+                        child.key.empty() && !child.is_block ? lookup(locations_, child.value) : kNone;
+                    if (loc == kNone) {
+                        issues_.error(file.name, child.line,
+                                      "unbekannter Ort " + quote(child.value) + " in " + what);
+                        continue;
+                    }
+                    d.locations.push_back(loc);
+                }
+                if (list->children.empty()) {
+                    issues_.error(file.name, list->line, what + " hat keinen Ort");
+                }
+            }
+            d.source = f.text("quelle").value_or("");
+            if (!parliament) {
+                return;
+            }
+            d.parliament = lookup(parliaments_, *parliament);
+            if (d.parliament == kNone) {
+                // Wahlkreise eines späteren Parlaments gehören nicht zur Welt (Abschnitt 3.18).
+                if (later_.count("parlament:" + *parliament) == 0) {
+                    issues_.error(file.name, node.find("parlament")->line,
+                                  "unbekanntes Parlament " + quote(*parliament) + " in " + what +
+                                      " (common/parlamente.chron)");
+                }
+                return;
+            }
+            const auto index = static_cast<Index>(world_.electoral_districts.size());
+            if (register_id(electoral_districts_, d.id, index, file.name, node.line, "Wahlkreis")) {
+                const ScriptNode* state_node = node.find("staat");
+                world_.electoral_districts.push_back(std::move(d));
+                district_refs_.push_back(DistrictRef{state.value_or(""), file.name,
+                                                     state_node != nullptr ? state_node->line : node.line});
+            }
+        });
+    }
+
     /// Ebene der Parlamente nach drop_states_without_land: Der Staat muss zum Startdatum bestehen.
     void resolve_parliaments() {
         for (std::size_t i = 0; i < world_.parliaments.size(); ++i) {
@@ -1898,6 +1962,64 @@ private:
                 continue;
             }
             world_.parliaments[i].state = state;
+        }
+        // Wahlkreise: Staat zum Startdatum, Orte dieses Staates, jeder Ort einmal je Parlament,
+        // Sitze zusammen gleich der Sollzahl.
+        std::vector<std::vector<Index>> assigned(world_.parliaments.size());
+        std::vector<std::int64_t> seats(world_.parliaments.size(), 0);
+        std::vector<bool> has_districts(world_.parliaments.size(), false);
+        for (std::size_t i = 0; i < world_.electoral_districts.size(); ++i) {
+            ElectoralDistrict& d = world_.electoral_districts[i];
+            const DistrictRef& ref = district_refs_[i];
+            const auto p = static_cast<std::size_t>(d.parliament);
+            has_districts[p] = true;
+            seats[p] += d.seats;
+            const Parliament& parliament = world_.parliaments[p];
+            d.state = lookup(states_, ref.state_tag);
+            if (d.state == kNone) {
+                issues_.error(ref.file, ref.line,
+                              dropped_states_.count(ref.state_tag) != 0
+                                  ? "Staat " + quote(ref.state_tag) + " von wahlkreis " + d.id +
+                                        " besitzt zum Startdatum keinen Ort"
+                                  : "unbekannter Staat " + quote(ref.state_tag) + " in wahlkreis " + d.id);
+                continue;
+            }
+            if (parliament.state != kNone && d.state != parliament.state) {
+                issues_.error(ref.file, ref.line,
+                              "wahlkreis " + d.id + " liegt in " + ref.state_tag + ", parlament " +
+                                  parliament.id + " gehört zu " +
+                                  world_.states[static_cast<std::size_t>(parliament.state)].tag);
+            }
+            std::vector<Index>& seen = assigned[p];
+            if (seen.empty()) {
+                seen.assign(world_.locations.size(), kNone);
+            }
+            for (const Index loc : d.locations) {
+                const Location& l = world_.locations[static_cast<std::size_t>(loc)];
+                if (l.owner != d.state) {
+                    issues_.error(ref.file, ref.line,
+                                  "Ort " + l.id + " in wahlkreis " + d.id +
+                                      " gehört zum Startdatum nicht zu " + ref.state_tag);
+                }
+                Index& first = seen[static_cast<std::size_t>(loc)];
+                if (first != kNone) {
+                    issues_.error(ref.file, ref.line,
+                                  "Ort " + l.id + " liegt schon in wahlkreis " +
+                                      world_.electoral_districts[static_cast<std::size_t>(first)].id +
+                                      " desselben Parlaments");
+                } else {
+                    first = static_cast<Index>(i);
+                }
+            }
+        }
+        for (std::size_t p = 0; p < world_.parliaments.size(); ++p) {
+            const Parliament& parliament = world_.parliaments[p];
+            if (has_districts[p] && seats[p] != parliament.seats) {
+                const Definition& def = parliaments_.find(parliament.id)->second;
+                issues_.error(def.file, def.line,
+                              "parlament " + parliament.id + " hat " + std::to_string(parliament.seats) +
+                                  " Sitze, seine Wahlkreise zusammen " + std::to_string(seats[p]));
+            }
         }
     }
 
@@ -2742,6 +2864,8 @@ private:
     Registry interest_groups_;                   // seit M8
     Registry parliaments_;                       // seit M8
     std::vector<ParliamentRef> parliament_refs_; // parallel zu world_.parliaments
+    Registry electoral_districts_;               // seit M8
+    std::vector<DistrictRef> district_refs_;     // parallel zu world_.electoral_districts
     // Inhalt ab einem Datum (seit M7): spätere Definitionen als „gut:kohle“ → 'seit'.
     struct LaterDefinition {
         Date date;

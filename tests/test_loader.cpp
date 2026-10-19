@@ -1511,6 +1511,7 @@ TEST_CASE("Lader: Politik (seit M8)") {
         std::filesystem::remove(dir / "common/stroemungen.chron");
         std::filesystem::remove(dir / "common/interessengruppen.chron");
         std::filesystem::remove(dir / "common/parlamente.chron");
+        std::filesystem::remove_all(dir / "history/wahlkreise");
         const LoadResult r = load(dir, "jahresbeginn_1650");
         INFO(issues_text(r));
         REQUIRE(r.ok());
@@ -1594,6 +1595,42 @@ TEST_CASE("Lader: Politik (seit M8)") {
         replace_in_file(dir / parliaments, "fraktionen_ab = 1650.06.01", "fraktionen_ab = 1650.01.01");
         expect_error(load(dir, "jahresbeginn_1650"),
                      "'fraktionen_ab' liegt vor dem Wahltag von parlament landtag", parliaments);
+    }
+    const char* const districts = "history/wahlkreise/landtag.chron";
+    SUBCASE("Wahlkreise gelesen") {
+        const LoadResult r = load(dir, "jahresbeginn_1650");
+        INFO(issues_text(r));
+        REQUIRE(r.ok());
+        const World& w = *r.world;
+        REQUIRE(w.electoral_districts.size() == 2);
+        const uhrwerk::ElectoralDistrict& d = w.electoral_districts[0];
+        CHECK(d.id == "lt_dresden");
+        CHECK(d.parliament == 0);
+        CHECK(d.state == w.find_state("SAX"));
+        CHECK(d.seats == 3);
+        CHECK(d.locations == std::vector<Index>{w.find_location("dresden")});
+        CHECK(w.electoral_districts[1].seats == 1);          // Standard
+        CHECK(load(dir).world->electoral_districts.empty()); // Parlament erst ab 1649
+    }
+    SUBCASE("Sitze der Wahlkreise passen nicht zur Sollzahl") {
+        replace_in_file(dir / districts, "sitze     = 3", "sitze     = 2");
+        expect_error(load(dir, "jahresbeginn_1650"),
+                     "parlament landtag hat 4 Sitze, seine Wahlkreise zusammen 3", parliaments);
+    }
+    SUBCASE("Ort eines anderen Staates, Ort doppelt") {
+        replace_in_file(dir / districts, "orte      = { leipzig }",
+                        "orte      = { leipzig dresden potsdam }");
+        const LoadResult r = load(dir, "jahresbeginn_1650");
+        expect_error(r, "Ort potsdam in wahlkreis lt_leipzig gehört zum Startdatum nicht zu SAX", districts);
+        expect_error(r, "Ort dresden liegt schon in wahlkreis lt_dresden desselben Parlaments", districts);
+    }
+    SUBCASE("unbekanntes Parlament, Staat des Parlaments") {
+        replace_in_file(dir / districts, "parlament = landtag\n    staat     = SAX\n    orte",
+                        "parlament = reichstag\n    staat     = SAX\n    orte");
+        replace_in_file(dir / districts, "staat     = SAX\n    sitze", "staat     = BRA\n    sitze");
+        const LoadResult r = load(dir, "jahresbeginn_1650");
+        expect_error(r, "unbekanntes Parlament 'reichstag' in wahlkreis lt_leipzig", districts);
+        expect_error(r, "wahlkreis lt_dresden liegt in BRA, parlament landtag gehört zu SAX", districts);
     }
     SUBCASE("späteres Parlament wird auch vor 'seit' geprüft") {
         replace_in_file(dir / parliaments, "wahlrecht     = allgemein_maenner", "wahlrecht     = alle");

@@ -421,6 +421,10 @@ jobs:
       - name: Tests der Geodaten (tools/geodaten)
         run: python3 -m unittest discover -s tools/geodaten -v
 
+      # Seit M8: Die Wahlkreise sind aus den Tabellen berechnet (ohne Zwischenspeicher).
+      - name: Wahlkreise aktuell? (data/tabellen/wahlkreise.csv)
+        run: python3 tools/geodaten/wahlkreise_1848.py --pruefen
+
   godot:
     name: Godot (Brücke, Tests, Screenshots)
     runs-on: ubuntu-24.04

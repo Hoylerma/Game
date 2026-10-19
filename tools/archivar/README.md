@@ -67,6 +67,10 @@ Werte werden als Text aus der Tabelle übernommen (keine Gleitkomma-Umwandlung).
   Strecke. Unbekannte Orte, gleicher Anfang und gleiches Ende und doppelte Abschnitte (auch auf
   verschiedenen Strecken) sind Fehler, Abschnitte über 120 km und gleiche Namen verschiedener
   Strecken Warnungen.
+- `wahlkreise.csv` (seit M8) erzeugt `history/wahlkreise/<parlament>.chron`: je Zeile ein Wahlkreis
+  mit Staat, Sitzen und Orten. Unbekannte Orte und Staaten, ein Ort in zwei Wahlkreisen desselben
+  Parlaments und Sitze unter 1 sind Fehler; ob das Parlament besteht und wem die Orte gehören,
+  prüft der Kern.
 - Ein Staat ohne Ort zum Szenariodatum besteht in diesem Szenario nicht; seine Pflichtfelder werden
   dort nicht verlangt. Spielerstaat und spielbare Staaten (`spielbar`) müssen zum Szenariodatum
   bestehen.

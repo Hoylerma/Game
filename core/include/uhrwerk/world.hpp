@@ -271,6 +271,18 @@ struct Parliament {
     std::string source;
 };
 
+/// Wahlkreis eines Parlaments (history/wahlkreise/*.chron, politik.md Abschnitt 5.3). Inhalt; die Orte
+/// gehören zum Startdatum dem Staat des Wahlkreises.
+struct ElectoralDistrict {
+    std::string id; // z. B. "nv_bad_10"
+    std::string name;
+    Index parliament = kNone;
+    Index state = kNone;
+    std::int32_t seats = 1;       // mehrere Sitze für große Städte (Berlin, Wien)
+    std::vector<Index> locations; // in der Reihenfolge der Datei
+    std::string source;
+};
+
 /// Haushalt eines Staates in einem Monat, festgestellt an seinem Rechentag (seit M5,
 /// docs/technik/wirtschaft.md Abschnitt 4.6). Beträge in Reichstalern.
 struct StateBudget {
@@ -464,11 +476,12 @@ struct World {
     std::vector<std::string> deposits;    // Vorkommen (Kennungen aus betriebe.chron), seit M5
     std::vector<State> states;
     std::vector<District> districts;
-    std::vector<AdminUnit> admin_units;         // seit M7
-    std::vector<Railway> railways;              // seit M7
-    std::vector<PoliticalCurrent> currents;     // seit M8
-    std::vector<InterestGroup> interest_groups; // seit M8
-    std::vector<Parliament> parliaments;        // seit M8, nur die des Szenarios ('seit')
+    std::vector<AdminUnit> admin_units;                 // seit M7
+    std::vector<Railway> railways;                      // seit M7
+    std::vector<PoliticalCurrent> currents;             // seit M8
+    std::vector<InterestGroup> interest_groups;         // seit M8
+    std::vector<Parliament> parliaments;                // seit M8, nur die des Szenarios ('seit')
+    std::vector<ElectoralDistrict> electoral_districts; // seit M8, die Wahlkreise dieser Parlamente
     std::vector<Location> locations;
     std::vector<PopBlock> pops;
     std::vector<ChronicleEntry> chronicle;

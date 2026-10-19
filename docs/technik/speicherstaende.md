@@ -81,7 +81,7 @@ Simulation beeinflusst, und ein Gesamtwert über die 14 Bereiche (seit M8; vorhe
 | `maerkte`, `vorkommen` | Kennungen und Landschaften, Eisenbahnen mit allen Abschnitten (seit M7); Kennungen der Vorkommen |
 | `staaten`, `kreise` | Kennung, Kurzname, Konfession des Herrscherhauses und Zollverein (seit M7) der Staaten, die zum Startdatum bestehen; Kennungen der Kreise; Verwaltungseinheiten mit Kennung, Art und übergeordneter Einheit (seit M7) |
 | `orte` | Kennung, Name, Gelände, Kreis, Lage, Fläche, Stadt, Markt, Vorkommen, Hafen, Verwaltungseinheit und Bundesgebiet (seit M7); die Zahl der Orte |
-| `politik` (seit M8) | Strömungen (Kennung, Position), Interessengruppen (Mitglieder, Neigung), Parlamente mit Wahl und Fraktionen, Verfassung und Wahlordnung der Staaten ([politik.md](politik.md)) |
+| `politik` (seit M8) | Strömungen (Kennung, Position), Interessengruppen (Mitglieder, Neigung), Parlamente mit Wahl und Fraktionen, Verfassung und Wahlordnung der Staaten, Wahlkreise mit Name, Staat, Sitzen und Orten ([politik.md](politik.md)) |
 
 **Nicht** dazu gehören volle Staatsnamen, Farben, Quellen und Beschreibungen: Eine korrigierte
 Quelle macht alte Spielstände nicht unbrauchbar. Der **Kurzname der Staaten und der Name der Orte

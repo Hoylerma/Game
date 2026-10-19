@@ -17,7 +17,7 @@ parlament nationalversammlung {
     wahlsystem    = stichwahl
     wahl_indirekt = ja                   # in den meisten Staaten über Wahlmänner
     fraktionen_ab = 1848.10.01           # Fraktionsstärken der Literatur, Stand Herbst 1848
-    boykott       = { tschechen }        # tschechische Wahlkreise in Böhmen und Mähren (Palacký)
+    boykott       = { tschechen polen daenen }   # tschechische Wahlkreise (Palacký), polnische in Posen, dänische in Nordschleswig
     quelle        = "Wissensstand ohne Quellenzugang; Hinweise der Websuche (englische Wikipedia: Factions in the Frankfurt Assembly; Bundesarchiv; DHM); Prüfung offen"
 
     # Reihenfolge der Literatur von rechts nach links; Bereiche sind Spielwerte (Abschnitt 3.2).
