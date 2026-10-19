@@ -336,6 +336,28 @@ jobs:
           } >> "$GITHUB_STEP_SUMMARY"
           exit "$status"
 
+      # Wahllabor (M8, docs/technik/politik.md Abschnitt 7.8): Nationalversammlung 1848 und
+      # Preußisches Abgeordnetenhaus 1849 gegen data/common/wahlziele_voelkerfruehling.chron, mit dem
+      # Ergebnis je Wahlkreis der Nationalversammlung im Bericht.
+      - name: Wahllabor 1848/49
+        if: ${{ !cancelled() }}
+        run: |
+          status=0
+          ./build/release/cli/uhrwerk-cli wahl --daten data --szenario voelkerfruehling --seeds 16 --wahlkreise \
+            > "$RUNNER_TEMP/wahl_1848.txt" 2>&1 || status=$?
+          # Preußen 1849 (Dreiklassen): Plausibilität, 16 Monate je Seed
+          ./build/release/cli/uhrwerk-cli wahl --daten data --szenario voelkerfruehling --seeds 8 \
+            --parlament pr_abgeordnetenhaus >> "$RUNNER_TEMP/wahl_1848.txt" 2>&1 || status=$?
+          sed '/^Ergebnis je Wahlkreis/,/^$/d' "$RUNNER_TEMP/wahl_1848.txt"
+          {
+            echo "### Wahllabor 1848/49"
+            echo
+            echo '```'
+            cat "$RUNNER_TEMP/wahl_1848.txt"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          exit "$status"
+
   formatierung:
     name: Formatierung
     runs-on: ubuntu-24.04

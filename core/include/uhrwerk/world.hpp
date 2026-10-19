@@ -266,9 +266,10 @@ struct Parliament {
     Date election_day;                   // Wahltag
     ElectoralLaw law;                    // Wahlrecht dieser Wahl
     Date faction_day;                    // Stichtag der Fraktionen (vorher gelten die Strömungen)
-    std::vector<Index> boycott_cultures; // Wahlkreise mit Mehrheit dieser Kulturen wählen nicht
-    std::vector<Faction> factions;       // nach Bereich aufsteigend, lückenlos von −100 bis +100
-    Index seat = kNone;                  // Tagungsort (Ort); bestimmt die Meldereihenfolge am Wahlabend
+    std::vector<Index> boycott_cultures; // Wahlkreise mit Mehrheit dieser Kulturen wählen nicht …
+    std::vector<Index> boycott_markets; // … nur in diesen Märkten (Markt des ersten Ortes); leer = überall
+    std::vector<Faction> factions;      // nach Bereich aufsteigend, lückenlos von −100 bis +100
+    Index seat = kNone;                 // Tagungsort (Ort); bestimmt die Meldereihenfolge am Wahlabend
     std::string source;
 };
 

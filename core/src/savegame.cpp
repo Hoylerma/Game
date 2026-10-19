@@ -916,6 +916,10 @@ ContentFingerprint content_fingerprint(const World& w) {
             for (const Index c : pa.boycott_cultures) {
                 h.i64(c);
             }
+            h.u64(pa.boycott_markets.size());
+            for (const Index m : pa.boycott_markets) {
+                h.i64(m);
+            }
             h.u64(pa.factions.size());
             for (const Faction& f : pa.factions) {
                 h.text(f.id);

@@ -86,8 +86,8 @@ Fraktionen (3.2).
 |---|---|---|
 | `konservative` | +70 | Adel, Hof, orthodoxe Protestanten |
 | `katholiken` (politischer Katholizismus) | +35 | katholisches Milieu |
-| `liberale` (konstitutionelle Liberale) | +15 | Bildungs- und Wirtschaftsbürgertum |
-| `demokraten` | −45 | Kleinbürgertum, Handwerker, Studenten |
+| `liberale` (konstitutionelle Liberale) | +10 (Entwurf +15, kalibriert in a4) | Bildungs- und Wirtschaftsbürgertum |
+| `demokraten` | −50 (Entwurf −45, kalibriert in a4) | Kleinbürgertum, Handwerker, Studenten |
 | `arbeiter` (frühe Arbeiterbewegung) | −75 | Handwerksgesellen, Arbeiter |
 
 Eine zweite Achse (großdeutsch – kleindeutsch) spaltet die Paulskirche erst ab Herbst 1848; sie
@@ -234,8 +234,11 @@ Ergebnis:
   Abgeordneten; das Modell nimmt meist einen, Großstädte mehrere.
 
 **Boykott (Entscheidung 3):** Wahlkreise mit Mehrheit einer Kultur aus `boykott` wählen nicht, ihre
-Sitze bleiben leer. Für die Nationalversammlung sind das `tschechen` (Palacký), `polen` (Posen) und
-`daenen` (Nordschleswig).
+Sitze bleiben leer. Mit `boykott_maerkte` gilt das nur in diesen Märkten. Für die Nationalversammlung
+sind das die `tschechen` in Böhmen (Absage Palackýs). In Mähren wählten die meisten tschechischen
+Wahlkreise, deshalb gilt der Boykott dort nicht. Polen und Dänen wählen im Modell. Historisch lagen die
+polnischen Teile Posens außerhalb des Bundesgebiets; das Modell gibt Posen deshalb zu viele Sitze. Der
+Boykott lässt 62 Sitze leer, also 587 besetzte, nahe den rund 585 der Literatur.
 
 ## 6. Gesetze und Verfassungen in M8
 
@@ -316,7 +319,10 @@ Je nach Wahlrecht kommen Gewichte hinzu:
 er nicht. Die Berechtigten bleiben stehen, Wähler und Stimmen sind 0, der Sitz bleibt leer.
 
 Bei `mehrheit_stichwahl` gewinnt eine Strömung mit absoluter Mehrheit. Sonst kommen die beiden
-stärksten in die Stichwahl, und die Stimmen der übrigen gehen anteilig an die näher stehende.
+stärksten in die Stichwahl. Die Stimmen der übrigen gehen anteilig nach der Nähe an beide: an den
+einen Finalisten der Abstand zum anderen geteilt durch beide Abstände. Die Liberalen (10) geben zwischen
+Demokraten (−50) und Katholiken (35) also 60 ÷ 85, gut sieben Zehntel, an die Katholiken und den Rest an
+die Demokraten.
 Gleichstand entscheidet die Position (die gemäßigtere gewinnt), nicht der Zufall. Bei
 `mehrheit_relativ` gewinnt die stärkste.
 
@@ -359,14 +365,18 @@ Parlamente hat. Das Szenario 1648 hat keine; die Prüfsumme nach 100 Jahren blei
 
 ### 7.8 Zielwerte und Wahllabor
 
-`uhrwerk-cli wahl [--szenario voelkerfruehling] [--parlament nationalversammlung] [--seeds N]
-[--wahlkreise]` rechnet bis zum Wahltag und gibt aus:
+`uhrwerk-cli wahl --szenario voelkerfruehling [--parlament ID] [--seeds N] [--seed N] [--ziele DATEI]
+[--wahlkreise]` rechnet je Seed vom Start bis zum Wahltag. Standard ist das erste Parlament des
+Szenarios mit 16 Seeds. Die Ausgabe enthält:
+- besetzte Sitze und die Beteiligung (Median der Wahlkreise);
 - Sitze je Strömung und Fraktion mit Median sowie 5- und 95-%-Wert über die Seeds;
-- Beteiligung und Berechtigte je Staat;
-- mit `--wahlkreise` das Ergebnis je Wahlkreis.
+- die Blöcke der Wahlziele mit ihrem Anteil;
+- je Staat Sitze, Berechtigte, Beteiligung und Sitze je Strömung;
+- mit `--wahlkreise` das Ergebnis je Wahlkreis im ersten Lauf.
 
-Die Zielwerte stehen in `common/wahlziele_voelkerfruehling.chron` (Format wie `zielwerte*.chron`).
-Exitcode 1 bei Verstoß; ein Schritt im CI-Job „Balancing“.
+Die Zielwerte stehen in `common/wahlziele_voelkerfruehling.chron` (chronik-skript.md, Abschnitt 3.24).
+Exitcode 1 bei Verstoß. Der Befehl ist ein Schritt im CI-Job „Balancing“ (16 Seeds); CTests rechnen den
+Landtag der Testdaten und die Nationalversammlung mit zwei Seeds. Im Kern: `uhrwerk/election_lab.hpp`.
 
 Ziele für die Nationalversammlung, Anteil an den besetzten Sitzen, Stand Oktober 1848
 (ungeprüfte Richtwerte aus der Literaturkenntnis und der Websuche, Fachprüfung offen):
@@ -526,3 +536,48 @@ Weitere Tests:
 | a1 Datenmodell | `common/stroemungen.chron` (5 Strömungen), `common/interessengruppen.chron` (11 Gruppen, davon 10 im Lesezeichen 1848; die Arbeiterbewegung erst ab August 1848), `common/parlamente.chron` (Nationalversammlung 1848 mit 8 Fraktionen, Preußisches Abgeordnetenhaus 1849 mit 3), `selbststaendig` bei Landarmen (0,6) und Fabrikarbeitern (0,7); Verfassung und Wahlrecht der Landtage für die 38 Staaten von 1848 in `staaten_historie.csv` (aus der Regierungsform abgeleitet, Zensus in Baden, Württemberg, Hessen-Darmstadt und den Niederlanden). Lader (chronik-skript.md 3.19–3.21), Archivar, Inhaltsfingerabdruck (Bereich `politik`), `info` und `pruefen`. 1648 ohne Parlament, Prüfsumme unverändert. |
 | a2 Wahlkreise | `tools/geodaten/wahlkreise_1848.py` (mit Tests, CI prüft die Tabelle), `wahlkreise.csv` mit 633 Wahlkreisen der Nationalversammlung (649 Sitze) und 337 des Preußischen Abgeordnetenhauses (350 Sitze), Archivar (`history/wahlkreise/`), Lader mit Prüfungen (Sitze = Sollzahl, Orte des Staates, jeder Ort einmal), Fingerabdruck, `info`. Boykott um Polen und Dänen ergänzt. |
 | a3 Wahl im Kern | `core/src/politics.cpp` (Abschnitte 7.1–7.7). Die Wahl läuft im Tagesablauf am Wahltag nach der Wirtschaft, mit Chronikeintrag. `common/wahlen.chron` (chronik-skript.md 3.23) enthält Wahlregeln und fünf Regionen als Spielwerte; Sitz der Parlamente ist Frankfurt bzw. Berlin. Ergebnis im Zustandsverzeichnis nur mit Parlamenten, Spielstand Format 2 (speicherstaende.md, Abschnitt 6). Tests: Neigung, Fraktionen, Stichwahl, Gleichstand, Boykott, Dreiklassen, Zensus, Threads, Spielstände, Formatwache. 1648 bitgleich. Erster Lauf 1848 ohne Kalibrierung: 504 von 649 Sitzen besetzt (145 leer, davon Tschechen 89, Polen 51, Dänen 5), die Liberalen gewinnen 369 Sitze, Konservative und Demokraten keinen. Die Kalibrierung folgt in a4. |
+| a4 Wahllabor und Kalibrierung | `uhrwerk-cli wahl` (Abschnitt 7.8, Kern `uhrwerk/election_lab.hpp`), Wahlziele `common/wahlziele_voelkerfruehling.chron` (chronik-skript.md 3.24), CI-Schritt „Wahllabor 1848/49“, CTests `wahl_fixture` und `wahl_1848`. Ergebnis 1848 mit 16 Seeds: alle Ziele erfüllt (siehe unten). Preußen 1849: Konservative und Liberale 83 %, Arbeiterbewegung 0 %. |
+
+### 14.1 Kalibrierung der Nationalversammlung (Schritt a4)
+
+Ergebnis von `uhrwerk-cli wahl --szenario voelkerfruehling --seeds 16`: Median über 16 Seeds, Anteil
+an 587 besetzten Sitzen, in Klammern der 5- und 95-%-Wert.
+
+| Block | Fraktionen | Ergebnis | Ziel |
+|---|---|---|---|
+| Rechte | Café Milani (29) | 4,9 % (4,3–6,3) | 4–10 % |
+| Rechtes Zentrum | Casino (115), Landsberg (60) | 30,7 % (26,9–34,2) | 22–34 % |
+| Linkes Zentrum | Augsburger Hof (49), Württemberger Hof (68) | 19,6 % (18,2–22,0) | 13–25 % |
+| Linke | Westendhall (21), Deutscher Hof (77), Donnersberg (11) | 19,2 % (18,1–21,8) | 15–27 % |
+| Fraktionslos | — (143) | 24,4 % (22,7–27,9) | 20–35 % |
+| Besetzte Sitze | — | 587 | 560–610 |
+| Beteiligung | — | Median der Wahlkreise 54 % | 45–70 % |
+
+Strömungen: Konservative 71, Katholiken 70, Liberale 296, Demokraten 149, Arbeiterbewegung 0.
+
+Was die Kalibrierung geändert hat:
+- **Stichwahl** anteilig nach der Nähe (Abschnitt 7.5). Vorher gingen alle Stimmen der übrigen an den
+  näheren Finalisten, und die Demokraten verloren jede Stichwahl gegen die Mitte.
+- **Boykott** nur der Tschechen in Böhmen (`boykott_maerkte`, Abschnitt 5.3).
+- **Positionen:** Liberale +10 statt +15, damit ihre Abgeordneten sich wie historisch auf das rechte
+  und linke Zentrum verteilen; Demokraten −50 statt −45 und `position_rauschen` 18 statt 15, damit
+  der Donnersberg nicht leer bleibt.
+- **Wahlregeln:**
+  - Grundbeteiligung 0,55 statt 0,45, denn die Alphabetisierung der Blöcke liegt im Median bei 16 %;
+  - Grundneigung der Nichtmitglieder demokratischer;
+  - Wahlmänner nur noch ×1,1;
+  - Städte stärker demokratisch.
+- **Katholische Kirche:** Sie bindet 40 statt 60 % der Katholiken.
+- **Regionen** nach der Wahlgeographie 1848 (`common/wahlen.chron`):
+  - demokratisch: Baden und Pfalz, Württemberg, Sachsen, Thüringen, Niederschlesien, Rhein-Main,
+    Franken, Wien, Ostpreußen und das Rheinland (dort auch katholisch);
+  - konservativ: Brandenburg, Pommern, Westpreußen und Posen;
+  - katholisch: Altbayern, Tirol und Vorarlberg;
+  - Josephinismus (ganz Österreich): Liberale statt politischer Katholizismus.
+
+Grenzen:
+- Mit Mehrheitswahl je Wahlkreis gewinnen Hochburgen fast geschlossen: Baden 20 von 20 Sitzen an die
+  Demokraten, Sachsen 25 von 26. Historisch saßen auch dort Liberale wie Bassermann und Mathy.
+- Preußen stellt 68 Konservative, mehr als historisch; die Rechte im Ganzen liegt trotzdem im Ziel.
+- Die Arbeiterbewegung entsteht erst im August 1848 und gewinnt im Mai keinen Sitz.
+- Alle Werte sind Spielwerte gegen ungeprüfte Richtwerte; die Fachprüfung mit Quellen steht aus.

@@ -226,9 +226,10 @@ Arbeitsverzeichnis), alternativ `--daten DIR`:
 # Release-Build: cmake --preset release && cmake --build --preset release
 ./build/release/cli/uhrwerk-cli lasttest --jahre 3 --vergleich 1 --grenze 2   # 500.000 Bevölkerungsblöcke
 ./build/release/cli/uhrwerk-cli bilanz --seeds 16 --jahre 100               # Balancing-Bericht gegen die Zielwerte
+./build/release/cli/uhrwerk-cli wahl --szenario voelkerfruehling --seeds 16  # Wahllabor: Nationalversammlung 1848
 ```
 
-Exitcodes: `0` in Ordnung, `1` Daten- oder Determinismusfehler oder verfehlte Zielwerte (`bilanz`),
+Exitcodes: `0` in Ordnung, `1` Daten- oder Determinismusfehler oder verfehlte Zielwerte (`bilanz`, `wahl`),
 `2` Bedienfehler.
 
 **4. Daten bearbeiten** – Orte und Staaten stehen in `data/tabellen/*.csv` (Format:

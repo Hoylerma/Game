@@ -1,9 +1,9 @@
 # Regeln der Wahlsimulation (Meilenstein M8, docs/technik/politik.md Abschnitt 7).
 #
-# Format: docs/technik/chronik-skript.md, Abschnitt 3.23. Alle Werte sind Spielwerte nach dem Entwurf;
-# die Kalibrierung gegen die Fraktionsstärken der Nationalversammlung folgt in M8, Schritt a4
-# (common/wahlziele_voelkerfruehling.chron). Neigungen je Strömung aus common/stroemungen.chron;
-# fehlende Strömungen zählen 0.
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.23. Alle Werte sind Spielwerte, kalibriert in M8,
+# Schritt a4, gegen die Fraktionsstärken der Nationalversammlung (common/wahlziele_voelkerfruehling.chron,
+# Ergebnis und Begründung: docs/technik/politik.md, Abschnitt 14.1). Neigungen je Strömung aus
+# common/stroemungen.chron; fehlende Strömungen zählen 0.
 
 wahlregeln {
     # 7.1 Wahlberechtigte: Männer ab 25 (Dreiklassen ab 24), dazu der Anteil „selbstständig“ je Beruf.
@@ -12,7 +12,7 @@ wahlregeln {
     junge_ab_24         = 0.4      # Anteil der 15–29-Jährigen ab 24
 
     # 7.2 Beteiligung = basis + bildung × Alphabetisierung + stadt − not × (1 − Lebensstandard/100)
-    beteiligung_basis   = 0.45
+    beteiligung_basis   = 0.55
     beteiligung_bildung = 0.25
     beteiligung_stadt   = 0.1
     beteiligung_not     = 0.15
@@ -21,44 +21,92 @@ wahlregeln {
 
     # 7.3 Neigung: Interessengruppen, sonst die Grundneigung; dazu Bildung, Not, Stadt und Region.
     not_unter       = 40           # Lebensstandard, unter dem die Not die Neigung verschiebt (Pauperismus)
-    neigung_basis   = { konservative = 0.35 katholiken = 0.15 liberale = 0.2 demokraten = 0.25 arbeiter = 0.05 }
+    neigung_basis   = { konservative = 0.3 katholiken = 0.15 liberale = 0.15 demokraten = 0.35 arbeiter = 0.05 }
     neigung_bildung = { konservative = -0.15 liberale = 0.1 demokraten = 0.05 }
     neigung_not     = { konservative = -0.1 liberale = -0.05 demokraten = 0.15 arbeiter = 0.1 }
-    neigung_stadt   = { konservative = -0.08 katholiken = -0.04 liberale = 0.06 demokraten = 0.06 }
+    neigung_stadt   = { konservative = -0.08 katholiken = -0.04 liberale = 0.06 demokraten = 0.12 }
 
     # 7.4 Indirekte Wahl: Die Wahlmänner verschieben zu den Honoratioren.
-    wahlmaenner     = { liberale = 1.15 katholiken = 1.15 }
+    wahlmaenner     = { liberale = 1.1 katholiken = 1.1 }
 
     # 7.3 Rauschen je Wahlkreis und Strömung (±, relativ); 7.6 Abgeordnete.
     rauschen          = 0.05
     zug_zur_mitte     = 0.3
-    position_rauschen = 15
+    position_rauschen = 18
     fraktionslos      = 0.25
 }
 
-# Regionen mit eigener Neigung (Abschnitt 7.3): Staaten (Tags zum Startdatum) oder Märkte.
+# Regionen mit eigener Neigung (Abschnitt 7.3): Staaten (Tags zum Startdatum) oder Märkte. Nach der
+# Wahlgeographie 1848: Demokraten im Südwesten, in Sachsen, Thüringen, Schlesien, am Rhein-Main und in
+# Wien; Konservative in Ostelbien; politischer Katholizismus in Altbayern, den Alpenländern und am Rhein.
 region suedwesten {
     staaten = { BAD }
     maerkte = { kurpfalz }          # Pfalz
-    neigung = { konservative = -0.1 demokraten = 0.12 liberale = 0.03 }
+    neigung = { konservative = -0.1 demokraten = 0.4 }
 }
 
 region wuerttemberg {
     staaten = { WUE }
-    neigung = { konservative = -0.05 demokraten = 0.08 }
+    neigung = { konservative = -0.05 demokraten = 0.35 }
 }
 
 region sachsen {
     staaten = { SAX }
-    neigung = { konservative = -0.05 demokraten = 0.1 }
+    neigung = { konservative = -0.05 demokraten = 0.35 }
+}
+
+region thueringen {
+    staaten = { ALT SCG SMG WEI REA REJ SRU SSH }
+    maerkte = { thueringen }
+    neigung = { demokraten = 0.3 }
+}
+
+region schlesien {
+    maerkte = { niederschlesien }   # Weberelend, Breslauer Demokraten
+    neigung = { demokraten = 0.35 }
+}
+
+region rhein_main {
+    maerkte = { rheinhessen starkenburg oberhessen wetterau nassau }
+    neigung = { demokraten = 0.3 }
+}
+
+region franken {
+    maerkte = { franken mainfranken }
+    neigung = { demokraten = 0.25 }
+}
+
+region wien {
+    maerkte = { niederoesterreich }
+    neigung = { demokraten = 0.4 }
+}
+
+region ostelbien {
+    maerkte = { brandenburg pommern westpreussen posen }
+    neigung = { konservative = 0.22 }
+}
+
+region altbayern {
+    maerkte = { bayern oberpfalz schwaben }
+    neigung = { katholiken = 0.08 konservative = 0.1 }
+}
+
+region alpenlaender {
+    maerkte = { tirol vorarlberg }
+    neigung = { katholiken = 0.3 konservative = 0.15 }
+}
+
+region josephinismus {
+    staaten = { AUT }               # Staatskirche: der politische Katholizismus blieb schwach
+    neigung = { katholiken = -0.15 liberale = 0.15 }
 }
 
 region rheinland {
     maerkte = { rheinland niederrhein trier muensterland }
-    neigung = { katholiken = 0.08 konservative = -0.05 }
+    neigung = { katholiken = 0.12 konservative = -0.05 demokraten = 0.1 }
 }
 
-region ostelbien {
-    maerkte = { brandenburg pommern ostpreussen westpreussen mecklenburg posen }
-    neigung = { konservative = 0.12 demokraten = -0.05 }
+region ostpreussen {
+    maerkte = { ostpreussen }       # Königsberger Liberale und Demokraten
+    neigung = { demokraten = 0.15 }
 }

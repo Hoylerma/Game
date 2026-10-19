@@ -17,8 +17,8 @@ interessengruppe adel {
 interessengruppe katholische_kirche {
     name         = "Katholische Kirche"
     farbe        = { 90 70 50 }
-    konfessionen = { katholisch = 0.6 }
-    neigung      = { katholiken = 0.6 konservative = 0.25 liberale = 0.1 demokraten = 0.05 }
+    konfessionen = { katholisch = 0.4 }
+    neigung      = { katholiken = 0.55 konservative = 0.25 liberale = 0.15 demokraten = 0.05 }
     quelle       = "Spielwert M8 nach Kapitel 09, Abschnitt 5.1"
 }
 

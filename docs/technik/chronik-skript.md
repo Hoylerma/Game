@@ -646,7 +646,8 @@ parlament nationalversammlung {
     wahl_indirekt = ja                               # optional: Wahl über Wahlmänner, Standard nein
     wahl_zensus   = 1                                # Pflicht bei wahlrecht = zensus
     fraktionen_ab = 1848.10.01                       # optional: Stichtag der Fraktionen, Standard der Wahltag
-    boykott       = { tschechen }                    # optional: Kulturen, deren Wahlkreise nicht wählen
+    boykott       = { tschechen }                    # optional: Kulturen, deren Wahlkreise nicht wählen …
+    boykott_maerkte = { boehmen }                    # optional seit M8 a4: … nur in diesen Märkten (Markt des ersten Ortes)
     sitz          = frankfurt_am_main                # optional seit M8 a3: Tagungsort (Meldereihenfolge am Wahlabend)
     quelle        = "…"                              # optional
     fraktion casino { name = "Casino" farbe = { 70 96 150 } von = 20 bis = 55 }   # mindestens eine
@@ -659,7 +660,8 @@ bleiben bitgleich. Die Fraktionen teilen die Links-rechts-Achse **lückenlos** v
 kleiner als `bis`; die Reihenfolge in der Datei ist frei, der Kern ordnet nach `von`). Die Ebene wird
 nach dem Staatenbestand aufgelöst (Abschnitt 3.5): Ein Staat ohne Ort zum Startdatum ist fatal.
 Weitere Fehler: unbekannte Kulturen im Boykott, `fraktionen_ab` vor dem Wahltag, `wahl_zensus` ohne
-`wahlrecht = zensus`, ein unbekannter Ort als `sitz`. Gibt es zum Startdatum ein Parlament, braucht die Welt
+`wahlrecht = zensus`, ein unbekannter Ort als `sitz`, ein unbekannter Markt in `boykott_maerkte` oder
+`boykott_maerkte` ohne `boykott`. Gibt es zum Startdatum ein Parlament, braucht die Welt
 die Wahlregeln (Abschnitt 3.23). Die Datei darf fehlen. Im Kern: `World::parliaments` (`Parliament`,
 `Faction`, `ElectoralLaw`).
 
@@ -728,6 +730,35 @@ Fatal sind:
 
 Die Datei darf fehlen, solange es zum Startdatum kein Parlament gibt. Im Kern: `World::election_rules`
 (`ElectionRules`) und `World::political_regions` (`PoliticalRegion`).
+
+### 3.24 `common/wahlziele_<szenario>.chron` (seit M8)
+
+Wahlziele des Wahllabors ([politik.md](politik.md), Abschnitt 7.8). Wie die Zielwerte (Abschnitt 3.15)
+gehört die Datei nicht zum Spielinhalt. Nur `uhrwerk-cli wahl` liest sie; `uhrwerk-cli pruefen` prüft sie,
+wenn sie vorhanden ist.
+
+```text
+wahl nationalversammlung {          # je Parlament des Szenarios höchstens ein Block
+    besetzt     = { 560 610 }       # optional: besetzte Sitze, Median über die Seeds
+    beteiligung = { 0.45 0.7 }      # optional: Median der Beteiligung der gewählten Wahlkreise
+    block rechte {                  # beliebig viele
+        fraktionen = { cafe_milani }        # Fraktionen des Parlaments, auch fraktionslos …
+        anteil     = { 0.04 0.10 }          # Pflicht: Anteil an den besetzten Sitzen (0..1), Median
+    }
+    block buergerliche {
+        stroemungen = { konservative liberale }   # … oder Strömungen (genau eines von beiden)
+        anteil      = { 0.6 1 }
+    }
+}
+```
+
+Bereiche stehen als `{ von bis }` mit von ≤ bis. Fehler sind:
+- unbekannte Parlamente, Fraktionen, Strömungen und Felder;
+- ein Block mit beiden oder keiner Liste;
+- Anteile außerhalb von 0 bis 1;
+- zwei Blöcke `wahl` für dasselbe Parlament.
+
+Im Kern: `ElectionTargets` (`uhrwerk/election_lab.hpp`).
 
 ## 4. Startzustand
 

@@ -1690,6 +1690,20 @@ TEST_CASE("Lader: Politik (seit M8)") {
                                "region elbtal {\n    staaten = { SAX }\n    neigung = { }\n}\n");
         expect_error(load(dir, "jahresbeginn_1650"), "Block 'wahlregeln' fehlt", elections);
     }
+    SUBCASE("Boykott nur in bestimmten Märkten") {
+        replace_in_file(dir / parliaments, "boykott       = { sorben }",
+                        "boykott       = { sorben }\n    boykott_maerkte = { mitte }");
+        const LoadResult r = load(dir, "jahresbeginn_1650");
+        INFO(issues_text(r));
+        REQUIRE(r.ok());
+        CHECK(r.world->parliaments[0].boycott_markets == std::vector<Index>{r.world->find_market("mitte")});
+        replace_in_file(dir / parliaments, "{ mitte }", "{ atlantis }");
+        replace_in_file(dir / parliaments, "    boykott       = { sorben }\n", "");
+        const LoadResult bad = load(dir, "jahresbeginn_1650");
+        expect_error(bad, "unbekannter Markt 'atlantis' in 'boykott_maerkte' von parlament landtag",
+                     parliaments);
+        expect_error(bad, "'boykott_maerkte' gilt nur mit 'boykott' in parlament landtag", parliaments);
+    }
     SUBCASE("unbekannter Ort als Sitz") {
         replace_in_file(dir / parliaments, "sitz          = dresden", "sitz          = atlantis");
         expect_error(load(dir, "jahresbeginn_1650"),

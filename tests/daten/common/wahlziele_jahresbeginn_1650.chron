@@ -1,0 +1,16 @@
+# Testdaten: Wahlziele für den Landtag im Szenario jahresbeginn_1650 (seit M8), gelesen von
+# `uhrwerk-cli wahl` (CTest wahl_fixture) und `uhrwerk-cli pruefen`.
+
+wahl landtag {
+    besetzt     = { 4 4 }
+    beteiligung = { 0.2 0.9 }
+
+    block alle {
+        fraktionen = { linke mitte rechte fraktionslos }
+        anteil     = { 1 1 }
+    }
+    block buergerliche {
+        stroemungen = { konservative liberale }
+        anteil      = { 0 1 }
+    }
+}

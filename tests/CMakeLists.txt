@@ -62,6 +62,13 @@ if(UHRWERK_BUILD_CLI)
                 --ziele ${PROJECT_SOURCE_DIR}/data/common/zielwerte.chron)
     # Mit PASS_REGULAR_EXPRESSION zählt die Ausgabe statt des Exitcodes: Ein Bedienfehler bestünde nicht.
     set_tests_properties(bilanz_verstoss PROPERTIES PASS_REGULAR_EXPRESSION "Verstöße \\([0-9]+, mit ! markiert\\)")
+    # Wahllabor (seit M8): Landtag der Fixture mit ihren Wahlzielen; die Nationalversammlung 1848 mit
+    # zwei Seeds (die volle Prüfung mit 16 Seeds läuft im CI-Job "Balancing").
+    add_test(NAME wahl_fixture
+        COMMAND uhrwerk-cli wahl --daten ${CMAKE_CURRENT_SOURCE_DIR}/daten --szenario jahresbeginn_1650 --seeds 3
+                --wahlkreise)
+    add_test(NAME wahl_1848
+        COMMAND uhrwerk-cli wahl --daten ${PROJECT_SOURCE_DIR}/data --szenario voelkerfruehling --seeds 2)
 
     # Spielstände und Wiederholungen (seit M6, docs/technik/speicherstaende.md Abschnitt 10): Abnahme
     # mit den echten Daten über die Datei; Wiederholung eines Protokolls und eines Spielstands über

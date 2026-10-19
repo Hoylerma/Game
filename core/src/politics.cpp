@@ -225,8 +225,12 @@ DistrictWork elect_district(const World& world, Index parliament_index, Index di
             people += pop.size();
         });
     }
+    const bool boycott_here =
+        parliament.boycott_markets.empty() ||
+        (!district.locations.empty() &&
+         contains(parliament.boycott_markets, world.locations[at(district.locations.front())].market));
     for (const Index culture : parliament.boycott_cultures) {
-        if (culture_people[at(culture)] * Fixed::from_int(2) > people) {
+        if (boycott_here && culture_people[at(culture)] * Fixed::from_int(2) > people) {
             result.boycott = true;
         }
     }
@@ -321,17 +325,14 @@ DistrictWork elect_district(const World& world, Index parliament_index, Index di
             if (c == first || c == second) {
                 continue;
             }
+            // Anteilig nach der Nähe: an den ersten Finalisten Abstand zum zweiten ÷ beide Abstände.
             const Fixed to_first = abs(position_of(world, c) - pos_first);
             const Fixed to_second = abs(position_of(world, c) - pos_second);
-            if (to_first < to_second) {
-                final_votes[first] += result.votes[c];
-            } else if (to_second < to_first) {
-                final_votes[second] += result.votes[c];
-            } else {
-                const Fixed half = result.votes[c] / Fixed::from_int(2);
-                final_votes[first] += half;
-                final_votes[second] += result.votes[c] - half;
-            }
+            const Fixed distance = to_first + to_second;
+            const Fixed share = distance > Fixed::zero() ? to_second / distance : Fixed::from_ratio(1, 2);
+            const Fixed part = result.votes[c] * share;
+            final_votes[first] += part;
+            final_votes[second] += result.votes[c] - part;
         }
         winner = beats(world, final_votes, first, second) ? first : second;
         result.runoff = true;

@@ -53,6 +53,7 @@ Nützliche Befehle:
 ./build/dev/cli/uhrwerk-cli determinismus --jahre 100      # zwei Läufe, Prüfsummen vergleichen
 ./build/dev/cli/uhrwerk-cli wirtschaft --jahre 20          # Wirtschaft und Haushalt im Überblick (Kalibrierung)
 ./build/release/cli/uhrwerk-cli bilanz --seeds 16          # Balancing-Bericht (Release-Build, wie in der CI)
+./build/release/cli/uhrwerk-cli wahl --szenario voelkerfruehling --seeds 16   # Wahllabor 1848 (wie in der CI)
 python3 tools/archivar/archivar.py                         # data/history/ aus data/tabellen/ erzeugen
 python3 tools/kartengenerator/kartengenerator.py           # Karte neu erzeugen (provinzen.png, fluesse.png, definition.csv)
 

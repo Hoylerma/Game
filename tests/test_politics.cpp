@@ -1,6 +1,7 @@
 // Tests der Wahlen (seit M8, docs/technik/politik.md, Abschnitt 7 und 11) mit dem Landtag der Testdaten.
 
 #include "test_hilfen.hpp"
+#include "uhrwerk/election_lab.hpp"
 #include "uhrwerk/parallel.hpp"
 #include "uhrwerk/politics.hpp"
 #include "uhrwerk/savegame.hpp"
@@ -192,7 +193,8 @@ TEST_CASE("Politik: Wahl unabhängig von den Threads, abhängig vom Seed") {
 
 TEST_CASE("Politik: Mehrheit, Stichwahl und Gleichstand") {
     const Index conservative = 0; // Position 70
-    const Index democrat = 2;     // Position -45; liberale (15) steht den Konservativen näher
+    const Index liberal = 1;      // Position 15
+    const Index democrat = 2;     // Position -45
 
     SUBCASE("absolute Mehrheit") {
         const ElectionResult e = elect(flat_world(fx("0.6"), fx("0.1"), fx("0.3")));
@@ -201,16 +203,26 @@ TEST_CASE("Politik: Mehrheit, Stichwahl und Gleichstand") {
             CHECK_FALSE(d.runoff);
         }
     }
-    SUBCASE("Stichwahl: die Stimmen der Liberalen gehen an die näher stehenden Konservativen") {
+    SUBCASE("Stichwahl: die Konservativen geben anteilig nach der Nähe, überwiegend an die Liberalen") {
+        // Konservative zu den Liberalen 55, zu den Demokraten 115: 115/170 an die Liberalen,
+        // also 0,40 + 0,108 gegen 0,44 + 0,052.
+        const ElectionResult e = elect(flat_world(fx("0.16"), fx("0.4"), fx("0.44")));
+        for (const DistrictResult& d : e.districts) {
+            CHECK(d.votes[2] > d.votes[1]);
+            CHECK(d.winner == liberal);
+            CHECK(d.runoff);
+        }
+    }
+    SUBCASE("Stichwahl: knapper Rückstand reicht nicht, wenn die Dritten fast gleich nah stehen") {
+        // Liberale zu den Konservativen 55, zu den Demokraten 60: fast halbe-halbe.
         const ElectionResult e = elect(flat_world(fx("0.4"), fx("0.15"), fx("0.45")));
         for (const DistrictResult& d : e.districts) {
-            CHECK(d.votes[2] > d.votes[0]);
-            CHECK(d.winner == conservative);
+            CHECK(d.winner == democrat);
             CHECK(d.runoff);
         }
     }
     SUBCASE("relative Mehrheit ohne Stichwahl") {
-        World w = flat_world(fx("0.4"), fx("0.15"), fx("0.45"));
+        World w = flat_world(fx("0.16"), fx("0.4"), fx("0.44"));
         w.parliaments[0].law.system = ElectoralSystem::Plurality;
         const ElectionResult e = elect(std::move(w));
         for (const DistrictResult& d : e.districts) {
@@ -248,6 +260,24 @@ TEST_CASE("Politik: Boykott") {
     }
     CHECK(any);
     CHECK(static_cast<std::int32_t>(e.deputies.size()) == open_seats);
+}
+
+TEST_CASE("Politik: Boykott nur in den genannten Märkten") {
+    World w = landtag_world();
+    const Index dresden = w.find_location("dresden");
+    w.parliaments[0].boycott_cultures = {w.location_majority_culture(dresden)};
+    w.parliaments[0].boycott_markets = {w.locations[static_cast<std::size_t>(dresden)].market};
+    World elsewhere = w;
+    const ElectionResult e = elect(std::move(w));
+    CHECK(e.districts[0].boycott); // lt_dresden
+    for (Index m = 0; m < static_cast<Index>(elsewhere.markets.size()); ++m) {
+        if (m != elsewhere.locations[static_cast<std::size_t>(dresden)].market) {
+            elsewhere.parliaments[0].boycott_markets = {m};
+            break;
+        }
+    }
+    const ElectionResult other = elect(std::move(elsewhere));
+    CHECK_FALSE(other.districts[0].boycott);
 }
 
 TEST_CASE("Politik: Wahlrecht") {
@@ -361,4 +391,112 @@ TEST_CASE("Politik: Spielstand im Format 1 zeigt seine Angaben, lädt aber nicht
     CHECK(info->content.parts[13] == 0);
     const LoadedGame loaded = uhrwerk::load_game(bytes, w, 1);
     CHECK(loaded.error == "Spielstand im Format 1 wird nicht unterstützt");
+}
+
+// ─── Wahllabor (seit M8, Schritt a4) ─────────────────────────────────────────
+
+TEST_CASE("Wahllabor: Wahlziele lesen") {
+    const World w = landtag_world();
+    SUBCASE("gültig") {
+        const uhrwerk::ElectionTargetsResult r = uhrwerk::parse_election_targets(R"(
+            wahl landtag {
+                besetzt     = { 3 4 }
+                beteiligung = { 0.2 0.9 }
+                block links { fraktionen = { linke fraktionslos } anteil = { 0 0.5 } }
+                block mitte { stroemungen = { liberale } anteil = { 0.1 1 } }
+            })",
+                                                                                 w);
+        INFO(r.errors.size());
+        REQUIRE(r.ok());
+        const uhrwerk::ElectionTargets* t = r.find(0);
+        REQUIRE(t != nullptr);
+        CHECK(t->seated->min == Fixed::from_int(3));
+        CHECK(t->turnout->max == fx("0.9"));
+        REQUIRE(t->blocks.size() == 2);
+        CHECK(t->blocks[0].factions == std::vector<Index>{0, kNone});
+        CHECK(t->blocks[1].currents == std::vector<Index>{w.find_current("liberale")});
+        CHECK(r.find(1) == nullptr);
+    }
+    SUBCASE("Fehler") {
+        const uhrwerk::ElectionTargetsResult r = uhrwerk::parse_election_targets(R"(
+            wahl reichstag { }
+            wahl landtag {
+                farbe = rot
+                block a { fraktionen = { zentrum } anteil = { 0 1 } }
+                block b { stroemungen = { radikale } anteil = { 0 1 } }
+                block c { fraktionen = { linke } stroemungen = { liberale } anteil = { 0 1 } }
+                block d { fraktionen = { linke } anteil = { 0.5 2 } }
+            }
+            wahl landtag { })",
+                                                                                 w, "ziele.chron");
+        CHECK_FALSE(r.ok());
+        CHECK(r.targets.empty());
+        const auto has = [&](std::string_view needle) {
+            return std::any_of(r.errors.begin(), r.errors.end(),
+                               [&](const std::string& e) { return e.find(needle) != std::string::npos; });
+        };
+        CHECK(has("unbekanntes Parlament 'reichstag'"));
+        CHECK(has("unbekanntes Feld 'farbe'"));
+        CHECK(has("unbekannte Fraktion 'zentrum' in parlament landtag"));
+        CHECK(has("unbekannte Strömung 'radikale'"));
+        CHECK(has("block c braucht genau eines von 'fraktionen' und 'stroemungen'"));
+        CHECK(has("'anteil' erwartet einen Bereich innerhalb von 0 bis 1"));
+        CHECK(has("Zielwerte für parlament landtag sind mehrfach angegeben"));
+        CHECK(has("ziele.chron:"));
+    }
+}
+
+TEST_CASE("Wahllabor: Messung und Zusammenfassung") {
+    const World w = landtag_world();
+    std::vector<uhrwerk::ElectionRun> runs;
+    for (std::uint64_t seed = 0; seed < 3; ++seed) {
+        Simulation sim(w, SimConfig{kSeed + seed, 1});
+        const auto e = uhrwerk::run_to_election(sim, 0);
+        REQUIRE(e.has_value());
+        CHECK(e->day == kElectionDay);
+        CHECK(sim.world().date == Date{1650, 3, 2});                  // der Wahltag ist gerechnet
+        CHECK(uhrwerk::run_to_election(sim, 0)->day == kElectionDay); // schon gewählt: dasselbe Ergebnis
+        CHECK_FALSE(uhrwerk::run_to_election(sim, 5).has_value());
+        runs.push_back(uhrwerk::measure_election(sim.world(), *e));
+    }
+    const uhrwerk::ElectionRun& run = runs[0];
+    CHECK(run.seated == 4);
+    CHECK(run.by_faction.size() == 4);
+    CHECK(run.turnout > Fixed::zero());
+    CHECK(run.turnout < Fixed::one());
+    const auto sax = static_cast<std::size_t>(w.find_state("SAX"));
+    CHECK(run.state_seats[sax] == 4);
+    CHECK(run.state_electorate[sax] > run.state_voters[sax]);
+
+    const uhrwerk::ElectionTargetsResult targets = uhrwerk::parse_election_targets(R"(
+        wahl landtag {
+            besetzt = { 4 4 }
+            beteiligung = { 0.95 1 }
+            block alle { fraktionen = { linke mitte rechte fraktionslos } anteil = { 1 1 } }
+            block nichts { stroemungen = { liberale } anteil = { 2 2 } }
+        })",
+                                                                                   w);
+    // 'anteil' außerhalb von 0..1 ist ein Lesefehler; ohne den Block prüfen.
+    CHECK_FALSE(targets.ok());
+    const uhrwerk::ElectionTargetsResult valid = uhrwerk::parse_election_targets(R"(
+        wahl landtag {
+            besetzt = { 4 4 }
+            beteiligung = { 0.95 1 }
+            block alle { fraktionen = { linke mitte rechte fraktionslos } anteil = { 1 1 } }
+            block keiner { fraktionen = { linke mitte rechte fraktionslos } anteil = { 0 0.5 } }
+        })",
+                                                                                 w);
+    REQUIRE(valid.ok());
+    const uhrwerk::ElectionSummary s = uhrwerk::summarize_elections(w, 0, runs, valid.find(0));
+    CHECK(s.runs == 3);
+    CHECK(s.seated.median == Fixed::from_int(4));
+    REQUIRE(s.block_share.size() == 2);
+    CHECK(s.block_share[0].median == Fixed::one());
+    REQUIRE(s.violations.size() == 2); // Beteiligung und Block keiner
+    CHECK(s.violations[0].check == uhrwerk::ElectionCheck::Turnout);
+    CHECK(s.violations[1].check == uhrwerk::ElectionCheck::Block);
+    CHECK(s.violations[1].block == 1);
+    const uhrwerk::ElectionSummary plain = uhrwerk::summarize_elections(w, 0, runs, nullptr);
+    CHECK(plain.violations.empty());
+    CHECK(plain.by_current.size() == 3);
 }

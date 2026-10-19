@@ -1778,7 +1778,7 @@ private:
             }
             Fields f(plain, file.name, what, issues_,
                      {"name", "ebene", "sitze", "seit", "wahltag", "wahlrecht", "wahlsystem", "wahl_indirekt",
-                      "wahl_zensus", "fraktionen_ab", "boykott", "sitz", "quelle"});
+                      "wahl_zensus", "fraktionen_ab", "boykott", "boykott_maerkte", "sitz", "quelle"});
             Parliament p;
             p.id = node.value;
             p.name = f.text("name").value_or("");
@@ -1817,6 +1817,27 @@ private:
                             continue;
                         }
                         p.boycott_cultures.push_back(culture);
+                    }
+                }
+            }
+            if (f.has("boykott_maerkte")) {
+                if (!f.has("boykott")) {
+                    issues_.error(file.name, plain.find("boykott_maerkte")->line,
+                                  "'boykott_maerkte' gilt nur mit 'boykott' in " + what);
+                }
+                if (const ScriptNode* list =
+                        f.block("boykott_maerkte", "Liste von Märkten, z. B. { boehmen }")) {
+                    for (const ScriptNode& child : list->children) {
+                        const Index market =
+                            child.key.empty() && !child.is_block ? lookup(markets_, child.value) : kNone;
+                        if (market == kNone) {
+                            issues_.error(file.name, child.line,
+                                          "unbekannter Markt " + quote(child.value) +
+                                              " in 'boykott_maerkte' von " + what +
+                                              " (common/maerkte.chron)");
+                            continue;
+                        }
+                        p.boycott_markets.push_back(market);
                     }
                 }
             }
