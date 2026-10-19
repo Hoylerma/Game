@@ -434,13 +434,16 @@ public:
         }
         return d;
     }
-    ContentFingerprint content() {
+    /// Fingerabdruck des Inhalts; Format 1 (bis M7) kennt nur die ersten 13 Bereiche (ohne politik),
+    /// die übrigen bleiben 0. So zeigt auch ein alter Spielstand seine Metadaten an.
+    ContentFingerprint content(std::uint32_t version) {
+        const std::size_t count = version == 1 ? 13 : kContentParts.size();
         ContentFingerprint fp;
         fp.total = hex("inhalt");
-        for (std::size_t i = 0; i < kContentParts.size(); ++i) {
+        for (std::size_t i = 0; i < count; ++i) {
             fp.parts[i] = hex("inhalt." + std::string(kContentParts[i]));
         }
-        if (ok() && content_fingerprint_total(fp.parts) != fp.total) {
+        if (ok() && content_fingerprint_total(std::span(fp.parts).first(count)) != fp.total) {
             bad("inhalt");
         }
         return fp;
@@ -449,8 +452,7 @@ public:
     bool ok() const { return bad_.empty(); }
     std::string error() const { return "Metadaten beschädigt (" + bad_ + " fehlt oder ist ungültig)"; }
 
-    static std::uint64_t
-    content_fingerprint_total(const std::array<std::uint64_t, kContentParts.size()>& parts) {
+    static std::uint64_t content_fingerprint_total(std::span<const std::uint64_t> parts) {
         Fnv h;
         for (const std::uint64_t p : parts) {
             h.u64(p);
@@ -726,6 +728,28 @@ std::string validate_state(const Simulation& sim) {
             return "Chronik mit ungültigem Verweis";
         }
     }
+    // Wahlen (seit M8): Wahlkreise des eigenen Parlaments, Stimmen je Strömung.
+    const std::size_t C = w.currents.size();
+    for (const ElectionResult& e : w.elections) {
+        if (!in(e.parliament, w.parliaments.size()) || !is_valid(e.day)) {
+            return "Wahl mit ungültigem Verweis";
+        }
+        const auto own = [&](Index d) {
+            return in(d, w.electoral_districts.size()) &&
+                   w.electoral_districts[static_cast<std::size_t>(d)].parliament == e.parliament;
+        };
+        for (const DistrictResult& d : e.districts) {
+            if (!own(d.district) || d.votes.size() != C || !none_or_in(d.winner, C)) {
+                return "Wahlergebnis mit ungültigem Verweis";
+            }
+        }
+        const std::size_t factions = w.parliaments[static_cast<std::size_t>(e.parliament)].factions.size();
+        for (const Deputy& a : e.deputies) {
+            if (!own(a.district) || !in(a.current, C) || !none_or_in(a.faction, factions)) {
+                return "Abgeordneter mit ungültigem Verweis";
+            }
+        }
+    }
     return {};
 }
 
@@ -869,6 +893,7 @@ ContentFingerprint content_fingerprint(const World& w) {
         h.u64(w.currents.size());
         for (const PoliticalCurrent& c : w.currents) {
             h.text(c.id);
+            h.text(c.name); // steht in der Chronik der Wahl
             h.fixed(c.position);
         }
         h.u64(w.interest_groups.size());
@@ -897,6 +922,32 @@ ContentFingerprint content_fingerprint(const World& w) {
                 h.fixed(f.from);
                 h.fixed(f.to);
             }
+            h.i64(pa.seat);
+            h.text(pa.name); // steht in der Chronik der Wahl
+        }
+        // Wahlregeln und Regionen (seit M8, Schritt a3).
+        const ElectionRules& r = w.election_rules;
+        for (const Fixed f :
+             {r.male_share, r.young_of_age, r.young_of_age_24, r.turnout_base, r.turnout_literacy,
+              r.turnout_city, r.turnout_poverty, r.turnout_min, r.turnout_max, r.poverty_below, r.noise,
+              r.position_pull, r.position_noise, r.independent_share}) {
+            h.fixed(f);
+        }
+        for (const std::vector<Fixed>* v : {&r.base, &r.literacy, &r.poverty, &r.city, &r.electors}) {
+            fixeds(h, *v);
+        }
+        h.u64(w.political_regions.size());
+        for (const PoliticalRegion& region : w.political_regions) {
+            h.text(region.id);
+            h.u64(region.states.size());
+            for (const Index s : region.states) {
+                h.i64(s);
+            }
+            h.u64(region.markets.size());
+            for (const Index m : region.markets) {
+                h.i64(m);
+            }
+            fixeds(h, region.leaning);
         }
         h.u64(w.states.size());
         for (const State& s : w.states) {
@@ -988,7 +1039,7 @@ std::optional<SaveInfo> info_from(const Container& c, std::string* error) {
     info.checksum = m.hex("pruefsumme");
     info.start_checksum = m.hex("startpruefsumme");
     info.commands = m.u64("befehle");
-    info.content = m.content();
+    info.content = m.content(c.version);
     if (!m.ok()) {
         fail(error, m.error());
         return std::nullopt;
@@ -1148,7 +1199,7 @@ std::optional<Replay> read_replay(std::span<const std::uint8_t> bytes, std::stri
     r.end_checksum = m.hex("endpruefsumme");
     const std::uint64_t command_count = m.u64("befehle");
     const std::uint64_t checkpoint_count = m.u64("kontrollpunkte");
-    r.content = m.content();
+    r.content = m.content(container->version);
     if (!m.ok()) {
         fail(error, m.error());
         return std::nullopt;

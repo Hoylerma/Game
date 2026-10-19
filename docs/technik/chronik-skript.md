@@ -75,13 +75,18 @@ data/
 │   ├── gueter.chron        Güter (seit M5)
 │   ├── beduerfnisse.chron  Bedürfnisse mit Warenkorb je Schicht (seit M5)
 │   ├── betriebe.chron      Betriebe: Arbeitsstätten der Berufe (seit M5)
-│   └── maerkte.chron       Märkte aus Landschaften (seit M5)
+│   ├── maerkte.chron       Märkte aus Landschaften (seit M5)
+│   ├── stroemungen.chron   politische Strömungen (seit M8, optional)
+│   ├── interessengruppen.chron  Interessengruppen (seit M8, optional)
+│   ├── parlamente.chron    Parlamente mit Wahlrecht und Fraktionen (seit M8, optional)
+│   └── wahlen.chron        Regeln der Wahlsimulation und Regionen (seit M8, optional)
 ├── history/                generiert aus tabellen/ (tools/archivar), nicht von Hand bearbeiten
 │   ├── staaten/*.chron     Staaten (Reichsstände) mit datierter Historie
 │   ├── kreise/*.chron      Kreise: Gruppen von 4–12 Orten (seit M3)
 │   ├── verwaltung/*.chron  Verwaltungseinheiten der Staaten (seit M7, optional)
 │   ├── orte/*.chron        Orte mit datierter Historie (Besitz, Bevölkerung …)
-│   └── eisenbahnen/*.chron Eisenbahnstrecken mit Abschnitten (seit M7, optional)
+│   ├── eisenbahnen/*.chron Eisenbahnstrecken mit Abschnitten (seit M7, optional)
+│   └── wahlkreise/*.chron  Wahlkreise je Parlament (seit M8, optional)
 ├── tabellen/*.csv          Quelle der Wahrheit für history/ (siehe tabellen.md)
 ├── szenarien/*.chron       Lesezeichen
 └── karte/
@@ -94,7 +99,8 @@ data/
 
 Ladereihenfolge: `regeln`, `gelaende`, `konfessionen`, `kulturen` (seit M4), `berufe`, `gueter`, `beduerfnisse`,
 `betriebe`, `maerkte` (seit M5), dann alle Dateien der Ordner `szenarien` (seit M7 vor `common/`, weil das
-Startdatum bestimmt, welche Güter, Berufe und Betriebe gelten), `history/staaten`, `history/kreise` (seit M3), `history/verwaltung` (seit M7), `history/orte`, `history/eisenbahnen` (seit M7), jeweils **nach Dateiname sortiert**, Einträge in Dateireihenfolge. Daraus ergeben sich die Indizes in `World`. Die Szenarien kommen vor der Historie, weil das Startdatum des gewählten Szenarios bestimmt, welche datierten Blöcke gelten (Abschnitt 3.8).
+Startdatum bestimmt, welche Güter, Berufe und Betriebe gelten), `stroemungen`, `interessengruppen`, `parlamente`,
+`wahlen` (seit M8), `history/staaten`, `history/kreise` (seit M3), `history/verwaltung` (seit M7), `history/orte`, `history/eisenbahnen` (seit M7), `history/wahlkreise` (seit M8), jeweils **nach Dateiname sortiert**, Einträge in Dateireihenfolge. Daraus ergeben sich die Indizes in `World`. Die Szenarien kommen vor der Historie, weil das Startdatum des gewählten Szenarios bestimmt, welche datierten Blöcke gelten (Abschnitt 3.8).
 
 Die Dateien in `history/` erzeugt das Werkzeug `tools/archivar` aus den Tabellen in `data/tabellen/` (Format: [tabellen.md](tabellen.md)). Änderungen gehören in die Tabellen; die CI prüft mit `archivar.py --pruefen`, dass `history/` aktuell ist.
 
@@ -641,6 +647,7 @@ parlament nationalversammlung {
     wahl_zensus   = 1                                # Pflicht bei wahlrecht = zensus
     fraktionen_ab = 1848.10.01                       # optional: Stichtag der Fraktionen, Standard der Wahltag
     boykott       = { tschechen }                    # optional: Kulturen, deren Wahlkreise nicht wählen
+    sitz          = frankfurt_am_main                # optional seit M8 a3: Tagungsort (Meldereihenfolge am Wahlabend)
     quelle        = "…"                              # optional
     fraktion casino { name = "Casino" farbe = { 70 96 150 } von = 20 bis = 55 }   # mindestens eine
 }
@@ -652,8 +659,9 @@ bleiben bitgleich. Die Fraktionen teilen die Links-rechts-Achse **lückenlos** v
 kleiner als `bis`; die Reihenfolge in der Datei ist frei, der Kern ordnet nach `von`). Die Ebene wird
 nach dem Staatenbestand aufgelöst (Abschnitt 3.5): Ein Staat ohne Ort zum Startdatum ist fatal.
 Weitere Fehler: unbekannte Kulturen im Boykott, `fraktionen_ab` vor dem Wahltag, `wahl_zensus` ohne
-`wahlrecht = zensus`. Die Datei darf fehlen. Im Kern: `World::parliaments` (`Parliament`, `Faction`,
-`ElectoralLaw`).
+`wahlrecht = zensus`, ein unbekannter Ort als `sitz`. Gibt es zum Startdatum ein Parlament, braucht die Welt
+die Wahlregeln (Abschnitt 3.23). Die Datei darf fehlen. Im Kern: `World::parliaments` (`Parliament`,
+`Faction`, `ElectoralLaw`).
 
 ### 3.22 `history/wahlkreise/*.chron` (seit M8)
 
@@ -674,6 +682,52 @@ eines anderen Staates oder in zwei Wahlkreisen desselben Parlaments, ein Staat o
 ein Wahlkreis außerhalb des Staates eines Landtags, eine Summe der Sitze, die nicht der Sollzahl des
 Parlaments entspricht. Der Ordner darf fehlen. Im Kern: `World::electoral_districts`
 (`ElectoralDistrict`).
+
+### 3.23 `common/wahlen.chron` (seit M8)
+
+```text
+wahlregeln {                                   # Pflicht, genau einmal
+    maenneranteil       = 0.5                  # Männer unter den Erwachsenen (0..1)
+    junge_im_wahlalter  = 0.33                 # Anteil der 15–29-Jährigen ab 25 (0..1)
+    junge_ab_24         = 0.4                  # dasselbe ab 24 (Dreiklassen)
+    beteiligung_basis   = 0.45                 # Beteiligung = basis + bildung × Alphabetisierung + stadt
+    beteiligung_bildung = 0.25                 #   − not × (1 − Lebensstandard/100), begrenzt auf min..max
+    beteiligung_stadt   = 0.1
+    beteiligung_not     = 0.15
+    beteiligung_min     = 0.15
+    beteiligung_max     = 0.9
+    not_unter           = 40                   # Lebensstandard (0..100), unter dem die Not wirkt
+    neigung_basis       = { konservative = 0.35 liberale = 0.2 … }   # je Strömung 0..1, fehlende 0
+    neigung_bildung     = { konservative = -0.15 liberale = 0.1 }    # je Strömung −1..1
+    neigung_not         = { demokraten = 0.15 arbeiter = 0.1 }
+    neigung_stadt       = { liberale = 0.06 demokraten = 0.06 }
+    wahlmaenner         = { liberale = 1.15 }  # optional: Faktor bei indirekter Wahl (0..10), Standard 1
+    rauschen            = 0.05                 # ± relativ je Wahlkreis und Strömung (0..1)
+    zug_zur_mitte       = 0.3                  # Abgeordnete: Zug zur Mitte des Wahlkreises (0..1)
+    position_rauschen   = 15                   # ± Punkte auf der Achse (0..100)
+    fraktionslos        = 0.25                 # Anteil der Fraktionslosen (0..1)
+}
+
+region suedwesten {                            # beliebig viele
+    staaten = { BAD }                          # Staatstags zum Startdatum und/oder
+    maerkte = { kurpfalz }                     # Märkte (common/maerkte.chron); mindestens eins von beiden
+    neigung = { demokraten = 0.12 }            # Pflicht: Verschiebung je Strömung (−1..1)
+}
+```
+
+Regeln der Wahlsimulation ([politik.md](politik.md), Abschnitt 7). Alle Felder von `wahlregeln` außer
+`wahlmaenner` sind Pflicht. Die Neigungen verweisen auf `common/stroemungen.chron`. Ein Ort gehört zu
+jeder Region, deren Staaten seinen Besitzer oder deren Märkte seinen Markt enthalten; die Verschiebungen
+addieren sich. Staaten ohne Ort zum Startdatum werden übersprungen.
+
+Fatal sind:
+- unbekannte Strömungen, Staaten oder Märkte;
+- Werte außerhalb der Bereiche;
+- `beteiligung_min` über `beteiligung_max`;
+- ein fehlender oder doppelter Block `wahlregeln`.
+
+Die Datei darf fehlen, solange es zum Startdatum kein Parlament gibt. Im Kern: `World::election_rules`
+(`ElectionRules`) und `World::political_regions` (`PoliticalRegion`).
 
 ## 4. Startzustand
 

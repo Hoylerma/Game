@@ -487,11 +487,19 @@ struct DistrictRef {
     int line = 0;
 };
 
-/// Ebene eines Parlaments (seit M8): Staatstag, leer für den Deutschen Bund.
+/// Ebene eines Parlaments (seit M8): Staatstag, leer für den Deutschen Bund; Tagungsort.
 struct ParliamentRef {
     std::string state_tag;
     std::string file;
     int line = 0;
+    std::string seat; // Ortskennung, leer = keine
+    int seat_line = 0;
+};
+
+/// Staaten einer Region der Wahlneigung (seit M8), aufgelöst nach dem Staatenbestand.
+struct RegionRef {
+    std::vector<std::pair<std::string, int>> state_tags; // Tag, Zeile
+    std::string file;
 };
 
 class Loader {
@@ -543,6 +551,7 @@ public:
         process_optional("common/interessengruppen.chron",
                          [&](const SourceFile& f) { load_interest_groups(f); });
         process_optional("common/parlamente.chron", [&](const SourceFile& f) { load_parliaments(f); });
+        process_optional("common/wahlen.chron", [&](const SourceFile& f) { load_election_rules(f); });
 
         for (const std::string& name : list_folder("history/staaten")) {
             process(name, [&](const SourceFile& f) { load_states(f); });
@@ -1769,11 +1778,12 @@ private:
             }
             Fields f(plain, file.name, what, issues_,
                      {"name", "ebene", "sitze", "seit", "wahltag", "wahlrecht", "wahlsystem", "wahl_indirekt",
-                      "wahl_zensus", "fraktionen_ab", "boykott", "quelle"});
+                      "wahl_zensus", "fraktionen_ab", "boykott", "sitz", "quelle"});
             Parliament p;
             p.id = node.value;
             p.name = f.text("name").value_or("");
             ParliamentRef ref;
+            ref.file = file.name;
             if (const auto level = f.text("ebene")) {
                 if (*level != "bund") {
                     if (!is_state_tag(*level)) {
@@ -1781,7 +1791,8 @@ private:
                                       "ungültige Ebene " + quote(*level) + " in " + what +
                                           " (erwartet bund oder einen Staatstag)");
                     } else {
-                        ref = ParliamentRef{*level, file.name, plain.find("ebene")->line};
+                        ref.state_tag = *level;
+                        ref.line = plain.find("ebene")->line;
                     }
                 }
             }
@@ -1807,6 +1818,13 @@ private:
                         }
                         p.boycott_cultures.push_back(culture);
                     }
+                }
+            }
+            if (f.has("sitz")) {
+                if (const auto seat = f.text("sitz")) {
+                    ref.seat = *seat;
+                    ref.seat_line = plain.find("sitz")->line;
+                    ref.file = file.name;
                 }
             }
             p.source = f.text("quelle").value_or("");
@@ -1944,6 +1962,163 @@ private:
         });
     }
 
+    /// Werte je Strömung aus einem Block { strömung = wert } im Bereich [lo, hi]; fehlende Strömungen 0.
+    std::vector<Fixed> read_current_values(Fields& f, std::string_view key, Fixed lo, Fixed hi) {
+        std::vector<Fixed> out(world_.currents.size(), Fixed{});
+        const ScriptNode* node = f.block(key, "<strömung> = <wert>, z. B. { liberale = 0.2 }");
+        if (node == nullptr) {
+            return out;
+        }
+        std::set<Index> seen;
+        for (const ScriptNode& child : node->children) {
+            if (child.key.empty() || child.is_block || child.op != "=") {
+                f.issues().error(f.file(), child.line,
+                                 "ungültiger Eintrag im Block " + quote(key) +
+                                     " (erwartet <strömung> = <wert>)");
+                continue;
+            }
+            const Index current = lookup(currents_, child.key);
+            if (current == kNone) {
+                f.issues().error(f.file(), child.line,
+                                 "unbekannte Strömung " + quote(child.key) + " in " + quote(key) + " von " +
+                                     f.what() + " (common/stroemungen.chron)");
+                continue;
+            }
+            if (!seen.insert(current).second) {
+                f.issues().error(f.file(), child.line,
+                                 "Strömung " + quote(child.key) + " ist in " + quote(key) +
+                                     " mehrfach angegeben");
+                continue;
+            }
+            const auto value = Fixed::parse(child.value);
+            if (!value || *value < lo || *value > hi) {
+                f.issues().error(f.file(), child.line,
+                                 "ungültiger Wert " + quote(child.value) + " für " + quote(child.key) +
+                                     " in " + quote(key) + " (erwartet eine Zahl von " + show(lo) + " bis " +
+                                     show(hi) + ")");
+                continue;
+            }
+            out[static_cast<std::size_t>(current)] = *value;
+        }
+        return out;
+    }
+
+    /// Wahlregeln und Regionen (Abschnitt 3.23): wahlregeln { … } und region <kennung> { … }.
+    void load_election_rules(const SourceFile& file) {
+        const ScriptNode* rules = nullptr;
+        for (const ScriptNode& node : file.root.children) {
+            if (node.key == "wahlregeln") {
+                if (!node.is_block || !node.value.empty()) {
+                    issues_.error(file.name, node.line, "ungültige Definition, erwartet: wahlregeln { … }");
+                } else if (rules != nullptr) {
+                    issues_.error(file.name, node.line,
+                                  "Block 'wahlregeln' ist mehrfach vorhanden (zuerst in Zeile " +
+                                      std::to_string(rules->line) + ")");
+                } else {
+                    rules = &node;
+                }
+                continue;
+            }
+            if (node.key != "region") {
+                warn_unknown_top_level(file, node, "wahlregeln { … } oder region <kennung> { … }");
+                continue;
+            }
+            if (!node.is_block || node.value.empty()) {
+                issues_.error(file.name, node.line, "ungültige Definition, erwartet: region <kennung> { … }");
+                continue;
+            }
+            check_id(file, node, "Kennung einer Region");
+            Fields f(node, file.name, "region " + node.value, issues_, {"staaten", "maerkte", "neigung"});
+            PoliticalRegion region;
+            region.id = node.value;
+            RegionRef ref;
+            ref.file = file.name;
+            if (f.has("staaten")) {
+                if (const ScriptNode* list = f.block("staaten", "Liste von Staatstags, z. B. { BAD WUE }")) {
+                    for (const ScriptNode& child : list->children) {
+                        if (!child.key.empty() || child.is_block || !is_state_tag(child.value)) {
+                            issues_.error(file.name, child.line,
+                                          "ungültiger Eintrag in 'staaten' von region " + node.value);
+                            continue;
+                        }
+                        ref.state_tags.emplace_back(child.value, child.line);
+                    }
+                }
+            }
+            if (f.has("maerkte")) {
+                if (const ScriptNode* list = f.block("maerkte", "Liste von Märkten, z. B. { pfalz }")) {
+                    for (const ScriptNode& child : list->children) {
+                        const Index market =
+                            child.key.empty() && !child.is_block ? lookup(markets_, child.value) : kNone;
+                        if (market == kNone) {
+                            issues_.error(file.name, child.line,
+                                          "unbekannter Markt " + quote(child.value) + " in region " +
+                                              node.value + " (common/maerkte.chron)");
+                            continue;
+                        }
+                        region.markets.push_back(market);
+                    }
+                }
+            }
+            if (!f.has("staaten") && !f.has("maerkte")) {
+                issues_.error(file.name, node.line,
+                              "region " + node.value + " braucht 'staaten' oder 'maerkte'");
+            }
+            region.leaning = read_current_values(f, "neigung", fx(-1), fx(1));
+            const auto index = static_cast<Index>(world_.political_regions.size());
+            if (register_id(regions_, region.id, index, file.name, node.line, "Region")) {
+                world_.political_regions.push_back(std::move(region));
+                region_refs_.push_back(std::move(ref));
+            }
+        }
+        if (rules == nullptr) {
+            issues_.error(file.name, 0, "Block 'wahlregeln' fehlt");
+            return;
+        }
+        election_rules_found_ = true;
+        Fields f(*rules, file.name, "wahlregeln", issues_,
+                 {"maenneranteil", "junge_im_wahlalter", "junge_ab_24", "beteiligung_basis",
+                  "beteiligung_bildung", "beteiligung_stadt", "beteiligung_not", "beteiligung_min",
+                  "beteiligung_max", "not_unter", "neigung_basis", "neigung_bildung", "neigung_not",
+                  "neigung_stadt", "wahlmaenner", "rauschen", "zug_zur_mitte", "position_rauschen",
+                  "fraktionslos"});
+        ElectionRules& r = world_.election_rules;
+        const Range unit = between(fx(0), fx(1));
+        r.male_share = f.fixed("maenneranteil", unit).value_or(Fixed{});
+        r.young_of_age = f.fixed("junge_im_wahlalter", unit).value_or(Fixed{});
+        r.young_of_age_24 = f.fixed("junge_ab_24", unit).value_or(Fixed{});
+        r.turnout_base = f.fixed("beteiligung_basis", unit).value_or(Fixed{});
+        r.turnout_literacy = f.fixed("beteiligung_bildung", unit).value_or(Fixed{});
+        r.turnout_city = f.fixed("beteiligung_stadt", unit).value_or(Fixed{});
+        r.turnout_poverty = f.fixed("beteiligung_not", unit).value_or(Fixed{});
+        r.turnout_min = f.fixed("beteiligung_min", unit).value_or(Fixed{});
+        r.turnout_max = f.fixed("beteiligung_max", unit).value_or(Fixed::one());
+        if (r.turnout_min > r.turnout_max) {
+            issues_.error(file.name, rules->line, "'beteiligung_min' ist größer als 'beteiligung_max'");
+        }
+        r.poverty_below = f.fixed("not_unter", between(fx(0), fx(100))).value_or(Fixed{});
+        r.base = read_current_values(f, "neigung_basis", fx(0), fx(1));
+        r.literacy = read_current_values(f, "neigung_bildung", fx(-1), fx(1));
+        r.poverty = read_current_values(f, "neigung_not", fx(-1), fx(1));
+        r.city = read_current_values(f, "neigung_stadt", fx(-1), fx(1));
+        r.electors.assign(world_.currents.size(), Fixed::one());
+        if (f.has("wahlmaenner")) {
+            const std::vector<Fixed> factors = read_current_values(f, "wahlmaenner", fx(0), fx(10));
+            const ScriptNode* list = rules->find("wahlmaenner");
+            for (const ScriptNode& child : list->children) {
+                const Index current = lookup(currents_, child.key);
+                if (current != kNone) {
+                    r.electors[static_cast<std::size_t>(current)] =
+                        factors[static_cast<std::size_t>(current)];
+                }
+            }
+        }
+        r.noise = f.fixed("rauschen", unit).value_or(Fixed{});
+        r.position_pull = f.fixed("zug_zur_mitte", unit).value_or(Fixed{});
+        r.position_noise = f.fixed("position_rauschen", between(fx(0), fx(100))).value_or(Fixed{});
+        r.independent_share = f.fixed("fraktionslos", unit).value_or(Fixed{});
+    }
+
     /// Ebene der Parlamente nach drop_states_without_land: Der Staat muss zum Startdatum bestehen.
     void resolve_parliaments() {
         for (std::size_t i = 0; i < world_.parliaments.size(); ++i) {
@@ -1962,6 +2137,35 @@ private:
                 continue;
             }
             world_.parliaments[i].state = state;
+        }
+        for (std::size_t i = 0; i < world_.parliaments.size(); ++i) {
+            const ParliamentRef& ref = parliament_refs_[i];
+            if (ref.seat.empty()) {
+                continue;
+            }
+            world_.parliaments[i].seat = lookup(locations_, ref.seat);
+            if (world_.parliaments[i].seat == kNone) {
+                issues_.error(ref.file, ref.seat_line,
+                              "unbekannter Ort " + quote(ref.seat) + " als Sitz von parlament " +
+                                  world_.parliaments[i].id);
+            }
+        }
+        if (!world_.parliaments.empty() && !election_rules_found_) {
+            const Definition& def = parliaments_.find(world_.parliaments.front().id)->second;
+            issues_.error(def.file, def.line,
+                          "Parlamente brauchen die Wahlregeln in common/wahlen.chron (wahlregeln { … })");
+        }
+        for (std::size_t i = 0; i < world_.political_regions.size(); ++i) {
+            for (const auto& [tag, line] : region_refs_[i].state_tags) {
+                const Index state = lookup(states_, tag);
+                if (state != kNone) {
+                    world_.political_regions[i].states.push_back(state);
+                } else if (dropped_states_.count(tag) == 0) {
+                    issues_.error(region_refs_[i].file, line,
+                                  "unbekannter Staat " + quote(tag) + " in region " +
+                                      world_.political_regions[i].id);
+                }
+            }
         }
         // Wahlkreise: Staat zum Startdatum, Orte dieses Staates, jeder Ort einmal je Parlament,
         // Sitze zusammen gleich der Sollzahl.
@@ -2865,6 +3069,9 @@ private:
     Registry parliaments_;                       // seit M8
     std::vector<ParliamentRef> parliament_refs_; // parallel zu world_.parliaments
     Registry electoral_districts_;               // seit M8
+    Registry regions_;                           // seit M8
+    std::vector<RegionRef> region_refs_;         // parallel zu world_.political_regions
+    bool election_rules_found_ = false;          // common/wahlen.chron mit wahlregeln gelesen
     std::vector<DistrictRef> district_refs_;     // parallel zu world_.electoral_districts
     // Inhalt ab einem Datum (seit M7): spätere Definitionen als „gut:kohle“ → 'seit'.
     struct LaterDefinition {

@@ -21,6 +21,7 @@ enum class RngStream : std::uint64_t {
     Ki = 4,
     Lasttest = 5,    // seit M4: Aufbau der Lasttest-Welt (uhrwerk/lasttest.hpp), nicht in der Simulation
     Testbefehle = 6, // seit M6: Testbefehle der Kommandozeile (--testbefehle), nicht in der Simulation
+    Wahlen = 7,      // seit M8: je Wahl neu aus Seed und Parlament (politics.hpp), kein Zustand
 };
 
 class Pcg32 {

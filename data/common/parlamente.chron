@@ -13,6 +13,7 @@ parlament nationalversammlung {
     sitze         = 649                  # Sollzahl: ein Abgeordneter je 50.000 Einwohner der Bundesmatrikel
     seit          = 1848.03.01
     wahltag       = 1848.05.01           # Urwahlen in den meisten Staaten Ende April bis Mitte Mai
+    sitz          = frankfurt_am_main    # Paulskirche
     wahlrecht     = allgemein_maenner    # Bundesbeschluss vom 7. April 1848: volljährige, „selbstständige“ Männer
     wahlsystem    = stichwahl
     wahl_indirekt = ja                   # in den meisten Staaten über Wahlmänner
@@ -37,6 +38,7 @@ parlament pr_abgeordnetenhaus {
     sitze         = 350                  # Zweite Kammer nach der oktroyierten Verfassung
     seit          = 1848.03.01
     wahltag       = 1849.07.17
+    sitz          = berlin_coelln
     wahlrecht     = dreiklassen          # Verordnung vom 30. Mai 1849
     wahlsystem    = stichwahl
     wahl_indirekt = ja                   # öffentliche Wahl der Wahlmänner je Klasse

@@ -5,6 +5,7 @@ parlament landtag {
     sitze         = 4
     seit          = 1649.01.01
     wahltag       = 1650.03.01
+    sitz          = dresden
     wahlrecht     = allgemein_maenner
     wahlsystem    = stichwahl
     wahl_indirekt = ja

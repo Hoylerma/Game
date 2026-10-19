@@ -1511,6 +1511,7 @@ TEST_CASE("Lader: Politik (seit M8)") {
         std::filesystem::remove(dir / "common/stroemungen.chron");
         std::filesystem::remove(dir / "common/interessengruppen.chron");
         std::filesystem::remove(dir / "common/parlamente.chron");
+        std::filesystem::remove(dir / "common/wahlen.chron");
         std::filesystem::remove_all(dir / "history/wahlkreise");
         const LoadResult r = load(dir, "jahresbeginn_1650");
         INFO(issues_text(r));
@@ -1635,6 +1636,64 @@ TEST_CASE("Lader: Politik (seit M8)") {
     SUBCASE("späteres Parlament wird auch vor 'seit' geprüft") {
         replace_in_file(dir / parliaments, "wahlrecht     = allgemein_maenner", "wahlrecht     = alle");
         expect_error(load(dir), "ungültiges Wahlrecht 'alle' in parlament landtag", parliaments);
+    }
+    const char* const elections = "common/wahlen.chron";
+    SUBCASE("Wahlregeln, Regionen und Sitz gelesen") {
+        const LoadResult r = load(dir, "jahresbeginn_1650");
+        INFO(issues_text(r));
+        REQUIRE(r.ok());
+        const World& w = *r.world;
+        const uhrwerk::ElectionRules& rules = w.election_rules;
+        CHECK(rules.male_share == fx("0.5"));
+        CHECK(rules.turnout_max == fx("0.9"));
+        CHECK(rules.poverty_below == Fixed::from_int(40));
+        CHECK(rules.base == std::vector<Fixed>{fx("0.5"), fx("0.3"), fx("0.2")});
+        CHECK(rules.literacy == std::vector<Fixed>{fx("-0.1"), fx("0.1"), Fixed{}});
+        CHECK(rules.electors == std::vector<Fixed>{Fixed::one(), fx("1.15"), Fixed::one()}); // Standard 1
+        CHECK(rules.position_noise == Fixed::from_int(15));
+        REQUIRE(w.political_regions.size() == 1);
+        CHECK(w.political_regions[0].id == "elbtal");
+        CHECK(w.political_regions[0].states == std::vector<Index>{w.find_state("SAX")});
+        CHECK(w.parliaments[0].seat == w.find_location("dresden"));
+    }
+    SUBCASE("Parlamente ohne Wahlregeln") {
+        std::filesystem::remove(dir / elections);
+        expect_error(load(dir, "jahresbeginn_1650"),
+                     "Parlamente brauchen die Wahlregeln in common/wahlen.chron (wahlregeln { … })",
+                     parliaments);
+        const LoadResult before = load(dir); // ohne Parlament keine Wahlregeln nötig
+        INFO(issues_text(before));
+        CHECK(before.ok());
+    }
+    SUBCASE("Fehler in den Wahlregeln und Regionen") {
+        replace_in_file(dir / elections, "    rauschen            = 0.05\n", "");
+        replace_in_file(dir / elections, "beteiligung_min     = 0.15", "beteiligung_min     = 0.95");
+        replace_in_file(dir / elections, "neigung_stadt       = { liberale = 0.05 }",
+                        "neigung_stadt       = { radikale = 0.05 }");
+        replace_in_file(dir / elections, "staaten = { SAX }",
+                        "staaten = { XYZ }\n    maerkte = { atlantis }");
+        const LoadResult r = load(dir, "jahresbeginn_1650");
+        expect_error(r, "Pflichtfeld 'rauschen' fehlt in wahlregeln", elections);
+        expect_error(r, "'beteiligung_min' ist größer als 'beteiligung_max'", elections);
+        expect_error(r, "unbekannte Strömung 'radikale' in 'neigung_stadt' von wahlregeln", elections);
+        expect_error(r, "unbekannter Staat 'XYZ' in region elbtal", elections);
+        expect_error(r, "unbekannter Markt 'atlantis' in region elbtal", elections);
+    }
+    SUBCASE("Wahlregeln fehlen oder doppelt, Region ohne Gebiet") {
+        replace_in_file(dir / elections, "region elbtal {\n    staaten = { SAX }\n", "region elbtal {\n");
+        const std::string text = testhilfen::read_file(dir / elections);
+        testhilfen::write_file(dir / elections, text + "\nwahlregeln {\n}\n");
+        const LoadResult r = load(dir, "jahresbeginn_1650");
+        expect_error(r, "region elbtal braucht 'staaten' oder 'maerkte'", elections);
+        expect_error(r, "Block 'wahlregeln' ist mehrfach vorhanden", elections);
+        testhilfen::write_file(dir / elections,
+                               "region elbtal {\n    staaten = { SAX }\n    neigung = { }\n}\n");
+        expect_error(load(dir, "jahresbeginn_1650"), "Block 'wahlregeln' fehlt", elections);
+    }
+    SUBCASE("unbekannter Ort als Sitz") {
+        replace_in_file(dir / parliaments, "sitz          = dresden", "sitz          = atlantis");
+        expect_error(load(dir, "jahresbeginn_1650"),
+                     "unbekannter Ort 'atlantis' als Sitz von parlament landtag", parliaments);
     }
 }
 

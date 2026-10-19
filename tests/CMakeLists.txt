@@ -25,6 +25,7 @@ add_executable(uhrwerk_tests
     test_lasttest.cpp
     test_balance.cpp
     test_savegame.cpp
+    test_politics.cpp
 )
 target_link_libraries(uhrwerk_tests PRIVATE uhrwerk::core doctest::doctest uhrwerk_warnings)
 target_compile_definitions(uhrwerk_tests PRIVATE

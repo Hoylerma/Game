@@ -161,6 +161,30 @@ template <typename Sim, typename V> void StateAccess::visit(Sim& sim, V& v) {
         v.field("ernte", m.harvest);
     });
 
+    // Politik (seit M8): nur in Welten mit Parlamenten, damit die Prüfsumme der übrigen (1648) bleibt.
+    if (!w.parliaments.empty()) {
+        list(v, "wahlen", w.elections, Extent::State, [&](auto& e) {
+            v.field("parlament", e.parliament);
+            v.field("tag", e.day);
+            list(v, "wahlkreise", e.districts, Extent::State, [&](auto& d) {
+                v.field("wahlkreis", d.district);
+                v.field("berechtigte", d.electorate);
+                v.field("waehler", d.voters);
+                values(v, "stimmen", d.votes);
+                v.field("sieger", d.winner);
+                v.field("stichwahl", d.runoff);
+                v.field("boykott", d.boycott);
+                v.field("meldung", d.report_rank);
+            });
+            list(v, "abgeordnete", e.deputies, Extent::State, [&](auto& a) {
+                v.field("wahlkreis", a.district);
+                v.field("stroemung", a.current);
+                v.field("position", a.position);
+                v.field("fraktion", a.faction);
+            });
+        });
+    }
+
     v.field("zufall.demografie", sim.rng_demography_);
     v.field("zufall.wirtschaft", sim.rng_economy_);
     v.field("zufall.ereignisse", sim.rng_events_);

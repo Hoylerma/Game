@@ -268,7 +268,68 @@ struct Parliament {
     Date faction_day;                    // Stichtag der Fraktionen (vorher gelten die Strömungen)
     std::vector<Index> boycott_cultures; // Wahlkreise mit Mehrheit dieser Kulturen wählen nicht
     std::vector<Faction> factions;       // nach Bereich aufsteigend, lückenlos von −100 bis +100
+    Index seat = kNone;                  // Tagungsort (Ort); bestimmt die Meldereihenfolge am Wahlabend
     std::string source;
+};
+
+/// Regeln der Wahlsimulation (common/wahlen.chron, politik.md Abschnitt 7). Spielwerte; Vektoren je
+/// Strömung, leer ohne Politik.
+struct ElectionRules {
+    Fixed male_share;       // Männer unter den Erwachsenen
+    Fixed young_of_age;     // Anteil der 15–29-Jährigen ab 25 (Wahlalter)
+    Fixed young_of_age_24;  // Anteil der 15–29-Jährigen ab 24 (Dreiklassenwahlrecht)
+    Fixed turnout_base;     // Beteiligung: Grundwert …
+    Fixed turnout_literacy; // … + je Alphabetisierung
+    Fixed turnout_city;     // … + in Städten
+    Fixed turnout_poverty;  // … − je Not (1 − Lebensstandard/100)
+    Fixed turnout_min;
+    Fixed turnout_max;
+    Fixed poverty_below;         // Lebensstandard, unter dem die Not die Neigung verschiebt
+    std::vector<Fixed> base;     // Neigung der Blöcke, soweit sie keiner Interessengruppe angehören
+    std::vector<Fixed> literacy; // Verschiebung je Alphabetisierung (−1..1)
+    std::vector<Fixed> poverty;  // Verschiebung bei voller Not (Lebensstandard 0)
+    std::vector<Fixed> city;     // Verschiebung in Städten
+    std::vector<Fixed> electors; // Faktor bei indirekter Wahl über Wahlmänner (Standard 1)
+    Fixed noise;                 // Rauschen je Wahlkreis und Strömung (±, relativ)
+    Fixed position_pull;         // Zug der Abgeordneten zur Mitte ihres Wahlkreises (0..1)
+    Fixed position_noise;        // Rauschen der Position (± Punkte)
+    Fixed independent_share;     // Anteil der fraktionslosen Abgeordneten
+};
+
+/// Region mit eigener Wahlneigung (common/wahlen.chron): Staaten und Märkte (Landschaften).
+struct PoliticalRegion {
+    std::string id;
+    std::vector<Index> states;
+    std::vector<Index> markets;
+    std::vector<Fixed> leaning; // Verschiebung je Strömung (−1..1)
+};
+
+/// Ergebnis eines Wahlkreises (Zustand seit M8, politik.md Abschnitt 7.7).
+struct DistrictResult {
+    Index district = kNone;       // in World::electoral_districts
+    Fixed electorate;             // Wahlberechtigte
+    Fixed voters;                 // Wähler
+    std::vector<Fixed> votes;     // Stimmen je Strömung nach Gewichten (Dreiklassen, Wahlmänner, Rauschen)
+    Index winner = kNone;         // Strömung; kNone bei Boykott oder ohne Wähler
+    bool runoff = false;          // durch Stichwahl entschieden
+    bool boycott = false;         // Wahlkreis hat nicht gewählt
+    std::int32_t report_rank = 0; // Meldereihenfolge am Wahlabend (0 = zuerst)
+};
+
+/// Gewählter Abgeordneter (Zustand seit M8).
+struct Deputy {
+    Index district = kNone;
+    Index current = kNone;
+    Fixed position;        // Links-rechts-Achse
+    Index faction = kNone; // kNone = fraktionslos
+};
+
+/// Ergebnis einer Wahl (Zustand seit M8).
+struct ElectionResult {
+    Index parliament = kNone;
+    Date day;
+    std::vector<DistrictResult> districts; // in der Reihenfolge der Wahlkreise des Parlaments
+    std::vector<Deputy> deputies;          // je Wahlkreis und Sitz
 };
 
 /// Wahlkreis eines Parlaments (history/wahlkreise/*.chron, politik.md Abschnitt 5.3). Inhalt; die Orte
@@ -482,6 +543,8 @@ struct World {
     std::vector<InterestGroup> interest_groups;         // seit M8
     std::vector<Parliament> parliaments;                // seit M8, nur die des Szenarios ('seit')
     std::vector<ElectoralDistrict> electoral_districts; // seit M8, die Wahlkreise dieser Parlamente
+    ElectionRules election_rules;                       // seit M8
+    std::vector<PoliticalRegion> political_regions;     // seit M8
     std::vector<Location> locations;
     std::vector<PopBlock> pops;
     std::vector<ChronicleEntry> chronicle;
@@ -505,6 +568,7 @@ struct World {
         location_coverage; // Bedarfsdeckung 0..1: [(ort × berufe + beruf) × bedürfnisse + bedürfnis]
     std::vector<Fixed> location_development; // Landesausbau: verbaute Reichstaler je Ort (Abschnitt 4.6)
     std::vector<MarketState> market_states;  // parallel zu markets
+    std::vector<ElectionResult> elections;   // seit M8: abgehaltene Wahlen in zeitlicher Folge
 
     Index find_state(std::string_view tag) const;
     Index find_location(std::string_view id) const;

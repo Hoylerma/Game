@@ -29,8 +29,11 @@ und Protokoll anhängen“) und für die Fehlersuche bei Determinismusfehlern.
 veränderlichen Zustand Feld für Feld auf: Datum, Tage, Seed; je Staat Kasse, Steuersätze, Heer,
 Schulden, Haushalt, Zins, Bankrotte, Hofhaltung und Hauptstadt; je Ort Besitzer, Verwüstung und
 Blockbereich; Blöcke und Zugänge mit allen Feldern; Momentaufnahmen, Bilanzen, Ortswirtschaft;
-Betriebsanteile, Angebot, Nachfrage, Einkommen, Bedarfsdeckung, Landesausbau; Märkte; die drei
-Zufallsströme; Chronik; wartende Befehle. Jeder Besucher bekommt jedes Feld mit Namen:
+Betriebsanteile, Angebot, Nachfrage, Einkommen, Bedarfsdeckung, Landesausbau; Märkte; seit M8 die
+abgehaltenen Wahlen (je Wahlkreis Berechtigte, Wähler, Stimmen je Strömung, Sieger, Stichwahl, Boykott,
+Meldereihenfolge; je Abgeordnetem Wahlkreis, Strömung, Position, Fraktion), **nur in Welten mit
+Parlamenten**, damit 1648 bitgleich bleibt; die drei Zufallsströme; Chronik; wartende Befehle. Jeder
+Besucher bekommt jedes Feld mit Namen:
 
 | Besucher | Zweck |
 |---|---|
@@ -81,7 +84,7 @@ Simulation beeinflusst, und ein Gesamtwert über die 14 Bereiche (seit M8; vorhe
 | `maerkte`, `vorkommen` | Kennungen und Landschaften, Eisenbahnen mit allen Abschnitten (seit M7); Kennungen der Vorkommen |
 | `staaten`, `kreise` | Kennung, Kurzname, Konfession des Herrscherhauses und Zollverein (seit M7) der Staaten, die zum Startdatum bestehen; Kennungen der Kreise; Verwaltungseinheiten mit Kennung, Art und übergeordneter Einheit (seit M7) |
 | `orte` | Kennung, Name, Gelände, Kreis, Lage, Fläche, Stadt, Markt, Vorkommen, Hafen, Verwaltungseinheit und Bundesgebiet (seit M7); die Zahl der Orte |
-| `politik` (seit M8) | Strömungen (Kennung, Position), Interessengruppen (Mitglieder, Neigung), Parlamente mit Wahl und Fraktionen, Verfassung und Wahlordnung der Staaten, Wahlkreise mit Name, Staat, Sitzen und Orten ([politik.md](politik.md)) |
+| `politik` (seit M8) | Strömungen (Kennung, Name, Position), Interessengruppen (Mitglieder, Neigung), Parlamente mit Wahl, Fraktionen, Sitz und Name, Verfassung und Wahlordnung der Staaten, Wahlkreise mit Name, Staat, Sitzen und Orten, Wahlregeln und Regionen ([politik.md](politik.md)) |
 
 **Nicht** dazu gehören volle Staatsnamen, Farben, Quellen und Beschreibungen: Eine korrigierte
 Quelle macht alte Spielstände nicht unbrauchbar. Der **Kurzname der Staaten und der Name der Orte
@@ -121,7 +124,7 @@ Compiler; kein `memcpy` von Strukturen.
 ```
 Kopf (fest, 48 Byte)
   Magie            8 Byte  "EINIGKT\x1A"
-  Formatversion    u32     1
+  Formatversion    u32     2 (1 bis M7)
   Kennzeichen      u32     Bit 0: Nutzdaten mit zstd komprimiert
   Metadaten        u32     Länge in Byte
   reserviert       u32     0
@@ -129,7 +132,7 @@ Kopf (fest, 48 Byte)
   Nutzdaten        u64     Länge in der Datei
   Prüfwert         u64     FNV-1a-64 über die unkomprimierten Nutzdaten
 Metadaten (UTF-8-Text, unkomprimiert, eine Zeile je Angabe "schluessel=wert")
-  spiel=0.1.0, formatversion=1, szenario=westfaelischer_frieden, spielerstaat=BRA,
+  spiel=0.1.0, formatversion=2, szenario=westfaelischer_frieden, spielerstaat=BRA,
   datum=1748-10-24, seed=1648, tage=36525, pruefsumme=5db13a66d63e6079,
   startpruefsumme=29f316d0f4498130, befehle=0, inhalt=69719ceda66eebd9, inhalt.regeln=…
   (je Bereich aus Abschnitt 3)
@@ -188,18 +191,23 @@ von −10 % bis 110 % des Höchstsatzes – also gültige und ungültige.
 
 ## 6. Versionen und Migration
 
-- Die **Formatversion** steht im Kopf (`kSaveFormatVersion = 1`). **Neuere** Versionen lehnt der
-  Kern ab („Spielstand aus einer neueren Spielversion (Format 2, unterstützt bis 1)“).
+- Die **Formatversion** steht im Kopf (`kSaveFormatVersion = 2` seit M8, vorher 1). **Neuere**
+  Versionen lehnt der Kern ab („Spielstand aus einer neueren Spielversion (Format 3, unterstützt bis 2)“).
+- **Format 2 (M8):** die Wahlen im Zustandsverzeichnis und der Inhaltsbereich `politik`. Ein
+  Spielstand im Format 1 zeigt seine Metadaten noch an (13 Inhaltsbereiche, der Gesamtwert über
+  diese 13; `politik` bleibt 0), lädt aber nicht („Spielstand im Format 1 wird nicht unterstützt“):
+  Mit `politik` hat sich ohnehin der Inhalt geändert (Abschnitt 3).
 - Jede Änderung am Zustand (neues Feld, neue Reihenfolge) erhöht die Formatversion. Der Test
   „Spielstand: Formatwache“ verhindert, dass das vergessen wird: Er speichert die Test-Fixture nach
   einem Jahr und vergleicht den Prüfwert der Nutzdaten mit einem festgehaltenen Wert. Ändert er
   sich, muss entweder die Formatversion steigen oder (bei geänderten Testdaten oder geänderter
   Simulation) der Referenzwert neu festgehalten werden; die Meldung des Tests sagt beides.
-- Ältere Versionen gibt es noch nicht. Der Lesebesucher bekommt mit Version 2 einen
-  Versionsschalter (`if (v.version() >= 2) v.field("…", neues_feld)`), der Felder überspringt oder
-  mit Standardwerten füllt. Weil sich vor 1.0 mit fast jedem Meilenstein auch der Inhalt ändert,
-  laufen alte Spielstände meist ohnehin nicht mehr (Abschnitt 3); echte Migrationen werden mit der
-  ersten öffentlichen Version wichtig.
+- Einen Versionsschalter im Lesebesucher (`if (v.version() >= 2) v.field("…", neues_feld)`), der
+  Felder überspringt oder mit Standardwerten füllt, gibt es noch nicht. Weil sich vor 1.0 mit fast
+  jedem Meilenstein auch der Inhalt ändert, laufen alte Spielstände ohnehin nicht mehr (Abschnitt 3);
+  echte Migrationen werden mit der ersten öffentlichen Version wichtig.
+- Der Test „Politik: Spielstand vor und nach dem Wahltag“ hat eine eigene Formatwache für die Wahlen
+  (Testszenario `jahresbeginn_1650` mit dem Landtag der Testdaten).
 
 ## 7. Kern-Schnittstelle (`uhrwerk/savegame.hpp`)
 
@@ -316,8 +324,8 @@ Freigegeben vor der Umsetzung, jeweils mit der Empfehlung:
 
 - **Spieldaten müssen passen:** Jede Änderung an Regeln, Berufen, Gütern oder Orten macht alte
   Spielstände unbrauchbar (Abschnitt 3); vor 1.0 ist das gewollt.
-- **Keine älteren Formatversionen:** Version 1 ist die erste; der Versionsschalter im Lesebesucher
-  entsteht mit Version 2.
+- **Keine älteren Formatversionen:** Format 1 lädt seit M8 nicht mehr (Abschnitt 6); einen
+  Versionsschalter im Lesebesucher gibt es erst mit der ersten Migration.
 - **Wiederholung nur ab Szenariostart:** Das Protokoll reicht immer bis zum Partiebeginn zurück,
   auch nach `lauf --laden`. Eine Partie, die in einer Lasttest-Welt begann, lässt sich aber nicht
   wiederholen: Ihr Startzustand ist nicht das Szenario.

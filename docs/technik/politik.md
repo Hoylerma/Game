@@ -264,6 +264,10 @@ Bürger, Handwerker und Adel 1, Landarme 0,6 (Gesinde und Tagelöhner zum Teil a
 Fabrikarbeiter 0,7, Geistlichkeit 1. Ergebnis 1848: rund 80 % der Männer, nahe den 75–85 % der
 Literatur.
 
+Beim **Zensus** (Landtage) zählen die Steuern je Kopf und Jahr: Einkommen des Berufs im Ort × 12 ×
+Kontribution des Staates. Privilegierte Berufe ohne Kontribution (Adel, Geistlichkeit) wählen als Stand
+mit. Ohne Wahlrecht (`keines`, `staendisch`) gibt es keine Berechtigten; ständische Wahlen kommen später.
+
 ### 7.2 Wahlbeteiligung
 
 ```
@@ -294,14 +298,22 @@ im Wahllabor über die Seeds sichtbar.
 Stimmen je Strömung = Σ Berechtigte × Beteiligung × Neigung, je Block.
 
 Je nach Wahlrecht kommen Gewichte hinzu:
-- **Dreiklassen:** Die Wähler eines Wahlkreises werden nach Steuerleistung (Steuern je Kopf ihres
-  Berufs im Ort) sortiert und in drei Klassen mit je einem Drittel der Steuern geteilt. Jede Klasse
-  zählt ein Drittel.
+- **Dreiklassen:** Die Wähler eines Ortes werden nach Steuerleistung sortiert und in drei Klassen mit
+  je einem Drittel der Steuern geteilt. Jede besetzte Klasse zählt gleich viel.
+  - Der Ort steht für den Urwahlbezirk.
+  - Die Steuerleistung ist das Einkommen je Kopf des Berufs im Ort; innerhalb eines Staates ordnet
+    es wie die Steuern.
+  - Ein Block, der über eine Klassengrenze reicht, zählt anteilig in beiden Klassen.
+  - Die Stimmen eines Ortes ergeben weiter seine Wähler; nur ihr Gewicht verschiebt sich zu den
+    Reichen.
 - **Indirekte Wahl:** Die Wahlmänner verschieben zu den Honoratioren, also Faktor
   `wahlmaenner_liberal` (Spielwert 1,15) auf `liberale` und `katholiken`. Die Literatur nennt die
   Überrepräsentation des Bildungsbürgertums; unter den rund 600 Abgeordneten war kein Arbeiter.
 
 ### 7.5 Mehrheit und Stichwahl
+
+**Boykott:** Stellt eine Kultur aus `boykott` mehr als die Hälfte der Menschen eines Wahlkreises, wählt
+er nicht. Die Berechtigten bleiben stehen, Wähler und Stimmen sind 0, der Sitz bleibt leer.
 
 Bei `mehrheit_stichwahl` gewinnt eine Strömung mit absoluter Mehrheit. Sonst kommen die beiden
 stärksten in die Stichwahl, und die Stimmen der übrigen gehen anteilig an die näher stehende.
@@ -313,6 +325,9 @@ Gleichstand entscheidet die Position (die gemäßigtere gewinnt), nicht der Zufa
 Der Abgeordnete eines Wahlkreises bekommt die Position seiner Strömung, verschoben zur Mitte des
 Wahlkreises (die mit den Stimmen gewichtete Position, Faktor 0,3), dazu Rauschen (±15). Daraus
 folgt die Fraktion nach Abschnitt 3.2.
+
+Ein Wahlkreis mit mehreren Sitzen (Berlin, Wien, Hamburg) gibt alle Sitze an die siegreiche Strömung.
+Jeder Abgeordnete zieht aber eigene Position und Fraktion.
 
 Ein Anteil bleibt fraktionslos (Spielwert 25 %, je Abgeordneter gezogen). Die Fraktionen entstehen
 mit ihrem Datum: Die Wahl im Mai kennt nur ihre Positionen. Die Zuordnung gilt ab dem
@@ -327,6 +342,11 @@ Je Wahl und Wahlkreis bleiben gespeichert:
 - Meldereihenfolge (für den Wahlabend, Abschnitt 8).
 
 Je Parlament kommen die Sitze je Fraktion und Strömung hinzu.
+
+**Zufall:** Jeder Wahlkreis hat einen eigenen Generator aus Seed, Parlament und Wahlkreis (Strom
+`Wahlen`). Er zieht in fester Folge: die Meldereihenfolge, das Rauschen je Strömung, dann je Sitz
+Position und Fraktionslosigkeit. Deshalb rechnen die Wahlkreise parallel, und das Ergebnis hängt nicht
+von der Zahl der Threads ab.
 
 Das Ergebnis ist **Zustand**: Es steht im Zustandsverzeichnis (Prüfsumme, Spielstand, Textexport)
 und in der Chronik („Wahl zur Deutschen Nationalversammlung: 585 Abgeordnete, Casino stärkste
@@ -368,8 +388,9 @@ Dazu kommt eine Plausibilitätsprüfung für Preußen 1849 (Dreiklassen): `konse
 
 Der Kern rechnet am Wahltag das ganze Ergebnis. Der **Wahlabend ist eine Inszenierung** dieses
 Ergebnisses (Entscheidung 4): Die Simulation hält an, und der Bildschirm lässt die Wahlkreise
-nacheinander „eintreffen“, in der Meldereihenfolge (Abstand des Wahlkreises von Frankfurt plus
-Zufall, im Zustand gespeichert, damit jede Wiederholung gleich aussieht). Stil 1848 nach Kapitel 10,
+nacheinander „eintreffen“, in der Meldereihenfolge. Sie ergibt sich aus dem Abstand vom Tagungsort
+(`sitz` des Parlaments) zum ersten Ort des Wahlkreises plus 0 bis 150 km Zufall. Sie steht im Zustand,
+damit jede Wiederholung gleich aussieht. Stil 1848 nach Kapitel 10,
 Abschnitt 6: Telegramme und Extrablatt, Fraktur als Zierschrift, Antiqua für alle Zahlen.
 
 | Bereich | Inhalt |
@@ -504,3 +525,4 @@ Weitere Tests:
 |---|---|
 | a1 Datenmodell | `common/stroemungen.chron` (5 Strömungen), `common/interessengruppen.chron` (11 Gruppen, davon 10 im Lesezeichen 1848; die Arbeiterbewegung erst ab August 1848), `common/parlamente.chron` (Nationalversammlung 1848 mit 8 Fraktionen, Preußisches Abgeordnetenhaus 1849 mit 3), `selbststaendig` bei Landarmen (0,6) und Fabrikarbeitern (0,7); Verfassung und Wahlrecht der Landtage für die 38 Staaten von 1848 in `staaten_historie.csv` (aus der Regierungsform abgeleitet, Zensus in Baden, Württemberg, Hessen-Darmstadt und den Niederlanden). Lader (chronik-skript.md 3.19–3.21), Archivar, Inhaltsfingerabdruck (Bereich `politik`), `info` und `pruefen`. 1648 ohne Parlament, Prüfsumme unverändert. |
 | a2 Wahlkreise | `tools/geodaten/wahlkreise_1848.py` (mit Tests, CI prüft die Tabelle), `wahlkreise.csv` mit 633 Wahlkreisen der Nationalversammlung (649 Sitze) und 337 des Preußischen Abgeordnetenhauses (350 Sitze), Archivar (`history/wahlkreise/`), Lader mit Prüfungen (Sitze = Sollzahl, Orte des Staates, jeder Ort einmal), Fingerabdruck, `info`. Boykott um Polen und Dänen ergänzt. |
+| a3 Wahl im Kern | `core/src/politics.cpp` (Abschnitte 7.1–7.7). Die Wahl läuft im Tagesablauf am Wahltag nach der Wirtschaft, mit Chronikeintrag. `common/wahlen.chron` (chronik-skript.md 3.23) enthält Wahlregeln und fünf Regionen als Spielwerte; Sitz der Parlamente ist Frankfurt bzw. Berlin. Ergebnis im Zustandsverzeichnis nur mit Parlamenten, Spielstand Format 2 (speicherstaende.md, Abschnitt 6). Tests: Neigung, Fraktionen, Stichwahl, Gleichstand, Boykott, Dreiklassen, Zensus, Threads, Spielstände, Formatwache. 1648 bitgleich. Erster Lauf 1848 ohne Kalibrierung: 504 von 649 Sitzen besetzt (145 leer, davon Tschechen 89, Polen 51, Dänen 5), die Liberalen gewinnen 369 Sitze, Konservative und Demokraten keinen. Die Kalibrierung folgt in a4. |

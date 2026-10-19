@@ -167,6 +167,7 @@ private:
     void publish_snapshot(Index location);
     void book_migration(const Migration& migration);
     void run_economy(Index state);
+    void run_elections();
     void run_yearly();
 
     /// Hilfslisten aus dem unveränderlichen Inhalt und den Besitzverhältnissen (seit M4).

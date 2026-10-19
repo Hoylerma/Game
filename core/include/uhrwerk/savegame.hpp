@@ -26,7 +26,8 @@
 namespace uhrwerk {
 
 /// Formatversion der Spielstände und Protokolle; jede Änderung am Zustandsverzeichnis erhöht sie.
-inline constexpr std::uint32_t kSaveFormatVersion = 1;
+/// Format 2 seit M8: Wahlen im Zustand, Inhaltsbereich politik.
+inline constexpr std::uint32_t kSaveFormatVersion = 2;
 
 /// Bereiche des Inhaltsfingerabdrucks (Abschnitt 3), in dieser Reihenfolge.
 inline constexpr std::array<std::string_view, 14> kContentParts = {

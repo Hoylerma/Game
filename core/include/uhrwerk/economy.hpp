@@ -44,6 +44,10 @@ struct EconomyTopology {
 
 EconomyTopology build_economy_topology(const World& world);
 
+/// Abstand in km wie bei der Wanderung: Grad, Länge mit cos 51° gestaucht, 111,2 km je Grad
+/// (deterministisch; auch für die Meldereihenfolge der Wahlen, seit M8).
+Fixed distance_km(Fixed lon_a, Fixed lat_a, Fixed lon_b, Fixed lat_b);
+
 /// Darf der Betrieb im Ort stehen (Standort, Vorkommen)? Der Beruf wird nicht geprüft.
 bool business_allowed(const World& world, const Location& location, const BusinessType& business);
 

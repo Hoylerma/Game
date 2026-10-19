@@ -1,0 +1,28 @@
+# Testdaten: Regeln der Wahlsimulation (seit M8), nur im Szenario jahresbeginn_1650 wirksam.
+
+wahlregeln {
+    maenneranteil       = 0.5
+    junge_im_wahlalter  = 0.33
+    junge_ab_24         = 0.4
+    beteiligung_basis   = 0.45
+    beteiligung_bildung = 0.25
+    beteiligung_stadt   = 0.1
+    beteiligung_not     = 0.15
+    beteiligung_min     = 0.15
+    beteiligung_max     = 0.9
+    not_unter           = 40
+    neigung_basis       = { konservative = 0.5 liberale = 0.3 demokraten = 0.2 }
+    neigung_bildung     = { konservative = -0.1 liberale = 0.1 }
+    neigung_not         = { demokraten = 0.1 }
+    neigung_stadt       = { liberale = 0.05 }
+    wahlmaenner         = { liberale = 1.15 }
+    rauschen            = 0.05
+    zug_zur_mitte       = 0.3
+    position_rauschen   = 15
+    fraktionslos        = 0.25
+}
+
+region elbtal {
+    staaten = { SAX }
+    neigung = { demokraten = 0.05 }
+}

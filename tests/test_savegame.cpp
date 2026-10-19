@@ -317,8 +317,16 @@ TEST_CASE("Spielstand: Inhaltsfingerabdruck") {
         CHECK(uhrwerk::content_differences(fp, uhrwerk::content_fingerprint(w)) ==
               std::vector<std::string_view>{"berufe"});
         w = base;
-        w.currents[0].name = "Andere";
+        w.currents[0].name = "Andere"; // steht in der Chronik der Wahl (seit M8, Schritt a3)
+        CHECK(uhrwerk::content_differences(fp, uhrwerk::content_fingerprint(w)) ==
+              std::vector<std::string_view>{"politik"});
+        w = base;
+        w.election_rules.noise += Fixed::from_ratio(1, 100);
+        CHECK(uhrwerk::content_differences(fp, uhrwerk::content_fingerprint(w)) ==
+              std::vector<std::string_view>{"politik"});
+        w = base;
         w.interest_groups[0].color = uhrwerk::Color{1, 2, 3};
+        w.currents[0].color = uhrwerk::Color{1, 2, 3};
         CHECK(uhrwerk::content_fingerprint(w) == fp);
     }
     SUBCASE("Laden in anderen Inhalt wird mit den Bereichen abgelehnt") {
