@@ -527,6 +527,8 @@ func _check_new_game() -> void:
 	if not listed.any(func(entry: Dictionary) -> bool: return bool(entry.get("player", false))):
 		_fail("Politische Legende: Spielerstaat Lübeck fehlt")
 
+	await _check_election_night(sim)
+
 	# Ein Spielstand von 1648 lässt sich im Spiel von 1848 aus der Liste laden.
 	_main.call("open_game_menu")
 	if not menu.load_entry("Stand1648"):
@@ -540,6 +542,83 @@ func _check_new_game() -> void:
 		)
 	_clear_saves(dir)
 	print("  Neues Spiel 1848, Modus Verwaltung, Staatswechsel, Spielstand von 1648 geladen")
+
+
+## Wahlen 1848 (seit M8): Taste Ä, Wahlkreis in der Ortsinfo, Wahlabend am Wahltag mit Meldungen,
+## Hochrechnung = Ergebnis am Ende, Telegramm zeigt den Wahlkreis, „Letzte Wahl“ im Spielmenü.
+func _check_election_night(sim: SimulationClient) -> void:
+	var night: ElectionNight = _main.call("election_night")
+	var panel: LocationPanel = _main.call("location_panel")
+	await _key(KEY_APOSTROPHE)
+	if int(_main.call("map_mode")) != MapModes.MAP_WAHLEN:
+		_fail("Taste Ä schaltet nicht in den Modus Wahlen (%d)" % int(_main.call("map_mode")))
+	var mannheim := sim.get_location_index("mannheim")
+	var before: Dictionary = sim.get_location(mannheim).get("wahl", {})
+	if before.is_empty() or bool(before.get("held", true)):
+		_fail("Ortsinfo Mannheim vor der Wahl: %s" % str(before))
+	_main.call("set_speed", 5)
+	for _frame in 3000:
+		if night.is_open():
+			break
+		await process_frame
+	if not night.is_open():
+		_fail("Wahlabend öffnet nicht am Wahltag (%s)" % sim.get_date_text())
+		return
+	var date := sim.get_date()
+	var left := _main.get_node("UI/Root/LeftColumn") as Control
+	if (
+		int(date.get("month", 0)) != 5 or int(date.get("day", 0)) != 2
+		or int(_main.call("speed")) != 0 or left.visible
+		or int(_main.call("map_mode")) != MapModes.MAP_WAHLEN
+	):
+		_fail(
+			"Wahlabend: %s, Tempo %d, linke Spalte %s, Modus %d" % [
+				sim.get_date_text(), int(_main.call("speed")), left.visible, int(_main.call("map_mode"))
+			]
+		)
+	if night.reported_count() != 0 or night.district_count() != 633:
+		_fail("Wahlabend: %d von %d gemeldet zu Beginn" % [night.reported_count(), night.district_count()])
+	night.set_speed(1)
+	for _frame in 20:
+		await process_frame
+	var partial := night.reported_count()
+	if partial <= 0 or night.is_complete():
+		_fail("Wahlabend: keine schrittweisen Meldungen (%d)" % partial)
+	var election := sim.get_election(sim.get_election_count() - 1)
+	night.finish()
+	await _frames(1)
+	var tally := night.current_tally()
+	var counts: PackedInt32Array = tally.get("counts", PackedInt32Array())
+	var projection: PackedFloat64Array = tally.get("projection", PackedFloat64Array())
+	var seats: PackedInt32Array = election.get("seats_by_current", PackedInt32Array())
+	var same := counts == seats
+	for g in projection.size():
+		same = same and is_equal_approx(projection[g], float(counts[g]))
+	if not night.is_complete() or not same:
+		_fail("Wahlabend: Ergebnis %s, Hochrechnung %s, Kern %s" % [counts, projection, seats])
+	# Telegramm: der Wahlkreis erscheint in der Ortsinfo mit dem Ergebnis.
+	night.district_requested.emit(mannheim)
+	await _frames(2)
+	var section := panel.find_child("Election", true, false) as Control
+	var after: Dictionary = sim.get_location(mannheim).get("wahl", {})
+	if section == null or not section.visible or not bool(after.get("held", false)):
+		_fail("Ortsinfo Mannheim nach der Wahl ohne Ergebnis (%s)" % str(after))
+	night.close_requested.emit()
+	await _frames(1)
+	if night.is_open() or not left.visible or int(_main.call("speed")) != 5:
+		_fail("Wahlabend schließen: offen %s, linke Spalte %s, Tempo %d" % [
+			night.is_open(), left.visible, int(_main.call("speed"))
+		])
+	_main.call("set_speed", 0)
+	# Spielmenü: „Letzte Wahl“ öffnet den Wahlabend mit dem ganzen Ergebnis.
+	_main.call("open_game_menu")
+	_main.call("open_last_election")
+	await _frames(1)
+	if not night.is_open() or not night.is_complete():
+		_fail("Letzte Wahl: Wahlabend offen %s, vollständig %s" % [night.is_open(), night.is_complete()])
+	night.close_requested.emit()
+	await _frames(1)
+	print("  Wahlen 1848: Taste Ä, Wahlabend am 1. Mai (%d Meldungen schrittweise), Ergebnis = Hochrechnung" % partial)
 
 
 ## Taste drücken und loslassen (echtes Eingabeereignis mit physischem Tastencode).

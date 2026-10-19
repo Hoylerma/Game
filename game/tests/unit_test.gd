@@ -27,6 +27,7 @@ func _initialize() -> void:
 	_test_map_data_and_layout()
 	_test_location_catalog()
 	_test_save_slots()
+	_test_election_tally()
 	if _failures.is_empty():
 		print("UNIT OK (%d Prüfungen)" % _count)
 		quit(0)
@@ -83,7 +84,7 @@ func _test_launch_options() -> void:
 	_true(not defaults.wants_screenshot(), "ohne --screenshot kein Screenshot")
 	var bad_args := PackedStringArray(
 		[
-			"--tage=-3", "--kartenmodus=12", "--unbekannt", "--zoom=0", "--zoom=viel", "--szenario",
+			"--tage=-3", "--kartenmodus=13", "--unbekannt", "--zoom=0", "--zoom=viel", "--szenario",
 			"--staat="
 		]
 	)
@@ -96,6 +97,9 @@ func _test_launch_options() -> void:
 	_equal(chosen.state_tag, "BAV", "Option --staat (Großbuchstaben)")
 	_equal(chosen.problems.size(), 0, "--szenario und --staat ohne Probleme")
 	_equal(bad.zoom_factor, 0.0, "fehlerhaftes --zoom ignoriert")
+	var night := LaunchOptions.parse(PackedStringArray(["--wahlabend", "--kartenmodus=12"]))
+	_true(night.show_election_night and night.problems.is_empty(), "Option --wahlabend (seit M8)")
+	_equal(night.map_mode, MapModes.MAP_WAHLEN, "--kartenmodus=12 ist der Kartenmodus Wahlen")
 	var budget := LaunchOptions.parse(PackedStringArray(["--haushalt"]))
 	_equal(budget.show_budget and budget.problems.is_empty(), true, "Option --haushalt")
 	_equal(defaults.show_budget, false, "Standard ohne --haushalt")
@@ -191,7 +195,11 @@ func _test_legend_entries() -> void:
 
 
 func _test_map_modes() -> void:
-	_equal(MapModes.COUNT, 12, "zwölf Kartenmodi (Verwaltung und Eisenbahnen seit M7)")
+	_equal(MapModes.COUNT, 13, "dreizehn Kartenmodi (Wahlen seit M8)")
+	_equal(MapModes.MAP_WAHLEN, 12, "Kartenmodus Wahlen = 12 (bridge-api.md)")
+	_equal(MapModes.KEY_HINTS[MapModes.MAP_WAHLEN], "Ä", "Taste Ä für Wahlen")
+	_true(InputMap.has_action(&"kartenmodus_wahlen"), "Aktion für den Kartenmodus Wahlen")
+	_true(MapModes.DATA_MODES.has(MapModes.MAP_WAHLEN), "Wahlen mit Schraffur")
 	_equal(MapModes.name_of(MapModes.MAP_VERWALTUNG), "Verwaltung", "Name des Modus Verwaltung")
 	_equal(MapModes.MAP_KREISE, 5, "Kartenmodus Kreise = 5 (bridge-api.md)")
 	_equal(MapModes.MAP_LEBENSSTANDARD, 6, "Kartenmodus Lebensstandard = 6 (bridge-api.md)")
@@ -513,3 +521,73 @@ func _true(condition: bool, what: String) -> bool:
 		_failures.append(what)
 		printerr("  FEHLER  ", what)
 	return condition
+
+
+## Wahlabend (seit M8): Meldereihenfolge, Hochrechnung, Halbrund, Telegramme, Tagesnummern.
+func _test_election_tally() -> void:
+	# Zwei Staaten: Staat 0 mit zwei Wahlkreisen (je 1 Sitz), Staat 1 mit einem Wahlkreis (2 Sitze)
+	# und einem Boykott. Zwei Strömungen.
+	var election := {
+		"districts": [
+			{"district_index": 10, "name": "A", "state_index": 0, "state_name": "Nord", "seats": 1,
+				"winner": 0, "winner_share": 0.6, "boycott": false, "report_rank": 2},
+			{"district_index": 11, "name": "B", "state_index": 0, "state_name": "Nord", "seats": 1,
+				"winner": 1, "winner_share": 0.55, "boycott": false, "report_rank": 0, "runoff": true},
+			{"district_index": 12, "name": "C", "state_index": 1, "state_name": "Süd", "seats": 2,
+				"winner": 1, "winner_share": 0.7, "boycott": false, "report_rank": 1},
+			{"district_index": 13, "name": "D", "state_index": 1, "state_name": "Süd", "seats": 1,
+				"winner": -1, "boycott": true, "report_rank": 3},
+		],
+		"deputy_district": PackedInt32Array([10, 11, 12, 12]),
+		"deputy_current": PackedInt32Array([0, 1, 1, 1]),
+		"deputy_position": PackedFloat32Array([40.0, -30.0, -50.0, -20.0]),
+		"deputy_faction": PackedInt32Array([1, 0, -1, 0]),
+	}
+	_equal(ElectionTally.report_order(election), PackedInt32Array([1, 2, 0, 3]), "Meldereihenfolge")
+	var none := ElectionTally.tally(election, 0, false, 2)
+	_equal(none["counts"], PackedInt32Array([0, 0]), "vor der ersten Meldung keine Sitze")
+	_equal(none["open_seats"], 5, "alle Sitze offen")
+	# Nach der ersten Meldung (B in Nord, Strömung 1): Nord hochgerechnet nach B, Süd nach allen.
+	var first := ElectionTally.tally(election, 1, false, 2)
+	_equal(first["counts"], PackedInt32Array([0, 1]), "erste Meldung")
+	_true(is_equal_approx(first["projection"][1], 5.0), "Hochrechnung: alle offenen Sitze an Strömung 1")
+	var all := ElectionTally.tally(election, 4, false, 2)
+	_equal(all["counts"], PackedInt32Array([1, 3]), "Endergebnis je Strömung")
+	_true(
+		is_equal_approx(all["projection"][0], 1.0) and is_equal_approx(all["projection"][1], 3.0),
+		"am Ende Hochrechnung = Ergebnis"
+	)
+	_true(is_zero_approx(all["band"][1]), "am Ende kein Fehlerband")
+	_equal(all["empty"], 1, "ein Sitz leer (Boykott)")
+	_equal(all["seated"], 4, "vier Abgeordnete")
+	var factions := ElectionTally.tally(election, 4, true, 3)
+	_equal(factions["counts"], PackedInt32Array([2, 1, 1]), "je Fraktion, zuletzt fraktionslos")
+	_equal(ElectionTally.seat_order(election), PackedInt32Array([2, 1, 3, 0]), "Sitzordnung links nach rechts")
+	var layout := ElectionTally.hemicycle(587, Vector2(200, 180), 170.0)
+	var points: PackedVector2Array = layout["points"]
+	_equal(points.size(), 587, "Halbrund mit allen Sitzen")
+	_true(points[0].x < points[points.size() - 1].x, "Halbrund von links nach rechts")
+	_true(float(layout["dot_size"]) > 1.0, "Sitze sichtbar groß")
+	var currents: Array[Dictionary] = [{"name": "Rechte"}, {"name": "Linke"}]
+	_equal(
+		ElectionTally.telegram(election["districts"][1], currents),
+		"B (Nord): Linke 55" + NBSP + "% nach Stichwahl",
+		"Telegramm mit Stichwahl"
+	)
+	_equal(
+		ElectionTally.telegram(election["districts"][3], currents),
+		"D (Süd): Boykott, kein Abgeordneter",
+		"Telegramm Boykott"
+	)
+	_equal(
+		ElectionTally.day_number({"year": 1848, "month": 5, "day": 1})
+		- ElectionTally.day_number({"year": 1848, "month": 3, "day": 1}),
+		61,
+		"Tage vom 1. März bis 1. Mai 1848"
+	)
+	_equal(
+		ElectionTally.day_number({"year": 1849, "month": 3, "day": 1})
+		- ElectionTally.day_number({"year": 1849, "month": 2, "day": 28}),
+		1,
+		"1849 ohne 29. Februar"
+	)

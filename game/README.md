@@ -61,13 +61,14 @@ Optionen stehen nach `--` (Benutzerargumente):
 |---|---|
 | `--screenshot=<pfad>` | Nach dem Laden simulieren, etwa 20 Bilder warten, den Viewport als PNG speichern und beenden |
 | `--tage=<n>` | Simulierte Tage vor dem Screenshot (Standard 60) |
-| `--kartenmodus=<0..11>` | 0 Politisch, 1 Bevölkerungsdichte, 2 Konfession, 3 Gelände, 4 Verwüstung, 5 Kreise, 6 Lebensstandard, 7 Kultur (6 und 7 seit M4), 8 Wirtschaft, 9 Märkte (seit M5), 10 Verwaltung, 11 Eisenbahnen (beide seit M7) |
+| `--kartenmodus=<0..12>` | 0 Politisch, 1 Bevölkerungsdichte, 2 Konfession, 3 Gelände, 4 Verwüstung, 5 Kreise, 6 Lebensstandard, 7 Kultur (6 und 7 seit M4), 8 Wirtschaft, 9 Märkte (seit M5), 10 Verwaltung, 11 Eisenbahnen (beide seit M7), 12 Wahlen (seit M8) |
 | `--ort=<ort_id>` | Ort auswählen, Ortsinfo geöffnet (z. B. `berlin_coelln`) |
 | `--zoom=<faktor>` | Vergrößerung gegenüber der Übersicht (1 = ganze Karte), zentriert auf `--ort`, sonst auf die Kartenmitte (bis zum Faktor 1 bleibt die Bildmitte der Übersicht); gilt auch ohne `--screenshot` |
 | `--haushalt` | Haushaltsfenster des Spielerstaates vor dem Screenshot öffnen (seit M5) |
 | `--spielmenue` | Spielmenü vor dem Screenshot öffnen (seit M6) |
 | `--szenario=<id>` | Szenario beim Start, z. B. `voelkerfruehling` (seit M7; Standard `westfaelischer_frieden`); gilt auch ohne `--screenshot` |
 | `--staat=<TAG>` | Spielerstaat beim Start, z. B. `BAV` (seit M7; Standard: Spieler des Szenarios) |
+| `--wahlabend` | Wahlabend der letzten Wahl mit dem ganzen Ergebnis vor dem Screenshot öffnen (seit M8; dafür `--tage` über den Wahltag, 1848 z. B. `--tage=62`) |
 
 Auf der Kernraum-Karte bei 1600 × 900 Pixeln reicht die ferne Stufe (Staatsnamen) bis etwa
 `--zoom=2,7`, die mittlere (Kreisnamen) bis etwa `--zoom=6,3`, darüber folgt die nahe
@@ -99,7 +100,8 @@ Modus `--headless` gibt es kein Bild; ohne Bildschirm hilft `xvfb-run`.
 | H | Zur Hauptstadt des Spielerstaates (mittlere Zoomstufe) |
 | Leertaste | Pause / weiter |
 | 1 – 5 | Geschwindigkeit: 2, 5, 15, 40 oder 120 Tage je Sekunde |
-| Q W E R T Z U I O P Ü + | Kartenmodus Politisch, Bevölkerungsdichte, Konfession, Gelände, Verwüstung, Kreise, Lebensstandard, Kultur, Wirtschaft, Märkte, Verwaltung und Eisenbahnen (beide seit M7; „+“ ist die Taste rechts neben Ü, englisch „]“) (die Leiste zeigt Kurznamen, die Taste steht im Tooltip). Im Modus Eisenbahnen zeichnet die Karte die Strecken: eröffnete durchgezogen, die der nächsten fünf Jahre gestrichelt |
+| Q W E R T Z U I O P Ü + Ä | Kartenmodus Politisch, Bevölkerungsdichte, Konfession, Gelände, Verwüstung, Kreise, Lebensstandard, Kultur, Wirtschaft, Märkte, Verwaltung und Eisenbahnen (beide seit M7; „+“ ist die Taste rechts neben Ü, englisch „]“) und Wahlen (seit M8; „Ä“ rechts neben Ö, englisch „'“) (die Leiste zeigt Kurznamen, die Taste steht im Tooltip). Im Modus Eisenbahnen zeichnet die Karte die Strecken: eröffnete durchgezogen, die der nächsten fünf Jahre gestrichelt |
+| Wahlabend | seit M8: öffnet am Wahltag von selbst, die Zeit hält an. Die Wahlkreise treffen in der Meldereihenfolge ein (Tempo ×1, ×4 oder sofort); Halbrund, Balken mit Hochrechnung und Fehlerband, Telegramme (Klick zeigt den Wahlkreis). Danach im Spielmenü „Letzte Wahl“ |
 | Steuerregler | Kontribution, Akzise und Zoll des Spielerstaates (wirksam ab dem nächsten simulierten Tag) |
 | „Haushalt im Einzelnen …“ | Haushaltsfenster: Einnahmen je Steuerart, Ausgaben je Posten (Hof, Verwaltung, Heer, Zinsen, Bauten), Schatz, Schulden, Zins, Staatsbankrotte |
 | Klick auf einen Chronikeintrag | Ort des Ereignisses auswählen und anfahren |
@@ -142,6 +144,7 @@ game/
 │   │   ├── map_modes.gd           MapModes: Kartenmodi, Namen, Tasten
 │   │   ├── german_format.gd       GermanFormat: Tausenderpunkt, Dezimalkomma, Einheiten
 │   │   ├── save_slots.gd          SaveSlots: Ordner, Dateinamen und Liste der Spielstände, Autosave (seit M6)
+│   │   ├── election_tally.gd      ElectionTally: Meldereihenfolge, Hochrechnung, Halbrund (seit M8)
 │   │   └── launch_options.gd      LaunchOptions: --screenshot, --tage, --kartenmodus, --ort, --zoom
 │   ├── map/
 │   │   ├── map_view.gd            MapView: Darstellung, Nachschlagetexturen, Auswahl, Rahmen
@@ -150,7 +153,7 @@ game/
 │   │   ├── map_labels.gd          MapLabels: Namen im Bildschirmraum mit Rastern
 │   │   ├── map_label_layout.gd    MapLabelLayout: Namenspunkte von Staaten und Kreisen
 │   │   └── railway_layer.gd       RailwayLayer: Eisenbahnstrecken über der Karte (seit M7)
-│   └── ui/                    Skripte der Panels, Legendenberechnung, Farbpalette
+│   └── ui/                    Skripte der Panels, Legendenberechnung, Farbpalette; Wahlabend (election_night.gd, seit M8)
 ├── shaders/map.gdshader       Kartenshader (canvas_item)
 ├── theme/einigkeit_theme.tres Theme der Oberfläche (Papier und Tinte)
 └── tests/                     Einheiten-, Rauch-, Klick- und Leistungstest, siehe tests/README.md
@@ -166,7 +169,7 @@ oberen Leiste oder F10 und hält die Zeit an: Name des Spielstands (vorbelegt mi
 Liste der Spielstände (zuletzt geänderte zuerst, mit Datum, Staat und Änderungszeit; Dateien, die
 nicht zu den Spieldaten passen oder keine Spielstände sind, erscheinen ausgegraut mit dem Grund
 als Tooltip; Spielstände des anderen Lesezeichens sind ladbar und wechseln es), Neues Spiel
-(„Starten“ verlangt einen zweiten Klick, weil die laufende Partie endet), Laden, Schnellspeichern, Schnellladen, Weiterspielen. Die Namen `schnellspeicher`
+(„Starten“ verlangt einen zweiten Klick, weil die laufende Partie endet), Laden, Schnellspeichern, Schnellladen, Weiterspielen; seit M8 „Letzte Wahl“ (Wahlabend mit dem ganzen Ergebnis). Die Namen `schnellspeicher`
 und `autosave_…` sind reserviert. F5 und F9 wirken auch ohne
 Menü. Am **1. Januar** speichert das Spiel automatisch; `autosave_1` ist der neueste, die drei
 letzten bleiben. Nach dem Laden steht die Zeit, die Auswahl ist aufgehoben, und Grenzen, Namen,

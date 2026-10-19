@@ -413,7 +413,25 @@ Abschnitt 6: Telegramme und Extrablatt, Fraktur als Zierschrift, Antiqua für al
 | Steuerung | Tempo (×1, ×4, sofort), Ergebnis je Wahlkreis (Klick auf die Karte oder die Liste), Schließen |
 
 Der Bildschirm öffnet sich am Wahltag von selbst und ist danach aus dem Spielmenü erreichbar
-(„Letzte Wahl“). Der **Kartenmodus „Wahlen“** (Taste Ä, frei neben den Kameratasten) zeigt danach die Wahlkreise mit der Farbe
+(„Letzte Wahl“).
+
+**Umsetzung (Schritt b1):**
+- **Panel:** Der Wahlabend (`game/scripts/ui/election_night.gd`) liegt als Panel über der linken
+  Spalte, damit die Karte daneben sichtbar bleibt. Die Zeit läuft höchstens bis einschließlich zum
+  Wahltag und hält dann an.
+- **Meldungen:**
+  - Tempo ×1 meldet 10 Wahlkreise je Sekunde, ×4 meldet 40, „Sofort“ alle.
+  - Noch nicht gemeldete Wahlkreise sind auf der Karte schraffiert.
+  - Ein Klick auf ein Telegramm wählt den Wahlkreis in der Ortsinfo.
+- **Hochrechnung** (`game/scripts/core/election_tally.gd`):
+  - Die offenen Sitze eines Staates gehen nach den Anteilen der gemeldeten Sitze desselben Staates,
+    ohne Meldung dort nach allen gemeldeten.
+  - Das Fehlerband ist ±1,96 σ, binomial je offenem Sitz.
+  - Am Ende ist die Hochrechnung gleich dem Ergebnis.
+- **Halbrund:** Es zeigt die besetzten Sitze von links nach rechts nach der Position der
+  Abgeordneten. Leere Sitze (Boykott) nennt der Kopf.
+- **Fraktionen:** Vor dem Fraktionsstichtag zeigen Balken und Halbrund die Strömungen, danach die
+  Fraktionen. Der **Kartenmodus „Wahlen“** (Taste Ä, frei neben den Kameratasten) zeigt danach die Wahlkreise mit der Farbe
 des Siegers und einer Helligkeit nach seinem Anteil. Die Ortsinfo nennt Wahlkreis, Sieger,
 Stimmen je Strömung und die Beteiligung.
 
@@ -537,6 +555,7 @@ Weitere Tests:
 | a2 Wahlkreise | `tools/geodaten/wahlkreise_1848.py` (mit Tests, CI prüft die Tabelle), `wahlkreise.csv` mit 633 Wahlkreisen der Nationalversammlung (649 Sitze) und 337 des Preußischen Abgeordnetenhauses (350 Sitze), Archivar (`history/wahlkreise/`), Lader mit Prüfungen (Sitze = Sollzahl, Orte des Staates, jeder Ort einmal), Fingerabdruck, `info`. Boykott um Polen und Dänen ergänzt. |
 | a3 Wahl im Kern | `core/src/politics.cpp` (Abschnitte 7.1–7.7). Die Wahl läuft im Tagesablauf am Wahltag nach der Wirtschaft, mit Chronikeintrag. `common/wahlen.chron` (chronik-skript.md 3.23) enthält Wahlregeln und fünf Regionen als Spielwerte; Sitz der Parlamente ist Frankfurt bzw. Berlin. Ergebnis im Zustandsverzeichnis nur mit Parlamenten, Spielstand Format 2 (speicherstaende.md, Abschnitt 6). Tests: Neigung, Fraktionen, Stichwahl, Gleichstand, Boykott, Dreiklassen, Zensus, Threads, Spielstände, Formatwache. 1648 bitgleich. Erster Lauf 1848 ohne Kalibrierung: 504 von 649 Sitzen besetzt (145 leer, davon Tschechen 89, Polen 51, Dänen 5), die Liberalen gewinnen 369 Sitze, Konservative und Demokraten keinen. Die Kalibrierung folgt in a4. |
 | a4 Wahllabor und Kalibrierung | `uhrwerk-cli wahl` (Abschnitt 7.8, Kern `uhrwerk/election_lab.hpp`), Wahlziele `common/wahlziele_voelkerfruehling.chron` (chronik-skript.md 3.24), CI-Schritt „Wahllabor 1848/49“, CTests `wahl_fixture` und `wahl_1848`. Ergebnis 1848 mit 16 Seeds: alle Ziele erfüllt (siehe unten). Preußen 1849: Konservative und Liberale 83 %, Arbeiterbewegung 0 %. |
+| b1 Wahlabend und Kartenmodus | Brücke: `get_currents`, `get_parliaments`, `get_election`, `get_location_electoral_district_indices`, `get_shown_parliament`, Kartenmodus 12 `MAP_WAHLEN`, Wahlkreis und Ergebnis in `get_location` (`wahl`). Godot: Kartenmodus „Wahlen“ (Taste Ä) mit Wahlkreisgrenzen, Legende, Tooltip und Abschnitt „Wahl“ in der Ortsinfo; Wahlabend (Abschnitt 8) mit Spielmenü „Letzte Wahl“ und Startoption `--wahlabend`. Tests: Einheitentests (Hochrechnung, Halbrund, Telegramme), Rauchtest der Brücke 1848, Klicktest (Wahlabend am 1. Mai, schrittweise Meldungen, Hochrechnung am Ende = Ergebnis, Telegramm zeigt die Ortsinfo), Screenshot `einigkeit_wahlabend.png` in der CI. |
 
 ### 14.1 Kalibrierung der Nationalversammlung (Schritt a4)
 

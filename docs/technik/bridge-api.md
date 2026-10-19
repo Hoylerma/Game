@@ -1,4 +1,4 @@
-# GDExtension-Brücke: Schnittstelle für GDScript (Meilensteine M1 bis M6)
+# GDExtension-Brücke: Schnittstelle für GDScript (Meilensteine M1 bis M8)
 
 Die Brücke (`bridge/`) stellt dem Godot-Projekt genau eine Klasse bereit: **`UhrwerkSimulation`** (erbt von `RefCounted`). Sie besitzt einen `uhrwerk::Simulation`-Kern und übersetzt zwischen Godot-Typen und Kern-Typen.
 
@@ -46,6 +46,12 @@ Die Brücke (`bridge/`) stellt dem Godot-Projekt genau eine Klasse bereit: **`Uh
 | `get_kreis_index(id: String)` | `int` | seit M3; −1, wenn unbekannt |
 | `get_kreis(index: int)` | `Dictionary` | seit M3: `id`, `name`, `location_count` (int), `source` |
 | `get_map_colors(mode: int)` | `PackedColorArray` | Eine Farbe je Simulations-Ortsindex (Länge = `get_location_count()`), siehe Kartenmodi |
+| `get_currents()` | `Array` | seit M8: politische Strömungen `{ id, name, color, position }` (Position −100 … +100) |
+| `get_parliaments()` | `Array` | seit M8: je Parlament des Szenarios `{ index, id, name, state_index (−1 = Deutscher Bund), seats, election_date ({ year, month, day }), election_date_text, faction_date, faction_date_text, seat_index (Tagungsort), franchise (Text), indirect, district_count, election_index (letzte Wahl oder −1), factions: [{ id, name, color, from, to }] }` |
+| `get_election_count()` | `int` | seit M8: Zahl der abgehaltenen Wahlen |
+| `get_election(index: int)` | `Dictionary` | seit M8: `index`, `parliament_index`, `parliament_name`, `date`, `date_text`, `seats` (Sollzahl), `seated`, `electorate`, `voters`, `boycott_seats`; `districts` je Wahlkreis `{ district_index, id, name, state_index, state_name, seats, location_index (erster Ort), electorate, voters, turnout, shares (PackedFloat64Array je Strömung, Summe 1), winner (−1 ohne), winner_share, runoff, boycott, report_rank (Meldereihenfolge ab 0) }`; Abgeordnete als gepackte Felder `deputy_district`, `deputy_current`, `deputy_position` (PackedFloat32Array), `deputy_faction` (−1 fraktionslos); `seats_by_current`, `seats_by_faction` (zuletzt die Fraktionslosen) |
+| `get_location_electoral_district_indices(parliament: int)` | `PackedInt32Array` | seit M8: Wahlkreis (Index über alle Parlamente) je Ort, −1 ohne; leer bei unbekanntem Parlament; Grenzen im Modus „Wahlen“ |
+| `get_shown_parliament()` | `int` | seit M8: Parlament, das Kartenmodus und Ortsinfo zeigen: das der letzten Wahl, vorher das mit dem nächsten Wahltag; −1 ohne Parlament |
 | `set_tax_rate_percent(state_index: int, percent: int)` | `bool` | Reiht einen `SetTaxRate`-Befehl für die Kontribution ein; `false`, wenn Index ungültig oder Prozent außerhalb 0..Maximum |
 | `set_tax_percent(state_index: int, kind: int, percent: int)` | `bool` | seit M5: wie oben für eine Steuerart (`TAX_KONTRIBUTION` 0, `TAX_AKZISE` 1, `TAX_ZOLL` 2); `false` auch bei unbekannter Art |
 | `get_max_tax_rate_percent()` | `int` | Höchstsatz, gilt für alle drei Steuerarten |
@@ -81,8 +87,9 @@ Dateipfade des Betriebssystems (in GDScript `ProjectSettings.globalize_path("use
 | 9 | `MAP_MAERKTE` | seit M5: Farbe je Markt aus der Palette von `MAP_KREISE`; die aktiven Märkte laufen nacheinander durch die Palette, damit sich Nachbarn unterscheiden |
 | 10 | `MAP_VERWALTUNG` | seit M7: Farbe der obersten Verwaltungseinheit (Provinz, Kronland …) aus der Palette von `MAP_KREISE` (`palette[einheitsindex % n]`); die Grenzen der untersten Einheiten zeichnet Godot aus `get_location_admin_indices`; Orte von Staaten ohne Gliederung in der aufgehellten Staatsfarbe |
 | 11 | `MAP_EISENBAHNEN` | seit M7: Bahnhof (Endpunkt eines zum aktuellen Datum eröffneten Abschnitts) dunkelrot, Ort in einem Markt, der mit einem Nachbarmarkt zur Bahnfracht handelt, hellbraun (wie im Kern, wirtschaft.md 4.1), sonst blass; Orte ohne Daten Alpha 0. Die Strecken zeichnet Godot aus `get_railways`: eröffnete durchgezogen, spätere gestrichelt, wenn sie in den nächsten 5 Jahren eröffnen |
+| 12 | `MAP_WAHLEN` | seit M8: Parlament nach `get_shown_parliament`. Nach der Wahl die Farbe der siegreichen Strömung, vom Papierton (Anteil des Siegers 25 %) bis zur vollen Farbe (70 %); Boykott kühles Grau; vor der Wahl die Wahlkreise aus der Palette von `MAP_KREISE`, aufgehellt; außerhalb des Wahlgebiets Papierton; Orte ohne Daten Alpha 0. Die Grenzen der Wahlkreise zeichnet Godot aus `get_location_electoral_district_indices`; während des Wahlabends setzt Godot noch nicht gemeldete Wahlkreise auf Alpha 0 (Schraffur) |
 
-**Orte ohne Daten** (seit M3) erhalten in den Modi 0, 1, 2, 4, 6, 7, 8 und 10 eine Farbe mit **Alpha 0**;
+**Orte ohne Daten** (seit M3) erhalten in den Modi 0, 1, 2, 4, 6, 7, 8, 10, 11 und 12 eine Farbe mit **Alpha 0**;
 die Godot-Seite zeichnet dort eine Schraffur „keine Daten“. In den Modi 3 und 5 haben sie normale
 Farben (Alpha 1), im Modus 9 dann, wenn ihr Markt Orte mit Daten hat.
 

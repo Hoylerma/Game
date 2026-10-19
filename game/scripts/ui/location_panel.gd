@@ -41,6 +41,8 @@ var show_federation := false
 var player_index := -1
 
 var _play_button: Button = null
+## Abschnitt Wahl (seit M8): Wahlkreis und Ergebnis der letzten Wahl.
+var _election_box: VBoxContainer = null
 var _owner_index := -1
 
 ## Höchste Höhe des Panels (fit_height); unbegrenzt, solange nicht gesetzt.
@@ -127,6 +129,12 @@ func _ready() -> void:
 	var facts := $Scroll/Margin/Content/Facts
 	facts.get_parent().add_child(_play_button)
 	facts.get_parent().move_child(_play_button, facts.get_index() + 1)
+	_election_box = VBoxContainer.new()
+	_election_box.name = "Election"
+	_election_box.add_theme_constant_override(&"separation", 4)
+	# Gleich unter den Eckdaten: Im Kartenmodus „Wahlen“ ist das Ergebnis der Grund des Klicks.
+	facts.get_parent().add_child(_election_box)
+	facts.get_parent().move_child(_election_box, _play_button.get_index() + 1)
 
 
 ## Begrenzt die Höhe des Panels; überzähliger Inhalt wird scrollbar.
@@ -211,10 +219,45 @@ func show_location(location: Dictionary, owner_color: Color) -> void:
 	_literacy.text = GermanFormat.percent(float(location.get("literacy_percent", 0.0)))
 	_show_ages(location)
 	_show_balance(location.get("balance_previous", {}))
+	_show_election(location.get("wahl", {}))
 	_identifier.text = "Kennung: %s" % str(location.get("id", "–"))
 	var source := str(location.get("source", ""))
 	_source.text = "Quelle: %s" % (source if not source.is_empty() else "keine Angabe")
 	visible = true
+
+
+## Wahlkreis und Ergebnis der letzten Wahl (seit M8); leer außerhalb des Wahlgebiets.
+func _show_election(election: Dictionary) -> void:
+	_clear(_election_box)
+	_election_box.visible = not election.is_empty()
+	if election.is_empty():
+		return
+	_election_box.add_child(HSeparator.new())
+	_election_box.add_child(_caption("WAHL"))
+	var grid := GridContainer.new()
+	grid.columns = 2
+	_election_box.add_child(grid)
+	_add_fact(grid, "Parlament", str(election.get("parliament_name", "")))
+	var district := str(election.get("district_name", ""))
+	var seats := int(election.get("seats", 1))
+	if seats > 1:
+		district += " (%d Sitze)" % seats
+	_add_fact(grid, "Wahlkreis", district)
+	if not bool(election.get("held", false)):
+		_add_fact(grid, "Wahl am", str(election.get("election_date_text", "")))
+		return
+	if bool(election.get("boycott", false)):
+		_add_fact(grid, "Ergebnis", "Boykott, kein Abgeordneter")
+		return
+	var winner := str(election.get("winner_name", "–"))
+	if bool(election.get("runoff", false)):
+		winner += " (Stichwahl)"
+	_add_fact(grid, "Gewählt", winner)
+	_add_fact(grid, "Berechtigte", GermanFormat.integer(int(election.get("electorate", 0))))
+	_add_fact(grid, "Beteiligung", GermanFormat.percent(float(election.get("turnout_percent", 0.0)), 1))
+	var shares_box := VBoxContainer.new()
+	_election_box.add_child(shares_box)
+	_show_shares(shares_box, election.get("shares", {}), election.get("colors", {}))
 
 
 ## Anteile (Name → Prozent) als Balken, größter zuerst; Farben je Name, sonst neutral.

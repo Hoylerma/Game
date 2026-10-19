@@ -12,6 +12,8 @@ signal quick_load_requested
 signal close_requested
 ## Neues Spiel mit dem Szenario scenario_id (seit M7).
 signal new_game_requested(scenario_id: String)
+## Wahlabend der letzten Wahl öffnen (seit M8).
+signal last_election_requested
 
 const PANEL_WIDTH := 680.0
 const LIST_HEIGHT := 250.0
@@ -29,6 +31,7 @@ var _scenario_ids := PackedStringArray()
 var _current_scenario := ""
 var _scenario_names := {}
 var _new_game_button: Button = null
+var _last_election_button: Button = null
 ## „Starten“ verlangt einen zweiten Klick, weil die laufende Partie endet.
 var _confirm_new_game := false
 var _group := ButtonGroup.new()
@@ -95,6 +98,11 @@ func show_scenarios(scenarios: Array[Dictionary], current: String) -> void:
 		_scenario_ids.append(id)
 		if id == current:
 			_scenario_select.select(_scenario_ids.size() - 1)
+
+
+## Knopf „Letzte Wahl“ nur, wenn schon gewählt wurde (seit M8).
+func show_last_election(available: bool) -> void:
+	_last_election_button.visible = available
 
 
 ## Kennungen der angebotenen Szenarien (Tests).
@@ -233,6 +241,10 @@ func _build() -> void:
 	row.add_child(_button("Schnellspeichern (F5)", func() -> void: quick_save_requested.emit()))
 	_quick_load_button = _button("Schnellladen (F9)", func() -> void: quick_load_requested.emit())
 	row.add_child(_quick_load_button)
+	_last_election_button = _button("Letzte Wahl", func() -> void: last_election_requested.emit())
+	_last_election_button.tooltip_text = "Wahlabend der letzten Wahl mit dem ganzen Ergebnis"
+	_last_election_button.visible = false
+	row.add_child(_last_election_button)
 	var spacer := Control.new()
 	spacer.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	row.add_child(spacer)

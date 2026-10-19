@@ -90,7 +90,7 @@ const MARKET_GOOD_FIELDS: PackedStringArray = [
 const KREIS_FIELDS: PackedStringArray = ["id", "name", "location_count", "source"]
 ## Kartenmodi, in denen Orte ohne Daten Alpha 0 haben (bridge-api.md); im Marktmodus (9)
 ## nur Orte ohne Daten in Märkten ohne Orte mit Daten.
-const NO_DATA_ALPHA_MODES: PackedInt32Array = [0, 1, 2, 4, 6, 7, 8, 10, 11]
+const NO_DATA_ALPHA_MODES: PackedInt32Array = [0, 1, 2, 4, 6, 7, 8, 10, 11, 12]
 const CHRONICLE_FIELDS: PackedStringArray = ["date_text", "text", "location_index", "state_index"]
 
 var _failures := PackedStringArray()
@@ -277,6 +277,80 @@ func _check_scenario_1848() -> void:
 		"set_player_state hat den Spieler nicht gewechselt"
 	)
 	_check_railways_1848(sim)
+	_check_elections_1848(sim)
+
+
+## Wahlen 1848 (seit M8): Parlamente, Strömungen, Wahlkreise je Ort, Kartenmodus, die Wahl am 1. Mai
+## mit Ergebnis je Wahlkreis und Abgeordneten, Ortsinfo.
+func _check_elections_1848(sim: SimulationClient) -> void:
+	var parliaments := sim.get_parliaments()
+	var currents := sim.get_currents()
+	var national: Dictionary = parliaments[0] if not parliaments.is_empty() else {}
+	_check(
+		parliaments.size() == 2 and currents.size() == 5
+		and int(national.get("seats", 0)) == 649 and int(national.get("district_count", 0)) == 633
+		and (national.get("factions", []) as Array).size() == 8
+		and int(national.get("election_index", 0)) == -1 and sim.get_shown_parliament() == 0,
+		"Parlamente 1848: %s mit %d Sitzen, %d Wahlkreisen; %d Strömungen" % [
+			national.get("name"), national.get("seats"), national.get("district_count"), currents.size()
+		],
+		"Parlamente 1848: %d, %s; Strömungen %d" % [parliaments.size(), str(national), currents.size()]
+	)
+	var districts := sim.get_location_electoral_district_indices(0)
+	var in_district := 0
+	for d in districts:
+		in_district += 1 if d >= 0 else 0
+	var colors := sim.get_map_colors(MapModes.MAP_WAHLEN)
+	_check(
+		districts.size() == sim.get_location_count() and in_district > 3000
+		and colors.size() == sim.get_location_count()
+		and sim.get_location_electoral_district_indices(5).is_empty(),
+		"Wahlkreise je Ort: %d Orte in Wahlkreisen der Nationalversammlung" % in_district,
+		"Wahlkreise je Ort: %d Einträge, %d in Wahlkreisen" % [districts.size(), in_district]
+	)
+	sim.advance_days(62)
+	var count := sim.get_election_count()
+	var election := sim.get_election(0) if count > 0 else {}
+	var results: Array = election.get("districts", [])
+	var ranks := {}
+	var seats_sum := 0
+	for r: Variant in results:
+		ranks[int((r as Dictionary).get("report_rank", -1))] = true
+	for seats in (election.get("seats_by_current", PackedInt32Array()) as PackedInt32Array):
+		seats_sum += seats
+	var seated := int(election.get("seated", 0))
+	_check(
+		count == 1 and results.size() == 633 and ranks.size() == 633 and ranks.has(0) and ranks.has(632)
+		and seated == seats_sum and seated > 500
+		and (election.get("deputy_position", PackedFloat32Array()) as PackedFloat32Array).size() == seated
+		and int(election.get("boycott_seats", 0)) + seated == 649,
+		"Wahl %s: %d von 649 Sitzen besetzt, Meldereihenfolge vollständig" % [
+			election.get("date_text"), seated
+		],
+		"Wahl 1848: %d Wahlen, %d Wahlkreise, %d Ränge, %d Sitze (Summe %d), leer %d" % [
+			count, results.size(), ranks.size(), seated, seats_sum, int(election.get("boycott_seats", 0))
+		]
+	)
+	var mannheim: Dictionary = sim.get_location(sim.get_location_index("mannheim")).get("wahl", {})
+	var shares: Dictionary = mannheim.get("shares", {})
+	var total := 0.0
+	for value: Variant in shares.values():
+		total += float(value)
+	_check(
+		bool(mannheim.get("held", false)) and not str(mannheim.get("winner_name", "")).is_empty()
+		and shares.size() == 5 and absf(total - 100.0) < 0.01
+		and float(mannheim.get("turnout_percent", 0.0)) > 20.0,
+		"Ortsinfo Mannheim: Wahlkreis %s, gewählt %s" % [
+			mannheim.get("district_name"), mannheim.get("winner_name")
+		],
+		"Ortsinfo Mannheim: %s" % str(mannheim)
+	)
+	var legend := LegendData.election_entries(sim)
+	_check(
+		legend.any(func(entry: Dictionary) -> bool: return str(entry.get("text", "")) == "Boykott"),
+		"Legende Wahlen: %d Einträge mit Boykott" % legend.size(),
+		"Legende Wahlen: %s" % str(legend)
+	)
 
 
 ## 1648 gibt es die Strecken als Inhalt, aber noch keine Eröffnung (Review M7).

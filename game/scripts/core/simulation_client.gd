@@ -58,6 +58,12 @@ const REQUIRED_METHODS: Array[StringName] = [
 	&"get_market_count",
 	&"get_market",
 	&"get_map_colors",
+	&"get_currents",
+	&"get_parliaments",
+	&"get_election_count",
+	&"get_election",
+	&"get_location_electoral_district_indices",
+	&"get_shown_parliament",
 	&"set_tax_rate_percent",
 	&"set_tax_percent",
 	&"get_max_tax_rate_percent",
@@ -320,6 +326,40 @@ func get_chronicle(from_index: int) -> Array[Dictionary]:
 	return entries
 
 
+## Politische Strömungen (seit M8): { id, name, color, position }.
+func get_currents() -> Array[Dictionary]:
+	return _as_dictionaries(_native.call(&"get_currents"))
+
+
+## Parlamente des Szenarios (seit M8): { index, id, name, state_index, seats, election_date,
+## election_date_text, faction_date, faction_date_text, seat_index, franchise, indirect,
+## district_count, election_index, factions: [{ id, name, color, from, to }] }.
+func get_parliaments() -> Array[Dictionary]:
+	return _as_dictionaries(_native.call(&"get_parliaments"))
+
+
+## Zahl der abgehaltenen Wahlen (seit M8).
+func get_election_count() -> int:
+	return int(_native.call(&"get_election_count"))
+
+
+## Ergebnis einer Wahl (seit M8, bridge-api.md): Kopf, districts (je Wahlkreis), Abgeordnete als
+## gepackte Felder deputy_*, seats_by_current und seats_by_faction (zuletzt fraktionslos).
+func get_election(index: int) -> Dictionary:
+	return _as_dictionary(_native.call(&"get_election", index))
+
+
+## Wahlkreis (Index) je Ort für ein Parlament, -1 = keiner (seit M8).
+func get_location_electoral_district_indices(parliament: int) -> PackedInt32Array:
+	return PackedInt32Array(_native.call(&"get_location_electoral_district_indices", parliament))
+
+
+## Parlament, das Kartenmodus und Ortsinfo zeigen: das der letzten Wahl, vorher das mit dem
+## nächsten Wahltag; -1 ohne Parlament (seit M8).
+func get_shown_parliament() -> int:
+	return int(_native.call(&"get_shown_parliament"))
+
+
 func get_checksum() -> String:
 	return str(_native.call(&"get_checksum"))
 
@@ -344,6 +384,15 @@ func get_save_info(path: String) -> Dictionary:
 
 func get_save_format_version() -> int:
 	return int(_native.call(&"get_save_format_version"))
+
+
+static func _as_dictionaries(value: Variant) -> Array[Dictionary]:
+	var result: Array[Dictionary] = []
+	if value is Array:
+		for entry: Variant in value:
+			if entry is Dictionary:
+				result.append(entry)
+	return result
 
 
 static func _as_dictionary(value: Variant) -> Dictionary:

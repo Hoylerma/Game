@@ -44,6 +44,7 @@ public:
         MAP_MAERKTE = 9,        // seit M5
         MAP_VERWALTUNG = 10,    // seit M7
         MAP_EISENBAHNEN = 11,   // seit M7
+        MAP_WAHLEN = 12,        // seit M8
     };
 
     /// Steuerarten für set_tax_percent (seit M5, wie uhrwerk::TaxKind).
@@ -100,6 +101,14 @@ public:
 
     godot::PackedColorArray get_map_colors(std::int64_t mode) const;
 
+    // Politik (seit M8, docs/technik/politik.md Abschnitt 10)
+    godot::Array get_currents() const;
+    godot::Array get_parliaments() const;
+    std::int64_t get_election_count() const;
+    godot::Dictionary get_election(std::int64_t index) const;
+    godot::PackedInt32Array get_location_electoral_district_indices(std::int64_t parliament) const;
+    std::int64_t get_shown_parliament() const;
+
     bool set_tax_rate_percent(std::int64_t state_index, std::int64_t percent);
     bool set_tax_percent(std::int64_t state_index, std::int64_t kind, std::int64_t percent);
     std::int64_t get_max_tax_rate_percent() const;
@@ -120,6 +129,11 @@ protected:
 
 private:
     const uhrwerk::World* world() const;
+    /// Ergebnis eines Wahlkreises in einer Wahl oder nullptr (seit M8).
+    const uhrwerk::DistrictResult* district_result(const uhrwerk::ElectionResult& election,
+                                                   std::int64_t district) const;
+    /// Letzte Wahl eines Parlaments oder nullptr (seit M8).
+    const uhrwerk::ElectionResult* latest_election(std::int64_t parliament) const;
     /// Nachschlagetabellen für Kennungen und Orte je Kreis; Orte und Kreise ändern sich
     /// während einer Partie nicht. Nur Anzeige, ohne Einfluss auf die Simulation.
     void build_lookups();
@@ -131,9 +145,12 @@ private:
     std::unordered_map<std::string, std::int64_t> location_lookup_;
     std::unordered_map<std::string, std::int64_t> kreis_lookup_;
     std::vector<std::int64_t> kreis_location_counts_;
-    std::vector<std::int64_t> market_location_counts_; // Orte mit Daten je Markt
-    std::vector<bool> market_ports_;                   // Markt mit Hafenort (mit Daten)
-    std::vector<std::size_t> market_colors_;           // Farbe je Markt (Index in die Palette)
+    std::vector<std::int64_t> market_location_counts_;          // Orte mit Daten je Markt
+    std::vector<bool> market_ports_;                            // Markt mit Hafenort (mit Daten)
+    std::vector<std::size_t> market_colors_;                    // Farbe je Markt (Index in die Palette)
+    std::vector<std::vector<std::int32_t>> location_districts_; // je Parlament: Wahlkreis je Ort, -1 = keiner
+    std::vector<std::int64_t>
+        district_positions_; // je Wahlkreis: Stelle unter den Wahlkreisen seines Parlaments
 };
 
 } // namespace uhrwerk_bridge

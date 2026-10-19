@@ -15,7 +15,8 @@ const MAP_WIRTSCHAFT := 8
 const MAP_MAERKTE := 9
 const MAP_VERWALTUNG := 10
 const MAP_EISENBAHNEN := 11
-const COUNT := 12
+const MAP_WAHLEN := 12
+const COUNT := 13
 
 ## Anzeigenamen der Modi (Index = Modus).
 const NAMES: PackedStringArray = [
@@ -31,6 +32,7 @@ const NAMES: PackedStringArray = [
 	"Märkte",
 	"Verwaltung",
 	"Eisenbahnen",
+	"Wahlen",
 ]
 
 ## Kurznamen für die Knöpfe der Modusleiste (Index = Modus); seit M4 kurz gehalten,
@@ -48,6 +50,7 @@ const SHORT_NAMES: PackedStringArray = [
 	"Märkte",
 	"Verwaltung",
 	"Bahn",
+	"Wahlen",
 ]
 
 ## Kurze Erklärung für Tooltips der Modusleiste.
@@ -64,6 +67,7 @@ const DESCRIPTIONS: PackedStringArray = [
 	"Märkte: Orte, die gemeinsam handeln und Preise bilden",
 	"Verwaltungseinheiten der Staaten (Provinzen, Kronländer, Kreise); seit 1848",
 	"Eisenbahnstrecken und Bahnhöfe; Märkte mit Bahnanschluss handeln mit geringerer Fracht",
+	"Wahlkreise und Ergebnis der letzten Wahl: Farbe der siegreichen Strömung, kräftiger bei klarem Sieg; seit 1848",
 ]
 
 ## Aktionen der Eingabebelegung (project.godot), Index = Modus.
@@ -80,12 +84,14 @@ const ACTIONS: Array[StringName] = [
 	&"kartenmodus_maerkte",
 	&"kartenmodus_verwaltung",
 	&"kartenmodus_eisenbahnen",
+	&"kartenmodus_wahlen",
 ]
 
 ## Tastenbezeichnung für die Anzeige, Index = Modus. Die Belegung nutzt physische
 ## Tasten: „Z“ ist die Taste rechts neben T (auf englischen Tastaturen „Y“), „Ü“ die rechts
-## neben P (englisch „[“), „+“ die rechts neben Ü (englisch „]“).
-const KEY_HINTS: PackedStringArray = ["Q", "W", "E", "R", "T", "Z", "U", "I", "O", "P", "Ü", "+"]
+## neben P (englisch „[“), „+“ die rechts neben Ü (englisch „]“), „Ä“ die rechts neben Ö (englisch
+## „'“, seit M8).
+const KEY_HINTS: PackedStringArray = ["Q", "W", "E", "R", "T", "Z", "U", "I", "O", "P", "Ü", "+", "Ä"]
 
 ## Modi, deren Farben von der Simulation abhängen; dort erhalten Orte ohne Daten
 ## Alpha 0 (Schraffur „keine Daten“, bridge-api.md). Im Marktmodus gilt das nur für
@@ -101,6 +107,7 @@ const DATA_MODES: PackedInt32Array = [
 	MAP_MAERKTE,
 	MAP_VERWALTUNG,
 	MAP_EISENBAHNEN,
+	MAP_WAHLEN,
 ]
 
 ## Obergrenze der Dichteskala der Brücke (≥ 120 Einwohner je km² → dunkelste Farbe).

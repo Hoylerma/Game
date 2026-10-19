@@ -133,6 +133,17 @@ echten Daten und prüft:
    Geschwindigkeit fort; F5 legt den Schnellspeicher an, F9 stellt seine Prüfsumme wieder her; eine
    fremde Datei steht ausgegraut in der Liste und lässt sich nicht laden, der eigene Spielstand
    schon; mit Stufe 5 entsteht am nächsten 1. Januar `autosave_1`.
+6. **Neues Spiel 1848** (seit M7): Start über das Spielmenü, Kartenmodi Verwaltung und
+   Eisenbahnen, Staatswechsel über die Ortsinfo, danach Laden eines Spielstands von 1648.
+7. **Wahlen 1848** (seit M8):
+   - Taste Ä schaltet in den Kartenmodus „Wahlen“.
+   - Mit Stufe 5 hält die Zeit am 2. Mai an, und der Wahlabend öffnet sich mit 0 von 633
+     gemeldeten Wahlkreisen.
+   - Mit Tempo ×4 kommen die Meldungen schrittweise; „Sofort“ meldet alle, und die
+     Hochrechnung gleicht dann dem Ergebnis des Kerns.
+   - Ein Telegramm zeigt Mannheim mit Ergebnis in der Ortsinfo.
+   - „Schließen“ setzt die Geschwindigkeit fort; „Letzte Wahl“ im Spielmenü öffnet das ganze
+     Ergebnis.
 
 ```bash
 godot --headless --path game --script res://tests/klick_test.gd
