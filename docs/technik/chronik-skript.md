@@ -708,6 +708,13 @@ wahlregeln {                                   # Pflicht, genau einmal
     zug_zur_mitte       = 0.3                  # Abgeordnete: Zug zur Mitte des Wahlkreises (0..1)
     position_rauschen   = 15                   # ± Punkte auf der Achse (0..100)
     fraktionslos        = 0.25                 # Anteil der Fraktionslosen (0..1)
+    wahlkampf {                                # Parteienmodus (seit Schritt b2)
+        spenden         = 0.0003               # Anteil am Monatseinkommen der Anhänger (0..1)
+        stimmungsfehler = 8                    # Stimmungsbericht: ± Prozentpunkte (0..50)
+        versammlung  { kosten = 400   wirkung = 0.05  hoechstens = 0.25 }   # Mobilisierung
+        flugblaetter { kosten = 250   wirkung = 0.3   hoechstens = 1 }      # Neigung × Alphabetisierung
+        verein       { kosten = 1500  wirkung = 0.03  hoechstens = 0.06 }   # bleibt nach der Wahl
+    }
 }
 
 region suedwesten {                            # beliebig viele
@@ -718,7 +725,10 @@ region suedwesten {                            # beliebig viele
 ```
 
 Regeln der Wahlsimulation ([politik.md](politik.md), Abschnitt 7). Alle Felder von `wahlregeln` außer
-`wahlmaenner` sind Pflicht. Die Neigungen verweisen auf `common/stroemungen.chron`. Ein Ort gehört zu
+`wahlmaenner` sind Pflicht, auch der Block `wahlkampf` mit allen Feldern (Abschnitt 9.1):
+- `kosten` in der Währung des Szenarios (0..1.000.000);
+- `wirkung` und `hoechstens` je 0..1. Jede Ausführung hebt die Stufe um
+  `wirkung × (1 − Stufe / hoechstens)`. Die Neigungen verweisen auf `common/stroemungen.chron`. Ein Ort gehört zu
 jeder Region, deren Staaten seinen Besitzer oder deren Märkte seinen Markt enthalten; die Verschiebungen
 addieren sich. Staaten ohne Ort zum Startdatum werden übersprungen.
 
@@ -726,6 +736,7 @@ Fatal sind:
 - unbekannte Strömungen, Staaten oder Märkte;
 - Werte außerhalb der Bereiche;
 - `beteiligung_min` über `beteiligung_max`;
+- `wirkung` größer als `hoechstens` in einer Art des Wahlkampfs;
 - ein fehlender oder doppelter Block `wahlregeln`.
 
 Die Datei darf fehlen, solange es zum Startdatum kein Parlament gibt. Im Kern: `World::election_rules`

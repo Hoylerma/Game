@@ -620,6 +620,8 @@ Date date_after(const Date& start, std::int64_t days) {
 /// Testbefehle (speicherstaende.md, Abschnitt 5): count Steuerbefehle an zufälligen Tagen in
 /// [first_day, end_day), nach Tag geordnet. Gültige und ungültige (Staat -1 oder hinter dem letzten,
 /// Steuerart 3, Satz unter 0 oder über dem Höchstsatz), aus dem eigenen Zufallsstrom Testbefehle.
+/// Mit Parlamenten (seit M8) ist jeder zweite Befehl Wahlkampf: Strömung, Wahlkreis und Art zufällig,
+/// auch ungültige (-1 oder hinter dem letzten, Art 3); ohne Parlamente bleibt die Folge wie bisher.
 std::vector<uhrwerk::LoggedCommand> make_test_commands(const World& w, std::uint64_t seed, std::int64_t count,
                                                        std::int64_t first_day, std::int64_t end_day) {
     std::vector<uhrwerk::LoggedCommand> list;
@@ -639,6 +641,15 @@ std::vector<uhrwerk::LoggedCommand> make_test_commands(const World& w, std::uint
         c.command.kind =
             static_cast<uhrwerk::TaxKind>(rng.below(static_cast<std::uint32_t>(uhrwerk::kTaxKinds) + 1));
         c.command.value = rng.uniform(-margin, max + margin);
+        if (!w.parliaments.empty() && rng.below(2) == 0) {
+            const auto currents = static_cast<std::uint32_t>(w.currents.size());
+            const auto districts = static_cast<std::uint32_t>(w.electoral_districts.size());
+            c.command.type = uhrwerk::CommandType::Campaign;
+            c.command.state = static_cast<Index>(rng.below(currents + 2)) - 1;
+            c.command.target = static_cast<Index>(rng.below(districts + 2)) - 1;
+            c.command.action = static_cast<uhrwerk::CampaignAction>(
+                rng.below(static_cast<std::uint32_t>(uhrwerk::kCampaignActions) + 1));
+        }
         list.push_back(c);
     }
     std::stable_sort(list.begin(), list.end(), [](const auto& a, const auto& b) { return a.day < b.day; });

@@ -77,6 +77,10 @@ var _district_indices := PackedInt32Array()
 var _district_parliament := -2
 ## Wahltage noch nicht abgehaltener Wahlen; die Zeit hält danach an (Wahlabend).
 var _pending_election_days := PackedInt32Array()
+## Parteienmodus (seit M8): gespielte Strömung (-1 = Staat), Parteipanel, Strömungen des Szenarios.
+var _player_current := -1
+var _party_panel: PartyPanel = null
+var _currents: Array[Dictionary] = []
 
 @onready var _map_view: MapView = $MapView
 @onready var _top_bar: TopBar = %TopBar
@@ -105,10 +109,12 @@ func _ready() -> void:
 	_top_bar.menu_requested.connect(toggle_game_menu)
 	_build_game_menu()
 	_build_election_night()
+	_build_party_panel()
 	_state_panel.tax_rate_requested.connect(_on_tax_rate_requested)
 	_chronicle_panel.location_requested.connect(_on_chronicle_location_requested)
 	_location_panel.close_requested.connect(_select_location.bind(-1))
 	_location_panel.play_state_requested.connect(play_state)
+	_location_panel.campaign_requested.connect(_on_campaign_requested)
 	_mode_bar.mode_selected.connect(_set_map_mode)
 	_map_view.location_hovered.connect(_on_location_hovered)
 	_map_view.location_clicked.connect(_on_location_clicked)
@@ -128,6 +134,7 @@ func _ready() -> void:
 		_legend_month = int(_sim.get_date().get("month", 0))
 	_set_map_mode(MapModes.MAP_POLITICAL)
 	_refresh_all()
+	_apply_party_option()
 
 	# Erst nach dem ersten Layout sind die Panelgrößen bekannt.
 	await get_tree().process_frame
@@ -426,6 +433,8 @@ func _refresh_all() -> void:
 	if capital >= 0:
 		capital_name = str(_sim.get_location(capital).get("name", ""))
 	_state_panel.show_state(state, capital_name)
+	if _player_current >= 0:
+		_party_panel.show_party(_sim.get_party(_player_current))
 	_refresh_location_panel()
 	_refresh_map()
 	_pull_chronicle()
@@ -546,6 +555,8 @@ func _read_scenario_constants() -> bool:
 	_location_panel.player_index = _player
 	# Wahlen (seit M8): Was schon gewählt ist, öffnet keinen Wahlabend mehr.
 	_elections_seen = _sim.get_election_count()
+	_currents = _sim.get_currents()
+	_player_current = _sim.get_player_current()
 	_district_parliament = -2
 	_update_pending_elections()
 	var scenario_id := str(_sim.get_scenario().get("id", ""))
@@ -672,6 +683,16 @@ func _refresh_location_panel() -> void:
 	var location := _sim.get_location(_selected)
 	var owner_state := _sim.get_state(int(location.get("owner_index", -1)))
 	_location_panel.show_location(location, owner_state.get("color", UiPalette.PAPER_DEEP))
+	# Parteienmodus (seit M8): Stimmungsbericht und Wahlkampf im Wahlkreis des Ortes.
+	var election: Dictionary = location.get("wahl", {})
+	if _player_current >= 0 and not election.is_empty():
+		var district := int(election.get("district_index", -1))
+		_location_panel.show_campaign(
+			district,
+			_sim.get_campaign(district, _player_current),
+			_currents,
+			str(_currents[_player_current].get("name", "")) if _player_current < _currents.size() else ""
+		)
 	_fit_location_panel.call_deferred()
 
 
@@ -1062,6 +1083,78 @@ func _build_game_menu() -> void:
 	_game_menu.close_requested.connect(close_game_menu)
 	_game_menu.new_game_requested.connect(func(id: String) -> void: start_new_game(id))
 	_game_menu.last_election_requested.connect(open_last_election)
+	_game_menu.role_selected.connect(set_party)
+
+
+# --- Parteienmodus (seit M8) ------------------------------------------------------
+
+
+func _build_party_panel() -> void:
+	_party_panel = PartyPanel.new()
+	_left_column.add_child(_party_panel)
+	_left_column.move_child(_party_panel, _state_panel.get_index())
+	_party_panel.leave_requested.connect(set_party.bind(-1))
+
+
+## Parteipanel (Tests).
+func party_panel() -> PartyPanel:
+	return _party_panel
+
+
+## --partei=<strömung> (seit M8): Parteienmodus beim Start.
+func _apply_party_option() -> void:
+	if _sim == null or _options.party_id.is_empty():
+		return
+	for i in _currents.size():
+		if str(_currents[i].get("id", "")) == _options.party_id:
+			set_party(i)
+			return
+	printerr("EINIGKEIT: --partei=%s: unbekannte Strömung in diesem Szenario." % _options.party_id)
+
+
+## Gespielte Strömung (-1 = Staat).
+func player_current() -> int:
+	return _player_current
+
+
+## Rolle wechseln: Strömung current im Parteienmodus, -1 = Staat (Spielmenü, Parteipanel, --partei).
+func set_party(current: int) -> void:
+	if _sim == null or not _sim.set_player_current(current):
+		return
+	_player_current = _sim.get_player_current()
+	_apply_role()
+	if _player_current >= 0:
+		_top_bar.show_notice("Ihr spielt jetzt die Partei %s" % str(_currents[_player_current].get("name", "")))
+	else:
+		_top_bar.show_notice("Ihr spielt wieder %s" % str(_sim.get_state(_player).get("name", "")))
+
+
+## Staats- oder Parteipanel in der linken Spalte, Wahlkampf in der Ortsinfo.
+func _apply_role() -> void:
+	var party := _player_current >= 0
+	_party_panel.visible = party
+	_state_panel.visible = not party
+	_location_panel.set_party_mode(party)
+	if party:
+		_party_panel.show_party(_sim.get_party(_player_current))
+	_refresh_location_panel()
+
+
+func _on_campaign_requested(district: int, action: int) -> void:
+	if _sim == null or _player_current < 0:
+		return
+	var campaign := _sim.get_campaign(district, _player_current)
+	var actions: Array = campaign.get("actions", [])
+	var name_text := str((actions[action] as Dictionary).get("name", "")) if action < actions.size() else ""
+	if _sim.campaign(_player_current, district, action):
+		_top_bar.show_notice(
+			"%s im Wahlkreis %s angesetzt (ab dem nächsten Tag)" % [
+				name_text, str(campaign.get("district_name", ""))
+			]
+		)
+	else:
+		_top_bar.show_notice("%s nicht möglich: Mittel reichen nicht oder die Wahl ist vorbei" % name_text)
+	_refresh_location_panel()
 
 
 # --- Wahlabend (seit M8) ----------------------------------------------------------
@@ -1202,6 +1295,7 @@ func open_game_menu() -> void:
 		state_name = str(state.get("name", ""))
 	_game_menu.show_scenarios(_sim.get_scenarios(_data_dir), str(_sim.get_scenario().get("id", "")))
 	_game_menu.show_last_election(_sim.get_election_count() > 0)
+	_game_menu.show_roles(state_name, _currents, _player_current)
 	_game_menu.open(
 		SaveSlots.default_name(state_name, _sim.get_date()),
 		SaveSlots.list(_sim, save_dir),
@@ -1267,6 +1361,8 @@ func _after_load(new_client: bool = false) -> void:
 	if _election_night.is_open():
 		_close_election_night(false)
 	_player = _sim.get_player_state_index()
+	_player_current = _sim.get_player_current()
+	_apply_role()
 	if _read_scenario_constants() or new_client:
 		_connect_map_and_simulation()
 	_day_accumulator = 0.0

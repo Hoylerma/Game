@@ -273,6 +273,18 @@ struct Parliament {
     std::string source;
 };
 
+/// Arten des Wahlkampfs (seit M8, Schritt b2, politik.md Abschnitt 9).
+enum class CampaignAction : std::uint8_t { Rally, Leaflets, Club };
+inline constexpr std::size_t kCampaignActions = 3;
+
+/// Kosten und Wirkung einer Art des Wahlkampfs: Jede Aktion erhöht den Stand im Wahlkreis um
+/// wirkung × (1 − stand ÷ hoechstens), also mit abnehmendem Ertrag bis zur Obergrenze.
+struct CampaignRule {
+    Fixed cost;   // Taler aus den Mitteln der Strömung
+    Fixed effect; // Zuwachs des Standes bei Stand 0
+    Fixed cap;    // Obergrenze des Standes
+};
+
 /// Regeln der Wahlsimulation (common/wahlen.chron, politik.md Abschnitt 7). Spielwerte; Vektoren je
 /// Strömung, leer ohne Politik.
 struct ElectionRules {
@@ -295,6 +307,17 @@ struct ElectionRules {
     Fixed position_pull;         // Zug der Abgeordneten zur Mitte ihres Wahlkreises (0..1)
     Fixed position_noise;        // Rauschen der Position (± Punkte)
     Fixed independent_share;     // Anteil der fraktionslosen Abgeordneten
+    // Wahlkampf (seit Schritt b2, Abschnitt 9)
+    Fixed donations;                                       // Spende: Anteil am Monatseinkommen der Anhänger
+    std::array<CampaignRule, kCampaignActions> campaign{}; // je CampaignAction
+    Fixed poll_error;                                      // Stimmungsbericht: ± Prozentpunkte (Anzeige)
+};
+
+/// Wahlkampf einer Strömung in einem Wahlkreis (Zustand seit M8, Schritt b2).
+struct CampaignState {
+    Fixed mobilization; // Versammlungen: Stimmen der Strömung × (1 + Mobilisierung), bis zum Wahltag
+    Fixed persuasion;   // Flugblätter: Neigung + je Alphabetisierung, bis zum Wahltag
+    Fixed club;         // Vereine: bleibende Mobilisierung
 };
 
 /// Region mit eigener Wahlneigung (common/wahlen.chron): Staaten und Märkte (Landschaften).
@@ -570,6 +593,9 @@ struct World {
     std::vector<Fixed> location_development; // Landesausbau: verbaute Reichstaler je Ort (Abschnitt 4.6)
     std::vector<MarketState> market_states;  // parallel zu markets
     std::vector<ElectionResult> elections;   // seit M8: abgehaltene Wahlen in zeitlicher Folge
+    std::vector<CampaignState> campaign;     // seit M8 (b2): [wahlkreis × strömungen + strömung]
+    std::vector<Fixed> party_funds;          // seit M8 (b2): Mittel je Strömung (Taler)
+    std::vector<Fixed> party_donations;      // seit M8 (b2): Spenden des letzten Monats je Strömung
 
     Index find_state(std::string_view tag) const;
     Index find_location(std::string_view id) const;

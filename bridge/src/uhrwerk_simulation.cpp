@@ -528,6 +528,7 @@ String UhrwerkSimulation::load_scenario(const String& data_path, const String& s
     config.seed = static_cast<std::uint64_t>(seed);
     simulation_ = std::make_unique<uhrwerk::Simulation>(std::move(*result.world), config);
     player_tag_ = simulation_->world().scenario.player_tag;
+    player_current_.clear();
     content_ = uhrwerk::content_fingerprint(simulation_->world());
     build_lookups();
     return String();
@@ -1380,6 +1381,206 @@ std::int64_t UhrwerkSimulation::get_shown_parliament() const {
     return next;
 }
 
+// ─── Parteienmodus (seit M8, Schritt b2) ────────────────────────────────────
+
+namespace {
+
+const std::array<std::string_view, uhrwerk::kCampaignActions> kCampaignNames = {"Versammlung", "Flugblätter",
+                                                                                "Verein gründen"};
+
+/// Fester Anzeigefehler des Stimmungsberichts je Wahlkreis, Strömung und Monat in [−1, 1] (keine
+/// Simulation, kein Zufallsstrom: die Zahl bleibt einen Monat lang gleich).
+double poll_offset(std::int64_t district, std::size_t current, const uhrwerk::Date& date) {
+    std::uint64_t x = static_cast<std::uint64_t>(district) * 1'000'003ULL + current * 7919ULL +
+                      static_cast<std::uint64_t>(date.year * 12 + date.month) * 104'729ULL;
+    x += 0x9E3779B97F4A7C15ULL; // splitmix64
+    x = (x ^ (x >> 30U)) * 0xBF58476D1CE4E5B9ULL;
+    x = (x ^ (x >> 27U)) * 0x94D049BB133111EBULL;
+    x ^= x >> 31U;
+    return static_cast<double>(x % 2001ULL) / 1000.0 - 1.0;
+}
+
+} // namespace
+
+bool UhrwerkSimulation::campaign(std::int64_t current, std::int64_t district, std::int64_t action) {
+    const uhrwerk::World* w = world();
+    if (!w || action < CAMPAIGN_VERSAMMLUNG || action > CAMPAIGN_VEREIN ||
+        !valid_index(w->currents, current) || !valid_index(w->electoral_districts, district)) {
+        return false;
+    }
+    const auto kind = static_cast<uhrwerk::CampaignAction>(action);
+    if (!uhrwerk::campaign_allowed(*w, static_cast<uhrwerk::Index>(current),
+                                   static_cast<uhrwerk::Index>(district), kind)) {
+        return false;
+    }
+    uhrwerk::Command command;
+    command.type = uhrwerk::CommandType::Campaign;
+    command.state = static_cast<uhrwerk::Index>(current);
+    command.target = static_cast<uhrwerk::Index>(district);
+    command.action = kind;
+    simulation_->submit(command);
+    return true;
+}
+
+Dictionary UhrwerkSimulation::get_party(std::int64_t current) const {
+    Dictionary result;
+    const uhrwerk::World* w = world();
+    if (!w || !valid_index(w->currents, current)) {
+        return result;
+    }
+    const auto c = static_cast<std::size_t>(current);
+    const uhrwerk::PoliticalCurrent& info = w->currents[c];
+    result["index"] = current;
+    result["id"] = to_godot(info.id);
+    result["name"] = to_godot(info.name);
+    result["color"] = to_godot(info.color);
+    result["funds"] = c < w->party_funds.size() ? w->party_funds[c].to_double() : 0.0;
+    result["donations"] = c < w->party_donations.size() ? w->party_donations[c].to_double() : 0.0;
+    std::int64_t districts = 0;
+    const std::size_t currents = w->currents.size();
+    for (std::size_t d = 0;
+         d < w->electoral_districts.size() && w->campaign.size() == w->electoral_districts.size() * currents;
+         ++d) {
+        const uhrwerk::CampaignState& state = w->campaign[d * currents + c];
+        if (state.mobilization > uhrwerk::Fixed::zero() || state.persuasion > uhrwerk::Fixed::zero() ||
+            state.club > uhrwerk::Fixed::zero()) {
+            ++districts;
+        }
+    }
+    result["campaign_districts"] = districts;
+    const std::int64_t parliament = get_shown_parliament();
+    if (!valid_index(w->parliaments, parliament)) {
+        return result;
+    }
+    const uhrwerk::Parliament& p = at(w->parliaments, parliament);
+    result["parliament_name"] = to_godot(p.name);
+    result["election_date_text"] = to_godot(uhrwerk::format_date_long(p.election_day));
+    result["faction_date_text"] = to_godot(uhrwerk::format_date_long(p.faction_day));
+    const uhrwerk::ElectionResult* election = latest_election(parliament);
+    result["held"] = election != nullptr;
+    if (election == nullptr) {
+        return result;
+    }
+    const std::vector<std::int32_t> seats = uhrwerk::seats_by_current(*w, *election);
+    const std::vector<std::int32_t> by_faction = uhrwerk::seats_by_faction(*w, *election);
+    result["seats"] = c < seats.size() ? seats[c] : 0;
+    result["seated"] = static_cast<std::int64_t>(election->deputies.size());
+    // Eigene Abgeordnete je Fraktion; man spielt die Fraktion mit den meisten (Abschnitt 9).
+    std::vector<std::int64_t> own(p.factions.size(), 0);
+    Array deputies;
+    for (const uhrwerk::Deputy& deputy : election->deputies) {
+        if (deputy.current != static_cast<uhrwerk::Index>(current) ||
+            !valid_index(w->electoral_districts, deputy.district)) {
+            continue;
+        }
+        const uhrwerk::ElectoralDistrict& district = at(w->electoral_districts, deputy.district);
+        Dictionary entry;
+        entry["district_name"] = to_godot(district.name);
+        entry["state_name"] = valid_index(w->states, district.state)
+                                  ? to_godot(at(w->states, district.state).short_name)
+                                  : String();
+        entry["faction_name"] = valid_index(p.factions, deputy.faction)
+                                    ? to_godot(at(p.factions, deputy.faction).name)
+                                    : to_godot(std::string_view("fraktionslos"));
+        entry["position"] = deputy.position.to_double();
+        deputies.push_back(entry);
+        if (valid_index(p.factions, deputy.faction)) {
+            ++own[static_cast<std::size_t>(deputy.faction)];
+        }
+    }
+    result["deputies"] = deputies;
+    result["factions_formed"] = w->date >= p.faction_day;
+    std::size_t best = 0;
+    for (std::size_t f = 1; f < own.size(); ++f) {
+        if (own[f] > own[best]) {
+            best = f;
+        }
+    }
+    if (!own.empty() && own[best] > 0) {
+        result["faction_name"] = to_godot(p.factions[best].name);
+        result["faction_own"] = own[best];
+        result["faction_seats"] = best < by_faction.size() ? by_faction[best] : 0;
+    }
+    return result;
+}
+
+Dictionary UhrwerkSimulation::get_campaign(std::int64_t district, std::int64_t current) const {
+    Dictionary result;
+    const uhrwerk::World* w = world();
+    if (!w || !valid_index(w->electoral_districts, district) || !valid_index(w->currents, current)) {
+        return result;
+    }
+    const auto c = static_cast<std::size_t>(current);
+    const std::size_t currents = w->currents.size();
+    const uhrwerk::ElectoralDistrict& d = at(w->electoral_districts, district);
+    result["district_name"] = to_godot(d.name);
+    result["seats"] = d.seats;
+    bool open = valid_index(w->parliaments, d.parliament) && latest_election(d.parliament) == nullptr &&
+                w->date <= at(w->parliaments, d.parliament).election_day;
+    result["open"] = open;
+    if (w->campaign.size() == w->electoral_districts.size() * currents) {
+        const uhrwerk::CampaignState& state = w->campaign[static_cast<std::size_t>(district) * currents + c];
+        result["mobilization"] = state.mobilization.to_double();
+        result["persuasion"] = state.persuasion.to_double();
+        result["club"] = state.club.to_double();
+    }
+    Array actions;
+    for (std::size_t a = 0; a < uhrwerk::kCampaignActions; ++a) {
+        const uhrwerk::CampaignRule& rule = w->election_rules.campaign[a];
+        Dictionary entry;
+        entry["action"] = static_cast<std::int64_t>(a);
+        entry["name"] = to_godot(kCampaignNames[a]);
+        entry["cost"] = rule.cost.to_double();
+        entry["allowed"] = uhrwerk::campaign_allowed(*w, static_cast<uhrwerk::Index>(current),
+                                                     static_cast<uhrwerk::Index>(district),
+                                                     static_cast<uhrwerk::CampaignAction>(a));
+        actions.push_back(entry);
+    }
+    result["actions"] = actions;
+    // Stimmungsbericht: Schätzung mit Fehler (Abschnitt 9), Prozent je Strömung, Summe 100.
+    if (open) {
+        const uhrwerk::DistrictEstimate estimate =
+            uhrwerk::estimate_district(*w, static_cast<uhrwerk::Index>(district));
+        const double error = w->election_rules.poll_error.to_double();
+        result["boycott"] = estimate.boycott;
+        result["poll_error"] = error;
+        PackedFloat64Array poll;
+        double total = 0.0;
+        for (std::size_t k = 0; k < estimate.shares.size(); ++k) {
+            const double value = std::max(0.0, estimate.shares[k].to_double() * 100.0 +
+                                                   poll_offset(district, k, w->date) * error);
+            poll.push_back(value);
+            total += value;
+        }
+        for (std::int64_t k = 0; k < poll.size() && total > 0.0; ++k) {
+            poll[k] = poll[k] * 100.0 / total;
+        }
+        result["poll"] = poll;
+    }
+    return result;
+}
+
+bool UhrwerkSimulation::set_player_current(std::int64_t current) {
+    const uhrwerk::World* w = world();
+    if (!w) {
+        return false;
+    }
+    if (current < 0) {
+        player_current_.clear();
+        return true;
+    }
+    if (!valid_index(w->currents, current)) {
+        return false;
+    }
+    player_current_ = at(w->currents, current).id;
+    return true;
+}
+
+std::int64_t UhrwerkSimulation::get_player_current() const {
+    const uhrwerk::World* w = world();
+    return w && !player_current_.empty() ? w->find_current(player_current_) : uhrwerk::kNone;
+}
+
 bool UhrwerkSimulation::set_tax_rate_percent(std::int64_t state_index, std::int64_t percent) {
     return set_tax_percent(state_index, TAX_KONTRIBUTION, percent);
 }
@@ -1451,7 +1652,8 @@ String UhrwerkSimulation::save_game(const String& path, std::int64_t player_stat
         std::filesystem::create_directories(file.parent_path(), ignored);
     }
     std::string error;
-    if (!uhrwerk::write_file(file, uhrwerk::save_game(*simulation_, uhrwerk::SaveMeta{tag}), &error)) {
+    if (!uhrwerk::write_file(file, uhrwerk::save_game(*simulation_, uhrwerk::SaveMeta{tag, player_current_}),
+                             &error)) {
         return to_godot(error);
     }
     return String();
@@ -1491,6 +1693,8 @@ String UhrwerkSimulation::load_game(const String& data_path, const String& path)
     load_warnings_ = warnings;
     const uhrwerk::World& w = simulation_->world();
     player_tag_ = w.find_state(info->player_tag) != uhrwerk::kNone ? info->player_tag : w.scenario.player_tag;
+    player_current_ =
+        w.find_current(info->player_current) != uhrwerk::kNone ? info->player_current : std::string();
     content_ = info->content;
     build_lookups();
     return String();
@@ -1519,6 +1723,7 @@ Dictionary UhrwerkSimulation::get_save_info(const String& path) const {
     result["date_text"] = to_godot(uhrwerk::format_date_long(info->date));
     result["days"] = info->days;
     result["player_tag"] = to_godot(info->player_tag);
+    result["player_current"] = to_godot(info->player_current); // Parteienmodus (seit M8), leer = Staat
     // Kurzname für Listen (z. B. „Brandenburg“), sonst der volle Name oder die Kennung. Nur im
     // laufenden Szenario nachschlagen: ein anderes kennt andere Staaten (seit M7).
     String player_name = to_godot(info->player_tag);
@@ -1608,6 +1813,11 @@ void UhrwerkSimulation::_bind_methods() {
     ClassDB::bind_method(D_METHOD("get_location_electoral_district_indices", "parliament"),
                          &UhrwerkSimulation::get_location_electoral_district_indices);
     ClassDB::bind_method(D_METHOD("get_shown_parliament"), &UhrwerkSimulation::get_shown_parliament);
+    ClassDB::bind_method(D_METHOD("campaign", "current", "district", "action"), &UhrwerkSimulation::campaign);
+    ClassDB::bind_method(D_METHOD("get_party", "current"), &UhrwerkSimulation::get_party);
+    ClassDB::bind_method(D_METHOD("get_campaign", "district", "current"), &UhrwerkSimulation::get_campaign);
+    ClassDB::bind_method(D_METHOD("set_player_current", "current"), &UhrwerkSimulation::set_player_current);
+    ClassDB::bind_method(D_METHOD("get_player_current"), &UhrwerkSimulation::get_player_current);
 
     ClassDB::bind_method(D_METHOD("set_tax_rate_percent", "state_index", "percent"),
                          &UhrwerkSimulation::set_tax_rate_percent);
@@ -1641,6 +1851,9 @@ void UhrwerkSimulation::_bind_methods() {
     BIND_ENUM_CONSTANT(TAX_KONTRIBUTION);
     BIND_ENUM_CONSTANT(TAX_AKZISE);
     BIND_ENUM_CONSTANT(TAX_ZOLL);
+    BIND_ENUM_CONSTANT(CAMPAIGN_VERSAMMLUNG);
+    BIND_ENUM_CONSTANT(CAMPAIGN_FLUGBLAETTER);
+    BIND_ENUM_CONSTANT(CAMPAIGN_VEREIN);
 }
 
 } // namespace uhrwerk_bridge

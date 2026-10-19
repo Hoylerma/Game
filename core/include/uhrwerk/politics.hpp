@@ -38,6 +38,33 @@ Index faction_of(const Parliament& parliament, Fixed position);
 ElectionResult run_election(const World& world, Index parliament, std::uint64_t seed,
                             ThreadPool* pool = nullptr);
 
+// ─── Wahlkampf (seit Schritt b2, Abschnitt 9) ──────────────────────────────
+
+/// Legt den Zustand des Wahlkampfs an, wenn die Welt Parlamente hat und die Größen nicht passen.
+void ensure_politics_state(World& world);
+
+/// Spenden des Monats je Strömung: Einkommen der Anhänger im Wahlgebiet × Neigung × Spendenanteil;
+/// erhöht die Mittel und hält die Spende in World::party_donations fest. Ohne Parlamente nichts.
+void collect_donations(World& world);
+
+/// Ob die Strömung im Wahlkreis Wahlkampf der Art führen kann: Wahl ausstehend, Mittel reichen.
+bool campaign_allowed(const World& world, Index current, Index district, CampaignAction action);
+
+/// Führt den Wahlkampf aus (Mittel ab, Stand mit abnehmendem Ertrag hinauf); false, wenn nicht erlaubt.
+bool apply_campaign(World& world, Index current, Index district, CampaignAction action);
+
+/// Nach der Wahl eines Parlaments: Versammlungen und Flugblätter wirken nicht mehr, Vereine bleiben.
+void end_campaign(World& world, Index parliament);
+
+/// Stimmungsbericht ohne Rauschen und ohne Fehler: Anteile je Strömung, wenn heute gewählt würde.
+struct DistrictEstimate {
+    bool boycott = false;
+    Fixed electorate;
+    Fixed voters;
+    std::vector<Fixed> shares; // je Strömung, Summe 1 (leer bei unbekanntem Wahlkreis)
+};
+DistrictEstimate estimate_district(const World& world, Index district);
+
 /// Sitze je Strömung (parallel zu World::currents).
 std::vector<std::int32_t> seats_by_current(const World& world, const ElectionResult& election);
 

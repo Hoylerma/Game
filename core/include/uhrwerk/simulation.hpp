@@ -46,13 +46,16 @@ struct SimConfig {
 
 enum class CommandType : std::uint8_t {
     SetTaxRate, // state, kind, value = neuer Steuersatz (0..rules.tax_rate_max)
+    Campaign,   // seit M8: state = Strömung, target = Wahlkreis, action = Art (politik.md Abschnitt 9)
 };
 
 struct Command {
     CommandType type = CommandType::SetTaxRate;
     Index state = kNone;
     Fixed value;
-    TaxKind kind = TaxKind::Kontribution; // SetTaxRate: welche Steuer (seit M5)
+    TaxKind kind = TaxKind::Kontribution;          // SetTaxRate: welche Steuer (seit M5)
+    Index target = kNone;                          // Campaign: Wahlkreis (seit M8)
+    CampaignAction action = CampaignAction::Rally; // Campaign: Art (seit M8)
 
     friend bool operator==(const Command&, const Command&) = default;
 };

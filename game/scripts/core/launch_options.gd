@@ -14,6 +14,7 @@ extends RefCounted
 ##   --szenario=<id>        Szenario beim Start (seit M7; Standard westfaelischer_frieden)
 ##   --staat=<TAG>          Spielerstaat beim Start (seit M7; Standard: Spieler des Szenarios)
 ##   --wahlabend            Wahlabend der letzten Wahl öffnen, ganz gemeldet (seit M8)
+##   --partei=<strömung>    Parteienmodus mit dieser Strömung, z. B. liberale (seit M8)
 
 const DEFAULT_SCREENSHOT_DAYS := 60
 
@@ -28,6 +29,8 @@ var show_budget := false
 var show_game_menu := false
 ## Wahlabend der letzten Wahl vor dem Screenshot öffnen (seit M8).
 var show_election_night := false
+## Strömung im Parteienmodus beim Start (seit M8); leer = Staat.
+var party_id := ""
 ## Szenario und Spielerstaat beim Start (seit M7); leer = Standard.
 var scenario_id := ""
 var state_tag := ""
@@ -88,6 +91,11 @@ static func parse(args: PackedStringArray) -> LaunchOptions:
 					options.show_game_menu = true
 				else:
 					options.problems.append("--spielmenue erwartet keinen Wert, nicht „%s“." % value)
+			"--partei":
+				if value.is_empty():
+					options.problems.append("--partei braucht eine Strömung (--partei=liberale).")
+				else:
+					options.party_id = value
 			"--wahlabend":
 				if value.is_empty():
 					options.show_election_night = true

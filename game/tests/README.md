@@ -28,7 +28,9 @@ Projektion (`MapConfig`, das M1-Feld `kueste` wird ignoriert), die Pfadauflösun
 Schraffur), die Kartenmodi samt Kreise-Modus und die Eingabeaktionen aus `project.godot`, die
 Detailstufen (`MapDetail`: je Ortsgröße genau eine Namen-Ebene, Grenzen nach Zoom; bei leerer
 Ebene der Rückfall auf die nächste, `MapLabels.shown_tier`) und `LocationCatalog` (auch die
-Zählung der Kreise mit Orten für die Legende).
+Zählung der Kreise mit Orten für die Legende). Seit M8 auch die Rechnungen des Wahlabends
+(`ElectionTally`: Meldereihenfolge, Hochrechnung, Halbrund, Telegramme), `--wahlabend`,
+`--partei` und das Parteipanel (Angaben vor und nach der Wahl).
 
 Dazu legt der Test unter `user://unit_test_karte` eine kleine Testkarte an (8 × 6 Pixel mit
 drei Orten, Meer, See und Ausland), lädt sie mit `MapData` (Kartenindex und Flächenart je
@@ -84,6 +86,13 @@ Prüft die GDExtension und die Kartendaten ohne Szene und ohne Grafikausgabe:
     Bildgröße wie in `karte.chron`; Blaukanal ist eine Flächenart 0..3, bei B ≠ 0 kein Ort;
     alle Kartenindizes bekannt; jeder Ort mit mindestens einem Pixel, Pixelzahl je Ort wie in
     der CSV, jeder Beschriftungspunkt im eigenen Ort
+15. Lesezeichen 1848 (seit M7): Szenarien ohne Laden, Verwaltung, Bundesgebiet, Eisenbahnen,
+    Staatswechsel. Seit M8 die Wahlen: zwei Parlamente, fünf Strömungen, Wahlkreis je Ort, die
+    Wahl am 1. Mai mit 633 Wahlkreisen und vollständiger Meldereihenfolge, Ortsinfo Mannheim,
+    Legende mit Boykott. Dazu der Parteienmodus: Mittel nach der Spende des Monatsersten,
+    Stimmungsbericht mit Summe 100 %, eine Versammlung kostet am nächsten Tag genau ihre Kosten,
+    ungültige Wahlkampfbefehle werden abgelehnt, die Rolle steht im Spielstand; nach der Wahl
+    passen die Sitze der Partei zum Ergebnis, und der Wahlkampf ist beendet
 
 Am Ende steht `SMOKE OK` (Exitcode 0) oder `SMOKE FEHLGESCHLAGEN` mit allen Fehlern (Exitcode 1).
 
@@ -135,7 +144,12 @@ echten Daten und prüft:
    schon; mit Stufe 5 entsteht am nächsten 1. Januar `autosave_1`.
 6. **Neues Spiel 1848** (seit M7): Start über das Spielmenü, Kartenmodi Verwaltung und
    Eisenbahnen, Staatswechsel über die Ortsinfo, danach Laden eines Spielstands von 1648.
-7. **Wahlen 1848** (seit M8):
+7. **Parteienmodus** (seit M8): Die Rolle „Partei: Konstitutionelle Liberale“ im Spielmenü
+   ersetzt das Staatspanel durch das Parteipanel. Die Ortsinfo von Mannheim zeigt den Abschnitt
+   „Wahl“ vor den Eckdaten, ohne „Diesen Staat spielen“. Der Knopf „Versammlung“ meldet sich in
+   der oberen Leiste, am nächsten Tag sind die Mittel kleiner und das Panel nennt einen Wahlkreis
+   mit Wahlkampf. „Staat spielen“ führt zurück.
+8. **Wahlen 1848** (seit M8):
    - Taste Ä schaltet in den Kartenmodus „Wahlen“.
    - Mit Stufe 5 hält die Zeit am 2. Mai an, und der Wahlabend öffnet sich mit 0 von 633
      gemeldeten Wahlkreisen.

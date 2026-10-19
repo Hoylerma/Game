@@ -620,6 +620,11 @@ jobs:
             "$GODOT_BIN" --path game --rendering-driver opengl3 --audio-driver Dummy \
             -- --screenshot="$PWD/artefakte/einigkeit_wahlabend.png" --szenario=voelkerfruehling --tage=62 --wahlabend --ort=mannheim \
             2>&1 | tee -a "$RUNNER_TEMP/screenshot.log"
+          # Parteienmodus: Liberale im Wahlkampf, Ortsinfo Mannheim mit Stimmungsbericht (seit M8)
+          xvfb-run -a -s "-screen 0 1600x900x24" \
+            "$GODOT_BIN" --path game --rendering-driver opengl3 --audio-driver Dummy \
+            -- --screenshot="$PWD/artefakte/einigkeit_partei.png" --szenario=voelkerfruehling --tage=20 --partei=liberale --kartenmodus=12 --ort=mannheim \
+            2>&1 | tee -a "$RUNNER_TEMP/screenshot.log"
           if grep -E "SCRIPT ERROR|Parse Error|SHADER ERROR" "$RUNNER_TEMP/screenshot.log"; then
             echo "::error::Skript- oder Shaderfehler bei den Screenshots."
             exit 1

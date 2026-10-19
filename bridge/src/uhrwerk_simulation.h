@@ -54,6 +54,13 @@ public:
         TAX_ZOLL = 2,
     };
 
+    /// Arten des Wahlkampfs für campaign (seit M8, wie uhrwerk::CampaignAction).
+    enum CampaignKind : std::int64_t {
+        CAMPAIGN_VERSAMMLUNG = 0,
+        CAMPAIGN_FLUGBLAETTER = 1,
+        CAMPAIGN_VEREIN = 2,
+    };
+
     static constexpr std::int64_t kMaxAdvanceDays = 3660;
 
     UhrwerkSimulation();
@@ -109,6 +116,13 @@ public:
     godot::PackedInt32Array get_location_electoral_district_indices(std::int64_t parliament) const;
     std::int64_t get_shown_parliament() const;
 
+    // Parteienmodus (seit M8, Schritt b2, politik.md Abschnitt 9)
+    bool campaign(std::int64_t current, std::int64_t district, std::int64_t action);
+    godot::Dictionary get_party(std::int64_t current) const;
+    godot::Dictionary get_campaign(std::int64_t district, std::int64_t current) const;
+    bool set_player_current(std::int64_t current);
+    std::int64_t get_player_current() const;
+
     bool set_tax_rate_percent(std::int64_t state_index, std::int64_t percent);
     bool set_tax_percent(std::int64_t state_index, std::int64_t kind, std::int64_t percent);
     std::int64_t get_max_tax_rate_percent() const;
@@ -141,6 +155,7 @@ private:
     std::unique_ptr<uhrwerk::Simulation> simulation_;
     godot::PackedStringArray load_warnings_;
     std::string player_tag_;              // Spielerstaat: aus dem Szenario oder dem Spielstand (seit M6)
+    std::string player_current_;          // Strömung im Parteienmodus (seit M8), leer = Staat
     uhrwerk::ContentFingerprint content_; // Inhalt der geladenen Spieldaten (Vergleich mit Spielständen)
     std::unordered_map<std::string, std::int64_t> location_lookup_;
     std::unordered_map<std::string, std::int64_t> kreis_lookup_;
@@ -157,3 +172,4 @@ private:
 
 VARIANT_ENUM_CAST(uhrwerk_bridge::UhrwerkSimulation::MapMode);
 VARIANT_ENUM_CAST(uhrwerk_bridge::UhrwerkSimulation::TaxKind);
+VARIANT_ENUM_CAST(uhrwerk_bridge::UhrwerkSimulation::CampaignKind);

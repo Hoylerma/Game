@@ -19,7 +19,13 @@ wahlregeln {
     rauschen            = 0.05
     zug_zur_mitte       = 0.3
     position_rauschen   = 15
-    fraktionslos        = 0.25
+    fraktionslos        = 0.25    wahlkampf {
+        spenden         = 0.05
+        stimmungsfehler = 8
+        versammlung  { kosten = 10  wirkung = 0.1  hoechstens = 0.3 }
+        flugblaetter { kosten = 5   wirkung = 0.3  hoechstens = 1 }
+        verein       { kosten = 40  wirkung = 0.05 hoechstens = 0.1 }
+    }
 }
 
 region elbtal {

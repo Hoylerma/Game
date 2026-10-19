@@ -34,6 +34,17 @@ wahlregeln {
     zug_zur_mitte     = 0.3
     position_rauschen = 18
     fraktionslos      = 0.25
+    # Wahlkampf (Abschnitt 9, seit Schritt b2): Mittel aus Spenden der Anhänger, je Art Kosten (Taler),
+    # Wirkung bei Stand 0 und Obergrenze; jede Aktion erhöht den Stand um wirkung × (1 − stand ÷
+    # hoechstens). Versammlungen und Vereine mehren die Stimmen der Strömung im Wahlkreis
+    # (× 1 + Stand), Flugblätter die Neigung je Alphabetisierung; Vereine bleiben nach der Wahl.
+    wahlkampf {
+        spenden         = 0.0003    # Anteil am Monatseinkommen der Anhänger im Wahlgebiet
+        stimmungsfehler = 8         # Stimmungsbericht: ± Prozentpunkte
+        versammlung  { kosten = 400   wirkung = 0.05  hoechstens = 0.25 }
+        flugblaetter { kosten = 250   wirkung = 0.3   hoechstens = 1 }
+        verein       { kosten = 1500  wirkung = 0.03  hoechstens = 0.06 }
+    }
 }
 
 # Regionen mit eigener Neigung (Abschnitt 7.3): Staaten (Tags zum Startdatum) oder Märkte. Nach der

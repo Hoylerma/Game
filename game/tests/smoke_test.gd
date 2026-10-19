@@ -308,6 +308,7 @@ func _check_elections_1848(sim: SimulationClient) -> void:
 		"Wahlkreise je Ort: %d Orte in Wahlkreisen der Nationalversammlung" % in_district,
 		"Wahlkreise je Ort: %d Einträge, %d in Wahlkreisen" % [districts.size(), in_district]
 	)
+	var liberals := _check_party_1848(sim, currents)
 	sim.advance_days(62)
 	var count := sim.get_election_count()
 	var election := sim.get_election(0) if count > 0 else {}
@@ -351,6 +352,96 @@ func _check_elections_1848(sim: SimulationClient) -> void:
 		"Legende Wahlen: %d Einträge mit Boykott" % legend.size(),
 		"Legende Wahlen: %s" % str(legend)
 	)
+	var party := sim.get_party(liberals)
+	var deputies: Array = party.get("deputies", [])
+	var by_current: PackedInt32Array = election.get("seats_by_current", PackedInt32Array())
+	_check(
+		bool(party.get("held", false)) and liberals >= 0 and liberals < by_current.size()
+		and int(party.get("seats", -1)) == by_current[liberals] and deputies.size() == by_current[liberals]
+		and int(party.get("seated", 0)) == seated
+		and not bool(sim.get_campaign(sim.get_location_electoral_district_indices(0)[
+			sim.get_location_index("mannheim")
+		], liberals).get("open", true)),
+		"Partei nach der Wahl: %d Sitze, Wahlkampf beendet" % int(party.get("seats", 0)),
+		"Partei nach der Wahl: %s" % str(party)
+	)
+
+
+## Parteienmodus 1848 (seit M8): Mittel und Spenden, Wahlkampf als Befehl für den nächsten Tag,
+## Stimmungsbericht, Rolle im Spielstand. Gibt den Index der Liberalen zurück.
+func _check_party_1848(sim: SimulationClient, currents: Array[Dictionary]) -> int:
+	var liberals := -1
+	for i in currents.size():
+		if str(currents[i].get("id", "")) == "liberale":
+			liberals = i
+	sim.advance_days(1) # Spenden am Monatsersten
+	var party := sim.get_party(liberals)
+	var funds := float(party.get("funds", 0.0))
+	_check(
+		liberals >= 0 and funds > 1000.0 and is_equal_approx(funds, float(party.get("donations", 0.0)))
+		and not bool(party.get("held", true)) and int(party.get("campaign_districts", -1)) == 0
+		and sim.get_party(-1).is_empty() and sim.get_party(currents.size()).is_empty(),
+		"Partei %s: %s Taler Mittel, Wahl %s" % [
+			party.get("name"), GermanFormat.integer(roundi(funds)), party.get("election_date_text")
+		],
+		"Partei: %s" % str(party)
+	)
+	var district := sim.get_location_electoral_district_indices(0)[sim.get_location_index("mannheim")]
+	var campaign := sim.get_campaign(district, liberals)
+	var poll: PackedFloat64Array = campaign.get("poll", PackedFloat64Array())
+	var poll_total := 0.0
+	for value in poll:
+		poll_total += value
+	var actions: Array = campaign.get("actions", [])
+	_check(
+		bool(campaign.get("open", false)) and poll.size() == currents.size()
+		and absf(poll_total - 100.0) < 0.01 and actions.size() == 3
+		and float(campaign.get("poll_error", 0.0)) > 0.0
+		and actions.all(func(a: Dictionary) -> bool: return bool(a.get("allowed", false))),
+		"Stimmungsbericht %s: ± %s Punkte, %d Arten" % [
+			campaign.get("district_name"), campaign.get("poll_error"), actions.size()
+		],
+		"Stimmungsbericht: %s" % str(campaign)
+	)
+	var rally_cost := float((actions[SimulationClient.CAMPAIGN_VERSAMMLUNG] as Dictionary).get("cost", 0.0))
+	_check(
+		sim.campaign(liberals, district, SimulationClient.CAMPAIGN_VERSAMMLUNG)
+		and not sim.campaign(liberals, -1, SimulationClient.CAMPAIGN_VERSAMMLUNG)
+		and not sim.campaign(liberals, district, 3) and not sim.campaign(-1, district, 0),
+		"Wahlkampf angesetzt (Versammlung in %s)" % campaign.get("district_name"),
+		"Wahlkampf: Befehle falsch angenommen oder abgelehnt"
+	)
+	sim.advance_days(1)
+	party = sim.get_party(liberals)
+	campaign = sim.get_campaign(district, liberals)
+	_check(
+		is_equal_approx(float(party.get("funds", 0.0)), funds - rally_cost)
+		and int(party.get("campaign_districts", 0)) == 1 and float(campaign.get("mobilization", 0.0)) > 0.0,
+		"Wahlkampf am nächsten Tag: Mittel %s, Mobilisierung %s" % [
+			GermanFormat.integer(roundi(float(party.get("funds", 0.0)))), campaign.get("mobilization")
+		],
+		"Wahlkampf am nächsten Tag: %s, %s" % [str(party), str(campaign)]
+	)
+	# Rolle im Spielstand (Metadaten „spielerstroemung“).
+	var dir := OS.get_user_data_dir().path_join("smoke_test_partei")
+	_remove_dir(dir)
+	DirAccess.make_dir_recursive_absolute(dir)
+	var path := dir.path_join("partei.einigkeit")
+	var role_ok := sim.set_player_current(liberals) and sim.get_player_current() == liberals
+	role_ok = role_ok and not sim.set_player_current(currents.size())
+	var error := sim.save_game(path, sim.get_player_state_index())
+	var info := sim.get_save_info(path)
+	role_ok = role_ok and sim.set_player_current(-1) and sim.get_player_current() == -1
+	error += sim.load_game(UhrwerkPaths.data_dir(), path)
+	_check(
+		role_ok and error.is_empty() and str(info.get("player_current", "")) == "liberale"
+		and sim.get_player_current() == liberals,
+		"Rolle im Spielstand: Partei %s" % str(info.get("player_current", "")),
+		"Rolle im Spielstand: %s, Fehler „%s“, geladen %d" % [str(info), error, sim.get_player_current()]
+	)
+	_remove_dir(dir)
+	sim.set_player_current(-1)
+	return liberals
 
 
 ## 1648 gibt es die Strecken als Inhalt, aber noch keine Eröffnung (Review M7).

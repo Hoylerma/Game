@@ -183,6 +183,14 @@ template <typename Sim, typename V> void StateAccess::visit(Sim& sim, V& v) {
                 v.field("fraktion", a.faction);
             });
         });
+        // Wahlkampf (seit Schritt b2): je Wahlkreis und Strömung, Mittel und Spenden je Strömung.
+        list(v, "wahlkampf", w.campaign, Extent::State, [&](auto& c) {
+            v.field("mobilisierung", c.mobilization);
+            v.field("flugblaetter", c.persuasion);
+            v.field("vereine", c.club);
+        });
+        values(v, "parteikasse", w.party_funds);
+        values(v, "spenden", w.party_donations);
     }
 
     v.field("zufall.demografie", sim.rng_demography_);
@@ -201,6 +209,10 @@ template <typename Sim, typename V> void StateAccess::visit(Sim& sim, V& v) {
         v.field("staat", c.state);
         v.field("wert", c.value);
         v.field("steuerart", c.kind);
+        if (!w.parliaments.empty()) { // Wahlkampf (seit M8)
+            v.field("ziel", c.target);
+            v.field("aktion", c.action);
+        }
     });
 }
 

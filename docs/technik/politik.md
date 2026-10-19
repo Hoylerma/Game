@@ -459,6 +459,53 @@ Grenze).
 Der Befehl ist ein gewöhnlicher Steuerbefehl der Simulation: im Befehlsprotokoll, wiederholbar,
 mit Wirkung erst am nächsten Tag.
 
+### 9.1 Umsetzung (Schritt b2)
+
+**Kern** (`core/src/politics.cpp`):
+- **Zustand:** je Wahlkreis und Strömung `wahlkampf` mit Mobilisierung, Flugblättern und Vereinen;
+  je Strömung `parteikasse` und `spenden` (Zustandsverzeichnis, nur mit Parlamenten).
+- **Spenden** am Monatsersten: Σ über alle Orte in einem Wahlkreis und alle Blöcke von
+  Einkommen × Größe × Neigung zur Strömung (Abschnitt 7.3, mit Interessengruppen und Regionen),
+  mal `spenden` aus `wahlregeln`. Bis zur Wahl am 1. Mai 1848 kommen zwei Zahlungen an: Liberale
+  rund 7.800 Taler, Demokraten 7.500, Konservative 6.100, Katholiken 3.300, Arbeiterbewegung 230.
+- **Befehl** `Wahlkampf` (Strömung, Wahlkreis, Art), erlaubt bis zum Wahltag des Parlaments und
+  solange die Kasse die Kosten deckt. Jede Ausführung kostet `kosten` und hebt die Stufe um
+  `wirkung × (1 − Stufe / hoechstens)`.
+- **Wirkung** in der Wahl (Abschnitt 7.4):
+  - Versammlung und Verein: Stimmen der Strömung im Wahlkreis × (1 + Mobilisierung + Verein);
+  - Flugblätter: Neigung + Stufe × Alphabetisierung des Blocks, vor der Normierung.
+- **Nach der Wahl** fallen Mobilisierung und Flugblätter auf null; Vereine bleiben.
+- **Spielwerte** (`common/wahlen.chron`, Block `wahlkampf`, chronik-skript.md 3.23):
+  | Art | Kosten | Wirkung | höchstens |
+  |---|---|---|---|
+  | Versammlung | 400 Taler | 0,05 | 0,25 |
+  | Flugblätter | 250 Taler | 0,3 | 1 |
+  | Verein gründen | 1.500 Taler | 0,03 | 0,06 |
+
+  `spenden` ist 0,0003, `stimmungsfehler` 8 Punkte.
+- **Wirkung gemessen:** Mannheim, Stand 30. April 1848, alle Mittel der Liberalen in diesem einen
+  Wahlkreis. Vorher Demokraten 49 %, Liberale 27 %.
+  - 31 Flugblätter: Liberale 37 %, Demokraten 42 %;
+  - 19 Versammlungen: Liberale 32 %, Demokraten 46 %.
+
+  Wahlkampf kippt also knappe Wahlkreise, aber keine Hochburgen.
+
+**Stimmungsbericht** (Brücke `get_campaign`): Schätzung der Anteile mit derselben Rechnung wie die
+Wahl, aber ohne Zufall. Dazu kommt ein Anzeigefehler je Wahlkreis, Strömung und Monat, gleichverteilt
+in ± `stimmungsfehler` Punkten. Danach wird wieder auf 100 % normiert. Der Fehler ist reine Anzeige
+und berührt weder die Simulation noch einen Zufallsstrom.
+
+**Godot:**
+- Rolle im Spielmenü („Staat: …“ oder „Partei: …“) oder Startoption `--partei=<strömung>`.
+- Im Parteienmodus steht das Parteipanel an der Stelle des Staatspanels:
+  - vor der Wahl Mittel, Spenden, Wahltag und die Zahl der Wahlkreise mit Wahlkampf;
+  - nach der Wahl Sitze und ab dem Fraktionsstichtag die Fraktion mit den meisten eigenen
+    Abgeordneten, dazu die Liste der Abgeordneten;
+  - „Staat spielen“ führt zurück.
+- In der Ortsinfo rückt der Abschnitt „Wahl“ nach oben, mit Stimmungsbericht, Stand des eigenen
+  Wahlkampfs und je einem Knopf je Art. Der Knopf ist gesperrt, wenn die Mittel nicht reichen.
+- Die Rolle steht im Spielstand (Metadaten `spielerstroemung`, speicherstaende.md).
+
 ## 10. Kern, Daten, Leistung
 
 - **Lader:**
@@ -556,6 +603,7 @@ Weitere Tests:
 | a3 Wahl im Kern | `core/src/politics.cpp` (Abschnitte 7.1–7.7). Die Wahl läuft im Tagesablauf am Wahltag nach der Wirtschaft, mit Chronikeintrag. `common/wahlen.chron` (chronik-skript.md 3.23) enthält Wahlregeln und fünf Regionen als Spielwerte; Sitz der Parlamente ist Frankfurt bzw. Berlin. Ergebnis im Zustandsverzeichnis nur mit Parlamenten, Spielstand Format 2 (speicherstaende.md, Abschnitt 6). Tests: Neigung, Fraktionen, Stichwahl, Gleichstand, Boykott, Dreiklassen, Zensus, Threads, Spielstände, Formatwache. 1648 bitgleich. Erster Lauf 1848 ohne Kalibrierung: 504 von 649 Sitzen besetzt (145 leer, davon Tschechen 89, Polen 51, Dänen 5), die Liberalen gewinnen 369 Sitze, Konservative und Demokraten keinen. Die Kalibrierung folgt in a4. |
 | a4 Wahllabor und Kalibrierung | `uhrwerk-cli wahl` (Abschnitt 7.8, Kern `uhrwerk/election_lab.hpp`), Wahlziele `common/wahlziele_voelkerfruehling.chron` (chronik-skript.md 3.24), CI-Schritt „Wahllabor 1848/49“, CTests `wahl_fixture` und `wahl_1848`. Ergebnis 1848 mit 16 Seeds: alle Ziele erfüllt (siehe unten). Preußen 1849: Konservative und Liberale 83 %, Arbeiterbewegung 0 %. |
 | b1 Wahlabend und Kartenmodus | Brücke: `get_currents`, `get_parliaments`, `get_election`, `get_location_electoral_district_indices`, `get_shown_parliament`, Kartenmodus 12 `MAP_WAHLEN`, Wahlkreis und Ergebnis in `get_location` (`wahl`). Godot: Kartenmodus „Wahlen“ (Taste Ä) mit Wahlkreisgrenzen, Legende, Tooltip und Abschnitt „Wahl“ in der Ortsinfo; Wahlabend (Abschnitt 8) mit Spielmenü „Letzte Wahl“ und Startoption `--wahlabend`. Tests: Einheitentests (Hochrechnung, Halbrund, Telegramme), Rauchtest der Brücke 1848, Klicktest (Wahlabend am 1. Mai, schrittweise Meldungen, Hochrechnung am Ende = Ergebnis, Telegramm zeigt die Ortsinfo), Screenshot `einigkeit_wahlabend.png` in der CI. |
+| b2 Parteienmodus | Kern: Spenden, Befehl `Wahlkampf` mit drei Arten, Wirkung in der Wahl, Ende mit der Wahl (Abschnitt 9.1); `common/wahlen.chron` mit Block `wahlkampf`; Befehle im Spielstand mit Ziel und Art (speicherstaende.md). Brücke: `campaign`, `get_party`, `get_campaign` (Stimmungsbericht), `set_player_current`, `get_player_current`, `player_current` in `get_save_info`. Godot: Rolle im Spielmenü, `--partei`, Parteipanel, Wahlkampf in der Ortsinfo. Tests: Kern (Spenden, Kosten, abnehmender Ertrag, Wirkung, Ende mit der Wahl, Wiederholung, Spielstand), Lader, Rauchtest der Brücke, Klicktest (Rolle, Versammlung in Mannheim, zurück zum Staat), Einheitentests (Parteipanel, `--partei`), Screenshot `einigkeit_partei.png` in der CI. `speichertest_1848` mischt Wahlkampfbefehle ein. 1648 bitgleich. Plausibilität Preußen 1849 (Dreiklassenwahl, `uhrwerk-cli wahl --parlament pr_abgeordnetenhaus --seeds 8`): Konservative 66, Katholiken 20, Liberale 226, Demokraten 38 von 350 Sitzen; Konservative und Liberale 83 %, Arbeiterbewegung 0 %, beide Ziele erfüllt. Grenze: Historisch boykottierten die Demokraten die Wahl vom Juli 1849; das Modell kennt keinen Boykott einer Strömung. |
 
 ### 14.1 Kalibrierung der Nationalversammlung (Schritt a4)
 

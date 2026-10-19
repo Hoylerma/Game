@@ -52,6 +52,11 @@ Die Brücke (`bridge/`) stellt dem Godot-Projekt genau eine Klasse bereit: **`Uh
 | `get_election(index: int)` | `Dictionary` | seit M8: `index`, `parliament_index`, `parliament_name`, `date`, `date_text`, `seats` (Sollzahl), `seated`, `electorate`, `voters`, `boycott_seats`; `districts` je Wahlkreis `{ district_index, id, name, state_index, state_name, seats, location_index (erster Ort), electorate, voters, turnout, shares (PackedFloat64Array je Strömung, Summe 1), winner (−1 ohne), winner_share, runoff, boycott, report_rank (Meldereihenfolge ab 0) }`; Abgeordnete als gepackte Felder `deputy_district`, `deputy_current`, `deputy_position` (PackedFloat32Array), `deputy_faction` (−1 fraktionslos); `seats_by_current`, `seats_by_faction` (zuletzt die Fraktionslosen) |
 | `get_location_electoral_district_indices(parliament: int)` | `PackedInt32Array` | seit M8: Wahlkreis (Index über alle Parlamente) je Ort, −1 ohne; leer bei unbekanntem Parlament; Grenzen im Modus „Wahlen“ |
 | `get_shown_parliament()` | `int` | seit M8: Parlament, das Kartenmodus und Ortsinfo zeigen: das der letzten Wahl, vorher das mit dem nächsten Wahltag; −1 ohne Parlament |
+| `campaign(current: int, district: int, action: int)` | `bool` | seit M8 (Parteienmodus): reiht einen `Campaign`-Befehl ein (Strömung, Wahlkreis, Art `CAMPAIGN_*`), Wirkung am nächsten Tag; `false` bei ungültigem Index oder unbekannter Art, wenn die Wahl des Wahlkreises nicht mehr aussteht oder die Mittel nicht reichen (politik.md 9.1) |
+| `get_party(current: int)` | `Dictionary` | seit M8: `index`, `id`, `name`, `color`, `funds`, `donations` (letzte Monatsspende), `campaign_districts` (Wahlkreise mit Wahlkampf), `parliament_name`, `election_date_text`, `faction_date_text` (Parlament mit dem nächsten Wahltag, sonst das der letzten Wahl), `held`; nach der Wahl `seats`, `seated`, `deputies` (je Abgeordnetem `{ district_name, state_name, faction_name, position }`), `factions_formed`, `faction_name`, `faction_own`, `faction_seats` (Fraktion mit den meisten eigenen Abgeordneten); leer bei ungültigem Index |
+| `get_campaign(district: int, current: int)` | `Dictionary` | seit M8: `district_name`, `seats`, `open` (Wahl steht aus), `mobilization`, `persuasion`, `club`, `actions` (je Art `{ action, name, cost, allowed }`); solange `open`: `boycott`, `poll_error` (± Punkte), `poll` (PackedFloat64Array, Stimmungsbericht in Prozent je Strömung, Summe 100; Schätzung ohne Zufall plus Anzeigefehler je Wahlkreis, Strömung und Monat) |
+| `set_player_current(current: int)` | `bool` | seit M8: Parteienmodus mit dieser Strömung, −1 = Staat; `false` bei ungültigem Index. Steht im Spielstand (`save_game`), `load_scenario` setzt ihn zurück |
+| `get_player_current()` | `int` | seit M8: gespielte Strömung, −1 = Staat |
 | `set_tax_rate_percent(state_index: int, percent: int)` | `bool` | Reiht einen `SetTaxRate`-Befehl für die Kontribution ein; `false`, wenn Index ungültig oder Prozent außerhalb 0..Maximum |
 | `set_tax_percent(state_index: int, kind: int, percent: int)` | `bool` | seit M5: wie oben für eine Steuerart (`TAX_KONTRIBUTION` 0, `TAX_AKZISE` 1, `TAX_ZOLL` 2); `false` auch bei unbekannter Art |
 | `get_max_tax_rate_percent()` | `int` | Höchstsatz, gilt für alle drei Steuerarten |
@@ -66,10 +71,10 @@ Dateipfade des Betriebssystems (in GDScript `ProjectSettings.globalize_path("use
 
 | Methode | Rückgabe | Beschreibung |
 |---|---|---|
-| `save_game(path: String, player_state_index: int)` | `String` | Schreibt den Spielstand (Spielerstaat für die Metadaten; ungültiger Index = bisheriger Spielerstaat), legt den Ordner an. Leer bei Erfolg, sonst die Meldung |
+| `save_game(path: String, player_state_index: int)` | `String` | Schreibt den Spielstand (Spielerstaat für die Metadaten; ungültiger Index = bisheriger Spielerstaat; seit M8 auch die Strömung aus `set_player_current`), legt den Ordner an. Leer bei Erfolg, sonst die Meldung |
 | `load_game(data_path: String, path: String)` | `String` | Lädt die Spieldaten des Szenarios aus dem Spielstand frisch und den Zustand hinein. Ersetzt die laufende Simulation **nur bei Erfolg**; danach gelten Spielerstaat und Ladehinweise aus diesem Ladevorgang. Leer bei Erfolg, sonst die Meldung (z. B. „Spielstand passt nicht zu den Spieldaten (abweichend: orte)“) |
-| `get_save_info(path: String)` | `Dictionary` | Ohne zu laden: `ok` (bool, Datei lesbar), `compatible` (bool, passt zum Inhalt der geladenen Spieldaten; ein Spielstand eines anderen Szenarios passt nie, `load_game` prüft ihn gegen sein eigenes), `reason` (String, leer wenn passend), `scenario`, `date` (`{ year, month, day }`), `date_text`, `days` (int), `player_tag`, `player_name` (Kurzname, sonst Kennung; nachgeschlagen nur im laufenden Szenario), `format_version` (int), `game_version`, `checksum` (16-stellig hex). Bei `ok == false` nur `ok`, `compatible` und `reason` |
-| `get_save_format_version()` | `int` | Formatversion, die diese Brücke schreibt (1) |
+| `get_save_info(path: String)` | `Dictionary` | Ohne zu laden: `ok` (bool, Datei lesbar), `compatible` (bool, passt zum Inhalt der geladenen Spieldaten; ein Spielstand eines anderen Szenarios passt nie, `load_game` prüft ihn gegen sein eigenes), `reason` (String, leer wenn passend), `scenario`, `date` (`{ year, month, day }`), `date_text`, `days` (int), `player_tag`, `player_name` (Kurzname, sonst Kennung; nachgeschlagen nur im laufenden Szenario), `player_current` (seit M8: Kennung der Strömung im Parteienmodus, leer = Staat), `format_version` (int), `game_version`, `checksum` (16-stellig hex). Bei `ok == false` nur `ok`, `compatible` und `reason` |
+| `get_save_format_version()` | `int` | Formatversion, die diese Brücke schreibt (2 seit M8) |
 
 ## Kartenmodi (`get_map_colors`)
 
@@ -94,7 +99,8 @@ die Godot-Seite zeichnet dort eine Schraffur „keine Daten“. In den Modi 3 un
 Farben (Alpha 1), im Modus 9 dann, wenn ihr Markt Orte mit Daten hat.
 
 **Steuerarten** (seit M5) sind als Konstanten `TAX_KONTRIBUTION` (0), `TAX_AKZISE` (1) und
-`TAX_ZOLL` (2) gebunden, die Kartenmodi als `MAP_*`.
+`TAX_ZOLL` (2) gebunden, die Kartenmodi als `MAP_*`, die Arten des Wahlkampfs (seit M8) als
+`CAMPAIGN_VERSAMMLUNG` (0), `CAMPAIGN_FLUGBLAETTER` (1) und `CAMPAIGN_VEREIN` (2).
 
 **Threads (seit M4):** Die Brücke legt die Simulation mit `SimConfig::threads = 0` an, rechnet
 also auf allen Kernen. Das Ergebnis ist bei jeder Thread-Zahl gleich (bevoelkerung.md,

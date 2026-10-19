@@ -376,6 +376,11 @@ class MetaReader {
 public:
     explicit MetaReader(const Meta& meta) : meta_(meta) {}
 
+    /// Angabe, die fehlen darf (seit M8: spielerstroemung); leer, wenn sie fehlt.
+    std::string optional_text(std::string_view key) const {
+        const auto it = meta_.find(key);
+        return it == meta_.end() ? std::string() : it->second;
+    }
     std::string text(std::string_view key) {
         const auto it = meta_.find(key);
         if (it == meta_.end()) {
@@ -598,13 +603,15 @@ void write_commands(ByteWriter& out, const std::vector<LoggedCommand>& commands)
         out.i64(c.command.state);
         out.i64(c.command.value.raw());
         out.u64(static_cast<std::uint64_t>(c.command.kind));
+        out.i64(c.command.target);                             // seit Format 2 (M8)
+        out.u64(static_cast<std::uint64_t>(c.command.action)); // seit Format 2 (M8)
     }
 }
 
 std::vector<LoggedCommand> read_commands(ByteReader& in) {
     const std::uint64_t count = in.u64();
     std::vector<LoggedCommand> commands;
-    if (count > in.remaining() / 40) {
+    if (count > in.remaining() / 56) {
         in.fail("Befehlsprotokoll beschädigt (Anzahl)");
         return commands;
     }
@@ -616,9 +623,12 @@ std::vector<LoggedCommand> read_commands(ByteReader& in) {
         const std::int64_t state = in.i64();
         c.command.value = Fixed::from_raw(in.i64());
         const std::uint64_t kind = in.u64();
+        const std::int64_t target = in.i64();
+        const std::uint64_t action = in.u64();
         // Tage aufsteigend; Art und Steuerart müssen in ihren Typ passen (ungültige Werte innerhalb des
         // Typs verwirft execute wie beim Spielen).
-        if (c.day < previous || type > 0xFF || kind > 0xFF || state < kNone || state > INT32_MAX) {
+        if (c.day < previous || type > 0xFF || kind > 0xFF || action > 0xFF || state < kNone ||
+            state > INT32_MAX || target < kNone || target > INT32_MAX) {
             in.fail("Befehlsprotokoll beschädigt");
             break;
         }
@@ -626,6 +636,8 @@ std::vector<LoggedCommand> read_commands(ByteReader& in) {
         c.command.type = static_cast<CommandType>(type);
         c.command.state = static_cast<Index>(state);
         c.command.kind = static_cast<TaxKind>(kind);
+        c.command.target = static_cast<Index>(target);
+        c.command.action = static_cast<CampaignAction>(action);
     }
     return commands;
 }
@@ -730,6 +742,10 @@ std::string validate_state(const Simulation& sim) {
     }
     // Wahlen (seit M8): Wahlkreise des eigenen Parlaments, Stimmen je Strömung.
     const std::size_t C = w.currents.size();
+    if (!w.parliaments.empty() && (w.campaign.size() != w.electoral_districts.size() * C ||
+                                   w.party_funds.size() != C || w.party_donations.size() != C)) {
+        return "Größe des Wahlkampfs passt nicht";
+    }
     for (const ElectionResult& e : w.elections) {
         if (!in(e.parliament, w.parliaments.size()) || !is_valid(e.day)) {
             return "Wahl mit ungültigem Verweis";
@@ -940,6 +956,13 @@ ContentFingerprint content_fingerprint(const World& w) {
         for (const std::vector<Fixed>* v : {&r.base, &r.literacy, &r.poverty, &r.city, &r.electors}) {
             fixeds(h, *v);
         }
+        h.fixed(r.donations); // Wahlkampf (seit Schritt b2)
+        h.fixed(r.poll_error);
+        for (const CampaignRule& rule : r.campaign) {
+            h.fixed(rule.cost);
+            h.fixed(rule.effect);
+            h.fixed(rule.cap);
+        }
         h.u64(w.political_regions.size());
         for (const PoliticalRegion& region : w.political_regions) {
             h.text(region.id);
@@ -1018,6 +1041,9 @@ std::vector<std::uint8_t> save_game(const Simulation& sim, const SaveMeta& meta)
     add_meta(text, "formatversion", std::to_string(kSaveFormatVersion));
     add_meta(text, "szenario", w.scenario.id);
     add_meta(text, "spielerstaat", meta.player_tag);
+    if (!meta.player_current.empty()) {
+        add_meta(text, "spielerstroemung", meta.player_current); // Parteienmodus (seit M8)
+    }
     add_meta(text, "datum", iso_date(w.date));
     add_meta(text, "seed", std::to_string(sim.config().seed));
     add_meta(text, "tage", std::to_string(sim.days_elapsed()));
@@ -1037,6 +1063,7 @@ std::optional<SaveInfo> info_from(const Container& c, std::string* error) {
     info.game_version = m.text("spiel");
     info.scenario = m.text("szenario");
     info.player_tag = m.text("spielerstaat");
+    info.player_current = m.optional_text("spielerstroemung");
     info.date = m.date("datum");
     info.seed = m.u64("seed");
     info.days = m.i64("tage");

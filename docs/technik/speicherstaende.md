@@ -31,8 +31,9 @@ Schulden, Haushalt, Zins, Bankrotte, Hofhaltung und Hauptstadt; je Ort Besitzer,
 Blockbereich; Blöcke und Zugänge mit allen Feldern; Momentaufnahmen, Bilanzen, Ortswirtschaft;
 Betriebsanteile, Angebot, Nachfrage, Einkommen, Bedarfsdeckung, Landesausbau; Märkte; seit M8 die
 abgehaltenen Wahlen (je Wahlkreis Berechtigte, Wähler, Stimmen je Strömung, Sieger, Stichwahl, Boykott,
-Meldereihenfolge; je Abgeordnetem Wahlkreis, Strömung, Position, Fraktion), **nur in Welten mit
-Parlamenten**, damit 1648 bitgleich bleibt; die drei Zufallsströme; Chronik; wartende Befehle. Jeder
+Meldereihenfolge; je Abgeordnetem Wahlkreis, Strömung, Position, Fraktion), der Wahlkampf je
+Wahlkreis und Strömung (Mobilisierung, Flugblätter, Vereine) sowie Parteikasse und Spenden je
+Strömung, **nur in Welten mit Parlamenten**, damit 1648 bitgleich bleibt; die drei Zufallsströme; Chronik; wartende Befehle. Jeder
 Besucher bekommt jedes Feld mit Namen:
 
 | Besucher | Zweck |
@@ -116,7 +117,7 @@ Spielstand lädt daher in die frisch geladenen Spieldaten.
 Ein Fuzz-Lauf mit 3.000 verfälschten, aber gültig gepackten Nutzdaten unter AddressSanitizer und
 UndefinedBehaviorSanitizer endete ohne Befund; angenommen wurden nur Änderungen ohne Wirkung.
 
-## 4. Dateiformat (Version 1)
+## 4. Dateiformat (Version 2)
 
 Endung `.einigkeit`. Alle Zahlen little-endian mit fester Breite, unabhängig von Plattform und
 Compiler; kein `memcpy` von Strukturen.
@@ -135,11 +136,12 @@ Metadaten (UTF-8-Text, unkomprimiert, eine Zeile je Angabe "schluessel=wert")
   spiel=0.1.0, formatversion=2, szenario=westfaelischer_frieden, spielerstaat=BRA,
   datum=1748-10-24, seed=1648, tage=36525, pruefsumme=5db13a66d63e6079,
   startpruefsumme=29f316d0f4498130, befehle=0, inhalt=69719ceda66eebd9, inhalt.regeln=…
-  (je Bereich aus Abschnitt 3)
+  (je Bereich aus Abschnitt 3); seit M8 optional spielerstroemung=liberale (Parteienmodus)
 Nutzdaten (zstd 1.5.6, Stufe 3; je Abschnitt 4 Zeichen Kennung und u64-Länge)
   ZUST  alle Felder aus dem Zustandsverzeichnis in fester Reihenfolge
-  PROT  Startprüfsumme, Zahl der Befehle, je Befehl: Tag (i64), Art (u64), Staat (i64),
-        Wert (i64, Festkomma roh), Steuerart (u64)
+  PROT  Startprüfsumme, Zahl der Befehle, je Befehl (56 Byte): Tag (i64), Art (u64),
+        Staat (i64; beim Wahlkampf die Strömung), Wert (i64, Festkomma roh), Steuerart (u64),
+        Ziel (i64; Wahlkreis, sonst −1), Aktion (u64; Art des Wahlkampfs)
 ```
 
 Die Metadaten lassen sich lesen, ohne die Nutzdaten zu entpacken (Liste der Spielstände in Godot).
@@ -187,13 +189,17 @@ Szenario); die Meldung lautet dann „Startzustand weicht ab“.
 **Testbefehle:** Die Kommandozeile hat keine Spielerbefehle. Für Tests erzeugt `--testbefehle N`
 N Steuerbefehle an zufälligen Tagen aus einem eigenen Zufallsstrom `Testbefehle = 6`, der die Ströme
 des Spiels nicht berührt: Staat −1 bis hinter den letzten, Steuerart 0 bis 3 (3 ist ungültig), Satz
-von −10 % bis 110 % des Höchstsatzes – also gültige und ungültige.
+von −10 % bis 110 % des Höchstsatzes – also gültige und ungültige. In Welten mit Parlamenten
+(seit M8) folgt jedem zweiten Steuerbefehl ein Wahlkampfbefehl, ebenso mit ungültigen Werten:
+Strömung −1 bis hinter die letzte, Wahlkreis −1 bis hinter den letzten, Art 0 bis 3. Ohne Parlament
+bleibt die Folge der Zufallszahlen wie vor M8.
 
 ## 6. Versionen und Migration
 
 - Die **Formatversion** steht im Kopf (`kSaveFormatVersion = 2` seit M8, vorher 1). **Neuere**
   Versionen lehnt der Kern ab („Spielstand aus einer neueren Spielversion (Format 3, unterstützt bis 2)“).
-- **Format 2 (M8):** die Wahlen im Zustandsverzeichnis und der Inhaltsbereich `politik`. Ein
+- **Format 2 (M8):** die Wahlen und der Wahlkampf im Zustandsverzeichnis, Befehle mit Ziel und
+  Aktion (56 statt 40 Byte im Protokoll) und der Inhaltsbereich `politik`. Ein
   Spielstand im Format 1 zeigt seine Metadaten noch an (13 Inhaltsbereiche, der Gesamtwert über
   diese 13; `politik` bleibt 0), lädt aber nicht („Spielstand im Format 1 wird nicht unterstützt“):
   Mit `politik` hat sich ohnehin der Inhalt geändert (Abschnitt 3).
@@ -259,7 +265,7 @@ den alten Spielstand heil. In der Simulation kamen `command_log()`, `start_check
 - `load_game(data_path, path) -> String` (ersetzt die laufende Simulation nur bei Erfolg; der
   Spielerstaat kommt aus dem Spielstand)
 - `get_save_info(path) -> Dictionary`: Szenario, Datum, Tage, Spielerstaat (Kennung und Kurzname),
-  Formatversion, Spielversion, Prüfsumme, `compatible` und `reason` (Vergleich mit dem Inhalt der
+  seit M8 die Strömung im Parteienmodus (`player_current`), Formatversion, Spielversion, Prüfsumme, `compatible` und `reason` (Vergleich mit dem Inhalt der
   geladenen Spieldaten), ohne zu laden
 - `get_save_format_version() -> int`
 
@@ -278,7 +284,8 @@ den alten Spielstand heil. In der Simulation kamen `command_log()`, `start_check
   neueste). Die Zeit läuft dazu je Bild höchstens bis zum Jahreswechsel; die übrigen Tage folgen im
   nächsten Bild.
 - Nach dem Laden bauen Spieler, Grenzen, Namen, Panels, Legende und Chronik neu auf; die Auswahl
-  wird aufgehoben, die Zeit steht.
+  wird aufgehoben, die Zeit steht. Seit M8 kommt auch die Rolle zurück: Ein Spielstand aus dem
+  Parteienmodus öffnet wieder mit dem Parteipanel.
 - Startoption `--spielmenue` öffnet das Menü (Screenshots).
 
 ## 10. Tests und Abnahme

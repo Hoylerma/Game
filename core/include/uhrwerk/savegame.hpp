@@ -21,6 +21,7 @@
 #include <span>
 #include <string>
 #include <string_view>
+#include <utility>
 #include <vector>
 
 namespace uhrwerk {
@@ -51,9 +52,10 @@ std::vector<std::string_view> content_differences(const ContentFingerprint& a, c
 /// Angaben aus Kopf und Metadaten (ohne die Nutzdaten zu entpacken).
 struct SaveInfo {
     std::uint32_t format_version = 0;
-    std::string game_version; // Spielversion beim Speichern
-    std::string scenario;     // Kennung des Szenarios
-    std::string player_tag;   // Spielerstaat (vom Aufrufer beim Speichern)
+    std::string game_version;   // Spielversion beim Speichern
+    std::string scenario;       // Kennung des Szenarios
+    std::string player_tag;     // Spielerstaat (vom Aufrufer beim Speichern)
+    std::string player_current; // Strömung im Parteienmodus (seit M8), leer = Staat
     Date date;
     std::uint64_t seed = 0;
     std::int64_t days = 0;
@@ -69,7 +71,13 @@ struct SaveInfo {
 
 /// Angaben des Aufrufers beim Speichern.
 struct SaveMeta {
+    SaveMeta() = default;
+    // NOLINTNEXTLINE(google-explicit-constructor): SaveMeta{"SAX"} wie vor M8
+    SaveMeta(std::string tag, std::string current = {})
+        : player_tag(std::move(tag)), player_current(std::move(current)) {}
+
     std::string player_tag;
+    std::string player_current; // Kennung der Strömung im Parteienmodus (seit M8), leer = Staat
 };
 
 /// Spielstand als Bytes. Gleicher Zustand ergibt dieselben Bytes (keine Uhrzeit, kein Rechnername).

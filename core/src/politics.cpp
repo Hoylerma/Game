@@ -178,30 +178,20 @@ struct DistrictWork {
     Fixed report_key; // Entfernung zum Tagungsort in km plus Zufall
 };
 
-DistrictWork elect_district(const World& world, Index parliament_index, Index district_index,
-                            std::uint64_t seed) {
+/// Stimmen eines Wahlkreises ohne Rauschen (Abschnitt 7.1 bis 7.4 und Wahlkampf, Abschnitt 9): Boykott,
+/// Berechtigte, Wähler und Stimmen je Strömung nach Gewichten. Gemeinsam für Wahl und Stimmungsbericht.
+void tally_votes(const World& world, Index parliament_index, Index district_index, DistrictResult& result) {
     const Parliament& parliament = world.parliaments[at(parliament_index)];
     const ElectoralDistrict& district = world.electoral_districts[at(district_index)];
     const ElectionRules& r = world.election_rules;
     const std::size_t currents = world.currents.size();
     const std::size_t professions = world.professions.size();
-    Pcg32 rng = district_rng(seed, parliament_index, district_index);
-
-    DistrictWork work;
-    DistrictResult& result = work.result;
     result.district = district_index;
     result.votes.assign(currents, Fixed{});
-
-    // Meldereihenfolge (Abschnitt 8): nahe am Tagungsort zuerst, mit bis zu 150 km Zufall.
-    const Fixed jitter = rng.uniform(Fixed::zero(), Fixed::from_int(150));
-    if (in_range(world.locations, parliament.seat) && !district.locations.empty()) {
-        const Location& seat = world.locations[at(parliament.seat)];
-        const Location& first = world.locations[at(district.locations.front())];
-        work.report_key =
-            distance_km(seat.longitude, seat.latitude, first.longitude, first.latitude) + jitter;
-    } else {
-        work.report_key = jitter * Fixed::from_int(1000) / Fixed::from_int(150);
-    }
+    const CampaignState* campaign =
+        world.campaign.size() == world.electoral_districts.size() * currents && currents > 0
+            ? &world.campaign[at(district_index) * currents]
+            : nullptr;
 
     // Boykott: Eine Kultur aus der Liste stellt mehr als die Hälfte der Menschen im Wahlkreis.
     std::vector<Fixed> culture_people(world.cultures.size(), Fixed{});
@@ -262,7 +252,14 @@ DistrictWork elect_district(const World& world, Index parliament_index, Index di
             v.income = income;
             v.weight = Fixed::one();
             v.leaning = leanings.size();
-            const std::vector<Fixed> leaning = current_leaning(world, pop, region);
+            // Flugblätter (Wahlkampf): Neigung + je Alphabetisierung des Blocks.
+            std::vector<Fixed> shift = region;
+            if (campaign != nullptr) {
+                for (std::size_t c = 0; c < currents; ++c) {
+                    shift[c] += campaign[c].persuasion * pop.literacy;
+                }
+            }
+            const std::vector<Fixed> leaning = current_leaning(world, pop, shift);
             leanings.insert(leanings.end(), leaning.begin(), leaning.end());
             voters.push_back(v);
         });
@@ -276,6 +273,12 @@ DistrictWork elect_district(const World& world, Index parliament_index, Index di
             }
         }
     }
+    // Versammlungen und Vereine (Wahlkampf): mehr Stimmen der Strömung.
+    if (campaign != nullptr) {
+        for (std::size_t c = 0; c < currents; ++c) {
+            result.votes[c] = result.votes[c] * (Fixed::one() + campaign[c].mobilization + campaign[c].club);
+        }
+    }
     if (parliament.law.indirect) {
         for (std::size_t c = 0; c < currents; ++c) {
             result.votes[c] = result.votes[c] * (c < r.electors.size() ? r.electors[c] : Fixed::one());
@@ -285,6 +288,34 @@ DistrictWork elect_district(const World& world, Index parliament_index, Index di
         // Wer boykottiert, wählt nicht: Berechtigte bleiben stehen, Wähler und Stimmen fallen weg.
         result.voters = Fixed::zero();
         std::fill(result.votes.begin(), result.votes.end(), Fixed{});
+        return;
+    }
+}
+
+DistrictWork elect_district(const World& world, Index parliament_index, Index district_index,
+                            std::uint64_t seed) {
+    const Parliament& parliament = world.parliaments[at(parliament_index)];
+    const ElectoralDistrict& district = world.electoral_districts[at(district_index)];
+    const ElectionRules& r = world.election_rules;
+    const std::size_t currents = world.currents.size();
+    Pcg32 rng = district_rng(seed, parliament_index, district_index);
+
+    DistrictWork work;
+    DistrictResult& result = work.result;
+
+    // Meldereihenfolge (Abschnitt 8): nahe am Tagungsort zuerst, mit bis zu 150 km Zufall.
+    const Fixed jitter = rng.uniform(Fixed::zero(), Fixed::from_int(150));
+    if (in_range(world.locations, parliament.seat) && !district.locations.empty()) {
+        const Location& seat = world.locations[at(parliament.seat)];
+        const Location& first = world.locations[at(district.locations.front())];
+        work.report_key =
+            distance_km(seat.longitude, seat.latitude, first.longitude, first.latitude) + jitter;
+    } else {
+        work.report_key = jitter * Fixed::from_int(1000) / Fixed::from_int(150);
+    }
+
+    tally_votes(world, parliament_index, district_index, result);
+    if (result.boycott) {
         return work;
     }
 
@@ -525,6 +556,169 @@ std::vector<std::int32_t> seats_by_faction(const World& world, const ElectionRes
         ++seats[in_range(seats, deputy.faction) ? at(deputy.faction) : seats.size() - 1];
     }
     return seats;
+}
+
+// ─── Wahlkampf (seit Schritt b2, Abschnitt 9) ──────────────────────────────
+
+namespace {
+
+/// Parlament eines Wahlkreises, wenn seine Wahl noch aussteht; sonst kNone.
+Index pending_parliament(const World& world, Index district) {
+    if (!in_range(world.electoral_districts, district)) {
+        return kNone;
+    }
+    const Index parliament = world.electoral_districts[at(district)].parliament;
+    if (!in_range(world.parliaments, parliament) ||
+        world.date > world.parliaments[at(parliament)].election_day) {
+        return kNone;
+    }
+    for (const ElectionResult& e : world.elections) {
+        if (e.parliament == parliament) {
+            return kNone;
+        }
+    }
+    return parliament;
+}
+
+Fixed& campaign_level(CampaignState& state, CampaignAction action) {
+    switch (action) {
+    case CampaignAction::Leaflets:
+        return state.persuasion;
+    case CampaignAction::Club:
+        return state.club;
+    case CampaignAction::Rally:
+        break;
+    }
+    return state.mobilization;
+}
+
+} // namespace
+
+void ensure_politics_state(World& world) {
+    if (world.parliaments.empty()) {
+        return;
+    }
+    const std::size_t currents = world.currents.size();
+    if (world.campaign.size() != world.electoral_districts.size() * currents) {
+        world.campaign.assign(world.electoral_districts.size() * currents, CampaignState{});
+    }
+    if (world.party_funds.size() != currents) {
+        world.party_funds.assign(currents, Fixed{});
+    }
+    if (world.party_donations.size() != currents) {
+        world.party_donations.assign(currents, Fixed{});
+    }
+}
+
+void collect_donations(World& world) {
+    const std::size_t currents = world.currents.size();
+    if (world.parliaments.empty() || world.party_funds.size() != currents ||
+        world.party_donations.size() != currents) {
+        return;
+    }
+    // Wahlgebiet: Orte in einem Wahlkreis irgendeines Parlaments, aufsteigend.
+    std::vector<bool> in_area(world.locations.size(), false);
+    for (const ElectoralDistrict& d : world.electoral_districts) {
+        for (const Index location : d.locations) {
+            if (in_range(world.locations, location)) {
+                in_area[at(location)] = true;
+            }
+        }
+    }
+    const std::size_t professions = world.professions.size();
+    std::vector<Fixed> support(currents, Fixed{});
+    for (std::size_t l = 0; l < world.locations.size(); ++l) {
+        if (!in_area[l]) {
+            continue;
+        }
+        const Location& loc = world.locations[l];
+        const std::vector<Fixed> region = region_shift(world, static_cast<Index>(l));
+        for (Index p = loc.first_pop; p < loc.first_pop + loc.pop_count; ++p) {
+            const PopBlock& pop = world.pops[at(p)];
+            const std::size_t income_index = l * professions + at(pop.profession);
+            if (!in_range(world.professions, pop.profession) ||
+                income_index >= world.location_income.size()) {
+                continue;
+            }
+            const Fixed income = Fixed::max(Fixed::zero(), world.location_income[income_index]);
+            const Fixed purse = income * pop.size();
+            if (purse <= Fixed::zero()) {
+                continue;
+            }
+            const std::vector<Fixed> leaning = current_leaning(world, pop, region);
+            for (std::size_t c = 0; c < currents; ++c) {
+                support[c] += purse * leaning[c];
+            }
+        }
+    }
+    for (std::size_t c = 0; c < currents; ++c) {
+        world.party_donations[c] = support[c] * world.election_rules.donations;
+        world.party_funds[c] += world.party_donations[c];
+    }
+}
+
+bool campaign_allowed(const World& world, Index current, Index district, CampaignAction action) {
+    const auto a = static_cast<std::size_t>(action);
+    if (a >= kCampaignActions || !in_range(world.currents, current) ||
+        pending_parliament(world, district) == kNone ||
+        world.campaign.size() != world.electoral_districts.size() * world.currents.size() ||
+        !in_range(world.party_funds, current)) {
+        return false;
+    }
+    return world.party_funds[at(current)] >= world.election_rules.campaign[a].cost;
+}
+
+bool apply_campaign(World& world, Index current, Index district, CampaignAction action) {
+    if (!campaign_allowed(world, current, district, action)) {
+        return false;
+    }
+    const CampaignRule& rule = world.election_rules.campaign[static_cast<std::size_t>(action)];
+    CampaignState& state = world.campaign[at(district) * world.currents.size() + at(current)];
+    Fixed& level = campaign_level(state, action);
+    if (rule.cap > Fixed::zero()) {
+        level = Fixed::min(rule.cap, level + rule.effect * (Fixed::one() - level / rule.cap));
+    }
+    world.party_funds[at(current)] -= rule.cost;
+    return true;
+}
+
+void end_campaign(World& world, Index parliament) {
+    const std::size_t currents = world.currents.size();
+    if (world.campaign.size() != world.electoral_districts.size() * currents) {
+        return;
+    }
+    for (std::size_t d = 0; d < world.electoral_districts.size(); ++d) {
+        if (world.electoral_districts[d].parliament != parliament) {
+            continue;
+        }
+        for (std::size_t c = 0; c < currents; ++c) {
+            CampaignState& state = world.campaign[d * currents + c];
+            state.mobilization = Fixed{};
+            state.persuasion = Fixed{};
+        }
+    }
+}
+
+DistrictEstimate estimate_district(const World& world, Index district) {
+    DistrictEstimate estimate;
+    if (!in_range(world.electoral_districts, district) ||
+        !in_range(world.parliaments, world.electoral_districts[at(district)].parliament)) {
+        return estimate;
+    }
+    DistrictResult result;
+    tally_votes(world, world.electoral_districts[at(district)].parliament, district, result);
+    estimate.boycott = result.boycott;
+    estimate.electorate = result.electorate;
+    estimate.voters = result.voters;
+    Fixed total;
+    for (const Fixed v : result.votes) {
+        total += v;
+    }
+    estimate.shares.assign(result.votes.size(), Fixed{});
+    for (std::size_t c = 0; c < result.votes.size() && total > Fixed::zero(); ++c) {
+        estimate.shares[c] = result.votes[c] / total;
+    }
+    return estimate;
 }
 
 } // namespace uhrwerk

@@ -527,6 +527,7 @@ func _check_new_game() -> void:
 	if not listed.any(func(entry: Dictionary) -> bool: return bool(entry.get("player", false))):
 		_fail("Politische Legende: Spielerstaat Lübeck fehlt")
 
+	await _check_party_mode(sim)
 	await _check_election_night(sim)
 
 	# Ein Spielstand von 1648 lässt sich im Spiel von 1848 aus der Liste laden.
@@ -542,6 +543,70 @@ func _check_new_game() -> void:
 		)
 	_clear_saves(dir)
 	print("  Neues Spiel 1848, Modus Verwaltung, Staatswechsel, Spielstand von 1648 geladen")
+
+
+## Parteienmodus (seit M8): Rolle im Spielmenü, Parteipanel statt Staatspanel, Wahlkampf über den
+## Knopf in der Ortsinfo (Wahl oben, kein „Diesen Staat spielen“), Mittel am nächsten Tag weniger,
+## zurück zum Staat über das Parteipanel.
+func _check_party_mode(sim: SimulationClient) -> void:
+	var currents := sim.get_currents()
+	var liberals := -1
+	for i in currents.size():
+		if str(currents[i].get("id", "")) == "liberale":
+			liberals = i
+	sim.advance_days(1) # Spenden am Monatsersten
+	_main.call("_after_time_passed")
+	var menu: GameMenu = _main.call("game_menu")
+	_main.call("open_game_menu")
+	menu.select_role(liberals)
+	_main.call("close_game_menu", false)
+	await _frames(1)
+	var party_panel: PartyPanel = _main.call("party_panel")
+	var state_panel: StatePanel = _main.call("state_panel")
+	var bar: TopBar = _main.call("top_bar")
+	if not party_panel.visible or state_panel.visible or sim.get_player_current() != liberals:
+		_fail("Parteienmodus: Parteipanel %s, Staatspanel %s, Strömung %d statt %d" % [
+			party_panel.visible, state_panel.visible, sim.get_player_current(), liberals
+		])
+		return
+	if not party_panel.facts_text().contains("Taler") or not bar.speed_line_text().contains("Liberale"):
+		_fail("Parteienmodus: Angaben „%s“, Meldung „%s“" % [party_panel.facts_text(), bar.speed_line_text()])
+	_main.call("select_location", sim.get_location_index("mannheim"))
+	await _frames(1)
+	var panel: LocationPanel = _main.call("location_panel")
+	var rally := panel.find_child("Campaign%d" % SimulationClient.CAMPAIGN_VERSAMMLUNG, true, false) as Button
+	var play := panel.find_child("PlayState", true, false) as Button
+	var section := panel.find_child("Election", true, false) as Control
+	var facts := panel.find_child("Facts", true, false) as Control
+	if rally == null or rally.disabled or play.visible or section.get_index() > facts.get_index():
+		_fail("Ortsinfo Mannheim im Parteienmodus: Versammlung %s, Staat spielen %s, Wahl oben %s" % [
+			rally != null and not rally.disabled, play.visible, section.get_index() < facts.get_index()
+		])
+		return
+	var funds := float(sim.get_party(liberals).get("funds", 0.0))
+	rally.pressed.emit()
+	await _frames(1)
+	if not bar.speed_line_text().contains("Versammlung"):
+		_fail("Wahlkampf: keine Meldung (%s)" % bar.speed_line_text())
+	sim.advance_days(1)
+	_main.call("_after_time_passed")
+	await _frames(1)
+	var party := sim.get_party(liberals)
+	if float(party.get("funds", 0.0)) >= funds or not party_panel.facts_text().contains("in 1 Wahlkreis"):
+		_fail("Wahlkampf am nächsten Tag: %s, Panel „%s“" % [str(party), party_panel.facts_text()])
+	var leave := party_panel.find_child("LeaveParty", true, false) as Button
+	leave.pressed.emit()
+	await _frames(1)
+	if (
+		party_panel.visible or not state_panel.visible or sim.get_player_current() != -1
+		or panel.find_child("Campaign", true, false) != null or section.get_index() < facts.get_index()
+	):
+		_fail("Zurück zum Staat: Parteipanel %s, Staatspanel %s, Strömung %d" % [
+			party_panel.visible, state_panel.visible, sim.get_player_current()
+		])
+	print("  Parteienmodus: Rolle im Menü, Versammlung in Mannheim (%s → %s Taler), zurück zum Staat" % [
+		GermanFormat.integer(roundi(funds)), GermanFormat.integer(roundi(float(party.get("funds", 0.0))))
+	])
 
 
 ## Wahlen 1848 (seit M8): Taste Ä, Wahlkreis in der Ortsinfo, Wahlabend am Wahltag mit Meldungen,

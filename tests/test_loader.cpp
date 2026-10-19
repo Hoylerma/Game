@@ -1704,6 +1704,25 @@ TEST_CASE("Lader: Politik (seit M8)") {
                      parliaments);
         expect_error(bad, "'boykott_maerkte' gilt nur mit 'boykott' in parlament landtag", parliaments);
     }
+    SUBCASE("Wahlkampf gelesen und Fehler") {
+        {
+            const LoadResult r = load(dir, "jahresbeginn_1650");
+            INFO(issues_text(r));
+            REQUIRE(r.ok());
+            const uhrwerk::ElectionRules& rules = r.world->election_rules;
+            CHECK(rules.donations == fx("0.05"));
+            CHECK(rules.poll_error == Fixed::from_int(8));
+            CHECK(rules.campaign[0].cost == Fixed::from_int(10));
+            CHECK(rules.campaign[1].effect == fx("0.3"));
+            CHECK(rules.campaign[2].cap == fx("0.1"));
+        }
+        replace_in_file(dir / elections, "verein       { kosten = 40  wirkung = 0.05 hoechstens = 0.1 }",
+                        "verein       { kosten = 40  wirkung = 0.5 hoechstens = 0.1 }");
+        replace_in_file(dir / elections, "        stimmungsfehler = 8\n", "");
+        const LoadResult r = load(dir, "jahresbeginn_1650");
+        expect_error(r, "'wirkung' ist größer als 'hoechstens' in wahlkampf verein", elections);
+        expect_error(r, "Pflichtfeld 'stimmungsfehler' fehlt in wahlkampf", elections);
+    }
     SUBCASE("unbekannter Ort als Sitz") {
         replace_in_file(dir / parliaments, "sitz          = dresden", "sitz          = atlantis");
         expect_error(load(dir, "jahresbeginn_1650"),

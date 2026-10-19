@@ -156,6 +156,7 @@ void Simulation::prepare_population_state() {
     world_.arrivals.resize(count);
     next_targets_.assign(count * professions, Fixed{});
     ensure_economy_state(world_, topology_);
+    ensure_politics_state(world_); // Wahlkampf (seit M8), nur mit Parlamenten
 
     const bool fits = world_.snapshots.size() == count &&
                       world_.snapshot_targets.size() == count * professions &&
@@ -239,6 +240,10 @@ void Simulation::step_day() {
     if (day == 1) {
         reorganize(world_);
         update_markets(world_, topology_, state_spending(world_));
+        // Spenden an die Strömungen (seit M8, politik.md Abschnitt 9), nur mit Parlamenten.
+        if (!world_.parliaments.empty()) {
+            collect_donations(world_);
+        }
     }
 
     // 4. und 5. Bevölkerung der Orte mit heutigem Rechentag (Tage 29–31 haben keine): parallel
@@ -347,6 +352,10 @@ void Simulation::execute(const Command& command) {
         }
         world_.states[static_cast<std::size_t>(command.state)]
             .tax_rates[static_cast<std::size_t>(command.kind)] = command.value;
+        return;
+    case CommandType::Campaign:
+        // Ungültige oder zu teure Befehle bleiben ohne Wirkung (wie beim Steuersatz).
+        apply_campaign(world_, command.state, command.target, command.action);
         return;
     }
 }
@@ -575,6 +584,7 @@ void Simulation::run_elections() {
             continue;
         }
         world_.elections.push_back(run_election(world_, index, config_.seed, &pool_.get()));
+        end_campaign(world_, index);
         const ElectionResult& election = world_.elections.back();
         const std::vector<std::int32_t> seats = seats_by_current(world_, election);
         std::size_t strongest = 0;

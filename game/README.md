@@ -69,6 +69,7 @@ Optionen stehen nach `--` (Benutzerargumente):
 | `--szenario=<id>` | Szenario beim Start, z. B. `voelkerfruehling` (seit M7; Standard `westfaelischer_frieden`); gilt auch ohne `--screenshot` |
 | `--staat=<TAG>` | Spielerstaat beim Start, z. B. `BAV` (seit M7; Standard: Spieler des Szenarios) |
 | `--wahlabend` | Wahlabend der letzten Wahl mit dem ganzen Ergebnis vor dem Screenshot öffnen (seit M8; dafür `--tage` über den Wahltag, 1848 z. B. `--tage=62`) |
+| `--partei=<strömung>` | Parteienmodus mit dieser Strömung beim Start, z. B. `liberale` (seit M8; nur in Szenarien mit Parlament, 1848) |
 
 Auf der Kernraum-Karte bei 1600 × 900 Pixeln reicht die ferne Stufe (Staatsnamen) bis etwa
 `--zoom=2,7`, die mittlere (Kreisnamen) bis etwa `--zoom=6,3`, darüber folgt die nahe
@@ -107,6 +108,8 @@ Modus `--headless` gibt es kein Bild; ohne Bildschirm hilft `xvfb-run`.
 | Klick auf einen Chronikeintrag | Ort des Ereignisses auswählen und anfahren |
 | F10, Knopf „Menü“ | Spielmenü: Neues Spiel mit Wahl des Lesezeichens (1648 oder 1848, seit M7), Speichern unter einem Namen, Laden aus der Liste, Schnellspeichern und -laden; die Zeit hält an, Esc oder F10 schließt es (seit M6) |
 | „Diesen Staat spielen“ (Ortsinfo) | Den Besitzer des Ortes als Spielerstaat übernehmen (seit M7); nach einem neuen Spiel nennt ein Hinweis die hervorgehobenen Staaten des Lesezeichens |
+| Rolle (Spielmenü) | seit M8, 1848: „Staat: …“ oder „Partei: …“. Im **Parteienmodus** steht links das Parteipanel (Mittel, Spenden, Wahltag, Wahlkampf; nach der Wahl Sitze, Fraktion und Abgeordnete) statt des Staatspanels; „Staat spielen“ führt zurück |
+| Wahlkampf (Ortsinfo) | seit M8, im Parteienmodus vor der Wahl: Stimmungsbericht des Wahlkreises (Schätzung mit ± 8 Punkten Fehler) und die Knöpfe Versammlung, Flugblätter und Verein gründen; Wirkung ab dem nächsten Tag ([docs/technik/politik.md](../docs/technik/politik.md), Abschnitt 9) |
 | F5 | Schnellspeichern (`schnellspeicher.einigkeit`) |
 | F9 | Schnellladen |
 
@@ -153,7 +156,7 @@ game/
 │   │   ├── map_labels.gd          MapLabels: Namen im Bildschirmraum mit Rastern
 │   │   ├── map_label_layout.gd    MapLabelLayout: Namenspunkte von Staaten und Kreisen
 │   │   └── railway_layer.gd       RailwayLayer: Eisenbahnstrecken über der Karte (seit M7)
-│   └── ui/                    Skripte der Panels, Legendenberechnung, Farbpalette; Wahlabend (election_night.gd, seit M8)
+│   └── ui/                    Skripte der Panels, Legendenberechnung, Farbpalette; Wahlabend (election_night.gd) und Parteipanel (party_panel.gd, beide seit M8)
 ├── shaders/map.gdshader       Kartenshader (canvas_item)
 ├── theme/einigkeit_theme.tres Theme der Oberfläche (Papier und Tinte)
 └── tests/                     Einheiten-, Rauch-, Klick- und Leistungstest, siehe tests/README.md
@@ -169,7 +172,7 @@ oberen Leiste oder F10 und hält die Zeit an: Name des Spielstands (vorbelegt mi
 Liste der Spielstände (zuletzt geänderte zuerst, mit Datum, Staat und Änderungszeit; Dateien, die
 nicht zu den Spieldaten passen oder keine Spielstände sind, erscheinen ausgegraut mit dem Grund
 als Tooltip; Spielstände des anderen Lesezeichens sind ladbar und wechseln es), Neues Spiel
-(„Starten“ verlangt einen zweiten Klick, weil die laufende Partie endet), Laden, Schnellspeichern, Schnellladen, Weiterspielen; seit M8 „Letzte Wahl“ (Wahlabend mit dem ganzen Ergebnis). Die Namen `schnellspeicher`
+(„Starten“ verlangt einen zweiten Klick, weil die laufende Partie endet), Laden, Schnellspeichern, Schnellladen, Weiterspielen; seit M8 „Letzte Wahl“ (Wahlabend mit dem ganzen Ergebnis) und die Rolle (Staat oder Partei, steht im Spielstand). Die Namen `schnellspeicher`
 und `autosave_…` sind reserviert. F5 und F9 wirken auch ohne
 Menü. Am **1. Januar** speichert das Spiel automatisch; `autosave_1` ist der neueste, die drei
 letzten bleiben. Nach dem Laden steht die Zeit, die Auswahl ist aufgehoben, und Grenzen, Namen,

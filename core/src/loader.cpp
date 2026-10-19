@@ -2098,11 +2098,11 @@ private:
         }
         election_rules_found_ = true;
         Fields f(*rules, file.name, "wahlregeln", issues_,
-                 {"maenneranteil", "junge_im_wahlalter", "junge_ab_24", "beteiligung_basis",
-                  "beteiligung_bildung", "beteiligung_stadt", "beteiligung_not", "beteiligung_min",
-                  "beteiligung_max", "not_unter", "neigung_basis", "neigung_bildung", "neigung_not",
-                  "neigung_stadt", "wahlmaenner", "rauschen", "zug_zur_mitte", "position_rauschen",
-                  "fraktionslos"});
+                 {"maenneranteil",       "junge_im_wahlalter", "junge_ab_24",     "beteiligung_basis",
+                  "beteiligung_bildung", "beteiligung_stadt",  "beteiligung_not", "beteiligung_min",
+                  "beteiligung_max",     "not_unter",          "neigung_basis",   "neigung_bildung",
+                  "neigung_not",         "neigung_stadt",      "wahlmaenner",     "rauschen",
+                  "zug_zur_mitte",       "position_rauschen",  "fraktionslos",    "wahlkampf"});
         ElectionRules& r = world_.election_rules;
         const Range unit = between(fx(0), fx(1));
         r.male_share = f.fixed("maenneranteil", unit).value_or(Fixed{});
@@ -2138,6 +2138,32 @@ private:
         r.position_pull = f.fixed("zug_zur_mitte", unit).value_or(Fixed{});
         r.position_noise = f.fixed("position_rauschen", between(fx(0), fx(100))).value_or(Fixed{});
         r.independent_share = f.fixed("fraktionslos", unit).value_or(Fixed{});
+        // Wahlkampf (seit Schritt b2): Spenden, Fehler des Stimmungsberichts, Kosten und Wirkung je Art.
+        if (const ScriptNode* node = f.block("wahlkampf", "wahlkampf { spenden = … versammlung { … } … }")) {
+            Fields c(*node, file.name, "wahlkampf", issues_,
+                     {"spenden", "stimmungsfehler", "versammlung", "flugblaetter", "verein"});
+            r.donations = c.fixed("spenden", unit).value_or(Fixed{});
+            r.poll_error = c.fixed("stimmungsfehler", between(fx(0), fx(50))).value_or(Fixed{});
+            constexpr std::array<std::string_view, kCampaignActions> kinds = {"versammlung", "flugblaetter",
+                                                                              "verein"};
+            for (std::size_t k = 0; k < kinds.size(); ++k) {
+                const ScriptNode* action = c.block(kinds[k], "{ kosten = … wirkung = … hoechstens = … }");
+                if (action == nullptr) {
+                    continue;
+                }
+                Fields a(*action, file.name, "wahlkampf " + std::string(kinds[k]), issues_,
+                         {"kosten", "wirkung", "hoechstens"});
+                CampaignRule& rule = r.campaign[k];
+                rule.cost = a.fixed("kosten", between(fx(0), fx(1000000))).value_or(Fixed{});
+                rule.effect = a.fixed("wirkung", unit).value_or(Fixed{});
+                rule.cap = a.fixed("hoechstens", unit).value_or(Fixed{});
+                if (rule.effect > rule.cap) {
+                    issues_.error(file.name, action->line,
+                                  "'wirkung' ist größer als 'hoechstens' in wahlkampf " +
+                                      std::string(kinds[k]));
+                }
+            }
+        }
     }
 
     /// Ebene der Parlamente nach drop_states_without_land: Der Staat muss zum Startdatum bestehen.

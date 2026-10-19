@@ -24,6 +24,11 @@ const TAX_AKZISE := 1
 const TAX_ZOLL := 2
 const TAX_KIND_COUNT := 3
 
+## Arten des Wahlkampfs für campaign (seit M8, wie CAMPAIGN_* der Brücke).
+const CAMPAIGN_VERSAMMLUNG := 0
+const CAMPAIGN_FLUGBLAETTER := 1
+const CAMPAIGN_VEREIN := 2
+
 ## Alle Methoden, die die Oberfläche benutzt.
 const REQUIRED_METHODS: Array[StringName] = [
 	&"load_scenario",
@@ -64,6 +69,11 @@ const REQUIRED_METHODS: Array[StringName] = [
 	&"get_election",
 	&"get_location_electoral_district_indices",
 	&"get_shown_parliament",
+	&"campaign",
+	&"get_party",
+	&"get_campaign",
+	&"set_player_current",
+	&"get_player_current",
 	&"set_tax_rate_percent",
 	&"set_tax_percent",
 	&"get_max_tax_rate_percent",
@@ -360,6 +370,34 @@ func get_shown_parliament() -> int:
 	return int(_native.call(&"get_shown_parliament"))
 
 
+## Wahlkampf der Strömung current im Wahlkreis district (seit M8): Befehl für den nächsten Tag;
+## false, wenn die Wahl nicht mehr aussteht oder die Mittel nicht reichen.
+func campaign(current: int, district: int, action: int) -> bool:
+	return bool(_native.call(&"campaign", current, district, action))
+
+
+## Partei (seit M8): { index, id, name, color, funds, donations, campaign_districts, parliament_name,
+## election_date_text, faction_date_text, held, seats, seated, deputies, factions_formed,
+## faction_name, faction_own, faction_seats }.
+func get_party(current: int) -> Dictionary:
+	return _as_dictionary(_native.call(&"get_party", current))
+
+
+## Wahlkampf in einem Wahlkreis (seit M8): { district_name, seats, open, mobilization, persuasion,
+## club, actions: [{ action, name, cost, allowed }], poll (Prozent je Strömung), poll_error, boycott }.
+func get_campaign(district: int, current: int) -> Dictionary:
+	return _as_dictionary(_native.call(&"get_campaign", district, current))
+
+
+## Parteienmodus (seit M8): Strömung, die man spielt; -1 = Staat. Steht im Spielstand.
+func set_player_current(current: int) -> bool:
+	return bool(_native.call(&"set_player_current", current))
+
+
+func get_player_current() -> int:
+	return int(_native.call(&"get_player_current"))
+
+
 func get_checksum() -> String:
 	return str(_native.call(&"get_checksum"))
 
@@ -377,7 +415,8 @@ func load_game(data_path: String, path: String) -> String:
 
 
 ## Angaben zu einem Spielstand ohne ihn zu laden: { ok, compatible, reason, scenario, date,
-## date_text, days, player_tag, player_name, format_version, game_version, checksum } (seit M6).
+## date_text, days, player_tag, player_name, player_current, format_version, game_version, checksum }
+## (seit M6; player_current seit M8: Strömung im Parteienmodus, leer = Staat).
 func get_save_info(path: String) -> Dictionary:
 	return _as_dictionary(_native.call(&"get_save_info", path))
 

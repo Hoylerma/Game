@@ -28,6 +28,7 @@ func _initialize() -> void:
 	_test_location_catalog()
 	_test_save_slots()
 	_test_election_tally()
+	_test_party_panel()
 	if _failures.is_empty():
 		print("UNIT OK (%d Prüfungen)" % _count)
 		quit(0)
@@ -85,11 +86,14 @@ func _test_launch_options() -> void:
 	var bad_args := PackedStringArray(
 		[
 			"--tage=-3", "--kartenmodus=13", "--unbekannt", "--zoom=0", "--zoom=viel", "--szenario",
-			"--staat="
+			"--staat=", "--partei="
 		]
 	)
 	var bad := LaunchOptions.parse(bad_args)
-	_equal(bad.problems.size(), 7, "fehlerhafte Optionen gemeldet")
+	_equal(bad.problems.size(), 8, "fehlerhafte Optionen gemeldet")
+	var party := LaunchOptions.parse(PackedStringArray(["--szenario=voelkerfruehling", "--partei=liberale"]))
+	_true(party.party_id == "liberale" and party.problems.is_empty(), "Option --partei (seit M8)")
+	_equal(defaults.party_id, "", "ohne --partei spielt man den Staat")
 	var chosen := LaunchOptions.parse(
 		PackedStringArray(["--szenario=voelkerfruehling", "--staat=bav"])
 	)
@@ -591,3 +595,29 @@ func _test_election_tally() -> void:
 		1,
 		"1849 ohne 29. Februar"
 	)
+
+
+func _test_party_panel() -> void:
+	var panel := PartyPanel.new()
+	panel._ready() # baut den Inhalt; in _initialize ist der Baum noch nicht bereit
+	panel.show_party({
+		"name": "Liberale", "funds": 1234.0, "donations": 100.0, "parliament_name": "Nationalversammlung",
+		"held": false, "election_date_text": "1. Mai 1848", "campaign_districts": 2,
+	})
+	var before := panel.facts_text()
+	_true(
+		before.contains("1.234") and before.contains("am 1. Mai 1848") and before.contains("in 2 Wahlkreisen"),
+		"Parteipanel vor der Wahl: Mittel, Wahltag, Wahlkampf (%s)" % before
+	)
+	panel.show_party({
+		"name": "Liberale", "parliament_name": "Nationalversammlung", "held": true, "seats": 3, "seated": 10,
+		"factions_formed": true, "faction_name": "Casino", "faction_own": 2, "faction_seats": 4,
+		"deputies": [{"district_name": "Mannheim", "state_name": "Baden", "faction_name": "Casino"}],
+	})
+	var after := panel.facts_text()
+	_true(
+		after.contains("3 von 10") and after.contains("Casino (2 eigene von 4)")
+		and not after.contains("Wahlkampf"),
+		"Parteipanel nach der Wahl: Sitze und Fraktion (%s)" % after
+	)
+	panel.free()

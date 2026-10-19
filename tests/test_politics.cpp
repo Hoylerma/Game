@@ -358,7 +358,7 @@ TEST_CASE("Politik: Spielstand vor und nach dem Wahltag") {
         const auto info = uhrwerk::read_save_info(uhrwerk::save_game(year, SaveMeta{}));
         REQUIRE(info.has_value());
         CHECK_MESSAGE(
-            uhrwerk::hex16(info->payload_hash) == "53d0d332aa53477c",
+            uhrwerk::hex16(info->payload_hash) == "ec2bc31377c9c171",
             "Prüfwert der Nutzdaten geändert: Formatversion erhöhen oder Referenzwert neu festhalten");
     }
 }
@@ -499,4 +499,138 @@ TEST_CASE("Wahllabor: Messung und Zusammenfassung") {
     const uhrwerk::ElectionSummary plain = uhrwerk::summarize_elections(w, 0, runs, nullptr);
     CHECK(plain.violations.empty());
     CHECK(plain.by_current.size() == 3);
+}
+
+// ─── Wahlkampf (seit M8, Schritt b2) ─────────────────────────────────────────
+
+namespace {
+
+uhrwerk::Command campaign_command(Index current, Index district, uhrwerk::CampaignAction action) {
+    uhrwerk::Command c;
+    c.type = uhrwerk::CommandType::Campaign;
+    c.state = current;
+    c.target = district;
+    c.action = action;
+    return c;
+}
+
+} // namespace
+
+TEST_CASE("Wahlkampf: Spenden, Kosten und abnehmender Ertrag") {
+    Simulation sim(landtag_world());
+    const World& w = sim.world();
+    const std::size_t currents = w.currents.size();
+    REQUIRE(w.campaign.size() == w.electoral_districts.size() * currents);
+    REQUIRE(w.party_funds.size() == currents);
+    sim.step_day(); // 1. Januar 1650: Spenden des Monats
+    const Index democrats = w.find_current("demokraten");
+    const auto d = static_cast<std::size_t>(democrats);
+    REQUIRE(w.party_donations[d] > Fixed::zero());
+    CHECK(w.party_funds[d] == w.party_donations[d]);
+    const uhrwerk::CampaignRule& rally = w.election_rules.campaign[0];
+
+    const Fixed before = w.party_funds[d];
+    sim.submit(campaign_command(democrats, 0, uhrwerk::CampaignAction::Rally));
+    sim.submit(campaign_command(democrats, 0, uhrwerk::CampaignAction::Rally));
+    // Ungültig: unbekannte Strömung, unbekannter Wahlkreis, unbekannte Art.
+    sim.submit(campaign_command(-1, 0, uhrwerk::CampaignAction::Rally));
+    sim.submit(campaign_command(democrats, 99, uhrwerk::CampaignAction::Rally));
+    sim.submit(campaign_command(democrats, 0, static_cast<uhrwerk::CampaignAction>(3)));
+    sim.step_day();
+    const uhrwerk::CampaignState& state = w.campaign[d];
+    const Fixed first = rally.effect;
+    const Fixed second = first + rally.effect * (Fixed::one() - first / rally.cap);
+    CHECK(state.mobilization == second);
+    CHECK(w.party_funds[d] == before - rally.cost - rally.cost);
+    CHECK(uhrwerk::campaign_allowed(w, democrats, 0, uhrwerk::CampaignAction::Club) ==
+          (w.party_funds[d] >= w.election_rules.campaign[2].cost));
+
+    SUBCASE("ohne Mittel kein Wahlkampf") {
+        World poor = w;
+        poor.party_funds[d] = Fixed{};
+        CHECK_FALSE(uhrwerk::campaign_allowed(poor, democrats, 0, uhrwerk::CampaignAction::Leaflets));
+        CHECK_FALSE(uhrwerk::apply_campaign(poor, democrats, 0, uhrwerk::CampaignAction::Leaflets));
+        CHECK(poor.campaign[d].persuasion == Fixed::zero());
+    }
+    SUBCASE("Obergrenze") {
+        World rich = w;
+        rich.party_funds[d] = Fixed::from_int(1'000'000);
+        for (int i = 0; i < 200; ++i) {
+            uhrwerk::apply_campaign(rich, democrats, 0, uhrwerk::CampaignAction::Rally);
+        }
+        CHECK(rich.campaign[d].mobilization <= rally.cap);
+        CHECK(rich.campaign[d].mobilization > rally.cap - fx("0.01"));
+    }
+}
+
+TEST_CASE("Wahlkampf: Wirkung auf die Stimmen und Ende mit der Wahl") {
+    Simulation sim(landtag_world());
+    sim.step_day();
+    const World& w = sim.world();
+    const Index democrats = w.find_current("demokraten");
+    const auto d = static_cast<std::size_t>(democrats);
+    const uhrwerk::DistrictEstimate plain = uhrwerk::estimate_district(w, 0);
+    REQUIRE(plain.shares.size() == w.currents.size());
+    CHECK(std::abs(sum(plain.shares).to_double() - 1.0) < 0.001);
+
+    World campaigned = w;
+    campaigned.party_funds[d] = Fixed::from_int(1000);
+    REQUIRE(uhrwerk::apply_campaign(campaigned, democrats, 0, uhrwerk::CampaignAction::Rally));
+    const uhrwerk::DistrictEstimate rally = uhrwerk::estimate_district(campaigned, 0);
+    CHECK(rally.shares[d] > plain.shares[d]);
+    REQUIRE(uhrwerk::apply_campaign(campaigned, democrats, 0, uhrwerk::CampaignAction::Leaflets));
+    const uhrwerk::DistrictEstimate leaflets = uhrwerk::estimate_district(campaigned, 0);
+    CHECK(leaflets.shares[d] > rally.shares[d]);
+    CHECK(uhrwerk::estimate_district(campaigned, 1).shares == uhrwerk::estimate_district(w, 1).shares);
+
+    // Bis zum Wahltag wirkt alles; danach bleiben nur die Vereine.
+    sim.submit(campaign_command(democrats, 0, uhrwerk::CampaignAction::Rally));
+    sim.submit(campaign_command(democrats, 0, uhrwerk::CampaignAction::Club));
+    step_to(sim, kElectionDay);
+    CHECK(w.campaign[d].mobilization > Fixed::zero());
+    sim.submit(campaign_command(democrats, 1, uhrwerk::CampaignAction::Rally)); // am Wahltag: zählt
+    sim.step_day();
+    REQUIRE(w.elections.size() == 1);
+    CHECK(w.campaign[d].mobilization == Fixed::zero());
+    CHECK(w.campaign[d].persuasion == Fixed::zero());
+    CHECK(w.campaign[d].club > Fixed::zero());
+    const Fixed funds = w.party_funds[d];
+    sim.submit(campaign_command(democrats, 0, uhrwerk::CampaignAction::Rally)); // nach der Wahl: nichts
+    sim.step_day();
+    CHECK(w.party_funds[d] == funds);
+    CHECK_FALSE(uhrwerk::campaign_allowed(w, democrats, 0, uhrwerk::CampaignAction::Rally));
+}
+
+TEST_CASE("Wahlkampf: Wiederholung und Spielstand mit Wahlkampfbefehlen") {
+    const auto play = [](Simulation& sim, std::int64_t days) {
+        const World& w = sim.world();
+        while (sim.days_elapsed() < days) {
+            const std::int64_t day = sim.days_elapsed();
+            if (day % 5 == 1) {
+                const auto current = static_cast<Index>(day % static_cast<std::int64_t>(w.currents.size()));
+                const auto action = static_cast<uhrwerk::CampaignAction>(day % 3);
+                sim.submit(campaign_command(current, static_cast<Index>(day % 2), action));
+            }
+            sim.step_day();
+        }
+    };
+    Simulation one(landtag_world(), SimConfig{kSeed, 1});
+    Simulation four(landtag_world(), SimConfig{kSeed, 4});
+    play(one, 40);
+    play(four, 40);
+    CHECK(one.checksum() == four.checksum());
+    const Bytes bytes = uhrwerk::save_game(one, SaveMeta{"SAX"});
+    LoadedGame loaded = load(bytes);
+    INFO(loaded.error);
+    REQUIRE(loaded.ok());
+    CHECK(loaded.simulation->command_log() == one.command_log());
+    play(one, 90);
+    play(*loaded.simulation, 90);
+    CHECK(loaded.simulation->checksum() == one.checksum());
+
+    const uhrwerk::Replay replay = uhrwerk::make_replay(one);
+    const uhrwerk::ReplayResult result = uhrwerk::run_replay(replay, landtag_world(), 2);
+    INFO(result.error);
+    CHECK(result.ok);
+    CHECK(result.mismatch_day == -1);
 }
