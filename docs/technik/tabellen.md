@@ -143,7 +143,7 @@ Bevölkerungsangabe oder keines von beiden.
 |---|---|
 | `tag` | Staatstag |
 | `ab` | Datum, ab dem der Wert gilt |
-| `feld` | `name`, `kurzname`, `hauptstadt`, `regierungsform`, `herrscher`, `konfession`, `schatz`, `kontribution`, `akzise`, `zoll`, `hofhaltung`, `heer`, `schulden` (die letzten fünf und die drei Steuern seit M5; `steuersatz` heißt seit M5 `kontribution`), `zollverein` (seit M7, `ja`/`nein`) |
+| `feld` | `name`, `kurzname`, `hauptstadt`, `regierungsform`, `herrscher`, `konfession`, `schatz`, `kontribution`, `akzise`, `zoll`, `hofhaltung`, `heer`, `schulden` (die letzten fünf und die drei Steuern seit M5; `steuersatz` heißt seit M5 `kontribution`), `zollverein` (seit M7, `ja`/`nein`); seit M8 `verfassung` (`keine`, `staendisch`, `konstitutionell`), `wahlrecht` (`keines`, `staendisch`, `zensus`, `dreiklassen`, `allgemein_maenner`), `wahlsystem` (`stichwahl`, `relativ`), `wahl_indirekt` (`ja`/`nein`), `wahl_zensus` (Zahl) |
 | `wert` | Wert im Format des Felds (Ortskennung, Konfessionskennung, Zahl, Text) |
 | `sicherheit`, `quelle` | siehe oben |
 
@@ -223,6 +223,8 @@ Sie erzeugen daraus die Zeilen von `besitz.csv` zum 1848.03.01 und von `bevoelke
 - seit M7: unbekannte Verwaltungseinheit (in `besitz.csv` oder als `ueber`), Einheit eines anderen
   Staates als der Besitzer bzw. die übergeordnete Einheit, Zyklus über `ueber`, `bund` und
   `zollverein` weder `ja`, `nein` noch leer
+- seit M8: ein Wert von `verfassung`, `wahlrecht`, `wahlsystem` oder `wahl_indirekt` außerhalb der
+  erlaubten Werte, `wahl_zensus` keine Zahl von 0 bis 1.000.000
 
 **Warnungen** (Ausreißer, vermutlich Tippfehler):
 

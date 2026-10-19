@@ -1,0 +1,35 @@
+# Politische Strömungen (Meilenstein M8, docs/technik/politik.md Abschnitt 3.1).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.19. Die Position auf der Links-rechts-Achse
+# reicht von −100 (Volkssouveränität, Republik) bis +100 (monarchisches Prinzip, Restauration); sie
+# ordnet die Stichwahl und die Fraktionen der Parlamente. Spielwerte nach Kapitel 11, Abschnitt 2.1.
+
+stroemung konservative {
+    name     = "Konservative"
+    farbe    = { 42 52 92 }
+    position = 70            # Adel, Hof, orthodoxe Protestanten; Legitimisten
+}
+
+stroemung katholiken {
+    name     = "Politischer Katholizismus"
+    farbe    = { 74 58 44 }
+    position = 35            # Piusvereine 1848; Kirchenfreiheit, großdeutsch
+}
+
+stroemung liberale {
+    name     = "Konstitutionelle Liberale"
+    farbe    = { 206 160 40 }
+    position = 15            # Bildungs- und Wirtschaftsbürgertum; Heppenheim 1847, Märzministerien
+}
+
+stroemung demokraten {
+    name     = "Demokraten"
+    farbe    = { 192 54 44 }
+    position = -45           # Kleinbürgertum, Handwerker, Studenten; Offenburg 1847
+}
+
+stroemung arbeiter {
+    name     = "Frühe Arbeiterbewegung"
+    farbe    = { 118 22 34 }
+    position = -75           # Handwerksgesellen, Arbeiter; Arbeiterverbrüderung 1848
+}

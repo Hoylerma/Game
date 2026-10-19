@@ -22,5 +22,7 @@ staat NAS {
         heer           = 6
         schulden       = 379000
         zollverein     = ja
+        verfassung     = konstitutionell
+        wahlrecht      = staendisch
     }
 }

@@ -22,5 +22,7 @@ staat OLD {
         heer           = 6
         schulden       = 98000
         zollverein     = nein
+        verfassung     = keine
+        wahlrecht      = keines
     }
 }

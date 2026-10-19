@@ -761,6 +761,7 @@ ContentFingerprint content_fingerprint(const World& w) {
         h.fixed(pr.literacy);
         h.i64(pr.city_profession);
         h.fixed(pr.agrarian_levy);
+        h.fixed(pr.self_employed);
     });
     p[5] = hash_list(w.goods, [](Fnv& h, const Good& g) {
         h.text(g.id);
@@ -850,6 +851,60 @@ ContentFingerprint content_fingerprint(const World& w) {
         h.i64(l.admin);
         h.flag(l.federal);
     });
+    // Politik (seit M8): Strömungen, Interessengruppen, Parlamente und die Wahlordnung der Staaten.
+    {
+        const auto law = [](Fnv& h, const ElectoralLaw& l) {
+            h.u64(static_cast<std::uint64_t>(l.franchise));
+            h.u64(static_cast<std::uint64_t>(l.system));
+            h.flag(l.indirect);
+            h.fixed(l.census_threshold);
+        };
+        const auto fixeds = [](Fnv& h, const std::vector<Fixed>& values) {
+            h.u64(values.size());
+            for (const Fixed v : values) {
+                h.fixed(v);
+            }
+        };
+        Fnv h;
+        h.u64(w.currents.size());
+        for (const PoliticalCurrent& c : w.currents) {
+            h.text(c.id);
+            h.fixed(c.position);
+        }
+        h.u64(w.interest_groups.size());
+        for (const InterestGroup& g : w.interest_groups) {
+            h.text(g.id);
+            fixeds(h, g.professions);
+            fixeds(h, g.confessions);
+            h.flag(g.by_literacy);
+            fixeds(h, g.leaning);
+        }
+        h.u64(w.parliaments.size());
+        for (const Parliament& pa : w.parliaments) {
+            h.text(pa.id);
+            h.i64(pa.state);
+            h.i64(pa.seats);
+            h.i64(to_day_number(pa.election_day));
+            law(h, pa.law);
+            h.i64(to_day_number(pa.faction_day));
+            h.u64(pa.boycott_cultures.size());
+            for (const Index c : pa.boycott_cultures) {
+                h.i64(c);
+            }
+            h.u64(pa.factions.size());
+            for (const Faction& f : pa.factions) {
+                h.text(f.id);
+                h.fixed(f.from);
+                h.fixed(f.to);
+            }
+        }
+        h.u64(w.states.size());
+        for (const State& s : w.states) {
+            h.u64(static_cast<std::uint64_t>(s.constitution));
+            law(h, s.law);
+        }
+        p[13] = h.value();
+    }
     fp.total = MetaReader::content_fingerprint_total(fp.parts);
     return fp;
 }

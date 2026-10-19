@@ -69,18 +69,19 @@ mitgespeichert. Dazu kommt die **Startprüfsumme** (Prüfsumme des Startzustands
 Ein Spielstand enthält nur den Zustand. Beim Laden lädt der Kern zuerst den Inhalt des Szenarios
 aus dem Datenordner (wie beim Spielstart) und überschreibt dann den Zustand. Damit das passt, trägt
 der Spielstand einen **Inhaltsfingerabdruck**: FNV-1a-64 je Bereich über alles am Inhalt, was die
-Simulation beeinflusst, und ein Gesamtwert über die 13 Bereiche:
+Simulation beeinflusst, und ein Gesamtwert über die 14 Bereiche (seit M8; vorher 13):
 
 | Bereich | Inhalt |
 |---|---|
-| `regeln` | alle 61 Regelwerte (ein `static_assert` auf die Zahl der Felder von `Rules` erinnert an neue Felder, auch wenn sie in eine Ausrichtungslücke passen) |
+| `regeln` | alle 62 Regelwerte (ein `static_assert` auf die Zahl der Felder von `Rules` erinnert an neue Felder, auch wenn sie in eine Ausrichtungslücke passen) |
 | `gelaende`, `konfessionen`, `kulturen` | Kennungen; Ertragsfaktor und Tragfähigkeit bzw. Alphabetisierungsfaktor |
-| `berufe` | Kennung, Schicht, steuerpflichtig, Anteile Stadt/Land, Agrarberuf, Alphabetisierung, Stadtberuf, Agrarabgabe |
+| `berufe` | Kennung, Schicht, steuerpflichtig, Anteile Stadt/Land, Agrarberuf, Alphabetisierung, Stadtberuf, Agrarabgabe, Anteil „selbstständig“ (seit M8) |
 | `gueter`, `beduerfnisse` | Kennung, Basispreis, Weltmarktfaktor; Hunger und Warenkörbe je Schicht |
 | `betriebe` | Kennung, Beruf, Erzeugung, Vorleistungen, Agrar, Standort, Vorkommen, Handel, Gewicht, Geländefaktoren |
-| `maerkte`, `vorkommen` | Kennungen und Landschaften; Kennungen der Vorkommen |
+| `maerkte`, `vorkommen` | Kennungen und Landschaften, Eisenbahnen mit allen Abschnitten (seit M7); Kennungen der Vorkommen |
 | `staaten`, `kreise` | Kennung, Kurzname, Konfession des Herrscherhauses und Zollverein (seit M7) der Staaten, die zum Startdatum bestehen; Kennungen der Kreise; Verwaltungseinheiten mit Kennung, Art und übergeordneter Einheit (seit M7) |
 | `orte` | Kennung, Name, Gelände, Kreis, Lage, Fläche, Stadt, Markt, Vorkommen, Hafen, Verwaltungseinheit und Bundesgebiet (seit M7); die Zahl der Orte |
+| `politik` (seit M8) | Strömungen (Kennung, Position), Interessengruppen (Mitglieder, Neigung), Parlamente mit Wahl und Fraktionen, Verfassung und Wahlordnung der Staaten ([politik.md](politik.md)) |
 
 **Nicht** dazu gehören volle Staatsnamen, Farben, Quellen und Beschreibungen: Eine korrigierte
 Quelle macht alte Spielstände nicht unbrauchbar. Der **Kurzname der Staaten und der Name der Orte

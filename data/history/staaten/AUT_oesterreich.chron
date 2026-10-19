@@ -22,6 +22,8 @@ staat AUT {
         heer           = 10
         schulden       = 35602000
         zollverein     = nein
+        verfassung     = staendisch
+        wahlrecht      = staendisch
     }
 
     1848.12.02 = {

@@ -22,6 +22,8 @@ staat BAV {
         heer           = 8
         schulden       = 12998000
         zollverein     = ja
+        verfassung     = konstitutionell
+        wahlrecht      = staendisch
     }
 
     1848.03.20 = {

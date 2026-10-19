@@ -50,5 +50,7 @@ staat BWO {
         heer           = 6
         schulden       = 247000
         zollverein     = ja
+        verfassung     = konstitutionell
+        wahlrecht      = staendisch
     }
 }

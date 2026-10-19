@@ -1,0 +1,18 @@
+# Testdaten: ein Landtag, nur im Szenario jahresbeginn_1650 (seit M8)
+parlament landtag {
+    name          = "Sächsischer Landtag"
+    ebene         = SAX
+    sitze         = 4
+    seit          = 1649.01.01
+    wahltag       = 1650.03.01
+    wahlrecht     = allgemein_maenner
+    wahlsystem    = stichwahl
+    wahl_indirekt = ja
+    fraktionen_ab = 1650.06.01
+    boykott       = { sorben }
+    quelle        = "Testdaten"
+
+    fraktion rechte  { name = "Rechte"  farbe = { 40 50 90 }   von = 30   bis = 100 }
+    fraktion mitte   { name = "Mitte"   farbe = { 200 160 40 } von = -10  bis = 30 }
+    fraktion linke   { name = "Linke"   farbe = { 190 50 40 }  von = -100 bis = -10 }
+}

@@ -22,5 +22,7 @@ staat SCG {
         heer           = 6
         schulden       = 134000
         zollverein     = ja
+        verfassung     = konstitutionell
+        wahlrecht      = staendisch
     }
 }

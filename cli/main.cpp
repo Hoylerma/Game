@@ -434,6 +434,20 @@ std::string describe_locations(const World& w) {
     return plural(w.locations.size(), "Ort", "Orte") + " " + location_data_split(w);
 }
 
+/// Strömungen, Interessengruppen und Parlamente mit Wahltag (seit M8).
+std::string politics_summary(const World& w) {
+    std::string text = plural(w.currents.size(), "Strömung", "Strömungen") + ", " +
+                       plural(w.interest_groups.size(), "Interessengruppe", "Interessengruppen") + ", " +
+                       plural(w.parliaments.size(), "Parlament", "Parlamente");
+    for (const uhrwerk::Parliament& p : w.parliaments) {
+        text += "\n              " + p.name + ": " +
+                plural(static_cast<std::size_t>(p.seats), "Sitz", "Sitze") + ", Wahl am " +
+                uhrwerk::format_date_long(p.election_day) + ", " +
+                plural(p.factions.size(), "Fraktion", "Fraktionen");
+    }
+    return text;
+}
+
 /// Strecken, Abschnitte und Märkte mit Bahnfracht zum Startdatum (seit M7).
 std::string railway_summary(const World& w) {
     std::size_t sections = 0;
@@ -732,7 +746,13 @@ int cmd_pruefen(const Options& o, const fs::path& data_dir) {
               << plural(w.markets.size(), "Markt", "Märkte") << ", "
               << plural(w.states.size(), "Staat", "Staaten") << ", "
               << plural(w.districts.size(), "Kreis", "Kreise") << ", " << describe_locations(w) << ", "
-              << plural(w.pops.size(), "Bevölkerungsblock", "Bevölkerungsblöcke") << ".\n";
+              << plural(w.pops.size(), "Bevölkerungsblock", "Bevölkerungsblöcke");
+    if (!w.currents.empty() || !w.parliaments.empty()) {
+        std::cout << ", " << plural(w.currents.size(), "Strömung", "Strömungen") << ", "
+                  << plural(w.interest_groups.size(), "Interessengruppe", "Interessengruppen") << ", "
+                  << plural(w.parliaments.size(), "Parlament", "Parlamente");
+    }
+    std::cout << ".\n";
     return kExitOk;
 }
 
@@ -765,6 +785,7 @@ int cmd_info(const Options& o, const fs::path& data_dir) {
               << "Kreise:       " << group_digits(std::to_string(w.districts.size())) << " "
               << location_district_split(w) << '\n'
               << "Eisenbahnen:  " << railway_summary(w) << '\n'
+              << "Politik:      " << politics_summary(w) << '\n'
               << "Bevölkerung:  " << format_int(total.round()) << "\n\n";
 
     std::vector<std::vector<std::string>> rows;

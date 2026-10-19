@@ -480,6 +480,13 @@ struct PlayerRef {
     int line = 0;
 };
 
+/// Ebene eines Parlaments (seit M8): Staatstag, leer für den Deutschen Bund.
+struct ParliamentRef {
+    std::string state_tag;
+    std::string file;
+    int line = 0;
+};
+
 class Loader {
 public:
     Loader(fs::path data_dir, std::vector<LoadIssue>& issues)
@@ -524,6 +531,11 @@ public:
         process("common/beduerfnisse.chron", [&](const SourceFile& f) { load_needs(f); });
         process("common/betriebe.chron", [&](const SourceFile& f) { load_businesses(f); });
         process("common/maerkte.chron", [&](const SourceFile& f) { load_markets(f); });
+        // Politik (seit M8, docs/technik/politik.md); die Dateien dürfen fehlen.
+        process_optional("common/stroemungen.chron", [&](const SourceFile& f) { load_currents(f); });
+        process_optional("common/interessengruppen.chron",
+                         [&](const SourceFile& f) { load_interest_groups(f); });
+        process_optional("common/parlamente.chron", [&](const SourceFile& f) { load_parliaments(f); });
 
         for (const std::string& name : list_folder("history/staaten")) {
             process(name, [&](const SourceFile& f) { load_states(f); });
@@ -547,6 +559,7 @@ public:
         }
 
         drop_states_without_land();
+        resolve_parliaments();
         check_players(scenarios, selected);
         check_capitals();
         check_districts();
@@ -573,6 +586,14 @@ private:
             handler(*file);
         }
         issues_.sort_by_line_from(first_issue);
+    }
+
+    /// Wie process, aber eine fehlende Datei ist kein Fehler (Inhalt, den ältere Datenstände nicht haben).
+    template <typename Handler> void process_optional(const std::string& relative, Handler handler) {
+        std::error_code ec;
+        if (fs::is_regular_file(data_dir_ / utf8_to_path(relative), ec)) {
+            process(relative, handler);
+        }
     }
 
     std::optional<SourceFile> read_file(const std::string& relative) {
@@ -662,7 +683,11 @@ private:
         const auto [it, inserted] = later_.emplace(std::string(kind) + ":" + node.value,
                                                    LaterDefinition{*date, file.name, node.line});
         if (!inserted) {
-            const std::string label = kind == "gut" ? "Gut" : kind == "beruf" ? "Beruf" : "Betrieb";
+            const std::string label = kind == "gut"                ? "Gut"
+                                      : kind == "beruf"            ? "Beruf"
+                                      : kind == "betrieb"          ? "Betrieb"
+                                      : kind == "interessengruppe" ? "Interessengruppe"
+                                                                   : "Parlament";
             issues_.error(file.name, node.line,
                           "doppelte Kennung " + quote(node.value) + " für " + label +
                               " (bereits definiert in " + it->second.file + ":" +
@@ -1024,7 +1049,7 @@ private:
             const LaterScope scope(in_later_, later);
             Fields f(node, file.name, "beruf " + node.value, issues_,
                      {"name", "schicht", "steuerpflichtig", "anteil_stadt", "anteil_land", "agrar", "bildung",
-                      "in_stadt", "agrarabgabe", "seit", "anteil_aus"});
+                      "in_stadt", "agrarabgabe", "seit", "anteil_aus", "selbststaendig"});
             Profession p;
             p.id = node.value;
             p.name = f.text("name").value_or("");
@@ -1047,6 +1072,9 @@ private:
             p.literacy = f.fixed("bildung", between(fx(0), fx(1))).value_or(Fixed{});
             if (f.has("agrarabgabe")) {
                 p.agrarian_levy = f.fixed("agrarabgabe", between(fx(0), fx(1))).value_or(Fixed{});
+            }
+            if (f.has("selbststaendig")) {
+                p.self_employed = f.fixed("selbststaendig", between(fx(0), fx(1))).value_or(Fixed::one());
             }
             ProfessionRef ref;
             ref.file = file.name;
@@ -1485,6 +1513,394 @@ private:
         }
     }
 
+    // ── Politik (seit M8, docs/technik/politik.md) ──
+
+    static std::optional<Constitution> parse_constitution(std::string_view text) {
+        if (text == "keine") {
+            return Constitution::None;
+        }
+        if (text == "staendisch") {
+            return Constitution::Estates;
+        }
+        if (text == "konstitutionell") {
+            return Constitution::Constitutional;
+        }
+        return std::nullopt;
+    }
+
+    static std::optional<Franchise> parse_franchise(std::string_view text) {
+        if (text == "keines") {
+            return Franchise::None;
+        }
+        if (text == "staendisch") {
+            return Franchise::Estates;
+        }
+        if (text == "zensus") {
+            return Franchise::Census;
+        }
+        if (text == "dreiklassen") {
+            return Franchise::ThreeClass;
+        }
+        if (text == "allgemein_maenner") {
+            return Franchise::Manhood;
+        }
+        return std::nullopt;
+    }
+
+    /// Wahlordnung aus wahlrecht, wahlsystem, wahl_indirekt und wahl_zensus (Abschnitt 3.5 und 3.21).
+    ElectoralLaw read_electoral_law(Fields& f, const ScriptNode& block, const std::string& file,
+                                    const std::string& what, bool franchise_required) {
+        ElectoralLaw law;
+        if (franchise_required || f.has("wahlrecht")) {
+            if (const auto text = f.text("wahlrecht")) {
+                if (const auto franchise = parse_franchise(*text)) {
+                    law.franchise = *franchise;
+                } else {
+                    issues_.error(
+                        file, block.find("wahlrecht")->line,
+                        "ungültiges Wahlrecht " + quote(*text) + " in " + what +
+                            " (erlaubt: keines, staendisch, zensus, dreiklassen, allgemein_maenner)");
+                }
+            }
+        }
+        if (f.has("wahlsystem")) {
+            if (const auto text = f.text("wahlsystem")) {
+                if (*text == "stichwahl") {
+                    law.system = ElectoralSystem::Runoff;
+                } else if (*text == "relativ") {
+                    law.system = ElectoralSystem::Plurality;
+                } else {
+                    issues_.error(file, block.find("wahlsystem")->line,
+                                  "ungültiges Wahlsystem " + quote(*text) + " in " + what +
+                                      " (erlaubt: stichwahl, relativ)");
+                }
+            }
+        }
+        if (f.has("wahl_indirekt")) {
+            law.indirect = f.boolean("wahl_indirekt").value_or(false);
+        }
+        if (law.franchise == Franchise::Census) {
+            law.census_threshold = f.fixed("wahl_zensus", between(fx(0), fx(1'000'000))).value_or(Fixed{});
+        } else if (f.has("wahl_zensus")) {
+            issues_.error(file, block.find("wahl_zensus")->line,
+                          "'wahl_zensus' gilt nur mit wahlrecht = zensus (" + what + ")");
+        }
+        return law;
+    }
+
+    /// Strömungen (Abschnitt 3.19): stroemung <kennung> { name farbe position }.
+    void load_currents(const SourceFile& file) {
+        for_each_definition(file, "stroemung", "stroemung <kennung> { … }", [&](const ScriptNode& node) {
+            check_id(file, node, "Kennung einer Strömung");
+            Fields f(node, file.name, "stroemung " + node.value, issues_, {"name", "farbe", "position"});
+            PoliticalCurrent c;
+            c.id = node.value;
+            c.name = f.text("name").value_or("");
+            c.color = f.color("farbe").value_or(Color{});
+            c.position = f.fixed("position", between(fx(-100), fx(100))).value_or(Fixed{});
+            const auto index = static_cast<Index>(world_.currents.size());
+            if (register_id(currents_, c.id, index, file.name, node.line, "Strömung")) {
+                world_.currents.push_back(std::move(c));
+            }
+        });
+        if (world_.currents.empty()) {
+            issues_.error(file.name, 0, "keine Strömung definiert (erwartet: stroemung <kennung> { … })");
+        }
+    }
+
+    /// Anteile je Kennung aus einem Block { kennung = wert } (0..1), z. B. berufe = { bauern = 0.9 }.
+    template <typename Resolve>
+    std::vector<Fixed> read_shares(Fields& f, std::string_view key, std::string_view example,
+                                   std::size_t count, std::string_view label, Resolve resolve) {
+        std::vector<Fixed> out;
+        const ScriptNode* node = f.block(key, example);
+        if (node == nullptr) {
+            return out;
+        }
+        out.assign(count, Fixed{});
+        std::set<Index> seen;
+        for (const ScriptNode& child : node->children) {
+            if (child.key.empty() || child.is_block || child.op != "=") {
+                f.issues().error(f.file(), child.line,
+                                 "ungültiger Eintrag im Block " + quote(key) + " (erwartet " +
+                                     std::string(example) + ")");
+                continue;
+            }
+            const std::optional<Index> index = resolve(child);
+            if (!index) {
+                continue; // gemeldet oder späterer Inhalt
+            }
+            if (!seen.insert(*index).second) {
+                f.issues().error(f.file(), child.line,
+                                 std::string(label) + " " + quote(child.key) + " ist in " + quote(key) +
+                                     " von " + f.what() + " mehrfach angegeben");
+                continue;
+            }
+            const auto value = Fixed::parse(child.value);
+            if (!value || *value < Fixed::zero() || *value > Fixed::one()) {
+                f.issues().error(f.file(), child.line,
+                                 "ungültiger Anteil " + quote(child.value) + " für " + quote(child.key) +
+                                     " in " + f.what() + " (erwartet eine Zahl von 0 bis 1)");
+                continue;
+            }
+            out[static_cast<std::size_t>(*index)] = *value;
+        }
+        return out;
+    }
+
+    /// Interessengruppen (Abschnitt 3.20): Mitglieder je Beruf und Konfession, Neigung je Strömung.
+    void load_interest_groups(const SourceFile& file) {
+        for_each_definition(
+            file, "interessengruppe", "interessengruppe <kennung> { … }", [&](const ScriptNode& node) {
+                check_id(file, node, "Kennung einer Interessengruppe");
+                const bool later = is_later(file, node, "interessengruppe");
+                const LaterScope scope(in_later_, later);
+                Fields f(
+                    node, file.name, "interessengruppe " + node.value, issues_,
+                    {"name", "farbe", "berufe", "konfessionen", "nach_bildung", "neigung", "seit", "quelle"});
+                InterestGroup g;
+                g.id = node.value;
+                g.name = f.text("name").value_or("");
+                g.color = f.color("farbe").value_or(Color{});
+                if (!f.has("berufe") && !f.has("konfessionen")) {
+                    issues_.error(file.name, node.line,
+                                  "interessengruppe " + node.value + " braucht 'berufe' oder 'konfessionen'");
+                }
+                if (f.has("berufe")) {
+                    g.professions = read_shares(
+                        f, "berufe", "<beruf> = <anteil>, z. B. { bauern = 0.9 }", world_.professions.size(),
+                        "Beruf", [&](const ScriptNode& child) -> std::optional<Index> {
+                            const Index index = lookup(professions_, child.key);
+                            if (index == kNone &&
+                                !later_reference("beruf", "Beruf", child.key, file.name, child.line,
+                                                 "interessengruppe " + node.value)) {
+                                issues_.error(file.name, child.line,
+                                              "unbekannter Beruf " + quote(child.key) +
+                                                  " in interessengruppe " + node.value +
+                                                  " (common/berufe.chron)");
+                            }
+                            return index == kNone ? std::nullopt : std::optional<Index>(index);
+                        });
+                } else {
+                    g.professions.assign(world_.professions.size(), Fixed::one());
+                }
+                if (f.has("konfessionen")) {
+                    g.confessions =
+                        read_shares(f, "konfessionen", "<konfession> = <anteil>, z. B. { katholisch = 0.6 }",
+                                    world_.confessions.size(), "Konfession",
+                                    [&](const ScriptNode& child) -> std::optional<Index> {
+                                        const Index index = lookup(confessions_, child.key);
+                                        if (index == kNone) {
+                                            issues_.error(file.name, child.line,
+                                                          "unbekannte Konfession " + quote(child.key) +
+                                                              " in interessengruppe " + node.value +
+                                                              " (common/konfessionen.chron)");
+                                            return std::nullopt;
+                                        }
+                                        return index;
+                                    });
+                }
+                if (f.has("nach_bildung")) {
+                    g.by_literacy = f.boolean("nach_bildung").value_or(false);
+                }
+                g.leaning = read_shares(
+                    f, "neigung", "<strömung> = <anteil>, z. B. { liberale = 0.6 demokraten = 0.4 }",
+                    world_.currents.size(), "Strömung", [&](const ScriptNode& child) -> std::optional<Index> {
+                        const Index index = lookup(currents_, child.key);
+                        if (index == kNone) {
+                            issues_.error(file.name, child.line,
+                                          "unbekannte Strömung " + quote(child.key) +
+                                              " in interessengruppe " + node.value +
+                                              " (common/stroemungen.chron)");
+                            return std::nullopt;
+                        }
+                        return index;
+                    });
+                if (!g.leaning.empty()) {
+                    Fixed sum;
+                    for (const Fixed v : g.leaning) {
+                        sum += v;
+                    }
+                    const Fixed tolerance = Fixed::from_ratio(1, 1000);
+                    if (sum < Fixed::one() - tolerance || sum > Fixed::one() + tolerance) {
+                        issues_.error(file.name, node.find("neigung")->line,
+                                      "die Neigung von interessengruppe " + node.value + " ergibt " +
+                                          show(sum) + ", erwartet 1");
+                    }
+                }
+                g.source = f.text("quelle").value_or("");
+                if (later) {
+                    return;
+                }
+                const auto index = static_cast<Index>(world_.interest_groups.size());
+                if (register_id(interest_groups_, g.id, index, file.name, node.line, "Interessengruppe")) {
+                    world_.interest_groups.push_back(std::move(g));
+                }
+            });
+        check_later_ids("interessengruppe", interest_groups_, "Interessengruppe");
+    }
+
+    /// Parlamente (Abschnitt 3.21): parlament <kennung> { … fraktion <kennung> { … } }.
+    void load_parliaments(const SourceFile& file) {
+        for_each_definition(file, "parlament", "parlament <kennung> { … }", [&](const ScriptNode& node) {
+            check_id(file, node, "Kennung eines Parlaments");
+            const bool later = is_later(file, node, "parlament");
+            const std::string what = "parlament " + node.value;
+            ScriptNode plain = node;
+            plain.children.clear();
+            std::vector<const ScriptNode*> faction_nodes;
+            for (const ScriptNode& child : node.children) {
+                if (child.key == "fraktion") {
+                    faction_nodes.push_back(&child);
+                } else {
+                    plain.children.push_back(child);
+                }
+            }
+            Fields f(plain, file.name, what, issues_,
+                     {"name", "ebene", "sitze", "seit", "wahltag", "wahlrecht", "wahlsystem", "wahl_indirekt",
+                      "wahl_zensus", "fraktionen_ab", "boykott", "quelle"});
+            Parliament p;
+            p.id = node.value;
+            p.name = f.text("name").value_or("");
+            ParliamentRef ref;
+            if (const auto level = f.text("ebene")) {
+                if (*level != "bund") {
+                    if (!is_state_tag(*level)) {
+                        issues_.error(file.name, plain.find("ebene")->line,
+                                      "ungültige Ebene " + quote(*level) + " in " + what +
+                                          " (erwartet bund oder einen Staatstag)");
+                    } else {
+                        ref = ParliamentRef{*level, file.name, plain.find("ebene")->line};
+                    }
+                }
+            }
+            p.seats = static_cast<std::int32_t>(f.integer("sitze", 1, 10'000).value_or(0));
+            p.election_day = f.date("wahltag").value_or(Date{});
+            p.law = read_electoral_law(f, plain, file.name, what, true);
+            p.faction_day =
+                f.has("fraktionen_ab") ? f.date("fraktionen_ab").value_or(p.election_day) : p.election_day;
+            if (p.faction_day < p.election_day) {
+                issues_.error(file.name, plain.find("fraktionen_ab")->line,
+                              "'fraktionen_ab' liegt vor dem Wahltag von " + what);
+            }
+            if (f.has("boykott")) {
+                if (const ScriptNode* list = f.block("boykott", "Liste von Kulturen, z. B. { tschechen }")) {
+                    for (const ScriptNode& child : list->children) {
+                        const Index culture =
+                            child.key.empty() && !child.is_block ? lookup(cultures_, child.value) : kNone;
+                        if (culture == kNone) {
+                            issues_.error(file.name, child.line,
+                                          "unbekannte Kultur " + quote(child.value) + " in 'boykott' von " +
+                                              what + " (common/kulturen.chron)");
+                            continue;
+                        }
+                        p.boycott_cultures.push_back(culture);
+                    }
+                }
+            }
+            p.source = f.text("quelle").value_or("");
+            p.factions = read_factions(file, node, what, faction_nodes);
+            if (later) {
+                return;
+            }
+            const auto index = static_cast<Index>(world_.parliaments.size());
+            if (register_id(parliaments_, p.id, index, file.name, node.line, "Parlament")) {
+                world_.parliaments.push_back(std::move(p));
+                parliament_refs_.push_back(std::move(ref));
+            }
+        });
+        check_later_ids("parlament", parliaments_, "Parlament");
+    }
+
+    /// Fraktionen eines Parlaments: Bereiche auf der Links-rechts-Achse, lückenlos von −100 bis +100.
+    std::vector<Faction> read_factions(const SourceFile& file, const ScriptNode& node,
+                                       const std::string& what, const std::vector<const ScriptNode*>& nodes) {
+        std::vector<Faction> factions;
+        std::set<std::string, std::less<>> ids;
+        for (const ScriptNode* fn : nodes) {
+            if (!fn->is_block || fn->value.empty()) {
+                issues_.error(file.name, fn->line,
+                              "'fraktion' in " + what +
+                                  " erwartet: fraktion <kennung> { name farbe von bis }");
+                continue;
+            }
+            if (!is_location_id(fn->value)) {
+                issues_.error(file.name, fn->line,
+                              "ungültige Kennung " + quote(fn->value) +
+                                  " für eine Fraktion (nur Kleinbuchstaben a–z, Ziffern und '_')");
+            }
+            if (!ids.insert(fn->value).second) {
+                issues_.error(file.name, fn->line,
+                              "doppelte Kennung " + quote(fn->value) + " für Fraktion in " + what);
+                continue;
+            }
+            Fields ff(*fn, file.name, "fraktion " + fn->value + " in " + what, issues_,
+                      {"name", "farbe", "von", "bis"});
+            Faction faction;
+            faction.id = fn->value;
+            faction.name = ff.text("name").value_or("");
+            faction.color = ff.color("farbe").value_or(Color{});
+            const auto from = ff.fixed("von", between(fx(-100), fx(100)));
+            const auto to = ff.fixed("bis", between(fx(-100), fx(100)));
+            if (!from || !to) {
+                continue;
+            }
+            if (*from >= *to) {
+                issues_.error(file.name, fn->line,
+                              "fraktion " + fn->value + " in " + what +
+                                  ": 'von' muss kleiner als 'bis' sein");
+                continue;
+            }
+            faction.from = *from;
+            faction.to = *to;
+            factions.push_back(std::move(faction));
+        }
+        if (factions.empty()) {
+            issues_.error(file.name, node.line, what + " hat keine Fraktion (fraktion <kennung> { … })");
+            return factions;
+        }
+        std::stable_sort(factions.begin(), factions.end(),
+                         [](const Faction& a, const Faction& b) { return a.from < b.from; });
+        Fixed expected = fx(-100);
+        for (const Faction& faction : factions) {
+            if (faction.from != expected) {
+                issues_.error(file.name, node.line,
+                              "die Fraktionen von " + what + " decken die Achse nicht lückenlos ab (bei " +
+                                  show(expected) + ", fraktion " + faction.id + " beginnt bei " +
+                                  show(faction.from) + ")");
+                return factions;
+            }
+            expected = faction.to;
+        }
+        if (expected != fx(100)) {
+            issues_.error(file.name, node.line,
+                          "die Fraktionen von " + what + " reichen nur bis " + show(expected) +
+                              ", erwartet 100");
+        }
+        return factions;
+    }
+
+    /// Ebene der Parlamente nach drop_states_without_land: Der Staat muss zum Startdatum bestehen.
+    void resolve_parliaments() {
+        for (std::size_t i = 0; i < world_.parliaments.size(); ++i) {
+            const ParliamentRef& ref = parliament_refs_[i];
+            if (ref.state_tag.empty()) {
+                continue;
+            }
+            const Index state = lookup(states_, ref.state_tag);
+            if (state == kNone) {
+                issues_.error(ref.file, ref.line,
+                              dropped_states_.count(ref.state_tag) != 0
+                                  ? "Staat " + quote(ref.state_tag) + " von parlament " +
+                                        world_.parliaments[i].id + " besitzt zum Startdatum keinen Ort"
+                                  : "unbekannter Staat " + quote(ref.state_tag) +
+                                        " als Ebene von parlament " + world_.parliaments[i].id);
+                continue;
+            }
+            world_.parliaments[i].state = state;
+        }
+    }
+
     // ── history/ ──
 
     void load_states(const SourceFile& file) {
@@ -1500,9 +1916,11 @@ private:
             std::vector<LoadIssue> field_issues;
             Issues state_issues(field_issues);
             Fields f(merged, file.name, "staat " + node.value, state_issues,
-                     {"name", "kurzname", "farbe", "hauptstadt", "regierungsform", "herrscher", "konfession",
-                      "schatz", "kontribution", "akzise", "zoll", "hofhaltung", "heer", "schulden",
-                      "zollverein", "quelle"});
+                     {"name",       "kurzname",   "farbe",      "hauptstadt",    "regierungsform",
+                      "herrscher",  "konfession", "schatz",     "kontribution",  "akzise",
+                      "zoll",       "hofhaltung", "heer",       "schulden",      "zollverein",
+                      "verfassung", "wahlrecht",  "wahlsystem", "wahl_indirekt", "wahl_zensus",
+                      "quelle"});
             State s;
             s.tag = node.value;
             s.name = f.text("name").value_or("");
@@ -1533,6 +1951,19 @@ private:
             if (f.has("zollverein")) {
                 s.customs_union = f.boolean("zollverein").value_or(false);
             }
+            // Verfassung und Wahlordnung des Landtags (seit M8, Abschnitt 3.5).
+            if (f.has("verfassung")) {
+                if (const auto text = f.text("verfassung")) {
+                    if (const auto c = parse_constitution(*text)) {
+                        s.constitution = *c;
+                    } else {
+                        issues_.error(file.name, merged.find("verfassung")->line,
+                                      "ungültige Verfassung " + quote(*text) + " in staat " + node.value +
+                                          " (erlaubt: keine, staendisch, konstitutionell)");
+                    }
+                }
+            }
+            s.law = read_electoral_law(f, merged, file.name, "staat " + node.value, false);
             s.source = f.text("quelle").value_or("");
 
             std::vector<LoadIssue> missing;
@@ -2307,6 +2738,10 @@ private:
     Registry districts_;
     Registry admin_units_;
     Registry railways_;
+    Registry currents_;                          // seit M8
+    Registry interest_groups_;                   // seit M8
+    Registry parliaments_;                       // seit M8
+    std::vector<ParliamentRef> parliament_refs_; // parallel zu world_.parliaments
     // Inhalt ab einem Datum (seit M7): spätere Definitionen als „gut:kohle“ → 'seit'.
     struct LaterDefinition {
         Date date;

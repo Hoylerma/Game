@@ -411,6 +411,12 @@ class TestStaatenbestandUndVerwaltung(MitKopie):
             ("verwaltung.csv", "Kreis Burg;kreis", "Kreis Burg;Kreis"): "ungültige Art 'Kreis'",
             ("verwaltung.csv", "sl_burg;sued", "keine;sued"): "ungültige Kennung 'keine' für eine Verwaltungseinheit",
             ("staaten_historie.csv", "zollverein;ja", "zollverein;1"): "'zollverein' erwartet ja oder nein, nicht '1'",
+            ("staaten_historie.csv", "zollverein;ja", "wahlrecht;alle"): (
+                "'wahlrecht' erwartet keines, staendisch, zensus, dreiklassen, allgemein_maenner, nicht 'alle'"
+            ),
+            ("staaten_historie.csv", "zollverein;ja", "verfassung;ja"): (
+                "'verfassung' erwartet keine, staendisch, konstitutionell, nicht 'ja'"
+            ),
         }
         for (tabelle, alt, neu), text in faelle.items():
             with self.subTest(text):

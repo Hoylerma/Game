@@ -70,6 +70,18 @@ Index World::find_business(std::string_view id) const {
     return find_by(businesses, id, [](const BusinessType& b) -> std::string_view { return b.id; });
 }
 
+Index World::find_current(std::string_view id) const {
+    return find_by(currents, id, [](const PoliticalCurrent& c) -> std::string_view { return c.id; });
+}
+
+Index World::find_interest_group(std::string_view id) const {
+    return find_by(interest_groups, id, [](const InterestGroup& g) -> std::string_view { return g.id; });
+}
+
+Index World::find_parliament(std::string_view id) const {
+    return find_by(parliaments, id, [](const Parliament& p) -> std::string_view { return p.id; });
+}
+
 Index World::find_market(std::string_view id) const {
     return find_by(markets, id, [](const Market& m) -> std::string_view { return m.id; });
 }

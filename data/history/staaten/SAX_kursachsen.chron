@@ -51,5 +51,7 @@ staat SAX {
         heer           = 7
         schulden       = 2372000
         zollverein     = ja
+        verfassung     = konstitutionell
+        wahlrecht      = staendisch
     }
 }

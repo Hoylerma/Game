@@ -22,5 +22,7 @@ staat PRU {
         heer           = 9
         schulden       = 24197000
         zollverein     = ja
+        verfassung     = staendisch
+        wahlrecht      = staendisch
     }
 }

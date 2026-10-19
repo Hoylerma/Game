@@ -22,6 +22,11 @@ staat HED {
         heer           = 7
         schulden       = 1687000
         zollverein     = ja
+        verfassung     = konstitutionell
+        wahlrecht      = zensus
+        wahlsystem     = stichwahl
+        wahl_indirekt  = ja
+        wahl_zensus    = 1
     }
 
     1848.06.16 = {

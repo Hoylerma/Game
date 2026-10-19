@@ -22,5 +22,7 @@ staat HAN {
         heer           = 7
         schulden       = 3845000
         zollverein     = nein
+        verfassung     = konstitutionell
+        wahlrecht      = staendisch
     }
 }

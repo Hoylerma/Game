@@ -1,6 +1,6 @@
 # Politik, Parteien und Wahlen (Meilenstein M8)
 
-> **Status: Entwurf** – zur Freigabe; offene Entscheidungen in Abschnitt 12
+> **Status: in Umsetzung** – Entscheidungen 1–10 wie empfohlen freigegeben; Stand in Abschnitt 14
 > ([meilensteine.md](../meilensteine.md#m8--politik-parteien-und-wahlen)). Grundlage sind
 > [09 Politik, Staat und Gesetze](../09_politik_staat_und_gesetze.md) (Abschnitte 2–6),
 > [10 Parlamente, Wahlen, Koalitionen](../10_parlamente_wahlen_koalitionen.md) (Abschnitte 2, 3
@@ -144,6 +144,8 @@ Neue datierte Felder je Staat in `staaten_historie.csv`, mit Quelle und Sicherhe
 | `wahlrecht` | `keines`, `staendisch`, `zensus`, `dreiklassen`, `allgemein_maenner` | Preußen 1849.05.30 `dreiklassen` |
 | `wahlsystem` | `mehrheit_stichwahl`, `mehrheit_relativ`; dazu `indirekt` (ja/nein) | — |
 
+Die Felder gelten **zum Startdatum** (wie alle Staatsfelder) und beschreiben den Landtag. Jede Wahl
+trägt ihr eigenes Wahlrecht im Parlament (Abschnitt 5.1), so auch die Dreiklassenwahl in Preußen 1849.
 Das Wahlrecht eines **Parlaments** kann das des Staates überstimmen: Für die Nationalversammlung
 galt der Bundesbeschluss vom 7. April 1848. Danach durften alle volljährigen, „selbstständigen“
 Männer wählen, ohne Zensus, Stand oder Konfession; die Auslegung lag bei den Staaten.
@@ -157,8 +159,8 @@ Die Optionen in Zahlen (Spielwerte, Abschnitt 7.1):
 | `dreiklassen` | Männer ab 24 | drei Klassen nach Steuerleistung, jede wählt ein Drittel der Wahlmänner |
 | `staendisch` | Vertreter der Stände | keine Volkswahl (kein Wahlkreis) |
 
-Ein **Gesetzesmodell** mit 36 Gruppen (Kapitel 09, Abschnitt 6) baut M8 nicht. Die drei Felder
-sind die erste Gruppe davon und wechseln nur zu ihrem Datum (Entscheidung 7).
+Ein **Gesetzesmodell** mit 36 Gruppen (Kapitel 09, Abschnitt 6) baut M8 nicht. Die Felder sind die
+erste Gruppe davon (Entscheidung 7).
 
 ## 5. Parlamente und Wahlkreise
 
@@ -478,3 +480,9 @@ Weitere Tests:
 | b1 | **Brücke und Godot:** Kartenmodus „Wahlen“, Wahlabend, Ortsinfo, Staatsinfo (Verfassung, Wahlrecht, Interessengruppen) | Godot-Tests, Screenshots |
 | b2 | **Parteienmodus** (Wahlkampf, Mittel, Stimmungsberichte) und **Preußen 1849** (Dreiklassen) | Unit-Tests, Wiederholung mit Wahlkampfbefehlen, Plausibilität 1849 |
 | b3 | **Doku und Review** (Abschluss M8) | CI grün |
+
+## 14. Umsetzungsstand
+
+| Schritt | Stand |
+|---|---|
+| a1 Datenmodell | `common/stroemungen.chron` (5 Strömungen), `common/interessengruppen.chron` (11 Gruppen, davon 10 im Lesezeichen 1848; die Arbeiterbewegung erst ab August 1848), `common/parlamente.chron` (Nationalversammlung 1848 mit 8 Fraktionen, Preußisches Abgeordnetenhaus 1849 mit 3), `selbststaendig` bei Landarmen (0,6) und Fabrikarbeitern (0,7); Verfassung und Wahlrecht der Landtage für die 38 Staaten von 1848 in `staaten_historie.csv` (aus der Regierungsform abgeleitet, Zensus in Baden, Württemberg, Hessen-Darmstadt und den Niederlanden). Lader (chronik-skript.md 3.19–3.21), Archivar, Inhaltsfingerabdruck (Bereich `politik`), `info` und `pruefen`. 1648 ohne Parlament, Prüfsumme unverändert. |

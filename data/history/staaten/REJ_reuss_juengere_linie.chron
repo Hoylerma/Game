@@ -22,5 +22,7 @@ staat REJ {
         heer           = 6
         schulden       = 65000
         zollverein     = ja
+        verfassung     = keine
+        wahlrecht      = keines
     }
 }

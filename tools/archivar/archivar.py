@@ -88,7 +88,19 @@ STAAT_FELDER = (
     "heer",
     "schulden",
     "zollverein",
+    "verfassung",
+    "wahlrecht",
+    "wahlsystem",
+    "wahl_indirekt",
+    "wahl_zensus",
 )
+# Werte der politischen Felder (seit M8, docs/technik/politik.md Abschnitt 4).
+POLITIK_WERTE = {
+    "verfassung": ("keine", "staendisch", "konstitutionell"),
+    "wahlrecht": ("keines", "staendisch", "zensus", "dreiklassen", "allgemein_maenner"),
+    "wahlsystem": ("stichwahl", "relativ"),
+    "wahl_indirekt": ("ja", "nein"),
+}
 # Felder, die zu jedem Szenariodatum bekannt sein müssen (name/kurzname kommen aus staaten.csv).
 STAAT_PFLICHT = (
     "hauptstadt",
@@ -820,6 +832,11 @@ def _pruefe_staatswert(z: Zeile, feld_name: str, wert: str, archiv: Archiv, bezu
     if feld_name == "zollverein" and wert not in ("ja", "nein"):
         m.fehler_bei(z.datei, z.nr, f"'zollverein' erwartet ja oder nein, nicht '{wert}'")
         return False
+    if feld_name in POLITIK_WERTE and wert not in POLITIK_WERTE[feld_name]:
+        m.fehler_bei(z.datei, z.nr, f"'{feld_name}' erwartet {', '.join(POLITIK_WERTE[feld_name])}, nicht '{wert}'")
+        return False
+    if feld_name == "wahl_zensus":
+        return _dezimal(z, "wert", 0, 1e6, m, wert) is not None
     if feld_name in TEXT_FELDER and hat_zeilenumbruch(wert):
         m.fehler_bei(z.datei, z.nr, f"Zeilenumbruch im Wert für '{feld_name}'")
         return False

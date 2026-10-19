@@ -19,5 +19,7 @@ staat HAM {
         heer           = 4
         schulden       = 354000
         zollverein     = nein
+        verfassung     = staendisch
+        wahlrecht      = staendisch
     }
 }

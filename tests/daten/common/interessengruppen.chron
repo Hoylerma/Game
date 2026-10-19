@@ -1,0 +1,18 @@
+# Testdaten: zwei Interessengruppen (seit M8)
+interessengruppe bauernschaft {
+    name    = "Bauernschaft"
+    farbe   = { 110 140 60 }
+    berufe  = { bauern = 0.9 }
+    neigung = { konservative = 0.6 liberale = 0.3 demokraten = 0.1 }
+    quelle  = "Testdaten"
+}
+
+interessengruppe bildungsbuergertum {
+    name         = "Bildungsbürgertum"
+    farbe        = { 170 120 150 }
+    berufe       = { kaufleute = 0.6 adel = 0.2 }
+    konfessionen = { lutherisch = 1 reformiert = 1 katholisch = 0.5 }
+    nach_bildung = ja
+    neigung      = { liberale = 0.7 demokraten = 0.3 }
+    quelle       = "Testdaten"
+}

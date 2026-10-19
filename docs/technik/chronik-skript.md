@@ -217,6 +217,7 @@ beruf bauern {
     agrarabgabe     = 0.08         # optional seit M5: Anteil am Agrarertrag des Ortes (0..1)
     seit            = 1800.01.01   # optional seit M7: erst ab diesem Datum (Abschnitt 3.18)
     anteil_aus      = landarme     # optional seit M7: Anteile werden diesem Beruf abgezogen
+    selbststaendig  = 0.6          # optional seit M8: Anteil „selbstständiger“ Männer (Wahlrecht 1848), 0..1, Standard 1
 }
 ```
 
@@ -252,6 +253,11 @@ staat BRA {
     heer           = 10                            # Pflicht seit M5: Soldaten je 1.000 Einwohner, 0..1000
     schulden       = 0                             # optional seit M5: Reichstaler, Standard 0
     zollverein     = nein                          # optional seit M7: ja/nein, Standard nein, datierbar
+    verfassung     = konstitutionell               # optional seit M8: keine | staendisch | konstitutionell
+    wahlrecht      = zensus                        # optional seit M8: Landtag (Abschnitt 3.21), Standard keines
+    wahlsystem     = stichwahl                     # optional seit M8: stichwahl | relativ
+    wahl_indirekt  = ja                            # optional seit M8: Wahl über Wahlmänner, Standard nein
+    wahl_zensus    = 1                             # Pflicht bei wahlrecht = zensus: Steuern je Kopf und Jahr
     quelle         = "…"                           # Pflicht (oder "Testdaten, geschätzt")
 }
 ```
@@ -273,6 +279,11 @@ Ort`); die Spieler der übrigen Szenarien müssen nur bekannte Staaten sein.
 **Zollverein (seit M7).** `zollverein = ja` markiert die Mitgliedschaft im Deutschen Zollverein
 (`State::customs_union`). In M7 ist das Feld Inhalt ohne Wirkung auf die Simulation; der Zoll
 zwischen Mitgliedern entfällt mit M9.
+
+**Verfassung und Wahlordnung (seit M8).** `verfassung` und die Wahlfelder beschreiben den Landtag zum
+Startdatum (`State::constitution`, `State::law`); Werte wie in Abschnitt 3.21. In M8 sind sie Inhalt zur
+Anzeige: Die Wahlen tragen ihr eigenes Wahlrecht im Parlament, und ein Gesetzgebungsverfahren, das die
+Felder ändert, kommt mit M11 ([politik.md](politik.md), Abschnitte 4 und 6).
 
 ### 3.6 `history/orte/*.chron`
 
@@ -577,6 +588,72 @@ der Reihenfolge in der Datei; ein Kreis (A aus B, B aus A) ist fatal. Das Vorkom
 Betriebs bleibt bekannt, damit Orte es tragen dürfen. Ohne gültiges Szenario (Prüfung aller Daten) gilt alles.
 Fortschritt im Spiel – Inhalt, der während einer Partie hinzukommt – gibt es damit noch nicht: Eine Partie
 ab 1648 erreicht die Industrie nicht.
+
+### 3.19 `common/stroemungen.chron` (seit M8)
+
+```text
+stroemung liberale {
+    name     = "Konstitutionelle Liberale"   # Pflicht
+    farbe    = { 206 160 40 }                # Pflicht
+    position = 15                            # Pflicht: Links-rechts-Achse −100 … +100
+}
+```
+
+Politische Strömungen ([politik.md](politik.md), Abschnitt 3.1). Die Position ordnet die Stichwahl und
+die Fraktionen. Die Datei darf fehlen (dann gibt es keine Politik); ist sie da, braucht sie mindestens
+eine Strömung. Im Kern: `World::currents` (`PoliticalCurrent`).
+
+### 3.20 `common/interessengruppen.chron` (seit M8)
+
+```text
+interessengruppe bildungsbuergertum {
+    name         = "Bildungsbürgertum"                          # Pflicht
+    farbe        = { 170 120 150 }                              # Pflicht
+    berufe       = { buerger = 0.6 geistlichkeit = 0.4 }        # Anteil der Mitglieder je Beruf (0..1)
+    konfessionen = { katholisch = 0.5 }                         # optional: Faktor je Konfession (0..1)
+    nach_bildung = ja                                           # optional: zusätzlich × Alphabetisierung
+    neigung      = { liberale = 0.55 demokraten = 0.45 }        # Pflicht: je Strömung, Summe 1
+    seit         = 1700.01.01                                   # optional (Abschnitt 3.18)
+    quelle       = "…"                                          # optional
+}
+```
+
+Ein Block gehört der Gruppe mit dem Anteil `berufe[Beruf] × konfessionen[Konfession]`, mit
+`nach_bildung` zusätzlich × seiner Alphabetisierung. Fehlt `berufe` oder `konfessionen`, zählt dieser
+Faktor 1; mindestens eines von beiden ist Pflicht. Nicht genannte Berufe und Konfessionen zählen 0.
+Fatal: unbekannte Berufe, Konfessionen oder Strömungen, Anteile außerhalb 0..1, eine Neigung mit einer
+Summe außerhalb 1 ± 0,001, ein Verweis auf einen späteren Beruf aus einer geltenden Gruppe. Im Kern:
+`World::interest_groups` (`InterestGroup`; Anteile als Vektoren über alle Berufe, Konfessionen und
+Strömungen). Bedeutung: [politik.md](politik.md), Abschnitte 3.3 und 7.3.
+
+### 3.21 `common/parlamente.chron` (seit M8)
+
+```text
+parlament nationalversammlung {
+    name          = "Deutsche Nationalversammlung"   # Pflicht
+    ebene         = bund                             # Pflicht: bund oder ein Staatstag
+    sitze         = 649                              # Pflicht: Sollzahl, 1..10000
+    seit          = 1848.03.01                       # optional (Abschnitt 3.18)
+    wahltag       = 1848.05.01                       # Pflicht
+    wahlrecht     = allgemein_maenner                # Pflicht: keines | staendisch | zensus | dreiklassen | allgemein_maenner
+    wahlsystem    = stichwahl                        # optional: stichwahl (Standard) | relativ
+    wahl_indirekt = ja                               # optional: Wahl über Wahlmänner, Standard nein
+    wahl_zensus   = 1                                # Pflicht bei wahlrecht = zensus
+    fraktionen_ab = 1848.10.01                       # optional: Stichtag der Fraktionen, Standard der Wahltag
+    boykott       = { tschechen }                    # optional: Kulturen, deren Wahlkreise nicht wählen
+    quelle        = "…"                              # optional
+    fraktion casino { name = "Casino" farbe = { 70 96 150 } von = 20 bis = 55 }   # mindestens eine
+}
+```
+
+Ein Parlament mit seiner Wahl ([politik.md](politik.md), Abschnitt 5). `seit` ist hier das früheste
+Startdatum eines Szenarios, in dem es vorkommt; so gibt es 1648 kein Parlament, und dessen Ergebnisse
+bleiben bitgleich. Die Fraktionen teilen die Links-rechts-Achse **lückenlos** von −100 bis +100 auf (`von`
+kleiner als `bis`; die Reihenfolge in der Datei ist frei, der Kern ordnet nach `von`). Die Ebene wird
+nach dem Staatenbestand aufgelöst (Abschnitt 3.5): Ein Staat ohne Ort zum Startdatum ist fatal.
+Weitere Fehler: unbekannte Kulturen im Boykott, `fraktionen_ab` vor dem Wahltag, `wahl_zensus` ohne
+`wahlrecht = zensus`. Die Datei darf fehlen. Im Kern: `World::parliaments` (`Parliament`, `Faction`,
+`ElectoralLaw`).
 
 ## 4. Startzustand
 

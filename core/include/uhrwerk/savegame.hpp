@@ -29,9 +29,9 @@ namespace uhrwerk {
 inline constexpr std::uint32_t kSaveFormatVersion = 1;
 
 /// Bereiche des Inhaltsfingerabdrucks (Abschnitt 3), in dieser Reihenfolge.
-inline constexpr std::array<std::string_view, 13> kContentParts = {
+inline constexpr std::array<std::string_view, 14> kContentParts = {
     "regeln",   "gelaende", "konfessionen", "kulturen", "berufe", "gueter", "beduerfnisse",
-    "betriebe", "maerkte",  "vorkommen",    "staaten",  "kreise", "orte"};
+    "betriebe", "maerkte",  "vorkommen",    "staaten",  "kreise", "orte",   "politik"};
 
 /// Fingerabdruck des Inhalts: je Bereich und gesamt (FNV-1a-64). Namen, Farben und Quellen zählen
 /// nicht mit, nur was die Simulation beeinflusst.

@@ -22,5 +22,10 @@ staat WUE {
         heer           = 7
         schulden       = 3029000
         zollverein     = ja
+        verfassung     = konstitutionell
+        wahlrecht      = zensus
+        wahlsystem     = stichwahl
+        wahl_indirekt  = ja
+        wahl_zensus    = 1
     }
 }

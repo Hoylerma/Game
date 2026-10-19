@@ -22,5 +22,10 @@ staat BAD {
         heer           = 7
         schulden       = 2361000
         zollverein     = ja
+        verfassung     = konstitutionell
+        wahlrecht      = zensus
+        wahlsystem     = stichwahl
+        wahl_indirekt  = ja
+        wahl_zensus    = 1
     }
 }

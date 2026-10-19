@@ -22,6 +22,8 @@ staat HSI {
         heer           = 6
         schulden       = 37000
         zollverein     = ja
+        verfassung     = konstitutionell
+        wahlrecht      = staendisch
     }
 
     1848.08.27 = {
