@@ -20,8 +20,6 @@ template <typename T> bool in_range(const std::vector<T>& items, Index index) {
     return index >= 0 && static_cast<std::size_t>(index) < items.size();
 }
 
-const ValueRange kShare{Fixed::zero(), Fixed::one()};
-
 /// Quantile über ganze Zahlen.
 Quantiles int_quantiles(const std::vector<std::int32_t>& values) {
     std::vector<Fixed> fixed;
