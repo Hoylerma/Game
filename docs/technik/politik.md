@@ -1,7 +1,9 @@
 # Politik, Parteien und Wahlen (Meilenstein M8)
 
-> **Status: in Umsetzung** – Entscheidungen 1–10 wie empfohlen freigegeben; Stand in Abschnitt 14
-> ([meilensteine.md](../meilensteine.md#m8--politik-parteien-und-wahlen)). Grundlage sind
+> **Status: verbindlich seit M8** – Entscheidungen 1–10 wie empfohlen freigegeben; Stand in
+> Abschnitt 14 ([meilensteine.md](../meilensteine.md#m8--politik-parteien-und-wahlen-)). Die Werte in
+> den Abschnitten 3 bis 9 sind die Spielwerte nach der Kalibrierung (Abschnitt 14.1) und dem Review
+> in Schritt b3. Grundlage sind
 > [09 Politik, Staat und Gesetze](../09_politik_staat_und_gesetze.md) (Abschnitte 2–6),
 > [10 Parlamente, Wahlen, Koalitionen](../10_parlamente_wahlen_koalitionen.md) (Abschnitte 2, 3
 > und 6), [11 Parteien-Datenbank](../11_parteien_datenbank.md) (Abschnitte 1 und 2),
@@ -111,9 +113,9 @@ bleibt fraktionslos.
 | Deutscher Hof | demokratische Linke | −50 … −25 |
 | Donnersberg | äußerste Linke | −100 … −50 |
 
-Die Fraktionen sind **Daten des Parlaments**: `history/parlamente/nationalversammlung.chron` mit
-Name, Farbe, Bereich und `seit` (Landsberg, Augsburger Hof und Westendhall entstanden erst im
-Sommer 1848). Im Parteienmodus spielt man eine Fraktion (Abschnitt 9).
+Die Fraktionen sind **Daten des Parlaments** in `common/parlamente.chron`, mit Name, Farbe und
+Bereich. Sie gelten ab dem Stichtag `fraktionen_ab` (1. Oktober 1848), denn Landsberg, Augsburger
+Hof und Westendhall entstanden erst im Sommer 1848. Im Parteienmodus spielt man eine Fraktion (Abschnitt 9).
 
 ### 3.3 Interessengruppen (`common/interessengruppen.chron`)
 
@@ -122,10 +124,11 @@ katholische Kirche, evangelische Kirche, Handel und Finanzen, Zünfte und Mittel
 Beamtenschaft, Militär, Bildungsbürgertum, Arbeiterbewegung (ab 1848) und Nationalbewegung.
 
 Jede Gruppe beschreibt zwei Dinge:
-- **Mitglieder:** Anteile je Beruf, Konfession und Bildung, z. B. Bauernschaft = 90 % der Bauern;
-  katholische Kirche = 60 % der Katholiken. Ein Block kann mehreren Gruppen angehören.
-- **Neigung:** Gewichte auf die Strömungen, z. B. Bildungsbürgertum: liberale 0,5, demokraten
-  0,3, konservative 0,1, katholiken 0,1.
+- **Mitglieder:** Anteile je Beruf, Konfession und Bildung, z. B. Bauernschaft = 90 % der Bauern
+  und 30 % der Landarmen; katholische Kirche = 40 % der Katholiken. Ein Block kann mehreren Gruppen
+  angehören.
+- **Neigung:** Gewichte auf die Strömungen, z. B. Bildungsbürgertum: liberale 0,55, demokraten
+  0,3, konservative 0,1, katholiken 0,05.
 
 Daraus folgen je Staat:
 - **Anteil** = Mitglieder ÷ Erwachsene;
@@ -133,6 +136,13 @@ Daraus folgen je Staat:
 
 Beides ist abgeleitet, also kein Zustand. Zustimmung, Forderungen und Aktionen der Gruppen kommen
 später (Entscheidung 6). In M8 tragen die Gruppen vor allem die Wahlneigung (Abschnitt 7.3).
+
+Umgesetzt (Schritt b3) als `interest_group_standing` im Kern, über die Orte des Staates:
+- **Anteil:** Mitglieder ab 15 Jahren ÷ Einwohner ab 15;
+- **Einfluss:** Einkommen der Mitglieder ÷ Einkommen aller Blöcke. Das Einkommen eines Blocks ist das
+  Einkommen je Kopf seines Berufs im Ort × Größe, wie bei den Spenden (Abschnitt 9.1).
+
+Die Staatsinfo zeigt beides im Fenster „Verfassung und Gruppen“, nur in Szenarien mit Parlament.
 
 ## 4. Verfassung und Wahlrecht je Staat
 
@@ -142,7 +152,7 @@ Neue datierte Felder je Staat in `staaten_historie.csv`, mit Quelle und Sicherhe
 |---|---|---|
 | `verfassung` | `keine`, `staendisch`, `konstitutionell` | Baden, Bayern, Württemberg 1818/19 `konstitutionell`; Preußen 1848.12.05 (oktroyiert) |
 | `wahlrecht` | `keines`, `staendisch`, `zensus`, `dreiklassen`, `allgemein_maenner` | Preußen 1849.05.30 `dreiklassen` |
-| `wahlsystem` | `mehrheit_stichwahl`, `mehrheit_relativ`; dazu `indirekt` (ja/nein) | — |
+| `wahlsystem` | `stichwahl`, `relativ`; dazu `wahl_indirekt` (ja/nein) und bei `zensus` die Schwelle `wahl_zensus` | Baden `stichwahl`, `wahl_indirekt = ja` |
 
 Die Felder gelten **zum Startdatum** (wie alle Staatsfelder) und beschreiben den Landtag. Jede Wahl
 trägt ihr eigenes Wahlrecht im Parlament (Abschnitt 5.1), so auch die Dreiklassenwahl in Preußen 1849.
@@ -155,7 +165,7 @@ Die Optionen in Zahlen (Spielwerte, Abschnitt 7.1):
 | Wahlrecht | Wer wählt | Gewicht |
 |---|---|---|
 | `allgemein_maenner` | Männer ab 25, „selbstständig“ nach Beruf (Landarme und Fabrikarbeiter zum Teil, je Staat) | gleich |
-| `zensus` | Männer ab 25 mit Steuerleistung über einer Schwelle (Feld `zensus_schwelle` je Staat) | gleich |
+| `zensus` | Männer ab 25 mit Steuerleistung über einer Schwelle (Feld `wahl_zensus` je Staat) | gleich |
 | `dreiklassen` | Männer ab 24 | drei Klassen nach Steuerleistung, jede wählt ein Drittel der Wahlmänner |
 | `staendisch` | Vertreter der Stände | keine Volkswahl (kein Wahlkreis) |
 
@@ -164,23 +174,33 @@ erste Gruppe davon (Entscheidung 7).
 
 ## 5. Parlamente und Wahlkreise
 
-### 5.1 Parlamente (`history/parlamente/*.chron`)
+### 5.1 Parlamente (`common/parlamente.chron`)
 
 ```text
 parlament nationalversammlung {
-    name      = "Deutsche Nationalversammlung"
-    ebene     = bund                # bund oder Staatstag (z. B. PRU)
-    sitze     = 649                 # Sollzahl
-    wahl      = { tag = 1848.05.01  wahlrecht = allgemein_maenner  indirekt = ja }
+    name          = "Deutsche Nationalversammlung"
+    ebene         = bund                # bund oder Staatstag (z. B. PRU)
+    sitze         = 649                 # Sollzahl
+    seit          = 1848.03.01
+    wahltag       = 1848.05.01
+    sitz          = frankfurt_am_main
+    wahlrecht     = allgemein_maenner
+    wahlsystem    = stichwahl
+    wahl_indirekt = ja
+    fraktionen_ab = 1848.10.01
+    boykott       = { tschechen }
+    boykott_maerkte = { boehmen }
     fraktion casino { name = "Casino"  farbe = { … }  von = 20  bis = 55 }
     …
-    quelle    = "…"
+    quelle        = "…"
 }
 ```
 
+Vollständiges Schema: [chronik-skript.md](chronik-skript.md), Abschnitt 3.21.
+
 **Vorschlag (Entscheidung 1):**
 - **Deutsche Nationalversammlung** 1848: kalibriert, Abnahme.
-- **Preußisches Abgeordnetenhaus** 17. Juli 1849 mit Dreiklassenwahlrecht: nur
+- **Preußische Zweite Kammer** 17. Juli 1849 mit Dreiklassenwahlrecht: nur
   Plausibilitätsprüfung. Es zeigt die Wirkung des Wahlrechts auf dieselbe Bevölkerung, ohne den
   Boykott der Demokraten von 1849.
 
@@ -216,16 +236,25 @@ Bildung:
    zum nächsten Wahlkreis.
 4. **Übrige Orte:** Bausteine sind die Kreise der Verwaltung (Preußen, Österreich), sonst die
    räumlichen Kreise aus M3; zu große Bausteine zerfallen in Orte. Die Bausteine werden entlang einer
-   Hilbert-Kurve über ihre Lage in Gruppen gleicher Einwohnerzahl geschnitten.
+   Hilbert-Kurve über ihre Lage geschnitten. Seit dem Review in b3 ist der Schnitt optimal
+   (dynamische Programmierung): Er minimiert die quadrierte Abweichung der Abschnitte vom Mittel
+   der Region plus eine Strafe für Lücken über 50 km zwischen Nachbarn der Kurve. Bausteine ab
+   dem 0,75-Fachen der Zielgröße zerfallen in ihre Orte. Vorher schnitt das Werkzeug gierig
+   entlang der Kurve; dabei entstanden Wahlkreise vom 0,2- bis 1,8-Fachen des Ziels.
 5. **Name** nach dem einwohnerstärksten Ort, Kennung `nv_<staat>_<nr>` bzw. `pr_<nr>`.
 
 Ergebnis:
 - **Nationalversammlung:** 633 Wahlkreise mit 649 Sitzen. Einwohner je Sitz im Median rund 70.000
-  (Liechtenstein 6.500 als eigener Staat, höchstens 125.000).
-- **Preußisches Abgeordnetenhaus:** 337 Wahlkreise mit 350 Sitzen, rund 46.000 je Sitz. Kein
-  Wahlkreis reicht weiter als 66 km vom Mittelpunkt.
-- **Weit gestreckt** sind nur Kleinstaaten mit Exklaven: Oldenburg mit Eutin (Cloppenburg 232 km)
-  und Braunschweig (Bodenwerder 119 km). Ihre Exklaven sind für einen eigenen Sitz zu klein.
+  (Liechtenstein 6.500 als eigener Staat, höchstens 120.000). Im Verhältnis zum Mittel der Region
+  liegen alle Wahlkreise beim 2/3- bis 1,5-Fachen, bis auf sechs. Die Ausreißer sind Oldenburgs
+  Exklaven: Die Fürstentümer Birkenfeld (Idar-Oberstein, 26.000) und Lübeck (Eutin, 19.000) sind
+  eigene kleine Wahlkreise, und die beiden übrigen Oldenburger sind entsprechend groß. Dazu kommen
+  Remscheid und Kaltennordheim mit dem 0,65-Fachen.
+- **Preußische Zweite Kammer:** 337 Wahlkreise mit 350 Sitzen, rund 46.000 je Sitz (31.000 bis
+  69.000, alle beim 0,69- bis 1,49-Fachen des Mittels der Region). Kein Wahlkreis reicht weiter
+  als 68 km vom Mittelpunkt.
+- **Weit gestreckt** sind in der Nationalversammlung nur Braunschweig mit Bodenwerder (116 km),
+  Hamburg mit Cuxhaven (91 km) und Neumarkt in der Steiermark (88 km).
 - **Zusammenhang:** Den prüft das Werkzeug nicht (es gibt keine Nachbarschaft der Orte). Ein
   Maß dafür ist die Ausdehnung, die der Bericht nennt.
 - Die Tabelle ist reproduzierbar, die CI prüft sie mit `--pruefen`. Ausnahmen per Hand wären eine
@@ -274,12 +303,13 @@ mit. Ohne Wahlrecht (`keines`, `staendisch`) gibt es keine Berechtigten; ständi
 ### 7.2 Wahlbeteiligung
 
 ```
-beteiligung = basis (0,45) + 0,25 × alphabetisierung + 0,10 × stadt − 0,15 × (1 − lebensstandard/100)
-              + mobilisierung der Strömungen im Wahlkreis (Wahlkampf, Abschnitt 9)
+beteiligung = basis (0,55) + 0,25 × alphabetisierung + 0,10 × stadt − 0,15 × (1 − lebensstandard/100)
 ```
 
 Grenzen 0,15 bis 0,9; Spielwerte, kalibriert auf die Beteiligung der Literatur (in Württemberg
-etwa drei Viertel, in Holstein unter der Hälfte).
+etwa drei Viertel, in Holstein unter der Hälfte). Der Wahlkampf ändert die Beteiligung nicht: Er
+vervielfacht die Stimmen der eigenen Strömung im Wahlkreis (Abschnitt 9.1). Wähler und Beteiligung im
+Wahllabor und in der Ortsinfo zeigen ihn deshalb nicht.
 
 ### 7.3 Neigung je Block
 
@@ -310,7 +340,7 @@ Je nach Wahlrecht kommen Gewichte hinzu:
   - Die Stimmen eines Ortes ergeben weiter seine Wähler; nur ihr Gewicht verschiebt sich zu den
     Reichen.
 - **Indirekte Wahl:** Die Wahlmänner verschieben zu den Honoratioren, also Faktor
-  `wahlmaenner_liberal` (Spielwert 1,15) auf `liberale` und `katholiken`. Die Literatur nennt die
+  `wahlmaenner = { liberale = 1.1 katholiken = 1.1 }` (Spielwert). Die Literatur nennt die
   Überrepräsentation des Bildungsbürgertums; unter den rund 600 Abgeordneten war kein Arbeiter.
 
 ### 7.5 Mehrheit und Stichwahl
@@ -318,18 +348,18 @@ Je nach Wahlrecht kommen Gewichte hinzu:
 **Boykott:** Stellt eine Kultur aus `boykott` mehr als die Hälfte der Menschen eines Wahlkreises, wählt
 er nicht. Die Berechtigten bleiben stehen, Wähler und Stimmen sind 0, der Sitz bleibt leer.
 
-Bei `mehrheit_stichwahl` gewinnt eine Strömung mit absoluter Mehrheit. Sonst kommen die beiden
+Bei `stichwahl` gewinnt eine Strömung mit absoluter Mehrheit. Sonst kommen die beiden
 stärksten in die Stichwahl. Die Stimmen der übrigen gehen anteilig nach der Nähe an beide: an den
 einen Finalisten der Abstand zum anderen geteilt durch beide Abstände. Die Liberalen (10) geben zwischen
 Demokraten (−50) und Katholiken (35) also 60 ÷ 85, gut sieben Zehntel, an die Katholiken und den Rest an
 die Demokraten.
 Gleichstand entscheidet die Position (die gemäßigtere gewinnt), nicht der Zufall. Bei
-`mehrheit_relativ` gewinnt die stärkste.
+`relativ` gewinnt die stärkste.
 
 ### 7.6 Abgeordnete und Fraktionen
 
 Der Abgeordnete eines Wahlkreises bekommt die Position seiner Strömung, verschoben zur Mitte des
-Wahlkreises (die mit den Stimmen gewichtete Position, Faktor 0,3), dazu Rauschen (±15). Daraus
+Wahlkreises (die mit den Stimmen gewichtete Position, Faktor 0,3), dazu Rauschen (±18). Daraus
 folgt die Fraktion nach Abschnitt 3.2.
 
 Ein Wahlkreis mit mehreren Sitzen (Berlin, Wien, Hamburg) gibt alle Sitze an die siegreiche Strömung.
@@ -355,13 +385,14 @@ Position und Fraktionslosigkeit. Deshalb rechnen die Wahlkreise parallel, und da
 von der Zahl der Threads ab.
 
 Das Ergebnis ist **Zustand**: Es steht im Zustandsverzeichnis (Prüfsumme, Spielstand, Textexport)
-und in der Chronik („Wahl zur Deutschen Nationalversammlung: 585 Abgeordnete, Casino stärkste
-Fraktion“). In M8 wirkt es auf nichts zurück: Wirtschaft und Bevölkerung rechnen wie bisher.
+und in der Chronik („Wahltag – Deutsche Nationalversammlung: 587 von 649 Sitzen besetzt, 62 leer
+(Boykott); stärkste Strömung: Konstitutionelle Liberale mit 293 Sitzen.“). Die Fraktionen gibt es am
+Wahltag noch nicht, deshalb nennt die Chronik die Strömung. In M8 wirkt es auf nichts zurück: Wirtschaft und Bevölkerung rechnen wie bisher.
 
 **1648 bleibt bitgleich** (Entscheidung 8): Der neue Zustand wird nur besucht, wenn die Welt
 Parlamente hat. Das Szenario 1648 hat keine; die Prüfsumme nach 100 Jahren bleibt
-`5db13a66d63e6079`. Der Spielstand bekommt **Format 2** mit dem Versionsschalter aus
-[speicherstaende.md](speicherstaende.md), Abschnitt 6.
+`5db13a66d63e6079`. Der Spielstand bekommt **Format 2** ([speicherstaende.md](speicherstaende.md),
+Abschnitt 6); einen Versionsschalter für ältere Spielstände gibt es noch nicht.
 
 ### 7.8 Zielwerte und Wahllabor
 
@@ -376,7 +407,7 @@ Szenarios mit 16 Seeds. Die Ausgabe enthält:
 
 Die Zielwerte stehen in `common/wahlziele_voelkerfruehling.chron` (chronik-skript.md, Abschnitt 3.24).
 Exitcode 1 bei Verstoß. Der Befehl ist ein Schritt im CI-Job „Balancing“ (16 Seeds); CTests rechnen den
-Landtag der Testdaten und die Nationalversammlung mit zwei Seeds. Im Kern: `uhrwerk/election_lab.hpp`.
+Landtag der Testdaten mit drei und die Nationalversammlung mit zwei Seeds. Im Kern: `uhrwerk/election_lab.hpp`.
 
 Ziele für die Nationalversammlung, Anteil an den besetzten Sitzen, Stand Oktober 1848
 (ungeprüfte Richtwerte aus der Literaturkenntnis und der Websuche, Fachprüfung offen):
@@ -435,6 +466,17 @@ Der Bildschirm öffnet sich am Wahltag von selbst und ist danach aus dem Spielme
 des Siegers und einer Helligkeit nach seinem Anteil. Die Ortsinfo nennt Wahlkreis, Sieger,
 Stimmen je Strömung und die Beteiligung.
 
+**Nach dem Review (Schritt b3):**
+- Solange der Wahlabend läuft, zeigen Ortsinfo, Tooltip und Legende für noch nicht gemeldete
+  Wahlkreise kein Ergebnis („noch nicht gemeldet“); die Sitze stehen erst am Ende in der Legende.
+- Mit acht Fraktionen und den Fraktionslosen scrollen die Telegramme; die Tempozeile bleibt im Bild.
+  Die stärkste Fraktion im Kopf ist nie „fraktionslos“.
+- Telegramme und Balken nennen die Strömungen mit Kurznamen (`kurzname`), damit der Anteil sichtbar
+  bleibt; die Telegramm-Knöpfe bleiben beim Melden dieselben (kein verlorener Klick).
+- Ein langes Bild meldet nicht auf einen Schlag (höchstens 0,05 s je Bild zählen).
+- „Letzte Wahl“ aus dem Spielmenü setzt beim Schließen das Tempo von vor dem Menü fort.
+- Ein Screenshot über einen Wahltag öffnet den Wahlabend nur mit `--wahlabend`.
+
 ## 9. Parteienmodus
 
 **Vorschlag (Entscheidung 5):** Statt eines Staates wählt man beim neuen Spiel eine
@@ -470,7 +512,9 @@ mit Wirkung erst am nächsten Tag.
   rund 7.800 Taler, Demokraten 7.500, Konservative 6.100, Katholiken 3.300, Arbeiterbewegung 230.
 - **Befehl** `Wahlkampf` (Strömung, Wahlkreis, Art), erlaubt bis zum Wahltag des Parlaments und
   solange die Kasse die Kosten deckt. Jede Ausführung kostet `kosten` und hebt die Stufe um
-  `wirkung × (1 − Stufe / hoechstens)`.
+  `wirkung × (1 − Stufe / hoechstens)`. Die Kosten sinken erst bei der Ausführung am nächsten Tag
+  von der Kasse; bis dahin zählen eingereihte Befehle als verplant (`reserved_campaign_funds`,
+  Review in b3), sodass die Brücke keinen Befehl annimmt, den die Kasse dann nicht deckt.
 - **Wirkung** in der Wahl (Abschnitt 7.4):
   - Versammlung und Verein: Stimmen der Strömung im Wahlkreis × (1 + Mobilisierung + Verein);
   - Flugblätter: Neigung + Stufe × Alphabetisierung des Blocks, vor der Normierung.
@@ -484,9 +528,9 @@ mit Wirkung erst am nächsten Tag.
 
   `spenden` ist 0,0003, `stimmungsfehler` 8 Punkte.
 - **Wirkung gemessen:** Mannheim, Stand 30. April 1848, alle Mittel der Liberalen in diesem einen
-  Wahlkreis. Vorher Demokraten 49 %, Liberale 27 %.
-  - 31 Flugblätter: Liberale 37 %, Demokraten 42 %;
-  - 19 Versammlungen: Liberale 32 %, Demokraten 46 %.
+  Wahlkreis (Wahlkreise nach dem Review in b3). Vorher Demokraten 50 %, Liberale 28 %.
+  - 31 Flugblätter: Liberale 38 %, Demokraten 42 %;
+  - 19 Versammlungen: Liberale 32 %, Demokraten 47 %.
 
   Wahlkampf kippt also knappe Wahlkreise, aber keine Hochburgen.
 
@@ -495,29 +539,39 @@ Wahl, aber ohne Zufall. Dazu kommt ein Anzeigefehler je Wahlkreis, Strömung und
 in ± `stimmungsfehler` Punkten. Danach wird wieder auf 100 % normiert. Der Fehler ist reine Anzeige
 und berührt weder die Simulation noch einen Zufallsstrom.
 
+**Welche Wahl:** Der Parteienmodus gilt immer der **nächsten ausstehenden Wahl** (frühester Wahltag
+ohne Ergebnis). 1848 ist das bis zum 1. Mai die Nationalversammlung, danach die Preußische Zweite
+Kammer vom 17. Juli 1849 (Review in b3; vorher blieb der Wahlkampf nach dem 1. Mai unerreichbar).
+Die Brücke liefert dafür je Ort `campaign_district`.
+
 **Godot:**
-- Rolle im Spielmenü („Staat: …“ oder „Partei: …“) oder Startoption `--partei=<strömung>`.
+- Rolle im Spielmenü („Staat: …“ oder „Partei: …“, nur in Szenarien mit Parlament) oder
+  Startoption `--partei=<strömung>`.
 - Im Parteienmodus steht das Parteipanel an der Stelle des Staatspanels:
-  - vor der Wahl Mittel, Spenden, Wahltag und die Zahl der Wahlkreise mit Wahlkampf;
-  - nach der Wahl Sitze und ab dem Fraktionsstichtag die Fraktion mit den meisten eigenen
-    Abgeordneten, dazu die Liste der Abgeordneten;
+  - Mittel, verplante Mittel, Spenden;
+  - die nächste Wahl mit Tag und der Zahl der Wahlkreise mit Wahlkampf;
+  - nach einer Wahl deren Sitze, ab dem Fraktionsstichtag die Fraktion mit den meisten eigenen
+    Abgeordneten und die Liste der Abgeordneten (beides zugleich, wenn nach einer Wahl die nächste
+    aussteht);
   - „Staat spielen“ führt zurück.
-- In der Ortsinfo rückt der Abschnitt „Wahl“ nach oben, mit Stimmungsbericht, Stand des eigenen
-  Wahlkampfs und je einem Knopf je Art. Der Knopf ist gesperrt, wenn die Mittel nicht reichen.
+- In der Ortsinfo rückt der Abschnitt „Wahl“ nach oben. Darunter steht der Abschnitt „Wahlkampf“
+  zur nächsten Wahl: Parlament, Wahlkreis, Stimmungsbericht, Stand des eigenen Wahlkampfs und je
+  ein Knopf je Art. Der Knopf ist gesperrt, wenn die Mittel nach den verplanten nicht reichen; er
+  bleibt bei laufender Zeit derselbe, damit kein Klick verloren geht.
 - Die Rolle steht im Spielstand (Metadaten `spielerstroemung`, speicherstaende.md).
 
 ## 10. Kern, Daten, Leistung
 
 - **Lader:**
-  - neue Dateien `common/stroemungen.chron` und `common/interessengruppen.chron`, Ordner
-    `history/parlamente/` und `history/wahlkreise/`;
+  - neue Dateien `common/stroemungen.chron`, `common/interessengruppen.chron`,
+    `common/parlamente.chron` und `common/wahlen.chron`, Ordner `history/wahlkreise/`;
   - neue Felder in den Staaten (Abschnitt 4) und in den Berufen (`selbststaendig`);
   - alles im Inhaltsfingerabdruck (neuer Bereich `politik`);
   - späterer Inhalt mit `seit` wie in M7.
 - **Archivar:** `wahlkreise.csv`; neue Felder in `staaten_historie.csv`; Prüfung, dass jeder Ort
   mit Daten im Bundesgebiet einen Wahlkreis hat.
 - **Kern:**
-  - `uhrwerk/politics.hpp`: `Current`, `InterestGroup`, `Parliament`, `Faction`,
+  - `uhrwerk/politics.hpp`: `PoliticalCurrent`, `InterestGroup`, `Parliament`, `Faction`,
     `ElectoralDistrict`, `ElectionResult`;
   - die Wahl in `core/src/politics.cpp`, aufgerufen im Tagesablauf am Wahltag nach der Wirtschaft.
 - **Leistung:**
@@ -525,16 +579,16 @@ und berührt weder die Simulation noch einen Zufallsstrom.
   - Der Wahlkampf ist ein Feld je Wahlkreis und Strömung.
   - Kein Einfluss auf das Spieljahr ohne Wahl.
 - **Brücke:**
-  - `get_parliaments`, `get_election(parliament)` (Wahlkreise, Ergebnis, Meldereihenfolge),
-    `get_location_district_indices`, `get_currents`, `get_interest_groups(state)`;
+  - `get_parliaments`, `get_election(index)` (Wahlkreise, Ergebnis, Meldereihenfolge),
+    `get_location_electoral_district_indices`, `get_currents`, `get_state_politics(state)`;
   - Kartenmodus 12 `MAP_WAHLEN`;
-  - Befehl `campaign(...)`.
+  - Parteienmodus `campaign`, `get_party`, `get_campaign` (Abschnitt 9.1).
 
 ## 11. Tests und Abnahme
 
 | Kriterium | Prüfung |
 |---|---|
-| Eine Wahl zur Nationalversammlung 1848 ergibt eine historisch plausible Sitzverteilung (Abweichung dokumentiert) | `wahl --seeds 16` gegen `wahlziele_voelkerfruehling.chron` in der CI; Abweichungen je Block in dieser Datei, Abschnitt 13 |
+| Eine Wahl zur Nationalversammlung 1848 ergibt eine historisch plausible Sitzverteilung (Abweichung dokumentiert) | `wahl --seeds 16` gegen `wahlziele_voelkerfruehling.chron` in der CI; Abweichungen je Block in dieser Datei, Abschnitt 14.1 |
 | Wahlabend mit Hochrechnung und Ergebnis je Wahlkreis | Godot-Rauchtest (Wahlabend öffnet am Wahltag, alle Wahlkreise gemeldet, Hochrechnung am Ende = Ergebnis), Klicktest auf einen Wahlkreis, Screenshot in der CI |
 
 Weitere Tests:
@@ -543,7 +597,7 @@ Weitere Tests:
   - Gleichstand;
   - Dreiklassen mit bekanntem Ergebnis;
   - Boykott;
-  - Fraktionen mit `seit`;
+  - Fraktionen ab dem Stichtag (`fraktionen_ab`);
   - Rundung der Sitzverteilung.
 - **Determinismus:** gleiche Wahl mit 1 und 4 Threads.
 - **Spielstände:** Speichern vor und nach dem Wahltag, Laden, gleiche Prüfsumme; Format 2 mit
@@ -553,8 +607,8 @@ Weitere Tests:
 
 ## 12. Offene Entscheidungen
 
-1. **Welche Wahlen.** Empfehlung: **Nationalversammlung 1848** (kalibriert) und **Preußisches
-   Abgeordnetenhaus Juli 1849** mit Dreiklassenwahlrecht (Plausibilität). Alternative: nur die
+1. **Welche Wahlen.** Empfehlung: **Nationalversammlung 1848** (kalibriert) und **Preußische
+   Zweite Kammer Juli 1849** mit Dreiklassenwahlrecht (Plausibilität). Alternative: nur die
    Nationalversammlung; oder zusätzlich die Preußische Nationalversammlung 1848 und die Landtage.
 2. **Sitze und Wahlkreise.** Empfehlung: **649 Sitze im Verhältnis zur Bevölkerung im
    Bundesgebiet**, Wahlkreise per Werkzeug aus den Kreisen (Abschnitt 5). Alternativen:
@@ -598,29 +652,32 @@ Weitere Tests:
 
 | Schritt | Stand |
 |---|---|
-| a1 Datenmodell | `common/stroemungen.chron` (5 Strömungen), `common/interessengruppen.chron` (11 Gruppen, davon 10 im Lesezeichen 1848; die Arbeiterbewegung erst ab August 1848), `common/parlamente.chron` (Nationalversammlung 1848 mit 8 Fraktionen, Preußisches Abgeordnetenhaus 1849 mit 3), `selbststaendig` bei Landarmen (0,6) und Fabrikarbeitern (0,7); Verfassung und Wahlrecht der Landtage für die 38 Staaten von 1848 in `staaten_historie.csv` (aus der Regierungsform abgeleitet, Zensus in Baden, Württemberg, Hessen-Darmstadt und den Niederlanden). Lader (chronik-skript.md 3.19–3.21), Archivar, Inhaltsfingerabdruck (Bereich `politik`), `info` und `pruefen`. 1648 ohne Parlament, Prüfsumme unverändert. |
-| a2 Wahlkreise | `tools/geodaten/wahlkreise_1848.py` (mit Tests, CI prüft die Tabelle), `wahlkreise.csv` mit 633 Wahlkreisen der Nationalversammlung (649 Sitze) und 337 des Preußischen Abgeordnetenhauses (350 Sitze), Archivar (`history/wahlkreise/`), Lader mit Prüfungen (Sitze = Sollzahl, Orte des Staates, jeder Ort einmal), Fingerabdruck, `info`. Boykott um Polen und Dänen ergänzt. |
-| a3 Wahl im Kern | `core/src/politics.cpp` (Abschnitte 7.1–7.7). Die Wahl läuft im Tagesablauf am Wahltag nach der Wirtschaft, mit Chronikeintrag. `common/wahlen.chron` (chronik-skript.md 3.23) enthält Wahlregeln und fünf Regionen als Spielwerte; Sitz der Parlamente ist Frankfurt bzw. Berlin. Ergebnis im Zustandsverzeichnis nur mit Parlamenten, Spielstand Format 2 (speicherstaende.md, Abschnitt 6). Tests: Neigung, Fraktionen, Stichwahl, Gleichstand, Boykott, Dreiklassen, Zensus, Threads, Spielstände, Formatwache. 1648 bitgleich. Erster Lauf 1848 ohne Kalibrierung: 504 von 649 Sitzen besetzt (145 leer, davon Tschechen 89, Polen 51, Dänen 5), die Liberalen gewinnen 369 Sitze, Konservative und Demokraten keinen. Die Kalibrierung folgt in a4. |
+| a1 Datenmodell | `common/stroemungen.chron` (5 Strömungen), `common/interessengruppen.chron` (11 Gruppen, davon 10 im Lesezeichen 1848; die Arbeiterbewegung erst ab August 1848), `common/parlamente.chron` (Nationalversammlung 1848 mit 8 Fraktionen, Preußische Zweite Kammer 1849 mit 3), `selbststaendig` bei Landarmen (0,6) und Fabrikarbeitern (0,7); Verfassung und Wahlrecht der Landtage für die 38 Staaten von 1848 in `staaten_historie.csv` (aus der Regierungsform abgeleitet, Zensus in Baden, Württemberg und Hessen-Darmstadt; nach dem Review in b3 ständisch in den Niederlanden, Dänemark, Liechtenstein und Schaumburg-Lippe). Lader (chronik-skript.md 3.19–3.21), Archivar, Inhaltsfingerabdruck (Bereich `politik`), `info` und `pruefen`. 1648 ohne Parlament, Prüfsumme unverändert. |
+| a2 Wahlkreise | `tools/geodaten/wahlkreise_1848.py` (mit Tests, CI prüft die Tabelle), `wahlkreise.csv` mit 633 Wahlkreisen der Nationalversammlung (649 Sitze) und 337 der Preußischen Zweiten Kammer (350 Sitze), Archivar (`history/wahlkreise/`), Lader mit Prüfungen (Sitze = Sollzahl, Orte des Staates, jeder Ort einmal), Fingerabdruck, `info`. Boykott um Polen und Dänen ergänzt. |
+| a3 Wahl im Kern | `core/src/politics.cpp` (Abschnitte 7.1–7.7). Die Wahl läuft im Tagesablauf am Wahltag nach der Wirtschaft, mit Chronikeintrag. `common/wahlen.chron` (chronik-skript.md 3.23) enthält Wahlregeln und fünf Regionen als Spielwerte (nach der Kalibrierung in a4 vierzehn); Sitz der Parlamente ist Frankfurt bzw. Berlin. Ergebnis im Zustandsverzeichnis nur mit Parlamenten, Spielstand Format 2 (speicherstaende.md, Abschnitt 6). Tests: Neigung, Fraktionen, Stichwahl, Gleichstand, Boykott, Dreiklassen, Zensus, Threads, Spielstände, Formatwache. 1648 bitgleich. Erster Lauf 1848 ohne Kalibrierung: 504 von 649 Sitzen besetzt (145 leer, davon Tschechen 89, Polen 51, Dänen 5), die Liberalen gewinnen 369 Sitze, Konservative und Demokraten keinen. Die Kalibrierung folgt in a4. |
 | a4 Wahllabor und Kalibrierung | `uhrwerk-cli wahl` (Abschnitt 7.8, Kern `uhrwerk/election_lab.hpp`), Wahlziele `common/wahlziele_voelkerfruehling.chron` (chronik-skript.md 3.24), CI-Schritt „Wahllabor 1848/49“, CTests `wahl_fixture` und `wahl_1848`. Ergebnis 1848 mit 16 Seeds: alle Ziele erfüllt (siehe unten). Preußen 1849: Konservative und Liberale 83 %, Arbeiterbewegung 0 %. |
 | b1 Wahlabend und Kartenmodus | Brücke: `get_currents`, `get_parliaments`, `get_election`, `get_location_electoral_district_indices`, `get_shown_parliament`, Kartenmodus 12 `MAP_WAHLEN`, Wahlkreis und Ergebnis in `get_location` (`wahl`). Godot: Kartenmodus „Wahlen“ (Taste Ä) mit Wahlkreisgrenzen, Legende, Tooltip und Abschnitt „Wahl“ in der Ortsinfo; Wahlabend (Abschnitt 8) mit Spielmenü „Letzte Wahl“ und Startoption `--wahlabend`. Tests: Einheitentests (Hochrechnung, Halbrund, Telegramme), Rauchtest der Brücke 1848, Klicktest (Wahlabend am 1. Mai, schrittweise Meldungen, Hochrechnung am Ende = Ergebnis, Telegramm zeigt die Ortsinfo), Screenshot `einigkeit_wahlabend.png` in der CI. |
 | b2 Parteienmodus | Kern: Spenden, Befehl `Wahlkampf` mit drei Arten, Wirkung in der Wahl, Ende mit der Wahl (Abschnitt 9.1); `common/wahlen.chron` mit Block `wahlkampf`; Befehle im Spielstand mit Ziel und Art (speicherstaende.md). Brücke: `campaign`, `get_party`, `get_campaign` (Stimmungsbericht), `set_player_current`, `get_player_current`, `player_current` in `get_save_info`. Godot: Rolle im Spielmenü, `--partei`, Parteipanel, Wahlkampf in der Ortsinfo. Tests: Kern (Spenden, Kosten, abnehmender Ertrag, Wirkung, Ende mit der Wahl, Wiederholung, Spielstand), Lader, Rauchtest der Brücke, Klicktest (Rolle, Versammlung in Mannheim, zurück zum Staat), Einheitentests (Parteipanel, `--partei`), Screenshot `einigkeit_partei.png` in der CI. `speichertest_1848` mischt Wahlkampfbefehle ein. 1648 bitgleich. Plausibilität Preußen 1849 (Dreiklassenwahl, `uhrwerk-cli wahl --parlament pr_abgeordnetenhaus --seeds 8`): Konservative 66, Katholiken 20, Liberale 226, Demokraten 38 von 350 Sitzen; Konservative und Liberale 83 %, Arbeiterbewegung 0 %, beide Ziele erfüllt. Grenze: Historisch boykottierten die Demokraten die Wahl vom Juli 1849; das Modell kennt keinen Boykott einer Strömung. |
+| b3 Abschluss | Staatsinfo (Abschnitt 3.3 und 6): Knopf „Verfassung und Gruppen …“ im Staatspanel mit Verfassung, Wahlrecht und Wahlsystem des Landtags und Anteil und Einfluss jeder Interessengruppe im Staat (Kern `interest_group_standing`, Brücke `get_state_politics`, Startoption `--verfassung`). Review M8 in drei Teilen (Kern; Brücke und Godot; Werkzeuge, Daten und Doku), behoben: Wahlkreise optimal geschnitten (Abschnitt 5.3), Parteienmodus bis zur Wahl 1849 (9.1), verplante Mittel, Wahlkampf-Knöpfe und Telegramme bei laufender Zeit, Wahlabend mit Fraktionen im Bild und ohne Vorabergebnis, Parteienmodus nur mit Parlament, Lader- und Wahllaborprüfungen, Staaten NL, DEN, LIE, SLI ständisch, „Preußische Zweite Kammer“, Kurznamen der Strömungen, Doku nach Daten und Code. Ergebnis 1848 danach siehe 14.1; Preußen 1849 mit 8 Seeds: Konservative 70, Katholiken 18, Liberale 227, Demokraten 34; Konservative und Liberale 85 %. |
 
 ### 14.1 Kalibrierung der Nationalversammlung (Schritt a4)
 
 Ergebnis von `uhrwerk-cli wahl --szenario voelkerfruehling --seeds 16`: Median über 16 Seeds, Anteil
-an 587 besetzten Sitzen, in Klammern der 5- und 95-%-Wert.
+an 587 besetzten Sitzen, in Klammern der 5- und 95-%-Wert. Stand nach dem Review in b3 mit den
+gleichmäßigeren Wahlkreisen (Abschnitt 5.3); die Kalibrierung aus a4 blieb unverändert, alle Ziele
+sind weiter erfüllt.
 
 | Block | Fraktionen | Ergebnis | Ziel |
 |---|---|---|---|
-| Rechte | Café Milani (29) | 4,9 % (4,3–6,3) | 4–10 % |
-| Rechtes Zentrum | Casino (115), Landsberg (60) | 30,7 % (26,9–34,2) | 22–34 % |
-| Linkes Zentrum | Augsburger Hof (49), Württemberger Hof (68) | 19,6 % (18,2–22,0) | 13–25 % |
-| Linke | Westendhall (21), Deutscher Hof (77), Donnersberg (11) | 19,2 % (18,1–21,8) | 15–27 % |
-| Fraktionslos | — (143) | 24,4 % (22,7–27,9) | 20–35 % |
+| Rechte | Café Milani (28) | 4,8 % (3,6–6,0) | 4–10 % |
+| Rechtes Zentrum | Casino (117), Landsberg (63) | 31,5 % (27,8–34,9) | 22–34 % |
+| Linkes Zentrum | Augsburger Hof (47), Württemberger Hof (67) | 19,6 % (17,4–22,8) | 13–25 % |
+| Linke | Westendhall (23), Deutscher Hof (79), Donnersberg (13) | 19,1 % (17,7–21,5) | 15–27 % |
+| Fraktionslos | — (144) | 24,5 % (22,0–28,1) | 20–35 % |
 | Besetzte Sitze | — | 587 | 560–610 |
 | Beteiligung | — | Median der Wahlkreise 54 % | 45–70 % |
 
-Strömungen: Konservative 71, Katholiken 70, Liberale 296, Demokraten 149, Arbeiterbewegung 0.
+Strömungen: Konservative 70, Katholiken 72, Liberale 293, Demokraten 150, Arbeiterbewegung 0.
 
 Was die Kalibrierung geändert hat:
 - **Stichwahl** anteilig nach der Nähe (Abschnitt 7.5). Vorher gingen alle Stimmen der übrigen an den
@@ -643,8 +700,12 @@ Was die Kalibrierung geändert hat:
   - Josephinismus (ganz Österreich): Liberale statt politischer Katholizismus.
 
 Grenzen:
-- Mit Mehrheitswahl je Wahlkreis gewinnen Hochburgen fast geschlossen: Baden 20 von 20 Sitzen an die
-  Demokraten, Sachsen 25 von 26. Historisch saßen auch dort Liberale wie Bassermann und Mathy.
-- Preußen stellt 68 Konservative, mehr als historisch; die Rechte im Ganzen liegt trotzdem im Ziel.
+- Mit Mehrheitswahl je Wahlkreis gewinnen Hochburgen geschlossen: Baden 20 von 20 Sitzen an die
+  Demokraten, Sachsen 26 von 26. Historisch saßen auch dort Liberale wie Bassermann und Mathy.
+- Preußen stellt 67 Konservative, mehr als historisch; die Rechte im Ganzen liegt trotzdem im Ziel.
+- Die Wahlkreise tragen den Namen ihres größten Ortes, und die Orte heißen wie heute (Wuppertal,
+  Norderstedt, Villingen-Schwenningen). Historische Ortsnamen sind eine Aufgabe der Ortsdaten.
+- Preußen 1849: Die Beteiligung liegt im Modell bei 56 %; historisch war sie wohl deutlich niedriger
+  (auch wegen des Boykotts der Demokraten). Kein Ziel prüft sie.
 - Die Arbeiterbewegung entsteht erst im August 1848 und gewinnt im Mai keinen Sitz.
 - Alle Werte sind Spielwerte gegen ungeprüfte Richtwerte; die Fachprüfung mit Quellen steht aus.

@@ -190,9 +190,9 @@ Szenario); die Meldung lautet dann „Startzustand weicht ab“.
 N Steuerbefehle an zufälligen Tagen aus einem eigenen Zufallsstrom `Testbefehle = 6`, der die Ströme
 des Spiels nicht berührt: Staat −1 bis hinter den letzten, Steuerart 0 bis 3 (3 ist ungültig), Satz
 von −10 % bis 110 % des Höchstsatzes – also gültige und ungültige. In Welten mit Parlamenten
-(seit M8) folgt jedem zweiten Steuerbefehl ein Wahlkampfbefehl, ebenso mit ungültigen Werten:
-Strömung −1 bis hinter die letzte, Wahlkreis −1 bis hinter den letzten, Art 0 bis 3. Ohne Parlament
-bleibt die Folge der Zufallszahlen wie vor M8.
+(seit M8) wird jeder Testbefehl mit Wahrscheinlichkeit ½ zum Wahlkampfbefehl, ebenso mit ungültigen
+Werten: Strömung −1 bis hinter die letzte, Wahlkreis −1 bis hinter den letzten, Art 0 bis 3. Die Zahl
+der Befehle bleibt N. Ohne Parlament bleibt die Folge der Zufallszahlen wie vor M8.
 
 ## 6. Versionen und Migration
 

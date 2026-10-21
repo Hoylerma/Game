@@ -411,6 +411,43 @@ std::vector<Fixed> interest_memberships(const World& world, const PopBlock& pop)
     return out;
 }
 
+std::vector<InterestGroupStanding> interest_group_standing(const World& world, Index state) {
+    if (!in_range(world.states, state)) {
+        return {};
+    }
+    const std::size_t groups = world.interest_groups.size();
+    const std::size_t professions = world.professions.size();
+    std::vector<Fixed> members(groups, Fixed{});
+    std::vector<Fixed> member_income(groups, Fixed{});
+    Fixed adults;
+    Fixed income;
+    for (const Index l : world.state_locations(state)) {
+        const Location& loc = world.locations[at(l)];
+        for (Index p = loc.first_pop; p < loc.first_pop + loc.pop_count; ++p) {
+            const PopBlock& pop = world.pops[at(p)];
+            const Fixed grown = pop.young + pop.working + pop.old;
+            const std::size_t income_index = at(l) * professions + at(pop.profession);
+            const Fixed purse =
+                in_range(world.professions, pop.profession) && income_index < world.location_income.size()
+                    ? Fixed::max(Fixed::zero(), world.location_income[income_index]) * pop.size()
+                    : Fixed{};
+            adults += grown;
+            income += purse;
+            const std::vector<Fixed> m = interest_memberships(world, pop);
+            for (std::size_t g = 0; g < groups; ++g) {
+                members[g] += m[g] * grown;
+                member_income[g] += m[g] * purse;
+            }
+        }
+    }
+    std::vector<InterestGroupStanding> out(groups);
+    for (std::size_t g = 0; g < groups; ++g) {
+        out[g].share = adults > Fixed::zero() ? members[g] / adults : Fixed{};
+        out[g].influence = income > Fixed::zero() ? member_income[g] / income : Fixed{};
+    }
+    return out;
+}
+
 std::vector<Fixed> region_shift(const World& world, Index location) {
     std::vector<Fixed> out(world.currents.size(), Fixed{});
     if (!in_range(world.locations, location)) {

@@ -22,7 +22,7 @@ staat DEN {
         heer           = 8
         schulden       = 2946000
         zollverein     = nein
-        verfassung     = keine
-        wahlrecht      = keines
+        verfassung     = staendisch
+        wahlrecht      = staendisch
     }
 }

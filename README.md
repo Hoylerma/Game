@@ -117,9 +117,9 @@ Ergänzt durch zwei Querschnittsprinzipien: **Geschichte als lebendiges System**
 
 **Meilensteine M1 (technischer Durchstich), M2 (Datenpipeline), M3 (Karte des Kernraums), M4
 (Bevölkerung und Lasttest), M5 (Wirtschaft und Staatshaushalt) und M6 (Speicherstände und
-Wiederholungen) sind abgeschlossen – damit ist die Vorproduktion (Phase 1) fertig. Mit M7
-(Lesezeichen 1848) hat die Phase 2 begonnen; technisch ist M7 fertig, die Fachprüfung der Daten
-steht aus**, siehe [Meilensteinplan](docs/meilensteine.md). Der ganze Weg von den Daten bis
+Wiederholungen) sind abgeschlossen – damit ist die Vorproduktion (Phase 1) fertig. In der Phase 2
+sind M7 (Lesezeichen 1848) und M8 (Politik, Parteien und Wahlen) technisch fertig; die Fachprüfung
+der Daten und Werte steht aus**, siehe [Meilensteinplan](docs/meilensteine.md). Der ganze Weg von den Daten bis
 zum Bild steht: Tabellen → Archivar → Chronik-Skript → Simulationskern „Uhrwerk“ → GDExtension →
 Godot-Oberfläche. Die Karte zeigt seit M3 den **ganzen Kernraum mit 4.542 Orten in 626 Kreisen**;
 historische Daten (Besitzer, Bevölkerung, Konfession, Verwüstung) haben um 1648 nur die
@@ -135,23 +135,27 @@ aus Gütern, Betrieben und regionalen Märkten, und die Staaten führen einen Ha
 Staatsbankrott; ein Balancing-Bericht prüft in der CI, dass die Kassen über 100 Jahre plausibel
 bleiben. Seit M6 lassen sich Partien speichern, laden und bitgleich fortsetzen (zstd-komprimiert,
 38 KB nach 100 Jahren), und aus Startzustand und Befehlsprotokoll lässt sich jede Partie exakt
-wiederholen. Das ganze Spiel aus dem Design-Dokument ist das noch nicht.
+wiederholen. Seit M8 wählt der Deutsche Bund 1848 die Nationalversammlung: 633 Wahlkreise, fünf
+Strömungen und zehn Interessengruppen (die Arbeiterbewegung folgt im August), Stichwahl und
+Fraktionen der Paulskirche; die Preußische Zweite Kammer wählt 1849 nach dem Dreiklassenwahlrecht.
+Der Wahlabend inszeniert das Ergebnis mit Hochrechnung, und im Parteienmodus führt man als Strömung
+Wahlkampf. Das ganze Spiel aus dem Design-Dokument ist das noch nicht.
 
 | Baustein | Stand |
 |---|---|
-| Simulationskern „Uhrwerk“ (`core/`) | Festkomma, Zufallsströme, Kalender, Parser und Lader für das Chronik-Skript mit datierter Historie, Tagestick, Seuchen und Kriegsverwüstung, Steuerbefehl, Chronik, Prüfsumme; seit M3 Orte ohne Daten und Kreise; seit M4 Bevölkerungsmodell (Altersaufbau, Kultur, Lebensstandard, Bildung, Wanderung), Mehrkernberechnung und Lasttest-Welt; seit M5 Wirtschaft (Güter, Betriebe, Märkte, Handel, Verbrauch) und Staatshaushalt (drei Steuerarten, Kredit, Bankrott, Landesausbau), Balancing-Bericht; seit M6 Zustandsverzeichnis, Spielstände (zstd), Inhaltsfingerabdruck, Befehlsprotokoll und Wiederholung, Textexport des Zustands; seit M7 Verwaltungsgliederung, Bundesgebiet und Zollverein, spielbare Staaten, Eisenbahnen mit Bahnfracht, Inhalt ab einem Datum (`seit`) und Tragfähigkeit je Szenario |
-| Kommandozeile `uhrwerk-cli` (`cli/`) | Daten prüfen, Überblick (Orte mit und ohne Daten, Kreise), Simulationsläufe mit Bericht, Bevölkerungsbilanz und Chronik, Determinismusprüfung, Lasttest, Wirtschaft im Überblick, Balancing-Bericht über viele Seeds; seit M6 Speichern, Laden, Protokoll, Wiederholung, Speichertest und Spielstandinfo mit Textexport; seit M7 alle Befehle auch für 1848 (`--szenario voelkerfruehling`), Zielwerte je Szenario |
-| Tests (`tests/`) | 153 Testfälle (doctest) und Integrationsläufe mit den echten Daten, Lasttest mit 3 Threads gegen 1 Thread, Balancing-Bericht auf der Test-Fixture, Speichertest und Wiederholung über 50 Jahre, Datenprüfung, Determinismus und Speichertest für 1848 |
-| Spieldaten (`data/`) | Lesezeichen „Der Westfälische Frieden“ (24.10.1648): 16 Staaten, 4.542 Orte in 626 Kreisen, davon 60 mit historischen Daten (Mittel- und Nordostdeutschland); seit M5 Güter, Bedürfnisse, Betriebe, 77 Märkte und Zielwerte des Balancing-Berichts; seit M7 Lesezeichen „Völkerfrühling“ (1.3.1848): 38 Staaten, 3.967 Orte mit Daten, 458 Verwaltungseinheiten, 42 Eisenbahnstrecken, frühe Industrie ab 1800 und eigene Zielwerte; gepflegt in Tabellen mit Quelle und Sicherheit je Angabe |
-| Archivar (`tools/archivar/`) | erzeugt `data/history/` (Staaten, Kreise, Orte) aus den Tabellen und prüft Verweise, Lücken und Ausreißer; seit M7 auch Verwaltung und Eisenbahnen; 44 Tests |
-| Geodaten (`tools/geodaten/`) | lädt und pinnt die offenen Quellen (Natural Earth, GeoNames, Terrain Tiles), schneidet Land, Seen und Flüsse zu und erzeugt mit `orte.py` die Orte und Kreise des Kernraums; seit M7 Zuordnung der Orte 1848 (`zuordnung.py`), Bevölkerung 1846 und Stichprobe; 116 Tests |
+| Simulationskern „Uhrwerk“ (`core/`) | Festkomma, Zufallsströme, Kalender, Parser und Lader für das Chronik-Skript mit datierter Historie, Tagestick, Seuchen und Kriegsverwüstung, Steuerbefehl, Chronik, Prüfsumme; seit M3 Orte ohne Daten und Kreise; seit M4 Bevölkerungsmodell (Altersaufbau, Kultur, Lebensstandard, Bildung, Wanderung), Mehrkernberechnung und Lasttest-Welt; seit M5 Wirtschaft (Güter, Betriebe, Märkte, Handel, Verbrauch) und Staatshaushalt (drei Steuerarten, Kredit, Bankrott, Landesausbau), Balancing-Bericht; seit M6 Zustandsverzeichnis, Spielstände (zstd), Inhaltsfingerabdruck, Befehlsprotokoll und Wiederholung, Textexport des Zustands; seit M7 Verwaltungsgliederung, Bundesgebiet und Zollverein, spielbare Staaten, Eisenbahnen mit Bahnfracht, Inhalt ab einem Datum (`seit`) und Tragfähigkeit je Szenario; seit M8 Strömungen, Interessengruppen, Verfassung und Wahlrecht, Parlamente und Wahlkreise, Wahl mit Stichwahl, Boykott und Fraktionen, Wahlkampf und Spenden, Spielstand Format 2 |
+| Kommandozeile `uhrwerk-cli` (`cli/`) | Daten prüfen, Überblick (Orte mit und ohne Daten, Kreise), Simulationsläufe mit Bericht, Bevölkerungsbilanz und Chronik, Determinismusprüfung, Lasttest, Wirtschaft im Überblick, Balancing-Bericht über viele Seeds; seit M6 Speichern, Laden, Protokoll, Wiederholung, Speichertest und Spielstandinfo mit Textexport; seit M7 alle Befehle auch für 1848 (`--szenario voelkerfruehling`), Zielwerte je Szenario; seit M8 Wahllabor (`wahl`) mit Wahlzielen |
+| Tests (`tests/`) | 169 Testfälle (doctest) und Integrationsläufe mit den echten Daten, Lasttest mit 3 Threads gegen 1 Thread, Balancing-Bericht auf der Test-Fixture, Speichertest und Wiederholung über 50 Jahre, Datenprüfung, Determinismus und Speichertest für 1848, Wahllabor auf der Fixture und für 1848 |
+| Spieldaten (`data/`) | Lesezeichen „Der Westfälische Frieden“ (24.10.1648): 16 Staaten, 4.542 Orte in 626 Kreisen, davon 60 mit historischen Daten (Mittel- und Nordostdeutschland); seit M5 Güter, Bedürfnisse, Betriebe, 77 Märkte und Zielwerte des Balancing-Berichts; seit M7 Lesezeichen „Völkerfrühling“ (1.3.1848): 38 Staaten, 3.967 Orte mit Daten, 458 Verwaltungseinheiten, 42 Eisenbahnstrecken, frühe Industrie ab 1800 und eigene Zielwerte; seit M8 Strömungen, Interessengruppen, Verfassung und Wahlrecht der Staaten, Nationalversammlung 1848 und Preußische Zweite Kammer 1849 mit 633 bzw. 337 Wahlkreisen, Wahlregeln und Wahlziele; gepflegt in Tabellen mit Quelle und Sicherheit je Angabe |
+| Archivar (`tools/archivar/`) | erzeugt `data/history/` (Staaten, Kreise, Orte) aus den Tabellen und prüft Verweise, Lücken und Ausreißer; seit M7 auch Verwaltung und Eisenbahnen, seit M8 Wahlkreise; 44 Tests |
+| Geodaten (`tools/geodaten/`) | lädt und pinnt die offenen Quellen (Natural Earth, GeoNames, Terrain Tiles), schneidet Land, Seen und Flüsse zu und erzeugt mit `orte.py` die Orte und Kreise des Kernraums; seit M7 Zuordnung der Orte 1848 (`zuordnung.py`), Bevölkerung 1846 und Stichprobe; seit M8 Wahlkreise 1848/49 (`wahlkreise_1848.py`); 123 Tests |
 | Kartengenerator (`tools/kartengenerator/`) | erzeugt Ort-ID-Bild mit Flächenart (4096 × 3329 Pixel), Flussebene und Zuordnungstabelle aus Geometrie und Orten (Python mit numpy, 13–21 s); 88 Tests |
 | Brücke (`bridge/`) | GDExtension mit der Klasse `UhrwerkSimulation` |
-| Godot-Prototyp (`game/`) | Großkarte des Kernraums mit zwölf Kartenmodi (u. a. Lebensstandard, Kultur, Wirtschaft, Märkte, Verwaltung und Eisenbahnen), Zoomstufen mit Staats-, Kreis- und Ortsnamen, Staatspanel mit drei Steuerreglern und Haushaltsfenster, Ortsinfo mit Wirtschaft, Kulturen, Altersaufbau und Bevölkerungsbilanz, Chronik, Legende, Spielmenü mit Speichern und Laden, F5/F9, Autosave; neues Spiel mit Wahl des Lesezeichens (1648 oder 1848) und Staatswahl; Einheitentest (228 Prüfungen), Rauchtest, Klicktest (4.542 von 4.542 Orten in drei Zoomstufen, Namen und Panels, Wirtschaft, Spielstände) |
-| CI (`.github/workflows/`) | Linux (GCC, Clang), Windows (MSVC), Prüfsummenvergleich (100 Jahre, Lasttest und Prüfwert eines Spielstands), Lasttest mit 500.000 Blöcken (Release), Balancing-Bericht (16 Seeds, 100 Jahre; 1848 mit 8 Seeds, 30 Jahre), Formatierung, Python-Werkzeuge (Python 3.10 und 3.13 mit numpy), Godot mit Einheiten-, Rauch- und Klicktest und Screenshots |
+| Godot-Prototyp (`game/`) | Großkarte des Kernraums mit dreizehn Kartenmodi (u. a. Lebensstandard, Kultur, Wirtschaft, Märkte, Verwaltung, Eisenbahnen und Wahlen), Zoomstufen mit Staats-, Kreis- und Ortsnamen, Staatspanel mit drei Steuerreglern und Haushaltsfenster, Ortsinfo mit Wirtschaft, Kulturen, Altersaufbau und Bevölkerungsbilanz, Chronik, Legende, Spielmenü mit Speichern und Laden, F5/F9, Autosave; neues Spiel mit Wahl des Lesezeichens (1648 oder 1848) und Staatswahl; seit M8 Wahlabend, Parteienmodus und „Verfassung und Gruppen“ in der Staatsinfo; Einheitentest (260 Prüfungen), Rauchtest, Klicktest (4.542 von 4.542 Orten in drei Zoomstufen, Namen und Panels, Wirtschaft, Spielstände, Wahlabend, Parteienmodus) |
+| CI (`.github/workflows/`) | Linux (GCC, Clang), Windows (MSVC), Prüfsummenvergleich (100 Jahre, Lasttest und Prüfwert eines Spielstands), Lasttest mit 500.000 Blöcken (Release), Balancing-Bericht (16 Seeds, 100 Jahre; 1848 mit 8 Seeds, 30 Jahre), Wahllabor 1848/49, Formatierung, Python-Werkzeuge (Python 3.10 und 3.13 mit numpy), Godot mit Einheiten-, Rauch- und Klicktest und Screenshots |
 
 Noch **nicht** umgesetzt ist alles Weitere aus dem Design-Dokument – historische Daten für den
-übrigen Kernraum um 1648, Politik, Parteien und Wahlen, Diplomatie, Krieg, Ereignisse, KI,
+übrigen Kernraum um 1648, Gesetzgebung und Regierungsbildung, Diplomatie, Krieg, Ereignisse, KI,
 Multiplayer und Modding-Werkzeuge. Was sich ändert, steht im [Änderungsprotokoll](CHANGELOG.md).
 
 ### Repository-Struktur
@@ -289,7 +293,7 @@ godot --path game                         # Spiel starten
 godot --editor --path game                # im Editor öffnen
 
 # Tests der Godot-Seite (wie in der CI): Hilfsklassen, Brücke und Kartendaten, Klickerkennung
-godot --headless --path game --script res://tests/unit_test.gd     # „UNIT OK (187 Prüfungen)“
+godot --headless --path game --script res://tests/unit_test.gd     # „UNIT OK (260 Prüfungen)“
 godot --headless --path game --script res://tests/smoke_test.gd    # „SMOKE OK“
 godot --headless --path game --script res://tests/klick_test.gd    # „KLICK OK 4542/4542“
 

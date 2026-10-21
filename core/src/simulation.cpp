@@ -193,6 +193,17 @@ void Simulation::submit(const Command& command) {
     pending_.push_back(command);
 }
 
+Fixed Simulation::reserved_campaign_funds(Index current) const {
+    Fixed reserved;
+    for (const Command& command : pending_) {
+        const auto action = static_cast<std::size_t>(command.action);
+        if (command.type == CommandType::Campaign && command.state == current && action < kCampaignActions) {
+            reserved += world_.election_rules.campaign[action].cost;
+        }
+    }
+    return reserved;
+}
+
 void Simulation::step_day() {
     // 1. Befehle in Eingangsreihenfolge. Geänderte Steuersätze werden je Staat
     //    einmal pro Tag in der Chronik vermerkt (nicht je Befehl).

@@ -8,6 +8,66 @@ Vor Version 1.0 kann sich jede Schnittstelle ändern.
 
 ## [Unveröffentlicht]
 
+### Meilenstein M8 – Politik, Parteien und Wahlen
+
+Im Lesezeichen 1848 wählt der Deutsche Bund am 1. Mai die **Nationalversammlung**: 633 Wahlkreise,
+649 Sitze, davon 587 besetzt; die Tschechen in Böhmen boykottieren. Die Sitzverteilung trifft alle
+Zielkorridore der Fraktionen, die Abweichungen sind dokumentiert. Der **Wahlabend** inszeniert das
+Ergebnis mit Meldungen, Hochrechnung und Halbrund. Im **Parteienmodus** spielt man eine Strömung und
+führt bis zur Wahl Wahlkampf. Die Preußische Zweite Kammer von 1849 (Dreiklassenwahlrecht) ist
+plausibel. Das Szenario 1648 bleibt bitgleich (`5db13a66d63e6079`).
+
+Alle Werte sind Spielwerte gegen ungeprüfte Richtwerte; die Fachprüfung mit Quellen schließt sich an
+die von M7 an. Ergebnis und Grenzen:
+[docs/meilensteine.md](docs/meilensteine.md#m8--politik-parteien-und-wahlen-).
+
+- **Vertrag:** [technik/politik.md](docs/technik/politik.md) (neu) mit Umsetzungsstand je Schritt;
+  [chronik-skript.md](docs/technik/chronik-skript.md) Abschnitte 3.19–3.24 (Strömungen,
+  Interessengruppen, Parlamente, Wahlkreise, Wahlregeln, Wahlziele).
+- **Daten (M8a):**
+  - 5 Strömungen von den Konservativen bis zur frühen Arbeiterbewegung, 11 Interessengruppen,
+    2 Parlamente: Nationalversammlung 1848 mit 8 Fraktionen, Preußische Zweite Kammer 1849 mit 3.
+  - Verfassung, Wahlrecht und Wahlsystem der 38 Staaten in `staaten_historie.csv`.
+  - `wahlkreise.csv`: 633 Wahlkreise der Nationalversammlung (649 Sitze) und 337 des Preußischen
+    Zweiten Kammer (350 Sitze), erzeugt mit `tools/geodaten/wahlkreise_1848.py`.
+  - `common/wahlen.chron` mit Wahlregeln, Wahlkampf und 14 Regionen der Wahlgeographie;
+    Wahlziele `common/wahlziele_voelkerfruehling.chron`.
+- **Kern:**
+  - Wahl am Wahltag im Tagesablauf: Wahlberechtigte nach Wahlrecht (allgemein, Zensus, Dreiklassen),
+    Beteiligung, Neigung je Block aus Interessengruppen, Bildung, Not, Stadt und Region, Wahlmänner,
+    Boykott, Stichwahl, Abgeordnete mit Position und Fraktion ab dem Stichtag; Zufallsstrom `Wahlen`.
+  - Parteienmodus: Spenden am Monatsersten, Befehl `Wahlkampf` (Versammlung, Flugblätter, Verein)
+    mit abnehmendem Ertrag; Schätzung je Wahlkreis für den Stimmungsbericht.
+  - Spielstand Format 2: Wahlen und Wahlkampf im Zustandsverzeichnis (nur mit Parlamenten), Befehle
+    mit Ziel und Aktion, Metadaten `spielerstroemung`, Inhaltsbereich `politik`.
+- **CLI:** `uhrwerk-cli wahl` (Wahllabor über viele Seeds, mit Wahlzielen, `--parlament`,
+  `--wahlkreise`); `info` mit Parlamenten und Wahlkreisen; Testbefehle mit Wahlkampf.
+- **Brücke und Godot:**
+  - Kartenmodus „Wahlen“ (Taste Ä) mit Wahlkreisgrenzen, Legende und Abschnitt „Wahl“ in der Ortsinfo.
+  - Wahlabend am Wahltag: Meldungen in Meldereihenfolge (×1, ×4, sofort), Hochrechnung mit
+    Fehlerband, Halbrund nach Strömung oder Fraktion, Telegramme; „Letzte Wahl“ im Spielmenü.
+  - Parteienmodus: Rolle im Spielmenü, Parteipanel, Wahlkampf und Stimmungsbericht in der Ortsinfo.
+  - Staatsinfo „Verfassung und Gruppen …“: Verfassung, Wahlrecht und Wahlsystem des Landtags, Anteil
+    und Einfluss der Interessengruppen (`get_state_politics`, Kern `interest_group_standing`).
+  - Startoptionen `--wahlabend`, `--partei` und `--verfassung`.
+  - Einheitentest mit **260 Prüfungen** (vorher 228); Kern mit **169 Testfällen** (vorher 153).
+- **CI:** CTests `wahl_fixture` und `wahl_1848`, Schritt „Wahllabor 1848/49“, Prüfung der Tabelle
+  der Wahlkreise, Screenshots von Wahlabend und Parteienmodus.
+- **Review M8** (Kern; Brücke und Godot; Werkzeuge, Daten und Doku):
+  - Wahlkreise optimal geschnitten (gleiche Einwohnerzahl, kurze Wege): bis auf Oldenburgs Exklaven
+    beim 2/3- bis 1,5-Fachen des Regionsmittels statt 0,2 bis 1,8; größte Ausdehnung 116 statt 232
+    km. Alle Wahlziele bleiben erfüllt.
+  - Parteienmodus: Wahlkampf zur nächsten ausstehenden Wahl, nach dem 1. Mai 1848 also zur
+    Preußischen Zweiten Kammer 1849; eingereihte Befehle zählen als verplant; Knöpfe und Telegramme
+    bleiben bei laufender Zeit bestehen; nur in Szenarien mit Parlament.
+  - Wahlabend: passt mit acht Fraktionen ins Bild, die stärkste Fraktion ist nie „fraktionslos“,
+    Ortsinfo und Legende zeigen vor der Meldung kein Ergebnis; „Letzte Wahl“ setzt das Tempo fort.
+  - Lader: Wahltag vor dem Start und leere `boykott_maerkte` sind Fehler; Wahlziele prüfen
+    `beteiligung` und doppelte Einträge.
+  - Daten: Niederlande, Dänemark, Liechtenstein und Schaumburg-Lippe ständisch; „Preußische Zweite
+    Kammer“ statt des erst 1855 eingeführten „Abgeordnetenhauses“; Kurznamen der Strömungen.
+  - Doku nach Daten und Code; Archivar lehnt `sitze` mit Nicht-Ziffern ab, statt abzubrechen.
+
 ### Meilenstein M7 – Lesezeichen 1848
 
 Das zweite Lesezeichen **„Völkerfrühling“ (1. März 1848)** ist spielbar. Es umfasst den Deutschen

@@ -34,7 +34,7 @@ parlament nationalversammlung {
 }
 
 parlament pr_abgeordnetenhaus {
-    name          = "Preußisches Abgeordnetenhaus"
+    name          = "Preußische Zweite Kammer"
     ebene         = PRU
     sitze         = 350                  # Zweite Kammer nach der oktroyierten Verfassung
     seit          = 1848.03.01

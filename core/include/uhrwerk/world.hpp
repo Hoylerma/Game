@@ -214,6 +214,7 @@ struct Railway {
 struct PoliticalCurrent {
     std::string id;
     std::string name;
+    std::string short_name; // für knappe Anzeigen (Telegramme, Balken); ohne Angabe der Name
     Color color;
     Fixed position; // Links-rechts-Achse: −100 Volkssouveränität … +100 monarchisches Prinzip
 };

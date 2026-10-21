@@ -337,7 +337,7 @@ jobs:
           exit "$status"
 
       # Wahllabor (M8, docs/technik/politik.md Abschnitt 7.8): Nationalversammlung 1848 und
-      # Preußisches Abgeordnetenhaus 1849 gegen data/common/wahlziele_voelkerfruehling.chron, mit dem
+      # Preußische Zweite Kammer 1849 gegen data/common/wahlziele_voelkerfruehling.chron, mit dem
       # Ergebnis je Wahlkreis der Nationalversammlung im Bericht.
       - name: Wahllabor 1848/49
         if: ${{ !cancelled() }}

@@ -68,6 +68,8 @@ var _speed_before_menu := 0
 var _election_night: ElectionNight = null
 var _elections_seen := 0
 var _speed_before_election := 0
+## Screenshot ohne --wahlabend: eine Wahl in den simulierten Tagen öffnet keinen Wahlabend (Review M8).
+var _quiet_elections := false
 ## Meldeposition je Ort (Wahlkreis des gezeigten Wahlabends), -1 = keiner.
 var _election_ranks := PackedInt32Array()
 ## Gemeldete Wahlkreise des offenen Wahlabends; -1 = Karte ohne Schraffur offener Wahlkreise.
@@ -111,6 +113,8 @@ func _ready() -> void:
 	_build_election_night()
 	_build_party_panel()
 	_state_panel.tax_rate_requested.connect(_on_tax_rate_requested)
+	_state_panel.politics_source = func() -> Dictionary:
+		return _sim.get_state_politics(_player) if _sim != null else {}
 	_chronicle_panel.location_requested.connect(_on_chronicle_location_requested)
 	_location_panel.close_requested.connect(_select_location.bind(-1))
 	_location_panel.play_state_requested.connect(play_state)
@@ -126,7 +130,8 @@ func _ready() -> void:
 	_map_labels.camera = _map_view.camera
 	_map_labels.location_diameter = _map_view.location_diameter()
 	_map_labels.set_covering_controls([
-		_top_bar, _state_panel, _chronicle_panel, _location_panel, _legend, _mode_bar
+		_top_bar, _state_panel, _party_panel, _chronicle_panel, _location_panel, _legend, _mode_bar,
+		_election_night,
 	])
 	_update_place_labels()
 	_update_owners()
@@ -446,7 +451,8 @@ func _after_time_passed() -> void:
 		_update_pending_elections()
 		_district_parliament = -2
 		_update_owners(true)
-		_open_election_night(_elections_seen - 1, _options.wants_screenshot())
+		if not _quiet_elections:
+			_open_election_night(_elections_seen - 1, _options.wants_screenshot())
 	_refresh_all()
 	var month := int(_sim.get_date().get("month", 0))
 	if month != _legend_month:
@@ -682,24 +688,35 @@ func _refresh_location_panel() -> void:
 		return
 	var location := _sim.get_location(_selected)
 	var owner_state := _sim.get_state(int(location.get("owner_index", -1)))
-	_location_panel.show_location(location, owner_state.get("color", UiPalette.PAPER_DEEP))
-	# Parteienmodus (seit M8): Stimmungsbericht und Wahlkampf im Wahlkreis des Ortes.
+	# Wahlabend (Review M8): Ein Wahlkreis, der noch nicht gemeldet hat, verrät sein Ergebnis nicht.
 	var election: Dictionary = location.get("wahl", {})
-	if _player_current >= 0 and not election.is_empty():
-		var district := int(election.get("district_index", -1))
+	if (
+		not election.is_empty() and _election_reported >= 0
+		and _election_night.rank_of_district(int(election.get("district_index", -1))) >= _election_reported
+	):
+		election["unreported"] = true
+	_location_panel.show_location(location, owner_state.get("color", UiPalette.PAPER_DEEP))
+	# Parteienmodus (seit M8): Stimmungsbericht und Wahlkampf im Wahlkreis der nächsten Wahl.
+	var district := int(location.get("campaign_district", -1))
+	if _player_current >= 0 and district >= 0:
 		_location_panel.show_campaign(
 			district,
 			_sim.get_campaign(district, _player_current),
 			_currents,
-			str(_currents[_player_current].get("name", "")) if _player_current < _currents.size() else ""
+			str(_currents[_player_current].get("short_name", "")) if _player_current < _currents.size() else ""
 		)
+	else:
+		_location_panel.hide_campaign()
 	_fit_location_panel.call_deferred()
 
 
 ## Ortsinfo und Legende teilen sich die rechte Spalte; die Ortsinfo weicht aus.
 func _fit_location_panel() -> void:
+	# Höhe aus der Verankerung, nicht aus size.y (die wächst mit dem Inhalt und ginge sonst in die
+	# nächste Rechnung ein); zwei Abstände zwischen Ortsinfo, Platzhalter und Legende (Review M8).
 	var separation := float(_right_column.get_theme_constant(&"separation", &"VBoxContainer"))
-	var available := _right_column.size.y - _legend.get_combined_minimum_size().y - separation
+	var height := _right_column.get_parent_area_size().y - _right_column.offset_top + _right_column.offset_bottom
+	var available := height - _legend.get_combined_minimum_size().y - 2.0 * separation
 	_location_panel.fit_height(available)
 
 
@@ -835,7 +852,7 @@ func _rebuild_legend() -> void:
 			else:
 				_legend.show_swatches(title, units)
 		MapModes.MAP_WAHLEN:
-			var entries := LegendData.election_entries(_sim)
+			var entries := LegendData.election_entries(_sim, _election_reported >= 0)
 			if entries.is_empty():
 				_legend.show_message(title, "In diesem Szenario gibt es kein Parlament und keine Wahl.")
 			else:
@@ -1056,9 +1073,12 @@ func _election_tooltip(location: Dictionary) -> String:
 		return text + " · Wahl am %s" % str(election.get("election_date_text", ""))
 	if bool(election.get("boycott", false)):
 		return text + " · Boykott"
-	var winner := str(election.get("winner_name", ""))
+	var winner := str(election.get("winner_short_name", election.get("winner_name", "")))
 	var shares: Dictionary = election.get("shares", {})
-	return "%s · %s %s" % [text, winner, GermanFormat.percent(roundi(float(shares.get(winner, 0.0))))]
+	text += " · %s %s" % [winner, GermanFormat.percent(roundi(float(shares.get(winner, 0.0))))]
+	if bool(election.get("runoff", false)):
+		text += " im ersten Wahlgang, Sieg in der Stichwahl"
+	return text
 
 
 func _on_tax_rate_requested(kind: int, percent: int) -> void:
@@ -1105,6 +1125,9 @@ func party_panel() -> PartyPanel:
 func _apply_party_option() -> void:
 	if _sim == null or _options.party_id.is_empty():
 		return
+	if _sim.get_parliaments().is_empty():
+		printerr("EINIGKEIT: --partei=%s: Dieses Szenario hat kein Parlament." % _options.party_id)
+		return
 	for i in _currents.size():
 		if str(_currents[i].get("id", "")) == _options.party_id:
 			set_party(i)
@@ -1134,6 +1157,8 @@ func _apply_role() -> void:
 	var party := _player_current >= 0
 	_party_panel.visible = party
 	_state_panel.visible = not party
+	if party:
+		_state_panel.hide_popups()
 	_location_panel.set_party_mode(party)
 	if party:
 		_party_panel.show_party(_sim.get_party(_player_current))
@@ -1181,8 +1206,13 @@ func election_night() -> ElectionNight:
 func open_last_election() -> void:
 	if _sim == null or _sim.get_election_count() == 0:
 		return
+	# Nach dem Schließen gilt das Tempo von vor dem Menü (Review M8).
+	var resume := _speed_before_menu if _game_menu.is_open() else _speed
+	var was_open := _election_night.is_open()
 	close_game_menu(false)
 	_open_election_night(_sim.get_election_count() - 1, true)
+	if not was_open:
+		_speed_before_election = resume
 
 
 ## Öffnet den Wahlabend der Wahl index; die Zeit hält an, die Karte zeigt die Wahlen.
@@ -1203,10 +1233,6 @@ func _open_election_night(index: int, complete: bool) -> void:
 		>= ElectionTally.day_number(parliament.get("faction_date", {}))
 	)
 	# Meldeposition je Ort für die Schraffur offener Wahlkreise.
-	var ranks := {}
-	for district: Variant in election.get("districts", []):
-		var d := district as Dictionary
-		ranks[int(d.get("district_index", -1))] = int(d.get("report_rank", 0))
 	var by_location := _sim.get_location_electoral_district_indices(parliament_index)
 	_election_ranks = PackedInt32Array()
 	_election_ranks.resize(by_location.size())
@@ -1216,13 +1242,18 @@ func _open_election_night(index: int, complete: bool) -> void:
 		if by_location[i] >= 0:
 			_election_ranks[i] = _election_night.rank_of_district(by_location[i])
 	_left_column.visible = false
+	_state_panel.hide_popups()
 	_tooltip.hide_tooltip()
 	_set_map_mode(MapModes.MAP_WAHLEN)
 	_on_election_progress(_election_night.reported_count())
 
 
 func _on_election_progress(reported: int) -> void:
+	var was_revealing := _election_reported >= 0
 	_election_reported = reported if not _election_night.is_complete() else -1
+	if was_revealing != (_election_reported >= 0):
+		_rebuild_legend()
+	_refresh_location_panel()
 	_refresh_map()
 	var hovered := _map_view.get_hovered()
 	if hovered >= 0:
@@ -1295,7 +1326,11 @@ func open_game_menu() -> void:
 		state_name = str(state.get("name", ""))
 	_game_menu.show_scenarios(_sim.get_scenarios(_data_dir), str(_sim.get_scenario().get("id", "")))
 	_game_menu.show_last_election(_sim.get_election_count() > 0)
-	_game_menu.show_roles(state_name, _currents, _player_current)
+	# Parteienmodus nur mit Parlament (Review M8: 1648 hat Strömungen, aber keine Wahl).
+	var roles: Array[Dictionary] = []
+	if not _sim.get_parliaments().is_empty():
+		roles = _currents
+	_game_menu.show_roles(state_name, roles, _player_current)
 	_game_menu.open(
 		SaveSlots.default_name(state_name, _sim.get_date()),
 		SaveSlots.list(_sim, save_dir),
@@ -1361,10 +1396,9 @@ func _after_load(new_client: bool = false) -> void:
 	if _election_night.is_open():
 		_close_election_night(false)
 	_player = _sim.get_player_state_index()
-	_player_current = _sim.get_player_current()
-	_apply_role()
 	if _read_scenario_constants() or new_client:
 		_connect_map_and_simulation()
+	_apply_role()  # nach den Konstanten: _currents und _player_current gelten für den Spielstand
 	_day_accumulator = 0.0
 	_select_location(-1)
 	_state_panel.clear_pending()
@@ -1477,6 +1511,7 @@ func _report_load_error(error: String) -> void:
 func _run_screenshot() -> void:
 	_map_view.hover_enabled = false
 	_tooltip.hide_tooltip()
+	_quiet_elections = not _options.show_election_night
 	if _sim != null and _options.days > 0:
 		_sim.advance_days(_options.days)
 	if MapModes.is_valid(_options.map_mode):
@@ -1492,6 +1527,8 @@ func _run_screenshot() -> void:
 		_after_time_passed()
 	if _options.show_budget:
 		_state_panel.show_budget()
+	if _options.show_politics:
+		_state_panel.show_politics()
 	if _options.show_game_menu:
 		open_game_menu()
 	if _options.show_election_night:

@@ -389,6 +389,9 @@ func _check_save_ui(sim: SimulationClient) -> void:
 	await _key(KEY_ESCAPE)
 
 	await _key(KEY_F10)
+	# 1648 hat kein Parlament: keine Rolle „Partei“ im Spielmenü (Review M8).
+	if menu.role_count() != 0:
+		_fail("Spielmenü 1648: %d Rollen statt keiner" % menu.role_count())
 	if not menu.is_open() or int(_main.call("speed")) != 0:
 		_fail("Spielstände: F10 öffnet das Menü nicht oder die Zeit läuft weiter")
 	menu.save_as("autosave_1")
@@ -545,9 +548,9 @@ func _check_new_game() -> void:
 	print("  Neues Spiel 1848, Modus Verwaltung, Staatswechsel, Spielstand von 1648 geladen")
 
 
-## Parteienmodus (seit M8): Rolle im Spielmenü, Parteipanel statt Staatspanel, Wahlkampf über den
-## Knopf in der Ortsinfo (Wahl oben, kein „Diesen Staat spielen“), Mittel am nächsten Tag weniger,
-## zurück zum Staat über das Parteipanel.
+## Staatsinfo und Parteienmodus (seit M8): „Verfassung und Gruppen …“ im Staatspanel; Rolle im
+## Spielmenü, Parteipanel statt Staatspanel, Wahlkampf über den Knopf in der Ortsinfo (Wahl oben,
+## kein „Diesen Staat spielen“), Mittel am nächsten Tag weniger, zurück zum Staat über das Parteipanel.
 func _check_party_mode(sim: SimulationClient) -> void:
 	var currents := sim.get_currents()
 	var liberals := -1
@@ -556,13 +559,25 @@ func _check_party_mode(sim: SimulationClient) -> void:
 			liberals = i
 	sim.advance_days(1) # Spenden am Monatsersten
 	_main.call("_after_time_passed")
+	# Staatsinfo (seit M8): „Verfassung und Gruppen …“ zeigt Verfassung, Wahlrecht und Gruppen.
+	var state_panel: StatePanel = _main.call("state_panel")
+	var politics := state_panel.find_child("PoliticsButton", true, false) as Button
+	if politics == null or not politics.visible:
+		_fail("Staatspanel 1848: Knopf „Verfassung und Gruppen“ fehlt")
+	else:
+		politics.pressed.emit()
+		await _frames(1)
+		var text := state_panel.politics_text()
+		var shown := state_panel.is_politics_visible()
+		if not shown or not text.contains("Verfassung:") or not text.contains("Bauernschaft"):
+			_fail("Verfassung und Gruppen: offen %s, Text „%s“" % [shown, text])
+		(state_panel.find_child("PoliticsPopup", true, false) as PopupPanel).hide()
 	var menu: GameMenu = _main.call("game_menu")
 	_main.call("open_game_menu")
 	menu.select_role(liberals)
 	_main.call("close_game_menu", false)
 	await _frames(1)
 	var party_panel: PartyPanel = _main.call("party_panel")
-	var state_panel: StatePanel = _main.call("state_panel")
 	var bar: TopBar = _main.call("top_bar")
 	if not party_panel.visible or state_panel.visible or sim.get_player_current() != liberals:
 		_fail("Parteienmodus: Parteipanel %s, Staatspanel %s, Strömung %d statt %d" % [
@@ -594,12 +609,16 @@ func _check_party_mode(sim: SimulationClient) -> void:
 	var party := sim.get_party(liberals)
 	if float(party.get("funds", 0.0)) >= funds or not party_panel.facts_text().contains("in 1 Wahlkreis"):
 		_fail("Wahlkampf am nächsten Tag: %s, Panel „%s“" % [str(party), party_panel.facts_text()])
+	# Der Knopf bleibt derselbe, damit ein Klick bei laufender Zeit nicht verloren geht (Review M8).
+	if not is_instance_valid(rally) or not rally.is_inside_tree() or not rally.is_visible_in_tree():
+		_fail("Wahlkampf: Knopf „Versammlung“ nach dem Tageswechsel neu angelegt oder verborgen")
 	var leave := party_panel.find_child("LeaveParty", true, false) as Button
 	leave.pressed.emit()
 	await _frames(1)
 	if (
 		party_panel.visible or not state_panel.visible or sim.get_player_current() != -1
-		or panel.find_child("Campaign", true, false) != null or section.get_index() < facts.get_index()
+		or (panel.find_child("Campaign", true, false) as Control).visible
+		or section.get_index() < facts.get_index()
 	):
 		_fail("Zurück zum Staat: Parteipanel %s, Staatspanel %s, Strömung %d" % [
 			party_panel.visible, state_panel.visible, sim.get_player_current()
@@ -643,12 +662,18 @@ func _check_election_night(sim: SimulationClient) -> void:
 		)
 	if night.reported_count() != 0 or night.district_count() != 633:
 		_fail("Wahlabend: %d von %d gemeldet zu Beginn" % [night.reported_count(), night.district_count()])
+	_main.call("select_location", mannheim)
 	night.set_speed(1)
 	for _frame in 20:
 		await process_frame
 	var partial := night.reported_count()
 	if partial <= 0 or night.is_complete():
 		_fail("Wahlabend: keine schrittweisen Meldungen (%d)" % partial)
+	# Die Ortsinfo verrät das Ergebnis nicht vor der Meldung (Review M8).
+	var mannheim_rank := night.rank_of_district(int(before.get("district_index", -1)))
+	var shown := _texts(panel.find_child("Election", true, false))
+	if mannheim_rank >= night.reported_count() and not shown.contains("noch nicht gemeldet"):
+		_fail("Wahlabend: Ortsinfo Mannheim zeigt vor der Meldung „%s“" % shown)
 	var election := sim.get_election(sim.get_election_count() - 1)
 	night.finish()
 	await _frames(1)
@@ -683,7 +708,30 @@ func _check_election_night(sim: SimulationClient) -> void:
 		_fail("Letzte Wahl: Wahlabend offen %s, vollständig %s" % [night.is_open(), night.is_complete()])
 	night.close_requested.emit()
 	await _frames(1)
+	# Ab dem Fraktionsstichtag zeigt der Wahlabend acht Fraktionen und die Fraktionslosen: Er bleibt
+	# im Bild, und die stärkste Fraktion ist keine „fraktionslos“ (Review M8).
+	sim.advance_days(155)
+	_main.call("open_game_menu")
+	_main.call("open_last_election")
+	await _frames(2)
+	var bottom := night.get_global_rect().end.y
+	var height := _main.get_viewport().get_visible_rect().size.y
+	var status := _texts(night)
+	if bottom > height + 0.5 or not status.contains("stärkste Fraktion") or status.contains("Fraktion: fraktionslos"):
+		_fail("Wahlabend mit Fraktionen: unten bei %d von %d, „%s“" % [bottom, height, status])
+	night.close_requested.emit()
+	await _frames(1)
 	print("  Wahlen 1848: Taste Ä, Wahlabend am 1. Mai (%d Meldungen schrittweise), Ergebnis = Hochrechnung" % partial)
+
+
+## Texte aller Labels unter node (Tests).
+func _texts(node: Node) -> String:
+	var parts := PackedStringArray()
+	if node == null:
+		return ""
+	for label in node.find_children("*", "Label", true, false):
+		parts.append((label as Label).text)
+	return " ".join(parts)
 
 
 ## Taste drücken und loslassen (echtes Eingabeereignis mit physischem Tastencode).

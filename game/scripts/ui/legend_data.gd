@@ -305,7 +305,7 @@ static func election_title(sim: SimulationClient) -> String:
 
 ## Einträge im Kartenmodus „Wahlen“ (seit M8): vor der Wahl die Wahlkreise, danach die Sitze je
 ## Strömung und der Boykott; dazu die Orte außerhalb des Wahlgebiets. Leer ohne Parlament.
-static func election_entries(sim: SimulationClient) -> Array[Dictionary]:
+static func election_entries(sim: SimulationClient, revealing: bool = false) -> Array[Dictionary]:
 	var entries: Array[Dictionary] = []
 	var parliament_index := sim.get_shown_parliament()
 	var parliaments := sim.get_parliaments()
@@ -336,6 +336,19 @@ static func election_entries(sim: SimulationClient) -> Array[Dictionary]:
 				str(parliament.get("election_date_text", "")),
 			],
 		})
+	elif revealing:
+		# Wahlabend läuft (Review M8): keine Sitze vor der letzten Meldung.
+		entries.append({
+			"color": sample if sample.a > 0.0 else UiPalette.PAPER_DEEP,
+			"text": "gemeldet",
+			"detail": "Farbe der siegreichen Strömung; die Sitze folgen am Ende des Wahlabends",
+		})
+		entries.append({
+			"color": UiPalette.PAPER_DEEP,
+			"hatch": true,
+			"text": "noch nicht gemeldet",
+			"detail": parliament_name,
+		})
 	else:
 		var election := sim.get_election(election_index)
 		var currents := sim.get_currents()
@@ -345,9 +358,9 @@ static func election_entries(sim: SimulationClient) -> Array[Dictionary]:
 				continue
 			entries.append({
 				"color": currents[c].get("color", UiPalette.BAR_NEUTRAL),
-				"text": str(currents[c].get("name", "")),
-				"detail": "%s Sitze (%s); hell bei knappem Sieg" % [
-					GermanFormat.integer(seats[c]), parliament_name
+				"text": str(currents[c].get("short_name", currents[c].get("name", ""))),
+				"detail": "%s: %s Sitze (%s); hell bei knappem Sieg" % [
+					str(currents[c].get("name", "")), GermanFormat.integer(seats[c]), parliament_name
 				],
 			})
 		var empty := int(election.get("boycott_seats", 0))
@@ -360,7 +373,7 @@ static func election_entries(sim: SimulationClient) -> Array[Dictionary]:
 	if outside > 0:
 		entries.append({
 			"color": ELECTION_OUTSIDE,
-			"text": "außerhalb des Wahlgebiets",
+			"text": "nicht im Wahlgebiet",
 			"detail": count_text(outside),
 		})
 	return entries

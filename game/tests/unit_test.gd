@@ -86,14 +86,16 @@ func _test_launch_options() -> void:
 	var bad_args := PackedStringArray(
 		[
 			"--tage=-3", "--kartenmodus=13", "--unbekannt", "--zoom=0", "--zoom=viel", "--szenario",
-			"--staat=", "--partei="
+			"--staat=", "--partei=", "--verfassung=ja"
 		]
 	)
 	var bad := LaunchOptions.parse(bad_args)
-	_equal(bad.problems.size(), 8, "fehlerhafte Optionen gemeldet")
+	_equal(bad.problems.size(), 9, "fehlerhafte Optionen gemeldet")
 	var party := LaunchOptions.parse(PackedStringArray(["--szenario=voelkerfruehling", "--partei=liberale"]))
 	_true(party.party_id == "liberale" and party.problems.is_empty(), "Option --partei (seit M8)")
 	_equal(defaults.party_id, "", "ohne --partei spielt man den Staat")
+	var politics := LaunchOptions.parse(PackedStringArray(["--verfassung"]))
+	_true(politics.show_politics and not defaults.show_politics, "Option --verfassung (seit M8)")
 	var chosen := LaunchOptions.parse(
 		PackedStringArray(["--szenario=voelkerfruehling", "--staat=bav"])
 	)
@@ -601,17 +603,20 @@ func _test_party_panel() -> void:
 	var panel := PartyPanel.new()
 	panel._ready() # baut den Inhalt; in _initialize ist der Baum noch nicht bereit
 	panel.show_party({
-		"name": "Liberale", "funds": 1234.0, "donations": 100.0, "parliament_name": "Nationalversammlung",
-		"held": false, "election_date_text": "1. Mai 1848", "campaign_districts": 2,
+		"name": "Liberale", "funds": 1234.0, "donations": 100.0, "reserved": 400.0, "open": true,
+		"parliament_name": "Nationalversammlung", "held": false, "election_date_text": "1. Mai 1848",
+		"campaign_districts": 2,
 	})
 	var before := panel.facts_text()
 	_true(
-		before.contains("1.234") and before.contains("am 1. Mai 1848") and before.contains("in 2 Wahlkreisen"),
-		"Parteipanel vor der Wahl: Mittel, Wahltag, Wahlkampf (%s)" % before
+		before.contains("1.234") and before.contains("1. Mai 1848") and before.contains("in 2 Wahlkreisen")
+		and before.contains("400") and not before.contains("Sitze"),
+		"Parteipanel vor der Wahl: Mittel, verplant, Wahltag, Wahlkampf (%s)" % before
 	)
 	panel.show_party({
-		"name": "Liberale", "parliament_name": "Nationalversammlung", "held": true, "seats": 3, "seated": 10,
-		"factions_formed": true, "faction_name": "Casino", "faction_own": 2, "faction_seats": 4,
+		"name": "Liberale", "open": false, "held": true, "last_parliament_name": "Nationalversammlung",
+		"seats": 3, "seated": 10, "factions_formed": true, "faction_name": "Casino", "faction_own": 2,
+		"faction_seats": 4,
 		"deputies": [{"district_name": "Mannheim", "state_name": "Baden", "faction_name": "Casino"}],
 	})
 	var after := panel.facts_text()
@@ -619,5 +624,16 @@ func _test_party_panel() -> void:
 		after.contains("3 von 10") and after.contains("Casino (2 eigene von 4)")
 		and not after.contains("Wahlkampf"),
 		"Parteipanel nach der Wahl: Sitze und Fraktion (%s)" % after
+	)
+	# Nächste Wahl und letzte Wahl zugleich (nach der Nationalversammlung, vor Preußen 1849).
+	panel.show_party({
+		"name": "Liberale", "open": true, "parliament_name": "Preußische Zweite Kammer",
+		"election_date_text": "17. Juli 1849", "held": true, "last_parliament_name": "Nationalversammlung",
+		"seats": 3, "seated": 10,
+	})
+	var both := panel.facts_text()
+	_true(
+		both.contains("Preußische Zweite Kammer") and both.contains("3 von 10"),
+		"Parteipanel mit nächster und letzter Wahl (%s)" % both
 	)
 	panel.free()

@@ -115,6 +115,7 @@ public:
     godot::Dictionary get_election(std::int64_t index) const;
     godot::PackedInt32Array get_location_electoral_district_indices(std::int64_t parliament) const;
     std::int64_t get_shown_parliament() const;
+    godot::Dictionary get_state_politics(std::int64_t state_index) const;
 
     // Parteienmodus (seit M8, Schritt b2, politik.md Abschnitt 9)
     bool campaign(std::int64_t current, std::int64_t district, std::int64_t action);
@@ -148,6 +149,10 @@ private:
                                                    std::int64_t district) const;
     /// Letzte Wahl eines Parlaments oder nullptr (seit M8).
     const uhrwerk::ElectionResult* latest_election(std::int64_t parliament) const;
+    // Parlament mit der nächsten ausstehenden Wahl (Parteienmodus), -1 ohne.
+    std::int64_t next_parliament() const;
+    // Wahlkampf erlaubt und bezahlbar, auch nach den schon eingereihten Befehlen der Strömung.
+    bool campaign_possible(std::int64_t current, std::int64_t district, uhrwerk::CampaignAction action) const;
     /// Nachschlagetabellen für Kennungen und Orte je Kreis; Orte und Kreise ändern sich
     /// während einer Partie nicht. Nur Anzeige, ohne Einfluss auf die Simulation.
     void build_lookups();

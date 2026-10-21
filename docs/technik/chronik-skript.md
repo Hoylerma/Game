@@ -600,13 +600,14 @@ ab 1648 erreicht die Industrie nicht.
 ```text
 stroemung liberale {
     name     = "Konstitutionelle Liberale"   # Pflicht
+    kurzname = "Liberale"                    # optional: knappe Anzeigen (Telegramme, Balken); sonst name
     farbe    = { 206 160 40 }                # Pflicht
-    position = 15                            # Pflicht: Links-rechts-Achse −100 … +100
+    position = 10                            # Pflicht: Links-rechts-Achse −100 … +100
 }
 ```
 
 Politische Strömungen ([politik.md](politik.md), Abschnitt 3.1). Die Position ordnet die Stichwahl und
-die Fraktionen. Die Datei darf fehlen (dann gibt es keine Politik); ist sie da, braucht sie mindestens
+die Fraktionen. Der Kurzname ist reine Anzeige und gehört nicht zum Inhaltsfingerabdruck. Die Datei darf fehlen (dann gibt es keine Politik); ist sie da, braucht sie mindestens
 eine Strömung. Im Kern: `World::currents` (`PoliticalCurrent`).
 
 ### 3.20 `common/interessengruppen.chron` (seit M8)
@@ -692,7 +693,7 @@ wahlregeln {                                   # Pflicht, genau einmal
     maenneranteil       = 0.5                  # Männer unter den Erwachsenen (0..1)
     junge_im_wahlalter  = 0.33                 # Anteil der 15–29-Jährigen ab 25 (0..1)
     junge_ab_24         = 0.4                  # dasselbe ab 24 (Dreiklassen)
-    beteiligung_basis   = 0.45                 # Beteiligung = basis + bildung × Alphabetisierung + stadt
+    beteiligung_basis   = 0.55                 # Beteiligung = basis + bildung × Alphabetisierung + stadt
     beteiligung_bildung = 0.25                 #   − not × (1 − Lebensstandard/100), begrenzt auf min..max
     beteiligung_stadt   = 0.1
     beteiligung_not     = 0.15
@@ -703,10 +704,10 @@ wahlregeln {                                   # Pflicht, genau einmal
     neigung_bildung     = { konservative = -0.15 liberale = 0.1 }    # je Strömung −1..1
     neigung_not         = { demokraten = 0.15 arbeiter = 0.1 }
     neigung_stadt       = { liberale = 0.06 demokraten = 0.06 }
-    wahlmaenner         = { liberale = 1.15 }  # optional: Faktor bei indirekter Wahl (0..10), Standard 1
+    wahlmaenner         = { liberale = 1.1 }   # optional: Faktor bei indirekter Wahl (0..10), Standard 1
     rauschen            = 0.05                 # ± relativ je Wahlkreis und Strömung (0..1)
     zug_zur_mitte       = 0.3                  # Abgeordnete: Zug zur Mitte des Wahlkreises (0..1)
-    position_rauschen   = 15                   # ± Punkte auf der Achse (0..100)
+    position_rauschen   = 18                   # ± Punkte auf der Achse (0..100)
     fraktionslos        = 0.25                 # Anteil der Fraktionslosen (0..1)
     wahlkampf {                                # Parteienmodus (seit Schritt b2)
         spenden         = 0.0003               # Anteil am Monatseinkommen der Anhänger (0..1)

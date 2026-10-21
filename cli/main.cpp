@@ -620,8 +620,9 @@ Date date_after(const Date& start, std::int64_t days) {
 /// Testbefehle (speicherstaende.md, Abschnitt 5): count Steuerbefehle an zufälligen Tagen in
 /// [first_day, end_day), nach Tag geordnet. Gültige und ungültige (Staat -1 oder hinter dem letzten,
 /// Steuerart 3, Satz unter 0 oder über dem Höchstsatz), aus dem eigenen Zufallsstrom Testbefehle.
-/// Mit Parlamenten (seit M8) ist jeder zweite Befehl Wahlkampf: Strömung, Wahlkreis und Art zufällig,
-/// auch ungültige (-1 oder hinter dem letzten, Art 3); ohne Parlamente bleibt die Folge wie bisher.
+/// Mit Parlamenten (seit M8) wird jeder Befehl mit Wahrscheinlichkeit ½ zum Wahlkampf: Strömung,
+/// Wahlkreis und Art zufällig, auch ungültige (-1 oder hinter dem letzten, Art 3); die Zahl der Befehle
+/// bleibt count. Ohne Parlamente bleibt die Folge der Zufallszahlen wie bisher.
 std::vector<uhrwerk::LoggedCommand> make_test_commands(const World& w, std::uint64_t seed, std::int64_t count,
                                                        std::int64_t first_day, std::int64_t end_day) {
     std::vector<uhrwerk::LoggedCommand> list;

@@ -81,6 +81,11 @@ public:
     void step_day();
     void step_days(std::int64_t days);
 
+    /// Kosten der eingereihten Wahlkampfbefehle einer Strömung (seit M8, Review): Die Mittel sinken
+    /// erst bei der Ausführung am nächsten Tag; wer vorher prüft, ob ein weiterer Befehl bezahlbar
+    /// ist (Brücke), rechnet diese Kosten als verplant ab.
+    Fixed reserved_campaign_funds(Index current) const;
+
     const World& world() const { return world_; }
     /// Märkte, Nachbarn und Bahnverbindungen (seit M7 auch für die Anzeige der Bahnfracht).
     const EconomyTopology& economy_topology() const { return topology_; }

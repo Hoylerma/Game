@@ -47,6 +47,16 @@ var party_mode := false
 var _play_button: Button = null
 ## Abschnitt Wahl (seit M8): Wahlkreis und Ergebnis der letzten Wahl.
 var _election_box: VBoxContainer = null
+## Abschnitt Wahlkampf (Parteienmodus, seit M8): einmal angelegt und danach nur aktualisiert, damit
+## die Knöpfe bei laufender Zeit nicht verschwinden (Review M8).
+var _campaign_box: VBoxContainer = null
+var _campaign_facts: GridContainer = null
+var _campaign_poll_caption: Label = null
+var _campaign_note: Label = null
+var _campaign_poll: VBoxContainer = null
+var _campaign_levels: Label = null
+var _campaign_buttons: Array[Button] = []
+var _campaign_district := -1
 var _owner_index := -1
 
 ## Höchste Höhe des Panels (fit_height); unbegrenzt, solange nicht gesetzt.
@@ -139,6 +149,9 @@ func _ready() -> void:
 	# Gleich unter den Eckdaten: Im Kartenmodus „Wahlen“ ist das Ergebnis der Grund des Klicks.
 	facts.get_parent().add_child(_election_box)
 	facts.get_parent().move_child(_election_box, _play_button.get_index() + 1)
+	_build_campaign()
+	facts.get_parent().add_child(_campaign_box)
+	_place_after(_campaign_box, _election_box)
 
 
 ## Parteienmodus ein- oder ausschalten: Der Wahlkampf ist dann der Grund des Klicks, der Abschnitt
@@ -152,6 +165,17 @@ func set_party_mode(on: bool) -> void:
 	if _election_box.get_index() < index:
 		index -= 1
 	parent.move_child(_election_box, index)
+	_place_after(_campaign_box, _election_box)
+	if not on:
+		hide_campaign()
+
+
+## node direkt hinter anchor (gleicher Elternknoten).
+static func _place_after(node: Node, anchor: Node) -> void:
+	var index := anchor.get_index() + 1
+	if node.get_index() < index:
+		index -= 1
+	node.get_parent().move_child(node, index)
 
 
 ## Begrenzt die Höhe des Panels; überzähliger Inhalt wird scrollbar.
@@ -245,64 +269,102 @@ func show_location(location: Dictionary, owner_color: Color) -> void:
 	visible = true
 
 
-## Wahlkampf im Wahlkreis des Ortes (seit M8, Parteienmodus): Stimmungsbericht mit Fehler, Stand des
-## eigenen Wahlkampfs, Knöpfe je Art. campaign aus SimulationClient.get_campaign, currents aus
-## get_currents. Nach show_location aufrufen; ohne offene Wahl nichts.
+## Wahlkampf im Wahlkreis des Ortes (seit M8, Parteienmodus): Wahl, Stimmungsbericht mit Fehler,
+## Stand des eigenen Wahlkampfs, Knöpfe je Art. district ist der Wahlkreis der nächsten Wahl
+## (get_location: campaign_district), campaign aus SimulationClient.get_campaign, currents aus
+## get_currents. Ohne offene Wahl verschwindet der Abschnitt.
 func show_campaign(district: int, campaign: Dictionary, currents: Array[Dictionary], party_name: String) -> void:
-	if campaign.is_empty() or not bool(campaign.get("open", false)) or not _election_box.visible:
+	if campaign.is_empty() or not bool(campaign.get("open", false)):
+		hide_campaign()
 		return
-	var box := VBoxContainer.new()
-	box.name = "Campaign"
-	box.add_theme_constant_override(&"separation", 4)
-	_election_box.add_child(box)
-	box.add_child(_caption("STIMMUNGSBERICHT (± %s PUNKTE)" % GermanFormat.number(
+	_campaign_district = district
+	_clear(_campaign_facts)
+	_add_fact(_campaign_facts, "Wahl", "%s, %s" % [
+		str(campaign.get("parliament_name", "")), str(campaign.get("election_date_text", ""))
+	])
+	var name_text := str(campaign.get("district_name", ""))
+	var seats := int(campaign.get("seats", 1))
+	if seats > 1:
+		name_text += " (%d Sitze)" % seats
+	_add_fact(_campaign_facts, "Wahlkreis", name_text)
+	_campaign_poll_caption.text = "STIMMUNGSBERICHT (± %s PUNKTE)" % GermanFormat.number(
 		float(campaign.get("poll_error", 0.0)), 0
-	)))
-	if bool(campaign.get("boycott", false)):
-		var note := Label.new()
-		note.text = "Die Mehrheit boykottiert die Wahl; dieser Wahlkreis bleibt wohl leer."
-		note.theme_type_variation = &"MutedLabel"
-		note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-		note.custom_minimum_size = Vector2(1, 0)
-		box.add_child(note)
+	)
+	_campaign_note.visible = bool(campaign.get("boycott", false))
 	var poll: PackedFloat64Array = campaign.get("poll", PackedFloat64Array())
 	var shares := {}
 	var colors := {}
 	for c in mini(poll.size(), currents.size()):
-		var current_name := str(currents[c].get("name", ""))
+		var current_name := str(currents[c].get("short_name", currents[c].get("name", "")))
 		shares[current_name] = poll[c]
 		colors[current_name] = currents[c].get("color", UiPalette.BAR_NEUTRAL)
-	var poll_box := VBoxContainer.new()
-	box.add_child(poll_box)
-	_show_shares(poll_box, shares, colors)
-	box.add_child(_caption("WAHLKAMPF: %s" % party_name.to_upper()))
-	var levels := Label.new()
-	levels.theme_type_variation = &"MutedLabel"
-	levels.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	levels.custom_minimum_size = Vector2(1, 0)
-	levels.text = "Mobilisierung +%s, Vereine +%s, Flugblätter %s" % [
+	_show_shares(_campaign_poll, shares, colors)
+	_campaign_levels.text = "%s: Mobilisierung +%s, Vereine +%s, Flugblätter %s" % [
+		party_name,
 		GermanFormat.percent(roundi(float(campaign.get("mobilization", 0.0)) * 100.0)),
 		GermanFormat.percent(roundi(float(campaign.get("club", 0.0)) * 100.0)),
 		GermanFormat.number(float(campaign.get("persuasion", 0.0)), 2),
 	]
-	box.add_child(levels)
-	for entry: Variant in campaign.get("actions", []):
-		var action := entry as Dictionary
-		var button := Button.new()
-		button.name = "Campaign%d" % int(action.get("action", 0))
+	var actions: Array = campaign.get("actions", [])
+	for i in _campaign_buttons.size():
+		var button := _campaign_buttons[i]
+		var action: Dictionary = actions[i] if i < actions.size() else {}
+		button.visible = not action.is_empty()
 		button.text = "%s – %s" % [
 			str(action.get("name", "")), GermanFormat.money(float(action.get("cost", 0.0)))
 		]
-		button.focus_mode = Control.FOCUS_NONE
 		button.disabled = not bool(action.get("allowed", false))
 		button.tooltip_text = (
 			"Wirkt ab dem nächsten Tag bis zum Wahltag, mit abnehmendem Ertrag"
 			if not button.disabled
-			else "Die Mittel reichen nicht"
+			else "Die Mittel reichen nicht (auch nach den schon angesetzten Aktionen)"
 		)
-		var kind := int(action.get("action", 0))
-		button.pressed.connect(func() -> void: campaign_requested.emit(district, kind))
-		box.add_child(button)
+	if not _campaign_box.visible:
+		_campaign_box.visible = true
+
+
+## Abschnitt Wahlkampf ausblenden (Staat gespielt, keine offene Wahl am Ort).
+func hide_campaign() -> void:
+	_campaign_district = -1
+	if _campaign_box != null and _campaign_box.visible:
+		_campaign_box.visible = false
+
+
+func _build_campaign() -> void:
+	_campaign_box = VBoxContainer.new()
+	_campaign_box.name = "Campaign"
+	_campaign_box.add_theme_constant_override(&"separation", 4)
+	_campaign_box.visible = false
+	_campaign_box.add_child(HSeparator.new())
+	_campaign_box.add_child(_caption("WAHLKAMPF"))
+	_campaign_facts = GridContainer.new()
+	_campaign_facts.columns = 2
+	_campaign_box.add_child(_campaign_facts)
+	_campaign_poll_caption = _caption("STIMMUNGSBERICHT")
+	_campaign_box.add_child(_campaign_poll_caption)
+	_campaign_note = Label.new()
+	_campaign_note.text = "Die Mehrheit boykottiert die Wahl; dieser Wahlkreis bleibt wohl leer."
+	_campaign_note.theme_type_variation = &"MutedLabel"
+	_campaign_note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_campaign_note.custom_minimum_size = Vector2(1, 0)
+	_campaign_box.add_child(_campaign_note)
+	_campaign_poll = VBoxContainer.new()
+	_campaign_box.add_child(_campaign_poll)
+	_campaign_levels = Label.new()
+	_campaign_levels.theme_type_variation = &"MutedLabel"
+	_campaign_levels.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_campaign_levels.custom_minimum_size = Vector2(1, 0)
+	_campaign_box.add_child(_campaign_levels)
+	for i in 3:
+		var button := Button.new()
+		button.name = "Campaign%d" % i
+		button.focus_mode = Control.FOCUS_NONE
+		button.pressed.connect(func() -> void:
+			if _campaign_district >= 0:
+				campaign_requested.emit(_campaign_district, i)
+		)
+		_campaign_box.add_child(button)
+		_campaign_buttons.append(button)
 
 
 ## Wahlkreis und Ergebnis der letzten Wahl (seit M8); leer außerhalb des Wahlgebiets.
@@ -322,6 +384,10 @@ func _show_election(election: Dictionary) -> void:
 	if seats > 1:
 		district += " (%d Sitze)" % seats
 	_add_fact(grid, "Wahlkreis", district)
+	if bool(election.get("unreported", false)):
+		# Wahlabend läuft, der Wahlkreis hat noch nicht gemeldet (Review M8).
+		_add_fact(grid, "Ergebnis", "noch nicht gemeldet")
+		return
 	if not bool(election.get("held", false)):
 		_add_fact(grid, "Wahl am", str(election.get("election_date_text", "")))
 		return

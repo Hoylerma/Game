@@ -20,7 +20,7 @@ Rasterregel, Dateien unter `data/karte/geometrie/`); Inhalt des Kernraums:
 | `zuordnung.py`, `gebietscodes.csv` | Lesezeichen 1848 (M7): Besitzer, Bundesgebiet und Verwaltung der Orte aus Regeln (siehe [Lesezeichen 1848](#lesezeichen-1848-zuordnungpy-bevoelkerung_1846py)); `gebietscodes.csv` = heutige Verwaltungscodes und Einwohner je Ort aus GeoNames (erzeugt) |
 | `bevoelkerung_1846.py` | Lesezeichen 1848 (M7): Bevölkerung der Orte zum 3. Dezember 1846 (Schätzung aus Summen) |
 | `stichprobe_1848.py` | Lesezeichen 1848 (M7): reproduzierbare Stichprobe und Flächensummen für die Prüfung ([stichprobe_1848.md](../../docs/pruefung/stichprobe_1848.md)) |
-| `wahlkreise_1848.py` | Wahlkreise der Nationalversammlung 1848 und des Preußischen Abgeordnetenhauses 1849 (seit M8, `data/tabellen/wahlkreise.csv`) |
+| `wahlkreise_1848.py` | Wahlkreise der Nationalversammlung 1848 und der Preußischen Zweiten Kammer 1849 (seit M8, `data/tabellen/wahlkreise.csv`) |
 | `test_geodaten.py`, `test_orte.py`, `test_zuordnung.py`, `test_bevoelkerung_1846.py`, `test_stichprobe_1848.py`, `test_wahlkreise_1848.py`, `testdaten/` | Tests ohne Netz und ohne Zwischenspeicher |
 
 Erzeugt bzw. gepflegt in `data/karte/`:
@@ -52,7 +52,7 @@ python3 tools/geodaten/hoehen.py 13.40 52.52 --radius 5
 python3 tools/geodaten/orte.py                         # Orte und Kreise erzeugen (1–2 min), siehe unten
 python3 tools/geodaten/orte.py --pruefen               # Exitcode 1, wenn die Tabellen veraltet sind
 
-python3 -m unittest discover -s tools/geodaten         # 96 Tests ohne Netz (auch mit Python 3.10; läuft in der CI)
+python3 -m unittest discover -s tools/geodaten         # 123 Tests ohne Netz (auch mit Python 3.10; läuft in der CI)
 ```
 
 `holen` lädt nur, was fehlt oder einen falschen Prüfwert hat; eine Datei mit abweichendem Prüfwert
@@ -483,8 +483,14 @@ python3 tools/geodaten/wahlkreise_1848.py --pruefen   # Exitcode 1, wenn wahlkre
    mindestens einen) und innerhalb eines Staates auf seine Regionen: Regierungsbezirke, Kronländer
    oder Landschaften.
 3. Orte mit dem 1,5-Fachen der Zielgröße werden eigene Wahlkreise mit mehreren Sitzen.
-4. Die übrigen Kreise schneidet das Werkzeug entlang einer Hilbert-Kurve in Gruppen gleicher
-   Einwohnerzahl.
+4. Die übrigen Kreise (ab dem 0,75-Fachen der Zielgröße in ihre Orte zerlegt) schneidet das
+   Werkzeug entlang einer Hilbert-Kurve optimal: möglichst gleiche Einwohnerzahl, mit einer Strafe
+   für Lücken über 50 km innerhalb eines Wahlkreises (dynamische Programmierung, seit dem Review M8).
+
+Der Bericht nennt je Parlament die Spanne der Einwohner je Sitz, das Verhältnis zum Mittel der
+Region (Nationalversammlung 0,28 bis 1,71, sechs Wahlkreise außerhalb von 2/3 bis 1,5, alle bei
+Oldenburgs Exklaven und zwei kleinen Fällen; Preußen 1849 0,69 bis 1,49) und die größte Ausdehnung.
+Von Hand geänderte Zeilen der Tabelle lässt `--pruefen` scheitern; Änderungen gehören ins Werkzeug.
 
 Die Rechnung ist deterministisch und braucht keinen Zwischenspeicher; die CI prüft mit
 `--pruefen`, dass die Tabelle aktuell ist.

@@ -208,6 +208,7 @@ class TestFehler(MitKopie):
             ("wahlkreise.csv", ";heide;", ";hafen;"): "Ort hafen liegt schon in Wahlkreis lt_01 (Zeile 2)",
             ("wahlkreise.csv", "landtag;AAA;Heide", "landtag;CCC;Heide"): "unbekannter Staat 'CCC' für Wahlkreis lt_02",
             ("wahlkreise.csv", "Heide-Süd;2;", "Heide-Süd;0;"): "'sitze' erwartet eine Ganzzahl ab 1, nicht '0'",
+            ("wahlkreise.csv", "Heide-Süd;2;", "Heide-Süd;²;"): "'sitze' erwartet eine Ganzzahl ab 1, nicht '²'",
             ("wahlkreise.csv", "lt_02;", "lt_01;"): "Wahlkreis lt_01 ist doppelt (zuerst in Zeile 2)",
             ("eisenbahnen.csv", "nordbahn;nord;;moor;heide", "zweitbahn;nord;Zweitbahn;moor;hafen"): (
                 "Abschnitt moor–hafen der Strecke zweitbahn liegt schon auf Strecke nordbahn (Zeile 2)"

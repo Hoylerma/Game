@@ -23,6 +23,16 @@ class ThreadPool;
 /// World::interest_groups.
 std::vector<Fixed> interest_memberships(const World& world, const PopBlock& pop);
 
+/// Stand einer Interessengruppe in einem Staat (Abschnitt 3.3; abgeleitet, kein Zustand).
+struct InterestGroupStanding {
+    Fixed share;     // Mitglieder ab 15 Jahren ÷ Einwohner ab 15 (0..1)
+    Fixed influence; // Einkommen der Mitglieder ÷ Einkommen aller Blöcke (0..1)
+};
+
+/// Stand aller Interessengruppen (parallel zu World::interest_groups) über die Orte des Staates;
+/// Einkommen eines Blocks = Einkommen je Kopf seines Berufs im Ort × Größe. Leer bei unbekanntem Staat.
+std::vector<InterestGroupStanding> interest_group_standing(const World& world, Index state);
+
 /// Verschiebung der Neigung an einem Ort: Summe der passenden Regionen (je Strömung).
 std::vector<Fixed> region_shift(const World& world, Index location);
 
