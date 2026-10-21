@@ -1,0 +1,420 @@
+# Diplomatie und Zollverein (Meilenstein M9)
+
+> **Status: Entwurf** – Entscheidungen offen (Abschnitt 9). Grundlage sind
+> [14 Diplomatie](../14_diplomatie.md) (Abschnitte 1, 3, 4 und 5),
+> [08 Wirtschaft und Finanzen](../08_wirtschaft_und_finanzen.md) (Abschnitt 5.3, Zollverein),
+> [12 Föderalismus](../12_foederalismus_und_bundeslaender.md) und der Meilensteinplan
+> ([meilensteine.md](../meilensteine.md#m9--diplomatie-und-zollverein)). Das Wirtschaftsmodell steht
+> in [wirtschaft.md](wirtschaft.md), das Lesezeichen 1848 in [lesezeichen_1848.md](lesezeichen_1848.md).
+
+Im März 1848 ist der Deutsche Bund ein Staatenbund unter österreichischem Vorsitz. Wirtschaftlich
+geht ein Teil davon schon eigene Wege: Der **Zollverein** umfasst seit 1834 Preußen, die
+Mittelstaaten des Südens und Thüringen, nicht aber Österreich, Hannover, Mecklenburg und die
+Hansestädte. Zwischen Wien und Berlin entscheidet sich in den nächsten Jahren die deutsche Frage,
+zuerst diplomatisch (Erfurter Union, Olmütz 1850), dann militärisch (1866).
+
+M9 bringt dafür zwei Dinge in die Simulation:
+- den **Zollverein** als Wirtschaftssystem: Zollgebiete, Zoll im Handel, gemeinsame Kasse, Beitritt
+  und Austritt;
+- die **Diplomatie** der deutschen Staaten: Beziehungen, Bündnisse und Garantien, die
+  Bundesversammlung und diplomatische Spiele um die Führung im Bund.
+
+Krieg (M10), Ereignisse und Revolution (M11) und die KI der Staaten (M12) bauen darauf auf.
+
+## 1. Umfang
+
+Der Meilensteinplan verlangt:
+
+- Beziehungen, Bündnisse, Garantien, Bundesversammlung des Deutschen Bundes
+- Zollverein: Beitritt, Austritt, Zolleinnahmen, Wirkung auf die Märkte aus M5
+- Diplomatische Spiele zur deutschen Frage (kleindeutsch, großdeutsch)
+- Abnahme: Zollverein-Mitgliedschaften 1848 historisch korrekt; Beitritte verändern Handel und
+  Kassen messbar.
+
+Vorschlag (Entscheidung 1): **zwei Teile** wie bei M7 und M8.
+
+| Teil | Inhalt | Ergebnis |
+|---|---|---|
+| **M9a** | Zollunionen als Daten, Zollgebiete je Markt, Zoll als Handelshemmnis, Vereinskasse mit Verteilung nach Bevölkerung, Beitritt und Austritt, Kommandozeile `zoll` mit Beitrittsvergleich, Kalibrierung, Kartenmodus „Zollgebiete“ | Abnahme der Zollverein-Kriterien, in der CI |
+| **M9b** | Beziehungen, Gesandte, Bündnisse und Garantien, Bundesversammlung mit Anträgen und Abstimmungen, diplomatische Spiele, Anzeige „Die deutsche Frage“; Doku und Review | Diplomatie im Spiel bedienbar |
+
+**Nicht in M9:**
+- Krieg, Mobilmachung und Bündnisfall mit Folgen (M10). Bündnisse und Garantien sind in M9 Verträge
+  mit Wirkung auf Beziehungen und diplomatische Spiele.
+- Die Außenmächte Frankreich, Russland und Großbritannien als Akteure (Entscheidung 10).
+- Ereignisse der Revolution: Vorparlament, Reichsverweser, Erfurter Union als Ereigniskette (M11).
+  M9 liefert die Mechanik, M11 die historischen Anlässe.
+- Entscheidungen der Staaten ohne Spieler über einfache Regeln hinaus (M12).
+- Handelsverträge außerhalb der Zollunionen, Münzverträge, Zollparlament (1868).
+- Heirat, Erbfolge und Reichspolitik vor 1806 (Abschnitt 2 von Kapitel 14).
+
+## 2. Ausgangslage
+
+**Vorhanden:**
+- Seit M7 trägt jeder Staat das datierte Feld `zollverein` (ja/nein), bisher ohne Wirkung. 1848
+  sind 26 der 38 Staaten Mitglied, darunter Preußen, Bayern, Sachsen, Württemberg, Baden, beide
+  Hessen, Nassau, Thüringen, Braunschweig, Lippe, Waldeck, Frankfurt und Luxemburg. Nicht Mitglied
+  sind Österreich, Hannover, Oldenburg, Schaumburg-Lippe, beide Mecklenburg, Hamburg, Bremen,
+  Lübeck, Liechtenstein, Dänemark (Holstein, Lauenburg) und die Niederlande (Limburg).
+- Seit M5 ist der **Zoll** ein Aufschlag auf den Einfuhranteil `e_g` der Waren im Markt
+  (`Q_g = P_g × (1 + akzise) × (1 + zoll × e_g)`, [wirtschaft.md](wirtschaft.md), Abschnitt 4.3).
+  Es gilt der Satz des Besitzers des Ortes; 1848 überall 3 %. Der Zoll bremst den Handel bisher
+  nicht, und jede Einfuhr zählt, auch aus einem Markt desselben Staates.
+- Zoll ist 1848 eine kleine Einnahme: 226.000 von 3,93 Mio. Talern je Monat (5,7 %), Preußen
+  90.000 von 1,35 Mio. (gemessen nach 60 Tagen).
+- **Märkte** sind Landschaften, keine Staaten (77, davon 63 mit Daten 1848). Nur 8 Märkte mischen
+  Zollgebiete (weniger als 95 % in einem Gebiet): Braunschweig (Hannover 17 %), Bremen-Verden,
+  Calenberg, Göttingen, Holstein, Mecklenburg, Trier (Oldenburgs Birkenfeld 7 %) und Vorarlberg
+  (Liechtenstein 5 %). Die großen Zollgrenzen laufen zwischen Märkten.
+- Handel zwischen Nachbarmärkten nach Preislücke und Fracht; Häfen handeln mit dem Weltmarkt.
+- Das Heer ist eine Zahl je Staat (Soldaten je 1.000 Einwohner), nur als Kosten.
+- Bundesgebiet je Ort; Parlamente und Wahlen seit M8.
+
+**Es fehlt:** jeder Zustand zwischen zwei Staaten, eine Kasse über mehreren Staaten und eine Wirkung
+der Zollgrenzen auf den Handel.
+
+**Quellen:** wie in M7 und M8 ohne Seitenzugriff. Die Mitgliedschaften 1848 und die Daten der
+Beitritte sind gut bekannt (Kapitel 08, Abschnitt 5.3); Tarifhöhen, Stimmen der Bundesversammlung
+und Ausgangsbeziehungen sind Spielwerte nach Literaturkenntnis, `ungeprueft` (Entscheidung 11).
+
+## 3. Zollunionen und Zollgebiete (M9a)
+
+### 3.1 Daten
+
+Neue Datei `common/zollunionen.chron`:
+
+```text
+zollunion zollverein {
+    name       = "Deutscher Zollverein"
+    seit       = 1834.01.01
+    leitung    = PRU           # Leitmacht: entscheidet über Beitritte (Abschnitt 3.5)
+    tarif      = 0.03          # Vereinstarif, gilt für alle Mitglieder (Spielwert)
+    verteilung = bevoelkerung  # Einnahmen nach Bevölkerung (Abschnitt 3.4)
+    quelle     = "…"
+}
+
+zollunion steuerverein {
+    name       = "Steuerverein"
+    seit       = 1834.01.01
+    leitung    = HAN
+    tarif      = 0.03
+    verteilung = bevoelkerung
+    quelle     = "…"
+}
+```
+
+Das Staatsfeld `zollverein = ja/nein` wird zu **`zollunion = <kennung>`** (leer: eigenes
+Zollgebiet), datiert wie bisher. Der Archivar übernimmt die Werte aus M7; dazu kommen die Mitglieder
+des **Steuervereins** (Entscheidung 6): Hannover, Oldenburg (seit 1836) und Schaumburg-Lippe (seit
+1838). Braunschweig wechselte 1841/44 in den Zollverein.
+
+Ein **Zollgebiet** ist eine Zollunion oder ein Staat ohne Union. 1848 sind das elf: Zollverein,
+Steuerverein und neun Staaten für sich (Österreich, Liechtenstein, beide Mecklenburg, Hamburg,
+Bremen, Lübeck, Dänemark, die Niederlande).
+
+### 3.2 Anteile je Markt
+
+Am Monatsersten, vor dem Handel: `s_m(z)` = Anteil des Zollgebiets *z* an der Bevölkerung des
+Marktes *m* (Orte mit Daten). In 55 von 63 Märkten ist ein Gebiet fast allein (über 95 %); in den
+übrigen acht teilen die Anteile Handel und Einnahmen auf (Entscheidung 2). Grenzen innerhalb eines
+Marktes zählen nicht: Der Markt bleibt ein gemeinsamer Handelsplatz.
+
+### 3.3 Zoll im Handel
+
+Eine Ware, die von Markt *m* nach *n* geht, zahlt den Tarif des Gebiets, in dem sie gekauft wird,
+wenn sie aus einem anderen Gebiet kommt. Erwarteter Tarif:
+
+```
+t_mn   = Σ_z s_n(z) × (1 − s_m(z)) × tarif(z)
+lücke  = P_n,g − P_m,g × (1 + fracht + t_mn)            (statt 1 + fracht, wirtschaft.md 4.1)
+t_Welt = Σ_z s_n(z) × tarif(z)                           (Einfuhr aus dem Weltmarkt)
+```
+
+`tarif(z)` ist der Vereinstarif einer Union oder der Zollsatz eines Staates ohne Union (der Regler
+des Spielers). Innerhalb des Zollvereins ist `t_mn` null; zwischen Hannover und Preußen etwa der
+Tarif. Der Zoll wirkt so wie zusätzliche Fracht: Er schließt kleine Preislücken und verringert den
+Handel über die Grenze (Entscheidung 3).
+
+### 3.4 Einnahmen und Vereinskasse
+
+Der Zoll bleibt ein Aufschlag beim Kauf (wirtschaft.md 4.3), aber nur auf den **fremden**
+Einfuhranteil des Gebiets, in dem der Ort liegt:
+
+```
+e_g,z = (Σ_m Einfuhr_m→n,g × (1 − s_m(z)) + Welteinfuhr_n,g) / A'_n,g
+Q_g   = P_g × (1 + akzise) × (1 + tarif(z) × e_g,z)
+```
+
+- **Staat ohne Union:** Der Zoll seiner Orte geht wie bisher in seine Kasse.
+- **Mitglied einer Union:** Der Zoll geht in die **Vereinskasse** (Zustand der Union). Am
+  Monatsende wird sie nach der Bevölkerung der Mitglieder verteilt (Bevölkerungsschlüssel,
+  Entscheidung 4), als Einnahme „Zoll“ im Haushalt jedes Mitglieds.
+
+Wirkung: Kleine Mitglieder ohne eigenen Hafen und ohne Außengrenze bekommen mehr als in ihren
+eigenen Orten anfällt; Staaten mit viel Einfuhr (Häfen, Grenzmärkte) geben ab. Das war historisch der
+Anreiz für die kleinen Staaten.
+
+### 3.5 Beitritt und Austritt
+
+Neuer Befehl **`Zollunion(staat, union)`**; `union = kNone` heißt Austritt.
+
+- **Beitritt** braucht die Zustimmung der Union (Einstimmigkeit, Kapitel 08). Bis zur KI (M12)
+  entscheidet die **Leitmacht** nach einer Regel: Sie stimmt zu, wenn ihre Beziehung zum
+  Antragsteller mindestens 0 ist (Abschnitt 4.1; in M9a ohne Beziehungen: immer), und lehnt eine
+  andere Leitmacht ab (Österreich in den Zollverein, Preußen in den Steuerverein). Ist der Spieler
+  die Leitmacht, entscheidet er selbst über Anträge anderer, sobald es solche gibt (M12).
+- **Wirksam** zum nächsten 1. Januar (Vertragsjahr, Entscheidung 5); bis dahin „beantragt“.
+- **Austritt** ohne Zustimmung, ebenfalls zum nächsten 1. Januar. Historisch liefen die Verträge
+  zwölf Jahre (1834, 1842, 1854); eine Kündigungsfrist bis zum Ende der Periode wäre genauer, aber im
+  Spiel zu träge.
+- Mitglieder können ihren Zoll nicht selbst einstellen: Der Regler zeigt den Vereinstarif.
+  Änderungen des Tarifs (Generalkonferenz, Einstimmigkeit) kommen mit M11 und M12.
+- Chronik: „Hannover tritt zum 1. Januar 1849 dem Deutschen Zollverein bei.“
+
+### 3.6 Messung und Abnahme
+
+Neuer Befehl **`uhrwerk-cli zoll`** (Zolllabor) nach dem Vorbild von `wahl`:
+
+```
+uhrwerk-cli zoll --szenario voelkerfruehling [--beitritt TAG[:UNION]] [--austritt TAG]
+                 [--jahre N] [--seeds N]
+```
+
+Er rechnet je Seed zwei Läufe gleichen Startzustands, mit und ohne den Wechsel zum ersten
+1. Januar, und vergleicht nach N Jahren:
+- Handel über Zollgrenzen und mit den Nachbarmärkten des Staates (Menge und Wert je Monat);
+- Zolleinnahmen und Kasse des Staates und der Union;
+- Preise in den Märkten des Staates.
+
+**Abnahme:**
+1. Die Mitgliedschaften 1848 stimmen mit der Liste in Abschnitt 2 und den Beitrittsdaten aus
+   Kapitel 08 überein (Test gegen eine Tabelle).
+2. Beitrittsvergleich in der CI, z. B. Hannover und Mecklenburg-Schwerin in den Zollverein, über
+   fünf Jahre: Der Handel über die frühere Zollgrenze steigt, die Zolleinnahme des Staates ändert
+   sich, beides deutlich über dem Rauschen der Seeds. Die Zielwerte stehen in einer Datei wie bei
+   der Wahl (`zollziele_voelkerfruehling.chron`).
+3. Der Balancing-Bericht 1848 bleibt in allen Zielwerten (Kassen, Preise, Bevölkerung).
+
+### 3.7 Godot
+
+- **Kartenmodus „Zollgebiete“** (Modus 13): Farbe je Zollgebiet, Unionen kräftig, Einzelstaaten
+  blass; Legende mit Unionen und Mitgliederzahl. Kapitel 08: „1648 ist die Karte ein Gewirr;
+  1834 entsteht ein großer, einfarbiger Block.“
+- **Staatspanel:** Zollunion des Staates; der Zollregler zeigt bei Mitgliedern den Vereinstarif
+  und ist gesperrt; im Haushaltsfenster der Anteil aus der Vereinskasse.
+- **Knopf** „Zollverein beitreten …“ bzw. „Austreten …“ mit Rückfrage und Zeitpunkt.
+- Ortsinfo: Zollgebiet des Ortes.
+
+## 4. Diplomatie (M9b)
+
+### 4.1 Beziehungen
+
+Ein Wert **Beziehung** je Staatenpaar, −200 bis +200, symmetrisch (Entscheidung 7). Vertrauen,
+Bedrohung und Einfluss aus Kapitel 14 kommen später; sie brauchen Krieg und KI.
+
+**Zielwert und Drift:** Jede Beziehung bewegt sich monatlich um 5 % auf einen Zielwert zu:
+
+| Anteil | Wert (Spielwert) |
+|---|---|
+| Grundwert aus den Daten (`beziehungen.csv`, sonst 0) | z. B. Österreich–Preußen −40 (Dualismus), Sachsen–Österreich +30 |
+| gemeinsame Zollunion | +30 |
+| beide im Deutschen Bund | +10 |
+| gleiche Konfession der Staaten | +10 |
+| Bündnis, Garantie | +40, +20 |
+| Gesandter (Abschnitt 4.2) | +5 je Monat, bis +60 über dem Ziel |
+| diplomatisches Spiel auf verschiedenen Seiten | einmalig −30 |
+
+**Lager:** Für jeden Staat ist die Neigung zu Preußen oder Österreich die Differenz seiner beiden
+Beziehungen. Sie bestimmt Stimmen und Parteinahme (Abschnitte 4.4 und 4.5).
+
+### 4.2 Gesandte
+
+Befehl **`Gesandter(staat, ziel)`**: Ein Gesandter verbessert die Beziehung zum Ziel um 5 je Monat
+(bis zur Grenze) und kostet 0,5 % der Monatseinnahmen. Zahl der Gesandten je Staat: 1 + 1 je 5 Mio.
+Einwohner im Modell (Preußen 4, Österreich 3, die übrigen 1). Kapitel 14 nennt das die
+diplomatische Kapazität.
+
+### 4.3 Bündnisse und Garantien
+
+Befehl **`Vertrag(staat, ziel, art)`** mit den Arten Bündnis (gegenseitig) und Garantie (einseitig:
+der Staat schützt das Ziel), dazu Kündigung.
+
+- **Annahme** durch das Ziel nach Regel (bis M12): Bündnis ab Beziehung 100, Garantie ab 50; kein
+  Bündnis mit einem Staat, der mit dem eigenen Gegner verbündet ist.
+- **Wirkung in M9:** Zielwert der Beziehung, Parteinahme in diplomatischen Spielen (ein Verbündeter
+  steht immer auf der eigenen Seite, ein Garant auf der Seite des Geschützten). Den Bündnisfall im
+  Krieg bringt M10.
+- 1848 bestehen keine Bündnisse unter den Bundesstaaten außer dem Bund selbst (Bundesakte, Art. 11).
+
+### 4.4 Bundesversammlung
+
+Die **Bundesversammlung** in Frankfurt (Präsidialmacht Österreich) ist ein Gremium mit Stimmen je
+Staat aus den Daten (`common/bundesversammlung.chron`):
+- **Engerer Rat:** 17 Stimmen, elf Virilstimmen und sechs Kuriatstimmen (Gruppen kleiner Staaten
+  stimmen gemeinsam; ihre Mehrheit entscheidet die Stimme). Einfache Mehrheit.
+- **Plenum:** rund 70 Stimmen, gewichtet nach Größe. Zwei Drittel für Grundgesetze des Bundes,
+  Einstimmigkeit für Änderungen der Bundesakte.
+
+**Anträge** (Befehl `Bundesantrag(art, ziel)`, Entscheidung 8), je Monat höchstens einer im Bund:
+
+| Antrag | Gremium | Wirkung in M9 |
+|---|---|---|
+| Bundesreform (Volksvertretung beim Bund) | Plenum, einstimmig | Anzeige „Deutsche Frage“ (Abschnitt 4.6); M11 knüpft daran an |
+| Zolleinigung des Bundes | Plenum, zwei Drittel | alle Bundesstaaten werden Mitglied einer Union nach Wahl des Antragstellers |
+| Bundesintervention gegen einen Staat | Engerer Rat | Beziehungen; Vollzug mit M10 |
+| Präsidium (Wechsel des Vorsitzes) | Plenum, einstimmig | Leitung des Bundes |
+
+**Stimmen** ohne Spieler nach Regel: Ein Staat stimmt mit Ja, wenn seine Beziehung zum
+Antragsteller höher ist als zum stärksten Gegner des Antrags (für Zolleinigung: die Leitmacht der
+anderen Union; für Bundesreform: Österreich als Präsidialmacht). Die Abstimmung läuft am nächsten
+Monatsersten und steht in der Chronik.
+
+Historisch gab die Bundesversammlung ihre Befugnisse im Juli 1848 an den Reichsverweser ab und kehrte
+1850/51 zurück. Diese Wechsel sind Ereignisse (M11); in M9 tagt sie durchgehend.
+
+### 4.5 Diplomatische Spiele
+
+Ablauf nach Kapitel 14, Abschnitt 5, ohne Krieg (Entscheidung 9):
+
+1. **Forderung:** Ein Staat stellt eine Forderung an einen anderen. M9 kennt drei:
+   - **Führung im Bund** (kleindeutsch: eine Union unter Preußens Führung, großdeutsch: der Bund
+     unter Österreichs Führung) – Vorbild Erfurter Union und Olmütz 1849/50;
+   - **Beitritt zu einer Zollunion** (der Gegner tritt bei oder zahlt);
+   - **Bündnis lösen** (der Gegner kündigt ein Bündnis).
+2. **Parteinahme** der übrigen Bundesstaaten nach Regel: Bündnis und Garantie zuerst, sonst das
+   Lager, wenn die Neigung über 20 liegt, sonst neutral.
+3. **Eskalation** in drei Stufen zu je 30 Tagen: Protest, Ultimatum, Mobilmachung. Jede Stufe
+   senkt die Beziehungen zwischen den Seiten und kostet auf der Stufe Mobilmachung Geld (Heer
+   × 1,5 je Monat).
+4. **Manöver** des Spielers je Stufe: nachgeben, Vermittlung anbieten (Kompromiss: halbe Wirkung),
+   weiter eskalieren.
+5. **Auflösung:** Nach der dritten Stufe gibt die schwächere Seite nach, wenn ihre Stärke unter
+   zwei Dritteln der anderen liegt (Stärke = Soldaten der Seite); sonst endet das Spiel mit einem
+   Kompromiss. Krieg statt Auflösung kommt mit M10.
+
+Die Seiten ohne Spieler eskalieren nach Regel, solange ihre Stärke mindestens so groß ist wie die der
+Gegenseite.
+
+### 4.6 Die deutsche Frage (Anzeige)
+
+Ein Fenster zeigt die Lage, nach der M13 die Ausgänge des Journals „Die deutsche Frage“ bewertet
+(Kapitel 14, Abschnitt 3):
+
+- Anteil des Zollvereins an der Bevölkerung des Bundes;
+- Lager: Bevölkerung der Bundesstaaten mit Neigung zu Preußen, zu Österreich, unentschieden;
+- Stand der Bundesreform (Anträge, Ergebnisse) und der Führung im Bund (gewonnene Spiele);
+- Bündnisse und Garantien als Netz.
+
+In M9 ist das eine Anzeige ohne Wertung; die sechs Ausgänge kommen mit M13.
+
+## 5. Zustand, Kern und Spielstand
+
+- **Neuer Zustand** (Zustandsverzeichnis, Prüfsumme, Spielstand):
+  - je Union die Vereinskasse des Monats und die Mitglieder mit Datum des Wechsels;
+  - je Staatenpaar die Beziehung (Fixed, 38 × 37 / 2 = 703 Paare 1848);
+  - Gesandte, Verträge, offene Bundesanträge und laufende diplomatische Spiele.
+- **Neue Befehle:** `Zollunion`, `Gesandter`, `Vertrag`, `Bundesantrag`, `Forderung`,
+  `Manoever`. Sie laufen wie `Wahlkampf` über das Befehlsprotokoll (Spielstand **Format 3**).
+- **Inhaltsfingerabdruck:** neuer Bereich `diplomatie` (Zollunionen, Grundbeziehungen, Stimmen).
+- **Kein neuer Zufallsstrom:** Alle Regeln sind deterministisch.
+- **1648 bitgleich** (Entscheidung 11): Zollgebiete gelten erst mit einer Zollunion im Szenario,
+  Diplomatie nur mit einer Bundesversammlung. Ohne sie rechnet der Zoll wie in M5, und der neue
+  Zustand wird nicht besucht. Reichspolitik und Diplomatie vor 1806 kommen mit dem übrigen
+  Kernraum.
+- **Leistung:** Anteile je Markt und Tarife einmal im Monat (63 × 11 Werte); Beziehungen einmal im
+  Monat (703 Paare). Vernachlässigbar.
+
+## 6. Brücke und Godot (M9b)
+
+- **Brücke:** `get_customs_unions`, `get_relations(state)`, `get_treaties`, `get_diet` (Stimmen,
+  Anträge), `get_diplomatic_plays`, `get_german_question`; Befehle wie in Abschnitt 5; Kartenmodus 13
+  `MAP_ZOLLGEBIETE`, dazu 14 `MAP_BEZIEHUNGEN` (Beziehung des Spielerstaates zu jedem Staat, rot bis
+  grün).
+- **Godot:**
+  - Fenster **Diplomatie** (Knopf im Staatspanel): Liste der Staaten mit Beziehung, Lager, Verträgen
+    und Gesandten; Aktionen je Staat.
+  - Fenster **Bundesversammlung**: Stimmenverteilung, Anträge, letzte Abstimmungen als Halbrund wie
+    beim Wahlabend.
+  - **Diplomatisches Spiel** als Leiste über der Karte mit Seiten, Stärke, Stufe und Knöpfen.
+  - Fenster **Die deutsche Frage** (Abschnitt 4.6).
+
+## 7. Tests und Abnahme
+
+| Kriterium | Prüfung |
+|---|---|
+| Zollverein-Mitgliedschaften 1848 historisch korrekt | Test gegen die Liste in Abschnitt 2 (Kern), `info` nennt Unionen und Mitglieder |
+| Beitritte verändern Handel und Kassen messbar | `uhrwerk-cli zoll` mit Zielwerten in der CI (Abschnitt 3.6) |
+
+Weitere Tests:
+- **Einheitentests:** Anteile je Markt, Tarif im Handel (innerhalb einer Union 0), Vereinskasse und
+  Verteilung, Beitritt zum 1. Januar, Austritt, gesperrter Zollregler; Beziehungen mit Drift,
+  Gesandte, Verträge, Abstimmungen mit Kuriatstimmen, diplomatisches Spiel mit Nachgeben und
+  Kompromiss.
+- **Determinismus und Spielstände:** gleiche Prüfsumme mit 1 und 4 Threads; Speichern während eines
+  Spiels und eines beantragten Beitritts; Formatwache.
+- **1648 bitgleich:** `5db13a66d63e6079` nach 100 Jahren.
+- **Godot:** Rauchtest der neuen Brückenmethoden, Klicktest (Beitritt über den Knopf, Gesandter,
+  Antrag, Spiel bis zur Auflösung), Screenshots der Kartenmodi und Fenster.
+
+## 8. Daten
+
+| Datei | Inhalt |
+|---|---|
+| `common/zollunionen.chron` | Zollverein und Steuerverein mit Leitung, Tarif, Verteilung |
+| `tabellen/staaten_historie.csv` | Feld `zollunion` statt `zollverein`, datiert (Steuerverein neu) |
+| `tabellen/beziehungen.csv` (neu) | Grundbeziehungen für einzelne Paare mit Quelle (Dualismus, Dynastien, Konfessionsblöcke) |
+| `common/bundesversammlung.chron` | Stimmen im Engeren Rat (mit Kurien) und im Plenum, Präsidialmacht |
+| `common/zollziele_voelkerfruehling.chron` | Zielwerte des Zolllabors |
+
+Der Archivar prüft `zollunion` (bekannte Union, nicht vor ihrem `seit`) und `beziehungen.csv`
+(bekannte Staaten, Wert im Bereich, kein Paar doppelt).
+
+## 9. Entscheidungen (vor der Umsetzung zu bestätigen)
+
+1. **Teilung M9a/M9b.** Empfehlung: ja (Abschnitt 1). Alternative: Diplomatie zuerst, dann
+   Zollverein.
+2. **Zollgebiete je Markt.** Empfehlung: **Bevölkerungsanteile je Markt** (Abschnitt 3.2); Grenzen
+   innerhalb eines Marktes zählen nicht. Alternativen:
+   - jeder Markt ganz in einem Gebiet (nach Mehrheit): einfacher, aber der Beitritt eines kleinen
+     Staates ändert dann oft nichts;
+   - Märkte an Zollgrenzen teilen: genauer, aber neue Märkte und eine neue Kalibrierung.
+3. **Zoll als Handelshemmnis.** Empfehlung: **ja**, als Aufschlag auf die Fracht (Abschnitt 3.3),
+   mit den Sätzen aus den Daten (1848: 3 %). Alternative: ein höherer Vereinstarif nach den
+   historischen Sätzen (rund 10 % auf Fertigwaren); dann muss der Haushalt 1848 neu kalibriert
+   werden, weil der Zoll dann gut das Dreifache einbringt.
+4. **Verteilung der Vereinskasse.** Empfehlung: **nach Bevölkerung** (historisch). Alternative: nach
+   dem Zoll, der in den Orten jedes Mitglieds anfällt (dann bringt der Beitritt einem kleinen Staat
+   wenig).
+5. **Zeitpunkt von Beitritt und Austritt.** Empfehlung: **zum nächsten 1. Januar**. Alternative:
+   sofort zum Monatsersten; oder Austritt nur zum Ende der Vertragsperiode (1853).
+6. **Steuerverein.** Empfehlung: **als zweite Union** (Hannover, Oldenburg, Schaumburg-Lippe).
+   Alternative: nur der Zollverein, die anderen Staaten je für sich.
+7. **Umfang der Beziehungen.** Empfehlung: **ein symmetrischer Wert** mit Zielwert und Drift,
+   Gesandte, Bündnis und Garantie. Alternative: alle vier Werte aus Kapitel 14 (Beziehung,
+   Vertrauen, Bedrohung, Einfluss) schon jetzt.
+8. **Bundesversammlung.** Empfehlung: **Anträge mit Abstimmung** nach Regeln (vier Arten,
+   Abschnitt 4.4). Alternative: nur Anzeige der Stimmen bis M11.
+9. **Diplomatische Spiele ohne Krieg.** Empfehlung: **ja**, Auflösung nach Stärke wie in Olmütz
+   1850 (Abschnitt 4.5); M10 ersetzt die letzte Stufe durch Krieg. Alternative: diplomatische Spiele
+   erst mit M10.
+10. **Außenmächte.** Empfehlung: **nicht in M9**; Frankreich, Russland und Großbritannien kommen mit
+    M10 und M12 als Akteure ohne Orte. Alternative: schon jetzt als feste Unterstützer in Spielen.
+11. **1648 und Quellen.** Empfehlung: **1648 bitgleich** (Zollgebiete und Diplomatie nur mit Union
+    bzw. Bundesversammlung im Szenario); Tarife, Stimmen und Grundbeziehungen als `ungeprueft`
+    bzw. `spielwert`, Fachprüfung mit M7 und M8. Alternative: neue Referenzprüfsumme für 1648 mit
+    Zollgrenzen zwischen allen Staaten.
+12. **Deutsche Frage.** Empfehlung: **Anzeige der Lage** in M9, Ausgänge in M13. Alternative: schon
+    jetzt eine Wertung je Ausgang.
+
+## 10. Umsetzungsschritte
+
+| Schritt | Inhalt | Prüfung |
+|---|---|---|
+| a1 | **Daten:** `zollunionen.chron`, Feld `zollunion`, Steuerverein; Lader, Archivar, Fingerabdruck, `info` | Mitgliedschaften 1848 als Test, `pruefen` für beide Szenarien |
+| a2 | **Kern:** Anteile je Markt, Tarif im Handel, fremder Einfuhranteil, Vereinskasse, Befehl `Zollunion` zum 1. Januar, Spielstand Format 3 | Einheitentests, Determinismus, 1648 bitgleich |
+| a3 | **Zolllabor:** `uhrwerk-cli zoll`, Zielwerte, Kalibrierung, Balancing-Bericht 1848, CI | Zielwerte erfüllt |
+| a4 | **Godot:** Kartenmodus „Zollgebiete“, Staatspanel (Union, Vereinstarif, Beitritt) | Godot-Tests, Screenshots |
+| b1 | **Kern Diplomatie:** Beziehungen mit Drift, Gesandte, Verträge; `beziehungen.csv` | Einheitentests, Spielstände |
+| b2 | **Bundesversammlung** und **diplomatische Spiele** im Kern | Einheitentests, Wiederholung mit Befehlen |
+| b3 | **Brücke und Godot:** Fenster Diplomatie, Bundesversammlung, Spiel, Deutsche Frage, Kartenmodus „Beziehungen“ | Godot-Tests, Screenshots |
+| b4 | **Doku und Review** (Abschluss M9) | CI grün |

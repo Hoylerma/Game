@@ -564,6 +564,7 @@ Vertrag: [technik/politik.md](technik/politik.md).
 ### M9 – Diplomatie und Zollverein
 
 **Ziel:** Diplomatie nach [14 Diplomatie](14_diplomatie.md) mit dem Zollverein als Kernsystem.
+Entwurf: [technik/diplomatie.md](technik/diplomatie.md).
 
 **Umfang**
 - Beziehungen, Bündnisse, Garantien, Bundesversammlung des Deutschen Bundes
