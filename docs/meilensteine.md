@@ -499,7 +499,7 @@ Entwurf: [technik/politik.md](technik/politik.md).
   (ständisch, Zensus, Dreiklassen, allgemeines Männerwahlrecht) und Wahlsystem. Die Wahl rechnet
   mit jeder Option.
 - **Parlamente:** Deutsche Nationalversammlung (Wahl am 1. Mai 1848, indirekt, 8 Fraktionen ab dem
-  Stichtag) und Preußisches Abgeordnetenhaus (17. Juli 1849, Dreiklassenwahl, 3 Fraktionen).
+  Stichtag) und Preußische Zweite Kammer (17. Juli 1849, Dreiklassenwahl, 3 Fraktionen).
 - **Wahlkreise** aus den Kreisen der Verwaltung, per Werkzeug `wahlkreise_1848.py`: 633 Wahlkreise
   mit 649 Sitzen (rund 70.000 Einwohner je Sitz) und 337 mit 350 Sitzen in Preußen 1849.
 - **Wahl im Kern:** Wahlberechtigte, Beteiligung, Neigung je Block, Wahlmänner, Boykott, Stichwahl

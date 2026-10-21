@@ -470,6 +470,8 @@ TEST_CASE("Wahllabor: Wahlziele lesen") {
                 block b { stroemungen = { radikale } anteil = { 0 1 } }
                 block c { fraktionen = { linke } stroemungen = { liberale } anteil = { 0 1 } }
                 block d { fraktionen = { linke } anteil = { 0.5 2 } }
+                block e { fraktionen = { mitte mitte } anteil = { 0 1 } }
+                beteiligung = { 45 70 }
             }
             wahl landtag { })",
                                                                                  w, "ziele.chron");
@@ -485,6 +487,8 @@ TEST_CASE("Wahllabor: Wahlziele lesen") {
         CHECK(has("unbekannte Strömung 'radikale'"));
         CHECK(has("block c braucht genau eines von 'fraktionen' und 'stroemungen'"));
         CHECK(has("'anteil' erwartet einen Bereich innerhalb von 0 bis 1"));
+        CHECK(has("'mitte' steht mehrfach in block e"));
+        CHECK(has("'beteiligung' erwartet einen Bereich innerhalb von 0 bis 1"));
         CHECK(has("Zielwerte für parlament landtag sind mehrfach angegeben"));
         CHECK(has("ziele.chron:"));
     }
@@ -580,7 +584,12 @@ TEST_CASE("Wahlkampf: Spenden, Kosten und abnehmender Ertrag") {
     sim.submit(campaign_command(-1, 0, uhrwerk::CampaignAction::Rally));
     sim.submit(campaign_command(democrats, 99, uhrwerk::CampaignAction::Rally));
     sim.submit(campaign_command(democrats, 0, static_cast<uhrwerk::CampaignAction>(3)));
+    // Verplant sind die beiden gültigen Versammlungen der Demokraten (und die mit unbekanntem
+    // Wahlkreis, die die Brücke nie einreiht); die unbekannte Art kostet nichts.
+    CHECK(sim.reserved_campaign_funds(democrats) == rally.cost * Fixed::from_int(3));
+    CHECK(sim.reserved_campaign_funds(w.find_current("liberale")) == Fixed::zero());
     sim.step_day();
+    CHECK(sim.reserved_campaign_funds(democrats) == Fixed::zero());
     const uhrwerk::CampaignState& state = w.campaign[d];
     const Fixed first = rally.effect;
     const Fixed second = first + rally.effect * (Fixed::one() - first / rally.cap);

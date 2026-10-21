@@ -23,9 +23,7 @@ staat NED {
         schulden       = 189000
         zollverein     = nein
         verfassung     = konstitutionell
-        wahlrecht      = zensus
-        wahlsystem     = stichwahl
-        wahl_indirekt  = nein
-        wahl_zensus    = 1
+        wahlrecht      = staendisch
+        wahl_indirekt  = ja
     }
 }

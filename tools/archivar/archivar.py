@@ -568,7 +568,7 @@ def pruefe_wahlkreise(archiv: Archiv, m: Meldungen) -> None:
             continue
         if not (_pflicht(z, "name", m) and _einzeilig(z, "name", m)):
             continue
-        if not z["sitze"].isdigit() or int(z["sitze"]) < 1:
+        if not re.fullmatch(r"[0-9]+", z["sitze"]) or int(z["sitze"]) < 1:
             m.fehler_bei(z.datei, z.nr, f"'sitze' erwartet eine Ganzzahl ab 1, nicht '{z['sitze']}'")
             continue
         orte = z["orte"].split()

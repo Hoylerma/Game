@@ -363,8 +363,20 @@ func _check_elections_1848(sim: SimulationClient) -> void:
 		and not bool(sim.get_campaign(sim.get_location_electoral_district_indices(0)[
 			sim.get_location_index("mannheim")
 		], liberals).get("open", true)),
-		"Partei nach der Wahl: %d Sitze, Wahlkampf beendet" % int(party.get("seats", 0)),
+		"Partei nach der Wahl: %d Sitze, Wahlkampf zur Nationalversammlung beendet" % int(party.get("seats", 0)),
 		"Partei nach der Wahl: %s" % str(party)
+	)
+	# Danach führt man Wahlkampf zur Preußischen Zweiten Kammer (Review M8): Berlin hat dafür einen
+	# offenen Wahlkreis, Mannheim keinen.
+	var berlin := sim.get_location(sim.get_location_index("berlin_coelln"))
+	var next_district := int(berlin.get("campaign_district", -1))
+	var next_campaign := sim.get_campaign(next_district, liberals)
+	_check(
+		bool(party.get("open", false)) and str(party.get("parliament_name", "")).contains("Zweite Kammer")
+		and next_district >= 0 and bool(next_campaign.get("open", false))
+		and int(sim.get_location(sim.get_location_index("mannheim")).get("campaign_district", 0)) == -1,
+		"Nächste Wahl: %s, Wahlkreis %s offen" % [party.get("parliament_name"), next_campaign.get("district_name")],
+		"Nächste Wahl: %s; Berlin %d, %s" % [str(party.get("parliament_name")), next_district, str(next_campaign)]
 	)
 
 
@@ -449,6 +461,30 @@ func _check_party_1848(sim: SimulationClient, currents: Array[Dictionary]) -> in
 		],
 		"Wahlkampf am nächsten Tag: %s, %s" % [str(party), str(campaign)]
 	)
+	# Eingereihte Befehle zählen als verplant (Review M8): Für zwei Vereine reicht es, der dritte
+	# wird abgelehnt, und der Knopf ist gesperrt.
+	var funds_now := float(party.get("funds", 0.0))
+	var club_cost := float((actions[SimulationClient.CAMPAIGN_VEREIN] as Dictionary).get("cost", 0.0))
+	var affordable := floori(funds_now / club_cost)
+	var accepted := 0
+	for _i in affordable + 1:
+		accepted += 1 if sim.campaign(liberals, district, SimulationClient.CAMPAIGN_VEREIN) else 0
+	var club_allowed := bool(
+		(sim.get_campaign(district, liberals).get("actions", [{}, {}, {}])[SimulationClient.CAMPAIGN_VEREIN]
+		as Dictionary).get("allowed", true)
+	)
+	var reserved := float(sim.get_party(liberals).get("reserved", 0.0))
+	_check(
+		affordable >= 1 and accepted == affordable and not club_allowed
+		and is_equal_approx(reserved, affordable * club_cost),
+		"Verplante Mittel: %d Vereine angenommen, der nächste abgelehnt (%s Taler verplant)" % [
+			accepted, GermanFormat.integer(roundi(reserved))
+		],
+		"Verplante Mittel: %d von %d angenommen, erlaubt %s, verplant %s" % [
+			accepted, affordable, club_allowed, reserved
+		]
+	)
+	sim.advance_days(1)
 	# Rolle im Spielstand (Metadaten „spielerstroemung“).
 	var dir := OS.get_user_data_dir().path_join("smoke_test_partei")
 	_remove_dir(dir)
@@ -610,8 +646,9 @@ func _check_invalid_indices(sim: SimulationClient, max_tax: int, player: int) ->
 		and not sim.set_tax_percent(player, SimulationClient.TAX_ZOLL, max_tax + 1)
 		and sim.get_market(-1).is_empty()
 		and sim.get_market(sim.get_market_count()).is_empty()
-		# 1648 ohne Parlament: keine Angaben zu Verfassung und Gruppen (seit M8).
+		# 1648 ohne Parlament: keine Angaben zu Verfassung und Gruppen, kein Parteienmodus (seit M8).
 		and sim.get_state_politics(player).is_empty()
+		and not sim.set_player_current(0)
 		and not bool(sim.get_state(player).get("politik", true))
 	)
 	_check(

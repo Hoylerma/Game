@@ -984,7 +984,7 @@ ContentFingerprint content_fingerprint(const World& w) {
         h.u64(w.electoral_districts.size());
         for (const ElectoralDistrict& d : w.electoral_districts) {
             h.text(d.id);
-            h.text(d.name); // steht in der Chronik der Wahl
+            h.text(d.name); // Anzeige (Wahlabend, Ortsinfo), wie die Namen der Orte
             h.i64(d.parliament);
             h.i64(d.state);
             h.i64(d.seats);

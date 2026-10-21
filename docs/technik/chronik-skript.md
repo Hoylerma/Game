@@ -600,13 +600,14 @@ ab 1648 erreicht die Industrie nicht.
 ```text
 stroemung liberale {
     name     = "Konstitutionelle Liberale"   # Pflicht
+    kurzname = "Liberale"                    # optional: knappe Anzeigen (Telegramme, Balken); sonst name
     farbe    = { 206 160 40 }                # Pflicht
-    position = 15                            # Pflicht: Links-rechts-Achse −100 … +100
+    position = 10                            # Pflicht: Links-rechts-Achse −100 … +100
 }
 ```
 
 Politische Strömungen ([politik.md](politik.md), Abschnitt 3.1). Die Position ordnet die Stichwahl und
-die Fraktionen. Die Datei darf fehlen (dann gibt es keine Politik); ist sie da, braucht sie mindestens
+die Fraktionen. Der Kurzname ist reine Anzeige und gehört nicht zum Inhaltsfingerabdruck. Die Datei darf fehlen (dann gibt es keine Politik); ist sie da, braucht sie mindestens
 eine Strömung. Im Kern: `World::currents` (`PoliticalCurrent`).
 
 ### 3.20 `common/interessengruppen.chron` (seit M8)

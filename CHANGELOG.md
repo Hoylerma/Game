@@ -14,7 +14,7 @@ Im Lesezeichen 1848 wählt der Deutsche Bund am 1. Mai die **Nationalversammlung
 649 Sitze, davon 587 besetzt; die Tschechen in Böhmen boykottieren. Die Sitzverteilung trifft alle
 Zielkorridore der Fraktionen, die Abweichungen sind dokumentiert. Der **Wahlabend** inszeniert das
 Ergebnis mit Meldungen, Hochrechnung und Halbrund. Im **Parteienmodus** spielt man eine Strömung und
-führt bis zur Wahl Wahlkampf. Das Preußische Abgeordnetenhaus von 1849 (Dreiklassenwahlrecht) ist
+führt bis zur Wahl Wahlkampf. Die Preußische Zweite Kammer von 1849 (Dreiklassenwahlrecht) ist
 plausibel. Das Szenario 1648 bleibt bitgleich (`5db13a66d63e6079`).
 
 Alle Werte sind Spielwerte gegen ungeprüfte Richtwerte; die Fachprüfung mit Quellen schließt sich an
@@ -26,10 +26,10 @@ die von M7 an. Ergebnis und Grenzen:
   Interessengruppen, Parlamente, Wahlkreise, Wahlregeln, Wahlziele).
 - **Daten (M8a):**
   - 5 Strömungen von den Konservativen bis zur frühen Arbeiterbewegung, 11 Interessengruppen,
-    2 Parlamente: Nationalversammlung 1848 mit 8 Fraktionen, Preußisches Abgeordnetenhaus 1849 mit 3.
+    2 Parlamente: Nationalversammlung 1848 mit 8 Fraktionen, Preußische Zweite Kammer 1849 mit 3.
   - Verfassung, Wahlrecht und Wahlsystem der 38 Staaten in `staaten_historie.csv`.
   - `wahlkreise.csv`: 633 Wahlkreise der Nationalversammlung (649 Sitze) und 337 des Preußischen
-    Abgeordnetenhauses (350 Sitze), erzeugt mit `tools/geodaten/wahlkreise_1848.py`.
+    Zweiten Kammer (350 Sitze), erzeugt mit `tools/geodaten/wahlkreise_1848.py`.
   - `common/wahlen.chron` mit Wahlregeln, Wahlkampf und fünf Regionen der Wahlgeographie;
     Wahlziele `common/wahlziele_voelkerfruehling.chron`.
 - **Kern:**

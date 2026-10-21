@@ -17,6 +17,8 @@ const PANEL_WIDTH := 340.0
 ## Wahlkreise je Sekunde für die Tempostufen ×1 und ×4; „Sofort“ meldet alles auf einmal.
 const RATES: PackedFloat64Array = [10.0, 40.0]
 const SPEED_NAMES: PackedStringArray = ["×1", "×4", "Sofort"]
+## Längste Bildzeit, die beim Melden zählt.
+const MAX_FRAME_SECONDS := 0.05
 ## Zahl der Telegramme (neueste zuerst).
 const TELEGRAMS := 6
 const HEMICYCLE_HEIGHT := 170.0
@@ -47,6 +49,10 @@ var _hemicycle: Control = null
 var _bars: VBoxContainer = null
 var _bar_caption: Label = null
 var _telegrams: VBoxContainer = null
+## Feste Knöpfe der Telegramme (Review M8): beim Melden ändern sich nur Text und Ziel, damit ein
+## Klick während der Meldungen nicht verloren geht.
+var _telegram_buttons: Array[Button] = []
+var _waiting: Label = null
 var _speed_buttons: Array[Button] = []
 
 
@@ -83,7 +89,10 @@ func open(
 		_groups.append({"name": "fraktionslos", "color": INDEPENDENT_COLOR})
 	else:
 		for current in currents:
-			_groups.append({"name": str(current.get("name", "")), "color": current.get("color", INDEPENDENT_COLOR)})
+			_groups.append({
+				"name": str(current.get("short_name", current.get("name", ""))),
+				"color": current.get("color", INDEPENDENT_COLOR),
+			})
 	_order = ElectionTally.report_order(election)
 	_rank_of_district.clear()
 	var districts: Array = election.get("districts", [])
@@ -161,7 +170,8 @@ func finish() -> void:
 func _process(delta: float) -> void:
 	if not visible or _rate <= 0.0 or is_complete():
 		return
-	_accumulator += delta * _rate
+	# Ein langes Bild (etwa das, in dem die Wahl gerechnet wurde) meldet nicht auf einen Schlag.
+	_accumulator += minf(delta, MAX_FRAME_SECONDS) * _rate
 	var steps := floori(_accumulator)
 	if steps > 0:
 		_accumulator -= steps
@@ -191,7 +201,8 @@ func _refresh() -> void:
 	if is_complete():
 		var counts: PackedInt32Array = _tally.get("counts", PackedInt32Array())
 		var best := 0
-		for g in counts.size():
+		# Die Fraktionslosen (letzte Gruppe) sind keine Fraktion.
+		for g in counts.size() - (1 if _by_faction else 0):
 			if counts[g] > counts[best]:
 				best = g
 		status = "Alle %s Wahlkreise gemeldet: %s von %s Sitzen besetzt" % [
@@ -262,10 +273,33 @@ func _build() -> void:
 	telegram_caption.text = "TELEGRAMME"
 	telegram_caption.theme_type_variation = &"CaptionLabel"
 	box.add_child(telegram_caption)
+	# Mit acht Fraktionen und den Fraktionslosen reicht die Höhe nicht für alle Telegramme: Sie
+	# scrollen, die Tempozeile bleibt unten sichtbar (Review M8).
+	var telegram_scroll := ScrollContainer.new()
+	telegram_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	telegram_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	box.add_child(telegram_scroll)
 	_telegrams = VBoxContainer.new()
 	_telegrams.add_theme_constant_override(&"separation", 0)
-	_telegrams.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	box.add_child(_telegrams)
+	_telegrams.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	telegram_scroll.add_child(_telegrams)
+	_waiting = Label.new()
+	_waiting.text = "Noch keine Meldung."
+	_waiting.theme_type_variation = &"MutedLabel"
+	_telegrams.add_child(_waiting)
+	for i in TELEGRAMS:
+		var button := Button.new()
+		button.theme_type_variation = &"FlatButton"
+		button.alignment = HORIZONTAL_ALIGNMENT_LEFT
+		button.focus_mode = Control.FOCUS_NONE
+		button.clip_text = true
+		button.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+		button.tooltip_text = "Wahlkreis auf der Karte zeigen"
+		button.custom_minimum_size = Vector2(1, 0)
+		button.set_meta(&"location", -1)
+		button.pressed.connect(func() -> void: district_requested.emit(int(button.get_meta(&"location"))))
+		_telegrams.add_child(button)
+		_telegram_buttons.append(button)
 
 	var controls := HBoxContainer.new()
 	controls.add_theme_constant_override(&"separation", 6)
@@ -302,7 +336,9 @@ func _build_bars() -> void:
 		var row := HBoxContainer.new()
 		var label := Label.new()
 		label.text = str(_groups[g].get("name", ""))
-		label.custom_minimum_size = Vector2(100, 0)
+		label.tooltip_text = label.text
+		label.mouse_filter = Control.MOUSE_FILTER_PASS
+		label.custom_minimum_size = Vector2(128, 0)
 		label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 		label.clip_text = true
 		row.add_child(label)
@@ -313,7 +349,7 @@ func _build_bars() -> void:
 		bar.draw.connect(_draw_bar.bind(bar, g))
 		row.add_child(bar)
 		var value := Label.new()
-		value.custom_minimum_size = Vector2(104, 0)
+		value.custom_minimum_size = Vector2(96, 0)
 		value.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 		row.add_child(value)
 		row.set_meta(&"bar", bar)
@@ -368,29 +404,17 @@ func _draw_bar(bar: Control, group: int) -> void:
 
 
 func _update_telegrams() -> void:
-	for child in _telegrams.get_children():
-		_telegrams.remove_child(child)
-		child.queue_free()
 	var districts: Array = _election.get("districts", [])
-	if _reported == 0:
-		var waiting := Label.new()
-		waiting.text = "Noch keine Meldung."
-		waiting.theme_type_variation = &"MutedLabel"
-		_telegrams.add_child(waiting)
-		return
-	for k in range(_reported - 1, maxi(_reported - TELEGRAMS, 0) - 1, -1):
+	_waiting.visible = _reported == 0
+	for i in _telegram_buttons.size():
+		var button := _telegram_buttons[i]
+		var k := _reported - 1 - i
+		button.visible = k >= 0
+		if k < 0:
+			continue
 		var district := districts[_order[k]] as Dictionary
-		var button := Button.new()
 		button.text = ElectionTally.telegram(district, _currents)
-		button.theme_type_variation = &"FlatButton"
-		button.alignment = HORIZONTAL_ALIGNMENT_LEFT
-		button.focus_mode = Control.FOCUS_NONE
-		button.clip_text = true
-		button.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
-		button.tooltip_text = "Wahlkreis auf der Karte zeigen"
-		var location := int(district.get("location_index", -1))
-		button.pressed.connect(func() -> void: district_requested.emit(location))
-		_telegrams.add_child(button)
+		button.set_meta(&"location", int(district.get("location_index", -1)))
 
 
 ## Halbrund: Abgeordnete von links nach rechts nach ihrer Position; gemeldete in der Farbe ihrer

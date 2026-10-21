@@ -1723,6 +1723,15 @@ TEST_CASE("Lader: Politik (seit M8)") {
         expect_error(r, "'wirkung' ist größer als 'hoechstens' in wahlkampf verein", elections);
         expect_error(r, "Pflichtfeld 'stimmungsfehler' fehlt in wahlkampf", elections);
     }
+    SUBCASE("Wahltag vor dem Start und leere Boykottmärkte (Review M8)") {
+        replace_in_file(dir / parliaments, "wahltag       = 1650.03.01", "wahltag       = 1649.06.01");
+        replace_in_file(dir / parliaments, "boykott       = { sorben }",
+                        "boykott       = { sorben }\n    boykott_maerkte = { }");
+        const LoadResult r = load(dir, "jahresbeginn_1650");
+        expect_error(r, "Wahltag 01.06.1649 von parlament landtag liegt vor dem Startdatum 01.01.1650",
+                     parliaments);
+        expect_error(r, "'boykott_maerkte' ist leer in parlament landtag", parliaments);
+    }
     SUBCASE("unbekannter Ort als Sitz") {
         replace_in_file(dir / parliaments, "sitz          = dresden", "sitz          = atlantis");
         expect_error(load(dir, "jahresbeginn_1650"),

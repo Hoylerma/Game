@@ -18,6 +18,8 @@ const TAX_TOOLTIPS: PackedStringArray = [
 	"Akzise: Verbrauchssteuer auf alle Käufe in Städten",
 	"Zoll: Abgabe auf eingeführte Waren (nach ihrem Anteil am Angebot des Marktes)",
 ]
+## Kürzester Abstand zwischen zwei Füllungen des offenen Fensters „Verfassung und Gruppen“.
+const POLITICS_REFRESH_MS := 1000
 const DEFAULT_HINT := "Höhere Steuern füllen die Kasse, verteuern aber Waren und bremsen das Wachstum."
 
 var _state_rates: Array[int] = [-1, -1, -1]
@@ -36,6 +38,7 @@ var _politics_button: Button = null
 var _politics_popup: PopupPanel = null
 var _politics_grid: GridContainer = null
 var _politics_groups: VBoxContainer = null
+var _politics_filled_at := 0
 
 @onready var _coat: CoatOfArms = %Coat
 @onready var _name: Label = %StateName
@@ -131,10 +134,11 @@ func show_state(state: Dictionary, capital_name: String) -> void:
 		_fill_budget()
 	_politics_button.visible = bool(state.get("politik", false))
 	if _politics_popup.visible:
-		if _politics_button.visible:
-			_fill_politics()
-		else:
+		if not _politics_button.visible:
 			_politics_popup.hide()
+		elif Time.get_ticks_msec() - _politics_filled_at >= POLITICS_REFRESH_MS:
+			# Anteil und Einfluss rechnen über alle Blöcke des Staates: höchstens einmal je Sekunde.
+			_fill_politics()
 
 
 func show_unavailable() -> void:
@@ -192,6 +196,14 @@ func show_politics() -> void:
 		return
 	var rect := get_global_rect()
 	_politics_popup.popup(Rect2i(Vector2i(rect.end.x + 8.0, rect.position.y), Vector2i(360, 0)))
+
+
+## Haushalts- und Verfassungsfenster schließen (Wahlabend, Parteienmodus).
+func hide_popups() -> void:
+	if _budget_popup != null:
+		_budget_popup.hide()
+	if _politics_popup != null:
+		_politics_popup.hide()
 
 
 ## true, solange das Fenster „Verfassung und Gruppen“ offen ist (für Tests).
@@ -379,6 +391,7 @@ func _fill_politics() -> bool:
 	var politics: Dictionary = politics_source.call() if politics_source.is_valid() else {}
 	if politics.is_empty():
 		return false
+	_politics_filled_at = Time.get_ticks_msec()
 	for child in _politics_grid.get_children():
 		_politics_grid.remove_child(child)
 		child.queue_free()

@@ -67,6 +67,10 @@ ElectionTargetsResult targets_from(const ParseResult& parsed, const World& world
         }
         if (w->find("beteiligung") != nullptr) {
             t.turnout = r.range(*w, "beteiligung");
+            if (t.turnout && (t.turnout->min < Fixed::zero() || t.turnout->max > Fixed::one())) {
+                r.error(*w->find("beteiligung"),
+                        "'beteiligung' erwartet einen Bereich innerhalb von 0 bis 1");
+            }
         }
         for (const ScriptNode* b : w->find_all("block")) {
             if (!b->is_block || b->value.empty()) {
@@ -87,7 +91,14 @@ ElectionTargetsResult targets_from(const ParseResult& parsed, const World& world
                 r.error(list, "'" + list.key + "' erwartet eine Liste { … }");
                 continue;
             }
+            std::vector<std::string_view> seen;
             for (const std::string_view id : list.bare_values()) {
+                if (std::find(seen.begin(), seen.end(), id) != seen.end()) {
+                    // Doppelt gezählt ergäbe Anteile über 100 % (Review M8).
+                    r.error(list, "'" + std::string(id) + "' steht mehrfach in block " + b->value);
+                    continue;
+                }
+                seen.push_back(id);
                 if (factions != nullptr) {
                     if (id == "fraktionslos") {
                         block.factions.push_back(kNone);

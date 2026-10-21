@@ -510,6 +510,40 @@ const uhrwerk::ElectionResult* UhrwerkSimulation::latest_election(std::int64_t p
     return nullptr;
 }
 
+std::int64_t UhrwerkSimulation::next_parliament() const {
+    const uhrwerk::World* w = world();
+    std::int64_t next = -1;
+    if (!w) {
+        return next;
+    }
+    for (std::size_t p = 0; p < w->parliaments.size(); ++p) {
+        const auto index = static_cast<std::int64_t>(p);
+        const uhrwerk::Parliament& parliament = w->parliaments[p];
+        if (latest_election(index) != nullptr || parliament.election_day < w->date) {
+            continue;
+        }
+        if (next < 0 || parliament.election_day < at(w->parliaments, next).election_day) {
+            next = index;
+        }
+    }
+    return next;
+}
+
+bool UhrwerkSimulation::campaign_possible(std::int64_t current, std::int64_t district,
+                                          uhrwerk::CampaignAction action) const {
+    const uhrwerk::World* w = world();
+    if (!w || !valid_index(w->currents, current) || !valid_index(w->electoral_districts, district) ||
+        !uhrwerk::campaign_allowed(*w, static_cast<uhrwerk::Index>(current),
+                                   static_cast<uhrwerk::Index>(district), action)) {
+        return false;
+    }
+    // Die Kosten eingereihter Befehle sinken erst am nächsten Tag von der Kasse (Review M8).
+    const uhrwerk::Fixed reserved =
+        simulation_->reserved_campaign_funds(static_cast<uhrwerk::Index>(current));
+    return at(w->party_funds, current) - reserved >=
+           w->election_rules.campaign[static_cast<std::size_t>(action)].cost;
+}
+
 String UhrwerkSimulation::load_scenario(const String& data_path, const String& scenario_id,
                                         std::int64_t seed) {
     simulation_.reset();
@@ -812,20 +846,29 @@ Dictionary UhrwerkSimulation::get_location(std::int64_t index) const {
             election["winner"] = r->winner;
             election["winner_name"] =
                 valid_index(w->currents, r->winner) ? to_godot(at(w->currents, r->winner).name) : String();
+            election["winner_short_name"] = valid_index(w->currents, r->winner)
+                                                ? to_godot(at(w->currents, r->winner).short_name)
+                                                : String();
             const PackedFloat64Array shares = vote_shares(*r);
             Dictionary by_name;
             Dictionary colors;
             for (std::size_t c = 0; c < w->currents.size() && c < static_cast<std::size_t>(shares.size());
                  ++c) {
-                const String name = to_godot(w->currents[c].name);
+                const String name = to_godot(w->currents[c].short_name); // Balken der Ortsinfo
                 by_name[name] = shares[static_cast<std::int64_t>(c)] * 100.0;
                 colors[name] = to_godot(w->currents[c].color);
             }
-            election["shares"] = by_name; // Strömung → Prozent
+            election["shares"] = by_name; // Kurzname der Strömung → Prozent
             election["colors"] = colors;  // Strömung → Farbe
         }
         result["wahl"] = election;
     }
+    // Wahlkreis der nächsten ausstehenden Wahl (Parteienmodus), -1 ohne (Review M8: nach der
+    // Nationalversammlung führt man Wahlkampf zur Preußischen Zweiten Kammer).
+    const std::int64_t next = next_parliament();
+    result["campaign_district"] = valid_index(location_districts_, next)
+                                      ? at(location_districts_, next)[static_cast<std::size_t>(index)]
+                                      : -1;
     result["terrain"] =
         valid_index(w->terrains, loc.terrain) ? to_godot(at(w->terrains, loc.terrain).name) : String();
     result["is_city"] = loc.is_city;
@@ -1220,6 +1263,7 @@ Array UhrwerkSimulation::get_currents() const {
         Dictionary entry;
         entry["id"] = to_godot(c.id);
         entry["name"] = to_godot(c.name);
+        entry["short_name"] = to_godot(c.short_name);
         entry["color"] = to_godot(c.color);
         entry["position"] = c.position.to_double();
         result.push_back(entry);
@@ -1453,8 +1497,7 @@ bool UhrwerkSimulation::campaign(std::int64_t current, std::int64_t district, st
         return false;
     }
     const auto kind = static_cast<uhrwerk::CampaignAction>(action);
-    if (!uhrwerk::campaign_allowed(*w, static_cast<uhrwerk::Index>(current),
-                                   static_cast<uhrwerk::Index>(district), kind)) {
+    if (!campaign_possible(current, district, kind)) {
         return false;
     }
     uhrwerk::Command command;
@@ -1480,31 +1523,39 @@ Dictionary UhrwerkSimulation::get_party(std::int64_t current) const {
     result["color"] = to_godot(info.color);
     result["funds"] = c < w->party_funds.size() ? w->party_funds[c].to_double() : 0.0;
     result["donations"] = c < w->party_donations.size() ? w->party_donations[c].to_double() : 0.0;
-    std::int64_t districts = 0;
-    const std::size_t currents = w->currents.size();
-    for (std::size_t d = 0;
-         d < w->electoral_districts.size() && w->campaign.size() == w->electoral_districts.size() * currents;
-         ++d) {
-        const uhrwerk::CampaignState& state = w->campaign[d * currents + c];
-        if (state.mobilization > uhrwerk::Fixed::zero() || state.persuasion > uhrwerk::Fixed::zero() ||
-            state.club > uhrwerk::Fixed::zero()) {
-            ++districts;
+    result["reserved"] =
+        simulation_->reserved_campaign_funds(static_cast<uhrwerk::Index>(current)).to_double();
+    // Nächste Wahl: Parlament, Tag und Wahlkreise mit eigenem Wahlkampf.
+    const std::int64_t next = next_parliament();
+    result["open"] = next >= 0;
+    if (next >= 0) {
+        const uhrwerk::Parliament& p = at(w->parliaments, next);
+        result["parliament_name"] = to_godot(p.name);
+        result["election_date_text"] = to_godot(uhrwerk::format_date_long(p.election_day));
+        std::int64_t districts = 0;
+        const std::size_t currents = w->currents.size();
+        for (std::size_t d = 0; d < w->electoral_districts.size() &&
+                                w->campaign.size() == w->electoral_districts.size() * currents;
+             ++d) {
+            const uhrwerk::CampaignState& state = w->campaign[d * currents + c];
+            if (w->electoral_districts[d].parliament == next &&
+                (state.mobilization > uhrwerk::Fixed::zero() || state.persuasion > uhrwerk::Fixed::zero() ||
+                 state.club > uhrwerk::Fixed::zero())) {
+                ++districts;
+            }
         }
+        result["campaign_districts"] = districts;
     }
-    result["campaign_districts"] = districts;
-    const std::int64_t parliament = get_shown_parliament();
-    if (!valid_index(w->parliaments, parliament)) {
+    // Letzte Wahl: Sitze, Abgeordnete und Fraktion.
+    result["held"] = !w->elections.empty();
+    if (w->elections.empty() || !valid_index(w->parliaments, w->elections.back().parliament)) {
         return result;
     }
-    const uhrwerk::Parliament& p = at(w->parliaments, parliament);
-    result["parliament_name"] = to_godot(p.name);
-    result["election_date_text"] = to_godot(uhrwerk::format_date_long(p.election_day));
+    const uhrwerk::ElectionResult* election = &w->elections.back();
+    const uhrwerk::Parliament& p = at(w->parliaments, election->parliament);
+    result["last_parliament_name"] = to_godot(p.name);
+    result["last_election_date_text"] = to_godot(uhrwerk::format_date_long(election->day));
     result["faction_date_text"] = to_godot(uhrwerk::format_date_long(p.faction_day));
-    const uhrwerk::ElectionResult* election = latest_election(parliament);
-    result["held"] = election != nullptr;
-    if (election == nullptr) {
-        return result;
-    }
     const std::vector<std::int32_t> seats = uhrwerk::seats_by_current(*w, *election);
     const std::vector<std::int32_t> by_faction = uhrwerk::seats_by_faction(*w, *election);
     result["seats"] = c < seats.size() ? seats[c] : 0;
@@ -1562,6 +1613,11 @@ Dictionary UhrwerkSimulation::get_campaign(std::int64_t district, std::int64_t c
     bool open = valid_index(w->parliaments, d.parliament) && latest_election(d.parliament) == nullptr &&
                 w->date <= at(w->parliaments, d.parliament).election_day;
     result["open"] = open;
+    if (valid_index(w->parliaments, d.parliament)) {
+        const uhrwerk::Parliament& p = at(w->parliaments, d.parliament);
+        result["parliament_name"] = to_godot(p.name);
+        result["election_date_text"] = to_godot(uhrwerk::format_date_long(p.election_day));
+    }
     if (w->campaign.size() == w->electoral_districts.size() * currents) {
         const uhrwerk::CampaignState& state = w->campaign[static_cast<std::size_t>(district) * currents + c];
         result["mobilization"] = state.mobilization.to_double();
@@ -1575,9 +1631,7 @@ Dictionary UhrwerkSimulation::get_campaign(std::int64_t district, std::int64_t c
         entry["action"] = static_cast<std::int64_t>(a);
         entry["name"] = to_godot(kCampaignNames[a]);
         entry["cost"] = rule.cost.to_double();
-        entry["allowed"] = uhrwerk::campaign_allowed(*w, static_cast<uhrwerk::Index>(current),
-                                                     static_cast<uhrwerk::Index>(district),
-                                                     static_cast<uhrwerk::CampaignAction>(a));
+        entry["allowed"] = campaign_possible(current, district, static_cast<uhrwerk::CampaignAction>(a));
         actions.push_back(entry);
     }
     result["actions"] = actions;
@@ -1613,7 +1667,8 @@ bool UhrwerkSimulation::set_player_current(std::int64_t current) {
         player_current_.clear();
         return true;
     }
-    if (!valid_index(w->currents, current)) {
+    // Parteienmodus nur in Szenarien mit Parlament (Review M8: 1648 hat Strömungen, aber keine Wahl).
+    if (!valid_index(w->currents, current) || w->parliaments.empty()) {
         return false;
     }
     player_current_ = at(w->currents, current).id;

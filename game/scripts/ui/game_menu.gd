@@ -116,6 +116,11 @@ func show_roles(state_name: String, currents: Array[Dictionary], current: int) -
 	_role_select.visible = not currents.is_empty()
 
 
+## Zahl der wählbaren Rollen (Tests); 0, wenn die Zeile verborgen ist (Szenario ohne Parlament).
+func role_count() -> int:
+	return _role_select.item_count if _role_select.visible else 0
+
+
 ## Rolle wählen wie in der Liste (Klicktest); index -1 = Staat.
 func select_role(current: int) -> void:
 	_role_select.select(current + 1)

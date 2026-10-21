@@ -33,7 +33,7 @@ wahl nationalversammlung {
     }
 }
 
-# Preußisches Abgeordnetenhaus 1849 (Dreiklassenwahlrecht): Plausibilität nach Abschnitt 7.8. Der
+# Preußische Zweite Kammer 1849 (Dreiklassenwahlrecht): Plausibilität nach Abschnitt 7.8. Der
 # Boykott der Demokraten 1849 ist nicht abgebildet.
 wahl pr_abgeordnetenhaus {
     block konservative_und_liberale {

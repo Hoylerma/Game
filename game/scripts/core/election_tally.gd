@@ -202,7 +202,8 @@ static func hemicycle(count: int, center: Vector2, radius: float) -> Dictionary:
 	return {"points": points, "dot_size": dot}
 
 
-## Meldung eines Wahlkreises als Telegramm, z. B. „Mannheim (Baden): Demokraten 61 %“.
+## Meldung eines Wahlkreises als Telegramm, z. B. „Mannheim (Baden): Demokraten 61 %“; mit dem
+## Kurznamen der Strömung (short_name), damit der Anteil auch in schmalen Spalten sichtbar bleibt.
 static func telegram(district: Dictionary, currents: Array[Dictionary]) -> String:
 	var place := str(district.get("name", "–"))
 	var state := str(district.get("state_name", ""))
@@ -215,7 +216,7 @@ static func telegram(district: Dictionary, currents: Array[Dictionary]) -> Strin
 		return "%s: ohne Ergebnis" % place
 	var text := "%s: %s %s" % [
 		place,
-		str(currents[winner].get("name", "–")),
+		str(currents[winner].get("short_name", currents[winner].get("name", "–"))),
 		GermanFormat.percent(roundi(float(district.get("winner_share", 0.0)) * 100.0)),
 	]
 	if bool(district.get("runoff", false)):

@@ -27,6 +27,15 @@ class TestRechnung(unittest.TestCase):
         self.assertEqual([len(t) for t in teile], [2, 2, 2])
         self.assertEqual(len(wk.schneide(gruppen, 10)), 6)
 
+    def test_schneiden_optimal_und_ohne_grosse_luecken(self) -> None:
+        gewichte = [30, 70, 40, 60, 100]
+        gruppen = [[ort(f"o{i}", w, 0.01 * i, 0)] for i, w in enumerate(gewichte)]
+        self.assertEqual([sum(o.einwohner for o in t) for t in wk.schneide(gruppen, 3)], [100, 100, 100])
+        # Drei Orte dicht beieinander, einer gut 300 km entfernt: kein Wahlkreis überspannt die Lücke,
+        # auch wenn 2 + 2 gleicher wäre.
+        nah_fern = [[ort("a", 100, 0, 50)], [ort("b", 100, 0.01, 50)], [ort("c", 100, 0.02, 50)], [ort("d", 100, 4.5, 50)]]
+        self.assertEqual([[o.kennung for o in t] for t in wk.schneide(nah_fern, 2)], [["a", "b", "c"], ["d"]])
+
     def test_grosse_stadt_mit_mehreren_sitzen(self) -> None:
         orte = [ort("stadt", 600, 0, 0), *[ort(f"dorf{i}", 100, 0.1 * i, 0.1, f"k:{i // 2}") for i in range(4)]]
         kreise = wk.wahlkreise_eines_staates("AAA", orte, 10)

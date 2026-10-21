@@ -11,16 +11,20 @@ Erzeugt ``data/tabellen/wahlkreise.csv`` für die Parlamente aus ``data/common/p
 3. **Regionen je Staat:** Die Sitze eines Staates verteilen sich nach Einwohnern auf seine Regionen
    (in Preußen die Regierungsbezirke, in Österreich die Kronländer, sonst die Landschaften der
    Karte); eine Region ohne eigenen Sitz kommt zur nächsten Region. So überspannt kein Wahlkreis
-   getrennte Landesteile (Rheinprovinz und Ostpreußen, die Pfalz und Altbayern).
+   große getrennte Landesteile (Rheinprovinz und Ostpreußen, die Pfalz und Altbayern); kleine
+   Exklaven ohne eigenen Sitz (Oldenburgs Birkenfeld und Eutin) bleiben in ihrer Region.
 4. **Wahlkreise je Region:** Ein Ort mit mindestens dem 1,5-Fachen der Zielgröße (Einwohner je Sitz)
    wird ein eigener Wahlkreis mit mehreren Sitzen (Berlin, Wien). Die übrigen Orte bilden
    Bausteine: in Preußen und Österreich die Kreise der Verwaltung, sonst die Kreise der Karte
-   (M3). Zu große Bausteine zerfallen in ihre Orte. Die Bausteine werden in der Reihenfolge einer
-   Hilbert-Kurve über ihre Lage in zusammenhängende Gruppen gleicher Einwohnerzahl geschnitten.
+   (M3). Bausteine ab dem 0,75-Fachen der Zielgröße zerfallen in ihre Orte. Die Bausteine werden in
+   der Reihenfolge einer Hilbert-Kurve über ihre Lage in zusammenhängende Gruppen geschnitten:
+   optimal nach möglichst gleicher Einwohnerzahl, mit einer Strafe für große Lücken innerhalb
+   eines Wahlkreises (``schneide``).
 5. **Name** nach dem einwohnerstärksten Ort, Kennung ``<kürzel>_<staat>_<nr>``.
 
-Die Wahlkreise sind Spielwerte, keine historischen Grenzen; die Tabelle bleibt editierbar und
-wird mit ``--pruefen`` gegen eine Neuberechnung verglichen.
+Die Wahlkreise sind Spielwerte, keine historischen Grenzen. Die Tabelle wird mit ``--pruefen``
+gegen eine Neuberechnung verglichen (so auch in der CI); Änderungen gehören deshalb ins Werkzeug,
+nicht in die Tabelle.
 
 Aufruf::
 
@@ -53,6 +57,9 @@ STICHTAG_BEVOELKERUNG = "1846.12.03"
 # Zugelassen zur Wahl der Nationalversammlung, obwohl außerhalb des Bundesgebiets (April 1848).
 ZUGELASSEN = frozenset({"PRU", "DEN"})
 GROSSER_ORT = 1.5  # ab diesem Vielfachen der Zielgröße ein eigener Wahlkreis
+BAUSTEIN_TEILEN = 0.75  # ab diesem Vielfachen der Zielgröße zerfällt ein Baustein in seine Orte
+SPRUNG_KM = 50  # größere Lücken zwischen Nachbarn der Hilbert-Folge kosten beim Schneiden …
+SPRUNG_SKALA = 100  # … und zwar so viel wie eine Abweichung um das ganze Mittel je SPRUNG_SKALA km
 KUERZEL = {"nationalversammlung": "nv", "pr_abgeordnetenhaus": "pr"}
 QUELLE = (
     "Werkzeug tools/geodaten/wahlkreise_1848.py (M8): Sitze im Verhältnis zur Bevölkerung 1846, "
@@ -87,6 +94,7 @@ class Wahlkreis:
     sitze: int = 1
     kennung: str = ""
     name: str = ""
+    ziel: float = 0.0  # Einwohner je Sitz der Region (Bericht)
 
     @property
     def einwohner(self) -> int:
@@ -263,33 +271,57 @@ def raeumlich_sortiert(gruppen: list[list[Ort]]) -> list[list[Ort]]:
 
 
 def schneide(gruppen: list[list[Ort]], teile: int) -> list[list[Ort]]:
-    """Folge von Gruppen in ``teile`` zusammenhängende Abschnitte mit möglichst gleicher Einwohnerzahl."""
+    """Folge von Gruppen in ``teile`` zusammenhängende Abschnitte mit möglichst gleicher Einwohnerzahl.
+
+    Optimal im Sinne der kleinsten Summe der Kosten je Abschnitt (dynamische Programmierung über die
+    Schnittstellen): quadrierte Abweichung vom Mittel plus eine Strafe für die größte Lücke zwischen
+    benachbarten Gruppen im Abschnitt, wenn sie ``SPRUNG_KM`` übersteigt (die Hilbert-Kurve springt
+    an Rändern, ein Wahlkreis soll das nicht). Eine Lücke von 2 × ``SPRUNG_KM`` wiegt so viel wie
+    eine Abweichung um das ganze Mittel. Ein Abschnitt reicht höchstens bis zum Dreifachen des
+    Mittels, außer er besteht aus einer Gruppe.
+    """
     if teile <= 0:
         return []
-    if teile >= len(gruppen):
+    n = len(gruppen)
+    if teile >= n:
         return [list(g) for g in gruppen]
-    gewichte = [sum(o.einwohner for o in g) for g in gruppen]
-    gesamt = sum(gewichte)
-    kumuliert = []
-    laufend = 0
-    for w in gewichte:
-        laufend += w
-        kumuliert.append(laufend)
-    schnitte = []
-    letzter = -1
-    for j in range(1, teile):
-        ziel = gesamt * j / teile
-        # Schnitt nach Gruppe i; mindestens eine Gruppe je Abschnitt davor und danach.
-        lo, hi = letzter + 1, len(gruppen) - (teile - j) - 1
-        bester = min(range(lo, hi + 1), key=lambda i: (abs(kumuliert[i] - ziel), i))
-        schnitte.append(bester)
-        letzter = bester
-    ergebnis = []
-    anfang = 0
-    for s in schnitte + [len(gruppen) - 1]:
-        ergebnis.append([o for g in gruppen[anfang : s + 1] for o in g])
-        anfang = s + 1
-    return ergebnis
+    praefix = [0]
+    for g in gruppen:
+        praefix.append(praefix[-1] + sum(o.einwohner for o in g))
+    gesamt = praefix[-1]
+    mitten = [mittelpunkt(g) for g in gruppen]
+    luecke = [0] + [
+        round(abstand_km(Ort("", "", "", False, 0, mitten[i - 1][0], mitten[i - 1][1], "", ""), *mitten[i]))
+        for i in range(1, n)
+    ]  # Lücke vor Gruppe i in ganzen Kilometern
+    # kosten[k][i]: beste Aufteilung der ersten i Gruppen in k Abschnitte; Abweichung als
+    # teile × Abschnitt − gesamt (ganzzahlig statt Abschnitt − gesamt / teile).
+    kosten: list[list[int | None]] = [[None] * (n + 1) for _ in range(teile + 1)]
+    zurueck = [[-1] * (n + 1) for _ in range(teile + 1)]
+    kosten[0][0] = 0
+    for k in range(1, teile + 1):
+        for i in range(k, n - (teile - k) + 1):
+            bester: int | None = None
+            sprung = 0  # größte Lücke innerhalb des Abschnitts
+            for j in range(i - 1, k - 2, -1):  # Abschnitt aus den Gruppen j … i−1
+                abschnitt = teile * (praefix[i] - praefix[j])
+                if j < i - 1:
+                    if abschnitt > 3 * gesamt:
+                        break
+                    sprung = max(sprung, luecke[j + 1])
+                vorher = kosten[k - 1][j]
+                if vorher is None:
+                    continue
+                strafe = max(0, sprung - SPRUNG_KM) ** 2 * gesamt**2 // SPRUNG_SKALA**2
+                wert = vorher + (abschnitt - gesamt) ** 2 + strafe
+                if bester is None or wert < bester:
+                    bester, zurueck[k][i] = wert, j
+            kosten[k][i] = bester
+    grenzen = [n]
+    for k in range(teile, 0, -1):
+        grenzen.append(zurueck[k][grenzen[-1]])
+    grenzen.reverse()
+    return [[o for g in gruppen[a:b] for o in g] for a, b in zip(grenzen, grenzen[1:])]
 
 
 def wahlkreise_eines_staates(staat: str, orte: list[Ort], sitze: int) -> list[Wahlkreis]:
@@ -307,7 +339,7 @@ def wahlkreise_einer_region(staat: str, orte: list[Ort], sitze: int) -> list[Wah
     rest: list[Ort] = []
     for o in sorted(orte, key=lambda o: o.kennung):
         if o.einwohner >= GROSSER_ORT * ziel and len(orte) > 1:
-            kreise.append(Wahlkreis(staat, [o], max(1, round(o.einwohner / ziel))))
+            kreise.append(Wahlkreis(staat, [o], max(1, round(o.einwohner / ziel)), ziel=ziel))
         else:
             rest.append(o)
     while sum(k.sitze for k in kreise) > sitze:  # große Orte nehmen nie mehr als alle Sitze
@@ -319,14 +351,14 @@ def wahlkreise_einer_region(staat: str, orte: list[Ort], sitze: int) -> list[Wah
             bausteine[o.baustein].append(o)
         gruppen = []
         for _, g in sorted(bausteine.items()):
-            if sum(o.einwohner for o in g) > GROSSER_ORT * ziel and len(g) > 1:
+            if sum(o.einwohner for o in g) > BAUSTEIN_TEILEN * ziel and len(g) > 1:
                 gruppen += [[o] for o in g]
             else:
                 gruppen.append(g)
         if len(gruppen) < uebrig:
             gruppen = [[o] for g in gruppen for o in g]
         teile = schneide(raeumlich_sortiert(gruppen), min(uebrig, len(gruppen)))
-        neue = [Wahlkreis(staat, t) for t in teile]
+        neue = [Wahlkreis(staat, t, ziel=ziel) for t in teile]
         # Mehr Sitze als Orte: die einwohnerstärksten Wahlkreise wählen mehrere Abgeordnete.
         for i in range(uebrig - len(neue)):
             max(neue, key=lambda k: (k.einwohner / k.sitze, k.orte[0].kennung)).sitze += 1
@@ -407,11 +439,14 @@ def bericht(ergebnisse: list[Ergebnis]) -> str:
         sitze = sum(k.sitze for k in kreise)
         je_sitz = sorted(k.einwohner / k.sitze for k in kreise)
         median = je_sitz[len(je_sitz) // 2]
+        relativ = sorted(k.einwohner / k.sitze / k.ziel for k in kreise if k.ziel > 0)
+        abseits = sum(1 for r in relativ if r < 2 / 3 or r > 1.5)
         weit = sorted(kreise, key=lambda k: -ausdehnung_km(k))[:3]
         teile.append(
             f"{e.parlament.kennung}: {len(kreise)} Wahlkreise, {sitze} Sitze "
             f"(Soll {e.parlament.sitze}); Einwohner je Sitz Median {zahl(median)}, "
-            f"{zahl(je_sitz[0])} bis {zahl(je_sitz[-1])}; größte Ausdehnung "
+            f"{zahl(je_sitz[0])} bis {zahl(je_sitz[-1])}; im Verhältnis zum Ziel der Region "
+            f"{relativ[0]:.2f} bis {relativ[-1]:.2f}, {abseits} außerhalb 2/3 bis 1,5; größte Ausdehnung "
             + ", ".join(f"{k.name} {ausdehnung_km(k):.0f} km" for k in weit)
         )
         teile.append(

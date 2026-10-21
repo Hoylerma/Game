@@ -20,7 +20,7 @@ Rasterregel, Dateien unter `data/karte/geometrie/`); Inhalt des Kernraums:
 | `zuordnung.py`, `gebietscodes.csv` | Lesezeichen 1848 (M7): Besitzer, Bundesgebiet und Verwaltung der Orte aus Regeln (siehe [Lesezeichen 1848](#lesezeichen-1848-zuordnungpy-bevoelkerung_1846py)); `gebietscodes.csv` = heutige Verwaltungscodes und Einwohner je Ort aus GeoNames (erzeugt) |
 | `bevoelkerung_1846.py` | Lesezeichen 1848 (M7): Bevölkerung der Orte zum 3. Dezember 1846 (Schätzung aus Summen) |
 | `stichprobe_1848.py` | Lesezeichen 1848 (M7): reproduzierbare Stichprobe und Flächensummen für die Prüfung ([stichprobe_1848.md](../../docs/pruefung/stichprobe_1848.md)) |
-| `wahlkreise_1848.py` | Wahlkreise der Nationalversammlung 1848 und des Preußischen Abgeordnetenhauses 1849 (seit M8, `data/tabellen/wahlkreise.csv`) |
+| `wahlkreise_1848.py` | Wahlkreise der Nationalversammlung 1848 und der Preußischen Zweiten Kammer 1849 (seit M8, `data/tabellen/wahlkreise.csv`) |
 | `test_geodaten.py`, `test_orte.py`, `test_zuordnung.py`, `test_bevoelkerung_1846.py`, `test_stichprobe_1848.py`, `test_wahlkreise_1848.py`, `testdaten/` | Tests ohne Netz und ohne Zwischenspeicher |
 
 Erzeugt bzw. gepflegt in `data/karte/`:

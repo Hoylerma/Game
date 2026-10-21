@@ -21,7 +21,7 @@ staat LIE {
         hofhaltung     = 500
         heer           = 2
         zollverein     = nein
-        verfassung     = keine
-        wahlrecht      = keines
+        verfassung     = staendisch
+        wahlrecht      = staendisch
     }
 }

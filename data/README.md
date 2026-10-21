@@ -341,10 +341,10 @@ Zielwerte erfüllt. Kein Staatsbankrott; Vermögen am Ende im Median 1,05 (Frank
 |---|---|
 | `common/stroemungen.chron` | 5 Strömungen mit Position auf der Achse −100 … +100 |
 | `common/interessengruppen.chron` | 11 Interessengruppen mit Mitgliedern je Beruf, Konfession und Bildung und Neigung je Strömung (die Arbeiterbewegung ab August 1848) |
-| `common/parlamente.chron` | Nationalversammlung 1848 (8 Fraktionen) und Preußisches Abgeordnetenhaus 1849 (3 Fraktionen) |
+| `common/parlamente.chron` | Nationalversammlung 1848 (8 Fraktionen) und Preußische Zweite Kammer 1849 (3 Fraktionen) |
 | `common/wahlen.chron` | Wahlregeln, Wahlkampf und fünf Regionen der Wahlgeographie (Spielwerte) |
 | `common/wahlziele_voelkerfruehling.chron` | Zielkorridore des Wahllabors (`uhrwerk-cli wahl`) |
-| `tabellen/wahlkreise.csv` → `history/wahlkreise/` | 633 Wahlkreise der Nationalversammlung, 337 des Abgeordnetenhauses; erzeugt von `tools/geodaten/wahlkreise_1848.py` |
+| `tabellen/wahlkreise.csv` → `history/wahlkreise/` | 633 Wahlkreise der Nationalversammlung, 337 der Zweiten Kammer; erzeugt von `tools/geodaten/wahlkreise_1848.py` |
 | `tabellen/staaten_historie.csv` | Felder `verfassung`, `wahlrecht`, `wahlsystem`, `wahl_indirekt`, `wahl_zensus` je Staat |
 
 Das Lesezeichen 1648 hat kein Parlament; Strömungen und Gruppen sind dort geladen, wirken aber nicht.

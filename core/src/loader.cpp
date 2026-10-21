@@ -534,6 +534,7 @@ public:
         // Ohne gültiges Szenario werden alle datierten Blöcke angewendet, damit die
         // Prüfung trotzdem alle Felder sieht.
         start_ = selected != nullptr ? selected->start : Date{9999, 12, 31};
+        scenario_selected_ = selected != nullptr;
         capacity_factor_ = selected != nullptr ? selected->capacity_factor : Fixed::one();
 
         process("common/regeln.chron", [&](const SourceFile& f) { load_rules(f); });
@@ -1612,10 +1613,12 @@ private:
     void load_currents(const SourceFile& file) {
         for_each_definition(file, "stroemung", "stroemung <kennung> { … }", [&](const ScriptNode& node) {
             check_id(file, node, "Kennung einer Strömung");
-            Fields f(node, file.name, "stroemung " + node.value, issues_, {"name", "farbe", "position"});
+            Fields f(node, file.name, "stroemung " + node.value, issues_,
+                     {"name", "kurzname", "farbe", "position"});
             PoliticalCurrent c;
             c.id = node.value;
             c.name = f.text("name").value_or("");
+            c.short_name = f.has("kurzname") ? f.text("kurzname").value_or(c.name) : c.name;
             c.color = f.color("farbe").value_or(Color{});
             c.position = f.fixed("position", between(fx(-100), fx(100))).value_or(Fixed{});
             const auto index = static_cast<Index>(world_.currents.size());
@@ -1805,6 +1808,13 @@ private:
                 issues_.error(file.name, plain.find("fraktionen_ab")->line,
                               "'fraktionen_ab' liegt vor dem Wahltag von " + what);
             }
+            // Eine Wahl vor dem Start fände nie statt, Wahlkampf und Spenden liefen ins Leere
+            // (Review M8). Ein späteres Lesezeichen braucht ein Parlament mit eigenem Wahltag.
+            if (!later && scenario_selected_ && plain.find("wahltag") != nullptr && p.election_day < start_) {
+                issues_.error(file.name, plain.find("wahltag")->line,
+                              "Wahltag " + format_date(p.election_day) + " von " + what +
+                                  " liegt vor dem Startdatum " + format_date(start_));
+            }
             if (f.has("boykott")) {
                 if (const ScriptNode* list = f.block("boykott", "Liste von Kulturen, z. B. { tschechen }")) {
                     for (const ScriptNode& child : list->children) {
@@ -1827,6 +1837,12 @@ private:
                 }
                 if (const ScriptNode* list =
                         f.block("boykott_maerkte", "Liste von Märkten, z. B. { boehmen }")) {
+                    if (list->children.empty()) {
+                        // Leer hieße „Boykott überall“, also das Gegenteil des Gemeinten (Review M8).
+                        issues_.error(file.name, list->line,
+                                      "'boykott_maerkte' ist leer in " + what +
+                                          " (ohne die Zeile gilt der Boykott überall)");
+                    }
                     for (const ScriptNode& child : list->children) {
                         const Index market =
                             child.key.empty() && !child.is_block ? lookup(markets_, child.value) : kNone;
@@ -3135,6 +3151,7 @@ private:
     Registry scenarios_;
 
     Date start_{9999, 12, 31};                     // Startdatum des gewählten Szenarios
+    bool scenario_selected_ = false;               // ein gültiges Szenario ist gewählt
     std::vector<CapitalRef> capitals_;             // parallel zu world_.states
     std::vector<PlayerRef> players_;               // parallel zu den Szenarien
     std::vector<std::vector<PlayerRef>> playable_; // spielbare Staaten, parallel zu den Szenarien

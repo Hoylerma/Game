@@ -197,7 +197,7 @@ Vollständiges Schema: [chronik-skript.md](chronik-skript.md), Abschnitt 3.21.
 
 **Vorschlag (Entscheidung 1):**
 - **Deutsche Nationalversammlung** 1848: kalibriert, Abnahme.
-- **Preußisches Abgeordnetenhaus** 17. Juli 1849 mit Dreiklassenwahlrecht: nur
+- **Preußische Zweite Kammer** 17. Juli 1849 mit Dreiklassenwahlrecht: nur
   Plausibilitätsprüfung. Es zeigt die Wirkung des Wahlrechts auf dieselbe Bevölkerung, ohne den
   Boykott der Demokraten von 1849.
 
@@ -233,16 +233,25 @@ Bildung:
    zum nächsten Wahlkreis.
 4. **Übrige Orte:** Bausteine sind die Kreise der Verwaltung (Preußen, Österreich), sonst die
    räumlichen Kreise aus M3; zu große Bausteine zerfallen in Orte. Die Bausteine werden entlang einer
-   Hilbert-Kurve über ihre Lage in Gruppen gleicher Einwohnerzahl geschnitten.
+   Hilbert-Kurve über ihre Lage geschnitten. Seit dem Review in b3 ist der Schnitt optimal
+   (dynamische Programmierung): Er minimiert die quadrierte Abweichung der Abschnitte vom Mittel
+   der Region plus eine Strafe für Lücken über 50 km zwischen Nachbarn der Kurve. Bausteine ab
+   dem 0,75-Fachen der Zielgröße zerfallen in ihre Orte. Vorher schnitt das Werkzeug gierig
+   entlang der Kurve; dabei entstanden Wahlkreise vom 0,2- bis 1,8-Fachen des Ziels.
 5. **Name** nach dem einwohnerstärksten Ort, Kennung `nv_<staat>_<nr>` bzw. `pr_<nr>`.
 
 Ergebnis:
 - **Nationalversammlung:** 633 Wahlkreise mit 649 Sitzen. Einwohner je Sitz im Median rund 70.000
-  (Liechtenstein 6.500 als eigener Staat, höchstens 125.000).
-- **Preußisches Abgeordnetenhaus:** 337 Wahlkreise mit 350 Sitzen, rund 46.000 je Sitz. Kein
-  Wahlkreis reicht weiter als 66 km vom Mittelpunkt.
-- **Weit gestreckt** sind nur Kleinstaaten mit Exklaven: Oldenburg mit Eutin (Cloppenburg 232 km)
-  und Braunschweig (Bodenwerder 119 km). Ihre Exklaven sind für einen eigenen Sitz zu klein.
+  (Liechtenstein 6.500 als eigener Staat, höchstens 120.000). Im Verhältnis zum Mittel der Region
+  liegen alle Wahlkreise beim 2/3- bis 1,5-Fachen, bis auf sechs. Die Ausreißer sind Oldenburgs
+  Exklaven: Die Fürstentümer Birkenfeld (Idar-Oberstein, 26.000) und Lübeck (Eutin, 19.000) sind
+  eigene kleine Wahlkreise, und die beiden übrigen Oldenburger sind entsprechend groß. Dazu kommen
+  Remscheid und Kaltennordheim mit dem 0,65-Fachen.
+- **Preußische Zweite Kammer:** 337 Wahlkreise mit 350 Sitzen, rund 46.000 je Sitz (31.000 bis
+  69.000, alle beim 0,69- bis 1,49-Fachen des Mittels der Region). Kein Wahlkreis reicht weiter
+  als 68 km vom Mittelpunkt.
+- **Weit gestreckt** sind in der Nationalversammlung nur Braunschweig mit Bodenwerder (116 km),
+  Hamburg mit Cuxhaven (91 km) und Neumarkt in der Steiermark (88 km).
 - **Zusammenhang:** Den prüft das Werkzeug nicht (es gibt keine Nachbarschaft der Orte). Ein
   Maß dafür ist die Ausdehnung, die der Bericht nennt.
 - Die Tabelle ist reproduzierbar, die CI prüft sie mit `--pruefen`. Ausnahmen per Hand wären eine
@@ -570,8 +579,8 @@ Weitere Tests:
 
 ## 12. Offene Entscheidungen
 
-1. **Welche Wahlen.** Empfehlung: **Nationalversammlung 1848** (kalibriert) und **Preußisches
-   Abgeordnetenhaus Juli 1849** mit Dreiklassenwahlrecht (Plausibilität). Alternative: nur die
+1. **Welche Wahlen.** Empfehlung: **Nationalversammlung 1848** (kalibriert) und **Preußische
+   Zweite Kammer Juli 1849** mit Dreiklassenwahlrecht (Plausibilität). Alternative: nur die
    Nationalversammlung; oder zusätzlich die Preußische Nationalversammlung 1848 und die Landtage.
 2. **Sitze und Wahlkreise.** Empfehlung: **649 Sitze im Verhältnis zur Bevölkerung im
    Bundesgebiet**, Wahlkreise per Werkzeug aus den Kreisen (Abschnitt 5). Alternativen:
@@ -615,8 +624,8 @@ Weitere Tests:
 
 | Schritt | Stand |
 |---|---|
-| a1 Datenmodell | `common/stroemungen.chron` (5 Strömungen), `common/interessengruppen.chron` (11 Gruppen, davon 10 im Lesezeichen 1848; die Arbeiterbewegung erst ab August 1848), `common/parlamente.chron` (Nationalversammlung 1848 mit 8 Fraktionen, Preußisches Abgeordnetenhaus 1849 mit 3), `selbststaendig` bei Landarmen (0,6) und Fabrikarbeitern (0,7); Verfassung und Wahlrecht der Landtage für die 38 Staaten von 1848 in `staaten_historie.csv` (aus der Regierungsform abgeleitet, Zensus in Baden, Württemberg, Hessen-Darmstadt und den Niederlanden). Lader (chronik-skript.md 3.19–3.21), Archivar, Inhaltsfingerabdruck (Bereich `politik`), `info` und `pruefen`. 1648 ohne Parlament, Prüfsumme unverändert. |
-| a2 Wahlkreise | `tools/geodaten/wahlkreise_1848.py` (mit Tests, CI prüft die Tabelle), `wahlkreise.csv` mit 633 Wahlkreisen der Nationalversammlung (649 Sitze) und 337 des Preußischen Abgeordnetenhauses (350 Sitze), Archivar (`history/wahlkreise/`), Lader mit Prüfungen (Sitze = Sollzahl, Orte des Staates, jeder Ort einmal), Fingerabdruck, `info`. Boykott um Polen und Dänen ergänzt. |
+| a1 Datenmodell | `common/stroemungen.chron` (5 Strömungen), `common/interessengruppen.chron` (11 Gruppen, davon 10 im Lesezeichen 1848; die Arbeiterbewegung erst ab August 1848), `common/parlamente.chron` (Nationalversammlung 1848 mit 8 Fraktionen, Preußische Zweite Kammer 1849 mit 3), `selbststaendig` bei Landarmen (0,6) und Fabrikarbeitern (0,7); Verfassung und Wahlrecht der Landtage für die 38 Staaten von 1848 in `staaten_historie.csv` (aus der Regierungsform abgeleitet, Zensus in Baden, Württemberg und Hessen-Darmstadt; nach dem Review in b3 ständisch in den Niederlanden, Dänemark, Liechtenstein und Schaumburg-Lippe). Lader (chronik-skript.md 3.19–3.21), Archivar, Inhaltsfingerabdruck (Bereich `politik`), `info` und `pruefen`. 1648 ohne Parlament, Prüfsumme unverändert. |
+| a2 Wahlkreise | `tools/geodaten/wahlkreise_1848.py` (mit Tests, CI prüft die Tabelle), `wahlkreise.csv` mit 633 Wahlkreisen der Nationalversammlung (649 Sitze) und 337 der Preußischen Zweiten Kammer (350 Sitze), Archivar (`history/wahlkreise/`), Lader mit Prüfungen (Sitze = Sollzahl, Orte des Staates, jeder Ort einmal), Fingerabdruck, `info`. Boykott um Polen und Dänen ergänzt. |
 | a3 Wahl im Kern | `core/src/politics.cpp` (Abschnitte 7.1–7.7). Die Wahl läuft im Tagesablauf am Wahltag nach der Wirtschaft, mit Chronikeintrag. `common/wahlen.chron` (chronik-skript.md 3.23) enthält Wahlregeln und fünf Regionen als Spielwerte; Sitz der Parlamente ist Frankfurt bzw. Berlin. Ergebnis im Zustandsverzeichnis nur mit Parlamenten, Spielstand Format 2 (speicherstaende.md, Abschnitt 6). Tests: Neigung, Fraktionen, Stichwahl, Gleichstand, Boykott, Dreiklassen, Zensus, Threads, Spielstände, Formatwache. 1648 bitgleich. Erster Lauf 1848 ohne Kalibrierung: 504 von 649 Sitzen besetzt (145 leer, davon Tschechen 89, Polen 51, Dänen 5), die Liberalen gewinnen 369 Sitze, Konservative und Demokraten keinen. Die Kalibrierung folgt in a4. |
 | a4 Wahllabor und Kalibrierung | `uhrwerk-cli wahl` (Abschnitt 7.8, Kern `uhrwerk/election_lab.hpp`), Wahlziele `common/wahlziele_voelkerfruehling.chron` (chronik-skript.md 3.24), CI-Schritt „Wahllabor 1848/49“, CTests `wahl_fixture` und `wahl_1848`. Ergebnis 1848 mit 16 Seeds: alle Ziele erfüllt (siehe unten). Preußen 1849: Konservative und Liberale 83 %, Arbeiterbewegung 0 %. |
 | b1 Wahlabend und Kartenmodus | Brücke: `get_currents`, `get_parliaments`, `get_election`, `get_location_electoral_district_indices`, `get_shown_parliament`, Kartenmodus 12 `MAP_WAHLEN`, Wahlkreis und Ergebnis in `get_location` (`wahl`). Godot: Kartenmodus „Wahlen“ (Taste Ä) mit Wahlkreisgrenzen, Legende, Tooltip und Abschnitt „Wahl“ in der Ortsinfo; Wahlabend (Abschnitt 8) mit Spielmenü „Letzte Wahl“ und Startoption `--wahlabend`. Tests: Einheitentests (Hochrechnung, Halbrund, Telegramme), Rauchtest der Brücke 1848, Klicktest (Wahlabend am 1. Mai, schrittweise Meldungen, Hochrechnung am Ende = Ergebnis, Telegramm zeigt die Ortsinfo), Screenshot `einigkeit_wahlabend.png` in der CI. |
