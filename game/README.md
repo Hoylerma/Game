@@ -110,8 +110,8 @@ Modus `--headless` gibt es kein Bild; ohne Bildschirm hilft `xvfb-run`.
 | Klick auf einen Chronikeintrag | Ort des Ereignisses auswählen und anfahren |
 | F10, Knopf „Menü“ | Spielmenü: Neues Spiel mit Wahl des Lesezeichens (1648 oder 1848, seit M7), Speichern unter einem Namen, Laden aus der Liste, Schnellspeichern und -laden; die Zeit hält an, Esc oder F10 schließt es (seit M6) |
 | „Diesen Staat spielen“ (Ortsinfo) | Den Besitzer des Ortes als Spielerstaat übernehmen (seit M7); nach einem neuen Spiel nennt ein Hinweis die hervorgehobenen Staaten des Lesezeichens |
-| Rolle (Spielmenü) | seit M8, 1848: „Staat: …“ oder „Partei: …“. Im **Parteienmodus** steht links das Parteipanel (Mittel, Spenden, Wahltag, Wahlkampf; nach der Wahl Sitze, Fraktion und Abgeordnete) statt des Staatspanels; „Staat spielen“ führt zurück |
-| Wahlkampf (Ortsinfo) | seit M8, im Parteienmodus vor der Wahl: Stimmungsbericht des Wahlkreises (Schätzung mit ± 8 Punkten Fehler) und die Knöpfe Versammlung, Flugblätter und Verein gründen; Wirkung ab dem nächsten Tag ([docs/technik/politik.md](../docs/technik/politik.md), Abschnitt 9) |
+| Rolle (Spielmenü) | seit M8, nur in Szenarien mit Parlament (1848): „Staat: …“ oder „Partei: …“. Im **Parteienmodus** steht links das Parteipanel (Mittel, verplante Mittel, Spenden; die nächste Wahl mit Wahlkampf; nach einer Wahl deren Sitze, Fraktion und Abgeordnete) statt des Staatspanels; „Staat spielen“ führt zurück. Nach der Nationalversammlung (1. Mai 1848) gilt der Wahlkampf der Preußischen Zweiten Kammer (17. Juli 1849) |
+| Wahlkampf (Ortsinfo) | seit M8, im Parteienmodus für die nächste Wahl: Parlament und Wahlkreis, Stimmungsbericht (Schätzung mit ± 8 Punkten Fehler) und die Knöpfe Versammlung, Flugblätter und Verein gründen; Wirkung ab dem nächsten Tag, gesperrt, wenn die Mittel nach den schon angesetzten Aktionen nicht reichen ([docs/technik/politik.md](../docs/technik/politik.md), Abschnitt 9) |
 | F5 | Schnellspeichern (`schnellspeicher.einigkeit`) |
 | F9 | Schnellladen |
 

@@ -342,7 +342,7 @@ Zielwerte erfüllt. Kein Staatsbankrott; Vermögen am Ende im Median 1,05 (Frank
 | `common/stroemungen.chron` | 5 Strömungen mit Position auf der Achse −100 … +100 |
 | `common/interessengruppen.chron` | 11 Interessengruppen mit Mitgliedern je Beruf, Konfession und Bildung und Neigung je Strömung (die Arbeiterbewegung ab August 1848) |
 | `common/parlamente.chron` | Nationalversammlung 1848 (8 Fraktionen) und Preußische Zweite Kammer 1849 (3 Fraktionen) |
-| `common/wahlen.chron` | Wahlregeln, Wahlkampf und fünf Regionen der Wahlgeographie (Spielwerte) |
+| `common/wahlen.chron` | Wahlregeln, Wahlkampf und 14 Regionen der Wahlgeographie (Spielwerte) |
 | `common/wahlziele_voelkerfruehling.chron` | Zielkorridore des Wahllabors (`uhrwerk-cli wahl`) |
 | `tabellen/wahlkreise.csv` → `history/wahlkreise/` | 633 Wahlkreise der Nationalversammlung, 337 der Zweiten Kammer; erzeugt von `tools/geodaten/wahlkreise_1848.py` |
 | `tabellen/staaten_historie.csv` | Felder `verfassung`, `wahlrecht`, `wahlsystem`, `wahl_indirekt`, `wahl_zensus` je Staat |
@@ -362,7 +362,7 @@ Das Lesezeichen 1648 hat kein Parlament; Strömungen und Gruppen sind dort gelad
   steht aus; vorbereitet ist [stichprobe_1848.md](../docs/pruefung/stichprobe_1848.md).
 - **Politik 1848 ungeprüft:** Verfassung und Wahlrecht der Staaten tragen `ungeprueft`; Strömungen,
   Interessengruppen, Wahlregeln und Zielkorridore sind Spielwerte nach Literaturkenntnis. Die
-  Sitze verteilen sich nach der heutigen Bevölkerung im Bundesgebiet, nicht nach der Bundesmatrikel.
+  Sitze verteilen sich nach der geschätzten Bevölkerung 1846 im Wahlgebiet, nicht nach der Bundesmatrikel.
 - **Ohne historische Daten** sind innerhalb und am Rand der Testregion u. a. die Reichsstädte
   Mühlhausen, Nordhausen, Goslar, Lübeck und Hamburg, das Reichsstift Quedlinburg, Schwarzburg, Reuß,
   Mansfeld, Stolberg, die Henneberger Lande, die Hochstifte Merseburg und Naumburg, Anhalt-Plötzkau,

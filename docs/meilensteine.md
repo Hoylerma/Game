@@ -474,7 +474,7 @@ Fehlersuche ([02 Engine und Technik](02_engine_und_technik.md), [23 Multiplayer 
 **Ziel:** Politisches System nach [09 Politik, Staat und Gesetze](09_politik_staat_und_gesetze.md),
 [10 Parlamente, Wahlen, Koalitionen](10_parlamente_wahlen_koalitionen.md) und
 [11 Parteien-Datenbank](11_parteien_datenbank.md).
-Entwurf: [technik/politik.md](technik/politik.md).
+Vertrag: [technik/politik.md](technik/politik.md).
 
 **Umfang**
 - Strömungen und Parteien bzw. Fraktionen von 1848 (Paulskirche), Interessengruppen
@@ -491,52 +491,68 @@ Entwurf: [technik/politik.md](technik/politik.md).
 **Ergebnis**
 - **Vertrag** in [technik/politik.md](technik/politik.md) mit dem Stand je Schritt. Umgesetzt in zwei
   Teilen: M8a (Daten, Wahlkreise, Wahl im Kern, Wahllabor) und M8b (Kartenmodus, Wahlabend,
-  Parteienmodus, Preußen 1849).
+  Parteienmodus, Preußen 1849, Staatsinfo, Review).
 - **Strömungen und Gruppen:** 5 Strömungen auf einer Achse von −100 bis +100 (Konservative,
   politischer Katholizismus, konstitutionelle Liberale, Demokraten, frühe Arbeiterbewegung) und
-  11 Interessengruppen. Die Gruppen tragen die Wahlneigung der Blöcke.
+  11 Interessengruppen (zur Wahl 1848 zehn; die Arbeiterbewegung ab August). Die Gruppen tragen
+  die Wahlneigung der Blöcke; die Staatsinfo zeigt ihren Anteil und Einfluss im Staat.
 - **Verfassung und Wahlrecht** der 38 Staaten als Felder zum Startdatum: Verfassung, Wahlrecht
   (ständisch, Zensus, Dreiklassen, allgemeines Männerwahlrecht) und Wahlsystem. Die Wahl rechnet
-  mit jeder Option.
+  mit jeder Option. Godot zeigt sie im Fenster „Verfassung und Gruppen“ des Staatspanels.
 - **Parlamente:** Deutsche Nationalversammlung (Wahl am 1. Mai 1848, indirekt, 8 Fraktionen ab dem
   Stichtag) und Preußische Zweite Kammer (17. Juli 1849, Dreiklassenwahl, 3 Fraktionen).
 - **Wahlkreise** aus den Kreisen der Verwaltung, per Werkzeug `wahlkreise_1848.py`: 633 Wahlkreise
-  mit 649 Sitzen (rund 70.000 Einwohner je Sitz) und 337 mit 350 Sitzen in Preußen 1849.
+  mit 649 Sitzen (rund 70.000 Einwohner je Sitz) und 337 mit 350 Sitzen in Preußen 1849. Der
+  Schnitt ist optimal nach gleicher Einwohnerzahl und kurzen Wegen; bis auf Oldenburgs Exklaven
+  und zwei kleine Fälle liegt jeder Wahlkreis beim 2/3- bis 1,5-Fachen des Mittels seiner Region.
 - **Wahl im Kern:** Wahlberechtigte, Beteiligung, Neigung je Block, Wahlmänner, Boykott, Stichwahl
   und Abgeordnete mit Position und Fraktion. Sie ist deterministisch und hat einen eigenen
   Zufallsstrom.
 - **Ergebnis 1848** (16 Seeds, Median, in der CI): 587 besetzte Sitze, Boykott der Tschechen in
-  Böhmen. Rechte 4,9 %, rechtes Zentrum 30,7 %, linkes Zentrum 19,6 %, Linke 19,2 %, fraktionslos
-  24,4 %; alle Zielkorridore erfüllt ([technik/politik.md](technik/politik.md#141-kalibrierung-der-nationalversammlung-schritt-a4)).
-- **Preußen 1849:** Konservative und Liberale 83 %, Arbeiterbewegung 0 %; beide Ziele erfüllt.
+  Böhmen. Rechte 4,8 %, rechtes Zentrum 31,5 %, linkes Zentrum 19,6 %, Linke 19,1 %, fraktionslos
+  24,5 %; alle Zielkorridore erfüllt ([technik/politik.md](technik/politik.md#141-kalibrierung-der-nationalversammlung-schritt-a4)).
+- **Preußen 1849** (Preußische Zweite Kammer, 8 Seeds): Konservative und Liberale 85 %,
+  Arbeiterbewegung 0 %; beide Ziele erfüllt.
 - **Wahlabend:** Er öffnet am Wahltag. Die Wahlkreise melden in der Meldereihenfolge; dazu
   Hochrechnung mit Fehlerband, Halbrund nach Strömung oder Fraktion und Telegramme, die den
   Wahlkreis in der Ortsinfo zeigen. Der Kartenmodus „Wahlen“ (Taste Ä) zeigt Wahlkreise und Sieger.
-- **Parteienmodus:** Man spielt eine Strömung. Bis zur Wahl führt man mit Spenden Wahlkampf
-  (Versammlung, Flugblätter, Verein) und sieht Stimmungsberichte mit großem Fehler; nach der Wahl
-  folgen Sitze, Fraktion und Abgeordnete. Wahlkampf kippt knappe Wahlkreise, keine Hochburgen.
+- **Parteienmodus:** Man spielt eine Strömung. Bis zur nächsten Wahl führt man mit Spenden
+  Wahlkampf (Versammlung, Flugblätter, Verein) und sieht Stimmungsberichte mit großem Fehler; nach
+  der Wahl folgen Sitze, Fraktion und Abgeordnete. Nach der Nationalversammlung geht der Wahlkampf
+  zur Preußischen Zweiten Kammer weiter. Wahlkampf kippt knappe Wahlkreise, keine Hochburgen.
 - **Wahllabor:** `uhrwerk-cli wahl` rechnet eine Wahl über viele Seeds und prüft die Wahlziele.
 - **1648 unverändert:** Die Prüfsumme nach 100 Jahren bleibt `5db13a66d63e6079`, weil der neue
   Zustand nur mit Parlamenten besucht wird.
+- **Tests:** 169 Testfälle (vorher 153); CTests `wahl_fixture` und `wahl_1848`; Godot-Einheitentest
+  mit 260 Prüfungen (vorher 228); Rauchtest mit Wahl, Parteienmodus und Staatsinfo; Klicktest mit
+  Wahlabend, Parteienmodus und Staatsinfo; Screenshots von Wahlabend und Parteienmodus in der CI.
+- **Review M8** in drei Teilen (Kern; Brücke und Godot; Werkzeuge, Daten und Doku). Behoben sind
+  die gefundenen Fehler, darunter vier mittlere:
+  - Wahlkreise innerhalb einer Region waren sehr ungleich groß (0,2- bis 1,8-faches Mittel).
+  - Nach dem 1. Mai 1848 war der Wahlkampf zur Wahl 1849 nicht erreichbar.
+  - Bei laufender Zeit gingen Klicks auf die Wahlkampf-Knöpfe verloren.
+  - Eingereihte Wahlkampfbefehle wurden nicht gegen die Mittel gerechnet; überzählige verfielen
+    still.
 
 **Abnahme im Einzelnen**
 
 | Kriterium | Stand |
 |---|---|
-| Wahl zur Nationalversammlung 1848 mit historisch plausibler Sitzverteilung, Abweichung dokumentiert | erfüllt im Sinne der Zielwerte: Alle Korridore in `wahlziele_voelkerfruehling.chron` sind über 16 Seeds erfüllt (CTest `wahl_1848`, Schritt „Wahllabor 1848/49“ in der CI). Die Abweichungen stehen in [technik/politik.md](technik/politik.md), Abschnitt 14.1. Die Richtwerte sind ungeprüft (Entscheidung 10) |
+| Wahl zur Nationalversammlung 1848 mit historisch plausibler Sitzverteilung, Abweichung dokumentiert | erfüllt im Sinne der Zielwerte: Alle Korridore in `wahlziele_voelkerfruehling.chron` sind über 16 Seeds erfüllt (Schritt „Wahllabor 1848/49“ in der CI; der CTest `wahl_1848` rechnet zwei Seeds). Die Abweichungen stehen in [technik/politik.md](technik/politik.md), Abschnitt 14.1. Die Richtwerte sind ungeprüft (Entscheidung 10) |
 | Wahlabend mit Hochrechnung und Ergebnis je Wahlkreis | erfüllt: Hochrechnung mit Fehlerband je Strömung bzw. Fraktion, am Ende gleich dem Ergebnis des Kerns (Klicktest); Ergebnis je Wahlkreis in Telegramm, Karte und Ortsinfo |
 
 **Bekannte Grenzen**
 - **Fachprüfung offen:** Strömungen, Gruppen, Neigungen und Zielkorridore sind Spielwerte nach
   Literaturkenntnis, ohne Prüfung gegen Quellen.
 - **Mehrheitswahl verstärkt Hochburgen:** Baden geht mit 20 von 20 Sitzen an die Demokraten, Sachsen
-  mit 25 von 26. Historisch saßen auch dort Liberale. Preußen stellt mehr Konservative als
+  mit 26 von 26. Historisch saßen auch dort Liberale. Preußen stellt mehr Konservative als
   historisch.
-- **Sitze nach heutiger Bevölkerung im Bundesgebiet**, nicht nach der Bundesmatrikel; Posen hat
-  deshalb zu viele Sitze. Polen und Dänen boykottieren im Modell nicht.
+- **Sitze nach der geschätzten Bevölkerung 1846 im Wahlgebiet**, nicht nach der Bundesmatrikel;
+  Posen hat deshalb zu viele Sitze. Polen und Dänen boykottieren im Modell nicht.
+- **Wahlkreisnamen** nach dem größten Ort mit heutigem Namen (Wuppertal, Norderstedt).
 - **Ein Wahltag:** Historisch zogen sich die Wahlen von April bis Mai hin.
 - **Preußen 1849:** Die Demokraten boykottierten die Wahl historisch; das Modell kennt keinen
-  Boykott einer Strömung.
+  Boykott einer Strömung. Die Beteiligung liegt mit 56 % wohl zu hoch.
 - **Parteienmodus minimal:** Die anderen Strömungen führen keinen Wahlkampf (KI mit M12).
   Abstimmungen, Regierungsbildung und Koalitionen kommen mit M11.
 - **Kein Gesetzgebungsverfahren:** Verfassung und Wahlrecht gelten zum Startdatum; Änderungen

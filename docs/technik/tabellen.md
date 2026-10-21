@@ -1,4 +1,4 @@
-# Tabellen der Datenpipeline (Meilensteine M2 bis M7)
+# Tabellen der Datenpipeline (Meilensteine M2 bis M8)
 
 Orte und Staaten samt ihrer Geschichte werden in **Tabellen** gepflegt, nicht direkt im
 Chronik-Skript. Das Werkzeug **Archivar** (`tools/archivar/archivar.py`) prüft die Tabellen und
@@ -241,6 +241,9 @@ Sie erzeugen daraus die Zeilen von `besitz.csv` zum 1848.03.01 und von `bevoelke
   `zollverein` weder `ja`, `nein` noch leer
 - seit M8: ein Wert von `verfassung`, `wahlrecht`, `wahlsystem` oder `wahl_indirekt` außerhalb der
   erlaubten Werte, `wahl_zensus` keine Zahl von 0 bis 1.000.000
+- seit M8 in `wahlkreise.csv`: doppelter Wahlkreis, ungültige Kennung eines Parlaments, unbekannter
+  Staat oder Ort, leerer oder mehrzeiliger Name, `sitze` keine Ganzzahl ab 1 (nur Ziffern 0–9),
+  Wahlkreis ohne Ort, ein Ort in zwei Wahlkreisen desselben Parlaments
 
 **Warnungen** (Ausreißer, vermutlich Tippfehler):
 

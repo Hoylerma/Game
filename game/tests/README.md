@@ -91,8 +91,11 @@ Prüft die GDExtension und die Kartendaten ohne Szene und ohne Grafikausgabe:
     Wahl am 1. Mai mit 633 Wahlkreisen und vollständiger Meldereihenfolge, Ortsinfo Mannheim,
     Legende mit Boykott. Dazu der Parteienmodus: Mittel nach der Spende des Monatsersten,
     Stimmungsbericht mit Summe 100 %, eine Versammlung kostet am nächsten Tag genau ihre Kosten,
-    ungültige Wahlkampfbefehle werden abgelehnt, die Rolle steht im Spielstand; nach der Wahl
-    passen die Sitze der Partei zum Ergebnis, und der Wahlkampf ist beendet
+    ungültige Wahlkampfbefehle werden abgelehnt, eingereihte zählen als verplant (der dritte Verein
+    wird abgelehnt), die Rolle steht im Spielstand; nach der Wahl passen die Sitze der Partei zum
+    Ergebnis, der Wahlkampf zur Nationalversammlung ist beendet, und Berlin hat einen offenen
+    Wahlkreis der Preußischen Zweiten Kammer. Dazu „Verfassung und Gruppen“ für Baden; 1648 hat
+    weder diese Angaben noch einen Parteienmodus
 
 Am Ende steht `SMOKE OK` (Exitcode 0) oder `SMOKE FEHLGESCHLAGEN` mit allen Fehlern (Exitcode 1).
 
@@ -144,20 +147,24 @@ echten Daten und prüft:
    schon; mit Stufe 5 entsteht am nächsten 1. Januar `autosave_1`.
 6. **Neues Spiel 1848** (seit M7): Start über das Spielmenü, Kartenmodi Verwaltung und
    Eisenbahnen, Staatswechsel über die Ortsinfo, danach Laden eines Spielstands von 1648.
-7. **Parteienmodus** (seit M8): Die Rolle „Partei: Konstitutionelle Liberale“ im Spielmenü
-   ersetzt das Staatspanel durch das Parteipanel. Die Ortsinfo von Mannheim zeigt den Abschnitt
+7. **Staatsinfo und Parteienmodus** (seit M8): „Verfassung und Gruppen …“ öffnet das Fenster mit
+   Verfassung und Interessengruppen; 1648 bietet das Spielmenü keine Rolle an. Die Rolle „Partei:
+   Konstitutionelle Liberale“ im Spielmenü ersetzt das Staatspanel durch das Parteipanel. Die Ortsinfo von Mannheim zeigt den Abschnitt
    „Wahl“ vor den Eckdaten, ohne „Diesen Staat spielen“. Der Knopf „Versammlung“ meldet sich in
    der oberen Leiste, am nächsten Tag sind die Mittel kleiner und das Panel nennt einen Wahlkreis
-   mit Wahlkampf. „Staat spielen“ führt zurück.
+   mit Wahlkampf; der Knopf ist nach dem Tageswechsel derselbe. „Staat spielen“ führt zurück.
 8. **Wahlen 1848** (seit M8):
    - Taste Ä schaltet in den Kartenmodus „Wahlen“.
    - Mit Stufe 5 hält die Zeit am 2. Mai an, und der Wahlabend öffnet sich mit 0 von 633
      gemeldeten Wahlkreisen.
    - Mit Tempo ×4 kommen die Meldungen schrittweise; „Sofort“ meldet alle, und die
      Hochrechnung gleicht dann dem Ergebnis des Kerns.
+   - Die Ortsinfo von Mannheim verrät das Ergebnis nicht vor seiner Meldung.
    - Ein Telegramm zeigt Mannheim mit Ergebnis in der Ortsinfo.
    - „Schließen“ setzt die Geschwindigkeit fort; „Letzte Wahl“ im Spielmenü öffnet das ganze
      Ergebnis.
+   - Ab dem Fraktionsstichtag (Oktober 1848) passt der Wahlabend mit acht Fraktionen ins Bild, und
+     die stärkste Fraktion ist nicht „fraktionslos“.
 
 ```bash
 godot --headless --path game --script res://tests/klick_test.gd
