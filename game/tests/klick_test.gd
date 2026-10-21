@@ -545,9 +545,9 @@ func _check_new_game() -> void:
 	print("  Neues Spiel 1848, Modus Verwaltung, Staatswechsel, Spielstand von 1648 geladen")
 
 
-## Parteienmodus (seit M8): Rolle im Spielmenü, Parteipanel statt Staatspanel, Wahlkampf über den
-## Knopf in der Ortsinfo (Wahl oben, kein „Diesen Staat spielen“), Mittel am nächsten Tag weniger,
-## zurück zum Staat über das Parteipanel.
+## Staatsinfo und Parteienmodus (seit M8): „Verfassung und Gruppen …“ im Staatspanel; Rolle im
+## Spielmenü, Parteipanel statt Staatspanel, Wahlkampf über den Knopf in der Ortsinfo (Wahl oben,
+## kein „Diesen Staat spielen“), Mittel am nächsten Tag weniger, zurück zum Staat über das Parteipanel.
 func _check_party_mode(sim: SimulationClient) -> void:
 	var currents := sim.get_currents()
 	var liberals := -1
@@ -556,13 +556,25 @@ func _check_party_mode(sim: SimulationClient) -> void:
 			liberals = i
 	sim.advance_days(1) # Spenden am Monatsersten
 	_main.call("_after_time_passed")
+	# Staatsinfo (seit M8): „Verfassung und Gruppen …“ zeigt Verfassung, Wahlrecht und Gruppen.
+	var state_panel: StatePanel = _main.call("state_panel")
+	var politics := state_panel.find_child("PoliticsButton", true, false) as Button
+	if politics == null or not politics.visible:
+		_fail("Staatspanel 1848: Knopf „Verfassung und Gruppen“ fehlt")
+	else:
+		politics.pressed.emit()
+		await _frames(1)
+		var text := state_panel.politics_text()
+		var shown := state_panel.is_politics_visible()
+		if not shown or not text.contains("Verfassung:") or not text.contains("Bauernschaft"):
+			_fail("Verfassung und Gruppen: offen %s, Text „%s“" % [shown, text])
+		(state_panel.find_child("PoliticsPopup", true, false) as PopupPanel).hide()
 	var menu: GameMenu = _main.call("game_menu")
 	_main.call("open_game_menu")
 	menu.select_role(liberals)
 	_main.call("close_game_menu", false)
 	await _frames(1)
 	var party_panel: PartyPanel = _main.call("party_panel")
-	var state_panel: StatePanel = _main.call("state_panel")
 	var bar: TopBar = _main.call("top_bar")
 	if not party_panel.visible or state_panel.visible or sim.get_player_current() != liberals:
 		_fail("Parteienmodus: Parteipanel %s, Staatspanel %s, Strömung %d statt %d" % [

@@ -111,6 +111,8 @@ func _ready() -> void:
 	_build_election_night()
 	_build_party_panel()
 	_state_panel.tax_rate_requested.connect(_on_tax_rate_requested)
+	_state_panel.politics_source = func() -> Dictionary:
+		return _sim.get_state_politics(_player) if _sim != null else {}
 	_chronicle_panel.location_requested.connect(_on_chronicle_location_requested)
 	_location_panel.close_requested.connect(_select_location.bind(-1))
 	_location_panel.play_state_requested.connect(play_state)
@@ -1492,6 +1494,8 @@ func _run_screenshot() -> void:
 		_after_time_passed()
 	if _options.show_budget:
 		_state_panel.show_budget()
+	if _options.show_politics:
+		_state_panel.show_politics()
 	if _options.show_game_menu:
 		open_game_menu()
 	if _options.show_election_night:

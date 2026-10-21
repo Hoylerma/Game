@@ -119,6 +119,50 @@ TEST_CASE("Politik: Neigung, Mitgliedschaften und Fraktionen") {
     CHECK(uhrwerk::faction_of(none, Fixed::zero()) == kNone);
 }
 
+TEST_CASE("Politik: Stand der Interessengruppen je Staat") {
+    World w = landtag_world();
+    const Index saxony = w.find_state("SAX");
+    REQUIRE(saxony != kNone);
+    CHECK(uhrwerk::interest_group_standing(w, kNone).empty());
+    CHECK(uhrwerk::interest_group_standing(w, static_cast<Index>(w.states.size())).empty());
+    // Bauernschaft: 90 % der erwachsenen Bauern; Einfluss mit gleichem Einkommen je Kopf überall.
+    w.location_income.assign(w.locations.size() * w.professions.size(), Fixed::one());
+    Fixed adults;
+    Fixed farmers;
+    Fixed people;
+    Fixed farm_people;
+    for (const Index l : w.state_locations(saxony)) {
+        const uhrwerk::Location& loc = w.locations[static_cast<std::size_t>(l)];
+        for (Index p = loc.first_pop; p < loc.first_pop + loc.pop_count; ++p) {
+            const uhrwerk::PopBlock& pop = w.pops[static_cast<std::size_t>(p)];
+            const Fixed grown = pop.young + pop.working + pop.old;
+            adults += grown;
+            people += pop.size();
+            if (pop.profession == w.find_profession("bauern")) {
+                farmers += grown;
+                farm_people += pop.size();
+            }
+        }
+    }
+    REQUIRE(farmers > Fixed::zero());
+    const std::vector<uhrwerk::InterestGroupStanding> standing = uhrwerk::interest_group_standing(w, saxony);
+    REQUIRE(standing.size() == 2);
+    CHECK(std::abs(standing[0].share.to_double() - 0.9 * farmers.to_double() / adults.to_double()) < 0.001);
+    CHECK(std::abs(standing[0].influence.to_double() - 0.9 * farm_people.to_double() / people.to_double()) <
+          0.001);
+    for (const uhrwerk::InterestGroupStanding& g : standing) {
+        CHECK(g.share >= Fixed::zero());
+        CHECK(g.share <= Fixed::one());
+        CHECK(g.influence >= Fixed::zero());
+        CHECK(g.influence <= Fixed::one());
+    }
+    // Ohne Einkommen kein Einfluss, der Anteil bleibt.
+    w.location_income.assign(w.location_income.size(), Fixed{});
+    const std::vector<uhrwerk::InterestGroupStanding> poor = uhrwerk::interest_group_standing(w, saxony);
+    CHECK(poor[0].influence == Fixed::zero());
+    CHECK(poor[0].share == standing[0].share);
+}
+
 TEST_CASE("Politik: Wahl am Wahltag mit Ergebnis und Chronik") {
     Simulation sim(landtag_world());
     step_to(sim, kElectionDay);

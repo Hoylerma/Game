@@ -308,6 +308,7 @@ func _check_elections_1848(sim: SimulationClient) -> void:
 		"Wahlkreise je Ort: %d Orte in Wahlkreisen der Nationalversammlung" % in_district,
 		"Wahlkreise je Ort: %d Einträge, %d in Wahlkreisen" % [districts.size(), in_district]
 	)
+	_check_state_politics_1848(sim)
 	var liberals := _check_party_1848(sim, currents)
 	sim.advance_days(62)
 	var count := sim.get_election_count()
@@ -364,6 +365,32 @@ func _check_elections_1848(sim: SimulationClient) -> void:
 		], liberals).get("open", true)),
 		"Partei nach der Wahl: %d Sitze, Wahlkampf beendet" % int(party.get("seats", 0)),
 		"Partei nach der Wahl: %s" % str(party)
+	)
+
+
+## Verfassung und Interessengruppen 1848 (seit M8, politik.md 3.3): Baden konstitutionell mit
+## Zensuswahlrecht; zehn Gruppen (die Arbeiterbewegung erst ab August), Anteil und Einfluss in Prozent.
+func _check_state_politics_1848(sim: SimulationClient) -> void:
+	var baden := sim.get_state_politics(sim.get_state_index("BAD"))
+	var groups: Array = baden.get("interest_groups", [])
+	var valid := groups.size() == 10
+	var influence := 0.0
+	for entry: Variant in groups:
+		var group := entry as Dictionary
+		var share := float(group.get("share_percent", -1.0))
+		var weight := float(group.get("influence_percent", -1.0))
+		valid = valid and share >= 0.0 and share <= 100.0 and weight >= 0.0 and weight <= 100.0
+		influence += weight
+	_check(
+		valid and influence > 0.0 and str(baden.get("constitution", "")) == "konstitutionell"
+		and str(baden.get("franchise", "")) == "Zensuswahlrecht" and bool(baden.get("elected", false))
+		and float(baden.get("census_threshold", 0.0)) > 0.0
+		and bool(sim.get_state(sim.get_state_index("BAD")).get("politik", false))
+		and sim.get_state_politics(-1).is_empty() and sim.get_state_politics(sim.get_state_count()).is_empty(),
+		"Verfassung und Gruppen Baden: %s, %s, %d Gruppen" % [
+			baden.get("constitution"), baden.get("franchise"), groups.size()
+		],
+		"Verfassung und Gruppen Baden: %s" % str(baden)
 	)
 
 
@@ -583,6 +610,9 @@ func _check_invalid_indices(sim: SimulationClient, max_tax: int, player: int) ->
 		and not sim.set_tax_percent(player, SimulationClient.TAX_ZOLL, max_tax + 1)
 		and sim.get_market(-1).is_empty()
 		and sim.get_market(sim.get_market_count()).is_empty()
+		# 1648 ohne Parlament: keine Angaben zu Verfassung und Gruppen (seit M8).
+		and sim.get_state_politics(player).is_empty()
+		and not bool(sim.get_state(player).get("politik", true))
 	)
 	_check(
 		rejected,

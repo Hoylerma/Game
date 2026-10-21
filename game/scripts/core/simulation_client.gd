@@ -69,6 +69,7 @@ const REQUIRED_METHODS: Array[StringName] = [
 	&"get_election",
 	&"get_location_electoral_district_indices",
 	&"get_shown_parliament",
+	&"get_state_politics",
 	&"campaign",
 	&"get_party",
 	&"get_campaign",
@@ -368,6 +369,13 @@ func get_location_electoral_district_indices(parliament: int) -> PackedInt32Arra
 ## nächsten Wahltag; -1 ohne Parlament (seit M8).
 func get_shown_parliament() -> int:
 	return int(_native.call(&"get_shown_parliament"))
+
+
+## Verfassung, Wahlrecht und Interessengruppen eines Staates (seit M8, politik.md 3.3 und 4):
+## { constitution, franchise, elected, runoff, indirect, census_threshold, interest_groups: [{ id, name,
+## color, share_percent, influence_percent }] }; leer ohne Parlament im Szenario.
+func get_state_politics(state_index: int) -> Dictionary:
+	return _as_dictionary(_native.call(&"get_state_politics", state_index))
 
 
 ## Wahlkampf der Strömung current im Wahlkreis district (seit M8): Befehl für den nächsten Tag;

@@ -30,7 +30,7 @@ Detailstufen (`MapDetail`: je Ortsgröße genau eine Namen-Ebene, Grenzen nach Z
 Ebene der Rückfall auf die nächste, `MapLabels.shown_tier`) und `LocationCatalog` (auch die
 Zählung der Kreise mit Orten für die Legende). Seit M8 auch die Rechnungen des Wahlabends
 (`ElectionTally`: Meldereihenfolge, Hochrechnung, Halbrund, Telegramme), `--wahlabend`,
-`--partei` und das Parteipanel (Angaben vor und nach der Wahl).
+`--partei`, `--verfassung` und das Parteipanel (Angaben vor und nach der Wahl).
 
 Dazu legt der Test unter `user://unit_test_karte` eine kleine Testkarte an (8 × 6 Pixel mit
 drei Orten, Meer, See und Ausland), lädt sie mit `MapData` (Kartenindex und Flächenart je

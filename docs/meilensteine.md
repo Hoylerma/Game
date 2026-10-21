@@ -20,7 +20,7 @@ gebaut; Abhängigkeiten stehen jeweils dabei.
 | M5 | Wirtschaft und Staatshaushalt | 1 – Vorproduktion | M4 | **fertig** |
 | M6 | Speicherstände und Wiederholungen | 1 – Vorproduktion | M5 | **fertig** |
 | M7 | Lesezeichen 1848 | 2 – Vertical Slice | M6 | **fertig** (Fachprüfung der Daten offen, siehe unten) |
-| M8 | Politik, Parteien und Wahlen | 2 – Vertical Slice | M7 | offen |
+| M8 | Politik, Parteien und Wahlen | 2 – Vertical Slice | M7 | **fertig** (Fachprüfung der Werte offen, siehe unten) |
 | M9 | Diplomatie und Zollverein | 2 – Vertical Slice | M7 | offen |
 | M10 | Militär und Einigungskriege | 2 – Vertical Slice | M9 | offen |
 | M11 | Ereignisse und Revolution 1848/49 | 2 – Vertical Slice | M8 | offen |
@@ -469,7 +469,7 @@ Fehlersuche ([02 Engine und Technik](02_engine_und_technik.md), [23 Multiplayer 
 - **Alte Spielstände:** Spielstände aus M6 lassen sich nicht laden. Die Bereiche `regeln` und
   `maerkte` des Inhaltsfingerabdrucks haben sich geändert (Regel `bahnfracht`, Strecken).
 
-### M8 – Politik, Parteien und Wahlen
+### M8 – Politik, Parteien und Wahlen ✅
 
 **Ziel:** Politisches System nach [09 Politik, Staat und Gesetze](09_politik_staat_und_gesetze.md),
 [10 Parlamente, Wahlen, Koalitionen](10_parlamente_wahlen_koalitionen.md) und
@@ -487,6 +487,63 @@ Entwurf: [technik/politik.md](technik/politik.md).
 - Eine Wahl zur Nationalversammlung 1848 ergibt eine historisch plausible Sitzverteilung
   (Abweichung dokumentiert)
 - Wahlabend mit Hochrechnung und Ergebnis je Wahlkreis
+
+**Ergebnis**
+- **Vertrag** in [technik/politik.md](technik/politik.md) mit dem Stand je Schritt. Umgesetzt in zwei
+  Teilen: M8a (Daten, Wahlkreise, Wahl im Kern, Wahllabor) und M8b (Kartenmodus, Wahlabend,
+  Parteienmodus, Preußen 1849).
+- **Strömungen und Gruppen:** 5 Strömungen auf einer Achse von −100 bis +100 (Konservative,
+  politischer Katholizismus, konstitutionelle Liberale, Demokraten, frühe Arbeiterbewegung) und
+  11 Interessengruppen. Die Gruppen tragen die Wahlneigung der Blöcke.
+- **Verfassung und Wahlrecht** der 38 Staaten als Felder zum Startdatum: Verfassung, Wahlrecht
+  (ständisch, Zensus, Dreiklassen, allgemeines Männerwahlrecht) und Wahlsystem. Die Wahl rechnet
+  mit jeder Option.
+- **Parlamente:** Deutsche Nationalversammlung (Wahl am 1. Mai 1848, indirekt, 8 Fraktionen ab dem
+  Stichtag) und Preußisches Abgeordnetenhaus (17. Juli 1849, Dreiklassenwahl, 3 Fraktionen).
+- **Wahlkreise** aus den Kreisen der Verwaltung, per Werkzeug `wahlkreise_1848.py`: 633 Wahlkreise
+  mit 649 Sitzen (rund 70.000 Einwohner je Sitz) und 337 mit 350 Sitzen in Preußen 1849.
+- **Wahl im Kern:** Wahlberechtigte, Beteiligung, Neigung je Block, Wahlmänner, Boykott, Stichwahl
+  und Abgeordnete mit Position und Fraktion. Sie ist deterministisch und hat einen eigenen
+  Zufallsstrom.
+- **Ergebnis 1848** (16 Seeds, Median, in der CI): 587 besetzte Sitze, Boykott der Tschechen in
+  Böhmen. Rechte 4,9 %, rechtes Zentrum 30,7 %, linkes Zentrum 19,6 %, Linke 19,2 %, fraktionslos
+  24,4 %; alle Zielkorridore erfüllt ([technik/politik.md](technik/politik.md#141-kalibrierung-der-nationalversammlung-schritt-a4)).
+- **Preußen 1849:** Konservative und Liberale 83 %, Arbeiterbewegung 0 %; beide Ziele erfüllt.
+- **Wahlabend:** Er öffnet am Wahltag. Die Wahlkreise melden in der Meldereihenfolge; dazu
+  Hochrechnung mit Fehlerband, Halbrund nach Strömung oder Fraktion und Telegramme, die den
+  Wahlkreis in der Ortsinfo zeigen. Der Kartenmodus „Wahlen“ (Taste Ä) zeigt Wahlkreise und Sieger.
+- **Parteienmodus:** Man spielt eine Strömung. Bis zur Wahl führt man mit Spenden Wahlkampf
+  (Versammlung, Flugblätter, Verein) und sieht Stimmungsberichte mit großem Fehler; nach der Wahl
+  folgen Sitze, Fraktion und Abgeordnete. Wahlkampf kippt knappe Wahlkreise, keine Hochburgen.
+- **Wahllabor:** `uhrwerk-cli wahl` rechnet eine Wahl über viele Seeds und prüft die Wahlziele.
+- **1648 unverändert:** Die Prüfsumme nach 100 Jahren bleibt `5db13a66d63e6079`, weil der neue
+  Zustand nur mit Parlamenten besucht wird.
+
+**Abnahme im Einzelnen**
+
+| Kriterium | Stand |
+|---|---|
+| Wahl zur Nationalversammlung 1848 mit historisch plausibler Sitzverteilung, Abweichung dokumentiert | erfüllt im Sinne der Zielwerte: Alle Korridore in `wahlziele_voelkerfruehling.chron` sind über 16 Seeds erfüllt (CTest `wahl_1848`, Schritt „Wahllabor 1848/49“ in der CI). Die Abweichungen stehen in [technik/politik.md](technik/politik.md), Abschnitt 14.1. Die Richtwerte sind ungeprüft (Entscheidung 10) |
+| Wahlabend mit Hochrechnung und Ergebnis je Wahlkreis | erfüllt: Hochrechnung mit Fehlerband je Strömung bzw. Fraktion, am Ende gleich dem Ergebnis des Kerns (Klicktest); Ergebnis je Wahlkreis in Telegramm, Karte und Ortsinfo |
+
+**Bekannte Grenzen**
+- **Fachprüfung offen:** Strömungen, Gruppen, Neigungen und Zielkorridore sind Spielwerte nach
+  Literaturkenntnis, ohne Prüfung gegen Quellen.
+- **Mehrheitswahl verstärkt Hochburgen:** Baden geht mit 20 von 20 Sitzen an die Demokraten, Sachsen
+  mit 25 von 26. Historisch saßen auch dort Liberale. Preußen stellt mehr Konservative als
+  historisch.
+- **Sitze nach heutiger Bevölkerung im Bundesgebiet**, nicht nach der Bundesmatrikel; Posen hat
+  deshalb zu viele Sitze. Polen und Dänen boykottieren im Modell nicht.
+- **Ein Wahltag:** Historisch zogen sich die Wahlen von April bis Mai hin.
+- **Preußen 1849:** Die Demokraten boykottierten die Wahl historisch; das Modell kennt keinen
+  Boykott einer Strömung.
+- **Parteienmodus minimal:** Die anderen Strömungen führen keinen Wahlkampf (KI mit M12).
+  Abstimmungen, Regierungsbildung und Koalitionen kommen mit M11.
+- **Kein Gesetzgebungsverfahren:** Verfassung und Wahlrecht gelten zum Startdatum; Änderungen
+  kommen mit den Ereignissen in M11. Die Interessengruppen sind statisch.
+- **Keine Wahlen nach 1849.**
+- **Alte Spielstände:** Spielstände aus M7 lassen sich nicht laden (Format 2, Inhaltsbereich
+  `politik`).
 
 ### M9 – Diplomatie und Zollverein
 

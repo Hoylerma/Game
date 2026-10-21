@@ -115,6 +115,7 @@ public:
     godot::Dictionary get_election(std::int64_t index) const;
     godot::PackedInt32Array get_location_electoral_district_indices(std::int64_t parliament) const;
     std::int64_t get_shown_parliament() const;
+    godot::Dictionary get_state_politics(std::int64_t state_index) const;
 
     // Parteienmodus (seit M8, Schritt b2, politik.md Abschnitt 9)
     bool campaign(std::int64_t current, std::int64_t district, std::int64_t action);

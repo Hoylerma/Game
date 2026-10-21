@@ -391,6 +391,18 @@ String franchise_name(uhrwerk::Franchise franchise) {
     return to_godot(std::string_view("kein Wahlrecht"));
 }
 
+String constitution_name(uhrwerk::Constitution constitution) {
+    switch (constitution) {
+    case uhrwerk::Constitution::Constitutional:
+        return to_godot(std::string_view("konstitutionell"));
+    case uhrwerk::Constitution::Estates:
+        return to_godot(std::string_view("ständisch"));
+    case uhrwerk::Constitution::None:
+        break;
+    }
+    return to_godot(std::string_view("keine Verfassung"));
+}
+
 /// Anteile der Stimmen je Strömung (Summe 1, alle 0 ohne Stimmen).
 PackedFloat64Array vote_shares(const uhrwerk::DistrictResult& r) {
     PackedFloat64Array shares;
@@ -701,6 +713,7 @@ Dictionary UhrwerkSimulation::get_state(std::int64_t index) const {
         (state.army_per_mille * w->state_population(state_index) / uhrwerk::Fixed::from_int(1000)).round();
     result["bankruptcies"] = static_cast<std::int64_t>(state.bankruptcies);
     result["premium_months"] = static_cast<std::int64_t>(state.premium_months);
+    result["politik"] = !w->parliaments.empty(); // seit M8: get_state_politics hat Angaben
     return result;
 }
 
@@ -1402,6 +1415,37 @@ double poll_offset(std::int64_t district, std::size_t current, const uhrwerk::Da
 
 } // namespace
 
+Dictionary UhrwerkSimulation::get_state_politics(std::int64_t state_index) const {
+    Dictionary result;
+    const uhrwerk::World* w = world();
+    if (!w || w->parliaments.empty() || !valid_index(w->states, state_index)) {
+        return result;
+    }
+    const uhrwerk::State& state = at(w->states, state_index);
+    result["constitution"] = constitution_name(state.constitution);
+    result["franchise"] = franchise_name(state.law.franchise);
+    result["elected"] = state.law.franchise != uhrwerk::Franchise::None &&
+                        state.law.franchise != uhrwerk::Franchise::Estates; // Volkswahl
+    result["runoff"] = state.law.system == uhrwerk::ElectoralSystem::Runoff;
+    result["indirect"] = state.law.indirect;
+    result["census_threshold"] = state.law.census_threshold.to_double();
+    const std::vector<uhrwerk::InterestGroupStanding> standing =
+        uhrwerk::interest_group_standing(*w, static_cast<uhrwerk::Index>(state_index));
+    Array groups;
+    for (std::size_t g = 0; g < standing.size() && g < w->interest_groups.size(); ++g) {
+        const uhrwerk::InterestGroup& group = w->interest_groups[g];
+        Dictionary entry;
+        entry["id"] = to_godot(group.id);
+        entry["name"] = to_godot(group.name);
+        entry["color"] = to_godot(group.color);
+        entry["share_percent"] = standing[g].share.to_double() * 100.0;
+        entry["influence_percent"] = standing[g].influence.to_double() * 100.0;
+        groups.push_back(entry);
+    }
+    result["interest_groups"] = groups;
+    return result;
+}
+
 bool UhrwerkSimulation::campaign(std::int64_t current, std::int64_t district, std::int64_t action) {
     const uhrwerk::World* w = world();
     if (!w || action < CAMPAIGN_VERSAMMLUNG || action > CAMPAIGN_VEREIN ||
@@ -1813,6 +1857,8 @@ void UhrwerkSimulation::_bind_methods() {
     ClassDB::bind_method(D_METHOD("get_location_electoral_district_indices", "parliament"),
                          &UhrwerkSimulation::get_location_electoral_district_indices);
     ClassDB::bind_method(D_METHOD("get_shown_parliament"), &UhrwerkSimulation::get_shown_parliament);
+    ClassDB::bind_method(D_METHOD("get_state_politics", "state_index"),
+                         &UhrwerkSimulation::get_state_politics);
     ClassDB::bind_method(D_METHOD("campaign", "current", "district", "action"), &UhrwerkSimulation::campaign);
     ClassDB::bind_method(D_METHOD("get_party", "current"), &UhrwerkSimulation::get_party);
     ClassDB::bind_method(D_METHOD("get_campaign", "district", "current"), &UhrwerkSimulation::get_campaign);

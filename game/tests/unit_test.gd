@@ -86,14 +86,16 @@ func _test_launch_options() -> void:
 	var bad_args := PackedStringArray(
 		[
 			"--tage=-3", "--kartenmodus=13", "--unbekannt", "--zoom=0", "--zoom=viel", "--szenario",
-			"--staat=", "--partei="
+			"--staat=", "--partei=", "--verfassung=ja"
 		]
 	)
 	var bad := LaunchOptions.parse(bad_args)
-	_equal(bad.problems.size(), 8, "fehlerhafte Optionen gemeldet")
+	_equal(bad.problems.size(), 9, "fehlerhafte Optionen gemeldet")
 	var party := LaunchOptions.parse(PackedStringArray(["--szenario=voelkerfruehling", "--partei=liberale"]))
 	_true(party.party_id == "liberale" and party.problems.is_empty(), "Option --partei (seit M8)")
 	_equal(defaults.party_id, "", "ohne --partei spielt man den Staat")
+	var politics := LaunchOptions.parse(PackedStringArray(["--verfassung"]))
+	_true(politics.show_politics and not defaults.show_politics, "Option --verfassung (seit M8)")
 	var chosen := LaunchOptions.parse(
 		PackedStringArray(["--szenario=voelkerfruehling", "--staat=bav"])
 	)

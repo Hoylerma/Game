@@ -10,6 +10,7 @@ extends RefCounted
 ##   --zoom=<faktor>        Vergrößerung gegenüber der Übersicht (1 = ganze Karte);
 ##                          zentriert auf --ort, sonst auf die Kartenmitte (bis 1: Übersicht)
 ##   --haushalt             Haushaltsfenster des Spielerstaates öffnen (seit M5)
+##   --verfassung           Fenster „Verfassung und Gruppen“ des Spielerstaates öffnen (seit M8)
 ##   --spielmenue           Spielmenü öffnen (seit M6)
 ##   --szenario=<id>        Szenario beim Start (seit M7; Standard westfaelischer_frieden)
 ##   --staat=<TAG>          Spielerstaat beim Start (seit M7; Standard: Spieler des Szenarios)
@@ -26,6 +27,8 @@ var location_id := ""
 var zoom_factor := 0.0
 ## Haushaltsfenster vor dem Screenshot öffnen (seit M5).
 var show_budget := false
+## Fenster „Verfassung und Gruppen“ vor dem Screenshot öffnen (seit M8).
+var show_politics := false
 var show_game_menu := false
 ## Wahlabend der letzten Wahl vor dem Screenshot öffnen (seit M8).
 var show_election_night := false
@@ -86,6 +89,11 @@ static func parse(args: PackedStringArray) -> LaunchOptions:
 					options.show_budget = true
 				else:
 					options.problems.append("--haushalt erwartet keinen Wert, nicht „%s“." % value)
+			"--verfassung":
+				if value.is_empty():
+					options.show_politics = true
+				else:
+					options.problems.append("--verfassung erwartet keinen Wert, nicht „%s“." % value)
 			"--spielmenue":
 				if value.is_empty():
 					options.show_game_menu = true

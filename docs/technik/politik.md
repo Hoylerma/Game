@@ -111,9 +111,9 @@ bleibt fraktionslos.
 | Deutscher Hof | demokratische Linke | −50 … −25 |
 | Donnersberg | äußerste Linke | −100 … −50 |
 
-Die Fraktionen sind **Daten des Parlaments**: `history/parlamente/nationalversammlung.chron` mit
-Name, Farbe, Bereich und `seit` (Landsberg, Augsburger Hof und Westendhall entstanden erst im
-Sommer 1848). Im Parteienmodus spielt man eine Fraktion (Abschnitt 9).
+Die Fraktionen sind **Daten des Parlaments** in `common/parlamente.chron`, mit Name, Farbe und
+Bereich. Sie gelten ab dem Stichtag `fraktionen_ab` (1. Oktober 1848), denn Landsberg, Augsburger
+Hof und Westendhall entstanden erst im Sommer 1848. Im Parteienmodus spielt man eine Fraktion (Abschnitt 9).
 
 ### 3.3 Interessengruppen (`common/interessengruppen.chron`)
 
@@ -133,6 +133,13 @@ Daraus folgen je Staat:
 
 Beides ist abgeleitet, also kein Zustand. Zustimmung, Forderungen und Aktionen der Gruppen kommen
 später (Entscheidung 6). In M8 tragen die Gruppen vor allem die Wahlneigung (Abschnitt 7.3).
+
+Umgesetzt (Schritt b3) als `interest_group_standing` im Kern, über die Orte des Staates:
+- **Anteil:** Mitglieder ab 15 Jahren ÷ Einwohner ab 15;
+- **Einfluss:** Einkommen der Mitglieder ÷ Einkommen aller Blöcke. Das Einkommen eines Blocks ist das
+  Einkommen je Kopf seines Berufs im Ort × Größe, wie bei den Spenden (Abschnitt 9.1).
+
+Die Staatsinfo zeigt beides im Fenster „Verfassung und Gruppen“, nur in Szenarien mit Parlament.
 
 ## 4. Verfassung und Wahlrecht je Staat
 
@@ -164,19 +171,29 @@ erste Gruppe davon (Entscheidung 7).
 
 ## 5. Parlamente und Wahlkreise
 
-### 5.1 Parlamente (`history/parlamente/*.chron`)
+### 5.1 Parlamente (`common/parlamente.chron`)
 
 ```text
 parlament nationalversammlung {
-    name      = "Deutsche Nationalversammlung"
-    ebene     = bund                # bund oder Staatstag (z. B. PRU)
-    sitze     = 649                 # Sollzahl
-    wahl      = { tag = 1848.05.01  wahlrecht = allgemein_maenner  indirekt = ja }
+    name          = "Deutsche Nationalversammlung"
+    ebene         = bund                # bund oder Staatstag (z. B. PRU)
+    sitze         = 649                 # Sollzahl
+    seit          = 1848.03.01
+    wahltag       = 1848.05.01
+    sitz          = frankfurt_am_main
+    wahlrecht     = allgemein_maenner
+    wahlsystem    = stichwahl
+    wahl_indirekt = ja
+    fraktionen_ab = 1848.10.01
+    boykott       = { tschechen }
+    boykott_maerkte = { boehmen }
     fraktion casino { name = "Casino"  farbe = { … }  von = 20  bis = 55 }
     …
-    quelle    = "…"
+    quelle        = "…"
 }
 ```
+
+Vollständiges Schema: [chronik-skript.md](chronik-skript.md), Abschnitt 3.21.
 
 **Vorschlag (Entscheidung 1):**
 - **Deutsche Nationalversammlung** 1848: kalibriert, Abnahme.
@@ -509,8 +526,8 @@ und berührt weder die Simulation noch einen Zufallsstrom.
 ## 10. Kern, Daten, Leistung
 
 - **Lader:**
-  - neue Dateien `common/stroemungen.chron` und `common/interessengruppen.chron`, Ordner
-    `history/parlamente/` und `history/wahlkreise/`;
+  - neue Dateien `common/stroemungen.chron`, `common/interessengruppen.chron`,
+    `common/parlamente.chron` und `common/wahlen.chron`, Ordner `history/wahlkreise/`;
   - neue Felder in den Staaten (Abschnitt 4) und in den Berufen (`selbststaendig`);
   - alles im Inhaltsfingerabdruck (neuer Bereich `politik`);
   - späterer Inhalt mit `seit` wie in M7.
@@ -604,6 +621,7 @@ Weitere Tests:
 | a4 Wahllabor und Kalibrierung | `uhrwerk-cli wahl` (Abschnitt 7.8, Kern `uhrwerk/election_lab.hpp`), Wahlziele `common/wahlziele_voelkerfruehling.chron` (chronik-skript.md 3.24), CI-Schritt „Wahllabor 1848/49“, CTests `wahl_fixture` und `wahl_1848`. Ergebnis 1848 mit 16 Seeds: alle Ziele erfüllt (siehe unten). Preußen 1849: Konservative und Liberale 83 %, Arbeiterbewegung 0 %. |
 | b1 Wahlabend und Kartenmodus | Brücke: `get_currents`, `get_parliaments`, `get_election`, `get_location_electoral_district_indices`, `get_shown_parliament`, Kartenmodus 12 `MAP_WAHLEN`, Wahlkreis und Ergebnis in `get_location` (`wahl`). Godot: Kartenmodus „Wahlen“ (Taste Ä) mit Wahlkreisgrenzen, Legende, Tooltip und Abschnitt „Wahl“ in der Ortsinfo; Wahlabend (Abschnitt 8) mit Spielmenü „Letzte Wahl“ und Startoption `--wahlabend`. Tests: Einheitentests (Hochrechnung, Halbrund, Telegramme), Rauchtest der Brücke 1848, Klicktest (Wahlabend am 1. Mai, schrittweise Meldungen, Hochrechnung am Ende = Ergebnis, Telegramm zeigt die Ortsinfo), Screenshot `einigkeit_wahlabend.png` in der CI. |
 | b2 Parteienmodus | Kern: Spenden, Befehl `Wahlkampf` mit drei Arten, Wirkung in der Wahl, Ende mit der Wahl (Abschnitt 9.1); `common/wahlen.chron` mit Block `wahlkampf`; Befehle im Spielstand mit Ziel und Art (speicherstaende.md). Brücke: `campaign`, `get_party`, `get_campaign` (Stimmungsbericht), `set_player_current`, `get_player_current`, `player_current` in `get_save_info`. Godot: Rolle im Spielmenü, `--partei`, Parteipanel, Wahlkampf in der Ortsinfo. Tests: Kern (Spenden, Kosten, abnehmender Ertrag, Wirkung, Ende mit der Wahl, Wiederholung, Spielstand), Lader, Rauchtest der Brücke, Klicktest (Rolle, Versammlung in Mannheim, zurück zum Staat), Einheitentests (Parteipanel, `--partei`), Screenshot `einigkeit_partei.png` in der CI. `speichertest_1848` mischt Wahlkampfbefehle ein. 1648 bitgleich. Plausibilität Preußen 1849 (Dreiklassenwahl, `uhrwerk-cli wahl --parlament pr_abgeordnetenhaus --seeds 8`): Konservative 66, Katholiken 20, Liberale 226, Demokraten 38 von 350 Sitzen; Konservative und Liberale 83 %, Arbeiterbewegung 0 %, beide Ziele erfüllt. Grenze: Historisch boykottierten die Demokraten die Wahl vom Juli 1849; das Modell kennt keinen Boykott einer Strömung. |
+| b3 Abschluss | Staatsinfo (Abschnitt 3.3 und 6): Knopf „Verfassung und Gruppen …“ im Staatspanel mit Verfassung, Wahlrecht und Wahlsystem des Landtags und Anteil und Einfluss jeder Interessengruppe im Staat (Kern `interest_group_standing`, Brücke `get_state_politics`, Startoption `--verfassung`). Änderungsprotokoll, Meilensteinplan und READMEs. Review M8: in Arbeit. |
 
 ### 14.1 Kalibrierung der Nationalversammlung (Schritt a4)
 

@@ -29,6 +29,13 @@ var _values: Array[Label] = []
 var _state := {}
 var _budget_popup: PopupPanel = null
 var _budget_grid: GridContainer = null
+## Verfassung und Interessengruppen (seit M8): Knopf und Fenster; main.gd liefert die Angaben über
+## politics_source (SimulationClient.get_state_politics des Spielerstaates).
+var politics_source: Callable = Callable()
+var _politics_button: Button = null
+var _politics_popup: PopupPanel = null
+var _politics_grid: GridContainer = null
+var _politics_groups: VBoxContainer = null
 
 @onready var _coat: CoatOfArms = %Coat
 @onready var _name: Label = %StateName
@@ -53,6 +60,7 @@ func _ready() -> void:
 		_add_tax_row(kind)
 	_build_budget_popup()
 	_budget_button.pressed.connect(show_budget)
+	_build_politics()
 	show_unavailable()
 
 
@@ -121,6 +129,12 @@ func show_state(state: Dictionary, capital_name: String) -> void:
 	_budget_button.disabled = false
 	if _budget_popup.visible:
 		_fill_budget()
+	_politics_button.visible = bool(state.get("politik", false))
+	if _politics_popup.visible:
+		if _politics_button.visible:
+			_fill_politics()
+		else:
+			_politics_popup.hide()
 
 
 func show_unavailable() -> void:
@@ -142,6 +156,9 @@ func show_unavailable() -> void:
 	_budget_button.disabled = true
 	if _budget_popup != null:
 		_budget_popup.hide()
+	if _politics_popup != null:
+		_politics_button.visible = false
+		_politics_popup.hide()
 
 
 ## Noch nicht bestätigte Regler vergessen (nach dem Laden eines Spielstands, seit M6).
@@ -167,6 +184,34 @@ func show_budget() -> void:
 	_fill_budget()
 	var rect := get_global_rect()
 	_budget_popup.popup(Rect2i(Vector2i(rect.end.x + 8.0, rect.position.y), Vector2i(330, 0)))
+
+
+## Fenster „Verfassung und Gruppen“ neben dem Panel öffnen (seit M8, nur in Szenarien mit Parlament).
+func show_politics() -> void:
+	if _state.is_empty() or not _politics_button.visible or not _fill_politics():
+		return
+	var rect := get_global_rect()
+	_politics_popup.popup(Rect2i(Vector2i(rect.end.x + 8.0, rect.position.y), Vector2i(360, 0)))
+
+
+## true, solange das Fenster „Verfassung und Gruppen“ offen ist (für Tests).
+func is_politics_visible() -> bool:
+	return _politics_popup != null and _politics_popup.visible
+
+
+## Text des Fensters „Verfassung und Gruppen“, zeilenweise (für Tests).
+func politics_text() -> String:
+	var lines := PackedStringArray()
+	var children := _politics_grid.get_children()
+	for i in range(0, children.size() - 1, 2):
+		lines.append("%s: %s" % [(children[i] as Label).text, (children[i + 1] as Label).text])
+	for row in _politics_groups.get_children():
+		var parts := PackedStringArray()
+		for child in row.get_children():
+			if child is Label:
+				parts.append((child as Label).text)
+		lines.append(" ".join(parts))
+	return "\n".join(lines)
 
 
 ## true, solange das Haushaltsfenster offen ist (für Tests).
@@ -283,6 +328,114 @@ func _build_budget_popup() -> void:
 	# Ein Popup ist ein eigenes Fenster und übernimmt den Panel-Stil des Themes nicht: Stil
 	# des Staatspanels verwenden.
 	_budget_popup.add_theme_stylebox_override(&"panel", get_theme_stylebox(&"panel"))
+
+
+func _build_politics() -> void:
+	_politics_button = Button.new()
+	_politics_button.name = "PoliticsButton"
+	_politics_button.text = "Verfassung und Gruppen …"
+	_politics_button.focus_mode = Control.FOCUS_NONE
+	_politics_button.tooltip_text = "Verfassung, Wahlrecht des Landtags und Interessengruppen des Staates"
+	_politics_button.visible = false
+	_politics_button.pressed.connect(show_politics)
+	var parent := _budget_button.get_parent()
+	parent.add_child(_politics_button)
+	parent.move_child(_politics_button, _budget_button.get_index() + 1)
+	_politics_popup = PopupPanel.new()
+	_politics_popup.name = "PoliticsPopup"
+	var box := VBoxContainer.new()
+	box.add_theme_constant_override(&"separation", 6)
+	var header := Label.new()
+	header.text = "VERFASSUNG UND GRUPPEN"
+	header.theme_type_variation = &"HeaderLabel"
+	box.add_child(header)
+	_politics_grid = GridContainer.new()
+	_politics_grid.columns = 2
+	_politics_grid.add_theme_constant_override(&"h_separation", 18)
+	box.add_child(_politics_grid)
+	var caption := Label.new()
+	caption.text = "INTERESSENGRUPPEN (ANTEIL · EINFLUSS)"
+	caption.theme_type_variation = &"CaptionLabel"
+	box.add_child(caption)
+	_politics_groups = VBoxContainer.new()
+	_politics_groups.add_theme_constant_override(&"separation", 2)
+	box.add_child(_politics_groups)
+	var note := Label.new()
+	note.text = (
+		"Anteil: Mitglieder unter den Einwohnern ab 15 Jahren. Einfluss: Anteil der Mitglieder am "
+		+ "Einkommen. Ein Block kann mehreren Gruppen angehören."
+	)
+	note.theme_type_variation = &"CaptionLabel"
+	note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	note.custom_minimum_size = Vector2(320, 0)
+	box.add_child(note)
+	_politics_popup.add_child(box)
+	add_child(_politics_popup)
+	_politics_popup.add_theme_stylebox_override(&"panel", get_theme_stylebox(&"panel"))
+
+
+## Füllt das Fenster aus politics_source; false ohne Angaben.
+func _fill_politics() -> bool:
+	var politics: Dictionary = politics_source.call() if politics_source.is_valid() else {}
+	if politics.is_empty():
+		return false
+	for child in _politics_grid.get_children():
+		_politics_grid.remove_child(child)
+		child.queue_free()
+	for child in _politics_groups.get_children():
+		_politics_groups.remove_child(child)
+		child.queue_free()
+	_politics_line("Verfassung", str(politics.get("constitution", "–")))
+	var franchise := str(politics.get("franchise", "–"))
+	var threshold := float(politics.get("census_threshold", 0.0))
+	if threshold > 0.0:
+		franchise += " (ab %s Steuern im Jahr)" % GermanFormat.money(threshold)
+	_politics_line("Wahlrecht (Landtag)", franchise)
+	if bool(politics.get("elected", false)):
+		var system := "absolute Mehrheit, Stichwahl" if bool(politics.get("runoff", true)) else "relative Mehrheit"
+		if bool(politics.get("indirect", false)):
+			system += ", über Wahlmänner"
+		_politics_line("Wahlsystem", system)
+	var groups: Array = politics.get("interest_groups", [])
+	groups.sort_custom(func(a: Variant, b: Variant) -> bool:
+		return float((a as Dictionary).get("influence_percent", 0.0)) > float(
+			(b as Dictionary).get("influence_percent", 0.0)
+		)
+	)
+	for entry: Variant in groups:
+		var group := entry as Dictionary
+		var row := HBoxContainer.new()
+		row.add_theme_constant_override(&"separation", 8)
+		var swatch := ColorRect.new()
+		swatch.color = group.get("color", UiPalette.BAR_NEUTRAL)
+		swatch.custom_minimum_size = Vector2(12, 12)
+		swatch.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+		row.add_child(swatch)
+		var label := Label.new()
+		label.text = str(group.get("name", ""))
+		label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		row.add_child(label)
+		var values := Label.new()
+		values.text = "%s · %s" % [
+			GermanFormat.percent(float(group.get("share_percent", 0.0)), 1),
+			GermanFormat.percent(float(group.get("influence_percent", 0.0)), 1),
+		]
+		values.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+		row.add_child(values)
+		_politics_groups.add_child(row)
+	return true
+
+
+func _politics_line(caption: String, value: String) -> void:
+	var left := Label.new()
+	left.text = caption
+	left.theme_type_variation = &"MutedLabel"
+	var right := Label.new()
+	right.text = value
+	right.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	right.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_politics_grid.add_child(left)
+	_politics_grid.add_child(right)
 
 
 func _fill_budget() -> void:
