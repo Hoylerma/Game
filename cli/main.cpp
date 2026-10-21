@@ -7,6 +7,7 @@
 #include "uhrwerk/balance.hpp"
 #include "uhrwerk/date.hpp"
 #include "uhrwerk/economy.hpp"
+#include "uhrwerk/election_lab.hpp"
 #include "uhrwerk/fixed.hpp"
 #include "uhrwerk/lasttest.hpp"
 #include "uhrwerk/loader.hpp"
@@ -55,6 +56,7 @@ constexpr std::int64_t kMaxLoadTestBlocks = 10'000'000;
 constexpr std::int64_t kDefaultLoadTestYears = 3;
 constexpr std::int64_t kDefaultBalanceSeeds = 32;
 constexpr std::int64_t kDefaultBalanceYears = 100;
+constexpr std::int64_t kDefaultElectionSeeds = 16;
 constexpr std::int64_t kMaxBalanceSeeds = 1000;
 constexpr std::int64_t kMaxTestCommands = 1'000'000;
 constexpr std::int64_t kDefaultSavePoints = 10;
@@ -76,6 +78,8 @@ Befehle:
                  Einschwingen oder nach --jahre/--tage); Werkzeug der Kalibrierung
   bilanz         Balancing-Bericht: mehrere Läufe ohne Spielereingriff (Seeds ab --seed);
                  Haushalt, Preise, Bevölkerung und Lebensstandard gegen die Zielwerte
+  wahl           Wahllabor: eine Wahl über mehrere Seeds (bis zum Wahltag gerechnet); Sitze je
+                 Strömung, Fraktion und Staat, Beteiligung, gegen die Wahlziele (seit M8)
   speichertest   Abnahmetest der Spielstände: Lauf A ohne Unterbrechung; Lauf B speichert an
                  --punkte Stellen in eine Datei, lädt sie mit frisch geladenen Spieldaten und
                  rechnet weiter; alle Jahresprüfsummen müssen gleich sein
@@ -98,9 +102,12 @@ Optionen:
   --bericht      Tabelle je Staat am Ende des Laufs (nur lauf)
   --chronik      Chronik der Partie ausgeben (nur lauf)
   --maerkte      Preise je Markt (nur wirtschaft)
-  --seeds N      Bilanz: Zahl der Läufe (Standard: 32)
-  --ziele DATEI  Bilanz: Zielwerte (Standard: common/zielwerte_<szenario>.chron, sonst
-                 common/zielwerte.chron im Datenordner)
+  --seeds N      bilanz, wahl: Zahl der Läufe (Standard: bilanz 32, wahl 16)
+  --ziele DATEI  bilanz: Zielwerte (Standard: common/zielwerte_<szenario>.chron, sonst
+                 common/zielwerte.chron im Datenordner); wahl: Wahlziele (Standard:
+                 common/wahlziele_<szenario>.chron, wenn vorhanden)
+  --parlament ID wahl: Parlament (Standard: das erste des Szenarios)
+  --wahlkreise   wahl: Ergebnis je Wahlkreis im ersten Lauf
   --speichern F  lauf, lasttest: am Ende einen Spielstand in die Datei F schreiben
   --laden F      lauf: Spielstand F laden und weiterrechnen (Szenario und Seed aus dem
                  Spielstand; --jahre/--tage ab seinem Datum)
@@ -114,7 +121,7 @@ Optionen:
 
 Exitcodes:
   0  in Ordnung
-  1  Datenfehler, Determinismusfehler, verfehlte Zielwerte (bilanz), Spielstand nicht ladbar
+  1  Datenfehler, Determinismusfehler, verfehlte Zielwerte (bilanz, wahl), Spielstand nicht ladbar
      oder Wiederholung weicht ab
   2  Bedienfehler (unbekannter Befehl, ungültige Option)
 
@@ -125,6 +132,7 @@ Beispiele:
   uhrwerk-cli determinismus --jahre 100
   uhrwerk-cli lasttest --bloecke 500000 --jahre 3 --vergleich 1 --grenze 2
   uhrwerk-cli bilanz --seeds 16 --jahre 100
+  uhrwerk-cli wahl --szenario voelkerfruehling --seeds 16 --wahlkreise
   uhrwerk-cli lauf --jahre 50 --testbefehle 200 --speichern partie.einigkeit --protokoll partie.protokoll
   uhrwerk-cli lauf --laden partie.einigkeit --jahre 10
   uhrwerk-cli wiederholung partie.protokoll
@@ -147,6 +155,7 @@ struct Options {
     std::optional<double> limit_seconds;
     std::optional<std::int64_t> seeds;
     std::optional<fs::path> targets_file;
+    std::optional<std::string> parliament; // --parlament
     std::optional<fs::path> file;          // wiederholung, spielstand: Datei als Argument
     std::optional<fs::path> save_file;     // --speichern
     std::optional<fs::path> load_file;     // --laden
@@ -157,6 +166,7 @@ struct Options {
     bool chronicle = false;
     bool markets = false;
     bool text = false;
+    bool districts = false; // --wahlkreise
     bool help = false;
     std::set<std::string> given; // genannte Optionen, z. B. "--bericht"
 };
@@ -194,11 +204,12 @@ std::int64_t parse_count(std::string_view option, std::string_view text, std::in
 
 Options parse_options(int argc, char** argv) {
     Options o;
-    const std::set<std::string_view> with_value = {"--daten",  "--szenario",  "--jahre",       "--tage",
-                                                   "--seed",   "--threads",   "--bloecke",     "--vergleich",
-                                                   "--grenze", "--seeds",     "--ziele",       "--speichern",
-                                                   "--laden",  "--protokoll", "--testbefehle", "--punkte"};
-    const std::set<std::string_view> flags = {"--bericht", "--chronik", "--maerkte", "--text"};
+    const std::set<std::string_view> with_value = {
+        "--daten",   "--szenario",  "--jahre",       "--tage",   "--seed",     "--threads",
+        "--bloecke", "--vergleich", "--grenze",      "--seeds",  "--ziele",    "--speichern",
+        "--laden",   "--protokoll", "--testbefehle", "--punkte", "--parlament"};
+    const std::set<std::string_view> flags = {"--bericht", "--chronik", "--maerkte", "--text",
+                                              "--wahlkreise"};
 
     for (int i = 1; i < argc; ++i) {
         const std::string_view arg = argv[i];
@@ -217,10 +228,11 @@ Options parse_options(int argc, char** argv) {
                 if (value) {
                     throw UsageError{"Option " + name + " erwartet keinen Wert"};
                 }
-                (name == "--bericht"   ? o.report
-                 : name == "--chronik" ? o.chronicle
-                 : name == "--text"    ? o.text
-                                       : o.markets) = true;
+                (name == "--bericht"      ? o.report
+                 : name == "--chronik"    ? o.chronicle
+                 : name == "--text"       ? o.text
+                 : name == "--wahlkreise" ? o.districts
+                                          : o.markets) = true;
             } else if (with_value.count(name) != 0) {
                 if (!value) {
                     if (i + 1 >= argc) {
@@ -240,6 +252,11 @@ Options parse_options(int argc, char** argv) {
                     o.scenario = *value;
                 } else if (name == "--jahre") {
                     o.years = parse_count(name, *value, kMaxYears);
+                } else if (name == "--parlament") {
+                    if (value->empty()) {
+                        throw UsageError{"Option --parlament erwartet eine Kennung"};
+                    }
+                    o.parliament = *value;
                 } else if (name == "--ziele") {
                     if (value->empty()) {
                         throw UsageError{"Option --ziele erwartet eine Datei"};
@@ -434,6 +451,25 @@ std::string describe_locations(const World& w) {
     return plural(w.locations.size(), "Ort", "Orte") + " " + location_data_split(w);
 }
 
+/// Strömungen, Interessengruppen und Parlamente mit Wahltag (seit M8).
+std::string politics_summary(const World& w) {
+    std::string text = plural(w.currents.size(), "Strömung", "Strömungen") + ", " +
+                       plural(w.interest_groups.size(), "Interessengruppe", "Interessengruppen") + ", " +
+                       plural(w.parliaments.size(), "Parlament", "Parlamente");
+    for (std::size_t i = 0; i < w.parliaments.size(); ++i) {
+        const uhrwerk::Parliament& p = w.parliaments[i];
+        const auto districts = static_cast<std::size_t>(std::count_if(
+            w.electoral_districts.begin(), w.electoral_districts.end(),
+            [&](const uhrwerk::ElectoralDistrict& d) { return d.parliament == static_cast<Index>(i); }));
+        text += "\n              " + p.name + ": " +
+                plural(static_cast<std::size_t>(p.seats), "Sitz", "Sitze") + " in " +
+                plural(districts, "Wahlkreis", "Wahlkreisen") + ", Wahl am " +
+                uhrwerk::format_date_long(p.election_day) + ", " +
+                plural(p.factions.size(), "Fraktion", "Fraktionen");
+    }
+    return text;
+}
+
 /// Strecken, Abschnitte und Märkte mit Bahnfracht zum Startdatum (seit M7).
 std::string railway_summary(const World& w) {
     std::size_t sections = 0;
@@ -584,6 +620,8 @@ Date date_after(const Date& start, std::int64_t days) {
 /// Testbefehle (speicherstaende.md, Abschnitt 5): count Steuerbefehle an zufälligen Tagen in
 /// [first_day, end_day), nach Tag geordnet. Gültige und ungültige (Staat -1 oder hinter dem letzten,
 /// Steuerart 3, Satz unter 0 oder über dem Höchstsatz), aus dem eigenen Zufallsstrom Testbefehle.
+/// Mit Parlamenten (seit M8) ist jeder zweite Befehl Wahlkampf: Strömung, Wahlkreis und Art zufällig,
+/// auch ungültige (-1 oder hinter dem letzten, Art 3); ohne Parlamente bleibt die Folge wie bisher.
 std::vector<uhrwerk::LoggedCommand> make_test_commands(const World& w, std::uint64_t seed, std::int64_t count,
                                                        std::int64_t first_day, std::int64_t end_day) {
     std::vector<uhrwerk::LoggedCommand> list;
@@ -603,6 +641,15 @@ std::vector<uhrwerk::LoggedCommand> make_test_commands(const World& w, std::uint
         c.command.kind =
             static_cast<uhrwerk::TaxKind>(rng.below(static_cast<std::uint32_t>(uhrwerk::kTaxKinds) + 1));
         c.command.value = rng.uniform(-margin, max + margin);
+        if (!w.parliaments.empty() && rng.below(2) == 0) {
+            const auto currents = static_cast<std::uint32_t>(w.currents.size());
+            const auto districts = static_cast<std::uint32_t>(w.electoral_districts.size());
+            c.command.type = uhrwerk::CommandType::Campaign;
+            c.command.state = static_cast<Index>(rng.below(currents + 2)) - 1;
+            c.command.target = static_cast<Index>(rng.below(districts + 2)) - 1;
+            c.command.action = static_cast<uhrwerk::CampaignAction>(
+                rng.below(static_cast<std::uint32_t>(uhrwerk::kCampaignActions) + 1));
+        }
         list.push_back(c);
     }
     std::stable_sort(list.begin(), list.end(), [](const auto& a, const auto& b) { return a.day < b.day; });
@@ -690,6 +737,11 @@ fs::path default_targets_file(const fs::path& data_dir, const std::string& scena
     return fs::exists(own, ec) ? own : data_dir / "common" / "zielwerte.chron";
 }
 
+/// Wahlziele des Wahllabors (seit M8): common/wahlziele_<szenario>.chron.
+fs::path default_election_targets_file(const fs::path& data_dir, const std::string& scenario) {
+    return data_dir / "common" / ("wahlziele_" + scenario + ".chron");
+}
+
 // ─── Befehle ────────────────────────────────────────────────────────────────
 
 int cmd_pruefen(const Options& o, const fs::path& data_dir) {
@@ -716,6 +768,15 @@ int cmd_pruefen(const Options& o, const fs::path& data_dir) {
             std::cout << error << '\n';
         }
     }
+    // Wahlziele (seit M8) ebenso: nur `wahl` liest sie.
+    const fs::path election_targets = default_election_targets_file(data_dir, o.scenario);
+    if (result.ok() && fs::exists(election_targets, ec)) {
+        for (const std::string& error :
+             uhrwerk::load_election_targets(election_targets, *result.world).errors) {
+            ++errors;
+            std::cout << error << '\n';
+        }
+    }
     std::cout << "Ergebnis: " << plural(errors, "Fehler", "Fehler") << ", "
               << plural(warnings, "Warnung", "Warnungen") << ".\n";
     if (errors > 0) {
@@ -732,7 +793,13 @@ int cmd_pruefen(const Options& o, const fs::path& data_dir) {
               << plural(w.markets.size(), "Markt", "Märkte") << ", "
               << plural(w.states.size(), "Staat", "Staaten") << ", "
               << plural(w.districts.size(), "Kreis", "Kreise") << ", " << describe_locations(w) << ", "
-              << plural(w.pops.size(), "Bevölkerungsblock", "Bevölkerungsblöcke") << ".\n";
+              << plural(w.pops.size(), "Bevölkerungsblock", "Bevölkerungsblöcke");
+    if (!w.currents.empty() || !w.parliaments.empty()) {
+        std::cout << ", " << plural(w.currents.size(), "Strömung", "Strömungen") << ", "
+                  << plural(w.interest_groups.size(), "Interessengruppe", "Interessengruppen") << ", "
+                  << plural(w.parliaments.size(), "Parlament", "Parlamente");
+    }
+    std::cout << ".\n";
     return kExitOk;
 }
 
@@ -765,6 +832,7 @@ int cmd_info(const Options& o, const fs::path& data_dir) {
               << "Kreise:       " << group_digits(std::to_string(w.districts.size())) << " "
               << location_district_split(w) << '\n'
               << "Eisenbahnen:  " << railway_summary(w) << '\n'
+              << "Politik:      " << politics_summary(w) << '\n'
               << "Bevölkerung:  " << format_int(total.round()) << "\n\n";
 
     std::vector<std::vector<std::string>> rows;
@@ -1312,6 +1380,270 @@ int cmd_bilanz(const Options& o, const fs::path& data_dir) {
     return kExitDataError;
 }
 
+// ─── Wahllabor (seit M8) ────────────────────────────────────────────────────
+
+std::string format_share_quantiles(const uhrwerk::Quantiles& q) {
+    return format_share(q.median) + " (" + format_share(q.p5) + " … " + format_share(q.p95) + ")";
+}
+
+std::string format_seat_quantiles(const uhrwerk::Quantiles& q) {
+    return format_int(q.median.round()) + " (" + format_int(q.p5.round()) + " … " +
+           format_int(q.p95.round()) + ")";
+}
+
+std::string format_share_range(const uhrwerk::ValueRange& range) {
+    return format_compact(range.min * Fixed::from_int(100)) + " … " +
+           format_compact(range.max * Fixed::from_int(100)) + " %";
+}
+
+/// Anteil eines Medians an einem anderen ("–" ohne Nenner).
+std::string share_of(Fixed part, Fixed whole) {
+    return whole > Fixed::zero() ? format_share(part / whole) : "–";
+}
+
+std::string describe_block(const World& w, const uhrwerk::Parliament& p,
+                           const uhrwerk::ElectionBlockTarget& b) {
+    std::string text;
+    for (const Index f : b.factions) {
+        text += text.empty() ? "" : ", ";
+        text +=
+            f == uhrwerk::kNone ? std::string("fraktionslos") : p.factions[static_cast<std::size_t>(f)].name;
+    }
+    for (const Index c : b.currents) {
+        text += text.empty() ? "" : ", ";
+        text += w.currents[static_cast<std::size_t>(c)].name;
+    }
+    return text;
+}
+
+void print_districts(const World& w, const uhrwerk::ElectionResult& e) {
+    std::vector<std::vector<std::string>> rows;
+    rows.push_back({"Wahlkreis", "Name", "Staat", "Sitze", "Berechtigte", "Beteiligung", "Sieger", "Anteil",
+                    "Bemerkung", "Meldung"});
+    for (const uhrwerk::DistrictResult& d : e.districts) {
+        const uhrwerk::ElectoralDistrict& district =
+            w.electoral_districts[static_cast<std::size_t>(d.district)];
+        Fixed total;
+        for (const Fixed v : d.votes) {
+            total += v;
+        }
+        const bool won = d.winner != uhrwerk::kNone;
+        rows.push_back(
+            {district.id, district.name, w.states[static_cast<std::size_t>(district.state)].tag,
+             std::to_string(district.seats), format_int(d.electorate.round()),
+             share_of(d.voters, d.electorate), won ? w.currents[static_cast<std::size_t>(d.winner)].id : "–",
+             won ? share_of(d.votes[static_cast<std::size_t>(d.winner)], total) : "–",
+             d.boycott ? "Boykott" : (d.runoff ? "Stichwahl" : ""), std::to_string(d.report_rank + 1)});
+    }
+    print_table(rows, {false, false, false, true, true, true, false, true, false, true}, 0);
+}
+
+int cmd_wahl(const Options& o, const fs::path& data_dir) {
+    const auto world = load(data_dir, o.scenario, false);
+    if (!world) {
+        return kExitDataError;
+    }
+    const World& w = *world;
+    if (w.parliaments.empty()) {
+        std::cerr
+            << "Das Szenario " << o.scenario
+            << " hat kein Parlament; das Wahllabor braucht eines (z. B. --szenario voelkerfruehling).\n";
+        return kExitDataError;
+    }
+    Index parliament = 0;
+    if (o.parliament) {
+        parliament = w.find_parliament(*o.parliament);
+        if (parliament == uhrwerk::kNone) {
+            std::cerr << "Unbekanntes Parlament '" << *o.parliament << "'; im Szenario:";
+            for (const uhrwerk::Parliament& p : w.parliaments) {
+                std::cerr << ' ' << p.id;
+            }
+            std::cerr << '\n';
+            return kExitDataError;
+        }
+    }
+    const uhrwerk::Parliament& p = w.parliaments[static_cast<std::size_t>(parliament)];
+    if (p.election_day < w.date) {
+        std::cerr << "Der Wahltag von " << p.id << " (" << uhrwerk::format_date_long(p.election_day)
+                  << ") liegt vor dem Start des Szenarios.\n";
+        return kExitDataError;
+    }
+
+    std::optional<fs::path> targets_file = o.targets_file;
+    std::error_code ec;
+    if (!targets_file && fs::exists(default_election_targets_file(data_dir, o.scenario), ec)) {
+        targets_file = default_election_targets_file(data_dir, o.scenario);
+    }
+    uhrwerk::ElectionTargetsResult targets;
+    if (targets_file) {
+        targets = uhrwerk::load_election_targets(*targets_file, w);
+        if (!targets.ok()) {
+            for (const std::string& error : targets.errors) {
+                std::cerr << error << '\n';
+            }
+            std::cerr << "Wahlziele nicht lesbar: " << uhrwerk::path_to_utf8(*targets_file) << '\n';
+            return kExitDataError;
+        }
+    }
+    const uhrwerk::ElectionTargets* t = targets.find(parliament);
+
+    const std::int64_t seeds = o.seeds.value_or(kDefaultElectionSeeds);
+    const auto t0 = std::chrono::steady_clock::now();
+    std::vector<uhrwerk::ElectionRun> runs;
+    std::optional<uhrwerk::ElectionResult> first;
+    unsigned threads = 0;
+    for (std::int64_t i = 0; i < seeds; ++i) {
+        uhrwerk::Simulation sim(w, uhrwerk::SimConfig{o.seed + static_cast<std::uint64_t>(i), o.threads});
+        threads = sim.threads();
+        const std::optional<uhrwerk::ElectionResult> e = uhrwerk::run_to_election(sim, parliament);
+        if (!e) {
+            std::cerr << "Die Wahl von " << p.id << " fand nicht statt.\n";
+            return kExitDataError;
+        }
+        runs.push_back(uhrwerk::measure_election(sim.world(), *e));
+        if (!first) {
+            first = *e;
+        }
+    }
+    const double seconds = std::chrono::duration<double>(std::chrono::steady_clock::now() - t0).count();
+    const uhrwerk::ElectionSummary summary = uhrwerk::summarize_elections(w, parliament, runs, t);
+
+    std::size_t district_count = 0;
+    for (const uhrwerk::ElectoralDistrict& d : w.electoral_districts) {
+        district_count += d.parliament == parliament ? 1 : 0;
+    }
+    std::cout << "Wahllabor: " << p.name << ", Wahl am " << uhrwerk::format_date_long(p.election_day) << '\n'
+              << "Szenario:  " << w.scenario.name << " (" << w.scenario.id << ")\n"
+              << "Läufe:     " << seeds << " (Seeds " << o.seed;
+    if (seeds > 1) {
+        std::cout << "–" << o.seed + static_cast<std::uint64_t>(seeds - 1);
+    }
+    std::cout << "), Median (5 % … 95 %) über die Läufe\n"
+              << "Wahlziele: "
+              << (targets_file ? uhrwerk::path_to_utf8(*targets_file) : std::string("keine"));
+    if (targets_file && t == nullptr) {
+        std::cout << " (ohne Ziele für " << p.id << ")";
+    }
+    std::cout << '\n'
+              << "Threads:   " << threads << '\n'
+              << "Laufzeit:  " << format_seconds(seconds) << "\n\n";
+
+    using uhrwerk::ElectionCheck;
+    std::set<std::pair<int, std::size_t>> marked;
+    for (const uhrwerk::ElectionViolation& v : summary.violations) {
+        marked.insert({static_cast<int>(v.check), v.block});
+    }
+    const auto mark = [&marked](ElectionCheck check, std::size_t block) {
+        return marked.count({static_cast<int>(check), block}) != 0 ? std::string(" !") : std::string();
+    };
+
+    std::cout << "Wahlkreise:  " << format_int(static_cast<std::int64_t>(district_count)) << " mit "
+              << format_int(p.seats) << " Sitzen; besetzt " << format_seat_quantiles(summary.seated)
+              << mark(ElectionCheck::Seated, 0);
+    if (t != nullptr && t->seated) {
+        std::cout << ", Ziel " << format_range(*t->seated);
+    }
+    std::cout << "\nBeteiligung: Median der Wahlkreise " << format_share_quantiles(summary.turnout)
+              << mark(ElectionCheck::Turnout, 0);
+    if (t != nullptr && t->turnout) {
+        std::cout << ", Ziel " << format_share_range(*t->turnout);
+    }
+    std::cout << "\n\n";
+
+    const Fixed seated = summary.seated.median;
+    std::cout << "Sitze je Strömung\n";
+    std::vector<std::vector<std::string>> rows;
+    rows.push_back({"Strömung", "Position", "Sitze", "Anteil"});
+    for (std::size_t c = 0; c < w.currents.size(); ++c) {
+        rows.push_back({w.currents[c].name, format_compact(w.currents[c].position),
+                        format_seat_quantiles(summary.by_current[c]),
+                        share_of(summary.by_current[c].median, seated)});
+    }
+    print_table(rows, {false, true, true, true}, 0);
+
+    std::cout << "\nSitze je Fraktion (Zuordnung ab " << uhrwerk::format_date_long(p.faction_day) << ")\n";
+    rows.clear();
+    rows.push_back({"Fraktion", "Bereich", "Sitze", "Anteil"});
+    for (std::size_t f = 0; f < summary.by_faction.size(); ++f) {
+        const bool independent = f == p.factions.size();
+        rows.push_back(
+            {independent ? std::string("fraktionslos") : p.factions[f].name,
+             independent ? std::string()
+                         : format_compact(p.factions[f].from) + " … " + format_compact(p.factions[f].to),
+             format_seat_quantiles(summary.by_faction[f]), share_of(summary.by_faction[f].median, seated)});
+    }
+    print_table(rows, {false, true, true, true}, 0);
+
+    if (t != nullptr && !t->blocks.empty()) {
+        std::cout << "\nBlöcke: Anteil an den besetzten Sitzen\n";
+        rows.clear();
+        rows.push_back({"Block", "Umfasst", "Anteil", "Ziel"});
+        for (std::size_t b = 0; b < t->blocks.size(); ++b) {
+            rows.push_back({t->blocks[b].id, describe_block(w, p, t->blocks[b]),
+                            format_share_quantiles(summary.block_share[b]) + mark(ElectionCheck::Block, b),
+                            format_share_range(t->blocks[b].share)});
+        }
+        print_table(rows, {false, false, true, true}, 0);
+    }
+
+    std::cout << "\nJe Staat: Sitze (Sollzahl der Wahlkreise), Berechtigte, Beteiligung, Sitze je Strömung\n";
+    rows.clear();
+    std::vector<std::string> header = {"Staat", "Sitze", "Berechtigte", "Beteiligung"};
+    std::vector<bool> align = {false, true, true, true};
+    for (const uhrwerk::PoliticalCurrent& c : w.currents) {
+        header.push_back(c.id);
+        align.push_back(true);
+    }
+    rows.push_back(header);
+    for (std::size_t s = 0; s < w.states.size(); ++s) {
+        if (summary.state_seats[s] == 0) {
+            continue;
+        }
+        std::vector<std::string> row = {w.states[s].short_name + " (" + w.states[s].tag + ")",
+                                        std::to_string(summary.state_seats[s]),
+                                        format_int(summary.state_electorate[s].median.round()),
+                                        format_share(summary.state_turnout[s].median)};
+        for (std::size_t c = 0; c < w.currents.size(); ++c) {
+            row.push_back(format_int(summary.state_by_current[s][c].median.round()));
+        }
+        rows.push_back(std::move(row));
+    }
+    print_table(rows, align, 0);
+
+    if (o.districts && first) {
+        std::cout << "\nErgebnis je Wahlkreis (Lauf mit Seed " << o.seed << ")\n";
+        print_districts(w, *first);
+    }
+
+    std::cout << '\n';
+    if (t == nullptr) {
+        std::cout << "Verstöße: – (keine Wahlziele für " << p.id << ")\n";
+        return kExitOk;
+    }
+    if (summary.violations.empty()) {
+        std::cout << "Verstöße: keine – alle Wahlziele erfüllt.\n";
+        return kExitOk;
+    }
+    std::cout << "Verstöße (" << summary.violations.size() << ", mit ! markiert):\n";
+    for (const uhrwerk::ElectionViolation& v : summary.violations) {
+        switch (v.check) {
+        case ElectionCheck::Seated:
+            std::cout << "  Besetzte Sitze: Median " << format_int(v.value.round()) << ", Ziel "
+                      << format_range(*t->seated) << '\n';
+            break;
+        case ElectionCheck::Turnout:
+            std::cout << "  Beteiligung: Median " << format_share(v.value) << ", Ziel "
+                      << format_share_range(*t->turnout) << '\n';
+            break;
+        case ElectionCheck::Block:
+            std::cout << "  Block " << t->blocks[v.block].id << ": Anteil " << format_share(v.value)
+                      << ", Ziel " << format_share_range(t->blocks[v.block].share) << '\n';
+            break;
+        }
+    }
+    return kExitDataError;
+}
+
 int cmd_determinismus(const Options& o, const fs::path& data_dir) {
     // Jeder Lauf lädt die Daten neu – so fällt auch ein nicht deterministischer Lader auf.
     auto world_a = load(data_dir, o.scenario, true);
@@ -1828,6 +2160,9 @@ int run(int argc, char** argv) {
         } else if (o.command == "bilanz") {
             check_applicable(
                 o, {"--daten", "--szenario", "--jahre", "--seed", "--threads", "--seeds", "--ziele"});
+        } else if (o.command == "wahl") {
+            check_applicable(o, {"--daten", "--szenario", "--seed", "--threads", "--seeds", "--ziele",
+                                 "--parlament", "--wahlkreise"});
         } else if (o.command == "speichertest") {
             check_applicable(o, {"--daten", "--szenario", "--jahre", "--tage", "--seed", "--threads",
                                  "--testbefehle", "--punkte"});
@@ -1865,6 +2200,9 @@ int run(int argc, char** argv) {
         }
         if (o.command == "bilanz") {
             return cmd_bilanz(o, data_dir);
+        }
+        if (o.command == "wahl") {
+            return cmd_wahl(o, data_dir);
         }
         if (o.command == "speichertest") {
             return cmd_speichertest(o, data_dir);

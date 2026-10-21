@@ -19,5 +19,7 @@ staat FRA {
         heer           = 4
         schulden       = 28000
         zollverein     = ja
+        verfassung     = staendisch
+        wahlrecht      = staendisch
     }
 }

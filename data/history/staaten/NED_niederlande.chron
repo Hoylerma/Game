@@ -22,5 +22,10 @@ staat NED {
         heer           = 6
         schulden       = 189000
         zollverein     = nein
+        verfassung     = konstitutionell
+        wahlrecht      = zensus
+        wahlsystem     = stichwahl
+        wahl_indirekt  = nein
+        wahl_zensus    = 1
     }
 }

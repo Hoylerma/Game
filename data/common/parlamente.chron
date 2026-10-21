@@ -1,0 +1,51 @@
+# Parlamente und ihre Wahlen (Meilenstein M8, docs/technik/politik.md Abschnitt 5.1).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.21. 'seit' ist das früheste Startdatum eines
+# Szenarios, in dem das Parlament vorkommt (wie in Abschnitt 3.18); 1648 gibt es keines. Die
+# Fraktionen teilen die Links-rechts-Achse der Strömungen lückenlos auf; ein Abgeordneter gehört
+# zu der Fraktion, in deren Bereich seine Position fällt (Abschnitt 7.6). Wahlkreise: Schritt a2.
+#
+# Alle Angaben nach Wissensstand ohne Quellenzugang (Websuche nur mit Auszügen); Prüfung offen.
+
+parlament nationalversammlung {
+    name          = "Deutsche Nationalversammlung"
+    ebene         = bund
+    sitze         = 649                  # Sollzahl: ein Abgeordneter je 50.000 Einwohner der Bundesmatrikel
+    seit          = 1848.03.01
+    wahltag       = 1848.05.01           # Urwahlen in den meisten Staaten Ende April bis Mitte Mai
+    sitz          = frankfurt_am_main    # Paulskirche
+    wahlrecht     = allgemein_maenner    # Bundesbeschluss vom 7. April 1848: volljährige, „selbstständige“ Männer
+    wahlsystem    = stichwahl
+    wahl_indirekt = ja                   # in den meisten Staaten über Wahlmänner
+    fraktionen_ab = 1848.10.01           # Fraktionsstärken der Literatur, Stand Herbst 1848
+    boykott       = { tschechen }        # Absage Palackýs; in Böhmen blieben die tschechischen Wahlkreise leer,
+    boykott_maerkte = { boehmen }        # in Mähren wählten die meisten (Entscheidung 3, politik.md)
+    quelle        = "Wissensstand ohne Quellenzugang; Hinweise der Websuche (englische Wikipedia: Factions in the Frankfurt Assembly; Bundesarchiv; DHM); Prüfung offen"
+
+    # Reihenfolge der Literatur von rechts nach links; Bereiche sind Spielwerte (Abschnitt 3.2).
+    fraktion cafe_milani       { name = "Café Milani"        farbe = { 34 40 78 }    von = 55   bis = 100 }
+    fraktion casino            { name = "Casino"             farbe = { 70 96 150 }   von = 20   bis = 55 }
+    fraktion landsberg         { name = "Landsberg"          farbe = { 112 140 182 } von = 12   bis = 20 }
+    fraktion augsburger_hof    { name = "Augsburger Hof"     farbe = { 196 170 70 }  von = 4    bis = 12 }
+    fraktion wuerttemberger_hof { name = "Württemberger Hof" farbe = { 214 140 60 }  von = -10  bis = 4 }
+    fraktion westendhall       { name = "Westendhall"        farbe = { 206 100 70 }  von = -25  bis = -10 }
+    fraktion deutscher_hof     { name = "Deutscher Hof"      farbe = { 182 52 46 }   von = -50  bis = -25 }
+    fraktion donnersberg       { name = "Donnersberg"        farbe = { 120 22 30 }   von = -100 bis = -50 }
+}
+
+parlament pr_abgeordnetenhaus {
+    name          = "Preußisches Abgeordnetenhaus"
+    ebene         = PRU
+    sitze         = 350                  # Zweite Kammer nach der oktroyierten Verfassung
+    seit          = 1848.03.01
+    wahltag       = 1849.07.17
+    sitz          = berlin_coelln
+    wahlrecht     = dreiklassen          # Verordnung vom 30. Mai 1849
+    wahlsystem    = stichwahl
+    wahl_indirekt = ja                   # öffentliche Wahl der Wahlmänner je Klasse
+    quelle        = "Wissensstand ohne Quellenzugang; Prüfung offen. Der Boykott der Demokraten 1849 ist nicht abgebildet"
+
+    fraktion rechte  { name = "Rechte"  farbe = { 42 52 92 }   von = 35   bis = 100 }
+    fraktion zentrum { name = "Zentrum" farbe = { 206 160 40 } von = -5   bis = 35 }
+    fraktion linke   { name = "Linke"   farbe = { 192 54 44 }  von = -100 bis = -5 }
+}

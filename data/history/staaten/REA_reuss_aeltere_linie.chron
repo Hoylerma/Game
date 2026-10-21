@@ -22,5 +22,7 @@ staat REA {
         heer           = 6
         schulden       = 29000
         zollverein     = ja
+        verfassung     = keine
+        wahlrecht      = keines
     }
 }

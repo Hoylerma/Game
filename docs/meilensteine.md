@@ -474,6 +474,7 @@ Fehlersuche ([02 Engine und Technik](02_engine_und_technik.md), [23 Multiplayer 
 **Ziel:** Politisches System nach [09 Politik, Staat und Gesetze](09_politik_staat_und_gesetze.md),
 [10 Parlamente, Wahlen, Koalitionen](10_parlamente_wahlen_koalitionen.md) und
 [11 Parteien-Datenbank](11_parteien_datenbank.md).
+Entwurf: [technik/politik.md](technik/politik.md).
 
 **Umfang**
 - Strömungen und Parteien bzw. Fraktionen von 1848 (Paulskirche), Interessengruppen

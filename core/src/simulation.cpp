@@ -2,6 +2,7 @@
 
 #include "state_access.hpp"
 #include "uhrwerk/economy.hpp"
+#include "uhrwerk/politics.hpp"
 
 #include <algorithm>
 #include <array>
@@ -155,6 +156,7 @@ void Simulation::prepare_population_state() {
     world_.arrivals.resize(count);
     next_targets_.assign(count * professions, Fixed{});
     ensure_economy_state(world_, topology_);
+    ensure_politics_state(world_); // Wahlkampf (seit M8), nur mit Parlamenten
 
     const bool fits = world_.snapshots.size() == count &&
                       world_.snapshot_targets.size() == count * professions &&
@@ -238,6 +240,10 @@ void Simulation::step_day() {
     if (day == 1) {
         reorganize(world_);
         update_markets(world_, topology_, state_spending(world_));
+        // Spenden an die Strömungen (seit M8, politik.md Abschnitt 9), nur mit Parlamenten.
+        if (!world_.parliaments.empty()) {
+            collect_donations(world_);
+        }
     }
 
     // 4. und 5. Bevölkerung der Orte mit heutigem Rechentag (Tage 29–31 haben keine): parallel
@@ -288,6 +294,11 @@ void Simulation::step_day() {
         if (compute_day(i) == day) {
             run_economy(static_cast<Index>(i));
         }
+    }
+
+    // 6b. Wahlen am Wahltag (seit M8, politik.md Abschnitt 7).
+    if (!world_.parliaments.empty()) {
+        run_elections();
     }
 
     // 7. Jahreswechsel.
@@ -341,6 +352,10 @@ void Simulation::execute(const Command& command) {
         }
         world_.states[static_cast<std::size_t>(command.state)]
             .tax_rates[static_cast<std::size_t>(command.kind)] = command.value;
+        return;
+    case CommandType::Campaign:
+        // Ungültige oder zu teure Befehle bleiben ohne Wirkung (wie beim Steuersatz).
+        apply_campaign(world_, command.state, command.target, command.action);
         return;
     }
 }
@@ -549,6 +564,55 @@ void Simulation::run_economy(Index state) {
         entry.text = s.short_name + " erklärt den Staatsbankrott: Die Gläubiger verlieren " +
                      std::to_string(to_percent(world_.rules.bankruptcy_haircut)) + " % ihrer Forderungen.";
         entry.state = state;
+        world_.chronicle.push_back(std::move(entry));
+    }
+}
+
+// Wahlen der Parlamente mit heutigem Wahltag (politik.md, Abschnitt 7.7): Ergebnis und Chronik.
+void Simulation::run_elections() {
+    for (std::size_t i = 0; i < world_.parliaments.size(); ++i) {
+        const Parliament& parliament = world_.parliaments[i];
+        if (parliament.election_day != world_.date) {
+            continue;
+        }
+        const auto index = static_cast<Index>(i);
+        const bool held =
+            std::any_of(world_.elections.begin(), world_.elections.end(), [&](const ElectionResult& e) {
+                return e.parliament == index && e.day == world_.date;
+            });
+        if (held) {
+            continue;
+        }
+        world_.elections.push_back(run_election(world_, index, config_.seed, &pool_.get()));
+        end_campaign(world_, index);
+        const ElectionResult& election = world_.elections.back();
+        const std::vector<std::int32_t> seats = seats_by_current(world_, election);
+        std::size_t strongest = 0;
+        for (std::size_t c = 1; c < seats.size(); ++c) {
+            if (seats[c] > seats[strongest]) {
+                strongest = c;
+            }
+        }
+        std::int32_t empty = 0;
+        for (const DistrictResult& d : election.districts) {
+            if (d.boycott) {
+                empty += world_.electoral_districts[static_cast<std::size_t>(d.district)].seats;
+            }
+        }
+        ChronicleEntry entry;
+        entry.date = world_.date;
+        entry.text = "Wahltag – " + parliament.name + ": " + std::to_string(election.deputies.size()) +
+                     " von " + std::to_string(parliament.seats) + " Sitzen besetzt";
+        if (empty > 0) {
+            entry.text += ", " + std::to_string(empty) + " leer (Boykott)";
+        }
+        if (!seats.empty() && seats[strongest] > 0) {
+            entry.text += "; stärkste Strömung: " + world_.currents[strongest].name + " mit " +
+                          std::to_string(seats[strongest]) + " Sitzen";
+        }
+        entry.text += ".";
+        entry.location = parliament.seat;
+        entry.state = parliament.state;
         world_.chronicle.push_back(std::move(entry));
     }
 }

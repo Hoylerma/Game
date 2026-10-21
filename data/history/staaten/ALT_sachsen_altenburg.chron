@@ -50,6 +50,8 @@ staat ALT {
         heer           = 6
         schulden       = 129000
         zollverein     = ja
+        verfassung     = konstitutionell
+        wahlrecht      = staendisch
     }
 
     1848.11.30 = {

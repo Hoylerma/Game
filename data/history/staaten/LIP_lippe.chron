@@ -22,5 +22,7 @@ staat LIP {
         heer           = 6
         schulden       = 93000
         zollverein     = ja
+        verfassung     = staendisch
+        wahlrecht      = staendisch
     }
 }

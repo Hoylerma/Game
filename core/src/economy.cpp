@@ -48,16 +48,6 @@ std::uint64_t isqrt(std::uint64_t value) {
     return result;
 }
 
-/// Abstand in km wie bei der Wanderung: Grad, Länge mit cos 51° gestaucht, 111,2 km je Grad.
-Fixed distance_km(Fixed lon_a, Fixed lat_a, Fixed lon_b, Fixed lat_b) {
-    const Fixed cos_reference = Fixed::from_ratio(6293, 10000);
-    const std::int64_t dx = ((lon_b - lon_a) * cos_reference).raw();
-    const std::int64_t dy = (lat_b - lat_a).raw();
-    const auto squared = static_cast<std::uint64_t>(dx * dx + dy * dy); // Rohwert² = Q32
-    const Fixed degrees = Fixed::from_raw(static_cast<std::int64_t>(isqrt(squared)));
-    return degrees * Fixed::from_ratio(1112, 10);
-}
-
 /// Alle Bedürfnisse einer Schicht als Liste (Gut, Menge je Kopf und Jahr), Bedürfnisse in Rangfolge.
 Fixed basket_cost(const World& world, Stratum stratum, const std::vector<Fixed>& prices) {
     Fixed cost;
@@ -70,6 +60,15 @@ Fixed basket_cost(const World& world, Stratum stratum, const std::vector<Fixed>&
 }
 
 } // namespace
+
+Fixed distance_km(Fixed lon_a, Fixed lat_a, Fixed lon_b, Fixed lat_b) {
+    const Fixed cos_reference = Fixed::from_ratio(6293, 10000);
+    const std::int64_t dx = ((lon_b - lon_a) * cos_reference).raw();
+    const std::int64_t dy = (lat_b - lat_a).raw();
+    const auto squared = static_cast<std::uint64_t>(dx * dx + dy * dy); // Rohwert² = Q32
+    const Fixed degrees = Fixed::from_raw(static_cast<std::int64_t>(isqrt(squared)));
+    return degrees * Fixed::from_ratio(1112, 10);
+}
 
 bool EconomyTopology::active(Index market) const {
     return in_range(market_locations, market) && !market_locations[at(market)].empty();

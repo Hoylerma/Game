@@ -376,6 +376,11 @@ class MetaReader {
 public:
     explicit MetaReader(const Meta& meta) : meta_(meta) {}
 
+    /// Angabe, die fehlen darf (seit M8: spielerstroemung); leer, wenn sie fehlt.
+    std::string optional_text(std::string_view key) const {
+        const auto it = meta_.find(key);
+        return it == meta_.end() ? std::string() : it->second;
+    }
     std::string text(std::string_view key) {
         const auto it = meta_.find(key);
         if (it == meta_.end()) {
@@ -434,13 +439,16 @@ public:
         }
         return d;
     }
-    ContentFingerprint content() {
+    /// Fingerabdruck des Inhalts; Format 1 (bis M7) kennt nur die ersten 13 Bereiche (ohne politik),
+    /// die übrigen bleiben 0. So zeigt auch ein alter Spielstand seine Metadaten an.
+    ContentFingerprint content(std::uint32_t version) {
+        const std::size_t count = version == 1 ? 13 : kContentParts.size();
         ContentFingerprint fp;
         fp.total = hex("inhalt");
-        for (std::size_t i = 0; i < kContentParts.size(); ++i) {
+        for (std::size_t i = 0; i < count; ++i) {
             fp.parts[i] = hex("inhalt." + std::string(kContentParts[i]));
         }
-        if (ok() && content_fingerprint_total(fp.parts) != fp.total) {
+        if (ok() && content_fingerprint_total(std::span(fp.parts).first(count)) != fp.total) {
             bad("inhalt");
         }
         return fp;
@@ -449,8 +457,7 @@ public:
     bool ok() const { return bad_.empty(); }
     std::string error() const { return "Metadaten beschädigt (" + bad_ + " fehlt oder ist ungültig)"; }
 
-    static std::uint64_t
-    content_fingerprint_total(const std::array<std::uint64_t, kContentParts.size()>& parts) {
+    static std::uint64_t content_fingerprint_total(std::span<const std::uint64_t> parts) {
         Fnv h;
         for (const std::uint64_t p : parts) {
             h.u64(p);
@@ -596,13 +603,15 @@ void write_commands(ByteWriter& out, const std::vector<LoggedCommand>& commands)
         out.i64(c.command.state);
         out.i64(c.command.value.raw());
         out.u64(static_cast<std::uint64_t>(c.command.kind));
+        out.i64(c.command.target);                             // seit Format 2 (M8)
+        out.u64(static_cast<std::uint64_t>(c.command.action)); // seit Format 2 (M8)
     }
 }
 
 std::vector<LoggedCommand> read_commands(ByteReader& in) {
     const std::uint64_t count = in.u64();
     std::vector<LoggedCommand> commands;
-    if (count > in.remaining() / 40) {
+    if (count > in.remaining() / 56) {
         in.fail("Befehlsprotokoll beschädigt (Anzahl)");
         return commands;
     }
@@ -614,9 +623,12 @@ std::vector<LoggedCommand> read_commands(ByteReader& in) {
         const std::int64_t state = in.i64();
         c.command.value = Fixed::from_raw(in.i64());
         const std::uint64_t kind = in.u64();
+        const std::int64_t target = in.i64();
+        const std::uint64_t action = in.u64();
         // Tage aufsteigend; Art und Steuerart müssen in ihren Typ passen (ungültige Werte innerhalb des
         // Typs verwirft execute wie beim Spielen).
-        if (c.day < previous || type > 0xFF || kind > 0xFF || state < kNone || state > INT32_MAX) {
+        if (c.day < previous || type > 0xFF || kind > 0xFF || action > 0xFF || state < kNone ||
+            state > INT32_MAX || target < kNone || target > INT32_MAX) {
             in.fail("Befehlsprotokoll beschädigt");
             break;
         }
@@ -624,6 +636,8 @@ std::vector<LoggedCommand> read_commands(ByteReader& in) {
         c.command.type = static_cast<CommandType>(type);
         c.command.state = static_cast<Index>(state);
         c.command.kind = static_cast<TaxKind>(kind);
+        c.command.target = static_cast<Index>(target);
+        c.command.action = static_cast<CampaignAction>(action);
     }
     return commands;
 }
@@ -726,6 +740,32 @@ std::string validate_state(const Simulation& sim) {
             return "Chronik mit ungültigem Verweis";
         }
     }
+    // Wahlen (seit M8): Wahlkreise des eigenen Parlaments, Stimmen je Strömung.
+    const std::size_t C = w.currents.size();
+    if (!w.parliaments.empty() && (w.campaign.size() != w.electoral_districts.size() * C ||
+                                   w.party_funds.size() != C || w.party_donations.size() != C)) {
+        return "Größe des Wahlkampfs passt nicht";
+    }
+    for (const ElectionResult& e : w.elections) {
+        if (!in(e.parliament, w.parliaments.size()) || !is_valid(e.day)) {
+            return "Wahl mit ungültigem Verweis";
+        }
+        const auto own = [&](Index d) {
+            return in(d, w.electoral_districts.size()) &&
+                   w.electoral_districts[static_cast<std::size_t>(d)].parliament == e.parliament;
+        };
+        for (const DistrictResult& d : e.districts) {
+            if (!own(d.district) || d.votes.size() != C || !none_or_in(d.winner, C)) {
+                return "Wahlergebnis mit ungültigem Verweis";
+            }
+        }
+        const std::size_t factions = w.parliaments[static_cast<std::size_t>(e.parliament)].factions.size();
+        for (const Deputy& a : e.deputies) {
+            if (!own(a.district) || !in(a.current, C) || !none_or_in(a.faction, factions)) {
+                return "Abgeordneter mit ungültigem Verweis";
+            }
+        }
+    }
     return {};
 }
 
@@ -761,6 +801,7 @@ ContentFingerprint content_fingerprint(const World& w) {
         h.fixed(pr.literacy);
         h.i64(pr.city_profession);
         h.fixed(pr.agrarian_levy);
+        h.fixed(pr.self_employed);
     });
     p[5] = hash_list(w.goods, [](Fnv& h, const Good& g) {
         h.text(g.id);
@@ -850,6 +891,110 @@ ContentFingerprint content_fingerprint(const World& w) {
         h.i64(l.admin);
         h.flag(l.federal);
     });
+    // Politik (seit M8): Strömungen, Interessengruppen, Parlamente und die Wahlordnung der Staaten.
+    {
+        const auto law = [](Fnv& h, const ElectoralLaw& l) {
+            h.u64(static_cast<std::uint64_t>(l.franchise));
+            h.u64(static_cast<std::uint64_t>(l.system));
+            h.flag(l.indirect);
+            h.fixed(l.census_threshold);
+        };
+        const auto fixeds = [](Fnv& h, const std::vector<Fixed>& values) {
+            h.u64(values.size());
+            for (const Fixed v : values) {
+                h.fixed(v);
+            }
+        };
+        Fnv h;
+        h.u64(w.currents.size());
+        for (const PoliticalCurrent& c : w.currents) {
+            h.text(c.id);
+            h.text(c.name); // steht in der Chronik der Wahl
+            h.fixed(c.position);
+        }
+        h.u64(w.interest_groups.size());
+        for (const InterestGroup& g : w.interest_groups) {
+            h.text(g.id);
+            fixeds(h, g.professions);
+            fixeds(h, g.confessions);
+            h.flag(g.by_literacy);
+            fixeds(h, g.leaning);
+        }
+        h.u64(w.parliaments.size());
+        for (const Parliament& pa : w.parliaments) {
+            h.text(pa.id);
+            h.i64(pa.state);
+            h.i64(pa.seats);
+            h.i64(to_day_number(pa.election_day));
+            law(h, pa.law);
+            h.i64(to_day_number(pa.faction_day));
+            h.u64(pa.boycott_cultures.size());
+            for (const Index c : pa.boycott_cultures) {
+                h.i64(c);
+            }
+            h.u64(pa.boycott_markets.size());
+            for (const Index m : pa.boycott_markets) {
+                h.i64(m);
+            }
+            h.u64(pa.factions.size());
+            for (const Faction& f : pa.factions) {
+                h.text(f.id);
+                h.fixed(f.from);
+                h.fixed(f.to);
+            }
+            h.i64(pa.seat);
+            h.text(pa.name); // steht in der Chronik der Wahl
+        }
+        // Wahlregeln und Regionen (seit M8, Schritt a3).
+        const ElectionRules& r = w.election_rules;
+        for (const Fixed f :
+             {r.male_share, r.young_of_age, r.young_of_age_24, r.turnout_base, r.turnout_literacy,
+              r.turnout_city, r.turnout_poverty, r.turnout_min, r.turnout_max, r.poverty_below, r.noise,
+              r.position_pull, r.position_noise, r.independent_share}) {
+            h.fixed(f);
+        }
+        for (const std::vector<Fixed>* v : {&r.base, &r.literacy, &r.poverty, &r.city, &r.electors}) {
+            fixeds(h, *v);
+        }
+        h.fixed(r.donations); // Wahlkampf (seit Schritt b2)
+        h.fixed(r.poll_error);
+        for (const CampaignRule& rule : r.campaign) {
+            h.fixed(rule.cost);
+            h.fixed(rule.effect);
+            h.fixed(rule.cap);
+        }
+        h.u64(w.political_regions.size());
+        for (const PoliticalRegion& region : w.political_regions) {
+            h.text(region.id);
+            h.u64(region.states.size());
+            for (const Index s : region.states) {
+                h.i64(s);
+            }
+            h.u64(region.markets.size());
+            for (const Index m : region.markets) {
+                h.i64(m);
+            }
+            fixeds(h, region.leaning);
+        }
+        h.u64(w.states.size());
+        for (const State& s : w.states) {
+            h.u64(static_cast<std::uint64_t>(s.constitution));
+            law(h, s.law);
+        }
+        h.u64(w.electoral_districts.size());
+        for (const ElectoralDistrict& d : w.electoral_districts) {
+            h.text(d.id);
+            h.text(d.name); // steht in der Chronik der Wahl
+            h.i64(d.parliament);
+            h.i64(d.state);
+            h.i64(d.seats);
+            h.u64(d.locations.size());
+            for (const Index l : d.locations) {
+                h.i64(l);
+            }
+        }
+        p[13] = h.value();
+    }
     fp.total = MetaReader::content_fingerprint_total(fp.parts);
     return fp;
 }
@@ -896,6 +1041,9 @@ std::vector<std::uint8_t> save_game(const Simulation& sim, const SaveMeta& meta)
     add_meta(text, "formatversion", std::to_string(kSaveFormatVersion));
     add_meta(text, "szenario", w.scenario.id);
     add_meta(text, "spielerstaat", meta.player_tag);
+    if (!meta.player_current.empty()) {
+        add_meta(text, "spielerstroemung", meta.player_current); // Parteienmodus (seit M8)
+    }
     add_meta(text, "datum", iso_date(w.date));
     add_meta(text, "seed", std::to_string(sim.config().seed));
     add_meta(text, "tage", std::to_string(sim.days_elapsed()));
@@ -915,13 +1063,14 @@ std::optional<SaveInfo> info_from(const Container& c, std::string* error) {
     info.game_version = m.text("spiel");
     info.scenario = m.text("szenario");
     info.player_tag = m.text("spielerstaat");
+    info.player_current = m.optional_text("spielerstroemung");
     info.date = m.date("datum");
     info.seed = m.u64("seed");
     info.days = m.i64("tage");
     info.checksum = m.hex("pruefsumme");
     info.start_checksum = m.hex("startpruefsumme");
     info.commands = m.u64("befehle");
-    info.content = m.content();
+    info.content = m.content(c.version);
     if (!m.ok()) {
         fail(error, m.error());
         return std::nullopt;
@@ -1081,7 +1230,7 @@ std::optional<Replay> read_replay(std::span<const std::uint8_t> bytes, std::stri
     r.end_checksum = m.hex("endpruefsumme");
     const std::uint64_t command_count = m.u64("befehle");
     const std::uint64_t checkpoint_count = m.u64("kontrollpunkte");
-    r.content = m.content();
+    r.content = m.content(container->version);
     if (!m.ok()) {
         fail(error, m.error());
         return std::nullopt;

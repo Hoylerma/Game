@@ -1463,6 +1463,273 @@ TEST_CASE("Lader: spielbare Staaten und Währung des Szenarios") {
     }
 }
 
+TEST_CASE("Lader: Politik (seit M8)") {
+    TempDir dir(true);
+    SUBCASE("Strömungen, Interessengruppen und Parlament gelesen") {
+        const LoadResult r = load(dir, "jahresbeginn_1650");
+        INFO(issues_text(r));
+        REQUIRE(r.ok());
+        CHECK(r.issues.empty());
+        const World& w = *r.world;
+        REQUIRE(w.currents.size() == 3);
+        CHECK(w.currents[0].id == "konservative");
+        CHECK(w.currents[2].position == Fixed::from_int(-45));
+        REQUIRE(w.interest_groups.size() == 2);
+        const uhrwerk::InterestGroup& peasants = w.interest_groups[0];
+        REQUIRE(peasants.professions.size() == w.professions.size());
+        CHECK(peasants.professions[static_cast<std::size_t>(w.find_profession("bauern"))] == fx("0.9"));
+        CHECK(peasants.professions[static_cast<std::size_t>(w.find_profession("adel"))] == Fixed::zero());
+        CHECK(peasants.confessions.empty());
+        CHECK(peasants.leaning[static_cast<std::size_t>(w.find_current("konservative"))] == fx("0.6"));
+        const uhrwerk::InterestGroup& educated = w.interest_groups[1];
+        CHECK(educated.by_literacy);
+        CHECK(educated.confessions[static_cast<std::size_t>(w.find_confession("katholisch"))] == fx("0.5"));
+        REQUIRE(w.parliaments.size() == 1);
+        const uhrwerk::Parliament& p = w.parliaments[0];
+        CHECK(p.id == "landtag");
+        CHECK(p.state == w.find_state("SAX"));
+        CHECK(p.seats == 4);
+        CHECK(p.election_day == Date{1650, 3, 1});
+        CHECK(p.faction_day == Date{1650, 6, 1});
+        CHECK(p.law.franchise == uhrwerk::Franchise::Manhood);
+        CHECK(p.law.system == uhrwerk::ElectoralSystem::Runoff);
+        CHECK(p.law.indirect);
+        CHECK(p.boycott_cultures == std::vector<Index>{w.find_culture("sorben")});
+        REQUIRE(p.factions.size() == 3);
+        CHECK(p.factions[0].id == "linke"); // nach Bereich aufsteigend
+        CHECK(p.factions[2].to == Fixed::from_int(100));
+    }
+    SUBCASE("vor 'seit' kein Parlament, aber Strömungen und Interessengruppen") {
+        const LoadResult r = load(dir);
+        INFO(issues_text(r));
+        REQUIRE(r.ok());
+        CHECK(r.world->parliaments.empty());
+        CHECK(r.world->currents.size() == 3);
+        CHECK(r.world->interest_groups.size() == 2);
+    }
+    SUBCASE("ohne die Dateien keine Politik") {
+        std::filesystem::remove(dir / "common/stroemungen.chron");
+        std::filesystem::remove(dir / "common/interessengruppen.chron");
+        std::filesystem::remove(dir / "common/parlamente.chron");
+        std::filesystem::remove(dir / "common/wahlen.chron");
+        std::filesystem::remove_all(dir / "history/wahlkreise");
+        const LoadResult r = load(dir, "jahresbeginn_1650");
+        INFO(issues_text(r));
+        REQUIRE(r.ok());
+        CHECK(r.world->currents.empty());
+        CHECK(r.world->parliaments.empty());
+    }
+    SUBCASE("Verfassung, Wahlrecht und selbstständig") {
+        replace_in_file(dir / "history/staaten/20_mitteldeutschland.chron", "staat SAX {",
+                        "staat SAX {\n    verfassung = konstitutionell\n    wahlrecht = zensus\n"
+                        "    wahl_zensus = 2.5\n    wahl_indirekt = ja");
+        replace_in_file(dir / "common/berufe.chron", "beruf bauern {",
+                        "beruf bauern {\n    selbststaendig = 0.8");
+        const LoadResult r = load(dir);
+        INFO(issues_text(r));
+        REQUIRE(r.ok());
+        const World& w = *r.world;
+        const uhrwerk::State& sax = w.states[static_cast<std::size_t>(w.find_state("SAX"))];
+        CHECK(sax.constitution == uhrwerk::Constitution::Constitutional);
+        CHECK(sax.law.franchise == uhrwerk::Franchise::Census);
+        CHECK(sax.law.census_threshold == fx("2.5"));
+        CHECK(sax.law.indirect);
+        CHECK(w.states[static_cast<std::size_t>(w.find_state("BRA"))].law.franchise ==
+              uhrwerk::Franchise::None);
+        CHECK(w.professions[static_cast<std::size_t>(w.find_profession("bauern"))].self_employed ==
+              fx("0.8"));
+        CHECK(w.professions[static_cast<std::size_t>(w.find_profession("adel"))].self_employed ==
+              Fixed::one());
+    }
+    const char* const groups = "common/interessengruppen.chron";
+    const char* const parliaments = "common/parlamente.chron";
+    SUBCASE("Neigung ergibt nicht 1") {
+        replace_in_file(dir / groups, "demokraten = 0.1 }", "demokraten = 0.2 }");
+        expect_error(load(dir), "die Neigung von interessengruppe bauernschaft ergibt 1.1, erwartet 1",
+                     groups);
+    }
+    SUBCASE("unbekannte Strömung und unbekannter Beruf") {
+        replace_in_file(dir / groups, "demokraten = 0.1 }", "radikale = 0.1 }");
+        replace_in_file(dir / groups, "bauern = 0.9", "fischer = 0.9");
+        const LoadResult r = load(dir);
+        expect_error(r, "unbekannte Strömung 'radikale' in interessengruppe bauernschaft", groups);
+        expect_error(r, "unbekannter Beruf 'fischer' in interessengruppe bauernschaft", groups);
+    }
+    SUBCASE("Interessengruppe ohne Mitglieder") {
+        replace_in_file(dir / groups, "    berufe  = { bauern = 0.9 }\n", "");
+        expect_error(load(dir), "interessengruppe bauernschaft braucht 'berufe' oder 'konfessionen'", groups);
+    }
+    SUBCASE("Lücke zwischen Fraktionen") {
+        replace_in_file(dir / parliaments, "von = -10  bis = 30", "von = -5   bis = 30");
+        expect_error(load(dir, "jahresbeginn_1650"),
+                     "die Fraktionen von parlament landtag decken die Achse nicht lückenlos ab (bei -10, "
+                     "fraktion mitte beginnt bei -5)",
+                     parliaments);
+    }
+    SUBCASE("Fraktion mit leerem Bereich") {
+        replace_in_file(dir / parliaments, "von = 30   bis = 100", "von = 100  bis = 100");
+        expect_error(load(dir, "jahresbeginn_1650"),
+                     "fraktion rechte in parlament landtag: 'von' muss kleiner", parliaments);
+    }
+    SUBCASE("ungültiges Wahlrecht") {
+        replace_in_file(dir / parliaments, "wahlrecht     = allgemein_maenner", "wahlrecht     = alle");
+        expect_error(load(dir, "jahresbeginn_1650"), "ungültiges Wahlrecht 'alle' in parlament landtag",
+                     parliaments);
+    }
+    SUBCASE("Zensus ohne Schwelle, Schwelle ohne Zensus") {
+        replace_in_file(dir / parliaments, "wahlrecht     = allgemein_maenner", "wahlrecht     = zensus");
+        expect_error(load(dir, "jahresbeginn_1650"), "Pflichtfeld 'wahl_zensus' fehlt in parlament landtag",
+                     parliaments);
+        replace_in_file(dir / parliaments, "wahlrecht     = zensus",
+                        "wahlrecht     = dreiklassen\n    wahl_zensus = 1");
+        expect_error(load(dir, "jahresbeginn_1650"), "'wahl_zensus' gilt nur mit wahlrecht = zensus",
+                     parliaments);
+    }
+    SUBCASE("unbekannte Kultur im Boykott, unbekannter Staat als Ebene") {
+        replace_in_file(dir / parliaments, "{ sorben }", "{ wenden }");
+        replace_in_file(dir / parliaments, "ebene         = SAX", "ebene         = XYZ");
+        const LoadResult r = load(dir, "jahresbeginn_1650");
+        expect_error(r, "unbekannte Kultur 'wenden' in 'boykott' von parlament landtag", parliaments);
+        expect_error(r, "unbekannter Staat 'XYZ' als Ebene von parlament landtag", parliaments);
+    }
+    SUBCASE("Fraktionen vor dem Wahltag") {
+        replace_in_file(dir / parliaments, "fraktionen_ab = 1650.06.01", "fraktionen_ab = 1650.01.01");
+        expect_error(load(dir, "jahresbeginn_1650"),
+                     "'fraktionen_ab' liegt vor dem Wahltag von parlament landtag", parliaments);
+    }
+    const char* const districts = "history/wahlkreise/landtag.chron";
+    SUBCASE("Wahlkreise gelesen") {
+        const LoadResult r = load(dir, "jahresbeginn_1650");
+        INFO(issues_text(r));
+        REQUIRE(r.ok());
+        const World& w = *r.world;
+        REQUIRE(w.electoral_districts.size() == 2);
+        const uhrwerk::ElectoralDistrict& d = w.electoral_districts[0];
+        CHECK(d.id == "lt_dresden");
+        CHECK(d.parliament == 0);
+        CHECK(d.state == w.find_state("SAX"));
+        CHECK(d.seats == 3);
+        CHECK(d.locations == std::vector<Index>{w.find_location("dresden")});
+        CHECK(w.electoral_districts[1].seats == 1);          // Standard
+        CHECK(load(dir).world->electoral_districts.empty()); // Parlament erst ab 1649
+    }
+    SUBCASE("Sitze der Wahlkreise passen nicht zur Sollzahl") {
+        replace_in_file(dir / districts, "sitze     = 3", "sitze     = 2");
+        expect_error(load(dir, "jahresbeginn_1650"),
+                     "parlament landtag hat 4 Sitze, seine Wahlkreise zusammen 3", parliaments);
+    }
+    SUBCASE("Ort eines anderen Staates, Ort doppelt") {
+        replace_in_file(dir / districts, "orte      = { leipzig }",
+                        "orte      = { leipzig dresden potsdam }");
+        const LoadResult r = load(dir, "jahresbeginn_1650");
+        expect_error(r, "Ort potsdam in wahlkreis lt_leipzig gehört zum Startdatum nicht zu SAX", districts);
+        expect_error(r, "Ort dresden liegt schon in wahlkreis lt_dresden desselben Parlaments", districts);
+    }
+    SUBCASE("unbekanntes Parlament, Staat des Parlaments") {
+        replace_in_file(dir / districts, "parlament = landtag\n    staat     = SAX\n    orte",
+                        "parlament = reichstag\n    staat     = SAX\n    orte");
+        replace_in_file(dir / districts, "staat     = SAX\n    sitze", "staat     = BRA\n    sitze");
+        const LoadResult r = load(dir, "jahresbeginn_1650");
+        expect_error(r, "unbekanntes Parlament 'reichstag' in wahlkreis lt_leipzig", districts);
+        expect_error(r, "wahlkreis lt_dresden liegt in BRA, parlament landtag gehört zu SAX", districts);
+    }
+    SUBCASE("späteres Parlament wird auch vor 'seit' geprüft") {
+        replace_in_file(dir / parliaments, "wahlrecht     = allgemein_maenner", "wahlrecht     = alle");
+        expect_error(load(dir), "ungültiges Wahlrecht 'alle' in parlament landtag", parliaments);
+    }
+    const char* const elections = "common/wahlen.chron";
+    SUBCASE("Wahlregeln, Regionen und Sitz gelesen") {
+        const LoadResult r = load(dir, "jahresbeginn_1650");
+        INFO(issues_text(r));
+        REQUIRE(r.ok());
+        const World& w = *r.world;
+        const uhrwerk::ElectionRules& rules = w.election_rules;
+        CHECK(rules.male_share == fx("0.5"));
+        CHECK(rules.turnout_max == fx("0.9"));
+        CHECK(rules.poverty_below == Fixed::from_int(40));
+        CHECK(rules.base == std::vector<Fixed>{fx("0.5"), fx("0.3"), fx("0.2")});
+        CHECK(rules.literacy == std::vector<Fixed>{fx("-0.1"), fx("0.1"), Fixed{}});
+        CHECK(rules.electors == std::vector<Fixed>{Fixed::one(), fx("1.15"), Fixed::one()}); // Standard 1
+        CHECK(rules.position_noise == Fixed::from_int(15));
+        REQUIRE(w.political_regions.size() == 1);
+        CHECK(w.political_regions[0].id == "elbtal");
+        CHECK(w.political_regions[0].states == std::vector<Index>{w.find_state("SAX")});
+        CHECK(w.parliaments[0].seat == w.find_location("dresden"));
+    }
+    SUBCASE("Parlamente ohne Wahlregeln") {
+        std::filesystem::remove(dir / elections);
+        expect_error(load(dir, "jahresbeginn_1650"),
+                     "Parlamente brauchen die Wahlregeln in common/wahlen.chron (wahlregeln { … })",
+                     parliaments);
+        const LoadResult before = load(dir); // ohne Parlament keine Wahlregeln nötig
+        INFO(issues_text(before));
+        CHECK(before.ok());
+    }
+    SUBCASE("Fehler in den Wahlregeln und Regionen") {
+        replace_in_file(dir / elections, "    rauschen            = 0.05\n", "");
+        replace_in_file(dir / elections, "beteiligung_min     = 0.15", "beteiligung_min     = 0.95");
+        replace_in_file(dir / elections, "neigung_stadt       = { liberale = 0.05 }",
+                        "neigung_stadt       = { radikale = 0.05 }");
+        replace_in_file(dir / elections, "staaten = { SAX }",
+                        "staaten = { XYZ }\n    maerkte = { atlantis }");
+        const LoadResult r = load(dir, "jahresbeginn_1650");
+        expect_error(r, "Pflichtfeld 'rauschen' fehlt in wahlregeln", elections);
+        expect_error(r, "'beteiligung_min' ist größer als 'beteiligung_max'", elections);
+        expect_error(r, "unbekannte Strömung 'radikale' in 'neigung_stadt' von wahlregeln", elections);
+        expect_error(r, "unbekannter Staat 'XYZ' in region elbtal", elections);
+        expect_error(r, "unbekannter Markt 'atlantis' in region elbtal", elections);
+    }
+    SUBCASE("Wahlregeln fehlen oder doppelt, Region ohne Gebiet") {
+        replace_in_file(dir / elections, "region elbtal {\n    staaten = { SAX }\n", "region elbtal {\n");
+        const std::string text = testhilfen::read_file(dir / elections);
+        testhilfen::write_file(dir / elections, text + "\nwahlregeln {\n}\n");
+        const LoadResult r = load(dir, "jahresbeginn_1650");
+        expect_error(r, "region elbtal braucht 'staaten' oder 'maerkte'", elections);
+        expect_error(r, "Block 'wahlregeln' ist mehrfach vorhanden", elections);
+        testhilfen::write_file(dir / elections,
+                               "region elbtal {\n    staaten = { SAX }\n    neigung = { }\n}\n");
+        expect_error(load(dir, "jahresbeginn_1650"), "Block 'wahlregeln' fehlt", elections);
+    }
+    SUBCASE("Boykott nur in bestimmten Märkten") {
+        replace_in_file(dir / parliaments, "boykott       = { sorben }",
+                        "boykott       = { sorben }\n    boykott_maerkte = { mitte }");
+        const LoadResult r = load(dir, "jahresbeginn_1650");
+        INFO(issues_text(r));
+        REQUIRE(r.ok());
+        CHECK(r.world->parliaments[0].boycott_markets == std::vector<Index>{r.world->find_market("mitte")});
+        replace_in_file(dir / parliaments, "{ mitte }", "{ atlantis }");
+        replace_in_file(dir / parliaments, "    boykott       = { sorben }\n", "");
+        const LoadResult bad = load(dir, "jahresbeginn_1650");
+        expect_error(bad, "unbekannter Markt 'atlantis' in 'boykott_maerkte' von parlament landtag",
+                     parliaments);
+        expect_error(bad, "'boykott_maerkte' gilt nur mit 'boykott' in parlament landtag", parliaments);
+    }
+    SUBCASE("Wahlkampf gelesen und Fehler") {
+        {
+            const LoadResult r = load(dir, "jahresbeginn_1650");
+            INFO(issues_text(r));
+            REQUIRE(r.ok());
+            const uhrwerk::ElectionRules& rules = r.world->election_rules;
+            CHECK(rules.donations == fx("0.05"));
+            CHECK(rules.poll_error == Fixed::from_int(8));
+            CHECK(rules.campaign[0].cost == Fixed::from_int(10));
+            CHECK(rules.campaign[1].effect == fx("0.3"));
+            CHECK(rules.campaign[2].cap == fx("0.1"));
+        }
+        replace_in_file(dir / elections, "verein       { kosten = 40  wirkung = 0.05 hoechstens = 0.1 }",
+                        "verein       { kosten = 40  wirkung = 0.5 hoechstens = 0.1 }");
+        replace_in_file(dir / elections, "        stimmungsfehler = 8\n", "");
+        const LoadResult r = load(dir, "jahresbeginn_1650");
+        expect_error(r, "'wirkung' ist größer als 'hoechstens' in wahlkampf verein", elections);
+        expect_error(r, "Pflichtfeld 'stimmungsfehler' fehlt in wahlkampf", elections);
+    }
+    SUBCASE("unbekannter Ort als Sitz") {
+        replace_in_file(dir / parliaments, "sitz          = dresden", "sitz          = atlantis");
+        expect_error(load(dir, "jahresbeginn_1650"),
+                     "unbekannter Ort 'atlantis' als Sitz von parlament landtag", parliaments);
+    }
+}
+
 TEST_CASE("Lader: Tragfähigkeitsfaktor des Szenarios") {
     TempDir dir(true);
     const char* const scenario_file = "szenarien/jahresbeginn.chron";

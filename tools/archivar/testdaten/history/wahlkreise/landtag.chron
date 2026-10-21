@@ -1,0 +1,19 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+wahlkreis lt_01 {
+    name      = "Hafen"
+    parlament = landtag
+    staat     = AAA
+    sitze     = 1
+    orte      = { hafen moor }
+    quelle    = "Testdaten"
+}
+
+wahlkreis lt_02 {
+    name      = "Heide-Süd"
+    parlament = landtag
+    staat     = AAA
+    sitze     = 2
+    orte      = { heide }
+    quelle    = "Testdaten"
+}

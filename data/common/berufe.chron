@@ -94,6 +94,7 @@ beruf landarme {
     anteil_land     = 0.390
     agrar           = ja
     bildung         = 0.05
+    selbststaendig  = 0.6   # Wahlrecht 1848 (seit M8): Gesinde und Tagelöhner galten vielerorts nicht als selbstständig
 }
 
 # ─── Frühe Industrie (seit M7) ──────────────────────────────────────────────
@@ -110,4 +111,5 @@ beruf fabrikarbeiter {
     bildung         = 0.15
     seit            = 1800.01.01
     anteil_aus      = landarme
+    selbststaendig  = 0.7   # Wahlrecht 1848 (seit M8): Fabrikarbeiter im Kost- und Logis-Verhältnis zum Teil ausgeschlossen
 }

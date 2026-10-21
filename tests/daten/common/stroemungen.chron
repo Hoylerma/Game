@@ -1,0 +1,18 @@
+# Testdaten: drei Strömungen (seit M8)
+stroemung konservative {
+    name     = "Konservative"
+    farbe    = { 40 50 90 }
+    position = 70
+}
+
+stroemung liberale {
+    name     = "Liberale"
+    farbe    = { 200 160 40 }
+    position = 15
+}
+
+stroemung demokraten {
+    name     = "Demokraten"
+    farbe    = { 190 50 40 }
+    position = -45
+}

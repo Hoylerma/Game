@@ -1,0 +1,100 @@
+# Interessengruppen (Meilenstein M8, docs/technik/politik.md Abschnitt 3.3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.20. Ein Block gehört einer Gruppe mit dem Anteil
+# berufe[Beruf] × konfessionen[Konfession] (fehlt ein Block, zählt er 1), mit nach_bildung = ja
+# zusätzlich × Alphabetisierung; ein Block kann mehreren Gruppen angehören. Die Neigung verteilt die
+# Stimmen der Mitglieder auf die Strömungen (Summe 1). Katalog nach Kapitel 09, Abschnitt 5.1; alle
+# Anteile und Neigungen sind Spielwerte (Kalibrierung in M8, Schritt a4).
+
+interessengruppe adel {
+    name    = "Adel und Ritterschaft"
+    farbe   = { 70 60 110 }
+    berufe  = { adel = 1 }
+    neigung = { konservative = 0.75 katholiken = 0.1 liberale = 0.15 }
+    quelle  = "Spielwert M8 nach Kapitel 09, Abschnitt 5.1"
+}
+
+interessengruppe katholische_kirche {
+    name         = "Katholische Kirche"
+    farbe        = { 90 70 50 }
+    konfessionen = { katholisch = 0.4 }
+    neigung      = { katholiken = 0.55 konservative = 0.25 liberale = 0.15 demokraten = 0.05 }
+    quelle       = "Spielwert M8 nach Kapitel 09, Abschnitt 5.1"
+}
+
+interessengruppe evangelische_kirche {
+    name         = "Evangelische Kirche"
+    farbe        = { 60 80 120 }
+    konfessionen = { lutherisch = 0.5 reformiert = 0.5 }
+    neigung      = { konservative = 0.55 liberale = 0.35 demokraten = 0.1 }
+    quelle       = "Spielwert M8 nach Kapitel 09, Abschnitt 5.1"
+}
+
+interessengruppe handel_finanzen {
+    name    = "Handel und Finanzen"
+    farbe   = { 190 150 50 }
+    berufe  = { buerger = 0.5 }
+    neigung = { liberale = 0.75 konservative = 0.15 demokraten = 0.1 }
+    quelle  = "Spielwert M8 nach Kapitel 09, Abschnitt 5.1"
+}
+
+interessengruppe mittelstand {
+    name    = "Zünfte und Mittelstand"
+    farbe   = { 150 110 70 }
+    berufe  = { handwerker = 0.7 }
+    neigung = { demokraten = 0.4 liberale = 0.3 konservative = 0.15 katholiken = 0.1 arbeiter = 0.05 }
+    quelle  = "Spielwert M8 nach Kapitel 09, Abschnitt 5.1"
+}
+
+interessengruppe bauernschaft {
+    name    = "Bauernschaft"
+    farbe   = { 110 140 60 }
+    berufe  = { bauern = 0.9 landarme = 0.3 }
+    neigung = { konservative = 0.35 katholiken = 0.2 liberale = 0.25 demokraten = 0.2 }
+    quelle  = "Spielwert M8 nach Kapitel 09, Abschnitt 5.1"
+}
+
+interessengruppe beamtenschaft {
+    name    = "Beamtenschaft"
+    farbe   = { 100 110 120 }
+    berufe  = { buerger = 0.3 adel = 0.2 }
+    neigung = { liberale = 0.5 konservative = 0.45 demokraten = 0.05 }
+    quelle  = "Spielwert M8 nach Kapitel 09, Abschnitt 5.1"
+}
+
+interessengruppe militaer {
+    name    = "Militär"
+    farbe   = { 80 90 70 }
+    berufe  = { adel = 0.3 }
+    neigung = { konservative = 0.9 liberale = 0.1 }
+    quelle  = "Spielwert M8 nach Kapitel 09, Abschnitt 5.1"
+}
+
+interessengruppe bildungsbuergertum {
+    name         = "Bildungsbürgertum"
+    farbe        = { 170 120 150 }
+    berufe       = { buerger = 0.6 geistlichkeit = 0.4 adel = 0.2 handwerker = 0.1 }
+    nach_bildung = ja
+    neigung      = { liberale = 0.55 demokraten = 0.3 konservative = 0.1 katholiken = 0.05 }
+    seit         = 1700.01.01   # Gelehrte und Aufklärer
+    quelle       = "Spielwert M8 nach Kapitel 09, Abschnitt 5.1"
+}
+
+interessengruppe nationalbewegung {
+    name         = "Nationalbewegung"
+    farbe        = { 30 30 30 }
+    berufe       = { buerger = 0.4 handwerker = 0.2 geistlichkeit = 0.2 adel = 0.1 bauern = 0.05 }
+    nach_bildung = ja
+    neigung      = { liberale = 0.5 demokraten = 0.4 konservative = 0.1 }
+    seit         = 1806.01.01   # nach dem Ende des Alten Reiches
+    quelle       = "Spielwert M8 nach Kapitel 09, Abschnitt 5.1"
+}
+
+interessengruppe arbeiterbewegung {
+    name    = "Arbeiterbewegung"
+    farbe   = { 150 30 40 }
+    berufe  = { fabrikarbeiter = 0.3 handwerker = 0.1 landarme = 0.05 }
+    neigung = { arbeiter = 0.6 demokraten = 0.4 }
+    seit    = 1848.08.23   # Allgemeine Deutsche Arbeiterverbrüderung (Berlin); vor der Wahl 1848 ohne Organisation
+    quelle  = "Spielwert M8 nach Kapitel 09, Abschnitt 5.1 und Kapitel 11, Abschnitt 2.1"
+}

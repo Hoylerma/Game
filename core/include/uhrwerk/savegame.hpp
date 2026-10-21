@@ -21,17 +21,19 @@
 #include <span>
 #include <string>
 #include <string_view>
+#include <utility>
 #include <vector>
 
 namespace uhrwerk {
 
 /// Formatversion der Spielstände und Protokolle; jede Änderung am Zustandsverzeichnis erhöht sie.
-inline constexpr std::uint32_t kSaveFormatVersion = 1;
+/// Format 2 seit M8: Wahlen im Zustand, Inhaltsbereich politik.
+inline constexpr std::uint32_t kSaveFormatVersion = 2;
 
 /// Bereiche des Inhaltsfingerabdrucks (Abschnitt 3), in dieser Reihenfolge.
-inline constexpr std::array<std::string_view, 13> kContentParts = {
+inline constexpr std::array<std::string_view, 14> kContentParts = {
     "regeln",   "gelaende", "konfessionen", "kulturen", "berufe", "gueter", "beduerfnisse",
-    "betriebe", "maerkte",  "vorkommen",    "staaten",  "kreise", "orte"};
+    "betriebe", "maerkte",  "vorkommen",    "staaten",  "kreise", "orte",   "politik"};
 
 /// Fingerabdruck des Inhalts: je Bereich und gesamt (FNV-1a-64). Namen, Farben und Quellen zählen
 /// nicht mit, nur was die Simulation beeinflusst.
@@ -50,9 +52,10 @@ std::vector<std::string_view> content_differences(const ContentFingerprint& a, c
 /// Angaben aus Kopf und Metadaten (ohne die Nutzdaten zu entpacken).
 struct SaveInfo {
     std::uint32_t format_version = 0;
-    std::string game_version; // Spielversion beim Speichern
-    std::string scenario;     // Kennung des Szenarios
-    std::string player_tag;   // Spielerstaat (vom Aufrufer beim Speichern)
+    std::string game_version;   // Spielversion beim Speichern
+    std::string scenario;       // Kennung des Szenarios
+    std::string player_tag;     // Spielerstaat (vom Aufrufer beim Speichern)
+    std::string player_current; // Strömung im Parteienmodus (seit M8), leer = Staat
     Date date;
     std::uint64_t seed = 0;
     std::int64_t days = 0;
@@ -68,7 +71,13 @@ struct SaveInfo {
 
 /// Angaben des Aufrufers beim Speichern.
 struct SaveMeta {
+    SaveMeta() = default;
+    // NOLINTNEXTLINE(google-explicit-constructor): SaveMeta{"SAX"} wie vor M8
+    SaveMeta(std::string tag, std::string current = {})
+        : player_tag(std::move(tag)), player_current(std::move(current)) {}
+
     std::string player_tag;
+    std::string player_current; // Kennung der Strömung im Parteienmodus (seit M8), leer = Staat
 };
 
 /// Spielstand als Bytes. Gleicher Zustand ergibt dieselben Bytes (keine Uhrzeit, kein Rechnername).

@@ -1,0 +1,47 @@
+# Wahlziele des Wahllabors für das Lesezeichen 1848 (Szenario voelkerfruehling, Meilenstein M8),
+# gelesen nur von `uhrwerk-cli wahl` und `uhrwerk-cli pruefen`.
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.24; Herleitung: docs/technik/politik.md,
+# Abschnitt 7.8. Anteile an den besetzten Sitzen, geprüft am Median über die Seeds.
+#
+# Ungeprüfte Richtwerte nach Wissensstand und Websuche (Fraktionsstärken der Nationalversammlung im
+# Herbst 1848, rund 585 von 649 Abgeordneten anwesend); die Fachprüfung mit Quellen steht aus.
+
+wahl nationalversammlung {
+    besetzt     = { 560 610 }       # Sitze; Lücken durch den tschechischen Boykott
+    beteiligung = { 0.45 0.7 }      # Median der Wahlkreise; regional 40–75 %
+
+    block rechte {
+        fraktionen = { cafe_milani }                            # rund 40 Abgeordnete
+        anteil     = { 0.04 0.10 }
+    }
+    block rechtes_zentrum {
+        fraktionen = { casino landsberg }                       # rund 160
+        anteil     = { 0.22 0.34 }
+    }
+    block linkes_zentrum {
+        fraktionen = { augsburger_hof wuerttemberger_hof }      # rund 100–140
+        anteil     = { 0.13 0.25 }
+    }
+    block linke {
+        fraktionen = { westendhall deutscher_hof donnersberg }  # rund 140
+        anteil     = { 0.15 0.27 }
+    }
+    block fraktionslos {
+        fraktionen = { fraktionslos }                           # ein Viertel bis ein Drittel
+        anteil     = { 0.2 0.35 }
+    }
+}
+
+# Preußisches Abgeordnetenhaus 1849 (Dreiklassenwahlrecht): Plausibilität nach Abschnitt 7.8. Der
+# Boykott der Demokraten 1849 ist nicht abgebildet.
+wahl pr_abgeordnetenhaus {
+    block konservative_und_liberale {
+        stroemungen = { konservative liberale }
+        anteil      = { 0.6 1 }
+    }
+    block arbeiter {
+        stroemungen = { arbeiter }
+        anteil      = { 0 0.03 }
+    }
+}

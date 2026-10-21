@@ -50,5 +50,7 @@ staat BER {
         heer           = 6
         schulden       = 49000
         zollverein     = ja
+        verfassung     = keine
+        wahlrecht      = keines
     }
 }

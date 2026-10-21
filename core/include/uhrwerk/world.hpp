@@ -60,13 +60,14 @@ struct Profession {
     std::string id;
     std::string name;
     Stratum stratum = Stratum::Unten;
-    bool taxable = true;           // privilegierte Stände (Adel, Klerus) zahlen keine Kontribution
-    Fixed share_city;              // Anteil in Städten (0..1)
-    Fixed share_rural;             // Anteil auf dem Land (0..1)
-    bool agrarian = false;         // Ertrag hängt am Boden (Tragfähigkeit), seit M4
-    Fixed literacy;                // Alphabetisierung, Grundwert 0..1 (seit M4)
-    Index city_profession = kNone; // Beruf nach dem Zuzug in eine Stadt, kNone = derselbe (seit M4)
-    Fixed agrarian_levy;           // Anteil am Agrarertrag des Ortes (Grundrente, Zehnt), seit M5
+    bool taxable = true;                // privilegierte Stände (Adel, Klerus) zahlen keine Kontribution
+    Fixed share_city;                   // Anteil in Städten (0..1)
+    Fixed share_rural;                  // Anteil auf dem Land (0..1)
+    bool agrarian = false;              // Ertrag hängt am Boden (Tragfähigkeit), seit M4
+    Fixed literacy;                     // Alphabetisierung, Grundwert 0..1 (seit M4)
+    Index city_profession = kNone;      // Beruf nach dem Zuzug in eine Stadt, kNone = derselbe (seit M4)
+    Fixed agrarian_levy;                // Anteil am Agrarertrag des Ortes (Grundrente, Zehnt), seit M5
+    Fixed self_employed = Fixed::one(); // „selbstständig“ im Sinn des Wahlrechts 1848 (0..1), seit M8
 };
 
 /// Menge eines Gutes je Kopf und Jahr (Warenkorb, Erzeugung, Vorleistung), seit M5.
@@ -207,6 +208,166 @@ struct Railway {
     std::string source;
 };
 
+// ─── Politik (seit M8, docs/technik/politik.md) ─────────────────────────────
+
+/// Politische Strömung (politik.md Abschnitt 3.1), z. B. Liberale. Inhalt, kein Zustand.
+struct PoliticalCurrent {
+    std::string id;
+    std::string name;
+    Color color;
+    Fixed position; // Links-rechts-Achse: −100 Volkssouveränität … +100 monarchisches Prinzip
+};
+
+/// Interessengruppe (politik.md Abschnitt 3.3): Mitglieder nach Beruf, Konfession und Bildung,
+/// Neigung zu den Strömungen. In M8 statisch; Anteil und Einfluss je Staat sind abgeleitet.
+struct InterestGroup {
+    std::string id;
+    std::string name;
+    Color color;
+    std::vector<Fixed> professions; // Anteil der Mitglieder je Beruf (0..1), Länge = Berufe
+    std::vector<Fixed> confessions; // Faktor je Konfession (0..1); leer = alle Konfessionen
+    bool by_literacy = false;       // Mitgliedschaft zusätzlich × Alphabetisierung des Blocks
+    std::vector<Fixed> leaning;     // Neigung je Strömung, Summe 1
+    std::string source;
+};
+
+/// Verfassung eines Staates zum Startdatum (politik.md Abschnitt 4).
+enum class Constitution : std::uint8_t { None, Estates, Constitutional };
+/// Wahlrecht: wer wählt und mit welchem Gewicht.
+enum class Franchise : std::uint8_t { None, Estates, Census, ThreeClass, Manhood };
+/// Wahlsystem im Wahlkreis: absolute Mehrheit mit Stichwahl oder relative Mehrheit.
+enum class ElectoralSystem : std::uint8_t { Runoff, Plurality };
+
+/// Wahlordnung eines Staates (Landtag) oder einer Wahl.
+struct ElectoralLaw {
+    Franchise franchise = Franchise::None;
+    ElectoralSystem system = ElectoralSystem::Runoff;
+    bool indirect = false;  // Wahl über Wahlmänner
+    Fixed census_threshold; // Zensus: Steuern je Kopf und Jahr, ab denen ein Mann wählt
+
+    friend bool operator==(const ElectoralLaw&, const ElectoralLaw&) = default;
+};
+
+/// Fraktion eines Parlaments: Bereich auf der Links-rechts-Achse (politik.md Abschnitt 3.2).
+struct Faction {
+    std::string id; // z. B. "casino"
+    std::string name;
+    Color color;
+    Fixed from; // Untergrenze (eingeschlossen)
+    Fixed to;   // Obergrenze (eingeschlossen bei der obersten Fraktion)
+};
+
+/// Parlament mit seiner Wahl (common/parlamente.chron, politik.md Abschnitt 5.1). Inhalt.
+struct Parliament {
+    std::string id; // z. B. "nationalversammlung"
+    std::string name;
+    Index state = kNone;                 // kNone: Deutscher Bund (ebene = bund), sonst der Staat
+    std::int32_t seats = 0;              // Sollzahl der Sitze
+    Date election_day;                   // Wahltag
+    ElectoralLaw law;                    // Wahlrecht dieser Wahl
+    Date faction_day;                    // Stichtag der Fraktionen (vorher gelten die Strömungen)
+    std::vector<Index> boycott_cultures; // Wahlkreise mit Mehrheit dieser Kulturen wählen nicht …
+    std::vector<Index> boycott_markets; // … nur in diesen Märkten (Markt des ersten Ortes); leer = überall
+    std::vector<Faction> factions;      // nach Bereich aufsteigend, lückenlos von −100 bis +100
+    Index seat = kNone;                 // Tagungsort (Ort); bestimmt die Meldereihenfolge am Wahlabend
+    std::string source;
+};
+
+/// Arten des Wahlkampfs (seit M8, Schritt b2, politik.md Abschnitt 9).
+enum class CampaignAction : std::uint8_t { Rally, Leaflets, Club };
+inline constexpr std::size_t kCampaignActions = 3;
+
+/// Kosten und Wirkung einer Art des Wahlkampfs: Jede Aktion erhöht den Stand im Wahlkreis um
+/// wirkung × (1 − stand ÷ hoechstens), also mit abnehmendem Ertrag bis zur Obergrenze.
+struct CampaignRule {
+    Fixed cost;   // Taler aus den Mitteln der Strömung
+    Fixed effect; // Zuwachs des Standes bei Stand 0
+    Fixed cap;    // Obergrenze des Standes
+};
+
+/// Regeln der Wahlsimulation (common/wahlen.chron, politik.md Abschnitt 7). Spielwerte; Vektoren je
+/// Strömung, leer ohne Politik.
+struct ElectionRules {
+    Fixed male_share;       // Männer unter den Erwachsenen
+    Fixed young_of_age;     // Anteil der 15–29-Jährigen ab 25 (Wahlalter)
+    Fixed young_of_age_24;  // Anteil der 15–29-Jährigen ab 24 (Dreiklassenwahlrecht)
+    Fixed turnout_base;     // Beteiligung: Grundwert …
+    Fixed turnout_literacy; // … + je Alphabetisierung
+    Fixed turnout_city;     // … + in Städten
+    Fixed turnout_poverty;  // … − je Not (1 − Lebensstandard/100)
+    Fixed turnout_min;
+    Fixed turnout_max;
+    Fixed poverty_below;         // Lebensstandard, unter dem die Not die Neigung verschiebt
+    std::vector<Fixed> base;     // Neigung der Blöcke, soweit sie keiner Interessengruppe angehören
+    std::vector<Fixed> literacy; // Verschiebung je Alphabetisierung (−1..1)
+    std::vector<Fixed> poverty;  // Verschiebung bei voller Not (Lebensstandard 0)
+    std::vector<Fixed> city;     // Verschiebung in Städten
+    std::vector<Fixed> electors; // Faktor bei indirekter Wahl über Wahlmänner (Standard 1)
+    Fixed noise;                 // Rauschen je Wahlkreis und Strömung (±, relativ)
+    Fixed position_pull;         // Zug der Abgeordneten zur Mitte ihres Wahlkreises (0..1)
+    Fixed position_noise;        // Rauschen der Position (± Punkte)
+    Fixed independent_share;     // Anteil der fraktionslosen Abgeordneten
+    // Wahlkampf (seit Schritt b2, Abschnitt 9)
+    Fixed donations;                                       // Spende: Anteil am Monatseinkommen der Anhänger
+    std::array<CampaignRule, kCampaignActions> campaign{}; // je CampaignAction
+    Fixed poll_error;                                      // Stimmungsbericht: ± Prozentpunkte (Anzeige)
+};
+
+/// Wahlkampf einer Strömung in einem Wahlkreis (Zustand seit M8, Schritt b2).
+struct CampaignState {
+    Fixed mobilization; // Versammlungen: Stimmen der Strömung × (1 + Mobilisierung), bis zum Wahltag
+    Fixed persuasion;   // Flugblätter: Neigung + je Alphabetisierung, bis zum Wahltag
+    Fixed club;         // Vereine: bleibende Mobilisierung
+};
+
+/// Region mit eigener Wahlneigung (common/wahlen.chron): Staaten und Märkte (Landschaften).
+struct PoliticalRegion {
+    std::string id;
+    std::vector<Index> states;
+    std::vector<Index> markets;
+    std::vector<Fixed> leaning; // Verschiebung je Strömung (−1..1)
+};
+
+/// Ergebnis eines Wahlkreises (Zustand seit M8, politik.md Abschnitt 7.7).
+struct DistrictResult {
+    Index district = kNone;       // in World::electoral_districts
+    Fixed electorate;             // Wahlberechtigte
+    Fixed voters;                 // Wähler
+    std::vector<Fixed> votes;     // Stimmen je Strömung nach Gewichten (Dreiklassen, Wahlmänner, Rauschen)
+    Index winner = kNone;         // Strömung; kNone bei Boykott oder ohne Wähler
+    bool runoff = false;          // durch Stichwahl entschieden
+    bool boycott = false;         // Wahlkreis hat nicht gewählt
+    std::int32_t report_rank = 0; // Meldereihenfolge am Wahlabend (0 = zuerst)
+};
+
+/// Gewählter Abgeordneter (Zustand seit M8).
+struct Deputy {
+    Index district = kNone;
+    Index current = kNone;
+    Fixed position;        // Links-rechts-Achse
+    Index faction = kNone; // kNone = fraktionslos
+};
+
+/// Ergebnis einer Wahl (Zustand seit M8).
+struct ElectionResult {
+    Index parliament = kNone;
+    Date day;
+    std::vector<DistrictResult> districts; // in der Reihenfolge der Wahlkreise des Parlaments
+    std::vector<Deputy> deputies;          // je Wahlkreis und Sitz
+};
+
+/// Wahlkreis eines Parlaments (history/wahlkreise/*.chron, politik.md Abschnitt 5.3). Inhalt; die Orte
+/// gehören zum Startdatum dem Staat des Wahlkreises.
+struct ElectoralDistrict {
+    std::string id; // z. B. "nv_bad_10"
+    std::string name;
+    Index parliament = kNone;
+    Index state = kNone;
+    std::int32_t seats = 1;       // mehrere Sitze für große Städte (Berlin, Wien)
+    std::vector<Index> locations; // in der Reihenfolge der Datei
+    std::string source;
+};
+
 /// Haushalt eines Staates in einem Monat, festgestellt an seinem Rechentag (seit M5,
 /// docs/technik/wirtschaft.md Abschnitt 4.6). Beträge in Reichstalern.
 struct StateBudget {
@@ -247,6 +408,8 @@ struct State {
     std::int32_t premium_months = 0; // Monate mit Zinsaufschlag nach einem Staatsbankrott
     std::int32_t bankruptcies = 0;   // Zahl der Staatsbankrotte in dieser Partie
     bool customs_union = false;      // Mitglied des Zollvereins (seit M7; Inhalt, bis M9 ohne Wirkung)
+    Constitution constitution = Constitution::None; // zum Startdatum (seit M8, Inhalt)
+    ElectoralLaw law;                               // Wahlordnung des Landtags (seit M8, Inhalt)
 
     Fixed tax_rate(TaxKind kind) const { return tax_rates[static_cast<std::size_t>(kind)]; }
 };
@@ -398,8 +561,14 @@ struct World {
     std::vector<std::string> deposits;    // Vorkommen (Kennungen aus betriebe.chron), seit M5
     std::vector<State> states;
     std::vector<District> districts;
-    std::vector<AdminUnit> admin_units; // seit M7
-    std::vector<Railway> railways;      // seit M7
+    std::vector<AdminUnit> admin_units;                 // seit M7
+    std::vector<Railway> railways;                      // seit M7
+    std::vector<PoliticalCurrent> currents;             // seit M8
+    std::vector<InterestGroup> interest_groups;         // seit M8
+    std::vector<Parliament> parliaments;                // seit M8, nur die des Szenarios ('seit')
+    std::vector<ElectoralDistrict> electoral_districts; // seit M8, die Wahlkreise dieser Parlamente
+    ElectionRules election_rules;                       // seit M8
+    std::vector<PoliticalRegion> political_regions;     // seit M8
     std::vector<Location> locations;
     std::vector<PopBlock> pops;
     std::vector<ChronicleEntry> chronicle;
@@ -423,6 +592,10 @@ struct World {
         location_coverage; // Bedarfsdeckung 0..1: [(ort × berufe + beruf) × bedürfnisse + bedürfnis]
     std::vector<Fixed> location_development; // Landesausbau: verbaute Reichstaler je Ort (Abschnitt 4.6)
     std::vector<MarketState> market_states;  // parallel zu markets
+    std::vector<ElectionResult> elections;   // seit M8: abgehaltene Wahlen in zeitlicher Folge
+    std::vector<CampaignState> campaign;     // seit M8 (b2): [wahlkreis × strömungen + strömung]
+    std::vector<Fixed> party_funds;          // seit M8 (b2): Mittel je Strömung (Taler)
+    std::vector<Fixed> party_donations;      // seit M8 (b2): Spenden des letzten Monats je Strömung
 
     Index find_state(std::string_view tag) const;
     Index find_location(std::string_view id) const;
@@ -436,6 +609,9 @@ struct World {
     Index find_need(std::string_view id) const;
     Index find_business(std::string_view id) const;
     Index find_market(std::string_view id) const;
+    Index find_current(std::string_view id) const;        // seit M8
+    Index find_interest_group(std::string_view id) const; // seit M8
+    Index find_parliament(std::string_view id) const;     // seit M8
 
     /// Personen in den Blöcken des Ortes und in seinen Zugängen (arrivals).
     Fixed location_population(Index location) const;

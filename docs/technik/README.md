@@ -14,6 +14,7 @@ ist (Stand: Meilenstein M3, Karte des Kernraums).
 | [wirtschaft.md](wirtschaft.md) | **M5 (verbindlich):** Güter, Betriebe, Märkte und Handel, Verbrauch nach Warenkorb, Steuerarten, Staatshaushalt mit Kredit und Bankrott, Balancing-Bericht, Abnahme | Kern, `data/`, Archivar |
 | [speicherstaende.md](speicherstaende.md) | **Verbindlich seit M6:** Spielstände (Zustandsverzeichnis für Prüfsumme, Speichern, Laden und Textexport; Format mit zstd; Inhaltsfingerabdruck; Prüfungen beim Laden; Versionen), Befehlsprotokoll und Wiederholung, Kommandozeile, Spielmenü in Godot, Abnahme mit Messwerten | Kern, Kommandozeile, Brücke, Godot-Projekt |
 | [lesezeichen_1848.md](lesezeichen_1848.md) | **Verbindlich seit M7:** Lesezeichen „Völkerfrühling“ (1.3.1848): Quellen, Staaten des Deutschen Bundes, Zuordnung der Orte, Verwaltungsgliederung, Bevölkerung 1846, Eisenbahnen, frühe Industrie, Haushalte und Kalibrierung, Staatswahl, Abnahme, Entscheidungen, Umsetzungsstand | Daten, Werkzeuge, Kern, Godot-Projekt |
+| [politik.md](politik.md) | **Entwurf M8:** Strömungen und Fraktionen der Paulskirche, Interessengruppen, Verfassung und Wahlrecht je Staat, Parlamente und Wahlkreise, Wahlsimulation, Wahllabor, Wahlabend, Parteienmodus, offene Entscheidungen | Daten, Werkzeuge, Kern, Godot-Projekt (nach Freigabe) |
 
 Die öffentlichen Header in [`core/include/uhrwerk/`](../../core/include/uhrwerk/) sind die
 verbindliche Programmierschnittstelle des Kerns. Jede Datei beginnt mit einem Kommentar, der ihre

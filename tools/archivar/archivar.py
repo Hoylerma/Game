@@ -59,6 +59,7 @@ SPALTEN: dict[str, tuple[str, ...]] = {
     "kreise.csv": ("id", "datei", "name", "quelle"),
     "verwaltung.csv": ("id", "datei", "name", "art", "ueber", "staat", "sitz", "sicherheit", "quelle"),
     "eisenbahnen.csv": ("strecke", "datei", "name", "von", "bis", "eroeffnet", "sicherheit", "quelle"),
+    "wahlkreise.csv": ("wahlkreis", "parlament", "staat", "name", "sitze", "orte", "sicherheit", "quelle"),
     "besitz.csv": ("ort", "ab", "besitzer", "verwaltung", "bund", "sicherheit", "quelle"),
     "bevoelkerung.csv": (
         "ort",
@@ -88,7 +89,19 @@ STAAT_FELDER = (
     "heer",
     "schulden",
     "zollverein",
+    "verfassung",
+    "wahlrecht",
+    "wahlsystem",
+    "wahl_indirekt",
+    "wahl_zensus",
 )
+# Werte der politischen Felder (seit M8, docs/technik/politik.md Abschnitt 4).
+POLITIK_WERTE = {
+    "verfassung": ("keine", "staendisch", "konstitutionell"),
+    "wahlrecht": ("keines", "staendisch", "zensus", "dreiklassen", "allgemein_maenner"),
+    "wahlsystem": ("stichwahl", "relativ"),
+    "wahl_indirekt": ("ja", "nein"),
+}
 # Felder, die zu jedem Szenariodatum bekannt sein müssen (name/kurzname kommen aus staaten.csv).
 STAAT_PFLICHT = (
     "hauptstadt",
@@ -106,7 +119,7 @@ STEUER_FELDER = frozenset({"kontribution", "akzise", "zoll"})
 TEXT_FELDER = frozenset({"name", "kurzname", "herrscher", "quelle"})
 
 RE_ORT = re.compile(r"[a-z0-9_]+")
-ORDNER = ("eisenbahnen", "kreise", "orte", "staaten", "verwaltung")  # Unterordner von history/, die der Archivar erzeugt
+ORDNER = ("eisenbahnen", "kreise", "orte", "staaten", "verwaltung", "wahlkreise")  # Unterordner von history/, die der Archivar erzeugt
 RE_TAG = re.compile(r"[A-Z0-9]{2,4}")
 RE_DATEI = re.compile(r"[A-Za-z0-9_]+")
 RE_KENNUNG = re.compile(r"[a-z][a-z0-9_]*")
@@ -367,6 +380,7 @@ class Archiv:
     kreise: dict[str, Zeile] = field(default_factory=dict)  # in Tabellenreihenfolge
     verwaltung: dict[str, Zeile] = field(default_factory=dict)  # Verwaltungseinheiten (seit M7)
     eisenbahnen: dict[str, Strecke] = field(default_factory=dict)  # Eisenbahnstrecken (seit M7)
+    wahlkreise: dict[str, Zeile] = field(default_factory=dict)  # Wahlkreise (seit M8), Tabellenreihenfolge
     staaten: dict[str, Staat] = field(default_factory=dict)
     kommentare: dict[tuple[str, str], str] = field(default_factory=dict)  # (ordner, datei) → Text
     kulturen: dict[str, str] = field(default_factory=dict)  # Datei in history/orte → Standardkultur
@@ -527,6 +541,53 @@ def pruefe_eisenbahnen(archiv: Archiv, m: Meldungen) -> None:
         name = strecke.zeile["name"]
         if (andere := namen.setdefault(name, kennung)) != kennung:
             m.warnung_bei(strecke.zeile.datei, strecke.zeile.nr, f"Strecke {kennung} heißt wie Strecke {andere} ('{name}')")
+
+
+def pruefe_wahlkreise(archiv: Archiv, m: Meldungen) -> None:
+    """Wahlkreise (seit M8, docs/technik/politik.md Abschnitt 5.3): je Zeile ein Wahlkreis eines Parlaments.
+
+    Die Datei ist das Parlament (history/wahlkreise/<parlament>.chron). Ein Ort gehört in einem
+    Parlament höchstens zu einem Wahlkreis; ob das Parlament besteht und wem die Orte gehören, prüft
+    der Kern zum Startdatum.
+    """
+    je_parlament: dict[str, dict[str, Zeile]] = {}
+    for z in archiv.zeilen["wahlkreise.csv"]:
+        _herkunft(z, m)
+        kennung = z["wahlkreis"]
+        if not RE_ORT.fullmatch(kennung):
+            m.fehler_bei(z.datei, z.nr, f"ungültige Kennung '{kennung}' für einen Wahlkreis (a–z, 0–9, _)")
+            continue
+        if kennung in archiv.wahlkreise:
+            m.fehler_bei(z.datei, z.nr, f"Wahlkreis {kennung} ist doppelt (zuerst in Zeile {archiv.wahlkreise[kennung].nr})")
+            continue
+        if not RE_ORT.fullmatch(z["parlament"]):
+            m.fehler_bei(z.datei, z.nr, f"ungültige Kennung '{z['parlament']}' für ein Parlament (a–z, 0–9, _)")
+            continue
+        if z["staat"] not in archiv.staaten:
+            m.fehler_bei(z.datei, z.nr, f"unbekannter Staat '{z['staat']}' für Wahlkreis {kennung}")
+            continue
+        if not (_pflicht(z, "name", m) and _einzeilig(z, "name", m)):
+            continue
+        if not z["sitze"].isdigit() or int(z["sitze"]) < 1:
+            m.fehler_bei(z.datei, z.nr, f"'sitze' erwartet eine Ganzzahl ab 1, nicht '{z['sitze']}'")
+            continue
+        orte = z["orte"].split()
+        if not orte:
+            m.fehler_bei(z.datei, z.nr, f"Wahlkreis {kennung} hat keinen Ort")
+            continue
+        vergeben = je_parlament.setdefault(z["parlament"], {})
+        ok = True
+        for ort in orte:
+            if ort not in archiv.orte:
+                m.fehler_bei(z.datei, z.nr, f"unbekannter Ort '{ort}' in Wahlkreis {kennung}")
+                ok = False
+            elif ort in vergeben:
+                m.fehler_bei(z.datei, z.nr, f"Ort {ort} liegt schon in Wahlkreis {vergeben[ort]['wahlkreis']} (Zeile {vergeben[ort].nr})")
+                ok = False
+            else:
+                vergeben[ort] = z
+        if ok:
+            archiv.wahlkreise[kennung] = z
 
 
 def baue_archiv(tabellen: Path, bezug: Bezug, m: Meldungen) -> Archiv:
@@ -751,6 +812,7 @@ def baue_archiv(tabellen: Path, bezug: Bezug, m: Meldungen) -> Archiv:
             eintraege.sort(key=lambda e: e.datum)
 
     pruefe_eisenbahnen(archiv, m)
+    pruefe_wahlkreise(archiv, m)
 
     # Kopfkommentare
     gesehen = {}
@@ -759,6 +821,7 @@ def baue_archiv(tabellen: Path, bezug: Bezug, m: Meldungen) -> Archiv:
     benutzt |= {("kreise", k["datei"]) for k in archiv.kreise.values()}
     benutzt |= {("verwaltung", v["datei"]) for v in archiv.verwaltung.values()}
     benutzt |= {("eisenbahnen", s.zeile["datei"]) for s in archiv.eisenbahnen.values()}
+    benutzt |= {("wahlkreise", w["parlament"]) for w in archiv.wahlkreise.values()}
     for z in archiv.zeilen["dateien.csv"]:
         if z["ordner"] not in ORDNER:
             m.fehler_bei(
@@ -820,6 +883,11 @@ def _pruefe_staatswert(z: Zeile, feld_name: str, wert: str, archiv: Archiv, bezu
     if feld_name == "zollverein" and wert not in ("ja", "nein"):
         m.fehler_bei(z.datei, z.nr, f"'zollverein' erwartet ja oder nein, nicht '{wert}'")
         return False
+    if feld_name in POLITIK_WERTE and wert not in POLITIK_WERTE[feld_name]:
+        m.fehler_bei(z.datei, z.nr, f"'{feld_name}' erwartet {', '.join(POLITIK_WERTE[feld_name])}, nicht '{wert}'")
+        return False
+    if feld_name == "wahl_zensus":
+        return _dezimal(z, "wert", 0, 1e6, m, wert) is not None
     if feld_name in TEXT_FELDER and hat_zeilenumbruch(wert):
         m.fehler_bei(z.datei, z.nr, f"Zeilenumbruch im Wert für '{feld_name}'")
         return False
@@ -1034,6 +1102,18 @@ def strecke_text(strecke: Strecke) -> list[str]:
     return [f"strecke {erste['strecke']} {{", *_ausgerichtet(paare, "    "), "}"]
 
 
+def wahlkreis_text(z: Zeile) -> list[str]:
+    paare = [
+        ("name", chron_text(z["name"])),
+        ("parlament", z["parlament"]),
+        ("staat", z["staat"]),
+        ("sitze", z["sitze"]),
+        ("orte", "{ " + " ".join(z["orte"].split()) + " }"),
+        ("quelle", chron_text(z["quelle"])),
+    ]
+    return [f"wahlkreis {z['wahlkreis']} {{", *_ausgerichtet(paare, "    "), "}"]
+
+
 def erzeuge(archiv: Archiv) -> dict[str, str]:
     """Alle Ausgabedateien: relativer Pfad (z. B. history/orte/anhalt.chron) → Inhalt."""
     gruppen: dict[tuple[str, str], list[list[str]]] = {}
@@ -1046,6 +1126,8 @@ def erzeuge(archiv: Archiv) -> dict[str, str]:
     for strecke in archiv.eisenbahnen.values():
         if strecke.abschnitte:
             gruppen.setdefault(("eisenbahnen", strecke.zeile["datei"]), []).append(strecke_text(strecke))
+    for wahlkreis in archiv.wahlkreise.values():
+        gruppen.setdefault(("wahlkreise", wahlkreis["parlament"]), []).append(wahlkreis_text(wahlkreis))
     for ort in archiv.orte.values():
         gruppen.setdefault(("orte", ort.zeile["datei"]), []).append(ort_text(ort, archiv))
     ausgabe: dict[str, str] = {}
@@ -1109,12 +1191,13 @@ def bericht(archiv: Archiv, bezug: Bezug) -> str:
             f"Orte: {len(archiv.orte)}, Kreise: {len(archiv.kreise)}, Staaten: {len(archiv.staaten)}, "
             f"Verwaltungseinheiten: {len(archiv.verwaltung)}, "
             f"Eisenbahnstrecken: {len(archiv.eisenbahnen)} "
-            f"({sum(len(s.abschnitte) for s in archiv.eisenbahnen.values())} Abschnitte)"
+            f"({sum(len(s.abschnitte) for s in archiv.eisenbahnen.values())} Abschnitte), "
+            f"Wahlkreise: {len(archiv.wahlkreise)}"
         ),
         "",
         "Sicherheit der Angaben je Tabelle:",
     ]
-    for name in ("besitz.csv", "bevoelkerung.csv", "staaten_historie.csv", "verwaltung.csv", "eisenbahnen.csv"):
+    for name in ("besitz.csv", "bevoelkerung.csv", "staaten_historie.csv", "verwaltung.csv", "eisenbahnen.csv", "wahlkreise.csv"):
         zaehler = Counter(z["sicherheit"] for z in archiv.zeilen.get(name, []))
         teile = ", ".join(f"{s} {zaehler[s]}" for s in SICHERHEIT if zaehler[s])
         zeilen.append(f"  {name:<22} {len(archiv.zeilen.get(name, [])):>5} Zeilen  ({teile or '–'})")

@@ -60,12 +60,17 @@ Werte werden als Text aus der Tabelle übernommen (keine Gleitkomma-Umwandlung).
 
 - `verwaltung.csv` erzeugt `history/verwaltung/<datei>.chron` (Verwaltungseinheiten mit Art,
   übergeordneter Einheit und Sitz); `besitz.csv` setzt je Ort und Datum auch `verwaltung` und
-  `bund`, `staaten_historie.csv` das Feld `zollverein`. Unbekannte Einheiten, Kreise in `ueber` und
+  `bund`, `staaten_historie.csv` das Feld `zollverein` (seit M8 auch `verfassung`, `wahlrecht`,
+  `wahlsystem`, `wahl_indirekt` und `wahl_zensus`). Unbekannte Einheiten, Kreise in `ueber` und
   eine Einheit eines anderen Staates sind Fehler.
 - `eisenbahnen.csv` erzeugt `history/eisenbahnen/<datei>.chron`: je Zeile ein Abschnitt einer
   Strecke. Unbekannte Orte, gleicher Anfang und gleiches Ende und doppelte Abschnitte (auch auf
   verschiedenen Strecken) sind Fehler, Abschnitte über 120 km und gleiche Namen verschiedener
   Strecken Warnungen.
+- `wahlkreise.csv` (seit M8) erzeugt `history/wahlkreise/<parlament>.chron`: je Zeile ein Wahlkreis
+  mit Staat, Sitzen und Orten. Unbekannte Orte und Staaten, ein Ort in zwei Wahlkreisen desselben
+  Parlaments und Sitze unter 1 sind Fehler; ob das Parlament besteht und wem die Orte gehören,
+  prüft der Kern.
 - Ein Staat ohne Ort zum Szenariodatum besteht in diesem Szenario nicht; seine Pflichtfelder werden
   dort nicht verlangt. Spielerstaat und spielbare Staaten (`spielbar`) müssen zum Szenariodatum
   bestehen.

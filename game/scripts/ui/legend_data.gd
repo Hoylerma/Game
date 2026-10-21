@@ -288,6 +288,84 @@ static func railway_entries(sim: SimulationClient) -> Array[Dictionary]:
 	return entries
 
 
+## Farben des Kartenmodus „Wahlen“ wie in der Brücke (seit M8): außerhalb des Wahlgebiets, Boykott.
+const ELECTION_OUTSIDE := Color(0.90, 0.88, 0.82)
+const ELECTION_BOYCOTT := Color(0.76, 0.79, 0.84)
+
+
+## Titel der Legende im Kartenmodus „Wahlen“ mit dem Jahr der gezeigten Wahl (seit M8).
+static func election_title(sim: SimulationClient) -> String:
+	var parliament := sim.get_shown_parliament()
+	var parliaments := sim.get_parliaments()
+	if parliament < 0 or parliament >= parliaments.size():
+		return MapModes.name_of(MapModes.MAP_WAHLEN)
+	var date: Dictionary = parliaments[parliament].get("election_date", {})
+	return "Wahlen %d" % int(date.get("year", 0))
+
+
+## Einträge im Kartenmodus „Wahlen“ (seit M8): vor der Wahl die Wahlkreise, danach die Sitze je
+## Strömung und der Boykott; dazu die Orte außerhalb des Wahlgebiets. Leer ohne Parlament.
+static func election_entries(sim: SimulationClient) -> Array[Dictionary]:
+	var entries: Array[Dictionary] = []
+	var parliament_index := sim.get_shown_parliament()
+	var parliaments := sim.get_parliaments()
+	if parliament_index < 0 or parliament_index >= parliaments.size():
+		return entries
+	var parliament := parliaments[parliament_index]
+	var colors := sim.get_map_colors(MapModes.MAP_WAHLEN)
+	var districts := sim.get_location_electoral_district_indices(parliament_index)
+	var outside := 0
+	var sample := Color.TRANSPARENT
+	for i in mini(colors.size(), districts.size()):
+		if colors[i].a <= 0.0:
+			continue
+		if districts[i] < 0:
+			outside += 1
+		elif sample.a <= 0.0:
+			sample = colors[i]
+	var election_index := int(parliament.get("election_index", -1))
+	var parliament_name := str(parliament.get("name", ""))
+	if election_index < 0:
+		entries.append({
+			"color": sample if sample.a > 0.0 else UiPalette.PAPER_DEEP,
+			"text": "Wahlkreise",
+			"detail": "%s: %s Wahlkreise, %s Sitze; Wahl am %s" % [
+				parliament_name,
+				GermanFormat.integer(int(parliament.get("district_count", 0))),
+				GermanFormat.integer(int(parliament.get("seats", 0))),
+				str(parliament.get("election_date_text", "")),
+			],
+		})
+	else:
+		var election := sim.get_election(election_index)
+		var currents := sim.get_currents()
+		var seats: PackedInt32Array = election.get("seats_by_current", PackedInt32Array())
+		for c in mini(currents.size(), seats.size()):
+			if seats[c] <= 0:
+				continue
+			entries.append({
+				"color": currents[c].get("color", UiPalette.BAR_NEUTRAL),
+				"text": str(currents[c].get("name", "")),
+				"detail": "%s Sitze (%s); hell bei knappem Sieg" % [
+					GermanFormat.integer(seats[c]), parliament_name
+				],
+			})
+		var empty := int(election.get("boycott_seats", 0))
+		if empty > 0:
+			entries.append({
+				"color": ELECTION_BOYCOTT,
+				"text": "Boykott",
+				"detail": "%s Sitze leer" % GermanFormat.integer(empty),
+			})
+	if outside > 0:
+		entries.append({
+			"color": ELECTION_OUTSIDE,
+			"text": "außerhalb des Wahlgebiets",
+			"detail": count_text(outside),
+		})
+	return entries
+
+
 ## Verlauf für einen Kartenmodus mit Zahlenwerten im Ortsfeld field (0..scale_max).
 static func gradient_for(
 	sim: SimulationClient, mode: int, field: String, scale_max: float

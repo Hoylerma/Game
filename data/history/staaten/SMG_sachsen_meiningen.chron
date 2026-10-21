@@ -22,5 +22,7 @@ staat SMG {
         heer           = 6
         schulden       = 132000
         zollverein     = ja
+        verfassung     = konstitutionell
+        wahlrecht      = staendisch
     }
 }

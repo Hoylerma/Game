@@ -22,5 +22,7 @@ staat HHO {
         heer           = 6
         schulden       = 20000
         zollverein     = ja
+        verfassung     = keine
+        wahlrecht      = keines
     }
 }

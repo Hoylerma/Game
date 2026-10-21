@@ -12,6 +12,7 @@ data/tabellen/
 ├── kreise.csv             Kreise (seit M3)
 ├── verwaltung.csv         Verwaltungseinheiten der Staaten (seit M7)
 ├── eisenbahnen.csv        Eisenbahnstrecken: Abschnitte von Ort zu Ort mit Eröffnung (seit M7)
+├── wahlkreise.csv         Wahlkreise der Parlamente mit Staat, Sitzen und Orten (seit M8)
 ├── staaten.csv            Stammdaten der Staaten
 ├── besitz.csv             Besitzer, Verwaltung und Bundesgebiet je Ort mit Datum
 ├── bevoelkerung.csv       Bevölkerung, Konfession, Kultur und Verwüstung je Ort und Stichtag
@@ -143,7 +144,7 @@ Bevölkerungsangabe oder keines von beiden.
 |---|---|
 | `tag` | Staatstag |
 | `ab` | Datum, ab dem der Wert gilt |
-| `feld` | `name`, `kurzname`, `hauptstadt`, `regierungsform`, `herrscher`, `konfession`, `schatz`, `kontribution`, `akzise`, `zoll`, `hofhaltung`, `heer`, `schulden` (die letzten fünf und die drei Steuern seit M5; `steuersatz` heißt seit M5 `kontribution`), `zollverein` (seit M7, `ja`/`nein`) |
+| `feld` | `name`, `kurzname`, `hauptstadt`, `regierungsform`, `herrscher`, `konfession`, `schatz`, `kontribution`, `akzise`, `zoll`, `hofhaltung`, `heer`, `schulden` (die letzten fünf und die drei Steuern seit M5; `steuersatz` heißt seit M5 `kontribution`), `zollverein` (seit M7, `ja`/`nein`); seit M8 `verfassung` (`keine`, `staendisch`, `konstitutionell`), `wahlrecht` (`keines`, `staendisch`, `zensus`, `dreiklassen`, `allgemein_maenner`), `wahlsystem` (`stichwahl`, `relativ`), `wahl_indirekt` (`ja`/`nein`), `wahl_zensus` (Zahl) |
 | `wert` | Wert im Format des Felds (Ortskennung, Konfessionskennung, Zahl, Text) |
 | `sicherheit`, `quelle` | siehe oben |
 
@@ -167,11 +168,26 @@ Ort fällt weg, oder ein Nachbarort steht für sie (Altona durch Hamburg, Harbur
 Wulmstorf, Ludwigshafen durch Frankenthal). Wirkung im Spiel: [chronik-skript.md](chronik-skript.md),
 Abschnitt 3.17.
 
+## `wahlkreise.csv` (seit M8)
+
+| Spalte | Inhalt |
+|---|---|
+| `wahlkreis` | Kennung (a–z, 0–9, `_`), eindeutig, z. B. `nv_bad_10` |
+| `parlament` | Kennung aus `common/parlamente.chron`; zugleich die Datei in `history/wahlkreise/` |
+| `staat` | Staatstag; alle Orte gehören zum Startdatum diesem Staat (prüft der Kern) |
+| `name` | Name, meist der einwohnerstärkste Ort |
+| `sitze` | Zahl der Abgeordneten, ab 1 (Großstädte mehrere) |
+| `orte` | Ortskennungen, durch Leerzeichen getrennt; je Parlament jeder Ort höchstens einmal |
+| `sicherheit`, `quelle` | siehe oben |
+
+Erzeugt von `tools/geodaten/wahlkreise_1848.py` ([politik.md](politik.md), Abschnitt 5.3); die Summe der
+Sitze eines Parlaments muss seiner Sollzahl entsprechen (prüft der Kern).
+
 ## `dateien.csv`
 
 | Spalte | Inhalt |
 |---|---|
-| `ordner` | `orte`, `staaten`, `kreise`, `verwaltung` oder `eisenbahnen` (beide seit M7) |
+| `ordner` | `orte`, `staaten`, `kreise`, `verwaltung` oder `eisenbahnen` (beide seit M7), `wahlkreise` (seit M8) |
 | `datei` | Dateiname ohne Endung |
 | `kultur` | seit M4, nur für `orte`: Standardkultur der Landschaft, z. B. `maerker=100` oder `obersachsen=70 sorben=30`; sonst leer |
 | `kommentar` | mehrzeiliger Text; erscheint als Kopfkommentar der erzeugten Datei |
@@ -223,6 +239,8 @@ Sie erzeugen daraus die Zeilen von `besitz.csv` zum 1848.03.01 und von `bevoelke
 - seit M7: unbekannte Verwaltungseinheit (in `besitz.csv` oder als `ueber`), Einheit eines anderen
   Staates als der Besitzer bzw. die übergeordnete Einheit, Zyklus über `ueber`, `bund` und
   `zollverein` weder `ja`, `nein` noch leer
+- seit M8: ein Wert von `verfassung`, `wahlrecht`, `wahlsystem` oder `wahl_indirekt` außerhalb der
+  erlaubten Werte, `wahl_zensus` keine Zahl von 0 bis 1.000.000
 
 **Warnungen** (Ausreißer, vermutlich Tippfehler):
 

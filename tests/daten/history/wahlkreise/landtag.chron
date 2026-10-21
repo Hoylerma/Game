@@ -1,0 +1,17 @@
+# Testdaten: Wahlkreise des sächsischen Landtags (seit M8)
+wahlkreis lt_dresden {
+    name      = "Dresden"
+    parlament = landtag
+    staat     = SAX
+    sitze     = 3
+    orte      = { dresden }
+    quelle    = "Testdaten"
+}
+
+wahlkreis lt_leipzig {
+    name      = "Leipzig"
+    parlament = landtag
+    staat     = SAX
+    orte      = { leipzig }
+    quelle    = "Testdaten"
+}

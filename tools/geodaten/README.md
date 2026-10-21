@@ -20,7 +20,8 @@ Rasterregel, Dateien unter `data/karte/geometrie/`); Inhalt des Kernraums:
 | `zuordnung.py`, `gebietscodes.csv` | Lesezeichen 1848 (M7): Besitzer, Bundesgebiet und Verwaltung der Orte aus Regeln (siehe [Lesezeichen 1848](#lesezeichen-1848-zuordnungpy-bevoelkerung_1846py)); `gebietscodes.csv` = heutige Verwaltungscodes und Einwohner je Ort aus GeoNames (erzeugt) |
 | `bevoelkerung_1846.py` | Lesezeichen 1848 (M7): Bevölkerung der Orte zum 3. Dezember 1846 (Schätzung aus Summen) |
 | `stichprobe_1848.py` | Lesezeichen 1848 (M7): reproduzierbare Stichprobe und Flächensummen für die Prüfung ([stichprobe_1848.md](../../docs/pruefung/stichprobe_1848.md)) |
-| `test_geodaten.py`, `test_orte.py`, `test_zuordnung.py`, `test_bevoelkerung_1846.py`, `test_stichprobe_1848.py`, `testdaten/` | Tests ohne Netz und ohne Zwischenspeicher |
+| `wahlkreise_1848.py` | Wahlkreise der Nationalversammlung 1848 und des Preußischen Abgeordnetenhauses 1849 (seit M8, `data/tabellen/wahlkreise.csv`) |
+| `test_geodaten.py`, `test_orte.py`, `test_zuordnung.py`, `test_bevoelkerung_1846.py`, `test_stichprobe_1848.py`, `test_wahlkreise_1848.py`, `testdaten/` | Tests ohne Netz und ohne Zwischenspeicher |
 
 Erzeugt bzw. gepflegt in `data/karte/`:
 
@@ -470,7 +471,23 @@ python3 tools/geodaten/zuordnung.py --liste SAX       # Orte eines Staates zur S
 python3 tools/geodaten/bevoelkerung_1846.py --bericht # Einwohner und Dichte je Raum, größte Orte
 python3 tools/geodaten/zuordnung.py codes             # gebietscodes.csv aus GeoNames neu (Zwischenspeicher)
 python3 tools/geodaten/stichprobe_1848.py             # Stichprobe (Seed 1848) und Flächensummen als Markdown
+python3 tools/geodaten/wahlkreise_1848.py             # wahlkreise.csv (seit M8): Wahlkreise der Parlamente 1848/49
+python3 tools/geodaten/wahlkreise_1848.py --pruefen   # Exitcode 1, wenn wahlkreise.csv nicht zur Neuberechnung passt
 ```
+
+**Wahlkreise (seit M8).** `wahlkreise_1848.py` bildet die Wahlkreise der Parlamente aus
+`data/common/parlamente.chron` ([politik.md](../../docs/technik/politik.md), Abschnitt 5.3):
+1. Das Wahlgebiet der Nationalversammlung umfasst das Bundesgebiet und die im April 1848
+   zugelassenen Gebiete Preußens und Dänemarks; ein Landtag wählt in seinem Staat.
+2. Die Sitze verteilen sich nach der Bevölkerung 1846 auf die Staaten (Hare-Niemeyer, jeder Staat
+   mindestens einen) und innerhalb eines Staates auf seine Regionen: Regierungsbezirke, Kronländer
+   oder Landschaften.
+3. Orte mit dem 1,5-Fachen der Zielgröße werden eigene Wahlkreise mit mehreren Sitzen.
+4. Die übrigen Kreise schneidet das Werkzeug entlang einer Hilbert-Kurve in Gruppen gleicher
+   Einwohnerzahl.
+
+Die Rechnung ist deterministisch und braucht keinen Zwischenspeicher; die CI prüft mit
+`--pruefen`, dass die Tabelle aktuell ist.
 
 **Zuordnung.** Es gibt keine Grenzgeometrie von 1848; die Regeln in `territorien_1848.csv` greifen
 auf die heutigen Verwaltungseinheiten der Orte (GeoNames: Land, admin1–admin3), die Landschaften

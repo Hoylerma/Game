@@ -30,6 +30,8 @@ const BALANCE_FIELDS: Array[Array] = [
 signal close_requested
 ## „Diesen Staat spielen“ gedrückt (seit M7): Besitzer des Ortes als Spielerstaat.
 signal play_state_requested(state_index: int)
+## Wahlkampf der eigenen Strömung im Wahlkreis (seit M8, Parteienmodus).
+signal campaign_requested(district: int, action: int)
 
 ## Farben bekannter Konfessionen, solange keine Kartenfarbe vorliegt.
 var confession_colors := {}
@@ -39,8 +41,12 @@ var culture_colors := {}
 var show_federation := false
 ## Spielerstaat; der Knopf „Diesen Staat spielen“ erscheint bei Orten anderer Staaten (seit M7).
 var player_index := -1
+## Parteienmodus (seit M8, set_party_mode): Abschnitt Wahl ganz oben, kein „Diesen Staat spielen“.
+var party_mode := false
 
 var _play_button: Button = null
+## Abschnitt Wahl (seit M8): Wahlkreis und Ergebnis der letzten Wahl.
+var _election_box: VBoxContainer = null
 var _owner_index := -1
 
 ## Höchste Höhe des Panels (fit_height); unbegrenzt, solange nicht gesetzt.
@@ -127,6 +133,25 @@ func _ready() -> void:
 	var facts := $Scroll/Margin/Content/Facts
 	facts.get_parent().add_child(_play_button)
 	facts.get_parent().move_child(_play_button, facts.get_index() + 1)
+	_election_box = VBoxContainer.new()
+	_election_box.name = "Election"
+	_election_box.add_theme_constant_override(&"separation", 4)
+	# Gleich unter den Eckdaten: Im Kartenmodus „Wahlen“ ist das Ergebnis der Grund des Klicks.
+	facts.get_parent().add_child(_election_box)
+	facts.get_parent().move_child(_election_box, _play_button.get_index() + 1)
+
+
+## Parteienmodus ein- oder ausschalten: Der Wahlkampf ist dann der Grund des Klicks, der Abschnitt
+## Wahl rückt vor die Eckdaten.
+func set_party_mode(on: bool) -> void:
+	party_mode = on
+	var parent := _election_box.get_parent()
+	var anchor: Control = $Scroll/Margin/Content/Facts if on else _play_button
+	var index := anchor.get_index() + (0 if on else 1)
+	# move_child zählt mit dem Kasten selbst: Steht er vor dem Ziel, rückt das Ziel um eins vor.
+	if _election_box.get_index() < index:
+		index -= 1
+	parent.move_child(_election_box, index)
 
 
 ## Begrenzt die Höhe des Panels; überzähliger Inhalt wird scrollbar.
@@ -159,7 +184,9 @@ func show_location(location: Dictionary, owner_color: Color) -> void:
 	_coat.shield_color = owner_color if has_data else UiPalette.PAPER_DEEP
 	_owner.text = str(location.get("owner_name", "–")) if has_data else "Keine Daten"
 	_owner_index = int(location.get("owner_index", -1))
-	_play_button.visible = has_data and _owner_index >= 0 and _owner_index != player_index
+	_play_button.visible = (
+		has_data and _owner_index >= 0 and _owner_index != player_index and not party_mode
+	)
 	var is_city := bool(location.get("is_city", false))
 	_kind.text = "Stadt mit Umland" if is_city else "Ländlicher Ort"
 	var kreis_name := str(location.get("kreis_name", ""))
@@ -211,10 +238,105 @@ func show_location(location: Dictionary, owner_color: Color) -> void:
 	_literacy.text = GermanFormat.percent(float(location.get("literacy_percent", 0.0)))
 	_show_ages(location)
 	_show_balance(location.get("balance_previous", {}))
+	_show_election(location.get("wahl", {}))
 	_identifier.text = "Kennung: %s" % str(location.get("id", "–"))
 	var source := str(location.get("source", ""))
 	_source.text = "Quelle: %s" % (source if not source.is_empty() else "keine Angabe")
 	visible = true
+
+
+## Wahlkampf im Wahlkreis des Ortes (seit M8, Parteienmodus): Stimmungsbericht mit Fehler, Stand des
+## eigenen Wahlkampfs, Knöpfe je Art. campaign aus SimulationClient.get_campaign, currents aus
+## get_currents. Nach show_location aufrufen; ohne offene Wahl nichts.
+func show_campaign(district: int, campaign: Dictionary, currents: Array[Dictionary], party_name: String) -> void:
+	if campaign.is_empty() or not bool(campaign.get("open", false)) or not _election_box.visible:
+		return
+	var box := VBoxContainer.new()
+	box.name = "Campaign"
+	box.add_theme_constant_override(&"separation", 4)
+	_election_box.add_child(box)
+	box.add_child(_caption("STIMMUNGSBERICHT (± %s PUNKTE)" % GermanFormat.number(
+		float(campaign.get("poll_error", 0.0)), 0
+	)))
+	if bool(campaign.get("boycott", false)):
+		var note := Label.new()
+		note.text = "Die Mehrheit boykottiert die Wahl; dieser Wahlkreis bleibt wohl leer."
+		note.theme_type_variation = &"MutedLabel"
+		note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		note.custom_minimum_size = Vector2(1, 0)
+		box.add_child(note)
+	var poll: PackedFloat64Array = campaign.get("poll", PackedFloat64Array())
+	var shares := {}
+	var colors := {}
+	for c in mini(poll.size(), currents.size()):
+		var current_name := str(currents[c].get("name", ""))
+		shares[current_name] = poll[c]
+		colors[current_name] = currents[c].get("color", UiPalette.BAR_NEUTRAL)
+	var poll_box := VBoxContainer.new()
+	box.add_child(poll_box)
+	_show_shares(poll_box, shares, colors)
+	box.add_child(_caption("WAHLKAMPF: %s" % party_name.to_upper()))
+	var levels := Label.new()
+	levels.theme_type_variation = &"MutedLabel"
+	levels.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	levels.custom_minimum_size = Vector2(1, 0)
+	levels.text = "Mobilisierung +%s, Vereine +%s, Flugblätter %s" % [
+		GermanFormat.percent(roundi(float(campaign.get("mobilization", 0.0)) * 100.0)),
+		GermanFormat.percent(roundi(float(campaign.get("club", 0.0)) * 100.0)),
+		GermanFormat.number(float(campaign.get("persuasion", 0.0)), 2),
+	]
+	box.add_child(levels)
+	for entry: Variant in campaign.get("actions", []):
+		var action := entry as Dictionary
+		var button := Button.new()
+		button.name = "Campaign%d" % int(action.get("action", 0))
+		button.text = "%s – %s" % [
+			str(action.get("name", "")), GermanFormat.money(float(action.get("cost", 0.0)))
+		]
+		button.focus_mode = Control.FOCUS_NONE
+		button.disabled = not bool(action.get("allowed", false))
+		button.tooltip_text = (
+			"Wirkt ab dem nächsten Tag bis zum Wahltag, mit abnehmendem Ertrag"
+			if not button.disabled
+			else "Die Mittel reichen nicht"
+		)
+		var kind := int(action.get("action", 0))
+		button.pressed.connect(func() -> void: campaign_requested.emit(district, kind))
+		box.add_child(button)
+
+
+## Wahlkreis und Ergebnis der letzten Wahl (seit M8); leer außerhalb des Wahlgebiets.
+func _show_election(election: Dictionary) -> void:
+	_clear(_election_box)
+	_election_box.visible = not election.is_empty()
+	if election.is_empty():
+		return
+	_election_box.add_child(HSeparator.new())
+	_election_box.add_child(_caption("WAHL"))
+	var grid := GridContainer.new()
+	grid.columns = 2
+	_election_box.add_child(grid)
+	_add_fact(grid, "Parlament", str(election.get("parliament_name", "")))
+	var district := str(election.get("district_name", ""))
+	var seats := int(election.get("seats", 1))
+	if seats > 1:
+		district += " (%d Sitze)" % seats
+	_add_fact(grid, "Wahlkreis", district)
+	if not bool(election.get("held", false)):
+		_add_fact(grid, "Wahl am", str(election.get("election_date_text", "")))
+		return
+	if bool(election.get("boycott", false)):
+		_add_fact(grid, "Ergebnis", "Boykott, kein Abgeordneter")
+		return
+	var winner := str(election.get("winner_name", "–"))
+	if bool(election.get("runoff", false)):
+		winner += " (Stichwahl)"
+	_add_fact(grid, "Gewählt", winner)
+	_add_fact(grid, "Berechtigte", GermanFormat.integer(int(election.get("electorate", 0))))
+	_add_fact(grid, "Beteiligung", GermanFormat.percent(float(election.get("turnout_percent", 0.0)), 1))
+	var shares_box := VBoxContainer.new()
+	_election_box.add_child(shares_box)
+	_show_shares(shares_box, election.get("shares", {}), election.get("colors", {}))
 
 
 ## Anteile (Name → Prozent) als Balken, größter zuerst; Farben je Name, sonst neutral.

@@ -7,10 +7,12 @@ add_library(uhrwerk_core STATIC
     src/loader.cpp
     src/simulation.cpp
     src/parallel.cpp
+    src/politics.cpp
     src/population.cpp
     src/economy.cpp
     src/lasttest.cpp
     src/balance.cpp
+    src/election_lab.cpp
     src/savegame.cpp
 )
 add_library(uhrwerk::core ALIAS uhrwerk_core)

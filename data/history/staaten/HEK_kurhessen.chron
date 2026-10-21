@@ -22,5 +22,7 @@ staat HEK {
         heer           = 7
         schulden       = 0
         zollverein     = ja
+        verfassung     = konstitutionell
+        wahlrecht      = staendisch
     }
 }

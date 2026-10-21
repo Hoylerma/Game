@@ -12,6 +12,10 @@ signal quick_load_requested
 signal close_requested
 ## Neues Spiel mit dem Szenario scenario_id (seit M7).
 signal new_game_requested(scenario_id: String)
+## Wahlabend der letzten Wahl öffnen (seit M8).
+signal last_election_requested
+## Rolle gewählt (seit M8): Index der Strömung im Parteienmodus, -1 = Staat.
+signal role_selected(current: int)
 
 const PANEL_WIDTH := 680.0
 const LIST_HEIGHT := 250.0
@@ -29,6 +33,9 @@ var _scenario_ids := PackedStringArray()
 var _current_scenario := ""
 var _scenario_names := {}
 var _new_game_button: Button = null
+var _last_election_button: Button = null
+var _role_caption: Label = null
+var _role_select: OptionButton = null
 ## „Starten“ verlangt einen zweiten Klick, weil die laufende Partie endet.
 var _confirm_new_game := false
 var _group := ButtonGroup.new()
@@ -95,6 +102,29 @@ func show_scenarios(scenarios: Array[Dictionary], current: String) -> void:
 		_scenario_ids.append(id)
 		if id == current:
 			_scenario_select.select(_scenario_ids.size() - 1)
+
+
+## Rollen der laufenden Partie (seit M8): der Staat oder eine Strömung (Parteienmodus). Ohne
+## Strömungen bleibt die Zeile verborgen.
+func show_roles(state_name: String, currents: Array[Dictionary], current: int) -> void:
+	_role_select.clear()
+	_role_select.add_item("Staat: %s" % state_name)
+	for entry in currents:
+		_role_select.add_item("Partei: %s" % str(entry.get("name", "")))
+	_role_select.select(current + 1 if current >= 0 and current < currents.size() else 0)
+	_role_caption.visible = not currents.is_empty()
+	_role_select.visible = not currents.is_empty()
+
+
+## Rolle wählen wie in der Liste (Klicktest); index -1 = Staat.
+func select_role(current: int) -> void:
+	_role_select.select(current + 1)
+	role_selected.emit(current)
+
+
+## Knopf „Letzte Wahl“ nur, wenn schon gewählt wurde (seit M8).
+func show_last_election(available: bool) -> void:
+	_last_election_button.visible = available
 
 
 ## Kennungen der angebotenen Szenarien (Tests).
@@ -199,6 +229,17 @@ func _build() -> void:
 	new_row.add_child(_new_game_button)
 	box.add_child(new_row)
 
+	_role_caption = _caption("Rolle in dieser Partie")
+	box.add_child(_role_caption)
+	_role_select = OptionButton.new()
+	_role_select.focus_mode = Control.FOCUS_NONE
+	_role_select.fit_to_longest_item = false
+	_role_select.tooltip_text = (
+		"Den Staat führen oder als Partei (Strömung) Wahlkampf führen; nach der Wahl die Fraktion"
+	)
+	_role_select.item_selected.connect(func(index: int) -> void: role_selected.emit(index - 1))
+	box.add_child(_role_select)
+
 	box.add_child(_caption("Speichern"))
 	var save_row := HBoxContainer.new()
 	_name_edit = LineEdit.new()
@@ -233,6 +274,10 @@ func _build() -> void:
 	row.add_child(_button("Schnellspeichern (F5)", func() -> void: quick_save_requested.emit()))
 	_quick_load_button = _button("Schnellladen (F9)", func() -> void: quick_load_requested.emit())
 	row.add_child(_quick_load_button)
+	_last_election_button = _button("Letzte Wahl", func() -> void: last_election_requested.emit())
+	_last_election_button.tooltip_text = "Wahlabend der letzten Wahl mit dem ganzen Ergebnis"
+	_last_election_button.visible = false
+	row.add_child(_last_election_button)
 	var spacer := Control.new()
 	spacer.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	row.add_child(spacer)

@@ -22,5 +22,7 @@ staat MST {
         heer           = 6
         schulden       = 100000
         zollverein     = nein
+        verfassung     = staendisch
+        wahlrecht      = staendisch
     }
 }

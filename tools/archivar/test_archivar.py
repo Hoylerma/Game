@@ -68,7 +68,7 @@ class TestErzeugung(MitKopie):
         # Die eingecheckte Ausgabe unter testdaten/history ist die Referenz.
         code, aus, fehler = self.pruefen()
         self.assertEqual((code, fehler), (0, ""), aus)
-        self.assertIn("history/ ist aktuell (8 Dateien, 4 Orte, 2 Kreise, 2 Staaten)", aus)
+        self.assertIn("history/ ist aktuell (9 Dateien, 4 Orte, 2 Kreise, 2 Staaten)", aus)
 
     def test_deterministisch(self) -> None:
         m = ar.Meldungen()
@@ -204,6 +204,11 @@ class TestFehler(MitKopie):
             ("eisenbahnen.csv", "nord;;moor", "nord;Südbahn;moor"): "Strecke nordbahn heißt schon 'Nordbahn'",
             ("eisenbahnen.csv", "moor;heide;1842", "hafen;moor;1842"): "Abschnitt hafen–moor der Strecke nordbahn ist doppelt",
             ("eisenbahnen.csv", "nord;Nordbahn;", "nord;;"): "Spalte 'name' darf nicht leer sein",
+            ("wahlkreise.csv", "hafen moor", "hafen sumpf"): "unbekannter Ort 'sumpf' in Wahlkreis lt_01",
+            ("wahlkreise.csv", ";heide;", ";hafen;"): "Ort hafen liegt schon in Wahlkreis lt_01 (Zeile 2)",
+            ("wahlkreise.csv", "landtag;AAA;Heide", "landtag;CCC;Heide"): "unbekannter Staat 'CCC' für Wahlkreis lt_02",
+            ("wahlkreise.csv", "Heide-Süd;2;", "Heide-Süd;0;"): "'sitze' erwartet eine Ganzzahl ab 1, nicht '0'",
+            ("wahlkreise.csv", "lt_02;", "lt_01;"): "Wahlkreis lt_01 ist doppelt (zuerst in Zeile 2)",
             ("eisenbahnen.csv", "nordbahn;nord;;moor;heide", "zweitbahn;nord;Zweitbahn;moor;hafen"): (
                 "Abschnitt moor–hafen der Strecke zweitbahn liegt schon auf Strecke nordbahn (Zeile 2)"
             ),
@@ -411,6 +416,12 @@ class TestStaatenbestandUndVerwaltung(MitKopie):
             ("verwaltung.csv", "Kreis Burg;kreis", "Kreis Burg;Kreis"): "ungültige Art 'Kreis'",
             ("verwaltung.csv", "sl_burg;sued", "keine;sued"): "ungültige Kennung 'keine' für eine Verwaltungseinheit",
             ("staaten_historie.csv", "zollverein;ja", "zollverein;1"): "'zollverein' erwartet ja oder nein, nicht '1'",
+            ("staaten_historie.csv", "zollverein;ja", "wahlrecht;alle"): (
+                "'wahlrecht' erwartet keines, staendisch, zensus, dreiklassen, allgemein_maenner, nicht 'alle'"
+            ),
+            ("staaten_historie.csv", "zollverein;ja", "verfassung;ja"): (
+                "'verfassung' erwartet keine, staendisch, konstitutionell, nicht 'ja'"
+            ),
         }
         for (tabelle, alt, neu), text in faelle.items():
             with self.subTest(text):
