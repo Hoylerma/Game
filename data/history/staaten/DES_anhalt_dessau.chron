@@ -49,7 +49,7 @@ staat DES {
         hofhaltung     = 17800
         heer           = 6
         schulden       = 119000
-        zollverein     = ja
+        zollunion      = zollverein
         verfassung     = keine
         wahlrecht      = keines
     }

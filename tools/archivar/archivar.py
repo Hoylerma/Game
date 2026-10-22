@@ -88,7 +88,7 @@ STAAT_FELDER = (
     "hofhaltung",
     "heer",
     "schulden",
-    "zollverein",
+    "zollunion",
     "verfassung",
     "wahlrecht",
     "wahlsystem",
@@ -279,6 +279,7 @@ class Bezug:
     konfessionen: set[str] = field(default_factory=set)
     kulturen: set[str] = field(default_factory=set)
     vorkommen: set[str] = field(default_factory=set)  # aus common/betriebe.chron (seit M5)
+    zollunionen: dict[str, Datum | None] = field(default_factory=dict)  # Kennung → 'seit' (seit M9)
     steuersatz_max: float = 1.0
     szenarien: list[Szenario] = field(default_factory=list)
     spieler: dict[str, str] = field(default_factory=dict)  # Szenario → Spielerstaat (seit M7)
@@ -308,6 +309,14 @@ def lade_bezug(daten: Path, meldungen: Meldungen) -> Bezug:
         bezug.vorkommen = {
             v for n in root.children if n.key == "betrieb" and n.is_block if (v := n.get_string("vorkommen") or "")
         }
+    # Zollunionen (seit M9); die Datei darf fehlen wie im Kern. Ihre Felder prüft der Kern.
+    if (daten / "common/zollunionen.chron").is_file():
+        if root := _lade_chron(daten / "common/zollunionen.chron", "common/zollunionen.chron", meldungen):
+            bezug.zollunionen = {
+                n.value: parse_datum(n.get_string("seit") or "")
+                for n in root.children
+                if n.key == "zollunion" and n.is_block
+            }
     if root := _lade_chron(daten / "common/regeln.chron", "common/regeln.chron", meldungen):
         regeln = root.find("regeln")
         wert = regeln.get_zahl("steuersatz_max") if regeln else None
@@ -801,6 +810,12 @@ def baue_archiv(tabellen: Path, bezug: Bezug, m: Meldungen) -> Archiv:
             continue
         if not _pruefe_staatswert(z, feld_name, wert, archiv, bezug, m) or datum is None:
             continue
+        seit = bezug.zollunionen.get(wert) if feld_name == "zollunion" else None
+        if seit is not None and datum < seit:
+            m.fehler_bei(
+                z.datei, z.nr, f"Zollunion '{wert}' gibt es erst seit {datum_text(seit)} (common/zollunionen.chron)"
+            )
+            continue
         if _einmalig(f"{z['tag']}@{z['ab']}@{feld_name}", f"{feld_name} von {z['tag']} ab {z['ab']}", gesehen, z, m):
             staat.historie.setdefault(feld_name, []).append(Eintrag(datum, wert, z))
 
@@ -880,8 +895,8 @@ def _pruefe_staatswert(z: Zeile, feld_name: str, wert: str, archiv: Archiv, bezu
         return _dezimal(z, "wert", 0, 1e12, m, wert) is not None
     if feld_name == "heer":
         return _dezimal(z, "wert", 0, 1000, m, wert) is not None
-    if feld_name == "zollverein" and wert not in ("ja", "nein"):
-        m.fehler_bei(z.datei, z.nr, f"'zollverein' erwartet ja oder nein, nicht '{wert}'")
+    if feld_name == "zollunion" and wert != "keine" and wert not in bezug.zollunionen:
+        m.fehler_bei(z.datei, z.nr, f"unbekannte Zollunion '{wert}' (common/zollunionen.chron, oder keine)")
         return False
     if feld_name in POLITIK_WERTE and wert not in POLITIK_WERTE[feld_name]:
         m.fehler_bei(z.datei, z.nr, f"'{feld_name}' erwartet {', '.join(POLITIK_WERTE[feld_name])}, nicht '{wert}'")

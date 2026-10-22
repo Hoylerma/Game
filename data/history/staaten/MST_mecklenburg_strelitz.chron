@@ -21,7 +21,7 @@ staat MST {
         hofhaltung     = 14900
         heer           = 6
         schulden       = 100000
-        zollverein     = nein
+        zollunion      = keine
         verfassung     = staendisch
         wahlrecht      = staendisch
     }

@@ -21,7 +21,7 @@ staat BAV {
         hofhaltung     = 313700
         heer           = 8
         schulden       = 12998000
-        zollverein     = ja
+        zollunion      = zollverein
         verfassung     = konstitutionell
         wahlrecht      = staendisch
     }

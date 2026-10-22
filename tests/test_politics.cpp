@@ -407,34 +407,38 @@ TEST_CASE("Politik: Spielstand vor und nach dem Wahltag") {
     }
 }
 
-TEST_CASE("Politik: Spielstand im Format 1 zeigt seine Angaben, lädt aber nicht") {
-    // Format 1 (bis M7) hat 13 Inhaltsbereiche, der Gesamtwert läuft über diese 13.
+TEST_CASE("Politik: Spielstand im Format 1 oder 2 zeigt seine Angaben, lädt aber nicht") {
+    // Format 1 (bis M7) hat 13 Inhaltsbereiche, Format 2 (M8) 14; der Gesamtwert läuft über diese.
     const World w = testhilfen::load_fixture();
-    Bytes bytes = uhrwerk::save_game(Simulation(w), SaveMeta{});
     const uhrwerk::ContentFingerprint fp = uhrwerk::content_fingerprint(w);
-    std::uint64_t total = 0xcbf29ce484222325ULL;
-    for (std::size_t i = 0; i < 13; ++i) {
-        for (int b = 0; b < 8; ++b) {
-            total ^= static_cast<std::uint8_t>(fp.parts[i] >> (8 * b));
-            total *= 0x100000001b3ULL;
+    for (const auto& [version, parts] : {std::pair<std::uint8_t, std::size_t>{1, 13}, {2, 14}}) {
+        CAPTURE(version);
+        Bytes bytes = uhrwerk::save_game(Simulation(w), SaveMeta{});
+        std::uint64_t total = 0xcbf29ce484222325ULL;
+        for (std::size_t i = 0; i < parts; ++i) {
+            for (int b = 0; b < 8; ++b) {
+                total ^= static_cast<std::uint8_t>(fp.parts[i] >> (8 * b));
+                total *= 0x100000001b3ULL;
+            }
         }
-    }
-    const std::string needle = "\ninhalt=";
-    const auto it = std::search(bytes.begin(), bytes.end(), needle.begin(), needle.end());
-    REQUIRE(it != bytes.end());
-    const std::string value = uhrwerk::hex16(total);
-    std::copy(value.begin(), value.end(), it + static_cast<std::ptrdiff_t>(needle.size()));
-    bytes[8] = 1; // Formatversion im Kopf
+        const std::string needle = "\ninhalt=";
+        const auto it = std::search(bytes.begin(), bytes.end(), needle.begin(), needle.end());
+        REQUIRE(it != bytes.end());
+        const std::string value = uhrwerk::hex16(total);
+        std::copy(value.begin(), value.end(), it + static_cast<std::ptrdiff_t>(needle.size()));
+        bytes[8] = version; // Formatversion im Kopf
 
-    std::string error;
-    const auto info = uhrwerk::read_save_info(bytes, &error);
-    INFO(error);
-    REQUIRE(info.has_value());
-    CHECK(info->format_version == 1);
-    CHECK(info->content.parts[0] == fp.parts[0]);
-    CHECK(info->content.parts[13] == 0);
-    const LoadedGame loaded = uhrwerk::load_game(bytes, w, 1);
-    CHECK(loaded.error == "Spielstand im Format 1 wird nicht unterstützt");
+        std::string error;
+        const auto info = uhrwerk::read_save_info(bytes, &error);
+        INFO(error);
+        REQUIRE(info.has_value());
+        CHECK(info->format_version == version);
+        CHECK(info->content.parts[0] == fp.parts[0]);
+        CHECK(info->content.parts[parts - 1] == fp.parts[parts - 1]);
+        CHECK(info->content.parts[parts] == 0);
+        const LoadedGame loaded = uhrwerk::load_game(bytes, w, 1);
+        CHECK(loaded.error == "Spielstand im Format " + std::to_string(version) + " wird nicht unterstützt");
+    }
 }
 
 // ─── Wahllabor (seit M8, Schritt a4) ─────────────────────────────────────────

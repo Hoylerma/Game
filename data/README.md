@@ -349,6 +349,15 @@ Zielwerte erfüllt. Kein Staatsbankrott; Vermögen am Ende im Median 1,05 (Frank
 
 Das Lesezeichen 1648 hat kein Parlament; Strömungen und Gruppen sind dort geladen, wirken aber nicht.
 
+**Zollunionen** (seit M9, [diplomatie.md](../docs/technik/diplomatie.md)):
+
+| Datei | Inhalt |
+|---|---|
+| `common/zollunionen.chron` | Zollverein (Leitung Preußen) und Steuerverein (Leitung Hannover), Tarif je 3 % (Spielwert) |
+| `tabellen/staaten_historie.csv` | Feld `zollunion` je Staat: 1848 26 Staaten im Zollverein, 3 im Steuerverein, 9 für sich |
+
+Das Lesezeichen 1648 hat keine Zollunion; jeder Staat ist ein eigenes Zollgebiet.
+
 ## Bekannte Lücken und Vereinfachungen
 
 - **Orte ohne Daten:** Im Lesezeichen 1648 haben 4.482 der 4.542 Orte keinen Besitzer, keine

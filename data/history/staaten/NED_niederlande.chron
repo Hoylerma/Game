@@ -21,7 +21,7 @@ staat NED {
         hofhaltung     = 9500
         heer           = 6
         schulden       = 189000
-        zollverein     = nein
+        zollunion      = keine
         verfassung     = konstitutionell
         wahlrecht      = staendisch
         wahl_indirekt  = ja

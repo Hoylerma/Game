@@ -21,7 +21,7 @@ staat REJ {
         hofhaltung     = 9700
         heer           = 6
         schulden       = 65000
-        zollverein     = ja
+        zollunion      = zollverein
         verfassung     = keine
         wahlrecht      = keines
     }

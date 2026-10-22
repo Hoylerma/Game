@@ -21,7 +21,7 @@ staat SLI {
         hofhaltung     = 3900
         heer           = 6
         schulden       = 26000
-        zollverein     = nein
+        zollunion      = steuerverein
         verfassung     = staendisch
         wahlrecht      = staendisch
     }

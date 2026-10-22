@@ -21,7 +21,7 @@ staat HAN {
         hofhaltung     = 170900
         heer           = 7
         schulden       = 3845000
-        zollverein     = nein
+        zollunion      = steuerverein
         verfassung     = konstitutionell
         wahlrecht      = staendisch
     }

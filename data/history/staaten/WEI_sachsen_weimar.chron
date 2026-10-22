@@ -49,7 +49,7 @@ staat WEI {
         hofhaltung     = 35600
         heer           = 6
         schulden       = 237000
-        zollverein     = ja
+        zollunion      = zollverein
         verfassung     = konstitutionell
         wahlrecht      = staendisch
     }

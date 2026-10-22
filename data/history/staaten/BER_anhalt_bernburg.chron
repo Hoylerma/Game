@@ -49,7 +49,7 @@ staat BER {
         hofhaltung     = 7400
         heer           = 6
         schulden       = 49000
-        zollverein     = ja
+        zollunion      = zollverein
         verfassung     = keine
         wahlrecht      = keines
     }

@@ -18,7 +18,7 @@ staat BRE {
         hofhaltung     = 1700
         heer           = 4
         schulden       = 74000
-        zollverein     = nein
+        zollunion      = keine
         verfassung     = staendisch
         wahlrecht      = staendisch
     }

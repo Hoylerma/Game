@@ -21,7 +21,7 @@ staat HED {
         hofhaltung     = 65600
         heer           = 7
         schulden       = 1687000
-        zollverein     = ja
+        zollunion      = zollverein
         verfassung     = konstitutionell
         wahlrecht      = zensus
         wahlsystem     = stichwahl

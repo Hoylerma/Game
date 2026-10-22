@@ -1053,7 +1053,7 @@ void add_state_neu(const TempDir& dir) {
 
 } // namespace
 
-TEST_CASE("Lader: Verwaltung, Bundesgebiet und Zollverein") {
+TEST_CASE("Lader: Verwaltung und Bundesgebiet") {
     TempDir dir(true);
     write_admin_units(dir);
     replace_in_file(dir / kPlacesSax, kDresdenDistrict,
@@ -1062,8 +1062,6 @@ TEST_CASE("Lader: Verwaltung, Bundesgebiet und Zollverein") {
     replace_in_file(dir / "history/orte/30_anhalt.chron", "    kreis        = kr_anhalt\n",
                     "    kreis        = kr_anhalt\n    verwaltung   = sx_land\n"
                     "    1649.06.01 = { verwaltung = keine bund = ja }\n");
-    replace_in_file(dir / kStatesMid, "    heer           = 6\n",
-                    "    heer           = 6\n    zollverein     = ja\n");
 
     const LoadResult before = load(dir, "westfaelischer_frieden");
     INFO(issues_text(before));
@@ -1087,8 +1085,6 @@ TEST_CASE("Lader: Verwaltung, Bundesgebiet und Zollverein") {
     CHECK(dessau.admin == 0);
     CHECK_FALSE(dessau.federal);
     CHECK(w.locations[static_cast<std::size_t>(w.find_location("leipzig"))].admin == uhrwerk::kNone);
-    CHECK(w.states[static_cast<std::size_t>(w.find_state("SAX"))].customs_union);
-    CHECK_FALSE(w.states[static_cast<std::size_t>(w.find_state("ANH"))].customs_union);
 
     // Datierte Blöcke: ab 1649.06.01 liegt Dresden direkt im Land, Dessau in keiner Einheit, aber im Bund.
     const LoadResult after = load(dir, "jahresbeginn_1650");
@@ -1099,6 +1095,148 @@ TEST_CASE("Lader: Verwaltung, Bundesgebiet und Zollverein") {
     const uhrwerk::Location& dessau2 = w2.locations[static_cast<std::size_t>(w2.find_location("dessau"))];
     CHECK(dessau2.admin == uhrwerk::kNone);
     CHECK(dessau2.federal);
+}
+
+// ─── Zollunionen (seit M9) ──────────────────────────────────────────────────
+
+namespace {
+
+const char* const kUnionsFile = "common/zollunionen.chron";
+
+/// Mittelbund (Sachsen und Anhalt) seit 1648, Nordbund (Brandenburg) erst ab 1649.06.01; Anhalt tritt
+/// zum selben Tag aus.
+void write_customs_unions(const TempDir& dir) {
+    testhilfen::write_file(dir / kUnionsFile, "# Testdaten\n"
+                                              "\n"
+                                              "zollunion mittelbund {\n"
+                                              "    name    = \"Mittelbund\"\n"
+                                              "    seit    = 1648.01.01\n"
+                                              "    leitung = SAX\n"
+                                              "    tarif   = 0.04\n"
+                                              "    quelle  = \"Testdaten\"\n"
+                                              "}\n"
+                                              "\n"
+                                              "zollunion nordbund {\n"
+                                              "    name    = \"Nordbund\"\n"
+                                              "    seit    = 1649.06.01\n"
+                                              "    leitung = BRA\n"
+                                              "    tarif   = 0.02\n"
+                                              "    quelle  = \"Testdaten\"\n"
+                                              "}\n");
+    replace_in_file(dir / kStatesMid, "    heer           = 6\n",
+                    "    heer           = 6\n    zollunion      = mittelbund\n");
+    replace_in_file(dir / kStatesMid, "    heer           = 4\n",
+                    "    heer           = 4\n    zollunion      = mittelbund\n"
+                    "    1649.06.01 = { zollunion = keine }\n");
+    replace_in_file(dir / kStatesBra, "    heer           = 10\n",
+                    "    heer           = 10\n    1649.06.01 = { zollunion = nordbund }\n");
+}
+
+} // namespace
+
+TEST_CASE("Lader: Zollunionen und ihre Mitglieder") {
+    TempDir dir(true);
+    write_customs_unions(dir);
+
+    const LoadResult before = load(dir, "westfaelischer_frieden");
+    INFO(issues_text(before));
+    REQUIRE(before.ok());
+    CHECK(before.issues.empty());
+    const World& w = *before.world;
+    REQUIRE(w.customs_unions.size() == 1); // der Nordbund gilt erst ab 1649.06.01 ('seit')
+    const uhrwerk::CustomsUnion& u = w.customs_unions[0];
+    CHECK(u.id == "mittelbund");
+    CHECK(u.name == "Mittelbund");
+    CHECK(u.leader == w.find_state("SAX"));
+    CHECK(u.tariff == fx("0.04"));
+    CHECK(u.source == "Testdaten");
+    CHECK(w.find_customs_union("mittelbund") == 0);
+    CHECK(w.find_customs_union("nordbund") == uhrwerk::kNone);
+    const auto union_of = [](const World& world, std::string_view tag) {
+        return world.states[static_cast<std::size_t>(world.find_state(tag))].customs_union;
+    };
+    CHECK(union_of(w, "SAX") == 0);
+    CHECK(union_of(w, "ANH") == 0);
+    CHECK(union_of(w, "BRA") == uhrwerk::kNone);
+
+    // Ab 1649.06.01: Brandenburg im Nordbund, Anhalt ein eigenes Zollgebiet.
+    const LoadResult after = load(dir, "jahresbeginn_1650");
+    INFO(issues_text(after));
+    REQUIRE(after.ok());
+    const World& w2 = *after.world;
+    REQUIRE(w2.customs_unions.size() == 2);
+    CHECK(w2.customs_unions[1].id == "nordbund");
+    CHECK(w2.customs_unions[1].leader == w2.find_state("BRA"));
+    CHECK(union_of(w2, "SAX") == 0);
+    CHECK(union_of(w2, "ANH") == uhrwerk::kNone);
+    CHECK(union_of(w2, "BRA") == 1);
+
+    // Ohne die Datei ist jeder Staat ein eigenes Zollgebiet (wie in der Fixture).
+    const LoadResult fixture = uhrwerk::load_world(testhilfen::fixture_dir());
+    REQUIRE(fixture.ok());
+    CHECK(fixture.world->customs_unions.empty());
+}
+
+TEST_CASE("Lader: Fehler in Zollunionen") {
+    TempDir dir(true);
+    write_customs_unions(dir);
+    SUBCASE("unbekannte Zollunion im Staat") {
+        replace_in_file(dir / kStatesMid, "    zollunion      = mittelbund\n    quelle",
+                        "    zollunion      = suedbund\n    quelle");
+        expect_error(load(dir), "unbekannte Zollunion 'suedbund' in staat SAX (common/zollunionen.chron)",
+                     kStatesMid, 16);
+    }
+    SUBCASE("Verweis auf eine spätere Zollunion") {
+        replace_in_file(dir / kStatesBra, "    1649.06.01 = { zollunion = nordbund }\n",
+                        "    zollunion      = nordbund\n");
+        expect_error(
+            load(dir),
+            "Zollunion 'nordbund' gibt es erst seit 1649.06.01 ('seit'); staat BRA gilt schon vorher",
+            kStatesBra, 16);
+    }
+    SUBCASE("Leitmacht gehört nicht zur Union") {
+        replace_in_file(dir / kStatesMid, "    zollunion      = mittelbund\n    quelle",
+                        "    zollunion      = keine\n    quelle");
+        expect_error(load(dir), "Leitmacht SAX gehört zum Startdatum nicht zu zollunion mittelbund",
+                     kUnionsFile, 6);
+    }
+    SUBCASE("Leitmacht unbekannt oder ohne Ort") {
+        replace_in_file(dir / kUnionsFile, "leitung = SAX", "leitung = XYZ");
+        expect_error(load(dir), "unbekannter Staat 'XYZ' als Leitung von zollunion mittelbund", kUnionsFile,
+                     6);
+        add_state_neu(dir);
+        replace_in_file(dir / kUnionsFile, "leitung = XYZ", "leitung = NEU");
+        expect_error(load(dir), "Leitmacht 'NEU' von zollunion mittelbund besitzt zum Startdatum keinen Ort",
+                     kUnionsFile, 6);
+    }
+    SUBCASE("Kennung, Leitung und Tarif") {
+        replace_in_file(dir / kUnionsFile, "zollunion nordbund {", "zollunion keine {");
+        replace_in_file(dir / kUnionsFile, "leitung = BRA", "leitung = bra");
+        replace_in_file(dir / kUnionsFile, "tarif   = 0.04", "tarif   = 2");
+        const LoadResult r = load(dir);
+        expect_error(r, "„keine“ ist als Kennung einer Zollunion reserviert", kUnionsFile, 11);
+        expect_error(r, "ungültiger Staatstag 'bra' als Leitung von zollunion keine", kUnionsFile, 14);
+        expect_error(r, "'tarif'", kUnionsFile, 7);
+    }
+    SUBCASE("doppelte Kennung, auch mit späterem 'seit'") {
+        replace_in_file(dir / kUnionsFile, "zollunion nordbund {", "zollunion mittelbund {");
+        expect_error(load(dir), "doppelte Kennung 'mittelbund' für Zollunion", kUnionsFile, 11);
+    }
+    SUBCASE("Pflichtfeld fehlt") {
+        replace_in_file(dir / kUnionsFile, "    tarif   = 0.04\n", "");
+        expect_error(load(dir), "Pflichtfeld 'tarif' fehlt in zollunion mittelbund", kUnionsFile, 3);
+    }
+    SUBCASE("das alte Feld zollverein ist unbekannt") {
+        replace_in_file(dir / kStatesMid, "    zollunion      = mittelbund\n    quelle",
+                        "    zollunion      = mittelbund\n    zollverein     = ja\n    quelle");
+        const LoadResult r = load(dir);
+        INFO(issues_text(r));
+        REQUIRE(r.ok());
+        const uhrwerk::LoadIssue* issue =
+            testhilfen::find_issue(r, "unbekanntes Feld 'zollverein' in staat SAX");
+        REQUIRE(issue != nullptr);
+        CHECK_FALSE(issue->fatal);
+    }
 }
 
 constexpr const char* kRailFile = "history/eisenbahnen/test.chron";
@@ -1347,16 +1485,13 @@ TEST_CASE("Lader: Fehler bei Verwaltungseinheiten") {
         replace_in_file(dir / kAdminFile, "    art    = kreis\n", "");
         expect_error(load(dir), "Pflichtfeld 'art' fehlt in einheit sx_meissen", kAdminFile, 9);
     }
-    SUBCASE("bund und zollverein erwarten ja oder nein") {
+    SUBCASE("bund erwartet ja oder nein") {
         replace_in_file(dir / kPlacesSax, kDresdenDistrict,
                         std::string(kDresdenDistrict) + "    bund         = 1\n");
-        replace_in_file(dir / kStatesMid, "    heer           = 6\n",
-                        "    heer           = 6\n    zollverein     = 1\n");
         const LoadResult r = load(dir);
         INFO(issues_text(r));
         CHECK_FALSE(r.ok());
         CHECK(has_issue(r, "'bund'"));
-        CHECK(has_issue(r, "'zollverein'"));
     }
 }
 

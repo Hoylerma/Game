@@ -1,0 +1,2 @@
+# Testdaten: Zollunionen (seit M9)
+zollunion nordbund { name = "Nordbund" seit = 1680.01.01 leitung = AAA tarif = 0.03 quelle = "Testdaten" }

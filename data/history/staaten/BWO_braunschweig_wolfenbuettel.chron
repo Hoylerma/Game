@@ -49,7 +49,7 @@ staat BWO {
         hofhaltung     = 37000
         heer           = 6
         schulden       = 247000
-        zollverein     = ja
+        zollunion      = zollverein
         verfassung     = konstitutionell
         wahlrecht      = staendisch
     }

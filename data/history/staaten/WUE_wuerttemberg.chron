@@ -21,7 +21,7 @@ staat WUE {
         hofhaltung     = 134600
         heer           = 7
         schulden       = 3029000
-        zollverein     = ja
+        zollunion      = zollverein
         verfassung     = konstitutionell
         wahlrecht      = zensus
         wahlsystem     = stichwahl

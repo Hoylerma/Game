@@ -50,7 +50,7 @@ staat SAX {
         hofhaltung     = 127700
         heer           = 7
         schulden       = 2372000
-        zollverein     = ja
+        zollunion      = zollverein
         verfassung     = konstitutionell
         wahlrecht      = staendisch
     }

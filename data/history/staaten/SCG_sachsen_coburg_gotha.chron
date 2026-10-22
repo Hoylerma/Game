@@ -21,7 +21,7 @@ staat SCG {
         hofhaltung     = 20100
         heer           = 6
         schulden       = 134000
-        zollverein     = ja
+        zollunion      = zollverein
         verfassung     = konstitutionell
         wahlrecht      = staendisch
     }

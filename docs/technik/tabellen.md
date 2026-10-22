@@ -144,7 +144,7 @@ Bevölkerungsangabe oder keines von beiden.
 |---|---|
 | `tag` | Staatstag |
 | `ab` | Datum, ab dem der Wert gilt |
-| `feld` | `name`, `kurzname`, `hauptstadt`, `regierungsform`, `herrscher`, `konfession`, `schatz`, `kontribution`, `akzise`, `zoll`, `hofhaltung`, `heer`, `schulden` (die letzten fünf und die drei Steuern seit M5; `steuersatz` heißt seit M5 `kontribution`), `zollverein` (seit M7, `ja`/`nein`); seit M8 `verfassung` (`keine`, `staendisch`, `konstitutionell`), `wahlrecht` (`keines`, `staendisch`, `zensus`, `dreiklassen`, `allgemein_maenner`), `wahlsystem` (`stichwahl`, `relativ`), `wahl_indirekt` (`ja`/`nein`), `wahl_zensus` (Zahl) |
+| `feld` | `name`, `kurzname`, `hauptstadt`, `regierungsform`, `herrscher`, `konfession`, `schatz`, `kontribution`, `akzise`, `zoll`, `hofhaltung`, `heer`, `schulden` (die letzten fünf und die drei Steuern seit M5; `steuersatz` heißt seit M5 `kontribution`), `zollunion` (seit M9: Kennung aus `common/zollunionen.chron` oder `keine`; bis M8 `zollverein` mit `ja`/`nein`); seit M8 `verfassung` (`keine`, `staendisch`, `konstitutionell`), `wahlrecht` (`keines`, `staendisch`, `zensus`, `dreiklassen`, `allgemein_maenner`), `wahlsystem` (`stichwahl`, `relativ`), `wahl_indirekt` (`ja`/`nein`), `wahl_zensus` (Zahl) |
 | `wert` | Wert im Format des Felds (Ortskennung, Konfessionskennung, Zahl, Text) |
 | `sicherheit`, `quelle` | siehe oben |
 
@@ -237,8 +237,10 @@ Sie erzeugen daraus die Zeilen von `besitz.csv` zum 1848.03.01 und von `bevoelke
 - seit M7: Spielerstaat eines Szenarios ohne Ort zu dessen Datum
 - unbekannter Kreis in `orte.csv`
 - seit M7: unbekannte Verwaltungseinheit (in `besitz.csv` oder als `ueber`), Einheit eines anderen
-  Staates als der Besitzer bzw. die übergeordnete Einheit, Zyklus über `ueber`, `bund` und
-  `zollverein` weder `ja`, `nein` noch leer
+  Staates als der Besitzer bzw. die übergeordnete Einheit, Zyklus über `ueber`, `bund` weder
+  `ja`, `nein` noch leer
+- seit M9: `zollunion` weder `keine` noch eine Union aus `common/zollunionen.chron`, oder ein Datum
+  vor dem `seit` der Union
 - seit M8: ein Wert von `verfassung`, `wahlrecht`, `wahlsystem` oder `wahl_indirekt` außerhalb der
   erlaubten Werte, `wahl_zensus` keine Zahl von 0 bis 1.000.000
 - seit M8 in `wahlkreise.csv`: doppelter Wahlkreis, ungültige Kennung eines Parlaments, unbekannter

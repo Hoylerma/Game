@@ -69,6 +69,12 @@ if(UHRWERK_BUILD_CLI)
                 --wahlkreise)
     add_test(NAME wahl_1848
         COMMAND uhrwerk-cli wahl --daten ${PROJECT_SOURCE_DIR}/data --szenario voelkerfruehling --seeds 2)
+    # Zollunionen 1848 (seit M9, docs/technik/diplomatie.md Abschnitt 7): die Mitglieder von Zollverein und
+    # Steuerverein; die übrigen neun Staaten sind je ein eigenes Zollgebiet.
+    add_test(NAME zollunionen_1848
+        COMMAND uhrwerk-cli info --daten ${PROJECT_SOURCE_DIR}/data --szenario voelkerfruehling)
+    set_tests_properties(zollunionen_1848 PROPERTIES PASS_REGULAR_EXPRESSION
+        "2 Zollunionen, 9 Staaten für sich\n[^\n]*Zollverein \\(Leitung PRU, Tarif 3 %\\): 26 Staaten[^\n]*\n *ALT BAD BAV BER BWO DES FRA HED HEK HHO HOH HSI LIP LUX NAS PRU REA REJ SAX SCG SMG SRU SSH WAL WEI WUE\n[^\n]*Steuerverein \\(Leitung HAN, Tarif 3 %\\): 3 Staaten[^\n]*\n *HAN OLD SLI\n")
 
     # Spielstände und Wiederholungen (seit M6, docs/technik/speicherstaende.md Abschnitt 10): Abnahme
     # mit den echten Daten über die Datei; Wiederholung eines Protokolls und eines Spielstands über

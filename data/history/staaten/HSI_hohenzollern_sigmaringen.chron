@@ -21,7 +21,7 @@ staat HSI {
         hofhaltung     = 5500
         heer           = 6
         schulden       = 37000
-        zollverein     = ja
+        zollunion      = zollverein
         verfassung     = konstitutionell
         wahlrecht      = staendisch
     }

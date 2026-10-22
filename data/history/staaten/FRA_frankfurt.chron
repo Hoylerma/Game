@@ -18,7 +18,7 @@ staat FRA {
         hofhaltung     = 1100
         heer           = 4
         schulden       = 28000
-        zollverein     = ja
+        zollunion      = zollverein
         verfassung     = staendisch
         wahlrecht      = staendisch
     }

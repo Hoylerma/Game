@@ -21,7 +21,7 @@ staat HEK {
         hofhaltung     = 85700
         heer           = 7
         schulden       = 0
-        zollverein     = ja
+        zollunion      = zollverein
         verfassung     = konstitutionell
         wahlrecht      = staendisch
     }

@@ -73,7 +73,7 @@ mitgespeichert. Dazu kommt die **Startprüfsumme** (Prüfsumme des Startzustands
 Ein Spielstand enthält nur den Zustand. Beim Laden lädt der Kern zuerst den Inhalt des Szenarios
 aus dem Datenordner (wie beim Spielstart) und überschreibt dann den Zustand. Damit das passt, trägt
 der Spielstand einen **Inhaltsfingerabdruck**: FNV-1a-64 je Bereich über alles am Inhalt, was die
-Simulation beeinflusst, und ein Gesamtwert über die 14 Bereiche (seit M8; vorher 13):
+Simulation beeinflusst, und ein Gesamtwert über die 15 Bereiche (seit M9; M8 14, vorher 13):
 
 | Bereich | Inhalt |
 |---|---|
@@ -83,9 +83,10 @@ Simulation beeinflusst, und ein Gesamtwert über die 14 Bereiche (seit M8; vorhe
 | `gueter`, `beduerfnisse` | Kennung, Basispreis, Weltmarktfaktor; Hunger und Warenkörbe je Schicht |
 | `betriebe` | Kennung, Beruf, Erzeugung, Vorleistungen, Agrar, Standort, Vorkommen, Handel, Gewicht, Geländefaktoren |
 | `maerkte`, `vorkommen` | Kennungen und Landschaften, Eisenbahnen mit allen Abschnitten (seit M7); Kennungen der Vorkommen |
-| `staaten`, `kreise` | Kennung, Kurzname, Konfession des Herrscherhauses und Zollverein (seit M7) der Staaten, die zum Startdatum bestehen; Kennungen der Kreise; Verwaltungseinheiten mit Kennung, Art und übergeordneter Einheit (seit M7) |
+| `staaten`, `kreise` | Kennung, Kurzname und Konfession des Herrscherhauses der Staaten, die zum Startdatum bestehen (der Zollverein bis M8, seit M9 unter `diplomatie`); Kennungen der Kreise; Verwaltungseinheiten mit Kennung, Art und übergeordneter Einheit (seit M7) |
 | `orte` | Kennung, Name, Gelände, Kreis, Lage, Fläche, Stadt, Markt, Vorkommen, Hafen, Verwaltungseinheit und Bundesgebiet (seit M7); die Zahl der Orte |
 | `politik` (seit M8) | Strömungen (Kennung, Name, Position), Interessengruppen (Mitglieder, Neigung), Parlamente mit Wahl, Fraktionen, Sitz und Name, Verfassung und Wahlordnung der Staaten, Wahlkreise mit Name, Staat, Sitzen und Orten, Wahlregeln und Regionen ([politik.md](politik.md)) |
+| `diplomatie` (seit M9) | Zollunionen mit Kennung, Name, Leitmacht und Tarif, die Zollunion jedes Staates ([diplomatie.md](diplomatie.md)) |
 
 **Nicht** dazu gehören volle Staatsnamen, Farben, Quellen und Beschreibungen: Eine korrigierte
 Quelle macht alte Spielstände nicht unbrauchbar. Der **Kurzname der Staaten und der Name der Orte
@@ -196,13 +197,17 @@ der Befehle bleibt N. Ohne Parlament bleibt die Folge der Zufallszahlen wie vor 
 
 ## 6. Versionen und Migration
 
-- Die **Formatversion** steht im Kopf (`kSaveFormatVersion = 2` seit M8, vorher 1). **Neuere**
-  Versionen lehnt der Kern ab („Spielstand aus einer neueren Spielversion (Format 3, unterstützt bis 2)“).
+- Die **Formatversion** steht im Kopf (`kSaveFormatVersion = 3` seit M9, 2 in M8, vorher 1).
+  **Neuere** Versionen lehnt der Kern ab („Spielstand aus einer neueren Spielversion (Format 4,
+  unterstützt bis 3)“).
 - **Format 2 (M8):** die Wahlen und der Wahlkampf im Zustandsverzeichnis, Befehle mit Ziel und
   Aktion (56 statt 40 Byte im Protokoll) und der Inhaltsbereich `politik`. Ein
   Spielstand im Format 1 zeigt seine Metadaten noch an (13 Inhaltsbereiche, der Gesamtwert über
   diese 13; `politik` bleibt 0), lädt aber nicht („Spielstand im Format 1 wird nicht unterstützt“):
   Mit `politik` hat sich ohnehin der Inhalt geändert (Abschnitt 3).
+- **Format 3 (M9):** der Inhaltsbereich `diplomatie` (Zollunionen). Ein Spielstand im Format 2 zeigt
+  seine Metadaten wie oben mit 14 Bereichen an, lädt aber nicht. Mit Schritt a2 kommen die
+  Vereinskassen und der Befehl `Zollunion` dazu ([diplomatie.md](diplomatie.md), Abschnitt 5).
 - Jede Änderung am Zustand (neues Feld, neue Reihenfolge) erhöht die Formatversion. Der Test
   „Spielstand: Formatwache“ verhindert, dass das vergessen wird: Er speichert die Test-Fixture nach
   einem Jahr und vergleicht den Prüfwert der Nutzdaten mit einem festgehaltenen Wert. Ändert er

@@ -85,12 +85,13 @@ func show_state(state: Dictionary, capital_name: String) -> void:
 	_coat.shield_color = state.get("color", UiPalette.INK_FAINT)
 	_name.text = str(state.get("name", "–"))
 	_short.text = "%s · %s" % [str(state.get("short_name", "")), str(state.get("tag", ""))]
-	# Mitgliedschaften (seit M7).
+	# Mitgliedschaften (seit M7; Zollunion seit M9).
 	var member := PackedStringArray()
 	if bool(state.get("bund", false)):
 		member.append("Deutscher Bund")
-	if bool(state.get("zollverein", false)):
-		member.append("Zollverein")
+	var customs_union := str(state.get("customs_union_name", ""))
+	if not customs_union.is_empty():
+		member.append(customs_union)
 	if not member.is_empty():
 		_short.text += " · " + ", ".join(member)
 	_ruler.text = str(state.get("ruler", "–"))

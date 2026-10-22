@@ -20,7 +20,7 @@ staat LIE {
         zoll           = 0.03
         hofhaltung     = 500
         heer           = 2
-        zollverein     = nein
+        zollunion      = keine
         verfassung     = staendisch
         wahlrecht      = staendisch
     }

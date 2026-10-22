@@ -21,7 +21,7 @@ gebaut; Abhängigkeiten stehen jeweils dabei.
 | M6 | Speicherstände und Wiederholungen | 1 – Vorproduktion | M5 | **fertig** |
 | M7 | Lesezeichen 1848 | 2 – Vertical Slice | M6 | **fertig** (Fachprüfung der Daten offen, siehe unten) |
 | M8 | Politik, Parteien und Wahlen | 2 – Vertical Slice | M7 | **fertig** (Fachprüfung der Werte offen, siehe unten) |
-| M9 | Diplomatie und Zollverein | 2 – Vertical Slice | M7 | offen |
+| M9 | Diplomatie und Zollverein | 2 – Vertical Slice | M7 | in Arbeit (M9a) |
 | M10 | Militär und Einigungskriege | 2 – Vertical Slice | M9 | offen |
 | M11 | Ereignisse und Revolution 1848/49 | 2 – Vertical Slice | M8 | offen |
 | M12 | Künstliche Intelligenz der Staaten | 2 – Vertical Slice | M8–M11 | offen |
@@ -564,6 +564,8 @@ Vertrag: [technik/politik.md](technik/politik.md).
 ### M9 – Diplomatie und Zollverein
 
 **Ziel:** Diplomatie nach [14 Diplomatie](14_diplomatie.md) mit dem Zollverein als Kernsystem.
+Vertrag: [technik/diplomatie.md](technik/diplomatie.md) (Entscheidungen freigegeben, Stand in
+Abschnitt 11).
 
 **Umfang**
 - Beziehungen, Bündnisse, Garantien, Bundesversammlung des Deutschen Bundes
