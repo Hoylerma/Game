@@ -408,11 +408,21 @@ struct State {
     Fixed interest_rate;             // Zins des Vormonats (Anzeige)
     std::int32_t premium_months = 0; // Monate mit Zinsaufschlag nach einem Staatsbankrott
     std::int32_t bankruptcies = 0;   // Zahl der Staatsbankrotte in dieser Partie
-    bool customs_union = false;      // Mitglied des Zollvereins (seit M7; Inhalt, bis M9 ohne Wirkung)
+    Index customs_union = kNone;     // Zollunion (seit M9, diplomatie.md 3.1); kNone: eigenes Zollgebiet
     Constitution constitution = Constitution::None; // zum Startdatum (seit M8, Inhalt)
     ElectoralLaw law;                               // Wahlordnung des Landtags (seit M8, Inhalt)
 
     Fixed tax_rate(TaxKind kind) const { return tax_rates[static_cast<std::size_t>(kind)]; }
+};
+
+/// Zollunion (seit M9, docs/technik/diplomatie.md Abschnitt 3.1; data/common/zollunionen.chron): ein
+/// gemeinsames Zollgebiet mehrerer Staaten mit einem Tarif. Die Mitglieder stehen bei den Staaten.
+struct CustomsUnion {
+    std::string id; // z. B. "zollverein"
+    std::string name;
+    Index leader = kNone; // Leitmacht (Staat): entscheidet über Beitritte (Abschnitt 3.5)
+    Fixed tariff;         // Vereinstarif: Zollsatz aller Mitglieder
+    std::string source;
 };
 
 /// Globale Regeln und Balancing-Werte (data/common/regeln.chron).
@@ -570,6 +580,7 @@ struct World {
     std::vector<ElectoralDistrict> electoral_districts; // seit M8, die Wahlkreise dieser Parlamente
     ElectionRules election_rules;                       // seit M8
     std::vector<PoliticalRegion> political_regions;     // seit M8
+    std::vector<CustomsUnion> customs_unions;           // seit M9, nur die des Szenarios ('seit')
     std::vector<Location> locations;
     std::vector<PopBlock> pops;
     std::vector<ChronicleEntry> chronicle;
@@ -613,6 +624,7 @@ struct World {
     Index find_current(std::string_view id) const;        // seit M8
     Index find_interest_group(std::string_view id) const; // seit M8
     Index find_parliament(std::string_view id) const;     // seit M8
+    Index find_customs_union(std::string_view id) const;  // seit M9
 
     /// Personen in den Blöcken des Ortes und in seinen Zugängen (arrivals).
     Fixed location_population(Index location) const;

@@ -693,7 +693,11 @@ Dictionary UhrwerkSimulation::get_state(std::int64_t index) const {
     result["ruler"] = to_godot(state.ruler);
     result["government"] = to_godot(state.government);
     result["capital_index"] = state.capital;
-    result["zollverein"] = state.customs_union; // seit M7
+    // Zollunion (seit M9): Kennung und Name, leer für ein eigenes Zollgebiet.
+    const bool in_union = state.customs_union != uhrwerk::kNone;
+    result["customs_union"] = in_union ? to_godot(at(w->customs_unions, state.customs_union).id) : String();
+    result["customs_union_name"] =
+        in_union ? to_godot(at(w->customs_unions, state.customs_union).name) : String();
     result["treasury"] = state.treasury.to_double();
     result["tax_rate_percent"] = to_percent(state.tax_rate(uhrwerk::TaxKind::Kontribution));
     // Haushalt des letzten Rechentags (gleich last_month_*); vor dem ersten Rechentag die Schätzung

@@ -79,7 +79,8 @@ data/
 │   ├── stroemungen.chron   politische Strömungen (seit M8, optional)
 │   ├── interessengruppen.chron  Interessengruppen (seit M8, optional)
 │   ├── parlamente.chron    Parlamente mit Wahlrecht und Fraktionen (seit M8, optional)
-│   └── wahlen.chron        Regeln der Wahlsimulation und Regionen (seit M8, optional)
+│   ├── wahlen.chron        Regeln der Wahlsimulation und Regionen (seit M8, optional)
+│   └── zollunionen.chron   Zollunionen mit Leitmacht und Tarif (seit M9, optional)
 ├── history/                generiert aus tabellen/ (tools/archivar), nicht von Hand bearbeiten
 │   ├── staaten/*.chron     Staaten (Reichsstände) mit datierter Historie
 │   ├── kreise/*.chron      Kreise: Gruppen von 4–12 Orten (seit M3)
@@ -100,7 +101,7 @@ data/
 Ladereihenfolge: `regeln`, `gelaende`, `konfessionen`, `kulturen` (seit M4), `berufe`, `gueter`, `beduerfnisse`,
 `betriebe`, `maerkte` (seit M5), dann alle Dateien der Ordner `szenarien` (seit M7 vor `common/`, weil das
 Startdatum bestimmt, welche Güter, Berufe und Betriebe gelten), `stroemungen`, `interessengruppen`, `parlamente`,
-`wahlen` (seit M8), `history/staaten`, `history/kreise` (seit M3), `history/verwaltung` (seit M7), `history/orte`, `history/eisenbahnen` (seit M7), `history/wahlkreise` (seit M8), jeweils **nach Dateiname sortiert**, Einträge in Dateireihenfolge. Daraus ergeben sich die Indizes in `World`. Die Szenarien kommen vor der Historie, weil das Startdatum des gewählten Szenarios bestimmt, welche datierten Blöcke gelten (Abschnitt 3.8).
+`wahlen` (seit M8), `zollunionen` (seit M9), `history/staaten`, `history/kreise` (seit M3), `history/verwaltung` (seit M7), `history/orte`, `history/eisenbahnen` (seit M7), `history/wahlkreise` (seit M8), jeweils **nach Dateiname sortiert**, Einträge in Dateireihenfolge. Daraus ergeben sich die Indizes in `World`. Die Szenarien kommen vor der Historie, weil das Startdatum des gewählten Szenarios bestimmt, welche datierten Blöcke gelten (Abschnitt 3.8).
 
 Die Dateien in `history/` erzeugt das Werkzeug `tools/archivar` aus den Tabellen in `data/tabellen/` (Format: [tabellen.md](tabellen.md)). Änderungen gehören in die Tabellen; die CI prüft mit `archivar.py --pruefen`, dass `history/` aktuell ist.
 
@@ -258,7 +259,7 @@ staat BRA {
     hofhaltung     = 30000                         # Pflicht, Ausgaben pro Jahr
     heer           = 10                            # Pflicht seit M5: Soldaten je 1.000 Einwohner, 0..1000
     schulden       = 0                             # optional seit M5: Reichstaler, Standard 0
-    zollverein     = nein                          # optional seit M7: ja/nein, Standard nein, datierbar
+    zollunion      = zollverein                    # optional seit M9: Zollunion (Abschnitt 3.25) oder keine, Standard keine
     verfassung     = konstitutionell               # optional seit M8: keine | staendisch | konstitutionell
     wahlrecht      = zensus                        # optional seit M8: Landtag (Abschnitt 3.21), Standard keines
     wahlsystem     = stichwahl                     # optional seit M8: stichwahl | relativ
@@ -282,9 +283,12 @@ die Staaten aller Epochen, und jedes Szenario lädt nur die seiner Zeit. Der Spi
 Szenarios muss bestehen (sonst fatal: `Spielerstaat 'BRA' von szenario … besitzt zum Startdatum keinen
 Ort`); die Spieler der übrigen Szenarien müssen nur bekannte Staaten sein.
 
-**Zollverein (seit M7).** `zollverein = ja` markiert die Mitgliedschaft im Deutschen Zollverein
-(`State::customs_union`). In M7 ist das Feld Inhalt ohne Wirkung auf die Simulation; der Zoll
-zwischen Mitgliedern entfällt mit M9.
+**Zollunion (seit M9).** `zollunion = <kennung>` macht den Staat zum Mitglied einer Zollunion
+(Abschnitt 3.25, `State::customs_union`); `keine` oder ein fehlendes Feld heißt eigenes Zollgebiet. Das
+Feld ist datierbar. Eine unbekannte Union ist fatal, ebenso eine, die es zum Datum des Blocks noch nicht
+gibt (`seit`, Abschnitt 3.18). Bis M8 hieß das Feld `zollverein = ja/nein`; es ist seit M9 unbekannt
+(Warnung). Die Wirkung auf Handel und Haushalt kommt mit Schritt a2 ([diplomatie.md](diplomatie.md),
+Abschnitte 3.2 bis 3.4).
 
 **Verfassung und Wahlordnung (seit M8).** `verfassung` und die Wahlfelder beschreiben den Landtag zum
 Startdatum (`State::constitution`, `State::law`); Werte wie in Abschnitt 3.21. In M8 sind sie Inhalt zur
@@ -551,8 +555,8 @@ fatal); welche Einheit gilt, steht datiert im Ort (`verwaltung`, Abschnitt 3.6).
 fehlen. Im Kern: `World::admin_units` (`AdminUnit { id, name, kind, parent, source }`).
 
 Verwaltung, Bundesgebiet und Zollverein sind in M7 **Inhalt** wie die Kreise: Sie stehen im
-Fingerabdruck der Spieldaten (Bereiche `kreise`, `orte`, `staaten`), nicht in der Prüfsumme und nicht
-im Spielstand. Sobald Gebietswechsel im Spiel die Zuordnung ändern, wandern `Location::admin` und
+Fingerabdruck der Spieldaten (Bereiche `kreise`, `orte`, seit M9 `diplomatie`), nicht in der Prüfsumme
+und nicht im Spielstand. Sobald Gebietswechsel im Spiel die Zuordnung ändern, wandern `Location::admin` und
 `Location::federal` in den Zustand.
 
 ### 3.17 `history/eisenbahnen/*.chron` (seit M7)
@@ -594,6 +598,9 @@ der Reihenfolge in der Datei; ein Kreis (A aus B, B aus A) ist fatal. Das Vorkom
 Betriebs bleibt bekannt, damit Orte es tragen dürfen. Ohne gültiges Szenario (Prüfung aller Daten) gilt alles.
 Fortschritt im Spiel – Inhalt, der während einer Partie hinzukommt – gibt es damit noch nicht: Eine Partie
 ab 1648 erreicht die Industrie nicht.
+
+Seit M8 tragen auch `interessengruppe` und `parlament` ein `seit` (Abschnitte 3.20 und 3.21), seit M9
+`zollunion` (Abschnitt 3.25); es gilt dasselbe.
 
 ### 3.19 `common/stroemungen.chron` (seit M8)
 
@@ -771,6 +778,26 @@ Bereiche stehen als `{ von bis }` mit von ≤ bis. Fehler sind:
 - zwei Blöcke `wahl` für dasselbe Parlament.
 
 Im Kern: `ElectionTargets` (`uhrwerk/election_lab.hpp`).
+
+### 3.25 `common/zollunionen.chron` (seit M9)
+
+```text
+zollunion zollverein {
+    name    = "Zollverein"        # Pflicht; steht in der Chronik („… tritt dem Zollverein bei“)
+    seit    = 1834.01.01          # optional (Abschnitt 3.18)
+    leitung = PRU                 # Pflicht: Leitmacht, ein Staatstag
+    tarif   = 0.03                # Pflicht: Vereinstarif, 0..steuersatz_max
+    quelle  = "…"                 # Pflicht
+}
+```
+
+Eine Zollunion ([diplomatie.md](diplomatie.md), Abschnitt 3.1): ein gemeinsames Zollgebiet ihrer
+Mitglieder mit einem Tarif. Die Mitglieder stehen im Feld `zollunion` der Staaten (Abschnitt 3.5).
+`seit` ist das früheste Startdatum eines Szenarios, in dem es die Union gibt; so hat 1648 keine, und
+dessen Ergebnisse bleiben bitgleich. Die Leitmacht wird nach dem Staatenbestand aufgelöst: Ein Staat ohne
+Ort zum Startdatum und eine Leitmacht, die der Union zum Startdatum nicht angehört, sind fatal, ebenso
+eine doppelte Kennung. `keine` ist als Kennung reserviert. Die Datei darf fehlen. Im Kern:
+`World::customs_unions` (`CustomsUnion { id, name, leader, tariff, source }`).
 
 ## 4. Startzustand
 

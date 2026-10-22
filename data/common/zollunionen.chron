@@ -1,0 +1,25 @@
+# Zollunionen (Meilenstein M9, docs/technik/diplomatie.md Abschnitt 3.1).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.25. 'seit' wie in Abschnitt 3.18: 1648 gibt es
+# keine Zollunion, jeder Staat ist ein eigenes Zollgebiet. Die Mitglieder stehen im Feld 'zollunion'
+# der Staaten (data/tabellen/staaten_historie.csv); die Leitmacht muss selbst Mitglied sein. Der
+# Name steht in der Chronik („… tritt dem Zollverein bei“) und braucht deshalb den Artikel „dem“.
+#
+# Alle Angaben nach Wissensstand ohne Quellenzugang; Prüfung offen. Der Tarif ist ein Spielwert
+# (Entscheidung 3): der Zollsatz der Staaten seit M5.
+
+zollunion zollverein {
+    name    = "Zollverein"
+    seit    = 1834.01.01       # Verträge von 1833, in Kraft zum 1. Januar 1834
+    leitung = PRU
+    tarif   = 0.03
+    quelle  = "Deutscher Zollverein, in Kraft seit 1. Januar 1834 unter preußischer Führung; Verlängerungen 1841/42 und 1853/54. Tarif als Spielwert. Wissensstand ohne Quellenzugang; Prüfung offen"
+}
+
+zollunion steuerverein {
+    name    = "Steuerverein"
+    seit    = 1834.05.01       # Vertrag zwischen Hannover und Braunschweig
+    leitung = HAN
+    tarif   = 0.03
+    quelle  = "Steuerverein: Hannover und Braunschweig 1834, Oldenburg 1836, Schaumburg-Lippe 1838; Braunschweig wechselt 1841/44 in den Zollverein, Hannover 1854. Tarif als Spielwert. Wissensstand ohne Quellenzugang; Prüfung offen"
+}

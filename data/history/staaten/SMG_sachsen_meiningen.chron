@@ -21,7 +21,7 @@ staat SMG {
         hofhaltung     = 19900
         heer           = 6
         schulden       = 132000
-        zollverein     = ja
+        zollunion      = zollverein
         verfassung     = konstitutionell
         wahlrecht      = staendisch
     }

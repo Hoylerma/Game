@@ -8,6 +8,21 @@ Vor Version 1.0 kann sich jede Schnittstelle ändern.
 
 ## [Unveröffentlicht]
 
+### Meilenstein M9 – Diplomatie und Zollverein (in Arbeit)
+
+Vertrag: [technik/diplomatie.md](docs/technik/diplomatie.md), Entscheidungen 1–12 wie empfohlen
+freigegeben; Stand je Schritt in Abschnitt 11 dort.
+
+- **Zollunionen als Daten (Schritt a1):** `common/zollunionen.chron` mit Zollverein (Leitung
+  Preußen) und Steuerverein (Leitung Hannover), Tarif je 3 %
+  ([chronik-skript.md](docs/technik/chronik-skript.md) Abschnitt 3.25). Das Staatsfeld
+  `zollverein = ja/nein` heißt jetzt `zollunion = <kennung>|keine`; 1848 gehören 26 Staaten zum
+  Zollverein, Hannover, Oldenburg und Schaumburg-Lippe zum Steuerverein, neun Staaten sind je ein
+  eigenes Zollgebiet. Lader und Archivar prüfen die Verweise, `uhrwerk-cli info` zeigt Unionen und
+  Mitglieder, neuer CTest `zollunionen_1848`. Inhaltsbereich `diplomatie`, Spielstand **Format 3**
+  (Spielstände aus M8 laden nicht mehr). Brücke: `get_state` liefert `customs_union` und
+  `customs_union_name` statt `zollverein`. Noch ohne Wirkung auf Handel und Haushalt; 1648 bitgleich.
+
 ### Meilenstein M8 – Politik, Parteien und Wahlen
 
 Im Lesezeichen 1848 wählt der Deutsche Bund am 1. Mai die **Nationalversammlung**: 633 Wahlkreise,

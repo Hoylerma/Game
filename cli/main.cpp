@@ -470,6 +470,41 @@ std::string politics_summary(const World& w) {
     return text;
 }
 
+/// Zollunionen mit Leitmacht, Tarif und Mitgliedern; Staaten ohne Union bilden je ein eigenes Zollgebiet
+/// (seit M9, docs/technik/diplomatie.md Abschnitt 3.1).
+std::string customs_summary(const World& w) {
+    if (w.customs_unions.empty()) {
+        return "keine (jeder Staat ein eigenes Zollgebiet)";
+    }
+    std::vector<std::vector<std::string>> members(w.customs_unions.size());
+    std::vector<Fixed> population(w.customs_unions.size());
+    std::size_t alone = 0;
+    for (std::size_t i = 0; i < w.states.size(); ++i) {
+        const Index union_index = w.states[i].customs_union;
+        if (union_index == uhrwerk::kNone) {
+            ++alone;
+            continue;
+        }
+        members[static_cast<std::size_t>(union_index)].push_back(w.states[i].tag);
+        population[static_cast<std::size_t>(union_index)] += w.state_population(static_cast<Index>(i));
+    }
+    std::string text = plural(w.customs_unions.size(), "Zollunion", "Zollunionen") + ", " +
+                       plural(alone, "Staat", "Staaten") + " für sich";
+    for (std::size_t u = 0; u < w.customs_unions.size(); ++u) {
+        const uhrwerk::CustomsUnion& c = w.customs_unions[u];
+        const std::string leader =
+            c.leader != uhrwerk::kNone ? w.states[static_cast<std::size_t>(c.leader)].tag : std::string("–");
+        std::string tags;
+        for (const std::string& tag : members[u]) {
+            tags += (tags.empty() ? "" : " ") + tag;
+        }
+        text += "\n              " + c.name + " (Leitung " + leader + ", Tarif " + format_percent(c.tariff) +
+                "): " + plural(members[u].size(), "Staat", "Staaten") + ", " +
+                format_int(population[u].round()) + " Einwohner\n                " + tags;
+    }
+    return text;
+}
+
 /// Strecken, Abschnitte und Märkte mit Bahnfracht zum Startdatum (seit M7).
 std::string railway_summary(const World& w) {
     std::size_t sections = 0;
@@ -834,6 +869,7 @@ int cmd_info(const Options& o, const fs::path& data_dir) {
               << location_district_split(w) << '\n'
               << "Eisenbahnen:  " << railway_summary(w) << '\n'
               << "Politik:      " << politics_summary(w) << '\n'
+              << "Zollunionen:  " << customs_summary(w) << '\n'
               << "Bevölkerung:  " << format_int(total.round()) << "\n\n";
 
     std::vector<std::vector<std::string>> rows;

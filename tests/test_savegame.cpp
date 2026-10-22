@@ -277,7 +277,7 @@ TEST_CASE("Spielstand: Inhaltsfingerabdruck") {
         const auto parts = uhrwerk::content_differences(fp, changed);
         CHECK(parts == std::vector<std::string_view>{"regeln", "berufe", "orte"});
     }
-    SUBCASE("Verwaltung, Bundesgebiet und Zollverein (seit M7)") {
+    SUBCASE("Verwaltung und Bundesgebiet (seit M7)") {
         World w = base;
         w.admin_units.push_back(uhrwerk::AdminUnit{"sx_land", "Sachsen", "land", uhrwerk::kNone, "Test"});
         CHECK(uhrwerk::content_differences(fp, uhrwerk::content_fingerprint(w)) ==
@@ -285,9 +285,25 @@ TEST_CASE("Spielstand: Inhaltsfingerabdruck") {
         const auto with_unit = uhrwerk::content_fingerprint(w);
         w.locations[2].admin = 0;
         w.locations[3].federal = true;
-        w.states[1].customs_union = true;
         CHECK(uhrwerk::content_differences(with_unit, uhrwerk::content_fingerprint(w)) ==
-              std::vector<std::string_view>{"staaten", "orte"});
+              std::vector<std::string_view>{"orte"});
+    }
+    SUBCASE("Zollunionen und Mitglieder (seit M9)") {
+        World w = base;
+        w.customs_unions.push_back(
+            uhrwerk::CustomsUnion{"bund", "Bund", 1, Fixed::from_ratio(3, 100), "Test"});
+        const auto with_union = uhrwerk::content_fingerprint(w);
+        CHECK(uhrwerk::content_differences(fp, with_union) == std::vector<std::string_view>{"diplomatie"});
+        w.states[1].customs_union = 0;
+        const auto with_member = uhrwerk::content_fingerprint(w);
+        CHECK(uhrwerk::content_differences(with_union, with_member) ==
+              std::vector<std::string_view>{"diplomatie"});
+        w.customs_unions[0].tariff = Fixed::from_ratio(4, 100);
+        CHECK(uhrwerk::content_differences(with_member, uhrwerk::content_fingerprint(w)) ==
+              std::vector<std::string_view>{"diplomatie"});
+        w.customs_unions[0].source = "andere Quelle"; // Quellen zählen nicht
+        w.customs_unions[0].tariff = Fixed::from_ratio(3, 100);
+        CHECK(uhrwerk::content_fingerprint(w) == with_member);
     }
     SUBCASE("Eisenbahnen und Bahnfracht (seit M7)") {
         World w = base;

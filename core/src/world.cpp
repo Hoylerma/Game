@@ -82,6 +82,10 @@ Index World::find_parliament(std::string_view id) const {
     return find_by(parliaments, id, [](const Parliament& p) -> std::string_view { return p.id; });
 }
 
+Index World::find_customs_union(std::string_view id) const {
+    return find_by(customs_unions, id, [](const CustomsUnion& u) -> std::string_view { return u.id; });
+}
+
 Index World::find_market(std::string_view id) const {
     return find_by(markets, id, [](const Market& m) -> std::string_view { return m.id; });
 }

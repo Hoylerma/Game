@@ -21,7 +21,7 @@ staat REA {
         hofhaltung     = 4400
         heer           = 6
         schulden       = 29000
-        zollverein     = ja
+        zollunion      = zollverein
         verfassung     = keine
         wahlrecht      = keines
     }

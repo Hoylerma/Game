@@ -416,11 +416,17 @@ class TestStaatenbestandUndVerwaltung(MitKopie):
             ("verwaltung.csv", "BBB;burg;", "BBB;turm;"): "unbekannter Ort 'turm' als Sitz von sl_burg",
             ("verwaltung.csv", "Kreis Burg;kreis", "Kreis Burg;Kreis"): "ungültige Art 'Kreis'",
             ("verwaltung.csv", "sl_burg;sued", "keine;sued"): "ungültige Kennung 'keine' für eine Verwaltungseinheit",
-            ("staaten_historie.csv", "zollverein;ja", "zollverein;1"): "'zollverein' erwartet ja oder nein, nicht '1'",
-            ("staaten_historie.csv", "zollverein;ja", "wahlrecht;alle"): (
+            ("staaten_historie.csv", "zollunion;nordbund", "zollunion;suedbund"): (
+                "unbekannte Zollunion 'suedbund' (common/zollunionen.chron, oder keine)"
+            ),
+            ("staaten_historie.csv", "1690.01.01;zollunion", "1670.01.01;zollunion"): (
+                "Zollunion 'nordbund' gibt es erst seit 1680.01.01 (common/zollunionen.chron)"
+            ),
+            ("staaten_historie.csv", "zollunion;nordbund", "zollverein;ja"): "unbekanntes Feld 'zollverein'",
+            ("staaten_historie.csv", "zollunion;nordbund", "wahlrecht;alle"): (
                 "'wahlrecht' erwartet keines, staendisch, zensus, dreiklassen, allgemein_maenner, nicht 'alle'"
             ),
-            ("staaten_historie.csv", "zollverein;ja", "verfassung;ja"): (
+            ("staaten_historie.csv", "zollunion;nordbund", "verfassung;ja"): (
                 "'verfassung' erwartet keine, staendisch, konstitutionell, nicht 'ja'"
             ),
         }

@@ -440,9 +440,10 @@ public:
         return d;
     }
     /// Fingerabdruck des Inhalts; Format 1 (bis M7) kennt nur die ersten 13 Bereiche (ohne politik),
-    /// die übrigen bleiben 0. So zeigt auch ein alter Spielstand seine Metadaten an.
+    /// Format 2 (M8) die ersten 14 (ohne diplomatie), die übrigen bleiben 0. So zeigt auch ein alter
+    /// Spielstand seine Metadaten an.
     ContentFingerprint content(std::uint32_t version) {
-        const std::size_t count = version == 1 ? 13 : kContentParts.size();
+        const std::size_t count = version == 1 ? 13 : version == 2 ? 14 : kContentParts.size();
         ContentFingerprint fp;
         fp.total = hex("inhalt");
         for (std::size_t i = 0; i < count; ++i) {
@@ -859,7 +860,6 @@ ContentFingerprint content_fingerprint(const World& w) {
         h.text(s.tag);
         h.text(s.short_name);
         h.i64(s.confession);
-        h.flag(s.customs_union);
     });
     // Verwaltungseinheiten (seit M7) gehören zur politischen Gliederung wie die Kreise.
     {
@@ -994,6 +994,22 @@ ContentFingerprint content_fingerprint(const World& w) {
             }
         }
         p[13] = h.value();
+    }
+    // Diplomatie (seit M9): Zollunionen und die Mitgliedschaft der Staaten.
+    {
+        Fnv h;
+        h.u64(w.customs_unions.size());
+        for (const CustomsUnion& u : w.customs_unions) {
+            h.text(u.id);
+            h.text(u.name); // steht in der Chronik bei Beitritt und Austritt
+            h.i64(u.leader);
+            h.fixed(u.tariff);
+        }
+        h.u64(w.states.size());
+        for (const State& s : w.states) {
+            h.i64(s.customs_union);
+        }
+        p[14] = h.value();
     }
     fp.total = MetaReader::content_fingerprint_total(fp.parts);
     return fp;

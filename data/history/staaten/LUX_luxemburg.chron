@@ -21,7 +21,7 @@ staat LUX {
         hofhaltung     = 11400
         heer           = 6
         schulden       = 152000
-        zollverein     = ja
+        zollunion      = zollverein
         verfassung     = staendisch
         wahlrecht      = staendisch
     }

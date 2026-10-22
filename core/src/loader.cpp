@@ -487,6 +487,13 @@ struct DistrictRef {
     int line = 0;
 };
 
+/// Leitmacht einer Zollunion (seit M9), aufgelöst nach dem Staatenbestand.
+struct CustomsUnionRef {
+    std::string leader_tag;
+    std::string file;
+    int line = 0;
+};
+
 /// Ebene eines Parlaments (seit M8): Staatstag, leer für den Deutschen Bund; Tagungsort.
 struct ParliamentRef {
     std::string state_tag;
@@ -553,6 +560,9 @@ public:
                          [&](const SourceFile& f) { load_interest_groups(f); });
         process_optional("common/parlamente.chron", [&](const SourceFile& f) { load_parliaments(f); });
         process_optional("common/wahlen.chron", [&](const SourceFile& f) { load_election_rules(f); });
+        // Zollunionen (seit M9, docs/technik/diplomatie.md) vor den Staaten, die ihnen angehören; die Datei
+        // darf fehlen.
+        process_optional("common/zollunionen.chron", [&](const SourceFile& f) { load_customs_unions(f); });
 
         for (const std::string& name : list_folder("history/staaten")) {
             process(name, [&](const SourceFile& f) { load_states(f); });
@@ -581,6 +591,7 @@ public:
 
         drop_states_without_land();
         resolve_parliaments();
+        resolve_customs_unions();
         check_players(scenarios, selected);
         check_capitals();
         check_districts();
@@ -708,6 +719,7 @@ private:
                                       : kind == "beruf"            ? "Beruf"
                                       : kind == "betrieb"          ? "Betrieb"
                                       : kind == "interessengruppe" ? "Interessengruppe"
+                                      : kind == "zollunion"        ? "Zollunion"
                                                                    : "Parlament";
             issues_.error(file.name, node.line,
                           "doppelte Kennung " + quote(node.value) + " für " + label +
@@ -2182,6 +2194,73 @@ private:
         }
     }
 
+    /// Zollunionen (seit M9, diplomatie.md Abschnitt 3.1): zollunion <kennung> { name seit leitung tarif
+    /// quelle }. Eine Union mit späterem 'seit' wird geprüft, gehört aber nicht zur Welt.
+    void load_customs_unions(const SourceFile& file) {
+        for_each_definition(file, "zollunion", "zollunion <kennung> { … }", [&](const ScriptNode& node) {
+            check_id(file, node, "Kennung einer Zollunion");
+            if (node.value == "keine") {
+                issues_.error(file.name, node.line,
+                              "„keine“ ist als Kennung einer Zollunion reserviert (zollunion = keine)");
+            }
+            const bool later = is_later(file, node, "zollunion");
+            const std::string what = "zollunion " + node.value;
+            Fields f(node, file.name, what, issues_, {"name", "seit", "leitung", "tarif", "quelle"});
+            CustomsUnion u;
+            u.id = node.value;
+            u.name = f.text("name").value_or("");
+            CustomsUnionRef ref;
+            ref.file = file.name;
+            if (const auto leader = f.text("leitung")) {
+                ref.line = node.find("leitung")->line;
+                if (is_state_tag(*leader)) {
+                    ref.leader_tag = *leader;
+                } else {
+                    issues_.error(file.name, ref.line,
+                                  "ungültiger Staatstag " + quote(*leader) + " als Leitung von " + what);
+                }
+            }
+            const Fixed max_rate = tax_rate_max_known_ ? world_.rules.tax_rate_max : Fixed::one();
+            u.tariff = f.fixed("tarif", between(fx(0), max_rate)).value_or(Fixed{});
+            u.source = f.text("quelle").value_or("");
+            if (later) {
+                return;
+            }
+            const auto index = static_cast<Index>(world_.customs_unions.size());
+            if (register_id(customs_unions_, u.id, index, file.name, node.line, "Zollunion")) {
+                world_.customs_unions.push_back(std::move(u));
+                customs_union_refs_.push_back(std::move(ref));
+            }
+        });
+        check_later_ids("zollunion", customs_unions_, "Zollunion");
+    }
+
+    /// Leitmacht der Zollunionen nach drop_states_without_land: Sie muss zum Startdatum bestehen und der
+    /// Union angehören.
+    void resolve_customs_unions() {
+        for (std::size_t i = 0; i < world_.customs_unions.size(); ++i) {
+            CustomsUnion& u = world_.customs_unions[i];
+            const CustomsUnionRef& ref = customs_union_refs_[i];
+            if (ref.leader_tag.empty()) {
+                continue; // fehlendes oder ungültiges Feld wurde bereits gemeldet
+            }
+            u.leader = lookup(states_, ref.leader_tag);
+            if (u.leader == kNone) {
+                issues_.error(ref.file, ref.line,
+                              dropped_states_.count(ref.leader_tag) != 0
+                                  ? "Leitmacht " + quote(ref.leader_tag) + " von zollunion " + u.id +
+                                        " besitzt zum Startdatum keinen Ort"
+                                  : "unbekannter Staat " + quote(ref.leader_tag) +
+                                        " als Leitung von zollunion " + u.id);
+            } else if (world_.states[static_cast<std::size_t>(u.leader)].customs_union !=
+                       static_cast<Index>(i)) {
+                issues_.error(ref.file, ref.line,
+                              "Leitmacht " + ref.leader_tag + " gehört zum Startdatum nicht zu zollunion " +
+                                  u.id + " (zollunion = " + u.id + " im Staat)");
+            }
+        }
+    }
+
     /// Ebene der Parlamente nach drop_states_without_land: Der Staat muss zum Startdatum bestehen.
     void resolve_parliaments() {
         for (std::size_t i = 0; i < world_.parliaments.size(); ++i) {
@@ -2307,7 +2386,7 @@ private:
             Fields f(merged, file.name, "staat " + node.value, state_issues,
                      {"name",       "kurzname",   "farbe",      "hauptstadt",    "regierungsform",
                       "herrscher",  "konfession", "schatz",     "kontribution",  "akzise",
-                      "zoll",       "hofhaltung", "heer",       "schulden",      "zollverein",
+                      "zoll",       "hofhaltung", "heer",       "schulden",      "zollunion",
                       "verfassung", "wahlrecht",  "wahlsystem", "wahl_indirekt", "wahl_zensus",
                       "quelle"});
             State s;
@@ -2337,8 +2416,18 @@ private:
             if (f.has("schulden")) {
                 s.debt = f.fixed("schulden", between(fx(0), fx(1'000'000'000'000))).value_or(Fixed{});
             }
-            if (f.has("zollverein")) {
-                s.customs_union = f.boolean("zollverein").value_or(false);
+            // Zollunion (seit M9, diplomatie.md Abschnitt 3.1); „keine“: eigenes Zollgebiet.
+            if (f.has("zollunion")) {
+                if (const auto id = f.text("zollunion"); id && *id != "keine") {
+                    const int line = merged.find("zollunion")->line;
+                    s.customs_union = lookup(customs_unions_, *id);
+                    if (s.customs_union == kNone && !later_reference("zollunion", "Zollunion", *id, file.name,
+                                                                     line, "staat " + node.value)) {
+                        issues_.error(file.name, line,
+                                      "unbekannte Zollunion " + quote(*id) + " in staat " + node.value +
+                                          " (common/zollunionen.chron)");
+                    }
+                }
             }
             // Verfassung und Wahlordnung des Landtags (seit M8, Abschnitt 3.5).
             if (f.has("verfassung")) {
@@ -3136,6 +3225,9 @@ private:
     std::vector<RegionRef> region_refs_;         // parallel zu world_.political_regions
     bool election_rules_found_ = false;          // common/wahlen.chron mit wahlregeln gelesen
     std::vector<DistrictRef> district_refs_;     // parallel zu world_.electoral_districts
+
+    Registry customs_unions_;                         // seit M9
+    std::vector<CustomsUnionRef> customs_union_refs_; // parallel zu world_.customs_unions
     // Inhalt ab einem Datum (seit M7): spätere Definitionen als „gut:kohle“ → 'seit'.
     struct LaterDefinition {
         Date date;

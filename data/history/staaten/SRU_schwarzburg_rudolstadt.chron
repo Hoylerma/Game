@@ -21,7 +21,7 @@ staat SRU {
         hofhaltung     = 9900
         heer           = 6
         schulden       = 66000
-        zollverein     = ja
+        zollunion      = zollverein
         verfassung     = konstitutionell
         wahlrecht      = staendisch
     }

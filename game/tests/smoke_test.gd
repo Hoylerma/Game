@@ -38,7 +38,8 @@ const STATE_FIELDS: PackedStringArray = [
 	"soldiers",
 	"bankruptcies",
 	"premium_months",
-	"zollverein",
+	"customs_union",
+	"customs_union_name",
 	"bund",
 ]
 const LOCATION_FIELDS: PackedStringArray = [
@@ -209,7 +210,7 @@ func _run() -> void:
 		print("  –   Kartenprüfung übersprungen (--ohne-karte)")
 
 
-## Lesezeichen 1848 (seit M7): Szenarioliste, Staatswahl, Verwaltung, Bundesgebiet, Zollverein.
+## Lesezeichen 1848 (seit M7): Szenarioliste, Staatswahl, Verwaltung, Bundesgebiet, Zollunionen.
 func _check_scenario_1848() -> void:
 	var sim := SimulationClient.create()
 	var scenarios := sim.get_scenarios(UhrwerkPaths.data_dir())
@@ -234,9 +235,17 @@ func _check_scenario_1848() -> void:
 	var prussia := sim.get_state_index("PRU")
 	var state := sim.get_state(prussia)
 	_check(
-		bool(state.get("zollverein", false)) and bool(state.get("bund", false)),
+		str(state.get("customs_union", "")) == "zollverein" and bool(state.get("bund", false)),
 		"Preußen im Zollverein und im Deutschen Bund",
-		"Preußen: zollverein %s, bund %s" % [state.get("zollverein"), state.get("bund")]
+		"Preußen: Zollunion %s, bund %s" % [state.get("customs_union"), state.get("bund")]
+	)
+	var hanover := sim.get_state(sim.get_state_index("HAN"))
+	var austria := sim.get_state(sim.get_state_index("AUT"))
+	_check(
+		str(hanover.get("customs_union", "")) == "steuerverein"
+		and str(austria.get("customs_union", "-")).is_empty(),
+		"Hannover im Steuerverein, Österreich ein eigenes Zollgebiet (seit M9)",
+		"Hannover %s, Österreich %s" % [hanover.get("customs_union"), austria.get("customs_union")]
 	)
 	var berlin := sim.get_location(sim.get_location_index("berlin_coelln"))
 	var chain: Array = berlin.get("verwaltung", [])

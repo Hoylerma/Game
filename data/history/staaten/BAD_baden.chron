@@ -21,7 +21,7 @@ staat BAD {
         hofhaltung     = 78700
         heer           = 7
         schulden       = 2361000
-        zollverein     = ja
+        zollunion      = zollverein
         verfassung     = konstitutionell
         wahlrecht      = zensus
         wahlsystem     = stichwahl

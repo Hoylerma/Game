@@ -21,7 +21,7 @@ staat AUT {
         hofhaltung     = 491100
         heer           = 10
         schulden       = 35602000
-        zollverein     = nein
+        zollunion      = keine
         verfassung     = staendisch
         wahlrecht      = staendisch
     }

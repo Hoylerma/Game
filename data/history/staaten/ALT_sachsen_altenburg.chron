@@ -49,7 +49,7 @@ staat ALT {
         hofhaltung     = 19300
         heer           = 6
         schulden       = 129000
-        zollverein     = ja
+        zollunion      = zollverein
         verfassung     = konstitutionell
         wahlrecht      = staendisch
     }

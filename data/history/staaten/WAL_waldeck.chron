@@ -21,7 +21,7 @@ staat WAL {
         hofhaltung     = 7700
         heer           = 6
         schulden       = 52000
-        zollverein     = ja
+        zollunion      = zollverein
         verfassung     = konstitutionell
         wahlrecht      = staendisch
     }

@@ -18,7 +18,7 @@ staat LUE {
         hofhaltung     = 800
         heer           = 4
         schulden       = 45000
-        zollverein     = nein
+        zollunion      = keine
         verfassung     = staendisch
         wahlrecht      = staendisch
     }

@@ -1,6 +1,7 @@
 # Diplomatie und Zollverein (Meilenstein M9)
 
-> **Status: Entwurf** – Entscheidungen offen (Abschnitt 9). Grundlage sind
+> **Status: verbindlich** – Entscheidungen 1–12 wie empfohlen freigegeben (Abschnitt 9); Umsetzung
+> läuft, Stand in Abschnitt 11. Grundlage sind
 > [14 Diplomatie](../14_diplomatie.md) (Abschnitte 1, 3, 4 und 5),
 > [08 Wirtschaft und Finanzen](../08_wirtschaft_und_finanzen.md) (Abschnitt 5.3, Zollverein),
 > [12 Föderalismus](../12_foederalismus_und_bundeslaender.md) und der Meilensteinplan
@@ -81,29 +82,30 @@ und Ausgangsbeziehungen sind Spielwerte nach Literaturkenntnis, `ungeprueft` (En
 
 ### 3.1 Daten
 
-Neue Datei `common/zollunionen.chron`:
+Neue Datei `common/zollunionen.chron` (Format: [chronik-skript.md](chronik-skript.md), Abschnitt 3.25):
 
 ```text
 zollunion zollverein {
-    name       = "Deutscher Zollverein"
-    seit       = 1834.01.01
-    leitung    = PRU           # Leitmacht: entscheidet über Beitritte (Abschnitt 3.5)
-    tarif      = 0.03          # Vereinstarif, gilt für alle Mitglieder (Spielwert)
-    verteilung = bevoelkerung  # Einnahmen nach Bevölkerung (Abschnitt 3.4)
-    quelle     = "…"
+    name    = "Zollverein"   # steht in der Chronik: „Hannover tritt dem Zollverein bei“
+    seit    = 1834.01.01
+    leitung = PRU            # Leitmacht: entscheidet über Beitritte (Abschnitt 3.5), selbst Mitglied
+    tarif   = 0.03           # Vereinstarif, gilt für alle Mitglieder (Spielwert)
+    quelle  = "…"
 }
 
 zollunion steuerverein {
-    name       = "Steuerverein"
-    seit       = 1834.01.01
-    leitung    = HAN
-    tarif      = 0.03
-    verteilung = bevoelkerung
-    quelle     = "…"
+    name    = "Steuerverein"
+    seit    = 1834.05.01
+    leitung = HAN
+    tarif   = 0.03
+    quelle  = "…"
 }
 ```
 
-Das Staatsfeld `zollverein = ja/nein` wird zu **`zollunion = <kennung>`** (leer: eigenes
+Die Einnahmen werden nach der Bevölkerung verteilt (Abschnitt 3.4, Entscheidung 4); ein Feld dafür
+gibt es nicht, solange es nur diesen Schlüssel gibt.
+
+Das Staatsfeld `zollverein = ja/nein` wird zu **`zollunion = <kennung>`** (`keine`: eigenes
 Zollgebiet), datiert wie bisher. Der Archivar übernimmt die Werte aus M7; dazu kommen die Mitglieder
 des **Steuervereins** (Entscheidung 6): Hannover, Oldenburg (seit 1836) und Schaumburg-Lippe (seit
 1838). Braunschweig wechselte 1841/44 in den Zollverein.
@@ -169,7 +171,7 @@ Neuer Befehl **`Zollunion(staat, union)`**; `union = kNone` heißt Austritt.
   Spiel zu träge.
 - Mitglieder können ihren Zoll nicht selbst einstellen: Der Regler zeigt den Vereinstarif.
   Änderungen des Tarifs (Generalkonferenz, Einstimmigkeit) kommen mit M11 und M12.
-- Chronik: „Hannover tritt zum 1. Januar 1849 dem Deutschen Zollverein bei.“
+- Chronik: „Hannover tritt zum 1. Januar 1849 dem Zollverein bei.“
 
 ### 3.6 Messung und Abnahme
 
@@ -360,7 +362,7 @@ Weitere Tests:
 
 | Datei | Inhalt |
 |---|---|
-| `common/zollunionen.chron` | Zollverein und Steuerverein mit Leitung, Tarif, Verteilung |
+| `common/zollunionen.chron` | Zollverein und Steuerverein mit Leitung und Tarif |
 | `tabellen/staaten_historie.csv` | Feld `zollunion` statt `zollverein`, datiert (Steuerverein neu) |
 | `tabellen/beziehungen.csv` (neu) | Grundbeziehungen für einzelne Paare mit Quelle (Dualismus, Dynastien, Konfessionsblöcke) |
 | `common/bundesversammlung.chron` | Stimmen im Engeren Rat (mit Kurien) und im Plenum, Präsidialmacht |
@@ -369,7 +371,7 @@ Weitere Tests:
 Der Archivar prüft `zollunion` (bekannte Union, nicht vor ihrem `seit`) und `beziehungen.csv`
 (bekannte Staaten, Wert im Bereich, kein Paar doppelt).
 
-## 9. Entscheidungen (vor der Umsetzung zu bestätigen)
+## 9. Entscheidungen (wie empfohlen freigegeben)
 
 1. **Teilung M9a/M9b.** Empfehlung: ja (Abschnitt 1). Alternative: Diplomatie zuerst, dann
    Zollverein.
@@ -418,3 +420,9 @@ Der Archivar prüft `zollunion` (bekannte Union, nicht vor ihrem `seit`) und `be
 | b2 | **Bundesversammlung** und **diplomatische Spiele** im Kern | Einheitentests, Wiederholung mit Befehlen |
 | b3 | **Brücke und Godot:** Fenster Diplomatie, Bundesversammlung, Spiel, Deutsche Frage, Kartenmodus „Beziehungen“ | Godot-Tests, Screenshots |
 | b4 | **Doku und Review** (Abschluss M9) | CI grün |
+
+## 11. Umsetzungsstand
+
+| Schritt | Stand |
+|---|---|
+| a1 Daten | `common/zollunionen.chron` mit Zollverein (Leitung Preußen) und Steuerverein (Leitung Hannover), beide mit Tarif 3 % (chronik-skript.md 3.25). Staatsfeld `zollunion` statt `zollverein` (chronik-skript.md 3.5; die Brücke liefert `customs_union` und `customs_union_name` statt `zollverein`); 1848: 26 Staaten im Zollverein, Hannover, Oldenburg und Schaumburg-Lippe im Steuerverein, neun für sich. Lader mit Prüfungen (unbekannte oder spätere Union, Leitmacht ohne Ort oder nicht Mitglied, `keine` reserviert), Archivar (bekannte Union, Datum nicht vor ihrem `seit`), Inhaltsbereich `diplomatie`, Spielstand Format 3 (speicherstaende.md, Abschnitt 6), `uhrwerk-cli info` mit Unionen und Mitgliedern. Tests: Lader (Mitglieder vor und nach einem Wechsel, Fehler), Fingerabdruck, Format 1 und 2, CTest `zollunionen_1848` mit der Mitgliederliste; Godot-Rauchtest. Ohne Wirkung auf die Simulation; 1648 bitgleich (`5db13a66d63e6079`). |

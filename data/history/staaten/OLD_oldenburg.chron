@@ -21,7 +21,7 @@ staat OLD {
         hofhaltung     = 39100
         heer           = 6
         schulden       = 98000
-        zollverein     = nein
+        zollunion      = steuerverein
         verfassung     = keine
         wahlrecht      = keines
     }

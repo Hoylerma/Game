@@ -21,7 +21,7 @@ staat SSH {
         hofhaltung     = 8000
         heer           = 6
         schulden       = 53000
-        zollverein     = ja
+        zollunion      = zollverein
         verfassung     = konstitutionell
         wahlrecht      = staendisch
     }

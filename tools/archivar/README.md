@@ -63,6 +63,8 @@ Werte werden als Text aus der Tabelle übernommen (keine Gleitkomma-Umwandlung).
   `bund`, `staaten_historie.csv` das Feld `zollverein` (seit M8 auch `verfassung`, `wahlrecht`,
   `wahlsystem`, `wahl_indirekt` und `wahl_zensus`). Unbekannte Einheiten, Kreise in `ueber` und
   eine Einheit eines anderen Staates sind Fehler.
+- Seit M9 heißt das Feld `zollverein` `zollunion`: eine Union aus `common/zollunionen.chron` (die
+  Datei darf fehlen) oder `keine`. Eine unbekannte Union und ein Datum vor ihrem `seit` sind Fehler.
 - `eisenbahnen.csv` erzeugt `history/eisenbahnen/<datei>.chron`: je Zeile ein Abschnitt einer
   Strecke. Unbekannte Orte, gleicher Anfang und gleiches Ende und doppelte Abschnitte (auch auf
   verschiedenen Strecken) sind Fehler, Abschnitte über 120 km und gleiche Namen verschiedener

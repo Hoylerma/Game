@@ -49,7 +49,7 @@ staat MSC {
         hofhaltung     = 80600
         heer           = 6
         schulden       = 873000
-        zollverein     = nein
+        zollunion      = keine
         verfassung     = staendisch
         wahlrecht      = staendisch
     }
