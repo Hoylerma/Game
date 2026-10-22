@@ -60,6 +60,18 @@ freigegeben; Stand je Schritt in Abschnitt 11 dort.
   Gesandter) und `Vertrag` (Bündnis ab Beziehung 100, Garantie ab 50, kein Bündnis mit dem Verbündeten
   eines Gegners; Kündigung). `uhrwerk-cli info` zeigt Gegner, Gesandte und die Lager zwischen Preußen
   und Österreich. Spielstände 1848 aus M9a laden nicht mehr (Inhalt `diplomatie`); 1648 bitgleich.
+- **Bundesversammlung und diplomatische Spiele im Kern (Schritt b2):**
+  - Neue Daten `common/bundesversammlung.chron`: Präsidium Österreich, Plenum mit 68 Stimmen, Engerer
+    Rat mit 17 Stimmen (Kurien der kleinen Staaten). Befehl `Bundesantrag` für Bundesreform,
+    Zolleinigung, Bundesintervention und Präsidium; Abstimmung am nächsten Monatsersten nach den
+    Beziehungen zum Antragsteller und zum stärksten Gegner, mit Chronik und Wirkung (Zolleinigung:
+    alle Bundesstaaten treten der Union bei).
+  - Diplomatische Spiele: Befehl `Forderung` (Führung im Bund, Beitritt zur Zollunion, Bündnis lösen)
+    mit Parteinahme der Bundesstaaten, drei Stufen (Protest, Ultimatum, Mobilmachung) zu 30 Tagen,
+    Befehl `Manoever` (nachgeben, Vermittlung, eskalieren) und Auflösung nach Stärke; Mobilmachung
+    kostet das 1,5-Fache des Heeres.
+  - `uhrwerk-cli info` zeigt die Bundesversammlung. Spielstände 1848 aus Schritt b1 laden nicht mehr;
+    1648 bitgleich.
 
 ### Meilenstein M8 – Politik, Parteien und Wahlen
 

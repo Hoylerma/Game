@@ -66,4 +66,57 @@ DiplomacyDecision request_envoy(World& world, Index state, Index target, bool se
 DiplomacyDecision evaluate_treaty(const World& world, Index state, Index target, TreatyAction action);
 DiplomacyDecision request_treaty(World& world, Index state, Index target, TreatyAction action);
 
+/// Bundesstaat: mindestens ein Ort im Bundesgebiet.
+bool federal_state(const World& world, Index state);
+/// Beziehung einmalig ändern (Bundesintervention, diplomatische Spiele), begrenzt auf −200..200.
+void adjust_relation(World& world, Index a, Index b, Fixed delta);
+
+// ─── Bundesversammlung (seit Schritt b2, Abschnitt 4.4) ─────────────────────
+
+/// Es gibt eine Bundesversammlung, und Diplomatie gilt.
+bool has_diet(const World& world);
+std::int32_t plenum_votes(const World& world, Index state);
+/// Stärkster Gegner eines Antrags: Bundesreform die Präsidialmacht, Zolleinigung der
+/// bevölkerungsreichste Bundesstaat außerhalb der Union, der keiner anderen Union bloß als Mitglied
+/// angehört (eigenes Zollgebiet oder Leitmacht), Intervention ihr Ziel, Präsidium die Präsidialmacht.
+/// Ist der Antragsteller selbst dieser Staat, der bevölkerungsreichste übrige Bundesstaat.
+Index motion_opponent(const World& world, MotionKind kind, Index applicant, Index target);
+/// Stimme eines Staates nach Regel: Ja, wenn seine Beziehung zum Antragsteller höher ist als zum Gegner.
+/// Der Antragsteller stimmt mit Ja, der Gegner mit Nein.
+bool votes_yes(const World& world, Index state, Index applicant, Index opponent);
+/// Antrag stellen (Accepted) oder ungültig: ohne Bundesversammlung, ohne Plenarstimme, wenn schon ein
+/// Antrag offen ist oder das Ziel nicht passt.
+DiplomacyDecision evaluate_motion(const World& world, Index applicant, MotionKind kind, Index target);
+DiplomacyDecision file_motion(World& world, Index applicant, MotionKind kind, Index target);
+/// Abstimmung ohne Wirkung: Stimmen in Plenum und Engerem Rat und Mehrheit nach Art des Antrags.
+MotionResult tally_motion(const World& world, const Motion& motion);
+/// Monatserster: den offenen Antrag abstimmen (nicht am Tag seiner Stellung), Wirkung und Chronik.
+void run_diet(World& world);
+
+// ─── Diplomatische Spiele (seit Schritt b2, Abschnitt 4.5) ──────────────────
+
+/// Befehl Manöver (Command::value).
+enum class Manoeuvre : std::int32_t { Yield = 0, Mediate = 1, Escalate = 2 };
+
+/// Index des laufenden Spiels, in dem der Staat Hauptpartei ist, sonst kNone.
+Index play_of(const World& world, Index state);
+/// Soldaten eines Staates (Heer je 1.000 Einwohner × Einwohner).
+Fixed state_strength(const World& world, Index state);
+/// Stärke einer Seite: Hauptpartei und Unterstützer.
+Fixed side_strength(const World& world, const DiplomaticPlay& play, bool demander_side);
+/// Parteinahme der übrigen Bundesstaaten: Bündnis, dann Garantie, sonst Neigung über play_leaning.
+void play_sides(const World& world, Index demander, Index target, std::vector<Index>& demander_side,
+                std::vector<Index>& target_side);
+/// Forderung stellen (Accepted, das Spiel beginnt) oder ungültig.
+DiplomacyDecision evaluate_demand(const World& world, Index demander, Index target, DemandKind kind);
+DiplomacyDecision start_play(World& world, Index demander, Index target, DemandKind kind);
+/// Manöver einer Hauptpartei: Nachgeben (sofort), Vermittlung (angenommen, wenn die eigene Seite
+/// mindestens play_yield der anderen stark ist, sonst Rejected), Eskalieren (für die laufende Stufe).
+DiplomacyDecision evaluate_manoeuvre(const World& world, Index state, Manoeuvre manoeuvre);
+DiplomacyDecision apply_manoeuvre(World& world, Index state, Manoeuvre manoeuvre);
+/// Täglich: Ende einer Stufe mit Entscheidung der Seiten, Eskalation und Auflösung.
+void run_plays(World& world);
+/// Hauptpartei eines Spiels auf der Stufe Mobilmachung (Heereskosten × mobilization).
+bool mobilized(const World& world, Index state);
+
 } // namespace uhrwerk

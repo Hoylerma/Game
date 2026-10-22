@@ -34,7 +34,8 @@ Zollgebiete (je Staat Zollunion und Anteil an der Vereinskasse, je Union die Ver
 beantragten Wechsel, je Markt Gebiete, Anteile und fremder Einfuhranteil), **nur in Welten mit
 Zollunionen** ([diplomatie.md](diplomatie.md), Abschnitt 5); seit M9 (Schritt b1) die Diplomatie (die
 Beziehung je Staatenpaar, die Gesandten und Verträge mit Datum, je Staat die Kosten der Gesandten im
-Haushalt), **nur in Welten mit Deutschem Bund**; seit M8 die
+Haushalt; seit Schritt b2 die Präsidialmacht, der offene Antrag, die Abstimmungen, die laufenden
+diplomatischen Spiele mit Seiten und Stufe und ihre Ergebnisse), **nur in Welten mit Deutschem Bund**; seit M8 die
 abgehaltenen Wahlen (je Wahlkreis Berechtigte, Wähler, Stimmen je Strömung, Sieger, Stichwahl, Boykott,
 Meldereihenfolge; je Abgeordnetem Wahlkreis, Strömung, Position, Fraktion), der Wahlkampf je
 Wahlkreis und Strömung (Mobilisierung, Flugblätter, Vereine) sowie Parteikasse und Spenden je
@@ -91,7 +92,7 @@ Simulation beeinflusst, und ein Gesamtwert über die 15 Bereiche (seit M9; M8 14
 | `staaten`, `kreise` | Kennung, Kurzname und Konfession des Herrscherhauses der Staaten, die zum Startdatum bestehen (der Zollverein bis M8, seit M9 unter `diplomatie`); Kennungen der Kreise; Verwaltungseinheiten mit Kennung, Art und übergeordneter Einheit (seit M7) |
 | `orte` | Kennung, Name, Gelände, Kreis, Lage, Fläche, Stadt, Markt, Vorkommen, Hafen, Verwaltungseinheit und Bundesgebiet (seit M7); die Zahl der Orte |
 | `politik` (seit M8) | Strömungen (Kennung, Name, Position), Interessengruppen (Mitglieder, Neigung), Parlamente mit Wahl, Fraktionen, Sitz und Name, Verfassung und Wahlordnung der Staaten, Wahlkreise mit Name, Staat, Sitzen und Orten, Wahlregeln und Regionen ([politik.md](politik.md)) |
-| `diplomatie` (seit M9) | Zollunionen mit Kennung, Name, Leitmacht, Tarif und ausgeschlossenen Staaten; die Mitgliedschaft der Staaten ist seit Schritt a2 Zustand. Seit Schritt b1 in Welten mit Deutschem Bund auch die Regeln der Diplomatie und die Grundbeziehungen ([diplomatie.md](diplomatie.md)) |
+| `diplomatie` (seit M9) | Zollunionen mit Kennung, Name, Leitmacht, Tarif und ausgeschlossenen Staaten; die Mitgliedschaft der Staaten ist seit Schritt a2 Zustand. Seit Schritt b1 in Welten mit Deutschem Bund auch die Regeln der Diplomatie und die Grundbeziehungen, seit b2 die Bundesversammlung (Präsidium, Plenum, Engerer Rat) ([diplomatie.md](diplomatie.md)) |
 
 **Nicht** dazu gehören volle Staatsnamen, Farben, Quellen und Beschreibungen: Eine korrigierte
 Quelle macht alte Spielstände nicht unbrauchbar. Der **Kurzname der Staaten und der Name der Orte
@@ -202,8 +203,10 @@ der Befehle bleibt N. Mit Zollunionen (seit M9) wird danach jeder Testbefehl mit
 zum Befehl Zollunion (Staat −1 bis hinter den letzten, Union −1 = Austritt bis hinter die letzte).
 Mit Deutschem Bund (seit M9, Schritt b1) wird danach jeder Testbefehl mit Wahrscheinlichkeit ¼ zum
 Befehl Gesandter oder Vertrag (je zur Hälfte; Staat und Ziel −1 bis hinter den letzten, Gesandter 0
-oder 1, Vertragshandlung 0 bis 4, 4 ist ungültig). Ohne Parlament, Zollunion und Bund bleibt die Folge
-der Zufallszahlen wie vor M8.
+oder 1, Vertragshandlung 0 bis 4, 4 ist ungültig). Mit Bundesversammlung (seit Schritt b2) wird danach
+jeder Testbefehl mit Wahrscheinlichkeit ¼ zum Antrag, zur Forderung oder zum Manöver (je ein Drittel;
+Art 0 bis 4, 4 ist ungültig). Ohne Parlament, Zollunion und Bund bleibt die Folge der Zufallszahlen wie
+vor M8.
 
 ## 6. Versionen und Migration
 
@@ -224,7 +227,10 @@ der Zufallszahlen wie vor M8.
   Deutschem Bund die Beziehungen, Gesandten und Verträge im Zustand, die Befehle `Gesandter` und
   `Vertrag` im Protokoll (Ziel = Staat, Wert = Handlung) und die Regeln der Diplomatie und die
   Grundbeziehungen im Bereich `diplomatie`; ein Spielstand 1848 aus M9a lädt daher nicht mehr („Inhalt
-  geändert: diplomatie“). Spielstände von 1648 bleiben gültig: Ohne Bund zählen die Regeln nicht.
+  geändert: diplomatie“). Spielstände von 1648 bleiben gültig: Ohne Bund zählen die Regeln nicht. Seit
+  Schritt b2 kommen die Bundesversammlung, die Anträge und die diplomatischen Spiele hinzu (Befehle
+  `Bundesantrag`, `Forderung`, `Manoever` mit der Art im Wert); ein Spielstand 1848 aus Schritt b1 lädt
+  ebenso nicht mehr.
 - Jede Änderung am Zustand (neues Feld, neue Reihenfolge) erhöht die Formatversion. Der Test
   „Spielstand: Formatwache“ verhindert, dass das vergessen wird: Er speichert die Test-Fixture nach
   einem Jahr und vergleicht den Prüfwert der Nutzdaten mit einem festgehaltenen Wert. Ändert er

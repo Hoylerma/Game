@@ -797,6 +797,60 @@ std::string validate_state(const Simulation& sim) {
                 return "Vertrag mit ungültigem Verweis";
             }
         }
+        // Bundesversammlung und diplomatische Spiele (seit Schritt b2).
+        const auto motion_target_ok = [&](MotionKind kind, Index target) {
+            switch (kind) {
+            case MotionKind::CustomsUnification:
+                return in(target, w.customs_unions.size());
+            case MotionKind::Intervention:
+                return in(target, S);
+            case MotionKind::Reform:
+            case MotionKind::Presidency:
+                return target == kNone;
+            }
+            return false;
+        };
+        if (!none_or_in(w.diet_presidency, S) || w.motions.size() > 1) {
+            return "Bundesversammlung ungültig";
+        }
+        for (const Motion& m : w.motions) {
+            if (!in(m.applicant, S) || !motion_target_ok(m.kind, m.target) || !is_valid(m.filed)) {
+                return "Antrag mit ungültigem Verweis";
+            }
+        }
+        for (const MotionResult& r : w.motion_results) {
+            if (!in(r.applicant, S) || !motion_target_ok(r.kind, r.target) || !none_or_in(r.opponent, S) ||
+                !is_valid(r.date)) {
+                return "Abstimmung mit ungültigem Verweis";
+            }
+        }
+        const auto demand_ok = [&](DemandKind kind, Index customs_union) {
+            return kind == DemandKind::CustomsUnion
+                       ? in(customs_union, w.customs_unions.size())
+                       : (kind == DemandKind::Leadership || kind == DemandKind::BreakAlliance) &&
+                             customs_union == kNone;
+        };
+        for (const DiplomaticPlay& p : w.plays) {
+            if (!in(p.demander, S) || !in(p.target, S) || p.demander == p.target ||
+                !demand_ok(p.kind, p.customs_union) || p.stage < 1 || p.stage > 3 || !is_valid(p.started) ||
+                !is_valid(p.stage_started)) {
+                return "diplomatisches Spiel mit ungültigem Verweis";
+            }
+            for (const std::vector<Index>* side : {&p.demander_side, &p.target_side}) {
+                for (const Index s : *side) {
+                    if (!in(s, S)) {
+                        return "Unterstützer mit ungültigem Verweis";
+                    }
+                }
+            }
+        }
+        for (const PlayResult& r : w.play_results) {
+            if (!in(r.demander, S) || !in(r.target, S) || !demand_ok(r.kind, r.customs_union) ||
+                r.stage < 1 || r.stage > 3 || !is_valid(r.started) || !is_valid(r.ended) ||
+                static_cast<int>(r.outcome) > static_cast<int>(PlayOutcome::Compromise)) {
+                return "Spielergebnis mit ungültigem Verweis";
+            }
+        }
     }
     // Wahlen (seit M8): Wahlkreise des eigenen Parlaments, Stimmen je Strömung.
     const std::size_t C = w.currents.size();
@@ -1085,6 +1139,27 @@ ContentFingerprint content_fingerprint(const World& w) {
                 h.i64(r.a);
                 h.i64(r.b);
                 h.fixed(r.value);
+            }
+            // Bundesversammlung und Regeln der Spiele (seit Schritt b2).
+            for (const Fixed f :
+                 {d.intervention, d.play_leaning, d.play_break, d.play_stage, d.play_yield, d.mobilization}) {
+                h.fixed(f);
+            }
+            h.i64(d.play_stage_days);
+            h.text(w.diet.id);
+            h.text(w.diet.name); // steht in der Chronik der Anträge
+            h.i64(w.diet.presidency);
+            h.u64(w.diet.plenum.size());
+            for (const std::int32_t votes : w.diet.plenum) {
+                h.i64(votes);
+            }
+            h.u64(w.diet.council.size());
+            for (const CouncilVote& vote : w.diet.council) {
+                h.text(vote.id);
+                h.u64(vote.states.size());
+                for (const Index s : vote.states) {
+                    h.i64(s);
+                }
             }
         }
         p[14] = h.value();

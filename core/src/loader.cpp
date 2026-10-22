@@ -18,6 +18,7 @@
 #include <string>
 #include <string_view>
 #include <system_error>
+#include <tuple>
 #include <utility>
 #include <vector>
 
@@ -505,6 +506,23 @@ struct BaseRelationRef {
     int line = 0;
 };
 
+/// Bundesversammlung (seit M9, Schritt b2): Tags bis nach drop_states_without_land.
+struct DietRef {
+    std::string file;
+    int line = 0;
+    std::string presidency_tag;
+    int presidency_line = 0;
+    std::string seat;
+    int seat_line = 0;
+    std::vector<std::tuple<std::string, std::int32_t, int>> plenum; // Tag, Stimmen, Zeile
+    struct Vote {
+        std::string name;
+        std::vector<std::pair<std::string, int>> tags; // Tag, Zeile
+        int line = 0;
+    };
+    std::vector<Vote> council;
+};
+
 /// Ebene eines Parlaments (seit M8): Staatstag, leer für den Deutschen Bund; Tagungsort.
 struct ParliamentRef {
     std::string state_tag;
@@ -577,6 +595,7 @@ public:
         // Diplomatie (seit M9, Schritt b1): Regeln und Grundbeziehungen; beides darf fehlen, solange es
         // keinen Deutschen Bund gibt.
         process_optional("common/diplomatie.chron", [&](const SourceFile& f) { load_diplomacy_rules(f); });
+        process_optional("common/bundesversammlung.chron", [&](const SourceFile& f) { load_diet(f); });
         for (const std::string& name : list_folder("history/beziehungen", Folder::Optional)) {
             process(name, [&](const SourceFile& f) { load_base_relations(f); });
         }
@@ -610,6 +629,7 @@ public:
         resolve_parliaments();
         resolve_customs_unions();
         resolve_base_relations();
+        resolve_diet();
         check_players(scenarios, selected);
         check_capitals();
         check_districts();
@@ -2332,9 +2352,27 @@ private:
         }
         diplomacy_rules_found_ = true;
         Fields f(*rules, file.name, "diplomatie", issues_,
-                 {"drift", "zollunion", "bund", "konfession", "konfessionsgruppen", "buendnis", "garantie",
-                  "gesandter", "gesandter_grenze", "gesandter_kosten", "gesandter_je", "buendnis_ab",
-                  "garantie_ab", "gegner_unter"});
+                 {"drift",
+                  "zollunion",
+                  "bund",
+                  "konfession",
+                  "konfessionsgruppen",
+                  "buendnis",
+                  "garantie",
+                  "gesandter",
+                  "gesandter_grenze",
+                  "gesandter_kosten",
+                  "gesandter_je",
+                  "buendnis_ab",
+                  "garantie_ab",
+                  "gegner_unter",
+                  "intervention",
+                  "spiel_stufe_tage",
+                  "spiel_lager",
+                  "spiel_bruch",
+                  "spiel_stufe",
+                  "spiel_nachgeben",
+                  "mobilmachung"});
         DiplomacyRules& r = world_.diplomacy_rules;
         const Range relation = between(fx(-200), fx(200));
         r.drift = f.fixed("drift", between(fx(0), fx(1))).value_or(Fixed{});
@@ -2350,6 +2388,15 @@ private:
         r.alliance_min = f.fixed("buendnis_ab", relation).value_or(Fixed{});
         r.guarantee_min = f.fixed("garantie_ab", relation).value_or(Fixed{});
         r.rival_below = f.fixed("gegner_unter", relation).value_or(Fixed{});
+        // Bundesversammlung und diplomatische Spiele (seit Schritt b2).
+        r.intervention = f.fixed("intervention", relation).value_or(Fixed{});
+        r.play_stage_days = static_cast<std::int32_t>(
+            f.fixed("spiel_stufe_tage", between(fx(1), fx(365))).value_or(fx(30)).trunc());
+        r.play_leaning = f.fixed("spiel_lager", between(fx(0), fx(400))).value_or(Fixed{});
+        r.play_break = f.fixed("spiel_bruch", relation).value_or(Fixed{});
+        r.play_stage = f.fixed("spiel_stufe", relation).value_or(Fixed{});
+        r.play_yield = f.fixed("spiel_nachgeben", between(fx(0), fx(1))).value_or(Fixed{});
+        r.mobilization = f.fixed("mobilmachung", between(fx(1), fx(10))).value_or(Fixed::one());
         // Gruppen von Konfessionen, die als gleich zählen (z. B. evangelisch = { lutherisch reformiert }).
         r.confession_group.resize(world_.confessions.size());
         for (std::size_t c = 0; c < r.confession_group.size(); ++c) {
@@ -2475,6 +2522,163 @@ private:
             issues_.error(
                 "common/diplomatie.chron", 0,
                 "Szenarien mit Deutschem Bund brauchen die Regeln der Diplomatie (diplomatie { … })");
+        }
+    }
+
+    /// Bundesversammlung (seit M9, Schritt b2; diplomatie.md Abschnitt 4.4): bundesversammlung <kennung>
+    /// { name seit praesidium sitz plenum rat quelle }. Eine mit späterem 'seit' gehört nicht zur Welt.
+    void load_diet(const SourceFile& file) {
+        for_each_definition(
+            file, "bundesversammlung", "bundesversammlung <kennung> { … }", [&](const ScriptNode& node) {
+                check_id(file, node, "Kennung einer Bundesversammlung");
+                const std::string what = "bundesversammlung " + node.value;
+                Fields f(node, file.name, what, issues_,
+                         {"name", "seit", "praesidium", "sitz", "plenum", "rat", "quelle"});
+                DietRef ref;
+                ref.file = file.name;
+                ref.line = node.line;
+                FederalDiet diet;
+                diet.id = node.value;
+                diet.name = f.text("name").value_or("");
+                diet.source = f.text("quelle").value_or("");
+                if (const auto presidency = f.text("praesidium")) {
+                    ref.presidency_tag = *presidency;
+                    ref.presidency_line = node.find("praesidium")->line;
+                }
+                if (f.has("sitz")) {
+                    ref.seat = f.text("sitz").value_or("");
+                    ref.seat_line = node.find("sitz")->line;
+                }
+                if (const ScriptNode* plenum =
+                        f.block("plenum", "Stimmen je Staat, z. B. { AUT = 4 PRU = 4 }")) {
+                    for (const ScriptNode& child : plenum->children) {
+                        const std::int64_t votes = child.is_block ? 0 : std::atoll(child.value.c_str());
+                        if (!is_state_tag(child.key) || votes < 1 || votes > 100 ||
+                            std::to_string(votes) != child.value) {
+                            issues_.error(file.name, child.line,
+                                          "ungültiger Eintrag in 'plenum' von " + what +
+                                              " (erwartet TAG = Stimmen, 1–100)");
+                            continue;
+                        }
+                        ref.plenum.emplace_back(child.key, static_cast<std::int32_t>(votes), child.line);
+                    }
+                }
+                if (const ScriptNode* council = f.block(
+                        "rat", "Stimmen des Engeren Rats, z. B. { stimme = { staaten = { AUT } } }")) {
+                    for (const ScriptNode& vote : council->children) {
+                        if (vote.key != "stimme" || !vote.is_block) {
+                            issues_.error(file.name, vote.line,
+                                          "ungültiger Eintrag in 'rat' von " + what +
+                                              ", erwartet: stimme = { … }");
+                            continue;
+                        }
+                        Fields fv(vote, file.name, "stimme in " + what, issues_, {"name", "staaten"});
+                        DietRef::Vote v;
+                        v.line = vote.line;
+                        v.name = fv.has("name") ? fv.text("name").value_or("") : "";
+                        if (const ScriptNode* list = fv.block("staaten", "Staatstags, z. B. { WEI SCG }")) {
+                            for (const ScriptNode& child : list->children) {
+                                if (!child.key.empty() || child.is_block || !is_state_tag(child.value)) {
+                                    issues_.error(file.name, child.line,
+                                                  "ungültiger Staatstag " + quote(child.value) +
+                                                      " in stimme von " + what);
+                                    continue;
+                                }
+                                v.tags.emplace_back(child.value, child.line);
+                            }
+                        }
+                        if (v.tags.size() > 1 && v.name.empty()) {
+                            issues_.error(file.name, vote.line,
+                                          "eine Kuriatstimme braucht einen Namen ('name')");
+                        }
+                        ref.council.push_back(std::move(v));
+                    }
+                }
+                if (f.has("seit")) {
+                    if (const auto since = f.date("seit"); since && *since > start_) {
+                        return; // besteht zum Startdatum noch nicht
+                    }
+                }
+                if (diet_ref_) {
+                    issues_.error(file.name, node.line,
+                                  "mehr als eine Bundesversammlung zum Startdatum (zuerst " + world_.diet.id +
+                                      ")");
+                    return;
+                }
+                world_.diet = std::move(diet);
+                diet_ref_ = std::move(ref);
+            });
+    }
+
+    /// Bundesversammlung nach drop_states_without_land: Staaten ohne Ort entfallen, unbekannte sind
+    /// fatal; jeder Staat höchstens einmal im Plenum und im Engeren Rat.
+    void resolve_diet() {
+        if (!diet_ref_) {
+            return;
+        }
+        const DietRef& ref = *diet_ref_;
+        FederalDiet& diet = world_.diet;
+        const auto resolve = [&](const std::string& tag, int line, std::string_view where) {
+            const Index state = lookup(states_, tag);
+            if (state == kNone && dropped_states_.count(tag) == 0) {
+                issues_.error(ref.file, line,
+                              "unbekannter Staat " + quote(tag) + " in " + std::string(where) +
+                                  " von bundesversammlung " + diet.id);
+            }
+            return state;
+        };
+        diet.plenum.assign(world_.states.size(), 0);
+        for (const auto& [tag, votes, line] : ref.plenum) {
+            const Index state = resolve(tag, line, "'plenum'");
+            if (state == kNone) {
+                continue;
+            }
+            if (diet.plenum[static_cast<std::size_t>(state)] != 0) {
+                issues_.error(ref.file, line, "Staat " + tag + " steht zweimal in 'plenum'");
+                continue;
+            }
+            diet.plenum[static_cast<std::size_t>(state)] = votes;
+        }
+        std::vector<bool> seated(world_.states.size(), false);
+        for (const DietRef::Vote& v : ref.council) {
+            CouncilVote vote;
+            vote.name = v.name;
+            for (const auto& [tag, line] : v.tags) {
+                const Index state = resolve(tag, line, "'rat'");
+                if (state == kNone) {
+                    continue;
+                }
+                if (seated[static_cast<std::size_t>(state)]) {
+                    issues_.error(ref.file, line,
+                                  "Staat " + tag + " hat mehr als eine Stimme im Engeren Rat");
+                    continue;
+                }
+                seated[static_cast<std::size_t>(state)] = true;
+                vote.states.push_back(state);
+            }
+            if (vote.states.empty()) {
+                continue; // alle Staaten der Stimme bestehen zum Startdatum nicht
+            }
+            vote.id = v.tags.size() == 1 ? v.tags.front().first : v.name;
+            if (vote.name.empty()) {
+                vote.name = world_.states[static_cast<std::size_t>(vote.states.front())].short_name;
+            }
+            diet.council.push_back(std::move(vote));
+        }
+        if (!ref.presidency_tag.empty()) {
+            diet.presidency = resolve(ref.presidency_tag, ref.presidency_line, "'praesidium'");
+            if (diet.presidency == kNone && dropped_states_.count(ref.presidency_tag) != 0) {
+                issues_.error(ref.file, ref.presidency_line,
+                              "Präsidialmacht " + ref.presidency_tag + " besitzt zum Startdatum keinen Ort");
+            }
+        }
+        if (!ref.seat.empty()) {
+            diet.seat = lookup(locations_, ref.seat);
+            if (diet.seat == kNone) {
+                issues_.error(ref.file, ref.seat_line,
+                              "unbekannter Ort " + quote(ref.seat) + " als Sitz von bundesversammlung " +
+                                  diet.id);
+            }
         }
     }
 
@@ -3447,6 +3651,7 @@ private:
     std::vector<CustomsUnionRef> customs_union_refs_; // parallel zu world_.customs_unions
     std::vector<BaseRelationRef> base_relation_refs_; // seit M9 (b1), aufgelöst nach den Staaten
     bool diplomacy_rules_found_ = false;              // common/diplomatie.chron mit diplomatie gelesen
+    std::optional<DietRef> diet_ref_;                 // seit M9 (b2), nur wenn sie zum Startdatum besteht
     // Inhalt ab einem Datum (seit M7): spätere Definitionen als „gut:kohle“ → 'seit'.
     struct LaterDefinition {
         Date date;

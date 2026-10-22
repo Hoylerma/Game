@@ -580,6 +580,17 @@ std::string diplomacy_summary(const World& content) {
                 "Lager Österreich (" + std::to_string(counts[1]) + "): " + camps[1] + indent +
                 "unentschieden (" + std::to_string(counts[2]) + "): " + camps[2];
     }
+    if (!w.diet.id.empty()) {
+        std::int32_t plenum = 0;
+        for (const std::int32_t votes : w.diet.plenum) {
+            plenum += votes;
+        }
+        const std::string presidency = w.diet.presidency != uhrwerk::kNone
+                                           ? w.states[static_cast<std::size_t>(w.diet.presidency)].tag
+                                           : std::string("–");
+        text += indent + w.diet.name + " (Präsidium " + presidency + "): Plenum " + std::to_string(plenum) +
+                " Stimmen, Engerer Rat " + std::to_string(w.diet.council.size()) + " Stimmen";
+    }
     return text;
 }
 
@@ -737,8 +748,9 @@ Date date_after(const Date& start, std::int64_t days) {
 /// Wahlkreis und Art zufällig, auch ungültige (-1 oder hinter dem letzten, Art 3); die Zahl der Befehle
 /// bleibt count. Mit Zollunionen (seit M9) wird danach jeder Befehl mit Wahrscheinlichkeit ¼ zum Befehl
 /// Zollunion: Staat und Union zufällig (Union -1 = Austritt, hinter der letzten ungültig). Mit
-/// Deutschem Bund (seit M9, Schritt b1) auch Gesandte und Verträge. Ohne Parlamente, Zollunionen und
-/// Bund bleibt die Folge der Zufallszahlen wie bisher.
+/// Deutschem Bund (seit M9, Schritt b1) auch Gesandte und Verträge, mit Bundesversammlung (Schritt b2)
+/// Anträge, Forderungen und Manöver. Ohne Parlamente, Zollunionen und Bund bleibt die Folge der
+/// Zufallszahlen wie bisher.
 std::vector<uhrwerk::LoggedCommand> make_test_commands(const World& w, std::uint64_t seed, std::int64_t count,
                                                        std::int64_t first_day, std::int64_t end_day) {
     std::vector<uhrwerk::LoggedCommand> list;
@@ -751,6 +763,7 @@ std::vector<uhrwerk::LoggedCommand> make_test_commands(const World& w, std::uint
     const Fixed max = w.rules.tax_rate_max;
     const Fixed margin = max * Fixed::from_ratio(1, 10);
     const bool diplomacy = uhrwerk::diplomacy_active(w);
+    const bool diet = diplomacy && !w.diet.id.empty();
     for (std::int64_t i = 0; i < count; ++i) {
         uhrwerk::LoggedCommand c;
         c.day = first_day + rng.below(span);
@@ -782,6 +795,17 @@ std::vector<uhrwerk::LoggedCommand> make_test_commands(const World& w, std::uint
             c.command.state = static_cast<Index>(rng.below(states + 2)) - 1;
             c.command.target = static_cast<Index>(rng.below(states + 2)) - 1;
             c.command.value = Fixed::from_int(rng.below(envoy ? 2 : 5));
+        }
+        // Bundesversammlung und diplomatische Spiele (seit Schritt b2): Antrag, Forderung oder Manöver,
+        // Art 0 bis 4 (4 ist ungültig), Staat und Ziel −1 bis hinter den letzten.
+        if (diet && rng.below(4) == 0) {
+            const std::uint32_t kind = rng.below(3);
+            c.command.type = kind == 0   ? uhrwerk::CommandType::Motion
+                             : kind == 1 ? uhrwerk::CommandType::Demand
+                                         : uhrwerk::CommandType::Manoeuvre;
+            c.command.state = static_cast<Index>(rng.below(states + 2)) - 1;
+            c.command.target = kind == 2 ? uhrwerk::kNone : static_cast<Index>(rng.below(states + 2)) - 1;
+            c.command.value = Fixed::from_int(rng.below(5));
         }
         list.push_back(c);
     }
