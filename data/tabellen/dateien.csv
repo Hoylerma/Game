@@ -1369,3 +1369,4 @@ Format: docs/technik/chronik-skript.md, Abschnitt 3.9.
 Erzeugt von tools/geodaten/orte.py: je 4–12 benachbarte Orte der Landschaft,
 benannt nach dem größten Ort (heutige Einwohnerzahl). Räumlich gebildet, keine
 historischen Verwaltungseinheiten."
+beziehungen;grundwerte;;"Grundbeziehungen der Staatenpaare (M9, Schritt b1): Zielwert der Beziehung ohne Zollunion, Bund, Konfession und Verträge (docs/technik/diplomatie.md, Abschnitt 4.1)."

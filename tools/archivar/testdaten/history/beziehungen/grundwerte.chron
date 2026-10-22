@@ -1,0 +1,7 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+beziehung {
+    staaten = { AAA BBB }
+    wert    = -30
+    quelle  = "Testdaten"
+}

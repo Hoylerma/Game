@@ -2,6 +2,7 @@
 
 #include "state_access.hpp"
 #include "uhrwerk/customs.hpp"
+#include "uhrwerk/diplomacy.hpp"
 #include "uhrwerk/economy.hpp"
 #include "uhrwerk/politics.hpp"
 
@@ -157,7 +158,8 @@ void Simulation::prepare_population_state() {
     world_.arrivals.resize(count);
     next_targets_.assign(count * professions, Fixed{});
     ensure_economy_state(world_, topology_);
-    ensure_politics_state(world_); // Wahlkampf (seit M8), nur mit Parlamenten
+    ensure_politics_state(world_);  // Wahlkampf (seit M8), nur mit Parlamenten
+    ensure_diplomacy_state(world_); // Beziehungen (seit M9), nur mit Deutschem Bund
 
     const bool fits = world_.snapshots.size() == count &&
                       world_.snapshot_targets.size() == count * professions &&
@@ -264,6 +266,10 @@ void Simulation::step_day() {
         // Spenden an die Strömungen (seit M8, politik.md Abschnitt 9), nur mit Parlamenten.
         if (!world_.parliaments.empty()) {
             collect_donations(world_);
+        }
+        // Beziehungen (seit M9, diplomatie.md Abschnitte 4.1 und 4.2), nur mit Deutschem Bund.
+        if (!world_.relations.empty()) {
+            update_relations(world_);
         }
     }
 
@@ -387,6 +393,19 @@ void Simulation::execute(const Command& command) {
         // Entscheidung und Chronik in request_customs_change; wirksam zum nächsten 1. Januar.
         request_customs_change(world_, command.state, command.target);
         return;
+    case CommandType::Envoy:
+        // Diplomatie (seit M9, diplomatie.md 4.2): ungültige Befehle bleiben ohne Wirkung.
+        request_envoy(world_, command.state, command.target, command.value != Fixed::zero());
+        return;
+    case CommandType::Treaty: {
+        // Annahme nach Regel und Chronik in request_treaty (Abschnitt 4.3).
+        const std::int64_t action = command.value.trunc();
+        if (command.value == Fixed::from_int(action) && action >= 0 &&
+            action <= static_cast<std::int64_t>(TreatyAction::CancelGuarantee)) {
+            request_treaty(world_, command.state, command.target, static_cast<TreatyAction>(action));
+        }
+        return;
+    }
     }
 }
 

@@ -10,6 +10,7 @@ add_library(uhrwerk_core STATIC
     src/politics.cpp
     src/population.cpp
     src/customs.cpp
+    src/diplomacy.cpp
     src/customs_lab.cpp
     src/economy.cpp
     src/lasttest.cpp

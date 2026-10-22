@@ -1,9 +1,9 @@
-# Tabellen der Datenpipeline (Meilensteine M2 bis M8)
+# Tabellen der Datenpipeline (Meilensteine M2 bis M9)
 
 Orte und Staaten samt ihrer Geschichte werden in **Tabellen** gepflegt, nicht direkt im
 Chronik-Skript. Das Werkzeug **Archivar** (`tools/archivar/archivar.py`) prüft die Tabellen und
 erzeugt daraus `data/history/` (Format: [chronik-skript.md](chronik-skript.md), Abschnitte 3.5, 3.6,
-3.8, 3.9, 3.16 und 3.17). Die erzeugten Dateien werden eingecheckt; die CI prüft mit `--pruefen`, dass sie zu den
+3.8, 3.9, 3.16, 3.17 und 3.28). Die erzeugten Dateien werden eingecheckt; die CI prüft mit `--pruefen`, dass sie zu den
 Tabellen passen.
 
 ```
@@ -13,6 +13,7 @@ data/tabellen/
 ├── verwaltung.csv         Verwaltungseinheiten der Staaten (seit M7)
 ├── eisenbahnen.csv        Eisenbahnstrecken: Abschnitte von Ort zu Ort mit Eröffnung (seit M7)
 ├── wahlkreise.csv         Wahlkreise der Parlamente mit Staat, Sitzen und Orten (seit M8)
+├── beziehungen.csv        Grundbeziehungen von Staatenpaaren (seit M9)
 ├── staaten.csv            Stammdaten der Staaten
 ├── besitz.csv             Besitzer, Verwaltung und Bundesgebiet je Ort mit Datum
 ├── bevoelkerung.csv       Bevölkerung, Konfession, Kultur und Verwüstung je Ort und Stichtag
@@ -183,11 +184,24 @@ Abschnitt 3.17.
 Erzeugt von `tools/geodaten/wahlkreise_1848.py` ([politik.md](politik.md), Abschnitt 5.3); die Summe der
 Sitze eines Parlaments muss seiner Sollzahl entsprechen (prüft der Kern).
 
+## `beziehungen.csv` (seit M9)
+
+| Spalte | Inhalt |
+|---|---|
+| `staat_a`, `staat_b` | zwei verschiedene Staatstags aus `staaten.csv`; Reihenfolge beliebig |
+| `wert` | Grundbeziehung, ganze Zahl von −200 bis 200 (ohne Eintrag 0) |
+| `sicherheit`, `quelle` | siehe oben; Grundbeziehungen sind meist `spielwert` |
+
+Der Grundwert ist der Teil des Zielwerts einer Beziehung, den Zollunion, Bund, Konfession und Verträge
+nicht erklären ([diplomatie.md](diplomatie.md), Abschnitt 4.1): Dualismus, Dynastien, alte Konflikte.
+Der Archivar erzeugt daraus `history/beziehungen/grundwerte.chron`. Paare mit einem Staat, der zum
+Startdatum keinen Ort besitzt, übergeht der Kern.
+
 ## `dateien.csv`
 
 | Spalte | Inhalt |
 |---|---|
-| `ordner` | `orte`, `staaten`, `kreise`, `verwaltung` oder `eisenbahnen` (beide seit M7), `wahlkreise` (seit M8) |
+| `ordner` | `orte`, `staaten`, `kreise`, `verwaltung` oder `eisenbahnen` (beide seit M7), `wahlkreise` (seit M8), `beziehungen` (seit M9) |
 | `datei` | Dateiname ohne Endung |
 | `kultur` | seit M4, nur für `orte`: Standardkultur der Landschaft, z. B. `maerker=100` oder `obersachsen=70 sorben=30`; sonst leer |
 | `kommentar` | mehrzeiliger Text; erscheint als Kopfkommentar der erzeugten Datei |
@@ -246,6 +260,8 @@ Sie erzeugen daraus die Zeilen von `besitz.csv` zum 1848.03.01 und von `bevoelke
 - seit M8 in `wahlkreise.csv`: doppelter Wahlkreis, ungültige Kennung eines Parlaments, unbekannter
   Staat oder Ort, leerer oder mehrzeiliger Name, `sitze` keine Ganzzahl ab 1 (nur Ziffern 0–9),
   Wahlkreis ohne Ort, ein Ort in zwei Wahlkreisen desselben Parlaments
+- seit M9 in `beziehungen.csv`: unbekannter Staat, Beziehung eines Staates zu sich selbst, `wert`
+  keine ganze Zahl von −200 bis 200, ein Paar doppelt (auch in umgekehrter Reihenfolge)
 
 **Warnungen** (Ausreißer, vermutlich Tippfehler):
 

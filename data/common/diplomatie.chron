@@ -1,0 +1,32 @@
+# Regeln der Diplomatie (Meilenstein M9, Schritt b1; docs/technik/diplomatie.md Abschnitte 4.1–4.3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.27. Alle Werte sind Spielwerte (Entscheidung 7).
+# Diplomatie gilt nur in Szenarien mit Deutschem Bund (Orte im Bundesgebiet): 1648 bleiben diese
+# Regeln ohne Wirkung. Die Grundbeziehungen einzelner Paare stehen in data/tabellen/beziehungen.csv.
+
+diplomatie {
+    # 4.1 Beziehung je Staatenpaar (−200 bis +200): monatlich 5 % der Lücke zum Zielwert.
+    drift        = 0.05
+    # Zielwert = Grundwert (beziehungen.csv, sonst 0) + die folgenden Anteile.
+    zollunion    = 30          # gemeinsame Zollunion
+    bund         = 10          # beide im Deutschen Bund
+    konfession   = 10          # gleiche Konfession der Herrscherhäuser
+    # Lutheraner und Reformierte zählen als ein Bekenntnis (preußische Union 1817; 1848 ein Lager).
+    konfessionsgruppen = { evangelisch = { lutherisch reformiert } }
+    buendnis     = 40
+    garantie     = 20          # je Richtung
+
+    # 4.2 Gesandte: +5 je Monat bis 60 über dem Zielwert; Kosten 0,5 % der Monatseinnahmen je
+    # Gesandtem; ein Gesandter je Staat und einer mehr je 5 Mio. Einwohner (Preußen 4, Österreich 3).
+    gesandter        = 5
+    gesandter_grenze = 60
+    gesandter_kosten = 0.005
+    gesandter_je     = 5000000
+
+    # 4.3 Annahme durch das Ziel nach Regel (bis zur KI in M12): Bündnis ab Beziehung 100, Garantie
+    # ab 50; kein Bündnis mit einem Staat, der mit dem eigenen Gegner verbündet ist. Gegner: Beziehung
+    # unter −25 (1848: Österreich und Preußen, Dänemark und Preußen).
+    buendnis_ab  = 100
+    garantie_ab  = 50
+    gegner_unter = -25
+}

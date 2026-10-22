@@ -495,6 +495,16 @@ struct CustomsUnionRef {
     std::vector<std::pair<std::string, int>> excluded_tags; // Tag, Zeile (seit M9, Schritt a2)
 };
 
+/// Grundbeziehung (seit M9, Schritt b1): Tags bis nach drop_states_without_land.
+struct BaseRelationRef {
+    std::string a_tag;
+    std::string b_tag;
+    Fixed value;
+    std::string source;
+    std::string file;
+    int line = 0;
+};
+
 /// Ebene eines Parlaments (seit M8): Staatstag, leer für den Deutschen Bund; Tagungsort.
 struct ParliamentRef {
     std::string state_tag;
@@ -564,6 +574,12 @@ public:
         // Zollunionen (seit M9, docs/technik/diplomatie.md) vor den Staaten, die ihnen angehören; die Datei
         // darf fehlen.
         process_optional("common/zollunionen.chron", [&](const SourceFile& f) { load_customs_unions(f); });
+        // Diplomatie (seit M9, Schritt b1): Regeln und Grundbeziehungen; beides darf fehlen, solange es
+        // keinen Deutschen Bund gibt.
+        process_optional("common/diplomatie.chron", [&](const SourceFile& f) { load_diplomacy_rules(f); });
+        for (const std::string& name : list_folder("history/beziehungen", Folder::Optional)) {
+            process(name, [&](const SourceFile& f) { load_base_relations(f); });
+        }
 
         for (const std::string& name : list_folder("history/staaten")) {
             process(name, [&](const SourceFile& f) { load_states(f); });
@@ -593,6 +609,7 @@ public:
         drop_states_without_land();
         resolve_parliaments();
         resolve_customs_unions();
+        resolve_base_relations();
         check_players(scenarios, selected);
         check_capitals();
         check_districts();
@@ -2291,6 +2308,176 @@ private:
         }
     }
 
+    /// Regeln der Diplomatie (seit M9, diplomatie.md Abschnitte 4.1–4.3): diplomatie { … }.
+    void load_diplomacy_rules(const SourceFile& file) {
+        const ScriptNode* rules = nullptr;
+        for (const ScriptNode& node : file.root.children) {
+            if (node.key != "diplomatie") {
+                warn_unknown_top_level(file, node, "diplomatie { … }");
+                continue;
+            }
+            if (!node.is_block || !node.value.empty()) {
+                issues_.error(file.name, node.line, "ungültige Definition, erwartet: diplomatie { … }");
+            } else if (rules != nullptr) {
+                issues_.error(file.name, node.line,
+                              "Block 'diplomatie' ist mehrfach vorhanden (zuerst in Zeile " +
+                                  std::to_string(rules->line) + ")");
+            } else {
+                rules = &node;
+            }
+        }
+        if (rules == nullptr) {
+            issues_.error(file.name, 0, "Block 'diplomatie' fehlt");
+            return;
+        }
+        diplomacy_rules_found_ = true;
+        Fields f(*rules, file.name, "diplomatie", issues_,
+                 {"drift", "zollunion", "bund", "konfession", "konfessionsgruppen", "buendnis", "garantie",
+                  "gesandter", "gesandter_grenze", "gesandter_kosten", "gesandter_je", "buendnis_ab",
+                  "garantie_ab", "gegner_unter"});
+        DiplomacyRules& r = world_.diplomacy_rules;
+        const Range relation = between(fx(-200), fx(200));
+        r.drift = f.fixed("drift", between(fx(0), fx(1))).value_or(Fixed{});
+        r.customs_union = f.fixed("zollunion", relation).value_or(Fixed{});
+        r.federation = f.fixed("bund", relation).value_or(Fixed{});
+        r.confession = f.fixed("konfession", relation).value_or(Fixed{});
+        r.alliance = f.fixed("buendnis", relation).value_or(Fixed{});
+        r.guarantee = f.fixed("garantie", relation).value_or(Fixed{});
+        r.envoy = f.fixed("gesandter", between(fx(0), fx(200))).value_or(Fixed{});
+        r.envoy_limit = f.fixed("gesandter_grenze", between(fx(0), fx(400))).value_or(Fixed{});
+        r.envoy_cost = f.fixed("gesandter_kosten", between(fx(0), fx(1))).value_or(Fixed{});
+        r.envoy_people = f.fixed("gesandter_je", above_up_to(fx(0), fx(1000000000))).value_or(Fixed::one());
+        r.alliance_min = f.fixed("buendnis_ab", relation).value_or(Fixed{});
+        r.guarantee_min = f.fixed("garantie_ab", relation).value_or(Fixed{});
+        r.rival_below = f.fixed("gegner_unter", relation).value_or(Fixed{});
+        // Gruppen von Konfessionen, die als gleich zählen (z. B. evangelisch = { lutherisch reformiert }).
+        r.confession_group.resize(world_.confessions.size());
+        for (std::size_t c = 0; c < r.confession_group.size(); ++c) {
+            r.confession_group[c] = static_cast<Index>(c);
+        }
+        if (f.has("konfessionsgruppen")) {
+            if (const ScriptNode* groups =
+                    f.block("konfessionsgruppen",
+                            "Gruppen von Konfessionen, z. B. { evangelisch = { lutherisch reformiert } }")) {
+                std::vector<bool> grouped(world_.confessions.size(), false);
+                for (const ScriptNode& group : groups->children) {
+                    if (group.key.empty() || !group.is_block) {
+                        issues_.error(file.name, group.line,
+                                      "ungültige Gruppe in 'konfessionsgruppen', erwartet: name = { … }");
+                        continue;
+                    }
+                    Index first = kNone;
+                    for (const ScriptNode& child : group.children) {
+                        const Index c =
+                            child.key.empty() && !child.is_block ? lookup(confessions_, child.value) : kNone;
+                        if (c == kNone) {
+                            issues_.error(file.name, child.line,
+                                          "unbekannte Konfession " + quote(child.value) + " in Gruppe " +
+                                              group.key + " (common/konfessionen.chron)");
+                            continue;
+                        }
+                        if (grouped[static_cast<std::size_t>(c)]) {
+                            issues_.error(file.name, child.line,
+                                          "Konfession " + quote(child.value) + " steht in mehreren Gruppen");
+                            continue;
+                        }
+                        grouped[static_cast<std::size_t>(c)] = true;
+                        first = first == kNone ? c : first;
+                        r.confession_group[static_cast<std::size_t>(c)] = first;
+                    }
+                }
+            }
+        }
+        if (r.guarantee_min > r.alliance_min) {
+            issues_.error(file.name, rules->line, "'garantie_ab' ist größer als 'buendnis_ab'");
+        }
+    }
+
+    /// Grundbeziehungen (seit M9, Abschnitt 4.1; erzeugt vom Archivar aus tabellen/beziehungen.csv):
+    /// beziehung { staaten = { AUT PRU } wert quelle }.
+    void load_base_relations(const SourceFile& file) {
+        for (const ScriptNode& node : file.root.children) {
+            if (node.key != "beziehung") {
+                warn_unknown_top_level(file, node, "beziehung { … }");
+                continue;
+            }
+            if (!node.is_block || !node.value.empty()) {
+                issues_.error(file.name, node.line, "ungültige Definition, erwartet: beziehung { … }");
+                continue;
+            }
+            Fields f(node, file.name, "beziehung", issues_, {"staaten", "wert", "quelle"});
+            BaseRelationRef ref;
+            ref.file = file.name;
+            ref.line = node.line;
+            std::vector<std::string> tags;
+            if (const ScriptNode* list = f.block("staaten", "zwei Staatstags, z. B. { AUT PRU }")) {
+                for (const ScriptNode& child : list->children) {
+                    if (!child.key.empty() || child.is_block || !is_state_tag(child.value)) {
+                        issues_.error(file.name, child.line,
+                                      "ungültiger Staatstag " + quote(child.value) +
+                                          " in 'staaten' von beziehung");
+                        continue;
+                    }
+                    tags.push_back(child.value);
+                }
+                if (tags.size() != 2 || tags[0] == tags[1]) {
+                    issues_.error(file.name, list->line,
+                                  "'staaten' einer beziehung braucht zwei verschiedene Staaten");
+                    continue;
+                }
+            }
+            const auto value = f.fixed("wert", between(fx(-200), fx(200)));
+            ref.source = f.text("quelle").value_or("");
+            if (tags.size() != 2 || !value) {
+                continue;
+            }
+            ref.a_tag = tags[0];
+            ref.b_tag = tags[1];
+            ref.value = *value;
+            base_relation_refs_.push_back(std::move(ref));
+        }
+    }
+
+    /// Grundbeziehungen nach drop_states_without_land: Paare mit einem Staat ohne Ort zum Startdatum
+    /// entfallen; jedes Paar darf nur einmal vorkommen. Szenarien mit Deutschem Bund brauchen die Regeln.
+    void resolve_base_relations() {
+        std::map<std::pair<Index, Index>, const BaseRelationRef*> seen;
+        for (const BaseRelationRef& ref : base_relation_refs_) {
+            bool skip = false;
+            Index pair[2] = {kNone, kNone};
+            const std::string* tags[2] = {&ref.a_tag, &ref.b_tag};
+            for (int i = 0; i < 2; ++i) {
+                pair[i] = lookup(states_, *tags[i]);
+                if (pair[i] == kNone) {
+                    skip = true;
+                    if (dropped_states_.count(*tags[i]) == 0) {
+                        issues_.error(ref.file, ref.line,
+                                      "unbekannter Staat " + quote(*tags[i]) + " in beziehung");
+                    }
+                }
+            }
+            if (skip) {
+                continue;
+            }
+            const auto key = std::minmax(pair[0], pair[1]);
+            if (const auto [it, inserted] = seen.emplace(std::pair{key.first, key.second}, &ref); !inserted) {
+                issues_.error(ref.file, ref.line,
+                              "beziehung " + ref.a_tag + "–" + ref.b_tag + " ist doppelt (zuerst in " +
+                                  it->second->file + ", Zeile " + std::to_string(it->second->line) + ")");
+                continue;
+            }
+            world_.base_relations.push_back(BaseRelation{pair[0], pair[1], ref.value, ref.source});
+        }
+        const bool federation =
+            std::any_of(world_.locations.begin(), world_.locations.end(),
+                        [](const Location& loc) { return loc.federal && loc.owner != kNone; });
+        if (federation && !diplomacy_rules_found_) {
+            issues_.error(
+                "common/diplomatie.chron", 0,
+                "Szenarien mit Deutschem Bund brauchen die Regeln der Diplomatie (diplomatie { … })");
+        }
+    }
+
     /// Ebene der Parlamente nach drop_states_without_land: Der Staat muss zum Startdatum bestehen.
     void resolve_parliaments() {
         for (std::size_t i = 0; i < world_.parliaments.size(); ++i) {
@@ -3258,6 +3445,8 @@ private:
 
     Registry customs_unions_;                         // seit M9
     std::vector<CustomsUnionRef> customs_union_refs_; // parallel zu world_.customs_unions
+    std::vector<BaseRelationRef> base_relation_refs_; // seit M9 (b1), aufgelöst nach den Staaten
+    bool diplomacy_rules_found_ = false;              // common/diplomatie.chron mit diplomatie gelesen
     // Inhalt ab einem Datum (seit M7): spätere Definitionen als „gut:kohle“ → 'seit'.
     struct LaterDefinition {
         Date date;

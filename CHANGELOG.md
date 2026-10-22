@@ -52,6 +52,14 @@ freigegeben; Stand je Schritt in Abschnitt 11 dort.
     `get_location`, `MAP_ZOLLGEBIETE`; `set_tax_percent` lehnt den Zoll eines Mitglieds ab.
   - Tests: Rauchtest mit Unionen, Vorab-Prüfung und Antrag Hannovers; Klicktest mit Beitritt und
     Rücknahme über das Fenster; CI-Screenshot `einigkeit_zoll.png`. 1648 bitgleich.
+- **Diplomatie im Kern (Schritt b1):** In Szenarien mit Deutschem Bund hat jedes Staatenpaar eine
+  Beziehung von −200 bis +200, die sich monatlich auf ihren Zielwert zu bewegt: Grundwert aus der neuen
+  Tabelle `beziehungen.csv` (24 Paare 1848, z. B. Österreich–Preußen −40), dazu gemeinsame Zollunion,
+  Bund, Konfession, Bündnis und Garantie (`common/diplomatie.chron`). Neue Befehle `Gesandter`
+  (verbessert die Beziehung, kostet 0,5 % der Monatseinnahmen; Preußen 4, Österreich 3, sonst 1
+  Gesandter) und `Vertrag` (Bündnis ab Beziehung 100, Garantie ab 50, kein Bündnis mit dem Verbündeten
+  eines Gegners; Kündigung). `uhrwerk-cli info` zeigt Gegner, Gesandte und die Lager zwischen Preußen
+  und Österreich. Spielstände 1848 aus M9a laden nicht mehr (Inhalt `diplomatie`); 1648 bitgleich.
 
 ### Meilenstein M8 – Politik, Parteien und Wahlen
 

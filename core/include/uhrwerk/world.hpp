@@ -378,9 +378,10 @@ struct StateBudget {
     Fixed army;                           // Heer
     Fixed interest;                       // Zinsen
     Fixed building;                       // Bauten (Landesausbau)
+    Fixed diplomacy;                      // Gesandte (seit M9, diplomatie.md Abschnitt 4.2)
 
     Fixed income() const { return taxes[0] + taxes[1] + taxes[2]; }
-    Fixed expenses() const { return court + administration + army + interest + building; }
+    Fixed expenses() const { return court + administration + army + interest + building + diplomacy; }
 };
 
 /// Staat bzw. Reichsstand (data/history/staaten/*.chron).
@@ -434,6 +435,58 @@ struct CustomsRequest {
     Index customs_union = kNone; // kNone: Austritt
 
     friend bool operator==(const CustomsRequest&, const CustomsRequest&) = default;
+};
+
+/// Regeln der Diplomatie (seit M9, docs/technik/diplomatie.md Abschnitte 4.1–4.3;
+/// data/common/diplomatie.chron). Beziehungen reichen von −200 bis +200.
+struct DiplomacyRules {
+    Fixed drift;         // Anteil der Lücke zum Zielwert, den eine Beziehung je Monat schließt
+    Fixed customs_union; // Zielwert: gemeinsame Zollunion
+    Fixed federation;    // … beide im Deutschen Bund
+    Fixed confession;    // … gleiche Konfession der Herrscherhäuser (nach confession_group)
+    Fixed alliance;      // … Bündnis
+    Fixed guarantee;     // … Garantie (je Richtung)
+    Fixed envoy;         // Gesandter: Verbesserung je Monat …
+    Fixed envoy_limit;   // … bis so weit über den Zielwert
+    Fixed envoy_cost;    // Kosten je Gesandtem: Anteil der Monatseinnahmen
+    Fixed envoy_people;  // ein Gesandter mehr je so viele Einwohner (Kapazität 1 + Einwohner / x)
+    Fixed alliance_min;  // ein Bündnis wird ab dieser Beziehung angenommen
+    Fixed guarantee_min; // eine Garantie ab dieser
+    Fixed rival_below;   // Gegner: Beziehung unter diesem Wert
+    std::vector<Index> confession_group; // je Konfession: Gruppe für „gleiche Konfession“ (Index)
+};
+
+/// Grundbeziehung zweier Staaten aus den Daten (seit M9, history/beziehungen, Abschnitt 4.1).
+struct BaseRelation {
+    Index a = kNone;
+    Index b = kNone;
+    Fixed value;
+    std::string source;
+};
+
+/// Gesandter eines Staates bei einem anderen (Zustand seit M9, Abschnitt 4.2).
+struct Envoy {
+    Index from = kNone;
+    Index to = kNone;
+    Date since;
+
+    friend bool operator==(const Envoy&, const Envoy&) = default;
+};
+
+enum class TreatyKind : std::uint8_t {
+    Alliance,  // Bündnis (gegenseitig)
+    Guarantee, // Garantie: from schützt to
+};
+
+/// Vertrag zwischen zwei Staaten (Zustand seit M9, Abschnitt 4.3). Beim Bündnis ist from der Staat,
+/// der es vorgeschlagen hat.
+struct Treaty {
+    TreatyKind kind = TreatyKind::Alliance;
+    Index from = kNone;
+    Index to = kNone;
+    Date since;
+
+    friend bool operator==(const Treaty&, const Treaty&) = default;
 };
 
 /// Globale Regeln und Balancing-Werte (data/common/regeln.chron).
@@ -597,6 +650,8 @@ struct World {
     ElectionRules election_rules;                       // seit M8
     std::vector<PoliticalRegion> political_regions;     // seit M8
     std::vector<CustomsUnion> customs_unions;           // seit M9, nur die des Szenarios ('seit')
+    DiplomacyRules diplomacy_rules;                     // seit M9 (b1)
+    std::vector<BaseRelation> base_relations;           // seit M9 (b1): Paare dieses Szenarios
     std::vector<Location> locations;
     std::vector<PopBlock> pops;
     std::vector<ChronicleEntry> chronicle;
@@ -626,6 +681,10 @@ struct World {
     std::vector<Fixed> party_donations;           // seit M8 (b2): Spenden des letzten Monats je Strömung
     std::vector<Fixed> customs_revenue;           // seit M9: Vereinskasse des Monats je Zollunion
     std::vector<CustomsRequest> customs_requests; // seit M9: beantragte Wechsel, wirksam zum 1. Januar
+    // Diplomatie (seit M9, Schritt b1), nur in Welten mit Deutschem Bund (diplomacy_active); sonst leer.
+    std::vector<Fixed> relations; // Beziehung je Staatenpaar a < b (relation_slot), −200..200
+    std::vector<Envoy> envoys;    // Gesandte in der Reihenfolge ihrer Entsendung
+    std::vector<Treaty> treaties; // Bündnisse und Garantien in der Reihenfolge des Abschlusses
 
     Index find_state(std::string_view tag) const;
     Index find_location(std::string_view id) const;
