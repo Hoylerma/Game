@@ -7,6 +7,7 @@
 #include "uhrwerk/balance.hpp"
 #include "uhrwerk/customs_lab.hpp"
 #include "uhrwerk/date.hpp"
+#include "uhrwerk/diplomacy.hpp"
 #include "uhrwerk/economy.hpp"
 #include "uhrwerk/election_lab.hpp"
 #include "uhrwerk/fixed.hpp"
@@ -524,6 +525,64 @@ std::string customs_summary(const World& w) {
     return text;
 }
 
+/// Beziehungen zum Start (seit M9, Schritt b1): Grundwerte, Gegner, Gesandte und die Lager zwischen
+/// Preußen und Österreich (Neigung = Beziehung zu Preußen − zu Österreich, Lager ab ±20).
+std::string diplomacy_summary(const World& content) {
+    if (!uhrwerk::diplomacy_active(content)) {
+        return "keine (ohne Deutschen Bund)";
+    }
+    World w = content;
+    uhrwerk::ensure_diplomacy_state(w);
+    const auto states = static_cast<Index>(w.states.size());
+    const std::string indent = "\n              ";
+    std::string text = plural(w.relations.size(), "Beziehung", "Beziehungen") + " (" +
+                       plural(w.base_relations.size(), "Grundwert", "Grundwerte") + ")";
+    std::string rivals;
+    std::string envoys;
+    std::int64_t single = 0;
+    for (Index a = 0; a < states; ++a) {
+        const std::int64_t capacity = uhrwerk::envoy_capacity(w, a);
+        if (capacity > 1) {
+            envoys += (envoys.empty() ? "" : ", ") + w.states[static_cast<std::size_t>(a)].tag + " " +
+                      std::to_string(capacity);
+        } else {
+            ++single;
+        }
+        for (Index b = a + 1; b < states; ++b) {
+            if (uhrwerk::rivals(w, a, b)) {
+                rivals += (rivals.empty() ? "" : ", ") + w.states[static_cast<std::size_t>(a)].tag + "–" +
+                          w.states[static_cast<std::size_t>(b)].tag + " " +
+                          std::to_string(uhrwerk::relation(w, a, b).round());
+            }
+        }
+    }
+    if (single > 0) {
+        envoys += (envoys.empty() ? "" : ", ") + std::string("übrige 1");
+    }
+    text += indent + "Gegner: " + (rivals.empty() ? std::string("keine") : rivals);
+    text += indent + "Gesandte je Staat: " + envoys;
+    const Index prussia = w.find_state("PRU");
+    const Index austria = w.find_state("AUT");
+    if (prussia != uhrwerk::kNone && austria != uhrwerk::kNone) {
+        std::array<std::string, 3> camps;
+        std::array<std::size_t, 3> counts{};
+        const Fixed threshold = Fixed::from_int(20);
+        for (Index s = 0; s < states; ++s) {
+            if (s == prussia || s == austria) {
+                continue;
+            }
+            const Fixed leaning = uhrwerk::relation(w, s, prussia) - uhrwerk::relation(w, s, austria);
+            const std::size_t camp = leaning > threshold ? 0 : leaning < -threshold ? 1 : 2;
+            camps[camp] += (camps[camp].empty() ? "" : " ") + w.states[static_cast<std::size_t>(s)].tag;
+            ++counts[camp];
+        }
+        text += indent + "Lager Preußen (" + std::to_string(counts[0]) + "): " + camps[0] + indent +
+                "Lager Österreich (" + std::to_string(counts[1]) + "): " + camps[1] + indent +
+                "unentschieden (" + std::to_string(counts[2]) + "): " + camps[2];
+    }
+    return text;
+}
+
 /// Strecken, Abschnitte und Märkte mit Bahnfracht zum Startdatum (seit M7).
 std::string railway_summary(const World& w) {
     std::size_t sections = 0;
@@ -677,8 +736,9 @@ Date date_after(const Date& start, std::int64_t days) {
 /// Mit Parlamenten (seit M8) wird jeder Befehl mit Wahrscheinlichkeit ½ zum Wahlkampf: Strömung,
 /// Wahlkreis und Art zufällig, auch ungültige (-1 oder hinter dem letzten, Art 3); die Zahl der Befehle
 /// bleibt count. Mit Zollunionen (seit M9) wird danach jeder Befehl mit Wahrscheinlichkeit ¼ zum Befehl
-/// Zollunion: Staat und Union zufällig (Union -1 = Austritt, hinter der letzten ungültig). Ohne
-/// Parlamente und Zollunionen bleibt die Folge der Zufallszahlen wie bisher.
+/// Zollunion: Staat und Union zufällig (Union -1 = Austritt, hinter der letzten ungültig). Mit
+/// Deutschem Bund (seit M9, Schritt b1) auch Gesandte und Verträge. Ohne Parlamente, Zollunionen und
+/// Bund bleibt die Folge der Zufallszahlen wie bisher.
 std::vector<uhrwerk::LoggedCommand> make_test_commands(const World& w, std::uint64_t seed, std::int64_t count,
                                                        std::int64_t first_day, std::int64_t end_day) {
     std::vector<uhrwerk::LoggedCommand> list;
@@ -690,6 +750,7 @@ std::vector<uhrwerk::LoggedCommand> make_test_commands(const World& w, std::uint
     const auto states = static_cast<std::uint32_t>(w.states.size());
     const Fixed max = w.rules.tax_rate_max;
     const Fixed margin = max * Fixed::from_ratio(1, 10);
+    const bool diplomacy = uhrwerk::diplomacy_active(w);
     for (std::int64_t i = 0; i < count; ++i) {
         uhrwerk::LoggedCommand c;
         c.day = first_day + rng.below(span);
@@ -712,6 +773,15 @@ std::vector<uhrwerk::LoggedCommand> make_test_commands(const World& w, std::uint
             c.command.type = uhrwerk::CommandType::CustomsUnion;
             c.command.state = static_cast<Index>(rng.below(states + 2)) - 1;
             c.command.target = static_cast<Index>(rng.below(unions + 2)) - 1;
+        }
+        // Diplomatie (seit M9, Schritt b1): Gesandte und Verträge zwischen zufälligen Staaten, auch
+        // ungültige (Wert hinter der letzten Vertragshandlung, Staat außerhalb).
+        if (diplomacy && rng.below(4) == 0) {
+            const bool envoy = rng.below(2) == 0;
+            c.command.type = envoy ? uhrwerk::CommandType::Envoy : uhrwerk::CommandType::Treaty;
+            c.command.state = static_cast<Index>(rng.below(states + 2)) - 1;
+            c.command.target = static_cast<Index>(rng.below(states + 2)) - 1;
+            c.command.value = Fixed::from_int(rng.below(envoy ? 2 : 5));
         }
         list.push_back(c);
     }
@@ -911,6 +981,7 @@ int cmd_info(const Options& o, const fs::path& data_dir) {
               << "Eisenbahnen:  " << railway_summary(w) << '\n'
               << "Politik:      " << politics_summary(w) << '\n'
               << "Zollunionen:  " << customs_summary(w) << '\n'
+              << "Diplomatie:   " << diplomacy_summary(w) << '\n'
               << "Bevölkerung:  " << format_int(total.round()) << "\n\n";
 
     std::vector<std::vector<std::string>> rows;

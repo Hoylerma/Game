@@ -80,14 +80,16 @@ data/
 │   ├── interessengruppen.chron  Interessengruppen (seit M8, optional)
 │   ├── parlamente.chron    Parlamente mit Wahlrecht und Fraktionen (seit M8, optional)
 │   ├── wahlen.chron        Regeln der Wahlsimulation und Regionen (seit M8, optional)
-│   └── zollunionen.chron   Zollunionen mit Leitmacht und Tarif (seit M9, optional)
+│   ├── zollunionen.chron   Zollunionen mit Leitmacht und Tarif (seit M9, optional)
+│   └── diplomatie.chron    Regeln der Diplomatie (seit M9; Pflicht in Szenarien mit Deutschem Bund)
 ├── history/                generiert aus tabellen/ (tools/archivar), nicht von Hand bearbeiten
 │   ├── staaten/*.chron     Staaten (Reichsstände) mit datierter Historie
 │   ├── kreise/*.chron      Kreise: Gruppen von 4–12 Orten (seit M3)
 │   ├── verwaltung/*.chron  Verwaltungseinheiten der Staaten (seit M7, optional)
 │   ├── orte/*.chron        Orte mit datierter Historie (Besitz, Bevölkerung …)
 │   ├── eisenbahnen/*.chron Eisenbahnstrecken mit Abschnitten (seit M7, optional)
-│   └── wahlkreise/*.chron  Wahlkreise je Parlament (seit M8, optional)
+│   ├── wahlkreise/*.chron  Wahlkreise je Parlament (seit M8, optional)
+│   └── beziehungen/*.chron Grundbeziehungen von Staatenpaaren (seit M9, optional)
 ├── tabellen/*.csv          Quelle der Wahrheit für history/ (siehe tabellen.md)
 ├── szenarien/*.chron       Lesezeichen
 └── karte/
@@ -101,7 +103,7 @@ data/
 Ladereihenfolge: `regeln`, `gelaende`, `konfessionen`, `kulturen` (seit M4), `berufe`, `gueter`, `beduerfnisse`,
 `betriebe`, `maerkte` (seit M5), dann alle Dateien der Ordner `szenarien` (seit M7 vor `common/`, weil das
 Startdatum bestimmt, welche Güter, Berufe und Betriebe gelten), `stroemungen`, `interessengruppen`, `parlamente`,
-`wahlen` (seit M8), `zollunionen` (seit M9), `history/staaten`, `history/kreise` (seit M3), `history/verwaltung` (seit M7), `history/orte`, `history/eisenbahnen` (seit M7), `history/wahlkreise` (seit M8), jeweils **nach Dateiname sortiert**, Einträge in Dateireihenfolge. Daraus ergeben sich die Indizes in `World`. Die Szenarien kommen vor der Historie, weil das Startdatum des gewählten Szenarios bestimmt, welche datierten Blöcke gelten (Abschnitt 3.8).
+`wahlen` (seit M8), `zollunionen`, `diplomatie` und `history/beziehungen` (seit M9), `history/staaten`, `history/kreise` (seit M3), `history/verwaltung` (seit M7), `history/orte`, `history/eisenbahnen` (seit M7), `history/wahlkreise` (seit M8), jeweils **nach Dateiname sortiert**, Einträge in Dateireihenfolge. Daraus ergeben sich die Indizes in `World`. Die Szenarien kommen vor der Historie, weil das Startdatum des gewählten Szenarios bestimmt, welche datierten Blöcke gelten (Abschnitt 3.8).
 
 Die Dateien in `history/` erzeugt das Werkzeug `tools/archivar` aus den Tabellen in `data/tabellen/` (Format: [tabellen.md](tabellen.md)). Änderungen gehören in die Tabellen; die CI prüft mit `archivar.py --pruefen`, dass `history/` aktuell ist.
 
@@ -788,6 +790,7 @@ zollunion zollverein {
     leitung = PRU                 # Pflicht: Leitmacht, ein Staatstag
     tarif   = 0.03                # Pflicht: Vereinstarif, 0..steuersatz_max
     ausgeschlossen = { AUT }      # optional seit M9 a2: Staaten, deren Beitritt die Leitmacht ablehnt
+    farbe   = { 46 84 128 }       # optional seit M9 a4: Farbe im Kartenmodus „Zollgebiete“
     quelle  = "…"                 # Pflicht
 }
 ```
@@ -799,7 +802,7 @@ dessen Ergebnisse bleiben bitgleich. Die Leitmacht wird nach dem Staatenbestand 
 Ort zum Startdatum und eine Leitmacht, die der Union zum Startdatum nicht angehört, sind fatal, ebenso
 eine doppelte Kennung. `keine` ist als Kennung reserviert. In `ausgeschlossen` ist ein unbekannter
 Staat fatal; ein Staat ohne Ort zum Startdatum entfällt. Die Datei darf fehlen. Im Kern:
-`World::customs_unions` (`CustomsUnion { id, name, leader, tariff, excluded, source }`). Das Feld
+`World::customs_unions` (`CustomsUnion { id, name, leader, tariff, excluded, color, source }`). Das Feld
 `zollunion` der Staaten gibt die Mitgliedschaft zum Startdatum; im Spiel ändert sie der Befehl
 `Zollunion` (seit Schritt a2, [diplomatie.md](diplomatie.md) Abschnitt 3.5).
 
@@ -829,6 +832,54 @@ Bereiche stehen als `{ von bis }` mit von ≤ bis und gelten für den Median üb
 - `zoll` in `anteil` außerhalb von 0 bis 1.
 
 Im Kern: `CustomsTargets` (`uhrwerk/customs_lab.hpp`).
+
+### 3.27 `common/diplomatie.chron` (seit M9)
+
+Regeln der Diplomatie ([diplomatie.md](diplomatie.md), Abschnitte 4.1–4.3), ein Block `diplomatie`:
+
+```text
+diplomatie {
+    drift        = 0.05     # Pflicht: Anteil der Lücke zum Zielwert, den eine Beziehung je Monat schließt (0..1)
+    zollunion    = 30       # Pflicht: Zielwert bei gemeinsamer Zollunion (−200..200, wie alle Zielwert-Anteile)
+    bund         = 10       # Pflicht: beide im Deutschen Bund
+    konfession   = 10       # Pflicht: gleiche Konfession der Herrscherhäuser
+    konfessionsgruppen = { evangelisch = { lutherisch reformiert } }   # optional: zählen als gleich
+    buendnis     = 40       # Pflicht: Bündnis
+    garantie     = 20       # Pflicht: Garantie, je Richtung
+    gesandter        = 5        # Pflicht: Verbesserung je Monat durch einen Gesandten (0..200)
+    gesandter_grenze = 60       # Pflicht: … höchstens so weit über den Zielwert (0..400)
+    gesandter_kosten = 0.005    # Pflicht: Kosten je Gesandtem als Anteil der Monatseinnahmen (0..1)
+    gesandter_je     = 5000000  # Pflicht: ein Gesandter mehr je so viele Einwohner (> 0)
+    buendnis_ab  = 100      # Pflicht: ein Bündnis wird ab dieser Beziehung angenommen
+    garantie_ab  = 50       # Pflicht: eine Garantie ab dieser (nicht größer als buendnis_ab)
+    gegner_unter = -25      # Pflicht: Gegner sind Staaten mit einer Beziehung unter diesem Wert
+}
+```
+
+Die Regeln gelten nur in Szenarien mit Deutschem Bund (mindestens ein Ort mit `bund = ja`, Abschnitt
+3.3); dort fehlt die Datei als fatale Meldung. Ohne Bund (1648) bleibt sie ohne Wirkung und zählt nicht
+zum Inhaltsfingerabdruck. In `konfessionsgruppen` steht je Gruppe eine Liste von Konfessionen
+(`common/konfessionen.chron`); eine unbekannte Konfession und eine Konfession in zwei Gruppen sind
+fatal. Im Kern: `World::diplomacy_rules` (`DiplomacyRules`).
+
+### 3.28 `history/beziehungen/*.chron` (seit M9)
+
+Grundbeziehungen einzelner Staatenpaare ([diplomatie.md](diplomatie.md), Abschnitt 4.1). Der Archivar
+erzeugt die Datei `grundwerte.chron` aus `data/tabellen/beziehungen.csv` (Spalten `staat_a`, `staat_b`,
+`wert`, `sicherheit`, `quelle`):
+
+```text
+beziehung {
+    staaten = { AUT PRU }   # Pflicht: zwei verschiedene Staatstags, Reihenfolge beliebig
+    wert    = -40           # Pflicht: Grundwert der Beziehung, −200..200
+    quelle  = "…"           # optional
+}
+```
+
+Ein Paar ohne Eintrag hat den Grundwert 0. Paare mit einem Staat ohne Ort zum Startdatum entfallen
+(die Tabelle gilt für alle Szenarien); ein unbekannter Staat und ein doppeltes Paar (in beiden
+Richtungen) sind fatal. Der Ordner darf fehlen. Im Kern: `World::base_relations` (`BaseRelation { a, b,
+value, source }`); die Beziehungen selbst sind Zustand (`World::relations`).
 
 ## 4. Startzustand
 

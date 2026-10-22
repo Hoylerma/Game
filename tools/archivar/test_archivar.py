@@ -68,7 +68,7 @@ class TestErzeugung(MitKopie):
         # Die eingecheckte Ausgabe unter testdaten/history ist die Referenz.
         code, aus, fehler = self.pruefen()
         self.assertEqual((code, fehler), (0, ""), aus)
-        self.assertIn("history/ ist aktuell (9 Dateien, 4 Orte, 2 Kreise, 2 Staaten)", aus)
+        self.assertIn("history/ ist aktuell (10 Dateien, 4 Orte, 2 Kreise, 2 Staaten)", aus)
 
     def test_deterministisch(self) -> None:
         m = ar.Meldungen()
@@ -127,6 +127,8 @@ class TestErzeugung(MitKopie):
         self.assertIn("besitz.csv                 4 Zeilen  (gesichert 3, ungeprueft 1)", aus)
         self.assertIn("krone (1701.01.18): 3 Orte mit Daten, 1 ohne Daten, 2 Staaten mit Orten", aus)
         self.assertIn("Orte: 4, Kreise: 2, Staaten: 2, Verwaltungseinheiten: 2", aus)
+        self.assertIn("Grundbeziehungen: 1", aus)
+        self.assertIn("beziehungen.csv            1 Zeilen  (spielwert 1)", aus)
         self.assertIn("verwaltung.csv             2 Zeilen  (gesichert 1, schaetzung 1)", aus)
 
 
@@ -193,7 +195,7 @@ class TestFehler(MitKopie):
             ("orte.csv", "kr_burg;salz;", "kr_burg;salz salz;"): "Vorkommen doppelt angegeben",
             ("orte.csv", "kr_hafen;;ja;", "kr_hafen;;vielleicht;"): "Spalte 'hafen' erwartet ja, nein oder nichts",
             ("staaten_historie.csv", "BBB;1648.10.24;schatz", "BBB;1648.10.24;armee"): "unbekanntes Feld 'armee'",
-            ("dateien.csv", "staaten;AAA_nordland", "karten;AAA_nordland"): "erwartet eisenbahnen, kreise, orte, staaten",
+            ("dateien.csv", "staaten;AAA_nordland", "karten;AAA_nordland"): "erwartet beziehungen, eisenbahnen, kreise, orte",
             ("orte.csv", "200;ja;kr_burg", "200;ja;kr_turm"): "unbekannter Kreis 'kr_turm'",
             ("kreise.csv", "kr_burg;sued;Burg;Testdaten", "kr_burg;sued;;Testdaten"): "Spalte 'name' darf nicht leer sein",
             ("kreise.csv", "kr_burg;sued", "Kr_burg;sued"): "ungültige Kreiskennung 'Kr_burg'",
@@ -220,6 +222,25 @@ class TestFehler(MitKopie):
                 self.setUp()
                 self.ersetze(tabelle, alt, neu)
                 self.erwarte_fehler(text)
+
+    def test_beziehungen(self) -> None:
+        faelle = {
+            ("beziehungen.csv", "AAA;BBB;-30", "AAA;XYZ;-30"): "unbekannter Staat 'XYZ' in Spalte 'staat_b'",
+            ("beziehungen.csv", "AAA;BBB;-30", "AAA;AAA;-30"): "Beziehung von AAA zu sich selbst",
+            ("beziehungen.csv", "AAA;BBB;-30", "AAA;BBB;-201"): "ungültiger Wert '-201' (ganze Zahl von -200 bis 200)",
+            ("beziehungen.csv", "AAA;BBB;-30", "AAA;BBB;2.5"): "ungültiger Wert '2.5'",
+            ("beziehungen.csv", "AAA;BBB;-30;spielwert", "AAA;BBB;-30;geraten"): "ungültige Sicherheit 'geraten'",
+        }
+        for (tabelle, alt, neu), text in faelle.items():
+            with self.subTest(text):
+                self.tearDown()
+                self.setUp()
+                self.ersetze(tabelle, alt, neu)
+                self.erwarte_fehler(text)
+        self.tearDown()
+        self.setUp()
+        self.anhaengen("beziehungen.csv", "BBB;AAA;10;spielwert;Testdaten")
+        self.erwarte_fehler("tabellen/beziehungen.csv:3: Beziehung BBB–AAA ist doppelt (zuerst in Zeile 2)")
 
     def test_gleicher_streckenname_warnt(self) -> None:
         self.ersetze("eisenbahnen.csv", "nordbahn;nord;;moor;heide", "zweitbahn;nord;Nordbahn;moor;heide")

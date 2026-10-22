@@ -359,6 +359,15 @@ Das Lesezeichen 1648 hat kein Parlament; Strömungen und Gruppen sind dort gelad
 
 Das Lesezeichen 1648 hat keine Zollunion; jeder Staat ist ein eigenes Zollgebiet.
 
+**Diplomatie** (seit M9, Schritt b1, [diplomatie.md](../docs/technik/diplomatie.md) Abschnitt 4):
+
+| Datei | Inhalt |
+|---|---|
+| `common/diplomatie.chron` | Regeln: Drift, Anteile am Zielwert (Zollunion, Bund, Konfession, Bündnis, Garantie), Gesandte, Annahme von Verträgen (Spielwerte) |
+| `tabellen/beziehungen.csv` → `history/beziehungen/` | 24 Grundbeziehungen 1848 (Dualismus Österreich–Preußen −40, Österreichs Anhänger im Süden und Hannover, preußische Dynastien, Dänemark −50, Luxemburg–Niederlande); Spielwerte |
+
+Diplomatie gilt nur mit Deutschem Bund; 1648 bleiben die Regeln ohne Wirkung.
+
 ## Bekannte Lücken und Vereinfachungen
 
 - **Orte ohne Daten:** Im Lesezeichen 1648 haben 4.482 der 4.542 Orte keinen Besitzer, keine

@@ -40,6 +40,12 @@ const STATE_FIELDS: PackedStringArray = [
 	"premium_months",
 	"customs_union",
 	"customs_union_name",
+	"customs_union_index",
+	"customs_leader",
+	"customs_tariff_percent",
+	"customs_locked",
+	"customs_income",
+	"customs_request",
 	"bund",
 ]
 const LOCATION_FIELDS: PackedStringArray = [
@@ -80,6 +86,8 @@ const LOCATION_FIELDS: PackedStringArray = [
 	"goods",
 	"verwaltung",
 	"bundesgebiet",
+	"customs_zone_name",
+	"customs_tariff_percent",
 ]
 const MARKET_FIELDS: PackedStringArray = [
 	"id", "name", "location_count", "active", "is_port", "harvest", "goods"
@@ -91,7 +99,7 @@ const MARKET_GOOD_FIELDS: PackedStringArray = [
 const KREIS_FIELDS: PackedStringArray = ["id", "name", "location_count", "source"]
 ## Kartenmodi, in denen Orte ohne Daten Alpha 0 haben (bridge-api.md); im Marktmodus (9)
 ## nur Orte ohne Daten in Märkten ohne Orte mit Daten.
-const NO_DATA_ALPHA_MODES: PackedInt32Array = [0, 1, 2, 4, 6, 7, 8, 10, 11, 12]
+const NO_DATA_ALPHA_MODES: PackedInt32Array = [0, 1, 2, 4, 6, 7, 8, 10, 11, 12, 13]
 const CHRONICLE_FIELDS: PackedStringArray = ["date_text", "text", "location_index", "state_index"]
 
 var _failures := PackedStringArray()
@@ -287,6 +295,85 @@ func _check_scenario_1848() -> void:
 	)
 	_check_railways_1848(sim)
 	_check_elections_1848(sim)
+	_check_customs_1848(sim)
+
+
+## Zollunionen 1848 (seit M9, diplomatie.md 3.7): Unionen mit Mitgliedern, gesperrter Zollregler,
+## Vorab-Prüfung, Kartenmodus „Zollgebiete“, Ortsinfo, Beitritt Hannovers zum nächsten 1. Januar.
+func _check_customs_1848(sim: SimulationClient) -> void:
+	var unions := sim.get_customs_unions()
+	var zollverein: Dictionary = unions[0] if not unions.is_empty() else {}
+	var steuerverein: Dictionary = unions[1] if unions.size() > 1 else {}
+	var prussia := sim.get_state_index("PRU")
+	var hanover := sim.get_state_index("HAN")
+	var austria := sim.get_state_index("AUT")
+	_check(
+		unions.size() == 2 and str(zollverein.get("id", "")) == "zollverein"
+		and int(zollverein.get("leader_index", -1)) == prussia
+		and int(zollverein.get("member_count", 0)) == 26
+		and (zollverein.get("member_indices", PackedInt32Array()) as PackedInt32Array).has(prussia)
+		and roundi(float(zollverein.get("tariff_percent", 0.0))) == 10
+		and int(steuerverein.get("member_count", 0)) == 3
+		and str(steuerverein.get("leader_name", "")) == "Hannover"
+		and not bool(zollverein.get("dissolved", true)),
+		"get_customs_unions: Zollverein 26 Staaten unter %s, Steuerverein 3" % zollverein.get("leader_name"),
+		"get_customs_unions: %s" % str(unions)
+	)
+	var prussia_state := sim.get_state(prussia)
+	var austria_state := sim.get_state(austria)
+	_check(
+		bool(prussia_state.get("customs_locked", false)) and bool(prussia_state.get("customs_leader", false))
+		and int(prussia_state.get("customs_union_index", -1)) == 0
+		and roundi(float(prussia_state.get("customs_tariff_percent", 0.0))) == 10
+		and float(prussia_state.get("customs_income", 0.0)) > 0.0
+		and not sim.set_tax_percent(prussia, SimulationClient.TAX_ZOLL, 5)
+		and not bool(austria_state.get("customs_locked", true))
+		and int(austria_state.get("customs_union_index", 0)) == -1,
+		"Preußen: Vereinstarif 10 %, Zollregler gesperrt, Anteil an der Vereinskasse",
+		"Zoll Preußen %s, Österreich %s" % [
+			str(prussia_state.get("customs_tariff_percent")), str(austria_state.get("customs_locked"))
+		]
+	)
+	var join := sim.get_customs_change(hanover, 0)
+	_check(
+		str(join.get("decision", "")) == "angenommen" and bool(join.get("dissolves", false))
+		and str(join.get("current_name", "")) == "Steuerverein"
+		and str(join.get("target_name", "")) == "Zollverein"
+		and str(join.get("effective_text", "")) == "1. Januar 1849"
+		and str(sim.get_customs_change(austria, 0).get("decision", "")) == "abgelehnt"
+		and str(sim.get_customs_change(prussia, 0).get("decision", "")) == "ungueltig"
+		and sim.get_customs_change(prussia, 2).is_empty(),
+		"get_customs_change: Hannover zum 1. Januar 1849 (Steuerverein löst sich auf), Österreich abgelehnt",
+		"get_customs_change: Hannover %s, Österreich %s" % [str(join), str(sim.get_customs_change(austria, 0))]
+	)
+	var colors := sim.get_map_colors(MapModes.MAP_ZOLLGEBIETE)
+	var berlin := sim.get_location_index("berlin_coelln")
+	var vienna := sim.get_location(sim.get_location_index("wien"))
+	_check(
+		colors.size() == sim.get_location_count()
+		and colors[berlin].is_equal_approx(zollverein.get("color", Color.BLACK))
+		and str(vienna.get("customs_zone_name", "")) == str(austria_state.get("short_name", "-"))
+		and str(sim.get_location(berlin).get("customs_zone_name", "")) == "Zollverein",
+		"Kartenmodus Zollgebiete, Ortsinfo: Berlin im Zollverein, Wien %s" % vienna.get("customs_zone_name"),
+		"Zollgebiete: Berlin %s, Wien %s" % [str(colors[berlin]) if berlin < colors.size() else "–", str(vienna)]
+	)
+	_check(
+		sim.request_customs_union(hanover, 0) and not sim.request_customs_union(austria, 5),
+		"Beitritt Hannovers beantragt",
+		"request_customs_union: Hannover nicht angenommen oder ungültige Union angenommen"
+	)
+	sim.advance_days(1)
+	var request: Dictionary = sim.get_state(hanover).get("customs_request", {})
+	var entry := false
+	for item in sim.get_chronicle(0):
+		entry = entry or str(item["text"]).contains("verlässt zum 1. Januar 1849 den Steuerverein und tritt dem Zollverein bei")
+	_check(
+		str(request.get("customs_union_name", "")) == "Zollverein"
+		and str(request.get("effective_text", "")) == "1. Januar 1849" and entry
+		and str(sim.get_customs_change(hanover, 1).get("decision", "")) == "zurueckgezogen",
+		"Antrag Hannovers: Beitritt zum 1. Januar 1849, Chronik",
+		"Antrag Hannovers: %s, Chronik %s" % [str(request), entry]
+	)
 
 
 ## Wahlen 1848 (seit M8): Parlamente, Strömungen, Wahlkreise je Ort, Kartenmodus, die Wahl am 1. Mai
@@ -659,6 +746,12 @@ func _check_invalid_indices(sim: SimulationClient, max_tax: int, player: int) ->
 		and sim.get_state_politics(player).is_empty()
 		and not sim.set_player_current(0)
 		and not bool(sim.get_state(player).get("politik", true))
+		# 1648 ohne Zollunion: jeder Staat ein eigenes Zollgebiet, kein Beitritt (seit M9).
+		and sim.get_customs_unions().is_empty()
+		and sim.get_customs_change(player, 0).is_empty()
+		and str(sim.get_customs_change(player, -1).get("decision", "")) == "ungueltig"
+		and not sim.request_customs_union(player, -1)
+		and not bool(sim.get_state(player).get("customs_locked", true))
 	)
 	_check(
 		rejected,

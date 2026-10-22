@@ -37,6 +37,29 @@ freigegeben; Stand je Schritt in Abschnitt 11 dort.
   1 %); der Beitritt Hannovers erhöht den Grenzhandel um 40 % und senkt seinen Zoll auf zwei Drittel,
   der Mecklenburg-Schwerins verdoppelt ihn. Tritt eine Leitmacht aus, löst sich ihre Union auf
   (Hannover und der Steuerverein). Bilanz und Wahlen 1848 erfüllen alle Zielwerte.
+- **Zollunionen in Godot (Schritt a4):**
+  - Kartenmodus „Zollgebiete“ (13, Taste Ö): die Unionen in ihrer Farbe (`farbe` in
+    `zollunionen.chron`), Staaten ohne Union blass; Legende mit Mitgliederzahl, Tooltip mit Tarif.
+  - Staatspanel: Der Zollregler eines Mitglieds ist gesperrt und zeigt den Tarif der Union; im
+    Haushaltsfenster steht der Zoll als Anteil an der Vereinskasse. Neuer Knopf „Zollunion …“ mit
+    Fenster: Zollgebiet, Tarif, Anteil an der Kasse, je Union Leitmacht, Mitglieder, Tarif und Kasse;
+    „Beitreten …“, „Austreten …“ und „Antrag zurückziehen …“ mit Rückfrage und Zeitpunkt (nächster
+    1. Januar, Auflösung der eigenen Union beim Austritt einer Leitmacht). Ein offener Antrag steht
+    im Hinweis des Panels.
+  - Ortsinfo: Zollgebiet des Ortes mit Tarif. Startoption `--zollunion`.
+  - Brücke: `get_customs_unions`, `get_customs_change` (Vorab-Prüfung ohne Wirkung, Kern
+    `evaluate_customs_change`), `request_customs_union`, neue Felder in `get_state` und
+    `get_location`, `MAP_ZOLLGEBIETE`; `set_tax_percent` lehnt den Zoll eines Mitglieds ab.
+  - Tests: Rauchtest mit Unionen, Vorab-Prüfung und Antrag Hannovers; Klicktest mit Beitritt und
+    Rücknahme über das Fenster; CI-Screenshot `einigkeit_zoll.png`. 1648 bitgleich.
+- **Diplomatie im Kern (Schritt b1):** In Szenarien mit Deutschem Bund hat jedes Staatenpaar eine
+  Beziehung von −200 bis +200, die sich monatlich auf ihren Zielwert zu bewegt: Grundwert aus der neuen
+  Tabelle `beziehungen.csv` (24 Paare 1848, z. B. Österreich–Preußen −40), dazu gemeinsame Zollunion,
+  Bund, Konfession, Bündnis und Garantie (`common/diplomatie.chron`). Neue Befehle `Gesandter`
+  (verbessert die Beziehung, kostet 0,5 % der Monatseinnahmen; Preußen 4, Österreich 3, sonst 1
+  Gesandter) und `Vertrag` (Bündnis ab Beziehung 100, Garantie ab 50, kein Bündnis mit dem Verbündeten
+  eines Gegners; Kündigung). `uhrwerk-cli info` zeigt Gegner, Gesandte und die Lager zwischen Preußen
+  und Österreich. Spielstände 1848 aus M9a laden nicht mehr (Inhalt `diplomatie`); 1648 bitgleich.
 
 ### Meilenstein M8 – Politik, Parteien und Wahlen
 

@@ -179,6 +179,24 @@ template <typename Sim, typename V> void StateAccess::visit(Sim& sim, V& v) {
         });
     }
 
+    // Diplomatie (seit M9, Schritt b1): nur in Welten mit Deutschem Bund (1648 bleibt bitgleich).
+    if (!w.relations.empty()) {
+        values(v, "beziehungen", w.relations);
+        list(v, "gesandte", w.envoys, Extent::State, [&](auto& e) {
+            v.field("von", e.from);
+            v.field("bei", e.to);
+            v.field("seit", e.since);
+        });
+        list(v, "vertraege", w.treaties, Extent::State, [&](auto& t) {
+            v.field("art", t.kind);
+            v.field("von", t.from);
+            v.field("an", t.to);
+            v.field("seit", t.since);
+        });
+        list(v, "gesandtenkosten", w.states, Extent::Content,
+             [&](auto& s) { v.field("haushalt.gesandte", s.budget.diplomacy); });
+    }
+
     // Politik (seit M8): nur in Welten mit Parlamenten, damit die Prüfsumme der übrigen (1648) bleibt.
     if (!w.parliaments.empty()) {
         list(v, "wahlen", w.elections, Extent::State, [&](auto& e) {
@@ -227,7 +245,8 @@ template <typename Sim, typename V> void StateAccess::visit(Sim& sim, V& v) {
         v.field("staat", c.state);
         v.field("wert", c.value);
         v.field("steuerart", c.kind);
-        if (!w.parliaments.empty() || !w.customs_unions.empty()) { // Wahlkampf (M8), Zollunion (M9)
+        // Wahlkampf (M8), Zollunion und Diplomatie (M9)
+        if (!w.parliaments.empty() || !w.customs_unions.empty() || !w.relations.empty()) {
             v.field("ziel", c.target);
             v.field("aktion", c.action);
         }

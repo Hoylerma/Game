@@ -45,6 +45,7 @@ public:
         MAP_VERWALTUNG = 10,    // seit M7
         MAP_EISENBAHNEN = 11,   // seit M7
         MAP_WAHLEN = 12,        // seit M8
+        MAP_ZOLLGEBIETE = 13,   // seit M9
     };
 
     /// Steuerarten für set_tax_percent (seit M5, wie uhrwerk::TaxKind).
@@ -116,6 +117,11 @@ public:
     godot::PackedInt32Array get_location_electoral_district_indices(std::int64_t parliament) const;
     std::int64_t get_shown_parliament() const;
     godot::Dictionary get_state_politics(std::int64_t state_index) const;
+
+    // Zollunionen (seit M9, docs/technik/diplomatie.md Abschnitt 3.7)
+    godot::Array get_customs_unions() const;
+    godot::Dictionary get_customs_change(std::int64_t state_index, std::int64_t customs_union) const;
+    bool request_customs_union(std::int64_t state_index, std::int64_t customs_union);
 
     // Parteienmodus (seit M8, Schritt b2, politik.md Abschnitt 9)
     bool campaign(std::int64_t current, std::int64_t district, std::int64_t action);

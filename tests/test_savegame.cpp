@@ -284,14 +284,18 @@ TEST_CASE("Spielstand: Inhaltsfingerabdruck") {
               std::vector<std::string_view>{"kreise"});
         const auto with_unit = uhrwerk::content_fingerprint(w);
         w.locations[2].admin = 0;
-        w.locations[3].federal = true;
         CHECK(uhrwerk::content_differences(with_unit, uhrwerk::content_fingerprint(w)) ==
               std::vector<std::string_view>{"orte"});
+        // Mit dem Bundesgebiet gilt die Diplomatie (seit M9, Schritt b1): Ihre Regeln zählen dann mit.
+        const auto with_admin = uhrwerk::content_fingerprint(w);
+        w.locations[3].federal = true;
+        CHECK(uhrwerk::content_differences(with_admin, uhrwerk::content_fingerprint(w)) ==
+              std::vector<std::string_view>{"orte", "diplomatie"});
     }
     SUBCASE("Zollunionen (seit M9)") {
         World w = base;
         w.customs_unions.push_back(
-            uhrwerk::CustomsUnion{"bund", "Bund", 1, Fixed::from_ratio(3, 100), {}, "Test"});
+            uhrwerk::CustomsUnion{"bund", "Bund", 1, Fixed::from_ratio(3, 100), {}, {}, "Test"});
         const auto with_union = uhrwerk::content_fingerprint(w);
         CHECK(uhrwerk::content_differences(fp, with_union) == std::vector<std::string_view>{"diplomatie"});
         // Die Mitgliedschaft ist Zustand (Befehl Zollunion), kein Inhalt.

@@ -73,6 +73,9 @@ Werte werden als Text aus der Tabelle übernommen (keine Gleitkomma-Umwandlung).
   mit Staat, Sitzen und Orten. Unbekannte Orte und Staaten, ein Ort in zwei Wahlkreisen desselben
   Parlaments und Sitze unter 1 sind Fehler; ob das Parlament besteht und wem die Orte gehören,
   prüft der Kern.
+- `beziehungen.csv` (seit M9) erzeugt `history/beziehungen/grundwerte.chron`: je Zeile die
+  Grundbeziehung eines Staatenpaares. Unbekannte Staaten, ein Staat zu sich selbst, ein Wert außerhalb
+  von −200 bis 200 (nur ganze Zahlen) und ein doppeltes Paar (auch umgekehrt) sind Fehler.
 - Ein Staat ohne Ort zum Szenariodatum besteht in diesem Szenario nicht; seine Pflichtfelder werden
   dort nicht verlangt. Spielerstaat und spielbare Staaten (`spielbar`) müssen zum Szenariodatum
   bestehen.

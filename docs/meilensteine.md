@@ -21,7 +21,7 @@ gebaut; Abhängigkeiten stehen jeweils dabei.
 | M6 | Speicherstände und Wiederholungen | 1 – Vorproduktion | M5 | **fertig** |
 | M7 | Lesezeichen 1848 | 2 – Vertical Slice | M6 | **fertig** (Fachprüfung der Daten offen, siehe unten) |
 | M8 | Politik, Parteien und Wahlen | 2 – Vertical Slice | M7 | **fertig** (Fachprüfung der Werte offen, siehe unten) |
-| M9 | Diplomatie und Zollverein | 2 – Vertical Slice | M7 | in Arbeit (M9a) |
+| M9 | Diplomatie und Zollverein | 2 – Vertical Slice | M7 | in Arbeit (M9a fertig, M9b offen) |
 | M10 | Militär und Einigungskriege | 2 – Vertical Slice | M9 | offen |
 | M11 | Ereignisse und Revolution 1848/49 | 2 – Vertical Slice | M8 | offen |
 | M12 | Künstliche Intelligenz der Staaten | 2 – Vertical Slice | M8–M11 | offen |
@@ -575,6 +575,11 @@ Abschnitt 11).
 **Abnahme**
 - Zollverein-Mitgliedschaften 1848 historisch korrekt; Beitritte verändern Handel und Kassen
   messbar
+
+**Stand:** M9a (Zollunionen, Schritte a1–a4) ist umgesetzt: Daten, Zollgebiete im Kern, Zolllabor
+mit Kalibrierung und die Godot-Seite (Kartenmodus „Zollgebiete“, Fenster „Zollunion“). Beide
+Abnahmekriterien sind geprüft (CTest `zollunionen_1848`, Zolllabor in der CI). Offen ist M9b
+(Beziehungen, Bundesversammlung, diplomatische Spiele).
 
 ### M10 – Militär und Einigungskriege
 

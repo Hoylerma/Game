@@ -224,7 +224,10 @@ Ohne `--beitritt` und `--austritt` rechnet das Labor die Wechsel aus den Zollzie
   1834 entsteht ein großer, einfarbiger Block.“
 - **Staatspanel:** Zollunion des Staates; der Zollregler zeigt bei Mitgliedern den Vereinstarif
   und ist gesperrt; im Haushaltsfenster der Anteil aus der Vereinskasse.
-- **Knopf** „Zollverein beitreten …“ bzw. „Austreten …“ mit Rückfrage und Zeitpunkt.
+- **Knopf** „Zollunion …“ (umgesetzt statt „Zollverein beitreten …“, weil es zwei Unionen gibt):
+  Fenster mit Zollgebiet, Tarif und Kassenanteil des Staates und je Union „Beitreten …“ bzw.
+  „Austreten …“, dazu „Antrag zurückziehen …“; jede Aktion mit Rückfrage und Zeitpunkt. Was die
+  Leitmacht ablehnen würde, ist vorab gesperrt („Preußen lehnt ab“; Brücke `get_customs_change`).
 - Ortsinfo: Zollgebiet des Ortes.
 
 ## 4. Diplomatie (M9b)
@@ -241,10 +244,14 @@ Bedrohung und Einfluss aus Kapitel 14 kommen später; sie brauchen Krieg und KI.
 | Grundwert aus den Daten (`beziehungen.csv`, sonst 0) | z. B. Österreich–Preußen −40 (Dualismus), Sachsen–Österreich +30 |
 | gemeinsame Zollunion | +30 |
 | beide im Deutschen Bund | +10 |
-| gleiche Konfession der Staaten | +10 |
+| gleiche Konfession der Staaten (Herrscherhäuser; lutherisch und reformiert zählen gleich) | +10 |
 | Bündnis, Garantie | +40, +20 |
 | Gesandter (Abschnitt 4.2) | +5 je Monat, bis +60 über dem Ziel |
 | diplomatisches Spiel auf verschiedenen Seiten | einmalig −30 |
+
+Zum Start steht jede Beziehung auf ihrem Zielwert. Die Werte und Regeln stehen in
+`common/diplomatie.chron` (chronik-skript.md 3.27), die Grundwerte in `tabellen/beziehungen.csv`
+(tabellen.md). Diplomatie gilt nur in Szenarien mit Deutschem Bund; 1648 bleibt bitgleich.
 
 **Lager:** Für jeden Staat ist die Neigung zu Preußen oder Österreich die Differenz seiner beiden
 Beziehungen. Sie bestimmt Stimmen und Parteinahme (Abschnitte 4.4 und 4.5).
@@ -252,7 +259,8 @@ Beziehungen. Sie bestimmt Stimmen und Parteinahme (Abschnitte 4.4 und 4.5).
 ### 4.2 Gesandte
 
 Befehl **`Gesandter(staat, ziel)`**: Ein Gesandter verbessert die Beziehung zum Ziel um 5 je Monat
-(bis zur Grenze) und kostet 0,5 % der Monatseinnahmen. Zahl der Gesandten je Staat: 1 + 1 je 5 Mio.
+(bis zur Grenze) und kostet 0,5 % der Monatseinnahmen (Haushaltsposten „Gesandte“). Derselbe Befehl
+ruft ihn ab; je Ziel höchstens ein Gesandter. Zahl der Gesandten je Staat: 1 + 1 je 5 Mio.
 Einwohner im Modell (Preußen 4, Österreich 3, die übrigen 1). Kapitel 14 nennt das die
 diplomatische Kapazität.
 
@@ -262,7 +270,11 @@ Befehl **`Vertrag(staat, ziel, art)`** mit den Arten Bündnis (gegenseitig) und 
 der Staat schützt das Ziel), dazu Kündigung.
 
 - **Annahme** durch das Ziel nach Regel (bis M12): Bündnis ab Beziehung 100, Garantie ab 50; kein
-  Bündnis mit einem Staat, der mit dem eigenen Gegner verbündet ist.
+  Bündnis mit einem Staat, der mit dem eigenen Gegner verbündet ist (in beiden Richtungen geprüft).
+  Gegner sind Staaten mit einer Beziehung unter −25 (Spielwert; 1848 Österreich–Preußen und
+  Dänemark–Preußen). Zwischen Verbündeten gibt es keine Garantie.
+- **Kündigung:** ein Bündnis durch jede der beiden Seiten, eine Garantie durch den Garanten; sofort,
+  ohne weitere Folgen in M9.
 - **Wirkung in M9:** Zielwert der Beziehung, Parteinahme in diplomatischen Spielen (ein Verbündeter
   steht immer auf der eigenen Seite, ein Garant auf der Seite des Geschützten). Den Bündnisfall im
   Krieg bringt M10.
@@ -453,3 +465,5 @@ Der Archivar prüft `zollunion` (bekannte Union, nicht vor ihrem `seit`) und `be
 | a1 Daten | `common/zollunionen.chron` mit Zollverein (Leitung Preußen) und Steuerverein (Leitung Hannover), beide mit Tarif 3 % (chronik-skript.md 3.25). Staatsfeld `zollunion` statt `zollverein` (chronik-skript.md 3.5; die Brücke liefert `customs_union` und `customs_union_name` statt `zollverein`); 1848: 26 Staaten im Zollverein, Hannover, Oldenburg und Schaumburg-Lippe im Steuerverein, neun für sich. Lader mit Prüfungen (unbekannte oder spätere Union, Leitmacht ohne Ort oder nicht Mitglied, `keine` reserviert), Archivar (bekannte Union, Datum nicht vor ihrem `seit`), Inhaltsbereich `diplomatie`, Spielstand Format 3 (speicherstaende.md, Abschnitt 6), `uhrwerk-cli info` mit Unionen und Mitgliedern. Tests: Lader (Mitglieder vor und nach einem Wechsel, Fehler), Fingerabdruck, Format 1 und 2, CTest `zollunionen_1848` mit der Mitgliederliste; Godot-Rauchtest. Ohne Wirkung auf die Simulation; 1648 bitgleich (`5db13a66d63e6079`). |
 | a2 Kern | `core/src/customs.cpp` (`uhrwerk/customs.hpp`): Zollgebiete je Markt am Monatsersten (Abschnitt 3.2), erwarteter Tarif im Handel und bei der Einfuhr vom Weltmarkt (3.3), fremder Einfuhranteil je Markt und Gebiet für Verbraucherpreis und Zoll der Orte, Vereinskasse am Monatsersten nach Bevölkerung, Anteil als Zoll im Haushalt (3.4); Befehl `Zollunion` mit Entscheidung der Leitmacht (`ausgeschlossen`, Daten: Österreich beim Zollverein), Rücknahme, Wechsel und Chronik, wirksam zum 1. Januar; Zollregler der Mitglieder gesperrt (3.5). Zustand nur mit Zollunionen (Mitgliedschaft, Vereinsanteil, Vereinskasse, Anträge, Zollgebiete der Märkte); die Mitgliedschaft ist kein Inhalt mehr. Testbefehle der Kommandozeile mit Zollunion. Tests: Gebiete und Anteile, Tarif, Handel über die Grenze (Fixture: 10 % Tarif, ein Drittel weniger Einfuhr), fremder Einfuhranteil, Vereinskasse und Haushalt, Beitritt, Austritt, Rücknahme, Ablehnung, Wechsel, gesperrter Regler, Spielstand, Wiederholung, 1 und 4 Threads. 1648 bitgleich (`5db13a66d63e6079`). Messung 1848 (12 Monate gegen die Rechnung aus M5): Zoll 5,7 % → 1,1 % der Staatseinnahmen, weil Einfuhr aus dem eigenen Gebiet nicht mehr verzollt wird; Zollverein-Mitglieder je 0,7–0,9 %, Steuerverein 3,8–4,1 %, Bremen 13,4 %, Österreich 0,5 %; Einfuhr aller Märkte +9 %. Bilanz 1848 (8 Seeds, 30 Jahre) und Wahllabor 1848/49 erfüllen alle Zielwerte (Liberale 296 statt 293 Sitze, Preußen 1849 72/16/225/36). Die Höhe des Zolls kalibriert Schritt a3. |
 | a3 Zolllabor | `uhrwerk-cli zoll` (Abschnitt 3.6, Kern `uhrwerk/customs_lab.hpp`): je Seed ein Lauf ohne und je Wechsel einer mit ihm, Messung im letzten Jahr; Zollziele `common/zollziele_voelkerfruehling.chron` (chronik-skript.md 3.26), `pruefen` liest sie mit; CI-Schritt „Zolllabor 1848“ im Job Balancing, CTest `zoll_1848`. Regeländerung: Die Leitmacht kann austreten, ihre Union löst sich dann auf (Abschnitt 3.5), sonst wäre Hannovers Beitritt unmöglich. **Kalibrierung** (Entscheidung 3, Alternative): Mit 3 % brachte der Zoll dem Zollverein 1 % der Einnahmen; selbst 25 % brächten nur gut 4 %, weil die Einfuhr von außerhalb im Modell klein ist (der Zollverein ist ein großer Binnenmarkt; Kolonialwaren nur 4–7 % der fremden Einfuhr nach Wert). Gewählt: Zollverein 10 %, Steuerverein 3 % (niedriger verzollt). Ergebnis mit 8 Seeds, Messung 1853: Zollanteil Zollverein 2,9 % (2,6 … 3,0 %), Steuerverein 3,7 %; Beitritt Hannovers: Grenzhandel ×1,40 (×1,21 … ×1,80), Zoll ×0,67 (×0,61 … ×0,76), Preise ×1,02; Beitritt Mecklenburg-Schwerins: Grenzhandel ×2,08 (×1,79 … ×2,34), Handel ×1,61, Zoll ×0,49, Preise ×1,08. Hannover verliert Zoll wie historisch 1854 (dort mit Vorabanteil ausgeglichen). Bilanz 1848 (8 Seeds, 30 Jahre) und Wahllabor 1848/49 erfüllen alle Zielwerte (Liberale 296, Preußen 1849 71/16/227/36). Varianten: 10 %/5 % (Mecklenburg streut stark), 15 %/5 % (Zollanteil 3,7 %), 20 %/5 % (4,1 %). Der Zollanteil bleibt unter dem historischen (eher 10–20 %, Wissensstand ohne Quellen); dafür bräuchte das Modell mehr Einfuhr von Kolonial- und englischen Fabrikwaren. |
+| a4 Godot | Kartenmodus „Zollgebiete“ (13, Taste Ö, Abschnitt 3.7): Farbe der Union aus `farbe` in `zollunionen.chron` (chronik-skript.md 3.25; nur Anzeige, nicht im Fingerabdruck), Staaten ohne Union blass in ihrer Farbe; Legende mit Unionen und Mitgliederzahl, Tooltip mit Zollgebiet und Tarif. Staatspanel: Zollregler der Mitglieder gesperrt mit dem Tarif der Union, Haushaltszeile „Zoll (Vereinskasse, Tarif …)“, offener Antrag im Hinweis; Knopf „Zollunion …“ mit Fenster (Beitreten, Austreten, Antrag zurückziehen, jeweils mit Rückfrage und Zeitpunkt; was die Leitmacht ablehnt, ist gesperrt). Ortsinfo mit Zollgebiet. Kern: `evaluate_customs_change` (Vorab-Prüfung ohne Wirkung, von `request_customs_change` benutzt) und `customs_effective_date`. Brücke: `get_customs_unions`, `get_customs_change`, `request_customs_union`, Felder in `get_state` und `get_location`, `MAP_ZOLLGEBIETE`; `set_tax_percent` lehnt den Zoll eines Mitglieds ab (bridge-api.md). Startoption `--zollunion`. Tests: Kern (Vorab-Prüfung), Rauchtest (Unionen, gesperrter Regler, Vorab-Prüfung, Antrag Hannovers mit Chronik, 1648 ohne Union), Klicktest (Taste Ö, Legende, Regler, Ortsinfo, Beitritt Hannovers über das Fenster mit Rückfrage, Antrag am nächsten Tag, Rücknahme), CI-Screenshot. 1648 bitgleich (`5db13a66d63e6079`). **M9a abgeschlossen.** |
+| b1 Kern Diplomatie | `core/src/diplomacy.cpp` (`uhrwerk/diplomacy.hpp`): Beziehung je Staatenpaar (−200 bis +200, symmetrisch, 703 Paare 1848), monatlich 5 % der Lücke zum Zielwert (Abschnitt 4.1); zum Start auf dem Zielwert. Gesandte (4.2): Befehl `Gesandter` (Wert 1 entsenden, 0 abberufen), Kapazität 1 + Einwohner / 5 Mio. (Preußen 4, Österreich 3), +5 je Monat bis 60 über dem Zielwert, Kosten 0,5 % der Monatseinnahmen als Haushaltsposten. Verträge (4.3): Befehl `Vertrag` (Wert = Handlung: Bündnis, Garantie, Kündigung des Bündnisses, Kündigung der Garantie), Annahme nach Regel mit Chronik, Gegner unter −25. Daten: `common/diplomatie.chron` (chronik-skript.md 3.27), `tabellen/beziehungen.csv` mit 24 Grundwerten (Archivar, `history/beziehungen`, chronik-skript.md 3.28). Zustand (Beziehungen, Gesandte, Verträge, Kosten), Spielstandprüfung und Inhaltsbereich `diplomatie` nur mit Deutschem Bund; `uhrwerk-cli info` mit Gegnern, Gesandten und Lagern (1848: Preußen 21 Staaten, Österreich 5 – Bayern, Sachsen, Hannover, Liechtenstein, Dänemark –, unentschieden 10), Testbefehle mit Gesandten und Verträgen. Tests: Zielwerte und Drift, Gesandte mit Kapazität, Wirkung und Kosten, Bündnis nach Regel mit Lagerprüfung und Kündigung, Garantie, ungültige Befehle, Spielstand, Wiederholung, 1 und 4 Threads, Ladefehler, 1648 ohne Wirkung. 1648 bitgleich (`5db13a66d63e6079`); die Zahlen 1848 ändern sich ohne Befehle nicht. |

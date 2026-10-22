@@ -26,7 +26,7 @@ const OVERVIEW_MARGIN := 28.0
 const DYNAMIC_LEGEND_MODES: PackedInt32Array = [
 	MapModes.MAP_POLITICAL, MapModes.MAP_DENSITY, MapModes.MAP_CONFESSION,
 	MapModes.MAP_DEVASTATION, MapModes.MAP_LEBENSSTANDARD, MapModes.MAP_KULTUR,
-	MapModes.MAP_WIRTSCHAFT, MapModes.MAP_EISENBAHNEN, MapModes.MAP_WAHLEN
+	MapModes.MAP_WIRTSCHAFT, MapModes.MAP_EISENBAHNEN, MapModes.MAP_WAHLEN, MapModes.MAP_ZOLLGEBIETE
 ]
 ## Höchstzahl der Kennungen in einer Hinweismeldung.
 const MAX_LISTED_IDS := 20
@@ -115,6 +115,11 @@ func _ready() -> void:
 	_state_panel.tax_rate_requested.connect(_on_tax_rate_requested)
 	_state_panel.politics_source = func() -> Dictionary:
 		return _sim.get_state_politics(_player) if _sim != null else {}
+	_state_panel.customs_change_requested.connect(_on_customs_change_requested)
+	_state_panel.customs_source = func() -> Array:
+		return _sim.get_customs_unions() if _sim != null else []
+	_state_panel.customs_preview = func(customs_union: int) -> Dictionary:
+		return _sim.get_customs_change(_player, customs_union) if _sim != null else {}
 	_chronicle_panel.location_requested.connect(_on_chronicle_location_requested)
 	_location_panel.close_requested.connect(_select_location.bind(-1))
 	_location_panel.play_state_requested.connect(play_state)
@@ -558,6 +563,10 @@ func _read_scenario_constants() -> bool:
 	for state in _sim.get_state_count():
 		federation = federation or bool(_sim.get_state(state).get("bund", false))
 	_location_panel.show_federation = federation
+	# Zollunionen (seit M9): Zeile „Zollgebiet“ und Knopf „Zollunion …“.
+	var customs := not _sim.get_customs_unions().is_empty()
+	_location_panel.show_customs = customs
+	_state_panel.set_customs_available(customs)
 	_location_panel.player_index = _player
 	# Wahlen (seit M8): Was schon gewählt ist, öffnet keinen Wahlabend mehr.
 	_elections_seen = _sim.get_election_count()
@@ -864,6 +873,19 @@ func _rebuild_legend() -> void:
 				_legend.show_message(title, "Dieses Szenario enthält keine Eisenbahnen.")
 			else:
 				_legend.show_swatches(title, rail)
+		MapModes.MAP_ZOLLGEBIETE:
+			var customs := LegendData.customs_entries(_sim)
+			if customs.is_empty():
+				_legend.show_message(
+					title,
+					(
+						"In diesem Szenario gibt es keine Zollunion: Jeder Staat ist ein eigenes "
+						+ "Zollgebiet und erhebt seinen Zoll (blass in der Staatsfarbe)."
+					)
+				)
+			else:
+				customs.append_array(no_data)
+				_legend.show_swatches(title, customs)
 	if _selected >= 0:
 		_fit_location_panel.call_deferred()
 
@@ -1052,6 +1074,11 @@ func _tooltip_detail(location: Dictionary) -> String:
 			second = "Bahnhof: %s" % ", ".join(lines) if not lines.is_empty() else "ohne Bahnhof"
 		MapModes.MAP_WAHLEN when bool(location.get("has_data", true)):
 			second = _election_tooltip(location)
+		MapModes.MAP_ZOLLGEBIETE when bool(location.get("has_data", true)):
+			second = "Zollgebiet %s, Zoll %s" % [
+				str(location.get("customs_zone_name", "–")),
+				GermanFormat.percent(float(location.get("customs_tariff_percent", 0.0)))
+			]
 		_ when not bool(location.get("has_data", true)):
 			second = "%s · %s" % [kreis_text, second]
 	return "%s · %s" % [first, second]
@@ -1088,6 +1115,14 @@ func _on_tax_rate_requested(kind: int, percent: int) -> void:
 		_state_panel.reject_pending(
 			kind, "Der Satz %s wurde nicht angenommen." % GermanFormat.percent(percent)
 		)
+
+
+## Beitritt, Wechsel, Austritt oder Rücknahme (seit M9); wirksam wird der Befehl am nächsten Tag.
+func _on_customs_change_requested(customs_union: int) -> void:
+	if _sim == null:
+		return
+	if not _sim.request_customs_union(_player, customs_union):
+		_state_panel.reject_customs("Der Antrag wurde nicht angenommen.")
 
 
 # --- Spielstände (seit M6, docs/technik/speicherstaende.md Abschnitt 9) ----------
@@ -1529,6 +1564,8 @@ func _run_screenshot() -> void:
 		_state_panel.show_budget()
 	if _options.show_politics:
 		_state_panel.show_politics()
+	if _options.show_customs:
+		_state_panel.show_customs()
 	if _options.show_game_menu:
 		open_game_menu()
 	if _options.show_election_night:

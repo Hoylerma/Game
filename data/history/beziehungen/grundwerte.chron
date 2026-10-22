@@ -1,0 +1,147 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+#
+# Grundbeziehungen der Staatenpaare (M9, Schritt b1): Zielwert der Beziehung ohne Zollunion, Bund, Konfession und Verträge (docs/technik/diplomatie.md, Abschnitt 4.1).
+
+beziehung {
+    staaten = { AUT PRU }
+    wert    = -40
+    quelle  = "Dualismus der beiden Großmächte im Bund (Kapitel 14); Spielwert nach Wissensstand ohne Quellenzugang, Prüfung offen (M9, Schritt b1)"
+}
+
+beziehung {
+    staaten = { AUT BAV }
+    wert    = 40
+    quelle  = "Katholische Vormacht des Südens, großdeutsch; Vierkönigsbündnis 1850, 1866 an Österreichs Seite. Spielwert nach Wissensstand ohne Quellenzugang, Prüfung offen"
+}
+
+beziehung {
+    staaten = { AUT SAX }
+    wert    = 30
+    quelle  = "Sachsen an Österreich angelehnt: Vierkönigsbündnis 1850, Dresdner Konferenzen 1850/51, 1866 an Österreichs Seite. Spielwert nach Wissensstand ohne Quellenzugang, Prüfung offen"
+}
+
+beziehung {
+    staaten = { AUT WUE }
+    wert    = 30
+    quelle  = "Vierkönigsbündnis 1850, 1866 an Österreichs Seite. Spielwert nach Wissensstand ohne Quellenzugang, Prüfung offen"
+}
+
+beziehung {
+    staaten = { AUT HAN }
+    wert    = 30
+    quelle  = "Vierkönigsbündnis 1850, 1866 an Österreichs Seite. Spielwert nach Wissensstand ohne Quellenzugang, Prüfung offen"
+}
+
+beziehung {
+    staaten = { AUT HEK }
+    wert    = 30
+    quelle  = "Kurhessischer Verfassungskonflikt 1850 (Bundesexekution mit österreichischer Rückendeckung), 1866 an Österreichs Seite. Spielwert nach Wissensstand ohne Quellenzugang, Prüfung offen"
+}
+
+beziehung {
+    staaten = { AUT HED }
+    wert    = 30
+    quelle  = "Hessen-Darmstadt unter Dalwigk großdeutsch, 1866 an Österreichs Seite. Spielwert nach Wissensstand ohne Quellenzugang, Prüfung offen"
+}
+
+beziehung {
+    staaten = { AUT NAS }
+    wert    = 20
+    quelle  = "Nassau 1866 an Österreichs Seite. Spielwert nach Wissensstand ohne Quellenzugang, Prüfung offen"
+}
+
+beziehung {
+    staaten = { AUT LIE }
+    wert    = 40
+    quelle  = "Fürstenhaus in Wien ansässig, Zollvertrag mit Österreich 1852. Spielwert nach Wissensstand ohne Quellenzugang, Prüfung offen"
+}
+
+beziehung {
+    staaten = { PRU SAX }
+    wert    = -20
+    quelle  = "Teilung Sachsens auf dem Wiener Kongress 1815. Spielwert nach Wissensstand ohne Quellenzugang, Prüfung offen"
+}
+
+beziehung {
+    staaten = { PRU HAN }
+    wert    = -10
+    quelle  = "Rivalität um die Vormacht in Norddeutschland (Steuerverein gegen Zollverein). Spielwert nach Wissensstand ohne Quellenzugang, Prüfung offen"
+}
+
+beziehung {
+    staaten = { PRU BAV }
+    wert    = -10
+    quelle  = "Bayern als Gegengewicht zu Preußen im Süden (Trias-Gedanke). Spielwert nach Wissensstand ohne Quellenzugang, Prüfung offen"
+}
+
+beziehung {
+    staaten = { PRU WUE }
+    wert    = -10
+    quelle  = "Württemberg als Mittelstaat gegen preußische Vorherrschaft (Trias-Gedanke). Spielwert nach Wissensstand ohne Quellenzugang, Prüfung offen"
+}
+
+beziehung {
+    staaten = { PRU HED }
+    wert    = -10
+    quelle  = "Hessen-Darmstadt unter Dalwigk gegen Preußen. Spielwert nach Wissensstand ohne Quellenzugang, Prüfung offen"
+}
+
+beziehung {
+    staaten = { PRU HEK }
+    wert    = -10
+    quelle  = "Kurhessen: Streit um die Etappenstraßen und den Verfassungskonflikt 1850. Spielwert nach Wissensstand ohne Quellenzugang, Prüfung offen"
+}
+
+beziehung {
+    staaten = { PRU MSC }
+    wert    = 20
+    quelle  = "Dynastische Nähe: Großherzog Friedrich Franz II. ist ein Neffe Friedrich Wilhelms IV. Spielwert nach Wissensstand ohne Quellenzugang, Prüfung offen"
+}
+
+beziehung {
+    staaten = { PRU MST }
+    wert    = 20
+    quelle  = "Dynastische Nähe: Königin Luise, Mutter Friedrich Wilhelms IV., stammte aus Mecklenburg-Strelitz. Spielwert nach Wissensstand ohne Quellenzugang, Prüfung offen"
+}
+
+beziehung {
+    staaten = { PRU HOH }
+    wert    = 30
+    quelle  = "Schwäbische Linie des Hauses Hohenzollern; Abtretung an Preußen 1849/50. Spielwert nach Wissensstand ohne Quellenzugang, Prüfung offen"
+}
+
+beziehung {
+    staaten = { PRU HSI }
+    wert    = 30
+    quelle  = "Schwäbische Linie des Hauses Hohenzollern; Abtretung an Preußen 1849/50. Spielwert nach Wissensstand ohne Quellenzugang, Prüfung offen"
+}
+
+beziehung {
+    staaten = { PRU DEN }
+    wert    = -50
+    quelle  = "Schleswig-Holsteinische Frage: Erhebung im März 1848, preußische Truppen im April. Spielwert nach Wissensstand ohne Quellenzugang, Prüfung offen"
+}
+
+beziehung {
+    staaten = { HAN BWO }
+    wert    = 20
+    quelle  = "Beide Häuser welfisch; Hannover und Braunschweig gründen 1834 den Steuerverein. Spielwert nach Wissensstand ohne Quellenzugang, Prüfung offen"
+}
+
+beziehung {
+    staaten = { LUX NED }
+    wert    = 40
+    quelle  = "Personalunion: Der König der Niederlande ist Großherzog von Luxemburg. Spielwert nach Wissensstand ohne Quellenzugang, Prüfung offen"
+}
+
+beziehung {
+    staaten = { BAV WUE }
+    wert    = 10
+    quelle  = "Süddeutsche Mittelstaaten (Trias-Gedanke, Vierkönigsbündnis 1850). Spielwert nach Wissensstand ohne Quellenzugang, Prüfung offen"
+}
+
+beziehung {
+    staaten = { BAV SAX }
+    wert    = 10
+    quelle  = "Mittelstaaten im Vierkönigsbündnis 1850. Spielwert nach Wissensstand ohne Quellenzugang, Prüfung offen"
+}

@@ -18,12 +18,6 @@ std::size_t at(Index index) {
     return static_cast<std::size_t>(index);
 }
 
-/// Datum, zu dem ein heute angenommener Wechsel wirksam wird: der nächste 1. Januar (heute, wenn heute
-/// der 1. Januar ist, denn die Befehle laufen vor dem Jahreswechsel).
-Date effective_date(const Date& today) {
-    return today.month == 1 && today.day == 1 ? today : Date{today.year + 1, 1, 1};
-}
-
 void chronicle(World& world, Index state, std::string text) {
     ChronicleEntry entry;
     entry.date = world.date;
@@ -143,23 +137,17 @@ void distribute_customs(World& world) {
     }
 }
 
-CustomsDecision request_customs_change(World& world, Index state_index, Index target) {
+CustomsDecision evaluate_customs_change(const World& world, Index state_index, Index target) {
     if (world.customs_unions.empty() || !in_range(world.states, state_index) ||
         (target != kNone && !in_range(world.customs_unions, target))) {
         return CustomsDecision::Invalid;
     }
-    const State& state = world.states[at(state_index)];
-    const Index current = state.customs_union;
-    const auto pending = std::find_if(world.customs_requests.begin(), world.customs_requests.end(),
-                                      [&](const CustomsRequest& r) { return r.state == state_index; });
+    const Index current = world.states[at(state_index)].customs_union;
     if (target == current) {
-        if (pending == world.customs_requests.end()) {
-            return CustomsDecision::Invalid;
-        }
-        world.customs_requests.erase(pending);
-        return CustomsDecision::Withdrawn;
+        const bool pending = std::any_of(world.customs_requests.begin(), world.customs_requests.end(),
+                                         [&](const CustomsRequest& r) { return r.state == state_index; });
+        return pending ? CustomsDecision::Withdrawn : CustomsDecision::Invalid;
     }
-    const std::string effective = format_date_long(effective_date(world.date));
     if (target != kNone) {
         const CustomsUnion& joined = world.customs_unions[at(target)];
         // Einer aufgelösten Union (die Leitmacht gehört ihr nicht mehr an) kann nur die Leitmacht beitreten.
@@ -168,15 +156,38 @@ CustomsDecision request_customs_change(World& world, Index state_index, Index ta
             return CustomsDecision::Invalid;
         }
         if (std::find(joined.excluded.begin(), joined.excluded.end(), state_index) != joined.excluded.end()) {
-            const std::string leader = in_range(world.states, joined.leader)
-                                           ? world.states[at(joined.leader)].short_name
-                                           : joined.name;
-            chronicle(world, state_index,
-                      leader + " lehnt den Beitritt von " + state.short_name + " zum " + joined.name +
-                          " ab.");
             return CustomsDecision::Rejected;
         }
     }
+    return CustomsDecision::Accepted;
+}
+
+Date customs_effective_date(const Date& today) {
+    return today.month == 1 && today.day == 1 ? today : Date{today.year + 1, 1, 1};
+}
+
+CustomsDecision request_customs_change(World& world, Index state_index, Index target) {
+    const CustomsDecision decision = evaluate_customs_change(world, state_index, target);
+    if (decision == CustomsDecision::Invalid) {
+        return decision;
+    }
+    const auto pending = std::find_if(world.customs_requests.begin(), world.customs_requests.end(),
+                                      [&](const CustomsRequest& r) { return r.state == state_index; });
+    if (decision == CustomsDecision::Withdrawn) {
+        world.customs_requests.erase(pending);
+        return decision;
+    }
+    const State& state = world.states[at(state_index)];
+    if (decision == CustomsDecision::Rejected) {
+        const CustomsUnion& joined = world.customs_unions[at(target)];
+        const std::string leader =
+            in_range(world.states, joined.leader) ? world.states[at(joined.leader)].short_name : joined.name;
+        chronicle(world, state_index,
+                  leader + " lehnt den Beitritt von " + state.short_name + " zum " + joined.name + " ab.");
+        return decision;
+    }
+    const Index current = state.customs_union;
+    const std::string effective = format_date_long(customs_effective_date(world.date));
     std::string text = state.short_name;
     if (target == kNone) {
         text += " tritt zum " + effective + " aus dem " + world.customs_unions[at(current)].name + " aus";
@@ -197,7 +208,7 @@ CustomsDecision request_customs_change(World& world, Index state_index, Index ta
         world.customs_requests.push_back(CustomsRequest{state_index, target});
     }
     chronicle(world, state_index, std::move(text));
-    return CustomsDecision::Accepted;
+    return decision;
 }
 
 void apply_customs_changes(World& world) {

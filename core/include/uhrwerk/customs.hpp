@@ -53,6 +53,14 @@ enum class CustomsDecision {
     Accepted,  // Wechsel zum nächsten 1. Januar vorgemerkt
 };
 
+/// Wie request_customs_change entschieden würde, ohne die Welt zu ändern (seit Schritt a4: Knöpfe
+/// der Oberfläche zeigen vorher, ob ein Antrag möglich ist).
+CustomsDecision evaluate_customs_change(const World& world, Index state, Index target);
+
+/// Datum, zu dem ein heute angenommener Wechsel wirksam wird: der nächste 1. Januar (heute, wenn heute
+/// der 1. Januar ist, denn die Befehle laufen vor dem Jahreswechsel).
+Date customs_effective_date(const Date& today);
+
 /// Befehl Zollunion: state will zum nächsten 1. Januar in die Union target wechseln (kNone = Austritt).
 /// Beitritte entscheidet die Leitmacht (bis zur KI nach Regel: abgelehnt, wer in excluded steht);
 /// einer aufgelösten Union kann nur ihre Leitmacht beitreten. Austritte brauchen keine Zustimmung;

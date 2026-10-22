@@ -50,6 +50,8 @@ enum class CommandType : std::uint8_t {
     SetTaxRate,   // state, kind, value = neuer Steuersatz (0..rules.tax_rate_max)
     Campaign,     // seit M8: state = Strömung, target = Wahlkreis, action = Art (politik.md Abschnitt 9)
     CustomsUnion, // seit M9: state, target = Zollunion oder kNone für den Austritt (diplomatie.md 3.5)
+    Envoy,        // seit M9: state, target = Staat, value = 1 entsenden, 0 abberufen (Abschnitt 4.2)
+    Treaty,       // seit M9: state, target = Staat, value = TreatyAction (diplomacy.hpp, Abschnitt 4.3)
 };
 
 struct Command {
@@ -57,7 +59,8 @@ struct Command {
     Index state = kNone;
     Fixed value;
     TaxKind kind = TaxKind::Kontribution;          // SetTaxRate: welche Steuer (seit M5)
-    Index target = kNone;                          // Campaign: Wahlkreis (seit M8); CustomsUnion: Union
+    Index target = kNone;                          // Campaign: Wahlkreis (seit M8); CustomsUnion: Union;
+                                                   // Envoy, Treaty: Staat (seit M9)
     CampaignAction action = CampaignAction::Rally; // Campaign: Art (seit M8)
 
     friend bool operator==(const Command&, const Command&) = default;

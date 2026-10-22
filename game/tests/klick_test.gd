@@ -532,6 +532,7 @@ func _check_new_game() -> void:
 
 	await _check_party_mode(sim)
 	await _check_election_night(sim)
+	await _check_customs_ui(sim)
 
 	# Ein Spielstand von 1648 lässt sich im Spiel von 1848 aus der Liste laden.
 	_main.call("open_game_menu")
@@ -626,6 +627,88 @@ func _check_party_mode(sim: SimulationClient) -> void:
 	print("  Parteienmodus: Rolle im Menü, Versammlung in Mannheim (%s → %s Taler), zurück zum Staat" % [
 		GermanFormat.integer(roundi(funds)), GermanFormat.integer(roundi(float(party.get("funds", 0.0))))
 	])
+
+
+## Zollunion (seit M9, diplomatie.md 3.7): Taste Ö mit Legende, gesperrter Zollregler eines
+## Mitglieds, Zollgebiet in der Ortsinfo; Hannover tritt über das Fenster „Zollunion“ mit Rückfrage
+## dem Zollverein bei, der Antrag steht am nächsten Tag im Fenster, im Hinweis und in der Chronik und
+## wird wieder zurückgezogen.
+func _check_customs_ui(sim: SimulationClient) -> void:
+	await _key(KEY_SEMICOLON)
+	var legend := _texts(_main.get("_legend"))
+	if int(_main.call("map_mode")) != MapModes.MAP_ZOLLGEBIETE or not legend.contains("Zollverein (26 Staaten)"):
+		_fail("Taste Ö: Modus %d, Legende „%s“" % [int(_main.call("map_mode")), legend.left(160)])
+	var state_panel: StatePanel = _main.call("state_panel")
+	var sliders := state_panel.find_children("*", "HSlider", true, false)
+	var slider := sliders[SimulationClient.TAX_ZOLL] as HSlider if sliders.size() == 3 else null
+	if slider == null or slider.editable or roundi(slider.value) != 10:
+		_fail("Zollregler eines Zollvereinsmitglieds nicht auf 10 %% gesperrt (%s)" % [
+			"fehlt" if slider == null else "%s, frei %s" % [slider.value, slider.editable]
+		])
+	_main.call("select_location", sim.get_location_index("hamburg"))
+	await _frames(1)
+	var location: LocationPanel = _main.call("location_panel")
+	var zone := location.find_child("Customs", true, false) as Label
+	if zone == null or not zone.visible or not zone.text.begins_with("Hamburg (Zoll"):
+		_fail("Ortsinfo Hamburg: Zollgebiet „%s“" % (zone.text if zone != null else "–"))
+	_main.call("select_location", -1)
+
+	var hanover := sim.get_state_index("HAN")
+	_main.call("play_state", hanover)
+	await _frames(1)
+	var button := state_panel.find_child("CustomsButton", true, false) as Button
+	if button == null or not button.visible:
+		_fail("Staatspanel Hannover: Knopf „Zollunion …“ fehlt")
+		return
+	button.pressed.emit()
+	await _frames(1)
+	var text := state_panel.customs_text()
+	if (
+		not state_panel.is_customs_visible() or not text.contains("Zollgebiet: Steuerverein (Leitmacht)")
+		or not text.contains("[Beitreten …]") or not text.contains("[Austreten …]")
+	):
+		_fail("Fenster Zollunion (Hannover): offen %s, „%s“" % [state_panel.is_customs_visible(), text])
+		return
+	var effective := str(sim.get_customs_change(hanover, 0).get("effective_text", ""))
+	(state_panel.find_child("CustomsAction0", true, false) as Button).pressed.emit()
+	await _frames(1)
+	text = state_panel.customs_text()
+	var question := "Hannover verlässt zum %s den Steuerverein und tritt dem Zollverein bei." % effective
+	if not text.contains(question) or not text.contains("löst sich der Steuerverein dann auf"):
+		_fail("Rückfrage zum Beitritt: „%s“" % text)
+		return
+	(state_panel.find_child("CustomsConfirm", true, false) as Button).pressed.emit()
+	await _frames(1)
+	var join := state_panel.find_child("CustomsAction0", true, false) as Button
+	if not join.disabled or join.text != "beantragt" or not state_panel.customs_text().contains("nächsten Tag"):
+		_fail("Nach dem Antrag: Knopf „%s“ (gesperrt %s)" % [join.text, join.disabled])
+	sim.advance_days(1)
+	_main.call("_after_time_passed")
+	state_panel.show_customs()
+	await _frames(1)
+	text = state_panel.customs_text()
+	if text.contains("nächsten Tag hinaus"):
+		_fail("Hinweis „geht mit dem nächsten Tag hinaus“ bleibt nach dem Tageswechsel stehen")
+	var hint := (state_panel.find_child("TaxHint", true, false) as Label).text
+	var entry := false
+	for item in sim.get_chronicle(0):
+		entry = entry or str(item["text"]).contains(question.trim_suffix("."))
+	var request := "Beitritt zum Zollverein beantragt, wirksam zum %s" % effective
+	if not text.contains("Antrag: " + request) or not hint.begins_with(request) or not entry:
+		_fail("Antrag am nächsten Tag: Fenster „%s“, Hinweis „%s“, Chronik %s" % [text, hint, entry])
+		return
+	(state_panel.find_child("CustomsWithdraw", true, false) as Button).pressed.emit()
+	await _frames(1)
+	if not state_panel.customs_text().contains("Den Antrag zurückziehen? Hannover bleibt im Steuerverein."):
+		_fail("Rückfrage zur Rücknahme: „%s“" % state_panel.customs_text())
+	(state_panel.find_child("CustomsConfirm", true, false) as Button).pressed.emit()
+	sim.advance_days(1)
+	_main.call("_after_time_passed")
+	if not sim.get_state(hanover).get("customs_request", {}).is_empty():
+		_fail("Rücknahme: Antrag bleibt bestehen (%s)" % str(sim.get_state(hanover).get("customs_request")))
+	(state_panel.find_child("CustomsPopup", true, false) as PopupPanel).hide()
+	_main.call("set_map_mode", MapModes.MAP_POLITICAL)
+	print("  Zollunion: Taste Ö, Zollregler gesperrt, Hannover beantragt den Beitritt zum %s und zieht ihn zurück" % effective)
 
 
 ## Wahlen 1848 (seit M8): Taste Ä, Wahlkreis in der Ortsinfo, Wahlabend am Wahltag mit Meldungen,

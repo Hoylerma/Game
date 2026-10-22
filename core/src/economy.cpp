@@ -1,6 +1,7 @@
 #include "uhrwerk/economy.hpp"
 
 #include "uhrwerk/customs.hpp"
+#include "uhrwerk/diplomacy.hpp"
 
 #include <algorithm>
 #include <cstddef>
@@ -437,11 +438,13 @@ bool run_state_budget(World& world, Index state_index, const std::vector<Index>&
     base_expenses(world, state, population_of(world, locations), budget);
     state.interest_rate = interest_rate_of(world, state);
     budget.interest = state.debt * state.interest_rate / twelve;
+    // Gesandte (seit M9, diplomatie.md Abschnitt 4.2): ein Anteil der Monatseinnahmen je Gesandtem.
+    const Fixed income = budget.income();
+    budget.diplomacy = envoy_costs(world, state_index, income);
 
     // Bauten: Überschuss über der Rücklage, nur ohne Schulden.
-    const Fixed income = budget.income();
-    const Fixed available =
-        state.treasury + income - budget.court - budget.administration - budget.army - budget.interest;
+    const Fixed available = state.treasury + income - budget.court - budget.administration - budget.army -
+                            budget.interest - budget.diplomacy;
     const Fixed reserve = rules.reserve_years * (budget.court + budget.administration + budget.army) * twelve;
     if (state.debt <= Fixed::zero() && available > reserve) {
         budget.building = (available - reserve) * rules.building_share;
@@ -515,6 +518,7 @@ void estimate_budgets(World& world) {
         base_expenses(world, state, population_of(world, locations), budget);
         state.interest_rate = interest_rate_of(world, state);
         budget.interest = state.debt * state.interest_rate / twelve;
+        budget.diplomacy = envoy_costs(world, static_cast<Index>(s), budget.income());
         state.budget = budget;
         if (state.yearly_income <= Fixed::zero()) {
             state.yearly_income = budget.income() * twelve;

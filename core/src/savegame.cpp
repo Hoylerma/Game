@@ -3,6 +3,7 @@
 #include "uhrwerk/savegame.hpp"
 
 #include "state_access.hpp"
+#include "uhrwerk/diplomacy.hpp"
 
 #include <algorithm>
 #include <charconv>
@@ -768,6 +769,35 @@ std::string validate_state(const Simulation& sim) {
             }
         }
     }
+    // Diplomatie (seit M9, Schritt b1): Beziehungen je Paar, Gesandte und Verträge zwischen Staaten.
+    if (!w.relations.empty()) {
+        const Fixed limit = Fixed::from_int(200);
+        if (w.relations.size() != relation_count(S)) {
+            return "Größe der Beziehungen passt nicht";
+        }
+        for (const Fixed r : w.relations) {
+            if (r < -limit || r > limit) {
+                return "Beziehung außerhalb von −200 bis 200";
+            }
+        }
+        for (std::size_t i = 0; i < w.envoys.size(); ++i) {
+            const Envoy& e = w.envoys[i];
+            if (!in(e.from, S) || !in(e.to, S) || e.from == e.to || !is_valid(e.since)) {
+                return "Gesandter mit ungültigem Verweis";
+            }
+            for (std::size_t j = 0; j < i; ++j) {
+                if (w.envoys[j].from == e.from && w.envoys[j].to == e.to) {
+                    return "Gesandter doppelt";
+                }
+            }
+        }
+        for (const Treaty& t : w.treaties) {
+            if (!in(t.from, S) || !in(t.to, S) || t.from == t.to || !is_valid(t.since) ||
+                (t.kind != TreatyKind::Alliance && t.kind != TreatyKind::Guarantee)) {
+                return "Vertrag mit ungültigem Verweis";
+            }
+        }
+    }
     // Wahlen (seit M8): Wahlkreise des eigenen Parlaments, Stimmen je Strömung.
     const std::size_t C = w.currents.size();
     if (!w.parliaments.empty() && (w.campaign.size() != w.electoral_districts.size() * C ||
@@ -1035,6 +1065,26 @@ ContentFingerprint content_fingerprint(const World& w) {
             h.u64(u.excluded.size());
             for (const Index s : u.excluded) {
                 h.i64(s);
+            }
+        }
+        // Diplomatie (seit Schritt b1): Regeln und Grundbeziehungen, nur wo sie gelten (Deutscher Bund),
+        // damit Spielstände von 1648 gültig bleiben. Beziehungen, Gesandte und Verträge sind Zustand.
+        if (diplomacy_active(w)) {
+            const DiplomacyRules& d = w.diplomacy_rules;
+            for (const Fixed f : {d.drift, d.customs_union, d.federation, d.confession, d.alliance,
+                                  d.guarantee, d.envoy, d.envoy_limit, d.envoy_cost, d.envoy_people,
+                                  d.alliance_min, d.guarantee_min, d.rival_below}) {
+                h.fixed(f);
+            }
+            h.u64(d.confession_group.size());
+            for (const Index g : d.confession_group) {
+                h.i64(g);
+            }
+            h.u64(w.base_relations.size());
+            for (const BaseRelation& r : w.base_relations) {
+                h.i64(r.a);
+                h.i64(r.b);
+                h.fixed(r.value);
             }
         }
         p[14] = h.value();
