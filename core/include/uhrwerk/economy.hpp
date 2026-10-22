@@ -78,6 +78,7 @@ struct EconomyScratch {
     std::vector<Fixed> profit;       // je Betrieb: Gewinn je Kopf und Monat
     std::vector<Fixed> consumer;     // je Gut: Verbraucherpreis
     std::vector<Fixed> bought;       // je Gut: gekaufte Menge des Monats
+    std::vector<Fixed> no_imports;   // je Gut: 0 (Zollgebiet ohne Einfuhranteil im Markt, seit M9)
 };
 
 /// Wirtschaft eines Ortes an seinem Rechentag (Abschnitte 4.2–4.5). Schreibt nur Daten dieses Ortes:

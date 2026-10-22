@@ -1218,6 +1218,18 @@ TEST_CASE("Lader: Fehler in Zollunionen") {
         expect_error(r, "ungültiger Staatstag 'bra' als Leitung von zollunion keine", kUnionsFile, 14);
         expect_error(r, "'tarif'", kUnionsFile, 7);
     }
+    SUBCASE("ausgeschlossene Staaten") {
+        replace_in_file(dir / kUnionsFile, "    tarif   = 0.04\n",
+                        "    tarif   = 0.04\n    ausgeschlossen = { BRA xyz XYZ }\n");
+        add_state_neu(dir);
+        replace_in_file(dir / kUnionsFile, "{ BRA xyz XYZ }", "{ BRA xyz XYZ NEU }");
+        const LoadResult r = load(dir);
+        expect_error(r, "ungültiger Staatstag 'xyz' in 'ausgeschlossen' von zollunion mittelbund",
+                     kUnionsFile, 8);
+        expect_error(r, "unbekannter Staat 'XYZ' in 'ausgeschlossen' von zollunion mittelbund", kUnionsFile,
+                     8);
+        CHECK_FALSE(has_issue(r, "'NEU'")); // ohne Ort zum Startdatum: entfällt
+    }
     SUBCASE("doppelte Kennung, auch mit späterem 'seit'") {
         replace_in_file(dir / kUnionsFile, "zollunion nordbund {", "zollunion mittelbund {");
         expect_error(load(dir), "doppelte Kennung 'mittelbund' für Zollunion", kUnionsFile, 11);

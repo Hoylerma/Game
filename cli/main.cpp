@@ -657,7 +657,9 @@ Date date_after(const Date& start, std::int64_t days) {
 /// Steuerart 3, Satz unter 0 oder über dem Höchstsatz), aus dem eigenen Zufallsstrom Testbefehle.
 /// Mit Parlamenten (seit M8) wird jeder Befehl mit Wahrscheinlichkeit ½ zum Wahlkampf: Strömung,
 /// Wahlkreis und Art zufällig, auch ungültige (-1 oder hinter dem letzten, Art 3); die Zahl der Befehle
-/// bleibt count. Ohne Parlamente bleibt die Folge der Zufallszahlen wie bisher.
+/// bleibt count. Mit Zollunionen (seit M9) wird danach jeder Befehl mit Wahrscheinlichkeit ¼ zum Befehl
+/// Zollunion: Staat und Union zufällig (Union -1 = Austritt, hinter der letzten ungültig). Ohne
+/// Parlamente und Zollunionen bleibt die Folge der Zufallszahlen wie bisher.
 std::vector<uhrwerk::LoggedCommand> make_test_commands(const World& w, std::uint64_t seed, std::int64_t count,
                                                        std::int64_t first_day, std::int64_t end_day) {
     std::vector<uhrwerk::LoggedCommand> list;
@@ -685,6 +687,12 @@ std::vector<uhrwerk::LoggedCommand> make_test_commands(const World& w, std::uint
             c.command.target = static_cast<Index>(rng.below(districts + 2)) - 1;
             c.command.action = static_cast<uhrwerk::CampaignAction>(
                 rng.below(static_cast<std::uint32_t>(uhrwerk::kCampaignActions) + 1));
+        }
+        if (!w.customs_unions.empty() && rng.below(4) == 0) {
+            const auto unions = static_cast<std::uint32_t>(w.customs_unions.size());
+            c.command.type = uhrwerk::CommandType::CustomsUnion;
+            c.command.state = static_cast<Index>(rng.below(states + 2)) - 1;
+            c.command.target = static_cast<Index>(rng.below(unions + 2)) - 1;
         }
         list.push_back(c);
     }

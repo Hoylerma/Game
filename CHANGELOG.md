@@ -22,6 +22,14 @@ freigegeben; Stand je Schritt in Abschnitt 11 dort.
   Mitglieder, neuer CTest `zollunionen_1848`. Inhaltsbereich `diplomatie`, Spielstand **Format 3**
   (Spielstände aus M8 laden nicht mehr). Brücke: `get_state` liefert `customs_union` und
   `customs_union_name` statt `zollverein`. Noch ohne Wirkung auf Handel und Haushalt; 1648 bitgleich.
+- **Zollgebiete im Kern (Schritt a2):** Gibt es Zollunionen, teilt sich jeder Markt nach der
+  Bevölkerung in Zollgebiete. Der Zoll wirkt im Handel wie zusätzliche Fracht und trifft beim Kauf
+  nur die Einfuhr von außerhalb des eigenen Gebiets; die Mitglieder einer Union teilen ihren Zoll
+  über die Vereinskasse nach der Bevölkerung. Neuer Befehl `Zollunion` (Beitritt mit Zustimmung der
+  Leitmacht, Austritt, Wechsel, wirksam zum 1. Januar, mit Chronik); Mitglieder können ihren
+  Zollsatz nicht selbst ändern; der Zollverein lehnt Österreich ab (`ausgeschlossen`). 1848 sinkt
+  der Zoll von 5,7 % auf 1,1 % der Staatseinnahmen, der Handel steigt um 9 %; Bilanz und Wahlen 1848
+  erfüllen weiter alle Zielwerte. 1648 bitgleich.
 
 ### Meilenstein M8 – Politik, Parteien und Wahlen
 

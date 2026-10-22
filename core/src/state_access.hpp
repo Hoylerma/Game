@@ -161,6 +161,24 @@ template <typename Sim, typename V> void StateAccess::visit(Sim& sim, V& v) {
         v.field("ernte", m.harvest);
     });
 
+    // Zollgebiete (seit M9): nur in Welten mit Zollunionen, damit die Prüfsumme der übrigen (1648) bleibt.
+    if (!w.customs_unions.empty()) {
+        list(v, "zollgebiete", w.states, Extent::Content, [&](auto& s) {
+            v.field("zollunion", s.customs_union);
+            v.field("vereinsanteil", s.customs_income);
+        });
+        values(v, "vereinskasse", w.customs_revenue);
+        list(v, "zollantraege", w.customs_requests, Extent::State, [&](auto& r) {
+            v.field("staat", r.state);
+            v.field("zollunion", r.customs_union);
+        });
+        list(v, "marktzoll", w.market_states, Extent::State, [&](auto& m) {
+            values(v, "gebiete", m.zones);
+            values(v, "anteile", m.zone_shares);
+            values(v, "fremdeinfuhr", m.foreign_share);
+        });
+    }
+
     // Politik (seit M8): nur in Welten mit Parlamenten, damit die Prüfsumme der übrigen (1648) bleibt.
     if (!w.parliaments.empty()) {
         list(v, "wahlen", w.elections, Extent::State, [&](auto& e) {
@@ -209,7 +227,7 @@ template <typename Sim, typename V> void StateAccess::visit(Sim& sim, V& v) {
         v.field("staat", c.state);
         v.field("wert", c.value);
         v.field("steuerart", c.kind);
-        if (!w.parliaments.empty()) { // Wahlkampf (seit M8)
+        if (!w.parliaments.empty() || !w.customs_unions.empty()) { // Wahlkampf (M8), Zollunion (M9)
             v.field("ziel", c.target);
             v.field("aktion", c.action);
         }

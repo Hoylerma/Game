@@ -1,6 +1,7 @@
 #include "uhrwerk/simulation.hpp"
 
 #include "state_access.hpp"
+#include "uhrwerk/customs.hpp"
 #include "uhrwerk/economy.hpp"
 #include "uhrwerk/politics.hpp"
 
@@ -244,6 +245,10 @@ void Simulation::step_day() {
         world_.balance_previous = world_.balance_current;
         std::fill(world_.balance_current.begin(), world_.balance_current.end(), PopulationBalance{});
         draw_harvest(world_, topology_, rng_economy_);
+        // Beantragte Wechsel der Zollunion werden wirksam (seit M9, diplomatie.md Abschnitt 3.5).
+        if (!world_.customs_unions.empty()) {
+            apply_customs_changes(world_);
+        }
     }
 
     // 3. Neuordnung am Monatsersten (nur wenn es Zugänge oder zu kleine Blöcke gibt), dann die Märkte
@@ -251,6 +256,11 @@ void Simulation::step_day() {
     if (day == 1) {
         reorganize(world_);
         update_markets(world_, topology_, state_spending(world_));
+        // Vereinskassen (seit M9, diplomatie.md Abschnitt 3.4): Zoll der Mitglieder, nach Bevölkerung
+        // verteilt.
+        if (!world_.customs_unions.empty()) {
+            distribute_customs(world_);
+        }
         // Spenden an die Strömungen (seit M8, politik.md Abschnitt 9), nur mit Parlamenten.
         if (!world_.parliaments.empty()) {
             collect_donations(world_);
@@ -361,12 +371,21 @@ void Simulation::execute(const Command& command) {
             static_cast<std::size_t>(command.kind) >= kTaxKinds) {
             return;
         }
+        // Mitglieder einer Zollunion erheben den Vereinstarif (seit M9, diplomatie.md Abschnitt 3.5).
+        if (command.kind == TaxKind::Zoll && !world_.customs_unions.empty() &&
+            world_.states[static_cast<std::size_t>(command.state)].customs_union != kNone) {
+            return;
+        }
         world_.states[static_cast<std::size_t>(command.state)]
             .tax_rates[static_cast<std::size_t>(command.kind)] = command.value;
         return;
     case CommandType::Campaign:
         // Ungültige oder zu teure Befehle bleiben ohne Wirkung (wie beim Steuersatz).
         apply_campaign(world_, command.state, command.target, command.action);
+        return;
+    case CommandType::CustomsUnion:
+        // Entscheidung und Chronik in request_customs_change; wirksam zum nächsten 1. Januar.
+        request_customs_change(world_, command.state, command.target);
         return;
     }
 }

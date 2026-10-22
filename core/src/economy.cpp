@@ -1,5 +1,7 @@
 #include "uhrwerk/economy.hpp"
 
+#include "uhrwerk/customs.hpp"
+
 #include <algorithm>
 #include <cstddef>
 #include <cstdint>
@@ -276,6 +278,9 @@ void ensure_economy_state(World& world, const EconomyTopology& topology) {
     if (world.location_development.size() != locations) {
         world.location_development.assign(locations, Fixed{});
     }
+    if (world.customs_revenue.size() != world.customs_unions.size()) {
+        world.customs_revenue.assign(world.customs_unions.size(), Fixed{}); // Vereinskassen (seit M9)
+    }
 
     // Betriebsanteile aus den Gewichten (Abschnitt 4.8): je Beruf über die im Ort erlaubten Betriebe.
     if (world.business_shares.size() != locations * businesses) {
@@ -397,6 +402,14 @@ Fixed interest_rate_of(const World& world, const State& state) {
     return Fixed::min(rate, rules.interest_max);
 }
 
+/// Mitglieder einer Zollunion (seit M9, diplomatie.md Abschnitt 3.4) bekommen statt des Zolls ihrer
+/// Orte ihren Anteil an der Vereinskasse.
+void customs_income(const World& world, const State& state, StateBudget& budget) {
+    if (!world.customs_unions.empty() && state.customs_union != kNone) {
+        budget.taxes[static_cast<std::size_t>(TaxKind::Zoll)] = state.customs_income;
+    }
+}
+
 std::vector<Index> locations_of(const World& world, Index state) {
     std::vector<Index> result;
     for (std::size_t i = 0; i < world.locations.size(); ++i) {
@@ -420,6 +433,7 @@ bool run_state_budget(World& world, Index state_index, const std::vector<Index>&
             budget.taxes[t] += e.taxes[t];
         }
     }
+    customs_income(world, state, budget);
     base_expenses(world, state, population_of(world, locations), budget);
     state.interest_rate = interest_rate_of(world, state);
     budget.interest = state.debt * state.interest_rate / twelve;
@@ -483,6 +497,9 @@ bool run_state_budget(World& world, Index state_index, const std::vector<Index>&
 
 void estimate_budgets(World& world) {
     const Fixed twelve = Fixed::from_int(12);
+    if (!world.customs_unions.empty()) {
+        distribute_customs(world); // Vereinskasse (seit M9) aus den Steuern der Orte
+    }
     for (std::size_t s = 0; s < world.states.size(); ++s) {
         State& state = world.states[s];
         const std::vector<Index> locations = locations_of(world, static_cast<Index>(s));
@@ -494,6 +511,7 @@ void estimate_budgets(World& world) {
                 }
             }
         }
+        customs_income(world, state, budget);
         base_expenses(world, state, population_of(world, locations), budget);
         state.interest_rate = interest_rate_of(world, state);
         budget.interest = state.debt * state.interest_rate / twelve;
@@ -509,6 +527,18 @@ void update_markets(World& world, const EconomyTopology& topology,
     const Rules& rules = world.rules;
     const std::size_t goods = world.goods.size();
     const std::size_t markets = world.markets.size();
+
+    // 0. Zollgebiete je Markt und ihre Tarife (seit M9, diplomatie.md Abschnitte 3.2 und 3.3), nur mit
+    //    Zollunionen; ohne sie bleibt der Handel zollfrei wie in M5.
+    const bool customs = !world.customs_unions.empty();
+    std::vector<Fixed> tariffs;
+    if (customs) {
+        update_customs_zones(world, topology);
+        tariffs.resize(customs_zone_count(world));
+        for (std::size_t z = 0; z < tariffs.size(); ++z) {
+            tariffs[z] = zone_tariff(world, static_cast<Index>(z));
+        }
+    }
 
     // 1. Lokale Mengen aus den Meldungen der Orte, dazu die Staatsnachfrage.
     std::vector<Fixed> local_supply(markets * goods);
@@ -566,18 +596,21 @@ void update_markets(World& world, const EconomyTopology& topology,
             const MarketState& sa = world.market_states[a];
             const MarketState& sb = world.market_states[b];
             const Fixed freight = link.freight_on(world.date); // Bahnfracht ab der Verbindung (seit M7)
+            // Zoll wie zusätzliche Fracht (seit M9): Tarif des Gebiets, in dem gekauft wird.
+            const Fixed into_b = customs ? customs_tariff(&sa, sb, tariffs) : Fixed{};
+            const Fixed into_a = customs ? customs_tariff(&sb, sa, tariffs) : Fixed{};
             for (std::size_t g = 0; g < goods; ++g) {
                 const Fixed pa = sa.price[g];
                 const Fixed pb = sb.price[g];
-                if (pb > pa * (one + freight)) {
-                    const Fixed gap = pb - pa * (one + freight);
+                if (pb > pa * (one + freight + into_b)) {
+                    const Fixed gap = pb - pa * (one + freight + into_b);
                     const Fixed amount =
                         trade_share(rules.trade_rate, gap, pb) * Fixed::min(sa.supply[g], sb.demand[g]);
                     if (amount > Fixed::zero()) {
                         flows.push_back(Flow{static_cast<Index>(a), static_cast<Index>(b), g, amount});
                     }
-                } else if (pa > pb * (one + freight)) {
-                    const Fixed gap = pa - pb * (one + freight);
+                } else if (pa > pb * (one + freight + into_a)) {
+                    const Fixed gap = pa - pb * (one + freight + into_a);
                     const Fixed amount =
                         trade_share(rules.trade_rate, gap, pa) * Fixed::min(sb.supply[g], sa.demand[g]);
                     if (amount > Fixed::zero()) {
@@ -590,6 +623,7 @@ void update_markets(World& world, const EconomyTopology& topology,
             continue;
         }
         const MarketState& sa = world.market_states[a];
+        const Fixed sea_in = rules.freight_sea + (customs ? customs_tariff(nullptr, sa, tariffs) : Fixed{});
         for (std::size_t g = 0; g < goods; ++g) {
             const Good& good = world.goods[g];
             if (good.world_factor <= Fixed::zero()) {
@@ -604,10 +638,9 @@ void update_markets(World& world, const EconomyTopology& topology,
                 if (amount > Fixed::zero()) {
                     flows.push_back(Flow{static_cast<Index>(a), kNone, g, amount});
                 }
-            } else if (p > world_price * (one + rules.freight_sea)) {
+            } else if (p > world_price * (one + sea_in)) {
                 const Fixed amount =
-                    trade_share(rules.trade_rate, p - world_price * (one + rules.freight_sea), p) *
-                    sa.demand[g];
+                    trade_share(rules.trade_rate, p - world_price * (one + sea_in), p) * sa.demand[g];
                 if (amount > Fixed::zero()) {
                     flows.push_back(Flow{kNone, static_cast<Index>(a), g, amount});
                 }
@@ -630,6 +663,12 @@ void update_markets(World& world, const EconomyTopology& topology,
     };
     std::vector<Fixed> imports(markets * goods);
     std::vector<Fixed> exports(markets * goods);
+    // Fremde Einfuhr je Markt, Zollgebiet und Gut (seit M9, Abschnitt 3.4): aus anderen Märkten der Teil,
+    // der nicht aus dem eigenen Gebiet kommt, dazu alles vom Weltmarkt.
+    std::vector<std::vector<Fixed>> foreign(customs ? markets : 0);
+    for (std::size_t m = 0; m < foreign.size(); ++m) {
+        foreign[m].assign(world.market_states[m].zones.size() * goods, Fixed{});
+    }
     for (const Flow& f : flows) {
         Fixed factor = one;
         if (f.from != kNone) {
@@ -648,6 +687,14 @@ void update_markets(World& world, const EconomyTopology& topology,
         }
         if (f.to != kNone) {
             imports[at(f.to) * goods + f.good] += amount;
+        }
+        if (customs && f.to != kNone) {
+            const MarketState& to = world.market_states[at(f.to)];
+            for (std::size_t zi = 0; zi < to.zones.size(); ++zi) {
+                const Fixed outside =
+                    f.from != kNone ? one - zone_share(world.market_states[at(f.from)], to.zones[zi]) : one;
+                foreign[at(f.to)][zi * goods + f.good] += amount * outside;
+            }
         }
     }
 
@@ -680,6 +727,15 @@ void update_markets(World& world, const EconomyTopology& topology,
             state.imports[g] = imports[k];
             state.exports[g] = exports[k];
             sales += state.price[g] * Fixed::min(supply, demand);
+        }
+        if (customs) {
+            state.foreign_share.assign(state.zones.size() * goods, Fixed{});
+            for (std::size_t i = 0; i < state.foreign_share.size(); ++i) {
+                const Fixed supply = local_supply[m * goods + i % goods] + imports[m * goods + i % goods];
+                if (supply > Fixed::zero()) {
+                    state.foreign_share[i] = foreign[m][i] / supply;
+                }
+            }
         }
         state.margin_per_trader =
             traders[m] > Fixed::zero() ? rules.trade_margin * sales / traders[m] : Fixed::zero();
@@ -738,7 +794,19 @@ void run_location_economy(World& world, const EconomyTopology& topology, Index l
     const State& owner = world.states[at(loc.owner)];
     const Fixed kontribution = owner.tax_rate(TaxKind::Kontribution);
     const Fixed akzise = loc.is_city ? owner.tax_rate(TaxKind::Akzise) : Fixed::zero();
-    const Fixed zoll = owner.tax_rate(TaxKind::Zoll);
+    // Zoll: ohne Zollunionen der Satz des Besitzers auf die ganze Einfuhr (M5); mit ihnen (seit M9,
+    // diplomatie.md Abschnitt 3.4) der Tarif des Zollgebiets auf die Einfuhr von außerhalb.
+    Fixed zoll = owner.tax_rate(TaxKind::Zoll);
+    const Fixed* imported = market.import_share.data();
+    if (!world.customs_unions.empty()) {
+        const Index zone = customs_zone(world, loc.owner);
+        zoll = zone_tariff(world, zone);
+        const Index slot = zone_slot(market, zone);
+        scratch.no_imports.assign(goods, Fixed{});
+        imported = slot != kNone && market.foreign_share.size() == market.zones.size() * goods
+                       ? market.foreign_share.data() + at(slot) * goods
+                       : scratch.no_imports.data();
+    }
 
     // Köpfe je Beruf (Blöcke, ohne Zugänge).
     scratch.people.assign(professions, Fixed{});
@@ -829,7 +897,7 @@ void run_location_economy(World& world, const EconomyTopology& topology, Index l
     // 4.3 Verbrauch und 4.4 Lebensstandard.
     scratch.consumer.resize(goods);
     for (std::size_t g = 0; g < goods; ++g) {
-        scratch.consumer[g] = market.price[g] * (one + akzise) * (one + zoll * market.import_share[g]);
+        scratch.consumer[g] = market.price[g] * (one + akzise) * (one + zoll * imported[g]);
     }
     scratch.bought.assign(goods, Fixed{});
     for (std::size_t p = 0; p < professions; ++p) {
@@ -894,8 +962,7 @@ void run_location_economy(World& world, const EconomyTopology& topology, Index l
     for (std::size_t g = 0; g < goods; ++g) {
         const Fixed value = scratch.bought[g] * market.price[g];
         economy.taxes[static_cast<std::size_t>(TaxKind::Akzise)] += value * akzise;
-        economy.taxes[static_cast<std::size_t>(TaxKind::Zoll)] +=
-            value * (one + akzise) * zoll * market.import_share[g];
+        economy.taxes[static_cast<std::size_t>(TaxKind::Zoll)] += value * (one + akzise) * zoll * imported[g];
     }
     world.economy[li] = economy;
 

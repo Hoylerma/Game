@@ -741,6 +741,33 @@ std::string validate_state(const Simulation& sim) {
             return "Chronik mit ungültigem Verweis";
         }
     }
+    // Zollgebiete (seit M9): Unionen der Staaten und Anträge, Gebiete und Anteile je Markt.
+    const std::size_t U = w.customs_unions.size();
+    if (U > 0) {
+        if (w.customs_revenue.size() != U) {
+            return "Größe der Vereinskassen passt nicht";
+        }
+        for (const State& s : w.states) {
+            if (!none_or_in(s.customs_union, U)) {
+                return "Zollunion von " + s.tag + " ungültig";
+            }
+        }
+        for (const CustomsRequest& r : w.customs_requests) {
+            if (!in(r.state, S) || !none_or_in(r.customs_union, U)) {
+                return "Zollantrag mit ungültigem Verweis";
+            }
+        }
+        for (const MarketState& m : w.market_states) {
+            if (m.zone_shares.size() != m.zones.size() || m.foreign_share.size() != m.zones.size() * G) {
+                return "Größe der Zollgebiete eines Marktes passt nicht";
+            }
+            for (std::size_t i = 0; i < m.zones.size(); ++i) {
+                if (!in(m.zones[i], U + S) || (i > 0 && m.zones[i] <= m.zones[i - 1])) {
+                    return "Zollgebiet eines Marktes ungültig";
+                }
+            }
+        }
+    }
     // Wahlen (seit M8): Wahlkreise des eigenen Parlaments, Stimmen je Strömung.
     const std::size_t C = w.currents.size();
     if (!w.parliaments.empty() && (w.campaign.size() != w.electoral_districts.size() * C ||
@@ -995,7 +1022,8 @@ ContentFingerprint content_fingerprint(const World& w) {
         }
         p[13] = h.value();
     }
-    // Diplomatie (seit M9): Zollunionen und die Mitgliedschaft der Staaten.
+    // Diplomatie (seit M9): Zollunionen. Die Mitgliedschaft der Staaten ist seit Schritt a2 Zustand
+    // (Befehl Zollunion) und steht im Spielstand.
     {
         Fnv h;
         h.u64(w.customs_unions.size());
@@ -1004,10 +1032,10 @@ ContentFingerprint content_fingerprint(const World& w) {
             h.text(u.name); // steht in der Chronik bei Beitritt und Austritt
             h.i64(u.leader);
             h.fixed(u.tariff);
-        }
-        h.u64(w.states.size());
-        for (const State& s : w.states) {
-            h.i64(s.customs_union);
+            h.u64(u.excluded.size());
+            for (const Index s : u.excluded) {
+                h.i64(s);
+            }
         }
         p[14] = h.value();
     }

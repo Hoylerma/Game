@@ -29,7 +29,10 @@ und Protokoll anhängen“) und für die Fehlersuche bei Determinismusfehlern.
 veränderlichen Zustand Feld für Feld auf: Datum, Tage, Seed; je Staat Kasse, Steuersätze, Heer,
 Schulden, Haushalt, Zins, Bankrotte, Hofhaltung und Hauptstadt; je Ort Besitzer, Verwüstung und
 Blockbereich; Blöcke und Zugänge mit allen Feldern; Momentaufnahmen, Bilanzen, Ortswirtschaft;
-Betriebsanteile, Angebot, Nachfrage, Einkommen, Bedarfsdeckung, Landesausbau; Märkte; seit M8 die
+Betriebsanteile, Angebot, Nachfrage, Einkommen, Bedarfsdeckung, Landesausbau; Märkte; seit M9 die
+Zollgebiete (je Staat Zollunion und Anteil an der Vereinskasse, je Union die Vereinskasse, die
+beantragten Wechsel, je Markt Gebiete, Anteile und fremder Einfuhranteil), **nur in Welten mit
+Zollunionen** ([diplomatie.md](diplomatie.md), Abschnitt 5); seit M8 die
 abgehaltenen Wahlen (je Wahlkreis Berechtigte, Wähler, Stimmen je Strömung, Sieger, Stichwahl, Boykott,
 Meldereihenfolge; je Abgeordnetem Wahlkreis, Strömung, Position, Fraktion), der Wahlkampf je
 Wahlkreis und Strömung (Mobilisierung, Flugblätter, Vereine) sowie Parteikasse und Spenden je
@@ -86,7 +89,7 @@ Simulation beeinflusst, und ein Gesamtwert über die 15 Bereiche (seit M9; M8 14
 | `staaten`, `kreise` | Kennung, Kurzname und Konfession des Herrscherhauses der Staaten, die zum Startdatum bestehen (der Zollverein bis M8, seit M9 unter `diplomatie`); Kennungen der Kreise; Verwaltungseinheiten mit Kennung, Art und übergeordneter Einheit (seit M7) |
 | `orte` | Kennung, Name, Gelände, Kreis, Lage, Fläche, Stadt, Markt, Vorkommen, Hafen, Verwaltungseinheit und Bundesgebiet (seit M7); die Zahl der Orte |
 | `politik` (seit M8) | Strömungen (Kennung, Name, Position), Interessengruppen (Mitglieder, Neigung), Parlamente mit Wahl, Fraktionen, Sitz und Name, Verfassung und Wahlordnung der Staaten, Wahlkreise mit Name, Staat, Sitzen und Orten, Wahlregeln und Regionen ([politik.md](politik.md)) |
-| `diplomatie` (seit M9) | Zollunionen mit Kennung, Name, Leitmacht und Tarif, die Zollunion jedes Staates ([diplomatie.md](diplomatie.md)) |
+| `diplomatie` (seit M9) | Zollunionen mit Kennung, Name, Leitmacht, Tarif und ausgeschlossenen Staaten; die Mitgliedschaft der Staaten ist seit Schritt a2 Zustand ([diplomatie.md](diplomatie.md)) |
 
 **Nicht** dazu gehören volle Staatsnamen, Farben, Quellen und Beschreibungen: Eine korrigierte
 Quelle macht alte Spielstände nicht unbrauchbar. Der **Kurzname der Staaten und der Name der Orte
@@ -193,7 +196,9 @@ des Spiels nicht berührt: Staat −1 bis hinter den letzten, Steuerart 0 bis 3 
 von −10 % bis 110 % des Höchstsatzes – also gültige und ungültige. In Welten mit Parlamenten
 (seit M8) wird jeder Testbefehl mit Wahrscheinlichkeit ½ zum Wahlkampfbefehl, ebenso mit ungültigen
 Werten: Strömung −1 bis hinter die letzte, Wahlkreis −1 bis hinter den letzten, Art 0 bis 3. Die Zahl
-der Befehle bleibt N. Ohne Parlament bleibt die Folge der Zufallszahlen wie vor M8.
+der Befehle bleibt N. Mit Zollunionen (seit M9) wird danach jeder Testbefehl mit Wahrscheinlichkeit ¼
+zum Befehl Zollunion (Staat −1 bis hinter den letzten, Union −1 = Austritt bis hinter die letzte).
+Ohne Parlament und Zollunion bleibt die Folge der Zufallszahlen wie vor M8.
 
 ## 6. Versionen und Migration
 
@@ -206,8 +211,11 @@ der Befehle bleibt N. Ohne Parlament bleibt die Folge der Zufallszahlen wie vor 
   diese 13; `politik` bleibt 0), lädt aber nicht („Spielstand im Format 1 wird nicht unterstützt“):
   Mit `politik` hat sich ohnehin der Inhalt geändert (Abschnitt 3).
 - **Format 3 (M9):** der Inhaltsbereich `diplomatie` (Zollunionen). Ein Spielstand im Format 2 zeigt
-  seine Metadaten wie oben mit 14 Bereichen an, lädt aber nicht. Mit Schritt a2 kommen die
-  Vereinskassen und der Befehl `Zollunion` dazu ([diplomatie.md](diplomatie.md), Abschnitt 5).
+  seine Metadaten wie oben mit 14 Bereichen an, lädt aber nicht. Seit Schritt a2 stehen die
+  Zollgebiete im Zustand, der Befehl `Zollunion` im Protokoll (Ziel = Union) und die Mitgliedschaft
+  nicht mehr im Fingerabdruck; ein Spielstand 1848 aus Schritt a1 passt daher nicht mehr zum Inhalt
+  (`diplomatie`). In Welten mit Parlamenten oder Zollunionen tragen die wartenden Befehle Ziel und
+  Aktion ([diplomatie.md](diplomatie.md), Abschnitt 5).
 - Jede Änderung am Zustand (neues Feld, neue Reihenfolge) erhöht die Formatversion. Der Test
   „Spielstand: Formatwache“ verhindert, dass das vergessen wird: Er speichert die Test-Fixture nach
   einem Jahr und vergleicht den Prüfwert der Nutzdaten mit einem festgehaltenen Wert. Ändert er
