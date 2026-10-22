@@ -255,7 +255,7 @@ void Simulation::step_day() {
     //    (wirtschaft.md, Abschnitt 4.1).
     if (day == 1) {
         reorganize(world_);
-        update_markets(world_, topology_, state_spending(world_));
+        update_markets(world_, topology_, state_spending(world_), record_trade_ ? &trade_flows_ : nullptr);
         // Vereinskassen (seit M9, diplomatie.md Abschnitt 3.4): Zoll der Mitglieder, nach Bevölkerung
         // verteilt.
         if (!world_.customs_unions.empty()) {

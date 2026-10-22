@@ -164,10 +164,13 @@ Neuer Befehl **`Zollunion(staat, union)`**; `union = kNone` heißt Austritt.
 - **Beitritt** braucht die Zustimmung der Union (Einstimmigkeit, Kapitel 08). Bis zur KI (M12)
   entscheidet die **Leitmacht** nach einer Regel: Sie stimmt zu, wenn ihre Beziehung zum
   Antragsteller mindestens 0 ist (Abschnitt 4.1; in M9a ohne Beziehungen: immer), und lehnt die
-  Staaten in `ausgeschlossen` ab (Daten: Österreich beim Zollverein). Eine andere Leitmacht kann
-  nicht wechseln, weil eine Leitmacht ihre Union nicht verlassen kann (Preußen nicht in den
-  Steuerverein). Ist der Spieler die Leitmacht, entscheidet er selbst über Anträge anderer, sobald
-  es solche gibt (M12).
+  Staaten in `ausgeschlossen` ab (Daten: Österreich beim Zollverein). Ist der Spieler die Leitmacht,
+  entscheidet er selbst über Anträge anderer, sobald es solche gibt (M12).
+- **Austritt der Leitmacht** (seit Schritt a3): Tritt die Leitmacht aus oder wechselt sie, löst sich
+  ihre Union zum selben 1. Januar auf; die übrigen Mitglieder werden eigene Zollgebiete (Hannover 1854:
+  Ende des Steuervereins). Einer aufgelösten Union kann nur ihre Leitmacht wieder beitreten. (In
+  Schritt a2 konnte die Leitmacht nicht austreten; damit wäre der historische Beitritt Hannovers
+  unmöglich gewesen.)
 - **Wirksam** zum nächsten 1. Januar (Vertragsjahr, Entscheidung 5); bis dahin „beantragt“.
 - **Austritt** ohne Zustimmung, ebenfalls zum nächsten 1. Januar. Historisch liefen die Verträge
   zwölf Jahre (1834, 1842, 1854); eine Kündigungsfrist bis zum Ende der Periode wäre genauer, aber im
@@ -178,7 +181,8 @@ Neuer Befehl **`Zollunion(staat, union)`**; `union = kNone` heißt Austritt.
   Wechsel von einer Union in die andere ist ein Antrag (Austritt und Beitritt zum selben Tag).
 - Chronik bei der Entscheidung: „Hannover tritt zum 1. Januar 1849 dem Zollverein bei.“, „Baden tritt
   zum 1. Januar 1849 aus dem Zollverein aus.“, „Hannover verlässt zum 1. Januar 1849 den Steuerverein
-  und tritt dem Zollverein bei.“, „Preußen lehnt den Beitritt von Österreich zum Zollverein ab.“
+  und tritt dem Zollverein bei; der Steuerverein löst sich auf.“, „Preußen lehnt den Beitritt von
+  Österreich zum Zollverein ab.“
 
 ### 3.6 Messung und Abnahme
 
@@ -186,14 +190,23 @@ Neuer Befehl **`uhrwerk-cli zoll`** (Zolllabor) nach dem Vorbild von `wahl`:
 
 ```
 uhrwerk-cli zoll --szenario voelkerfruehling [--beitritt TAG[:UNION]] [--austritt TAG]
-                 [--jahre N] [--seeds N]
+                 [--jahre N] [--seeds N] [--ziele DATEI]
 ```
 
-Er rechnet je Seed zwei Läufe gleichen Startzustands, mit und ohne den Wechsel zum ersten
-1. Januar, und vergleicht nach N Jahren:
-- Handel über Zollgrenzen und mit den Nachbarmärkten des Staates (Menge und Wert je Monat);
-- Zolleinnahmen und Kasse des Staates und der Union;
-- Preise in den Märkten des Staates.
+Er rechnet je Seed einen Lauf ohne Wechsel und je Wechsel einen Lauf mit ihm (Befehl `Zollunion` am
+ersten Tag, wirksam zum ersten 1. Januar), jeweils bis zum 1. Januar N Jahre danach (Standard 5), und
+misst im letzten Jahr an jedem Monatsersten (Kern: `uhrwerk/customs_lab.hpp`, Ströme über
+`Simulation::record_trade`, kein Zustand):
+- **Grenzhandel:** Wert der Ströme zwischen den Märkten des Staates und denen der übrigen Mitglieder
+  der Union (beim Austritt: der bisherigen), gewichtet mit den Bevölkerungsanteilen zum Start;
+- **Handel:** Wert aller Ströme der Märkte des Staates nach seinem Anteil, auch mit dem Weltmarkt;
+- **Zoll:** Zolleinnahme des Staates im Haushalt;
+- **Preise:** Preis ÷ Basispreis in den Märkten des Staates, nach seiner Bevölkerung gewichtet;
+- im Lauf ohne Wechsel der **Zollanteil** jeder Union: Zoll ÷ Einnahmen ihrer Mitglieder.
+
+Ausgegeben werden die Faktoren „mit ÷ ohne Wechsel“ als Median mit 5- und 95-%-Wert über die Seeds.
+Ohne `--beitritt` und `--austritt` rechnet das Labor die Wechsel aus den Zollzielen
+(`common/zollziele_<szenario>.chron`, Format: [chronik-skript.md](chronik-skript.md), Abschnitt 3.26).
 
 **Abnahme:**
 1. Die Mitgliedschaften 1848 stimmen mit der Liste in Abschnitt 2 und den Beitrittsdaten aus
@@ -392,7 +405,8 @@ Der Archivar prüft `zollunion` (bekannte Union, nicht vor ihrem `seit`) und `be
      Staates ändert dann oft nichts;
    - Märkte an Zollgrenzen teilen: genauer, aber neue Märkte und eine neue Kalibrierung.
 3. **Zoll als Handelshemmnis.** Empfehlung: **ja**, als Aufschlag auf die Fracht (Abschnitt 3.3),
-   mit den Sätzen aus den Daten (1848: 3 %). Alternative: ein höherer Vereinstarif nach den
+   mit den Sätzen aus den Daten (1848: 3 %). *Umgesetzt mit der Alternative (Schritt a3, nach Rückfrage):
+   Vereinstarif 10 % für den Zollverein, weil der Zoll mit 3 % auf 1 % der Einnahmen fiel.* Alternative: ein höherer Vereinstarif nach den
    historischen Sätzen (rund 10 % auf Fertigwaren); dann muss der Haushalt 1848 neu kalibriert
    werden, weil der Zoll dann gut das Dreifache einbringt.
 4. **Verteilung der Vereinskasse.** Empfehlung: **nach Bevölkerung** (historisch). Alternative: nach
@@ -438,3 +452,4 @@ Der Archivar prüft `zollunion` (bekannte Union, nicht vor ihrem `seit`) und `be
 |---|---|
 | a1 Daten | `common/zollunionen.chron` mit Zollverein (Leitung Preußen) und Steuerverein (Leitung Hannover), beide mit Tarif 3 % (chronik-skript.md 3.25). Staatsfeld `zollunion` statt `zollverein` (chronik-skript.md 3.5; die Brücke liefert `customs_union` und `customs_union_name` statt `zollverein`); 1848: 26 Staaten im Zollverein, Hannover, Oldenburg und Schaumburg-Lippe im Steuerverein, neun für sich. Lader mit Prüfungen (unbekannte oder spätere Union, Leitmacht ohne Ort oder nicht Mitglied, `keine` reserviert), Archivar (bekannte Union, Datum nicht vor ihrem `seit`), Inhaltsbereich `diplomatie`, Spielstand Format 3 (speicherstaende.md, Abschnitt 6), `uhrwerk-cli info` mit Unionen und Mitgliedern. Tests: Lader (Mitglieder vor und nach einem Wechsel, Fehler), Fingerabdruck, Format 1 und 2, CTest `zollunionen_1848` mit der Mitgliederliste; Godot-Rauchtest. Ohne Wirkung auf die Simulation; 1648 bitgleich (`5db13a66d63e6079`). |
 | a2 Kern | `core/src/customs.cpp` (`uhrwerk/customs.hpp`): Zollgebiete je Markt am Monatsersten (Abschnitt 3.2), erwarteter Tarif im Handel und bei der Einfuhr vom Weltmarkt (3.3), fremder Einfuhranteil je Markt und Gebiet für Verbraucherpreis und Zoll der Orte, Vereinskasse am Monatsersten nach Bevölkerung, Anteil als Zoll im Haushalt (3.4); Befehl `Zollunion` mit Entscheidung der Leitmacht (`ausgeschlossen`, Daten: Österreich beim Zollverein), Rücknahme, Wechsel und Chronik, wirksam zum 1. Januar; Zollregler der Mitglieder gesperrt (3.5). Zustand nur mit Zollunionen (Mitgliedschaft, Vereinsanteil, Vereinskasse, Anträge, Zollgebiete der Märkte); die Mitgliedschaft ist kein Inhalt mehr. Testbefehle der Kommandozeile mit Zollunion. Tests: Gebiete und Anteile, Tarif, Handel über die Grenze (Fixture: 10 % Tarif, ein Drittel weniger Einfuhr), fremder Einfuhranteil, Vereinskasse und Haushalt, Beitritt, Austritt, Rücknahme, Ablehnung, Wechsel, gesperrter Regler, Spielstand, Wiederholung, 1 und 4 Threads. 1648 bitgleich (`5db13a66d63e6079`). Messung 1848 (12 Monate gegen die Rechnung aus M5): Zoll 5,7 % → 1,1 % der Staatseinnahmen, weil Einfuhr aus dem eigenen Gebiet nicht mehr verzollt wird; Zollverein-Mitglieder je 0,7–0,9 %, Steuerverein 3,8–4,1 %, Bremen 13,4 %, Österreich 0,5 %; Einfuhr aller Märkte +9 %. Bilanz 1848 (8 Seeds, 30 Jahre) und Wahllabor 1848/49 erfüllen alle Zielwerte (Liberale 296 statt 293 Sitze, Preußen 1849 72/16/225/36). Die Höhe des Zolls kalibriert Schritt a3. |
+| a3 Zolllabor | `uhrwerk-cli zoll` (Abschnitt 3.6, Kern `uhrwerk/customs_lab.hpp`): je Seed ein Lauf ohne und je Wechsel einer mit ihm, Messung im letzten Jahr; Zollziele `common/zollziele_voelkerfruehling.chron` (chronik-skript.md 3.26), `pruefen` liest sie mit; CI-Schritt „Zolllabor 1848“ im Job Balancing, CTest `zoll_1848`. Regeländerung: Die Leitmacht kann austreten, ihre Union löst sich dann auf (Abschnitt 3.5), sonst wäre Hannovers Beitritt unmöglich. **Kalibrierung** (Entscheidung 3, Alternative): Mit 3 % brachte der Zoll dem Zollverein 1 % der Einnahmen; selbst 25 % brächten nur gut 4 %, weil die Einfuhr von außerhalb im Modell klein ist (der Zollverein ist ein großer Binnenmarkt; Kolonialwaren nur 4–7 % der fremden Einfuhr nach Wert). Gewählt: Zollverein 10 %, Steuerverein 3 % (niedriger verzollt). Ergebnis mit 8 Seeds, Messung 1853: Zollanteil Zollverein 2,9 % (2,6 … 3,0 %), Steuerverein 3,7 %; Beitritt Hannovers: Grenzhandel ×1,40 (×1,21 … ×1,80), Zoll ×0,67 (×0,61 … ×0,76), Preise ×1,02; Beitritt Mecklenburg-Schwerins: Grenzhandel ×2,08 (×1,79 … ×2,34), Handel ×1,61, Zoll ×0,49, Preise ×1,08. Hannover verliert Zoll wie historisch 1854 (dort mit Vorabanteil ausgeglichen). Bilanz 1848 (8 Seeds, 30 Jahre) und Wahllabor 1848/49 erfüllen alle Zielwerte (Liberale 296, Preußen 1849 71/16/227/36). Varianten: 10 %/5 % (Mecklenburg streut stark), 15 %/5 % (Zollanteil 3,7 %), 20 %/5 % (4,1 %). Der Zollanteil bleibt unter dem historischen (eher 10–20 %, Wissensstand ohne Quellen); dafür bräuchte das Modell mehr Einfuhr von Kolonial- und englischen Fabrikwaren. |

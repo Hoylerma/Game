@@ -47,7 +47,7 @@ void distribute_customs(World& world);
 
 /// Ergebnis eines Antrags auf Wechsel der Zollunion (Befehl Zollunion, Abschnitt 3.5).
 enum class CustomsDecision {
-    Invalid,   // ungültig oder ohne Wirkung (gleiche Union ohne offenen Antrag, Leitmacht will austreten)
+    Invalid,   // ungültig oder ohne Wirkung (gleiche Union ohne offenen Antrag, aufgelöste Union)
     Withdrawn, // offener Antrag zurückgezogen (Antrag auf die bisherige Union)
     Rejected,  // Beitritt von der Leitmacht abgelehnt
     Accepted,  // Wechsel zum nächsten 1. Januar vorgemerkt
@@ -55,11 +55,13 @@ enum class CustomsDecision {
 
 /// Befehl Zollunion: state will zum nächsten 1. Januar in die Union target wechseln (kNone = Austritt).
 /// Beitritte entscheidet die Leitmacht (bis zur KI nach Regel: abgelehnt, wer in excluded steht);
-/// Austritte brauchen keine Zustimmung, die Leitmacht selbst kann nicht austreten. Ein neuer Antrag
-/// ersetzt einen offenen. Schreibt die Chronik.
+/// einer aufgelösten Union kann nur ihre Leitmacht beitreten. Austritte brauchen keine Zustimmung;
+/// tritt die Leitmacht aus, löst sich ihre Union zum selben Tag auf. Ein neuer Antrag ersetzt einen
+/// offenen. Schreibt die Chronik.
 CustomsDecision request_customs_change(World& world, Index state, Index target);
 
-/// Am 1. Januar: die vorgemerkten Wechsel werden wirksam (in Antragsreihenfolge).
+/// Am 1. Januar: die vorgemerkten Wechsel werden wirksam (in Antragsreihenfolge); danach lösen sich
+/// Unionen ohne ihre Leitmacht auf.
 void apply_customs_changes(World& world);
 
 } // namespace uhrwerk

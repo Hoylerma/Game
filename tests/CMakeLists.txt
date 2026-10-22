@@ -75,7 +75,12 @@ if(UHRWERK_BUILD_CLI)
     add_test(NAME zollunionen_1848
         COMMAND uhrwerk-cli info --daten ${PROJECT_SOURCE_DIR}/data --szenario voelkerfruehling)
     set_tests_properties(zollunionen_1848 PROPERTIES PASS_REGULAR_EXPRESSION
-        "2 Zollunionen, 9 Staaten für sich\n[^\n]*Zollverein \\(Leitung PRU, Tarif 3 %\\): 26 Staaten[^\n]*\n *ALT BAD BAV BER BWO DES FRA HED HEK HHO HOH HSI LIP LUX NAS PRU REA REJ SAX SCG SMG SRU SSH WAL WEI WUE\n[^\n]*Steuerverein \\(Leitung HAN, Tarif 3 %\\): 3 Staaten[^\n]*\n *HAN OLD SLI\n")
+        "2 Zollunionen, 9 Staaten für sich\n[^\n]*Zollverein \\(Leitung PRU, Tarif 10 %\\): 26 Staaten[^\n]*\n *ALT BAD BAV BER BWO DES FRA HED HEK HHO HOH HSI LIP LUX NAS PRU REA REJ SAX SCG SMG SRU SSH WAL WEI WUE\n[^\n]*Steuerverein \\(Leitung HAN, Tarif 3 %\\): 3 Staaten[^\n]*\n *HAN OLD SLI\n")
+
+    # Zolllabor (seit M9): ein kurzer Lauf mit einem Wechsel; die volle Prüfung läuft im CI-Job "Balancing".
+    add_test(NAME zoll_1848
+        COMMAND uhrwerk-cli zoll --daten ${PROJECT_SOURCE_DIR}/data --szenario voelkerfruehling --seeds 1
+                --jahre 1 --beitritt SLI:zollverein)
 
     # Spielstände und Wiederholungen (seit M6, docs/technik/speicherstaende.md Abschnitt 10): Abnahme
     # mit den echten Daten über die Datei; Wiederholung eines Protokolls und eines Spielstands über

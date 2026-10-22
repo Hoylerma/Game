@@ -159,12 +159,14 @@ CustomsDecision request_customs_change(World& world, Index state_index, Index ta
         world.customs_requests.erase(pending);
         return CustomsDecision::Withdrawn;
     }
-    if (current != kNone && world.customs_unions[at(current)].leader == state_index) {
-        return CustomsDecision::Invalid; // die Leitmacht bleibt in ihrer Union
-    }
     const std::string effective = format_date_long(effective_date(world.date));
     if (target != kNone) {
         const CustomsUnion& joined = world.customs_unions[at(target)];
+        // Einer aufgelösten Union (die Leitmacht gehört ihr nicht mehr an) kann nur die Leitmacht beitreten.
+        if (joined.leader != state_index && (!in_range(world.states, joined.leader) ||
+                                             world.states[at(joined.leader)].customs_union != target)) {
+            return CustomsDecision::Invalid;
+        }
         if (std::find(joined.excluded.begin(), joined.excluded.end(), state_index) != joined.excluded.end()) {
             const std::string leader = in_range(world.states, joined.leader)
                                            ? world.states[at(joined.leader)].short_name
@@ -177,13 +179,18 @@ CustomsDecision request_customs_change(World& world, Index state_index, Index ta
     }
     std::string text = state.short_name;
     if (target == kNone) {
-        text += " tritt zum " + effective + " aus dem " + world.customs_unions[at(current)].name + " aus.";
+        text += " tritt zum " + effective + " aus dem " + world.customs_unions[at(current)].name + " aus";
     } else if (current == kNone) {
-        text += " tritt zum " + effective + " dem " + world.customs_unions[at(target)].name + " bei.";
+        text += " tritt zum " + effective + " dem " + world.customs_unions[at(target)].name + " bei";
     } else {
         text += " verlässt zum " + effective + " den " + world.customs_unions[at(current)].name +
-                " und tritt dem " + world.customs_unions[at(target)].name + " bei.";
+                " und tritt dem " + world.customs_unions[at(target)].name + " bei";
     }
+    // Ohne ihre Leitmacht löst sich eine Union auf (apply_customs_changes).
+    if (current != kNone && world.customs_unions[at(current)].leader == state_index) {
+        text += "; der " + world.customs_unions[at(current)].name + " löst sich auf";
+    }
+    text += ".";
     if (pending != world.customs_requests.end()) {
         pending->customs_union = target;
     } else {
@@ -201,6 +208,19 @@ void apply_customs_changes(World& world) {
         }
     }
     world.customs_requests.clear();
+    // Eine Union, deren Leitmacht ausgetreten ist, löst sich auf: Ihre Mitglieder werden eigene Zollgebiete.
+    for (std::size_t u = 0; u < world.customs_unions.size(); ++u) {
+        const Index leader = world.customs_unions[u].leader;
+        if (in_range(world.states, leader) &&
+            world.states[at(leader)].customs_union == static_cast<Index>(u)) {
+            continue;
+        }
+        for (State& state : world.states) {
+            if (state.customs_union == static_cast<Index>(u)) {
+                state.customs_union = kNone;
+            }
+        }
+    }
 }
 
 } // namespace uhrwerk

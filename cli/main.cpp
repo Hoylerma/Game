@@ -5,6 +5,7 @@
 // Exitcodes: 0 in Ordnung, 1 Daten-, Determinismus-, Lasttest- oder Spielstandfehler, 2 Bedienfehler.
 
 #include "uhrwerk/balance.hpp"
+#include "uhrwerk/customs_lab.hpp"
 #include "uhrwerk/date.hpp"
 #include "uhrwerk/economy.hpp"
 #include "uhrwerk/election_lab.hpp"
@@ -57,6 +58,8 @@ constexpr std::int64_t kDefaultLoadTestYears = 3;
 constexpr std::int64_t kDefaultBalanceSeeds = 32;
 constexpr std::int64_t kDefaultBalanceYears = 100;
 constexpr std::int64_t kDefaultElectionSeeds = 16;
+constexpr std::int64_t kDefaultCustomsSeeds = 8;
+constexpr std::int64_t kDefaultCustomsYears = 5;
 constexpr std::int64_t kMaxBalanceSeeds = 1000;
 constexpr std::int64_t kMaxTestCommands = 1'000'000;
 constexpr std::int64_t kDefaultSavePoints = 10;
@@ -80,6 +83,9 @@ Befehle:
                  Haushalt, Preise, Bevölkerung und Lebensstandard gegen die Zielwerte
   wahl           Wahllabor: eine Wahl über mehrere Seeds (bis zum Wahltag gerechnet); Sitze je
                  Strömung, Fraktion und Staat, Beteiligung, gegen die Wahlziele (seit M8)
+  zoll           Zolllabor: je Seed Läufe ohne und mit dem Wechsel eines Staates in eine
+                 Zollunion zum ersten 1. Januar; Handel über die Zollgrenze, Zoll und Preise
+                 im letzten Jahr, Zollanteil der Unionen, gegen die Zollziele (seit M9)
   speichertest   Abnahmetest der Spielstände: Lauf A ohne Unterbrechung; Lauf B speichert an
                  --punkte Stellen in eine Datei, lädt sie mit frisch geladenen Spieldaten und
                  rechnet weiter; alle Jahresprüfsummen müssen gleich sein
@@ -102,12 +108,17 @@ Optionen:
   --bericht      Tabelle je Staat am Ende des Laufs (nur lauf)
   --chronik      Chronik der Partie ausgeben (nur lauf)
   --maerkte      Preise je Markt (nur wirtschaft)
-  --seeds N      bilanz, wahl: Zahl der Läufe (Standard: bilanz 32, wahl 16)
+  --seeds N      bilanz, wahl, zoll: Zahl der Läufe (Standard: bilanz 32, wahl 16, zoll 8)
   --ziele DATEI  bilanz: Zielwerte (Standard: common/zielwerte_<szenario>.chron, sonst
                  common/zielwerte.chron im Datenordner); wahl: Wahlziele (Standard:
-                 common/wahlziele_<szenario>.chron, wenn vorhanden)
+                 common/wahlziele_<szenario>.chron, wenn vorhanden); zoll: Zollziele
+                 (Standard: common/zollziele_<szenario>.chron, wenn vorhanden)
   --parlament ID wahl: Parlament (Standard: das erste des Szenarios)
   --wahlkreise   wahl: Ergebnis je Wahlkreis im ersten Lauf
+  --beitritt TAG[:UNION]
+                 zoll: nur dieser Wechsel, Beitritt zur Union (Standard: die erste Union);
+                 ohne --beitritt und --austritt die Wechsel aus den Zollziele
+  --austritt TAG zoll: nur dieser Wechsel, Austritt aus der Zollunion
   --speichern F  lauf, lasttest: am Ende einen Spielstand in die Datei F schreiben
   --laden F      lauf: Spielstand F laden und weiterrechnen (Szenario und Seed aus dem
                  Spielstand; --jahre/--tage ab seinem Datum)
@@ -133,6 +144,7 @@ Beispiele:
   uhrwerk-cli lasttest --bloecke 500000 --jahre 3 --vergleich 1 --grenze 2
   uhrwerk-cli bilanz --seeds 16 --jahre 100
   uhrwerk-cli wahl --szenario voelkerfruehling --seeds 16 --wahlkreise
+  uhrwerk-cli zoll --szenario voelkerfruehling --beitritt HAN:zollverein --jahre 5
   uhrwerk-cli lauf --jahre 50 --testbefehle 200 --speichern partie.einigkeit --protokoll partie.protokoll
   uhrwerk-cli lauf --laden partie.einigkeit --jahre 10
   uhrwerk-cli wiederholung partie.protokoll
@@ -156,6 +168,8 @@ struct Options {
     std::optional<std::int64_t> seeds;
     std::optional<fs::path> targets_file;
     std::optional<std::string> parliament; // --parlament
+    std::optional<std::string> join;       // --beitritt TAG[:UNION]
+    std::optional<std::string> leave;      // --austritt TAG
     std::optional<fs::path> file;          // wiederholung, spielstand: Datei als Argument
     std::optional<fs::path> save_file;     // --speichern
     std::optional<fs::path> load_file;     // --laden
@@ -205,9 +219,9 @@ std::int64_t parse_count(std::string_view option, std::string_view text, std::in
 Options parse_options(int argc, char** argv) {
     Options o;
     const std::set<std::string_view> with_value = {
-        "--daten",   "--szenario",  "--jahre",       "--tage",   "--seed",     "--threads",
-        "--bloecke", "--vergleich", "--grenze",      "--seeds",  "--ziele",    "--speichern",
-        "--laden",   "--protokoll", "--testbefehle", "--punkte", "--parlament"};
+        "--daten",       "--szenario", "--jahre",     "--tage",     "--seed",      "--threads", "--bloecke",
+        "--vergleich",   "--grenze",   "--seeds",     "--ziele",    "--speichern", "--laden",   "--protokoll",
+        "--testbefehle", "--punkte",   "--parlament", "--beitritt", "--austritt"};
     const std::set<std::string_view> flags = {"--bericht", "--chronik", "--maerkte", "--text",
                                               "--wahlkreise"};
 
@@ -257,6 +271,11 @@ Options parse_options(int argc, char** argv) {
                         throw UsageError{"Option --parlament erwartet eine Kennung"};
                     }
                     o.parliament = *value;
+                } else if (name == "--beitritt" || name == "--austritt") {
+                    if (value->empty()) {
+                        throw UsageError{"Option " + name + " erwartet einen Staatstag"};
+                    }
+                    (name == "--beitritt" ? o.join : o.leave) = *value;
                 } else if (name == "--ziele") {
                     if (value->empty()) {
                         throw UsageError{"Option --ziele erwartet eine Datei"};
@@ -786,6 +805,11 @@ fs::path default_election_targets_file(const fs::path& data_dir, const std::stri
     return data_dir / "common" / ("wahlziele_" + scenario + ".chron");
 }
 
+/// Zollziele des Zolllabors (seit M9): common/zollziele_<szenario>.chron.
+fs::path default_customs_targets_file(const fs::path& data_dir, const std::string& scenario) {
+    return data_dir / "common" / ("zollziele_" + scenario + ".chron");
+}
+
 // ─── Befehle ────────────────────────────────────────────────────────────────
 
 int cmd_pruefen(const Options& o, const fs::path& data_dir) {
@@ -817,6 +841,15 @@ int cmd_pruefen(const Options& o, const fs::path& data_dir) {
     if (result.ok() && fs::exists(election_targets, ec)) {
         for (const std::string& error :
              uhrwerk::load_election_targets(election_targets, *result.world).errors) {
+            ++errors;
+            std::cout << error << '\n';
+        }
+    }
+    // Zollziele (seit M9) ebenso: nur `zoll` liest sie.
+    const fs::path customs_targets = default_customs_targets_file(data_dir, o.scenario);
+    if (result.ok() && fs::exists(customs_targets, ec)) {
+        for (const std::string& error :
+             uhrwerk::load_customs_targets(customs_targets, *result.world).errors) {
             ++errors;
             std::cout << error << '\n';
         }
@@ -1689,6 +1722,224 @@ int cmd_wahl(const Options& o, const fs::path& data_dir) {
     return kExitDataError;
 }
 
+/// Faktor mit 5- und 95-%-Wert, z. B. "×1,35 (×1,21 … ×1,49)".
+std::string format_factor_quantiles(const uhrwerk::Quantiles& q) {
+    return format_quantiles(q, 2, "×");
+}
+
+/// Wechsel aus --beitritt TAG[:UNION] bzw. --austritt TAG; nullopt mit Meldung, wenn er nicht passt.
+std::optional<uhrwerk::CustomsChange> change_from_options(const Options& o, const World& w) {
+    const bool join = o.join.has_value();
+    const std::string text = join ? *o.join : *o.leave;
+    const std::size_t colon = text.find(':');
+    const std::string tag = text.substr(0, colon);
+    uhrwerk::CustomsChange change;
+    change.id = join ? "beitritt" : "austritt";
+    change.state = w.find_state(tag);
+    if (change.state == uhrwerk::kNone) {
+        std::cerr << "Unbekannter Staat '" << tag << "' (besteht nicht zum Startdatum).\n";
+        return std::nullopt;
+    }
+    if (join) {
+        change.customs_union = 0;
+        if (colon != std::string::npos) {
+            change.customs_union = w.find_customs_union(text.substr(colon + 1));
+            if (change.customs_union == uhrwerk::kNone) {
+                std::cerr << "Unbekannte Zollunion '" << text.substr(colon + 1) << "'.\n";
+                return std::nullopt;
+            }
+        }
+    } else if (colon != std::string::npos) {
+        std::cerr << "--austritt erwartet nur einen Staatstag.\n";
+        return std::nullopt;
+    }
+    const uhrwerk::State& state = w.states[static_cast<std::size_t>(change.state)];
+    if (state.customs_union == change.customs_union) {
+        std::cerr << state.short_name
+                  << (join ? " gehört schon zum " +
+                                 w.customs_unions[static_cast<std::size_t>(change.customs_union)].name
+                           : std::string(" gehört zu keiner Zollunion"))
+                  << ".\n";
+        return std::nullopt;
+    }
+    return change;
+}
+
+int cmd_zoll(const Options& o, const fs::path& data_dir) {
+    const auto world = load(data_dir, o.scenario, false);
+    if (!world) {
+        return kExitDataError;
+    }
+    const World& w = *world;
+    if (w.customs_unions.empty()) {
+        std::cerr
+            << "Das Szenario " << o.scenario
+            << " hat keine Zollunion; das Zolllabor braucht eine (z. B. --szenario voelkerfruehling).\n";
+        return kExitDataError;
+    }
+    if (o.join && o.leave) {
+        std::cerr << "Bitte nur einen Wechsel angeben: --beitritt oder --austritt.\n";
+        return kExitDataError;
+    }
+    std::optional<fs::path> targets_file = o.targets_file;
+    std::error_code ec;
+    if (!targets_file && fs::exists(default_customs_targets_file(data_dir, o.scenario), ec)) {
+        targets_file = default_customs_targets_file(data_dir, o.scenario);
+    }
+    uhrwerk::CustomsTargetsResult targets;
+    if (targets_file) {
+        targets = uhrwerk::load_customs_targets(*targets_file, w);
+        if (!targets.ok()) {
+            for (const std::string& error : targets.errors) {
+                std::cerr << error << '\n';
+            }
+            std::cerr << "Zollziele nicht lesbar: " << uhrwerk::path_to_utf8(*targets_file) << '\n';
+            return kExitDataError;
+        }
+    }
+    std::vector<uhrwerk::CustomsChange> changes = targets.targets.changes;
+    if (o.join || o.leave) {
+        const std::optional<uhrwerk::CustomsChange> change = change_from_options(o, w);
+        if (!change) {
+            return kExitDataError;
+        }
+        // Ziele eines passenden Wechsels aus den Zollzielen gelten auch hier.
+        const auto same = std::find_if(changes.begin(), changes.end(), [&](const uhrwerk::CustomsChange& c) {
+            return c.state == change->state && c.customs_union == change->customs_union;
+        });
+        changes = {same != changes.end() ? *same : *change};
+    }
+
+    const std::int64_t seeds = o.seeds.value_or(kDefaultCustomsSeeds);
+    const std::int64_t years = std::max<std::int64_t>(1, o.years.value_or(kDefaultCustomsYears));
+    const auto t0 = std::chrono::steady_clock::now();
+    std::vector<uhrwerk::CustomsLabRun> runs;
+    for (std::int64_t i = 0; i < seeds; ++i) {
+        runs.push_back(uhrwerk::run_customs_lab(
+            w, uhrwerk::SimConfig{o.seed + static_cast<std::uint64_t>(i), o.threads}, years, changes));
+    }
+    const double seconds = seconds_since(t0);
+    const uhrwerk::CustomsLabSummary summary =
+        uhrwerk::summarize_customs_lab(w, changes, runs, targets_file ? &targets.targets : nullptr);
+
+    const std::int32_t first_year = w.date.month == 1 && w.date.day == 1 ? w.date.year : w.date.year + 1;
+    const std::int32_t measured = first_year + static_cast<std::int32_t>(years) - 1;
+    std::cout << "Zolllabor: " << w.scenario.name << " (" << w.scenario.id << "), Wechsel zum 1. Januar "
+              << first_year << ", Messung im Jahr " << measured << " (je Monat)\n"
+              << "Läufe:     " << seeds << " (Seeds " << o.seed;
+    if (seeds > 1) {
+        std::cout << "–" << o.seed + static_cast<std::uint64_t>(seeds - 1);
+    }
+    std::cout << "), je Seed ein Lauf ohne und einer je Wechsel; Median (5 % … 95 %)\n"
+              << "Zollziele: " << (targets_file ? uhrwerk::path_to_utf8(*targets_file) : std::string("keine"))
+              << '\n'
+              << "Threads:   " << (o.threads == 0 ? std::string("alle Kerne") : std::to_string(o.threads))
+              << '\n'
+              << "Laufzeit:  " << format_seconds(seconds) << "\n\n";
+
+    using uhrwerk::CustomsCheck;
+    std::set<std::pair<int, std::size_t>> marked;
+    for (const uhrwerk::CustomsViolation& v : summary.violations) {
+        marked.insert({static_cast<int>(v.check), v.index});
+    }
+    const auto mark = [&marked](CustomsCheck check, std::size_t index) {
+        return marked.count({static_cast<int>(check), index}) != 0 ? std::string(" !") : std::string();
+    };
+
+    std::cout << "Zoll ÷ Einnahmen der Mitglieder (ohne Wechsel)\n";
+    std::vector<std::vector<std::string>> rows;
+    rows.push_back({"Zollunion", "Mitglieder", "Anteil", "Ziel"});
+    for (std::size_t u = 0; u < w.customs_unions.size(); ++u) {
+        const auto members = static_cast<std::size_t>(
+            std::count_if(w.states.begin(), w.states.end(),
+                          [&](const uhrwerk::State& s) { return s.customs_union == static_cast<Index>(u); }));
+        std::string goal = "–";
+        for (const uhrwerk::CustomsShareTarget& t : targets.targets.shares) {
+            if (t.customs_union == static_cast<Index>(u)) {
+                goal = format_share_range(t.share);
+            }
+        }
+        rows.push_back({w.customs_unions[u].name, std::to_string(members),
+                        format_share_quantiles(summary.share[u]) + mark(CustomsCheck::Share, u), goal});
+    }
+    print_table(rows, {false, true, true, true}, 0);
+
+    if (!changes.empty()) {
+        std::cout << "\nWechsel: Faktor mit ÷ ohne Wechsel im letzten Jahr\n";
+        rows.clear();
+        rows.push_back({"Wechsel", "Staat", "Grenzhandel", "Handel", "Zoll", "Preise", "Zoll ohne"});
+        for (std::size_t c = 0; c < changes.size(); ++c) {
+            const uhrwerk::CustomsChange& change = changes[c];
+            const uhrwerk::CustomsChangeSummary& s = summary.changes[c];
+            const std::string target =
+                change.customs_union != uhrwerk::kNone
+                    ? "→ " + w.customs_unions[static_cast<std::size_t>(change.customs_union)].name
+                    : std::string("Austritt");
+            rows.push_back({change.id, w.states[static_cast<std::size_t>(change.state)].tag + " " + target,
+                            format_factor_quantiles(s.border_trade) + mark(CustomsCheck::BorderTrade, c),
+                            format_factor_quantiles(s.trade) + mark(CustomsCheck::Trade, c),
+                            format_factor_quantiles(s.revenue) + mark(CustomsCheck::Revenue, c),
+                            format_factor_quantiles(s.price_level),
+                            format_int(s.revenue_without.median.round())});
+            if (s.rejected > 0) {
+                rows.back()[1] += " (abgelehnt in " + std::to_string(s.rejected) + " Läufen)";
+            }
+        }
+        print_table(rows, {false, false, true, true, true, true, true}, 0);
+        std::cout
+            << "Grenzhandel: zwischen den Märkten des Staates und denen der übrigen Mitglieder der "
+               "Union; Handel: der Märkte des Staates, je nach seinem Anteil; Zoll ohne: Taler je Monat\n";
+        bool any = false;
+        for (const uhrwerk::CustomsChange& change : changes) {
+            std::string goals;
+            for (const auto& [name, range] :
+                 {std::pair{"Grenzhandel", &change.border_trade}, std::pair{"Handel", &change.trade},
+                  std::pair{"Zoll", &change.revenue}}) {
+                if (*range) {
+                    goals += std::string(goals.empty() ? "" : ", ") + name + " " + format_range(**range, "×");
+                }
+            }
+            if (!goals.empty()) {
+                std::cout << (any ? "      " : "Ziele: ") << change.id << ": " << goals << '\n';
+                any = true;
+            }
+        }
+    }
+
+    std::cout << '\n';
+    if (!targets_file && changes.empty()) {
+        std::cout << "Verstöße: – (keine Zollziele)\n";
+        return kExitOk;
+    }
+    if (summary.violations.empty()) {
+        std::cout << "Verstöße: keine – alle Zollziele erfüllt.\n";
+        return kExitOk;
+    }
+    std::cout << "Verstöße (" << summary.violations.size() << ", mit ! markiert):\n";
+    for (const uhrwerk::CustomsViolation& v : summary.violations) {
+        const std::string what =
+            v.check == CustomsCheck::Share ? w.customs_unions[v.index].name : changes[v.index].id;
+        switch (v.check) {
+        case CustomsCheck::Share:
+            std::cout << "  Zollanteil " << what << ": Median " << format_share(v.value) << '\n';
+            break;
+        case CustomsCheck::BorderTrade:
+            std::cout << "  " << what << ": Grenzhandel ×" << format_fixed(v.value, 2) << '\n';
+            break;
+        case CustomsCheck::Trade:
+            std::cout << "  " << what << ": Handel ×" << format_fixed(v.value, 2) << '\n';
+            break;
+        case CustomsCheck::Revenue:
+            std::cout << "  " << what << ": Zoll ×" << format_fixed(v.value, 2) << '\n';
+            break;
+        case CustomsCheck::Rejected:
+            std::cout << "  " << what << ": Antrag in " << v.value.round() << " Läufen abgelehnt\n";
+            break;
+        }
+    }
+    return kExitDataError;
+}
+
 int cmd_determinismus(const Options& o, const fs::path& data_dir) {
     // Jeder Lauf lädt die Daten neu – so fällt auch ein nicht deterministischer Lader auf.
     auto world_a = load(data_dir, o.scenario, true);
@@ -2208,6 +2459,9 @@ int run(int argc, char** argv) {
         } else if (o.command == "wahl") {
             check_applicable(o, {"--daten", "--szenario", "--seed", "--threads", "--seeds", "--ziele",
                                  "--parlament", "--wahlkreise"});
+        } else if (o.command == "zoll") {
+            check_applicable(o, {"--daten", "--szenario", "--jahre", "--seed", "--threads", "--seeds",
+                                 "--ziele", "--beitritt", "--austritt"});
         } else if (o.command == "speichertest") {
             check_applicable(o, {"--daten", "--szenario", "--jahre", "--tage", "--seed", "--threads",
                                  "--testbefehle", "--punkte"});
@@ -2248,6 +2502,9 @@ int run(int argc, char** argv) {
         }
         if (o.command == "wahl") {
             return cmd_wahl(o, data_dir);
+        }
+        if (o.command == "zoll") {
+            return cmd_zoll(o, data_dir);
         }
         if (o.command == "speichertest") {
             return cmd_speichertest(o, data_dir);

@@ -127,6 +127,11 @@ public:
     /// Wiederholung.
     std::uint64_t start_checksum() const { return start_checksum_; }
 
+    /// Handelsströme der Märkte festhalten (seit M9, Zolllabor): trade_flows() enthält dann die Ströme
+    /// des letzten Monatsersten. Kein Zustand, ändert den Lauf nicht.
+    void record_trade(bool on) { record_trade_ = on; }
+    const std::vector<TradeFlow>& trade_flows() const { return trade_flows_; }
+
 private:
     /// Zustandsverzeichnis (core/src/state_access.hpp): Prüfsumme, Textexport und Spielstände lesen
     /// alle Felder über dieselbe Liste.
@@ -202,7 +207,9 @@ private:
     std::int64_t days_elapsed_ = 0;
     std::vector<LoggedCommand> command_log_;
     std::uint64_t start_checksum_ = 0;
-    EconomyTopology topology_; // abgeleitet: Märkte, Nachbarn, Betriebe je Beruf (seit M5)
+    EconomyTopology topology_;           // abgeleitet: Märkte, Nachbarn, Betriebe je Beruf (seit M5)
+    bool record_trade_ = false;          // Zolllabor (seit M9): Ströme festhalten
+    std::vector<TradeFlow> trade_flows_; // … des letzten Monatsersten, kein Zustand
 
     std::array<std::vector<Index>, 28> locations_by_day_; // Orte mit Blöcken je Rechentag, aufsteigend
     std::vector<std::vector<Index>> state_locations_;     // Orte je Staat, aufsteigend

@@ -522,8 +522,8 @@ void estimate_budgets(World& world) {
     }
 }
 
-void update_markets(World& world, const EconomyTopology& topology,
-                    const std::vector<StateSpending>& spending) {
+void update_markets(World& world, const EconomyTopology& topology, const std::vector<StateSpending>& spending,
+                    std::vector<TradeFlow>* flows_out) {
     const Rules& rules = world.rules;
     const std::size_t goods = world.goods.size();
     const std::size_t markets = world.markets.size();
@@ -669,6 +669,9 @@ void update_markets(World& world, const EconomyTopology& topology,
     for (std::size_t m = 0; m < foreign.size(); ++m) {
         foreign[m].assign(world.market_states[m].zones.size() * goods, Fixed{});
     }
+    if (flows_out != nullptr) {
+        flows_out->clear();
+    }
     for (const Flow& f : flows) {
         Fixed factor = one;
         if (f.from != kNone) {
@@ -687,6 +690,9 @@ void update_markets(World& world, const EconomyTopology& topology,
         }
         if (f.to != kNone) {
             imports[at(f.to) * goods + f.good] += amount;
+        }
+        if (flows_out != nullptr) {
+            flows_out->push_back(TradeFlow{f.from, f.to, static_cast<Index>(f.good), amount});
         }
         if (customs && f.to != kNone) {
             const MarketState& to = world.market_states[at(f.to)];

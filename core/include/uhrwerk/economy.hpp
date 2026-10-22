@@ -62,10 +62,19 @@ struct StateSpending {
     Fixed amount;
 };
 
+/// Ein Handelsstrom des Monats (Menge eines Gutes von Markt from nach Markt to; kNone = Weltmarkt).
+struct TradeFlow {
+    Index from = kNone;
+    Index to = kNone;
+    Index good = kNone;
+    Fixed amount;
+};
+
 /// Märkte am Monatsersten (Abschnitt 4.1): Summen aus den Orten, Handel mit Nachbarn und Weltmarkt,
-/// Preise, Quoten, Handelsspanne. spending: Staatsausgaben, die als Nachfrage in Märkte gehen.
-void update_markets(World& world, const EconomyTopology& topology,
-                    const std::vector<StateSpending>& spending);
+/// Preise, Quoten, Handelsspanne. spending: Staatsausgaben, die als Nachfrage in Märkte gehen. Mit
+/// flows (seit M9, Zolllabor) stehen dort danach die Ströme des Monats nach der Kürzung.
+void update_markets(World& world, const EconomyTopology& topology, const std::vector<StateSpending>& spending,
+                    std::vector<TradeFlow>* flows = nullptr);
 
 /// Erntefaktor je Markt für das neue Jahr (Abschnitt 4.7), aus dem Strom Wirtschaft.
 void draw_harvest(World& world, const EconomyTopology& topology, Pcg32& rng);

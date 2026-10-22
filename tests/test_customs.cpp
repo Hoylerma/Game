@@ -1,10 +1,12 @@
 // Tests der Zollgebiete und Zollunionen (seit M9, docs/technik/diplomatie.md Abschnitt 3).
 #include "test_hilfen.hpp"
 #include "uhrwerk/customs.hpp"
+#include "uhrwerk/customs_lab.hpp"
 #include "uhrwerk/economy.hpp"
 #include "uhrwerk/savegame.hpp"
 #include "uhrwerk/simulation.hpp"
 
+#include <algorithm>
 #include <cstdint>
 #include <doctest/doctest.h>
 #include <string>
@@ -291,10 +293,8 @@ TEST_CASE("Zoll: Befehl Zollunion zum 1. Januar") {
         CHECK(w.customs_requests.empty());
         CHECK(w.chronicle.size() == entries);
     }
-    SUBCASE("Leitmacht, Ausschluss und ungültige Befehle") {
+    SUBCASE("Ausschluss und ungültige Befehle") {
         const std::size_t entries = w.chronicle.size();
-        sim.submit(customs_command(sax, kNone)); // die Leitmacht bleibt
-        sim.submit(customs_command(bra, 0));     // auch beim Wechsel
         sim.submit(customs_command(anh, 2));     // keine solche Union
         sim.submit(customs_command(-1, 0));      // kein solcher Staat
         sim.submit(customs_command(anh, kNone)); // schon ohne Union
@@ -306,6 +306,28 @@ TEST_CASE("Zoll: Befehl Zollunion zum 1. Januar") {
         sim.step_day();
         CHECK(last_chronicle(sim) == "Brandenburg lehnt den Beitritt von Anhalt zum Nordbund ab.");
         CHECK(w.customs_requests.empty());
+    }
+    SUBCASE("Austritt der Leitmacht löst die Union auf") {
+        Simulation other(CustomsData(true).load());
+        const World& o = other.world();
+        other.submit(customs_command(sax, kNone));
+        other.step_day();
+        CHECK(last_chronicle(other) ==
+              "Sachsen tritt zum 1. Januar 1649 aus dem Mittelbund aus; der Mittelbund löst sich auf.");
+        step_to(other, Date{1649, 1, 2});
+        CHECK(o.states[static_cast<std::size_t>(sax)].customs_union == kNone);
+        CHECK(o.states[static_cast<std::size_t>(anh)].customs_union == kNone);
+        CHECK(o.states[static_cast<std::size_t>(bra)].customs_union == 1); // der Nordbund bleibt
+        CHECK(market(o, "mitte").zones == std::vector<Index>{2 + sax, 2 + anh});
+        // Einer aufgelösten Union kann nur ihre Leitmacht wieder beitreten.
+        const std::size_t entries = o.chronicle.size();
+        other.submit(customs_command(anh, 0));
+        other.step_day();
+        CHECK(o.chronicle.size() == entries);
+        CHECK(o.customs_requests.empty());
+        other.submit(customs_command(sax, 0));
+        other.step_day();
+        CHECK(last_chronicle(other) == "Sachsen tritt zum 1. Januar 1650 dem Mittelbund bei.");
     }
     SUBCASE("Wechsel zwischen zwei Unionen") {
         World changed = CustomsData(true).load();
@@ -363,4 +385,108 @@ TEST_CASE("Zoll: Spielstand, Wiederholung und Threads mit beantragtem Beitritt")
     const uhrwerk::ReplayResult result = uhrwerk::run_replay(replay, data.load(), 1);
     INFO(result.error);
     CHECK(result.ok);
+}
+
+// ─── Zolllabor (seit M9, Schritt a3) ───────────────────────────────────────
+
+TEST_CASE("Zolllabor: Zollziele lesen") {
+    const World w = CustomsData().load();
+    SUBCASE("gültig") {
+        const uhrwerk::CustomsTargetsResult r = uhrwerk::parse_customs_targets(R"(
+            anteil mittelbund { zoll = { 0.01 0.2 } }
+            wechsel brandenburg {
+                staat       = BRA
+                union       = mittelbund
+                grenzhandel = { 1.1 10 }
+                zoll        = { 0 5 }
+            }
+            wechsel austritt { staat = SAX union = keine })",
+                                                                               w);
+        INFO(r.errors.size());
+        REQUIRE(r.ok());
+        REQUIRE(r.targets.shares.size() == 1);
+        CHECK(r.targets.shares[0].customs_union == 0);
+        CHECK(r.targets.shares[0].share.max == fx(2, 10));
+        REQUIRE(r.targets.changes.size() == 2);
+        const uhrwerk::CustomsChange& c = r.targets.changes[0];
+        CHECK(c.id == "brandenburg");
+        CHECK(c.state == w.find_state("BRA"));
+        CHECK(c.customs_union == 0);
+        CHECK(c.border_trade->min == fx(11, 10));
+        CHECK_FALSE(c.trade.has_value());
+        CHECK(c.revenue->max == Fixed::from_int(5));
+        CHECK(r.targets.changes[1].customs_union == kNone);
+    }
+    SUBCASE("Fehler") {
+        const uhrwerk::CustomsTargetsResult r = uhrwerk::parse_customs_targets(R"(
+            anteil suedbund { zoll = { 0 1 } }
+            anteil mittelbund { zoll = { 0 2 } }
+            anteil mittelbund { zoll = { 0 1 } }
+            wechsel a { staat = XYZ union = mittelbund }
+            wechsel b { staat = ANH union = suedbund }
+            wechsel c { staat = SAX union = mittelbund }
+            wechsel d { staat = ANH }
+            wechsel e { staat = ANH union = mittelbund farbe = rot }
+            wechsel e { staat = ANH union = mittelbund }
+            zielwerte { })",
+                                                                               w, "zollziele.chron");
+        CHECK_FALSE(r.ok());
+        CHECK(r.targets.changes.empty());
+        const auto has = [&](std::string_view needle) {
+            return std::any_of(r.errors.begin(), r.errors.end(),
+                               [&](const std::string& e) { return e.find(needle) != std::string::npos; });
+        };
+        CHECK(has("unbekannte Zollunion 'suedbund'"));
+        CHECK(has("'zoll' erwartet einen Bereich innerhalb von 0 bis 1"));
+        CHECK(has("Zielwerte für anteil mittelbund sind mehrfach angegeben"));
+        CHECK(has("unbekannter Staat 'XYZ'"));
+        CHECK(has("SAX gehört zum Startdatum schon zu mittelbund"));
+        CHECK(has("wechsel d braucht 'staat' und 'union'"));
+        CHECK(has("unbekanntes Feld 'farbe'"));
+        CHECK(has("wechsel e ist mehrfach angegeben"));
+        CHECK(has("zollziele.chron:"));
+    }
+}
+
+TEST_CASE("Zolllabor: Beitritt Brandenburgs zum Mittelbund") {
+    // Brandenburg (Leitmacht des Nordbunds) wechselt in den Mittelbund; der Nordbund löst sich auf. Die
+    // Zollgrenze zwischen den Märkten Brandenburg und Mitte fällt bis auf den Anteil Anhalts.
+    const World w = CustomsData().load();
+    uhrwerk::CustomsChange change;
+    change.id = "brandenburg";
+    change.state = w.find_state("BRA");
+    change.customs_union = 0;
+    change.border_trade = uhrwerk::ValueRange{fx(101, 100), Fixed::from_int(100)};
+    const uhrwerk::CustomsLabRun run = uhrwerk::run_customs_lab(w, SimConfig{1648, 2}, 1, {change});
+    REQUIRE(run.accepted == std::vector<bool>{true});
+    REQUIRE(run.share.size() == 2);
+    CHECK(run.share[0] > Fixed::zero());
+    CHECK(run.without[0].border_trade > Fixed::zero());
+    CHECK(run.with[0].border_trade > run.without[0].border_trade);
+    CHECK(run.with[0].revenue != run.without[0].revenue);
+    CHECK(run.with[0].price_level > Fixed::zero());
+
+    uhrwerk::CustomsTargets targets;
+    targets.shares.push_back(
+        uhrwerk::CustomsShareTarget{0, uhrwerk::ValueRange{Fixed::zero(), Fixed::one()}});
+    targets.shares.push_back(uhrwerk::CustomsShareTarget{1, uhrwerk::ValueRange{Fixed::one(), Fixed::one()}});
+    const uhrwerk::CustomsLabSummary summary = uhrwerk::summarize_customs_lab(w, {change}, {run}, &targets);
+    CHECK(summary.changes[0].border_trade.median > fx(101, 100));
+    CHECK(summary.changes[0].rejected == 0);
+    REQUIRE(summary.violations.size() == 1); // nur der unerfüllbare Anteil des Nordbunds
+    CHECK(summary.violations[0].check == uhrwerk::CustomsCheck::Share);
+    CHECK(summary.violations[0].index == 1);
+
+    // Ein abgelehnter Antrag (Anhalt in den Nordbund) zählt mit Zielen als Verstoß.
+    uhrwerk::CustomsChange rejected = change;
+    rejected.id = "anhalt";
+    rejected.state = w.find_state("ANH");
+    rejected.customs_union = 1;
+    const uhrwerk::CustomsLabRun second = uhrwerk::run_customs_lab(w, SimConfig{1648, 2}, 1, {rejected});
+    CHECK(second.accepted == std::vector<bool>{false});
+    const uhrwerk::CustomsLabSummary s2 = uhrwerk::summarize_customs_lab(w, {rejected}, {second}, nullptr);
+    CHECK(s2.changes[0].rejected == 1);
+    CHECK(std::any_of(s2.violations.begin(), s2.violations.end(), [](const uhrwerk::CustomsViolation& v) {
+        return v.check == uhrwerk::CustomsCheck::Rejected;
+    }));
 }
