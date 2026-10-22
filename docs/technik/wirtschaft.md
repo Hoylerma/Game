@@ -268,6 +268,11 @@ Basispreis *B_g*.
    `W_g × B_g` und unbegrenzter Menge auf der Weltseite (statt `min(…)` das eigene Angebot bzw. die
    eigene Nachfrage). Ausfuhr zählt zur Nachfrage des Herkunftsmarktes, Einfuhr zum Angebot des
    Zielmarktes: `A'_g = A_g + Einfuhr_g`, `N'_g = N_g + Ausfuhr_g`.
+
+   **Zollgebiete (seit M9):** Gibt es im Szenario Zollunionen, wirkt der Zoll wie zusätzliche Fracht:
+   `lücke = P_n,g − P_m,g × (1 + fracht + t_mn)` mit dem erwarteten Tarif `t_mn` des Gebiets, in dem
+   gekauft wird, und bei Einfuhr vom Weltmarkt `seefracht + t_Welt`
+   ([diplomatie.md](diplomatie.md), Abschnitt 3.3). Ohne Zollunion bleibt der Handel zollfrei.
 3. **Preis** (gedämpft, begrenzt):
 
    ```
@@ -311,7 +316,10 @@ Ergebnis: Netto-Einkommen je Kopf und Monat `y_p`, Steuern des Ortes je Art.
 
 **Verbraucherpreis** im Ort: `Q_g = P_g × (1 + akzise_satz) × (1 + zoll_satz × e_g)`; Akzise nur in
 Orten mit Stadtrecht, Zoll in allen Orten (Satz des Besitzers). Die Aufschläge sind Steuern des
-Ortes: `akzise = Σ Ausgaben × akzise_satz / (1 + akzise_satz)`, entsprechend der Zoll.
+Ortes: `akzise = Σ Ausgaben × akzise_satz / (1 + akzise_satz)`, entsprechend der Zoll. Mit
+Zollunionen (seit M9) ist `zoll_satz` der Tarif des Zollgebiets (Vereinstarif oder Satz des Staates)
+und `e_g` nur der **fremde** Einfuhranteil, die Einfuhr von außerhalb des Gebiets
+([diplomatie.md](diplomatie.md), Abschnitt 3.4).
 
 **Einkauf** je Beruf (Warenkorb der Schicht, Bedürfnisse in Rangfolge):
 
@@ -360,7 +368,9 @@ Ist Tuch knapp und teuer, wechseln Handwerker in die Weberei, das Angebot steigt
 ### 4.6 Staatshaushalt (am Rechentag des Staates)
 
 **Einnahmen:** Summe der Steuern seiner Orte vom jeweils letzten Rechentag (Kontribution, Akzise,
-Zoll). Gleitende Jahreseinnahmen: `J ← J + (12 × einnahmen − J) / 12`.
+Zoll). Mitglieder einer Zollunion (seit M9) bekommen statt des Zolls ihrer Orte ihren Anteil an der
+Vereinskasse ([diplomatie.md](diplomatie.md), Abschnitt 3.4). Gleitende Jahreseinnahmen:
+`J ← J + (12 × einnahmen − J) / 12`.
 
 **Ausgaben je Monat:**
 

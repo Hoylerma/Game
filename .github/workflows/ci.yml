@@ -283,7 +283,7 @@ jobs:
   balancing:
     name: Balancing (Linux, Release)
     runs-on: ubuntu-24.04
-    timeout-minutes: 30
+    timeout-minutes: 40
     steps:
       - name: Quelltext auschecken
         uses: actions/checkout@v4
@@ -354,6 +354,25 @@ jobs:
             echo
             echo '```'
             cat "$RUNNER_TEMP/wahl_1848.txt"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          exit "$status"
+
+      # Zolllabor (M9, docs/technik/diplomatie.md Abschnitt 3.6): Beitritte Hannovers und
+      # Mecklenburg-Schwerins zum Zollverein und der Zollanteil der Unionen gegen
+      # data/common/zollziele_voelkerfruehling.chron.
+      - name: Zolllabor 1848
+        if: ${{ !cancelled() }}
+        run: |
+          status=0
+          ./build/release/cli/uhrwerk-cli zoll --daten data --szenario voelkerfruehling --seeds 8 \
+            > "$RUNNER_TEMP/zoll_1848.txt" 2>&1 || status=$?
+          cat "$RUNNER_TEMP/zoll_1848.txt"
+          {
+            echo "### Zolllabor 1848"
+            echo
+            echo '```'
+            cat "$RUNNER_TEMP/zoll_1848.txt"
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
           exit "$status"

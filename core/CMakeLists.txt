@@ -9,6 +9,8 @@ add_library(uhrwerk_core STATIC
     src/parallel.cpp
     src/politics.cpp
     src/population.cpp
+    src/customs.cpp
+    src/customs_lab.cpp
     src/economy.cpp
     src/lasttest.cpp
     src/balance.cpp

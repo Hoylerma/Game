@@ -1,0 +1,38 @@
+# Zielwerte des Zolllabors für das Lesezeichen 1848 (Szenario voelkerfruehling, Meilenstein M9 a3),
+# gelesen nur von `uhrwerk-cli zoll` und `uhrwerk-cli pruefen`.
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.26; Messung: docs/technik/diplomatie.md,
+# Abschnitt 3.6. Je Seed ein Lauf ohne und einer je Wechsel (zum 1. Januar 1849), gemessen im
+# letzten Jahr (Standard: 1853); Bereiche gelten für den Median über die Seeds.
+#
+# Die Zielwerte prüfen, dass Beitritte Handel und Kassen deutlich verändern (Abnahme M9), und halten die
+# Kalibrierung fest. Der Zoll bleibt mit rund 3 % der Einnahmen unter dem historischen Anteil (eher
+# 10–20 % bei den Zollvereinsstaaten, Wissensstand ohne Quellen): Das Modell kennt nur den Handel
+# zwischen seinen Märkten und wenig Einfuhr von Kolonial- und englischen Fabrikwaren.
+
+anteil zollverein {
+    zoll = { 0.015 0.06 }    # Zoll ÷ Einnahmen der Mitglieder ohne Wechsel
+}
+
+anteil steuerverein {
+    zoll = { 0.02 0.08 }
+}
+
+# Hannover tritt bei (historisch 1854, mit Vorabanteil): Der Steuerverein löst sich auf, der Handel
+# mit den Zollvereinsmärkten wächst, die Zolleinnahme sinkt (Bevölkerungsschlüssel statt eigener
+# Grenzzölle an Weser und Elbe).
+wechsel hannover {
+    staat       = HAN
+    union       = zollverein
+    grenzhandel = { 1.1 3 }
+    zoll        = { 0.4 0.95 }
+}
+
+# Mecklenburg-Schwerin tritt bei (historisch 1868): Handel mit Preußen und Lübeck wächst stark, die
+# Zolleinnahme sinkt.
+wechsel mecklenburg {
+    staat       = MSC
+    union       = zollverein
+    grenzhandel = { 1.3 4 }
+    zoll        = { 0.25 0.9 }
+}

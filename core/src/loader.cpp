@@ -492,6 +492,7 @@ struct CustomsUnionRef {
     std::string leader_tag;
     std::string file;
     int line = 0;
+    std::vector<std::pair<std::string, int>> excluded_tags; // Tag, Zeile (seit M9, Schritt a2)
 };
 
 /// Ebene eines Parlaments (seit M8): Staatstag, leer für den Deutschen Bund; Tagungsort.
@@ -2205,7 +2206,8 @@ private:
             }
             const bool later = is_later(file, node, "zollunion");
             const std::string what = "zollunion " + node.value;
-            Fields f(node, file.name, what, issues_, {"name", "seit", "leitung", "tarif", "quelle"});
+            Fields f(node, file.name, what, issues_,
+                     {"name", "seit", "leitung", "tarif", "ausgeschlossen", "quelle"});
             CustomsUnion u;
             u.id = node.value;
             u.name = f.text("name").value_or("");
@@ -2222,6 +2224,20 @@ private:
             }
             const Fixed max_rate = tax_rate_max_known_ ? world_.rules.tax_rate_max : Fixed::one();
             u.tariff = f.fixed("tarif", between(fx(0), max_rate)).value_or(Fixed{});
+            if (f.has("ausgeschlossen")) {
+                if (const ScriptNode* list =
+                        f.block("ausgeschlossen", "Liste von Staatstags, z. B. { AUT }")) {
+                    for (const ScriptNode& child : list->children) {
+                        if (!child.key.empty() || child.is_block || !is_state_tag(child.value)) {
+                            issues_.error(file.name, child.line,
+                                          "ungültiger Staatstag " + quote(child.value) +
+                                              " in 'ausgeschlossen' von " + what);
+                            continue;
+                        }
+                        ref.excluded_tags.emplace_back(child.value, child.line);
+                    }
+                }
+            }
             u.source = f.text("quelle").value_or("");
             if (later) {
                 return;
@@ -2241,6 +2257,17 @@ private:
         for (std::size_t i = 0; i < world_.customs_unions.size(); ++i) {
             CustomsUnion& u = world_.customs_unions[i];
             const CustomsUnionRef& ref = customs_union_refs_[i];
+            // Ausgeschlossene Staaten (seit Schritt a2): Staaten ohne Ort zum Startdatum entfallen.
+            for (const auto& [tag, line] : ref.excluded_tags) {
+                const Index state = lookup(states_, tag);
+                if (state != kNone) {
+                    u.excluded.push_back(state);
+                } else if (dropped_states_.count(tag) == 0) {
+                    issues_.error(ref.file, line,
+                                  "unbekannter Staat " + quote(tag) + " in 'ausgeschlossen' von zollunion " +
+                                      u.id);
+                }
+            }
             if (ref.leader_tag.empty()) {
                 continue; // fehlendes oder ungültiges Feld wurde bereits gemeldet
             }

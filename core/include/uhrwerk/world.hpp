@@ -409,6 +409,7 @@ struct State {
     std::int32_t premium_months = 0; // Monate mit Zinsaufschlag nach einem Staatsbankrott
     std::int32_t bankruptcies = 0;   // Zahl der Staatsbankrotte in dieser Partie
     Index customs_union = kNone;     // Zollunion (seit M9, diplomatie.md 3.1); kNone: eigenes Zollgebiet
+    Fixed customs_income;            // Anteil an der Vereinskasse im laufenden Monat (seit M9, Abschnitt 3.4)
     Constitution constitution = Constitution::None; // zum Startdatum (seit M8, Inhalt)
     ElectoralLaw law;                               // Wahlordnung des Landtags (seit M8, Inhalt)
 
@@ -420,9 +421,18 @@ struct State {
 struct CustomsUnion {
     std::string id; // z. B. "zollverein"
     std::string name;
-    Index leader = kNone; // Leitmacht (Staat): entscheidet über Beitritte (Abschnitt 3.5)
-    Fixed tariff;         // Vereinstarif: Zollsatz aller Mitglieder
+    Index leader = kNone;        // Leitmacht (Staat): entscheidet über Beitritte (Abschnitt 3.5)
+    Fixed tariff;                // Vereinstarif: Zollsatz aller Mitglieder
+    std::vector<Index> excluded; // Staaten, deren Beitritt die Leitmacht ablehnt (Spielwert bis M12)
     std::string source;
+};
+
+/// Beantragter Wechsel der Zollunion (seit M9, Abschnitt 3.5), wirksam zum nächsten 1. Januar.
+struct CustomsRequest {
+    Index state = kNone;
+    Index customs_union = kNone; // kNone: Austritt
+
+    friend bool operator==(const CustomsRequest&, const CustomsRequest&) = default;
 };
 
 /// Globale Regeln und Balancing-Werte (data/common/regeln.chron).
@@ -534,6 +544,11 @@ struct MarketState {
     std::vector<Fixed> exports;      // Ausfuhr des Monats (Menge)
     Fixed margin_per_trader;         // Handelsspanne je Kopf im Handelshaus und Monat (Reichstaler)
     Fixed harvest = Fixed::one();    // Erntefaktor des laufenden Jahres (Abschnitt 4.7)
+
+    // Zollgebiete (seit M9, diplomatie.md Abschnitte 3.2 und 3.4), nur mit Zollunionen.
+    std::vector<Index> zones;         // Zollgebiete im Markt (customs_zone), aufsteigend
+    std::vector<Fixed> zone_shares;   // Anteil an der Bevölkerung je Zollgebiet, parallel zu zones
+    std::vector<Fixed> foreign_share; // fremder Einfuhranteil am Angebot: [gebiet × güter + gut]
 };
 
 /// Szenario/Lesezeichen (data/szenarien/*.chron).
@@ -602,12 +617,14 @@ struct World {
     std::vector<Fixed> location_income; // Netto-Einkommen je Kopf und Monat: [ort × berufe + beruf]
     std::vector<Fixed>
         location_coverage; // Bedarfsdeckung 0..1: [(ort × berufe + beruf) × bedürfnisse + bedürfnis]
-    std::vector<Fixed> location_development; // Landesausbau: verbaute Reichstaler je Ort (Abschnitt 4.6)
-    std::vector<MarketState> market_states;  // parallel zu markets
-    std::vector<ElectionResult> elections;   // seit M8: abgehaltene Wahlen in zeitlicher Folge
-    std::vector<CampaignState> campaign;     // seit M8 (b2): [wahlkreis × strömungen + strömung]
-    std::vector<Fixed> party_funds;          // seit M8 (b2): Mittel je Strömung (Taler)
-    std::vector<Fixed> party_donations;      // seit M8 (b2): Spenden des letzten Monats je Strömung
+    std::vector<Fixed> location_development;      // Landesausbau: verbaute Reichstaler je Ort (Abschnitt 4.6)
+    std::vector<MarketState> market_states;       // parallel zu markets
+    std::vector<ElectionResult> elections;        // seit M8: abgehaltene Wahlen in zeitlicher Folge
+    std::vector<CampaignState> campaign;          // seit M8 (b2): [wahlkreis × strömungen + strömung]
+    std::vector<Fixed> party_funds;               // seit M8 (b2): Mittel je Strömung (Taler)
+    std::vector<Fixed> party_donations;           // seit M8 (b2): Spenden des letzten Monats je Strömung
+    std::vector<Fixed> customs_revenue;           // seit M9: Vereinskasse des Monats je Zollunion
+    std::vector<CustomsRequest> customs_requests; // seit M9: beantragte Wechsel, wirksam zum 1. Januar
 
     Index find_state(std::string_view tag) const;
     Index find_location(std::string_view id) const;

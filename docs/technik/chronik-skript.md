@@ -787,6 +787,7 @@ zollunion zollverein {
     seit    = 1834.01.01          # optional (Abschnitt 3.18)
     leitung = PRU                 # Pflicht: Leitmacht, ein Staatstag
     tarif   = 0.03                # Pflicht: Vereinstarif, 0..steuersatz_max
+    ausgeschlossen = { AUT }      # optional seit M9 a2: Staaten, deren Beitritt die Leitmacht ablehnt
     quelle  = "…"                 # Pflicht
 }
 ```
@@ -796,8 +797,38 @@ Mitglieder mit einem Tarif. Die Mitglieder stehen im Feld `zollunion` der Staate
 `seit` ist das früheste Startdatum eines Szenarios, in dem es die Union gibt; so hat 1648 keine, und
 dessen Ergebnisse bleiben bitgleich. Die Leitmacht wird nach dem Staatenbestand aufgelöst: Ein Staat ohne
 Ort zum Startdatum und eine Leitmacht, die der Union zum Startdatum nicht angehört, sind fatal, ebenso
-eine doppelte Kennung. `keine` ist als Kennung reserviert. Die Datei darf fehlen. Im Kern:
-`World::customs_unions` (`CustomsUnion { id, name, leader, tariff, source }`).
+eine doppelte Kennung. `keine` ist als Kennung reserviert. In `ausgeschlossen` ist ein unbekannter
+Staat fatal; ein Staat ohne Ort zum Startdatum entfällt. Die Datei darf fehlen. Im Kern:
+`World::customs_unions` (`CustomsUnion { id, name, leader, tariff, excluded, source }`). Das Feld
+`zollunion` der Staaten gibt die Mitgliedschaft zum Startdatum; im Spiel ändert sie der Befehl
+`Zollunion` (seit Schritt a2, [diplomatie.md](diplomatie.md) Abschnitt 3.5).
+
+### 3.26 `common/zollziele_<szenario>.chron` (seit M9)
+
+Zielwerte des Zolllabors ([diplomatie.md](diplomatie.md), Abschnitt 3.6). Wie die Wahlziele (Abschnitt
+3.24) gehört die Datei nicht zum Spielinhalt. Nur `uhrwerk-cli zoll` liest sie; `uhrwerk-cli pruefen`
+prüft sie, wenn sie vorhanden ist.
+
+```text
+anteil zollverein {              # je Zollunion höchstens ein Block
+    zoll = { 0.015 0.06 }        # Pflicht: Zoll ÷ Einnahmen der Mitglieder ohne Wechsel (0..1), Median
+}
+wechsel hannover {               # beliebig viele; das Labor rechnet je Wechsel einen Lauf je Seed
+    staat       = HAN            # Pflicht: Staat, der zum Startdatum besteht
+    union       = zollverein     # Pflicht: neue Zollunion oder keine (Austritt)
+    grenzhandel = { 1.1 3 }      # optional: Handel über die frühere Zollgrenze, mit ÷ ohne Wechsel
+    handel      = { 0.9 1.5 }    # optional: Handel der Märkte des Staates, mit ÷ ohne
+    zoll        = { 0.4 0.95 }   # optional: Zolleinnahme des Staates, mit ÷ ohne
+}
+```
+
+Bereiche stehen als `{ von bis }` mit von ≤ bis und gelten für den Median über die Seeds. Fehler sind:
+- unbekannte Zollunionen, Staaten und Felder;
+- zwei Blöcke `anteil` für dieselbe Union oder zwei Wechsel mit derselben Kennung;
+- ein Wechsel ohne `staat` oder `union` oder in die Union, der der Staat schon angehört;
+- `zoll` in `anteil` außerhalb von 0 bis 1.
+
+Im Kern: `CustomsTargets` (`uhrwerk/customs_lab.hpp`).
 
 ## 4. Startzustand
 

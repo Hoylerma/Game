@@ -9,8 +9,10 @@
 //
 // Ablauf eines Tages (step_day), in fester Reihenfolge (docs/technik/bevoelkerung.md, Abschnitt 3):
 //   1. Befehle der Warteschlange ausführen (in Eingangsreihenfolge)
-//   2. Am 1. Januar: Jahresabschluss (Bilanz des Jahres wird Bilanz des Vorjahres)
-//   3. Am Monatsersten: Neuordnung der Blöcke (Zugänge, zu kleine Blöcke), wenn nötig
+//   2. Am 1. Januar: Jahresabschluss (Bilanz des Jahres wird Bilanz des Vorjahres), Ernte, Wechsel der
+//      Zollunionen (seit M9)
+//   3. Am Monatsersten: Neuordnung der Blöcke (Zugänge, zu kleine Blöcke), wenn nötig; Märkte;
+//      Vereinskassen (seit M9)
 //   4. Bevölkerung der Orte, die heute ihren Rechentag haben – parallel
 //   5. Zusammenführen, nacheinander: Momentaufnahmen veröffentlichen, Wanderung buchen
 //   6. Wirtschaft der Staaten, die heute ihren Rechentag haben
@@ -45,8 +47,9 @@ struct SimConfig {
 };
 
 enum class CommandType : std::uint8_t {
-    SetTaxRate, // state, kind, value = neuer Steuersatz (0..rules.tax_rate_max)
-    Campaign,   // seit M8: state = Strömung, target = Wahlkreis, action = Art (politik.md Abschnitt 9)
+    SetTaxRate,   // state, kind, value = neuer Steuersatz (0..rules.tax_rate_max)
+    Campaign,     // seit M8: state = Strömung, target = Wahlkreis, action = Art (politik.md Abschnitt 9)
+    CustomsUnion, // seit M9: state, target = Zollunion oder kNone für den Austritt (diplomatie.md 3.5)
 };
 
 struct Command {
@@ -54,7 +57,7 @@ struct Command {
     Index state = kNone;
     Fixed value;
     TaxKind kind = TaxKind::Kontribution;          // SetTaxRate: welche Steuer (seit M5)
-    Index target = kNone;                          // Campaign: Wahlkreis (seit M8)
+    Index target = kNone;                          // Campaign: Wahlkreis (seit M8); CustomsUnion: Union
     CampaignAction action = CampaignAction::Rally; // Campaign: Art (seit M8)
 
     friend bool operator==(const Command&, const Command&) = default;
@@ -123,6 +126,11 @@ public:
     /// Prüfsumme des Startzustands der Partie (beim Laden aus dem Spielstand); Grundlage der
     /// Wiederholung.
     std::uint64_t start_checksum() const { return start_checksum_; }
+
+    /// Handelsströme der Märkte festhalten (seit M9, Zolllabor): trade_flows() enthält dann die Ströme
+    /// des letzten Monatsersten. Kein Zustand, ändert den Lauf nicht.
+    void record_trade(bool on) { record_trade_ = on; }
+    const std::vector<TradeFlow>& trade_flows() const { return trade_flows_; }
 
 private:
     /// Zustandsverzeichnis (core/src/state_access.hpp): Prüfsumme, Textexport und Spielstände lesen
@@ -199,7 +207,9 @@ private:
     std::int64_t days_elapsed_ = 0;
     std::vector<LoggedCommand> command_log_;
     std::uint64_t start_checksum_ = 0;
-    EconomyTopology topology_; // abgeleitet: Märkte, Nachbarn, Betriebe je Beruf (seit M5)
+    EconomyTopology topology_;           // abgeleitet: Märkte, Nachbarn, Betriebe je Beruf (seit M5)
+    bool record_trade_ = false;          // Zolllabor (seit M9): Ströme festhalten
+    std::vector<TradeFlow> trade_flows_; // … des letzten Monatsersten, kein Zustand
 
     std::array<std::vector<Index>, 28> locations_by_day_; // Orte mit Blöcken je Rechentag, aufsteigend
     std::vector<std::vector<Index>> state_locations_;     // Orte je Staat, aufsteigend

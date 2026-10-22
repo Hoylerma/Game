@@ -353,7 +353,8 @@ Das Lesezeichen 1648 hat kein Parlament; Strömungen und Gruppen sind dort gelad
 
 | Datei | Inhalt |
 |---|---|
-| `common/zollunionen.chron` | Zollverein (Leitung Preußen) und Steuerverein (Leitung Hannover), Tarif je 3 % (Spielwert) |
+| `common/zollunionen.chron` | Zollverein (Leitung Preußen, lehnt Österreich ab, Tarif 10 %) und Steuerverein (Leitung Hannover, 3 %); Tarife als Spielwerte, kalibriert mit `uhrwerk-cli zoll` |
+| `common/zollziele_voelkerfruehling.chron` | Zielwerte des Zolllabors: Zollanteil der Unionen, Beitritte Hannovers und Mecklenburg-Schwerins zum Zollverein |
 | `tabellen/staaten_historie.csv` | Feld `zollunion` je Staat: 1848 26 Staaten im Zollverein, 3 im Steuerverein, 9 für sich |
 
 Das Lesezeichen 1648 hat keine Zollunion; jeder Staat ist ein eigenes Zollgebiet.

@@ -4,15 +4,19 @@
 # keine Zollunion, jeder Staat ist ein eigenes Zollgebiet. Die Mitglieder stehen im Feld 'zollunion'
 # der Staaten (data/tabellen/staaten_historie.csv); die Leitmacht muss selbst Mitglied sein. Der
 # Name steht in der Chronik („… tritt dem Zollverein bei“) und braucht deshalb den Artikel „dem“.
+# 'ausgeschlossen': Staaten, deren Beitritt die Leitmacht ablehnt (Regel bis zur KI in M12).
 #
-# Alle Angaben nach Wissensstand ohne Quellenzugang; Prüfung offen. Der Tarif ist ein Spielwert
-# (Entscheidung 3): der Zollsatz der Staaten seit M5.
+# Alle Angaben nach Wissensstand ohne Quellenzugang; Prüfung offen. Die Tarife sind Spielwerte
+# (Entscheidung 3, kalibriert in M9 a3 mit `uhrwerk-cli zoll`, docs/technik/diplomatie.md Abschnitt 11):
+# Der Zollverein erhebt rund 10 % (Fertigwaren um 10 %, Rohstoffe fast frei, Kolonialwaren höher), der
+# Steuerverein mit 3 % weniger, wie der Zollsatz der Staaten seit M5.
 
 zollunion zollverein {
     name    = "Zollverein"
     seit    = 1834.01.01       # Verträge von 1833, in Kraft zum 1. Januar 1834
     leitung = PRU
-    tarif   = 0.03
+    tarif   = 0.10
+    ausgeschlossen = { AUT }   # Preußen hält Österreich heraus (Bruck-Plan 1849, Handelsvertrag statt Beitritt 1853)
     quelle  = "Deutscher Zollverein, in Kraft seit 1. Januar 1834 unter preußischer Führung; Verlängerungen 1841/42 und 1853/54. Tarif als Spielwert. Wissensstand ohne Quellenzugang; Prüfung offen"
 }
 
