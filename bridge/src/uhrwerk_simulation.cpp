@@ -1,5 +1,6 @@
 #include "uhrwerk_simulation.h"
 
+#include "uhrwerk/customs.hpp"
 #include "uhrwerk/date.hpp"
 #include "uhrwerk/economy.hpp"
 #include "uhrwerk/loader.hpp"
@@ -85,6 +86,7 @@ const Color kRailNone(0.94f, 0.91f, 0.83f);        // ohne Bahn
 const Color kElectionPaper(0.95f, 0.93f, 0.86f);   // Wahlen (seit M8): knapper Sieg hell …
 const Color kElectionOutside(0.90f, 0.88f, 0.82f); // … außerhalb des Wahlgebiets
 const Color kElectionBoycott(0.76f, 0.79f, 0.84f); // … Boykott (kühles Grau): der Wahlkreis wählte nicht
+constexpr double kCustomsAlone = 0.62;             // Zollgebiete (seit M9): Staaten ohne Union blass
 constexpr double kDensityMax = 120.0;              // Einwohner je km², ab hier dunkelste Stufe
 constexpr double kEconomyMax = 16.0;               // Reichstaler je Einwohner und Jahr, dunkelste Stufe
 
@@ -693,11 +695,34 @@ Dictionary UhrwerkSimulation::get_state(std::int64_t index) const {
     result["ruler"] = to_godot(state.ruler);
     result["government"] = to_godot(state.government);
     result["capital_index"] = state.capital;
-    // Zollunion (seit M9): Kennung und Name, leer für ein eigenes Zollgebiet.
+    // Zollunion (seit M9): Kennung und Name, leer für ein eigenes Zollgebiet; seit Schritt a4 Index,
+    // Leitmacht, Tarif des Zollgebiets, Anteil an der Vereinskasse und offener Antrag.
     const bool in_union = state.customs_union != uhrwerk::kNone;
     result["customs_union"] = in_union ? to_godot(at(w->customs_unions, state.customs_union).id) : String();
     result["customs_union_name"] =
         in_union ? to_godot(at(w->customs_unions, state.customs_union).name) : String();
+    result["customs_union_index"] = state.customs_union;
+    result["customs_leader"] = in_union && at(w->customs_unions, state.customs_union).leader == state_index;
+    const bool zones = !w->customs_unions.empty();
+    result["customs_tariff_percent"] =
+        (zones ? uhrwerk::zone_tariff(*w, uhrwerk::customs_zone(*w, state_index))
+               : state.tax_rate(uhrwerk::TaxKind::Zoll))
+            .to_double() *
+        100.0;
+    result["customs_locked"] = zones && in_union;
+    result["customs_income"] = state.customs_income.to_double();
+    Dictionary request;
+    for (const uhrwerk::CustomsRequest& r : w->customs_requests) {
+        if (r.state == state_index) {
+            request["customs_union_index"] = r.customs_union;
+            request["customs_union_name"] = r.customs_union != uhrwerk::kNone
+                                                ? to_godot(at(w->customs_unions, r.customs_union).name)
+                                                : String();
+            request["effective_text"] =
+                to_godot(uhrwerk::format_date_long(uhrwerk::customs_effective_date(w->date)));
+        }
+    }
+    result["customs_request"] = request;
     result["treasury"] = state.treasury.to_double();
     result["tax_rate_percent"] = to_percent(state.tax_rate(uhrwerk::TaxKind::Kontribution));
     // Haushalt des letzten Rechentags (gleich last_month_*); vor dem ersten Rechentag die Schätzung
@@ -823,6 +848,22 @@ Dictionary UhrwerkSimulation::get_location(std::int64_t index) const {
         }
     }
     result["eisenbahnen"] = railways;
+    // Zollgebiet des Ortes (seit M9): Union oder Besitzer, mit Tarif.
+    String zone_name;
+    double zone_tariff = 0.0;
+    if (valid_index(w->states, loc.owner)) {
+        const uhrwerk::State& owner = at(w->states, loc.owner);
+        zone_name = to_godot(valid_index(w->customs_unions, owner.customs_union)
+                                 ? at(w->customs_unions, owner.customs_union).name
+                                 : owner.short_name);
+        zone_tariff =
+            (w->customs_unions.empty() ? owner.tax_rate(uhrwerk::TaxKind::Zoll)
+                                       : uhrwerk::zone_tariff(*w, uhrwerk::customs_zone(*w, loc.owner)))
+                .to_double() *
+            100.0;
+    }
+    result["customs_zone_name"] = zone_name;
+    result["customs_tariff_percent"] = zone_tariff;
     // Wahlkreis des angezeigten Parlaments mit dem Ergebnis seiner letzten Wahl (seit M8).
     const std::int64_t parliament = get_shown_parliament();
     if (valid_index(location_districts_, parliament) &&
@@ -1121,7 +1162,7 @@ PackedColorArray UhrwerkSimulation::get_map_colors(std::int64_t mode) const {
     if (!w) {
         return colors;
     }
-    ERR_FAIL_COND_V_MSG(mode < MAP_POLITICAL || mode > MAP_WAHLEN, colors,
+    ERR_FAIL_COND_V_MSG(mode < MAP_POLITICAL || mode > MAP_ZOLLGEBIETE, colors,
                         "get_map_colors: unbekannter Kartenmodus.");
 
     const auto count = static_cast<std::int64_t>(w->locations.size());
@@ -1236,6 +1277,15 @@ PackedColorArray UhrwerkSimulation::get_map_colors(std::int64_t mode) const {
             }
             break;
         }
+        case MAP_ZOLLGEBIETE:
+            // Zollunionen in ihrer Farbe, Staaten ohne Union blass in der Staatsfarbe (seit M9).
+            if (valid_index(w->states, loc.owner)) {
+                const uhrwerk::State& owner = at(w->states, loc.owner);
+                color = valid_index(w->customs_unions, owner.customs_union)
+                            ? to_godot(at(w->customs_unions, owner.customs_union).color)
+                            : blend(to_godot(owner.color), Color(1.0f, 1.0f, 1.0f), kCustomsAlone);
+            }
+            break;
         default:
             break;
         }
@@ -1253,6 +1303,98 @@ PackedColorArray UhrwerkSimulation::get_map_colors(std::int64_t mode) const {
         colors.set(i, color);
     }
     return colors;
+}
+
+// ─── Zollunionen (seit M9) ──────────────────────────────────────────────────
+
+Array UhrwerkSimulation::get_customs_unions() const {
+    Array result;
+    const uhrwerk::World* w = world();
+    if (!w) {
+        return result;
+    }
+    for (std::size_t u = 0; u < w->customs_unions.size(); ++u) {
+        const uhrwerk::CustomsUnion& c = w->customs_unions[u];
+        PackedInt32Array members;
+        uhrwerk::Fixed population;
+        for (std::size_t s = 0; s < w->states.size(); ++s) {
+            if (w->states[s].customs_union == static_cast<uhrwerk::Index>(u)) {
+                members.append(static_cast<std::int32_t>(s));
+                population += w->state_population(static_cast<uhrwerk::Index>(s));
+            }
+        }
+        Dictionary entry;
+        entry["index"] = static_cast<std::int64_t>(u);
+        entry["id"] = to_godot(c.id);
+        entry["name"] = to_godot(c.name);
+        entry["color"] = to_godot(c.color);
+        entry["leader_index"] = c.leader;
+        entry["leader_name"] =
+            valid_index(w->states, c.leader) ? to_godot(at(w->states, c.leader).short_name) : String();
+        entry["tariff_percent"] = c.tariff.to_double() * 100.0;
+        entry["member_indices"] = members;
+        entry["member_count"] = static_cast<std::int64_t>(members.size());
+        entry["population"] = population.round();
+        entry["revenue_month"] =
+            u < w->customs_revenue.size() ? w->customs_revenue[u].to_double() : 0.0; // Vereinskasse
+        // Aufgelöst, wenn die Leitmacht ihr nicht mehr angehört (diplomatie.md Abschnitt 3.5).
+        entry["dissolved"] = !valid_index(w->states, c.leader) ||
+                             at(w->states, c.leader).customs_union != static_cast<uhrwerk::Index>(u);
+        result.append(entry);
+    }
+    return result;
+}
+
+Dictionary UhrwerkSimulation::get_customs_change(std::int64_t state_index, std::int64_t customs_union) const {
+    Dictionary result;
+    const uhrwerk::World* w = world();
+    if (!w || !valid_index(w->states, state_index)) {
+        return result;
+    }
+    const auto state = static_cast<uhrwerk::Index>(state_index);
+    const auto target = customs_union < 0 ? uhrwerk::kNone : static_cast<uhrwerk::Index>(customs_union);
+    if (target != uhrwerk::kNone && !valid_index(w->customs_unions, target)) {
+        return result;
+    }
+    constexpr std::array<const char*, 4> kDecisions = {"ungueltig", "zurueckgezogen", "abgelehnt",
+                                                       "angenommen"};
+    const uhrwerk::CustomsDecision decision = uhrwerk::evaluate_customs_change(*w, state, target);
+    result["decision"] = String(kDecisions[static_cast<std::size_t>(decision)]);
+    result["effective_text"] = to_godot(uhrwerk::format_date_long(uhrwerk::customs_effective_date(w->date)));
+    const uhrwerk::Index current = at(w->states, state_index).customs_union;
+    result["current_name"] =
+        valid_index(w->customs_unions, current) ? to_godot(at(w->customs_unions, current).name) : String();
+    result["target_name"] =
+        target != uhrwerk::kNone ? to_godot(at(w->customs_unions, target).name) : String();
+    result["dissolves"] = valid_index(w->customs_unions, current) && target != current &&
+                          at(w->customs_unions, current).leader == state;
+    if (target != uhrwerk::kNone) {
+        const uhrwerk::Index leader = at(w->customs_unions, target).leader;
+        result["leader_name"] =
+            valid_index(w->states, leader) ? to_godot(at(w->states, leader).short_name) : String();
+    }
+    return result;
+}
+
+bool UhrwerkSimulation::request_customs_union(std::int64_t state_index, std::int64_t customs_union) {
+    const uhrwerk::World* w = world();
+    if (!w || !valid_index(w->states, state_index)) {
+        return false;
+    }
+    const auto target = customs_union < 0 ? uhrwerk::kNone : static_cast<uhrwerk::Index>(customs_union);
+    if (target != uhrwerk::kNone && !valid_index(w->customs_unions, target)) {
+        return false;
+    }
+    if (uhrwerk::evaluate_customs_change(*w, static_cast<uhrwerk::Index>(state_index), target) ==
+        uhrwerk::CustomsDecision::Invalid) {
+        return false;
+    }
+    uhrwerk::Command command;
+    command.type = uhrwerk::CommandType::CustomsUnion;
+    command.state = static_cast<uhrwerk::Index>(state_index);
+    command.target = target;
+    simulation_->submit(command);
+    return true;
 }
 
 // ─── Politik (seit M8) ──────────────────────────────────────────────────────
@@ -1696,6 +1838,11 @@ bool UhrwerkSimulation::set_tax_percent(std::int64_t state_index, std::int64_t k
     if (kind < TAX_KONTRIBUTION || kind > TAX_ZOLL || percent < 0 || percent > get_max_tax_rate_percent()) {
         return false;
     }
+    // Mitglieder einer Zollunion erheben den Vereinstarif (seit M9); der Kern verwürfe den Befehl.
+    if (kind == TAX_ZOLL && !w->customs_unions.empty() &&
+        at(w->states, state_index).customs_union != uhrwerk::kNone) {
+        return false;
+    }
     uhrwerk::Command command;
     command.type = uhrwerk::CommandType::SetTaxRate;
     command.state = static_cast<uhrwerk::Index>(state_index);
@@ -1924,6 +2071,12 @@ void UhrwerkSimulation::_bind_methods() {
     ClassDB::bind_method(D_METHOD("set_player_current", "current"), &UhrwerkSimulation::set_player_current);
     ClassDB::bind_method(D_METHOD("get_player_current"), &UhrwerkSimulation::get_player_current);
 
+    ClassDB::bind_method(D_METHOD("get_customs_unions"), &UhrwerkSimulation::get_customs_unions);
+    ClassDB::bind_method(D_METHOD("get_customs_change", "state_index", "customs_union"),
+                         &UhrwerkSimulation::get_customs_change);
+    ClassDB::bind_method(D_METHOD("request_customs_union", "state_index", "customs_union"),
+                         &UhrwerkSimulation::request_customs_union);
+
     ClassDB::bind_method(D_METHOD("set_tax_rate_percent", "state_index", "percent"),
                          &UhrwerkSimulation::set_tax_rate_percent);
     ClassDB::bind_method(D_METHOD("set_tax_percent", "state_index", "kind", "percent"),
@@ -1953,6 +2106,7 @@ void UhrwerkSimulation::_bind_methods() {
     BIND_ENUM_CONSTANT(MAP_VERWALTUNG);
     BIND_ENUM_CONSTANT(MAP_EISENBAHNEN);
     BIND_ENUM_CONSTANT(MAP_WAHLEN);
+    BIND_ENUM_CONSTANT(MAP_ZOLLGEBIETE);
     BIND_ENUM_CONSTANT(TAX_KONTRIBUTION);
     BIND_ENUM_CONSTANT(TAX_AKZISE);
     BIND_ENUM_CONSTANT(TAX_ZOLL);

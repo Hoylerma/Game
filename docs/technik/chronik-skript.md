@@ -788,6 +788,7 @@ zollunion zollverein {
     leitung = PRU                 # Pflicht: Leitmacht, ein Staatstag
     tarif   = 0.03                # Pflicht: Vereinstarif, 0..steuersatz_max
     ausgeschlossen = { AUT }      # optional seit M9 a2: Staaten, deren Beitritt die Leitmacht ablehnt
+    farbe   = { 46 84 128 }       # optional seit M9 a4: Farbe im Kartenmodus „Zollgebiete“
     quelle  = "…"                 # Pflicht
 }
 ```
@@ -799,7 +800,7 @@ dessen Ergebnisse bleiben bitgleich. Die Leitmacht wird nach dem Staatenbestand 
 Ort zum Startdatum und eine Leitmacht, die der Union zum Startdatum nicht angehört, sind fatal, ebenso
 eine doppelte Kennung. `keine` ist als Kennung reserviert. In `ausgeschlossen` ist ein unbekannter
 Staat fatal; ein Staat ohne Ort zum Startdatum entfällt. Die Datei darf fehlen. Im Kern:
-`World::customs_unions` (`CustomsUnion { id, name, leader, tariff, excluded, source }`). Das Feld
+`World::customs_unions` (`CustomsUnion { id, name, leader, tariff, excluded, color, source }`). Das Feld
 `zollunion` der Staaten gibt die Mitgliedschaft zum Startdatum; im Spiel ändert sie der Befehl
 `Zollunion` (seit Schritt a2, [diplomatie.md](diplomatie.md) Abschnitt 3.5).
 

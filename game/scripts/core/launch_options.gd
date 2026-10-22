@@ -4,13 +4,15 @@ extends RefCounted
 ##
 ##   --screenshot=<pfad>    nach dem Laden simulieren, Bild speichern, beenden
 ##   --tage=<n>             Tage vor dem Screenshot (Standard 60)
-##   --kartenmodus=<0..12>  Kartenmodus (0 Politisch … 5 Kreise, 6 Lebensstandard, 7 Kultur,
-##                          8 Wirtschaft, 9 Märkte, 10 Verwaltung, 11 Eisenbahnen, 12 Wahlen)
+##   --kartenmodus=<0..13>  Kartenmodus (0 Politisch … 5 Kreise, 6 Lebensstandard, 7 Kultur,
+##                          8 Wirtschaft, 9 Märkte, 10 Verwaltung, 11 Eisenbahnen, 12 Wahlen,
+##                          13 Zollgebiete)
 ##   --ort=<ort_id>         Ort auswählen und Ortsinfo öffnen
 ##   --zoom=<faktor>        Vergrößerung gegenüber der Übersicht (1 = ganze Karte);
 ##                          zentriert auf --ort, sonst auf die Kartenmitte (bis 1: Übersicht)
 ##   --haushalt             Haushaltsfenster des Spielerstaates öffnen (seit M5)
 ##   --verfassung           Fenster „Verfassung und Gruppen“ des Spielerstaates öffnen (seit M8)
+##   --zollunion            Fenster „Zollunion“ des Spielerstaates öffnen (seit M9)
 ##   --spielmenue           Spielmenü öffnen (seit M6)
 ##   --szenario=<id>        Szenario beim Start (seit M7; Standard westfaelischer_frieden)
 ##   --staat=<TAG>          Spielerstaat beim Start (seit M7; Standard: Spieler des Szenarios)
@@ -29,6 +31,8 @@ var zoom_factor := 0.0
 var show_budget := false
 ## Fenster „Verfassung und Gruppen“ vor dem Screenshot öffnen (seit M8).
 var show_politics := false
+## Fenster „Zollunion“ vor dem Screenshot öffnen (seit M9).
+var show_customs := false
 var show_game_menu := false
 ## Wahlabend der letzten Wahl vor dem Screenshot öffnen (seit M8).
 var show_election_night := false
@@ -94,6 +98,11 @@ static func parse(args: PackedStringArray) -> LaunchOptions:
 					options.show_politics = true
 				else:
 					options.problems.append("--verfassung erwartet keinen Wert, nicht „%s“." % value)
+			"--zollunion":
+				if value.is_empty():
+					options.show_customs = true
+				else:
+					options.problems.append("--zollunion erwartet keinen Wert, nicht „%s“." % value)
 			"--spielmenue":
 				if value.is_empty():
 					options.show_game_menu = true

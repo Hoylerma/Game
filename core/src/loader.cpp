@@ -2207,7 +2207,7 @@ private:
             const bool later = is_later(file, node, "zollunion");
             const std::string what = "zollunion " + node.value;
             Fields f(node, file.name, what, issues_,
-                     {"name", "seit", "leitung", "tarif", "ausgeschlossen", "quelle"});
+                     {"name", "seit", "leitung", "tarif", "ausgeschlossen", "farbe", "quelle"});
             CustomsUnion u;
             u.id = node.value;
             u.name = f.text("name").value_or("");
@@ -2237,6 +2237,9 @@ private:
                         ref.excluded_tags.emplace_back(child.value, child.line);
                     }
                 }
+            }
+            if (f.has("farbe")) {
+                u.color = f.color("farbe").value_or(u.color); // Kartenmodus (seit Schritt a4)
             }
             u.source = f.text("quelle").value_or("");
             if (later) {

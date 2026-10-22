@@ -70,6 +70,9 @@ const REQUIRED_METHODS: Array[StringName] = [
 	&"get_location_electoral_district_indices",
 	&"get_shown_parliament",
 	&"get_state_politics",
+	&"get_customs_unions",
+	&"get_customs_change",
+	&"request_customs_union",
 	&"campaign",
 	&"get_party",
 	&"get_campaign",
@@ -376,6 +379,25 @@ func get_shown_parliament() -> int:
 ## color, share_percent, influence_percent }] }; leer ohne Parlament im Szenario.
 func get_state_politics(state_index: int) -> Dictionary:
 	return _as_dictionary(_native.call(&"get_state_politics", state_index))
+
+
+## Zollunionen (seit M9, diplomatie.md 3.7): [{ index, id, name, color, leader_index, leader_name,
+## tariff_percent, member_indices, member_count, population, revenue_month, dissolved }].
+func get_customs_unions() -> Array[Dictionary]:
+	return _as_dictionaries(_native.call(&"get_customs_unions"))
+
+
+## Vorab-Prüfung eines Wechsels in die Union customs_union (-1 = Austritt), ohne Wirkung:
+## { decision ("angenommen", "abgelehnt", "zurueckgezogen", "ungueltig"), effective_text,
+## current_name, target_name, dissolves, leader_name }; leer bei ungültigen Indizes.
+func get_customs_change(state_index: int, customs_union: int) -> Dictionary:
+	return _as_dictionary(_native.call(&"get_customs_change", state_index, customs_union))
+
+
+## Befehl Zollunion für den nächsten Tag (wirksam zum nächsten 1. Januar); false, wenn der Wechsel
+## ungültig ist (get_customs_change: "ungueltig").
+func request_customs_union(state_index: int, customs_union: int) -> bool:
+	return bool(_native.call(&"request_customs_union", state_index, customs_union))
 
 
 ## Wahlkampf der Strömung current im Wahlkreis district (seit M8): Befehl für den nächsten Tag;

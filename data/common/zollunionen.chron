@@ -16,6 +16,7 @@ zollunion zollverein {
     seit    = 1834.01.01       # Verträge von 1833, in Kraft zum 1. Januar 1834
     leitung = PRU
     tarif   = 0.10
+    farbe   = { 46 84 128 }    # Kartenmodus „Zollgebiete“: ein großer, einfarbiger Block (Kapitel 08)
     ausgeschlossen = { AUT }   # Preußen hält Österreich heraus (Bruck-Plan 1849, Handelsvertrag statt Beitritt 1853)
     quelle  = "Deutscher Zollverein, in Kraft seit 1. Januar 1834 unter preußischer Führung; Verlängerungen 1841/42 und 1853/54. Tarif als Spielwert. Wissensstand ohne Quellenzugang; Prüfung offen"
 }
@@ -25,5 +26,6 @@ zollunion steuerverein {
     seit    = 1834.05.01       # Vertrag zwischen Hannover und Braunschweig
     leitung = HAN
     tarif   = 0.03
+    farbe   = { 176 122 38 }
     quelle  = "Steuerverein: Hannover und Braunschweig 1834, Oldenburg 1836, Schaumburg-Lippe 1838; Braunschweig wechselt 1841/44 in den Zollverein, Hannover 1854. Tarif als Spielwert. Wissensstand ohne Quellenzugang; Prüfung offen"
 }

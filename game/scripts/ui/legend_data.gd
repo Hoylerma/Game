@@ -13,6 +13,9 @@ extends RefCounted
 const LINEAR_TOLERANCE := 0.02
 ## Höchstzahl der Zeilen in der politischen Legende (seit M7).
 const MAX_POLITICAL_ENTRIES := 16
+## Zollgebiete (seit M9): Musterfarbe der Staaten ohne Union (die Karte zeigt sie blass in ihrer
+## Staatsfarbe, die Legende stellvertretend in einem blassen Ton).
+const CUSTOMS_ALONE_SAMPLE := Color(0.86, 0.84, 0.79)
 
 
 ## Staaten mit mindestens einem Ort, alphabetisch nach Kurzname; bei mehr als max_entries
@@ -464,3 +467,42 @@ static func _fit_linear(
 		start[channel] = clampf(intercept, 0.0, 1.0)
 		finish[channel] = clampf(intercept + slope, 0.0, 1.0)
 	return [start, finish]
+
+
+## Legende „Zollgebiete“ (seit M9): je Zollunion mit Mitgliedern eine Zeile in ihrer Farbe (Leitmacht,
+## Tarif, Mitglieder, Einwohner), dazu die Staaten ohne Union, die blass in ihrer Staatsfarbe erscheinen
+## (je ein eigenes Zollgebiet). Leer, wenn das Szenario keine Zollunion hat.
+static func customs_entries(sim: SimulationClient) -> Array[Dictionary]:
+	var unions := sim.get_customs_unions()
+	if unions.is_empty():
+		return []
+	var entries: Array[Dictionary] = []
+	for union in unions:
+		var members := int(union.get("member_count", 0))
+		if members <= 0:
+			continue
+		entries.append({
+			"color": union.get("color", UiPalette.INK_FAINT),
+			"text": "%s (%s)" % [str(union.get("name", "")), states_text(members)],
+			"detail": "Leitung %s, Vereinstarif %s – %s Einwohner" % [
+				str(union.get("leader_name", "–")),
+				GermanFormat.percent(float(union.get("tariff_percent", 0.0))),
+				GermanFormat.integer(int(union.get("population", 0))),
+			],
+		})
+	var alone := 0
+	for index in sim.get_state_count():
+		var state := sim.get_state(index)
+		if int(state.get("location_count", 0)) > 0 and int(state.get("customs_union_index", -1)) < 0:
+			alone += 1
+	if alone > 0:
+		entries.append({
+			"color": CUSTOMS_ALONE_SAMPLE,
+			"text": "%s für sich" % states_text(alone),
+			"detail": "je ein eigenes Zollgebiet mit dem Zollsatz des Staates (blass in der Staatsfarbe)",
+		})
+	return entries
+
+
+static func states_text(count: int) -> String:
+	return "1 Staat" if count == 1 else "%s Staaten" % GermanFormat.integer(count)

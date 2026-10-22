@@ -291,7 +291,7 @@ TEST_CASE("Spielstand: Inhaltsfingerabdruck") {
     SUBCASE("Zollunionen (seit M9)") {
         World w = base;
         w.customs_unions.push_back(
-            uhrwerk::CustomsUnion{"bund", "Bund", 1, Fixed::from_ratio(3, 100), {}, "Test"});
+            uhrwerk::CustomsUnion{"bund", "Bund", 1, Fixed::from_ratio(3, 100), {}, {}, "Test"});
         const auto with_union = uhrwerk::content_fingerprint(w);
         CHECK(uhrwerk::content_differences(fp, with_union) == std::vector<std::string_view>{"diplomatie"});
         // Die Mitgliedschaft ist Zustand (Befehl Zollunion), kein Inhalt.

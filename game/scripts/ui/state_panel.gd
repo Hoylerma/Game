@@ -1,7 +1,7 @@
 class_name StatePanel
 extends PanelContainer
 ## Staatspanel des Spielerstaates mit Reglern für Kontribution, Akzise und Zoll und einem
-## Haushaltsfenster (seit M5).
+## Haushaltsfenster (seit M5), seit M9 mit dem Fenster „Zollunion“.
 ##
 ## Ein Regler schickt einen Befehl an die Simulation; wirksam wird er erst am nächsten
 ## simulierten Tag. Bis dahin zeigt das Panel den Wunschwert an. Beim Ziehen geht der Befehl
@@ -10,6 +10,9 @@ extends PanelContainer
 
 ## Neuer Satz in Prozent für eine Steuerart (SimulationClient.TAX_*) gewünscht.
 signal tax_rate_requested(kind: int, percent: int)
+## Wechsel der Zollunion gewünscht (seit M9): Index der Union, -1 für den Austritt. Die Union, der
+## der Staat schon angehört, zieht einen offenen Antrag zurück.
+signal customs_change_requested(customs_union: int)
 
 ## Namen der Steuerarten, Index = SimulationClient.TAX_*.
 const TAX_NAMES: PackedStringArray = ["Kontribution", "Akzise", "Zoll"]
@@ -21,6 +24,8 @@ const TAX_TOOLTIPS: PackedStringArray = [
 ## Kürzester Abstand zwischen zwei Füllungen des offenen Fensters „Verfassung und Gruppen“.
 const POLITICS_REFRESH_MS := 1000
 const DEFAULT_HINT := "Höhere Steuern füllen die Kasse, verteuern aber Waren und bremsen das Wachstum."
+## Kein Ziel gewählt bzw. kein Antrag unterwegs (Zollunion; -1 ist der Austritt).
+const NO_CUSTOMS_CHOICE := -2
 
 var _state_rates: Array[int] = [-1, -1, -1]
 var _pending: Array[int] = [-1, -1, -1]
@@ -39,6 +44,25 @@ var _politics_popup: PopupPanel = null
 var _politics_grid: GridContainer = null
 var _politics_groups: VBoxContainer = null
 var _politics_filled_at := 0
+## Zollunion (seit M9): Knopf und Fenster, nur in Szenarien mit Zollunionen (set_customs_available).
+## main.gd liefert die Unionen über customs_source (SimulationClient.get_customs_unions) und die
+## Vorschau eines Wechsels über customs_preview (get_customs_change des Spielerstaates; Argument
+## Union oder -1).
+var customs_source: Callable = Callable()
+var customs_preview: Callable = Callable()
+var _customs_available := false
+var _customs_button: Button = null
+var _customs_popup: PopupPanel = null
+var _customs_grid: GridContainer = null
+var _customs_rows: VBoxContainer = null
+var _customs_withdraw: Button = null
+var _customs_question_box: VBoxContainer = null
+var _customs_question: Label = null
+var _customs_note: Label = null
+var _customs_choice := NO_CUSTOMS_CHOICE
+var _customs_sent := NO_CUSTOMS_CHOICE
+var _customs_filled_at := 0
+var _tax_rows: Array[HBoxContainer] = []
 
 @onready var _coat: CoatOfArms = %Coat
 @onready var _name: Label = %StateName
@@ -64,6 +88,7 @@ func _ready() -> void:
 	_build_budget_popup()
 	_budget_button.pressed.connect(show_budget)
 	_build_politics()
+	_build_customs()
 	show_unavailable()
 
 
@@ -122,13 +147,28 @@ func show_state(state: Dictionary, capital_name: String) -> void:
 		&"font_color", UiPalette.NEGATIVE if debt > 0.0 else UiPalette.INK
 	)
 	var rates: Array = state.get("tax_rates_percent", [])
+	# Mitglieder einer Zollunion erheben den Vereinstarif: Zollregler gesperrt (seit M9).
+	var locked := bool(state.get("customs_locked", false))
 	for kind in _sliders.size():
 		_state_rates[kind] = int(rates[kind]) if kind < rates.size() else -1
+		var fixed := locked and kind == SimulationClient.TAX_ZOLL
+		if fixed:
+			_state_rates[kind] = roundi(float(state.get("customs_tariff_percent", 0.0)))
+			_pending[kind] = -1
 		if _pending[kind] == _state_rates[kind]:
 			_pending[kind] = -1
-		_sliders[kind].editable = _state_rates[kind] >= 0
+		_sliders[kind].editable = _state_rates[kind] >= 0 and not fixed
 		if _dragging != kind:
 			_show_rate(kind, _pending[kind] if _pending[kind] >= 0 else _state_rates[kind])
+	_set_tax_tooltip(
+		SimulationClient.TAX_ZOLL,
+		(
+			"Zoll: Tarif der Zollunion (%s). Mitglieder erheben keinen eigenen Zoll; sie erhalten "
+			% str(state.get("customs_union_name", ""))
+			+ "einen Anteil an der Vereinskasse nach Einwohnern."
+		) if locked else TAX_TOOLTIPS[SimulationClient.TAX_ZOLL]
+	)
+	_update_customs(state)
 	_update_hint()
 	_budget_button.disabled = false
 	if _budget_popup.visible:
@@ -161,6 +201,9 @@ func show_unavailable() -> void:
 	_budget_button.disabled = true
 	if _budget_popup != null:
 		_budget_popup.hide()
+	if _customs_popup != null:
+		_customs_button.visible = false
+		_customs_popup.hide()
 	if _politics_popup != null:
 		_politics_button.visible = false
 		_politics_popup.hide()
@@ -170,6 +213,17 @@ func show_unavailable() -> void:
 func clear_pending() -> void:
 	for kind in _pending.size():
 		_pending[kind] = -1
+	_customs_sent = NO_CUSTOMS_CHOICE
+	_customs_choice = NO_CUSTOMS_CHOICE
+	if _customs_note != null:
+		_customs_note.text = ""
+
+
+## Szenario mit Zollunionen (seit M9): Knopf „Zollunion …“ zeigen.
+func set_customs_available(available: bool) -> void:
+	_customs_available = available
+	if not available and _customs_popup != null:
+		_customs_popup.hide()
 
 
 ## Ein Befehl wurde abgelehnt: Regler auf den Wert der Simulation zurücksetzen.
@@ -199,12 +253,53 @@ func show_politics() -> void:
 	_politics_popup.popup(Rect2i(Vector2i(rect.end.x + 8.0, rect.position.y), Vector2i(360, 0)))
 
 
-## Haushalts- und Verfassungsfenster schließen (Wahlabend, Parteienmodus).
+## Fenster „Zollunion“ neben dem Panel öffnen (seit M9, nur in Szenarien mit Zollunionen).
+func show_customs() -> void:
+	if _state.is_empty() or not _customs_button.visible:
+		return
+	_customs_choice = NO_CUSTOMS_CHOICE
+	_customs_question_box.visible = false
+	if _customs_sent == NO_CUSTOMS_CHOICE:
+		_customs_note.text = ""
+	_fill_customs()
+	var rect := get_global_rect()
+	_customs_popup.popup(Rect2i(Vector2i(rect.end.x + 8.0, rect.position.y), Vector2i(380, 0)))
+
+
+## Haushalts-, Verfassungs- und Zollfenster schließen (Wahlabend, Parteienmodus).
 func hide_popups() -> void:
 	if _budget_popup != null:
 		_budget_popup.hide()
 	if _politics_popup != null:
 		_politics_popup.hide()
+	if _customs_popup != null:
+		_customs_popup.hide()
+
+
+## true, solange das Fenster „Zollunion“ offen ist (für Tests).
+func is_customs_visible() -> bool:
+	return _customs_popup != null and _customs_popup.visible
+
+
+## Text des Fensters „Zollunion“ mit Unionen und offener Rückfrage, zeilenweise (für Tests).
+func customs_text() -> String:
+	var lines := PackedStringArray()
+	var children := _customs_grid.get_children()
+	for i in range(0, children.size() - 1, 2):
+		lines.append("%s: %s" % [(children[i] as Label).text, (children[i + 1] as Label).text])
+	for row in _customs_rows.get_children():
+		var parts := PackedStringArray()
+		for child in row.find_children("*", "", true, false):
+			if child is Label:
+				parts.append((child as Label).text)
+			elif child is Button:
+				parts.append("[%s]" % (child as Button).text)
+		lines.append(" ".join(parts))
+	if _customs_question_box.visible:
+		lines.append(_customs_question.text)
+	if _customs_note.visible:
+		lines.append(_customs_note.text)
+	return "\n".join(lines)
 
 
 ## true, solange das Fenster „Verfassung und Gruppen“ offen ist (für Tests).
@@ -243,6 +338,7 @@ func budget_text() -> String:
 
 func _add_tax_row(kind: int) -> void:
 	var row := HBoxContainer.new()
+	row.name = "Tax%d" % kind
 	row.tooltip_text = TAX_TOOLTIPS[kind]
 	row.mouse_filter = Control.MOUSE_FILTER_PASS
 	var caption := Label.new()
@@ -274,6 +370,16 @@ func _add_tax_row(kind: int) -> void:
 	_taxes.add_child(row)
 	_sliders.append(slider)
 	_values.append(value)
+	_tax_rows.append(row)
+
+
+func _set_tax_tooltip(kind: int, text: String) -> void:
+	var row := _tax_rows[kind]
+	if row.tooltip_text == text:
+		return
+	row.tooltip_text = text
+	for child in row.get_children():
+		(child as Control).tooltip_text = text
 
 
 func _show_rate(kind: int, percent: int) -> void:
@@ -291,6 +397,11 @@ func _update_hint() -> void:
 				% [TAX_NAMES[kind], GermanFormat.percent(_state_rates[kind])]
 			)
 			return
+	# Beantragter Wechsel der Zollunion (seit M9).
+	var request: Dictionary = _state.get("customs_request", {})
+	if not request.is_empty():
+		_tax_hint.text = _request_text(request) + "."
+		return
 	_tax_hint.text = DEFAULT_HINT
 
 
@@ -440,6 +551,310 @@ func _fill_politics() -> bool:
 	return true
 
 
+func _build_customs() -> void:
+	_customs_button = Button.new()
+	_customs_button.name = "CustomsButton"
+	_customs_button.text = "Zollunion …"
+	_customs_button.focus_mode = Control.FOCUS_NONE
+	_customs_button.tooltip_text = "Zollunionen; Beitritt, Wechsel und Austritt zum nächsten 1. Januar"
+	_customs_button.visible = false
+	_customs_button.pressed.connect(show_customs)
+	var parent := _budget_button.get_parent()
+	parent.add_child(_customs_button)
+	parent.move_child(_customs_button, _politics_button.get_index() + 1)
+	_customs_popup = PopupPanel.new()
+	_customs_popup.name = "CustomsPopup"
+	var box := VBoxContainer.new()
+	box.add_theme_constant_override(&"separation", 6)
+	var header := Label.new()
+	header.text = "ZOLLUNION"
+	header.theme_type_variation = &"HeaderLabel"
+	box.add_child(header)
+	_customs_grid = GridContainer.new()
+	_customs_grid.columns = 2
+	_customs_grid.add_theme_constant_override(&"h_separation", 18)
+	box.add_child(_customs_grid)
+	var caption := Label.new()
+	caption.text = "UNIONEN (MITGLIEDER · TARIF · KASSE JE MONAT)"
+	caption.theme_type_variation = &"CaptionLabel"
+	box.add_child(caption)
+	_customs_rows = VBoxContainer.new()
+	_customs_rows.add_theme_constant_override(&"separation", 4)
+	box.add_child(_customs_rows)
+	_customs_withdraw = Button.new()
+	_customs_withdraw.name = "CustomsWithdraw"
+	_customs_withdraw.text = "Antrag zurückziehen …"
+	_customs_withdraw.focus_mode = Control.FOCUS_NONE
+	_customs_withdraw.pressed.connect(func() -> void:
+		_ask_customs(int(_state.get("customs_union_index", -1)))
+	)
+	box.add_child(_customs_withdraw)
+	# Rückfrage mit Zeitpunkt (diplomatie.md, Abschnitt 3.7).
+	_customs_question_box = VBoxContainer.new()
+	_customs_question_box.name = "CustomsQuestion"
+	_customs_question_box.visible = false
+	_customs_question = Label.new()
+	_customs_question.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_customs_question.custom_minimum_size = Vector2(340, 0)
+	_customs_question_box.add_child(_customs_question)
+	var answers := HBoxContainer.new()
+	answers.alignment = BoxContainer.ALIGNMENT_END
+	var confirm := Button.new()
+	confirm.name = "CustomsConfirm"
+	confirm.text = "Antrag stellen"
+	confirm.focus_mode = Control.FOCUS_NONE
+	confirm.pressed.connect(_confirm_customs)
+	var cancel := Button.new()
+	cancel.name = "CustomsCancel"
+	cancel.text = "Abbrechen"
+	cancel.focus_mode = Control.FOCUS_NONE
+	cancel.pressed.connect(func() -> void:
+		_customs_choice = NO_CUSTOMS_CHOICE
+		_customs_question_box.visible = false
+	)
+	answers.add_child(cancel)
+	answers.add_child(confirm)
+	_customs_question_box.add_child(answers)
+	box.add_child(_customs_question_box)
+	_customs_note = Label.new()
+	_customs_note.theme_type_variation = &"MutedLabel"
+	_customs_note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_customs_note.custom_minimum_size = Vector2(340, 0)
+	_customs_note.visible = false
+	box.add_child(_customs_note)
+	var note := Label.new()
+	note.text = (
+		"Wechsel werden zum nächsten 1. Januar wirksam. Mitglieder erheben den Tarif der Union; "
+		+ "die Vereinskasse wird nach Einwohnern verteilt. Über einen Beitritt entscheidet die "
+		+ "Leitmacht; tritt sie aus, löst sich ihre Union auf."
+	)
+	note.theme_type_variation = &"CaptionLabel"
+	note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	note.custom_minimum_size = Vector2(340, 0)
+	box.add_child(note)
+	_customs_popup.add_child(box)
+	add_child(_customs_popup)
+	_customs_popup.add_theme_stylebox_override(&"panel", get_theme_stylebox(&"panel"))
+
+
+func _update_customs(state: Dictionary) -> void:
+	_customs_button.visible = _customs_available
+	if not _customs_available:
+		_customs_popup.hide()
+		return
+	# Ein gestellter Antrag ist angekommen, sobald die Simulation ihn zeigt (oder, bei einer
+	# Rücknahme, keinen mehr).
+	if _customs_sent != NO_CUSTOMS_CHOICE:
+		var request: Dictionary = state.get("customs_request", {})
+		var shown := int(state.get("customs_union_index", -1))
+		if not request.is_empty():
+			shown = int(request.get("customs_union_index", -1))
+		if shown == _customs_sent:
+			_customs_sent = NO_CUSTOMS_CHOICE
+			_customs_note.text = ""
+			_customs_filled_at = 0
+	if _customs_popup.visible and Time.get_ticks_msec() - _customs_filled_at >= POLITICS_REFRESH_MS:
+		_fill_customs()
+
+
+## Füllt das Fenster „Zollunion“ aus customs_source und customs_preview.
+func _fill_customs() -> void:
+	_customs_filled_at = Time.get_ticks_msec()
+	var unions: Array = customs_source.call() if customs_source.is_valid() else []
+	var state := _state
+	var current := int(state.get("customs_union_index", -1))
+	var request: Dictionary = state.get("customs_request", {})
+	var requested := (
+		int(request.get("customs_union_index", -1)) if not request.is_empty() else NO_CUSTOMS_CHOICE
+	)
+	for child in _customs_grid.get_children():
+		_customs_grid.remove_child(child)
+		child.queue_free()
+	var tariff := GermanFormat.percent(roundi(float(state.get("customs_tariff_percent", 0.0))))
+	if current >= 0 and current < unions.size():
+		var union: Dictionary = unions[current]
+		var leader := str(union.get("leader_name", ""))
+		var leading := bool(state.get("customs_leader", false))
+		_customs_line(
+			"Zollgebiet",
+			"%s (%s)" % [
+				str(union.get("name", "")), "Leitmacht" if leading else "Leitmacht " + leader
+			]
+		)
+		_customs_line("Zoll", "%s, Tarif der Union" % tariff)
+		_customs_line(
+			"Anteil an der Vereinskasse",
+			GermanFormat.signed_money(float(state.get("customs_income", 0.0))) + " je Monat"
+		)
+	else:
+		_customs_line("Zollgebiet", "eigenes")
+		_customs_line("Zoll", "%s, eigener Satz" % tariff)
+	if not request.is_empty():
+		_customs_line("Antrag", _request_text(request))
+	while _customs_rows.get_child_count() < unions.size():
+		_add_customs_row(_customs_rows.get_child_count())
+	for i in _customs_rows.get_child_count():
+		_customs_rows.get_child(i).visible = i < unions.size()
+	for u in unions.size():
+		_fill_customs_row(u, unions[u], current, requested)
+	_customs_withdraw.visible = not request.is_empty()
+	_customs_withdraw.disabled = _customs_sent != NO_CUSTOMS_CHOICE
+	if _customs_sent != NO_CUSTOMS_CHOICE:
+		_customs_note.text = "Der Antrag geht mit dem nächsten Tag hinaus."
+	_customs_note.visible = not _customs_note.text.is_empty()
+
+
+func _add_customs_row(index: int) -> void:
+	var row := HBoxContainer.new()
+	row.name = "Union%d" % index
+	row.add_theme_constant_override(&"separation", 8)
+	var swatch := ColorRect.new()
+	swatch.name = "Swatch"
+	swatch.custom_minimum_size = Vector2(12, 12)
+	swatch.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	row.add_child(swatch)
+	var texts := VBoxContainer.new()
+	texts.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	texts.add_theme_constant_override(&"separation", 0)
+	var name_label := Label.new()
+	name_label.name = "Name"
+	texts.add_child(name_label)
+	var values := Label.new()
+	values.name = "Values"
+	values.theme_type_variation = &"MutedLabel"
+	texts.add_child(values)
+	row.add_child(texts)
+	var action := Button.new()
+	action.name = "CustomsAction%d" % index
+	action.focus_mode = Control.FOCUS_NONE
+	action.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	action.pressed.connect(func() -> void: _ask_customs(int(action.get_meta(&"target", -1))))
+	row.add_child(action)
+	_customs_rows.add_child(row)
+
+
+func _fill_customs_row(index: int, union: Dictionary, current: int, requested: int) -> void:
+	var row := _customs_rows.get_child(index)
+	(row.get_node("Swatch") as ColorRect).color = union.get("color", UiPalette.BAR_NEUTRAL)
+	var leader := str(union.get("leader_name", ""))
+	(row.find_child("Name", true, false) as Label).text = "%s (Leitmacht %s)" % [
+		str(union.get("name", "")), leader
+	]
+	var dissolved := bool(union.get("dissolved", false))
+	(row.find_child("Values", true, false) as Label).text = (
+		"aufgelöst" if dissolved
+		else "%s · %s · %s" % [
+			GermanFormat.integer(int(union.get("member_count", 0))),
+			GermanFormat.percent(roundi(float(union.get("tariff_percent", 0.0)))),
+			GermanFormat.money(float(union.get("revenue_month", 0.0))),
+		]
+	)
+	var action := row.find_child("CustomsAction%d" % index, true, false) as Button
+	var target := -1 if index == current else index
+	action.set_meta(&"target", target)
+	var preview: Dictionary = customs_preview.call(target) if customs_preview.is_valid() else {}
+	var decision := str(preview.get("decision", "ungueltig"))
+	action.text = "Austreten …" if target < 0 else "Beitreten …"
+	action.tooltip_text = ""
+	if target == requested or target == _customs_sent:
+		action.text = "beantragt"
+	elif decision == "abgelehnt":
+		action.text = "%s lehnt ab" % leader
+		action.tooltip_text = "%s lässt %s nicht in den %s." % [
+			leader, str(_state.get("short_name", "")), str(union.get("name", ""))
+		]
+	elif dissolved and decision != "angenommen":
+		action.text = "aufgelöst"
+		action.tooltip_text = "Einer aufgelösten Union kann nur ihre frühere Leitmacht wieder beitreten."
+	action.disabled = (
+		decision != "angenommen" or target == requested or _customs_sent != NO_CUSTOMS_CHOICE
+	)
+
+
+func _customs_line(caption: String, value: String) -> void:
+	var left := Label.new()
+	left.text = caption
+	left.theme_type_variation = &"MutedLabel"
+	var right := Label.new()
+	right.text = value
+	right.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	right.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_customs_grid.add_child(left)
+	_customs_grid.add_child(right)
+
+
+## Rückfrage zu einem Wechsel (Ziel: Union oder -1; die eigene Union zieht den Antrag zurück).
+func _ask_customs(target: int) -> void:
+	var preview: Dictionary = customs_preview.call(target) if customs_preview.is_valid() else {}
+	var decision := str(preview.get("decision", "ungueltig"))
+	if decision != "angenommen" and decision != "zurueckgezogen":
+		return
+	_customs_choice = target
+	_customs_question.text = _question_text(preview, decision, target)
+	_customs_question_box.visible = true
+	_customs_note.text = ""
+	_customs_note.visible = false
+
+
+func _question_text(preview: Dictionary, decision: String, target: int) -> String:
+	var state_name := str(_state.get("short_name", ""))
+	var when := str(preview.get("effective_text", ""))
+	var current := str(preview.get("current_name", ""))
+	var joined := str(preview.get("target_name", ""))
+	if decision == "zurueckgezogen":
+		return "Den Antrag zurückziehen? %s bleibt %s." % [
+			state_name, "im " + current if not current.is_empty() else "ein eigenes Zollgebiet"
+		]
+	var text := ""
+	if joined.is_empty():
+		text = "%s tritt zum %s aus dem %s aus." % [state_name, when, current]
+	elif current.is_empty():
+		text = "%s tritt zum %s dem %s bei." % [state_name, when, joined]
+	else:
+		text = "%s verlässt zum %s den %s und tritt dem %s bei." % [state_name, when, current, joined]
+	if bool(preview.get("dissolves", false)):
+		text += " Ohne seine Leitmacht löst sich der %s dann auf; seine Mitglieder werden eigene Zollgebiete." % current
+	if joined.is_empty():
+		text += " Danach erhebt %s wieder einen eigenen Zoll." % state_name
+	else:
+		var unions: Array = customs_source.call() if customs_source.is_valid() else []
+		var tariff := float((unions[target] as Dictionary).get("tariff_percent", 0.0)) if target < unions.size() else 0.0
+		text += " Danach gilt der Tarif der Union (%s), und %s erhält einen Anteil an der Vereinskasse." % [
+			GermanFormat.percent(roundi(tariff)), state_name
+		]
+	return text
+
+
+func _confirm_customs() -> void:
+	if _customs_choice == NO_CUSTOMS_CHOICE:
+		return
+	_customs_sent = _customs_choice
+	_customs_choice = NO_CUSTOMS_CHOICE
+	_customs_question_box.visible = false
+	customs_change_requested.emit(_customs_sent)
+	if _customs_popup.visible:
+		_fill_customs()
+
+
+## Ein Antrag wurde nicht angenommen (main.gd): Knöpfe wieder frei, Meldung im Fenster.
+func reject_customs(message: String) -> void:
+	_customs_sent = NO_CUSTOMS_CHOICE
+	_customs_note.text = message
+	_customs_note.visible = true
+	if _customs_popup.visible:
+		_fill_customs()
+
+
+## „Beitritt zum Zollverein beantragt, wirksam zum 1. Januar 1849“ (customs_request aus get_state).
+func _request_text(request: Dictionary) -> String:
+	var joined := str(request.get("customs_union_name", ""))
+	var when := str(request.get("effective_text", ""))
+	if joined.is_empty():
+		var left := str(_state.get("customs_union_name", ""))
+		return "Austritt aus dem %s beantragt, wirksam zum %s" % [left, when]
+	return "Beitritt zum %s beantragt, wirksam zum %s" % [joined, when]
+
+
 func _politics_line(caption: String, value: String) -> void:
 	var left := Label.new()
 	left.text = caption
@@ -465,10 +880,13 @@ func _fill_budget() -> void:
 		var amount := float(taxes[kind]) if kind < taxes.size() else 0.0
 		income += amount
 		var rate := int(rates[kind]) if kind < rates.size() else 0
-		_budget_line(
-			"%s (%s)" % [TAX_NAMES[kind], GermanFormat.percent(rate)],
-			GermanFormat.signed_money(amount)
-		)
+		var caption := "%s (%s)" % [TAX_NAMES[kind], GermanFormat.percent(rate)]
+		# Mitglieder einer Zollunion erhalten ihren Anteil an der Vereinskasse (seit M9).
+		if kind == SimulationClient.TAX_ZOLL and bool(state.get("customs_locked", false)):
+			caption = "Zoll (Vereinskasse, Tarif %s)" % GermanFormat.percent(
+				roundi(float(state.get("customs_tariff_percent", 0.0)))
+			)
+		_budget_line(caption, GermanFormat.signed_money(amount))
 	_budget_line("Summe", GermanFormat.signed_money(income))
 	var soldiers := int(state.get("soldiers", 0))
 	var interest_percent := float(state.get("interest_percent", 0.0))

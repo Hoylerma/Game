@@ -85,17 +85,23 @@ func _test_launch_options() -> void:
 	_true(not defaults.wants_screenshot(), "ohne --screenshot kein Screenshot")
 	var bad_args := PackedStringArray(
 		[
-			"--tage=-3", "--kartenmodus=13", "--unbekannt", "--zoom=0", "--zoom=viel", "--szenario",
-			"--staat=", "--partei=", "--verfassung=ja"
+			"--tage=-3", "--kartenmodus=14", "--unbekannt", "--zoom=0", "--zoom=viel", "--szenario",
+			"--staat=", "--partei=", "--verfassung=ja", "--zollunion=ja"
 		]
 	)
 	var bad := LaunchOptions.parse(bad_args)
-	_equal(bad.problems.size(), 9, "fehlerhafte Optionen gemeldet")
+	_equal(bad.problems.size(), 10, "fehlerhafte Optionen gemeldet")
 	var party := LaunchOptions.parse(PackedStringArray(["--szenario=voelkerfruehling", "--partei=liberale"]))
 	_true(party.party_id == "liberale" and party.problems.is_empty(), "Option --partei (seit M8)")
 	_equal(defaults.party_id, "", "ohne --partei spielt man den Staat")
 	var politics := LaunchOptions.parse(PackedStringArray(["--verfassung"]))
 	_true(politics.show_politics and not defaults.show_politics, "Option --verfassung (seit M8)")
+	var customs := LaunchOptions.parse(PackedStringArray(["--zollunion", "--kartenmodus=13"]))
+	_true(
+		customs.show_customs and customs.map_mode == 13 and customs.problems.is_empty()
+		and not defaults.show_customs,
+		"Optionen --zollunion und --kartenmodus=13 (seit M9)"
+	)
 	var chosen := LaunchOptions.parse(
 		PackedStringArray(["--szenario=voelkerfruehling", "--staat=bav"])
 	)
@@ -195,13 +201,18 @@ func _test_legend_entries() -> void:
 	_true(str(entry["detail"]).contains("4.481 Orte"), "Anzahl der Orte ohne Daten")
 	_equal(LegendData.count_text(1), "1 Ort", "count_text Einzahl")
 	_equal(LegendData.count_text(1234), "1.234 Orte", "count_text Mehrzahl")
+	_equal(LegendData.states_text(1) + ", " + LegendData.states_text(26), "1 Staat, 26 Staaten", "states_text")
 	var swatch := LegendPanel.hatch_swatch()
 	_true(swatch.texture != null, "Schraffurfeld der Legende")
 	swatch.free()
 
 
 func _test_map_modes() -> void:
-	_equal(MapModes.COUNT, 13, "dreizehn Kartenmodi (Wahlen seit M8)")
+	_equal(MapModes.COUNT, 14, "vierzehn Kartenmodi (Zollgebiete seit M9)")
+	_equal(MapModes.MAP_ZOLLGEBIETE, 13, "Kartenmodus Zollgebiete = 13 (bridge-api.md)")
+	_equal(MapModes.KEY_HINTS[MapModes.MAP_ZOLLGEBIETE], "Ö", "Taste Ö für Zollgebiete")
+	_true(InputMap.has_action(&"kartenmodus_zollgebiete"), "Aktion für den Kartenmodus Zollgebiete")
+	_true(MapModes.DATA_MODES.has(MapModes.MAP_ZOLLGEBIETE), "Zollgebiete mit Schraffur")
 	_equal(MapModes.MAP_WAHLEN, 12, "Kartenmodus Wahlen = 12 (bridge-api.md)")
 	_equal(MapModes.KEY_HINTS[MapModes.MAP_WAHLEN], "Ä", "Taste Ä für Wahlen")
 	_true(InputMap.has_action(&"kartenmodus_wahlen"), "Aktion für den Kartenmodus Wahlen")

@@ -16,7 +16,8 @@ const MAP_MAERKTE := 9
 const MAP_VERWALTUNG := 10
 const MAP_EISENBAHNEN := 11
 const MAP_WAHLEN := 12
-const COUNT := 13
+const MAP_ZOLLGEBIETE := 13
+const COUNT := 14
 
 ## Anzeigenamen der Modi (Index = Modus).
 const NAMES: PackedStringArray = [
@@ -33,6 +34,7 @@ const NAMES: PackedStringArray = [
 	"Verwaltung",
 	"Eisenbahnen",
 	"Wahlen",
+	"Zollgebiete",
 ]
 
 ## Kurznamen für die Knöpfe der Modusleiste (Index = Modus); seit M4 kurz gehalten,
@@ -51,6 +53,7 @@ const SHORT_NAMES: PackedStringArray = [
 	"Verwaltung",
 	"Bahn",
 	"Wahlen",
+	"Zoll",
 ]
 
 ## Kurze Erklärung für Tooltips der Modusleiste.
@@ -68,6 +71,7 @@ const DESCRIPTIONS: PackedStringArray = [
 	"Verwaltungseinheiten der Staaten (Provinzen, Kronländer, Kreise); seit 1848",
 	"Eisenbahnstrecken und Bahnhöfe; Märkte mit Bahnanschluss handeln mit geringerer Fracht",
 	"Wahlkreise und Ergebnis der letzten Wahl: Farbe der siegreichen Strömung, kräftiger bei klarem Sieg; seit 1848",
+	"Zollunionen in ihrer Farbe, Staaten ohne Union blass: Zwischen den Gebieten wird Zoll erhoben",
 ]
 
 ## Aktionen der Eingabebelegung (project.godot), Index = Modus.
@@ -85,13 +89,14 @@ const ACTIONS: Array[StringName] = [
 	&"kartenmodus_verwaltung",
 	&"kartenmodus_eisenbahnen",
 	&"kartenmodus_wahlen",
+	&"kartenmodus_zollgebiete",
 ]
 
 ## Tastenbezeichnung für die Anzeige, Index = Modus. Die Belegung nutzt physische
 ## Tasten: „Z“ ist die Taste rechts neben T (auf englischen Tastaturen „Y“), „Ü“ die rechts
 ## neben P (englisch „[“), „+“ die rechts neben Ü (englisch „]“), „Ä“ die rechts neben Ö (englisch
-## „'“, seit M8).
-const KEY_HINTS: PackedStringArray = ["Q", "W", "E", "R", "T", "Z", "U", "I", "O", "P", "Ü", "+", "Ä"]
+## „'“, seit M8), „Ö“ die links neben Ä (englisch „;“, seit M9).
+const KEY_HINTS: PackedStringArray = ["Q", "W", "E", "R", "T", "Z", "U", "I", "O", "P", "Ü", "+", "Ä", "Ö"]
 
 ## Modi, deren Farben von der Simulation abhängen; dort erhalten Orte ohne Daten
 ## Alpha 0 (Schraffur „keine Daten“, bridge-api.md). Im Marktmodus gilt das nur für
@@ -108,6 +113,7 @@ const DATA_MODES: PackedInt32Array = [
 	MAP_VERWALTUNG,
 	MAP_EISENBAHNEN,
 	MAP_WAHLEN,
+	MAP_ZOLLGEBIETE,
 ]
 
 ## Obergrenze der Dichteskala der Brücke (≥ 120 Einwohner je km² → dunkelste Farbe).

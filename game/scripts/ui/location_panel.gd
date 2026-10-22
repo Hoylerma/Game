@@ -39,6 +39,8 @@ var confession_colors := {}
 var culture_colors := {}
 ## Zeile „Deutscher Bund“ zeigen (seit M7: nur in Szenarien mit Bundesgebiet, main.gd).
 var show_federation := false
+## Zeile „Zollgebiet“ zeigen (seit M9: nur in Szenarien mit Zollunionen, main.gd).
+var show_customs := false
 ## Spielerstaat; der Knopf „Diesen Staat spielen“ erscheint bei Orten anderer Staaten (seit M7).
 var player_index := -1
 ## Parteienmodus (seit M8, set_party_mode): Abschnitt Wahl ganz oben, kein „Diesen Staat spielen“.
@@ -71,6 +73,8 @@ var _max_height := 100000.0
 @onready var _admin: Label = %Admin
 @onready var _federal_caption: Label = %FederalCaption
 @onready var _federal: Label = %Federal
+@onready var _customs_caption: Label = %CustomsCaption
+@onready var _customs: Label = %Customs
 @onready var _rail_caption: Label = %RailCaption
 @onready var _rail: Label = %Rail
 @onready var _no_data_note: Label = %NoDataNote
@@ -230,6 +234,13 @@ func show_location(location: Dictionary, owner_color: Color) -> void:
 	_federal.text = "Bundesgebiet" if federal else "außerhalb"
 	_federal_caption.visible = show_federation and has_data
 	_federal.visible = show_federation and has_data
+	# Zollgebiet (seit M9): Union oder Besitzer, mit dem Tarif an seiner Grenze.
+	var zone := str(location.get("customs_zone_name", ""))
+	_customs.text = "%s (Zoll %s)" % [
+		zone, GermanFormat.percent(roundi(float(location.get("customs_tariff_percent", 0.0))))
+	]
+	_customs_caption.visible = show_customs and has_data and not zone.is_empty()
+	_customs.visible = _customs_caption.visible
 	# Eisenbahn (seit M7): Strecken mit eröffnetem Abschnitt an diesem Ort, mit Jahr.
 	var lines: PackedStringArray = location.get("eisenbahnen", PackedStringArray())
 	_rail.text = ", ".join(lines)

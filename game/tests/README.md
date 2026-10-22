@@ -30,7 +30,8 @@ Detailstufen (`MapDetail`: je Ortsgröße genau eine Namen-Ebene, Grenzen nach Z
 Ebene der Rückfall auf die nächste, `MapLabels.shown_tier`) und `LocationCatalog` (auch die
 Zählung der Kreise mit Orten für die Legende). Seit M8 auch die Rechnungen des Wahlabends
 (`ElectionTally`: Meldereihenfolge, Hochrechnung, Halbrund, Telegramme), `--wahlabend`,
-`--partei`, `--verfassung` und das Parteipanel (Angaben vor und nach der Wahl).
+`--partei`, `--verfassung` und das Parteipanel (Angaben vor und nach der Wahl); seit M9 der
+Kartenmodus „Zollgebiete“ mit Taste Ö, `--zollunion` und `LegendData.states_text`.
 
 Dazu legt der Test unter `user://unit_test_karte` eine kleine Testkarte an (8 × 6 Pixel mit
 drei Orten, Meer, See und Ausland), lädt sie mit `MapData` (Kartenindex und Flächenart je
@@ -60,11 +61,11 @@ Prüft die GDExtension und die Kartendaten ohne Szene und ohne Grafikausgabe:
    `get_location_index` passt zu jedem Ort
 4. ungültige Indizes und Befehle werden abgewiesen (leere Rückgabe bzw. `false`, auch
    `get_kreis`, `get_kreis_index`, `get_market` und `set_tax_percent` mit ungültiger Steuerart)
-5. `get_map_colors` liefert für alle zehn Kartenmodi eine Farbe je Ort
+5. `get_map_colors` liefert für alle Kartenmodi (seit M9 vierzehn) eine Farbe je Ort
 6. Orte ohne Daten und Kreise: `get_location_owner_indices` und `get_location_kreis_indices`
    passen zu `get_location`; Orte ohne Daten haben keinen Besitzer und keine Bevölkerung;
    `get_kreis` hat alle Felder, `get_kreis_index` passt, `location_count` stimmt; Alpha der
-   Kartenfarben ist 0 genau für Orte ohne Daten in den Modi 0, 1, 2, 4, 6, 7 und 8, im Modus 9
+   Kartenfarben ist 0 genau für Orte ohne Daten in den Modi 0, 1, 2, 4, 6, 7, 8 und 10 bis 13, im Modus 9
    (Märkte) nur für Orte ohne Daten in Märkten ohne Orte mit Daten, sonst 1
 7. Wirtschaft (seit M5): Märkte mit allen Feldern und Preisen, Marktindex je Ort, jeder Ort mit
    Daten in einem aktiven Markt; Steuern je Art ergeben die Einnahmen, die Posten die Ausgaben;
@@ -95,7 +96,12 @@ Prüft die GDExtension und die Kartendaten ohne Szene und ohne Grafikausgabe:
     wird abgelehnt), die Rolle steht im Spielstand; nach der Wahl passen die Sitze der Partei zum
     Ergebnis, der Wahlkampf zur Nationalversammlung ist beendet, und Berlin hat einen offenen
     Wahlkreis der Preußischen Zweiten Kammer. Dazu „Verfassung und Gruppen“ für Baden; 1648 hat
-    weder diese Angaben noch einen Parteienmodus
+    weder diese Angaben noch einen Parteienmodus. Seit M9 die Zollunionen: Zollverein mit
+    26 Staaten unter Preußen und Tarif 10 %, Steuerverein mit 3; Preußens Zollregler gesperrt
+    (`set_tax_percent` lehnt ab) mit Anteil an der Vereinskasse; Vorab-Prüfung (Hannover zum
+    1. Januar 1849, der Steuerverein löst sich auf; Österreich abgelehnt); Kartenmodus
+    „Zollgebiete“ und Zollgebiet in der Ortsinfo; Hannovers Antrag steht am nächsten Tag im
+    Staat und in der Chronik. 1648 gibt es keine Union und keinen Beitritt
 
 Am Ende steht `SMOKE OK` (Exitcode 0) oder `SMOKE FEHLGESCHLAGEN` mit allen Fehlern (Exitcode 1).
 
@@ -165,6 +171,13 @@ echten Daten und prüft:
      Ergebnis.
    - Ab dem Fraktionsstichtag (Oktober 1848) passt der Wahlabend mit acht Fraktionen ins Bild, und
      die stärkste Fraktion ist nicht „fraktionslos“.
+9. **Zollunion** (seit M9): Taste Ö schaltet in den Kartenmodus „Zollgebiete“, die Legende nennt
+   den Zollverein mit 26 Staaten; der Zollregler Bayerns ist gesperrt und steht auf 10 %; die
+   Ortsinfo von Hamburg nennt das Zollgebiet. Als Hannover öffnet „Zollunion …“ das Fenster mit
+   „Beitreten …“ und „Austreten …“; der Beitritt zum Zollverein fragt mit Zeitpunkt und Auflösung
+   des Steuervereins nach, „Antrag stellen“ sperrt den Knopf („beantragt“), am nächsten Tag
+   stehen der Antrag im Fenster und im Hinweis des Staatspanels und der Eintrag in der Chronik;
+   „Antrag zurückziehen …“ nimmt ihn mit Rückfrage zurück.
 
 ```bash
 godot --headless --path game --script res://tests/klick_test.gd

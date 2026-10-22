@@ -200,8 +200,8 @@ TEST_CASE("Zoll: Handel über die Zollgrenze und fremder Einfuhranteil") {
     const uhrwerk::EconomyTopology topology = uhrwerk::build_economy_topology(plain);
     const auto with_unions = [&](bool together) {
         World w = plain;
-        w.customs_unions = {uhrwerk::CustomsUnion{"mittelbund", "Mittelbund", sax, fx(10, 100), {}, ""},
-                            uhrwerk::CustomsUnion{"nordbund", "Nordbund", bra, fx(10, 100), {}, ""}};
+        w.customs_unions = {uhrwerk::CustomsUnion{"mittelbund", "Mittelbund", sax, fx(10, 100), {}, {}, ""},
+                            uhrwerk::CustomsUnion{"nordbund", "Nordbund", bra, fx(10, 100), {}, {}, ""}};
         w.states[static_cast<std::size_t>(sax)].customs_union = 0;
         w.states[static_cast<std::size_t>(anh)].customs_union = 0;
         w.states[static_cast<std::size_t>(bra)].customs_union = together ? 0 : 1;
@@ -292,6 +292,20 @@ TEST_CASE("Zoll: Befehl Zollunion zum 1. Januar") {
         sim.step_day();
         CHECK(w.customs_requests.empty());
         CHECK(w.chronicle.size() == entries);
+    }
+    SUBCASE("Vorab-Prüfung ohne Wirkung") {
+        using uhrwerk::evaluate_customs_change;
+        CHECK(evaluate_customs_change(w, anh, 0) == CustomsDecision::Accepted);
+        CHECK(evaluate_customs_change(w, anh, 1) == CustomsDecision::Rejected);
+        CHECK(evaluate_customs_change(w, anh, 2) == CustomsDecision::Invalid);
+        CHECK(evaluate_customs_change(w, anh, kNone) == CustomsDecision::Invalid);
+        CHECK(evaluate_customs_change(w, sax, kNone) == CustomsDecision::Accepted); // Leitmacht: Auflösung
+        CHECK(w.customs_requests.empty());
+        CHECK(uhrwerk::customs_effective_date(Date{1648, 10, 24}) == Date{1649, 1, 1});
+        CHECK(uhrwerk::customs_effective_date(Date{1649, 1, 1}) == Date{1649, 1, 1});
+        sim.submit(customs_command(anh, 0));
+        sim.step_day();
+        CHECK(evaluate_customs_change(w, anh, kNone) == CustomsDecision::Withdrawn);
     }
     SUBCASE("Ausschluss und ungültige Befehle") {
         const std::size_t entries = w.chronicle.size();

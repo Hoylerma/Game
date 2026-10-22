@@ -424,6 +424,7 @@ struct CustomsUnion {
     Index leader = kNone;        // Leitmacht (Staat): entscheidet über Beitritte (Abschnitt 3.5)
     Fixed tariff;                // Vereinstarif: Zollsatz aller Mitglieder
     std::vector<Index> excluded; // Staaten, deren Beitritt die Leitmacht ablehnt (Spielwert bis M12)
+    Color color{90, 90, 90};     // Kartenmodus „Zollgebiete“ (seit Schritt a4, nur Anzeige)
     std::string source;
 };
 
