@@ -31,7 +31,9 @@ Ebene der Rückfall auf die nächste, `MapLabels.shown_tier`) und `LocationCatal
 Zählung der Kreise mit Orten für die Legende). Seit M8 auch die Rechnungen des Wahlabends
 (`ElectionTally`: Meldereihenfolge, Hochrechnung, Halbrund, Telegramme), `--wahlabend`,
 `--partei`, `--verfassung` und das Parteipanel (Angaben vor und nach der Wahl); seit M9 der
-Kartenmodus „Zollgebiete“ mit Taste Ö, `--zollunion` und `LegendData.states_text`.
+Kartenmodus „Zollgebiete“ mit Taste Ö, `--zollunion` und `LegendData.states_text`, der Kartenmodus
+„Beziehungen“ mit Taste #, `--diplomatie[=staaten|bund|frage]` und die Farben der Beziehungen
+(`LegendData.relation_color`).
 
 Dazu legt der Test unter `user://unit_test_karte` eine kleine Testkarte an (8 × 6 Pixel mit
 drei Orten, Meer, See und Ausland), lädt sie mit `MapData` (Kartenindex und Flächenart je
@@ -61,11 +63,11 @@ Prüft die GDExtension und die Kartendaten ohne Szene und ohne Grafikausgabe:
    `get_location_index` passt zu jedem Ort
 4. ungültige Indizes und Befehle werden abgewiesen (leere Rückgabe bzw. `false`, auch
    `get_kreis`, `get_kreis_index`, `get_market` und `set_tax_percent` mit ungültiger Steuerart)
-5. `get_map_colors` liefert für alle Kartenmodi (seit M9 vierzehn) eine Farbe je Ort
+5. `get_map_colors` liefert für alle Kartenmodi (seit M9 fünfzehn) eine Farbe je Ort
 6. Orte ohne Daten und Kreise: `get_location_owner_indices` und `get_location_kreis_indices`
    passen zu `get_location`; Orte ohne Daten haben keinen Besitzer und keine Bevölkerung;
    `get_kreis` hat alle Felder, `get_kreis_index` passt, `location_count` stimmt; Alpha der
-   Kartenfarben ist 0 genau für Orte ohne Daten in den Modi 0, 1, 2, 4, 6, 7, 8 und 10 bis 13, im Modus 9
+   Kartenfarben ist 0 genau für Orte ohne Daten in den Modi 0, 1, 2, 4, 6, 7, 8 und 10 bis 14, im Modus 9
    (Märkte) nur für Orte ohne Daten in Märkten ohne Orte mit Daten, sonst 1
 7. Wirtschaft (seit M5): Märkte mit allen Feldern und Preisen, Marktindex je Ort, jeder Ort mit
    Daten in einem aktiven Markt; Steuern je Art ergeben die Einnahmen, die Posten die Ausgaben;
@@ -101,7 +103,15 @@ Prüft die GDExtension und die Kartendaten ohne Szene und ohne Grafikausgabe:
     (`set_tax_percent` lehnt ab) mit Anteil an der Vereinskasse; Vorab-Prüfung (Hannover zum
     1. Januar 1849, der Steuerverein löst sich auf; Österreich abgelehnt); Kartenmodus
     „Zollgebiete“ und Zollgebiet in der Ortsinfo; Hannovers Antrag steht am nächsten Tag im
-    Staat und in der Chronik. 1648 gibt es keine Union und keinen Beitritt
+    Staat und in der Chronik. 1648 gibt es keine Union und keinen Beitritt. Seit M9, Schritt b3
+    die Diplomatie: Preußen mit Gesandten, Österreich als Gegner (−30), Bayern im Lager
+    Österreichs; Vorab-Prüfung der Handlungen (Gesandter und Forderung möglich, Bündnis abgelehnt);
+    Bundesversammlung mit Präsidium Österreich, 68 Plenarstimmen und 17 im Engeren Rat; Prognose
+    einer Bundesreform; Gesandter, Antrag und Forderung werden angenommen, ungültige abgewiesen;
+    am nächsten Tag laufen die Krise „Führung im Bund“ (Stufe 1) und der Antrag, der Gesandte ist
+    in München; nach dem Nachgeben Preußens und 40 Tagen ist die Krise beendet und die Reform
+    abgestimmt („Die deutsche Frage“); im Kartenmodus „Beziehungen“ hat der Spielerstaat seine
+    Farbe. 1648 gibt es weder Beziehungen noch Bundesversammlung noch Krisen
 
 Am Ende steht `SMOKE OK` (Exitcode 0) oder `SMOKE FEHLGESCHLAGEN` mit allen Fehlern (Exitcode 1).
 
@@ -178,6 +188,13 @@ echten Daten und prüft:
    des Steuervereins nach, „Antrag stellen“ sperrt den Knopf („beantragt“), am nächsten Tag
    stehen der Antrag im Fenster und im Hinweis des Staatspanels und der Eintrag in der Chronik;
    „Antrag zurückziehen …“ nimmt ihn mit Rückfrage zurück.
+10. **Diplomatie** (seit M9, Schritt b3): Taste # schaltet in den Kartenmodus „Beziehungen“ mit
+    Legende. Als Preußen öffnet „Diplomatie …“ das Fenster; ein Gesandter nach Bayern steht am
+    nächsten Tag in der Liste und im Haushalt (Posten „Gesandte“). Die Forderung „Führung im Bund“
+    an Österreich fragt mit den Seiten der Krise nach; am nächsten Tag zeigt die Krisenleiste die
+    Krise über dem Fenster (ohne Überlappung, das Fenster bleibt über der Leiste der Kartenmodi),
+    „Nachgeben“ beendet sie. Im Reiter „Bundesversammlung“ wird eine Bundesreform beantragt, die am
+    nächsten Tag als offener Antrag erscheint; Esc schließt das Fenster.
 
 ```bash
 godot --headless --path game --script res://tests/klick_test.gd

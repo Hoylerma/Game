@@ -533,6 +533,7 @@ func _check_new_game() -> void:
 	await _check_party_mode(sim)
 	await _check_election_night(sim)
 	await _check_customs_ui(sim)
+	await _check_diplomacy_ui(sim)
 
 	# Ein Spielstand von 1648 lässt sich im Spiel von 1848 aus der Liste laden.
 	_main.call("open_game_menu")
@@ -709,6 +710,107 @@ func _check_customs_ui(sim: SimulationClient) -> void:
 	(state_panel.find_child("CustomsPopup", true, false) as PopupPanel).hide()
 	_main.call("set_map_mode", MapModes.MAP_POLITICAL)
 	print("  Zollunion: Taste Ö, Zollregler gesperrt, Hannover beantragt den Beitritt zum %s und zieht ihn zurück" % effective)
+
+
+## Diplomatie (seit M9, Schritt b3, diplomatie.md Abschnitt 6): Taste # mit Legende; Preußen
+## öffnet das Fenster „Diplomatie“ über das Staatspanel, entsendet einen Gesandten nach Bayern
+## (Posten „Gesandte“ im Haushalt), fordert von Österreich die Führung im Bund (mit Rückfrage), sieht
+## die Krisenleiste über dem Fenster und gibt nach; ein Antrag in der Bundesversammlung; Escape schließt.
+func _check_diplomacy_ui(sim: SimulationClient) -> void:
+	await _key(KEY_BACKSLASH)
+	var legend := _texts(_main.get("_legend"))
+	if int(_main.call("map_mode")) != MapModes.MAP_BEZIEHUNGEN or not legend.contains("freundlich ("):
+		_fail("Taste #: Modus %d, Legende „%s“" % [int(_main.call("map_mode")), legend.left(160)])
+	var prussia := sim.get_state_index("PRU")
+	var austria := sim.get_state_index("AUT")
+	var bavaria := sim.get_state_index("BAV")
+	_main.call("play_state", prussia)
+	await _frames(1)
+	var state_panel: StatePanel = _main.call("state_panel")
+	var window: DiplomacyWindow = _main.call("diplomacy_window")
+	var bar: PlayBar = _main.call("play_bar")
+	var button := state_panel.find_child("DiplomacyButton", true, false) as Button
+	if button == null or not button.visible:
+		_fail("Staatspanel Preußen: Knopf „Diplomatie …“ fehlt")
+		return
+	button.pressed.emit()
+	await _frames(2)
+	if not window.is_open() or window.current_tab() != 0 or not window.window_text().contains("Gesandte 0 von"):
+		_fail("Fenster Diplomatie: offen %s, „%s“" % [window.is_open(), window.window_text().left(200)])
+		return
+	# Gesandter nach Bayern.
+	(window.find_child("State%d" % bavaria, true, false) as Button).pressed.emit()
+	await _frames(1)
+	var send := window.find_child("Action_envoy_send", true, false) as Button
+	if window.selected_state() != bavaria or send == null or send.disabled:
+		_fail("Bayern gewählt: %d, Knopf Gesandter %s" % [window.selected_state(), "fehlt" if send == null else "gesperrt"])
+		return
+	send.pressed.emit()
+	await _frames(1)
+	if not window.window_text().contains("Gesandter nach Bayern entsandt"):
+		_fail("Gesandter: keine Rückmeldung („%s“)" % window.window_text().right(300))
+	sim.advance_days(1)
+	_main.call("_after_time_passed")
+	window.refresh(true)
+	if not window.window_text().contains("unser Gesandter"):
+		_fail("Gesandter am nächsten Tag nicht in der Liste („%s“)" % window.window_text().left(300))
+	state_panel.show_budget()
+	await _frames(1)
+	if not state_panel.budget_text().contains("Gesandte"):
+		_fail("Haushalt Preußens ohne Posten „Gesandte“")
+	state_panel.hide_popups()
+	# Forderung an Österreich mit Rückfrage; die Krise steht am nächsten Tag in der Leiste.
+	window.select_state(austria)
+	(window.find_child("Action_demand_leadership", true, false) as Button).pressed.emit()
+	await _frames(1)
+	var question := window.find_child("DemandQuestion", true, false) as Control
+	if not question.visible or not window.window_text().contains("Führung im Bund fordern? Das löst eine Krise aus"):
+		_fail("Rückfrage zur Forderung: „%s“" % window.window_text().right(400))
+		return
+	(window.find_child("DemandConfirm", true, false) as Button).pressed.emit()
+	await _frames(1)
+	sim.advance_days(1)
+	_main.call("_after_time_passed")
+	await _frames(2)
+	if not bar.visible or not bar.bar_text().contains("KRISE: Preußen fordert von Österreich: Führung im Bund"):
+		_fail("Krisenleiste: sichtbar %s, „%s“" % [bar.visible, bar.bar_text()])
+		return
+	var modes_top := (_main.get("_mode_bar_area") as Control).get_global_rect().position.y
+	if window.get_global_rect().intersects(bar.get_global_rect()) or window.get_global_rect().end.y > modes_top:
+		_fail("Fenster %s, Krisenleiste %s und Leiste der Kartenmodi (ab %s) überlappen" % [
+			window.get_global_rect(), bar.get_global_rect(), modes_top
+		])
+	var give_in := bar.find_child("Yield", true, false) as Button
+	if give_in == null or not give_in.is_visible_in_tree():
+		_fail("Krisenleiste ohne Knopf „Nachgeben“")
+		return
+	give_in.pressed.emit()
+	await _frames(1)
+	if not bar.bar_text().contains("Wir geben nach"):
+		_fail("Nachgeben: keine Rückmeldung („%s“)" % bar.bar_text())
+	sim.advance_days(1)
+	_main.call("_after_time_passed")
+	await _frames(1)
+	if bar.visible or (sim.get_german_question().get("play_results", []) as Array).size() != 1:
+		_fail("Nach dem Nachgeben: Leiste sichtbar %s, Ergebnisse %s" % [bar.visible, sim.get_german_question().get("play_results")])
+	# Antrag auf eine Bundesreform im Reiter „Bundesversammlung“.
+	(window.find_child("Tab1", true, false) as Button).pressed.emit()
+	await _frames(1)
+	var reform := window.find_child("Motion%d_-1" % SimulationClient.MOTION_REFORM, true, false) as Button
+	if window.current_tab() != 1 or reform == null or reform.disabled:
+		_fail("Reiter Bundesversammlung: %d, Antrag Bundesreform %s" % [window.current_tab(), "fehlt" if reform == null else "gesperrt"])
+		return
+	reform.pressed.emit()
+	sim.advance_days(1)
+	_main.call("_after_time_passed")
+	window.refresh(true)
+	if not window.window_text().contains("Offener Antrag von Preußen: Bundesreform"):
+		_fail("Antrag am nächsten Tag nicht offen („%s“)" % window.window_text().right(400))
+	await _key(KEY_ESCAPE)
+	if window.is_open():
+		_fail("Escape schließt das Fenster Diplomatie nicht")
+	_main.call("set_map_mode", MapModes.MAP_POLITICAL)
+	print("  Diplomatie: Taste #, Gesandter nach Bayern, Krise um die Führung im Bund mit Nachgeben, Antrag Bundesreform")
 
 
 ## Wahlen 1848 (seit M8): Taste Ä, Wahlkreis in der Ortsinfo, Wahlabend am Wahltag mit Meldungen,

@@ -4,15 +4,17 @@ extends RefCounted
 ##
 ##   --screenshot=<pfad>    nach dem Laden simulieren, Bild speichern, beenden
 ##   --tage=<n>             Tage vor dem Screenshot (Standard 60)
-##   --kartenmodus=<0..13>  Kartenmodus (0 Politisch … 5 Kreise, 6 Lebensstandard, 7 Kultur,
+##   --kartenmodus=<0..14>  Kartenmodus (0 Politisch … 5 Kreise, 6 Lebensstandard, 7 Kultur,
 ##                          8 Wirtschaft, 9 Märkte, 10 Verwaltung, 11 Eisenbahnen, 12 Wahlen,
-##                          13 Zollgebiete)
+##                          13 Zollgebiete, 14 Beziehungen)
 ##   --ort=<ort_id>         Ort auswählen und Ortsinfo öffnen
 ##   --zoom=<faktor>        Vergrößerung gegenüber der Übersicht (1 = ganze Karte);
 ##                          zentriert auf --ort, sonst auf die Kartenmitte (bis 1: Übersicht)
 ##   --haushalt             Haushaltsfenster des Spielerstaates öffnen (seit M5)
 ##   --verfassung           Fenster „Verfassung und Gruppen“ des Spielerstaates öffnen (seit M8)
 ##   --zollunion            Fenster „Zollunion“ des Spielerstaates öffnen (seit M9)
+##   --diplomatie[=<reiter>]  Fenster „Diplomatie“ öffnen, Reiter staaten (Standard), bund oder
+##                          frage (seit M9, nur mit dem Deutschen Bund)
 ##   --spielmenue           Spielmenü öffnen (seit M6)
 ##   --szenario=<id>        Szenario beim Start (seit M7; Standard westfaelischer_frieden)
 ##   --staat=<TAG>          Spielerstaat beim Start (seit M7; Standard: Spieler des Szenarios)
@@ -20,6 +22,8 @@ extends RefCounted
 ##   --partei=<strömung>    Parteienmodus mit dieser Strömung, z. B. liberale (seit M8)
 
 const DEFAULT_SCREENSHOT_DAYS := 60
+## Reiter des Fensters „Diplomatie“ für --diplomatie=<reiter>.
+const DIPLOMACY_TABS: PackedStringArray = ["staaten", "bund", "frage"]
 
 var screenshot_path := ""
 var days := DEFAULT_SCREENSHOT_DAYS
@@ -33,6 +37,9 @@ var show_budget := false
 var show_politics := false
 ## Fenster „Zollunion“ vor dem Screenshot öffnen (seit M9).
 var show_customs := false
+## Reiter des Fensters „Diplomatie“ vor dem Screenshot (seit M9): 0 Staaten, 1 Bundesversammlung,
+## 2 Deutsche Frage; -1 = geschlossen.
+var diplomacy_tab := -1
 var show_game_menu := false
 ## Wahlabend der letzten Wahl vor dem Screenshot öffnen (seit M8).
 var show_election_night := false
@@ -103,6 +110,14 @@ static func parse(args: PackedStringArray) -> LaunchOptions:
 					options.show_customs = true
 				else:
 					options.problems.append("--zollunion erwartet keinen Wert, nicht „%s“." % value)
+			"--diplomatie":
+				var tab := DIPLOMACY_TABS.find(value if not value.is_empty() else "staaten")
+				if tab >= 0:
+					options.diplomacy_tab = tab
+				else:
+					options.problems.append(
+						"--diplomatie erwartet staaten, bund oder frage, nicht „%s“." % value
+					)
 			"--spielmenue":
 				if value.is_empty():
 					options.show_game_menu = true

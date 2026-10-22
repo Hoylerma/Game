@@ -46,6 +46,7 @@ public:
         MAP_EISENBAHNEN = 11,   // seit M7
         MAP_WAHLEN = 12,        // seit M8
         MAP_ZOLLGEBIETE = 13,   // seit M9
+        MAP_BEZIEHUNGEN = 14,   // seit M9 (b3)
     };
 
     /// Steuerarten für set_tax_percent (seit M5, wie uhrwerk::TaxKind).
@@ -60,6 +61,25 @@ public:
         CAMPAIGN_VERSAMMLUNG = 0,
         CAMPAIGN_FLUGBLAETTER = 1,
         CAMPAIGN_VEREIN = 2,
+    };
+
+    /// Diplomatie (seit M9, Schritt b3): Vertragshandlungen, Anträge, Forderungen und Manöver, wie
+    /// uhrwerk::TreatyAction, MotionKind, DemandKind und Manoeuvre.
+    enum DiplomacyKind : std::int64_t {
+        TREATY_ALLIANCE = 0,
+        TREATY_GUARANTEE = 1,
+        TREATY_CANCEL_ALLIANCE = 2,
+        TREATY_CANCEL_GUARANTEE = 3,
+        MOTION_REFORM = 0,
+        MOTION_CUSTOMS = 1,
+        MOTION_INTERVENTION = 2,
+        MOTION_PRESIDENCY = 3,
+        DEMAND_LEADERSHIP = 0,
+        DEMAND_CUSTOMS_UNION = 1,
+        DEMAND_BREAK_ALLIANCE = 2,
+        MANOEUVRE_YIELD = 0,
+        MANOEUVRE_MEDIATE = 1,
+        MANOEUVRE_ESCALATE = 2,
     };
 
     static constexpr std::int64_t kMaxAdvanceDays = 3660;
@@ -123,6 +143,21 @@ public:
     godot::Dictionary get_customs_change(std::int64_t state_index, std::int64_t customs_union) const;
     bool request_customs_union(std::int64_t state_index, std::int64_t customs_union);
 
+    // Diplomatie (seit M9, Schritt b3, diplomatie.md Abschnitt 6)
+    godot::Array get_relations(std::int64_t state_index) const;
+    godot::Dictionary get_diplomacy(std::int64_t state_index) const;
+    godot::Dictionary get_diplomacy_actions(std::int64_t state_index, std::int64_t target) const;
+    bool send_envoy(std::int64_t state_index, std::int64_t target, bool send);
+    bool propose_treaty(std::int64_t state_index, std::int64_t target, std::int64_t action);
+    godot::Dictionary get_diet() const;
+    godot::Dictionary get_motion_preview(std::int64_t applicant, std::int64_t kind,
+                                         std::int64_t target) const;
+    bool file_motion(std::int64_t applicant, std::int64_t kind, std::int64_t target);
+    godot::Array get_diplomatic_plays() const;
+    bool make_demand(std::int64_t demander, std::int64_t target, std::int64_t kind);
+    bool manoeuvre(std::int64_t state_index, std::int64_t kind);
+    godot::Dictionary get_german_question() const;
+
     // Parteienmodus (seit M8, Schritt b2, politik.md Abschnitt 9)
     bool campaign(std::int64_t current, std::int64_t district, std::int64_t action);
     godot::Dictionary get_party(std::int64_t current) const;
@@ -184,3 +219,4 @@ private:
 VARIANT_ENUM_CAST(uhrwerk_bridge::UhrwerkSimulation::MapMode);
 VARIANT_ENUM_CAST(uhrwerk_bridge::UhrwerkSimulation::TaxKind);
 VARIANT_ENUM_CAST(uhrwerk_bridge::UhrwerkSimulation::CampaignKind);
+VARIANT_ENUM_CAST(uhrwerk_bridge::UhrwerkSimulation::DiplomacyKind);

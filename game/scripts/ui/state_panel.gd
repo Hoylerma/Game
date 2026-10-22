@@ -13,6 +13,8 @@ signal tax_rate_requested(kind: int, percent: int)
 ## Wechsel der Zollunion gewünscht (seit M9): Index der Union, -1 für den Austritt. Die Union, der
 ## der Staat schon angehört, zieht einen offenen Antrag zurück.
 signal customs_change_requested(customs_union: int)
+## Fenster „Diplomatie“ öffnen oder schließen (seit M9, Schritt b3).
+signal diplomacy_requested
 
 ## Namen der Steuerarten, Index = SimulationClient.TAX_*.
 const TAX_NAMES: PackedStringArray = ["Kontribution", "Akzise", "Zoll"]
@@ -63,6 +65,9 @@ var _customs_choice := NO_CUSTOMS_CHOICE
 var _customs_sent := NO_CUSTOMS_CHOICE
 var _customs_filled_at := 0
 var _tax_rows: Array[HBoxContainer] = []
+## Diplomatie (seit M9, Schritt b3): Knopf, nur in Szenarien mit Deutschem Bund.
+var _diplomacy_available := false
+var _diplomacy_button: Button = null
 
 @onready var _coat: CoatOfArms = %Coat
 @onready var _name: Label = %StateName
@@ -89,6 +94,7 @@ func _ready() -> void:
 	_budget_button.pressed.connect(show_budget)
 	_build_politics()
 	_build_customs()
+	_build_diplomacy()
 	show_unavailable()
 
 
@@ -169,6 +175,7 @@ func show_state(state: Dictionary, capital_name: String) -> void:
 		) if locked else TAX_TOOLTIPS[SimulationClient.TAX_ZOLL]
 	)
 	_update_customs(state)
+	_diplomacy_button.visible = _diplomacy_available
 	_update_hint()
 	_budget_button.disabled = false
 	if _budget_popup.visible:
@@ -204,6 +211,8 @@ func show_unavailable() -> void:
 	if _customs_popup != null:
 		_customs_button.visible = false
 		_customs_popup.hide()
+	if _diplomacy_button != null:
+		_diplomacy_button.visible = false
 	if _politics_popup != null:
 		_politics_button.visible = false
 		_politics_popup.hide()
@@ -217,6 +226,13 @@ func clear_pending() -> void:
 	_customs_choice = NO_CUSTOMS_CHOICE
 	if _customs_note != null:
 		_customs_note.text = ""
+
+
+## Szenario mit Deutschem Bund (seit M9, Schritt b3): Knopf „Diplomatie …“ zeigen.
+func set_diplomacy_available(available: bool) -> void:
+	_diplomacy_available = available
+	if _diplomacy_button != null and not _state.is_empty():
+		_diplomacy_button.visible = available
 
 
 ## Szenario mit Zollunionen (seit M9): Knopf „Zollunion …“ zeigen.
@@ -549,6 +565,22 @@ func _fill_politics() -> bool:
 		row.add_child(values)
 		_politics_groups.add_child(row)
 	return true
+
+
+func _build_diplomacy() -> void:
+	_diplomacy_button = Button.new()
+	_diplomacy_button.name = "DiplomacyButton"
+	_diplomacy_button.text = "Diplomatie …"
+	_diplomacy_button.focus_mode = Control.FOCUS_NONE
+	_diplomacy_button.tooltip_text = (
+		"Beziehungen, Gesandte, Bündnisse und Garantien, Forderungen, die Bundesversammlung und die "
+		+ "deutsche Frage"
+	)
+	_diplomacy_button.visible = false
+	_diplomacy_button.pressed.connect(func() -> void: diplomacy_requested.emit())
+	var parent := _budget_button.get_parent()
+	parent.add_child(_diplomacy_button)
+	parent.move_child(_diplomacy_button, _customs_button.get_index() + 1)
 
 
 func _build_customs() -> void:
@@ -897,6 +929,9 @@ func _fill_budget() -> void:
 		["Zinsen (%s)" % GermanFormat.percent(interest_percent, 1), "interest_month"],
 		["Bauten (Landesausbau)", "building_month"],
 	]
+	# Gesandte (seit M9, Schritt b1): eigener Posten, nur mit Diplomatie.
+	if bool(state.get("diplomacy", false)):
+		items.append(["Gesandte", "envoy_cost_month"])
 	var expenses := 0.0
 	_budget_line("Ausgaben", "", true)
 	for item: Array in items:

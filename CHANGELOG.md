@@ -72,6 +72,18 @@ freigegeben; Stand je Schritt in Abschnitt 11 dort.
     kostet das 1,5-Fache des Heeres.
   - `uhrwerk-cli info` zeigt die Bundesversammlung. Spielstände 1848 aus Schritt b1 laden nicht mehr;
     1648 bitgleich.
+- **Diplomatie in Godot (Schritt b3):**
+  - Knopf „Diplomatie …“ im Staatspanel (1848) mit einem Fenster in drei Reitern: **Staaten** nach
+    Beziehung mit Verträgen, Gesandten und Lager, dazu für den gewählten Staat Gesandte, Bündnis,
+    Garantie, Forderungen (mit Rückfrage und den Seiten der Krise) und Bundesintervention;
+    **Bundesversammlung** mit Halbrund der Plenarstimmen nach Lagern, offenem Antrag, Anträgen mit
+    Prognose und den letzten Abstimmungen; **Deutsche Frage** mit Lagern, Zollverein, Reformen,
+    Krisen und Verträgen.
+  - Krisenleiste über der Karte mit Stufe, Seiten und den Manövern Nachgeben, Vermittlung anbieten
+    und Eskalieren.
+  - Kartenmodus „Beziehungen“ (Taste #, fünfzehnter Modus): grün freundlich, rot feindlich zum
+    Spielerstaat. Haushaltsposten „Gesandte“, Startoption `--diplomatie[=staaten|bund|frage]`.
+  - Brücke: Abfragen und Befehle der Diplomatie (bridge-api.md, Abschnitt Diplomatie).
 
 ### Meilenstein M8 – Politik, Parteien und Wahlen
 

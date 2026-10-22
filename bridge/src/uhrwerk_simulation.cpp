@@ -2,6 +2,7 @@
 
 #include "uhrwerk/customs.hpp"
 #include "uhrwerk/date.hpp"
+#include "uhrwerk/diplomacy.hpp"
 #include "uhrwerk/economy.hpp"
 #include "uhrwerk/loader.hpp"
 #include "uhrwerk/politics.hpp"
@@ -87,6 +88,10 @@ const Color kElectionPaper(0.95f, 0.93f, 0.86f);   // Wahlen (seit M8): knapper 
 const Color kElectionOutside(0.90f, 0.88f, 0.82f); // … außerhalb des Wahlgebiets
 const Color kElectionBoycott(0.76f, 0.79f, 0.84f); // … Boykott (kühles Grau): der Wahlkreis wählte nicht
 constexpr double kCustomsAlone = 0.62;             // Zollgebiete (seit M9): Staaten ohne Union blass
+const Color kRelationNeutral(0.94f, 0.91f, 0.83f); // Beziehungen (seit M9, b3): 0 …
+const Color kRelationFriend(0.24f, 0.52f, 0.30f);  // … +100 und mehr
+const Color kRelationFoe(0.70f, 0.16f, 0.10f);     // … −100 und weniger
+constexpr double kRelationScale = 100.0;           // volle Farbe ab diesem Betrag
 constexpr double kDensityMax = 120.0;              // Einwohner je km², ab hier dunkelste Stufe
 constexpr double kEconomyMax = 16.0;               // Reichstaler je Einwohner und Jahr, dunkelste Stufe
 
@@ -723,6 +728,9 @@ Dictionary UhrwerkSimulation::get_state(std::int64_t index) const {
         }
     }
     result["customs_request"] = request;
+    // Diplomatie (seit M9, b3): gilt sie, und was kosten die Gesandten (Haushalt)?
+    result["diplomacy"] = !w->relations.empty();
+    result["envoy_cost_month"] = state.budget.diplomacy.to_double();
     result["treasury"] = state.treasury.to_double();
     result["tax_rate_percent"] = to_percent(state.tax_rate(uhrwerk::TaxKind::Kontribution));
     // Haushalt des letzten Rechentags (gleich last_month_*); vor dem ersten Rechentag die Schätzung
@@ -1162,7 +1170,7 @@ PackedColorArray UhrwerkSimulation::get_map_colors(std::int64_t mode) const {
     if (!w) {
         return colors;
     }
-    ERR_FAIL_COND_V_MSG(mode < MAP_POLITICAL || mode > MAP_ZOLLGEBIETE, colors,
+    ERR_FAIL_COND_V_MSG(mode < MAP_POLITICAL || mode > MAP_BEZIEHUNGEN, colors,
                         "get_map_colors: unbekannter Kartenmodus.");
 
     const auto count = static_cast<std::int64_t>(w->locations.size());
@@ -1172,6 +1180,8 @@ PackedColorArray UhrwerkSimulation::get_map_colors(std::int64_t mode) const {
     // Wahlen (seit M8): das angezeigte Parlament und seine letzte Wahl.
     const std::int64_t parliament = mode == MAP_WAHLEN ? get_shown_parliament() : -1;
     const uhrwerk::ElectionResult* election = parliament >= 0 ? latest_election(parliament) : nullptr;
+    // Beziehungen (seit M9, b3): zum Spielerstaat.
+    const std::int64_t player = mode == MAP_BEZIEHUNGEN ? get_player_state_index() : -1;
     colors.resize(count);
     for (std::int64_t i = 0; i < count; ++i) {
         const uhrwerk::Location& loc = at(w->locations, i);
@@ -1286,6 +1296,20 @@ PackedColorArray UhrwerkSimulation::get_map_colors(std::int64_t mode) const {
                             : blend(to_godot(owner.color), Color(1.0f, 1.0f, 1.0f), kCustomsAlone);
             }
             break;
+        case MAP_BEZIEHUNGEN:
+            // Beziehung des Besitzers zum Spielerstaat: rot über Papier bis grün; der Spielerstaat in
+            // seiner Farbe. Ohne Diplomatie (1648) alles Papier.
+            if (valid_index(w->states, loc.owner)) {
+                if (loc.owner == player) {
+                    color = to_godot(at(w->states, loc.owner).color);
+                } else {
+                    const double r =
+                        uhrwerk::relation(*w, static_cast<uhrwerk::Index>(player), loc.owner).to_double();
+                    color = r >= 0.0 ? blend(kRelationNeutral, kRelationFriend, r / kRelationScale)
+                                     : blend(kRelationNeutral, kRelationFoe, -r / kRelationScale);
+                }
+            }
+            break;
         default:
             break;
         }
@@ -1395,6 +1419,585 @@ bool UhrwerkSimulation::request_customs_union(std::int64_t state_index, std::int
     command.target = target;
     simulation_->submit(command);
     return true;
+}
+
+// ─── Diplomatie (seit M9, Schritt b3) ───────────────────────────────────────
+
+namespace {
+
+String decision_text(uhrwerk::DiplomacyDecision decision) {
+    switch (decision) {
+    case uhrwerk::DiplomacyDecision::Accepted:
+        return "angenommen";
+    case uhrwerk::DiplomacyDecision::Rejected:
+        return "abgelehnt";
+    case uhrwerk::DiplomacyDecision::Invalid:
+        break;
+    }
+    return "ungueltig";
+}
+
+const uhrwerk::Fixed kCampLeaning = uhrwerk::Fixed::from_int(20); // Lager ab ±20 (Abschnitt 4.1)
+
+/// Lager eines Staates zwischen Preußen und Österreich: 1 Preußen, −1 Österreich, 0 unentschieden.
+int camp_of(const uhrwerk::World& w, uhrwerk::Index state) {
+    const uhrwerk::Index prussia = w.find_state("PRU");
+    const uhrwerk::Index austria = w.find_state("AUT");
+    if (prussia == uhrwerk::kNone || austria == uhrwerk::kNone) {
+        return 0;
+    }
+    if (state == prussia) {
+        return 1;
+    }
+    if (state == austria) {
+        return -1;
+    }
+    const uhrwerk::Fixed leaning =
+        uhrwerk::relation(w, state, prussia) - uhrwerk::relation(w, state, austria);
+    return leaning > kCampLeaning ? 1 : leaning < -kCampLeaning ? -1 : 0;
+}
+
+String camp_text(int camp) {
+    return to_godot(camp > 0   ? std::string_view("Preußen")
+                    : camp < 0 ? std::string_view("Österreich")
+                               : std::string_view("unentschieden"));
+}
+
+String short_name(const uhrwerk::World& w, std::int64_t state) {
+    return valid_index(w.states, state) ? to_godot(at(w.states, state).short_name) : String();
+}
+
+String motion_kind_text(const uhrwerk::World& w, uhrwerk::MotionKind kind, uhrwerk::Index target) {
+    switch (kind) {
+    case uhrwerk::MotionKind::Reform:
+        return "Bundesreform";
+    case uhrwerk::MotionKind::CustomsUnification:
+        return valid_index(w.customs_unions, target)
+                   ? "Zolleinigung im " + to_godot(at(w.customs_unions, target).name)
+                   : String("Zolleinigung");
+    case uhrwerk::MotionKind::Intervention:
+        return "Bundesintervention gegen " + short_name(w, target);
+    case uhrwerk::MotionKind::Presidency:
+        return "Vorsitz im Bund";
+    }
+    return {};
+}
+
+String majority_text(uhrwerk::MotionKind kind) {
+    switch (kind) {
+    case uhrwerk::MotionKind::Intervention:
+        return "Mehrheit im Engeren Rat";
+    case uhrwerk::MotionKind::CustomsUnification:
+        return "zwei Drittel im Plenum";
+    case uhrwerk::MotionKind::Reform:
+    case uhrwerk::MotionKind::Presidency:
+        break;
+    }
+    return "Einstimmigkeit im Plenum";
+}
+
+String demand_kind_text(const uhrwerk::World& w, uhrwerk::DemandKind kind, uhrwerk::Index customs_union) {
+    switch (kind) {
+    case uhrwerk::DemandKind::Leadership:
+        return to_godot(std::string_view("Führung im Bund"));
+    case uhrwerk::DemandKind::CustomsUnion:
+        return valid_index(w.customs_unions, customs_union)
+                   ? "Beitritt zum " + to_godot(at(w.customs_unions, customs_union).name)
+                   : String("Beitritt zur Zollunion");
+    case uhrwerk::DemandKind::BreakAlliance:
+        return to_godot(std::string_view("Bündnisse lösen"));
+    }
+    return {};
+}
+
+String outcome_text(uhrwerk::PlayOutcome outcome) {
+    switch (outcome) {
+    case uhrwerk::PlayOutcome::DemanderWon:
+        return "durchgesetzt";
+    case uhrwerk::PlayOutcome::TargetWon:
+        return "gescheitert";
+    case uhrwerk::PlayOutcome::Compromise:
+        break;
+    }
+    return "Kompromiss";
+}
+
+Dictionary motion_result_to_godot(const uhrwerk::World& w, const uhrwerk::MotionResult& r) {
+    Dictionary entry;
+    entry["kind"] = static_cast<std::int64_t>(r.kind);
+    entry["text"] = motion_kind_text(w, r.kind, r.target);
+    entry["applicant_index"] = r.applicant;
+    entry["applicant_name"] = short_name(w, r.applicant);
+    entry["opponent_name"] = short_name(w, r.opponent);
+    entry["date_text"] = to_godot(uhrwerk::format_date_long(r.date));
+    entry["plenum_yes"] = r.plenum_yes;
+    entry["plenum_total"] = r.plenum_total;
+    entry["council_yes"] = r.council_yes;
+    entry["council_total"] = r.council_total;
+    entry["council_body"] = r.kind == uhrwerk::MotionKind::Intervention;
+    entry["majority_text"] = majority_text(r.kind);
+    entry["accepted"] = r.accepted;
+    return entry;
+}
+
+PackedStringArray names_of(const uhrwerk::World& w, const std::vector<uhrwerk::Index>& states) {
+    PackedStringArray names;
+    for (const uhrwerk::Index s : states) {
+        names.push_back(short_name(w, s));
+    }
+    return names;
+}
+
+} // namespace
+
+Array UhrwerkSimulation::get_relations(std::int64_t state_index) const {
+    Array result;
+    const uhrwerk::World* w = world();
+    if (!w || w->relations.empty() || !valid_index(w->states, state_index)) {
+        return result;
+    }
+    const auto self = static_cast<uhrwerk::Index>(state_index);
+    for (std::size_t s = 0; s < w->states.size(); ++s) {
+        const auto other = static_cast<uhrwerk::Index>(s);
+        if (other == self) {
+            continue;
+        }
+        const uhrwerk::State& state = w->states[s];
+        Dictionary entry;
+        entry["index"] = other;
+        entry["tag"] = to_godot(state.tag);
+        entry["name"] = to_godot(state.name);
+        entry["short_name"] = to_godot(state.short_name);
+        entry["color"] = to_godot(state.color);
+        entry["relation"] = uhrwerk::relation(*w, self, other).to_double();
+        entry["target"] = uhrwerk::relation_target(*w, self, other).to_double();
+        entry["rival"] = uhrwerk::rivals(*w, self, other);
+        entry["allied"] = uhrwerk::allied(*w, self, other);
+        entry["guarantees"] = uhrwerk::guarantees(*w, self, other); // der Staat schützt other
+        entry["guaranteed"] = uhrwerk::guarantees(*w, other, self); // other schützt den Staat
+        entry["envoy"] = uhrwerk::has_envoy(*w, self, other);       // Gesandter des Staates bei other
+        entry["envoy_from"] = uhrwerk::has_envoy(*w, other, self);  // Gesandter von other beim Staat
+        entry["federal"] = uhrwerk::federal_state(*w, other);
+        entry["plenum_votes"] = uhrwerk::plenum_votes(*w, other);
+        const int camp = camp_of(*w, other);
+        entry["camp"] = camp;
+        entry["camp_text"] = camp_text(camp);
+        entry["in_play"] = uhrwerk::play_of(*w, other) != uhrwerk::kNone;
+        entry["customs_union_name"] = valid_index(w->customs_unions, state.customs_union)
+                                          ? to_godot(at(w->customs_unions, state.customs_union).name)
+                                          : String();
+        result.append(entry);
+    }
+    return result;
+}
+
+Dictionary UhrwerkSimulation::get_diplomacy(std::int64_t state_index) const {
+    Dictionary result;
+    const uhrwerk::World* w = world();
+    if (!w || !valid_index(w->states, state_index)) {
+        return result;
+    }
+    const auto self = static_cast<uhrwerk::Index>(state_index);
+    result["active"] = !w->relations.empty();
+    result["diet"] = uhrwerk::has_diet(*w);
+    result["envoy_capacity"] = uhrwerk::envoy_capacity(*w, self);
+    result["envoy_count"] = uhrwerk::envoy_count(*w, self);
+    result["envoy_cost_month"] = at(w->states, state_index).budget.diplomacy.to_double();
+    result["envoy_cost_percent"] = w->diplomacy_rules.envoy_cost.to_double() * 100.0;
+    result["alliance_min"] = w->diplomacy_rules.alliance_min.to_double();
+    result["guarantee_min"] = w->diplomacy_rules.guarantee_min.to_double();
+    result["rival_below"] = w->diplomacy_rules.rival_below.to_double();
+    result["play_index"] = uhrwerk::play_of(*w, self);
+    result["mobilized"] = uhrwerk::mobilized(*w, self);
+    result["camp"] = camp_of(*w, self);
+    result["federal"] = uhrwerk::federal_state(*w, self);
+    return result;
+}
+
+Dictionary UhrwerkSimulation::get_diplomacy_actions(std::int64_t state_index, std::int64_t target) const {
+    Dictionary result;
+    const uhrwerk::World* w = world();
+    if (!w || w->relations.empty() || !valid_index(w->states, state_index) ||
+        !valid_index(w->states, target) || state_index == target) {
+        return result;
+    }
+    const auto self = static_cast<uhrwerk::Index>(state_index);
+    const auto other = static_cast<uhrwerk::Index>(target);
+    using uhrwerk::TreatyAction;
+    result["envoy_send"] = decision_text(uhrwerk::evaluate_envoy(*w, self, other, true));
+    result["envoy_recall"] = decision_text(uhrwerk::evaluate_envoy(*w, self, other, false));
+    result["alliance"] = decision_text(uhrwerk::evaluate_treaty(*w, self, other, TreatyAction::Alliance));
+    result["guarantee"] = decision_text(uhrwerk::evaluate_treaty(*w, self, other, TreatyAction::Guarantee));
+    result["cancel_alliance"] =
+        decision_text(uhrwerk::evaluate_treaty(*w, self, other, TreatyAction::CancelAlliance));
+    result["cancel_guarantee"] =
+        decision_text(uhrwerk::evaluate_treaty(*w, self, other, TreatyAction::CancelGuarantee));
+    result["demand_leadership"] =
+        decision_text(uhrwerk::evaluate_demand(*w, self, other, uhrwerk::DemandKind::Leadership));
+    result["demand_customs_union"] =
+        decision_text(uhrwerk::evaluate_demand(*w, self, other, uhrwerk::DemandKind::CustomsUnion));
+    result["demand_break_alliance"] =
+        decision_text(uhrwerk::evaluate_demand(*w, self, other, uhrwerk::DemandKind::BreakAlliance));
+    result["motion_intervention"] =
+        decision_text(uhrwerk::evaluate_motion(*w, self, uhrwerk::MotionKind::Intervention, other));
+    result["customs_union_name"] =
+        valid_index(w->customs_unions, at(w->states, state_index).customs_union)
+            ? to_godot(at(w->customs_unions, at(w->states, state_index).customs_union).name)
+            : String();
+    // Seiten eines möglichen Spiels (Parteinahme, Abschnitt 4.5), mit Stärke in Soldaten.
+    std::vector<uhrwerk::Index> own;
+    std::vector<uhrwerk::Index> theirs;
+    uhrwerk::play_sides(*w, self, other, own, theirs);
+    uhrwerk::DiplomaticPlay probe;
+    probe.demander = self;
+    probe.target = other;
+    probe.demander_side = own;
+    probe.target_side = theirs;
+    result["own_side"] = names_of(*w, own);
+    result["other_side"] = names_of(*w, theirs);
+    result["own_strength"] = uhrwerk::side_strength(*w, probe, true).round();
+    result["other_strength"] = uhrwerk::side_strength(*w, probe, false).round();
+    return result;
+}
+
+bool UhrwerkSimulation::send_envoy(std::int64_t state_index, std::int64_t target, bool send) {
+    const uhrwerk::World* w = world();
+    if (!w || !valid_index(w->states, state_index) || !valid_index(w->states, target) ||
+        uhrwerk::evaluate_envoy(*w, static_cast<uhrwerk::Index>(state_index),
+                                static_cast<uhrwerk::Index>(target),
+                                send) == uhrwerk::DiplomacyDecision::Invalid) {
+        return false;
+    }
+    uhrwerk::Command command;
+    command.type = uhrwerk::CommandType::Envoy;
+    command.state = static_cast<uhrwerk::Index>(state_index);
+    command.target = static_cast<uhrwerk::Index>(target);
+    command.value = send ? uhrwerk::Fixed::one() : uhrwerk::Fixed::zero();
+    simulation_->submit(command);
+    return true;
+}
+
+bool UhrwerkSimulation::propose_treaty(std::int64_t state_index, std::int64_t target, std::int64_t action) {
+    const uhrwerk::World* w = world();
+    if (!w || action < TREATY_ALLIANCE || action > TREATY_CANCEL_GUARANTEE ||
+        !valid_index(w->states, state_index) || !valid_index(w->states, target) ||
+        uhrwerk::evaluate_treaty(
+            *w, static_cast<uhrwerk::Index>(state_index), static_cast<uhrwerk::Index>(target),
+            static_cast<uhrwerk::TreatyAction>(action)) == uhrwerk::DiplomacyDecision::Invalid) {
+        return false;
+    }
+    uhrwerk::Command command;
+    command.type = uhrwerk::CommandType::Treaty;
+    command.state = static_cast<uhrwerk::Index>(state_index);
+    command.target = static_cast<uhrwerk::Index>(target);
+    command.value = uhrwerk::Fixed::from_int(action);
+    simulation_->submit(command);
+    return true;
+}
+
+Dictionary UhrwerkSimulation::get_diet() const {
+    Dictionary result;
+    const uhrwerk::World* w = world();
+    if (!w || !uhrwerk::has_diet(*w)) {
+        return result;
+    }
+    const uhrwerk::FederalDiet& diet = w->diet;
+    result["name"] = to_godot(diet.name);
+    result["presidency_index"] = w->diet_presidency;
+    result["presidency_name"] = short_name(*w, w->diet_presidency);
+    result["seat_name"] =
+        valid_index(w->locations, diet.seat) ? to_godot(at(w->locations, diet.seat).name) : String();
+    Array plenum;
+    std::int64_t total = 0;
+    for (std::size_t s = 0; s < w->states.size(); ++s) {
+        const std::int32_t votes = uhrwerk::plenum_votes(*w, static_cast<uhrwerk::Index>(s));
+        if (votes <= 0) {
+            continue;
+        }
+        total += votes;
+        Dictionary entry;
+        entry["index"] = static_cast<std::int64_t>(s);
+        entry["short_name"] = to_godot(w->states[s].short_name);
+        entry["color"] = to_godot(w->states[s].color);
+        entry["votes"] = votes;
+        entry["camp"] = camp_of(*w, static_cast<uhrwerk::Index>(s));
+        plenum.append(entry);
+    }
+    result["plenum"] = plenum;
+    result["plenum_total"] = total;
+    Array council;
+    for (const uhrwerk::CouncilVote& vote : diet.council) {
+        Dictionary entry;
+        entry["name"] = to_godot(vote.name);
+        PackedInt32Array members;
+        for (const uhrwerk::Index s : vote.states) {
+            members.append(static_cast<std::int32_t>(s));
+        }
+        entry["state_indices"] = members;
+        entry["states"] = names_of(*w, vote.states);
+        council.append(entry);
+    }
+    result["council"] = council;
+    Dictionary motion;
+    if (!w->motions.empty()) {
+        const uhrwerk::Motion& m = w->motions.front();
+        uhrwerk::Date vote = m.filed;
+        vote.day = 1;
+        vote.month = m.filed.month == 12 ? 1 : m.filed.month + 1;
+        vote.year = m.filed.month == 12 ? m.filed.year + 1 : m.filed.year;
+        motion["kind"] = static_cast<std::int64_t>(m.kind);
+        motion["text"] = motion_kind_text(*w, m.kind, m.target);
+        motion["applicant_index"] = m.applicant;
+        motion["applicant_name"] = short_name(*w, m.applicant);
+        motion["filed_text"] = to_godot(uhrwerk::format_date_long(m.filed));
+        motion["vote_text"] = to_godot(uhrwerk::format_date_long(vote));
+        motion["majority_text"] = majority_text(m.kind);
+    }
+    result["motion"] = motion;
+    Array results;
+    std::int64_t reforms = 0;
+    std::int64_t reforms_accepted = 0;
+    for (const uhrwerk::MotionResult& r : w->motion_results) {
+        results.append(motion_result_to_godot(*w, r));
+        if (r.kind == uhrwerk::MotionKind::Reform) {
+            ++reforms;
+            reforms_accepted += r.accepted ? 1 : 0;
+        }
+    }
+    result["results"] = results;
+    result["reform_attempts"] = reforms;
+    result["reform_accepted"] = reforms_accepted;
+    return result;
+}
+
+Dictionary UhrwerkSimulation::get_motion_preview(std::int64_t applicant, std::int64_t kind,
+                                                 std::int64_t target) const {
+    Dictionary result;
+    const uhrwerk::World* w = world();
+    if (!w || kind < MOTION_REFORM || kind > MOTION_PRESIDENCY || !valid_index(w->states, applicant)) {
+        return result;
+    }
+    const auto motion_kind = static_cast<uhrwerk::MotionKind>(kind);
+    const auto target_index = target < 0 ? uhrwerk::kNone : static_cast<uhrwerk::Index>(target);
+    const uhrwerk::DiplomacyDecision decision =
+        uhrwerk::evaluate_motion(*w, static_cast<uhrwerk::Index>(applicant), motion_kind, target_index);
+    result["decision"] = decision_text(decision);
+    result["text"] = motion_kind_text(*w, motion_kind, target_index);
+    result["majority_text"] = majority_text(motion_kind);
+    if (decision == uhrwerk::DiplomacyDecision::Accepted) {
+        const uhrwerk::MotionResult tally = uhrwerk::tally_motion(
+            *w, uhrwerk::Motion{motion_kind, static_cast<uhrwerk::Index>(applicant), target_index, w->date});
+        Dictionary entry = motion_result_to_godot(*w, tally);
+        result["plenum_yes"] = entry["plenum_yes"];
+        result["plenum_total"] = entry["plenum_total"];
+        result["council_yes"] = entry["council_yes"];
+        result["council_total"] = entry["council_total"];
+        result["council_body"] = entry["council_body"];
+        result["opponent_name"] = entry["opponent_name"];
+        result["accepted"] = tally.accepted;
+    }
+    return result;
+}
+
+bool UhrwerkSimulation::file_motion(std::int64_t applicant, std::int64_t kind, std::int64_t target) {
+    const uhrwerk::World* w = world();
+    if (!w || kind < MOTION_REFORM || kind > MOTION_PRESIDENCY || !valid_index(w->states, applicant)) {
+        return false;
+    }
+    const auto target_index = target < 0 ? uhrwerk::kNone : static_cast<uhrwerk::Index>(target);
+    if (uhrwerk::evaluate_motion(*w, static_cast<uhrwerk::Index>(applicant),
+                                 static_cast<uhrwerk::MotionKind>(kind),
+                                 target_index) != uhrwerk::DiplomacyDecision::Accepted) {
+        return false;
+    }
+    uhrwerk::Command command;
+    command.type = uhrwerk::CommandType::Motion;
+    command.state = static_cast<uhrwerk::Index>(applicant);
+    command.target = target_index;
+    command.value = uhrwerk::Fixed::from_int(kind);
+    simulation_->submit(command);
+    return true;
+}
+
+Array UhrwerkSimulation::get_diplomatic_plays() const {
+    Array result;
+    const uhrwerk::World* w = world();
+    if (!w) {
+        return result;
+    }
+    const std::int64_t today = uhrwerk::to_day_number(w->date);
+    for (std::size_t i = 0; i < w->plays.size(); ++i) {
+        const uhrwerk::DiplomaticPlay& play = w->plays[i];
+        Dictionary entry;
+        entry["index"] = static_cast<std::int64_t>(i);
+        entry["kind"] = static_cast<std::int64_t>(play.kind);
+        entry["kind_text"] = demand_kind_text(*w, play.kind, play.customs_union);
+        entry["demander_index"] = play.demander;
+        entry["demander_name"] = short_name(*w, play.demander);
+        entry["target_index"] = play.target;
+        entry["target_name"] = short_name(*w, play.target);
+        entry["stage"] = play.stage;
+        entry["stage_text"] = play.stage == 1 ? "Protest" : play.stage == 2 ? "Ultimatum" : "Mobilmachung";
+        entry["days_left"] = std::max<std::int64_t>(0, uhrwerk::to_day_number(play.stage_started) +
+                                                           w->diplomacy_rules.play_stage_days - today);
+        entry["started_text"] = to_godot(uhrwerk::format_date_long(play.started));
+        entry["demander_strength"] = uhrwerk::side_strength(*w, play, true).round();
+        entry["target_strength"] = uhrwerk::side_strength(*w, play, false).round();
+        entry["demander_side"] = names_of(*w, play.demander_side);
+        entry["target_side"] = names_of(*w, play.target_side);
+        entry["demander_escalates"] = play.demander_escalates;
+        entry["target_escalates"] = play.target_escalates;
+        entry["demander_mediation"] =
+            decision_text(uhrwerk::evaluate_manoeuvre(*w, play.demander, uhrwerk::Manoeuvre::Mediate));
+        entry["target_mediation"] =
+            decision_text(uhrwerk::evaluate_manoeuvre(*w, play.target, uhrwerk::Manoeuvre::Mediate));
+        result.append(entry);
+    }
+    return result;
+}
+
+bool UhrwerkSimulation::make_demand(std::int64_t demander, std::int64_t target, std::int64_t kind) {
+    const uhrwerk::World* w = world();
+    if (!w || kind < DEMAND_LEADERSHIP || kind > DEMAND_BREAK_ALLIANCE || !valid_index(w->states, demander) ||
+        !valid_index(w->states, target) ||
+        uhrwerk::evaluate_demand(
+            *w, static_cast<uhrwerk::Index>(demander), static_cast<uhrwerk::Index>(target),
+            static_cast<uhrwerk::DemandKind>(kind)) != uhrwerk::DiplomacyDecision::Accepted) {
+        return false;
+    }
+    uhrwerk::Command command;
+    command.type = uhrwerk::CommandType::Demand;
+    command.state = static_cast<uhrwerk::Index>(demander);
+    command.target = static_cast<uhrwerk::Index>(target);
+    command.value = uhrwerk::Fixed::from_int(kind);
+    simulation_->submit(command);
+    return true;
+}
+
+bool UhrwerkSimulation::manoeuvre(std::int64_t state_index, std::int64_t kind) {
+    const uhrwerk::World* w = world();
+    if (!w || kind < MANOEUVRE_YIELD || kind > MANOEUVRE_ESCALATE || !valid_index(w->states, state_index) ||
+        uhrwerk::evaluate_manoeuvre(*w, static_cast<uhrwerk::Index>(state_index),
+                                    static_cast<uhrwerk::Manoeuvre>(kind)) ==
+            uhrwerk::DiplomacyDecision::Invalid) {
+        return false;
+    }
+    uhrwerk::Command command;
+    command.type = uhrwerk::CommandType::Manoeuvre;
+    command.state = static_cast<uhrwerk::Index>(state_index);
+    command.value = uhrwerk::Fixed::from_int(kind);
+    simulation_->submit(command);
+    return true;
+}
+
+Dictionary UhrwerkSimulation::get_german_question() const {
+    Dictionary result;
+    const uhrwerk::World* w = world();
+    if (!w || w->relations.empty()) {
+        return result;
+    }
+    // Bevölkerung des Bundes: Orte im Bundesgebiet, je Staat.
+    std::vector<double> federal(w->states.size(), 0.0);
+    double total = 0.0;
+    for (std::size_t i = 0; i < w->locations.size(); ++i) {
+        const uhrwerk::Location& loc = w->locations[i];
+        if (loc.federal && valid_index(w->states, loc.owner)) {
+            const double people = w->location_population(static_cast<uhrwerk::Index>(i)).to_double();
+            federal[static_cast<std::size_t>(loc.owner)] += people;
+            total += people;
+        }
+    }
+    result["federal_population"] = static_cast<std::int64_t>(total + 0.5);
+    // Anteil des Zollvereins (Union mit der Kennung zollverein, sonst der größten Union).
+    uhrwerk::Index zollverein = w->find_customs_union("zollverein");
+    std::vector<double> union_people(w->customs_unions.size(), 0.0);
+    for (std::size_t s = 0; s < w->states.size(); ++s) {
+        if (valid_index(w->customs_unions, w->states[s].customs_union)) {
+            union_people[static_cast<std::size_t>(w->states[s].customs_union)] += federal[s];
+        }
+    }
+    if (zollverein == uhrwerk::kNone && !union_people.empty()) {
+        zollverein = static_cast<uhrwerk::Index>(std::max_element(union_people.begin(), union_people.end()) -
+                                                 union_people.begin());
+    }
+    result["customs_union_name"] = valid_index(w->customs_unions, zollverein)
+                                       ? to_godot(at(w->customs_unions, zollverein).name)
+                                       : String();
+    result["customs_union_percent"] = valid_index(w->customs_unions, zollverein) && total > 0.0
+                                          ? union_people[static_cast<std::size_t>(zollverein)] / total * 100.0
+                                          : 0.0;
+    // Lager: Bevölkerung im Bund nach Neigung zu Preußen oder Österreich.
+    double camps[3] = {0.0, 0.0, 0.0};
+    std::int64_t camp_states[3] = {0, 0, 0};
+    for (std::size_t s = 0; s < w->states.size(); ++s) {
+        if (federal[s] <= 0.0) {
+            continue;
+        }
+        const int camp = camp_of(*w, static_cast<uhrwerk::Index>(s));
+        const std::size_t slot = camp > 0 ? 0 : camp < 0 ? 1 : 2;
+        camps[slot] += federal[s];
+        ++camp_states[slot];
+    }
+    result["prussia_percent"] = total > 0.0 ? camps[0] / total * 100.0 : 0.0;
+    result["austria_percent"] = total > 0.0 ? camps[1] / total * 100.0 : 0.0;
+    result["undecided_percent"] = total > 0.0 ? camps[2] / total * 100.0 : 0.0;
+    result["prussia_states"] = camp_states[0];
+    result["austria_states"] = camp_states[1];
+    result["undecided_states"] = camp_states[2];
+    // Bundesreform und Führung im Bund.
+    std::int64_t reforms = 0;
+    std::int64_t reforms_accepted = 0;
+    for (const uhrwerk::MotionResult& r : w->motion_results) {
+        if (r.kind == uhrwerk::MotionKind::Reform) {
+            ++reforms;
+            reforms_accepted += r.accepted ? 1 : 0;
+        }
+    }
+    result["reform_attempts"] = reforms;
+    result["reform_accepted"] = reforms_accepted;
+    const uhrwerk::Index prussia = w->find_state("PRU");
+    const uhrwerk::Index austria = w->find_state("AUT");
+    std::int64_t prussia_wins = 0;
+    std::int64_t austria_wins = 0;
+    std::int64_t compromises = 0;
+    Array plays;
+    for (const uhrwerk::PlayResult& r : w->play_results) {
+        Dictionary entry;
+        entry["text"] = demand_kind_text(*w, r.kind, r.customs_union);
+        entry["demander_name"] = short_name(*w, r.demander);
+        entry["target_name"] = short_name(*w, r.target);
+        entry["date_text"] = to_godot(uhrwerk::format_date_long(r.ended));
+        entry["outcome_text"] = outcome_text(r.outcome);
+        plays.append(entry);
+        if (r.kind != uhrwerk::DemandKind::Leadership) {
+            continue;
+        }
+        if (r.outcome == uhrwerk::PlayOutcome::Compromise) {
+            ++compromises;
+            continue;
+        }
+        const uhrwerk::Index winner = r.outcome == uhrwerk::PlayOutcome::DemanderWon ? r.demander : r.target;
+        prussia_wins += winner == prussia ? 1 : 0;
+        austria_wins += winner == austria ? 1 : 0;
+    }
+    result["leadership_prussia"] = prussia_wins;
+    result["leadership_austria"] = austria_wins;
+    result["leadership_compromises"] = compromises;
+    result["play_results"] = plays;
+    // Bündnisse und Garantien als Netz.
+    Array treaties;
+    for (const uhrwerk::Treaty& t : w->treaties) {
+        Dictionary entry;
+        entry["alliance"] = t.kind == uhrwerk::TreatyKind::Alliance;
+        entry["from_index"] = t.from;
+        entry["to_index"] = t.to;
+        entry["from_name"] = short_name(*w, t.from);
+        entry["to_name"] = short_name(*w, t.to);
+        entry["since_text"] = to_godot(uhrwerk::format_date_long(t.since));
+        treaties.append(entry);
+    }
+    result["treaties"] = treaties;
+    return result;
 }
 
 // ─── Politik (seit M8) ──────────────────────────────────────────────────────
@@ -2076,6 +2679,24 @@ void UhrwerkSimulation::_bind_methods() {
                          &UhrwerkSimulation::get_customs_change);
     ClassDB::bind_method(D_METHOD("request_customs_union", "state_index", "customs_union"),
                          &UhrwerkSimulation::request_customs_union);
+    ClassDB::bind_method(D_METHOD("get_relations", "state_index"), &UhrwerkSimulation::get_relations);
+    ClassDB::bind_method(D_METHOD("get_diplomacy", "state_index"), &UhrwerkSimulation::get_diplomacy);
+    ClassDB::bind_method(D_METHOD("get_diplomacy_actions", "state_index", "target"),
+                         &UhrwerkSimulation::get_diplomacy_actions);
+    ClassDB::bind_method(D_METHOD("send_envoy", "state_index", "target", "send"),
+                         &UhrwerkSimulation::send_envoy);
+    ClassDB::bind_method(D_METHOD("propose_treaty", "state_index", "target", "action"),
+                         &UhrwerkSimulation::propose_treaty);
+    ClassDB::bind_method(D_METHOD("get_diet"), &UhrwerkSimulation::get_diet);
+    ClassDB::bind_method(D_METHOD("get_motion_preview", "applicant", "kind", "target"),
+                         &UhrwerkSimulation::get_motion_preview);
+    ClassDB::bind_method(D_METHOD("file_motion", "applicant", "kind", "target"),
+                         &UhrwerkSimulation::file_motion);
+    ClassDB::bind_method(D_METHOD("get_diplomatic_plays"), &UhrwerkSimulation::get_diplomatic_plays);
+    ClassDB::bind_method(D_METHOD("make_demand", "demander", "target", "kind"),
+                         &UhrwerkSimulation::make_demand);
+    ClassDB::bind_method(D_METHOD("manoeuvre", "state_index", "kind"), &UhrwerkSimulation::manoeuvre);
+    ClassDB::bind_method(D_METHOD("get_german_question"), &UhrwerkSimulation::get_german_question);
 
     ClassDB::bind_method(D_METHOD("set_tax_rate_percent", "state_index", "percent"),
                          &UhrwerkSimulation::set_tax_rate_percent);
@@ -2107,12 +2728,27 @@ void UhrwerkSimulation::_bind_methods() {
     BIND_ENUM_CONSTANT(MAP_EISENBAHNEN);
     BIND_ENUM_CONSTANT(MAP_WAHLEN);
     BIND_ENUM_CONSTANT(MAP_ZOLLGEBIETE);
+    BIND_ENUM_CONSTANT(MAP_BEZIEHUNGEN);
     BIND_ENUM_CONSTANT(TAX_KONTRIBUTION);
     BIND_ENUM_CONSTANT(TAX_AKZISE);
     BIND_ENUM_CONSTANT(TAX_ZOLL);
     BIND_ENUM_CONSTANT(CAMPAIGN_VERSAMMLUNG);
     BIND_ENUM_CONSTANT(CAMPAIGN_FLUGBLAETTER);
     BIND_ENUM_CONSTANT(CAMPAIGN_VEREIN);
+    BIND_ENUM_CONSTANT(TREATY_ALLIANCE);
+    BIND_ENUM_CONSTANT(TREATY_GUARANTEE);
+    BIND_ENUM_CONSTANT(TREATY_CANCEL_ALLIANCE);
+    BIND_ENUM_CONSTANT(TREATY_CANCEL_GUARANTEE);
+    BIND_ENUM_CONSTANT(MOTION_REFORM);
+    BIND_ENUM_CONSTANT(MOTION_CUSTOMS);
+    BIND_ENUM_CONSTANT(MOTION_INTERVENTION);
+    BIND_ENUM_CONSTANT(MOTION_PRESIDENCY);
+    BIND_ENUM_CONSTANT(DEMAND_LEADERSHIP);
+    BIND_ENUM_CONSTANT(DEMAND_CUSTOMS_UNION);
+    BIND_ENUM_CONSTANT(DEMAND_BREAK_ALLIANCE);
+    BIND_ENUM_CONSTANT(MANOEUVRE_YIELD);
+    BIND_ENUM_CONSTANT(MANOEUVRE_MEDIATE);
+    BIND_ENUM_CONSTANT(MANOEUVRE_ESCALATE);
 }
 
 } // namespace uhrwerk_bridge
