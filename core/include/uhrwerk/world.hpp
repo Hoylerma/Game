@@ -580,10 +580,25 @@ struct Neighbor {
     friend bool operator==(const Neighbor&, const Neighbor&) = default;
 };
 
-/// Regeln des Militärs (seit M10, common/militaer.chron, Abschnitte 3–5). Inhalt.
+/// Regeln des Militärs (seit M10, common/militaer.chron, Abschnitte 3–5). Inhalt; Spielwerte.
 struct MilitaryRules {
     bool active = false;         // Militärdaten zum Startdatum ('seit'): Heere und Krieg (Entscheidung 14)
     std::int32_t river_rank = 3; // Flussübergang: gekreuzter Fluss bis zu diesem Rang
+    // Bewegung (seit Schritt a2, Abschnitt 3.4).
+    Fixed march_km = Fixed::from_int(20);         // Marschleistung je Tag
+    Fixed river_days = Fixed::one();              // zusätzliche Tage für einen Flussübergang
+    std::vector<Fixed> terrain_march;             // Faktor auf die Marschtage je Gelände (Zielort), sonst 1
+    Fixed rail_km = Fixed::from_int(300);         // Bahnfahrt je Tag
+    Fixed rail_capacity = Fixed::from_int(20000); // Soldaten je Strecke und Tag (Einladen)
+    std::int32_t unload_days = 1;                 // Ausladen am Ziel der Bahnfahrt
+    // Versorgung und Zermürbung (Abschnitt 3.5).
+    Fixed supply_days = Fixed::from_int(3);        // Tagesmärsche bis zum Bahnhof der eigenen Seite
+    Fixed attrition = Fixed::from_ratio(5, 10000); // Abgänge je Tag, versorgt
+    Fixed attrition_unsupplied = Fixed::from_ratio(5, 1000); // … unversorgt
+    Fixed morale_unsupplied = Fixed::from_ratio(2, 100);     // Moralverlust je Tag ohne Versorgung
+    Fixed morale_recovery = Fixed::from_ratio(1, 100);       // Erholung je Tag in Ruhe und versorgt
+    // Mobilmachung (Abschnitt 3.3).
+    std::int32_t demobilization_days = 30;
 };
 
 /// Garnison des Friedensheers (seit M10, Abschnitt 3.2): Anteil der Friedensstärke eines Staates an einem
@@ -596,10 +611,27 @@ struct Garrison {
     Fixed share; // Anteil am Friedensheer (je Staat zusammen 1)
 };
 
-/// Lage eines Heeres (seit M10). Weitere Lagen (Marsch, Bahnfahrt, Schlacht, Belagerung) kommen mit
-/// den Schritten a2 und a3.
+/// Lage eines Heeres (seit M10). Schlacht, Belagerung und Rückzug kommen mit Schritt a3.
 enum class ArmyStatus : std::uint8_t {
     Garrison = 0, // Friedensheer in seiner Garnison
+    Rest = 1,     // Feldarmee in Ruhe (seit a2)
+    March = 2,    // auf dem Marsch (seit a2)
+    Rail = 3,     // auf der Bahn (seit a2)
+};
+
+/// Art eines Wegabschnitts (seit Schritt a2).
+enum class LegMode : std::uint8_t {
+    March = 0, // Marsch zu einem Nachbarort (auch Überfahrt)
+    Rail = 1,  // Bahnfahrt über einen eröffneten Abschnitt
+};
+
+/// Ein Schritt auf dem Weg eines Heeres (seit Schritt a2): der nächste Ort und wie es ihn erreicht.
+struct RouteStep {
+    Index location = kNone;
+    LegMode mode = LegMode::March;
+    Index railway = kNone; // Bahn: Strecke des Abschnitts (Kapazität)
+
+    friend bool operator==(const RouteStep&, const RouteStep&) = default;
 };
 
 /// Heer (seit M10, Abschnitt 3.2). Zustand; die Nummer bleibt über die ganze Partie gleich (Befehle).
@@ -613,8 +645,27 @@ struct Army {
     Fixed guns;
     Fixed morale = Fixed::one(); // 0..1
     ArmyStatus status = ArmyStatus::Garrison;
+    std::vector<RouteStep> route; // seit a2: verbleibender Weg, der nächste Schritt zuerst
+    Fixed days_left;              // seit a2: Tage bis zum Ende des laufenden Abschnitts (Marsch, Bahnfahrt)
 
     friend bool operator==(const Army&, const Army&) = default;
+};
+
+/// Stand der Mobilmachung eines Staates (seit Schritt a2, Abschnitt 3.3).
+enum class MobilizationPhase : std::uint8_t {
+    Peace = 0,        // Friedensheer
+    Mobilizing = 1,   // Reserven strömen zu (mobilmachung_tage)
+    Mobilized = 2,    // volle Kriegsstärke erreicht
+    Demobilizing = 3, // Abrüstung (demobilmachung_tage), danach wieder Garnisonen
+};
+
+/// Mobilmachung je Staat (seit Schritt a2). Zustand.
+struct Mobilization {
+    MobilizationPhase phase = MobilizationPhase::Peace;
+    std::int32_t days = 0; // Tage seit Beginn der Phase
+    bool crisis = false;   // durch eine Krise (Stufe 3) mobil gemacht: rüstet mit ihrem Ende ab
+
+    friend bool operator==(const Mobilization&, const Mobilization&) = default;
 };
 
 /// Grundbeziehung zweier Staaten aus den Daten (seit M9, history/beziehungen, Abschnitt 4.1).
@@ -857,8 +908,10 @@ struct World {
     std::vector<DiplomaticPlay> plays;        // laufende Spiele in der Reihenfolge ihres Beginns
     std::vector<PlayResult> play_results;     // beendete Spiele in zeitlicher Folge
     // Militär (seit M10, Schritt a1), nur in Welten mit Militärdaten (military_rules.active); sonst leer.
-    std::vector<Army> armies;      // Heere in der Reihenfolge ihrer Aufstellung
-    std::int64_t next_army_id = 1; // Nummer des nächsten Heeres
+    std::vector<Army> armies;                // Heere in der Reihenfolge ihrer Aufstellung
+    std::int64_t next_army_id = 1;           // Nummer des nächsten Heeres
+    std::vector<Mobilization> mobilizations; // seit a2: je Staat
+    std::vector<std::int32_t> rail_backlog;  // seit a2: je Eisenbahnstrecke Tage, die sie belegt ist
 
     Index find_state(std::string_view tag) const;
     Index find_location(std::string_view id) const;

@@ -368,7 +368,9 @@ func _fill_states() -> void:
 		GermanFormat.percent(float(overview.get("envoy_cost_percent", 0.0)), 1),
 	]
 	if bool(overview.get("mobilized", false)):
-		_summary.text += " Das Heer ist mobilgemacht (Kosten × 1,5)."
+		_summary.text += " Das Heer ist mobilgemacht (Kosten × %s)." % GermanFormat.number(
+			float(overview.get("army_cost_factor", 1.0)), 1
+		)
 	var sorted := _relations.duplicate()
 	sorted.sort_custom(func(a: Dictionary, b: Dictionary) -> bool:
 		return float(a.get("relation", 0.0)) > float(b.get("relation", 0.0))

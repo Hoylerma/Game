@@ -1,4 +1,4 @@
-# Militär (Meilenstein M10, Schritt a1; docs/technik/militaer.md, Abschnitte 3.1 und 3.2).
+# Militär (Meilenstein M10, Schritte a1 und a2; docs/technik/militaer.md, Abschnitte 3.1–3.5).
 #
 # Format: docs/technik/chronik-skript.md, Abschnitt 3.30.
 # Das Militär gilt ab 'seit' (Entscheidung 14): Vor diesem Datum (Lesezeichen 1648) gibt es keine Heere,
@@ -11,6 +11,28 @@
 militaer {
     seit       = 1848.03.01   # Lesezeichen „Völkerfrühling“
     fluss_rang = 3            # Flussübergang bis Rang 3 (Rhein … Weser, Mosel … Main, Inn, Moldau; nachbarn.csv)
+
+    # Bewegung (Schritt a2, militaer.md Abschnitt 3.4): Marschtage = Abstand ÷ marsch_km × Gelände des
+    # Zielorts, ein Flussübergang kostet flussuebergang_tage mehr. Bahn: Einladen nach bahn_kapazitaet
+    # Soldaten je Strecke und Tag, Fahrt bahn_km je Tag, Ausladen ausladen_tage.
+    marsch_km           = 20
+    flussuebergang_tage = 1
+    gelaende            = { hochgebirge = 2 mittelgebirge = 1.5 wald = 1.5 bruch = 1.5 }
+    bahn_km             = 300
+    bahn_kapazitaet     = 20000
+    ausladen_tage       = 1
+
+    # Versorgung (Abschnitt 3.5): versorgt in eigenem oder verbündetem Gebiet, sonst höchstens
+    # versorgung_tage Tagesmärsche von einem Bahnhof der eigenen Seite. Zermürbung je Tag; im Winter
+    # (Dezember bis Februar) doppelt.
+    versorgung_tage        = 3
+    zermuerbung            = 0.0005
+    zermuerbung_unversorgt = 0.005
+    moral_unversorgt       = 0.02
+    moral_erholung         = 0.01
+
+    # Mobilmachung (Abschnitt 3.3): Abrüstung in demobilmachung_tage zurück in die Garnisonen.
+    demobilmachung_tage = 30
 }
 
 # ── Heerwesen ──────────────────────────────────────────────────────────────

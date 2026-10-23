@@ -342,6 +342,12 @@ void Simulation::step_day() {
         run_plays(world_);
     }
 
+    // 6d. Heere: Mobilmachung, Bewegung, Versorgung (seit M10, militaer.md Abschnitte 3.3–3.5), nur mit
+    //     Militärdaten.
+    if (military_active(world_)) {
+        run_military(world_);
+    }
+
     // 7. Jahreswechsel.
     if (new_year) {
         run_yearly();
@@ -439,6 +445,19 @@ void Simulation::execute(const Command& command) {
         }
         return;
     }
+    case CommandType::March: {
+        // Militär (seit M10, militaer.md 3.4): Nummer des Heeres im Wert; ungültige bleiben ohne Wirkung.
+        const std::int64_t army = command.value.trunc();
+        if (command.value == Fixed::from_int(army)) {
+            order_march(world_, command.state, army, command.target);
+        }
+        return;
+    }
+    case CommandType::Mobilization:
+        if (command.value == Fixed::one() || command.value == Fixed::zero()) {
+            order_mobilization(world_, command.state, command.value == Fixed::one());
+        }
+        return;
     }
 }
 

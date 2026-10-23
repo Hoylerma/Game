@@ -311,7 +311,9 @@ func _check_diplomacy_1848(sim: SimulationClient) -> void:
 	_check(
 		bool(overview.get("active", false)) and bool(overview.get("diet", false))
 		and int(overview.get("envoy_capacity", 0)) >= 1 and roundi(float(overview.get("alliance_min", 0.0))) == 100
-		and bool(sim.get_state(prussia).get("diplomacy", false)),
+		and bool(sim.get_state(prussia).get("diplomacy", false))
+		and not bool(overview.get("mobilized", true))
+		and is_equal_approx(float(overview.get("army_cost_factor", 0.0)), 1.0),
 		"get_diplomacy: Preußen mit %d Gesandten, Bündnis ab 100" % int(overview.get("envoy_capacity", 0)),
 		"get_diplomacy: %s" % str(overview)
 	)

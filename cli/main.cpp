@@ -793,8 +793,10 @@ Date date_after(const Date& start, std::int64_t days) {
 /// bleibt count. Mit Zollunionen (seit M9) wird danach jeder Befehl mit Wahrscheinlichkeit ¼ zum Befehl
 /// Zollunion: Staat und Union zufällig (Union -1 = Austritt, hinter der letzten ungültig). Mit
 /// Deutschem Bund (seit M9, Schritt b1) auch Gesandte und Verträge, mit Bundesversammlung (Schritt b2)
-/// Anträge, Forderungen und Manöver. Ohne Parlamente, Zollunionen und Bund bleibt die Folge der
-/// Zufallszahlen wie bisher.
+/// Anträge, Forderungen und Manöver. Mit Militär (seit M10, Schritt a2) Mobilmachung und Abrüstung und
+/// Märsche der Heere (Nummer nach den Garnisonen, meist mit dem eigenen Staat, Ziel zur Hälfte ein Ort
+/// dieses Staates). Ohne Parlamente, Zollunionen, Bund und Militär bleibt die Folge der Zufallszahlen
+/// wie bisher.
 std::vector<uhrwerk::LoggedCommand> make_test_commands(const World& w, std::uint64_t seed, std::int64_t count,
                                                        std::int64_t first_day, std::int64_t end_day) {
     std::vector<uhrwerk::LoggedCommand> list;
@@ -808,6 +810,16 @@ std::vector<uhrwerk::LoggedCommand> make_test_commands(const World& w, std::uint
     const Fixed margin = max * Fixed::from_ratio(1, 10);
     const bool diplomacy = uhrwerk::diplomacy_active(w);
     const bool diet = diplomacy && !w.diet.id.empty();
+    const bool military = uhrwerk::military_active(w);
+    std::vector<std::vector<Index>> state_locations(w.states.size());
+    if (military) {
+        for (std::size_t l = 0; l < w.locations.size(); ++l) {
+            if (w.locations[l].owner != uhrwerk::kNone) {
+                state_locations[static_cast<std::size_t>(w.locations[l].owner)].push_back(
+                    static_cast<Index>(l));
+            }
+        }
+    }
     for (std::int64_t i = 0; i < count; ++i) {
         uhrwerk::LoggedCommand c;
         c.day = first_day + rng.below(span);
@@ -850,6 +862,34 @@ std::vector<uhrwerk::LoggedCommand> make_test_commands(const World& w, std::uint
             c.command.state = static_cast<Index>(rng.below(states + 2)) - 1;
             c.command.target = kind == 2 ? uhrwerk::kNone : static_cast<Index>(rng.below(states + 2)) - 1;
             c.command.value = Fixed::from_int(rng.below(5));
+        }
+        // Militär (seit M10, Schritt a2): Mobilmachung (Wert 0 bis 2, 2 ist ungültig) oder Marsch eines
+        // Heeres (Nummer 0 bis hinter das letzte; die Heere entstehen beim Start in der Reihenfolge der
+        // Garnisonen).
+        if (military && rng.below(4) == 0) {
+            if (rng.below(3) == 0) {
+                c.command.type = uhrwerk::CommandType::Mobilization;
+                c.command.state = static_cast<Index>(rng.below(states + 2)) - 1;
+                c.command.target = uhrwerk::kNone;
+                c.command.value = Fixed::from_int(rng.below(3));
+            } else {
+                const auto garrisons = static_cast<std::uint32_t>(w.garrisons.size());
+                const std::uint32_t army = rng.below(garrisons + 2);
+                const bool known = army >= 1 && army <= garrisons;
+                const Index owner = known ? w.garrisons[army - 1].state : uhrwerk::kNone;
+                c.command.type = uhrwerk::CommandType::March;
+                c.command.value = Fixed::from_int(army);
+                c.command.state =
+                    known && rng.below(4) != 0 ? owner : static_cast<Index>(rng.below(states + 2)) - 1;
+                const std::vector<Index>* own =
+                    known ? &state_locations[static_cast<std::size_t>(owner)] : nullptr;
+                if (own != nullptr && !own->empty() && rng.below(2) == 0) {
+                    c.command.target = (*own)[rng.below(static_cast<std::uint32_t>(own->size()))];
+                } else {
+                    c.command.target =
+                        static_cast<Index>(rng.below(static_cast<std::uint32_t>(w.locations.size()) + 2)) - 1;
+                }
+            }
         }
         list.push_back(c);
     }

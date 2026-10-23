@@ -365,6 +365,8 @@ Präzisiert in Schritt b2:
   festgelegt zu Beginn des Spiels; nur Bundesstaaten.
 - **Beziehungen:** zu Beginn einmalig −30 zwischen allen Staaten auf verschiedenen Seiten, je weiterer
   Stufe −10 zwischen den Hauptparteien. Mobilmachung: Heereskosten der beiden Hauptparteien × 1,5.
+  Seit M10 (Schritt a2) machen in Welten mit Militär beide Hauptparteien stattdessen wirklich mobil
+  und rüsten mit dem Ende der Krise ab ([militaer.md](militaer.md), Abschnitt 3.3).
 - **Ausgang** (halbe Wirkung beim Kompromiss): Führung im Bund – Sieg oder Kompromiss stehen in der
   Anzeige „Die deutsche Frage“; Zollunion – Beitritt zum nächsten 1. Januar (ohne Vorbehalt der
   Leitmacht), beim Kompromiss zahlt der Gegner ein halbes Monatseinkommen; Bündnis lösen – der Gegner

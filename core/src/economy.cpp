@@ -2,6 +2,7 @@
 
 #include "uhrwerk/customs.hpp"
 #include "uhrwerk/diplomacy.hpp"
+#include "uhrwerk/military.hpp"
 
 #include <algorithm>
 #include <cstddef>
@@ -438,8 +439,12 @@ bool run_state_budget(World& world, Index state_index, const std::vector<Index>&
     base_expenses(world, state, population_of(world, locations), budget);
     state.interest_rate = interest_rate_of(world, state);
     budget.interest = state.debt * state.interest_rate / twelve;
-    // Mobilmachung in einem diplomatischen Spiel (seit M9, diplomatie.md Abschnitt 4.5).
-    if (mobilized(world, state_index)) {
+    // Mobilmachung: mit Militär (seit M10, militaer.md Abschnitt 3.3) nach den Soldaten unter Waffen, in
+    // die auch die Mobilmachung einer Krise aufgeht; sonst wie im diplomatischen Spiel (seit M9,
+    // diplomatie.md Abschnitt 4.5).
+    if (military_active(world)) {
+        budget.army = budget.army * army_cost_factor(world, state_index);
+    } else if (mobilized(world, state_index)) {
         budget.army = budget.army * world.diplomacy_rules.mobilization;
     }
     // Gesandte (seit M9, diplomatie.md Abschnitt 4.2): ein Anteil der Monatseinnahmen je Gesandtem.

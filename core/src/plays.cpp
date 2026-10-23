@@ -10,6 +10,7 @@
 
 #include "uhrwerk/customs.hpp"
 #include "uhrwerk/diplomacy.hpp"
+#include "uhrwerk/military.hpp"
 
 #include <algorithm>
 #include <cstddef>
@@ -116,6 +117,9 @@ void pay(State& state, Fixed amount) {
 void finish(World& world, std::size_t index, PlayOutcome outcome) {
     const DiplomaticPlay play = world.plays[index];
     world.plays.erase(world.plays.begin() + static_cast<std::ptrdiff_t>(index));
+    // Mit Militär (seit M10, militaer.md 3.3) rüsten die Hauptparteien ab, die die Krise mobil gemacht hat.
+    end_crisis_mobilization(world, play.demander);
+    end_crisis_mobilization(world, play.target);
     world.play_results.push_back(PlayResult{play.kind, play.demander, play.target, play.customs_union,
                                             play.started, world.date, play.stage, outcome});
     const std::string& demander = name_of(world, play.demander);
@@ -381,6 +385,13 @@ void run_plays(World& world) {
             adjust_relation(world, play.demander, play.target, rules.play_stage);
             chronicle(world, play.demander,
                       crisis(world, play) + (play.stage == 2 ? ": Ultimatum." : ": Mobilmachung."));
+            // Mit Militär (seit M10, militaer.md 3.3) machen beide Hauptparteien wirklich mobil.
+            if (play.stage == 3 && military_active(world)) {
+                const Index demander_state = play.demander;
+                const Index target_state = play.target;
+                order_mobilization(world, demander_state, true, true);
+                order_mobilization(world, target_state, true, true);
+            }
             ++i;
             continue;
         }

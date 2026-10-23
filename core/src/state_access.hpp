@@ -253,7 +253,19 @@ template <typename Sim, typename V> void StateAccess::visit(Sim& sim, V& v) {
             v.field("geschuetze", a.guns);
             v.field("moral", a.morale);
             v.field("lage", a.status);
+            list(v, "weg", a.route, Extent::State, [&](auto& r) { // seit a2
+                v.field("ort", r.location);
+                v.field("art", r.mode);
+                v.field("strecke", r.railway);
+            });
+            v.field("tage", a.days_left);
         });
+        list(v, "mobilmachung", w.mobilizations, Extent::Content, [&](auto& m) { // seit a2, je Staat
+            v.field("phase", m.phase);
+            v.field("tage", m.days);
+            v.field("krise", m.crisis);
+        });
+        list(v, "bahn_belegt", w.rail_backlog, Extent::Content, [&](auto& b) { v.field("", b); });
     }
 
     // Politik (seit M8): nur in Welten mit Parlamenten, damit die Prüfsumme der übrigen (1648) bleibt.
@@ -304,8 +316,9 @@ template <typename Sim, typename V> void StateAccess::visit(Sim& sim, V& v) {
         v.field("staat", c.state);
         v.field("wert", c.value);
         v.field("steuerart", c.kind);
-        // Wahlkampf (M8), Zollunion und Diplomatie (M9)
-        if (!w.parliaments.empty() || !w.customs_unions.empty() || !w.relations.empty()) {
+        // Wahlkampf (M8), Zollunion und Diplomatie (M9), Marsch (M10)
+        if (!w.parliaments.empty() || !w.customs_unions.empty() || !w.relations.empty() ||
+            w.military_rules.active) {
             v.field("ziel", c.target);
             v.field("aktion", c.action);
         }
