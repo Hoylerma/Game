@@ -5,6 +5,7 @@
 #include "uhrwerk/diplomacy.hpp"
 #include "uhrwerk/economy.hpp"
 #include "uhrwerk/loader.hpp"
+#include "uhrwerk/military.hpp"
 #include "uhrwerk/politics.hpp"
 
 #include <algorithm>
@@ -1619,7 +1620,16 @@ Dictionary UhrwerkSimulation::get_diplomacy(std::int64_t state_index) const {
     result["guarantee_min"] = w->diplomacy_rules.guarantee_min.to_double();
     result["rival_below"] = w->diplomacy_rules.rival_below.to_double();
     result["play_index"] = uhrwerk::play_of(*w, self);
-    result["mobilized"] = uhrwerk::mobilized(*w, self);
+    // Mit Militär (seit M10) zählt die Mobilmachung des Staates, die Kosten folgen den Soldaten; sonst die
+    // Mobilmachung der Krise mit dem Faktor der Diplomatie.
+    if (uhrwerk::military_active(*w)) {
+        result["mobilized"] = uhrwerk::mobilization_phase(*w, self) != uhrwerk::MobilizationPhase::Peace;
+        result["army_cost_factor"] = uhrwerk::army_cost_factor(*w, self).to_double();
+    } else {
+        const bool mobilized = uhrwerk::mobilized(*w, self);
+        result["mobilized"] = mobilized;
+        result["army_cost_factor"] = mobilized ? w->diplomacy_rules.mobilization.to_double() : 1.0;
+    }
     result["camp"] = camp_of(*w, self);
     result["federal"] = uhrwerk::federal_state(*w, self);
     return result;

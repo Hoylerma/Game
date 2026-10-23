@@ -437,7 +437,8 @@ func get_relations(state_index: int) -> Array[Dictionary]:
 
 
 ## Überblick eines Staates: { active, diet, envoy_capacity, envoy_count, envoy_cost_month,
-## envoy_cost_percent, alliance_min, guarantee_min, rival_below, play_index, mobilized, camp, federal }.
+## envoy_cost_percent, alliance_min, guarantee_min, rival_below, play_index, mobilized, army_cost_factor
+## (seit M10), camp, federal }.
 func get_diplomacy(state_index: int) -> Dictionary:
 	return _as_dictionary(_native.call(&"get_diplomacy", state_index))
 

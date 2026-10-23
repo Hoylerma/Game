@@ -15,7 +15,8 @@
 //      Vereinskassen (seit M9)
 //   4. Bevölkerung der Orte, die heute ihren Rechentag haben – parallel
 //   5. Zusammenführen, nacheinander: Momentaufnahmen veröffentlichen, Wanderung buchen
-//   6. Wirtschaft der Staaten, die heute ihren Rechentag haben
+//   6. Wirtschaft der Staaten, die heute ihren Rechentag haben; Wahlen (seit M8), diplomatische Spiele
+//      (seit M9), Heere (seit M10: Mobilmachung, Bewegung, Versorgung)
 //   7. Am 1. Januar: Seuchen und Abbau der Verwüstung (Orte ohne Blöcke werden übersprungen)
 //   8. Datum um einen Tag weiterschalten
 //
@@ -55,6 +56,8 @@ enum class CommandType : std::uint8_t {
     Motion,       // seit M9: state = Antragsteller, value = MotionKind, target = Union bzw. Staat (4.4)
     Demand,       // seit M9: state = Fordernder, target = Gegner, value = DemandKind (Abschnitt 4.5)
     Manoeuvre,    // seit M9: state = Hauptpartei eines Spiels, value = Manoeuvre (diplomacy.hpp, 4.5)
+    March,        // seit M10: state, value = Nummer des Heeres, target = Zielort, kNone hält an (3.4)
+    Mobilization, // seit M10: state, value = 1 Mobilmachung, 0 Abrüstung (militaer.md 3.3)
 };
 
 struct Command {
@@ -63,7 +66,7 @@ struct Command {
     Fixed value;
     TaxKind kind = TaxKind::Kontribution;          // SetTaxRate: welche Steuer (seit M5)
     Index target = kNone;                          // Campaign: Wahlkreis (seit M8); CustomsUnion: Union;
-                                                   // Envoy, Treaty: Staat (seit M9)
+                                                   // Envoy, Treaty: Staat (seit M9); March: Ort (M10)
     CampaignAction action = CampaignAction::Rally; // Campaign: Art (seit M8)
 
     friend bool operator==(const Command&, const Command&) = default;

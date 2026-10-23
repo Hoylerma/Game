@@ -2754,11 +2754,55 @@ private:
                 }
                 rules_found = true;
                 ref.line = node.line;
-                Fields f(node, file.name, "militaer", issues_, {"seit", "fluss_rang"});
+                Fields f(node, file.name, "militaer", issues_,
+                         {"seit", "fluss_rang", "marsch_km", "flussuebergang_tage", "gelaende", "bahn_km",
+                          "bahn_kapazitaet", "ausladen_tage", "versorgung_tage", "zermuerbung",
+                          "zermuerbung_unversorgt", "moral_unversorgt", "moral_erholung",
+                          "demobilmachung_tage"});
                 const std::optional<Date> since = f.date("seit");
-                world_.military_rules.river_rank =
-                    static_cast<std::int32_t>(f.integer("fluss_rang", 0, 6).value_or(3));
-                world_.military_rules.active = since.has_value() && *since <= start_;
+                MilitaryRules& rules = world_.military_rules;
+                rules.river_rank = static_cast<std::int32_t>(f.integer("fluss_rang", 0, 6).value_or(3));
+                rules.active = since.has_value() && *since <= start_;
+                // Bewegung und Versorgung (seit Schritt a2): optional, sonst die Spielwerte aus world.hpp.
+                const auto optional_fixed = [&](std::string_view key, Fixed& target, const Range& range) {
+                    if (f.has(key)) {
+                        target = f.fixed(key, range).value_or(target);
+                    }
+                };
+                const auto optional_days = [&](std::string_view key, std::int32_t& target, std::int64_t lo,
+                                               std::int64_t hi) {
+                    if (f.has(key)) {
+                        target = static_cast<std::int32_t>(f.integer(key, lo, hi).value_or(target));
+                    }
+                };
+                optional_fixed("marsch_km", rules.march_km, between(fx(1), fx(100)));
+                optional_fixed("flussuebergang_tage", rules.river_days, between(fx(0), fx(10)));
+                optional_fixed("bahn_km", rules.rail_km, between(fx(1), fx(2000)));
+                optional_fixed("bahn_kapazitaet", rules.rail_capacity, between(fx(1), fx(1000000)));
+                optional_days("ausladen_tage", rules.unload_days, 0, 10);
+                optional_fixed("versorgung_tage", rules.supply_days, between(fx(0), fx(30)));
+                optional_fixed("zermuerbung", rules.attrition, between(fx(0), fx(1)));
+                optional_fixed("zermuerbung_unversorgt", rules.attrition_unsupplied, between(fx(0), fx(1)));
+                optional_fixed("moral_unversorgt", rules.morale_unsupplied, between(fx(0), fx(1)));
+                optional_fixed("moral_erholung", rules.morale_recovery, between(fx(0), fx(1)));
+                optional_days("demobilmachung_tage", rules.demobilization_days, 1, 365);
+                rules.terrain_march.assign(world_.terrains.size(), Fixed::one());
+                if (f.has("gelaende")) {
+                    if (const ScriptNode* terrains =
+                            f.block("gelaende", "Faktor je Gelände, z. B. { hochgebirge = 2 wald = 1.5 }")) {
+                        for (const ScriptNode& child : terrains->children) {
+                            const Index terrain = lookup(terrains_, child.key);
+                            const auto factor = child.is_block ? std::nullopt : Fixed::parse(child.value);
+                            if (terrain == kNone || !factor || *factor < fx(1) || *factor > fx(10)) {
+                                issues_.error(file.name, child.line,
+                                              "ungültiger Eintrag in 'gelaende' von militaer (erwartet "
+                                              "Gelände = Faktor, 1–10)");
+                                continue;
+                            }
+                            rules.terrain_march[static_cast<std::size_t>(terrain)] = *factor;
+                        }
+                    }
+                }
             } else if (node.key == "heerwesen") {
                 if (!node.is_block || node.value.empty()) {
                     issues_.error(file.name, node.line,

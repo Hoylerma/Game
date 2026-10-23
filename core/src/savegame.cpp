@@ -34,7 +34,7 @@ constexpr int kZstdLevel = 3;
 /// Obergrenze der unkomprimierten Nutzdaten (Schutz vor beschädigten Längenangaben).
 constexpr std::uint64_t kMaxPayload = std::uint64_t{1} << 31;
 /// Stand des Militärs im Zustand (seit M10, Inhaltsbereich militaer): 1 = Schritt a1 (Garnisonen).
-constexpr std::uint64_t kMilitaryContentVersion = 1;
+constexpr std::uint64_t kMilitaryContentVersion = 2;
 
 bool fail(std::string* error, std::string message) {
     if (error != nullptr) {
@@ -872,8 +872,31 @@ std::string validate_state(const Simulation& sim) {
             if (!in(a.state, S) || !in(a.location, w.locations.size()) ||
                 !none_or_in(a.garrison, w.garrisons.size()) || a.soldiers < Fixed::zero() ||
                 a.guns < Fixed::zero() || a.morale < Fixed::zero() || a.morale > Fixed::one() ||
-                static_cast<int>(a.status) > static_cast<int>(ArmyStatus::Garrison)) {
+                static_cast<int>(a.status) > static_cast<int>(ArmyStatus::Rail)) {
                 return "Heer mit ungültigem Verweis oder Wert";
+            }
+            // Weg (seit a2): nur auf dem Marsch oder der Bahn, mit gültigen Orten und Strecken.
+            const bool moving = a.status == ArmyStatus::March || a.status == ArmyStatus::Rail;
+            if (moving == a.route.empty() || (!moving && a.days_left != Fixed::zero())) {
+                return "Heer mit ungültigem Weg";
+            }
+            for (const RouteStep& r : a.route) {
+                const bool rail = r.mode == LegMode::Rail;
+                if (!in(r.location, w.locations.size()) ||
+                    static_cast<int>(r.mode) > static_cast<int>(LegMode::Rail) ||
+                    (rail ? !in(r.railway, w.railways.size()) : r.railway != kNone)) {
+                    return "Heer mit ungültigem Weg";
+                }
+            }
+        }
+        for (const Mobilization& m : w.mobilizations) {
+            if (static_cast<int>(m.phase) > static_cast<int>(MobilizationPhase::Demobilizing) || m.days < 0) {
+                return "Mobilmachung ungültig";
+            }
+        }
+        for (const std::int32_t b : w.rail_backlog) {
+            if (b < 0) {
+                return "Belegung einer Bahnstrecke ungültig";
             }
         }
     } else if (!w.armies.empty()) {
@@ -1198,8 +1221,25 @@ ContentFingerprint content_fingerprint(const World& w) {
     {
         Fnv h;
         if (w.military_rules.active) {
+            const MilitaryRules& r = w.military_rules;
             h.u64(kMilitaryContentVersion);
-            h.i64(w.military_rules.river_rank);
+            h.i64(r.river_rank);
+            // Bewegung und Versorgung (seit a2).
+            h.fixed(r.march_km);
+            h.fixed(r.river_days);
+            h.u64(r.terrain_march.size());
+            for (const Fixed f : r.terrain_march) {
+                h.fixed(f);
+            }
+            h.fixed(r.rail_km);
+            h.fixed(r.rail_capacity);
+            h.i64(r.unload_days);
+            h.fixed(r.supply_days);
+            h.fixed(r.attrition);
+            h.fixed(r.attrition_unsupplied);
+            h.fixed(r.morale_unsupplied);
+            h.fixed(r.morale_recovery);
+            h.i64(r.demobilization_days);
             for (const State& s : w.states) {
                 h.fixed(s.army.firepower);
                 h.fixed(s.army.guns_per_mille);

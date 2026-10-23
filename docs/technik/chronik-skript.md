@@ -927,6 +927,19 @@ Abschnitte 3.1 und 3.2). Die Datei ist optional; ohne sie oder vor ihrem `seit` 
 militaer {
     seit       = 1848.03.01   # Pflicht: das Militär gilt, wenn das Startdatum nicht davor liegt
     fluss_rang = 3            # Pflicht, 0–6: Flussübergang bis zu diesem Rang (karte/nachbarn.csv)
+    # seit Schritt a2, alle optional (Standard in Klammern):
+    marsch_km              = 20     # 1–100 (20): Marschleistung je Tag
+    flussuebergang_tage    = 1      # 0–10 (1): zusätzliche Tage für einen Flussübergang
+    gelaende               = { hochgebirge = 2 wald = 1.5 }  # Faktor 1–10 je Gelände des Zielorts (1)
+    bahn_km                = 300    # 1–2.000 (300): Bahnfahrt je Tag
+    bahn_kapazitaet        = 20000  # 1–1.000.000 (20.000): Soldaten je Strecke und Tag beim Einladen
+    ausladen_tage          = 1      # Ganzzahl 0–10 (1)
+    versorgung_tage        = 3      # 0–30 (3): Tagesmärsche bis zum Bahnhof der eigenen Seite
+    zermuerbung            = 0.0005 # 0–1 (0,0005): Abgänge je Tag, versorgt
+    zermuerbung_unversorgt = 0.005  # 0–1 (0,005)
+    moral_unversorgt       = 0.02   # 0–1 (0,02): Moralverlust je Tag ohne Versorgung
+    moral_erholung         = 0.01   # 0–1 (0,01): Erholung je Tag in Ruhe und versorgt
+    demobilmachung_tage    = 30     # Ganzzahl 1–365 (30)
 }
 
 heerwesen standard {          # ohne 'staat': für alle Staaten ohne eigenen Eintrag
@@ -948,15 +961,18 @@ garnison pru_garde {
 }
 ```
 
-Genau ein Block `militaer` ist Pflicht. Heerwesen und Garnisonen mit späterem `seit` (Garnisonen
+Genau ein Block `militaer` ist Pflicht. In `gelaende` ist ein unbekanntes Gelände oder ein Faktor
+außerhalb von 1–10 fatal. Heerwesen und Garnisonen mit späterem `seit` (Garnisonen
 auch mit `bis` vor oder am Start) gehören nicht zur Welt. Die Anteile eines Staates werden auf ihre
 Summe bezogen; ein Staat ohne Garnison erhält eine in seiner Hauptstadt (`<TAG>_hauptstadt`, Anteil
 1). Fatal sind eine Kennung zweimal, ein unbekannter Staat oder Ort und Werte außerhalb der Bereiche;
 eine Garnison in einem Ort, der zum Start einem anderen Staat gehört, ist eine Warnung. Staaten, die
 zum Start keinen Ort haben, entfallen mit ihren Einträgen. Mit dem Militär lädt der Kern auch
 `karte/nachbarn.csv` und `karte/ueberfahrten.csv` (Abschnitte 6.6 und 6.7). Im Kern:
-`World::military_rules` (`active`, `river_rank`), `State::army` (`ArmyProfile`), `World::garrisons`
-und `World::neighbors`; die Heere sind Zustand (`World::armies`).
+`World::military_rules` (`MilitaryRules`: `active`, `river_rank`, seit a2 Bewegung, Bahn, Versorgung
+und Abrüstung, `terrain_march` je Gelände), `State::army` (`ArmyProfile`), `World::garrisons` und
+`World::neighbors`; Zustand sind die Heere (`World::armies`, seit a2 mit Weg und Resttagen), die
+Mobilmachung je Staat (`World::mobilizations`) und die Belegung je Bahnstrecke (`World::rail_backlog`).
 
 ## 4. Startzustand
 

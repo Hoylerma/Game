@@ -157,6 +157,18 @@ der Krisen aus M9, die darin aufgeht). Nach dem Frieden demobilisiert ein Staat 
 Ob die Reservisten der Wirtschaft als Arbeitskräfte fehlen, ist Entscheidung 7 (Empfehlung: in M10
 nicht; nur die Kosten und die Gefallenen wirken).
 
+Umsetzung (Schritt a2): Befehl `Mobilmachung` (Wert 1 mobil, 0 Abrüstung). Phasen je Staat: Frieden,
+Mobilmachung, mobil, Abrüstung. Mit der Mobilmachung werden alle Garnisonen eines Staates Feldarmeen
+(Lage „Ruhe“) und wachsen jeden Tag um ihren Anteil an der Friedensstärke × (Faktor − 1) ÷
+Mobilmachungstage, höchstens bis zur Kriegsstärke; Reserven stoßen dort zum Heer, wo es steht. Die
+Abrüstung führt die Stärke in `demobilmachung_tage` (30) gleichmäßig auf den Anteil zurück; danach
+stehen die Heere wieder als Garnisonen an ihren Standorten. Die Heereskosten sind die bisherigen mal
+Soldaten ÷ Friedensstärke, solange ein Staat nicht im Frieden ist; im Frieden bleiben sie unverändert
+(1848 ohne Befehle zeichengleich). Eine Krise auf der Stufe Mobilmachung (M9) macht in Welten mit
+Militär beide Hauptparteien wirklich mobil, statt die Kosten mit dem Faktor der Diplomatie (1,5) zu
+erhöhen; endet die Krise, rüsten die Staaten ab, die sie mobil gemacht hat. Befiehlt die Regierung
+selbst die Mobilmachung, bleibt sie nach der Krise bestehen.
+
 ### 3.4 Bewegung
 
 - **Marsch** zu einem Nachbarort: Tage = Abstand der Mittelpunkte ÷ Marschleistung (Spielwert
@@ -170,6 +182,18 @@ nicht; nur die Kosten und die Gefallenen wirken).
 - **Zugang:** Eigene, verbündete und gegnerische Orte (im Krieg); neutrale Staaten und Orte ohne
   Daten sind gesperrt.
 
+Umsetzung (Schritt a2): Befehl `Marsch` (Heer, Zielort; ohne Ziel hält das Heer an). Nur
+Feldarmeen marschieren, nicht die Garnisonen im Frieden. Der Weg ist der schnellste über Marsch und
+Bahn zugleich (Dijkstra über Ort × zu Fuß/auf der Bahn; Einladen an einem Bahnhof, Ausladen am Ende
+der Fahrt, beides eingerechnet). Das Gelände steht in `common/militaer.chron` (`gelaende`; 1848:
+Hochgebirge 2, Mittelgebirge, Wald und Bruch 1,5). Eine Bahnfahrt ist ein Abschnitt des Weges: Beim
+Einsteigen wartet das Heer, bis alle Strecken seiner Fahrt frei sind, lädt `Soldaten ÷ 20.000` Tage
+(aufgerundet) und belegt die Strecken so lange; dann fährt es und lädt einen Tag aus. Wird der nächste
+Ort unterwegs gesperrt (ein Bündnis endet), bleibt das Heer stehen. Wer schon auf einem Abschnitt
+marschiert und ein neues Ziel über denselben nächsten Ort bekommt, behält den zurückgelegten Teil;
+auf der Bahn nimmt ein Heer keine Befehle an. Zugang in a2: eigene und verbündete Orte (Krieg und
+Besetzung folgen mit a3).
+
 ### 3.5 Versorgung und Zermürbung
 
 Versorgt ist ein Heer in eigenem oder verbündetem Gebiet und im Feindesland, solange es höchstens
@@ -177,6 +201,12 @@ drei Tagesmärsche von einem Bahnhof hat, den seine Seite hält (Kapitel 15, Abs
 1850). Zermürbung je Tag (Krankheit, Abgänge): versorgt 0,05 %, unversorgt 0,5 % und Moral −0,02;
 im Winter (Dezember bis Februar) doppelt. Belagerer zählen wie unversorgt, wenn die Festung den
 Bahnhof sperrt.
+
+Umsetzung (Schritt a2): Zermürbung gilt nur für Feldarmeen, nicht für Garnisonen im Frieden. Die drei
+Tagesmärsche zum Bahnhof sind Marschtage wie bei der Bewegung; Orte ohne Daten liegen nicht auf dem
+Weg. In Ruhe und versorgt erholt sich die Moral um 0,01 je Tag. Die Geschütze folgen den Soldaten
+(Heerwesen). Die Abgänge mindern die Bevölkerung nicht; Gefallene kommen mit der Schlacht (a3). Ohne
+Krieg stehen alle Heere in eigenem oder verbündetem Gebiet und sind versorgt.
 
 ## 4. Krieg (M10a)
 
@@ -458,3 +488,4 @@ Weitere Tests:
 | Schritt | Stand |
 |---|---|
 | a1 Nachbarschaft und Heere | Kartengenerator: `nachbarn.csv` mit Grenzlänge und gekreuztem Fluss (Kreuzung der Verbindungslinie mit den Flusslinien statt einer Pixelzählung an der Grenze, die bei Flüssen in der Ortsmitte versagt), Testdaten und Tests. `karte/ueberfahrten.csv` mit 13 Fähren und Übergängen (Rügen, Hiddensee, Alsen, Fehmarn, Sylt, Föhr, Pellworm, Ærø, Wangerooge, Langeoog, Norderney, Juist, Borkum). `common/militaer.chron` (chronik-skript.md 3.30): Militär ab 1848.03.01, Flussrang 3, Heerwesen Standard, Preußen und Österreich, 18 Garnisonen (Preußen: Garde und acht Armeekorps, Österreich sechs Generalkommanden, Bayern drei), die übrigen Staaten in ihrer Hauptstadt: 53 Garnisonen, 382.528 Soldaten. Kern: `military.hpp` (Friedensstärke, Nachbarschaft, Flussübergang, Heere beim Start und am Monatsersten), Lader mit Prüfungen, Zustand `heere`, Inhaltsbereich `militaer` mit eigenem Stand, Spielstand Format 4, `uhrwerk-cli info` mit Nachbarschaft und Garnisonen. Tests: Lader, Heere, Spielstand und Wiederholung, Fingerabdruck, Ladefehler; Format 3 zeigt Metadaten, lädt nicht. 1648 bitgleich (`5db13a66d63e6079`). |
+| a2 Bewegung | Befehle `Marsch` (Heer, Zielort; ohne Ziel Halt) und `Mobilmachung` (1 mobil, 0 Abrüstung). Mobilmachung je Staat mit Phasen, Wachstum der Feldarmeen bis zur Kriegsstärke, Abrüstung in 30 Tagen zurück in die Garnisonen; Heereskosten nach Soldaten ÷ Friedensstärke. Wege mit Dijkstra über Marsch und Bahn (Gelände, Flussübergang, Überfahrt, Einladen nach Kapazität, Fahrt, Ausladen), Belegung je Bahnstrecke mit Warten, Bewegung mit Übertrag der Resttage. Versorgung (eigenes und verbündetes Gebiet, sonst Bahnhof in drei Tagesmärschen) und Zermürbung mit Winter, Moral. Krise Stufe 3 → Mobilmachung beider Hauptparteien, Ende der Krise → Abrüstung (statt Faktor 1,5 der Diplomatie). Regeln in `common/militaer.chron` (chronik-skript.md 3.30), Inhaltsbereich `militaer` Stand 2, Zustand: Weg und Resttage je Heer, Mobilmachung je Staat, Belegung je Strecke. Testbefehle des Speichertests mit Marsch und Mobilmachung. Brücke: `get_diplomacy` liefert `army_cost_factor`, das Diplomatiefenster zeigt den echten Faktor statt fest 1,5 (Heere auf der Karte und Befehle in der Oberfläche folgen mit b3). Tests: Marschtage, Zugang, Wege zu Fuß und mit der Bahn, Bündnis, Mobilmachung mit Kosten, Bahnfahrt mit Warten, Halt, Abrüstung, Versorgung und Winter, Krise, Spielstand während Mobilmachung, Marsch und Bahnfahrt, Wiederholung, Ladefehler. 1648 bitgleich, Wirtschaft 1848 ohne Befehle zeichengleich. |

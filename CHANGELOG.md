@@ -24,6 +24,17 @@ freigegeben; Stand je Schritt in Abschnitt 12 dort.
   Soldaten), am Monatsersten folgt es der Bevölkerung. Inhaltsbereich `militaer`, Spielstand
   **Format 4** (Spielstände aus M9 laden nicht mehr), `uhrwerk-cli info` mit Nachbarschaft und
   Garnisonen. Noch ohne Bewegung und Krieg; 1648 bitgleich.
+- **Bewegung, Eisenbahn, Versorgung, Mobilmachung (Schritt a2):** Neue Befehle `Mobilmachung` und
+  `Marsch`. Mit der Mobilmachung werden die Garnisonen Feldarmeen und wachsen in den
+  Mobilmachungstagen auf die Kriegsstärke (Preußen ×2,5 in 28 Tagen); die Heereskosten folgen den
+  Soldaten, die Abrüstung führt die Heere in 30 Tagen zurück in ihre Garnisonen. Eine Krise auf der
+  Stufe Mobilmachung macht beide Hauptparteien wirklich mobil und endet mit ihrer Abrüstung. Märsche
+  gehen auf dem schnellsten Weg über Land und Bahn: 20 km je Tag, Gebirge, Wald und Bruch langsamer,
+  ein Flussübergang einen Tag mehr, Fähren nach den Daten; die Bahn fährt 300 km je Tag, lädt 20.000
+  Soldaten je Strecke und Tag ein, und wer auf eine belegte Strecke trifft, wartet. Zugang vorerst nur
+  im eigenen und verbündeten Gebiet. Versorgung und Zermürbung (versorgt 0,05 %, sonst 0,5 % je Tag
+  und Moralverlust, im Winter doppelt). Regeln in `common/militaer.chron`; der Speichertest 1848 übt
+  Märsche und Mobilmachungen mit. Ohne Befehle rechnet 1848 zeichengleich; 1648 bitgleich.
 
 ### Meilenstein M9 – Diplomatie und Zollverein
 
