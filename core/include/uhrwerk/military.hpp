@@ -4,10 +4,12 @@
 //
 // Schritt a1: Nachbarschaft der Orte, Heerwesen je Staat, Garnisonen und das Friedensheer als Heere
 // in ihren Garnisonen. Schritt a2: Mobilmachung, Wege über Marsch und Eisenbahn, Bewegung, Versorgung
-// und Zermürbung. Alles gilt nur in Welten mit Militärdaten (MilitaryRules::active, ab dem 'seit' in
-// common/militaer.chron); ohne sie bleibt der Zustand leer (1648 bitgleich).
+// und Zermürbung. Schritt a3: Krieg mit Bündnisfall, Schlacht, Rückzug, Besetzung, Belagerung,
+// Verwundete, Gefangene und Gefallene. Alles gilt nur in Welten mit Militärdaten (MilitaryRules::active, ab
+// dem 'seit' in common/militaer.chron); ohne sie bleibt der Zustand leer (1648 bitgleich).
 
 #include "uhrwerk/fixed.hpp"
+#include "uhrwerk/rng.hpp"
 #include "uhrwerk/world.hpp"
 
 #include <cstdint>
@@ -49,8 +51,8 @@ void update_garrisons(World& world);
 Army* find_army(World& world, std::int64_t id);
 const Army* find_army(const World& world, std::int64_t id);
 
-/// Darf ein Heer von state den Ort betreten? Eigene und verbündete Orte; Orte ohne Daten und die
-/// anderer Staaten sind gesperrt (gegnerische und besetzte Orte im Krieg kommen mit Schritt a3).
+/// Darf ein Heer von state den Ort betreten? Eigene und verbündete Orte, im Krieg auch die der Gegner
+/// und die von der eigenen Seite besetzten; Orte ohne Daten und neutraler Staaten sind gesperrt.
 bool accessible(const World& world, Index state, Index location);
 
 /// Marschtage zum Nachbarn: Abstand ÷ Marschleistung × Geländefaktor des Zielorts, ein Flussübergang
@@ -98,8 +100,44 @@ Fixed army_cost_factor(const World& world, Index state);
 /// von einem Bahnhof seiner Seite.
 bool supplied(const World& world, const Army& army);
 
-/// Täglich nach den diplomatischen Spielen: Mobilmachung und Abrüstung, Bewegung, Versorgung und
-/// Zermürbung, Belegung der Bahnstrecken.
-void run_military(World& world);
+// ─── Krieg (seit Schritt a3, Abschnitte 4.1–4.4) ────────────────────────────
+
+/// Stehen a und b in einem Krieg auf verschiedenen Seiten?
+bool at_war(const World& world, Index a, Index b);
+
+/// Nimmt der Staat an einem Krieg teil?
+bool in_war(const World& world, Index state);
+
+/// Eigene Seite: derselbe Staat, verbündet oder in einem Krieg auf derselben Seite.
+bool friendly(const World& world, Index a, Index b);
+
+/// Wer den Ort kontrolliert: der Besetzer, sonst der Besitzer (kNone für Orte ohne Daten).
+Index controller(const World& world, Index location);
+
+/// Stufe der Festung im Ort (1–3), 0 ohne Festung.
+std::int32_t fortress_level(const World& world, Index location);
+
+/// Bündnisfall (Abschnitt 4.1): Seiten eines Krieges von attacker gegen target, Hauptparteien zuerst.
+/// Verbündete und Garanten des Ziels stehen bei ihm, Verbündete des Angreifers bei diesem; wer zu
+/// beiden gehört, bleibt neutral.
+void war_sides(const World& world, Index attacker, Index target, std::vector<Index>& attackers,
+               std::vector<Index>& defenders);
+
+/// Darf state target den Krieg erklären? Beide bestehen, sind verschieden, nicht schon im Krieg
+/// miteinander und nicht auf derselben Seite eines Krieges.
+bool can_declare_war(const World& world, Index state, Index target);
+
+/// Befehl Kriegserklärung: Bündnisfall, Beziehung bei allen Bundesstaaten, Verträge zwischen den Seiten
+/// enden, alle Kriegführenden machen mobil. false, wenn ungültig.
+bool declare_war(World& world, Index state, Index target);
+
+/// Krieg mit festen Seiten (Krise, Bundesexekution); Hauptparteien zuerst. Verträge zwischen den Seiten
+/// enden, alle machen mobil, die Chronik meldet den Krieg. false, wenn die Seiten ungültig sind.
+bool start_war(World& world, std::vector<Index> attackers, std::vector<Index> defenders, WarCause cause);
+
+/// Täglich nach den diplomatischen Spielen: Mobilmachung und Abrüstung, Bewegung, Schlachten (Zufall aus
+/// dem Strom krieg), Besetzung und Belagerung, Versorgung und Zermürbung, Verwundete, Belegung der
+/// Bahnstrecken; am Monatsersten mindern die Gefallenen die Bevölkerung.
+void run_military(World& world, Pcg32& rng);
 
 } // namespace uhrwerk

@@ -138,6 +138,10 @@ void finish(World& world, std::size_t index, PlayOutcome outcome) {
     case PlayOutcome::Compromise:
         chronicle(world, play.demander, "Die " + crisis(world, play) + " endet mit einem Kompromiss.");
         break;
+    case PlayOutcome::War:
+        // Seit M10 (militaer.md 4.1): Der Krieg hat schon begonnen; keine Wirkung der Forderung.
+        chronicle(world, play.demander, "Die " + crisis(world, play) + " wird zum Krieg.");
+        return;
     }
     const bool full = outcome == PlayOutcome::DemanderWon;
     switch (play.kind) {
@@ -395,11 +399,19 @@ void run_plays(World& world) {
             ++i;
             continue;
         }
-        // Auflösung nach der dritten Stufe (Krieg kommt mit M10).
+        // Auflösung nach der dritten Stufe. Gibt keine Seite nach, wird die Krise mit Militär zum Krieg
+        // (seit M10, militaer.md 4.1, Entscheidung 9), sonst endet sie mit einem Kompromiss.
         if (demander < target * rules.play_yield) {
             finish(world, i, PlayOutcome::TargetWon);
         } else if (target < demander * rules.play_yield) {
             finish(world, i, PlayOutcome::DemanderWon);
+        } else if (military_active(world)) {
+            std::vector<Index> attackers{play.demander};
+            attackers.insert(attackers.end(), play.demander_side.begin(), play.demander_side.end());
+            std::vector<Index> defenders{play.target};
+            defenders.insert(defenders.end(), play.target_side.begin(), play.target_side.end());
+            const bool war = start_war(world, std::move(attackers), std::move(defenders), WarCause::Crisis);
+            finish(world, i, war ? PlayOutcome::War : PlayOutcome::Compromise);
         } else {
             finish(world, i, PlayOutcome::Compromise);
         }

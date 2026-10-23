@@ -242,6 +242,8 @@ Strom-Kennung:
 | `Ki` | 4 | reserviert |
 | `Lasttest` | 5 | Aufbau der Lasttest-Welt (seit M4), nicht in der Simulation |
 | `Testbefehle` | 6 | Testbefehle der Kommandozeile (`--testbefehle`, seit M6), nicht in der Simulation |
+| `Wahlen` | 7 | je Wahl neu aus Seed und Parlament (seit M8), kein Zustand |
+| `Krieg` | 8 | Schlachten (seit M10, Schritt a3); Zustand nur in Welten mit Militär, ohne Krieg nicht gezogen |
 
 - Neue Inhalte in einem System verändern die Zufallsfolge der anderen Systeme **nicht**.
 - Die Werte der Kennungen ändern sich **nie**; neue Ströme werden hinten angefügt. Sonst wären

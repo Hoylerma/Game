@@ -940,6 +940,25 @@ militaer {
     moral_unversorgt       = 0.02   # 0–1 (0,02): Moralverlust je Tag ohne Versorgung
     moral_erholung         = 0.01   # 0–1 (0,01): Erholung je Tag in Ruhe und versorgt
     demobilmachung_tage    = 30     # Ganzzahl 1–365 (30)
+    # seit Schritt a3, ebenso optional (militaer.md, Abschnitte 4.1–4.3):
+    kriegserklaerung_beziehung = -20    # −200–0: Beziehung zu allen Bundesstaaten bei einer Erklärung
+    frontbreite            = 50000  # 100–1.000.000: Soldaten je Seite im Flachland (÷ Geländefaktor)
+    gelaende_verteidigung  = 0.5    # 0–2: Verteidiger × (1 + (Geländefaktor − 1) × dies)
+    flussverteidigung      = 1.5    # 1–5: Verteidiger gegen einen Angreifer über den Fluss
+    festung_verteidigung   = 0.5    # 0–5: Verteidiger × (1 + dies × Stufe)
+    geschuetz_wert         = 50     # 0–1.000: Kampfkraft eines Geschützes in Soldaten
+    verlustrate            = 0.08   # über 0 bis 1: Verluste je Tag je Kampfkraft des Gegners
+    moralverlust           = 5      # 0–100: Moral −= Verluste ÷ Soldaten × dies
+    bruch_moral            = 0.3    # 0–1
+    bruch_verluste         = 0.25   # über 0 bis 1: Anteil der Tagesverluste
+    gefallene              = 0.25   # 0–1: Anteil der Verluste
+    verwundete_rueckkehr   = 0.5    # 0–1: Anteil der Verwundeten, die zurückkehren
+    genesung_tage          = 60     # Ganzzahl 1–365
+    gefangene_rueckzug     = 0.1    # 0–1: Anteil der Soldaten beim Rückzug
+    verwuestung_verluste   = 100000 # 1–100.000.000: Verluste, die einen Ort ganz verwüsten
+    belagerung_tage        = 30     # über 0 bis 365: je Stufe bei gleicher Stärke
+    belagerung_mindesttage = 10     # 1–365
+    festung_besatzung      = 5000   # 0–1.000.000: je Stufe
 }
 
 heerwesen standard {          # ohne 'staat': für alle Staaten ohne eigenen Eintrag
@@ -950,6 +969,14 @@ heerwesen standard {          # ohne 'staat': für alle Staaten ohne eigenen Ein
     quelle            = "…"   # optional
 }
 heerwesen pru_1848 { staat = PRU seit = 1848.03.01 … }   # je Staat; es gilt der jüngste bis zum Start
+
+festung mainz {              # seit Schritt a3
+    ort    = mainz            # Pflicht; je Ort höchstens eine Festung
+    stufe  = 3                # Pflicht, 1–3
+    name   = "Bundesfestung Mainz"   # optional, sonst „Festung <Ortsname>“; beginnt mit „Festung“ o. ä.
+    seit   = 1816.01.01       # optional; bis (optional, ausschließlich)
+    quelle = "…"              # optional
+}
 
 garnison pru_garde {
     staat  = PRU              # Pflicht
@@ -962,7 +989,9 @@ garnison pru_garde {
 ```
 
 Genau ein Block `militaer` ist Pflicht. In `gelaende` ist ein unbekanntes Gelände oder ein Faktor
-außerhalb von 1–10 fatal. Heerwesen und Garnisonen mit späterem `seit` (Garnisonen
+außerhalb von 1–10 fatal. Bei Festungen sind eine Kennung zweimal, ein unbekannter Ort und eine
+zweite Festung im selben Ort fatal; der Name steht in der Chronik („Die Bundesfestung Mainz ergibt
+sich …“). Heerwesen und Garnisonen mit späterem `seit` (Garnisonen
 auch mit `bis` vor oder am Start) gehören nicht zur Welt. Die Anteile eines Staates werden auf ihre
 Summe bezogen; ein Staat ohne Garnison erhält eine in seiner Hauptstadt (`<TAG>_hauptstadt`, Anteil
 1). Fatal sind eine Kennung zweimal, ein unbekannter Staat oder Ort und Werte außerhalb der Bereiche;
@@ -971,8 +1000,10 @@ zum Start keinen Ort haben, entfallen mit ihren Einträgen. Mit dem Militär lä
 `karte/nachbarn.csv` und `karte/ueberfahrten.csv` (Abschnitte 6.6 und 6.7). Im Kern:
 `World::military_rules` (`MilitaryRules`: `active`, `river_rank`, seit a2 Bewegung, Bahn, Versorgung
 und Abrüstung, `terrain_march` je Gelände), `State::army` (`ArmyProfile`), `World::garrisons` und
-`World::neighbors`; Zustand sind die Heere (`World::armies`, seit a2 mit Weg und Resttagen), die
-Mobilmachung je Staat (`World::mobilizations`) und die Belegung je Bahnstrecke (`World::rail_backlog`).
+`World::neighbors`, seit a3 `World::fortresses`; Zustand sind die Heere (`World::armies`, seit a2 mit
+Weg und Resttagen), die Mobilmachung je Staat (`World::mobilizations`), die Belegung je Bahnstrecke
+(`World::rail_backlog`) und seit a3 Kriege, Kontrolle, Schlachten, Belagerungen, Verwundete, Gefangene
+und Gefallene.
 
 ## 4. Startzustand
 

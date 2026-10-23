@@ -375,7 +375,7 @@ Diplomatie gilt nur mit Deutschem Bund; 1648 bleiben die Regeln ohne Wirkung.
 
 | Datei | Inhalt |
 |---|---|
-| `common/militaer.chron` | Militär ab 1848.03.01, Flussübergang bis Rang 3; seit Schritt a2 Marsch (20 km je Tag, Hochgebirge ×2, Mittelgebirge, Wald und Bruch ×1,5), Bahn (300 km je Tag, 20.000 Soldaten je Strecke und Tag), Versorgung, Zermürbung und Abrüstung als Spielwerte; Heerwesen (Standard, Preußen, Österreich); 18 Garnisonen in Preußen (Garde und acht Armeekorps), Österreich (sechs Generalkommanden) und Bayern (drei), die übrigen Staaten in ihrer Hauptstadt. Spielwerte nach Wissensstand ohne Quellenzugang |
+| `common/militaer.chron` | Militär ab 1848.03.01, Flussübergang bis Rang 3; seit Schritt a2 Marsch (20 km je Tag, Hochgebirge ×2, Mittelgebirge, Wald und Bruch ×1,5), Bahn (300 km je Tag, 20.000 Soldaten je Strecke und Tag), Versorgung, Zermürbung und Abrüstung, seit a3 Schlacht und Belagerung als Spielwerte; 35 Festungen (Bundesfestungen Mainz, Luxemburg, Landau, Ulm, Rastatt; preußische, österreichische und bayerische Landesfestungen, Rendsburg; Stufe ungeprüft); Heerwesen (Standard, Preußen, Österreich); 18 Garnisonen in Preußen (Garde und acht Armeekorps), Österreich (sechs Generalkommanden) und Bayern (drei), die übrigen Staaten in ihrer Hauptstadt. Spielwerte nach Wissensstand ohne Quellenzugang |
 | `karte/nachbarn.csv` | 13.069 Paare benachbarter Orte mit Grenzlänge und gekreuztem Fluss (erzeugt von `tools/kartengenerator`) |
 | `karte/ueberfahrten.csv` | 13 Fähren und Übergänge: Rügen, Hiddensee, Alsen, Fehmarn, Sylt, Föhr, Pellworm, Ærø und die Ostfriesischen Inseln; Dauer als Spielwert |
 

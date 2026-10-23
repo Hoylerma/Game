@@ -568,6 +568,15 @@ std::string military_summary(const World& content) {
     if (!large.empty()) {
         text += indent + "mehrere Garnisonen: " + large;
     }
+    // Festungen (seit Schritt a3): Ort und Stufe.
+    if (!w.fortresses.empty()) {
+        std::string list;
+        for (const uhrwerk::Fortress& f : w.fortresses) {
+            list += (list.empty() ? "" : ", ") + w.locations[static_cast<std::size_t>(f.location)].name +
+                    " " + std::to_string(f.level);
+        }
+        text += indent + plural(w.fortresses.size(), "Festung", "Festungen") + " (Ort und Stufe): " + list;
+    }
     return text;
 }
 
@@ -795,8 +804,8 @@ Date date_after(const Date& start, std::int64_t days) {
 /// Deutschem Bund (seit M9, Schritt b1) auch Gesandte und Verträge, mit Bundesversammlung (Schritt b2)
 /// Anträge, Forderungen und Manöver. Mit Militär (seit M10, Schritt a2) Mobilmachung und Abrüstung und
 /// Märsche der Heere (Nummer nach den Garnisonen, meist mit dem eigenen Staat, Ziel zur Hälfte ein Ort
-/// dieses Staates). Ohne Parlamente, Zollunionen, Bund und Militär bleibt die Folge der Zufallszahlen
-/// wie bisher.
+/// dieses Staates), seit Schritt a3 auch Kriegserklärungen. Ohne Parlamente, Zollunionen, Bund und Militär
+/// bleibt die Folge der Zufallszahlen wie bisher.
 std::vector<uhrwerk::LoggedCommand> make_test_commands(const World& w, std::uint64_t seed, std::int64_t count,
                                                        std::int64_t first_day, std::int64_t end_day) {
     std::vector<uhrwerk::LoggedCommand> list;
@@ -867,7 +876,14 @@ std::vector<uhrwerk::LoggedCommand> make_test_commands(const World& w, std::uint
         // Heeres (Nummer 0 bis hinter das letzte; die Heere entstehen beim Start in der Reihenfolge der
         // Garnisonen).
         if (military && rng.below(4) == 0) {
-            if (rng.below(3) == 0) {
+            const std::uint32_t kind = rng.below(12);
+            if (kind == 0) {
+                // Kriegserklärung (seit a3): Staat und Gegner −1 bis hinter den letzten.
+                c.command.type = uhrwerk::CommandType::DeclareWar;
+                c.command.state = static_cast<Index>(rng.below(states + 2)) - 1;
+                c.command.target = static_cast<Index>(rng.below(states + 2)) - 1;
+                c.command.value = Fixed::zero();
+            } else if (kind <= 4) {
                 c.command.type = uhrwerk::CommandType::Mobilization;
                 c.command.state = static_cast<Index>(rng.below(states + 2)) - 1;
                 c.command.target = uhrwerk::kNone;

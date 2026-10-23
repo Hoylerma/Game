@@ -1,7 +1,8 @@
-// Militär (seit M10): docs/technik/militaer.md, Abschnitte 3.1–3.5.
+// Militär (seit M10): docs/technik/militaer.md, Abschnitte 3.1–3.5; Krieg und Schlacht in war.cpp.
 
 #include "uhrwerk/military.hpp"
 
+#include "military_internal.hpp"
 #include "uhrwerk/diplomacy.hpp"
 #include "uhrwerk/economy.hpp"
 
@@ -16,25 +17,17 @@
 
 namespace uhrwerk {
 
-namespace {
+namespace military_internal {
 
-template <typename T> bool in_range(const std::vector<T>& items, Index index) {
-    return index >= 0 && static_cast<std::size_t>(index) < items.size();
-}
-
-std::size_t at(Index index) {
-    return static_cast<std::size_t>(index);
-}
-
-void chronicle(World& world, Index state, std::string text) {
+void chronicle(World& world, Index state, std::string text, Index location) {
     ChronicleEntry entry;
     entry.date = world.date;
     entry.text = std::move(text);
     entry.state = state;
+    entry.location = location;
     world.chronicle.push_back(std::move(entry));
 }
 
-/// Summe der Anteile aller Garnisonen eines Staates (je Staat).
 std::vector<Fixed> garrison_shares(const World& world) {
     std::vector<Fixed> sums(world.states.size());
     for (const Garrison& g : world.garrisons) {
@@ -45,19 +38,57 @@ std::vector<Fixed> garrison_shares(const World& world) {
     return sums;
 }
 
-/// Soldaten einer Garnison: ihr Anteil an der Friedensstärke ihres Staates.
 Fixed garrison_soldiers(const Garrison& g, Fixed peace, Fixed shares) {
     return shares > Fixed::zero() ? peace * g.share / shares : Fixed::zero();
 }
 
-Fixed guns_for(const World& world, Index state, Fixed soldiers) {
-    return soldiers * world.states[at(state)].army.guns_per_mille / Fixed::from_int(1000);
-}
-
-/// Soldaten setzen; die Geschütze folgen nach dem Heerwesen.
 void set_soldiers(const World& world, Army& army, Fixed soldiers) {
     army.soldiers = Fixed::max(Fixed::zero(), soldiers);
-    army.guns = guns_for(world, army.state, army.soldiers);
+    army.guns = army.soldiers * world.states[at(army.state)].army.guns_per_mille / Fixed::from_int(1000);
+}
+
+void stop(Army& army) {
+    army.route.clear();
+    army.days_left = Fixed::zero();
+    army.status = ArmyStatus::Rest;
+}
+
+std::string grouped(std::int64_t value) {
+    std::string digits = std::to_string(value < 0 ? -value : value);
+    std::string out;
+    for (std::size_t i = 0; i < digits.size(); ++i) {
+        if (i > 0 && (digits.size() - i) % 3 == 0) {
+            out += '.';
+        }
+        out += digits[i];
+    }
+    return value < 0 ? "−" + out : out;
+}
+
+bool engaged(const Army& army) {
+    return army.status != ArmyStatus::Rail && army.status != ArmyStatus::Retreat;
+}
+
+bool hostile_army_at(const World& world, Index state, Index location) {
+    return std::any_of(world.armies.begin(), world.armies.end(), [&](const Army& a) {
+        return a.location == location && engaged(a) && at_war(world, state, a.state);
+    });
+}
+
+void add_war_dead(World& world, Index state, Fixed soldiers) {
+    if (in_range(world.war_dead, state) && soldiers > Fixed::zero()) {
+        world.war_dead[at(state)] += soldiers;
+    }
+}
+
+} // namespace military_internal
+
+using namespace military_internal;
+
+namespace {
+
+Fixed guns_for(const World& world, Index state, Fixed soldiers) {
+    return soldiers * world.states[at(state)].army.guns_per_mille / Fixed::from_int(1000);
 }
 
 Fixed location_distance(const World& world, Index a, Index b) {
@@ -78,14 +109,22 @@ struct RailEdge {
     Fixed days; // Fahrt ohne Ein- und Ausladen
 };
 
-/// Bahnnetz für die Heere eines Staates: eröffnete Abschnitte mit zwei zugänglichen Endpunkten.
+/// Ist ein Ort für state „eigene Seite“: kontrolliert vom eigenen Staat, einem Verbündeten oder einem
+/// Kriegführenden derselben Seite (seit a3 nach der Kontrolle, nicht nach dem Besitz)?
+bool own_side(const World& world, Index state, Index location) {
+    const Index holder = controller(world, location);
+    return holder != kNone && friendly(world, state, holder);
+}
+
+/// Bahnnetz für die Heere eines Staates: eröffnete Abschnitte mit zwei Endpunkten, die seine Seite
+/// kontrolliert (eigenes, verbündetes oder besetztes Gebiet).
 std::vector<std::vector<RailEdge>> rail_graph(const World& world, Index state) {
     std::vector<std::vector<RailEdge>> graph(world.locations.size());
     const Fixed per_day = world.military_rules.rail_km;
     for (std::size_t r = 0; r < world.railways.size(); ++r) {
         for (const RailSection& s : world.railways[r].sections) {
-            if (!section_open(world, s) || s.from == s.to || !accessible(world, state, s.from) ||
-                !accessible(world, state, s.to)) {
+            if (!section_open(world, s) || s.from == s.to || !own_side(world, state, s.from) ||
+                !own_side(world, state, s.to)) {
                 continue;
             }
             const Fixed days = location_distance(world, s.from, s.to) / per_day;
@@ -94,15 +133,6 @@ std::vector<std::vector<RailEdge>> rail_graph(const World& world, Index state) {
         }
     }
     return graph;
-}
-
-/// Ist ein Ort für state „eigene Seite“ (eigen oder verbündet)?
-bool own_side(const World& world, Index state, Index location) {
-    if (!in_range(world.locations, location)) {
-        return false;
-    }
-    const Index owner = world.locations[at(location)].owner;
-    return owner != kNone && (owner == state || allied(world, state, owner));
 }
 
 /// Die ersten Schritte des Weges, die zu einer Bahnfahrt gehören.
@@ -151,21 +181,20 @@ bool start_leg(World& world, Army& army) {
     return true;
 }
 
-void stop(Army& army) {
-    army.route.clear();
-    army.days_left = Fixed::zero();
-    army.status = ArmyStatus::Rest;
-}
-
 /// Ein Tag Bewegung: Am Ende eines Abschnitts erreicht das Heer den nächsten Ort (nach einer Bahnfahrt
-/// das Ende der Fahrt) und beginnt den folgenden; übrige Zeit wird mitgenommen.
+/// das Ende der Fahrt) und beginnt den folgenden; übrige Zeit wird mitgenommen. Steht im erreichten Ort
+/// ein Gegner, bleibt das Heer dort (Schlacht, seit a3).
 void move(World& world, Army& army) {
     army.days_left -= Fixed::one();
     while (army.days_left <= Fixed::zero() && !army.route.empty()) {
         const std::size_t done = army.route.front().mode == LegMode::Rail ? rail_block(army) : 1;
+        army.previous = army.location;
         army.location = army.route[done - 1].location;
+        army.days_here = 0;
         army.route.erase(army.route.begin(), army.route.begin() + static_cast<std::ptrdiff_t>(done));
-        if (!army.route.empty() && !start_leg(world, army)) {
+        if (hostile_army_at(world, army.state, army.location)) {
+            stop(army);
+        } else if (!army.route.empty() && !start_leg(world, army)) {
             stop(army);
         }
     }
@@ -213,8 +242,7 @@ void run_mobilization(World& world) {
                 m.phase = MobilizationPhase::Mobilized;
                 m.days = 0;
                 chronicle(world, state,
-                          st.short_name +
-                              " ist mobil: " + std::to_string(state_soldiers(world, state).round()) +
+                          st.short_name + " ist mobil: " + grouped(state_soldiers(world, state).round()) +
                               " Soldaten unter Waffen.");
             }
             continue;
@@ -242,6 +270,25 @@ void run_mobilization(World& world) {
             }
         }
         if (done) {
+            // Garnisonen, deren Heer im Krieg unterging, erhalten ein neues Friedensheer (seit a3).
+            for (std::size_t g = 0; g < world.garrisons.size(); ++g) {
+                const Garrison& garrison = world.garrisons[g];
+                const auto index = static_cast<Index>(g);
+                if (garrison.state != state ||
+                    std::any_of(world.armies.begin(), world.armies.end(),
+                                [&](const Army& a) { return a.garrison == index; })) {
+                    continue;
+                }
+                Army army;
+                army.id = world.next_army_id++;
+                army.state = state;
+                army.location = garrison.location;
+                army.garrison = index;
+                army.name = garrison.name;
+                set_soldiers(world, army, garrison_soldiers(garrison, peace, shares[s]));
+                army.status = ArmyStatus::Garrison;
+                world.armies.push_back(std::move(army));
+            }
             m = Mobilization{};
             chronicle(world, state,
                       st.short_name + " hat abgerüstet; die Truppen stehen wieder in ihren Garnisonen.");
@@ -260,7 +307,9 @@ void run_supply(World& world) {
         }
         const bool fed = supplied(world, army);
         const Fixed rate = (fed ? rules.attrition : rules.attrition_unsupplied) * season;
-        set_soldiers(world, army, army.soldiers - army.soldiers * rate);
+        const Fixed lost = army.soldiers * rate;
+        set_soldiers(world, army, army.soldiers - lost);
+        add_war_dead(world, army.state, lost); // seit a3: Abgänge mindern die Bevölkerung
         if (!fed) {
             army.morale = Fixed::max(Fixed::zero(), army.morale - rules.morale_unsupplied * season);
         } else if (army.status == ArmyStatus::Rest) {
@@ -330,6 +379,12 @@ void ensure_military_state(World& world) {
     if (world.rail_backlog.size() != world.railways.size()) {
         world.rail_backlog.assign(world.railways.size(), 0);
     }
+    if (world.control.size() != world.locations.size()) {
+        world.control.assign(world.locations.size(), kNone);
+    }
+    if (world.war_dead.size() != world.states.size()) {
+        world.war_dead.assign(world.states.size(), Fixed{});
+    }
     if (!world.armies.empty()) {
         return;
     }
@@ -391,7 +446,12 @@ const Army* find_army(const World& world, std::int64_t id) {
 }
 
 bool accessible(const World& world, Index state, Index location) {
-    return own_side(world, state, location);
+    if (!in_range(world.locations, location)) {
+        return false;
+    }
+    const Index owner = world.locations[at(location)].owner;
+    return owner != kNone &&
+           (friendly(world, state, owner) || at_war(world, state, owner) || own_side(world, state, location));
 }
 
 Fixed march_days(const World& world, const Neighbor& neighbor) {
@@ -513,7 +573,8 @@ bool order_march(World& world, Index state, std::int64_t id, Index target) {
     }
     Army* army = find_army(world, id);
     if (army == nullptr || army->state != state ||
-        (army->status != ArmyStatus::Rest && army->status != ArmyStatus::March)) {
+        (army->status != ArmyStatus::Rest && army->status != ArmyStatus::March &&
+         army->status != ArmyStatus::Siege)) {
         return false;
     }
     if (target == kNone || target == army->location) {
@@ -565,8 +626,8 @@ bool order_mobilization(World& world, Index state, bool mobilize, bool crisis) {
         chronicle(world, state, name + " macht mobil.");
         return true;
     }
-    if (!armed) {
-        return false;
+    if (!armed || in_war(world, state)) {
+        return false; // im Krieg rüstet niemand ab (seit a3)
     }
     m.phase = MobilizationPhase::Demobilizing;
     m.days = 0;
@@ -634,19 +695,29 @@ bool supplied(const World& world, const Army& army) {
     return false;
 }
 
-void run_military(World& world) {
+void run_military(World& world, Pcg32& rng) {
     if (!military_active(world)) {
         return;
     }
     run_mobilization(world);
     for (Army& army : world.armies) {
-        if (army.status == ArmyStatus::March || army.status == ArmyStatus::Rail) {
+        if (army.status == ArmyStatus::March || army.status == ArmyStatus::Rail ||
+            army.status == ArmyStatus::Retreat) {
             move(world, army);
         }
     }
+    run_battles(world, rng);
+    run_occupation(world);
     run_supply(world);
+    return_convalescents(world);
+    for (Army& army : world.armies) {
+        ++army.days_here;
+    }
     for (std::int32_t& backlog : world.rail_backlog) {
         backlog = std::max(0, backlog - 1);
+    }
+    if (world.date.day == 1) {
+        apply_war_dead(world);
     }
 }
 

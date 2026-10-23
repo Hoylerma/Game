@@ -34,7 +34,7 @@ constexpr int kZstdLevel = 3;
 /// Obergrenze der unkomprimierten Nutzdaten (Schutz vor beschädigten Längenangaben).
 constexpr std::uint64_t kMaxPayload = std::uint64_t{1} << 31;
 /// Stand des Militärs im Zustand (seit M10, Inhaltsbereich militaer): 1 = Schritt a1 (Garnisonen).
-constexpr std::uint64_t kMilitaryContentVersion = 2;
+constexpr std::uint64_t kMilitaryContentVersion = 3;
 
 bool fail(std::string* error, std::string message) {
     if (error != nullptr) {
@@ -854,7 +854,7 @@ std::string validate_state(const Simulation& sim) {
         for (const PlayResult& r : w.play_results) {
             if (!in(r.demander, S) || !in(r.target, S) || !demand_ok(r.kind, r.customs_union) ||
                 r.stage < 1 || r.stage > 3 || !is_valid(r.started) || !is_valid(r.ended) ||
-                static_cast<int>(r.outcome) > static_cast<int>(PlayOutcome::Compromise)) {
+                static_cast<int>(r.outcome) > static_cast<int>(PlayOutcome::War)) {
                 return "Spielergebnis mit ungültigem Verweis";
             }
         }
@@ -872,11 +872,13 @@ std::string validate_state(const Simulation& sim) {
             if (!in(a.state, S) || !in(a.location, w.locations.size()) ||
                 !none_or_in(a.garrison, w.garrisons.size()) || a.soldiers < Fixed::zero() ||
                 a.guns < Fixed::zero() || a.morale < Fixed::zero() || a.morale > Fixed::one() ||
-                static_cast<int>(a.status) > static_cast<int>(ArmyStatus::Rail)) {
+                static_cast<int>(a.status) > static_cast<int>(ArmyStatus::Retreat) ||
+                !none_or_in(a.previous, w.locations.size()) || a.days_here < 0) {
                 return "Heer mit ungültigem Verweis oder Wert";
             }
-            // Weg (seit a2): nur auf dem Marsch oder der Bahn, mit gültigen Orten und Strecken.
-            const bool moving = a.status == ArmyStatus::March || a.status == ArmyStatus::Rail;
+            // Weg (seit a2): nur auf dem Marsch, der Bahn oder dem Rückzug, mit gültigen Orten und Strecken.
+            const bool moving = a.status == ArmyStatus::March || a.status == ArmyStatus::Rail ||
+                                a.status == ArmyStatus::Retreat;
             if (moving == a.route.empty() || (!moving && a.days_left != Fixed::zero())) {
                 return "Heer mit ungültigem Weg";
             }
@@ -897,6 +899,64 @@ std::string validate_state(const Simulation& sim) {
         for (const std::int32_t b : w.rail_backlog) {
             if (b < 0) {
                 return "Belegung einer Bahnstrecke ungültig";
+            }
+        }
+        // Krieg (seit a3): Seiten getrennt und gültig, Kontrolle, Schlachten und Belagerungen in Orten,
+        // Verwundete, Gefangene und Gefallene nicht negativ.
+        std::set<std::int64_t> wars;
+        for (const War& war : w.wars) {
+            if (war.id < 1 || war.id >= w.next_war_id || !wars.insert(war.id).second ||
+                war.attackers.empty() || war.defenders.empty() || !is_valid(war.started) ||
+                static_cast<int>(war.cause) > static_cast<int>(WarCause::Execution)) {
+                return "Krieg mit ungültiger Nummer oder Seite";
+            }
+            std::set<Index> seen;
+            for (const std::vector<Index>* side : {&war.attackers, &war.defenders}) {
+                for (const Index s : *side) {
+                    if (!in(s, S) || !seen.insert(s).second) {
+                        return "Krieg mit ungültiger Nummer oder Seite";
+                    }
+                }
+            }
+        }
+        if (w.next_war_id < 1) {
+            return "Nummer des nächsten Krieges ungültig";
+        }
+        for (const Index c : w.control) {
+            if (!none_or_in(c, S)) {
+                return "Kontrolle eines Ortes ungültig";
+            }
+        }
+        std::set<Index> places;
+        for (const Battle& b : w.battles) {
+            if (!in(b.location, w.locations.size()) || !places.insert(b.location).second || b.days < 0 ||
+                !is_valid(b.started) || b.attacker_losses < Fixed::zero() ||
+                b.defender_losses < Fixed::zero()) {
+                return "Schlacht ungültig";
+            }
+        }
+        places.clear();
+        for (const Siege& g : w.sieges) {
+            const bool fortress = std::any_of(w.fortresses.begin(), w.fortresses.end(),
+                                              [&](const Fortress& f) { return f.location == g.location; });
+            if (!fortress || !places.insert(g.location).second || !in(g.besieger, S) ||
+                g.progress < Fixed::zero() || g.progress > Fixed::one() || !is_valid(g.started)) {
+                return "Belagerung ungültig";
+            }
+        }
+        for (const Convalescents& c : w.convalescents) {
+            if (!in(c.state, S) || c.soldiers < Fixed::zero() || !is_valid(c.returns)) {
+                return "Verwundete ungültig";
+            }
+        }
+        for (const Prisoners& p : w.prisoners) {
+            if (!in(p.state, S) || !in(p.captor, S) || p.soldiers < Fixed::zero()) {
+                return "Gefangene ungültig";
+            }
+        }
+        for (const Fixed d : w.war_dead) {
+            if (d < Fixed::zero()) {
+                return "Gefallene ungültig";
             }
         }
     } else if (!w.armies.empty()) {
@@ -1240,6 +1300,22 @@ ContentFingerprint content_fingerprint(const World& w) {
             h.fixed(r.morale_unsupplied);
             h.fixed(r.morale_recovery);
             h.i64(r.demobilization_days);
+            // Krieg, Schlacht und Belagerung (seit a3).
+            for (const Fixed f :
+                 {r.declaration_relation, r.frontage, r.terrain_defense, r.river_defense, r.fortress_defense,
+                  r.gun_value, r.loss_rate, r.morale_loss, r.break_morale, r.break_losses, r.dead_share,
+                  r.wounded_return, r.pursuit_prisoners, r.devastation_losses, r.siege_days, r.siege_min_days,
+                  r.fortress_garrison}) {
+                h.fixed(f);
+            }
+            h.i64(r.recovery_days);
+            h.u64(w.fortresses.size());
+            for (const Fortress& f : w.fortresses) {
+                h.text(f.id);
+                h.text(f.name); // steht in der Chronik
+                h.i64(f.location);
+                h.i64(f.level);
+            }
             for (const State& s : w.states) {
                 h.fixed(s.army.firepower);
                 h.fixed(s.army.guns_per_mille);

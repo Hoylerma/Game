@@ -39,7 +39,10 @@ diplomatischen Spiele mit Seiten und Stufe und ihre Ergebnisse), **nur in Welten
 seit M10 die Heere (Nummer, Staat, Ort, Garnison, Name, Soldaten, Geschütze, Moral, Lage, seit
 Schritt a2 der Weg mit Ort, Art und Strecke je Schritt und die Resttage des laufenden Abschnitts), die
 nächste Heeresnummer, seit a2 die Mobilmachung je Staat (Phase, Tage, durch eine Krise) und die
-Belegung je Bahnstrecke, **nur in Welten mit Militär** ([militaer.md](militaer.md)); seit M8 die
+Belegung je Bahnstrecke, seit a3 je Heer der vorige Ort und die Tage am Ort, die Kriege (Nummer, Seiten,
+Beginn, Anlass), die Kontrolle je Ort, laufende Schlachten und Belagerungen, Verwundete, Gefangene, die
+Gefallenen je Staat und der Zufallsstrom `krieg`, **nur in Welten mit Militär**
+([militaer.md](militaer.md)); seit M8 die
 abgehaltenen Wahlen (je Wahlkreis Berechtigte, Wähler, Stimmen je Strömung, Sieger, Stichwahl, Boykott,
 Meldereihenfolge; je Abgeordnetem Wahlkreis, Strömung, Position, Fraktion), der Wahlkampf je
 Wahlkreis und Strömung (Mobilisierung, Flugblätter, Vereine) sowie Parteikasse und Spenden je
@@ -97,7 +100,7 @@ Simulation beeinflusst, und ein Gesamtwert über die 16 Bereiche (seit M10; M9 1
 | `orte` | Kennung, Name, Gelände, Kreis, Lage, Fläche, Stadt, Markt, Vorkommen, Hafen, Verwaltungseinheit und Bundesgebiet (seit M7); die Zahl der Orte |
 | `politik` (seit M8) | Strömungen (Kennung, Name, Position), Interessengruppen (Mitglieder, Neigung), Parlamente mit Wahl, Fraktionen, Sitz und Name, Verfassung und Wahlordnung der Staaten, Wahlkreise mit Name, Staat, Sitzen und Orten, Wahlregeln und Regionen ([politik.md](politik.md)) |
 | `diplomatie` (seit M9) | Zollunionen mit Kennung, Name, Leitmacht, Tarif und ausgeschlossenen Staaten; die Mitgliedschaft der Staaten ist seit Schritt a2 Zustand. Seit Schritt b1 in Welten mit Deutschem Bund auch die Regeln der Diplomatie und die Grundbeziehungen, seit b2 die Bundesversammlung (Präsidium, Plenum, Engerer Rat) ([diplomatie.md](diplomatie.md)) |
-| `militaer` (seit M10) | Nur in Welten mit Militär (ab dem `seit` in `common/militaer.chron`): Stand des Bereichs (`kMilitaryContentVersion`), Flussrang, seit a2 die Regeln der Bewegung, Bahn, Versorgung und Abrüstung mit dem Geländefaktor je Gelände, das Heerwesen je Staat, die Garnisonen mit Kennung, Staat, Ort, Anteil und Name und die Nachbarschaft der Orte mit Grenze, Fluss und Überfahrt ([militaer.md](militaer.md)); sonst bleibt der Wert der eines leeren Bereichs |
+| `militaer` (seit M10) | Nur in Welten mit Militär (ab dem `seit` in `common/militaer.chron`): Stand des Bereichs (`kMilitaryContentVersion`), Flussrang, seit a2 die Regeln der Bewegung, Bahn, Versorgung und Abrüstung mit dem Geländefaktor je Gelände, seit a3 die Regeln von Krieg, Schlacht und Belagerung und die Festungen, das Heerwesen je Staat, die Garnisonen mit Kennung, Staat, Ort, Anteil und Name und die Nachbarschaft der Orte mit Grenze, Fluss und Überfahrt ([militaer.md](militaer.md)); sonst bleibt der Wert der eines leeren Bereichs |
 
 **Nicht** dazu gehören volle Staatsnamen, Farben, Quellen und Beschreibungen: Eine korrigierte
 Quelle macht alte Spielstände nicht unbrauchbar. Der **Kurzname der Staaten und der Name der Orte
@@ -210,11 +213,12 @@ Mit Deutschem Bund (seit M9, Schritt b1) wird danach jeder Testbefehl mit Wahrsc
 Befehl Gesandter oder Vertrag (je zur Hälfte; Staat und Ziel −1 bis hinter den letzten, Gesandter 0
 oder 1, Vertragshandlung 0 bis 4, 4 ist ungültig). Mit Bundesversammlung (seit Schritt b2) wird danach
 jeder Testbefehl mit Wahrscheinlichkeit ¼ zum Antrag, zur Forderung oder zum Manöver (je ein Drittel;
-Art 0 bis 4, 4 ist ungültig). Mit Militär (seit M10, Schritt a2) wird danach jeder Testbefehl mit
-Wahrscheinlichkeit ¼ zur Mobilmachung (ein Drittel; Staat −1 bis hinter den letzten, Wert 0 bis 2, 2
-ist ungültig) oder zum Marsch (zwei Drittel; Heer 0 bis hinter das letzte nach der Zahl der
-Garnisonen, meist mit dessen Staat, Ziel zur Hälfte ein Ort dieses Staates, sonst −1 bis hinter den
-letzten Ort). Ohne Parlament, Zollunion, Bund und Militär bleibt die Folge der Zufallszahlen wie vor M8.
+Art 0 bis 4, 4 ist ungültig). Mit Militär (seit M10) wird danach jeder Testbefehl mit
+Wahrscheinlichkeit ¼ zur Kriegserklärung (1 von 12, seit Schritt a3; Staat und Gegner −1 bis hinter
+den letzten), zur Mobilmachung (4 von 12; Staat −1 bis hinter den letzten, Wert 0 bis 2, 2 ist
+ungültig) oder zum Marsch (7 von 12; Heer 0 bis hinter das letzte nach der Zahl der Garnisonen, meist
+mit dessen Staat, Ziel zur Hälfte ein Ort dieses Staates, sonst −1 bis hinter den letzten Ort). Ohne
+Parlament, Zollunion, Bund und Militär bleibt die Folge der Zufallszahlen wie vor M8.
 
 ## 6. Versionen und Migration
 
@@ -243,10 +247,11 @@ letzten Ort). Ohne Parlament, Zollunion, Bund und Militär bleibt die Folge der 
 - **Format 4 (M10):** der Inhaltsbereich `militaer` und in Welten mit Militär die Heere im Zustand
   ([militaer.md](militaer.md)). Ein Spielstand im Format 3 zeigt seine Metadaten mit 15 Bereichen an,
   lädt aber nicht. Weil sich der Bereich in jedem Schritt von M10 erweitert, zählt er einen eigenen
-  Stand (`kMilitaryContentVersion`, 1 seit Schritt a1, 2 seit a2) mit: Ein Spielstand 1848 aus einem
-  früheren Schritt lädt dann nicht mehr („Inhalt geändert: militaer“). Seit Schritt a2 stehen die
-  Befehle `Marsch` (Wert = Nummer des Heeres, Ziel = Ort) und `Mobilmachung` im Protokoll, und in
-  Welten mit Militär tragen die wartenden Befehle Ziel und Aktion. Ohne Militär (1648) zählen weder
+  Stand (`kMilitaryContentVersion`, 1 seit Schritt a1, 2 seit a2, 3 seit a3) mit: Ein Spielstand 1848
+  aus einem früheren Schritt lädt dann nicht mehr („Inhalt geändert: militaer“). Seit Schritt a2 stehen
+  die Befehle `Marsch` (Wert = Nummer des Heeres, Ziel = Ort) und `Mobilmachung` im Protokoll, seit a3
+  `Kriegserklaerung` (Ziel = Gegner), und in Welten mit Militär tragen die wartenden Befehle Ziel und
+  Aktion. Seit a3 kann ein diplomatisches Spiel mit dem Ausgang „Krieg“ enden. Ohne Militär (1648) zählen weder
   der Stand noch die Heere, der Prüfwert der Formatwache bleibt.
 - Jede Änderung am Zustand (neues Feld, neue Reihenfolge) erhöht die Formatversion. Der Test
   „Spielstand: Formatwache“ verhindert, dass das vergessen wird: Er speichert die Test-Fixture nach

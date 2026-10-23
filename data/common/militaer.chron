@@ -1,4 +1,4 @@
-# Militär (Meilenstein M10, Schritte a1 und a2; docs/technik/militaer.md, Abschnitte 3.1–3.5).
+# Militär (Meilenstein M10, Schritte a1–a3; docs/technik/militaer.md, Abschnitte 3.1–4.4).
 #
 # Format: docs/technik/chronik-skript.md, Abschnitt 3.30.
 # Das Militär gilt ab 'seit' (Entscheidung 14): Vor diesem Datum (Lesezeichen 1648) gibt es keine Heere,
@@ -33,6 +33,33 @@ militaer {
 
     # Mobilmachung (Abschnitt 3.3): Abrüstung in demobilmachung_tage zurück in die Garnisonen.
     demobilmachung_tage = 30
+
+    # Krieg und Schlacht (Schritt a3, Abschnitte 4.1 und 4.2). Kampfkraft = (Soldaten × Bewaffnung +
+    # Geschütze × geschuetz_wert) × eingesetzter Anteil (Frontbreite ÷ Geländefaktor) × Moral; der
+    # Verteidiger mal Gelände, Festung und Flussübergang des Angreifers. Verluste je Tag = verlustrate ×
+    # Kampfkraft des Gegners × Zufall (0,8–1,2); Bruch unter bruch_moral oder bei Tagesverlusten über
+    # bruch_verluste.
+    kriegserklaerung_beziehung = -20
+    frontbreite                = 50000
+    gelaende_verteidigung      = 0.5
+    flussverteidigung          = 1.5
+    festung_verteidigung       = 0.5
+    geschuetz_wert             = 50
+    verlustrate                = 0.08
+    moralverlust               = 5
+    bruch_moral                = 0.3
+    bruch_verluste             = 0.25
+    gefallene                  = 0.25    # Anteil der Verluste; die übrigen sind verwundet
+    verwundete_rueckkehr       = 0.5     # … davon kehren zurück nach genesung_tage
+    genesung_tage              = 60
+    gefangene_rueckzug         = 0.1     # Verfolgung: Anteil der Soldaten, die beim Rückzug gefangen werden
+    verwuestung_verluste       = 100000  # so viele Verluste verwüsten einen Ort ganz
+
+    # Belagerung (Abschnitt 4.3): Tage = belagerung_tage × Stufe × Besatzung ÷ (Soldaten + Geschütze ×
+    # geschuetz_wert der Belagerer), mindestens belagerung_mindesttage; Besatzung = festung_besatzung × Stufe.
+    belagerung_tage        = 30
+    belagerung_mindesttage = 10
+    festung_besatzung      = 5000
 }
 
 # ── Heerwesen ──────────────────────────────────────────────────────────────
@@ -92,3 +119,48 @@ garnison aut_innsbruck { staat = AUT ort = innsbruck anteil = 0.07 name = "Gener
 garnison bav_1         { staat = BAV ort = muenchen  anteil = 0.50 name = "I. Armeekorps"  seit = 1848.03.01 }
 garnison bav_2         { staat = BAV ort = wuerzburg anteil = 0.30 name = "II. Armeekorps" seit = 1848.03.01 }
 garnison bav_nuernberg { staat = BAV ort = nuernberg anteil = 0.20 name = "Garnison Nürnberg" seit = 1848.03.01 }
+
+# ── Festungen 1848 (Schritt a3, Abschnitt 4.3) ─────────────────────────────
+# Stufe 1–3 als Spielwert nach Wissensstand ohne Quellenzugang (ungeprüft): Bundesfestungen, preußische,
+# österreichische und bayerische Landesfestungen, Rendsburg. Ulm und Rastatt waren 1848 im Bau (seit
+# 1842). Die Festungen in Frankreich (Metz, Straßburg, Bitsch) folgen mit Frankreich (Schritt b1).
+
+festung mainz       { ort = mainz               stufe = 3 name = "Bundesfestung Mainz" }
+festung luxemburg   { ort = luxemburg           stufe = 3 name = "Bundesfestung Luxemburg" }
+festung landau      { ort = landau_in_der_pfalz stufe = 2 name = "Bundesfestung Landau" }
+festung ulm         { ort = ulm                 stufe = 2 name = "Bundesfestung Ulm" }
+festung rastatt     { ort = rastatt             stufe = 2 name = "Bundesfestung Rastatt" }
+
+festung koblenz     { ort = koblenz     stufe = 3 name = "Festung Koblenz und Ehrenbreitstein" }
+festung koeln       { ort = koeln       stufe = 3 }
+festung magdeburg   { ort = magdeburg   stufe = 3 }
+festung posen       { ort = posen       stufe = 3 }
+festung danzig      { ort = danzig      stufe = 3 }
+festung koenigsberg { ort = koenigsberg stufe = 2 }
+festung stettin     { ort = stettin     stufe = 2 }
+festung kuestrin    { ort = kuestrin    stufe = 2 }
+festung glogau      { ort = glogau      stufe = 2 }
+festung neisse      { ort = neisse      stufe = 2 }
+festung glatz       { ort = glatz       stufe = 2 }
+festung thorn       { ort = thorn       stufe = 2 }
+festung graudenz    { ort = graudenz    stufe = 2 }
+festung wesel       { ort = wesel       stufe = 2 }
+festung minden      { ort = minden      stufe = 2 }
+festung saarlouis   { ort = saarlouis   stufe = 2 }
+festung torgau      { ort = torgau      stufe = 2 }
+festung wittenberg  { ort = wittenberg  stufe = 1 }
+festung erfurt      { ort = erfurt      stufe = 1 }
+festung juelich     { ort = juelich     stufe = 1 }
+festung pillau      { ort = pillau      stufe = 1 }
+festung kolberg     { ort = kolberg     stufe = 1 }
+festung swinemuende { ort = swinemuende stufe = 1 }
+
+festung olmuetz      { ort = olmuetz      stufe = 3 }
+festung koeniggraetz { ort = koeniggraetz stufe = 2 }
+festung josefstadt   { ort = jaromer      stufe = 2 name = "Festung Josefstadt" }
+
+festung ingolstadt  { ort = ingolstadt  stufe = 3 }
+festung germersheim { ort = germersheim stufe = 2 }
+festung wuerzburg   { ort = wuerzburg   stufe = 1 name = "Festung Marienberg" }
+
+festung rendsburg   { ort = rendsburg   stufe = 2 }

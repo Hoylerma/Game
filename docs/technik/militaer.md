@@ -191,8 +191,10 @@ Einsteigen wartet das Heer, bis alle Strecken seiner Fahrt frei sind, lädt `Sol
 (aufgerundet) und belegt die Strecken so lange; dann fährt es und lädt einen Tag aus. Wird der nächste
 Ort unterwegs gesperrt (ein Bündnis endet), bleibt das Heer stehen. Wer schon auf einem Abschnitt
 marschiert und ein neues Ziel über denselben nächsten Ort bekommt, behält den zurückgelegten Teil;
-auf der Bahn nimmt ein Heer keine Befehle an. Zugang in a2: eigene und verbündete Orte (Krieg und
-Besetzung folgen mit a3).
+auf der Bahn nimmt ein Heer keine Befehle an. Zugang in a2: eigene und verbündete Orte; seit a3 auch
+die der Kriegsgegner und die Orte, die die eigene Seite besetzt hält. Die Bahn fährt nur zwischen
+Bahnhöfen, die die eigene Seite kontrolliert. Erreicht ein Heer einen Ort mit einem gegnerischen Heer,
+bleibt es dort stehen (Schlacht).
 
 ### 3.5 Versorgung und Zermürbung
 
@@ -205,8 +207,9 @@ Bahnhof sperrt.
 Umsetzung (Schritt a2): Zermürbung gilt nur für Feldarmeen, nicht für Garnisonen im Frieden. Die drei
 Tagesmärsche zum Bahnhof sind Marschtage wie bei der Bewegung; Orte ohne Daten liegen nicht auf dem
 Weg. In Ruhe und versorgt erholt sich die Moral um 0,01 je Tag. Die Geschütze folgen den Soldaten
-(Heerwesen). Die Abgänge mindern die Bevölkerung nicht; Gefallene kommen mit der Schlacht (a3). Ohne
-Krieg stehen alle Heere in eigenem oder verbündetem Gebiet und sind versorgt.
+(Heerwesen). Seit a3 zählt die Versorgung nach der Kontrolle (besetzte Orte versorgen die Besetzer),
+und die Abgänge mindern wie die Gefallenen die Bevölkerung (Abschnitt 4.4). Ohne Krieg stehen alle
+Heere in eigenem oder verbündetem Gebiet und sind versorgt.
 
 ## 4. Krieg (M10a)
 
@@ -226,6 +229,17 @@ und Kriegspunkten. Er beginnt durch:
 des Angreifers, wenn sie nicht mit dem Ziel verbündet sind. Wer mit beiden verbündet ist, bleibt
 neutral. Kriegserklärungen kosten Beziehung bei allen Bundesstaaten (Spielwert −20) und lösen
 Bündnisse mit dem Gegner.
+
+Umsetzung (Schritt a3): Befehl `Kriegserklaerung` (Staat, Gegner; die Kriegsziele kommen mit a4).
+Gültig, wenn beide Orte haben, verschieden sind, nicht schon im Krieg miteinander stehen und nicht auf
+derselben Seite eines Krieges. Bündnisfall nach `war_sides`: Verbündete und Garanten des Ziels stehen
+bei ihm, Verbündete des Angreifers bei diesem, wer zu beiden gehört, bleibt neutral. Mit dem Krieg
+enden alle Verträge (Bündnisse und Garantien) zwischen den Seiten, und alle Kriegführenden machen
+mobil; im Krieg rüstet niemand ab. Eine Krise, in der nach der dritten Stufe keine Seite nachgibt,
+wird zum Krieg der beiden Seiten des Spiels (Ausgang „Krieg“ statt Kompromiss); eine angenommene
+Bundesintervention wird Bundesexekution: Antragsteller und Befürworter gegen das Ziel, dem seine
+Verbündeten und Garanten beistehen. Wer auf derselben Seite eines Krieges steht, gilt als eigene
+Seite (Zugang, Versorgung, Bahn). Lesezeichen im Krieg folgen mit b1.
 
 ### 4.2 Schlacht
 
@@ -248,6 +262,21 @@ kehrt nach 60 Tagen zurück) und Gefangene (beim Rückzug, kehren mit dem Friede
 Chronik meldet jede Schlacht: „Schlacht bei Königgrätz: Die I. und II. Armee schlagen die
 Nordarmee; Verluste 9.000 gegen 44.000.“ Der Ort erhält Verwüstung nach den Verlusten.
 
+Umsetzung (Schritt a3): Verteidiger ist, wer zum Herrn des Ortes (Besetzer, sonst Besitzer) hält,
+Angreifer, wer mit ihm im Krieg ist; Heere auf der Bahn und auf dem Rückzug kämpfen nicht. Feuerkraft =
+Soldaten × Bewaffnung + Geschütze × `geschuetz_wert` (50); Frontbreite 50.000 ÷ Geländefaktor des
+Ortes; Gelände stärkt den Verteidiger um die Hälfte seines Mehrwerts (Hochgebirge × 1,5), eine
+Festung um 0,5 je Stufe, ein Flussübergang des Angreifers um × 1,5 (nach dem Anteil der Soldaten, die
+über den Fluss kamen). Führung gibt es noch nicht (Faktor 1). Verlustrate 0,08, Moral −= Verluste ÷
+Soldaten × 5; Bruch unter Moral 0,3 oder bei Tagesverlusten über einem Viertel; brechen beide, weicht
+die Seite mit der geringeren Moral, bei Gleichstand der Angreifer. Die Verlierer ziehen sich in einen
+Nachbarort zurück (zugänglich, ohne Gegner, bevorzugt von der eigenen Seite gehalten, sonst der
+nächste) und verlieren dabei ein Zehntel als Gefangene; wer nicht ausweichen kann, ergibt sich ganz.
+Gefallene ein Viertel der Verluste, von den Verwundeten kehrt die Hälfte nach 60 Tagen zu ihrem Heer
+zurück (sonst zum ersten Heer des Staates), die übrigen sind Invaliden. Gefangene stehen je Staat und
+Gewahrsam im Zustand und kehren mit dem Frieden zurück (a4). Verwüstung: Verluste ÷ 100.000. Ein
+Heer, dessen Garnison im Krieg unterging, wird mit der Abrüstung neu aufgestellt.
+
 ### 4.3 Besetzung und Belagerung
 
 - Ein gegnerischer Ort ohne gegnerisches Heer wird nach einem Tag **besetzt**: Er bleibt im Besitz
@@ -258,10 +287,26 @@ Nordarmee; Verluste 9.000 gegen 44.000.“ Der Ort erhält Verwüstung nach den 
   im Ort bricht die Belagerung. Die Besatzung ist Teil eines Heeres.
 - Befreit wird ein Ort durch ein eigenes Heer ohne Gegner.
 
+Umsetzung (Schritt a3): Kontrolle je Ort im Zustand (`kontrolle`, leer = Besitzer). Ein Heer in Ruhe,
+das einen vollen Tag in einem Ort des Gegners steht, ohne dass dort ein Heer der anderen Seite steht,
+besetzt ihn für seinen Staat; ein Verbündeter des Besitzers befreit ihn für diesen. Die Chronik meldet
+Besetzung und Befreiung von Hauptstädten. Festungen stehen in `common/militaer.chron` (`festung`,
+Stufe 1–3; 1848: 35 Bundes- und Landesfestungen als Spielwert). Die Besatzung ist abweichend vom
+Entwurf kein Teil eines Heeres, sondern eine Zahl (`festung_besatzung` 5.000 je Stufe): Belagerung
+täglich um 1 ÷ Tage, Tage = 30 × Stufe × Besatzung ÷ (Soldaten + Geschütze × 50 der Belagerer),
+mindestens 10; Belagerer in der Lage „Belagerung“. Ziehen sie ab oder kommt ein Entsatzheer
+(Schlacht), verfällt der Fortschritt. Die Besatzung geht beim Fall nicht in Gefangenschaft (sie ist
+kein Heer). Kontribution: Die Steuern besetzter Orte fehlen dem Besitzer, die Hälfte aller Steuerarten
+geht an den Besetzer als Kontribution.
+
 ### 4.4 Verluste und Bevölkerung
 
 Gefallene und Zermürbung mindern die Bevölkerung der Heimatorte (Jahrgänge im wehrfähigen Alter,
 anteilig nach Einwohnern); so wirken die Verluste auf die Demografie (Kapitel 15, Abschnitt 3).
+
+Umsetzung (Schritt a3): Gefallene und Abgänge sammeln sich je Staat (`gefallene`) und mindern am
+Monatsersten die Jungen und Erwerbstätigen aller Orte des Staates um denselben Anteil; sie zählen in
+der Bilanz der Orte als Sterbefälle.
 
 ### 4.5 Kriegsziele, Kriegspunkte und Frieden
 
@@ -489,3 +534,4 @@ Weitere Tests:
 |---|---|
 | a1 Nachbarschaft und Heere | Kartengenerator: `nachbarn.csv` mit Grenzlänge und gekreuztem Fluss (Kreuzung der Verbindungslinie mit den Flusslinien statt einer Pixelzählung an der Grenze, die bei Flüssen in der Ortsmitte versagt), Testdaten und Tests. `karte/ueberfahrten.csv` mit 13 Fähren und Übergängen (Rügen, Hiddensee, Alsen, Fehmarn, Sylt, Föhr, Pellworm, Ærø, Wangerooge, Langeoog, Norderney, Juist, Borkum). `common/militaer.chron` (chronik-skript.md 3.30): Militär ab 1848.03.01, Flussrang 3, Heerwesen Standard, Preußen und Österreich, 18 Garnisonen (Preußen: Garde und acht Armeekorps, Österreich sechs Generalkommanden, Bayern drei), die übrigen Staaten in ihrer Hauptstadt: 53 Garnisonen, 382.528 Soldaten. Kern: `military.hpp` (Friedensstärke, Nachbarschaft, Flussübergang, Heere beim Start und am Monatsersten), Lader mit Prüfungen, Zustand `heere`, Inhaltsbereich `militaer` mit eigenem Stand, Spielstand Format 4, `uhrwerk-cli info` mit Nachbarschaft und Garnisonen. Tests: Lader, Heere, Spielstand und Wiederholung, Fingerabdruck, Ladefehler; Format 3 zeigt Metadaten, lädt nicht. 1648 bitgleich (`5db13a66d63e6079`). |
 | a2 Bewegung | Befehle `Marsch` (Heer, Zielort; ohne Ziel Halt) und `Mobilmachung` (1 mobil, 0 Abrüstung). Mobilmachung je Staat mit Phasen, Wachstum der Feldarmeen bis zur Kriegsstärke, Abrüstung in 30 Tagen zurück in die Garnisonen; Heereskosten nach Soldaten ÷ Friedensstärke. Wege mit Dijkstra über Marsch und Bahn (Gelände, Flussübergang, Überfahrt, Einladen nach Kapazität, Fahrt, Ausladen), Belegung je Bahnstrecke mit Warten, Bewegung mit Übertrag der Resttage. Versorgung (eigenes und verbündetes Gebiet, sonst Bahnhof in drei Tagesmärschen) und Zermürbung mit Winter, Moral. Krise Stufe 3 → Mobilmachung beider Hauptparteien, Ende der Krise → Abrüstung (statt Faktor 1,5 der Diplomatie). Regeln in `common/militaer.chron` (chronik-skript.md 3.30), Inhaltsbereich `militaer` Stand 2, Zustand: Weg und Resttage je Heer, Mobilmachung je Staat, Belegung je Strecke. Testbefehle des Speichertests mit Marsch und Mobilmachung. Brücke: `get_diplomacy` liefert `army_cost_factor`, das Diplomatiefenster zeigt den echten Faktor statt fest 1,5 (Heere auf der Karte und Befehle in der Oberfläche folgen mit b3). Tests: Marschtage, Zugang, Wege zu Fuß und mit der Bahn, Bündnis, Mobilmachung mit Kosten, Bahnfahrt mit Warten, Halt, Abrüstung, Versorgung und Winter, Krise, Spielstand während Mobilmachung, Marsch und Bahnfahrt, Wiederholung, Ladefehler. 1648 bitgleich, Wirtschaft 1848 ohne Befehle zeichengleich. |
+| a3 Krieg und Schlacht | Befehl `Kriegserklaerung` mit Bündnisfall, Beziehung −20 bei allen Bundesstaaten, Ende der Verträge zwischen den Seiten, Mobilmachung aller Kriegführenden; Krise → Krieg (Ausgang „Krieg“), Bundesintervention → Bundesexekution. Kontrolle je Ort, Zugang und Bahn nach Kontrolle. Tägliche Schlacht mit Zufallsstrom `krieg` (Frontbreite, Gelände, Festung, Flussübergang, Geschütze, Moral, Bruch), Rückzug mit Gefangenen, Kapitulation, Verwüstung, Chronik. Besetzung nach einem vollen Tag, Befreiung, Kontribution; Festungen (35 im Jahr 1848) mit Belagerung. Verwundete kehren nach 60 Tagen zurück, Gefangene je Staat, Gefallene und Abgänge mindern am Monatsersten die Bevölkerung. Regeln in `common/militaer.chron`, Inhaltsbereich `militaer` Stand 3, Zustand mit Kriegen, Kontrolle, Schlachten, Belagerungen, Verwundeten, Gefangenen, Gefallenen und Zufallsstrom; Testbefehle mit Kriegserklärungen. Tests: Bündnisfall, Erklärung, Schlacht mit Rückzug, Besetzung und Verlusten, Kontribution, Belagerung, Krise → Krieg, Bundesexekution, Spielstand während Schlacht und Belagerung mit Wiederholung und Threads, Ladefehler. 1648 bitgleich, 1848 ohne Befehle zeichengleich. |

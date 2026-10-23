@@ -544,6 +544,14 @@ struct MilitaryRef {
         int line = 0;
     };
     std::vector<GarrisonDraft> garrisons; // nur die zum Startdatum bestehenden
+    struct FortressDraft {
+        std::string id;
+        std::string name;
+        std::string location;
+        std::int32_t level = 1;
+        int line = 0;
+    };
+    std::vector<FortressDraft> fortresses; // seit Schritt a3, nur die zum Startdatum bestehenden
 };
 
 /// Felder einer CSV-Zeile (Semikolon; Felder in "…" dürfen ; enthalten, "" steht für ein ").
@@ -2755,10 +2763,38 @@ private:
                 rules_found = true;
                 ref.line = node.line;
                 Fields f(node, file.name, "militaer", issues_,
-                         {"seit", "fluss_rang", "marsch_km", "flussuebergang_tage", "gelaende", "bahn_km",
-                          "bahn_kapazitaet", "ausladen_tage", "versorgung_tage", "zermuerbung",
-                          "zermuerbung_unversorgt", "moral_unversorgt", "moral_erholung",
-                          "demobilmachung_tage"});
+                         {"seit",
+                          "fluss_rang",
+                          "marsch_km",
+                          "flussuebergang_tage",
+                          "gelaende",
+                          "bahn_km",
+                          "bahn_kapazitaet",
+                          "ausladen_tage",
+                          "versorgung_tage",
+                          "zermuerbung",
+                          "zermuerbung_unversorgt",
+                          "moral_unversorgt",
+                          "moral_erholung",
+                          "demobilmachung_tage",
+                          "kriegserklaerung_beziehung",
+                          "frontbreite",
+                          "gelaende_verteidigung",
+                          "flussverteidigung",
+                          "festung_verteidigung",
+                          "geschuetz_wert",
+                          "verlustrate",
+                          "moralverlust",
+                          "bruch_moral",
+                          "bruch_verluste",
+                          "gefallene",
+                          "verwundete_rueckkehr",
+                          "genesung_tage",
+                          "gefangene_rueckzug",
+                          "verwuestung_verluste",
+                          "belagerung_tage",
+                          "belagerung_mindesttage",
+                          "festung_besatzung"});
                 const std::optional<Date> since = f.date("seit");
                 MilitaryRules& rules = world_.military_rules;
                 rules.river_rank = static_cast<std::int32_t>(f.integer("fluss_rang", 0, 6).value_or(3));
@@ -2786,6 +2822,27 @@ private:
                 optional_fixed("moral_unversorgt", rules.morale_unsupplied, between(fx(0), fx(1)));
                 optional_fixed("moral_erholung", rules.morale_recovery, between(fx(0), fx(1)));
                 optional_days("demobilmachung_tage", rules.demobilization_days, 1, 365);
+                // Krieg und Schlacht (seit Schritt a3), ebenso optional.
+                optional_fixed("kriegserklaerung_beziehung", rules.declaration_relation,
+                               between(fx(-200), fx(0)));
+                optional_fixed("frontbreite", rules.frontage, between(fx(100), fx(1000000)));
+                optional_fixed("gelaende_verteidigung", rules.terrain_defense, between(fx(0), fx(2)));
+                optional_fixed("flussverteidigung", rules.river_defense, between(fx(1), fx(5)));
+                optional_fixed("festung_verteidigung", rules.fortress_defense, between(fx(0), fx(5)));
+                optional_fixed("geschuetz_wert", rules.gun_value, between(fx(0), fx(1000)));
+                optional_fixed("verlustrate", rules.loss_rate, above_up_to(fx(0), fx(1)));
+                optional_fixed("moralverlust", rules.morale_loss, between(fx(0), fx(100)));
+                optional_fixed("bruch_moral", rules.break_morale, between(fx(0), fx(1)));
+                optional_fixed("bruch_verluste", rules.break_losses, above_up_to(fx(0), fx(1)));
+                optional_fixed("gefallene", rules.dead_share, between(fx(0), fx(1)));
+                optional_fixed("verwundete_rueckkehr", rules.wounded_return, between(fx(0), fx(1)));
+                optional_days("genesung_tage", rules.recovery_days, 1, 365);
+                optional_fixed("gefangene_rueckzug", rules.pursuit_prisoners, between(fx(0), fx(1)));
+                optional_fixed("verwuestung_verluste", rules.devastation_losses,
+                               between(fx(1), fx(100000000)));
+                optional_fixed("belagerung_tage", rules.siege_days, above_up_to(fx(0), fx(365)));
+                optional_fixed("belagerung_mindesttage", rules.siege_min_days, between(fx(1), fx(365)));
+                optional_fixed("festung_besatzung", rules.fortress_garrison, between(fx(0), fx(1000000)));
                 rules.terrain_march.assign(world_.terrains.size(), Fixed::one());
                 if (f.has("gelaende")) {
                     if (const ScriptNode* terrains =
@@ -2858,9 +2915,33 @@ private:
                 if (since <= start_ && start_ < until) {
                     ref.garrisons.push_back(std::move(g));
                 }
+            } else if (node.key == "festung") {
+                // Festung (seit Schritt a3, militaer.md Abschnitt 4.3).
+                if (!node.is_block || node.value.empty()) {
+                    issues_.error(file.name, node.line,
+                                  "ungültige Definition, erwartet: festung <kennung> { … }");
+                    continue;
+                }
+                check_id(file, node, "Kennung einer Festung");
+                const std::string what = "festung " + node.value;
+                Fields f(node, file.name, what, issues_, {"ort", "stufe", "name", "seit", "bis", "quelle"});
+                MilitaryRef::FortressDraft d;
+                d.id = node.value;
+                d.line = node.line;
+                d.location = f.text("ort").value_or("");
+                d.level = static_cast<std::int32_t>(f.integer("stufe", 1, 3).value_or(1));
+                d.name = f.has("name") ? f.text("name").value_or("") : "";
+                const Date since = f.has("seit") ? f.date("seit").value_or(Date{1, 1, 1}) : Date{1, 1, 1};
+                const Date until =
+                    f.has("bis") ? f.date("bis").value_or(Date{9999, 12, 31}) : Date{9999, 12, 31};
+                if (since <= start_ && start_ < until) {
+                    ref.fortresses.push_back(std::move(d));
+                }
             } else {
                 warn_unknown_top_level(
-                    file, node, "militaer { … }, heerwesen <kennung> { … } oder garnison <kennung> { … }");
+                    file, node,
+                    "militaer { … }, heerwesen <kennung> { … }, garnison <kennung> { … } oder "
+                    "festung <kennung> { … }");
             }
         }
         if (!rules_found) {
@@ -2949,6 +3030,29 @@ private:
             for (Garrison& g : by_state[s]) {
                 world_.garrisons.push_back(std::move(g));
             }
+        }
+        // Festungen (seit Schritt a3): bekannter Ort, je Ort höchstens eine.
+        std::set<std::string, std::less<>> fortress_ids;
+        for (const MilitaryRef::FortressDraft& d : ref.fortresses) {
+            if (!fortress_ids.insert(d.id).second) {
+                issues_.error(ref.file, d.line, "festung " + d.id + " ist mehrfach vorhanden");
+                continue;
+            }
+            const Index location = lookup(locations_, d.location);
+            if (location == kNone) {
+                issues_.error(ref.file, d.line,
+                              "unbekannter Ort " + quote(d.location) + " in festung " + d.id);
+                continue;
+            }
+            if (std::any_of(world_.fortresses.begin(), world_.fortresses.end(),
+                            [&](const Fortress& f) { return f.location == location; })) {
+                issues_.error(ref.file, d.line,
+                              "festung " + d.id + ": Ort " + d.location + " hat schon eine Festung");
+                continue;
+            }
+            const std::string& place = world_.locations[static_cast<std::size_t>(location)].name;
+            world_.fortresses.push_back(
+                Fortress{d.id, d.name.empty() ? "Festung " + place : d.name, location, d.level});
         }
         load_neighbors();
     }

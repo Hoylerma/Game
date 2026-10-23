@@ -46,7 +46,7 @@ struct StateAccess {
     /// Zufallsströme mit ungeradem Inkrement (Pcg32::restore überlässt die Prüfung dem Aufrufer).
     static bool streams_valid(const Simulation& sim) {
         return (sim.rng_demography_.increment() & 1U) != 0 && (sim.rng_economy_.increment() & 1U) != 0 &&
-               (sim.rng_events_.increment() & 1U) != 0;
+               (sim.rng_events_.increment() & 1U) != 0 && (sim.rng_war_.increment() & 1U) != 0;
     }
 
 private:
@@ -259,6 +259,8 @@ template <typename Sim, typename V> void StateAccess::visit(Sim& sim, V& v) {
                 v.field("strecke", r.railway);
             });
             v.field("tage", a.days_left);
+            v.field("vorher", a.previous);     // seit a3
+            v.field("tage_hier", a.days_here); // seit a3
         });
         list(v, "mobilmachung", w.mobilizations, Extent::Content, [&](auto& m) { // seit a2, je Staat
             v.field("phase", m.phase);
@@ -266,6 +268,41 @@ template <typename Sim, typename V> void StateAccess::visit(Sim& sim, V& v) {
             v.field("krise", m.crisis);
         });
         list(v, "bahn_belegt", w.rail_backlog, Extent::Content, [&](auto& b) { v.field("", b); });
+        // Krieg (seit a3).
+        v.field("naechster_krieg", w.next_war_id);
+        list(v, "kriege", w.wars, Extent::State, [&](auto& k) {
+            v.field("nummer", k.id);
+            values(v, "angreifer", k.attackers);
+            values(v, "verteidiger", k.defenders);
+            v.field("beginn", k.started);
+            v.field("anlass", k.cause);
+        });
+        list(v, "kontrolle", w.control, Extent::Content, [&](auto& c) { v.field("", c); });
+        list(v, "schlachten", w.battles, Extent::State, [&](auto& b) {
+            v.field("ort", b.location);
+            v.field("beginn", b.started);
+            v.field("tage", b.days);
+            v.field("verluste_angreifer", b.attacker_losses);
+            v.field("verluste_verteidiger", b.defender_losses);
+        });
+        list(v, "belagerungen", w.sieges, Extent::State, [&](auto& b) {
+            v.field("ort", b.location);
+            v.field("belagerer", b.besieger);
+            v.field("fortschritt", b.progress);
+            v.field("beginn", b.started);
+        });
+        list(v, "verwundete", w.convalescents, Extent::State, [&](auto& c) {
+            v.field("heer", c.army);
+            v.field("staat", c.state);
+            v.field("soldaten", c.soldiers);
+            v.field("rueckkehr", c.returns);
+        });
+        list(v, "gefangene", w.prisoners, Extent::State, [&](auto& p) {
+            v.field("staat", p.state);
+            v.field("gewahrsam", p.captor);
+            v.field("soldaten", p.soldiers);
+        });
+        list(v, "gefallene", w.war_dead, Extent::Content, [&](auto& d) { v.field("", d); });
     }
 
     // Politik (seit M8): nur in Welten mit Parlamenten, damit die Prüfsumme der übrigen (1648) bleibt.
@@ -303,6 +340,9 @@ template <typename Sim, typename V> void StateAccess::visit(Sim& sim, V& v) {
     v.field("zufall.demografie", sim.rng_demography_);
     v.field("zufall.wirtschaft", sim.rng_economy_);
     v.field("zufall.ereignisse", sim.rng_events_);
+    if (w.military_rules.active) {
+        v.field("zufall.krieg", sim.rng_war_); // seit M10, Schritt a3
+    }
 
     list(v, "chronik", w.chronicle, Extent::State, [&](auto& e) {
         v.field("datum", e.date);

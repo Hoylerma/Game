@@ -2,6 +2,7 @@
 
 #include "uhrwerk/customs.hpp"
 #include "uhrwerk/diplomacy.hpp"
+#include "uhrwerk/military.hpp"
 
 #include <algorithm>
 #include <cstddef>
@@ -263,6 +264,16 @@ void run_diet(World& world) {
         }
         for (const Index state : supporters) {
             adjust_relation(world, state, motion.target, world.diplomacy_rules.intervention);
+        }
+        // Vollzug (seit M10, militaer.md 4.1): Bundesexekution der Befürworter gegen das Ziel, mit dem
+        // Antragsteller an der Spitze; Verbündete und Garanten des Ziels stehen ihm bei (Bündnisfall).
+        if (military_active(world)) {
+            std::vector<Index> attackers{motion.applicant};
+            attackers.insert(attackers.end(), supporters.begin(), supporters.end());
+            std::vector<Index> ignored;
+            std::vector<Index> defenders;
+            war_sides(world, motion.applicant, motion.target, ignored, defenders);
+            start_war(world, std::move(attackers), std::move(defenders), WarCause::Execution);
         }
         break;
     }

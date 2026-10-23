@@ -35,6 +35,19 @@ freigegeben; Stand je Schritt in Abschnitt 12 dort.
   im eigenen und verbündeten Gebiet. Versorgung und Zermürbung (versorgt 0,05 %, sonst 0,5 % je Tag
   und Moralverlust, im Winter doppelt). Regeln in `common/militaer.chron`; der Speichertest 1848 übt
   Märsche und Mobilmachungen mit. Ohne Befehle rechnet 1848 zeichengleich; 1648 bitgleich.
+- **Krieg, Schlacht, Besetzung, Belagerung (Schritt a3):** Neuer Befehl `Kriegserklaerung` mit
+  Bündnisfall (Verbündete und Garanten des Ziels stehen ihm bei, wer zu beiden gehört, bleibt
+  neutral); Verträge zwischen den Seiten enden, alle Kriegführenden machen mobil. Eine Krise, in der
+  nach der dritten Stufe keine Seite nachgibt, wird zum Krieg; eine angenommene Bundesintervention
+  zur Bundesexekution. Stehen gegnerische Heere im selben Ort, kämpfen sie täglich (neuer Zufallsstrom
+  `krieg`) mit Frontbreite, Gelände, Festung, Flussübergang, Geschützen und Moral, bis eine Seite
+  bricht; die Verlierer ziehen sich mit Gefangenen zurück oder ergeben sich. Ein gegnerischer Ort
+  ohne Verteidiger wird nach einem Tag besetzt (seine Steuern gehen zur Hälfte als Kontribution an
+  den Besetzer), 35 Festungen von 1848 müssen belagert werden. Verwundete kehren nach 60 Tagen
+  zurück, Gefallene und Abgänge mindern am Monatsersten die Bevölkerung. Die Chronik meldet Krieg,
+  Schlachten („Schlacht bei Dresden: … schlagen …; Verluste … gegen …“), besetzte Hauptstädte und
+  gefallene Festungen. Frieden folgt mit Schritt a4. Ohne Befehle rechnet 1848 zeichengleich; 1648
+  bitgleich.
 
 ### Meilenstein M9 – Diplomatie und Zollverein
 

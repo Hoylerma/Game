@@ -534,7 +534,12 @@ enum class DemandKind : std::uint8_t {
     BreakAlliance, // der Gegner kündigt seine Bündnisse mit Gegnern des Fordernden
 };
 
-enum class PlayOutcome : std::uint8_t { DemanderWon, TargetWon, Compromise };
+enum class PlayOutcome : std::uint8_t {
+    DemanderWon,
+    TargetWon,
+    Compromise,
+    War, // seit M10 (Schritt a3): keine Seite gibt nach, die Krise wird zum Krieg (militaer.md 4.1)
+};
 
 /// Laufendes diplomatisches Spiel (Zustand seit Schritt b2, Abschnitt 4.5).
 struct DiplomaticPlay {
@@ -599,6 +604,35 @@ struct MilitaryRules {
     Fixed morale_recovery = Fixed::from_ratio(1, 100);       // Erholung je Tag in Ruhe und versorgt
     // Mobilmachung (Abschnitt 3.3).
     std::int32_t demobilization_days = 30;
+    // Krieg und Schlacht (seit Schritt a3, Abschnitte 4.1–4.4).
+    Fixed declaration_relation =
+        Fixed::from_int(-20);                // Beziehung zu allen Bundesstaaten bei einer Kriegserklärung
+    Fixed frontage = Fixed::from_int(50000); // Frontbreite je Seite im Flachland (Soldaten)
+    Fixed terrain_defense = Fixed::from_ratio(1, 2);    // Verteidiger: 1 + (Geländefaktor − 1) × dies
+    Fixed river_defense = Fixed::from_ratio(3, 2);      // Verteidiger hinter einem Flussübergang
+    Fixed fortress_defense = Fixed::from_ratio(1, 2);   // Verteidiger in einer Festung: 1 + dies × Stufe
+    Fixed gun_value = Fixed::from_int(50);              // Kampfkraft eines Geschützes in Soldaten
+    Fixed loss_rate = Fixed::from_ratio(8, 100);        // Verluste je Tag je Kampfkraft des Gegners
+    Fixed morale_loss = Fixed::from_int(5);             // Moral −= Verluste ÷ Soldaten × dies
+    Fixed break_morale = Fixed::from_ratio(3, 10);      // Bruch unter dieser Moral …
+    Fixed break_losses = Fixed::from_ratio(1, 4);       // … oder bei Tagesverlusten über diesem Anteil
+    Fixed dead_share = Fixed::from_ratio(1, 4);         // Anteil der Gefallenen an den Verlusten
+    Fixed wounded_return = Fixed::from_ratio(1, 2);     // Anteil der Verwundeten, die zurückkehren
+    std::int32_t recovery_days = 60;                    // … nach so vielen Tagen
+    Fixed pursuit_prisoners = Fixed::from_ratio(1, 10); // Gefangene beim Rückzug (Anteil der Soldaten)
+    Fixed devastation_losses = Fixed::from_int(100000); // Verluste, die einen Ort ganz verwüsten
+    // Belagerung (Abschnitt 4.3).
+    Fixed siege_days = Fixed::from_int(30);          // Tage je Festungsstufe bei gleicher Stärke
+    Fixed siege_min_days = Fixed::from_int(10);      // mindestens
+    Fixed fortress_garrison = Fixed::from_int(5000); // Besatzung je Festungsstufe
+};
+
+/// Festung (seit Schritt a3, Abschnitt 4.3): muss belagert werden. Inhalt.
+struct Fortress {
+    std::string id;
+    std::string name;
+    Index location = kNone;
+    std::int32_t level = 1; // 1–3
 };
 
 /// Garnison des Friedensheers (seit M10, Abschnitt 3.2): Anteil der Friedensstärke eines Staates an einem
@@ -617,6 +651,9 @@ enum class ArmyStatus : std::uint8_t {
     Rest = 1,     // Feldarmee in Ruhe (seit a2)
     March = 2,    // auf dem Marsch (seit a2)
     Rail = 3,     // auf der Bahn (seit a2)
+    Battle = 4,   // in der Schlacht (seit a3)
+    Siege = 5,    // belagert eine Festung (seit a3)
+    Retreat = 6,  // auf dem Rückzug (seit a3)
 };
 
 /// Art eines Wegabschnitts (seit Schritt a2).
@@ -647,6 +684,8 @@ struct Army {
     ArmyStatus status = ArmyStatus::Garrison;
     std::vector<RouteStep> route; // seit a2: verbleibender Weg, der nächste Schritt zuerst
     Fixed days_left;              // seit a2: Tage bis zum Ende des laufenden Abschnitts (Marsch, Bahnfahrt)
+    Index previous = kNone;       // seit a3: Ort vor dem letzten Abschnitt (Flussübergang in der Schlacht)
+    std::int32_t days_here = 0;   // seit a3: volle Tage am Ort (Besetzung nach einem Tag)
 
     friend bool operator==(const Army&, const Army&) = default;
 };
@@ -657,6 +696,65 @@ enum class MobilizationPhase : std::uint8_t {
     Mobilizing = 1,   // Reserven strömen zu (mobilmachung_tage)
     Mobilized = 2,    // volle Kriegsstärke erreicht
     Demobilizing = 3, // Abrüstung (demobilmachung_tage), danach wieder Garnisonen
+};
+
+/// Wie ein Krieg begann (seit Schritt a3, Abschnitt 4.1).
+enum class WarCause : std::uint8_t {
+    Declaration = 0, // Kriegserklärung
+    Crisis = 1,      // Krise ohne Nachgeben nach der dritten Stufe
+    Execution = 2,   // Bundesexekution nach einer angenommenen Bundesintervention
+};
+
+/// Krieg (seit Schritt a3). Zustand; Kriegsziele, Kriegspunkte und Frieden kommen mit Schritt a4.
+struct War {
+    std::int64_t id = 0;
+    std::vector<Index> attackers; // Hauptpartei zuerst
+    std::vector<Index> defenders; // Hauptpartei zuerst
+    Date started;
+    WarCause cause = WarCause::Declaration;
+
+    friend bool operator==(const War&, const War&) = default;
+};
+
+/// Laufende Schlacht in einem Ort (seit Schritt a3, Abschnitt 4.2). Die Seiten folgen täglich aus den
+/// Heeren im Ort: Verteidiger hält der Herr des Ortes (Kontrolle), Angreifer ist sein Gegner.
+struct Battle {
+    Index location = kNone;
+    Date started;
+    std::int32_t days = 0;
+    Fixed attacker_losses; // bisher
+    Fixed defender_losses;
+
+    friend bool operator==(const Battle&, const Battle&) = default;
+};
+
+/// Belagerung einer Festung (seit Schritt a3, Abschnitt 4.3).
+struct Siege {
+    Index location = kNone;
+    Index besieger = kNone; // Staat des ersten Belagerers
+    Fixed progress;         // 0..1; bei 1 ergibt sich die Festung
+    Date started;
+
+    friend bool operator==(const Siege&, const Siege&) = default;
+};
+
+/// Verwundete, die zu ihrem Heer zurückkehren (seit Schritt a3).
+struct Convalescents {
+    std::int64_t army = 0;
+    Index state = kNone;
+    Fixed soldiers;
+    Date returns;
+
+    friend bool operator==(const Convalescents&, const Convalescents&) = default;
+};
+
+/// Kriegsgefangene eines Staates bei einem anderen (seit Schritt a3); kehren mit dem Frieden zurück (a4).
+struct Prisoners {
+    Index state = kNone;  // Heimatstaat
+    Index captor = kNone; // Gewahrsam
+    Fixed soldiers;
+
+    friend bool operator==(const Prisoners&, const Prisoners&) = default;
 };
 
 /// Mobilmachung je Staat (seit Schritt a2). Zustand.
@@ -868,6 +966,7 @@ struct World {
     MilitaryRules military_rules;                       // seit M10 (a1)
     std::vector<std::vector<Neighbor>> neighbors; // seit M10 (a1): je Ort, nach Nachbarort; nur mit Militär
     std::vector<Garrison> garrisons;              // seit M10 (a1): nach Staat, dann in Dateireihenfolge
+    std::vector<Fortress> fortresses;             // seit M10 (a3): Festungen zum Startdatum
     std::vector<Location> locations;
     std::vector<PopBlock> pops;
     std::vector<ChronicleEntry> chronicle;
@@ -912,6 +1011,14 @@ struct World {
     std::int64_t next_army_id = 1;           // Nummer des nächsten Heeres
     std::vector<Mobilization> mobilizations; // seit a2: je Staat
     std::vector<std::int32_t> rail_backlog;  // seit a2: je Eisenbahnstrecke Tage, die sie belegt ist
+    std::vector<War> wars;                   // seit a3: laufende Kriege in der Reihenfolge ihres Beginns
+    std::int64_t next_war_id = 1;
+    std::vector<Index> control;               // seit a3: je Ort der besetzende Staat, kNone = der Besitzer
+    std::vector<Battle> battles;              // seit a3: laufende Schlachten
+    std::vector<Siege> sieges;                // seit a3: laufende Belagerungen
+    std::vector<Convalescents> convalescents; // seit a3: Verwundete auf dem Weg zurück
+    std::vector<Prisoners> prisoners;         // seit a3: Kriegsgefangene je Staat und Gewahrsam
+    std::vector<Fixed> war_dead;              // seit a3: je Staat Gefallene und Abgänge bis zum Monatsersten
 
     Index find_state(std::string_view tag) const;
     Index find_location(std::string_view id) const;
