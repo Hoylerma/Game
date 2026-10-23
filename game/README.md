@@ -1,8 +1,9 @@
-# EINIGKEIT – Godot-Projekt (Prototyp der Spieloberfläche, Meilensteine M1 bis M6)
+# EINIGKEIT – Godot-Projekt (Prototyp der Spieloberfläche, Meilensteine M1 bis M9)
 
 Das Projekt zeigt die Simulation des Kerns **Uhrwerk** auf der Karte des **Kernraums**
-(Meilenstein M3: rund 4.500 Orte in rund 620 Kreisen): Kartenansicht mit zehn Kartenmodi
-(seit M4 auch Lebensstandard und Kultur, seit M5 Wirtschaftsleistung und Märkte), Zoomstufen mit
+(Meilenstein M3: rund 4.500 Orte in rund 620 Kreisen): Kartenansicht mit fünfzehn Kartenmodi
+(seit M4 auch Lebensstandard und Kultur, seit M5 Wirtschaftsleistung und Märkte, seit M7
+Verwaltung und Eisenbahnen, seit M8 Wahlen, seit M9 Zollgebiete und Beziehungen), Zoomstufen mit
 Staats-, Kreis- und Ortsnamen, obere Leiste, Staatspanel mit Reglern für Kontribution, Akzise und
 Zoll und einem Haushaltsfenster (seit M5), Ortsinfo mit Wirtschaft (Markt, Einkommen und
 Bedarfsdeckung je Beruf, Betriebe, Güter; seit M5) und Bevölkerung (Kulturen, Lebensstandard,
@@ -61,12 +62,13 @@ Optionen stehen nach `--` (Benutzerargumente):
 |---|---|
 | `--screenshot=<pfad>` | Nach dem Laden simulieren, etwa 20 Bilder warten, den Viewport als PNG speichern und beenden |
 | `--tage=<n>` | Simulierte Tage vor dem Screenshot (Standard 60) |
-| `--kartenmodus=<0..13>` | 0 Politisch, 1 Bevölkerungsdichte, 2 Konfession, 3 Gelände, 4 Verwüstung, 5 Kreise, 6 Lebensstandard, 7 Kultur (6 und 7 seit M4), 8 Wirtschaft, 9 Märkte (seit M5), 10 Verwaltung, 11 Eisenbahnen (beide seit M7), 12 Wahlen (seit M8), 13 Zollgebiete (seit M9) |
+| `--kartenmodus=<0..14>` | 0 Politisch, 1 Bevölkerungsdichte, 2 Konfession, 3 Gelände, 4 Verwüstung, 5 Kreise, 6 Lebensstandard, 7 Kultur (6 und 7 seit M4), 8 Wirtschaft, 9 Märkte (seit M5), 10 Verwaltung, 11 Eisenbahnen (beide seit M7), 12 Wahlen (seit M8), 13 Zollgebiete, 14 Beziehungen (beide seit M9) |
 | `--ort=<ort_id>` | Ort auswählen, Ortsinfo geöffnet (z. B. `berlin_coelln`) |
 | `--zoom=<faktor>` | Vergrößerung gegenüber der Übersicht (1 = ganze Karte), zentriert auf `--ort`, sonst auf die Kartenmitte (bis zum Faktor 1 bleibt die Bildmitte der Übersicht); gilt auch ohne `--screenshot` |
 | `--haushalt` | Haushaltsfenster des Spielerstaates vor dem Screenshot öffnen (seit M5) |
 | `--verfassung` | Fenster „Verfassung und Gruppen“ des Spielerstaates vor dem Screenshot öffnen (seit M8; nur in Szenarien mit Parlament, 1848) |
 | `--zollunion` | Fenster „Zollunion“ des Spielerstaates vor dem Screenshot öffnen (seit M9; nur in Szenarien mit Zollunion, 1848) |
+| `--diplomatie[=<reiter>]` | Fenster „Diplomatie“ vor dem Screenshot öffnen, Reiter `staaten` (Standard), `bund` oder `frage` (seit M9; nur mit dem Deutschen Bund, 1848) |
 | `--spielmenue` | Spielmenü vor dem Screenshot öffnen (seit M6) |
 | `--szenario=<id>` | Szenario beim Start, z. B. `voelkerfruehling` (seit M7; Standard `westfaelischer_frieden`); gilt auch ohne `--screenshot` |
 | `--staat=<TAG>` | Spielerstaat beim Start, z. B. `BAV` (seit M7; Standard: Spieler des Szenarios) |
@@ -103,12 +105,14 @@ Modus `--headless` gibt es kein Bild; ohne Bildschirm hilft `xvfb-run`.
 | H | Zur Hauptstadt des Spielerstaates (mittlere Zoomstufe) |
 | Leertaste | Pause / weiter |
 | 1 – 5 | Geschwindigkeit: 2, 5, 15, 40 oder 120 Tage je Sekunde |
-| Q W E R T Z U I O P Ü + Ä Ö | Kartenmodus Politisch, Bevölkerungsdichte, Konfession, Gelände, Verwüstung, Kreise, Lebensstandard, Kultur, Wirtschaft, Märkte, Verwaltung und Eisenbahnen (beide seit M7; „+“ ist die Taste rechts neben Ü, englisch „]“), Wahlen (seit M8; „Ä“ rechts neben Ö, englisch „'“) und Zollgebiete (seit M9; „Ö“, englisch „;“) (die Leiste zeigt Kurznamen, die Taste steht im Tooltip). Im Modus Eisenbahnen zeichnet die Karte die Strecken: eröffnete durchgezogen, die der nächsten fünf Jahre gestrichelt |
+| Q W E R T Z U I O P Ü + Ä Ö # | Kartenmodus Politisch, Bevölkerungsdichte, Konfession, Gelände, Verwüstung, Kreise, Lebensstandard, Kultur, Wirtschaft, Märkte, Verwaltung und Eisenbahnen (beide seit M7; „+“ ist die Taste rechts neben Ü, englisch „]“), Wahlen (seit M8; „Ä“ rechts neben Ö, englisch „'“), Zollgebiete (seit M9; „Ö“, englisch „;“) und Beziehungen (seit M9; „#“ rechts neben Ä, englisch „\“: Beziehung jedes Staates zum Spielerstaat, grün freundlich, rot feindlich) (die Leiste zeigt Kurznamen, die Taste steht im Tooltip). Im Modus Eisenbahnen zeichnet die Karte die Strecken: eröffnete durchgezogen, die der nächsten fünf Jahre gestrichelt |
 | Wahlabend | seit M8: öffnet am Wahltag von selbst, die Zeit hält an. Die Wahlkreise treffen in der Meldereihenfolge ein (Tempo ×1, ×4 oder sofort); Halbrund, Balken mit Hochrechnung und Fehlerband, Telegramme (Klick zeigt den Wahlkreis). Danach im Spielmenü „Letzte Wahl“ |
 | Steuerregler | Kontribution, Akzise und Zoll des Spielerstaates (wirksam ab dem nächsten simulierten Tag); seit M9 ist der Zollregler eines Mitglieds einer Zollunion gesperrt und zeigt den Tarif der Union |
 | „Haushalt im Einzelnen …“ | Haushaltsfenster: Einnahmen je Steuerart, Ausgaben je Posten (Hof, Verwaltung, Heer, Zinsen, Bauten), Schatz, Schulden, Zins, Staatsbankrotte |
 | „Verfassung und Gruppen …“ | seit M8, 1848: Verfassung, Wahlrecht und Wahlsystem des Landtags; Interessengruppen des Staates mit Anteil an den Einwohnern ab 15 und Einfluss (Anteil am Einkommen) |
-| „Zollunion …“ | seit M9, 1848: Zollgebiet, Tarif und Anteil an der Vereinskasse; je Union Leitmacht, Mitglieder, Tarif und Kasse mit „Beitreten …“ bzw. „Austreten …“, nach einer Rückfrage mit Zeitpunkt (nächster 1. Januar); „Antrag zurückziehen …“. Lehnt die Leitmacht ab (Österreich beim Zollverein), ist der Knopf gesperrt ([docs/technik/diplomatie.md](../docs/technik/diplomatie.md), Abschnitt 3.5) |
+| „Zollunion …“ | seit M9, 1848: Zollgebiet, Tarif und Anteil an der Vereinskasse; je Union Leitmacht, Mitglieder, Tarif und Kasse mit „Beitreten …“ bzw. „Austreten …“, nach einer Rückfrage mit Zeitpunkt (nächster 1. Januar); „Antrag zurückziehen …“. Ein verbindlicher Beitritt (nach einer Zolleinigung des Bundes oder einer verlorenen Krise, seit M9b) lässt sich nicht zurückziehen. Lehnt die Leitmacht ab (Österreich beim Zollverein), ist der Knopf gesperrt ([docs/technik/diplomatie.md](../docs/technik/diplomatie.md), Abschnitt 3.5) |
+| „Diplomatie …“ | seit M9, 1848 (mit dem Deutschen Bund): Fenster mit drei Reitern. **Staaten**: jeder Staat mit Beziehung (Farbfeld wie der Kartenmodus), Verträgen, Gesandten und Lager; für den gewählten Staat Gesandten entsenden/abberufen, Bündnis anbieten/kündigen, Garantie geben/kündigen, Forderungen (Führung im Bund, Beitritt zur Zollunion, Bündnisse lösen; nach einer Rückfrage mit den Seiten der Krise) und Bundesintervention beantragen; gesperrte Knöpfe nennen im Tooltip den Grund. **Bundesversammlung**: Präsidium, Halbrund des Plenums nach Lagern, offener Antrag, Anträge (Bundesreform, Vorsitz, Zolleinigung der eigenen Union) mit Prognose, die letzten Abstimmungen. **Deutsche Frage**: Lager, Zollverein, Reformen, Krisen und Verträge ohne Wertung. Esc oder × schließt ([docs/technik/diplomatie.md](../docs/technik/diplomatie.md), Abschnitt 6) |
+| Krisenleiste | seit M9: über der Karte, solange ein diplomatisches Spiel läuft (das eigene zuerst): Forderung, Stufe (Protest, Ultimatum, Mobilmachung) mit verbleibenden Tagen, beide Seiten mit Soldaten; ist der Spielerstaat Hauptpartei, die Knöpfe Nachgeben, Vermittlung anbieten (der Tooltip sagt, ob die Gegenseite annimmt) und Eskalieren |
 | Klick auf einen Chronikeintrag | Ort des Ereignisses auswählen und anfahren |
 | F10, Knopf „Menü“ | Spielmenü: Neues Spiel mit Wahl des Lesezeichens (1648 oder 1848, seit M7), Speichern unter einem Namen, Laden aus der Liste, Schnellspeichern und -laden; die Zeit hält an, Esc oder F10 schließt es (seit M6) |
 | „Diesen Staat spielen“ (Ortsinfo) | Den Besitzer des Ortes als Spielerstaat übernehmen (seit M7); nach einem neuen Spiel nennt ein Hinweis die hervorgehobenen Staaten des Lesezeichens |
@@ -160,7 +164,7 @@ game/
 │   │   ├── map_labels.gd          MapLabels: Namen im Bildschirmraum mit Rastern
 │   │   ├── map_label_layout.gd    MapLabelLayout: Namenspunkte von Staaten und Kreisen
 │   │   └── railway_layer.gd       RailwayLayer: Eisenbahnstrecken über der Karte (seit M7)
-│   └── ui/                    Skripte der Panels, Legendenberechnung, Farbpalette; Wahlabend (election_night.gd) und Parteipanel (party_panel.gd, beide seit M8)
+│   └── ui/                    Skripte der Panels, Legendenberechnung, Farbpalette; Wahlabend (election_night.gd) und Parteipanel (party_panel.gd, beide seit M8); Fenster „Diplomatie“ (diplomacy_window.gd) und Krisenleiste (play_bar.gd, beide seit M9)
 ├── shaders/map.gdshader       Kartenshader (canvas_item)
 ├── theme/einigkeit_theme.tres Theme der Oberfläche (Papier und Tinte)
 └── tests/                     Einheiten-, Rauch-, Klick- und Leistungstest, siehe tests/README.md

@@ -85,12 +85,13 @@ func _test_launch_options() -> void:
 	_true(not defaults.wants_screenshot(), "ohne --screenshot kein Screenshot")
 	var bad_args := PackedStringArray(
 		[
-			"--tage=-3", "--kartenmodus=14", "--unbekannt", "--zoom=0", "--zoom=viel", "--szenario",
-			"--staat=", "--partei=", "--verfassung=ja", "--zollunion=ja"
+			"--tage=-3", "--kartenmodus=15", "--unbekannt", "--zoom=0", "--zoom=viel", "--szenario",
+			"--staat=", "--partei=", "--verfassung=ja", "--zollunion=ja", "--diplomatie=krieg"
 		]
 	)
 	var bad := LaunchOptions.parse(bad_args)
-	_equal(bad.problems.size(), 10, "fehlerhafte Optionen gemeldet")
+	_equal(bad.problems.size(), 11, "fehlerhafte Optionen gemeldet")
+	_equal(bad.diplomacy_tab, -1, "fehlerhaftes --diplomatie öffnet nichts")
 	var party := LaunchOptions.parse(PackedStringArray(["--szenario=voelkerfruehling", "--partei=liberale"]))
 	_true(party.party_id == "liberale" and party.problems.is_empty(), "Option --partei (seit M8)")
 	_equal(defaults.party_id, "", "ohne --partei spielt man den Staat")
@@ -102,6 +103,14 @@ func _test_launch_options() -> void:
 		and not defaults.show_customs,
 		"Optionen --zollunion und --kartenmodus=13 (seit M9)"
 	)
+	var diplomacy := LaunchOptions.parse(PackedStringArray(["--diplomatie", "--kartenmodus=14"]))
+	_true(
+		diplomacy.diplomacy_tab == 0 and diplomacy.map_mode == 14 and diplomacy.problems.is_empty()
+		and defaults.diplomacy_tab == -1,
+		"Optionen --diplomatie und --kartenmodus=14 (seit M9)"
+	)
+	_equal(LaunchOptions.parse(PackedStringArray(["--diplomatie=bund"])).diplomacy_tab, 1, "--diplomatie=bund")
+	_equal(LaunchOptions.parse(PackedStringArray(["--diplomatie=frage"])).diplomacy_tab, 2, "--diplomatie=frage")
 	var chosen := LaunchOptions.parse(
 		PackedStringArray(["--szenario=voelkerfruehling", "--staat=bav"])
 	)
@@ -202,13 +211,24 @@ func _test_legend_entries() -> void:
 	_equal(LegendData.count_text(1), "1 Ort", "count_text Einzahl")
 	_equal(LegendData.count_text(1234), "1.234 Orte", "count_text Mehrzahl")
 	_equal(LegendData.states_text(1) + ", " + LegendData.states_text(26), "1 Staat, 26 Staaten", "states_text")
+	# Beziehungen (seit M9): grün freundlich, rot feindlich, neutral in der Mitte.
+	_true(
+		LegendData.relation_color(0.0).is_equal_approx(LegendData.RELATION_NEUTRAL)
+		and LegendData.relation_color(100.0).is_equal_approx(LegendData.RELATION_FRIEND)
+		and LegendData.relation_color(-250.0).is_equal_approx(LegendData.RELATION_FOE),
+		"Farben der Beziehungen"
+	)
 	var swatch := LegendPanel.hatch_swatch()
 	_true(swatch.texture != null, "Schraffurfeld der Legende")
 	swatch.free()
 
 
 func _test_map_modes() -> void:
-	_equal(MapModes.COUNT, 14, "vierzehn Kartenmodi (Zollgebiete seit M9)")
+	_equal(MapModes.COUNT, 15, "fünfzehn Kartenmodi (Zollgebiete und Beziehungen seit M9)")
+	_equal(MapModes.MAP_BEZIEHUNGEN, 14, "Kartenmodus Beziehungen = 14 (bridge-api.md)")
+	_equal(MapModes.KEY_HINTS[MapModes.MAP_BEZIEHUNGEN], "#", "Taste # für Beziehungen")
+	_true(InputMap.has_action(&"kartenmodus_beziehungen"), "Aktion für den Kartenmodus Beziehungen")
+	_true(MapModes.DATA_MODES.has(MapModes.MAP_BEZIEHUNGEN), "Beziehungen mit Schraffur")
 	_equal(MapModes.MAP_ZOLLGEBIETE, 13, "Kartenmodus Zollgebiete = 13 (bridge-api.md)")
 	_equal(MapModes.KEY_HINTS[MapModes.MAP_ZOLLGEBIETE], "Ö", "Taste Ö für Zollgebiete")
 	_true(InputMap.has_action(&"kartenmodus_zollgebiete"), "Aktion für den Kartenmodus Zollgebiete")

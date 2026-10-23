@@ -142,6 +142,10 @@ CustomsDecision evaluate_customs_change(const World& world, Index state_index, I
         (target != kNone && !in_range(world.customs_unions, target))) {
         return CustomsDecision::Invalid;
     }
+    // Einen verbindlichen Beitritt (Bundesbeschluss, verlorene Krise) kann der Staat nicht mehr ändern.
+    if (customs_request_binding(world, state_index)) {
+        return CustomsDecision::Invalid;
+    }
     const Index current = world.states[at(state_index)].customs_union;
     if (target == current) {
         const bool pending = std::any_of(world.customs_requests.begin(), world.customs_requests.end(),
@@ -164,6 +168,32 @@ CustomsDecision evaluate_customs_change(const World& world, Index state_index, I
 
 Date customs_effective_date(const Date& today) {
     return today.month == 1 && today.day == 1 ? today : Date{today.year + 1, 1, 1};
+}
+
+Date customs_forced_date(const Date& today) {
+    return Date{today.year + 1, 1, 1};
+}
+
+bool customs_request_binding(const World& world, Index state) {
+    const auto pending = std::find_if(world.customs_requests.begin(), world.customs_requests.end(),
+                                      [&](const CustomsRequest& r) { return r.state == state; });
+    if (pending == world.customs_requests.end() || pending->customs_union == kNone) {
+        return false;
+    }
+    // Vorgemerkt zum selben 1. Januar wie der offene Antrag: dann stammt er von diesem Ergebnis.
+    const Date due = customs_effective_date(world.date);
+    const Index joined = pending->customs_union;
+    const bool by_diet =
+        std::any_of(world.motion_results.begin(), world.motion_results.end(), [&](const MotionResult& r) {
+            return r.kind == MotionKind::CustomsUnification && r.accepted && r.target == joined &&
+                   customs_forced_date(r.date) == due;
+        });
+    const bool by_play =
+        std::any_of(world.play_results.begin(), world.play_results.end(), [&](const PlayResult& r) {
+            return r.kind == DemandKind::CustomsUnion && r.outcome == PlayOutcome::DemanderWon &&
+                   r.target == state && r.customs_union == joined && customs_forced_date(r.ended) == due;
+        });
+    return by_diet || by_play;
 }
 
 CustomsDecision request_customs_change(World& world, Index state_index, Index target) {

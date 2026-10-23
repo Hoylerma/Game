@@ -21,7 +21,7 @@ gebaut; Abhängigkeiten stehen jeweils dabei.
 | M6 | Speicherstände und Wiederholungen | 1 – Vorproduktion | M5 | **fertig** |
 | M7 | Lesezeichen 1848 | 2 – Vertical Slice | M6 | **fertig** (Fachprüfung der Daten offen, siehe unten) |
 | M8 | Politik, Parteien und Wahlen | 2 – Vertical Slice | M7 | **fertig** (Fachprüfung der Werte offen, siehe unten) |
-| M9 | Diplomatie und Zollverein | 2 – Vertical Slice | M7 | in Arbeit (M9a fertig, M9b offen) |
+| M9 | Diplomatie und Zollverein | 2 – Vertical Slice | M7 | **fertig** (Fachprüfung der Werte offen, siehe unten) |
 | M10 | Militär und Einigungskriege | 2 – Vertical Slice | M9 | offen |
 | M11 | Ereignisse und Revolution 1848/49 | 2 – Vertical Slice | M8 | offen |
 | M12 | Künstliche Intelligenz der Staaten | 2 – Vertical Slice | M8–M11 | offen |
@@ -561,7 +561,7 @@ Vertrag: [technik/politik.md](technik/politik.md).
 - **Alte Spielstände:** Spielstände aus M7 lassen sich nicht laden (Format 2, Inhaltsbereich
   `politik`).
 
-### M9 – Diplomatie und Zollverein
+### M9 – Diplomatie und Zollverein ✅
 
 **Ziel:** Diplomatie nach [14 Diplomatie](14_diplomatie.md) mit dem Zollverein als Kernsystem.
 Vertrag: [technik/diplomatie.md](technik/diplomatie.md) (Entscheidungen freigegeben, Stand in
@@ -576,14 +576,71 @@ Abschnitt 11).
 - Zollverein-Mitgliedschaften 1848 historisch korrekt; Beitritte verändern Handel und Kassen
   messbar
 
-**Stand:** M9a (Zollunionen, Schritte a1–a4) ist umgesetzt: Daten, Zollgebiete im Kern, Zolllabor
-mit Kalibrierung und die Godot-Seite (Kartenmodus „Zollgebiete“, Fenster „Zollunion“). Beide
-Abnahmekriterien sind geprüft (CTest `zollunionen_1848`, Zolllabor in der CI). Offen ist M9b
-(Beziehungen, Bundesversammlung, diplomatische Spiele).
+**Ergebnis**
+- **Vertrag** in [technik/diplomatie.md](technik/diplomatie.md) mit dem Stand je Schritt. Umgesetzt in
+  zwei Teilen: M9a (Zollunionen: Daten, Zollgebiete im Kern, Zolllabor, Godot) und M9b (Diplomatie:
+  Beziehungen, Bundesversammlung und Spiele im Kern, Brücke und Godot, Review).
+- **Zollunionen:** Zollverein (26 Staaten unter Preußen, Vereinstarif 10 %) und Steuerverein
+  (3 Staaten unter Hannover, 3 %); die übrigen neun Staaten sind eigene Zollgebiete. Jeder Markt
+  teilt sich nach der Bevölkerung in Zollgebiete; Zoll fällt nur auf Waren von außerhalb des
+  eigenen Gebiets an, die Vereinskasse verteilt ihn nach der Bevölkerung. Beitritt, Austritt und
+  Wechsel gelten zum 1. Januar; die Leitmacht entscheidet über Beitritte (der Zollverein lehnt
+  Österreich ab), ohne sie löst sich ihre Union auf.
+- **Zolllabor** (`uhrwerk-cli zoll`, in der CI): Zollanteil des Zollvereins 2,9 % der Einnahmen; der
+  Beitritt Hannovers erhöht den Grenzhandel um 40 %, der Mecklenburg-Schwerins verdoppelt ihn.
+- **Beziehungen** zwischen allen 38 Staaten (703 Paare) mit Zielwert aus Grundwert, Zollunion, Bund,
+  Konfession und Verträgen; Gesandte (Preußen 4, Österreich 3, die übrigen 1), Bündnisse und
+  Garantien nach Regel. 1848: Gegner sind Österreich–Preußen und Dänemark–Preußen; im Lager Preußens
+  stehen 21 Staaten, im Lager Österreichs 5, unentschieden sind 10.
+- **Bundesversammlung** in Frankfurt (Präsidium Österreich, Plenum 68 Stimmen, Engerer Rat 17 mit
+  Kurien): Anträge auf Bundesreform, Zolleinigung, Bundesintervention und Präsidium, Abstimmung am
+  nächsten Monatsersten nach den Beziehungen. Eine angenommene Zolleinigung ist verbindlich.
+- **Diplomatische Spiele:** Forderungen (Führung im Bund, Beitritt zur Zollunion, Bündnisse lösen),
+  Parteinahme der Bundesstaaten, drei Stufen zu 30 Tagen (Protest, Ultimatum, Mobilmachung),
+  Manöver (nachgeben, Vermittlung, eskalieren) und Auflösung nach Stärke, ohne Krieg.
+- **Godot:** Kartenmodi „Zollgebiete“ (Taste Ö) und „Beziehungen“ (Taste #), Fenster „Zollunion“
+  und „Diplomatie“ (Staaten, Bundesversammlung mit Halbrund, Deutsche Frage), Krisenleiste mit
+  Manövern, Haushaltsposten „Gesandte“.
+- **Spielstand Format 3** mit dem Inhaltsbereich `diplomatie`; der neue Zustand wird nur mit
+  Zollunionen bzw. dem Deutschen Bund besucht.
+- **1648 unverändert:** Die Prüfsumme nach 100 Jahren bleibt `5db13a66d63e6079`.
+- **Tests:** 189 Testfälle (vorher 169); CTests `zollunionen_1848` und `zoll_1848`; Godot-Einheitentest
+  mit 277 Prüfungen (vorher 260); Rauchtest mit Zollunionen und Diplomatie; Klicktest mit Beitritt,
+  Gesandtem, Forderung, Krisenleiste und Antrag; Screenshots der Zollgebiete, Beziehungen und der
+  Bundesversammlung in der CI.
+- **Review M9** über Kern, Brücke und Godot, Daten und Doku. Behoben sind:
+  - Ein erzwungener Beitritt (Zolleinigung, verlorene Krise) ließ sich bis zum 1. Januar
+    zurückziehen.
+  - Eine Abstimmung oder Krise am 1. Januar kündigte den Beitritt zum selben Tag an; er galt aber
+    erst ein Jahr später.
+  - Die Liste der Beziehungen war im Tooltip teuer.
+  - Kleinigkeiten im Fenster „Diplomatie“; der Knopf des Kartenmodus heißt jetzt „Beziehung“.
+
+**Abnahme im Einzelnen**
+
+| Kriterium | Stand |
+|---|---|
+| Zollverein-Mitgliedschaften 1848 historisch korrekt | erfüllt: CTest `zollunionen_1848` prüft die Mitglieder gegen die Liste in [technik/diplomatie.md](technik/diplomatie.md), Abschnitt 2; `uhrwerk-cli info` nennt Unionen und Mitglieder |
+| Beitritte verändern Handel und Kassen messbar | erfüllt: Das Zolllabor misst Grenzhandel, Handel, Zoll und Preise mit und ohne Beitritt über 8 Seeds gegen Zielwerte (Schritt „Zolllabor 1848“ in der CI, CTest `zoll_1848`) |
+
+**Bekannte Grenzen**
+- **Fachprüfung offen:** Grundbeziehungen, Stimmen, Schwellen und Tarife sind Spielwerte nach
+  Literaturkenntnis, ohne Prüfung gegen Quellen.
+- **Zollanteil zu klein:** Der Zoll bringt dem Zollverein knapp 3 % der Einnahmen, historisch eher
+  10–20 %; dafür fehlt dem Modell Einfuhr von Kolonial- und englischen Fabrikwaren.
+- **Keine KI:** Die anderen Staaten handeln nicht von sich aus (M12); sie stimmen und nehmen Partei
+  nach Regel.
+- **Bundesreform und Präsidium scheitern nach Regel immer** (Einstimmigkeit, wie historisch).
+- **Krisen ohne Krieg** und ohne Außenmächte; die Führung im Bund wirkt nur auf die Anzeige „Die
+  deutsche Frage“. Krieg und Bündnisfall kommen mit M10.
+- **Die Bundesversammlung tagt durchgehend**; ihre Suspendierung 1848–1850 kommt mit M11.
+- **Alte Spielstände:** Spielstände aus M8 laden nicht (Format 3), Spielstände 1848 aus den ersten
+  M9-Schritten ebenso nicht (Inhaltsbereich `diplomatie`).
 
 ### M10 – Militär und Einigungskriege
 
 **Ziel:** Kriegführung nach [15 Militär und Kriegsführung](15_militaer_und_kriegsfuehrung.md).
+Entwurf: [technik/militaer.md](technik/militaer.md).
 
 **Umfang**
 - Heere, Aushebung, Versorgung, Bewegung auf der Karte, Schlachten, Fronten

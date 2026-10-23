@@ -438,6 +438,10 @@ bool run_state_budget(World& world, Index state_index, const std::vector<Index>&
     base_expenses(world, state, population_of(world, locations), budget);
     state.interest_rate = interest_rate_of(world, state);
     budget.interest = state.debt * state.interest_rate / twelve;
+    // Mobilmachung in einem diplomatischen Spiel (seit M9, diplomatie.md Abschnitt 4.5).
+    if (mobilized(world, state_index)) {
+        budget.army = budget.army * world.diplomacy_rules.mobilization;
+    }
     // Gesandte (seit M9, diplomatie.md Abschnitt 4.2): ein Anteil der Monatseinnahmen je Gesandtem.
     const Fixed income = budget.income();
     budget.diplomacy = envoy_costs(world, state_index, income);

@@ -195,6 +195,49 @@ template <typename Sim, typename V> void StateAccess::visit(Sim& sim, V& v) {
         });
         list(v, "gesandtenkosten", w.states, Extent::Content,
              [&](auto& s) { v.field("haushalt.gesandte", s.budget.diplomacy); });
+        // Bundesversammlung und diplomatische Spiele (seit Schritt b2).
+        v.field("praesidium", w.diet_presidency);
+        list(v, "antraege", w.motions, Extent::State, [&](auto& m) {
+            v.field("art", m.kind);
+            v.field("antragsteller", m.applicant);
+            v.field("ziel", m.target);
+            v.field("gestellt", m.filed);
+        });
+        list(v, "abstimmungen", w.motion_results, Extent::State, [&](auto& r) {
+            v.field("art", r.kind);
+            v.field("antragsteller", r.applicant);
+            v.field("ziel", r.target);
+            v.field("gegner", r.opponent);
+            v.field("datum", r.date);
+            v.field("plenum_ja", r.plenum_yes);
+            v.field("plenum", r.plenum_total);
+            v.field("rat_ja", r.council_yes);
+            v.field("rat", r.council_total);
+            v.field("angenommen", r.accepted);
+        });
+        list(v, "spiele", w.plays, Extent::State, [&](auto& p) {
+            v.field("art", p.kind);
+            v.field("fordernder", p.demander);
+            v.field("gegner", p.target);
+            v.field("zollunion", p.customs_union);
+            v.field("stufe", p.stage);
+            v.field("beginn", p.started);
+            v.field("stufe_seit", p.stage_started);
+            values(v, "seite_fordernder", p.demander_side);
+            values(v, "seite_gegner", p.target_side);
+            v.field("fordernder_eskaliert", p.demander_escalates);
+            v.field("gegner_eskaliert", p.target_escalates);
+        });
+        list(v, "spielergebnisse", w.play_results, Extent::State, [&](auto& r) {
+            v.field("art", r.kind);
+            v.field("fordernder", r.demander);
+            v.field("gegner", r.target);
+            v.field("zollunion", r.customs_union);
+            v.field("beginn", r.started);
+            v.field("ende", r.ended);
+            v.field("stufe", r.stage);
+            v.field("ausgang", r.outcome);
+        });
     }
 
     // Politik (seit M8): nur in Welten mit Parlamenten, damit die Prüfsumme der übrigen (1648) bleibt.

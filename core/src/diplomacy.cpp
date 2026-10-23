@@ -126,6 +126,20 @@ bool diplomacy_active(const World& world) {
                        [&](const Location& loc) { return loc.federal && in_range(world.states, loc.owner); });
 }
 
+bool federal_state(const World& world, Index state) {
+    return in_range(world.states, state) &&
+           std::any_of(world.locations.begin(), world.locations.end(),
+                       [&](const Location& loc) { return loc.federal && loc.owner == state; });
+}
+
+void adjust_relation(World& world, Index a, Index b, Fixed delta) {
+    if (!valid_pair(world, a, b)) {
+        return;
+    }
+    Fixed& r = world.relations[relation_slot(world.states.size(), a, b)];
+    r = (r + delta).clamp(kRelationMin, kRelationMax);
+}
+
 std::size_t relation_count(std::size_t states) {
     return states < 2 ? 0 : states * (states - 1) / 2;
 }
@@ -149,6 +163,20 @@ Fixed relation_target(const World& world, Index a, Index b) {
         return Fixed::zero();
     }
     return TargetContext(world).target(a, b);
+}
+
+std::vector<Fixed> relation_targets(const World& world, Index state) {
+    if (world.relations.empty() || !in_range(world.states, state)) {
+        return {};
+    }
+    const TargetContext context(world);
+    std::vector<Fixed> targets(world.states.size());
+    for (std::size_t s = 0; s < world.states.size(); ++s) {
+        if (static_cast<Index>(s) != state) {
+            targets[s] = context.target(state, static_cast<Index>(s));
+        }
+    }
+    return targets;
 }
 
 bool rivals(const World& world, Index a, Index b) {
@@ -196,7 +224,9 @@ void ensure_diplomacy_state(World& world) {
     if (!diplomacy_active(world) || count == 0 || world.relations.size() == count) {
         return;
     }
-    // Zum Start steht jede Beziehung auf ihrem Zielwert (eingeschwungen wie die Wirtschaft).
+    // Zum Start steht jede Beziehung auf ihrem Zielwert (eingeschwungen wie die Wirtschaft); die
+    // Bundesversammlung (seit Schritt b2) hat ihre Präsidialmacht aus den Daten.
+    world.diet_presidency = world.diet.presidency;
     world.relations.assign(count, Fixed{});
     const TargetContext context(world);
     const auto states = static_cast<Index>(world.states.size());

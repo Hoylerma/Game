@@ -454,6 +454,106 @@ struct DiplomacyRules {
     Fixed guarantee_min; // eine Garantie ab dieser
     Fixed rival_below;   // Gegner: Beziehung unter diesem Wert
     std::vector<Index> confession_group; // je Konfession: Gruppe für „gleiche Konfession“ (Index)
+    // Bundesversammlung und diplomatische Spiele (seit Schritt b2, Abschnitte 4.4 und 4.5)
+    Fixed intervention;                // Bundesintervention: einmalig auf die Beziehung des Ziels zu jedem Ja
+    std::int32_t play_stage_days = 30; // Dauer einer Stufe (Protest, Ultimatum, Mobilmachung)
+    Fixed play_leaning;                // Parteinahme nach Neigung ab diesem Unterschied der Beziehungen
+    Fixed play_break;                  // einmalig zwischen Staaten auf verschiedenen Seiten
+    Fixed play_stage;                  // je neuer Stufe zwischen den beiden Hauptparteien
+    Fixed play_yield;   // Stärkeverhältnis, unter dem eine Seite nachgibt bzw. Vermittlung angenommen wird
+    Fixed mobilization; // Faktor auf die Heereskosten der Hauptparteien in der Mobilmachung
+};
+
+/// Stimme im Engeren Rat der Bundesversammlung (seit M9, Schritt b2): Virilstimme eines Staates oder
+/// Kuriatstimme mehrerer Staaten, deren Mehrheit nach Plenarstimmen entscheidet.
+struct CouncilVote {
+    std::string id;
+    std::string name;
+    std::vector<Index> states;
+};
+
+/// Bundesversammlung (seit M9, Schritt b2; data/common/bundesversammlung.chron, Abschnitt 4.4).
+struct FederalDiet {
+    std::string id; // leer: keine Bundesversammlung im Szenario
+    std::string name;
+    Index presidency = kNone;         // Präsidialmacht zum Start (im Spiel: World::diet_presidency)
+    Index seat = kNone;               // Tagungsort (Ort), Anzeige
+    std::vector<std::int32_t> plenum; // Stimmen im Plenum je Staat, 0 = keine
+    std::vector<CouncilVote> council; // Engerer Rat
+    std::string source;
+};
+
+enum class MotionKind : std::uint8_t {
+    Reform,             // Bundesreform: Plenum, einstimmig
+    CustomsUnification, // Zolleinigung des Bundes in einer Union: Plenum, zwei Drittel
+    Intervention,       // Bundesintervention gegen einen Staat: Engerer Rat, Mehrheit
+    Presidency,         // Präsidium für den Antragsteller: Plenum, einstimmig
+};
+
+/// Antrag in der Bundesversammlung (Zustand seit Schritt b2); Abstimmung am ersten Monatsersten nach
+/// dem Tag des Antrags.
+struct Motion {
+    MotionKind kind = MotionKind::Reform;
+    Index applicant = kNone;
+    Index target = kNone; // Zolleinigung: Zollunion; Intervention: Staat
+    Date filed;
+
+    friend bool operator==(const Motion&, const Motion&) = default;
+};
+
+/// Abgestimmter Antrag (Zustand seit Schritt b2).
+struct MotionResult {
+    MotionKind kind = MotionKind::Reform;
+    Index applicant = kNone;
+    Index target = kNone;
+    Index opponent = kNone; // stärkster Gegner des Antrags (Abschnitt 4.4)
+    Date date;
+    std::int32_t plenum_yes = 0;
+    std::int32_t plenum_total = 0;
+    std::int32_t council_yes = 0;
+    std::int32_t council_total = 0;
+    bool accepted = false;
+
+    friend bool operator==(const MotionResult&, const MotionResult&) = default;
+};
+
+enum class DemandKind : std::uint8_t {
+    Leadership,    // Führung im Bund
+    CustomsUnion,  // Beitritt des Gegners zur Zollunion des Fordernden
+    BreakAlliance, // der Gegner kündigt seine Bündnisse mit Gegnern des Fordernden
+};
+
+enum class PlayOutcome : std::uint8_t { DemanderWon, TargetWon, Compromise };
+
+/// Laufendes diplomatisches Spiel (Zustand seit Schritt b2, Abschnitt 4.5).
+struct DiplomaticPlay {
+    DemandKind kind = DemandKind::Leadership;
+    Index demander = kNone;
+    Index target = kNone;
+    Index customs_union = kNone; // CustomsUnion: Union des Fordernden beim Start
+    std::int32_t stage = 1;      // 1 Protest, 2 Ultimatum, 3 Mobilmachung
+    Date started;
+    Date stage_started;
+    std::vector<Index> demander_side; // Unterstützer (ohne die Hauptpartei), aufsteigend
+    std::vector<Index> target_side;
+    bool demander_escalates = false; // Manöver „eskalieren“ in der laufenden Stufe
+    bool target_escalates = false;
+
+    friend bool operator==(const DiplomaticPlay&, const DiplomaticPlay&) = default;
+};
+
+/// Beendetes diplomatisches Spiel (Zustand seit Schritt b2).
+struct PlayResult {
+    DemandKind kind = DemandKind::Leadership;
+    Index demander = kNone;
+    Index target = kNone;
+    Index customs_union = kNone;
+    Date started;
+    Date ended;
+    std::int32_t stage = 1;
+    PlayOutcome outcome = PlayOutcome::Compromise;
+
+    friend bool operator==(const PlayResult&, const PlayResult&) = default;
 };
 
 /// Grundbeziehung zweier Staaten aus den Daten (seit M9, history/beziehungen, Abschnitt 4.1).
@@ -652,6 +752,7 @@ struct World {
     std::vector<CustomsUnion> customs_unions;           // seit M9, nur die des Szenarios ('seit')
     DiplomacyRules diplomacy_rules;                     // seit M9 (b1)
     std::vector<BaseRelation> base_relations;           // seit M9 (b1): Paare dieses Szenarios
+    FederalDiet diet;                                   // seit M9 (b2), id leer ohne Bundesversammlung
     std::vector<Location> locations;
     std::vector<PopBlock> pops;
     std::vector<ChronicleEntry> chronicle;
@@ -685,6 +786,12 @@ struct World {
     std::vector<Fixed> relations; // Beziehung je Staatenpaar a < b (relation_slot), −200..200
     std::vector<Envoy> envoys;    // Gesandte in der Reihenfolge ihrer Entsendung
     std::vector<Treaty> treaties; // Bündnisse und Garantien in der Reihenfolge des Abschlusses
+    // Bundesversammlung und diplomatische Spiele (seit Schritt b2), ebenso nur mit Deutschem Bund.
+    Index diet_presidency = kNone;            // Präsidialmacht (Antrag Präsidium)
+    std::vector<Motion> motions;              // offener Antrag (höchstens einer)
+    std::vector<MotionResult> motion_results; // abgestimmte Anträge in zeitlicher Folge
+    std::vector<DiplomaticPlay> plays;        // laufende Spiele in der Reihenfolge ihres Beginns
+    std::vector<PlayResult> play_results;     // beendete Spiele in zeitlicher Folge
 
     Index find_state(std::string_view tag) const;
     Index find_location(std::string_view id) const;

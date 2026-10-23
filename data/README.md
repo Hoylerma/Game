@@ -366,6 +366,8 @@ Das Lesezeichen 1648 hat keine Zollunion; jeder Staat ist ein eigenes Zollgebiet
 | `common/diplomatie.chron` | Regeln: Drift, Anteile am Zielwert (Zollunion, Bund, Konfession, Bündnis, Garantie), Gesandte, Annahme von Verträgen (Spielwerte) |
 | `tabellen/beziehungen.csv` → `history/beziehungen/` | 24 Grundbeziehungen 1848 (Dualismus Österreich–Preußen −40, Österreichs Anhänger im Süden und Hannover, preußische Dynastien, Dänemark −50, Luxemburg–Niederlande); Spielwerte |
 
+| `common/bundesversammlung.chron` | Bundesversammlung seit 1816: Präsidium Österreich, Plenum mit 68 Stimmen, Engerer Rat mit 11 Viril- und 6 Kuriatstimmen (Bundesakte 1815, auf den Staatenbestand 1848 übertragen) |
+
 Diplomatie gilt nur mit Deutschem Bund; 1648 bleiben die Regeln ohne Wirkung.
 
 ## Bekannte Lücken und Vereinfachungen

@@ -267,9 +267,11 @@ void Simulation::step_day() {
         if (!world_.parliaments.empty()) {
             collect_donations(world_);
         }
-        // Beziehungen (seit M9, diplomatie.md Abschnitte 4.1 und 4.2), nur mit Deutschem Bund.
+        // Beziehungen (seit M9, diplomatie.md Abschnitte 4.1 und 4.2) und Abstimmung in der
+        // Bundesversammlung (Abschnitt 4.4), nur mit Deutschem Bund.
         if (!world_.relations.empty()) {
             update_relations(world_);
+            run_diet(world_);
         }
     }
 
@@ -326,6 +328,11 @@ void Simulation::step_day() {
     // 6b. Wahlen am Wahltag (seit M8, politik.md Abschnitt 7).
     if (!world_.parliaments.empty()) {
         run_elections();
+    }
+
+    // 6c. Diplomatische Spiele: Ende einer Stufe, Auflösung (seit M9, diplomatie.md Abschnitt 4.5).
+    if (!world_.plays.empty()) {
+        run_plays(world_);
     }
 
     // 7. Jahreswechsel.
@@ -403,6 +410,25 @@ void Simulation::execute(const Command& command) {
         if (command.value == Fixed::from_int(action) && action >= 0 &&
             action <= static_cast<std::int64_t>(TreatyAction::CancelGuarantee)) {
             request_treaty(world_, command.state, command.target, static_cast<TreatyAction>(action));
+        }
+        return;
+    }
+    case CommandType::Motion:
+    case CommandType::Demand:
+    case CommandType::Manoeuvre: {
+        // Bundesversammlung und diplomatische Spiele (seit M9, Abschnitte 4.4 und 4.5): Art im Wert.
+        const std::int64_t kind = command.value.trunc();
+        if (command.value != Fixed::from_int(kind) || kind < 0 || kind > 3) {
+            return;
+        }
+        if (command.type == CommandType::Motion) {
+            file_motion(world_, command.state, static_cast<MotionKind>(kind), command.target);
+        } else if (command.type == CommandType::Demand) {
+            if (kind <= static_cast<std::int64_t>(DemandKind::BreakAlliance)) {
+                start_play(world_, command.state, command.target, static_cast<DemandKind>(kind));
+            }
+        } else if (kind <= static_cast<std::int64_t>(Manoeuvre::Escalate) && command.target == kNone) {
+            apply_manoeuvre(world_, command.state, static_cast<Manoeuvre>(kind));
         }
         return;
     }

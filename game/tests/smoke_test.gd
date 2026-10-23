@@ -47,6 +47,8 @@ const STATE_FIELDS: PackedStringArray = [
 	"customs_income",
 	"customs_request",
 	"bund",
+	"diplomacy",
+	"envoy_cost_month",
 ]
 const LOCATION_FIELDS: PackedStringArray = [
 	"id",
@@ -99,7 +101,7 @@ const MARKET_GOOD_FIELDS: PackedStringArray = [
 const KREIS_FIELDS: PackedStringArray = ["id", "name", "location_count", "source"]
 ## Kartenmodi, in denen Orte ohne Daten Alpha 0 haben (bridge-api.md); im Marktmodus (9)
 ## nur Orte ohne Daten in Märkten ohne Orte mit Daten.
-const NO_DATA_ALPHA_MODES: PackedInt32Array = [0, 1, 2, 4, 6, 7, 8, 10, 11, 12, 13]
+const NO_DATA_ALPHA_MODES: PackedInt32Array = [0, 1, 2, 4, 6, 7, 8, 10, 11, 12, 13, 14]
 const CHRONICLE_FIELDS: PackedStringArray = ["date_text", "text", "location_index", "state_index"]
 
 var _failures := PackedStringArray()
@@ -296,6 +298,135 @@ func _check_scenario_1848() -> void:
 	_check_railways_1848(sim)
 	_check_elections_1848(sim)
 	_check_customs_1848(sim)
+	_check_diplomacy_1848(sim)
+
+
+## Diplomatie 1848 (seit M9, Schritt b3, diplomatie.md Abschnitt 6): Beziehungen, Handlungen,
+## Bundesversammlung mit Antrag und Abstimmung, eine Krise mit Manöver, die deutsche Frage, Kartenmodus.
+func _check_diplomacy_1848(sim: SimulationClient) -> void:
+	var prussia := sim.get_state_index("PRU")
+	var austria := sim.get_state_index("AUT")
+	var bavaria := sim.get_state_index("BAV")
+	var overview := sim.get_diplomacy(prussia)
+	_check(
+		bool(overview.get("active", false)) and bool(overview.get("diet", false))
+		and int(overview.get("envoy_capacity", 0)) >= 1 and roundi(float(overview.get("alliance_min", 0.0))) == 100
+		and bool(sim.get_state(prussia).get("diplomacy", false)),
+		"get_diplomacy: Preußen mit %d Gesandten, Bündnis ab 100" % int(overview.get("envoy_capacity", 0)),
+		"get_diplomacy: %s" % str(overview)
+	)
+	var relations := sim.get_relations(prussia)
+	var austria_entry: Dictionary = {}
+	var bavaria_entry: Dictionary = {}
+	for entry in relations:
+		if int(entry.get("index", -1)) == austria:
+			austria_entry = entry
+		elif int(entry.get("index", -1)) == bavaria:
+			bavaria_entry = entry
+	_check(
+		relations.size() == sim.get_state_count() - 1 and bool(austria_entry.get("rival", false))
+		and float(austria_entry.get("relation", 0.0)) < -25.0 and bool(austria_entry.get("federal", false))
+		and int(austria_entry.get("plenum_votes", 0)) == 4
+		and str(bavaria_entry.get("camp_text", "")) == "Österreich",
+		"get_relations: %d Staaten, Österreich Gegner (%s)" % [relations.size(), austria_entry.get("relation")],
+		"get_relations: %d Einträge, Österreich %s" % [relations.size(), str(austria_entry)]
+	)
+	var actions := sim.get_diplomacy_actions(prussia, austria)
+	_check(
+		str(actions.get("envoy_send", "")) == "angenommen" and str(actions.get("alliance", "")) == "abgelehnt"
+		and str(actions.get("demand_leadership", "")) == "angenommen"
+		and str(actions.get("cancel_alliance", "")) == "ungueltig"
+		and sim.get_diplomacy_actions(prussia, prussia).is_empty(),
+		"get_diplomacy_actions: Gesandter und Forderung möglich, Bündnis abgelehnt",
+		"get_diplomacy_actions: %s" % str(actions)
+	)
+	var diet := sim.get_diet()
+	_check(
+		str(diet.get("presidency_name", "")) == str(sim.get_state(austria).get("short_name", "-"))
+		and int(diet.get("plenum_total", 0)) == 68 and (diet.get("council", []) as Array).size() == 17
+		and (diet.get("motion", {}) as Dictionary).is_empty(),
+		"get_diet: %s, Präsidium %s, Plenum 68, Engerer Rat 17" % [diet.get("name"), diet.get("presidency_name")],
+		"get_diet: %s" % str(diet).left(400)
+	)
+	var preview := sim.get_motion_preview(bavaria, SimulationClient.MOTION_REFORM, -1)
+	_check(
+		str(preview.get("decision", "")) == "angenommen" and int(preview.get("plenum_total", 0)) == 68
+		and str(sim.get_motion_preview(bavaria, SimulationClient.MOTION_INTERVENTION, bavaria).get("decision", ""))
+		== "ungueltig",
+		"get_motion_preview: Bundesreform, voraussichtlich %d von 68 Stimmen" % int(preview.get("plenum_yes", 0)),
+		"get_motion_preview: %s" % str(preview)
+	)
+	_check(
+		sim.send_envoy(prussia, bavaria, true)
+		and sim.file_motion(bavaria, SimulationClient.MOTION_REFORM, -1)
+		and sim.make_demand(prussia, austria, SimulationClient.DEMAND_LEADERSHIP)
+		and not sim.make_demand(prussia, prussia, SimulationClient.DEMAND_LEADERSHIP)
+		and not sim.propose_treaty(prussia, austria, SimulationClient.TREATY_CANCEL_ALLIANCE)
+		and not sim.file_motion(bavaria, 9, -1),
+		"Gesandter, Antrag und Forderung angenommen, ungültige abgewiesen",
+		"send_envoy, file_motion oder make_demand nicht wie erwartet"
+	)
+	sim.advance_days(1)
+	var plays := sim.get_diplomatic_plays()
+	var motion: Dictionary = sim.get_diet().get("motion", {})
+	var envoy := false
+	for entry in sim.get_relations(prussia):
+		envoy = envoy or (int(entry.get("index", -1)) == bavaria and bool(entry.get("envoy", false)))
+	_check(
+		plays.size() == 1 and int(plays[0].get("stage", 0)) == 1 and int(plays[0].get("days_left", 0)) > 0
+		and str(plays[0].get("kind_text", "")) == "Führung im Bund"
+		and int(plays[0].get("demander_index", -1)) == prussia and not motion.is_empty() and envoy,
+		"Krise %s, offener Antrag (%s), Gesandter in München" % [
+			plays[0].get("kind_text") if not plays.is_empty() else "-", motion.get("vote_text")
+		],
+		"Krise %s, Antrag %s, Gesandter %s" % [str(plays), str(motion), envoy]
+	)
+	_check(
+		sim.manoeuvre(prussia, SimulationClient.MANOEUVRE_YIELD) and not sim.manoeuvre(bavaria, SimulationClient.MANOEUVRE_YIELD),
+		"Manöver Nachgeben angenommen (nur für Hauptparteien)",
+		"manoeuvre nicht wie erwartet"
+	)
+	sim.advance_days(40)
+	var question := sim.get_german_question()
+	var results: Array = sim.get_diet().get("results", [])
+	_check(
+		sim.get_diplomatic_plays().is_empty() and (question.get("play_results", []) as Array).size() == 1
+		and int(question.get("leadership_austria", 0)) == 1 and results.size() == 1
+		and int(question.get("reform_attempts", 0)) == 1 and int(question.get("federal_population", 0)) > 0,
+		"Krise beendet (Österreich setzt sich durch), Abstimmung: %s" % (
+			str(results[0].get("text", "")) if not results.is_empty() else "-"
+		),
+		"nach 40 Tagen: Spiele %s, deutsche Frage %s, Abstimmungen %s" % [
+			str(sim.get_diplomatic_plays()), str(question).left(400), str(results)
+		]
+	)
+	# Review M9: Wer eine Krise um den Zollverein verliert, tritt verbindlich bei (kein Zurückziehen).
+	var hanover := sim.get_state_index("HAN")
+	_check(
+		sim.make_demand(prussia, hanover, SimulationClient.DEMAND_CUSTOMS_UNION),
+		"Forderung an Hannover: Beitritt zum Zollverein",
+		"make_demand(Preußen, Hannover, Zollunion) abgewiesen"
+	)
+	sim.advance_days(1)
+	sim.manoeuvre(hanover, SimulationClient.MANOEUVRE_YIELD)
+	sim.advance_days(1)
+	var forced: Dictionary = sim.get_state(hanover).get("customs_request", {})
+	_check(
+		bool(forced.get("binding", false)) and int(forced.get("customs_union_index", -1)) == 0
+		and str(sim.get_customs_change(hanover, 1).get("decision", "")) == "ungueltig",
+		"Hannover gibt nach: Beitritt zum Zollverein verbindlich (%s)" % forced.get("effective_text"),
+		"Hannover nach der Krise: Antrag %s, Rücknahme %s" % [
+			str(forced), str(sim.get_customs_change(hanover, 1))
+		]
+	)
+	# Kartenmodus „Beziehungen“: der Spielerstaat (Bayern) in seiner Farbe.
+	var colors := sim.get_map_colors(MapModes.MAP_BEZIEHUNGEN)
+	var munich := sim.get_location_index("muenchen")
+	_check(
+		munich >= 0 and colors[munich].is_equal_approx(sim.get_state(bavaria).get("color", Color.BLACK)),
+		"Kartenmodus Beziehungen: München in der Farbe Bayerns",
+		"Kartenmodus Beziehungen: München %s" % (str(colors[munich]) if munich >= 0 else "fehlt")
+	)
 
 
 ## Zollunionen 1848 (seit M9, diplomatie.md 3.7): Unionen mit Mitgliedern, gesperrter Zollregler,
@@ -752,6 +883,17 @@ func _check_invalid_indices(sim: SimulationClient, max_tax: int, player: int) ->
 		and str(sim.get_customs_change(player, -1).get("decision", "")) == "ungueltig"
 		and not sim.request_customs_union(player, -1)
 		and not bool(sim.get_state(player).get("customs_locked", true))
+		# 1648 ohne Deutschen Bund: keine Beziehungen, keine Bundesversammlung, keine Krisen (seit M9).
+		and sim.get_relations(player).is_empty()
+		and not bool(sim.get_diplomacy(player).get("active", true))
+		and sim.get_diplomacy_actions(player, 0).is_empty()
+		and sim.get_diet().is_empty()
+		and sim.get_diplomatic_plays().is_empty()
+		and sim.get_german_question().is_empty()
+		and not sim.send_envoy(player, 0, true)
+		and not sim.file_motion(player, SimulationClient.MOTION_REFORM, -1)
+		and not sim.make_demand(player, 0, SimulationClient.DEMAND_LEADERSHIP)
+		and not bool(sim.get_state(player).get("diplomacy", true))
 	)
 	_check(
 		rejected,

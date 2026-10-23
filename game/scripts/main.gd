@@ -26,7 +26,8 @@ const OVERVIEW_MARGIN := 28.0
 const DYNAMIC_LEGEND_MODES: PackedInt32Array = [
 	MapModes.MAP_POLITICAL, MapModes.MAP_DENSITY, MapModes.MAP_CONFESSION,
 	MapModes.MAP_DEVASTATION, MapModes.MAP_LEBENSSTANDARD, MapModes.MAP_KULTUR,
-	MapModes.MAP_WIRTSCHAFT, MapModes.MAP_EISENBAHNEN, MapModes.MAP_WAHLEN, MapModes.MAP_ZOLLGEBIETE
+	MapModes.MAP_WIRTSCHAFT, MapModes.MAP_EISENBAHNEN, MapModes.MAP_WAHLEN, MapModes.MAP_ZOLLGEBIETE,
+	MapModes.MAP_BEZIEHUNGEN
 ]
 ## Höchstzahl der Kennungen in einer Hinweismeldung.
 const MAX_LISTED_IDS := 20
@@ -83,6 +84,9 @@ var _pending_election_days := PackedInt32Array()
 var _player_current := -1
 var _party_panel: PartyPanel = null
 var _currents: Array[Dictionary] = []
+## Diplomatie (seit M9, Schritt b3): Fenster „Diplomatie“ und Krisenleiste über der Karte.
+var _diplomacy_window: DiplomacyWindow = null
+var _play_bar: PlayBar = null
 
 @onready var _map_view: MapView = $MapView
 @onready var _top_bar: TopBar = %TopBar
@@ -112,6 +116,7 @@ func _ready() -> void:
 	_build_game_menu()
 	_build_election_night()
 	_build_party_panel()
+	_build_diplomacy()
 	_state_panel.tax_rate_requested.connect(_on_tax_rate_requested)
 	_state_panel.politics_source = func() -> Dictionary:
 		return _sim.get_state_politics(_player) if _sim != null else {}
@@ -136,7 +141,7 @@ func _ready() -> void:
 	_map_labels.location_diameter = _map_view.location_diameter()
 	_map_labels.set_covering_controls([
 		_top_bar, _state_panel, _party_panel, _chronicle_panel, _location_panel, _legend, _mode_bar,
-		_election_night,
+		_election_night, _diplomacy_window, _play_bar,
 	])
 	_update_place_labels()
 	_update_owners()
@@ -192,6 +197,10 @@ func _unhandled_input(event: InputEvent) -> void:
 				_set_speed(speed)
 			get_viewport().set_input_as_handled()
 			return
+	if event.is_action_pressed(&"auswahl_aufheben", false, true) and _diplomacy_window.is_open():
+		close_diplomacy()
+		get_viewport().set_input_as_handled()
+		return
 	if event.is_action_pressed(&"auswahl_aufheben", false, true) and _selected >= 0:
 		_select_location(-1)
 		get_viewport().set_input_as_handled()
@@ -445,6 +454,7 @@ func _refresh_all() -> void:
 	_state_panel.show_state(state, capital_name)
 	if _player_current >= 0:
 		_party_panel.show_party(_sim.get_party(_player_current))
+	_refresh_diplomacy()
 	_refresh_location_panel()
 	_refresh_map()
 	_pull_chronicle()
@@ -567,6 +577,8 @@ func _read_scenario_constants() -> bool:
 	var customs := not _sim.get_customs_unions().is_empty()
 	_location_panel.show_customs = customs
 	_state_panel.set_customs_available(customs)
+	# Diplomatie (seit M9, Schritt b3): Knopf „Diplomatie …“ und Krisenleiste nur mit dem Bund.
+	_state_panel.set_diplomacy_available(bool(_sim.get_diplomacy(_player).get("active", false)))
 	_location_panel.player_index = _player
 	# Wahlen (seit M8): Was schon gewählt ist, öffnet keinen Wahlabend mehr.
 	_elections_seen = _sim.get_election_count()
@@ -886,6 +898,16 @@ func _rebuild_legend() -> void:
 			else:
 				customs.append_array(no_data)
 				_legend.show_swatches(title, customs)
+		MapModes.MAP_BEZIEHUNGEN:
+			var relations := LegendData.relation_entries(_sim, _player)
+			if relations.is_empty():
+				_legend.show_message(
+					title,
+					"Beziehungen zwischen den Staaten gibt es erst mit dem Deutschen Bund (Lesezeichen 1848)."
+				)
+			else:
+				relations.append_array(no_data)
+				_legend.show_swatches(title, relations)
 	if _selected >= 0:
 		_fit_location_panel.call_deferred()
 
@@ -1014,6 +1036,7 @@ func _select_location(sim_index: int, focus_camera: bool = false) -> void:
 func _on_viewport_size_changed() -> void:
 	if _selected >= 0:
 		_fit_location_panel.call_deferred()
+	_place_diplomacy.call_deferred()
 
 
 func _on_location_clicked(sim_index: int) -> void:
@@ -1079,9 +1102,29 @@ func _tooltip_detail(location: Dictionary) -> String:
 				str(location.get("customs_zone_name", "–")),
 				GermanFormat.percent(float(location.get("customs_tariff_percent", 0.0)))
 			]
+		MapModes.MAP_BEZIEHUNGEN when bool(location.get("has_data", true)):
+			second = _relation_tooltip(int(location.get("owner_index", -1)))
 		_ when not bool(location.get("has_data", true)):
 			second = "%s · %s" % [kreis_text, second]
 	return "%s · %s" % [first, second]
+
+
+## Beziehung des Besitzers zum Spielerstaat im Tooltip (seit M9).
+func _relation_tooltip(owner: int) -> String:
+	if owner == _player:
+		return "Spielerstaat"
+	for entry in _sim.get_relations(_player):
+		if int(entry.get("index", -1)) == owner:
+			var text := "Beziehung %s (Ziel %s)" % [
+				GermanFormat.signed_number(roundi(float(entry.get("relation", 0.0)))),
+				GermanFormat.signed_number(roundi(float(entry.get("target", 0.0)))),
+			]
+			if bool(entry.get("allied", false)):
+				text += ", Bündnis"
+			if bool(entry.get("rival", false)):
+				text += ", Gegner"
+			return text
+	return "keine Beziehung"
 
 
 ## Wahlkreis und Ergebnis im Tooltip (seit M8); während des Wahlabends „noch offen“.
@@ -1123,6 +1166,147 @@ func _on_customs_change_requested(customs_union: int) -> void:
 		return
 	if not _sim.request_customs_union(_player, customs_union):
 		_state_panel.reject_customs("Der Antrag wurde nicht angenommen.")
+
+
+# --- Diplomatie (seit M9, Schritt b3, docs/technik/diplomatie.md Abschnitt 6) ------
+
+
+func _build_diplomacy() -> void:
+	var root: Control = $UI/Root
+	_diplomacy_window = DiplomacyWindow.new()
+	root.add_child(_diplomacy_window)
+	root.move_child(_diplomacy_window, _top_bar.get_index())
+	_play_bar = PlayBar.new()
+	root.add_child(_play_bar)
+	root.move_child(_play_bar, _top_bar.get_index())
+	_diplomacy_window.close_requested.connect(close_diplomacy)
+	_diplomacy_window.envoy_requested.connect(_on_envoy_requested)
+	_diplomacy_window.treaty_requested.connect(_on_treaty_requested)
+	_diplomacy_window.demand_requested.connect(_on_demand_requested)
+	_diplomacy_window.motion_requested.connect(_on_motion_requested)
+	_diplomacy_window.resized.connect(_place_diplomacy)
+	_play_bar.manoeuvre_requested.connect(_on_manoeuvre_requested)
+	_play_bar.resized.connect(_place_diplomacy)
+	_play_bar.visibility_changed.connect(_place_diplomacy)
+	_state_panel.diplomacy_requested.connect(toggle_diplomacy)
+
+
+## Fenster „Diplomatie“ (Zugriff für Tests).
+func diplomacy_window() -> DiplomacyWindow:
+	return _diplomacy_window
+
+
+## Krisenleiste (Zugriff für Tests).
+func play_bar() -> PlayBar:
+	return _play_bar
+
+
+## Öffnet das Fenster „Diplomatie“ mit dem Reiter tab (0 Staaten, 1 Bundesversammlung,
+## 2 Deutsche Frage); nur mit dem Deutschen Bund und nicht im Parteienmodus.
+func open_diplomacy(tab: int = 0) -> void:
+	if _sim == null or _player_current >= 0 or not bool(_sim.get_diplomacy(_player).get("active", false)):
+		return
+	_state_panel.hide_popups()
+	_diplomacy_window.open(_sim, _player, tab)
+	_place_diplomacy()
+
+
+func close_diplomacy() -> void:
+	if _diplomacy_window != null:
+		_diplomacy_window.close()
+
+
+func toggle_diplomacy() -> void:
+	if _diplomacy_window.is_open():
+		close_diplomacy()
+	else:
+		open_diplomacy()
+
+
+## Krisenleiste mittig unter der oberen Leiste, das Fenster rechts neben der linken Spalte darunter
+## und über der Leiste der Kartenmodi (die Staatenliste wird bei Bedarf kürzer).
+func _place_diplomacy() -> void:
+	if _diplomacy_window == null:
+		return
+	var top := _left_column.offset_top
+	var area := ($UI/Root as Control).size
+	var bar_size := _play_bar.get_combined_minimum_size()
+	_play_bar.size = bar_size
+	_play_bar.position = Vector2(roundf((area.x - bar_size.x) * 0.5), top)
+	var left := _left_column.offset_right + 12.0
+	if _play_bar.visible:
+		_play_bar.position.x = maxf(_play_bar.position.x, left)
+		top += bar_size.y + 8.0
+	if _diplomacy_window.is_open():
+		_diplomacy_window.fit_height(_mode_bar_area.position.y - 8.0 - top)
+	_diplomacy_window.size = _diplomacy_window.get_combined_minimum_size()
+	_diplomacy_window.position = Vector2(left, top)
+
+
+## Krisenleiste und offenes Fenster neu füllen (nach jedem Tag; das Fenster höchstens einmal je Sekunde).
+func _refresh_diplomacy() -> void:
+	var plays: Array[Dictionary] = _sim.get_diplomatic_plays()
+	_play_bar.show_plays(plays, _player if _player_current < 0 else -1)
+	_diplomacy_window.refresh()
+
+
+func _on_envoy_requested(target: int, send: bool) -> void:
+	var name_text := _state_short_name(target)
+	if _sim.send_envoy(_player, target, send):
+		_diplomacy_window.show_note(
+			("Gesandter nach %s entsandt" if send else "Gesandter aus %s abberufen") % name_text
+			+ " (ab dem nächsten Tag)."
+		)
+	else:
+		_diplomacy_window.show_note("Nicht möglich: kein Gesandter frei oder keiner in %s." % name_text)
+
+
+func _on_treaty_requested(target: int, action: int) -> void:
+	var name_text := _state_short_name(target)
+	var texts := {
+		SimulationClient.TREATY_ALLIANCE: "Bündnis mit %s geschlossen",
+		SimulationClient.TREATY_GUARANTEE: "Garantie für %s gegeben",
+		SimulationClient.TREATY_CANCEL_ALLIANCE: "Bündnis mit %s gekündigt",
+		SimulationClient.TREATY_CANCEL_GUARANTEE: "Garantie für %s gekündigt",
+	}
+	if _sim.propose_treaty(_player, target, action):
+		_diplomacy_window.show_note(str(texts.get(action, "%s")) % name_text + " (ab dem nächsten Tag).")
+	else:
+		_diplomacy_window.show_note("%s lehnt ab oder der Vertrag ist nicht möglich." % name_text)
+
+
+func _on_demand_requested(target: int, kind: int) -> void:
+	var name_text := _state_short_name(target)
+	if _sim.make_demand(_player, target, kind):
+		_diplomacy_window.show_note("Forderung an %s gestellt: Die Krise beginnt am nächsten Tag." % name_text)
+	else:
+		_diplomacy_window.show_note("Die Forderung an %s ist zur Zeit nicht möglich." % name_text)
+
+
+func _on_motion_requested(kind: int, target: int) -> void:
+	var preview := _sim.get_motion_preview(_player, kind, target)
+	if _sim.file_motion(_player, kind, target):
+		_diplomacy_window.show_note(
+			"Antrag gestellt: %s; abgestimmt wird am nächsten Monatsersten." % str(preview.get("text", ""))
+		)
+	else:
+		_diplomacy_window.show_note("Der Antrag ist zur Zeit nicht möglich (schon ein Antrag offen?).")
+
+
+func _on_manoeuvre_requested(kind: int) -> void:
+	var texts := {
+		SimulationClient.MANOEUVRE_YIELD: "Wir geben nach",
+		SimulationClient.MANOEUVRE_MEDIATE: "Wir bieten Vermittlung an",
+		SimulationClient.MANOEUVRE_ESCALATE: "Wir eskalieren am Ende der Stufe",
+	}
+	if _sim.manoeuvre(_player, kind):
+		_play_bar.show_note("%s (ab dem nächsten Tag)." % str(texts.get(kind, "")))
+	else:
+		_play_bar.show_note("Dieses Manöver ist zur Zeit nicht möglich.")
+
+
+func _state_short_name(state: int) -> String:
+	return str(_sim.get_state(state).get("short_name", "")) if _sim != null else ""
 
 
 # --- Spielstände (seit M6, docs/technik/speicherstaende.md Abschnitt 9) ----------
@@ -1194,6 +1378,7 @@ func _apply_role() -> void:
 	_state_panel.visible = not party
 	if party:
 		_state_panel.hide_popups()
+		close_diplomacy()
 	_location_panel.set_party_mode(party)
 	if party:
 		_party_panel.show_party(_sim.get_party(_player_current))
@@ -1278,6 +1463,7 @@ func _open_election_night(index: int, complete: bool) -> void:
 			_election_ranks[i] = _election_night.rank_of_district(by_location[i])
 	_left_column.visible = false
 	_state_panel.hide_popups()
+	close_diplomacy()
 	_tooltip.hide_tooltip()
 	_set_map_mode(MapModes.MAP_WAHLEN)
 	_on_election_progress(_election_night.reported_count())
@@ -1430,6 +1616,7 @@ func load_game_file(path: String) -> bool:
 func _after_load(new_client: bool = false) -> void:
 	if _election_night.is_open():
 		_close_election_night(false)
+	close_diplomacy()
 	_player = _sim.get_player_state_index()
 	if _read_scenario_constants() or new_client:
 		_connect_map_and_simulation()
@@ -1494,6 +1681,7 @@ func play_state(state_index: int) -> void:
 	_player = _sim.get_player_state_index()
 	_location_panel.player_index = _player
 	_state_panel.clear_pending()
+	close_diplomacy()
 	_refresh_all()
 	_rebuild_legend()
 	_top_bar.show_notice("Ihr spielt jetzt %s" % str(_sim.get_state(_player).get("name", "")))
@@ -1566,6 +1754,8 @@ func _run_screenshot() -> void:
 		_state_panel.show_politics()
 	if _options.show_customs:
 		_state_panel.show_customs()
+	if _options.diplomacy_tab >= 0:
+		open_diplomacy(_options.diplomacy_tab)
 	if _options.show_game_menu:
 		open_game_menu()
 	if _options.show_election_night:

@@ -52,6 +52,9 @@ enum class CommandType : std::uint8_t {
     CustomsUnion, // seit M9: state, target = Zollunion oder kNone für den Austritt (diplomatie.md 3.5)
     Envoy,        // seit M9: state, target = Staat, value = 1 entsenden, 0 abberufen (Abschnitt 4.2)
     Treaty,       // seit M9: state, target = Staat, value = TreatyAction (diplomacy.hpp, Abschnitt 4.3)
+    Motion,       // seit M9: state = Antragsteller, value = MotionKind, target = Union bzw. Staat (4.4)
+    Demand,       // seit M9: state = Fordernder, target = Gegner, value = DemandKind (Abschnitt 4.5)
+    Manoeuvre,    // seit M9: state = Hauptpartei eines Spiels, value = Manoeuvre (diplomacy.hpp, 4.5)
 };
 
 struct Command {

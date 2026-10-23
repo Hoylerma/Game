@@ -29,6 +29,22 @@ const CAMPAIGN_VERSAMMLUNG := 0
 const CAMPAIGN_FLUGBLAETTER := 1
 const CAMPAIGN_VEREIN := 2
 
+## Diplomatie (seit M9, Schritt b3, wie TREATY_*, MOTION_*, DEMAND_* und MANOEUVRE_* der Brücke).
+const TREATY_ALLIANCE := 0
+const TREATY_GUARANTEE := 1
+const TREATY_CANCEL_ALLIANCE := 2
+const TREATY_CANCEL_GUARANTEE := 3
+const MOTION_REFORM := 0
+const MOTION_CUSTOMS := 1
+const MOTION_INTERVENTION := 2
+const MOTION_PRESIDENCY := 3
+const DEMAND_LEADERSHIP := 0
+const DEMAND_CUSTOMS_UNION := 1
+const DEMAND_BREAK_ALLIANCE := 2
+const MANOEUVRE_YIELD := 0
+const MANOEUVRE_MEDIATE := 1
+const MANOEUVRE_ESCALATE := 2
+
 ## Alle Methoden, die die Oberfläche benutzt.
 const REQUIRED_METHODS: Array[StringName] = [
 	&"load_scenario",
@@ -73,6 +89,18 @@ const REQUIRED_METHODS: Array[StringName] = [
 	&"get_customs_unions",
 	&"get_customs_change",
 	&"request_customs_union",
+	&"get_relations",
+	&"get_diplomacy",
+	&"get_diplomacy_actions",
+	&"send_envoy",
+	&"propose_treaty",
+	&"get_diet",
+	&"get_motion_preview",
+	&"file_motion",
+	&"get_diplomatic_plays",
+	&"make_demand",
+	&"manoeuvre",
+	&"get_german_question",
 	&"campaign",
 	&"get_party",
 	&"get_campaign",
@@ -398,6 +426,73 @@ func get_customs_change(state_index: int, customs_union: int) -> Dictionary:
 ## ungültig ist (get_customs_change: "ungueltig").
 func request_customs_union(state_index: int, customs_union: int) -> bool:
 	return bool(_native.call(&"request_customs_union", state_index, customs_union))
+
+
+## Diplomatie (seit M9, Schritt b3, bridge-api.md): Beziehungen des Staates zu allen anderen,
+## je { index, tag, name, short_name, color, relation, target, rival, allied, guarantees, guaranteed,
+## envoy, envoy_from, federal, plenum_votes, camp, camp_text, in_play, customs_union_name }; leer ohne
+## Diplomatie.
+func get_relations(state_index: int) -> Array[Dictionary]:
+	return _as_dictionaries(_native.call(&"get_relations", state_index))
+
+
+## Überblick eines Staates: { active, diet, envoy_capacity, envoy_count, envoy_cost_month,
+## envoy_cost_percent, alliance_min, guarantee_min, rival_below, play_index, mobilized, camp, federal }.
+func get_diplomacy(state_index: int) -> Dictionary:
+	return _as_dictionary(_native.call(&"get_diplomacy", state_index))
+
+
+## Vorab-Prüfung aller Handlungen gegenüber target ("angenommen", "abgelehnt", "ungueltig") und die
+## Seiten eines möglichen Spiels mit Stärke.
+func get_diplomacy_actions(state_index: int, target: int) -> Dictionary:
+	return _as_dictionary(_native.call(&"get_diplomacy_actions", state_index, target))
+
+
+## Gesandten entsenden (send) oder abberufen; Befehl für den nächsten Tag, false wenn ungültig.
+func send_envoy(state_index: int, target: int, send: bool) -> bool:
+	return bool(_native.call(&"send_envoy", state_index, target, send))
+
+
+## Vertragshandlung TREATY_*; ein abgelehntes Angebot geht trotzdem hinaus (Chronik).
+func propose_treaty(state_index: int, target: int, action: int) -> bool:
+	return bool(_native.call(&"propose_treaty", state_index, target, action))
+
+
+## Bundesversammlung: { name, presidency_index, presidency_name, seat_name, plenum, plenum_total,
+## council, motion, results, reform_attempts, reform_accepted }; leer ohne Bundesversammlung.
+func get_diet() -> Dictionary:
+	return _as_dictionary(_native.call(&"get_diet"))
+
+
+## Voraussichtliche Abstimmung eines Antrags MOTION_* (target: Union bzw. Staat, sonst -1).
+func get_motion_preview(applicant: int, kind: int, target: int) -> Dictionary:
+	return _as_dictionary(_native.call(&"get_motion_preview", applicant, kind, target))
+
+
+## Antrag stellen; abgestimmt wird am nächsten Monatsersten. false, wenn ungültig.
+func file_motion(applicant: int, kind: int, target: int) -> bool:
+	return bool(_native.call(&"file_motion", applicant, kind, target))
+
+
+## Laufende diplomatische Spiele mit Seiten, Stufe, Tagen bis zum Ende der Stufe und Stärke.
+func get_diplomatic_plays() -> Array[Dictionary]:
+	return _as_dictionaries(_native.call(&"get_diplomatic_plays"))
+
+
+## Forderung DEMAND_* stellen: das Spiel beginnt am nächsten Tag. false, wenn ungültig.
+func make_demand(demander: int, target: int, kind: int) -> bool:
+	return bool(_native.call(&"make_demand", demander, target, kind))
+
+
+## Manöver MANOEUVRE_* einer Hauptpartei. false, wenn ungültig.
+func manoeuvre(state_index: int, kind: int) -> bool:
+	return bool(_native.call(&"manoeuvre", state_index, kind))
+
+
+## Die deutsche Frage (diplomatie.md 4.6): Zollverein, Lager, Bundesreform, Führung im Bund,
+## Verträge; leer ohne Diplomatie.
+func get_german_question() -> Dictionary:
+	return _as_dictionary(_native.call(&"get_german_question"))
 
 
 ## Wahlkampf der Strömung current im Wahlkreis district (seit M8): Befehl für den nächsten Tag;

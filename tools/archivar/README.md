@@ -13,7 +13,7 @@ python3 tools/archivar/archivar.py              # prüfen und data/history/ schr
 python3 tools/archivar/archivar.py --pruefen    # ist data/history/ aktuell? (wie in der CI)
 python3 tools/archivar/archivar.py --bericht    # Umfang, Sicherheit der Angaben, Szenarien
 python3 tools/archivar/archivar.py --daten DIR  # anderer Datenordner
-python3 -m unittest discover -s tools/archivar -v   # 44 Tests
+python3 -m unittest discover -s tools/archivar -v   # 45 Tests
 ```
 
 Exitcodes: `0` in Ordnung, `1` `data/history/` ist nicht aktuell (`--pruefen`), `2` Fehler in den

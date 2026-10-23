@@ -8,7 +8,7 @@ Vor Version 1.0 kann sich jede Schnittstelle ändern.
 
 ## [Unveröffentlicht]
 
-### Meilenstein M9 – Diplomatie und Zollverein (in Arbeit)
+### Meilenstein M9 – Diplomatie und Zollverein
 
 Vertrag: [technik/diplomatie.md](docs/technik/diplomatie.md), Entscheidungen 1–12 wie empfohlen
 freigegeben; Stand je Schritt in Abschnitt 11 dort.
@@ -60,6 +60,45 @@ freigegeben; Stand je Schritt in Abschnitt 11 dort.
   Gesandter) und `Vertrag` (Bündnis ab Beziehung 100, Garantie ab 50, kein Bündnis mit dem Verbündeten
   eines Gegners; Kündigung). `uhrwerk-cli info` zeigt Gegner, Gesandte und die Lager zwischen Preußen
   und Österreich. Spielstände 1848 aus M9a laden nicht mehr (Inhalt `diplomatie`); 1648 bitgleich.
+- **Bundesversammlung und diplomatische Spiele im Kern (Schritt b2):**
+  - Neue Daten `common/bundesversammlung.chron`: Präsidium Österreich, Plenum mit 68 Stimmen, Engerer
+    Rat mit 17 Stimmen (Kurien der kleinen Staaten). Befehl `Bundesantrag` für Bundesreform,
+    Zolleinigung, Bundesintervention und Präsidium; Abstimmung am nächsten Monatsersten nach den
+    Beziehungen zum Antragsteller und zum stärksten Gegner, mit Chronik und Wirkung (Zolleinigung:
+    alle Bundesstaaten treten der Union bei).
+  - Diplomatische Spiele: Befehl `Forderung` (Führung im Bund, Beitritt zur Zollunion, Bündnis lösen)
+    mit Parteinahme der Bundesstaaten, drei Stufen (Protest, Ultimatum, Mobilmachung) zu 30 Tagen,
+    Befehl `Manoever` (nachgeben, Vermittlung, eskalieren) und Auflösung nach Stärke; Mobilmachung
+    kostet das 1,5-Fache des Heeres.
+  - `uhrwerk-cli info` zeigt die Bundesversammlung. Spielstände 1848 aus Schritt b1 laden nicht mehr;
+    1648 bitgleich.
+- **Diplomatie in Godot (Schritt b3):**
+  - Knopf „Diplomatie …“ im Staatspanel (1848) mit einem Fenster in drei Reitern: **Staaten** nach
+    Beziehung mit Verträgen, Gesandten und Lager, dazu für den gewählten Staat Gesandte, Bündnis,
+    Garantie, Forderungen (mit Rückfrage und den Seiten der Krise) und Bundesintervention;
+    **Bundesversammlung** mit Halbrund der Plenarstimmen nach Lagern, offenem Antrag, Anträgen mit
+    Prognose und den letzten Abstimmungen; **Deutsche Frage** mit Lagern, Zollverein, Reformen,
+    Krisen und Verträgen.
+  - Krisenleiste über der Karte mit Stufe, Seiten und den Manövern Nachgeben, Vermittlung anbieten
+    und Eskalieren.
+  - Kartenmodus „Beziehungen“ (Taste #, fünfzehnter Modus): grün freundlich, rot feindlich zum
+    Spielerstaat. Haushaltsposten „Gesandte“, Startoption `--diplomatie[=staaten|bund|frage]`.
+  - Brücke: Abfragen und Befehle der Diplomatie (bridge-api.md, Abschnitt Diplomatie).
+- **Review und Abschluss M9 (Schritt b4):**
+  - Ein Beitritt nach einer angenommenen Zolleinigung des Bundes oder einer verlorenen Krise
+    „Beitritt zur Zollunion“ ist jetzt verbindlich. Vorher konnte der betroffene Staat ihn bis zum
+    1. Januar zurückziehen. Das Fenster „Zollunion“ zeigt „verbindlich“ und sperrt die Rücknahme
+    (Brücke: `customs_request.binding`).
+  - Eine Abstimmung oder Krise am 1. Januar kündigte den Beitritt zum selben Tag an, obwohl dessen
+    Jahreswechsel schon gelaufen war. Jetzt gilt er zum folgenden 1. Januar, wie er tatsächlich wirkt.
+  - Ein Mitglied einer Kurie ohne eigene Plenarstimme zählte im Engeren Rat immer als Nein (1848 ohne
+    Folgen).
+  - Die Liste der Beziehungen (Fenster, Tooltip im Kartenmodus „Beziehungen“) rechnet die Zielwerte
+    in einem Durchgang statt je Staat neu.
+  - Godot: Der Knopf des Kartenmodus heißt „Beziehung“ statt „Diplomatie“ (nicht mit dem Fenster zu
+    verwechseln); das Fenster „Diplomatie“ blendet Staaten eines anderen Spielstands aus.
+  - Doku zum Abschluss: diplomatie.md verbindlich mit Grenzen, Meilensteinplan mit Ergebnis und
+    Abnahme. Beide Abnahmekriterien sind erfüllt; 1648 bleibt bitgleich.
 
 ### Meilenstein M8 – Politik, Parteien und Wahlen
 

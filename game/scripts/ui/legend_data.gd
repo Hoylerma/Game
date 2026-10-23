@@ -504,5 +504,60 @@ static func customs_entries(sim: SimulationClient) -> Array[Dictionary]:
 	return entries
 
 
+## Farben des Kartenmodus „Beziehungen“ (wie kRelation* der Brücke, seit M9).
+const RELATION_NEUTRAL := Color(0.94, 0.91, 0.83)
+const RELATION_FRIEND := Color(0.24, 0.52, 0.30)
+const RELATION_FOE := Color(0.70, 0.16, 0.10)
+## Bänder der Legende „Beziehungen“: Untergrenze (einschließlich), Beschriftung, Bereich (Tooltip),
+## Mitte für die Farbe.
+const RELATION_BANDS: Array = [
+	[50.0, "freundlich", "ab +50", 100.0],
+	[10.0, "zugeneigt", "+10 bis +50", 30.0],
+	[-10.0, "neutral", "−10 bis +10", 0.0],
+	[-50.0, "gespannt", "−50 bis −10", -30.0],
+	[-1000.0, "feindlich", "unter −50", -100.0],
+]
+
+
+## Farbe einer Beziehung wie im Kartenmodus „Beziehungen“ (volle Farbe ab ±100).
+static func relation_color(relation: float) -> Color:
+	if relation >= 0.0:
+		return RELATION_NEUTRAL.lerp(RELATION_FRIEND, clampf(relation / 100.0, 0.0, 1.0))
+	return RELATION_NEUTRAL.lerp(RELATION_FOE, clampf(-relation / 100.0, 0.0, 1.0))
+
+
+## Legende „Beziehungen“ (seit M9): der Spielerstaat in seiner Farbe, dann je Band die Zahl der
+## Staaten. Leer ohne Diplomatie (1648).
+static func relation_entries(sim: SimulationClient, player: int) -> Array[Dictionary]:
+	var relations := sim.get_relations(player)
+	if relations.is_empty():
+		return []
+	var player_state := sim.get_state(player)
+	var entries: Array[Dictionary] = [{
+		"color": player_state.get("color", UiPalette.INK),
+		"text": str(player_state.get("short_name", "Spielerstaat")),
+		"detail": "Spielerstaat",
+	}]
+	for band: Array in RELATION_BANDS:
+		var count := 0
+		var names := PackedStringArray()
+		for entry in relations:
+			var value := float(entry.get("relation", 0.0))
+			var lower := float(band[0])
+			var upper := 1000.0
+			var index := RELATION_BANDS.find(band)
+			if index > 0:
+				upper = float(RELATION_BANDS[index - 1][0])
+			if value >= lower and value < upper:
+				count += 1
+				names.append(str(entry.get("short_name", "")))
+		entries.append({
+			"color": relation_color(float(band[3])),
+			"text": "%s (%d)" % [str(band[1]), count],
+			"detail": "Beziehung %s: %s" % [str(band[2]), ", ".join(names) if not names.is_empty() else "keine"],
+		})
+	return entries
+
+
 static func states_text(count: int) -> String:
 	return "1 Staat" if count == 1 else "%s Staaten" % GermanFormat.integer(count)

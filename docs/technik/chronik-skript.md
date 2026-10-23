@@ -81,7 +81,8 @@ data/
 │   ├── parlamente.chron    Parlamente mit Wahlrecht und Fraktionen (seit M8, optional)
 │   ├── wahlen.chron        Regeln der Wahlsimulation und Regionen (seit M8, optional)
 │   ├── zollunionen.chron   Zollunionen mit Leitmacht und Tarif (seit M9, optional)
-│   └── diplomatie.chron    Regeln der Diplomatie (seit M9; Pflicht in Szenarien mit Deutschem Bund)
+│   ├── diplomatie.chron    Regeln der Diplomatie (seit M9; Pflicht in Szenarien mit Deutschem Bund)
+│   └── bundesversammlung.chron  Bundesversammlung mit Plenum und Engerem Rat (seit M9, optional)
 ├── history/                generiert aus tabellen/ (tools/archivar), nicht von Hand bearbeiten
 │   ├── staaten/*.chron     Staaten (Reichsstände) mit datierter Historie
 │   ├── kreise/*.chron      Kreise: Gruppen von 4–12 Orten (seit M3)
@@ -103,7 +104,7 @@ data/
 Ladereihenfolge: `regeln`, `gelaende`, `konfessionen`, `kulturen` (seit M4), `berufe`, `gueter`, `beduerfnisse`,
 `betriebe`, `maerkte` (seit M5), dann alle Dateien der Ordner `szenarien` (seit M7 vor `common/`, weil das
 Startdatum bestimmt, welche Güter, Berufe und Betriebe gelten), `stroemungen`, `interessengruppen`, `parlamente`,
-`wahlen` (seit M8), `zollunionen`, `diplomatie` und `history/beziehungen` (seit M9), `history/staaten`, `history/kreise` (seit M3), `history/verwaltung` (seit M7), `history/orte`, `history/eisenbahnen` (seit M7), `history/wahlkreise` (seit M8), jeweils **nach Dateiname sortiert**, Einträge in Dateireihenfolge. Daraus ergeben sich die Indizes in `World`. Die Szenarien kommen vor der Historie, weil das Startdatum des gewählten Szenarios bestimmt, welche datierten Blöcke gelten (Abschnitt 3.8).
+`wahlen` (seit M8), `zollunionen`, `diplomatie`, `bundesversammlung` und `history/beziehungen` (seit M9), `history/staaten`, `history/kreise` (seit M3), `history/verwaltung` (seit M7), `history/orte`, `history/eisenbahnen` (seit M7), `history/wahlkreise` (seit M8), jeweils **nach Dateiname sortiert**, Einträge in Dateireihenfolge. Daraus ergeben sich die Indizes in `World`. Die Szenarien kommen vor der Historie, weil das Startdatum des gewählten Szenarios bestimmt, welche datierten Blöcke gelten (Abschnitt 3.8).
 
 Die Dateien in `history/` erzeugt das Werkzeug `tools/archivar` aus den Tabellen in `data/tabellen/` (Format: [tabellen.md](tabellen.md)). Änderungen gehören in die Tabellen; die CI prüft mit `archivar.py --pruefen`, dass `history/` aktuell ist.
 
@@ -853,6 +854,13 @@ diplomatie {
     buendnis_ab  = 100      # Pflicht: ein Bündnis wird ab dieser Beziehung angenommen
     garantie_ab  = 50       # Pflicht: eine Garantie ab dieser (nicht größer als buendnis_ab)
     gegner_unter = -25      # Pflicht: Gegner sind Staaten mit einer Beziehung unter diesem Wert
+    intervention = -20      # Pflicht seit b2: einmalig auf die Beziehung des Ziels einer Bundesintervention
+    spiel_stufe_tage = 30   # Pflicht seit b2: Dauer einer Stufe eines diplomatischen Spiels (1..365)
+    spiel_lager      = 20   # Pflicht seit b2: Parteinahme nach Neigung ab diesem Unterschied (0..400)
+    spiel_bruch      = -30  # Pflicht seit b2: einmalig zwischen Staaten auf verschiedenen Seiten
+    spiel_stufe      = -10  # Pflicht seit b2: je weiterer Stufe zwischen den Hauptparteien
+    spiel_nachgeben  = 0.6667  # Pflicht seit b2: Stärkeverhältnis für Nachgeben und Vermittlung (0..1)
+    mobilmachung     = 1.5  # Pflicht seit b2: Faktor auf die Heereskosten in der Mobilmachung (1..10)
 }
 ```
 
@@ -880,6 +888,31 @@ Ein Paar ohne Eintrag hat den Grundwert 0. Paare mit einem Staat ohne Ort zum St
 (die Tabelle gilt für alle Szenarien); ein unbekannter Staat und ein doppeltes Paar (in beiden
 Richtungen) sind fatal. Der Ordner darf fehlen. Im Kern: `World::base_relations` (`BaseRelation { a, b,
 value, source }`); die Beziehungen selbst sind Zustand (`World::relations`).
+
+### 3.29 `common/bundesversammlung.chron` (seit M9)
+
+Die Bundesversammlung des Deutschen Bundes ([diplomatie.md](diplomatie.md), Abschnitt 4.4):
+
+```text
+bundesversammlung bund {
+    name       = "Bundesversammlung"   # Pflicht; steht in der Chronik der Anträge
+    seit       = 1816.11.05            # optional (Abschnitt 3.18)
+    praesidium = AUT                   # Pflicht: Präsidialmacht zum Start
+    sitz       = frankfurt_am_main     # optional: Tagungsort (Ort), Anzeige
+    plenum     = { AUT = 4 PRU = 4 … } # Pflicht: Stimmen im Plenum je Staat, 1–100
+    rat        = {                     # Pflicht: Engerer Rat, je Eintrag eine Stimme
+        stimme = { staaten = { AUT } }                            # Virilstimme
+        stimme = { name = "Freie Städte" staaten = { LUE FRA } }  # Kuriatstimme, Name Pflicht
+    }
+    quelle     = "…"                   # Pflicht
+}
+```
+
+Zum Startdatum darf höchstens eine Bundesversammlung bestehen; eine mit späterem `seit` gehört nicht
+zur Welt (1648). Staaten ohne Ort zum Startdatum entfallen aus Plenum und Rat; ein unbekannter Staat,
+ein Staat zweimal im Plenum oder mit zwei Stimmen im Rat, eine Kuriatstimme ohne Namen und eine
+Präsidialmacht ohne Ort sind fatal. Im Kern: `World::diet` (`FederalDiet { id, name, presidency, seat,
+plenum, council, source }`); die Präsidialmacht im Spiel ist Zustand (`World::diet_presidency`).
 
 ## 4. Startzustand
 

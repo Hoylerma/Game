@@ -29,4 +29,19 @@ diplomatie {
     buendnis_ab  = 100
     garantie_ab  = 50
     gegner_unter = -25
+
+    # 4.4 Bundesversammlung: Eine beschlossene Bundesintervention kostet das Ziel 20 Punkte Beziehung zu
+    # jedem Staat, der dafür stimmte (Vollzug mit M10).
+    intervention = -20
+
+    # 4.5 Diplomatische Spiele: drei Stufen zu 30 Tagen; Parteinahme nach Neigung ab 20 Punkten
+    # Unterschied; einmalig −30 zwischen den Seiten, −10 je weiterer Stufe zwischen den Hauptparteien;
+    # eine Seite gibt unter zwei Dritteln der Stärke der anderen nach (Vermittlung wird darunter
+    # abgelehnt); in der Mobilmachung kostet das Heer der Hauptparteien das 1,5-Fache.
+    spiel_stufe_tage = 30
+    spiel_lager      = 20
+    spiel_bruch      = -30
+    spiel_stufe      = -10
+    spiel_nachgeben  = 0.6667
+    mobilmachung     = 1.5
 }

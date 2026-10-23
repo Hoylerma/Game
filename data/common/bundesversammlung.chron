@@ -1,0 +1,50 @@
+# Bundesversammlung des Deutschen Bundes (Meilenstein M9, Schritt b2; docs/technik/diplomatie.md 4.4).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.29. Stimmen nach der Bundesakte von 1815
+# (Art. 4 und 6) und der Wiener Schlussakte, angepasst an den Staatenbestand von 1848 im Modell:
+# Sachsen-Gotha und Sachsen-Hildburghausen sind 1826 in den sächsischen Häusern aufgegangen, Anhalt-Köthen
+# steht im Modell bei Anhalt-Dessau, Hessen-Homburg hat seit 1838 eine Stimme. Die Stimme für
+# Luxemburg und Limburg teilen sich im Modell Luxemburg und die Niederlande (beide unter dem König der
+# Niederlande). Wissensstand ohne Quellenzugang; Prüfung offen.
+
+bundesversammlung bund {
+    name       = "Bundesversammlung"
+    seit       = 1816.11.05        # Eröffnung in Frankfurt am Main
+    praesidium = AUT               # Präsidialmacht Österreich (Bundesakte Art. 5)
+    sitz       = frankfurt_am_main
+
+    # Plenum (Bundesakte Art. 6): 4 Stimmen für die sechs Königreiche und Österreich, 3, 2 oder 1 für
+    # die übrigen; im Modell 68 Stimmen.
+    plenum = {
+        AUT = 4  PRU = 4  BAV = 4  SAX = 4  HAN = 4  WUE = 4
+        BAD = 3  HEK = 3  HED = 3  DEN = 3  LUX = 2  NED = 1
+        BWO = 2  MSC = 2  NAS = 2
+        WEI = 1  SCG = 1  SMG = 1  ALT = 1  MST = 1  OLD = 1  DES = 1  BER = 1  SSH = 1  SRU = 1
+        HOH = 1  HSI = 1  LIE = 1  WAL = 1  REA = 1  REJ = 1  SLI = 1  LIP = 1  HHO = 1
+        LUE = 1  FRA = 1  BRE = 1  HAM = 1
+    }
+
+    # Engerer Rat (Bundesakte Art. 4): elf Virilstimmen und sechs Kuriatstimmen. In einer Kurie
+    # entscheidet die Mehrheit ihrer Plenarstimmen.
+    rat = {
+        stimme = { staaten = { AUT } }
+        stimme = { staaten = { PRU } }
+        stimme = { staaten = { BAV } }
+        stimme = { staaten = { SAX } }
+        stimme = { staaten = { HAN } }
+        stimme = { staaten = { WUE } }
+        stimme = { staaten = { BAD } }
+        stimme = { staaten = { HEK } }
+        stimme = { staaten = { HED } }
+        stimme = { name = "Holstein und Lauenburg" staaten = { DEN } }
+        stimme = { name = "Luxemburg und Limburg" staaten = { LUX NED } }
+        stimme = { name = "Sächsische Häuser" staaten = { WEI SCG SMG ALT } }
+        stimme = { name = "Braunschweig und Nassau" staaten = { BWO NAS } }
+        stimme = { name = "Mecklenburg" staaten = { MSC MST } }
+        stimme = { name = "Oldenburg, Anhalt und Schwarzburg" staaten = { OLD DES BER SSH SRU } }
+        stimme = { name = "Hohenzollern, Liechtenstein, Reuß, Lippe, Waldeck und Hessen-Homburg"
+                   staaten = { HOH HSI LIE REA REJ SLI LIP WAL HHO } }
+        stimme = { name = "Freie Städte" staaten = { LUE FRA BRE HAM } }
+    }
+    quelle = "Bundesakte 1815 (Art. 4–6), Wiener Schlussakte 1820; Stimmen auf den Staatenbestand des Modells 1848 übertragen. Wissensstand ohne Quellenzugang; Prüfung offen"
+}
