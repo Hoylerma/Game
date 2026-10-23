@@ -640,6 +640,7 @@ Abschnitt 11).
 ### M10 – Militär und Einigungskriege
 
 **Ziel:** Kriegführung nach [15 Militär und Kriegsführung](15_militaer_und_kriegsfuehrung.md).
+Entwurf: [technik/militaer.md](technik/militaer.md).
 
 **Umfang**
 - Heere, Aushebung, Versorgung, Bewegung auf der Karte, Schlachten, Fronten
