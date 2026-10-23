@@ -61,11 +61,22 @@ CustomsDecision evaluate_customs_change(const World& world, Index state, Index t
 /// der 1. Januar ist, denn die Befehle laufen vor dem Jahreswechsel).
 Date customs_effective_date(const Date& today);
 
+/// Datum, zu dem ein Beitritt wirksam wird, den die Simulation selbst nach dem Jahresabschluss des
+/// Tages vormerkt (Zolleinigung des Bundes, Ausgang einer Krise): immer der 1. Januar des Folgejahres,
+/// auch am 1. Januar, denn dessen Jahreswechsel ist dann schon gelaufen.
+Date customs_forced_date(const Date& today);
+
+/// Ob der offene Antrag des Staates verbindlich ist (seit Schritt b4): ein Beitritt, den eine
+/// angenommene Zolleinigung oder eine verlorene Krise „Beitritt zur Zollunion“ vorgemerkt hat
+/// (diplomatie.md 4.4 und 4.5). Er lässt sich bis zum Wirksamwerden weder zurückziehen noch ändern;
+/// erkannt wird er an den Ergebnissen (Abstimmungen, Spiele), nicht an einem eigenen Zustand.
+bool customs_request_binding(const World& world, Index state);
+
 /// Befehl Zollunion: state will zum nächsten 1. Januar in die Union target wechseln (kNone = Austritt).
 /// Beitritte entscheidet die Leitmacht (bis zur KI nach Regel: abgelehnt, wer in excluded steht);
 /// einer aufgelösten Union kann nur ihre Leitmacht beitreten. Austritte brauchen keine Zustimmung;
 /// tritt die Leitmacht aus, löst sich ihre Union zum selben Tag auf. Ein neuer Antrag ersetzt einen
-/// offenen. Schreibt die Chronik.
+/// offenen, außer der offene ist verbindlich (customs_request_binding). Schreibt die Chronik.
 CustomsDecision request_customs_change(World& world, Index state, Index target);
 
 /// Am 1. Januar: die vorgemerkten Wechsel werden wirksam (in Antragsreihenfolge); danach lösen sich

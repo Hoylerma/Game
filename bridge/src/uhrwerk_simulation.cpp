@@ -725,6 +725,9 @@ Dictionary UhrwerkSimulation::get_state(std::int64_t index) const {
                                                 : String();
             request["effective_text"] =
                 to_godot(uhrwerk::format_date_long(uhrwerk::customs_effective_date(w->date)));
+            // Verbindlich nach einem Bundesbeschluss oder einer verlorenen Krise (Review M9).
+            request["binding"] =
+                uhrwerk::customs_request_binding(*w, static_cast<uhrwerk::Index>(state_index));
         }
     }
     result["customs_request"] = request;
@@ -1557,6 +1560,14 @@ Array UhrwerkSimulation::get_relations(std::int64_t state_index) const {
         return result;
     }
     const auto self = static_cast<uhrwerk::Index>(state_index);
+    // Zielwerte und Bundesstaaten einmal für alle (die Liste wird im Tooltip je Bild gelesen).
+    const std::vector<uhrwerk::Fixed> targets = uhrwerk::relation_targets(*w, self);
+    std::vector<bool> federal(w->states.size(), false);
+    for (const uhrwerk::Location& loc : w->locations) {
+        if (loc.federal && valid_index(w->states, loc.owner)) {
+            federal[static_cast<std::size_t>(loc.owner)] = true;
+        }
+    }
     for (std::size_t s = 0; s < w->states.size(); ++s) {
         const auto other = static_cast<uhrwerk::Index>(s);
         if (other == self) {
@@ -1570,14 +1581,14 @@ Array UhrwerkSimulation::get_relations(std::int64_t state_index) const {
         entry["short_name"] = to_godot(state.short_name);
         entry["color"] = to_godot(state.color);
         entry["relation"] = uhrwerk::relation(*w, self, other).to_double();
-        entry["target"] = uhrwerk::relation_target(*w, self, other).to_double();
+        entry["target"] = targets[s].to_double();
         entry["rival"] = uhrwerk::rivals(*w, self, other);
         entry["allied"] = uhrwerk::allied(*w, self, other);
         entry["guarantees"] = uhrwerk::guarantees(*w, self, other); // der Staat schützt other
         entry["guaranteed"] = uhrwerk::guarantees(*w, other, self); // other schützt den Staat
         entry["envoy"] = uhrwerk::has_envoy(*w, self, other);       // Gesandter des Staates bei other
         entry["envoy_from"] = uhrwerk::has_envoy(*w, other, self);  // Gesandter von other beim Staat
-        entry["federal"] = uhrwerk::federal_state(*w, other);
+        entry["federal"] = static_cast<bool>(federal[s]);
         entry["plenum_votes"] = uhrwerk::plenum_votes(*w, other);
         const int camp = camp_of(*w, other);
         entry["camp"] = camp;

@@ -1,5 +1,6 @@
 // Tests der Diplomatie (seit M9, Schritt b1; docs/technik/diplomatie.md Abschnitte 4.1–4.3).
 #include "test_hilfen.hpp"
+#include "uhrwerk/customs.hpp"
 #include "uhrwerk/diplomacy.hpp"
 #include "uhrwerk/savegame.hpp"
 #include "uhrwerk/simulation.hpp"
@@ -186,6 +187,13 @@ TEST_CASE("Diplomatie: Beziehungen, Zielwerte und Drift") {
     CHECK(uhrwerk::guarantees(v, s.bra, s.anh));
     CHECK_FALSE(uhrwerk::guarantees(v, s.anh, s.bra));
     CHECK(uhrwerk::relation_target(v, s.bra, s.anh) == fx(80));
+    // Alle Zielwerte eines Staates in einem Durchgang (Anzeige), gleich den einzelnen.
+    const std::vector<Fixed> targets = uhrwerk::relation_targets(v, s.bra);
+    REQUIRE(targets.size() == 3);
+    CHECK(targets[static_cast<std::size_t>(s.anh)] == fx(80));
+    CHECK(targets[static_cast<std::size_t>(s.sax)] == uhrwerk::relation_target(v, s.bra, s.sax));
+    CHECK(targets[static_cast<std::size_t>(s.bra)] == Fixed::zero());
+    CHECK(uhrwerk::relation_targets(v, uhrwerk::kNone).empty());
     const Fixed drift = v.diplomacy_rules.drift;
     step_past_month_start(sim);
     const Fixed first = fx(60) + (fx(80) - fx(60)) * drift;
@@ -416,6 +424,14 @@ Command demand_command(Index demander, Index target, uhrwerk::DemandKind kind) {
     return c;
 }
 
+Command customs_command(Index state, Index target) {
+    Command c;
+    c.type = CommandType::CustomsUnion;
+    c.state = state;
+    c.target = target;
+    return c;
+}
+
 Command manoeuvre_command(Index state, uhrwerk::Manoeuvre manoeuvre) {
     Command c;
     c.type = CommandType::Manoeuvre;
@@ -547,11 +563,37 @@ TEST_CASE("Bundesversammlung: Daten, Antrag und Abstimmung am Monatsersten") {
         CHECK(v.motion_results[0].accepted);
         CHECK(v.customs_requests.size() == 2);
         CHECK(chronicle_contains(sim, "Alle Bundesstaaten treten zum 1. Januar 1649 dem Mittelbund bei."));
+        // Der Beschluss ist verbindlich: Brandenburg kann den Beitritt nicht zurückziehen (Review M9).
+        CHECK(uhrwerk::customs_request_binding(v, s.bra));
+        CHECK(uhrwerk::evaluate_customs_change(v, s.bra, uhrwerk::kNone) ==
+              uhrwerk::CustomsDecision::Invalid);
+        sim.submit(customs_command(s.bra, uhrwerk::kNone));
         step_through_month_start(sim);
+        CHECK(v.customs_requests.size() == 2);
         step_through_month_start(sim);
         step_through_month_start(sim); // 1. Januar 1649
         CHECK(v.states[static_cast<std::size_t>(s.bra)].customs_union == 0);
         CHECK(v.states[static_cast<std::size_t>(s.anh)].customs_union == 0);
+        CHECK_FALSE(uhrwerk::customs_request_binding(v, s.bra));
+    }
+    SUBCASE("Zolleinigung am 1. Januar wird zum folgenden 1. Januar wirksam") {
+        DiplomacyData customs(-60, 40, 60);
+        customs.add_customs_union();
+        customs.write_diet(
+            "BRA = 2 SAX = 4 ANH = 4",
+            "stimme = { staaten = { BRA } } stimme = { staaten = { SAX } } stimme = { staaten = { ANH } }");
+        Simulation sim(customs.load());
+        const World& v = sim.world();
+        const States s = states_of(v);
+        step_through_month_start(sim);
+        step_through_month_start(sim); // 1. Dezember 1648
+        sim.submit(motion_command(s.sax, MotionKind::CustomsUnification, 0));
+        step_through_month_start(sim); // Abstimmung am 1. Januar 1649, nach dem Jahreswechsel
+        REQUIRE(v.motion_results.size() == 1);
+        CHECK(v.motion_results[0].date == uhrwerk::Date{1649, 1, 1});
+        CHECK(chronicle_contains(sim, "Alle Bundesstaaten treten zum 1. Januar 1650 dem Mittelbund bei."));
+        CHECK(v.states[static_cast<std::size_t>(s.bra)].customs_union == uhrwerk::kNone);
+        CHECK(uhrwerk::customs_request_binding(v, s.bra));
     }
 }
 
@@ -703,6 +745,11 @@ TEST_CASE("Diplomatische Spiele: Manöver und Wirkungen der Forderungen") {
             CHECK(chronicle_contains(sim, "Brandenburg tritt zum 1. Januar 1649 dem Mittelbund bei."));
             REQUIRE(v.customs_requests.size() == 1);
             CHECK(v.customs_requests[0] == uhrwerk::CustomsRequest{s.bra, 0});
+            // Der Ausgang ist verbindlich (Review M9).
+            CHECK(uhrwerk::customs_request_binding(v, s.bra));
+            CHECK(uhrwerk::evaluate_customs_change(v, s.bra, uhrwerk::kNone) ==
+                  uhrwerk::CustomsDecision::Invalid);
+            CHECK_FALSE(uhrwerk::customs_request_binding(v, s.sax));
         }
         SUBCASE("Kompromiss") {
             Simulation sim(data.load());

@@ -27,6 +27,9 @@ std::size_t relation_slot(std::size_t states, Index a, Index b);
 Fixed relation(const World& world, Index a, Index b);
 /// Zielwert der Beziehung (Abschnitt 4.1) ohne Gesandte; 0 ohne Diplomatie.
 Fixed relation_target(const World& world, Index a, Index b);
+/// Zielwerte von state zu jedem Staat (Index = Staat, für state selbst 0) in einem Durchgang; leer
+/// ohne Diplomatie oder bei ungültigem Index (Anzeige: Liste der Staaten, Tooltip).
+std::vector<Fixed> relation_targets(const World& world, Index state);
 /// Gegner: Beziehung unter rival_below.
 bool rivals(const World& world, Index a, Index b);
 

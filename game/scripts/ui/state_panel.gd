@@ -730,7 +730,12 @@ func _fill_customs() -> void:
 	for u in unions.size():
 		_fill_customs_row(u, unions[u], current, requested)
 	_customs_withdraw.visible = not request.is_empty()
-	_customs_withdraw.disabled = _customs_sent != NO_CUSTOMS_CHOICE
+	# Ein verbindlicher Beitritt (Bundesbeschluss, verlorene Krise) lässt sich nicht zurückziehen.
+	var binding := bool(request.get("binding", false))
+	_customs_withdraw.disabled = binding or _customs_sent != NO_CUSTOMS_CHOICE
+	_customs_withdraw.tooltip_text = (
+		"Verbindlich: Bundesbeschluss oder Ausgang einer Krise." if binding else ""
+	)
 	if _customs_sent != NO_CUSTOMS_CHOICE:
 		_customs_note.text = "Der Antrag geht mit dem nächsten Tag hinaus."
 	_customs_note.visible = not _customs_note.text.is_empty()
@@ -881,6 +886,8 @@ func reject_customs(message: String) -> void:
 func _request_text(request: Dictionary) -> String:
 	var joined := str(request.get("customs_union_name", ""))
 	var when := str(request.get("effective_text", ""))
+	if bool(request.get("binding", false)):
+		return "Beitritt zum %s verbindlich, wirksam zum %s" % [joined, when]
 	if joined.is_empty():
 		var left := str(_state.get("customs_union_name", ""))
 		return "Austritt aus dem %s beantragt, wirksam zum %s" % [left, when]

@@ -8,7 +8,7 @@ Vor Version 1.0 kann sich jede Schnittstelle ändern.
 
 ## [Unveröffentlicht]
 
-### Meilenstein M9 – Diplomatie und Zollverein (in Arbeit)
+### Meilenstein M9 – Diplomatie und Zollverein
 
 Vertrag: [technik/diplomatie.md](docs/technik/diplomatie.md), Entscheidungen 1–12 wie empfohlen
 freigegeben; Stand je Schritt in Abschnitt 11 dort.
@@ -84,6 +84,21 @@ freigegeben; Stand je Schritt in Abschnitt 11 dort.
   - Kartenmodus „Beziehungen“ (Taste #, fünfzehnter Modus): grün freundlich, rot feindlich zum
     Spielerstaat. Haushaltsposten „Gesandte“, Startoption `--diplomatie[=staaten|bund|frage]`.
   - Brücke: Abfragen und Befehle der Diplomatie (bridge-api.md, Abschnitt Diplomatie).
+- **Review und Abschluss M9 (Schritt b4):**
+  - Ein Beitritt nach einer angenommenen Zolleinigung des Bundes oder einer verlorenen Krise
+    „Beitritt zur Zollunion“ ist jetzt verbindlich. Vorher konnte der betroffene Staat ihn bis zum
+    1. Januar zurückziehen. Das Fenster „Zollunion“ zeigt „verbindlich“ und sperrt die Rücknahme
+    (Brücke: `customs_request.binding`).
+  - Eine Abstimmung oder Krise am 1. Januar kündigte den Beitritt zum selben Tag an, obwohl dessen
+    Jahreswechsel schon gelaufen war. Jetzt gilt er zum folgenden 1. Januar, wie er tatsächlich wirkt.
+  - Ein Mitglied einer Kurie ohne eigene Plenarstimme zählte im Engeren Rat immer als Nein (1848 ohne
+    Folgen).
+  - Die Liste der Beziehungen (Fenster, Tooltip im Kartenmodus „Beziehungen“) rechnet die Zielwerte
+    in einem Durchgang statt je Staat neu.
+  - Godot: Der Knopf des Kartenmodus heißt „Beziehung“ statt „Diplomatie“ (nicht mit dem Fenster zu
+    verwechseln); das Fenster „Diplomatie“ blendet Staaten eines anderen Spielstands aus.
+  - Doku zum Abschluss: diplomatie.md verbindlich mit Grenzen, Meilensteinplan mit Ergebnis und
+    Abnahme. Beide Abnahmekriterien sind erfüllt; 1648 bleibt bitgleich.
 
 ### Meilenstein M8 – Politik, Parteien und Wahlen
 

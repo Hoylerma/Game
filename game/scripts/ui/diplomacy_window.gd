@@ -373,12 +373,16 @@ func _fill_states() -> void:
 	sorted.sort_custom(func(a: Dictionary, b: Dictionary) -> bool:
 		return float(a.get("relation", 0.0)) > float(b.get("relation", 0.0))
 	)
+	# Zeilen eines anderen Spielstands (andere Staaten) bleiben unsichtbar.
+	for state: int in _row_by_state:
+		((_row_by_state[state] as Array)[0] as Control).visible = false
 	for i in sorted.size():
 		var entry: Dictionary = sorted[i]
 		var state := int(entry.get("index", -1))
 		if not _row_by_state.has(state):
 			_make_row(state)
 		var parts: Array = _row_by_state[state]
+		(parts[0] as Control).visible = true
 		_rows.move_child(parts[0] as Control, i)
 		(parts[1] as ColorRect).color = LegendData.relation_color(float(entry.get("relation", 0.0)))
 		(parts[2] as Button).text = "%s   %s%s" % [
@@ -386,7 +390,7 @@ func _fill_states() -> void:
 			GermanFormat.signed_number(roundi(float(entry.get("relation", 0.0)))),
 			_markers(entry),
 		]
-	if _selected < 0 and not sorted.is_empty():
+	if (_selected < 0 or _entry_of(_selected).is_empty()) and not sorted.is_empty():
 		_selected = int(sorted[0].get("index", -1))
 	_fill_detail()
 	_highlight_rows()

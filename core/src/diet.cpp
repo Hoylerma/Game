@@ -174,14 +174,15 @@ MotionResult tally_motion(const World& world, const Motion& motion) {
     result.target = motion.target;
     result.date = world.date;
     result.opponent = motion_opponent(world, motion.kind, motion.applicant, motion.target);
+    // Die Haltung jedes Staates, auch eines Mitglieds einer Kurie ohne eigene Plenarstimme.
     std::vector<bool> yes(world.states.size(), false);
     for (std::size_t s = 0; s < world.states.size(); ++s) {
         const auto state = static_cast<Index>(s);
+        yes[s] = votes_yes(world, state, motion.applicant, result.opponent);
         const std::int32_t votes = plenum_votes(world, state);
         if (votes <= 0) {
             continue;
         }
-        yes[s] = votes_yes(world, state, motion.applicant, result.opponent);
         result.plenum_total += votes;
         result.plenum_yes += yes[s] ? votes : 0;
     }
@@ -276,7 +277,7 @@ void run_diet(World& world) {
             world.customs_requests.push_back(CustomsRequest{state, motion.target});
         }
         chronicle(world, motion.applicant,
-                  "Alle Bundesstaaten treten zum " + format_date_long(customs_effective_date(world.date)) +
+                  "Alle Bundesstaaten treten zum " + format_date_long(customs_forced_date(world.date)) +
                       " dem " + world.customs_unions[at(motion.target)].name + " bei.");
         break;
     }

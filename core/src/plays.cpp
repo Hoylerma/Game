@@ -146,8 +146,8 @@ void finish(World& world, std::size_t index, PlayOutcome outcome) {
                           [&](const CustomsRequest& r) { return r.state == play.target; });
             world.customs_requests.push_back(CustomsRequest{play.target, play.customs_union});
             chronicle(world, play.target,
-                      target + " tritt zum " + format_date_long(customs_effective_date(world.date)) +
-                          " dem " + world.customs_unions[at(play.customs_union)].name + " bei.");
+                      target + " tritt zum " + format_date_long(customs_forced_date(world.date)) + " dem " +
+                          world.customs_unions[at(play.customs_union)].name + " bei.");
         } else {
             // Kompromiss: eine Zahlung von einem halben Monatseinkommen.
             const Fixed amount = world.states[at(play.target)].last_month_income / Fixed::from_int(2);

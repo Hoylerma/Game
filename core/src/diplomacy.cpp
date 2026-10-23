@@ -165,6 +165,20 @@ Fixed relation_target(const World& world, Index a, Index b) {
     return TargetContext(world).target(a, b);
 }
 
+std::vector<Fixed> relation_targets(const World& world, Index state) {
+    if (world.relations.empty() || !in_range(world.states, state)) {
+        return {};
+    }
+    const TargetContext context(world);
+    std::vector<Fixed> targets(world.states.size());
+    for (std::size_t s = 0; s < world.states.size(); ++s) {
+        if (static_cast<Index>(s) != state) {
+            targets[s] = context.target(state, static_cast<Index>(s));
+        }
+    }
+    return targets;
+}
+
 bool rivals(const World& world, Index a, Index b) {
     return valid_pair(world, a, b) && relation(world, a, b) < world.diplomacy_rules.rival_below;
 }

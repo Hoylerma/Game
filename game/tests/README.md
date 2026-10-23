@@ -111,7 +111,9 @@ Prüft die GDExtension und die Kartendaten ohne Szene und ohne Grafikausgabe:
     am nächsten Tag laufen die Krise „Führung im Bund“ (Stufe 1) und der Antrag, der Gesandte ist
     in München; nach dem Nachgeben Preußens und 40 Tagen ist die Krise beendet und die Reform
     abgestimmt („Die deutsche Frage“); im Kartenmodus „Beziehungen“ hat der Spielerstaat seine
-    Farbe. 1648 gibt es weder Beziehungen noch Bundesversammlung noch Krisen
+    Farbe. Seit dem Review M9: Hannover gibt in der Krise um den Zollverein nach, sein Beitritt ist
+    verbindlich (`customs_request.binding`, Rücknahme `ungueltig`). 1648 gibt es weder Beziehungen
+    noch Bundesversammlung noch Krisen
 
 Am Ende steht `SMOKE OK` (Exitcode 0) oder `SMOKE FEHLGESCHLAGEN` mit allen Fehlern (Exitcode 1).
 

@@ -1,11 +1,12 @@
 # Diplomatie und Zollverein (Meilenstein M9)
 
-> **Status: verbindlich** – Entscheidungen 1–12 wie empfohlen freigegeben (Abschnitt 9); Umsetzung
-> läuft, Stand in Abschnitt 11. Grundlage sind
+> **Status: verbindlich seit M9** – Entscheidungen 1–12 wie empfohlen freigegeben (Abschnitt 9);
+> umgesetzt, Stand in Abschnitt 11 ([meilensteine.md](../meilensteine.md#m9--diplomatie-und-zollverein-)).
+> Die Regeln in Abschnitt 4 gelten mit den Präzisierungen aus den Schritten b2 bis b4. Grundlage sind
 > [14 Diplomatie](../14_diplomatie.md) (Abschnitte 1, 3, 4 und 5),
 > [08 Wirtschaft und Finanzen](../08_wirtschaft_und_finanzen.md) (Abschnitt 5.3, Zollverein),
 > [12 Föderalismus](../12_foederalismus_und_bundeslaender.md) und der Meilensteinplan
-> ([meilensteine.md](../meilensteine.md#m9--diplomatie-und-zollverein)). Das Wirtschaftsmodell steht
+> ([meilensteine.md](../meilensteine.md#m9--diplomatie-und-zollverein-)). Das Wirtschaftsmodell steht
 > in [wirtschaft.md](wirtschaft.md), das Lesezeichen 1848 in [lesezeichen_1848.md](lesezeichen_1848.md).
 
 Im März 1848 ist der Deutsche Bund ein Staatenbund unter österreichischem Vorsitz. Wirtschaftlich
@@ -318,6 +319,11 @@ Präzisiert in Schritt b2:
   bei, ohne Vorbehalt der Leitmacht. Präsidium: Der Antragsteller wird Präsidialmacht.
 - **Ein Antrag zur Zeit:** Solange ein Antrag offen ist, nimmt die Bundesversammlung keinen weiteren
   an. Ein Antrag vom Monatsersten wird am folgenden Monatsersten abgestimmt.
+- **Review (Schritt b4):** Die Zolleinigung ist **verbindlich**: Ein so vorgemerkter Beitritt lässt
+  sich bis zum 1. Januar weder zurückziehen noch ändern (Kern `customs_request_binding`, erkannt an der
+  Abstimmung; kein neuer Zustand). Fällt die Abstimmung auf einen 1. Januar, ist dessen Jahreswechsel
+  schon gelaufen; der Beitritt gilt dann zum folgenden 1. Januar (`customs_forced_date`). Ein Mitglied
+  einer Kurie ohne eigene Plenarstimme stimmt nach seiner Haltung (1848 haben alle eine).
 - **Daten:** `common/bundesversammlung.chron` (chronik-skript.md 3.29): 68 Plenarstimmen und
   17 Stimmen im Engeren Rat für die 38 Staaten von 1848; die Stimme für Luxemburg und Limburg teilen
   sich Luxemburg und die Niederlande.
@@ -365,6 +371,9 @@ Präzisiert in Schritt b2:
   kündigt seine Bündnisse mit Gegnern des Fordernden, beim Kompromiss belastet −30 diese Bündnisse.
 - Ein Staat ist höchstens in einem Spiel Hauptpartei; die Forderung „Zollunion“ verlangt eine Union
   des Fordernden, „Bündnis lösen“ ein Bündnis des Gegners mit einem Gegner des Fordernden.
+- **Review (Schritt b4):** Der Beitritt nach einer verlorenen Krise „Zollunion“ ist verbindlich wie die
+  Zolleinigung (Abschnitt 4.4) und gilt zum nächsten 1. Januar nach dem Ende der Krise, auch wenn sie
+  an einem 1. Januar endet.
 
 ### 4.6 Die deutsche Frage (Anzeige)
 
@@ -454,6 +463,11 @@ Weitere Tests:
 - **Godot:** Rauchtest der neuen Brückenmethoden, Klicktest (Beitritt über den Knopf, Gesandter,
   Antrag, Spiel bis zur Auflösung), Screenshots der Kartenmodi und Fenster.
 
+**Stand der Abnahme (M9 abgeschlossen):** Beide Kriterien sind erfüllt. Die Mitgliedschaften 1848
+prüft der CTest `zollunionen_1848` gegen die Liste; die Wirkung der Beitritte misst das Zolllabor mit
+Zielwerten in der CI (Abschnitt 3.6, Ergebnis in Abschnitt 11, Schritt a3). Die weiteren Tests stehen
+je Schritt in Abschnitt 11.
+
 ## 8. Daten
 
 | Datei | Inhalt |
@@ -529,3 +543,21 @@ Der Archivar prüft `zollunion` (bekannte Union, nicht vor ihrem `seit`) und `be
 | b1 Kern Diplomatie | `core/src/diplomacy.cpp` (`uhrwerk/diplomacy.hpp`): Beziehung je Staatenpaar (−200 bis +200, symmetrisch, 703 Paare 1848), monatlich 5 % der Lücke zum Zielwert (Abschnitt 4.1); zum Start auf dem Zielwert. Gesandte (4.2): Befehl `Gesandter` (Wert 1 entsenden, 0 abberufen), Kapazität 1 + Einwohner / 5 Mio. (Preußen 4, Österreich 3), +5 je Monat bis 60 über dem Zielwert, Kosten 0,5 % der Monatseinnahmen als Haushaltsposten. Verträge (4.3): Befehl `Vertrag` (Wert = Handlung: Bündnis, Garantie, Kündigung des Bündnisses, Kündigung der Garantie), Annahme nach Regel mit Chronik, Gegner unter −25. Daten: `common/diplomatie.chron` (chronik-skript.md 3.27), `tabellen/beziehungen.csv` mit 24 Grundwerten (Archivar, `history/beziehungen`, chronik-skript.md 3.28). Zustand (Beziehungen, Gesandte, Verträge, Kosten), Spielstandprüfung und Inhaltsbereich `diplomatie` nur mit Deutschem Bund; `uhrwerk-cli info` mit Gegnern, Gesandten und Lagern (1848: Preußen 21 Staaten, Österreich 5 – Bayern, Sachsen, Hannover, Liechtenstein, Dänemark –, unentschieden 10), Testbefehle mit Gesandten und Verträgen. Tests: Zielwerte und Drift, Gesandte mit Kapazität, Wirkung und Kosten, Bündnis nach Regel mit Lagerprüfung und Kündigung, Garantie, ungültige Befehle, Spielstand, Wiederholung, 1 und 4 Threads, Ladefehler, 1648 ohne Wirkung. 1648 bitgleich (`5db13a66d63e6079`); die Zahlen 1848 ändern sich ohne Befehle nicht. |
 | b2 Bundesversammlung und Spiele | Kern `core/src/diet.cpp` und `core/src/plays.cpp` (`uhrwerk/diplomacy.hpp`). **Bundesversammlung** (Abschnitt 4.4): Daten `common/bundesversammlung.chron` (Präsidium Österreich, Plenum 68 Stimmen, Engerer Rat 17 Stimmen mit Kurien), Befehl `Bundesantrag` (Bundesreform, Zolleinigung, Intervention, Präsidium), ein Antrag zur Zeit, Abstimmung am nächsten Monatsersten nach Regel mit Chronik und Wirkung; Gegner des Antrags und Einstimmigkeit wie oben präzisiert. **Diplomatische Spiele** (4.5): Befehle `Forderung` (Führung im Bund, Zollunion, Bündnis lösen) und `Manoever` (nachgeben, Vermittlung, eskalieren), Parteinahme nach Bündnis, Garantie und Neigung, drei Stufen zu 30 Tagen, Entscheidung nach Regel ohne Spieler im Kern, Auflösung nach Stärke, Mobilmachungskosten, Wirkungen mit Kompromiss. Regeln in `common/diplomatie.chron` erweitert. Zustand (Präsidium, Anträge, Abstimmungen, Spiele, Ergebnisse), Spielstandprüfung und Inhaltsbereich `diplomatie` (Bundesversammlung, Regeln) nur mit Deutschem Bund; `uhrwerk-cli info` mit Bundesversammlung, Testbefehle mit Anträgen, Forderungen und Manövern. Tests: Abstimmung mit Kurie, Annahme und Termin, Einstimmigkeit, Zolleinigung mit Beitritt, Parteinahme, Stufen und Auflösung, Kompromiss nach der ersten Stufe, Manöver, Zollunion mit Beitritt und Zahlung, Bündnis lösen, Mobilmachungskosten, Spielstand, Wiederholung, Threads, Ladefehler. 1648 bitgleich (`5db13a66d63e6079`); ohne Befehle ändern sich die Zahlen 1848 nicht. |
 | b3 Brücke und Godot | Brücke (bridge-api.md, Abschnitt Diplomatie): `get_relations`, `get_diplomacy`, `get_diplomacy_actions`, `send_envoy`, `propose_treaty`, `get_diet`, `get_motion_preview`, `file_motion`, `get_diplomatic_plays`, `make_demand`, `manoeuvre`, `get_german_question`, Konstanten `TREATY_*`, `MOTION_*`, `DEMAND_*`, `MANOEUVRE_*`, Kartenmodus 14 `MAP_BEZIEHUNGEN`, `get_state` mit `diplomacy` und `envoy_cost_month`. Godot (Abschnitt 6, präzisiert): Fenster „Diplomatie“ mit den Reitern Staaten, Bundesversammlung (Halbrund nach Lagern, Anträge mit Prognose, letzte Abstimmungen) und Deutsche Frage; Krisenleiste mit Manövern; Kartenmodus „Beziehungen“ (Taste #) mit Legende und Tooltip; Haushaltsposten „Gesandte“; Startoption `--diplomatie[=staaten|bund|frage]`. Die Leiste der Kartenmodi hat mit fünfzehn Modi Schrift 12. Tests: Einheitentest (Kartenmodus, Taste, Option, Farben), Rauchtest (Beziehungen, Handlungen, Bundesversammlung, Prognose, Gesandter, Antrag und Krise mit Nachgeben, deutsche Frage, Kartenmodus; 1648 leer), Klicktest (Taste #, Gesandter über das Fenster, Forderung mit Rückfrage, Krisenleiste mit Nachgeben, Antrag Bundesreform, Esc), CI-Screenshots. 1648 bitgleich (`5db13a66d63e6079`). |
+| b4 Abschluss | **Review M9** über Kern, Brücke und Godot, Daten und Doku. Behoben: Ein Beitritt nach einer angenommenen Zolleinigung oder einer verlorenen Krise „Zollunion“ ließ sich vom betroffenen Staat bis zum 1. Januar zurückziehen; jetzt ist er verbindlich (Kern `customs_request_binding`, ohne neuen Zustand; Brücke `customs_request.binding`, das Fenster „Zollunion“ sperrt die Rücknahme). Eine Abstimmung oder Krise am 1. Januar kündigte den Beitritt zum selben Tag an, obwohl dessen Jahreswechsel schon gelaufen war (`customs_forced_date`). Ein Mitglied einer Kurie ohne Plenarstimme zählte immer als Nein. Die Liste der Beziehungen rechnete den Zielwert je Staat neu (37-mal über alle Orte, im Tooltip je Bild); jetzt `relation_targets` in einem Durchgang. Das Fenster „Diplomatie“ blendet Staaten eines anderen Spielstands aus. Der Knopf des Kartenmodus heißt „Beziehung“ statt „Diplomatie“ (nicht mit dem Fenster zu verwechseln). Tests: Zolleinigung verbindlich und am 1. Januar zum Folgejahr, Krise „Zollunion“ verbindlich, `relation_targets`; Rauchtest mit Hannovers verbindlichem Beitritt nach einer Krise. 1648 bitgleich (`5db13a66d63e6079`). **M9 abgeschlossen.** |
+
+Grenzen (Stand M9):
+- **Keine KI:** Die übrigen Staaten stellen weder Anträge noch Forderungen, entsenden keine Gesandten
+  und schließen keine Verträge (M12). Sie stimmen und nehmen Partei nach Regel; ihre Hauptparteien
+  entscheiden am Ende jeder Stufe nach Regel.
+- **Bundesreform und Präsidium scheitern nach Regel immer** (Einstimmigkeit mit dem Gegner, wie
+  historisch); sie stehen nur als Versuche in der Anzeige. Die Bundesintervention wirkt nur auf die
+  Beziehungen, ihr Vollzug kommt mit M10.
+- **Krisen ohne Krieg:** Die Auflösung nach Stärke ersetzt bis M10 den Krieg; die Führung im Bund hat
+  außer der Anzeige „Die deutsche Frage“ keine Wirkung. Außenmächte (Frankreich, Russland,
+  Großbritannien) fehlen (Entscheidung 10).
+- **Durchgehende Bundesversammlung:** Ihre Suspendierung 1848–1850 kommt mit den Ereignissen (M11).
+- **Spielwerte:** Grundbeziehungen, Stimmen, Schwellen und Tarife sind Spielwerte nach
+  Literaturkenntnis; die Fachprüfung mit Quellen steht aus. Der Zollanteil an den Staatseinnahmen
+  bleibt unter dem historischen (Schritt a3).
+- **Alte Spielstände:** Spielstände 1848 aus Schritten vor b2 laden nicht (Inhalt `diplomatie`),
+  Spielstände aus M8 nicht (Format 3).

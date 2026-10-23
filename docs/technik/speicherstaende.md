@@ -230,7 +230,8 @@ vor M8.
   geändert: diplomatie“). Spielstände von 1648 bleiben gültig: Ohne Bund zählen die Regeln nicht. Seit
   Schritt b2 kommen die Bundesversammlung, die Anträge und die diplomatischen Spiele hinzu (Befehle
   `Bundesantrag`, `Forderung`, `Manoever` mit der Art im Wert); ein Spielstand 1848 aus Schritt b1 lädt
-  ebenso nicht mehr.
+  ebenso nicht mehr. Schritte b3 und b4 ändern den Zustand nicht: Ob ein Zollantrag verbindlich ist
+  (Zolleinigung, verlorene Krise), folgt aus den Abstimmungen und Spielergebnissen im Zustand.
 - Jede Änderung am Zustand (neues Feld, neue Reihenfolge) erhöht die Formatversion. Der Test
   „Spielstand: Formatwache“ verhindert, dass das vergessen wird: Er speichert die Test-Fixture nach
   einem Jahr und vergleicht den Prüfwert der Nutzdaten mit einem festgehaltenen Wert. Ändert er

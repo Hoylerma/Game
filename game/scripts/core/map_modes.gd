@@ -56,7 +56,7 @@ const SHORT_NAMES: PackedStringArray = [
 	"Bahn",
 	"Wahlen",
 	"Zoll",
-	"Diplomatie",
+	"Beziehung",
 ]
 
 ## Kurze Erklärung für Tooltips der Modusleiste.

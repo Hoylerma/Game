@@ -400,6 +400,25 @@ func _check_diplomacy_1848(sim: SimulationClient) -> void:
 			str(sim.get_diplomatic_plays()), str(question).left(400), str(results)
 		]
 	)
+	# Review M9: Wer eine Krise um den Zollverein verliert, tritt verbindlich bei (kein Zurückziehen).
+	var hanover := sim.get_state_index("HAN")
+	_check(
+		sim.make_demand(prussia, hanover, SimulationClient.DEMAND_CUSTOMS_UNION),
+		"Forderung an Hannover: Beitritt zum Zollverein",
+		"make_demand(Preußen, Hannover, Zollunion) abgewiesen"
+	)
+	sim.advance_days(1)
+	sim.manoeuvre(hanover, SimulationClient.MANOEUVRE_YIELD)
+	sim.advance_days(1)
+	var forced: Dictionary = sim.get_state(hanover).get("customs_request", {})
+	_check(
+		bool(forced.get("binding", false)) and int(forced.get("customs_union_index", -1)) == 0
+		and str(sim.get_customs_change(hanover, 1).get("decision", "")) == "ungueltig",
+		"Hannover gibt nach: Beitritt zum Zollverein verbindlich (%s)" % forced.get("effective_text"),
+		"Hannover nach der Krise: Antrag %s, Rücknahme %s" % [
+			str(forced), str(sim.get_customs_change(hanover, 1))
+		]
+	)
 	# Kartenmodus „Beziehungen“: der Spielerstaat (Bayern) in seiner Farbe.
 	var colors := sim.get_map_colors(MapModes.MAP_BEZIEHUNGEN)
 	var munich := sim.get_location_index("muenchen")
