@@ -1,0 +1,72 @@
+# Militär (Meilenstein M10, Schritt a1; docs/technik/militaer.md, Abschnitte 3.1 und 3.2).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.30.
+# Das Militär gilt ab 'seit' (Entscheidung 14): Vor diesem Datum (Lesezeichen 1648) gibt es keine Heere,
+# und die Simulation bleibt bitgleich. Die Friedensstärke eines Staates ist wie im Haushalt 'heer'
+# (Soldaten je 1.000 Einwohner) mal Bevölkerung; die Garnisonen teilen sie nach 'anteil' auf. Ein
+# Staat ohne Garnison hat eine in seiner Hauptstadt.
+#
+# Werte: Spielwerte nach Wissensstand ohne Quellenzugang (Prüfung offen).
+
+militaer {
+    seit       = 1848.03.01   # Lesezeichen „Völkerfrühling“
+    fluss_rang = 3            # Flussübergang bis Rang 3 (Rhein … Weser, Mosel … Main, Inn, Moldau; nachbarn.csv)
+}
+
+# ── Heerwesen ──────────────────────────────────────────────────────────────
+# bewaffnung: Feuerkraft der Infanterie (Vorderlader = 1); geschuetze: je 1.000 Soldaten;
+# mobilmachung: Kriegsstärke ÷ Friedensstärke (Reserve, Landwehr); mobilmachung_tage: bis zur vollen Stärke.
+
+heerwesen standard {
+    bewaffnung        = 1.0
+    geschuetze        = 2.5
+    mobilmachung      = 2.0
+    mobilmachung_tage = 35
+    quelle = "Spielwert M10: Vorderlader, rund 2–3 Geschütze je 1.000 Mann, Kontingente des Bundesheers"
+}
+
+heerwesen pru_1848 {
+    staat             = PRU
+    seit              = 1848.03.01
+    bewaffnung        = 1.2      # Zündnadelgewehr (1841) erst bei einem Teil der Infanterie
+    geschuetze        = 3
+    mobilmachung      = 2.5      # Reserve und Landwehr ersten Aufgebots
+    mobilmachung_tage = 28
+    quelle = "Spielwert M10: Dreyse-Zündnadelgewehr seit 1841, 1848 noch nicht allgemein; Landwehrordnung von 1815"
+}
+
+heerwesen aut_1848 {
+    staat             = AUT
+    seit              = 1848.03.01
+    bewaffnung        = 1.0
+    geschuetze        = 3
+    mobilmachung      = 2.0
+    mobilmachung_tage = 42
+    quelle = "Spielwert M10: Vorderlader (Augustin-Gewehr), lange Wege der Mobilmachung im Vielvölkerstaat"
+}
+
+# ── Garnisonen 1848 ────────────────────────────────────────────────────────
+# Preußen: Gardekorps und acht Armeekorps an den Sitzen der Generalkommandos.
+
+garnison pru_garde { staat = PRU ort = berlin_coelln  anteil = 0.12 name = "Gardekorps"       seit = 1848.03.01 }
+garnison pru_1     { staat = PRU ort = koenigsberg    anteil = 0.11 name = "I. Armeekorps"    seit = 1848.03.01 }
+garnison pru_2     { staat = PRU ort = stettin        anteil = 0.11 name = "II. Armeekorps"   seit = 1848.03.01 }
+garnison pru_3     { staat = PRU ort = frankfurt_oder anteil = 0.11 name = "III. Armeekorps"  seit = 1848.03.01 }
+garnison pru_4     { staat = PRU ort = magdeburg      anteil = 0.11 name = "IV. Armeekorps"   seit = 1848.03.01 }
+garnison pru_5     { staat = PRU ort = posen          anteil = 0.11 name = "V. Armeekorps"    seit = 1848.03.01 }
+garnison pru_6     { staat = PRU ort = breslau        anteil = 0.11 name = "VI. Armeekorps"   seit = 1848.03.01 }
+garnison pru_7     { staat = PRU ort = muenster       anteil = 0.11 name = "VII. Armeekorps"  seit = 1848.03.01 }
+garnison pru_8     { staat = PRU ort = koblenz        anteil = 0.11 name = "VIII. Armeekorps" seit = 1848.03.01 }
+
+# Österreich (nur die Länder im Kartenausschnitt): Generalkommanden.
+garnison aut_wien      { staat = AUT ort = wien      anteil = 0.35 name = "Generalkommando Wien"       seit = 1848.03.01 }
+garnison aut_prag      { staat = AUT ort = prag      anteil = 0.25 name = "Generalkommando Prag"       seit = 1848.03.01 }
+garnison aut_olmuetz   { staat = AUT ort = olmuetz   anteil = 0.15 name = "Generalkommando Mähren"     seit = 1848.03.01 }
+garnison aut_graz      { staat = AUT ort = graz      anteil = 0.10 name = "Generalkommando Graz"       seit = 1848.03.01 }
+garnison aut_laibach   { staat = AUT ort = laibach   anteil = 0.08 name = "Garnison Laibach"           seit = 1848.03.01 }
+garnison aut_innsbruck { staat = AUT ort = innsbruck anteil = 0.07 name = "Generalkommando Innsbruck"  seit = 1848.03.01 }
+
+# Bayern: zwei Armeekorps und Nürnberg.
+garnison bav_1         { staat = BAV ort = muenchen  anteil = 0.50 name = "I. Armeekorps"  seit = 1848.03.01 }
+garnison bav_2         { staat = BAV ort = wuerzburg anteil = 0.30 name = "II. Armeekorps" seit = 1848.03.01 }
+garnison bav_nuernberg { staat = BAV ort = nuernberg anteil = 0.20 name = "Garnison Nürnberg" seit = 1848.03.01 }

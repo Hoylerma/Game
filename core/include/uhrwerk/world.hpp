@@ -384,6 +384,16 @@ struct StateBudget {
     Fixed expenses() const { return court + administration + army + interest + building + diplomacy; }
 };
 
+/// Heerwesen eines Staates (seit M10, Abschnitt 3.2): aus common/militaer.chron, zum Startdatum. Inhalt.
+struct ArmyProfile {
+    Fixed firepower = Fixed::one();    // Feuerkraft der Infanterie (Vorderlader = 1)
+    Fixed guns_per_mille;              // Geschütze je 1.000 Soldaten
+    Fixed mobilization = Fixed::one(); // Kriegsstärke ÷ Friedensstärke
+    std::int32_t mobilization_days = 30;
+
+    friend bool operator==(const ArmyProfile&, const ArmyProfile&) = default;
+};
+
 /// Staat bzw. Reichsstand (data/history/staaten/*.chron).
 struct State {
     std::string tag; // z. B. "BRA"
@@ -413,6 +423,7 @@ struct State {
     Fixed customs_income;            // Anteil an der Vereinskasse im laufenden Monat (seit M9, Abschnitt 3.4)
     Constitution constitution = Constitution::None; // zum Startdatum (seit M8, Inhalt)
     ElectoralLaw law;                               // Wahlordnung des Landtags (seit M8, Inhalt)
+    ArmyProfile army;                               // Heerwesen zum Startdatum (seit M10, Inhalt)
 
     Fixed tax_rate(TaxKind kind) const { return tax_rates[static_cast<std::size_t>(kind)]; }
 };
@@ -554,6 +565,56 @@ struct PlayResult {
     PlayOutcome outcome = PlayOutcome::Compromise;
 
     friend bool operator==(const PlayResult&, const PlayResult&) = default;
+};
+
+/// Nachbarschaft eines Ortes (seit M10, docs/technik/militaer.md Abschnitt 3.1): Landgrenze aus
+/// karte/nachbarn.csv (Kartengenerator) oder Überfahrt aus karte/ueberfahrten.csv. Inhalt, nur in
+/// Welten mit Militär (MilitaryRules::active).
+struct Neighbor {
+    Index location = kNone;      // Nachbarort
+    Fixed distance_km;           // Abstand der Lagen (wie bei der Wanderung)
+    std::int32_t border = 0;     // gemeinsame Grenze in Pixelkanten, 0 bei einer Überfahrt
+    std::int32_t river = 0;      // Rang des größten gekreuzten Flusses (1 = Rhein, Elbe …), 0: keiner
+    std::int32_t ferry_days = 0; // Überfahrt: Tage; 0: Landweg
+
+    friend bool operator==(const Neighbor&, const Neighbor&) = default;
+};
+
+/// Regeln des Militärs (seit M10, common/militaer.chron, Abschnitte 3–5). Inhalt.
+struct MilitaryRules {
+    bool active = false;         // Militärdaten zum Startdatum ('seit'): Heere und Krieg (Entscheidung 14)
+    std::int32_t river_rank = 3; // Flussübergang: gekreuzter Fluss bis zu diesem Rang
+};
+
+/// Garnison des Friedensheers (seit M10, Abschnitt 3.2): Anteil der Friedensstärke eines Staates an einem
+/// Ort. Ohne Eintrag hat ein Staat eine Garnison in seiner Hauptstadt. Inhalt.
+struct Garrison {
+    std::string id;
+    std::string name; // z. B. "Gardekorps"
+    Index state = kNone;
+    Index location = kNone;
+    Fixed share; // Anteil am Friedensheer (je Staat zusammen 1)
+};
+
+/// Lage eines Heeres (seit M10). Weitere Lagen (Marsch, Bahnfahrt, Schlacht, Belagerung) kommen mit
+/// den Schritten a2 und a3.
+enum class ArmyStatus : std::uint8_t {
+    Garrison = 0, // Friedensheer in seiner Garnison
+};
+
+/// Heer (seit M10, Abschnitt 3.2). Zustand; die Nummer bleibt über die ganze Partie gleich (Befehle).
+struct Army {
+    std::int64_t id = 0;
+    Index state = kNone;
+    Index location = kNone;
+    Index garrison = kNone; // Garnison, aus der es stammt; kNone für Feldarmeen ohne Garnison
+    std::string name;
+    Fixed soldiers;
+    Fixed guns;
+    Fixed morale = Fixed::one(); // 0..1
+    ArmyStatus status = ArmyStatus::Garrison;
+
+    friend bool operator==(const Army&, const Army&) = default;
 };
 
 /// Grundbeziehung zweier Staaten aus den Daten (seit M9, history/beziehungen, Abschnitt 4.1).
@@ -753,6 +814,9 @@ struct World {
     DiplomacyRules diplomacy_rules;                     // seit M9 (b1)
     std::vector<BaseRelation> base_relations;           // seit M9 (b1): Paare dieses Szenarios
     FederalDiet diet;                                   // seit M9 (b2), id leer ohne Bundesversammlung
+    MilitaryRules military_rules;                       // seit M10 (a1)
+    std::vector<std::vector<Neighbor>> neighbors; // seit M10 (a1): je Ort, nach Nachbarort; nur mit Militär
+    std::vector<Garrison> garrisons;              // seit M10 (a1): nach Staat, dann in Dateireihenfolge
     std::vector<Location> locations;
     std::vector<PopBlock> pops;
     std::vector<ChronicleEntry> chronicle;
@@ -792,6 +856,9 @@ struct World {
     std::vector<MotionResult> motion_results; // abgestimmte Anträge in zeitlicher Folge
     std::vector<DiplomaticPlay> plays;        // laufende Spiele in der Reihenfolge ihres Beginns
     std::vector<PlayResult> play_results;     // beendete Spiele in zeitlicher Folge
+    // Militär (seit M10, Schritt a1), nur in Welten mit Militärdaten (military_rules.active); sonst leer.
+    std::vector<Army> armies;      // Heere in der Reihenfolge ihrer Aufstellung
+    std::int64_t next_army_id = 1; // Nummer des nächsten Heeres
 
     Index find_state(std::string_view tag) const;
     Index find_location(std::string_view id) const;

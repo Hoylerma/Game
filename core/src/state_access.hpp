@@ -240,6 +240,22 @@ template <typename Sim, typename V> void StateAccess::visit(Sim& sim, V& v) {
         });
     }
 
+    // Militär (seit M10, Schritt a1): nur in Welten mit Militärdaten (1648 bleibt bitgleich).
+    if (w.military_rules.active) {
+        v.field("naechstes_heer", w.next_army_id);
+        list(v, "heere", w.armies, Extent::State, [&](auto& a) {
+            v.field("nummer", a.id);
+            v.field("staat", a.state);
+            v.field("ort", a.location);
+            v.field("garnison", a.garrison);
+            v.field("name", a.name);
+            v.field("soldaten", a.soldiers);
+            v.field("geschuetze", a.guns);
+            v.field("moral", a.morale);
+            v.field("lage", a.status);
+        });
+    }
+
     // Politik (seit M8): nur in Welten mit Parlamenten, damit die Prüfsumme der übrigen (1648) bleibt.
     if (!w.parliaments.empty()) {
         list(v, "wahlen", w.elections, Extent::State, [&](auto& e) {

@@ -407,11 +407,12 @@ TEST_CASE("Politik: Spielstand vor und nach dem Wahltag") {
     }
 }
 
-TEST_CASE("Politik: Spielstand im Format 1 oder 2 zeigt seine Angaben, lädt aber nicht") {
-    // Format 1 (bis M7) hat 13 Inhaltsbereiche, Format 2 (M8) 14; der Gesamtwert läuft über diese.
+TEST_CASE("Politik: Spielstand im Format 1, 2 oder 3 zeigt seine Angaben, lädt aber nicht") {
+    // Format 1 (bis M7) hat 13 Inhaltsbereiche, Format 2 (M8) 14, Format 3 (M9) 15; der Gesamtwert
+    // läuft über diese.
     const World w = testhilfen::load_fixture();
     const uhrwerk::ContentFingerprint fp = uhrwerk::content_fingerprint(w);
-    for (const auto& [version, parts] : {std::pair<std::uint8_t, std::size_t>{1, 13}, {2, 14}}) {
+    for (const auto& [version, parts] : {std::pair<std::uint8_t, std::size_t>{1, 13}, {2, 14}, {3, 15}}) {
         CAPTURE(version);
         Bytes bytes = uhrwerk::save_game(Simulation(w), SaveMeta{});
         std::uint64_t total = 0xcbf29ce484222325ULL;

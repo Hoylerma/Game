@@ -1086,6 +1086,27 @@ class TestAusgaben(unittest.TestCase):
         self.assertIsNone(ergebnis.ort_bei(10.3, 52.55))  # Meer
         self.assertIsNone(ergebnis.ort_bei(12.0, 52.3))  # außerhalb
 
+    def test_nachbarn_csv_und_flussuebergaenge(self) -> None:
+        _, orte, ergebnis = _fixture()
+        csv = ergebnis.nachbarn_csv()
+        self.assertEqual(csv, (TESTDATEN / "karte" / "nachbarn.csv").read_bytes())
+        zeilen = csv.decode().splitlines()
+        self.assertEqual(zeilen[0], kg.NACHBARN_KOPF)
+        self.assertEqual(len(zeilen) - 1, len(ergebnis.nachbarn()))
+        # Strecken quer über einen Fluss: kleinster gekreuzter Rang; Berühren zählt nicht.
+        punkte = [kg.Ort("a", "A", 0.0, 0.0), kg.Ort("b", "B", 2.0, 0.0), kg.Ort("c", "C", 0.0, 2.0)]
+        linien = [
+            (4, np.array([[1.0, -1.0], [1.0, 1.0]])),  # kreuzt a–b
+            (2, np.array([[1.5, -1.0], [1.5, 0.5]])),  # kreuzt a–b
+            (1, np.array([[0.0, 2.0], [3.0, 2.0]])),  # berührt c nur
+        ]
+        self.assertEqual(kg.flussuebergaenge(punkte, [(0, 1), (0, 2)], linien), {(0, 1): 2, (0, 2): 0})
+        self.assertEqual(kg.flussuebergaenge(punkte, [(0, 1)], []), {(0, 1): 0})
+        self.assertEqual(
+            kg.nachbarn_csv(punkte, {(0, 1): 7, (0, 2): 3}, {(0, 1): 2}),
+            b"ort_a;ort_b;grenze;fluss\na;b;7;2\na;c;3;0\n",
+        )
+
     def test_definition_csv(self) -> None:
         flaechen = [kg.Flaeche(0, "berlin_coelln", "Berlin-Cölln", 2118, 1043, 1734, 212, 13.4, 52.5)]
         self.assertEqual(
@@ -1112,11 +1133,11 @@ class TestKommandozeile(unittest.TestCase):
         ausgabe = self.tmp / "aus"
         code, aus, err = _starte("--daten", str(TESTDATEN), "--ausgabe", str(ausgabe))
         self.assertEqual(code, 0, err)
-        self.assertEqual(aus.count("geschrieben:"), 3)
+        self.assertEqual(aus.count("geschrieben:"), len(kg.AUSGABEN))
         for name in kg.AUSGABEN:
             self.assertEqual((ausgabe / name).read_bytes(), (TESTDATEN / "karte" / name).read_bytes(), name)
         code, aus, _ = _starte("--daten", str(TESTDATEN), "--ausgabe", str(ausgabe))
-        self.assertEqual(aus.count("unverändert:"), 3)
+        self.assertEqual(aus.count("unverändert:"), len(kg.AUSGABEN))
         # Gleiche Pixel, andere Kompression: bleibt unberührt.
         bild = karte_png.dekodieren((ausgabe / "provinzen.png").read_bytes())
         (ausgabe / "provinzen.png").write_bytes(_png_mit_filter(bild, 4, stufe=1))
@@ -1136,8 +1157,12 @@ class TestKommandozeile(unittest.TestCase):
         (ausgabe / "fluesse.png").write_bytes(karte_png.kodieren(fluesse))
         csv = (ausgabe / "definition.csv").read_bytes()
         (ausgabe / "definition.csv").write_bytes(csv.replace(b"Aue", b"Au"))
+        nachbarn = (ausgabe / "nachbarn.csv").read_bytes()
+        (ausgabe / "nachbarn.csv").write_bytes(nachbarn.replace(b"hafen;heide;48;2", b"hafen;heide;48;0"))
         code, _, err = _starte("--daten", str(TESTDATEN), "--ausgabe", str(ausgabe), "--pruefen")
         self.assertEqual(code, 1)
+        self.assertIn("nachbarn.csv: Inhalt veraltet", err)
+        (ausgabe / "nachbarn.csv").write_bytes(nachbarn)
         self.assertIn("provinzen.png: 1 Pixel weichen ab", err)
         self.assertIn("fluesse.png: 6 Pixel weichen ab", err)
         self.assertIn("definition.csv: Inhalt veraltet", err)

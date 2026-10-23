@@ -28,12 +28,13 @@ namespace uhrwerk {
 
 /// Formatversion der Spielstände und Protokolle; jede Änderung am Zustandsverzeichnis erhöht sie.
 /// Format 2 seit M8: Wahlen im Zustand, Inhaltsbereich politik. Format 3 seit M9: Inhaltsbereich diplomatie.
-inline constexpr std::uint32_t kSaveFormatVersion = 3;
+/// Format 4 seit M10: Inhaltsbereich militaer.
+inline constexpr std::uint32_t kSaveFormatVersion = 4;
 
 /// Bereiche des Inhaltsfingerabdrucks (Abschnitt 3), in dieser Reihenfolge.
-inline constexpr std::array<std::string_view, 15> kContentParts = {
+inline constexpr std::array<std::string_view, 16> kContentParts = {
     "regeln",  "gelaende",  "konfessionen", "kulturen", "berufe", "gueter",  "beduerfnisse", "betriebe",
-    "maerkte", "vorkommen", "staaten",      "kreise",   "orte",   "politik", "diplomatie"};
+    "maerkte", "vorkommen", "staaten",      "kreise",   "orte",   "politik", "diplomatie",   "militaer"};
 
 /// Fingerabdruck des Inhalts: je Bereich und gesamt (FNV-1a-64). Namen, Farben und Quellen zählen
 /// nicht mit, nur was die Simulation beeinflusst.

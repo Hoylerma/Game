@@ -8,6 +8,23 @@ Vor Version 1.0 kann sich jede Schnittstelle ändern.
 
 ## [Unveröffentlicht]
 
+### Meilenstein M10 – Militär und Einigungskriege (in Arbeit)
+
+Vertrag: [technik/militaer.md](docs/technik/militaer.md), Entscheidungen 1–14 wie empfohlen
+freigegeben; Stand je Schritt in Abschnitt 12 dort.
+
+- **Nachbarschaft und Friedensheere (Schritt a1):** Der Kartengenerator schreibt
+  `karte/nachbarn.csv`: 13.069 Paare benachbarter Orte mit Grenzlänge und dem größten Fluss, den die
+  Verbindung der Orte kreuzt ([chronik-skript.md](docs/technik/chronik-skript.md) Abschnitt 6.6);
+  13 Fähren zu Inseln und über Meerengen stehen von Hand in `karte/ueberfahrten.csv` (6.7). Neue
+  Datei `common/militaer.chron` (3.30) mit Regeln, Heerwesen je Staat (Bewaffnung, Geschütze,
+  Mobilmachung) und Garnisonen: 1848 Gardekorps und acht Armeekorps Preußens, sechs
+  Generalkommanden Österreichs, drei Garnisonen Bayerns, die übrigen Staaten in ihrer Hauptstadt.
+  Beim Start steht je Garnison ein Heer mit ihrem Anteil an der Friedensstärke (zusammen 382.528
+  Soldaten), am Monatsersten folgt es der Bevölkerung. Inhaltsbereich `militaer`, Spielstand
+  **Format 4** (Spielstände aus M9 laden nicht mehr), `uhrwerk-cli info` mit Nachbarschaft und
+  Garnisonen. Noch ohne Bewegung und Krieg; 1648 bitgleich.
+
 ### Meilenstein M9 – Diplomatie und Zollverein
 
 Vertrag: [technik/diplomatie.md](docs/technik/diplomatie.md), Entscheidungen 1–12 wie empfohlen

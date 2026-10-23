@@ -13,6 +13,7 @@
 #include "uhrwerk/fixed.hpp"
 #include "uhrwerk/lasttest.hpp"
 #include "uhrwerk/loader.hpp"
+#include "uhrwerk/military.hpp"
 #include "uhrwerk/rng.hpp"
 #include "uhrwerk/savegame.hpp"
 #include "uhrwerk/script.hpp"
@@ -527,6 +528,49 @@ std::string customs_summary(const World& w) {
 
 /// Beziehungen zum Start (seit M9, Schritt b1): Grundwerte, Gegner, Gesandte und die Lager zwischen
 /// Preußen und Österreich (Neigung = Beziehung zu Preußen − zu Österreich, Lager ab ±20).
+/// Militär (seit M10): Nachbarschaft, Garnisonen und Friedensheere zum Start.
+std::string military_summary(const World& content) {
+    if (!uhrwerk::military_active(content)) {
+        return "keines (vor dem 'seit' in common/militaer.chron)";
+    }
+    World w = content;
+    uhrwerk::ensure_military_state(w);
+    std::size_t edges = 0;
+    std::size_t rivers = 0;
+    std::size_t ferries = 0;
+    for (const std::vector<uhrwerk::Neighbor>& list : w.neighbors) {
+        for (const uhrwerk::Neighbor& n : list) {
+            edges += 1;
+            rivers += uhrwerk::river_crossing(w, n) ? 1 : 0;
+            ferries += n.ferry_days > 0 ? 1 : 0;
+        }
+    }
+    Fixed soldiers;
+    for (const uhrwerk::Army& a : w.armies) {
+        soldiers += a.soldiers;
+    }
+    const std::string indent = "\n              ";
+    std::string text = plural(edges / 2, "Nachbarschaft", "Nachbarschaften") + " (" +
+                       format_int(static_cast<std::int64_t>(rivers / 2)) + " mit Flussübergang bis Rang " +
+                       std::to_string(w.military_rules.river_rank) + ", " +
+                       plural(ferries / 2, "Überfahrt", "Überfahrten") + ")" + indent +
+                       plural(w.garrisons.size(), "Garnison", "Garnisonen") + ", Friedensheere " +
+                       format_int(soldiers.round()) + " Soldaten";
+    std::string large;
+    for (std::size_t s = 0; s < w.states.size(); ++s) {
+        const auto state = static_cast<Index>(s);
+        const std::int64_t count = uhrwerk::state_army_count(w, state);
+        if (count > 1) {
+            large += (large.empty() ? "" : ", ") + w.states[s].tag + " " +
+                     format_int(uhrwerk::state_soldiers(w, state).round()) + " in " + std::to_string(count);
+        }
+    }
+    if (!large.empty()) {
+        text += indent + "mehrere Garnisonen: " + large;
+    }
+    return text;
+}
+
 std::string diplomacy_summary(const World& content) {
     if (!uhrwerk::diplomacy_active(content)) {
         return "keine (ohne Deutschen Bund)";
@@ -1006,6 +1050,7 @@ int cmd_info(const Options& o, const fs::path& data_dir) {
               << "Politik:      " << politics_summary(w) << '\n'
               << "Zollunionen:  " << customs_summary(w) << '\n'
               << "Diplomatie:   " << diplomacy_summary(w) << '\n'
+              << "Militär:      " << military_summary(w) << '\n'
               << "Bevölkerung:  " << format_int(total.round()) << "\n\n";
 
     std::vector<std::vector<std::string>> rows;

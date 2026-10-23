@@ -22,7 +22,7 @@ gebaut; Abhängigkeiten stehen jeweils dabei.
 | M7 | Lesezeichen 1848 | 2 – Vertical Slice | M6 | **fertig** (Fachprüfung der Daten offen, siehe unten) |
 | M8 | Politik, Parteien und Wahlen | 2 – Vertical Slice | M7 | **fertig** (Fachprüfung der Werte offen, siehe unten) |
 | M9 | Diplomatie und Zollverein | 2 – Vertical Slice | M7 | **fertig** (Fachprüfung der Werte offen, siehe unten) |
-| M10 | Militär und Einigungskriege | 2 – Vertical Slice | M9 | offen |
+| M10 | Militär und Einigungskriege | 2 – Vertical Slice | M9 | in Arbeit |
 | M11 | Ereignisse und Revolution 1848/49 | 2 – Vertical Slice | M8 | offen |
 | M12 | Künstliche Intelligenz der Staaten | 2 – Vertical Slice | M8–M11 | offen |
 | M13 | Spielbarer Vertical Slice 1848–1871 | 2 – Vertical Slice | M12 | offen |
@@ -640,7 +640,8 @@ Abschnitt 11).
 ### M10 – Militär und Einigungskriege
 
 **Ziel:** Kriegführung nach [15 Militär und Kriegsführung](15_militaer_und_kriegsfuehrung.md).
-Entwurf: [technik/militaer.md](technik/militaer.md).
+Vertrag: [technik/militaer.md](technik/militaer.md) (Entscheidungen freigegeben, Stand in
+Abschnitt 12).
 
 **Umfang**
 - Heere, Aushebung, Versorgung, Bewegung auf der Karte, Schlachten, Fronten
