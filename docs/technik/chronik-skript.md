@@ -82,7 +82,8 @@ data/
 │   ├── wahlen.chron        Regeln der Wahlsimulation und Regionen (seit M8, optional)
 │   ├── zollunionen.chron   Zollunionen mit Leitmacht und Tarif (seit M9, optional)
 │   ├── diplomatie.chron    Regeln der Diplomatie (seit M9; Pflicht in Szenarien mit Deutschem Bund)
-│   └── bundesversammlung.chron  Bundesversammlung mit Plenum und Engerem Rat (seit M9, optional)
+│   ├── bundesversammlung.chron  Bundesversammlung mit Plenum und Engerem Rat (seit M9, optional)
+│   └── militaer.chron      Militär: Regeln, Heerwesen, Garnisonen (seit M10, optional)
 ├── history/                generiert aus tabellen/ (tools/archivar), nicht von Hand bearbeiten
 │   ├── staaten/*.chron     Staaten (Reichsstände) mit datierter Historie
 │   ├── kreise/*.chron      Kreise: Gruppen von 4–12 Orten (seit M3)
@@ -98,13 +99,15 @@ data/
     ├── geometrie/          GeoJSON: Land, Seen, Flüsse (aus Natural Earth), Kernraum (von Hand)
     ├── provinzen.png       generiert: Ort-ID-Bild mit Flächenart
     ├── fluesse.png         generiert: Flussebene
-    └── definition.csv      generiert: Kartenindex → Ort, Beschriftungspunkt, Fläche
+    ├── definition.csv      generiert: Kartenindex → Ort, Beschriftungspunkt, Fläche
+    ├── nachbarn.csv        generiert: Nachbarschaft der Orte mit Grenze und Fluss (seit M10)
+    └── ueberfahrten.csv    von Hand: Fähren zu Inseln und über Meerengen (seit M10, optional)
 ```
 
 Ladereihenfolge: `regeln`, `gelaende`, `konfessionen`, `kulturen` (seit M4), `berufe`, `gueter`, `beduerfnisse`,
 `betriebe`, `maerkte` (seit M5), dann alle Dateien der Ordner `szenarien` (seit M7 vor `common/`, weil das
 Startdatum bestimmt, welche Güter, Berufe und Betriebe gelten), `stroemungen`, `interessengruppen`, `parlamente`,
-`wahlen` (seit M8), `zollunionen`, `diplomatie`, `bundesversammlung` und `history/beziehungen` (seit M9), `history/staaten`, `history/kreise` (seit M3), `history/verwaltung` (seit M7), `history/orte`, `history/eisenbahnen` (seit M7), `history/wahlkreise` (seit M8), jeweils **nach Dateiname sortiert**, Einträge in Dateireihenfolge. Daraus ergeben sich die Indizes in `World`. Die Szenarien kommen vor der Historie, weil das Startdatum des gewählten Szenarios bestimmt, welche datierten Blöcke gelten (Abschnitt 3.8).
+`wahlen` (seit M8), `zollunionen`, `diplomatie`, `bundesversammlung` (seit M9), `militaer` (seit M10), `history/beziehungen` (seit M9), `history/staaten`, `history/kreise` (seit M3), `history/verwaltung` (seit M7), `history/orte`, `history/eisenbahnen` (seit M7), `history/wahlkreise` (seit M8), jeweils **nach Dateiname sortiert**, Einträge in Dateireihenfolge. Daraus ergeben sich die Indizes in `World`. Die Szenarien kommen vor der Historie, weil das Startdatum des gewählten Szenarios bestimmt, welche datierten Blöcke gelten (Abschnitt 3.8).
 
 Die Dateien in `history/` erzeugt das Werkzeug `tools/archivar` aus den Tabellen in `data/tabellen/` (Format: [tabellen.md](tabellen.md)). Änderungen gehören in die Tabellen; die CI prüft mit `archivar.py --pruefen`, dass `history/` aktuell ist.
 
@@ -914,6 +917,47 @@ ein Staat zweimal im Plenum oder mit zwei Stimmen im Rat, eine Kuriatstimme ohne
 Präsidialmacht ohne Ort sind fatal. Im Kern: `World::diet` (`FederalDiet { id, name, presidency, seat,
 plenum, council, source }`); die Präsidialmacht im Spiel ist Zustand (`World::diet_presidency`).
 
+### 3.30 `common/militaer.chron` (seit M10)
+
+Regeln des Militärs, das Heerwesen der Staaten und die Garnisonen ([militaer.md](militaer.md),
+Abschnitte 3.1 und 3.2). Die Datei ist optional; ohne sie oder vor ihrem `seit` gibt es keine Heere
+(Lesezeichen 1648 bitgleich).
+
+```text
+militaer {
+    seit       = 1848.03.01   # Pflicht: das Militär gilt, wenn das Startdatum nicht davor liegt
+    fluss_rang = 3            # Pflicht, 0–6: Flussübergang bis zu diesem Rang (karte/nachbarn.csv)
+}
+
+heerwesen standard {          # ohne 'staat': für alle Staaten ohne eigenen Eintrag
+    bewaffnung        = 1.0   # Pflicht, 0–10: Feuerkraft der Infanterie (Vorderlader = 1)
+    geschuetze        = 2.5   # Pflicht, 0–50: Geschütze je 1.000 Soldaten
+    mobilmachung      = 2.0   # Pflicht, 1–10: Kriegsstärke ÷ Friedensstärke
+    mobilmachung_tage = 35    # Pflicht, 1–365: Tage bis zur vollen Kriegsstärke
+    quelle            = "…"   # optional
+}
+heerwesen pru_1848 { staat = PRU seit = 1848.03.01 … }   # je Staat; es gilt der jüngste bis zum Start
+
+garnison pru_garde {
+    staat  = PRU              # Pflicht
+    ort    = berlin_coelln    # Pflicht
+    anteil = 0.12             # Pflicht, > 0 bis 1: Anteil an der Friedensstärke des Staates
+    name   = "Gardekorps"     # optional, sonst „Garnison <Ortsname>“
+    seit   = 1848.03.01       # optional; bis (optional, ausschließlich): gilt nicht mehr
+    quelle = "…"              # optional
+}
+```
+
+Genau ein Block `militaer` ist Pflicht. Heerwesen und Garnisonen mit späterem `seit` (Garnisonen
+auch mit `bis` vor oder am Start) gehören nicht zur Welt. Die Anteile eines Staates werden auf ihre
+Summe bezogen; ein Staat ohne Garnison erhält eine in seiner Hauptstadt (`<TAG>_hauptstadt`, Anteil
+1). Fatal sind eine Kennung zweimal, ein unbekannter Staat oder Ort und Werte außerhalb der Bereiche;
+eine Garnison in einem Ort, der zum Start einem anderen Staat gehört, ist eine Warnung. Staaten, die
+zum Start keinen Ort haben, entfallen mit ihren Einträgen. Mit dem Militär lädt der Kern auch
+`karte/nachbarn.csv` und `karte/ueberfahrten.csv` (Abschnitte 6.6 und 6.7). Im Kern:
+`World::military_rules` (`active`, `river_rank`), `State::army` (`ArmyProfile`), `World::garrisons`
+und `World::neighbors`; die Heere sind Zustand (`World::armies`).
+
 ## 4. Startzustand
 
 Für jeden Ort entstehen Bevölkerungsblöcke **in dieser Reihenfolge**: für jeden Beruf (Ladereihenfolge), darin für jede Konfession des Ortes (Reihenfolge im `konfession`-Block) und darin für jede Kultur (Reihenfolge im `kultur`-Block, seit M4):
@@ -1054,11 +1098,49 @@ Der Kartenindex folgt der Ladereihenfolge der Orte (Dateien sortiert, Einträge 
 Dateireihenfolge). Die Godot-Seite ordnet Kartenindex und Simulationsindex trotzdem immer über die
 Ort-Kennung zu.
 
-### 6.6 Erzeugung und Prüfung
+### 6.6 `karte/nachbarn.csv` (generiert, seit M10)
 
-`python3 tools/kartengenerator/kartengenerator.py` erzeugt `provinzen.png`, `fluesse.png` und
-`definition.csv` deterministisch (gleiche Eingaben → pixelgleiche Bilder auf allen Plattformen;
-`--pruefen` vergleicht Pixel, nicht PNG-Bytes). Abhängigkeiten: Python ab 3.10 und **numpy**;
+Semikolon-getrennt, UTF-8, mit Kopfzeile; je Paar benachbarter Orte eine Zeile (Kartenindex
+`ort_a` < `ort_b`, aufsteigend):
+
+```
+ort_a;ort_b;grenze;fluss
+dessau;aken;15;0
+dessau;rodleben;43;1
+```
+
+- `grenze`: Länge der gemeinsamen Grenze im Ort-ID-Bild in Pixelkanten (waagrecht und senkrecht,
+  4er-Nachbarschaft; ≥ 1). Wasser, Ausland und Land ohne Ort trennen.
+- `fluss`: Rang des größten Flusses (kleinster Rang aus `geometrie/fluesse.geojson`, 1–6), den die
+  gerade Verbindung der Lagen beider Orte kreuzt; `0` = keiner. Berührungen zählen nicht. Der Kern
+  wertet `fluss` bis `fluss_rang` aus `common/militaer.chron` als Flussübergang.
+
+Orte ohne gemeinsame Grenze im Bild (Inseln, Orte an Meerengen) haben keine Zeile. Der Kern liest
+die Datei nur in Welten mit Militär (Abschnitt 3.30); dann fehlt sie fatal, und ein Paar zweimal,
+ein Ort als eigener Nachbar oder ein unbekannter Ort sind fatal.
+
+### 6.7 `karte/ueberfahrten.csv` (von Hand, seit M10)
+
+Fähren und Übergänge, die das Ort-ID-Bild nicht kennt; optional:
+
+```
+ort_a;ort_b;tage;name;quelle
+stralsund;samtens;1;Strelasund (Fähre Stralsund–Altefähr);"…"
+```
+
+- `tage`: Dauer der Überfahrt, 1–30. `name` und `quelle` dürfen in Anführungszeichen stehen (dann
+  auch mit `;`; `""` für ein Anführungszeichen).
+- Ein Paar, das schon in `nachbarn.csv` steht, ist fatal (mehrfach vorhanden).
+
+Ein Ort mit Daten (Besitzer zum Start), der danach keinen Nachbarn hat, ist eine Warnung („fehlt eine
+Überfahrt?“). 1848 bleiben nur Helgoland und Nordby ohne Daten unverbunden.
+
+### 6.8 Erzeugung und Prüfung
+
+`python3 tools/kartengenerator/kartengenerator.py` erzeugt `provinzen.png`, `fluesse.png`,
+`definition.csv` und (seit M10) `nachbarn.csv` deterministisch (gleiche Eingaben → pixelgleiche
+Bilder auf allen Plattformen; `--pruefen` vergleicht Pixel, nicht PNG-Bytes, und die CSV-Dateien
+zeilenweise). Abhängigkeiten: Python ab 3.10 und **numpy**;
 im Pixelpfad nur Grundrechenarten, Vergleiche und Rundung (keine Winkelfunktionen aus numpy oder
 `math`, deren Ergebnis plattformabhängig sein kann). Ziel: volle Karte in unter einer Minute auf
 vier Kernen.

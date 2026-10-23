@@ -1,5 +1,6 @@
 #include "uhrwerk/loader.hpp"
 
+#include "uhrwerk/economy.hpp"
 #include "uhrwerk/population.hpp"
 #include "uhrwerk/script.hpp"
 
@@ -523,6 +524,54 @@ struct DietRef {
     std::vector<Vote> council;
 };
 
+/// Militär aus common/militaer.chron (seit M10), aufgelöst nach den Staaten und Orten.
+struct MilitaryRef {
+    std::string file;
+    int line = 0;
+    struct Profile {
+        std::string tag; // leer: Standard für alle Staaten ohne eigenen Eintrag
+        Date since{1, 1, 1};
+        ArmyProfile profile;
+        int line = 0;
+    };
+    std::vector<Profile> profiles;
+    struct GarrisonDraft {
+        std::string id;
+        std::string name;
+        std::string tag;
+        std::string location;
+        Fixed share;
+        int line = 0;
+    };
+    std::vector<GarrisonDraft> garrisons; // nur die zum Startdatum bestehenden
+};
+
+/// Felder einer CSV-Zeile (Semikolon; Felder in "…" dürfen ; enthalten, "" steht für ein ").
+std::vector<std::string> split_csv(std::string_view line) {
+    std::vector<std::string> fields(1);
+    bool quoted = false;
+    for (std::size_t i = 0; i < line.size(); ++i) {
+        const char c = line[i];
+        if (quoted) {
+            if (c == '"' && i + 1 < line.size() && line[i + 1] == '"') {
+                fields.back() += '"';
+                ++i;
+            } else if (c == '"') {
+                quoted = false;
+            } else {
+                fields.back() += c;
+            }
+        } else if (c == '"' && fields.back().empty()) {
+            quoted = true;
+        } else if (c == ';') {
+            fields.emplace_back();
+        } else {
+            fields.back() += c;
+        }
+    }
+    return fields;
+}
+
 /// Ebene eines Parlaments (seit M8): Staatstag, leer für den Deutschen Bund; Tagungsort.
 struct ParliamentRef {
     std::string state_tag;
@@ -596,6 +645,9 @@ public:
         // keinen Deutschen Bund gibt.
         process_optional("common/diplomatie.chron", [&](const SourceFile& f) { load_diplomacy_rules(f); });
         process_optional("common/bundesversammlung.chron", [&](const SourceFile& f) { load_diet(f); });
+        // Militär (seit M10, docs/technik/militaer.md): Regeln, Heerwesen und Garnisonen; die Datei darf
+        // fehlen, das Militär gilt erst ab ihrem 'seit'.
+        process_optional("common/militaer.chron", [&](const SourceFile& f) { load_military(f); });
         for (const std::string& name : list_folder("history/beziehungen", Folder::Optional)) {
             process(name, [&](const SourceFile& f) { load_base_relations(f); });
         }
@@ -632,6 +684,7 @@ public:
         resolve_diet();
         check_players(scenarios, selected);
         check_capitals();
+        resolve_military(); // nach den Hauptstädten (Garnison eines Staates ohne Eintrag)
         check_districts();
         check_markets();
 
@@ -2682,6 +2735,314 @@ private:
         }
     }
 
+    /// Militär (seit M10, Abschnitte 3.1 und 3.2): militaer { seit fluss_rang }, heerwesen <kennung> {
+    /// staat seit bewaffnung geschuetze mobilmachung mobilmachung_tage } (ohne staat: Standard) und
+    /// garnison <kennung> { staat ort anteil name seit bis }.
+    void load_military(const SourceFile& file) {
+        MilitaryRef ref;
+        ref.file = file.name;
+        bool rules_found = false;
+        for (const ScriptNode& node : file.root.children) {
+            if (node.key == "militaer") {
+                if (!node.is_block || !node.value.empty()) {
+                    issues_.error(file.name, node.line, "ungültige Definition, erwartet: militaer { … }");
+                    continue;
+                }
+                if (rules_found) {
+                    issues_.error(file.name, node.line, "Block 'militaer' ist mehrfach vorhanden");
+                    continue;
+                }
+                rules_found = true;
+                ref.line = node.line;
+                Fields f(node, file.name, "militaer", issues_, {"seit", "fluss_rang"});
+                const std::optional<Date> since = f.date("seit");
+                world_.military_rules.river_rank =
+                    static_cast<std::int32_t>(f.integer("fluss_rang", 0, 6).value_or(3));
+                world_.military_rules.active = since.has_value() && *since <= start_;
+            } else if (node.key == "heerwesen") {
+                if (!node.is_block || node.value.empty()) {
+                    issues_.error(file.name, node.line,
+                                  "ungültige Definition, erwartet: heerwesen <kennung> { … }");
+                    continue;
+                }
+                check_id(file, node, "Kennung eines Heerwesens");
+                const std::string what = "heerwesen " + node.value;
+                Fields f(node, file.name, what, issues_,
+                         {"staat", "seit", "bewaffnung", "geschuetze", "mobilmachung", "mobilmachung_tage",
+                          "quelle"});
+                MilitaryRef::Profile profile;
+                profile.line = node.line;
+                if (f.has("staat")) {
+                    profile.tag = f.text("staat").value_or("");
+                    if (!is_state_tag(profile.tag)) {
+                        issues_.error(file.name, node.line,
+                                      "ungültiger Staatstag " + quote(profile.tag) + " in " + what);
+                    }
+                }
+                if (f.has("seit")) {
+                    profile.since = f.date("seit").value_or(Date{1, 1, 1});
+                }
+                ArmyProfile& a = profile.profile;
+                a.firepower = f.fixed("bewaffnung", between(fx(0), fx(10))).value_or(Fixed::one());
+                a.guns_per_mille = f.fixed("geschuetze", between(fx(0), fx(50))).value_or(Fixed{});
+                a.mobilization = f.fixed("mobilmachung", between(fx(1), fx(10))).value_or(Fixed::one());
+                a.mobilization_days =
+                    static_cast<std::int32_t>(f.integer("mobilmachung_tage", 1, 365).value_or(30));
+                if (profile.since <= start_) {
+                    ref.profiles.push_back(std::move(profile));
+                }
+            } else if (node.key == "garnison") {
+                if (!node.is_block || node.value.empty()) {
+                    issues_.error(file.name, node.line,
+                                  "ungültige Definition, erwartet: garnison <kennung> { … }");
+                    continue;
+                }
+                check_id(file, node, "Kennung einer Garnison");
+                const std::string what = "garnison " + node.value;
+                Fields f(node, file.name, what, issues_,
+                         {"staat", "ort", "anteil", "name", "seit", "bis", "quelle"});
+                MilitaryRef::GarrisonDraft g;
+                g.id = node.value;
+                g.line = node.line;
+                g.tag = f.text("staat").value_or("");
+                g.location = f.text("ort").value_or("");
+                g.share = f.fixed("anteil", above_up_to(fx(0), fx(1))).value_or(Fixed{});
+                g.name = f.has("name") ? f.text("name").value_or("") : "";
+                const Date since = f.has("seit") ? f.date("seit").value_or(Date{1, 1, 1}) : Date{1, 1, 1};
+                const Date until =
+                    f.has("bis") ? f.date("bis").value_or(Date{9999, 12, 31}) : Date{9999, 12, 31};
+                if (since <= start_ && start_ < until) {
+                    ref.garrisons.push_back(std::move(g));
+                }
+            } else {
+                warn_unknown_top_level(
+                    file, node, "militaer { … }, heerwesen <kennung> { … } oder garnison <kennung> { … }");
+            }
+        }
+        if (!rules_found) {
+            issues_.error(file.name, 0, "Block 'militaer' fehlt");
+            return;
+        }
+        military_ref_ = std::move(ref);
+    }
+
+    /// Militär nach drop_states_without_land (seit M10): Heerwesen je Staat (jüngster Eintrag bis zum
+    /// Startdatum, sonst der Standard), Garnisonen (ohne Eintrag eine in der Hauptstadt) und die
+    /// Nachbarschaft der Orte. Nur wenn das Militär zum Startdatum gilt.
+    void resolve_military() {
+        if (!military_ref_ || !world_.military_rules.active) {
+            world_.military_rules.active = false;
+            return;
+        }
+        const MilitaryRef& ref = *military_ref_;
+        // Heerwesen: zuerst der Standard, dann je Staat der jüngste Eintrag.
+        ArmyProfile standard;
+        for (const MilitaryRef::Profile& p : ref.profiles) {
+            if (p.tag.empty()) {
+                standard = p.profile;
+            }
+        }
+        std::vector<Date> profile_since(world_.states.size(), Date{0, 1, 1});
+        for (State& state : world_.states) {
+            state.army = standard;
+        }
+        for (const MilitaryRef::Profile& p : ref.profiles) {
+            if (p.tag.empty()) {
+                continue;
+            }
+            const Index state = lookup(states_, p.tag);
+            if (state == kNone) {
+                if (dropped_states_.count(p.tag) == 0) {
+                    issues_.error(ref.file, p.line, "unbekannter Staat " + quote(p.tag) + " in heerwesen");
+                }
+                continue;
+            }
+            if (profile_since[static_cast<std::size_t>(state)] <= p.since) {
+                profile_since[static_cast<std::size_t>(state)] = p.since;
+                world_.states[static_cast<std::size_t>(state)].army = p.profile;
+            }
+        }
+        // Garnisonen nach Staat, dann in Dateireihenfolge.
+        std::vector<std::vector<Garrison>> by_state(world_.states.size());
+        std::set<std::string, std::less<>> ids;
+        for (const MilitaryRef::GarrisonDraft& g : ref.garrisons) {
+            if (!ids.insert(g.id).second) {
+                issues_.error(ref.file, g.line, "garnison " + g.id + " ist mehrfach vorhanden");
+                continue;
+            }
+            const Index state = lookup(states_, g.tag);
+            if (state == kNone) {
+                if (dropped_states_.count(g.tag) == 0) {
+                    issues_.error(ref.file, g.line,
+                                  "unbekannter Staat " + quote(g.tag) + " in garnison " + g.id);
+                }
+                continue;
+            }
+            const Index location = lookup(locations_, g.location);
+            if (location == kNone) {
+                issues_.error(ref.file, g.line,
+                              "unbekannter Ort " + quote(g.location) + " in garnison " + g.id);
+                continue;
+            }
+            if (world_.locations[static_cast<std::size_t>(location)].owner != state) {
+                issues_.warning(ref.file, g.line,
+                                "garnison " + g.id + ": Ort " + g.location + " gehört zum Startdatum nicht " +
+                                    g.tag);
+            }
+            by_state[static_cast<std::size_t>(state)].push_back(Garrison{
+                g.id,
+                g.name.empty() ? "Garnison " + world_.locations[static_cast<std::size_t>(location)].name
+                               : g.name,
+                state, location, g.share});
+        }
+        for (std::size_t s = 0; s < world_.states.size(); ++s) {
+            const State& state = world_.states[s];
+            if (by_state[s].empty() && state.capital != kNone) {
+                const Location& capital = world_.locations[static_cast<std::size_t>(state.capital)];
+                by_state[s].push_back(Garrison{state.tag + "_hauptstadt", "Garnison " + capital.name,
+                                               static_cast<Index>(s), state.capital, Fixed::one()});
+            }
+            for (Garrison& g : by_state[s]) {
+                world_.garrisons.push_back(std::move(g));
+            }
+        }
+        load_neighbors();
+    }
+
+    /// Nachbarschaft (seit M10, Abschnitt 3.1): karte/nachbarn.csv (Kartengenerator) und, falls
+    /// vorhanden, karte/ueberfahrten.csv. Je Ort aufsteigend nach Nachbarort.
+    void load_neighbors() {
+        world_.neighbors.assign(world_.locations.size(), {});
+        const auto add = [&](const std::string& file, int line, Index a, Index b, Neighbor n) {
+            auto& list = world_.neighbors[static_cast<std::size_t>(a)];
+            if (std::any_of(list.begin(), list.end(), [&](const Neighbor& x) { return x.location == b; })) {
+                issues_.error(file, line,
+                              "Nachbarschaft " + world_.locations[static_cast<std::size_t>(a)].id + " – " +
+                                  world_.locations[static_cast<std::size_t>(b)].id +
+                                  " ist mehrfach vorhanden");
+                return;
+            }
+            const Location& la = world_.locations[static_cast<std::size_t>(a)];
+            const Location& lb = world_.locations[static_cast<std::size_t>(b)];
+            n.distance_km = distance_km(la.longitude, la.latitude, lb.longitude, lb.latitude);
+            n.location = b;
+            list.push_back(n);
+            n.location = a;
+            world_.neighbors[static_cast<std::size_t>(b)].push_back(n);
+        };
+        read_csv("karte/nachbarn.csv", "ort_a;ort_b;grenze;fluss", true,
+                 [&](const std::string& file, int line, const std::vector<std::string>& f) {
+                     const Index a = csv_location(file, line, f[0]);
+                     const Index b = csv_location(file, line, f[1]);
+                     const std::int64_t border = csv_integer(file, line, f[2], "grenze", 1, 1000000);
+                     const std::int64_t river = csv_integer(file, line, f[3], "fluss", 0, 6);
+                     if (a == kNone || b == kNone || border < 0 || river < 0) {
+                         return;
+                     }
+                     if (a == b) {
+                         issues_.error(file, line, "Ort " + f[0] + " ist sein eigener Nachbar");
+                         return;
+                     }
+                     Neighbor n;
+                     n.border = static_cast<std::int32_t>(border);
+                     n.river = static_cast<std::int32_t>(river);
+                     add(file, line, a, b, n);
+                 });
+        read_csv("karte/ueberfahrten.csv", "ort_a;ort_b;tage;name;quelle", false,
+                 [&](const std::string& file, int line, const std::vector<std::string>& f) {
+                     const Index a = csv_location(file, line, f[0]);
+                     const Index b = csv_location(file, line, f[1]);
+                     const std::int64_t days = csv_integer(file, line, f[2], "tage", 1, 30);
+                     if (a == kNone || b == kNone || days < 0) {
+                         return;
+                     }
+                     if (a == b) {
+                         issues_.error(file, line, "Überfahrt von " + f[0] + " zu sich selbst");
+                         return;
+                     }
+                     Neighbor n;
+                     n.ferry_days = static_cast<std::int32_t>(days);
+                     add(file, line, a, b, n);
+                 });
+        for (std::size_t l = 0; l < world_.neighbors.size(); ++l) {
+            auto& list = world_.neighbors[l];
+            std::sort(list.begin(), list.end(),
+                      [](const Neighbor& x, const Neighbor& y) { return x.location < y.location; });
+            const Location& loc = world_.locations[l];
+            if (list.empty() && loc.owner != kNone) {
+                issues_.warning("karte/nachbarn.csv", 0,
+                                "Ort " + loc.id + " hat Daten, aber keine Nachbarn (fehlt eine Überfahrt?)");
+            }
+        }
+    }
+
+    Index csv_location(const std::string& file, int line, const std::string& id) {
+        const Index location = lookup(locations_, id);
+        if (location == kNone) {
+            issues_.error(file, line, "unbekannter Ort " + quote(id));
+        }
+        return location;
+    }
+
+    /// Ganzzahl in einer CSV-Zeile; −1 bei einem Fehler.
+    std::int64_t csv_integer(const std::string& file, int line, const std::string& text,
+                             std::string_view column, std::int64_t lo, std::int64_t hi) {
+        const std::int64_t value = text.empty() ? -1 : std::atoll(text.c_str());
+        if (text.empty() || std::to_string(value) != text || value < lo || value > hi) {
+            issues_.error(file, line,
+                          "ungültiger Wert " + quote(text) + " in Spalte '" + std::string(column) +
+                              "' (erwartet " + std::to_string(lo) + "–" + std::to_string(hi) + ")");
+            return -1;
+        }
+        return value;
+    }
+
+    /// Liest eine CSV-Datei mit fester Kopfzeile; handler erhält Datei, Zeile und die Felder (so viele wie
+    /// der Kopf). Fehlt die Datei, ist das nur bei required ein Fehler.
+    template <typename Handler>
+    void read_csv(const std::string& relative, std::string_view header, bool required, Handler handler) {
+        const fs::path path = data_dir_ / utf8_to_path(relative);
+        std::error_code ec;
+        if (!fs::is_regular_file(path, ec)) {
+            if (required) {
+                issues_.error(relative, 0, "Datei fehlt (erzeugt von tools/kartengenerator)");
+            }
+            return;
+        }
+        std::ifstream in(path, std::ios::binary);
+        if (!in) {
+            issues_.error(relative, 0, "Datei kann nicht gelesen werden");
+            return;
+        }
+        const std::size_t columns = split_csv(header).size();
+        std::string text;
+        int line = 0;
+        while (std::getline(in, text)) {
+            ++line;
+            if (!text.empty() && text.back() == '\r') {
+                text.pop_back();
+            }
+            if (line == 1) {
+                if (text != header) {
+                    issues_.error(relative, 1,
+                                  "Kopfzeile " + quote(text) + ", erwartet " + quote(std::string(header)));
+                    return;
+                }
+                continue;
+            }
+            if (text.empty()) {
+                continue;
+            }
+            const std::vector<std::string> fields = split_csv(text);
+            if (fields.size() != columns) {
+                issues_.error(relative, line,
+                              std::to_string(fields.size()) + " Felder, erwartet " + std::to_string(columns));
+                continue;
+            }
+            handler(relative, line, fields);
+        }
+    }
+
     /// Ebene der Parlamente nach drop_states_without_land: Der Staat muss zum Startdatum bestehen.
     void resolve_parliaments() {
         for (std::size_t i = 0; i < world_.parliaments.size(); ++i) {
@@ -3652,6 +4013,7 @@ private:
     std::vector<BaseRelationRef> base_relation_refs_; // seit M9 (b1), aufgelöst nach den Staaten
     bool diplomacy_rules_found_ = false;              // common/diplomatie.chron mit diplomatie gelesen
     std::optional<DietRef> diet_ref_;                 // seit M9 (b2), nur wenn sie zum Startdatum besteht
+    std::optional<MilitaryRef> military_ref_;         // seit M10 (a1), common/militaer.chron
     // Inhalt ab einem Datum (seit M7): spätere Definitionen als „gut:kohle“ → 'seit'.
     struct LaterDefinition {
         Date date;

@@ -87,7 +87,9 @@ data/
     ├── geometrie/                 land, seen, fluesse (erzeugt von tools/geodaten), kernraum (von Hand)
     ├── provinzen.png              Ort-ID-Bild mit Flächenart     ┐ erzeugt von
     ├── fluesse.png                Flussebene (Graustufen)        │ tools/kartengenerator
-    └── definition.csv             Kartenindex, Beschriftungspunkt, Pixel, Fläche ┘
+    ├── definition.csv             Kartenindex, Beschriftungspunkt, Pixel, Fläche │
+    ├── nachbarn.csv               Nachbarschaft mit Grenze und Fluss (seit M10)  ┘
+    └── ueberfahrten.csv           Fähren zu Inseln und über Meerengen (seit M10, von Hand)
 ```
 
 In den Ortsdateien stehen die Orte mit Daten jeweils vorn; Reihenfolge und Inhalt dieser 60 Orte
@@ -365,10 +367,20 @@ Das Lesezeichen 1648 hat keine Zollunion; jeder Staat ist ein eigenes Zollgebiet
 |---|---|
 | `common/diplomatie.chron` | Regeln: Drift, Anteile am Zielwert (Zollunion, Bund, Konfession, Bündnis, Garantie), Gesandte, Annahme von Verträgen (Spielwerte) |
 | `tabellen/beziehungen.csv` → `history/beziehungen/` | 24 Grundbeziehungen 1848 (Dualismus Österreich–Preußen −40, Österreichs Anhänger im Süden und Hannover, preußische Dynastien, Dänemark −50, Luxemburg–Niederlande); Spielwerte |
-
 | `common/bundesversammlung.chron` | Bundesversammlung seit 1816: Präsidium Österreich, Plenum mit 68 Stimmen, Engerer Rat mit 11 Viril- und 6 Kuriatstimmen (Bundesakte 1815, auf den Staatenbestand 1848 übertragen) |
 
 Diplomatie gilt nur mit Deutschem Bund; 1648 bleiben die Regeln ohne Wirkung.
+
+**Militär** (seit M10, Schritt a1, [militaer.md](../docs/technik/militaer.md) Abschnitte 3.1 und 3.2):
+
+| Datei | Inhalt |
+|---|---|
+| `common/militaer.chron` | Militär ab 1848.03.01, Flussübergang bis Rang 3; Heerwesen (Standard, Preußen, Österreich); 18 Garnisonen in Preußen (Garde und acht Armeekorps), Österreich (sechs Generalkommanden) und Bayern (drei), die übrigen Staaten in ihrer Hauptstadt. Spielwerte nach Wissensstand ohne Quellenzugang |
+| `karte/nachbarn.csv` | 13.069 Paare benachbarter Orte mit Grenzlänge und gekreuztem Fluss (erzeugt von `tools/kartengenerator`) |
+| `karte/ueberfahrten.csv` | 13 Fähren und Übergänge: Rügen, Hiddensee, Alsen, Fehmarn, Sylt, Föhr, Pellworm, Ærø und die Ostfriesischen Inseln; Dauer als Spielwert |
+
+1848 stehen 53 Garnisonen mit zusammen 382.528 Soldaten. Das Lesezeichen 1648 hat kein Militär (vor dem
+`seit`); seine Prüfsumme bleibt.
 
 ## Bekannte Lücken und Vereinfachungen
 

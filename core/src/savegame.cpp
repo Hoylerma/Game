@@ -4,6 +4,7 @@
 
 #include "state_access.hpp"
 #include "uhrwerk/diplomacy.hpp"
+#include "uhrwerk/military.hpp"
 
 #include <algorithm>
 #include <charconv>
@@ -12,6 +13,7 @@
 #include <fstream>
 #include <iterator>
 #include <map>
+#include <set>
 #include <system_error>
 #include <utility>
 #include <zstd.h>
@@ -31,6 +33,8 @@ constexpr std::uint32_t kFlagZstd = 1;
 constexpr int kZstdLevel = 3;
 /// Obergrenze der unkomprimierten Nutzdaten (Schutz vor beschädigten Längenangaben).
 constexpr std::uint64_t kMaxPayload = std::uint64_t{1} << 31;
+/// Stand des Militärs im Zustand (seit M10, Inhaltsbereich militaer): 1 = Schritt a1 (Garnisonen).
+constexpr std::uint64_t kMilitaryContentVersion = 1;
 
 bool fail(std::string* error, std::string message) {
     if (error != nullptr) {
@@ -441,10 +445,13 @@ public:
         return d;
     }
     /// Fingerabdruck des Inhalts; Format 1 (bis M7) kennt nur die ersten 13 Bereiche (ohne politik),
-    /// Format 2 (M8) die ersten 14 (ohne diplomatie), die übrigen bleiben 0. So zeigt auch ein alter
-    /// Spielstand seine Metadaten an.
+    /// Format 2 (M8) die ersten 14 (ohne diplomatie), Format 3 (M9) die ersten 15 (ohne militaer), die
+    /// übrigen bleiben 0. So zeigt auch ein alter Spielstand seine Metadaten an.
     ContentFingerprint content(std::uint32_t version) {
-        const std::size_t count = version == 1 ? 13 : version == 2 ? 14 : kContentParts.size();
+        const std::size_t count = version == 1   ? 13
+                                  : version == 2 ? 14
+                                  : version == 3 ? 15
+                                                 : kContentParts.size();
         ContentFingerprint fp;
         fp.total = hex("inhalt");
         for (std::size_t i = 0; i < count; ++i) {
@@ -852,6 +859,26 @@ std::string validate_state(const Simulation& sim) {
             }
         }
     }
+    // Militär (seit M10): Heere mit gültigem Staat, Ort und Garnison, eindeutigen Nummern unter der nächsten.
+    if (w.military_rules.active) {
+        if (w.next_army_id < 1) {
+            return "Nummer des nächsten Heeres ungültig";
+        }
+        std::set<std::int64_t> ids;
+        for (const Army& a : w.armies) {
+            if (a.id < 1 || a.id >= w.next_army_id || !ids.insert(a.id).second) {
+                return "Heer mit ungültiger oder doppelter Nummer";
+            }
+            if (!in(a.state, S) || !in(a.location, w.locations.size()) ||
+                !none_or_in(a.garrison, w.garrisons.size()) || a.soldiers < Fixed::zero() ||
+                a.guns < Fixed::zero() || a.morale < Fixed::zero() || a.morale > Fixed::one() ||
+                static_cast<int>(a.status) > static_cast<int>(ArmyStatus::Garrison)) {
+                return "Heer mit ungültigem Verweis oder Wert";
+            }
+        }
+    } else if (!w.armies.empty()) {
+        return "Heere ohne Militärdaten";
+    }
     // Wahlen (seit M8): Wahlkreise des eigenen Parlaments, Stimmen je Strömung.
     const std::size_t C = w.currents.size();
     if (!w.parliaments.empty() && (w.campaign.size() != w.electoral_districts.size() * C ||
@@ -1163,6 +1190,43 @@ ContentFingerprint content_fingerprint(const World& w) {
             }
         }
         p[14] = h.value();
+    }
+    // Militär (seit M10): Regeln, Heerwesen, Garnisonen und Nachbarschaft, nur wo das Militär gilt, damit
+    // Spielstände von 1648 gültig bleiben. Heere sind Zustand. kMilitaryContentVersion steigt mit jedem
+    // Schritt, der den Zustand des Militärs erweitert: Ein Spielstand eines früheren Schritts passt dann
+    // nicht mehr zum Inhalt (speicherstaende.md, Abschnitt 6).
+    {
+        Fnv h;
+        if (w.military_rules.active) {
+            h.u64(kMilitaryContentVersion);
+            h.i64(w.military_rules.river_rank);
+            for (const State& s : w.states) {
+                h.fixed(s.army.firepower);
+                h.fixed(s.army.guns_per_mille);
+                h.fixed(s.army.mobilization);
+                h.i64(s.army.mobilization_days);
+            }
+            h.u64(w.garrisons.size());
+            for (const Garrison& g : w.garrisons) {
+                h.text(g.id);
+                h.text(g.name); // Name des Heeres
+                h.i64(g.state);
+                h.i64(g.location);
+                h.fixed(g.share);
+            }
+            h.u64(w.neighbors.size());
+            for (const std::vector<Neighbor>& list : w.neighbors) {
+                h.u64(list.size());
+                for (const Neighbor& n : list) {
+                    h.i64(n.location);
+                    h.fixed(n.distance_km);
+                    h.i64(n.border);
+                    h.i64(n.river);
+                    h.i64(n.ferry_days);
+                }
+            }
+        }
+        p[15] = h.value();
     }
     fp.total = MetaReader::content_fingerprint_total(fp.parts);
     return fp;

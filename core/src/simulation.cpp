@@ -4,6 +4,7 @@
 #include "uhrwerk/customs.hpp"
 #include "uhrwerk/diplomacy.hpp"
 #include "uhrwerk/economy.hpp"
+#include "uhrwerk/military.hpp"
 #include "uhrwerk/politics.hpp"
 
 #include <algorithm>
@@ -160,6 +161,7 @@ void Simulation::prepare_population_state() {
     ensure_economy_state(world_, topology_);
     ensure_politics_state(world_);  // Wahlkampf (seit M8), nur mit Parlamenten
     ensure_diplomacy_state(world_); // Beziehungen (seit M9), nur mit Deutschem Bund
+    ensure_military_state(world_);  // Friedensheere (seit M10), nur mit Militärdaten
 
     const bool fits = world_.snapshots.size() == count &&
                       world_.snapshot_targets.size() == count * professions &&
@@ -272,6 +274,11 @@ void Simulation::step_day() {
         if (!world_.relations.empty()) {
             update_relations(world_);
             run_diet(world_);
+        }
+        // Friedensheere folgen der Friedensstärke (seit M10, militaer.md Abschnitt 3.2), nur mit
+        // Militärdaten.
+        if (military_active(world_)) {
+            update_garrisons(world_);
         }
     }
 

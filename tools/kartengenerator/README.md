@@ -1,7 +1,7 @@
 # Kartengenerator
 
-Erzeugt aus den Spieldaten die drei Kartendateien, mit denen die Godot-Seite die Großkarte
-darstellt und jedem Pixel einen Ort zuordnet. Format und Kodierung sind in
+Erzeugt aus den Spieldaten die Kartendateien, mit denen die Godot-Seite die Großkarte darstellt
+und jedem Pixel einen Ort zuordnet, und (seit M10) die Nachbarschaft der Orte für die Heere. Format und Kodierung sind in
 [docs/technik/chronik-skript.md](../../docs/technik/chronik-skript.md), Abschnitt 6 (Fassung M3),
 festgelegt.
 
@@ -10,6 +10,7 @@ festgelegt.
 | `provinzen.png` | RGB: Ort-ID (`R + G·256` = Kartenindex + 1) und Flächenart im Blaukanal |
 | `fluesse.png` | Graustufen: Deckung durch Flüsse (0 … 255), kantengeglättet |
 | `definition.csv` | Kartenindex, Ort, Name, Beschriftungspunkt, Pixelzahl, Fläche in km² |
+| `nachbarn.csv` | seit M10: benachbarte Orte mit Grenzlänge und dem größten gekreuzten Fluss (Abschnitt 6.6) |
 
 Abhängigkeiten: **Python 3.10 oder neuer und numpy** (`python3 -m pip install numpy`). Die Ausgabe
 ist deterministisch und plattformunabhängig (siehe „Determinismus“); geprüft mit Python 3.10.20 /
@@ -28,7 +29,7 @@ numpy 2.2.6 und Python 3.13.16 / numpy 2.5.3 (byte-gleiche Dateien).
 ## Aufruf
 
 ```bash
-# Karte neu erzeugen (schreibt data/karte/provinzen.png, fluesse.png, definition.csv)
+# Karte neu erzeugen (schreibt data/karte/provinzen.png, fluesse.png, definition.csv, nachbarn.csv)
 python3 tools/kartengenerator/kartengenerator.py
 
 # CI: sind die eingecheckten Dateien aktuell? (schreibt nichts)
@@ -60,7 +61,7 @@ Fehler und Warnungen stehen auf der Standardfehlerausgabe in der Form
 `datei.chron:Zeile: Nachricht` (Pfade relativ zum Datenordner). Dateien, deren Pixel bzw. Inhalt
 sich nicht ändern, werden nicht neu geschrieben (auch wenn eine andere zlib-Version andere Bytes
 erzeugen würde). `--pruefen` vergleicht bei den PNG-Dateien die **Pixel** und bei
-`definition.csv` den Inhalt zeilenweise (Zeilenenden egal).
+`definition.csv` und `nachbarn.csv` den Inhalt zeilenweise (Zeilenenden egal).
 
 ## Eingaben
 
@@ -105,6 +106,22 @@ kartenindex;ort;name;x;y;pixel;flaeche_km2
 ```
 
 Ein Ort ohne Pixel (Warnung) hat `x = y = -1`, `pixel = 0`, `flaeche_km2 = 0`.
+
+**`nachbarn.csv`** (seit M10) – UTF-8, Semikolon, LF-Zeilenenden, mit Kopfzeile; je Paar
+benachbarter Orte (Kartenindex a < b, aufsteigend) eine Zeile:
+
+```
+ort_a;ort_b;grenze;fluss
+hafen;heide;48;2
+```
+
+`grenze` ist die gemeinsame Grenze in Pixelkanten (wie `ergebnis.nachbarn()`), `fluss` der Rang des
+größten Flusses, den die gerade Verbindung der Lagen beider Orte kreuzt (`0` = keiner). Der
+Kreuzungstest rechnet mit Orientierungen in Länge und Breite (Berührungen zählen nicht); die
+Flussabschnitte liegen dafür in Zellen von 0,25 Grad (`FLUSS_ZELLE_GRAD`). Die Verbindungslinie statt
+der Grenzpixel: Ein Fluss, der an der Grenze entlangläuft, wird nur gekreuzt, wenn er wirklich
+zwischen den Orten liegt. Fähren zu Inseln stehen von Hand in `data/karte/ueberfahrten.csv`
+(Abschnitt 6.7); der Generator liest sie nicht.
 
 Alle PNG enthalten nur `IHDR`, `IDAT` und `IEND` (keine Zeitstempel, kein Farbprofil);
 Zeilenfilter je Zeile *Sub* oder *Up*, zlib-Stufe 6.
@@ -210,6 +227,7 @@ for f in ergebnis.flaechen:          # je Ort: kartenindex, ort, name, x, y, pix
 ergebnis.warnungen                   # Liste deutscher Meldungen (wie auf der Kommandozeile)
 ergebnis.ohne_ort                    # Kernraum-Land ohne Ort: Teilflaeche(pixel, flaeche_km2, x, y, laenge, breite)
 ergebnis.nachbarn()                  # {(a, b): Grenzlänge in Pixelkanten} für benachbarte Orte a < b
+ergebnis.flussuebergaenge()          # {(a, b): Rang des größten gekreuzten Flusses, 0 = keiner} (seit M10)
 ergebnis.ort_bei(13.4, 52.5)         # Kartenindex an dieser Stelle oder None
 ergebnis.werte, ergebnis.art         # numpy-Felder: Kartenindex + 1 je Pixel, Flächenart je Pixel
 ergebnis.provinzen()                 # provinzen.png als (H, W, 3)-Feld
@@ -263,7 +281,7 @@ Fehler), Vorschau, Kommandozeile mit `--pruefen` und der Determinismus (zweimal 
 Python-Version: Python sucht `python3.10` … `python3.14` mit numpy im Suchpfad oder nimmt
 `KARTENGENERATOR_PYTHON_VERGLEICH`).
 
-`testdaten/karte/provinzen.png`, `fluesse.png` und `definition.csv` sind die erwarteten Ausgaben
+`testdaten/karte/provinzen.png`, `fluesse.png`, `definition.csv` und `nachbarn.csv` sind die erwarteten Ausgaben
 für die Testdaten (Festland mit Haff, Insel und Inselchen, See mit Seeinsel, Ausland mit Grenzsee,
 drei Flüsse, acht Orte, einer ohne Daten). Nach einer **gewollten** Änderung am Verfahren neu
 erzeugen:

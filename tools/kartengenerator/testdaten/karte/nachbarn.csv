@@ -1,0 +1,13 @@
+ort_a;ort_b;grenze;fluss
+hafen;heide;48;2
+hafen;moor;90;0
+hafen;seedorf;39;2
+heide;seedorf;11;0
+heide;mark;62;0
+moor;burg;23;0
+moor;seedorf;37;2
+burg;aue;25;2
+burg;seedorf;82;2
+aue;seedorf;86;0
+aue;mark;68;5
+seedorf;mark;20;5

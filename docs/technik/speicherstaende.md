@@ -35,7 +35,9 @@ beantragten Wechsel, je Markt Gebiete, Anteile und fremder Einfuhranteil), **nur
 Zollunionen** ([diplomatie.md](diplomatie.md), Abschnitt 5); seit M9 (Schritt b1) die Diplomatie (die
 Beziehung je Staatenpaar, die Gesandten und Verträge mit Datum, je Staat die Kosten der Gesandten im
 Haushalt; seit Schritt b2 die Präsidialmacht, der offene Antrag, die Abstimmungen, die laufenden
-diplomatischen Spiele mit Seiten und Stufe und ihre Ergebnisse), **nur in Welten mit Deutschem Bund**; seit M8 die
+diplomatischen Spiele mit Seiten und Stufe und ihre Ergebnisse), **nur in Welten mit Deutschem Bund**;
+seit M10 die Heere (Nummer, Staat, Ort, Garnison, Name, Soldaten, Geschütze, Moral, Lage) und die
+nächste Heeresnummer, **nur in Welten mit Militär** ([militaer.md](militaer.md)); seit M8 die
 abgehaltenen Wahlen (je Wahlkreis Berechtigte, Wähler, Stimmen je Strömung, Sieger, Stichwahl, Boykott,
 Meldereihenfolge; je Abgeordnetem Wahlkreis, Strömung, Position, Fraktion), der Wahlkampf je
 Wahlkreis und Strömung (Mobilisierung, Flugblätter, Vereine) sowie Parteikasse und Spenden je
@@ -79,7 +81,7 @@ mitgespeichert. Dazu kommt die **Startprüfsumme** (Prüfsumme des Startzustands
 Ein Spielstand enthält nur den Zustand. Beim Laden lädt der Kern zuerst den Inhalt des Szenarios
 aus dem Datenordner (wie beim Spielstart) und überschreibt dann den Zustand. Damit das passt, trägt
 der Spielstand einen **Inhaltsfingerabdruck**: FNV-1a-64 je Bereich über alles am Inhalt, was die
-Simulation beeinflusst, und ein Gesamtwert über die 15 Bereiche (seit M9; M8 14, vorher 13):
+Simulation beeinflusst, und ein Gesamtwert über die 16 Bereiche (seit M10; M9 15, M8 14, vorher 13):
 
 | Bereich | Inhalt |
 |---|---|
@@ -93,6 +95,7 @@ Simulation beeinflusst, und ein Gesamtwert über die 15 Bereiche (seit M9; M8 14
 | `orte` | Kennung, Name, Gelände, Kreis, Lage, Fläche, Stadt, Markt, Vorkommen, Hafen, Verwaltungseinheit und Bundesgebiet (seit M7); die Zahl der Orte |
 | `politik` (seit M8) | Strömungen (Kennung, Name, Position), Interessengruppen (Mitglieder, Neigung), Parlamente mit Wahl, Fraktionen, Sitz und Name, Verfassung und Wahlordnung der Staaten, Wahlkreise mit Name, Staat, Sitzen und Orten, Wahlregeln und Regionen ([politik.md](politik.md)) |
 | `diplomatie` (seit M9) | Zollunionen mit Kennung, Name, Leitmacht, Tarif und ausgeschlossenen Staaten; die Mitgliedschaft der Staaten ist seit Schritt a2 Zustand. Seit Schritt b1 in Welten mit Deutschem Bund auch die Regeln der Diplomatie und die Grundbeziehungen, seit b2 die Bundesversammlung (Präsidium, Plenum, Engerer Rat) ([diplomatie.md](diplomatie.md)) |
+| `militaer` (seit M10) | Nur in Welten mit Militär (ab dem `seit` in `common/militaer.chron`): Stand des Bereichs (`kMilitaryContentVersion`), Flussrang, das Heerwesen je Staat, die Garnisonen mit Kennung, Staat, Ort, Anteil und Name und die Nachbarschaft der Orte mit Grenze, Fluss und Überfahrt ([militaer.md](militaer.md)); sonst bleibt der Wert der eines leeren Bereichs |
 
 **Nicht** dazu gehören volle Staatsnamen, Farben, Quellen und Beschreibungen: Eine korrigierte
 Quelle macht alte Spielstände nicht unbrauchbar. Der **Kurzname der Staaten und der Name der Orte
@@ -210,9 +213,9 @@ vor M8.
 
 ## 6. Versionen und Migration
 
-- Die **Formatversion** steht im Kopf (`kSaveFormatVersion = 3` seit M9, 2 in M8, vorher 1).
-  **Neuere** Versionen lehnt der Kern ab („Spielstand aus einer neueren Spielversion (Format 4,
-  unterstützt bis 3)“).
+- Die **Formatversion** steht im Kopf (`kSaveFormatVersion = 4` seit M10, 3 in M9, 2 in M8, vorher
+  1). **Neuere** Versionen lehnt der Kern ab („Spielstand aus einer neueren Spielversion (Format 5,
+  unterstützt bis 4)“).
 - **Format 2 (M8):** die Wahlen und der Wahlkampf im Zustandsverzeichnis, Befehle mit Ziel und
   Aktion (56 statt 40 Byte im Protokoll) und der Inhaltsbereich `politik`. Ein
   Spielstand im Format 1 zeigt seine Metadaten noch an (13 Inhaltsbereiche, der Gesamtwert über
@@ -232,6 +235,12 @@ vor M8.
   `Bundesantrag`, `Forderung`, `Manoever` mit der Art im Wert); ein Spielstand 1848 aus Schritt b1 lädt
   ebenso nicht mehr. Schritte b3 und b4 ändern den Zustand nicht: Ob ein Zollantrag verbindlich ist
   (Zolleinigung, verlorene Krise), folgt aus den Abstimmungen und Spielergebnissen im Zustand.
+- **Format 4 (M10):** der Inhaltsbereich `militaer` und in Welten mit Militär die Heere im Zustand
+  ([militaer.md](militaer.md)). Ein Spielstand im Format 3 zeigt seine Metadaten mit 15 Bereichen an,
+  lädt aber nicht. Weil sich der Bereich in jedem Schritt von M10 erweitert, zählt er einen eigenen
+  Stand (`kMilitaryContentVersion`, 1 seit Schritt a1) mit: Ein Spielstand 1848 aus einem früheren
+  Schritt lädt dann nicht mehr („Inhalt geändert: militaer“). Ohne Militär (1648) zählen weder der
+  Stand noch die Heere, der Prüfwert der Formatwache bleibt.
 - Jede Änderung am Zustand (neues Feld, neue Reihenfolge) erhöht die Formatversion. Der Test
   „Spielstand: Formatwache“ verhindert, dass das vergessen wird: Er speichert die Test-Fixture nach
   einem Jahr und vergleicht den Prüfwert der Nutzdaten mit einem festgehaltenen Wert. Ändert er

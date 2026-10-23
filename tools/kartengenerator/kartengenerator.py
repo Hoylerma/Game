@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Kartengenerator für EINIGKEIT (Fassung M3).
+"""Kartengenerator für EINIGKEIT (Fassung M3, Nachbarn seit M10).
 
 Erzeugt aus data/karte/karte.chron, der Geometrie in data/karte/geometrie/*.geojson und den
 Orten in data/history/orte/*.chron die Dateien provinzen.png (Ort-ID-Bild mit Flächenart),
-fluesse.png (Flussebene) und definition.csv (Kartenindex, Beschriftungspunkt, Fläche).
+fluesse.png (Flussebene), definition.csv (Kartenindex, Beschriftungspunkt, Fläche) und
+nachbarn.csv (benachbarte Orte mit Grenzlänge und gekreuztem Fluss, seit M10).
 Spezifikation: docs/technik/chronik-skript.md, Abschnitt 6.
 
 Aufruf (siehe README.md im selben Ordner):
@@ -70,6 +71,10 @@ WENIGE_PIXEL_ANTEIL = 0.1
 OHNE_ORT_MELDUNGEN = 10
 
 CSV_KOPF = "kartenindex;ort;name;x;y;pixel;flaeche_km2"
+#: Kopf der nachbarn.csv (seit M10, Abschnitt 6.6).
+NACHBARN_KOPF = "ort_a;ort_b;grenze;fluss"
+#: Kantenlänge der Zellen (Grad), in die die Flussabschnitte für die Kreuzungssuche einsortiert werden.
+FLUSS_ZELLE_GRAD = 0.25
 GEOMETRIE_DATEIEN = ("land", "seen", "fluesse", "kernraum")
 #: Felder, die einen Ort zum „Ort mit Daten“ machen (Abschnitt 3.6).
 SIMULATIONSFELDER = ("besitzer", "bevoelkerung", "konfession", "verwuestung")
@@ -565,6 +570,7 @@ class Grundlage:
     raster: kr.Raster
     fluesse: np.ndarray | None  # uint8 (H, W) oder None, wenn nicht berechnet
     warnungen: list[str] = field(default_factory=list)
+    flusslinien: list[tuple[int, np.ndarray]] = field(default_factory=list)  # (rang, Länge/Breite), seit M10
 
     @property
     def art(self) -> np.ndarray:
@@ -611,6 +617,7 @@ class Ergebnis:
     warnungen: list[str]
     bereinigung: kr.Bereinigung
     zeiten: dict[str, float] = field(default_factory=dict)
+    flusslinien: list[tuple[int, np.ndarray]] = field(default_factory=list)  # aus der Grundlage, seit M10
 
     def provinzen(self) -> np.ndarray:
         """provinzen.png als (H, W, 3)-Feld: R + G·256 = Kartenindex + 1, B = Flächenart (Abschnitt 6.3)."""
@@ -636,6 +643,16 @@ class Ergebnis:
         wert = int(self.werte[py, px])
         return wert - 1 if wert > 0 else None
 
+    def flussuebergaenge(self) -> dict[tuple[int, int], int]:
+        """Je Paar benachbarter Orte der größte Fluss, den die Verbindungslinie ihrer Lagen kreuzt (seit M10).
+
+        Wert: der kleinste Rang der gekreuzten Flusslinien (1 = Rhein, Elbe, Donau …), 0 ohne Fluss.
+        """
+        return flussuebergaenge(self.orte, list(self.nachbarn()), self.flusslinien)
+
+    def nachbarn_csv(self) -> bytes:
+        return nachbarn_csv(self.orte, self.nachbarn(), self.flussuebergaenge())
+
     def nachbarn(self) -> dict[tuple[int, int], int]:
         """Benachbarte Orte: (Kartenindex a, Kartenindex b) mit a < b → Länge der gemeinsamen Grenze in Pixelkanten.
 
@@ -659,7 +676,7 @@ def grundlage_aus(karte: Karte, geometrie: Geometrie, *, fluesse: bool = True) -
     raster = kr.Raster.erzeuge(karte, geometrie.land, geometrie.seen, geometrie.kernraum)
     raster.verschiebe()
     bild = kr.zeichne_fluesse(geometrie.fluesse, karte) if fluesse else None
-    return Grundlage(karte, raster, bild)
+    return Grundlage(karte, raster, bild, flusslinien=list(geometrie.fluesse))
 
 
 def lade_grundlage(daten: Path | None = None, *, fluesse: bool = True) -> Grundlage:
@@ -808,6 +825,7 @@ def erzeuge(grundlage: Grundlage, orte: Sequence[Ort]) -> Ergebnis:
         warnungen=warnungen,
         bereinigung=bereinigung,
         zeiten=zeiten,
+        flusslinien=grundlage.flusslinien,
     )
 
 
@@ -832,19 +850,86 @@ def definition_csv(flaechen: Sequence[Flaeche]) -> bytes:
     return ("\n".join(zeilen) + "\n").encode("utf-8")
 
 
+# ─── nachbarn.csv ───────────────────────────────────────────────────────────
+
+
+def flussuebergaenge(
+    orte: Sequence[Ort], paare: Sequence[tuple[int, int]], flusslinien: Sequence[tuple[int, np.ndarray]]
+) -> dict[tuple[int, int], int]:
+    """Kleinster Rang der Flusslinien, die die Strecke zwischen den Lagen zweier Orte echt kreuzen (0: keine).
+
+    Kreuzungstest mit Orientierungen in Länge und Breite (eine affine Verzerrung ändert nichts daran);
+    Berührungen zählen nicht. Die Flussabschnitte liegen in Zellen von FLUSS_ZELLE_GRAD.
+    """
+    starts, enden, raenge = [], [], []
+    for rang, linie in flusslinien:
+        if len(linie) >= 2:
+            starts.append(linie[:-1])
+            enden.append(linie[1:])
+            raenge.append(np.full(len(linie) - 1, rang, dtype=np.int64))
+    ergebnis = {paar: 0 for paar in paare}
+    if not starts:
+        return ergebnis
+    a = np.concatenate(starts)
+    b = np.concatenate(enden)
+    rang = np.concatenate(raenge)
+    zelle = FLUSS_ZELLE_GRAD
+    lo = np.floor(np.minimum(a, b) / zelle).astype(np.int64)
+    hi = np.floor(np.maximum(a, b) / zelle).astype(np.int64)
+    zellen: dict[tuple[int, int], list[int]] = {}
+    for i in range(len(a)):
+        for cx in range(int(lo[i, 0]), int(hi[i, 0]) + 1):
+            for cy in range(int(lo[i, 1]), int(hi[i, 1]) + 1):
+                zellen.setdefault((cx, cy), []).append(i)
+    felder = {k: np.array(v, dtype=np.int64) for k, v in zellen.items()}
+
+    def orientierung(p: np.ndarray, q: np.ndarray, r: np.ndarray) -> np.ndarray:
+        return (q[..., 0] - p[..., 0]) * (r[..., 1] - p[..., 1]) - (q[..., 1] - p[..., 1]) * (r[..., 0] - p[..., 0])
+
+    for paar in paare:
+        p = np.array([orte[paar[0]].laenge, orte[paar[0]].breite])
+        q = np.array([orte[paar[1]].laenge, orte[paar[1]].breite])
+        x0, y0 = np.floor(np.minimum(p, q) / zelle).astype(np.int64)
+        x1, y1 = np.floor(np.maximum(p, q) / zelle).astype(np.int64)
+        teile = [felder[(cx, cy)] for cx in range(x0, x1 + 1) for cy in range(y0, y1 + 1) if (cx, cy) in felder]
+        if not teile:
+            continue
+        kandidaten = np.unique(np.concatenate(teile))
+        ka, kb = a[kandidaten], b[kandidaten]
+        d1 = orientierung(ka, kb, p)
+        d2 = orientierung(ka, kb, q)
+        d3 = orientierung(p, q, ka)
+        d4 = orientierung(p, q, kb)
+        kreuzt = (d1 * d2 < 0) & (d3 * d4 < 0)
+        if kreuzt.any():
+            ergebnis[paar] = int(rang[kandidaten][kreuzt].min())
+    return ergebnis
+
+
+def nachbarn_csv(orte: Sequence[Ort], grenzen: dict[tuple[int, int], int], fluesse: dict[tuple[int, int], int]) -> bytes:
+    """Abschnitt 6.6 (seit M10): je Paar benachbarter Orte (Kartenindex a < b, aufsteigend) die
+    Kennungen, die Länge der gemeinsamen Grenze in Pixelkanten und den Rang des größten Flusses, den
+    die Verbindungslinie der Lagen kreuzt (0: keiner). UTF-8, Kopfzeile, LF-Zeilenenden."""
+    zeilen = [NACHBARN_KOPF]
+    for paar, grenze in sorted(grenzen.items()):
+        zeilen.append(f"{orte[paar[0]].kennung};{orte[paar[1]].kennung};{grenze};{fluesse.get(paar, 0)}")
+    return ("\n".join(zeilen) + "\n").encode("utf-8")
+
+
 # ─── Dateien schreiben und prüfen ───────────────────────────────────────────
 
-AUSGABEN = ("provinzen.png", "fluesse.png", "definition.csv")
+AUSGABEN = ("provinzen.png", "fluesse.png", "definition.csv", "nachbarn.csv")
 
 
 def ausgaben(ergebnis: Ergebnis) -> dict[str, np.ndarray | bytes]:
-    """Inhalte der drei Ausgabedateien (Bilder als Felder, CSV als Bytes)."""
+    """Inhalte der Ausgabedateien (Bilder als Felder, CSV als Bytes)."""
     if ergebnis.fluesse is None:
         raise ValueError("Ergebnis ohne Flussebene (lade_grundlage(..., fluesse=True) verwenden)")
     return {
         "provinzen.png": ergebnis.provinzen(),
         "fluesse.png": ergebnis.fluesse,
         "definition.csv": ergebnis.definition_csv(),
+        "nachbarn.csv": ergebnis.nachbarn_csv(),
     }
 
 
@@ -871,7 +956,7 @@ def pruefe_ausgabe(ausgabe: Path, ergebnis: Ergebnis) -> list[str]:
     """Vergleicht die Dateien im Ausgabeordner mit dem Ergebnis; Liste der Abweichungen.
 
     Bilder: Pixel (nicht Bytes – andere zlib-Versionen dürfen anders komprimieren);
-    definition.csv: Inhalt zeilenweise (Zeilenenden egal).
+    definition.csv und nachbarn.csv: Inhalt zeilenweise (Zeilenenden egal).
     """
     abweichungen = []
     for name, erwartet in ausgaben(ergebnis).items():
@@ -903,7 +988,7 @@ def pruefe_ausgabe(ausgabe: Path, ergebnis: Ergebnis) -> list[str]:
 
 
 def schreibe_ausgabe(ausgabe: Path, ergebnis: Ergebnis) -> list[tuple[Path, bool, int]]:
-    """Schreibt die drei Dateien; unveränderte (gleiche Pixel bzw. gleicher Inhalt) bleiben unberührt.
+    """Schreibt die Ausgabedateien; unveränderte (gleiche Pixel bzw. gleicher Inhalt) bleiben unberührt.
 
     Ergebnis: (Pfad, geschrieben?, Bytes).
     """
@@ -971,7 +1056,7 @@ def _ausschnitt(text: str) -> tuple[float, float, float, float]:
 def _argumente() -> argparse.ArgumentParser:
     parser = _Argumente(
         prog="kartengenerator.py",
-        description="Erzeugt provinzen.png, fluesse.png und definition.csv aus karte.chron, der Geometrie "
+        description="Erzeugt provinzen.png, fluesse.png, definition.csv und nachbarn.csv aus karte.chron, der Geometrie "
         "und den Orten (docs/technik/chronik-skript.md, Abschnitt 6).",
         epilog="Exitcodes: 0 = Erfolg bzw. aktuell, 1 = --pruefen: nicht aktuell, 2 = Fehler.",
         formatter_class=_Hilfeformat,

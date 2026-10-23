@@ -1,6 +1,7 @@
 # Militär und Einigungskriege (Meilenstein M10)
 
-> **Status: Entwurf** – Entscheidungen offen (Abschnitt 10). Grundlage sind
+> **Status: verbindlich** – Entscheidungen 1–14 wie empfohlen freigegeben (Abschnitt 10); Umsetzung
+> läuft, Stand in Abschnitt 12. Grundlage sind
 > [15 Militär und Kriegsführung](../15_militaer_und_kriegsfuehrung.md) (Abschnitte 1, 3–5, 7–9, 12
 > und 13), [14 Diplomatie](../14_diplomatie.md) (Abschnitte 5 und 7), [04 Zeitrahmen](../04_zeitrahmen_epochen_startdaten.md)
 > (Startdaten) und der Meilensteinplan
@@ -101,14 +102,20 @@ Lesezeichen `ungeprueft` (Entscheidung 14).
 
 ### 3.1 Nachbarschaft der Orte
 
-Der Kartengenerator schreibt neben `definition.csv` eine Tabelle **`karte/nachbarn.csv`**: je Paar
-von Orten mit gemeinsamer Grenze im Ort-ID-Bild eine Zeile mit der Grenzlänge in Pixeln und einer
-Markierung, ob die Verbindungslinie der Ortsmittelpunkte einen Fluss der Flussebene kreuzt
-(Flussübergang). Meerengen, die das Bild nicht verbindet (Alsen, Fehmarn), stehen als Ergänzung in
-den Daten (`karte/ueberfahrten.csv`, wenige Zeilen). Der Kern lädt beides; Orte ohne Nachbarn sind
-ein Fehler. Die Prüfsumme der Karte (`definition.csv`) gilt auch für die Nachbarn.
+Der Kartengenerator schreibt neben `definition.csv` eine Tabelle **`karte/nachbarn.csv`**
+([chronik-skript.md](chronik-skript.md), Abschnitt 6.6): je Paar von Orten mit gemeinsamer Grenze im
+Ort-ID-Bild eine Zeile mit der Grenzlänge in Pixelkanten und dem Rang des größten Flusses, den die
+gerade Verbindung der Lagen beider Orte kreuzt (0 = keiner). Ein **Flussübergang** ist ein gekreuzter
+Fluss bis Rang `fluss_rang` (3: Rang 1 Rhein, Elbe, Donau, Oder, Weichsel; Rang 2 Weser, Mosel,
+Memel, Po; Rang 3 Main, Inn, Moldau, Maas, Ems, Warthe, Etsch; Spree, Saale und Neckar haben Rang 4). Meerengen und Inseln, die das Bild nicht verbindet (Rügen, Alsen,
+Fehmarn, die Nordfriesischen und Ostfriesischen Inseln, Ærø), stehen als Ergänzung in
+`karte/ueberfahrten.csv` (Abschnitt 6.7) mit der Dauer in Tagen. Der Kern lädt beides in Welten mit
+Militär; ein Ort mit Daten ohne Nachbarn ist eine Warnung. Die Nachbarschaft gehört zum
+Inhaltsfingerabdruck (`militaer`).
 
-Abschätzung: rund 4.500 Orte mit im Mittel sechs Nachbarn, also gut 13.000 Kanten.
+Daten 1848: 13.069 Kanten aus dem Bild, davon 1.261 mit Flussübergang bis Rang 3, und 13
+Überfahrten; alle Orte mit Daten hängen an einem Netz (nur Helgoland und Nordby, beide ohne Daten,
+bleiben allein).
 
 ### 3.2 Heere
 
@@ -131,6 +138,14 @@ Preußens seit 1841: ×1,5 gegen Vorderlader; Chassepot Frankreichs ab 1866), G�
 **Friedensheer** (Entscheidung 4): Die Friedensstärke ergibt sich wie bisher aus `heer`
 × Bevölkerung. Sie steht als Garnison in den Korpsstandorten aus den Daten (sonst in der
 Hauptstadt) und kostet wie bisher. Feldarmeen entstehen erst mit der Mobilmachung.
+
+Umsetzung (Schritt a1): Regeln, Heerwesen und Garnisonen stehen in `common/militaer.chron`
+([chronik-skript.md](chronik-skript.md), Abschnitt 3.30). Das Heerwesen hat in a1 Bewaffnung,
+Geschütze je 1.000 Soldaten, Mobilmachungsfaktor und -tage; Artillerie und Doktrin folgen, wenn die
+Schlacht sie braucht (a3). Jede Garnison hat einen Anteil an der Friedensstärke ihres Staates; beim
+Start entsteht je Garnison ein Heer (Lage „Garnison“, Moral 1), dessen Soldaten und Geschütze am
+Monatsersten der Friedensstärke folgen. Name, Befehlshaber, Ziel und Weg kommen mit der Bewegung
+(a2).
 
 ### 3.3 Mobilmachung
 
@@ -372,7 +387,7 @@ Weitere Tests:
 - **Godot:** Rauchtest der neuen Brückenmethoden, Klicktest, Screenshots der Lesezeichen mit
   Heeren und des Kartenmodus „Krieg“.
 
-## 10. Entscheidungen
+## 10. Entscheidungen (wie empfohlen freigegeben)
 
 1. **Teilung M10a/M10b.** Empfehlung: **ja** (Abschnitt 1). Alternative: Lesezeichen und Daten
    zuerst, Krieg danach (dann lässt sich der Krieg erst spät prüfen).
@@ -440,4 +455,6 @@ Weitere Tests:
 
 ## 12. Umsetzungsstand
 
-Noch nicht begonnen; der Entwurf wartet auf die Freigabe der Entscheidungen in Abschnitt 10.
+| Schritt | Stand |
+|---|---|
+| a1 Nachbarschaft und Heere | Kartengenerator: `nachbarn.csv` mit Grenzlänge und gekreuztem Fluss (Kreuzung der Verbindungslinie mit den Flusslinien statt einer Pixelzählung an der Grenze, die bei Flüssen in der Ortsmitte versagt), Testdaten und Tests. `karte/ueberfahrten.csv` mit 13 Fähren und Übergängen (Rügen, Hiddensee, Alsen, Fehmarn, Sylt, Föhr, Pellworm, Ærø, Wangerooge, Langeoog, Norderney, Juist, Borkum). `common/militaer.chron` (chronik-skript.md 3.30): Militär ab 1848.03.01, Flussrang 3, Heerwesen Standard, Preußen und Österreich, 18 Garnisonen (Preußen: Garde und acht Armeekorps, Österreich sechs Generalkommanden, Bayern drei), die übrigen Staaten in ihrer Hauptstadt: 53 Garnisonen, 382.528 Soldaten. Kern: `military.hpp` (Friedensstärke, Nachbarschaft, Flussübergang, Heere beim Start und am Monatsersten), Lader mit Prüfungen, Zustand `heere`, Inhaltsbereich `militaer` mit eigenem Stand, Spielstand Format 4, `uhrwerk-cli info` mit Nachbarschaft und Garnisonen. Tests: Lader, Heere, Spielstand und Wiederholung, Fingerabdruck, Ladefehler; Format 3 zeigt Metadaten, lädt nicht. 1648 bitgleich (`5db13a66d63e6079`). |
