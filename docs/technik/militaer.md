@@ -339,6 +339,27 @@ sich am nächsten Monatsersten neu. Ein Staat ohne Orte **geht unter**: Heere we
 Verträge enden, Kasse und Schulden gehen an den Erwerber, seine Stimmen in der Bundesversammlung
 entfallen. Wahlkreise bleiben bis zur nächsten Wahl beim alten Zuschnitt.
 
+Umsetzung (Schritt a4): Kriegsziele kommen mit der Kriegserklärung (Wert = Art + 8 × Parameter: 1
+Gebiet mit der Verwaltungseinheit, 2 Annexion mit dem Staat, 3 Führung im Bund, 4 Zollunion, 5
+Entschädigung mit 1–24 Monaten) oder mit dem neuen Befehl `Kriegsziel` der Hauptpartei. Eine Krise,
+die zum Krieg wird, hat das Ziel ihrer Forderung (Führung, Zollunion; beim Bündnis eine Entschädigung
+von drei Monatseinnahmen), die Bundesexekution sechs Monatseinnahmen. Kriegspunkte und Müdigkeit
+folgen jeweils aus dem Zustand (Bilanz je Krieg: zugefügte Verluste mit Gefangenen, vernichtete Heere,
+Kriegsstärke beim Beginn, letzte Bewegung). Ein Gebiet wechselt mit allen Orten der Gegenseite in der
+Einheit (auch untergeordneten); die Orte behalten Verwaltungseinheit und Bundesgebiet. Befehl
+`Friedensangebot` (Bedingungen 0 ohne Gewinner, 1 eigene Ziele, 2 Kapitulation); die andere
+Hauptpartei nimmt Ziele an, wenn die Punkte des Anbietenden oder ihre eigene Müdigkeit die Kosten
+decken, einen weißen Frieden, wenn sie selbst unter 25 Punkten steht oder ihre Müdigkeit 50 erreicht,
+eine Kapitulation immer. Ohne Angebot fällt am Monatsersten der Frieden nach Regel: Deckt eine Seite
+die Kosten ihrer Ziele, siegt sie; ist eine Seite erschöpft (Müdigkeit 100), siegt die andere mit
+ihren Zielen (ohne Ziele weißer Frieden); nach 12 Monaten ohne Schlacht und Besetzung endet der Krieg
+ohne Gewinner. Mit dem Frieden kehren die Gefangenen heim, die Besetzungen enden, Heere in nun fremdem
+Gebiet kehren in ihre Garnison oder Hauptstadt zurück, und wer in keinem Krieg mehr steht, rüstet ab.
+Verliert ein Staat seine Hauptstadt, wird sein bevölkerungsreichster Ort Hauptstadt. Führung im Bund:
+Der Verlierer verlässt den Bund, das Präsidium geht an den Sieger; hatte der Verlierer das Präsidium,
+löst sich der Bund auf (alle Staaten verlassen ihn). Nach einem Besitzwechsel baut die Simulation
+Rechentage, Märkte und Wanderungsziele neu auf.
+
 ## 5. Generalstab nach Regel (M10a)
 
 Ohne Spieler führt ein **Generalstab** die Heere einer Seite nach Regeln; der Spieler kann ihm
@@ -354,6 +375,17 @@ einzelne Heere übergeben (Entscheidung 3). Täglich je Seite:
 4. **Besetzung:** freie Heere rücken auf das Kriegsziel und die Hauptstadt des Gegners vor und
    belagern Festungen auf dem Weg.
 5. **Frieden** nach Abschnitt 4.5.
+
+Umsetzung (Schritt a4): Befehl `Generalstab` (Heer übergeben oder zurücknehmen); ein eigener
+`Marsch` nimmt das Heer dem Generalstab ab. Ob die Heere zu Beginn beim Generalstab stehen, sagt
+`generalstab` in `common/militaer.chron` (1848: ja). Täglich entscheidet er für jedes seiner Heere, das
+seit einem Tag ruht und dessen Staat im Krieg steht, in dieser Reihenfolge: Rückzug in die Hauptstadt
+vor doppelter Übermacht im Umkreis von 60 km; Angriff auf das nächste gegnerische Heer in 300 km, wenn
+die eigenen Heere im Umkreis es samt seinen Nachbarn um das 1,2-Fache übertreffen; sonst Vormarsch auf
+den nächsten Ort mit Vorrang Befreiung eigener Orte, Gebiet der Kriegsziele, Hauptstadt der
+gegnerischen Hauptpartei, übrige Orte der Gegenseite (eine verteidigende Seite ohne Ziele befreit nur),
+wenn dort keine Übermacht steht. Mobilmachung kommt mit dem Krieg (a3), Festungen werden nur belagert,
+wenn ein Heer dort ruht, Frieden nach Abschnitt 4.5.
 
 Die Regeln sind deterministisch; Unterschiede zwischen Läufen entstehen aus dem Zufall der
 Schlachten. Das genügt der Abnahme („plausibel, nicht festgelegt“); bessere Entscheidungen bringt
@@ -535,3 +567,4 @@ Weitere Tests:
 | a1 Nachbarschaft und Heere | Kartengenerator: `nachbarn.csv` mit Grenzlänge und gekreuztem Fluss (Kreuzung der Verbindungslinie mit den Flusslinien statt einer Pixelzählung an der Grenze, die bei Flüssen in der Ortsmitte versagt), Testdaten und Tests. `karte/ueberfahrten.csv` mit 13 Fähren und Übergängen (Rügen, Hiddensee, Alsen, Fehmarn, Sylt, Föhr, Pellworm, Ærø, Wangerooge, Langeoog, Norderney, Juist, Borkum). `common/militaer.chron` (chronik-skript.md 3.30): Militär ab 1848.03.01, Flussrang 3, Heerwesen Standard, Preußen und Österreich, 18 Garnisonen (Preußen: Garde und acht Armeekorps, Österreich sechs Generalkommanden, Bayern drei), die übrigen Staaten in ihrer Hauptstadt: 53 Garnisonen, 382.528 Soldaten. Kern: `military.hpp` (Friedensstärke, Nachbarschaft, Flussübergang, Heere beim Start und am Monatsersten), Lader mit Prüfungen, Zustand `heere`, Inhaltsbereich `militaer` mit eigenem Stand, Spielstand Format 4, `uhrwerk-cli info` mit Nachbarschaft und Garnisonen. Tests: Lader, Heere, Spielstand und Wiederholung, Fingerabdruck, Ladefehler; Format 3 zeigt Metadaten, lädt nicht. 1648 bitgleich (`5db13a66d63e6079`). |
 | a2 Bewegung | Befehle `Marsch` (Heer, Zielort; ohne Ziel Halt) und `Mobilmachung` (1 mobil, 0 Abrüstung). Mobilmachung je Staat mit Phasen, Wachstum der Feldarmeen bis zur Kriegsstärke, Abrüstung in 30 Tagen zurück in die Garnisonen; Heereskosten nach Soldaten ÷ Friedensstärke. Wege mit Dijkstra über Marsch und Bahn (Gelände, Flussübergang, Überfahrt, Einladen nach Kapazität, Fahrt, Ausladen), Belegung je Bahnstrecke mit Warten, Bewegung mit Übertrag der Resttage. Versorgung (eigenes und verbündetes Gebiet, sonst Bahnhof in drei Tagesmärschen) und Zermürbung mit Winter, Moral. Krise Stufe 3 → Mobilmachung beider Hauptparteien, Ende der Krise → Abrüstung (statt Faktor 1,5 der Diplomatie). Regeln in `common/militaer.chron` (chronik-skript.md 3.30), Inhaltsbereich `militaer` Stand 2, Zustand: Weg und Resttage je Heer, Mobilmachung je Staat, Belegung je Strecke. Testbefehle des Speichertests mit Marsch und Mobilmachung. Brücke: `get_diplomacy` liefert `army_cost_factor`, das Diplomatiefenster zeigt den echten Faktor statt fest 1,5 (Heere auf der Karte und Befehle in der Oberfläche folgen mit b3). Tests: Marschtage, Zugang, Wege zu Fuß und mit der Bahn, Bündnis, Mobilmachung mit Kosten, Bahnfahrt mit Warten, Halt, Abrüstung, Versorgung und Winter, Krise, Spielstand während Mobilmachung, Marsch und Bahnfahrt, Wiederholung, Ladefehler. 1648 bitgleich, Wirtschaft 1848 ohne Befehle zeichengleich. |
 | a3 Krieg und Schlacht | Befehl `Kriegserklaerung` mit Bündnisfall, Beziehung −20 bei allen Bundesstaaten, Ende der Verträge zwischen den Seiten, Mobilmachung aller Kriegführenden; Krise → Krieg (Ausgang „Krieg“), Bundesintervention → Bundesexekution. Kontrolle je Ort, Zugang und Bahn nach Kontrolle. Tägliche Schlacht mit Zufallsstrom `krieg` (Frontbreite, Gelände, Festung, Flussübergang, Geschütze, Moral, Bruch), Rückzug mit Gefangenen, Kapitulation, Verwüstung, Chronik. Besetzung nach einem vollen Tag, Befreiung, Kontribution; Festungen (35 im Jahr 1848) mit Belagerung. Verwundete kehren nach 60 Tagen zurück, Gefangene je Staat, Gefallene und Abgänge mindern am Monatsersten die Bevölkerung. Regeln in `common/militaer.chron`, Inhaltsbereich `militaer` Stand 3, Zustand mit Kriegen, Kontrolle, Schlachten, Belagerungen, Verwundeten, Gefangenen, Gefallenen und Zufallsstrom; Testbefehle mit Kriegserklärungen. Tests: Bündnisfall, Erklärung, Schlacht mit Rückzug, Besetzung und Verlusten, Kontribution, Belagerung, Krise → Krieg, Bundesexekution, Spielstand während Schlacht und Belagerung mit Wiederholung und Threads, Ladefehler. 1648 bitgleich, 1848 ohne Befehle zeichengleich. |
+| a4 Frieden und Generalstab | Kriegsziele (Gebiet, Annexion, Führung im Bund, Zollunion, Entschädigung) mit der Erklärung oder dem Befehl `Kriegsziel`, Kosten in Kriegspunkten; Kriegspunkte aus Besetzung, Hauptstadt, Schlachtbilanz und vernichteten Heeren; Kriegsmüdigkeit aus Verlusten, Besetzung und Dauer. Befehl `Friedensangebot` mit Annahme nach Regel, Frieden am Monatsersten nach Regel (Ziele gedeckt, Erschöpfung, 12 Monate Stillstand). Wirkung: Besitzwechsel, Untergang von Staaten (Heere, Verträge, Gesandte, Kasse und Schulden an den Erwerber, Abschied aus dem Bund), Austritt aus dem Bund oder seine Auflösung, Beitritt zur Zollunion, Zahlung; Gefangene heim, Besetzung aufgehoben, Heimkehr, Abrüstung, neue Hauptstadt, Neuaufbau der abgeleiteten Daten. Generalstab nach Regel (Befehl `Generalstab`, eigener Marsch übernimmt das Heer). Regeln in `common/militaer.chron` (1848 mit Generalstab), Inhaltsbereich `militaer` Stand 4, Zustand: Ziele und Bilanz je Krieg, Generalstab je Heer, Austritt aus dem Bund; Testbefehle mit Zielen, Angeboten und Generalstab. Probelauf 1848: Preußen annektiert Sachsen nach zwei Monaten; Preußen gegen Österreich um die Führung endet nach 13 Monaten erschöpft ohne Gewinner (Kalibrierung in b2). Tests: Ziele und Kosten, Punkte und Angebote mit Annexion und Untergang, Gebiet, Entschädigung, Stillstand, Auflösung des Bundes, Generalstab mit Lauf ohne Spieler, Threads, Spielstand und Wiederholung. 1648 bitgleich, 1848 ohne Befehle zeichengleich. |

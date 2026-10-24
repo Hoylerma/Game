@@ -261,6 +261,7 @@ template <typename Sim, typename V> void StateAccess::visit(Sim& sim, V& v) {
             v.field("tage", a.days_left);
             v.field("vorher", a.previous);     // seit a3
             v.field("tage_hier", a.days_here); // seit a3
+            v.field("generalstab", a.staff);   // seit a4
         });
         list(v, "mobilmachung", w.mobilizations, Extent::Content, [&](auto& m) { // seit a2, je Staat
             v.field("phase", m.phase);
@@ -276,6 +277,18 @@ template <typename Sim, typename V> void StateAccess::visit(Sim& sim, V& v) {
             values(v, "verteidiger", k.defenders);
             v.field("beginn", k.started);
             v.field("anlass", k.cause);
+            list(v, "ziele", k.goals, Extent::State, [&](auto& g) { // seit a4
+                v.field("art", g.kind);
+                v.field("angreifer", g.attacker);
+                v.field("wert", g.param);
+            });
+            v.field("staerke_angreifer", k.attacker_strength);
+            v.field("staerke_verteidiger", k.defender_strength);
+            v.field("verluste_zugefuegt_angreifer", k.attacker_inflicted);
+            v.field("verluste_zugefuegt_verteidiger", k.defender_inflicted);
+            v.field("vernichtet_angreifer", k.attacker_destroyed);
+            v.field("vernichtet_verteidiger", k.defender_destroyed);
+            v.field("letzte_bewegung", k.last_change);
         });
         list(v, "kontrolle", w.control, Extent::Content, [&](auto& c) { v.field("", c); });
         list(v, "schlachten", w.battles, Extent::State, [&](auto& b) {
@@ -303,6 +316,7 @@ template <typename Sim, typename V> void StateAccess::visit(Sim& sim, V& v) {
             v.field("soldaten", p.soldiers);
         });
         list(v, "gefallene", w.war_dead, Extent::Content, [&](auto& d) { v.field("", d); });
+        list(v, "bund_verlassen", w.left_federation, Extent::Content, [&](auto& b) { v.field("", b); }); // a4
     }
 
     // Politik (seit M8): nur in Welten mit Parlamenten, damit die Prüfsumme der übrigen (1648) bleibt.

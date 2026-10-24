@@ -127,6 +127,10 @@ bool diplomacy_active(const World& world) {
 }
 
 bool federal_state(const World& world, Index state) {
+    // Wer den Bund nach einem Krieg verlassen hat (seit M10, militaer.md 4.5), gehört nicht mehr dazu.
+    if (in_range(world.left_federation, state) && world.left_federation[at(state)] != 0) {
+        return false;
+    }
     return in_range(world.states, state) &&
            std::any_of(world.locations.begin(), world.locations.end(),
                        [&](const Location& loc) { return loc.federal && loc.owner == state; });

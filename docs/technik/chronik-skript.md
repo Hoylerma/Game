@@ -562,8 +562,9 @@ fehlen. Im Kern: `World::admin_units` (`AdminUnit { id, name, kind, parent, sour
 
 Verwaltung, Bundesgebiet und Zollverein sind in M7 **Inhalt** wie die Kreise: Sie stehen im
 Fingerabdruck der Spieldaten (Bereiche `kreise`, `orte`, seit M9 `diplomatie`), nicht in der Prüfsumme
-und nicht im Spielstand. Sobald Gebietswechsel im Spiel die Zuordnung ändern, wandern `Location::admin` und
-`Location::federal` in den Zustand.
+und nicht im Spielstand. Gebietswechsel im Krieg (seit M10, Schritt a4) ändern nur den Besitzer (Zustand
+wie bisher): Ein abgetretener Ort behält seine Verwaltungseinheit und sein Bundesgebiet; wer den Bund
+verlässt, steht im Zustand (`bund_verlassen`).
 
 ### 3.17 `history/eisenbahnen/*.chron` (seit M7)
 
@@ -959,6 +960,17 @@ militaer {
     belagerung_tage        = 30     # über 0 bis 365: je Stufe bei gleicher Stärke
     belagerung_mindesttage = 10     # 1–365
     festung_besatzung      = 5000   # 0–1.000.000: je Stufe
+    # seit Schritt a4, ebenso optional (militaer.md, Abschnitte 4.5 und 5):
+    ziel_gebiet            = 100    # 0–100: Kosten × Anteil an der Bevölkerung des Gegners
+    ziel_gebiet_mindestens = 10     # 0–100
+    ziel_annexion          = 80     # 0–100; ziel_fuehrung 50, ziel_zollunion 30 ebenso
+    ziel_entschaedigung    = 10     # 0–100: je Monatseinnahme
+    punkte_besetzung       = 60     # 0–100; punkte_hauptstadt 20, punkte_schlachten 30, punkte_heer 10
+    muedigkeit_verluste    = 100    # 0–1.000; muedigkeit_besetzung 50 (0–1.000), muedigkeit_monat 2 (0–100)
+    stillstand_monate      = 12     # Ganzzahl 1–120
+    generalstab            = ja     # ja/nein (nein): die Heere stehen beim Start unter dem Generalstab
+    generalstab_angriff    = 1.2    # 1–10; generalstab_rueckzug 2 (1–10)
+    generalstab_umkreis_km = 60     # 1–1.000; generalstab_reichweite_km 300 (1–5.000)
 }
 
 heerwesen standard {          # ohne 'staat': für alle Staaten ohne eigenen Eintrag

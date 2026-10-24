@@ -34,7 +34,7 @@ constexpr int kZstdLevel = 3;
 /// Obergrenze der unkomprimierten Nutzdaten (Schutz vor beschädigten Längenangaben).
 constexpr std::uint64_t kMaxPayload = std::uint64_t{1} << 31;
 /// Stand des Militärs im Zustand (seit M10, Inhaltsbereich militaer): 1 = Schritt a1 (Garnisonen).
-constexpr std::uint64_t kMilitaryContentVersion = 3;
+constexpr std::uint64_t kMilitaryContentVersion = 4;
 
 bool fail(std::string* error, std::string message) {
     if (error != nullptr) {
@@ -918,6 +918,23 @@ std::string validate_state(const Simulation& sim) {
                     }
                 }
             }
+            // seit a4: Ziele und Bilanz
+            for (const WarGoal& g : war.goals) {
+                if (static_cast<int>(g.kind) < 1 ||
+                    static_cast<int>(g.kind) > static_cast<int>(WarGoalKind::Indemnity) || g.param < kNone) {
+                    return "Kriegsziel ungültig";
+                }
+            }
+            if (war.attacker_strength < Fixed::zero() || war.defender_strength < Fixed::zero() ||
+                war.attacker_inflicted < Fixed::zero() || war.defender_inflicted < Fixed::zero() ||
+                war.attacker_destroyed < 0 || war.defender_destroyed < 0 || !is_valid(war.last_change)) {
+                return "Bilanz eines Krieges ungültig";
+            }
+        }
+        for (const std::uint8_t b : w.left_federation) {
+            if (b > 1) {
+                return "Austritt aus dem Bund ungültig";
+            }
         }
         if (w.next_war_id < 1) {
             return "Nummer des nächsten Krieges ungültig";
@@ -1309,6 +1326,16 @@ ContentFingerprint content_fingerprint(const World& w) {
                 h.fixed(f);
             }
             h.i64(r.recovery_days);
+            // Kriegsziele, Kriegspunkte, Frieden und Generalstab (seit a4).
+            for (const Fixed f :
+                 {r.goal_territory, r.goal_territory_min, r.goal_annexation, r.goal_leadership,
+                  r.goal_customs, r.goal_indemnity, r.points_occupation, r.points_capital, r.points_battles,
+                  r.points_army, r.weariness_losses, r.weariness_occupation, r.weariness_month,
+                  r.staff_attack, r.staff_retreat, r.staff_radius_km, r.staff_reach_km}) {
+                h.fixed(f);
+            }
+            h.i64(r.stalemate_months);
+            h.u64(r.staff ? 1 : 0);
             h.u64(w.fortresses.size());
             for (const Fortress& f : w.fortresses) {
                 h.text(f.id);

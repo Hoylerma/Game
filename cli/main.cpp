@@ -804,7 +804,8 @@ Date date_after(const Date& start, std::int64_t days) {
 /// Deutschem Bund (seit M9, Schritt b1) auch Gesandte und Verträge, mit Bundesversammlung (Schritt b2)
 /// Anträge, Forderungen und Manöver. Mit Militär (seit M10, Schritt a2) Mobilmachung und Abrüstung und
 /// Märsche der Heere (Nummer nach den Garnisonen, meist mit dem eigenen Staat, Ziel zur Hälfte ein Ort
-/// dieses Staates), seit Schritt a3 auch Kriegserklärungen. Ohne Parlamente, Zollunionen, Bund und Militär
+/// dieses Staates), seit Schritt a3 auch Kriegserklärungen, seit a4 mit Kriegszielen, dazu
+/// Friedensangebote, Kriegsziele und der Generalstab. Ohne Parlamente, Zollunionen, Bund und Militär
 /// bleibt die Folge der Zufallszahlen wie bisher.
 std::vector<uhrwerk::LoggedCommand> make_test_commands(const World& w, std::uint64_t seed, std::int64_t count,
                                                        std::int64_t first_day, std::int64_t end_day) {
@@ -878,11 +879,21 @@ std::vector<uhrwerk::LoggedCommand> make_test_commands(const World& w, std::uint
         if (military && rng.below(4) == 0) {
             const std::uint32_t kind = rng.below(12);
             if (kind == 0) {
-                // Kriegserklärung (seit a3): Staat und Gegner −1 bis hinter den letzten.
+                // Kriegserklärung (seit a3): Staat und Gegner −1 bis hinter den letzten; seit a4 mit einem
+                // Kriegsziel 0 bis 47 (Art 0 bis 7, Parameter 0 bis 5; auch ungültige).
                 c.command.type = uhrwerk::CommandType::DeclareWar;
                 c.command.state = static_cast<Index>(rng.below(states + 2)) - 1;
                 c.command.target = static_cast<Index>(rng.below(states + 2)) - 1;
-                c.command.value = Fixed::zero();
+                c.command.value = Fixed::from_int(rng.below(48));
+            } else if (kind == 1) {
+                // Seit a4: Friedensangebot (Krieg 0 bis 4, Bedingungen 0 bis 3), Kriegsziel oder Generalstab.
+                const std::uint32_t which = rng.below(3);
+                c.command.type = which == 0   ? uhrwerk::CommandType::PeaceOffer
+                                 : which == 1 ? uhrwerk::CommandType::WarGoal
+                                              : uhrwerk::CommandType::Staff;
+                c.command.state = static_cast<Index>(rng.below(states + 2)) - 1;
+                c.command.target = static_cast<Index>(rng.below(which == 2 ? 3 : 5));
+                c.command.value = Fixed::from_int(rng.below(which == 0 ? 4 : which == 1 ? 48 : 60));
             } else if (kind <= 4) {
                 c.command.type = uhrwerk::CommandType::Mobilization;
                 c.command.state = static_cast<Index>(rng.below(states + 2)) - 1;

@@ -82,7 +82,11 @@ bool has_diet(const World& world) {
 }
 
 std::int32_t plenum_votes(const World& world, Index state) {
-    return in_range(world.diet.plenum, state) ? world.diet.plenum[at(state)] : 0;
+    // Seit M10 (militaer.md 4.5): Wer den Bund verlassen hat oder unterging, stimmt nicht mehr.
+    if (!in_range(world.diet.plenum, state) || !federal_state(world, state)) {
+        return 0;
+    }
+    return world.diet.plenum[at(state)];
 }
 
 Index motion_opponent(const World& world, MotionKind kind, Index applicant, Index target) {
@@ -273,7 +277,9 @@ void run_diet(World& world) {
             std::vector<Index> ignored;
             std::vector<Index> defenders;
             war_sides(world, motion.applicant, motion.target, ignored, defenders);
-            start_war(world, std::move(attackers), std::move(defenders), WarCause::Execution);
+            // Kriegsziel (seit a4): eine Entschädigung von sechs Monatseinnahmen.
+            start_war(world, std::move(attackers), std::move(defenders), WarCause::Execution,
+                      {WarGoal{WarGoalKind::Indemnity, true, 6}});
         }
         break;
     }

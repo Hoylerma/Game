@@ -128,16 +128,62 @@ void war_sides(const World& world, Index attacker, Index target, std::vector<Ind
 bool can_declare_war(const World& world, Index state, Index target);
 
 /// Befehl Kriegserklärung: Bündnisfall, Beziehung bei allen Bundesstaaten, Verträge zwischen den Seiten
-/// enden, alle Kriegführenden machen mobil. false, wenn ungültig.
-bool declare_war(World& world, Index state, Index target);
+/// enden, alle Kriegführenden machen mobil; goal ist ein Kriegsziel wie bei add_war_goal (0: keines,
+/// ein ungültiges entfällt). false, wenn ungültig.
+bool declare_war(World& world, Index state, Index target, std::int64_t goal = 0);
 
 /// Krieg mit festen Seiten (Krise, Bundesexekution); Hauptparteien zuerst. Verträge zwischen den Seiten
 /// enden, alle machen mobil, die Chronik meldet den Krieg. false, wenn die Seiten ungültig sind.
-bool start_war(World& world, std::vector<Index> attackers, std::vector<Index> defenders, WarCause cause);
+bool start_war(World& world, std::vector<Index> attackers, std::vector<Index> defenders, WarCause cause,
+               const std::vector<WarGoal>& goals = {});
+
+// ─── Kriegsziele, Kriegspunkte, Frieden (seit Schritt a4, Abschnitt 4.5) ────
+
+/// Wert eines Kriegsziels im Befehl: Art + 8 × Parameter (Verwaltungseinheit, Staat, Monate).
+std::int64_t encode_war_goal(WarGoalKind kind, Index param);
+/// Kriegsziel aus dem Wert; nullopt bei 0 oder unbekannter Art.
+std::optional<WarGoal> decode_war_goal(std::int64_t code, bool attacker);
+
+War* find_war(World& world, std::int64_t id);
+const War* find_war(const World& world, std::int64_t id);
+
+/// Gilt das Ziel in diesem Krieg (Einheit mit Orten der Gegenseite, Staat der Gegenseite, Bund, Union,
+/// 1–24 Monate) und ist es noch nicht gestellt?
+bool valid_war_goal(const World& world, const War& war, const WarGoal& goal);
+
+/// Kosten eines Ziels und aller Ziele einer Seite in Kriegspunkten.
+Fixed war_goal_cost(const World& world, const War& war, const WarGoal& goal);
+Fixed war_goals_cost(const World& world, const War& war, bool attacker);
+
+/// Kriegspunkte einer Seite (0–100): Besetzung, Hauptstadt, Schlachten, vernichtete Heere.
+Fixed war_score(const World& world, const War& war, bool attacker);
+
+/// Kriegsmüdigkeit einer Seite (0–100): erlittene Verluste, eigene besetzte Bevölkerung, Dauer.
+Fixed war_weariness(const World& world, const War& war, bool attacker);
+
+/// Befehl Kriegsziel: Die Hauptpartei einer Seite stellt ein weiteres Ziel. false, wenn ungültig.
+bool add_war_goal(World& world, Index state, std::int64_t war, std::int64_t goal);
+
+/// Bedingungen eines Friedensangebots.
+enum class PeaceTerms : std::uint8_t {
+    White = 0,        // ohne Gewinner
+    OwnGoals = 1,     // die eigenen Kriegsziele
+    Capitulation = 2, // die Ziele der Gegenseite
+};
+
+/// Befehl Friedensangebot einer Hauptpartei; die andere entscheidet nach Regel: Ziele, wenn die
+/// Kriegspunkte des Anbietenden oder ihre Müdigkeit die Kosten decken; weißer Frieden, wenn sie selbst
+/// unter 25 Punkten steht oder ihre Müdigkeit 50 erreicht; die Kapitulation immer. true bei Frieden.
+bool offer_peace(World& world, Index state, std::int64_t war, PeaceTerms terms);
+
+/// Befehl Generalstab: Heer übergeben (on) oder zurücknehmen. false, wenn ungültig.
+bool set_staff(World& world, Index state, std::int64_t army, bool on);
 
 /// Täglich nach den diplomatischen Spielen: Mobilmachung und Abrüstung, Bewegung, Schlachten (Zufall aus
 /// dem Strom krieg), Besetzung und Belagerung, Versorgung und Zermürbung, Verwundete, Belegung der
-/// Bahnstrecken; am Monatsersten mindern die Gefallenen die Bevölkerung.
-void run_military(World& world, Pcg32& rng);
+/// Bahnstrecken; am Monatsersten mindern die Gefallenen die Bevölkerung und es fällt der Frieden nach
+/// Regel (seit a4); vorher führt der Generalstab seine Heere. true, wenn Orte den Besitzer wechselten
+/// (abgeleitete Daten neu aufbauen).
+bool run_military(World& world, Pcg32& rng);
 
 } // namespace uhrwerk

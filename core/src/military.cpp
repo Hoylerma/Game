@@ -287,6 +287,7 @@ void run_mobilization(World& world) {
                 army.name = garrison.name;
                 set_soldiers(world, army, garrison_soldiers(garrison, peace, shares[s]));
                 army.status = ArmyStatus::Garrison;
+                army.staff = world.military_rules.staff;
                 world.armies.push_back(std::move(army));
             }
             m = Mobilization{};
@@ -385,6 +386,9 @@ void ensure_military_state(World& world) {
     if (world.war_dead.size() != world.states.size()) {
         world.war_dead.assign(world.states.size(), Fixed{});
     }
+    if (world.left_federation.size() != world.states.size()) {
+        world.left_federation.assign(world.states.size(), 0);
+    }
     if (!world.armies.empty()) {
         return;
     }
@@ -404,6 +408,7 @@ void ensure_military_state(World& world) {
         army.soldiers = garrison_soldiers(garrison, peace[at(garrison.state)], shares[at(garrison.state)]);
         army.guns = guns_for(world, garrison.state, army.soldiers);
         army.status = ArmyStatus::Garrison;
+        army.staff = world.military_rules.staff;
         world.armies.push_back(std::move(army));
     }
 }
@@ -695,11 +700,21 @@ bool supplied(const World& world, const Army& army) {
     return false;
 }
 
-void run_military(World& world, Pcg32& rng) {
+bool set_staff(World& world, Index state, std::int64_t id, bool on) {
+    Army* army = find_army(world, id);
+    if (!military_active(world) || army == nullptr || army->state != state) {
+        return false;
+    }
+    army->staff = on;
+    return true;
+}
+
+bool run_military(World& world, Pcg32& rng) {
     if (!military_active(world)) {
-        return;
+        return false;
     }
     run_mobilization(world);
+    run_staff(world); // seit a4: der Generalstab entscheidet vor der Bewegung
     for (Army& army : world.armies) {
         if (army.status == ArmyStatus::March || army.status == ArmyStatus::Rail ||
             army.status == ArmyStatus::Retreat) {
@@ -716,9 +731,12 @@ void run_military(World& world, Pcg32& rng) {
     for (std::int32_t& backlog : world.rail_backlog) {
         backlog = std::max(0, backlog - 1);
     }
+    bool changed = false;
     if (world.date.day == 1) {
         apply_war_dead(world);
+        changed = run_peace(world); // seit a4: Frieden nach Regel
     }
+    return changed;
 }
 
 } // namespace uhrwerk

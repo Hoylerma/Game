@@ -48,6 +48,17 @@ freigegeben; Stand je Schritt in Abschnitt 12 dort.
   Schlachten („Schlacht bei Dresden: … schlagen …; Verluste … gegen …“), besetzte Hauptstädte und
   gefallene Festungen. Frieden folgt mit Schritt a4. Ohne Befehle rechnet 1848 zeichengleich; 1648
   bitgleich.
+- **Frieden und Generalstab (Schritt a4):** Kriegsziele (Gebiet einer Verwaltungseinheit, Annexion,
+  Führung im Bund, Beitritt zur Zollunion, Entschädigung) mit der Kriegserklärung oder dem neuen Befehl
+  `Kriegsziel`; Kriegspunkte aus Besetzung, Hauptstadt, Schlachten und vernichteten Heeren;
+  Kriegsmüdigkeit. Neuer Befehl `Friedensangebot` (ohne Gewinner, eigene Ziele, Kapitulation) mit
+  Annahme nach Regel; am Monatsersten fällt der Frieden nach Regel, wenn eine Seite ihre Ziele deckt,
+  die andere erschöpft ist oder ein Jahr lang nichts geschieht. Orte wechseln zur Laufzeit den
+  Besitzer, Staaten ohne Orte gehen unter, der Bund verliert Mitglieder oder löst sich auf, Gefangene
+  kehren heim, Heere kehren zurück und rüsten ab. Ein Generalstab führt die Heere nach Regeln
+  (Rückzug vor doppelter, Angriff mit 1,2-facher Übermacht, Vormarsch auf die Ziele); Befehl
+  `Generalstab`, ein eigener Marsch übernimmt das Heer. Probelauf 1848: Preußen annektiert Sachsen in
+  zwei Monaten. Ohne Befehle rechnet 1848 zeichengleich; 1648 bitgleich.
 
 ### Meilenstein M9 – Diplomatie und Zollverein
 

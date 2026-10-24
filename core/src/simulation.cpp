@@ -344,8 +344,8 @@ void Simulation::step_day() {
 
     // 6d. Heere: Mobilmachung, Bewegung, Schlachten, Besetzung, Versorgung (seit M10, militaer.md
     //     Abschnitte 3.3–4.4), nur mit Militärdaten.
-    if (military_active(world_)) {
-        run_military(world_, rng_war_);
+    if (military_active(world_) && run_military(world_, rng_war_)) {
+        rebuild_derived(); // Frieden mit Besitzwechsel (seit a4): Rechentage, Märkte, Wanderungsziele
     }
 
     // 7. Jahreswechsel.
@@ -448,8 +448,9 @@ void Simulation::execute(const Command& command) {
     case CommandType::March: {
         // Militär (seit M10, militaer.md 3.4): Nummer des Heeres im Wert; ungültige bleiben ohne Wirkung.
         const std::int64_t army = command.value.trunc();
-        if (command.value == Fixed::from_int(army)) {
-            order_march(world_, command.state, army, command.target);
+        if (command.value == Fixed::from_int(army) &&
+            order_march(world_, command.state, army, command.target)) {
+            find_army(world_, army)->staff = false; // seit a4: wer selbst befiehlt, führt das Heer selbst
         }
         return;
     }
@@ -460,8 +461,27 @@ void Simulation::execute(const Command& command) {
         return;
     case CommandType::DeclareWar:
         // Militär (seit M10, militaer.md 4.1): Bündnisfall und Chronik in declare_war.
-        declare_war(world_, command.state, command.target);
+        declare_war(world_, command.state, command.target, command.value.trunc());
         return;
+    case CommandType::WarGoal:
+        add_war_goal(world_, command.state, command.target, command.value.trunc());
+        return;
+    case CommandType::PeaceOffer: {
+        const std::int64_t terms = command.value.trunc();
+        if (command.value == Fixed::from_int(terms) && terms >= 0 &&
+            terms <= static_cast<std::int64_t>(PeaceTerms::Capitulation) &&
+            offer_peace(world_, command.state, command.target, static_cast<PeaceTerms>(terms))) {
+            rebuild_derived();
+        }
+        return;
+    }
+    case CommandType::Staff: {
+        const std::int64_t army = command.value.trunc();
+        if (command.value == Fixed::from_int(army) && (command.target == 0 || command.target == 1)) {
+            set_staff(world_, command.state, army, command.target == 1);
+        }
+        return;
+    }
     }
 }
 

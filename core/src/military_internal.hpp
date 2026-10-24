@@ -56,4 +56,10 @@ void return_convalescents(World& world);
 /// Am Monatsersten: Gefallene und Abgänge mindern die Jahrgänge im wehrfähigen Alter (war.cpp).
 void apply_war_dead(World& world);
 
+/// Am Monatsersten: Frieden nach Regel (seit a4, war.cpp). true, wenn Orte den Besitzer wechselten.
+bool run_peace(World& world);
+
+/// Täglich vor der Bewegung: Der Generalstab führt seine Heere (seit a4, staff.cpp).
+void run_staff(World& world);
+
 } // namespace uhrwerk::military_internal

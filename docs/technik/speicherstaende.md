@@ -41,7 +41,9 @@ Schritt a2 der Weg mit Ort, Art und Strecke je Schritt und die Resttage des lauf
 nächste Heeresnummer, seit a2 die Mobilmachung je Staat (Phase, Tage, durch eine Krise) und die
 Belegung je Bahnstrecke, seit a3 je Heer der vorige Ort und die Tage am Ort, die Kriege (Nummer, Seiten,
 Beginn, Anlass), die Kontrolle je Ort, laufende Schlachten und Belagerungen, Verwundete, Gefangene, die
-Gefallenen je Staat und der Zufallsstrom `krieg`, **nur in Welten mit Militär**
+Gefallenen je Staat und der Zufallsstrom `krieg`, seit a4 je Krieg die Kriegsziele und die Bilanz
+(Kriegsstärke, zugefügte Verluste, vernichtete Heere, letzte Bewegung), je Heer der Generalstab und je
+Staat der Austritt aus dem Bund, **nur in Welten mit Militär**
 ([militaer.md](militaer.md)); seit M8 die
 abgehaltenen Wahlen (je Wahlkreis Berechtigte, Wähler, Stimmen je Strömung, Sieger, Stichwahl, Boykott,
 Meldereihenfolge; je Abgeordnetem Wahlkreis, Strömung, Position, Fraktion), der Wahlkampf je
@@ -215,8 +217,9 @@ oder 1, Vertragshandlung 0 bis 4, 4 ist ungültig). Mit Bundesversammlung (seit 
 jeder Testbefehl mit Wahrscheinlichkeit ¼ zum Antrag, zur Forderung oder zum Manöver (je ein Drittel;
 Art 0 bis 4, 4 ist ungültig). Mit Militär (seit M10) wird danach jeder Testbefehl mit
 Wahrscheinlichkeit ¼ zur Kriegserklärung (1 von 12, seit Schritt a3; Staat und Gegner −1 bis hinter
-den letzten), zur Mobilmachung (4 von 12; Staat −1 bis hinter den letzten, Wert 0 bis 2, 2 ist
-ungültig) oder zum Marsch (7 von 12; Heer 0 bis hinter das letzte nach der Zahl der Garnisonen, meist
+den letzten, seit a4 Kriegsziel 0 bis 47), seit a4 zum Friedensangebot, Kriegsziel oder Generalstab
+(1 von 12, je ein Drittel; Krieg bzw. Ziel 0 bis 4), zur Mobilmachung (3 von 12; Staat −1 bis hinter
+den letzten, Wert 0 bis 2, 2 ist ungültig) oder zum Marsch (7 von 12; Heer 0 bis hinter das letzte nach der Zahl der Garnisonen, meist
 mit dessen Staat, Ziel zur Hälfte ein Ort dieses Staates, sonst −1 bis hinter den letzten Ort). Ohne
 Parlament, Zollunion, Bund und Militär bleibt die Folge der Zufallszahlen wie vor M8.
 
@@ -247,11 +250,13 @@ Parlament, Zollunion, Bund und Militär bleibt die Folge der Zufallszahlen wie v
 - **Format 4 (M10):** der Inhaltsbereich `militaer` und in Welten mit Militär die Heere im Zustand
   ([militaer.md](militaer.md)). Ein Spielstand im Format 3 zeigt seine Metadaten mit 15 Bereichen an,
   lädt aber nicht. Weil sich der Bereich in jedem Schritt von M10 erweitert, zählt er einen eigenen
-  Stand (`kMilitaryContentVersion`, 1 seit Schritt a1, 2 seit a2, 3 seit a3) mit: Ein Spielstand 1848
+  Stand (`kMilitaryContentVersion`, 1 seit Schritt a1, 2 seit a2, 3 seit a3, 4 seit a4) mit: Ein Spielstand 1848
   aus einem früheren Schritt lädt dann nicht mehr („Inhalt geändert: militaer“). Seit Schritt a2 stehen
   die Befehle `Marsch` (Wert = Nummer des Heeres, Ziel = Ort) und `Mobilmachung` im Protokoll, seit a3
-  `Kriegserklaerung` (Ziel = Gegner), und in Welten mit Militär tragen die wartenden Befehle Ziel und
-  Aktion. Seit a3 kann ein diplomatisches Spiel mit dem Ausgang „Krieg“ enden. Ohne Militär (1648) zählen weder
+  `Kriegserklaerung` (Ziel = Gegner, seit a4 Wert = Kriegsziel), seit a4 `Kriegsziel` und
+  `Friedensangebot` (Ziel = Nummer des Krieges) und `Generalstab` (Wert = Heer, Ziel 1/0), und in
+  Welten mit Militär tragen die wartenden Befehle Ziel und Aktion. Seit a3 kann ein diplomatisches
+  Spiel mit dem Ausgang „Krieg“ enden. Ohne Militär (1648) zählen weder
   der Stand noch die Heere, der Prüfwert der Formatwache bleibt.
 - Jede Änderung am Zustand (neues Feld, neue Reihenfolge) erhöht die Formatversion. Der Test
   „Spielstand: Formatwache“ verhindert, dass das vergessen wird: Er speichert die Test-Fixture nach

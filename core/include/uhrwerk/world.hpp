@@ -625,6 +625,27 @@ struct MilitaryRules {
     Fixed siege_days = Fixed::from_int(30);          // Tage je Festungsstufe bei gleicher Stärke
     Fixed siege_min_days = Fixed::from_int(10);      // mindestens
     Fixed fortress_garrison = Fixed::from_int(5000); // Besatzung je Festungsstufe
+    // Kriegsziele, Kriegspunkte, Kriegsmüdigkeit und Frieden (seit Schritt a4, Abschnitt 4.5).
+    Fixed goal_territory = Fixed::from_int(100);    // Gebiet: × Anteil an der Bevölkerung des Gegners …
+    Fixed goal_territory_min = Fixed::from_int(10); // … mindestens
+    Fixed goal_annexation = Fixed::from_int(80);
+    Fixed goal_leadership = Fixed::from_int(50);
+    Fixed goal_customs = Fixed::from_int(30);
+    Fixed goal_indemnity = Fixed::from_int(10);    // je Monatseinnahme
+    Fixed points_occupation = Fixed::from_int(60); // × besetzte Bevölkerung ÷ Bevölkerung des Gegners
+    Fixed points_capital = Fixed::from_int(20);    // Hauptstadt der gegnerischen Hauptpartei besetzt
+    Fixed points_battles = Fixed::from_int(30); // × Verlustbilanz ÷ Kriegsstärke des Gegners, ± so viel
+    Fixed points_army = Fixed::from_int(10);    // je vernichtetes Heer
+    Fixed weariness_losses = Fixed::from_int(100);    // × erlittene Verluste ÷ eigene Kriegsstärke
+    Fixed weariness_occupation = Fixed::from_int(50); // × eigener besetzter Bevölkerungsanteil
+    Fixed weariness_month = Fixed::from_int(2);       // je Kriegsmonat
+    std::int32_t stalemate_months = 12;               // ohne Bewegung endet der Krieg ohne Gewinner
+    // Generalstab (Abschnitt 5).
+    bool staff = false;                           // die Heere stehen beim Start unter dem Generalstab
+    Fixed staff_attack = Fixed::from_ratio(6, 5); // Angriff bei so viel Übermacht
+    Fixed staff_retreat = Fixed::from_int(2);     // Rückzug vor so viel Übermacht
+    Fixed staff_radius_km = Fixed::from_int(60);  // gemeinsam operieren, Bedrohung
+    Fixed staff_reach_km = Fixed::from_int(300);  // Gegner in dieser Entfernung angreifen
 };
 
 /// Festung (seit Schritt a3, Abschnitt 4.3): muss belagert werden. Inhalt.
@@ -686,6 +707,7 @@ struct Army {
     Fixed days_left;              // seit a2: Tage bis zum Ende des laufenden Abschnitts (Marsch, Bahnfahrt)
     Index previous = kNone;       // seit a3: Ort vor dem letzten Abschnitt (Flussübergang in der Schlacht)
     std::int32_t days_here = 0;   // seit a3: volle Tage am Ort (Besetzung nach einem Tag)
+    bool staff = false;           // seit a4: vom Generalstab geführt (Abschnitt 5)
 
     friend bool operator==(const Army&, const Army&) = default;
 };
@@ -705,13 +727,39 @@ enum class WarCause : std::uint8_t {
     Execution = 2,   // Bundesexekution nach einer angenommenen Bundesintervention
 };
 
-/// Krieg (seit Schritt a3). Zustand; Kriegsziele, Kriegspunkte und Frieden kommen mit Schritt a4.
+/// Kriegsziel (seit Schritt a4, Abschnitt 4.5).
+enum class WarGoalKind : std::uint8_t {
+    Territory = 1,  // Verwaltungseinheit (param): ihre Orte der Gegenseite wechseln den Besitzer
+    Annexation = 2, // Staat (param) der Gegenseite: alle seine Orte, er geht unter
+    Leadership = 3, // Führung im Bund: die gegnerische Hauptpartei verlässt den Bund
+    Customs = 4,    // Beitritt der gegnerischen Hauptpartei zur eigenen Zollunion
+    Indemnity = 5,  // Entschädigung: param Monatseinnahmen der gegnerischen Hauptpartei
+};
+
+struct WarGoal {
+    WarGoalKind kind = WarGoalKind::Indemnity;
+    bool attacker = true; // Ziel der Angreiferseite, sonst der Verteidiger
+    Index param = kNone;
+
+    friend bool operator==(const WarGoal&, const WarGoal&) = default;
+};
+
+/// Krieg (seit Schritt a3). Zustand; seit a4 mit Kriegszielen und der Bilanz für die Kriegspunkte.
 struct War {
     std::int64_t id = 0;
     std::vector<Index> attackers; // Hauptpartei zuerst
     std::vector<Index> defenders; // Hauptpartei zuerst
     Date started;
     WarCause cause = WarCause::Declaration;
+    // seit a4
+    std::vector<WarGoal> goals;
+    Fixed attacker_strength; // Kriegsstärke beim Beginn (Friedensstärke × Mobilmachungsfaktor)
+    Fixed defender_strength;
+    Fixed attacker_inflicted; // den Verteidigern zugefügte Verluste (mit Gefangenen)
+    Fixed defender_inflicted;
+    std::int32_t attacker_destroyed = 0; // von den Angreifern vernichtete Heere
+    std::int32_t defender_destroyed = 0;
+    Date last_change; // letzte Schlacht oder Besetzung (Stillstand)
 
     friend bool operator==(const War&, const War&) = default;
 };
@@ -1019,6 +1067,7 @@ struct World {
     std::vector<Convalescents> convalescents; // seit a3: Verwundete auf dem Weg zurück
     std::vector<Prisoners> prisoners;         // seit a3: Kriegsgefangene je Staat und Gewahrsam
     std::vector<Fixed> war_dead;              // seit a3: je Staat Gefallene und Abgänge bis zum Monatsersten
+    std::vector<std::uint8_t> left_federation; // seit a4: je Staat 1, wenn er den Bund verlassen hat
 
     Index find_state(std::string_view tag) const;
     Index find_location(std::string_view id) const;

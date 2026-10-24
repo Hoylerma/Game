@@ -58,7 +58,10 @@ enum class CommandType : std::uint8_t {
     Manoeuvre,    // seit M9: state = Hauptpartei eines Spiels, value = Manoeuvre (diplomacy.hpp, 4.5)
     March,        // seit M10: state, value = Nummer des Heeres, target = Zielort, kNone hält an (3.4)
     Mobilization, // seit M10: state, value = 1 Mobilmachung, 0 Abrüstung (militaer.md 3.3)
-    DeclareWar,   // seit M10: state, target = Gegner (militaer.md 4.1; Kriegsziele mit Schritt a4)
+    DeclareWar,   // seit M10: state, target = Gegner, value = Kriegsziel (encode_war_goal, 0: keines)
+    WarGoal,      // seit M10: state, target = Nummer des Krieges, value = Kriegsziel (militaer.md 4.5)
+    PeaceOffer,   // seit M10: state, target = Nummer des Krieges, value = PeaceTerms (militaer.md 4.5)
+    Staff,        // seit M10: state, value = Nummer des Heeres, target = 1 übergeben, 0 zurücknehmen (5)
 };
 
 struct Command {

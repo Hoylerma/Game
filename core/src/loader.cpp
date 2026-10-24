@@ -2794,7 +2794,26 @@ private:
                           "verwuestung_verluste",
                           "belagerung_tage",
                           "belagerung_mindesttage",
-                          "festung_besatzung"});
+                          "festung_besatzung",
+                          "ziel_gebiet",
+                          "ziel_gebiet_mindestens",
+                          "ziel_annexion",
+                          "ziel_fuehrung",
+                          "ziel_zollunion",
+                          "ziel_entschaedigung",
+                          "punkte_besetzung",
+                          "punkte_hauptstadt",
+                          "punkte_schlachten",
+                          "punkte_heer",
+                          "muedigkeit_verluste",
+                          "muedigkeit_besetzung",
+                          "muedigkeit_monat",
+                          "stillstand_monate",
+                          "generalstab",
+                          "generalstab_angriff",
+                          "generalstab_rueckzug",
+                          "generalstab_umkreis_km",
+                          "generalstab_reichweite_km"});
                 const std::optional<Date> since = f.date("seit");
                 MilitaryRules& rules = world_.military_rules;
                 rules.river_rank = static_cast<std::int32_t>(f.integer("fluss_rang", 0, 6).value_or(3));
@@ -2843,6 +2862,28 @@ private:
                 optional_fixed("belagerung_tage", rules.siege_days, above_up_to(fx(0), fx(365)));
                 optional_fixed("belagerung_mindesttage", rules.siege_min_days, between(fx(1), fx(365)));
                 optional_fixed("festung_besatzung", rules.fortress_garrison, between(fx(0), fx(1000000)));
+                // Kriegsziele, Kriegspunkte, Frieden und Generalstab (seit Schritt a4), ebenso optional.
+                optional_fixed("ziel_gebiet", rules.goal_territory, between(fx(0), fx(100)));
+                optional_fixed("ziel_gebiet_mindestens", rules.goal_territory_min, between(fx(0), fx(100)));
+                optional_fixed("ziel_annexion", rules.goal_annexation, between(fx(0), fx(100)));
+                optional_fixed("ziel_fuehrung", rules.goal_leadership, between(fx(0), fx(100)));
+                optional_fixed("ziel_zollunion", rules.goal_customs, between(fx(0), fx(100)));
+                optional_fixed("ziel_entschaedigung", rules.goal_indemnity, between(fx(0), fx(100)));
+                optional_fixed("punkte_besetzung", rules.points_occupation, between(fx(0), fx(100)));
+                optional_fixed("punkte_hauptstadt", rules.points_capital, between(fx(0), fx(100)));
+                optional_fixed("punkte_schlachten", rules.points_battles, between(fx(0), fx(100)));
+                optional_fixed("punkte_heer", rules.points_army, between(fx(0), fx(100)));
+                optional_fixed("muedigkeit_verluste", rules.weariness_losses, between(fx(0), fx(1000)));
+                optional_fixed("muedigkeit_besetzung", rules.weariness_occupation, between(fx(0), fx(1000)));
+                optional_fixed("muedigkeit_monat", rules.weariness_month, between(fx(0), fx(100)));
+                optional_days("stillstand_monate", rules.stalemate_months, 1, 120);
+                if (f.has("generalstab")) {
+                    rules.staff = f.boolean("generalstab").value_or(false);
+                }
+                optional_fixed("generalstab_angriff", rules.staff_attack, between(fx(1), fx(10)));
+                optional_fixed("generalstab_rueckzug", rules.staff_retreat, between(fx(1), fx(10)));
+                optional_fixed("generalstab_umkreis_km", rules.staff_radius_km, between(fx(1), fx(1000)));
+                optional_fixed("generalstab_reichweite_km", rules.staff_reach_km, between(fx(1), fx(5000)));
                 rules.terrain_march.assign(world_.terrains.size(), Fixed::one());
                 if (f.has("gelaende")) {
                     if (const ScriptNode* terrains =

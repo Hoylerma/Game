@@ -1,4 +1,4 @@
-# Militär (Meilenstein M10, Schritte a1–a3; docs/technik/militaer.md, Abschnitte 3.1–4.4).
+# Militär (Meilenstein M10, Schritte a1–a4; docs/technik/militaer.md, Abschnitte 3–5).
 #
 # Format: docs/technik/chronik-skript.md, Abschnitt 3.30.
 # Das Militär gilt ab 'seit' (Entscheidung 14): Vor diesem Datum (Lesezeichen 1648) gibt es keine Heere,
@@ -60,6 +60,32 @@ militaer {
     belagerung_tage        = 30
     belagerung_mindesttage = 10
     festung_besatzung      = 5000
+
+    # Kriegsziele, Kriegspunkte und Frieden (Schritt a4, Abschnitt 4.5): Kosten der Ziele in Kriegspunkten;
+    # Punkte aus Besetzung (× besetzte Bevölkerung ÷ Bevölkerung des Gegners), Hauptstadt, Schlachten
+    # (× Verlustbilanz ÷ Kriegsstärke, höchstens so viel) und vernichteten Heeren; Kriegsmüdigkeit aus
+    # Verlusten, Besetzung und Monaten. Ohne Bewegung endet ein Krieg nach stillstand_monate.
+    ziel_gebiet            = 100   # × Anteil an der Bevölkerung des Gegners
+    ziel_gebiet_mindestens = 10
+    ziel_annexion          = 80
+    ziel_fuehrung          = 50
+    ziel_zollunion         = 30
+    ziel_entschaedigung    = 10    # je Monatseinnahme
+    punkte_besetzung       = 60
+    punkte_hauptstadt      = 20
+    punkte_schlachten      = 30
+    punkte_heer            = 10
+    muedigkeit_verluste    = 100
+    muedigkeit_besetzung   = 50
+    muedigkeit_monat       = 2
+    stillstand_monate      = 12
+
+    # Generalstab (Abschnitt 5): führt alle Heere, bis ein Befehl 'Marsch' oder 'Generalstab' sie übernimmt.
+    generalstab               = ja
+    generalstab_angriff       = 1.2
+    generalstab_rueckzug      = 2
+    generalstab_umkreis_km    = 60
+    generalstab_reichweite_km = 300
 }
 
 # ── Heerwesen ──────────────────────────────────────────────────────────────

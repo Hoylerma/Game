@@ -410,7 +410,14 @@ void run_plays(World& world) {
             attackers.insert(attackers.end(), play.demander_side.begin(), play.demander_side.end());
             std::vector<Index> defenders{play.target};
             defenders.insert(defenders.end(), play.target_side.begin(), play.target_side.end());
-            const bool war = start_war(world, std::move(attackers), std::move(defenders), WarCause::Crisis);
+            // Kriegsziel nach der Forderung (seit a4): Führung, Zollunion; für ein Bündnis eine
+            // Entschädigung.
+            const WarGoal goal =
+                play.kind == DemandKind::Leadership     ? WarGoal{WarGoalKind::Leadership, true, kNone}
+                : play.kind == DemandKind::CustomsUnion ? WarGoal{WarGoalKind::Customs, true, kNone}
+                                                        : WarGoal{WarGoalKind::Indemnity, true, 3};
+            const bool war =
+                start_war(world, std::move(attackers), std::move(defenders), WarCause::Crisis, {goal});
             finish(world, i, war ? PlayOutcome::War : PlayOutcome::Compromise);
         } else {
             finish(world, i, PlayOutcome::Compromise);
