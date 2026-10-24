@@ -10,6 +10,7 @@
 bundesversammlung bund {
     name       = "Bundesversammlung"
     seit       = 1816.11.05        # Eröffnung in Frankfurt am Main
+    bis        = 1866.08.24        # Auflösung nach dem Prager Frieden (seit M10b)
     praesidium = AUT               # Präsidialmacht Österreich (Bundesakte Art. 5)
     sitz       = frankfurt_am_main
 
@@ -47,4 +48,31 @@ bundesversammlung bund {
         stimme = { name = "Freie Städte" staaten = { LUE FRA BRE HAM } }
     }
     quelle = "Bundesakte 1815 (Art. 4–6), Wiener Schlussakte 1820; Stimmen auf den Staatenbestand des Modells 1848 übertragen. Wissensstand ohne Quellenzugang; Prüfung offen"
+}
+
+# Bundesrat des Norddeutschen Bundes (seit M10b, militaer.md 6.2): Verfassung vom 16. April 1867, in
+# Kraft am 1. Juli 1867, 43 Stimmen nach dem Muster des Bundestags; Präsidium Preußen. Einen Engeren
+# Rat gibt es nicht: Im Modell führt jeder Staat eine eigene Stimme. Bundesgebiet: die Orte mit
+# bund = ja ab 1867.07.01 (aenderungen_1849_1870.csv). Wissensstand ohne Quellenzugang; Prüfung offen.
+bundesversammlung norddeutscher_bund {
+    name       = "Bundesrat des Norddeutschen Bundes"
+    seit       = 1867.07.01
+    praesidium = PRU
+    sitz       = berlin_coelln
+    plenum = {
+        PRU = 17  SAX = 4  MSC = 2  BWO = 2
+        HED = 1  WEI = 1  MST = 1  OLD = 1  SMG = 1  ALT = 1  SCG = 1  DES = 1  SSH = 1  SRU = 1
+        WAL = 1  REA = 1  REJ = 1  SLI = 1  LIP = 1  LUE = 1  BRE = 1  HAM = 1
+    }
+    rat = {
+        stimme = { staaten = { PRU } }  stimme = { staaten = { SAX } }  stimme = { staaten = { MSC } }
+        stimme = { staaten = { BWO } }  stimme = { staaten = { HED } }  stimme = { staaten = { WEI } }
+        stimme = { staaten = { MST } }  stimme = { staaten = { OLD } }  stimme = { staaten = { SMG } }
+        stimme = { staaten = { ALT } }  stimme = { staaten = { SCG } }  stimme = { staaten = { DES } }
+        stimme = { staaten = { SSH } }  stimme = { staaten = { SRU } }  stimme = { staaten = { WAL } }
+        stimme = { staaten = { REA } }  stimme = { staaten = { REJ } }  stimme = { staaten = { SLI } }
+        stimme = { staaten = { LIP } }  stimme = { staaten = { LUE } }  stimme = { staaten = { BRE } }
+        stimme = { staaten = { HAM } }
+    }
+    quelle     = "Verfassung des Norddeutschen Bundes 1867, Art. 6 (43 Stimmen); Wissensstand ohne Quellenzugang, Prüfung offen"
 }

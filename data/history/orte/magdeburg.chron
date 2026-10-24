@@ -47,6 +47,16 @@ ort magdeburg {
         verwaltung = pr_kr_magdeburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort halle {
@@ -79,6 +89,16 @@ ort halle {
         verwaltung = pr_kr_halle
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort halberstadt {
@@ -109,6 +129,16 @@ ort halberstadt {
         besitzer   = PRU
         verwaltung = pr_kr_halberstadt
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -141,6 +171,16 @@ ort jueterbog {
         verwaltung = pr_kr_jueterbog_luckenwalde
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort neuhaldensleben {
@@ -163,6 +203,16 @@ ort neuhaldensleben {
         besitzer   = PRU
         verwaltung = pr_kr_neuhaldensleben
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -187,6 +237,16 @@ ort oebisfelde {
         verwaltung = pr_kr_gardelegen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort calvoerde {
@@ -206,6 +266,16 @@ ort calvoerde {
     }
 
     1848.03.01 = {
+        besitzer = BWO
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BWO
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = BWO
         bund     = ja
     }
@@ -232,6 +302,16 @@ ort weferlingen {
         verwaltung = pr_kr_neuhaldensleben
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort burg_bei_magdeburg {
@@ -254,6 +334,16 @@ ort burg_bei_magdeburg {
         besitzer   = PRU
         verwaltung = pr_kr_jerichow_i
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -278,6 +368,16 @@ ort genthin {
         verwaltung = pr_kr_jerichow_ii
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort moeckern {
@@ -300,6 +400,16 @@ ort moeckern {
         besitzer   = PRU
         verwaltung = pr_kr_jerichow_i
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -324,6 +434,16 @@ ort loburg {
         verwaltung = pr_kr_jerichow_i
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort tucheim {
@@ -346,6 +466,16 @@ ort tucheim {
         besitzer   = PRU
         verwaltung = pr_kr_jerichow_ii
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -371,6 +501,16 @@ ort schoenebeck {
         verwaltung = pr_kr_calbe
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort calbe {
@@ -393,6 +533,16 @@ ort calbe {
         besitzer   = PRU
         verwaltung = pr_kr_calbe
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -417,6 +567,16 @@ ort wolmirstedt {
         verwaltung = pr_kr_wolmirstedt
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort gommern {
@@ -439,6 +599,16 @@ ort gommern {
         besitzer   = PRU
         verwaltung = pr_kr_magdeburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -463,6 +633,16 @@ ort niederndodeleben {
         verwaltung = pr_kr_magdeburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort barby {
@@ -485,6 +665,16 @@ ort barby {
         besitzer   = PRU
         verwaltung = pr_kr_calbe
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -509,6 +699,16 @@ ort gerwisch {
         verwaltung = pr_kr_magdeburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort angern {
@@ -531,6 +731,16 @@ ort angern {
         besitzer   = PRU
         verwaltung = pr_kr_jerichow_i
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -555,6 +765,16 @@ ort oschersleben {
         verwaltung = pr_kr_oschersleben
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort groeningen {
@@ -577,6 +797,16 @@ ort groeningen {
         besitzer   = PRU
         verwaltung = pr_kr_oschersleben
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -601,6 +831,16 @@ ort egeln {
         verwaltung = pr_kr_wanzleben
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort wanzleben {
@@ -623,6 +863,16 @@ ort wanzleben {
         besitzer   = PRU
         verwaltung = pr_kr_wanzleben
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -647,6 +897,16 @@ ort eilsleben {
         verwaltung = pr_kr_oschersleben
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort ausleben {
@@ -669,6 +929,16 @@ ort ausleben {
         besitzer   = PRU
         verwaltung = pr_kr_oschersleben
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -693,6 +963,16 @@ ort wernigerode {
         verwaltung = pr_kr_wernigerode
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort blankenburg {
@@ -712,6 +992,16 @@ ort blankenburg {
     }
 
     1848.03.01 = {
+        besitzer = BWO
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BWO
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = BWO
         bund     = ja
     }
@@ -738,6 +1028,16 @@ ort huy_neinstedt {
         verwaltung = pr_kr_halberstadt
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort osterwieck {
@@ -761,6 +1061,16 @@ ort osterwieck {
         verwaltung = pr_kr_wernigerode
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort hasselfelde {
@@ -780,6 +1090,16 @@ ort hasselfelde {
     }
 
     1848.03.01 = {
+        besitzer = BWO
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BWO
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = BWO
         bund     = ja
     }
@@ -806,6 +1126,16 @@ ort benneckenstein {
         verwaltung = pr_kr_wernigerode
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort derenburg {
@@ -828,6 +1158,16 @@ ort derenburg {
         besitzer   = PRU
         verwaltung = pr_kr_wernigerode
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -852,6 +1192,16 @@ ort aschersleben {
         verwaltung = pr_kr_aschersleben
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort quedlinburg {
@@ -874,6 +1224,16 @@ ort quedlinburg {
         besitzer   = PRU
         verwaltung = pr_kr_halberstadt
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -899,6 +1259,16 @@ ort stassfurt {
         verwaltung = pr_kr_aschersleben
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort ballenstedt {
@@ -921,6 +1291,20 @@ ort ballenstedt {
         besitzer = BER
         bund     = ja
     }
+
+    1863.08.19 = {
+        besitzer = DES
+    }
+
+    1866.08.24 = {
+        besitzer = DES
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = DES
+        bund     = ja
+    }
 }
 
 ort harzgerode {
@@ -941,6 +1325,20 @@ ort harzgerode {
 
     1848.03.01 = {
         besitzer = BER
+        bund     = ja
+    }
+
+    1863.08.19 = {
+        besitzer = DES
+    }
+
+    1866.08.24 = {
+        besitzer = DES
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = DES
         bund     = ja
     }
 }
@@ -966,6 +1364,16 @@ ort gatersleben {
         verwaltung = pr_kr_aschersleben
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort merseburg {
@@ -988,6 +1396,16 @@ ort merseburg {
         besitzer   = PRU
         verwaltung = pr_kr_merseburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1013,6 +1431,16 @@ ort bad_duerrenberg {
         verwaltung = pr_kr_merseburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort querfurt {
@@ -1035,6 +1463,16 @@ ort querfurt {
         besitzer   = PRU
         verwaltung = pr_kr_querfurt
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1059,6 +1497,16 @@ ort teutschenthal {
         verwaltung = pr_kr_halle
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort muecheln {
@@ -1081,6 +1529,16 @@ ort muecheln {
         besitzer   = PRU
         verwaltung = pr_kr_merseburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1105,6 +1563,16 @@ ort bad_lauchstaedt {
         verwaltung = pr_kr_merseburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort koennern {
@@ -1128,6 +1596,16 @@ ort koennern {
         verwaltung = pr_kr_mansfelder_gebirgskreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort landsberg_bei_halle {
@@ -1150,6 +1628,16 @@ ort landsberg_bei_halle {
         besitzer   = PRU
         verwaltung = pr_kr_delitzsch
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1175,6 +1663,16 @@ ort wettin {
         verwaltung = pr_kr_halle
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort groebers {
@@ -1197,5 +1695,15 @@ ort groebers {
         besitzer   = PRU
         verwaltung = pr_kr_halle
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }

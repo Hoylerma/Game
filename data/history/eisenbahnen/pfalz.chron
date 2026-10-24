@@ -6,3 +6,18 @@ strecke pfaelzische_ludwigsbahn {
     abschnitt = { von = frankenthal bis = neustadt_an_der_haardt eroeffnet = 1847.06.11 }
     abschnitt = { von = frankenthal bis = speyer eroeffnet = 1847.06.11 }
 }
+
+strecke pfaelzische_ludwigsbahn_west {
+    name      = "Pfälzische Ludwigsbahn (Neustadt–Bexbach)"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M10b, Schritt b1)"
+    abschnitt = { von = neustadt_an_der_haardt bis = kaiserslautern eroeffnet = 1849.06.01 }
+    abschnitt = { von = kaiserslautern bis = homburg eroeffnet = 1849.06.01 }
+    abschnitt = { von = homburg bis = neunkirchen eroeffnet = 1850.11.16 }
+}
+
+strecke pfaelzische_maximiliansbahn {
+    name      = "Pfälzische Maximiliansbahn"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M10b, Schritt b1)"
+    abschnitt = { von = neustadt_an_der_haardt bis = landau_in_der_pfalz eroeffnet = 1855.07.18 }
+    abschnitt = { von = landau_in_der_pfalz bis = weissenburg eroeffnet = 1855.07.18 }
+}

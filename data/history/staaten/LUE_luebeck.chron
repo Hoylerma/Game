@@ -22,4 +22,8 @@ staat LUE {
         verfassung     = staendisch
         wahlrecht      = staendisch
     }
+
+    1868.08.11 = {
+        zollunion = zollverein
+    }
 }

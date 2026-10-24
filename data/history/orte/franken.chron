@@ -30,6 +30,11 @@ ort hof {
         verwaltung = by_oberfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort wunsiedel {
@@ -52,6 +57,11 @@ ort wunsiedel {
         besitzer   = BAV
         verwaltung = by_oberfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -76,6 +86,11 @@ ort selb {
         verwaltung = by_oberfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort muenchberg {
@@ -98,6 +113,11 @@ ort muenchberg {
         besitzer   = BAV
         verwaltung = by_oberfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -122,6 +142,11 @@ ort schwarzenbach_an_der_saale {
         verwaltung = by_oberfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort naila {
@@ -144,6 +169,11 @@ ort naila {
         besitzer   = BAV
         verwaltung = by_oberfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -168,6 +198,11 @@ ort marktleuthen {
         verwaltung = by_oberfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort weissenstadt {
@@ -190,6 +225,11 @@ ort weissenstadt {
         besitzer   = BAV
         verwaltung = by_oberfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -214,6 +254,11 @@ ort arzberg {
         verwaltung = by_oberfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort regnitzlosau {
@@ -236,6 +281,11 @@ ort regnitzlosau {
         besitzer   = BAV
         verwaltung = by_oberfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -260,6 +310,11 @@ ort toepen {
         verwaltung = by_oberfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort coburg {
@@ -279,6 +334,16 @@ ort coburg {
     }
 
     1848.03.01 = {
+        besitzer = SCG
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = SCG
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = SCG
         bund     = ja
     }
@@ -305,6 +370,11 @@ ort lichtenfels {
         verwaltung = by_oberfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort burgkunstadt {
@@ -328,6 +398,11 @@ ort burgkunstadt {
         verwaltung = by_oberfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort sonnefeld {
@@ -347,6 +422,16 @@ ort sonnefeld {
     }
 
     1848.03.01 = {
+        besitzer = SCG
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = SCG
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = SCG
         bund     = ja
     }
@@ -373,6 +458,11 @@ ort sesslach {
         verwaltung = by_oberfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort kronach {
@@ -395,6 +485,11 @@ ort kronach {
         besitzer   = BAV
         verwaltung = by_oberfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -419,6 +514,11 @@ ort wilhelmsthal {
         verwaltung = by_oberfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort ludwigsstadt {
@@ -441,6 +541,11 @@ ort ludwigsstadt {
         besitzer   = BAV
         verwaltung = by_oberfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -465,6 +570,11 @@ ort marktleugast {
         verwaltung = by_oberfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort tettau {
@@ -487,6 +597,11 @@ ort tettau {
         besitzer   = BAV
         verwaltung = by_oberfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -511,6 +626,11 @@ ort teuschnitz {
         verwaltung = by_oberfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort nordhalben {
@@ -533,6 +653,11 @@ ort nordhalben {
         besitzer   = BAV
         verwaltung = by_oberfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -557,6 +682,11 @@ ort rugendorf {
         verwaltung = by_oberfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort kulmbach {
@@ -579,6 +709,11 @@ ort kulmbach {
         besitzer   = BAV
         verwaltung = by_oberfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -603,6 +738,11 @@ ort ebermannstadt {
         verwaltung = by_oberfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort hollfeld {
@@ -625,6 +765,11 @@ ort hollfeld {
         besitzer   = BAV
         verwaltung = by_oberfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -649,6 +794,11 @@ ort goessweinstein {
         verwaltung = by_oberfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort neudrossenfeld {
@@ -671,6 +821,11 @@ ort neudrossenfeld {
         besitzer   = BAV
         verwaltung = by_oberfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -695,6 +850,11 @@ ort waischenfeld {
         verwaltung = by_oberfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort kasendorf {
@@ -717,6 +877,11 @@ ort kasendorf {
         besitzer   = BAV
         verwaltung = by_oberfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -741,6 +906,11 @@ ort heiligenstadt_franken {
         verwaltung = by_oberfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort stadelhofen {
@@ -763,6 +933,11 @@ ort stadelhofen {
         besitzer   = BAV
         verwaltung = by_oberfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -787,6 +962,11 @@ ort bayreuth {
         verwaltung = by_oberfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort speichersdorf {
@@ -809,6 +989,11 @@ ort speichersdorf {
         besitzer   = BAV
         verwaltung = by_oberfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -833,6 +1018,11 @@ ort bad_berneck_im_fichtelgebirge {
         verwaltung = by_oberfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort creussen {
@@ -855,6 +1045,11 @@ ort creussen {
         besitzer   = BAV
         verwaltung = by_oberfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -879,6 +1074,11 @@ ort mistelgau {
         verwaltung = by_oberfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort warmensteinach {
@@ -901,6 +1101,11 @@ ort warmensteinach {
         besitzer   = BAV
         verwaltung = by_oberfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -925,6 +1130,11 @@ ort bamberg {
         verwaltung = by_oberfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort ebensfeld {
@@ -947,6 +1157,11 @@ ort ebensfeld {
         besitzer   = BAV
         verwaltung = by_oberfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -971,6 +1186,11 @@ ort breitenguessbach {
         verwaltung = by_oberfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort viereth_trunstadt {
@@ -993,6 +1213,11 @@ ort viereth_trunstadt {
         besitzer   = BAV
         verwaltung = by_oberfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -1017,6 +1242,11 @@ ort schesslitz {
         verwaltung = by_oberfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort forchheim {
@@ -1039,6 +1269,11 @@ ort forchheim {
         besitzer   = BAV
         verwaltung = by_oberfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -1063,6 +1298,11 @@ ort hoechstadt_an_der_aisch {
         verwaltung = by_mittelfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort hirschaid {
@@ -1085,6 +1325,11 @@ ort hirschaid {
         besitzer   = BAV
         verwaltung = by_oberfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -1109,6 +1354,11 @@ ort schluesselfeld {
         verwaltung = by_oberfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort hemhofen {
@@ -1131,6 +1381,11 @@ ort hemhofen {
         besitzer   = BAV
         verwaltung = by_mittelfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -1155,6 +1410,11 @@ ort burgebrach {
         verwaltung = by_oberfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort frensdorf {
@@ -1177,6 +1437,11 @@ ort frensdorf {
         besitzer   = BAV
         verwaltung = by_oberfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -1201,6 +1466,11 @@ ort scheinfeld {
         verwaltung = by_mittelfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort neustadt_an_der_aisch {
@@ -1223,6 +1493,11 @@ ort neustadt_an_der_aisch {
         besitzer   = BAV
         verwaltung = by_mittelfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -1247,6 +1522,11 @@ ort heilsbronn {
         verwaltung = by_mittelfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort langenzenn {
@@ -1269,6 +1549,11 @@ ort langenzenn {
         besitzer   = BAV
         verwaltung = by_mittelfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -1293,6 +1578,11 @@ ort rosstal {
         verwaltung = by_mittelfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort windsbach {
@@ -1315,6 +1605,11 @@ ort windsbach {
         besitzer   = BAV
         verwaltung = by_mittelfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -1339,6 +1634,11 @@ ort dietenhofen {
         verwaltung = by_mittelfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort markt_erlbach {
@@ -1361,6 +1661,11 @@ ort markt_erlbach {
         besitzer   = BAV
         verwaltung = by_mittelfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -1385,6 +1690,11 @@ ort lauf_an_der_pegnitz {
         verwaltung = by_mittelfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort pegnitz {
@@ -1407,6 +1717,11 @@ ort pegnitz {
         besitzer   = BAV
         verwaltung = by_oberfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -1431,6 +1746,11 @@ ort hersbruck {
         verwaltung = by_mittelfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort neuhaus_an_der_pegnitz {
@@ -1453,6 +1773,11 @@ ort neuhaus_an_der_pegnitz {
         besitzer   = BAV
         verwaltung = by_mittelfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -1477,6 +1802,11 @@ ort alfeld {
         verwaltung = by_mittelfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort bad_windsheim {
@@ -1499,6 +1829,11 @@ ort bad_windsheim {
         besitzer   = BAV
         verwaltung = by_mittelfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -1523,6 +1858,11 @@ ort uffenheim {
         verwaltung = by_mittelfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort burgbernheim {
@@ -1545,6 +1885,11 @@ ort burgbernheim {
         besitzer   = BAV
         verwaltung = by_mittelfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -1569,6 +1914,11 @@ ort markt_nordheim {
         verwaltung = by_mittelfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort nuernberg {
@@ -1591,6 +1941,11 @@ ort nuernberg {
         besitzer   = BAV
         verwaltung = by_mittelfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -1615,6 +1970,11 @@ ort erlangen {
         verwaltung = by_mittelfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort fuerth {
@@ -1637,6 +1997,11 @@ ort fuerth {
         besitzer   = BAV
         verwaltung = by_mittelfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -1661,6 +2026,11 @@ ort herzogenaurach {
         verwaltung = by_mittelfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort neunkirchen_am_brand {
@@ -1683,6 +2053,11 @@ ort neunkirchen_am_brand {
         besitzer   = BAV
         verwaltung = by_oberfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -1707,6 +2082,11 @@ ort heroldsberg {
         verwaltung = by_mittelfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort graefenberg {
@@ -1729,6 +2109,11 @@ ort graefenberg {
         besitzer   = BAV
         verwaltung = by_oberfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -1753,6 +2138,11 @@ ort schwabach {
         verwaltung = by_mittelfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort roth {
@@ -1775,6 +2165,11 @@ ort roth {
         besitzer   = BAV
         verwaltung = by_mittelfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -1799,6 +2194,11 @@ ort wendelstein {
         verwaltung = by_mittelfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort hilpoltstein {
@@ -1821,6 +2221,11 @@ ort hilpoltstein {
         besitzer   = BAV
         verwaltung = by_mittelfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -1845,6 +2250,11 @@ ort burgthann {
         verwaltung = by_mittelfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort georgensgmuend {
@@ -1867,6 +2277,11 @@ ort georgensgmuend {
         besitzer   = BAV
         verwaltung = by_mittelfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -1891,6 +2306,11 @@ ort ansbach {
         verwaltung = by_mittelfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort rothenburg_ob_der_tauber {
@@ -1913,6 +2333,11 @@ ort rothenburg_ob_der_tauber {
         besitzer   = BAV
         verwaltung = by_mittelfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -1937,6 +2362,11 @@ ort dinkelsbuehl {
         verwaltung = by_mittelfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort feuchtwangen {
@@ -1959,6 +2389,11 @@ ort feuchtwangen {
         besitzer   = BAV
         verwaltung = by_mittelfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -1983,6 +2418,11 @@ ort herrieden {
         verwaltung = by_mittelfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort leutershausen {
@@ -2005,6 +2445,11 @@ ort leutershausen {
         besitzer   = BAV
         verwaltung = by_mittelfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -2029,6 +2474,11 @@ ort schnelldorf {
         verwaltung = by_mittelfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort langfurth {
@@ -2051,6 +2501,11 @@ ort langfurth {
         besitzer   = BAV
         verwaltung = by_mittelfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -2075,6 +2530,11 @@ ort flachslanden {
         verwaltung = by_mittelfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort schillingsfuerst {
@@ -2097,6 +2557,11 @@ ort schillingsfuerst {
         besitzer   = BAV
         verwaltung = by_mittelfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -2121,6 +2586,11 @@ ort geslau {
         verwaltung = by_mittelfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort gunzenhausen {
@@ -2143,6 +2613,11 @@ ort gunzenhausen {
         besitzer   = BAV
         verwaltung = by_mittelfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -2167,6 +2642,11 @@ ort wassertruedingen {
         verwaltung = by_mittelfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort merkendorf {
@@ -2189,6 +2669,11 @@ ort merkendorf {
         besitzer   = BAV
         verwaltung = by_mittelfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -2213,6 +2698,11 @@ ort heidenheim {
         verwaltung = by_mittelfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort arberg {
@@ -2235,6 +2725,11 @@ ort arberg {
         besitzer   = BAV
         verwaltung = by_mittelfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -2259,6 +2754,11 @@ ort weissenburg_in_bayern {
         verwaltung = by_mittelfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort treuchtlingen {
@@ -2281,6 +2781,11 @@ ort treuchtlingen {
         besitzer   = BAV
         verwaltung = by_mittelfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -2305,6 +2810,11 @@ ort pleinfeld {
         verwaltung = by_mittelfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort greding {
@@ -2327,6 +2837,11 @@ ort greding {
         besitzer   = BAV
         verwaltung = by_mittelfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -2351,6 +2866,11 @@ ort thalmaessing {
         verwaltung = by_mittelfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort solnhofen {
@@ -2374,6 +2894,11 @@ ort solnhofen {
         verwaltung = by_mittelfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort burgsalach {
@@ -2396,5 +2921,10 @@ ort burgsalach {
         besitzer   = BAV
         verwaltung = by_mittelfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }

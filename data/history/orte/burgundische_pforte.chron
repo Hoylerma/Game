@@ -18,6 +18,14 @@ ort moempelgard {
     stadt    = ja
     kreis    = kr_moempelgard
     quelle   = "GeoNames (CC BY 4.0), geonameid 2992938; deutscher Name aus den GeoNames-Alternativnamen (heute Montbéliard); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        bevoelkerung = 13424
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort lure {
@@ -28,6 +36,14 @@ ort lure {
     stadt    = ja
     kreis    = kr_moempelgard
     quelle   = "GeoNames (CC BY 4.0), geonameid 2997076; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        bevoelkerung = 18058
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort luxeuil_les_bains {
@@ -38,6 +54,14 @@ ort luxeuil_les_bains {
     stadt    = nein
     kreis    = kr_moempelgard
     quelle   = "GeoNames (CC BY 4.0), geonameid 2996995; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        bevoelkerung = 15371
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort pont_de_roide {
@@ -48,6 +72,14 @@ ort pont_de_roide {
     stadt    = nein
     kreis    = kr_moempelgard
     quelle   = "GeoNames (CC BY 4.0), geonameid 2986237; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        bevoelkerung = 4204
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort saint_loup_sur_semouse {
@@ -58,6 +90,14 @@ ort saint_loup_sur_semouse {
     stadt    = nein
     kreis    = kr_moempelgard
     quelle   = "GeoNames (CC BY 4.0), geonameid 2978688; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        bevoelkerung = 16356
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort ronchamp {
@@ -68,6 +108,14 @@ ort ronchamp {
     stadt    = nein
     kreis    = kr_moempelgard
     quelle   = "GeoNames (CC BY 4.0), geonameid 2982951; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        bevoelkerung = 11561
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort herimoncourt {
@@ -78,6 +126,14 @@ ort herimoncourt {
     stadt    = nein
     kreis    = kr_moempelgard
     quelle   = "GeoNames (CC BY 4.0), geonameid 3013448; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        bevoelkerung = 6043
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort colombier_fontaine {
@@ -88,6 +144,14 @@ ort colombier_fontaine {
     stadt    = nein
     kreis    = kr_moempelgard
     quelle   = "GeoNames (CC BY 4.0), geonameid 3024243; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        bevoelkerung = 4861
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort arcey {
@@ -98,4 +162,12 @@ ort arcey {
     stadt    = nein
     kreis    = kr_moempelgard
     quelle   = "GeoNames (CC BY 4.0), geonameid 3037221; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        bevoelkerung = 14057
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 100 }
+        verwuestung  = 0
+    }
 }

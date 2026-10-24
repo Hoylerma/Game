@@ -271,6 +271,16 @@ ort eupen {
         verwaltung = pr_kr_eupen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort bleyberg {
@@ -414,6 +424,16 @@ ort malmedy {
         verwaltung = pr_kr_malmedy
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort spa {
@@ -447,6 +467,16 @@ ort sankt_vith {
         verwaltung = pr_kr_malmedy
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort buellingen {
@@ -470,6 +500,16 @@ ort buellingen {
         verwaltung = pr_kr_malmedy
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort amel {
@@ -492,6 +532,16 @@ ort amel {
         besitzer   = PRU
         verwaltung = pr_kr_malmedy
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 

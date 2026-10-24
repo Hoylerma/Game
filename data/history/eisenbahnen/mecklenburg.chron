@@ -6,3 +6,11 @@ strecke mecklenburgische {
     abschnitt = { von = hagenow bis = schwerin eroeffnet = 1847.05.01 }
     abschnitt = { von = schwerin bis = wismar eroeffnet = 1848.07.12 }
 }
+
+strecke mecklenburgische_rostock {
+    name      = "Mecklenburgische Eisenbahn (Rostock, Güstrow)"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M10b, Schritt b1)"
+    abschnitt = { von = schwerin bis = buetzow eroeffnet = 1850.05.13 }
+    abschnitt = { von = buetzow bis = rostock eroeffnet = 1850.05.13 }
+    abschnitt = { von = buetzow bis = guestrow eroeffnet = 1850.05.13 }
+}

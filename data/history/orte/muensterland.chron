@@ -30,6 +30,16 @@ ort rheine {
         verwaltung = pr_kr_steinfurt
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort ibbenbueren {
@@ -54,6 +64,16 @@ ort ibbenbueren {
         verwaltung = pr_kr_tecklenburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort hoerstel {
@@ -76,6 +96,16 @@ ort hoerstel {
         besitzer   = PRU
         verwaltung = pr_kr_tecklenburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -100,6 +130,16 @@ ort westerkappeln {
         verwaltung = pr_kr_tecklenburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort recke {
@@ -122,6 +162,16 @@ ort recke {
         besitzer   = PRU
         verwaltung = pr_kr_tecklenburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -146,6 +196,16 @@ ort gronau_muensterland {
         verwaltung = pr_kr_ahaus
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort steinfurt {
@@ -168,6 +228,16 @@ ort steinfurt {
         besitzer   = PRU
         verwaltung = pr_kr_steinfurt
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -192,6 +262,16 @@ ort ahaus {
         verwaltung = pr_kr_ahaus
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort stadtlohn {
@@ -214,6 +294,16 @@ ort stadtlohn {
         besitzer   = PRU
         verwaltung = pr_kr_ahaus
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -238,6 +328,16 @@ ort vreden {
         verwaltung = pr_kr_ahaus
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort ochtrup {
@@ -260,6 +360,16 @@ ort ochtrup {
         besitzer   = PRU
         verwaltung = pr_kr_steinfurt
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -284,6 +394,16 @@ ort schoeppingen {
         verwaltung = pr_kr_steinfurt
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort muenster {
@@ -306,6 +426,16 @@ ort muenster {
         besitzer   = PRU
         verwaltung = pr_kr_muenster
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -330,6 +460,16 @@ ort emsdetten {
         verwaltung = pr_kr_steinfurt
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort greven {
@@ -352,6 +492,16 @@ ort greven {
         besitzer   = PRU
         verwaltung = pr_kr_muenster
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -376,6 +526,16 @@ ort telgte {
         verwaltung = pr_kr_muenster
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort lengerich {
@@ -398,6 +558,16 @@ ort lengerich {
         besitzer   = PRU
         verwaltung = pr_kr_tecklenburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -422,6 +592,16 @@ ort ostbevern {
         verwaltung = pr_kr_warendorf
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort altenberge {
@@ -444,6 +624,16 @@ ort altenberge {
         besitzer   = PRU
         verwaltung = pr_kr_steinfurt
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -468,6 +658,16 @@ ort lienen {
         verwaltung = pr_kr_tecklenburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort ladbergen {
@@ -490,6 +690,16 @@ ort ladbergen {
         besitzer   = PRU
         verwaltung = pr_kr_tecklenburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -514,6 +724,16 @@ ort luedinghausen {
         verwaltung = pr_kr_luedinghausen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort ascheberg {
@@ -536,6 +756,16 @@ ort ascheberg {
         besitzer   = PRU
         verwaltung = pr_kr_luedinghausen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -560,6 +790,16 @@ ort drensteinfurt {
         verwaltung = pr_kr_hamm
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort senden_muensterland {
@@ -582,6 +822,16 @@ ort senden_muensterland {
         besitzer   = PRU
         verwaltung = pr_kr_luedinghausen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -606,6 +856,16 @@ ort sendenhorst {
         verwaltung = pr_kr_warendorf
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort ahlen {
@@ -628,6 +888,16 @@ ort ahlen {
         besitzer   = PRU
         verwaltung = pr_kr_hamm
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -652,6 +922,16 @@ ort warendorf {
         verwaltung = pr_kr_warendorf
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort beckum {
@@ -674,6 +954,16 @@ ort beckum {
         besitzer   = PRU
         verwaltung = pr_kr_beckum
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -698,6 +988,16 @@ ort oelde {
         verwaltung = pr_kr_wiedenbrueck
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort ennigerloh {
@@ -720,6 +1020,16 @@ ort ennigerloh {
         besitzer   = PRU
         verwaltung = pr_kr_beckum
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -744,6 +1054,16 @@ ort wadersloh {
         verwaltung = pr_kr_lippstadt
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort beelen {
@@ -766,6 +1086,16 @@ ort beelen {
         besitzer   = PRU
         verwaltung = pr_kr_warendorf
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -790,6 +1120,16 @@ ort marl {
         verwaltung = pr_kr_recklinghausen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort coesfeld {
@@ -812,6 +1152,16 @@ ort coesfeld {
         besitzer   = PRU
         verwaltung = pr_kr_coesfeld
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -836,6 +1186,16 @@ ort borken_muensterland {
         verwaltung = pr_kr_borken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort bocholt {
@@ -858,6 +1218,16 @@ ort bocholt {
         besitzer   = PRU
         verwaltung = pr_kr_borken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -882,6 +1252,16 @@ ort dorsten {
         verwaltung = pr_kr_recklinghausen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort duelmen {
@@ -904,6 +1284,16 @@ ort duelmen {
         besitzer   = PRU
         verwaltung = pr_kr_luedinghausen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -928,6 +1318,16 @@ ort haltern_am_see {
         verwaltung = pr_kr_recklinghausen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort nottuln {
@@ -950,6 +1350,16 @@ ort nottuln {
         besitzer   = PRU
         verwaltung = pr_kr_coesfeld
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -974,6 +1384,16 @@ ort velen {
         verwaltung = pr_kr_borken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort raesfeld {
@@ -996,6 +1416,16 @@ ort raesfeld {
         besitzer   = PRU
         verwaltung = pr_kr_borken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1020,6 +1450,16 @@ ort isselburg {
         verwaltung = pr_kr_borken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort klein_reken {
@@ -1042,6 +1482,16 @@ ort klein_reken {
         besitzer   = PRU
         verwaltung = pr_kr_borken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1067,6 +1517,16 @@ ort gelsenkirchen {
         verwaltung = pr_kr_bochum
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort recklinghausen {
@@ -1089,6 +1549,16 @@ ort recklinghausen {
         besitzer   = PRU
         verwaltung = pr_kr_recklinghausen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1113,6 +1583,16 @@ ort bottrop {
         verwaltung = pr_kr_bochum
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort castrop_rauxel {
@@ -1135,6 +1615,16 @@ ort castrop_rauxel {
         besitzer   = PRU
         verwaltung = pr_kr_recklinghausen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1159,6 +1649,16 @@ ort gladbeck {
         verwaltung = pr_kr_recklinghausen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort datteln {
@@ -1181,5 +1681,15 @@ ort datteln {
         besitzer   = PRU
         verwaltung = pr_kr_recklinghausen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }

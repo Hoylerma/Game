@@ -28,3 +28,29 @@ strecke hannoversche_west {
     abschnitt = { von = nienburg bis = verden eroeffnet = 1847.12.12 }
     abschnitt = { von = verden bis = bremen eroeffnet = 1847.12.12 }
 }
+
+strecke hannoversche_sued_kassel {
+    name      = "Hannoversche Südbahn"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M10b, Schritt b1)"
+    abschnitt = { von = hannover bis = northeim eroeffnet = 1854.07.31 }
+    abschnitt = { von = northeim bis = goettingen eroeffnet = 1854.07.31 }
+    abschnitt = { von = goettingen bis = kassel eroeffnet = 1856.09.23 }
+}
+
+strecke hannoversche_westbahn {
+    name      = "Hannoversche Westbahn"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M10b, Schritt b1)"
+    abschnitt = { von = loehne bis = melle eroeffnet = 1855.11.21 }
+    abschnitt = { von = melle bis = osnabrueck eroeffnet = 1855.11.21 }
+    abschnitt = { von = osnabrueck bis = rheine eroeffnet = 1856.06.20 }
+    abschnitt = { von = rheine bis = lingen eroeffnet = 1856.06.20 }
+    abschnitt = { von = lingen bis = meppen eroeffnet = 1856.06.20 }
+    abschnitt = { von = meppen bis = leer eroeffnet = 1856.06.20 }
+    abschnitt = { von = leer bis = emden eroeffnet = 1856.06.20 }
+}
+
+strecke bremen_geestemuende {
+    name      = "Bremen-Geestemünder Eisenbahn"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M10b, Schritt b1)"
+    abschnitt = { von = bremen bis = bremerhaven eroeffnet = 1862.01.23 }
+}

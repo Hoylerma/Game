@@ -239,7 +239,7 @@ mobil; im Krieg rüstet niemand ab. Eine Krise, in der nach der dritten Stufe ke
 wird zum Krieg der beiden Seiten des Spiels (Ausgang „Krieg“ statt Kompromiss); eine angenommene
 Bundesintervention wird Bundesexekution: Antragsteller und Befürworter gegen das Ziel, dem seine
 Verbündeten und Garanten beistehen. Wer auf derselben Seite eines Krieges steht, gilt als eigene
-Seite (Zugang, Versorgung, Bahn). Lesezeichen im Krieg folgen mit b1.
+Seite (Zugang, Versorgung, Bahn). Lesezeichen im Krieg seit b1 (Abschnitt 6.1).
 
 ### 4.2 Schlacht
 
@@ -408,6 +408,34 @@ Jedes Lesezeichen bringt die Heere im historischen Aufmarsch mit (Ort, Soldaten,
 Befehlshaber) und beginnt im Krieg mit den historischen Kriegszielen (1864: Schleswig und Holstein;
 1866: Führung im Bund und Annexionen; 1870: Elsass und Lothringen und eine Entschädigung).
 
+Umsetzung (Schritt b1, Kern): Der Aufmarsch steht in `common/aufmarsch_<lesezeichen>.chron`
+(chronik-skript.md 3.32): Heere mit Staat, Name, Befehlshaber, Führung (0–3), Ort, Soldaten und Moral,
+die Kriege zum Start mit festen Seiten, Beginn, Anlass und den Zielen beider Seiten, dazu Bündnisse und
+Garantien. Beim Start stehen die Heere als Feldarmeen, ihre Staaten sind mobil, die Garnisonen bleiben
+als Besatzung; die übrigen Kriegführenden machen wie bei einer Erklärung mobil. Die Kriegsstärke einer
+Seite ist seitdem mindestens die Zahl ihrer Soldaten. Die Führung wirkt als Faktor
+1 + `fuehrung` × (Führung − 1) auf die Kampfkraft eines Heeres (Regel in `militaer.chron`, ohne
+Befehlshaber Führung 1, also ohne Wirkung). Nach dem Frieden lösen sich Heere ohne Garnison mit der
+Abrüstung auf. Das Kriegslabor beobachtet einen Krieg aus dem Lesezeichen, statt ihn zu erklären.
+
+Umsetzung (Schritt b1, Lesezeichen): `szenarien/dueppel.chron`, `koeniggraetz.chron` und
+`sedan.chron` mit Aufmarsch in `common/aufmarsch_<lesezeichen>.chron`. 1864: Preußen und Österreich
+(Bündnis) gegen Dänemark um Schleswig, Holstein und Lauenburg; I. Korps bei Eckernförde,
+Gardedivision und VI. Korps (Gablenz) bei Rendsburg, die dänische Armee am Danewerk, die Düppeler
+Schanzen als Festung bei Gravenstein; Dänemark mit Hinterland. 1866: Preußen und die norddeutschen
+Staaten gegen Österreich, Sachsen, Hannover, Bayern, Württemberg, Baden, beide Hessen, Nassau,
+Frankfurt, Sachsen-Meiningen, Reuß ä. L. und Liechtenstein; Ziele Führung im Bund, die Annexion von
+Hannover, Kurhessen, Nassau und Frankfurt und Holstein, Österreich eine Entschädigung; Elbarmee bei
+Torgau, I. Armee bei Görlitz, II. Armee bei Neisse, Westarmee bei Minden, Division Manteuffel in
+Rendsburg gegen die Nordarmee bei Olmütz, ihr I. Korps bei Jungbunzlau, die Sachsen in Dresden, die
+Hannoveraner in Göttingen und die Bundeskorps am Main. 1870: Frankreich gegen den Norddeutschen Bund und
+die süddeutschen Staaten (Schutz- und Trutzbündnisse), deutsche Ziele Elsass, Moselle und eine
+Entschädigung, französisches Ziel die Pfalz (Spielwert); drei deutsche Armeen an Saar und Pfalz gegen die
+Rheinarmee in Metz, Forbach, Bitsch, Straßburg, Belfort und Verdun. Erste Läufe ohne Spieler (je zwei
+Seeds, höchstens ein Jahr) zeigen den Kalibrierungsbedarf für b2: 1864 kein Frieden binnen eines Jahres,
+1866 siegt Österreich nach 6–9 Monaten, 1870 nimmt Frankreich in 13 Tagen die Pfalz (das Gebietsziel
+ist zu billig).
+
 ### 6.2 Daten 1849–1870
 
 - **Staaten und Besitz:** Hohenzollern an Preußen (1850), Anhalt vereinigt (1863), Schleswig,
@@ -426,6 +454,35 @@ Befehlshaber) und beginnt im Krieg mit den historischen Kriegszielen (1864: Schl
 - **Festungen** (rund 30 Orte) und Korpsstandorte; **Militär je Staat** (Bewaffnung,
   Mobilmachung) datiert.
 - **Bevölkerung:** 1846 (Entscheidung 14).
+
+Umsetzung (Schritt b1, Daten): Besitz, Bundesgebiet und Verwaltung 1849–1870 stehen als datierte
+Änderungen in `data/tabellen/aenderungen_1849_1870.csv`; das Werkzeug
+`tools/geodaten/historie_1849_1870.py` wendet sie auf die Zuordnung von 1848 an und schreibt
+`besitz.csv` (tabellen.md). Frankreich (FRK) gehört ab 1849 zur Welt, das Lesezeichen 1848 bleibt
+ohne Frankreich: 217 Orte im Kartenausschnitt (Elsass, Lothringen, Ardennen, Französisch-Flandern,
+Hennegau und Burgundische Pforte) mit 4,01 Millionen Einwohnern nach der Zählung 1846. Vereinfacht:
+Schleswig und Lauenburg werden schon mit dem Wiener Frieden preußisch, Holstein österreichisch (die
+Teilung von Gastein 1865); die annektierten Länder erhalten 1866 nur ihre Provinz als Verwaltung.
+Das Feld `bund` heißt ab dem 1. Juli 1867 Gebiet des Norddeutschen Bundes, dessen Bundesrat die
+Bundesversammlung ersetzt (`bis` bei Bundesversammlung, Zollunion und Parlament,
+chronik-skript.md 3.21, 3.25 und 3.29). Dänemark hat nach 1864 keinen Ort im Kartenausschnitt
+mehr und fehlt in den Lesezeichen 1866 und 1870.
+
+Umsetzung (Schritt b1, Eisenbahnen): 62 Strecken mit 185 Abschnitten von 1849 bis 1870 in
+`eisenbahnen.csv` (zusammen 361 Abschnitte), darunter die Aufmarschlinien nach Böhmen (Dresden–
+Bodenbach–Prag, Görlitz und Zittau–Reichenberg–Turnau–Josefstadt–Königgrätz–Pardubitz, Berlin–Görlitz
+1867), an den Rhein (Main-Weser, Rhein-Nahe, Saarbrücken, Pfalz, Ludwigshafen–Weißenburg–Straßburg,
+Metz–Forbach) und nach Schleswig (Rendsburg–Flensburg). Weil die Strecken an ihrem Tag eröffnen, fährt
+auch ein Spiel ab 1848 von 1849 an auf ihnen; die Zahlen 1848 ändern sich damit nach dem ersten Jahr,
+alle Korridore von Balancing-Bericht, Wahl-, Zoll- und Kriegslabor 1848 bleiben erfüllt.
+
+Umsetzung (Schritt b1, Kern): Das Hinterland steht je Staat in `militaer.chron` (`hinterland <TAG>`,
+chronik-skript.md 3.30) mit Bevölkerung, Einnahmen je Monat, Ersatz je Kriegsmonat und den Orten am
+Kartenrand. Am Monatsersten fließen die Einnahmen in die Kasse; im Krieg trifft der Ersatz im ersten
+dieser Orte ein, den die eigene Seite hält (bei einer Feldarmee ohne Garnison dort, sonst als neues
+Heer „Ersatz <Ort>“). Die Bevölkerung des Hinterlands zählt bei Besetzung, Kriegspunkten und
+Kriegsmüdigkeit mit und kann nicht besetzt werden; die Hauptstadt auf der Karte bringt dem Gegner keine
+Punkte (Paris liegt außerhalb).
 
 ### 6.3 Kriegslabor
 
@@ -585,3 +642,4 @@ Weitere Tests:
 | a3 Krieg und Schlacht | Befehl `Kriegserklaerung` mit Bündnisfall, Beziehung −20 bei allen Bundesstaaten, Ende der Verträge zwischen den Seiten, Mobilmachung aller Kriegführenden; Krise → Krieg (Ausgang „Krieg“), Bundesintervention → Bundesexekution. Kontrolle je Ort, Zugang und Bahn nach Kontrolle. Tägliche Schlacht mit Zufallsstrom `krieg` (Frontbreite, Gelände, Festung, Flussübergang, Geschütze, Moral, Bruch), Rückzug mit Gefangenen, Kapitulation, Verwüstung, Chronik. Besetzung nach einem vollen Tag, Befreiung, Kontribution; Festungen (35 im Jahr 1848) mit Belagerung. Verwundete kehren nach 60 Tagen zurück, Gefangene je Staat, Gefallene und Abgänge mindern am Monatsersten die Bevölkerung. Regeln in `common/militaer.chron`, Inhaltsbereich `militaer` Stand 3, Zustand mit Kriegen, Kontrolle, Schlachten, Belagerungen, Verwundeten, Gefangenen, Gefallenen und Zufallsstrom; Testbefehle mit Kriegserklärungen. Tests: Bündnisfall, Erklärung, Schlacht mit Rückzug, Besetzung und Verlusten, Kontribution, Belagerung, Krise → Krieg, Bundesexekution, Spielstand während Schlacht und Belagerung mit Wiederholung und Threads, Ladefehler. 1648 bitgleich, 1848 ohne Befehle zeichengleich. |
 | a4 Frieden und Generalstab | Kriegsziele (Gebiet, Annexion, Führung im Bund, Zollunion, Entschädigung) mit der Erklärung oder dem Befehl `Kriegsziel`, Kosten in Kriegspunkten; Kriegspunkte aus Besetzung, Hauptstadt, Schlachtbilanz und vernichteten Heeren; Kriegsmüdigkeit aus Verlusten, Besetzung und Dauer. Befehl `Friedensangebot` mit Annahme nach Regel, Frieden am Monatsersten nach Regel (Ziele gedeckt, Erschöpfung, 12 Monate Stillstand). Wirkung: Besitzwechsel, Untergang von Staaten (Heere, Verträge, Gesandte, Kasse und Schulden an den Erwerber, Abschied aus dem Bund), Austritt aus dem Bund oder seine Auflösung, Beitritt zur Zollunion, Zahlung; Gefangene heim, Besetzung aufgehoben, Heimkehr, Abrüstung, neue Hauptstadt, Neuaufbau der abgeleiteten Daten. Generalstab nach Regel (Befehl `Generalstab`, eigener Marsch übernimmt das Heer). Regeln in `common/militaer.chron` (1848 mit Generalstab), Inhaltsbereich `militaer` Stand 4, Zustand: Ziele und Bilanz je Krieg, Generalstab je Heer, Austritt aus dem Bund; Testbefehle mit Zielen, Angeboten und Generalstab. Probelauf 1848: Preußen annektiert Sachsen nach zwei Monaten; Preußen gegen Österreich um die Führung endet nach 13 Monaten erschöpft ohne Gewinner (Kalibrierung in b2). Tests: Ziele und Kosten, Punkte und Angebote mit Annexion und Untergang, Gebiet, Entschädigung, Stillstand, Auflösung des Bundes, Generalstab mit Lauf ohne Spieler, Threads, Spielstand und Wiederholung. 1648 bitgleich, 1848 ohne Befehle zeichengleich. |
 | a5 Kriegslabor | `uhrwerk-cli krieg` (Seeds, `--ziele`, `--tage`) mit Kriegszielen in `common/kriegsziele_<szenario>.chron` (chronik-skript.md 3.31): je Krieg und Seed ein Lauf ohne Spieler bis zum Frieden, Bericht je Lauf (Ausgang, Tage, Schlachten, Verluste, Orte, Schulden, Friedensschluss) und Verteilung über die Läufe, Verstöße mit Exitcode 1; `pruefen` prüft die Datei. Kern: `war_lab.hpp`, Ergebnis je beendetem Krieg im Zustand (`kriegsergebnisse`), Schlachten je Krieg, Inhaltsbereich `militaer` Stand 5. Kriegsziele 1848: Preußen gegen Sachsen (Sieg in 16 von 16 Läufen nach 61 Tagen im Median, 103 Orte). Fixture mit Militärdaten `tests/daten_krieg` (Nachbarschaft, Fähre, Generalstab, Festung Dresden) und drei Kriegen; CTests `pruefen_krieg_fixture`, `krieg_fixture` (16 Seeds), `krieg_1848`; CI-Schritt „Kriegslabor 1848“ (16 Seeds) im Job „Balancing“. Tests: Leser mit Fehlern, Lauf bis zum Frieden und mit Höchstdauer, gleiche Ergebnisse mit Threads, Ergebnis im Zustand, Zusammenfassung mit Verstößen. 1648 bitgleich, 1848 ohne Befehle zeichengleich. |
+| b1 Daten 1849–1870 und Kriegslesezeichen | Kern (b1a): Aufmarsch je Lesezeichen in `common/aufmarsch_<szenario>.chron` (chronik-skript.md 3.32) mit Heeren (Befehlshaber, Führung), Kriegen zum Start mit Zielen beider Seiten, Bündnissen und Garantien; Regel `fuehrung`; Hinterland je Staat (Einnahmen, Ersatz am Kartenrand, Bevölkerung bei Besetzung und Kriegspunkten); Auflösung der Aufmarschheere nach dem Frieden; Kriegsstärke mindestens die Soldaten unter Waffen; `uhrwerk-cli info` mit Aufmarsch, Kriegen und Hinterland; das Kriegslabor beobachtet Kriege aus dem Lesezeichen. Inhaltsbereich `militaer` Stand 6. Tests: Aufmarsch, Bündnis und Krieg zum Start, Hinterland, Führung, Auflösung, Spielstand und Wiederholung, Ladefehler. Daten (b1b): Historie 1849–1870 mit `historie_1849_1870.py` und `aenderungen_1849_1870.csv` (38 Änderungen), Frankreich mit 217 Orten ab 1849, Bundesrat des Norddeutschen Bundes, `bis` bei Bundesversammlung, Zollunion und Parlament; 1648 bitgleich, 1848 zeichengleich. Eisenbahnen (b1c): 62 Strecken mit 185 Abschnitten 1849–1870, ein Spiel ab 1848 bekommt sie zur Eröffnung (Korridore 1848 erfüllt). Militärdaten (b1d): Heerwesen 1859–1867, Garnisonen IX.–XII. Korps und Frankreich, Danewerk, Düppel und 13 französische Festungen, Hinterland Frankreich und Dänemark, Regel `fuehrung` 0,2. Lesezeichen (b1e): `dueppel`, `koeniggraetz`, `sedan` mit Aufmarsch (4, 15 und 14 Heere), Kriegen und Zielen beider Seiten, Bündnissen; Kriegsziele-Dateien ohne Korridore (b2). CTests `daten_pruefen_<lesezeichen>`, `krieg_<lesezeichen>` (ein Seed, 60 Tage) und `speichertest_koeniggraetz`. 1648 bitgleich. |

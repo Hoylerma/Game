@@ -484,6 +484,10 @@ jobs:
       - name: Wahlkreise aktuell? (data/tabellen/wahlkreise.csv)
         run: python3 tools/geodaten/wahlkreise_1848.py --pruefen
 
+      # Seit M10b: Besitz und Bevölkerung 1849–1870 aus den datierten Änderungen (ohne Zwischenspeicher).
+      - name: Historie 1849–1870 aktuell? (besitz.csv, bevoelkerung.csv)
+        run: python3 tools/geodaten/historie_1849_1870.py --pruefen
+
   godot:
     name: Godot (Brücke, Tests, Screenshots)
     runs-on: ubuntu-24.04

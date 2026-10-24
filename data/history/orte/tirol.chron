@@ -31,6 +31,11 @@ ort sankt_johann_in_tirol {
         verwaltung = au_kr_kreis_unterinntal
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort kitzbuehel {
@@ -53,6 +58,11 @@ ort kitzbuehel {
         besitzer   = AUT
         verwaltung = au_kr_kreis_unterinntal
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -77,6 +87,11 @@ ort koessen {
         verwaltung = au_kr_kreis_unterinntal
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort fieberbrunn {
@@ -99,6 +114,11 @@ ort fieberbrunn {
         besitzer   = AUT
         verwaltung = au_kr_kreis_unterinntal
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -123,6 +143,11 @@ ort westendorf {
         verwaltung = au_kr_kreis_unterinntal
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort ellmau {
@@ -145,6 +170,11 @@ ort ellmau {
         besitzer   = AUT
         verwaltung = au_kr_kreis_unterinntal
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -169,6 +199,11 @@ ort waidring {
         verwaltung = au_kr_kreis_unterinntal
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort woergl {
@@ -191,6 +226,11 @@ ort woergl {
         besitzer   = AUT
         verwaltung = au_kr_kreis_unterinntal
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -215,6 +255,11 @@ ort schwaz {
         verwaltung = au_kr_kreis_unterinntal
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort kufstein {
@@ -237,6 +282,11 @@ ort kufstein {
         besitzer   = AUT
         verwaltung = au_kr_kreis_unterinntal
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -261,6 +311,11 @@ ort alpbach {
         verwaltung = au_kr_kreis_unterinntal
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort fuegen {
@@ -283,6 +338,11 @@ ort fuegen {
         besitzer   = AUT
         verwaltung = au_kr_kreis_unterinntal
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -307,6 +367,11 @@ ort achenkirch {
         verwaltung = au_kr_kreis_unterinntal
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort brandenberg {
@@ -329,6 +394,11 @@ ort brandenberg {
         besitzer   = AUT
         verwaltung = au_kr_kreis_unterinntal
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -353,6 +423,11 @@ ort reutte {
         verwaltung = au_kr_kreis_oberinntal
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort tannheim {
@@ -375,6 +450,11 @@ ort tannheim {
         besitzer   = AUT
         verwaltung = au_kr_kreis_oberinntal
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -399,6 +479,11 @@ ort elbigenalp {
         verwaltung = au_kr_kreis_oberinntal
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort elmen {
@@ -422,6 +507,11 @@ ort elmen {
         verwaltung = au_kr_kreis_oberinntal
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort innsbruck {
@@ -444,6 +534,11 @@ ort innsbruck {
         besitzer   = AUT
         verwaltung = au_kr_kreis_unterinntal
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -469,6 +564,11 @@ ort hall_in_tirol {
         verwaltung = au_kr_kreis_unterinntal
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort telfs {
@@ -491,6 +591,11 @@ ort telfs {
         besitzer   = AUT
         verwaltung = au_kr_kreis_oberinntal
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -515,6 +620,11 @@ ort zirl {
         verwaltung = au_kr_kreis_unterinntal
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort leutasch {
@@ -537,6 +647,11 @@ ort leutasch {
         besitzer   = AUT
         verwaltung = au_kr_kreis_oberinntal
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -561,6 +676,11 @@ ort fritzens {
         verwaltung = au_kr_kreis_unterinntal
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort gries_im_sellrain {
@@ -583,6 +703,11 @@ ort gries_im_sellrain {
         besitzer   = AUT
         verwaltung = au_kr_kreis_oberinntal
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -607,6 +732,11 @@ ort imst {
         verwaltung = au_kr_kreis_oberinntal
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort laengenfeld {
@@ -629,6 +759,11 @@ ort laengenfeld {
         besitzer   = AUT
         verwaltung = au_kr_kreis_oberinntal
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -653,6 +788,11 @@ ort soelden {
         verwaltung = au_kr_kreis_oberinntal
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort oetz {
@@ -675,6 +815,11 @@ ort oetz {
         besitzer   = AUT
         verwaltung = au_kr_kreis_oberinntal
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -699,6 +844,11 @@ ort ehrwald {
         verwaltung = au_kr_kreis_oberinntal
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort nassereith {
@@ -721,6 +871,11 @@ ort nassereith {
         besitzer   = AUT
         verwaltung = au_kr_kreis_oberinntal
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -745,6 +900,11 @@ ort jerzens {
         verwaltung = au_kr_kreis_oberinntal
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort mayrhofen {
@@ -767,6 +927,11 @@ ort mayrhofen {
         besitzer   = AUT
         verwaltung = au_kr_kreis_unterinntal
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -791,6 +956,11 @@ ort tux {
         verwaltung = au_kr_kreis_unterinntal
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort aschau_im_zillertal {
@@ -813,6 +983,11 @@ ort aschau_im_zillertal {
         besitzer   = AUT
         verwaltung = au_kr_kreis_unterinntal
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -837,6 +1012,11 @@ ort gerlos {
         verwaltung = au_kr_kreis_unterinntal
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort landeck {
@@ -859,6 +1039,11 @@ ort landeck {
         besitzer   = AUT
         verwaltung = au_kr_kreis_oberinntal
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -883,6 +1068,11 @@ ort pfunds {
         verwaltung = au_kr_kreis_oberinntal
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort sankt_anton_am_arlberg {
@@ -905,6 +1095,11 @@ ort sankt_anton_am_arlberg {
         besitzer   = AUT
         verwaltung = au_kr_kreis_oberinntal
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -929,6 +1124,11 @@ ort ischgl {
         verwaltung = au_kr_kreis_oberinntal
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort nauders {
@@ -951,6 +1151,11 @@ ort nauders {
         besitzer   = AUT
         verwaltung = au_kr_kreis_oberinntal
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -975,6 +1180,11 @@ ort kappl {
         verwaltung = au_kr_kreis_oberinntal
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort serfaus {
@@ -997,6 +1207,11 @@ ort serfaus {
         besitzer   = AUT
         verwaltung = au_kr_kreis_oberinntal
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1021,6 +1236,11 @@ ort prutz {
         verwaltung = au_kr_kreis_oberinntal
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort flirsch {
@@ -1043,6 +1263,11 @@ ort flirsch {
         besitzer   = AUT
         verwaltung = au_kr_kreis_oberinntal
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1067,6 +1292,11 @@ ort galtuer {
         verwaltung = au_kr_kreis_oberinntal
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort graun_im_vinschgau {
@@ -1089,6 +1319,11 @@ ort graun_im_vinschgau {
         besitzer   = AUT
         verwaltung = au_kr_kreis_oberinntal
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1113,6 +1348,11 @@ ort steeg {
         verwaltung = au_kr_kreis_oberinntal
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort sterzing {
@@ -1135,6 +1375,11 @@ ort sterzing {
         besitzer   = AUT
         verwaltung = au_kr_kreis_pustertal
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1159,6 +1404,11 @@ ort neustift_im_stubaital {
         verwaltung = au_kr_kreis_unterinntal
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort steinach_am_brenner {
@@ -1181,6 +1431,11 @@ ort steinach_am_brenner {
         besitzer   = AUT
         verwaltung = au_kr_kreis_unterinntal
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1205,6 +1460,11 @@ ort ried {
         verwaltung = au_kr_kreis_pustertal
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort vals {
@@ -1227,6 +1487,11 @@ ort vals {
         besitzer   = AUT
         verwaltung = au_kr_kreis_unterinntal
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1251,6 +1516,11 @@ ort gschnitz {
         verwaltung = au_kr_kreis_unterinntal
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort lienz {
@@ -1273,6 +1543,11 @@ ort lienz {
         besitzer   = AUT
         verwaltung = au_kr_kreis_pustertal
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1297,6 +1572,11 @@ ort toblach {
         verwaltung = au_kr_kreis_pustertal
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort matrei_in_osttirol {
@@ -1319,6 +1599,11 @@ ort matrei_in_osttirol {
         besitzer   = AUT
         verwaltung = au_kr_kreis_pustertal
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1343,6 +1628,11 @@ ort sillian {
         verwaltung = au_kr_kreis_pustertal
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort nikolsdorf {
@@ -1365,6 +1655,11 @@ ort nikolsdorf {
         besitzer   = AUT
         verwaltung = au_kr_kreis_pustertal
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1389,6 +1684,11 @@ ort obertilliach {
         verwaltung = au_kr_kreis_pustertal
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort schlaiten {
@@ -1411,6 +1711,11 @@ ort schlaiten {
         besitzer   = AUT
         verwaltung = au_kr_kreis_pustertal
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1435,6 +1740,11 @@ ort san_martino {
         verwaltung = au_kr_kreis_pustertal
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort sankt_veit_in_defereggen {
@@ -1457,6 +1767,11 @@ ort sankt_veit_in_defereggen {
         besitzer   = AUT
         verwaltung = au_kr_kreis_pustertal
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1481,6 +1796,11 @@ ort praegraten {
         verwaltung = au_kr_kreis_pustertal
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort kals_am_grossglockner {
@@ -1503,6 +1823,11 @@ ort kals_am_grossglockner {
         besitzer   = AUT
         verwaltung = au_kr_kreis_pustertal
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1527,6 +1852,11 @@ ort bruneck {
         verwaltung = au_kr_kreis_pustertal
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort ahrntal {
@@ -1549,6 +1879,11 @@ ort ahrntal {
         besitzer   = AUT
         verwaltung = au_kr_kreis_pustertal
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1573,6 +1908,11 @@ ort sand_in_taufers {
         verwaltung = au_kr_kreis_pustertal
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort rasen_antholz {
@@ -1595,6 +1935,11 @@ ort rasen_antholz {
         besitzer   = AUT
         verwaltung = au_kr_kreis_pustertal
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1619,6 +1964,11 @@ ort muehlwald {
         verwaltung = au_kr_kreis_pustertal
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort prettau {
@@ -1641,6 +1991,11 @@ ort prettau {
         besitzer   = AUT
         verwaltung = au_kr_kreis_pustertal
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1665,6 +2020,11 @@ ort brixen {
         verwaltung = au_kr_kreis_pustertal
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort st_ulrich_in_groeden {
@@ -1687,6 +2047,11 @@ ort st_ulrich_in_groeden {
         besitzer   = AUT
         verwaltung = au_kr_kreis_an_der_etsch
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1711,6 +2076,11 @@ ort klausen {
         verwaltung = au_kr_kreis_an_der_etsch
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort vintl {
@@ -1733,6 +2103,11 @@ ort vintl {
         besitzer   = AUT
         verwaltung = au_kr_kreis_pustertal
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1757,6 +2132,11 @@ ort sankt_vigil {
         verwaltung = au_kr_kreis_pustertal
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort abtei {
@@ -1779,6 +2159,11 @@ ort abtei {
         besitzer   = AUT
         verwaltung = au_kr_kreis_pustertal
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1804,6 +2189,11 @@ ort meran {
         verwaltung = au_kr_kreis_an_der_etsch
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort ratschings {
@@ -1826,6 +2216,11 @@ ort ratschings {
         besitzer   = AUT
         verwaltung = au_kr_kreis_an_der_etsch
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1850,6 +2245,11 @@ ort sarnthein {
         verwaltung = au_kr_kreis_an_der_etsch
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort sankt_martin_in_passeier {
@@ -1872,6 +2272,11 @@ ort sankt_martin_in_passeier {
         besitzer   = AUT
         verwaltung = au_kr_kreis_an_der_etsch
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1896,6 +2301,11 @@ ort gargazon {
         verwaltung = au_kr_kreis_an_der_etsch
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort moos_in_passeier {
@@ -1918,6 +2328,11 @@ ort moos_in_passeier {
         besitzer   = AUT
         verwaltung = au_kr_kreis_an_der_etsch
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1942,6 +2357,11 @@ ort schlanders {
         verwaltung = au_kr_kreis_an_der_etsch
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort naturns {
@@ -1964,6 +2384,11 @@ ort naturns {
         besitzer   = AUT
         verwaltung = au_kr_kreis_an_der_etsch
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1988,6 +2413,11 @@ ort prad_am_stilfser_joch {
         verwaltung = au_kr_kreis_an_der_etsch
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort ulten {
@@ -2010,6 +2440,11 @@ ort ulten {
         besitzer   = AUT
         verwaltung = au_kr_kreis_an_der_etsch
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -2034,6 +2469,11 @@ ort schnals {
         verwaltung = au_kr_kreis_an_der_etsch
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort taufers_im_muenstertal {
@@ -2056,6 +2496,11 @@ ort taufers_im_muenstertal {
         besitzer   = AUT
         verwaltung = au_kr_kreis_an_der_etsch
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -2080,6 +2525,11 @@ ort laurein {
         verwaltung = au_kr_kreis_an_der_etsch
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort martell {
@@ -2102,6 +2552,11 @@ ort martell {
         besitzer   = AUT
         verwaltung = au_kr_kreis_an_der_etsch
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -2127,6 +2582,11 @@ ort bozen {
         verwaltung = au_kr_kreis_an_der_etsch
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort kaltern {
@@ -2149,6 +2609,11 @@ ort kaltern {
         besitzer   = AUT
         verwaltung = au_kr_kreis_an_der_etsch
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -2173,6 +2638,11 @@ ort ritten {
         verwaltung = au_kr_kreis_an_der_etsch
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort neumarkt_tirol {
@@ -2195,6 +2665,11 @@ ort neumarkt_tirol {
         besitzer   = AUT
         verwaltung = au_kr_kreis_an_der_etsch
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -2219,6 +2694,11 @@ ort salurn {
         verwaltung = au_kr_kreis_an_der_etsch
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort welschnofen {
@@ -2241,5 +2721,10 @@ ort welschnofen {
         besitzer   = AUT
         verwaltung = au_kr_kreis_an_der_etsch
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }

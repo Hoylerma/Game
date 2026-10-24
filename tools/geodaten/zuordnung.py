@@ -369,12 +369,15 @@ def besitz_zeilen(orte: list[dict[str, str]], ergebnis: Ergebnis) -> list[list[s
 
 
 def neue_besitz_tabelle(alt: str, neue: list[list[str]]) -> str:
-    """besitz.csv mit allen Zeilen außer denen zum Stichtag, dahinter die neuen Zeilen."""
+    """besitz.csv mit allen Zeilen außer denen zum Stichtag, die neuen Zeilen nach den früheren und vor
+    den späteren (seit M10: die Historie 1849–1870 von historie_1849_1870.py bleibt dahinter)."""
     zeilen = list(csv.reader(io.StringIO(alt, newline=""), delimiter=";"))
     if not zeilen or tuple(zeilen[0]) != BESITZ_SPALTEN:
         raise ZuordnungFehler(f"besitz.csv: Kopfzeile erwartet {';'.join(BESITZ_SPALTEN)}")
-    behalten = [z for z in zeilen[1:] if z and z[1] != STICHTAG]
-    return csv_text(BESITZ_SPALTEN, behalten + neue)
+    stichtag = tuple(int(t) for t in STICHTAG.split("."))
+    frueher = [z for z in zeilen[1:] if z and z[1] != STICHTAG and tuple(int(t) for t in z[1].split(".")) < stichtag]
+    spaeter = [z for z in zeilen[1:] if z and z[1] != STICHTAG and tuple(int(t) for t in z[1].split(".")) > stichtag]
+    return csv_text(BESITZ_SPALTEN, frueher + neue + spaeter)
 
 
 # ─── Bericht ────────────────────────────────────────────────────────────────

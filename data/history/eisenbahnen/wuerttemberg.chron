@@ -9,3 +9,25 @@ strecke wuerttembergische_zentralbahn {
     abschnitt = { von = ludwigsburg bis = bietigheim_bissingen eroeffnet = 1847.10.11 }
     abschnitt = { von = bietigheim_bissingen bis = heilbronn eroeffnet = 1848.07.25 }
 }
+
+strecke wuerttembergische_zentralbahn_ulm {
+    name      = "Württembergische Ostbahn und Südbahn"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M10b, Schritt b1)"
+    abschnitt = { von = goeppingen bis = ulm eroeffnet = 1850.06.29 }
+    abschnitt = { von = ulm bis = biberach_an_der_riss eroeffnet = 1850.06.08 }
+    abschnitt = { von = biberach_an_der_riss bis = friedrichshafen eroeffnet = 1850.06.08 }
+}
+
+strecke wuerttembergische_westbahn {
+    name      = "Württembergische Westbahn"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M10b, Schritt b1)"
+    abschnitt = { von = bietigheim_bissingen bis = muehlacker eroeffnet = 1853.10.01 }
+    abschnitt = { von = muehlacker bis = bruchsal eroeffnet = 1853.10.01 }
+}
+
+strecke neckarbahn {
+    name      = "Obere Neckarbahn"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M10b, Schritt b1)"
+    abschnitt = { von = esslingen bis = reutlingen eroeffnet = 1861.09.20 }
+    abschnitt = { von = reutlingen bis = tuebingen eroeffnet = 1861.09.20 }
+}

@@ -48,6 +48,11 @@ ort prag {
         verwaltung = au_kr_prag
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort leitmeritz {
@@ -80,6 +85,11 @@ ort leitmeritz {
         verwaltung = au_kr_leitmeritz
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort boehmisch_leipa {
@@ -110,6 +120,11 @@ ort boehmisch_leipa {
         besitzer   = AUT
         verwaltung = au_kr_leitmeritz
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -142,6 +157,11 @@ ort reichenberg {
         verwaltung = au_kr_bunzlau
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort gablonz {
@@ -164,6 +184,11 @@ ort gablonz {
         besitzer   = AUT
         verwaltung = au_kr_bidschow
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -188,6 +213,11 @@ ort turnau {
         verwaltung = au_kr_bidschow
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort friedland_in_boehmen {
@@ -210,6 +240,11 @@ ort friedland_in_boehmen {
         besitzer   = AUT
         verwaltung = au_kr_bidschow
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -234,6 +269,11 @@ ort tannwald {
         verwaltung = au_kr_bidschow
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort semil {
@@ -256,6 +296,11 @@ ort semil {
         besitzer   = AUT
         verwaltung = au_kr_bidschow
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -280,6 +325,11 @@ ort neustadt_an_der_tafelfichte {
         verwaltung = au_kr_bidschow
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort boehmisch_aicha {
@@ -302,6 +352,11 @@ ort boehmisch_aicha {
         besitzer   = AUT
         verwaltung = au_kr_bunzlau
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -326,6 +381,11 @@ ort rochlitz_an_der_iser {
         verwaltung = au_kr_bidschow
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort warnsdorf {
@@ -348,6 +408,11 @@ ort warnsdorf {
         besitzer   = AUT
         verwaltung = au_kr_leitmeritz
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -372,6 +437,11 @@ ort boehmisch_kamnitz {
         verwaltung = au_kr_leitmeritz
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort schluckenau {
@@ -394,6 +464,11 @@ ort schluckenau {
         besitzer   = AUT
         verwaltung = au_kr_leitmeritz
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -418,6 +493,11 @@ ort deutsch_gabel {
         verwaltung = au_kr_bunzlau
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort zwickau_boehmen {
@@ -440,6 +520,11 @@ ort zwickau_boehmen {
         besitzer   = AUT
         verwaltung = au_kr_leitmeritz
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -464,6 +549,11 @@ ort sandau {
         verwaltung = au_kr_leitmeritz
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort aussig {
@@ -486,6 +576,11 @@ ort aussig {
         besitzer   = AUT
         verwaltung = au_kr_leitmeritz
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -510,6 +605,11 @@ ort tetschen {
         verwaltung = au_kr_leitmeritz
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort poemmerle {
@@ -532,6 +632,11 @@ ort poemmerle {
         besitzer   = AUT
         verwaltung = au_kr_leitmeritz
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -556,6 +661,11 @@ ort koenigswald {
         verwaltung = au_kr_leitmeritz
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort trautenau {
@@ -578,6 +688,11 @@ ort trautenau {
         besitzer   = AUT
         verwaltung = au_kr_koeniggraetz
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -602,6 +717,11 @@ ort koeniginhof_an_der_elbe {
         verwaltung = au_kr_koeniggraetz
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort jitschin {
@@ -624,6 +744,11 @@ ort jitschin {
         besitzer   = AUT
         verwaltung = au_kr_bidschow
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -648,6 +773,11 @@ ort jaromer {
         verwaltung = au_kr_koeniggraetz
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort hohenelbe {
@@ -670,6 +800,11 @@ ort hohenelbe {
         besitzer   = AUT
         verwaltung = au_kr_bidschow
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -694,6 +829,11 @@ ort horitz {
         verwaltung = au_kr_bidschow
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort neu_paka {
@@ -716,6 +856,11 @@ ort neu_paka {
         besitzer   = AUT
         verwaltung = au_kr_bidschow
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -740,6 +885,11 @@ ort arnau {
         verwaltung = au_kr_bidschow
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort schatzlar {
@@ -762,6 +912,11 @@ ort schatzlar {
         besitzer   = AUT
         verwaltung = au_kr_bidschow
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -786,6 +941,11 @@ ort spindlermuehle {
         verwaltung = au_kr_bidschow
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort laun {
@@ -808,6 +968,11 @@ ort laun {
         besitzer   = AUT
         verwaltung = au_kr_saaz
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -832,6 +997,11 @@ ort raudnitz_a_d_elbe {
         verwaltung = au_kr_leitmeritz
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort wegstaedtl {
@@ -854,6 +1024,11 @@ ort wegstaedtl {
         besitzer   = AUT
         verwaltung = au_kr_leitmeritz
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -878,6 +1053,11 @@ ort libochowitz {
         verwaltung = au_kr_leitmeritz
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort auscha {
@@ -900,6 +1080,11 @@ ort auscha {
         besitzer   = AUT
         verwaltung = au_kr_leitmeritz
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -924,6 +1109,11 @@ ort peruc {
         verwaltung = au_kr_leitmeritz
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort wellemin {
@@ -946,6 +1136,11 @@ ort wellemin {
         besitzer   = AUT
         verwaltung = au_kr_leitmeritz
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -970,6 +1165,11 @@ ort bruex {
         verwaltung = au_kr_saaz
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort teplitz {
@@ -992,6 +1192,11 @@ ort teplitz {
         besitzer   = AUT
         verwaltung = au_kr_leitmeritz
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1016,6 +1221,11 @@ ort oberleutensdorf {
         verwaltung = au_kr_saaz
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort bilin {
@@ -1038,6 +1248,11 @@ ort bilin {
         besitzer   = AUT
         verwaltung = au_kr_leitmeritz
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1062,6 +1277,11 @@ ort rothkosteletz {
         verwaltung = au_kr_koeniggraetz
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort braunau {
@@ -1084,6 +1304,11 @@ ort braunau {
         besitzer   = AUT
         verwaltung = au_kr_koeniggraetz
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1108,6 +1333,11 @@ ort politz_an_der_mettau {
         verwaltung = au_kr_koeniggraetz
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort radowenz {
@@ -1130,6 +1360,11 @@ ort radowenz {
         besitzer   = AUT
         verwaltung = au_kr_koeniggraetz
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1154,6 +1389,11 @@ ort komotau {
         verwaltung = au_kr_saaz
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort saaz {
@@ -1176,6 +1416,11 @@ ort saaz {
         besitzer   = AUT
         verwaltung = au_kr_saaz
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1200,6 +1445,11 @@ ort kaaden {
         verwaltung = au_kr_saaz
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort podersam {
@@ -1222,6 +1472,11 @@ ort podersam {
         besitzer   = AUT
         verwaltung = au_kr_saaz
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1246,6 +1501,11 @@ ort radonitz {
         verwaltung = au_kr_saaz
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort puerstein {
@@ -1268,6 +1528,11 @@ ort puerstein {
         besitzer   = AUT
         verwaltung = au_kr_elbogen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1292,6 +1557,11 @@ ort jungbunzlau {
         verwaltung = au_kr_bunzlau
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort muenchengraetz {
@@ -1314,6 +1584,11 @@ ort muenchengraetz {
         besitzer   = AUT
         verwaltung = au_kr_bunzlau
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1338,6 +1613,11 @@ ort niemes {
         verwaltung = au_kr_bunzlau
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort hirschberg_in_boehmen {
@@ -1360,6 +1640,11 @@ ort hirschberg_in_boehmen {
         besitzer   = AUT
         verwaltung = au_kr_bunzlau
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1384,6 +1669,11 @@ ort weisswasser_in_boehmen {
         verwaltung = au_kr_bunzlau
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort dolni_bousov {
@@ -1406,6 +1696,11 @@ ort dolni_bousov {
         besitzer   = AUT
         verwaltung = au_kr_bidschow
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1430,6 +1725,11 @@ ort mseno {
         verwaltung = au_kr_bunzlau
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort neubidschow {
@@ -1452,6 +1752,11 @@ ort neubidschow {
         besitzer   = AUT
         verwaltung = au_kr_bidschow
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1476,6 +1781,11 @@ ort chlumec_nad_cidlinou {
         verwaltung = au_kr_koeniggraetz
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort koenigstadtl {
@@ -1498,6 +1808,11 @@ ort koenigstadtl {
         besitzer   = AUT
         verwaltung = au_kr_bidschow
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1522,6 +1837,11 @@ ort nechanitz {
         verwaltung = au_kr_koeniggraetz
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort kopidlno {
@@ -1544,6 +1864,11 @@ ort kopidlno {
         besitzer   = AUT
         verwaltung = au_kr_bidschow
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1568,6 +1893,11 @@ ort krinec {
         verwaltung = au_kr_bunzlau
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort karlsbad {
@@ -1590,6 +1920,11 @@ ort karlsbad {
         besitzer   = AUT
         verwaltung = au_kr_elbogen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1614,6 +1949,11 @@ ort schlackenwerth {
         verwaltung = au_kr_elbogen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort chodau {
@@ -1636,6 +1976,11 @@ ort chodau {
         besitzer   = AUT
         verwaltung = au_kr_elbogen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1660,6 +2005,11 @@ ort neudek_in_boehmen {
         verwaltung = au_kr_elbogen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort schlaggenwald {
@@ -1682,6 +2032,11 @@ ort schlaggenwald {
         besitzer   = AUT
         verwaltung = au_kr_elbogen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1706,6 +2061,11 @@ ort rothau {
         verwaltung = au_kr_elbogen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort koeniggraetz {
@@ -1728,6 +2088,11 @@ ort koeniggraetz {
         besitzer   = AUT
         verwaltung = au_kr_koeniggraetz
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1752,6 +2117,11 @@ ort nachod {
         verwaltung = au_kr_koeniggraetz
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort reichenau_an_der_knieschna {
@@ -1774,6 +2144,11 @@ ort reichenau_an_der_knieschna {
         besitzer   = AUT
         verwaltung = au_kr_koeniggraetz
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1798,6 +2173,11 @@ ort neustadt_an_der_mettau {
         verwaltung = au_kr_koeniggraetz
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort boehmisch_skalitz {
@@ -1820,6 +2200,11 @@ ort boehmisch_skalitz {
         besitzer   = AUT
         verwaltung = au_kr_koeniggraetz
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1844,6 +2229,11 @@ ort tinischt {
         verwaltung = au_kr_koeniggraetz
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort holitz {
@@ -1866,6 +2256,11 @@ ort holitz {
         besitzer   = AUT
         verwaltung = au_kr_chrudim
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1890,6 +2285,11 @@ ort opotschno {
         verwaltung = au_kr_koeniggraetz
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort dolni_cernilov {
@@ -1913,6 +2313,11 @@ ort dolni_cernilov {
         verwaltung = au_kr_koeniggraetz
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort skuhrov_nad_belou {
@@ -1935,6 +2340,11 @@ ort skuhrov_nad_belou {
         besitzer   = AUT
         verwaltung = au_kr_koeniggraetz
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1960,6 +2370,11 @@ ort kladno {
         verwaltung = au_kr_beraun
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort kralupy_nad_vltavou {
@@ -1982,6 +2397,11 @@ ort kralupy_nad_vltavou {
         besitzer   = AUT
         verwaltung = au_kr_prag
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -2006,6 +2426,11 @@ ort melnik {
         verwaltung = au_kr_prag
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort neratowitz {
@@ -2028,6 +2453,11 @@ ort neratowitz {
         besitzer   = AUT
         verwaltung = au_kr_prag
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -2052,6 +2482,11 @@ ort schlan {
         verwaltung = au_kr_prag
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort hostiwitz {
@@ -2074,6 +2509,11 @@ ort hostiwitz {
         besitzer   = AUT
         verwaltung = au_kr_prag
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -2098,6 +2538,11 @@ ort klecany {
         verwaltung = au_kr_prag
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort eger {
@@ -2120,6 +2565,11 @@ ort eger {
         besitzer   = AUT
         verwaltung = au_kr_elbogen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -2145,6 +2595,11 @@ ort falkenau {
         verwaltung = au_kr_elbogen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort asch {
@@ -2167,6 +2622,11 @@ ort asch {
         besitzer   = AUT
         verwaltung = au_kr_elbogen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -2191,6 +2651,11 @@ ort koenigsberg_an_der_eger {
         verwaltung = au_kr_elbogen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort schoenbach {
@@ -2213,6 +2678,11 @@ ort schoenbach {
         besitzer   = AUT
         verwaltung = au_kr_elbogen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -2237,6 +2707,11 @@ ort haslau {
         verwaltung = au_kr_elbogen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort unter_sandau {
@@ -2259,6 +2734,11 @@ ort unter_sandau {
         besitzer   = AUT
         verwaltung = au_kr_elbogen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -2283,6 +2763,11 @@ ort theusing {
         verwaltung = au_kr_elbogen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort kralowitz {
@@ -2305,6 +2790,11 @@ ort kralowitz {
         besitzer   = AUT
         verwaltung = au_kr_rakonitz
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -2329,6 +2819,11 @@ ort luditz {
         verwaltung = au_kr_elbogen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort buchau {
@@ -2351,6 +2846,11 @@ ort buchau {
         besitzer   = AUT
         verwaltung = au_kr_elbogen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -2375,6 +2875,11 @@ ort manetin {
         verwaltung = au_kr_pilsen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort jechnitz {
@@ -2397,6 +2902,11 @@ ort jechnitz {
         besitzer   = AUT
         verwaltung = au_kr_rakonitz
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -2421,6 +2931,11 @@ ort lubenz {
         verwaltung = au_kr_saaz
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort pardubitz {
@@ -2443,6 +2958,11 @@ ort pardubitz {
         besitzer   = AUT
         verwaltung = au_kr_chrudim
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -2467,6 +2987,11 @@ ort chrudim {
         verwaltung = au_kr_chrudim
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort hohenmauth {
@@ -2489,6 +3014,11 @@ ort hohenmauth {
         besitzer   = AUT
         verwaltung = au_kr_chrudim
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -2513,6 +3043,11 @@ ort chotebor {
         verwaltung = au_kr_chrudim
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort hlinsko {
@@ -2535,6 +3070,11 @@ ort hlinsko {
         besitzer   = AUT
         verwaltung = au_kr_chrudim
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -2559,6 +3099,11 @@ ort skutsch {
         verwaltung = au_kr_chrudim
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort hermannstaedtel {
@@ -2581,6 +3126,11 @@ ort hermannstaedtel {
         besitzer   = AUT
         verwaltung = au_kr_chrudim
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -2605,6 +3155,11 @@ ort prosec {
         verwaltung = au_kr_chrudim
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort nassaberg {
@@ -2627,6 +3182,11 @@ ort nassaberg {
         besitzer   = AUT
         verwaltung = au_kr_chrudim
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -2651,6 +3211,11 @@ ort chroustowitz {
         verwaltung = au_kr_chrudim
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort kolin {
@@ -2673,6 +3238,11 @@ ort kolin {
         besitzer   = AUT
         verwaltung = au_kr_kaurzim
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -2697,6 +3267,11 @@ ort podebrady {
         verwaltung = au_kr_kaurzim
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort brandys_nad_labem_stara_boleslav {
@@ -2719,6 +3294,11 @@ ort brandys_nad_labem_stara_boleslav {
         besitzer   = AUT
         verwaltung = au_kr_prag
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -2743,6 +3323,11 @@ ort neu_benatek {
         verwaltung = au_kr_bunzlau
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort lissa_an_der_elbe {
@@ -2765,6 +3350,11 @@ ort lissa_an_der_elbe {
         besitzer   = AUT
         verwaltung = au_kr_bunzlau
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -2789,6 +3379,11 @@ ort boehmisch_brod {
         verwaltung = au_kr_kaurzim
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort uvaly {
@@ -2811,6 +3406,11 @@ ort uvaly {
         besitzer   = AUT
         verwaltung = au_kr_kaurzim
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -2835,6 +3435,11 @@ ort sadska {
         verwaltung = au_kr_kaurzim
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort kourim {
@@ -2857,6 +3462,11 @@ ort kourim {
         besitzer   = AUT
         verwaltung = au_kr_kaurzim
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -2881,6 +3491,11 @@ ort marienbad {
         verwaltung = au_kr_elbogen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort tachau {
@@ -2903,6 +3518,11 @@ ort tachau {
         besitzer   = AUT
         verwaltung = au_kr_elbogen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -2927,6 +3547,11 @@ ort mies {
         verwaltung = au_kr_pilsen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort plan {
@@ -2949,6 +3574,11 @@ ort plan {
         besitzer   = AUT
         verwaltung = au_kr_elbogen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -2973,6 +3603,11 @@ ort haid {
         verwaltung = au_kr_pilsen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort tepl {
@@ -2995,6 +3630,11 @@ ort tepl {
         besitzer   = AUT
         verwaltung = au_kr_elbogen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -3019,6 +3659,11 @@ ort tschernoschin {
         verwaltung = au_kr_pilsen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort weseritz {
@@ -3041,6 +3686,11 @@ ort weseritz {
         besitzer   = AUT
         verwaltung = au_kr_pilsen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -3066,6 +3716,11 @@ ort beraun {
         verwaltung = au_kr_beraun
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort rakonitz {
@@ -3088,6 +3743,11 @@ ort rakonitz {
         besitzer   = AUT
         verwaltung = au_kr_rakonitz
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -3112,6 +3772,11 @@ ort dobris {
         verwaltung = au_kr_beraun
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort neustraschitz {
@@ -3134,6 +3799,11 @@ ort neustraschitz {
         besitzer   = AUT
         verwaltung = au_kr_rakonitz
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -3158,6 +3828,11 @@ ort mnisek_pod_brdy {
         verwaltung = au_kr_beraun
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort zditz {
@@ -3180,6 +3855,11 @@ ort zditz {
         besitzer   = AUT
         verwaltung = au_kr_beraun
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -3204,6 +3884,11 @@ ort cernosice {
         verwaltung = au_kr_prag
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort hostomitz {
@@ -3226,6 +3911,11 @@ ort hostomitz {
         besitzer   = AUT
         verwaltung = au_kr_beraun
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -3250,6 +3940,11 @@ ort roztoky {
         verwaltung = au_kr_rakonitz
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort kuttenberg {
@@ -3272,6 +3967,11 @@ ort kuttenberg {
         besitzer   = AUT
         verwaltung = au_kr_czaslau
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -3296,6 +3996,11 @@ ort tschaslau {
         verwaltung = au_kr_czaslau
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort prelouc {
@@ -3318,6 +4023,11 @@ ort prelouc {
         besitzer   = AUT
         verwaltung = au_kr_czaslau
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -3342,6 +4052,11 @@ ort tremoschnitz {
         verwaltung = au_kr_czaslau
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort chwaletitz {
@@ -3364,6 +4079,11 @@ ort chwaletitz {
         besitzer   = AUT
         verwaltung = au_kr_czaslau
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -3388,6 +4108,11 @@ ort goltsch_jenikau {
         verwaltung = au_kr_czaslau
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort boehmisch_truebau {
@@ -3410,6 +4135,11 @@ ort boehmisch_truebau {
         besitzer   = AUT
         verwaltung = au_kr_chrudim
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -3434,6 +4164,11 @@ ort wildenschwert {
         verwaltung = au_kr_chrudim
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort leitomischl {
@@ -3456,6 +4191,11 @@ ort leitomischl {
         besitzer   = AUT
         verwaltung = au_kr_chrudim
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -3480,6 +4220,11 @@ ort landskron {
         verwaltung = au_kr_chrudim
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort senftenberg_boehmen {
@@ -3502,6 +4247,11 @@ ort senftenberg_boehmen {
         besitzer   = AUT
         verwaltung = au_kr_koeniggraetz
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -3526,6 +4276,11 @@ ort grulich {
         verwaltung = au_kr_koeniggraetz
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort jablonne_nad_orlici {
@@ -3548,6 +4303,11 @@ ort jablonne_nad_orlici {
         besitzer   = AUT
         verwaltung = au_kr_chrudim
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -3572,6 +4332,11 @@ ort beneschau {
         verwaltung = au_kr_kaurzim
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort ricany {
@@ -3594,6 +4359,11 @@ ort ricany {
         besitzer   = AUT
         verwaltung = au_kr_prag
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -3618,6 +4388,11 @@ ort tynec_nad_sazavou {
         verwaltung = au_kr_prag
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort wotitz {
@@ -3640,6 +4415,11 @@ ort wotitz {
         besitzer   = AUT
         verwaltung = au_kr_tabor
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -3664,6 +4444,11 @@ ort eule {
         verwaltung = au_kr_prag
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort neweklau {
@@ -3686,6 +4471,11 @@ ort neweklau {
         besitzer   = AUT
         verwaltung = au_kr_prag
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -3710,6 +4500,11 @@ ort zwittau {
         verwaltung = au_kr_chrudim
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort maehrisch_truebau {
@@ -3732,6 +4527,11 @@ ort maehrisch_truebau {
         besitzer   = AUT
         verwaltung = au_kr_chrudim
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -3756,6 +4556,11 @@ ort policka {
         verwaltung = au_kr_chrudim
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort bistrau {
@@ -3779,6 +4584,11 @@ ort bistrau {
         verwaltung = au_kr_chrudim
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort bruesau {
@@ -3801,6 +4611,11 @@ ort bruesau {
         besitzer   = AUT
         verwaltung = au_kr_chrudim
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -3826,6 +4641,11 @@ ort pilsen {
         verwaltung = au_kr_pilsen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort prestice {
@@ -3848,6 +4668,11 @@ ort prestice {
         besitzer   = AUT
         verwaltung = au_kr_pilsen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -3872,6 +4697,11 @@ ort dobrzan {
         verwaltung = au_kr_pilsen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort nuerschan {
@@ -3894,6 +4724,11 @@ ort nuerschan {
         besitzer   = AUT
         verwaltung = au_kr_pilsen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -3918,6 +4753,11 @@ ort alt_pilsenetz {
         verwaltung = au_kr_pilsen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort holysov {
@@ -3940,6 +4780,11 @@ ort holysov {
         besitzer   = AUT
         verwaltung = au_kr_klattau
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -3964,6 +4809,11 @@ ort ober_bris {
         verwaltung = au_kr_pilsen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort wlaschim {
@@ -3986,6 +4836,11 @@ ort wlaschim {
         besitzer   = AUT
         verwaltung = au_kr_kaurzim
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -4010,6 +4865,11 @@ ort zruc_nad_sazavou {
         verwaltung = au_kr_czaslau
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort sazau {
@@ -4032,6 +4892,11 @@ ort sazau {
         besitzer   = AUT
         verwaltung = au_kr_kaurzim
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -4056,6 +4921,11 @@ ort kohljanowitz {
         verwaltung = au_kr_kaurzim
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort cechtice {
@@ -4078,6 +4948,11 @@ ort cechtice {
         besitzer   = AUT
         verwaltung = au_kr_tabor
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -4102,6 +4977,11 @@ ort zbraslawitz {
         verwaltung = au_kr_czaslau
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort naceradec {
@@ -4124,6 +5004,11 @@ ort naceradec {
         besitzer   = AUT
         verwaltung = au_kr_tabor
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -4148,6 +5033,11 @@ ort pribram {
         verwaltung = au_kr_beraun
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort rokitzan {
@@ -4170,6 +5060,11 @@ ort rokitzan {
         besitzer   = AUT
         verwaltung = au_kr_pilsen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -4194,6 +5089,11 @@ ort horowitz {
         verwaltung = au_kr_beraun
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort breznitz {
@@ -4216,6 +5116,11 @@ ort breznitz {
         besitzer   = AUT
         verwaltung = au_kr_prachin
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -4240,6 +5145,11 @@ ort zbirow {
         verwaltung = au_kr_beraun
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort radnitz {
@@ -4262,6 +5172,11 @@ ort radnitz {
         besitzer   = AUT
         verwaltung = au_kr_pilsen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -4286,6 +5201,11 @@ ort straschitz {
         verwaltung = au_kr_pilsen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort deutsch_brod {
@@ -4308,6 +5228,11 @@ ort deutsch_brod {
         besitzer   = AUT
         verwaltung = au_kr_czaslau
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -4332,6 +5257,11 @@ ort humpoletz {
         verwaltung = au_kr_czaslau
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort pilgram {
@@ -4354,6 +5284,11 @@ ort pilgram {
         besitzer   = AUT
         verwaltung = au_kr_tabor
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -4378,6 +5313,11 @@ ort svetla_nad_sazavou {
         verwaltung = au_kr_czaslau
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort ledec_nad_sazavou {
@@ -4400,6 +5340,11 @@ ort ledec_nad_sazavou {
         besitzer   = AUT
         verwaltung = au_kr_czaslau
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -4424,6 +5369,11 @@ ort pribislau {
         verwaltung = au_kr_chrudim
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort stecken {
@@ -4446,6 +5396,11 @@ ort stecken {
         besitzer   = AUT
         verwaltung = au_kr_czaslau
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -4470,6 +5425,11 @@ ort seelau {
         verwaltung = au_kr_tabor
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort muehlhausen_boehmen {
@@ -4492,6 +5452,11 @@ ort muehlhausen_boehmen {
         besitzer   = AUT
         verwaltung = au_kr_tabor
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -4516,6 +5481,11 @@ ort sedlcany {
         verwaltung = au_kr_tabor
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort jistebnitz {
@@ -4538,6 +5508,11 @@ ort jistebnitz {
         besitzer   = AUT
         verwaltung = au_kr_tabor
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -4562,6 +5537,11 @@ ort oparany {
         verwaltung = au_kr_tabor
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort kowarow {
@@ -4584,6 +5564,11 @@ ort kowarow {
         besitzer   = AUT
         verwaltung = au_kr_prachin
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -4608,6 +5593,11 @@ ort schoenberg {
         verwaltung = au_kr_prachin
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort taus {
@@ -4630,6 +5620,11 @@ ort taus {
         besitzer   = AUT
         verwaltung = au_kr_klattau
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -4654,6 +5649,11 @@ ort neugedein {
         verwaltung = au_kr_klattau
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort bischofteinitz {
@@ -4676,6 +5676,11 @@ ort bischofteinitz {
         besitzer   = AUT
         verwaltung = au_kr_klattau
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -4700,6 +5705,11 @@ ort ronsperg {
         verwaltung = au_kr_klattau
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort weissensulz {
@@ -4722,6 +5732,11 @@ ort weissensulz {
         besitzer   = AUT
         verwaltung = au_kr_klattau
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -4746,6 +5761,11 @@ ort blatna {
         verwaltung = au_kr_prachin
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort horazdovice {
@@ -4768,6 +5788,11 @@ ort horazdovice {
         besitzer   = AUT
         verwaltung = au_kr_klattau
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -4792,6 +5817,11 @@ ort nepomuk {
         verwaltung = au_kr_klattau
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort blowitz {
@@ -4814,6 +5844,11 @@ ort blowitz {
         besitzer   = AUT
         verwaltung = au_kr_pilsen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -4838,6 +5873,11 @@ ort kasejowitz {
         verwaltung = au_kr_klattau
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort tabor {
@@ -4860,6 +5900,11 @@ ort tabor {
         besitzer   = AUT
         verwaltung = au_kr_tabor
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -4884,6 +5929,11 @@ ort neuhaus {
         verwaltung = au_kr_tabor
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort sobeslau {
@@ -4906,6 +5956,11 @@ ort sobeslau {
         besitzer   = AUT
         verwaltung = au_kr_tabor
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -4930,6 +5985,11 @@ ort veseli_nad_luznici {
         verwaltung = au_kr_tabor
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort patzau {
@@ -4952,6 +6012,11 @@ ort patzau {
         besitzer   = AUT
         verwaltung = au_kr_tabor
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -4976,6 +6041,11 @@ ort kamenitz_an_der_linde {
         verwaltung = au_kr_tabor
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort pocatky {
@@ -4998,6 +6068,11 @@ ort pocatky {
         besitzer   = AUT
         verwaltung = au_kr_tabor
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -5022,6 +6097,11 @@ ort jungwoschitz {
         verwaltung = au_kr_tabor
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort kardasova_recice {
@@ -5044,6 +6124,11 @@ ort kardasova_recice {
         besitzer   = AUT
         verwaltung = au_kr_tabor
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -5068,6 +6153,11 @@ ort cernovice {
         verwaltung = au_kr_tabor
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort chejnow {
@@ -5090,6 +6180,11 @@ ort chejnow {
         besitzer   = AUT
         verwaltung = au_kr_tabor
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -5114,6 +6209,11 @@ ort horni_cerekev {
         verwaltung = au_kr_tabor
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort klattau {
@@ -5136,6 +6236,11 @@ ort klattau {
         besitzer   = AUT
         verwaltung = au_kr_klattau
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -5160,6 +6265,11 @@ ort schuettenhofen {
         verwaltung = au_kr_klattau
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort neuern {
@@ -5182,6 +6292,11 @@ ort neuern {
         besitzer   = AUT
         verwaltung = au_kr_klattau
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -5206,6 +6321,11 @@ ort markt_eisenstein {
         verwaltung = au_kr_klattau
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort schwihau {
@@ -5228,6 +6348,11 @@ ort schwihau {
         besitzer   = AUT
         verwaltung = au_kr_klattau
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -5252,6 +6377,11 @@ ort planitz {
         verwaltung = au_kr_klattau
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort kolinetz {
@@ -5274,6 +6404,11 @@ ort kolinetz {
         besitzer   = AUT
         verwaltung = au_kr_klattau
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -5298,6 +6433,11 @@ ort pisek {
         verwaltung = au_kr_prachin
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort strakonitz {
@@ -5320,6 +6460,11 @@ ort strakonitz {
         besitzer   = AUT
         verwaltung = au_kr_prachin
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -5344,6 +6489,11 @@ ort moldauthein {
         verwaltung = au_kr_prachin
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort vodnany {
@@ -5366,6 +6516,11 @@ ort vodnany {
         besitzer   = AUT
         verwaltung = au_kr_prachin
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -5390,6 +6545,11 @@ ort bechyne {
         verwaltung = au_kr_tabor
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort wolin {
@@ -5412,6 +6572,11 @@ ort wolin {
         besitzer   = AUT
         verwaltung = au_kr_prachin
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -5436,6 +6601,11 @@ ort netolitz {
         verwaltung = au_kr_budweis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort mirotitz {
@@ -5458,6 +6628,11 @@ ort mirotitz {
         besitzer   = AUT
         verwaltung = au_kr_prachin
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -5482,6 +6657,11 @@ ort zirnau {
         verwaltung = au_kr_budweis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort datschitz {
@@ -5504,6 +6684,11 @@ ort datschitz {
         besitzer   = AUT
         verwaltung = au_kr_tabor
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -5528,6 +6713,11 @@ ort neu_bistritz {
         verwaltung = au_kr_budweis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort zlabings {
@@ -5550,6 +6740,11 @@ ort zlabings {
         besitzer   = AUT
         verwaltung = au_kr_budweis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -5574,6 +6769,11 @@ ort koenigseck {
         verwaltung = au_kr_tabor
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort prachatitz {
@@ -5596,6 +6796,11 @@ ort prachatitz {
         besitzer   = AUT
         verwaltung = au_kr_prachin
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -5620,6 +6825,11 @@ ort winterberg_boehmen {
         verwaltung = au_kr_prachin
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort wallern {
@@ -5642,6 +6852,11 @@ ort wallern {
         besitzer   = AUT
         verwaltung = au_kr_budweis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -5666,6 +6881,11 @@ ort bergreichenstein {
         verwaltung = au_kr_klattau
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort vacov {
@@ -5688,6 +6908,11 @@ ort vacov {
         besitzer   = AUT
         verwaltung = au_kr_prachin
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -5712,6 +6937,11 @@ ort ferchenhaid {
         verwaltung = au_kr_prachin
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort budweis {
@@ -5734,6 +6964,11 @@ ort budweis {
         besitzer   = AUT
         verwaltung = au_kr_budweis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -5758,6 +6993,11 @@ ort wittingau {
         verwaltung = au_kr_budweis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort frauenberg {
@@ -5780,6 +7020,11 @@ ort frauenberg {
         besitzer   = AUT
         verwaltung = au_kr_budweis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -5804,6 +7049,11 @@ ort trhove_sviny {
         verwaltung = au_kr_budweis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort lischau {
@@ -5826,6 +7076,11 @@ ort lischau {
         besitzer   = AUT
         verwaltung = au_kr_budweis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -5850,6 +7105,11 @@ ort gratzen {
         verwaltung = au_kr_budweis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort suchenthal_an_der_lainsitz {
@@ -5872,6 +7132,11 @@ ort suchenthal_an_der_lainsitz {
         besitzer   = AUT
         verwaltung = au_kr_budweis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -5896,6 +7161,11 @@ ort lomnitz {
         verwaltung = au_kr_budweis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort sevetin {
@@ -5918,6 +7188,11 @@ ort sevetin {
         besitzer   = AUT
         verwaltung = au_kr_budweis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -5942,6 +7217,11 @@ ort krumau {
         verwaltung = au_kr_budweis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort kaplitz {
@@ -5964,6 +7244,11 @@ ort kaplitz {
         besitzer   = AUT
         verwaltung = au_kr_budweis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -5988,6 +7273,11 @@ ort velesin {
         verwaltung = au_kr_budweis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort hohenfurth {
@@ -6010,6 +7300,11 @@ ort hohenfurth {
         besitzer   = AUT
         verwaltung = au_kr_budweis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -6034,6 +7329,11 @@ ort oberplan {
         verwaltung = au_kr_budweis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort kremze {
@@ -6056,6 +7356,11 @@ ort kremze {
         besitzer   = AUT
         verwaltung = au_kr_budweis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -6080,6 +7385,11 @@ ort friedberg_in_boehmen {
         verwaltung = au_kr_budweis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort deutsch_beneschau {
@@ -6103,6 +7413,11 @@ ort deutsch_beneschau {
         verwaltung = au_kr_budweis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort unter_haid {
@@ -6125,5 +7440,10 @@ ort unter_haid {
         besitzer   = AUT
         verwaltung = au_kr_budweis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }

@@ -14,3 +14,27 @@ strecke badische_hauptbahn {
     abschnitt = { von = emmendingen bis = freiburg_im_breisgau eroeffnet = 1845.07.30 }
     abschnitt = { von = freiburg_im_breisgau bis = muellheim eroeffnet = 1847.06.01 }
 }
+
+strecke badische_hauptbahn_basel {
+    name      = "Badische Hauptbahn (bis Basel) und Hochrheinbahn"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M10b, Schritt b1)"
+    abschnitt = { von = muellheim bis = loerrach eroeffnet = 1855.02.20 }
+    abschnitt = { von = loerrach bis = bad_saeckingen eroeffnet = 1856.10.30 }
+    abschnitt = { von = bad_saeckingen bis = waldshut_tiengen eroeffnet = 1856.10.30 }
+    abschnitt = { von = waldshut_tiengen bis = singen eroeffnet = 1863.06.15 }
+    abschnitt = { von = singen bis = konstanz eroeffnet = 1863.06.15 }
+}
+
+strecke kehl_strassburg {
+    name      = "Rheinbrücke Kehl–Straßburg"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M10b, Schritt b1)"
+    abschnitt = { von = offenburg bis = strassburg eroeffnet = 1861.04.11 }
+}
+
+strecke odenwaldbahn {
+    name      = "Badische Odenwaldbahn"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M10b, Schritt b1)"
+    abschnitt = { von = heidelberg bis = mosbach eroeffnet = 1862.10.23 }
+    abschnitt = { von = mosbach bis = osterburken eroeffnet = 1866.08.25 }
+    abschnitt = { von = osterburken bis = wuerzburg eroeffnet = 1866.08.25 }
+}

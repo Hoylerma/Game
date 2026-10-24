@@ -1,0 +1,164 @@
+# Aufmarsch des Lesezeichens „Königgrätz“ (16. Juni 1866; Meilenstein M10b, Schritt b1).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.32; militaer.md, Abschnitt 6.1. Elbarmee, I. und
+# II. Armee an der Grenze zu Sachsen und Böhmen, die Westarmee gegen Hannover und Kurhessen; die
+# Nordarmee Benedeks bei Olmütz, ihr I. Korps mit den Sachsen in Nordböhmen; die süddeutschen
+# Bundeskorps am Main. Ohne die Südarmee (Italien, nicht abgebildet). Stärken ungeprüft.
+
+krieg deutscher_krieg {
+    name        = "Deutscher Krieg"
+    beginn      = 1866.06.16
+    angreifer   = { PRU MSC MST OLD BWO DES WAL LIP LUE BRE HAM }
+    verteidiger = { AUT SAX HAN BAV WUE BAD HED HEK NAS FRA SMG REA LIE }
+    ziel        = { fuehrung = ja annexion = HAN annexion = HEK annexion = NAS annexion = FRA gebiet = au_holstein }
+    ziel_verteidiger = { entschaedigung = 6 }
+    quelle      = "Bundesbeschluss vom 14.6.1866 und Einmarsch am 16.6.; Ziele nach dem Prager Frieden (23.8.1866) und den Annexionen"
+}
+
+heer pru_elbarmee {
+    staat        = PRU
+    name         = "Elbarmee"
+    befehlshaber = "Karl Eberhard Herwarth von Bittenfeld"
+    fuehrung     = 1.1
+    ort          = torgau
+    soldaten     = 46000
+    quelle = "Stärke und Ort nach Wissensstand ohne Quellenzugang (ungeprüft), Führung Spielwert (M10b)"
+}
+
+heer pru_erste_armee {
+    staat        = PRU
+    name         = "I. Armee"
+    befehlshaber = "Prinz Friedrich Karl"
+    fuehrung     = 1.2
+    ort          = goerlitz
+    soldaten     = 93000
+    quelle = "Stärke und Ort nach Wissensstand ohne Quellenzugang (ungeprüft), Führung Spielwert (M10b)"
+}
+
+heer pru_zweite_armee {
+    staat        = PRU
+    name         = "II. Armee"
+    befehlshaber = "Kronprinz Friedrich Wilhelm"
+    fuehrung     = 1.4
+    ort          = neisse
+    soldaten     = 115000
+    quelle = "Stärke und Ort nach Wissensstand ohne Quellenzugang (ungeprüft), Führung Spielwert (M10b)"
+}
+
+heer pru_westarmee {
+    staat        = PRU
+    name         = "Westarmee"
+    befehlshaber = "Eduard Vogel von Falckenstein"
+    fuehrung     = 1.2
+    ort          = minden
+    soldaten     = 45000
+    quelle = "Stärke und Ort nach Wissensstand ohne Quellenzugang (ungeprüft), Führung Spielwert (M10b)"
+}
+
+heer pru_manteuffel {
+    staat        = PRU
+    name         = "Division Manteuffel"
+    befehlshaber = "Edwin von Manteuffel"
+    fuehrung     = 1
+    ort          = rendsburg
+    soldaten     = 14000
+    quelle = "Stärke und Ort nach Wissensstand ohne Quellenzugang (ungeprüft), Führung Spielwert (M10b)"
+}
+
+heer aut_nordarmee {
+    staat        = AUT
+    name         = "Nordarmee"
+    befehlshaber = "Ludwig von Benedek"
+    fuehrung     = 0.7
+    ort          = olmuetz
+    soldaten     = 205000
+    quelle = "Stärke und Ort nach Wissensstand ohne Quellenzugang (ungeprüft), Führung Spielwert (M10b)"
+}
+
+heer aut_clam_gallas {
+    staat        = AUT
+    name         = "I. Korps"
+    befehlshaber = "Eduard Clam-Gallas"
+    fuehrung     = 0.6
+    ort          = jungbunzlau
+    soldaten     = 33000
+    quelle = "Stärke und Ort nach Wissensstand ohne Quellenzugang (ungeprüft), Führung Spielwert (M10b)"
+}
+
+heer sax_kronprinz_albert {
+    staat        = SAX
+    name         = "Sächsisches Armeekorps"
+    befehlshaber = "Kronprinz Albert"
+    fuehrung     = 1.3
+    ort          = dresden
+    soldaten     = 32000
+    quelle = "Stärke und Ort nach Wissensstand ohne Quellenzugang (ungeprüft), Führung Spielwert (M10b)"
+}
+
+heer han_armee {
+    staat        = HAN
+    name         = "Hannoversche Armee"
+    befehlshaber = "Alexander von Arentschildt"
+    fuehrung     = 1
+    ort          = goettingen
+    soldaten     = 19000
+    quelle = "Stärke und Ort nach Wissensstand ohne Quellenzugang (ungeprüft), Führung Spielwert (M10b)"
+}
+
+heer bav_bundeskorps {
+    staat        = BAV
+    name         = "VII. Bundeskorps"
+    befehlshaber = "Prinz Karl von Bayern"
+    fuehrung     = 0.8
+    ort          = schweinfurt
+    soldaten     = 45000
+    quelle = "Stärke und Ort nach Wissensstand ohne Quellenzugang (ungeprüft), Führung Spielwert (M10b)"
+}
+
+heer wue_division_1866 {
+    staat        = WUE
+    name         = "Württembergische Division"
+    befehlshaber = "Oskar von Hardegg"
+    fuehrung     = 0.9
+    ort          = frankfurt_am_main
+    soldaten     = 14000
+    quelle = "Stärke und Ort nach Wissensstand ohne Quellenzugang (ungeprüft), Führung Spielwert (M10b)"
+}
+
+heer bad_division_1866 {
+    staat        = BAD
+    name         = "Badische Division"
+    befehlshaber = "Prinz Wilhelm von Baden"
+    fuehrung     = 0.9
+    ort          = heidelberg
+    soldaten     = 11000
+    quelle = "Stärke und Ort nach Wissensstand ohne Quellenzugang (ungeprüft), Führung Spielwert (M10b)"
+}
+
+heer hed_division_1866 {
+    staat        = HED
+    name         = "Großherzoglich Hessische Division"
+    befehlshaber = "Prinz Alexander von Hessen"
+    fuehrung     = 0.8
+    ort          = darmstadt
+    soldaten     = 10000
+    quelle = "Stärke und Ort nach Wissensstand ohne Quellenzugang (ungeprüft), Führung Spielwert (M10b)"
+}
+
+heer nas_brigade {
+    staat        = NAS
+    name         = "Nassauische Brigade"
+    fuehrung     = 0.9
+    ort          = wiesbaden
+    soldaten     = 5000
+    quelle = "Stärke und Ort nach Wissensstand ohne Quellenzugang (ungeprüft), Führung Spielwert (M10b)"
+}
+
+heer hek_division {
+    staat        = HEK
+    name         = "Kurhessische Division"
+    fuehrung     = 0.8
+    ort          = fulda
+    soldaten     = 7000
+    quelle = "Stärke und Ort nach Wissensstand ohne Quellenzugang (ungeprüft), Führung Spielwert (M10b)"
+}

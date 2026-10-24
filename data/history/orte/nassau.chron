@@ -33,6 +33,16 @@ ort wetzlar {
         verwaltung = pr_kr_wetzlar
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort dillenburg {
@@ -54,6 +64,21 @@ ort dillenburg {
 
     1848.03.01 = {
         besitzer = NAS
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = NAS
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
         bund     = ja
     }
 }
@@ -79,6 +104,21 @@ ort weilburg {
         besitzer = NAS
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = NAS
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort braunfels {
@@ -101,6 +141,16 @@ ort braunfels {
         besitzer   = PRU
         verwaltung = pr_kr_wetzlar
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -125,6 +175,16 @@ ort ehringshausen {
         verwaltung = pr_kr_wetzlar
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort weilmuenster {
@@ -145,6 +205,21 @@ ort weilmuenster {
 
     1848.03.01 = {
         besitzer = NAS
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = NAS
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
         bund     = ja
     }
 }
@@ -170,6 +245,16 @@ ort bischoffen {
         verwaltung = hd_oberhessen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort westerburg {
@@ -190,6 +275,21 @@ ort westerburg {
 
     1848.03.01 = {
         besitzer = NAS
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = NAS
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
         bund     = ja
     }
 }
@@ -214,6 +314,21 @@ ort bad_marienberg {
         besitzer = NAS
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = NAS
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort driedorf {
@@ -234,6 +349,21 @@ ort driedorf {
 
     1848.03.01 = {
         besitzer = NAS
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = NAS
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
         bund     = ja
     }
 }
@@ -258,6 +388,21 @@ ort hachenburg {
         besitzer = NAS
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = NAS
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort rennerod {
@@ -278,6 +423,21 @@ ort rennerod {
 
     1848.03.01 = {
         besitzer = NAS
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = NAS
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
         bund     = ja
     }
 }
@@ -302,6 +462,21 @@ ort lahnstein {
         besitzer = NAS
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = NAS
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort montabaur {
@@ -322,6 +497,21 @@ ort montabaur {
 
     1848.03.01 = {
         besitzer = NAS
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = NAS
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
         bund     = ja
     }
 }
@@ -346,6 +536,21 @@ ort bad_ems {
         besitzer = NAS
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = NAS
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort hoehr_grenzhausen {
@@ -366,6 +571,21 @@ ort hoehr_grenzhausen {
 
     1848.03.01 = {
         besitzer = NAS
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = NAS
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
         bund     = ja
     }
 }
@@ -390,6 +610,21 @@ ort nastaetten {
         besitzer = NAS
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = NAS
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort selters {
@@ -410,6 +645,21 @@ ort selters {
 
     1848.03.01 = {
         besitzer = NAS
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = NAS
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
         bund     = ja
     }
 }
@@ -434,6 +684,21 @@ ort holzappel {
         besitzer = NAS
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = NAS
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort wiesbaden {
@@ -454,6 +719,21 @@ ort wiesbaden {
 
     1848.03.01 = {
         besitzer = NAS
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = NAS
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
         bund     = ja
     }
 }
@@ -478,6 +758,21 @@ ort limburg_an_der_lahn {
         besitzer = NAS
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = NAS
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort hofheim_am_taunus {
@@ -498,6 +793,21 @@ ort hofheim_am_taunus {
 
     1848.03.01 = {
         besitzer = NAS
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = NAS
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
         bund     = ja
     }
 }
@@ -522,6 +832,21 @@ ort bad_schwalbach {
         besitzer = NAS
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = NAS
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort idstein {
@@ -542,6 +867,21 @@ ort idstein {
 
     1848.03.01 = {
         besitzer = NAS
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = NAS
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
         bund     = ja
     }
 }
@@ -566,6 +906,21 @@ ort eschborn {
         besitzer = NAS
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = NAS
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort bad_camberg {
@@ -586,6 +941,21 @@ ort bad_camberg {
 
     1848.03.01 = {
         besitzer = NAS
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = NAS
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
         bund     = ja
     }
 }
@@ -610,6 +980,21 @@ ort eltville {
         besitzer = NAS
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = NAS
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort villmar {
@@ -632,6 +1017,21 @@ ort villmar {
         besitzer = NAS
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = NAS
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort hahnstaetten {
@@ -652,6 +1052,21 @@ ort hahnstaetten {
 
     1848.03.01 = {
         besitzer = NAS
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = NAS
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
         bund     = ja
     }
 }

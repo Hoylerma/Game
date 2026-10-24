@@ -19,6 +19,15 @@ ort duenkirchen {
     stadt    = ja
     kreis    = kr_duenkirchen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3020686; deutscher Name aus den GeoNames-Alternativnamen (heute Dunkerque); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_nord
+        bevoelkerung = 40774
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 75 flamen = 25 }
+        verwuestung  = 0
+    }
 }
 
 ort loon_plage {
@@ -29,6 +38,15 @@ ort loon_plage {
     stadt    = nein
     kreis    = kr_duenkirchen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2997621; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Lage auf das nächste Landpixel gesetzt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_nord
+        bevoelkerung = 10757
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 75 flamen = 25 }
+        verwuestung  = 0
+    }
 }
 
 ort wormhout {
@@ -39,6 +57,15 @@ ort wormhout {
     stadt    = nein
     kreis    = kr_duenkirchen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2967288; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_nord
+        bevoelkerung = 37872
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 75 flamen = 25 }
+        verwuestung  = 0
+    }
 }
 
 ort bray_dunes {
@@ -49,6 +76,15 @@ ort bray_dunes {
     stadt    = nein
     kreis    = kr_duenkirchen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3030473; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_nord
+        bevoelkerung = 11016
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 75 flamen = 25 }
+        verwuestung  = 0
+    }
 }
 
 ort hondschoote {
@@ -59,6 +95,15 @@ ort hondschoote {
     stadt    = nein
     kreis    = kr_duenkirchen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3013174; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_nord
+        bevoelkerung = 28368
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 75 flamen = 25 }
+        verwuestung  = 0
+    }
 }
 
 ort lille {
@@ -69,6 +114,15 @@ ort lille {
     stadt    = ja
     kreis    = kr_lille
     quelle   = "GeoNames (CC BY 4.0), geonameid 2998324; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_nord
+        bevoelkerung = 99916
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 75 flamen = 25 }
+        verwuestung  = 0
+    }
 }
 
 ort roubaix {
@@ -79,6 +133,15 @@ ort roubaix {
     stadt    = ja
     kreis    = kr_lille
     quelle   = "GeoNames (CC BY 4.0), geonameid 2982681; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_nord
+        bevoelkerung = 52720
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 75 flamen = 25 }
+        verwuestung  = 0
+    }
 }
 
 ort armentieres {
@@ -89,6 +152,15 @@ ort armentieres {
     stadt    = ja
     kreis    = kr_lille
     quelle   = "GeoNames (CC BY 4.0), geonameid 3036903; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_nord
+        bevoelkerung = 31556
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 75 flamen = 25 }
+        verwuestung  = 0
+    }
 }
 
 ort hazebrouck {
@@ -99,6 +171,15 @@ ort hazebrouck {
     stadt    = ja
     kreis    = kr_lille
     quelle   = "GeoNames (CC BY 4.0), geonameid 3013619; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_nord
+        bevoelkerung = 29975
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 75 flamen = 25 }
+        verwuestung  = 0
+    }
 }
 
 ort bailleul {
@@ -109,6 +190,15 @@ ort bailleul {
     stadt    = nein
     kreis    = kr_lille
     quelle   = "GeoNames (CC BY 4.0), geonameid 3035359; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_nord
+        bevoelkerung = 18720
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 75 flamen = 25 }
+        verwuestung  = 0
+    }
 }
 
 ort comines {
@@ -119,6 +209,15 @@ ort comines {
     stadt    = nein
     kreis    = kr_lille
     quelle   = "GeoNames (CC BY 4.0), geonameid 3024102; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_nord
+        bevoelkerung = 19872
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 75 flamen = 25 }
+        verwuestung  = 0
+    }
 }
 
 ort estaires {
@@ -129,6 +228,15 @@ ort estaires {
     stadt    = nein
     kreis    = kr_lille
     quelle   = "GeoNames (CC BY 4.0), geonameid 3019578; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_nord
+        bevoelkerung = 24768
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 75 flamen = 25 }
+        verwuestung  = 0
+    }
 }
 
 ort steenvoorde {
@@ -139,6 +247,15 @@ ort steenvoorde {
     stadt    = nein
     kreis    = kr_lille
     quelle   = "GeoNames (CC BY 4.0), geonameid 2973823; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_nord
+        bevoelkerung = 22464
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 75 flamen = 25 }
+        verwuestung  = 0
+    }
 }
 
 ort douai {
@@ -149,6 +266,15 @@ ort douai {
     stadt    = ja
     kreis    = kr_douai
     quelle   = "GeoNames (CC BY 4.0), geonameid 3021000; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_nord
+        bevoelkerung = 40160
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 75 flamen = 25 }
+        verwuestung  = 0
+    }
 }
 
 ort henin_beaumont {
@@ -159,6 +285,14 @@ ort henin_beaumont {
     stadt    = ja
     kreis    = kr_douai
     quelle   = "GeoNames (CC BY 4.0), geonameid 3013525; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        bevoelkerung = 8097
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort carvin {
@@ -169,6 +303,14 @@ ort carvin {
     stadt    = nein
     kreis    = kr_douai
     quelle   = "GeoNames (CC BY 4.0), geonameid 3028486; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        bevoelkerung = 13335
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort somain {
@@ -179,6 +321,15 @@ ort somain {
     stadt    = nein
     kreis    = kr_douai
     quelle   = "GeoNames (CC BY 4.0), geonameid 2974324; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_nord
+        bevoelkerung = 20736
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 75 flamen = 25 }
+        verwuestung  = 0
+    }
 }
 
 ort la_bassee {
@@ -189,6 +340,15 @@ ort la_bassee {
     stadt    = nein
     kreis    = kr_douai
     quelle   = "GeoNames (CC BY 4.0), geonameid 3011307; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_nord
+        bevoelkerung = 19440
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 75 flamen = 25 }
+        verwuestung  = 0
+    }
 }
 
 ort orchies {
@@ -199,6 +359,15 @@ ort orchies {
     stadt    = nein
     kreis    = kr_douai
     quelle   = "GeoNames (CC BY 4.0), geonameid 2989422; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_nord
+        bevoelkerung = 27504
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 75 flamen = 25 }
+        verwuestung  = 0
+    }
 }
 
 ort cysoing {
@@ -209,6 +378,15 @@ ort cysoing {
     stadt    = nein
     kreis    = kr_douai
     quelle   = "GeoNames (CC BY 4.0), geonameid 3021935; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_nord
+        bevoelkerung = 23328
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 75 flamen = 25 }
+        verwuestung  = 0
+    }
 }
 
 ort arleux {
@@ -219,4 +397,13 @@ ort arleux {
     stadt    = nein
     kreis    = kr_douai
     quelle   = "GeoNames (CC BY 4.0), geonameid 3036932; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_nord
+        bevoelkerung = 19296
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 75 flamen = 25 }
+        verwuestung  = 0
+    }
 }

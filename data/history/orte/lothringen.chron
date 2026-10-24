@@ -18,6 +18,15 @@ ort diedenhofen {
     stadt    = ja
     kreis    = kr_diedenhofen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2972811; deutscher Name aus den GeoNames-Alternativnamen (heute Thionville); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_moselle
+        bevoelkerung = 17360
+        konfession   = { katholisch = 97 lutherisch = 1 juedisch = 2 }
+        kultur       = { lothringer = 55 franzosen = 45 }
+        verwuestung  = 0
+    }
 }
 
 ort longwy {
@@ -28,6 +37,15 @@ ort longwy {
     stadt    = nein
     kreis    = kr_diedenhofen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2997638; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_meurthe
+        bevoelkerung = 8950
+        konfession   = { katholisch = 98 reformiert = 1 juedisch = 1 }
+        kultur       = { franzosen = 95 lothringer = 5 }
+        verwuestung  = 0
+    }
 }
 
 ort hayange {
@@ -38,6 +56,15 @@ ort hayange {
     stadt    = nein
     kreis    = kr_diedenhofen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3013627; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_moselle
+        bevoelkerung = 8443
+        konfession   = { katholisch = 97 lutherisch = 1 juedisch = 2 }
+        kultur       = { lothringer = 55 franzosen = 45 }
+        verwuestung  = 0
+    }
 }
 
 ort amneville {
@@ -48,6 +75,15 @@ ort amneville {
     stadt    = nein
     kreis    = kr_diedenhofen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3037838; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_moselle
+        bevoelkerung = 9563
+        konfession   = { katholisch = 97 lutherisch = 1 juedisch = 2 }
+        kultur       = { lothringer = 55 franzosen = 45 }
+        verwuestung  = 0
+    }
 }
 
 ort briey {
@@ -58,6 +94,15 @@ ort briey {
     stadt    = ja
     kreis    = kr_diedenhofen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3030071; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_meurthe
+        bevoelkerung = 9690
+        konfession   = { katholisch = 98 reformiert = 1 juedisch = 1 }
+        kultur       = { franzosen = 95 lothringer = 5 }
+        verwuestung  = 0
+    }
 }
 
 ort jarny {
@@ -68,6 +113,15 @@ ort jarny {
     stadt    = nein
     kreis    = kr_diedenhofen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3012467; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_meurthe
+        bevoelkerung = 15010
+        konfession   = { katholisch = 98 reformiert = 1 juedisch = 1 }
+        kultur       = { franzosen = 95 lothringer = 5 }
+        verwuestung  = 0
+    }
 }
 
 ort longuyon {
@@ -78,6 +132,15 @@ ort longuyon {
     stadt    = nein
     kreis    = kr_diedenhofen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2997646; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_meurthe
+        bevoelkerung = 24516
+        konfession   = { katholisch = 98 reformiert = 1 juedisch = 1 }
+        kultur       = { franzosen = 95 lothringer = 5 }
+        verwuestung  = 0
+    }
 }
 
 ort etain {
@@ -88,6 +151,15 @@ ort etain {
     stadt    = nein
     kreis    = kr_diedenhofen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3019474; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_meuse
+        bevoelkerung = 20682
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort koenigsmachern {
@@ -98,6 +170,15 @@ ort koenigsmachern {
     stadt    = nein
     kreis    = kr_diedenhofen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3011437; deutscher Name aus den GeoNames-Alternativnamen (heute Kœnigsmacker); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_moselle
+        bevoelkerung = 13374
+        konfession   = { katholisch = 97 lutherisch = 1 juedisch = 2 }
+        kultur       = { lothringer = 55 franzosen = 45 }
+        verwuestung  = 0
+    }
 }
 
 ort aumetz {
@@ -108,6 +189,15 @@ ort aumetz {
     stadt    = nein
     kreis    = kr_diedenhofen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3036107; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_moselle
+        bevoelkerung = 15242
+        konfession   = { katholisch = 97 lutherisch = 1 juedisch = 2 }
+        kultur       = { lothringer = 55 franzosen = 45 }
+        verwuestung  = 0
+    }
 }
 
 ort piennes {
@@ -118,6 +208,15 @@ ort piennes {
     stadt    = nein
     kreis    = kr_diedenhofen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2987328; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_meurthe
+        bevoelkerung = 13842
+        konfession   = { katholisch = 98 reformiert = 1 juedisch = 1 }
+        kultur       = { franzosen = 95 lothringer = 5 }
+        verwuestung  = 0
+    }
 }
 
 ort metzervisse {
@@ -128,6 +227,15 @@ ort metzervisse {
     stadt    = nein
     kreis    = kr_diedenhofen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2994155; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_moselle
+        bevoelkerung = 11058
+        konfession   = { katholisch = 97 lutherisch = 1 juedisch = 2 }
+        kultur       = { lothringer = 55 franzosen = 45 }
+        verwuestung  = 0
+    }
 }
 
 ort forbach_lothringen {
@@ -138,6 +246,15 @@ ort forbach_lothringen {
     stadt    = ja
     kreis    = kr_forbach_lothringen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3017805; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_moselle
+        bevoelkerung = 11519
+        konfession   = { katholisch = 97 lutherisch = 1 juedisch = 2 }
+        kultur       = { lothringer = 55 franzosen = 45 }
+        verwuestung  = 0
+    }
 }
 
 ort sankt_avold {
@@ -148,6 +265,15 @@ ort sankt_avold {
     stadt    = nein
     kreis    = kr_forbach_lothringen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2981492; deutscher Name aus den GeoNames-Alternativnamen (heute Saint-Avold); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_moselle
+        bevoelkerung = 9862
+        konfession   = { katholisch = 97 lutherisch = 1 juedisch = 2 }
+        kultur       = { lothringer = 55 franzosen = 45 }
+        verwuestung  = 0
+    }
 }
 
 ort kreuzwald {
@@ -158,6 +284,15 @@ ort kreuzwald {
     stadt    = nein
     kreis    = kr_forbach_lothringen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3022513; deutscher Name aus den GeoNames-Alternativnamen (heute Creutzwald); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_moselle
+        bevoelkerung = 10236
+        konfession   = { katholisch = 97 lutherisch = 1 juedisch = 2 }
+        kultur       = { lothringer = 55 franzosen = 45 }
+        verwuestung  = 0
+    }
 }
 
 ort bolchen {
@@ -168,6 +303,15 @@ ort bolchen {
     stadt    = ja
     kreis    = kr_forbach_lothringen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3031182; deutscher Name aus den GeoNames-Alternativnamen (heute Boulay-Moselle); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_moselle
+        bevoelkerung = 15386
+        konfession   = { katholisch = 97 lutherisch = 1 juedisch = 2 }
+        kultur       = { lothringer = 55 franzosen = 45 }
+        verwuestung  = 0
+    }
 }
 
 ort falkenberg_lothringen {
@@ -178,6 +322,15 @@ ort falkenberg_lothringen {
     stadt    = nein
     kreis    = kr_forbach_lothringen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3018946; deutscher Name aus den GeoNames-Alternativnamen (heute Faulquemont); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_moselle
+        bevoelkerung = 14719
+        konfession   = { katholisch = 97 lutherisch = 1 juedisch = 2 }
+        kultur       = { lothringer = 55 franzosen = 45 }
+        verwuestung  = 0
+    }
 }
 
 ort busendorf {
@@ -188,6 +341,15 @@ ort busendorf {
     stadt    = nein
     kreis    = kr_forbach_lothringen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3030668; deutscher Name aus den GeoNames-Alternativnamen (heute Bouzonville); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_moselle
+        bevoelkerung = 20397
+        konfession   = { katholisch = 97 lutherisch = 1 juedisch = 2 }
+        kultur       = { lothringer = 55 franzosen = 45 }
+        verwuestung  = 0
+    }
 }
 
 ort courcelles_chaussy {
@@ -198,6 +360,15 @@ ort courcelles_chaussy {
     stadt    = nein
     kreis    = kr_forbach_lothringen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3023107; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_moselle
+        bevoelkerung = 10385
+        konfession   = { katholisch = 97 lutherisch = 1 juedisch = 2 }
+        kultur       = { lothringer = 55 franzosen = 45 }
+        verwuestung  = 0
+    }
 }
 
 ort remilly {
@@ -208,6 +379,15 @@ ort remilly {
     stadt    = nein
     kreis    = kr_forbach_lothringen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2984060; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_moselle
+        bevoelkerung = 16362
+        konfession   = { katholisch = 97 lutherisch = 1 juedisch = 2 }
+        kultur       = { lothringer = 55 franzosen = 45 }
+        verwuestung  = 0
+    }
 }
 
 ort seingbouse {
@@ -218,6 +398,15 @@ ort seingbouse {
     stadt    = nein
     kreis    = kr_forbach_lothringen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2975245; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_moselle
+        bevoelkerung = 16288
+        konfession   = { katholisch = 97 lutherisch = 1 juedisch = 2 }
+        kultur       = { lothringer = 55 franzosen = 45 }
+        verwuestung  = 0
+    }
 }
 
 ort vigy {
@@ -228,6 +417,15 @@ ort vigy {
     stadt    = nein
     kreis    = kr_forbach_lothringen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2969074; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_moselle
+        bevoelkerung = 11954
+        konfession   = { katholisch = 97 lutherisch = 1 juedisch = 2 }
+        kultur       = { lothringer = 55 franzosen = 45 }
+        verwuestung  = 0
+    }
 }
 
 ort verdun {
@@ -238,6 +436,15 @@ ort verdun {
     stadt    = ja
     kreis    = kr_verdun
     quelle   = "GeoNames (CC BY 4.0), geonameid 2969958; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_meuse
+        bevoelkerung = 36438
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort bar_le_duc {
@@ -248,6 +455,15 @@ ort bar_le_duc {
     stadt    = ja
     kreis    = kr_verdun
     quelle   = "GeoNames (CC BY 4.0), geonameid 3034911; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_meuse
+        bevoelkerung = 27734
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort commercy {
@@ -258,6 +474,15 @@ ort commercy {
     stadt    = ja
     kreis    = kr_verdun
     quelle   = "GeoNames (CC BY 4.0), geonameid 3024086; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_meuse
+        bevoelkerung = 20202
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort saint_mihiel {
@@ -268,6 +493,15 @@ ort saint_mihiel {
     stadt    = nein
     kreis    = kr_verdun
     quelle   = "GeoNames (CC BY 4.0), geonameid 2977948; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_meuse
+        bevoelkerung = 19230
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort ligny_en_barrois {
@@ -278,6 +512,15 @@ ort ligny_en_barrois {
     stadt    = nein
     kreis    = kr_verdun
     quelle   = "GeoNames (CC BY 4.0), geonameid 2998362; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_meuse
+        bevoelkerung = 27242
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort stenay {
@@ -288,6 +531,15 @@ ort stenay {
     stadt    = nein
     kreis    = kr_verdun
     quelle   = "GeoNames (CC BY 4.0), geonameid 2973809; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_meuse
+        bevoelkerung = 21233
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort revigny_sur_ornain {
@@ -298,6 +550,15 @@ ort revigny_sur_ornain {
     stadt    = nein
     kreis    = kr_verdun
     quelle   = "GeoNames (CC BY 4.0), geonameid 2983812; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_meuse
+        bevoelkerung = 13571
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort montmedy {
@@ -308,6 +569,15 @@ ort montmedy {
     stadt    = nein
     kreis    = kr_verdun
     quelle   = "GeoNames (CC BY 4.0), geonameid 2992260; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_meuse
+        bevoelkerung = 16976
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort clermont_en_argonne {
@@ -318,6 +588,15 @@ ort clermont_en_argonne {
     stadt    = nein
     kreis    = kr_verdun
     quelle   = "GeoNames (CC BY 4.0), geonameid 3024636; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_meuse
+        bevoelkerung = 38761
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort vigneulles_les_hattonchatel {
@@ -328,6 +607,15 @@ ort vigneulles_les_hattonchatel {
     stadt    = nein
     kreis    = kr_verdun
     quelle   = "GeoNames (CC BY 4.0), geonameid 2969113; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_meuse
+        bevoelkerung = 23637
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort dieue_sur_meuse {
@@ -338,6 +626,15 @@ ort dieue_sur_meuse {
     stadt    = nein
     kreis    = kr_verdun
     quelle   = "GeoNames (CC BY 4.0), geonameid 3021398; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_meuse
+        bevoelkerung = 21684
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort metz {
@@ -348,6 +645,15 @@ ort metz {
     stadt    = ja
     kreis    = kr_metz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2994160; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_moselle
+        bevoelkerung = 61473
+        konfession   = { katholisch = 97 lutherisch = 1 juedisch = 2 }
+        kultur       = { lothringer = 55 franzosen = 45 }
+        verwuestung  = 0
+    }
 }
 
 ort pont_a_mousson {
@@ -358,6 +664,15 @@ ort pont_a_mousson {
     stadt    = nein
     kreis    = kr_metz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2986306; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_meurthe
+        bevoelkerung = 6059
+        konfession   = { katholisch = 98 reformiert = 1 juedisch = 1 }
+        kultur       = { franzosen = 95 lothringer = 5 }
+        verwuestung  = 0
+    }
 }
 
 ort ars_sur_moselle {
@@ -368,6 +683,15 @@ ort ars_sur_moselle {
     stadt    = nein
     kreis    = kr_metz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3036711; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_moselle
+        bevoelkerung = 9563
+        konfession   = { katholisch = 97 lutherisch = 1 juedisch = 2 }
+        kultur       = { lothringer = 55 franzosen = 45 }
+        verwuestung  = 0
+    }
 }
 
 ort pagny_sur_moselle {
@@ -378,6 +702,15 @@ ort pagny_sur_moselle {
     stadt    = nein
     kreis    = kr_metz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2988823; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_meurthe
+        bevoelkerung = 12063
+        konfession   = { katholisch = 98 reformiert = 1 juedisch = 1 }
+        kultur       = { franzosen = 95 lothringer = 5 }
+        verwuestung  = 0
+    }
 }
 
 ort dieulouard {
@@ -388,6 +721,15 @@ ort dieulouard {
     stadt    = nein
     kreis    = kr_metz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3021394; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_meurthe
+        bevoelkerung = 11285
+        konfession   = { katholisch = 98 reformiert = 1 juedisch = 1 }
+        kultur       = { franzosen = 95 lothringer = 5 }
+        verwuestung  = 0
+    }
 }
 
 ort amanvillers {
@@ -398,6 +740,15 @@ ort amanvillers {
     stadt    = nein
     kreis    = kr_metz
     quelle   = "GeoNames (CC BY 4.0), geonameid 3037967; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_moselle
+        bevoelkerung = 9265
+        konfession   = { katholisch = 97 lutherisch = 1 juedisch = 2 }
+        kultur       = { lothringer = 55 franzosen = 45 }
+        verwuestung  = 0
+    }
 }
 
 ort nomeny {
@@ -408,6 +759,15 @@ ort nomeny {
     stadt    = nein
     kreis    = kr_metz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2990164; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_meurthe
+        bevoelkerung = 12675
+        konfession   = { katholisch = 98 reformiert = 1 juedisch = 1 }
+        kultur       = { franzosen = 95 lothringer = 5 }
+        verwuestung  = 0
+    }
 }
 
 ort verny {
@@ -418,6 +778,15 @@ ort verny {
     stadt    = nein
     kreis    = kr_metz
     quelle   = "GeoNames (CC BY 4.0), geonameid 2969736; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_moselle
+        bevoelkerung = 12403
+        konfession   = { katholisch = 97 lutherisch = 1 juedisch = 2 }
+        kultur       = { lothringer = 55 franzosen = 45 }
+        verwuestung  = 0
+    }
 }
 
 ort saargemuend {
@@ -428,6 +797,15 @@ ort saargemuend {
     stadt    = ja
     kreis    = kr_saargemuend
     quelle   = "GeoNames (CC BY 4.0), geonameid 2975964; deutscher Name aus den GeoNames-Alternativnamen (heute Sarreguemines); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_moselle
+        bevoelkerung = 16577
+        konfession   = { katholisch = 97 lutherisch = 1 juedisch = 2 }
+        kultur       = { lothringer = 55 franzosen = 45 }
+        verwuestung  = 0
+    }
 }
 
 ort bitsch {
@@ -438,6 +816,15 @@ ort bitsch {
     stadt    = nein
     kreis    = kr_saargemuend
     quelle   = "GeoNames (CC BY 4.0), geonameid 3032518; deutscher Name aus den GeoNames-Alternativnamen (heute Bitche); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_moselle
+        bevoelkerung = 13299
+        konfession   = { katholisch = 97 lutherisch = 1 juedisch = 2 }
+        kultur       = { lothringer = 55 franzosen = 45 }
+        verwuestung  = 0
+    }
 }
 
 ort saaralben {
@@ -448,6 +835,15 @@ ort saaralben {
     stadt    = nein
     kreis    = kr_saargemuend
     quelle   = "GeoNames (CC BY 4.0), geonameid 2975992; deutscher Name aus den GeoNames-Alternativnamen (heute Sarralbe); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_moselle
+        bevoelkerung = 19799
+        konfession   = { katholisch = 97 lutherisch = 1 juedisch = 2 }
+        kultur       = { lothringer = 55 franzosen = 45 }
+        verwuestung  = 0
+    }
 }
 
 ort goetzenbrueck {
@@ -458,6 +854,15 @@ ort goetzenbrueck {
     stadt    = nein
     kreis    = kr_saargemuend
     quelle   = "GeoNames (CC BY 4.0), geonameid 3015756; deutscher Name aus den GeoNames-Alternativnamen (heute Goetzenbruck); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_moselle
+        bevoelkerung = 8069
+        konfession   = { katholisch = 97 lutherisch = 1 juedisch = 2 }
+        kultur       = { lothringer = 55 franzosen = 45 }
+        verwuestung  = 0
+    }
 }
 
 ort rohrbach {
@@ -468,6 +873,15 @@ ort rohrbach {
     stadt    = nein
     kreis    = kr_saargemuend
     quelle   = "GeoNames (CC BY 4.0), geonameid 2983095; deutscher Name aus den GeoNames-Alternativnamen (heute Rohrbach-lès-Bitche); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_moselle
+        bevoelkerung = 13523
+        konfession   = { katholisch = 97 lutherisch = 1 juedisch = 2 }
+        kultur       = { lothringer = 55 franzosen = 45 }
+        verwuestung  = 0
+    }
 }
 
 ort saarburg_lothringen {
@@ -478,6 +892,15 @@ ort saarburg_lothringen {
     stadt    = ja
     kreis    = kr_saarburg_lothringen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2975967; deutscher Name aus den GeoNames-Alternativnamen (heute Sarrebourg); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_moselle
+        bevoelkerung = 23336
+        konfession   = { katholisch = 97 lutherisch = 1 juedisch = 2 }
+        kultur       = { lothringer = 55 franzosen = 45 }
+        verwuestung  = 0
+    }
 }
 
 ort pfalzburg {
@@ -488,6 +911,15 @@ ort pfalzburg {
     stadt    = nein
     kreis    = kr_saarburg_lothringen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2987421; deutscher Name aus den GeoNames-Alternativnamen (heute Phalsbourg); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_moselle
+        bevoelkerung = 11730
+        konfession   = { katholisch = 97 lutherisch = 1 juedisch = 2 }
+        kultur       = { lothringer = 55 franzosen = 45 }
+        verwuestung  = 0
+    }
 }
 
 ort dagsburg {
@@ -498,6 +930,15 @@ ort dagsburg {
     stadt    = nein
     kreis    = kr_saarburg_lothringen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3021933; deutscher Name aus den GeoNames-Alternativnamen (heute Dabo); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_moselle
+        bevoelkerung = 9683
+        konfession   = { katholisch = 97 lutherisch = 1 juedisch = 2 }
+        kultur       = { lothringer = 55 franzosen = 45 }
+        verwuestung  = 0
+    }
 }
 
 ort abreschviller {
@@ -508,6 +949,15 @@ ort abreschviller {
     stadt    = nein
     kreis    = kr_saarburg_lothringen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3038738; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_moselle
+        bevoelkerung = 10311
+        konfession   = { katholisch = 97 lutherisch = 1 juedisch = 2 }
+        kultur       = { lothringer = 55 franzosen = 45 }
+        verwuestung  = 0
+    }
 }
 
 ort lorquin {
@@ -518,6 +968,15 @@ ort lorquin {
     stadt    = nein
     kreis    = kr_saarburg_lothringen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2997552; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_moselle
+        bevoelkerung = 13598
+        konfession   = { katholisch = 97 lutherisch = 1 juedisch = 2 }
+        kultur       = { lothringer = 55 franzosen = 45 }
+        verwuestung  = 0
+    }
 }
 
 ort nancy {
@@ -528,6 +987,15 @@ ort nancy {
     stadt    = ja
     kreis    = kr_nancy
     quelle   = "GeoNames (CC BY 4.0), geonameid 2990999; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_meurthe
+        bevoelkerung = 50837
+        konfession   = { katholisch = 98 reformiert = 1 juedisch = 1 }
+        kultur       = { franzosen = 95 lothringer = 5 }
+        verwuestung  = 0
+    }
 }
 
 ort toul {
@@ -538,6 +1006,15 @@ ort toul {
     stadt    = ja
     kreis    = kr_nancy
     quelle   = "GeoNames (CC BY 4.0), geonameid 2972350; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_meurthe
+        bevoelkerung = 12465
+        konfession   = { katholisch = 98 reformiert = 1 juedisch = 1 }
+        kultur       = { franzosen = 95 lothringer = 5 }
+        verwuestung  = 0
+    }
 }
 
 ort liverdun {
@@ -548,6 +1025,15 @@ ort liverdun {
     stadt    = nein
     kreis    = kr_nancy
     quelle   = "GeoNames (CC BY 4.0), geonameid 2998078; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_meurthe
+        bevoelkerung = 6115
+        konfession   = { katholisch = 98 reformiert = 1 juedisch = 1 }
+        kultur       = { franzosen = 95 lothringer = 5 }
+        verwuestung  = 0
+    }
 }
 
 ort neuves_maisons {
@@ -558,6 +1044,15 @@ ort neuves_maisons {
     stadt    = nein
     kreis    = kr_nancy
     quelle   = "GeoNames (CC BY 4.0), geonameid 2990580; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_meurthe
+        bevoelkerung = 13286
+        konfession   = { katholisch = 98 reformiert = 1 juedisch = 1 }
+        kultur       = { franzosen = 95 lothringer = 5 }
+        verwuestung  = 0
+    }
 }
 
 ort foug {
@@ -568,6 +1063,15 @@ ort foug {
     stadt    = nein
     kreis    = kr_nancy
     quelle   = "GeoNames (CC BY 4.0), geonameid 3017622; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_meurthe
+        bevoelkerung = 10118
+        konfession   = { katholisch = 98 reformiert = 1 juedisch = 1 }
+        kultur       = { franzosen = 95 lothringer = 5 }
+        verwuestung  = 0
+    }
 }
 
 ort bouxieres_aux_chenes {
@@ -578,6 +1082,15 @@ ort bouxieres_aux_chenes {
     stadt    = nein
     kreis    = kr_nancy
     quelle   = "GeoNames (CC BY 4.0), geonameid 3030714; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_meurthe
+        bevoelkerung = 11563
+        konfession   = { katholisch = 98 reformiert = 1 juedisch = 1 }
+        kultur       = { franzosen = 95 lothringer = 5 }
+        verwuestung  = 0
+    }
 }
 
 ort vezelise {
@@ -588,6 +1101,15 @@ ort vezelise {
     stadt    = nein
     kreis    = kr_nancy
     quelle   = "GeoNames (CC BY 4.0), geonameid 2969477; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_meurthe
+        bevoelkerung = 15399
+        konfession   = { katholisch = 98 reformiert = 1 juedisch = 1 }
+        kultur       = { franzosen = 95 lothringer = 5 }
+        verwuestung  = 0
+    }
 }
 
 ort colombey_les_belles {
@@ -598,6 +1120,15 @@ ort colombey_les_belles {
     stadt    = nein
     kreis    = kr_nancy
     quelle   = "GeoNames (CC BY 4.0), geonameid 3024264; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_meurthe
+        bevoelkerung = 18401
+        konfession   = { katholisch = 98 reformiert = 1 juedisch = 1 }
+        kultur       = { franzosen = 95 lothringer = 5 }
+        verwuestung  = 0
+    }
 }
 
 ort villey_saint_etienne {
@@ -608,6 +1139,15 @@ ort villey_saint_etienne {
     stadt    = nein
     kreis    = kr_nancy
     quelle   = "GeoNames (CC BY 4.0), geonameid 2968220; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_meurthe
+        bevoelkerung = 11852
+        konfession   = { katholisch = 98 reformiert = 1 juedisch = 1 }
+        kultur       = { franzosen = 95 lothringer = 5 }
+        verwuestung  = 0
+    }
 }
 
 ort luneville {
@@ -618,6 +1158,15 @@ ort luneville {
     stadt    = ja
     kreis    = kr_luneville
     quelle   = "GeoNames (CC BY 4.0), geonameid 2997110; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_meurthe
+        bevoelkerung = 12703
+        konfession   = { katholisch = 98 reformiert = 1 juedisch = 1 }
+        kultur       = { franzosen = 95 lothringer = 5 }
+        verwuestung  = 0
+    }
 }
 
 ort salzburgen {
@@ -628,6 +1177,15 @@ ort salzburgen {
     stadt    = ja
     kreis    = kr_luneville
     quelle   = "GeoNames (CC BY 4.0), geonameid 3026200; deutscher Name aus den GeoNames-Alternativnamen (heute Château-Salins); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_moselle
+        bevoelkerung = 21354
+        konfession   = { katholisch = 97 lutherisch = 1 juedisch = 2 }
+        kultur       = { lothringer = 55 franzosen = 45 }
+        verwuestung  = 0
+    }
 }
 
 ort dombasle_sur_meurthe {
@@ -638,6 +1196,15 @@ ort dombasle_sur_meurthe {
     stadt    = nein
     kreis    = kr_luneville
     quelle   = "GeoNames (CC BY 4.0), geonameid 3021221; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_meurthe
+        bevoelkerung = 10562
+        konfession   = { katholisch = 98 reformiert = 1 juedisch = 1 }
+        kultur       = { franzosen = 95 lothringer = 5 }
+        verwuestung  = 0
+    }
 }
 
 ort dieuze {
@@ -648,6 +1215,15 @@ ort dieuze {
     stadt    = nein
     kreis    = kr_luneville
     quelle   = "GeoNames (CC BY 4.0), geonameid 3021392; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_moselle
+        bevoelkerung = 31903
+        konfession   = { katholisch = 97 lutherisch = 1 juedisch = 2 }
+        kultur       = { lothringer = 55 franzosen = 45 }
+        verwuestung  = 0
+    }
 }
 
 ort morhange {
@@ -658,6 +1234,15 @@ ort morhange {
     stadt    = nein
     kreis    = kr_luneville
     quelle   = "GeoNames (CC BY 4.0), geonameid 2991806; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_moselle
+        bevoelkerung = 21966
+        konfession   = { katholisch = 97 lutherisch = 1 juedisch = 2 }
+        kultur       = { lothringer = 55 franzosen = 45 }
+        verwuestung  = 0
+    }
 }
 
 ort gerbeviller {
@@ -668,6 +1253,15 @@ ort gerbeviller {
     stadt    = nein
     kreis    = kr_luneville
     quelle   = "GeoNames (CC BY 4.0), geonameid 3016264; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_meurthe
+        bevoelkerung = 13342
+        konfession   = { katholisch = 98 reformiert = 1 juedisch = 1 }
+        kultur       = { franzosen = 95 lothringer = 5 }
+        verwuestung  = 0
+    }
 }
 
 ort bayon {
@@ -678,6 +1272,15 @@ ort bayon {
     stadt    = nein
     kreis    = kr_luneville
     quelle   = "GeoNames (CC BY 4.0), geonameid 3034476; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_meurthe
+        bevoelkerung = 11619
+        konfession   = { katholisch = 98 reformiert = 1 juedisch = 1 }
+        kultur       = { franzosen = 95 lothringer = 5 }
+        verwuestung  = 0
+    }
 }
 
 ort einville_au_jard {
@@ -688,6 +1291,15 @@ ort einville_au_jard {
     stadt    = nein
     kreis    = kr_luneville
     quelle   = "GeoNames (CC BY 4.0), geonameid 3020314; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_meurthe
+        bevoelkerung = 16010
+        konfession   = { katholisch = 98 reformiert = 1 juedisch = 1 }
+        kultur       = { franzosen = 95 lothringer = 5 }
+        verwuestung  = 0
+    }
 }
 
 ort neufchateau_lothringen {
@@ -698,6 +1310,15 @@ ort neufchateau_lothringen {
     stadt    = ja
     kreis    = kr_neufchateau_lothringen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2990682; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_vosges
+        bevoelkerung = 18848
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort liffol_le_grand {
@@ -708,6 +1329,15 @@ ort liffol_le_grand {
     stadt    = nein
     kreis    = kr_neufchateau_lothringen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2998425; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_vosges
+        bevoelkerung = 27679
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort gondrecourt_le_chateau {
@@ -718,6 +1348,15 @@ ort gondrecourt_le_chateau {
     stadt    = nein
     kreis    = kr_neufchateau_lothringen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3015701; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_meuse
+        bevoelkerung = 25089
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort vaucouleurs {
@@ -728,6 +1367,15 @@ ort vaucouleurs {
     stadt    = nein
     kreis    = kr_neufchateau_lothringen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2970546; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_meuse
+        bevoelkerung = 13521
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort saint_die_des_vosges {
@@ -738,6 +1386,15 @@ ort saint_die_des_vosges {
     stadt    = ja
     kreis    = kr_saint_die_des_vosges
     quelle   = "GeoNames (CC BY 4.0), geonameid 2980827; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_vosges
+        bevoelkerung = 17395
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort rambervillers {
@@ -748,6 +1405,15 @@ ort rambervillers {
     stadt    = nein
     kreis    = kr_saint_die_des_vosges
     quelle   = "GeoNames (CC BY 4.0), geonameid 2984516; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_vosges
+        bevoelkerung = 18497
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort baccarat {
@@ -758,6 +1424,15 @@ ort baccarat {
     stadt    = nein
     kreis    = kr_saint_die_des_vosges
     quelle   = "GeoNames (CC BY 4.0), geonameid 3035498; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_meurthe
+        bevoelkerung = 14509
+        konfession   = { katholisch = 98 reformiert = 1 juedisch = 1 }
+        kultur       = { franzosen = 95 lothringer = 5 }
+        verwuestung  = 0
+    }
 }
 
 ort moyenmoutier {
@@ -768,6 +1443,15 @@ ort moyenmoutier {
     stadt    = nein
     kreis    = kr_saint_die_des_vosges
     quelle   = "GeoNames (CC BY 4.0), geonameid 2991271; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_vosges
+        bevoelkerung = 16956
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort badonviller {
@@ -778,6 +1462,15 @@ ort badonviller {
     stadt    = nein
     kreis    = kr_saint_die_des_vosges
     quelle   = "GeoNames (CC BY 4.0), geonameid 3035449; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_meurthe
+        bevoelkerung = 12564
+        konfession   = { katholisch = 98 reformiert = 1 juedisch = 1 }
+        kultur       = { franzosen = 95 lothringer = 5 }
+        verwuestung  = 0
+    }
 }
 
 ort cirey_sur_vezouze {
@@ -788,6 +1481,15 @@ ort cirey_sur_vezouze {
     stadt    = nein
     kreis    = kr_saint_die_des_vosges
     quelle   = "GeoNames (CC BY 4.0), geonameid 3024899; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_meurthe
+        bevoelkerung = 14565
+        konfession   = { katholisch = 98 reformiert = 1 juedisch = 1 }
+        kultur       = { franzosen = 95 lothringer = 5 }
+        verwuestung  = 0
+    }
 }
 
 ort vittel {
@@ -798,6 +1500,15 @@ ort vittel {
     stadt    = nein
     kreis    = kr_vittel
     quelle   = "GeoNames (CC BY 4.0), geonameid 2967845; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_vosges
+        bevoelkerung = 14007
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort bulgneville {
@@ -808,6 +1519,15 @@ ort bulgneville {
     stadt    = nein
     kreis    = kr_vittel
     quelle   = "GeoNames (CC BY 4.0), geonameid 3029580; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_vosges
+        bevoelkerung = 15213
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort darney {
@@ -818,6 +1538,15 @@ ort darney {
     stadt    = nein
     kreis    = kr_vittel
     quelle   = "GeoNames (CC BY 4.0), geonameid 3021716; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_vosges
+        bevoelkerung = 30359
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort chatenois {
@@ -828,6 +1557,15 @@ ort chatenois {
     stadt    = nein
     kreis    = kr_vittel
     quelle   = "GeoNames (CC BY 4.0), geonameid 3026099; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_vosges
+        bevoelkerung = 18229
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort lamarche {
@@ -838,6 +1576,15 @@ ort lamarche {
     stadt    = nein
     kreis    = kr_vittel
     quelle   = "GeoNames (CC BY 4.0), geonameid 3008303; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_vosges
+        bevoelkerung = 22719
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort epinal {
@@ -848,6 +1595,15 @@ ort epinal {
     stadt    = ja
     kreis    = kr_epinal
     quelle   = "GeoNames (CC BY 4.0), geonameid 3020035; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_vosges
+        bevoelkerung = 21326
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort mirecourt {
@@ -858,6 +1614,15 @@ ort mirecourt {
     stadt    = nein
     kreis    = kr_epinal
     quelle   = "GeoNames (CC BY 4.0), geonameid 2993728; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_vosges
+        bevoelkerung = 20843
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort charmes {
@@ -868,6 +1633,15 @@ ort charmes {
     stadt    = nein
     kreis    = kr_epinal
     quelle   = "GeoNames (CC BY 4.0), geonameid 3026588; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_vosges
+        bevoelkerung = 11862
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort chatel_sur_moselle {
@@ -878,6 +1652,15 @@ ort chatel_sur_moselle {
     stadt    = nein
     kreis    = kr_epinal
     quelle   = "GeoNames (CC BY 4.0), geonameid 3026130; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_vosges
+        bevoelkerung = 14744
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort darnieulles {
@@ -888,6 +1671,15 @@ ort darnieulles {
     stadt    = nein
     kreis    = kr_epinal
     quelle   = "GeoNames (CC BY 4.0), geonameid 3021713; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_vosges
+        bevoelkerung = 16420
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort gerardmer {
@@ -898,6 +1690,15 @@ ort gerardmer {
     stadt    = nein
     kreis    = kr_gerardmer
     quelle   = "GeoNames (CC BY 4.0), geonameid 3016274; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_vosges
+        bevoelkerung = 12814
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort remiremont {
@@ -908,6 +1709,15 @@ ort remiremont {
     stadt    = nein
     kreis    = kr_gerardmer
     quelle   = "GeoNames (CC BY 4.0), geonameid 2984050; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_vosges
+        bevoelkerung = 6327
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort bruyeres {
@@ -918,6 +1728,15 @@ ort bruyeres {
     stadt    = nein
     kreis    = kr_gerardmer
     quelle   = "GeoNames (CC BY 4.0), geonameid 3029725; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_vosges
+        bevoelkerung = 16513
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort vagney {
@@ -928,6 +1747,15 @@ ort vagney {
     stadt    = nein
     kreis    = kr_gerardmer
     quelle   = "GeoNames (CC BY 4.0), geonameid 2971186; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_vosges
+        bevoelkerung = 5415
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort rupt_sur_moselle {
@@ -938,6 +1766,15 @@ ort rupt_sur_moselle {
     stadt    = nein
     kreis    = kr_gerardmer
     quelle   = "GeoNames (CC BY 4.0), geonameid 2982130; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_vosges
+        bevoelkerung = 13350
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort eloyes {
@@ -948,6 +1785,15 @@ ort eloyes {
     stadt    = nein
     kreis    = kr_gerardmer
     quelle   = "GeoNames (CC BY 4.0), geonameid 3020275; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_vosges
+        bevoelkerung = 10777
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort fraize {
@@ -958,6 +1804,15 @@ ort fraize {
     stadt    = nein
     kreis    = kr_gerardmer
     quelle   = "GeoNames (CC BY 4.0), geonameid 3017400; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_vosges
+        bevoelkerung = 9972
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort xertigny {
@@ -968,6 +1823,15 @@ ort xertigny {
     stadt    = nein
     kreis    = kr_gerardmer
     quelle   = "GeoNames (CC BY 4.0), geonameid 2967269; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_vosges
+        bevoelkerung = 9972
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort le_thillot {
@@ -978,6 +1842,15 @@ ort le_thillot {
     stadt    = nein
     kreis    = kr_gerardmer
     quelle   = "GeoNames (CC BY 4.0), geonameid 2999185; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_vosges
+        bevoelkerung = 10509
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort cornimont {
@@ -988,6 +1861,15 @@ ort cornimont {
     stadt    = nein
     kreis    = kr_gerardmer
     quelle   = "GeoNames (CC BY 4.0), geonameid 3023573; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_vosges
+        bevoelkerung = 9329
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort plombieres_les_bains {
@@ -998,6 +1880,15 @@ ort plombieres_les_bains {
     stadt    = nein
     kreis    = kr_gerardmer
     quelle   = "GeoNames (CC BY 4.0), geonameid 2986715; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_vosges
+        bevoelkerung = 9490
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort bains_les_bains {
@@ -1008,4 +1899,13 @@ ort bains_les_bains {
     stadt    = nein
     kreis    = kr_gerardmer
     quelle   = "GeoNames (CC BY 4.0), geonameid 3035317; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_vosges
+        bevoelkerung = 19435
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 100 }
+        verwuestung  = 0
+    }
 }

@@ -259,9 +259,11 @@ template <typename Sim, typename V> void StateAccess::visit(Sim& sim, V& v) {
                 v.field("strecke", r.railway);
             });
             v.field("tage", a.days_left);
-            v.field("vorher", a.previous);     // seit a3
-            v.field("tage_hier", a.days_here); // seit a3
-            v.field("generalstab", a.staff);   // seit a4
+            v.field("vorher", a.previous);        // seit a3
+            v.field("tage_hier", a.days_here);    // seit a3
+            v.field("generalstab", a.staff);      // seit a4
+            v.field("befehlshaber", a.commander); // seit b1
+            v.field("fuehrung", a.leadership);    // seit b1
         });
         list(v, "mobilmachung", w.mobilizations, Extent::Content, [&](auto& m) { // seit a2, je Staat
             v.field("phase", m.phase);

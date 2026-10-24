@@ -25,4 +25,12 @@ staat HAN {
         verfassung     = konstitutionell
         wahlrecht      = staendisch
     }
+
+    1851.11.18 = {
+        herrscher = "Georg V."
+    }
+
+    1854.01.01 = {
+        zollunion = zollverein
+    }
 }

@@ -70,6 +70,18 @@ freigegeben; Stand je Schritt in Abschnitt 12 dort.
   (Inhaltsbereich `militaer` Stand 5, Spielstände 1848 aus a4 laden nicht mehr). Test-Fixture mit
   Militärdaten (`tests/daten_krieg`), CTests `krieg_fixture` und `krieg_1848`, CI-Schritt
   „Kriegslabor 1848“. 1648 bitgleich, 1848 ohne Befehle zeichengleich.
+- **Daten 1849–1870 und Kriegslesezeichen (Schritt b1):** Drei neue Lesezeichen „Düppel“ (1.2.1864),
+  „Königgrätz“ (16.6.1866) und „Sedan“ (19.7.1870), die im Krieg beginnen: Aufmarsch in
+  `common/aufmarsch_<lesezeichen>.chron` (chronik-skript.md 3.32) mit Heeren unter Befehlshabern mit
+  Führung, Kriegen mit festen Seiten und Zielen beider Seiten, Bündnissen. Frankreich gehört ab 1849 mit
+  217 Orten im Kartenausschnitt zur Welt, Paris und das übrige Land als Hinterland (Einnahmen, Ersatz
+  am Kartenrand, Bevölkerung bei Besetzung und Kriegspunkten). Die Historie 1849–1870 schreibt das neue
+  Werkzeug `tools/geodaten/historie_1849_1870.py` aus datierten Änderungen: Hohenzollern, Anhalt,
+  Schleswig-Holstein, die Annexionen von 1866, Ende des Deutschen Bundes und Bundesrat des
+  Norddeutschen Bundes, Zollverein 1854 und 1868. 62 weitere Bahnstrecken (185 Abschnitte) bis 1870,
+  die auch ein Spiel ab 1848 zur Eröffnung bekommt (Korridore 1848 weiter erfüllt). Heerwesen,
+  Garnisonen und Festungen bis 1870. `bis` bei Bundesversammlung, Zollunion und Parlament.
+  Inhaltsbereich `militaer` Stand 6. Die Kalibrierung der drei Kriege folgt mit b2. 1648 bitgleich.
 
 ### Meilenstein M9 – Diplomatie und Zollverein
 

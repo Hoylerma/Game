@@ -1,0 +1,15 @@
+# Kriegslesezeichen „Königgrätz“ (Meilenstein M10b, Schritt b1; docs/technik/militaer.md, Abschnitt 6.1).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.7. Nach dem Bundesbeschluss vom 14. Juni 1866
+# (Mobilmachung des Bundesheers gegen Preußen) marschieren die preußischen Truppen am 16. Juni in
+# Sachsen, Hannover und Kurhessen ein; drei Armeen stehen an der böhmischen Grenze. Italien bindet die
+# österreichische Südarmee (nicht abgebildet). Aufmarsch und Kriegsziele: common/aufmarsch_koeniggraetz.chron.
+
+szenario koeniggraetz {
+    name     = "Königgrätz"
+    datum    = 1866.06.16
+    spieler  = PRU
+    spielbar = { PRU AUT SAX BAV HAN }
+    waehrung = "Taler"
+    tragfaehigkeit_faktor = 2.5
+}

@@ -28,4 +28,8 @@ staat WUE {
         wahl_indirekt  = ja
         wahl_zensus    = 1
     }
+
+    1864.06.25 = {
+        herrscher = "Karl I."
+    }
 }

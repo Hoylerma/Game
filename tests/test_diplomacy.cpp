@@ -835,3 +835,46 @@ TEST_CASE("Bundesversammlung und Spiele: Spielstand, Wiederholung und Threads") 
     CHECK(continued.world().motion_results.size() == 1);
     CHECK(run(4, 104).checksum() == continued.checksum());
 }
+
+TEST_CASE("Bundesversammlung, Zollunion und Parlament enden mit 'bis' (seit M10b)") {
+    const DiplomacyData data(-60, 40, 0);
+    data.add_customs_union();
+    // Zwei Bundesversammlungen nacheinander: die erste bis 1648, die zweite ab 1648.
+    testhilfen::write_file(
+        data.dir() / "common/bundesversammlung.chron",
+        "bundesversammlung alt {\n    name = \"Alter Bund\"\n    bis = 1648.01.01\n    praesidium = BRA\n"
+        "    plenum = { BRA = 1 SAX = 1 }\n    rat = { stimme = { staaten = { BRA } } }\n    quelle = "
+        "\"Testdaten\"\n}\n"
+        "bundesversammlung neu {\n    name = \"Neuer Bund\"\n    seit = 1648.01.01\n    praesidium = SAX\n"
+        "    plenum = { BRA = 1 SAX = 2 }\n    rat = { stimme = { staaten = { SAX } } }\n    quelle = "
+        "\"Testdaten\"\n}\n");
+    SUBCASE("vor dem Ende") {
+        const World w = data.load();
+        CHECK(w.diet.id == "neu");
+        CHECK(w.customs_unions.size() == 1);
+    }
+    SUBCASE("nach dem Ende") {
+        // Die Union endet vor dem Start; Sachsen muss sie dann schon verlassen haben.
+        testhilfen::replace_in_file(data.dir() / "common/zollunionen.chron", "    tarif = 0.05\n",
+                                    "    tarif = 0.05\n    bis = 1648.01.01\n");
+        testhilfen::replace_in_file(data.dir() / "history/staaten/20_mitteldeutschland.chron",
+                                    "    zollunion      = mittelbund\n", "");
+        // Der Landtag der Fixture (seit 1649, im Szenario jahresbeginn_1650) endet vor dessen Start.
+        testhilfen::replace_in_file(data.dir() / "common/parlamente.chron",
+                                    "    seit          = 1649.01.01\n",
+                                    "    seit          = 1649.01.01\n    bis           = 1650.01.01\n");
+        const World w = data.load();
+        CHECK(w.diet.id == "neu");
+        CHECK(w.customs_unions.empty());
+        const uhrwerk::LoadResult later = uhrwerk::load_world(data.dir().path(), "jahresbeginn_1650");
+        INFO(testhilfen::issues_text(later));
+        REQUIRE(later.ok());
+        CHECK(later.world->parliaments.empty());
+        CHECK(later.world->electoral_districts.empty());
+        // Ein Staat, der zum Start noch einer aufgelösten Union angehört, ist ein Fehler.
+        testhilfen::replace_in_file(data.dir() / "history/staaten/20_mitteldeutschland.chron",
+                                    "    heer           = 6\n",
+                                    "    heer           = 6\n    zollunion      = mittelbund\n");
+        CHECK_FALSE(uhrwerk::load_world(data.dir().path()).ok());
+    }
+}

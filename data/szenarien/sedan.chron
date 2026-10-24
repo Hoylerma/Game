@@ -1,0 +1,15 @@
+# Kriegslesezeichen „Sedan“ (Meilenstein M10b, Schritt b1; docs/technik/militaer.md, Abschnitt 6.1).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.7. Am 19. Juli 1870 erklärt Frankreich Preußen
+# den Krieg; der Norddeutsche Bund und die süddeutschen Staaten (Schutz- und Trutzbündnisse 1866)
+# marschieren an Rhein und Pfalz auf. Paris und das übrige Frankreich sind Hinterland
+# (common/militaer.chron). Aufmarsch und Kriegsziele: common/aufmarsch_sedan.chron.
+
+szenario sedan {
+    name     = "Sedan"
+    datum    = 1870.07.19
+    spieler  = PRU
+    spielbar = { PRU FRK BAV }
+    waehrung = "Taler"
+    tragfaehigkeit_faktor = 2.5
+}

@@ -25,4 +25,8 @@ staat OLD {
         verfassung     = keine
         wahlrecht      = keines
     }
+
+    1854.01.01 = {
+        zollunion = zollverein
+    }
 }

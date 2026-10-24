@@ -646,6 +646,8 @@ struct MilitaryRules {
     Fixed staff_retreat = Fixed::from_int(2);     // Rückzug vor so viel Übermacht
     Fixed staff_radius_km = Fixed::from_int(60);  // gemeinsam operieren, Bedrohung
     Fixed staff_reach_km = Fixed::from_int(300);  // Gegner in dieser Entfernung angreifen
+    // Lesezeichen im Krieg (seit M10b, Schritt b1).
+    Fixed leadership; // Kampfkraft × (1 + leadership × (Führung − 1)) je Heer
 };
 
 /// Festung (seit Schritt a3, Abschnitt 4.3): muss belagert werden. Inhalt.
@@ -708,6 +710,8 @@ struct Army {
     Index previous = kNone;       // seit a3: Ort vor dem letzten Abschnitt (Flussübergang in der Schlacht)
     std::int32_t days_here = 0;   // seit a3: volle Tage am Ort (Besetzung nach einem Tag)
     bool staff = false;           // seit a4: vom Generalstab geführt (Abschnitt 5)
+    std::string commander;        // seit b1: Befehlshaber (leer ohne)
+    Fixed leadership = Fixed::one(); // seit b1: Führung 0–3, 1 ohne Befehlshaber
 
     friend bool operator==(const Army&, const Army&) = default;
 };
@@ -863,6 +867,42 @@ struct Treaty {
     Date since;
 
     friend bool operator==(const Treaty&, const Treaty&) = default;
+};
+
+/// Heer im Aufmarsch eines Lesezeichens (seit M10b, Schritt b1; common/aufmarsch_<szenario>.chron):
+/// steht beim Start als Feldarmee am Ort, sein Staat ist mobil. Inhalt.
+struct Deployment {
+    std::string id;
+    Index state = kNone;
+    Index location = kNone;
+    std::string name;
+    std::string commander;
+    Fixed leadership = Fixed::one();
+    Fixed soldiers; // Geschütze nach dem Heerwesen des Staates
+    Fixed morale = Fixed::one();
+    bool staff = false;
+};
+
+/// Krieg, in dem ein Lesezeichen beginnt (seit Schritt b1): feste Seiten, Hauptparteien zuerst. Inhalt.
+struct OpeningWar {
+    std::string id;
+    std::string name;
+    Date started;
+    WarCause cause = WarCause::Declaration;
+    std::vector<Index> attackers;
+    std::vector<Index> defenders;
+    std::vector<WarGoal> goals;
+};
+
+/// Hinterland eines Staates außerhalb der Karte (seit Schritt b1, Frankreich): Bevölkerung, die bei
+/// Besetzung und Kriegspunkten mitzählt, Einnahmen je Monat und Ersatz je Kriegsmonat, der an den Orten
+/// am Kartenrand eintrifft. Inhalt.
+struct Hinterland {
+    Index state = kNone;
+    Fixed population;
+    Fixed income;       // Taler je Monat in die Staatskasse
+    Fixed replacements; // Soldaten je Monat, solange der Staat im Krieg steht
+    std::vector<Index> entries;
 };
 
 /// Globale Regeln und Balancing-Werte (data/common/regeln.chron).
@@ -1033,6 +1073,10 @@ struct World {
     std::vector<std::vector<Neighbor>> neighbors; // seit M10 (a1): je Ort, nach Nachbarort; nur mit Militär
     std::vector<Garrison> garrisons;              // seit M10 (a1): nach Staat, dann in Dateireihenfolge
     std::vector<Fortress> fortresses;             // seit M10 (a3): Festungen zum Startdatum
+    std::vector<Deployment> deployments;          // seit M10 (b1): Aufmarsch des Lesezeichens
+    std::vector<OpeningWar> opening_wars;         // seit M10 (b1): Kriege zum Start
+    std::vector<Treaty> opening_treaties;         // seit M10 (b1): Bündnisse zum Start
+    std::vector<Hinterland> hinterlands;          // seit M10 (b1): je Staat höchstens eines
     std::vector<Location> locations;
     std::vector<PopBlock> pops;
     std::vector<ChronicleEntry> chronicle;

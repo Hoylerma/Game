@@ -1,0 +1,7 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+strecke oldenburg_bremen {
+    name      = "Oldenburgische Staatsbahn"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M10b, Schritt b1)"
+    abschnitt = { von = bremen bis = oldenburg eroeffnet = 1867.07.14 }
+}

@@ -31,6 +31,16 @@ ort sankt_wendel {
         verwaltung = pr_kr_sankt_wendel
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort wadern {
@@ -53,6 +63,16 @@ ort wadern {
         besitzer   = PRU
         verwaltung = pr_kr_merzig
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -77,6 +97,16 @@ ort tholey {
         verwaltung = pr_kr_sankt_wendel
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort nohfelden {
@@ -96,6 +126,16 @@ ort nohfelden {
     }
 
     1848.03.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = OLD
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = OLD
         bund     = ja
     }
@@ -122,6 +162,16 @@ ort nonnweiler {
         verwaltung = pr_kr_sankt_wendel
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort freisen {
@@ -144,6 +194,16 @@ ort freisen {
         besitzer   = PRU
         verwaltung = pr_kr_sankt_wendel
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -169,6 +229,16 @@ ort neunkirchen {
         verwaltung = pr_kr_ottweiler
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort homburg {
@@ -191,6 +261,11 @@ ort homburg {
         besitzer   = BAV
         verwaltung = by_pfalz
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -215,6 +290,11 @@ ort blieskastel {
         verwaltung = by_pfalz
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort sankt_ingbert {
@@ -238,6 +318,11 @@ ort sankt_ingbert {
         verwaltung = by_pfalz
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort gersheim {
@@ -260,6 +345,11 @@ ort gersheim {
         besitzer   = BAV
         verwaltung = by_pfalz
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -285,6 +375,16 @@ ort saarbruecken {
         verwaltung = pr_kr_saarbruecken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort saarlouis {
@@ -308,6 +408,16 @@ ort saarlouis {
         verwaltung = pr_kr_saarlouis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort merzig {
@@ -330,6 +440,16 @@ ort merzig {
         besitzer   = PRU
         verwaltung = pr_kr_merzig
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -355,6 +475,16 @@ ort voelklingen {
         verwaltung = pr_kr_saarlouis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort heusweiler {
@@ -377,6 +507,16 @@ ort heusweiler {
         besitzer   = PRU
         verwaltung = pr_kr_saarbruecken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -401,6 +541,16 @@ ort eppelborn {
         verwaltung = pr_kr_sankt_wendel
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort nalbach {
@@ -423,6 +573,16 @@ ort nalbach {
         besitzer   = PRU
         verwaltung = pr_kr_saarlouis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -447,6 +607,16 @@ ort merchweiler {
         verwaltung = pr_kr_ottweiler
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort losheim {
@@ -470,6 +640,16 @@ ort losheim {
         verwaltung = pr_kr_merzig
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort orscholz {
@@ -492,5 +672,15 @@ ort orscholz {
         besitzer   = PRU
         verwaltung = pr_kr_merzig
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }

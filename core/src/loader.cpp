@@ -552,6 +552,15 @@ struct MilitaryRef {
         int line = 0;
     };
     std::vector<FortressDraft> fortresses; // seit Schritt a3, nur die zum Startdatum bestehenden
+    struct HinterlandDraft {
+        std::string tag;
+        Fixed population;
+        Fixed income;
+        Fixed replacements;
+        std::vector<std::string> entries;
+        int line = 0;
+    };
+    std::vector<HinterlandDraft> hinterlands; // seit Schritt b1
 };
 
 /// Felder einer CSV-Zeile (Semikolon; Felder in "…" dürfen ; enthalten, "" steht für ein ").
@@ -693,6 +702,11 @@ public:
         check_players(scenarios, selected);
         check_capitals();
         resolve_military(); // nach den Hauptstädten (Garnison eines Staates ohne Eintrag)
+        // Aufmarsch eines Lesezeichens im Krieg (seit M10b, Schritt b1): nur für das gewählte Szenario.
+        if (selected != nullptr) {
+            process_optional("common/aufmarsch_" + selected->id + ".chron",
+                             [&](const SourceFile& f) { load_deployment(f); });
+        }
         check_districts();
         check_markets();
 
@@ -1878,8 +1892,20 @@ private:
     void load_parliaments(const SourceFile& file) {
         for_each_definition(file, "parlament", "parlament <kennung> { … }", [&](const ScriptNode& node) {
             check_id(file, node, "Kennung eines Parlaments");
-            const bool later = is_later(file, node, "parlament");
             const std::string what = "parlament " + node.value;
+            // Ein Parlament mit 'bis' (seit M10b) gehört zu späteren Startdaten nicht mehr zur Welt; seine
+            // Wahlkreise entfallen wie die eines späteren Parlaments.
+            bool later = is_later(file, node, "parlament");
+            if (const ScriptNode* until = node.find("bis"); !later && until != nullptr) {
+                const std::optional<Date> end = until->is_block ? std::nullopt : parse_date(until->value);
+                if (!end) {
+                    issues_.error(file.name, until->line,
+                                  "ungültiges Datum " + quote(until->value) + " für 'bis' in " + what);
+                } else if (*end <= start_) {
+                    later_.emplace("parlament:" + node.value, LaterDefinition{*end, file.name, node.line});
+                    later = true;
+                }
+            }
             ScriptNode plain = node;
             plain.children.clear();
             std::vector<const ScriptNode*> faction_nodes;
@@ -1891,8 +1917,9 @@ private:
                 }
             }
             Fields f(plain, file.name, what, issues_,
-                     {"name", "ebene", "sitze", "seit", "wahltag", "wahlrecht", "wahlsystem", "wahl_indirekt",
-                      "wahl_zensus", "fraktionen_ab", "boykott", "boykott_maerkte", "sitz", "quelle"});
+                     {"name", "ebene", "sitze", "seit", "bis", "wahltag", "wahlrecht", "wahlsystem",
+                      "wahl_indirekt", "wahl_zensus", "fraktionen_ab", "boykott", "boykott_maerkte", "sitz",
+                      "quelle"});
             Parliament p;
             p.id = node.value;
             p.name = f.text("name").value_or("");
@@ -2302,10 +2329,22 @@ private:
                 issues_.error(file.name, node.line,
                               "„keine“ ist als Kennung einer Zollunion reserviert (zollunion = keine)");
             }
-            const bool later = is_later(file, node, "zollunion");
             const std::string what = "zollunion " + node.value;
+            // Eine Union mit 'bis' (seit M10b) gehört ab diesem Startdatum nicht mehr zur Welt; Verweise
+            // darauf (Zollunion eines Staates in einem früheren Block) zählen dann wie spätere.
+            bool later = is_later(file, node, "zollunion");
+            if (const ScriptNode* until = node.find("bis"); !later && until != nullptr) {
+                const std::optional<Date> end = until->is_block ? std::nullopt : parse_date(until->value);
+                if (!end) {
+                    issues_.error(file.name, until->line,
+                                  "ungültiges Datum " + quote(until->value) + " für 'bis' in " + what);
+                } else if (*end <= start_) {
+                    later_.emplace("zollunion:" + node.value, LaterDefinition{*end, file.name, node.line});
+                    later = true;
+                }
+            }
             Fields f(node, file.name, what, issues_,
-                     {"name", "seit", "leitung", "tarif", "ausgeschlossen", "farbe", "quelle"});
+                     {"name", "seit", "bis", "leitung", "tarif", "ausgeschlossen", "farbe", "quelle"});
             CustomsUnion u;
             u.id = node.value;
             u.name = f.text("name").value_or("");
@@ -2594,7 +2633,7 @@ private:
                 check_id(file, node, "Kennung einer Bundesversammlung");
                 const std::string what = "bundesversammlung " + node.value;
                 Fields f(node, file.name, what, issues_,
-                         {"name", "seit", "praesidium", "sitz", "plenum", "rat", "quelle"});
+                         {"name", "seit", "bis", "praesidium", "sitz", "plenum", "rat", "quelle"});
                 DietRef ref;
                 ref.file = file.name;
                 ref.line = node.line;
@@ -2658,6 +2697,11 @@ private:
                 if (f.has("seit")) {
                     if (const auto since = f.date("seit"); since && *since > start_) {
                         return; // besteht zum Startdatum noch nicht
+                    }
+                }
+                if (f.has("bis")) {
+                    if (const auto until = f.date("bis"); until && *until <= start_) {
+                        return; // seit M10b: zum Startdatum aufgelöst
                     }
                 }
                 if (diet_ref_) {
@@ -2813,7 +2857,8 @@ private:
                           "generalstab_angriff",
                           "generalstab_rueckzug",
                           "generalstab_umkreis_km",
-                          "generalstab_reichweite_km"});
+                          "generalstab_reichweite_km",
+                          "fuehrung"});
                 const std::optional<Date> since = f.date("seit");
                 MilitaryRules& rules = world_.military_rules;
                 rules.river_rank = static_cast<std::int32_t>(f.integer("fluss_rang", 0, 6).value_or(3));
@@ -2884,6 +2929,7 @@ private:
                 optional_fixed("generalstab_rueckzug", rules.staff_retreat, between(fx(1), fx(10)));
                 optional_fixed("generalstab_umkreis_km", rules.staff_radius_km, between(fx(1), fx(1000)));
                 optional_fixed("generalstab_reichweite_km", rules.staff_reach_km, between(fx(1), fx(5000)));
+                optional_fixed("fuehrung", rules.leadership, between(fx(0), fx(1))); // seit b1
                 rules.terrain_march.assign(world_.terrains.size(), Fixed::one());
                 if (f.has("gelaende")) {
                     if (const ScriptNode* terrains =
@@ -2978,11 +3024,40 @@ private:
                 if (since <= start_ && start_ < until) {
                     ref.fortresses.push_back(std::move(d));
                 }
+            } else if (node.key == "hinterland") {
+                // Hinterland außerhalb der Karte (seit Schritt b1, militaer.md Abschnitt 6.2).
+                if (!node.is_block || node.value.empty()) {
+                    issues_.error(file.name, node.line,
+                                  "ungültige Definition, erwartet: hinterland <TAG> { … }");
+                    continue;
+                }
+                const std::string what = "hinterland " + node.value;
+                Fields f(node, file.name, what, issues_,
+                         {"bevoelkerung", "einnahmen", "ersatz", "orte", "quelle"});
+                MilitaryRef::HinterlandDraft h;
+                h.tag = node.value;
+                h.line = node.line;
+                if (!is_state_tag(h.tag)) {
+                    issues_.error(file.name, node.line,
+                                  "ungültiger Staatstag " + quote(h.tag) + " in hinterland");
+                }
+                h.population = f.fixed("bevoelkerung", between(fx(0), fx(1000000000))).value_or(Fixed{});
+                h.income = f.fixed("einnahmen", between(fx(0), fx(1000000000))).value_or(Fixed{});
+                h.replacements = f.fixed("ersatz", between(fx(0), fx(1000000))).value_or(Fixed{});
+                if (const ScriptNode* entries =
+                        f.block("orte", "Orte am Kartenrand, z. B. { verdun sedan }")) {
+                    for (const std::string_view id : entries->bare_values()) {
+                        h.entries.emplace_back(id);
+                    }
+                    if (h.entries.empty()) {
+                        issues_.error(file.name, entries->line, "'orte' in " + what + " nennt keinen Ort");
+                    }
+                }
+                ref.hinterlands.push_back(std::move(h));
             } else {
-                warn_unknown_top_level(
-                    file, node,
-                    "militaer { … }, heerwesen <kennung> { … }, garnison <kennung> { … } oder "
-                    "festung <kennung> { … }");
+                warn_unknown_top_level(file, node,
+                                       "militaer { … }, heerwesen <kennung> { … }, garnison <kennung> { … }, "
+                                       "festung <kennung> { … } oder hinterland <TAG> { … }");
             }
         }
         if (!rules_found) {
@@ -3095,7 +3170,307 @@ private:
             world_.fortresses.push_back(
                 Fortress{d.id, d.name.empty() ? "Festung " + place : d.name, location, d.level});
         }
+        // Hinterland (seit Schritt b1): je Staat höchstens eines, Orte am Kartenrand bekannt.
+        for (const MilitaryRef::HinterlandDraft& d : ref.hinterlands) {
+            const Index state = lookup(states_, d.tag);
+            if (state == kNone) {
+                if (dropped_states_.count(d.tag) == 0) {
+                    issues_.error(ref.file, d.line, "unbekannter Staat " + quote(d.tag) + " in hinterland");
+                }
+                continue;
+            }
+            if (std::any_of(world_.hinterlands.begin(), world_.hinterlands.end(),
+                            [&](const Hinterland& h) { return h.state == state; })) {
+                issues_.error(ref.file, d.line, "hinterland " + d.tag + " ist mehrfach vorhanden");
+                continue;
+            }
+            Hinterland h{state, d.population, d.income, d.replacements, {}};
+            for (const std::string& id : d.entries) {
+                const Index location = lookup(locations_, id);
+                if (location == kNone) {
+                    issues_.error(ref.file, d.line,
+                                  "unbekannter Ort " + quote(id) + " in hinterland " + d.tag);
+                    continue;
+                }
+                h.entries.push_back(location);
+            }
+            world_.hinterlands.push_back(std::move(h));
+        }
         load_neighbors();
+    }
+
+    /// Staaten einer Liste { TAG … } (Aufmarsch, seit Schritt b1); unbekannte und untergegangene sind Fehler.
+    std::vector<Index> state_list(const std::string& file, const ScriptNode& node, const std::string& what) {
+        std::vector<Index> states;
+        if (!node.is_block) {
+            issues_.error(file, node.line,
+                          quote(node.key) + " in " + what + " erwartet eine Liste { TAG … }");
+            return states;
+        }
+        for (const std::string_view tag : node.bare_values()) {
+            const Index state = lookup(states_, tag);
+            if (state == kNone) {
+                issues_.error(file, node.line,
+                              (dropped_states_.count(tag) != 0
+                                   ? "Staat " + quote(tag) + " besitzt zum Startdatum keinen Ort"
+                                   : "unbekannter Staat " + quote(tag)) +
+                                  " in " + what);
+                continue;
+            }
+            if (std::find(states.begin(), states.end(), state) != states.end()) {
+                issues_.error(file, node.line, "Staat " + quote(tag) + " steht zweimal in " + what);
+                continue;
+            }
+            states.push_back(state);
+        }
+        if (states.empty()) {
+            issues_.error(file, node.line, quote(node.key) + " in " + what + " nennt keinen Staat");
+        }
+        return states;
+    }
+
+    /// Kriegsziele einer Seite: { annexion = TAG gebiet = <einheit> fuehrung = ja zollunion = ja
+    /// entschaedigung = 1..24 }, Einträge auch mehrfach (seit Schritt b1).
+    void war_goals(const std::string& file, const ScriptNode& node, const std::string& what, bool attacker,
+                   std::vector<WarGoal>& goals) {
+        if (!node.is_block) {
+            issues_.error(file, node.line, quote(node.key) + " in " + what + " erwartet einen Block { … }");
+            return;
+        }
+        for (const ScriptNode& child : node.children) {
+            const std::string field = quote(child.key) + " in " + quote(node.key) + " von " + what;
+            if (child.is_block || child.key.empty()) {
+                issues_.error(file, child.line, "ungültiges Kriegsziel in " + what);
+                continue;
+            }
+            if (child.key == "annexion") {
+                const Index state = lookup(states_, child.value);
+                if (state == kNone) {
+                    issues_.error(file, child.line,
+                                  "unbekannter Staat " + quote(child.value) + " in " + field);
+                    continue;
+                }
+                goals.push_back(WarGoal{WarGoalKind::Annexation, attacker, state});
+            } else if (child.key == "gebiet") {
+                const Index unit = lookup(admin_units_, child.value);
+                if (unit == kNone) {
+                    issues_.error(file, child.line,
+                                  "unbekannte Verwaltungseinheit " + quote(child.value) + " in " + field);
+                    continue;
+                }
+                goals.push_back(WarGoal{WarGoalKind::Territory, attacker, unit});
+            } else if (child.key == "fuehrung" || child.key == "zollunion") {
+                if (child.value != "ja") {
+                    issues_.error(file, child.line, field + " erwartet ja");
+                    continue;
+                }
+                goals.push_back(WarGoal{
+                    child.key == "fuehrung" ? WarGoalKind::Leadership : WarGoalKind::Customs, attacker, 0});
+            } else if (child.key == "entschaedigung") {
+                const std::optional<std::int64_t> months = parse_int(child.value);
+                if (!months || *months < 1 || *months > 24) {
+                    issues_.error(file, child.line, field + " erwartet ganze Monatseinnahmen von 1 bis 24");
+                    continue;
+                }
+                goals.push_back(WarGoal{WarGoalKind::Indemnity, attacker, static_cast<Index>(*months)});
+            } else {
+                issues_.error(file, child.line,
+                              "unbekanntes Kriegsziel " + quote(child.key) +
+                                  " (erwartet annexion, gebiet, fuehrung, zollunion oder entschaedigung)");
+            }
+        }
+    }
+
+    /// Aufmarsch eines Lesezeichens (seit M10b, Schritt b1; militaer.md Abschnitt 6.1):
+    /// common/aufmarsch_<szenario>.chron mit heer <kennung> { … }, krieg <kennung> { … } und
+    /// buendnis { … } / garantie { … }. Nur mit Militär zum Startdatum.
+    void load_deployment(const SourceFile& file) {
+        if (!world_.military_rules.active) {
+            issues_.error(file.name, 0,
+                          "Aufmarsch ohne Militär zum Startdatum (common/militaer.chron, 'seit')");
+            return;
+        }
+        std::set<std::string, std::less<>> army_ids;
+        std::set<std::string, std::less<>> war_ids;
+        std::vector<Index> at_war;
+        for (const ScriptNode& node : file.root.children) {
+            if (node.key == "heer") {
+                if (!node.is_block || node.value.empty()) {
+                    issues_.error(file.name, node.line,
+                                  "ungültige Definition, erwartet: heer <kennung> { … }");
+                    continue;
+                }
+                check_id(file, node, "Kennung eines Heeres");
+                const std::string what = "heer " + node.value;
+                if (!army_ids.insert(node.value).second) {
+                    issues_.error(file.name, node.line, what + " ist mehrfach vorhanden");
+                    continue;
+                }
+                Fields f(node, file.name, what, issues_,
+                         {"staat", "name", "befehlshaber", "fuehrung", "ort", "soldaten", "moral",
+                          "generalstab", "quelle"});
+                Deployment d;
+                d.id = node.value;
+                const std::optional<std::string> tag = f.text("staat");
+                const std::optional<std::string> place = f.text("ort");
+                d.name = f.text("name").value_or("");
+                if (f.has("befehlshaber")) {
+                    d.commander = f.text("befehlshaber").value_or("");
+                }
+                if (f.has("fuehrung")) {
+                    d.leadership = f.fixed("fuehrung", between(fx(0), fx(3))).value_or(Fixed::one());
+                }
+                d.soldiers = f.fixed("soldaten", above_up_to(fx(0), fx(10000000))).value_or(Fixed{});
+                if (f.has("moral")) {
+                    d.morale = f.fixed("moral", above_up_to(fx(0), fx(1))).value_or(Fixed::one());
+                }
+                d.staff = f.has("generalstab") ? f.boolean("generalstab").value_or(false)
+                                               : world_.military_rules.staff;
+                if (tag) {
+                    d.state = lookup(states_, *tag);
+                    if (d.state == kNone) {
+                        issues_.error(file.name, node.line,
+                                      (dropped_states_.count(*tag) != 0
+                                           ? "Staat " + quote(*tag) + " besitzt zum Startdatum keinen Ort"
+                                           : "unbekannter Staat " + quote(*tag)) +
+                                          " in " + what);
+                    }
+                }
+                if (place) {
+                    d.location = lookup(locations_, *place);
+                    if (d.location == kNone) {
+                        issues_.error(file.name, node.line,
+                                      "unbekannter Ort " + quote(*place) + " in " + what);
+                    } else if (world_.locations[static_cast<std::size_t>(d.location)].owner == kNone) {
+                        issues_.error(file.name, node.line, what + ": Ort " + *place + " hat keine Daten");
+                        d.location = kNone;
+                    }
+                }
+                if (d.state != kNone && d.location != kNone && !d.name.empty()) {
+                    world_.deployments.push_back(std::move(d));
+                }
+            } else if (node.key == "krieg") {
+                if (!node.is_block || node.value.empty()) {
+                    issues_.error(file.name, node.line,
+                                  "ungültige Definition, erwartet: krieg <kennung> { … }");
+                    continue;
+                }
+                check_id(file, node, "Kennung eines Krieges");
+                const std::string what = "krieg " + node.value;
+                if (!war_ids.insert(node.value).second) {
+                    issues_.error(file.name, node.line, what + " ist mehrfach vorhanden");
+                    continue;
+                }
+                Fields f(node, file.name, what, issues_,
+                         {"name", "beginn", "anlass", "angreifer", "verteidiger", "ziel", "ziel_verteidiger",
+                          "quelle"});
+                OpeningWar war;
+                war.id = node.value;
+                war.name = f.text("name").value_or("");
+                war.started = f.has("beginn") ? f.date("beginn").value_or(start_) : start_;
+                if (start_ < war.started) {
+                    issues_.error(file.name, node.line, what + ": 'beginn' liegt nach dem Startdatum");
+                }
+                if (f.has("anlass")) {
+                    const std::string cause = f.text("anlass").value_or("erklaerung");
+                    if (cause == "krise") {
+                        war.cause = WarCause::Crisis;
+                    } else if (cause == "bundesexekution") {
+                        war.cause = WarCause::Execution;
+                    } else if (cause != "erklaerung") {
+                        issues_.error(file.name, node.line,
+                                      "'anlass' in " + what +
+                                          " erwartet erklaerung, krise oder bundesexekution");
+                    }
+                }
+                if (const ScriptNode* a = f.block("angreifer", "{ TAG … }, Hauptpartei zuerst")) {
+                    war.attackers = state_list(file.name, *a, what);
+                }
+                if (const ScriptNode* d = f.block("verteidiger", "{ TAG … }, Hauptpartei zuerst")) {
+                    war.defenders = state_list(file.name, *d, what);
+                }
+                bool valid = !war.attackers.empty() && !war.defenders.empty();
+                for (const Index s : war.attackers) {
+                    if (std::find(war.defenders.begin(), war.defenders.end(), s) != war.defenders.end()) {
+                        issues_.error(file.name, node.line,
+                                      what + ": " + world_.states[static_cast<std::size_t>(s)].tag +
+                                          " steht auf beiden Seiten");
+                        valid = false;
+                    }
+                }
+                for (const std::vector<Index>* side : {&war.attackers, &war.defenders}) {
+                    for (const Index s : *side) {
+                        if (std::find(at_war.begin(), at_war.end(), s) != at_war.end()) {
+                            issues_.error(file.name, node.line,
+                                          what + ": " + world_.states[static_cast<std::size_t>(s)].tag +
+                                              " führt schon einen anderen Krieg des Aufmarschs");
+                            valid = false;
+                        }
+                    }
+                }
+                if (f.has("ziel")) {
+                    if (const ScriptNode* g = f.block("ziel", "Kriegsziele der Angreifer")) {
+                        war_goals(file.name, *g, what, true, war.goals);
+                    }
+                }
+                if (f.has("ziel_verteidiger")) {
+                    if (const ScriptNode* g = f.block("ziel_verteidiger", "Kriegsziele der Verteidiger")) {
+                        war_goals(file.name, *g, what, false, war.goals);
+                    }
+                }
+                if (valid && !war.name.empty()) {
+                    at_war.insert(at_war.end(), war.attackers.begin(), war.attackers.end());
+                    at_war.insert(at_war.end(), war.defenders.begin(), war.defenders.end());
+                    world_.opening_wars.push_back(std::move(war));
+                }
+            } else if (node.key == "buendnis" || node.key == "garantie") {
+                const bool alliance = node.key == "buendnis";
+                const std::string what = node.key;
+                if (!node.is_block || !node.value.empty()) {
+                    issues_.error(file.name, node.line, "ungültige Definition, erwartet: " + what + " { … }");
+                    continue;
+                }
+                Fields f(node, file.name, what, issues_,
+                         alliance ? std::initializer_list<std::string_view>{"staaten", "quelle"}
+                                  : std::initializer_list<std::string_view>{"von", "fuer", "quelle"});
+                Treaty t;
+                t.kind = alliance ? TreatyKind::Alliance : TreatyKind::Guarantee;
+                t.since = start_;
+                if (alliance) {
+                    if (const ScriptNode* list = f.block("staaten", "zwei Staatstags, z. B. { PRU AUT }")) {
+                        const std::vector<Index> states = state_list(file.name, *list, what);
+                        if (states.size() != 2) {
+                            issues_.error(file.name, node.line, "buendnis erwartet genau zwei Staaten");
+                            continue;
+                        }
+                        t.from = states[0];
+                        t.to = states[1];
+                    }
+                } else {
+                    for (const auto& [key, target] : {std::pair{"von", &t.from}, std::pair{"fuer", &t.to}}) {
+                        const std::optional<std::string> tag = f.text(key);
+                        if (tag) {
+                            *target = lookup(states_, *tag);
+                            if (*target == kNone) {
+                                issues_.error(file.name, node.line,
+                                              "unbekannter Staat " + quote(*tag) + " in garantie");
+                            }
+                        }
+                    }
+                    if (t.from != kNone && t.from == t.to) {
+                        issues_.error(file.name, node.line, "garantie: 'von' und 'fuer' sind derselbe Staat");
+                        continue;
+                    }
+                }
+                if (t.from != kNone && t.to != kNone) {
+                    world_.opening_treaties.push_back(t);
+                }
+            } else {
+                warn_unknown_top_level(file, node,
+                                       "heer <kennung> { … }, krieg <kennung> { … }, buendnis { … } oder "
+                                       "garantie { … }");
+            }
+        }
     }
 
     /// Nachbarschaft (seit M10, Abschnitt 3.1): karte/nachbarn.csv (Kartengenerator) und, falls

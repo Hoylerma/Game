@@ -28,6 +28,15 @@ ort valenciennes {
     stadt    = ja
     kreis    = kr_tournai
     quelle   = "GeoNames (CC BY 4.0), geonameid 2971041; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_nord
+        bevoelkerung = 46647
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 75 flamen = 25 }
+        verwuestung  = 0
+    }
 }
 
 ort mouscron {
@@ -48,6 +57,15 @@ ort cambrai {
     stadt    = ja
     kreis    = kr_tournai
     quelle   = "GeoNames (CC BY 4.0), geonameid 3029030; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_nord
+        bevoelkerung = 59559
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 75 flamen = 25 }
+        verwuestung  = 0
+    }
 }
 
 ort denain {
@@ -58,6 +76,15 @@ ort denain {
     stadt    = ja
     kreis    = kr_tournai
     quelle   = "GeoNames (CC BY 4.0), geonameid 3021605; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_nord
+        bevoelkerung = 35201
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 75 flamen = 25 }
+        verwuestung  = 0
+    }
 }
 
 ort saint_amand_les_eaux {
@@ -68,6 +95,15 @@ ort saint_amand_les_eaux {
     stadt    = nein
     kreis    = kr_tournai
     quelle   = "GeoNames (CC BY 4.0), geonameid 2981839; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_nord
+        bevoelkerung = 26928
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 75 flamen = 25 }
+        verwuestung  = 0
+    }
 }
 
 ort caudry {
@@ -78,6 +114,15 @@ ort caudry {
     stadt    = nein
     kreis    = kr_tournai
     quelle   = "GeoNames (CC BY 4.0), geonameid 3028205; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_nord
+        bevoelkerung = 25200
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 75 flamen = 25 }
+        verwuestung  = 0
+    }
 }
 
 ort le_quesnoy {
@@ -88,6 +133,15 @@ ort le_quesnoy {
     stadt    = nein
     kreis    = kr_tournai
     quelle   = "GeoNames (CC BY 4.0), geonameid 3002420; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_nord
+        bevoelkerung = 24336
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 75 flamen = 25 }
+        verwuestung  = 0
+    }
 }
 
 ort busigny {
@@ -98,6 +152,15 @@ ort busigny {
     stadt    = nein
     kreis    = kr_tournai
     quelle   = "GeoNames (CC BY 4.0), geonameid 3029477; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_nord
+        bevoelkerung = 15264
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 75 flamen = 25 }
+        verwuestung  = 0
+    }
 }
 
 ort haussy {
@@ -108,6 +171,15 @@ ort haussy {
     stadt    = nein
     kreis    = kr_tournai
     quelle   = "GeoNames (CC BY 4.0), geonameid 3013830; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_nord
+        bevoelkerung = 27216
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 75 flamen = 25 }
+        verwuestung  = 0
+    }
 }
 
 ort bergen_hennegau {
@@ -298,6 +370,15 @@ ort maubeuge {
     stadt    = ja
     kreis    = kr_maubeuge
     quelle   = "GeoNames (CC BY 4.0), geonameid 2995150; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_nord
+        bevoelkerung = 34871
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 75 flamen = 25 }
+        verwuestung  = 0
+    }
 }
 
 ort avesnes_sur_helpe {
@@ -308,6 +389,15 @@ ort avesnes_sur_helpe {
     stadt    = ja
     kreis    = kr_maubeuge
     quelle   = "GeoNames (CC BY 4.0), geonameid 3035698; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Einwohnerzahl für die Auswahl aus einwohner.csv; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_nord
+        bevoelkerung = 23904
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 75 flamen = 25 }
+        verwuestung  = 0
+    }
 }
 
 ort aulnoye_aymeries {
@@ -318,6 +408,15 @@ ort aulnoye_aymeries {
     stadt    = nein
     kreis    = kr_maubeuge
     quelle   = "GeoNames (CC BY 4.0), geonameid 3036132; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_nord
+        bevoelkerung = 19584
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 75 flamen = 25 }
+        verwuestung  = 0
+    }
 }
 
 ort jeumont {
@@ -328,6 +427,15 @@ ort jeumont {
     stadt    = nein
     kreis    = kr_maubeuge
     quelle   = "GeoNames (CC BY 4.0), geonameid 3012346; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_nord
+        bevoelkerung = 18864
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 75 flamen = 25 }
+        verwuestung  = 0
+    }
 }
 
 ort landrecies {
@@ -338,6 +446,15 @@ ort landrecies {
     stadt    = nein
     kreis    = kr_maubeuge
     quelle   = "GeoNames (CC BY 4.0), geonameid 3007830; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_nord
+        bevoelkerung = 33120
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 75 flamen = 25 }
+        verwuestung  = 0
+    }
 }
 
 ort bavay {
@@ -348,6 +465,15 @@ ort bavay {
     stadt    = nein
     kreis    = kr_maubeuge
     quelle   = "GeoNames (CC BY 4.0), geonameid 3034514; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_nord
+        bevoelkerung = 24480
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 75 flamen = 25 }
+        verwuestung  = 0
+    }
 }
 
 ort solre_le_chateau {
@@ -358,6 +484,15 @@ ort solre_le_chateau {
     stadt    = nein
     kreis    = kr_maubeuge
     quelle   = "GeoNames (CC BY 4.0), geonameid 2974329; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_nord
+        bevoelkerung = 29088
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 75 flamen = 25 }
+        verwuestung  = 0
+    }
 }
 
 ort fourmies {
@@ -368,6 +503,15 @@ ort fourmies {
     stadt    = nein
     kreis    = kr_fourmies
     quelle   = "GeoNames (CC BY 4.0), geonameid 3017512; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_nord
+        bevoelkerung = 26496
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 75 flamen = 25 }
+        verwuestung  = 0
+    }
 }
 
 ort chimay {
@@ -388,6 +532,14 @@ ort hirson {
     stadt    = nein
     kreis    = kr_fourmies
     quelle   = "GeoNames (CC BY 4.0), geonameid 3013258; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        bevoelkerung = 8474
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort beaumont {
@@ -418,6 +570,14 @@ ort le_nouvion_en_thierache {
     stadt    = nein
     kreis    = kr_fourmies
     quelle   = "GeoNames (CC BY 4.0), geonameid 3003101; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        bevoelkerung = 10116
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort la_capelle {
@@ -428,4 +588,12 @@ ort la_capelle {
     stadt    = nein
     kreis    = kr_fourmies
     quelle   = "GeoNames (CC BY 4.0), geonameid 3010609; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        bevoelkerung = 6043
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 100 }
+        verwuestung  = 0
+    }
 }

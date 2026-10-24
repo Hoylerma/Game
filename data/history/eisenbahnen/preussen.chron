@@ -137,3 +137,113 @@ strecke magdeburg_halberstadt {
     abschnitt = { von = magdeburg bis = oschersleben eroeffnet = 1843.07.15 }
     abschnitt = { von = oschersleben bis = halberstadt eroeffnet = 1843.07.15 }
 }
+
+strecke ostbahn {
+    name      = "Preußische Ostbahn"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M10b, Schritt b1)"
+    abschnitt = { von = kreuz bis = schneidemuehl eroeffnet = 1851.07.27 }
+    abschnitt = { von = schneidemuehl bis = bromberg eroeffnet = 1851.07.27 }
+    abschnitt = { von = bromberg bis = dirschau eroeffnet = 1852.08.06 }
+    abschnitt = { von = dirschau bis = danzig eroeffnet = 1852.08.06 }
+    abschnitt = { von = marienburg bis = elbing eroeffnet = 1853.08.19 }
+    abschnitt = { von = elbing bis = braunsberg_ostpreussen eroeffnet = 1853.08.19 }
+    abschnitt = { von = braunsberg_ostpreussen bis = koenigsberg eroeffnet = 1853.08.19 }
+    abschnitt = { von = dirschau bis = marienburg eroeffnet = 1857.10.12 }
+    abschnitt = { von = kreuz bis = landsberg_warthe eroeffnet = 1857.10.12 }
+    abschnitt = { von = landsberg_warthe bis = kuestrin eroeffnet = 1857.10.12 }
+    abschnitt = { von = koenigsberg bis = insterburg eroeffnet = 1860.06.15 }
+    abschnitt = { von = insterburg bis = gumbinnen eroeffnet = 1860.06.15 }
+    abschnitt = { von = gumbinnen bis = stallupoenen eroeffnet = 1860.06.15 }
+    abschnitt = { von = kuestrin bis = berlin_coelln eroeffnet = 1867.10.01 }
+}
+
+strecke posen_breslau {
+    name      = "Posen-Breslauer Eisenbahn"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M10b, Schritt b1)"
+    abschnitt = { von = posen bis = lissa eroeffnet = 1856.10.29 }
+    abschnitt = { von = lissa bis = breslau eroeffnet = 1856.10.29 }
+}
+
+strecke magdeburg_wittenberge {
+    name      = "Magdeburg-Wittenberger Eisenbahn"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M10b, Schritt b1)"
+    abschnitt = { von = magdeburg bis = stendal eroeffnet = 1849.07.07 }
+    abschnitt = { von = stendal bis = wittenberge eroeffnet = 1849.07.07 }
+}
+
+strecke westfaelische {
+    name      = "Westfälische Eisenbahn"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M10b, Schritt b1)"
+    abschnitt = { von = hamm bis = soest eroeffnet = 1850.10.01 }
+    abschnitt = { von = soest bis = paderborn eroeffnet = 1850.10.01 }
+    abschnitt = { von = paderborn bis = warburg eroeffnet = 1853.07.21 }
+}
+
+strecke bergisch_maerkische {
+    name      = "Bergisch-Märkische Eisenbahn"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M10b, Schritt b1)"
+    abschnitt = { von = wuppertal bis = hagen eroeffnet = 1849.03.09 }
+    abschnitt = { von = hagen bis = dortmund eroeffnet = 1849.03.09 }
+}
+
+strecke hinterpommersche {
+    name      = "Hinterpommersche Eisenbahn"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M10b, Schritt b1)"
+    abschnitt = { von = stargard bis = belgard eroeffnet = 1859.06.01 }
+    abschnitt = { von = belgard bis = koeslin eroeffnet = 1859.06.01 }
+    abschnitt = { von = koeslin bis = stolp eroeffnet = 1869.07.01 }
+    abschnitt = { von = stolp bis = lauenburg_in_pommern eroeffnet = 1870.09.01 }
+    abschnitt = { von = lauenburg_in_pommern bis = danzig eroeffnet = 1870.09.01 }
+}
+
+strecke angermuende_stralsund {
+    name      = "Angermünde-Stralsunder Eisenbahn"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M10b, Schritt b1)"
+    abschnitt = { von = angermuende bis = pasewalk eroeffnet = 1863.11.01 }
+    abschnitt = { von = pasewalk bis = anklam eroeffnet = 1863.11.01 }
+    abschnitt = { von = anklam bis = stralsund eroeffnet = 1863.11.01 }
+    abschnitt = { von = stettin bis = pasewalk eroeffnet = 1863.11.01 }
+}
+
+strecke oberschlesische_tarnowitz {
+    name      = "Oppeln-Tarnowitzer Eisenbahn"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M10b, Schritt b1)"
+    abschnitt = { von = oppeln bis = tarnowitz eroeffnet = 1858.10.15 }
+}
+
+strecke berlin_goerlitz {
+    name      = "Berlin-Görlitzer Eisenbahn"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M10b, Schritt b1)"
+    abschnitt = { von = berlin_coelln bis = luebben eroeffnet = 1866.12.13 }
+    abschnitt = { von = luebben bis = cottbus eroeffnet = 1866.12.13 }
+    abschnitt = { von = cottbus bis = goerlitz eroeffnet = 1867.12.31 }
+}
+
+strecke saarbruecker {
+    name      = "Saarbrücker Eisenbahn"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M10b, Schritt b1)"
+    abschnitt = { von = neunkirchen bis = saarbruecken eroeffnet = 1852.11.15 }
+    abschnitt = { von = saarbruecken bis = merzig eroeffnet = 1860.05.26 }
+    abschnitt = { von = merzig bis = trier eroeffnet = 1860.05.26 }
+}
+
+strecke rhein_nahe {
+    name      = "Rhein-Nahe-Bahn"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M10b, Schritt b1)"
+    abschnitt = { von = bingen_am_rhein bis = bad_kreuznach eroeffnet = 1858.07.15 }
+    abschnitt = { von = bad_kreuznach bis = idar_oberstein eroeffnet = 1860.05.26 }
+    abschnitt = { von = idar_oberstein bis = neunkirchen eroeffnet = 1860.05.26 }
+}
+
+strecke linke_rheinstrecke {
+    name      = "Linke Rheinstrecke (Rheinische Eisenbahn)"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M10b, Schritt b1)"
+    abschnitt = { von = bonn bis = koblenz eroeffnet = 1858.11.15 }
+    abschnitt = { von = koblenz bis = bingen_am_rhein eroeffnet = 1859.12.15 }
+}
+
+strecke loehne_herford {
+    name      = "Anschluss Löhne"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M10b, Schritt b1)"
+    abschnitt = { von = herford bis = loehne eroeffnet = 1855.11.21 }
+}

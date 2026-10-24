@@ -29,4 +29,9 @@ staat AUT {
     1848.12.02 = {
         herrscher = "Franz Joseph I."
     }
+
+    1861.02.26 = {
+        regierungsform = konstitutionelle_monarchie
+        verfassung     = konstitutionell
+    }
 }

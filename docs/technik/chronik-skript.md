@@ -655,6 +655,7 @@ parlament nationalversammlung {
     ebene         = bund                             # Pflicht: bund oder ein Staatstag
     sitze         = 649                              # Pflicht: Sollzahl, 1..10000
     seit          = 1848.03.01                       # optional (Abschnitt 3.18)
+    bis           = 1849.06.18                       # optional seit M10b: ab diesem Startdatum nicht mehr
     wahltag       = 1848.05.01                       # Pflicht
     wahlrecht     = allgemein_maenner                # Pflicht: keines | staendisch | zensus | dreiklassen | allgemein_maenner
     wahlsystem    = stichwahl                        # optional: stichwahl (Standard) | relativ
@@ -671,7 +672,9 @@ parlament nationalversammlung {
 
 Ein Parlament mit seiner Wahl ([politik.md](politik.md), Abschnitt 5). `seit` ist hier das früheste
 Startdatum eines Szenarios, in dem es vorkommt; so gibt es 1648 kein Parlament, und dessen Ergebnisse
-bleiben bitgleich. Die Fraktionen teilen die Links-rechts-Achse **lückenlos** von −100 bis +100 auf (`von`
+bleiben bitgleich. `bis` (seit M10b) ist das erste Startdatum, zu dem es nicht mehr vorkommt; mit
+seinen Wahlkreisen entfällt es dann wie ein späteres (so laden die Kriegslesezeichen 1864–1870 ohne die
+Wahlen von 1848/49). Die Fraktionen teilen die Links-rechts-Achse **lückenlos** von −100 bis +100 auf (`von`
 kleiner als `bis`; die Reihenfolge in der Datei ist frei, der Kern ordnet nach `von`). Die Ebene wird
 nach dem Staatenbestand aufgelöst (Abschnitt 3.5): Ein Staat ohne Ort zum Startdatum ist fatal.
 Weitere Fehler: unbekannte Kulturen im Boykott, `fraktionen_ab` vor dem Wahltag, `wahl_zensus` ohne
@@ -792,6 +795,7 @@ Im Kern: `ElectionTargets` (`uhrwerk/election_lab.hpp`).
 zollunion zollverein {
     name    = "Zollverein"        # Pflicht; steht in der Chronik („… tritt dem Zollverein bei“)
     seit    = 1834.01.01          # optional (Abschnitt 3.18)
+    bis     = 1854.01.01          # optional seit M10b: ab diesem Startdatum aufgelöst
     leitung = PRU                 # Pflicht: Leitmacht, ein Staatstag
     tarif   = 0.03                # Pflicht: Vereinstarif, 0..steuersatz_max
     ausgeschlossen = { AUT }      # optional seit M9 a2: Staaten, deren Beitritt die Leitmacht ablehnt
@@ -803,7 +807,8 @@ zollunion zollverein {
 Eine Zollunion ([diplomatie.md](diplomatie.md), Abschnitt 3.1): ein gemeinsames Zollgebiet ihrer
 Mitglieder mit einem Tarif. Die Mitglieder stehen im Feld `zollunion` der Staaten (Abschnitt 3.5).
 `seit` ist das früheste Startdatum eines Szenarios, in dem es die Union gibt; so hat 1648 keine, und
-dessen Ergebnisse bleiben bitgleich. Die Leitmacht wird nach dem Staatenbestand aufgelöst: Ein Staat ohne
+dessen Ergebnisse bleiben bitgleich. Mit `bis` (seit M10b) gehört sie ab diesem Startdatum nicht mehr
+zur Welt (Steuerverein bis 1854); ein Staat, der ihr zum Start noch angehörte, ist dann fatal. Die Leitmacht wird nach dem Staatenbestand aufgelöst: Ein Staat ohne
 Ort zum Startdatum und eine Leitmacht, die der Union zum Startdatum nicht angehört, sind fatal, ebenso
 eine doppelte Kennung. `keine` ist als Kennung reserviert. In `ausgeschlossen` ist ein unbekannter
 Staat fatal; ein Staat ohne Ort zum Startdatum entfällt. Die Datei darf fehlen. Im Kern:
@@ -901,6 +906,7 @@ Die Bundesversammlung des Deutschen Bundes ([diplomatie.md](diplomatie.md), Absc
 bundesversammlung bund {
     name       = "Bundesversammlung"   # Pflicht; steht in der Chronik der Anträge
     seit       = 1816.11.05            # optional (Abschnitt 3.18)
+    bis        = 1866.08.24            # optional seit M10b: ab diesem Startdatum aufgelöst
     praesidium = AUT                   # Pflicht: Präsidialmacht zum Start
     sitz       = frankfurt_am_main     # optional: Tagungsort (Ort), Anzeige
     plenum     = { AUT = 4 PRU = 4 … } # Pflicht: Stimmen im Plenum je Staat, 1–100
@@ -913,7 +919,8 @@ bundesversammlung bund {
 ```
 
 Zum Startdatum darf höchstens eine Bundesversammlung bestehen; eine mit späterem `seit` gehört nicht
-zur Welt (1648). Staaten ohne Ort zum Startdatum entfallen aus Plenum und Rat; ein unbekannter Staat,
+zur Welt (1648), ebenso eine mit `bis` zum Startdatum oder davor (seit M10b: der Deutsche Bund bis
+1866, danach der Bundesrat des Norddeutschen Bundes ab 1867). Staaten ohne Ort zum Startdatum entfallen aus Plenum und Rat; ein unbekannter Staat,
 ein Staat zweimal im Plenum oder mit zwei Stimmen im Rat, eine Kuriatstimme ohne Namen und eine
 Präsidialmacht ohne Ort sind fatal. Im Kern: `World::diet` (`FederalDiet { id, name, presidency, seat,
 plenum, council, source }`); die Präsidialmacht im Spiel ist Zustand (`World::diet_presidency`).
@@ -971,6 +978,8 @@ militaer {
     generalstab            = ja     # ja/nein (nein): die Heere stehen beim Start unter dem Generalstab
     generalstab_angriff    = 1.2    # 1–10; generalstab_rueckzug 2 (1–10)
     generalstab_umkreis_km = 60     # 1–1.000; generalstab_reichweite_km 300 (1–5.000)
+    # seit Schritt b1, optional:
+    fuehrung               = 0.2    # 0–1 (0): Kampfkraft × (1 + dies × (Führung des Heeres − 1))
 }
 
 heerwesen standard {          # ohne 'staat': für alle Staaten ohne eigenen Eintrag
@@ -988,6 +997,15 @@ festung mainz {              # seit Schritt a3
     name   = "Bundesfestung Mainz"   # optional, sonst „Festung <Ortsname>“; beginnt mit „Festung“ o. ä.
     seit   = 1816.01.01       # optional; bis (optional, ausschließlich)
     quelle = "…"              # optional
+}
+
+hinterland FRK {             # seit Schritt b1: Staat mit Land außerhalb der Karte, höchstens einmal
+    bevoelkerung = 36000000    # Pflicht, 0–1.000.000.000: zählt bei Besetzung und Kriegspunkten mit
+    einnahmen    = 4000000     # Pflicht, 0–1.000.000.000: Taler je Monat in die Staatskasse
+    ersatz       = 30000       # Pflicht, 0–1.000.000: Soldaten je Monat, solange der Staat Krieg führt
+    orte         = { verdun sedan }   # Pflicht: Orte am Kartenrand; der Ersatz kommt im ersten, den
+                                      # die eigene Seite hält
+    quelle       = "…"         # optional
 }
 
 garnison pru_garde {
@@ -1015,7 +1033,9 @@ und Abrüstung, `terrain_march` je Gelände), `State::army` (`ArmyProfile`), `Wo
 `World::neighbors`, seit a3 `World::fortresses`; Zustand sind die Heere (`World::armies`, seit a2 mit
 Weg und Resttagen), die Mobilmachung je Staat (`World::mobilizations`), die Belegung je Bahnstrecke
 (`World::rail_backlog`) und seit a3 Kriege, Kontrolle, Schlachten, Belagerungen, Verwundete, Gefangene
-und Gefallene, seit a5 die Ergebnisse beendeter Kriege (`World::war_results`).
+und Gefallene, seit a5 die Ergebnisse beendeter Kriege (`World::war_results`). Ein Hinterland mit
+unbekanntem Staat oder Ort oder zweimal für denselben Staat ist fatal; ein Staat ohne Ort zum Start
+entfällt mit seinem Hinterland (`World::hinterlands`).
 
 ### 3.31 `common/kriegsziele_<szenario>.chron` (seit M10)
 
@@ -1051,6 +1071,48 @@ Höchstdauer. Fehler sind:
 Ob ein Ziel im Krieg gilt (etwa eine Einheit mit Orten des Verteidigers), entscheidet erst der Kern bei
 der Erklärung; ein ungültiges entfällt. Ein Lauf, in dem die Erklärung scheitert, ist ein Verstoß. Im
 Kern: `WarTargets` (`uhrwerk/war_lab.hpp`).
+
+### 3.32 `common/aufmarsch_<szenario>.chron` (seit M10b)
+
+Aufmarsch eines Lesezeichens, das im Krieg beginnt ([militaer.md](militaer.md), Abschnitt 6.1). Der
+Lader liest die Datei nur für das gewählte Szenario und nur mit Militär zum Startdatum (sonst fatal);
+sie darf fehlen.
+
+```text
+heer pru_erste_armee {
+    staat        = PRU                 # Pflicht: besteht zum Startdatum
+    name         = "I. Armee"          # Pflicht
+    befehlshaber = "Prinz Friedrich Karl"   # optional
+    fuehrung     = 1.5                 # optional, 0–3 (1): wirkt mit der Regel 'fuehrung' (3.30)
+    ort          = goerlitz            # Pflicht: Ort mit Daten, auch im Land des Gegners
+    soldaten     = 93000               # Pflicht, über 0; Geschütze nach dem Heerwesen
+    moral        = 1                   # optional, über 0 bis 1 (1)
+    generalstab  = ja                  # optional (Standard: Regel 'generalstab')
+    quelle       = "…"                 # optional
+}
+krieg deutscher_krieg {
+    name        = "Deutscher Krieg"    # Pflicht
+    beginn      = 1866.06.14           # optional, nicht nach dem Startdatum (Standard: Startdatum)
+    anlass      = erklaerung           # optional: erklaerung, krise oder bundesexekution
+    angreifer   = { PRU MSC }          # Pflicht, Hauptpartei zuerst
+    verteidiger = { AUT SAX BAV }      # Pflicht, Hauptpartei zuerst
+    ziel        = { fuehrung = ja annexion = HAN }   # optional: Ziele der Angreifer, Einträge wie in
+    ziel_verteidiger = { entschaedigung = 6 }        # 3.31, auch mehrfach; ebenso der Verteidiger
+    quelle      = "…"
+}
+buendnis { staaten = { PRU AUT } }     # Bündnis zum Start
+garantie { von = GBR fuer = BEL }      # Garantie zum Start
+```
+
+Beim Start stehen die Heere als Feldarmeen an ihrem Ort, ihre Staaten sind mobil (die Garnisonen
+bleiben als Besatzung stehen, die übrigen Kriegführenden machen mobil); dann gelten die Bündnisse und
+beginnen die Kriege mit ihren Zielen (ein Ziel, das im Krieg nicht gilt, entfällt wie bei einer
+Erklärung). Nach dem Frieden lösen sich die Heere des Aufmarschs mit der Abrüstung auf. Fatal sind
+unbekannte Staaten, Orte und Felder der Ziele, ein Ort ohne Daten, eine Kennung zweimal, ein Staat auf
+beiden Seiten oder in zwei Kriegen, ein `beginn` nach dem Start und ein Bündnis ohne genau zwei
+Staaten. Im Kern: `World::deployments` (`Deployment`), `World::opening_wars` (`OpeningWar`) und
+`World::opening_treaties`; die Heere tragen seit b1 Befehlshaber und Führung (`Army::commander`,
+`Army::leadership`).
 
 ## 4. Startzustand
 

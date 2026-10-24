@@ -50,6 +50,11 @@ ort roermond {
         besitzer = NED
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = NED
+        bund     = nein
+    }
 }
 
 ort weert {
@@ -71,6 +76,11 @@ ort weert {
     1848.03.01 = {
         besitzer = NED
         bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = NED
+        bund     = nein
     }
 }
 
@@ -94,6 +104,11 @@ ort venray {
         besitzer = NED
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = NED
+        bund     = nein
+    }
 }
 
 ort gennep {
@@ -115,6 +130,11 @@ ort gennep {
     1848.03.01 = {
         besitzer = NED
         bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = NED
+        bund     = nein
     }
 }
 
@@ -138,6 +158,11 @@ ort arcen {
         besitzer = NED
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = NED
+        bund     = nein
+    }
 }
 
 ort heythuysen {
@@ -159,6 +184,11 @@ ort heythuysen {
     1848.03.01 = {
         besitzer = NED
         bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = NED
+        bund     = nein
     }
 }
 
@@ -182,6 +212,11 @@ ort maasbracht {
         besitzer = NED
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = NED
+        bund     = nein
+    }
 }
 
 ort meijel {
@@ -203,6 +238,11 @@ ort meijel {
     1848.03.01 = {
         besitzer = NED
         bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = NED
+        bund     = nein
     }
 }
 
@@ -226,6 +266,11 @@ ort sevenum {
         besitzer = NED
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = NED
+        bund     = nein
+    }
 }
 
 ort offenbeek {
@@ -247,6 +292,11 @@ ort offenbeek {
     1848.03.01 = {
         besitzer = NED
         bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = NED
+        bund     = nein
     }
 }
 
@@ -291,6 +341,11 @@ ort heerlen {
         besitzer = NED
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = NED
+        bund     = nein
+    }
 }
 
 ort sittard {
@@ -312,6 +367,11 @@ ort sittard {
     1848.03.01 = {
         besitzer = NED
         bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = NED
+        bund     = nein
     }
 }
 
@@ -335,6 +395,11 @@ ort gulpen {
         besitzer = NED
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = NED
+        bund     = nein
+    }
 }
 
 ort schimmert {
@@ -356,5 +421,10 @@ ort schimmert {
     1848.03.01 = {
         besitzer = NED
         bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = NED
+        bund     = nein
     }
 }

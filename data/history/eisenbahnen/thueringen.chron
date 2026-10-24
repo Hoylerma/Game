@@ -10,3 +10,18 @@ strecke thueringische {
     abschnitt = { von = erfurt bis = gotha eroeffnet = 1847.05.10 }
     abschnitt = { von = gotha bis = eisenach eroeffnet = 1847.06.24 }
 }
+
+strecke werrabahn {
+    name      = "Werrabahn"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M10b, Schritt b1)"
+    abschnitt = { von = eisenach bis = meiningen eroeffnet = 1859.01.02 }
+    abschnitt = { von = meiningen bis = coburg eroeffnet = 1859.01.02 }
+    abschnitt = { von = coburg bis = lichtenfels eroeffnet = 1859.01.02 }
+}
+
+strecke leipzig_gera {
+    name      = "Leipzig-Zeitz-Geraer Eisenbahn"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M10b, Schritt b1)"
+    abschnitt = { von = leipzig bis = zeitz eroeffnet = 1859.03.19 }
+    abschnitt = { von = zeitz bis = gera eroeffnet = 1859.03.19 }
+}

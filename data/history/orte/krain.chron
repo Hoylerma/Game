@@ -31,6 +31,11 @@ ort assling_krain {
         verwaltung = au_kr_laibacher_kreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort radmannsdorf {
@@ -53,6 +58,11 @@ ort radmannsdorf {
         besitzer   = AUT
         verwaltung = au_kr_laibacher_kreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -77,6 +87,11 @@ ort neumarktl {
         verwaltung = au_kr_laibacher_kreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort zelezniki {
@@ -99,6 +114,11 @@ ort zelezniki {
         besitzer   = AUT
         verwaltung = au_kr_laibacher_kreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -123,6 +143,11 @@ ort kronau {
         verwaltung = au_kr_laibacher_kreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort wochein_feistritz {
@@ -145,6 +170,11 @@ ort wochein_feistritz {
         besitzer   = AUT
         verwaltung = au_kr_laibacher_kreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -169,6 +199,11 @@ ort gorenja_vas {
         verwaltung = au_kr_laibacher_kreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort krainburg {
@@ -191,6 +226,11 @@ ort krainburg {
         besitzer   = AUT
         verwaltung = au_kr_laibacher_kreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -215,6 +255,11 @@ ort stein {
         verwaltung = au_kr_laibacher_kreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort bischoflack {
@@ -237,6 +282,11 @@ ort bischoflack {
         besitzer   = AUT
         verwaltung = au_kr_laibacher_kreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -261,6 +311,11 @@ ort domzale {
         verwaltung = au_kr_laibacher_kreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort medvode {
@@ -283,6 +338,11 @@ ort medvode {
         besitzer   = AUT
         verwaltung = au_kr_laibacher_kreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -307,6 +367,11 @@ ort zirklach {
         verwaltung = au_kr_laibacher_kreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort littai {
@@ -329,6 +394,11 @@ ort littai {
         besitzer   = AUT
         verwaltung = au_kr_laibacher_kreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -353,6 +423,11 @@ ort trebnje {
         verwaltung = au_kr_neustaedtler_kreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort radece {
@@ -375,6 +450,11 @@ ort radece {
         besitzer   = AUT
         verwaltung = au_kr_neustaedtler_kreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -399,6 +479,11 @@ ort ivancna_gorica {
         verwaltung = au_kr_laibacher_kreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort seisenberg {
@@ -421,6 +506,11 @@ ort seisenberg {
         besitzer   = AUT
         verwaltung = au_kr_neustaedtler_kreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -445,6 +535,11 @@ ort moravce {
         verwaltung = au_kr_laibacher_kreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort izlake {
@@ -467,6 +562,11 @@ ort izlake {
         besitzer   = AUT
         verwaltung = au_kr_laibacher_kreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -491,6 +591,11 @@ ort nassenfuss {
         verwaltung = au_kr_neustaedtler_kreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort laibach {
@@ -513,6 +618,11 @@ ort laibach {
         besitzer   = AUT
         verwaltung = au_kr_laibacher_kreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -537,6 +647,11 @@ ort grosuplje {
         verwaltung = au_kr_laibacher_kreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort logatec {
@@ -559,6 +674,11 @@ ort logatec {
         besitzer   = AUT
         verwaltung = au_kr_adelsberger_kreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -583,6 +703,11 @@ ort borovnica {
         verwaltung = au_kr_laibacher_kreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort iggdorf {
@@ -605,6 +730,11 @@ ort iggdorf {
         besitzer   = AUT
         verwaltung = au_kr_laibacher_kreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -629,6 +759,11 @@ ort log_pri_brezovici {
         verwaltung = au_kr_laibacher_kreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort rudolfswert {
@@ -651,6 +786,11 @@ ort rudolfswert {
         besitzer   = AUT
         verwaltung = au_kr_neustaedtler_kreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -675,6 +815,11 @@ ort gurkfeld {
         verwaltung = au_kr_neustaedtler_kreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort tschernembl {
@@ -697,6 +842,11 @@ ort tschernembl {
         besitzer   = AUT
         verwaltung = au_kr_neustaedtler_kreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -721,6 +871,11 @@ ort moettling {
         verwaltung = au_kr_neustaedtler_kreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort sankt_bartlmae {
@@ -743,6 +898,11 @@ ort sankt_bartlmae {
         besitzer   = AUT
         verwaltung = au_kr_neustaedtler_kreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -767,6 +927,11 @@ ort dolenjske_toplice {
         verwaltung = au_kr_neustaedtler_kreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort adelsberg {
@@ -789,6 +954,11 @@ ort adelsberg {
         besitzer   = AUT
         verwaltung = au_kr_adelsberger_kreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -813,6 +983,11 @@ ort zirknitz {
         verwaltung = au_kr_adelsberger_kreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort illyrisch_feistritz {
@@ -835,6 +1010,11 @@ ort illyrisch_feistritz {
         besitzer   = AUT
         verwaltung = au_kr_adelsberger_kreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -859,6 +1039,11 @@ ort idria {
         verwaltung = au_kr_adelsberger_kreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort pivka {
@@ -881,6 +1066,11 @@ ort pivka {
         besitzer   = AUT
         verwaltung = au_kr_adelsberger_kreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -905,6 +1095,11 @@ ort vipava {
         verwaltung = au_kr_adelsberger_kreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort gottschee {
@@ -927,6 +1122,11 @@ ort gottschee {
         besitzer   = AUT
         verwaltung = au_kr_neustaedtler_kreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -951,6 +1151,11 @@ ort reifnitz {
         verwaltung = au_kr_neustaedtler_kreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort grosslaschitz {
@@ -973,6 +1178,11 @@ ort grosslaschitz {
         besitzer   = AUT
         verwaltung = au_kr_laibacher_kreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -997,6 +1207,11 @@ ort leskova_dolina {
         verwaltung = au_kr_adelsberger_kreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort kostel {
@@ -1019,6 +1234,11 @@ ort kostel {
         besitzer   = AUT
         verwaltung = au_kr_neustaedtler_kreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1043,6 +1263,11 @@ ort laserbach {
         verwaltung = au_kr_adelsberger_kreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort osilnica {
@@ -1066,6 +1291,11 @@ ort osilnica {
         verwaltung = au_kr_adelsberger_kreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort nova_vas {
@@ -1088,5 +1318,10 @@ ort nova_vas {
         besitzer   = AUT
         verwaltung = au_kr_adelsberger_kreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }

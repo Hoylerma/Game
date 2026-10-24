@@ -30,6 +30,11 @@ ort salzburg {
         verwaltung = au_salzburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort hallein {
@@ -54,6 +59,11 @@ ort hallein {
         verwaltung = au_salzburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort oberndorf_bei_salzburg {
@@ -76,6 +86,11 @@ ort oberndorf_bei_salzburg {
         besitzer   = AUT
         verwaltung = au_salzburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -100,6 +115,11 @@ ort henndorf_am_wallersee {
         verwaltung = au_salzburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort mattsee {
@@ -122,6 +142,11 @@ ort mattsee {
         besitzer   = AUT
         verwaltung = au_salzburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -146,6 +171,11 @@ ort strasswalchen {
         verwaltung = au_salzburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort hof_bei_salzburg {
@@ -168,6 +198,11 @@ ort hof_bei_salzburg {
         besitzer   = AUT
         verwaltung = au_salzburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -192,6 +227,11 @@ ort golling_an_der_salzach {
         verwaltung = au_salzburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort hintersee {
@@ -214,6 +254,11 @@ ort hintersee {
         besitzer   = AUT
         verwaltung = au_salzburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -238,6 +283,11 @@ ort saalfelden_am_steinernen_meer {
         verwaltung = au_salzburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort zell_am_see {
@@ -260,6 +310,11 @@ ort zell_am_see {
         besitzer   = AUT
         verwaltung = au_salzburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -284,6 +339,11 @@ ort kaprun {
         verwaltung = au_salzburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort lofer {
@@ -306,6 +366,11 @@ ort lofer {
         besitzer   = AUT
         verwaltung = au_salzburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -330,6 +395,11 @@ ort dienten_am_hochkoenig {
         verwaltung = au_salzburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort bischofshofen {
@@ -352,6 +422,11 @@ ort bischofshofen {
         besitzer   = AUT
         verwaltung = au_salzburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -376,6 +451,11 @@ ort schwarzach_im_pongau {
         verwaltung = au_salzburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort bad_hofgastein {
@@ -398,6 +478,11 @@ ort bad_hofgastein {
         besitzer   = AUT
         verwaltung = au_salzburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -422,6 +507,11 @@ ort bad_gastein {
         verwaltung = au_salzburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort grossarl {
@@ -444,6 +534,11 @@ ort grossarl {
         besitzer   = AUT
         verwaltung = au_salzburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -468,6 +563,11 @@ ort rauris {
         verwaltung = au_salzburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort kleinarl {
@@ -490,6 +590,11 @@ ort kleinarl {
         besitzer   = AUT
         verwaltung = au_salzburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -514,6 +619,11 @@ ort huettschlag {
         verwaltung = au_salzburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort altenmarkt_im_pongau {
@@ -536,6 +646,11 @@ ort altenmarkt_im_pongau {
         besitzer   = AUT
         verwaltung = au_salzburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -560,6 +675,11 @@ ort abtenau {
         verwaltung = au_salzburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort sankt_martin_am_tennengebirge {
@@ -582,6 +702,11 @@ ort sankt_martin_am_tennengebirge {
         besitzer   = AUT
         verwaltung = au_salzburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -606,6 +731,11 @@ ort forstau {
         verwaltung = au_salzburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort untertauern {
@@ -628,6 +758,11 @@ ort untertauern {
         besitzer   = AUT
         verwaltung = au_salzburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -652,6 +787,11 @@ ort bramberg_am_wildkogel {
         verwaltung = au_salzburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort mittersill {
@@ -674,6 +814,11 @@ ort mittersill {
         besitzer   = AUT
         verwaltung = au_salzburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -698,6 +843,11 @@ ort krimml {
         verwaltung = au_salzburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort uttendorf {
@@ -720,6 +870,11 @@ ort uttendorf {
         besitzer   = AUT
         verwaltung = au_salzburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -744,6 +899,11 @@ ort saalbach {
         verwaltung = au_salzburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort niedernsill {
@@ -766,6 +926,11 @@ ort niedernsill {
         besitzer   = AUT
         verwaltung = au_salzburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -790,6 +955,11 @@ ort tamsweg {
         verwaltung = au_salzburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort sankt_michael_im_lungau {
@@ -812,6 +982,11 @@ ort sankt_michael_im_lungau {
         besitzer   = AUT
         verwaltung = au_salzburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -836,6 +1011,11 @@ ort zederhaus {
         verwaltung = au_salzburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort ramingstein {
@@ -858,6 +1038,11 @@ ort ramingstein {
         besitzer   = AUT
         verwaltung = au_salzburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -882,6 +1067,11 @@ ort thomatal {
         verwaltung = au_salzburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort muhr {
@@ -905,6 +1095,11 @@ ort muhr {
         verwaltung = au_salzburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort tweng {
@@ -927,5 +1122,10 @@ ort tweng {
         besitzer   = AUT
         verwaltung = au_salzburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }

@@ -25,4 +25,8 @@ staat SLI {
         verfassung     = staendisch
         wahlrecht      = staendisch
     }
+
+    1854.01.01 = {
+        zollunion = zollverein
+    }
 }

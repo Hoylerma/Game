@@ -2511,3 +2511,39 @@ einheit pr_kr_heinsberg {
     ueber  = pr_rb_aachen
     quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
 }
+
+einheit pr_hohenzollern {
+    name   = "Hohenzollernsche Lande"
+    art    = regierungsbezirk
+    quelle = "M10b-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_schleswig {
+    name   = "Herzogtum Schleswig"
+    art    = herzogtum
+    quelle = "Nach dem Wiener Frieden (30.10.1864) gemeinsam, seit Gastein (14.8.1865) preußisch verwaltet; vereinfacht ab 30.10.1864 preußisch (M10b)"
+}
+
+einheit pr_lauenburg {
+    name   = "Herzogtum Lauenburg"
+    art    = herzogtum
+    quelle = "Seit Gastein in Personalunion mit Preußen; vereinfacht ab 30.10.1864 (M10b)"
+}
+
+einheit pr_schleswig_holstein {
+    name   = "Provinz Schleswig-Holstein"
+    art    = provinz
+    quelle = "M10b-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_hannover {
+    name   = "Provinz Hannover"
+    art    = provinz
+    quelle = "M10b-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit pr_hessen_nassau {
+    name   = "Provinz Hessen-Nassau"
+    art    = provinz
+    quelle = "Regierungsbezirke Kassel und Wiesbaden 1867, Provinz 1868; mit Frankfurt, Homburg, dem Hinterland und Gersfeld (M10b)"
+}

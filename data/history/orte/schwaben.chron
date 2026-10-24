@@ -30,6 +30,11 @@ ort noerdlingen {
         verwaltung = by_schwaben
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort donauwoerth {
@@ -52,6 +57,11 @@ ort donauwoerth {
         besitzer   = BAV
         verwaltung = by_schwaben
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -76,6 +86,11 @@ ort oettingen_in_bayern {
         verwaltung = by_schwaben
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort wemding {
@@ -98,6 +113,11 @@ ort wemding {
         besitzer   = BAV
         verwaltung = by_schwaben
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -122,6 +142,11 @@ ort monheim {
         verwaltung = by_schwaben
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort harburg {
@@ -144,6 +169,11 @@ ort harburg {
         besitzer   = BAV
         verwaltung = by_schwaben
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -168,6 +198,11 @@ ort tapfheim {
         verwaltung = by_schwaben
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort rain {
@@ -190,6 +225,11 @@ ort rain {
         besitzer   = BAV
         verwaltung = by_schwaben
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -214,6 +254,11 @@ ort fremdingen {
         verwaltung = by_schwaben
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort aichach {
@@ -236,6 +281,11 @@ ort aichach {
         besitzer   = BAV
         verwaltung = by_schwaben
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -260,6 +310,11 @@ ort poettmes {
         verwaltung = by_schwaben
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort affing {
@@ -282,6 +337,11 @@ ort affing {
         besitzer   = BAV
         verwaltung = by_schwaben
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -306,6 +366,11 @@ ort dasing {
         verwaltung = by_schwaben
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort guenzburg {
@@ -328,6 +393,11 @@ ort guenzburg {
         besitzer   = BAV
         verwaltung = by_schwaben
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -352,6 +422,11 @@ ort dillingen_an_der_donau {
         verwaltung = by_schwaben
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort burgau {
@@ -374,6 +449,11 @@ ort burgau {
         besitzer   = BAV
         verwaltung = by_schwaben
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -398,6 +478,11 @@ ort ichenhausen {
         verwaltung = by_schwaben
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort gundelfingen {
@@ -420,6 +505,11 @@ ort gundelfingen {
         besitzer   = BAV
         verwaltung = by_schwaben
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -444,6 +534,11 @@ ort ziertheim {
         verwaltung = by_schwaben
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort ulm {
@@ -466,6 +561,11 @@ ort ulm {
         besitzer   = WUE
         verwaltung = wu_donaukreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }
 
@@ -490,6 +590,11 @@ ort langenau {
         verwaltung = wu_donaukreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort laichingen {
@@ -512,6 +617,11 @@ ort laichingen {
         besitzer   = WUE
         verwaltung = wu_donaukreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }
 
@@ -536,6 +646,11 @@ ort dornstadt {
         verwaltung = wu_donaukreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort blaubeuren {
@@ -558,6 +673,11 @@ ort blaubeuren {
         besitzer   = WUE
         verwaltung = wu_donaukreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }
 
@@ -582,6 +702,11 @@ ort lonsee {
         verwaltung = wu_donaukreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort nellingen {
@@ -604,6 +729,11 @@ ort nellingen {
         besitzer   = WUE
         verwaltung = wu_donaukreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }
 
@@ -628,6 +758,11 @@ ort augsburg {
         verwaltung = by_schwaben
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort koenigsbrunn {
@@ -650,6 +785,11 @@ ort koenigsbrunn {
         besitzer   = BAV
         verwaltung = by_schwaben
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -674,6 +814,11 @@ ort schwabmuenchen {
         verwaltung = by_schwaben
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort meitingen {
@@ -696,6 +841,11 @@ ort meitingen {
         besitzer   = BAV
         verwaltung = by_schwaben
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -720,6 +870,11 @@ ort diedorf {
         verwaltung = by_schwaben
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort wertingen {
@@ -742,6 +897,11 @@ ort wertingen {
         besitzer   = BAV
         verwaltung = by_schwaben
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -766,6 +926,11 @@ ort dinkelscherben {
         verwaltung = by_schwaben
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort altenmuenster {
@@ -788,6 +953,11 @@ ort altenmuenster {
         besitzer   = BAV
         verwaltung = by_schwaben
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -812,6 +982,11 @@ ort gablingen {
         verwaltung = by_schwaben
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort horgau {
@@ -834,6 +1009,11 @@ ort horgau {
         besitzer   = BAV
         verwaltung = by_schwaben
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -858,6 +1038,11 @@ ort langenneufnach {
         verwaltung = by_schwaben
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort krumbach {
@@ -880,6 +1065,11 @@ ort krumbach {
         besitzer   = BAV
         verwaltung = by_schwaben
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -904,6 +1094,11 @@ ort babenhausen_schwaben {
         verwaltung = by_schwaben
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort thannhausen {
@@ -926,6 +1121,11 @@ ort thannhausen {
         besitzer   = BAV
         verwaltung = by_schwaben
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -950,6 +1150,11 @@ ort eppishausen {
         verwaltung = by_schwaben
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort breitenbrunn {
@@ -972,6 +1177,11 @@ ort breitenbrunn {
         besitzer   = BAV
         verwaltung = by_schwaben
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -996,6 +1206,11 @@ ort riedlingen {
         verwaltung = wu_donaukreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort gammertingen {
@@ -1016,6 +1231,21 @@ ort gammertingen {
 
     1848.03.01 = {
         besitzer = HSI
+        bund     = ja
+    }
+
+    1850.04.06 = {
+        besitzer   = PRU
+        verwaltung = pr_hohenzollern
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
         bund     = ja
     }
 }
@@ -1041,6 +1271,11 @@ ort uttenweiler {
         verwaltung = wu_donaukreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort obermarchtal {
@@ -1063,6 +1298,11 @@ ort obermarchtal {
         besitzer   = WUE
         verwaltung = wu_donaukreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }
 
@@ -1087,6 +1327,11 @@ ort biberach_an_der_riss {
         verwaltung = wu_donaukreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort ehingen {
@@ -1109,6 +1354,11 @@ ort ehingen {
         besitzer   = WUE
         verwaltung = wu_donaukreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }
 
@@ -1133,6 +1383,11 @@ ort laupheim {
         verwaltung = wu_donaukreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort illertissen {
@@ -1155,6 +1410,11 @@ ort illertissen {
         besitzer   = BAV
         verwaltung = by_schwaben
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -1179,6 +1439,11 @@ ort weissenhorn {
         verwaltung = by_schwaben
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort senden_schwaben {
@@ -1201,6 +1466,11 @@ ort senden_schwaben {
         besitzer   = BAV
         verwaltung = by_schwaben
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -1225,6 +1495,11 @@ ort ochsenhausen {
         verwaltung = wu_donaukreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort erbach {
@@ -1247,6 +1522,11 @@ ort erbach {
         besitzer   = WUE
         verwaltung = wu_donaukreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }
 
@@ -1271,6 +1551,11 @@ ort erolzheim {
         verwaltung = wu_donaukreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort schwendi {
@@ -1294,6 +1579,11 @@ ort schwendi {
         verwaltung = wu_donaukreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort sigmaringen {
@@ -1314,6 +1604,21 @@ ort sigmaringen {
 
     1848.03.01 = {
         besitzer = HSI
+        bund     = ja
+    }
+
+    1850.04.06 = {
+        besitzer   = PRU
+        verwaltung = pr_hohenzollern
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
         bund     = ja
     }
 }
@@ -1339,6 +1644,11 @@ ort pfullendorf {
         verwaltung = bd_seekreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
+    }
 }
 
 ort messkirch {
@@ -1361,6 +1671,11 @@ ort messkirch {
         besitzer   = BAD
         verwaltung = bd_seekreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
     }
 }
 
@@ -1385,6 +1700,11 @@ ort mengen {
         verwaltung = wu_donaukreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort ostrach {
@@ -1405,6 +1725,21 @@ ort ostrach {
 
     1848.03.01 = {
         besitzer = HSI
+        bund     = ja
+    }
+
+    1850.04.06 = {
+        besitzer   = PRU
+        verwaltung = pr_hohenzollern
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
         bund     = ja
     }
 }
@@ -1430,6 +1765,11 @@ ort leibertingen {
         verwaltung = bd_seekreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
+    }
 }
 
 ort stetten_am_kalten_markt {
@@ -1452,6 +1792,11 @@ ort stetten_am_kalten_markt {
         besitzer   = BAD
         verwaltung = bd_seekreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
     }
 }
 
@@ -1476,6 +1821,11 @@ ort kaufbeuren {
         verwaltung = by_schwaben
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort marktoberdorf {
@@ -1498,6 +1848,11 @@ ort marktoberdorf {
         besitzer   = BAV
         verwaltung = by_schwaben
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -1522,6 +1877,11 @@ ort mindelheim {
         verwaltung = by_schwaben
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort bad_woerishofen {
@@ -1544,6 +1904,11 @@ ort bad_woerishofen {
         besitzer   = BAV
         verwaltung = by_schwaben
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -1568,6 +1933,11 @@ ort buchloe {
         verwaltung = by_schwaben
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort ettringen {
@@ -1590,6 +1960,11 @@ ort ettringen {
         besitzer   = BAV
         verwaltung = by_schwaben
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -1614,6 +1989,11 @@ ort bidingen {
         verwaltung = by_schwaben
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort oberostendorf {
@@ -1636,6 +2016,11 @@ ort oberostendorf {
         besitzer   = BAV
         verwaltung = by_schwaben
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -1660,6 +2045,11 @@ ort ravensburg {
         verwaltung = wu_donaukreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort ueberlingen {
@@ -1682,6 +2072,11 @@ ort ueberlingen {
         besitzer   = BAD
         verwaltung = bd_seekreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
     }
 }
 
@@ -1706,6 +2101,11 @@ ort markdorf {
         verwaltung = bd_seekreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
+    }
 }
 
 ort saulgau {
@@ -1728,6 +2128,11 @@ ort saulgau {
         besitzer   = WUE
         verwaltung = wu_donaukreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }
 
@@ -1752,6 +2157,11 @@ ort salem {
         verwaltung = bd_seekreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
+    }
 }
 
 ort bad_schussenried {
@@ -1774,6 +2184,11 @@ ort bad_schussenried {
         besitzer   = WUE
         verwaltung = wu_donaukreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }
 
@@ -1798,6 +2213,11 @@ ort altshausen {
         verwaltung = wu_donaukreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort horgenzell {
@@ -1820,6 +2240,11 @@ ort horgenzell {
         besitzer   = WUE
         verwaltung = wu_donaukreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }
 
@@ -1844,6 +2269,11 @@ ort baindt {
         verwaltung = wu_donaukreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort herdwangen_schoenach {
@@ -1866,6 +2296,11 @@ ort herdwangen_schoenach {
         besitzer   = BAD
         verwaltung = bd_seekreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
     }
 }
 
@@ -1890,6 +2325,11 @@ ort wilhelmsdorf {
         verwaltung = wu_donaukreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort kempten_allgaeu {
@@ -1912,6 +2352,11 @@ ort kempten_allgaeu {
         besitzer   = BAV
         verwaltung = by_schwaben
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -1936,6 +2381,11 @@ ort memmingen {
         verwaltung = by_schwaben
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort altusried {
@@ -1958,6 +2408,11 @@ ort altusried {
         besitzer   = BAV
         verwaltung = by_schwaben
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -1982,6 +2437,11 @@ ort ottobeuren {
         verwaltung = by_schwaben
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort oberguenzburg {
@@ -2004,6 +2464,11 @@ ort oberguenzburg {
         besitzer   = BAV
         verwaltung = by_schwaben
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -2028,6 +2493,11 @@ ort erkheim {
         verwaltung = by_schwaben
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort aitrach {
@@ -2050,6 +2520,11 @@ ort aitrach {
         besitzer   = WUE
         verwaltung = wu_donaukreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }
 
@@ -2074,6 +2549,11 @@ ort wangen {
         verwaltung = wu_donaukreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort leutkirch {
@@ -2096,6 +2576,11 @@ ort leutkirch {
         besitzer   = WUE
         verwaltung = wu_donaukreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }
 
@@ -2120,6 +2605,11 @@ ort bad_waldsee {
         verwaltung = wu_donaukreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort bad_wurzach {
@@ -2142,6 +2632,11 @@ ort bad_wurzach {
         besitzer   = WUE
         verwaltung = wu_donaukreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }
 
@@ -2166,6 +2661,11 @@ ort kisslegg {
         verwaltung = wu_donaukreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort eberhardzell {
@@ -2188,6 +2688,11 @@ ort eberhardzell {
         besitzer   = WUE
         verwaltung = wu_donaukreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }
 
@@ -2212,6 +2717,11 @@ ort bodnegg {
         verwaltung = wu_donaukreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort vogt {
@@ -2234,6 +2744,11 @@ ort vogt {
         besitzer   = WUE
         verwaltung = wu_donaukreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }
 
@@ -2258,6 +2773,11 @@ ort friedrichshafen {
         verwaltung = wu_donaukreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort lindau_schwaben {
@@ -2280,6 +2800,11 @@ ort lindau_schwaben {
         besitzer   = BAV
         verwaltung = by_schwaben
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -2304,6 +2829,11 @@ ort meckenbeuren {
         verwaltung = wu_donaukreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort kressbronn_am_bodensee {
@@ -2326,6 +2856,11 @@ ort kressbronn_am_bodensee {
         besitzer   = WUE
         verwaltung = wu_donaukreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }
 
@@ -2350,6 +2885,11 @@ ort fuessen {
         verwaltung = by_schwaben
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort pfronten {
@@ -2372,6 +2912,11 @@ ort pfronten {
         besitzer   = BAV
         verwaltung = by_schwaben
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -2396,6 +2941,11 @@ ort oy_mittelberg {
         verwaltung = by_schwaben
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort halblech {
@@ -2418,6 +2968,11 @@ ort halblech {
         besitzer   = BAV
         verwaltung = by_schwaben
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -2442,6 +2997,11 @@ ort goerisried {
         verwaltung = by_schwaben
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort sonthofen {
@@ -2464,6 +3024,11 @@ ort sonthofen {
         besitzer   = BAV
         verwaltung = by_schwaben
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -2488,6 +3053,11 @@ ort isny {
         verwaltung = wu_donaukreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort oberstdorf {
@@ -2510,6 +3080,11 @@ ort oberstdorf {
         besitzer   = BAV
         verwaltung = by_schwaben
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -2534,6 +3109,11 @@ ort oberstaufen {
         verwaltung = by_schwaben
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort weitnau {
@@ -2557,6 +3137,11 @@ ort weitnau {
         verwaltung = by_schwaben
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort scheidegg {
@@ -2579,5 +3164,10 @@ ort scheidegg {
         besitzer   = BAV
         verwaltung = by_schwaben
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }

@@ -30,6 +30,20 @@ ort wilhelmshaven {
         besitzer = OLD
         bund     = ja
     }
+
+    1854.11.23 = {
+        besitzer = PRU
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort jever {
@@ -49,6 +63,16 @@ ort jever {
     }
 
     1848.03.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = OLD
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = OLD
         bund     = ja
     }
@@ -74,6 +98,16 @@ ort nordenham {
         besitzer = OLD
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = OLD
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
 }
 
 ort varel {
@@ -93,6 +127,16 @@ ort varel {
     }
 
     1848.03.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = OLD
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = OLD
         bund     = ja
     }
@@ -118,6 +162,16 @@ ort zetel {
         besitzer = OLD
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = OLD
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
 }
 
 ort butjadingen {
@@ -137,6 +191,16 @@ ort butjadingen {
     }
 
     1848.03.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = OLD
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = OLD
         bund     = ja
     }
@@ -162,6 +226,16 @@ ort schillig {
         besitzer = OLD
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = OLD
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
 }
 
 ort wangerooge {
@@ -181,6 +255,16 @@ ort wangerooge {
     }
 
     1848.03.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = OLD
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = OLD
         bund     = ja
     }
@@ -206,6 +290,16 @@ ort oldenburg {
         besitzer = OLD
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = OLD
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
 }
 
 ort westerstede {
@@ -225,6 +319,16 @@ ort westerstede {
     }
 
     1848.03.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = OLD
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = OLD
         bund     = ja
     }
@@ -250,6 +354,16 @@ ort bad_zwischenahn {
         besitzer = OLD
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = OLD
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
 }
 
 ort rastede {
@@ -269,6 +383,16 @@ ort rastede {
     }
 
     1848.03.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = OLD
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = OLD
         bund     = ja
     }
@@ -294,6 +418,16 @@ ort barssel {
         besitzer = OLD
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = OLD
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
 }
 
 ort wardenburg {
@@ -313,6 +447,16 @@ ort wardenburg {
     }
 
     1848.03.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = OLD
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = OLD
         bund     = ja
     }
@@ -338,6 +482,16 @@ ort delmenhorst {
         besitzer = OLD
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = OLD
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
 }
 
 ort brake_unterweser {
@@ -357,6 +511,16 @@ ort brake_unterweser {
     }
 
     1848.03.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = OLD
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = OLD
         bund     = ja
     }
@@ -382,6 +546,16 @@ ort hude {
         besitzer = OLD
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = OLD
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
 }
 
 ort elsfleth {
@@ -401,6 +575,16 @@ ort elsfleth {
     }
 
     1848.03.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = OLD
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = OLD
         bund     = ja
     }
@@ -426,6 +610,16 @@ ort lemwerder {
         besitzer = OLD
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = OLD
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
 }
 
 ort hatten {
@@ -445,6 +639,16 @@ ort hatten {
     }
 
     1848.03.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = OLD
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = OLD
         bund     = ja
     }
@@ -470,6 +674,16 @@ ort cloppenburg {
         besitzer = OLD
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = OLD
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
 }
 
 ort friesoythe {
@@ -489,6 +703,16 @@ ort friesoythe {
     }
 
     1848.03.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = OLD
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = OLD
         bund     = ja
     }
@@ -514,6 +738,16 @@ ort loeningen {
         besitzer = OLD
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = OLD
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
 }
 
 ort garrel {
@@ -533,6 +767,16 @@ ort garrel {
     }
 
     1848.03.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = OLD
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = OLD
         bund     = ja
     }
@@ -558,6 +802,16 @@ ort molbergen {
         besitzer = OLD
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = OLD
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
 }
 
 ort vechta {
@@ -577,6 +831,16 @@ ort vechta {
     }
 
     1848.03.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = OLD
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = OLD
         bund     = ja
     }
@@ -602,6 +866,16 @@ ort wildeshausen {
         besitzer = OLD
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = OLD
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
 }
 
 ort lohne {
@@ -621,6 +895,16 @@ ort lohne {
     }
 
     1848.03.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = OLD
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = OLD
         bund     = ja
     }
@@ -646,6 +930,16 @@ ort grossenkneten {
         besitzer = OLD
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = OLD
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
 }
 
 ort damme {
@@ -665,6 +959,16 @@ ort damme {
     }
 
     1848.03.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = OLD
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = OLD
         bund     = ja
     }
@@ -690,6 +994,16 @@ ort goldenstedt {
         besitzer = OLD
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = OLD
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
 }
 
 ort visbek {
@@ -709,6 +1023,16 @@ ort visbek {
     }
 
     1848.03.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = OLD
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = OLD
         bund     = ja
     }
@@ -734,6 +1058,16 @@ ort holdorf {
         besitzer = OLD
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = OLD
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
 }
 
 ort harpstedt {
@@ -756,5 +1090,20 @@ ort harpstedt {
         besitzer   = HAN
         verwaltung = hn_hannover
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }

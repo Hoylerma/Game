@@ -100,6 +100,19 @@ if(UHRWERK_BUILD_CLI)
     add_test(NAME krieg_1848
         COMMAND uhrwerk-cli krieg --daten ${PROJECT_SOURCE_DIR}/data --szenario voelkerfruehling --seeds 1)
 
+    # Kriegslesezeichen (seit M10b, militaer.md Abschnitt 6.1): Daten, ein kurzer Lauf des Krieges aus
+    # dem Lesezeichen und der Speichertest mitten im Krieg 1866.
+    foreach(lesezeichen dueppel koeniggraetz sedan)
+        add_test(NAME daten_pruefen_${lesezeichen}
+            COMMAND uhrwerk-cli pruefen --daten ${PROJECT_SOURCE_DIR}/data --szenario ${lesezeichen})
+        add_test(NAME krieg_${lesezeichen}
+            COMMAND uhrwerk-cli krieg --daten ${PROJECT_SOURCE_DIR}/data --szenario ${lesezeichen} --seeds 1
+                    --tage 60)
+    endforeach()
+    add_test(NAME speichertest_koeniggraetz
+        COMMAND uhrwerk-cli speichertest --daten ${PROJECT_SOURCE_DIR}/data --szenario koeniggraetz --tage 90
+                --punkte 3)
+
     # Spielstände und Wiederholungen (seit M6, docs/technik/speicherstaende.md Abschnitt 10): Abnahme
     # mit den echten Daten über die Datei; Wiederholung eines Protokolls und eines Spielstands über
     # 50 Jahre mit Testbefehlen.

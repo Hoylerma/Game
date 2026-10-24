@@ -9,3 +9,18 @@ strecke altona_kiel {
     abschnitt = { von = elmshorn bis = glueckstadt eroeffnet = 1845.07.20 }
     abschnitt = { von = neumuenster bis = rendsburg eroeffnet = 1845.09.18 }
 }
+
+strecke schleswigsche {
+    name      = "Schleswigsche Eisenbahnen"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M10b, Schritt b1)"
+    abschnitt = { von = flensburg bis = husum_schleswig eroeffnet = 1854.10.04 }
+    abschnitt = { von = husum_schleswig bis = toenning eroeffnet = 1854.10.04 }
+    abschnitt = { von = rendsburg bis = schleswig eroeffnet = 1858.10.25 }
+    abschnitt = { von = schleswig bis = flensburg eroeffnet = 1858.10.25 }
+}
+
+strecke luebeck_buechen {
+    name      = "Lübeck-Büchener Eisenbahn"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M10b, Schritt b1)"
+    abschnitt = { von = luebeck bis = buechen eroeffnet = 1851.10.15 }
+}

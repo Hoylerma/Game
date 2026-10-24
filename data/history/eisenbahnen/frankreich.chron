@@ -1,0 +1,58 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+strecke ostbahn_frankreich {
+    name      = "Chemin de fer de l’Est (Paris–Straßburg)"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M10b, Schritt b1)"
+    abschnitt = { von = bar_le_duc bis = commercy eroeffnet = 1852.07.10 }
+    abschnitt = { von = commercy bis = toul eroeffnet = 1852.07.10 }
+    abschnitt = { von = toul bis = nancy eroeffnet = 1852.07.10 }
+    abschnitt = { von = nancy bis = luneville eroeffnet = 1852.07.29 }
+    abschnitt = { von = luneville bis = saarburg_lothringen eroeffnet = 1852.07.29 }
+    abschnitt = { von = saarburg_lothringen bis = zabern eroeffnet = 1852.07.29 }
+    abschnitt = { von = zabern bis = strassburg eroeffnet = 1852.07.29 }
+}
+
+strecke metz_nancy {
+    name      = "Chemin de fer de l’Est (Frouard–Metz–Forbach)"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M10b, Schritt b1)"
+    abschnitt = { von = nancy bis = metz eroeffnet = 1850.07.10 }
+    abschnitt = { von = metz bis = forbach_lothringen eroeffnet = 1851.11.15 }
+    abschnitt = { von = forbach_lothringen bis = saarbruecken eroeffnet = 1852.11.15 }
+}
+
+strecke strassburg_basel {
+    name      = "Chemin de fer de Strasbourg à Bâle"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M10b, Schritt b1)"
+    abschnitt = { von = strassburg bis = kolmar_elsass eroeffnet = 1849.01.01 }
+    abschnitt = { von = kolmar_elsass bis = muelhausen eroeffnet = 1849.01.01 }
+    abschnitt = { von = muelhausen bis = beffert eroeffnet = 1858.06.01 }
+}
+
+strecke strassburg_weissenburg {
+    name      = "Chemin de fer de Strasbourg à Wissembourg"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M10b, Schritt b1)"
+    abschnitt = { von = strassburg bis = hagenau eroeffnet = 1855.07.18 }
+    abschnitt = { von = hagenau bis = weissenburg eroeffnet = 1855.07.18 }
+}
+
+strecke metz_luxemburg {
+    name      = "Chemin de fer de l’Est (Metz–Diedenhofen–Luxemburg)"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M10b, Schritt b1)"
+    abschnitt = { von = metz bis = diedenhofen eroeffnet = 1854.07.01 }
+    abschnitt = { von = diedenhofen bis = luxemburg eroeffnet = 1859.10.04 }
+}
+
+strecke ardennes {
+    name      = "Chemin de fer des Ardennes"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M10b, Schritt b1)"
+    abschnitt = { von = charleville_mezieres bis = sedan eroeffnet = 1859.07.01 }
+    abschnitt = { von = sedan bis = montmedy eroeffnet = 1862.06.01 }
+    abschnitt = { von = montmedy bis = diedenhofen eroeffnet = 1863.06.01 }
+}
+
+strecke nancy_epinal {
+    name      = "Chemin de fer de Nancy à Épinal"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M10b, Schritt b1)"
+    abschnitt = { von = nancy bis = charmes eroeffnet = 1857.08.01 }
+    abschnitt = { von = charmes bis = epinal eroeffnet = 1857.08.01 }
+}

@@ -223,8 +223,11 @@ def neue_tabelle(alt: str, neue: list[list[str]]) -> str:
     zeilen = list(csv.reader(io.StringIO(alt, newline=""), delimiter=";"))
     if not zeilen or tuple(zeilen[0]) != BEVOELKERUNG_SPALTEN:
         raise zu.ZuordnungFehler(f"bevoelkerung.csv: Kopfzeile erwartet {';'.join(BEVOELKERUNG_SPALTEN)}")
-    behalten = [z for z in zeilen[1:] if z and z[1] != STICHTAG]
-    return zu.csv_text(BEVOELKERUNG_SPALTEN, behalten + neue)
+    # Spätere Zeilen (seit M10: Frankreich ab 1849 von historie_1849_1870.py) bleiben hinter den neuen.
+    stichtag = tuple(int(t) for t in STICHTAG.split("."))
+    frueher = [z for z in zeilen[1:] if z and z[1] != STICHTAG and tuple(int(t) for t in z[1].split(".")) < stichtag]
+    spaeter = [z for z in zeilen[1:] if z and z[1] != STICHTAG and tuple(int(t) for t in z[1].split(".")) > stichtag]
+    return zu.csv_text(BEVOELKERUNG_SPALTEN, frueher + neue + spaeter)
 
 
 def lade(tabellen: Path) -> tuple[list[Ort], dict[str, str], list[str]]:

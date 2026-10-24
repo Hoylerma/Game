@@ -31,6 +31,11 @@ ort bad_neustadt_an_der_saale {
         verwaltung = by_unterfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort bad_koenigshofen_im_grabfeld {
@@ -53,6 +58,11 @@ ort bad_koenigshofen_im_grabfeld {
         besitzer   = BAV
         verwaltung = by_unterfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -77,6 +87,11 @@ ort muennerstadt {
         verwaltung = by_unterfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort mellrichstadt {
@@ -99,6 +114,11 @@ ort mellrichstadt {
         besitzer   = BAV
         verwaltung = by_unterfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -123,6 +143,11 @@ ort bischofsheim_an_der_rhoen {
         verwaltung = by_unterfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort massbach {
@@ -145,6 +170,11 @@ ort massbach {
         besitzer   = BAV
         verwaltung = by_unterfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -169,6 +199,11 @@ ort oberelsbach {
         verwaltung = by_unterfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort fladungen {
@@ -192,6 +227,11 @@ ort fladungen {
         verwaltung = by_unterfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort wuelfershausen {
@@ -214,6 +254,11 @@ ort wuelfershausen {
         besitzer   = BAV
         verwaltung = by_unterfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -239,6 +284,11 @@ ort bad_kissingen {
         verwaltung = by_unterfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort karlstadt {
@@ -261,6 +311,11 @@ ort karlstadt {
         besitzer   = BAV
         verwaltung = by_unterfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -285,6 +340,11 @@ ort hammelburg {
         verwaltung = by_unterfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort gemuenden_am_main {
@@ -307,6 +367,11 @@ ort gemuenden_am_main {
         besitzer   = BAV
         verwaltung = by_unterfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -331,6 +396,11 @@ ort bad_brueckenau {
         verwaltung = by_unterfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort burkardroth {
@@ -353,6 +423,11 @@ ort burkardroth {
         besitzer   = BAV
         verwaltung = by_unterfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -377,6 +452,11 @@ ort oberthulba {
         verwaltung = by_unterfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort burgsinn {
@@ -399,6 +479,11 @@ ort burgsinn {
         besitzer   = BAV
         verwaltung = by_unterfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -423,6 +508,11 @@ ort wartmannsroth {
         verwaltung = by_unterfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort zeitlofs {
@@ -445,6 +535,11 @@ ort zeitlofs {
         besitzer   = BAV
         verwaltung = by_unterfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -469,6 +564,11 @@ ort motten {
         verwaltung = by_unterfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort schweinfurt {
@@ -491,6 +591,11 @@ ort schweinfurt {
         besitzer   = BAV
         verwaltung = by_unterfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -515,6 +620,11 @@ ort werneck {
         verwaltung = by_unterfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort arnstein {
@@ -537,6 +647,11 @@ ort arnstein {
         besitzer   = BAV
         verwaltung = by_unterfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -561,6 +676,11 @@ ort bergtheim {
         verwaltung = by_unterfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort wasserlosen {
@@ -583,6 +703,11 @@ ort wasserlosen {
         besitzer   = BAV
         verwaltung = by_unterfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -607,6 +732,11 @@ ort hassfurt {
         verwaltung = by_unterfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort eltmann {
@@ -629,6 +759,11 @@ ort eltmann {
         besitzer   = BAV
         verwaltung = by_unterfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -653,6 +788,11 @@ ort hofheim_in_unterfranken {
         verwaltung = by_unterfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort maroldsweisach {
@@ -675,6 +815,11 @@ ort maroldsweisach {
         besitzer   = BAV
         verwaltung = by_unterfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -699,6 +844,11 @@ ort rentweinsdorf {
         verwaltung = by_unterfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort aschaffenburg {
@@ -721,6 +871,11 @@ ort aschaffenburg {
         besitzer   = BAV
         verwaltung = by_unterfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -745,6 +900,11 @@ ort grossostheim {
         verwaltung = by_unterfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort lohr_am_main {
@@ -767,6 +927,11 @@ ort lohr_am_main {
         besitzer   = BAV
         verwaltung = by_unterfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -791,6 +956,11 @@ ort moembris {
         verwaltung = by_unterfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort erlenbach_am_main {
@@ -813,6 +983,11 @@ ort erlenbach_am_main {
         besitzer   = BAV
         verwaltung = by_unterfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -837,6 +1012,11 @@ ort laufach {
         verwaltung = by_unterfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort leidersbach {
@@ -859,6 +1039,11 @@ ort leidersbach {
         besitzer   = BAV
         verwaltung = by_unterfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -883,6 +1068,11 @@ ort frammersbach {
         verwaltung = by_unterfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort weibersbrunn {
@@ -906,6 +1096,11 @@ ort weibersbrunn {
         verwaltung = by_unterfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort kleinkahl {
@@ -928,6 +1123,11 @@ ort kleinkahl {
         besitzer   = BAV
         verwaltung = by_unterfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -953,6 +1153,11 @@ ort wuerzburg {
         verwaltung = by_unterfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort marktheidenfeld {
@@ -975,6 +1180,11 @@ ort marktheidenfeld {
         besitzer   = BAV
         verwaltung = by_unterfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -999,6 +1209,11 @@ ort guentersleben {
         verwaltung = by_unterfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort hettstadt {
@@ -1021,6 +1236,11 @@ ort hettstadt {
         besitzer   = BAV
         verwaltung = by_unterfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -1045,6 +1265,11 @@ ort helmstadt {
         verwaltung = by_unterfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort wertheim {
@@ -1067,6 +1292,11 @@ ort wertheim {
         besitzer   = BAD
         verwaltung = bd_unterrheinkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
     }
 }
 
@@ -1091,6 +1321,11 @@ ort tauberbischofsheim {
         verwaltung = bd_unterrheinkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
+    }
 }
 
 ort miltenberg {
@@ -1113,6 +1348,11 @@ ort miltenberg {
         besitzer   = BAV
         verwaltung = by_unterfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -1137,6 +1377,11 @@ ort kuelsheim {
         verwaltung = bd_unterrheinkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
+    }
 }
 
 ort kirchzell {
@@ -1160,6 +1405,11 @@ ort kirchzell {
         verwaltung = by_unterfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort dorfprozelten {
@@ -1182,6 +1432,11 @@ ort dorfprozelten {
         besitzer   = BAV
         verwaltung = by_unterfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -1207,6 +1462,11 @@ ort kitzingen {
         verwaltung = by_unterfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort ochsenfurt {
@@ -1229,6 +1489,11 @@ ort ochsenfurt {
         besitzer   = BAV
         verwaltung = by_unterfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -1254,6 +1519,11 @@ ort volkach {
         verwaltung = by_unterfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort gerolzhofen {
@@ -1276,6 +1546,11 @@ ort gerolzhofen {
         besitzer   = BAV
         verwaltung = by_unterfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -1300,6 +1575,11 @@ ort grettstadt {
         verwaltung = by_unterfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort wiesentheid {
@@ -1323,6 +1603,11 @@ ort wiesentheid {
         verwaltung = by_unterfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort giebelstadt {
@@ -1345,6 +1630,11 @@ ort giebelstadt {
         besitzer   = BAV
         verwaltung = by_unterfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -1370,6 +1660,11 @@ ort iphofen {
         verwaltung = by_unterfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort geiselwind {
@@ -1392,6 +1687,11 @@ ort geiselwind {
         besitzer   = BAV
         verwaltung = by_unterfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -1416,6 +1716,11 @@ ort bad_mergentheim {
         verwaltung = wu_jagstkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort weikersheim {
@@ -1438,6 +1743,11 @@ ort weikersheim {
         besitzer   = WUE
         verwaltung = wu_jagstkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }
 
@@ -1462,6 +1772,11 @@ ort niederstetten {
         verwaltung = wu_jagstkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort creglingen {
@@ -1484,6 +1799,11 @@ ort creglingen {
         besitzer   = WUE
         verwaltung = wu_jagstkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }
 
@@ -1508,6 +1828,11 @@ ort boxberg_mainfranken {
         verwaltung = bd_unterrheinkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
+    }
 }
 
 ort aub {
@@ -1530,5 +1855,10 @@ ort aub {
         besitzer   = BAV
         verwaltung = by_unterfranken
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }

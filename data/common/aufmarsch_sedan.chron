@@ -1,0 +1,159 @@
+# Aufmarsch des Lesezeichens „Sedan“ (19. Juli 1870; Meilenstein M10b, Schritt b1).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.32; militaer.md, Abschnitt 6.1. Die drei
+# deutschen Armeen marschieren an Saar und Pfalz auf (die süddeutschen Kontingente in der III. Armee);
+# die Rheinarmee steht in Lothringen und im Elsass, Canrobert noch bei Châlons (im Modell Verdun).
+# Stärken ungeprüft, Führung Spielwert.
+
+krieg deutsch_franzoesischer_krieg {
+    name        = "Deutsch-Französischer Krieg"
+    beginn      = 1870.07.19
+    angreifer   = { FRK }
+    verteidiger = { PRU SAX BAV WUE BAD HED MSC MST OLD BWO WEI SMG ALT SCG DES SSH SRU REA REJ WAL LIP SLI LUE BRE HAM }
+    ziel        = { gebiet = by_pfalz }
+    ziel_verteidiger = { gebiet = fr_elsass gebiet = fr_moselle entschaedigung = 6 }
+    quelle      = "Kriegserklärung vom 19.7.1870; deutsche Ziele nach dem Frankfurter Frieden (10.5.1871): Elsass, Lothringen mit Metz, Entschädigung; französisches Ziel Spielwert (Kompensationsforderungen 1866)"
+}
+
+buendnis { staaten = { PRU BAV } quelle = "Schutz- und Trutzbündnis vom 22.8.1866" }
+buendnis { staaten = { PRU WUE } quelle = "Schutz- und Trutzbündnis vom 13.8.1866" }
+buendnis { staaten = { PRU BAD } quelle = "Schutz- und Trutzbündnis vom 17.8.1866" }
+
+heer pru_erste_armee_1870 {
+    staat        = PRU
+    name         = "I. Armee"
+    befehlshaber = "Karl Friedrich von Steinmetz"
+    fuehrung     = 0.9
+    ort          = saarlouis
+    soldaten     = 60000
+    quelle = "Stärke und Ort nach Wissensstand ohne Quellenzugang (ungeprüft), Führung Spielwert (M10b)"
+}
+
+heer pru_zweite_armee_1870 {
+    staat        = PRU
+    name         = "II. Armee"
+    befehlshaber = "Prinz Friedrich Karl"
+    fuehrung     = 1.2
+    ort          = kaiserslautern
+    soldaten     = 164000
+    quelle = "Stärke und Ort nach Wissensstand ohne Quellenzugang (ungeprüft), Führung Spielwert (M10b)"
+}
+
+heer pru_dritte_armee_1870 {
+    staat        = PRU
+    name         = "III. Armee"
+    befehlshaber = "Kronprinz Friedrich Wilhelm"
+    fuehrung     = 1.4
+    ort          = landau_in_der_pfalz
+    soldaten     = 80000
+    quelle = "Stärke und Ort nach Wissensstand ohne Quellenzugang (ungeprüft), Führung Spielwert (M10b)"
+}
+
+heer sax_zwoelftes_korps {
+    staat        = SAX
+    name         = "XII. Armeekorps"
+    befehlshaber = "Kronprinz Albert"
+    fuehrung     = 1.3
+    ort          = mainz
+    soldaten     = 30000
+    quelle = "Stärke und Ort nach Wissensstand ohne Quellenzugang (ungeprüft), Führung Spielwert (M10b)"
+}
+
+heer hed_division_1870 {
+    staat        = HED
+    name         = "Großherzoglich Hessische Division"
+    fuehrung     = 1
+    ort          = mainz
+    soldaten     = 18000
+    quelle = "Stärke und Ort nach Wissensstand ohne Quellenzugang (ungeprüft), Führung Spielwert (M10b)"
+}
+
+heer bav_korps_1870 {
+    staat        = BAV
+    name         = "I. und II. Bayerisches Armeekorps"
+    befehlshaber = "Ludwig von der Tann"
+    fuehrung     = 1.1
+    ort          = speyer
+    soldaten     = 50000
+    quelle = "Stärke und Ort nach Wissensstand ohne Quellenzugang (ungeprüft), Führung Spielwert (M10b)"
+}
+
+heer wue_division_1870 {
+    staat        = WUE
+    name         = "Württembergische Division"
+    befehlshaber = "Hugo von Obernitz"
+    fuehrung     = 1
+    ort          = karlsruhe
+    soldaten     = 15000
+    quelle = "Stärke und Ort nach Wissensstand ohne Quellenzugang (ungeprüft), Führung Spielwert (M10b)"
+}
+
+heer bad_division_1870 {
+    staat        = BAD
+    name         = "Badische Division"
+    befehlshaber = "August von Werder"
+    fuehrung     = 1.2
+    ort          = rastatt
+    soldaten     = 12000
+    quelle = "Stärke und Ort nach Wissensstand ohne Quellenzugang (ungeprüft), Führung Spielwert (M10b)"
+}
+
+heer frk_bazaine {
+    staat        = FRK
+    name         = "Rheinarmee (Hauptkräfte)"
+    befehlshaber = "François-Achille Bazaine"
+    fuehrung     = 0.7
+    ort          = metz
+    soldaten     = 130000
+    quelle = "Stärke und Ort nach Wissensstand ohne Quellenzugang (ungeprüft), Führung Spielwert (M10b)"
+}
+
+heer frk_frossard {
+    staat        = FRK
+    name         = "II. Korps"
+    befehlshaber = "Charles Auguste Frossard"
+    fuehrung     = 0.9
+    ort          = forbach_lothringen
+    soldaten     = 30000
+    quelle = "Stärke und Ort nach Wissensstand ohne Quellenzugang (ungeprüft), Führung Spielwert (M10b)"
+}
+
+heer frk_mac_mahon {
+    staat        = FRK
+    name         = "I. Korps"
+    befehlshaber = "Patrice de MacMahon"
+    fuehrung     = 1
+    ort          = strassburg
+    soldaten     = 45000
+    quelle = "Stärke und Ort nach Wissensstand ohne Quellenzugang (ungeprüft), Führung Spielwert (M10b)"
+}
+
+heer frk_failly {
+    staat        = FRK
+    name         = "V. Korps"
+    befehlshaber = "Pierre Louis Charles de Failly"
+    fuehrung     = 0.8
+    ort          = bitsch
+    soldaten     = 25000
+    quelle = "Stärke und Ort nach Wissensstand ohne Quellenzugang (ungeprüft), Führung Spielwert (M10b)"
+}
+
+heer frk_douay {
+    staat        = FRK
+    name         = "VII. Korps"
+    befehlshaber = "Félix Douay"
+    fuehrung     = 0.9
+    ort          = beffert
+    soldaten     = 20000
+    quelle = "Stärke und Ort nach Wissensstand ohne Quellenzugang (ungeprüft), Führung Spielwert (M10b)"
+}
+
+heer frk_canrobert {
+    staat        = FRK
+    name         = "VI. Korps"
+    befehlshaber = "François Certain de Canrobert"
+    fuehrung     = 0.9
+    ort          = verdun
+    soldaten     = 35000
+    quelle = "Stärke und Ort nach Wissensstand ohne Quellenzugang (ungeprüft), Führung Spielwert (M10b)"
+}

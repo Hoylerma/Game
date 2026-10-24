@@ -371,6 +371,23 @@ Das Lesezeichen 1648 hat keine Zollunion; jeder Staat ist ein eigenes Zollgebiet
 
 Diplomatie gilt nur mit Deutschem Bund; 1648 bleiben die Regeln ohne Wirkung.
 
+**Historie 1849–1870** (seit M10b, [militaer.md](../docs/technik/militaer.md) Abschnitt 6.2): Die
+Kriegslesezeichen nutzen die Daten von 1848 und die datierte Historie bis zu ihrem Datum.
+
+| Datei | Inhalt |
+|---|---|
+| `tabellen/aenderungen_1849_1870.csv` → `besitz.csv` | 38 datierte Änderungen (Werkzeug `tools/geodaten/historie_1849_1870.py`): Frankreich ab 1849, Hohenzollern 1850 und Jadegebiet 1854 an Preußen, Anhalt 1863 vereinigt, Schleswig, Holstein und Lauenburg 1864 (vereinfacht nach Gastein), Hessen-Homburg 1866 an Hessen-Darmstadt, Ende des Deutschen Bundes am 24.8.1866, Annexionen vom 20.9.1866 (Hannover, Kurhessen, Nassau, Frankfurt, Schleswig-Holstein und kleine Gebiete), Norddeutscher Bund ab 1.7.1867 |
+| `tabellen/einwohner_1849_1870.csv`, `staedte_1849_1870.csv`, `merkmale_1849_1870.csv` → `bevoelkerung.csv` | Frankreich im Kartenausschnitt: 217 Orte, 4,01 Millionen Einwohner nach der Zählung 1846 je Département (Moselle und Meurthe auf die heutigen Grenzen umgerechnet), Konfession und Kultur |
+| `tabellen/staaten.csv`, `staaten_historie.csv` | Staat Frankreich (FRK: Republik, Kaiserreich ab 2.12.1852, Hauptstadt auf der Karte Straßburg); Herrscher und Verfassungen 1849–1870, Herzogtum Anhalt ab 1863; Hannover, Oldenburg und Schaumburg-Lippe 1854, Mecklenburg und Lübeck 1868 im Zollverein |
+| `tabellen/verwaltung.csv` | neue Einheiten: Hohenzollernsche Lande, Schleswig, Holstein (österreichisch), Lauenburg, die Provinzen Schleswig-Holstein, Hannover und Hessen-Nassau, Elsass (Bas-Rhin, Haut-Rhin), Arrondissement Belfort, Lothringen (Moselle, Meurthe, Vosges, Meuse), Ardennes, Nord |
+| `common/bundesversammlung.chron` | Deutscher Bund bis 24.8.1866, Bundesrat des Norddeutschen Bundes ab 1.7.1867 (43 Stimmen, Präsidium Preußen) |
+| `szenarien/dueppel.chron`, `koeniggraetz.chron`, `sedan.chron` | die Kriegslesezeichen 1.2.1864, 16.6.1866 und 19.7.1870 (spielbar: Preußen, Österreich, Dänemark; Preußen, Österreich, Sachsen, Bayern, Hannover; Preußen, Frankreich, Bayern) |
+| `common/aufmarsch_<lesezeichen>.chron` | Krieg zum Start mit Seiten und Zielen, Bündnisse und die Heere des Aufmarschs mit Befehlshaber und Führung: 1864 vier Heere (63.000 gegen 38.000), 1866 fünfzehn (313.000 Preußen gegen 238.000 Österreicher und die Verbündeten), 1870 vierzehn (429.000 gegen 285.000); Stärken ungeprüft, Führung Spielwert |
+| `common/kriegsziele_<lesezeichen>.chron` | die Kriege der Lesezeichen für das Kriegslabor; Korridore mit der Kalibrierung (b2) |
+| `common/militaer.chron` (1849–1870) | Heerwesen Preußen 1860, Österreich 1859, Dänemark, Sachsen und Bayern 1867, Frankreich 1849 und 1866 (Chassepot); Garnisonen IX.–XII. Armeekorps und Frankreich; Danewerk, Düppeler Schanzen und 13 französische Festungen, Luxemburg bis 1867; Hinterland Frankreich (31,4 Mio. Einwohner, Ersatz 25.000 je Monat) und Dänemark; Regel `fuehrung` 0,2 |
+| `common/zollunionen.chron`, `common/parlamente.chron` | Steuerverein bis 1854; Nationalversammlung und Preußische Zweite Kammer nur bis 1849 (spätere Wahlen mit M11) |
+| `tabellen/eisenbahnen.csv` → `history/eisenbahnen/` | seit b1c: 62 Strecken mit 185 Abschnitten 1849–1870 (zusammen 104 Strecken, 361 Abschnitte): Ostbahn bis Königsberg und Eydtkuhnen, Posen–Breslau, Westfälische und Main-Weser-Bahn, Saarbrücker und Rhein-Nahe-Bahn, die Rheinstrecken, Hannoversche Süd- und Westbahn, Schleswig, Mecklenburg, Werrabahn, Elbtal nach Bodenbach und Prag, die Süd-Norddeutsche Verbindungsbahn über Königgrätz nach Reichenberg und Zittau, Ludwigs-Westbahn, Maximiliansbahn, Bayerische Ostbahn, Westbahn Wien–Salzburg, Semmering, in Frankreich die Ostbahn Paris–Straßburg mit Metz–Forbach und Metz–Luxemburg, die Ardennenbahn bis Sedan und Diedenhofen. Ungeprüft |
+
 **Militär** (seit M10, Schritt a1, [militaer.md](../docs/technik/militaer.md) Abschnitte 3.1 und 3.2):
 
 | Datei | Inhalt |

@@ -31,6 +31,11 @@ ort karlsruhe {
         verwaltung = bd_mittelrheinkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
+    }
 }
 
 ort bruchsal {
@@ -53,6 +58,11 @@ ort bruchsal {
         besitzer   = BAD
         verwaltung = bd_mittelrheinkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
     }
 }
 
@@ -77,6 +87,11 @@ ort ettlingen {
         verwaltung = bd_mittelrheinkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
+    }
 }
 
 ort eggenstein_leopoldshafen {
@@ -99,6 +114,11 @@ ort eggenstein_leopoldshafen {
         besitzer   = BAD
         verwaltung = bd_mittelrheinkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
     }
 }
 
@@ -123,6 +143,11 @@ ort oestringen {
         verwaltung = bd_mittelrheinkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
+    }
 }
 
 ort philippsburg {
@@ -145,6 +170,11 @@ ort philippsburg {
         besitzer   = BAD
         verwaltung = bd_mittelrheinkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
     }
 }
 
@@ -169,6 +199,11 @@ ort weingarten {
         verwaltung = bd_mittelrheinkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
+    }
 }
 
 ort zaisenhausen {
@@ -191,6 +226,11 @@ ort zaisenhausen {
         besitzer   = BAD
         verwaltung = bd_mittelrheinkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
     }
 }
 
@@ -215,6 +255,11 @@ ort pforzheim {
         verwaltung = bd_mittelrheinkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
+    }
 }
 
 ort muehlacker {
@@ -237,6 +282,11 @@ ort muehlacker {
         besitzer   = WUE
         verwaltung = wu_schwarzwaldkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }
 
@@ -261,6 +311,11 @@ ort bretten {
         verwaltung = bd_mittelrheinkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
+    }
 }
 
 ort koenigsbach_stein {
@@ -283,6 +338,11 @@ ort koenigsbach_stein {
         besitzer   = BAD
         verwaltung = bd_mittelrheinkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
     }
 }
 
@@ -307,6 +367,11 @@ ort neuenbuerg {
         verwaltung = wu_schwarzwaldkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort tiefenbronn {
@@ -329,6 +394,11 @@ ort tiefenbronn {
         besitzer   = BAD
         verwaltung = bd_mittelrheinkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
     }
 }
 
@@ -353,6 +423,11 @@ ort baden_baden {
         verwaltung = bd_mittelrheinkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
+    }
 }
 
 ort rastatt {
@@ -375,6 +450,11 @@ ort rastatt {
         besitzer   = BAD
         verwaltung = bd_mittelrheinkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
     }
 }
 
@@ -399,6 +479,11 @@ ort buehl {
         verwaltung = bd_mittelrheinkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
+    }
 }
 
 ort gaggenau {
@@ -421,6 +506,11 @@ ort gaggenau {
         besitzer   = BAD
         verwaltung = bd_mittelrheinkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
     }
 }
 
@@ -445,6 +535,11 @@ ort achern {
         verwaltung = bd_mittelrheinkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
+    }
 }
 
 ort durmersheim {
@@ -467,6 +562,11 @@ ort durmersheim {
         besitzer   = BAD
         verwaltung = bd_mittelrheinkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
     }
 }
 
@@ -491,6 +591,11 @@ ort huegelsheim {
         verwaltung = bd_mittelrheinkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
+    }
 }
 
 ort forbach_baden {
@@ -513,6 +618,11 @@ ort forbach_baden {
         besitzer   = BAD
         verwaltung = bd_mittelrheinkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
     }
 }
 
@@ -537,6 +647,11 @@ ort lichtenau_baden {
         verwaltung = bd_mittelrheinkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
+    }
 }
 
 ort biberach {
@@ -559,6 +674,11 @@ ort biberach {
         besitzer   = BAD
         verwaltung = bd_mittelrheinkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
     }
 }
 
@@ -584,6 +704,11 @@ ort offenburg {
         verwaltung = bd_mittelrheinkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
+    }
 }
 
 ort lahr {
@@ -606,6 +731,11 @@ ort lahr {
         besitzer   = BAD
         verwaltung = bd_mittelrheinkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
     }
 }
 
@@ -630,6 +760,11 @@ ort oberkirch {
         verwaltung = bd_mittelrheinkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
+    }
 }
 
 ort ettenheim {
@@ -652,6 +787,11 @@ ort ettenheim {
         besitzer   = BAD
         verwaltung = bd_mittelrheinkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
     }
 }
 
@@ -676,6 +816,11 @@ ort willstaett {
         verwaltung = bd_mittelrheinkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
+    }
 }
 
 ort gengenbach {
@@ -698,6 +843,11 @@ ort gengenbach {
         besitzer   = BAD
         verwaltung = bd_mittelrheinkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
     }
 }
 
@@ -722,6 +872,11 @@ ort oppenau {
         verwaltung = bd_mittelrheinkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
+    }
 }
 
 ort meissenheim {
@@ -744,6 +899,11 @@ ort meissenheim {
         besitzer   = BAD
         verwaltung = bd_mittelrheinkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
     }
 }
 
@@ -768,6 +928,11 @@ ort schuttertal {
         verwaltung = bd_mittelrheinkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
+    }
 }
 
 ort oberharmersbach {
@@ -790,6 +955,11 @@ ort oberharmersbach {
         besitzer   = BAD
         verwaltung = bd_mittelrheinkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
     }
 }
 
@@ -814,6 +984,11 @@ ort emmendingen {
         verwaltung = bd_oberrheinkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
+    }
 }
 
 ort waldkirch {
@@ -836,6 +1011,11 @@ ort waldkirch {
         besitzer   = BAD
         verwaltung = bd_oberrheinkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
     }
 }
 
@@ -860,6 +1040,11 @@ ort furtwangen {
         verwaltung = bd_seekreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
+    }
 }
 
 ort elzach {
@@ -882,6 +1067,11 @@ ort elzach {
         besitzer   = BAD
         verwaltung = bd_oberrheinkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
     }
 }
 
@@ -906,6 +1096,11 @@ ort sankt_maergen {
         verwaltung = bd_oberrheinkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
+    }
 }
 
 ort villingen_schwenningen {
@@ -928,6 +1123,11 @@ ort villingen_schwenningen {
         besitzer   = BAD
         verwaltung = bd_seekreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
     }
 }
 
@@ -952,6 +1152,11 @@ ort sankt_georgen_im_schwarzwald {
         verwaltung = bd_seekreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
+    }
 }
 
 ort niedereschach {
@@ -974,6 +1179,11 @@ ort niedereschach {
         besitzer   = BAD
         verwaltung = bd_seekreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
     }
 }
 
@@ -998,6 +1208,11 @@ ort wolfach {
         verwaltung = bd_mittelrheinkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
+    }
 }
 
 ort hornberg {
@@ -1020,6 +1235,11 @@ ort hornberg {
         besitzer   = BAD
         verwaltung = bd_mittelrheinkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
     }
 }
 
@@ -1045,6 +1265,11 @@ ort freiburg_im_breisgau {
         verwaltung = bd_oberrheinkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
+    }
 }
 
 ort breisach_am_rhein {
@@ -1069,6 +1294,11 @@ ort breisach_am_rhein {
         verwaltung = bd_oberrheinkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
+    }
 }
 
 ort kirchzarten {
@@ -1091,6 +1321,11 @@ ort kirchzarten {
         besitzer   = BAD
         verwaltung = bd_oberrheinkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
     }
 }
 
@@ -1115,6 +1350,11 @@ ort schallstadt {
         verwaltung = bd_oberrheinkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
+    }
 }
 
 ort boetzingen {
@@ -1137,6 +1377,11 @@ ort boetzingen {
         besitzer   = BAD
         verwaltung = bd_oberrheinkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
     }
 }
 
@@ -1161,6 +1406,11 @@ ort muenstertal_schwarzwald {
         verwaltung = bd_oberrheinkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
+    }
 }
 
 ort hartheim {
@@ -1183,6 +1433,11 @@ ort hartheim {
         besitzer   = BAD
         verwaltung = bd_oberrheinkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
     }
 }
 
@@ -1207,6 +1462,11 @@ ort weisweil {
         verwaltung = bd_oberrheinkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
+    }
 }
 
 ort donaueschingen {
@@ -1229,6 +1489,11 @@ ort donaueschingen {
         besitzer   = BAD
         verwaltung = bd_seekreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
     }
 }
 
@@ -1253,6 +1518,11 @@ ort titisee_neustadt {
         verwaltung = bd_oberrheinkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
+    }
 }
 
 ort engen {
@@ -1275,6 +1545,11 @@ ort engen {
         besitzer   = BAD
         verwaltung = bd_seekreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
     }
 }
 
@@ -1299,6 +1574,11 @@ ort loeffingen {
         verwaltung = bd_oberrheinkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
+    }
 }
 
 ort blumberg {
@@ -1321,6 +1601,11 @@ ort blumberg {
         besitzer   = BAD
         verwaltung = bd_seekreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
     }
 }
 
@@ -1345,6 +1630,11 @@ ort wutoeschingen {
         verwaltung = bd_oberrheinkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
+    }
 }
 
 ort jestetten {
@@ -1367,6 +1657,11 @@ ort jestetten {
         besitzer   = BAD
         verwaltung = bd_oberrheinkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
     }
 }
 
@@ -1391,6 +1686,11 @@ ort stuehlingen {
         verwaltung = bd_oberrheinkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
+    }
 }
 
 ort hohentengen {
@@ -1413,6 +1713,11 @@ ort hohentengen {
         besitzer   = BAD
         verwaltung = bd_oberrheinkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
     }
 }
 
@@ -1437,6 +1742,11 @@ ort tengen {
         verwaltung = bd_seekreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
+    }
 }
 
 ort konstanz {
@@ -1459,6 +1769,11 @@ ort konstanz {
         besitzer   = BAD
         verwaltung = bd_seekreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
     }
 }
 
@@ -1483,6 +1798,11 @@ ort singen {
         verwaltung = bd_seekreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
+    }
 }
 
 ort radolfzell {
@@ -1505,6 +1825,11 @@ ort radolfzell {
         besitzer   = BAD
         verwaltung = bd_seekreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
     }
 }
 
@@ -1529,6 +1854,11 @@ ort stockach {
         verwaltung = bd_seekreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
+    }
 }
 
 ort allensbach {
@@ -1551,6 +1881,11 @@ ort allensbach {
         besitzer   = BAD
         verwaltung = bd_seekreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
     }
 }
 
@@ -1575,6 +1910,11 @@ ort oehningen {
         verwaltung = bd_seekreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
+    }
 }
 
 ort gailingen {
@@ -1597,6 +1937,11 @@ ort gailingen {
         besitzer   = BAD
         verwaltung = bd_seekreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
     }
 }
 
@@ -1621,6 +1966,11 @@ ort waldshut_tiengen {
         verwaltung = bd_oberrheinkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
+    }
 }
 
 ort bad_saeckingen {
@@ -1643,6 +1993,11 @@ ort bad_saeckingen {
         besitzer   = BAD
         verwaltung = bd_oberrheinkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
     }
 }
 
@@ -1667,6 +2022,11 @@ ort laufenburg {
         verwaltung = bd_oberrheinkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
+    }
 }
 
 ort goerwihl {
@@ -1689,6 +2049,11 @@ ort goerwihl {
         besitzer   = BAD
         verwaltung = bd_oberrheinkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
     }
 }
 
@@ -1713,6 +2078,11 @@ ort todtnau {
         verwaltung = bd_oberrheinkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
+    }
 }
 
 ort staufen {
@@ -1736,6 +2106,11 @@ ort staufen {
         verwaltung = bd_oberrheinkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
+    }
 }
 
 ort todtmoos {
@@ -1758,6 +2133,11 @@ ort todtmoos {
         besitzer   = BAD
         verwaltung = bd_oberrheinkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
     }
 }
 
@@ -1783,6 +2163,11 @@ ort loerrach {
         verwaltung = bd_oberrheinkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
+    }
 }
 
 ort rheinfelden {
@@ -1807,6 +2192,11 @@ ort rheinfelden {
         verwaltung = bd_oberrheinkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
+    }
 }
 
 ort schopfheim {
@@ -1829,6 +2219,11 @@ ort schopfheim {
         besitzer   = BAD
         verwaltung = bd_oberrheinkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
     }
 }
 
@@ -1854,6 +2249,11 @@ ort muellheim {
         verwaltung = bd_oberrheinkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
+    }
 }
 
 ort efringen_kirchen {
@@ -1877,6 +2277,11 @@ ort efringen_kirchen {
         verwaltung = bd_oberrheinkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
+    }
 }
 
 ort kandern {
@@ -1899,5 +2304,10 @@ ort kandern {
         besitzer   = BAD
         verwaltung = bd_oberrheinkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
     }
 }

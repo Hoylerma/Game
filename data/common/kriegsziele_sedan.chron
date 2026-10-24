@@ -1,0 +1,8 @@
+# Kriegsziele des Kriegslabors für das Lesezeichen sedan (M10b, Schritt b1), gelesen von
+# `uhrwerk-cli krieg` und `uhrwerk-cli pruefen`. Format: docs/technik/chronik-skript.md, Abschnitt 3.31.
+# Der Krieg kommt aus dem Lesezeichen (common/aufmarsch_sedan.chron); die Korridore setzt die Kalibrierung (b2).
+krieg sedan {
+    angreifer   = FRK
+    verteidiger = PRU
+    tage        = 365
+}

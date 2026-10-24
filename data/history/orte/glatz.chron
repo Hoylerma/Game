@@ -30,6 +30,16 @@ ort glatz {
         verwaltung = pr_kr_glatz
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort neurode {
@@ -54,6 +64,16 @@ ort neurode {
         verwaltung = pr_kr_reichenbach
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort bad_kudowa {
@@ -76,6 +96,16 @@ ort bad_kudowa {
         besitzer   = PRU
         verwaltung = pr_kr_glatz
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -100,6 +130,16 @@ ort habelschwerdt {
         verwaltung = pr_kr_habelschwerdt
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort bad_altheide {
@@ -122,6 +162,16 @@ ort bad_altheide {
         besitzer   = PRU
         verwaltung = pr_kr_glatz
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -146,6 +196,16 @@ ort bad_landeck {
         verwaltung = pr_kr_habelschwerdt
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort bad_reinerz {
@@ -168,6 +228,16 @@ ort bad_reinerz {
         besitzer   = PRU
         verwaltung = pr_kr_glatz
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -192,6 +262,16 @@ ort mittelwalde {
         verwaltung = pr_kr_habelschwerdt
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort wuenschelburg {
@@ -214,5 +294,15 @@ ort wuenschelburg {
         besitzer   = PRU
         verwaltung = pr_kr_glatz
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }

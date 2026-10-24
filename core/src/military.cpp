@@ -290,9 +290,51 @@ void run_mobilization(World& world) {
                 army.staff = world.military_rules.staff;
                 world.armies.push_back(std::move(army));
             }
+            // Feldarmeen ohne Garnison (Aufmarsch, Ersatz; seit b1) lösen sich auf.
+            std::erase_if(world.armies, [&](const Army& a) {
+                return a.state == state && a.garrison == kNone && a.status != ArmyStatus::Garrison;
+            });
             m = Mobilization{};
             chronicle(world, state,
                       st.short_name + " hat abgerüstet; die Truppen stehen wieder in ihren Garnisonen.");
+        }
+    }
+}
+
+/// Hinterland am Monatsersten (seit b1, Abschnitt 6.2): Einnahmen in die Kasse; im Krieg trifft der
+/// Ersatz am ersten Ort am Kartenrand ein, den die eigene Seite hält, bei einer Feldarmee ohne Garnison
+/// dort oder als neues Heer.
+void run_hinterland(World& world) {
+    for (const Hinterland& h : world.hinterlands) {
+        if (!in_range(world.states, h.state) || world.states[at(h.state)].capital == kNone) {
+            continue; // untergegangen
+        }
+        world.states[at(h.state)].treasury += h.income;
+        if (!in_war(world, h.state) || h.replacements <= Fixed::zero()) {
+            continue;
+        }
+        for (const Index entry : h.entries) {
+            if (!friendly(world, h.state, controller(world, entry))) {
+                continue;
+            }
+            const auto target = std::find_if(world.armies.begin(), world.armies.end(), [&](const Army& a) {
+                return a.state == h.state && a.location == entry && a.garrison == kNone &&
+                       a.status == ArmyStatus::Rest;
+            });
+            if (target != world.armies.end()) {
+                set_soldiers(world, *target, target->soldiers + h.replacements);
+            } else {
+                Army army;
+                army.id = world.next_army_id++;
+                army.state = h.state;
+                army.location = entry;
+                army.name = "Ersatz " + world.locations[at(entry)].name;
+                set_soldiers(world, army, h.replacements);
+                army.status = ArmyStatus::Rest;
+                army.staff = world.military_rules.staff;
+                world.armies.push_back(std::move(army));
+            }
+            break;
         }
     }
 }
@@ -410,6 +452,34 @@ void ensure_military_state(World& world) {
         army.status = ArmyStatus::Garrison;
         army.staff = world.military_rules.staff;
         world.armies.push_back(std::move(army));
+    }
+    if (world.next_war_id != 1) {
+        return; // schon ein Krieg geführt: kein neuer Aufmarsch
+    }
+    // Aufmarsch eines Lesezeichens (seit b1, Abschnitt 6.1): Feldarmeen am Ort, ihre Staaten sind mobil
+    // (die Garnisonen bleiben als Besatzung stehen); dann die Bündnisse und die Kriege zum Start.
+    for (const Deployment& d : world.deployments) {
+        Army army;
+        army.id = world.next_army_id++;
+        army.state = d.state;
+        army.location = d.location;
+        army.name = d.name;
+        army.commander = d.commander;
+        army.leadership = d.leadership;
+        army.soldiers = d.soldiers;
+        army.guns = guns_for(world, d.state, d.soldiers);
+        army.morale = d.morale;
+        army.status = ArmyStatus::Rest;
+        army.staff = d.staff;
+        world.armies.push_back(std::move(army));
+        world.mobilizations[at(d.state)] = Mobilization{MobilizationPhase::Mobilized, 0, false};
+    }
+    world.treaties.insert(world.treaties.end(), world.opening_treaties.begin(), world.opening_treaties.end());
+    for (const OpeningWar& opening : world.opening_wars) {
+        if (start_war(world, opening.attackers, opening.defenders, opening.cause, opening.goals)) {
+            War& war = world.wars.back();
+            war.started = opening.started;
+        }
     }
 }
 
@@ -733,6 +803,7 @@ bool run_military(World& world, Pcg32& rng) {
     }
     bool changed = false;
     if (world.date.day == 1) {
+        run_hinterland(world); // seit b1
         apply_war_dead(world);
         changed = run_peace(world); // seit a4: Frieden nach Regel
     }

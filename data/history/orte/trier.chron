@@ -31,6 +31,16 @@ ort daun {
         verwaltung = pr_kr_daun
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort gerolstein {
@@ -53,6 +63,16 @@ ort gerolstein {
         besitzer   = PRU
         verwaltung = pr_kr_daun
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -77,6 +97,16 @@ ort kelberg {
         verwaltung = pr_kr_adenau
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort uexheim {
@@ -99,6 +129,16 @@ ort uexheim {
         besitzer   = PRU
         verwaltung = pr_kr_adenau
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -123,6 +163,16 @@ ort gillenfeld {
         verwaltung = pr_kr_daun
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort lissendorf {
@@ -145,6 +195,16 @@ ort lissendorf {
         besitzer   = PRU
         verwaltung = pr_kr_pruem
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -169,6 +229,16 @@ ort bitburg {
         verwaltung = pr_kr_bitburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort pruem {
@@ -191,6 +261,16 @@ ort pruem {
         besitzer   = PRU
         verwaltung = pr_kr_pruem
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -215,6 +295,16 @@ ort arzfeld {
         verwaltung = pr_kr_pruem
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort bleialf {
@@ -237,6 +327,16 @@ ort bleialf {
         besitzer   = PRU
         verwaltung = pr_kr_pruem
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -261,6 +361,16 @@ ort kyllburg {
         verwaltung = pr_kr_bitburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort mettendorf {
@@ -283,6 +393,16 @@ ort mettendorf {
         besitzer   = PRU
         verwaltung = pr_kr_bitburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -308,6 +428,16 @@ ort trier {
         verwaltung = pr_kr_trier
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort konz {
@@ -330,6 +460,16 @@ ort konz {
         besitzer   = PRU
         verwaltung = pr_kr_trier
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -354,6 +494,16 @@ ort saarburg_trier {
         verwaltung = pr_kr_saarburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort schweich {
@@ -376,6 +526,16 @@ ort schweich {
         besitzer   = PRU
         verwaltung = pr_kr_trier
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -400,6 +560,16 @@ ort welschbillig {
         verwaltung = pr_kr_trier
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort zemmer {
@@ -422,6 +592,16 @@ ort zemmer {
         besitzer   = PRU
         verwaltung = pr_kr_bitburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -446,6 +626,16 @@ ort zerf {
         verwaltung = pr_kr_saarburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort idar_oberstein {
@@ -465,6 +655,16 @@ ort idar_oberstein {
     }
 
     1848.03.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = OLD
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = OLD
         bund     = ja
     }
@@ -491,6 +691,16 @@ ort wittlich {
         verwaltung = pr_kr_wittlich
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort birkenfeld {
@@ -510,6 +720,16 @@ ort birkenfeld {
     }
 
     1848.03.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = OLD
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = OLD
         bund     = ja
     }
@@ -537,6 +757,16 @@ ort bernkastel_kues {
         verwaltung = pr_kr_bernkastel
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort morbach {
@@ -560,6 +790,16 @@ ort morbach {
         verwaltung = pr_kr_bernkastel
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort baumholder {
@@ -579,6 +819,16 @@ ort baumholder {
     }
 
     1848.03.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = OLD
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = OLD
         bund     = ja
     }
@@ -605,6 +855,16 @@ ort neumagen_dhron {
         verwaltung = pr_kr_bernkastel
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort reinsfeld {
@@ -627,6 +887,16 @@ ort reinsfeld {
         besitzer   = PRU
         verwaltung = pr_kr_trier
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -651,6 +921,16 @@ ort rhaunen {
         verwaltung = pr_kr_simmern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort thalfang {
@@ -674,6 +954,16 @@ ort thalfang {
         verwaltung = pr_kr_bernkastel
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort kinderbeuern {
@@ -696,5 +986,15 @@ ort kinderbeuern {
         besitzer   = PRU
         verwaltung = pr_kr_wittlich
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }

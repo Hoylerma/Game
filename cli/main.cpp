@@ -556,7 +556,9 @@ std::string military_summary(const World& content) {
     }
     Fixed soldiers;
     for (const uhrwerk::Army& a : w.armies) {
-        soldiers += a.soldiers;
+        if (a.garrison != uhrwerk::kNone) {
+            soldiers += a.soldiers;
+        }
     }
     const std::string indent = "\n              ";
     std::string text = plural(edges / 2, "Nachbarschaft", "Nachbarschaften") + " (" +
@@ -569,9 +571,15 @@ std::string military_summary(const World& content) {
     for (std::size_t s = 0; s < w.states.size(); ++s) {
         const auto state = static_cast<Index>(s);
         const std::int64_t count = uhrwerk::state_army_count(w, state);
-        if (count > 1) {
-            large += (large.empty() ? "" : ", ") + w.states[s].tag + " " +
-                     format_int(uhrwerk::state_soldiers(w, state).round()) + " in " + std::to_string(count);
+        const auto garrisons = std::count_if(w.garrisons.begin(), w.garrisons.end(),
+                                             [&](const uhrwerk::Garrison& g) { return g.state == state; });
+        if (count > 1 && garrisons > 1) {
+            Fixed peace;
+            for (const uhrwerk::Army& a : w.armies) {
+                peace += a.state == state && a.garrison != uhrwerk::kNone ? a.soldiers : Fixed::zero();
+            }
+            large += (large.empty() ? "" : ", ") + w.states[s].tag + " " + format_int(peace.round()) +
+                     " in " + std::to_string(garrisons);
         }
     }
     if (!large.empty()) {
@@ -585,6 +593,37 @@ std::string military_summary(const World& content) {
                     " " + std::to_string(f.level);
         }
         text += indent + plural(w.fortresses.size(), "Festung", "Festungen") + " (Ort und Stufe): " + list;
+    }
+    // Aufmarsch, Kriege zum Start und Hinterland (seit Schritt b1).
+    const auto tag = [&](Index state) { return w.states[static_cast<std::size_t>(state)].tag; };
+    if (!w.deployments.empty()) {
+        Fixed deployed;
+        std::string list;
+        for (const uhrwerk::Deployment& d : w.deployments) {
+            deployed += d.soldiers;
+            list += indent + "  " + tag(d.state) + " " + d.name +
+                    (d.commander.empty() ? std::string() : " (" + d.commander + ")") + " in " +
+                    w.locations[static_cast<std::size_t>(d.location)].name + ": " +
+                    format_int(d.soldiers.round());
+        }
+        text += indent + "Aufmarsch: " + plural(w.deployments.size(), "Heer", "Heere") + ", " +
+                format_int(deployed.round()) + " Soldaten" + list;
+    }
+    for (const uhrwerk::OpeningWar& o : w.opening_wars) {
+        std::string sides;
+        for (const auto* side : {&o.attackers, &o.defenders}) {
+            sides += sides.empty() ? "" : " gegen ";
+            for (std::size_t i = 0; i < side->size(); ++i) {
+                sides += (i == 0 ? "" : " ") + tag((*side)[i]);
+            }
+        }
+        text += indent + "Krieg zum Start: " + o.name + " seit " + uhrwerk::format_date_long(o.started) +
+                ", " + sides + ", " + plural(o.goals.size(), "Kriegsziel", "Kriegsziele");
+    }
+    for (const uhrwerk::Hinterland& h : w.hinterlands) {
+        text += indent + "Hinterland " + tag(h.state) + ": " + format_int(h.population.round()) +
+                " Einwohner, " + format_int(h.income.round()) + " Taler und " +
+                format_int(h.replacements.round()) + " Soldaten Ersatz je Monat";
     }
     return text;
 }
@@ -2271,13 +2310,20 @@ int cmd_krieg(const Options& o, const fs::path& data_dir) {
     for (std::size_t k = 0; k < wars.size(); ++k) {
         const uhrwerk::WarScenario& war = wars[k];
         const uhrwerk::WarScenarioSummary& s = summary.wars[k];
+        // Führt das Lesezeichen den Krieg schon (seit b1), gelten seine Ziele, nicht die der Kriegsziele.
+        const auto opening =
+            std::find_if(w.opening_wars.begin(), w.opening_wars.end(), [&](const uhrwerk::OpeningWar& ow) {
+                return ow.attackers.front() == war.attacker && ow.defenders.front() == war.defender;
+            });
         std::string goals;
-        for (const uhrwerk::WarGoal& goal : war.goals) {
-            goals += (goals.empty() ? "" : ", ") + describe_war_goal(w, goal);
+        for (const uhrwerk::WarGoal& goal : opening != w.opening_wars.end() ? opening->goals : war.goals) {
+            goals += (goals.empty() ? "" : ", ") + describe_war_goal(w, goal) + (goal.attacker ? "" : " (V)");
         }
         std::cout << "\nKrieg " << war.id << ": " << state_name(w, war.attacker) << " gegen "
-                  << state_name(w, war.defender) << ", Ziele: " << (goals.empty() ? "keine" : goals)
-                  << ", höchstens " << format_int(war.days) << " Tage\n";
+                  << state_name(w, war.defender)
+                  << (opening != w.opening_wars.end() ? " (" + opening->name + " aus dem Lesezeichen)" : "")
+                  << ", Ziele: " << (goals.empty() ? "keine" : goals) << ", höchstens "
+                  << format_int(war.days) << " Tage\n";
         std::vector<std::vector<std::string>> rows;
         rows.push_back({"Seed", "Ausgang", "Tage", "Schlachten", "Verluste A", "Verluste V", "Orte",
                         "Schulden A", "Schulden V"});

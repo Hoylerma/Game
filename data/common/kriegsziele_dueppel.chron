@@ -1,0 +1,8 @@
+# Kriegsziele des Kriegslabors für das Lesezeichen dueppel (M10b, Schritt b1), gelesen von
+# `uhrwerk-cli krieg` und `uhrwerk-cli pruefen`. Format: docs/technik/chronik-skript.md, Abschnitt 3.31.
+# Der Krieg kommt aus dem Lesezeichen (common/aufmarsch_dueppel.chron); die Korridore setzt die Kalibrierung (b2).
+krieg dueppel {
+    angreifer   = PRU
+    verteidiger = DEN
+    tage        = 365
+}

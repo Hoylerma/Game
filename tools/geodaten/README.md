@@ -19,9 +19,10 @@ Rasterregel, Dateien unter `data/karte/geometrie/`); Inhalt des Kernraums:
 | `landschaften.csv`, `landschaften_dateien.csv`, `exonyme.csv`, `ausschluesse.csv`, `einwohner.csv`, `gelaende_gebiete.csv` | Hilfstabellen von `orte.py` (von Hand gepflegt) |
 | `zuordnung.py`, `gebietscodes.csv` | Lesezeichen 1848 (M7): Besitzer, Bundesgebiet und Verwaltung der Orte aus Regeln (siehe [Lesezeichen 1848](#lesezeichen-1848-zuordnungpy-bevoelkerung_1846py)); `gebietscodes.csv` = heutige Verwaltungscodes und Einwohner je Ort aus GeoNames (erzeugt) |
 | `bevoelkerung_1846.py` | Lesezeichen 1848 (M7): Bevölkerung der Orte zum 3. Dezember 1846 (Schätzung aus Summen) |
+| `historie_1849_1870.py` | Kriegslesezeichen (M10b): datierte Änderungen von Besitz, Bundesgebiet und Verwaltung 1849–1870, Bevölkerung Frankreichs (siehe [Historie 1849–1870](#historie-18491870-historie_1849_1870py)) |
 | `stichprobe_1848.py` | Lesezeichen 1848 (M7): reproduzierbare Stichprobe und Flächensummen für die Prüfung ([stichprobe_1848.md](../../docs/pruefung/stichprobe_1848.md)) |
 | `wahlkreise_1848.py` | Wahlkreise der Nationalversammlung 1848 und der Preußischen Zweiten Kammer 1849 (seit M8, `data/tabellen/wahlkreise.csv`) |
-| `test_geodaten.py`, `test_orte.py`, `test_zuordnung.py`, `test_bevoelkerung_1846.py`, `test_stichprobe_1848.py`, `test_wahlkreise_1848.py`, `testdaten/` | Tests ohne Netz und ohne Zwischenspeicher |
+| `test_geodaten.py`, `test_orte.py`, `test_zuordnung.py`, `test_bevoelkerung_1846.py`, `test_stichprobe_1848.py`, `test_wahlkreise_1848.py`, `test_historie_1849_1870.py`, `testdaten/` | Tests ohne Netz und ohne Zwischenspeicher |
 
 Erzeugt bzw. gepflegt in `data/karte/`:
 
@@ -526,3 +527,32 @@ Bayern 508), 575 Orte ohne Daten (Ausland); 45,0 Millionen Einwohner in 57 Räum
 der Regeln, Auflösung je Feld, Verwaltungseinheit eines anderen Staates, Zeilen zum Stichtag
 ersetzen, Summen und feste Städte, Merkmale, reproduzierbare Stichprobe; dazu je ein Test, dass `besitz.csv` und `bevoelkerung.csv` zu den eingecheckten
 Eingaben passen (wie `--pruefen`).
+
+## Historie 1849–1870 (`historie_1849_1870.py`)
+
+Die drei Kriegslesezeichen (Meilenstein M10b, [militaer.md](../../docs/technik/militaer.md),
+Abschnitt 6) nutzen die Daten von 1848 und die datierte Historie bis zu ihrem Datum. Das Werkzeug
+beginnt mit der Zuordnung zum 1. März 1848 (den Zeilen von `zuordnung.py` in `besitz.csv`) und
+wendet die Änderungen aus `data/tabellen/aenderungen_1849_1870.csv` in zeitlicher Folge an. Je Datum
+gilt für jedes Feld die stärkste passende Regel wie in `zuordnung.py`; dazu kommen die Formen
+`verwaltung:<einheit>` (Rang 2,5), `staat:<TAG>` (1,5) und `alle` (0,5), bezogen auf den Stand vor
+dem Datum. Wechselt ein Ort den Staat ohne Regel für die Verwaltung, bleibt seine Einheit nur, wenn sie
+zum neuen Staat gehört. Ein Ort ohne Daten, der einen Staat erhält, bekommt seine Bevölkerung wie in
+`bevoelkerung_1846.py` aus `einwohner_1849_1870.csv`, `staedte_1849_1870.csv` und
+`merkmale_1849_1870.csv`.
+
+```sh
+python3 tools/geodaten/historie_1849_1870.py             # besitz.csv, bevoelkerung.csv: Zeilen 1849–1870 neu
+python3 tools/geodaten/historie_1849_1870.py --bericht   # Orte je Staat und Bundesgebiet zu jedem Datum
+python3 tools/geodaten/historie_1849_1870.py --pruefen   # Exitcode 1, wenn die Tabellen nicht aktuell sind
+```
+
+Kennzahlen dieses Laufs: 38 Änderungen an neun Daten. Frankreich erhält zum 1. Januar 1849 217
+Orte im Kartenausschnitt mit 4,01 Millionen Einwohnern (Zählung 1846 je Département, für die nur
+zum Teil erfassten nach der Fläche); Hohenzollern 1850 und das Jadegebiet 1854 an Preußen, Anhalt
+1863 vereinigt; Schleswig, Holstein und Lauenburg nach dem Wiener Frieden 1864 (vereinfacht
+gleich nach der Teilung von Gastein), Hessen-Homburg im März 1866 an Hessen-Darmstadt; der Bund
+endet am 24. August 1866, die Annexionen vom 20. September 1866 machen Preußen zu 1.778 Orten; der
+Norddeutsche Bund umfasst ab 1. Juli 1867 2.143 Orte. Die CI prüft mit `--pruefen`. Tests
+(`test_historie_1849_1870.py`): Lesefehler, Annexion mit Verwaltung, zeitliche Folge und Rang,
+Einheit beim Staatswechsel, neue Orte, unbekannte Verweise, andere Zeilen bleiben.

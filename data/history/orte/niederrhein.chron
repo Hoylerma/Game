@@ -31,6 +31,16 @@ ort kleve {
         verwaltung = pr_kr_kleve
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort emmerich {
@@ -53,6 +63,16 @@ ort emmerich {
         besitzer   = PRU
         verwaltung = pr_kr_kleve
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -77,6 +97,16 @@ ort goch {
         verwaltung = pr_kr_kleve
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort kevelaer {
@@ -99,6 +129,16 @@ ort kevelaer {
         besitzer   = PRU
         verwaltung = pr_kr_geldern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -123,6 +163,16 @@ ort rees {
         verwaltung = pr_kr_rees
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort kalkar {
@@ -146,6 +196,16 @@ ort kalkar {
         verwaltung = pr_kr_rees
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort uedem {
@@ -168,6 +228,16 @@ ort uedem {
         besitzer   = PRU
         verwaltung = pr_kr_rees
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -193,6 +263,16 @@ ort essen_niederrhein {
         verwaltung = pr_kr_duisburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort duisburg {
@@ -216,6 +296,16 @@ ort duisburg {
         verwaltung = pr_kr_duisburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort wuppertal {
@@ -238,6 +328,16 @@ ort wuppertal {
         besitzer   = PRU
         verwaltung = pr_kr_elberfeld
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -263,6 +363,16 @@ ort oberhausen {
         verwaltung = pr_kr_duisburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort solingen {
@@ -285,6 +395,16 @@ ort solingen {
         besitzer   = PRU
         verwaltung = pr_kr_solingen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -309,6 +429,16 @@ ort remscheid {
         verwaltung = pr_kr_lennep
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort mettmann {
@@ -331,6 +461,16 @@ ort mettmann {
         besitzer   = PRU
         verwaltung = pr_kr_solingen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -355,6 +495,16 @@ ort velbert {
         verwaltung = pr_kr_elberfeld
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort ratingen {
@@ -377,6 +527,16 @@ ort ratingen {
         besitzer   = PRU
         verwaltung = pr_kr_duesseldorf
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -401,6 +561,16 @@ ort dinslaken {
         verwaltung = pr_kr_duisburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort moers {
@@ -423,6 +593,16 @@ ort moers {
         besitzer   = PRU
         verwaltung = pr_kr_duisburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -447,6 +627,16 @@ ort wesel {
         verwaltung = pr_kr_rees
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort kamp_lintfort {
@@ -469,6 +659,16 @@ ort kamp_lintfort {
         besitzer   = PRU
         verwaltung = pr_kr_geldern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -493,6 +693,16 @@ ort geldern {
         verwaltung = pr_kr_geldern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort hamminkeln {
@@ -515,6 +725,16 @@ ort hamminkeln {
         besitzer   = PRU
         verwaltung = pr_kr_rees
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -539,6 +759,16 @@ ort xanten {
         verwaltung = pr_kr_rees
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort straelen {
@@ -561,6 +791,16 @@ ort straelen {
         besitzer   = PRU
         verwaltung = pr_kr_geldern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -585,6 +825,16 @@ ort schermbeck {
         verwaltung = pr_kr_duisburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort issum {
@@ -607,6 +857,16 @@ ort issum {
         besitzer   = PRU
         verwaltung = pr_kr_geldern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -631,6 +891,16 @@ ort duesseldorf {
         verwaltung = pr_kr_duesseldorf
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort neuss {
@@ -653,6 +923,16 @@ ort neuss {
         besitzer   = PRU
         verwaltung = pr_kr_neuss
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -677,6 +957,16 @@ ort grevenbroich {
         verwaltung = pr_kr_grevenbroich
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort dormagen {
@@ -699,6 +989,16 @@ ort dormagen {
         besitzer   = PRU
         verwaltung = pr_kr_muelheim
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -723,6 +1023,16 @@ ort hilden {
         verwaltung = pr_kr_solingen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort langenfeld {
@@ -745,6 +1055,16 @@ ort langenfeld {
         besitzer   = PRU
         verwaltung = pr_kr_muelheim
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -769,6 +1089,16 @@ ort rommerskirchen {
         verwaltung = pr_kr_bergheim
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort moenchengladbach {
@@ -791,6 +1121,16 @@ ort moenchengladbach {
         besitzer   = PRU
         verwaltung = pr_kr_gladbach
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -815,6 +1155,16 @@ ort krefeld {
         verwaltung = pr_kr_krefeld
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort viersen {
@@ -837,6 +1187,16 @@ ort viersen {
         besitzer   = PRU
         verwaltung = pr_kr_gladbach
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -861,6 +1221,16 @@ ort willich {
         verwaltung = pr_kr_krefeld
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort kempen {
@@ -884,6 +1254,16 @@ ort kempen {
         verwaltung = pr_kr_kempen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort niederkruechten {
@@ -906,5 +1286,15 @@ ort niederkruechten {
         besitzer   = PRU
         verwaltung = pr_kr_erkelenz
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }

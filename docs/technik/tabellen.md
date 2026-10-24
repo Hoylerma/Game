@@ -1,4 +1,4 @@
-# Tabellen der Datenpipeline (Meilensteine M2 bis M9)
+# Tabellen der Datenpipeline (Meilensteine M2 bis M10)
 
 Orte und Staaten samt ihrer Geschichte werden in **Tabellen** gepflegt, nicht direkt im
 Chronik-Skript. Das Werkzeug **Archivar** (`tools/archivar/archivar.py`) prüft die Tabellen und
@@ -222,6 +222,19 @@ Sie erzeugen daraus die Zeilen von `besitz.csv` zum 1848.03.01 und von `bevoelke
 | `einwohner_1846.csv` | `raum;einwohner;sicherheit;quelle` | Einwohnersumme je Raum: Verwaltungseinheit (`pr_rheinprovinz`) oder Staat (`BAV`). Ein Ort gehört zum ersten Raum seiner Verwaltungskette, sonst zu seinem Staat. |
 | `staedte_1846.csv` | `ort;einwohner;sicherheit;quelle` | feste Einwohnerzahl der Stadt; die Umgebung des Ortes kommt dazu |
 | `merkmale_1846.csv` | `gebiet;konfession;kultur;dichte;sicherheit;quelle` | Konfession und Kultur (Anteile wie in `bevoelkerung.csv`) und ländlicher Dichtefaktor; `gebiet` wie oben, dazu `verwaltung:<id>` und `staat:<TAG>`. Rang: Ort > Kreis > Bezirk > Landschaft > Verwaltung > Staat > Bundesland > Staat heute. Ohne Kultur gilt die Standardkultur der Landschaft. |
+
+## Eingaben für die Historie 1849–1870 (seit M10b)
+
+Ebenso liest sie nicht der Archivar, sondern `tools/geodaten/historie_1849_1870.py`
+([README](../../tools/geodaten/README.md#historie-18491870-historie_1849_1870py)). Das Werkzeug
+schreibt die Zeilen von `besitz.csv` und `bevoelkerung.csv` mit Datum 1849.01.01 bis 1870.12.31
+neu; die Zeilen von 1648 und 1848 bleiben unberührt (und `zuordnung.py` und `bevoelkerung_1846.py`
+lassen die späteren Zeilen hinter ihren eigenen stehen).
+
+| Tabelle | Spalten | Inhalt |
+|---|---|---|
+| `aenderungen_1849_1870.csv` | `ab;gebiet;staat;bund;verwaltung;sicherheit;quelle` | datierte Änderungen von Besitzer, Bundesgebiet und Verwaltung: `gebiet` wie in `territorien_1848.csv`, dazu `verwaltung:<einheit>`, `staat:<TAG>` (beides zum Stand vor `ab`) und `alle` (alle Orte mit Daten). Leere Felder setzen nichts, `verwaltung = -` hebt die Einheit auf; `staat = -` ist nicht erlaubt. |
+| `einwohner_1849_1870.csv`, `staedte_1849_1870.csv`, `merkmale_1849_1870.csv` | wie die Tabellen von 1846 | Bevölkerung der Orte, die erst nach 1848 Daten erhalten (Frankreich ab 1849), wie 1846 geschätzt |
 
 ## Prüfungen des Archivars
 
