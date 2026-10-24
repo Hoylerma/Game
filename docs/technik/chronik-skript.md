@@ -971,6 +971,8 @@ militaer {
     generalstab            = ja     # ja/nein (nein): die Heere stehen beim Start unter dem Generalstab
     generalstab_angriff    = 1.2    # 1–10; generalstab_rueckzug 2 (1–10)
     generalstab_umkreis_km = 60     # 1–1.000; generalstab_reichweite_km 300 (1–5.000)
+    # seit Schritt b1, optional:
+    fuehrung               = 0.2    # 0–1 (0): Kampfkraft × (1 + dies × (Führung des Heeres − 1))
 }
 
 heerwesen standard {          # ohne 'staat': für alle Staaten ohne eigenen Eintrag
@@ -988,6 +990,15 @@ festung mainz {              # seit Schritt a3
     name   = "Bundesfestung Mainz"   # optional, sonst „Festung <Ortsname>“; beginnt mit „Festung“ o. ä.
     seit   = 1816.01.01       # optional; bis (optional, ausschließlich)
     quelle = "…"              # optional
+}
+
+hinterland FRK {             # seit Schritt b1: Staat mit Land außerhalb der Karte, höchstens einmal
+    bevoelkerung = 36000000    # Pflicht, 0–1.000.000.000: zählt bei Besetzung und Kriegspunkten mit
+    einnahmen    = 4000000     # Pflicht, 0–1.000.000.000: Taler je Monat in die Staatskasse
+    ersatz       = 30000       # Pflicht, 0–1.000.000: Soldaten je Monat, solange der Staat Krieg führt
+    orte         = { verdun sedan }   # Pflicht: Orte am Kartenrand; der Ersatz kommt im ersten, den
+                                      # die eigene Seite hält
+    quelle       = "…"         # optional
 }
 
 garnison pru_garde {
@@ -1015,7 +1026,9 @@ und Abrüstung, `terrain_march` je Gelände), `State::army` (`ArmyProfile`), `Wo
 `World::neighbors`, seit a3 `World::fortresses`; Zustand sind die Heere (`World::armies`, seit a2 mit
 Weg und Resttagen), die Mobilmachung je Staat (`World::mobilizations`), die Belegung je Bahnstrecke
 (`World::rail_backlog`) und seit a3 Kriege, Kontrolle, Schlachten, Belagerungen, Verwundete, Gefangene
-und Gefallene, seit a5 die Ergebnisse beendeter Kriege (`World::war_results`).
+und Gefallene, seit a5 die Ergebnisse beendeter Kriege (`World::war_results`). Ein Hinterland mit
+unbekanntem Staat oder Ort oder zweimal für denselben Staat ist fatal; ein Staat ohne Ort zum Start
+entfällt mit seinem Hinterland (`World::hinterlands`).
 
 ### 3.31 `common/kriegsziele_<szenario>.chron` (seit M10)
 
@@ -1051,6 +1064,48 @@ Höchstdauer. Fehler sind:
 Ob ein Ziel im Krieg gilt (etwa eine Einheit mit Orten des Verteidigers), entscheidet erst der Kern bei
 der Erklärung; ein ungültiges entfällt. Ein Lauf, in dem die Erklärung scheitert, ist ein Verstoß. Im
 Kern: `WarTargets` (`uhrwerk/war_lab.hpp`).
+
+### 3.32 `common/aufmarsch_<szenario>.chron` (seit M10b)
+
+Aufmarsch eines Lesezeichens, das im Krieg beginnt ([militaer.md](militaer.md), Abschnitt 6.1). Der
+Lader liest die Datei nur für das gewählte Szenario und nur mit Militär zum Startdatum (sonst fatal);
+sie darf fehlen.
+
+```text
+heer pru_erste_armee {
+    staat        = PRU                 # Pflicht: besteht zum Startdatum
+    name         = "I. Armee"          # Pflicht
+    befehlshaber = "Prinz Friedrich Karl"   # optional
+    fuehrung     = 1.5                 # optional, 0–3 (1): wirkt mit der Regel 'fuehrung' (3.30)
+    ort          = goerlitz            # Pflicht: Ort mit Daten, auch im Land des Gegners
+    soldaten     = 93000               # Pflicht, über 0; Geschütze nach dem Heerwesen
+    moral        = 1                   # optional, über 0 bis 1 (1)
+    generalstab  = ja                  # optional (Standard: Regel 'generalstab')
+    quelle       = "…"                 # optional
+}
+krieg deutscher_krieg {
+    name        = "Deutscher Krieg"    # Pflicht
+    beginn      = 1866.06.14           # optional, nicht nach dem Startdatum (Standard: Startdatum)
+    anlass      = erklaerung           # optional: erklaerung, krise oder bundesexekution
+    angreifer   = { PRU MSC }          # Pflicht, Hauptpartei zuerst
+    verteidiger = { AUT SAX BAV }      # Pflicht, Hauptpartei zuerst
+    ziel        = { fuehrung = ja annexion = HAN }   # optional: Ziele der Angreifer, Einträge wie in
+    ziel_verteidiger = { entschaedigung = 6 }        # 3.31, auch mehrfach; ebenso der Verteidiger
+    quelle      = "…"
+}
+buendnis { staaten = { PRU AUT } }     # Bündnis zum Start
+garantie { von = GBR fuer = BEL }      # Garantie zum Start
+```
+
+Beim Start stehen die Heere als Feldarmeen an ihrem Ort, ihre Staaten sind mobil (die Garnisonen
+bleiben als Besatzung stehen, die übrigen Kriegführenden machen mobil); dann gelten die Bündnisse und
+beginnen die Kriege mit ihren Zielen (ein Ziel, das im Krieg nicht gilt, entfällt wie bei einer
+Erklärung). Nach dem Frieden lösen sich die Heere des Aufmarschs mit der Abrüstung auf. Fatal sind
+unbekannte Staaten, Orte und Felder der Ziele, ein Ort ohne Daten, eine Kennung zweimal, ein Staat auf
+beiden Seiten oder in zwei Kriegen, ein `beginn` nach dem Start und ein Bündnis ohne genau zwei
+Staaten. Im Kern: `World::deployments` (`Deployment`), `World::opening_wars` (`OpeningWar`) und
+`World::opening_treaties`; die Heere tragen seit b1 Befehlshaber und Führung (`Army::commander`,
+`Army::leadership`).
 
 ## 4. Startzustand
 

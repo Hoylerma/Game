@@ -121,7 +121,10 @@ Fixed terrain_factor(const World& world, Index location) {
 /// Kampfkraft eines Heeres mit dem eingesetzten Anteil (Abschnitt 4.2).
 Fixed strength(const World& world, const Army& army, Fixed deployed) {
     const Fixed firepower = world.states[at(army.state)].army.firepower;
-    return (army.soldiers * firepower + army.guns * world.military_rules.gun_value) * deployed * army.morale;
+    // Führung des Befehlshabers (seit b1): 1 ohne Befehlshaber, dann ist der Faktor genau 1.
+    const Fixed command = Fixed::one() + world.military_rules.leadership * (army.leadership - Fixed::one());
+    return (army.soldiers * firepower + army.guns * world.military_rules.gun_value) * deployed * army.morale *
+           command;
 }
 
 /// Rückzug in einen Nachbarort: zugänglich, ohne Gegner, bevorzugt von der eigenen Seite gehalten, dann
@@ -404,6 +407,12 @@ Holdings holdings(const World& world, const std::vector<Index>& owners, const st
         h.population += people;
         if (contains(holders, controller(world, static_cast<Index>(l)))) {
             h.occupied += people;
+        }
+    }
+    // Das Hinterland außerhalb der Karte (seit b1) zählt mit und kann nicht besetzt werden.
+    for (const Hinterland& hinterland : world.hinterlands) {
+        if (contains(owners, hinterland.state)) {
+            h.population += hinterland.population;
         }
     }
     return h;
@@ -946,11 +955,16 @@ bool start_war(World& world, std::vector<Index> attackers, std::vector<Index> de
     war.cause = cause;
     war.last_change = world.date;
     // Kriegsstärke beim Beginn (seit a4): Friedensstärke × Mobilmachungsfaktor je Seite.
+    // Seit b1 mindestens die Soldaten unter Waffen (Aufmarsch eines Lesezeichens).
+    const auto war_strength = [&](Index s) {
+        return Fixed::max(peace_strength(world, s) * world.states[at(s)].army.mobilization,
+                          state_soldiers(world, s));
+    };
     for (const Index s : attackers) {
-        war.attacker_strength += peace_strength(world, s) * world.states[at(s)].army.mobilization;
+        war.attacker_strength += war_strength(s);
     }
     for (const Index s : defenders) {
-        war.defender_strength += peace_strength(world, s) * world.states[at(s)].army.mobilization;
+        war.defender_strength += war_strength(s);
     }
     for (const WarGoal& goal : goals) {
         if (valid_war_goal(world, war, goal)) {
@@ -1145,8 +1159,11 @@ Fixed war_score(const World& world, const War& war, bool attacker) {
     if (h.population > Fixed::zero()) {
         score += rules.points_occupation * h.occupied / h.population;
     }
+    // Liegt die Hauptstadt im Hinterland (seit b1: Paris), zählt die Hauptstadt auf der Karte nicht.
     const Index capital = world.states[at(enemies.front())].capital;
-    if (capital != kNone && contains(own, controller(world, capital))) {
+    const bool beyond = std::any_of(world.hinterlands.begin(), world.hinterlands.end(),
+                                    [&](const Hinterland& hl) { return hl.state == enemies.front(); });
+    if (capital != kNone && !beyond && contains(own, controller(world, capital))) {
         score += rules.points_capital;
     }
     const Fixed inflicted = attacker ? war.attacker_inflicted : war.defender_inflicted;

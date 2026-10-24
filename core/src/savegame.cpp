@@ -34,7 +34,7 @@ constexpr int kZstdLevel = 3;
 /// Obergrenze der unkomprimierten Nutzdaten (Schutz vor beschädigten Längenangaben).
 constexpr std::uint64_t kMaxPayload = std::uint64_t{1} << 31;
 /// Stand des Militärs im Zustand (seit M10, Inhaltsbereich militaer): 1 = Schritt a1 (Garnisonen).
-constexpr std::uint64_t kMilitaryContentVersion = 5;
+constexpr std::uint64_t kMilitaryContentVersion = 6;
 
 bool fail(std::string* error, std::string message) {
     if (error != nullptr) {
@@ -873,7 +873,8 @@ std::string validate_state(const Simulation& sim) {
                 !none_or_in(a.garrison, w.garrisons.size()) || a.soldiers < Fixed::zero() ||
                 a.guns < Fixed::zero() || a.morale < Fixed::zero() || a.morale > Fixed::one() ||
                 static_cast<int>(a.status) > static_cast<int>(ArmyStatus::Retreat) ||
-                !none_or_in(a.previous, w.locations.size()) || a.days_here < 0) {
+                !none_or_in(a.previous, w.locations.size()) || a.days_here < 0 ||
+                a.leadership < Fixed::zero() || a.leadership > Fixed::from_int(3)) {
                 return "Heer mit ungültigem Verweis oder Wert";
             }
             // Weg (seit a2): nur auf dem Marsch, der Bahn oder dem Rückzug, mit gültigen Orten und Strecken.
@@ -1343,6 +1344,56 @@ ContentFingerprint content_fingerprint(const World& w) {
             }
             h.i64(r.stalemate_months);
             h.u64(r.staff ? 1 : 0);
+            // Lesezeichen im Krieg (seit b1): Führung, Aufmarsch, Kriege und Bündnisse zum Start, Hinterland.
+            h.fixed(r.leadership);
+            h.u64(w.deployments.size());
+            for (const Deployment& d : w.deployments) {
+                h.text(d.id);
+                h.i64(d.state);
+                h.i64(d.location);
+                h.text(d.name);
+                h.text(d.commander);
+                h.fixed(d.leadership);
+                h.fixed(d.soldiers);
+                h.fixed(d.morale);
+                h.u64(d.staff ? 1 : 0);
+            }
+            h.u64(w.opening_wars.size());
+            for (const OpeningWar& o : w.opening_wars) {
+                h.text(o.id);
+                h.text(o.name);
+                h.i64(to_day_number(o.started));
+                h.u64(static_cast<std::uint64_t>(o.cause));
+                for (const std::vector<Index>* side : {&o.attackers, &o.defenders}) {
+                    h.u64(side->size());
+                    for (const Index s : *side) {
+                        h.i64(s);
+                    }
+                }
+                h.u64(o.goals.size());
+                for (const WarGoal& g : o.goals) {
+                    h.u64(static_cast<std::uint64_t>(g.kind));
+                    h.u64(g.attacker ? 1 : 0);
+                    h.i64(g.param);
+                }
+            }
+            h.u64(w.opening_treaties.size());
+            for (const Treaty& t : w.opening_treaties) {
+                h.u64(static_cast<std::uint64_t>(t.kind));
+                h.i64(t.from);
+                h.i64(t.to);
+            }
+            h.u64(w.hinterlands.size());
+            for (const Hinterland& hl : w.hinterlands) {
+                h.i64(hl.state);
+                h.fixed(hl.population);
+                h.fixed(hl.income);
+                h.fixed(hl.replacements);
+                h.u64(hl.entries.size());
+                for (const Index e : hl.entries) {
+                    h.i64(e);
+                }
+            }
             h.u64(w.fortresses.size());
             for (const Fortress& f : w.fortresses) {
                 h.text(f.id);

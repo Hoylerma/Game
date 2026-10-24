@@ -1499,3 +1499,248 @@ TEST_CASE("Militär: Kriegslabor") {
         CHECK(s.violations[2].value == Fixed::from_int(3));
     }
 }
+
+// ─── Schritt b1: Lesezeichen im Krieg ───────────────────────────────────────
+
+namespace {
+
+constexpr std::string_view kDeployment =
+    "heer bra_erste {\n    staat = BRA\n    name = \"I. Armee\"\n    befehlshaber = \"Derfflinger\"\n"
+    "    fuehrung = 2\n    ort = potsdam\n    soldaten = 5000\n    moral = 0.9\n    quelle = "
+    "\"Testdaten\"\n}\n"
+    "krieg sachsenkrieg {\n    name = \"Sächsischer Krieg\"\n    beginn = 1648.10.01\n"
+    "    angreifer = { BRA }\n    verteidiger = { SAX }\n    ziel = { annexion = SAX }\n"
+    "    ziel_verteidiger = { entschaedigung = 2 }\n}\n"
+    "buendnis { staaten = { BRA ANH } }\n";
+
+constexpr std::string_view kHinterland =
+    "hinterland SAX {\n    bevoelkerung = 100000\n    einnahmen = 1000\n    ersatz = 500\n"
+    "    orte = { leipzig dresden }\n}\n";
+
+/// Fixture mit Aufmarsch für das Szenario westfaelischer_frieden und Hinterland Sachsens.
+void add_deployment(const MilitaryData& data, std::string_view deployment = kDeployment) {
+    testhilfen::write_file(data.dir() / "common/aufmarsch_westfaelischer_frieden.chron", deployment);
+    testhilfen::write_file(data.dir() / "common/militaer.chron",
+                           testhilfen::read_file(data.dir() / "common/militaer.chron") +
+                               std::string(kHinterland));
+}
+
+const uhrwerk::Army* army_named(const World& w, std::string_view name) {
+    const auto it = std::find_if(w.armies.begin(), w.armies.end(),
+                                 [&](const uhrwerk::Army& a) { return a.name == name; });
+    return it == w.armies.end() ? nullptr : &*it;
+}
+
+} // namespace
+
+TEST_CASE("Militär: Lesezeichen im Krieg") {
+    const MilitaryData data;
+    add_deployment(data);
+    const World start = with_strength(data.load(), 10, 10);
+    const Index bra = start.find_state("BRA");
+    const Index sax = start.find_state("SAX");
+    const Index anh = start.find_state("ANH");
+    REQUIRE(start.deployments.size() == 1);
+    REQUIRE(start.opening_wars.size() == 1);
+    REQUIRE(start.hinterlands.size() == 1);
+    CHECK(start.hinterlands[0].entries.size() == 2);
+    CHECK(start.opening_wars[0].goals.size() == 2);
+
+    SUBCASE("Aufmarsch, Bündnis und Krieg zum Start") {
+        const Simulation sim(start);
+        const World& v = sim.world();
+        const uhrwerk::Army* first = army_named(v, "I. Armee");
+        REQUIRE(first != nullptr);
+        CHECK(first->state == bra);
+        CHECK(first->location == v.find_location("potsdam"));
+        CHECK(first->commander == "Derfflinger");
+        CHECK(first->leadership == Fixed::from_int(2));
+        CHECK(first->soldiers == Fixed::from_int(5000));
+        CHECK(first->morale == Fixed::from_ratio(9, 10));
+        CHECK(first->status == ArmyStatus::Rest);
+        CHECK(first->garrison == uhrwerk::kNone);
+        CHECK(uhrwerk::mobilization_phase(v, bra) == MobilizationPhase::Mobilized);
+        CHECK(uhrwerk::mobilization_phase(v, sax) == MobilizationPhase::Mobilizing);
+        // Die Garnisonen Brandenburgs bleiben stehen.
+        CHECK(std::count_if(v.armies.begin(), v.armies.end(), [&](const uhrwerk::Army& a) {
+                  return a.state == bra && a.status == ArmyStatus::Garrison;
+              }) == 2);
+        REQUIRE(v.wars.size() == 1);
+        const uhrwerk::War& war = v.wars[0];
+        CHECK(war.started == uhrwerk::Date{1648, 10, 1});
+        CHECK(war.attackers == std::vector<Index>{bra});
+        CHECK(war.defenders == std::vector<Index>{sax});
+        CHECK(war.goals.size() == 2);
+        CHECK(war.attacker_strength >= Fixed::from_int(5000));
+        CHECK(std::any_of(v.treaties.begin(), v.treaties.end(), [&](const uhrwerk::Treaty& t) {
+            return t.kind == uhrwerk::TreatyKind::Alliance && t.from == bra && t.to == anh;
+        }));
+        CHECK(chronicle_contains(v, "Brandenburg erklärt Sachsen den Krieg"));
+    }
+
+    SUBCASE("Hinterland: Ersatz, Einnahmen und Kriegspunkte") {
+        Simulation sim(start);
+        const World& v = sim.world();
+        while (v.date.day != 1) {
+            sim.step_day();
+        }
+        // Am Monatsersten trifft der Ersatz in Leipzig ein (erster Ort am Kartenrand).
+        sim.step_day();
+        const uhrwerk::Army* replacement = army_named(v, "Ersatz Leipzig");
+        REQUIRE(replacement != nullptr);
+        CHECK(replacement->state == sax);
+        CHECK(replacement->soldiers == Fixed::from_int(500));
+        // Das Hinterland zählt bei der Besetzung mit, die Hauptstadt auf der Karte nicht.
+        World occupied = v;
+        for (std::size_t l = 0; l < occupied.locations.size(); ++l) {
+            if (occupied.locations[l].owner == sax) {
+                occupied.control[l] = bra;
+            }
+        }
+        World plain = occupied;
+        plain.hinterlands.clear();
+        const Fixed with = uhrwerk::war_score(occupied, occupied.wars[0], true);
+        const Fixed without = uhrwerk::war_score(plain, plain.wars[0], true);
+        CHECK(with < without);
+        CHECK(uhrwerk::war_weariness(occupied, occupied.wars[0], false) <
+              uhrwerk::war_weariness(plain, plain.wars[0], false));
+    }
+
+    SUBCASE("Führung in der Schlacht") {
+        const auto inflicted = [&](std::string_view leadership) {
+            const MilitaryData d;
+            d.add_rules("    fuehrung = 0.5\n");
+            std::string text(kDeployment);
+            testhilfen::write_file(d.dir() / "common/aufmarsch_westfaelischer_frieden.chron", text);
+            testhilfen::replace_in_file(d.dir() / "common/aufmarsch_westfaelischer_frieden.chron",
+                                        "fuehrung = 2", "fuehrung = " + std::string(leadership));
+            testhilfen::replace_in_file(d.dir() / "common/aufmarsch_westfaelischer_frieden.chron",
+                                        "soldaten = 5000", "soldaten = 1000");
+            Simulation sim(with_strength(d.load(), 10, 40));
+            const uhrwerk::Army* first = army_named(sim.world(), "I. Armee");
+            REQUIRE(first != nullptr);
+            sim.submit(command(CommandType::March, bra, first->id, sim.world().find_location("dresden")));
+            sim.step_days(12);
+            const World& v = sim.world();
+            if (!v.wars.empty()) {
+                return v.wars[0].attacker_inflicted;
+            }
+            REQUIRE(v.war_results.size() == 1); // Frieden am Monatsersten
+            return v.war_results[0].defender_losses;
+        };
+        const Fixed weak = inflicted("1");
+        CHECK(weak > Fixed::zero());
+        CHECK(inflicted("3") > weak);
+    }
+
+    SUBCASE("Frieden: Aufmarschheere lösen sich auf") {
+        Simulation sim(start);
+        const World& v = sim.world();
+        sim.submit(peace(bra, uhrwerk::PeaceTerms::Capitulation));
+        sim.step_days(40);
+        CHECK(v.wars.empty());
+        CHECK(army_named(v, "I. Armee") == nullptr);
+        CHECK(uhrwerk::mobilization_phase(v, bra) == MobilizationPhase::Peace);
+        CHECK(std::all_of(v.armies.begin(), v.armies.end(),
+                          [](const uhrwerk::Army& a) { return a.garrison != uhrwerk::kNone; }));
+    }
+
+    SUBCASE("Spielstand und Wiederholung") {
+        Simulation full(start);
+        full.step_days(60);
+        Simulation part(start);
+        part.step_days(20);
+        const Bytes bytes = uhrwerk::save_game(part, SaveMeta{});
+        uhrwerk::LoadedGame loaded = uhrwerk::load_game(bytes, start, 2);
+        INFO(loaded.error);
+        REQUIRE(loaded.ok());
+        CHECK(loaded.simulation->world().armies == part.world().armies);
+        loaded.simulation->step_days(40);
+        CHECK(loaded.simulation->checksum() == full.checksum());
+        const uhrwerk::ReplayResult replay = uhrwerk::run_replay(uhrwerk::make_replay(full), start, 2);
+        INFO(replay.error);
+        CHECK(replay.ok);
+        // Ein anderer Aufmarsch ist anderer Inhalt.
+        World other = start;
+        other.deployments[0].soldiers = Fixed::from_int(6000);
+        CHECK_FALSE(uhrwerk::load_game(bytes, other, 2).ok());
+    }
+
+    SUBCASE("Nur im eigenen Szenario") {
+        const uhrwerk::LoadResult result = uhrwerk::load_world(data.dir().path(), "jahresbeginn_1650");
+        INFO(testhilfen::issues_text(result));
+        REQUIRE(result.ok());
+        CHECK(result.world->deployments.empty());
+        CHECK(result.world->opening_wars.empty());
+        CHECK(result.world->hinterlands.size() == 1);
+    }
+}
+
+TEST_CASE("Militär: Ladefehler im Aufmarsch") {
+    const auto issues = [](std::string_view deployment, std::string_view hinterland = "") {
+        const MilitaryData data;
+        testhilfen::write_file(data.dir() / "common/aufmarsch_westfaelischer_frieden.chron", deployment);
+        if (!hinterland.empty()) {
+            testhilfen::write_file(data.dir() / "common/militaer.chron",
+                                   testhilfen::read_file(data.dir() / "common/militaer.chron") +
+                                       std::string(hinterland));
+        }
+        return uhrwerk::load_world(data.dir().path());
+    };
+    for (const auto& [text, message] : {
+             std::pair{"heer a { staat = XXX name = \"A\" ort = potsdam soldaten = 10 }",
+                       "unbekannter Staat 'XXX'"},
+             std::pair{"heer a { staat = BRA name = \"A\" ort = nirgends soldaten = 10 }",
+                       "unbekannter Ort 'nirgends'"},
+             std::pair{"heer a { staat = BRA name = \"A\" ort = potsdam soldaten = 0 }", "'soldaten'"},
+             std::pair{"heer a { staat = BRA name = \"A\" ort = potsdam soldaten = 10 fuehrung = 4 }",
+                       "'fuehrung'"},
+             std::pair{"heer a { staat = BRA name = \"A\" ort = potsdam soldaten = 10 }\n"
+                       "heer a { staat = BRA name = \"B\" ort = potsdam soldaten = 10 }",
+                       "heer a ist mehrfach vorhanden"},
+             std::pair{"krieg k { name = \"K\" angreifer = { BRA } verteidiger = { BRA } }",
+                       "steht auf beiden Seiten"},
+             std::pair{"krieg k { name = \"K\" angreifer = { BRA } verteidiger = { SAX } }\n"
+                       "krieg l { name = \"L\" angreifer = { ANH } verteidiger = { SAX } }",
+                       "führt schon einen anderen Krieg"},
+             std::pair{
+                 "krieg k { name = \"K\" beginn = 1700.01.01 angreifer = { BRA } verteidiger = { SAX } }",
+                 "'beginn' liegt nach dem Startdatum"},
+             std::pair{"krieg k { name = \"K\" anlass = laune angreifer = { BRA } verteidiger = { SAX } }",
+                       "'anlass' in krieg k erwartet"},
+             std::pair{
+                 "krieg k { name = \"K\" angreifer = { BRA } verteidiger = { SAX } ziel = { beute = 1 } }",
+                 "unbekanntes Kriegsziel 'beute'"},
+             std::pair{"krieg k { name = \"K\" angreifer = { BRA } verteidiger = { SAX } ziel = { "
+                       "entschaedigung = 30 } }",
+                       "ganze Monatseinnahmen"},
+             std::pair{"krieg k { name = \"K\" angreifer = { } verteidiger = { SAX } }",
+                       "nennt keinen Staat"},
+             std::pair{"buendnis { staaten = { BRA SAX ANH } }", "buendnis erwartet genau zwei Staaten"},
+             std::pair{"garantie { von = BRA fuer = BRA }", "derselbe Staat"},
+             std::pair{"truppe a { }", "unbekannt"},
+         }) {
+        CAPTURE(text);
+        const uhrwerk::LoadResult result = issues(text);
+        INFO(testhilfen::issues_text(result));
+        CHECK(testhilfen::has_issue(result, message, std::string_view(message) != "unbekannt"));
+    }
+    SUBCASE("Hinterland") {
+        const uhrwerk::LoadResult result =
+            issues("", "hinterland SAX { bevoelkerung = 1 einnahmen = 1 ersatz = 1 orte = { nirgends } }\n"
+                       "hinterland SAX { bevoelkerung = 1 einnahmen = 1 ersatz = 1 orte = { dresden } }\n"
+                       "hinterland XXX { bevoelkerung = 1 einnahmen = 1 ersatz = 1 orte = { dresden } }\n");
+        INFO(testhilfen::issues_text(result));
+        CHECK(testhilfen::has_issue(result, "unbekannter Ort 'nirgends' in hinterland SAX"));
+        CHECK(testhilfen::has_issue(result, "hinterland SAX ist mehrfach vorhanden"));
+        CHECK(testhilfen::has_issue(result, "unbekannter Staat 'XXX' in hinterland"));
+    }
+    SUBCASE("Aufmarsch ohne Militär") {
+        const MilitaryData data;
+        testhilfen::replace_in_file(data.dir() / "common/militaer.chron", "seit = 1648.01.01",
+                                    "seit = 1700.01.01");
+        testhilfen::write_file(data.dir() / "common/aufmarsch_westfaelischer_frieden.chron", "");
+        const uhrwerk::LoadResult result = uhrwerk::load_world(data.dir().path());
+        CHECK(testhilfen::has_issue(result, "Aufmarsch ohne Militär zum Startdatum"));
+    }
+}
