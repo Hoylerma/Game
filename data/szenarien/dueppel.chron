@@ -1,0 +1,15 @@
+# Kriegslesezeichen „Düppel“ (Meilenstein M10b, Schritt b1; docs/technik/militaer.md, Abschnitt 6.1).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.7. Am 1. Februar 1864 überschreiten Preußen und
+# Österreich die Eider: Der Deutsch-Dänische Krieg beginnt (Ultimatum vom 16. Januar zur Rücknahme der
+# Novemberverfassung). Aufmarsch und Kriegsziele: common/aufmarsch_dueppel.chron. Bevölkerung wie 1846
+# (Entscheidung 14).
+
+szenario dueppel {
+    name     = "Düppel"
+    datum    = 1864.02.01
+    spieler  = PRU
+    spielbar = { PRU AUT DEN }
+    waehrung = "Taler"
+    tragfaehigkeit_faktor = 2.5   # wie 1848 (keine Hochrechnung, Entscheidung 14)
+}

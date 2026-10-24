@@ -1,0 +1,56 @@
+# Aufmarsch des Lesezeichens „Düppel“ (1. Februar 1864; Meilenstein M10b, Schritt b1).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.32; militaer.md, Abschnitt 6.1. Die alliierte
+# Armee unter Wrangel überschreitet die Eider; die dänische Armee unter de Meza steht am Danewerk.
+# Stärken und Orte ungeprüft, Führung (0–3, 1 ohne Wirkung) Spielwert.
+
+krieg deutsch_daenischer_krieg {
+    name        = "Deutsch-Dänischer Krieg"
+    beginn      = 1864.02.01
+    angreifer   = { PRU AUT }
+    verteidiger = { DEN }
+    ziel        = { gebiet = dk_schleswig gebiet = dk_holstein gebiet = dk_lauenburg }
+    quelle      = "Ultimatum vom 16.1.1864; Kriegsziel nach dem Wiener Frieden (30.10.1864): Schleswig, Holstein und Lauenburg"
+}
+
+buendnis { staaten = { PRU AUT } quelle = "Punktation vom 16.1.1864" }
+
+heer pru_friedrich_karl {
+    staat        = PRU
+    name         = "I. Korps"
+    befehlshaber = "Prinz Friedrich Karl"
+    fuehrung     = 1.2
+    ort          = eckernfoerde
+    soldaten     = 25000
+    quelle = "Stärke und Ort nach Wissensstand ohne Quellenzugang (ungeprüft), Führung Spielwert (M10b)"
+}
+
+heer pru_garde_1864 {
+    staat        = PRU
+    name         = "Gardedivision"
+    befehlshaber = "Eduard von der Mülbe"
+    fuehrung     = 1
+    ort          = rendsburg
+    soldaten     = 12000
+    quelle = "Stärke und Ort nach Wissensstand ohne Quellenzugang (ungeprüft), Führung Spielwert (M10b)"
+}
+
+heer aut_gablenz {
+    staat        = AUT
+    name         = "VI. Korps"
+    befehlshaber = "Ludwig von Gablenz"
+    fuehrung     = 1.5
+    ort          = rendsburg
+    soldaten     = 20000
+    quelle = "Stärke und Ort nach Wissensstand ohne Quellenzugang (ungeprüft), Führung Spielwert (M10b)"
+}
+
+heer den_de_meza {
+    staat        = DEN
+    name         = "Dänische Armee"
+    befehlshaber = "Christian de Meza"
+    fuehrung     = 1
+    ort          = schleswig
+    soldaten     = 38000
+    quelle = "Stärke und Ort nach Wissensstand ohne Quellenzugang (ungeprüft), Führung Spielwert (M10b)"
+}

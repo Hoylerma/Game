@@ -1,4 +1,4 @@
-# Militär (Meilenstein M10, Schritte a1–a4; docs/technik/militaer.md, Abschnitte 3–5).
+# Militär (Meilenstein M10, Schritte a1–a4 und b1; docs/technik/militaer.md, Abschnitte 3–6).
 #
 # Format: docs/technik/chronik-skript.md, Abschnitt 3.30.
 # Das Militär gilt ab 'seit' (Entscheidung 14): Vor diesem Datum (Lesezeichen 1648) gibt es keine Heere,
@@ -86,6 +86,10 @@ militaer {
     generalstab_rueckzug      = 2
     generalstab_umkreis_km    = 60
     generalstab_reichweite_km = 300
+
+    # Führung (Schritt b1): Kampfkraft × (1 + fuehrung × (Führung − 1)) je Heer; die Heere des Aufmarschs
+    # tragen Befehlshaber mit Führung 0–3, alle übrigen Führung 1 (ohne Wirkung).
+    fuehrung = 0.2
 }
 
 # ── Heerwesen ──────────────────────────────────────────────────────────────
@@ -152,7 +156,7 @@ garnison bav_nuernberg { staat = BAV ort = nuernberg anteil = 0.20 name = "Garni
 # 1842). Die Festungen in Frankreich (Metz, Straßburg, Bitsch) folgen mit Frankreich (Schritt b1).
 
 festung mainz       { ort = mainz               stufe = 3 name = "Bundesfestung Mainz" }
-festung luxemburg   { ort = luxemburg           stufe = 3 name = "Bundesfestung Luxemburg" }
+festung luxemburg   { ort = luxemburg           stufe = 3 name = "Bundesfestung Luxemburg" bis = 1867.09.09 }   # geschleift nach dem Londoner Vertrag
 festung landau      { ort = landau_in_der_pfalz stufe = 2 name = "Bundesfestung Landau" }
 festung ulm         { ort = ulm                 stufe = 2 name = "Bundesfestung Ulm" }
 festung rastatt     { ort = rastatt             stufe = 2 name = "Bundesfestung Rastatt" }
@@ -190,3 +194,122 @@ festung germersheim { ort = germersheim stufe = 2 }
 festung wuerzburg   { ort = wuerzburg   stufe = 1 name = "Festung Marienberg" }
 
 festung rendsburg   { ort = rendsburg   stufe = 2 }
+
+# ── 1849–1870 (Schritt b1, militaer.md Abschnitt 6.2) ──────────────────────
+# Für die Kriegslesezeichen 1864, 1866 und 1870; das Lesezeichen 1848 bleibt unberührt (alles mit
+# späterem 'seit'). Heerwesen: es gilt der jüngste Eintrag bis zum Start.
+
+heerwesen pru_1860 {
+    staat             = PRU
+    seit              = 1860.02.10
+    bewaffnung        = 1.5      # Zündnadelgewehr allgemein, Schnellfeuer im Liegen
+    geschuetze        = 3
+    mobilmachung      = 2.8      # Heeresreform: drei Jahrgänge Dienst, vier Reserve, Landwehr
+    mobilmachung_tage = 21       # Mobilmachungsplan mit der Bahn (1866 und 1870 rund drei Wochen)
+    quelle = "Spielwert M10b: Heeresreform Roons ab 1860; Wissensstand ohne Quellenzugang"
+}
+
+heerwesen aut_1859 {
+    staat             = AUT
+    seit              = 1859.07.01
+    bewaffnung        = 1.0      # Lorenz-Vorderlader, Stoßtaktik
+    geschuetze        = 3.5      # gezogene Vorderlader-Artillerie, 1866 der preußischen überlegen
+    mobilmachung      = 2.2
+    mobilmachung_tage = 42
+    quelle = "Spielwert M10b: Armee nach Solferino; Wissensstand ohne Quellenzugang"
+}
+
+heerwesen den_1849 {
+    staat             = DEN
+    seit              = 1849.01.01
+    bewaffnung        = 1.0
+    geschuetze        = 3
+    mobilmachung      = 2.0
+    mobilmachung_tage = 30
+    quelle = "Spielwert M10b: dänisches Heer 1864 mit Vorderladern; Wissensstand ohne Quellenzugang"
+}
+
+heerwesen sax_1867 {
+    staat             = SAX
+    seit              = 1867.01.01
+    bewaffnung        = 1.5      # preußisches Muster im Norddeutschen Bund (XII. Armeekorps)
+    geschuetze        = 3
+    mobilmachung      = 2.6
+    mobilmachung_tage = 21
+    quelle = "Spielwert M10b: Militärkonvention mit Preußen 1867; Wissensstand ohne Quellenzugang"
+}
+
+heerwesen bav_1867 {
+    staat             = BAV
+    seit              = 1867.01.01
+    bewaffnung        = 1.3      # Podewils-Hinterlader umgebaut, Werder-Gewehr ab 1869
+    geschuetze        = 2.5
+    mobilmachung      = 2.4
+    mobilmachung_tage = 28
+    quelle = "Spielwert M10b: bayerische Heeresreform nach 1866; Wissensstand ohne Quellenzugang"
+}
+
+heerwesen frk_1849 {
+    staat             = FRK
+    seit              = 1849.01.01
+    bewaffnung        = 1.0
+    geschuetze        = 2.5
+    mobilmachung      = 1.6      # Berufsheer mit wenig Reserve
+    mobilmachung_tage = 28
+    quelle = "Spielwert M10b: französisches Heer mit langer Dienstzeit; Wissensstand ohne Quellenzugang"
+}
+
+heerwesen frk_1866 {
+    staat             = FRK
+    seit              = 1866.08.30
+    bewaffnung        = 1.7      # Chassepot (1866), reicht weiter als das Zündnadelgewehr; Mitrailleuse
+    geschuetze        = 2.5      # Vorderlader-Artillerie, der Krupp-Hinterladern unterlegen
+    mobilmachung      = 1.6      # Garde mobile kaum ausgebildet, Mobilmachung 1870 ungeordnet
+    mobilmachung_tage = 21
+    quelle = "Spielwert M10b: Armee nach der Reform Niels (1868); Wissensstand ohne Quellenzugang"
+}
+
+# Garnisonen nach 1864/1866: die neuen preußischen Armeekorps, das sächsische XII. Korps, Frankreich.
+garnison aut_holstein { staat = AUT ort = kiel      anteil = 0.02 name = "Brigade Kalik"         seit = 1865.08.14 bis = 1866.06.12 }
+garnison pru_9        { staat = PRU ort = rendsburg anteil = 0.11 name = "IX. Armeekorps"        seit = 1866.09.20 }
+garnison pru_10       { staat = PRU ort = hannover  anteil = 0.11 name = "X. Armeekorps"         seit = 1866.09.20 }
+garnison pru_11       { staat = PRU ort = kassel    anteil = 0.11 name = "XI. Armeekorps"        seit = 1866.09.20 }
+garnison sax_12       { staat = SAX ort = dresden   anteil = 1    name = "XII. Armeekorps"       seit = 1867.01.01 }
+garnison frk_metz       { staat = FRK ort = metz       anteil = 0.4 name = "Garnison Metz"       seit = 1849.01.01 }
+garnison frk_strassburg { staat = FRK ort = strassburg anteil = 0.3 name = "Garnison Straßburg"  seit = 1849.01.01 }
+garnison frk_lille      { staat = FRK ort = lille      anteil = 0.2 name = "Garnison Lille"      seit = 1849.01.01 }
+garnison frk_belfort    { staat = FRK ort = beffert    anteil = 0.1 name = "Garnison Belfort"    seit = 1849.01.01 }
+
+# Festungen 1849–1870: Danewerk und Düppeler Schanzen (1864), Frankreich (ab 1849 in der Welt).
+festung danewerk     { ort = schleswig    stufe = 1 name = "Danewerk"           seit = 1861.01.01 bis = 1864.10.30 }
+festung dueppel      { ort = gravenstein  stufe = 2 name = "Düppeler Schanzen"  seit = 1861.01.01 bis = 1864.10.30 }
+festung metz         { ort = metz         stufe = 3 seit = 1849.01.01 }
+festung strassburg   { ort = strassburg   stufe = 3 seit = 1849.01.01 }
+festung belfort      { ort = beffert      stufe = 2 name = "Festung Belfort" seit = 1849.01.01 }
+festung bitsch       { ort = bitsch       stufe = 2 seit = 1849.01.01 }
+festung diedenhofen  { ort = diedenhofen  stufe = 2 seit = 1849.01.01 }
+festung pfalzburg    { ort = pfalzburg    stufe = 1 seit = 1849.01.01 }
+festung toul         { ort = toul         stufe = 1 seit = 1849.01.01 }
+festung verdun       { ort = verdun       stufe = 1 seit = 1849.01.01 }
+festung sedan        { ort = sedan        stufe = 1 seit = 1849.01.01 }
+festung longwy       { ort = longwy       stufe = 1 seit = 1849.01.01 }
+festung montmedy     { ort = montmedy     stufe = 1 seit = 1849.01.01 }
+festung schlettstadt { ort = schlettstadt stufe = 1 seit = 1849.01.01 }
+
+# Hinterland (Entscheidung 12, Abschnitt 6.2): Land außerhalb des Kartenausschnitts. Einnahmen im
+# Maßstab des Modells (rund 1 Taler je Einwohner und Jahr wie die Staaten 1848), Ersatz je Kriegsmonat.
+hinterland FRK {
+    bevoelkerung = 31400000   # Frankreich 1846 rund 35,4 Mio., davon 4,0 Mio. im Kartenausschnitt
+    einnahmen    = 2600000
+    ersatz       = 25000      # Depots, Garde mobile, nach Sedan die Heere der Republik
+    orte         = { verdun sedan charleville_mezieres bar_le_duc }
+    quelle       = "Spielwerte M10b nach Wissensstand ohne Quellenzugang; Kalibrierung in b2"
+}
+
+hinterland DEN {
+    bevoelkerung = 1600000    # Königreich nördlich der Königsau, Seeland und Fünen (Zählung 1860)
+    einnahmen    = 130000
+    ersatz       = 3000
+    orte         = { christiansfeld roedding }
+    quelle       = "Spielwerte M10b nach Wissensstand ohne Quellenzugang; Kalibrierung in b2"
+}
