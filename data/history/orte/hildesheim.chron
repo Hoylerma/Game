@@ -30,6 +30,21 @@ ort hildesheim {
         verwaltung = hn_hildesheim
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort sarstedt {
@@ -52,6 +67,21 @@ ort sarstedt {
         besitzer   = HAN
         verwaltung = hn_hildesheim
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -76,6 +106,21 @@ ort bad_salzdetfurth {
         verwaltung = hn_hildesheim
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort bockenem {
@@ -98,6 +143,21 @@ ort bockenem {
         besitzer   = HAN
         verwaltung = hn_hildesheim
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -122,6 +182,21 @@ ort algermissen {
         verwaltung = hn_hildesheim
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort soehlde {
@@ -144,6 +219,21 @@ ort soehlde {
         besitzer   = HAN
         verwaltung = hn_hildesheim
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -168,6 +258,21 @@ ort schellerten {
         verwaltung = hn_hildesheim
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort holle {
@@ -190,6 +295,21 @@ ort holle {
         besitzer   = HAN
         verwaltung = hn_hildesheim
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -214,6 +334,21 @@ ort lamspringe {
         verwaltung = hn_hildesheim
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort alfeld_leine {
@@ -236,6 +371,21 @@ ort alfeld_leine {
         besitzer   = HAN
         verwaltung = hn_hildesheim
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -260,6 +410,21 @@ ort nordstemmen {
         verwaltung = hn_hildesheim
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort gronau_hildesheim {
@@ -283,6 +448,21 @@ ort gronau_hildesheim {
         verwaltung = hn_hildesheim
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort duingen {
@@ -305,5 +485,20 @@ ort duingen {
         besitzer   = HAN
         verwaltung = hn_hildesheim
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }

@@ -31,6 +31,26 @@ ort fehmarn {
         verwaltung = dk_holstein
         bund       = ja
     }
+
+    1864.10.30 = {
+        besitzer   = AUT
+        verwaltung = au_holstein
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort oldenburg_in_holstein {
@@ -53,6 +73,26 @@ ort oldenburg_in_holstein {
         besitzer   = DEN
         verwaltung = dk_holstein
         bund       = ja
+    }
+
+    1864.10.30 = {
+        besitzer   = AUT
+        verwaltung = au_holstein
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -77,6 +117,26 @@ ort groemitz {
         verwaltung = dk_holstein
         bund       = ja
     }
+
+    1864.10.30 = {
+        besitzer   = AUT
+        verwaltung = au_holstein
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort heiligenhafen {
@@ -99,6 +159,26 @@ ort heiligenhafen {
         besitzer   = DEN
         verwaltung = dk_holstein
         bund       = ja
+    }
+
+    1864.10.30 = {
+        besitzer   = AUT
+        verwaltung = au_holstein
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -123,6 +203,26 @@ ort lensahn {
         verwaltung = dk_holstein
         bund       = ja
     }
+
+    1864.10.30 = {
+        besitzer   = AUT
+        verwaltung = au_holstein
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort wangels {
@@ -145,6 +245,26 @@ ort wangels {
         besitzer   = DEN
         verwaltung = dk_holstein
         bund       = ja
+    }
+
+    1864.10.30 = {
+        besitzer   = AUT
+        verwaltung = au_holstein
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -169,6 +289,26 @@ ort schoenwalde_am_bungsberg {
         verwaltung = dk_holstein
         bund       = ja
     }
+
+    1864.10.30 = {
+        besitzer   = AUT
+        verwaltung = au_holstein
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort grube {
@@ -191,6 +331,26 @@ ort grube {
         besitzer   = DEN
         verwaltung = dk_holstein
         bund       = ja
+    }
+
+    1864.10.30 = {
+        besitzer   = AUT
+        verwaltung = au_holstein
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -215,6 +375,26 @@ ort kiel {
         verwaltung = dk_holstein
         bund       = ja
     }
+
+    1864.10.30 = {
+        besitzer   = AUT
+        verwaltung = au_holstein
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort preetz {
@@ -237,6 +417,26 @@ ort preetz {
         besitzer   = DEN
         verwaltung = dk_holstein
         bund       = ja
+    }
+
+    1864.10.30 = {
+        besitzer   = AUT
+        verwaltung = au_holstein
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -261,6 +461,26 @@ ort luetjenburg {
         verwaltung = dk_holstein
         bund       = ja
     }
+
+    1864.10.30 = {
+        besitzer   = AUT
+        verwaltung = au_holstein
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort probsteierhagen {
@@ -283,6 +503,26 @@ ort probsteierhagen {
         besitzer   = DEN
         verwaltung = dk_holstein
         bund       = ja
+    }
+
+    1864.10.30 = {
+        besitzer   = AUT
+        verwaltung = au_holstein
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -307,6 +547,26 @@ ort selent {
         verwaltung = dk_holstein
         bund       = ja
     }
+
+    1864.10.30 = {
+        besitzer   = AUT
+        verwaltung = au_holstein
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort hohenfelde {
@@ -329,6 +589,26 @@ ort hohenfelde {
         besitzer   = DEN
         verwaltung = dk_holstein
         bund       = ja
+    }
+
+    1864.10.30 = {
+        besitzer   = AUT
+        verwaltung = au_holstein
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -353,6 +633,26 @@ ort heide {
         verwaltung = dk_holstein
         bund       = ja
     }
+
+    1864.10.30 = {
+        besitzer   = AUT
+        verwaltung = au_holstein
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort meldorf {
@@ -375,6 +675,26 @@ ort meldorf {
         besitzer   = DEN
         verwaltung = dk_holstein
         bund       = ja
+    }
+
+    1864.10.30 = {
+        besitzer   = AUT
+        verwaltung = au_holstein
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -399,6 +719,26 @@ ort buesum {
         verwaltung = dk_holstein
         bund       = ja
     }
+
+    1864.10.30 = {
+        besitzer   = AUT
+        verwaltung = au_holstein
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort wesselburen {
@@ -421,6 +761,26 @@ ort wesselburen {
         besitzer   = DEN
         verwaltung = dk_holstein
         bund       = ja
+    }
+
+    1864.10.30 = {
+        besitzer   = AUT
+        verwaltung = au_holstein
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -445,6 +805,26 @@ ort friedrichskoog {
         verwaltung = dk_holstein
         bund       = ja
     }
+
+    1864.10.30 = {
+        besitzer   = AUT
+        verwaltung = au_holstein
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort tellingstedt {
@@ -468,6 +848,26 @@ ort tellingstedt {
         verwaltung = dk_holstein
         bund       = ja
     }
+
+    1864.10.30 = {
+        besitzer   = AUT
+        verwaltung = au_holstein
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort hennstedt {
@@ -490,6 +890,26 @@ ort hennstedt {
         besitzer   = DEN
         verwaltung = dk_holstein
         bund       = ja
+    }
+
+    1864.10.30 = {
+        besitzer   = AUT
+        verwaltung = au_holstein
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -523,6 +943,16 @@ ort eutin {
         besitzer = OLD
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = OLD
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
 }
 
 ort bad_segeberg {
@@ -545,6 +975,26 @@ ort bad_segeberg {
         besitzer   = DEN
         verwaltung = dk_holstein
         bund       = ja
+    }
+
+    1864.10.30 = {
+        besitzer   = AUT
+        verwaltung = au_holstein
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -569,6 +1019,26 @@ ort ploen {
         verwaltung = dk_holstein
         bund       = ja
     }
+
+    1864.10.30 = {
+        besitzer   = AUT
+        verwaltung = au_holstein
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort neustadt_in_holstein {
@@ -592,6 +1062,26 @@ ort neustadt_in_holstein {
         verwaltung = dk_holstein
         bund       = ja
     }
+
+    1864.10.30 = {
+        besitzer   = AUT
+        verwaltung = au_holstein
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort scharbeutz {
@@ -611,6 +1101,16 @@ ort scharbeutz {
     }
 
     1848.03.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = OLD
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = OLD
         bund     = ja
     }
@@ -637,6 +1137,26 @@ ort ahrensboek {
         verwaltung = dk_holstein
         bund       = ja
     }
+
+    1864.10.30 = {
+        besitzer   = AUT
+        verwaltung = au_holstein
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort bornhoeved {
@@ -659,6 +1179,26 @@ ort bornhoeved {
         besitzer   = DEN
         verwaltung = dk_holstein
         bund       = ja
+    }
+
+    1864.10.30 = {
+        besitzer   = AUT
+        verwaltung = au_holstein
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -683,6 +1223,26 @@ ort seedorf {
         verwaltung = dk_holstein
         bund       = ja
     }
+
+    1864.10.30 = {
+        besitzer   = AUT
+        verwaltung = au_holstein
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort pronstorf {
@@ -705,6 +1265,26 @@ ort pronstorf {
         besitzer   = DEN
         verwaltung = dk_holstein
         bund       = ja
+    }
+
+    1864.10.30 = {
+        besitzer   = AUT
+        verwaltung = au_holstein
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -729,6 +1309,26 @@ ort neumuenster {
         verwaltung = dk_holstein
         bund       = ja
     }
+
+    1864.10.30 = {
+        besitzer   = AUT
+        verwaltung = au_holstein
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort rendsburg {
@@ -751,6 +1351,26 @@ ort rendsburg {
         besitzer   = DEN
         verwaltung = dk_holstein
         bund       = ja
+    }
+
+    1864.10.30 = {
+        besitzer   = AUT
+        verwaltung = au_holstein
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -775,6 +1395,26 @@ ort bordesholm {
         verwaltung = dk_holstein
         bund       = ja
     }
+
+    1864.10.30 = {
+        besitzer   = AUT
+        verwaltung = au_holstein
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort flintbek {
@@ -797,6 +1437,26 @@ ort flintbek {
         besitzer   = DEN
         verwaltung = dk_holstein
         bund       = ja
+    }
+
+    1864.10.30 = {
+        besitzer   = AUT
+        verwaltung = au_holstein
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -821,6 +1481,26 @@ ort nortorf {
         verwaltung = dk_holstein
         bund       = ja
     }
+
+    1864.10.30 = {
+        besitzer   = AUT
+        verwaltung = au_holstein
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort felde {
@@ -843,6 +1523,26 @@ ort felde {
         besitzer   = DEN
         verwaltung = dk_holstein
         bund       = ja
+    }
+
+    1864.10.30 = {
+        besitzer   = AUT
+        verwaltung = au_holstein
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -867,6 +1567,26 @@ ort itzehoe {
         verwaltung = dk_holstein
         bund       = ja
     }
+
+    1864.10.30 = {
+        besitzer   = AUT
+        verwaltung = au_holstein
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort brunsbuettel {
@@ -889,6 +1609,26 @@ ort brunsbuettel {
         besitzer   = DEN
         verwaltung = dk_holstein
         bund       = ja
+    }
+
+    1864.10.30 = {
+        besitzer   = AUT
+        verwaltung = au_holstein
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -913,6 +1653,26 @@ ort glueckstadt {
         verwaltung = dk_holstein
         bund       = ja
     }
+
+    1864.10.30 = {
+        besitzer   = AUT
+        verwaltung = au_holstein
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort hohenwestedt {
@@ -935,6 +1695,26 @@ ort hohenwestedt {
         besitzer   = DEN
         verwaltung = dk_holstein
         bund       = ja
+    }
+
+    1864.10.30 = {
+        besitzer   = AUT
+        verwaltung = au_holstein
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -959,6 +1739,26 @@ ort wilster {
         verwaltung = dk_holstein
         bund       = ja
     }
+
+    1864.10.30 = {
+        besitzer   = AUT
+        verwaltung = au_holstein
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort sankt_michaelisdonn {
@@ -981,6 +1781,26 @@ ort sankt_michaelisdonn {
         besitzer   = DEN
         verwaltung = dk_holstein
         bund       = ja
+    }
+
+    1864.10.30 = {
+        besitzer   = AUT
+        verwaltung = au_holstein
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1005,6 +1825,26 @@ ort hanerau_hademarschen {
         verwaltung = dk_holstein
         bund       = ja
     }
+
+    1864.10.30 = {
+        besitzer   = AUT
+        verwaltung = au_holstein
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort schenefeld {
@@ -1027,6 +1867,26 @@ ort schenefeld {
         besitzer   = DEN
         verwaltung = dk_holstein
         bund       = ja
+    }
+
+    1864.10.30 = {
+        besitzer   = AUT
+        verwaltung = au_holstein
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1051,6 +1911,26 @@ ort burg {
         verwaltung = dk_holstein
         bund       = ja
     }
+
+    1864.10.30 = {
+        besitzer   = AUT
+        verwaltung = au_holstein
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort luebeck {
@@ -1070,6 +1950,16 @@ ort luebeck {
     }
 
     1848.03.01 = {
+        besitzer = LUE
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = LUE
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = LUE
         bund     = ja
     }
@@ -1097,6 +1987,26 @@ ort bad_oldesloe {
         verwaltung = dk_holstein
         bund       = ja
     }
+
+    1864.10.30 = {
+        besitzer   = AUT
+        verwaltung = au_holstein
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort ratzeburg {
@@ -1119,6 +2029,21 @@ ort ratzeburg {
         besitzer   = DEN
         verwaltung = dk_lauenburg
         bund       = ja
+    }
+
+    1864.10.30 = {
+        besitzer   = PRU
+        verwaltung = pr_lauenburg
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1143,6 +2068,21 @@ ort moelln {
         verwaltung = dk_lauenburg
         bund       = ja
     }
+
+    1864.10.30 = {
+        besitzer   = PRU
+        verwaltung = pr_lauenburg
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort ratekau {
@@ -1162,6 +2102,16 @@ ort ratekau {
     }
 
     1848.03.01 = {
+        besitzer = OLD
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = OLD
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = OLD
         bund     = ja
     }
@@ -1188,6 +2138,26 @@ ort trittau {
         verwaltung = dk_holstein
         bund       = ja
     }
+
+    1864.10.30 = {
+        besitzer   = AUT
+        verwaltung = au_holstein
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort reinfeld {
@@ -1210,6 +2180,26 @@ ort reinfeld {
         besitzer   = DEN
         verwaltung = dk_holstein
         bund       = ja
+    }
+
+    1864.10.30 = {
+        besitzer   = AUT
+        verwaltung = au_holstein
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1234,6 +2224,21 @@ ort gross_groenau {
         verwaltung = dk_lauenburg
         bund       = ja
     }
+
+    1864.10.30 = {
+        besitzer   = PRU
+        verwaltung = pr_lauenburg
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort sandesneben {
@@ -1256,6 +2261,21 @@ ort sandesneben {
         besitzer   = DEN
         verwaltung = dk_lauenburg
         bund       = ja
+    }
+
+    1864.10.30 = {
+        besitzer   = PRU
+        verwaltung = pr_lauenburg
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1280,6 +2300,26 @@ ort elmshorn {
         verwaltung = dk_holstein
         bund       = ja
     }
+
+    1864.10.30 = {
+        besitzer   = AUT
+        verwaltung = au_holstein
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort pinneberg {
@@ -1302,6 +2342,26 @@ ort pinneberg {
         besitzer   = DEN
         verwaltung = dk_holstein
         bund       = ja
+    }
+
+    1864.10.30 = {
+        besitzer   = AUT
+        verwaltung = au_holstein
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1326,6 +2386,26 @@ ort wedel {
         verwaltung = dk_holstein
         bund       = ja
     }
+
+    1864.10.30 = {
+        besitzer   = AUT
+        verwaltung = au_holstein
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort uetersen {
@@ -1348,6 +2428,26 @@ ort uetersen {
         besitzer   = DEN
         verwaltung = dk_holstein
         bund       = ja
+    }
+
+    1864.10.30 = {
+        besitzer   = AUT
+        verwaltung = au_holstein
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1372,6 +2472,26 @@ ort kaltenkirchen {
         verwaltung = dk_holstein
         bund       = ja
     }
+
+    1864.10.30 = {
+        besitzer   = AUT
+        verwaltung = au_holstein
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort bad_bramstedt {
@@ -1394,6 +2514,26 @@ ort bad_bramstedt {
         besitzer   = DEN
         verwaltung = dk_holstein
         bund       = ja
+    }
+
+    1864.10.30 = {
+        besitzer   = AUT
+        verwaltung = au_holstein
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1418,6 +2558,26 @@ ort barmstedt {
         verwaltung = dk_holstein
         bund       = ja
     }
+
+    1864.10.30 = {
+        besitzer   = AUT
+        verwaltung = au_holstein
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort kellinghusen {
@@ -1440,6 +2600,26 @@ ort kellinghusen {
         besitzer   = DEN
         verwaltung = dk_holstein
         bund       = ja
+    }
+
+    1864.10.30 = {
+        besitzer   = AUT
+        verwaltung = au_holstein
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1464,6 +2644,26 @@ ort grossenaspe {
         verwaltung = dk_holstein
         bund       = ja
     }
+
+    1864.10.30 = {
+        besitzer   = AUT
+        verwaltung = au_holstein
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort hartenholm {
@@ -1487,6 +2687,26 @@ ort hartenholm {
         verwaltung = dk_holstein
         bund       = ja
     }
+
+    1864.10.30 = {
+        besitzer   = AUT
+        verwaltung = au_holstein
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort hamburg {
@@ -1506,6 +2726,16 @@ ort hamburg {
     }
 
     1848.03.01 = {
+        besitzer = HAM
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HAM
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = HAM
         bund     = ja
     }
@@ -1532,6 +2762,26 @@ ort norderstedt {
         verwaltung = dk_holstein
         bund       = ja
     }
+
+    1864.10.30 = {
+        besitzer   = AUT
+        verwaltung = au_holstein
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort ahrensburg {
@@ -1554,6 +2804,26 @@ ort ahrensburg {
         besitzer   = DEN
         verwaltung = dk_holstein
         bund       = ja
+    }
+
+    1864.10.30 = {
+        besitzer   = AUT
+        verwaltung = au_holstein
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1578,6 +2848,26 @@ ort reinbek {
         verwaltung = dk_holstein
         bund       = ja
     }
+
+    1864.10.30 = {
+        besitzer   = AUT
+        verwaltung = au_holstein
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort barsbuettel {
@@ -1600,6 +2890,26 @@ ort barsbuettel {
         besitzer   = DEN
         verwaltung = dk_holstein
         bund       = ja
+    }
+
+    1864.10.30 = {
+        besitzer   = AUT
+        verwaltung = au_holstein
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1624,6 +2934,26 @@ ort suelfeld {
         verwaltung = dk_holstein
         bund       = ja
     }
+
+    1864.10.30 = {
+        besitzer   = AUT
+        verwaltung = au_holstein
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort tangstedt {
@@ -1647,6 +2977,26 @@ ort tangstedt {
         verwaltung = dk_holstein
         bund       = ja
     }
+
+    1864.10.30 = {
+        besitzer   = AUT
+        verwaltung = au_holstein
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort geesthacht {
@@ -1666,6 +3016,16 @@ ort geesthacht {
     }
 
     1848.03.01 = {
+        besitzer = HAM
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HAM
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = HAM
         bund     = ja
     }
@@ -1692,6 +3052,21 @@ ort schwarzenbek {
         verwaltung = dk_lauenburg
         bund       = ja
     }
+
+    1864.10.30 = {
+        besitzer   = PRU
+        verwaltung = pr_lauenburg
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort lauenburg {
@@ -1715,6 +3090,21 @@ ort lauenburg {
         verwaltung = dk_lauenburg
         bund       = ja
     }
+
+    1864.10.30 = {
+        besitzer   = PRU
+        verwaltung = pr_lauenburg
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort buechen {
@@ -1737,5 +3127,20 @@ ort buechen {
         besitzer   = DEN
         verwaltung = dk_lauenburg
         bund       = ja
+    }
+
+    1864.10.30 = {
+        besitzer   = PRU
+        verwaltung = pr_lauenburg
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }

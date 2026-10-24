@@ -45,6 +45,16 @@ ort dessau {
         besitzer = DES
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = DES
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = DES
+        bund     = ja
+    }
 }
 
 ort bernburg {
@@ -75,6 +85,20 @@ ort bernburg {
         besitzer = BER
         bund     = ja
     }
+
+    1863.08.19 = {
+        besitzer = DES
+    }
+
+    1866.08.24 = {
+        besitzer = DES
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = DES
+        bund     = ja
+    }
 }
 
 ort koethen {
@@ -102,6 +126,16 @@ ort koethen {
     }
 
     1848.03.01 = {
+        besitzer = DES
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = DES
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = DES
         bund     = ja
     }
@@ -135,6 +169,16 @@ ort zerbst {
         besitzer = DES
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = DES
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = DES
+        bund     = ja
+    }
 }
 
 ort aken {
@@ -154,6 +198,16 @@ ort aken {
     }
 
     1848.03.01 = {
+        besitzer = DES
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = DES
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = DES
         bund     = ja
     }
@@ -179,6 +233,16 @@ ort groebzig {
         besitzer = DES
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = DES
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = DES
+        bund     = ja
+    }
 }
 
 ort rodleben {
@@ -198,6 +262,16 @@ ort rodleben {
     }
 
     1848.03.01 = {
+        besitzer = DES
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = DES
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = DES
         bund     = ja
     }
@@ -223,6 +297,16 @@ ort lindau_anhalt {
         besitzer = DES
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = DES
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = DES
+        bund     = ja
+    }
 }
 
 ort quellendorf {
@@ -242,6 +326,16 @@ ort quellendorf {
     }
 
     1848.03.01 = {
+        besitzer = DES
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = DES
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = DES
         bund     = ja
     }
@@ -268,6 +362,16 @@ ort wolfen {
         verwaltung = pr_kr_bitterfeld
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort zoerbig {
@@ -290,6 +394,16 @@ ort zoerbig {
         besitzer   = PRU
         verwaltung = pr_kr_bitterfeld
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -314,6 +428,16 @@ ort roitzsch {
         verwaltung = pr_kr_delitzsch
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort pouch {
@@ -336,5 +460,15 @@ ort pouch {
         besitzer   = PRU
         verwaltung = pr_kr_bitterfeld
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }

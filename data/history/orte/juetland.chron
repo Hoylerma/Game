@@ -99,6 +99,21 @@ ort christiansfeld {
         besitzer   = DEN
         verwaltung = dk_schleswig
     }
+
+    1864.10.30 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort roedding {
@@ -120,6 +135,21 @@ ort roedding {
     1848.03.01 = {
         besitzer   = DEN
         verwaltung = dk_schleswig
+    }
+
+    1864.10.30 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_schleswig_holstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 

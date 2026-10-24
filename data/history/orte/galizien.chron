@@ -75,6 +75,11 @@ ort auschwitz {
         verwaltung = au_kr_wadowicer_kreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort alwernia {
@@ -120,6 +125,11 @@ ort zator {
         verwaltung = au_kr_wadowicer_kreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort saybusch {
@@ -142,6 +152,11 @@ ort saybusch {
         besitzer   = AUT
         verwaltung = au_kr_wadowicer_kreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -166,6 +181,11 @@ ort wadowice {
         verwaltung = au_kr_wadowicer_kreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort andrychow {
@@ -188,6 +208,11 @@ ort andrychow {
         besitzer   = AUT
         verwaltung = au_kr_wadowicer_kreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -212,6 +237,11 @@ ort kenty {
         verwaltung = au_kr_wadowicer_kreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort milowka {
@@ -234,6 +264,11 @@ ort milowka {
         besitzer   = AUT
         verwaltung = au_kr_wadowicer_kreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -258,6 +293,11 @@ ort jelesnia {
         verwaltung = au_kr_wadowicer_kreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort lachowice {
@@ -281,6 +321,11 @@ ort lachowice {
         verwaltung = au_kr_wadowicer_kreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort rycerka_gorna {
@@ -303,5 +348,10 @@ ort rycerka_gorna {
         besitzer   = AUT
         verwaltung = au_kr_wadowicer_kreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }

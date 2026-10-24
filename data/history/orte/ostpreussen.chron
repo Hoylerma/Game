@@ -30,6 +30,11 @@ ort memel {
         besitzer   = PRU
         verwaltung = pr_kr_memel
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort heydekrug {
@@ -51,6 +56,11 @@ ort heydekrug {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_heydekrug
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -74,6 +84,11 @@ ort russ {
         besitzer   = PRU
         verwaltung = pr_kr_heydekrug
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort proekuls {
@@ -95,6 +110,11 @@ ort proekuls {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_memel
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -118,6 +138,11 @@ ort tilsit {
         besitzer   = PRU
         verwaltung = pr_kr_tilsit
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort ragnit {
@@ -139,6 +164,11 @@ ort ragnit {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_ragnit
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -162,6 +192,11 @@ ort heinrichswalde {
         besitzer   = PRU
         verwaltung = pr_kr_niederung
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort pogegen {
@@ -183,6 +218,11 @@ ort pogegen {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_tilsit
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -206,6 +246,11 @@ ort koenigsberg {
         besitzer   = PRU
         verwaltung = pr_kr_koenigsberg
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort cranz {
@@ -227,6 +272,11 @@ ort cranz {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_koenigsberg
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -250,6 +300,11 @@ ort tapiau {
         besitzer   = PRU
         verwaltung = pr_kr_wehlau
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort neuhausen_ostpreussen {
@@ -271,6 +326,11 @@ ort neuhausen_ostpreussen {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_koenigsberg
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -294,6 +354,11 @@ ort labiau {
         besitzer   = PRU
         verwaltung = pr_kr_labiau
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort nidden {
@@ -315,6 +380,11 @@ ort nidden {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_heydekrug
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -338,6 +408,11 @@ ort wehlau {
         besitzer   = PRU
         verwaltung = pr_kr_wehlau
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort bol_shoe_isakovo {
@@ -359,6 +434,11 @@ ort bol_shoe_isakovo {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_koenigsberg
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -382,6 +462,11 @@ ort jesau {
         besitzer   = PRU
         verwaltung = pr_kr_preussisch_eylau
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort powunden {
@@ -403,6 +488,11 @@ ort powunden {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_koenigsberg
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -426,6 +516,11 @@ ort pillau {
         besitzer   = PRU
         verwaltung = pr_kr_fischhausen
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort rauschen {
@@ -447,6 +542,11 @@ ort rauschen {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_fischhausen
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -470,6 +570,11 @@ ort zimmerbude {
         besitzer   = PRU
         verwaltung = pr_kr_fischhausen
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort palmnicken {
@@ -491,6 +596,11 @@ ort palmnicken {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_fischhausen
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -514,6 +624,11 @@ ort fischhausen {
         besitzer   = PRU
         verwaltung = pr_kr_fischhausen
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort vzmorye {
@@ -535,6 +650,11 @@ ort vzmorye {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_fischhausen
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -558,6 +678,11 @@ ort insterburg {
         besitzer   = PRU
         verwaltung = pr_kr_insterburg
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort gumbinnen {
@@ -579,6 +704,11 @@ ort gumbinnen {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_gumbinnen
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -602,6 +732,11 @@ ort stallupoenen {
         besitzer   = PRU
         verwaltung = pr_kr_stallupoenen
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort lasdehnen {
@@ -623,6 +758,11 @@ ort lasdehnen {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_pillkallen
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -646,6 +786,11 @@ ort braunsberg_ostpreussen {
         besitzer   = PRU
         verwaltung = pr_kr_braunsberg
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort preussisch_holland {
@@ -667,6 +812,11 @@ ort preussisch_holland {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_preussisch_holland
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -690,6 +840,11 @@ ort tolkemit {
         besitzer   = PRU
         verwaltung = pr_kr_braunsberg
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort frauenburg {
@@ -711,6 +866,11 @@ ort frauenburg {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_braunsberg
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -734,6 +894,11 @@ ort muehlhausen_ostpreussen {
         besitzer   = PRU
         verwaltung = pr_kr_preussisch_holland
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort heilsberg {
@@ -755,6 +920,11 @@ ort heilsberg {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_heilsberg
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -778,6 +948,11 @@ ort preussisch_eylau {
         besitzer   = PRU
         verwaltung = pr_kr_preussisch_eylau
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort guttstadt {
@@ -799,6 +974,11 @@ ort guttstadt {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_heilsberg
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -822,6 +1002,11 @@ ort wormditt {
         besitzer   = PRU
         verwaltung = pr_kr_mohrungen
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort heiligenbeil {
@@ -843,6 +1028,11 @@ ort heiligenbeil {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_heiligenbeil
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -866,6 +1056,11 @@ ort landsberg {
         besitzer   = PRU
         verwaltung = pr_kr_preussisch_eylau
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort ludwigsort {
@@ -887,6 +1082,11 @@ ort ludwigsort {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_heiligenbeil
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -910,6 +1110,11 @@ ort mehlsack {
         besitzer   = PRU
         verwaltung = pr_kr_braunsberg
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort liebstadt {
@@ -931,6 +1136,11 @@ ort liebstadt {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_mohrungen
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -954,6 +1164,11 @@ ort arnsdorf {
         besitzer   = PRU
         verwaltung = pr_kr_heilsberg
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort lichtenfeld {
@@ -975,6 +1190,11 @@ ort lichtenfeld {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_heiligenbeil
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -998,6 +1218,11 @@ ort rastenburg {
         besitzer   = PRU
         verwaltung = pr_kr_rastenburg
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort bartenstein {
@@ -1019,6 +1244,11 @@ ort bartenstein {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_preussisch_eylau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1042,6 +1272,11 @@ ort friedland_ostpreussen {
         besitzer   = PRU
         verwaltung = pr_kr_friedland
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort bischofsburg {
@@ -1063,6 +1298,11 @@ ort bischofsburg {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_sensburg
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1086,6 +1326,11 @@ ort roessel {
         besitzer   = PRU
         verwaltung = pr_kr_roessel
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort seeburg {
@@ -1107,6 +1352,11 @@ ort seeburg {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_heilsberg
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1130,6 +1380,11 @@ ort korschen {
         besitzer   = PRU
         verwaltung = pr_kr_roessel
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort bischofstein {
@@ -1151,6 +1406,11 @@ ort bischofstein {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_roessel
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1174,6 +1434,11 @@ ort gerdauen {
         besitzer   = PRU
         verwaltung = pr_kr_gerdauen
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort schippenbeil {
@@ -1195,6 +1460,11 @@ ort schippenbeil {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_friedland
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1218,6 +1488,11 @@ ort drengfurth {
         besitzer   = PRU
         verwaltung = pr_kr_angerburg
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort barten {
@@ -1239,6 +1514,11 @@ ort barten {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_gerdauen
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1262,6 +1542,11 @@ ort loetzen {
         besitzer   = PRU
         verwaltung = pr_kr_loetzen
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort darkehmen {
@@ -1283,6 +1568,11 @@ ort darkehmen {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_darkehmen
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1306,6 +1596,11 @@ ort angerburg {
         besitzer   = PRU
         verwaltung = pr_kr_angerburg
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort goldap {
@@ -1327,6 +1622,11 @@ ort goldap {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_goldap
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1350,6 +1650,11 @@ ort kowahlen {
         besitzer   = PRU
         verwaltung = pr_kr_oletzko
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort benkheim {
@@ -1371,6 +1676,11 @@ ort benkheim {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_darkehmen
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1394,6 +1704,11 @@ ort possessern {
         besitzer   = PRU
         verwaltung = pr_kr_angerburg
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort kruglanken {
@@ -1415,6 +1730,11 @@ ort kruglanken {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_loetzen
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1438,6 +1758,11 @@ ort sensburg {
         besitzer   = PRU
         verwaltung = pr_kr_sensburg
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort johannisburg {
@@ -1459,6 +1784,11 @@ ort johannisburg {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_johannisburg
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1482,6 +1812,11 @@ ort ruciane_nida {
         besitzer   = PRU
         verwaltung = pr_kr_johannisburg
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort bialla {
@@ -1503,6 +1838,11 @@ ort bialla {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_johannisburg
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1526,6 +1866,11 @@ ort nikolaiken {
         besitzer   = PRU
         verwaltung = pr_kr_sensburg
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort rhein {
@@ -1547,6 +1892,11 @@ ort rhein {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_sensburg
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1570,6 +1920,11 @@ ort peitschendorf {
         besitzer   = PRU
         verwaltung = pr_kr_sensburg
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort schwentainen {
@@ -1591,6 +1946,11 @@ ort schwentainen {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_ortelsburg
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1614,6 +1974,11 @@ ort friedrichshof {
         besitzer   = PRU
         verwaltung = pr_kr_ortelsburg
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort lyck {
@@ -1635,6 +2000,11 @@ ort lyck {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_lyck
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1658,6 +2028,11 @@ ort marggrabowa {
         besitzer   = PRU
         verwaltung = pr_kr_oletzko
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort arys {
@@ -1679,6 +2054,11 @@ ort arys {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_johannisburg
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1702,6 +2082,11 @@ ort widminnen {
         besitzer   = PRU
         verwaltung = pr_kr_loetzen
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort alt_jucha {
@@ -1723,6 +2108,11 @@ ort alt_jucha {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_lyck
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1746,6 +2136,11 @@ ort swietajno {
         besitzer   = PRU
         verwaltung = pr_kr_oletzko
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort allenstein {
@@ -1767,6 +2162,11 @@ ort allenstein {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_allenstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1790,6 +2190,11 @@ ort osterode {
         besitzer   = PRU
         verwaltung = pr_kr_osterode
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort mohrungen {
@@ -1811,6 +2216,11 @@ ort mohrungen {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_mohrungen
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1834,6 +2244,11 @@ ort hohenstein_ostpreussen {
         besitzer   = PRU
         verwaltung = pr_kr_osterode
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort wartenburg {
@@ -1855,6 +2270,11 @@ ort wartenburg {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_allenstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1878,6 +2298,11 @@ ort liebemuehl {
         besitzer   = PRU
         verwaltung = pr_kr_osterode
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort jonkendorf {
@@ -1899,6 +2324,11 @@ ort jonkendorf {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_allenstein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1922,6 +2352,11 @@ ort stabigotten {
         besitzer   = PRU
         verwaltung = pr_kr_allenstein
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort maldeuten {
@@ -1943,6 +2378,11 @@ ort maldeuten {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_mohrungen
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1966,6 +2406,11 @@ ort dietrichswalde {
         besitzer   = PRU
         verwaltung = pr_kr_allenstein
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort geierswalde {
@@ -1987,6 +2432,11 @@ ort geierswalde {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_osterode
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -2010,6 +2460,11 @@ ort ortelsburg {
         besitzer   = PRU
         verwaltung = pr_kr_ortelsburg
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort passenheim {
@@ -2031,6 +2486,11 @@ ort passenheim {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_ortelsburg
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -2054,6 +2514,11 @@ ort willenberg {
         besitzer   = PRU
         verwaltung = pr_kr_ortelsburg
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort mensguth {
@@ -2075,6 +2540,11 @@ ort mensguth {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_ortelsburg
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -2098,6 +2568,11 @@ ort gedwangen {
         besitzer   = PRU
         verwaltung = pr_kr_ortelsburg
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort soldau {
@@ -2119,6 +2594,11 @@ ort soldau {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_neidenburg
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -2142,6 +2622,11 @@ ort neidenburg {
         besitzer   = PRU
         verwaltung = pr_kr_neidenburg
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort lautenburg {
@@ -2163,6 +2648,11 @@ ort lautenburg {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_loebau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -2186,6 +2676,11 @@ ort gross_koslau {
         besitzer   = PRU
         verwaltung = pr_kr_neidenburg
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort rybno {
@@ -2208,6 +2703,11 @@ ort rybno {
         besitzer   = PRU
         verwaltung = pr_kr_loebau
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort ilowo_osada {
@@ -2229,5 +2729,10 @@ ort ilowo_osada {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_neidenburg
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }

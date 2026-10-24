@@ -48,6 +48,16 @@ ort erfurt {
         verwaltung = pr_kr_erfurt
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort heiligenstadt {
@@ -79,6 +89,16 @@ ort heiligenstadt {
         verwaltung = pr_kr_heiligenstadt
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort gotha {
@@ -106,6 +126,16 @@ ort gotha {
     }
 
     1848.03.01 = {
+        besitzer = SCG
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = SCG
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = SCG
         bund     = ja
     }
@@ -139,6 +169,16 @@ ort weimar {
         besitzer = WEI
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = WEI
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = WEI
+        bund     = ja
+    }
 }
 
 ort eisenach {
@@ -169,6 +209,16 @@ ort eisenach {
         besitzer = WEI
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = WEI
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = WEI
+        bund     = ja
+    }
 }
 
 ort altenburg {
@@ -196,6 +246,16 @@ ort altenburg {
     }
 
     1848.03.01 = {
+        besitzer = ALT
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = ALT
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = ALT
         bund     = ja
     }
@@ -230,6 +290,16 @@ ort sangerhausen {
         verwaltung = pr_kr_sangerhausen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort eisleben {
@@ -252,6 +322,16 @@ ort eisleben {
         besitzer   = PRU
         verwaltung = pr_kr_mansfelder_seekreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -276,6 +356,16 @@ ort hettstedt {
         verwaltung = pr_kr_mansfelder_gebirgskreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort roeblingen_am_see {
@@ -298,6 +388,16 @@ ort roeblingen_am_see {
         besitzer   = PRU
         verwaltung = pr_kr_querfurt
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -322,6 +422,16 @@ ort wippra {
         verwaltung = pr_kr_sangerhausen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort nordhausen {
@@ -345,6 +455,16 @@ ort nordhausen {
         verwaltung = pr_kr_nordhausen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort sondershausen {
@@ -364,6 +484,16 @@ ort sondershausen {
     }
 
     1848.03.01 = {
+        besitzer = SSH
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = SSH
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = SSH
         bund     = ja
     }
@@ -390,6 +520,16 @@ ort bad_frankenhausen {
         besitzer = SRU
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = SRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = SRU
+        bund     = ja
+    }
 }
 
 ort ellrich {
@@ -412,6 +552,16 @@ ort ellrich {
         besitzer   = PRU
         verwaltung = pr_kr_nordhausen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -436,6 +586,16 @@ ort bleicherode {
         verwaltung = pr_kr_nordhausen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort kelbra {
@@ -458,6 +618,16 @@ ort kelbra {
         besitzer   = PRU
         verwaltung = pr_kr_sangerhausen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -482,6 +652,16 @@ ort weissenborn_luederode {
         verwaltung = pr_kr_worbis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort wolkramshausen {
@@ -504,6 +684,16 @@ ort wolkramshausen {
         besitzer   = PRU
         verwaltung = pr_kr_nordhausen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -528,6 +718,16 @@ ort rottleberode {
         verwaltung = pr_kr_nordhausen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort leinefelde_worbis {
@@ -550,6 +750,16 @@ ort leinefelde_worbis {
         besitzer   = PRU
         verwaltung = pr_kr_worbis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -574,6 +784,16 @@ ort kuellstedt {
         verwaltung = pr_kr_worbis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort geismar {
@@ -596,6 +816,16 @@ ort geismar {
         besitzer   = PRU
         verwaltung = pr_kr_heiligenstadt
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -620,6 +850,16 @@ ort muehlhausen_thueringen {
         verwaltung = pr_kr_muehlhausen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort bad_langensalza {
@@ -643,6 +883,16 @@ ort bad_langensalza {
         verwaltung = pr_kr_langensalza
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort schlotheim {
@@ -662,6 +912,16 @@ ort schlotheim {
     }
 
     1848.03.01 = {
+        besitzer = SRU
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = SRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = SRU
         bund     = ja
     }
@@ -688,6 +948,16 @@ ort bad_tennstedt {
         verwaltung = pr_kr_langensalza
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort menteroda {
@@ -710,6 +980,16 @@ ort menteroda {
         besitzer   = PRU
         verwaltung = pr_kr_muehlhausen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -734,6 +1014,16 @@ ort soemmerda {
         verwaltung = pr_kr_weissensee
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort koelleda {
@@ -756,6 +1046,16 @@ ort koelleda {
         besitzer   = PRU
         verwaltung = pr_kr_weissensee
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -781,6 +1081,16 @@ ort artern {
         verwaltung = pr_kr_sangerhausen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort rossleben {
@@ -804,6 +1114,16 @@ ort rossleben {
         verwaltung = pr_kr_eckartsberga
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort greussen {
@@ -823,6 +1143,16 @@ ort greussen {
     }
 
     1848.03.01 = {
+        besitzer = SSH
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = SSH
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = SSH
         bund     = ja
     }
@@ -849,6 +1179,16 @@ ort nebra {
         verwaltung = pr_kr_eckartsberga
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort rastenberg {
@@ -868,6 +1208,16 @@ ort rastenberg {
     }
 
     1848.03.01 = {
+        besitzer = WEI
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WEI
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = WEI
         bund     = ja
     }
@@ -894,6 +1244,16 @@ ort bad_bibra {
         verwaltung = pr_kr_eckartsberga
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort kindelbrueck {
@@ -916,6 +1276,16 @@ ort kindelbrueck {
         besitzer   = PRU
         verwaltung = pr_kr_weissensee
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -940,6 +1310,16 @@ ort treffurt {
         verwaltung = pr_kr_muehlhausen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort marksuhl {
@@ -959,6 +1339,16 @@ ort marksuhl {
     }
 
     1848.03.01 = {
+        besitzer = WEI
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WEI
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = WEI
         bund     = ja
     }
@@ -984,6 +1374,16 @@ ort gerstungen {
         besitzer = WEI
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = WEI
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = WEI
+        bund     = ja
+    }
 }
 
 ort creuzburg {
@@ -1003,6 +1403,16 @@ ort creuzburg {
     }
 
     1848.03.01 = {
+        besitzer = WEI
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WEI
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = WEI
         bund     = ja
     }
@@ -1028,6 +1438,16 @@ ort arnstadt {
         besitzer = SSH
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = SSH
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = SSH
+        bund     = ja
+    }
 }
 
 ort bad_berka {
@@ -1050,6 +1470,16 @@ ort bad_berka {
         besitzer = WEI
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = WEI
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = WEI
+        bund     = ja
+    }
 }
 
 ort berlstedt {
@@ -1069,6 +1499,16 @@ ort berlstedt {
     }
 
     1848.03.01 = {
+        besitzer = WEI
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WEI
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = WEI
         bund     = ja
     }
@@ -1095,6 +1535,16 @@ ort elxleben {
         verwaltung = pr_kr_erfurt
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort klettbach {
@@ -1114,6 +1564,16 @@ ort klettbach {
     }
 
     1848.03.01 = {
+        besitzer = SCG
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = SCG
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = SCG
         bund     = ja
     }
@@ -1139,6 +1599,16 @@ ort wandersleben {
         besitzer = SCG
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = SCG
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = SCG
+        bund     = ja
+    }
 }
 
 ort meiningen {
@@ -1158,6 +1628,16 @@ ort meiningen {
     }
 
     1848.03.01 = {
+        besitzer = SMG
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = SMG
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = SMG
         bund     = ja
     }
@@ -1181,6 +1661,16 @@ ort bad_salzungen {
     }
 
     1848.03.01 = {
+        besitzer = SMG
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = SMG
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = SMG
         bund     = ja
     }
@@ -1208,6 +1698,21 @@ ort schmalkalden {
         verwaltung = hk_niederhessen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HEK
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort waltershausen {
@@ -1230,6 +1735,16 @@ ort waltershausen {
         besitzer = SCG
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = SCG
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = SCG
+        bund     = ja
+    }
 }
 
 ort ruhla {
@@ -1249,6 +1764,16 @@ ort ruhla {
     }
 
     1848.03.01 = {
+        besitzer = WEI
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WEI
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = WEI
         bund     = ja
     }
@@ -1275,6 +1800,21 @@ ort steinbach_hallenberg {
         verwaltung = hk_niederhessen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HEK
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort breitungen {
@@ -1298,6 +1838,21 @@ ort breitungen {
         verwaltung = hk_niederhessen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HEK
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort tambach_dietharz {
@@ -1317,6 +1872,16 @@ ort tambach_dietharz {
     }
 
     1848.03.01 = {
+        besitzer = SCG
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = SCG
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = SCG
         bund     = ja
     }
@@ -1343,6 +1908,21 @@ ort brotterode {
         verwaltung = hk_niederhessen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HEK
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort haina_thueringen {
@@ -1365,6 +1945,16 @@ ort haina_thueringen {
         besitzer = SCG
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = SCG
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = SCG
+        bund     = ja
+    }
 }
 
 ort jena {
@@ -1384,6 +1974,16 @@ ort jena {
     }
 
     1848.03.01 = {
+        besitzer = WEI
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WEI
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = WEI
         bund     = ja
     }
@@ -1411,6 +2011,16 @@ ort naumburg_an_der_saale {
         verwaltung = pr_kr_naumburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort apolda {
@@ -1430,6 +2040,16 @@ ort apolda {
     }
 
     1848.03.01 = {
+        besitzer = WEI
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WEI
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = WEI
         bund     = ja
     }
@@ -1455,6 +2075,16 @@ ort eisenberg {
         besitzer = ALT
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = ALT
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = ALT
+        bund     = ja
+    }
 }
 
 ort hermsdorf {
@@ -1474,6 +2104,16 @@ ort hermsdorf {
     }
 
     1848.03.01 = {
+        besitzer = ALT
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = ALT
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = ALT
         bund     = ja
     }
@@ -1499,6 +2139,16 @@ ort stadtroda {
         besitzer = ALT
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = ALT
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = ALT
+        bund     = ja
+    }
 }
 
 ort kahla {
@@ -1518,6 +2168,16 @@ ort kahla {
     }
 
     1848.03.01 = {
+        besitzer = ALT
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = ALT
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = ALT
         bund     = ja
     }
@@ -1544,6 +2204,16 @@ ort schkoelen {
         verwaltung = pr_kr_naumburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort bad_sulza {
@@ -1564,6 +2234,16 @@ ort bad_sulza {
     }
 
     1848.03.01 = {
+        besitzer = WEI
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WEI
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = WEI
         bund     = ja
     }
@@ -1589,6 +2269,16 @@ ort magdala {
         besitzer = WEI
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = WEI
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = WEI
+        bund     = ja
+    }
 }
 
 ort gera {
@@ -1608,6 +2298,16 @@ ort gera {
     }
 
     1848.03.01 = {
+        besitzer = REJ
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = REJ
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = REJ
         bund     = ja
     }
@@ -1634,6 +2334,16 @@ ort weissenfels {
         verwaltung = pr_kr_weissenfels
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort zeitz {
@@ -1657,6 +2367,16 @@ ort zeitz {
         verwaltung = pr_kr_zeitz
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort schmoelln {
@@ -1676,6 +2396,16 @@ ort schmoelln {
     }
 
     1848.03.01 = {
+        besitzer = ALT
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = ALT
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = ALT
         bund     = ja
     }
@@ -1702,6 +2432,16 @@ ort hohenmoelsen {
         verwaltung = pr_kr_weissenfels
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort meuselwitz {
@@ -1721,6 +2461,16 @@ ort meuselwitz {
     }
 
     1848.03.01 = {
+        besitzer = ALT
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = ALT
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = ALT
         bund     = ja
     }
@@ -1747,6 +2497,16 @@ ort luetzen {
         verwaltung = pr_kr_weissenfels
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort poelzig {
@@ -1766,6 +2526,16 @@ ort poelzig {
     }
 
     1848.03.01 = {
+        besitzer = ALT
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = ALT
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = ALT
         bund     = ja
     }
@@ -1791,6 +2561,16 @@ ort unterbreizbach {
         besitzer = WEI
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = WEI
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = WEI
+        bund     = ja
+    }
 }
 
 ort geisa {
@@ -1810,6 +2590,16 @@ ort geisa {
     }
 
     1848.03.01 = {
+        besitzer = WEI
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WEI
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = WEI
         bund     = ja
     }
@@ -1835,6 +2625,16 @@ ort dermbach {
         besitzer = WEI
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = WEI
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = WEI
+        bund     = ja
+    }
 }
 
 ort kaltennordheim {
@@ -1854,6 +2654,16 @@ ort kaltennordheim {
     }
 
     1848.03.01 = {
+        besitzer = WEI
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WEI
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = WEI
         bund     = ja
     }
@@ -1879,6 +2689,16 @@ ort greiz {
         besitzer = REA
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = REA
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = REA
+        bund     = ja
+    }
 }
 
 ort zeulenroda {
@@ -1898,6 +2718,16 @@ ort zeulenroda {
     }
 
     1848.03.01 = {
+        besitzer = REA
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = REA
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = REA
         bund     = ja
     }
@@ -1923,6 +2753,16 @@ ort weida {
         besitzer = WEI
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = WEI
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = WEI
+        bund     = ja
+    }
 }
 
 ort neustadt_an_der_orla {
@@ -1942,6 +2782,16 @@ ort neustadt_an_der_orla {
     }
 
     1848.03.01 = {
+        besitzer = WEI
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WEI
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = WEI
         bund     = ja
     }
@@ -1967,6 +2817,16 @@ ort triptis {
         besitzer = WEI
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = WEI
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = WEI
+        bund     = ja
+    }
 }
 
 ort muenchenbernsdorf {
@@ -1986,6 +2846,16 @@ ort muenchenbernsdorf {
     }
 
     1848.03.01 = {
+        besitzer = WEI
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WEI
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = WEI
         bund     = ja
     }
@@ -2011,6 +2881,16 @@ ort seelingstaedt {
         besitzer = ALT
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = ALT
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = ALT
+        bund     = ja
+    }
 }
 
 ort saalfeld_thueringen {
@@ -2030,6 +2910,16 @@ ort saalfeld_thueringen {
     }
 
     1848.03.01 = {
+        besitzer = SMG
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = SMG
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = SMG
         bund     = ja
     }
@@ -2055,6 +2945,16 @@ ort schleiz {
         besitzer = REJ
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = REJ
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = REJ
+        bund     = ja
+    }
 }
 
 ort rudolstadt {
@@ -2074,6 +2974,16 @@ ort rudolstadt {
     }
 
     1848.03.01 = {
+        besitzer = SRU
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = SRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = SRU
         bund     = ja
     }
@@ -2099,6 +3009,16 @@ ort poessneck {
         besitzer = SMG
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = SMG
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = SMG
+        bund     = ja
+    }
 }
 
 ort bad_lobenstein {
@@ -2118,6 +3038,16 @@ ort bad_lobenstein {
     }
 
     1848.03.01 = {
+        besitzer = REJ
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = REJ
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = REJ
         bund     = ja
     }
@@ -2143,6 +3073,16 @@ ort remptendorf {
         besitzer = REJ
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = REJ
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = REJ
+        bund     = ja
+    }
 }
 
 ort leutenberg {
@@ -2165,6 +3105,16 @@ ort leutenberg {
         besitzer = SRU
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = SRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = SRU
+        bund     = ja
+    }
 }
 
 ort tanna {
@@ -2184,6 +3134,16 @@ ort tanna {
     }
 
     1848.03.01 = {
+        besitzer = REJ
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = REJ
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = REJ
         bund     = ja
     }
@@ -2211,6 +3171,16 @@ ort suhl {
         verwaltung = pr_kr_schleusingen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort ilmenau {
@@ -2230,6 +3200,16 @@ ort ilmenau {
     }
 
     1848.03.01 = {
+        besitzer = WEI
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WEI
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = WEI
         bund     = ja
     }
@@ -2255,6 +3235,16 @@ ort koenigsee {
         besitzer = SRU
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = SRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = SRU
+        bund     = ja
+    }
 }
 
 ort stadtilm {
@@ -2277,6 +3267,16 @@ ort stadtilm {
         besitzer = SRU
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = SRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = SRU
+        bund     = ja
+    }
 }
 
 ort graefenroda {
@@ -2296,6 +3296,16 @@ ort graefenroda {
     }
 
     1848.03.01 = {
+        besitzer = SSH
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = SSH
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = SSH
         bund     = ja
     }
@@ -2322,6 +3332,21 @@ ort barchfeld {
         verwaltung = hk_niederhessen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HEK
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort sonneberg {
@@ -2341,6 +3366,16 @@ ort sonneberg {
     }
 
     1848.03.01 = {
+        besitzer = SMG
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = SMG
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = SMG
         bund     = ja
     }
@@ -2366,6 +3401,16 @@ ort hildburghausen {
         besitzer = SMG
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = SMG
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = SMG
+        bund     = ja
+    }
 }
 
 ort neuhaus_am_rennweg {
@@ -2388,6 +3433,16 @@ ort neuhaus_am_rennweg {
         besitzer = SMG
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = SMG
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = SMG
+        bund     = ja
+    }
 }
 
 ort eisfeld {
@@ -2407,6 +3462,16 @@ ort eisfeld {
     }
 
     1848.03.01 = {
+        besitzer = SMG
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = SMG
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = SMG
         bund     = ja
     }
@@ -2433,6 +3498,16 @@ ort schleusingen {
         verwaltung = pr_kr_schleusingen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort masserberg {
@@ -2452,6 +3527,16 @@ ort masserberg {
     }
 
     1848.03.01 = {
+        besitzer = SMG
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = SMG
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = SMG
         bund     = ja
     }
@@ -2477,6 +3562,16 @@ ort themar {
         besitzer = SMG
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = SMG
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = SMG
+        bund     = ja
+    }
 }
 
 ort gleichamberg {
@@ -2496,6 +3591,16 @@ ort gleichamberg {
     }
 
     1848.03.01 = {
+        besitzer = SMG
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = SMG
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = SMG
         bund     = ja
     }
@@ -2521,5 +3626,15 @@ ort frauenwald {
         besitzer   = PRU
         verwaltung = pr_kr_schleusingen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }

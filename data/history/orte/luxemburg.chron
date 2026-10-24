@@ -49,6 +49,11 @@ ort clerf {
         besitzer = LUX
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = LUX
+        bund     = nein
+    }
 }
 
 ort weiswampach {
@@ -70,6 +75,11 @@ ort weiswampach {
     1848.03.01 = {
         besitzer = LUX
         bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = LUX
+        bund     = nein
     }
 }
 
@@ -273,6 +283,11 @@ ort diekirch {
         besitzer = LUX
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = LUX
+        bund     = nein
+    }
 }
 
 ort echternach {
@@ -294,6 +309,11 @@ ort echternach {
     1848.03.01 = {
         besitzer = LUX
         bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = LUX
+        bund     = nein
     }
 }
 
@@ -317,6 +337,11 @@ ort grevenmacher {
         besitzer = LUX
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = LUX
+        bund     = nein
+    }
 }
 
 ort wiltz {
@@ -338,6 +363,11 @@ ort wiltz {
     1848.03.01 = {
         besitzer = LUX
         bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = LUX
+        bund     = nein
     }
 }
 
@@ -361,6 +391,11 @@ ort mersch {
         besitzer = LUX
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = LUX
+        bund     = nein
+    }
 }
 
 ort vianden {
@@ -382,6 +417,11 @@ ort vianden {
     1848.03.01 = {
         besitzer = LUX
         bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = LUX
+        bund     = nein
     }
 }
 
@@ -405,6 +445,11 @@ ort redingen {
         besitzer = LUX
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = LUX
+        bund     = nein
+    }
 }
 
 ort befort {
@@ -426,6 +471,11 @@ ort befort {
     1848.03.01 = {
         besitzer = LUX
         bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = LUX
+        bund     = nein
     }
 }
 
@@ -449,6 +499,11 @@ ort mertzig {
         besitzer = LUX
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = LUX
+        bund     = nein
+    }
 }
 
 ort bauschleiden {
@@ -470,6 +525,11 @@ ort bauschleiden {
     1848.03.01 = {
         besitzer = LUX
         bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = LUX
+        bund     = nein
     }
 }
 
@@ -493,6 +553,11 @@ ort luxemburg {
         besitzer = LUX
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = LUX
+        bund     = nein
+    }
 }
 
 ort esch_an_der_alzette {
@@ -514,6 +579,11 @@ ort esch_an_der_alzette {
     1848.03.01 = {
         besitzer = LUX
         bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = LUX
+        bund     = nein
     }
 }
 
@@ -537,6 +607,11 @@ ort duedelingen {
         besitzer = LUX
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = LUX
+        bund     = nein
+    }
 }
 
 ort remich {
@@ -558,6 +633,11 @@ ort remich {
     1848.03.01 = {
         besitzer = LUX
         bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = LUX
+        bund     = nein
     }
 }
 
@@ -581,6 +661,11 @@ ort petingen {
         besitzer = LUX
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = LUX
+        bund     = nein
+    }
 }
 
 ort capellen {
@@ -602,6 +687,11 @@ ort capellen {
     1848.03.01 = {
         besitzer = LUX
         bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = LUX
+        bund     = nein
     }
 }
 
@@ -625,6 +715,11 @@ ort niederanven {
         besitzer = LUX
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = LUX
+        bund     = nein
+    }
 }
 
 ort aspelt {
@@ -646,6 +741,11 @@ ort aspelt {
     1848.03.01 = {
         besitzer = LUX
         bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = LUX
+        bund     = nein
     }
 }
 

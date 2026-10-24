@@ -24,6 +24,7 @@ zollunion zollverein {
 zollunion steuerverein {
     name    = "Steuerverein"
     seit    = 1834.05.01       # Vertrag zwischen Hannover und Braunschweig
+    bis     = 1854.01.01       # aufgelöst mit dem Beitritt Hannovers, Oldenburgs und Schaumburg-Lippes (seit M10b)
     leitung = HAN
     tarif   = 0.03
     farbe   = { 176 122 38 }

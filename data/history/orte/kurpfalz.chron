@@ -31,6 +31,11 @@ ort mannheim {
         verwaltung = bd_unterrheinkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
+    }
 }
 
 ort speyer {
@@ -53,6 +58,11 @@ ort speyer {
         besitzer   = BAV
         verwaltung = by_pfalz
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -78,6 +88,11 @@ ort neustadt_an_der_haardt {
         verwaltung = by_pfalz
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort frankenthal {
@@ -100,6 +115,11 @@ ort frankenthal {
         besitzer   = BAV
         verwaltung = by_pfalz
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -125,6 +145,11 @@ ort bad_duerkheim {
         verwaltung = by_pfalz
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort hassloch {
@@ -147,6 +172,11 @@ ort hassloch {
         besitzer   = BAV
         verwaltung = by_pfalz
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -171,6 +201,11 @@ ort schifferstadt {
         verwaltung = by_pfalz
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort gruenstadt {
@@ -193,6 +228,11 @@ ort gruenstadt {
         besitzer   = BAV
         verwaltung = by_pfalz
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -217,6 +257,11 @@ ort fussgoenheim {
         verwaltung = by_pfalz
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort carlsberg {
@@ -239,6 +284,11 @@ ort carlsberg {
         besitzer   = BAV
         verwaltung = by_pfalz
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -263,6 +313,11 @@ ort kaiserslautern {
         verwaltung = by_pfalz
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort hochspeyer {
@@ -285,6 +340,11 @@ ort hochspeyer {
         besitzer   = BAV
         verwaltung = by_pfalz
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -309,6 +369,11 @@ ort trippstadt {
         verwaltung = by_pfalz
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort elmstein {
@@ -331,6 +396,11 @@ ort elmstein {
         besitzer   = BAV
         verwaltung = by_pfalz
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -355,6 +425,11 @@ ort landstuhl {
         verwaltung = by_pfalz
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort kusel {
@@ -377,6 +452,11 @@ ort kusel {
         besitzer   = BAV
         verwaltung = by_pfalz
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -401,6 +481,11 @@ ort bruchmuehlbach_miesau {
         verwaltung = by_pfalz
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort weilerbach {
@@ -423,6 +508,11 @@ ort weilerbach {
         besitzer   = BAV
         verwaltung = by_pfalz
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -447,6 +537,11 @@ ort lauterecken {
         verwaltung = by_pfalz
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort altenkirchen_kurpfalz {
@@ -469,6 +564,11 @@ ort altenkirchen_kurpfalz {
         besitzer   = BAV
         verwaltung = by_pfalz
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -493,6 +593,11 @@ ort niederkirchen {
         verwaltung = by_pfalz
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort heidelberg {
@@ -515,6 +620,11 @@ ort heidelberg {
         besitzer   = BAD
         verwaltung = bd_unterrheinkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
     }
 }
 
@@ -539,6 +649,11 @@ ort weinheim {
         verwaltung = bd_unterrheinkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
+    }
 }
 
 ort sinsheim {
@@ -561,6 +676,11 @@ ort sinsheim {
         besitzer   = BAD
         verwaltung = bd_unterrheinkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
     }
 }
 
@@ -585,6 +705,11 @@ ort wiesloch {
         verwaltung = bd_unterrheinkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
+    }
 }
 
 ort schwetzingen {
@@ -607,6 +732,11 @@ ort schwetzingen {
         besitzer   = BAD
         verwaltung = bd_unterrheinkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
     }
 }
 
@@ -631,6 +761,11 @@ ort edingen_neckarhausen {
         verwaltung = bd_unterrheinkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
+    }
 }
 
 ort neckargemuend {
@@ -653,6 +788,11 @@ ort neckargemuend {
         besitzer   = BAD
         verwaltung = bd_unterrheinkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
     }
 }
 
@@ -677,6 +817,11 @@ ort reilingen {
         verwaltung = bd_unterrheinkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
+    }
 }
 
 ort heiligkreuzsteinach {
@@ -699,6 +844,11 @@ ort heiligkreuzsteinach {
         besitzer   = BAD
         verwaltung = bd_unterrheinkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
     }
 }
 
@@ -723,6 +873,11 @@ ort mosbach {
         verwaltung = bd_unterrheinkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
+    }
 }
 
 ort buchen_in_odenwald {
@@ -745,6 +900,11 @@ ort buchen_in_odenwald {
         besitzer   = BAD
         verwaltung = bd_unterrheinkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
     }
 }
 
@@ -769,6 +929,11 @@ ort eberbach {
         verwaltung = bd_unterrheinkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
+    }
 }
 
 ort hardheim {
@@ -791,6 +956,11 @@ ort hardheim {
         besitzer   = BAD
         verwaltung = bd_unterrheinkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
     }
 }
 
@@ -815,6 +985,11 @@ ort aglasterhausen {
         verwaltung = bd_unterrheinkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
+    }
 }
 
 ort osterburken {
@@ -837,6 +1012,11 @@ ort osterburken {
         besitzer   = BAD
         verwaltung = bd_unterrheinkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
     }
 }
 
@@ -861,6 +1041,11 @@ ort mudau {
         verwaltung = bd_unterrheinkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
+    }
 }
 
 ort fahrenbach {
@@ -883,6 +1068,11 @@ ort fahrenbach {
         besitzer   = BAD
         verwaltung = bd_unterrheinkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
     }
 }
 
@@ -907,6 +1097,11 @@ ort pirmasens {
         verwaltung = by_pfalz
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort zweibruecken {
@@ -929,6 +1124,11 @@ ort zweibruecken {
         besitzer   = BAV
         verwaltung = by_pfalz
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -953,6 +1153,11 @@ ort waldfischbach_burgalben {
         verwaltung = by_pfalz
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort dahn {
@@ -976,6 +1181,11 @@ ort dahn {
         verwaltung = by_pfalz
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort eppenbrunn {
@@ -998,6 +1208,11 @@ ort eppenbrunn {
         besitzer   = BAV
         verwaltung = by_pfalz
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -1023,6 +1238,11 @@ ort landau_in_der_pfalz {
         verwaltung = by_pfalz
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort germersheim {
@@ -1045,6 +1265,11 @@ ort germersheim {
         besitzer   = BAV
         verwaltung = by_pfalz
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -1069,6 +1294,11 @@ ort woerth_am_rhein {
         verwaltung = by_pfalz
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort bad_bergzabern {
@@ -1091,6 +1321,11 @@ ort bad_bergzabern {
         besitzer   = BAV
         verwaltung = by_pfalz
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -1115,6 +1350,11 @@ ort annweiler_am_trifels {
         verwaltung = by_pfalz
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort ruelzheim {
@@ -1138,6 +1378,11 @@ ort ruelzheim {
         verwaltung = by_pfalz
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort freckenfeld {
@@ -1160,5 +1405,10 @@ ort freckenfeld {
         besitzer   = BAV
         verwaltung = by_pfalz
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }

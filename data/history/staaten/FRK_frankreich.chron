@@ -1,0 +1,30 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+staat FRK {
+    name     = "Frankreich"
+    kurzname = "Frankreich"
+    farbe    = { 52 72 168 }
+    quelle   = "Ab 1849 in der Welt (Entscheidung 12, militaer.md 6.2): die Orte im Kartenausschnitt (Elsass, Lothringen, Ardennen, Französisch-Flandern, Burgundische Pforte), Paris und das übrige Land als Hinterland (common/militaer.chron). Republik 1848, Zweites Kaiserreich ab 2.12.1852. Hauptstadt auf der Karte Straßburg (Paris liegt außerhalb). Schatz, Steuersätze, Hofhaltung und Heer sind Spielwerte"
+
+    1849.01.01 = {
+        hauptstadt     = strassburg
+        regierungsform = republik
+        herrscher      = "Louis-Napoléon Bonaparte (Präsident)"
+        konfession     = katholisch
+        schatz         = 0
+        kontribution   = 0.10
+        akzise         = 0.05
+        zoll           = 0.03
+        hofhaltung     = 160000
+        heer           = 11
+        schulden       = 8000000
+        zollunion      = keine
+        verfassung     = konstitutionell
+        wahlrecht      = allgemein_maenner
+    }
+
+    1852.12.02 = {
+        regierungsform = kaiserreich
+        herrscher      = "Napoleon III."
+    }
+}

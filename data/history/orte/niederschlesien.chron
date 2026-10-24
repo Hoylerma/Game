@@ -31,6 +31,16 @@ ort gruenberg {
         verwaltung = pr_kr_gruenberg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort zuellichau {
@@ -53,6 +63,16 @@ ort zuellichau {
         besitzer   = PRU
         verwaltung = pr_kr_zuellichau_schwiebus
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -77,6 +97,16 @@ ort naumburg_am_bober {
         verwaltung = pr_kr_sagan
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort rothenburg_an_der_oder {
@@ -100,6 +130,16 @@ ort rothenburg_an_der_oder {
         verwaltung = pr_kr_gruenberg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort bomst {
@@ -122,6 +162,11 @@ ort bomst {
         besitzer   = PRU
         verwaltung = pr_kr_bomst
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort unruhstadt {
@@ -143,6 +188,11 @@ ort unruhstadt {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_bomst
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -167,6 +217,16 @@ ort schweinitz {
         verwaltung = pr_kr_gruenberg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort boyadel {
@@ -189,6 +249,16 @@ ort boyadel {
         besitzer   = PRU
         verwaltung = pr_kr_gruenberg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -213,6 +283,16 @@ ort kolzig {
         verwaltung = pr_kr_gruenberg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort guhrau {
@@ -235,6 +315,16 @@ ort guhrau {
         besitzer   = PRU
         verwaltung = pr_kr_guhrau
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -259,6 +349,16 @@ ort trachenberg {
         verwaltung = pr_kr_trebnitz
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort herrnstadt {
@@ -281,6 +381,16 @@ ort herrnstadt {
         besitzer   = PRU
         verwaltung = pr_kr_guhrau
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -305,6 +415,16 @@ ort winzig {
         verwaltung = pr_kr_steinau
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort glogau {
@@ -327,6 +447,16 @@ ort glogau {
         besitzer   = PRU
         verwaltung = pr_kr_glogau
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -351,6 +481,16 @@ ort neusalz {
         verwaltung = pr_kr_freystadt
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort polkwitz {
@@ -373,6 +513,16 @@ ort polkwitz {
         besitzer   = PRU
         verwaltung = pr_kr_lueben
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -397,6 +547,16 @@ ort freystadt_niederschlesien {
         verwaltung = pr_kr_freystadt
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort kotzenau {
@@ -419,6 +579,16 @@ ort kotzenau {
         besitzer   = PRU
         verwaltung = pr_kr_lueben
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -443,6 +613,16 @@ ort primkenau {
         verwaltung = pr_kr_sprottau
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort beuthen_an_der_oder {
@@ -465,6 +645,16 @@ ort beuthen_an_der_oder {
         besitzer   = PRU
         verwaltung = pr_kr_freystadt
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -489,6 +679,16 @@ ort gromadka {
         verwaltung = pr_kr_bunzlau
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort radwanice {
@@ -511,6 +711,16 @@ ort radwanice {
         besitzer   = PRU
         verwaltung = pr_kr_glogau
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -535,6 +745,16 @@ ort kuttlau {
         verwaltung = pr_kr_glogau
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort sagan {
@@ -557,6 +777,16 @@ ort sagan {
         besitzer   = PRU
         verwaltung = pr_kr_sagan
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -581,6 +811,16 @@ ort sprottau {
         verwaltung = pr_kr_sprottau
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort halbau {
@@ -603,6 +843,16 @@ ort halbau {
         besitzer   = PRU
         verwaltung = pr_kr_sagan
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -627,6 +877,16 @@ ort freiwaldau_niederschlesien {
         verwaltung = pr_kr_rothenburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort mallmitz {
@@ -649,6 +909,16 @@ ort mallmitz {
         besitzer   = PRU
         verwaltung = pr_kr_sprottau
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -673,6 +943,16 @@ ort bunzlau {
         verwaltung = pr_kr_bunzlau
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort haynau {
@@ -695,6 +975,16 @@ ort haynau {
         besitzer   = PRU
         verwaltung = pr_kr_goldberg_haynau
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -719,6 +1009,16 @@ ort goldberg_in_schlesien {
         verwaltung = pr_kr_goldberg_haynau
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort loewenberg {
@@ -741,6 +1041,16 @@ ort loewenberg {
         besitzer   = PRU
         verwaltung = pr_kr_loewenberg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -765,6 +1075,16 @@ ort greiffenberg {
         verwaltung = pr_kr_lauban
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort naumburg_am_queis {
@@ -787,6 +1107,16 @@ ort naumburg_am_queis {
         besitzer   = PRU
         verwaltung = pr_kr_lauban
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -811,6 +1141,16 @@ ort laehn {
         verwaltung = pr_kr_loewenberg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort olszanica {
@@ -833,6 +1173,16 @@ ort olszanica {
         besitzer   = PRU
         verwaltung = pr_kr_goldberg_haynau
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -857,6 +1207,16 @@ ort oels {
         verwaltung = pr_kr_oels
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort militsch {
@@ -879,6 +1239,16 @@ ort militsch {
         besitzer   = PRU
         verwaltung = pr_kr_militsch
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -903,6 +1273,16 @@ ort gross_wartenberg {
         verwaltung = pr_kr_gross_wartenberg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort festenberg {
@@ -925,6 +1305,16 @@ ort festenberg {
         besitzer   = PRU
         verwaltung = pr_kr_oels
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -949,6 +1339,16 @@ ort bernstadt {
         verwaltung = pr_kr_namslau
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort neumittelwalde {
@@ -971,6 +1371,16 @@ ort neumittelwalde {
         besitzer   = PRU
         verwaltung = pr_kr_gross_wartenberg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -995,6 +1405,16 @@ ort kraschnitz {
         verwaltung = pr_kr_militsch
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort freyhan {
@@ -1017,6 +1437,16 @@ ort freyhan {
         besitzer   = PRU
         verwaltung = pr_kr_militsch
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1041,6 +1471,16 @@ ort liegnitz {
         verwaltung = pr_kr_liegnitz
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort lueben {
@@ -1063,6 +1503,16 @@ ort lueben {
         besitzer   = PRU
         verwaltung = pr_kr_lueben
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1087,6 +1537,16 @@ ort neumarkt_niederschlesien {
         verwaltung = pr_kr_neumarkt
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort dyhernfurth {
@@ -1109,6 +1569,16 @@ ort dyhernfurth {
         besitzer   = PRU
         verwaltung = pr_kr_wohlau
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1133,6 +1603,16 @@ ort wohlau {
         verwaltung = pr_kr_wohlau
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort steinau {
@@ -1155,6 +1635,16 @@ ort steinau {
         besitzer   = PRU
         verwaltung = pr_kr_steinau
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1179,6 +1669,16 @@ ort parchwitz {
         verwaltung = pr_kr_liegnitz
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort miekinia {
@@ -1201,6 +1701,16 @@ ort miekinia {
         besitzer   = PRU
         verwaltung = pr_kr_neumarkt
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1225,6 +1735,16 @@ ort maltsch {
         verwaltung = pr_kr_neumarkt
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort raudten {
@@ -1247,6 +1767,16 @@ ort raudten {
         besitzer   = PRU
         verwaltung = pr_kr_lueben
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1271,6 +1801,16 @@ ort breslau {
         verwaltung = pr_kr_breslau
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort ohlau {
@@ -1293,6 +1833,16 @@ ort ohlau {
         besitzer   = PRU
         verwaltung = pr_kr_ohlau
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1317,6 +1867,16 @@ ort trebnitz {
         verwaltung = pr_kr_trebnitz
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort obernigk {
@@ -1339,6 +1899,16 @@ ort obernigk {
         besitzer   = PRU
         verwaltung = pr_kr_trebnitz
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1363,6 +1933,16 @@ ort jelcz_laskowice {
         verwaltung = pr_kr_ohlau
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort kanth {
@@ -1385,6 +1965,16 @@ ort kanth {
         besitzer   = PRU
         verwaltung = pr_kr_neumarkt
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1409,6 +1999,16 @@ ort tschechnitz {
         verwaltung = pr_kr_breslau
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort rothsuerben {
@@ -1431,6 +2031,16 @@ ort rothsuerben {
         besitzer   = PRU
         verwaltung = pr_kr_breslau
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1455,6 +2065,16 @@ ort kielczow {
         verwaltung = pr_kr_breslau
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort schmolz {
@@ -1477,6 +2097,16 @@ ort schmolz {
         besitzer   = PRU
         verwaltung = pr_kr_breslau
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1501,6 +2131,16 @@ ort psary {
         verwaltung = pr_kr_breslau
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort jauer {
@@ -1523,6 +2163,16 @@ ort jauer {
         besitzer   = PRU
         verwaltung = pr_kr_jauer
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1547,6 +2197,16 @@ ort striegau {
         verwaltung = pr_kr_striegau
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort saarau {
@@ -1569,6 +2229,16 @@ ort saarau {
         besitzer   = PRU
         verwaltung = pr_kr_striegau
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1593,6 +2263,16 @@ ort bolkenhain {
         verwaltung = pr_kr_bolkenhain
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort kauffung {
@@ -1615,6 +2295,16 @@ ort kauffung {
         besitzer   = PRU
         verwaltung = pr_kr_schoenau
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1639,6 +2329,16 @@ ort udanin {
         verwaltung = pr_kr_striegau
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort hirschberg_in_schlesien {
@@ -1661,6 +2361,16 @@ ort hirschberg_in_schlesien {
         besitzer   = PRU
         verwaltung = pr_kr_hirschberg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1685,6 +2395,16 @@ ort schmiedeberg {
         verwaltung = pr_kr_landeshut
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort schreiberhau {
@@ -1707,6 +2427,16 @@ ort schreiberhau {
         besitzer   = PRU
         verwaltung = pr_kr_hirschberg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1731,6 +2461,16 @@ ort stara_kamienica {
         verwaltung = pr_kr_hirschberg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort brieg {
@@ -1753,6 +2493,16 @@ ort brieg {
         besitzer   = PRU
         verwaltung = pr_kr_brieg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1777,6 +2527,16 @@ ort namslau {
         verwaltung = pr_kr_namslau
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort strehlen {
@@ -1799,6 +2559,16 @@ ort strehlen {
         besitzer   = PRU
         verwaltung = pr_kr_strehlen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1823,6 +2593,16 @@ ort grottkau {
         verwaltung = pr_kr_grottkau
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort loewen_niederschlesien {
@@ -1845,6 +2625,16 @@ ort loewen_niederschlesien {
         besitzer   = PRU
         verwaltung = pr_kr_falkenberg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1869,6 +2659,16 @@ ort wansen {
         verwaltung = pr_kr_strehlen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort carlsruhe {
@@ -1891,6 +2691,16 @@ ort carlsruhe {
         besitzer   = PRU
         verwaltung = pr_kr_namslau
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1915,6 +2725,16 @@ ort noldau {
         verwaltung = pr_kr_namslau
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort prieborn {
@@ -1937,6 +2757,16 @@ ort prieborn {
         besitzer   = PRU
         verwaltung = pr_kr_strehlen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1961,6 +2791,16 @@ ort waldenburg_in_schlesien {
         verwaltung = pr_kr_waldenburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort schweidnitz {
@@ -1983,6 +2823,16 @@ ort schweidnitz {
         besitzer   = PRU
         verwaltung = pr_kr_schweidnitz
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -2007,6 +2857,16 @@ ort freiburg_in_schlesien {
         verwaltung = pr_kr_waldenburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort landeshut {
@@ -2029,6 +2889,16 @@ ort landeshut {
         besitzer   = PRU
         verwaltung = pr_kr_landeshut
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -2053,6 +2923,16 @@ ort wuestegiersdorf {
         verwaltung = pr_kr_waldenburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort liebau {
@@ -2075,6 +2955,16 @@ ort liebau {
         besitzer   = PRU
         verwaltung = pr_kr_landeshut
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -2099,6 +2989,16 @@ ort friedland_in_schlesien {
         verwaltung = pr_kr_waldenburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort reichenbach_in_schlesien {
@@ -2121,6 +3021,16 @@ ort reichenbach_in_schlesien {
         besitzer   = PRU
         verwaltung = pr_kr_reichenbach
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -2145,6 +3055,16 @@ ort frankenstein {
         verwaltung = pr_kr_frankenstein
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort muensterberg {
@@ -2167,6 +3087,16 @@ ort muensterberg {
         besitzer   = PRU
         verwaltung = pr_kr_muensterberg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -2191,6 +3121,16 @@ ort gnadenfrei {
         verwaltung = pr_kr_nimptsch
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort zobten {
@@ -2213,6 +3153,16 @@ ort zobten {
         besitzer   = PRU
         verwaltung = pr_kr_schweidnitz
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -2237,6 +3187,16 @@ ort reichenstein {
         verwaltung = pr_kr_glatz
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort wartha {
@@ -2259,6 +3219,16 @@ ort wartha {
         besitzer   = PRU
         verwaltung = pr_kr_glatz
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -2283,6 +3253,16 @@ ort heidersdorf {
         verwaltung = pr_kr_nimptsch
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort tepliwoda {
@@ -2305,5 +3285,15 @@ ort tepliwoda {
         besitzer   = PRU
         verwaltung = pr_kr_frankenstein
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }

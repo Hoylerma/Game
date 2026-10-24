@@ -655,6 +655,7 @@ parlament nationalversammlung {
     ebene         = bund                             # Pflicht: bund oder ein Staatstag
     sitze         = 649                              # Pflicht: Sollzahl, 1..10000
     seit          = 1848.03.01                       # optional (Abschnitt 3.18)
+    bis           = 1849.06.18                       # optional seit M10b: ab diesem Startdatum nicht mehr
     wahltag       = 1848.05.01                       # Pflicht
     wahlrecht     = allgemein_maenner                # Pflicht: keines | staendisch | zensus | dreiklassen | allgemein_maenner
     wahlsystem    = stichwahl                        # optional: stichwahl (Standard) | relativ
@@ -671,7 +672,9 @@ parlament nationalversammlung {
 
 Ein Parlament mit seiner Wahl ([politik.md](politik.md), Abschnitt 5). `seit` ist hier das früheste
 Startdatum eines Szenarios, in dem es vorkommt; so gibt es 1648 kein Parlament, und dessen Ergebnisse
-bleiben bitgleich. Die Fraktionen teilen die Links-rechts-Achse **lückenlos** von −100 bis +100 auf (`von`
+bleiben bitgleich. `bis` (seit M10b) ist das erste Startdatum, zu dem es nicht mehr vorkommt; mit
+seinen Wahlkreisen entfällt es dann wie ein späteres (so laden die Kriegslesezeichen 1864–1870 ohne die
+Wahlen von 1848/49). Die Fraktionen teilen die Links-rechts-Achse **lückenlos** von −100 bis +100 auf (`von`
 kleiner als `bis`; die Reihenfolge in der Datei ist frei, der Kern ordnet nach `von`). Die Ebene wird
 nach dem Staatenbestand aufgelöst (Abschnitt 3.5): Ein Staat ohne Ort zum Startdatum ist fatal.
 Weitere Fehler: unbekannte Kulturen im Boykott, `fraktionen_ab` vor dem Wahltag, `wahl_zensus` ohne
@@ -792,6 +795,7 @@ Im Kern: `ElectionTargets` (`uhrwerk/election_lab.hpp`).
 zollunion zollverein {
     name    = "Zollverein"        # Pflicht; steht in der Chronik („… tritt dem Zollverein bei“)
     seit    = 1834.01.01          # optional (Abschnitt 3.18)
+    bis     = 1854.01.01          # optional seit M10b: ab diesem Startdatum aufgelöst
     leitung = PRU                 # Pflicht: Leitmacht, ein Staatstag
     tarif   = 0.03                # Pflicht: Vereinstarif, 0..steuersatz_max
     ausgeschlossen = { AUT }      # optional seit M9 a2: Staaten, deren Beitritt die Leitmacht ablehnt
@@ -803,7 +807,8 @@ zollunion zollverein {
 Eine Zollunion ([diplomatie.md](diplomatie.md), Abschnitt 3.1): ein gemeinsames Zollgebiet ihrer
 Mitglieder mit einem Tarif. Die Mitglieder stehen im Feld `zollunion` der Staaten (Abschnitt 3.5).
 `seit` ist das früheste Startdatum eines Szenarios, in dem es die Union gibt; so hat 1648 keine, und
-dessen Ergebnisse bleiben bitgleich. Die Leitmacht wird nach dem Staatenbestand aufgelöst: Ein Staat ohne
+dessen Ergebnisse bleiben bitgleich. Mit `bis` (seit M10b) gehört sie ab diesem Startdatum nicht mehr
+zur Welt (Steuerverein bis 1854); ein Staat, der ihr zum Start noch angehörte, ist dann fatal. Die Leitmacht wird nach dem Staatenbestand aufgelöst: Ein Staat ohne
 Ort zum Startdatum und eine Leitmacht, die der Union zum Startdatum nicht angehört, sind fatal, ebenso
 eine doppelte Kennung. `keine` ist als Kennung reserviert. In `ausgeschlossen` ist ein unbekannter
 Staat fatal; ein Staat ohne Ort zum Startdatum entfällt. Die Datei darf fehlen. Im Kern:
@@ -901,6 +906,7 @@ Die Bundesversammlung des Deutschen Bundes ([diplomatie.md](diplomatie.md), Absc
 bundesversammlung bund {
     name       = "Bundesversammlung"   # Pflicht; steht in der Chronik der Anträge
     seit       = 1816.11.05            # optional (Abschnitt 3.18)
+    bis        = 1866.08.24            # optional seit M10b: ab diesem Startdatum aufgelöst
     praesidium = AUT                   # Pflicht: Präsidialmacht zum Start
     sitz       = frankfurt_am_main     # optional: Tagungsort (Ort), Anzeige
     plenum     = { AUT = 4 PRU = 4 … } # Pflicht: Stimmen im Plenum je Staat, 1–100
@@ -913,7 +919,8 @@ bundesversammlung bund {
 ```
 
 Zum Startdatum darf höchstens eine Bundesversammlung bestehen; eine mit späterem `seit` gehört nicht
-zur Welt (1648). Staaten ohne Ort zum Startdatum entfallen aus Plenum und Rat; ein unbekannter Staat,
+zur Welt (1648), ebenso eine mit `bis` zum Startdatum oder davor (seit M10b: der Deutsche Bund bis
+1866, danach der Bundesrat des Norddeutschen Bundes ab 1867). Staaten ohne Ort zum Startdatum entfallen aus Plenum und Rat; ein unbekannter Staat,
 ein Staat zweimal im Plenum oder mit zwei Stimmen im Rat, eine Kuriatstimme ohne Namen und eine
 Präsidialmacht ohne Ort sind fatal. Im Kern: `World::diet` (`FederalDiet { id, name, presidency, seat,
 plenum, council, source }`); die Präsidialmacht im Spiel ist Zustand (`World::diet_presidency`).

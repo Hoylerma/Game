@@ -25,4 +25,17 @@ staat PRU {
         verfassung     = staendisch
         wahlrecht      = staendisch
     }
+
+    1850.01.31 = {
+        regierungsform = konstitutionelle_monarchie
+        verfassung     = konstitutionell
+    }
+
+    1858.10.07 = {
+        herrscher = "Wilhelm (Prinzregent)"
+    }
+
+    1861.01.02 = {
+        herrscher = "Wilhelm I."
+    }
 }

@@ -29,4 +29,8 @@ staat BAV {
     1848.03.20 = {
         herrscher = "Maximilian II."
     }
+
+    1864.03.10 = {
+        herrscher = "Ludwig II."
+    }
 }

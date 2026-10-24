@@ -31,6 +31,11 @@ ort mainz {
         verwaltung = hd_rheinhessen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
+    }
 }
 
 ort worms {
@@ -54,6 +59,11 @@ ort worms {
         besitzer   = HED
         verwaltung = hd_rheinhessen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
     }
 }
 
@@ -79,6 +89,11 @@ ort alzey {
         verwaltung = hd_rheinhessen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
+    }
 }
 
 ort nieder_olm {
@@ -101,6 +116,11 @@ ort nieder_olm {
         besitzer   = HED
         verwaltung = hd_rheinhessen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
     }
 }
 
@@ -125,6 +145,11 @@ ort woerrstadt {
         verwaltung = hd_rheinhessen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
+    }
 }
 
 ort osthofen {
@@ -147,6 +172,11 @@ ort osthofen {
         besitzer   = HED
         verwaltung = hd_rheinhessen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
     }
 }
 
@@ -172,6 +202,11 @@ ort oppenheim {
         verwaltung = hd_rheinhessen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
+    }
 }
 
 ort monsheim {
@@ -194,6 +229,11 @@ ort monsheim {
         besitzer   = HED
         verwaltung = hd_rheinhessen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
     }
 }
 
@@ -219,6 +259,16 @@ ort bad_kreuznach {
         verwaltung = pr_kr_kreuznach
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort ingelheim_am_rhein {
@@ -241,6 +291,11 @@ ort ingelheim_am_rhein {
         besitzer   = HED
         verwaltung = hd_rheinhessen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
     }
 }
 
@@ -266,6 +321,11 @@ ort bingen_am_rhein {
         verwaltung = hd_rheinhessen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
+    }
 }
 
 ort kirn {
@@ -288,6 +348,16 @@ ort kirn {
         besitzer   = PRU
         verwaltung = pr_kr_simmern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -312,6 +382,11 @@ ort sprendlingen {
         verwaltung = hd_rheinhessen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
+    }
 }
 
 ort meisenheim {
@@ -332,6 +407,25 @@ ort meisenheim {
 
     1848.03.01 = {
         besitzer = HHO
+        bund     = ja
+    }
+
+    1866.03.24 = {
+        besitzer = HED
+    }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_rheinprovinz
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
         bund     = ja
     }
 }
@@ -357,6 +451,16 @@ ort waldboeckelheim {
         verwaltung = pr_kr_kreuznach
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort monzingen {
@@ -379,6 +483,16 @@ ort monzingen {
         besitzer   = PRU
         verwaltung = pr_kr_kreuznach
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -403,6 +517,16 @@ ort spabruecken {
         verwaltung = pr_kr_kreuznach
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort kirchheimbolanden {
@@ -425,6 +549,11 @@ ort kirchheimbolanden {
         besitzer   = BAV
         verwaltung = by_pfalz
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -449,6 +578,11 @@ ort rockenhausen {
         verwaltung = by_pfalz
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort kerzenheim {
@@ -471,6 +605,11 @@ ort kerzenheim {
         besitzer   = BAV
         verwaltung = by_pfalz
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -495,6 +634,11 @@ ort alsenz {
         verwaltung = by_pfalz
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort muenchweiler_an_der_alsenz {
@@ -517,5 +661,10 @@ ort muenchweiler_an_der_alsenz {
         besitzer   = BAV
         verwaltung = by_pfalz
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }

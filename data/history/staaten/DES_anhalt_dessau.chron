@@ -53,4 +53,9 @@ staat DES {
         verfassung     = keine
         wahlrecht      = keines
     }
+
+    1863.08.19 = {
+        name     = "Herzogtum Anhalt"
+        kurzname = "Anhalt"
+    }
 }

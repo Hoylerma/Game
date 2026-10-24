@@ -29,6 +29,16 @@ ort bad_arolsen {
         besitzer = WAL
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = WAL
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = WAL
+        bund     = ja
+    }
 }
 
 ort hofgeismar {
@@ -51,6 +61,21 @@ ort hofgeismar {
         besitzer   = HEK
         verwaltung = hk_niederhessen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HEK
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -75,6 +100,21 @@ ort wolfhagen {
         verwaltung = hk_niederhessen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HEK
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort calden {
@@ -97,6 +137,21 @@ ort calden {
         besitzer   = HEK
         verwaltung = hk_niederhessen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HEK
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -121,6 +176,21 @@ ort zierenberg {
         verwaltung = hk_niederhessen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HEK
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort trendelburg {
@@ -143,6 +213,21 @@ ort trendelburg {
         besitzer   = HEK
         verwaltung = hk_niederhessen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HEK
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -167,6 +252,21 @@ ort niedenstein {
         verwaltung = hk_niederhessen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HEK
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort naumburg {
@@ -189,6 +289,21 @@ ort naumburg {
         besitzer   = HEK
         verwaltung = hk_niederhessen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HEK
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -213,6 +328,21 @@ ort breuna {
         verwaltung = hk_niederhessen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HEK
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort kassel {
@@ -235,6 +365,21 @@ ort kassel {
         besitzer   = HEK
         verwaltung = hk_niederhessen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HEK
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -259,6 +404,21 @@ ort eschwege {
         verwaltung = hk_niederhessen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HEK
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort witzenhausen {
@@ -281,6 +441,21 @@ ort witzenhausen {
         besitzer   = HEK
         verwaltung = hk_niederhessen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HEK
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -305,6 +480,21 @@ ort hessisch_lichtenau {
         verwaltung = hk_niederhessen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HEK
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort kaufungen {
@@ -327,6 +517,21 @@ ort kaufungen {
         besitzer   = HEK
         verwaltung = hk_niederhessen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HEK
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -352,6 +557,21 @@ ort bad_sooden_allendorf {
         verwaltung = hk_niederhessen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HEK
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort grossalmerode {
@@ -375,6 +595,21 @@ ort grossalmerode {
         verwaltung = hk_niederhessen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HEK
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort korbach {
@@ -394,6 +629,16 @@ ort korbach {
     }
 
     1848.03.01 = {
+        besitzer = WAL
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WAL
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = WAL
         bund     = ja
     }
@@ -420,6 +665,21 @@ ort voehl {
         verwaltung = hd_oberhessen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort waldeck {
@@ -439,6 +699,16 @@ ort waldeck {
     }
 
     1848.03.01 = {
+        besitzer = WAL
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WAL
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = WAL
         bund     = ja
     }
@@ -464,6 +734,16 @@ ort willingen {
         besitzer = WAL
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = WAL
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = WAL
+        bund     = ja
+    }
 }
 
 ort bad_wildungen {
@@ -483,6 +763,16 @@ ort bad_wildungen {
     }
 
     1848.03.01 = {
+        besitzer = WAL
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WAL
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = WAL
         bund     = ja
     }
@@ -509,6 +799,21 @@ ort homberg_efze {
         verwaltung = hk_niederhessen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HEK
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort fritzlar {
@@ -531,6 +836,21 @@ ort fritzlar {
         besitzer   = HEK
         verwaltung = hk_niederhessen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HEK
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -555,6 +875,21 @@ ort melsungen {
         verwaltung = hk_niederhessen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HEK
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort borken_kurhessen {
@@ -577,6 +912,21 @@ ort borken_kurhessen {
         besitzer   = HEK
         verwaltung = hk_niederhessen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HEK
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -601,6 +951,21 @@ ort felsberg {
         verwaltung = hk_niederhessen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HEK
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort frielendorf {
@@ -623,6 +988,21 @@ ort frielendorf {
         besitzer   = HEK
         verwaltung = hk_niederhessen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HEK
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -647,6 +1027,21 @@ ort guxhagen {
         verwaltung = hk_niederhessen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HEK
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort frankenberg_kurhessen {
@@ -669,6 +1064,21 @@ ort frankenberg_kurhessen {
         besitzer   = HEK
         verwaltung = hk_oberhessen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HEK
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -693,6 +1103,21 @@ ort allendorf {
         verwaltung = hk_oberhessen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HEK
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort gilserberg {
@@ -715,6 +1140,21 @@ ort gilserberg {
         besitzer   = HEK
         verwaltung = hk_niederhessen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HEK
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -739,6 +1179,16 @@ ort hatzfeld {
         verwaltung = hd_oberhessen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort haina_kurhessen {
@@ -761,6 +1211,21 @@ ort haina_kurhessen {
         besitzer   = HEK
         verwaltung = hk_oberhessen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HEK
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -785,6 +1250,21 @@ ort rosenthal {
         verwaltung = hk_oberhessen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HEK
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort rotenburg_an_der_fulda {
@@ -807,6 +1287,21 @@ ort rotenburg_an_der_fulda {
         besitzer   = HEK
         verwaltung = hk_fulda
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HEK
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -831,6 +1326,21 @@ ort sontra {
         verwaltung = hk_niederhessen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HEK
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort heringen {
@@ -853,6 +1363,21 @@ ort heringen {
         besitzer   = HEK
         verwaltung = hk_fulda
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HEK
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -877,6 +1402,21 @@ ort waldkappel {
         verwaltung = hk_niederhessen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HEK
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort herleshausen {
@@ -899,6 +1439,21 @@ ort herleshausen {
         besitzer   = HEK
         verwaltung = hk_niederhessen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HEK
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -923,6 +1478,21 @@ ort friedewald {
         verwaltung = hk_fulda
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HEK
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort bad_hersfeld {
@@ -945,6 +1515,21 @@ ort bad_hersfeld {
         besitzer   = HEK
         verwaltung = hk_fulda
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HEK
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -969,6 +1554,21 @@ ort huenfeld {
         verwaltung = hk_fulda
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HEK
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort willingshausen {
@@ -991,6 +1591,21 @@ ort willingshausen {
         besitzer   = HEK
         verwaltung = hk_niederhessen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HEK
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1015,6 +1630,21 @@ ort niederaula {
         verwaltung = hk_fulda
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HEK
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort eiterfeld {
@@ -1037,6 +1667,21 @@ ort eiterfeld {
         besitzer   = HEK
         verwaltung = hk_fulda
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HEK
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1061,6 +1706,21 @@ ort neukirchen_kurhessen {
         verwaltung = hk_niederhessen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HEK
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort oberaula {
@@ -1083,6 +1743,21 @@ ort oberaula {
         besitzer   = HEK
         verwaltung = hk_niederhessen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HEK
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1107,6 +1782,21 @@ ort fulda {
         verwaltung = hk_fulda
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HEK
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort grossenlueder {
@@ -1129,6 +1819,21 @@ ort grossenlueder {
         besitzer   = HEK
         verwaltung = hk_fulda
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HEK
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1153,6 +1858,21 @@ ort flieden {
         verwaltung = hk_fulda
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HEK
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort hofbieber {
@@ -1175,6 +1895,21 @@ ort hofbieber {
         besitzer   = HEK
         verwaltung = hk_fulda
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HEK
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1199,6 +1934,21 @@ ort gersfeld {
         verwaltung = by_unterfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort hilders {
@@ -1222,6 +1972,11 @@ ort hilders {
         verwaltung = by_unterfranken
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort hosenfeld {
@@ -1244,5 +1999,20 @@ ort hosenfeld {
         besitzer   = HEK
         verwaltung = hk_fulda
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HEK
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }

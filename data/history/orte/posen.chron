@@ -31,6 +31,11 @@ ort schneidemuehl {
         besitzer   = PRU
         verwaltung = pr_kr_chodziesen
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort kolmar_posen {
@@ -52,6 +57,11 @@ ort kolmar_posen {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_chodziesen
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -75,6 +85,11 @@ ort schoenlanke {
         besitzer   = PRU
         verwaltung = pr_kr_czarnikau
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort czarnkow {
@@ -96,6 +111,11 @@ ort czarnkow {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_czarnikau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -119,6 +139,11 @@ ort ujscie {
         besitzer   = PRU
         verwaltung = pr_kr_chodziesen
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort margonin {
@@ -140,6 +165,11 @@ ort margonin {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_chodziesen
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -163,6 +193,11 @@ ort budzyn {
         besitzer   = PRU
         verwaltung = pr_kr_chodziesen
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort kaczory {
@@ -184,6 +219,11 @@ ort kaczory {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_chodziesen
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -207,6 +247,11 @@ ort nakel {
         besitzer   = PRU
         verwaltung = pr_kr_schubin
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort krone {
@@ -228,6 +273,11 @@ ort krone {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_bromberg
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -251,6 +301,11 @@ ort wirsitz {
         besitzer   = PRU
         verwaltung = pr_kr_wirsitz
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort mrotschen {
@@ -272,6 +327,11 @@ ort mrotschen {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_wirsitz
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -295,6 +355,11 @@ ort lobsens {
         besitzer   = PRU
         verwaltung = pr_kr_wirsitz
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort wissek {
@@ -316,6 +381,11 @@ ort wissek {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_wirsitz
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -339,6 +409,11 @@ ort sadki {
         besitzer   = PRU
         verwaltung = pr_kr_wirsitz
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort sicienko {
@@ -360,6 +435,11 @@ ort sicienko {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_bromberg
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -383,6 +463,11 @@ ort bromberg {
         besitzer   = PRU
         verwaltung = pr_kr_bromberg
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort fordon {
@@ -404,6 +489,11 @@ ort fordon {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_bromberg
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -427,6 +517,11 @@ ort schulitz {
         besitzer   = PRU
         verwaltung = pr_kr_bromberg
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort schubin {
@@ -448,6 +543,11 @@ ort schubin {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_schubin
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -471,6 +571,11 @@ ort barcin {
         besitzer   = PRU
         verwaltung = pr_kr_schubin
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort labischin {
@@ -492,6 +597,11 @@ ort labischin {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_schubin
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -515,6 +625,11 @@ ort znin {
         besitzer   = PRU
         verwaltung = pr_kr_schubin
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort janowiec_wielkopolski {
@@ -536,6 +651,11 @@ ort janowiec_wielkopolski {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_wongrowitz
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -559,6 +679,11 @@ ort kcynia {
         besitzer   = PRU
         verwaltung = pr_kr_schubin
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort golancz {
@@ -580,6 +705,11 @@ ort golancz {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_wongrowitz
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -603,6 +733,11 @@ ort damaslawek {
         besitzer   = PRU
         verwaltung = pr_kr_wongrowitz
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort rogowo {
@@ -624,6 +759,11 @@ ort rogowo {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_gnesen
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -647,6 +787,11 @@ ort wagrowiec {
         besitzer   = PRU
         verwaltung = pr_kr_wongrowitz
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort obornik {
@@ -668,6 +813,11 @@ ort obornik {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_obornik
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -691,6 +841,11 @@ ort rogasen {
         besitzer   = PRU
         verwaltung = pr_kr_wongrowitz
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort murowana_goslina {
@@ -712,6 +867,11 @@ ort murowana_goslina {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_obornik
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -735,6 +895,11 @@ ort schokken {
         besitzer   = PRU
         verwaltung = pr_kr_wongrowitz
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort ryczywol {
@@ -756,6 +921,11 @@ ort ryczywol {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_obornik
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -779,6 +949,11 @@ ort kiszkowo {
         besitzer   = PRU
         verwaltung = pr_kr_gnesen
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort miescisko {
@@ -800,6 +975,11 @@ ort miescisko {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_wongrowitz
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -824,6 +1004,11 @@ ort inowroclaw {
         besitzer   = PRU
         verwaltung = pr_kr_inowrazlaw
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort mogilno {
@@ -845,6 +1030,11 @@ ort mogilno {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_mogilno
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -868,6 +1058,11 @@ ort kruszwica {
         besitzer   = PRU
         verwaltung = pr_kr_inowrazlaw
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort gniewkowo {
@@ -889,6 +1084,11 @@ ort gniewkowo {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_inowrazlaw
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -912,6 +1112,11 @@ ort janikowo {
         besitzer   = PRU
         verwaltung = pr_kr_inowrazlaw
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort strelno {
@@ -933,6 +1138,11 @@ ort strelno {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_mogilno
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -956,6 +1166,11 @@ ort zlotniki_kujawskie {
         besitzer   = PRU
         verwaltung = pr_kr_inowrazlaw
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort dabrowa {
@@ -977,6 +1192,11 @@ ort dabrowa {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_mogilno
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1000,6 +1220,11 @@ ort samter {
         besitzer   = PRU
         verwaltung = pr_kr_samter
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort wronki {
@@ -1021,6 +1246,11 @@ ort wronki {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_samter
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1044,6 +1274,11 @@ ort obrzycko {
         besitzer   = PRU
         verwaltung = pr_kr_samter
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort tarnowo_podgorne {
@@ -1065,6 +1300,11 @@ ort tarnowo_podgorne {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_samter
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1088,6 +1328,11 @@ ort pamiatkowo {
         besitzer   = PRU
         verwaltung = pr_kr_samter
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort zlotniki {
@@ -1109,6 +1354,11 @@ ort zlotniki {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_posen
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1132,6 +1382,11 @@ ort gnesen {
         besitzer   = PRU
         verwaltung = pr_kr_gnesen
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort wreschen {
@@ -1153,6 +1408,11 @@ ort wreschen {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_wreschen
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1176,6 +1436,11 @@ ort trzemeszno {
         besitzer   = PRU
         verwaltung = pr_kr_mogilno
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort witkowo {
@@ -1197,6 +1462,11 @@ ort witkowo {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_gnesen
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1220,6 +1490,11 @@ ort czerniejewo {
         besitzer   = PRU
         verwaltung = pr_kr_wreschen
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort klecko {
@@ -1241,6 +1516,11 @@ ort klecko {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_gnesen
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1264,6 +1544,11 @@ ort pinne {
         besitzer   = PRU
         verwaltung = pr_kr_samter
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort kreuz {
@@ -1285,6 +1570,11 @@ ort kreuz {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_birnbaum
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1308,6 +1598,11 @@ ort filehne {
         besitzer   = PRU
         verwaltung = pr_kr_czarnikau
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort sierakow {
@@ -1329,6 +1624,11 @@ ort sierakow {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_birnbaum
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1352,6 +1652,11 @@ ort neustadt_bei_pinne {
         besitzer   = PRU
         verwaltung = pr_kr_birnbaum
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort duszniki {
@@ -1373,6 +1678,11 @@ ort duszniki {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_samter
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1396,6 +1706,11 @@ ort kwilcz {
         besitzer   = PRU
         verwaltung = pr_kr_birnbaum
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort chrzypsko_wielkie {
@@ -1417,6 +1732,11 @@ ort chrzypsko_wielkie {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_birnbaum
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1440,6 +1760,11 @@ ort meseritz {
         besitzer   = PRU
         verwaltung = pr_kr_meseritz
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort birnbaum {
@@ -1461,6 +1786,11 @@ ort birnbaum {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_birnbaum
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1484,6 +1814,11 @@ ort schwerin_posen {
         besitzer   = PRU
         verwaltung = pr_kr_meseritz
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort betsche {
@@ -1505,6 +1840,11 @@ ort betsche {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_meseritz
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1528,6 +1868,11 @@ ort przytoczna {
         besitzer   = PRU
         verwaltung = pr_kr_birnbaum
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort blesen {
@@ -1549,6 +1894,11 @@ ort blesen {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_meseritz
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1572,6 +1922,11 @@ ort braetz {
         besitzer   = PRU
         verwaltung = pr_kr_meseritz
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort posen {
@@ -1593,6 +1948,11 @@ ort posen {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_posen
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1616,6 +1976,11 @@ ort schrimm {
         besitzer   = PRU
         verwaltung = pr_kr_schrimm
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort schroda {
@@ -1637,6 +2002,11 @@ ort schroda {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_schroda
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1660,6 +2030,11 @@ ort swarzedz {
         besitzer   = PRU
         verwaltung = pr_kr_posen
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort lubon {
@@ -1681,6 +2056,11 @@ ort lubon {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_posen
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1704,6 +2084,11 @@ ort mosina {
         besitzer   = PRU
         verwaltung = pr_kr_posen
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort pudewitz {
@@ -1725,6 +2110,11 @@ ort pudewitz {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_gnesen
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1748,6 +2138,11 @@ ort kostrzyn {
         besitzer   = PRU
         verwaltung = pr_kr_schroda
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort kurnik {
@@ -1769,6 +2164,11 @@ ort kurnik {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_schroda
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1792,6 +2192,11 @@ ort steszew {
         besitzer   = PRU
         verwaltung = pr_kr_posen
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort ksiaz_wielkopolski {
@@ -1813,6 +2218,11 @@ ort ksiaz_wielkopolski {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_schrimm
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1836,6 +2246,11 @@ ort zaniemysl {
         besitzer   = PRU
         verwaltung = pr_kr_schroda
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort nowy_tomysl {
@@ -1857,6 +2272,11 @@ ort nowy_tomysl {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_buk
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1880,6 +2300,11 @@ ort wolsztyn {
         besitzer   = PRU
         verwaltung = pr_kr_bomst
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort zbaszyn {
@@ -1901,6 +2326,11 @@ ort zbaszyn {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_bomst
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1924,6 +2354,11 @@ ort rakoniewice {
         besitzer   = PRU
         verwaltung = pr_kr_bomst
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort tirschtiegel {
@@ -1945,6 +2380,11 @@ ort tirschtiegel {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_meseritz
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1968,6 +2408,11 @@ ort kosten {
         besitzer   = PRU
         verwaltung = pr_kr_kosten
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort graetz {
@@ -1989,6 +2434,11 @@ ort graetz {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_buk
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -2012,6 +2462,11 @@ ort opalenica {
         besitzer   = PRU
         verwaltung = pr_kr_buk
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort smigiel {
@@ -2033,6 +2488,11 @@ ort smigiel {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_kosten
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -2056,6 +2516,11 @@ ort czempin {
         besitzer   = PRU
         verwaltung = pr_kr_kosten
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort buk {
@@ -2077,6 +2542,11 @@ ort buk {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_buk
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -2100,6 +2570,11 @@ ort granowo {
         besitzer   = PRU
         verwaltung = pr_kr_buk
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort jarocin {
@@ -2121,6 +2596,11 @@ ort jarocin {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_pleschen
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -2144,6 +2624,11 @@ ort pleszew {
         besitzer   = PRU
         verwaltung = pr_kr_pleschen
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort miloslaw {
@@ -2165,6 +2650,11 @@ ort miloslaw {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_wreschen
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -2198,6 +2688,11 @@ ort zerkow {
         besitzer   = PRU
         verwaltung = pr_kr_pleschen
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort goluchow {
@@ -2220,6 +2715,11 @@ ort goluchow {
         besitzer   = PRU
         verwaltung = pr_kr_pleschen
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort nowe_miasto_nad_warta {
@@ -2241,6 +2741,11 @@ ort nowe_miasto_nad_warta {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_schroda
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -2284,6 +2789,11 @@ ort lissa {
         besitzer   = PRU
         verwaltung = pr_kr_fraustadt
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort rawitsch {
@@ -2305,6 +2815,11 @@ ort rawitsch {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_kroeben
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -2328,6 +2843,11 @@ ort krobia {
         besitzer   = PRU
         verwaltung = pr_kr_kroeben
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort miejska_gorka {
@@ -2349,6 +2869,11 @@ ort miejska_gorka {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_kroeben
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -2372,6 +2897,11 @@ ort poniec {
         besitzer   = PRU
         verwaltung = pr_kr_kroeben
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort rydzyna {
@@ -2393,6 +2923,11 @@ ort rydzyna {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_kroeben
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -2416,6 +2951,11 @@ ort krzemieniewo {
         besitzer   = PRU
         verwaltung = pr_kr_kroeben
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort osieczna {
@@ -2437,6 +2977,11 @@ ort osieczna {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_kosten
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -2460,6 +3005,11 @@ ort krzywin {
         besitzer   = PRU
         verwaltung = pr_kr_kosten
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort fraustadt {
@@ -2481,6 +3031,11 @@ ort fraustadt {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_fraustadt
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -2504,6 +3059,11 @@ ort schlawa {
         besitzer   = PRU
         verwaltung = pr_kr_fraustadt
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort wloszakowice {
@@ -2525,6 +3085,11 @@ ort wloszakowice {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_fraustadt
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -2548,6 +3113,11 @@ ort schlichtingsheim {
         besitzer   = PRU
         verwaltung = pr_kr_fraustadt
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort przemet {
@@ -2569,6 +3139,11 @@ ort przemet {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_bomst
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -2592,6 +3167,11 @@ ort brenno {
         besitzer   = PRU
         verwaltung = pr_kr_fraustadt
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort krotoszyn {
@@ -2613,6 +3193,11 @@ ort krotoszyn {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_krotoschin
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -2636,6 +3221,11 @@ ort gostyn {
         besitzer   = PRU
         verwaltung = pr_kr_schrimm
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort koschmin {
@@ -2657,6 +3247,11 @@ ort koschmin {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_krotoschin
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -2680,6 +3275,11 @@ ort kobylin {
         besitzer   = PRU
         verwaltung = pr_kr_krotoschin
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort pogorzela {
@@ -2701,6 +3301,11 @@ ort pogorzela {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_krotoschin
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -2724,6 +3329,11 @@ ort dobrzyca {
         besitzer   = PRU
         verwaltung = pr_kr_pleschen
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort borek_wielkopolski {
@@ -2745,6 +3355,11 @@ ort borek_wielkopolski {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_schrimm
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -2768,6 +3383,11 @@ ort dolsk {
         besitzer   = PRU
         verwaltung = pr_kr_schrimm
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort ostrow_wielkopolski {
@@ -2789,6 +3409,11 @@ ort ostrow_wielkopolski {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_adelnau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -2812,6 +3437,11 @@ ort nowe_skalmierzyce {
         besitzer   = PRU
         verwaltung = pr_kr_pleschen
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort adelnau {
@@ -2833,6 +3463,11 @@ ort adelnau {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_adelnau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -2856,6 +3491,11 @@ ort raszkow {
         besitzer   = PRU
         verwaltung = pr_kr_adelnau
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort sulmierzyce {
@@ -2877,6 +3517,11 @@ ort sulmierzyce {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_adelnau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -2900,6 +3545,11 @@ ort sosnie {
         besitzer   = PRU
         verwaltung = pr_kr_adelnau
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort kempen_in_posen {
@@ -2921,6 +3571,11 @@ ort kempen_in_posen {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_schildberg
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -2944,6 +3599,11 @@ ort ostrzeszow {
         besitzer   = PRU
         verwaltung = pr_kr_schildberg
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort grabow_nad_prosna {
@@ -2965,6 +3625,11 @@ ort grabow_nad_prosna {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_schildberg
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -2988,6 +3653,11 @@ ort mikstat {
         besitzer   = PRU
         verwaltung = pr_kr_schildberg
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort doruchow {
@@ -3009,6 +3679,11 @@ ort doruchow {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_schildberg
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -3032,6 +3707,11 @@ ort rychtal {
         besitzer   = PRU
         verwaltung = pr_kr_schildberg
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort trzcinica {
@@ -3054,6 +3734,11 @@ ort trzcinica {
         besitzer   = PRU
         verwaltung = pr_kr_schildberg
     }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort czajkow {
@@ -3075,5 +3760,10 @@ ort czajkow {
     1848.03.01 = {
         besitzer   = PRU
         verwaltung = pr_kr_schildberg
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }

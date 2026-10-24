@@ -30,6 +30,11 @@ ort straubing {
         verwaltung = by_niederbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort bogen {
@@ -52,6 +57,11 @@ ort bogen {
         besitzer   = BAV
         verwaltung = by_niederbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -76,6 +86,11 @@ ort wiesenfelden {
         verwaltung = by_niederbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort oberschneiding {
@@ -98,6 +113,11 @@ ort oberschneiding {
         besitzer   = BAV
         verwaltung = by_niederbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -122,6 +142,11 @@ ort aholfing {
         verwaltung = by_niederbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort deggendorf {
@@ -144,6 +169,11 @@ ort deggendorf {
         besitzer   = BAV
         verwaltung = by_niederbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -168,6 +198,11 @@ ort regen {
         verwaltung = by_niederbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort plattling {
@@ -190,6 +225,11 @@ ort plattling {
         besitzer   = BAV
         verwaltung = by_niederbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -214,6 +254,11 @@ ort zwiesel {
         verwaltung = by_niederbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort viechtach {
@@ -236,6 +281,11 @@ ort viechtach {
         besitzer   = BAV
         verwaltung = by_niederbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -260,6 +310,11 @@ ort bodenmais {
         verwaltung = by_niederbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort bernried {
@@ -282,6 +337,11 @@ ort bernried {
         besitzer   = BAV
         verwaltung = by_niederbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -306,6 +366,11 @@ ort kirchberg_im_wald {
         verwaltung = by_niederbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort zachenberg {
@@ -328,6 +393,11 @@ ort zachenberg {
         besitzer   = BAV
         verwaltung = by_niederbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -352,6 +422,11 @@ ort arnbruck {
         verwaltung = by_niederbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort konzell {
@@ -374,6 +449,11 @@ ort konzell {
         besitzer   = BAV
         verwaltung = by_niederbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -398,6 +478,11 @@ ort sankt_englmar {
         verwaltung = by_niederbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort ingolstadt {
@@ -420,6 +505,11 @@ ort ingolstadt {
         besitzer   = BAV
         verwaltung = by_oberbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -444,6 +534,11 @@ ort neuburg_an_der_donau {
         verwaltung = by_oberbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort kelheim {
@@ -466,6 +561,11 @@ ort kelheim {
         besitzer   = BAV
         verwaltung = by_niederbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -490,6 +590,11 @@ ort eichstaett {
         verwaltung = by_oberbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort bad_abbach {
@@ -512,6 +617,11 @@ ort bad_abbach {
         besitzer   = BAV
         verwaltung = by_niederbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -536,6 +646,11 @@ ort gaimersheim {
         verwaltung = by_oberbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort karlshuld {
@@ -558,6 +673,11 @@ ort karlshuld {
         besitzer   = BAV
         verwaltung = by_oberbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -582,6 +702,11 @@ ort riedenburg {
         verwaltung = by_niederbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort rennertshofen {
@@ -604,6 +729,11 @@ ort rennertshofen {
         besitzer   = BAV
         verwaltung = by_oberbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -628,6 +758,11 @@ ort landau_an_der_isar {
         verwaltung = by_niederbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort reisbach {
@@ -650,6 +785,11 @@ ort reisbach {
         besitzer   = BAV
         verwaltung = by_niederbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -674,6 +814,11 @@ ort eichendorf {
         verwaltung = by_niederbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort wallersdorf {
@@ -696,6 +841,11 @@ ort wallersdorf {
         besitzer   = BAV
         verwaltung = by_niederbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -720,6 +870,11 @@ ort arnstorf {
         verwaltung = by_niederbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort hauzenberg {
@@ -742,6 +897,11 @@ ort hauzenberg {
         besitzer   = BAV
         verwaltung = by_niederbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -766,6 +926,11 @@ ort freyung {
         verwaltung = by_niederbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort waldkirchen {
@@ -788,6 +953,11 @@ ort waldkirchen {
         besitzer   = BAV
         verwaltung = by_niederbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -812,6 +982,11 @@ ort grafenau {
         verwaltung = by_niederbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort untergriesbach {
@@ -834,6 +1009,11 @@ ort untergriesbach {
         besitzer   = BAV
         verwaltung = by_niederbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -858,6 +1038,11 @@ ort spiegelau {
         verwaltung = by_niederbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort wegscheid {
@@ -880,6 +1065,11 @@ ort wegscheid {
         besitzer   = BAV
         verwaltung = by_niederbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -904,6 +1094,11 @@ ort neureichenau {
         verwaltung = by_niederbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort mauth {
@@ -926,6 +1121,11 @@ ort mauth {
         besitzer   = BAV
         verwaltung = by_niederbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -950,6 +1150,11 @@ ort dingolfing {
         verwaltung = by_niederbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort essenbach {
@@ -972,6 +1177,11 @@ ort essenbach {
         besitzer   = BAV
         verwaltung = by_niederbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -996,6 +1206,11 @@ ort ergoldsbach {
         verwaltung = by_niederbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort geiselhoering {
@@ -1018,6 +1233,11 @@ ort geiselhoering {
         besitzer   = BAV
         verwaltung = by_niederbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -1042,6 +1262,11 @@ ort mengkofen {
         verwaltung = by_niederbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort mallersdorf_pfaffenberg {
@@ -1064,6 +1289,11 @@ ort mallersdorf_pfaffenberg {
         besitzer   = BAV
         verwaltung = by_niederbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -1088,6 +1318,11 @@ ort woerth_an_der_isar {
         verwaltung = by_niederbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort mainburg {
@@ -1110,6 +1345,11 @@ ort mainburg {
         besitzer   = BAV
         verwaltung = by_niederbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -1134,6 +1374,11 @@ ort neustadt_an_der_donau {
         verwaltung = by_niederbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort wolnzach {
@@ -1156,6 +1401,11 @@ ort wolnzach {
         besitzer   = BAV
         verwaltung = by_oberbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -1180,6 +1430,11 @@ ort geisenfeld {
         verwaltung = by_oberbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort rottenburg_an_der_laaber {
@@ -1202,6 +1457,11 @@ ort rottenburg_an_der_laaber {
         besitzer   = BAV
         verwaltung = by_niederbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -1226,6 +1486,11 @@ ort vohburg_an_der_donau {
         verwaltung = by_oberbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort reichertshofen {
@@ -1248,6 +1513,11 @@ ort reichertshofen {
         besitzer   = BAV
         verwaltung = by_oberbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -1272,6 +1542,11 @@ ort au_in_der_hallertau {
         verwaltung = by_oberbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort hoergertshausen {
@@ -1294,6 +1569,11 @@ ort hoergertshausen {
         besitzer   = BAV
         verwaltung = by_oberbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -1318,6 +1598,11 @@ ort obersuessbach {
         verwaltung = by_niederbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort train {
@@ -1340,6 +1625,11 @@ ort train {
         besitzer   = BAV
         verwaltung = by_niederbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -1364,6 +1654,11 @@ ort passau {
         verwaltung = by_niederbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort osterhofen {
@@ -1386,6 +1681,11 @@ ort osterhofen {
         besitzer   = BAV
         verwaltung = by_niederbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -1410,6 +1710,11 @@ ort vilshofen {
         verwaltung = by_niederbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort fuerstenzell {
@@ -1432,6 +1737,11 @@ ort fuerstenzell {
         besitzer   = BAV
         verwaltung = by_niederbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -1456,6 +1766,11 @@ ort hengersberg {
         verwaltung = by_niederbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort hutthurm {
@@ -1478,6 +1793,11 @@ ort hutthurm {
         besitzer   = BAV
         verwaltung = by_niederbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -1502,6 +1822,11 @@ ort aldersbach {
         verwaltung = by_niederbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort schoellnach {
@@ -1524,6 +1849,11 @@ ort schoellnach {
         besitzer   = BAV
         verwaltung = by_niederbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -1548,6 +1878,11 @@ ort fuerstenstein {
         verwaltung = by_niederbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort landshut {
@@ -1570,6 +1905,11 @@ ort landshut {
         besitzer   = BAV
         verwaltung = by_niederbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -1594,6 +1934,11 @@ ort erding {
         verwaltung = by_oberbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort moosburg {
@@ -1616,6 +1961,11 @@ ort moosburg {
         besitzer   = BAV
         verwaltung = by_oberbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -1640,6 +1990,11 @@ ort vilsheim {
         verwaltung = by_niederbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort berglern {
@@ -1662,6 +2017,11 @@ ort berglern {
         besitzer   = BAV
         verwaltung = by_oberbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -1686,6 +2046,11 @@ ort freising {
         verwaltung = by_oberbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort unterschleissheim {
@@ -1708,6 +2073,11 @@ ort unterschleissheim {
         besitzer   = BAV
         verwaltung = by_oberbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -1732,6 +2102,11 @@ ort neufahrn_bei_freising {
         verwaltung = by_oberbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort ismaning {
@@ -1754,6 +2129,11 @@ ort ismaning {
         besitzer   = BAV
         verwaltung = by_oberbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -1778,6 +2158,11 @@ ort allershausen {
         verwaltung = by_oberbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort fahrenzhausen {
@@ -1800,6 +2185,11 @@ ort fahrenzhausen {
         besitzer   = BAV
         verwaltung = by_oberbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -1824,6 +2214,11 @@ ort wolfersdorf {
         verwaltung = by_oberbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort pocking {
@@ -1846,6 +2241,11 @@ ort pocking {
         besitzer   = BAV
         verwaltung = by_niederbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -1870,6 +2270,11 @@ ort pfarrkirchen {
         verwaltung = by_niederbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort eggenfelden {
@@ -1892,6 +2297,11 @@ ort eggenfelden {
         besitzer   = BAV
         verwaltung = by_niederbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -1916,6 +2326,11 @@ ort simbach_am_inn {
         verwaltung = by_niederbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort bad_birnbach {
@@ -1938,6 +2353,11 @@ ort bad_birnbach {
         besitzer   = BAV
         verwaltung = by_niederbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -1962,6 +2382,11 @@ ort rotthalmuenster {
         verwaltung = by_niederbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort tann {
@@ -1984,6 +2409,11 @@ ort tann {
         besitzer   = BAV
         verwaltung = by_niederbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -2008,6 +2438,11 @@ ort johanniskirchen {
         verwaltung = by_niederbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort dorfen {
@@ -2030,6 +2465,11 @@ ort dorfen {
         besitzer   = BAV
         verwaltung = by_oberbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -2054,6 +2494,11 @@ ort vilsbiburg {
         verwaltung = by_niederbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort taufkirchen {
@@ -2076,6 +2521,11 @@ ort taufkirchen {
         besitzer   = BAV
         verwaltung = by_oberbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -2100,6 +2550,11 @@ ort neumarkt_sankt_veit {
         verwaltung = by_oberbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort gangkofen {
@@ -2122,6 +2577,11 @@ ort gangkofen {
         besitzer   = BAV
         verwaltung = by_niederbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -2146,6 +2606,11 @@ ort velden {
         verwaltung = by_niederbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort obertaufkirchen {
@@ -2168,6 +2633,11 @@ ort obertaufkirchen {
         besitzer   = BAV
         verwaltung = by_oberbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -2192,6 +2662,11 @@ ort oberbergkirchen {
         verwaltung = by_oberbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort dachau {
@@ -2214,6 +2689,11 @@ ort dachau {
         besitzer   = BAV
         verwaltung = by_oberbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -2238,6 +2718,11 @@ ort pfaffenhofen_an_der_ilm {
         verwaltung = by_oberbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort schrobenhausen {
@@ -2260,6 +2745,11 @@ ort schrobenhausen {
         besitzer   = BAV
         verwaltung = by_oberbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -2284,6 +2774,11 @@ ort markt_indersdorf {
         verwaltung = by_oberbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort petershausen {
@@ -2306,6 +2801,11 @@ ort petershausen {
         besitzer   = BAV
         verwaltung = by_oberbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -2330,6 +2830,11 @@ ort altomuenster {
         verwaltung = by_oberbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort odelzhausen {
@@ -2352,6 +2857,11 @@ ort odelzhausen {
         besitzer   = BAV
         verwaltung = by_oberbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -2376,6 +2886,11 @@ ort gerolsbach {
         verwaltung = by_oberbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort burghausen {
@@ -2398,6 +2913,11 @@ ort burghausen {
         besitzer   = BAV
         verwaltung = by_oberbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -2422,6 +2942,11 @@ ort altoetting {
         verwaltung = by_oberbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort muehldorf {
@@ -2444,6 +2969,11 @@ ort muehldorf {
         besitzer   = BAV
         verwaltung = by_oberbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -2468,6 +2998,11 @@ ort garching_an_der_alz {
         verwaltung = by_oberbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort tittmoning {
@@ -2490,6 +3025,11 @@ ort tittmoning {
         besitzer   = BAV
         verwaltung = by_oberbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -2514,6 +3054,11 @@ ort fridolfing {
         verwaltung = by_oberbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort kraiburg_am_inn {
@@ -2536,6 +3081,11 @@ ort kraiburg_am_inn {
         besitzer   = BAV
         verwaltung = by_oberbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -2560,6 +3110,11 @@ ort pleiskirchen {
         verwaltung = by_oberbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort muenchen {
@@ -2582,6 +3137,11 @@ ort muenchen {
         besitzer   = BAV
         verwaltung = by_oberbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -2606,6 +3166,11 @@ ort ebersberg {
         verwaltung = by_oberbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort unterhaching {
@@ -2628,6 +3193,11 @@ ort unterhaching {
         besitzer   = BAV
         verwaltung = by_oberbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -2652,6 +3222,11 @@ ort vaterstetten {
         verwaltung = by_oberbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort hoehenkirchen_siegertsbrunn {
@@ -2674,6 +3249,11 @@ ort hoehenkirchen_siegertsbrunn {
         besitzer   = BAV
         verwaltung = by_oberbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -2698,6 +3278,11 @@ ort markt_schwaben {
         verwaltung = by_oberbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort altdorf {
@@ -2720,6 +3305,11 @@ ort altdorf {
         besitzer   = BAV
         verwaltung = by_oberbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -2744,6 +3334,11 @@ ort assling_bayern {
         verwaltung = by_oberbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort isen {
@@ -2766,6 +3361,11 @@ ort isen {
         besitzer   = BAV
         verwaltung = by_oberbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -2790,6 +3390,11 @@ ort glonn {
         verwaltung = by_oberbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort germering {
@@ -2812,6 +3417,11 @@ ort germering {
         besitzer   = BAV
         verwaltung = by_oberbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -2836,6 +3446,11 @@ ort fuerstenfeldbruck {
         verwaltung = by_oberbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort starnberg {
@@ -2858,6 +3473,11 @@ ort starnberg {
         besitzer   = BAV
         verwaltung = by_oberbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -2882,6 +3502,11 @@ ort herrsching_am_ammersee {
         verwaltung = by_oberbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort schaeftlarn {
@@ -2904,6 +3529,11 @@ ort schaeftlarn {
         besitzer   = BAV
         verwaltung = by_oberbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -2928,6 +3558,11 @@ ort wessling {
         verwaltung = by_oberbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort wasserburg_am_inn {
@@ -2950,6 +3585,11 @@ ort wasserburg_am_inn {
         besitzer   = BAV
         verwaltung = by_oberbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -2974,6 +3614,11 @@ ort prien_am_chiemsee {
         verwaltung = by_oberbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort trostberg_an_der_alz {
@@ -2996,6 +3641,11 @@ ort trostberg_an_der_alz {
         besitzer   = BAV
         verwaltung = by_oberbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -3020,6 +3670,11 @@ ort aschau_im_chiemgau {
         verwaltung = by_oberbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort seeon_seebruck {
@@ -3042,6 +3697,11 @@ ort seeon_seebruck {
         besitzer   = BAV
         verwaltung = by_oberbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -3066,6 +3726,11 @@ ort grassau {
         verwaltung = by_oberbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort schnaitsee {
@@ -3088,6 +3753,11 @@ ort schnaitsee {
         besitzer   = BAV
         verwaltung = by_oberbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -3112,6 +3782,11 @@ ort amerang {
         verwaltung = by_oberbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort vogtareuth {
@@ -3134,6 +3809,11 @@ ort vogtareuth {
         besitzer   = BAV
         verwaltung = by_oberbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -3158,6 +3838,11 @@ ort landsberg_am_lech {
         verwaltung = by_oberbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort geltendorf {
@@ -3180,6 +3865,11 @@ ort geltendorf {
         besitzer   = BAV
         verwaltung = by_oberbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -3204,6 +3894,11 @@ ort vilgertshofen {
         verwaltung = by_oberbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort prittriching {
@@ -3226,6 +3921,11 @@ ort prittriching {
         besitzer   = BAV
         verwaltung = by_oberbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -3250,6 +3950,11 @@ ort althegnenberg {
         verwaltung = by_oberbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort hurlach {
@@ -3272,6 +3977,11 @@ ort hurlach {
         besitzer   = BAV
         verwaltung = by_oberbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -3297,6 +4007,11 @@ ort traunstein {
         verwaltung = by_oberbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort bad_reichenhall {
@@ -3321,6 +4036,11 @@ ort bad_reichenhall {
         verwaltung = by_oberbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort freilassing {
@@ -3343,6 +4063,11 @@ ort freilassing {
         besitzer   = BAV
         verwaltung = by_oberbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -3367,6 +4092,11 @@ ort bischofswiesen {
         verwaltung = by_oberbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort teisendorf {
@@ -3389,6 +4119,11 @@ ort teisendorf {
         besitzer   = BAV
         verwaltung = by_oberbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -3413,6 +4148,11 @@ ort ruhpolding {
         verwaltung = by_oberbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort waging_am_see {
@@ -3435,6 +4175,11 @@ ort waging_am_see {
         besitzer   = BAV
         verwaltung = by_oberbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -3459,6 +4204,11 @@ ort geretsried {
         verwaltung = by_oberbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort wolfratshausen {
@@ -3481,6 +4231,11 @@ ort wolfratshausen {
         besitzer   = BAV
         verwaltung = by_oberbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -3506,6 +4261,11 @@ ort penzberg {
         verwaltung = by_oberbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort murnau_am_staffelsee {
@@ -3528,6 +4288,11 @@ ort murnau_am_staffelsee {
         besitzer   = BAV
         verwaltung = by_oberbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -3552,6 +4317,11 @@ ort tutzing {
         verwaltung = by_oberbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort seeshaupt {
@@ -3575,6 +4345,11 @@ ort seeshaupt {
         verwaltung = by_oberbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort kochel {
@@ -3597,6 +4372,11 @@ ort kochel {
         besitzer   = BAV
         verwaltung = by_oberbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -3622,6 +4402,11 @@ ort rosenheim {
         verwaltung = by_oberbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort bad_aibling {
@@ -3644,6 +4429,11 @@ ort bad_aibling {
         besitzer   = BAV
         verwaltung = by_oberbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -3668,6 +4458,11 @@ ort bruckmuehl {
         verwaltung = by_oberbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort bad_feilnbach {
@@ -3690,6 +4485,11 @@ ort bad_feilnbach {
         besitzer   = BAV
         verwaltung = by_oberbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -3714,6 +4514,11 @@ ort oberaudorf {
         verwaltung = by_oberbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort neubeuern {
@@ -3736,6 +4541,11 @@ ort neubeuern {
         besitzer   = BAV
         verwaltung = by_oberbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -3760,6 +4570,11 @@ ort bayrischzell {
         verwaltung = by_oberbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort weilheim {
@@ -3782,6 +4597,11 @@ ort weilheim {
         besitzer   = BAV
         verwaltung = by_oberbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -3806,6 +4626,11 @@ ort peiting {
         verwaltung = by_oberbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort steingaden {
@@ -3828,6 +4653,11 @@ ort steingaden {
         besitzer   = BAV
         verwaltung = by_oberbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -3852,6 +4682,11 @@ ort wessobrunn {
         verwaltung = by_oberbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort bad_toelz {
@@ -3874,6 +4709,11 @@ ort bad_toelz {
         besitzer   = BAV
         verwaltung = by_oberbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -3898,6 +4738,11 @@ ort miesbach {
         verwaltung = by_oberbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort holzkirchen {
@@ -3920,6 +4765,11 @@ ort holzkirchen {
         besitzer   = BAV
         verwaltung = by_oberbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -3944,6 +4794,11 @@ ort lenggries {
         verwaltung = by_oberbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort waakirchen {
@@ -3966,6 +4821,11 @@ ort waakirchen {
         besitzer   = BAV
         verwaltung = by_oberbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -3990,6 +4850,11 @@ ort dietramszell {
         verwaltung = by_oberbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort rottach_egern {
@@ -4012,6 +4877,11 @@ ort rottach_egern {
         besitzer   = BAV
         verwaltung = by_oberbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -4036,6 +4906,11 @@ ort garmisch_partenkirchen {
         verwaltung = by_oberbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort mittenwald {
@@ -4058,6 +4933,11 @@ ort mittenwald {
         besitzer   = BAV
         verwaltung = by_oberbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }
 
@@ -4082,6 +4962,11 @@ ort oberammergau {
         verwaltung = by_oberbayern
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
+    }
 }
 
 ort kruen {
@@ -4104,5 +4989,10 @@ ort kruen {
         besitzer   = BAV
         verwaltung = by_oberbayern
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAV
+        bund     = nein
     }
 }

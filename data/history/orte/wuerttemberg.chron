@@ -32,6 +32,11 @@ ort oehringen {
         verwaltung = wu_jagstkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort kuenzelsau {
@@ -54,6 +59,11 @@ ort kuenzelsau {
         besitzer   = WUE
         verwaltung = wu_jagstkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }
 
@@ -78,6 +88,11 @@ ort neuenstadt_am_kocher {
         verwaltung = wu_neckarkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort moeckmuehl {
@@ -100,6 +115,11 @@ ort moeckmuehl {
         besitzer   = WUE
         verwaltung = wu_neckarkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }
 
@@ -124,6 +144,11 @@ ort forchtenberg {
         verwaltung = wu_jagstkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort mulfingen {
@@ -147,6 +172,11 @@ ort mulfingen {
         verwaltung = wu_jagstkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort krautheim {
@@ -169,6 +199,11 @@ ort krautheim {
         besitzer   = BAD
         verwaltung = bd_unterrheinkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
     }
 }
 
@@ -194,6 +229,11 @@ ort waldenburg {
         verwaltung = wu_jagstkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort heilbronn {
@@ -218,6 +258,11 @@ ort heilbronn {
         verwaltung = wu_neckarkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort eppingen {
@@ -240,6 +285,11 @@ ort eppingen {
         besitzer   = BAD
         verwaltung = bd_unterrheinkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
     }
 }
 
@@ -265,6 +315,11 @@ ort bad_rappenau {
         verwaltung = bd_unterrheinkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
+    }
 }
 
 ort brackenheim {
@@ -287,6 +342,11 @@ ort brackenheim {
         besitzer   = WUE
         verwaltung = wu_neckarkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }
 
@@ -311,6 +371,11 @@ ort ilsfeld {
         verwaltung = wu_neckarkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort kirchardt {
@@ -334,6 +399,11 @@ ort kirchardt {
         verwaltung = bd_unterrheinkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
+    }
 }
 
 ort zaberfeld {
@@ -356,6 +426,11 @@ ort zaberfeld {
         besitzer   = WUE
         verwaltung = wu_neckarkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }
 
@@ -381,6 +456,11 @@ ort schwaebisch_hall {
         verwaltung = wu_jagstkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort crailsheim {
@@ -403,6 +483,11 @@ ort crailsheim {
         besitzer   = WUE
         verwaltung = wu_jagstkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }
 
@@ -427,6 +512,11 @@ ort gaildorf {
         verwaltung = wu_jagstkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort ilshofen {
@@ -449,6 +539,11 @@ ort ilshofen {
         besitzer   = WUE
         verwaltung = wu_jagstkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }
 
@@ -473,6 +568,11 @@ ort rot_am_see {
         verwaltung = wu_jagstkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort schrozberg {
@@ -495,6 +595,11 @@ ort schrozberg {
         besitzer   = WUE
         verwaltung = wu_jagstkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }
 
@@ -519,6 +624,11 @@ ort obersontheim {
         verwaltung = wu_jagstkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort braunsbach {
@@ -541,6 +651,11 @@ ort braunsbach {
         besitzer   = WUE
         verwaltung = wu_jagstkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }
 
@@ -565,6 +680,11 @@ ort gerabronn {
         verwaltung = wu_jagstkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort rosenberg_wuerttemberg {
@@ -587,6 +707,11 @@ ort rosenberg_wuerttemberg {
         besitzer   = WUE
         verwaltung = wu_jagstkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }
 
@@ -611,6 +736,11 @@ ort ludwigsburg {
         verwaltung = wu_neckarkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort leonberg {
@@ -633,6 +763,11 @@ ort leonberg {
         besitzer   = WUE
         verwaltung = wu_neckarkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }
 
@@ -658,6 +793,11 @@ ort bietigheim_bissingen {
         verwaltung = wu_neckarkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort vaihingen_an_der_enz {
@@ -680,6 +820,11 @@ ort vaihingen_an_der_enz {
         besitzer   = WUE
         verwaltung = wu_neckarkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }
 
@@ -704,6 +849,11 @@ ort schwieberdingen {
         verwaltung = wu_neckarkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort steinheim_an_der_murr {
@@ -727,6 +877,11 @@ ort steinheim_an_der_murr {
         verwaltung = wu_neckarkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort weissach {
@@ -749,6 +904,11 @@ ort weissach {
         besitzer   = WUE
         verwaltung = wu_neckarkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }
 
@@ -774,6 +934,11 @@ ort aalen {
         verwaltung = wu_jagstkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort ellwangen {
@@ -796,6 +961,11 @@ ort ellwangen {
         besitzer   = WUE
         verwaltung = wu_jagstkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }
 
@@ -820,6 +990,11 @@ ort bopfingen {
         verwaltung = wu_jagstkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort abtsgmuend {
@@ -842,6 +1017,11 @@ ort abtsgmuend {
         besitzer   = WUE
         verwaltung = wu_jagstkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }
 
@@ -866,6 +1046,11 @@ ort neresheim {
         verwaltung = wu_jagstkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort unterschneidheim {
@@ -888,6 +1073,11 @@ ort unterschneidheim {
         besitzer   = WUE
         verwaltung = wu_jagstkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }
 
@@ -912,6 +1102,11 @@ ort stoedtlen {
         verwaltung = wu_jagstkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort waiblingen {
@@ -934,6 +1129,11 @@ ort waiblingen {
         besitzer   = WUE
         verwaltung = wu_neckarkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }
 
@@ -958,6 +1158,11 @@ ort schorndorf {
         verwaltung = wu_neckarkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort backnang {
@@ -980,6 +1185,11 @@ ort backnang {
         besitzer   = WUE
         verwaltung = wu_neckarkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }
 
@@ -1004,6 +1214,11 @@ ort winnenden {
         verwaltung = wu_neckarkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort ebersbach_an_der_fils {
@@ -1026,6 +1241,11 @@ ort ebersbach_an_der_fils {
         besitzer   = WUE
         verwaltung = wu_donaukreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }
 
@@ -1050,6 +1270,11 @@ ort murrhardt {
         verwaltung = wu_neckarkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort wuestenrot {
@@ -1072,6 +1297,11 @@ ort wuestenrot {
         besitzer   = WUE
         verwaltung = wu_neckarkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }
 
@@ -1096,6 +1326,11 @@ ort schwaebisch_gmuend {
         verwaltung = wu_jagstkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort goeppingen {
@@ -1118,6 +1353,11 @@ ort goeppingen {
         besitzer   = WUE
         verwaltung = wu_donaukreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }
 
@@ -1142,6 +1382,11 @@ ort geislingen_an_der_steige {
         verwaltung = wu_donaukreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort welzheim {
@@ -1164,6 +1409,11 @@ ort welzheim {
         besitzer   = WUE
         verwaltung = wu_neckarkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }
 
@@ -1188,6 +1438,11 @@ ort heubach {
         verwaltung = wu_jagstkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort suessen {
@@ -1210,6 +1465,11 @@ ort suessen {
         besitzer   = WUE
         verwaltung = wu_donaukreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }
 
@@ -1234,6 +1494,11 @@ ort deggingen {
         verwaltung = wu_donaukreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort spraitbach {
@@ -1256,6 +1521,11 @@ ort spraitbach {
         besitzer   = WUE
         verwaltung = wu_jagstkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }
 
@@ -1281,6 +1551,11 @@ ort stuttgart {
         verwaltung = wu_neckarkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort esslingen {
@@ -1305,6 +1580,11 @@ ort esslingen {
         verwaltung = wu_neckarkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort boeblingen {
@@ -1327,6 +1607,11 @@ ort boeblingen {
         besitzer   = WUE
         verwaltung = wu_neckarkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }
 
@@ -1351,6 +1636,11 @@ ort leinfelden_echterdingen {
         verwaltung = wu_neckarkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort dettenhausen {
@@ -1373,6 +1663,11 @@ ort dettenhausen {
         besitzer   = WUE
         verwaltung = wu_schwarzwaldkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }
 
@@ -1397,6 +1692,11 @@ ort heidenheim_an_der_brenz {
         verwaltung = wu_jagstkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort giengen_an_der_brenz {
@@ -1419,6 +1719,11 @@ ort giengen_an_der_brenz {
         besitzer   = WUE
         verwaltung = wu_jagstkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }
 
@@ -1443,6 +1748,11 @@ ort gerstetten {
         verwaltung = wu_jagstkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort boehmenkirch {
@@ -1465,6 +1775,11 @@ ort boehmenkirch {
         besitzer   = WUE
         verwaltung = wu_donaukreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }
 
@@ -1489,6 +1804,11 @@ ort niederstotzingen {
         verwaltung = wu_jagstkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort altensteig {
@@ -1511,6 +1831,11 @@ ort altensteig {
         besitzer   = WUE
         verwaltung = wu_schwarzwaldkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }
 
@@ -1535,6 +1860,11 @@ ort bad_wildbad {
         verwaltung = wu_schwarzwaldkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort bad_herrenalb {
@@ -1557,6 +1887,11 @@ ort bad_herrenalb {
         besitzer   = WUE
         verwaltung = wu_schwarzwaldkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }
 
@@ -1581,6 +1916,11 @@ ort neuweiler {
         verwaltung = wu_schwarzwaldkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort enzkloesterle {
@@ -1603,6 +1943,11 @@ ort enzkloesterle {
         besitzer   = WUE
         verwaltung = wu_schwarzwaldkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }
 
@@ -1627,6 +1972,11 @@ ort tuebingen {
         verwaltung = wu_schwarzwaldkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort calw {
@@ -1649,6 +1999,11 @@ ort calw {
         besitzer   = WUE
         verwaltung = wu_schwarzwaldkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }
 
@@ -1673,6 +2028,11 @@ ort herrenberg {
         verwaltung = wu_neckarkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort weil_der_stadt {
@@ -1695,6 +2055,11 @@ ort weil_der_stadt {
         besitzer   = WUE
         verwaltung = wu_neckarkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }
 
@@ -1719,6 +2084,11 @@ ort nagold {
         verwaltung = wu_schwarzwaldkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort rottenburg {
@@ -1741,6 +2111,11 @@ ort rottenburg {
         besitzer   = WUE
         verwaltung = wu_schwarzwaldkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }
 
@@ -1765,6 +2140,11 @@ ort aidlingen {
         verwaltung = wu_neckarkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort bondorf {
@@ -1787,6 +2167,11 @@ ort bondorf {
         besitzer   = WUE
         verwaltung = wu_neckarkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }
 
@@ -1811,6 +2196,11 @@ ort reutlingen {
         verwaltung = wu_schwarzwaldkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort nuertingen {
@@ -1833,6 +2223,11 @@ ort nuertingen {
         besitzer   = WUE
         verwaltung = wu_neckarkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }
 
@@ -1857,6 +2252,11 @@ ort kirchheim_unter_teck {
         verwaltung = wu_neckarkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort metzingen {
@@ -1879,6 +2279,11 @@ ort metzingen {
         besitzer   = WUE
         verwaltung = wu_schwarzwaldkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }
 
@@ -1903,6 +2308,11 @@ ort muensingen {
         verwaltung = wu_schwarzwaldkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort bad_urach {
@@ -1925,6 +2335,11 @@ ort bad_urach {
         besitzer   = WUE
         verwaltung = wu_schwarzwaldkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }
 
@@ -1949,6 +2364,11 @@ ort lenningen {
         verwaltung = wu_neckarkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort zwiefalten {
@@ -1971,6 +2391,11 @@ ort zwiefalten {
         besitzer   = WUE
         verwaltung = wu_schwarzwaldkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }
 
@@ -1995,6 +2420,11 @@ ort moessingen {
         verwaltung = wu_schwarzwaldkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort hechingen {
@@ -2017,6 +2447,21 @@ ort hechingen {
         besitzer = HOH
         bund     = ja
     }
+
+    1850.04.06 = {
+        besitzer   = PRU
+        verwaltung = pr_hohenzollern
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort burladingen {
@@ -2037,6 +2482,21 @@ ort burladingen {
 
     1848.03.01 = {
         besitzer = HOH
+        bund     = ja
+    }
+
+    1850.04.06 = {
+        besitzer   = PRU
+        verwaltung = pr_hohenzollern
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
         bund     = ja
     }
 }
@@ -2062,6 +2522,11 @@ ort messstetten {
         verwaltung = wu_schwarzwaldkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort winterlingen {
@@ -2084,6 +2549,11 @@ ort winterlingen {
         besitzer   = WUE
         verwaltung = wu_schwarzwaldkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }
 
@@ -2108,6 +2578,11 @@ ort balingen {
         verwaltung = wu_schwarzwaldkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort freudenstadt {
@@ -2131,6 +2606,11 @@ ort freudenstadt {
         verwaltung = wu_schwarzwaldkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort horb_am_neckar {
@@ -2153,6 +2633,11 @@ ort horb_am_neckar {
         besitzer   = WUE
         verwaltung = wu_schwarzwaldkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }
 
@@ -2178,6 +2663,11 @@ ort sulz_am_neckar {
         verwaltung = wu_schwarzwaldkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort haigerloch {
@@ -2198,6 +2688,21 @@ ort haigerloch {
 
     1848.03.01 = {
         besitzer = HSI
+        bund     = ja
+    }
+
+    1850.04.06 = {
+        besitzer   = PRU
+        verwaltung = pr_hohenzollern
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
         bund     = ja
     }
 }
@@ -2223,6 +2728,11 @@ ort alpirsbach {
         verwaltung = wu_schwarzwaldkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort oberndorf {
@@ -2245,6 +2755,11 @@ ort oberndorf {
         besitzer   = WUE
         verwaltung = wu_schwarzwaldkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }
 
@@ -2269,6 +2784,11 @@ ort rosenfeld {
         verwaltung = wu_schwarzwaldkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort schopfloch {
@@ -2291,6 +2811,11 @@ ort schopfloch {
         besitzer   = WUE
         verwaltung = wu_schwarzwaldkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }
 
@@ -2315,6 +2840,11 @@ ort tuttlingen {
         verwaltung = wu_schwarzwaldkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort rottweil {
@@ -2337,6 +2867,11 @@ ort rottweil {
         besitzer   = WUE
         verwaltung = wu_schwarzwaldkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }
 
@@ -2361,6 +2896,11 @@ ort schramberg {
         verwaltung = wu_schwarzwaldkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort trossingen {
@@ -2383,6 +2923,11 @@ ort trossingen {
         besitzer   = WUE
         verwaltung = wu_schwarzwaldkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }
 
@@ -2407,6 +2952,11 @@ ort dunningen {
         verwaltung = wu_schwarzwaldkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort immendingen {
@@ -2429,6 +2979,11 @@ ort immendingen {
         besitzer   = BAD
         verwaltung = bd_seekreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BAD
+        bund     = nein
     }
 }
 
@@ -2453,6 +3008,11 @@ ort gosheim {
         verwaltung = wu_schwarzwaldkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
+    }
 }
 
 ort fridingen_an_der_donau {
@@ -2475,5 +3035,10 @@ ort fridingen_an_der_donau {
         besitzer   = WUE
         verwaltung = wu_schwarzwaldkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = WUE
+        bund     = nein
     }
 }

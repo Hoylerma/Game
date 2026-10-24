@@ -31,6 +31,11 @@ ort offenbach {
         verwaltung = hd_starkenburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
+    }
 }
 
 ort dietzenbach {
@@ -53,6 +58,11 @@ ort dietzenbach {
         besitzer   = HED
         verwaltung = hd_starkenburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
     }
 }
 
@@ -77,6 +87,11 @@ ort neu_isenburg {
         verwaltung = hd_starkenburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
+    }
 }
 
 ort gross_umstadt {
@@ -99,6 +114,11 @@ ort gross_umstadt {
         besitzer   = HED
         verwaltung = hd_starkenburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
     }
 }
 
@@ -123,6 +143,11 @@ ort seligenstadt {
         verwaltung = hd_starkenburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
+    }
 }
 
 ort reinheim {
@@ -145,6 +170,11 @@ ort reinheim {
         besitzer   = HED
         verwaltung = hd_starkenburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
     }
 }
 
@@ -169,6 +199,11 @@ ort babenhausen_starkenburg {
         verwaltung = hd_starkenburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
+    }
 }
 
 ort messel {
@@ -191,6 +226,11 @@ ort messel {
         besitzer   = HED
         verwaltung = hd_starkenburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
     }
 }
 
@@ -215,6 +255,11 @@ ort ruesselsheim {
         verwaltung = hd_starkenburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
+    }
 }
 
 ort gross_gerau {
@@ -237,6 +282,11 @@ ort gross_gerau {
         besitzer   = HED
         verwaltung = hd_starkenburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
     }
 }
 
@@ -261,6 +311,11 @@ ort moerfelden_walldorf {
         verwaltung = hd_starkenburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
+    }
 }
 
 ort kelsterbach {
@@ -283,6 +338,11 @@ ort kelsterbach {
         besitzer   = HED
         verwaltung = hd_starkenburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
     }
 }
 
@@ -307,6 +367,11 @@ ort darmstadt {
         verwaltung = hd_starkenburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
+    }
 }
 
 ort heppenheim {
@@ -329,6 +394,11 @@ ort heppenheim {
         besitzer   = HED
         verwaltung = hd_starkenburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
     }
 }
 
@@ -353,6 +423,11 @@ ort viernheim {
         verwaltung = hd_starkenburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
+    }
 }
 
 ort lampertheim {
@@ -375,6 +450,11 @@ ort lampertheim {
         besitzer   = HED
         verwaltung = hd_starkenburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
     }
 }
 
@@ -399,6 +479,11 @@ ort pfungstadt {
         verwaltung = hd_starkenburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
+    }
 }
 
 ort biblis {
@@ -421,6 +506,11 @@ ort biblis {
         besitzer   = HED
         verwaltung = hd_starkenburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
     }
 }
 
@@ -445,6 +535,11 @@ ort zwingenberg {
         verwaltung = hd_starkenburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
+    }
 }
 
 ort biebesheim {
@@ -467,6 +562,11 @@ ort biebesheim {
         besitzer   = HED
         verwaltung = hd_starkenburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
     }
 }
 
@@ -491,6 +591,11 @@ ort erbach_im_odenwald {
         verwaltung = hd_starkenburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
+    }
 }
 
 ort wald_michelbach {
@@ -513,6 +618,11 @@ ort wald_michelbach {
         besitzer   = HED
         verwaltung = hd_starkenburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
     }
 }
 
@@ -537,6 +647,11 @@ ort moerlenbach {
         verwaltung = hd_starkenburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
+    }
 }
 
 ort bad_koenig {
@@ -559,6 +674,11 @@ ort bad_koenig {
         besitzer   = HED
         verwaltung = hd_starkenburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
     }
 }
 
@@ -583,6 +703,11 @@ ort beerfelden {
         verwaltung = hd_starkenburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
+    }
 }
 
 ort lindenfels {
@@ -605,6 +730,11 @@ ort lindenfels {
         besitzer   = HED
         verwaltung = hd_starkenburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
     }
 }
 
@@ -629,6 +759,11 @@ ort fraenkisch_crumbach {
         verwaltung = hd_starkenburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
+    }
 }
 
 ort hirschhorn {
@@ -651,5 +786,10 @@ ort hirschhorn {
         besitzer   = HED
         verwaltung = hd_starkenburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
     }
 }

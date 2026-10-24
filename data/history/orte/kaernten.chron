@@ -31,6 +31,11 @@ ort spittal_an_der_drau {
         verwaltung = au_kr_villacher_kreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort sachsenburg {
@@ -53,6 +58,11 @@ ort sachsenburg {
         besitzer   = AUT
         verwaltung = au_kr_villacher_kreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -77,6 +87,11 @@ ort gmuend_in_kaernten {
         verwaltung = au_kr_villacher_kreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort obervellach {
@@ -99,6 +114,11 @@ ort obervellach {
         besitzer   = AUT
         verwaltung = au_kr_villacher_kreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -123,6 +143,11 @@ ort rennweg_am_katschberg {
         verwaltung = au_kr_villacher_kreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort sankt_veit_an_der_glan {
@@ -145,6 +170,11 @@ ort sankt_veit_an_der_glan {
         besitzer   = AUT
         verwaltung = au_kr_klagenfurter_kreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -170,6 +200,11 @@ ort althofen {
         verwaltung = au_kr_klagenfurter_kreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort friesach {
@@ -192,6 +227,11 @@ ort friesach {
         besitzer   = AUT
         verwaltung = au_kr_klagenfurter_kreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -216,6 +256,11 @@ ort gurk {
         verwaltung = au_kr_klagenfurter_kreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort metnitz {
@@ -238,6 +283,11 @@ ort metnitz {
         besitzer   = AUT
         verwaltung = au_kr_klagenfurter_kreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -262,6 +312,11 @@ ort gloednitz {
         verwaltung = au_kr_klagenfurter_kreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort koetschach {
@@ -284,6 +339,11 @@ ort koetschach {
         besitzer   = AUT
         verwaltung = au_kr_villacher_kreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -308,6 +368,11 @@ ort heiligenblut {
         verwaltung = au_kr_villacher_kreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort greifenburg {
@@ -330,6 +395,11 @@ ort greifenburg {
         besitzer   = AUT
         verwaltung = au_kr_villacher_kreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -354,6 +424,11 @@ ort winklern {
         verwaltung = au_kr_villacher_kreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort kirchbach {
@@ -376,6 +451,11 @@ ort kirchbach {
         besitzer   = AUT
         verwaltung = au_kr_villacher_kreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -400,6 +480,11 @@ ort oberdrauburg {
         verwaltung = au_kr_villacher_kreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort stall {
@@ -422,6 +507,11 @@ ort stall {
         besitzer   = AUT
         verwaltung = au_kr_villacher_kreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -446,6 +536,11 @@ ort klagenfurt {
         verwaltung = au_kr_klagenfurter_kreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort ferlach {
@@ -468,6 +563,11 @@ ort ferlach {
         besitzer   = AUT
         verwaltung = au_kr_klagenfurter_kreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -492,6 +592,11 @@ ort poggersdorf {
         verwaltung = au_kr_klagenfurter_kreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort zgornje_jezersko {
@@ -514,6 +619,11 @@ ort zgornje_jezersko {
         besitzer   = AUT
         verwaltung = au_kr_klagenfurter_kreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -538,6 +648,11 @@ ort sittersdorf {
         verwaltung = au_kr_klagenfurter_kreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort sankt_margareten_im_rosental {
@@ -560,6 +675,11 @@ ort sankt_margareten_im_rosental {
         besitzer   = AUT
         verwaltung = au_kr_klagenfurter_kreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -584,6 +704,11 @@ ort villach {
         verwaltung = au_kr_villacher_kreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort feldkirchen_in_kaernten {
@@ -606,6 +731,11 @@ ort feldkirchen_in_kaernten {
         besitzer   = AUT
         verwaltung = au_kr_klagenfurter_kreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -630,6 +760,11 @@ ort poertschach_am_woerthersee {
         verwaltung = au_kr_klagenfurter_kreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort velden_am_woerthersee {
@@ -652,6 +787,11 @@ ort velden_am_woerthersee {
         besitzer   = AUT
         verwaltung = au_kr_villacher_kreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -676,6 +816,11 @@ ort radenthein {
         verwaltung = au_kr_villacher_kreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort feistritz_an_der_drau {
@@ -698,6 +843,11 @@ ort feistritz_an_der_drau {
         besitzer   = AUT
         verwaltung = au_kr_villacher_kreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -722,6 +872,11 @@ ort feistritz_im_rosental {
         verwaltung = au_kr_klagenfurter_kreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort bodensdorf {
@@ -744,6 +899,11 @@ ort bodensdorf {
         besitzer   = AUT
         verwaltung = au_kr_villacher_kreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -768,6 +928,11 @@ ort arriach {
         verwaltung = au_kr_villacher_kreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort gnesau {
@@ -790,6 +955,11 @@ ort gnesau {
         besitzer   = AUT
         verwaltung = au_kr_villacher_kreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -814,6 +984,11 @@ ort mauer {
         verwaltung = au_kr_klagenfurter_kreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort gutenstein {
@@ -836,6 +1011,11 @@ ort gutenstein {
         besitzer   = AUT
         verwaltung = au_kr_klagenfurter_kreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -860,6 +1040,11 @@ ort voelkermarkt {
         verwaltung = au_kr_klagenfurter_kreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort mezica {
@@ -882,6 +1067,11 @@ ort mezica {
         besitzer   = AUT
         verwaltung = au_kr_klagenfurter_kreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -906,6 +1096,11 @@ ort bad_sankt_leonhard_im_lavanttal {
         verwaltung = au_kr_klagenfurter_kreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort sankt_andrae {
@@ -928,6 +1123,11 @@ ort sankt_andrae {
         besitzer   = AUT
         verwaltung = au_kr_klagenfurter_kreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -952,6 +1152,11 @@ ort brueckl {
         verwaltung = au_kr_klagenfurter_kreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort lavamuend {
@@ -974,6 +1179,11 @@ ort lavamuend {
         besitzer   = AUT
         verwaltung = au_kr_klagenfurter_kreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -998,6 +1208,11 @@ ort ruden {
         verwaltung = au_kr_klagenfurter_kreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort tarvis {
@@ -1020,6 +1235,11 @@ ort tarvis {
         besitzer   = AUT
         verwaltung = au_kr_villacher_kreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1044,6 +1264,11 @@ ort hermagor {
         verwaltung = au_kr_villacher_kreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort arnoldstein {
@@ -1066,6 +1291,11 @@ ort arnoldstein {
         besitzer   = AUT
         verwaltung = au_kr_villacher_kreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1090,6 +1320,11 @@ ort pontebba {
         verwaltung = au_kr_villacher_kreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort malborghetto {
@@ -1112,5 +1347,10 @@ ort malborghetto {
         besitzer   = AUT
         verwaltung = au_kr_villacher_kreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }

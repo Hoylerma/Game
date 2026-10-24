@@ -31,6 +31,16 @@ ort hamm {
         verwaltung = pr_kr_hamm
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort unna {
@@ -55,6 +65,16 @@ ort unna {
         verwaltung = pr_kr_dortmund
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort soest {
@@ -77,6 +97,16 @@ ort soest {
         besitzer   = PRU
         verwaltung = pr_kr_soest
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -101,6 +131,16 @@ ort luenen {
         verwaltung = pr_kr_dortmund
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort bergkamen {
@@ -123,6 +163,16 @@ ort bergkamen {
         besitzer   = PRU
         verwaltung = pr_kr_hamm
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -148,6 +198,16 @@ ort werl {
         verwaltung = pr_kr_soest
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort selm {
@@ -170,6 +230,16 @@ ort selm {
         besitzer   = PRU
         verwaltung = pr_kr_luedinghausen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -194,6 +264,16 @@ ort boenen {
         verwaltung = pr_kr_hamm
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort welver {
@@ -216,6 +296,16 @@ ort welver {
         besitzer   = PRU
         verwaltung = pr_kr_soest
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -240,6 +330,16 @@ ort lippstadt {
         verwaltung = pr_kr_lippstadt
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort meschede {
@@ -263,6 +363,16 @@ ort meschede {
         verwaltung = pr_kr_meschede
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort warstein {
@@ -285,6 +395,16 @@ ort warstein {
         besitzer   = PRU
         verwaltung = pr_kr_meschede
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -310,6 +430,16 @@ ort brilon {
         verwaltung = pr_kr_brilon
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort geseke {
@@ -332,6 +462,16 @@ ort geseke {
         besitzer   = PRU
         verwaltung = pr_kr_bueren
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -356,6 +496,16 @@ ort marsberg {
         verwaltung = pr_kr_brilon
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort anroechte {
@@ -378,6 +528,16 @@ ort anroechte {
         besitzer   = PRU
         verwaltung = pr_kr_lippstadt
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -402,6 +562,16 @@ ort bestwig {
         verwaltung = pr_kr_meschede
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort ruethen {
@@ -424,6 +594,16 @@ ort ruethen {
         besitzer   = PRU
         verwaltung = pr_kr_bueren
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -449,6 +629,16 @@ ort dortmund {
         verwaltung = pr_kr_dortmund
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort bochum {
@@ -472,6 +662,16 @@ ort bochum {
         besitzer   = PRU
         verwaltung = pr_kr_bochum
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -497,6 +697,16 @@ ort herne {
         verwaltung = pr_kr_bochum
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort hagen {
@@ -519,6 +729,16 @@ ort hagen {
         besitzer   = PRU
         verwaltung = pr_kr_hagen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -544,6 +764,16 @@ ort witten {
         verwaltung = pr_kr_bochum
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort schwelm {
@@ -566,6 +796,16 @@ ort schwelm {
         besitzer   = PRU
         verwaltung = pr_kr_hagen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -591,6 +831,16 @@ ort hattingen {
         verwaltung = pr_kr_bochum
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort schwerte {
@@ -613,6 +863,16 @@ ort schwerte {
         besitzer   = PRU
         verwaltung = pr_kr_dortmund
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -637,6 +897,16 @@ ort halver {
         verwaltung = pr_kr_altena
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort breckerfeld {
@@ -659,6 +929,16 @@ ort breckerfeld {
         besitzer   = PRU
         verwaltung = pr_kr_hagen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -683,6 +963,16 @@ ort arnsberg {
         verwaltung = pr_kr_arnsberg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort schmallenberg {
@@ -705,6 +995,16 @@ ort schmallenberg {
         besitzer   = PRU
         verwaltung = pr_kr_wittgenstein
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -729,6 +1029,16 @@ ort sundern {
         verwaltung = pr_kr_arnsberg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort eslohe {
@@ -751,6 +1061,16 @@ ort eslohe {
         besitzer   = PRU
         verwaltung = pr_kr_meschede
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -775,6 +1095,16 @@ ort iserlohn {
         verwaltung = pr_kr_iserlohn
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort luedenscheid {
@@ -797,6 +1127,16 @@ ort luedenscheid {
         besitzer   = PRU
         verwaltung = pr_kr_altena
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -821,6 +1161,16 @@ ort menden {
         verwaltung = pr_kr_iserlohn
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort plettenberg {
@@ -843,6 +1193,16 @@ ort plettenberg {
         besitzer   = PRU
         verwaltung = pr_kr_altena
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -867,6 +1227,16 @@ ort lennestadt {
         verwaltung = pr_kr_olpe
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort attendorn {
@@ -889,6 +1259,16 @@ ort attendorn {
         besitzer   = PRU
         verwaltung = pr_kr_olpe
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -913,6 +1293,16 @@ ort meinerzhagen {
         verwaltung = pr_kr_olpe
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort altena {
@@ -935,6 +1325,16 @@ ort altena {
         besitzer   = PRU
         verwaltung = pr_kr_altena
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -959,6 +1359,16 @@ ort werdohl {
         verwaltung = pr_kr_altena
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort balve {
@@ -981,6 +1391,16 @@ ort balve {
         besitzer   = PRU
         verwaltung = pr_kr_iserlohn
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1005,6 +1425,16 @@ ort herscheid {
         verwaltung = pr_kr_altena
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort bad_berleburg {
@@ -1027,6 +1457,16 @@ ort bad_berleburg {
         besitzer   = PRU
         verwaltung = pr_kr_wittgenstein
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1051,6 +1491,16 @@ ort bad_laasphe {
         verwaltung = pr_kr_wittgenstein
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort winterberg_sauerland {
@@ -1073,6 +1523,16 @@ ort winterberg_sauerland {
         besitzer   = PRU
         verwaltung = pr_kr_wittgenstein
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1097,6 +1557,16 @@ ort erndtebrueck {
         verwaltung = pr_kr_wittgenstein
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort medebach {
@@ -1120,6 +1590,16 @@ ort medebach {
         verwaltung = pr_kr_brilon
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort hallenberg {
@@ -1142,6 +1622,16 @@ ort hallenberg {
         besitzer   = PRU
         verwaltung = pr_kr_wittgenstein
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1167,6 +1657,16 @@ ort siegen {
         verwaltung = pr_kr_siegen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort olpe {
@@ -1190,6 +1690,16 @@ ort olpe {
         verwaltung = pr_kr_olpe
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort kreuztal {
@@ -1212,6 +1722,16 @@ ort kreuztal {
         besitzer   = PRU
         verwaltung = pr_kr_siegen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1237,6 +1757,16 @@ ort wilnsdorf {
         verwaltung = pr_kr_siegen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort hilchenbach {
@@ -1260,6 +1790,16 @@ ort hilchenbach {
         verwaltung = pr_kr_siegen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort freudenberg {
@@ -1282,5 +1822,15 @@ ort freudenberg {
         besitzer   = PRU
         verwaltung = pr_kr_siegen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }

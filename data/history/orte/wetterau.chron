@@ -31,6 +31,16 @@ ort nidda {
         verwaltung = hd_oberhessen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort schluechtern {
@@ -53,6 +63,21 @@ ort schluechtern {
         besitzer   = HEK
         verwaltung = hk_hanau
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HEK
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -77,6 +102,21 @@ ort bad_soden_salmuenster {
         verwaltung = hk_hanau
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HEK
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort birstein {
@@ -99,6 +139,21 @@ ort birstein {
         besitzer   = HEK
         verwaltung = hk_hanau
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HEK
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -123,6 +178,16 @@ ort gedern {
         verwaltung = hd_oberhessen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort hanau_am_main {
@@ -145,6 +210,21 @@ ort hanau_am_main {
         besitzer   = HEK
         verwaltung = hk_hanau
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HEK
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -169,6 +249,21 @@ ort gelnhausen {
         verwaltung = hk_hanau
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HEK
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort buedingen {
@@ -191,6 +286,16 @@ ort buedingen {
         besitzer   = HED
         verwaltung = hd_oberhessen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = HED
+        bund     = ja
     }
 }
 
@@ -215,6 +320,21 @@ ort langenselbold {
         verwaltung = hk_hanau
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HEK
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort frankfurt_am_main {
@@ -237,6 +357,21 @@ ort frankfurt_am_main {
         besitzer = FRA
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = FRA
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort bad_homburg_vor_der_hoehe {
@@ -257,6 +392,25 @@ ort bad_homburg_vor_der_hoehe {
 
     1848.03.01 = {
         besitzer = HHO
+        bund     = ja
+    }
+
+    1866.03.24 = {
+        besitzer = HED
+    }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
         bund     = ja
     }
 }
@@ -282,6 +436,16 @@ ort friedberg {
         verwaltung = hd_oberhessen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort bad_vilbel {
@@ -304,6 +468,16 @@ ort bad_vilbel {
         besitzer   = HED
         verwaltung = hd_oberhessen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = HED
+        bund     = ja
     }
 }
 
@@ -328,6 +502,16 @@ ort butzbach {
         verwaltung = hd_oberhessen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort koenigstein_im_taunus {
@@ -350,6 +534,21 @@ ort koenigstein_im_taunus {
         besitzer = NAS
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = NAS
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort usingen {
@@ -370,6 +569,21 @@ ort usingen {
 
     1848.03.01 = {
         besitzer = NAS
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = NAS
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
         bund     = ja
     }
 }
@@ -395,6 +609,16 @@ ort woelfersheim {
         verwaltung = hd_oberhessen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort florstadt {
@@ -418,6 +642,16 @@ ort florstadt {
         verwaltung = hd_oberhessen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort schmitten {
@@ -440,6 +674,21 @@ ort schmitten {
         besitzer = NAS
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = NAS
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort graevenwiesbach {
@@ -460,6 +709,21 @@ ort graevenwiesbach {
 
     1848.03.01 = {
         besitzer = NAS
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = NAS
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
         bund     = ja
     }
 }

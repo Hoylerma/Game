@@ -30,6 +30,11 @@ ort gmuend {
         verwaltung = au_kr_viertel_ober_dem_manhartsberg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort zwettl {
@@ -52,6 +57,11 @@ ort zwettl {
         besitzer   = AUT
         verwaltung = au_kr_viertel_ober_dem_manhartsberg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -76,6 +86,11 @@ ort waidhofen_an_der_thaya {
         verwaltung = au_kr_viertel_ober_dem_manhartsberg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort heidenreichstein {
@@ -98,6 +113,11 @@ ort heidenreichstein {
         besitzer   = AUT
         verwaltung = au_kr_viertel_ober_dem_manhartsberg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -122,6 +142,11 @@ ort weitra {
         verwaltung = au_kr_viertel_ober_dem_manhartsberg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort litschau {
@@ -144,6 +169,11 @@ ort litschau {
         besitzer   = AUT
         verwaltung = au_kr_viertel_ober_dem_manhartsberg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -168,6 +198,11 @@ ort allentsteig {
         verwaltung = au_kr_viertel_ober_dem_manhartsberg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort gross_siegharts {
@@ -190,6 +225,11 @@ ort gross_siegharts {
         besitzer   = AUT
         verwaltung = au_kr_viertel_ober_dem_manhartsberg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -214,6 +254,11 @@ ort dobersberg {
         verwaltung = au_kr_viertel_ober_dem_manhartsberg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort raabs_an_der_thaya {
@@ -236,6 +281,11 @@ ort raabs_an_der_thaya {
         besitzer   = AUT
         verwaltung = au_kr_viertel_ober_dem_manhartsberg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -260,6 +310,11 @@ ort schweiggers {
         verwaltung = au_kr_viertel_ober_dem_manhartsberg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort vitis {
@@ -282,6 +337,11 @@ ort vitis {
         besitzer   = AUT
         verwaltung = au_kr_viertel_ober_dem_manhartsberg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -306,6 +366,11 @@ ort laa_an_der_thaya {
         verwaltung = au_kr_viertel_unter_dem_manhartsberg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort ernstbrunn {
@@ -328,6 +393,11 @@ ort ernstbrunn {
         besitzer   = AUT
         verwaltung = au_kr_viertel_unter_dem_manhartsberg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -352,6 +422,11 @@ ort grossmugl {
         verwaltung = au_kr_viertel_unter_dem_manhartsberg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort mailberg {
@@ -374,6 +449,11 @@ ort mailberg {
         besitzer   = AUT
         verwaltung = au_kr_viertel_unter_dem_manhartsberg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -398,6 +478,11 @@ ort gnadendorf {
         verwaltung = au_kr_viertel_unter_dem_manhartsberg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort eggenburg {
@@ -420,6 +505,11 @@ ort eggenburg {
         besitzer   = AUT
         verwaltung = au_kr_viertel_ober_dem_manhartsberg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -445,6 +535,11 @@ ort retz {
         verwaltung = au_kr_viertel_unter_dem_manhartsberg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort langau {
@@ -467,6 +562,11 @@ ort langau {
         besitzer   = AUT
         verwaltung = au_kr_viertel_ober_dem_manhartsberg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -491,6 +591,11 @@ ort sitzendorf_an_der_schmida {
         verwaltung = au_kr_viertel_unter_dem_manhartsberg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort guntersdorf {
@@ -513,6 +618,11 @@ ort guntersdorf {
         besitzer   = AUT
         verwaltung = au_kr_viertel_unter_dem_manhartsberg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -537,6 +647,11 @@ ort hardegg {
         verwaltung = au_kr_viertel_unter_dem_manhartsberg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort mistelbach {
@@ -560,6 +675,11 @@ ort mistelbach {
         verwaltung = au_kr_viertel_unter_dem_manhartsberg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort zistersdorf {
@@ -582,6 +702,11 @@ ort zistersdorf {
         besitzer   = AUT
         verwaltung = au_kr_viertel_unter_dem_manhartsberg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -607,6 +732,11 @@ ort poysdorf {
         verwaltung = au_kr_viertel_unter_dem_manhartsberg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort gaweinstal {
@@ -629,6 +759,11 @@ ort gaweinstal {
         besitzer   = AUT
         verwaltung = au_kr_viertel_unter_dem_manhartsberg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -653,6 +788,11 @@ ort hohenau {
         verwaltung = au_kr_viertel_unter_dem_manhartsberg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort duernkrut {
@@ -676,6 +816,11 @@ ort duernkrut {
         verwaltung = au_kr_viertel_unter_dem_manhartsberg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort bernhardsthal {
@@ -698,6 +843,11 @@ ort bernhardsthal {
         besitzer   = AUT
         verwaltung = au_kr_viertel_unter_dem_manhartsberg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -723,6 +873,11 @@ ort krems_an_der_donau {
         verwaltung = au_kr_viertel_ober_dem_manhartsberg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort horn {
@@ -745,6 +900,11 @@ ort horn {
         besitzer   = AUT
         verwaltung = au_kr_viertel_ober_dem_manhartsberg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -769,6 +929,11 @@ ort gfoehl {
         verwaltung = au_kr_viertel_ober_dem_manhartsberg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort weissenkirchen_in_der_wachau {
@@ -791,6 +956,11 @@ ort weissenkirchen_in_der_wachau {
         besitzer   = AUT
         verwaltung = au_kr_viertel_ober_dem_manhartsberg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -815,6 +985,11 @@ ort rastenfeld {
         verwaltung = au_kr_viertel_ober_dem_manhartsberg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort sankt_leonhard_am_hornerwald {
@@ -837,6 +1012,11 @@ ort sankt_leonhard_am_hornerwald {
         besitzer   = AUT
         verwaltung = au_kr_viertel_ober_dem_manhartsberg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -861,6 +1041,11 @@ ort brunn_an_der_wild {
         verwaltung = au_kr_viertel_ober_dem_manhartsberg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort gaenserndorf {
@@ -883,6 +1068,11 @@ ort gaenserndorf {
         besitzer   = AUT
         verwaltung = au_kr_viertel_unter_dem_manhartsberg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -907,6 +1097,11 @@ ort hainburg_an_der_donau {
         verwaltung = au_kr_viertel_unter_dem_wienerwald
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort leopoldsdorf_im_marchfelde {
@@ -929,6 +1124,11 @@ ort leopoldsdorf_im_marchfelde {
         besitzer   = AUT
         verwaltung = au_kr_viertel_unter_dem_manhartsberg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -953,6 +1153,11 @@ ort marchegg {
         verwaltung = au_kr_viertel_unter_dem_manhartsberg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort angern_an_der_march {
@@ -975,6 +1180,11 @@ ort angern_an_der_march {
         besitzer   = AUT
         verwaltung = au_kr_viertel_unter_dem_manhartsberg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -999,6 +1209,11 @@ ort eckartsau {
         verwaltung = au_kr_viertel_unter_dem_manhartsberg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort tulln {
@@ -1021,6 +1236,11 @@ ort tulln {
         besitzer   = AUT
         verwaltung = au_kr_viertel_ober_dem_wienerwald
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1045,6 +1265,11 @@ ort hollabrunn {
         verwaltung = au_kr_viertel_unter_dem_manhartsberg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort grossweikersdorf {
@@ -1067,6 +1292,11 @@ ort grossweikersdorf {
         besitzer   = AUT
         verwaltung = au_kr_viertel_unter_dem_manhartsberg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1091,6 +1321,11 @@ ort fels_am_wagram {
         verwaltung = au_kr_viertel_unter_dem_manhartsberg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort erpersdorf {
@@ -1113,6 +1348,11 @@ ort erpersdorf {
         besitzer   = AUT
         verwaltung = au_kr_viertel_ober_dem_wienerwald
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1137,6 +1377,11 @@ ort ysper {
         verwaltung = au_kr_viertel_ober_dem_manhartsberg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort poeggstall {
@@ -1159,6 +1404,11 @@ ort poeggstall {
         besitzer   = AUT
         verwaltung = au_kr_viertel_ober_dem_manhartsberg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1183,6 +1433,11 @@ ort gross_gerungs {
         verwaltung = au_kr_viertel_ober_dem_manhartsberg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort ottenschlag {
@@ -1205,6 +1460,11 @@ ort ottenschlag {
         besitzer   = AUT
         verwaltung = au_kr_viertel_ober_dem_manhartsberg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1229,6 +1489,11 @@ ort rappottenstein {
         verwaltung = au_kr_viertel_ober_dem_manhartsberg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort altmelon {
@@ -1251,6 +1516,11 @@ ort altmelon {
         besitzer   = AUT
         verwaltung = au_kr_viertel_ober_dem_manhartsberg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1275,6 +1545,11 @@ ort wien {
         verwaltung = au_kr_viertel_unter_dem_wienerwald
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort stockerau {
@@ -1297,6 +1572,11 @@ ort stockerau {
         besitzer   = AUT
         verwaltung = au_kr_viertel_unter_dem_manhartsberg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1322,6 +1602,11 @@ ort klosterneuburg {
         verwaltung = au_kr_viertel_unter_dem_wienerwald
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort schwechat {
@@ -1344,6 +1629,11 @@ ort schwechat {
         besitzer   = AUT
         verwaltung = au_kr_viertel_unter_dem_wienerwald
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1368,6 +1658,11 @@ ort gerasdorf_bei_wien {
         verwaltung = au_kr_viertel_unter_dem_manhartsberg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort gross_enzersdorf {
@@ -1390,6 +1685,11 @@ ort gross_enzersdorf {
         besitzer   = AUT
         verwaltung = au_kr_viertel_unter_dem_manhartsberg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1414,6 +1714,11 @@ ort wolkersdorf_im_weinviertel {
         verwaltung = au_kr_viertel_unter_dem_manhartsberg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort harmannsdorf {
@@ -1436,6 +1741,11 @@ ort harmannsdorf {
         besitzer   = AUT
         verwaltung = au_kr_viertel_unter_dem_manhartsberg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1460,6 +1770,11 @@ ort sankt_poelten {
         verwaltung = au_kr_viertel_ober_dem_wienerwald
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort melk {
@@ -1482,6 +1797,11 @@ ort melk {
         besitzer   = AUT
         verwaltung = au_kr_viertel_ober_dem_wienerwald
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1506,6 +1826,11 @@ ort wilhelmsburg {
         verwaltung = au_kr_viertel_ober_dem_wienerwald
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort herzogenburg {
@@ -1528,6 +1853,11 @@ ort herzogenburg {
         besitzer   = AUT
         verwaltung = au_kr_viertel_ober_dem_wienerwald
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1552,6 +1882,11 @@ ort kirchberg_an_der_pielach {
         verwaltung = au_kr_viertel_ober_dem_wienerwald
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort boeheimkirchen {
@@ -1574,6 +1909,11 @@ ort boeheimkirchen {
         besitzer   = AUT
         verwaltung = au_kr_viertel_ober_dem_wienerwald
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1598,6 +1938,11 @@ ort mank {
         verwaltung = au_kr_viertel_ober_dem_wienerwald
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort hainfeld {
@@ -1620,6 +1965,11 @@ ort hainfeld {
         besitzer   = AUT
         verwaltung = au_kr_viertel_ober_dem_wienerwald
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1644,6 +1994,11 @@ ort markersdorf_an_der_pielach {
         verwaltung = au_kr_viertel_ober_dem_wienerwald
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort lilienfeld {
@@ -1666,6 +2021,11 @@ ort lilienfeld {
         besitzer   = AUT
         verwaltung = au_kr_viertel_ober_dem_wienerwald
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1690,6 +2050,11 @@ ort ybbs_an_der_donau {
         verwaltung = au_kr_viertel_ober_dem_wienerwald
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort poechlarn {
@@ -1712,6 +2077,11 @@ ort poechlarn {
         besitzer   = AUT
         verwaltung = au_kr_viertel_ober_dem_wienerwald
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1736,6 +2106,11 @@ ort scheibbs {
         verwaltung = au_kr_viertel_ober_dem_wienerwald
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort gaming {
@@ -1758,6 +2133,11 @@ ort gaming {
         besitzer   = AUT
         verwaltung = au_kr_viertel_ober_dem_wienerwald
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1782,6 +2162,11 @@ ort steinakirchen_am_forst {
         verwaltung = au_kr_viertel_ober_dem_wienerwald
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort puchenstuben {
@@ -1804,6 +2189,11 @@ ort puchenstuben {
         besitzer   = AUT
         verwaltung = au_kr_viertel_ober_dem_wienerwald
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1828,6 +2218,11 @@ ort amstetten {
         verwaltung = au_kr_viertel_ober_dem_wienerwald
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort sankt_valentin {
@@ -1850,6 +2245,11 @@ ort sankt_valentin {
         besitzer   = AUT
         verwaltung = au_kr_viertel_ober_dem_wienerwald
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1874,6 +2274,11 @@ ort waidhofen_an_der_ybbs {
         verwaltung = au_kr_viertel_ober_dem_wienerwald
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort seitenstetten {
@@ -1896,6 +2301,11 @@ ort seitenstetten {
         besitzer   = AUT
         verwaltung = au_kr_viertel_ober_dem_wienerwald
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1920,6 +2330,11 @@ ort wallsee {
         verwaltung = au_kr_viertel_ober_dem_wienerwald
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort goestling_an_der_ybbs {
@@ -1942,6 +2357,11 @@ ort goestling_an_der_ybbs {
         besitzer   = AUT
         verwaltung = au_kr_viertel_ober_dem_wienerwald
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1966,6 +2386,11 @@ ort hollenstein_an_der_ybbs {
         verwaltung = au_kr_viertel_ober_dem_wienerwald
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort bruck_an_der_leitha {
@@ -1988,6 +2413,11 @@ ort bruck_an_der_leitha {
         besitzer   = AUT
         verwaltung = au_kr_viertel_unter_dem_wienerwald
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -2012,6 +2442,11 @@ ort ebreichsdorf {
         verwaltung = au_kr_viertel_unter_dem_wienerwald
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort mannersdorf_am_leithagebirge {
@@ -2034,6 +2469,11 @@ ort mannersdorf_am_leithagebirge {
         besitzer   = AUT
         verwaltung = au_kr_viertel_unter_dem_wienerwald
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -2058,6 +2498,11 @@ ort gramatneusiedl {
         verwaltung = au_kr_viertel_unter_dem_wienerwald
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort enzersdorf_an_der_fischa {
@@ -2080,6 +2525,11 @@ ort enzersdorf_an_der_fischa {
         besitzer   = AUT
         verwaltung = au_kr_viertel_unter_dem_wienerwald
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -2105,6 +2555,11 @@ ort baden {
         verwaltung = au_kr_viertel_unter_dem_wienerwald
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort moedling {
@@ -2127,6 +2582,11 @@ ort moedling {
         besitzer   = AUT
         verwaltung = au_kr_viertel_unter_dem_wienerwald
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -2151,6 +2611,11 @@ ort purkersdorf {
         verwaltung = au_kr_viertel_unter_dem_wienerwald
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort breitenfurt_bei_wien {
@@ -2173,6 +2638,11 @@ ort breitenfurt_bei_wien {
         besitzer   = AUT
         verwaltung = au_kr_viertel_unter_dem_wienerwald
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -2197,6 +2667,11 @@ ort berndorf {
         verwaltung = au_kr_viertel_unter_dem_wienerwald
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort sollenau {
@@ -2219,6 +2694,11 @@ ort sollenau {
         besitzer   = AUT
         verwaltung = au_kr_viertel_unter_dem_wienerwald
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -2243,6 +2723,11 @@ ort klausen_leopoldsdorf {
         verwaltung = au_kr_viertel_unter_dem_wienerwald
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort neulengbach {
@@ -2265,6 +2750,11 @@ ort neulengbach {
         besitzer   = AUT
         verwaltung = au_kr_viertel_ober_dem_wienerwald
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -2289,6 +2779,11 @@ ort tuernitz {
         verwaltung = au_kr_viertel_ober_dem_wienerwald
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort sankt_aegyd_am_neuwalde {
@@ -2311,6 +2806,11 @@ ort sankt_aegyd_am_neuwalde {
         besitzer   = AUT
         verwaltung = au_kr_viertel_ober_dem_wienerwald
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -2335,6 +2835,11 @@ ort rohr_im_gebirge {
         verwaltung = au_kr_viertel_unter_dem_wienerwald
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort schwarzau_im_gebirge {
@@ -2357,6 +2862,11 @@ ort schwarzau_im_gebirge {
         besitzer   = AUT
         verwaltung = au_kr_viertel_unter_dem_wienerwald
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -2381,6 +2891,11 @@ ort wiener_neustadt {
         verwaltung = au_kr_viertel_unter_dem_wienerwald
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort ternitz {
@@ -2403,6 +2918,11 @@ ort ternitz {
         besitzer   = AUT
         verwaltung = au_kr_viertel_unter_dem_wienerwald
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -2427,6 +2947,11 @@ ort gloggnitz {
         verwaltung = au_kr_viertel_unter_dem_wienerwald
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort puchberg_am_schneeberg {
@@ -2449,6 +2974,11 @@ ort puchberg_am_schneeberg {
         besitzer   = AUT
         verwaltung = au_kr_viertel_unter_dem_wienerwald
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -2473,6 +3003,11 @@ ort bad_erlach {
         verwaltung = au_kr_viertel_unter_dem_wienerwald
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort pernitz {
@@ -2495,6 +3030,11 @@ ort pernitz {
         besitzer   = AUT
         verwaltung = au_kr_viertel_unter_dem_wienerwald
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -2519,6 +3059,11 @@ ort kirchschlag_in_der_buckligen_welt {
         verwaltung = au_kr_viertel_unter_dem_wienerwald
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort aspang {
@@ -2541,6 +3086,11 @@ ort aspang {
         besitzer   = AUT
         verwaltung = au_kr_viertel_unter_dem_wienerwald
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -2565,6 +3115,11 @@ ort wiesmath {
         verwaltung = au_kr_viertel_unter_dem_wienerwald
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort trattenbach {
@@ -2587,5 +3142,10 @@ ort trattenbach {
         besitzer   = AUT
         verwaltung = au_kr_viertel_unter_dem_wienerwald
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }

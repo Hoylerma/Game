@@ -44,6 +44,16 @@ ort wolfenbuettel {
         besitzer = BWO
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = BWO
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = BWO
+        bund     = ja
+    }
 }
 
 ort braunschweig {
@@ -71,6 +81,16 @@ ort braunschweig {
     }
 
     1848.03.01 = {
+        besitzer = BWO
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BWO
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = BWO
         bund     = ja
     }
@@ -104,6 +124,16 @@ ort helmstedt {
         besitzer = BWO
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = BWO
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = BWO
+        bund     = ja
+    }
 }
 
 ort peine {
@@ -127,6 +157,21 @@ ort peine {
         verwaltung = hn_hildesheim
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort vechelde {
@@ -146,6 +191,16 @@ ort vechelde {
     }
 
     1848.03.01 = {
+        besitzer = BWO
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BWO
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = BWO
         bund     = ja
     }
@@ -172,6 +227,21 @@ ort hohenhameln {
         verwaltung = hn_hildesheim
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort wendeburg {
@@ -191,6 +261,16 @@ ort wendeburg {
     }
 
     1848.03.01 = {
+        besitzer = BWO
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BWO
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = BWO
         bund     = ja
     }
@@ -216,6 +296,16 @@ ort koenigslutter_am_elm {
         besitzer = BWO
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = BWO
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = BWO
+        bund     = ja
+    }
 }
 
 ort schoeningen {
@@ -235,6 +325,16 @@ ort schoeningen {
     }
 
     1848.03.01 = {
+        besitzer = BWO
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BWO
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = BWO
         bund     = ja
     }
@@ -260,6 +360,16 @@ ort cremlingen {
         besitzer = BWO
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = BWO
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = BWO
+        bund     = ja
+    }
 }
 
 ort schoeppenstedt {
@@ -279,6 +389,16 @@ ort schoeppenstedt {
     }
 
     1848.03.01 = {
+        besitzer = BWO
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BWO
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = BWO
         bund     = ja
     }
@@ -304,6 +424,16 @@ ort lehre {
         besitzer = BWO
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = BWO
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = BWO
+        bund     = ja
+    }
 }
 
 ort gross_twuelpstedt {
@@ -323,6 +453,16 @@ ort gross_twuelpstedt {
     }
 
     1848.03.01 = {
+        besitzer = BWO
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BWO
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = BWO
         bund     = ja
     }
@@ -349,6 +489,21 @@ ort goslar {
         verwaltung = hn_hildesheim
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort bad_harzburg {
@@ -372,6 +527,16 @@ ort bad_harzburg {
         besitzer = BWO
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = BWO
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = BWO
+        bund     = ja
+    }
 }
 
 ort seesen {
@@ -391,6 +556,16 @@ ort seesen {
     }
 
     1848.03.01 = {
+        besitzer = BWO
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BWO
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = BWO
         bund     = ja
     }
@@ -417,6 +592,21 @@ ort clausthal_zellerfeld {
         verwaltung = hn_clausthal
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort liebenburg {
@@ -440,6 +630,21 @@ ort liebenburg {
         verwaltung = hn_hildesheim
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort braunlage {
@@ -459,6 +664,16 @@ ort braunlage {
     }
 
     1848.03.01 = {
+        besitzer = BWO
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BWO
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = BWO
         bund     = ja
     }
@@ -484,6 +699,16 @@ ort lutter_am_barenberge {
         besitzer = BWO
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = BWO
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = BWO
+        bund     = ja
+    }
 }
 
 ort boerssum {
@@ -503,6 +728,16 @@ ort boerssum {
     }
 
     1848.03.01 = {
+        besitzer = BWO
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BWO
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = BWO
         bund     = ja
     }
@@ -528,6 +763,16 @@ ort elbe {
         besitzer = BWO
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = BWO
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = BWO
+        bund     = ja
+    }
 }
 
 ort holzminden {
@@ -547,6 +792,16 @@ ort holzminden {
     }
 
     1848.03.01 = {
+        besitzer = BWO
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BWO
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = BWO
         bund     = ja
     }
@@ -572,6 +827,16 @@ ort stadtoldendorf {
         besitzer = BWO
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = BWO
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = BWO
+        bund     = ja
+    }
 }
 
 ort bodenwerder {
@@ -594,6 +859,16 @@ ort bodenwerder {
         besitzer = BWO
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = BWO
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = BWO
+        bund     = ja
+    }
 }
 
 ort eimen {
@@ -613,6 +888,16 @@ ort eimen {
     }
 
     1848.03.01 = {
+        besitzer = BWO
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BWO
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = BWO
         bund     = ja
     }

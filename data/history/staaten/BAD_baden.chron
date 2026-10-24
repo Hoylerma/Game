@@ -28,4 +28,12 @@ staat BAD {
         wahl_indirekt  = ja
         wahl_zensus    = 1
     }
+
+    1852.04.24 = {
+        herrscher = "Friedrich (Regent)"
+    }
+
+    1856.09.05 = {
+        herrscher = "Friedrich I."
+    }
 }

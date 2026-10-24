@@ -1892,8 +1892,20 @@ private:
     void load_parliaments(const SourceFile& file) {
         for_each_definition(file, "parlament", "parlament <kennung> { … }", [&](const ScriptNode& node) {
             check_id(file, node, "Kennung eines Parlaments");
-            const bool later = is_later(file, node, "parlament");
             const std::string what = "parlament " + node.value;
+            // Ein Parlament mit 'bis' (seit M10b) gehört zu späteren Startdaten nicht mehr zur Welt; seine
+            // Wahlkreise entfallen wie die eines späteren Parlaments.
+            bool later = is_later(file, node, "parlament");
+            if (const ScriptNode* until = node.find("bis"); !later && until != nullptr) {
+                const std::optional<Date> end = until->is_block ? std::nullopt : parse_date(until->value);
+                if (!end) {
+                    issues_.error(file.name, until->line,
+                                  "ungültiges Datum " + quote(until->value) + " für 'bis' in " + what);
+                } else if (*end <= start_) {
+                    later_.emplace("parlament:" + node.value, LaterDefinition{*end, file.name, node.line});
+                    later = true;
+                }
+            }
             ScriptNode plain = node;
             plain.children.clear();
             std::vector<const ScriptNode*> faction_nodes;
@@ -1905,8 +1917,9 @@ private:
                 }
             }
             Fields f(plain, file.name, what, issues_,
-                     {"name", "ebene", "sitze", "seit", "wahltag", "wahlrecht", "wahlsystem", "wahl_indirekt",
-                      "wahl_zensus", "fraktionen_ab", "boykott", "boykott_maerkte", "sitz", "quelle"});
+                     {"name", "ebene", "sitze", "seit", "bis", "wahltag", "wahlrecht", "wahlsystem",
+                      "wahl_indirekt", "wahl_zensus", "fraktionen_ab", "boykott", "boykott_maerkte", "sitz",
+                      "quelle"});
             Parliament p;
             p.id = node.value;
             p.name = f.text("name").value_or("");
@@ -2316,10 +2329,22 @@ private:
                 issues_.error(file.name, node.line,
                               "„keine“ ist als Kennung einer Zollunion reserviert (zollunion = keine)");
             }
-            const bool later = is_later(file, node, "zollunion");
             const std::string what = "zollunion " + node.value;
+            // Eine Union mit 'bis' (seit M10b) gehört ab diesem Startdatum nicht mehr zur Welt; Verweise
+            // darauf (Zollunion eines Staates in einem früheren Block) zählen dann wie spätere.
+            bool later = is_later(file, node, "zollunion");
+            if (const ScriptNode* until = node.find("bis"); !later && until != nullptr) {
+                const std::optional<Date> end = until->is_block ? std::nullopt : parse_date(until->value);
+                if (!end) {
+                    issues_.error(file.name, until->line,
+                                  "ungültiges Datum " + quote(until->value) + " für 'bis' in " + what);
+                } else if (*end <= start_) {
+                    later_.emplace("zollunion:" + node.value, LaterDefinition{*end, file.name, node.line});
+                    later = true;
+                }
+            }
             Fields f(node, file.name, what, issues_,
-                     {"name", "seit", "leitung", "tarif", "ausgeschlossen", "farbe", "quelle"});
+                     {"name", "seit", "bis", "leitung", "tarif", "ausgeschlossen", "farbe", "quelle"});
             CustomsUnion u;
             u.id = node.value;
             u.name = f.text("name").value_or("");
@@ -2608,7 +2633,7 @@ private:
                 check_id(file, node, "Kennung einer Bundesversammlung");
                 const std::string what = "bundesversammlung " + node.value;
                 Fields f(node, file.name, what, issues_,
-                         {"name", "seit", "praesidium", "sitz", "plenum", "rat", "quelle"});
+                         {"name", "seit", "bis", "praesidium", "sitz", "plenum", "rat", "quelle"});
                 DietRef ref;
                 ref.file = file.name;
                 ref.line = node.line;
@@ -2672,6 +2697,11 @@ private:
                 if (f.has("seit")) {
                     if (const auto since = f.date("seit"); since && *since > start_) {
                         return; // besteht zum Startdatum noch nicht
+                    }
+                }
+                if (f.has("bis")) {
+                    if (const auto until = f.date("bis"); until && *until <= start_) {
+                        return; // seit M10b: zum Startdatum aufgelöst
                     }
                 }
                 if (diet_ref_) {

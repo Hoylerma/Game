@@ -1,0 +1,73 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+einheit fr_elsass {
+    name   = "Elsass"
+    art    = region
+    quelle = "M10b-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit fr_bas_rhin {
+    name   = "Département Bas-Rhin"
+    art    = departement
+    ueber  = fr_elsass
+    quelle = "Département 1846; für Moselle und Meurthe die heutigen Grenzen von Moselle und Meurthe-et-Moselle, die der Grenze von 1871 folgen (M10b, Wissensstand ohne Quellenzugang)"
+}
+
+einheit fr_haut_rhin {
+    name   = "Département Haut-Rhin"
+    art    = departement
+    ueber  = fr_elsass
+    quelle = "Ohne das Arrondissement Belfort, das 1871 französisch blieb (M10b)"
+}
+
+einheit fr_belfort {
+    name   = "Arrondissement Belfort"
+    art    = arrondissement
+    quelle = "Teil des Haut-Rhin, eigene Einheit für die Grenze von 1871 (M10b)"
+}
+
+einheit fr_lothringen {
+    name   = "Lothringen"
+    art    = region
+    quelle = "M10b-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit fr_moselle {
+    name   = "Département Moselle"
+    art    = departement
+    ueber  = fr_lothringen
+    quelle = "Département 1846; für Moselle und Meurthe die heutigen Grenzen von Moselle und Meurthe-et-Moselle, die der Grenze von 1871 folgen (M10b, Wissensstand ohne Quellenzugang)"
+}
+
+einheit fr_meurthe {
+    name   = "Département Meurthe"
+    art    = departement
+    ueber  = fr_lothringen
+    quelle = "Département 1846; für Moselle und Meurthe die heutigen Grenzen von Moselle und Meurthe-et-Moselle, die der Grenze von 1871 folgen (M10b, Wissensstand ohne Quellenzugang)"
+}
+
+einheit fr_vosges {
+    name   = "Département Vosges"
+    art    = departement
+    ueber  = fr_lothringen
+    quelle = "M10b-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit fr_meuse {
+    name   = "Département Meuse"
+    art    = departement
+    ueber  = fr_lothringen
+    quelle = "M10b-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit fr_ardennes {
+    name   = "Département Ardennes"
+    art    = departement
+    quelle = "M10b-Recherche ohne Quellenzugang; Prüfung offen"
+}
+
+einheit fr_nord {
+    name   = "Département Nord"
+    art    = departement
+    quelle = "M10b-Recherche ohne Quellenzugang; Prüfung offen"
+}

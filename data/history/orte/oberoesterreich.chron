@@ -31,6 +31,11 @@ ort rohrbach_in_oberoesterreich {
         verwaltung = au_kr_muehlkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort altenfelden {
@@ -53,6 +58,11 @@ ort altenfelden {
         besitzer   = AUT
         verwaltung = au_kr_muehlkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -77,6 +87,11 @@ ort ulrichsberg {
         verwaltung = au_kr_muehlkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort afiesl {
@@ -99,6 +114,11 @@ ort afiesl {
         besitzer   = AUT
         verwaltung = au_kr_muehlkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -123,6 +143,11 @@ ort freistadt_oberoesterreich {
         verwaltung = au_kr_muehlkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort perg {
@@ -145,6 +170,11 @@ ort perg {
         besitzer   = AUT
         verwaltung = au_kr_muehlkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -169,6 +199,11 @@ ort hellmonsoedt {
         verwaltung = au_kr_muehlkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort grein {
@@ -191,6 +226,11 @@ ort grein {
         besitzer   = AUT
         verwaltung = au_kr_muehlkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -215,6 +255,11 @@ ort tragwein {
         verwaltung = au_kr_muehlkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort neumarkt_im_muehlkreis {
@@ -237,6 +282,11 @@ ort neumarkt_im_muehlkreis {
         besitzer   = AUT
         verwaltung = au_kr_muehlkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -261,6 +311,11 @@ ort koenigswiesen {
         verwaltung = au_kr_muehlkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort gutau {
@@ -283,6 +338,11 @@ ort gutau {
         besitzer   = AUT
         verwaltung = au_kr_muehlkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -307,6 +367,11 @@ ort burgfried {
         verwaltung = au_kr_muehlkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort weitersfelden {
@@ -329,6 +394,11 @@ ort weitersfelden {
         besitzer   = AUT
         verwaltung = au_kr_muehlkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -353,6 +423,11 @@ ort schaerding {
         verwaltung = au_kr_innkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort andorf {
@@ -375,6 +450,11 @@ ort andorf {
         besitzer   = AUT
         verwaltung = au_kr_innkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -399,6 +479,11 @@ ort muenzkirchen {
         verwaltung = au_kr_innkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort sankt_aegidi {
@@ -421,6 +506,11 @@ ort sankt_aegidi {
         besitzer   = AUT
         verwaltung = au_kr_innkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -445,6 +535,11 @@ ort linz {
         verwaltung = au_kr_muehlkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort wels {
@@ -467,6 +562,11 @@ ort wels {
         besitzer   = AUT
         verwaltung = au_kr_hausruckkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -491,6 +591,11 @@ ort gallneukirchen {
         verwaltung = au_kr_muehlkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort neuhofen_an_der_krems {
@@ -513,6 +618,11 @@ ort neuhofen_an_der_krems {
         besitzer   = AUT
         verwaltung = au_kr_traunkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -537,6 +647,11 @@ ort traun {
         verwaltung = au_kr_traunkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort eferding {
@@ -559,6 +674,11 @@ ort eferding {
         besitzer   = AUT
         verwaltung = au_kr_hausruckkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -583,6 +703,11 @@ ort walding {
         verwaltung = au_kr_muehlkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort sankt_georgen_an_der_gusen {
@@ -605,6 +730,11 @@ ort sankt_georgen_an_der_gusen {
         besitzer   = AUT
         verwaltung = au_kr_muehlkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -629,6 +759,11 @@ ort sankt_florian {
         verwaltung = au_kr_traunkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort ried_im_innkreis {
@@ -651,6 +786,11 @@ ort ried_im_innkreis {
         besitzer   = AUT
         verwaltung = au_kr_innkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -675,6 +815,11 @@ ort grieskirchen {
         verwaltung = au_kr_hausruckkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort peuerbach {
@@ -697,6 +842,11 @@ ort peuerbach {
         besitzer   = AUT
         verwaltung = au_kr_hausruckkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -721,6 +871,11 @@ ort frankenburg {
         verwaltung = au_kr_hausruckkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort haag_am_hausruck {
@@ -743,6 +898,11 @@ ort haag_am_hausruck {
         besitzer   = AUT
         verwaltung = au_kr_hausruckkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -767,6 +927,11 @@ ort ottnang_am_hausruck {
         verwaltung = au_kr_hausruckkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort mattighofen {
@@ -789,6 +954,11 @@ ort mattighofen {
         besitzer   = AUT
         verwaltung = au_kr_innkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -813,6 +983,11 @@ ort altheim {
         verwaltung = au_kr_innkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort mauerkirchen {
@@ -835,6 +1010,11 @@ ort mauerkirchen {
         besitzer   = AUT
         verwaltung = au_kr_innkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -859,6 +1039,11 @@ ort obernberg_am_inn {
         verwaltung = au_kr_innkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort moosdorf {
@@ -881,6 +1066,11 @@ ort moosdorf {
         besitzer   = AUT
         verwaltung = au_kr_innkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -905,6 +1095,11 @@ ort handenberg {
         verwaltung = au_kr_innkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort steyr {
@@ -927,6 +1122,11 @@ ort steyr {
         besitzer   = AUT
         verwaltung = au_kr_traunkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -951,6 +1151,11 @@ ort kremsmuenster {
         verwaltung = au_kr_traunkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort micheldorf_in_oberoesterreich {
@@ -973,6 +1178,11 @@ ort micheldorf_in_oberoesterreich {
         besitzer   = AUT
         verwaltung = au_kr_traunkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -997,6 +1207,11 @@ ort ternberg {
         verwaltung = au_kr_traunkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort weyer {
@@ -1019,6 +1234,11 @@ ort weyer {
         besitzer   = AUT
         verwaltung = au_kr_traunkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1043,6 +1263,11 @@ ort adlwang {
         verwaltung = au_kr_traunkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort windischgarsten {
@@ -1065,6 +1290,11 @@ ort windischgarsten {
         besitzer   = AUT
         verwaltung = au_kr_traunkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1089,6 +1319,11 @@ ort molln {
         verwaltung = au_kr_traunkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort maria_neustift {
@@ -1111,6 +1346,11 @@ ort maria_neustift {
         besitzer   = AUT
         verwaltung = au_kr_traunkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1135,6 +1375,11 @@ ort reichraming {
         verwaltung = au_kr_traunkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort gmunden {
@@ -1157,6 +1402,11 @@ ort gmunden {
         besitzer   = AUT
         verwaltung = au_kr_traunkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1181,6 +1431,11 @@ ort attnang_puchheim {
         verwaltung = au_kr_hausruckkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort vorchdorf {
@@ -1203,6 +1458,11 @@ ort vorchdorf {
         besitzer   = AUT
         verwaltung = au_kr_traunkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1228,6 +1488,11 @@ ort ebensee {
         verwaltung = au_kr_traunkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort lambach {
@@ -1250,6 +1515,11 @@ ort lambach {
         besitzer   = AUT
         verwaltung = au_kr_hausruckkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1274,6 +1544,11 @@ ort gruenau_im_almtal {
         verwaltung = au_kr_traunkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort mondsee {
@@ -1297,6 +1572,11 @@ ort mondsee {
         verwaltung = au_kr_hausruckkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort sankt_georgen_im_attergau {
@@ -1319,6 +1599,11 @@ ort sankt_georgen_im_attergau {
         besitzer   = AUT
         verwaltung = au_kr_hausruckkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1344,6 +1629,11 @@ ort bad_ischl {
         verwaltung = au_kr_traunkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort sankt_wolfgang_im_salzkammergut {
@@ -1366,6 +1656,11 @@ ort sankt_wolfgang_im_salzkammergut {
         besitzer   = AUT
         verwaltung = au_kr_traunkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -1390,6 +1685,11 @@ ort gosau {
         verwaltung = au_kr_traunkreis
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort steinbach_am_attersee {
@@ -1412,5 +1712,10 @@ ort steinbach_am_attersee {
         besitzer   = AUT
         verwaltung = au_kr_hausruckkreis
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }

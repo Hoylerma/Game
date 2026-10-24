@@ -18,6 +18,15 @@ ort weissenburg {
     stadt    = ja
     kreis    = kr_weissenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2967325; deutscher Name aus den GeoNames-Alternativnamen (heute Wissembourg); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_bas_rhin
+        bevoelkerung = 16393
+        konfession   = { katholisch = 64 lutherisch = 31 reformiert = 2 juedisch = 3 }
+        kultur       = { elsaesser = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort reichshofen {
@@ -28,6 +37,15 @@ ort reichshofen {
     stadt    = nein
     kreis    = kr_weissenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2984136; deutscher Name aus den GeoNames-Alternativnamen (heute Reichshoffen); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_bas_rhin
+        bevoelkerung = 20195
+        konfession   = { katholisch = 64 lutherisch = 31 reformiert = 2 juedisch = 3 }
+        kultur       = { elsaesser = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort sufflenheim {
@@ -38,6 +56,15 @@ ort sufflenheim {
     stadt    = nein
     kreis    = kr_weissenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2974086; deutscher Name aus den GeoNames-Alternativnamen (heute Soufflenheim); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_bas_rhin
+        bevoelkerung = 11513
+        konfession   = { katholisch = 64 lutherisch = 31 reformiert = 2 juedisch = 3 }
+        kultur       = { elsaesser = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort betschdorf {
@@ -48,6 +75,15 @@ ort betschdorf {
     stadt    = nein
     kreis    = kr_weissenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2989816; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_bas_rhin
+        bevoelkerung = 15005
+        konfession   = { katholisch = 64 lutherisch = 31 reformiert = 2 juedisch = 3 }
+        kultur       = { elsaesser = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort selz {
@@ -58,6 +94,15 @@ ort selz {
     stadt    = nein
     kreis    = kr_weissenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2975199; deutscher Name aus den GeoNames-Alternativnamen (heute Seltz); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_bas_rhin
+        bevoelkerung = 16807
+        konfession   = { katholisch = 64 lutherisch = 31 reformiert = 2 juedisch = 3 }
+        kultur       = { elsaesser = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort lembach {
@@ -68,6 +113,15 @@ ort lembach {
     stadt    = nein
     kreis    = kr_weissenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 3003496; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_bas_rhin
+        bevoelkerung = 19912
+        konfession   = { katholisch = 64 lutherisch = 31 reformiert = 2 juedisch = 3 }
+        kultur       = { elsaesser = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort lauterburg {
@@ -78,6 +132,15 @@ ort lauterburg {
     stadt    = nein
     kreis    = kr_weissenburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 3005948; deutscher Name aus den GeoNames-Alternativnamen (heute Lauterbourg); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_bas_rhin
+        bevoelkerung = 12759
+        konfession   = { katholisch = 64 lutherisch = 31 reformiert = 2 juedisch = 3 }
+        kultur       = { elsaesser = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort hagenau {
@@ -88,6 +151,15 @@ ort hagenau {
     stadt    = ja
     kreis    = kr_hagenau
     quelle   = "GeoNames (CC BY 4.0), geonameid 3014078; deutscher Name aus den GeoNames-Alternativnamen (heute Haguenau); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_bas_rhin
+        bevoelkerung = 21140
+        konfession   = { katholisch = 64 lutherisch = 31 reformiert = 2 juedisch = 3 }
+        kultur       = { elsaesser = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort brumath {
@@ -98,6 +170,15 @@ ort brumath {
     stadt    = nein
     kreis    = kr_hagenau
     quelle   = "GeoNames (CC BY 4.0), geonameid 3029771; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_bas_rhin
+        bevoelkerung = 11985
+        konfession   = { katholisch = 64 lutherisch = 31 reformiert = 2 juedisch = 3 }
+        kultur       = { elsaesser = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort wanzenau {
@@ -108,6 +189,15 @@ ort wanzenau {
     stadt    = nein
     kreis    = kr_hagenau
     quelle   = "GeoNames (CC BY 4.0), geonameid 3005422; deutscher Name aus den GeoNames-Alternativnamen (heute La Wantzenau); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_bas_rhin
+        bevoelkerung = 17789
+        konfession   = { katholisch = 64 lutherisch = 31 reformiert = 2 juedisch = 3 }
+        kultur       = { elsaesser = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort herrlisheim {
@@ -118,6 +208,15 @@ ort herrlisheim {
     stadt    = nein
     kreis    = kr_hagenau
     quelle   = "GeoNames (CC BY 4.0), geonameid 3013387; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_bas_rhin
+        bevoelkerung = 9154
+        konfession   = { katholisch = 64 lutherisch = 31 reformiert = 2 juedisch = 3 }
+        kultur       = { elsaesser = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort zabern {
@@ -128,6 +227,15 @@ ort zabern {
     stadt    = ja
     kreis    = kr_zabern
     quelle   = "GeoNames (CC BY 4.0), geonameid 2975588; deutscher Name aus den GeoNames-Alternativnamen (heute Saverne); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_bas_rhin
+        bevoelkerung = 16651
+        konfession   = { katholisch = 64 lutherisch = 31 reformiert = 2 juedisch = 3 }
+        kultur       = { elsaesser = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort wasselnheim {
@@ -138,6 +246,15 @@ ort wasselnheim {
     stadt    = nein
     kreis    = kr_zabern
     quelle   = "GeoNames (CC BY 4.0), geonameid 2967437; deutscher Name aus den GeoNames-Alternativnamen (heute Wasselonne); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_bas_rhin
+        bevoelkerung = 14155
+        konfession   = { katholisch = 64 lutherisch = 31 reformiert = 2 juedisch = 3 }
+        kultur       = { elsaesser = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort saarunion {
@@ -148,6 +265,15 @@ ort saarunion {
     stadt    = nein
     kreis    = kr_zabern
     quelle   = "GeoNames (CC BY 4.0), geonameid 2975957; deutscher Name aus den GeoNames-Alternativnamen (heute Sarre-Union); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_bas_rhin
+        bevoelkerung = 19251
+        konfession   = { katholisch = 64 lutherisch = 31 reformiert = 2 juedisch = 3 }
+        kultur       = { elsaesser = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort buchsweiler {
@@ -158,6 +284,15 @@ ort buchsweiler {
     stadt    = nein
     kreis    = kr_zabern
     quelle   = "GeoNames (CC BY 4.0), geonameid 3030708; deutscher Name aus den GeoNames-Alternativnamen (heute Bouxwiller); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_bas_rhin
+        bevoelkerung = 13023
+        konfession   = { katholisch = 64 lutherisch = 31 reformiert = 2 juedisch = 3 }
+        kultur       = { elsaesser = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort pfaffenhofen {
@@ -168,6 +303,15 @@ ort pfaffenhofen {
     stadt    = nein
     kreis    = kr_zabern
     quelle   = "GeoNames (CC BY 4.0), geonameid 2987431; deutscher Name aus den GeoNames-Alternativnamen (heute Pfaffenhoffen); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_bas_rhin
+        bevoelkerung = 12646
+        konfession   = { katholisch = 64 lutherisch = 31 reformiert = 2 juedisch = 3 }
+        kultur       = { elsaesser = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort hochfelden {
@@ -178,6 +322,15 @@ ort hochfelden {
     stadt    = nein
     kreis    = kr_zabern
     quelle   = "GeoNames (CC BY 4.0), geonameid 3013249; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_bas_rhin
+        bevoelkerung = 13967
+        konfession   = { katholisch = 64 lutherisch = 31 reformiert = 2 juedisch = 3 }
+        kultur       = { elsaesser = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort wimmenau {
@@ -188,6 +341,15 @@ ort wimmenau {
     stadt    = nein
     kreis    = kr_zabern
     quelle   = "GeoNames (CC BY 4.0), geonameid 2967349; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_bas_rhin
+        bevoelkerung = 12174
+        konfession   = { katholisch = 64 lutherisch = 31 reformiert = 2 juedisch = 3 }
+        kultur       = { elsaesser = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort drulingen {
@@ -198,6 +360,15 @@ ort drulingen {
     stadt    = nein
     kreis    = kr_zabern
     quelle   = "GeoNames (CC BY 4.0), geonameid 3020740; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_bas_rhin
+        bevoelkerung = 18874
+        konfession   = { katholisch = 64 lutherisch = 31 reformiert = 2 juedisch = 3 }
+        kultur       = { elsaesser = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort strassburg {
@@ -208,6 +379,15 @@ ort strassburg {
     stadt    = ja
     kreis    = kr_strassburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2973783; deutscher Name aus den GeoNames-Alternativnamen (heute Strasbourg); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_bas_rhin
+        bevoelkerung = 84835
+        konfession   = { katholisch = 64 lutherisch = 31 reformiert = 2 juedisch = 3 }
+        kultur       = { elsaesser = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort schlettstadt {
@@ -218,6 +398,15 @@ ort schlettstadt {
     stadt    = ja
     kreis    = kr_strassburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2975233; deutscher Name aus den GeoNames-Alternativnamen (heute Sélestat); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_bas_rhin
+        bevoelkerung = 15888
+        konfession   = { katholisch = 64 lutherisch = 31 reformiert = 2 juedisch = 3 }
+        kultur       = { elsaesser = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort molsheim {
@@ -228,6 +417,15 @@ ort molsheim {
     stadt    = ja
     kreis    = kr_strassburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2993476; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_bas_rhin
+        bevoelkerung = 12354
+        konfession   = { katholisch = 64 lutherisch = 31 reformiert = 2 juedisch = 3 }
+        kultur       = { elsaesser = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort oberehnheim {
@@ -238,6 +436,15 @@ ort oberehnheim {
     stadt    = nein
     kreis    = kr_strassburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2989796; deutscher Name aus den GeoNames-Alternativnamen (heute Obernai); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_bas_rhin
+        bevoelkerung = 13306
+        konfession   = { katholisch = 64 lutherisch = 31 reformiert = 2 juedisch = 3 }
+        kultur       = { elsaesser = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort erstein {
@@ -248,6 +455,15 @@ ort erstein {
     stadt    = nein
     kreis    = kr_strassburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 3019865; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_bas_rhin
+        bevoelkerung = 12174
+        konfession   = { katholisch = 64 lutherisch = 31 reformiert = 2 juedisch = 3 }
+        kultur       = { elsaesser = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort geispolsheim {
@@ -258,6 +474,15 @@ ort geispolsheim {
     stadt    = nein
     kreis    = kr_strassburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 3016424; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_bas_rhin
+        bevoelkerung = 12457
+        konfession   = { katholisch = 64 lutherisch = 31 reformiert = 2 juedisch = 3 }
+        kultur       = { elsaesser = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort la_broque {
@@ -268,6 +493,15 @@ ort la_broque {
     stadt    = nein
     kreis    = kr_strassburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 3010778; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_bas_rhin
+        bevoelkerung = 21969
+        konfession   = { katholisch = 64 lutherisch = 31 reformiert = 2 juedisch = 3 }
+        kultur       = { elsaesser = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort rheinau {
@@ -278,6 +512,15 @@ ort rheinau {
     stadt    = nein
     kreis    = kr_strassburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2983761; deutscher Name aus den GeoNames-Alternativnamen (heute Rhinau); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_bas_rhin
+        bevoelkerung = 14844
+        konfession   = { katholisch = 64 lutherisch = 31 reformiert = 2 juedisch = 3 }
+        kultur       = { elsaesser = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort hilsenheim {
@@ -288,6 +531,15 @@ ort hilsenheim {
     stadt    = nein
     kreis    = kr_strassburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 3013282; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_bas_rhin
+        bevoelkerung = 9437
+        konfession   = { katholisch = 64 lutherisch = 31 reformiert = 2 juedisch = 3 }
+        kultur       = { elsaesser = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort epfig {
@@ -298,6 +550,15 @@ ort epfig {
     stadt    = nein
     kreis    = kr_strassburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 3020051; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_bas_rhin
+        bevoelkerung = 14155
+        konfession   = { katholisch = 64 lutherisch = 31 reformiert = 2 juedisch = 3 }
+        kultur       = { elsaesser = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort niederhaslach {
@@ -308,6 +569,15 @@ ort niederhaslach {
     stadt    = nein
     kreis    = kr_strassburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 2990417; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_bas_rhin
+        bevoelkerung = 10720
+        konfession   = { katholisch = 64 lutherisch = 31 reformiert = 2 juedisch = 3 }
+        kultur       = { elsaesser = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort ittenheim {
@@ -318,6 +588,15 @@ ort ittenheim {
     stadt    = nein
     kreis    = kr_strassburg
     quelle   = "GeoNames (CC BY 4.0), geonameid 3012640; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_bas_rhin
+        bevoelkerung = 13117
+        konfession   = { katholisch = 64 lutherisch = 31 reformiert = 2 juedisch = 3 }
+        kultur       = { elsaesser = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort kolmar_elsass {
@@ -328,6 +607,15 @@ ort kolmar_elsass {
     stadt    = ja
     kreis    = kr_kolmar_elsass
     quelle   = "GeoNames (CC BY 4.0), geonameid 3024297; deutscher Name aus den GeoNames-Alternativnamen (heute Colmar); Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_haut_rhin
+        bevoelkerung = 42088
+        konfession   = { katholisch = 87 lutherisch = 5 reformiert = 6 juedisch = 2 }
+        kultur       = { elsaesser = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort rappoltsweiler {
@@ -338,6 +626,15 @@ ort rappoltsweiler {
     stadt    = ja
     kreis    = kr_kolmar_elsass
     quelle   = "GeoNames (CC BY 4.0), geonameid 2983705; deutscher Name aus den GeoNames-Alternativnamen (heute Ribeauvillé); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_haut_rhin
+        bevoelkerung = 13994
+        konfession   = { katholisch = 87 lutherisch = 5 reformiert = 6 juedisch = 2 }
+        kultur       = { elsaesser = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort markirch {
@@ -348,6 +645,15 @@ ort markirch {
     stadt    = nein
     kreis    = kr_kolmar_elsass
     quelle   = "GeoNames (CC BY 4.0), geonameid 2980438; deutscher Name aus den GeoNames-Alternativnamen (heute Sainte-Marie-aux-Mines); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_haut_rhin
+        bevoelkerung = 17423
+        konfession   = { katholisch = 87 lutherisch = 5 reformiert = 6 juedisch = 2 }
+        kultur       = { elsaesser = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort markolsheim {
@@ -358,6 +664,15 @@ ort markolsheim {
     stadt    = nein
     kreis    = kr_kolmar_elsass
     quelle   = "GeoNames (CC BY 4.0), geonameid 2995936; deutscher Name aus den GeoNames-Alternativnamen (heute Marckolsheim); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_bas_rhin
+        bevoelkerung = 18025
+        konfession   = { katholisch = 64 lutherisch = 31 reformiert = 2 juedisch = 3 }
+        kultur       = { elsaesser = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort munster_elsass {
@@ -368,6 +683,15 @@ ort munster_elsass {
     stadt    = nein
     kreis    = kr_kolmar_elsass
     quelle   = "GeoNames (CC BY 4.0), geonameid 2991189; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Zusatz der Landschaft zur Unterscheidung gleichnamiger Orte; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_haut_rhin
+        bevoelkerung = 19652
+        konfession   = { katholisch = 87 lutherisch = 5 reformiert = 6 juedisch = 2 }
+        kultur       = { elsaesser = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort orbey {
@@ -378,6 +702,15 @@ ort orbey {
     stadt    = nein
     kreis    = kr_kolmar_elsass
     quelle   = "GeoNames (CC BY 4.0), geonameid 2989441; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_haut_rhin
+        bevoelkerung = 13707
+        konfession   = { katholisch = 87 lutherisch = 5 reformiert = 6 juedisch = 2 }
+        kultur       = { elsaesser = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort weiler {
@@ -388,6 +721,15 @@ ort weiler {
     stadt    = nein
     kreis    = kr_kolmar_elsass
     quelle   = "GeoNames (CC BY 4.0), geonameid 2968894; deutscher Name aus den GeoNames-Alternativnamen (heute Villé); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_bas_rhin
+        bevoelkerung = 15326
+        konfession   = { katholisch = 64 lutherisch = 31 reformiert = 2 juedisch = 3 }
+        kultur       = { elsaesser = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort muelhausen {
@@ -398,6 +740,15 @@ ort muelhausen {
     stadt    = ja
     kreis    = kr_muelhausen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2991214; deutscher Name aus den GeoNames-Alternativnamen (heute Mulhouse); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_haut_rhin
+        bevoelkerung = 46341
+        konfession   = { katholisch = 87 lutherisch = 5 reformiert = 6 juedisch = 2 }
+        kultur       = { elsaesser = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort gebweiler {
@@ -408,6 +759,15 @@ ort gebweiler {
     stadt    = ja
     kreis    = kr_muelhausen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3014433; deutscher Name aus den GeoNames-Alternativnamen (heute Guebwiller); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_haut_rhin
+        bevoelkerung = 15115
+        konfession   = { katholisch = 87 lutherisch = 5 reformiert = 6 juedisch = 2 }
+        kultur       = { elsaesser = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort ensisheim {
@@ -418,6 +778,15 @@ ort ensisheim {
     stadt    = nein
     kreis    = kr_muelhausen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3020152; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_haut_rhin
+        bevoelkerung = 13418
+        konfession   = { katholisch = 87 lutherisch = 5 reformiert = 6 juedisch = 2 }
+        kultur       = { elsaesser = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort wittelsheim {
@@ -428,6 +797,15 @@ ort wittelsheim {
     stadt    = nein
     kreis    = kr_muelhausen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2967319; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_haut_rhin
+        bevoelkerung = 10218
+        konfession   = { katholisch = 87 lutherisch = 5 reformiert = 6 juedisch = 2 }
+        kultur       = { elsaesser = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort rufach {
@@ -438,6 +816,15 @@ ort rufach {
     stadt    = nein
     kreis    = kr_muelhausen
     quelle   = "GeoNames (CC BY 4.0), geonameid 2982636; deutscher Name aus den GeoNames-Alternativnamen (heute Rouffach); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_haut_rhin
+        bevoelkerung = 17443
+        konfession   = { katholisch = 87 lutherisch = 5 reformiert = 6 juedisch = 2 }
+        kultur       = { elsaesser = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort fessenheim {
@@ -448,6 +835,15 @@ ort fessenheim {
     stadt    = nein
     kreis    = kr_muelhausen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3018601; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_haut_rhin
+        bevoelkerung = 15069
+        konfession   = { katholisch = 87 lutherisch = 5 reformiert = 6 juedisch = 2 }
+        kultur       = { elsaesser = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort bantzenheim {
@@ -458,6 +854,15 @@ ort bantzenheim {
     stadt    = nein
     kreis    = kr_muelhausen
     quelle   = "GeoNames (CC BY 4.0), geonameid 3035099; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_haut_rhin
+        bevoelkerung = 17309
+        konfession   = { katholisch = 87 lutherisch = 5 reformiert = 6 juedisch = 2 }
+        kultur       = { elsaesser = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort beffert {
@@ -468,6 +873,15 @@ ort beffert {
     stadt    = ja
     kreis    = kr_beffert
     quelle   = "GeoNames (CC BY 4.0), geonameid 3033791; deutscher Name aus den GeoNames-Alternativnamen (heute Belfort); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_belfort
+        bevoelkerung = 30513
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort thann {
@@ -478,6 +892,15 @@ ort thann {
     stadt    = ja
     kreis    = kr_beffert
     quelle   = "GeoNames (CC BY 4.0), geonameid 2973013; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_haut_rhin
+        bevoelkerung = 10940
+        konfession   = { katholisch = 87 lutherisch = 5 reformiert = 6 juedisch = 2 }
+        kultur       = { elsaesser = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort masmuenster {
@@ -488,6 +911,15 @@ ort masmuenster {
     stadt    = nein
     kreis    = kr_beffert
     quelle   = "GeoNames (CC BY 4.0), geonameid 2995281; deutscher Name aus den GeoNames-Alternativnamen (heute Masevaux); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_haut_rhin
+        bevoelkerung = 15358
+        konfession   = { katholisch = 87 lutherisch = 5 reformiert = 6 juedisch = 2 }
+        kultur       = { elsaesser = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort giromagny {
@@ -498,6 +930,15 @@ ort giromagny {
     stadt    = nein
     kreis    = kr_beffert
     quelle   = "GeoNames (CC BY 4.0), geonameid 3015958; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_belfort
+        bevoelkerung = 14617
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort sankt_amarin {
@@ -508,6 +949,15 @@ ort sankt_amarin {
     stadt    = nein
     kreis    = kr_beffert
     quelle   = "GeoNames (CC BY 4.0), geonameid 2981815; deutscher Name aus den GeoNames-Alternativnamen (heute Saint-Amarin); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_haut_rhin
+        bevoelkerung = 15771
+        konfession   = { katholisch = 87 lutherisch = 5 reformiert = 6 juedisch = 2 }
+        kultur       = { elsaesser = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort niederburnhaupt {
@@ -518,6 +968,15 @@ ort niederburnhaupt {
     stadt    = nein
     kreis    = kr_beffert
     quelle   = "GeoNames (CC BY 4.0), geonameid 3029499; deutscher Name aus den GeoNames-Alternativnamen (heute Burnhaupt-le-Bas); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_haut_rhin
+        bevoelkerung = 16824
+        konfession   = { katholisch = 87 lutherisch = 5 reformiert = 6 juedisch = 2 }
+        kultur       = { elsaesser = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort montreux_chateau {
@@ -528,6 +987,15 @@ ort montreux_chateau {
     stadt    = nein
     kreis    = kr_beffert
     quelle   = "GeoNames (CC BY 4.0), geonameid 2992057; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_belfort
+        bevoelkerung = 18271
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort st_ludwig {
@@ -538,6 +1006,15 @@ ort st_ludwig {
     stadt    = ja
     kreis    = kr_st_ludwig
     quelle   = "GeoNames (CC BY 4.0), geonameid 2978742; deutscher Name aus den GeoNames-Alternativnamen (heute Saint-Louis); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_haut_rhin
+        bevoelkerung = 12263
+        konfession   = { katholisch = 87 lutherisch = 5 reformiert = 6 juedisch = 2 }
+        kultur       = { elsaesser = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort altkirch {
@@ -548,6 +1025,15 @@ ort altkirch {
     stadt    = ja
     kreis    = kr_st_ludwig
     quelle   = "GeoNames (CC BY 4.0), geonameid 3038012; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_haut_rhin
+        bevoelkerung = 18693
+        konfession   = { katholisch = 87 lutherisch = 5 reformiert = 6 juedisch = 2 }
+        kultur       = { elsaesser = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort dattenried {
@@ -558,6 +1044,15 @@ ort dattenried {
     stadt    = nein
     kreis    = kr_st_ludwig
     quelle   = "GeoNames (CC BY 4.0), geonameid 3021629; deutscher Name aus den GeoNames-Alternativnamen (heute Delle); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_belfort
+        bevoelkerung = 11599
+        konfession   = { katholisch = 99 reformiert = 1 }
+        kultur       = { franzosen = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort sierenz {
@@ -568,6 +1063,15 @@ ort sierenz {
     stadt    = nein
     kreis    = kr_st_ludwig
     quelle   = "GeoNames (CC BY 4.0), geonameid 2974608; deutscher Name aus den GeoNames-Alternativnamen (heute Sierentz); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_haut_rhin
+        bevoelkerung = 17443
+        konfession   = { katholisch = 87 lutherisch = 5 reformiert = 6 juedisch = 2 }
+        kultur       = { elsaesser = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort waldighofen {
@@ -578,6 +1082,15 @@ ort waldighofen {
     stadt    = nein
     kreis    = kr_st_ludwig
     quelle   = "GeoNames (CC BY 4.0), geonameid 2967500; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_haut_rhin
+        bevoelkerung = 21882
+        konfession   = { katholisch = 87 lutherisch = 5 reformiert = 6 juedisch = 2 }
+        kultur       = { elsaesser = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort pfetterhausen {
@@ -588,6 +1101,15 @@ ort pfetterhausen {
     stadt    = nein
     kreis    = kr_st_ludwig
     quelle   = "GeoNames (CC BY 4.0), geonameid 2987428; deutscher Name aus den GeoNames-Alternativnamen (heute Pfetterhouse); Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_haut_rhin
+        bevoelkerung = 16308
+        konfession   = { katholisch = 87 lutherisch = 5 reformiert = 6 juedisch = 2 }
+        kultur       = { elsaesser = 100 }
+        verwuestung  = 0
+    }
 }
 
 ort hagenthal_le_bas {
@@ -598,4 +1120,13 @@ ort hagenthal_le_bas {
     stadt    = nein
     kreis    = kr_st_ludwig
     quelle   = "GeoNames (CC BY 4.0), geonameid 3014088; heutiger Name nach GeoNames, kein abweichender deutscher Name belegt; Gelände aus Höhenmodell; Fläche aus der Karte"
+
+    1849.01.01 = {
+        besitzer     = FRK
+        verwaltung   = fr_haut_rhin
+        bevoelkerung = 7741
+        konfession   = { katholisch = 87 lutherisch = 5 reformiert = 6 juedisch = 2 }
+        kultur       = { elsaesser = 100 }
+        verwuestung  = 0
+    }
 }

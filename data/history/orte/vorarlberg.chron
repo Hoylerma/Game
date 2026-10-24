@@ -30,6 +30,11 @@ ort dornbirn {
         verwaltung = au_kr_kreis_vorarlberg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort bregenz {
@@ -52,6 +57,11 @@ ort bregenz {
         besitzer   = AUT
         verwaltung = au_kr_kreis_vorarlberg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -76,6 +86,11 @@ ort goetzis {
         verwaltung = au_kr_kreis_vorarlberg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort hoechst {
@@ -98,6 +113,11 @@ ort hoechst {
         besitzer   = AUT
         verwaltung = au_kr_kreis_vorarlberg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -122,6 +142,11 @@ ort andelsbuch {
         verwaltung = au_kr_kreis_vorarlberg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort sulzberg {
@@ -144,6 +169,11 @@ ort sulzberg {
         besitzer   = AUT
         verwaltung = au_kr_kreis_vorarlberg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -168,6 +198,11 @@ ort sibratsgfaell {
         verwaltung = au_kr_kreis_vorarlberg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort mittelberg {
@@ -190,6 +225,11 @@ ort mittelberg {
         besitzer   = AUT
         verwaltung = au_kr_kreis_vorarlberg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -214,6 +254,11 @@ ort lech {
         verwaltung = au_kr_kreis_vorarlberg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort schoppernau {
@@ -236,6 +281,11 @@ ort schoppernau {
         besitzer   = AUT
         verwaltung = au_kr_kreis_vorarlberg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -260,6 +310,11 @@ ort damuels {
         verwaltung = au_kr_kreis_vorarlberg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort feldkirch {
@@ -283,6 +338,11 @@ ort feldkirch {
         verwaltung = au_kr_kreis_vorarlberg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort vaduz {
@@ -304,6 +364,11 @@ ort vaduz {
     1848.03.01 = {
         besitzer = LIE
         bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = LIE
+        bund     = nein
     }
 }
 
@@ -328,6 +393,11 @@ ort bludenz {
         verwaltung = au_kr_kreis_vorarlberg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort nenzing {
@@ -350,6 +420,11 @@ ort nenzing {
         besitzer   = AUT
         verwaltung = au_kr_kreis_vorarlberg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }
 
@@ -374,6 +449,11 @@ ort schruns {
         verwaltung = au_kr_kreis_vorarlberg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort gaschurn {
@@ -397,6 +477,11 @@ ort gaschurn {
         verwaltung = au_kr_kreis_oberinntal
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
+    }
 }
 
 ort brand {
@@ -419,5 +504,10 @@ ort brand {
         besitzer   = AUT
         verwaltung = au_kr_kreis_vorarlberg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = AUT
+        bund     = nein
     }
 }

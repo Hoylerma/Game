@@ -31,6 +31,21 @@ ort buchholz_in_der_nordheide {
         verwaltung = hn_lueneburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort winsen_luhe {
@@ -53,6 +68,21 @@ ort winsen_luhe {
         besitzer   = HAN
         verwaltung = hn_lueneburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -77,6 +107,21 @@ ort neu_wulmstorf {
         verwaltung = hn_lueneburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort tostedt {
@@ -99,6 +144,21 @@ ort tostedt {
         besitzer   = HAN
         verwaltung = hn_lueneburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -123,6 +183,21 @@ ort salzhausen {
         verwaltung = hn_lueneburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort amelinghausen {
@@ -145,6 +220,21 @@ ort amelinghausen {
         besitzer   = HAN
         verwaltung = hn_lueneburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -169,6 +259,21 @@ ort hollenstedt {
         verwaltung = hn_lueneburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort handeloh {
@@ -191,6 +296,21 @@ ort handeloh {
         besitzer   = HAN
         verwaltung = hn_lueneburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -215,6 +335,21 @@ ort embsen {
         verwaltung = hn_lueneburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort hanstedt {
@@ -237,6 +372,21 @@ ort hanstedt {
         besitzer   = HAN
         verwaltung = hn_lueneburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -262,6 +412,21 @@ ort lueneburg {
         verwaltung = hn_lueneburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort bad_bevensen {
@@ -284,6 +449,21 @@ ort bad_bevensen {
         besitzer   = HAN
         verwaltung = hn_lueneburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -308,6 +488,21 @@ ort bleckede {
         verwaltung = hn_lueneburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort bienenbuettel {
@@ -330,6 +525,21 @@ ort bienenbuettel {
         besitzer   = HAN
         verwaltung = hn_lueneburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -354,6 +564,21 @@ ort brietlingen {
         verwaltung = hn_lueneburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort dahlenburg {
@@ -376,6 +601,21 @@ ort dahlenburg {
         besitzer   = HAN
         verwaltung = hn_lueneburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -400,6 +640,21 @@ ort neu_darchau {
         verwaltung = hn_lueneburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort himbergen {
@@ -422,6 +677,21 @@ ort himbergen {
         besitzer   = HAN
         verwaltung = hn_lueneburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -446,6 +716,21 @@ ort reinstorf {
         verwaltung = hn_lueneburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort soltau {
@@ -468,6 +753,21 @@ ort soltau {
         besitzer   = HAN
         verwaltung = hn_lueneburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -492,6 +792,21 @@ ort schneverdingen {
         verwaltung = hn_lueneburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort munster_lueneburg {
@@ -514,6 +829,21 @@ ort munster_lueneburg {
         besitzer   = HAN
         verwaltung = hn_lueneburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -538,6 +868,21 @@ ort bispingen {
         verwaltung = hn_lueneburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort wietzendorf {
@@ -560,6 +905,21 @@ ort wietzendorf {
         besitzer   = HAN
         verwaltung = hn_lueneburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -584,6 +944,21 @@ ort neuenkirchen {
         verwaltung = hn_lueneburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort luechow {
@@ -606,6 +981,21 @@ ort luechow {
         besitzer   = HAN
         verwaltung = hn_lueneburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -630,6 +1020,21 @@ ort dannenberg {
         verwaltung = hn_lueneburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort clenze {
@@ -652,6 +1057,21 @@ ort clenze {
         besitzer   = HAN
         verwaltung = hn_lueneburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -676,6 +1096,21 @@ ort rosche {
         verwaltung = hn_lueneburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort zernien {
@@ -698,6 +1133,21 @@ ort zernien {
         besitzer   = HAN
         verwaltung = hn_lueneburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -722,6 +1172,21 @@ ort gartow {
         verwaltung = hn_lueneburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort uelzen {
@@ -744,6 +1209,21 @@ ort uelzen {
         besitzer   = HAN
         verwaltung = hn_lueneburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -768,6 +1248,21 @@ ort ebstorf {
         verwaltung = hn_lueneburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort suderburg {
@@ -790,6 +1285,21 @@ ort suderburg {
         besitzer   = HAN
         verwaltung = hn_lueneburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -814,6 +1324,21 @@ ort wieren {
         verwaltung = hn_lueneburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort eimke {
@@ -836,6 +1361,21 @@ ort eimke {
         besitzer   = HAN
         verwaltung = hn_lueneburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -860,6 +1400,21 @@ ort bad_fallingbostel {
         verwaltung = hn_lueneburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort schwarmstedt {
@@ -882,6 +1437,21 @@ ort schwarmstedt {
         besitzer   = HAN
         verwaltung = hn_lueneburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -906,6 +1476,21 @@ ort hodenhagen {
         verwaltung = hn_lueneburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort rethem {
@@ -928,6 +1513,21 @@ ort rethem {
         besitzer   = HAN
         verwaltung = hn_lueneburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -952,6 +1552,21 @@ ort celle {
         verwaltung = hn_lueneburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort bergen_lueneburg {
@@ -974,6 +1589,21 @@ ort bergen_lueneburg {
         besitzer   = HAN
         verwaltung = hn_lueneburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -998,6 +1628,21 @@ ort winsen_aller {
         verwaltung = hn_lueneburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort hermannsburg {
@@ -1020,6 +1665,21 @@ ort hermannsburg {
         besitzer   = HAN
         verwaltung = hn_lueneburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1044,6 +1704,21 @@ ort wathlingen {
         verwaltung = hn_lueneburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort lachendorf {
@@ -1066,6 +1741,21 @@ ort lachendorf {
         besitzer   = HAN
         verwaltung = hn_lueneburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1090,6 +1780,21 @@ ort unterluess {
         verwaltung = hn_lueneburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort eschede {
@@ -1112,6 +1817,21 @@ ort eschede {
         besitzer   = HAN
         verwaltung = hn_lueneburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1136,6 +1856,21 @@ ort gifhorn {
         verwaltung = hn_lueneburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort wittingen {
@@ -1158,6 +1893,21 @@ ort wittingen {
         besitzer   = HAN
         verwaltung = hn_lueneburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1182,6 +1932,21 @@ ort meinersen {
         verwaltung = hn_lueneburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort hankensbuettel {
@@ -1204,6 +1969,21 @@ ort hankensbuettel {
         besitzer   = HAN
         verwaltung = hn_lueneburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1228,6 +2008,21 @@ ort ruehen {
         verwaltung = hn_lueneburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort wesendorf {
@@ -1250,6 +2045,21 @@ ort wesendorf {
         besitzer   = HAN
         verwaltung = hn_lueneburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1274,6 +2084,21 @@ ort weyhausen {
         verwaltung = hn_lueneburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort brome {
@@ -1297,6 +2122,21 @@ ort brome {
         verwaltung = hn_lueneburg
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort vordorf {
@@ -1316,6 +2156,16 @@ ort vordorf {
     }
 
     1848.03.01 = {
+        besitzer = BWO
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = BWO
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = BWO
         bund     = ja
     }
@@ -1341,5 +2191,20 @@ ort steinhorst {
         besitzer   = HAN
         verwaltung = hn_lueneburg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }

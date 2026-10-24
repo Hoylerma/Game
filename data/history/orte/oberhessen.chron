@@ -30,6 +30,21 @@ ort marburg_an_der_lahn {
         verwaltung = hk_oberhessen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HEK
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort stadtallendorf {
@@ -52,6 +67,21 @@ ort stadtallendorf {
         besitzer   = HEK
         verwaltung = hk_oberhessen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HEK
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -76,6 +106,16 @@ ort alsfeld {
         verwaltung = hd_oberhessen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort biedenkopf {
@@ -98,6 +138,21 @@ ort biedenkopf {
         besitzer   = HED
         verwaltung = hd_oberhessen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -122,6 +177,21 @@ ort gladenbach {
         verwaltung = hd_oberhessen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort wetter {
@@ -144,6 +214,21 @@ ort wetter {
         besitzer   = HEK
         verwaltung = hk_oberhessen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HEK
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -168,6 +253,16 @@ ort homberg_an_der_ohm {
         verwaltung = hd_oberhessen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort fronhausen {
@@ -190,6 +285,21 @@ ort fronhausen {
         besitzer   = HEK
         verwaltung = hk_oberhessen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HEK
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -214,6 +324,16 @@ ort kirtorf {
         verwaltung = hd_oberhessen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort rauschenberg {
@@ -236,6 +356,21 @@ ort rauschenberg {
         besitzer   = HEK
         verwaltung = hk_oberhessen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HEK
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hessen_nassau
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -260,6 +395,16 @@ ort lauterbach {
         verwaltung = hd_oberhessen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort schotten {
@@ -282,6 +427,16 @@ ort schotten {
         besitzer   = HED
         verwaltung = hd_oberhessen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = HED
+        bund     = ja
     }
 }
 
@@ -306,6 +461,16 @@ ort schlitz {
         verwaltung = hd_oberhessen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort grebenhain {
@@ -328,6 +493,16 @@ ort grebenhain {
         besitzer   = HED
         verwaltung = hd_oberhessen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = HED
+        bund     = ja
     }
 }
 
@@ -352,6 +527,16 @@ ort freiensteinau {
         verwaltung = hd_oberhessen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort grebenau {
@@ -374,6 +559,16 @@ ort grebenau {
         besitzer   = HED
         verwaltung = hd_oberhessen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = HED
+        bund     = ja
     }
 }
 
@@ -398,6 +593,16 @@ ort ulrichstein {
         verwaltung = hd_oberhessen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort giessen {
@@ -420,6 +625,16 @@ ort giessen {
         besitzer   = HED
         verwaltung = hd_oberhessen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = HED
+        bund     = ja
     }
 }
 
@@ -444,6 +659,16 @@ ort langgoens {
         verwaltung = hd_oberhessen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort gruenberg_in_hessen {
@@ -466,6 +691,16 @@ ort gruenberg_in_hessen {
         besitzer   = HED
         verwaltung = hd_oberhessen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = HED
+        bund     = ja
     }
 }
 
@@ -490,6 +725,16 @@ ort reiskirchen {
         verwaltung = hd_oberhessen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort lich {
@@ -513,6 +758,16 @@ ort lich {
         verwaltung = hd_oberhessen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = HED
+        bund     = ja
+    }
 }
 
 ort rabenau {
@@ -535,5 +790,15 @@ ort rabenau {
         besitzer   = HED
         verwaltung = hd_oberhessen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HED
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = HED
+        bund     = ja
     }
 }

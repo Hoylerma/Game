@@ -416,3 +416,9 @@ einheit au_kr_krakauer_kreis {
     ueber  = au_galizien
     quelle = "M7-Recherche ohne Quellenzugang; Prüfung offen"
 }
+
+einheit au_holstein {
+    name   = "Herzogtum Holstein"
+    art    = herzogtum
+    quelle = "Seit Gastein (14.8.1865) österreichisch verwaltet; vereinfacht ab 30.10.1864 (M10b)"
+}

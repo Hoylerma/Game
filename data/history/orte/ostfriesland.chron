@@ -30,6 +30,21 @@ ort wittmund {
         verwaltung = hn_aurich
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort esens {
@@ -52,6 +67,21 @@ ort esens {
         besitzer   = HAN
         verwaltung = hn_aurich
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -76,6 +106,21 @@ ort dornum {
         verwaltung = hn_aurich
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort langeoog {
@@ -98,6 +143,21 @@ ort langeoog {
         besitzer   = HAN
         verwaltung = hn_aurich
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -122,6 +182,21 @@ ort aurich {
         verwaltung = hn_aurich
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort leer {
@@ -144,6 +219,21 @@ ort leer {
         besitzer   = HAN
         verwaltung = hn_aurich
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -168,6 +258,21 @@ ort wiesmoor {
         verwaltung = hn_aurich
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort weener {
@@ -190,6 +295,21 @@ ort weener {
         besitzer   = HAN
         verwaltung = hn_aurich
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -214,6 +334,21 @@ ort ostrhauderfehn {
         verwaltung = hn_aurich
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort mittegrossefehn {
@@ -236,6 +371,21 @@ ort mittegrossefehn {
         besitzer   = HAN
         verwaltung = hn_aurich
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -260,6 +410,21 @@ ort hesel {
         verwaltung = hn_aurich
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort emden {
@@ -282,6 +447,21 @@ ort emden {
         besitzer   = HAN
         verwaltung = hn_aurich
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -306,6 +486,21 @@ ort norden {
         verwaltung = hn_aurich
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort borkum {
@@ -328,6 +523,21 @@ ort borkum {
         besitzer   = HAN
         verwaltung = hn_aurich
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -352,6 +562,21 @@ ort norderney {
         verwaltung = hn_aurich
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort upgant_schott {
@@ -374,6 +599,21 @@ ort upgant_schott {
         besitzer   = HAN
         verwaltung = hn_aurich
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -398,6 +638,21 @@ ort juist {
         verwaltung = hn_aurich
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort wirdum {
@@ -420,5 +675,20 @@ ort wirdum {
         besitzer   = HAN
         verwaltung = hn_aurich
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = HAN
+        bund     = nein
+    }
+
+    1866.09.20 = {
+        besitzer   = PRU
+        verwaltung = pr_hannover
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }

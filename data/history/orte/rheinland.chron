@@ -31,6 +31,16 @@ ort erkelenz {
         verwaltung = pr_kr_erkelenz
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort heinsberg {
@@ -53,6 +63,16 @@ ort heinsberg {
         besitzer   = PRU
         verwaltung = pr_kr_heinsberg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -77,6 +97,16 @@ ort geilenkirchen {
         verwaltung = pr_kr_geilenkirchen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort wegberg {
@@ -99,6 +129,16 @@ ort wegberg {
         besitzer   = PRU
         verwaltung = pr_kr_erkelenz
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -123,6 +163,16 @@ ort gangelt {
         verwaltung = pr_kr_geilenkirchen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort leverkusen {
@@ -145,6 +195,16 @@ ort leverkusen {
         besitzer   = PRU
         verwaltung = pr_kr_muelheim
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -169,6 +229,16 @@ ort bergisch_gladbach {
         verwaltung = pr_kr_muelheim
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort roesrath {
@@ -191,6 +261,16 @@ ort roesrath {
         besitzer   = PRU
         verwaltung = pr_kr_sieg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -215,6 +295,16 @@ ort wipperfuerth {
         verwaltung = pr_kr_wipperfuerth
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort overath {
@@ -237,6 +327,16 @@ ort overath {
         besitzer   = PRU
         verwaltung = pr_kr_sieg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -261,6 +361,16 @@ ort radevormwald {
         verwaltung = pr_kr_wipperfuerth
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort kuerten {
@@ -283,6 +393,16 @@ ort kuerten {
         besitzer   = PRU
         verwaltung = pr_kr_wipperfuerth
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -307,6 +427,16 @@ ort burscheid {
         verwaltung = pr_kr_solingen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort gummersbach {
@@ -329,6 +459,16 @@ ort gummersbach {
         besitzer   = PRU
         verwaltung = pr_kr_gummersbach
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -353,6 +493,16 @@ ort wiehl {
         verwaltung = pr_kr_gummersbach
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort engelskirchen {
@@ -375,6 +525,16 @@ ort engelskirchen {
         besitzer   = PRU
         verwaltung = pr_kr_gummersbach
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -399,6 +559,16 @@ ort eitorf {
         verwaltung = pr_kr_altenkirchen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort waldbroel {
@@ -421,6 +591,16 @@ ort waldbroel {
         besitzer   = PRU
         verwaltung = pr_kr_waldbroel
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -445,6 +625,16 @@ ort ruppichteroth {
         verwaltung = pr_kr_waldbroel
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort morsbach {
@@ -467,6 +657,16 @@ ort morsbach {
         besitzer   = PRU
         verwaltung = pr_kr_waldbroel
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -491,6 +691,16 @@ ort much {
         verwaltung = pr_kr_waldbroel
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort koeln {
@@ -513,6 +723,16 @@ ort koeln {
         besitzer   = PRU
         verwaltung = pr_kr_koeln
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -537,6 +757,16 @@ ort bonn {
         verwaltung = pr_kr_bonn
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort siegburg {
@@ -559,6 +789,16 @@ ort siegburg {
         besitzer   = PRU
         verwaltung = pr_kr_sieg
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -583,6 +823,16 @@ ort huerth {
         verwaltung = pr_kr_koeln
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort koenigswinter {
@@ -605,6 +855,16 @@ ort koenigswinter {
         besitzer   = PRU
         verwaltung = pr_kr_bonn
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -629,6 +889,16 @@ ort bornheim {
         verwaltung = pr_kr_bonn
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort wesseling {
@@ -651,6 +921,16 @@ ort wesseling {
         besitzer   = PRU
         verwaltung = pr_kr_koeln
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -675,6 +955,16 @@ ort meckenheim {
         verwaltung = pr_kr_rheinbach
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort weilerswist {
@@ -697,6 +987,16 @@ ort weilerswist {
         besitzer   = PRU
         verwaltung = pr_kr_euskirchen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -721,6 +1021,16 @@ ort porz_am_rhein {
         verwaltung = pr_kr_koeln
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort kerpen {
@@ -743,6 +1053,16 @@ ort kerpen {
         besitzer   = PRU
         verwaltung = pr_kr_bergheim
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -767,6 +1087,16 @@ ort bergheim {
         verwaltung = pr_kr_bergheim
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort pulheim {
@@ -789,6 +1119,16 @@ ort pulheim {
         besitzer   = PRU
         verwaltung = pr_kr_koeln
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -813,6 +1153,16 @@ ort noervenich {
         verwaltung = pr_kr_dueren
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort dueren {
@@ -835,6 +1185,16 @@ ort dueren {
         besitzer   = PRU
         verwaltung = pr_kr_dueren
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -859,6 +1219,16 @@ ort simmerath {
         verwaltung = pr_kr_montjoie
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort nideggen {
@@ -881,6 +1251,16 @@ ort nideggen {
         besitzer   = PRU
         verwaltung = pr_kr_dueren
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -905,6 +1285,16 @@ ort roetgen {
         verwaltung = pr_kr_montjoie
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort aachen {
@@ -927,6 +1317,16 @@ ort aachen {
         besitzer   = PRU
         verwaltung = pr_kr_aachen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -952,6 +1352,16 @@ ort eschweiler {
         verwaltung = pr_kr_juelich
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort herzogenrath {
@@ -976,6 +1386,16 @@ ort herzogenrath {
         verwaltung = pr_kr_aachen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort juelich {
@@ -998,6 +1418,16 @@ ort juelich {
         besitzer   = PRU
         verwaltung = pr_kr_juelich
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1022,6 +1452,16 @@ ort baesweiler {
         verwaltung = pr_kr_geilenkirchen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort niederzier {
@@ -1044,6 +1484,16 @@ ort niederzier {
         besitzer   = PRU
         verwaltung = pr_kr_juelich
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1068,6 +1518,16 @@ ort linnich {
         verwaltung = pr_kr_juelich
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort titz {
@@ -1090,6 +1550,16 @@ ort titz {
         besitzer   = PRU
         verwaltung = pr_kr_juelich
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1114,6 +1584,16 @@ ort euskirchen {
         verwaltung = pr_kr_euskirchen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort mechernich {
@@ -1136,6 +1616,16 @@ ort mechernich {
         besitzer   = PRU
         verwaltung = pr_kr_euskirchen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1160,6 +1650,16 @@ ort bad_muenstereifel {
         verwaltung = pr_kr_euskirchen
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort zuelpich {
@@ -1182,6 +1682,16 @@ ort zuelpich {
         besitzer   = PRU
         verwaltung = pr_kr_euskirchen
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }
 
@@ -1206,6 +1716,16 @@ ort schleiden {
         verwaltung = pr_kr_schleiden
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort nettersheim {
@@ -1229,6 +1749,16 @@ ort nettersheim {
         verwaltung = pr_kr_schleiden
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort dahlem {
@@ -1251,5 +1781,15 @@ ort dahlem {
         besitzer   = PRU
         verwaltung = pr_kr_schleiden
         bund       = ja
+    }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
     }
 }

@@ -45,6 +45,16 @@ ort schwerin {
         besitzer = MSC
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = MSC
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = MSC
+        bund     = ja
+    }
 }
 
 ort wismar {
@@ -73,6 +83,16 @@ ort wismar {
     }
 
     1848.03.01 = {
+        besitzer = MSC
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = MSC
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = MSC
         bund     = ja
     }
@@ -107,6 +127,16 @@ ort rostock {
         besitzer = MSC
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = MSC
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = MSC
+        bund     = ja
+    }
 }
 
 ort guestrow {
@@ -134,6 +164,16 @@ ort guestrow {
     }
 
     1848.03.01 = {
+        besitzer = MSC
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = MSC
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = MSC
         bund     = ja
     }
@@ -167,6 +207,16 @@ ort parchim {
         besitzer = MSC
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = MSC
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = MSC
+        bund     = ja
+    }
 }
 
 ort neubrandenburg {
@@ -197,6 +247,16 @@ ort neubrandenburg {
         besitzer = MST
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = MST
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = MST
+        bund     = ja
+    }
 }
 
 ort bad_doberan {
@@ -216,6 +276,16 @@ ort bad_doberan {
     }
 
     1848.03.01 = {
+        besitzer = MSC
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = MSC
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = MSC
         bund     = ja
     }
@@ -241,6 +311,16 @@ ort buetzow {
         besitzer = MSC
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = MSC
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = MSC
+        bund     = ja
+    }
 }
 
 ort kuehlungsborn {
@@ -260,6 +340,16 @@ ort kuehlungsborn {
     }
 
     1848.03.01 = {
+        besitzer = MSC
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = MSC
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = MSC
         bund     = ja
     }
@@ -285,6 +375,16 @@ ort schwaan {
         besitzer = MSC
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = MSC
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = MSC
+        bund     = ja
+    }
 }
 
 ort laage {
@@ -304,6 +404,16 @@ ort laage {
     }
 
     1848.03.01 = {
+        besitzer = MSC
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = MSC
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = MSC
         bund     = ja
     }
@@ -329,6 +439,16 @@ ort satow_oberhagen {
         besitzer = MSC
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = MSC
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = MSC
+        bund     = ja
+    }
 }
 
 ort graal_mueritz {
@@ -348,6 +468,16 @@ ort graal_mueritz {
     }
 
     1848.03.01 = {
+        besitzer = MSC
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = MSC
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = MSC
         bund     = ja
     }
@@ -373,6 +503,16 @@ ort elmenhorst {
         besitzer = MSC
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = MSC
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = MSC
+        bund     = ja
+    }
 }
 
 ort dummerstorf {
@@ -395,6 +535,16 @@ ort dummerstorf {
         besitzer = MSC
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = MSC
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = MSC
+        bund     = ja
+    }
 }
 
 ort tessin {
@@ -414,6 +564,16 @@ ort tessin {
     }
 
     1848.03.01 = {
+        besitzer = MSC
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = MSC
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = MSC
         bund     = ja
     }
@@ -440,6 +600,16 @@ ort demmin {
         verwaltung = pr_kr_demmin
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort malchin {
@@ -459,6 +629,16 @@ ort malchin {
     }
 
     1848.03.01 = {
+        besitzer = MSC
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = MSC
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = MSC
         bund     = ja
     }
@@ -484,6 +664,16 @@ ort teterow {
         besitzer = MSC
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = MSC
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = MSC
+        bund     = ja
+    }
 }
 
 ort gnoien {
@@ -503,6 +693,16 @@ ort gnoien {
     }
 
     1848.03.01 = {
+        besitzer = MSC
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = MSC
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = MSC
         bund     = ja
     }
@@ -528,6 +728,16 @@ ort dargun {
         besitzer = MSC
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = MSC
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = MSC
+        bund     = ja
+    }
 }
 
 ort neukalen {
@@ -550,6 +760,16 @@ ort neukalen {
         besitzer = MSC
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = MSC
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = MSC
+        bund     = ja
+    }
 }
 
 ort joerdenstorf {
@@ -569,6 +789,16 @@ ort joerdenstorf {
     }
 
     1848.03.01 = {
+        besitzer = MSC
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = MSC
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = MSC
         bund     = ja
     }
@@ -595,6 +825,16 @@ ort borrentin {
         verwaltung = pr_kr_demmin
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort neubukow {
@@ -614,6 +854,16 @@ ort neubukow {
     }
 
     1848.03.01 = {
+        besitzer = MSC
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = MSC
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = MSC
         bund     = ja
     }
@@ -639,6 +889,16 @@ ort neukloster {
         besitzer = MSC
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = MSC
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = MSC
+        bund     = ja
+    }
 }
 
 ort bad_kleinen {
@@ -658,6 +918,16 @@ ort bad_kleinen {
     }
 
     1848.03.01 = {
+        besitzer = MSC
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = MSC
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = MSC
         bund     = ja
     }
@@ -683,6 +953,16 @@ ort blowatz {
         besitzer = MSC
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = MSC
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = MSC
+        bund     = ja
+    }
 }
 
 ort gramkow {
@@ -702,6 +982,16 @@ ort gramkow {
     }
 
     1848.03.01 = {
+        besitzer = MSC
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = MSC
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = MSC
         bund     = ja
     }
@@ -727,6 +1017,16 @@ ort grevesmuehlen {
         besitzer = MSC
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = MSC
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = MSC
+        bund     = ja
+    }
 }
 
 ort gadebusch {
@@ -746,6 +1046,16 @@ ort gadebusch {
     }
 
     1848.03.01 = {
+        besitzer = MSC
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = MSC
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = MSC
         bund     = ja
     }
@@ -771,6 +1081,16 @@ ort kluetz {
         besitzer = MSC
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = MSC
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = MSC
+        bund     = ja
+    }
 }
 
 ort dassow {
@@ -790,6 +1110,16 @@ ort dassow {
     }
 
     1848.03.01 = {
+        besitzer = MSC
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = MSC
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = MSC
         bund     = ja
     }
@@ -815,6 +1145,16 @@ ort rehna {
         besitzer = MSC
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = MSC
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = MSC
+        bund     = ja
+    }
 }
 
 ort bruesewitz {
@@ -834,6 +1174,16 @@ ort bruesewitz {
     }
 
     1848.03.01 = {
+        besitzer = MSC
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = MSC
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = MSC
         bund     = ja
     }
@@ -859,6 +1209,16 @@ ort krakow_am_see {
         besitzer = MSC
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = MSC
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = MSC
+        bund     = ja
+    }
 }
 
 ort goldberg {
@@ -878,6 +1238,16 @@ ort goldberg {
     }
 
     1848.03.01 = {
+        besitzer = MSC
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = MSC
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = MSC
         bund     = ja
     }
@@ -903,6 +1273,16 @@ ort lalendorf {
         besitzer = MSC
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = MSC
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = MSC
+        bund     = ja
+    }
 }
 
 ort ludwigslust {
@@ -922,6 +1302,16 @@ ort ludwigslust {
     }
 
     1848.03.01 = {
+        besitzer = MSC
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = MSC
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = MSC
         bund     = ja
     }
@@ -947,6 +1337,16 @@ ort neustadt_glewe {
         besitzer = MSC
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = MSC
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = MSC
+        bund     = ja
+    }
 }
 
 ort luebz {
@@ -966,6 +1366,16 @@ ort luebz {
     }
 
     1848.03.01 = {
+        besitzer = MSC
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = MSC
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = MSC
         bund     = ja
     }
@@ -991,6 +1401,16 @@ ort crivitz {
         besitzer = MSC
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = MSC
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = MSC
+        bund     = ja
+    }
 }
 
 ort sternberg_mecklenburg {
@@ -1010,6 +1430,16 @@ ort sternberg_mecklenburg {
     }
 
     1848.03.01 = {
+        besitzer = MSC
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = MSC
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = MSC
         bund     = ja
     }
@@ -1035,6 +1465,16 @@ ort plate {
         besitzer = MSC
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = MSC
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = MSC
+        bund     = ja
+    }
 }
 
 ort loecknitz {
@@ -1054,6 +1494,16 @@ ort loecknitz {
     }
 
     1848.03.01 = {
+        besitzer = MSC
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = MSC
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = MSC
         bund     = ja
     }
@@ -1079,6 +1529,16 @@ ort rastow {
         besitzer = MSC
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = MSC
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = MSC
+        bund     = ja
+    }
 }
 
 ort stralendorf {
@@ -1101,6 +1561,16 @@ ort stralendorf {
         besitzer = MSC
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = MSC
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = MSC
+        bund     = ja
+    }
 }
 
 ort demen {
@@ -1120,6 +1590,16 @@ ort demen {
     }
 
     1848.03.01 = {
+        besitzer = MSC
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = MSC
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = MSC
         bund     = ja
     }
@@ -1146,6 +1626,16 @@ ort altentreptow {
         verwaltung = pr_kr_demmin
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort woldegk {
@@ -1165,6 +1655,16 @@ ort woldegk {
     }
 
     1848.03.01 = {
+        besitzer = MST
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = MST
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = MST
         bund     = ja
     }
@@ -1190,6 +1690,16 @@ ort friedland_mecklenburg {
         besitzer = MST
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = MST
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = MST
+        bund     = ja
+    }
 }
 
 ort penzlin {
@@ -1209,6 +1719,16 @@ ort penzlin {
     }
 
     1848.03.01 = {
+        besitzer = MSC
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = MSC
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = MSC
         bund     = ja
     }
@@ -1235,6 +1755,16 @@ ort loitz {
         verwaltung = pr_kr_anklam
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort moellenhagen {
@@ -1254,6 +1784,16 @@ ort moellenhagen {
     }
 
     1848.03.01 = {
+        besitzer = MSC
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = MSC
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = MSC
         bund     = ja
     }
@@ -1280,6 +1820,16 @@ ort guetzkow {
         verwaltung = pr_kr_demmin
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort gross_nemerow {
@@ -1299,6 +1849,16 @@ ort gross_nemerow {
     }
 
     1848.03.01 = {
+        besitzer = MST
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = MST
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = MST
         bund     = ja
     }
@@ -1325,6 +1885,16 @@ ort wackerow {
         verwaltung = pr_kr_demmin
         bund       = ja
     }
+
+    1866.08.24 = {
+        besitzer = PRU
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = PRU
+        bund     = ja
+    }
 }
 
 ort hagenow {
@@ -1344,6 +1914,16 @@ ort hagenow {
     }
 
     1848.03.01 = {
+        besitzer = MSC
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = MSC
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = MSC
         bund     = ja
     }
@@ -1369,6 +1949,16 @@ ort boizenburg {
         besitzer = MSC
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = MSC
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = MSC
+        bund     = ja
+    }
 }
 
 ort wittenburg {
@@ -1388,6 +1978,16 @@ ort wittenburg {
     }
 
     1848.03.01 = {
+        besitzer = MSC
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = MSC
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = MSC
         bund     = ja
     }
@@ -1413,6 +2013,16 @@ ort luebtheen {
         besitzer = MSC
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = MSC
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = MSC
+        bund     = ja
+    }
 }
 
 ort doemitz {
@@ -1432,6 +2042,16 @@ ort doemitz {
     }
 
     1848.03.01 = {
+        besitzer = MSC
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = MSC
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = MSC
         bund     = ja
     }
@@ -1457,6 +2077,16 @@ ort zarrentin {
         besitzer = MSC
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = MSC
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = MSC
+        bund     = ja
+    }
 }
 
 ort malliss {
@@ -1476,6 +2106,16 @@ ort malliss {
     }
 
     1848.03.01 = {
+        besitzer = MSC
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = MSC
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = MSC
         bund     = ja
     }
@@ -1501,6 +2141,16 @@ ort neustrelitz {
         besitzer = MST
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = MST
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = MST
+        bund     = ja
+    }
 }
 
 ort waren {
@@ -1520,6 +2170,16 @@ ort waren {
     }
 
     1848.03.01 = {
+        besitzer = MSC
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = MSC
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = MSC
         bund     = ja
     }
@@ -1545,6 +2205,16 @@ ort malchow {
         besitzer = MSC
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = MSC
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = MSC
+        bund     = ja
+    }
 }
 
 ort plau_am_see {
@@ -1564,6 +2234,16 @@ ort plau_am_see {
     }
 
     1848.03.01 = {
+        besitzer = MSC
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = MSC
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = MSC
         bund     = ja
     }
@@ -1589,6 +2269,16 @@ ort wesenberg {
         besitzer = MST
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = MST
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = MST
+        bund     = ja
+    }
 }
 
 ort roebel {
@@ -1608,6 +2298,16 @@ ort roebel {
     }
 
     1848.03.01 = {
+        besitzer = MSC
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = MSC
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = MSC
         bund     = ja
     }
@@ -1633,6 +2333,16 @@ ort rechlin {
         besitzer = MSC
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = MSC
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = MSC
+        bund     = ja
+    }
 }
 
 ort carpin {
@@ -1655,6 +2365,16 @@ ort carpin {
         besitzer = MST
         bund     = ja
     }
+
+    1866.08.24 = {
+        besitzer = MST
+        bund     = nein
+    }
+
+    1867.07.01 = {
+        besitzer = MST
+        bund     = ja
+    }
 }
 
 ort grabowhoefe {
@@ -1674,6 +2394,16 @@ ort grabowhoefe {
     }
 
     1848.03.01 = {
+        besitzer = MSC
+        bund     = ja
+    }
+
+    1866.08.24 = {
+        besitzer = MSC
+        bund     = nein
+    }
+
+    1867.07.01 = {
         besitzer = MSC
         bund     = ja
     }
