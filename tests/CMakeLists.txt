@@ -84,6 +84,22 @@ if(UHRWERK_BUILD_CLI)
         COMMAND uhrwerk-cli zoll --daten ${PROJECT_SOURCE_DIR}/data --szenario voelkerfruehling --seeds 1
                 --jahre 1 --beitritt SLI:zollverein)
 
+    # Kriegslabor (seit M10, docs/technik/militaer.md Abschnitt 6.3): drei Kriege auf der Fixture mit
+    # Militärdaten (tests/daten_krieg über tests/daten) gegen ihre Kriegsziele über 16 Seeds; 1848 ein
+    # kurzer Lauf, die volle Prüfung läuft im CI-Job "Balancing".
+    set(krieg_daten ${CMAKE_CURRENT_BINARY_DIR}/krieg_daten)
+    add_test(NAME krieg_daten
+        COMMAND ${CMAKE_COMMAND} -DQUELLE=${CMAKE_CURRENT_SOURCE_DIR} -DZIEL=${krieg_daten}
+                -P ${CMAKE_CURRENT_SOURCE_DIR}/krieg_daten.cmake)
+    set_tests_properties(krieg_daten PROPERTIES FIXTURES_SETUP krieg_daten)
+    add_test(NAME pruefen_krieg_fixture COMMAND uhrwerk-cli pruefen --daten ${krieg_daten})
+    add_test(NAME krieg_fixture COMMAND uhrwerk-cli krieg --daten ${krieg_daten} --seeds 16)
+    set_tests_properties(pruefen_krieg_fixture krieg_fixture PROPERTIES FIXTURES_REQUIRED krieg_daten)
+    set_tests_properties(krieg_fixture PROPERTIES PASS_REGULAR_EXPRESSION
+        "Verstöße: keine – alle Kriegsziele erfüllt")
+    add_test(NAME krieg_1848
+        COMMAND uhrwerk-cli krieg --daten ${PROJECT_SOURCE_DIR}/data --szenario voelkerfruehling --seeds 1)
+
     # Spielstände und Wiederholungen (seit M6, docs/technik/speicherstaende.md Abschnitt 10): Abnahme
     # mit den echten Daten über die Datei; Wiederholung eines Protokolls und eines Spielstands über
     # 50 Jahre mit Testbefehlen.

@@ -1,13 +1,14 @@
 // Tests des Militärs (seit M10; docs/technik/militaer.md): Schritt a1 Nachbarschaft, Heerwesen und
 // Garnisonen (Abschnitte 3.1 und 3.2), Schritt a2 Mobilmachung, Wege, Bahn und Versorgung (3.3–3.5),
 // Schritt a3 Krieg, Schlacht, Besetzung, Belagerung und Verluste (4.1–4.4), Schritt a4 Kriegsziele,
-// Kriegspunkte, Frieden und Generalstab (4.5, 5).
+// Kriegspunkte, Frieden und Generalstab (4.5, 5), Schritt a5 Kriegslabor (6.3).
 #include "test_hilfen.hpp"
 #include "uhrwerk/diplomacy.hpp"
 #include "uhrwerk/economy.hpp"
 #include "uhrwerk/military.hpp"
 #include "uhrwerk/savegame.hpp"
 #include "uhrwerk/simulation.hpp"
+#include "uhrwerk/war_lab.hpp"
 
 #include <algorithm>
 #include <cstdint>
@@ -15,6 +16,7 @@
 #include <string>
 #include <string_view>
 #include <tuple>
+#include <utility>
 #include <vector>
 
 namespace {
@@ -145,6 +147,14 @@ private:
 
 std::size_t at(Index index) {
     return static_cast<std::size_t>(index);
+}
+
+std::string lines(const std::vector<std::string>& texts) {
+    std::string result;
+    for (const std::string& text : texts) {
+        result += text + '\n';
+    }
+    return result;
 }
 
 Command command(CommandType type, Index state, std::int64_t value, Index target = uhrwerk::kNone) {
@@ -1318,5 +1328,174 @@ TEST_CASE("Militär: Generalstab und Lauf ohne Spieler") {
         const uhrwerk::ReplayResult replay = uhrwerk::run_replay(uhrwerk::make_replay(full), start, 2);
         INFO(replay.error);
         CHECK(replay.ok);
+    }
+}
+
+TEST_CASE("Militär: Kriegslabor") {
+    const MilitaryData data;
+    data.add_rules("    generalstab = ja\n");
+    data.add_unit();
+    const World start = with_strength(data.load(), 30, 5);
+    const Index bra = start.find_state("BRA");
+    const Index sax = start.find_state("SAX");
+    using uhrwerk::WarGoalKind;
+    using uhrwerk::WarOutcome;
+
+    SUBCASE("Kriegsziele lesen") {
+        const uhrwerk::WarTargetsResult r = uhrwerk::parse_war_targets(
+            "krieg sachsen {\n    angreifer = BRA\n    verteidiger = SAX\n"
+            "    ziel = { annexion = SAX gebiet = leipziger_kreis }\n    ziel = { entschaedigung = 3 }\n"
+            "    tage = 200\n    sieg = { 0.5 1 }\n    niederlage = { 0 0.2 }\n    weiss = { 0 0.5 }\n"
+            "    dauer = { 10 150 }\n    offen = ja\n}\n"
+            "krieg anhalt { angreifer = SAX verteidiger = ANH }\n",
+            start);
+        INFO(lines(r.errors));
+        REQUIRE(r.ok());
+        REQUIRE(r.targets.wars.size() == 2);
+        const uhrwerk::WarScenario& war = r.targets.wars[0];
+        CHECK(war.id == "sachsen");
+        CHECK(war.attacker == bra);
+        CHECK(war.defender == sax);
+        REQUIRE(war.goals.size() == 3);
+        CHECK(war.goals[0] == uhrwerk::WarGoal{WarGoalKind::Annexation, true, sax});
+        CHECK(war.goals[1] ==
+              uhrwerk::WarGoal{WarGoalKind::Territory, true, start.find_admin_unit("leipziger_kreis")});
+        CHECK(war.goals[2] == uhrwerk::WarGoal{WarGoalKind::Indemnity, true, 3});
+        CHECK(war.days == 200);
+        REQUIRE(war.victory.has_value());
+        CHECK(war.victory->min == Fixed::from_ratio(1, 2));
+        CHECK(war.defeat.has_value());
+        CHECK(war.white.has_value());
+        REQUIRE(war.duration.has_value());
+        CHECK(war.duration->max == Fixed::from_int(150));
+        CHECK(war.open);
+        const uhrwerk::WarScenario& anhalt = r.targets.wars[1];
+        CHECK(anhalt.goals.empty());
+        CHECK(anhalt.days == 730);
+        CHECK_FALSE(anhalt.victory.has_value());
+        CHECK_FALSE(anhalt.open);
+    }
+
+    SUBCASE("Fehler in den Kriegszielen") {
+        for (const auto& [text, message] : {
+                 std::pair{"krieg a { angreifer = XXX verteidiger = SAX }", "unbekannter Staat 'XXX'"},
+                 std::pair{"krieg a { angreifer = SAX verteidiger = SAX }", "derselbe Staat"},
+                 std::pair{"krieg a { angreifer = SAX }", "braucht 'angreifer' und 'verteidiger'"},
+                 std::pair{"krieg a { angreifer = BRA verteidiger = SAX sieg = { 0 2 } }",
+                           "innerhalb von 0 bis 1"},
+                 std::pair{"krieg a { angreifer = BRA verteidiger = SAX dauer = { 9 3 } }", "von ≤ bis"},
+                 std::pair{"krieg a { angreifer = BRA verteidiger = SAX tage = 0 }", "'tage' erwartet"},
+                 std::pair{"krieg a { angreifer = BRA verteidiger = SAX sieger = BRA }",
+                           "unbekanntes Feld 'sieger'"},
+                 std::pair{"krieg a { angreifer = BRA verteidiger = SAX ziel = { entschaedigung = 30 } }",
+                           "ganze Monatseinnahmen"},
+                 std::pair{"krieg a { angreifer = BRA verteidiger = SAX ziel = { gebiet = nirgends } }",
+                           "unbekannte Verwaltungseinheit"},
+                 std::pair{"krieg a { angreifer = BRA verteidiger = SAX ziel = { fuehrung = nein } }",
+                           "'fuehrung' erwartet ja"},
+                 std::pair{"krieg a { angreifer = BRA verteidiger = SAX ziel = { beute = ja } }",
+                           "unbekanntes Feld 'beute'"},
+                 std::pair{"krieg a { angreifer = BRA verteidiger = SAX offen = vielleicht }",
+                           "'offen' erwartet ja oder nein"},
+                 std::pair{"krieg a { angreifer = BRA verteidiger = SAX }\nkrieg a { angreifer = SAX "
+                           "verteidiger = BRA }",
+                           "mehrfach"},
+                 std::pair{"wechsel a { }", "unbekanntes Feld 'wechsel'"},
+             }) {
+            CAPTURE(text);
+            const uhrwerk::WarTargetsResult r = uhrwerk::parse_war_targets(text, start, "ziele.chron");
+            CHECK_FALSE(r.ok());
+            CHECK(r.targets.wars.empty());
+            const std::string errors = lines(r.errors);
+            CAPTURE(errors);
+            CHECK(errors.find(message) != std::string::npos);
+            CHECK(errors.find("ziele.chron:") != std::string::npos);
+        }
+    }
+
+    uhrwerk::WarScenario war;
+    war.id = "sachsen";
+    war.attacker = bra;
+    war.defender = sax;
+    war.goals = {uhrwerk::WarGoal{WarGoalKind::Annexation, true, sax},
+                 uhrwerk::WarGoal{WarGoalKind::Indemnity, true, 2}};
+    war.days = 200;
+
+    SUBCASE("Lauf bis zum Frieden") {
+        const uhrwerk::WarLabRun run = uhrwerk::run_war_lab(start, SimConfig{7, 1}, war);
+        CHECK(run.started);
+        CHECK(run.outcome == WarOutcome::Attacker);
+        CHECK(run.days > 0);
+        CHECK(run.days < 200);
+        CHECK(run.battles >= 1);
+        CHECK(run.transfers == 2);
+        CHECK(run.defender_losses > Fixed::zero());
+        CHECK(run.peace.find("Brandenburg annektiert Sachsen") != std::string::npos);
+        // Gleicher Seed, gleiches Ergebnis, auch mit Threads.
+        const uhrwerk::WarLabRun again = uhrwerk::run_war_lab(start, SimConfig{7, 4}, war);
+        CHECK(again.days == run.days);
+        CHECK(again.battles == run.battles);
+        CHECK(again.attacker_losses == run.attacker_losses);
+        CHECK(again.defender_debt == run.defender_debt);
+        CHECK(again.peace == run.peace);
+        // Der Krieg bleibt als Ergebnis im Zustand.
+        Simulation sim(start);
+        sim.submit(command(CommandType::DeclareWar, bra, goal(WarGoalKind::Annexation, sax), sax));
+        sim.step_days(200);
+        const World& v = sim.world();
+        REQUIRE(v.war_results.size() == 1);
+        const uhrwerk::WarResult& result = v.war_results[0];
+        CHECK(result.attacker == bra);
+        CHECK(result.defender == sax);
+        CHECK(result.winner == 1);
+        CHECK(result.transfers == 2);
+        CHECK(result.battles >= 1);
+        CHECK(result.ended > result.started);
+        CHECK(result.defender_losses > Fixed::zero());
+    }
+
+    SUBCASE("Höchstdauer ohne Frieden") {
+        war.days = 5;
+        const uhrwerk::WarLabRun run = uhrwerk::run_war_lab(start, SimConfig{7, 1}, war);
+        CHECK(run.started);
+        CHECK(run.outcome == WarOutcome::Open);
+        CHECK(run.days == 5);
+        CHECK(run.peace.empty());
+    }
+
+    SUBCASE("Zusammenfassung und Verstöße") {
+        std::vector<uhrwerk::WarLabRun> runs;
+        for (const std::uint64_t seed : {1u, 2u, 3u}) {
+            runs.push_back(uhrwerk::run_war_lab(start, SimConfig{seed, 1}, war));
+        }
+        uhrwerk::WarScenario invalid = war;
+        invalid.id = "ungueltig";
+        invalid.defender = bra; // sich selbst kann niemand den Krieg erklären
+        const uhrwerk::WarLabRun none = uhrwerk::run_war_lab(start, SimConfig{1, 1}, invalid);
+        CHECK_FALSE(none.started);
+
+        war.victory = uhrwerk::ValueRange{Fixed::from_ratio(9, 10), Fixed::one()};
+        uhrwerk::WarLabSummary s = uhrwerk::summarize_war_lab({war, invalid}, {runs, {none, none}});
+        REQUIRE(s.wars.size() == 2);
+        CHECK(s.wars[0].outcomes[static_cast<std::size_t>(WarOutcome::Attacker)] == 3);
+        CHECK(s.wars[0].transfers.median == Fixed::from_int(2));
+        CHECK(s.wars[0].days.median > Fixed::zero());
+        CHECK(s.wars[1].not_started == 2);
+        REQUIRE(s.violations.size() == 1);
+        CHECK(s.violations[0].check == uhrwerk::WarCheck::NotStarted);
+        CHECK(s.violations[0].war == 1);
+
+        war.open = true;
+        war.defeat = uhrwerk::ValueRange{Fixed::from_ratio(1, 2), Fixed::one()};
+        war.duration = uhrwerk::ValueRange{Fixed::one(), Fixed::from_int(2)};
+        s = uhrwerk::summarize_war_lab({war}, {runs});
+        std::vector<uhrwerk::WarCheck> checks;
+        for (const uhrwerk::WarViolation& v : s.violations) {
+            checks.push_back(v.check);
+        }
+        CHECK(checks == std::vector<uhrwerk::WarCheck>{uhrwerk::WarCheck::Defeat, uhrwerk::WarCheck::Duration,
+                                                       uhrwerk::WarCheck::Fixed});
+        CHECK(s.violations[0].value == Fixed::zero());
+        CHECK(s.violations[2].value == Fixed::from_int(3));
     }
 }

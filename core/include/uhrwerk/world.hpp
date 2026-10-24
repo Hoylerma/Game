@@ -759,9 +759,27 @@ struct War {
     Fixed defender_inflicted;
     std::int32_t attacker_destroyed = 0; // von den Angreifern vernichtete Heere
     std::int32_t defender_destroyed = 0;
-    Date last_change; // letzte Schlacht oder Besetzung (Stillstand)
+    Date last_change;         // letzte Schlacht oder Besetzung (Stillstand)
+    std::int32_t battles = 0; // seit a5: beendete Schlachten
 
     friend bool operator==(const War&, const War&) = default;
+};
+
+/// Beendeter Krieg (seit Schritt a5): für das Kriegslabor und die Anzeige. Zustand.
+struct WarResult {
+    std::int64_t id = 0;
+    Index attacker = kNone; // Hauptparteien
+    Index defender = kNone;
+    WarCause cause = WarCause::Declaration;
+    Date started;
+    Date ended;
+    std::int32_t winner = 0; // 1 Angreifer, −1 Verteidiger, 0 ohne Gewinner
+    std::int32_t battles = 0;
+    Fixed attacker_losses; // erlittene Verluste mit Gefangenen
+    Fixed defender_losses;
+    std::int32_t transfers = 0; // Orte, die den Besitzer wechselten
+
+    friend bool operator==(const WarResult&, const WarResult&) = default;
 };
 
 /// Laufende Schlacht in einem Ort (seit Schritt a3, Abschnitt 4.2). Die Seiten folgen täglich aus den
@@ -1068,6 +1086,7 @@ struct World {
     std::vector<Prisoners> prisoners;         // seit a3: Kriegsgefangene je Staat und Gewahrsam
     std::vector<Fixed> war_dead;              // seit a3: je Staat Gefallene und Abgänge bis zum Monatsersten
     std::vector<std::uint8_t> left_federation; // seit a4: je Staat 1, wenn er den Bund verlassen hat
+    std::vector<WarResult> war_results;        // seit a5: beendete Kriege in zeitlicher Folge
 
     Index find_state(std::string_view tag) const;
     Index find_location(std::string_view id) const;

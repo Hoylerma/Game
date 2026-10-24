@@ -17,6 +17,7 @@ add_library(uhrwerk_core STATIC
     src/war.cpp
     src/staff.cpp
     src/customs_lab.cpp
+    src/war_lab.cpp
     src/economy.cpp
     src/lasttest.cpp
     src/balance.cpp

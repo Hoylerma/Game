@@ -289,6 +289,20 @@ template <typename Sim, typename V> void StateAccess::visit(Sim& sim, V& v) {
             v.field("vernichtet_angreifer", k.attacker_destroyed);
             v.field("vernichtet_verteidiger", k.defender_destroyed);
             v.field("letzte_bewegung", k.last_change);
+            v.field("schlachten", k.battles); // seit a5
+        });
+        list(v, "kriegsergebnisse", w.war_results, Extent::State, [&](auto& r) { // seit a5
+            v.field("nummer", r.id);
+            v.field("angreifer", r.attacker);
+            v.field("verteidiger", r.defender);
+            v.field("anlass", r.cause);
+            v.field("beginn", r.started);
+            v.field("ende", r.ended);
+            v.field("sieger", r.winner);
+            v.field("schlachten", r.battles);
+            v.field("verluste_angreifer", r.attacker_losses);
+            v.field("verluste_verteidiger", r.defender_losses);
+            v.field("besitzwechsel", r.transfers);
         });
         list(v, "kontrolle", w.control, Extent::Content, [&](auto& c) { v.field("", c); });
         list(v, "schlachten", w.battles, Extent::State, [&](auto& b) {
