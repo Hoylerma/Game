@@ -51,6 +51,12 @@ void add_war_dead(World& world, Index state, Fixed soldiers);
 /// Schlachten, Besetzung und Belagerung, Verwundete eines Tages (war.cpp).
 void run_battles(World& world, Pcg32& rng);
 void run_occupation(World& world);
+/// Besetzung im Vorbeimarsch (seit b2): Ein Heer, das auf dem Marsch einen gegnerischen Ort ohne Festung
+/// und ohne Verteidiger erreicht, nimmt ihn sofort.
+void occupy_on_passage(World& world, const Army& army);
+/// Kampfkraft eines Heeres in voller Front (seit b2 für den Generalstab): Bewaffnung, Geschütze, Moral,
+/// Führung.
+Fixed combat_power(const World& world, const Army& army);
 void return_convalescents(World& world);
 
 /// Am Monatsersten: Gefallene und Abgänge mindern die Jahrgänge im wehrfähigen Alter (war.cpp).

@@ -1,8 +1,14 @@
 # Kriegsziele des Kriegslabors für das Lesezeichen dueppel (M10b, Schritt b1), gelesen von
 # `uhrwerk-cli krieg` und `uhrwerk-cli pruefen`. Format: docs/technik/chronik-skript.md, Abschnitt 3.31.
-# Der Krieg kommt aus dem Lesezeichen (common/aufmarsch_dueppel.chron); die Korridore setzt die Kalibrierung (b2).
+# Der Krieg kommt aus dem Lesezeichen (common/aufmarsch_dueppel.chron).
+# Korridore (b2) nach militaer.md, Abschnitt 6.3: Dänemark verliert Schleswig in mindestens 80 % der
+# Läufe, Dauer 2–9 Monate. Der Ausgang ist 1864 militärisch entschieden (alle 16 Läufe: die Dänen
+# weichen vom Danewerk nach Düppel aus, die Schanzen fallen im Sturm oder nach der Einschließung);
+# die Läufe unterscheiden sich in Verlauf und Dauer, daher hier ohne 'offen'.
 krieg dueppel {
     angreifer   = PRU
     verteidiger = DEN
     tage        = 365
+    sieg        = { 0.8 1 }
+    dauer       = { 60 270 }
 }

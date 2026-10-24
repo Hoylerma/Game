@@ -29,7 +29,7 @@ militaer {
     zermuerbung            = 0.0005
     zermuerbung_unversorgt = 0.005
     moral_unversorgt       = 0.02
-    moral_erholung         = 0.01
+    moral_erholung         = 0.04
 
     # Mobilmachung (Abschnitt 3.3): Abrüstung in demobilmachung_tage zurück in die Garnisonen.
     demobilmachung_tage = 30
@@ -49,6 +49,7 @@ militaer {
     moralverlust               = 5
     bruch_moral                = 0.3
     bruch_verluste             = 0.25
+    moral_sieg                 = 0.3     # seit b2: so viel Moral gewinnen die Sieger einer Schlacht zurück
     gefallene                  = 0.25    # Anteil der Verluste; die übrigen sind verwundet
     verwundete_rueckkehr       = 0.5     # … davon kehren zurück nach genesung_tage
     genesung_tage              = 60
@@ -66,17 +67,18 @@ militaer {
     # (× Verlustbilanz ÷ Kriegsstärke, höchstens so viel) und vernichteten Heeren; Kriegsmüdigkeit aus
     # Verlusten, Besetzung und Monaten. Ohne Bewegung endet ein Krieg nach stillstand_monate.
     ziel_gebiet            = 100   # × Anteil an der Bevölkerung des Gegners
-    ziel_gebiet_mindestens = 10
+    ziel_gebiet_mindestens = 5
     ziel_annexion          = 80
-    ziel_fuehrung          = 50
+    ziel_fuehrung          = 20
     ziel_zollunion         = 30
     ziel_entschaedigung    = 10    # je Monatseinnahme
     punkte_besetzung       = 60
     punkte_hauptstadt      = 20
     punkte_schlachten      = 30
     punkte_heer            = 10
+    punkte_heer_anteil     = 0.1   # seit b2: ein Heer zählt ab diesem Anteil an der Kriegsstärke seiner Seite
     muedigkeit_verluste    = 100
-    muedigkeit_besetzung   = 50
+    muedigkeit_besetzung   = 100
     muedigkeit_monat       = 2
     stillstand_monate      = 12
 
@@ -85,7 +87,8 @@ militaer {
     generalstab_angriff       = 1.2
     generalstab_rueckzug      = 2
     generalstab_umkreis_km    = 60
-    generalstab_reichweite_km = 300
+    generalstab_reichweite_km = 150
+    generalstab_moral         = 0.5   # seit b2: darunter erholt sich ein Heer, statt anzugreifen oder vorzurücken
 
     # Führung (Schritt b1): Kampfkraft × (1 + fuehrung × (Führung − 1)) je Heer; die Heere des Aufmarschs
     # tragen Befehlshaber mit Führung 0–3, alle übrigen Führung 1 (ohne Wirkung).
@@ -212,7 +215,7 @@ heerwesen pru_1860 {
 heerwesen aut_1859 {
     staat             = AUT
     seit              = 1859.07.01
-    bewaffnung        = 1.0      # Lorenz-Vorderlader, Stoßtaktik
+    bewaffnung        = 1.2      # Lorenz-Vorderlader (weittragend, langsam), Stoßtaktik
     geschuetze        = 3.5      # gezogene Vorderlader-Artillerie, 1866 der preußischen überlegen
     mobilmachung      = 2.2
     mobilmachung_tage = 42
@@ -282,7 +285,7 @@ garnison frk_belfort    { staat = FRK ort = beffert    anteil = 0.1 name = "Garn
 
 # Festungen 1849–1870: Danewerk und Düppeler Schanzen (1864), Frankreich (ab 1849 in der Welt).
 festung danewerk     { ort = schleswig    stufe = 1 name = "Danewerk"           seit = 1861.01.01 bis = 1864.10.30 }
-festung dueppel      { ort = gravenstein  stufe = 2 name = "Düppeler Schanzen"  seit = 1861.01.01 bis = 1864.10.30 }
+festung dueppel      { ort = gravenstein  stufe = 3 name = "Düppeler Schanzen"  seit = 1861.01.01 bis = 1864.10.30 }
 festung metz         { ort = metz         stufe = 3 seit = 1849.01.01 }
 festung strassburg   { ort = strassburg   stufe = 3 seit = 1849.01.01 }
 festung belfort      { ort = beffert      stufe = 2 name = "Festung Belfort" seit = 1849.01.01 }

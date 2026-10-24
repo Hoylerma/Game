@@ -63,16 +63,20 @@ Date days_after(const Date& date, std::int32_t days) {
     return from_day_number(to_day_number(date) + days);
 }
 
-/// Bilanz für die Kriegspunkte (seit a4): by fügt on Verluste zu und vernichtet Heere; die Bewegung
-/// setzt den Stillstand zurück.
-void credit(World& world, Index by, Index on, Fixed inflicted, std::int32_t destroyed) {
+/// Bilanz für die Kriegspunkte (seit a4): by fügt on Verluste zu und vernichtet ein Heer mit army
+/// Soldaten (null: keines); die Bewegung setzt den Stillstand zurück. Seit b2 zählt ein vernichtetes Heer
+/// nur, wenn es mindestens punkte_heer_anteil der Kriegsstärke seiner Seite hatte.
+void credit(World& world, Index by, Index on, Fixed inflicted, Fixed army) {
     for (War& w : world.wars) {
         const bool attacking = contains(w.attackers, by) && contains(w.defenders, on);
         if (!attacking && !(contains(w.defenders, by) && contains(w.attackers, on))) {
             continue;
         }
         (attacking ? w.attacker_inflicted : w.defender_inflicted) += inflicted;
-        (attacking ? w.attacker_destroyed : w.defender_destroyed) += destroyed;
+        const Fixed strength = attacking ? w.defender_strength : w.attacker_strength;
+        if (army > Fixed::zero() && army >= strength * world.military_rules.points_army_share) {
+            ++(attacking ? w.attacker_destroyed : w.defender_destroyed);
+        }
         w.last_change = world.date;
         return;
     }
@@ -225,6 +229,11 @@ void end_battle(World& world, const Battle& battle, const std::vector<std::size_
                 const std::vector<std::size_t>& losers, Fixed winner_losses, Fixed loser_losses,
                 std::vector<std::int64_t>& destroyed) {
     const MilitaryRules& rules = world.military_rules;
+    // Seit b2: Der Sieg gibt den Siegern Moral zurück.
+    for (const std::size_t i : winners) {
+        world.armies[i].morale =
+            Fixed::min(Fixed::one(), world.armies[i].morale + world.military_rules.victory_morale);
+    }
     std::size_t strongest = winners.front();
     for (const std::size_t i : winners) {
         if (world.armies[i].soldiers > world.armies[strongest].soldiers) {
@@ -247,13 +256,13 @@ void end_battle(World& world, const Battle& battle, const std::vector<std::size_
         if (target == kNone) {
             add_prisoners(world, army.state, captor, army.soldiers);
             lost += army.soldiers;
-            credit(world, captor, army.state, taken + army.soldiers, 1);
+            credit(world, captor, army.state, taken + army.soldiers, taken + army.soldiers);
             set_soldiers(world, army, Fixed::zero());
             surrendered.push_back(army.name);
             destroyed.push_back(army.id);
             continue;
         }
-        credit(world, captor, army.state, taken, 0);
+        credit(world, captor, army.state, taken, Fixed::zero());
         stop(army);
         army.route.push_back(RouteStep{target, LegMode::March, kNone});
         army.days_left = march_days(world, *find_neighbor(world, army.location, target));
@@ -309,8 +318,9 @@ bool fight(World& world, Battle& battle, const Sides& sides, Pcg32& rng,
     const Fixed one = Fixed::one();
     defense = defense * (one + (terrain - one) * rules.terrain_defense);
     const std::int32_t level = fortress_level(world, location);
+    const Fixed cover = one + rules.fortress_defense * Fixed::from_int(level);
     if (level > 0) {
-        defense = defense * (one + rules.fortress_defense * Fixed::from_int(level));
+        defense = defense * cover;
     }
     if (attackers > Fixed::zero()) {
         defense = defense * (one + (rules.river_defense - one) * crossing / attackers);
@@ -319,7 +329,8 @@ bool fight(World& world, Battle& battle, const Sides& sides, Pcg32& rng,
     const Fixed high = Fixed::from_ratio(12, 10);
     const Fixed attacker_luck = rng.uniform(low, high);
     const Fixed defender_luck = rng.uniform(low, high);
-    const Fixed defender_losses = Fixed::min(defenders, rules.loss_rate * attack * attacker_luck);
+    // Seit b2 schützt die Festung die Verteidiger auch: ihre Verluste ÷ denselben Faktor.
+    const Fixed defender_losses = Fixed::min(defenders, rules.loss_rate * attack * attacker_luck / cover);
     const Fixed attacker_losses = Fixed::min(attackers, rules.loss_rate * defense * defender_luck);
     apply_losses(world, sides.attackers, attackers, attacker_losses);
     apply_losses(world, sides.defenders, defenders, defender_losses);
@@ -327,8 +338,8 @@ bool fight(World& world, Battle& battle, const Sides& sides, Pcg32& rng,
     battle.defender_losses += defender_losses;
     const Index attacker_state = world.armies[sides.attackers.front()].state;
     const Index defender_state = world.armies[sides.defenders.front()].state;
-    credit(world, attacker_state, defender_state, defender_losses, 0);
-    credit(world, defender_state, attacker_state, attacker_losses, 0);
+    credit(world, attacker_state, defender_state, defender_losses, Fixed::zero());
+    credit(world, defender_state, attacker_state, attacker_losses, Fixed::zero());
 
     const Fixed attacker_morale = morale_of(world, sides.attackers);
     const Fixed defender_morale = morale_of(world, sides.defenders);
@@ -445,12 +456,17 @@ void pay(State& state, Fixed amount) {
 }
 
 /// Ein Staat ohne Orte geht unter (Abschnitt 4.5): Heere aufgelöst, Verträge und Gesandte enden, Kasse und
-/// Schulden gehen an den Erwerber, er verlässt den Bund und alle Kriege.
+/// Schulden gehen an den Erwerber, er verlässt den Bund und alle Kriege. Ein Staat mit Hinterland
+/// (seit b2) verlässt nur die Karte: Kasse und Schulden gehen mit ihm.
 void extinguish(World& world, Index state, Index heir, std::string& text) {
     State& gone = world.states[at(state)];
     State& gains = world.states[at(heir)];
-    gains.treasury += gone.treasury;
-    gains.debt += gone.debt;
+    const bool beyond = std::any_of(world.hinterlands.begin(), world.hinterlands.end(),
+                                    [&](const Hinterland& h) { return h.state == state; });
+    if (!beyond) {
+        gains.treasury += gone.treasury;
+        gains.debt += gone.debt;
+    }
     gone.treasury = Fixed::zero();
     gone.debt = Fixed::zero();
     gone.capital = kNone;
@@ -476,7 +492,7 @@ void extinguish(World& world, Index state, Index heir, std::string& text) {
         std::erase(w.defenders, state);
     }
     std::erase_if(world.wars, [](const War& w) { return w.attackers.empty() || w.defenders.empty(); });
-    text += " " + gone.short_name + " geht unter.";
+    text += " " + gone.short_name + (beyond ? " verlässt die Karte." : " geht unter.");
 }
 
 /// Friedensschluss (Abschnitt 4.5): Der Krieg endet; winner 1 Angreifer, −1 Verteidiger, 0 ohne Gewinner.
@@ -658,6 +674,28 @@ void run_battles(World& world, Pcg32& rng) {
         }
         auto it = std::find_if(world.battles.begin(), world.battles.end(),
                                [&](const Battle& b) { return b.location == location; });
+        // Seit b2: Ein Heer in der Festung wird eingeschlossen statt gestürmt (Belagerung), wenn die
+        // Angreifer es an Soldaten um generalstab_angriff übertreffen, an Kampfkraft aber nicht um so viel
+        // über die Festung hinaus.
+        if (it == world.battles.end()) {
+            const std::int32_t level = fortress_level(world, location);
+            if (level > 0 && soldiers_of(world, sides.attackers) >=
+                                 soldiers_of(world, sides.defenders) * world.military_rules.staff_attack) {
+                Fixed attack;
+                Fixed defense;
+                for (const std::size_t i : sides.attackers) {
+                    attack += combat_power(world, world.armies[i]);
+                }
+                for (const std::size_t i : sides.defenders) {
+                    defense += combat_power(world, world.armies[i]);
+                }
+                const Fixed cover =
+                    Fixed::one() + world.military_rules.fortress_defense * Fixed::from_int(level);
+                if (attack < defense * cover * world.military_rules.staff_attack) {
+                    continue;
+                }
+            }
+        }
         if (it == world.battles.end()) {
             world.battles.push_back(Battle{location, world.date, 0, Fixed{}, Fixed{}});
             it = world.battles.end() - 1;
@@ -688,13 +726,50 @@ void run_battles(World& world, Pcg32& rng) {
     remove_armies(world, destroyed);
 }
 
+Fixed combat_power(const World& world, const Army& army) {
+    return strength(world, army, Fixed::one());
+}
+
+void occupy_on_passage(World& world, const Army& army) {
+    const Index location = army.location;
+    const Index holder = controller(world, location);
+    if (holder == kNone || !at_war(world, army.state, holder) || fortress_level(world, location) > 0) {
+        return;
+    }
+    if (std::any_of(world.armies.begin(), world.armies.end(), [&](const Army& a) {
+            return a.location == location && engaged(a) && friendly(world, a.state, holder);
+        })) {
+        return;
+    }
+    const Location& place = world.locations[at(location)];
+    const Index next = friendly(world, army.state, place.owner) ? kNone : army.state;
+    world.control[at(location)] = next;
+    credit(world, army.state, holder, Fixed::zero(), Fixed::zero());
+    if (place.owner != kNone && world.states[at(place.owner)].capital == location) {
+        chronicle(world, army.state,
+                  next == kNone ? name_of(world, army.state) + " befreit " + place.name +
+                                      ", die Hauptstadt von " + name_of(world, place.owner) + "."
+                                : name_of(world, army.state) + " besetzt " + place.name +
+                                      ", die Hauptstadt von " + name_of(world, place.owner) + ".",
+                  location);
+    }
+}
+
 void run_occupation(World& world) {
     if (world.wars.empty() && world.sieges.empty()) {
         return;
     }
     const MilitaryRules& rules = world.military_rules;
+    // Seit b2: Wer nach einem vollen Tag am Ort abmarschiert, nimmt ihn mit (ohne Festung, wie im
+    // Vorbeimarsch).
+    for (const Army& army : world.armies) {
+        if (army.status == ArmyStatus::March && army.days_here >= 1) {
+            occupy_on_passage(world, army);
+        }
+    }
     const std::map<Index, std::vector<std::size_t>> engaged_here = armies_by_location(world, false);
     std::vector<Index> besieged;
+    std::vector<std::int64_t> surrendered; // seit b2: Heere, die sich mit einer Festung ergeben
     for (const auto& [location, armies] : armies_by_location(world, true)) {
         if (std::any_of(world.battles.begin(), world.battles.end(),
                         [&](const Battle& b) { return b.location == location; })) {
@@ -704,25 +779,32 @@ void run_occupation(World& world) {
         if (holder == kNone) {
             continue;
         }
+        const std::int32_t level = fortress_level(world, location);
         std::vector<std::size_t> takers;
         for (const std::size_t i : armies) {
             if (world.armies[i].days_here >= 1 && at_war(world, world.armies[i].state, holder)) {
                 takers.push_back(i);
             }
         }
+
+        // Heere des Besitzers im Ort: ohne Festung verhindern sie die Besetzung, in einer Festung werden sie
+        // seit b2 mit ihr belagert (Einschließung) und ergeben sich mit ihr.
         const auto present = engaged_here.find(location);
-        const bool defended = present != engaged_here.end() &&
-                              std::any_of(present->second.begin(), present->second.end(), [&](std::size_t i) {
-                                  return friendly(world, world.armies[i].state, holder);
-                              });
-        if (takers.empty() || defended) {
+        std::vector<std::size_t> inside;
+        if (present != engaged_here.end()) {
+            for (const std::size_t i : present->second) {
+                if (friendly(world, world.armies[i].state, holder)) {
+                    inside.push_back(i);
+                }
+            }
+        }
+        if (takers.empty() || (!inside.empty() && level == 0)) {
             continue;
         }
         const Index taker = world.armies[takers.front()].state;
         const Location& place = world.locations[at(location)];
         // Ein Verbündeter des Besitzers befreit den Ort für ihn.
         const Index next = friendly(world, taker, place.owner) ? kNone : taker;
-        const std::int32_t level = fortress_level(world, location);
         if (level > 0) {
             auto siege = std::find_if(world.sieges.begin(), world.sieges.end(),
                                       [&](const Siege& s) { return s.location == location; });
@@ -735,7 +817,10 @@ void run_occupation(World& world) {
                 besiegers += world.armies[i].soldiers + world.armies[i].guns * rules.gun_value;
                 world.armies[i].status = ArmyStatus::Siege;
             }
-            const Fixed garrison = rules.fortress_garrison * Fixed::from_int(level);
+            Fixed garrison = rules.fortress_garrison * Fixed::from_int(level);
+            for (const std::size_t i : inside) {
+                garrison += world.armies[i].soldiers;
+            }
             Fixed required = rules.siege_min_days;
             if (besiegers > Fixed::zero()) {
                 required =
@@ -760,13 +845,27 @@ void run_occupation(World& world) {
                     name = f.name;
                 }
             }
-            chronicle(world, taker, "Die " + name + " ergibt sich " + name_of(world, taker) + ".", location);
+            std::string text = "Die " + name + " ergibt sich " + name_of(world, taker) + ".";
+            if (!inside.empty()) {
+                std::vector<std::string> names;
+                for (const std::size_t i : inside) {
+                    Army& army = world.armies[i];
+                    names.push_back(army.name);
+                    surrendered.push_back(army.id);
+                    add_prisoners(world, army.state, taker, army.soldiers);
+                    credit(world, taker, army.state, army.soldiers, army.soldiers);
+                    set_soldiers(world, army, Fixed::zero());
+                }
+                text += " Mit ihr " + std::string(names.size() == 1 ? "ergibt sich " : "ergeben sich ") +
+                        join(names) + ".";
+            }
+            chronicle(world, taker, std::move(text), location);
         }
         if (world.control[at(location)] == next) {
             continue;
         }
         world.control[at(location)] = next;
-        credit(world, taker, holder, Fixed::zero(), 0);
+        credit(world, taker, holder, Fixed::zero(), Fixed::zero());
         if (place.owner != kNone && world.states[at(place.owner)].capital == location) {
             chronicle(world, taker,
                       next == kNone ? name_of(world, taker) + " befreit " + place.name +
@@ -776,6 +875,7 @@ void run_occupation(World& world) {
                       location);
         }
     }
+    remove_armies(world, surrendered);
     // Belagerungen ohne Belagerer heute (abgezogen, gefallen, Schlacht) enden; der Fortschritt verfällt.
     std::erase_if(world.sieges, [&](const Siege& s) {
         return !contains(besieged, s.location) || s.progress >= Fixed::one();
@@ -1125,11 +1225,44 @@ Fixed war_goal_cost(const World& world, const War& war, const WarGoal& goal) {
                 part += people;
             }
         }
+        // Seit b2 zählt das Hinterland mit, wie bei den Kriegspunkten.
+        for (const Hinterland& hinterland : world.hinterlands) {
+            if (contains(enemies, hinterland.state)) {
+                whole += hinterland.population;
+            }
+        }
         const Fixed cost = whole > Fixed::zero() ? rules.goal_territory * part / whole : rules.goal_territory;
         return Fixed::max(rules.goal_territory_min, cost);
     }
-    case WarGoalKind::Annexation:
-        return rules.goal_annexation;
+    case WarGoalKind::Annexation: {
+        // Seit b2: × Anteil des Staates an der Bevölkerung der Gegenseite (mit Hinterland), mindestens
+        // ziel_gebiet_mindestens; die Annexion der ganzen Gegenseite kostet ziel_annexion.
+        const std::vector<Index>& enemies = side_of(war, !goal.attacker);
+        Fixed part;
+        Fixed whole;
+        for (std::size_t l = 0; l < world.locations.size(); ++l) {
+            const Index owner = world.locations[l].owner;
+            if (!contains(enemies, owner)) {
+                continue;
+            }
+            const Fixed people = world.location_population(static_cast<Index>(l));
+            whole += people;
+            if (owner == goal.param) {
+                part += people;
+            }
+        }
+        for (const Hinterland& hinterland : world.hinterlands) {
+            if (contains(enemies, hinterland.state)) {
+                whole += hinterland.population;
+                if (hinterland.state == goal.param) {
+                    part += hinterland.population;
+                }
+            }
+        }
+        const Fixed cost =
+            whole > Fixed::zero() ? rules.goal_annexation * part / whole : rules.goal_annexation;
+        return Fixed::max(rules.goal_territory_min, cost);
+    }
     case WarGoalKind::Leadership:
         return rules.goal_leadership;
     case WarGoalKind::Customs:
@@ -1262,9 +1395,12 @@ bool run_peace(World& world) {
     bool changed = false;
     for (std::size_t i = 0; i < world.wars.size();) {
         const War& war = world.wars[i];
+        // Eine Seite setzt ihre Ziele durch, wenn ihre Kriegspunkte deren Kosten decken; seit b2 auch, wenn
+        // die Kriegsmüdigkeit der Gegenseite sie erreicht (wie beim Friedensangebot zu eigenen Bedingungen).
         const auto decided = [&](bool attacker) {
             const Fixed cost = war_goals_cost(world, war, attacker);
-            return cost > Fixed::zero() && war_score(world, war, attacker) >= cost;
+            return cost > Fixed::zero() &&
+                   (war_score(world, war, attacker) >= cost || war_weariness(world, war, !attacker) >= cost);
         };
         int winner = 2; // 2: weiter Krieg
         if (decided(true)) {

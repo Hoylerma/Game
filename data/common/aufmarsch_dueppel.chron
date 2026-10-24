@@ -10,7 +10,8 @@ krieg deutsch_daenischer_krieg {
     angreifer   = { PRU AUT }
     verteidiger = { DEN }
     ziel        = { gebiet = dk_schleswig gebiet = dk_holstein gebiet = dk_lauenburg }
-    quelle      = "Ultimatum vom 16.1.1864; Kriegsziel nach dem Wiener Frieden (30.10.1864): Schleswig, Holstein und Lauenburg"
+    besetzt     = { gebiet = dk_holstein gebiet = dk_lauenburg }
+    quelle      = "Ultimatum vom 16.1.1864; Kriegsziel nach dem Wiener Frieden (30.10.1864): Schleswig, Holstein und Lauenburg; Holstein und Lauenburg seit der Bundesexekution (Dezember 1863) besetzt"
 }
 
 buendnis { staaten = { PRU AUT } quelle = "Punktation vom 16.1.1864" }
@@ -51,6 +52,6 @@ heer den_de_meza {
     befehlshaber = "Christian de Meza"
     fuehrung     = 1
     ort          = schleswig
-    soldaten     = 38000
-    quelle = "Stärke und Ort nach Wissensstand ohne Quellenzugang (ungeprüft), Führung Spielwert (M10b)"
+    soldaten     = 31000
+    quelle = "Stärke und Ort nach Wissensstand ohne Quellenzugang (ungeprüft): 31.000 im Feld, dazu die Besatzung des Danewerks (Garnison, 7.000); Führung Spielwert (M10b)"
 }

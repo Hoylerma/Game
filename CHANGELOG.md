@@ -82,6 +82,18 @@ freigegeben; Stand je Schritt in Abschnitt 12 dort.
   die auch ein Spiel ab 1848 zur Eröffnung bekommt (Korridore 1848 weiter erfüllt). Heerwesen,
   Garnisonen und Festungen bis 1870. `bis` bei Bundesversammlung, Zollunion und Parlament.
   Inhaltsbereich `militaer` Stand 6. Die Kalibrierung der drei Kriege folgt mit b2. 1648 bitgleich.
+- **Kalibrierung der Einigungskriege (Schritt b2):** Das Kriegslabor rechnet die drei Lesezeichen über
+  16 Seeds in den Korridoren der Spezifikation: Düppel 16/16 für Preußen in 90 Tagen, Königgrätz
+  11/16 in 107 Tagen, Sedan 14/16 für die deutsche Seite in 197 Tagen (CI-Schritt „Kriegslabor
+  Lesezeichen“). Dafür: Generalstab mit Kampfkraft, Sturm oder Einschließung, Sammeln vor einer
+  Übermacht, Rückzug in die stärkere Festung, Ziele in Reichweite; Besetzung im Vorbeimarsch; ein Heer
+  in der Festung wird eingeschlossen und ergibt sich mit ihr; die Festung mindert die Verluste der
+  Verteidiger; Moral für die Sieger; vernichtete Heere zählen erst ab einem Zehntel der Kriegsstärke;
+  Ziele kosten nach der Bevölkerung der Gegenseite mit Hinterland; Frieden auch bei Müdigkeit über den
+  Kosten; Dänemark verlässt die Karte, statt unterzugehen; `besetzt` im Aufmarsch (Holstein 1864).
+  Neue Regeln `generalstab_moral`, `moral_sieg`, `punkte_heer_anteil`; Inhaltsbereich `militaer`
+  Stand 7 (Spielstände der Lesezeichen aus b1 laden nicht mehr). 1648 bitgleich, 1848 ohne Befehle
+  bitgleich zu b1.
 
 ### Meilenstein M9 – Diplomatie und Zollverein
 

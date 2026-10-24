@@ -953,12 +953,13 @@ militaer {
     frontbreite            = 50000  # 100–1.000.000: Soldaten je Seite im Flachland (÷ Geländefaktor)
     gelaende_verteidigung  = 0.5    # 0–2: Verteidiger × (1 + (Geländefaktor − 1) × dies)
     flussverteidigung      = 1.5    # 1–5: Verteidiger gegen einen Angreifer über den Fluss
-    festung_verteidigung   = 0.5    # 0–5: Verteidiger × (1 + dies × Stufe)
+    festung_verteidigung   = 0.5    # 0–5: Verteidiger × (1 + dies × Stufe), seit b2 ihre Verluste ÷ ebenso
     geschuetz_wert         = 50     # 0–1.000: Kampfkraft eines Geschützes in Soldaten
     verlustrate            = 0.08   # über 0 bis 1: Verluste je Tag je Kampfkraft des Gegners
     moralverlust           = 5      # 0–100: Moral −= Verluste ÷ Soldaten × dies
     bruch_moral            = 0.3    # 0–1
     bruch_verluste         = 0.25   # über 0 bis 1: Anteil der Tagesverluste
+    moral_sieg             = 0.3    # seit b2, 0–1 (0): Moral, die die Sieger einer Schlacht zurückgewinnen
     gefallene              = 0.25   # 0–1: Anteil der Verluste
     verwundete_rueckkehr   = 0.5    # 0–1: Anteil der Verwundeten, die zurückkehren
     genesung_tage          = 60     # Ganzzahl 1–365
@@ -970,14 +971,18 @@ militaer {
     # seit Schritt a4, ebenso optional (militaer.md, Abschnitte 4.5 und 5):
     ziel_gebiet            = 100    # 0–100: Kosten × Anteil an der Bevölkerung des Gegners
     ziel_gebiet_mindestens = 10     # 0–100
-    ziel_annexion          = 80     # 0–100; ziel_fuehrung 50, ziel_zollunion 30 ebenso
+    ziel_annexion          = 80     # 0–100, seit b2 × Anteil des Staates an der Gegenseite (mindestens
+                                    # ziel_gebiet_mindestens); ziel_fuehrung 50, ziel_zollunion 30 ebenso
     ziel_entschaedigung    = 10     # 0–100: je Monatseinnahme
     punkte_besetzung       = 60     # 0–100; punkte_hauptstadt 20, punkte_schlachten 30, punkte_heer 10
+    punkte_heer_anteil     = 0.1    # seit b2, 0–1 (0): ein vernichtetes Heer zählt ab diesem Anteil an der
+                                    # Kriegsstärke seiner Seite
     muedigkeit_verluste    = 100    # 0–1.000; muedigkeit_besetzung 50 (0–1.000), muedigkeit_monat 2 (0–100)
     stillstand_monate      = 12     # Ganzzahl 1–120
     generalstab            = ja     # ja/nein (nein): die Heere stehen beim Start unter dem Generalstab
     generalstab_angriff    = 1.2    # 1–10; generalstab_rueckzug 2 (1–10)
     generalstab_umkreis_km = 60     # 1–1.000; generalstab_reichweite_km 300 (1–5.000)
+    generalstab_moral      = 0.5    # seit b2, 0–1 (0): darunter erholt sich ein Heer, statt vorzurücken
     # seit Schritt b1, optional:
     fuehrung               = 0.2    # 0–1 (0): Kampfkraft × (1 + dies × (Führung des Heeres − 1))
 }
@@ -1098,6 +1103,8 @@ krieg deutscher_krieg {
     verteidiger = { AUT SAX BAV }      # Pflicht, Hauptpartei zuerst
     ziel        = { fuehrung = ja annexion = HAN }   # optional: Ziele der Angreifer, Einträge wie in
     ziel_verteidiger = { entschaedigung = 6 }        # 3.31, auch mehrfach; ebenso der Verteidiger
+    besetzt     = { gebiet = dk_holstein }           # optional, seit b2: Gebiete der Verteidiger, die
+                                                     # die Hauptpartei der Angreifer zum Start hält
     quelle      = "…"
 }
 buendnis { staaten = { PRU AUT } }     # Bündnis zum Start
@@ -1107,11 +1114,13 @@ garantie { von = GBR fuer = BEL }      # Garantie zum Start
 Beim Start stehen die Heere als Feldarmeen an ihrem Ort, ihre Staaten sind mobil (die Garnisonen
 bleiben als Besatzung stehen, die übrigen Kriegführenden machen mobil); dann gelten die Bündnisse und
 beginnen die Kriege mit ihren Zielen (ein Ziel, das im Krieg nicht gilt, entfällt wie bei einer
-Erklärung). Nach dem Frieden lösen sich die Heere des Aufmarschs mit der Abrüstung auf. Fatal sind
-unbekannte Staaten, Orte und Felder der Ziele, ein Ort ohne Daten, eine Kennung zweimal, ein Staat auf
+Erklärung); die Orte der Verteidiger in den Gebieten unter `besetzt` hält die Hauptpartei der
+Angreifer (1864: Holstein und Lauenburg seit der Bundesexekution). Nach dem Frieden lösen sich die
+Heere des Aufmarschs mit der Abrüstung auf. Fatal sind unbekannte Staaten, Orte und Felder der Ziele,
+in `besetzt` ein Eintrag außer `gebiet = <Verwaltungseinheit>`, ein Ort ohne Daten, eine Kennung zweimal, ein Staat auf
 beiden Seiten oder in zwei Kriegen, ein `beginn` nach dem Start und ein Bündnis ohne genau zwei
 Staaten. Im Kern: `World::deployments` (`Deployment`), `World::opening_wars` (`OpeningWar`) und
-`World::opening_treaties`; die Heere tragen seit b1 Befehlshaber und Führung (`Army::commander`,
+`World::opening_treaties`, seit b2 `OpeningWar::occupied`; die Heere tragen seit b1 Befehlshaber und Führung (`Army::commander`,
 `Army::leadership`).
 
 ## 4. Startzustand

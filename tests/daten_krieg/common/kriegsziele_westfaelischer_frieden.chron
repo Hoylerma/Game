@@ -2,16 +2,15 @@
 # `uhrwerk-cli pruefen`. Format: docs/technik/chronik-skript.md, Abschnitt 3.31. Die Bereiche halten
 # das Verhalten der Fixture fest (CTest krieg_fixture, 16 Seeds); sie sind kein Spielwert.
 
-# Sachsen (35.000 Einwohner) gegen Brandenburg (13.500): Sachsen siegt meist nach dem ersten
-# Monatsersten; in einzelnen Läufen hält sich Brandenburg bis zum Ende.
+# Sachsen (35.000 Einwohner) gegen Brandenburg (13.500): Seit b2 besetzt Sachsen im Vorbeimarsch ganz
+# Brandenburg und siegt am ersten Monatsersten (8 Tage).
 krieg brandenburg {
     angreifer   = SAX
     verteidiger = BRA
     ziel        = { annexion = BRA }
     tage        = 365
     sieg        = { 0.75 1 }
-    dauer       = { 20 90 }
-    offen       = ja
+    dauer       = { 5 90 }
 }
 
 # Brandenburg greift das stärkere Sachsen an und erschöpft sich vor der Festung Dresden; Sachsen hat

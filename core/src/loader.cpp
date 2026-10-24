@@ -2858,6 +2858,9 @@ private:
                           "generalstab_rueckzug",
                           "generalstab_umkreis_km",
                           "generalstab_reichweite_km",
+                          "generalstab_moral",
+                          "moral_sieg",
+                          "punkte_heer_anteil",
                           "fuehrung"});
                 const std::optional<Date> since = f.date("seit");
                 MilitaryRules& rules = world_.military_rules;
@@ -2929,7 +2932,10 @@ private:
                 optional_fixed("generalstab_rueckzug", rules.staff_retreat, between(fx(1), fx(10)));
                 optional_fixed("generalstab_umkreis_km", rules.staff_radius_km, between(fx(1), fx(1000)));
                 optional_fixed("generalstab_reichweite_km", rules.staff_reach_km, between(fx(1), fx(5000)));
-                optional_fixed("fuehrung", rules.leadership, between(fx(0), fx(1))); // seit b1
+                optional_fixed("fuehrung", rules.leadership, between(fx(0), fx(1)));            // seit b1
+                optional_fixed("generalstab_moral", rules.staff_morale, between(fx(0), fx(1))); // seit b2
+                optional_fixed("moral_sieg", rules.victory_morale, between(fx(0), fx(1)));      // seit b2
+                optional_fixed("punkte_heer_anteil", rules.points_army_share, between(fx(0), fx(1)));
                 rules.terrain_march.assign(world_.terrains.size(), Fixed::one());
                 if (f.has("gelaende")) {
                     if (const ScriptNode* terrains =
@@ -3363,7 +3369,7 @@ private:
                 }
                 Fields f(node, file.name, what, issues_,
                          {"name", "beginn", "anlass", "angreifer", "verteidiger", "ziel", "ziel_verteidiger",
-                          "quelle"});
+                          "besetzt", "quelle"});
                 OpeningWar war;
                 war.id = node.value;
                 war.name = f.text("name").value_or("");
@@ -3416,6 +3422,24 @@ private:
                 if (f.has("ziel_verteidiger")) {
                     if (const ScriptNode* g = f.block("ziel_verteidiger", "Kriegsziele der Verteidiger")) {
                         war_goals(file.name, *g, what, false, war.goals);
+                    }
+                }
+                // Seit b2: Gebiete, die die Hauptpartei der Angreifer zum Start besetzt hält (gebiet = …).
+                if (f.has("besetzt")) {
+                    if (const ScriptNode* b = f.block("besetzt", "{ gebiet = … }")) {
+                        for (const ScriptNode& child : b->children) {
+                            const Index unit = child.key == "gebiet" && !child.is_block
+                                                   ? lookup(admin_units_, child.value)
+                                                   : kNone;
+                            if (unit == kNone) {
+                                issues_.error(file.name, child.line,
+                                              "'besetzt' in " + what +
+                                                  " erwartet gebiet = <Verwaltungseinheit>, nicht " +
+                                                  quote(child.key + " = " + child.value));
+                                continue;
+                            }
+                            war.occupied.push_back(unit);
+                        }
                     }
                 }
                 if (valid && !war.name.empty()) {

@@ -18,7 +18,7 @@ heerwesen bra {
     seit              = 1600.01.01
     bewaffnung        = 1.2
     geschuetze        = 3
-    mobilmachung      = 2.5
+    mobilmachung      = 2.0      # seit b2 (vorher 2,5): sonst wagt der Generalstab Sachsens keinen Angriff
     mobilmachung_tage = 20
 }
 

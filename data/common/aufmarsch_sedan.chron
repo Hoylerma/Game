@@ -10,9 +10,9 @@ krieg deutsch_franzoesischer_krieg {
     beginn      = 1870.07.19
     angreifer   = { FRK }
     verteidiger = { PRU SAX BAV WUE BAD HED MSC MST OLD BWO WEI SMG ALT SCG DES SSH SRU REA REJ WAL LIP SLI LUE BRE HAM }
-    ziel        = { gebiet = by_pfalz }
+    ziel        = { gebiet = by_pfalz entschaedigung = 9 }
     ziel_verteidiger = { gebiet = fr_elsass gebiet = fr_moselle entschaedigung = 6 }
-    quelle      = "Kriegserklärung vom 19.7.1870; deutsche Ziele nach dem Frankfurter Frieden (10.5.1871): Elsass, Lothringen mit Metz, Entschädigung; französisches Ziel Spielwert (Kompensationsforderungen 1866)"
+    quelle      = "Kriegserklärung vom 19.7.1870; deutsche Ziele nach dem Frankfurter Frieden (10.5.1871): Elsass, Lothringen mit Metz, Entschädigung; französische Ziele Spielwert (Kompensationsforderungen 1866, Entschädigung)"
 }
 
 buendnis { staaten = { PRU BAV } quelle = "Schutz- und Trutzbündnis vom 22.8.1866" }
