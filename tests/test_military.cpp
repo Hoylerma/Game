@@ -1,7 +1,10 @@
 // Tests des Militärs (seit M10; docs/technik/militaer.md): Schritt a1 Nachbarschaft, Heerwesen und
-// Garnisonen (Abschnitte 3.1 und 3.2), Schritt a2 Mobilmachung, Wege, Bahn und Versorgung (3.3–3.5).
+// Garnisonen (Abschnitte 3.1 und 3.2), Schritt a2 Mobilmachung, Wege, Bahn und Versorgung (3.3–3.5),
+// Schritt a3 Krieg, Schlacht, Besetzung, Belagerung und Verluste (4.1–4.4), Schritt a4 Kriegsziele,
+// Kriegspunkte, Frieden und Generalstab (4.5, 5).
 #include "test_hilfen.hpp"
 #include "uhrwerk/diplomacy.hpp"
+#include "uhrwerk/economy.hpp"
 #include "uhrwerk/military.hpp"
 #include "uhrwerk/savegame.hpp"
 #include "uhrwerk/simulation.hpp"
@@ -101,6 +104,33 @@ public:
                          " }\n    wert = " + std::to_string(value) + "\n    quelle = \"Testdaten\"\n}\n";
         }
         testhilfen::write_file(dir_ / "history/beziehungen/grundwerte.chron", relations);
+    }
+
+    /// Bundesversammlung wie in den Diplomatietests (Plenum BRA 4, SAX 4, ANH 1, je eine Stimme im Rat).
+    void add_diet() const {
+        testhilfen::write_file(
+            dir_ / "common/bundesversammlung.chron",
+            "bundesversammlung bund {\n    name = \"Bundesversammlung\"\n    praesidium = SAX\n"
+            "    plenum = { BRA = 4 SAX = 4 ANH = 1 }\n"
+            "    rat = { stimme = { staaten = { BRA } } stimme = { staaten = { SAX } } "
+            "stimme = { staaten = { ANH } } }\n    quelle = \"Testdaten\"\n}\n");
+    }
+
+    /// Festung in Dresden (seit Schritt a3).
+    void add_fortress(int level) const {
+        testhilfen::write_file(dir_ / "common/militaer.chron",
+                               testhilfen::read_file(dir_ / "common/militaer.chron") +
+                                   "festung dresden { ort = dresden stufe = " + std::to_string(level) +
+                                   " }\n");
+    }
+
+    /// Verwaltungseinheit „Leipziger Kreis“ mit Leipzig (seit Schritt a4, Gebietsziel).
+    void add_unit() const {
+        testhilfen::write_file(dir_ / "history/verwaltung/test.chron",
+                               "einheit leipziger_kreis {\n    name = \"Leipziger Kreis\"\n    art = kreis\n"
+                               "    quelle = \"Testdaten\"\n}\n");
+        testhilfen::replace_in_file(dir_ / "history/orte/20_sachsen.chron", "ort leipzig {\n",
+                                    "ort leipzig {\n    verwaltung = leipziger_kreis\n");
     }
 
     /// Zusätzliche Regeln im Block 'militaer'.
@@ -359,6 +389,22 @@ TEST_CASE("Militär: Ladefehler") {
         CHECK(std::count_if(result.issues.begin(), result.issues.end(), [](const uhrwerk::LoadIssue& i) {
                   return i.message.find("ungültiger Eintrag in 'gelaende' von militaer") != std::string::npos;
               }) == 2);
+    }
+    SUBCASE("Festungen") {
+        const MilitaryData data;
+        testhilfen::write_file(data.dir() / "common/militaer.chron",
+                               std::string(kMilitary) + "festung f1 { ort = nirgendwo stufe = 1 }\n"
+                                                        "festung f2 { ort = dresden stufe = 4 }\n"
+                                                        "festung f3 { ort = dresden stufe = 2 }\n"
+                                                        "festung f3 { ort = leipzig stufe = 2 }\n"
+                                                        "festung f4 { ort = dresden stufe = 1 }\n");
+        const uhrwerk::LoadResult result = uhrwerk::load_world(data.dir().path());
+        INFO(testhilfen::issues_text(result));
+        CHECK_FALSE(result.ok());
+        CHECK(testhilfen::has_issue(result, "unbekannter Ort 'nirgendwo' in festung f1"));
+        CHECK(testhilfen::has_issue(result, "'stufe' muss zwischen 1 und 3 liegen"));
+        CHECK(testhilfen::has_issue(result, "festung f3 ist mehrfach vorhanden"));
+        CHECK(testhilfen::has_issue(result, "festung f4: Ort dresden hat schon eine Festung"));
     }
     SUBCASE("Block 'militaer' fehlt") {
         const MilitaryData data;
@@ -704,4 +750,573 @@ TEST_CASE("Militär: Krise auf der Stufe Mobilmachung") {
     CHECK(uhrwerk::mobilization_phase(v, bra) == MobilizationPhase::Peace);
     CHECK(std::all_of(v.armies.begin(), v.armies.end(),
                       [](const uhrwerk::Army& a) { return a.status == ArmyStatus::Garrison; }));
+}
+
+// ─── Schritt a3: Krieg, Schlacht, Besetzung, Belagerung ─────────────────────
+
+namespace {
+
+/// Welt mit gesetzten Heeren je 1.000 Einwohner.
+World with_strength(World w, std::int64_t bra, std::int64_t sax) {
+    w.states[at(w.find_state("BRA"))].army_per_mille = Fixed::from_int(bra);
+    w.states[at(w.find_state("SAX"))].army_per_mille = Fixed::from_int(sax);
+    w.states[at(w.find_state("ANH"))].army_per_mille = Fixed::zero();
+    return w;
+}
+
+/// Kriegserklärung Brandenburgs an Sachsen am ersten Tag, die Garde marschiert am zweiten nach Dresden
+/// (Überfahrt, drei Tage: Ankunft und Schlacht am vierten Tag, days_elapsed 3).
+void brandenburg_attacks(Simulation& sim, std::int64_t days, std::int64_t goal = 0) {
+    const World& v = sim.world();
+    const Index bra = v.find_state("BRA");
+    while (sim.days_elapsed() < days) {
+        if (sim.days_elapsed() == 0) {
+            sim.submit(command(CommandType::DeclareWar, bra, goal, v.find_state("SAX")));
+        } else if (sim.days_elapsed() == 1) {
+            sim.submit(command(CommandType::March, bra, 1, v.find_location("dresden")));
+        }
+        sim.step_day();
+    }
+}
+
+} // namespace
+
+TEST_CASE("Militär: Kriegserklärung und Bündnisfall") {
+    const MilitaryData data;
+    const World start = Simulation(data.load()).world();
+    const Index bra = start.find_state("BRA");
+    const Index sax = start.find_state("SAX");
+    const Index anh = start.find_state("ANH");
+    const auto alliance = [&](World& w, Index a, Index b) {
+        w.treaties.push_back(uhrwerk::Treaty{uhrwerk::TreatyKind::Alliance, a, b, w.date});
+    };
+    std::vector<Index> attackers;
+    std::vector<Index> defenders;
+
+    SUBCASE("Verbündete und Garanten") {
+        World w = start;
+        alliance(w, anh, sax);
+        uhrwerk::war_sides(w, bra, sax, attackers, defenders);
+        CHECK(attackers == std::vector<Index>{bra});
+        CHECK(defenders == std::vector<Index>{sax, anh});
+        alliance(w, anh, bra); // mit beiden verbündet: neutral
+        uhrwerk::war_sides(w, bra, sax, attackers, defenders);
+        CHECK(defenders == std::vector<Index>{sax});
+        World g = start;
+        g.treaties.push_back(uhrwerk::Treaty{uhrwerk::TreatyKind::Guarantee, anh, sax, g.date});
+        uhrwerk::war_sides(g, bra, sax, attackers, defenders);
+        CHECK(defenders == std::vector<Index>{sax, anh});
+        World a = start;
+        alliance(a, bra, anh);
+        uhrwerk::war_sides(a, bra, sax, attackers, defenders);
+        CHECK(attackers == std::vector<Index>{bra, anh});
+    }
+    SUBCASE("Erklärung") {
+        World w = start;
+        alliance(w, anh, bra);
+        alliance(w, bra, sax); // endet mit dem Krieg
+        CHECK_FALSE(uhrwerk::can_declare_war(w, bra, bra));
+        CHECK_FALSE(uhrwerk::can_declare_war(w, bra, uhrwerk::kNone));
+        REQUIRE(uhrwerk::declare_war(w, bra, sax));
+        REQUIRE(w.wars.size() == 1);
+        CHECK(w.wars[0].id == 1);
+        CHECK(w.next_war_id == 2);
+        CHECK(w.wars[0].attackers == std::vector<Index>{bra, anh});
+        CHECK(w.wars[0].defenders == std::vector<Index>{sax});
+        CHECK(w.wars[0].cause == uhrwerk::WarCause::Declaration);
+        CHECK(chronicle_contains(
+            w, "Brandenburg erklärt Sachsen den Krieg. An der Seite von Brandenburg: Anhalt."));
+        CHECK_FALSE(uhrwerk::allied(w, bra, sax));
+        CHECK(uhrwerk::allied(w, bra, anh));
+        CHECK(uhrwerk::at_war(w, bra, sax));
+        CHECK(uhrwerk::at_war(w, sax, anh));
+        CHECK_FALSE(uhrwerk::at_war(w, bra, anh));
+        CHECK(uhrwerk::friendly(w, anh, bra));
+        CHECK(uhrwerk::in_war(w, sax));
+        // Alle machen mobil; im Krieg rüstet niemand ab.
+        for (const Index s : {bra, sax, anh}) {
+            CHECK(uhrwerk::mobilization_phase(w, s) == MobilizationPhase::Mobilizing);
+        }
+        CHECK_FALSE(uhrwerk::order_mobilization(w, bra, false));
+        // Gegnerische Orte stehen offen, Orte ohne Daten nicht.
+        CHECK(uhrwerk::accessible(w, bra, w.find_location("dresden")));
+        CHECK(uhrwerk::accessible(w, sax, w.find_location("potsdam")));
+        CHECK_FALSE(uhrwerk::accessible(w, bra, w.find_location("zerbst")));
+        CHECK_FALSE(uhrwerk::can_declare_war(w, bra, sax)); // schon im Krieg
+        CHECK_FALSE(uhrwerk::can_declare_war(w, bra, anh)); // auf derselben Seite
+        CHECK_FALSE(uhrwerk::declare_war(w, sax, bra));
+        CHECK(w.wars.size() == 1);
+    }
+}
+
+TEST_CASE("Militär: Schlacht, Rückzug, Besetzung und Verluste") {
+    const MilitaryData data;
+    Simulation sim(with_strength(data.load(), 30, 5));
+    const World& v = sim.world();
+    const Index bra = v.find_state("BRA");
+    const Index sax = v.find_state("SAX");
+    const Index dresden = v.find_location("dresden");
+    const Index leipzig = v.find_location("leipzig");
+    const auto army = [&](std::int64_t id) -> const uhrwerk::Army& { return *uhrwerk::find_army(v, id); };
+    const Fixed devastation = v.locations[at(dresden)].devastation;
+
+    // Ankunft am vierten Tag: Schlacht, die Sachsen weichen nach Leipzig.
+    brandenburg_attacks(sim, 4);
+    REQUIRE(v.wars.size() == 1);
+    CHECK(army(1).location == dresden);
+    CHECK(army(1).status == ArmyStatus::Rest);
+    CHECK(v.battles.empty());
+    CHECK(chronicle_contains(v, "Schlacht bei Dresden: Garde schlägt Garnison Dresden; Verluste "));
+    const uhrwerk::Army& saxons = army(3);
+    CHECK(saxons.status == ArmyStatus::Retreat);
+    REQUIRE(saxons.route.size() == 1);
+    CHECK(saxons.route[0].location == leipzig);
+    CHECK(saxons.morale < Fixed::from_ratio(3, 10));
+    CHECK(army(1).morale > saxons.morale);
+    REQUIRE(v.prisoners.size() == 1);
+    CHECK(v.prisoners[0].state == sax);
+    CHECK(v.prisoners[0].captor == bra);
+    CHECK(v.prisoners[0].soldiers > Fixed::zero());
+    CHECK_FALSE(v.convalescents.empty());
+    CHECK(v.war_dead[at(sax)] > Fixed::zero());
+    CHECK(v.locations[at(dresden)].devastation > devastation);
+    CHECK(v.control[at(dresden)] == uhrwerk::kNone); // erst nach einem vollen Tag
+
+    // Am nächsten Tag ist Dresden besetzt; die Sachsen stehen in Leipzig.
+    sim.step_day();
+    CHECK(v.control[at(dresden)] == bra);
+    CHECK(uhrwerk::controller(v, dresden) == bra);
+    CHECK(chronicle_contains(v, "Brandenburg besetzt Dresden, die Hauptstadt von Sachsen."));
+    sim.step_days(6); // gut sechs Tage über die Elbe
+    CHECK(army(3).location == leipzig);
+    CHECK(army(3).status == ArmyStatus::Rest);
+
+    // Am Monatsersten mindern die Gefallenen die Jahrgänge im wehrfähigen Alter.
+    while (v.date.day != 1) {
+        sim.step_day();
+    }
+    const Fixed dead = v.war_dead[at(sax)];
+    REQUIRE(dead > Fixed::zero());
+    const Fixed deaths_before = v.balance_current[at(dresden)].deaths + v.balance_current[at(leipzig)].deaths;
+    sim.step_day();
+    const Fixed deaths_after = v.balance_current[at(dresden)].deaths + v.balance_current[at(leipzig)].deaths;
+    CHECK(v.war_dead[at(sax)] < dead / Fixed::from_int(10)); // nur die Abgänge des Tages
+    CHECK(difference(deaths_after - deaths_before, dead) < Fixed::one());
+
+    // Die Verwundeten der Schlacht kehren nach 60 Tagen zu ihren Heeren zurück.
+    REQUIRE_FALSE(v.convalescents.empty());
+    sim.step_days(60);
+    CHECK(v.convalescents.empty());
+}
+
+TEST_CASE("Militär: Kontribution aus besetzten Orten") {
+    const MilitaryData data;
+    World w = Simulation(data.load()).world();
+    const Index bra = w.find_state("BRA");
+    const Index sax = w.find_state("SAX");
+    const Index dresden = w.find_location("dresden");
+    const Index leipzig = w.find_location("leipzig");
+    const auto kontribution = static_cast<std::size_t>(uhrwerk::TaxKind::Kontribution);
+    World peaceful = w;
+    uhrwerk::run_state_budget(peaceful, bra, {w.find_location("berlin_coelln"), w.find_location("potsdam")});
+    REQUIRE(uhrwerk::declare_war(w, bra, sax));
+    w.control[at(dresden)] = bra;
+    uhrwerk::run_state_budget(w, sax, {dresden, leipzig});
+    uhrwerk::run_state_budget(w, bra, {w.find_location("berlin_coelln"), w.find_location("potsdam")});
+    // Sachsen fehlen Dresdens Steuern; Brandenburg erhält die Hälfte als Kontribution.
+    for (std::size_t t = 0; t < uhrwerk::kTaxKinds; ++t) {
+        CHECK(w.states[at(sax)].budget.taxes[t] == w.economy[at(leipzig)].taxes[t]);
+    }
+    Fixed half;
+    for (const Fixed tax : w.economy[at(dresden)].taxes) {
+        half += tax / Fixed::from_int(2);
+    }
+    REQUIRE(half > Fixed::zero());
+    CHECK(w.states[at(bra)].budget.taxes[kontribution] ==
+          peaceful.states[at(bra)].budget.taxes[kontribution] + half);
+}
+
+TEST_CASE("Militär: Belagerung einer Festung") {
+    const MilitaryData data;
+    data.add_fortress(1);
+    data.add_rules("    festung_besatzung = 100\n");
+    const World start = with_strength(data.load(), 30, 5);
+    REQUIRE(start.fortresses.size() == 1);
+    CHECK(start.fortresses[0].name == "Festung Dresden");
+    CHECK(uhrwerk::fortress_level(start, start.find_location("dresden")) == 1);
+    Simulation sim(start);
+    const World& v = sim.world();
+    const Index bra = v.find_state("BRA");
+    const Index dresden = v.find_location("dresden");
+    brandenburg_attacks(sim, 4);
+    CHECK(chronicle_contains(v, "Schlacht bei Dresden: Garde schlägt Garnison Dresden"));
+    // Mindestens zehn Tage Belagerung (kleine Besatzung), dann ergibt sich die Festung.
+    sim.step_day();
+    REQUIRE(v.sieges.size() == 1);
+    CHECK(v.sieges[0].besieger == bra);
+    CHECK(difference(v.sieges[0].progress, Fixed::from_ratio(1, 10)) < Fixed::from_ratio(1, 1000));
+    CHECK(uhrwerk::find_army(v, 1)->status == ArmyStatus::Siege);
+    CHECK(v.control[at(dresden)] == uhrwerk::kNone);
+    sim.step_days(8);
+    CHECK(v.sieges.size() == 1);
+    CHECK(v.control[at(dresden)] == uhrwerk::kNone);
+    sim.step_day();
+    CHECK(v.sieges.empty());
+    CHECK(v.control[at(dresden)] == bra);
+    CHECK(uhrwerk::find_army(v, 1)->status == ArmyStatus::Rest);
+    CHECK(chronicle_contains(v, "Die Festung Dresden ergibt sich Brandenburg."));
+}
+
+TEST_CASE("Militär: Krise wird zum Krieg") {
+    const MilitaryData data;
+    data.add_federation();
+    World w = with_strength(data.load(), 10, 0);
+    const Index bra = w.find_state("BRA");
+    const Index sax = w.find_state("SAX");
+    // Sachsen fast so stark wie Brandenburg: keine Seite gibt nach.
+    w.states[at(sax)].army_per_mille = uhrwerk::state_strength(w, bra) * Fixed::from_ratio(9, 10) *
+                                       Fixed::from_int(1000) / w.state_population(sax);
+    Simulation sim(w);
+    const World& v = sim.world();
+    const auto escalate = [&] {
+        Command c;
+        c.type = CommandType::Manoeuvre;
+        c.state = sax;
+        c.value = Fixed::from_int(static_cast<std::int64_t>(uhrwerk::Manoeuvre::Escalate));
+        sim.submit(c);
+    };
+    sim.submit(
+        command(CommandType::Demand, bra, static_cast<std::int64_t>(uhrwerk::DemandKind::Leadership), sax));
+    sim.step_day();
+    for (const std::int64_t day : {1, 31, 61}) {
+        while (sim.days_elapsed() < day) {
+            sim.step_day();
+        }
+        escalate();
+    }
+    while (!v.plays.empty() && sim.days_elapsed() < 120) {
+        sim.step_day();
+    }
+    REQUIRE(v.play_results.size() == 1);
+    CHECK(v.play_results[0].outcome == uhrwerk::PlayOutcome::War);
+    CHECK(v.play_results[0].stage == 3);
+    REQUIRE(v.wars.size() == 1);
+    CHECK(v.wars[0].cause == uhrwerk::WarCause::Crisis);
+    CHECK(v.wars[0].attackers.front() == bra);
+    CHECK(v.wars[0].defenders.front() == sax);
+    CHECK(chronicle_contains(v, "Die Krise zwischen Brandenburg und Sachsen wird zum Krieg."));
+    // Die Mobilmachung der Krise bleibt im Krieg bestehen.
+    CHECK(uhrwerk::mobilization_phase(v, bra) != MobilizationPhase::Demobilizing);
+    CHECK_FALSE(v.mobilizations[at(bra)].crisis);
+}
+
+TEST_CASE("Militär: Bundesexekution") {
+    const MilitaryData data;
+    data.add_federation();
+    data.add_diet();
+    Simulation sim(data.load());
+    const World& v = sim.world();
+    const Index bra = v.find_state("BRA");
+    const Index sax = v.find_state("SAX");
+    const Index anh = v.find_state("ANH");
+    sim.submit(
+        command(CommandType::Motion, bra, static_cast<std::int64_t>(uhrwerk::MotionKind::Intervention), sax));
+    while (v.motion_results.empty() && sim.days_elapsed() < 70) {
+        sim.step_day();
+    }
+    REQUIRE(v.motion_results.size() == 1);
+    REQUIRE(v.motion_results[0].accepted);
+    REQUIRE(v.wars.size() == 1);
+    CHECK(v.wars[0].cause == uhrwerk::WarCause::Execution);
+    CHECK(v.wars[0].attackers == std::vector<Index>{bra, anh});
+    CHECK(v.wars[0].defenders == std::vector<Index>{sax});
+    CHECK(chronicle_contains(v, "Bundesexekution gegen Sachsen. An der Seite von Brandenburg: Anhalt."));
+}
+
+TEST_CASE("Militär: Spielstand während Schlacht und Belagerung") {
+    const MilitaryData data;
+    data.add_fortress(1);
+    data.add_rules("    festung_besatzung = 100\n    verlustrate = 0.03\n");
+    const World start = with_strength(data.load(), 30, 5);
+    const auto run = [&](unsigned threads, std::int64_t days) {
+        SimConfig config;
+        config.threads = threads;
+        Simulation sim(start, config);
+        brandenburg_attacks(sim, days);
+        return sim;
+    };
+    const Simulation full = run(1, 60);
+    CHECK(run(4, 60).checksum() == full.checksum());
+    bool saw_battle = false;
+    bool saw_siege = false;
+    for (std::int64_t day = 4; day < 45; ++day) {
+        const Simulation part = run(1, day);
+        saw_battle = saw_battle || !part.world().battles.empty();
+        saw_siege = saw_siege || !part.world().sieges.empty();
+        if (part.world().battles.empty() && part.world().sieges.empty()) {
+            continue;
+        }
+        CAPTURE(day);
+        const Bytes bytes = uhrwerk::save_game(part, SaveMeta{});
+        uhrwerk::LoadedGame loaded = uhrwerk::load_game(bytes, start, 1);
+        INFO(loaded.error);
+        REQUIRE(loaded.ok());
+        CHECK(loaded.simulation->world().battles == part.world().battles);
+        CHECK(loaded.simulation->world().sieges == part.world().sieges);
+        CHECK(loaded.simulation->world().wars == part.world().wars);
+        brandenburg_attacks(*loaded.simulation, 60);
+        CHECK(loaded.simulation->checksum() == full.checksum());
+    }
+    CHECK(saw_battle);
+    CHECK(saw_siege);
+    const uhrwerk::ReplayResult replay = uhrwerk::run_replay(uhrwerk::make_replay(full), start, 2);
+    INFO(replay.error);
+    CHECK(replay.ok);
+}
+
+// ─── Schritt a4: Kriegsziele, Kriegspunkte, Frieden, Generalstab ────────────
+
+namespace {
+
+std::int64_t goal(uhrwerk::WarGoalKind kind, Index param = 0) {
+    return uhrwerk::encode_war_goal(kind, param);
+}
+
+Command peace(Index state, uhrwerk::PeaceTerms terms) {
+    return command(CommandType::PeaceOffer, state, static_cast<std::int64_t>(terms), 1);
+}
+
+} // namespace
+
+TEST_CASE("Militär: Kriegsziele und ihre Kosten") {
+    using uhrwerk::WarGoalKind;
+    const MilitaryData data;
+    data.add_unit();
+    World w = Simulation(data.load()).world();
+    const Index bra = w.find_state("BRA");
+    const Index sax = w.find_state("SAX");
+    const Index unit = w.find_admin_unit("leipziger_kreis");
+    REQUIRE(unit != uhrwerk::kNone);
+    CHECK(uhrwerk::decode_war_goal(0, true) == std::nullopt);
+    CHECK(uhrwerk::decode_war_goal(6, true) == std::nullopt);
+    CHECK(uhrwerk::decode_war_goal(goal(WarGoalKind::Annexation, sax), false) ==
+          uhrwerk::WarGoal{WarGoalKind::Annexation, false, sax});
+    REQUIRE(uhrwerk::declare_war(w, bra, sax, goal(WarGoalKind::Territory, unit)));
+    uhrwerk::War& war = w.wars[0];
+    REQUIRE(war.goals.size() == 1);
+    CHECK(chronicle_contains(w, "Kriegsziel: Leipziger Kreis."));
+    CHECK(war.attacker_strength > Fixed::zero());
+    CHECK(war.defender_strength > Fixed::zero());
+    // Gebiet nach dem Anteil an der Bevölkerung Sachsens, mindestens 10.
+    const Fixed part = w.location_population(w.find_location("leipzig"));
+    const Fixed whole = part + w.location_population(w.find_location("dresden"));
+    CHECK(uhrwerk::war_goal_cost(w, war, war.goals[0]) ==
+          Fixed::max(Fixed::from_int(10), Fixed::from_int(100) * part / whole));
+    // Weitere Ziele: Annexion 80, Entschädigung 10 je Monat; ungültig sind Führung (kein Bund), Zollunion,
+    // Annexion des eigenen Staates, 25 Monate und Ziele der Mitkriegführenden.
+    CHECK(uhrwerk::add_war_goal(w, bra, 1, goal(WarGoalKind::Annexation, sax)));
+    CHECK(uhrwerk::add_war_goal(w, sax, 1, goal(WarGoalKind::Indemnity, 3)));
+    CHECK_FALSE(uhrwerk::add_war_goal(w, bra, 1, goal(WarGoalKind::Annexation, sax))); // schon gestellt
+    CHECK_FALSE(uhrwerk::add_war_goal(w, bra, 1, goal(WarGoalKind::Annexation, bra)));
+    CHECK_FALSE(uhrwerk::add_war_goal(w, bra, 1, goal(WarGoalKind::Leadership)));
+    CHECK_FALSE(uhrwerk::add_war_goal(w, bra, 1, goal(WarGoalKind::Customs)));
+    CHECK_FALSE(uhrwerk::add_war_goal(w, bra, 1, goal(WarGoalKind::Indemnity, 25)));
+    CHECK_FALSE(uhrwerk::add_war_goal(w, bra, 2, goal(WarGoalKind::Indemnity, 1))); // kein Krieg 2
+    CHECK_FALSE(uhrwerk::add_war_goal(w, w.find_state("ANH"), 1, goal(WarGoalKind::Indemnity, 1)));
+    CHECK(uhrwerk::war_goals_cost(w, war, false) == Fixed::from_int(30));
+    CHECK(uhrwerk::war_goals_cost(w, war, true) ==
+          uhrwerk::war_goal_cost(w, war, war.goals[0]) + Fixed::from_int(80));
+    // Ohne Schlacht und Besetzung: keine Punkte, kaum Müdigkeit.
+    CHECK(uhrwerk::war_score(w, war, true) == Fixed::zero());
+    CHECK(uhrwerk::war_weariness(w, war, false) == Fixed::zero());
+}
+
+TEST_CASE("Militär: Kriegspunkte, Friedensangebote und Annexion") {
+    const MilitaryData data;
+    Simulation sim(with_strength(data.load(), 30, 5));
+    const World& v = sim.world();
+    const Index bra = v.find_state("BRA");
+    const Index sax = v.find_state("SAX");
+    brandenburg_attacks(sim, 5, goal(uhrwerk::WarGoalKind::Annexation, sax));
+    REQUIRE(v.wars.size() == 1);
+    REQUIRE(v.control[at(v.find_location("dresden"))] == bra);
+    const uhrwerk::War& war = v.wars[0];
+    const Fixed score = uhrwerk::war_score(v, war, true);
+    CHECK(score > Fixed::from_int(20)); // Hauptstadt besetzt, Schlacht gewonnen
+    CHECK(score < Fixed::from_int(80));
+    CHECK(uhrwerk::war_score(v, war, false) == Fixed::zero());
+    CHECK(uhrwerk::war_weariness(v, war, false) > uhrwerk::war_weariness(v, war, true));
+    CHECK(war.attacker_inflicted > war.defender_inflicted);
+
+    // Sachsen bietet weißen Frieden an, Brandenburg verlangt die Annexion: beides abgelehnt.
+    sim.submit(peace(sax, uhrwerk::PeaceTerms::White));
+    sim.submit(peace(bra, uhrwerk::PeaceTerms::OwnGoals));
+    sim.submit(peace(v.find_state("ANH"), uhrwerk::PeaceTerms::White)); // keine Hauptpartei
+    sim.step_day();
+    CHECK(chronicle_contains(v,
+                             "Sachsen bietet Brandenburg Frieden an (ohne Gewinner); Brandenburg lehnt ab."));
+    CHECK(chronicle_contains(
+        v, "Brandenburg bietet Sachsen Frieden an (zu seinen Bedingungen); Sachsen lehnt ab."));
+    REQUIRE(v.wars.size() == 1);
+
+    // Sachsen unterwirft sich: Annexion, Sachsen geht unter.
+    const Fixed treasury = v.states[at(bra)].treasury + v.states[at(sax)].treasury;
+    sim.submit(peace(sax, uhrwerk::PeaceTerms::Capitulation));
+    sim.step_day();
+    CHECK(v.wars.empty());
+    CHECK(chronicle_contains(
+        v, "Frieden zwischen Brandenburg und Sachsen: Brandenburg siegt. Brandenburg annektiert "
+           "Sachsen (2 Orte). Sachsen geht unter."));
+    CHECK(v.locations[at(v.find_location("leipzig"))].owner == bra);
+    CHECK(v.locations[at(v.find_location("dresden"))].owner == bra);
+    CHECK(v.states[at(sax)].capital == uhrwerk::kNone);
+    CHECK(v.states[at(sax)].treasury == Fixed::zero());
+    CHECK(v.states[at(bra)].treasury >= treasury);
+    CHECK(std::none_of(v.armies.begin(), v.armies.end(),
+                       [&](const uhrwerk::Army& a) { return a.state == sax; }));
+    CHECK(std::all_of(v.control.begin(), v.control.end(), [](Index c) { return c == uhrwerk::kNone; }));
+    CHECK(v.prisoners.empty());
+    CHECK(uhrwerk::mobilization_phase(v, bra) == MobilizationPhase::Demobilizing);
+    // Weiterrechnen mit den neuen Grenzen; nach der Abrüstung stehen die Heere in den Garnisonen.
+    sim.step_days(40);
+    CHECK(uhrwerk::mobilization_phase(v, bra) == MobilizationPhase::Peace);
+    CHECK(uhrwerk::find_army(v, 1)->status == ArmyStatus::Garrison);
+    CHECK(uhrwerk::find_army(v, 1)->location == v.find_location("berlin_coelln"));
+}
+
+TEST_CASE("Militär: Gebiet, Entschädigung und Stillstand") {
+    using uhrwerk::WarGoalKind;
+    const MilitaryData data;
+    data.add_unit();
+    const World start = with_strength(data.load(), 30, 5);
+    const Index bra = start.find_state("BRA");
+    const Index sax = start.find_state("SAX");
+    SUBCASE("Gebiet") {
+        Simulation sim(start);
+        const World& v = sim.world();
+        brandenburg_attacks(sim, 5, goal(WarGoalKind::Territory, v.find_admin_unit("leipziger_kreis")));
+        sim.submit(peace(sax, uhrwerk::PeaceTerms::Capitulation));
+        sim.step_day();
+        CHECK(v.wars.empty());
+        CHECK(chronicle_contains(v, "Brandenburg erhält Leipziger Kreis (1 Ort)."));
+        CHECK(v.locations[at(v.find_location("leipzig"))].owner == bra);
+        CHECK(v.locations[at(v.find_location("dresden"))].owner == sax);
+        CHECK(v.states[at(sax)].capital == v.find_location("dresden"));
+        // Brandenburgs Heer in Dresden kehrt heim; Sachsens Heer, das in Leipzig stand, ebenso.
+        for (const uhrwerk::Army& a : v.armies) {
+            CHECK(uhrwerk::accessible(v, a.state, a.location));
+        }
+    }
+    SUBCASE("Entschädigung") {
+        // Neun Monatseinnahmen kosten 90 Punkte: kein Frieden von selbst. Kapitulation nach Sachsens erstem
+        // Rechentag, nicht am Rechentag eines der beiden Staaten.
+        Simulation sim(start);
+        const World& v = sim.world();
+        brandenburg_attacks(sim, 45, goal(WarGoalKind::Indemnity, 9));
+        while (v.date.day == 1 || v.date.day == 3) {
+            sim.step_day();
+        }
+        REQUIRE(v.wars.size() == 1);
+        const Fixed income = v.states[at(sax)].last_month_income;
+        REQUIRE(income > Fixed::zero());
+        const Fixed before = v.states[at(bra)].treasury;
+        sim.submit(peace(sax, uhrwerk::PeaceTerms::Capitulation));
+        sim.step_day();
+        CHECK(v.wars.empty());
+        CHECK(v.states[at(bra)].treasury == before + income * Fixed::from_int(9));
+        CHECK(chronicle_contains(v, "Sachsen zahlt "));
+    }
+    SUBCASE("Stillstand") {
+        Simulation sim(start);
+        const World& v = sim.world();
+        sim.submit(command(CommandType::DeclareWar, bra, 0, sax));
+        sim.step_days(300);
+        CHECK(v.wars.size() == 1);
+        sim.step_days(100);
+        CHECK(v.wars.empty());
+        CHECK(chronicle_contains(v, "Frieden zwischen Brandenburg und Sachsen ohne Gewinner."));
+    }
+}
+
+TEST_CASE("Militär: Führung im Bund") {
+    const MilitaryData data;
+    data.add_federation();
+    data.add_diet();
+    Simulation sim(with_strength(data.load(), 30, 5));
+    const World& v = sim.world();
+    const Index sax = v.find_state("SAX");
+    REQUIRE(v.diet_presidency == sax);
+    REQUIRE(uhrwerk::plenum_votes(v, sax) == 4);
+    brandenburg_attacks(sim, 5, goal(uhrwerk::WarGoalKind::Leadership));
+    REQUIRE(v.wars.size() == 1);
+    REQUIRE(v.wars[0].goals.size() == 1);
+    // Sachsen hat das Präsidium: Mit seiner Niederlage löst sich der Bund auf.
+    sim.submit(peace(sax, uhrwerk::PeaceTerms::Capitulation));
+    sim.step_day();
+    CHECK(chronicle_contains(v, "Der Deutsche Bund löst sich auf."));
+    for (std::size_t s = 0; s < v.states.size(); ++s) {
+        CHECK_FALSE(uhrwerk::federal_state(v, static_cast<Index>(s)));
+        CHECK(uhrwerk::plenum_votes(v, static_cast<Index>(s)) == 0);
+    }
+}
+
+TEST_CASE("Militär: Generalstab und Lauf ohne Spieler") {
+    const MilitaryData data;
+    data.add_rules("    generalstab = ja\n");
+    const World start = with_strength(data.load(), 30, 5);
+    const Index bra = start.find_state("BRA");
+    const Index sax = start.find_state("SAX");
+    const auto run = [&](unsigned threads, std::int64_t days) {
+        SimConfig config;
+        config.threads = threads;
+        Simulation sim(start, config);
+        while (sim.days_elapsed() < days) {
+            if (sim.days_elapsed() == 0) {
+                sim.submit(
+                    command(CommandType::DeclareWar, bra, goal(uhrwerk::WarGoalKind::Annexation, sax), sax));
+            }
+            sim.step_day();
+        }
+        return sim;
+    };
+    SUBCASE("Generalstab führt die Heere zum Sieg") {
+        const Simulation sim = run(1, 200);
+        const World& v = sim.world();
+        CHECK(std::all_of(v.armies.begin(), v.armies.end(), [](const uhrwerk::Army& a) { return a.staff; }));
+        CHECK(v.wars.empty());
+        CHECK(chronicle_contains(v, "Brandenburg annektiert Sachsen"));
+        CHECK(v.locations[at(v.find_location("dresden"))].owner == bra);
+    }
+    SUBCASE("Befehle nehmen dem Generalstab Heere ab") {
+        Simulation sim(start);
+        const World& v = sim.world();
+        sim.submit(command(CommandType::DeclareWar, bra, 0, sax));
+        sim.submit(command(CommandType::Staff, bra, 1, 0));
+        sim.submit(command(CommandType::Staff, sax, 1, 1)); // nicht sein Heer
+        sim.step_days(10);
+        CHECK_FALSE(uhrwerk::find_army(v, 1)->staff);
+        CHECK(uhrwerk::find_army(v, 1)->location == v.find_location("berlin_coelln"));
+        CHECK(uhrwerk::find_army(v, 2)->staff);
+        sim.submit(command(CommandType::March, bra, 2, v.find_location("berlin_coelln")));
+        sim.step_day();
+        CHECK_FALSE(uhrwerk::find_army(v, 2)->staff);
+    }
+    SUBCASE("Threads, Spielstand und Wiederholung") {
+        const Simulation full = run(1, 150);
+        CHECK(run(4, 150).checksum() == full.checksum());
+        for (const std::int64_t day : {6, 40}) {
+            CAPTURE(day);
+            const Simulation part = run(1, day);
+            const Bytes bytes = uhrwerk::save_game(part, SaveMeta{});
+            uhrwerk::LoadedGame loaded = uhrwerk::load_game(bytes, start, 2);
+            INFO(loaded.error);
+            REQUIRE(loaded.ok());
+            CHECK(loaded.simulation->world().wars == part.world().wars);
+            loaded.simulation->step_days(150 - day);
+            CHECK(loaded.simulation->checksum() == full.checksum());
+        }
+        const uhrwerk::ReplayResult replay = uhrwerk::run_replay(uhrwerk::make_replay(full), start, 2);
+        INFO(replay.error);
+        CHECK(replay.ok);
+    }
 }

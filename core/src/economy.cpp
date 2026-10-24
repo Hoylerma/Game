@@ -429,10 +429,26 @@ bool run_state_budget(World& world, Index state_index, const std::vector<Index>&
     State& state = world.states[at(state_index)];
     const Fixed twelve = Fixed::from_int(12);
     StateBudget budget;
+    // Besetzte Orte (seit M10, militaer.md Abschnitt 4.3): Ihre Steuern fehlen dem Besitzer; die Hälfte
+    // geht als Kontribution an den Besetzer.
+    const bool occupation = military_active(world) && world.control.size() == world.locations.size();
     for (const Index li : locations) {
+        if (occupation && world.control[at(li)] != kNone) {
+            continue;
+        }
         const LocationEconomy& e = world.economy[at(li)];
         for (std::size_t t = 0; t < kTaxKinds; ++t) {
             budget.taxes[t] += e.taxes[t];
+        }
+    }
+    if (occupation) {
+        for (std::size_t li = 0; li < world.control.size(); ++li) {
+            if (world.control[li] != state_index) {
+                continue;
+            }
+            for (const Fixed tax : world.economy[li].taxes) {
+                budget.taxes[static_cast<std::size_t>(TaxKind::Kontribution)] += tax / Fixed::from_int(2);
+            }
         }
     }
     customs_income(world, state, budget);

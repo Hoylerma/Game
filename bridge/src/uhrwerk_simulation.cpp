@@ -1520,6 +1520,8 @@ String outcome_text(uhrwerk::PlayOutcome outcome) {
         return "durchgesetzt";
     case uhrwerk::PlayOutcome::TargetWon:
         return "gescheitert";
+    case uhrwerk::PlayOutcome::War:
+        return "Krieg"; // seit M10
     case uhrwerk::PlayOutcome::Compromise:
         break;
     }
@@ -1996,6 +1998,9 @@ Dictionary UhrwerkSimulation::get_german_question() const {
         if (r.outcome == uhrwerk::PlayOutcome::Compromise) {
             ++compromises;
             continue;
+        }
+        if (r.outcome == uhrwerk::PlayOutcome::War) {
+            continue; // seit M10: entscheidet der Krieg (Frieden mit Schritt a4)
         }
         const uhrwerk::Index winner = r.outcome == uhrwerk::PlayOutcome::DemanderWon ? r.demander : r.target;
         prussia_wins += winner == prussia ? 1 : 0;

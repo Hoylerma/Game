@@ -16,7 +16,7 @@
 //   4. Bevölkerung der Orte, die heute ihren Rechentag haben – parallel
 //   5. Zusammenführen, nacheinander: Momentaufnahmen veröffentlichen, Wanderung buchen
 //   6. Wirtschaft der Staaten, die heute ihren Rechentag haben; Wahlen (seit M8), diplomatische Spiele
-//      (seit M9), Heere (seit M10: Mobilmachung, Bewegung, Versorgung)
+//      (seit M9), Heere (seit M10: Mobilmachung, Bewegung, Schlachten, Besetzung, Versorgung)
 //   7. Am 1. Januar: Seuchen und Abbau der Verwüstung (Orte ohne Blöcke werden übersprungen)
 //   8. Datum um einen Tag weiterschalten
 //
@@ -58,6 +58,10 @@ enum class CommandType : std::uint8_t {
     Manoeuvre,    // seit M9: state = Hauptpartei eines Spiels, value = Manoeuvre (diplomacy.hpp, 4.5)
     March,        // seit M10: state, value = Nummer des Heeres, target = Zielort, kNone hält an (3.4)
     Mobilization, // seit M10: state, value = 1 Mobilmachung, 0 Abrüstung (militaer.md 3.3)
+    DeclareWar,   // seit M10: state, target = Gegner, value = Kriegsziel (encode_war_goal, 0: keines)
+    WarGoal,      // seit M10: state, target = Nummer des Krieges, value = Kriegsziel (militaer.md 4.5)
+    PeaceOffer,   // seit M10: state, target = Nummer des Krieges, value = PeaceTerms (militaer.md 4.5)
+    Staff,        // seit M10: state, value = Nummer des Heeres, target = 1 übergeben, 0 zurücknehmen (5)
 };
 
 struct Command {
@@ -213,6 +217,7 @@ private:
     Pcg32 rng_demography_;
     Pcg32 rng_economy_;
     Pcg32 rng_events_;
+    Pcg32 rng_war_; // seit M10: Schlachten; im Zustand nur mit Militär
     std::int64_t days_elapsed_ = 0;
     std::vector<LoggedCommand> command_log_;
     std::uint64_t start_checksum_ = 0;

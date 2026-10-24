@@ -2,6 +2,7 @@
 
 #include "uhrwerk/customs.hpp"
 #include "uhrwerk/diplomacy.hpp"
+#include "uhrwerk/military.hpp"
 
 #include <algorithm>
 #include <cstddef>
@@ -81,7 +82,11 @@ bool has_diet(const World& world) {
 }
 
 std::int32_t plenum_votes(const World& world, Index state) {
-    return in_range(world.diet.plenum, state) ? world.diet.plenum[at(state)] : 0;
+    // Seit M10 (militaer.md 4.5): Wer den Bund verlassen hat oder unterging, stimmt nicht mehr.
+    if (!in_range(world.diet.plenum, state) || !federal_state(world, state)) {
+        return 0;
+    }
+    return world.diet.plenum[at(state)];
 }
 
 Index motion_opponent(const World& world, MotionKind kind, Index applicant, Index target) {
@@ -263,6 +268,18 @@ void run_diet(World& world) {
         }
         for (const Index state : supporters) {
             adjust_relation(world, state, motion.target, world.diplomacy_rules.intervention);
+        }
+        // Vollzug (seit M10, militaer.md 4.1): Bundesexekution der Befürworter gegen das Ziel, mit dem
+        // Antragsteller an der Spitze; Verbündete und Garanten des Ziels stehen ihm bei (Bündnisfall).
+        if (military_active(world)) {
+            std::vector<Index> attackers{motion.applicant};
+            attackers.insert(attackers.end(), supporters.begin(), supporters.end());
+            std::vector<Index> ignored;
+            std::vector<Index> defenders;
+            war_sides(world, motion.applicant, motion.target, ignored, defenders);
+            // Kriegsziel (seit a4): eine Entschädigung von sechs Monatseinnahmen.
+            start_war(world, std::move(attackers), std::move(defenders), WarCause::Execution,
+                      {WarGoal{WarGoalKind::Indemnity, true, 6}});
         }
         break;
     }

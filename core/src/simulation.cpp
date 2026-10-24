@@ -57,8 +57,8 @@ bool same_key(const PopBlock& pop, Index profession, Index confession, Index cul
 Simulation::Simulation(World world, SimConfig config)
     : world_(std::move(world)), config_(config), rates_(derive_rates(world_.rules)),
       rng_demography_(config.seed, RngStream::Demografie), rng_economy_(config.seed, RngStream::Wirtschaft),
-      rng_events_(config.seed, RngStream::Ereignisse), topology_(build_economy_topology(world_)),
-      pool_(ThreadPool::resolve_threads(config.threads)) {
+      rng_events_(config.seed, RngStream::Ereignisse), rng_war_(config.seed, RngStream::Krieg),
+      topology_(build_economy_topology(world_)), pool_(ThreadPool::resolve_threads(config.threads)) {
     build_schedule();
     build_migration_targets();
     prepare_population_state();
@@ -342,10 +342,10 @@ void Simulation::step_day() {
         run_plays(world_);
     }
 
-    // 6d. Heere: Mobilmachung, Bewegung, Versorgung (seit M10, militaer.md Abschnitte 3.3–3.5), nur mit
-    //     Militärdaten.
-    if (military_active(world_)) {
-        run_military(world_);
+    // 6d. Heere: Mobilmachung, Bewegung, Schlachten, Besetzung, Versorgung (seit M10, militaer.md
+    //     Abschnitte 3.3–4.4), nur mit Militärdaten.
+    if (military_active(world_) && run_military(world_, rng_war_)) {
+        rebuild_derived(); // Frieden mit Besitzwechsel (seit a4): Rechentage, Märkte, Wanderungsziele
     }
 
     // 7. Jahreswechsel.
@@ -448,8 +448,9 @@ void Simulation::execute(const Command& command) {
     case CommandType::March: {
         // Militär (seit M10, militaer.md 3.4): Nummer des Heeres im Wert; ungültige bleiben ohne Wirkung.
         const std::int64_t army = command.value.trunc();
-        if (command.value == Fixed::from_int(army)) {
-            order_march(world_, command.state, army, command.target);
+        if (command.value == Fixed::from_int(army) &&
+            order_march(world_, command.state, army, command.target)) {
+            find_army(world_, army)->staff = false; // seit a4: wer selbst befiehlt, führt das Heer selbst
         }
         return;
     }
@@ -458,6 +459,29 @@ void Simulation::execute(const Command& command) {
             order_mobilization(world_, command.state, command.value == Fixed::one());
         }
         return;
+    case CommandType::DeclareWar:
+        // Militär (seit M10, militaer.md 4.1): Bündnisfall und Chronik in declare_war.
+        declare_war(world_, command.state, command.target, command.value.trunc());
+        return;
+    case CommandType::WarGoal:
+        add_war_goal(world_, command.state, command.target, command.value.trunc());
+        return;
+    case CommandType::PeaceOffer: {
+        const std::int64_t terms = command.value.trunc();
+        if (command.value == Fixed::from_int(terms) && terms >= 0 &&
+            terms <= static_cast<std::int64_t>(PeaceTerms::Capitulation) &&
+            offer_peace(world_, command.state, command.target, static_cast<PeaceTerms>(terms))) {
+            rebuild_derived();
+        }
+        return;
+    }
+    case CommandType::Staff: {
+        const std::int64_t army = command.value.trunc();
+        if (command.value == Fixed::from_int(army) && (command.target == 0 || command.target == 1)) {
+            set_staff(world_, command.state, army, command.target == 1);
+        }
+        return;
+    }
     }
 }
 
