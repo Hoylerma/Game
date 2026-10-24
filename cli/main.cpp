@@ -18,6 +18,7 @@
 #include "uhrwerk/savegame.hpp"
 #include "uhrwerk/script.hpp"
 #include "uhrwerk/simulation.hpp"
+#include "uhrwerk/war_lab.hpp"
 #include "uhrwerk/world.hpp"
 
 #include <algorithm>
@@ -62,6 +63,7 @@ constexpr std::int64_t kDefaultBalanceYears = 100;
 constexpr std::int64_t kDefaultElectionSeeds = 16;
 constexpr std::int64_t kDefaultCustomsSeeds = 8;
 constexpr std::int64_t kDefaultCustomsYears = 5;
+constexpr std::int64_t kDefaultWarSeeds = 16;
 constexpr std::int64_t kMaxBalanceSeeds = 1000;
 constexpr std::int64_t kMaxTestCommands = 1'000'000;
 constexpr std::int64_t kDefaultSavePoints = 10;
@@ -88,6 +90,9 @@ Befehle:
   zoll           Zolllabor: je Seed Läufe ohne und mit dem Wechsel eines Staates in eine
                  Zollunion zum ersten 1. Januar; Handel über die Zollgrenze, Zoll und Preise
                  im letzten Jahr, Zollanteil der Unionen, gegen die Zollziele (seit M9)
+  krieg          Kriegslabor: je Seed die Kriege aus den Kriegszielen ohne Spieler bis zum
+                 Frieden; Ausgang, Dauer, Friedensschluss, Schlachten, Verluste und Schulden,
+                 über alle Läufe die Verteilung gegen die Kriegsziele (seit M10)
   speichertest   Abnahmetest der Spielstände: Lauf A ohne Unterbrechung; Lauf B speichert an
                  --punkte Stellen in eine Datei, lädt sie mit frisch geladenen Spieldaten und
                  rechnet weiter; alle Jahresprüfsummen müssen gleich sein
@@ -101,7 +106,8 @@ Optionen:
                  nach data/ ab dem Arbeitsverzeichnis und ab dem Ordner des Programms
   --szenario ID  Szenario (Standard: westfaelischer_frieden)
   --jahre N      Zu simulierende Jahre (Standard: 10, wenn auch --tage fehlt; bilanz: 100)
-  --tage N       Zusätzlich zu simulierende Tage
+  --tage N       Zusätzlich zu simulierende Tage; krieg: höchstens so viele Tage je Krieg
+                 (Standard: 'tage' in den Kriegszielen, sonst 730)
   --seed N       Seed der Partie (Standard: 1648)
   --threads N    Rechnende Threads, 0 = alle Kerne (Standard: 0)
   --bloecke N    Lasttest: angestrebte Zahl der Bevölkerungsblöcke (Standard: 500000)
@@ -110,11 +116,13 @@ Optionen:
   --bericht      Tabelle je Staat am Ende des Laufs (nur lauf)
   --chronik      Chronik der Partie ausgeben (nur lauf)
   --maerkte      Preise je Markt (nur wirtschaft)
-  --seeds N      bilanz, wahl, zoll: Zahl der Läufe (Standard: bilanz 32, wahl 16, zoll 8)
+  --seeds N      bilanz, wahl, zoll, krieg: Zahl der Läufe (Standard: bilanz 32, wahl 16,
+                 zoll 8, krieg 16)
   --ziele DATEI  bilanz: Zielwerte (Standard: common/zielwerte_<szenario>.chron, sonst
                  common/zielwerte.chron im Datenordner); wahl: Wahlziele (Standard:
                  common/wahlziele_<szenario>.chron, wenn vorhanden); zoll: Zollziele
-                 (Standard: common/zollziele_<szenario>.chron, wenn vorhanden)
+                 (Standard: common/zollziele_<szenario>.chron, wenn vorhanden); krieg:
+                 Kriegsziele (Standard: common/kriegsziele_<szenario>.chron)
   --parlament ID wahl: Parlament (Standard: das erste des Szenarios)
   --wahlkreise   wahl: Ergebnis je Wahlkreis im ersten Lauf
   --beitritt TAG[:UNION]
@@ -134,8 +142,8 @@ Optionen:
 
 Exitcodes:
   0  in Ordnung
-  1  Datenfehler, Determinismusfehler, verfehlte Zielwerte (bilanz, wahl), Spielstand nicht ladbar
-     oder Wiederholung weicht ab
+  1  Datenfehler, Determinismusfehler, verfehlte Zielwerte (bilanz, wahl, zoll, krieg),
+     Spielstand nicht ladbar oder Wiederholung weicht ab
   2  Bedienfehler (unbekannter Befehl, ungültige Option)
 
 Beispiele:
@@ -147,6 +155,7 @@ Beispiele:
   uhrwerk-cli bilanz --seeds 16 --jahre 100
   uhrwerk-cli wahl --szenario voelkerfruehling --seeds 16 --wahlkreise
   uhrwerk-cli zoll --szenario voelkerfruehling --beitritt HAN:zollverein --jahre 5
+  uhrwerk-cli krieg --szenario voelkerfruehling --seeds 16
   uhrwerk-cli lauf --jahre 50 --testbefehle 200 --speichern partie.einigkeit --protokoll partie.protokoll
   uhrwerk-cli lauf --laden partie.einigkeit --jahre 10
   uhrwerk-cli wiederholung partie.protokoll
@@ -1015,6 +1024,11 @@ fs::path default_customs_targets_file(const fs::path& data_dir, const std::strin
     return data_dir / "common" / ("zollziele_" + scenario + ".chron");
 }
 
+/// Kriegsziele des Kriegslabors (seit M10): common/kriegsziele_<szenario>.chron.
+fs::path default_war_targets_file(const fs::path& data_dir, const std::string& scenario) {
+    return data_dir / "common" / ("kriegsziele_" + scenario + ".chron");
+}
+
 // ─── Befehle ────────────────────────────────────────────────────────────────
 
 int cmd_pruefen(const Options& o, const fs::path& data_dir) {
@@ -1055,6 +1069,14 @@ int cmd_pruefen(const Options& o, const fs::path& data_dir) {
     if (result.ok() && fs::exists(customs_targets, ec)) {
         for (const std::string& error :
              uhrwerk::load_customs_targets(customs_targets, *result.world).errors) {
+            ++errors;
+            std::cout << error << '\n';
+        }
+    }
+    // Kriegsziele (seit M10) ebenso: nur `krieg` liest sie.
+    const fs::path war_targets = default_war_targets_file(data_dir, o.scenario);
+    if (result.ok() && fs::exists(war_targets, ec)) {
+        for (const std::string& error : uhrwerk::load_war_targets(war_targets, *result.world).errors) {
             ++errors;
             std::cout << error << '\n';
         }
@@ -2147,6 +2169,204 @@ int cmd_zoll(const Options& o, const fs::path& data_dir) {
     return kExitDataError;
 }
 
+// ─── Kriegslabor (seit M10) ─────────────────────────────────────────────────
+
+std::string state_name(const World& w, Index state) {
+    return w.states[static_cast<std::size_t>(state)].short_name;
+}
+
+std::string describe_war_goal(const World& w, const uhrwerk::WarGoal& goal) {
+    switch (goal.kind) {
+    case uhrwerk::WarGoalKind::Territory:
+        return "Gebiet " + w.admin_units[static_cast<std::size_t>(goal.param)].name;
+    case uhrwerk::WarGoalKind::Annexation:
+        return "Annexion " + state_name(w, goal.param);
+    case uhrwerk::WarGoalKind::Leadership:
+        return "Führung im Bund";
+    case uhrwerk::WarGoalKind::Customs:
+        return "Zollunion";
+    case uhrwerk::WarGoalKind::Indemnity:
+        return "Entschädigung " + std::to_string(goal.param) + " Monate";
+    }
+    return "?";
+}
+
+constexpr std::array<std::string_view, uhrwerk::kWarOutcomes> kWarOutcomeNames = {
+    "Angreifer siegt", "Verteidiger siegt", "ohne Gewinner", "kein Frieden"};
+
+/// Schulden als Änderung mit Vorzeichen, z. B. "+1.234.567".
+std::string format_debt(Fixed change) {
+    const std::int64_t value = change.round();
+    return (value > 0 ? "+" : "") + format_int(value);
+}
+
+int cmd_krieg(const Options& o, const fs::path& data_dir) {
+    const auto world = load(data_dir, o.scenario, false);
+    if (!world) {
+        return kExitDataError;
+    }
+    const World& w = *world;
+    if (!uhrwerk::military_active(w)) {
+        std::cerr << "Das Szenario " << o.scenario
+                  << " hat kein Militär (common/militaer.chron, 'seit' bis zum Startdatum); das "
+                     "Kriegslabor braucht es (z. B. --szenario voelkerfruehling).\n";
+        return kExitDataError;
+    }
+    const fs::path targets_file =
+        o.targets_file ? *o.targets_file : default_war_targets_file(data_dir, o.scenario);
+    std::error_code ec;
+    if (!fs::exists(targets_file, ec)) {
+        std::cerr << "Keine Kriegsziele: " << uhrwerk::path_to_utf8(targets_file)
+                  << " fehlt (sie nennen die Kriege des Labors).\n";
+        return kExitDataError;
+    }
+    const uhrwerk::WarTargetsResult targets = uhrwerk::load_war_targets(targets_file, w);
+    if (!targets.ok()) {
+        for (const std::string& error : targets.errors) {
+            std::cerr << error << '\n';
+        }
+        std::cerr << "Kriegsziele nicht lesbar: " << uhrwerk::path_to_utf8(targets_file) << '\n';
+        return kExitDataError;
+    }
+    std::vector<uhrwerk::WarScenario> wars = targets.targets.wars;
+    if (o.days) {
+        for (uhrwerk::WarScenario& war : wars) {
+            war.days = static_cast<std::int32_t>(std::max<std::int64_t>(1, *o.days));
+        }
+    }
+
+    const std::int64_t seeds = o.seeds.value_or(kDefaultWarSeeds);
+    const auto t0 = std::chrono::steady_clock::now();
+    std::vector<std::vector<uhrwerk::WarLabRun>> runs(wars.size());
+    for (std::size_t k = 0; k < wars.size(); ++k) {
+        for (std::int64_t i = 0; i < seeds; ++i) {
+            runs[k].push_back(uhrwerk::run_war_lab(
+                w, uhrwerk::SimConfig{o.seed + static_cast<std::uint64_t>(i), o.threads}, wars[k]));
+        }
+    }
+    const double seconds = seconds_since(t0);
+    const uhrwerk::WarLabSummary summary = uhrwerk::summarize_war_lab(wars, runs);
+
+    std::cout << "Kriegslabor: " << w.scenario.name << " (" << w.scenario.id << "), Kriegsbeginn am "
+              << uhrwerk::format_date_long(w.date) << ", ohne Spieler (Generalstab nach Regel)\n"
+              << "Läufe:       " << seeds << " je Krieg (Seeds " << o.seed;
+    if (seeds > 1) {
+        std::cout << "–" << o.seed + static_cast<std::uint64_t>(seeds - 1);
+    }
+    std::cout << "); Median (5 % … 95 %)\n"
+              << "Kriegsziele: " << uhrwerk::path_to_utf8(targets_file) << '\n'
+              << "Threads:     " << (o.threads == 0 ? std::string("alle Kerne") : std::to_string(o.threads))
+              << '\n'
+              << "Laufzeit:    " << format_seconds(seconds) << '\n';
+
+    using uhrwerk::WarCheck;
+    std::set<std::pair<int, std::size_t>> marked;
+    for (const uhrwerk::WarViolation& v : summary.violations) {
+        marked.insert({static_cast<int>(v.check), v.war});
+    }
+    const auto mark = [&marked](WarCheck check, std::size_t war) {
+        return marked.count({static_cast<int>(check), war}) != 0 ? std::string(" !") : std::string();
+    };
+
+    for (std::size_t k = 0; k < wars.size(); ++k) {
+        const uhrwerk::WarScenario& war = wars[k];
+        const uhrwerk::WarScenarioSummary& s = summary.wars[k];
+        std::string goals;
+        for (const uhrwerk::WarGoal& goal : war.goals) {
+            goals += (goals.empty() ? "" : ", ") + describe_war_goal(w, goal);
+        }
+        std::cout << "\nKrieg " << war.id << ": " << state_name(w, war.attacker) << " gegen "
+                  << state_name(w, war.defender) << ", Ziele: " << (goals.empty() ? "keine" : goals)
+                  << ", höchstens " << format_int(war.days) << " Tage\n";
+        std::vector<std::vector<std::string>> rows;
+        rows.push_back({"Seed", "Ausgang", "Tage", "Schlachten", "Verluste A", "Verluste V", "Orte",
+                        "Schulden A", "Schulden V"});
+        for (std::size_t i = 0; i < runs[k].size(); ++i) {
+            const uhrwerk::WarLabRun& run = runs[k][i];
+            const std::string seed = std::to_string(o.seed + static_cast<std::uint64_t>(i));
+            if (!run.started) {
+                rows.push_back({seed, "keine Kriegserklärung", "–", "–", "–", "–", "–", "–", "–"});
+                continue;
+            }
+            rows.push_back({seed, std::string(kWarOutcomeNames[static_cast<std::size_t>(run.outcome)]),
+                            format_int(run.days), format_int(run.battles),
+                            format_int(run.attacker_losses.round()), format_int(run.defender_losses.round()),
+                            format_int(run.transfers), format_debt(run.attacker_debt),
+                            format_debt(run.defender_debt)});
+        }
+        print_table(rows, {true, false, true, true, true, true, true, true, true}, 0);
+        std::cout << "A: Angreiferseite, V: Verteidigerseite; Verluste: Gefallene, Verwundete und Gefangene; "
+                     "Schulden der Hauptpartei: Ende minus Start\n";
+        for (std::size_t i = 0; i < runs[k].size(); ++i) {
+            if (!runs[k][i].peace.empty()) {
+                std::cout << "  " << o.seed + static_cast<std::uint64_t>(i) << ": " << runs[k][i].peace
+                          << '\n';
+            }
+        }
+
+        rows.clear();
+        rows.push_back({"Ausgang", "Läufe", "Anteil", "Ziel"});
+        const std::array<const std::optional<uhrwerk::ValueRange>*, uhrwerk::kWarOutcomes> ranges = {
+            &war.victory, &war.defeat, &war.white, nullptr};
+        const std::array<WarCheck, 3> checks = {WarCheck::Victory, WarCheck::Defeat, WarCheck::White};
+        const std::int64_t total = std::max<std::int64_t>(1, seeds);
+        for (std::size_t a = 0; a < uhrwerk::kWarOutcomes; ++a) {
+            const std::int64_t count = s.outcomes[a];
+            const bool has_range = ranges[a] != nullptr && ranges[a]->has_value();
+            rows.push_back({std::string(kWarOutcomeNames[a]), std::to_string(count),
+                            format_share(Fixed::from_ratio(count, total)) + (a < 3 ? mark(checks[a], k) : ""),
+                            has_range ? format_share_range(**ranges[a]) : std::string("–")});
+        }
+        std::cout << '\n';
+        print_table(rows, {false, true, true, true}, 0);
+        const std::int64_t peace =
+            seeds - s.not_started - s.outcomes[static_cast<std::size_t>(uhrwerk::WarOutcome::Open)];
+        std::cout << "Dauer bis zum Frieden: "
+                  << (peace > 0 ? format_quantiles(s.days, 0) + " Tage" : std::string("–"))
+                  << mark(WarCheck::Duration, k)
+                  << (war.duration ? ", Ziel " + format_range(*war.duration) + " Tage" : std::string())
+                  << '\n'
+                  << "Schlachten: " << format_quantiles(s.battles, 0) << "; Verluste A "
+                  << format_seat_quantiles(s.attacker_losses) << ", V "
+                  << format_seat_quantiles(s.defender_losses) << "; Orte " << format_quantiles(s.transfers, 0)
+                  << '\n'
+                  << "Schulden A " << format_debt(s.attacker_debt.median) << ", V "
+                  << format_debt(s.defender_debt.median) << " (Median)\n";
+    }
+
+    std::cout << '\n';
+    if (summary.violations.empty()) {
+        std::cout << "Verstöße: keine – alle Kriegsziele erfüllt.\n";
+        return kExitOk;
+    }
+    std::cout << "Verstöße (" << summary.violations.size() << ", mit ! markiert):\n";
+    for (const uhrwerk::WarViolation& v : summary.violations) {
+        const std::string& id = wars[v.war].id;
+        switch (v.check) {
+        case WarCheck::NotStarted:
+            std::cout << "  " << id << ": keine gültige Kriegserklärung in " << v.value.round()
+                      << " Läufen\n";
+            break;
+        case WarCheck::Victory:
+            std::cout << "  " << id << ": Angreifer siegt in " << format_share(v.value) << '\n';
+            break;
+        case WarCheck::Defeat:
+            std::cout << "  " << id << ": Verteidiger siegt in " << format_share(v.value) << '\n';
+            break;
+        case WarCheck::White:
+            std::cout << "  " << id << ": ohne Gewinner in " << format_share(v.value) << '\n';
+            break;
+        case WarCheck::Duration:
+            std::cout << "  " << id << ": Dauer im Median " << format_int(v.value.round()) << " Tage\n";
+            break;
+        case WarCheck::Fixed:
+            std::cout << "  " << id << ": derselbe Ausgang in allen " << v.value.round() << " Läufen\n";
+            break;
+        }
+    }
+    return kExitDataError;
+}
+
 int cmd_determinismus(const Options& o, const fs::path& data_dir) {
     // Jeder Lauf lädt die Daten neu – so fällt auch ein nicht deterministischer Lader auf.
     auto world_a = load(data_dir, o.scenario, true);
@@ -2669,6 +2889,9 @@ int run(int argc, char** argv) {
         } else if (o.command == "zoll") {
             check_applicable(o, {"--daten", "--szenario", "--jahre", "--seed", "--threads", "--seeds",
                                  "--ziele", "--beitritt", "--austritt"});
+        } else if (o.command == "krieg") {
+            check_applicable(
+                o, {"--daten", "--szenario", "--tage", "--seed", "--threads", "--seeds", "--ziele"});
         } else if (o.command == "speichertest") {
             check_applicable(o, {"--daten", "--szenario", "--jahre", "--tage", "--seed", "--threads",
                                  "--testbefehle", "--punkte"});
@@ -2712,6 +2935,9 @@ int run(int argc, char** argv) {
         }
         if (o.command == "zoll") {
             return cmd_zoll(o, data_dir);
+        }
+        if (o.command == "krieg") {
+            return cmd_krieg(o, data_dir);
         }
         if (o.command == "speichertest") {
             return cmd_speichertest(o, data_dir);

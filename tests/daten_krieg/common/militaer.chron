@@ -1,0 +1,28 @@
+# Testdaten des Kriegslabors (seit M10, Schritt a5): Militär ab dem Startdatum der Fixture, Generalstab
+# für alle Heere, Festung Dresden. Wird über die Fixture tests/daten gelegt (CTest krieg_fixture).
+militaer {
+    seit       = 1648.01.01
+    fluss_rang = 3
+    generalstab = ja
+}
+
+heerwesen standard {
+    bewaffnung        = 1
+    geschuetze        = 2
+    mobilmachung      = 2
+    mobilmachung_tage = 30
+}
+
+heerwesen bra {
+    staat             = BRA
+    seit              = 1600.01.01
+    bewaffnung        = 1.2
+    geschuetze        = 3
+    mobilmachung      = 2.5
+    mobilmachung_tage = 20
+}
+
+garnison bra_berlin  { staat = BRA ort = berlin_coelln anteil = 0.6 name = "Garde" }
+garnison bra_potsdam { staat = BRA ort = potsdam anteil = 0.4 }
+
+festung dresden { ort = dresden stufe = 1 }

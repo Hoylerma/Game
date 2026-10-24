@@ -34,7 +34,7 @@ constexpr int kZstdLevel = 3;
 /// Obergrenze der unkomprimierten Nutzdaten (Schutz vor beschädigten Längenangaben).
 constexpr std::uint64_t kMaxPayload = std::uint64_t{1} << 31;
 /// Stand des Militärs im Zustand (seit M10, Inhaltsbereich militaer): 1 = Schritt a1 (Garnisonen).
-constexpr std::uint64_t kMilitaryContentVersion = 4;
+constexpr std::uint64_t kMilitaryContentVersion = 5;
 
 bool fail(std::string* error, std::string message) {
     if (error != nullptr) {
@@ -934,6 +934,13 @@ std::string validate_state(const Simulation& sim) {
         for (const std::uint8_t b : w.left_federation) {
             if (b > 1) {
                 return "Austritt aus dem Bund ungültig";
+            }
+        }
+        for (const WarResult& r : w.war_results) {
+            if (!in(r.attacker, S) || !in(r.defender, S) || r.winner < -1 || r.winner > 1 || r.battles < 0 ||
+                r.transfers < 0 || !is_valid(r.started) || !is_valid(r.ended) ||
+                static_cast<int>(r.cause) > static_cast<int>(WarCause::Execution)) {
+                return "Kriegsergebnis ungültig";
             }
         }
         if (w.next_war_id < 1) {

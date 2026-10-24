@@ -1,0 +1,35 @@
+# Kriegsziele der Testdaten (seit M10, Schritt a5), gelesen von `uhrwerk-cli krieg` und
+# `uhrwerk-cli pruefen`. Format: docs/technik/chronik-skript.md, Abschnitt 3.31. Die Bereiche halten
+# das Verhalten der Fixture fest (CTest krieg_fixture, 16 Seeds); sie sind kein Spielwert.
+
+# Sachsen (35.000 Einwohner) gegen Brandenburg (13.500): Sachsen siegt meist nach dem ersten
+# Monatsersten; in einzelnen Läufen hält sich Brandenburg bis zum Ende.
+krieg brandenburg {
+    angreifer   = SAX
+    verteidiger = BRA
+    ziel        = { annexion = BRA }
+    tage        = 365
+    sieg        = { 0.75 1 }
+    dauer       = { 20 90 }
+    offen       = ja
+}
+
+# Brandenburg greift das stärkere Sachsen an und erschöpft sich vor der Festung Dresden; Sachsen hat
+# keine Ziele, der Frieden kommt ohne Gewinner.
+krieg sachsen {
+    angreifer   = BRA
+    verteidiger = SAX
+    ziel        = { entschaedigung = 3 }
+    tage        = 365
+    niederlage  = { 0 0 }
+    weiss       = { 0.75 1 }
+}
+
+# Sachsen gegen das kleine Anhalt: eine Schlacht, Anhalt geht unter.
+krieg anhalt {
+    angreifer   = SAX
+    verteidiger = ANH
+    ziel        = { annexion = ANH }
+    sieg        = { 0.9 1 }
+    dauer       = { 20 90 }
+}

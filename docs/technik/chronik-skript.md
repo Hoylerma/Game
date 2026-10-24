@@ -1015,7 +1015,42 @@ und Abrüstung, `terrain_march` je Gelände), `State::army` (`ArmyProfile`), `Wo
 `World::neighbors`, seit a3 `World::fortresses`; Zustand sind die Heere (`World::armies`, seit a2 mit
 Weg und Resttagen), die Mobilmachung je Staat (`World::mobilizations`), die Belegung je Bahnstrecke
 (`World::rail_backlog`) und seit a3 Kriege, Kontrolle, Schlachten, Belagerungen, Verwundete, Gefangene
-und Gefallene.
+und Gefallene, seit a5 die Ergebnisse beendeter Kriege (`World::war_results`).
+
+### 3.31 `common/kriegsziele_<szenario>.chron` (seit M10)
+
+Kriegsziele des Kriegslabors ([militaer.md](militaer.md), Abschnitt 6.3). Wie die Zollziele
+(Abschnitt 3.26) gehört die Datei nicht zum Spielinhalt. Nur `uhrwerk-cli krieg` liest sie und braucht
+sie, denn sie nennt die Kriege des Labors; `uhrwerk-cli pruefen` prüft sie, wenn sie vorhanden ist.
+
+```text
+krieg sachsen {                    # beliebig viele; je Krieg ein Lauf je Seed
+    angreifer   = PRU              # Pflicht: Staat, der zum Startdatum besteht; erklärt am ersten Tag
+    verteidiger = SAX              # Pflicht: anderer Staat (Bündnisfall wie bei jeder Erklärung)
+    ziel        = { annexion = SAX }  # optional, auch mehrfach: Ziele des Angreifers, das erste mit
+                                   # der Erklärung; annexion = TAG, gebiet = <einheit>, fuehrung = ja,
+                                   # zollunion = ja, entschaedigung = 1..24 (Monatseinnahmen)
+    tage        = 730              # optional, 1..3650: höchstens so viele Tage (Standard 730)
+    sieg        = { 0.8 1 }        # optional: Anteil der Läufe, in denen der Angreifer siegt (0..1)
+    niederlage  = { 0 0.2 }        # optional: … der Verteidiger siegt
+    weiss       = { 0 0.2 }        # optional: … Frieden ohne Gewinner
+    dauer       = { 30 180 }       # optional: Median der Tage bis zum Frieden (Läufe mit Frieden)
+    offen       = ja               # optional: kein Ausgang in allen Läufen (Standard nein)
+}
+```
+
+Bereiche stehen als `{ von bis }` mit von ≤ bis. Führt das Szenario den Krieg zwischen den beiden
+Hauptparteien schon, erklärt der Angreifer ihn nicht neu. Ohne Lauf mit Frieden gilt für `dauer` die
+Höchstdauer. Fehler sind:
+- unbekannte Staaten, Verwaltungseinheiten und Felder;
+- zwei Kriege mit derselben Kennung, ein Krieg ohne `angreifer` oder `verteidiger` oder mit demselben
+  Staat auf beiden Seiten;
+- Anteile außerhalb von 0 bis 1, `tage` außerhalb von 1 bis 3650, `entschaedigung` keine ganze Zahl
+  von 1 bis 24, `fuehrung` und `zollunion` nicht `ja`, `offen` nicht `ja` oder `nein`.
+
+Ob ein Ziel im Krieg gilt (etwa eine Einheit mit Orten des Verteidigers), entscheidet erst der Kern bei
+der Erklärung; ein ungültiges entfällt. Ein Lauf, in dem die Erklärung scheitert, ist ein Verstoß. Im
+Kern: `WarTargets` (`uhrwerk/war_lab.hpp`).
 
 ## 4. Startzustand
 

@@ -1,0 +1,19 @@
+# Kriegsziele des Kriegslabors für das Lesezeichen 1848 (Szenario voelkerfruehling, Meilenstein M10
+# Schritt a5), gelesen nur von `uhrwerk-cli krieg` und `uhrwerk-cli pruefen`.
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.31; Labor: docs/technik/militaer.md, Abschnitt
+# 6.3. Je Seed ein Lauf ohne Spieler: Der Angreifer erklärt den Krieg am Startdatum, der Generalstab
+# führt alle Heere; Anteile gelten über die Läufe, die Dauer für den Median der Läufe mit Frieden.
+#
+# Kein historischer Krieg, sondern ein Korridor für den Krieg im Kern, bis die drei Kriegslesezeichen
+# (Düppel, Königgrätz, Sedan) mit eigenen Kriegszielen folgen (M10 b1, Kalibrierung b2). Spielwerte.
+
+# Preußen gegen Sachsen ohne Verbündete: Preußen besetzt Sachsen und annektiert es nach rund zwei
+# Monaten (Probelauf a4). Ob das Ergebnis streut (offen = ja), prüft erst die Kalibrierung.
+krieg sachsen {
+    angreifer   = PRU
+    verteidiger = SAX
+    ziel        = { annexion = SAX }
+    sieg        = { 0.8 1 }
+    dauer       = { 30 180 }
+}

@@ -59,6 +59,17 @@ freigegeben; Stand je Schritt in Abschnitt 12 dort.
   (Rückzug vor doppelter, Angriff mit 1,2-facher Übermacht, Vormarsch auf die Ziele); Befehl
   `Generalstab`, ein eigener Marsch übernimmt das Heer. Probelauf 1848: Preußen annektiert Sachsen in
   zwei Monaten. Ohne Befehle rechnet 1848 zeichengleich; 1648 bitgleich.
+- **Kriegslabor (Schritt a5):** `uhrwerk-cli krieg` rechnet je Seed die Kriege aus
+  `common/kriegsziele_<szenario>.chron` ([chronik-skript.md](docs/technik/chronik-skript.md)
+  Abschnitt 3.31) ohne Spieler bis zum Frieden (höchstens zwei Jahre): Der Angreifer erklärt den Krieg
+  mit seinen Zielen, der Generalstab führt alle Heere. Bericht je Lauf mit Ausgang, Dauer,
+  Friedensschluss, Schlachten, Verlusten, gewechselten Orten und Schulden, über alle Läufe die
+  Verteilung gegen die Korridore (Anteil der Siege, Dauer, kein Ausgang in allen Läufen); Exitcode 1
+  bei Verstößen, `pruefen` prüft die Datei. Kriegsziele 1848: Preußen annektiert Sachsen in 16 von
+  16 Läufen nach rund zwei Monaten. Der Zustand hält die Ergebnisse beendeter Kriege
+  (Inhaltsbereich `militaer` Stand 5, Spielstände 1848 aus a4 laden nicht mehr). Test-Fixture mit
+  Militärdaten (`tests/daten_krieg`), CTests `krieg_fixture` und `krieg_1848`, CI-Schritt
+  „Kriegslabor 1848“. 1648 bitgleich, 1848 ohne Befehle zeichengleich.
 
 ### Meilenstein M9 – Diplomatie und Zollverein
 

@@ -267,6 +267,15 @@ void end_battle(World& world, const Battle& battle, const std::vector<std::size_
         text += " " + join(surrendered) + (surrendered.size() == 1 ? " ergibt sich." : " ergeben sich.");
     }
     chronicle(world, captor, std::move(text), battle.location);
+    // Beendete Schlacht im Krieg zwischen den Hauptbeteiligten (seit a5).
+    const Index loser_state = world.armies[losers.front()].state;
+    for (War& w : world.wars) {
+        if ((contains(w.attackers, captor) && contains(w.defenders, loser_state)) ||
+            (contains(w.defenders, captor) && contains(w.attackers, loser_state))) {
+            ++w.battles;
+            break;
+        }
+    }
 }
 
 /// Ein Kampftag in einem Ort (Abschnitt 4.2). true, wenn die Schlacht endet.
@@ -472,6 +481,7 @@ bool conclude_peace(World& world, std::size_t index, int winner) {
                        (winner == 0 ? " ohne Gewinner."
                                     : ": " + name_of(world, winner > 0 ? attacker : defender) + " siegt.");
     bool changed = false;
+    std::int32_t transfers = 0;
     std::vector<Index> heirs(world.states.size(), kNone);
     if (winner != 0) {
         const bool attacker_won = winner > 0;
@@ -500,6 +510,7 @@ bool conclude_peace(World& world, std::size_t index, int winner) {
                 }
                 if (count > 0) {
                     changed = true;
+                    transfers += count;
                     const std::string places =
                         " (" + std::to_string(count) + (count == 1 ? " Ort)." : " Orte).");
                     text += " " + name_of(world, main) +
@@ -607,6 +618,9 @@ bool conclude_peace(World& world, std::size_t index, int winner) {
         army.days_here = 0;
     }
     chronicle(world, attacker, std::move(text));
+    world.war_results.push_back(WarResult{war.id, attacker, defender, war.cause, war.started, world.date,
+                                          winner, war.battles, war.defender_inflicted, war.attacker_inflicted,
+                                          transfers});
     // Wer in keinem Krieg mehr steht, rüstet ab.
     for (const std::vector<Index>* side : {&war.attackers, &war.defenders}) {
         for (const Index s : *side) {
