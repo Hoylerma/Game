@@ -1,0 +1,7 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+strecke luxemburg_trier {
+    name      = "Luxemburgische Prinz-Heinrich- und Wilhelm-Luxemburg-Bahn (Luxemburg–Trier)"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M10b, Schritt b1)"
+    abschnitt = { von = luxemburg bis = trier eroeffnet = 1861.08.29 }
+}

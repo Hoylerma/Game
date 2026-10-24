@@ -28,3 +28,45 @@ strecke carlsbahn {
     quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M7, Schritt b1)"
     abschnitt = { von = kassel bis = hofgeismar eroeffnet = 1848.03.30 }
 }
+
+strecke carlsbahn_warburg {
+    name      = "Friedrich-Wilhelms-Nordbahn (Carlsbahn bis Warburg)"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M10b, Schritt b1)"
+    abschnitt = { von = hofgeismar bis = warburg eroeffnet = 1851.03.30 }
+}
+
+strecke friedrich_wilhelms_nordbahn {
+    name      = "Friedrich-Wilhelms-Nordbahn"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M10b, Schritt b1)"
+    abschnitt = { von = kassel bis = rotenburg_an_der_fulda eroeffnet = 1849.09.29 }
+    abschnitt = { von = rotenburg_an_der_fulda bis = gerstungen eroeffnet = 1849.09.29 }
+    abschnitt = { von = gerstungen bis = eisenach eroeffnet = 1849.09.29 }
+}
+
+strecke bebra_hanau {
+    name      = "Bebra-Hanauer Eisenbahn"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M10b, Schritt b1)"
+    abschnitt = { von = rotenburg_an_der_fulda bis = bad_hersfeld eroeffnet = 1866.12.22 }
+    abschnitt = { von = bad_hersfeld bis = fulda eroeffnet = 1866.12.22 }
+    abschnitt = { von = fulda bis = schluechtern eroeffnet = 1868.05.01 }
+    abschnitt = { von = schluechtern bis = hanau_am_main eroeffnet = 1868.05.01 }
+}
+
+strecke main_weser {
+    name      = "Main-Weser-Bahn"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M10b, Schritt b1)"
+    abschnitt = { von = kassel bis = marburg_an_der_lahn eroeffnet = 1850.07.04 }
+    abschnitt = { von = marburg_an_der_lahn bis = giessen eroeffnet = 1850.07.29 }
+    abschnitt = { von = giessen bis = friedberg eroeffnet = 1852.05.15 }
+    abschnitt = { von = friedberg bis = frankfurt_am_main eroeffnet = 1852.05.15 }
+}
+
+strecke hessische_ludwigsbahn {
+    name      = "Hessische Ludwigsbahn"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M10b, Schritt b1)"
+    abschnitt = { von = mainz bis = worms eroeffnet = 1853.08.24 }
+    abschnitt = { von = worms bis = frankenthal eroeffnet = 1853.08.24 }
+    abschnitt = { von = mainz bis = bingen_am_rhein eroeffnet = 1859.12.17 }
+    abschnitt = { von = mainz bis = darmstadt eroeffnet = 1858.12.15 }
+    abschnitt = { von = darmstadt bis = aschaffenburg eroeffnet = 1858.12.15 }
+}

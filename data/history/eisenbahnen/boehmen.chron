@@ -9,3 +9,44 @@ strecke noerdliche_staatsbahn {
     abschnitt = { von = pardubitz bis = kolin eroeffnet = 1845.08.20 }
     abschnitt = { von = kolin bis = prag eroeffnet = 1845.08.20 }
 }
+
+strecke prag_bodenbach {
+    name      = "Nördliche Staatsbahn (Prag–Bodenbach)"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M10b, Schritt b1)"
+    abschnitt = { von = prag bis = kralupy_nad_vltavou eroeffnet = 1851.04.06 }
+    abschnitt = { von = kralupy_nad_vltavou bis = leitmeritz eroeffnet = 1851.04.06 }
+    abschnitt = { von = leitmeritz bis = aussig eroeffnet = 1851.04.06 }
+    abschnitt = { von = aussig bis = tetschen eroeffnet = 1851.04.06 }
+}
+
+strecke brunn_truebau {
+    name      = "Brünn-Trübauer Eisenbahn"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M10b, Schritt b1)"
+    abschnitt = { von = bruenn bis = blansko eroeffnet = 1849.01.01 }
+    abschnitt = { von = blansko bis = boehmisch_truebau eroeffnet = 1849.01.01 }
+}
+
+strecke sued_norddeutsche_verbindungsbahn {
+    name      = "Süd-Norddeutsche Verbindungsbahn"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M10b, Schritt b1)"
+    abschnitt = { von = pardubitz bis = koeniggraetz eroeffnet = 1857.11.01 }
+    abschnitt = { von = koeniggraetz bis = jaromer eroeffnet = 1857.11.01 }
+    abschnitt = { von = jaromer bis = turnau eroeffnet = 1859.05.01 }
+    abschnitt = { von = turnau bis = reichenberg eroeffnet = 1859.05.01 }
+    abschnitt = { von = reichenberg bis = zittau eroeffnet = 1859.12.01 }
+}
+
+strecke turnau_kralup_prag {
+    name      = "Turnau-Kralup-Prager Eisenbahn"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M10b, Schritt b1)"
+    abschnitt = { von = prag bis = jungbunzlau eroeffnet = 1865.10.16 }
+    abschnitt = { von = jungbunzlau bis = turnau eroeffnet = 1865.10.16 }
+}
+
+strecke boehmische_westbahn {
+    name      = "Böhmische Westbahn"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M10b, Schritt b1)"
+    abschnitt = { von = prag bis = beraun eroeffnet = 1862.07.14 }
+    abschnitt = { von = beraun bis = pilsen eroeffnet = 1862.07.14 }
+    abschnitt = { von = pilsen bis = furth_im_wald eroeffnet = 1862.10.15 }
+}

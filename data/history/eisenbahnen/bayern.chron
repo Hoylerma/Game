@@ -25,3 +25,40 @@ strecke ludwig_sued_nord {
     abschnitt = { von = augsburg bis = buchloe eroeffnet = 1847.09.01 }
     abschnitt = { von = buchloe bis = kaufbeuren eroeffnet = 1847.09.01 }
 }
+
+strecke ludwig_sued_nord_lindau {
+    name      = "Ludwig-Süd-Nord-Bahn (Allgäu)"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M10b, Schritt b1)"
+    abschnitt = { von = kaufbeuren bis = kempten_allgaeu eroeffnet = 1852.04.01 }
+    abschnitt = { von = kempten_allgaeu bis = lindau_schwaben eroeffnet = 1854.03.01 }
+}
+
+strecke ludwigs_westbahn {
+    name      = "Ludwigs-Westbahn"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M10b, Schritt b1)"
+    abschnitt = { von = bamberg bis = schweinfurt eroeffnet = 1852.12.01 }
+    abschnitt = { von = schweinfurt bis = wuerzburg eroeffnet = 1852.12.01 }
+    abschnitt = { von = wuerzburg bis = aschaffenburg eroeffnet = 1854.10.01 }
+}
+
+strecke maximiliansbahn {
+    name      = "Maximiliansbahn"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M10b, Schritt b1)"
+    abschnitt = { von = augsburg bis = guenzburg eroeffnet = 1854.05.26 }
+    abschnitt = { von = guenzburg bis = ulm eroeffnet = 1854.05.26 }
+    abschnitt = { von = muenchen bis = rosenheim eroeffnet = 1860.08.12 }
+    abschnitt = { von = rosenheim bis = salzburg eroeffnet = 1860.08.12 }
+}
+
+strecke bayerische_ostbahn {
+    name      = "Bayerische Ostbahn"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M10b, Schritt b1)"
+    abschnitt = { von = muenchen bis = landshut eroeffnet = 1858.11.03 }
+    abschnitt = { von = landshut bis = regensburg eroeffnet = 1859.12.12 }
+    abschnitt = { von = nuernberg bis = amberg eroeffnet = 1859.12.12 }
+    abschnitt = { von = amberg bis = schwandorf_in_bayern eroeffnet = 1859.12.12 }
+    abschnitt = { von = schwandorf_in_bayern bis = regensburg eroeffnet = 1859.12.12 }
+    abschnitt = { von = regensburg bis = straubing eroeffnet = 1860.09.20 }
+    abschnitt = { von = straubing bis = passau eroeffnet = 1860.09.20 }
+    abschnitt = { von = schwandorf_in_bayern bis = furth_im_wald eroeffnet = 1861.01.20 }
+}

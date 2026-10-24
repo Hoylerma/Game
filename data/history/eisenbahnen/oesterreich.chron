@@ -43,3 +43,32 @@ strecke budweis_linz_gmunden {
     abschnitt = { von = linz bis = wels eroeffnet = 1836.05.01 }
     abschnitt = { von = wels bis = gmunden eroeffnet = 1836.05.01 }
 }
+
+strecke kaiserin_elisabeth_westbahn {
+    name      = "Kaiserin-Elisabeth-Westbahn"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M10b, Schritt b1)"
+    abschnitt = { von = wien bis = sankt_poelten eroeffnet = 1858.12.15 }
+    abschnitt = { von = sankt_poelten bis = amstetten eroeffnet = 1858.12.15 }
+    abschnitt = { von = amstetten bis = linz eroeffnet = 1858.12.15 }
+    abschnitt = { von = wels bis = salzburg eroeffnet = 1860.08.12 }
+    abschnitt = { von = wels bis = passau eroeffnet = 1861.09.01 }
+}
+
+strecke semmering {
+    name      = "Semmeringbahn"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M10b, Schritt b1)"
+    abschnitt = { von = gloggnitz bis = muerzzuschlag eroeffnet = 1854.07.17 }
+}
+
+strecke suedbahn_laibach {
+    name      = "Südbahn (Cilli–Laibach)"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M10b, Schritt b1)"
+    abschnitt = { von = cilli bis = laibach eroeffnet = 1849.09.16 }
+}
+
+strecke nordtiroler_bahn {
+    name      = "Nordtiroler Bahn"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M10b, Schritt b1)"
+    abschnitt = { von = rosenheim bis = kufstein eroeffnet = 1858.11.24 }
+    abschnitt = { von = kufstein bis = innsbruck eroeffnet = 1858.11.24 }
+}

@@ -382,6 +382,7 @@ Kriegslesezeichen nutzen die Daten von 1848 und die datierte Historie bis zu ihr
 | `tabellen/verwaltung.csv` | neue Einheiten: Hohenzollernsche Lande, Schleswig, Holstein (österreichisch), Lauenburg, die Provinzen Schleswig-Holstein, Hannover und Hessen-Nassau, Elsass (Bas-Rhin, Haut-Rhin), Arrondissement Belfort, Lothringen (Moselle, Meurthe, Vosges, Meuse), Ardennes, Nord |
 | `common/bundesversammlung.chron` | Deutscher Bund bis 24.8.1866, Bundesrat des Norddeutschen Bundes ab 1.7.1867 (43 Stimmen, Präsidium Preußen) |
 | `common/zollunionen.chron`, `common/parlamente.chron` | Steuerverein bis 1854; Nationalversammlung und Preußische Zweite Kammer nur bis 1849 (spätere Wahlen mit M11) |
+| `tabellen/eisenbahnen.csv` → `history/eisenbahnen/` | seit b1c: 62 Strecken mit 185 Abschnitten 1849–1870 (zusammen 104 Strecken, 361 Abschnitte): Ostbahn bis Königsberg und Eydtkuhnen, Posen–Breslau, Westfälische und Main-Weser-Bahn, Saarbrücker und Rhein-Nahe-Bahn, die Rheinstrecken, Hannoversche Süd- und Westbahn, Schleswig, Mecklenburg, Werrabahn, Elbtal nach Bodenbach und Prag, die Süd-Norddeutsche Verbindungsbahn über Königgrätz nach Reichenberg und Zittau, Ludwigs-Westbahn, Maximiliansbahn, Bayerische Ostbahn, Westbahn Wien–Salzburg, Semmering, in Frankreich die Ostbahn Paris–Straßburg mit Metz–Forbach und Metz–Luxemburg, die Ardennenbahn bis Sedan und Diedenhofen. Ungeprüft |
 
 **Militär** (seit M10, Schritt a1, [militaer.md](../docs/technik/militaer.md) Abschnitte 3.1 und 3.2):
 

@@ -1,0 +1,16 @@
+# Erzeugt von tools/archivar aus data/tabellen/ – nicht von Hand bearbeiten.
+
+strecke lahntalbahn {
+    name      = "Lahntalbahn"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M10b, Schritt b1)"
+    abschnitt = { von = lahnstein bis = bad_ems eroeffnet = 1862.07.05 }
+    abschnitt = { von = bad_ems bis = limburg_an_der_lahn eroeffnet = 1862.07.05 }
+    abschnitt = { von = limburg_an_der_lahn bis = wetzlar eroeffnet = 1863.01.10 }
+    abschnitt = { von = wetzlar bis = giessen eroeffnet = 1863.01.10 }
+}
+
+strecke rechte_rheinstrecke {
+    name      = "Rechte Rheinstrecke (Nassauische Rheinbahn)"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M10b, Schritt b1)"
+    abschnitt = { von = wiesbaden bis = lahnstein eroeffnet = 1862.08.22 }
+}

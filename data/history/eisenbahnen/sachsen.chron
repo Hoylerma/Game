@@ -33,3 +33,30 @@ strecke loebau_zittau {
     quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M7, Schritt b1)"
     abschnitt = { von = loebau bis = zittau eroeffnet = 1848.06.10 }
 }
+
+strecke saechsisch_boehmische {
+    name      = "Sächsisch-Böhmische Staatseisenbahn"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M10b, Schritt b1)"
+    abschnitt = { von = dresden bis = pirna eroeffnet = 1851.04.06 }
+    abschnitt = { von = pirna bis = tetschen eroeffnet = 1851.04.06 }
+}
+
+strecke chemnitz_riesa {
+    name      = "Chemnitz-Riesaer Eisenbahn"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M10b, Schritt b1)"
+    abschnitt = { von = riesa bis = doebeln eroeffnet = 1852.09.01 }
+    abschnitt = { von = doebeln bis = chemnitz eroeffnet = 1852.09.01 }
+}
+
+strecke chemnitz_zwickau {
+    name      = "Chemnitz-Zwickauer Eisenbahn"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M10b, Schritt b1)"
+    abschnitt = { von = chemnitz bis = zwickau eroeffnet = 1858.11.15 }
+}
+
+strecke saechsisch_bayerische_hof {
+    name      = "Sächsisch-Bayerische Eisenbahn (Göltzschtal)"
+    quelle    = "Strecke und Eröffnung nach Wissensstand ohne Quellenzugang; Prüfung offen (M10b, Schritt b1)"
+    abschnitt = { von = reichenbach_vogtland bis = plauen eroeffnet = 1851.07.15 }
+    abschnitt = { von = plauen bis = hof eroeffnet = 1851.07.15 }
+}
