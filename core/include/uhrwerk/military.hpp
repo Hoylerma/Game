@@ -14,6 +14,7 @@
 
 #include <cstdint>
 #include <optional>
+#include <string>
 #include <vector>
 
 namespace uhrwerk {
@@ -175,6 +176,13 @@ enum class PeaceTerms : std::uint8_t {
 /// Kriegspunkte des Anbietenden oder ihre Müdigkeit die Kosten decken; weißer Frieden, wenn sie selbst
 /// unter 25 Punkten steht oder ihre Müdigkeit 50 erreicht; die Kapitulation immer. true bei Frieden.
 bool offer_peace(World& world, Index state, std::int64_t war, PeaceTerms terms);
+
+/// Vorab-Prüfung eines Friedensangebots (seit b3, für die Oberfläche): nimmt die andere Hauptpartei nach
+/// Regel an? nullopt, wenn das Angebot ungültig ist (kein Krieg, keine Hauptpartei, keine eigenen Ziele).
+std::optional<bool> peace_acceptance(const World& world, Index state, std::int64_t war, PeaceTerms terms);
+
+/// Text eines Kriegsziels wie in der Chronik („Herzogtum Schleswig“, „Annexion von Hannover“, seit b3).
+std::string war_goal_text(const World& world, const War& war, const WarGoal& goal);
 
 /// Befehl Generalstab: Heer übergeben (on) oder zurücknehmen. false, wenn ungültig.
 bool set_staff(World& world, Index state, std::int64_t army, bool on);

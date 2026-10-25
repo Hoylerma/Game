@@ -13,6 +13,7 @@
 #include <algorithm>
 #include <cstdint>
 #include <doctest/doctest.h>
+#include <optional>
 #include <string>
 #include <string_view>
 #include <tuple>
@@ -1854,6 +1855,15 @@ TEST_CASE("Militär: Regeln der Kalibrierung (b2)") {
         w.wars[0].started = uhrwerk::from_day_number(uhrwerk::to_day_number(w.date) - 185);
         REQUIRE(uhrwerk::war_score(w, w.wars[0], true) == Fixed::zero());
         REQUIRE(uhrwerk::war_weariness(w, w.wars[0], false) >= Fixed::from_int(10));
+        // Vorab-Prüfung (seit b3): Sachsen nähme Brandenburgs Ziele an; ungültig ohne Ziele oder Krieg.
+        CHECK(uhrwerk::peace_acceptance(w, bra, 1, uhrwerk::PeaceTerms::OwnGoals) ==
+              std::optional<bool>(true));
+        CHECK(uhrwerk::peace_acceptance(w, sax, 1, uhrwerk::PeaceTerms::OwnGoals) == std::nullopt);
+        CHECK(uhrwerk::peace_acceptance(w, bra, 2, uhrwerk::PeaceTerms::White) == std::nullopt);
+        CHECK(uhrwerk::peace_acceptance(w, sax, 1, uhrwerk::PeaceTerms::Capitulation) ==
+              std::optional<bool>(true));
+        CHECK(uhrwerk::war_goal_text(w, w.wars[0], w.wars[0].goals[0]) ==
+              "Entschädigung von 1 Monatseinnahmen");
         Simulation sim(w);
         while (sim.world().date.day != 1) {
             sim.step_day();

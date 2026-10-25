@@ -1343,6 +1343,34 @@ bool add_war_goal(World& world, Index state, std::int64_t id, std::int64_t code)
     return true;
 }
 
+std::string war_goal_text(const World& world, const War& war, const WarGoal& goal) {
+    return goal_text(world, war, goal);
+}
+
+std::optional<bool> peace_acceptance(const World& world, Index state, std::int64_t id, PeaceTerms terms) {
+    const War* war = find_war(world, id);
+    if (war == nullptr || !in_range(world.states, state) ||
+        (war->attackers.front() != state && war->defenders.front() != state)) {
+        return std::nullopt;
+    }
+    const bool attacker = war->attackers.front() == state;
+    switch (terms) {
+    case PeaceTerms::White:
+        return war_score(world, *war, !attacker) < Fixed::from_int(25) ||
+               war_weariness(world, *war, !attacker) >= Fixed::from_int(50);
+    case PeaceTerms::OwnGoals: {
+        const Fixed cost = war_goals_cost(world, *war, attacker);
+        if (cost <= Fixed::zero()) {
+            return std::nullopt;
+        }
+        return war_score(world, *war, attacker) >= cost || war_weariness(world, *war, !attacker) >= cost;
+    }
+    case PeaceTerms::Capitulation:
+        return true;
+    }
+    return std::nullopt;
+}
+
 bool offer_peace(World& world, Index state, std::int64_t id, PeaceTerms terms) {
     const War* war = find_war(world, id);
     if (war == nullptr || !in_range(world.states, state) ||
@@ -1351,29 +1379,22 @@ bool offer_peace(World& world, Index state, std::int64_t id, PeaceTerms terms) {
     }
     const bool attacker = war->attackers.front() == state;
     const Index other = side_of(*war, !attacker).front();
-    const Fixed own_score = war_score(world, *war, attacker);
-    const Fixed other_score = war_score(world, *war, !attacker);
-    const Fixed other_weariness = war_weariness(world, *war, !attacker);
-    bool accepted = false;
+    const std::optional<bool> accepted_by_rule = peace_acceptance(world, state, id, terms);
+    if (!accepted_by_rule) {
+        return false;
+    }
+    const bool accepted = *accepted_by_rule;
     int winner = 0;
     std::string what;
     switch (terms) {
     case PeaceTerms::White:
-        accepted = other_score < Fixed::from_int(25) || other_weariness >= Fixed::from_int(50);
         what = "ohne Gewinner";
         break;
-    case PeaceTerms::OwnGoals: {
-        const Fixed cost = war_goals_cost(world, *war, attacker);
-        if (cost <= Fixed::zero()) {
-            return false;
-        }
-        accepted = own_score >= cost || other_weariness >= cost;
+    case PeaceTerms::OwnGoals:
         winner = attacker ? 1 : -1;
         what = "zu seinen Bedingungen";
         break;
-    }
     case PeaceTerms::Capitulation:
-        accepted = true;
         winner = attacker ? -1 : 1;
         what = "und unterwirft sich";
         break;
