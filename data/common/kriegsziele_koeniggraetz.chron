@@ -1,8 +1,13 @@
 # Kriegsziele des Kriegslabors für das Lesezeichen koeniggraetz (M10b, Schritt b1), gelesen von
 # `uhrwerk-cli krieg` und `uhrwerk-cli pruefen`. Format: docs/technik/chronik-skript.md, Abschnitt 3.31.
-# Der Krieg kommt aus dem Lesezeichen (common/aufmarsch_koeniggraetz.chron); die Korridore setzt die Kalibrierung (b2).
+# Der Krieg kommt aus dem Lesezeichen (common/aufmarsch_koeniggraetz.chron).
+# Korridore (b2) nach militaer.md, Abschnitt 6.3: Preußen setzt sich in 60–90 % der Läufe durch,
+# Dauer 3–16 Wochen, kein Ausgang in allen Läufen.
 krieg koeniggraetz {
     angreifer   = PRU
     verteidiger = AUT
     tage        = 365
+    sieg        = { 0.6 0.9 }
+    dauer       = { 21 112 }
+    offen       = ja
 }

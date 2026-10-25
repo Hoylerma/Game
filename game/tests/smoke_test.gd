@@ -49,6 +49,12 @@ const STATE_FIELDS: PackedStringArray = [
 	"bund",
 	"diplomacy",
 	"envoy_cost_month",
+	"military",
+	"mobilization",
+	"mobilization_text",
+	"in_war",
+	"soldiers_under_arms",
+	"peace_strength",
 ]
 const LOCATION_FIELDS: PackedStringArray = [
 	"id",
@@ -214,6 +220,7 @@ func _run() -> void:
 	_check_determinism(sim, player, new_tax, new_excise)
 	_check_savegames(sim, player)
 	_check_scenario_1848()
+	_check_military_1866()
 	if _check_map:
 		_check_map_files(sim)
 	else:
@@ -299,6 +306,114 @@ func _check_scenario_1848() -> void:
 	_check_elections_1848(sim)
 	_check_customs_1848(sim)
 	_check_diplomacy_1848(sim)
+
+
+## Militär im Lesezeichen 1866 (seit M10, Schritt b3, militaer.md Abschnitt 8): Krieg zum Start, Heere,
+## Weg und Marschbefehl, Generalstab, Kontrolle, Kartenmodus Krieg, Vorab-Prüfung des Friedens.
+func _check_military_1866() -> void:
+	var sim := SimulationClient.create()
+	var errors := sim.load_scenario(UhrwerkPaths.data_dir(), "koeniggraetz")
+	if not _check(errors.is_empty(), "Lesezeichen Königgrätz geladen", "Königgrätz: " + errors):
+		return
+	var prussia := sim.get_state_index("PRU")
+	var austria := sim.get_state_index("AUT")
+	var wars := sim.get_wars()
+	var war: Dictionary = wars[0] if wars.size() == 1 else {}
+	_check(
+		str(war.get("name", "")) == "Deutscher Krieg"
+		and Array(war.get("attackers", [])).has(prussia)
+		and Array(war.get("defenders", [])).has(austria)
+		and not Array(war.get("goals", [])).is_empty(),
+		"get_wars: %s, %d Ziele" % [war.get("name"), Array(war.get("goals", [])).size()],
+		"get_wars: %s" % str(wars)
+	)
+	var state := sim.get_state(prussia)
+	_check(
+		bool(state.get("military", false)) and bool(state.get("in_war", false))
+		and int(state.get("mobilization", -1)) == 2 and int(state.get("soldiers_under_arms", 0)) > 0,
+		"Preußen mobil im Krieg: %d Soldaten unter Waffen" % int(state.get("soldiers_under_arms", 0)),
+		"Preußen: %s" % str(state)
+	)
+	var first := {}
+	for army in sim.get_armies(prussia):
+		if str(army.get("name", "")) == "I. Armee":
+			first = army
+	_check(
+		not first.is_empty() and str(first.get("commander", "")) == "Prinz Friedrich Karl"
+		and int(first.get("location_index", -1)) == sim.get_location_index("goerlitz")
+		and not bool(first.get("garrison", true)),
+		"get_armies: I. Armee unter Prinz Friedrich Karl in Görlitz",
+		"get_armies: %s" % str(first)
+	)
+	var army_id := int(first.get("id", -1))
+	var prag := sim.get_location_index("prag")
+	var preview := sim.get_route_preview(army_id, prag)
+	_check(
+		bool(preview.get("ok", false)) and float(preview.get("days", 0.0)) > 0.0
+		and PackedInt32Array(preview.get("path", PackedInt32Array())).size() > 0
+		and int(PackedInt32Array(preview.get("path"))[-1]) == prag,
+		"get_route_preview: Görlitz – Prag in %.1f Tagen, Ankunft %s" % [
+			float(preview.get("days", 0.0)), preview.get("arrival_text", "")
+		],
+		"get_route_preview: %s" % str(preview)
+	)
+	_check(
+		not bool(sim.get_route_preview(-5, prag).get("ok", true)) and not sim.order_march(-5, prag),
+		"kein Weg für ein unbekanntes Heer",
+		"get_route_preview/order_march nehmen ein unbekanntes Heer an"
+	)
+	_check(sim.order_march(army_id, prag), "Marschbefehl nach Prag", "order_march abgelehnt")
+	var won_peace := sim.get_peace_preview(prussia, int(war.get("id", -1)), SimulationClient.PEACE_OWN_GOALS)
+	var surrender := sim.get_peace_preview(
+		prussia, int(war.get("id", -1)), SimulationClient.PEACE_CAPITULATION
+	)
+	_check(
+		bool(won_peace.get("valid", false)) and not bool(won_peace.get("accepted", true))
+		and bool(surrender.get("accepted", false))
+		and not bool(sim.get_peace_preview(prussia, 999, SimulationClient.PEACE_WHITE).get("valid", true)),
+		"get_peace_preview: Österreich lehnt Preußens Ziele zum Start ab, nähme die Kapitulation an",
+		"get_peace_preview: %s / %s" % [str(won_peace), str(surrender)]
+	)
+	_check(
+		sim.get_declaration_goals(prussia, austria).is_empty()
+		and sim.get_war_goal_options(prussia, int(war.get("id", -1))) is Array,
+		"keine Kriegserklärung an Österreich im Krieg; Zielauswahl für den Krieg",
+		"get_declaration_goals/get_war_goal_options unerwartet"
+	)
+	sim.advance_days(1)
+	var marching := sim.get_army(army_id)
+	_check(
+		int(marching.get("destination_index", -1)) == prag and not bool(marching.get("staff", true)),
+		"I. Armee marschiert (%s), ohne Generalstab" % marching.get("status_text", ""),
+		"I. Armee nach dem Befehl: %s" % str(marching)
+	)
+	var handed := sim.set_army_staff(army_id, true)
+	sim.advance_days(1)
+	_check(
+		handed and bool(sim.get_army(army_id).get("staff", false))
+		and not sim.set_army_staff(army_id, true),
+		"Heer dem Generalstab übergeben",
+		"set_army_staff ohne Wirkung: %s" % str(sim.get_army(army_id))
+	)
+	_check(
+		not sim.order_mobilization(prussia, false) and not sim.order_mobilization(prussia, true),
+		"im Krieg keine Abrüstung, mobil keine zweite Mobilmachung",
+		"order_mobilization im Krieg angenommen"
+	)
+	sim.advance_days(30)
+	var control := sim.get_location_control()
+	var occupied := 0
+	var owners := sim.get_location_owner_indices()
+	for i in control.size():
+		if control[i] >= 0 and control[i] != owners[i]:
+			occupied += 1
+	var colors := sim.get_map_colors(15)
+	_check(
+		control.size() == sim.get_location_count() and colors.size() == sim.get_location_count()
+		and occupied > 0 and sim.get_battles() is Array and sim.get_sieges() is Array,
+		"nach 30 Tagen %d besetzte Orte; Kartenmodus Krieg mit %d Farben" % [occupied, colors.size()],
+		"Kontrolle %d, Farben %d, besetzt %d" % [control.size(), colors.size(), occupied]
+	)
 
 
 ## Diplomatie 1848 (seit M9, Schritt b3, diplomatie.md Abschnitt 6): Beziehungen, Handlungen,

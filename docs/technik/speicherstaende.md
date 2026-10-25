@@ -259,7 +259,8 @@ Parlament, Zollunion, Bund und Militär bleibt die Folge der Zufallszahlen wie v
   Spiel mit dem Ausgang „Krieg“ enden. Seit a5 hält der Zustand je beendetem Krieg ein Ergebnis
   (`kriegsergebnisse`) und je Krieg die Zahl der Schlachten (`schlachten`). Seit b1 tragen die Heere
   Befehlshaber und Führung, und der Bereich `militaer` umfasst Aufmarsch, Kriege und Bündnisse zum Start
-  und das Hinterland. Ohne Militär (1648) zählen weder
+  und das Hinterland; seit b2 (Stand 7) die Regeln `generalstab_moral`, `moral_sieg` und
+  `punkte_heer_anteil` und die besetzten Gebiete der Kriege zum Start. Ohne Militär (1648) zählen weder
   der Stand noch die Heere, der Prüfwert der Formatwache bleibt.
 - Jede Änderung am Zustand (neues Feld, neue Reihenfolge) erhöht die Formatversion. Der Test
   „Spielstand: Formatwache“ verhindert, dass das vergessen wird: Er speichert die Test-Fixture nach

@@ -646,6 +646,9 @@ struct MilitaryRules {
     Fixed staff_retreat = Fixed::from_int(2);     // Rückzug vor so viel Übermacht
     Fixed staff_radius_km = Fixed::from_int(60);  // gemeinsam operieren, Bedrohung
     Fixed staff_reach_km = Fixed::from_int(300);  // Gegner in dieser Entfernung angreifen
+    Fixed staff_morale;      // seit b2: darunter ruht ein Heer (kein Angriff, kein Vormarsch)
+    Fixed victory_morale;    // seit b2: Moral, die die Sieger einer Schlacht zurückgewinnen
+    Fixed points_army_share; // seit b2: ein vernichtetes Heer zählt ab diesem Anteil der Kriegsstärke
     // Lesezeichen im Krieg (seit M10b, Schritt b1).
     Fixed leadership; // Kampfkraft × (1 + leadership × (Führung − 1)) je Heer
 };
@@ -892,6 +895,7 @@ struct OpeningWar {
     std::vector<Index> attackers;
     std::vector<Index> defenders;
     std::vector<WarGoal> goals;
+    std::vector<Index> occupied; // seit b2: Verwaltungseinheiten, die die Angreifer zum Start besetzt halten
 };
 
 /// Hinterland eines Staates außerhalb der Karte (seit Schritt b1, Frankreich): Bevölkerung, die bei

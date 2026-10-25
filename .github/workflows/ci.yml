@@ -395,6 +395,26 @@ jobs:
           } >> "$GITHUB_STEP_SUMMARY"
           exit "$status"
 
+      # Kriegslabor der Kriegslesezeichen (M10b, Schritt b2): Düppel, Königgrätz und Sedan gegen
+      # data/common/kriegsziele_<lesezeichen>.chron, je 16 Seeds.
+      - name: Kriegslabor Lesezeichen
+        if: ${{ !cancelled() }}
+        run: |
+          status=0
+          for lesezeichen in dueppel koeniggraetz sedan; do
+            ./build/release/cli/uhrwerk-cli krieg --daten data --szenario "$lesezeichen" --seeds 16 \
+              > "$RUNNER_TEMP/krieg_$lesezeichen.txt" 2>&1 || status=1
+            cat "$RUNNER_TEMP/krieg_$lesezeichen.txt"
+            {
+              echo "### Kriegslabor $lesezeichen"
+              echo
+              echo '```'
+              cat "$RUNNER_TEMP/krieg_$lesezeichen.txt"
+              echo '```'
+            } >> "$GITHUB_STEP_SUMMARY"
+          done
+          exit "$status"
+
   formatierung:
     name: Formatierung
     runs-on: ubuntu-24.04

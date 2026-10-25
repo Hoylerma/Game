@@ -101,13 +101,15 @@ if(UHRWERK_BUILD_CLI)
         COMMAND uhrwerk-cli krieg --daten ${PROJECT_SOURCE_DIR}/data --szenario voelkerfruehling --seeds 1)
 
     # Kriegslesezeichen (seit M10b, militaer.md Abschnitt 6.1): Daten, ein kurzer Lauf des Krieges aus
-    # dem Lesezeichen und der Speichertest mitten im Krieg 1866.
+    # dem Lesezeichen und der Speichertest mitten im Krieg 1866. Der kurze Lauf prüft nur, dass das Labor
+    # rechnet; die Korridore (seit b2) prüft das Kriegslabor mit 16 Seeds in der CI.
     foreach(lesezeichen dueppel koeniggraetz sedan)
         add_test(NAME daten_pruefen_${lesezeichen}
             COMMAND uhrwerk-cli pruefen --daten ${PROJECT_SOURCE_DIR}/data --szenario ${lesezeichen})
         add_test(NAME krieg_${lesezeichen}
             COMMAND uhrwerk-cli krieg --daten ${PROJECT_SOURCE_DIR}/data --szenario ${lesezeichen} --seeds 1
                     --tage 60)
+        set_tests_properties(krieg_${lesezeichen} PROPERTIES PASS_REGULAR_EXPRESSION "Ausgang +Läufe +Anteil")
     endforeach()
     add_test(NAME speichertest_koeniggraetz
         COMMAND uhrwerk-cli speichertest --daten ${PROJECT_SOURCE_DIR}/data --szenario koeniggraetz --tage 90

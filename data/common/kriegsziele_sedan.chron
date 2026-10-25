@@ -1,8 +1,13 @@
 # Kriegsziele des Kriegslabors für das Lesezeichen sedan (M10b, Schritt b1), gelesen von
 # `uhrwerk-cli krieg` und `uhrwerk-cli pruefen`. Format: docs/technik/chronik-skript.md, Abschnitt 3.31.
-# Der Krieg kommt aus dem Lesezeichen (common/aufmarsch_sedan.chron); die Korridore setzt die Kalibrierung (b2).
+# Der Krieg kommt aus dem Lesezeichen (common/aufmarsch_sedan.chron).
+# Korridore (b2) nach militaer.md, Abschnitt 6.3: Die deutsche Seite (Verteidiger) gewinnt in
+# mindestens 75 % der Läufe, Dauer 2–10 Monate, kein Ausgang in allen Läufen.
 krieg sedan {
     angreifer   = FRK
     verteidiger = PRU
     tage        = 365
+    niederlage  = { 0.75 1 }
+    dauer       = { 60 300 }
+    offen       = ja
 }

@@ -34,7 +34,7 @@ constexpr int kZstdLevel = 3;
 /// Obergrenze der unkomprimierten Nutzdaten (Schutz vor beschädigten Längenangaben).
 constexpr std::uint64_t kMaxPayload = std::uint64_t{1} << 31;
 /// Stand des Militärs im Zustand (seit M10, Inhaltsbereich militaer): 1 = Schritt a1 (Garnisonen).
-constexpr std::uint64_t kMilitaryContentVersion = 6;
+constexpr std::uint64_t kMilitaryContentVersion = 7;
 
 bool fail(std::string* error, std::string message) {
     if (error != nullptr) {
@@ -1346,6 +1346,9 @@ ContentFingerprint content_fingerprint(const World& w) {
             h.u64(r.staff ? 1 : 0);
             // Lesezeichen im Krieg (seit b1): Führung, Aufmarsch, Kriege und Bündnisse zum Start, Hinterland.
             h.fixed(r.leadership);
+            h.fixed(r.staff_morale); // seit b2
+            h.fixed(r.victory_morale);
+            h.fixed(r.points_army_share);
             h.u64(w.deployments.size());
             for (const Deployment& d : w.deployments) {
                 h.text(d.id);
@@ -1375,6 +1378,10 @@ ContentFingerprint content_fingerprint(const World& w) {
                     h.u64(static_cast<std::uint64_t>(g.kind));
                     h.u64(g.attacker ? 1 : 0);
                     h.i64(g.param);
+                }
+                h.u64(o.occupied.size()); // seit b2
+                for (const Index u : o.occupied) {
+                    h.i64(u);
                 }
             }
             h.u64(w.opening_treaties.size());

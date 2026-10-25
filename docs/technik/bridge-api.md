@@ -93,6 +93,32 @@ zu der Großmacht, zu der seine Beziehung um mehr als 20 besser ist.
 | `manoeuvre(state_index: int, kind: int)` | `bool` | Manöver der Hauptpartei: `MANOEUVRE_YIELD` (0), `MANOEUVRE_MEDIATE` (1), `MANOEUVRE_ESCALATE` (2) (`Manoeuvre`-Befehl) |
 | `get_german_question()` | `Dictionary` | Anzeige „Die deutsche Frage“ (Abschnitt 4.6): `federal_population`, `customs_union_name` und `customs_union_percent` (Zollverein, Anteil der Bundesbevölkerung), `prussia_percent`, `austria_percent`, `undecided_percent` und `prussia_states`, `austria_states`, `undecided_states` (Lager nach Bevölkerung und Zahl), `reform_attempts`, `reform_accepted`, `leadership_prussia`, `leadership_austria`, `leadership_compromises` (Krisen um die Führung im Bund), `play_results` (je `{ text, demander_name, target_name, date_text, outcome_text }`), `treaties` (je `{ alliance, from_index, to_index, from_name, to_name, since_text }`) |
 
+### Militär (seit M10, Schritt b3)
+
+Regeln: [militaer.md](militaer.md), Abschnitte 3 bis 5 und 8. In Welten ohne Militär (1648) sind die
+Listen leer. Die Befehle prüfen vorab wie der Kern und reihen nur gültige Befehle ein; wirksam werden
+sie am nächsten Tag. `get_state` trägt seit b3 `military` (bool), `mobilization` (0 Frieden, 1 macht
+mobil, 2 mobil, 3 rüstet ab), `mobilization_text`, `in_war`, `soldiers_under_arms` und `peace_strength`.
+
+| Methode | Rückgabe | Beschreibung |
+|---|---|---|
+| `get_armies(state_index: int = -1)` | `Array` | Heere eines Staates (−1: alle), je `{ id, state_index, name, commander, leadership, location_index, soldiers, guns, morale (0–1), status (0 Garnison … 6 Rückzug, wie `ArmyStatus`), status_text, garrison (bool), staff (Generalstab), supplied, route (PackedInt32Array der Orte), destination_index (−1 ohne Weg), on_rail (der laufende Abschnitt auf der Bahn), days_left (des laufenden Abschnitts) }` |
+| `get_army(army_id: int)` | `Dictionary` | ein Heer wie in `get_armies`, leer ohne |
+| `get_route_preview(army_id: int, location_index: int)` | `Dictionary` | Weg ohne Befehl: `ok` (bool), `days`, `path` (PackedInt32Array bis zum Ziel), `rail_legs`, `arrival_text`; `ok == false` für Garnisonen, ohne Weg oder am eigenen Ort |
+| `order_march(army_id: int, location_index: int)` | `bool` | Marschbefehl (`March`); das Heer verlässt den Generalstab |
+| `set_army_staff(army_id: int, on: bool)` | `bool` | Heer dem Generalstab übergeben oder zurücknehmen (`Staff`); `false`, wenn es schon so steht |
+| `order_mobilization(state_index: int, mobilize: bool)` | `bool` | Mobilmachung oder Abrüstung (`Mobilization`); `false`, wenn schon so oder im Krieg (keine Abrüstung) |
+| `get_location_control()` | `PackedInt32Array` | wer jeden Ort hält (Staatsindex, −1 ohne Daten); weicht er von `get_location_owner_indices` ab, ist der Ort besetzt |
+| `get_battles()` | `Array` | laufende Schlachten `{ location_index, days, attacker_losses, defender_losses }` |
+| `get_sieges()` | `Array` | laufende Belagerungen `{ location_index, besieger_index, progress (0–1) }` |
+| `get_wars()` | `Array` | laufende Kriege `{ id, name (aus dem Aufmarsch, sonst „A gegen B“), attackers, defenders (Staatsindizes, Hauptpartei zuerst), started_text, goals (je `{ attacker, text, cost }`), attacker_score, defender_score, attacker_weariness, defender_weariness, attacker_cost, defender_cost (Kosten der Ziele), attacker_losses, defender_losses (erlittene), battles, player_side (1 Angreifer, −1 Verteidiger, 0), player_leads (Spielerstaat ist Hauptpartei) }` |
+| `get_declaration_goals(state_index: int, target: int)` | `Array` | gültige Kriegsziele einer Erklärung an `target` mit den Seiten des Bündnisfalls, je `{ code, kind, text, cost }`: Annexion je Staat der Gegenseite, Gebiete der beiden obersten Verwaltungsebenen, Führung im Bund, Zollunion, Entschädigung 3/6/12 Monate; leer, wenn keine Erklärung möglich ist |
+| `get_war_goal_options(state_index: int, war_id: int)` | `Array` | weitere Ziele der Hauptpartei in einem laufenden Krieg (wie oben) |
+| `declare_war(state_index: int, target: int, goal: int = 0)` | `bool` | Kriegserklärung (`DeclareWar`) mit einem `code` (0: ohne Ziel) |
+| `add_war_goal(state_index: int, war_id: int, goal: int)` | `bool` | weiteres Kriegsziel (`WarGoal`) |
+| `get_peace_preview(state_index: int, war_id: int, terms: int)` | `Dictionary` | Vorab-Prüfung (`PEACE_WHITE` 0, `PEACE_OWN_GOALS` 1, `PEACE_CAPITULATION` 2): `valid`, `accepted`, `text` („Österreich nähme an.“) |
+| `offer_peace(state_index: int, war_id: int, terms: int)` | `bool` | Friedensangebot (`PeaceOffer`); ein abgelehntes geht trotzdem hinaus (Chronik) |
+
 ### Spielstände (seit M6)
 
 Format, Prüfungen und Godot-Seite: [speicherstaende.md](speicherstaende.md). Pfade sind
@@ -124,15 +150,17 @@ Dateipfade des Betriebssystems (in GDScript `ProjectSettings.globalize_path("use
 | 12 | `MAP_WAHLEN` | seit M8: Parlament nach `get_shown_parliament`. Nach der Wahl die Farbe der siegreichen Strömung, vom Papierton (Anteil des Siegers 25 %) bis zur vollen Farbe (70 %); Boykott kühles Grau; vor der Wahl die Wahlkreise aus der Palette von `MAP_KREISE`, aufgehellt; außerhalb des Wahlgebiets Papierton; Orte ohne Daten Alpha 0. Die Grenzen der Wahlkreise zeichnet Godot aus `get_location_electoral_district_indices`; während des Wahlabends setzt Godot noch nicht gemeldete Wahlkreise auf Alpha 0 (Schraffur) |
 | 13 | `MAP_ZOLLGEBIETE` | seit M9: Zollunionen in ihrer Farbe (`farbe` in `common/zollunionen.chron`), Staaten ohne Union in der Staatsfarbe, zu 62 % mit Weiß gemischt; Orte ohne Daten Alpha 0. Ohne Zollunion im Szenario (1648) ist jeder Staat blass |
 | 14 | `MAP_BEZIEHUNGEN` | seit M9, Schritt b3: Beziehung des Besitzers zum Spielerstaat (`get_player_state_index`), vom Papierton (0) zu Grün (+100) bzw. Rot (−100); der Spielerstaat in seiner Farbe; Orte ohne Daten Alpha 0. Ohne Beziehungen (1648) alles Papierton |
+| 15 | `MAP_KRIEG` | seit M10, Schritt b3: Farbe dessen, der den Ort hält (`get_location_control`); Staaten ohne Krieg zu 60 % mit dem Papierton gemischt; Orte ohne Daten Alpha 0. Besetzte Orte schraffiert Godot in der Farbe des Besetzers, die Fronten sind die Grenzen der Kontrolle |
 
-**Orte ohne Daten** (seit M3) erhalten in den Modi 0, 1, 2, 4, 6, 7, 8, 10, 11, 12, 13 und 14 eine Farbe mit **Alpha 0**;
+**Orte ohne Daten** (seit M3) erhalten in den Modi 0, 1, 2, 4, 6, 7, 8, 10, 11, 12, 13, 14 und 15 eine Farbe mit **Alpha 0**;
 die Godot-Seite zeichnet dort eine Schraffur „keine Daten“. In den Modi 3 und 5 haben sie normale
 Farben (Alpha 1), im Modus 9 dann, wenn ihr Markt Orte mit Daten hat.
 
 **Steuerarten** (seit M5) sind als Konstanten `TAX_KONTRIBUTION` (0), `TAX_AKZISE` (1) und
 `TAX_ZOLL` (2) gebunden, die Kartenmodi als `MAP_*`, die Arten des Wahlkampfs (seit M8) als
 `CAMPAIGN_VERSAMMLUNG` (0), `CAMPAIGN_FLUGBLAETTER` (1) und `CAMPAIGN_VEREIN` (2), die Arten der
-Diplomatie (seit M9) als `TREATY_*`, `MOTION_*`, `DEMAND_*` und `MANOEUVRE_*` (Abschnitt Diplomatie).
+Diplomatie (seit M9) als `TREATY_*`, `MOTION_*`, `DEMAND_*` und `MANOEUVRE_*` (Abschnitt Diplomatie),
+die Friedensangebote (seit M10) als `PEACE_*` (Abschnitt Militär).
 
 **Threads (seit M4):** Die Brücke legt die Simulation mit `SimConfig::threads = 0` an, rechnet
 also auf allen Kernen. Das Ergebnis ist bei jeder Thread-Zahl gleich (bevoelkerung.md,

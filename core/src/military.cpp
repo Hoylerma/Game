@@ -187,13 +187,19 @@ bool start_leg(World& world, Army& army) {
 void move(World& world, Army& army) {
     army.days_left -= Fixed::one();
     while (army.days_left <= Fixed::zero() && !army.route.empty()) {
-        const std::size_t done = army.route.front().mode == LegMode::Rail ? rail_block(army) : 1;
+        const bool marching = army.route.front().mode == LegMode::March;
+        const std::size_t done = marching ? 1 : rail_block(army);
         army.previous = army.location;
         army.location = army.route[done - 1].location;
         army.days_here = 0;
         army.route.erase(army.route.begin(), army.route.begin() + static_cast<std::ptrdiff_t>(done));
         if (hostile_army_at(world, army.state, army.location)) {
             stop(army);
+        } else if (marching && army.status == ArmyStatus::March) {
+            occupy_on_passage(world, army); // seit b2
+            if (!army.route.empty() && !start_leg(world, army)) {
+                stop(army);
+            }
         } else if (!army.route.empty() && !start_leg(world, army)) {
             stop(army);
         }
@@ -479,6 +485,22 @@ void ensure_military_state(World& world) {
         if (start_war(world, opening.attackers, opening.defenders, opening.cause, opening.goals)) {
             War& war = world.wars.back();
             war.started = opening.started;
+            // Seit b2: Gebiete der Verteidiger, die die Angreifer zum Start besetzt halten.
+            for (const Index unit : opening.occupied) {
+                for (std::size_t l = 0; l < world.locations.size(); ++l) {
+                    const Index owner = world.locations[l].owner;
+                    if (std::find(war.defenders.begin(), war.defenders.end(), owner) == war.defenders.end()) {
+                        continue;
+                    }
+                    for (Index u = world.locations[l].admin; in_range(world.admin_units, u);
+                         u = world.admin_units[at(u)].parent) {
+                        if (u == unit) {
+                            world.control[l] = war.attackers.front();
+                            break;
+                        }
+                    }
+                }
+            }
         }
     }
 }

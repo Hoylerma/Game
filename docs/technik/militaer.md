@@ -282,7 +282,7 @@ Heer, dessen Garnison im Krieg unterging, wird mit der Abrüstung neu aufgestell
 - Ein gegnerischer Ort ohne gegnerisches Heer wird nach einem Tag **besetzt**: Er bleibt im Besitz
   seines Staates, wird aber von der anderen Seite kontrolliert. Seine Steuern fehlen dem Besitzer;
   die Hälfte geht als Kontribution an den Besetzer.
-- **Festungen** (Daten: Stufe 1–3, z. B. Düppel 2, Mainz 3, Metz 3, Straßburg 3) müssen belagert
+- **Festungen** (Daten: Stufe 1–3, z. B. Düppel 3, Mainz 3, Metz 3, Straßburg 3) müssen belagert
   werden: Tage = 30 × Stufe × Besatzung ÷ (Belagerer mit Geschützen), mindestens 10; ein Entsatzheer
   im Ort bricht die Belagerung. Die Besatzung ist Teil eines Heeres.
 - Befreit wird ein Ort durch ein eigenes Heer ohne Gegner.
@@ -389,7 +389,8 @@ wenn ein Heer dort ruht, Frieden nach Abschnitt 4.5.
 
 Die Regeln sind deterministisch; Unterschiede zwischen Läufen entstehen aus dem Zufall der
 Schlachten. Das genügt der Abnahme („plausibel, nicht festgelegt“); bessere Entscheidungen bringt
-die KI in M12.
+die KI in M12. Seit der Kalibrierung (b2) gelten die geänderten Regeln aus Abschnitt 6.3 (Kampfkraft,
+Sturm oder Einschließung, Sammeln, Rückzug in die stärkere Festung, Erholung).
 
 ## 6. Die Einigungskriege (M10b)
 
@@ -515,6 +516,61 @@ Verluste, gewechselte Orte) und je Krieg die Zahl der Schlachten. Kriegsziele 18
 (`kriegsziele_voelkerfruehling.chron`): Preußen gegen Sachsen um die Annexion, Sieg in 80–100 % der
 Läufe, Dauer 30–180 Tage; `offen` erst mit der Kalibrierung (b2). CTest `krieg_fixture` auf der
 Fixture mit Militärdaten (`tests/daten_krieg` über `tests/daten`): drei Kriege über 16 Seeds.
+
+Umsetzung (Schritt b2, Kalibrierung): Die drei Kriege liefen zuerst ins Leere (der Generalstab
+marschierte ohne Unterlass auf ferne Hauptstädte, Heere zogen aneinander vorbei, kleine Ersatzheere
+entschieden Kriege, Festungen schützten ihre Verteidiger nicht). Geändert haben sich Regeln, keine
+Kriegsziele der Spieler:
+
+- **Generalstab** (Abschnitt 5) rechnet mit Kampfkraft (Abschnitt 4.2) statt Soldaten, Gegner in einer
+  Festung, die sie halten, mal deren Faktor. Ein Ziel kann er nehmen, wenn die Kampfkraft im Umkreis
+  die der Gegner um `generalstab_angriff` übertrifft (Sturm) oder, bei einer Festung, die Soldaten um so
+  viel (Einschließung). Angriff auf das nächste gegnerische Heer in Reichweite, das er nehmen kann,
+  sofern keine Übermacht näher steht; mit einer Übermacht in Reichweite rückt er nicht vor, sondern
+  sammelt sich beim stärksten eigenen Heer; Ziele des Vormarschs nur in Reichweite (`generalstab_
+  reichweite_km` 150), sonst der nächste Ort überhaupt (Vormarsch an die Front); je Stufe der nächste
+  Ort ohne Übermacht. Rückzug vor doppelter Übermacht oder mit Moral unter `generalstab_moral` (0,5)
+  bei Gegnern im Umkreis: in die nächste stärkere eigene Festung, die weiter vom Gegner liegt (aus
+  einer Festung schon vor der Übermacht, die einschließen würde: 1864 vom Danewerk nach Düppel), sonst
+  hält das Heer eine Festung in einem Gebiet, das der Gegner fordert, oder geht zum stärksten eigenen
+  Heer in Reichweite, zuletzt in die Hauptstadt. Unter `generalstab_moral` ohne Gegner erholt es sich.
+  Ein eingeschlossenes Heer bleibt.
+- **Besetzung im Vorbeimarsch** (Abschnitt 4.3): Ein Heer auf dem Marsch nimmt einen Ort ohne Festung
+  und ohne Heer der Gegenseite bei der Ankunft und beim Abmarsch nach einem vollen Tag.
+- **Einschließung** (4.3): Ein Heer in einer Festung, das die Angreifer an Soldaten um
+  `generalstab_angriff` übertreffen, an Kampfkraft aber nicht um so viel über den Festungsfaktor
+  hinaus, wird nicht gestürmt, sondern mit der Festung belagert (seine Soldaten zählen zur Besatzung)
+  und ergibt sich mit ihr in Gefangenschaft. Die Festung mindert seit b2 auch die **Verluste** der
+  Verteidiger (÷ Festungsfaktor).
+- **Moral** (4.2): Die Sieger einer Schlacht gewinnen `moral_sieg` (0,3) zurück; `moral_erholung`
+  0,04.
+- **Kriegspunkte und Frieden** (4.5): Ein vernichtetes Heer zählt nur ab `punkte_heer_anteil` (0,1)
+  der Kriegsstärke seiner Seite; Gebiets- und Annexionsziele kosten nach dem Anteil an der Bevölkerung
+  der Gegenseite **mit** Hinterland (`ziel_annexion` 80 nur für die ganze Gegenseite); Frieden nach
+  Regel auch, wenn die Kriegsmüdigkeit der Gegenseite die Kosten der Ziele erreicht (wie beim
+  Friedensangebot). Ein Staat mit Hinterland geht ohne Orte nicht unter, er **verlässt die Karte**
+  (Kasse und Schulden bleiben bei ihm). Regeln: `ziel_gebiet_mindestens` 5, `ziel_fuehrung` 20,
+  `muedigkeit_besetzung` 100.
+- **Aufmarsch:** `besetzt = { gebiet = … }` im Krieg zum Start (chronik-skript.md 3.32): 1864 halten
+  die Verbündeten Holstein und Lauenburg seit der Bundesexekution.
+- **Daten:** dänische Armee 31.000 (mit der Besatzung des Danewerks 38.000), Düppel Stufe 3;
+  1866 die II. Armee bei Landeshut, Österreich Bewaffnung 1,2 und Führung Benedeks 1,0, österreichische
+  Ziele Schlesien und zwei Monatseinnahmen; 1870 französische Ziele Pfalz und neun Monatseinnahmen.
+
+Ergebnis über 16 Seeds (`kriegsziele_<lesezeichen>.chron`, CI-Schritt „Kriegslabor Lesezeichen“):
+
+| Lesezeichen | Ausgang | Dauer (Median, 5–95 %) | Korridor |
+|---|---|---|---|
+| Düppel | Preußen siegt 16 von 16 | 90 (60–90) Tage | Sieg 80–100 %, Dauer 60–270 Tage |
+| Königgrätz | Preußen siegt 11, Österreich 5 | 107 (77–138) Tage | Sieg 60–90 %, Dauer 21–112 Tage, offen |
+| Sedan | die deutsche Seite siegt 14, Frankreich 2 | 197 (135–347) Tage | Niederlage des Angreifers 75–100 %, Dauer 60–300 Tage, offen |
+
+Abweichung: **Düppel** ohne `offen`: Dänemark verliert Schleswig in allen Läufen; auf der Karte hat es
+nur die Herzogtümer, deren Besetzung seine Kriegsmüdigkeit in zwei bis drei Monaten über die Kosten
+hebt. Die Läufe unterscheiden sich im Verlauf (Sturm auf Düppel oder Einschließung) und in der Dauer.
+Ebenso 1848 (Preußen annektiert Sachsen in 16 von 16 Läufen nach 31 Tagen). Ein Spiel ab 1848 rechnet
+ohne Befehle bitgleich zu b1 (keine Kriege). Die Fixture `tests/daten_krieg` hält das neue Verhalten
+fest (Brandenburg mit Mobilmachung 2, Sachsen siegt am ersten Monatsersten).
 
 ## 7. Zustand, Kern und Spielstand
 
@@ -643,3 +699,4 @@ Weitere Tests:
 | a4 Frieden und Generalstab | Kriegsziele (Gebiet, Annexion, Führung im Bund, Zollunion, Entschädigung) mit der Erklärung oder dem Befehl `Kriegsziel`, Kosten in Kriegspunkten; Kriegspunkte aus Besetzung, Hauptstadt, Schlachtbilanz und vernichteten Heeren; Kriegsmüdigkeit aus Verlusten, Besetzung und Dauer. Befehl `Friedensangebot` mit Annahme nach Regel, Frieden am Monatsersten nach Regel (Ziele gedeckt, Erschöpfung, 12 Monate Stillstand). Wirkung: Besitzwechsel, Untergang von Staaten (Heere, Verträge, Gesandte, Kasse und Schulden an den Erwerber, Abschied aus dem Bund), Austritt aus dem Bund oder seine Auflösung, Beitritt zur Zollunion, Zahlung; Gefangene heim, Besetzung aufgehoben, Heimkehr, Abrüstung, neue Hauptstadt, Neuaufbau der abgeleiteten Daten. Generalstab nach Regel (Befehl `Generalstab`, eigener Marsch übernimmt das Heer). Regeln in `common/militaer.chron` (1848 mit Generalstab), Inhaltsbereich `militaer` Stand 4, Zustand: Ziele und Bilanz je Krieg, Generalstab je Heer, Austritt aus dem Bund; Testbefehle mit Zielen, Angeboten und Generalstab. Probelauf 1848: Preußen annektiert Sachsen nach zwei Monaten; Preußen gegen Österreich um die Führung endet nach 13 Monaten erschöpft ohne Gewinner (Kalibrierung in b2). Tests: Ziele und Kosten, Punkte und Angebote mit Annexion und Untergang, Gebiet, Entschädigung, Stillstand, Auflösung des Bundes, Generalstab mit Lauf ohne Spieler, Threads, Spielstand und Wiederholung. 1648 bitgleich, 1848 ohne Befehle zeichengleich. |
 | a5 Kriegslabor | `uhrwerk-cli krieg` (Seeds, `--ziele`, `--tage`) mit Kriegszielen in `common/kriegsziele_<szenario>.chron` (chronik-skript.md 3.31): je Krieg und Seed ein Lauf ohne Spieler bis zum Frieden, Bericht je Lauf (Ausgang, Tage, Schlachten, Verluste, Orte, Schulden, Friedensschluss) und Verteilung über die Läufe, Verstöße mit Exitcode 1; `pruefen` prüft die Datei. Kern: `war_lab.hpp`, Ergebnis je beendetem Krieg im Zustand (`kriegsergebnisse`), Schlachten je Krieg, Inhaltsbereich `militaer` Stand 5. Kriegsziele 1848: Preußen gegen Sachsen (Sieg in 16 von 16 Läufen nach 61 Tagen im Median, 103 Orte). Fixture mit Militärdaten `tests/daten_krieg` (Nachbarschaft, Fähre, Generalstab, Festung Dresden) und drei Kriegen; CTests `pruefen_krieg_fixture`, `krieg_fixture` (16 Seeds), `krieg_1848`; CI-Schritt „Kriegslabor 1848“ (16 Seeds) im Job „Balancing“. Tests: Leser mit Fehlern, Lauf bis zum Frieden und mit Höchstdauer, gleiche Ergebnisse mit Threads, Ergebnis im Zustand, Zusammenfassung mit Verstößen. 1648 bitgleich, 1848 ohne Befehle zeichengleich. |
 | b1 Daten 1849–1870 und Kriegslesezeichen | Kern (b1a): Aufmarsch je Lesezeichen in `common/aufmarsch_<szenario>.chron` (chronik-skript.md 3.32) mit Heeren (Befehlshaber, Führung), Kriegen zum Start mit Zielen beider Seiten, Bündnissen und Garantien; Regel `fuehrung`; Hinterland je Staat (Einnahmen, Ersatz am Kartenrand, Bevölkerung bei Besetzung und Kriegspunkten); Auflösung der Aufmarschheere nach dem Frieden; Kriegsstärke mindestens die Soldaten unter Waffen; `uhrwerk-cli info` mit Aufmarsch, Kriegen und Hinterland; das Kriegslabor beobachtet Kriege aus dem Lesezeichen. Inhaltsbereich `militaer` Stand 6. Tests: Aufmarsch, Bündnis und Krieg zum Start, Hinterland, Führung, Auflösung, Spielstand und Wiederholung, Ladefehler. Daten (b1b): Historie 1849–1870 mit `historie_1849_1870.py` und `aenderungen_1849_1870.csv` (38 Änderungen), Frankreich mit 217 Orten ab 1849, Bundesrat des Norddeutschen Bundes, `bis` bei Bundesversammlung, Zollunion und Parlament; 1648 bitgleich, 1848 zeichengleich. Eisenbahnen (b1c): 62 Strecken mit 185 Abschnitten 1849–1870, ein Spiel ab 1848 bekommt sie zur Eröffnung (Korridore 1848 erfüllt). Militärdaten (b1d): Heerwesen 1859–1867, Garnisonen IX.–XII. Korps und Frankreich, Danewerk, Düppel und 13 französische Festungen, Hinterland Frankreich und Dänemark, Regel `fuehrung` 0,2. Lesezeichen (b1e): `dueppel`, `koeniggraetz`, `sedan` mit Aufmarsch (4, 15 und 14 Heere), Kriegen und Zielen beider Seiten, Bündnissen; Kriegsziele-Dateien ohne Korridore (b2). CTests `daten_pruefen_<lesezeichen>`, `krieg_<lesezeichen>` (ein Seed, 60 Tage) und `speichertest_koeniggraetz`. 1648 bitgleich. |
+| b2 Kalibrierung | Kern: Generalstab mit Kampfkraft, Sturm oder Einschließung, Sammeln, Rückzug in die stärkere Festung, Halten der geforderten Festung, Erholung unter `generalstab_moral`; Besetzung im Vorbeimarsch; Einschließung eines Heeres in der Festung mit Kapitulation; Festung mindert die Verluste der Verteidiger; `moral_sieg`; vernichtete Heere ab `punkte_heer_anteil`; Gebiet und Annexion nach dem Anteil der Gegenseite mit Hinterland; Frieden nach Regel bei Müdigkeit ≥ Kosten; ein Staat mit Hinterland verlässt die Karte; `besetzt` im Aufmarsch. Daten: Regeln und Aufmarsch (Abschnitt 6.3), Korridore in `kriegsziele_<lesezeichen>.chron`: Düppel 16/16 in 90 Tagen, Königgrätz 11/16 in 107 Tagen, Sedan 14/16 für die deutsche Seite in 197 Tagen; Düppel ohne `offen` (Abweichung, Abschnitt 6.3). CI-Schritt „Kriegslabor Lesezeichen“, CTests `krieg_<lesezeichen>` prüfen nur den Lauf. Inhaltsbereich `militaer` Stand 7. Tests: Einschließung und Kapitulation, Moral nach Sieg und vor dem Vorrücken, Annexionskosten, Frieden bei Müdigkeit, besetzte Gebiete zum Start, Staat mit Hinterland verlässt die Karte, Ladefehler `besetzt`. 1648 bitgleich, 1848 ohne Befehle bitgleich zu b1. |

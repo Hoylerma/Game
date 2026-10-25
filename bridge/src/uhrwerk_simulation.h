@@ -47,6 +47,7 @@ public:
         MAP_WAHLEN = 12,        // seit M8
         MAP_ZOLLGEBIETE = 13,   // seit M9
         MAP_BEZIEHUNGEN = 14,   // seit M9 (b3)
+        MAP_KRIEG = 15,         // seit M10 (b3)
     };
 
     /// Steuerarten für set_tax_percent (seit M5, wie uhrwerk::TaxKind).
@@ -80,6 +81,13 @@ public:
         MANOEUVRE_YIELD = 0,
         MANOEUVRE_MEDIATE = 1,
         MANOEUVRE_ESCALATE = 2,
+    };
+
+    /// Bedingungen eines Friedensangebots (seit M10, Schritt b3, wie uhrwerk::PeaceTerms).
+    enum PeaceKind : std::int64_t {
+        PEACE_WHITE = 0,
+        PEACE_OWN_GOALS = 1,
+        PEACE_CAPITULATION = 2,
     };
 
     static constexpr std::int64_t kMaxAdvanceDays = 3660;
@@ -158,6 +166,25 @@ public:
     bool manoeuvre(std::int64_t state_index, std::int64_t kind);
     godot::Dictionary get_german_question() const;
 
+    // Militär (seit M10, Schritt b3, militaer.md Abschnitt 8)
+    godot::Array get_armies(std::int64_t state_index) const;
+    godot::Dictionary get_army(std::int64_t army_id) const;
+    godot::Dictionary get_route_preview(std::int64_t army_id, std::int64_t location_index) const;
+    bool order_march(std::int64_t army_id, std::int64_t location_index);
+    bool set_army_staff(std::int64_t army_id, bool on);
+    bool order_mobilization(std::int64_t state_index, bool mobilize);
+    godot::PackedInt32Array get_location_control() const;
+    godot::Array get_battles() const;
+    godot::Array get_sieges() const;
+    godot::Array get_wars() const;
+    godot::Array get_declaration_goals(std::int64_t state_index, std::int64_t target) const;
+    godot::Array get_war_goal_options(std::int64_t state_index, std::int64_t war_id) const;
+    bool declare_war(std::int64_t state_index, std::int64_t target, std::int64_t goal);
+    bool add_war_goal(std::int64_t state_index, std::int64_t war_id, std::int64_t goal);
+    godot::Dictionary get_peace_preview(std::int64_t state_index, std::int64_t war_id,
+                                        std::int64_t terms) const;
+    bool offer_peace(std::int64_t state_index, std::int64_t war_id, std::int64_t terms);
+
     // Parteienmodus (seit M8, Schritt b2, politik.md Abschnitt 9)
     bool campaign(std::int64_t current, std::int64_t district, std::int64_t action);
     godot::Dictionary get_party(std::int64_t current) const;
@@ -220,3 +247,4 @@ VARIANT_ENUM_CAST(uhrwerk_bridge::UhrwerkSimulation::MapMode);
 VARIANT_ENUM_CAST(uhrwerk_bridge::UhrwerkSimulation::TaxKind);
 VARIANT_ENUM_CAST(uhrwerk_bridge::UhrwerkSimulation::CampaignKind);
 VARIANT_ENUM_CAST(uhrwerk_bridge::UhrwerkSimulation::DiplomacyKind);
+VARIANT_ENUM_CAST(uhrwerk_bridge::UhrwerkSimulation::PeaceKind);

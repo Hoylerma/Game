@@ -45,6 +45,11 @@ const MANOEUVRE_YIELD := 0
 const MANOEUVRE_MEDIATE := 1
 const MANOEUVRE_ESCALATE := 2
 
+## Friedensangebote (seit M10, Schritt b3, wie PEACE_* der Brücke).
+const PEACE_WHITE := 0
+const PEACE_OWN_GOALS := 1
+const PEACE_CAPITULATION := 2
+
 ## Alle Methoden, die die Oberfläche benutzt.
 const REQUIRED_METHODS: Array[StringName] = [
 	&"load_scenario",
@@ -101,6 +106,22 @@ const REQUIRED_METHODS: Array[StringName] = [
 	&"make_demand",
 	&"manoeuvre",
 	&"get_german_question",
+	&"get_armies",
+	&"get_army",
+	&"get_route_preview",
+	&"order_march",
+	&"set_army_staff",
+	&"order_mobilization",
+	&"get_location_control",
+	&"get_battles",
+	&"get_sieges",
+	&"get_wars",
+	&"get_declaration_goals",
+	&"get_war_goal_options",
+	&"declare_war",
+	&"add_war_goal",
+	&"get_peace_preview",
+	&"offer_peace",
 	&"campaign",
 	&"get_party",
 	&"get_campaign",
@@ -494,6 +515,94 @@ func manoeuvre(state_index: int, kind: int) -> bool:
 ## Verträge; leer ohne Diplomatie.
 func get_german_question() -> Dictionary:
 	return _as_dictionary(_native.call(&"get_german_question"))
+
+
+## Militär (seit M10, Schritt b3, bridge-api.md): Heere eines Staates (-1: alle), je { id, state_index,
+## name, commander, leadership, location_index, soldiers, guns, morale, status, status_text, garrison,
+## staff, supplied, route, destination_index, on_rail, days_left }.
+func get_armies(state_index: int = -1) -> Array[Dictionary]:
+	return _as_dictionaries(_native.call(&"get_armies", state_index))
+
+
+## Ein Heer wie in get_armies; leer, wenn es nicht (mehr) besteht.
+func get_army(army_id: int) -> Dictionary:
+	return _as_dictionary(_native.call(&"get_army", army_id))
+
+
+## Weg eines Heeres zum Ort ohne Befehl: { ok, days, path, rail_legs, arrival_text }.
+func get_route_preview(army_id: int, location_index: int) -> Dictionary:
+	return _as_dictionary(_native.call(&"get_route_preview", army_id, location_index))
+
+
+## Marschbefehl für den nächsten Tag; das Heer verlässt den Generalstab. false ohne Weg.
+func order_march(army_id: int, location_index: int) -> bool:
+	return bool(_native.call(&"order_march", army_id, location_index))
+
+
+## Heer dem Generalstab übergeben (on) oder zurücknehmen. false, wenn schon so.
+func set_army_staff(army_id: int, on: bool) -> bool:
+	return bool(_native.call(&"set_army_staff", army_id, on))
+
+
+## Mobilmachung (mobilize) oder Abrüstung; false, wenn schon so oder im Krieg.
+func order_mobilization(state_index: int, mobilize: bool) -> bool:
+	return bool(_native.call(&"order_mobilization", state_index, mobilize))
+
+
+## Wer jeden Ort hält (Staatsindex, -1 ohne Daten); weicht er vom Besitzer ab, ist der Ort besetzt.
+func get_location_control() -> PackedInt32Array:
+	var control: Variant = _native.call(&"get_location_control")
+	if control is PackedInt32Array:
+		return control
+	return PackedInt32Array()
+
+
+## Laufende Schlachten: je { location_index, days, attacker_losses, defender_losses }.
+func get_battles() -> Array[Dictionary]:
+	return _as_dictionaries(_native.call(&"get_battles"))
+
+
+## Laufende Belagerungen: je { location_index, besieger_index, progress }.
+func get_sieges() -> Array[Dictionary]:
+	return _as_dictionaries(_native.call(&"get_sieges"))
+
+
+## Laufende Kriege: je { id, name, attackers, defenders, started_text, goals, attacker_score,
+## defender_score, attacker_weariness, defender_weariness, attacker_cost, defender_cost,
+## attacker_losses, defender_losses, battles, player_side, player_leads }.
+func get_wars() -> Array[Dictionary]:
+	return _as_dictionaries(_native.call(&"get_wars"))
+
+
+## Mögliche Kriegsziele einer Erklärung an target: je { code, kind, text, cost }; leer, wenn keine
+## Erklärung möglich ist.
+func get_declaration_goals(state_index: int, target: int) -> Array[Dictionary]:
+	return _as_dictionaries(_native.call(&"get_declaration_goals", state_index, target))
+
+
+## Weitere Kriegsziele der Hauptpartei in einem laufenden Krieg (wie get_declaration_goals).
+func get_war_goal_options(state_index: int, war_id: int) -> Array[Dictionary]:
+	return _as_dictionaries(_native.call(&"get_war_goal_options", state_index, war_id))
+
+
+## Kriegserklärung mit einem Kriegsziel (code aus get_declaration_goals, 0: keines).
+func declare_war(state_index: int, target: int, goal: int = 0) -> bool:
+	return bool(_native.call(&"declare_war", state_index, target, goal))
+
+
+## Weiteres Kriegsziel stellen; false, wenn ungültig.
+func add_war_goal(state_index: int, war_id: int, goal: int) -> bool:
+	return bool(_native.call(&"add_war_goal", state_index, war_id, goal))
+
+
+## Vorab-Prüfung eines Friedensangebots PEACE_*: { valid, accepted, text }.
+func get_peace_preview(state_index: int, war_id: int, terms: int) -> Dictionary:
+	return _as_dictionary(_native.call(&"get_peace_preview", state_index, war_id, terms))
+
+
+## Friedensangebot für den nächsten Tag; false, wenn ungültig.
+func offer_peace(state_index: int, war_id: int, terms: int) -> bool:
+	return bool(_native.call(&"offer_peace", state_index, war_id, terms))
 
 
 ## Wahlkampf der Strömung current im Wahlkreis district (seit M8): Befehl für den nächsten Tag;

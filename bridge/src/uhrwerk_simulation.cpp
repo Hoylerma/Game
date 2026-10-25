@@ -92,9 +92,11 @@ constexpr double kCustomsAlone = 0.62;             // Zollgebiete (seit M9): Sta
 const Color kRelationNeutral(0.94f, 0.91f, 0.83f); // Beziehungen (seit M9, b3): 0 …
 const Color kRelationFriend(0.24f, 0.52f, 0.30f);  // … +100 und mehr
 const Color kRelationFoe(0.70f, 0.16f, 0.10f);     // … −100 und weniger
-constexpr double kRelationScale = 100.0;           // volle Farbe ab diesem Betrag
-constexpr double kDensityMax = 120.0;              // Einwohner je km², ab hier dunkelste Stufe
-constexpr double kEconomyMax = 16.0;               // Reichstaler je Einwohner und Jahr, dunkelste Stufe
+constexpr double kRelationScale = 100.0;
+constexpr double kWarNeutral =
+    0.6; // Krieg (seit M10, b3): Staaten ohne Krieg blass           // volle Farbe ab diesem Betrag
+constexpr double kDensityMax = 120.0; // Einwohner je km², ab hier dunkelste Stufe
+constexpr double kEconomyMax = 16.0;  // Reichstaler je Einwohner und Jahr, dunkelste Stufe
 
 // Feste Palette für MAP_KREISE: palette[kreisindex % n]. Gedämpfte, gut unterscheidbare Töne;
 // aufeinanderfolgende Einträge liegen weit auseinander (CIELAB ΔE ≥ 37), alle mindestens
@@ -634,6 +636,21 @@ std::int64_t UhrwerkSimulation::get_player_state_index() const {
 
 namespace {
 
+/// Phase der Mobilmachung als Text (seit M10, b3).
+String mobilization_text(uhrwerk::MobilizationPhase phase) {
+    switch (phase) {
+    case uhrwerk::MobilizationPhase::Peace:
+        return to_godot("Frieden");
+    case uhrwerk::MobilizationPhase::Mobilizing:
+        return to_godot("macht mobil");
+    case uhrwerk::MobilizationPhase::Mobilized:
+        return to_godot("mobil");
+    case uhrwerk::MobilizationPhase::Demobilizing:
+        return to_godot("rüstet ab");
+    }
+    return String();
+}
+
 Dictionary scenario_to_godot(const uhrwerk::Scenario& scenario) {
     Dictionary result;
     result["id"] = to_godot(scenario.id);
@@ -789,6 +806,14 @@ Dictionary UhrwerkSimulation::get_state(std::int64_t index) const {
     result["bankruptcies"] = static_cast<std::int64_t>(state.bankruptcies);
     result["premium_months"] = static_cast<std::int64_t>(state.premium_months);
     result["politik"] = !w->parliaments.empty(); // seit M8: get_state_politics hat Angaben
+    // Militär (seit M10, b3): Mobilmachung, Krieg und Soldaten unter Waffen.
+    result["military"] = uhrwerk::military_active(*w);
+    const uhrwerk::MobilizationPhase phase = uhrwerk::mobilization_phase(*w, state_index);
+    result["mobilization"] = static_cast<std::int64_t>(phase);
+    result["mobilization_text"] = mobilization_text(phase);
+    result["in_war"] = uhrwerk::in_war(*w, state_index);
+    result["soldiers_under_arms"] = uhrwerk::state_soldiers(*w, state_index).round();
+    result["peace_strength"] = uhrwerk::peace_strength(*w, state_index).round();
     return result;
 }
 
@@ -1174,7 +1199,7 @@ PackedColorArray UhrwerkSimulation::get_map_colors(std::int64_t mode) const {
     if (!w) {
         return colors;
     }
-    ERR_FAIL_COND_V_MSG(mode < MAP_POLITICAL || mode > MAP_BEZIEHUNGEN, colors,
+    ERR_FAIL_COND_V_MSG(mode < MAP_POLITICAL || mode > MAP_KRIEG, colors,
                         "get_map_colors: unbekannter Kartenmodus.");
 
     const auto count = static_cast<std::int64_t>(w->locations.size());
@@ -1314,6 +1339,19 @@ PackedColorArray UhrwerkSimulation::get_map_colors(std::int64_t mode) const {
                 }
             }
             break;
+        case MAP_KRIEG: {
+            // Krieg (seit M10, b3): Farbe dessen, der den Ort hält; Staaten im Krieg kräftig, die übrigen
+            // blass. Besetzte Orte schraffiert Godot nach get_location_control, die Fronten sind die
+            // Grenzen der Kontrolle.
+            const uhrwerk::Index holder = uhrwerk::controller(*w, static_cast<uhrwerk::Index>(i));
+            if (valid_index(w->states, holder)) {
+                color = to_godot(at(w->states, holder).color);
+                if (!uhrwerk::in_war(*w, holder)) {
+                    color = blend(color, kRelationNeutral, kWarNeutral);
+                }
+            }
+            break;
+        }
         default:
             break;
         }
@@ -2026,6 +2064,403 @@ Dictionary UhrwerkSimulation::get_german_question() const {
     return result;
 }
 
+// ─── Militär (seit M10, Schritt b3) ─────────────────────────────────────────
+
+namespace {
+
+String army_status_text(uhrwerk::ArmyStatus status) {
+    switch (status) {
+    case uhrwerk::ArmyStatus::Garrison:
+        return to_godot("in der Garnison");
+    case uhrwerk::ArmyStatus::Rest:
+        return to_godot("in Ruhe");
+    case uhrwerk::ArmyStatus::March:
+        return to_godot("auf dem Marsch");
+    case uhrwerk::ArmyStatus::Rail:
+        return to_godot("auf der Bahn");
+    case uhrwerk::ArmyStatus::Battle:
+        return to_godot("in der Schlacht");
+    case uhrwerk::ArmyStatus::Siege:
+        return to_godot("belagert eine Festung");
+    case uhrwerk::ArmyStatus::Retreat:
+        return to_godot("auf dem Rückzug");
+    }
+    return String();
+}
+
+Dictionary army_to_godot(const uhrwerk::World& w, const uhrwerk::Army& army) {
+    Dictionary result;
+    result["id"] = army.id;
+    result["state_index"] = army.state;
+    result["name"] = to_godot(army.name);
+    result["commander"] = to_godot(army.commander);
+    result["leadership"] = army.leadership.to_double();
+    result["location_index"] = army.location;
+    result["soldiers"] = army.soldiers.round();
+    result["guns"] = army.guns.round();
+    result["morale"] = army.morale.to_double();
+    result["status"] = static_cast<std::int64_t>(army.status);
+    result["status_text"] = army_status_text(army.status);
+    result["garrison"] = army.status == uhrwerk::ArmyStatus::Garrison;
+    result["staff"] = army.staff;
+    result["supplied"] = army.status == uhrwerk::ArmyStatus::Garrison || uhrwerk::supplied(w, army);
+    PackedInt32Array route;
+    bool rail = false;
+    for (const uhrwerk::RouteStep& step : army.route) {
+        route.push_back(static_cast<std::int32_t>(step.location));
+    }
+    if (!army.route.empty()) {
+        rail = army.route.front().mode != uhrwerk::LegMode::March;
+    }
+    result["route"] = route;
+    result["destination_index"] = army.route.empty() ? std::int64_t{-1} : army.route.back().location;
+    result["on_rail"] = rail;
+    result["days_left"] = army.days_left.to_double();
+    return result;
+}
+
+/// Name eines Krieges: der Name aus dem Aufmarsch, wenn er derselbe Krieg ist, sonst „A gegen B“.
+String war_name(const uhrwerk::World& w, const uhrwerk::War& war) {
+    for (const uhrwerk::OpeningWar& opening : w.opening_wars) {
+        if (!opening.attackers.empty() && !opening.defenders.empty() &&
+            opening.attackers.front() == war.attackers.front() &&
+            opening.defenders.front() == war.defenders.front() && opening.started == war.started) {
+            return to_godot(opening.name);
+        }
+    }
+    return to_godot(at(w.states, war.attackers.front()).short_name + " gegen " +
+                    at(w.states, war.defenders.front()).short_name);
+}
+
+Array state_indices(const std::vector<uhrwerk::Index>& states) {
+    Array result;
+    for (const uhrwerk::Index s : states) {
+        result.push_back(s);
+    }
+    return result;
+}
+
+/// Mögliche Kriegsziele einer Seite: Annexion je Staat der Gegenseite, Gebiete der beiden obersten
+/// Ebenen, Führung im Bund, Beitritt zur Zollunion, Entschädigung von 3, 6 und 12 Monatseinnahmen;
+/// nur gültige, mit Kosten.
+Array goal_options(const uhrwerk::World& w, const uhrwerk::War& war, bool attacker) {
+    Array result;
+    const auto add = [&](uhrwerk::WarGoalKind kind, uhrwerk::Index param) {
+        const uhrwerk::WarGoal goal{kind, attacker, param};
+        if (!uhrwerk::valid_war_goal(w, war, goal)) {
+            return;
+        }
+        Dictionary entry;
+        entry["code"] = uhrwerk::encode_war_goal(kind, param);
+        entry["kind"] = static_cast<std::int64_t>(kind);
+        entry["text"] = to_godot(uhrwerk::war_goal_text(w, war, goal));
+        entry["cost"] = uhrwerk::war_goal_cost(w, war, goal).to_double();
+        result.push_back(entry);
+    };
+    for (const uhrwerk::Index s : attacker ? war.defenders : war.attackers) {
+        add(uhrwerk::WarGoalKind::Annexation, s);
+    }
+    for (std::size_t u = 0; u < w.admin_units.size(); ++u) {
+        const uhrwerk::Index parent = w.admin_units[u].parent;
+        if (parent == uhrwerk::kNone || at(w.admin_units, parent).parent == uhrwerk::kNone) {
+            add(uhrwerk::WarGoalKind::Territory, static_cast<uhrwerk::Index>(u));
+        }
+    }
+    add(uhrwerk::WarGoalKind::Leadership, 0);
+    add(uhrwerk::WarGoalKind::Customs, 0);
+    for (const uhrwerk::Index months : {3, 6, 12}) {
+        add(uhrwerk::WarGoalKind::Indemnity, months);
+    }
+    return result;
+}
+
+} // namespace
+
+Array UhrwerkSimulation::get_armies(std::int64_t state_index) const {
+    Array result;
+    const uhrwerk::World* w = world();
+    if (!w) {
+        return result;
+    }
+    for (const uhrwerk::Army& army : w->armies) {
+        if (state_index < 0 || army.state == state_index) {
+            result.push_back(army_to_godot(*w, army));
+        }
+    }
+    return result;
+}
+
+Dictionary UhrwerkSimulation::get_army(std::int64_t army_id) const {
+    const uhrwerk::World* w = world();
+    const uhrwerk::Army* army = w ? uhrwerk::find_army(*w, army_id) : nullptr;
+    return army ? army_to_godot(*w, *army) : Dictionary();
+}
+
+Dictionary UhrwerkSimulation::get_route_preview(std::int64_t army_id, std::int64_t location_index) const {
+    Dictionary result;
+    result["ok"] = false;
+    const uhrwerk::World* w = world();
+    const uhrwerk::Army* army = w ? uhrwerk::find_army(*w, army_id) : nullptr;
+    if (!army || army->status == uhrwerk::ArmyStatus::Garrison ||
+        !valid_index(w->locations, location_index)) {
+        return result;
+    }
+    const std::optional<uhrwerk::Route> route =
+        uhrwerk::find_route(*w, *army, static_cast<uhrwerk::Index>(location_index));
+    if (!route) {
+        return result;
+    }
+    PackedInt32Array path;
+    std::int64_t rail_legs = 0;
+    for (const uhrwerk::RouteStep& step : route->steps) {
+        path.push_back(static_cast<std::int32_t>(step.location));
+        rail_legs += step.mode != uhrwerk::LegMode::March ? 1 : 0;
+    }
+    result["ok"] = true;
+    result["days"] = route->days.to_double();
+    result["path"] = path;
+    result["rail_legs"] = rail_legs;
+    const std::int64_t whole = route->days.trunc();
+    const std::int64_t days = whole + (route->days > uhrwerk::Fixed::from_int(whole) ? 1 : 0);
+    result["arrival_text"] =
+        to_godot(uhrwerk::format_date_long(uhrwerk::from_day_number(uhrwerk::to_day_number(w->date) + days)));
+    return result;
+}
+
+bool UhrwerkSimulation::order_march(std::int64_t army_id, std::int64_t location_index) {
+    const uhrwerk::World* w = world();
+    const uhrwerk::Army* army = w ? uhrwerk::find_army(*w, army_id) : nullptr;
+    if (!army || !bool(get_route_preview(army_id, location_index)["ok"])) {
+        return false;
+    }
+    uhrwerk::Command command;
+    command.type = uhrwerk::CommandType::March;
+    command.state = army->state;
+    command.target = static_cast<uhrwerk::Index>(location_index);
+    command.value = uhrwerk::Fixed::from_int(army_id);
+    simulation_->submit(command);
+    return true;
+}
+
+bool UhrwerkSimulation::set_army_staff(std::int64_t army_id, bool on) {
+    const uhrwerk::World* w = world();
+    const uhrwerk::Army* army = w ? uhrwerk::find_army(*w, army_id) : nullptr;
+    if (!army || army->staff == on) {
+        return false;
+    }
+    uhrwerk::Command command;
+    command.type = uhrwerk::CommandType::Staff;
+    command.state = army->state;
+    command.target = on ? 1 : 0;
+    command.value = uhrwerk::Fixed::from_int(army_id);
+    simulation_->submit(command);
+    return true;
+}
+
+bool UhrwerkSimulation::order_mobilization(std::int64_t state_index, bool mobilize) {
+    const uhrwerk::World* w = world();
+    if (!w || !uhrwerk::military_active(*w) || !valid_index(w->states, state_index)) {
+        return false;
+    }
+    const auto state = static_cast<uhrwerk::Index>(state_index);
+    const uhrwerk::MobilizationPhase phase = uhrwerk::mobilization_phase(*w, state);
+    const bool armed =
+        phase == uhrwerk::MobilizationPhase::Mobilizing || phase == uhrwerk::MobilizationPhase::Mobilized;
+    if (mobilize == armed || (!mobilize && uhrwerk::in_war(*w, state))) {
+        return false; // schon so, oder im Krieg rüstet niemand ab
+    }
+    uhrwerk::Command command;
+    command.type = uhrwerk::CommandType::Mobilization;
+    command.state = state;
+    command.value = mobilize ? uhrwerk::Fixed::one() : uhrwerk::Fixed::zero();
+    simulation_->submit(command);
+    return true;
+}
+
+PackedInt32Array UhrwerkSimulation::get_location_control() const {
+    PackedInt32Array result;
+    const uhrwerk::World* w = world();
+    if (!w) {
+        return result;
+    }
+    result.resize(static_cast<std::int64_t>(w->locations.size()));
+    for (std::size_t l = 0; l < w->locations.size(); ++l) {
+        const uhrwerk::Index holder = uhrwerk::controller(*w, static_cast<uhrwerk::Index>(l));
+        result.set(static_cast<std::int64_t>(l),
+                   holder == uhrwerk::kNone ? -1 : static_cast<std::int32_t>(holder));
+    }
+    return result;
+}
+
+Array UhrwerkSimulation::get_battles() const {
+    Array result;
+    const uhrwerk::World* w = world();
+    if (!w) {
+        return result;
+    }
+    for (const uhrwerk::Battle& battle : w->battles) {
+        Dictionary entry;
+        entry["location_index"] = battle.location;
+        entry["days"] = static_cast<std::int64_t>(battle.days);
+        entry["attacker_losses"] = battle.attacker_losses.round();
+        entry["defender_losses"] = battle.defender_losses.round();
+        result.push_back(entry);
+    }
+    return result;
+}
+
+Array UhrwerkSimulation::get_sieges() const {
+    Array result;
+    const uhrwerk::World* w = world();
+    if (!w) {
+        return result;
+    }
+    for (const uhrwerk::Siege& siege : w->sieges) {
+        Dictionary entry;
+        entry["location_index"] = siege.location;
+        entry["besieger_index"] = siege.besieger;
+        entry["progress"] = siege.progress.to_double();
+        result.push_back(entry);
+    }
+    return result;
+}
+
+Array UhrwerkSimulation::get_wars() const {
+    Array result;
+    const uhrwerk::World* w = world();
+    if (!w) {
+        return result;
+    }
+    const std::int64_t player = get_player_state_index();
+    for (const uhrwerk::War& war : w->wars) {
+        Dictionary entry;
+        entry["id"] = war.id;
+        entry["name"] = war_name(*w, war);
+        entry["attackers"] = state_indices(war.attackers);
+        entry["defenders"] = state_indices(war.defenders);
+        entry["started_text"] = to_godot(uhrwerk::format_date_long(war.started));
+        Array goals;
+        for (const uhrwerk::WarGoal& goal : war.goals) {
+            Dictionary g;
+            g["attacker"] = goal.attacker;
+            g["text"] = to_godot(uhrwerk::war_goal_text(*w, war, goal));
+            g["cost"] = uhrwerk::war_goal_cost(*w, war, goal).to_double();
+            goals.push_back(g);
+        }
+        entry["goals"] = goals;
+        for (const bool attacker : {true, false}) {
+            const std::string side = attacker ? "attacker_" : "defender_";
+            entry[to_godot(side + "score")] = uhrwerk::war_score(*w, war, attacker).to_double();
+            entry[to_godot(side + "weariness")] = uhrwerk::war_weariness(*w, war, attacker).to_double();
+            entry[to_godot(side + "cost")] = uhrwerk::war_goals_cost(*w, war, attacker).to_double();
+            // Erlittene Verluste der Seite: was die Gegenseite ihr zugefügt hat.
+            entry[to_godot(side + "losses")] =
+                (attacker ? war.defender_inflicted : war.attacker_inflicted).round();
+        }
+        entry["battles"] = static_cast<std::int64_t>(war.battles);
+        const auto has = [&](const std::vector<uhrwerk::Index>& side) {
+            return std::find(side.begin(), side.end(), player) != side.end();
+        };
+        entry["player_side"] = has(war.attackers) ? 1 : (has(war.defenders) ? -1 : 0);
+        entry["player_leads"] = player == war.attackers.front() || player == war.defenders.front();
+        result.push_back(entry);
+    }
+    return result;
+}
+
+Array UhrwerkSimulation::get_declaration_goals(std::int64_t state_index, std::int64_t target) const {
+    const uhrwerk::World* w = world();
+    if (!w || !valid_index(w->states, state_index) || !valid_index(w->states, target) ||
+        !uhrwerk::can_declare_war(*w, static_cast<uhrwerk::Index>(state_index),
+                                  static_cast<uhrwerk::Index>(target))) {
+        return Array();
+    }
+    uhrwerk::War war; // gedachter Krieg mit den Seiten des Bündnisfalls
+    uhrwerk::war_sides(*w, static_cast<uhrwerk::Index>(state_index), static_cast<uhrwerk::Index>(target),
+                       war.attackers, war.defenders);
+    return goal_options(*w, war, true);
+}
+
+Array UhrwerkSimulation::get_war_goal_options(std::int64_t state_index, std::int64_t war_id) const {
+    const uhrwerk::World* w = world();
+    const uhrwerk::War* war = w ? uhrwerk::find_war(*w, war_id) : nullptr;
+    if (!war || (war->attackers.front() != state_index && war->defenders.front() != state_index)) {
+        return Array();
+    }
+    return goal_options(*w, *war, war->attackers.front() == state_index);
+}
+
+bool UhrwerkSimulation::declare_war(std::int64_t state_index, std::int64_t target, std::int64_t goal) {
+    const uhrwerk::World* w = world();
+    if (!w || !valid_index(w->states, state_index) || !valid_index(w->states, target) ||
+        !uhrwerk::can_declare_war(*w, static_cast<uhrwerk::Index>(state_index),
+                                  static_cast<uhrwerk::Index>(target))) {
+        return false;
+    }
+    uhrwerk::Command command;
+    command.type = uhrwerk::CommandType::DeclareWar;
+    command.state = static_cast<uhrwerk::Index>(state_index);
+    command.target = static_cast<uhrwerk::Index>(target);
+    command.value = uhrwerk::Fixed::from_int(goal);
+    simulation_->submit(command);
+    return true;
+}
+
+bool UhrwerkSimulation::add_war_goal(std::int64_t state_index, std::int64_t war_id, std::int64_t goal) {
+    const uhrwerk::World* w = world();
+    const uhrwerk::War* war = w ? uhrwerk::find_war(*w, war_id) : nullptr;
+    if (!war || (war->attackers.front() != state_index && war->defenders.front() != state_index)) {
+        return false;
+    }
+    const std::optional<uhrwerk::WarGoal> decoded =
+        uhrwerk::decode_war_goal(goal, war->attackers.front() == state_index);
+    if (!decoded || !uhrwerk::valid_war_goal(*w, *war, *decoded)) {
+        return false;
+    }
+    uhrwerk::Command command;
+    command.type = uhrwerk::CommandType::WarGoal;
+    command.state = static_cast<uhrwerk::Index>(state_index);
+    command.target = static_cast<uhrwerk::Index>(war_id);
+    command.value = uhrwerk::Fixed::from_int(goal);
+    simulation_->submit(command);
+    return true;
+}
+
+Dictionary UhrwerkSimulation::get_peace_preview(std::int64_t state_index, std::int64_t war_id,
+                                                std::int64_t terms) const {
+    Dictionary result;
+    result["valid"] = false;
+    const uhrwerk::World* w = world();
+    if (!w || terms < PEACE_WHITE || terms > PEACE_CAPITULATION || !valid_index(w->states, state_index)) {
+        return result;
+    }
+    const std::optional<bool> accepted = uhrwerk::peace_acceptance(
+        *w, static_cast<uhrwerk::Index>(state_index), war_id, static_cast<uhrwerk::PeaceTerms>(terms));
+    if (!accepted) {
+        return result;
+    }
+    const uhrwerk::War& war = *uhrwerk::find_war(*w, war_id);
+    const bool attacker = war.attackers.front() == state_index;
+    const uhrwerk::Index other = attacker ? war.defenders.front() : war.attackers.front();
+    result["valid"] = true;
+    result["accepted"] = *accepted;
+    result["text"] = to_godot(at(w->states, other).short_name + (*accepted ? " nähme an." : " lehnte ab."));
+    return result;
+}
+
+bool UhrwerkSimulation::offer_peace(std::int64_t state_index, std::int64_t war_id, std::int64_t terms) {
+    if (!bool(get_peace_preview(state_index, war_id, terms)["valid"])) {
+        return false;
+    }
+    uhrwerk::Command command;
+    command.type = uhrwerk::CommandType::PeaceOffer;
+    command.state = static_cast<uhrwerk::Index>(state_index);
+    command.target = static_cast<uhrwerk::Index>(war_id);
+    command.value = uhrwerk::Fixed::from_int(terms);
+    simulation_->submit(command);
+    return true;
+}
+
 // ─── Politik (seit M8) ──────────────────────────────────────────────────────
 
 Array UhrwerkSimulation::get_currents() const {
@@ -2724,6 +3159,32 @@ void UhrwerkSimulation::_bind_methods() {
     ClassDB::bind_method(D_METHOD("manoeuvre", "state_index", "kind"), &UhrwerkSimulation::manoeuvre);
     ClassDB::bind_method(D_METHOD("get_german_question"), &UhrwerkSimulation::get_german_question);
 
+    ClassDB::bind_method(D_METHOD("get_armies", "state_index"), &UhrwerkSimulation::get_armies, DEFVAL(-1));
+    ClassDB::bind_method(D_METHOD("get_army", "army_id"), &UhrwerkSimulation::get_army);
+    ClassDB::bind_method(D_METHOD("get_route_preview", "army_id", "location_index"),
+                         &UhrwerkSimulation::get_route_preview);
+    ClassDB::bind_method(D_METHOD("order_march", "army_id", "location_index"),
+                         &UhrwerkSimulation::order_march);
+    ClassDB::bind_method(D_METHOD("set_army_staff", "army_id", "on"), &UhrwerkSimulation::set_army_staff);
+    ClassDB::bind_method(D_METHOD("order_mobilization", "state_index", "mobilize"),
+                         &UhrwerkSimulation::order_mobilization);
+    ClassDB::bind_method(D_METHOD("get_location_control"), &UhrwerkSimulation::get_location_control);
+    ClassDB::bind_method(D_METHOD("get_battles"), &UhrwerkSimulation::get_battles);
+    ClassDB::bind_method(D_METHOD("get_sieges"), &UhrwerkSimulation::get_sieges);
+    ClassDB::bind_method(D_METHOD("get_wars"), &UhrwerkSimulation::get_wars);
+    ClassDB::bind_method(D_METHOD("get_declaration_goals", "state_index", "target"),
+                         &UhrwerkSimulation::get_declaration_goals);
+    ClassDB::bind_method(D_METHOD("get_war_goal_options", "state_index", "war_id"),
+                         &UhrwerkSimulation::get_war_goal_options);
+    ClassDB::bind_method(D_METHOD("declare_war", "state_index", "target", "goal"),
+                         &UhrwerkSimulation::declare_war, DEFVAL(0));
+    ClassDB::bind_method(D_METHOD("add_war_goal", "state_index", "war_id", "goal"),
+                         &UhrwerkSimulation::add_war_goal);
+    ClassDB::bind_method(D_METHOD("get_peace_preview", "state_index", "war_id", "terms"),
+                         &UhrwerkSimulation::get_peace_preview);
+    ClassDB::bind_method(D_METHOD("offer_peace", "state_index", "war_id", "terms"),
+                         &UhrwerkSimulation::offer_peace);
+
     ClassDB::bind_method(D_METHOD("set_tax_rate_percent", "state_index", "percent"),
                          &UhrwerkSimulation::set_tax_rate_percent);
     ClassDB::bind_method(D_METHOD("set_tax_percent", "state_index", "kind", "percent"),
@@ -2755,6 +3216,7 @@ void UhrwerkSimulation::_bind_methods() {
     BIND_ENUM_CONSTANT(MAP_WAHLEN);
     BIND_ENUM_CONSTANT(MAP_ZOLLGEBIETE);
     BIND_ENUM_CONSTANT(MAP_BEZIEHUNGEN);
+    BIND_ENUM_CONSTANT(MAP_KRIEG);
     BIND_ENUM_CONSTANT(TAX_KONTRIBUTION);
     BIND_ENUM_CONSTANT(TAX_AKZISE);
     BIND_ENUM_CONSTANT(TAX_ZOLL);
@@ -2775,6 +3237,9 @@ void UhrwerkSimulation::_bind_methods() {
     BIND_ENUM_CONSTANT(MANOEUVRE_YIELD);
     BIND_ENUM_CONSTANT(MANOEUVRE_MEDIATE);
     BIND_ENUM_CONSTANT(MANOEUVRE_ESCALATE);
+    BIND_ENUM_CONSTANT(PEACE_WHITE);
+    BIND_ENUM_CONSTANT(PEACE_OWN_GOALS);
+    BIND_ENUM_CONSTANT(PEACE_CAPITULATION);
 }
 
 } // namespace uhrwerk_bridge

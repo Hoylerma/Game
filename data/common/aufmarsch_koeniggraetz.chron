@@ -11,8 +11,8 @@ krieg deutscher_krieg {
     angreifer   = { PRU MSC MST OLD BWO DES WAL LIP LUE BRE HAM }
     verteidiger = { AUT SAX HAN BAV WUE BAD HED HEK NAS FRA SMG REA LIE }
     ziel        = { fuehrung = ja annexion = HAN annexion = HEK annexion = NAS annexion = FRA gebiet = au_holstein }
-    ziel_verteidiger = { entschaedigung = 6 }
-    quelle      = "Bundesbeschluss vom 14.6.1866 und Einmarsch am 16.6.; Ziele nach dem Prager Frieden (23.8.1866) und den Annexionen"
+    ziel_verteidiger = { gebiet = pr_schlesien entschaedigung = 2 }
+    quelle      = "Bundesbeschluss vom 14.6.1866 und Einmarsch am 16.6.; Ziele nach dem Prager Frieden (23.8.1866) und den Annexionen; österreichische Ziele Spielwert (Rückgewinn Schlesiens, Entschädigung)"
 }
 
 heer pru_elbarmee {
@@ -40,7 +40,7 @@ heer pru_zweite_armee {
     name         = "II. Armee"
     befehlshaber = "Kronprinz Friedrich Wilhelm"
     fuehrung     = 1.4
-    ort          = neisse
+    ort          = landeshut
     soldaten     = 115000
     quelle = "Stärke und Ort nach Wissensstand ohne Quellenzugang (ungeprüft), Führung Spielwert (M10b)"
 }
@@ -69,7 +69,7 @@ heer aut_nordarmee {
     staat        = AUT
     name         = "Nordarmee"
     befehlshaber = "Ludwig von Benedek"
-    fuehrung     = 0.7
+    fuehrung     = 1.0
     ort          = olmuetz
     soldaten     = 205000
     quelle = "Stärke und Ort nach Wissensstand ohne Quellenzugang (ungeprüft), Führung Spielwert (M10b)"
