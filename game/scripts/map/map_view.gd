@@ -10,6 +10,10 @@ extends Node2D
 signal location_hovered(sim_index: int)
 ## Linksklick auf die Karte (-1 = kein Ort an dieser Stelle).
 signal location_clicked(sim_index: int)
+## Rechtsklick auf die Karte (seit M10: Marschbefehl), -1 = kein Ort.
+signal location_right_clicked(sim_index: int)
+## Linksklick auf die Marke eines Heeres (seit M10); dann kein location_clicked.
+signal army_clicked(army_id: int)
 
 const MAP_SHADER: Shader = preload("res://shaders/map.gdshader")
 ## Markierung in der Farbtabelle für Orte der Karte, die die Simulation nicht kennt.
@@ -38,6 +42,12 @@ var _map: MapData = null
 var _material: ShaderMaterial = null
 var _color_texture: ImageTexture = null
 var _info_texture: ImageTexture = null
+## Schraffur besetzter Orte (seit M10, Kartenmodus „Krieg“).
+var _hatch_texture: ImageTexture = null
+var _last_hatch := PackedColorArray()
+## Heere über der Karte (seit M10).
+var _armies: ArmyLayer = null
+var _army_zoom := -1.0
 var _last_colors := PackedColorArray()
 var _last_owners := PackedInt32Array()
 var _last_kreise := PackedInt32Array()
@@ -88,18 +98,31 @@ func setup(map: MapData) -> void:
 		_material.set_shader_parameter(&"river_map", map.river_texture)
 	_material.set_shader_parameter(&"color_lut", _color_texture)
 	_material.set_shader_parameter(&"info_lut", _info_texture)
+	_hatch_texture = ImageTexture.create_from_image(
+		Image.create_empty(lut.x, lut.y, false, Image.FORMAT_RGBA8)
+	)
+	_last_hatch = PackedColorArray()
+	_material.set_shader_parameter(&"hatch_lut", _hatch_texture)
 	_material.set_shader_parameter(&"grain_map", _make_grain_texture())
 	_material.set_shader_parameter(&"lut_columns", MapData.LUT_COLUMNS)
 	_material.set_shader_parameter(&"map_size", map.size)
 	_material.set_shader_parameter(&"selected_index", -1)
 	_material.set_shader_parameter(&"hovered_index", -1)
 	_sprite.material = _material
+	if not camera.right_clicked.is_connected(_on_camera_right_clicked):
+		camera.right_clicked.connect(_on_camera_right_clicked)
 	if _railways == null:
 		_railways = RailwayLayer.new()
 		_railways.name = "Railways"
 		_railways.visible = false
 		add_child(_railways)
 		move_child(_railways, _sprite.get_index() + 1)
+	if _armies == null:
+		_armies = ArmyLayer.new()
+		_armies.name = "Armies"
+		add_child(_armies)
+		move_child(_armies, _railways.get_index() + 1)
+	_army_zoom = -1.0
 	_detail_size = -1.0
 	_update_detail()
 	queue_redraw()
@@ -200,6 +223,85 @@ func set_railways(sections: PackedInt32Array, open: Array[bool]) -> void:
 	_railways.set_sections(open_points, planned_points, _location_diameter)
 
 
+## Schraffur je Simulationsindex (seit M10): Alpha 1 schraffiert in dieser Farbe, leer schaltet ab.
+func set_hatch_colors(colors: PackedColorArray) -> void:
+	if not has_map():
+		return
+	_material.set_shader_parameter(&"hatch_enabled", not colors.is_empty())
+	if colors.is_empty() or colors == _last_hatch:
+		return
+	_last_hatch = colors
+	var lut := MapData.lut_size(_map.map_count())
+	var table := PackedColorArray()
+	table.resize(lut.x * lut.y)
+	for map_index in _map.map_count():
+		var sim_index := _map.map_to_sim[map_index]
+		table[map_index] = colors[sim_index] if sim_index >= 0 and sim_index < colors.size() else Color(0, 0, 0, 0)
+	var image := Image.create_from_data(
+		lut.x, lut.y, false, Image.FORMAT_RGBAF, table.to_byte_array()
+	)
+	image.convert(Image.FORMAT_RGBA8)
+	_hatch_texture.update(image)
+
+
+## Ebene der Heere (seit M10).
+func army_layer() -> ArmyLayer:
+	return _armies
+
+
+## Heere (wie get_armies) mit Staatsfarben (Index = Staat) auf die Karte; player = Spielerstaat.
+func set_armies(armies: Array[Dictionary], state_colors: PackedColorArray, player: int) -> void:
+	if _armies == null:
+		return
+	var positions := PackedVector2Array()
+	var colors := PackedColorArray()
+	var own: Array[bool] = []
+	for army in armies:
+		var state := int(army.get("state_index", -1))
+		positions.append(location_center(int(army.get("location_index", -1))))
+		colors.append(state_colors[state] if state >= 0 and state < state_colors.size() else Color.GRAY)
+		own.append(state == player)
+	_armies.set_armies(armies, positions, colors, own)
+
+
+## Schlachten und Belagerungen (wie get_battles und get_sieges) auf die Karte.
+func set_war_events(battles: Array[Dictionary], sieges: Array[Dictionary]) -> void:
+	if _armies == null:
+		return
+	_armies.set_events(_centers_of(battles), _centers_of(sieges))
+
+
+## Ausgewähltes Heer mit seinem Weg: from = Standort, route = Orte des Weges (Simulationsindizes).
+func set_army_selection(army_id: int, from: int, route: PackedInt32Array) -> void:
+	if _armies == null:
+		return
+	_armies.set_selection(army_id, _route_points(from, route) if army_id >= 0 else PackedVector2Array())
+
+
+## Vorschau eines Marschbefehls (leere route: aus).
+func set_route_preview(from: int, route: PackedInt32Array) -> void:
+	if _armies != null:
+		_armies.set_preview(_route_points(from, route) if not route.is_empty() else PackedVector2Array())
+
+
+func _route_points(from: int, route: PackedInt32Array) -> PackedVector2Array:
+	var points := PackedVector2Array()
+	for index in [from] + Array(route):
+		var point := location_center(int(index))
+		if point.x >= 0.0:
+			points.append(point)
+	return points
+
+
+func _centers_of(entries: Array[Dictionary]) -> PackedVector2Array:
+	var points := PackedVector2Array()
+	for entry in entries:
+		var point := location_center(int(entry.get("location_index", -1)))
+		if point.x >= 0.0:
+			points.append(point)
+	return points
+
+
 func set_railways_visible(enabled: bool) -> void:
 	if _railways != null:
 		_railways.visible = enabled
@@ -270,6 +372,9 @@ func _process(_delta: float) -> void:
 	if not has_map():
 		return
 	_update_detail()
+	if _armies != null and not is_equal_approx(camera.zoom.x, _army_zoom):
+		_army_zoom = camera.zoom.x
+		_armies.set_zoom(_army_zoom)
 	var sim_index := -1
 	if hover_enabled and _mouse_in_window:
 		sim_index = _sim_index_under_mouse()
@@ -281,12 +386,24 @@ func _process(_delta: float) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	var button := event as InputEventMouseButton
-	if button == null or button.button_index != MOUSE_BUTTON_LEFT or not button.pressed:
+	if button == null or not button.pressed or not has_map():
 		return
-	if not has_map():
+	if button.button_index == MOUSE_BUTTON_LEFT:
+		var army := -1
+		if _armies != null and _armies.visible:
+			army = _armies.army_at(camera.screen_to_world(button.position))
+		if army >= 0:
+			army_clicked.emit(army)
+		else:
+			location_clicked.emit(location_at_screen(button.position))
+	else:
 		return
-	location_clicked.emit(location_at_screen(button.position))
 	get_viewport().set_input_as_handled()
+
+
+func _on_camera_right_clicked(screen_position: Vector2) -> void:
+	if has_map():
+		location_right_clicked.emit(location_at_screen(screen_position))
 
 
 ## Zoomabhängige Deckkraft der Kreis- und Ortsgrenzen (MapDetail).

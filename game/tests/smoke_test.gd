@@ -107,7 +107,7 @@ const MARKET_GOOD_FIELDS: PackedStringArray = [
 const KREIS_FIELDS: PackedStringArray = ["id", "name", "location_count", "source"]
 ## Kartenmodi, in denen Orte ohne Daten Alpha 0 haben (bridge-api.md); im Marktmodus (9)
 ## nur Orte ohne Daten in Märkten ohne Orte mit Daten.
-const NO_DATA_ALPHA_MODES: PackedInt32Array = [0, 1, 2, 4, 6, 7, 8, 10, 11, 12, 13, 14]
+const NO_DATA_ALPHA_MODES: PackedInt32Array = [0, 1, 2, 4, 6, 7, 8, 10, 11, 12, 13, 14, 15]
 const CHRONICLE_FIELDS: PackedStringArray = ["date_text", "text", "location_index", "state_index"]
 
 var _failures := PackedStringArray()
@@ -407,7 +407,7 @@ func _check_military_1866() -> void:
 	for i in control.size():
 		if control[i] >= 0 and control[i] != owners[i]:
 			occupied += 1
-	var colors := sim.get_map_colors(15)
+	var colors := sim.get_map_colors(MapModes.MAP_KRIEG)
 	_check(
 		control.size() == sim.get_location_count() and colors.size() == sim.get_location_count()
 		and occupied > 0 and sim.get_battles() is Array and sim.get_sieges() is Array,

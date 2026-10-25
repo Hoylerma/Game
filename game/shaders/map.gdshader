@@ -23,6 +23,9 @@ uniform sampler2D id_map : filter_nearest, repeat_disable;
 uniform sampler2D river_map : hint_default_black, filter_linear_mipmap, repeat_disable;
 uniform sampler2D color_lut : filter_nearest, repeat_disable;
 uniform sampler2D info_lut : filter_nearest, repeat_disable;
+// Besetzte Orte (seit M10, Kartenmodus „Krieg“): Farbe der Schraffur (Besitzer), Alpha 1 = schraffiert.
+uniform sampler2D hatch_lut : hint_default_transparent, filter_nearest, repeat_disable;
+uniform bool hatch_enabled = false;
 uniform sampler2D grain_map : hint_default_white, filter_linear, repeat_enable;
 uniform int lut_columns = 256;
 // Größe von provinzen.png in Pixeln (gesetzt von der Kartenansicht).
@@ -48,6 +51,8 @@ uniform vec4 river_color = vec4(0.333, 0.471, 0.553, 0.9);
 uniform vec4 hatch_color = vec4(0.42, 0.35, 0.26, 0.30);
 uniform float hatch_spacing = 7.0;
 uniform float hatch_width : hint_range(0.05, 0.5) = 0.2;
+// Deckkraft der Streifen besetzter Orte (seit M10).
+uniform float occupied_hatch_alpha : hint_range(0.0, 1.0) = 0.85;
 
 // Papierton und Körnung.
 uniform vec4 paper_color = vec4(0.953, 0.918, 0.835, 1.0);
@@ -156,6 +161,12 @@ void fragment() {
 		vec4 lut = texelFetch(color_lut, lut_texel(here.x), 0);
 		if (lut.a > 0.75) {
 			color = lut.rgb;
+			if (hatch_enabled) {
+				vec4 occupied = texelFetch(hatch_lut, lut_texel(here.x), 0);
+				if (occupied.a > 0.5) {
+					color = blend(color, vec4(occupied.rgb, occupied_hatch_alpha * hatch(texel, px)));
+				}
+			}
 		} else if (lut.a > 0.25) {
 			color = unknown_color.rgb;
 		} else {

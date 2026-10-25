@@ -27,7 +27,7 @@ const DYNAMIC_LEGEND_MODES: PackedInt32Array = [
 	MapModes.MAP_POLITICAL, MapModes.MAP_DENSITY, MapModes.MAP_CONFESSION,
 	MapModes.MAP_DEVASTATION, MapModes.MAP_LEBENSSTANDARD, MapModes.MAP_KULTUR,
 	MapModes.MAP_WIRTSCHAFT, MapModes.MAP_EISENBAHNEN, MapModes.MAP_WAHLEN, MapModes.MAP_ZOLLGEBIETE,
-	MapModes.MAP_BEZIEHUNGEN
+	MapModes.MAP_BEZIEHUNGEN, MapModes.MAP_KRIEG,
 ]
 ## Höchstzahl der Kennungen in einer Hinweismeldung.
 const MAX_LISTED_IDS := 20
@@ -86,6 +86,13 @@ var _party_panel: PartyPanel = null
 var _currents: Array[Dictionary] = []
 ## Diplomatie (seit M9, Schritt b3): Fenster „Diplomatie“ und Krisenleiste über der Karte.
 var _diplomacy_window: DiplomacyWindow = null
+## Militär (seit M10, Schritt b3): ausgewähltes Heer (-1 keines), Staatsfarben je Index, Heere des
+## letzten Tages und die Kontrolle je Ort.
+var _selected_army := -1
+var _state_colors := PackedColorArray()
+var _armies: Array[Dictionary] = []
+var _control := PackedInt32Array()
+var _tooltip_index := -1
 var _play_bar: PlayBar = null
 
 @onready var _map_view: MapView = $MapView
@@ -132,6 +139,8 @@ func _ready() -> void:
 	_mode_bar.mode_selected.connect(_set_map_mode)
 	_map_view.location_hovered.connect(_on_location_hovered)
 	_map_view.location_clicked.connect(_on_location_clicked)
+	_map_view.location_right_clicked.connect(_on_location_right_clicked)
+	_map_view.army_clicked.connect(select_army)
 	get_viewport().size_changed.connect(_on_viewport_size_changed)
 
 	_load_map()
@@ -199,6 +208,10 @@ func _unhandled_input(event: InputEvent) -> void:
 			return
 	if event.is_action_pressed(&"auswahl_aufheben", false, true) and _diplomacy_window.is_open():
 		close_diplomacy()
+		get_viewport().set_input_as_handled()
+		return
+	if event.is_action_pressed(&"auswahl_aufheben", false, true) and _selected_army >= 0:
+		select_army(-1)
 		get_viewport().set_input_as_handled()
 		return
 	if event.is_action_pressed(&"auswahl_aufheben", false, true) and _selected >= 0:
@@ -457,6 +470,7 @@ func _refresh_all() -> void:
 	_refresh_diplomacy()
 	_refresh_location_panel()
 	_refresh_map()
+	_update_armies()
 	_pull_chronicle()
 
 
@@ -493,6 +507,81 @@ func _refresh_map() -> void:
 			if _election_ranks[i] >= _election_reported:
 				colors[i].a = 0.0
 	_map_view.set_location_colors(colors)
+	_update_war_map()
+
+
+## Kartenmodus „Krieg“ (seit M10): Grenzen nach der Kontrolle (Fronten), besetzte Orte schraffiert
+## in der Farbe des Besitzers; in den übrigen Modi ohne Schraffur.
+func _update_war_map() -> void:
+	if _map_mode != MapModes.MAP_KRIEG:
+		_map_view.set_hatch_colors(PackedColorArray())
+		return
+	_control = _sim.get_location_control()
+	var hatch := PackedColorArray()
+	hatch.resize(_control.size())
+	for i in _control.size():
+		var owner := _owners[i] if i < _owners.size() else -1
+		if _control[i] >= 0 and owner >= 0 and _control[i] != owner and owner < _state_colors.size():
+			hatch[i] = _state_colors[owner]
+		else:
+			hatch[i] = Color(0, 0, 0, 0)
+	_map_view.set_hatch_colors(hatch)
+	_map_view.set_location_info(_control, _border_groups())
+
+
+## Heere, Schlachten und Belagerungen auf der Karte (seit M10); Garnisonen nur im Modus „Krieg“.
+func _update_armies() -> void:
+	if _sim == null or not _map.is_valid() or _map_view.army_layer() == null:
+		return
+	if _state_colors.size() != _sim.get_state_count():
+		_state_colors.resize(_sim.get_state_count())
+		for i in _state_colors.size():
+			_state_colors[i] = _sim.get_state(i).get("color", Color.GRAY)
+	_armies = _sim.get_armies()
+	_map_view.army_layer().show_garrisons = _map_mode == MapModes.MAP_KRIEG
+	_map_view.set_armies(_armies, _state_colors, _player)
+	_map_view.set_war_events(_sim.get_battles(), _sim.get_sieges())
+	var army := selected_army_data()
+	if army.is_empty():
+		_selected_army = -1
+	_map_view.set_army_selection(
+		_selected_army, int(army.get("location_index", -1)), army.get("route", PackedInt32Array())
+	)
+
+
+## Heer auswählen (-1: keines); die Karte zeigt seinen Weg.
+func select_army(army_id: int) -> void:
+	_selected_army = army_id
+	if army_id < 0:
+		_map_view.set_route_preview(-1, PackedInt32Array())
+	_update_armies()
+
+
+func selected_army() -> int:
+	return _selected_army
+
+
+## Daten des ausgewählten Heeres (wie get_armies) oder leer.
+func selected_army_data() -> Dictionary:
+	for army in _armies:
+		if int(army.get("id", -1)) == _selected_army:
+			return army
+	return {}
+
+
+## Rechtsklick: ein eigenes ausgewähltes Feldheer marschiert zum Ort (seit M10).
+func _on_location_right_clicked(sim_index: int) -> void:
+	var army := selected_army_data()
+	if _sim == null or army.is_empty() or sim_index < 0:
+		return
+	if int(army.get("state_index", -1)) != _player or bool(army.get("garrison", false)):
+		return
+	if _sim.order_march(int(army.get("id", -1)), sim_index):
+		var preview := _sim.get_route_preview(int(army.get("id", -1)), sim_index)
+		_map_view.set_army_selection(
+			_selected_army, int(army.get("location_index", -1)), preview.get("path", PackedInt32Array())
+		)
+		_map_view.set_route_preview(-1, PackedInt32Array())
 
 
 ## Besitzer und Kreise je Ort (zwei Indexarrays der Brücke) für Grenzen und Staatsnamen;
@@ -504,7 +593,8 @@ func _update_owners(force: bool = false) -> void:
 	if owners == _owners and not _owners.is_empty() and not force:
 		return
 	_owners = owners
-	_map_view.set_location_info(owners, _border_groups())
+	if _map_mode != MapModes.MAP_KRIEG:
+		_map_view.set_location_info(owners, _border_groups())
 	_update_state_labels()
 
 
@@ -567,6 +657,10 @@ func _currency() -> String:
 ## anderen Szenario als bisher auch Ortskatalog, Farben der Ortsinfo und Steuergrenze. True, wenn
 ## das Szenario gewechselt hat.
 func _read_scenario_constants() -> bool:
+	# Militär (seit M10): Farben und Auswahl gehören zum Szenario.
+	_state_colors = PackedColorArray()
+	_selected_army = -1
+	_armies.clear()
 	_market_indices = _sim.get_location_market_indices()
 	_admin_indices = _sim.get_location_admin_indices()
 	var federation := false
@@ -898,6 +992,19 @@ func _rebuild_legend() -> void:
 			else:
 				customs.append_array(no_data)
 				_legend.show_swatches(title, customs)
+		MapModes.MAP_KRIEG:
+			var war := LegendData.war_entries(_sim)
+			if war.is_empty():
+				_legend.show_message(
+					title,
+					(
+						"Zurzeit führt kein Staat Krieg. Heere und Kriege gibt es seit 1848; die Lesezeichen "
+						+ "Düppel, Königgrätz und Sedan beginnen im Krieg."
+					)
+				)
+			else:
+				war.append_array(no_data)
+				_legend.show_swatches(title, war)
 		MapModes.MAP_BEZIEHUNGEN:
 			var relations := LegendData.relation_entries(_sim, _player)
 			if relations.is_empty():
@@ -989,6 +1096,7 @@ func _set_map_mode(mode: int) -> void:
 	if not _owners.is_empty():
 		_map_view.set_location_info(_owners, _border_groups())
 	_refresh_map()
+	_update_armies()
 	_update_railways()
 	_rebuild_legend()
 	var hovered := _map_view.get_hovered()
@@ -1050,9 +1158,32 @@ func _on_chronicle_location_requested(sim_index: int) -> void:
 func _on_location_hovered(sim_index: int) -> void:
 	if _sim == null or sim_index < 0:
 		_tooltip.hide_tooltip()
+		_map_view.set_route_preview(-1, PackedInt32Array())
 		return
 	var location := _sim.get_location(sim_index)
-	_tooltip.show_text(str(location.get("name", "–")), _tooltip_detail(location))
+	_tooltip_index = sim_index
+	var detail := _tooltip_detail(location)
+	var march := _march_preview(sim_index)
+	if not march.is_empty():
+		detail += "\n" + march
+	_tooltip.show_text(str(location.get("name", "–")), detail)
+
+
+## Mit einem eigenen ausgewählten Feldheer: Weg zum Ort auf der Karte und als Text (seit M10).
+func _march_preview(sim_index: int) -> String:
+	var army := selected_army_data()
+	if army.is_empty() or int(army.get("state_index", -1)) != _player or bool(army.get("garrison", false)):
+		_map_view.set_route_preview(-1, PackedInt32Array())
+		return ""
+	var preview := _sim.get_route_preview(int(army.get("id", -1)), sim_index)
+	if not bool(preview.get("ok", false)):
+		_map_view.set_route_preview(-1, PackedInt32Array())
+		return "%s: kein Weg" % str(army.get("name", ""))
+	_map_view.set_route_preview(int(army.get("location_index", -1)), preview.get("path", PackedInt32Array()))
+	return "Rechtsklick: %s marschiert hierher, %s Tage (Ankunft %s)" % [
+		str(army.get("name", "")), GermanFormat.number(float(preview.get("days", 0.0)), 1),
+		str(preview.get("arrival_text", "")),
+	]
 
 
 ## Zweite Zeile des Tooltips: Besitzer und der Wert des Kartenmodus; für Orte ohne
@@ -1104,9 +1235,32 @@ func _tooltip_detail(location: Dictionary) -> String:
 			]
 		MapModes.MAP_BEZIEHUNGEN when bool(location.get("has_data", true)):
 			second = _relation_tooltip(int(location.get("owner_index", -1)))
+		MapModes.MAP_KRIEG when bool(location.get("has_data", true)):
+			second = _war_tooltip(_tooltip_index, int(location.get("owner_index", -1)))
 		_ when not bool(location.get("has_data", true)):
 			second = "%s · %s" % [kreis_text, second]
 	return "%s · %s" % [first, second]
+
+
+## Wer den Ort hält und welche Heere dort stehen, im Kartenmodus „Krieg“ (seit M10).
+func _war_tooltip(sim_index: int, owner: int) -> String:
+	var parts := PackedStringArray()
+	var holder := _control[sim_index] if sim_index >= 0 and sim_index < _control.size() else owner
+	if holder >= 0 and holder != owner:
+		parts.append("besetzt von %s" % _state_short_name(holder))
+	else:
+		parts.append("gehalten")
+	var soldiers := 0
+	var count := 0
+	for army in _armies:
+		if int(army.get("location_index", -1)) == sim_index:
+			soldiers += int(army.get("soldiers", 0))
+			count += 1
+	if count > 0:
+		parts.append("%s Heer%s mit %s Soldaten" % [
+			GermanFormat.integer(count), "" if count == 1 else "e", GermanFormat.integer(soldiers)
+		])
+	return ", ".join(parts)
 
 
 ## Beziehung des Besitzers zum Spielerstaat im Tooltip (seit M9).

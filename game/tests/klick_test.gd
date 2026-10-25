@@ -534,6 +534,7 @@ func _check_new_game() -> void:
 	await _check_election_night(sim)
 	await _check_customs_ui(sim)
 	await _check_diplomacy_ui(sim)
+	await _check_war_ui(menu)
 
 	# Ein Spielstand von 1648 lässt sich im Spiel von 1848 aus der Liste laden.
 	_main.call("open_game_menu")
@@ -548,6 +549,62 @@ func _check_new_game() -> void:
 		)
 	_clear_saves(dir)
 	print("  Neues Spiel 1848, Modus Verwaltung, Staatswechsel, Spielstand von 1648 geladen")
+
+
+## Krieg (seit M10, Schritt b3): das Lesezeichen Königgrätz im Menü, Heere auf der Karte, Auswahl
+## per Klick auf die Marke, Marschbefehl per Rechtsklick, Kartenmodus „Krieg“ (Taste Y), Escape hebt
+## die Auswahl auf.
+func _check_war_ui(menu: GameMenu) -> void:
+	_main.call("open_game_menu")
+	if not menu.scenario_ids().has("koeniggraetz"):
+		_fail("Neues Spiel: Lesezeichen Königgrätz fehlt im Menü (%s)" % ", ".join(menu.scenario_ids()))
+		return
+	menu.start_new_game("koeniggraetz")
+	await _frames(2)
+	var sim: SimulationClient = _main.call("simulation")
+	var view: MapView = _main.call("map_view")
+	var layer := view.army_layer()
+	if sim.get_scenario_name() != "Königgrätz" or layer == null or layer.marker_count() < 10:
+		_fail("Königgrätz: %s, %d Heeresmarken" % [
+			sim.get_scenario_name(), layer.marker_count() if layer != null else -1
+		])
+		return
+	var player := sim.get_player_state_index()
+	var army_id := -1
+	for army in sim.get_armies(player):
+		if str(army.get("name", "")) == "I. Armee":
+			army_id = int(army.get("id", -1))
+	var prag := sim.get_location_index("prag")
+	view.camera.focus_on(view.location_center(sim.get_location_index("goerlitz")), view.camera.overview_zoom * 4.0)
+	await _frames(30)
+	# Die Meldung „Neues Spiel“ liegt in der Mitte über der Karte; „Verstanden“ schließt sie.
+	for button in _main.find_child("NoticeLayer", true, false).find_children("*", "Button", true, false):
+		if (button as Button).text == "Verstanden":
+			(button as Button).pressed.emit()
+	await _frames(2)
+	var marker := layer.marker_center(army_id)
+	await _click(view.camera.world_to_screen(marker))
+	if int(_main.call("selected_army")) != army_id:
+		_fail("Klick auf die Marke der I. Armee wählt sie nicht (%d statt %d)" % [
+			int(_main.call("selected_army")), army_id
+		])
+		return
+	var target := view.camera.world_to_screen(view.location_center(prag))
+	await _right_click(target)
+	sim.advance_days(1)
+	_main.call("_after_time_passed")
+	var marching := sim.get_army(army_id)
+	if int(marching.get("destination_index", -1)) != prag:
+		_fail("Rechtsklick auf Prag: kein Marschbefehl (%s)" % str(marching))
+	await _key(KEY_Z)
+	if int(_main.call("map_mode")) != MapModes.MAP_KRIEG or not layer.show_garrisons:
+		_fail("Taste Y schaltet nicht in den Modus Krieg mit Garnisonen (%d)" % int(_main.call("map_mode")))
+	await _key(KEY_ESCAPE)
+	if int(_main.call("selected_army")) != -1:
+		_fail("Escape hebt die Auswahl des Heeres nicht auf")
+	print("  Königgrätz: %d Heeresmarken, I. Armee per Klick gewählt, Marsch nach Prag per Rechtsklick" % [
+		layer.marker_count()
+	])
 
 
 ## Staatsinfo und Parteienmodus (seit M8): „Verfassung und Gruppen …“ im Staatspanel; Rolle im
@@ -986,6 +1043,21 @@ func _click(position: Vector2) -> void:
 			event.button_mask = MOUSE_BUTTON_MASK_LEFT
 		Input.parse_input_event(event)
 		# Eingaben werden einmal je Bild ausgeliefert.
+		await process_frame
+
+
+## Rechtsklick ohne Ziehen an einem Punkt in Viewport-Koordinaten (seit M10, Marschbefehl).
+func _right_click(position: Vector2) -> void:
+	var in_window := root.get_final_transform() * position
+	for pressed: bool in [true, false]:
+		var event := InputEventMouseButton.new()
+		event.button_index = MOUSE_BUTTON_RIGHT
+		event.pressed = pressed
+		event.position = in_window
+		event.global_position = in_window
+		if pressed:
+			event.button_mask = MOUSE_BUTTON_MASK_RIGHT
+		Input.parse_input_event(event)
 		await process_frame
 
 
