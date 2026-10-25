@@ -379,8 +379,9 @@ struct StateBudget {
     Fixed interest;                       // Zinsen
     Fixed building;                       // Bauten (Landesausbau)
     Fixed diplomacy;                      // Gesandte (seit M9, diplomatie.md Abschnitt 4.2)
+    Fixed hinterland;                     // Überschuss des Hinterlands (seit M10, Review; militaer.md 6.2)
 
-    Fixed income() const { return taxes[0] + taxes[1] + taxes[2]; }
+    Fixed income() const { return taxes[0] + taxes[1] + taxes[2] + hinterland; }
     Fixed expenses() const { return court + administration + army + interest + building + diplomacy; }
 };
 

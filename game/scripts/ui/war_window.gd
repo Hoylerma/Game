@@ -51,6 +51,8 @@ var _peace_buttons: Array[Button] = []
 var _goal_box: HBoxContainer = null
 var _goal_choice: OptionButton = null
 var _goal_button: Button = null
+## Stand der Zielauswahl (_fill_goal_options); leer: neu füllen.
+var _goal_key := ""
 var _note: Label = null
 var _army_summary: Label = null
 var _army_rows: VBoxContainer = null
@@ -71,6 +73,7 @@ func open(sim: SimulationClient, player: int, tab: int = 0) -> void:
 		_selected = -1
 	_player = player
 	_note.text = ""
+	_goal_key = ""
 	visible = true
 	show_tab(tab)
 	refresh(true)
@@ -450,7 +453,7 @@ func _fill_detail() -> void:
 			)
 	_goal_box.visible = leads
 	if leads:
-		_fill_goal_options()
+		_fill_goal_options(war)
 
 
 func _side_label(text: String, caption: bool) -> void:
@@ -474,7 +477,16 @@ func _peace_tooltip(terms: int) -> String:
 	return ""
 
 
-func _fill_goal_options() -> void:
+## Weitere Kriegsziele zur Wahl. Neu gefüllt nur, wenn sich Krieg, seine Ziele oder der Monat (Kosten
+## nach der Bevölkerung) ändern: Die Liste kostet bei vielen Zielen einige Millisekunden, und ein
+## Neufüllen schlösse eine gerade offene Auswahl (Review M10).
+func _fill_goal_options(war: Dictionary) -> void:
+	var key := "%d:%d:%d:%d" % [
+		_selected, (war.get("goals", []) as Array).size(), int(_sim.get_date().get("month", 0)), _player
+	]
+	if key == _goal_key:
+		return
+	_goal_key = key
 	var options := _sim.get_war_goal_options(_player, _selected)
 	var keep := _goal_choice.get_item_id(_goal_choice.selected) if _goal_choice.selected >= 0 else -1
 	_goal_choice.clear()

@@ -757,6 +757,7 @@ Dictionary UhrwerkSimulation::get_state(std::int64_t index) const {
     // Haushalt des letzten Rechentags (gleich last_month_*); vor dem ersten Rechentag die Schätzung
     // aus dem Start (estimate_budgets) statt 0.
     result["income_month"] = state.budget.income().to_double();
+    result["hinterland_month"] = state.budget.hinterland.to_double(); // seit dem Review M10
     result["expenses_month"] = state.budget.expenses().to_double();
     result["population"] = w->state_population(state_index).round();
     const std::vector<uhrwerk::Index> locations = w->state_locations(state_index);

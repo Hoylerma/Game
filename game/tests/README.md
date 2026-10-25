@@ -206,7 +206,12 @@ echten Daten und prüft:
     Kriegsfenster mit Kriegspunkten und Friedensangeboten samt Antwort Österreichs; im Reiter
     „Heere“ wählt ein Klick die I. Armee; Esc schließt. Binnen 60 Tagen kommt ein Schlachtbericht;
     „Krieg erklären …“ im Fenster „Diplomatie“ fragt mit Seiten nach, am nächsten Tag läuft ein Krieg
-    mehr.
+    mehr. Düppel als Dänemark: Verliert der Spielerstaat alle Orte, hält die Zeit an und ein Hinweis
+    erscheint (Review M10).
+12. **Kriegslesezeichen durchgespielt** (Abnahme M10): Düppel, Königgrätz und Sedan als Preußen; das
+    stärkste Feldheer marschiert per Rechtsklick zur Hauptstadt des Gegners, im Kriegsfenster geht
+    das erste Friedensangebot hinaus, das der Gegner laut Vorab-Prüfung annimmt; am nächsten Tag ist
+    der Krieg zu Ende.
 
 ```bash
 godot --headless --path game --script res://tests/klick_test.gd

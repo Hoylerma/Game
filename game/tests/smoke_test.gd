@@ -380,6 +380,14 @@ func _check_military_1866() -> void:
 		"keine Kriegserklärung an Österreich im Krieg; Zielauswahl für den Krieg",
 		"get_declaration_goals/get_war_goal_options unerwartet"
 	)
+	# Hinterland (Review M10): Frankreichs Überschuss ist ein Posten im Haushalt und Teil der Einnahmen.
+	var france := sim.get_state(sim.get_state_index("FRK"))
+	_check(
+		is_equal_approx(float(france.get("hinterland_month", 0.0)), 690000.0)
+		and float(france.get("income_month", 0.0)) > float(france.get("hinterland_month", 0.0)),
+		"Frankreich: Hinterland 690.000 je Monat in den Einnahmen",
+		"hinterland_month %s, income_month %s" % [france.get("hinterland_month"), france.get("income_month")]
+	)
 	# Seiten einer möglichen Erklärung: Hauptparteien zuerst, Soldaten je Seite (seit b3c).
 	var declarable := -1
 	for target in sim.get_state_count():

@@ -100,6 +100,11 @@ var _previous_armies: Array[Dictionary] = []
 var _army_panel: ArmyPanel = null
 var _war_window: WarWindow = null
 var _battle_reports: BattleReports = null
+## Der Spielerstaat ist untergegangen oder hat die Karte verlassen (Hinweis einmal, Review M10).
+var _player_gone_noticed := false
+## Kriege beim letzten Aufbau der Legende im Kartenmodus „Krieg“ (_war_signature).
+var _legend_wars := ""
+var _legend_wars_chronicle := -1
 
 @onready var _map_view: MapView = $MapView
 @onready var _top_bar: TopBar = %TopBar
@@ -496,13 +501,18 @@ func _after_time_passed() -> void:
 		_update_owners(true)
 		if not _quiet_elections:
 			_open_election_night(_elections_seen - 1, _options.wants_screenshot())
+	# Besitzer jeden Tag (Review M10: ein Frieden tritt Orte mitten im Monat ab); Grenzen und
+	# Staatsnamen ändern sich nur, wenn sich ein Besitzer geändert hat.
+	_update_owners()
 	_refresh_all()
+	_check_player_state()
 	var month := int(_sim.get_date().get("month", 0))
-	if month != _legend_month:
+	var wars := _war_signature()
+	if month != _legend_month or wars != _legend_wars:
 		_legend_month = month
+		_legend_wars = wars
 		if DYNAMIC_LEGEND_MODES.has(_map_mode):
 			_rebuild_legend()
-		_update_owners()
 	# Eröffnungen fallen nicht auf Monatserste; die Linien folgen den Farben jeden Tag.
 	if _map_mode == MapModes.MAP_EISENBAHNEN:
 		_update_railways()
@@ -613,12 +623,60 @@ func selected_army_data() -> Dictionary:
 	return {}
 
 
+## Kriege und ihre Seiten als Text (Kartenmodus „Krieg“): Die Legende folgt einem neuen Krieg oder
+## Frieden am selben Tag statt am Monatsersten (Review M10); in anderen Modi leer. Kriegsbeginn und
+## Frieden stehen in der Chronik: Ohne neuen Eintrag bleibt der letzte Stand (get_wars kostet einige
+## Millisekunden).
+func _war_signature() -> String:
+	if _map_mode != MapModes.MAP_KRIEG:
+		return ""
+	if _sim.get_chronicle_size() == _legend_wars_chronicle and not _legend_wars.is_empty():
+		return _legend_wars
+	_legend_wars_chronicle = _sim.get_chronicle_size()
+	var parts := PackedStringArray()
+	for war in _sim.get_wars():
+		parts.append("%d:%s:%s" % [int(war.get("id", -1)), str(war.get("attackers", [])), str(war.get("defenders", []))])
+	return ";".join(parts)
+
+
+## Hat der Spielerstaat keine Orte mehr (annektiert im Frieden, seit M10), hält die Zeit an und ein
+## Hinweis nennt den Weg zu einem anderen Staat; die Partie läuft danach weiter.
+func _check_player_state() -> void:
+	if _player_gone_noticed or _player_current >= 0:
+		return
+	var state := _sim.get_state(_player)
+	if state.is_empty() or int(state.get("location_count", 1)) > 0:
+		return
+	_player_gone_noticed = true
+	_set_speed(0)
+	close_war_window()
+	select_army(-1)
+	_notices.add_notice(
+		"%s hat keine Orte mehr" % str(state.get("name", "")),
+		"Der Staat hat im Frieden alle Orte auf der Karte verloren. Die Partie läuft weiter: Ein Klick "
+		+ "auf einen Ort und „Diesen Staat spielen“ in der Ortsinfo übernimmt einen anderen Staat.",
+		""
+	)
+
+
+func player_gone_noticed() -> bool:
+	return _player_gone_noticed
+
+
+## Befehligt der Spieler dieses Heer? Eigene Feldheere, nicht im Parteienmodus (Review M10).
+func _commands_army(army: Dictionary) -> bool:
+	return (
+		_player_current < 0 and int(army.get("state_index", -1)) == _player
+		and not bool(army.get("garrison", false))
+	)
+
+
 ## Rechtsklick: ein eigenes ausgewähltes Feldheer marschiert zum Ort (seit M10).
 func _on_location_right_clicked(sim_index: int) -> void:
 	var army := selected_army_data()
 	if _sim == null or army.is_empty() or sim_index < 0:
 		return
-	if int(army.get("state_index", -1)) != _player or bool(army.get("garrison", false)):
+	if not _commands_army(army):
 		return
 	var preview := _sim.get_route_preview(int(army.get("id", -1)), sim_index)
 	if _sim.order_march(int(army.get("id", -1)), sim_index):
@@ -1268,7 +1326,7 @@ func _on_location_hovered(sim_index: int) -> void:
 ## Mit einem eigenen ausgewählten Feldheer: Weg zum Ort auf der Karte und als Text (seit M10).
 func _march_preview(sim_index: int) -> String:
 	var army := selected_army_data()
-	if army.is_empty() or int(army.get("state_index", -1)) != _player or bool(army.get("garrison", false)):
+	if army.is_empty() or not _commands_army(army):
 		_map_view.set_route_preview(-1, PackedInt32Array())
 		return ""
 	var preview := _sim.get_route_preview(int(army.get("id", -1)), sim_index)
@@ -2021,6 +2079,7 @@ func _after_load(new_client: bool = false) -> void:
 	select_army(-1)
 	_battle_reports.clear()
 	_previous_armies.clear()
+	_player_gone_noticed = false
 	_player = _sim.get_player_state_index()
 	if _read_scenario_constants() or new_client:
 		_connect_map_and_simulation()
@@ -2089,6 +2148,7 @@ func play_state(state_index: int) -> void:
 	close_war_window()
 	select_army(-1)
 	_battle_reports.clear()
+	_player_gone_noticed = false
 	_refresh_all()
 	_rebuild_legend()
 	_top_bar.show_notice("Ihr spielt jetzt %s" % str(_sim.get_state(_player).get("name", "")))

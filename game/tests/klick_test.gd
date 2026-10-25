@@ -535,6 +535,7 @@ func _check_new_game() -> void:
 	await _check_customs_ui(sim)
 	await _check_diplomacy_ui(sim)
 	await _check_war_ui(menu)
+	await _check_war_bookmarks()
 
 	# Ein Spielstand von 1648 lässt sich im Spiel von 1848 aus der Liste laden.
 	_main.call("open_game_menu")
@@ -678,12 +679,91 @@ func _check_war_ui(menu: GameMenu) -> void:
 				question, sim.get_wars().size(), wars_before + 1
 			])
 	_main.call("close_diplomacy")
+	var enemy_name := str(sim.get_state(enemy).get("short_name", ""))
+	var markers := layer.marker_count()
+	# Düppel als Dänemark (Review M10): Verliert der Spielerstaat alle Orte, hält die Zeit an und ein
+	# Hinweis nennt den Weg zu einem anderen Staat.
+	_main.call("start_new_game", "dueppel", "DEN")
+	await _frames(1)
+	sim = _main.call("simulation")
+	var denmark := sim.get_player_state_index()
+	var war_days := 0
+	while int(sim.get_state(denmark).get("location_count", 1)) > 0 and war_days < 200:
+		sim.advance_days(1)
+		_main.call("_after_time_passed")
+		war_days += 1
+	if not bool(_main.call("player_gone_noticed")) or int(_main.call("speed")) != 0:
+		_fail("Dänemark ohne Orte nach %d Tagen: kein Hinweis oder die Zeit läuft" % war_days)
+	for button in _main.find_child("NoticeLayer", true, false).find_children("*", "Button", true, false):
+		if (button as Button).text == "Verstanden":
+			(button as Button).pressed.emit()
+	await _frames(1)
 	print(
 		"  Kriegslesezeichen Düppel, Königgrätz, Sedan im Menü; Königgrätz: %d Heeresmarken, I. Armee per Klick gewählt, Marsch nach Prag per Rechtsklick, "
-		% layer.marker_count()
-		+ "Heeresfenster mit Generalstab, Kriegsfenster, Schlachtbericht nach %d Tagen, Kriegserklärung an %s"
-		% [days, str(sim.get_state(enemy).get("short_name", ""))]
+		% markers
+		+ "Heeresfenster mit Generalstab, Kriegsfenster, Schlachtbericht nach %d Tagen, Kriegserklärung an %s; "
+		% [days, enemy_name]
+		+ "Düppel: Dänemark nach %d Tagen ohne Orte, Hinweis" % war_days
 	)
+
+
+## Die drei Kriegslesezeichen durchspielen (Abnahme M10, militaer.md Abschnitt 9): als Preußen das
+## stärkste eigene Feldheer per Rechtsklick zur Hauptstadt des Gegners schicken, im Kriegsfenster ein
+## Friedensangebot senden, das der Gegner laut Vorab-Prüfung annimmt; am nächsten Tag ist der Krieg aus.
+func _check_war_bookmarks() -> void:
+	var lines := PackedStringArray()
+	for bookmark in ["dueppel", "koeniggraetz", "sedan"]:
+		_main.call("start_new_game", bookmark, "PRU")
+		await _frames(1)
+		for button in _main.find_child("NoticeLayer", true, false).find_children("*", "Button", true, false):
+			if (button as Button).text == "Verstanden":
+				(button as Button).pressed.emit()
+		var sim: SimulationClient = _main.call("simulation")
+		var player := sim.get_player_state_index()
+		var wars := sim.get_wars()
+		if wars.is_empty():
+			_fail("%s: kein Krieg zum Start" % bookmark)
+			continue
+		var war: Dictionary = wars[0]
+		var enemies: Variant = war.get("defenders" if int(war.get("player_side", 0)) > 0 else "attackers", [])
+		var enemy_capital := int(sim.get_state(int((enemies as Variant)[0])).get("capital_index", -1))
+		# Marsch: das stärkste Feldheer mit einem Weg zur feindlichen Hauptstadt.
+		_main.call("_select_strongest_army")
+		var army: Dictionary = _main.call("selected_army_data")
+		var view: MapView = _main.call("map_view")
+		view.camera.focus_on(view.location_center(enemy_capital), view.camera.overview_zoom * 2.0)
+		await _frames(2)
+		await _right_click(view.camera.world_to_screen(view.location_center(enemy_capital)))
+		sim.advance_days(1)
+		_main.call("_after_time_passed")
+		var marching := sim.get_army(int(army.get("id", -1)))
+		if army.is_empty() or (marching.get("route", PackedInt32Array()) as PackedInt32Array).is_empty():
+			_fail("%s: %s marschiert nicht zur Hauptstadt des Gegners (%s)" % [
+				bookmark, str(army.get("name", "–")), str(marching.get("status_text", ""))
+			])
+		# Frieden: das erste Angebot, das der Gegner annähme.
+		_main.call("open_war_window")
+		var window: WarWindow = _main.call("war_window")
+		window.select_war(int(war.get("id", -1)))
+		var sent := ""
+		for terms in [SimulationClient.PEACE_OWN_GOALS, SimulationClient.PEACE_WHITE, SimulationClient.PEACE_CAPITULATION]:
+			var button := window.peace_button(terms)
+			if not button.disabled and button.text.contains("nähme an"):
+				sent = button.text
+				button.pressed.emit()
+				break
+		sim.advance_days(1)
+		_main.call("_after_time_passed")
+		var still := false
+		for w in sim.get_wars():
+			still = still or int(w.get("id", -1)) == int(war.get("id", -1))
+		if sent.is_empty() or still:
+			_fail("%s: Frieden nicht geschlossen (Angebot „%s“, Krieg läuft %s)" % [bookmark, sent, still])
+		_main.call("close_war_window")
+		lines.append("%s %s, %s" % [
+			str(sim.get_scenario_name()), str(army.get("name", "–")), sent.get_slice(" – ", 0)
+		])
+	print("  Kriegslesezeichen durchgespielt (Marsch, Frieden): " + "; ".join(lines))
 
 
 ## Staatsinfo und Parteienmodus (seit M8): „Verfassung und Gruppen …“ im Staatspanel; Rolle im

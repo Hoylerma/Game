@@ -299,11 +299,13 @@ festung longwy       { ort = longwy       stufe = 1 seit = 1849.01.01 }
 festung montmedy     { ort = montmedy     stufe = 1 seit = 1849.01.01 }
 festung schlettstadt { ort = schlettstadt stufe = 1 seit = 1849.01.01 }
 
-# Hinterland (Entscheidung 12, Abschnitt 6.2): Land außerhalb des Kartenausschnitts. Einnahmen im
-# Maßstab des Modells (rund 1 Taler je Einwohner und Jahr wie die Staaten 1848), Ersatz je Kriegsmonat.
+# Hinterland (Entscheidung 12, Abschnitt 6.2): Land außerhalb des Kartenausschnitts. Einnahmen sind der
+# Überschuss nach den eigenen Ausgaben (Hof, Verwaltung, Zinsen, Heer außerhalb der Karte): rund 1 Taler
+# je Einwohner und Jahr wie die Staaten 1848, davon der Anteil, den der Kartenteil des Staates im Frieden
+# übrig behält (Frankreich 26 %, Dänemark 31 %; Review M10). Ersatz je Kriegsmonat.
 hinterland FRK {
     bevoelkerung = 31400000   # Frankreich 1846 rund 35,4 Mio., davon 4,0 Mio. im Kartenausschnitt
-    einnahmen    = 2600000
+    einnahmen    = 690000     # 2,6 Mio. brutto × 0,265
     ersatz       = 25000      # Depots, Garde mobile, nach Sedan die Heere der Republik
     orte         = { verdun sedan charleville_mezieres bar_le_duc }
     quelle       = "Spielwerte M10b nach Wissensstand ohne Quellenzugang; Kalibrierung in b2"
@@ -311,7 +313,7 @@ hinterland FRK {
 
 hinterland DEN {
     bevoelkerung = 1600000    # Königreich nördlich der Königsau, Seeland und Fünen (Zählung 1860)
-    einnahmen    = 130000
+    einnahmen    = 40000      # 130.000 brutto × 0,31
     ersatz       = 3000
     orte         = { christiansfeld roedding }
     quelle       = "Spielwerte M10b nach Wissensstand ohne Quellenzugang; Kalibrierung in b2"

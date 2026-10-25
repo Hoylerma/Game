@@ -1050,6 +1050,11 @@ func _fill_budget() -> void:
 				roundi(float(state.get("customs_tariff_percent", 0.0)))
 			)
 		_budget_line(caption, GermanFormat.signed_money(amount))
+	# Überschuss des Hinterlands außerhalb der Karte (seit dem Review M10; Frankreich, Dänemark).
+	var hinterland := float(state.get("hinterland_month", 0.0))
+	if hinterland > 0.0:
+		income += hinterland
+		_budget_line("Hinterland (Überschuss)", GermanFormat.signed_money(hinterland))
 	_budget_line("Summe", GermanFormat.signed_money(income))
 	var soldiers := int(state.get("soldiers", 0))
 	var interest_percent := float(state.get("interest_percent", 0.0))

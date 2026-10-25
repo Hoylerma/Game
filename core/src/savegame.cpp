@@ -34,7 +34,7 @@ constexpr int kZstdLevel = 3;
 /// Obergrenze der unkomprimierten Nutzdaten (Schutz vor beschädigten Längenangaben).
 constexpr std::uint64_t kMaxPayload = std::uint64_t{1} << 31;
 /// Stand des Militärs im Zustand (seit M10, Inhaltsbereich militaer): 1 = Schritt a1 (Garnisonen).
-constexpr std::uint64_t kMilitaryContentVersion = 7;
+constexpr std::uint64_t kMilitaryContentVersion = 8;
 
 bool fail(std::string* error, std::string message) {
     if (error != nullptr) {

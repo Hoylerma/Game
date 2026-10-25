@@ -250,7 +250,7 @@ Parlament, Zollunion, Bund und Militär bleibt die Folge der Zufallszahlen wie v
 - **Format 4 (M10):** der Inhaltsbereich `militaer` und in Welten mit Militär die Heere im Zustand
   ([militaer.md](militaer.md)). Ein Spielstand im Format 3 zeigt seine Metadaten mit 15 Bereichen an,
   lädt aber nicht. Weil sich der Bereich in jedem Schritt von M10 erweitert, zählt er einen eigenen
-  Stand (`kMilitaryContentVersion`, 1 seit Schritt a1, 2 seit a2, 3 seit a3, 4 seit a4, 5 seit a5, 6 seit b1) mit: Ein Spielstand 1848
+  Stand (`kMilitaryContentVersion`, 1 seit Schritt a1, 2 seit a2, 3 seit a3, 4 seit a4, 5 seit a5, 6 seit b1, 7 seit b2, 8 seit dem Review) mit: Ein Spielstand 1848
   aus einem früheren Schritt lädt dann nicht mehr („Inhalt geändert: militaer“). Seit Schritt a2 stehen
   die Befehle `Marsch` (Wert = Nummer des Heeres, Ziel = Ort) und `Mobilmachung` im Protokoll, seit a3
   `Kriegserklaerung` (Ziel = Gegner, seit a4 Wert = Kriegsziel), seit a4 `Kriegsziel` und
@@ -260,7 +260,8 @@ Parlament, Zollunion, Bund und Militär bleibt die Folge der Zufallszahlen wie v
   (`kriegsergebnisse`) und je Krieg die Zahl der Schlachten (`schlachten`). Seit b1 tragen die Heere
   Befehlshaber und Führung, und der Bereich `militaer` umfasst Aufmarsch, Kriege und Bündnisse zum Start
   und das Hinterland; seit b2 (Stand 7) die Regeln `generalstab_moral`, `moral_sieg` und
-  `punkte_heer_anteil` und die besetzten Gebiete der Kriege zum Start. Ohne Militär (1648) zählen weder
+  `punkte_heer_anteil` und die besetzten Gebiete der Kriege zum Start; seit dem Review M10 (Stand 8)
+  der Überschuss des Hinterlands als Posten im Haushalt (Zustand, nur in Welten mit Hinterland). Ohne Militär (1648) zählen weder
   der Stand noch die Heere, der Prüfwert der Formatwache bleibt.
 - Jede Änderung am Zustand (neues Feld, neue Reihenfolge) erhöht die Formatversion. Der Test
   „Spielstand: Formatwache“ verhindert, dass das vergessen wird: Er speichert die Test-Fixture nach

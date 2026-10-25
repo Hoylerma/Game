@@ -29,6 +29,10 @@ Fixed peace_strength(const World& world, Index state);
 /// Soldaten aller Heere eines Staates.
 Fixed state_soldiers(const World& world, Index state);
 
+/// Überschuss des Hinterlands je Monat (seit dem Review M10, Abschnitt 6.2): eine Einnahme im
+/// Haushalt des Staates; 0 ohne Hinterland oder für einen untergegangenen Staat.
+Fixed hinterland_income(const World& world, Index state);
+
 /// Heere eines Staates (Zahl).
 std::int64_t state_army_count(const World& world, Index state);
 
