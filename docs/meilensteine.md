@@ -23,7 +23,7 @@ gebaut; Abhängigkeiten stehen jeweils dabei.
 | M8 | Politik, Parteien und Wahlen | 2 – Vertical Slice | M7 | **fertig** (Fachprüfung der Werte offen, siehe unten) |
 | M9 | Diplomatie und Zollverein | 2 – Vertical Slice | M7 | **fertig** (Fachprüfung der Werte offen, siehe unten) |
 | M10 | Militär und Einigungskriege | 2 – Vertical Slice | M9 | **fertig** (Fachprüfung der Werte offen, siehe unten) |
-| M11 | Ereignisse und Revolution 1848/49 | 2 – Vertical Slice | M8 | offen |
+| M11 | Ereignisse und Revolution 1848/49 | 2 – Vertical Slice | M8 | Entwurf ([technik/ereignisse.md](technik/ereignisse.md), Entscheidungen offen) |
 | M12 | Künstliche Intelligenz der Staaten | 2 – Vertical Slice | M8–M11 | offen |
 | M13 | Spielbarer Vertical Slice 1848–1871 | 2 – Vertical Slice | M12 | offen |
 
@@ -736,6 +736,7 @@ Abschnitt 12).
 
 **Ziel:** Ereignisse, Journale und Missionen nach
 [18 Ereignisse, Journale, Missionen](18_ereignisse_journale_missionen.md).
+Vertrag (Entwurf, Entscheidungen offen): [technik/ereignisse.md](technik/ereignisse.md).
 
 **Umfang**
 - Ereignissystem im Chronik-Skript (Bedingungen, Auswahlmöglichkeiten, Folgen)
