@@ -16,6 +16,8 @@ const MAX_POLITICAL_ENTRIES := 16
 ## Zollgebiete (seit M9): Musterfarbe der Staaten ohne Union (die Karte zeigt sie blass in ihrer
 ## Staatsfarbe, die Legende stellvertretend in einem blassen Ton).
 const CUSTOMS_ALONE_SAMPLE := Color(0.86, 0.84, 0.79)
+## Probe für Staaten ohne Krieg im Kartenmodus „Krieg“ (seit M10, wie kWarNeutral der Brücke).
+const WAR_NEUTRAL_SAMPLE := Color(0.83, 0.80, 0.73)
 
 
 ## Staaten mit mindestens einem Ort, alphabetisch nach Kurzname; bei mehr als max_entries
@@ -556,6 +558,43 @@ static func relation_entries(sim: SimulationClient, player: int) -> Array[Dictio
 			"text": "%s (%d)" % [str(band[1]), count],
 			"detail": "Beziehung %s: %s" % [str(band[2]), ", ".join(names) if not names.is_empty() else "keine"],
 		})
+	return entries
+
+
+## Kartenmodus „Krieg“ (seit M10): die Kriegführenden je Krieg in ihrer Farbe, besetzte Orte
+## (Schraffur in der Farbe des Besitzers) und blass die Staaten ohne Krieg; leer ohne Krieg.
+static func war_entries(sim: SimulationClient) -> Array[Dictionary]:
+	var wars := sim.get_wars()
+	if wars.is_empty():
+		return []
+	var entries: Array[Dictionary] = []
+	var listed := {}
+	for war in wars:
+		for side: String in ["attackers", "defenders"]:
+			var states: Array = war.get(side, [])
+			for i in states.size():
+				var index := int(states[i])
+				if listed.has(index):
+					continue
+				listed[index] = true
+				var state := sim.get_state(index)
+				entries.append({
+					"color": state.get("color", UiPalette.INK),
+					"text": str(state.get("short_name", "")),
+					"detail": "%s im %s" % [
+						"Angreifer" if side == "attackers" else "Verteidiger", str(war.get("name", "Krieg"))
+					],
+				})
+	entries.append({
+		"hatch": true,
+		"text": "besetzt",
+		"detail": "Farbe des Besetzers, Streifen in der Farbe des Besitzers; die Fronten sind Grenzen",
+	})
+	entries.append({
+		"color": WAR_NEUTRAL_SAMPLE,
+		"text": "ohne Krieg",
+		"detail": "Staaten, die keinen Krieg führen, blass",
+	})
 	return entries
 
 

@@ -63,11 +63,11 @@ Prüft die GDExtension und die Kartendaten ohne Szene und ohne Grafikausgabe:
    `get_location_index` passt zu jedem Ort
 4. ungültige Indizes und Befehle werden abgewiesen (leere Rückgabe bzw. `false`, auch
    `get_kreis`, `get_kreis_index`, `get_market` und `set_tax_percent` mit ungültiger Steuerart)
-5. `get_map_colors` liefert für alle Kartenmodi (seit M9 fünfzehn) eine Farbe je Ort
+5. `get_map_colors` liefert für alle Kartenmodi (seit M10 sechzehn) eine Farbe je Ort
 6. Orte ohne Daten und Kreise: `get_location_owner_indices` und `get_location_kreis_indices`
    passen zu `get_location`; Orte ohne Daten haben keinen Besitzer und keine Bevölkerung;
    `get_kreis` hat alle Felder, `get_kreis_index` passt, `location_count` stimmt; Alpha der
-   Kartenfarben ist 0 genau für Orte ohne Daten in den Modi 0, 1, 2, 4, 6, 7, 8 und 10 bis 14, im Modus 9
+   Kartenfarben ist 0 genau für Orte ohne Daten in den Modi 0, 1, 2, 4, 6, 7, 8 und 10 bis 15, im Modus 9
    (Märkte) nur für Orte ohne Daten in Märkten ohne Orte mit Daten, sonst 1
 7. Wirtschaft (seit M5): Märkte mit allen Feldern und Preisen, Marktindex je Ort, jeder Ort mit
    Daten in einem aktiven Markt; Steuern je Art ergeben die Einnahmen, die Posten die Ausgaben;
@@ -197,6 +197,21 @@ echten Daten und prüft:
     Krise über dem Fenster (ohne Überlappung, das Fenster bleibt über der Leiste der Kartenmodi),
     „Nachgeben“ beendet sie. Im Reiter „Bundesversammlung“ wird eine Bundesreform beantragt, die am
     nächsten Tag als offener Antrag erscheint; Esc schließt das Fenster.
+11. **Krieg** (seit M10, Schritt b3): Düppel, Königgrätz und Sedan stehen im Menü „Neues Spiel“.
+    Lesezeichen Königgrätz; ein Klick auf die Marke der I. Armee wählt sie aus, ein Rechtsklick auf
+    Prag gibt den Marschbefehl, am nächsten Tag ist Prag ihr Ziel. Taste Y schaltet in den
+    Kartenmodus „Krieg“ mit Garnisonen. Das Heeresfenster nennt Befehlshaber, Moral und Ziel;
+    „Dem Generalstab übergeben“ wirkt am nächsten Tag („Selbst führen“); Esc hebt die Auswahl auf.
+    Das Staatspanel zeigt das mobile Heer ohne Abrüstung im Krieg, „Krieg …“ öffnet das
+    Kriegsfenster mit Kriegspunkten und Friedensangeboten samt Antwort Österreichs; im Reiter
+    „Heere“ wählt ein Klick die I. Armee; Esc schließt. Binnen 60 Tagen kommt ein Schlachtbericht;
+    „Krieg erklären …“ im Fenster „Diplomatie“ fragt mit Seiten nach, am nächsten Tag läuft ein Krieg
+    mehr. Düppel als Dänemark: Verliert der Spielerstaat alle Orte, hält die Zeit an und ein Hinweis
+    erscheint (Review M10).
+12. **Kriegslesezeichen durchgespielt** (Abnahme M10): Düppel, Königgrätz und Sedan als Preußen; das
+    stärkste Feldheer marschiert per Rechtsklick zur Hauptstadt des Gegners, im Kriegsfenster geht
+    das erste Friedensangebot hinaus, das der Gegner laut Vorab-Prüfung annimmt; am nächsten Tag ist
+    der Krieg zu Ende.
 
 ```bash
 godot --headless --path game --script res://tests/klick_test.gd

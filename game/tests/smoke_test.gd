@@ -107,7 +107,7 @@ const MARKET_GOOD_FIELDS: PackedStringArray = [
 const KREIS_FIELDS: PackedStringArray = ["id", "name", "location_count", "source"]
 ## Kartenmodi, in denen Orte ohne Daten Alpha 0 haben (bridge-api.md); im Marktmodus (9)
 ## nur Orte ohne Daten in Märkten ohne Orte mit Daten.
-const NO_DATA_ALPHA_MODES: PackedInt32Array = [0, 1, 2, 4, 6, 7, 8, 10, 11, 12, 13, 14]
+const NO_DATA_ALPHA_MODES: PackedInt32Array = [0, 1, 2, 4, 6, 7, 8, 10, 11, 12, 13, 14, 15]
 const CHRONICLE_FIELDS: PackedStringArray = ["date_text", "text", "location_index", "state_index"]
 
 var _failures := PackedStringArray()
@@ -380,6 +380,29 @@ func _check_military_1866() -> void:
 		"keine Kriegserklärung an Österreich im Krieg; Zielauswahl für den Krieg",
 		"get_declaration_goals/get_war_goal_options unerwartet"
 	)
+	# Hinterland (Review M10): Frankreichs Überschuss ist ein Posten im Haushalt und Teil der Einnahmen.
+	var france := sim.get_state(sim.get_state_index("FRK"))
+	_check(
+		is_equal_approx(float(france.get("hinterland_month", 0.0)), 690000.0)
+		and float(france.get("income_month", 0.0)) > float(france.get("hinterland_month", 0.0)),
+		"Frankreich: Hinterland 690.000 je Monat in den Einnahmen",
+		"hinterland_month %s, income_month %s" % [france.get("hinterland_month"), france.get("income_month")]
+	)
+	# Seiten einer möglichen Erklärung: Hauptparteien zuerst, Soldaten je Seite (seit b3c).
+	var declarable := -1
+	for target in sim.get_state_count():
+		if target != prussia and not sim.get_declaration_goals(prussia, target).is_empty():
+			declarable = target
+			break
+	var sides := sim.get_declaration_sides(prussia, declarable)
+	_check(
+		sim.get_declaration_sides(prussia, austria).is_empty() and declarable >= 0
+		and (sides.get("attackers", []) as Variant)[0] == prussia
+		and (sides.get("defenders", []) as Variant)[0] == declarable
+		and int(sides.get("attacker_soldiers", 0)) > 0,
+		"get_declaration_sides: leer gegen Österreich, Seiten gegen %s" % str(sim.get_state(declarable).get("short_name", "")),
+		"get_declaration_sides: %s (Ziel %d)" % [str(sides), declarable]
+	)
 	sim.advance_days(1)
 	var marching := sim.get_army(army_id)
 	_check(
@@ -407,7 +430,7 @@ func _check_military_1866() -> void:
 	for i in control.size():
 		if control[i] >= 0 and control[i] != owners[i]:
 			occupied += 1
-	var colors := sim.get_map_colors(15)
+	var colors := sim.get_map_colors(MapModes.MAP_KRIEG)
 	_check(
 		control.size() == sim.get_location_count() and colors.size() == sim.get_location_count()
 		and occupied > 0 and sim.get_battles() is Array and sim.get_sieges() is Array,

@@ -22,8 +22,8 @@ gebaut; Abhängigkeiten stehen jeweils dabei.
 | M7 | Lesezeichen 1848 | 2 – Vertical Slice | M6 | **fertig** (Fachprüfung der Daten offen, siehe unten) |
 | M8 | Politik, Parteien und Wahlen | 2 – Vertical Slice | M7 | **fertig** (Fachprüfung der Werte offen, siehe unten) |
 | M9 | Diplomatie und Zollverein | 2 – Vertical Slice | M7 | **fertig** (Fachprüfung der Werte offen, siehe unten) |
-| M10 | Militär und Einigungskriege | 2 – Vertical Slice | M9 | in Arbeit |
-| M11 | Ereignisse und Revolution 1848/49 | 2 – Vertical Slice | M8 | offen |
+| M10 | Militär und Einigungskriege | 2 – Vertical Slice | M9 | **fertig** (Fachprüfung der Werte offen, siehe unten) |
+| M11 | Ereignisse und Revolution 1848/49 | 2 – Vertical Slice | M8 | Entwurf ([technik/ereignisse.md](technik/ereignisse.md), Entscheidungen offen) |
 | M12 | Künstliche Intelligenz der Staaten | 2 – Vertical Slice | M8–M11 | offen |
 | M13 | Spielbarer Vertical Slice 1848–1871 | 2 – Vertical Slice | M12 | offen |
 
@@ -637,7 +637,7 @@ Abschnitt 11).
 - **Alte Spielstände:** Spielstände aus M8 laden nicht (Format 3), Spielstände 1848 aus den ersten
   M9-Schritten ebenso nicht (Inhaltsbereich `diplomatie`).
 
-### M10 – Militär und Einigungskriege
+### M10 – Militär und Einigungskriege ✅
 
 **Ziel:** Kriegführung nach [15 Militär und Kriegsführung](15_militaer_und_kriegsfuehrung.md).
 Vertrag: [technik/militaer.md](technik/militaer.md) (Entscheidungen freigegeben, Stand in
@@ -654,10 +654,89 @@ Abschnitt 12).
   plausiblen, nicht festgelegten Ergebnissen
 - Heereskosten belasten den Haushalt aus M5
 
+**Ergebnis**
+- **Vertrag** in [technik/militaer.md](technik/militaer.md) mit dem Stand je Schritt. Umgesetzt in
+  zwei Teilen: M10a (Krieg im Kern auf den Daten von 1848: Nachbarschaft, Heere, Bewegung, Schlacht,
+  Besetzung, Frieden, Generalstab, Kriegslabor) und M10b (Daten 1849–1870, drei Kriegslesezeichen,
+  Kalibrierung, Brücke und Godot, Review).
+- **Netz und Heere:** 13.069 Paare benachbarter Orte mit Grenzlänge und gekreuztem Fluss, 13 Fähren;
+  Garnisonen an den Korpsstandorten (1848 zusammen 382.528 Soldaten), Feldarmeen erst mit der
+  Mobilmachung (Preußen ×2,5 in 28 Tagen), Abrüstung in 30 Tagen. Märsche über Land und Bahn auf dem
+  schnellsten Weg (20 km bzw. 300 km je Tag, Einladen nach Kapazität, Warten auf belegten Strecken),
+  Versorgung über Bahnhöfe der eigenen Seite, Zermürbung im Winter.
+- **Krieg:** Kriegserklärung mit Bündnisfall, Krise → Krieg, Bundesexekution; tägliche Schlachten
+  mit eigenem Zufallsstrom (Frontbreite, Gelände, Festung, Fluss, Geschütze, Moral), Rückzug,
+  Gefangene, Verwundete, Gefallene in der Bevölkerung; Besetzung, Belagerung und Einschließung;
+  Kriegsziele (Gebiet, Annexion, Führung im Bund, Zollunion, Entschädigung) mit Kosten in
+  Kriegspunkten, Kriegsmüdigkeit, Friedensangebote und Frieden nach Regel, Besitzwechsel zur
+  Laufzeit, Untergang von Staaten und Auflösung des Bundes. Ein Generalstab führt die Heere nach
+  Regeln; der Spieler kann ihm Heere übergeben.
+- **Daten 1849–1870:** Historie mit 38 datierten Änderungen (u. a. Annexionen 1866, Norddeutscher
+  Bund, Zollverein 1854 und 1868), Frankreich mit 217 Orten und Hinterland, 62 weitere Bahnstrecken
+  (185 Abschnitte), Heerwesen, Garnisonen und Festungen bis 1870.
+- **Drei Kriegslesezeichen** „Düppel“ (1.2.1864), „Königgrätz“ (16.6.1866) und „Sedan“ (19.7.1870), die
+  im Krieg beginnen (Aufmarsch mit Befehlshabern, Kriege mit Zielen beider Seiten, Bündnisse).
+- **Kriegslabor** (`uhrwerk-cli krieg`, in der CI): Düppel 16 von 16 Läufen für Preußen (Median 90
+  Tage), Königgrätz 11 von 16 (107 Tage), Sedan 14 von 16 für die deutsche Seite (197 Tage); in
+  keinem Lesezeichen derselbe Ausgang in allen Läufen außer Düppel (dort historisch zwingend,
+  Abweichung in Abschnitt 6.3 des Vertrags).
+- **Godot:** Heere als Marken mit Stärke, Auswahl per Klick, Marschbefehl per Rechtsklick mit Weg und
+  Ankunft, Schlachten und Belagerungen auf der Karte; Kartenmodus „Krieg“ (Taste Y) mit
+  schraffierten besetzten Orten und Fronten; Heeresfenster, Kriegsfenster mit Friedensangeboten samt
+  Vorab-Prüfung und weiteren Zielen, „Krieg erklären …“ im Fenster „Diplomatie“, Mobilmachung im
+  Staatspanel, Schlachtberichte; die drei Lesezeichen im Menü „Neues Spiel“.
+- **Spielstand Format 4** mit dem Inhaltsbereich `militaer`; der Zustand des Militärs wird nur in
+  Welten mit Militärdaten besucht.
+- **1648 unverändert:** Die Prüfsumme nach 100 Jahren bleibt `5db13a66d63e6079`.
+- **Tests:** 216 Testfälle (vorher 189); neue CTests `krieg_daten`, `pruefen_krieg_fixture`,
+  `krieg_fixture`, `krieg_1848`, je Lesezeichen `daten_pruefen_<lesezeichen>` und
+  `krieg_<lesezeichen>` sowie `speichertest_koeniggraetz`; Godot-Einheitentest mit 302 Prüfungen
+  (vorher 277); Rauchtest Königgrätz; Klicktest mit Auswahl, Marsch, Generalstab, Kriegsfenster,
+  Schlachtbericht, Kriegserklärung, dem Durchspielen aller drei Lesezeichen bis zum Frieden und dem
+  Untergang des Spielerstaates; Screenshots des Kartenmodus „Krieg“ und des Kriegsfensters in der CI.
+- **Review M10** über Kern, Brücke und Godot, Daten und Doku. Behoben sind:
+  - Das Hinterland zahlte seine vollen Einnahmen in die Kasse, ohne die Ausgaben seiner Bevölkerung:
+    Frankreich tilgte mitten im Krieg 1870 seine ganzen Schulden, und Dänemark verfehlte seit b1 den
+    Balancing-Bericht 1848 (Vermögen). Jetzt ist sein Überschuss ein Posten im Haushalt
+    im Verhältnis, das der Kartenteil des Staates im Frieden übrig behält (Frankreich 690.000 statt
+    2,6 Mio. Taler je Monat, Dänemark 40.000 statt 130.000).
+  - Im Parteienmodus ließ sich ein Heer des Staates per Rechtsklick in Marsch setzen.
+  - Verliert der Spielerstaat alle Orte, hält die Zeit an und ein Hinweis nennt den Weg zu einem
+    anderen Staat.
+  - Grenzen und Staatsnamen folgten einem Frieden erst am nächsten Monatsersten, die Legende im
+    Kartenmodus „Krieg“ einem neuen Krieg ebenso.
+  - Das Kriegsfenster rechnete die Zielauswahl jede Sekunde neu (rund 18 ms) und schloss dabei eine
+    offene Auswahl.
+
+**Abnahme im Einzelnen**
+
+| Kriterium | Stand |
+|---|---|
+| Die drei Kriege lassen sich durchspielen | erfüllt: Der Klicktest spielt Düppel, Königgrätz und Sedan als Preußen mit Marschbefehl per Rechtsklick und einem angenommenen Friedensangebot bis zum Frieden; Königgrätz zusätzlich mit Generalstab, Schlachtbericht und Kriegserklärung; der Rauchtest prüft die Brücke |
+| Ein ungestörter Lauf ohne Spieler führt zu plausiblen, nicht festgelegten Ergebnissen | erfüllt: Das Kriegslabor rechnet je Lesezeichen 16 Seeds gegen die Korridore der Kriegsziele (CI-Schritt „Kriegslabor Lesezeichen“); Königgrätz und Sedan enden nicht in allen Läufen gleich, Düppel mit Absicht immer für Preußen |
+| Heereskosten belasten den Haushalt aus M5 | erfüllt: Der Einheitentest prüft den Posten „Heer“ mit der Mobilmachung (×2,4 bis ×2,5); das Kriegslabor berichtet die Schulden der Hauptparteien vor und nach dem Krieg |
+
+**Bekannte Grenzen**
+- **Fachprüfung offen:** Stärken, Daten des Aufmarschs und Hinterlands sind `ungeprueft`, Kampfwerte
+  und Regeln Spielwerte nach Literaturkenntnis, ohne Prüfung gegen Quellen.
+- **Bevölkerung der Kriegslesezeichen von 1846** ohne Hochrechnung auf 1864–1870 (Entscheidung 14).
+- **Keine KI:** Außer dem Generalstab, der Heere führt, handeln die Staaten nicht von sich aus (M12):
+  Sie erklären keine Kriege und bieten keinen Frieden an; Frieden schließen sie nach Regel.
+- **Haushalt im Krieg:** Die Staaten wirtschaften schon im Frieden mit Überschuss (keine
+  Ausgabenpolitik ohne KI); Preußen tilgt 1870 trotz Mobilmachung weiter Schulden, Frankreich
+  verschuldet sich.
+- **Keine Arbeitskräfte:** Reservisten fehlen der Wirtschaft nicht (Entscheidung 7).
+- **Keine Flotte, keine Außenmächte** außer Frankreich (Italien, Russland, Großbritannien fehlen).
+- **Kriegsfenster** ohne eigene Höhenanpassung: Mit sehr vielen Kriegen kann es unter die Leiste der
+  Kartenmodi reichen.
+- **Alte Spielstände:** Spielstände aus M9 laden nicht (Format 4), Spielstände 1848 und der Kriegslesezeichen
+  aus früheren M10-Schritten ebenso nicht (Inhaltsbereich `militaer`).
+
 ### M11 – Ereignisse und Revolution 1848/49
 
 **Ziel:** Ereignisse, Journale und Missionen nach
 [18 Ereignisse, Journale, Missionen](18_ereignisse_journale_missionen.md).
+Vertrag (Entwurf, Entscheidungen offen): [technik/ereignisse.md](technik/ereignisse.md).
 
 **Umfang**
 - Ereignissystem im Chronik-Skript (Bedingungen, Auswahlmöglichkeiten, Folgen)

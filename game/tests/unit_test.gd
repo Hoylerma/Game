@@ -23,6 +23,8 @@ func _initialize() -> void:
 	_test_legend_entries()
 	_test_map_modes()
 	_test_railway_layer()
+	_test_army_layer()
+	_test_battle_reports()
 	_test_map_detail()
 	_test_map_data_and_layout()
 	_test_location_catalog()
@@ -85,12 +87,14 @@ func _test_launch_options() -> void:
 	_true(not defaults.wants_screenshot(), "ohne --screenshot kein Screenshot")
 	var bad_args := PackedStringArray(
 		[
-			"--tage=-3", "--kartenmodus=15", "--unbekannt", "--zoom=0", "--zoom=viel", "--szenario",
-			"--staat=", "--partei=", "--verfassung=ja", "--zollunion=ja", "--diplomatie=krieg"
+			"--tage=-3", "--kartenmodus=16", "--unbekannt", "--zoom=0", "--zoom=viel", "--szenario",
+			"--staat=", "--partei=", "--verfassung=ja", "--zollunion=ja", "--diplomatie=krieg",
+			"--krieg=frieden", "--heer=1"
 		]
 	)
 	var bad := LaunchOptions.parse(bad_args)
-	_equal(bad.problems.size(), 11, "fehlerhafte Optionen gemeldet")
+	_equal(bad.problems.size(), 13, "fehlerhafte Optionen gemeldet")
+	_true(bad.war_tab == -1 and not bad.select_army, "fehlerhaftes --krieg und --heer öffnen nichts")
 	_equal(bad.diplomacy_tab, -1, "fehlerhaftes --diplomatie öffnet nichts")
 	var party := LaunchOptions.parse(PackedStringArray(["--szenario=voelkerfruehling", "--partei=liberale"]))
 	_true(party.party_id == "liberale" and party.problems.is_empty(), "Option --partei (seit M8)")
@@ -111,6 +115,13 @@ func _test_launch_options() -> void:
 	)
 	_equal(LaunchOptions.parse(PackedStringArray(["--diplomatie=bund"])).diplomacy_tab, 1, "--diplomatie=bund")
 	_equal(LaunchOptions.parse(PackedStringArray(["--diplomatie=frage"])).diplomacy_tab, 2, "--diplomatie=frage")
+	var war := LaunchOptions.parse(PackedStringArray(["--krieg", "--heer", "--kartenmodus=15"]))
+	_true(
+		war.war_tab == 0 and war.select_army and war.map_mode == 15 and war.problems.is_empty()
+		and defaults.war_tab == -1 and not defaults.select_army,
+		"Optionen --krieg, --heer und --kartenmodus=15 (seit M10)"
+	)
+	_equal(LaunchOptions.parse(PackedStringArray(["--krieg=heere"])).war_tab, 1, "--krieg=heere")
 	var chosen := LaunchOptions.parse(
 		PackedStringArray(["--szenario=voelkerfruehling", "--staat=bav"])
 	)
@@ -224,7 +235,14 @@ func _test_legend_entries() -> void:
 
 
 func _test_map_modes() -> void:
-	_equal(MapModes.COUNT, 15, "fünfzehn Kartenmodi (Zollgebiete und Beziehungen seit M9)")
+	_equal(MapModes.COUNT, 16, "sechzehn Kartenmodi (Krieg seit M10)")
+	_equal(MapModes.MAP_KRIEG, 15, "Kartenmodus Krieg = 15 (bridge-api.md)")
+	_equal(MapModes.KEY_HINTS[MapModes.MAP_KRIEG], "Y", "Taste Y (links neben X) für Krieg")
+	_true(InputMap.has_action(&"kartenmodus_krieg"), "Aktion für den Kartenmodus Krieg")
+	_true(MapModes.DATA_MODES.has(MapModes.MAP_KRIEG), "Krieg mit Schraffur")
+	var y_key := InputEventKey.new()
+	y_key.physical_keycode = KEY_Z
+	_equal(MapModes.mode_for_event(y_key), MapModes.MAP_KRIEG, "Taste links neben X: Krieg")
 	_equal(MapModes.MAP_BEZIEHUNGEN, 14, "Kartenmodus Beziehungen = 14 (bridge-api.md)")
 	_equal(MapModes.KEY_HINTS[MapModes.MAP_BEZIEHUNGEN], "#", "Taste # für Beziehungen")
 	_true(InputMap.has_action(&"kartenmodus_beziehungen"), "Aktion für den Kartenmodus Beziehungen")
@@ -299,6 +317,60 @@ func _test_railway_layer() -> void:
 	)
 	_true(RailwayLayer.is_shown({"open": true}, date), "eröffneter Abschnitt immer sichtbar")
 	_true(not RailwayLayer.is_shown({"open": false}, date), "Abschnitt ohne Datum ausgeblendet")
+
+
+## Heere auf der Karte (seit M10, Schritt b3): Stärke in Tausend, Garnisonen nur auf Wunsch,
+## Auswahl per Weltpunkt.
+## Schlachtberichte (seit M10, Schritt b3): höchstens MAX_REPORTS, die älteste weicht; × entfernt.
+func _test_battle_reports() -> void:
+	var reports := BattleReports.new()
+	root.add_child(reports)
+	_true(not reports.visible and reports.report_count() == 0, "ohne Meldung unsichtbar")
+	for i in BattleReports.MAX_REPORTS + 1:
+		reports.add_report("Sieg bei Ort %d" % i, "Schlacht bei Ort %d" % i, i, true)
+	_equal(reports.report_count(), BattleReports.MAX_REPORTS, "höchstens MAX_REPORTS Meldungen")
+	_true(
+		not reports.reports_text().contains("Ort 0") and reports.reports_text().contains("Ort 3"),
+		"die älteste Meldung weicht"
+	)
+	var shown: Array[int] = [-1] # Lambdas fangen Werte ein, ein Array teilen sie
+	reports.location_requested.connect(func(index: int) -> void: shown[0] = index)
+	(reports.get_child(0).find_child("Show", true, false) as Button).pressed.emit()
+	_equal(shown[0], 1, "„Zeigen“ meldet den Ort der Schlacht")
+	reports.clear()
+	_true(not reports.visible and reports.report_count() == 0, "nach clear leer und unsichtbar")
+	reports.free()
+
+
+func _test_army_layer() -> void:
+	_equal(ArmyLayer.strength_text(93000), "93", "Stärke in Tausend")
+	_equal(ArmyLayer.strength_text(1499), "1", "Stärke gerundet")
+	_equal(ArmyLayer.strength_text(800), "<1", "unter tausend")
+	_equal(ArmyLayer.strength_text(205000), "205", "große Armee")
+	var layer := ArmyLayer.new()
+	var armies: Array[Dictionary] = [
+		{"id": 1, "soldiers": 93000, "garrison": false, "staff": true},
+		{"id": 2, "soldiers": 16000, "garrison": true, "staff": true},
+		{"id": 3, "soldiers": 5000, "garrison": false, "staff": false},
+	]
+	var positions := PackedVector2Array([Vector2(100, 100), Vector2(300, 300), Vector2(100, 100)])
+	var colors := PackedColorArray([Color.BLUE, Color.BLUE, Color.YELLOW])
+	var own: Array[bool] = [true, true, false]
+	layer.set_armies(armies, positions, colors, own)
+	_equal(layer.marker_count(), 2, "Garnisonen ohne Kartenmodus Krieg ausgeblendet")
+	layer.show_garrisons = true
+	layer.set_armies(armies, positions, colors, own)
+	_equal(layer.marker_count(), 3, "Garnisonen im Kartenmodus Krieg")
+	layer.set_zoom(1.0)
+	var first := layer.marker_center(1)
+	var third := layer.marker_center(3)
+	_true(first.y < 100.0 and absf(first.x - third.x) > 1.0, "zwei Heere im selben Ort nebeneinander über dem Ort")
+	_equal(layer.army_at(first), 1, "Klick auf die Marke wählt das Heer")
+	_equal(layer.army_at(third), 3, "zweite Marke im selben Ort")
+	_equal(layer.army_at(Vector2(500, 500)), -1, "daneben kein Heer")
+	layer.set_selection(1, PackedVector2Array([Vector2(100, 100), Vector2(200, 100)]))
+	_equal(layer.selected_army(), 1, "Auswahl gespeichert")
+	layer.free()
 
 
 func _test_map_detail() -> void:

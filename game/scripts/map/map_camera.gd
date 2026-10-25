@@ -11,6 +11,11 @@ extends Camera2D
 ## die Kamera. Tasten, die keinem Kartenmodus gehören, bewegen sofort.
 
 ## Ab dieser Haltedauer gilt eine doppelt belegte Taste als Kamerabewegung.
+## Rechtsklick ohne Ziehen (seit M10: Marschbefehl), Bildschirmposition im Viewport.
+signal right_clicked(screen_position: Vector2)
+
+## Weiter als so viele Bildschirmpixel gezogen, ist ein Rechtsklick kein Klick mehr.
+const CLICK_SLOP := 6.0
 const TAP_HOLD_MS := 180
 const PAN_ACTIONS: Array[StringName] = [
 	&"kamera_links", &"kamera_rechts", &"kamera_hoch", &"kamera_runter"
@@ -40,6 +45,9 @@ var _target_zoom := 1.0
 var _zoom_anchor_screen := Vector2.ZERO
 var _zoom_anchor_world := Vector2.ZERO
 var _dragging := false
+## Rechte Taste: wo gedrückt und wie weit seitdem gezogen (seit M10, Rechtsklick).
+var _right_press := Vector2.ZERO
+var _right_travel := -1.0
 ## Gedrückte Bewegungstasten: Tastencode → [Richtung, Zeitpunkt in ms, doppelt belegt].
 var _held_keys := {}
 
@@ -127,11 +135,16 @@ func _input(event: InputEvent) -> void:
 			_dragging = false
 			return
 		_move_by(-motion.relative / zoom.x)
+		if _right_travel >= 0.0:
+			_right_travel = maxf(_right_travel, motion.position.distance_to(_right_press))
 		get_viewport().set_input_as_handled()
 		return
 	var button := event as InputEventMouseButton
 	if button != null and not button.pressed and _is_drag_button(button.button_index):
 		_dragging = false
+		if button.button_index == MOUSE_BUTTON_RIGHT and _right_travel >= 0.0 and _right_travel <= CLICK_SLOP:
+			right_clicked.emit(button.position)
+		_right_travel = -1.0
 		get_viewport().set_input_as_handled()
 
 
@@ -149,6 +162,8 @@ func _handle_mouse_button(button: InputEventMouseButton) -> void:
 	if _is_drag_button(button.button_index):
 		if button.pressed:
 			_dragging = true
+			_right_press = button.position
+			_right_travel = 0.0 if button.button_index == MOUSE_BUTTON_RIGHT else -1.0
 			get_viewport().set_input_as_handled()
 		return
 	if not button.pressed:

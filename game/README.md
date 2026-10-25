@@ -1,9 +1,9 @@
 # EINIGKEIT – Godot-Projekt (Prototyp der Spieloberfläche, Meilensteine M1 bis M9)
 
 Das Projekt zeigt die Simulation des Kerns **Uhrwerk** auf der Karte des **Kernraums**
-(Meilenstein M3: rund 4.500 Orte in rund 620 Kreisen): Kartenansicht mit fünfzehn Kartenmodi
+(Meilenstein M3: rund 4.500 Orte in rund 620 Kreisen): Kartenansicht mit sechzehn Kartenmodi
 (seit M4 auch Lebensstandard und Kultur, seit M5 Wirtschaftsleistung und Märkte, seit M7
-Verwaltung und Eisenbahnen, seit M8 Wahlen, seit M9 Zollgebiete und Beziehungen), Zoomstufen mit
+Verwaltung und Eisenbahnen, seit M8 Wahlen, seit M9 Zollgebiete und Beziehungen, seit M10 Krieg), Zoomstufen mit
 Staats-, Kreis- und Ortsnamen, obere Leiste, Staatspanel mit Reglern für Kontribution, Akzise und
 Zoll und einem Haushaltsfenster (seit M5), Ortsinfo mit Wirtschaft (Markt, Einkommen und
 Bedarfsdeckung je Beruf, Betriebe, Güter; seit M5) und Bevölkerung (Kulturen, Lebensstandard,
@@ -62,13 +62,15 @@ Optionen stehen nach `--` (Benutzerargumente):
 |---|---|
 | `--screenshot=<pfad>` | Nach dem Laden simulieren, etwa 20 Bilder warten, den Viewport als PNG speichern und beenden |
 | `--tage=<n>` | Simulierte Tage vor dem Screenshot (Standard 60) |
-| `--kartenmodus=<0..14>` | 0 Politisch, 1 Bevölkerungsdichte, 2 Konfession, 3 Gelände, 4 Verwüstung, 5 Kreise, 6 Lebensstandard, 7 Kultur (6 und 7 seit M4), 8 Wirtschaft, 9 Märkte (seit M5), 10 Verwaltung, 11 Eisenbahnen (beide seit M7), 12 Wahlen (seit M8), 13 Zollgebiete, 14 Beziehungen (beide seit M9) |
+| `--kartenmodus=<0..15>` | 0 Politisch, 1 Bevölkerungsdichte, 2 Konfession, 3 Gelände, 4 Verwüstung, 5 Kreise, 6 Lebensstandard, 7 Kultur (6 und 7 seit M4), 8 Wirtschaft, 9 Märkte (seit M5), 10 Verwaltung, 11 Eisenbahnen (beide seit M7), 12 Wahlen (seit M8), 13 Zollgebiete, 14 Beziehungen (beide seit M9), 15 Krieg (seit M10) |
 | `--ort=<ort_id>` | Ort auswählen, Ortsinfo geöffnet (z. B. `berlin_coelln`) |
 | `--zoom=<faktor>` | Vergrößerung gegenüber der Übersicht (1 = ganze Karte), zentriert auf `--ort`, sonst auf die Kartenmitte (bis zum Faktor 1 bleibt die Bildmitte der Übersicht); gilt auch ohne `--screenshot` |
 | `--haushalt` | Haushaltsfenster des Spielerstaates vor dem Screenshot öffnen (seit M5) |
 | `--verfassung` | Fenster „Verfassung und Gruppen“ des Spielerstaates vor dem Screenshot öffnen (seit M8; nur in Szenarien mit Parlament, 1848) |
 | `--zollunion` | Fenster „Zollunion“ des Spielerstaates vor dem Screenshot öffnen (seit M9; nur in Szenarien mit Zollunion, 1848) |
 | `--diplomatie[=<reiter>]` | Fenster „Diplomatie“ vor dem Screenshot öffnen, Reiter `staaten` (Standard), `bund` oder `frage` (seit M9; nur mit dem Deutschen Bund, 1848) |
+| `--krieg[=<reiter>]` | Kriegsfenster vor dem Screenshot öffnen, Reiter `kriege` (Standard) oder `heere` (seit M10; nur in Szenarien mit Heeren) |
+| `--heer` | Stärkstes eigenes Feldheer auswählen, das Heeresfenster steht dann in der rechten Spalte (seit M10) |
 | `--spielmenue` | Spielmenü vor dem Screenshot öffnen (seit M6) |
 | `--szenario=<id>` | Szenario beim Start, z. B. `voelkerfruehling` (seit M7; Standard `westfaelischer_frieden`); gilt auch ohne `--screenshot` |
 | `--staat=<TAG>` | Spielerstaat beim Start, z. B. `BAV` (seit M7; Standard: Spieler des Szenarios) |
@@ -97,7 +99,9 @@ Modus `--headless` gibt es kein Bild; ohne Bildschirm hilft `xvfb-run`.
 | Eingabe | Wirkung |
 |---|---|
 | Linksklick auf die Karte | Ort auswählen, Ortsinfo öffnen (Klick ins Leere, ins Meer oder Ausland schließt sie) |
-| Esc | Auswahl aufheben |
+| Linksklick auf eine Heeresmarke | seit M10: Heer auswählen (Rahmen, Weg bis zum Ziel gestrichelt) |
+| Rechtsklick ohne Ziehen | seit M10, mit einem eigenen Feldheer ausgewählt: Marschbefehl zum Ort (wirksam ab dem nächsten Tag); der Tooltip nennt beim Überfahren Tage und Ankunft, die Karte zeigt den Weg gestrichelt |
+| Esc | Auswahl aufheben (zuerst das Heer, dann den Ort) |
 | Rechte oder mittlere Maustaste ziehen | Karte verschieben |
 | Mausrad | Zoomen (zum Mauszeiger hin, von knapp unter der Übersicht, bis ein Kartenpixel 6 Bildschirmpixel groß ist) |
 | W A S D, Pfeiltasten | Karte verschieben |
@@ -105,13 +109,18 @@ Modus `--headless` gibt es kein Bild; ohne Bildschirm hilft `xvfb-run`.
 | H | Zur Hauptstadt des Spielerstaates (mittlere Zoomstufe) |
 | Leertaste | Pause / weiter |
 | 1 – 5 | Geschwindigkeit: 2, 5, 15, 40 oder 120 Tage je Sekunde |
-| Q W E R T Z U I O P Ü + Ä Ö # | Kartenmodus Politisch, Bevölkerungsdichte, Konfession, Gelände, Verwüstung, Kreise, Lebensstandard, Kultur, Wirtschaft, Märkte, Verwaltung und Eisenbahnen (beide seit M7; „+“ ist die Taste rechts neben Ü, englisch „]“), Wahlen (seit M8; „Ä“ rechts neben Ö, englisch „'“), Zollgebiete (seit M9; „Ö“, englisch „;“) und Beziehungen (seit M9; „#“ rechts neben Ä, englisch „\“: Beziehung jedes Staates zum Spielerstaat, grün freundlich, rot feindlich) (die Leiste zeigt Kurznamen, die Taste steht im Tooltip). Im Modus Eisenbahnen zeichnet die Karte die Strecken: eröffnete durchgezogen, die der nächsten fünf Jahre gestrichelt |
+| Q W E R T Z U I O P Ü + Ä Ö # Y | Kartenmodus Politisch, Bevölkerungsdichte, Konfession, Gelände, Verwüstung, Kreise, Lebensstandard, Kultur, Wirtschaft, Märkte, Verwaltung und Eisenbahnen (beide seit M7; „+“ ist die Taste rechts neben Ü, englisch „]“), Wahlen (seit M8; „Ä“ rechts neben Ö, englisch „'“), Zollgebiete (seit M9; „Ö“, englisch „;“) und Beziehungen (seit M9; „#“ rechts neben Ä, englisch „\“: Beziehung jedes Staates zum Spielerstaat, grün freundlich, rot feindlich) und Krieg (seit M10; „Y“ links unten, englisch „Z“: wer die Orte hält, besetzte Orte schraffiert in der Farbe des Besitzers, Fronten als Grenzen, dazu Garnisonen, Schlachten und Belagerungen) (die Leiste zeigt Kurznamen, die Taste steht im Tooltip). Im Modus Eisenbahnen zeichnet die Karte die Strecken: eröffnete durchgezogen, die der nächsten fünf Jahre gestrichelt |
 | Wahlabend | seit M8: öffnet am Wahltag von selbst, die Zeit hält an. Die Wahlkreise treffen in der Meldereihenfolge ein (Tempo ×1, ×4 oder sofort); Halbrund, Balken mit Hochrechnung und Fehlerband, Telegramme (Klick zeigt den Wahlkreis). Danach im Spielmenü „Letzte Wahl“ |
 | Steuerregler | Kontribution, Akzise und Zoll des Spielerstaates (wirksam ab dem nächsten simulierten Tag); seit M9 ist der Zollregler eines Mitglieds einer Zollunion gesperrt und zeigt den Tarif der Union |
 | „Haushalt im Einzelnen …“ | Haushaltsfenster: Einnahmen je Steuerart, Ausgaben je Posten (Hof, Verwaltung, Heer, Zinsen, Bauten), Schatz, Schulden, Zins, Staatsbankrotte |
 | „Verfassung und Gruppen …“ | seit M8, 1848: Verfassung, Wahlrecht und Wahlsystem des Landtags; Interessengruppen des Staates mit Anteil an den Einwohnern ab 15 und Einfluss (Anteil am Einkommen) |
 | „Zollunion …“ | seit M9, 1848: Zollgebiet, Tarif und Anteil an der Vereinskasse; je Union Leitmacht, Mitglieder, Tarif und Kasse mit „Beitreten …“ bzw. „Austreten …“, nach einer Rückfrage mit Zeitpunkt (nächster 1. Januar); „Antrag zurückziehen …“. Ein verbindlicher Beitritt (nach einer Zolleinigung des Bundes oder einer verlorenen Krise, seit M9b) lässt sich nicht zurückziehen. Lehnt die Leitmacht ab (Österreich beim Zollverein), ist der Knopf gesperrt ([docs/technik/diplomatie.md](../docs/technik/diplomatie.md), Abschnitt 3.5) |
 | „Diplomatie …“ | seit M9, 1848 (mit dem Deutschen Bund): Fenster mit drei Reitern. **Staaten**: jeder Staat mit Beziehung (Farbfeld wie der Kartenmodus), Verträgen, Gesandten und Lager; für den gewählten Staat Gesandten entsenden/abberufen, Bündnis anbieten/kündigen, Garantie geben/kündigen, Forderungen (Führung im Bund, Beitritt zur Zollunion, Bündnisse lösen; nach einer Rückfrage mit den Seiten der Krise) und Bundesintervention beantragen; gesperrte Knöpfe nennen im Tooltip den Grund. **Bundesversammlung**: Präsidium, Halbrund des Plenums nach Lagern, offener Antrag, Anträge (Bundesreform, Vorsitz, Zolleinigung der eigenen Union) mit Prognose, die letzten Abstimmungen. **Deutsche Frage**: Lager, Zollverein, Reformen, Krisen und Verträge ohne Wertung. Esc oder × schließt ([docs/technik/diplomatie.md](../docs/technik/diplomatie.md), Abschnitt 6) |
+| Heeresfenster | seit M10, nach einem Klick auf eine Heeresmarke (oder im Kriegsfenster) anstelle der Ortsinfo: Befehlshaber mit Führung, Stärke, Moral, Versorgung, Standort, Ziel mit Ankunft; für eigene Feldheere „Dem Generalstab übergeben“ bzw. „Selbst führen“ (ab dem nächsten Tag; ein eigener Marschbefehl nimmt das Heer dem Generalstab ab) und „Zeigen“. Esc oder × hebt die Auswahl auf |
+| „Krieg …“ (Staatspanel) | seit M10, in Szenarien mit Heeren: Kriegsfenster. **Kriege**: je Krieg Seiten, Ziele mit Kosten, Kriegspunkte gegen die Kosten der eigenen Ziele (Balken), Müdigkeit, Verluste und Schlachten; für die Hauptpartei „Weißer Frieden“, „Unsere Ziele fordern“ und „Kapitulation anbieten“, jeweils mit der Antwort des Gegners vorab („Österreich nähme an“), und ein weiteres Kriegsziel. **Heere**: die eigenen Heere mit Stärke, Moral, Lage und Weg; ein Klick wählt das Heer und fährt es an. Esc oder × schließt ([docs/technik/militaer.md](../docs/technik/militaer.md), Abschnitt 8) |
+| Mobilmachung (Staatspanel) | seit M10: Soldaten unter Waffen und Stufe (Frieden, macht mobil, mobil, rüstet ab); „Mobil machen“ bzw. „Abrüsten“ ab dem nächsten Tag, im Krieg keine Abrüstung |
+| „Krieg erklären …“ (Diplomatie, Staaten) | seit M10: Rückfrage mit den Seiten des Bündnisfalls und ihren Soldaten und der Wahl des Kriegsziels; der Krieg beginnt am nächsten Tag, alle Beteiligten machen mobil |
+| Schlachtbericht | seit M10: nach einer Schlacht mit eigenen Heeren unten rechts über der Karte „Sieg bei …“ bzw. „Niederlage bei …“ mit dem Bericht der Chronik; „Zeigen“ fährt den Ort an, nach 12 Sekunden oder mit × verschwindet die Meldung (höchstens drei zugleich) |
 | Krisenleiste | seit M9: über der Karte, solange ein diplomatisches Spiel läuft (das eigene zuerst): Forderung, Stufe (Protest, Ultimatum, Mobilmachung) mit verbleibenden Tagen, beide Seiten mit Soldaten; ist der Spielerstaat Hauptpartei, die Knöpfe Nachgeben, Vermittlung anbieten (der Tooltip sagt, ob die Gegenseite annimmt) und Eskalieren |
 | Klick auf einen Chronikeintrag | Ort des Ereignisses auswählen und anfahren |
 | F10, Knopf „Menü“ | Spielmenü: Neues Spiel mit Wahl des Lesezeichens (1648 oder 1848, seit M7), Speichern unter einem Namen, Laden aus der Liste, Schnellspeichern und -laden; die Zeit hält an, Esc oder F10 schließt es (seit M6) |
@@ -129,7 +138,7 @@ Die Tastenbelegung steht als Aktionen in `project.godot` (`kamera_*`, `kartenmod
 `tempo_*`, `auswahl_aufheben`, `spielmenue`, `schnellspeichern`, `schnellladen`) und lässt sich im Editor unter *Projekteinstellungen →
 Eingabebelegung* ändern. Es werden physische Tasten verwendet, die Belegung gilt also auf
 jeder Tastatur an derselben Stelle: „Z“ ist die Taste rechts neben T (auf englischen
-Tastaturen beschriftet mit „Y“), „Ü“ die rechts neben P (englisch „[“).
+Tastaturen beschriftet mit „Y“), „Ü“ die rechts neben P (englisch „[“), „Y“ die links unten neben der Umschalttaste (englisch „Z“).
 
 ## Aufbau
 
@@ -163,8 +172,9 @@ game/
 │   │   ├── map_detail.gd          MapDetail: Detailstufen nach Zoom (Grenzen, Namen)
 │   │   ├── map_labels.gd          MapLabels: Namen im Bildschirmraum mit Rastern
 │   │   ├── map_label_layout.gd    MapLabelLayout: Namenspunkte von Staaten und Kreisen
-│   │   └── railway_layer.gd       RailwayLayer: Eisenbahnstrecken über der Karte (seit M7)
-│   └── ui/                    Skripte der Panels, Legendenberechnung, Farbpalette; Wahlabend (election_night.gd) und Parteipanel (party_panel.gd, beide seit M8); Fenster „Diplomatie“ (diplomacy_window.gd) und Krisenleiste (play_bar.gd, beide seit M9)
+│   │   ├── railway_layer.gd       RailwayLayer: Eisenbahnstrecken über der Karte (seit M7)
+│   │   └── army_layer.gd          ArmyLayer: Heeresmarken, Wege, Schlachten, Belagerungen (seit M10)
+│   └── ui/                    Skripte der Panels, Legendenberechnung, Farbpalette; Wahlabend (election_night.gd) und Parteipanel (party_panel.gd, beide seit M8); Fenster „Diplomatie“ (diplomacy_window.gd) und Krisenleiste (play_bar.gd, beide seit M9); Heeresfenster (army_panel.gd), Kriegsfenster (war_window.gd) und Schlachtberichte (battle_reports.gd, alle seit M10)
 ├── shaders/map.gdshader       Kartenshader (canvas_item)
 ├── theme/einigkeit_theme.tres Theme der Oberfläche (Papier und Tinte)
 └── tests/                     Einheiten-, Rauch-, Klick- und Leistungstest, siehe tests/README.md

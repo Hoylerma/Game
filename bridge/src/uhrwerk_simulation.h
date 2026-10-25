@@ -179,6 +179,7 @@ public:
     godot::Array get_wars() const;
     godot::Array get_declaration_goals(std::int64_t state_index, std::int64_t target) const;
     godot::Array get_war_goal_options(std::int64_t state_index, std::int64_t war_id) const;
+    godot::Dictionary get_declaration_sides(std::int64_t state_index, std::int64_t target) const;
     bool declare_war(std::int64_t state_index, std::int64_t target, std::int64_t goal);
     bool add_war_goal(std::int64_t state_index, std::int64_t war_id, std::int64_t goal);
     godot::Dictionary get_peace_preview(std::int64_t state_index, std::int64_t war_id,

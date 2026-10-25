@@ -1,7 +1,8 @@
 class_name StatePanel
 extends PanelContainer
 ## Staatspanel des Spielerstaates mit Reglern für Kontribution, Akzise und Zoll und einem
-## Haushaltsfenster (seit M5), seit M9 mit dem Fenster „Zollunion“.
+## Haushaltsfenster (seit M5), seit M9 mit dem Fenster „Zollunion“, seit M10 mit Heer und
+## Mobilmachung.
 ##
 ## Ein Regler schickt einen Befehl an die Simulation; wirksam wird er erst am nächsten
 ## simulierten Tag. Bis dahin zeigt das Panel den Wunschwert an. Beim Ziehen geht der Befehl
@@ -15,6 +16,10 @@ signal tax_rate_requested(kind: int, percent: int)
 signal customs_change_requested(customs_union: int)
 ## Fenster „Diplomatie“ öffnen oder schließen (seit M9, Schritt b3).
 signal diplomacy_requested
+## Mobilmachung (true) oder Abrüstung gewünscht (seit M10, Schritt b3).
+signal mobilization_requested(mobilize: bool)
+## Kriegsfenster öffnen oder schließen (seit M10, Schritt b3).
+signal war_window_requested
 
 ## Namen der Steuerarten, Index = SimulationClient.TAX_*.
 const TAX_NAMES: PackedStringArray = ["Kontribution", "Akzise", "Zoll"]
@@ -68,6 +73,15 @@ var _tax_rows: Array[HBoxContainer] = []
 ## Diplomatie (seit M9, Schritt b3): Knopf, nur in Szenarien mit Deutschem Bund.
 var _diplomacy_available := false
 var _diplomacy_button: Button = null
+## Zeile mit „Zollunion …“ und „Diplomatie …“ (seit M10), sichtbar, wenn einer der beiden es ist.
+var _window_row: HBoxContainer = null
+## Militär (seit M10, Schritt b3): Stärke und Stufe der Mobilmachung, Knöpfe; nur in Szenarien mit
+## Heeren. _mobilization_sent: 1 Mobilmachung, 0 Abrüstung unterwegs, -1 kein Befehl.
+var _military_box: VBoxContainer = null
+var _military_info: Label = null
+var _mobilize_button: Button = null
+var _war_button: Button = null
+var _mobilization_sent := -1
 
 @onready var _coat: CoatOfArms = %Coat
 @onready var _name: Label = %StateName
@@ -95,6 +109,7 @@ func _ready() -> void:
 	_build_politics()
 	_build_customs()
 	_build_diplomacy()
+	_build_military()
 	show_unavailable()
 
 
@@ -176,6 +191,8 @@ func show_state(state: Dictionary, capital_name: String) -> void:
 	)
 	_update_customs(state)
 	_diplomacy_button.visible = _diplomacy_available
+	_window_row.visible = _customs_button.visible or _diplomacy_button.visible
+	_update_military(state)
 	_update_hint()
 	_budget_button.disabled = false
 	if _budget_popup.visible:
@@ -213,6 +230,10 @@ func show_unavailable() -> void:
 		_customs_popup.hide()
 	if _diplomacy_button != null:
 		_diplomacy_button.visible = false
+	if _military_box != null:
+		_military_box.visible = false
+	if _window_row != null:
+		_window_row.visible = false
 	if _politics_popup != null:
 		_politics_button.visible = false
 		_politics_popup.hide()
@@ -224,6 +245,7 @@ func clear_pending() -> void:
 		_pending[kind] = -1
 	_customs_sent = NO_CUSTOMS_CHOICE
 	_customs_choice = NO_CUSTOMS_CHOICE
+	_mobilization_sent = -1
 	if _customs_note != null:
 		_customs_note.text = ""
 
@@ -577,10 +599,112 @@ func _build_diplomacy() -> void:
 		+ "deutsche Frage"
 	)
 	_diplomacy_button.visible = false
+	_diplomacy_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_diplomacy_button.pressed.connect(func() -> void: diplomacy_requested.emit())
+	# „Zollunion …“ und „Diplomatie …“ teilen sich eine Zeile (seit M10: Platz für das Heer).
 	var parent := _budget_button.get_parent()
-	parent.add_child(_diplomacy_button)
-	parent.move_child(_diplomacy_button, _customs_button.get_index() + 1)
+	_window_row = HBoxContainer.new()
+	_window_row.name = "WindowButtons"
+	_window_row.add_theme_constant_override(&"separation", 6)
+	parent.add_child(_window_row)
+	parent.move_child(_window_row, _customs_button.get_index())
+	_customs_button.reparent(_window_row)
+	_customs_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_window_row.add_child(_diplomacy_button)
+
+
+## Heer und Mobilmachung (seit M10, Schritt b3): Zeile mit den Soldaten unter Waffen und der Stufe,
+## Knöpfe „Mobil machen“ bzw. „Abrüsten“ und „Krieg …“.
+func _build_military() -> void:
+	_military_box = VBoxContainer.new()
+	_military_box.name = "Military"
+	_military_box.add_theme_constant_override(&"separation", 4)
+	_military_box.visible = false
+	_military_info = Label.new()
+	_military_info.name = "MilitaryInfo"
+	_military_info.theme_type_variation = &"MutedLabel"
+	_military_info.mouse_filter = Control.MOUSE_FILTER_PASS
+	_military_info.clip_text = true
+	_military_info.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+	_military_info.custom_minimum_size = Vector2(1, 0)
+	_military_box.add_child(_military_info)
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override(&"separation", 6)
+	_mobilize_button = Button.new()
+	_mobilize_button.name = "MobilizeButton"
+	_mobilize_button.focus_mode = Control.FOCUS_NONE
+	_mobilize_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_mobilize_button.pressed.connect(_on_mobilize_pressed)
+	row.add_child(_mobilize_button)
+	_war_button = Button.new()
+	_war_button.name = "WarButton"
+	_war_button.text = "Krieg …"
+	_war_button.focus_mode = Control.FOCUS_NONE
+	_war_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_war_button.tooltip_text = "Kriege mit Seiten, Zielen und Kriegspunkten, Friedensangebote; die eigenen Heere"
+	_war_button.pressed.connect(func() -> void: war_window_requested.emit())
+	row.add_child(_war_button)
+	_military_box.add_child(row)
+	var parent := _budget_button.get_parent()
+	parent.add_child(_military_box)
+	parent.move_child(_military_box, _window_row.get_index() + 1)
+
+
+func _update_military(state: Dictionary) -> void:
+	_military_box.visible = bool(state.get("military", false))
+	if not _military_box.visible:
+		return
+	var stage := int(state.get("mobilization", 0))
+	var mobilized := stage == 1 or stage == 2
+	if _mobilization_sent >= 0 and mobilized == (_mobilization_sent == 1):
+		_mobilization_sent = -1
+	var in_war := bool(state.get("in_war", false))
+	_military_info.text = "Heer: %s Mann · %s%s" % [
+		GermanFormat.integer(int(state.get("soldiers_under_arms", 0))),
+		str(state.get("mobilization_text", "")),
+		" · im Krieg" if in_war else "",
+	]
+	_military_info.tooltip_text = "Soldaten unter Waffen; Friedensstärke %s" % GermanFormat.integer(
+		int(state.get("peace_strength", 0))
+	)
+	var wants_mobilized := mobilized if _mobilization_sent < 0 else _mobilization_sent == 1
+	_mobilize_button.text = "Abrüsten" if wants_mobilized else "Mobil machen"
+	_mobilize_button.disabled = _mobilization_sent >= 0 or (in_war and wants_mobilized)
+	if _mobilization_sent >= 0:
+		_mobilize_button.tooltip_text = "Befehl erteilt; wirksam ab dem nächsten Tag."
+	elif in_war and wants_mobilized:
+		_mobilize_button.tooltip_text = "Im Krieg rüstet das Heer nicht ab."
+	elif wants_mobilized:
+		_mobilize_button.tooltip_text = "Das Heer kehrt nach und nach auf die Friedensstärke zurück und kostet wieder weniger."
+	else:
+		_mobilize_button.tooltip_text = "Die Reserven rücken ein, die Garnisonen werden Feldheere; die Heereskosten steigen mit den Soldaten."
+
+
+func _on_mobilize_pressed() -> void:
+	if _mobilization_sent >= 0:
+		return
+	var mobilize := _mobilize_button.text == "Mobil machen"
+	_mobilization_sent = 1 if mobilize else 0
+	_mobilize_button.disabled = true
+	mobilization_requested.emit(mobilize)
+
+
+## Mobilmachung abgelehnt (main.gd): Knopf wieder frei.
+func reject_mobilization(message: String) -> void:
+	_mobilization_sent = -1
+	_tax_hint.text = message
+
+
+## Text der Zeile Heer und der Knöpfe (für Tests).
+func military_text() -> String:
+	if not _military_box.visible:
+		return ""
+	return "%s [%s%s]" % [_military_info.text, _mobilize_button.text, " gesperrt" if _mobilize_button.disabled else ""]
+
+
+## Knopf „Mobil machen“ bzw. „Abrüsten“ (für Tests).
+func mobilize_button() -> Button:
+	return _mobilize_button
 
 
 func _build_customs() -> void:
@@ -926,6 +1050,11 @@ func _fill_budget() -> void:
 				roundi(float(state.get("customs_tariff_percent", 0.0)))
 			)
 		_budget_line(caption, GermanFormat.signed_money(amount))
+	# Überschuss des Hinterlands außerhalb der Karte (seit dem Review M10; Frankreich, Dänemark).
+	var hinterland := float(state.get("hinterland_month", 0.0))
+	if hinterland > 0.0:
+		income += hinterland
+		_budget_line("Hinterland (Überschuss)", GermanFormat.signed_money(hinterland))
 	_budget_line("Summe", GermanFormat.signed_money(income))
 	var soldiers := int(state.get("soldiers", 0))
 	var interest_percent := float(state.get("interest_percent", 0.0))

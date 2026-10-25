@@ -1591,6 +1591,11 @@ TEST_CASE("Militär: Lesezeichen im Krieg") {
         REQUIRE(replacement != nullptr);
         CHECK(replacement->state == sax);
         CHECK(replacement->soldiers == Fixed::from_int(500));
+        // Der Überschuss des Hinterlands ist eine Einnahme im Haushalt (seit dem Review M10).
+        CHECK(v.states[at(sax)].budget.hinterland == Fixed::from_int(1000));
+        CHECK(v.states[at(sax)].budget.income() ==
+              v.states[at(sax)].budget.taxes[0] + v.states[at(sax)].budget.taxes[1] +
+                  v.states[at(sax)].budget.taxes[2] + Fixed::from_int(1000));
         // Das Hinterland zählt bei der Besetzung mit, die Hauptstadt auf der Karte nicht.
         World occupied = v;
         for (std::size_t l = 0; l < occupied.locations.size(); ++l) {

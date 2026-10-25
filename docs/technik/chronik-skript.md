@@ -1006,7 +1006,8 @@ festung mainz {              # seit Schritt a3
 
 hinterland FRK {             # seit Schritt b1: Staat mit Land außerhalb der Karte, höchstens einmal
     bevoelkerung = 36000000    # Pflicht, 0–1.000.000.000: zählt bei Besetzung und Kriegspunkten mit
-    einnahmen    = 4000000     # Pflicht, 0–1.000.000.000: Taler je Monat in die Staatskasse
+    einnahmen    = 1000000     # Pflicht, 0–1.000.000.000: Überschuss in Talern je Monat in die
+                               # Staatskasse (nach den eigenen Ausgaben des Hinterlands)
     ersatz       = 30000       # Pflicht, 0–1.000.000: Soldaten je Monat, solange der Staat Krieg führt
     orte         = { verdun sedan }   # Pflicht: Orte am Kartenrand; der Ersatz kommt im ersten, den
                                       # die eigene Seite hält

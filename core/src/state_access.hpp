@@ -333,6 +333,10 @@ template <typename Sim, typename V> void StateAccess::visit(Sim& sim, V& v) {
         });
         list(v, "gefallene", w.war_dead, Extent::Content, [&](auto& d) { v.field("", d); });
         list(v, "bund_verlassen", w.left_federation, Extent::Content, [&](auto& b) { v.field("", b); }); // a4
+        if (!w.hinterlands.empty()) { // seit dem Review M10: Überschuss des Hinterlands im Haushalt
+            list(v, "hinterland_einnahmen", w.states, Extent::Content,
+                 [&](auto& s) { v.field("haushalt.hinterland", s.budget.hinterland); });
+        }
     }
 
     // Politik (seit M8): nur in Welten mit Parlamenten, damit die Prüfsumme der übrigen (1648) bleibt.

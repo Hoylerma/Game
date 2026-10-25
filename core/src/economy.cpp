@@ -452,6 +452,7 @@ bool run_state_budget(World& world, Index state_index, const std::vector<Index>&
         }
     }
     customs_income(world, state, budget);
+    budget.hinterland = hinterland_income(world, state_index); // seit dem Review M10
     base_expenses(world, state, population_of(world, locations), budget);
     state.interest_rate = interest_rate_of(world, state);
     budget.interest = state.debt * state.interest_rate / twelve;
@@ -540,12 +541,15 @@ void estimate_budgets(World& world) {
             }
         }
         customs_income(world, state, budget);
+        budget.hinterland = hinterland_income(world, static_cast<Index>(s));
         base_expenses(world, state, population_of(world, locations), budget);
         state.interest_rate = interest_rate_of(world, state);
         budget.interest = state.debt * state.interest_rate / twelve;
         budget.diplomacy = envoy_costs(world, static_cast<Index>(s), budget.income());
         state.budget = budget;
-        if (state.yearly_income <= Fixed::zero()) {
+        // Erst mit Steuern: Beim Laden gibt es noch keine, und der Überschuss eines Hinterlands allein
+        // (seit dem Review M10) setzte die Jahreseinnahmen dauerhaft zu niedrig an.
+        if (state.yearly_income <= Fixed::zero() && budget.income() > budget.hinterland) {
             state.yearly_income = budget.income() * twelve;
         }
     }

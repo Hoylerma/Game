@@ -307,15 +307,14 @@ void run_mobilization(World& world) {
     }
 }
 
-/// Hinterland am Monatsersten (seit b1, Abschnitt 6.2): Einnahmen in die Kasse; im Krieg trifft der
-/// Ersatz am ersten Ort am Kartenrand ein, den die eigene Seite hält, bei einer Feldarmee ohne Garnison
-/// dort oder als neues Heer.
+/// Hinterland am Monatsersten (seit b1, Abschnitt 6.2): Im Krieg trifft der Ersatz am ersten Ort am
+/// Kartenrand ein, den die eigene Seite hält, bei einer Feldarmee ohne Garnison dort oder als neues Heer.
+/// Der Überschuss des Hinterlands ist seit dem Review M10 eine Einnahme im Haushalt (hinterland_income).
 void run_hinterland(World& world) {
     for (const Hinterland& h : world.hinterlands) {
         if (!in_range(world.states, h.state) || world.states[at(h.state)].capital == kNone) {
             continue; // untergegangen
         }
-        world.states[at(h.state)].treasury += h.income;
         if (!in_war(world, h.state) || h.replacements <= Fixed::zero()) {
             continue;
         }
@@ -387,6 +386,16 @@ Fixed peace_strength(const World& world, Index state) {
         return Fixed::zero();
     }
     return world.states[at(state)].army_per_mille * world.state_population(state) / Fixed::from_int(1000);
+}
+
+Fixed hinterland_income(const World& world, Index state) {
+    Fixed income;
+    for (const Hinterland& h : world.hinterlands) {
+        if (h.state == state && in_range(world.states, state) && world.states[at(state)].capital != kNone) {
+            income += h.income;
+        }
+    }
+    return income;
 }
 
 Fixed state_soldiers(const World& world, Index state) {

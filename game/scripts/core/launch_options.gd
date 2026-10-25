@@ -4,9 +4,9 @@ extends RefCounted
 ##
 ##   --screenshot=<pfad>    nach dem Laden simulieren, Bild speichern, beenden
 ##   --tage=<n>             Tage vor dem Screenshot (Standard 60)
-##   --kartenmodus=<0..14>  Kartenmodus (0 Politisch … 5 Kreise, 6 Lebensstandard, 7 Kultur,
+##   --kartenmodus=<0..15>  Kartenmodus (0 Politisch … 5 Kreise, 6 Lebensstandard, 7 Kultur,
 ##                          8 Wirtschaft, 9 Märkte, 10 Verwaltung, 11 Eisenbahnen, 12 Wahlen,
-##                          13 Zollgebiete, 14 Beziehungen)
+##                          13 Zollgebiete, 14 Beziehungen, 15 Krieg)
 ##   --ort=<ort_id>         Ort auswählen und Ortsinfo öffnen
 ##   --zoom=<faktor>        Vergrößerung gegenüber der Übersicht (1 = ganze Karte);
 ##                          zentriert auf --ort, sonst auf die Kartenmitte (bis 1: Übersicht)
@@ -15,6 +15,9 @@ extends RefCounted
 ##   --zollunion            Fenster „Zollunion“ des Spielerstaates öffnen (seit M9)
 ##   --diplomatie[=<reiter>]  Fenster „Diplomatie“ öffnen, Reiter staaten (Standard), bund oder
 ##                          frage (seit M9, nur mit dem Deutschen Bund)
+##   --krieg[=<reiter>]     Kriegsfenster öffnen, Reiter kriege (Standard) oder heere (seit M10,
+##                          nur in Szenarien mit Heeren)
+##   --heer                 stärkstes eigenes Feldheer auswählen (Heeresfenster, seit M10)
 ##   --spielmenue           Spielmenü öffnen (seit M6)
 ##   --szenario=<id>        Szenario beim Start (seit M7; Standard westfaelischer_frieden)
 ##   --staat=<TAG>          Spielerstaat beim Start (seit M7; Standard: Spieler des Szenarios)
@@ -24,6 +27,8 @@ extends RefCounted
 const DEFAULT_SCREENSHOT_DAYS := 60
 ## Reiter des Fensters „Diplomatie“ für --diplomatie=<reiter>.
 const DIPLOMACY_TABS: PackedStringArray = ["staaten", "bund", "frage"]
+## Reiter des Kriegsfensters für --krieg=<reiter> (seit M10).
+const WAR_TABS: PackedStringArray = ["kriege", "heere"]
 
 var screenshot_path := ""
 var days := DEFAULT_SCREENSHOT_DAYS
@@ -40,6 +45,10 @@ var show_customs := false
 ## Reiter des Fensters „Diplomatie“ vor dem Screenshot (seit M9): 0 Staaten, 1 Bundesversammlung,
 ## 2 Deutsche Frage; -1 = geschlossen.
 var diplomacy_tab := -1
+## Reiter des Kriegsfensters vor dem Screenshot (seit M10): 0 Kriege, 1 Heere; -1 = geschlossen.
+var war_tab := -1
+## Stärkstes eigenes Feldheer vor dem Screenshot auswählen (seit M10).
+var select_army := false
 var show_game_menu := false
 ## Wahlabend der letzten Wahl vor dem Screenshot öffnen (seit M8).
 var show_election_night := false
@@ -118,6 +127,17 @@ static func parse(args: PackedStringArray) -> LaunchOptions:
 					options.problems.append(
 						"--diplomatie erwartet staaten, bund oder frage, nicht „%s“." % value
 					)
+			"--krieg":
+				var war := WAR_TABS.find(value if not value.is_empty() else "kriege")
+				if war >= 0:
+					options.war_tab = war
+				else:
+					options.problems.append("--krieg erwartet kriege oder heere, nicht „%s“." % value)
+			"--heer":
+				if value.is_empty():
+					options.select_army = true
+				else:
+					options.problems.append("--heer erwartet keinen Wert, nicht „%s“." % value)
 			"--spielmenue":
 				if value.is_empty():
 					options.show_game_menu = true

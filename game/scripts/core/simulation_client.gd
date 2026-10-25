@@ -117,6 +117,7 @@ const REQUIRED_METHODS: Array[StringName] = [
 	&"get_sieges",
 	&"get_wars",
 	&"get_declaration_goals",
+	&"get_declaration_sides",
 	&"get_war_goal_options",
 	&"declare_war",
 	&"add_war_goal",
@@ -578,6 +579,12 @@ func get_wars() -> Array[Dictionary]:
 ## Erklärung möglich ist.
 func get_declaration_goals(state_index: int, target: int) -> Array[Dictionary]:
 	return _as_dictionaries(_native.call(&"get_declaration_goals", state_index, target))
+
+
+## Seiten einer Kriegserklärung an target (Bündnisfall): { attackers, defenders (Staatsindizes,
+## Hauptpartei zuerst), attacker_soldiers, defender_soldiers }; leer, wenn keine möglich ist.
+func get_declaration_sides(state_index: int, target: int) -> Dictionary:
+	return _as_dictionary(_native.call(&"get_declaration_sides", state_index, target))
 
 
 ## Weitere Kriegsziele der Hauptpartei in einem laufenden Krieg (wie get_declaration_goals).

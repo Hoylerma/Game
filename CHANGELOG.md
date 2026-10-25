@@ -8,7 +8,7 @@ Vor Version 1.0 kann sich jede Schnittstelle ändern.
 
 ## [Unveröffentlicht]
 
-### Meilenstein M10 – Militär und Einigungskriege (in Arbeit)
+### Meilenstein M10 – Militär und Einigungskriege
 
 Vertrag: [technik/militaer.md](docs/technik/militaer.md), Entscheidungen 1–14 wie empfohlen
 freigegeben; Stand je Schritt in Abschnitt 12 dort.
@@ -94,6 +94,43 @@ freigegeben; Stand je Schritt in Abschnitt 12 dort.
   Neue Regeln `generalstab_moral`, `moral_sieg`, `punkte_heer_anteil`; Inhaltsbereich `militaer`
   Stand 7 (Spielstände der Lesezeichen aus b1 laden nicht mehr). 1648 bitgleich, 1848 ohne Befehle
   bitgleich zu b1.
+- **Krieg in Godot (Schritt b3):** Heere stehen als Fähnchen in der Staatsfarbe mit ihrer Stärke in
+  Tausend auf der Karte, Schlachten als gekreuzte Linien, Belagerungen als Ring. Ein Klick wählt ein
+  Heer, ein Rechtsklick ohne Ziehen gibt einem eigenen Feldheer den Marschbefehl; beim Überfahren
+  nennt der Tooltip Tage und Ankunft, die Karte zeigt den Weg gestrichelt. Das **Heeresfenster**
+  (anstelle der Ortsinfo) zeigt Befehlshaber mit Führung, Stärke, Moral, Versorgung, Standort und
+  Ziel und übergibt das Heer dem Generalstab oder nimmt es zurück. Das **Kriegsfenster** („Krieg …“
+  im Staatspanel) zeigt je Krieg Seiten, Ziele mit Kosten, Kriegspunkte, Müdigkeit und Verluste,
+  bietet der Hauptpartei weißen Frieden, die eigenen Ziele oder die Kapitulation mit Vorab-Prüfung
+  („Österreich nähme an“) und weitere Kriegsziele an; der Reiter „Heere“ listet die eigenen Heere.
+  Im Fenster „Diplomatie“ steht „Krieg erklären …“ mit Rückfrage (Seiten des Bündnisfalls mit
+  Soldaten, Wahl des Kriegsziels). Das Staatspanel zeigt die Soldaten unter Waffen und die Stufe der
+  Mobilmachung mit „Mobil machen“ bzw. „Abrüsten“. Schlachten mit eigenen Heeren erscheinen als
+  Meldung „Sieg bei …“ bzw. „Niederlage bei …“ unten rechts über der Karte. Kartenmodus 15 **Krieg**
+  (Taste Y): Kontrolle der Orte, besetzte Orte schraffiert in der Farbe des Besitzers, Fronten als
+  Grenzen, Garnisonen sichtbar. Brücke: Heere, Wege, Kontrolle, Schlachten, Belagerungen, Kriege,
+  Kriegsziele, Seiten einer Erklärung, Vorab-Prüfung eines Friedens und die Befehle
+  ([bridge-api.md](docs/technik/bridge-api.md), Abschnitt Militär). Startoptionen `--krieg[=heere]`
+  und `--heer`, zwei neue CI-Screenshots; Einheiten-, Rauch- und Klicktest erweitert (u. a. die drei
+  Kriegslesezeichen im Menü „Neues Spiel“). 1648 bitgleich.
+- **Review und Abschluss M10 (Schritt b4):** Review über Kern, Brücke und Godot, Daten und Doku.
+  Behoben: Das Hinterland zahlte seine vollen Einnahmen in die Kasse, ohne die Ausgaben seiner
+  Bevölkerung; Frankreich tilgte 1870 mitten im Krieg seine ganzen Schulden und häufte in einer Partie
+  ab 1849 Jahr für Jahr Millionen an. Dänemark verfehlte damit seit Schritt b1 die Korridore des
+  Balancing-Berichts 1848 (Vermögen am Ende 2,8 Jahreseinnahmen statt höchstens 1,5; die CI lief
+  nicht). Jetzt ist der Überschuss des Hinterlands ein Posten „Hinterland“ im Haushalt (zählt zu
+  Monats- und Jahreseinnahmen, im Haushaltsfenster eine eigene Zeile), im Verhältnis, das der
+  Kartenteil im Frieden übrig behält (Frankreich 690.000 statt 2,6 Mio. Taler je Monat, Dänemark
+  40.000 statt 130.000); Inhaltsbereich `militaer` Stand 8. Im Parteienmodus ließ sich ein Heer des Staates per Rechtsklick in Marsch
+  setzen. Verliert der Spielerstaat alle Orte, hält die Zeit an und ein Hinweis nennt den Weg zu einem
+  anderen Staat. Besitzer, Grenzen und Staatsnamen folgen einem Frieden am selben Tag statt am
+  nächsten Monatsersten, die Legende im Kartenmodus „Krieg“ einem neuen Krieg ebenso. Das
+  Kriegsfenster füllt die Zielauswahl nur noch bei Änderungen (vorher jede Sekunde rund 18 ms, eine
+  offene Auswahl schloss sich). Der Klicktest spielt alle drei Kriegslesezeichen als Preußen mit
+  Marschbefehl und angenommenem Friedensangebot bis zum Frieden (Abnahme M10). Doku:
+  [meilensteine.md](docs/meilensteine.md) mit Ergebnis, Abnahme und Grenzen. 1648 bitgleich; Partien ab 1848
+  rechnen ab 1849 (Frankreich) anders, Spielstände 1848 und der Kriegslesezeichen aus b3 laden nicht mehr
+  (Inhaltsbereich `militaer`). **M10 abgeschlossen.**
 
 ### Meilenstein M9 – Diplomatie und Zollverein
 
