@@ -2,7 +2,7 @@ class_name DiplomacyWindow
 extends PanelContainer
 ## Fenster „Diplomatie“ (seit M9, Schritt b3, docs/technik/diplomatie.md Abschnitt 6) mit drei
 ## Reitern: die Staaten mit Beziehung, Lager, Verträgen und Gesandten und den Handlungen gegenüber dem
-## gewählten Staat; die Bundesversammlung mit Halbrund, offenem Antrag, Anträgen und den letzten
+## gewählten Staat (seit M10 auch die Kriegserklärung mit Kriegsziel); die Bundesversammlung mit Halbrund, offenem Antrag, Anträgen und den letzten
 ## Abstimmungen; „Die deutsche Frage“ als Anzeige ohne Wertung (Abschnitt 4.6).
 ##
 ## Das Fenster liest über SimulationClient und meldet Befehle als Signale; main.gd schickt sie an die
@@ -13,12 +13,14 @@ signal envoy_requested(target: int, send: bool)
 signal treaty_requested(target: int, action: int)
 signal demand_requested(target: int, kind: int)
 signal motion_requested(kind: int, target: int)
+## Kriegserklärung an target mit einem Kriegsziel (code aus get_declaration_goals; seit M10).
+signal war_requested(target: int, goal: int)
 signal close_requested
 
 const WIDTH := 620.0
 const LIST_HEIGHT := 250.0
 ## Kürzeste Staatenliste, wenn das Fenster sonst nicht in die Höhe passt (fit_height).
-const MIN_LIST_HEIGHT := 120.0
+const MIN_LIST_HEIGHT := 80.0
 ## Kürzester Abstand zwischen zwei Füllungen bei laufender Zeit.
 const REFRESH_MS := 1000
 const MAX_RESULTS := 8
@@ -59,6 +61,11 @@ var _question_box: VBoxContainer = null
 var _question: Label = null
 var _pending_demand := -1
 var _note: Label = null
+## Kriegserklärung (seit M10, Schritt b3): Knopf, Rückfrage mit Seiten und Wahl des Kriegsziels.
+var _war_button: Button = null
+var _war_box: VBoxContainer = null
+var _war_question: Label = null
+var _war_goal: OptionButton = null
 var _diet_info: Label = null
 var _hemicycle: Control = null
 var _hemicycle_layout := {}
@@ -86,6 +93,7 @@ func open(sim: SimulationClient, player: int, tab: int = 0) -> void:
 	_player = player
 	_pending_demand = -1
 	_question_box.visible = false
+	_war_box.visible = false
 	_note.text = ""
 	visible = true
 	show_tab(tab)
@@ -137,6 +145,7 @@ func select_state(state: int) -> void:
 	_selected = state
 	_pending_demand = -1
 	_question_box.visible = false
+	_war_box.visible = false
 	_fill_detail()
 	_highlight_rows()
 
@@ -159,6 +168,10 @@ func window_text() -> String:
 		lines.append("[%s%s]" % [button.text, " gesperrt" if button.disabled else ""])
 	if _question_box.visible:
 		lines.append(_question.text)
+	lines.append("[%s%s]" % [_war_button.text, " gesperrt" if _war_button.disabled else ""])
+	if _war_box.visible:
+		lines.append(_war_question.text)
+		lines.append("Kriegsziel: %s" % _war_goal.get_item_text(_war_goal.selected) if _war_goal.selected >= 0 else "")
 	lines.append(_note.text)
 	lines.append(_diet_info.text)
 	lines.append(_motion_label.text)
@@ -255,6 +268,7 @@ func _build_states_tab() -> Control:
 		grid.add_child(button)
 		_action_buttons[str(action[0])] = button
 	tab.add_child(grid)
+	_build_war_declaration(tab)
 	_question_box = VBoxContainer.new()
 	_question_box.name = "DemandQuestion"
 	_question_box.visible = false
@@ -282,6 +296,43 @@ func _build_states_tab() -> Control:
 	_note = _label(&"MutedLabel", true)
 	tab.add_child(_note)
 	return tab
+
+
+## Knopf „Krieg erklären …“ und die Rückfrage mit Seiten und Kriegsziel (seit M10).
+func _build_war_declaration(tab: VBoxContainer) -> void:
+	_war_button = Button.new()
+	_war_button.name = "DeclareWar"
+	_war_button.text = "Krieg erklären …"
+	_war_button.focus_mode = Control.FOCUS_NONE
+	_war_button.pressed.connect(_ask_war)
+	tab.add_child(_war_button)
+	_war_box = VBoxContainer.new()
+	_war_box.name = "WarQuestion"
+	_war_box.visible = false
+	_war_question = _label(&"Label", true)
+	_war_box.add_child(_war_question)
+	_war_goal = OptionButton.new()
+	_war_goal.name = "WarGoal"
+	_war_goal.focus_mode = Control.FOCUS_NONE
+	_war_goal.clip_text = true
+	_war_goal.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+	_war_box.add_child(_war_goal)
+	var answers := HBoxContainer.new()
+	answers.alignment = BoxContainer.ALIGNMENT_END
+	var cancel := Button.new()
+	cancel.name = "WarCancel"
+	cancel.text = "Abbrechen"
+	cancel.focus_mode = Control.FOCUS_NONE
+	cancel.pressed.connect(func() -> void: _war_box.visible = false)
+	answers.add_child(cancel)
+	var confirm := Button.new()
+	confirm.name = "WarConfirm"
+	confirm.text = "Krieg erklären"
+	confirm.focus_mode = Control.FOCUS_NONE
+	confirm.pressed.connect(_confirm_war)
+	answers.add_child(confirm)
+	_war_box.add_child(answers)
+	tab.add_child(_war_box)
 
 
 func _build_diet_tab() -> Control:
@@ -468,6 +519,7 @@ func _fill_detail() -> void:
 		_detail_info.text = ""
 		for key: String in _action_buttons:
 			(_action_buttons[key] as Button).disabled = true
+		_war_button.disabled = true
 		return
 	var actions := _sim.get_diplomacy_actions(_player, _selected)
 	var overview := _sim.get_diplomacy(_player)
@@ -501,6 +553,15 @@ func _fill_detail() -> void:
 			button.text = "Fordern: Beitritt zum %s" % str(actions.get("customs_union_name", ""))
 		if decision == "abgelehnt":
 			button.text += " (lehnt ab)"
+	var can_declare := not _sim.get_declaration_goals(_player, _selected).is_empty()
+	_war_button.disabled = not can_declare
+	_war_button.tooltip_text = (
+		"Krieg gegen %s: Verbündete und Garanten treten bei; das Kriegsziel bestimmt, was der Frieden kostet."
+		% str(entry.get("short_name", ""))
+		if can_declare else "Zur Zeit nicht möglich (ohne Heere im Szenario, schon im Krieg oder verbündet)."
+	)
+	if not can_declare:
+		_war_box.visible = false
 
 
 func _names_text(names: PackedStringArray) -> String:
@@ -582,6 +643,50 @@ func _on_action(action: Array) -> void:
 				]
 			)
 			_question_box.visible = true
+
+
+## Rückfrage vor der Kriegserklärung: Seiten des Bündnisfalls mit Soldaten, Wahl des Kriegsziels.
+func _ask_war() -> void:
+	if _selected < 0:
+		return
+	var goals := _sim.get_declaration_goals(_player, _selected)
+	var sides := _sim.get_declaration_sides(_player, _selected)
+	if goals.is_empty() or sides.is_empty():
+		return
+	_war_goal.clear()
+	for goal: Dictionary in goals:
+		_war_goal.add_item("%s (Kosten %s)" % [
+			str(goal.get("text", "")), GermanFormat.integer(roundi(float(goal.get("cost", 0.0))))
+		], int(goal.get("code", 0)))
+	_war_goal.select(0)
+	_war_question.text = (
+		"%s den Krieg erklären? Auf unserer Seite: %s (%s Soldaten); auf der Gegenseite: %s (%s Soldaten). "
+		% [
+			str(_entry_of(_selected).get("short_name", "")),
+			_names_text(_state_names(sides.get("attackers", PackedInt32Array()))),
+			GermanFormat.integer(int(sides.get("attacker_soldiers", 0))),
+			_names_text(_state_names(sides.get("defenders", PackedInt32Array()))),
+			GermanFormat.integer(int(sides.get("defender_soldiers", 0))),
+		]
+		+ "Alle Beteiligten machen mobil; der Frieden setzt das Ziel durch, wenn unsere Kriegspunkte seine Kosten erreichen."
+	)
+	_question_box.visible = false
+	_pending_demand = -1
+	_war_box.visible = true
+
+
+func _state_names(indices: Variant) -> PackedStringArray:
+	var names := PackedStringArray()
+	for index: int in indices:
+		names.append(str(_sim.get_state(index).get("short_name", "")))
+	return names
+
+
+func _confirm_war() -> void:
+	if _selected < 0 or _war_goal.selected < 0:
+		return
+	war_requested.emit(_selected, _war_goal.get_item_id(_war_goal.selected))
+	_war_box.visible = false
 
 
 func _confirm_demand() -> void:

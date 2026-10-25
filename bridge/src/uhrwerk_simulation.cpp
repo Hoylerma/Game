@@ -2381,6 +2381,33 @@ Array UhrwerkSimulation::get_declaration_goals(std::int64_t state_index, std::in
     return goal_options(*w, war, true);
 }
 
+Dictionary UhrwerkSimulation::get_declaration_sides(std::int64_t state_index, std::int64_t target) const {
+    const uhrwerk::World* w = world();
+    Dictionary result;
+    if (!w || !valid_index(w->states, state_index) || !valid_index(w->states, target) ||
+        !uhrwerk::can_declare_war(*w, static_cast<uhrwerk::Index>(state_index),
+                                  static_cast<uhrwerk::Index>(target))) {
+        return result;
+    }
+    std::vector<uhrwerk::Index> attackers;
+    std::vector<uhrwerk::Index> defenders;
+    uhrwerk::war_sides(*w, static_cast<uhrwerk::Index>(state_index), static_cast<uhrwerk::Index>(target),
+                       attackers, defenders);
+    const auto side = [&](const std::vector<uhrwerk::Index>& states, const char* key, const char* soldiers) {
+        PackedInt32Array indices;
+        uhrwerk::Fixed sum;
+        for (const uhrwerk::Index s : states) {
+            indices.push_back(static_cast<std::int32_t>(s));
+            sum += uhrwerk::state_soldiers(*w, s);
+        }
+        result[key] = indices;
+        result[soldiers] = sum.round();
+    };
+    side(attackers, "attackers", "attacker_soldiers");
+    side(defenders, "defenders", "defender_soldiers");
+    return result;
+}
+
 Array UhrwerkSimulation::get_war_goal_options(std::int64_t state_index, std::int64_t war_id) const {
     const uhrwerk::World* w = world();
     const uhrwerk::War* war = w ? uhrwerk::find_war(*w, war_id) : nullptr;
@@ -3174,6 +3201,8 @@ void UhrwerkSimulation::_bind_methods() {
     ClassDB::bind_method(D_METHOD("get_wars"), &UhrwerkSimulation::get_wars);
     ClassDB::bind_method(D_METHOD("get_declaration_goals", "state_index", "target"),
                          &UhrwerkSimulation::get_declaration_goals);
+    ClassDB::bind_method(D_METHOD("get_declaration_sides", "state_index", "target"),
+                         &UhrwerkSimulation::get_declaration_sides);
     ClassDB::bind_method(D_METHOD("get_war_goal_options", "state_index", "war_id"),
                          &UhrwerkSimulation::get_war_goal_options);
     ClassDB::bind_method(D_METHOD("declare_war", "state_index", "target", "goal"),

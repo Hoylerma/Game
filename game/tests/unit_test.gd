@@ -24,6 +24,7 @@ func _initialize() -> void:
 	_test_map_modes()
 	_test_railway_layer()
 	_test_army_layer()
+	_test_battle_reports()
 	_test_map_detail()
 	_test_map_data_and_layout()
 	_test_location_catalog()
@@ -87,11 +88,13 @@ func _test_launch_options() -> void:
 	var bad_args := PackedStringArray(
 		[
 			"--tage=-3", "--kartenmodus=16", "--unbekannt", "--zoom=0", "--zoom=viel", "--szenario",
-			"--staat=", "--partei=", "--verfassung=ja", "--zollunion=ja", "--diplomatie=krieg"
+			"--staat=", "--partei=", "--verfassung=ja", "--zollunion=ja", "--diplomatie=krieg",
+			"--krieg=frieden", "--heer=1"
 		]
 	)
 	var bad := LaunchOptions.parse(bad_args)
-	_equal(bad.problems.size(), 11, "fehlerhafte Optionen gemeldet")
+	_equal(bad.problems.size(), 13, "fehlerhafte Optionen gemeldet")
+	_true(bad.war_tab == -1 and not bad.select_army, "fehlerhaftes --krieg und --heer öffnen nichts")
 	_equal(bad.diplomacy_tab, -1, "fehlerhaftes --diplomatie öffnet nichts")
 	var party := LaunchOptions.parse(PackedStringArray(["--szenario=voelkerfruehling", "--partei=liberale"]))
 	_true(party.party_id == "liberale" and party.problems.is_empty(), "Option --partei (seit M8)")
@@ -112,6 +115,13 @@ func _test_launch_options() -> void:
 	)
 	_equal(LaunchOptions.parse(PackedStringArray(["--diplomatie=bund"])).diplomacy_tab, 1, "--diplomatie=bund")
 	_equal(LaunchOptions.parse(PackedStringArray(["--diplomatie=frage"])).diplomacy_tab, 2, "--diplomatie=frage")
+	var war := LaunchOptions.parse(PackedStringArray(["--krieg", "--heer", "--kartenmodus=15"]))
+	_true(
+		war.war_tab == 0 and war.select_army and war.map_mode == 15 and war.problems.is_empty()
+		and defaults.war_tab == -1 and not defaults.select_army,
+		"Optionen --krieg, --heer und --kartenmodus=15 (seit M10)"
+	)
+	_equal(LaunchOptions.parse(PackedStringArray(["--krieg=heere"])).war_tab, 1, "--krieg=heere")
 	var chosen := LaunchOptions.parse(
 		PackedStringArray(["--szenario=voelkerfruehling", "--staat=bav"])
 	)
@@ -311,6 +321,27 @@ func _test_railway_layer() -> void:
 
 ## Heere auf der Karte (seit M10, Schritt b3): Stärke in Tausend, Garnisonen nur auf Wunsch,
 ## Auswahl per Weltpunkt.
+## Schlachtberichte (seit M10, Schritt b3): höchstens MAX_REPORTS, die älteste weicht; × entfernt.
+func _test_battle_reports() -> void:
+	var reports := BattleReports.new()
+	root.add_child(reports)
+	_true(not reports.visible and reports.report_count() == 0, "ohne Meldung unsichtbar")
+	for i in BattleReports.MAX_REPORTS + 1:
+		reports.add_report("Sieg bei Ort %d" % i, "Schlacht bei Ort %d" % i, i, true)
+	_equal(reports.report_count(), BattleReports.MAX_REPORTS, "höchstens MAX_REPORTS Meldungen")
+	_true(
+		not reports.reports_text().contains("Ort 0") and reports.reports_text().contains("Ort 3"),
+		"die älteste Meldung weicht"
+	)
+	var shown: Array[int] = [-1] # Lambdas fangen Werte ein, ein Array teilen sie
+	reports.location_requested.connect(func(index: int) -> void: shown[0] = index)
+	(reports.get_child(0).find_child("Show", true, false) as Button).pressed.emit()
+	_equal(shown[0], 1, "„Zeigen“ meldet den Ort der Schlacht")
+	reports.clear()
+	_true(not reports.visible and reports.report_count() == 0, "nach clear leer und unsichtbar")
+	reports.free()
+
+
 func _test_army_layer() -> void:
 	_equal(ArmyLayer.strength_text(93000), "93", "Stärke in Tausend")
 	_equal(ArmyLayer.strength_text(1499), "1", "Stärke gerundet")

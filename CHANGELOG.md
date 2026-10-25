@@ -94,6 +94,25 @@ freigegeben; Stand je Schritt in Abschnitt 12 dort.
   Neue Regeln `generalstab_moral`, `moral_sieg`, `punkte_heer_anteil`; Inhaltsbereich `militaer`
   Stand 7 (Spielstände der Lesezeichen aus b1 laden nicht mehr). 1648 bitgleich, 1848 ohne Befehle
   bitgleich zu b1.
+- **Krieg in Godot (Schritt b3):** Heere stehen als Fähnchen in der Staatsfarbe mit ihrer Stärke in
+  Tausend auf der Karte, Schlachten als gekreuzte Linien, Belagerungen als Ring. Ein Klick wählt ein
+  Heer, ein Rechtsklick ohne Ziehen gibt einem eigenen Feldheer den Marschbefehl; beim Überfahren
+  nennt der Tooltip Tage und Ankunft, die Karte zeigt den Weg gestrichelt. Das **Heeresfenster**
+  (anstelle der Ortsinfo) zeigt Befehlshaber mit Führung, Stärke, Moral, Versorgung, Standort und
+  Ziel und übergibt das Heer dem Generalstab oder nimmt es zurück. Das **Kriegsfenster** („Krieg …“
+  im Staatspanel) zeigt je Krieg Seiten, Ziele mit Kosten, Kriegspunkte, Müdigkeit und Verluste,
+  bietet der Hauptpartei weißen Frieden, die eigenen Ziele oder die Kapitulation mit Vorab-Prüfung
+  („Österreich nähme an“) und weitere Kriegsziele an; der Reiter „Heere“ listet die eigenen Heere.
+  Im Fenster „Diplomatie“ steht „Krieg erklären …“ mit Rückfrage (Seiten des Bündnisfalls mit
+  Soldaten, Wahl des Kriegsziels). Das Staatspanel zeigt die Soldaten unter Waffen und die Stufe der
+  Mobilmachung mit „Mobil machen“ bzw. „Abrüsten“. Schlachten mit eigenen Heeren erscheinen als
+  Meldung „Sieg bei …“ bzw. „Niederlage bei …“ unten rechts über der Karte. Kartenmodus 15 **Krieg**
+  (Taste Y): Kontrolle der Orte, besetzte Orte schraffiert in der Farbe des Besitzers, Fronten als
+  Grenzen, Garnisonen sichtbar. Brücke: Heere, Wege, Kontrolle, Schlachten, Belagerungen, Kriege,
+  Kriegsziele, Seiten einer Erklärung, Vorab-Prüfung eines Friedens und die Befehle
+  ([bridge-api.md](docs/technik/bridge-api.md), Abschnitt Militär). Startoptionen `--krieg[=heere]`
+  und `--heer`, zwei neue CI-Screenshots; Einheiten-, Rauch- und Klicktest erweitert (u. a. die drei
+  Kriegslesezeichen im Menü „Neues Spiel“). 1648 bitgleich.
 
 ### Meilenstein M9 – Diplomatie und Zollverein
 

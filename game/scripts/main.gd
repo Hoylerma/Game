@@ -94,6 +94,12 @@ var _armies: Array[Dictionary] = []
 var _control := PackedInt32Array()
 var _tooltip_index := -1
 var _play_bar: PlayBar = null
+## Heere des Vortags (Schlachtberichte: Stand vor der Schlacht), Heeresfenster in der rechten Spalte,
+## Kriegsfenster und Schlachtberichte unten rechts über der Karte (seit M10, Schritt b3).
+var _previous_armies: Array[Dictionary] = []
+var _army_panel: ArmyPanel = null
+var _war_window: WarWindow = null
+var _battle_reports: BattleReports = null
 
 @onready var _map_view: MapView = $MapView
 @onready var _top_bar: TopBar = %TopBar
@@ -124,6 +130,7 @@ func _ready() -> void:
 	_build_election_night()
 	_build_party_panel()
 	_build_diplomacy()
+	_build_war()
 	_state_panel.tax_rate_requested.connect(_on_tax_rate_requested)
 	_state_panel.politics_source = func() -> Dictionary:
 		return _sim.get_state_politics(_player) if _sim != null else {}
@@ -150,7 +157,7 @@ func _ready() -> void:
 	_map_labels.location_diameter = _map_view.location_diameter()
 	_map_labels.set_covering_controls([
 		_top_bar, _state_panel, _party_panel, _chronicle_panel, _location_panel, _legend, _mode_bar,
-		_election_night, _diplomacy_window, _play_bar,
+		_election_night, _diplomacy_window, _play_bar, _army_panel, _war_window, _battle_reports,
 	])
 	_update_place_labels()
 	_update_owners()
@@ -208,6 +215,10 @@ func _unhandled_input(event: InputEvent) -> void:
 			return
 	if event.is_action_pressed(&"auswahl_aufheben", false, true) and _diplomacy_window.is_open():
 		close_diplomacy()
+		get_viewport().set_input_as_handled()
+		return
+	if event.is_action_pressed(&"auswahl_aufheben", false, true) and _war_window.is_open():
+		close_war_window()
 		get_viewport().set_input_as_handled()
 		return
 	if event.is_action_pressed(&"auswahl_aufheben", false, true) and _selected_army >= 0:
@@ -471,10 +482,13 @@ func _refresh_all() -> void:
 	_refresh_location_panel()
 	_refresh_map()
 	_update_armies()
+	_war_window.refresh()
 	_pull_chronicle()
 
 
 func _after_time_passed() -> void:
+	# Befehle des Vortags sind ausgeführt oder verworfen (Generalstab, seit M10).
+	_army_panel.clear_pending()
 	if _sim.get_election_count() > _elections_seen:
 		_elections_seen = _sim.get_election_count()
 		_update_pending_elections()
@@ -537,6 +551,7 @@ func _update_armies() -> void:
 		_state_colors.resize(_sim.get_state_count())
 		for i in _state_colors.size():
 			_state_colors[i] = _sim.get_state(i).get("color", Color.GRAY)
+	_previous_armies = _armies
 	_armies = _sim.get_armies()
 	_map_view.army_layer().show_garrisons = _map_mode == MapModes.MAP_KRIEG
 	_map_view.set_armies(_armies, _state_colors, _player)
@@ -547,14 +562,43 @@ func _update_armies() -> void:
 	_map_view.set_army_selection(
 		_selected_army, int(army.get("location_index", -1)), army.get("route", PackedInt32Array())
 	)
+	_refresh_army_panel(army)
 
 
-## Heer auswählen (-1: keines); die Karte zeigt seinen Weg.
+## Heeresfenster des ausgewählten Heeres (seit M10); ersetzt solange die Ortsinfo.
+func _refresh_army_panel(army: Dictionary) -> void:
+	if army.is_empty():
+		_army_panel.hide_army()
+		return
+	var location := int(army.get("location_index", -1))
+	var destination := int(army.get("destination_index", -1))
+	var own := int(army.get("state_index", -1)) == _player and _player_current < 0
+	var arrival := ""
+	if own and destination >= 0:
+		arrival = str(_sim.get_route_preview(int(army.get("id", -1)), destination).get("arrival_text", ""))
+	_army_panel.show_army(
+		army, _state_short_name(int(army.get("state_index", -1))), _location_name(location),
+		_location_name(destination) if destination >= 0 else "", own, arrival
+	)
+
+
+func _location_name(index: int) -> String:
+	return _catalog.names[index] if index >= 0 and index < _catalog.names.size() else "–"
+
+
+## Heer auswählen (-1: keines); die Karte zeigt seinen Weg, die rechte Spalte das Heeresfenster
+## statt der Ortsinfo.
 func select_army(army_id: int) -> void:
 	_selected_army = army_id
 	if army_id < 0:
 		_map_view.set_route_preview(-1, PackedInt32Array())
+	elif _selected >= 0:
+		_select_location(-1)
 	_update_armies()
+
+
+func army_panel() -> ArmyPanel:
+	return _army_panel
 
 
 func selected_army() -> int:
@@ -576,12 +620,18 @@ func _on_location_right_clicked(sim_index: int) -> void:
 		return
 	if int(army.get("state_index", -1)) != _player or bool(army.get("garrison", false)):
 		return
+	var preview := _sim.get_route_preview(int(army.get("id", -1)), sim_index)
 	if _sim.order_march(int(army.get("id", -1)), sim_index):
-		var preview := _sim.get_route_preview(int(army.get("id", -1)), sim_index)
 		_map_view.set_army_selection(
 			_selected_army, int(army.get("location_index", -1)), preview.get("path", PackedInt32Array())
 		)
 		_map_view.set_route_preview(-1, PackedInt32Array())
+		_top_bar.show_notice("%s marschiert nach %s: %s Tage, Ankunft %s" % [
+			str(army.get("name", "")), _location_name(sim_index),
+			GermanFormat.number(float(preview.get("days", 0.0)), 1), str(preview.get("arrival_text", "")),
+		])
+	else:
+		_top_bar.show_notice("%s: kein Weg nach %s" % [str(army.get("name", "")), _location_name(sim_index)])
 
 
 ## Besitzer und Kreise je Ort (zwei Indexarrays der Brücke) für Grenzen und Staatsnamen;
@@ -841,8 +891,51 @@ func _pull_chronicle() -> void:
 		_chronicle_panel.clear()
 		_chronicle_read = 0
 	if count > _chronicle_read:
-		_chronicle_panel.add_entries(_sim.get_chronicle(_chronicle_read))
+		var entries := _sim.get_chronicle(_chronicle_read)
+		_chronicle_panel.add_entries(entries)
+		# Ein neues Spiel liest die ganze Chronik: nur Schlachten aus dem laufenden Spiel melden.
+		if _chronicle_read > 0:
+			_report_battles(entries)
 		_chronicle_read = count
+
+
+## Schlachtberichte (seit M10): Schlachten, in denen ein eigenes Heer stand (am Vortag oder heute am
+## Ort). Die Chronik nennt den Staat des stärksten Siegers; steht er gegen uns im Krieg, ist es eine
+## Niederlage.
+func _report_battles(entries: Array[Dictionary]) -> void:
+	if _player_current >= 0:
+		return
+	for entry in entries:
+		var text := str(entry.get("text", ""))
+		if not text.begins_with("Schlacht bei "):
+			continue
+		var location := int(entry.get("location_index", -1))
+		var involved := false
+		for army in _previous_armies + _armies:
+			if int(army.get("state_index", -1)) == _player and int(army.get("location_index", -1)) == location:
+				involved = true
+				break
+		if not involved:
+			continue
+		var victor := int(entry.get("state_index", -1))
+		var victory := victor == _player or not _is_enemy(victor)
+		_battle_reports.add_report(
+			"%s bei %s" % ["Sieg" if victory else "Niederlage", _location_name(location)],
+			"%s · %s" % [str(entry.get("date_text", "")), text], location, victory
+		)
+
+
+## Steht state in einem Krieg auf der Gegenseite des Spielerstaates?
+func _is_enemy(state: int) -> bool:
+	for war in _sim.get_wars():
+		var side := int(war.get("player_side", 0))
+		if side == 0:
+			continue
+		var enemies: Variant = war.get("defenders" if side > 0 else "attackers", [])
+		for index: int in enemies:
+			if index == state:
+				return true
+	return false
 
 
 func _rebuild_legend() -> void:
@@ -1127,6 +1220,8 @@ func _select_location(sim_index: int, focus_camera: bool = false) -> void:
 	if _sim == null or sim_index < 0 or sim_index >= _sim.get_location_count():
 		sim_index = -1
 	_selected = sim_index
+	if sim_index >= 0 and _selected_army >= 0:
+		select_army(-1)
 	_map_view.set_selected(sim_index)
 	var pinned_point := _map_view.location_center(sim_index)
 	if sim_index >= 0 and sim_index < _catalog.size() and pinned_point.x >= 0.0:
@@ -1145,6 +1240,7 @@ func _on_viewport_size_changed() -> void:
 	if _selected >= 0:
 		_fit_location_panel.call_deferred()
 	_place_diplomacy.call_deferred()
+	_place_reports.call_deferred()
 
 
 func _on_location_clicked(sim_index: int) -> void:
@@ -1361,6 +1457,7 @@ func open_diplomacy(tab: int = 0) -> void:
 	if _sim == null or _player_current >= 0 or not bool(_sim.get_diplomacy(_player).get("active", false)):
 		return
 	_state_panel.hide_popups()
+	close_war_window()
 	_diplomacy_window.open(_sim, _player, tab)
 	_place_diplomacy()
 
@@ -1395,6 +1492,11 @@ func _place_diplomacy() -> void:
 		_diplomacy_window.fit_height(_mode_bar_area.position.y - 8.0 - top)
 	_diplomacy_window.size = _diplomacy_window.get_combined_minimum_size()
 	_diplomacy_window.position = Vector2(left, top)
+	# Kriegsfenster an derselben Stelle (seit M10; nie beide zugleich offen).
+	if _war_window != null:
+		_war_window.size = _war_window.get_combined_minimum_size()
+		_war_window.position = Vector2(left, top)
+	_place_reports()
 
 
 ## Krisenleiste und offenes Fenster neu füllen (nach jedem Tag; das Fenster höchstens einmal je Sekunde).
@@ -1457,6 +1559,148 @@ func _on_manoeuvre_requested(kind: int) -> void:
 		_play_bar.show_note("%s (ab dem nächsten Tag)." % str(texts.get(kind, "")))
 	else:
 		_play_bar.show_note("Dieses Manöver ist zur Zeit nicht möglich.")
+
+
+# --- Militär (seit M10, Schritt b3; docs/technik/militaer.md Abschnitt 8) -----------
+
+
+func _build_war() -> void:
+	var root := $UI/Root as Control
+	_army_panel = ArmyPanel.new()
+	_right_column.add_child(_army_panel)
+	_right_column.move_child(_army_panel, _location_panel.get_index())
+	_army_panel.close_requested.connect(select_army.bind(-1))
+	_army_panel.staff_requested.connect(_on_staff_requested)
+	_army_panel.focus_requested.connect(focus_army)
+	_war_window = WarWindow.new()
+	root.add_child(_war_window)
+	root.move_child(_war_window, _top_bar.get_index())
+	_war_window.state_name = _state_short_name
+	_war_window.location_name = _location_name
+	_war_window.close_requested.connect(close_war_window)
+	_war_window.peace_requested.connect(_on_peace_requested)
+	_war_window.goal_requested.connect(_on_goal_requested)
+	_war_window.army_selected.connect(func(army_id: int) -> void:
+		select_army(army_id)
+		focus_army(army_id)
+	)
+	_war_window.resized.connect(_place_diplomacy)
+	_battle_reports = BattleReports.new()
+	root.add_child(_battle_reports)
+	root.move_child(_battle_reports, _top_bar.get_index())
+	_battle_reports.minimum_size_changed.connect(_place_reports.call_deferred)
+	_war_window.visibility_changed.connect(_place_reports.call_deferred)
+	_diplomacy_window.visibility_changed.connect(_place_reports.call_deferred)
+	_battle_reports.location_requested.connect(func(index: int) -> void: _select_location(index, true))
+	_state_panel.mobilization_requested.connect(_on_mobilization_requested)
+	_state_panel.war_window_requested.connect(toggle_war_window)
+	_diplomacy_window.war_requested.connect(_on_war_requested)
+
+
+func war_window() -> WarWindow:
+	return _war_window
+
+
+func battle_reports() -> BattleReports:
+	return _battle_reports
+
+
+## Kriegsfenster öffnen (Reiter 0 Kriege, 1 Heere); nur in Szenarien mit Heeren, nicht im
+## Parteienmodus. Schließt das Fenster „Diplomatie“ (beide stehen an derselben Stelle).
+func open_war_window(tab: int = 0) -> void:
+	if _sim == null or _player_current >= 0 or not bool(_sim.get_state(_player).get("military", false)):
+		return
+	_state_panel.hide_popups()
+	close_diplomacy()
+	_war_window.open(_sim, _player, tab)
+	_place_diplomacy()
+
+
+func close_war_window() -> void:
+	if _war_window != null:
+		_war_window.close()
+
+
+func toggle_war_window() -> void:
+	if _war_window.is_open():
+		close_war_window()
+	else:
+		open_war_window()
+
+
+## Karte auf den Standort eines Heeres.
+func focus_army(army_id: int) -> void:
+	var army := _sim.get_army(army_id) if _sim != null else {}
+	var center := _map_view.location_center(int(army.get("location_index", -1)))
+	if center.x >= 0.0:
+		_map_view.camera.focus_on(center)
+
+
+## Schlachtberichte unten rechts über der Karte, links der rechten Spalte und über der Leiste der
+## Kartenmodi; neben einem offenen Fenster (Krieg, Diplomatie) so schmal wie nötig.
+func _place_reports() -> void:
+	if _battle_reports == null:
+		return
+	var right := _right_column.get_global_rect().position.x - 12.0
+	var left := _left_column.offset_right + 12.0
+	for window: Control in [_war_window, _diplomacy_window]:
+		if window != null and window.visible:
+			left = maxf(left, window.position.x + window.size.x + 8.0)
+	var width := clampf(right - left, BattleReports.MIN_WIDTH, BattleReports.MAX_WIDTH)
+	_battle_reports.custom_minimum_size.x = width
+	var size := _battle_reports.get_combined_minimum_size()
+	_battle_reports.size = size
+	_battle_reports.position = Vector2(right - size.x, _mode_bar_area.position.y - size.y - 8.0)
+
+
+## Stärkstes eigenes Feldheer auswählen (Screenshot mit --heer).
+func _select_strongest_army() -> void:
+	var best := {}
+	for army in _sim.get_armies(_player):
+		if not bool(army.get("garrison", false)) and int(army.get("soldiers", 0)) > int(best.get("soldiers", -1)):
+			best = army
+	if not best.is_empty():
+		select_army(int(best.get("id", -1)))
+
+
+func _on_staff_requested(army_id: int, on: bool) -> void:
+	if not _sim.set_army_staff(army_id, on):
+		_army_panel.clear_pending()
+		_top_bar.show_notice("Das Heer steht schon so")
+	_update_armies()
+
+
+func _on_mobilization_requested(mobilize: bool) -> void:
+	if _sim.order_mobilization(_player, mobilize):
+		_top_bar.show_notice(("Mobilmachung befohlen" if mobilize else "Abrüstung befohlen") + " (ab dem nächsten Tag)")
+	else:
+		_state_panel.reject_mobilization(
+			"Mobilmachung nicht möglich." if mobilize else "Abrüstung nicht möglich (im Krieg oder schon im Frieden)."
+		)
+	_refresh_all()
+
+
+func _on_war_requested(target: int, goal: int) -> void:
+	var name_text := _state_short_name(target)
+	if _sim.declare_war(_player, target, goal):
+		_diplomacy_window.show_note("Kriegserklärung an %s: Der Krieg beginnt am nächsten Tag." % name_text)
+	else:
+		_diplomacy_window.show_note("Eine Kriegserklärung an %s ist zur Zeit nicht möglich." % name_text)
+
+
+func _on_peace_requested(war_id: int, terms: int) -> void:
+	var preview := _sim.get_peace_preview(_player, war_id, terms)
+	if _sim.offer_peace(_player, war_id, terms):
+		_war_window.show_note("Friedensangebot gesandt: %s Antwort am nächsten Tag." % str(preview.get("text", "")))
+	else:
+		_war_window.show_note("Dieses Friedensangebot ist zur Zeit nicht möglich.")
+
+
+func _on_goal_requested(war_id: int, code: int) -> void:
+	if _sim.add_war_goal(_player, war_id, code):
+		_war_window.show_note("Neues Kriegsziel gestellt (ab dem nächsten Tag).")
+	else:
+		_war_window.show_note("Dieses Kriegsziel ist nicht möglich.")
 
 
 func _state_short_name(state: int) -> String:
@@ -1533,6 +1777,7 @@ func _apply_role() -> void:
 	if party:
 		_state_panel.hide_popups()
 		close_diplomacy()
+		close_war_window()
 	_location_panel.set_party_mode(party)
 	if party:
 		_party_panel.show_party(_sim.get_party(_player_current))
@@ -1618,6 +1863,7 @@ func _open_election_night(index: int, complete: bool) -> void:
 	_left_column.visible = false
 	_state_panel.hide_popups()
 	close_diplomacy()
+	close_war_window()
 	_tooltip.hide_tooltip()
 	_set_map_mode(MapModes.MAP_WAHLEN)
 	_on_election_progress(_election_night.reported_count())
@@ -1771,6 +2017,10 @@ func _after_load(new_client: bool = false) -> void:
 	if _election_night.is_open():
 		_close_election_night(false)
 	close_diplomacy()
+	close_war_window()
+	select_army(-1)
+	_battle_reports.clear()
+	_previous_armies.clear()
 	_player = _sim.get_player_state_index()
 	if _read_scenario_constants() or new_client:
 		_connect_map_and_simulation()
@@ -1836,6 +2086,9 @@ func play_state(state_index: int) -> void:
 	_location_panel.player_index = _player
 	_state_panel.clear_pending()
 	close_diplomacy()
+	close_war_window()
+	select_army(-1)
+	_battle_reports.clear()
 	_refresh_all()
 	_rebuild_legend()
 	_top_bar.show_notice("Ihr spielt jetzt %s" % str(_sim.get_state(_player).get("name", "")))
@@ -1910,6 +2163,10 @@ func _run_screenshot() -> void:
 		_state_panel.show_customs()
 	if _options.diplomacy_tab >= 0:
 		open_diplomacy(_options.diplomacy_tab)
+	if _options.war_tab >= 0:
+		open_war_window(_options.war_tab)
+	if _options.select_army:
+		_select_strongest_army()
 	if _options.show_game_menu:
 		open_game_menu()
 	if _options.show_election_night:

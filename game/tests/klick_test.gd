@@ -556,9 +556,12 @@ func _check_new_game() -> void:
 ## die Auswahl auf.
 func _check_war_ui(menu: GameMenu) -> void:
 	_main.call("open_game_menu")
-	if not menu.scenario_ids().has("koeniggraetz"):
-		_fail("Neues Spiel: Lesezeichen Königgrätz fehlt im Menü (%s)" % ", ".join(menu.scenario_ids()))
-		return
+	for war_scenario in ["dueppel", "koeniggraetz", "sedan"]:
+		if not menu.scenario_ids().has(war_scenario):
+			_fail("Neues Spiel: Kriegslesezeichen %s fehlt im Menü (%s)" % [
+				war_scenario, ", ".join(menu.scenario_ids())
+			])
+			return
 	menu.start_new_game("koeniggraetz")
 	await _frames(2)
 	var sim: SimulationClient = _main.call("simulation")
@@ -599,12 +602,88 @@ func _check_war_ui(menu: GameMenu) -> void:
 	await _key(KEY_Z)
 	if int(_main.call("map_mode")) != MapModes.MAP_KRIEG or not layer.show_garrisons:
 		_fail("Taste Y schaltet nicht in den Modus Krieg mit Garnisonen (%d)" % int(_main.call("map_mode")))
+	# Heeresfenster (seit b3c): Stärke, Moral, Versorgung, Befehlshaber, Ziel; Generalstab.
+	var army_panel: ArmyPanel = _main.call("army_panel")
+	var army_text := army_panel.panel_text()
+	if not army_panel.visible or army_panel.army_id() != army_id or not army_text.contains("Prag") \
+			or not army_text.contains("Moral") or not army_text.contains("Befehlshaber"):
+		_fail("Heeresfenster der I. Armee: sichtbar %s, Text „%s“" % [army_panel.visible, army_text])
+	army_panel.staff_button().pressed.emit()
+	var pending := army_panel.staff_button().disabled
+	sim.advance_days(1)
+	_main.call("_after_time_passed")
+	if not pending or not bool(sim.get_army(army_id).get("staff", false)) \
+			or army_panel.staff_button().text != "Selbst führen":
+		_fail("„Dem Generalstab übergeben“: gesperrt %s, Generalstab %s, Knopf „%s“" % [
+			pending, sim.get_army(army_id).get("staff", false), army_panel.staff_button().text
+		])
 	await _key(KEY_ESCAPE)
-	if int(_main.call("selected_army")) != -1:
+	if int(_main.call("selected_army")) != -1 or army_panel.visible:
 		_fail("Escape hebt die Auswahl des Heeres nicht auf")
-	print("  Königgrätz: %d Heeresmarken, I. Armee per Klick gewählt, Marsch nach Prag per Rechtsklick" % [
-		layer.marker_count()
-	])
+	# Staatspanel: Heer unter Waffen, im Krieg keine Abrüstung; „Krieg …“ öffnet das Kriegsfenster.
+	var state_panel: StatePanel = _main.call("state_panel")
+	var military := state_panel.military_text()
+	if not military.contains(" Mann · mobil") or not state_panel.mobilize_button().disabled:
+		_fail("Staatspanel im Krieg: „%s“" % military)
+	(state_panel.find_child("WarButton", true, false) as Button).pressed.emit()
+	await _frames(1)
+	var war_window: WarWindow = _main.call("war_window")
+	var war_text := war_window.window_text()
+	if not war_window.is_open() or not war_text.contains("Kriegspunkte") \
+			or not war_window.peace_button(SimulationClient.PEACE_WHITE).text.contains("Österreich"):
+		_fail("Kriegsfenster: offen %s, Text „%s“" % [war_window.is_open(), war_text])
+	war_window.show_tab(1)
+	var row := war_window.army_button(army_id)
+	if row == null:
+		_fail("Kriegsfenster, Reiter Heere: I. Armee fehlt")
+	else:
+		row.pressed.emit()
+		if int(_main.call("selected_army")) != army_id:
+			_fail("Kriegsfenster, Reiter Heere: Klick wählt die I. Armee nicht")
+	await _key(KEY_ESCAPE)
+	if war_window.is_open():
+		_fail("Escape schließt das Kriegsfenster nicht")
+	_main.call("select_army", -1)
+	# Schlachtbericht: Tage bis zur ersten Schlacht mit einem preußischen Heer.
+	var reports: BattleReports = _main.call("battle_reports")
+	var days := 0
+	while reports.report_count() == 0 and days < 60:
+		sim.advance_days(1)
+		_main.call("_after_time_passed")
+		days += 1
+	var report := reports.reports_text()
+	if reports.report_count() == 0 or not report.contains(" bei ") or not report.contains("Schlacht bei"):
+		_fail("Kein Schlachtbericht in %d Tagen („%s“)" % [days, report])
+	# Kriegserklärung aus dem Fenster „Diplomatie“: Rückfrage mit Seiten und Ziel, Krieg am nächsten Tag.
+	var enemy := -1
+	for state in sim.get_state_count():
+		if state != player and not sim.get_declaration_goals(player, state).is_empty():
+			enemy = state
+			break
+	_main.call("open_diplomacy")
+	var diplomacy: DiplomacyWindow = _main.call("diplomacy_window")
+	diplomacy.select_state(enemy)
+	var declare := diplomacy.find_child("DeclareWar", true, false) as Button
+	var wars_before := sim.get_wars().size()
+	if enemy < 0 or declare == null or declare.disabled:
+		_fail("Diplomatie: „Krieg erklären …“ fehlt oder gesperrt (Ziel %d)" % enemy)
+	else:
+		declare.pressed.emit()
+		var question := diplomacy.window_text()
+		(diplomacy.find_child("WarConfirm", true, false) as Button).pressed.emit()
+		sim.advance_days(1)
+		_main.call("_after_time_passed")
+		if not question.contains("den Krieg erklären?") or sim.get_wars().size() != wars_before + 1:
+			_fail("Kriegserklärung: Rückfrage „%s“, Kriege %d statt %d" % [
+				question, sim.get_wars().size(), wars_before + 1
+			])
+	_main.call("close_diplomacy")
+	print(
+		"  Kriegslesezeichen Düppel, Königgrätz, Sedan im Menü; Königgrätz: %d Heeresmarken, I. Armee per Klick gewählt, Marsch nach Prag per Rechtsklick, "
+		% layer.marker_count()
+		+ "Heeresfenster mit Generalstab, Kriegsfenster, Schlachtbericht nach %d Tagen, Kriegserklärung an %s"
+		% [days, str(sim.get_state(enemy).get("short_name", ""))]
+	)
 
 
 ## Staatsinfo und Parteienmodus (seit M8): „Verfassung und Gruppen …“ im Staatspanel; Rolle im

@@ -380,6 +380,21 @@ func _check_military_1866() -> void:
 		"keine Kriegserklärung an Österreich im Krieg; Zielauswahl für den Krieg",
 		"get_declaration_goals/get_war_goal_options unerwartet"
 	)
+	# Seiten einer möglichen Erklärung: Hauptparteien zuerst, Soldaten je Seite (seit b3c).
+	var declarable := -1
+	for target in sim.get_state_count():
+		if target != prussia and not sim.get_declaration_goals(prussia, target).is_empty():
+			declarable = target
+			break
+	var sides := sim.get_declaration_sides(prussia, declarable)
+	_check(
+		sim.get_declaration_sides(prussia, austria).is_empty() and declarable >= 0
+		and (sides.get("attackers", []) as Variant)[0] == prussia
+		and (sides.get("defenders", []) as Variant)[0] == declarable
+		and int(sides.get("attacker_soldiers", 0)) > 0,
+		"get_declaration_sides: leer gegen Österreich, Seiten gegen %s" % str(sim.get_state(declarable).get("short_name", "")),
+		"get_declaration_sides: %s (Ziel %d)" % [str(sides), declarable]
+	)
 	sim.advance_days(1)
 	var marching := sim.get_army(army_id)
 	_check(

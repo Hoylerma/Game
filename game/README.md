@@ -69,6 +69,8 @@ Optionen stehen nach `--` (Benutzerargumente):
 | `--verfassung` | Fenster „Verfassung und Gruppen“ des Spielerstaates vor dem Screenshot öffnen (seit M8; nur in Szenarien mit Parlament, 1848) |
 | `--zollunion` | Fenster „Zollunion“ des Spielerstaates vor dem Screenshot öffnen (seit M9; nur in Szenarien mit Zollunion, 1848) |
 | `--diplomatie[=<reiter>]` | Fenster „Diplomatie“ vor dem Screenshot öffnen, Reiter `staaten` (Standard), `bund` oder `frage` (seit M9; nur mit dem Deutschen Bund, 1848) |
+| `--krieg[=<reiter>]` | Kriegsfenster vor dem Screenshot öffnen, Reiter `kriege` (Standard) oder `heere` (seit M10; nur in Szenarien mit Heeren) |
+| `--heer` | Stärkstes eigenes Feldheer auswählen, das Heeresfenster steht dann in der rechten Spalte (seit M10) |
 | `--spielmenue` | Spielmenü vor dem Screenshot öffnen (seit M6) |
 | `--szenario=<id>` | Szenario beim Start, z. B. `voelkerfruehling` (seit M7; Standard `westfaelischer_frieden`); gilt auch ohne `--screenshot` |
 | `--staat=<TAG>` | Spielerstaat beim Start, z. B. `BAV` (seit M7; Standard: Spieler des Szenarios) |
@@ -114,6 +116,11 @@ Modus `--headless` gibt es kein Bild; ohne Bildschirm hilft `xvfb-run`.
 | „Verfassung und Gruppen …“ | seit M8, 1848: Verfassung, Wahlrecht und Wahlsystem des Landtags; Interessengruppen des Staates mit Anteil an den Einwohnern ab 15 und Einfluss (Anteil am Einkommen) |
 | „Zollunion …“ | seit M9, 1848: Zollgebiet, Tarif und Anteil an der Vereinskasse; je Union Leitmacht, Mitglieder, Tarif und Kasse mit „Beitreten …“ bzw. „Austreten …“, nach einer Rückfrage mit Zeitpunkt (nächster 1. Januar); „Antrag zurückziehen …“. Ein verbindlicher Beitritt (nach einer Zolleinigung des Bundes oder einer verlorenen Krise, seit M9b) lässt sich nicht zurückziehen. Lehnt die Leitmacht ab (Österreich beim Zollverein), ist der Knopf gesperrt ([docs/technik/diplomatie.md](../docs/technik/diplomatie.md), Abschnitt 3.5) |
 | „Diplomatie …“ | seit M9, 1848 (mit dem Deutschen Bund): Fenster mit drei Reitern. **Staaten**: jeder Staat mit Beziehung (Farbfeld wie der Kartenmodus), Verträgen, Gesandten und Lager; für den gewählten Staat Gesandten entsenden/abberufen, Bündnis anbieten/kündigen, Garantie geben/kündigen, Forderungen (Führung im Bund, Beitritt zur Zollunion, Bündnisse lösen; nach einer Rückfrage mit den Seiten der Krise) und Bundesintervention beantragen; gesperrte Knöpfe nennen im Tooltip den Grund. **Bundesversammlung**: Präsidium, Halbrund des Plenums nach Lagern, offener Antrag, Anträge (Bundesreform, Vorsitz, Zolleinigung der eigenen Union) mit Prognose, die letzten Abstimmungen. **Deutsche Frage**: Lager, Zollverein, Reformen, Krisen und Verträge ohne Wertung. Esc oder × schließt ([docs/technik/diplomatie.md](../docs/technik/diplomatie.md), Abschnitt 6) |
+| Heeresfenster | seit M10, nach einem Klick auf eine Heeresmarke (oder im Kriegsfenster) anstelle der Ortsinfo: Befehlshaber mit Führung, Stärke, Moral, Versorgung, Standort, Ziel mit Ankunft; für eigene Feldheere „Dem Generalstab übergeben“ bzw. „Selbst führen“ (ab dem nächsten Tag; ein eigener Marschbefehl nimmt das Heer dem Generalstab ab) und „Zeigen“. Esc oder × hebt die Auswahl auf |
+| „Krieg …“ (Staatspanel) | seit M10, in Szenarien mit Heeren: Kriegsfenster. **Kriege**: je Krieg Seiten, Ziele mit Kosten, Kriegspunkte gegen die Kosten der eigenen Ziele (Balken), Müdigkeit, Verluste und Schlachten; für die Hauptpartei „Weißer Frieden“, „Unsere Ziele fordern“ und „Kapitulation anbieten“, jeweils mit der Antwort des Gegners vorab („Österreich nähme an“), und ein weiteres Kriegsziel. **Heere**: die eigenen Heere mit Stärke, Moral, Lage und Weg; ein Klick wählt das Heer und fährt es an. Esc oder × schließt ([docs/technik/militaer.md](../docs/technik/militaer.md), Abschnitt 8) |
+| Mobilmachung (Staatspanel) | seit M10: Soldaten unter Waffen und Stufe (Frieden, macht mobil, mobil, rüstet ab); „Mobil machen“ bzw. „Abrüsten“ ab dem nächsten Tag, im Krieg keine Abrüstung |
+| „Krieg erklären …“ (Diplomatie, Staaten) | seit M10: Rückfrage mit den Seiten des Bündnisfalls und ihren Soldaten und der Wahl des Kriegsziels; der Krieg beginnt am nächsten Tag, alle Beteiligten machen mobil |
+| Schlachtbericht | seit M10: nach einer Schlacht mit eigenen Heeren unten rechts über der Karte „Sieg bei …“ bzw. „Niederlage bei …“ mit dem Bericht der Chronik; „Zeigen“ fährt den Ort an, nach 12 Sekunden oder mit × verschwindet die Meldung (höchstens drei zugleich) |
 | Krisenleiste | seit M9: über der Karte, solange ein diplomatisches Spiel läuft (das eigene zuerst): Forderung, Stufe (Protest, Ultimatum, Mobilmachung) mit verbleibenden Tagen, beide Seiten mit Soldaten; ist der Spielerstaat Hauptpartei, die Knöpfe Nachgeben, Vermittlung anbieten (der Tooltip sagt, ob die Gegenseite annimmt) und Eskalieren |
 | Klick auf einen Chronikeintrag | Ort des Ereignisses auswählen und anfahren |
 | F10, Knopf „Menü“ | Spielmenü: Neues Spiel mit Wahl des Lesezeichens (1648 oder 1848, seit M7), Speichern unter einem Namen, Laden aus der Liste, Schnellspeichern und -laden; die Zeit hält an, Esc oder F10 schließt es (seit M6) |
@@ -165,8 +172,9 @@ game/
 │   │   ├── map_detail.gd          MapDetail: Detailstufen nach Zoom (Grenzen, Namen)
 │   │   ├── map_labels.gd          MapLabels: Namen im Bildschirmraum mit Rastern
 │   │   ├── map_label_layout.gd    MapLabelLayout: Namenspunkte von Staaten und Kreisen
-│   │   └── railway_layer.gd       RailwayLayer: Eisenbahnstrecken über der Karte (seit M7)
-│   └── ui/                    Skripte der Panels, Legendenberechnung, Farbpalette; Wahlabend (election_night.gd) und Parteipanel (party_panel.gd, beide seit M8); Fenster „Diplomatie“ (diplomacy_window.gd) und Krisenleiste (play_bar.gd, beide seit M9)
+│   │   ├── railway_layer.gd       RailwayLayer: Eisenbahnstrecken über der Karte (seit M7)
+│   │   └── army_layer.gd          ArmyLayer: Heeresmarken, Wege, Schlachten, Belagerungen (seit M10)
+│   └── ui/                    Skripte der Panels, Legendenberechnung, Farbpalette; Wahlabend (election_night.gd) und Parteipanel (party_panel.gd, beide seit M8); Fenster „Diplomatie“ (diplomacy_window.gd) und Krisenleiste (play_bar.gd, beide seit M9); Heeresfenster (army_panel.gd), Kriegsfenster (war_window.gd) und Schlachtberichte (battle_reports.gd, alle seit M10)
 ├── shaders/map.gdshader       Kartenshader (canvas_item)
 ├── theme/einigkeit_theme.tres Theme der Oberfläche (Papier und Tinte)
 └── tests/                     Einheiten-, Rauch-, Klick- und Leistungstest, siehe tests/README.md

@@ -197,10 +197,16 @@ echten Daten und prüft:
     Krise über dem Fenster (ohne Überlappung, das Fenster bleibt über der Leiste der Kartenmodi),
     „Nachgeben“ beendet sie. Im Reiter „Bundesversammlung“ wird eine Bundesreform beantragt, die am
     nächsten Tag als offener Antrag erscheint; Esc schließt das Fenster.
-11. **Krieg** (seit M10, Schritt b3): Lesezeichen Königgrätz; ein Klick auf die Marke der
-    I. Armee wählt sie aus, ein Rechtsklick auf Prag gibt den Marschbefehl, am nächsten Tag ist
-    Prag ihr Ziel. Taste Y schaltet in den Kartenmodus „Krieg“ mit Garnisonen; Esc hebt die
-    Auswahl des Heeres auf.
+11. **Krieg** (seit M10, Schritt b3): Düppel, Königgrätz und Sedan stehen im Menü „Neues Spiel“.
+    Lesezeichen Königgrätz; ein Klick auf die Marke der I. Armee wählt sie aus, ein Rechtsklick auf
+    Prag gibt den Marschbefehl, am nächsten Tag ist Prag ihr Ziel. Taste Y schaltet in den
+    Kartenmodus „Krieg“ mit Garnisonen. Das Heeresfenster nennt Befehlshaber, Moral und Ziel;
+    „Dem Generalstab übergeben“ wirkt am nächsten Tag („Selbst führen“); Esc hebt die Auswahl auf.
+    Das Staatspanel zeigt das mobile Heer ohne Abrüstung im Krieg, „Krieg …“ öffnet das
+    Kriegsfenster mit Kriegspunkten und Friedensangeboten samt Antwort Österreichs; im Reiter
+    „Heere“ wählt ein Klick die I. Armee; Esc schließt. Binnen 60 Tagen kommt ein Schlachtbericht;
+    „Krieg erklären …“ im Fenster „Diplomatie“ fragt mit Seiten nach, am nächsten Tag läuft ein Krieg
+    mehr.
 
 ```bash
 godot --headless --path game --script res://tests/klick_test.gd
