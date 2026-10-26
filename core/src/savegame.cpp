@@ -15,6 +15,7 @@
 #include <map>
 #include <set>
 #include <system_error>
+#include <tuple>
 #include <utility>
 #include <zstd.h>
 
@@ -35,6 +36,9 @@ constexpr int kZstdLevel = 3;
 constexpr std::uint64_t kMaxPayload = std::uint64_t{1} << 31;
 /// Stand des Militärs im Zustand (seit M10, Inhaltsbereich militaer): 1 = Schritt a1 (Garnisonen).
 constexpr std::uint64_t kMilitaryContentVersion = 8;
+
+/// Stand der Ereignisse im Zustand (seit M11, Inhaltsbereich ereignisse): 1 = Schritt a1.
+constexpr std::uint64_t kEventContentVersion = 1;
 
 bool fail(std::string* error, std::string message) {
     if (error != nullptr) {
@@ -445,12 +449,14 @@ public:
         return d;
     }
     /// Fingerabdruck des Inhalts; Format 1 (bis M7) kennt nur die ersten 13 Bereiche (ohne politik),
-    /// Format 2 (M8) die ersten 14 (ohne diplomatie), Format 3 (M9) die ersten 15 (ohne militaer), die
-    /// übrigen bleiben 0. So zeigt auch ein alter Spielstand seine Metadaten an.
+    /// Format 2 (M8) die ersten 14 (ohne diplomatie), Format 3 (M9) die ersten 15 (ohne militaer), Format 4
+    /// (M10) die ersten 16 (ohne ereignisse), die übrigen bleiben 0. So zeigt auch ein alter Spielstand seine
+    /// Metadaten an.
     ContentFingerprint content(std::uint32_t version) {
         const std::size_t count = version == 1   ? 13
                                   : version == 2 ? 14
                                   : version == 3 ? 15
+                                  : version == 4 ? 16
                                                  : kContentParts.size();
         ContentFingerprint fp;
         fp.total = hex("inhalt");
@@ -1013,12 +1019,138 @@ std::string validate_state(const Simulation& sim) {
             }
         }
     }
+    // Ereignisse (seit M11): Verfassung, Gesetze, Verweise der Ereignischronik und offenen Ereignisse,
+    // Merkmale geordnet und eindeutig, Zustimmung und Unruhe im Wertebereich.
+    if (w.event_rules.active) {
+        for (const State& s : w.states) {
+            if (s.constitution > Constitution::Constitutional || s.law.franchise > Franchise::Manhood) {
+                return "Verfassung von " + s.tag + " ungültig";
+            }
+            for (std::size_t g = 0; g < s.laws.size(); ++g) {
+                if (!in(s.laws[g], w.law_groups[g].options.size())) {
+                    return "Gesetz von " + s.tag + " ungültig";
+                }
+            }
+        }
+        const auto event_ok = [&](Index event, Index state) {
+            if (!in(event, w.events.size())) {
+                return false;
+            }
+            return w.events[static_cast<std::size_t>(event)].scope == EventScope::World ? state == kNone
+                                                                                        : in(state, S);
+        };
+        for (const EventRecord& r : w.event_log) {
+            if (!event_ok(r.event, r.state) ||
+                !in(r.option, w.events[static_cast<std::size_t>(r.event)].options.size()) ||
+                !is_valid(r.date) || w.date < r.date) {
+                return "Ereignischronik mit ungültigem Verweis";
+            }
+        }
+        for (const PendingEvent& e : w.pending_events) {
+            if (!event_ok(e.event, e.state) || !is_valid(e.since) || !is_valid(e.due) || e.due < e.since) {
+                return "offenes Ereignis mit ungültigem Verweis";
+            }
+        }
+        for (const ScheduledEvent& e : w.scheduled_events) {
+            if (!event_ok(e.event, e.state) || !is_valid(e.due)) {
+                return "geplantes Ereignis mit ungültigem Verweis";
+            }
+        }
+        for (std::size_t i = 0; i < w.event_flags.size(); ++i) {
+            const EventFlag& f = w.event_flags[i];
+            if (!none_or_in(f.state, S) || f.name.empty() ||
+                (i > 0 && !(std::tie(w.event_flags[i - 1].state, w.event_flags[i - 1].name) <
+                            std::tie(f.state, f.name)))) {
+                return "Merkmal ungültig oder nicht geordnet";
+            }
+        }
+        for (const Fixed a : w.approval) {
+            if (a < Fixed::from_int(-10) || a > Fixed::from_int(10)) {
+                return "Zustimmung außerhalb von −10 bis 10";
+            }
+        }
+        for (const Fixed u : w.unrest) {
+            if (u < Fixed::zero() || u > Fixed::from_int(100)) {
+                return "Unruhe außerhalb von 0 bis 100";
+            }
+        }
+    }
     return {};
 }
 
 } // namespace
 
 // ─── Inhaltsfingerabdruck ───────────────────────────────────────────────────
+
+namespace {
+
+void condition_hash(Fnv& h, const Condition& c) {
+    h.u64(static_cast<std::uint64_t>(c.kind));
+    h.u64(static_cast<std::uint64_t>(c.op));
+    h.i64(c.a);
+    h.i64(c.b);
+    h.fixed(c.value);
+    h.i64(to_day_number(c.date));
+    h.text(c.name);
+    h.u64(c.list.size());
+    for (const Index i : c.list) {
+        h.i64(i);
+    }
+    h.u64(c.children.size());
+    for (const Condition& child : c.children) {
+        condition_hash(h, child);
+    }
+}
+
+void effects_hash(Fnv& h, const std::vector<Effect>& effects) {
+    h.u64(effects.size());
+    for (const Effect& e : effects) {
+        h.u64(static_cast<std::uint64_t>(e.kind));
+        h.i64(e.a);
+        h.i64(e.b);
+        h.fixed(e.value);
+        h.i64(e.days);
+        h.text(e.name); // Merkmal oder Chroniktext
+        effects_hash(h, e.children);
+        h.u64(e.weights.size());
+        for (std::size_t i = 0; i < e.weights.size(); ++i) {
+            h.fixed(e.weights[i]);
+            effects_hash(h, e.branches[i]);
+        }
+    }
+}
+
+/// Ein Ereignis ohne Text, Quelle und Sicherheit; Titel und Optionstexte stehen in der Chronik.
+void event_hash(Fnv& h, const EventDef& e) {
+    h.text(e.id);
+    h.text(e.title);
+    h.u64(static_cast<std::uint64_t>(e.kind));
+    h.flag(e.turning_point);
+    h.u64(static_cast<std::uint64_t>(e.scope));
+    condition_hash(h, e.condition);
+    h.i64(e.wait);
+    h.flag(e.has_fixed_date);
+    h.i64(e.has_fixed_date ? to_day_number(e.fixed_date) : 0);
+    h.flag(e.repeatable);
+    h.i64(e.spacing);
+    h.i64(e.deadline);
+    h.u64(e.options.size());
+    for (const EventOption& o : e.options) {
+        h.text(o.id);
+        h.text(o.text);
+        h.flag(o.historical);
+        h.fixed(o.weight);
+        h.u64(o.weight_modifiers.size());
+        for (const WeightModifier& m : o.weight_modifiers) {
+            condition_hash(h, m.condition);
+            h.fixed(m.plus);
+        }
+        condition_hash(h, o.condition);
+        effects_hash(h, o.effects);
+    }
+}
+
+} // namespace
 
 ContentFingerprint content_fingerprint(const World& w) {
     ContentFingerprint fp;
@@ -1435,6 +1567,37 @@ ContentFingerprint content_fingerprint(const World& w) {
             }
         }
         p[15] = h.value();
+    }
+    // Ereignisse (seit M11): Gesetzesgruppen, Wünsche der Gruppen, Gesetze zum Start, Regeln und Ereignisse,
+    // nur in Welten mit Ereignissen. Texte zählen nicht mit, außer der Chronik einer Wirkung.
+    {
+        Fnv h;
+        if (w.event_rules.active) {
+            h.u64(kEventContentVersion);
+            h.i64(w.event_rules.deadline);
+            h.u64(w.law_groups.size());
+            for (const LawGroup& g : w.law_groups) {
+                h.text(g.id);
+                h.u64(g.options.size());
+                for (const LawOption& o : g.options) {
+                    h.text(o.id);
+                }
+                h.i64(g.standard);
+            }
+            for (const InterestGroup& g : w.interest_groups) {
+                h.u64(g.wishes.size());
+                for (const LawWish& wish : g.wishes) {
+                    h.i64(wish.law);
+                    h.i64(wish.option);
+                    h.fixed(wish.approval);
+                }
+            }
+            h.u64(w.events.size());
+            for (const EventDef& e : w.events) {
+                event_hash(h, e);
+            }
+        }
+        p[16] = h.value();
     }
     fp.total = MetaReader::content_fingerprint_total(fp.parts);
     return fp;

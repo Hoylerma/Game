@@ -7,6 +7,7 @@
 // durch die Ladereihenfolge festgelegt und damit deterministisch.
 
 #include "uhrwerk/date.hpp"
+#include "uhrwerk/event_types.hpp"
 #include "uhrwerk/fixed.hpp"
 
 #include <array>
@@ -229,6 +230,7 @@ struct InterestGroup {
     std::vector<Fixed> confessions; // Faktor je Konfession (0..1); leer = alle Konfessionen
     bool by_literacy = false;       // Mitgliedschaft zusätzlich × Alphabetisierung des Blocks
     std::vector<Fixed> leaning;     // Neigung je Strömung, Summe 1
+    std::vector<LawWish> wishes;    // seit M11: Zustimmung je Gesetzesoption (ereignisse.md 4.2)
     std::string source;
 };
 
@@ -425,6 +427,8 @@ struct State {
     Constitution constitution = Constitution::None; // zum Startdatum (seit M8, Inhalt)
     ElectoralLaw law;                               // Wahlordnung des Landtags (seit M8, Inhalt)
     ArmyProfile army;                               // Heerwesen zum Startdatum (seit M10, Inhalt)
+    std::vector<Index>
+        laws; // seit M11: Option je Gesetzesgruppe (law_groups); zum Start Inhalt, danach Zustand
 
     Fixed tax_rate(TaxKind kind) const { return tax_rates[static_cast<std::size_t>(kind)]; }
 };
@@ -1082,6 +1086,9 @@ struct World {
     std::vector<OpeningWar> opening_wars;         // seit M10 (b1): Kriege zum Start
     std::vector<Treaty> opening_treaties;         // seit M10 (b1): Bündnisse zum Start
     std::vector<Hinterland> hinterlands;          // seit M10 (b1): je Staat höchstens eines
+    std::vector<LawGroup> law_groups;             // seit M11 (a1): Gesetzesgruppen zum Startdatum
+    EventRules event_rules;                       // seit M11 (a1)
+    std::vector<EventDef> events;                 // seit M11 (a1): nur mit event_rules.active
     std::vector<Location> locations;
     std::vector<PopBlock> pops;
     std::vector<ChronicleEntry> chronicle;
@@ -1136,6 +1143,13 @@ struct World {
     std::vector<Fixed> war_dead;              // seit a3: je Staat Gefallene und Abgänge bis zum Monatsersten
     std::vector<std::uint8_t> left_federation; // seit a4: je Staat 1, wenn er den Bund verlassen hat
     std::vector<WarResult> war_results;        // seit a5: beendete Kriege in zeitlicher Folge
+    // Ereignisse (seit M11, Schritt a1), nur in Welten mit Ereignissen (event_rules.active); sonst leer.
+    std::vector<EventRecord> event_log;           // eingetretene Ereignisse in zeitlicher Folge
+    std::vector<PendingEvent> pending_events;     // Ereignisse des Spielers, die auf seine Wahl warten
+    std::vector<ScheduledEvent> scheduled_events; // Folgeereignisse nach Fälligkeit, dann Reihenfolge
+    std::vector<EventFlag> event_flags;           // Merkmale nach Staat (Welt = -1 zuerst), dann Name
+    std::vector<Fixed> approval; // Zustimmung je Staat und Gruppe: [staat × gruppen + gruppe]
+    std::vector<Fixed> unrest;   // Unruhe je Staat (0 … 100)
 
     Index find_state(std::string_view tag) const;
     Index find_location(std::string_view id) const;
@@ -1153,6 +1167,8 @@ struct World {
     Index find_interest_group(std::string_view id) const; // seit M8
     Index find_parliament(std::string_view id) const;     // seit M8
     Index find_customs_union(std::string_view id) const;  // seit M9
+    Index find_law_group(std::string_view id) const;      // seit M11
+    Index find_event(std::string_view id) const;          // seit M11
 
     /// Personen in den Blöcken des Ortes und in seinen Zugängen (arrivals).
     Fixed location_population(Index location) const;

@@ -211,8 +211,8 @@ TEST_CASE("Militär: nur ab 'seit'") {
         // Ohne Militär zählt der Bereich nicht: der Fingerabdruck gleicht dem der Fixture.
         const uhrwerk::LoadResult fixture = uhrwerk::load_world(testhilfen::fixture_dir());
         REQUIRE(fixture.ok());
-        CHECK(uhrwerk::content_fingerprint(w).parts.back() ==
-              uhrwerk::content_fingerprint(*fixture.world).parts.back());
+        CHECK(uhrwerk::content_fingerprint(w).parts[15] ==
+              uhrwerk::content_fingerprint(*fixture.world).parts[15]);
     }
 }
 
@@ -324,8 +324,8 @@ TEST_CASE("Militär: Spielstand, Wiederholung und Fingerabdruck") {
     testhilfen::replace_in_file(data.dir() / "karte/nachbarn.csv", "leipzig;dresden;90;3",
                                 "leipzig;dresden;90;1");
     const World changed = data.load();
-    CHECK(uhrwerk::content_fingerprint(changed).parts.back() !=
-          uhrwerk::content_fingerprint(one.world()).parts.back());
+    CHECK(uhrwerk::content_fingerprint(changed).parts[15] !=
+          uhrwerk::content_fingerprint(one.world()).parts[15]);
     const uhrwerk::LoadedGame refused = uhrwerk::load_game(bytes, data.load(), 1);
     CHECK_FALSE(refused.ok());
     CHECK(refused.error.find("militaer") != std::string::npos);

@@ -11,23 +11,36 @@ staat BAV {
     }
 
     1848.03.01 = {
-        hauptstadt     = muenchen
-        regierungsform = konstitutionelle_monarchie
-        konfession     = katholisch
-        schatz         = 0
-        kontribution   = 0.10
-        akzise         = 0.05
-        zoll           = 0.03
-        hofhaltung     = 313700
-        heer           = 8
-        schulden       = 12998000
-        zollunion      = zollverein
-        verfassung     = konstitutionell
-        wahlrecht      = staendisch
+        hauptstadt         = muenchen
+        regierungsform     = konstitutionelle_monarchie
+        konfession         = katholisch
+        schatz             = 0
+        kontribution       = 0.10
+        akzise             = 0.05
+        zoll               = 0.03
+        hofhaltung         = 313700
+        heer               = 8
+        schulden           = 12998000
+        zollunion          = zollverein
+        verfassung         = konstitutionell
+        wahlrecht          = staendisch
+        gesetz_grundlasten = grundherrschaft
     }
 
     1848.03.20 = {
         herrscher = "Maximilian II."
+    }
+
+    1848.06.04 = {
+        gesetz_grundlasten = abloesung
+    }
+
+    1854.07.06 = {
+        gesetz_presse = pressegesetz
+    }
+
+    1854.07.13 = {
+        gesetz_vereine = genehmigung
     }
 
     1864.03.10 = {

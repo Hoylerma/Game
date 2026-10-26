@@ -31,6 +31,14 @@ staat PRU {
         verfassung     = konstitutionell
     }
 
+    1850.03.11 = {
+        gesetz_vereine = genehmigung
+    }
+
+    1851.05.12 = {
+        gesetz_presse = pressegesetz
+    }
+
     1858.10.07 = {
         herrscher = "Wilhelm (Prinzregent)"
     }

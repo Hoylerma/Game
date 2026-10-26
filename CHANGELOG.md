@@ -8,6 +8,27 @@ Vor Version 1.0 kann sich jede Schnittstelle ändern.
 
 ## [Unveröffentlicht]
 
+### Meilenstein M11 – Ereignisse und Revolution 1848/49
+
+Vertrag: [technik/ereignisse.md](docs/technik/ereignisse.md), Entscheidungen 1–13 wie empfohlen
+freigegeben; Stand je Schritt in Abschnitt 13 dort.
+
+- **Datenmodell (Schritt a1):** Neue Datei `common/gesetze.chron`
+  ([chronik-skript.md](docs/technik/chronik-skript.md) Abschnitt 3.33) mit drei Gesetzesgruppen
+  (Presse, Vereine, Grundlasten); die Staaten tragen ihre Option datiert im Feld `gesetz_<gruppe>`
+  (`staaten_historie.csv`, 82 Zeilen: Grundherrschaft und Ablösung 1848, preußisches Vereins- und
+  Pressegesetz 1850/51, Bundesgesetze 1854), die Interessengruppen ihre Wünsche (`wuensche`, 3.20).
+  Neue Regeldatei `common/ereignisse.chron` (Ereignisse ab 1848.01.01, Frist 30 Tage) und der Lader der
+  Ereignisse in `common/ereignisse/*.chron` (3.34): Titel und mehrzeilige Texte, Art, Quelle,
+  Wartezeit oder Termin, Wiederholung, Optionen mit Gewichten und Zuschlägen, ein festes Vokabular von
+  Bedingungen und Wirkungen; Verweise auf späteren Inhalt sind nie wahr bzw. entfallen, Folgen ohne
+  Frist dürfen keinen Kreis bilden. Zustand in Welten mit Ereignissen: Verfassung, Wahlrecht und
+  Gesetze je Staat, Ereignischronik, offene und geplante Ereignisse, Merkmale, Zustimmung je Staat und
+  Gruppe, Unruhe je Staat. Inhaltsbereich `ereignisse`, Spielstand **Format 5** (Spielstände aus M10
+  laden nicht mehr); `uhrwerk-cli info` zählt Ereignisse je Art und Jahrzehnt und die Gesetze zum
+  Start, `pruefen` die Gesetzesgruppen und Ereignisse. Noch ohne Auslösung und ohne Ereignisse im
+  Inhalt; 1648 bitgleich.
+
 ### Meilenstein M10 – Militär und Einigungskriege
 
 Vertrag: [technik/militaer.md](docs/technik/militaer.md), Entscheidungen 1–14 wie empfohlen

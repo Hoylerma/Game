@@ -88,7 +88,7 @@ mitgespeichert. Dazu kommt die **Startprüfsumme** (Prüfsumme des Startzustands
 Ein Spielstand enthält nur den Zustand. Beim Laden lädt der Kern zuerst den Inhalt des Szenarios
 aus dem Datenordner (wie beim Spielstart) und überschreibt dann den Zustand. Damit das passt, trägt
 der Spielstand einen **Inhaltsfingerabdruck**: FNV-1a-64 je Bereich über alles am Inhalt, was die
-Simulation beeinflusst, und ein Gesamtwert über die 16 Bereiche (seit M10; M9 15, M8 14, vorher 13):
+Simulation beeinflusst, und ein Gesamtwert über die 17 Bereiche (seit M11; M10 16, M9 15, M8 14, vorher 13):
 
 | Bereich | Inhalt |
 |---|---|
@@ -103,6 +103,7 @@ Simulation beeinflusst, und ein Gesamtwert über die 16 Bereiche (seit M10; M9 1
 | `politik` (seit M8) | Strömungen (Kennung, Name, Position), Interessengruppen (Mitglieder, Neigung), Parlamente mit Wahl, Fraktionen, Sitz und Name, Verfassung und Wahlordnung der Staaten, Wahlkreise mit Name, Staat, Sitzen und Orten, Wahlregeln und Regionen ([politik.md](politik.md)) |
 | `diplomatie` (seit M9) | Zollunionen mit Kennung, Name, Leitmacht, Tarif und ausgeschlossenen Staaten; die Mitgliedschaft der Staaten ist seit Schritt a2 Zustand. Seit Schritt b1 in Welten mit Deutschem Bund auch die Regeln der Diplomatie und die Grundbeziehungen, seit b2 die Bundesversammlung (Präsidium, Plenum, Engerer Rat) ([diplomatie.md](diplomatie.md)) |
 | `militaer` (seit M10) | Nur in Welten mit Militär (ab dem `seit` in `common/militaer.chron`): Stand des Bereichs (`kMilitaryContentVersion`), Flussrang, seit a2 die Regeln der Bewegung, Bahn, Versorgung und Abrüstung mit dem Geländefaktor je Gelände, seit a3 die Regeln von Krieg, Schlacht und Belagerung und die Festungen, das Heerwesen je Staat, die Garnisonen mit Kennung, Staat, Ort, Anteil und Name und die Nachbarschaft der Orte mit Grenze, Fluss und Überfahrt ([militaer.md](militaer.md)); sonst bleibt der Wert der eines leeren Bereichs |
+| `ereignisse` (seit M11) | Nur in Welten mit Ereignissen (ab dem `seit` in `common/ereignisse.chron`): Stand des Bereichs (`kEventContentVersion`), Frist der Regeln, Gesetzesgruppen mit Optionen und Standard, Wünsche der Interessengruppen und die Ereignisse mit Kennung, Titel, Art, Bedingungen, Wartezeit, Termin, Wiederholung, Frist und Optionen (Kennung, Text, Gewichte, Bedingung, Wirkungen); Ereignistext, Quelle und Sicherheit zählen nicht ([ereignisse.md](ereignisse.md)); sonst der Wert eines leeren Bereichs |
 
 **Nicht** dazu gehören volle Staatsnamen, Farben, Quellen und Beschreibungen: Eine korrigierte
 Quelle macht alte Spielstände nicht unbrauchbar. Der **Kurzname der Staaten und der Name der Orte
@@ -263,6 +264,12 @@ Parlament, Zollunion, Bund und Militär bleibt die Folge der Zufallszahlen wie v
   `punkte_heer_anteil` und die besetzten Gebiete der Kriege zum Start; seit dem Review M10 (Stand 8)
   der Überschuss des Hinterlands als Posten im Haushalt (Zustand, nur in Welten mit Hinterland). Ohne Militär (1648) zählen weder
   der Stand noch die Heere, der Prüfwert der Formatwache bleibt.
+- **Format 5 (M11):** der Inhaltsbereich `ereignisse` und in Welten mit Ereignissen im Zustand
+  Verfassung, Wahlrecht und Gesetze je Staat (`verfassungen`), die Ereignischronik, offene und
+  geplante Ereignisse, Merkmale, Zustimmung je Staat und Gruppe und Unruhe je Staat
+  ([ereignisse.md](ereignisse.md), Abschnitt 8). Ein Spielstand im Format 4 zeigt seine Metadaten mit 16
+  Bereichen an, lädt aber nicht. Der Bereich zählt einen eigenen Stand (`kEventContentVersion`, 1 seit
+  Schritt a1). Ohne Ereignisse (1648) zählt nichts davon, der Prüfwert der Formatwache bleibt.
 - Jede Änderung am Zustand (neues Feld, neue Reihenfolge) erhöht die Formatversion. Der Test
   „Spielstand: Formatwache“ verhindert, dass das vergessen wird: Er speichert die Test-Fixture nach
   einem Jahr und vergleicht den Prüfwert der Nutzdaten mit einem festgehaltenen Wert. Ändert er

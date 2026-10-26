@@ -4,13 +4,16 @@
 # berufe[Beruf] × konfessionen[Konfession] (fehlt ein Block, zählt er 1), mit nach_bildung = ja
 # zusätzlich × Alphabetisierung; ein Block kann mehreren Gruppen angehören. Die Neigung verteilt die
 # Stimmen der Mitglieder auf die Strömungen (Summe 1). Katalog nach Kapitel 09, Abschnitt 5.1; alle
-# Anteile und Neigungen sind Spielwerte (Kalibrierung in M8, Schritt a4).
+# Anteile und Neigungen sind Spielwerte (Kalibrierung in M8, Schritt a4). Seit M11 (ereignisse.md 4.2)
+# nennen die Gruppen Wünsche: die Zustimmung (−10 … +10), die eine Gesetzesoption ihnen auf Dauer bringt;
+# Spielwerte nach Kapitel 09, Abschnitt 5.
 
 interessengruppe adel {
     name    = "Adel und Ritterschaft"
     farbe   = { 70 60 110 }
     berufe  = { adel = 1 }
     neigung = { konservative = 0.75 katholiken = 0.1 liberale = 0.15 }
+    wuensche = { presse = { vorzensur = 1 pressefreiheit = -1 } vereine = { verbot = 1 vereinsfreiheit = -1 } grundlasten = { grundherrschaft = 3 abloesung = -1 frei = -3 } }
     quelle  = "Spielwert M8 nach Kapitel 09, Abschnitt 5.1"
 }
 
@@ -19,6 +22,7 @@ interessengruppe katholische_kirche {
     farbe        = { 90 70 50 }
     konfessionen = { katholisch = 0.4 }
     neigung      = { katholiken = 0.55 konservative = 0.25 liberale = 0.15 demokraten = 0.05 }
+    wuensche = { vereine = { verbot = -1 vereinsfreiheit = 1 } }
     quelle       = "Spielwert M8 nach Kapitel 09, Abschnitt 5.1"
 }
 
@@ -27,6 +31,7 @@ interessengruppe evangelische_kirche {
     farbe        = { 60 80 120 }
     konfessionen = { lutherisch = 0.5 reformiert = 0.5 }
     neigung      = { konservative = 0.55 liberale = 0.35 demokraten = 0.1 }
+    wuensche = { presse = { vorzensur = 1 pressefreiheit = -1 } }
     quelle       = "Spielwert M8 nach Kapitel 09, Abschnitt 5.1"
 }
 
@@ -35,6 +40,7 @@ interessengruppe handel_finanzen {
     farbe   = { 190 150 50 }
     berufe  = { buerger = 0.5 }
     neigung = { liberale = 0.75 konservative = 0.15 demokraten = 0.1 }
+    wuensche = { presse = { vorzensur = -1 pressefreiheit = 1 } vereine = { vereinsfreiheit = 1 } }
     quelle  = "Spielwert M8 nach Kapitel 09, Abschnitt 5.1"
 }
 
@@ -43,6 +49,7 @@ interessengruppe mittelstand {
     farbe   = { 150 110 70 }
     berufe  = { handwerker = 0.7 }
     neigung = { demokraten = 0.4 liberale = 0.3 konservative = 0.15 katholiken = 0.1 arbeiter = 0.05 }
+    wuensche = { presse = { pressefreiheit = 1 } vereine = { verbot = -1 vereinsfreiheit = 1 } }
     quelle  = "Spielwert M8 nach Kapitel 09, Abschnitt 5.1"
 }
 
@@ -51,6 +58,7 @@ interessengruppe bauernschaft {
     farbe   = { 110 140 60 }
     berufe  = { bauern = 0.9 landarme = 0.3 }
     neigung = { konservative = 0.35 katholiken = 0.2 liberale = 0.25 demokraten = 0.2 }
+    wuensche = { grundlasten = { grundherrschaft = -4 frei = 3 } }
     quelle  = "Spielwert M8 nach Kapitel 09, Abschnitt 5.1"
 }
 
@@ -59,6 +67,7 @@ interessengruppe beamtenschaft {
     farbe   = { 100 110 120 }
     berufe  = { buerger = 0.3 adel = 0.2 }
     neigung = { liberale = 0.5 konservative = 0.45 demokraten = 0.05 }
+    wuensche = { presse = { vorzensur = 1 pressegesetz = 1 pressefreiheit = -1 } }
     quelle  = "Spielwert M8 nach Kapitel 09, Abschnitt 5.1"
 }
 
@@ -67,6 +76,7 @@ interessengruppe militaer {
     farbe   = { 80 90 70 }
     berufe  = { adel = 0.3 }
     neigung = { konservative = 0.9 liberale = 0.1 }
+    wuensche = { presse = { vorzensur = 1 pressefreiheit = -2 } vereine = { verbot = 1 vereinsfreiheit = -2 } }
     quelle  = "Spielwert M8 nach Kapitel 09, Abschnitt 5.1"
 }
 
@@ -77,6 +87,7 @@ interessengruppe bildungsbuergertum {
     nach_bildung = ja
     neigung      = { liberale = 0.55 demokraten = 0.3 konservative = 0.1 katholiken = 0.05 }
     seit         = 1700.01.01   # Gelehrte und Aufklärer
+    wuensche = { presse = { vorzensur = -3 pressegesetz = -1 pressefreiheit = 3 } vereine = { verbot = -2 vereinsfreiheit = 2 } }
     quelle       = "Spielwert M8 nach Kapitel 09, Abschnitt 5.1"
 }
 
@@ -87,6 +98,7 @@ interessengruppe nationalbewegung {
     nach_bildung = ja
     neigung      = { liberale = 0.5 demokraten = 0.4 konservative = 0.1 }
     seit         = 1806.01.01   # nach dem Ende des Alten Reiches
+    wuensche = { presse = { vorzensur = -2 pressefreiheit = 2 } vereine = { verbot = -3 vereinsfreiheit = 3 } }
     quelle       = "Spielwert M8 nach Kapitel 09, Abschnitt 5.1"
 }
 
@@ -96,5 +108,6 @@ interessengruppe arbeiterbewegung {
     berufe  = { fabrikarbeiter = 0.3 handwerker = 0.1 landarme = 0.05 }
     neigung = { arbeiter = 0.6 demokraten = 0.4 }
     seit    = 1848.08.23   # Allgemeine Deutsche Arbeiterverbrüderung (Berlin); vor der Wahl 1848 ohne Organisation
+    wuensche = { presse = { vorzensur = -2 pressefreiheit = 2 } vereine = { verbot = -4 genehmigung = -1 vereinsfreiheit = 3 } }
     quelle  = "Spielwert M8 nach Kapitel 09, Abschnitt 5.1 und Kapitel 11, Abschnitt 2.1"
 }

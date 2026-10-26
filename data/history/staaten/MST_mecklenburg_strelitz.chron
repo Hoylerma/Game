@@ -11,19 +11,28 @@ staat MST {
     }
 
     1848.03.01 = {
-        hauptstadt     = neustrelitz
-        regierungsform = staendische_monarchie
-        konfession     = lutherisch
-        schatz         = 0
-        kontribution   = 0.10
-        akzise         = 0.05
-        zoll           = 0.03
-        hofhaltung     = 14900
-        heer           = 6
-        schulden       = 100000
-        zollunion      = keine
-        verfassung     = staendisch
-        wahlrecht      = staendisch
+        hauptstadt         = neustrelitz
+        regierungsform     = staendische_monarchie
+        konfession         = lutherisch
+        schatz             = 0
+        kontribution       = 0.10
+        akzise             = 0.05
+        zoll               = 0.03
+        hofhaltung         = 14900
+        heer               = 6
+        schulden           = 100000
+        zollunion          = keine
+        verfassung         = staendisch
+        wahlrecht          = staendisch
+        gesetz_grundlasten = grundherrschaft
+    }
+
+    1854.07.06 = {
+        gesetz_presse = pressegesetz
+    }
+
+    1854.07.13 = {
+        gesetz_vereine = genehmigung
     }
 
     1868.08.11 = {

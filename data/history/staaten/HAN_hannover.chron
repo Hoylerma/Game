@@ -33,4 +33,12 @@ staat HAN {
     1854.01.01 = {
         zollunion = zollverein
     }
+
+    1854.07.06 = {
+        gesetz_presse = pressegesetz
+    }
+
+    1854.07.13 = {
+        gesetz_vereine = genehmigung
+    }
 }

@@ -83,7 +83,10 @@ data/
 │   ├── zollunionen.chron   Zollunionen mit Leitmacht und Tarif (seit M9, optional)
 │   ├── diplomatie.chron    Regeln der Diplomatie (seit M9; Pflicht in Szenarien mit Deutschem Bund)
 │   ├── bundesversammlung.chron  Bundesversammlung mit Plenum und Engerem Rat (seit M9, optional)
-│   └── militaer.chron      Militär: Regeln, Heerwesen, Garnisonen (seit M10, optional)
+│   ├── militaer.chron      Militär: Regeln, Heerwesen, Garnisonen (seit M10, optional)
+│   ├── gesetze.chron       Gesetzesgruppen mit Optionen (seit M11, optional)
+│   ├── ereignisse.chron    Regeln der Ereignisse (seit M11, optional)
+│   └── ereignisse/*.chron  Ereignisse, eine Datei je Thema (seit M11, optional)
 ├── history/                generiert aus tabellen/ (tools/archivar), nicht von Hand bearbeiten
 │   ├── staaten/*.chron     Staaten (Reichsstände) mit datierter Historie
 │   ├── kreise/*.chron      Kreise: Gruppen von 4–12 Orten (seit M3)
@@ -106,8 +109,8 @@ data/
 
 Ladereihenfolge: `regeln`, `gelaende`, `konfessionen`, `kulturen` (seit M4), `berufe`, `gueter`, `beduerfnisse`,
 `betriebe`, `maerkte` (seit M5), dann alle Dateien der Ordner `szenarien` (seit M7 vor `common/`, weil das
-Startdatum bestimmt, welche Güter, Berufe und Betriebe gelten), `stroemungen`, `interessengruppen`, `parlamente`,
-`wahlen` (seit M8), `zollunionen`, `diplomatie`, `bundesversammlung` (seit M9), `militaer` (seit M10), `history/beziehungen` (seit M9), `history/staaten`, `history/kreise` (seit M3), `history/verwaltung` (seit M7), `history/orte`, `history/eisenbahnen` (seit M7), `history/wahlkreise` (seit M8), jeweils **nach Dateiname sortiert**, Einträge in Dateireihenfolge. Daraus ergeben sich die Indizes in `World`. Die Szenarien kommen vor der Historie, weil das Startdatum des gewählten Szenarios bestimmt, welche datierten Blöcke gelten (Abschnitt 3.8).
+Startdatum bestimmt, welche Güter, Berufe und Betriebe gelten), `gesetze` (seit M11), `stroemungen`, `interessengruppen`, `parlamente`,
+`wahlen` (seit M8), `zollunionen`, `diplomatie`, `bundesversammlung` (seit M9), `militaer` (seit M10), `history/beziehungen` (seit M9), `history/staaten`, `history/kreise` (seit M3), `history/verwaltung` (seit M7), `history/orte`, `history/eisenbahnen` (seit M7), `history/wahlkreise` (seit M8), zuletzt `ereignisse` und `common/ereignisse/` auf der fertigen Welt (seit M11), jeweils **nach Dateiname sortiert**, Einträge in Dateireihenfolge. Daraus ergeben sich die Indizes in `World`. Die Szenarien kommen vor der Historie, weil das Startdatum des gewählten Szenarios bestimmt, welche datierten Blöcke gelten (Abschnitt 3.8).
 
 Die Dateien in `history/` erzeugt das Werkzeug `tools/archivar` aus den Tabellen in `data/tabellen/` (Format: [tabellen.md](tabellen.md)). Änderungen gehören in die Tabellen; die CI prüft mit `archivar.py --pruefen`, dass `history/` aktuell ist.
 
@@ -271,6 +274,7 @@ staat BRA {
     wahlsystem     = stichwahl                     # optional seit M8: stichwahl | relativ
     wahl_indirekt  = ja                            # optional seit M8: Wahl über Wahlmänner, Standard nein
     wahl_zensus    = 1                             # Pflicht bei wahlrecht = zensus: Steuern je Kopf und Jahr
+    gesetz_presse  = pressefreiheit                # optional seit M11: Option je Gesetzesgruppe (3.33)
     quelle         = "…"                           # Pflicht (oder "Testdaten, geschätzt")
 }
 ```
@@ -300,6 +304,12 @@ Abschnitte 3.2 bis 3.4).
 Startdatum (`State::constitution`, `State::law`); Werte wie in Abschnitt 3.21. In M8 sind sie Inhalt zur
 Anzeige: Die Wahlen tragen ihr eigenes Wahlrecht im Parlament, und ein Gesetzgebungsverfahren, das die
 Felder ändert, kommt mit M11 ([politik.md](politik.md), Abschnitte 4 und 6).
+
+**Gesetze (seit M11).** `gesetz_<gruppe> = <option>` setzt die Option einer Gesetzesgruppe (Abschnitt
+3.33, `State::laws`); ohne Feld gilt die Option `standard` der Gruppe. Die Felder sind datierbar und
+kommen aus `staaten_historie.csv` (Archivar). Fatal sind eine unbekannte Gruppe oder Option und ein
+Verweis auf eine Gruppe, die es zum Datum des Blocks noch nicht gibt. In Welten mit Ereignissen
+(Abschnitt 3.34) sind Verfassung, Wahlrecht und Gesetze ab dem Start Zustand, den Ereignisse ändern.
 
 ### 3.6 `history/orte/*.chron`
 
@@ -635,9 +645,16 @@ interessengruppe bildungsbuergertum {
     nach_bildung = ja                                           # optional: zusätzlich × Alphabetisierung
     neigung      = { liberale = 0.55 demokraten = 0.45 }        # Pflicht: je Strömung, Summe 1
     seit         = 1700.01.01                                   # optional (Abschnitt 3.18)
+    wuensche     = { presse = { pressefreiheit = 2 vorzensur = -2 } }   # optional seit M11
     quelle       = "…"                                          # optional
 }
 ```
+
+**Wünsche (seit M11).** `wuensche` nennt je Gesetzesgruppe (Abschnitt 3.33) die Zustimmung, die eine
+Option der Gruppe bringt (−10 … +10; nicht genannte Optionen 0). Daraus ergibt sich ab Schritt a3 der
+Zielwert der Zustimmung ([ereignisse.md](ereignisse.md), Abschnitt 4.2). Fatal sind unbekannte Gruppen
+und Optionen und Werte außerhalb −10 … +10; ein Wunsch an eine Gruppe mit späterem `seit` entfällt. Im
+Kern: `InterestGroup::wishes` (`LawWish`).
 
 Ein Block gehört der Gruppe mit dem Anteil `berufe[Beruf] × konfessionen[Konfession]`, mit
 `nach_bildung` zusätzlich × seiner Alphabetisierung. Fehlt `berufe` oder `konfessionen`, zählt dieser
@@ -1123,6 +1140,127 @@ beiden Seiten oder in zwei Kriegen, ein `beginn` nach dem Start und ein Bündnis
 Staaten. Im Kern: `World::deployments` (`Deployment`), `World::opening_wars` (`OpeningWar`) und
 `World::opening_treaties`, seit b2 `OpeningWar::occupied`; die Heere tragen seit b1 Befehlshaber und Führung (`Army::commander`,
 `Army::leadership`).
+
+### 3.33 `common/gesetze.chron` (seit M11)
+
+Gesetzesgruppen ([ereignisse.md](ereignisse.md), Abschnitt 4.1); die Datei darf fehlen.
+
+```text
+gesetz presse {
+    name     = "Presse"               # Pflicht
+    seit     = 1815.06.08             # optional (Abschnitt 3.18)
+    standard = vorzensur              # Pflicht: Option, solange die Historie keine andere nennt
+    option vorzensur      { name = "Vorzensur" }       # mindestens zwei Optionen
+    option pressefreiheit { name = "Pressefreiheit" }
+    quelle   = "…"                    # optional
+}
+```
+
+Fatal sind eine Kennung zweimal (Gruppe oder Option), weniger als zwei Optionen und ein unbekannter
+Standard. Im Kern: `World::law_groups` (`LawGroup`, `LawOption`). Die Staaten nennen ihre Option mit
+`gesetz_<gruppe>` (Abschnitt 3.5), die Interessengruppen ihre Wünsche mit `wuensche` (Abschnitt 3.20).
+
+### 3.34 `common/ereignisse.chron` und `common/ereignisse/*.chron` (seit M11)
+
+Regeln und Ereignisse ([ereignisse.md](ereignisse.md), Abschnitt 3). Beide dürfen fehlen; ohne
+Regeldatei oder vor ihrem `seit` gibt es keine Ereignisse, die Dateien in `common/ereignisse/` werden
+dann nicht gelesen und der Zustand bleibt der ohne Ereignisse (1648 bitgleich).
+
+```text
+ereignisse {
+    seit  = 1848.01.01   # Pflicht: ab diesem Startdatum gibt es Ereignisse
+    frist = 30           # optional (30), 1–365: Tage bis zur Wahl ohne Spieler
+}
+```
+
+Ein Ereignis (Kennung aus a–z, 0–9, `_` und `.`, beginnend mit einem Buchstaben, z. B.
+`maerz.forderungen`):
+
+```text
+ereignis maerz.forderungen {
+    titel  = "Die Märzforderungen"             # Pflicht
+    text {                                     # Pflicht: Zeichenkette oder Block aus Zeichenketten,
+        "In Mannheim hat eine Volksversammlung …"   # mit Leerzeichen verbunden; "" beginnt einen
+        ""                                     # neuen Absatz
+        "Petitionen mit Tausenden Unterschriften …"
+    }
+    datum  = 1848.02.27                        # optional: historisches Datum (Anzeige, Kompass)
+    quelle = "Siemann 1985, S. 66 f."          # Pflicht bei art = historisch
+    sicherheit = gesichert                     # optional: gesichert, schaetzung, spielwert, ungeprueft
+    art    = historisch                        # Pflicht: historisch, dynamisch, atmosphaerisch
+    wendepunkt = ja                            # optional (nein)
+    wer    = staat                             # optional: staat (je Staat geprüft) oder welt
+    bedingung { … }                            # optional: Prüfungen, die alle gelten müssen
+    wartezeit = 10                             # optional, 0–36500 Tage (0 = sofort)
+    termin = 1848.05.18                        # optional statt wartezeit: genau an diesem Tag
+    wiederholbar = ja                          # optional (nein), dann Pflicht:
+    abstand = 365                              #   Tage bis zum nächsten Eintritt, ab 1
+    frist  = 14                                # optional, 1–365 (Standard der Regeln)
+    option gewaehren {                         # mindestens eine
+        text = "Gewähren: ein Märzministerium berufen"   # Pflicht
+        historisch = ja                        # optional, höchstens eine Option je Ereignis
+        gewicht = 70                           # Pflicht, 0–1000; Summe der Optionen über 0
+        gewicht_wenn { unruhe >= 60  plus = 30 }   # optional, mehrfach: Zuschlag −1000…1000
+        bedingung { zustimmung_militaer >= 0 } # optional: Verfügbarkeit
+        wirkung { … }                          # optional
+    }
+}
+```
+
+**Bedingungen** (Vergleich `=`, `!=`, `<`, `<=`, `>`, `>=`, wo nicht anders genannt). Prüfungen auf
+den Staat gelten nur in Staatsereignissen oder innerhalb von `staat <TAG> { … }` und
+`ein_staat { … }`; in einem Welt-Ereignis sind sie sonst fatal.
+
+| Prüfung | Bedeutung |
+|---|---|
+| `alle { … }`, `oder { … }`, `nicht { … }` | alle, mindestens eine, keine der Prüfungen |
+| `staat <TAG> { … }`, `ein_staat { … }` | für diesen Staat, für mindestens einen Staat |
+| `datum >= 1848.03.01` | Tagesdatum |
+| `staat = TAG`, `staat_in = { TAG … }` | der Staat (`=`, `!=`) bzw. einer der Liste |
+| `geschehen = <ereignis>`, `geschehen { ereignis = … option = … }` | eingetreten (für diesen Staat oder die Welt), mit der Option |
+| `merkmal = <name>`, `welt_merkmal = <name>` | Merkmal am Staat bzw. in der Welt |
+| `gesetz_<gruppe> = <option>` (`=`, `!=`) | Gesetz des Staates |
+| `verfassung = …`, `wahlrecht = …` (`=`, `!=`) | Werte wie in Abschnitt 3.5 |
+| `zustimmung_<gruppe> >= n` | Zustimmung einer Interessengruppe, −10…10 |
+| `anteil_<gruppe> >= x`, `einfluss_<gruppe> >= x` | Anteil und Einfluss, 0…1 |
+| `unruhe >= n`, `nachbar_unruhe >= n` | Unruhe des Staates bzw. eines Nachbarn, 0…100 |
+| `lebensstandard_unten <= n` | Lebensstandard der unteren Schicht, 0…100 |
+| `preis_<gut> >= x` | Preisfaktor im Markt der Hauptstadt |
+| `im_krieg`, `mobil`, `bund`, `spieler` = `ja`/`nein` | Krieg, Mobilmachung, Bund, Spielerstaat |
+| `krieg_mit = TAG`, `zollunion = <id>`/`keine`, `beziehung_<TAG> >= n` | Krieg, Zollunion, Beziehung |
+| `sitze { parlament = <id> stroemung = <id> mindestens = n }` | Sitze nach der letzten Wahl |
+| `soldaten >= n`, `schatz >= n`, `schulden_quote >= x` | Heer und Haushalt |
+
+**Wirkungen.** Wirkungen auf den Staat gelten nur in Staatsereignissen oder innerhalb von
+`staat <TAG> { … }` und `alle_staaten { … }`.
+
+| Wirkung | Bedeutung |
+|---|---|
+| `gesetz_<gruppe> = <option>`, `verfassung = …`, `wahlrecht = …` | Gesetz bzw. Verfassungsfeld setzen |
+| `zustimmung_<gruppe> = ±n` (−20…20), `unruhe = ±n` (−100…100) | Zustimmung bzw. Unruhe ändern |
+| `merke`, `vergiss`, `welt_merke`, `welt_vergiss` = `<name>` | Merkmal setzen bzw. löschen |
+| `schatz = ±n`, `monatseinnahmen = ±x` (−120…120) | Geld, auch als Vielfaches der Monatseinnahmen |
+| `beziehung_<TAG> = ±n` (−400…400) | Beziehung zu einem Staat |
+| `auswanderung = x` (0…1) | Anteil der unteren Schicht wandert aus |
+| `verwuestung = x`, `verwuestung { ort = <id> wert = x }` (−1…1) | Verwüstung der Hauptstadt bzw. eines Ortes |
+| `mobilmachung = ja` | Mobilmachung |
+| `folge { ereignis = <id> tage = n staat = TAG }` | Folgeereignis nach n Tagen (0), auch für einen anderen Staat |
+| `chronik = "…"` | eigener Chronikeintrag |
+| `zufall { 30 = { … } 70 = { … } }` | genau ein Zweig nach Gewicht (Strom `Ereignisse`) |
+| `staat <TAG> { … }`, `alle_staaten { … }` | für diesen Staat bzw. für jeden Staat |
+
+**Späterer Inhalt.** Ein Verweis auf einen Staat ohne Orte zum Startdatum oder auf eine Gruppe,
+Gesetzesgruppe, ein Gut, Parlament oder eine Zollunion mit späterem `seit` ist kein Fehler: Die Prüfung
+ist nie wahr (`nicht`/`!=` entsprechend immer), die Wirkung entfällt. Unbekannte Kennungen sind fatal.
+
+**Prüfungen.** Fatal sind außerdem: unbekannte Felder in Bedingungen und Wirkungen, eine Kennung oder
+Option zweimal, ein fehlender Titel, Text, `art`, eine fehlende `quelle` bei `art = historisch`, ein
+Ereignis ohne Option, eine Option ohne Text oder Gewicht, mehr als eine historische Option, eine
+Gewichtssumme von 0, `termin` zusammen mit `wartezeit`, `abstand` ohne `wiederholbar` (und umgekehrt),
+eine `folge` auf ein Staatsereignis ohne Staat, `staat` in einer `folge` auf ein Welt-Ereignis und
+Folgeereignisse ohne Frist (`tage = 0`), die einen Kreis bilden. Die Ereignisse stehen im Kern nach
+Kennung geordnet (`World::events`, `EventDef`; Regeln `World::event_rules`). Auslösung und Wahl kommen
+mit Schritt a2.
 
 ## 4. Startzustand
 

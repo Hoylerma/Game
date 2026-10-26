@@ -30,6 +30,7 @@
 #include <filesystem>
 #include <fstream>
 #include <iostream>
+#include <map>
 #include <optional>
 #include <set>
 #include <string>
@@ -496,6 +497,46 @@ std::string politics_summary(const World& w) {
                 plural(districts, "Wahlkreis", "Wahlkreisen") + ", Wahl am " +
                 uhrwerk::format_date_long(p.election_day) + ", " +
                 plural(p.factions.size(), "Fraktion", "Fraktionen");
+    }
+    return text;
+}
+
+/// Ereignisse (seit M11, docs/technik/ereignisse.md): Zahl je Art und Jahrzehnt, Gesetze zum Start.
+std::string events_summary(const World& w) {
+    if (!w.event_rules.active) {
+        return "keine (vor dem 'seit' in common/ereignisse.chron)";
+    }
+    std::array<std::size_t, 3> kinds{};
+    std::map<int, std::size_t> decades; // Jahrzehnt des Datums oder Termins; -1 ohne Datum
+    for (const uhrwerk::EventDef& e : w.events) {
+        kinds[static_cast<std::size_t>(e.kind)] += 1;
+        const int year = e.has_date ? e.date.year : e.has_fixed_date ? e.fixed_date.year : -1;
+        decades[year < 0 ? -1 : year / 10 * 10] += 1;
+    }
+    std::string text = plural(w.events.size(), "Ereignis", "Ereignisse") + " (" + std::to_string(kinds[0]) +
+                       " historisch, " + std::to_string(kinds[1]) + " dynamisch, " +
+                       std::to_string(kinds[2]) + " atmosphärisch), Frist " +
+                       plural(static_cast<std::size_t>(w.event_rules.deadline), "Tag", "Tage");
+    if (!decades.empty()) {
+        std::string line;
+        for (const auto& [decade, count] : decades) {
+            line += (line.empty() ? "" : ", ") +
+                    (decade < 0 ? std::string("ohne Datum") : std::to_string(decade) + "er") + " " +
+                    std::to_string(count);
+        }
+        text += "\n              je Jahrzehnt: " + line;
+    }
+    for (std::size_t g = 0; g < w.law_groups.size(); ++g) {
+        const uhrwerk::LawGroup& group = w.law_groups[g];
+        std::vector<std::size_t> counts(group.options.size());
+        for (const uhrwerk::State& s : w.states) {
+            counts[static_cast<std::size_t>(s.laws[g])] += 1;
+        }
+        std::string line;
+        for (std::size_t o = 0; o < group.options.size(); ++o) {
+            line += (line.empty() ? "" : ", ") + group.options[o].name + " " + std::to_string(counts[o]);
+        }
+        text += "\n              " + group.name + ": " + line;
     }
     return text;
 }
@@ -1142,6 +1183,10 @@ int cmd_pruefen(const Options& o, const fs::path& data_dir) {
                   << plural(w.interest_groups.size(), "Interessengruppe", "Interessengruppen") << ", "
                   << plural(w.parliaments.size(), "Parlament", "Parlamente");
     }
+    if (w.event_rules.active) {
+        std::cout << ", " << plural(w.law_groups.size(), "Gesetzesgruppe", "Gesetzesgruppen") << ", "
+                  << plural(w.events.size(), "Ereignis", "Ereignisse");
+    }
     std::cout << ".\n";
     return kExitOk;
 }
@@ -1179,6 +1224,7 @@ int cmd_info(const Options& o, const fs::path& data_dir) {
               << "Zollunionen:  " << customs_summary(w) << '\n'
               << "Diplomatie:   " << diplomacy_summary(w) << '\n'
               << "Militär:      " << military_summary(w) << '\n'
+              << "Ereignisse:   " << events_summary(w) << '\n'
               << "Bevölkerung:  " << format_int(total.round()) << "\n\n";
 
     std::vector<std::vector<std::string>> rows;

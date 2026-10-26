@@ -1,0 +1,10 @@
+# Regeln der Ereignisse (Meilenstein M11, docs/technik/ereignisse.md Abschnitt 3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.34. Ereignisse gibt es erst ab 'seit'; Szenarien davor
+# (1648) laufen ohne sie und bleiben bitgleich. Die Ereignisse selbst stehen in common/ereignisse/*.chron
+# (ab Schritt b1).
+
+ereignisse {
+    seit  = 1848.01.01
+    frist = 30          # Tage, bis ohne Wahl des Spielers die Option mit dem größten Gewicht gilt
+}

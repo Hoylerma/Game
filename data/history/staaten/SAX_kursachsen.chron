@@ -55,6 +55,14 @@ staat SAX {
         wahlrecht      = staendisch
     }
 
+    1854.07.06 = {
+        gesetz_presse = pressegesetz
+    }
+
+    1854.07.13 = {
+        gesetz_vereine = genehmigung
+    }
+
     1854.08.09 = {
         herrscher = "Johann"
     }
