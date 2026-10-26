@@ -16,7 +16,8 @@
 //   4. Bevölkerung der Orte, die heute ihren Rechentag haben – parallel
 //   5. Zusammenführen, nacheinander: Momentaufnahmen veröffentlichen, Wanderung buchen
 //   6. Wirtschaft der Staaten, die heute ihren Rechentag haben; Wahlen (seit M8), diplomatische Spiele
-//      (seit M9), Heere (seit M10: Mobilmachung, Bewegung, Schlachten, Besetzung, Versorgung)
+//      (seit M9), Heere (seit M10: Mobilmachung, Bewegung, Schlachten, Besetzung, Versorgung), Ereignisse
+//      (seit M11: Fristen, Folgeereignisse, Auslösung und Wahl)
 //   7. Am 1. Januar: Seuchen und Abbau der Verwüstung (Orte ohne Blöcke werden übersprungen)
 //   8. Datum um einen Tag weiterschalten
 //
@@ -25,6 +26,7 @@
 // daher nicht von der Zahl der Threads ab.
 
 #include "uhrwerk/economy.hpp"
+#include "uhrwerk/events.hpp"
 #include "uhrwerk/parallel.hpp"
 #include "uhrwerk/population.hpp"
 #include "uhrwerk/rng.hpp"
@@ -62,6 +64,8 @@ enum class CommandType : std::uint8_t {
     WarGoal,      // seit M10: state, target = Nummer des Krieges, value = Kriegsziel (militaer.md 4.5)
     PeaceOffer,   // seit M10: state, target = Nummer des Krieges, value = PeaceTerms (militaer.md 4.5)
     Staff,        // seit M10: state, value = Nummer des Heeres, target = 1 übergeben, 0 zurücknehmen (5)
+    EventChoice,  // seit M11: state, value = Ereignis, target = Option (ereignisse.md Abschnitt 3.6)
+    EventPlayer,  // seit M11: state = Staat, dessen Ereignisse auf die Wahl warten; kNone: keiner
 };
 
 struct Command {
@@ -223,6 +227,7 @@ private:
     std::uint64_t start_checksum_ = 0;
     EconomyTopology topology_;           // abgeleitet: Märkte, Nachbarn, Betriebe je Beruf (seit M5)
     bool record_trade_ = false;          // Zolllabor (seit M9): Ströme festhalten
+    EventCache event_cache_;             // abgeleitet (seit M11): letzter Eintritt, Nachbarstaaten
     std::vector<TradeFlow> trade_flows_; // … des letzten Monatsersten, kein Zustand
 
     std::array<std::vector<Index>, 28> locations_by_day_; // Orte mit Blöcken je Rechentag, aufsteigend

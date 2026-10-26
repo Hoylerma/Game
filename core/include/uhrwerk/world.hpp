@@ -1148,8 +1148,10 @@ struct World {
     std::vector<PendingEvent> pending_events;     // Ereignisse des Spielers, die auf seine Wahl warten
     std::vector<ScheduledEvent> scheduled_events; // Folgeereignisse nach Fälligkeit, dann Reihenfolge
     std::vector<EventFlag> event_flags;           // Merkmale nach Staat (Welt = -1 zuerst), dann Name
-    std::vector<Fixed> approval; // Zustimmung je Staat und Gruppe: [staat × gruppen + gruppe]
-    std::vector<Fixed> unrest;   // Unruhe je Staat (0 … 100)
+    std::vector<Fixed> approval;            // Zustimmung je Staat und Gruppe: [staat × gruppen + gruppe]
+    std::vector<Fixed> unrest;              // Unruhe je Staat (0 … 100)
+    std::vector<TimedEffect> timed_effects; // seit a2: befristete Wirkungen in der Reihenfolge ihres Beginns
+    Index event_player = -1;                // seit a2: Staat, dessen Ereignisse auf die Wahl warten (Befehl)
 
     Index find_state(std::string_view tag) const;
     Index find_location(std::string_view id) const;

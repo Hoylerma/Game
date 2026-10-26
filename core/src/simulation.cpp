@@ -62,6 +62,8 @@ Simulation::Simulation(World world, SimConfig config)
     build_schedule();
     build_migration_targets();
     prepare_population_state();
+    ensure_events_state(world_);
+    rebuild_event_cache(world_, event_cache_);
     start_checksum_ = checksum();
 }
 
@@ -69,6 +71,7 @@ void Simulation::rebuild_derived() {
     topology_ = build_economy_topology(world_);
     build_schedule();
     build_migration_targets();
+    rebuild_event_cache(world_, event_cache_);
 }
 
 void Simulation::build_schedule() {
@@ -348,6 +351,12 @@ void Simulation::step_day() {
         rebuild_derived(); // Frieden mit Besitzwechsel (seit a4): Rechentage, Märkte, Wanderungsziele
     }
 
+    // 6e. Ereignisse: befristete Wirkungen, Fristen des Spielers, Folgeereignisse, Auslösung und Wahl (seit
+    //     M11, ereignisse.md Abschnitte 3.4–3.7), nur in Welten mit Ereignissen.
+    if (events_active(world_)) {
+        run_events(world_, rng_events_, event_cache_);
+    }
+
     // 7. Jahreswechsel.
     if (new_year) {
         run_yearly();
@@ -482,6 +491,17 @@ void Simulation::execute(const Command& command) {
         }
         return;
     }
+    case CommandType::EventChoice: {
+        const std::int64_t event = command.value.trunc();
+        if (command.value == Fixed::from_int(event) && event >= 0 && event <= INT32_MAX) {
+            choose_event_option(world_, rng_events_, event_cache_, command.state, static_cast<Index>(event),
+                                command.target);
+        }
+        return;
+    }
+    case CommandType::EventPlayer:
+        set_event_player(world_, command.state);
+        return;
     }
 }
 

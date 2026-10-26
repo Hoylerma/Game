@@ -112,6 +112,17 @@ enum class EffectKind : std::uint8_t {
     Random,         // zufall { <gewicht> = { … } … }: genau ein Zweig
     OfState,        // staat <TAG> { … }: die Kinder für den Staat a
     AllStates,      // alle_staaten { … }: die Kinder für jeden Staat
+    Timed,          // befristet { tage = days text = name … }: Werte in timed (seit a2, Abschnitt 3.7)
+};
+
+/// Werte einer befristeten Wirkung (Abschnitt 3.7).
+struct TimedValues {
+    Fixed tax;      // Steuerertrag ±x (Anteil)
+    Fixed morale;   // Kampfkraft der Heere über die Moral ±x (Anteil)
+    Fixed unrest;   // Unruhe je Monat ±n
+    Fixed relation; // Beziehung zu allen Bundesstaaten je Monat ±n
+
+    friend bool operator==(const TimedValues&, const TimedValues&) = default;
 };
 
 struct Effect {
@@ -120,8 +131,9 @@ struct Effect {
     Index b = -1;
     Fixed value;
     std::int32_t days = 0;
-    std::string name;             // Flag oder Chroniktext
+    std::string name;             // Flag, Chroniktext oder Text der Befristung
     std::vector<Effect> children; // OfState, AllStates
+    TimedValues timed;            // Timed
     /// Random: je Zweig ein Gewicht (weights[i]) und seine Wirkungen (branches[i]).
     std::vector<Fixed> weights;
     std::vector<std::vector<Effect>> branches;
@@ -164,6 +176,7 @@ struct EventDef {
     bool has_fixed_date = false; // termin
     Date fixed_date;
     bool repeatable = false;
+    bool follow_only = false;  // nur_folge: tritt nur als Folgeereignis ein (seit a2)
     std::int32_t spacing = 0;  // Mindestabstand in Tagen bei wiederholbaren Ereignissen
     std::int32_t deadline = 0; // Frist für die Wahl des Spielers; 0 = Standard der Regeln
     std::vector<EventOption> options;
@@ -206,6 +219,17 @@ struct ScheduledEvent {
     Date due;
 
     friend bool operator==(const ScheduledEvent&, const ScheduledEvent&) = default;
+};
+
+/// Befristete Wirkung eines Staates bis zu einem Datum (Zustand, seit a2, Abschnitt 3.7).
+struct TimedEffect {
+    Index state = -1;
+    Index event = -1; // Ereignis, aus dem sie stammt
+    Date until;       // gilt bis zum Vortag
+    TimedValues values;
+    std::string text; // z. B. "Belagerungszustand in Berlin"
+
+    friend bool operator==(const TimedEffect&, const TimedEffect&) = default;
 };
 
 /// Merkmal (Flag) eines Staates oder der Welt (state = -1), Zustand.

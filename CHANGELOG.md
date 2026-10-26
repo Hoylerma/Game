@@ -28,6 +28,14 @@ freigegeben; Stand je Schritt in Abschnitt 13 dort.
   laden nicht mehr); `uhrwerk-cli info` zählt Ereignisse je Art und Jahrzehnt und die Gesetze zum
   Start, `pruefen` die Gesetzesgruppen und Ereignisse. Noch ohne Auslösung und ohne Ereignisse im
   Inhalt; 1648 bitgleich.
+- **Auslösung und Wahl (Schritt a2):** Täglich nach dem Militär treten Ereignisse ein, deren Bedingung
+  gilt: sofort, mit mittlerer Wartezeit (Strom `Ereignisse`) oder am Termin, je Staat einmal oder
+  wiederholt mit Abstand. Staaten ohne Spieler wählen nach Gewicht mit Zuschlägen; Ereignisse des
+  Spielerstaates warten (neue Befehle `Ereignisspieler` und `Ereigniswahl`), ohne Wahl gilt nach der
+  Frist die Option mit dem größten Gewicht. Folgeereignisse mit und ohne Frist (`nur_folge`), alle
+  Wirkungen aus [ereignisse.md](docs/technik/ereignisse.md) 3.3 bis auf Aufstände, Journale und Kriege,
+  befristete Wirkungen (`befristet`: Steuerertrag, Moral, Unruhe, Beziehung) und Chronikeinträge der
+  gewählten Optionen. Die Testbefehle der Kommandozeile üben die neuen Befehle; 1648 bitgleich.
 
 ### Meilenstein M10 – Militär und Einigungskriege
 

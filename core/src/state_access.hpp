@@ -402,6 +402,18 @@ template <typename Sim, typename V> void StateAccess::visit(Sim& sim, V& v) {
         });
         list(v, "zustimmung", w.approval, Extent::Content, [&](auto& a) { v.field("", a); });
         list(v, "unruhe", w.unrest, Extent::Content, [&](auto& u) { v.field("", u); });
+        // Seit Schritt a2: befristete Wirkungen und der Staat, dessen Ereignisse auf die Wahl warten.
+        list(v, "befristet", w.timed_effects, Extent::State, [&](auto& t) {
+            v.field("staat", t.state);
+            v.field("ereignis", t.event);
+            v.field("bis", t.until);
+            v.field("steuerertrag", t.values.tax);
+            v.field("moral", t.values.morale);
+            v.field("unruhe", t.values.unrest);
+            v.field("beziehung", t.values.relation);
+            v.field("text", t.text);
+        });
+        v.field("ereignisspieler", w.event_player);
     }
 
     v.field("zufall.demografie", sim.rng_demography_);
@@ -425,7 +437,7 @@ template <typename Sim, typename V> void StateAccess::visit(Sim& sim, V& v) {
         v.field("steuerart", c.kind);
         // Wahlkampf (M8), Zollunion und Diplomatie (M9), Marsch (M10)
         if (!w.parliaments.empty() || !w.customs_unions.empty() || !w.relations.empty() ||
-            w.military_rules.active) {
+            w.military_rules.active || w.event_rules.active) {
             v.field("ziel", c.target);
             v.field("aktion", c.action);
         }

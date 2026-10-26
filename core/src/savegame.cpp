@@ -38,7 +38,7 @@ constexpr std::uint64_t kMaxPayload = std::uint64_t{1} << 31;
 constexpr std::uint64_t kMilitaryContentVersion = 8;
 
 /// Stand der Ereignisse im Zustand (seit M11, Inhaltsbereich ereignisse): 1 = Schritt a1.
-constexpr std::uint64_t kEventContentVersion = 1;
+constexpr std::uint64_t kEventContentVersion = 2; // 2 seit a2 (Auslösung, Befristung, Spieler)
 
 bool fail(std::string* error, std::string message) {
     if (error != nullptr) {
@@ -1074,6 +1074,14 @@ std::string validate_state(const Simulation& sim) {
                 return "Unruhe außerhalb von 0 bis 100";
             }
         }
+        for (const TimedEffect& t : w.timed_effects) {
+            if (!in(t.state, S) || !in(t.event, w.events.size()) || !is_valid(t.until)) {
+                return "befristete Wirkung mit ungültigem Verweis";
+            }
+        }
+        if (!none_or_in(w.event_player, S)) {
+            return "Spieler der Ereignisse ungültig";
+        }
     }
     return {};
 }
@@ -1110,8 +1118,11 @@ void effects_hash(Fnv& h, const std::vector<Effect>& effects) {
         h.i64(e.b);
         h.fixed(e.value);
         h.i64(e.days);
-        h.text(e.name); // Merkmal oder Chroniktext
+        h.text(e.name); // Merkmal, Chroniktext oder Text der Befristung
         effects_hash(h, e.children);
+        for (const Fixed f : {e.timed.tax, e.timed.morale, e.timed.unrest, e.timed.relation}) { // seit a2
+            h.fixed(f);
+        }
         h.u64(e.weights.size());
         for (std::size_t i = 0; i < e.weights.size(); ++i) {
             h.fixed(e.weights[i]);
@@ -1132,6 +1143,7 @@ void event_hash(Fnv& h, const EventDef& e) {
     h.flag(e.has_fixed_date);
     h.i64(e.has_fixed_date ? to_day_number(e.fixed_date) : 0);
     h.flag(e.repeatable);
+    h.flag(e.follow_only); // seit a2
     h.i64(e.spacing);
     h.i64(e.deadline);
     h.u64(e.options.size());

@@ -574,6 +574,10 @@ private:
                 if (const auto b = boolean(child)) {
                     event.repeatable = *b;
                 }
+            } else if (key == "nur_folge") {
+                if (const auto b = boolean(child)) {
+                    event.follow_only = *b;
+                }
             } else if (key == "abstand") {
                 if (const auto days = integer(child, 1, 36500)) {
                     event.spacing = static_cast<std::int32_t>(*days);
@@ -601,6 +605,9 @@ private:
         }
         if (seen.count("termin") != 0 && seen.count("wartezeit") != 0) {
             error(seen["termin"], "'termin' und 'wartezeit' schließen sich aus in " + what);
+        }
+        if (event.follow_only && (seen.count("termin") != 0 || seen.count("wartezeit") != 0)) {
+            error(node.line, "'nur_folge' schließt 'termin' und 'wartezeit' aus in " + what);
         }
         if (seen.count("abstand") != 0 && !event.repeatable) {
             error(seen["abstand"], "'abstand' gilt nur mit wiederholbar = ja in " + what);
@@ -1326,6 +1333,9 @@ private:
         if (key == "folge") {
             return follow(node, has_state, skip);
         }
+        if (key == "befristet") {
+            return timed(node, has_state);
+        }
         if (key == "zufall") {
             return random(node, has_state);
         }
@@ -1534,6 +1544,76 @@ private:
         }
         if (world_.locations[static_cast<std::size_t>(e.a)].owner == kNone) {
             skip = true; // Ort ohne Simulationsdaten zum Startdatum (die Blöcke entstehen erst danach)
+        }
+        return e;
+    }
+
+    /// befristet { tage = n text = "…" steuerertrag = x moral = x unruhe = n beziehung_bund = n } (3.7).
+    std::optional<Effect> timed(const ScriptNode& node, bool has_state) {
+        if (!node.is_block || !node.value.empty()) {
+            error(node.line, "'befristet' erwartet einen Block: befristet { tage = n text = \"…\" … }");
+            return std::nullopt;
+        }
+        if (!need_state(node, has_state)) {
+            return std::nullopt;
+        }
+        Effect e;
+        e.kind = EffectKind::Timed;
+        std::map<std::string, int, std::less<>> seen;
+        bool ok = true;
+        for (const ScriptNode& child : node.children) {
+            if (child.key.empty() || !first_time(seen, child, "befristet")) {
+                ok = ok && !child.key.empty();
+                continue;
+            }
+            std::optional<Fixed> value;
+            if (child.key == "tage") {
+                const auto days = integer(child, 1, 36500);
+                ok = ok && days.has_value();
+                e.days = static_cast<std::int32_t>(days.value_or(0));
+                continue;
+            }
+            if (child.key == "text") {
+                const auto t = scalar(child) ? text(child) : std::nullopt;
+                ok = ok && t.has_value();
+                e.name = t.value_or("");
+                continue;
+            }
+            if (!assign(child)) {
+                ok = false;
+                continue;
+            }
+            if (child.key == "steuerertrag") {
+                value = number(child, fx(-1), fx(1));
+                e.timed.tax = value.value_or(Fixed::zero());
+            } else if (child.key == "moral") {
+                value = number(child, fx(-1), fx(1));
+                e.timed.morale = value.value_or(Fixed::zero());
+            } else if (child.key == "unruhe") {
+                value = number(child, fx(-100), fx(100));
+                e.timed.unrest = value.value_or(Fixed::zero());
+            } else if (child.key == "beziehung_bund") {
+                value = number(child, fx(-100), fx(100));
+                e.timed.relation = value.value_or(Fixed::zero());
+            } else {
+                error(child.line, "in 'befristet' sind nur tage, text, steuerertrag, moral, unruhe und "
+                                  "beziehung_bund erlaubt");
+            }
+            ok = ok && value.has_value();
+        }
+        for (const char* required : {"tage", "text"}) {
+            if (seen.count(required) == 0) {
+                error(node.line, "Pflichtfeld '" + std::string(required) + "' fehlt in befristet");
+                ok = false;
+            }
+        }
+        if (seen.size() <= 2 && ok) {
+            error(node.line, "'befristet' braucht mindestens einen Wert (steuerertrag, moral, unruhe oder "
+                             "beziehung_bund)");
+            ok = false;
+        }
+        if (!ok) {
+            return std::nullopt;
         }
         return e;
     }

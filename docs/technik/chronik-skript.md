@@ -1196,6 +1196,7 @@ ereignis maerz.forderungen {
     wiederholbar = ja                          # optional (nein), dann Pflicht:
     abstand = 365                              #   Tage bis zum nächsten Eintritt, ab 1
     frist  = 14                                # optional, 1–365 (Standard der Regeln)
+    nur_folge = ja                             # optional (nein): nur als Folgeereignis, ohne termin/wartezeit
     option gewaehren {                         # mindestens eine
         text = "Gewähren: ein Märzministerium berufen"   # Pflicht
         historisch = ja                        # optional, höchstens eine Option je Ereignis
@@ -1245,6 +1246,7 @@ den Staat gelten nur in Staatsereignissen oder innerhalb von `staat <TAG> { … 
 | `verwuestung = x`, `verwuestung { ort = <id> wert = x }` (−1…1) | Verwüstung der Hauptstadt bzw. eines Ortes |
 | `mobilmachung = ja` | Mobilmachung |
 | `folge { ereignis = <id> tage = n staat = TAG }` | Folgeereignis nach n Tagen (0), auch für einen anderen Staat |
+| `befristet { tage = n text = "…" steuerertrag = x moral = x unruhe = n beziehung_bund = n }` | Wirkung auf Zeit (seit a2): Steuerertrag und Kampfkraft ±x (−1…1), Unruhe und Beziehung zu allen Bundesstaaten je Monatserstem ±n (−100…100); `tage` (1…36500) und `text` Pflicht, mindestens ein Wert |
 | `chronik = "…"` | eigener Chronikeintrag |
 | `zufall { 30 = { … } 70 = { … } }` | genau ein Zweig nach Gewicht (Strom `Ereignisse`) |
 | `staat <TAG> { … }`, `alle_staaten { … }` | für diesen Staat bzw. für jeden Staat |
@@ -1259,8 +1261,9 @@ Ereignis ohne Option, eine Option ohne Text oder Gewicht, mehr als eine historis
 Gewichtssumme von 0, `termin` zusammen mit `wartezeit`, `abstand` ohne `wiederholbar` (und umgekehrt),
 eine `folge` auf ein Staatsereignis ohne Staat, `staat` in einer `folge` auf ein Welt-Ereignis und
 Folgeereignisse ohne Frist (`tage = 0`), die einen Kreis bilden. Die Ereignisse stehen im Kern nach
-Kennung geordnet (`World::events`, `EventDef`; Regeln `World::event_rules`). Auslösung und Wahl kommen
-mit Schritt a2.
+Kennung geordnet (`World::events`, `EventDef`; Regeln `World::event_rules`). Fatal ist seit a2 auch
+`nur_folge` mit `termin` oder `wartezeit`. Auslösung, Wahl und Wirkungen: [ereignisse.md](ereignisse.md),
+Abschnitte 3.4–3.7 (`core/src/events.cpp`).
 
 ## 4. Startzustand
 

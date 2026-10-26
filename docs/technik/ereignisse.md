@@ -232,7 +232,15 @@ Wirkungen ändern den Zustand am Tag der Wahl; alle sind deterministisch, Zufall
   `wiederholbar = ja` mit `abstand = n` Tagen (dynamische Ereignisse).
 - **Feste Termine** (`termin = 1848.05.18`) treten an genau diesem Tag ein, wenn die Bedingung gilt
   (z. B. Eröffnung der Paulskirche); sonst verfallen sie.
-- Folgeereignisse (`folge`) treten nach ihrer Frist ein, wenn ihre Bedingung dann gilt.
+- Folgeereignisse (`folge`) treten nach ihrer Frist ein, wenn ihre Bedingung dann gilt, auch wenn das
+  Ereignis schon eingetreten ist; `nur_folge = ja` heißt, dass ein Ereignis nur so eintritt. Eine Folge
+  ohne Frist (`tage = 0`) tritt am selben Tag ein.
+- **Umsetzung (seit a2, `core/src/events.cpp`):** Reihenfolge im Tag nach dem Militär: befristete
+  Wirkungen (Ablauf, am Monatsersten Unruhe und Beziehung), fällige Fristen des Spielers, fällige
+  Folgeereignisse, Auslösung, dann die Folgen ohne Frist aus der Auslösung. Prüfungen des Datums auf
+  oberster Ebene der Bedingung schließen das Fenster für alle Staaten zugleich; Staaten ohne Orte mit
+  Bevölkerung nehmen nicht teil. Die Ziehung je Ereignis und Staat (`1 / wartezeit`) kommt nur, wenn
+  die Bedingung gilt; am Termin und ohne Wartezeit gibt es keine.
 
 ### 3.5 Wahl ohne Spieler
 
@@ -255,7 +263,11 @@ festgelegt“). Welt-Ereignisse (`wer = welt`) ohne Staat wählen ebenso.
   auf die Wahl: Der Kern legt es in die Liste offener Ereignisse; Godot hält die Zeit an und öffnet
   das Fenster (Abschnitt 9).
 - Der Spieler wählt per **Befehl `Ereigniswahl`** (Wert = Ereignis, Ziel = Option). Wirksam ab dem
-  nächsten Tag wie alle Befehle, im Protokoll für die Wiederholung (M6).
+  nächsten Tag wie alle Befehle, im Protokoll für die Wiederholung (M6). Welcher Staat wartet, setzt
+  der **Befehl `Ereignisspieler`** (Staat oder keiner; `World::event_player`, Zustand): Die Oberfläche
+  schickt ihn beim Start einer Partie, die Kommandozeile und die Labore spielen ohne ihn. Eine Option,
+  deren Bedingung nicht gilt, lässt sich nicht wählen; Folgeereignisse des Spielerstaates warten
+  ebenfalls.
 - Ohne Wahl gilt nach `frist` Tagen (Standard 30) die Option mit dem größten Gewicht, damit Läufe
   ohne Oberfläche (Kommandozeile, Labore) weiterlaufen. Godot lässt die Frist nicht verstreichen,
   weil die Zeit steht.
@@ -267,7 +279,12 @@ festgelegt“). Welt-Ereignisse (`wer = welt`) ohne Staat wählen ebenso.
   (`maerzministerium`, `kaiserkrone_abgelehnt`), und tragen Bedingungen späterer Ereignisse.
 - **Befristete Wirkungen** sind Modifikatoren mit Ablaufdatum: Steuerertrag ±x, Moral der Heere ±x,
   Unruhe je Monat ±n, Beziehung zu allen Bundesstaaten ±n. Sie stehen mit Text in der Staatsinfo
-  („Belagerungszustand in Berlin, bis 28. Juli 1849“).
+  („Belagerungszustand in Berlin, bis 28. Juli 1849“). Seit a2 (`befristet { … }`, chronik-skript.md
+  3.34): Der Steuerertrag wirkt im Haushalt auf alle drei Steuerarten, die Moral als Faktor auf die
+  Kampfkraft der Heere des Staates, Unruhe und Beziehung am Monatsersten; die Wirkung endet am Tag
+  `bis` (`World::timed_effects`, Zustand).
+- **Chronik:** Eine gewählte Option schreibt „Staat: Titel – Optionstext“, außer sie hat eine eigene
+  Wirkung `chronik = "…"`.
 
 ### 3.8 Lader und Prüfungen
 
@@ -672,4 +689,5 @@ Weitere Tests:
 | Schritt | Stand |
 |---|---|
 | – | Entscheidungen wie empfohlen freigegeben; Umsetzung beginnt mit a1 |
+| a2 | **erledigt:** tägliche Auslösung mit Wartezeit, Termin und Datumsfenster, Einmaligkeit und Wiederholung mit Abstand, Folgeereignisse (auch ohne Frist am selben Tag, `nur_folge`), Wahl nach Gewicht mit Zuschlägen aus dem Strom `Ereignisse`, offene Ereignisse des Spielers mit Frist, Befehle `Ereigniswahl` und `Ereignisspieler`, alle Wirkungen aus 3.3 außer denen späterer Schritte, befristete Wirkungen (`befristet`, Steuerertrag, Moral, Unruhe, Beziehung); Bedingungen über Gruppen, Lebensstandard, Preise, Krieg, Bund, Zoll, Beziehung, Sitze, Heer und Haushalt. Inhaltsbereich Stand 2. Tests in `test_events.cpp` (Auslösung, Folgen, Wirkungen, Wahl des Spielers, Frist, Spielstand und Wiederholung mit offenem Ereignis, Determinismus mit 1 und 4 Threads); 1648 bitgleich |
 | a1 | **erledigt:** Gesetzesgruppen `common/gesetze.chron` (Presse, Vereine, Grundlasten; Startwerte datiert in `staaten_historie.csv`, Feld `gesetz_<gruppe>`), Wünsche der elf Interessengruppen (`wuensche`), Regeln `common/ereignisse.chron` (`seit = 1848.01.01`, Frist 30), Lader der Ereignisse mit dem Vokabular aus 3.2/3.3 (Schlüssel mit `_`, mehrzeilige Texte, späterer Inhalt nie wahr bzw. entfällt, Kreisprüfung der Folgen ohne Frist); Zustand (Verfassung, Wahlrecht und Gesetze je Staat, Ereignischronik, offene und geplante Ereignisse, Merkmale, Zustimmung, Unruhe), Inhaltsbereich `ereignisse`, Spielstand Format 5; `info` zählt Ereignisse je Art und Jahrzehnt und die Gesetze zum Start. Tests `test_events.cpp`; 1648 bitgleich. Noch ohne Ereignisse im Inhalt (ab b1) |

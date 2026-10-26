@@ -894,8 +894,9 @@ Date date_after(const Date& start, std::int64_t days) {
 /// Anträge, Forderungen und Manöver. Mit Militär (seit M10, Schritt a2) Mobilmachung und Abrüstung und
 /// Märsche der Heere (Nummer nach den Garnisonen, meist mit dem eigenen Staat, Ziel zur Hälfte ein Ort
 /// dieses Staates), seit Schritt a3 auch Kriegserklärungen, seit a4 mit Kriegszielen, dazu
-/// Friedensangebote, Kriegsziele und der Generalstab. Ohne Parlamente, Zollunionen, Bund und Militär
-/// bleibt die Folge der Zufallszahlen wie bisher.
+/// Friedensangebote, Kriegsziele und der Generalstab; mit Ereignissen (seit M11) Ereignisspieler und
+/// Ereigniswahl. Ohne Parlamente, Zollunionen, Bund, Militär und Ereignisse bleibt die Folge der
+/// Zufallszahlen wie bisher.
 std::vector<uhrwerk::LoggedCommand> make_test_commands(const World& w, std::uint64_t seed, std::int64_t count,
                                                        std::int64_t first_day, std::int64_t end_day) {
     std::vector<uhrwerk::LoggedCommand> list;
@@ -910,6 +911,7 @@ std::vector<uhrwerk::LoggedCommand> make_test_commands(const World& w, std::uint
     const bool diplomacy = uhrwerk::diplomacy_active(w);
     const bool diet = diplomacy && !w.diet.id.empty();
     const bool military = uhrwerk::military_active(w);
+    const bool events = w.event_rules.active;
     std::vector<std::vector<Index>> state_locations(w.states.size());
     if (military) {
         for (std::size_t l = 0; l < w.locations.size(); ++l) {
@@ -1006,6 +1008,17 @@ std::vector<uhrwerk::LoggedCommand> make_test_commands(const World& w, std::uint
                         static_cast<Index>(rng.below(static_cast<std::uint32_t>(w.locations.size()) + 2)) - 1;
                 }
             }
+        }
+        // Ereignisse (seit M11, Schritt a2): Spieler der Ereignisse (Staat −1 bis hinter den letzten) und
+        // Ereigniswahl (Ereignis 0 bis hinter das letzte, Option −1 bis 3; meist ungültig).
+        if (events && rng.below(8) == 0) {
+            const bool player = rng.below(4) == 0;
+            c.command.type = player ? uhrwerk::CommandType::EventPlayer : uhrwerk::CommandType::EventChoice;
+            c.command.state = static_cast<Index>(rng.below(states + 2)) - 1;
+            c.command.value =
+                player ? Fixed{}
+                       : Fixed::from_int(rng.below(static_cast<std::uint32_t>(w.events.size()) + 2));
+            c.command.target = player ? uhrwerk::kNone : static_cast<Index>(rng.below(5)) - 1;
         }
         list.push_back(c);
     }
