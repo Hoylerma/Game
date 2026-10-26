@@ -86,7 +86,9 @@ data/
 │   ├── militaer.chron      Militär: Regeln, Heerwesen, Garnisonen (seit M10, optional)
 │   ├── gesetze.chron       Gesetzesgruppen mit Optionen (seit M11, optional)
 │   ├── ereignisse.chron    Regeln der Ereignisse (seit M11, optional)
-│   └── ereignisse/*.chron  Ereignisse, eine Datei je Thema (seit M11, optional)
+│   ├── ereignisse/*.chron  Ereignisse, eine Datei je Thema (seit M11, optional)
+│   ├── journale/*.chron    Journale (seit M11, optional)
+│   └── abstimmungen.chron  Abstimmungen in Parlamenten (seit M11, optional)
 ├── history/                generiert aus tabellen/ (tools/archivar), nicht von Hand bearbeiten
 │   ├── staaten/*.chron     Staaten (Reichsstände) mit datierter Historie
 │   ├── kreise/*.chron      Kreise: Gruppen von 4–12 Orten (seit M3)
@@ -1252,6 +1254,11 @@ den Staat gelten nur in Staatsereignissen oder innerhalb von `staat <TAG> { … 
 | `preis_<gut> >= x` | Preisfaktor im Markt der Hauptstadt |
 | `im_krieg`, `mobil`, `bund`, `spieler` = `ja`/`nein` | Krieg, Mobilmachung, Bund, Spielerstaat |
 | `aufstand = ja`/`nein` | im Staat läuft ein Aufstand (seit a3) |
+| `journal_<id> = <stufe>` (`=`, `!=`) | Stufe oder Ausgang eines Journals (seit a4, Abschnitt 3.35); vor dem Beginn keine |
+| `abstimmung_<id> = angenommen`/`abgelehnt` | Ergebnis der letzten Abstimmung (seit a4); ohne Abstimmung nie wahr |
+| `bevoelkerungsanteil { wenn { … } unter { … } mindestens = x }` | Anteil der Bevölkerung der Staaten aus `unter` (ohne: alle), für die `wenn` gilt (seit a4, 0…1) |
+| `staaten { wenn { … } mindestens = n }` | Zahl der Staaten, für die `wenn` gilt (seit a4) |
+| `bundesversammlung = ruht`/`tagt` | die Bundesversammlung ruht (seit a4) |
 | `krieg_mit = TAG`, `zollunion = <id>`/`keine`, `beziehung_<TAG> >= n` | Krieg, Zollunion, Beziehung |
 | `sitze { parlament = <id> stroemung = <id> mindestens = n }` | Sitze nach der letzten Wahl |
 | `soldaten >= n`, `schatz >= n`, `schulden_quote >= x` | Heer und Haushalt |
@@ -1270,6 +1277,11 @@ den Staat gelten nur in Staatsereignissen oder innerhalb von `staat <TAG> { … 
 | `verwuestung = x`, `verwuestung { ort = <id> wert = x }` (−1…1) | Verwüstung der Hauptstadt bzw. eines Ortes |
 | `mobilmachung = ja` | Mobilmachung |
 | `aufstand = barrikaden`/`agrarunruhen`/`erhebung` | Aufstand beginnen (seit a3; je Staat höchstens einer) |
+| `journal_<id> = <stufe>` | Journal in eine Stufe oder einen Ausgang setzen (seit a4, auch in der Welt) |
+| `abstimmung = <id>` | Abstimmung im Parlament (seit a4, auch in der Welt; Abschnitt 3.35) |
+| `bundesversammlung = ruht`/`tagt` | Ruhen der Bundesversammlung (seit a4, auch in der Welt) |
+| `antrag { art = reform\|praesidium\|intervention\|zolleinigung ziel = TAG\|<zollunion> }` | Antrag des Staates in der Bundesversammlung (seit a4) |
+| `krieg = TAG` | Kriegserklärung ohne Kriegsziel, mit Bündnisfall (seit a4; nur mit Militär) |
 | `intervention = TAG` | Truppen gegen den Aufstand in TAG (seit a3; mit Militär Mobilmachung) |
 | `folge { ereignis = <id> tage = n staat = TAG }` | Folgeereignis nach n Tagen (0), auch für einen anderen Staat |
 | `befristet { tage = n text = "…" steuerertrag = x moral = x unruhe = n beziehung_bund = n }` | Wirkung auf Zeit (seit a2): Steuerertrag und Kampfkraft ±x (−1…1), Unruhe und Beziehung zu allen Bundesstaaten je Monatserstem ±n (−100…100); `tage` (1…36500) und `text` Pflicht, mindestens ein Wert |
@@ -1290,6 +1302,52 @@ Folgeereignisse ohne Frist (`tage = 0`), die einen Kreis bilden. Die Ereignisse 
 Kennung geordnet (`World::events`, `EventDef`; Regeln `World::event_rules`). Fatal ist seit a2 auch
 `nur_folge` mit `termin` oder `wartezeit`. Auslösung, Wahl und Wirkungen: [ereignisse.md](ereignisse.md),
 Abschnitte 3.4–3.7 (`core/src/events.cpp`).
+
+### 3.35 `common/journale/*.chron` und `common/abstimmungen.chron` (seit M11a4)
+
+Journale und Abstimmungen ([ereignisse.md](ereignisse.md), Abschnitt 5); nur in Welten mit Ereignissen,
+beide dürfen fehlen. Kennungen aus a–z, 0–9 und `_`.
+
+```text
+journal revolution {
+    titel  = "Revolution 1848/49"     # Pflicht
+    text   = "…"                      # optional, wie bei Ereignissen
+    beginn = 1848.03.01               # optional: erste Stufe ab diesem Tag (sonst ab dem Start)
+    ende   = 1851.12.31               # optional: dann gilt der Ausgang mit standard = ja (Pflicht)
+    stufe maerz {                     # die erste Stufe beginnt; Stufen und Ausgänge in beliebiger Folge
+        titel = "Märzunruhen"         # Pflicht
+        text  = "…"
+        ziel { text = "Vorparlament" bedingung { welt_merkmal = vorparlament } }       # Anzeige
+        ziel { text = "Märzministerien" zaehle { merkmal = maerzministerium } soll = 20 }
+        weiter { zu = vorparlament  wenn { welt_merkmal = vorparlament } }  # mehrfach; der erste gilt
+        wirkung { … }                 # beim Eintritt, wie bei Ereignissen (Welt)
+    }
+    ausgang gegenrevolution {
+        titel   = "Die Gegenrevolution siegt"   # Pflicht
+        wertung = gescheitert                   # Pflicht: gelungen, teilweise, gescheitert
+        standard = ja                           # höchstens ein Ausgang
+        wirkung { bundesversammlung = tagt }
+    }
+}
+```
+
+```text
+abstimmung erbkaiser {
+    titel     = "Erbliches Kaisertum"         # Pflicht, steht in der Chronik
+    parlament = nationalversammlung           # Pflicht (späteres Parlament: die Abstimmung entfällt)
+    neigung   = { casino = 0.95 landsberg = 0.9 wuerttemberger_hof = 0.5 donnersberg = 0 }  # Pflicht
+    fraktionslos = 0.5                        # optional (0.5): auch für nicht genannte Fraktionen
+    mehrheit  = 0.5                           # optional (0.5): angenommen mit mehr Ja als mehrheit × Stimmen
+    ja   { welt_merke = erbkaiser }           # optional: Wirkungen (Welt)
+    nein { … }
+}
+```
+
+Fatal sind eine Kennung zweimal (Journal, Stufe, Abstimmung), ein Journal ohne Titel, ohne Stufe am
+Anfang oder ohne Ausgang, mehr als ein Ausgang mit `standard`, ein `ende` ohne ihn oder vor `beginn`,
+ein Ziel ohne Text oder ohne genau eine Art (bedingung oder zaehle mit soll), ein Übergang ohne `zu`
+oder zu einer unbekannten Stufe, ein Ausgang ohne Wertung, unbekannte Parlamente und Fraktionen und
+Anteile außerhalb 0…1. Im Kern: `World::journals` (`JournalDef`), `World::votes` (`VoteDef`).
 
 ## 4. Startzustand
 

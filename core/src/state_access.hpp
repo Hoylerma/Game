@@ -422,6 +422,24 @@ template <typename Sim, typename V> void StateAccess::visit(Sim& sim, V& v) {
             v.field("staerke", r.strength);
             v.field("helfer", r.helper);
         });
+        // Seit Schritt a4: Journale, Abstimmungen, Ruhen der Bundesversammlung.
+        list(v, "journale", w.journal_states, Extent::Content, [&](auto& j) {
+            v.field("stufe", j.stage);
+            v.field("seit", j.since);
+        });
+        list(v, "journalweg", w.journal_history, Extent::State, [&](auto& j) {
+            v.field("journal", j.journal);
+            v.field("stufe", j.stage);
+            v.field("datum", j.date);
+        });
+        list(v, "abstimmungen_parlament", w.vote_results, Extent::State, [&](auto& r) {
+            v.field("abstimmung", r.vote);
+            v.field("datum", r.date);
+            v.field("ja", r.yes);
+            v.field("nein", r.no);
+            v.field("angenommen", r.accepted);
+        });
+        v.field("bundesversammlung_ruht", w.diet_suspended);
     }
 
     v.field("zufall.demografie", sim.rng_demography_);

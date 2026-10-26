@@ -516,7 +516,15 @@ std::string events_summary(const World& w) {
     std::string text = plural(w.events.size(), "Ereignis", "Ereignisse") + " (" + std::to_string(kinds[0]) +
                        " historisch, " + std::to_string(kinds[1]) + " dynamisch, " +
                        std::to_string(kinds[2]) + " atmosphärisch), Frist " +
-                       plural(static_cast<std::size_t>(w.event_rules.deadline), "Tag", "Tage");
+                       plural(static_cast<std::size_t>(w.event_rules.deadline), "Tag", "Tage") + ", " +
+                       plural(w.journals.size(), "Journal", "Journale") + ", " +
+                       plural(w.votes.size(), "Abstimmung", "Abstimmungen");
+    for (const uhrwerk::JournalDef& j : w.journals) {
+        const auto outcomes = static_cast<std::size_t>(std::count_if(
+            j.stages.begin(), j.stages.end(), [](const uhrwerk::JournalStage& s) { return s.outcome; }));
+        text += "\n              " + j.title + ": " + plural(j.stages.size() - outcomes, "Stufe", "Stufen") +
+                ", " + plural(outcomes, "Ausgang", "Ausgänge");
+    }
     if (!decades.empty()) {
         std::string line;
         for (const auto& [decade, count] : decades) {
@@ -1198,7 +1206,8 @@ int cmd_pruefen(const Options& o, const fs::path& data_dir) {
     }
     if (w.event_rules.active) {
         std::cout << ", " << plural(w.law_groups.size(), "Gesetzesgruppe", "Gesetzesgruppen") << ", "
-                  << plural(w.events.size(), "Ereignis", "Ereignisse");
+                  << plural(w.events.size(), "Ereignis", "Ereignisse") << ", "
+                  << plural(w.journals.size(), "Journal", "Journale");
     }
     std::cout << ".\n";
     return kExitOk;

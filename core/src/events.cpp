@@ -106,6 +106,40 @@ public:
             return has_flag(w, kNone, c.name);
         case ConditionKind::Never:
             return false;
+        case ConditionKind::Journal: {
+            const Index stage = in_range(w.journal_states, c.a) ? w.journal_states[at(c.a)].stage : kNone;
+            return compare(c.op, stage, c.b);
+        }
+        case ConditionKind::Vote:
+            for (auto it = w.vote_results.rbegin(); it != w.vote_results.rend(); ++it) {
+                if (it->vote == c.a) {
+                    return it->accepted == (c.b == 1);
+                }
+            }
+            return false;
+        case ConditionKind::DietSuspended:
+            return w.diet_suspended != 0;
+        case ConditionKind::PopulationShare:
+        case ConditionKind::CountStates: {
+            Fixed matching;
+            Fixed among;
+            for (std::size_t s = 0; s < w.states.size(); ++s) {
+                const auto other = static_cast<Index>(s);
+                if (!alive(other) || !holds(c.children[1], other)) {
+                    continue;
+                }
+                const Fixed weight =
+                    c.kind == ConditionKind::PopulationShare ? w.state_population(other) : Fixed::one();
+                among += weight;
+                if (holds(c.children[0], other)) {
+                    matching += weight;
+                }
+            }
+            if (c.kind == ConditionKind::CountStates) {
+                return compare(c.op, matching, c.value);
+            }
+            return among > Fixed::zero() && compare(c.op, matching / among, c.value);
+        }
         case ConditionKind::OfState:
             return in_range(w.states, c.a) && alive(c.a) && all_children(c, c.a);
         case ConditionKind::AnyState:
@@ -411,6 +445,20 @@ private:
                 }
             }
             return;
+        case EffectKind::Journal:
+            enter_stage(e.a, e.b);
+            return;
+        case EffectKind::Vote:
+            hold_vote(e.a);
+            return;
+        case EffectKind::Diet:
+            if (w.diet_suspended != static_cast<std::uint8_t>(e.a) && !w.diet.id.empty()) {
+                w.diet_suspended = static_cast<std::uint8_t>(e.a);
+                chronicle(e.a != 0 ? "Die " + w.diet.name + " ruht."
+                                   : "Die " + w.diet.name + " tritt wieder zusammen.",
+                          kNone);
+            }
+            return;
         default:
             break;
         }
@@ -481,11 +529,78 @@ private:
         case EffectKind::Intervention:
             intervene(state, e.a);
             return;
+        case EffectKind::Motion:
+            if (!w.relations.empty()) {
+                file_motion(w, state, static_cast<MotionKind>(e.a), e.b);
+            }
+            return;
+        case EffectKind::War:
+            if (alive(e.a)) {
+                declare_war(w, state, e.a);
+            }
+            return;
         default:
             return;
         }
     }
 
+public:
+    /// Ein Journal tritt in eine Stufe oder einen Ausgang (Abschnitt 5.1): Zustand, Weg, Chronik, Wirkungen.
+    void enter_stage(Index journal, Index stage) {
+        if (!in_range(world_.journals, journal) || !in_range(world_.journal_states, journal)) {
+            return;
+        }
+        const JournalDef& j = world_.journals[at(journal)];
+        if (!in_range(j.stages, stage) || world_.journal_states[at(journal)].stage == stage) {
+            return;
+        }
+        world_.journal_states[at(journal)] = JournalState{stage, world_.date};
+        world_.journal_history.push_back(JournalStep{journal, stage, world_.date});
+        const JournalStage& s = j.stages[at(stage)];
+        chronicle(s.outcome ? j.title + " endet: " + s.title + " (" + s.rating + ")."
+                            : j.title + ": " + s.title + ".",
+                  kNone);
+        event_ = kNone;
+        apply(s.effects, kNone);
+    }
+
+    /// Abstimmung nach Fraktionen (Abschnitt 5.3) mit den Abgeordneten der letzten Wahl des Parlaments;
+    /// ohne Wahl findet sie nicht statt.
+    void hold_vote(Index vote) {
+        const VoteDef& v = world_.votes[at(vote)];
+        const ElectionResult* election = nullptr;
+        for (auto it = world_.elections.rbegin(); it != world_.elections.rend(); ++it) {
+            if (it->parliament == v.parliament) {
+                election = &*it;
+                break;
+            }
+        }
+        if (election == nullptr || election->deputies.empty()) {
+            return;
+        }
+        std::vector<std::int64_t> seats(v.leaning.size() + 1, 0); // letzte: fraktionslos
+        for (const Deputy& d : election->deputies) {
+            seats[in_range(v.leaning, d.faction) ? at(d.faction) : v.leaning.size()] += 1;
+        }
+        std::int64_t yes = 0;
+        std::int64_t total = 0;
+        for (std::size_t f = 0; f < seats.size(); ++f) {
+            const Fixed share = f < v.leaning.size() ? v.leaning[f] : v.unaligned;
+            yes += (Fixed::from_int(seats[f]) * share).round();
+            total += seats[f];
+        }
+        const bool accepted = Fixed::from_int(yes) > v.majority * Fixed::from_int(total);
+        world_.vote_results.push_back(VoteResult{vote, world_.date, static_cast<std::int32_t>(yes),
+                                                 static_cast<std::int32_t>(total - yes), accepted});
+        const std::string& house = world_.parliaments[at(v.parliament)].name;
+        chronicle(house + ": " + v.title + (accepted ? " angenommen (" : " abgelehnt (") +
+                      std::to_string(yes) + " : " + std::to_string(total - yes) + ").",
+                  kNone);
+        event_ = kNone;
+        apply(accepted ? v.yes : v.no, kNone);
+    }
+
+private:
     bool alive(Index state) const { return in_range(cache_.alive, state) && cache_.alive[at(state)] != 0; }
 
     /// Ein Aufstand beginnt (Abschnitt 4.4); je Staat höchstens einer.
@@ -912,6 +1027,9 @@ void ensure_events_state(World& world) {
     if (!events_active(world)) {
         return;
     }
+    if (world.journal_states.size() != world.journals.size()) {
+        world.journal_states.assign(world.journals.size(), JournalState{});
+    }
     const std::size_t groups = world.states.size() * world.interest_groups.size();
     if (world.approval.size() != groups) {
         world.approval.assign(groups, Fixed::zero());
@@ -1053,6 +1171,34 @@ void run_events(World& world, Pcg32& rng, EventCache& cache) {
     }
 
     // Folgeereignisse ohne Frist aus den heutigen Ereignissen.
+    run_scheduled(world, executor, cache);
+
+    // Journale nach den Ereignissen (Abschnitt 5.1): Beginn, am Ende der Ausgang mit standard = ja, sonst
+    // höchstens ein Übergang je Tag; dann die Folgen ohne Frist ihrer Wirkungen.
+    for (std::size_t j = 0; j < world.journals.size() && j < world.journal_states.size(); ++j) {
+        const JournalDef& journal = world.journals[j];
+        const auto index = static_cast<Index>(j);
+        if (world.journal_states[j].stage == kNone) {
+            if (journal.has_begin && world.date < journal.begin) {
+                continue;
+            }
+            executor.enter_stage(index, 0);
+        }
+        const Index stage = world.journal_states[j].stage;
+        if (journal.stages[at(stage)].outcome) {
+            continue;
+        }
+        if (journal.has_end && journal.end <= world.date) {
+            executor.enter_stage(index, journal.fallback);
+            continue;
+        }
+        for (const JournalTransition& t : journal.stages[at(stage)].transitions) {
+            if (condition_holds(world, cache, t.condition, kNone)) {
+                executor.enter_stage(index, t.target);
+                break;
+            }
+        }
+    }
     run_scheduled(world, executor, cache);
 }
 

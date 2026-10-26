@@ -213,10 +213,10 @@ Wirkungen ändern den Zustand am Tag der Wahl; alle sind deterministisch, Zufall
 | `auswanderung = x` | Anteil der unteren Schicht wandert aus (über das Bevölkerungsmodell, M4) |
 | `verwuestung = x`, `verwuestung { ort = <id> wert = x }` | Verwüstung (M1) |
 | `aufstand = <art>` | Aufstand beginnen (4.4, ab Schritt a3) |
-| `mobilmachung = ja`; `krieg { gegen = TAG ziel = … }`, `frieden …` (ab Schritt a2) | Militär (M10), mit Bündnisfall |
-| `antrag <art>`, `bund_ruht`, `bund_tagt` (ab Schritt a4) | Bundesversammlung (M9) und ihr Ruhen 1848–1851 |
-| `journal_<id> = <stufe>` | Journal weiterschalten (Abschnitt 5, ab Schritt a4) |
-| `abstimmung = <id>` (ab Schritt a4) | Abstimmung in einem Parlament auslösen (5.3) |
+| `mobilmachung = ja`; `krieg = TAG` (seit a4, ohne Kriegsziel) | Militär (M10), mit Bündnisfall; den Frieden schließt der Krieg selbst (M10) |
+| `antrag { art = … ziel = … }`, `bundesversammlung = ruht`/`tagt` (seit a4) | Bundesversammlung (M9) und ihr Ruhen 1848–1851 |
+| `journal_<id> = <stufe>` (seit a4) | Journal weiterschalten (Abschnitt 5) |
+| `abstimmung = <id>` (seit a4) | Abstimmung in einem Parlament auslösen (5.3) |
 | `folge { ereignis = <id> tage = n }`, `folge { ereignis = <id> staat = TAG }` | Folgeereignis, auch für einen anderen Staat |
 | `chronik = "…"` | eigener Chronikeintrag (sonst schreibt die gewählte Option ihren Text) |
 
@@ -421,7 +421,7 @@ Endstufe mit Text, Wertung und Folgen. Die Stufe ist Zustand; jeder Wechsel schr
 journal revolution {
     titel = "Revolution 1848/49"
     beginn = 1848.03.01
-    stufe maerz { titel = "Märzunruhen"  weiter { stufe = vorparlament  wenn { welt_merkmal = vorparlament } } }
+    stufe maerz { titel = "Märzunruhen"  weiter { zu = vorparlament  wenn { welt_merkmal = vorparlament } } }
     stufe vorparlament { … }
     …
     ausgang reich_paulskirche { titel = "Reichsverfassung in Kraft"  wertung = gelungen  … }
@@ -476,6 +476,16 @@ Nach Kapitel 18, Abschnitt 7, auf die Daten des Lesezeichens gelegt:
 | **Gegenrevolution** (gescheitert, historisch) | Krone abgelehnt, Aufstände niedergeschlagen, Olmütz | Bundesversammlung tagt wieder (1851), Bundesreaktionsbeschluss: Gesetze zurück (Presse, Vereine), Unruhe sinkt auf Zeit, Auswanderung |
 | **Republik** (selten) | Aufstände siegen in Staaten mit mehr als der Hälfte der Bundesbevölkerung außerhalb Österreichs | Revolutionsregierungen als Merkmal, Krieg der Fürsten (M10) mit offenem Ausgang |
 
+**Umsetzung (seit a4, `core/src/events.cpp`):** Journale stehen in `common/journale/*.chron`
+(chronik-skript.md 3.35). Täglich nach den Ereignissen beginnt ein Journal an seinem `beginn` (ohne:
+sofort) mit seiner ersten Stufe; danach gilt höchstens ein Übergang je Tag (`weiter { zu = … wenn
+{ … } }`, der erste, dessen Bedingung gilt), am `ende` der Ausgang mit `standard = ja`. Jeder Wechsel
+schreibt Zustand (`World::journal_states`), Weg (`journal_history`) und Chronik und wendet die
+Wirkungen der Stufe an (Welt). Ziele (`ziel`) sind Anzeige: erfüllt nach einer Bedingung oder
+Fortschritt als Zahl der Staaten, für die eine Bedingung gilt, von `soll`. Für Bedingungen über viele
+Staaten gibt es seit a4 `bevoelkerungsanteil { wenn { … } unter { … } mindestens = x }` und
+`staaten { wenn { … } mindestens = n }`.
+
 Die Ausgänge setzen Merkmale, Gesetze und Felder; der Besitz der Orte und die Staaten bleiben
 (ein Reich der Paulskirche ist ein Bundesstaat der bestehenden Staaten, Entscheidung 6).
 
@@ -488,6 +498,19 @@ einer **Neigung** je Frage (Daten, z. B. Erbkaiser: Casino und Landsberg ja, Wü
 geteilt, Donnersberg nein; großdeutsch: Katholiken und Demokraten ja). Die Sitze stammen aus der Wahl
 vom 1. Mai (M8); eine andere Wahl ergibt andere Mehrheiten. Im **Parteienmodus** stimmt die eigene
 Strömung, wie der Spieler wählt (Ereignis mit Optionen, Entscheidung 9).
+
+**Umsetzung (seit a4):** Abstimmungen stehen in `common/abstimmungen.chron` (chronik-skript.md 3.35) und
+beginnen mit der Wirkung `abstimmung = <id>`. Gezählt werden die Abgeordneten der letzten Wahl des
+Parlaments je Fraktion: Ja-Stimmen = gerundet Sitze × Neigung der Fraktion (fraktionslose nach
+`fraktionslos`); angenommen ist die Vorlage mit mehr Ja-Stimmen als `mehrheit` × abgegebene. Das
+Ergebnis steht im Zustand (`World::vote_results`), in der Chronik („Nationalversammlung: Erbliches
+Kaisertum angenommen (267 : 263)“) und in der Bedingung `abstimmung_<id> = angenommen`; die Wirkungen
+`ja { … }` bzw. `nein { … }` gelten für die Welt. Ohne Wahl des Parlaments findet keine Abstimmung
+statt. Die Stimme der eigenen Strömung im Parteienmodus kommt mit der Oberfläche (b4).
+
+**Bundesversammlung (seit a4):** `bundesversammlung = ruht` setzt `World::diet_suspended`; solange sie
+ruht, nimmt sie keine Anträge an und stimmt über einen offenen Antrag erst ab, wenn sie wieder tagt
+(`bundesversammlung = tagt`).
 
 ### 5.4 Die deutsche Frage (bis 1871)
 
@@ -720,6 +743,7 @@ Weitere Tests:
 | Schritt | Stand |
 |---|---|
 | – | Entscheidungen wie empfohlen freigegeben; Umsetzung beginnt mit a1 |
+| a4 | **erledigt:** Journale (`common/journale/*.chron`) mit Stufen, Zielen, Übergängen und Ausgängen (Wertung, Ausgang am Ende, Wirkungen), Bedingung und Wirkung `journal_<id>`; Abstimmungen (`common/abstimmungen.chron`) nach Fraktionen mit den Sitzen der letzten Wahl, Bedingung `abstimmung_<id> = angenommen|abgelehnt`, Wirkungen bei Annahme und Ablehnung; Bundesversammlung `ruht`/`tagt` (keine Anträge, keine Abstimmung); Wirkungen `antrag { … }` und `krieg = TAG`; Bedingungen `bevoelkerungsanteil` und `staaten`; `info` zählt Journale und Abstimmungen. Inhaltsstand 4. Tests in `test_events.cpp`; 1648 bitgleich |
 | a3 | **erledigt:** Zustimmung und Unruhe nähern sich am Monatsersten ihren Zielwerten (Wünsche der Gruppen; Not, Teuerung, Verfassung, Zensur über `unruhe` an den Gesetzesoptionen, Ansteckung über Nachbarn und das Welt-Merkmal, Zustimmung nach Einfluss); Steuerverweigerung und Auswanderung bei hoher Unruhe; Aufstände mit wöchentlichem Kräftevergleich (Mobilisierung, Elitenspaltung, Loyalität, Intervention) und drei Ausgängen mit Folgeereignissen; Wirkungen `aufstand` und `intervention`, Bedingung `aufstand = ja`; alle Faktoren als Spielwerte in `ereignisse.chron`. Inhaltsstand 3. Tests in `test_events.cpp`; 1648 bitgleich |
 | a2 | **erledigt:** tägliche Auslösung mit Wartezeit, Termin und Datumsfenster, Einmaligkeit und Wiederholung mit Abstand, Folgeereignisse (auch ohne Frist am selben Tag, `nur_folge`), Wahl nach Gewicht mit Zuschlägen aus dem Strom `Ereignisse`, offene Ereignisse des Spielers mit Frist, Befehle `Ereigniswahl` und `Ereignisspieler`, alle Wirkungen aus 3.3 außer denen späterer Schritte, befristete Wirkungen (`befristet`, Steuerertrag, Moral, Unruhe, Beziehung); Bedingungen über Gruppen, Lebensstandard, Preise, Krieg, Bund, Zoll, Beziehung, Sitze, Heer und Haushalt. Inhaltsbereich Stand 2. Tests in `test_events.cpp` (Auslösung, Folgen, Wirkungen, Wahl des Spielers, Frist, Spielstand und Wiederholung mit offenem Ereignis, Determinismus mit 1 und 4 Threads); 1648 bitgleich |
 | a1 | **erledigt:** Gesetzesgruppen `common/gesetze.chron` (Presse, Vereine, Grundlasten; Startwerte datiert in `staaten_historie.csv`, Feld `gesetz_<gruppe>`), Wünsche der elf Interessengruppen (`wuensche`), Regeln `common/ereignisse.chron` (`seit = 1848.01.01`, Frist 30), Lader der Ereignisse mit dem Vokabular aus 3.2/3.3 (Schlüssel mit `_`, mehrzeilige Texte, späterer Inhalt nie wahr bzw. entfällt, Kreisprüfung der Folgen ohne Frist); Zustand (Verfassung, Wahlrecht und Gesetze je Staat, Ereignischronik, offene und geplante Ereignisse, Merkmale, Zustimmung, Unruhe), Inhaltsbereich `ereignisse`, Spielstand Format 5; `info` zählt Ereignisse je Art und Jahrzehnt und die Gesetze zum Start. Tests `test_events.cpp`; 1648 bitgleich. Noch ohne Ereignisse im Inhalt (ab b1) |

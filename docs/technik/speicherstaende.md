@@ -270,7 +270,8 @@ Parlament, Zollunion, Bund und Militär bleibt die Folge der Zufallszahlen wie v
   ([ereignisse.md](ereignisse.md), Abschnitt 8). Ein Spielstand im Format 4 zeigt seine Metadaten mit 16
   Bereichen an, lädt aber nicht. Der Bereich zählt einen eigenen Stand (`kEventContentVersion`, 1 seit
   Schritt a1, 2 seit a2, 3 seit a3: Regeln der Unruhe und Aufstände, `unruhe` der Gesetzesoptionen; im
-  Zustand die laufenden Aufstände). Seit a2 stehen die befristeten Wirkungen und der Spieler der Ereignisse im
+  Zustand die laufenden Aufstände; 4 seit a4: Journale und Abstimmungen, im Zustand Stufe und Weg der
+  Journale, Ergebnisse der Abstimmungen und das Ruhen der Bundesversammlung). Seit a2 stehen die befristeten Wirkungen und der Spieler der Ereignisse im
   Zustand, die Befehle `Ereigniswahl` (Wert = Ereignis, Ziel = Option) und `Ereignisspieler` im
   Protokoll, und in Welten mit Ereignissen tragen die wartenden Befehle Ziel und Aktion. Ohne
   Ereignisse (1648) zählt nichts davon, der Prüfwert der Formatwache bleibt.

@@ -166,6 +166,17 @@ public:
         for (const std::string& name : list_folder("common/ereignisse")) {
             sources_.push_back(read(name));
         }
+        // Journale und Abstimmungen (seit a4, Abschnitt 5): Kennungen und Stufen vor den Ereignissen, die
+        // auf sie verweisen; ihr Inhalt nach den Ereignissen, auf die er verweist.
+        for (const std::string& name : list_folder("common/journale")) {
+            journal_sources_.push_back(read(name));
+        }
+        if (fs::is_regular_file(data_dir_ / utf8_to_path("common/abstimmungen.chron"), ec)) {
+            journal_sources_.push_back(read("common/abstimmungen.chron"));
+        }
+        for (const Source& source : journal_sources_) {
+            register_journals(source);
+        }
         // Erster Durchgang: Kennungen, Optionen und Geltungsbereich aller Ereignisse; dann nach Kennung
         // geordnet (Reihenfolge der täglichen Prüfung, Abschnitt 3.4).
         for (const Source& source : sources_) {
@@ -183,6 +194,8 @@ public:
             file_ = entries_[i].source->name;
             load_event(entries_[i], world_.events[i]);
         }
+        current_ = kNone;
+        load_journals_and_votes();
         check_follow_cycles();
         // Meldungen nach Datei und Zeile wie im übrigen Lader (gelesen wird nach Kennung).
         std::stable_sort(issues_.begin() + static_cast<std::ptrdiff_t>(first_issue_), issues_.end(),
@@ -1040,6 +1053,9 @@ private:
         if (key == "sitze") {
             return seats(node);
         }
+        if (key == "bevoelkerungsanteil" || key == "staaten") {
+            return state_count(node);
+        }
         if (node.is_block && key != "staat_in") {
             error(node.line, "unbekannte Bedingung " + quote(key) + " (Vokabular: chronik-skript.md 3.34)");
             return std::nullopt;
@@ -1231,6 +1247,27 @@ private:
                 c.value = *value;
                 return c;
             }
+        }
+        if (key == "bundesversammlung") {
+            const auto op = equality(node);
+            if (!op || (node.value != "ruht" && node.value != "tagt")) {
+                if (op) {
+                    error(node.line, "'bundesversammlung' erwartet ruht oder tagt");
+                }
+                return std::nullopt;
+            }
+            c.kind = ConditionKind::DietSuspended;
+            const bool suspended = (node.value == "ruht") == (*op == CompareOp::Eq);
+            if (suspended) {
+                return c;
+            }
+            Condition negation;
+            negation.kind = ConditionKind::Not;
+            negation.children.push_back(std::move(c));
+            return negation;
+        }
+        if (const auto p = split(key, {"journal", "abstimmung"})) {
+            return journal_or_vote_check(node, *p);
         }
         if (const auto p = split(key, {"gesetz", "zustimmung", "anteil", "einfluss", "preis", "beziehung"})) {
             return prefixed_check(node, *p, has_state);
@@ -1507,6 +1544,9 @@ private:
         if (key == "verwuestung") {
             return devastation(node, has_state, skip);
         }
+        if (key == "antrag") {
+            return motion(node, has_state, skip);
+        }
         if (node.is_block) {
             error(node.line, "unbekannte Wirkung " + quote(key) + " (Vokabular: chronik-skript.md 3.34)");
             return std::nullopt;
@@ -1531,9 +1571,42 @@ private:
             e.name = *flag;
             return e;
         }
+        if (const auto p = split(key, {"journal"})) {
+            const Index journal = world_.find_journal(p->id);
+            if (journal == kNone) {
+                error(node.line, "unbekanntes Journal " + quote(p->id) + " in " + quote(key));
+                return std::nullopt;
+            }
+            const Index stage = stage_of(node, journal, node.value);
+            if (stage == kNone) {
+                return std::nullopt;
+            }
+            e.kind = EffectKind::Journal;
+            e.a = journal;
+            e.b = stage;
+            return e;
+        }
+        if (key == "abstimmung") {
+            e.kind = EffectKind::Vote;
+            e.a = world_.find_vote(node.value);
+            if (e.a == kNone) {
+                error(node.line, "unbekannte Abstimmung " + quote(node.value));
+                return std::nullopt;
+            }
+            return e;
+        }
+        if (key == "bundesversammlung") {
+            if (node.value != "ruht" && node.value != "tagt") {
+                error(node.line, "'bundesversammlung' erwartet ruht oder tagt");
+                return std::nullopt;
+            }
+            e.kind = EffectKind::Diet;
+            e.a = node.value == "ruht" ? 1 : 0;
+            return e;
+        }
         // Ab hier wirkt alles auf einen Staat.
         const bool known = key == "merke" || key == "vergiss" || key == "verfassung" || key == "wahlrecht" ||
-                           key == "unruhe" || key == "schatz" || key == "monatseinnahmen" ||
+                           key == "krieg" || key == "unruhe" || key == "schatz" || key == "monatseinnahmen" ||
                            key == "auswanderung" || key == "mobilmachung" || key == "aufstand" ||
                            key == "intervention" ||
                            split(key, {"gesetz", "zustimmung", "beziehung"}).has_value();
@@ -1577,6 +1650,17 @@ private:
             }
             e.kind = EffectKind::Franchise;
             e.a = static_cast<Index>(*value);
+            return e;
+        }
+        if (key == "krieg") {
+            bool is_absent = false;
+            const auto target = state_ref(node, node.value, is_absent);
+            if (!target) {
+                return std::nullopt;
+            }
+            skip = is_absent;
+            e.kind = EffectKind::War;
+            e.a = *target;
             return e;
         }
         if (key == "aufstand") {
@@ -1907,6 +1991,473 @@ private:
         return e;
     }
 
+    // ── Journale und Abstimmungen (Abschnitt 5, seit a4) ──
+
+    /// Stufe oder Ausgang eines Journals nach Kennung; Fehler, wenn es sie nicht gibt.
+    Index stage_of(const ScriptNode& node, Index journal, const std::string& id) {
+        const JournalDef& j = world_.journals[static_cast<std::size_t>(journal)];
+        for (std::size_t i = 0; i < j.stages.size(); ++i) {
+            if (j.stages[i].id == id) {
+                return static_cast<Index>(i);
+            }
+        }
+        error(node.line, "unbekannte Stufe " + quote(id) + " des Journals " + j.id);
+        return kNone;
+    }
+
+    std::optional<Condition> journal_or_vote_check(const ScriptNode& node, const Prefixed& p) {
+        Condition c;
+        const auto op = equality(node);
+        if (!op) {
+            return std::nullopt;
+        }
+        c.op = *op;
+        if (p.base == "journal") {
+            c.kind = ConditionKind::Journal;
+            c.a = world_.find_journal(p.id);
+            if (c.a == kNone) {
+                error(node.line, "unbekanntes Journal " + quote(p.id) + " in " + quote(node.key));
+                return std::nullopt;
+            }
+            c.b = stage_of(node, c.a, node.value);
+            return c.b == kNone ? std::nullopt : std::optional<Condition>(c);
+        }
+        c.kind = ConditionKind::Vote;
+        c.a = world_.find_vote(p.id);
+        if (c.a == kNone) {
+            error(node.line, "unbekannte Abstimmung " + quote(p.id) + " in " + quote(node.key));
+            return std::nullopt;
+        }
+        if (node.value != "angenommen" && node.value != "abgelehnt") {
+            error(node.line, quote(node.key) + " erwartet angenommen oder abgelehnt");
+            return std::nullopt;
+        }
+        c.b = node.value == "angenommen" ? 1 : 0;
+        return c;
+    }
+
+    /// bevoelkerungsanteil { wenn { … } unter { … } mindestens = x } und staaten { wenn { … } mindestens = n
+    /// }: Bedingungen je Staat über alle bestehenden Staaten, in jedem Zusammenhang gültig.
+    std::optional<Condition> state_count(const ScriptNode& node) {
+        const bool share = node.key == "bevoelkerungsanteil";
+        if (!node.is_block || !node.value.empty()) {
+            error(node.line,
+                  quote(node.key) + " erwartet einen Block: " + node.key + " { wenn { … } mindestens = … }");
+            return std::nullopt;
+        }
+        Condition c;
+        c.kind = share ? ConditionKind::PopulationShare : ConditionKind::CountStates;
+        c.op = CompareOp::Ge;
+        Condition when;
+        Condition among; // leer: alle bestehenden Staaten
+        bool has_when = false;
+        bool has_minimum = false;
+        for (const ScriptNode& child : node.children) {
+            if (child.key == "wenn") {
+                when = condition_block(child, true);
+                has_when = true;
+            } else if (child.key == "unter" && share) {
+                among = condition_block(child, true);
+            } else if (child.key == "mindestens") {
+                has_minimum = true;
+                const auto value =
+                    assign(child) ? (share ? number(child, fx(0), fx(1)) : number(child, fx(0), fx(1000)))
+                                  : std::nullopt;
+                if (!value) {
+                    return std::nullopt;
+                }
+                c.value = *value;
+            } else {
+                error(child.line, std::string("in ") + quote(node.key) + " sind nur " +
+                                      (share ? "wenn, unter und mindestens" : "wenn und mindestens") +
+                                      " erlaubt");
+            }
+        }
+        if (!has_when || !has_minimum) {
+            error(node.line, quote(node.key) + " braucht wenn und mindestens");
+            return std::nullopt;
+        }
+        c.children.push_back(std::move(when));
+        c.children.push_back(std::move(among));
+        return c;
+    }
+
+    /// antrag { art = reform|zolleinigung|intervention|praesidium ziel = <TAG|zollunion> }
+    /// (Bundesversammlung).
+    std::optional<Effect> motion(const ScriptNode& node, bool has_state, bool& skip) {
+        if (!node.is_block || !node.value.empty() || !need_state(node, has_state)) {
+            if (node.is_block && node.value.empty()) {
+                return std::nullopt;
+            }
+            error(node.line, "'antrag' erwartet einen Block: antrag { art = … ziel = … }");
+            return std::nullopt;
+        }
+        const ScriptNode* kind = node.find("art");
+        const ScriptNode* target = node.find("ziel");
+        for (const ScriptNode& child : node.children) {
+            if (child.key != "art" && child.key != "ziel") {
+                error(child.line, "in 'antrag' sind nur art und ziel erlaubt");
+            }
+        }
+        if (kind == nullptr || !scalar(*kind)) {
+            error(node.line, "Pflichtfeld 'art' fehlt in antrag");
+            return std::nullopt;
+        }
+        Effect e;
+        e.kind = EffectKind::Motion;
+        e.b = kNone;
+        const std::string& k = kind->value;
+        if (k == "reform" || k == "praesidium") {
+            e.a = static_cast<Index>(k == "reform" ? MotionKind::Reform : MotionKind::Presidency);
+            if (target != nullptr) {
+                error(target->line, "Antrag " + k + " hat kein Ziel");
+                return std::nullopt;
+            }
+            return e;
+        }
+        if (k != "intervention" && k != "zolleinigung") {
+            error(kind->line, "ungültige Art " + quote(k) +
+                                  " für 'antrag' (erlaubt: reform, zolleinigung, intervention, praesidium)");
+            return std::nullopt;
+        }
+        if (target == nullptr || !scalar(*target)) {
+            error(node.line, "Antrag " + k + " braucht ein Ziel (ziel = …)");
+            return std::nullopt;
+        }
+        if (k == "intervention") {
+            e.a = static_cast<Index>(MotionKind::Intervention);
+            bool is_absent = false;
+            const auto state = state_ref(*target, target->value, is_absent);
+            if (!state) {
+                return std::nullopt;
+            }
+            skip = is_absent;
+            e.b = *state;
+            return e;
+        }
+        e.a = static_cast<Index>(MotionKind::CustomsUnification);
+        e.b = world_.find_customs_union(target->value);
+        if (e.b == kNone) {
+            if (absent("zollunion", target->value)) {
+                skip = true;
+                return e;
+            }
+            error(target->line, "unbekannte Zollunion " + quote(target->value) + " in 'antrag'");
+            return std::nullopt;
+        }
+        return e;
+    }
+
+    /// Erster Durchgang: Journale mit Kennung und Stufen, Abstimmungen mit Kennung.
+    void register_journals(const Source& source) {
+        file_ = source.name;
+        for (const ScriptNode& node : source.root.children) {
+            const bool journal = node.key == "journal";
+            if (!journal && node.key != "abstimmung") {
+                warning(node.line, "unbekannter Eintrag " + quote(node.key.empty() ? node.value : node.key) +
+                                       " wird ignoriert (erwartet: journal <kennung> { … } oder abstimmung "
+                                       "<kennung> { … })");
+                continue;
+            }
+            if (!node.is_block || !is_lower_id(node.value, false)) {
+                error(node.line, "ungültige Definition, erwartet: " + node.key +
+                                     " <kennung> { … } (Kennung aus a-z, 0-9 und _)");
+                continue;
+            }
+            if (journal) {
+                if (world_.find_journal(node.value) != kNone) {
+                    error(node.line, "doppelte Kennung " + quote(node.value) + " für Journal");
+                    continue;
+                }
+                JournalDef j;
+                j.id = node.value;
+                j.file = source.name;
+                j.line = node.line;
+                for (const ScriptNode& child : node.children) {
+                    if ((child.key == "stufe" || child.key == "ausgang") && child.is_block &&
+                        is_lower_id(child.value, false)) {
+                        JournalStage stage;
+                        stage.id = child.value;
+                        stage.outcome = child.key == "ausgang";
+                        j.stages.push_back(std::move(stage));
+                    }
+                }
+                world_.journals.push_back(std::move(j));
+                journal_nodes_.emplace_back(&source, &node);
+            } else {
+                if (world_.find_vote(node.value) != kNone) {
+                    error(node.line, "doppelte Kennung " + quote(node.value) + " für Abstimmung");
+                    continue;
+                }
+                VoteDef v;
+                v.id = node.value;
+                world_.votes.push_back(std::move(v));
+                vote_nodes_.emplace_back(&source, &node);
+            }
+        }
+    }
+
+    void load_journals_and_votes() {
+        for (std::size_t i = 0; i < journal_nodes_.size(); ++i) {
+            file_ = journal_nodes_[i].first->name;
+            load_journal(*journal_nodes_[i].second, world_.journals[i]);
+        }
+        for (std::size_t i = 0; i < vote_nodes_.size(); ++i) {
+            file_ = vote_nodes_[i].first->name;
+            load_vote(*vote_nodes_[i].second, world_.votes[i]);
+        }
+    }
+
+    void load_journal(const ScriptNode& node, JournalDef& j) {
+        const std::string what = "Journal " + j.id;
+        std::map<std::string, int, std::less<>> seen;
+        std::map<std::string, int, std::less<>> stage_lines;
+        std::size_t stage = 0;
+        for (const ScriptNode& child : node.children) {
+            if (child.key == "stufe" || child.key == "ausgang") {
+                if (!child.is_block || !is_lower_id(child.value, false)) {
+                    error(child.line, "ungültige " + std::string(child.key == "stufe" ? "Stufe" : "Ausgang") +
+                                          ", erwartet: " + child.key + " <kennung> { … }");
+                    continue;
+                }
+                const auto [it, inserted] = stage_lines.emplace(child.value, child.line);
+                if (!inserted) {
+                    error(child.line, "doppelte Stufe " + quote(child.value) + " in " + what +
+                                          " (zuerst in Zeile " + std::to_string(it->second) + ")");
+                    ++stage;
+                    continue;
+                }
+                load_stage(child, j, j.stages[stage]);
+                ++stage;
+                continue;
+            }
+            if (child.key.empty() || !first_time(seen, child, what)) {
+                continue;
+            }
+            if (child.key == "titel") {
+                if (scalar(child)) {
+                    j.title = text(child).value_or("");
+                }
+            } else if (child.key == "text") {
+                j.text = text(child).value_or("");
+            } else if (child.key == "beginn" || child.key == "ende") {
+                if (assign(child)) {
+                    if (const auto d = date(child)) {
+                        (child.key == "beginn" ? j.has_begin : j.has_end) = true;
+                        (child.key == "beginn" ? j.begin : j.end) = *d;
+                    }
+                }
+            } else {
+                warning(child.line,
+                        "unbekanntes Feld " + quote(child.key) + " in " + what + " wird ignoriert");
+            }
+        }
+        if (seen.count("titel") == 0) {
+            error(node.line, "Pflichtfeld 'titel' fehlt in " + what);
+        }
+        if (j.stages.empty() || j.stages[0].outcome) {
+            error(node.line, what + " braucht als Erstes eine Stufe (stufe <kennung> { … })");
+        }
+        if (std::none_of(j.stages.begin(), j.stages.end(), [](const JournalStage& s) { return s.outcome; })) {
+            error(node.line, what + " braucht mindestens einen Ausgang (ausgang <kennung> { … })");
+        }
+        for (std::size_t i = 0; i < j.stages.size(); ++i) {
+            if (j.stages[i].fallback) {
+                if (j.fallback != kNone) {
+                    error(node.line, what + " hat mehr als einen Ausgang mit standard = ja");
+                }
+                j.fallback = static_cast<Index>(i);
+            }
+        }
+        if (j.has_end && j.fallback == kNone) {
+            error(node.line, what + " hat ein Ende, aber keinen Ausgang mit standard = ja");
+        }
+        if (j.has_begin && j.has_end && j.end <= j.begin) {
+            error(node.line, "'ende' muss nach 'beginn' liegen in " + what);
+        }
+    }
+
+    void load_stage(const ScriptNode& node, JournalDef& j, JournalStage& stage) {
+        const std::string what = (stage.outcome ? "Ausgang " : "Stufe ") + stage.id + " von " + j.id;
+        const auto journal = static_cast<Index>(world_.find_journal(j.id));
+        std::map<std::string, int, std::less<>> seen;
+        for (const ScriptNode& child : node.children) {
+            if (child.key == "ziel" && !stage.outcome) {
+                read_goal(child, stage);
+                continue;
+            }
+            if (child.key == "weiter" && !stage.outcome) {
+                read_transition(child, journal, stage);
+                continue;
+            }
+            if (child.key.empty() || !first_time(seen, child, what)) {
+                continue;
+            }
+            if (child.key == "titel") {
+                if (scalar(child)) {
+                    stage.title = text(child).value_or("");
+                }
+            } else if (child.key == "text") {
+                stage.text = text(child).value_or("");
+            } else if (child.key == "wirkung") {
+                if (!child.is_block) {
+                    error(child.line, "'wirkung' erwartet einen Block in geschweiften Klammern");
+                    continue;
+                }
+                stage.effects = effects(child, false);
+            } else if (child.key == "wertung" && stage.outcome) {
+                if (scalar(child) && assign(child)) {
+                    if (child.value != "gelungen" && child.value != "teilweise" &&
+                        child.value != "gescheitert") {
+                        error(child.line, "ungültige Wertung " + quote(child.value) +
+                                              " (erlaubt: gelungen, teilweise, gescheitert)");
+                    } else {
+                        stage.rating = child.value;
+                    }
+                }
+            } else if (child.key == "standard" && stage.outcome) {
+                stage.fallback = boolean(child).value_or(false);
+            } else {
+                warning(child.line,
+                        "unbekanntes Feld " + quote(child.key) + " in " + what + " wird ignoriert");
+            }
+        }
+        if (seen.count("titel") == 0) {
+            error(node.line, "Pflichtfeld 'titel' fehlt in " + what);
+        }
+        if (stage.outcome && seen.count("wertung") == 0) {
+            error(node.line, "Pflichtfeld 'wertung' fehlt in " + what);
+        }
+    }
+
+    /// ziel { text = "…" bedingung { … } } oder ziel { text = "…" zaehle { … } soll = n }.
+    void read_goal(const ScriptNode& node, JournalStage& stage) {
+        if (!node.is_block || !node.value.empty()) {
+            error(node.line, "'ziel' erwartet einen Block: ziel { text = \"…\" bedingung { … } }");
+            return;
+        }
+        JournalGoal goal;
+        bool has_text = false;
+        bool has_target = false;
+        bool has_condition = false;
+        for (const ScriptNode& child : node.children) {
+            if (child.key == "text") {
+                has_text = true;
+                goal.text = text(child).value_or("");
+            } else if (child.key == "bedingung") {
+                has_condition = true;
+                goal.condition = condition_block(child, false);
+            } else if (child.key == "zaehle") {
+                goal.counting = true;
+                goal.count = condition_block(child, true);
+            } else if (child.key == "soll") {
+                has_target = true;
+                goal.target = static_cast<std::int32_t>(integer(child, 1, 1000).value_or(1));
+            } else {
+                error(child.line, "in 'ziel' sind nur text, bedingung, zaehle und soll erlaubt");
+            }
+        }
+        if (!has_text) {
+            error(node.line, "Pflichtfeld 'text' fehlt in ziel");
+        }
+        if (goal.counting != has_target || goal.counting == has_condition) {
+            error(node.line, "'ziel' braucht entweder bedingung oder zaehle mit soll");
+        }
+        stage.goals.push_back(std::move(goal));
+    }
+
+    /// weiter { zu = <stufe|ausgang> wenn { … } }: ohne wenn sofort.
+    void read_transition(const ScriptNode& node, Index journal, JournalStage& stage) {
+        if (!node.is_block || !node.value.empty()) {
+            error(node.line, "'weiter' erwartet einen Block: weiter { zu = … wenn { … } }");
+            return;
+        }
+        JournalTransition t;
+        for (const ScriptNode& child : node.children) {
+            if (child.key == "zu") {
+                if (scalar(child) && assign(child)) {
+                    t.target = stage_of(child, journal, child.value);
+                }
+            } else if (child.key == "wenn") {
+                t.condition = condition_block(child, false);
+            } else {
+                error(child.line, "in 'weiter' sind nur zu und wenn erlaubt");
+            }
+        }
+        if (node.find("zu") == nullptr) {
+            error(node.line, "Pflichtfeld 'zu' fehlt in weiter");
+        }
+        if (t.target != kNone) {
+            stage.transitions.push_back(std::move(t));
+        }
+    }
+
+    void load_vote(const ScriptNode& node, VoteDef& v) {
+        const std::string what = "Abstimmung " + v.id;
+        std::map<std::string, int, std::less<>> seen;
+        const ScriptNode* leaning = nullptr;
+        for (const ScriptNode& child : node.children) {
+            if (child.key.empty() || !first_time(seen, child, what)) {
+                continue;
+            }
+            if (child.key == "titel") {
+                if (scalar(child)) {
+                    v.title = text(child).value_or("");
+                }
+            } else if (child.key == "parlament") {
+                if (scalar(child) && assign(child)) {
+                    v.parliament = world_.find_parliament(child.value);
+                    if (v.parliament == kNone && !absent("parlament", child.value)) {
+                        error(child.line, "unbekanntes Parlament " + quote(child.value) + " in " + what);
+                    }
+                }
+            } else if (child.key == "neigung") {
+                leaning = &child;
+            } else if (child.key == "fraktionslos" || child.key == "mehrheit") {
+                if (assign(child)) {
+                    if (const auto value = number(child, fx(0), fx(1))) {
+                        (child.key == "fraktionslos" ? v.unaligned : v.majority) = *value;
+                    }
+                }
+            } else if (child.key == "ja" || child.key == "nein") {
+                if (!child.is_block) {
+                    error(child.line, quote(child.key) + " erwartet einen Block mit Wirkungen");
+                    continue;
+                }
+                (child.key == "ja" ? v.yes : v.no) = effects(child, false);
+            } else {
+                warning(child.line,
+                        "unbekanntes Feld " + quote(child.key) + " in " + what + " wird ignoriert");
+            }
+        }
+        for (const char* required : {"titel", "parlament", "neigung"}) {
+            if (seen.count(required) == 0) {
+                error(node.line, "Pflichtfeld '" + std::string(required) + "' fehlt in " + what);
+            }
+        }
+        if (leaning == nullptr || v.parliament == kNone) {
+            return;
+        }
+        // neigung = { <fraktion> = Anteil der Ja-Stimmen … }; nicht genannte Fraktionen wie fraktionslos
+        const Parliament& p = world_.parliaments[static_cast<std::size_t>(v.parliament)];
+        v.leaning.assign(p.factions.size(), v.unaligned);
+        if (!leaning->is_block) {
+            error(leaning->line, "'neigung' erwartet einen Block { <fraktion> = Anteil … }");
+            return;
+        }
+        for (const ScriptNode& entry : leaning->children) {
+            const auto it = std::find_if(p.factions.begin(), p.factions.end(),
+                                         [&](const Faction& f) { return f.id == entry.key; });
+            if (it == p.factions.end()) {
+                error(entry.line, "unbekannte Fraktion " + quote(entry.key) + " des Parlaments " + p.id);
+                continue;
+            }
+            if (const auto value = number(entry, fx(0), fx(1))) {
+                v.leaning[static_cast<std::size_t>(it - p.factions.begin())] = *value;
+            }
+        }
+    }
+
     // ── Kreise aus Folgeereignissen ohne Frist (Abschnitt 3.8) ──
 
     void check_follow_cycles() {
@@ -1960,6 +2511,9 @@ private:
     std::map<std::string, Index, std::less<>> index_;
     std::vector<FollowEdge> follows_;
     std::string rules_file_;
+    std::vector<Source> journal_sources_;
+    std::vector<std::pair<const Source*, const ScriptNode*>> journal_nodes_; // je Journal
+    std::vector<std::pair<const Source*, const ScriptNode*>> vote_nodes_;    // je Abstimmung
     std::array<std::pair<std::string, int>, 3> outcome_names_{}; // folge_nachgeben … (Kennung, Zeile)
 };
 

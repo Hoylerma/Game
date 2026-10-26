@@ -38,7 +38,8 @@ constexpr std::uint64_t kMaxPayload = std::uint64_t{1} << 31;
 constexpr std::uint64_t kMilitaryContentVersion = 8;
 
 /// Stand der Ereignisse im Zustand (seit M11, Inhaltsbereich ereignisse): 1 = Schritt a1.
-constexpr std::uint64_t kEventContentVersion = 3; // 2 seit a2 (Auslösung, Befristung, Spieler), 3 seit a3
+constexpr std::uint64_t kEventContentVersion =
+    4; // 2 seit a2 (Auslösung, Befristung, Spieler), 3 seit a3, 4 seit a4
 
 bool fail(std::string* error, std::string message) {
     if (error != nullptr) {
@@ -1075,7 +1076,7 @@ std::string validate_state(const Simulation& sim) {
             }
         }
         for (const TimedEffect& t : w.timed_effects) {
-            if (!in(t.state, S) || !in(t.event, w.events.size()) || !is_valid(t.until)) {
+            if (!in(t.state, S) || !none_or_in(t.event, w.events.size()) || !is_valid(t.until)) {
                 return "befristete Wirkung mit ungültigem Verweis";
             }
         }
@@ -1090,6 +1091,28 @@ std::string validate_state(const Simulation& sim) {
                             [&](const Revolt& other) { return other.state == r.state; })) {
                 return "Aufstand ungültig";
             }
+        }
+        for (std::size_t j = 0; j < w.journal_states.size(); ++j) {
+            const JournalState& js = w.journal_states[j];
+            if (!none_or_in(js.stage, w.journals[j].stages.size()) ||
+                (js.stage != kNone && !is_valid(js.since))) {
+                return "Journal " + w.journals[j].id + " ungültig";
+            }
+        }
+        for (const JournalStep& step : w.journal_history) {
+            if (!in(step.journal, w.journals.size()) ||
+                !in(step.stage, w.journals[static_cast<std::size_t>(step.journal)].stages.size()) ||
+                !is_valid(step.date)) {
+                return "Weg eines Journals ungültig";
+            }
+        }
+        for (const VoteResult& r : w.vote_results) {
+            if (!in(r.vote, w.votes.size()) || !is_valid(r.date) || r.yes < 0 || r.no < 0) {
+                return "Abstimmung ungültig";
+            }
+        }
+        if (w.diet_suspended > 1) {
+            return "Bundesversammlung ungültig";
         }
     }
     return {};
@@ -1661,6 +1684,44 @@ ContentFingerprint content_fingerprint(const World& w) {
             h.u64(w.events.size());
             for (const EventDef& e : w.events) {
                 event_hash(h, e);
+            }
+            // Journale und Abstimmungen (seit a4); Titel stehen in der Chronik, Texte nicht.
+            h.u64(w.journals.size());
+            for (const JournalDef& j : w.journals) {
+                h.text(j.id);
+                h.text(j.title);
+                h.flag(j.has_begin);
+                h.i64(j.has_begin ? to_day_number(j.begin) : 0);
+                h.flag(j.has_end);
+                h.i64(j.has_end ? to_day_number(j.end) : 0);
+                h.i64(j.fallback);
+                h.u64(j.stages.size());
+                for (const JournalStage& st : j.stages) {
+                    h.text(st.id);
+                    h.text(st.title);
+                    h.flag(st.outcome);
+                    h.text(st.rating);
+                    h.u64(st.transitions.size());
+                    for (const JournalTransition& t : st.transitions) {
+                        h.i64(t.target);
+                        condition_hash(h, t.condition);
+                    }
+                    effects_hash(h, st.effects);
+                }
+            }
+            h.u64(w.votes.size());
+            for (const VoteDef& v : w.votes) {
+                h.text(v.id);
+                h.text(v.title);
+                h.i64(v.parliament);
+                h.u64(v.leaning.size());
+                for (const Fixed f : v.leaning) {
+                    h.fixed(f);
+                }
+                h.fixed(v.unaligned);
+                h.fixed(v.majority);
+                effects_hash(h, v.yes);
+                effects_hash(h, v.no);
             }
         }
         p[16] = h.value();

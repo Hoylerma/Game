@@ -1089,6 +1089,8 @@ struct World {
     std::vector<LawGroup> law_groups;             // seit M11 (a1): Gesetzesgruppen zum Startdatum
     EventRules event_rules;                       // seit M11 (a1)
     std::vector<EventDef> events;                 // seit M11 (a1): nur mit event_rules.active
+    std::vector<JournalDef> journals; // seit M11 (a4): common/journale/*.chron, nur mit Ereignissen
+    std::vector<VoteDef> votes;       // seit M11 (a4): common/abstimmungen.chron, nur mit Ereignissen
     std::vector<Location> locations;
     std::vector<PopBlock> pops;
     std::vector<ChronicleEntry> chronicle;
@@ -1153,6 +1155,10 @@ struct World {
     std::vector<TimedEffect> timed_effects; // seit a2: befristete Wirkungen in der Reihenfolge ihres Beginns
     Index event_player = -1;                // seit a2: Staat, dessen Ereignisse auf die Wahl warten (Befehl)
     std::vector<Revolt> revolts;            // seit a3: laufende Aufstände in der Reihenfolge ihres Beginns
+    std::vector<JournalState> journal_states; // seit a4: je Journal
+    std::vector<JournalStep> journal_history; // seit a4: erreichte Stufen in zeitlicher Folge
+    std::vector<VoteResult> vote_results;     // seit a4: Abstimmungen in zeitlicher Folge
+    std::uint8_t diet_suspended = 0;          // seit a4: 1, solange die Bundesversammlung ruht
 
     Index find_state(std::string_view tag) const;
     Index find_location(std::string_view id) const;
@@ -1172,6 +1178,8 @@ struct World {
     Index find_customs_union(std::string_view id) const;  // seit M9
     Index find_law_group(std::string_view id) const;      // seit M11
     Index find_event(std::string_view id) const;          // seit M11
+    Index find_journal(std::string_view id) const;        // seit M11 (a4)
+    Index find_vote(std::string_view id) const;           // seit M11 (a4)
 
     /// Personen in den Blöcken des Ortes und in seinen Zugängen (arrivals).
     Fixed location_population(Index location) const;

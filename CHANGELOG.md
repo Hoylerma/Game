@@ -44,6 +44,13 @@ freigegeben; Stand je Schritt in Abschnitt 13 dort.
   Loyalität der Truppen und einer Intervention (`intervention = TAG`) und enden mit Nachgeben,
   Niederschlagung oder Sieg der Aufständischen, je mit Chronik und optionalem Folgeereignis. Alle
   Faktoren sind Spielwerte in `common/ereignisse.chron`; 1648 bitgleich.
+- **Journale und Abstimmungen (Schritt a4):** Journale (`common/journale/*.chron`) als Zustandsautomaten
+  mit Stufen, Zielen, Übergängen und Ausgängen mit Wertung; Abstimmungen
+  (`common/abstimmungen.chron`) nach Fraktionen mit den Sitzen der letzten Wahl und Wirkungen bei
+  Annahme oder Ablehnung; die Bundesversammlung kann ruhen; Ereignisse stellen Anträge in der
+  Bundesversammlung und erklären Kriege (`krieg = TAG`). Neue Bedingungen `journal_<id>`,
+  `abstimmung_<id>`, `bevoelkerungsanteil`, `staaten`, `bundesversammlung`; `info` zählt Journale.
+  1648 bitgleich.
 
 ### Meilenstein M10 – Militär und Einigungskriege
 
