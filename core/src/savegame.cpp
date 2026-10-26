@@ -38,7 +38,7 @@ constexpr std::uint64_t kMaxPayload = std::uint64_t{1} << 31;
 constexpr std::uint64_t kMilitaryContentVersion = 8;
 
 /// Stand der Ereignisse im Zustand (seit M11, Inhaltsbereich ereignisse): 1 = Schritt a1.
-constexpr std::uint64_t kEventContentVersion = 2; // 2 seit a2 (Auslösung, Befristung, Spieler)
+constexpr std::uint64_t kEventContentVersion = 3; // 2 seit a2 (Auslösung, Befristung, Spieler), 3 seit a3
 
 bool fail(std::string* error, std::string message) {
     if (error != nullptr) {
@@ -1082,6 +1082,15 @@ std::string validate_state(const Simulation& sim) {
         if (!none_or_in(w.event_player, S)) {
             return "Spieler der Ereignisse ungültig";
         }
+        for (std::size_t i = 0; i < w.revolts.size(); ++i) {
+            const Revolt& r = w.revolts[i];
+            if (!in(r.state, S) || !none_or_in(r.helper, S) ||
+                static_cast<std::size_t>(r.kind) >= kRevoltKinds || !is_valid(r.start) || w.date < r.start ||
+                std::any_of(w.revolts.begin(), w.revolts.begin() + static_cast<std::ptrdiff_t>(i),
+                            [&](const Revolt& other) { return other.state == r.state; })) {
+                return "Aufstand ungültig";
+            }
+        }
     }
     return {};
 }
@@ -1586,13 +1595,58 @@ ContentFingerprint content_fingerprint(const World& w) {
         Fnv h;
         if (w.event_rules.active) {
             h.u64(kEventContentVersion);
-            h.i64(w.event_rules.deadline);
+            const EventRules& r = w.event_rules;
+            h.i64(r.deadline);
+            // Zustimmung, Unruhe und Aufstände (seit a3).
+            for (const Fixed f : {r.approval_rate,
+                                  r.unrest_rate,
+                                  r.misery,
+                                  r.misery_from,
+                                  r.misery_span,
+                                  r.dearth,
+                                  r.dearth_from,
+                                  r.dearth_span,
+                                  r.constitution[0],
+                                  r.constitution[1],
+                                  r.constitution[2],
+                                  r.contagion,
+                                  r.contagion_from,
+                                  r.approval_weight,
+                                  r.tax_refusal_from,
+                                  r.tax_refusal,
+                                  r.emigration_from,
+                                  r.emigration,
+                                  r.revolt_step,
+                                  r.revolt_noise,
+                                  r.revolt_concession,
+                                  r.split,
+                                  r.soldiers_reference,
+                                  r.concession_unrest,
+                                  r.suppression_unrest,
+                                  r.suppression_devastation}) {
+                h.fixed(f);
+            }
+            h.i64(r.grain);
+            h.text(r.contagion_flag);
+            h.i64(r.revolt_min_days);
+            h.i64(r.revolt_max_days);
+            h.u64(r.split_groups.size());
+            for (const Index g : r.split_groups) {
+                h.i64(g);
+            }
+            h.text(r.split_flag);
+            h.i64(r.loyalty_group);
+            h.text(r.victory_flag);
+            for (const Index e : r.outcome_events) {
+                h.i64(e);
+            }
             h.u64(w.law_groups.size());
             for (const LawGroup& g : w.law_groups) {
                 h.text(g.id);
                 h.u64(g.options.size());
                 for (const LawOption& o : g.options) {
                     h.text(o.id);
+                    h.fixed(o.unrest); // seit a3
                 }
                 h.i64(g.standard);
             }

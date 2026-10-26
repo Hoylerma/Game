@@ -37,7 +37,10 @@ constexpr std::string_view kLaws =
     "gesetz vereine {\n    name = \"Vereine\"\n    seit = 1700.01.01\n    standard = verbot\n"
     "    option verbot { name = \"Verbot\" }\n    option frei { name = \"Vereinsfreiheit\" }\n}\n";
 
-constexpr std::string_view kRules = "ereignisse {\n    seit = 1648.01.01\n    frist = 20\n}\n";
+// Ohne Annäherung an die Zielwerte (Schritt a3), damit die Tests der Schritte a1 und a2 die Wirkungen der
+// Ereignisse allein sehen.
+constexpr std::string_view kRules = "ereignisse {\n    seit = 1648.01.01\n    frist = 20\n"
+                                    "    zustimmung_annaeherung = 0\n    unruhe_annaeherung = 0\n}\n";
 
 constexpr std::string_view kEvents = R"(
 ereignis test.unruhen {
@@ -298,7 +301,7 @@ TEST_CASE("Ereignisse: Ladefehler") {
     };
     const Case cases[] = {
         {"unbekannte Bedingung", "unruhe >= 30", "aufruhr >= 30", "unbekannte Bedingung 'aufruhr'"},
-        {"unbekannte Wirkung", "unruhe = -20", "aufstand = barrikaden", "unbekannte Wirkung 'aufstand'"},
+        {"unbekannte Wirkung", "unruhe = -20", "revolution = ja", "unbekannte Wirkung 'revolution'"},
         {"unbekannte Gesetzesoption", "gesetz_presse = pressefreiheit", "gesetz_presse = frei",
          "unbekannte Option 'frei' der Gesetzesgruppe presse"},
         {"unbekannte Gesetzesgruppe", "gesetz_presse = vorzensur", "gesetz_zensur = vorzensur",
@@ -674,4 +677,191 @@ TEST_CASE("Ereignisse: Determinismus mit 1 und 4 Threads") {
         return sim.checksum();
     };
     CHECK(run(1) == run(4));
+}
+
+// ─── Schritt a3: Zustimmung, Unruhe, Aufstände ─────────────────────────────
+
+namespace {
+
+/// Fixture mit Ereignissen und eigenen Regeln (ereignisse { … }); ohne Ereignisse, die von selbst eintreten,
+/// außer denen in events.
+class RuleData : public EventData {
+public:
+    RuleData(std::string_view rules, std::string_view events) : EventData(events) {
+        testhilfen::write_file(dir() / "common/ereignisse.chron",
+                               "ereignisse {\n    seit = 1648.01.01\n" + std::string(rules) + "\n}\n");
+    }
+};
+
+constexpr std::string_view kQuiet = R"(
+ereignis z.nie { titel = "x" text = "x" art = dynamisch nur_folge = ja option a { text = "a" gewicht = 1 } }
+)";
+
+Fixed fx(std::int64_t n, std::int64_t d = 1) {
+    return Fixed::from_ratio(n, d);
+}
+
+} // namespace
+
+TEST_CASE("Ereignisse: Zustimmung und Unruhe am Monatsersten") {
+    const RuleData data("    unruhe_not = 0\n    unruhe_teuerung = 0\n    unruhe_zustimmung = 0\n"
+                        "    unruhe_verfassung = { keine = 40 staendisch = 20 konstitutionell = 0 }\n",
+                        kQuiet);
+    testhilfen::replace_in_file(data.dir() / "common/gesetze.chron",
+                                "option vorzensur { name = \"Vorzensur\" }",
+                                "option vorzensur { name = \"Vorzensur\" unruhe = 10 }");
+    Simulation sim(data.load());
+    const World& w = sim.world();
+    const Index bra = state_of(w, "BRA");
+    const Index sax = state_of(w, "SAX");
+    const std::size_t groups = w.interest_groups.size();
+    const std::size_t educated = ix(w.find_interest_group("bildungsbuergertum"));
+    CHECK(w.law_groups[0].options[0].unrest == Fixed::from_int(10));
+    sim.step_days(8); // bis einschließlich 31. Oktober
+    CHECK(w.unrest[ix(sax)] == Fixed::zero());
+    sim.step_day(); // 1. November
+    // Zielwert Sachsen: keine Verfassung 40 + Vorzensur 10; Brandenburg mit Pressefreiheit 40.
+    CHECK(w.unrest[ix(sax)] == fx(50) * fx(1, 4));
+    CHECK(w.unrest[ix(bra)] == fx(40) * fx(1, 4));
+    // Zustimmung: Bildungsbürgertum wünscht Pressefreiheit +2, Vorzensur −2; ein Fünftel der Lücke.
+    CHECK(w.approval[ix(bra) * groups + educated] == fx(2) * fx(1, 5));
+    CHECK(w.approval[ix(sax) * groups + educated] == fx(-2) * fx(1, 5));
+    uhrwerk::EventCache cache;
+    uhrwerk::rebuild_event_cache(w, cache);
+    CHECK(uhrwerk::unrest_target(w, cache, sax) == fx(50));
+
+    // Hohe Unruhe: Steuerverweigerung und mehr Auswanderung der unteren Schicht.
+    World high = data.load();
+    high.unrest[ix(sax)] = fx(60);
+    CHECK(uhrwerk::event_tax_factor(high, sax) == fx(9, 10));
+    CHECK(uhrwerk::event_tax_factor(high, bra) == Fixed::one());
+    CHECK(uhrwerk::unrest_emigration_factor(high, sax) == fx(3, 2));
+}
+
+TEST_CASE("Ereignisse: Ansteckung über ein Welt-Merkmal") {
+    const RuleData data("    unruhe_not = 0\n    unruhe_teuerung = 0\n    unruhe_zustimmung = 0\n"
+                        "    unruhe_verfassung = { keine = 0 }\n    unruhe_ansteckung = 10\n"
+                        "    ansteckung_merkmal = februarrevolution\n",
+                        R"(
+ereignis paris { titel = "Paris" text = "x" art = dynamisch wer = welt
+    option a { text = "a" gewicht = 1 wirkung { welt_merke = februarrevolution } } }
+)");
+    Simulation sim(data.load());
+    const World& w = sim.world();
+    sim.step_day();
+    uhrwerk::EventCache cache;
+    uhrwerk::rebuild_event_cache(w, cache);
+    // Ohne Nachbarschaft der Orte (kein Militär in der Fixture) zählt nur das Merkmal: Anteil 1.
+    CHECK(uhrwerk::unrest_target(w, cache, state_of(w, "SAX")) == fx(10));
+}
+
+TEST_CASE("Ereignisse: Aufstände") {
+    const std::string revolt_event = R"(
+ereignis a.aufstand { titel = "Aufstand" text = "x" art = dynamisch
+    bedingung { staat = SAX }
+    option a { text = "a" gewicht = 1 wirkung { unruhe = UNRUHE aufstand = ART } } }
+ereignis b.hilfe { titel = "Hilfe" text = "x" art = dynamisch
+    bedingung { staat = BRA  staat SAX { aufstand = ja } }
+    option a { text = "a" gewicht = 1 wirkung { intervention = SAX } } }
+ereignis c.standrecht { titel = "Standrecht" text = "x" art = dynamisch nur_folge = ja
+    option a { text = "a" gewicht = 1 wirkung { merke = standrecht } } }
+)";
+    const auto make = [&](std::string_view unrest, std::string_view kind) {
+        std::string text = revolt_event;
+        text.replace(text.find("UNRUHE"), 6, unrest);
+        text.replace(text.find("ART"), 3, kind);
+        return text;
+    };
+    const auto flag = [](const World& w, Index s, std::string_view name) {
+        return std::any_of(w.event_flags.begin(), w.event_flags.end(),
+                           [&](const uhrwerk::EventFlag& f) { return f.state == s && f.name == name; });
+    };
+
+    SUBCASE("Niederschlagung mit Folgeereignis") {
+        const RuleData data("    aufstand_schritt = 4\n    aufstand_zufall = 0\n"
+                            "    folge_niederschlagung = c.standrecht\n",
+                            make("0", "barrikaden"));
+        Simulation sim(data.load());
+        const World& w = sim.world();
+        const Index sax = state_of(w, "SAX");
+        sim.step_day();
+        REQUIRE(w.revolts.size() == 1);
+        CHECK(w.revolts[0].kind == uhrwerk::RevoltKind::Barricades);
+        CHECK(has_chronicle(w, "Barrikadenkämpfe"));
+        // Brandenburg greift ein (am selben Tag, nach Sachsen in der Reihenfolge der Kennungen).
+        CHECK(w.revolts[0].helper == state_of(w, "BRA"));
+        CHECK(has_chronicle(w, "schickt Truppen gegen den Aufstand"));
+        const Index capital = w.states[ix(sax)].capital;
+        const Fixed devastation = w.locations[ix(capital)].devastation;
+        sim.step_days(7);
+        CHECK(w.revolts.empty());
+        CHECK(has_chronicle(w, "niedergeschlagen"));
+        CHECK(flag(w, sax, "standrecht"));
+        CHECK(w.locations[ix(capital)].devastation == devastation + fx(1, 20));
+    }
+    SUBCASE("Sieg der Aufständischen") {
+        const RuleData data("    aufstand_schritt = 2\n    aufstand_zufall = 0\n", make("100", "erhebung"));
+        // Ohne Helfer: Brandenburg greift nicht ein.
+        Simulation sim(data.load());
+        const World& w = sim.world();
+        sim.submit(command(CommandType::EventPlayer, state_of(w, "BRA")));
+        sim.step_days(8);
+        CHECK(w.revolts.empty());
+        CHECK(flag(w, state_of(w, "SAX"), "revolutionsregierung"));
+        CHECK(has_chronicle(w, "Die Aufständischen siegen"));
+    }
+    SUBCASE("Nachgeben nach der Höchstdauer, Spielstand mit laufendem Aufstand") {
+        const RuleData data(
+            "    aufstand_schritt = 0.5\n    aufstand_zufall = 0\n    aufstand_nachgeben = 0\n"
+            "    aufstand_tage = { 7 14 }\n",
+            make("100", "erhebung"));
+        Simulation sim(data.load());
+        const World& w = sim.world();
+        sim.submit(command(CommandType::EventPlayer, state_of(w, "BRA"))); // Brandenburg wartet, hilft nicht
+        sim.step_days(8);
+        REQUIRE(w.revolts.size() == 1);
+        CHECK(w.revolts[0].strength > Fixed::zero());
+        const Bytes bytes = uhrwerk::save_game(sim, SaveMeta{});
+        uhrwerk::LoadedGame loaded = uhrwerk::load_game(bytes, data.load(), 1);
+        INFO(loaded.error);
+        REQUIRE(loaded.ok());
+        CHECK(loaded.simulation->world().revolts == w.revolts);
+        sim.step_days(7);
+        loaded.simulation->step_days(7);
+        CHECK(loaded.simulation->checksum() == sim.checksum());
+        CHECK(w.revolts.empty());
+        CHECK(has_chronicle(w, "gibt den Aufständischen nach"));
+    }
+}
+
+TEST_CASE("Ereignisse: Lader a3") {
+    struct Case {
+        std::string_view rules;
+        std::string_view events;
+        std::string_view message;
+    };
+    const Case cases[] = {
+        {"    unruhe_verfassung = { republik = 3 }\n", kQuiet, "ungültige Verfassung 'republik'"},
+        {"    spaltung_gruppen = { adel }\n", kQuiet, "unbekannte Interessengruppe 'adel'"},
+        {"    folge_sieg = gibt.es.nicht\n", kQuiet, "unbekanntes Ereignis 'gibt.es.nicht'"},
+        {"    getreide = brot\n", kQuiet, "unbekanntes Gut 'brot'"},
+        {"    aufstand_tage = { 9 3 }\n", kQuiet, "'aufstand_tage' erwartet"},
+        {"    unruhe_annaeherung = 2\n", kQuiet, "'unruhe_annaeherung' muss zwischen 0 und 1 liegen"},
+        {"",
+         "ereignis x { titel = \"x\" text = \"x\" art = dynamisch option a { text = \"a\" gewicht = 1 "
+         "wirkung { aufstand = putsch } } }",
+         "ungültige Art 'putsch' für 'aufstand'"},
+        {"",
+         "ereignis x { titel = \"x\" text = \"x\" art = dynamisch option a { text = \"a\" gewicht = 1 "
+         "wirkung { intervention = XYZ } } }",
+         "unbekannter Staat 'XYZ'"},
+    };
+    for (const Case& c : cases) {
+        CAPTURE(c.message);
+        const RuleData data(c.rules, c.events);
+        const uhrwerk::LoadResult result = data.result();
+        INFO(testhilfen::issues_text(result));
+        CHECK_FALSE(result.ok());
+        CHECK(testhilfen::has_issue(result, c.message));
+    }
 }

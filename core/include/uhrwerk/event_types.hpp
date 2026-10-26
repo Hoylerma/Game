@@ -6,6 +6,7 @@
 #include "uhrwerk/date.hpp"
 #include "uhrwerk/fixed.hpp"
 
+#include <array>
 #include <cstdint>
 #include <string>
 #include <vector>
@@ -20,6 +21,7 @@ using Index = std::int32_t; // wie in world.hpp
 struct LawOption {
     std::string id; // z. B. "pressefreiheit"
     std::string name;
+    Fixed unrest; // seit a3: Beitrag zum Zielwert der Unruhe (Zensur, Abschnitt 4.3)
 };
 
 /// Gesetzesgruppe (data/common/gesetze.chron), z. B. Presse mit Vorzensur, Pressegesetz und Pressefreiheit.
@@ -77,6 +79,7 @@ enum class ConditionKind : std::uint8_t {
     OfState,        // staat <TAG> { … }: die Kinder für den Staat a (kNone: gibt es nicht, nie wahr)
     AnyState,       // ein_staat { … }: die Kinder für mindestens einen Staat
     Never,          // Verweis auf etwas, das es zum Startdatum nicht gibt (späterer Inhalt): nie wahr
+    InRevolt,       // aufstand = ja (seit a3): im Staat läuft ein Aufstand
 };
 
 struct Condition {
@@ -113,6 +116,8 @@ enum class EffectKind : std::uint8_t {
     OfState,        // staat <TAG> { … }: die Kinder für den Staat a
     AllStates,      // alle_staaten { … }: die Kinder für jeden Staat
     Timed,          // befristet { tage = days text = name … }: Werte in timed (seit a2, Abschnitt 3.7)
+    Revolt,         // aufstand = <art> (seit a3): a = RevoltKind
+    Intervention,   // intervention = TAG (seit a3): Truppen gegen den Aufstand im Staat a
 };
 
 /// Werte einer befristeten Wirkung (Abschnitt 3.7).
@@ -185,9 +190,53 @@ struct EventDef {
 };
 
 /// Regeln der Ereignisse (data/common/ereignisse.chron).
+/// Art eines Aufstands (Abschnitt 4.4): wer sich erhebt.
+enum class RevoltKind : std::uint8_t { Barricades, Agrarian, Uprising }; // Städter, Bauern, alle
+inline constexpr std::size_t kRevoltKinds = 3;
+
+/// Ausgang eines Aufstands (Abschnitt 4.4).
+enum class RevoltOutcome : std::uint8_t { Concession, Suppression, Victory };
+
 struct EventRules {
     bool active = false;        // ab 'seit'; sonst gibt es keine Ereignisse (1648 bitgleich)
     std::int32_t deadline = 30; // Standardfrist der Wahl des Spielers in Tagen
+
+    // Zustimmung und Unruhe (seit a3, Abschnitte 4.2 und 4.3), am Monatsersten; Spielwerte.
+    Fixed approval_rate = Fixed::from_ratio(1, 5); // Anteil der Lücke zum Zielwert je Monat
+    Fixed unrest_rate = Fixed::from_ratio(1, 4);
+    Fixed misery = Fixed::from_int(20);          // je Punkt Not (0 … 2)
+    Fixed misery_from = Fixed::from_int(50);     // Lebensstandard der unteren Schicht, ab dem Not beginnt
+    Fixed misery_span = Fixed::from_int(25);     // … je Punkt Not
+    Fixed dearth = Fixed::from_int(15);          // je Punkt Teuerung (0 … 2)
+    Index grain = -1;                            // Gut der Teuerung (Markt der Hauptstadt), −1: keine
+    Fixed dearth_from = Fixed::from_ratio(6, 5); // Preisfaktor, ab dem Teuerung beginnt
+    Fixed dearth_span = Fixed::from_ratio(1, 2);
+    std::array<Fixed, 3> constitution = {Fixed::from_int(15), Fixed::from_int(10), Fixed{}}; // je Verfassung
+    Fixed contagion = Fixed::from_int(10); // × Anteil der Nachbarn mit hoher Unruhe
+    Fixed contagion_from = Fixed::from_int(60);
+    std::string contagion_flag;                   // Welt-Merkmal, das als unruhiger Nachbar zählt
+    Fixed approval_weight = Fixed::from_int(2);   // × Σ Einfluss × Zustimmung
+    Fixed tax_refusal_from = Fixed::from_int(50); // Unruhe, ab der Steuern verweigert werden
+    Fixed tax_refusal = Fixed::from_ratio(1, 10); // … Anteil des Steuerertrags
+    Fixed emigration_from = Fixed::from_int(50);  // Unruhe, ab der die untere Schicht mehr auswandert
+    Fixed emigration = Fixed::from_ratio(1, 2);   // … zusätzlicher Anteil
+
+    // Aufstände (seit a3, Abschnitt 4.4).
+    std::int32_t revolt_min_days = 7;                   // erste Entscheidung nach einer Woche
+    std::int32_t revolt_max_days = 60;                  // spätestens dann endet er
+    Fixed revolt_step = Fixed::from_ratio(1, 4);        // Stärke je Woche × (Aufständische − Regierung)
+    Fixed revolt_noise = Fixed::from_ratio(3, 20);      // Zufall je Woche ±
+    Fixed revolt_concession = Fixed::from_ratio(3, 10); // Neigung nachzugeben × Stärke je Woche
+    std::vector<Index> split_groups;                    // Elitenspaltung: Gruppen mit Zustimmung < 0 …
+    std::string split_flag;                             // … und ein Merkmal am Staat (Märzministerium)
+    Fixed split = Fixed::from_ratio(1, 4);              // je Treffer
+    Index loyalty_group = -1;                           // Loyalität: Zustimmung dieser Gruppe (Militär)
+    Fixed soldiers_reference = Fixed::from_int(10);     // Soldaten je 1.000 Einwohner für Loyalität 1
+    Fixed concession_unrest = Fixed::from_int(-30);
+    Fixed suppression_unrest = Fixed::from_int(-20);
+    Fixed suppression_devastation = Fixed::from_ratio(1, 20); // in der Hauptstadt
+    std::string victory_flag = "revolutionsregierung";        // Merkmal nach dem Sieg
+    std::array<Index, 3> outcome_events = {-1, -1, -1};       // je RevoltOutcome ein Folgeereignis
 };
 
 // ─── Zustand ────────────────────────────────────────────────────────────────
@@ -230,6 +279,17 @@ struct TimedEffect {
     std::string text; // z. B. "Belagerungszustand in Berlin"
 
     friend bool operator==(const TimedEffect&, const TimedEffect&) = default;
+};
+
+/// Laufender Aufstand eines Staates (Zustand, seit a3, Abschnitt 4.4).
+struct Revolt {
+    Index state = -1;
+    RevoltKind kind = RevoltKind::Barricades;
+    Date start;
+    Fixed strength;    // > 0 für die Aufständischen; ±1 entscheidet
+    Index helper = -1; // Staat, der mit Truppen eingreift
+
+    friend bool operator==(const Revolt&, const Revolt&) = default;
 };
 
 /// Merkmal (Flag) eines Staates oder der Welt (state = -1), Zustand.

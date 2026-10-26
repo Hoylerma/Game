@@ -345,6 +345,16 @@ Ansteckung       = 10 × Anteil der Nachbarstaaten mit Unruhe ≥ 60 (Welt-Merkm
 Zustimmung       = Σ Einfluss × Zustimmung über alle Gruppen (−10 … +10) × 2
 ```
 
+**Umsetzung (seit a3, `core/src/events.cpp`):** Zustimmung und Unruhe nähern sich am Monatsersten ihren
+Zielwerten, für alle bestehenden Staaten zugleich: zuerst die Zustimmung, dann die Unruhe, deren Zielwerte
+alle aus dem Stand vor der Annäherung entstehen (die Ansteckung hängt nicht von der Reihenfolge der
+Staaten ab). Not aus dem Lebensstandard der unteren Schicht (nach Köpfen), Teuerung aus dem Preisfaktor
+des Getreides im Markt der Hauptstadt, Zensur aus dem Feld `unruhe` der Gesetzesoptionen
+(`gesetze.chron`), Nachbarn über die Nachbarschaft der Orte (nur mit Militärdaten), Einfluss der Gruppen
+wie in M8. Alle Faktoren stehen als Spielwerte in `ereignisse.chron` (chronik-skript.md 3.34). Ohne
+Ereignisse und ohne Spielereingriff liegt die Unruhe 1848 nach einem Jahr zwischen 12 und 37 (vor der
+Kalibrierung).
+
 Spielwerte; die Kalibrierung (M11b) stellt sie so ein, dass im März 1848 die meisten Staaten
 Unruhe ≥ 40 haben und ohne Zugeständnisse bis zum Sommer über 60 steigen. Wirkungen:
 - Unruhe ≥ 50: Steuerertrag −10 % (Steuerverweigerung), Auswanderung der unteren Schicht +50 %;
@@ -376,6 +386,27 @@ Zufall aus dem Strom `Ereignisse`. Ausgänge:
 
 Die Option, einem anderen Staat mit Truppen zu helfen („Preußen schickt Truppen nach Baden“), ist
 ein Ereignis des Helfers; mit M10 macht er mobil, seine Heere marschieren aber nicht (Entscheidung 7).
+
+**Umsetzung (seit a3):** Ein Aufstand beginnt mit der Wirkung `aufstand = <art>` (je Staat höchstens
+einer) und hat eine Stärke, anfangs 0. Ab dem siebten Tag (`aufstand_tage`) rechnet der Kern jede Woche:
+
+```
+Aufständische = Unruhe ÷ 100 × (½ + Anteil Städter | Bauern | 1) + Spaltung × Treffer
+Treffer       = Gruppen aus spaltung_gruppen mit Zustimmung < 0, dazu das Merkmal spaltung_merkmal
+Regierung     = (Zustimmung der Gruppe loyalitaet + 10) ÷ 20 × min(2, Soldaten je 1.000 ÷ soldaten_bezug)
+              + min(2, Soldaten des Helfers je 1.000 Einwohner ÷ soldaten_bezug)
+Stärke       += aufstand_schritt × (Aufständische − Regierung) ± aufstand_zufall (Strom Ereignisse)
+```
+
+Bei Stärke ≥ 1 siegen die Aufständischen (Merkmal `revolutionsregierung`), bei ≤ −1 wird der Aufstand
+niedergeschlagen (Unruhe −20, Verwüstung der Hauptstadt +0,05); sonst gibt die Regierung bei positiver
+Stärke mit der Wahrscheinlichkeit Stärke × `aufstand_nachgeben` nach (Unruhe −30). Nach der Höchstdauer
+endet er mit Nachgeben (Stärke > 0) oder Niederschlagung. Soldaten des Helfers: sein größtes Heer, ohne
+Militär ein Viertel seines Friedensheeres. Jeder Ausgang schreibt einen Chronikeintrag und kann ein
+Folgeereignis haben (`folge_nachgeben`, `folge_niederschlagung`, `folge_sieg`), das die eigentlichen
+Zugeständnisse, das Standrecht oder die Flucht des Fürsten mit Optionen erzählt. Wirkungen der Unruhe:
+Steuerverweigerung im Haushalt (alle Steuerarten), zusätzliche Auswanderung der unteren Schicht in der
+Bevölkerungsrechnung.
 
 ## 5. Journale (M11a/b)
 
@@ -689,5 +720,6 @@ Weitere Tests:
 | Schritt | Stand |
 |---|---|
 | – | Entscheidungen wie empfohlen freigegeben; Umsetzung beginnt mit a1 |
+| a3 | **erledigt:** Zustimmung und Unruhe nähern sich am Monatsersten ihren Zielwerten (Wünsche der Gruppen; Not, Teuerung, Verfassung, Zensur über `unruhe` an den Gesetzesoptionen, Ansteckung über Nachbarn und das Welt-Merkmal, Zustimmung nach Einfluss); Steuerverweigerung und Auswanderung bei hoher Unruhe; Aufstände mit wöchentlichem Kräftevergleich (Mobilisierung, Elitenspaltung, Loyalität, Intervention) und drei Ausgängen mit Folgeereignissen; Wirkungen `aufstand` und `intervention`, Bedingung `aufstand = ja`; alle Faktoren als Spielwerte in `ereignisse.chron`. Inhaltsstand 3. Tests in `test_events.cpp`; 1648 bitgleich |
 | a2 | **erledigt:** tägliche Auslösung mit Wartezeit, Termin und Datumsfenster, Einmaligkeit und Wiederholung mit Abstand, Folgeereignisse (auch ohne Frist am selben Tag, `nur_folge`), Wahl nach Gewicht mit Zuschlägen aus dem Strom `Ereignisse`, offene Ereignisse des Spielers mit Frist, Befehle `Ereigniswahl` und `Ereignisspieler`, alle Wirkungen aus 3.3 außer denen späterer Schritte, befristete Wirkungen (`befristet`, Steuerertrag, Moral, Unruhe, Beziehung); Bedingungen über Gruppen, Lebensstandard, Preise, Krieg, Bund, Zoll, Beziehung, Sitze, Heer und Haushalt. Inhaltsbereich Stand 2. Tests in `test_events.cpp` (Auslösung, Folgen, Wirkungen, Wahl des Spielers, Frist, Spielstand und Wiederholung mit offenem Ereignis, Determinismus mit 1 und 4 Threads); 1648 bitgleich |
 | a1 | **erledigt:** Gesetzesgruppen `common/gesetze.chron` (Presse, Vereine, Grundlasten; Startwerte datiert in `staaten_historie.csv`, Feld `gesetz_<gruppe>`), Wünsche der elf Interessengruppen (`wuensche`), Regeln `common/ereignisse.chron` (`seit = 1848.01.01`, Frist 30), Lader der Ereignisse mit dem Vokabular aus 3.2/3.3 (Schlüssel mit `_`, mehrzeilige Texte, späterer Inhalt nie wahr bzw. entfällt, Kreisprüfung der Folgen ohne Frist); Zustand (Verfassung, Wahlrecht und Gesetze je Staat, Ereignischronik, offene und geplante Ereignisse, Merkmale, Zustimmung, Unruhe), Inhaltsbereich `ereignisse`, Spielstand Format 5; `info` zählt Ereignisse je Art und Jahrzehnt und die Gesetze zum Start. Tests `test_events.cpp`; 1648 bitgleich. Noch ohne Ereignisse im Inhalt (ab b1) |

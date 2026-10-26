@@ -3,14 +3,15 @@
 # Format: docs/technik/chronik-skript.md, Abschnitt 3.33. Drei Gruppen aus Kapitel 09, Abschnitt 6.1, die
 # 1848 im Mittelpunkt stehen; Verfassung, Wahlrecht und Wahlsystem bleiben Felder des Staates (M8). Ein
 # Staat hat die Option 'standard', solange seine Historie (staaten_historie.csv, Feld gesetz_<gruppe>)
-# keine andere nennt. Ereignisse ändern die Gesetze zur Laufzeit (ab Schritt a2).
+# keine andere nennt. Ereignisse ändern die Gesetze zur Laufzeit (seit Schritt a2). 'unruhe' an einer
+# Option (seit a3) geht in den Zielwert der Unruhe ein (Spielwert).
 
 gesetz presse {
     name     = "Presse"
     seit     = 1815.06.08   # Deutscher Bund; Vorzensur seit den Karlsbader Beschlüssen 1819
     standard = vorzensur
-    option vorzensur      { name = "Vorzensur" }
-    option pressegesetz   { name = "Repressives Pressegesetz" }
+    option vorzensur      { name = "Vorzensur"                unruhe = 10 }   # Zensur (ereignisse.md 4.3)
+    option pressegesetz   { name = "Repressives Pressegesetz" unruhe = 5 }
     option pressefreiheit { name = "Pressefreiheit" }
     quelle   = "Kapitel 09, Abschnitt 6.1 (Gruppe 12); Huber, Verfassungsgeschichte Bd. 1 und 2"
 }

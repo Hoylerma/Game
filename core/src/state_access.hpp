@@ -414,6 +414,14 @@ template <typename Sim, typename V> void StateAccess::visit(Sim& sim, V& v) {
             v.field("text", t.text);
         });
         v.field("ereignisspieler", w.event_player);
+        // Seit Schritt a3: laufende Aufstände.
+        list(v, "aufstaende", w.revolts, Extent::State, [&](auto& r) {
+            v.field("staat", r.state);
+            v.field("art", r.kind);
+            v.field("beginn", r.start);
+            v.field("staerke", r.strength);
+            v.field("helfer", r.helper);
+        });
     }
 
     v.field("zufall.demografie", sim.rng_demography_);

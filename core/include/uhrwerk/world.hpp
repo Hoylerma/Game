@@ -1152,6 +1152,7 @@ struct World {
     std::vector<Fixed> unrest;              // Unruhe je Staat (0 … 100)
     std::vector<TimedEffect> timed_effects; // seit a2: befristete Wirkungen in der Reihenfolge ihres Beginns
     Index event_player = -1;                // seit a2: Staat, dessen Ereignisse auf die Wahl warten (Befehl)
+    std::vector<Revolt> revolts;            // seit a3: laufende Aufstände in der Reihenfolge ihres Beginns
 
     Index find_state(std::string_view tag) const;
     Index find_location(std::string_view id) const;

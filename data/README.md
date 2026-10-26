@@ -407,7 +407,8 @@ Kriegslesezeichen nutzen die Daten von 1848 und die datierte Historie bis zu ihr
 | `common/gesetze.chron` | drei Gesetzesgruppen seit 1815: Presse (Vorzensur, Pressegesetz, Pressefreiheit; Standard Vorzensur), Vereine (Verbot, Genehmigung, Vereinsfreiheit; Standard Verbot), Grundlasten (Grundherrschaft, Ablösung, frei; Standard Ablösung) |
 | `tabellen/staaten_historie.csv` (Felder `gesetz_<gruppe>`) | Grundherrschaft 1848 in Österreich, Bayern und den beiden Mecklenburg, Ablösung in Bayern ab 4.6.1848 und Österreich ab 7.9.1848; Preußisches Vereinsgesetz 11.3.1850, Pressegesetz 12.5.1851; Bundespresse- und Bundesvereinsgesetz 6./13.7.1854 für die übrigen Staaten. 82 Zeilen, ungeprüft nach Literaturkenntnis |
 | `common/interessengruppen.chron` (`wuensche`) | Wünsche der elf Gruppen an die drei Gesetzesgruppen (−3 … +3), Spielwerte |
-| `common/ereignisse.chron` | Ereignisse ab 1848.01.01, Frist der Wahl 30 Tage; die Ereignisse selbst (`common/ereignisse/`) folgen ab Schritt b1 |
+| `common/ereignisse.chron` | Ereignisse ab 1848.01.01, Frist der Wahl 30 Tage; seit a3 die Spielwerte von Zustimmung, Unruhe (Not, Teuerung des Getreides, Verfassung, Ansteckung über das Welt-Merkmal `februarrevolution`) und Aufständen (Spaltung über Beamtenschaft, Adel und das Merkmal `maerzministerium`, Loyalität des Militärs); die Ereignisse selbst (`common/ereignisse/`) folgen ab Schritt b1 |
+| `common/gesetze.chron` (`unruhe`) | Zensur im Zielwert der Unruhe: Vorzensur 10, Pressegesetz 5 (Spielwerte) |
 
 Das Lesezeichen 1648 hat keine Ereignisse (vor dem `seit`); seine Prüfsumme bleibt.
 

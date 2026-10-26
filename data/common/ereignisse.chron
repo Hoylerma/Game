@@ -1,10 +1,45 @@
-# Regeln der Ereignisse (Meilenstein M11, docs/technik/ereignisse.md Abschnitt 3).
+# Regeln der Ereignisse (Meilenstein M11, docs/technik/ereignisse.md Abschnitte 3 und 4).
 #
 # Format: docs/technik/chronik-skript.md, Abschnitt 3.34. Ereignisse gibt es erst ab 'seit'; Szenarien davor
 # (1648) laufen ohne sie und bleiben bitgleich. Die Ereignisse selbst stehen in common/ereignisse/*.chron
-# (ab Schritt b1).
+# (ab Schritt b1). Alle Werte außer 'seit' sind Spielwerte; die Kalibrierung folgt mit Schritt b2.
 
 ereignisse {
     seit  = 1848.01.01
     frist = 30          # Tage, bis ohne Wahl des Spielers die Option mit dem größten Gewicht gilt
+
+    # Zustimmung und Unruhe am Monatsersten (Abschnitte 4.2 und 4.3)
+    zustimmung_annaeherung = 0.2     # Anteil der Lücke zum Zielwert aus den Gesetzen
+    unruhe_annaeherung     = 0.25
+    unruhe_not      = 20             # je Punkt Not: (not_ab − Lebensstandard unten) ÷ not_spanne, 0 … 2
+    not_ab          = 50
+    not_spanne      = 25
+    unruhe_teuerung = 15             # je Punkt Teuerung: (Preisfaktor − teuerung_ab) ÷ teuerung_spanne, 0 … 2
+    getreide        = getreide
+    teuerung_ab     = 1.2
+    teuerung_spanne = 0.5
+    unruhe_verfassung = { keine = 15 staendisch = 10 konstitutionell = 0 }
+    unruhe_ansteckung = 10           # × Anteil der Nachbarn mit Unruhe ab ansteckung_ab
+    ansteckung_ab     = 60
+    ansteckung_merkmal = februarrevolution   # Welt-Merkmal, zählt als unruhiger Nachbar
+    unruhe_zustimmung = 2            # × Σ Einfluss × Zustimmung der Gruppen
+    steuerverweigerung_ab = 50
+    steuerverweigerung    = 0.1
+    auswanderung_ab       = 50
+    auswanderung_unruhe   = 0.5      # Auswanderung der unteren Schicht +50 %
+
+    # Aufstände (Abschnitt 4.4)
+    aufstand_tage      = { 7 60 }    # erste Entscheidung nach einer Woche, spätestens nach 60 Tagen
+    aufstand_schritt   = 0.25
+    aufstand_zufall    = 0.15
+    aufstand_nachgeben = 0.3
+    spaltung_gruppen   = { beamtenschaft adel }
+    spaltung_merkmal   = maerzministerium
+    spaltung           = 0.25
+    loyalitaet         = militaer
+    soldaten_bezug     = 10          # Soldaten je 1.000 Einwohner für volle Loyalität
+    nachgeben_unruhe            = -30
+    niederschlagung_unruhe      = -20
+    niederschlagung_verwuestung = 0.05
+    sieg_merkmal       = revolutionsregierung
 }

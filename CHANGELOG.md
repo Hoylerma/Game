@@ -36,6 +36,14 @@ freigegeben; Stand je Schritt in Abschnitt 13 dort.
   Wirkungen aus [ereignisse.md](docs/technik/ereignisse.md) 3.3 bis auf Aufstände, Journale und Kriege,
   befristete Wirkungen (`befristet`: Steuerertrag, Moral, Unruhe, Beziehung) und Chronikeinträge der
   gewählten Optionen. Die Testbefehle der Kommandozeile üben die neuen Befehle; 1648 bitgleich.
+- **Zustimmung, Unruhe, Aufstände (Schritt a3):** Am Monatsersten nähern sich die Zustimmung der
+  Gruppen ihrem Zielwert aus den Gesetzen und die Unruhe ihrem Zielwert aus Not, Teuerung des Getreides,
+  Verfassung, Zensur (`unruhe` an den Gesetzesoptionen), Ansteckung und Zustimmung. Ab Unruhe 50
+  verweigern die Untertanen einen Teil der Steuern und wandern mehr aus. Aufstände (`aufstand =
+  barrikaden|agrarunruhen|erhebung`) vergleichen jede Woche Mobilisierung und Elitenspaltung mit der
+  Loyalität der Truppen und einer Intervention (`intervention = TAG`) und enden mit Nachgeben,
+  Niederschlagung oder Sieg der Aufständischen, je mit Chronik und optionalem Folgeereignis. Alle
+  Faktoren sind Spielwerte in `common/ereignisse.chron`; 1648 bitgleich.
 
 ### Meilenstein M10 – Militär und Einigungskriege
 

@@ -3,6 +3,7 @@
 #include "uhrwerk/script.hpp"
 
 #include <algorithm>
+#include <array>
 #include <cstddef>
 #include <cstdint>
 #include <functional>
@@ -175,6 +176,7 @@ public:
         for (std::size_t i = 0; i < entries_.size(); ++i) {
             index_.emplace(entries_[i].id, static_cast<Index>(i));
         }
+        resolve_outcome_events();
         world_.events.resize(entries_.size());
         for (std::size_t i = 0; i < entries_.size(); ++i) {
             current_ = static_cast<Index>(i);
@@ -389,6 +391,7 @@ private:
 
     void load_rules(const Source& source) {
         file_ = source.name;
+        rules_file_ = source.name;
         bool found = false;
         for (const ScriptNode& node : source.root.children) {
             if (node.key != "ereignisse" || !node.is_block || !node.value.empty()) {
@@ -415,7 +418,7 @@ private:
                     if (const auto days = integer(child, 1, 365)) {
                         world_.event_rules.deadline = static_cast<std::int32_t>(*days);
                     }
-                } else {
+                } else if (!read_rule(child)) {
                     warning(child.line,
                             "unbekanntes Feld " + quote(child.key) + " in ereignisse wird ignoriert");
                 }
@@ -427,6 +430,167 @@ private:
         }
         if (!found) {
             error(0, "Block 'ereignisse { seit = … }' fehlt");
+        }
+    }
+
+    /// Spielwerte von Zustimmung, Unruhe und Aufständen (seit a3, Abschnitte 4.2–4.4); false bei
+    /// unbekanntem Feld.
+    bool read_rule(const ScriptNode& child) {
+        EventRules& r = world_.event_rules;
+        struct Value {
+            std::string_view key;
+            Fixed* target;
+            Fixed lo;
+            Fixed hi;
+        };
+        const Value values[] = {
+            {"zustimmung_annaeherung", &r.approval_rate, fx(0), fx(1)},
+            {"unruhe_annaeherung", &r.unrest_rate, fx(0), fx(1)},
+            {"unruhe_not", &r.misery, fx(0), fx(100)},
+            {"not_ab", &r.misery_from, fx(0), fx(100)},
+            {"not_spanne", &r.misery_span, Fixed::from_ratio(1, 100), fx(100)},
+            {"unruhe_teuerung", &r.dearth, fx(0), fx(100)},
+            {"teuerung_ab", &r.dearth_from, fx(0), fx(10)},
+            {"teuerung_spanne", &r.dearth_span, Fixed::from_ratio(1, 100), fx(10)},
+            {"unruhe_ansteckung", &r.contagion, fx(0), fx(100)},
+            {"ansteckung_ab", &r.contagion_from, fx(0), fx(100)},
+            {"unruhe_zustimmung", &r.approval_weight, fx(0), fx(10)},
+            {"steuerverweigerung_ab", &r.tax_refusal_from, fx(0), fx(100)},
+            {"steuerverweigerung", &r.tax_refusal, fx(0), fx(1)},
+            {"auswanderung_ab", &r.emigration_from, fx(0), fx(100)},
+            {"auswanderung_unruhe", &r.emigration, fx(0), fx(10)},
+            {"aufstand_schritt", &r.revolt_step, fx(0), fx(10)},
+            {"aufstand_zufall", &r.revolt_noise, fx(0), fx(10)},
+            {"aufstand_nachgeben", &r.revolt_concession, fx(0), fx(1)},
+            {"spaltung", &r.split, fx(0), fx(10)},
+            {"soldaten_bezug", &r.soldiers_reference, Fixed::from_ratio(1, 100), fx(1000)},
+            {"nachgeben_unruhe", &r.concession_unrest, fx(-100), fx(100)},
+            {"niederschlagung_unruhe", &r.suppression_unrest, fx(-100), fx(100)},
+            {"niederschlagung_verwuestung", &r.suppression_devastation, fx(0), fx(1)},
+        };
+        for (const Value& v : values) {
+            if (child.key == v.key) {
+                if (assign(child)) {
+                    if (const auto value = number(child, v.lo, v.hi)) {
+                        *v.target = *value;
+                    }
+                }
+                return true;
+            }
+        }
+        if (child.key == "aufstand_tage") {
+            // aufstand_tage = { 7 60 }: erste Entscheidung und Höchstdauer
+            const std::vector<std::string_view> days =
+                child.is_block ? child.bare_values() : std::vector<std::string_view>{};
+            const auto first = days.size() == 2 ? parse_int(days[0]) : std::nullopt;
+            const auto last = days.size() == 2 ? parse_int(days[1]) : std::nullopt;
+            if (!first || !last || *first < 1 || *last < *first || *last > 3650) {
+                error(child.line,
+                      "'aufstand_tage' erwartet zwei Ganzzahlen { erste_entscheidung hoechstens }, "
+                      "1 ≤ erste ≤ höchstens ≤ 3650");
+            } else {
+                r.revolt_min_days = static_cast<std::int32_t>(*first);
+                r.revolt_max_days = static_cast<std::int32_t>(*last);
+            }
+            return true;
+        }
+        if (child.key == "unruhe_verfassung") {
+            // unruhe_verfassung = { keine = 15 staendisch = 10 konstitutionell = 0 }
+            if (!child.is_block) {
+                error(child.line, "'unruhe_verfassung' erwartet einen Block { keine = n staendisch = n "
+                                  "konstitutionell = n }");
+                return true;
+            }
+            for (const ScriptNode& entry : child.children) {
+                const auto which = parse_constitution(entry.key);
+                if (!which) {
+                    error(entry.line, "ungültige Verfassung " + quote(entry.key) +
+                                          " (erlaubt: keine, staendisch, konstitutionell)");
+                    continue;
+                }
+                if (const auto value = number(entry, fx(-100), fx(100))) {
+                    r.constitution[static_cast<std::size_t>(*which)] = *value;
+                }
+            }
+            return true;
+        }
+        if (child.key == "getreide") {
+            if (scalar(child) && assign(child)) {
+                r.grain = world_.find_good(child.value);
+                if (r.grain == kNone && !absent("gut", child.value)) {
+                    error(child.line, "unbekanntes Gut " + quote(child.value) + " für 'getreide'");
+                }
+            }
+            return true;
+        }
+        if (child.key == "ansteckung_merkmal" || child.key == "spaltung_merkmal" ||
+            child.key == "sieg_merkmal") {
+            if (const auto flag = name(child)) {
+                (child.key == "ansteckung_merkmal" ? r.contagion_flag
+                 : child.key == "spaltung_merkmal" ? r.split_flag
+                                                   : r.victory_flag) = *flag;
+            }
+            return true;
+        }
+        if (child.key == "loyalitaet") {
+            if (scalar(child) && assign(child)) {
+                r.loyalty_group = group_ref(child, child.value);
+            }
+            return true;
+        }
+        if (child.key == "spaltung_gruppen") {
+            if (!child.is_block) {
+                error(child.line, "'spaltung_gruppen' erwartet eine Liste { gruppe gruppe … }");
+                return true;
+            }
+            for (const std::string_view id : child.bare_values()) {
+                if (const Index g = group_ref(child, std::string(id)); g != kNone) {
+                    r.split_groups.push_back(g);
+                }
+            }
+            return true;
+        }
+        if (child.key == "folge_nachgeben" || child.key == "folge_niederschlagung" ||
+            child.key == "folge_sieg") {
+            if (scalar(child) && assign(child)) {
+                const std::size_t outcome = child.key == "folge_nachgeben"         ? 0
+                                            : child.key == "folge_niederschlagung" ? 1
+                                                                                   : 2;
+                outcome_names_[outcome] = {child.value, child.line};
+            }
+            return true;
+        }
+        return false;
+    }
+
+    /// Interessengruppe der Regeln: kNone ohne Fehler, wenn es sie erst später gibt.
+    Index group_ref(const ScriptNode& node, const std::string& id) {
+        const Index g = world_.find_interest_group(id);
+        if (g == kNone && !absent("interessengruppe", id)) {
+            error(node.line, "unbekannte Interessengruppe " + quote(id) + " in " + quote(node.key));
+        }
+        return g;
+    }
+
+    /// Folgeereignisse der Ausgänge eines Aufstands, nach dem ersten Durchgang.
+    void resolve_outcome_events() {
+        for (std::size_t i = 0; i < outcome_names_.size(); ++i) {
+            const auto& [id, line] = outcome_names_[i];
+            if (id.empty()) {
+                continue;
+            }
+            const Index event = event_index(id);
+            if (event == kNone) {
+                error(rules_file_, line,
+                      "unbekanntes Ereignis " + quote(id) + " für den Ausgang eines Aufstands");
+                continue;
+            }
+            if (entries_[static_cast<std::size_t>(event)].scope != EventScope::State) {
+                error(rules_file_, line,
+                      "Ereignis " + id + " für den Ausgang eines Aufstands muss wer = staat haben");
+                continue;
+            }
+            world_.event_rules.outcome_events[i] = event;
         }
     }
 
@@ -979,7 +1143,7 @@ private:
             }
             return c;
         }
-        if (key == "im_krieg" || key == "mobil" || key == "bund" || key == "spieler") {
+        if (key == "im_krieg" || key == "mobil" || key == "bund" || key == "spieler" || key == "aufstand") {
             if (!need_state(node, has_state)) {
                 return std::nullopt;
             }
@@ -987,10 +1151,11 @@ private:
             if (!value) {
                 return std::nullopt;
             }
-            c.kind = key == "im_krieg" ? ConditionKind::AtWar
-                     : key == "mobil"  ? ConditionKind::Mobilized
-                     : key == "bund"   ? ConditionKind::Federal
-                                       : ConditionKind::Player;
+            c.kind = key == "im_krieg"  ? ConditionKind::AtWar
+                     : key == "mobil"   ? ConditionKind::Mobilized
+                     : key == "bund"    ? ConditionKind::Federal
+                     : key == "spieler" ? ConditionKind::Player
+                                        : ConditionKind::InRevolt;
             if (*value) {
                 return c;
             }
@@ -1369,7 +1534,8 @@ private:
         // Ab hier wirkt alles auf einen Staat.
         const bool known = key == "merke" || key == "vergiss" || key == "verfassung" || key == "wahlrecht" ||
                            key == "unruhe" || key == "schatz" || key == "monatseinnahmen" ||
-                           key == "auswanderung" || key == "mobilmachung" ||
+                           key == "auswanderung" || key == "mobilmachung" || key == "aufstand" ||
+                           key == "intervention" ||
                            split(key, {"gesetz", "zustimmung", "beziehung"}).has_value();
         if (!known) {
             error(node.line, "unbekannte Wirkung " + quote(key) + " (Vokabular: chronik-skript.md 3.34)");
@@ -1411,6 +1577,30 @@ private:
             }
             e.kind = EffectKind::Franchise;
             e.a = static_cast<Index>(*value);
+            return e;
+        }
+        if (key == "aufstand") {
+            const RevoltKind kind = node.value == "barrikaden"     ? RevoltKind::Barricades
+                                    : node.value == "agrarunruhen" ? RevoltKind::Agrarian
+                                                                   : RevoltKind::Uprising;
+            if (node.value != "barrikaden" && node.value != "agrarunruhen" && node.value != "erhebung") {
+                error(node.line, "ungültige Art " + quote(node.value) +
+                                     " für 'aufstand' (erlaubt: barrikaden, agrarunruhen, erhebung)");
+                return std::nullopt;
+            }
+            e.kind = EffectKind::Revolt;
+            e.a = static_cast<Index>(kind);
+            return e;
+        }
+        if (key == "intervention") {
+            bool is_absent = false;
+            const auto target = state_ref(node, node.value, is_absent);
+            if (!target) {
+                return std::nullopt;
+            }
+            skip = is_absent;
+            e.kind = EffectKind::Intervention;
+            e.a = *target;
             return e;
         }
         if (key == "mobilmachung") {
@@ -1769,6 +1959,8 @@ private:
     std::vector<EventEntry> entries_;
     std::map<std::string, Index, std::less<>> index_;
     std::vector<FollowEdge> follows_;
+    std::string rules_file_;
+    std::array<std::pair<std::string, int>, 3> outcome_names_{}; // folge_nachgeben … (Kennung, Zeile)
 };
 
 } // namespace

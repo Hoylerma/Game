@@ -1150,14 +1150,16 @@ gesetz presse {
     name     = "Presse"               # Pflicht
     seit     = 1815.06.08             # optional (Abschnitt 3.18)
     standard = vorzensur              # Pflicht: Option, solange die Historie keine andere nennt
-    option vorzensur      { name = "Vorzensur" }       # mindestens zwei Optionen
+    option vorzensur      { name = "Vorzensur" unruhe = 10 }   # mindestens zwei Optionen; unruhe optional
     option pressefreiheit { name = "Pressefreiheit" }
     quelle   = "…"                    # optional
 }
 ```
 
 Fatal sind eine Kennung zweimal (Gruppe oder Option), weniger als zwei Optionen und ein unbekannter
-Standard. Im Kern: `World::law_groups` (`LawGroup`, `LawOption`). Die Staaten nennen ihre Option mit
+Standard. `unruhe` (seit M11a3, −100 … 100, Standard 0) geht in den Zielwert der Unruhe des Staates ein,
+der diese Option hat (Zensur, [ereignisse.md](ereignisse.md) Abschnitt 4.3). Im Kern: `World::law_groups`
+(`LawGroup`, `LawOption`). Die Staaten nennen ihre Option mit
 `gesetz_<gruppe>` (Abschnitt 3.5), die Interessengruppen ihre Wünsche mit `wuensche` (Abschnitt 3.20).
 
 ### 3.34 `common/ereignisse.chron` und `common/ereignisse/*.chron` (seit M11)
@@ -1170,8 +1172,29 @@ dann nicht gelesen und der Zustand bleibt der ohne Ereignisse (1648 bitgleich).
 ereignisse {
     seit  = 1848.01.01   # Pflicht: ab diesem Startdatum gibt es Ereignisse
     frist = 30           # optional (30), 1–365: Tage bis zur Wahl ohne Spieler
+    # seit a3, alle optional (Standardwerte in Klammern), ereignisse.md Abschnitte 4.2–4.4:
+    zustimmung_annaeherung = 0.2   # 0–1: Anteil der Lücke zum Zielwert je Monat (0.2)
+    unruhe_annaeherung = 0.25      # 0–1 (0.25)
+    unruhe_not = 20  not_ab = 50  not_spanne = 25           # Not aus dem Lebensstandard unten
+    unruhe_teuerung = 15  getreide = getreide  teuerung_ab = 1.2  teuerung_spanne = 0.5
+    unruhe_verfassung = { keine = 15 staendisch = 10 konstitutionell = 0 }
+    unruhe_ansteckung = 10  ansteckung_ab = 60  ansteckung_merkmal = februarrevolution
+    unruhe_zustimmung = 2                                     # × Σ Einfluss × Zustimmung
+    steuerverweigerung_ab = 50  steuerverweigerung = 0.1      # Unruhe ab …, Anteil des Steuerertrags
+    auswanderung_ab = 50  auswanderung_unruhe = 0.5           # zusätzliche Auswanderung unten
+    aufstand_tage = { 7 60 }                                  # erste Entscheidung, Höchstdauer
+    aufstand_schritt = 0.25  aufstand_zufall = 0.15  aufstand_nachgeben = 0.3
+    spaltung_gruppen = { beamtenschaft adel }  spaltung_merkmal = maerzministerium  spaltung = 0.25
+    loyalitaet = militaer  soldaten_bezug = 10
+    nachgeben_unruhe = -30  niederschlagung_unruhe = -20  niederschlagung_verwuestung = 0.05
+    sieg_merkmal = revolutionsregierung
+    folge_nachgeben = <ereignis>  folge_niederschlagung = <ereignis>  folge_sieg = <ereignis>
 }
 ```
+
+Fatal sind Werte außerhalb ihres Bereichs, unbekannte Gruppen, Güter und Ereignisse (Gruppen und Güter mit
+späterem `seit` entfallen ohne Fehler), eine Verfassung außer den drei Werten und ein Folgeereignis eines
+Ausgangs, das kein Staatsereignis ist.
 
 Ein Ereignis (Kennung aus a–z, 0–9, `_` und `.`, beginnend mit einem Buchstaben, z. B.
 `maerz.forderungen`):
@@ -1228,6 +1251,7 @@ den Staat gelten nur in Staatsereignissen oder innerhalb von `staat <TAG> { … 
 | `lebensstandard_unten <= n` | Lebensstandard der unteren Schicht, 0…100 |
 | `preis_<gut> >= x` | Preisfaktor im Markt der Hauptstadt |
 | `im_krieg`, `mobil`, `bund`, `spieler` = `ja`/`nein` | Krieg, Mobilmachung, Bund, Spielerstaat |
+| `aufstand = ja`/`nein` | im Staat läuft ein Aufstand (seit a3) |
 | `krieg_mit = TAG`, `zollunion = <id>`/`keine`, `beziehung_<TAG> >= n` | Krieg, Zollunion, Beziehung |
 | `sitze { parlament = <id> stroemung = <id> mindestens = n }` | Sitze nach der letzten Wahl |
 | `soldaten >= n`, `schatz >= n`, `schulden_quote >= x` | Heer und Haushalt |
@@ -1245,6 +1269,8 @@ den Staat gelten nur in Staatsereignissen oder innerhalb von `staat <TAG> { … 
 | `auswanderung = x` (0…1) | Anteil der unteren Schicht wandert aus |
 | `verwuestung = x`, `verwuestung { ort = <id> wert = x }` (−1…1) | Verwüstung der Hauptstadt bzw. eines Ortes |
 | `mobilmachung = ja` | Mobilmachung |
+| `aufstand = barrikaden`/`agrarunruhen`/`erhebung` | Aufstand beginnen (seit a3; je Staat höchstens einer) |
+| `intervention = TAG` | Truppen gegen den Aufstand in TAG (seit a3; mit Militär Mobilmachung) |
 | `folge { ereignis = <id> tage = n staat = TAG }` | Folgeereignis nach n Tagen (0), auch für einen anderen Staat |
 | `befristet { tage = n text = "…" steuerertrag = x moral = x unruhe = n beziehung_bund = n }` | Wirkung auf Zeit (seit a2): Steuerertrag und Kampfkraft ±x (−1…1), Unruhe und Beziehung zu allen Bundesstaaten je Monatserstem ±n (−100…100); `tage` (1…36500) und `text` Pflicht, mindestens ein Wert |
 | `chronik = "…"` | eigener Chronikeintrag |
