@@ -1,0 +1,6 @@
+# Testdaten des Ereignislabors (seit M11, Schritt a5): Ereignisse schon 1648, sonst Standardwerte.
+ereignisse {
+    seit  = 1648.01.01
+    frist = 30
+    ansteckung_merkmal = februarrevolution
+}

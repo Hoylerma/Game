@@ -10,6 +10,7 @@
 #include "uhrwerk/diplomacy.hpp"
 #include "uhrwerk/economy.hpp"
 #include "uhrwerk/election_lab.hpp"
+#include "uhrwerk/event_lab.hpp"
 #include "uhrwerk/fixed.hpp"
 #include "uhrwerk/lasttest.hpp"
 #include "uhrwerk/loader.hpp"
@@ -94,6 +95,10 @@ Befehle:
   krieg          Kriegslabor: je Seed die Kriege aus den Kriegszielen ohne Spieler bis zum
                  Frieden; Ausgang, Dauer, Friedensschluss, Schlachten, Verluste und Schulden,
                  über alle Läufe die Verteilung gegen die Kriegsziele (seit M10)
+  ereignisse     Ereignislabor: je Seed das Lesezeichen ohne Spieler bis zum Ende der Korridore
+                 (--bis); Ausgang des Journals mit Weg, Ereignisse je Art, Wendepunkte, Aufstände,
+                 Unruhe und Gesetze; über alle Läufe die Verteilung gegen die Korridore; mit
+                 --strategie spielt ein Staat nach einer Strategie der Zieldatei (seit M11)
   speichertest   Abnahmetest der Spielstände: Lauf A ohne Unterbrechung; Lauf B speichert an
                  --punkte Stellen in eine Datei, lädt sie mit frisch geladenen Spieldaten und
                  rechnet weiter; alle Jahresprüfsummen müssen gleich sein
@@ -157,6 +162,7 @@ Beispiele:
   uhrwerk-cli wahl --szenario voelkerfruehling --seeds 16 --wahlkreise
   uhrwerk-cli zoll --szenario voelkerfruehling --beitritt HAN:zollverein --jahre 5
   uhrwerk-cli krieg --szenario voelkerfruehling --seeds 16
+  uhrwerk-cli ereignisse --szenario voelkerfruehling --seeds 16 --strategie krone
   uhrwerk-cli lauf --jahre 50 --testbefehle 200 --speichern partie.einigkeit --protokoll partie.protokoll
   uhrwerk-cli lauf --laden partie.einigkeit --jahre 10
   uhrwerk-cli wiederholung partie.protokoll
@@ -182,6 +188,8 @@ struct Options {
     std::optional<std::string> parliament; // --parlament
     std::optional<std::string> join;       // --beitritt TAG[:UNION]
     std::optional<std::string> leave;      // --austritt TAG
+    std::optional<std::string> strategy;   // --strategie KENNUNG (Ereignislabor, seit M11)
+    std::optional<uhrwerk::Date> until;    // --bis JJJJ.MM.TT (Ereignislabor, seit M11)
     std::optional<fs::path> file;          // wiederholung, spielstand: Datei als Argument
     std::optional<fs::path> save_file;     // --speichern
     std::optional<fs::path> load_file;     // --laden
@@ -231,9 +239,10 @@ std::int64_t parse_count(std::string_view option, std::string_view text, std::in
 Options parse_options(int argc, char** argv) {
     Options o;
     const std::set<std::string_view> with_value = {
-        "--daten",       "--szenario", "--jahre",     "--tage",     "--seed",      "--threads", "--bloecke",
-        "--vergleich",   "--grenze",   "--seeds",     "--ziele",    "--speichern", "--laden",   "--protokoll",
-        "--testbefehle", "--punkte",   "--parlament", "--beitritt", "--austritt"};
+        "--daten",    "--szenario",  "--jahre",       "--tage",   "--seed",      "--threads",
+        "--bloecke",  "--vergleich", "--grenze",      "--seeds",  "--ziele",     "--speichern",
+        "--laden",    "--protokoll", "--testbefehle", "--punkte", "--parlament", "--beitritt",
+        "--austritt", "--strategie", "--bis"};
     const std::set<std::string_view> flags = {"--bericht", "--chronik", "--maerkte", "--text",
                                               "--wahlkreise"};
 
@@ -288,6 +297,17 @@ Options parse_options(int argc, char** argv) {
                         throw UsageError{"Option " + name + " erwartet einen Staatstag"};
                     }
                     (name == "--beitritt" ? o.join : o.leave) = *value;
+                } else if (name == "--strategie") {
+                    if (value->empty()) {
+                        throw UsageError{"Option --strategie erwartet eine Kennung"};
+                    }
+                    o.strategy = *value;
+                } else if (name == "--bis") {
+                    const auto date = uhrwerk::parse_date(*value);
+                    if (!date) {
+                        throw UsageError{"Ungültiger Wert für --bis: '" + *value + "' (erwartet JJJJ.MM.TT)"};
+                    }
+                    o.until = *date;
                 } else if (name == "--ziele") {
                     if (value->empty()) {
                         throw UsageError{"Option --ziele erwartet eine Datei"};
@@ -1123,6 +1143,11 @@ fs::path default_election_targets_file(const fs::path& data_dir, const std::stri
 /// Zollziele des Zolllabors (seit M9): common/zollziele_<szenario>.chron.
 fs::path default_customs_targets_file(const fs::path& data_dir, const std::string& scenario) {
     return data_dir / "common" / ("zollziele_" + scenario + ".chron");
+}
+
+/// Korridore des Ereignislabors (seit M11): common/ereignisziele_<szenario>.chron.
+fs::path default_event_targets_file(const fs::path& data_dir, const std::string& scenario) {
+    return data_dir / "common" / ("ereignisziele_" + scenario + ".chron");
 }
 
 /// Kriegsziele des Kriegslabors (seit M10): common/kriegsziele_<szenario>.chron.
@@ -2481,6 +2506,215 @@ int cmd_krieg(const Options& o, const fs::path& data_dir) {
     return kExitDataError;
 }
 
+int cmd_ereignisse(const Options& o, const fs::path& data_dir) {
+    const auto world = load(data_dir, o.scenario, false);
+    if (!world) {
+        return kExitDataError;
+    }
+    const World& w = *world;
+    if (!w.event_rules.active) {
+        std::cerr << "Das Szenario " << o.scenario
+                  << " hat keine Ereignisse (common/ereignisse.chron, 'seit' bis zum Startdatum); das "
+                     "Ereignislabor braucht sie (z. B. --szenario voelkerfruehling).\n";
+        return kExitDataError;
+    }
+    const fs::path targets_file =
+        o.targets_file ? *o.targets_file : default_event_targets_file(data_dir, o.scenario);
+    std::error_code ec;
+    if (!fs::exists(targets_file, ec)) {
+        std::cerr << "Keine Korridore: " << uhrwerk::path_to_utf8(targets_file) << " fehlt.\n";
+        return kExitDataError;
+    }
+    uhrwerk::EventTargetsResult loaded = uhrwerk::load_event_targets(targets_file, w);
+    if (!loaded.ok()) {
+        for (const std::string& error : loaded.errors) {
+            std::cerr << error << '\n';
+        }
+        std::cerr << "Korridore nicht lesbar: " << uhrwerk::path_to_utf8(targets_file) << '\n';
+        return kExitDataError;
+    }
+    uhrwerk::EventTargets& targets = loaded.targets;
+    if (o.until) {
+        if (*o.until < w.date) {
+            std::cerr << "--bis liegt vor dem Startdatum.\n";
+            return kExitUsageError;
+        }
+        targets.until = *o.until;
+    }
+    const uhrwerk::EventStrategy* strategy = nullptr;
+    if (o.strategy) {
+        const auto it = std::find_if(targets.strategies.begin(), targets.strategies.end(),
+                                     [&](const uhrwerk::EventStrategy& s) { return s.id == *o.strategy; });
+        if (it == targets.strategies.end()) {
+            std::cerr << "Unbekannte Strategie '" << *o.strategy << "' in "
+                      << uhrwerk::path_to_utf8(targets_file) << ".\n";
+            return kExitUsageError;
+        }
+        strategy = &*it;
+    }
+
+    const std::int64_t seeds = o.seeds.value_or(kDefaultWarSeeds);
+    const auto t0 = std::chrono::steady_clock::now();
+    std::vector<uhrwerk::EventLabRun> runs;
+    for (std::int64_t i = 0; i < seeds; ++i) {
+        runs.push_back(uhrwerk::run_event_lab(
+            w, uhrwerk::SimConfig{o.seed + static_cast<std::uint64_t>(i), o.threads}, targets, strategy));
+    }
+    const double seconds = seconds_since(t0);
+    const uhrwerk::EventLabSummary summary = uhrwerk::summarize_event_lab(w, targets, strategy, runs);
+    const uhrwerk::JournalDef* journal =
+        targets.journal != uhrwerk::kNone ? &w.journals[static_cast<std::size_t>(targets.journal)] : nullptr;
+    const auto stage_title = [&](Index stage) {
+        return journal != nullptr && stage != uhrwerk::kNone
+                   ? journal->stages[static_cast<std::size_t>(stage)].title
+                   : std::string("offen");
+    };
+
+    std::cout << "Ereignislabor: " << w.scenario.name << " (" << w.scenario.id << "), "
+              << uhrwerk::format_date_long(w.date) << " bis " << uhrwerk::format_date_long(targets.until)
+              << ", "
+              << (strategy != nullptr
+                      ? "Strategie " + strategy->id + " für " + state_name(w, strategy->player)
+                      : std::string("ohne Spieler"))
+              << '\n'
+              << "Läufe:       " << seeds << " (Seeds " << o.seed;
+    if (seeds > 1) {
+        std::cout << "–" << o.seed + static_cast<std::uint64_t>(seeds - 1);
+    }
+    std::cout << ")\n"
+              << "Korridore:   " << uhrwerk::path_to_utf8(targets_file) << '\n'
+              << "Journal:     " << (journal != nullptr ? journal->title : std::string("–")) << '\n'
+              << "Laufzeit:    " << format_seconds(seconds) << "\n\n";
+
+    std::vector<std::vector<std::string>> rows;
+    rows.push_back(
+        {"Seed", "Ausgang", "am", "Ereignisse h/d/a", "Aufstände n/s/g", "Unruhe Median", "höchste"});
+    for (std::size_t i = 0; i < runs.size(); ++i) {
+        const uhrwerk::EventLabRun& run = runs[i];
+        rows.push_back({std::to_string(o.seed + static_cast<std::uint64_t>(i)), stage_title(run.outcome),
+                        run.outcome != uhrwerk::kNone ? uhrwerk::format_script_date(run.outcome_date) : "–",
+                        std::to_string(run.kinds[0]) + "/" + std::to_string(run.kinds[1]) + "/" +
+                            std::to_string(run.kinds[2]),
+                        std::to_string(run.revolts[0]) + "/" + std::to_string(run.revolts[1]) + "/" +
+                            std::to_string(run.revolts[2]) +
+                            (run.revolts_running > 0 ? " +" + std::to_string(run.revolts_running) : ""),
+                        format_fixed(run.unrest_median, 1), format_fixed(run.unrest_max, 1)});
+    }
+    print_table(rows, {true, false, false, true, true, true, true}, 0);
+    std::cout
+        << "Ereignisse: historisch/dynamisch/atmosphärisch; Aufstände: nachgegeben/niedergeschlagen/gesiegt "
+           "(+ laufend)\n";
+    for (std::size_t i = 0; i < runs.size(); ++i) {
+        std::string line;
+        for (const uhrwerk::JournalStep& step : runs[i].path) {
+            line += (line.empty() ? "" : " → ") + stage_title(step.stage) + " (" +
+                    uhrwerk::format_script_date(step.date) + ")";
+        }
+        for (const uhrwerk::EventRecord& r : runs[i].turning) {
+            const uhrwerk::EventDef& e = w.events[static_cast<std::size_t>(r.event)];
+            line += "; " +
+                    (r.state != uhrwerk::kNone ? w.states[static_cast<std::size_t>(r.state)].tag + " " : "") +
+                    e.title + ": " + e.options[static_cast<std::size_t>(r.option)].id;
+        }
+        if (!line.empty()) {
+            std::cout << "  " << o.seed + static_cast<std::uint64_t>(i) << ": " << line << '\n';
+        }
+    }
+    if (!runs.empty() && !w.law_groups.empty()) {
+        std::cout << "Gesetze am Ende (Seed " << o.seed << "):";
+        for (std::size_t g = 0; g < w.law_groups.size(); ++g) {
+            std::cout << (g == 0 ? " " : "; ") << w.law_groups[g].name << " ";
+            for (std::size_t k = 0; k < w.law_groups[g].options.size(); ++k) {
+                std::cout << (k == 0 ? "" : ", ") << w.law_groups[g].options[k].id << " "
+                          << runs[0].laws[g][k];
+            }
+        }
+        std::cout << '\n';
+    }
+
+    using uhrwerk::EventCheck;
+    const std::vector<uhrwerk::OutcomeCorridor>& corridors =
+        strategy != nullptr ? strategy->outcomes : targets.outcomes;
+    if (journal != nullptr) {
+        rows.clear();
+        rows.push_back({"Ausgang", "Läufe", "Anteil", "Ziel"});
+        const std::int64_t total = std::max<std::int64_t>(1, seeds);
+        for (std::size_t s = 0; s < journal->stages.size(); ++s) {
+            if (!journal->stages[s].outcome) {
+                continue;
+            }
+            std::string target = "–";
+            for (const uhrwerk::OutcomeCorridor& c : corridors) {
+                if (c.stage == static_cast<Index>(s)) {
+                    target = format_share_range(c.share);
+                }
+            }
+            bool marked = false;
+            for (const uhrwerk::EventViolation& v : summary.violations) {
+                marked =
+                    marked ||
+                    (v.check == EventCheck::Outcome && corridors[v.index].stage == static_cast<Index>(s)) ||
+                    (v.check == EventCheck::Determined && v.index == s);
+            }
+            rows.push_back(
+                {journal->stages[s].title + " (" + journal->stages[s].rating + ")",
+                 std::to_string(summary.outcomes[s]),
+                 format_share(Fixed::from_ratio(summary.outcomes[s], total)) + (marked ? " !" : ""), target});
+        }
+        rows.push_back({"offen", std::to_string(summary.open),
+                        format_share(Fixed::from_ratio(summary.open, total)), "–"});
+        std::cout << '\n';
+        print_table(rows, {false, true, true, true}, 0);
+    }
+    if (!targets.events.empty()) {
+        rows.clear();
+        rows.push_back({"Ereignis", "Option", "bis", "gemessen", "Ziel"});
+        for (std::size_t c = 0; c < targets.events.size(); ++c) {
+            const uhrwerk::EventCorridor& e = targets.events[c];
+            const uhrwerk::EventDef& def = w.events[static_cast<std::size_t>(e.event)];
+            const bool marked = std::any_of(summary.violations.begin(), summary.violations.end(),
+                                            [&](const uhrwerk::EventViolation& v) {
+                                                return v.check == EventCheck::Event && v.index == c;
+                                            });
+            rows.push_back(
+                {def.id,
+                 e.option != uhrwerk::kNone ? def.options[static_cast<std::size_t>(e.option)].id : "–",
+                 e.has_until ? uhrwerk::format_script_date(e.until) : "–",
+                 format_share(summary.events[c]) + (e.states ? " der Staaten" : " der Läufe") +
+                     (marked ? " !" : ""),
+                 strategy != nullptr ? "–" : format_share_range(e.share)});
+        }
+        std::cout << '\n';
+        print_table(rows, {false, false, false, true, true}, 0);
+    }
+
+    std::cout << '\n';
+    if (summary.violations.empty()) {
+        std::cout << "Verstöße: keine – alle Korridore erfüllt.\n";
+        return kExitOk;
+    }
+    std::cout << "Verstöße (" << summary.violations.size() << ", mit ! markiert):\n";
+    for (const uhrwerk::EventViolation& v : summary.violations) {
+        switch (v.check) {
+        case EventCheck::Outcome:
+            std::cout << "  Ausgang " << stage_title(corridors[v.index].stage) << " in "
+                      << format_share(v.value) << " der Läufe, Ziel "
+                      << format_share_range(corridors[v.index].share) << '\n';
+            break;
+        case EventCheck::Determined:
+            std::cout << "  derselbe Ausgang in allen Läufen: " << stage_title(static_cast<Index>(v.index))
+                      << '\n';
+            break;
+        case EventCheck::Event:
+            std::cout << "  Ereignis " << w.events[static_cast<std::size_t>(targets.events[v.index].event)].id
+                      << ": " << format_share(v.value) << ", Ziel "
+                      << format_share_range(targets.events[v.index].share) << '\n';
+            break;
+        }
+    }
+    return kExitDataError;
+}
+
 int cmd_determinismus(const Options& o, const fs::path& data_dir) {
     // Jeder Lauf lädt die Daten neu – so fällt auch ein nicht deterministischer Lader auf.
     auto world_a = load(data_dir, o.scenario, true);
@@ -3006,6 +3240,9 @@ int run(int argc, char** argv) {
         } else if (o.command == "krieg") {
             check_applicable(
                 o, {"--daten", "--szenario", "--tage", "--seed", "--threads", "--seeds", "--ziele"});
+        } else if (o.command == "ereignisse") {
+            check_applicable(o, {"--daten", "--szenario", "--seed", "--threads", "--seeds", "--ziele",
+                                 "--strategie", "--bis"});
         } else if (o.command == "speichertest") {
             check_applicable(o, {"--daten", "--szenario", "--jahre", "--tage", "--seed", "--threads",
                                  "--testbefehle", "--punkte"});
@@ -3052,6 +3289,9 @@ int run(int argc, char** argv) {
         }
         if (o.command == "krieg") {
             return cmd_krieg(o, data_dir);
+        }
+        if (o.command == "ereignisse") {
+            return cmd_ereignisse(o, data_dir);
         }
         if (o.command == "speichertest") {
             return cmd_speichertest(o, data_dir);

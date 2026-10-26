@@ -3,6 +3,7 @@
 // Inhaltsbereich ereignisse und Spielstand Format 5 (Abschnitt 8).
 
 #include "test_hilfen.hpp"
+#include "uhrwerk/event_lab.hpp"
 #include "uhrwerk/events.hpp"
 #include "uhrwerk/savegame.hpp"
 #include "uhrwerk/simulation.hpp"
@@ -10,6 +11,7 @@
 #include <algorithm>
 #include <cstdint>
 #include <doctest/doctest.h>
+#include <filesystem>
 #include <string>
 #include <string_view>
 #include <utility>
@@ -1098,5 +1100,84 @@ ereignis x { titel = "x" text = "x" art = dynamisch wer = welt bedingung { journ
                                "abstimmung v { titel = \"v\" parlament = landtag neigung = { casino = 1 } }");
         uhrwerk::LoadResult result = uhrwerk::load_world(data.dir().path(), "jahresbeginn_1650");
         CHECK(testhilfen::has_issue(result, "unbekannte Fraktion 'casino' des Parlaments landtag"));
+    }
+}
+
+// ─── Schritt a5: Ereignislabor ─────────────────────────────────────────────
+
+TEST_CASE("Ereignisse: Ereignislabor") {
+    testhilfen::TempDir dir(true);
+    std::filesystem::copy(testhilfen::fixture_dir().parent_path() / "daten_ereignisse", dir.path(),
+                          std::filesystem::copy_options::recursive |
+                              std::filesystem::copy_options::overwrite_existing);
+    const uhrwerk::LoadResult loaded = uhrwerk::load_world(dir.path());
+    INFO(testhilfen::issues_text(loaded));
+    REQUIRE(loaded.ok());
+    const World& w = *loaded.world;
+    const uhrwerk::EventTargetsResult targets =
+        uhrwerk::load_event_targets(dir / "common/ereignisziele_westfaelischer_frieden.chron", w);
+    const std::string first_error = targets.errors.empty() ? std::string() : targets.errors.front();
+    INFO(first_error);
+    REQUIRE(targets.ok());
+    const uhrwerk::EventTargets& t = targets.targets;
+    CHECK(t.until == uhrwerk::Date{1650, 12, 31});
+    CHECK(t.journal == w.find_journal("revolution"));
+    CHECK(t.outcomes.size() == 2);
+    CHECK(t.events.size() == 2);
+    CHECK(t.events[0].states);
+    REQUIRE(t.strategies.size() == 2);
+    CHECK(t.strategies[1].choices.size() == 2);
+
+    std::vector<uhrwerk::EventLabRun> runs;
+    for (std::uint64_t seed = 1648; seed < 1652; ++seed) {
+        runs.push_back(uhrwerk::run_event_lab(w, uhrwerk::SimConfig{seed, 1}, t));
+    }
+    // Gleicher Seed, gleicher Lauf.
+    const uhrwerk::EventLabRun again = uhrwerk::run_event_lab(w, uhrwerk::SimConfig{1648, 2}, t);
+    CHECK(again.outcome == runs[0].outcome);
+    CHECK(again.path == runs[0].path);
+    for (const uhrwerk::EventLabRun& run : runs) {
+        CHECK(run.outcome != kNone);
+        CHECK(run.path.size() == 3);
+        REQUIRE(run.turning.size() == 1);
+        CHECK(run.events[1] == Fixed::one()); // die Kaiserkrone wird immer angeboten
+    }
+    const uhrwerk::EventLabSummary summary = uhrwerk::summarize_event_lab(w, t, nullptr, runs);
+    CHECK(summary.open == 0);
+
+    // Strategie krone: immer das Reich, gegen den Korridor 100 %.
+    std::vector<uhrwerk::EventLabRun> crown;
+    for (std::uint64_t seed = 1648; seed < 1652; ++seed) {
+        crown.push_back(uhrwerk::run_event_lab(w, uhrwerk::SimConfig{seed, 1}, t, &t.strategies[0]));
+    }
+    CHECK(uhrwerk::summarize_event_lab(w, t, &t.strategies[0], crown).violations.empty());
+    // Dieselben Läufe gegen die Korridore ohne Strategie: das Reich in allen Läufen ist zu viel und
+    // festgelegt.
+    const uhrwerk::EventLabSummary wrong = uhrwerk::summarize_event_lab(w, t, nullptr, crown);
+    CHECK(std::any_of(wrong.violations.begin(), wrong.violations.end(), [](const uhrwerk::EventViolation& v) {
+        return v.check == uhrwerk::EventCheck::Determined;
+    }));
+    CHECK(std::any_of(wrong.violations.begin(), wrong.violations.end(), [](const uhrwerk::EventViolation& v) {
+        return v.check == uhrwerk::EventCheck::Outcome;
+    }));
+
+    SUBCASE("Fehler der Korridore") {
+        for (const auto& [text, message] :
+             {std::pair{"ausgang reich { anteil = { 0 1 } }", "Block 'labor' fehlt"},
+              std::pair{
+                  "labor { bis = 1650.12.31 journal = revolution }\nausgang himmel { anteil = { 0 1 } }",
+                  "unbekannter Ausgang 'himmel'"},
+              std::pair{
+                  "labor { bis = 1650.12.31 }\nereignis maerz.forderungen { option = nie anteil = { 0 1 } }",
+                  "unbekannte Option 'nie'"},
+              std::pair{"labor { bis = 1650.12.31 }\nstrategie s { spieler = XYZ }", "bestehenden Staat"},
+              std::pair{"labor { bis = 1650.12.31 }\nereignis krone.angebot { anteil = { 0 2 } }",
+                        "innerhalb von 0 bis 1"}}) {
+            CAPTURE(text);
+            const uhrwerk::EventTargetsResult r = uhrwerk::parse_event_targets(text, w);
+            CHECK_FALSE(r.ok());
+            CHECK(std::any_of(r.errors.begin(), r.errors.end(),
+                              [&](const std::string& e) { return e.find(message) != std::string::npos; }));
+        }
     }
 }

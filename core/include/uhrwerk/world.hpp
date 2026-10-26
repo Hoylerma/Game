@@ -1155,6 +1155,7 @@ struct World {
     std::vector<TimedEffect> timed_effects; // seit a2: befristete Wirkungen in der Reihenfolge ihres Beginns
     Index event_player = -1;                // seit a2: Staat, dessen Ereignisse auf die Wahl warten (Befehl)
     std::vector<Revolt> revolts;            // seit a3: laufende Aufstände in der Reihenfolge ihres Beginns
+    std::vector<RevoltRecord> revolt_history; // seit a5: beendete Aufstände in zeitlicher Folge
     std::vector<JournalState> journal_states; // seit a4: je Journal
     std::vector<JournalStep> journal_history; // seit a4: erreichte Stufen in zeitlicher Folge
     std::vector<VoteResult> vote_results;     // seit a4: Abstimmungen in zeitlicher Folge

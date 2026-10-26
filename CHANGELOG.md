@@ -51,6 +51,12 @@ freigegeben; Stand je Schritt in Abschnitt 13 dort.
   Bundesversammlung und erklären Kriege (`krieg = TAG`). Neue Bedingungen `journal_<id>`,
   `abstimmung_<id>`, `bevoelkerungsanteil`, `staaten`, `bundesversammlung`; `info` zählt Journale.
   1648 bitgleich.
+- **Ereignislabor (Schritt a5):** `uhrwerk-cli ereignisse` rechnet ein Lesezeichen je Seed ohne
+  Spieler oder mit einer Strategie für einen Staat (`--strategie`) bis zum Ende der Korridore und
+  berichtet Ausgang und Weg des Journals, Ereignisse, Wendepunkte, Aufstände, Unruhe und Gesetze;
+  Korridore in `common/ereignisziele_<szenario>.chron`, Exitcode 1 bei Verstößen. Beendete Aufstände
+  stehen im Zustand. Eine kleine Revolution auf der Test-Fixture (`tests/daten_ereignisse`) mit drei
+  CTests; 1648 bitgleich.
 
 ### Meilenstein M10 – Militär und Einigungskriege
 

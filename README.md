@@ -241,6 +241,7 @@ Arbeitsverzeichnis), alternativ `--daten DIR`:
 ./build/release/cli/uhrwerk-cli zoll --szenario voelkerfruehling            # Zolllabor: Beitritte zum Zollverein
 ./build/release/cli/uhrwerk-cli krieg --szenario voelkerfruehling           # Kriegslabor: Kriege ohne Spieler
 ./build/release/cli/uhrwerk-cli krieg --szenario koeniggraetz --seeds 16     # Kriegslabor: Deutscher Krieg 1866
+./build/release/cli/uhrwerk-cli ereignisse --daten build/agent-clang/tests/ereignis_daten --strategie krone  # Ereignislabor (Test-Fixture)
 ```
 
 Exitcodes: `0` in Ordnung, `1` Daten- oder Determinismusfehler oder verfehlte Zielwerte (`bilanz`, `wahl`, `zoll`, `krieg`),

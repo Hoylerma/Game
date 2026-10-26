@@ -1349,6 +1349,30 @@ ein Ziel ohne Text oder ohne genau eine Art (bedingung oder zaehle mit soll), ei
 oder zu einer unbekannten Stufe, ein Ausgang ohne Wertung, unbekannte Parlamente und Fraktionen und
 Anteile außerhalb 0…1. Im Kern: `World::journals` (`JournalDef`), `World::votes` (`VoteDef`).
 
+### 3.36 `common/ereignisziele_<szenario>.chron` (seit M11a5)
+
+Korridore des Ereignislabors (`uhrwerk-cli ereignisse`, [ereignisse.md](ereignisse.md) Abschnitt 7).
+
+```text
+labor {
+    bis     = 1851.12.31            # Pflicht: Ende der Läufe (überschreibbar mit --bis)
+    journal = revolution            # optional: Journal, dessen Ausgänge zählen
+    nicht_festgelegt = ja           # optional: kein Ausgang in allen Läufen (ohne Strategie)
+}
+ausgang gegenrevolution { anteil = { 0.5 0.9 } }     # Anteil der Läufe mit diesem Ausgang
+ereignis kaiserwahl { anteil = { 0.6 1 } }           # Anteil der Läufe, in denen es eintritt
+ereignis maerz.forderungen { option = gewaehren  bis = 1848.04.30  staaten = { 0.7 1 } }
+                                                     # mittlerer Anteil der Staaten mit Ereignis und Option
+strategie krone {
+    spieler = PRU                                    # Pflicht: besteht zum Start
+    wahl    = { kaiserkrone.angebot = annehmen }     # bevorzugte Option je Ereignis
+    ausgang reich_paulskirche { anteil = { 0.5 1 } } # Korridore mit dieser Strategie
+}
+```
+
+Fehler (Exitcode 1): unbekannte Felder, Journale, Ausgänge, Ereignisse, Optionen und Staaten, ein Bereich
+außerhalb von 0 bis 1, ein Ereignis ohne genau eines von `anteil` und `staaten`, ein Ende vor dem Start.
+
 ## 4. Startzustand
 
 Für jeden Ort entstehen Bevölkerungsblöcke **in dieser Reihenfolge**: für jeden Beruf (Ladereihenfolge), darin für jede Konfession des Ortes (Reihenfolge im `konfession`-Block) und darin für jede Kultur (Reihenfolge im `kultur`-Block, seit M4):

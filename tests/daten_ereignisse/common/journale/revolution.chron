@@ -1,0 +1,18 @@
+# Testdaten des Ereignislabors (seit M11, Schritt a5).
+journal revolution {
+    titel  = "Revolution (Test)"
+    beginn = 1648.11.01
+    ende   = 1650.12.31
+    stufe maerz {
+        titel = "Märzunruhen"
+        ziel { text = "Märzministerien" zaehle { merkmal = maerzministerium } soll = 3 }
+        weiter { zu = kaiserfrage  wenn { datum >= 1649.03.01 } }
+    }
+    stufe kaiserfrage {
+        titel = "Kaiserfrage"
+        weiter { zu = reich  wenn { welt_merkmal = krone_angenommen } }
+        weiter { zu = gegenrevolution  wenn { welt_merkmal = reaktion } }
+    }
+    ausgang reich           { titel = "Reich" wertung = gelungen }
+    ausgang gegenrevolution { titel = "Gegenrevolution" wertung = gescheitert standard = ja }
+}

@@ -619,6 +619,20 @@ Zieldatei.
 
 `--bis 1871.07.01` rechnet die deutsche Frage (langsamer, nicht in jedem CI-Lauf).
 
+**Umsetzung (seit a5, `core/src/event_lab.cpp`, `uhrwerk-cli ereignisse`):** Die Korridore stehen in
+`common/ereignisziele_<szenario>.chron` (chronik-skript.md 3.36): ein Block `labor` mit Ende, Journal
+und `nicht_festgelegt`, Korridore je Ausgang (`ausgang <id> { anteil = { von bis } }`) und je Ereignis
+(Anteil der Läufe mit dem Ereignis oder, mit `staaten`, mittlerer Anteil der Staaten mit Ereignis und
+Option bis zu einem Datum) und Strategien (`strategie <id> { spieler = TAG wahl = { <ereignis> =
+<option> … } ausgang … }`). Mit `--strategie` wartet der Staat der Strategie (Befehl
+`Ereignisspieler`) und das Labor wählt für ihn: die bevorzugte Option, sonst die mit dem größten
+Gewicht; geprüft werden dann nur die Ausgänge der Strategie. Der Bericht zeigt je Lauf Ausgang und
+Datum, Ereignisse je Art, Aufstände je Ausgang, Unruhe (Median am Ende, höchste an einem
+Monatsersten), den Weg des Journals und die Wendepunkte, dazu die Gesetze am Ende des ersten Laufs.
+Die CTests `ereignisse_fixture`, `ereignisse_fixture_krone` und `ereignisse_fixture_reaktion` rechnen
+eine kleine Revolution auf der Test-Fixture (`tests/daten_ereignisse`); die Korridore 1848 kommen mit
+dem Inhalt (b1, b2).
+
 ## 8. Zustand, Kern und Spielstand
 
 - **Zustand** (nur in Welten mit Ereignissen; 1648 bleibt bitgleich): eingetretene Ereignisse je
@@ -743,6 +757,7 @@ Weitere Tests:
 | Schritt | Stand |
 |---|---|
 | – | Entscheidungen wie empfohlen freigegeben; Umsetzung beginnt mit a1 |
+| a5 | **erledigt:** Ereignislabor `uhrwerk-cli ereignisse` (Korridore je Ausgang und Ereignis, `nicht_festgelegt`, Strategien mit bevorzugten Optionen, `--bis`), Bericht je Lauf und über alle Läufe, Exitcode 1 bei Verstößen; beendete Aufstände im Zustand (`revolt_history`, Inhaltsstand 5); Test-Fixture `tests/daten_ereignisse` mit kleiner Revolution und drei CTests (ohne Spieler, `krone`, `reaktion`); Unit-Tests der Korridore |
 | a4 | **erledigt:** Journale (`common/journale/*.chron`) mit Stufen, Zielen, Übergängen und Ausgängen (Wertung, Ausgang am Ende, Wirkungen), Bedingung und Wirkung `journal_<id>`; Abstimmungen (`common/abstimmungen.chron`) nach Fraktionen mit den Sitzen der letzten Wahl, Bedingung `abstimmung_<id> = angenommen|abgelehnt`, Wirkungen bei Annahme und Ablehnung; Bundesversammlung `ruht`/`tagt` (keine Anträge, keine Abstimmung); Wirkungen `antrag { … }` und `krieg = TAG`; Bedingungen `bevoelkerungsanteil` und `staaten`; `info` zählt Journale und Abstimmungen. Inhaltsstand 4. Tests in `test_events.cpp`; 1648 bitgleich |
 | a3 | **erledigt:** Zustimmung und Unruhe nähern sich am Monatsersten ihren Zielwerten (Wünsche der Gruppen; Not, Teuerung, Verfassung, Zensur über `unruhe` an den Gesetzesoptionen, Ansteckung über Nachbarn und das Welt-Merkmal, Zustimmung nach Einfluss); Steuerverweigerung und Auswanderung bei hoher Unruhe; Aufstände mit wöchentlichem Kräftevergleich (Mobilisierung, Elitenspaltung, Loyalität, Intervention) und drei Ausgängen mit Folgeereignissen; Wirkungen `aufstand` und `intervention`, Bedingung `aufstand = ja`; alle Faktoren als Spielwerte in `ereignisse.chron`. Inhaltsstand 3. Tests in `test_events.cpp`; 1648 bitgleich |
 | a2 | **erledigt:** tägliche Auslösung mit Wartezeit, Termin und Datumsfenster, Einmaligkeit und Wiederholung mit Abstand, Folgeereignisse (auch ohne Frist am selben Tag, `nur_folge`), Wahl nach Gewicht mit Zuschlägen aus dem Strom `Ereignisse`, offene Ereignisse des Spielers mit Frist, Befehle `Ereigniswahl` und `Ereignisspieler`, alle Wirkungen aus 3.3 außer denen späterer Schritte, befristete Wirkungen (`befristet`, Steuerertrag, Moral, Unruhe, Beziehung); Bedingungen über Gruppen, Lebensstandard, Preise, Krieg, Bund, Zoll, Beziehung, Sitze, Heer und Haushalt. Inhaltsbereich Stand 2. Tests in `test_events.cpp` (Auslösung, Folgen, Wirkungen, Wahl des Spielers, Frist, Spielstand und Wiederholung mit offenem Ereignis, Determinismus mit 1 und 4 Threads); 1648 bitgleich |

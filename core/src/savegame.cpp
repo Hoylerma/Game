@@ -37,9 +37,10 @@ constexpr std::uint64_t kMaxPayload = std::uint64_t{1} << 31;
 /// Stand des Militärs im Zustand (seit M10, Inhaltsbereich militaer): 1 = Schritt a1 (Garnisonen).
 constexpr std::uint64_t kMilitaryContentVersion = 8;
 
-/// Stand der Ereignisse im Zustand (seit M11, Inhaltsbereich ereignisse): 1 = Schritt a1.
-constexpr std::uint64_t kEventContentVersion =
-    4; // 2 seit a2 (Auslösung, Befristung, Spieler), 3 seit a3, 4 seit a4
+/// Stand der Ereignisse im Zustand (seit M11, Inhaltsbereich ereignisse): 1 = Schritt a1, 2 = a2 (Auslösung,
+/// Befristung, Spieler), 3 = a3 (Unruhe, Aufstände), 4 = a4 (Journale, Abstimmungen), 5 = a5 (beendete
+/// Aufstände).
+constexpr std::uint64_t kEventContentVersion = 5;
 
 bool fail(std::string* error, std::string message) {
     if (error != nullptr) {
@@ -1109,6 +1110,14 @@ std::string validate_state(const Simulation& sim) {
         for (const VoteResult& r : w.vote_results) {
             if (!in(r.vote, w.votes.size()) || !is_valid(r.date) || r.yes < 0 || r.no < 0) {
                 return "Abstimmung ungültig";
+            }
+        }
+        for (const RevoltRecord& r : w.revolt_history) {
+            if (!in(r.state, S) || !none_or_in(r.helper, S) ||
+                static_cast<std::size_t>(r.kind) >= kRevoltKinds ||
+                static_cast<int>(r.outcome) > static_cast<int>(RevoltOutcome::Victory) ||
+                !is_valid(r.start) || !is_valid(r.end) || r.end < r.start) {
+                return "beendeter Aufstand ungültig";
             }
         }
         if (w.diet_suspended > 1) {

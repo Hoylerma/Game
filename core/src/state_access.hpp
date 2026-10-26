@@ -422,6 +422,15 @@ template <typename Sim, typename V> void StateAccess::visit(Sim& sim, V& v) {
             v.field("staerke", r.strength);
             v.field("helfer", r.helper);
         });
+        // Seit Schritt a5: beendete Aufstände.
+        list(v, "aufstaende_beendet", w.revolt_history, Extent::State, [&](auto& r) {
+            v.field("staat", r.state);
+            v.field("art", r.kind);
+            v.field("beginn", r.start);
+            v.field("ende", r.end);
+            v.field("ausgang", r.outcome);
+            v.field("helfer", r.helper);
+        });
         // Seit Schritt a4: Journale, Abstimmungen, Ruhen der Bundesversammlung.
         list(v, "journale", w.journal_states, Extent::Content, [&](auto& j) {
             v.field("stufe", j.stage);

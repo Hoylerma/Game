@@ -639,6 +639,8 @@ public:
     void end_revolt(std::size_t index, RevoltOutcome outcome) {
         const Revolt revolt = world_.revolts[index];
         world_.revolts.erase(world_.revolts.begin() + static_cast<std::ptrdiff_t>(index));
+        world_.revolt_history.push_back(
+            RevoltRecord{revolt.state, revolt.kind, revolt.start, world_.date, outcome, revolt.helper});
         const EventRules& r = world_.event_rules;
         State& s = world_.states[at(revolt.state)];
         switch (outcome) {

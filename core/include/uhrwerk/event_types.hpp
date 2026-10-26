@@ -387,6 +387,18 @@ struct Revolt {
     friend bool operator==(const Revolt&, const Revolt&) = default;
 };
 
+/// Beendeter Aufstand mit Ausgang (Zustand, seit a5; Labor und Anzeige).
+struct RevoltRecord {
+    Index state = -1;
+    RevoltKind kind = RevoltKind::Barricades;
+    Date start;
+    Date end;
+    RevoltOutcome outcome = RevoltOutcome::Suppression;
+    Index helper = -1;
+
+    friend bool operator==(const RevoltRecord&, const RevoltRecord&) = default;
+};
+
 /// Merkmal (Flag) eines Staates oder der Welt (state = -1), Zustand.
 struct EventFlag {
     Index state = -1;
