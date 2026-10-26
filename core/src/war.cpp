@@ -9,6 +9,7 @@
 #include "uhrwerk/customs.hpp"
 #include "uhrwerk/date.hpp"
 #include "uhrwerk/diplomacy.hpp"
+#include "uhrwerk/events.hpp"
 #include "uhrwerk/military.hpp"
 
 #include <algorithm>
@@ -127,8 +128,10 @@ Fixed strength(const World& world, const Army& army, Fixed deployed) {
     const Fixed firepower = world.states[at(army.state)].army.firepower;
     // Führung des Befehlshabers (seit b1): 1 ohne Befehlshaber, dann ist der Faktor genau 1.
     const Fixed command = Fixed::one() + world.military_rules.leadership * (army.leadership - Fixed::one());
-    return (army.soldiers * firepower + army.guns * world.military_rules.gun_value) * deployed * army.morale *
-           command;
+    const Fixed force = (army.soldiers * firepower + army.guns * world.military_rules.gun_value) * deployed *
+                        army.morale * command;
+    // Befristete Wirkungen der Ereignisse (seit M11, ereignisse.md Abschnitt 3.7): Moral ±x.
+    return world.timed_effects.empty() ? force : force * timed_morale_factor(world, army.state);
 }
 
 /// Rückzug in einen Nachbarort: zugänglich, ohne Gegner, bevorzugt von der eigenen Seite gehalten, dann

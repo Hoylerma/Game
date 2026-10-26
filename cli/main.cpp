@@ -30,6 +30,7 @@
 #include <filesystem>
 #include <fstream>
 #include <iostream>
+#include <map>
 #include <optional>
 #include <set>
 #include <string>
@@ -500,6 +501,46 @@ std::string politics_summary(const World& w) {
     return text;
 }
 
+/// Ereignisse (seit M11, docs/technik/ereignisse.md): Zahl je Art und Jahrzehnt, Gesetze zum Start.
+std::string events_summary(const World& w) {
+    if (!w.event_rules.active) {
+        return "keine (vor dem 'seit' in common/ereignisse.chron)";
+    }
+    std::array<std::size_t, 3> kinds{};
+    std::map<int, std::size_t> decades; // Jahrzehnt des Datums oder Termins; -1 ohne Datum
+    for (const uhrwerk::EventDef& e : w.events) {
+        kinds[static_cast<std::size_t>(e.kind)] += 1;
+        const int year = e.has_date ? e.date.year : e.has_fixed_date ? e.fixed_date.year : -1;
+        decades[year < 0 ? -1 : year / 10 * 10] += 1;
+    }
+    std::string text = plural(w.events.size(), "Ereignis", "Ereignisse") + " (" + std::to_string(kinds[0]) +
+                       " historisch, " + std::to_string(kinds[1]) + " dynamisch, " +
+                       std::to_string(kinds[2]) + " atmosphärisch), Frist " +
+                       plural(static_cast<std::size_t>(w.event_rules.deadline), "Tag", "Tage");
+    if (!decades.empty()) {
+        std::string line;
+        for (const auto& [decade, count] : decades) {
+            line += (line.empty() ? "" : ", ") +
+                    (decade < 0 ? std::string("ohne Datum") : std::to_string(decade) + "er") + " " +
+                    std::to_string(count);
+        }
+        text += "\n              je Jahrzehnt: " + line;
+    }
+    for (std::size_t g = 0; g < w.law_groups.size(); ++g) {
+        const uhrwerk::LawGroup& group = w.law_groups[g];
+        std::vector<std::size_t> counts(group.options.size());
+        for (const uhrwerk::State& s : w.states) {
+            counts[static_cast<std::size_t>(s.laws[g])] += 1;
+        }
+        std::string line;
+        for (std::size_t o = 0; o < group.options.size(); ++o) {
+            line += (line.empty() ? "" : ", ") + group.options[o].name + " " + std::to_string(counts[o]);
+        }
+        text += "\n              " + group.name + ": " + line;
+    }
+    return text;
+}
+
 /// Zollunionen mit Leitmacht, Tarif und Mitgliedern; Staaten ohne Union bilden je ein eigenes Zollgebiet
 /// (seit M9, docs/technik/diplomatie.md Abschnitt 3.1).
 std::string customs_summary(const World& w) {
@@ -853,8 +894,9 @@ Date date_after(const Date& start, std::int64_t days) {
 /// Anträge, Forderungen und Manöver. Mit Militär (seit M10, Schritt a2) Mobilmachung und Abrüstung und
 /// Märsche der Heere (Nummer nach den Garnisonen, meist mit dem eigenen Staat, Ziel zur Hälfte ein Ort
 /// dieses Staates), seit Schritt a3 auch Kriegserklärungen, seit a4 mit Kriegszielen, dazu
-/// Friedensangebote, Kriegsziele und der Generalstab. Ohne Parlamente, Zollunionen, Bund und Militär
-/// bleibt die Folge der Zufallszahlen wie bisher.
+/// Friedensangebote, Kriegsziele und der Generalstab; mit Ereignissen (seit M11) Ereignisspieler und
+/// Ereigniswahl. Ohne Parlamente, Zollunionen, Bund, Militär und Ereignisse bleibt die Folge der
+/// Zufallszahlen wie bisher.
 std::vector<uhrwerk::LoggedCommand> make_test_commands(const World& w, std::uint64_t seed, std::int64_t count,
                                                        std::int64_t first_day, std::int64_t end_day) {
     std::vector<uhrwerk::LoggedCommand> list;
@@ -869,6 +911,7 @@ std::vector<uhrwerk::LoggedCommand> make_test_commands(const World& w, std::uint
     const bool diplomacy = uhrwerk::diplomacy_active(w);
     const bool diet = diplomacy && !w.diet.id.empty();
     const bool military = uhrwerk::military_active(w);
+    const bool events = w.event_rules.active;
     std::vector<std::vector<Index>> state_locations(w.states.size());
     if (military) {
         for (std::size_t l = 0; l < w.locations.size(); ++l) {
@@ -965,6 +1008,17 @@ std::vector<uhrwerk::LoggedCommand> make_test_commands(const World& w, std::uint
                         static_cast<Index>(rng.below(static_cast<std::uint32_t>(w.locations.size()) + 2)) - 1;
                 }
             }
+        }
+        // Ereignisse (seit M11, Schritt a2): Spieler der Ereignisse (Staat −1 bis hinter den letzten) und
+        // Ereigniswahl (Ereignis 0 bis hinter das letzte, Option −1 bis 3; meist ungültig).
+        if (events && rng.below(8) == 0) {
+            const bool player = rng.below(4) == 0;
+            c.command.type = player ? uhrwerk::CommandType::EventPlayer : uhrwerk::CommandType::EventChoice;
+            c.command.state = static_cast<Index>(rng.below(states + 2)) - 1;
+            c.command.value =
+                player ? Fixed{}
+                       : Fixed::from_int(rng.below(static_cast<std::uint32_t>(w.events.size()) + 2));
+            c.command.target = player ? uhrwerk::kNone : static_cast<Index>(rng.below(5)) - 1;
         }
         list.push_back(c);
     }
@@ -1142,6 +1196,10 @@ int cmd_pruefen(const Options& o, const fs::path& data_dir) {
                   << plural(w.interest_groups.size(), "Interessengruppe", "Interessengruppen") << ", "
                   << plural(w.parliaments.size(), "Parlament", "Parlamente");
     }
+    if (w.event_rules.active) {
+        std::cout << ", " << plural(w.law_groups.size(), "Gesetzesgruppe", "Gesetzesgruppen") << ", "
+                  << plural(w.events.size(), "Ereignis", "Ereignisse");
+    }
     std::cout << ".\n";
     return kExitOk;
 }
@@ -1179,6 +1237,7 @@ int cmd_info(const Options& o, const fs::path& data_dir) {
               << "Zollunionen:  " << customs_summary(w) << '\n'
               << "Diplomatie:   " << diplomacy_summary(w) << '\n'
               << "Militär:      " << military_summary(w) << '\n'
+              << "Ereignisse:   " << events_summary(w) << '\n'
               << "Bevölkerung:  " << format_int(total.round()) << "\n\n";
 
     std::vector<std::vector<std::string>> rows;

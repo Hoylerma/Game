@@ -86,6 +86,14 @@ Index World::find_customs_union(std::string_view id) const {
     return find_by(customs_unions, id, [](const CustomsUnion& u) -> std::string_view { return u.id; });
 }
 
+Index World::find_law_group(std::string_view id) const {
+    return find_by(law_groups, id, [](const LawGroup& g) -> std::string_view { return g.id; });
+}
+
+Index World::find_event(std::string_view id) const {
+    return find_by(events, id, [](const EventDef& e) -> std::string_view { return e.id; });
+}
+
 Index World::find_market(std::string_view id) const {
     return find_by(markets, id, [](const Market& m) -> std::string_view { return m.id; });
 }

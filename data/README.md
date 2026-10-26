@@ -400,6 +400,17 @@ Kriegslesezeichen nutzen die Daten von 1848 und die datierte Historie bis zu ihr
 1848 stehen 53 Garnisonen mit zusammen 382.528 Soldaten. Das Lesezeichen 1648 hat kein Militär (vor dem
 `seit`); seine Prüfsumme bleibt.
 
+**Ereignisse und Gesetze** (seit M11, Schritt a1, [ereignisse.md](../docs/technik/ereignisse.md) Abschnitte 3 und 4):
+
+| Datei | Inhalt |
+|---|---|
+| `common/gesetze.chron` | drei Gesetzesgruppen seit 1815: Presse (Vorzensur, Pressegesetz, Pressefreiheit; Standard Vorzensur), Vereine (Verbot, Genehmigung, Vereinsfreiheit; Standard Verbot), Grundlasten (Grundherrschaft, Ablösung, frei; Standard Ablösung) |
+| `tabellen/staaten_historie.csv` (Felder `gesetz_<gruppe>`) | Grundherrschaft 1848 in Österreich, Bayern und den beiden Mecklenburg, Ablösung in Bayern ab 4.6.1848 und Österreich ab 7.9.1848; Preußisches Vereinsgesetz 11.3.1850, Pressegesetz 12.5.1851; Bundespresse- und Bundesvereinsgesetz 6./13.7.1854 für die übrigen Staaten. 82 Zeilen, ungeprüft nach Literaturkenntnis |
+| `common/interessengruppen.chron` (`wuensche`) | Wünsche der elf Gruppen an die drei Gesetzesgruppen (−3 … +3), Spielwerte |
+| `common/ereignisse.chron` | Ereignisse ab 1848.01.01, Frist der Wahl 30 Tage; die Ereignisse selbst (`common/ereignisse/`) folgen ab Schritt b1 |
+
+Das Lesezeichen 1648 hat keine Ereignisse (vor dem `seit`); seine Prüfsumme bleibt.
+
 ## Bekannte Lücken und Vereinfachungen
 
 - **Orte ohne Daten:** Im Lesezeichen 1648 haben 4.482 der 4.542 Orte keinen Besitzer, keine

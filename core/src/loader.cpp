@@ -1,5 +1,6 @@
 #include "uhrwerk/loader.hpp"
 
+#include "event_loader.hpp"
 #include "uhrwerk/economy.hpp"
 #include "uhrwerk/population.hpp"
 #include "uhrwerk/script.hpp"
@@ -158,6 +159,7 @@ public:
         return std::any_of(out_.begin(), out_.end(), [](const LoadIssue& i) { return i.fatal; });
     }
     std::size_t size() const { return out_.size(); }
+    std::vector<LoadIssue>& out() { return out_; }
     /// Ordnet die Meldungen ab Position first stabil nach Zeile (Meldungen einer Datei).
     void sort_by_line_from(std::size_t first) {
         std::stable_sort(out_.begin() + static_cast<std::ptrdiff_t>(first), out_.end(),
@@ -649,6 +651,9 @@ public:
         process("common/beduerfnisse.chron", [&](const SourceFile& f) { load_needs(f); });
         process("common/betriebe.chron", [&](const SourceFile& f) { load_businesses(f); });
         process("common/maerkte.chron", [&](const SourceFile& f) { load_markets(f); });
+        // Gesetze (seit M11, docs/technik/ereignisse.md Abschnitt 4.1) vor den Interessengruppen, die sie
+        // sich wünschen, und den Staaten, die sie haben; die Datei darf fehlen.
+        process_optional("common/gesetze.chron", [&](const SourceFile& f) { load_laws(f); });
         // Politik (seit M8, docs/technik/politik.md); die Dateien dürfen fehlen.
         process_optional("common/stroemungen.chron", [&](const SourceFile& f) { load_currents(f); });
         process_optional("common/interessengruppen.chron",
@@ -709,6 +714,18 @@ public:
         }
         check_districts();
         check_markets();
+        // Ereignisse (seit M11, docs/technik/ereignisse.md Abschnitt 3) auf der fertigen Welt; Verweise auf
+        // Inhalt, den es erst später gibt, sind dort kein Fehler.
+        {
+            detail::AbsentContent absent;
+            for (const std::string& tag : dropped_states_) {
+                absent.insert("staat:" + tag);
+            }
+            for (const auto& entry : later_) {
+                absent.insert(entry.first);
+            }
+            detail::load_event_content(data_dir_, start_, absent, world_, issues_.out());
+        }
 
         if (issues_.has_errors() || selected == nullptr) {
             return std::nullopt;
@@ -833,6 +850,7 @@ private:
                                       : kind == "betrieb"          ? "Betrieb"
                                       : kind == "interessengruppe" ? "Interessengruppe"
                                       : kind == "zollunion"        ? "Zollunion"
+                                      : kind == "gesetz"           ? "Gesetzesgruppe"
                                                                    : "Parlament";
             issues_.error(file.name, node.line,
                           "doppelte Kennung " + quote(node.value) + " für " + label +
@@ -1797,15 +1815,143 @@ private:
     }
 
     /// Interessengruppen (Abschnitt 3.20): Mitglieder je Beruf und Konfession, Neigung je Strömung.
+    /// Gesetzesgruppen (seit M11, chronik-skript.md 3.33): gesetz <kennung> { name, standard, option … }.
+    void load_laws(const SourceFile& file) {
+        for_each_definition(file, "gesetz", "gesetz <kennung> { … }", [&](const ScriptNode& node) {
+            check_id(file, node, "Kennung einer Gesetzesgruppe");
+            const bool later = is_later(file, node, "gesetz");
+            const std::string what = "gesetz " + node.value;
+            LawGroup g;
+            g.id = node.value;
+            Registry options;
+            std::string standard;
+            int standard_line = node.line;
+            for (const ScriptNode& child : node.children) {
+                if (child.key == "option") {
+                    if (!child.is_block || child.value.empty()) {
+                        issues_.error(file.name, child.line,
+                                      "ungültige Option in " + what +
+                                          ", erwartet: option <kennung> { name = \"…\" }");
+                        continue;
+                    }
+                    check_id(file, child, "Kennung einer Gesetzesoption");
+                    Fields of(child, file.name, "option " + child.value + " in " + what, issues_, {"name"});
+                    LawOption o;
+                    o.id = child.value;
+                    o.name = of.text("name").value_or("");
+                    if (register_id(options, o.id, static_cast<Index>(g.options.size()), file.name,
+                                    child.line, "Option von " + what)) {
+                        g.options.push_back(std::move(o));
+                    }
+                } else if (child.key == "name" || child.key == "quelle" || child.key == "seit") {
+                    if (child.is_block || child.op != "=") {
+                        issues_.error(file.name, child.line,
+                                      "Feld " + quote(child.key) + " in " + what +
+                                          " erwartet einen einzelnen Wert");
+                    } else if (child.key == "name") {
+                        g.name = child.value;
+                    } else if (child.key == "quelle") {
+                        g.source = child.value;
+                    }
+                } else if (child.key == "standard") {
+                    standard = child.value;
+                    standard_line = child.line;
+                } else {
+                    issues_.warning(file.name, child.line,
+                                    "unbekanntes Feld " + quote(child.key) + " in " + what +
+                                        " wird ignoriert");
+                }
+            }
+            if (g.name.empty()) {
+                issues_.error(file.name, node.line, "Pflichtfeld 'name' fehlt in " + what);
+            }
+            if (g.options.size() < 2) {
+                issues_.error(file.name, node.line, what + " braucht mindestens zwei Optionen");
+            }
+            if (standard.empty()) {
+                issues_.error(file.name, node.line, "Pflichtfeld 'standard' fehlt in " + what);
+            } else if (const Index o = lookup(options, standard); o == kNone) {
+                issues_.error(file.name, standard_line,
+                              "unbekannte Option " + quote(standard) + " als Standard von " + what);
+            } else {
+                g.standard = o;
+            }
+            if (later) {
+                return;
+            }
+            const auto index = static_cast<Index>(world_.law_groups.size());
+            if (register_id(laws_, g.id, index, file.name, node.line, "Gesetzesgruppe")) {
+                world_.law_groups.push_back(std::move(g));
+                law_options_.push_back(std::move(options));
+            }
+        });
+        check_later_ids("gesetz", laws_, "Gesetzesgruppe");
+    }
+
+    /// Wünsche einer Interessengruppe (seit M11, chronik-skript.md 3.20): wuensche { <gesetz> = { <option> =
+    /// n } }. Ein Gesetz, das es zum Startdatum noch nicht gibt, wird übergangen.
+    std::vector<LawWish> read_wishes(const SourceFile& file, const ScriptNode& node) {
+        std::vector<LawWish> wishes;
+        const ScriptNode* block = node.find("wuensche");
+        if (block == nullptr) {
+            return wishes;
+        }
+        const std::string what = "wuensche in interessengruppe " + node.value;
+        if (!block->is_block) {
+            issues_.error(file.name, block->line,
+                          what + " erwartet einen Block, z. B. { presse = { pressefreiheit = 2 } }");
+            return wishes;
+        }
+        for (const ScriptNode& law_node : block->children) {
+            if (law_node.key.empty() || !law_node.is_block) {
+                issues_.error(file.name, law_node.line,
+                              "ungültiger Eintrag in " + what +
+                                  ", erwartet <gesetz> = { <option> = <zustimmung> }");
+                continue;
+            }
+            const Index law = lookup(laws_, law_node.key);
+            if (law == kNone) {
+                if (!is_later_id("gesetz", law_node.key)) {
+                    issues_.error(file.name, law_node.line,
+                                  "unbekannte Gesetzesgruppe " + quote(law_node.key) + " in " + what +
+                                      " (common/gesetze.chron)");
+                }
+                continue;
+            }
+            for (const ScriptNode& option_node : law_node.children) {
+                const Index option =
+                    option_node.key.empty() || option_node.is_block
+                        ? kNone
+                        : lookup(law_options_[static_cast<std::size_t>(law)], option_node.key);
+                if (option == kNone) {
+                    issues_.error(file.name, option_node.line,
+                                  "unbekannte Option " +
+                                      quote(option_node.key.empty() ? option_node.value : option_node.key) +
+                                      " von gesetz " + law_node.key + " in " + what);
+                    continue;
+                }
+                const auto value = Fixed::parse(option_node.value);
+                if (!value || *value < fx(-10) || *value > fx(10)) {
+                    issues_.error(file.name, option_node.line,
+                                  "Zustimmung " + quote(option_node.value) + " in " + what +
+                                      " muss zwischen -10 und 10 liegen");
+                    continue;
+                }
+                wishes.push_back(LawWish{law, option, *value});
+            }
+        }
+        return wishes;
+    }
+
     void load_interest_groups(const SourceFile& file) {
         for_each_definition(
             file, "interessengruppe", "interessengruppe <kennung> { … }", [&](const ScriptNode& node) {
                 check_id(file, node, "Kennung einer Interessengruppe");
                 const bool later = is_later(file, node, "interessengruppe");
                 const LaterScope scope(in_later_, later);
-                Fields f(
-                    node, file.name, "interessengruppe " + node.value, issues_,
-                    {"name", "farbe", "berufe", "konfessionen", "nach_bildung", "neigung", "seit", "quelle"});
+                Fields f(node, file.name, "interessengruppe " + node.value, issues_,
+                         {"name", "farbe", "berufe", "konfessionen", "nach_bildung", "neigung", "wuensche",
+                          "seit", "quelle"});
                 InterestGroup g;
                 g.id = node.value;
                 g.name = f.text("name").value_or("");
@@ -1876,6 +2022,7 @@ private:
                                           show(sum) + ", erwartet 1");
                     }
                 }
+                g.wishes = read_wishes(file, node);
                 g.source = f.text("quelle").value_or("");
                 if (later) {
                     return;
@@ -3748,7 +3895,16 @@ private:
                               "ungültiger Staatstag " + quote(node.value) +
                                   " (2–4 Zeichen, nur Großbuchstaben A–Z und Ziffern)");
             }
-            const ScriptNode merged = apply_history(node, file.name, "staat " + node.value, {"farbe"});
+            ScriptNode merged = apply_history(node, file.name, "staat " + node.value, {"farbe"});
+            // Gesetze (seit M11): Felder gesetz_<gruppe> = <option>, vor den übrigen Feldern ausgesondert.
+            std::vector<ScriptNode> law_fields;
+            std::erase_if(merged.children, [&](const ScriptNode& child) {
+                if (child.key.rfind("gesetz_", 0) != 0) {
+                    return false;
+                }
+                law_fields.push_back(child);
+                return true;
+            });
             // Fehlende Pflichtfelder zählen nur für Staaten, die zum Startdatum bestehen (seit M7,
             // drop_states_without_land); die übrigen Meldungen gelten sofort.
             std::vector<LoadIssue> field_issues;
@@ -3812,6 +3968,32 @@ private:
                 }
             }
             s.law = read_electoral_law(f, merged, file.name, "staat " + node.value, false);
+            s.laws.resize(world_.law_groups.size());
+            for (std::size_t g = 0; g < world_.law_groups.size(); ++g) {
+                s.laws[g] = world_.law_groups[g].standard;
+            }
+            for (const ScriptNode& field : law_fields) {
+                const std::string id = field.key.substr(7);
+                const Index law = lookup(laws_, id);
+                if (law == kNone) {
+                    if (!later_reference("gesetz", "Gesetzesgruppe", id, file.name, field.line,
+                                         "staat " + node.value)) {
+                        issues_.error(file.name, field.line,
+                                      "unbekannte Gesetzesgruppe " + quote(id) + " in staat " + node.value +
+                                          " (common/gesetze.chron)");
+                    }
+                    continue;
+                }
+                const Index option =
+                    field.is_block ? kNone : lookup(law_options_[static_cast<std::size_t>(law)], field.value);
+                if (option == kNone) {
+                    issues_.error(file.name, field.line,
+                                  "unbekannte Option " + quote(field.value) + " für " + quote(field.key) +
+                                      " in staat " + node.value);
+                    continue;
+                }
+                s.laws[static_cast<std::size_t>(law)] = option;
+            }
             s.source = f.text("quelle").value_or("");
 
             std::vector<LoadIssue> missing;
@@ -4586,6 +4768,8 @@ private:
     Registry districts_;
     Registry admin_units_;
     Registry railways_;
+    Registry laws_;                              // seit M11: Gesetzesgruppen
+    std::vector<Registry> law_options_;          // seit M11: Optionen je Gesetzesgruppe
     Registry currents_;                          // seit M8
     Registry interest_groups_;                   // seit M8
     Registry parliaments_;                       // seit M8

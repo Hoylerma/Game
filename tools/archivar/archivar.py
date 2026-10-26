@@ -95,6 +95,9 @@ STAAT_FELDER = (
     "wahlsystem",
     "wahl_indirekt",
     "wahl_zensus",
+    "gesetz_presse",
+    "gesetz_vereine",
+    "gesetz_grundlasten",
 )
 # Werte der politischen Felder (seit M8, docs/technik/politik.md Abschnitt 4).
 POLITIK_WERTE = {
@@ -102,6 +105,10 @@ POLITIK_WERTE = {
     "wahlrecht": ("keines", "staendisch", "zensus", "dreiklassen", "allgemein_maenner"),
     "wahlsystem": ("stichwahl", "relativ"),
     "wahl_indirekt": ("ja", "nein"),
+    # Gesetze (seit M11, docs/technik/ereignisse.md Abschnitt 4.1; Optionen wie common/gesetze.chron).
+    "gesetz_presse": ("vorzensur", "pressegesetz", "pressefreiheit"),
+    "gesetz_vereine": ("verbot", "genehmigung", "vereinsfreiheit"),
+    "gesetz_grundlasten": ("grundherrschaft", "abloesung", "frei"),
 }
 # Felder, die zu jedem Szenariodatum bekannt sein müssen (name/kurzname kommen aus staaten.csv).
 STAAT_PFLICHT = (

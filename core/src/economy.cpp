@@ -2,6 +2,7 @@
 
 #include "uhrwerk/customs.hpp"
 #include "uhrwerk/diplomacy.hpp"
+#include "uhrwerk/events.hpp"
 #include "uhrwerk/military.hpp"
 
 #include <algorithm>
@@ -452,6 +453,13 @@ bool run_state_budget(World& world, Index state_index, const std::vector<Index>&
         }
     }
     customs_income(world, state, budget);
+    // Befristete Wirkungen der Ereignisse (seit M11, ereignisse.md Abschnitt 3.7): Steuerertrag ±x.
+    if (!world.timed_effects.empty()) {
+        const Fixed factor = timed_tax_factor(world, state_index);
+        for (Fixed& tax : budget.taxes) {
+            tax = tax * factor;
+        }
+    }
     budget.hinterland = hinterland_income(world, state_index); // seit dem Review M10
     base_expenses(world, state, population_of(world, locations), budget);
     state.interest_rate = interest_rate_of(world, state);

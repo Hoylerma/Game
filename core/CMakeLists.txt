@@ -4,6 +4,7 @@ add_library(uhrwerk_core STATIC
     src/date.cpp
     src/script.cpp
     src/world.cpp
+    src/event_loader.cpp
     src/loader.cpp
     src/simulation.cpp
     src/parallel.cpp
@@ -19,6 +20,7 @@ add_library(uhrwerk_core STATIC
     src/customs_lab.cpp
     src/war_lab.cpp
     src/economy.cpp
+    src/events.cpp
     src/lasttest.cpp
     src/balance.cpp
     src/election_lab.cpp

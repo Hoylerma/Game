@@ -54,6 +54,14 @@ staat DES {
         wahlrecht      = keines
     }
 
+    1854.07.06 = {
+        gesetz_presse = pressegesetz
+    }
+
+    1854.07.13 = {
+        gesetz_vereine = genehmigung
+    }
+
     1863.08.19 = {
         name     = "Herzogtum Anhalt"
         kurzname = "Anhalt"

@@ -371,6 +371,51 @@ template <typename Sim, typename V> void StateAccess::visit(Sim& sim, V& v) {
         values(v, "spenden", w.party_donations);
     }
 
+    // Ereignisse (seit M11, Schritt a1): nur in Welten mit Ereignissen (1648 bleibt bitgleich). Verfassung,
+    // Wahlrecht und Gesetze kommen zum Start aus dem Inhalt und werden durch Ereignisse Zustand.
+    if (w.event_rules.active) {
+        list(v, "verfassungen", w.states, Extent::Content, [&](auto& s) {
+            v.field("verfassung", s.constitution);
+            v.field("wahlrecht", s.law.franchise);
+            list(v, "gesetze", s.laws, Extent::Content, [&](auto& g) { v.field("", g); });
+        });
+        list(v, "ereignischronik", w.event_log, Extent::State, [&](auto& r) {
+            v.field("ereignis", r.event);
+            v.field("staat", r.state);
+            v.field("option", r.option);
+            v.field("datum", r.date);
+        });
+        list(v, "ereignisse_offen", w.pending_events, Extent::State, [&](auto& e) {
+            v.field("ereignis", e.event);
+            v.field("staat", e.state);
+            v.field("seit", e.since);
+            v.field("frist", e.due);
+        });
+        list(v, "ereignisse_geplant", w.scheduled_events, Extent::State, [&](auto& e) {
+            v.field("ereignis", e.event);
+            v.field("staat", e.state);
+            v.field("faellig", e.due);
+        });
+        list(v, "merkmale", w.event_flags, Extent::State, [&](auto& f) {
+            v.field("staat", f.state);
+            v.field("name", f.name);
+        });
+        list(v, "zustimmung", w.approval, Extent::Content, [&](auto& a) { v.field("", a); });
+        list(v, "unruhe", w.unrest, Extent::Content, [&](auto& u) { v.field("", u); });
+        // Seit Schritt a2: befristete Wirkungen und der Staat, dessen Ereignisse auf die Wahl warten.
+        list(v, "befristet", w.timed_effects, Extent::State, [&](auto& t) {
+            v.field("staat", t.state);
+            v.field("ereignis", t.event);
+            v.field("bis", t.until);
+            v.field("steuerertrag", t.values.tax);
+            v.field("moral", t.values.morale);
+            v.field("unruhe", t.values.unrest);
+            v.field("beziehung", t.values.relation);
+            v.field("text", t.text);
+        });
+        v.field("ereignisspieler", w.event_player);
+    }
+
     v.field("zufall.demografie", sim.rng_demography_);
     v.field("zufall.wirtschaft", sim.rng_economy_);
     v.field("zufall.ereignisse", sim.rng_events_);
@@ -392,7 +437,7 @@ template <typename Sim, typename V> void StateAccess::visit(Sim& sim, V& v) {
         v.field("steuerart", c.kind);
         // Wahlkampf (M8), Zollunion und Diplomatie (M9), Marsch (M10)
         if (!w.parliaments.empty() || !w.customs_unions.empty() || !w.relations.empty() ||
-            w.military_rules.active) {
+            w.military_rules.active || w.event_rules.active) {
             v.field("ziel", c.target);
             v.field("aktion", c.action);
         }

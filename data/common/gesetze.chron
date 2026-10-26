@@ -1,0 +1,36 @@
+# Gesetzesgruppen (Meilenstein M11, docs/technik/ereignisse.md Abschnitt 4.1).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.33. Drei Gruppen aus Kapitel 09, Abschnitt 6.1, die
+# 1848 im Mittelpunkt stehen; Verfassung, Wahlrecht und Wahlsystem bleiben Felder des Staates (M8). Ein
+# Staat hat die Option 'standard', solange seine Historie (staaten_historie.csv, Feld gesetz_<gruppe>)
+# keine andere nennt. Ereignisse ändern die Gesetze zur Laufzeit (ab Schritt a2).
+
+gesetz presse {
+    name     = "Presse"
+    seit     = 1815.06.08   # Deutscher Bund; Vorzensur seit den Karlsbader Beschlüssen 1819
+    standard = vorzensur
+    option vorzensur      { name = "Vorzensur" }
+    option pressegesetz   { name = "Repressives Pressegesetz" }
+    option pressefreiheit { name = "Pressefreiheit" }
+    quelle   = "Kapitel 09, Abschnitt 6.1 (Gruppe 12); Huber, Verfassungsgeschichte Bd. 1 und 2"
+}
+
+gesetz vereine {
+    name     = "Vereine und Versammlungen"
+    seit     = 1815.06.08   # Verbot politischer Vereine durch den Bundesbeschluss vom 5. Juli 1832
+    standard = verbot
+    option verbot          { name = "Verbot politischer Vereine" }
+    option genehmigung     { name = "Genehmigungspflicht" }
+    option vereinsfreiheit { name = "Vereinsfreiheit" }
+    quelle   = "Kapitel 09, Abschnitt 6.1 (Gruppe 13); Huber, Verfassungsgeschichte Bd. 2"
+}
+
+gesetz grundlasten {
+    name     = "Grundlasten"
+    seit     = 1815.06.08
+    standard = abloesung    # Ablösung begonnen (Preußen seit 1807/1821, Sachsen 1832, Hannover 1833 …)
+    option grundherrschaft { name = "Grundherrschaft" }
+    option abloesung       { name = "Ablösung der Grundlasten" }
+    option frei            { name = "Freies Bauerntum" }
+    quelle   = "Kapitel 09, Abschnitt 6.1 (Gruppe 22, Agrarverfassung); Wehler, Gesellschaftsgeschichte Bd. 2"
+}

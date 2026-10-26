@@ -1,6 +1,7 @@
 # Ereignisse und Revolution 1848/49 (Meilenstein M11)
 
-> **Status: Entwurf** – die Entscheidungen in Abschnitt 11 sind offen. Grundlage sind
+> **Status: verbindlich** – Entscheidungen 1–13 wie empfohlen freigegeben (Abschnitt 11); Umsetzung
+> läuft, Stand in Abschnitt 13. Grundlage sind
 > [18 Ereignisse, Journale, Missionen](../18_ereignisse_journale_missionen.md) (Abschnitte 1–4, 6–9),
 > [09 Politik, Staat und Gesetze](../09_politik_staat_und_gesetze.md) (Abschnitte 3, 5, 6 und 13),
 > [20 Verantwortung und Erinnerungskultur](../20_verantwortung_und_erinnerungskultur.md) und der
@@ -116,9 +117,11 @@ Bedingungen und Wirkungen als Blöcke (Entscheidung 2).
 ```text
 ereignis maerz.forderungen {
     titel  = "Die Märzforderungen"
-    text   = "In Mannheim hat eine Volksversammlung Pressefreiheit, Schwurgerichte, Volksbewaffnung
-              und ein deutsches Parlament gefordert. Petitionen mit Tausenden Unterschriften liegen
-              vor dem Schloss."          # Zeilenumbrüche im Text erlaubt (neu, Abschnitt 3.8)
+    text {                            # Zeilen eines Absatzes, mit Leerzeichen verbunden (3.8)
+        "In Mannheim hat eine Volksversammlung Pressefreiheit, Schwurgerichte, Volksbewaffnung"
+        "und ein deutsches Parlament gefordert. Petitionen mit Tausenden Unterschriften liegen"
+        "vor dem Schloss."
+    }
     datum  = 1848.02.27               # historisches Datum (Anzeige, Kompass)
     quelle = "Siemann 1985, S. 66 f."
     art    = historisch               # historisch | dynamisch | atmosphaerisch
@@ -128,7 +131,7 @@ ereignis maerz.forderungen {
     bedingung {
         datum >= 1848.03.01
         datum <  1848.06.01
-        gesetz presse = vorzensur
+        gesetz_presse = vorzensur
         unruhe >= 30
         nicht { geschehen = maerz.forderungen }  # je Staat einmal
     }
@@ -139,10 +142,10 @@ ereignis maerz.forderungen {
         historisch = ja
         gewicht = 70                  # Wahl ohne Spieler (3.5)
         wirkung {
-            gesetz presse = pressefreiheit
-            gesetz vereine = vereinsfreiheit
-            zustimmung bildungsbuergertum = 3
-            zustimmung adel = -2
+            gesetz_presse = pressefreiheit
+            gesetz_vereine = vereinsfreiheit
+            zustimmung_bildungsbuergertum = 3
+            zustimmung_adel = -2
             unruhe = -20
             merke = maerzministerium   # Flag am Staat
         }
@@ -155,8 +158,8 @@ ereignis maerz.forderungen {
     option militaer {
         text = "Das Militär einsetzen"
         gewicht = 10
-        bedingung { zustimmung militaer >= 0 }
-        wirkung { zustimmung militaer = 2  zustimmung bildungsbuergertum = -4  aufstand = barrikaden }
+        bedingung { zustimmung_militaer >= 0 }
+        wirkung { zustimmung_militaer = 2  zustimmung_bildungsbuergertum = -4  aufstand = barrikaden }   # ab Schritt a3 (4.4)
     }
 }
 ```
@@ -170,24 +173,28 @@ Bildungsbürgertum +3, Adel −2, Unruhe −20“) und, falls sie Folgeereigniss
 Eine Bedingung ist ein Block von Prüfungen, die alle gelten müssen; `oder { … }` und `nicht { … }`
 verknüpfen. Bedingungen lesen nur, sie ändern nichts.
 
+Die Kennung einer Gruppe, eines Gesetzes, Gutes oder Staates hängt mit `_` am Schlüssel
+(`zustimmung_militaer >= 0`), weil `WORT WORT = wert` keine Form des Chronik-Skripts ist
+(chronik-skript.md 1.2). Vokabular, Wertebereiche und Prüfungen des Laders: chronik-skript.md 3.34.
+
 | Prüfung | Bedeutung |
 |---|---|
 | `datum >= / < JJJJ.MM.TT` | Tagesdatum |
 | `staat = TAG`, `staat_in = { … }` | nur für diese Staaten (bei `wer = staat`) |
-| `geschehen = <ereignis>` | das Ereignis ist für diesen Staat (bzw. die Welt) eingetreten; mit `option = <name>` die gewählte Option |
+| `geschehen = <ereignis>`, `geschehen { ereignis = <id> option = <name> }` | das Ereignis ist für diesen Staat (bzw. die Welt) eingetreten, mit der gewählten Option |
 | `merkmal = <name>`, `welt_merkmal = <name>` | Flag am Staat bzw. in der Welt (3.7) |
-| `journal <id> = <stufe>` | Stufe eines Journals (Abschnitt 5) |
-| `gesetz <gruppe> = <option>` | Gesetz des Staates (4.1); auch `verfassung`, `wahlrecht` |
-| `zustimmung <gruppe> >= n` | Zustimmung einer Interessengruppe (4.2) |
-| `anteil <gruppe> >= x`, `einfluss <gruppe> >= x` | Anteil und Einfluss (M8) |
+| `journal_<id> = <stufe>` | Stufe eines Journals (Abschnitt 5, ab Schritt a4) |
+| `gesetz_<gruppe> = <option>` | Gesetz des Staates (4.1); auch `verfassung`, `wahlrecht` |
+| `zustimmung_<gruppe> >= n` | Zustimmung einer Interessengruppe (4.2) |
+| `anteil_<gruppe> >= x`, `einfluss_<gruppe> >= x` | Anteil und Einfluss (M8) |
 | `unruhe >= n`, `nachbar_unruhe >= n` | Unruhe des Staates bzw. eines Nachbarstaates (4.3) |
-| `lebensstandard unten <= n` | Lebensstandard der unteren Schicht |
-| `preis <gut> >= x` | Preisfaktor im Markt der Hauptstadt |
-| `im_krieg`, `krieg_mit = TAG`, `mobil` | Krieg und Mobilmachung (M10) |
-| `bund`, `zollunion = <id>`, `beziehung TAG >= n` | Bund, Zollunion, Beziehung (M7, M9) |
-| `sitze <stroemung> >= n` in `parlament <id>` | Sitze nach der letzten Wahl (M8) |
+| `lebensstandard_unten <= n` | Lebensstandard der unteren Schicht |
+| `preis_<gut> >= x` | Preisfaktor im Markt der Hauptstadt |
+| `im_krieg = ja`, `krieg_mit = TAG`, `mobil = ja` | Krieg und Mobilmachung (M10) |
+| `bund = ja`, `zollunion = <id>`, `beziehung_<TAG> >= n` | Bund, Zollunion, Beziehung (M7, M9) |
+| `sitze { parlament = <id> stroemung = <id> mindestens = n }` | Sitze nach der letzten Wahl (M8) |
 | `soldaten >= n`, `schatz >= n`, `schulden_quote >= x` | Heer und Haushalt |
-| `spieler` | der Staat ist der Spielerstaat (nur für Texte und Kompass, nicht für Auslöser) |
+| `spieler = ja` | der Staat ist der Spielerstaat (nur für Texte und Kompass, nicht für Auslöser) |
 
 ### 3.3 Wirkungen
 
@@ -196,20 +203,20 @@ Wirkungen ändern den Zustand am Tag der Wahl; alle sind deterministisch, Zufall
 
 | Wirkung | Bedeutung |
 |---|---|
-| `gesetz <gruppe> = <option>`, `verfassung = …`, `wahlrecht = …` | Gesetz bzw. Verfassungsfeld ändern (4.1) |
-| `zustimmung <gruppe> = ±n` | Zustimmung einer Gruppe ändern (−10 … +10) |
+| `gesetz_<gruppe> = <option>`, `verfassung = …`, `wahlrecht = …` | Gesetz bzw. Verfassungsfeld ändern (4.1) |
+| `zustimmung_<gruppe> = ±n` | Zustimmung einer Gruppe ändern (Ergebnis −10 … +10) |
 | `unruhe = ±n` | Unruhe des Staates ändern |
 | `merke = <name>`, `vergiss = <name>`, `welt_merke = <name>` | Flag setzen bzw. löschen |
-| `befristet { … tage = n }` | Wirkung auf Zeit (3.7): Steuerertrag, Moral, Unruhe je Monat |
+| `befristet { … tage = n }` (ab Schritt a2) | Wirkung auf Zeit (3.7): Steuerertrag, Moral, Unruhe je Monat |
 | `schatz = ±n`, `monatseinnahmen = ±x` | Geld (auch als Vielfaches der Monatseinnahmen) |
-| `beziehung TAG = ±n` | Beziehung zu einem Staat (M9) |
+| `beziehung_<TAG> = ±n` | Beziehung zu einem Staat (M9) |
 | `auswanderung = x` | Anteil der unteren Schicht wandert aus (über das Bevölkerungsmodell, M4) |
-| `verwuestung = x` in `hauptstadt` / `ort <id>` | Verwüstung (M1) |
-| `aufstand = <art>` | Aufstand beginnen (4.4) |
-| `mobilmachung`, `krieg { gegen = TAG ziel = … }`, `frieden …` | Militär (M10), mit Bündnisfall |
-| `antrag <art>`, `bund_ruht`, `bund_tagt` | Bundesversammlung (M9) und ihr Ruhen 1848–1851 |
-| `journal <id> = <stufe>` | Journal weiterschalten (Abschnitt 5) |
-| `abstimmung <id>` | Abstimmung in einem Parlament auslösen (5.3) |
+| `verwuestung = x`, `verwuestung { ort = <id> wert = x }` | Verwüstung (M1) |
+| `aufstand = <art>` | Aufstand beginnen (4.4, ab Schritt a3) |
+| `mobilmachung = ja`; `krieg { gegen = TAG ziel = … }`, `frieden …` (ab Schritt a2) | Militär (M10), mit Bündnisfall |
+| `antrag <art>`, `bund_ruht`, `bund_tagt` (ab Schritt a4) | Bundesversammlung (M9) und ihr Ruhen 1848–1851 |
+| `journal_<id> = <stufe>` | Journal weiterschalten (Abschnitt 5, ab Schritt a4) |
+| `abstimmung = <id>` (ab Schritt a4) | Abstimmung in einem Parlament auslösen (5.3) |
 | `folge { ereignis = <id> tage = n }`, `folge { ereignis = <id> staat = TAG }` | Folgeereignis, auch für einen anderen Staat |
 | `chronik = "…"` | eigener Chronikeintrag (sonst schreibt die gewählte Option ihren Text) |
 
@@ -225,7 +232,15 @@ Wirkungen ändern den Zustand am Tag der Wahl; alle sind deterministisch, Zufall
   `wiederholbar = ja` mit `abstand = n` Tagen (dynamische Ereignisse).
 - **Feste Termine** (`termin = 1848.05.18`) treten an genau diesem Tag ein, wenn die Bedingung gilt
   (z. B. Eröffnung der Paulskirche); sonst verfallen sie.
-- Folgeereignisse (`folge`) treten nach ihrer Frist ein, wenn ihre Bedingung dann gilt.
+- Folgeereignisse (`folge`) treten nach ihrer Frist ein, wenn ihre Bedingung dann gilt, auch wenn das
+  Ereignis schon eingetreten ist; `nur_folge = ja` heißt, dass ein Ereignis nur so eintritt. Eine Folge
+  ohne Frist (`tage = 0`) tritt am selben Tag ein.
+- **Umsetzung (seit a2, `core/src/events.cpp`):** Reihenfolge im Tag nach dem Militär: befristete
+  Wirkungen (Ablauf, am Monatsersten Unruhe und Beziehung), fällige Fristen des Spielers, fällige
+  Folgeereignisse, Auslösung, dann die Folgen ohne Frist aus der Auslösung. Prüfungen des Datums auf
+  oberster Ebene der Bedingung schließen das Fenster für alle Staaten zugleich; Staaten ohne Orte mit
+  Bevölkerung nehmen nicht teil. Die Ziehung je Ereignis und Staat (`1 / wartezeit`) kommt nur, wenn
+  die Bedingung gilt; am Termin und ohne Wartezeit gibt es keine.
 
 ### 3.5 Wahl ohne Spieler
 
@@ -236,7 +251,7 @@ Zustand abhängen (Entscheidung 4):
 ```text
 gewicht = 40
 gewicht_wenn { unruhe >= 60  plus = 30 }       # unter Druck eher nachgeben
-gewicht_wenn { zustimmung militaer >= 5  plus = -20 }
+gewicht_wenn { zustimmung_militaer >= 5  plus = -20 }
 ```
 
 Die historische Option hat in der Regel das größte Gewicht, aber nicht alle (Abnahme: „nicht
@@ -248,7 +263,11 @@ festgelegt“). Welt-Ereignisse (`wer = welt`) ohne Staat wählen ebenso.
   auf die Wahl: Der Kern legt es in die Liste offener Ereignisse; Godot hält die Zeit an und öffnet
   das Fenster (Abschnitt 9).
 - Der Spieler wählt per **Befehl `Ereigniswahl`** (Wert = Ereignis, Ziel = Option). Wirksam ab dem
-  nächsten Tag wie alle Befehle, im Protokoll für die Wiederholung (M6).
+  nächsten Tag wie alle Befehle, im Protokoll für die Wiederholung (M6). Welcher Staat wartet, setzt
+  der **Befehl `Ereignisspieler`** (Staat oder keiner; `World::event_player`, Zustand): Die Oberfläche
+  schickt ihn beim Start einer Partie, die Kommandozeile und die Labore spielen ohne ihn. Eine Option,
+  deren Bedingung nicht gilt, lässt sich nicht wählen; Folgeereignisse des Spielerstaates warten
+  ebenfalls.
 - Ohne Wahl gilt nach `frist` Tagen (Standard 30) die Option mit dem größten Gewicht, damit Läufe
   ohne Oberfläche (Kommandozeile, Labore) weiterlaufen. Godot lässt die Frist nicht verstreichen,
   weil die Zeit steht.
@@ -260,7 +279,12 @@ festgelegt“). Welt-Ereignisse (`wer = welt`) ohne Staat wählen ebenso.
   (`maerzministerium`, `kaiserkrone_abgelehnt`), und tragen Bedingungen späterer Ereignisse.
 - **Befristete Wirkungen** sind Modifikatoren mit Ablaufdatum: Steuerertrag ±x, Moral der Heere ±x,
   Unruhe je Monat ±n, Beziehung zu allen Bundesstaaten ±n. Sie stehen mit Text in der Staatsinfo
-  („Belagerungszustand in Berlin, bis 28. Juli 1849“).
+  („Belagerungszustand in Berlin, bis 28. Juli 1849“). Seit a2 (`befristet { … }`, chronik-skript.md
+  3.34): Der Steuerertrag wirkt im Haushalt auf alle drei Steuerarten, die Moral als Faktor auf die
+  Kampfkraft der Heere des Staates, Unruhe und Beziehung am Monatsersten; die Wirkung endet am Tag
+  `bis` (`World::timed_effects`, Zustand).
+- **Chronik:** Eine gewählte Option schreibt „Staat: Titel – Optionstext“, außer sie hat eine eigene
+  Wirkung `chronik = "…"`.
 
 ### 3.8 Lader und Prüfungen
 
@@ -270,9 +294,9 @@ festgelegt“). Welt-Ereignisse (`wer = welt`) ohne Staat wählen ebenso.
   Journale und Stufen werden beim Laden geprüft (Meldungen wie im Lader üblich).
 - Folgeketten ohne Bedingung dürfen keinen Kreis bilden (`pruefen` meldet ihn).
 - `uhrwerk-cli pruefen` prüft die Ereignisse, `uhrwerk-cli info` zählt sie je Art und Jahrzehnt.
-- **Neu im Chronik-Skript:** Zeichenketten über mehrere Zeilen (nur für `text`; Zeilenumbrüche
-  werden Leerzeichen). Bisher dürfen Zeichenketten keinen Zeilenumbruch enthalten
-  (chronik-skript.md 1.1).
+- **Lange Texte:** `text` ist eine Zeichenkette oder ein Block aus Zeichenketten, die mit Leerzeichen
+  verbunden werden; eine leere Zeichenkette `""` beginnt einen neuen Absatz. Die Syntax bleibt
+  unverändert (Zeichenketten ohne Zeilenumbruch, chronik-skript.md 1.1).
 
 ## 4. Gesetze, Zustimmung, Unruhe (M11a)
 
@@ -595,7 +619,7 @@ Weitere Tests:
 - **Godot:** Einheitentests (Ereignisfenster, Folgentexte), Rauchtest der Brücke, Klicktest (siehe
   oben), Screenshots des Ereignisfensters und des Journals.
 
-## 11. Offene Entscheidungen
+## 11. Entscheidungen (wie empfohlen freigegeben)
 
 1. **Teilung M11a/M11b.** Empfehlung: **ja** (Abschnitt 1). Alternative: Inhalt und System
    zusammen, Revolution zuerst (schneller sichtbar, schwerer prüfbar).
@@ -664,4 +688,6 @@ Weitere Tests:
 
 | Schritt | Stand |
 |---|---|
-| – | Entwurf; Entscheidungen offen |
+| – | Entscheidungen wie empfohlen freigegeben; Umsetzung beginnt mit a1 |
+| a2 | **erledigt:** tägliche Auslösung mit Wartezeit, Termin und Datumsfenster, Einmaligkeit und Wiederholung mit Abstand, Folgeereignisse (auch ohne Frist am selben Tag, `nur_folge`), Wahl nach Gewicht mit Zuschlägen aus dem Strom `Ereignisse`, offene Ereignisse des Spielers mit Frist, Befehle `Ereigniswahl` und `Ereignisspieler`, alle Wirkungen aus 3.3 außer denen späterer Schritte, befristete Wirkungen (`befristet`, Steuerertrag, Moral, Unruhe, Beziehung); Bedingungen über Gruppen, Lebensstandard, Preise, Krieg, Bund, Zoll, Beziehung, Sitze, Heer und Haushalt. Inhaltsbereich Stand 2. Tests in `test_events.cpp` (Auslösung, Folgen, Wirkungen, Wahl des Spielers, Frist, Spielstand und Wiederholung mit offenem Ereignis, Determinismus mit 1 und 4 Threads); 1648 bitgleich |
+| a1 | **erledigt:** Gesetzesgruppen `common/gesetze.chron` (Presse, Vereine, Grundlasten; Startwerte datiert in `staaten_historie.csv`, Feld `gesetz_<gruppe>`), Wünsche der elf Interessengruppen (`wuensche`), Regeln `common/ereignisse.chron` (`seit = 1848.01.01`, Frist 30), Lader der Ereignisse mit dem Vokabular aus 3.2/3.3 (Schlüssel mit `_`, mehrzeilige Texte, späterer Inhalt nie wahr bzw. entfällt, Kreisprüfung der Folgen ohne Frist); Zustand (Verfassung, Wahlrecht und Gesetze je Staat, Ereignischronik, offene und geplante Ereignisse, Merkmale, Zustimmung, Unruhe), Inhaltsbereich `ereignisse`, Spielstand Format 5; `info` zählt Ereignisse je Art und Jahrzehnt und die Gesetze zum Start. Tests `test_events.cpp`; 1648 bitgleich. Noch ohne Ereignisse im Inhalt (ab b1) |
