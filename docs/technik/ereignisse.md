@@ -472,7 +472,7 @@ Nach Kapitel 18, Abschnitt 7, auf die Daten des Lesezeichens gelegt:
 |---|---|---|
 | **Reich der Paulskirche** (gelungen) | Preußen nimmt die Krone an und mindestens zwei Drittel der Bundesbevölkerung außerhalb Österreichs erkennen die Reichsverfassung an, oder der Krieg darum wird gewonnen | Reichsverfassung: die Mitglieder `konstitutionell`, Grundrechte (Presse, Vereine), Reichstag nach `allgemein_maenner` (neue Wahl), Zollunion aller Mitglieder (M9 Zolleinigung), Bundesversammlung endet, Preußen Präsidialmacht; Österreich außerhalb, Krise mit Österreich |
 | **Großdeutsche Lösung** (gelungen) | Die Paulskirche stimmt großdeutsch und Österreich tritt mit seinen Bundesländern bei | wie oben mit Österreich; Erbkaiser oder Direktorium nach Abstimmung |
-| **Union** (teilweise) | Preußen lehnt ab, setzt eine Union mit Fürsten durch und gibt in Olmütz nicht nach | Union als Bund unter Preußen (wie der Norddeutsche Bund 1867), Bundesversammlung ohne die Union |
+| **Union** (teilweise) | Preußen lehnt ab, setzt eine Union mit Fürsten durch und gibt in Olmütz nicht nach; Österreich lenkt ein (seit b2) | Union als Bund unter Preußen (wie der Norddeutsche Bund 1867), Bundesversammlung ohne die Union |
 | **Gegenrevolution** (gescheitert, historisch) | Krone abgelehnt, Aufstände niedergeschlagen, Olmütz | Bundesversammlung tagt wieder (1851), Bundesreaktionsbeschluss: Gesetze zurück (Presse, Vereine), Unruhe sinkt auf Zeit, Auswanderung |
 | **Republik** (selten) | Aufstände siegen in Staaten mit mehr als der Hälfte der Bundesbevölkerung außerhalb Österreichs | Revolutionsregierungen als Merkmal, Krieg der Fürsten (M10) mit offenem Ausgang |
 
@@ -543,8 +543,8 @@ Rund 55 Ereignisse; `w` = Welt, `s` = je Staat, `W` = Wendepunkt.
 | 1849 | Oktroyierte Märzverfassung Österreichs, Abstimmungen über Reichsverfassung, Wahlrecht und Erbkaiser (w), Kaiserwahl (w), Kaiserdeputation (Preußen, W: annehmen · ablehnen · Bedingungen), Anerkennung der Reichsverfassung (s), Dresdner Maiaufstand (Sachsen, Aufstand), Badische Revolution und Festung Rastatt (Baden), Pfälzer Aufstand (Bayern), Elberfeld und Iserlohn (Preußen), Intervention (s: Preußen hilft), Rumpfparlament in Stuttgart (w), Standgerichte (Baden, dokumentarisch), Dreiklassenwahlrecht (Preußen, W), Dreikönigsbündnis (Preußen, Sachsen, Hannover), Auswanderung der Achtundvierziger (s) |
 | 1850–1851 | Erfurter Unionsparlament (w), Frieden von Berlin und Idstedt (Dänemark), Kurhessischer Verfassungskonflikt (Kurhessen, Bundesexekution M9), Olmütz (Preußen, W: nachgeben · Krieg), Dresdner Konferenzen (w), Wiederherstellung der Bundesversammlung (w), Bundesreaktionsbeschluss (w; je Staat Gesetze zurück) |
 
-**Umsetzung (seit b1):** 64 Ereignisse in `common/ereignisse/1848_maerz.chron`, `1848_paulskirche.chron`,
-`1849_reichsverfassung.chron` und `1850_union.chron` (54 historisch, 5 dynamisch, 5 atmosphärisch; die
+**Umsetzung (seit b1, kalibriert in b2):** 65 Ereignisse in `common/ereignisse/1848_maerz.chron`, `1848_paulskirche.chron`,
+`1849_reichsverfassung.chron` und `1850_union.chron` (54 historisch, 6 dynamisch, 5 atmosphärisch; die
 je Staat wiederholten Ereignisse wie die Märzforderungen zählen einmal), das Journal
 `common/journale/revolution.chron` (7 Stufen, 5 Ausgänge) und acht Abstimmungen der Paulskirche in
 `common/abstimmungen.chron`. Alle Ereignisse tragen Datumsfenster bis Ende 1851 und treten in den
@@ -558,8 +558,12 @@ sein Ende schon vor dem Start liegt). Einige Mechanismen aus der Liste oben sind
   dem Ereignis „Das Ende der Revolutionsregierung“ (Rastatt) und den Standgerichten.
 - Ein Reich der Paulskirche oder die großdeutsche Lösung führt die Reichsverfassung in den Staaten ein,
   die sie anerkannt haben (Merkmal `reichsverfassung`, Folgeereignis `reich.mitglied`).
-- Olmütz: Mit „standhalten“ erklärt Preußen Österreich den Krieg; der Ausgang „Union“ gilt, sobald
-  Preußen danach nicht mehr im Krieg ist.
+- Olmütz: Mit „standhalten“ macht Preußen mobil, und Österreich antwortet eine Woche später
+  (dynamisches Ereignis `aut.olmuetz.antwort`): Es beginnt den Krieg (60) oder nimmt die Union hin
+  (40). Nur das Einlenken führt zum Ausgang „Union“; ein Krieg um die Union endet in der Regel nicht
+  vor Ende 1851, und sein Ausgang entscheidet das Journal nicht (der Ausgang am Ende ist dann die
+  Gegenrevolution). Seit b2; in b1 erklärte Preußen selbst den Krieg, und die Union galt erst nach
+  dessen Ende, das im Labor nie vor 1852 kam.
 - Die Gesetze von 1850–1854 aus `staaten_historie.csv` gelten nur für spätere Lesezeichen; in einer
   Partie ab 1848 setzt sie der Bundesreaktionsbeschluss (Ereignis „Die Reaktion im eigenen Land“).
 
@@ -777,6 +781,7 @@ Weitere Tests:
 | Schritt | Stand |
 |---|---|
 | – | Entscheidungen wie empfohlen freigegeben; Umsetzung beginnt mit a1 |
+| b2 | **erledigt:** Kalibrierung mit dem Ereignislabor (16 Seeds wie die CI): Märzforderungen gewähren 75 · hinhalten 15 · Militär 10 (vorher 60/25/15), Kaiserdeputation annehmen 20 · ablehnen 50 · Bedingungen 30 (vorher 15/55/30), Olmütz nachgeben 70 · standhalten 30 (vorher 75/25) mit der Antwort Österreichs (`aut.olmuetz.antwort`), Übergang zur Union über `union_anerkannt`. Ohne Spieler mit den Seeds der CI (1648–1663): Gegenrevolution 87,5 %, Reich 6,3 %, Union 6,3 %; mit 48 weiteren Seeds (2000–2047): 62,5 %, 27,1 %, 10,4 %; über alle 64 Läufe 68,8 %, 21,9 %, 9,4 %, Republik und großdeutsche Lösung nie. Märzministerien bis Ende April in 66,4 % aller Staaten (76 % der 33 Staaten mit dem Ereignis), Kaiserwahl in allen Läufen; `krone` 100 % Reich, `reaktion` 100 % Gegenrevolution. Korridor der Märzministerien auf 70 … 100 % der Staaten mit dem Ereignis (0,61 … 0,87), Korridor der Union (höchstens 20 %). Bilanz, Wahl (Nationalversammlung, Preußen 1849), Zoll und Krieg 1848 mit Ereignissen in ihren Zielwerten |
 | b1 | **erledigt:** Inhalt 1848–1851: 64 Ereignisse mit Quellen (Literatur, ungeprüft), Journal „Revolution 1848/49“ mit 7 Stufen und 5 Ausgängen, 8 Abstimmungen der Paulskirche nach Fraktionen, Korridore und Strategien `krone` und `reaktion` in `common/ereignisziele_voelkerfruehling.chron` (vorläufig bis b2); CTest `ereignisse_1848` (bis Ende 1848), CI-Schritt „Ereignislabor 1848“ (16 Seeds, ohne Spieler und mit beiden Strategien). Kernkorrekturen: ein Journal beginnt nicht nach seinem Ende; Folgen aus Journalen gehen nicht in die Kreisprüfung. Erste Läufe siehe CHANGELOG |
 | a5 | **erledigt:** Ereignislabor `uhrwerk-cli ereignisse` (Korridore je Ausgang und Ereignis, `nicht_festgelegt`, Strategien mit bevorzugten Optionen, `--bis`), Bericht je Lauf und über alle Läufe, Exitcode 1 bei Verstößen; beendete Aufstände im Zustand (`revolt_history`, Inhaltsstand 5); Test-Fixture `tests/daten_ereignisse` mit kleiner Revolution und drei CTests (ohne Spieler, `krone`, `reaktion`); Unit-Tests der Korridore |
 | a4 | **erledigt:** Journale (`common/journale/*.chron`) mit Stufen, Zielen, Übergängen und Ausgängen (Wertung, Ausgang am Ende, Wirkungen), Bedingung und Wirkung `journal_<id>`; Abstimmungen (`common/abstimmungen.chron`) nach Fraktionen mit den Sitzen der letzten Wahl, Bedingung `abstimmung_<id> = angenommen|abgelehnt`, Wirkungen bei Annahme und Ablehnung; Bundesversammlung `ruht`/`tagt` (keine Anträge, keine Abstimmung); Wirkungen `antrag { … }` und `krieg = TAG`; Bedingungen `bevoelkerungsanteil` und `staaten`; `info` zählt Journale und Abstimmungen. Inhaltsstand 4. Tests in `test_events.cpp`; 1648 bitgleich |

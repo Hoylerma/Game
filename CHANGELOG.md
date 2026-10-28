@@ -70,6 +70,15 @@ freigegeben; Stand je Schritt in Abschnitt 13 dort.
   „Ereignislabor 1848“, CTest `ereignisse_1848`. Rauch- und Klicktest kennen die Revolution: Preußen
   darf mobil sein (Eingreifen gegen Aufstände), der Antrag im Diplomatiefenster kommt vor dem Juli 1848,
   in dem die Bundesversammlung zu ruhen beginnt; 1648 bitgleich.
+- **Kalibrierung 1848 (Schritt b2):** Mit dem Ereignislabor (16 Seeds wie die CI) geben mehr Staaten
+  im März nach (gewähren 75, hinhalten 15, Militär 10), Preußen nimmt die Kaiserkrone öfter an
+  (annehmen 20, ablehnen 50, Bedingungen 30) und hält in Olmütz öfter stand (30). Hält es stand,
+  antwortet Österreich mit einem eigenen Ereignis: Krieg oder die Union hinnehmen; nur das Einlenken
+  führt zum Ausgang „Union“. Ohne Spieler endet die Revolution über 64 Läufe zu 69 % mit der
+  Gegenrevolution, zu 22 % im Reich der Paulskirche und zu 9 % in der Union (mit den 16 Seeds der CI
+  88 %, 6 %, 6 %); Märzministerien bis Ende April in 76 % der Staaten mit dem Ereignis. Korridore auf die Zielwerte aus ereignisse.md Abschnitt 7 (Märzministerien
+  mindestens 70 %, Union höchstens 20 %). Balancing-Bericht, Wahl-, Zoll- und Kriegslabor 1848 bleiben
+  mit Ereignissen in ihren Zielwerten; 1648 bitgleich.
 
 ### Meilenstein M10 – Militär und Einigungskriege
 

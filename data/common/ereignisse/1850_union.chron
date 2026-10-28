@@ -89,19 +89,49 @@ ereignis pru.olmuetz {
     option nachgeben {
         text = "Nachgeben: auf die Union verzichten und zum Bund zurückkehren"
         historisch = ja
-        gewicht = 75
+        gewicht = 70
         wirkung { welt_merke = olmuetz  beziehung_AUT = 20  zustimmung_militaer = -2  zustimmung_nationalbewegung = -3 }
     }
     option standhalten {
         text = "Standhalten: die Union notfalls mit Krieg verteidigen"
-        gewicht = 25
+        gewicht = 30
         gewicht_wenn { zustimmung_militaer >= 3  plus = 10 }
         wirkung {
             welt_merke = olmuetz_standgehalten
             mobilmachung = ja
-            krieg = AUT
             zustimmung_nationalbewegung = 3
             chronik = "Preußen: In dieser Geschichte gibt Preußen in Olmütz nicht nach."
+            staat AUT { folge { ereignis = aut.olmuetz.antwort  tage = 7 } }
+        }
+    }
+}
+
+ereignis aut.olmuetz.antwort {
+    titel  = "Preußen gibt nicht nach"
+    text {
+        "Manteuffel ist ohne Unterschrift aus Olmütz abgereist, die preußischen Reservisten stehen unter"
+        "Waffen. Fürst Schwarzenberg muss entscheiden, ob Österreich mit Bayern und Sachsen den Krieg"
+        "beginnt oder die Union neben dem Bund hinnimmt. Der Zar mahnt beide Seiten zum Frieden."
+    }
+    quelle = "Siemann (1985); Clark (2007)"
+    sicherheit = ungeprueft
+    art    = dynamisch
+    wendepunkt = ja
+    nur_folge = ja
+    bedingung { staat = AUT  welt_merkmal = olmuetz_standgehalten }
+    option krieg {
+        text = "Der Bund vollstreckt die Exekution in Kurhessen, notfalls gegen Preußen"
+        gewicht = 60
+        wirkung { welt_merke = bruderkrieg_1850  mobilmachung = ja  krieg = PRU  zustimmung_militaer = 2 }
+    }
+    option einlenken {
+        text = "Die Union hinnehmen und den Bund ohne Preußen weiterführen"
+        gewicht = 40
+        wirkung {
+            welt_merke = union_anerkannt
+            beziehung_PRU = 15
+            zustimmung_militaer = -2
+            chronik = "Österreich: In dieser Geschichte nimmt Schwarzenberg die preußische Union hin."
         }
     }
 }

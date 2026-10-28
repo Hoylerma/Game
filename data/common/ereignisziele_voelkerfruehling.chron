@@ -1,7 +1,7 @@
 # Korridore des Ereignislabors für das Lesezeichen 1848 (Meilenstein M11, docs/technik/ereignisse.md
 # Abschnitt 7; Format: docs/technik/chronik-skript.md, Abschnitt 3.36). Spielwerte nach Entscheidung 11:
-# die Gegenrevolution als häufigster Ausgang, die anderen möglich, keiner in allen Läufen. Vorläufig bis
-# zur Kalibrierung (Schritt b2).
+# die Gegenrevolution als häufigster Ausgang, die anderen möglich, keiner in allen Läufen. Kalibriert in
+# Schritt b2.
 
 labor {
     bis     = 1851.12.31
@@ -12,11 +12,13 @@ labor {
 ausgang gegenrevolution   { anteil = { 0.5 0.9 } }
 ausgang reich_paulskirche { anteil = { 0.05 0.3 } }
 ausgang grossdeutsch      { anteil = { 0 0.1 } }
+ausgang union             { anteil = { 0 0.2 } }
 ausgang republik          { anteil = { 0 0.1 } }
 
-# Märzministerien bis Ende April 1848 (Anteil aller Staaten des Lesezeichens; ohne Preußen, Österreich,
-# Bayern, Dänemark und die Niederlande, die eigene Ereignisse haben, sind es 33 von 38)
-ereignis maerz.forderungen { option = gewaehren  bis = 1848.04.30  staaten = { 0.45 0.87 } }
+# Märzministerien bis Ende April 1848 in mindestens 70 % der Staaten mit dem Ereignis (Abschnitt 7). Der
+# Anteil zählt alle 38 Staaten des Lesezeichens; ohne Preußen, Österreich, Bayern, Dänemark und die
+# Niederlande, die eigene Ereignisse haben, sind es 33, also 70 % … 100 % = 0,61 … 0,87.
+ereignis maerz.forderungen { option = gewaehren  bis = 1848.04.30  staaten = { 0.61 0.87 } }
 ereignis nv.kaiserwahl     { anteil = { 0.6 1 } }
 
 # Abnahme „beide Wege sind spielbar“ (Abschnitt 10): Preußen nimmt die Krone an bzw. folgt der Reaktion.
