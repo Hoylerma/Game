@@ -1,0 +1,17 @@
+# Korridore des Ereignislabors für die deutsche Frage ab 1848 (Meilenstein M11, Schritt b3;
+# docs/technik/ereignisse.md Abschnitte 5.4 und 7; Format: docs/technik/chronik-skript.md, Abschnitt
+# 3.36). Rechnet bis zum Ende des Journals am 1.7.1871 (langsamer, nicht in jedem CI-Lauf):
+#   uhrwerk-cli ereignisse --szenario voelkerfruehling --seeds 16 --ziele data/common/ereignisziele_voelkerfruehling_1871.chron
+# Vorläufig bis zur Kalibrierung.
+
+labor {
+    bis     = 1871.07.01
+    journal = deutsche_frage
+    nicht_festgelegt = ja
+}
+
+ausgang kleindeutsch { anteil = { 0 1 } }
+ausgang zwei_buende  { anteil = { 0 1 } }
+ausgang bund         { anteil = { 0 1 } }
+ausgang gescheitert  { anteil = { 0 1 } }
+ausgang grossdeutsch { anteil = { 0 1 } }

@@ -35,12 +35,12 @@ constexpr int kZstdLevel = 3;
 /// Obergrenze der unkomprimierten Nutzdaten (Schutz vor beschädigten Längenangaben).
 constexpr std::uint64_t kMaxPayload = std::uint64_t{1} << 31;
 /// Stand des Militärs im Zustand (seit M10, Inhaltsbereich militaer): 1 = Schritt a1 (Garnisonen).
-constexpr std::uint64_t kMilitaryContentVersion = 8;
+constexpr std::uint64_t kMilitaryContentVersion = 9;
 
 /// Stand der Ereignisse im Zustand (seit M11, Inhaltsbereich ereignisse): 1 = Schritt a1, 2 = a2 (Auslösung,
 /// Befristung, Spieler), 3 = a3 (Unruhe, Aufstände), 4 = a4 (Journale, Abstimmungen), 5 = a5 (beendete
 /// Aufstände).
-constexpr std::uint64_t kEventContentVersion = 5;
+constexpr std::uint64_t kEventContentVersion = 6;
 
 bool fail(std::string* error, std::string message) {
     if (error != nullptr) {
@@ -1169,6 +1169,10 @@ void effects_hash(Fnv& h, const std::vector<Effect>& effects) {
             h.fixed(e.weights[i]);
             effects_hash(h, e.branches[i]);
         }
+        h.u64(e.goals.size()); // seit b3 (Inhaltsstand 6)
+        for (const std::int64_t g : e.goals) {
+            h.i64(g);
+        }
     }
 }
 
@@ -1534,6 +1538,7 @@ ContentFingerprint content_fingerprint(const World& w) {
             h.fixed(r.staff_morale); // seit b2
             h.fixed(r.victory_morale);
             h.fixed(r.points_army_share);
+            h.u64(r.federal_passage ? 1 : 0); // seit M11 (b3)
             h.u64(w.deployments.size());
             for (const Deployment& d : w.deployments) {
                 h.text(d.id);

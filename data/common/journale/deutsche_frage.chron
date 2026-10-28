@@ -1,0 +1,90 @@
+# Journal „Die deutsche Frage“ 1848–1871 (Meilenstein M11, Schritt b3; docs/technik/ereignisse.md
+# Abschnitt 5.4). Format: docs/technik/chronik-skript.md, Abschnitt 3.35.
+#
+# In einer Partie ab 1848 bleiben Besitz, Bundesgebiet und Bundesversammlung die des Starts (militaer.md
+# 6.1); die deutsche Frage entscheiden daher die Merkmale der Ereignisse: das Reich der Paulskirche, die
+# Union, der Krieg von 1866, der Norddeutsche Bund, die Kaiserproklamation. In den Lesezeichen 1866 und
+# 1870 beginnt das Journal mit dem Krieg bzw. mit dem Norddeutschen Bund (Bundesgebiet ohne Österreich).
+# Ohne Spieler kommt eine Reichsgründung 1871 nur über Ereignisse zustande, die Kriege auslösen
+# (Entscheidung 10). Am Ende wählt jede Stufe ihren Ausgang selbst (Übergänge am 30.6.1871).
+
+journal deutsche_frage {
+    titel  = "Die deutsche Frage"
+    text {
+        "Neununddreißig Staaten bilden den Deutschen Bund, einen Bund der Fürsten ohne Parlament, geführt"
+        "von Österreich und Preußen. Die Nationalbewegung will einen Bundesstaat, die einen mit, die anderen"
+        "ohne Österreich; die Fürsten wollen ihre Souveränität behalten."
+        ""
+        "Ob am Ende ein kleindeutsches oder ein großdeutsches Reich steht, zwei Bünde nördlich und südlich"
+        "des Mains oder der alte Bund, entscheidet sich bis zum Sommer 1871."
+    }
+    ende = 1871.07.01
+
+    stufe deutscher_bund {
+        titel = "Der Deutsche Bund"
+        text  = "Österreich führt den Vorsitz in der Bundesversammlung, Preußen den Zollverein. Jede Reform braucht beide Großmächte und die Mehrheit der Mittelstaaten."
+        ziel { text = "Preußen führt den Zollverein weiter" bedingung { welt_merkmal = zollverein_verlaengert } }
+        ziel { text = "Ein deutscher Nationalverein" bedingung { welt_merkmal = nationalverein } }
+        ziel { text = "Schleswig-Holstein ist dänisch nicht mehr" bedingung { welt_merkmal = wiener_frieden } }
+        weiter { zu = kleindeutsch  wenn { oder { welt_merkmal = reich_paulskirche  welt_merkmal = kaiserproklamation } } }
+        weiter { zu = grossdeutsch  wenn { welt_merkmal = grossdeutsches_reich } }
+        weiter { zu = bruderkrieg   wenn { oder { welt_merkmal = deutscher_krieg  staat PRU { krieg_mit = AUT } } } }
+        weiter {
+            zu = nordbund
+            wenn {
+                oder {
+                    welt_merkmal = norddeutscher_bund
+                    welt_merkmal = union_preussen
+                    alle { staat AUT { bund = nein }  staat PRU { bund = ja } }
+                }
+            }
+        }
+        weiter { zu = bund  wenn { datum >= 1871.06.30 } }
+    }
+    stufe bruderkrieg {
+        titel = "Der Deutsche Krieg"
+        text  = "Preußen und Österreich führen Krieg um die Vorherrschaft in Deutschland, die Mittelstaaten stehen meist auf Österreichs Seite. Wer siegt, bestimmt die Ordnung nach dem Krieg."
+        ziel { text = "Der Bund ist aufgelöst" bedingung { welt_merkmal = bund_aufgeloest } }
+        ziel { text = "Ein Bund unter Preußen nördlich des Mains" bedingung { welt_merkmal = norddeutscher_bund } }
+        weiter { zu = nordbund  wenn { welt_merkmal = norddeutscher_bund } }
+        weiter { zu = deutscher_bund  wenn { welt_merkmal = bundesreform_oesterreich } }
+        weiter { zu = gescheitert  wenn { welt_merkmal = bund_aufgeloest  datum >= 1871.06.30 } }
+        weiter { zu = bund  wenn { datum >= 1871.06.30 } }
+    }
+    stufe nordbund {
+        titel = "Zwei Bünde"
+        text  = "Nördlich des Mains regiert ein Bund unter Preußen mit einem Reichstag aus allgemeinen Wahlen. Bayern, Württemberg, Baden und Hessen sind durch Bündnisse und den Zollverein gebunden, aber selbständig."
+        ziel { text = "Das Zollparlament tagt" bedingung { welt_merkmal = zollparlament } }
+        ziel { text = "Süddeutsche Staaten treten dem Bund bei" zaehle { merkmal = reichsbeitritt } soll = 4 }
+        ziel { text = "Ein Deutscher Kaiser" bedingung { welt_merkmal = kaiserproklamation } }
+        weiter { zu = kleindeutsch  wenn { welt_merkmal = kaiserproklamation } }
+        weiter { zu = zwei_buende  wenn { datum >= 1871.06.30 } }
+    }
+    ausgang kleindeutsch {
+        titel   = "Das kleindeutsche Reich"
+        wertung = gelungen
+        text    = "Ein Bundesstaat unter Preußen umfasst die Staaten nördlich und südlich des Mains; Österreich bleibt draußen. Ob er aus der Paulskirche kommt oder aus Versailles, bestimmt, wie frei er ist."
+        wirkung { welt_merke = kleindeutsches_reich }
+    }
+    ausgang grossdeutsch {
+        titel   = "Das großdeutsche Reich"
+        wertung = gelungen
+        text    = "Österreich gehört mit seinen deutschen Ländern zum Reich. Ein Staat von der Nordsee bis zur Adria entsteht, mit Völkern, die nicht alle Deutsche sind und es nicht werden wollen."
+    }
+    ausgang zwei_buende {
+        titel   = "Zwei Bünde"
+        wertung = teilweise
+        text    = "Der Norddeutsche Bund unter Preußen besteht neben selbständigen süddeutschen Staaten. Der Main ist eine Grenze geblieben, die Zollverein und Bündnisse überbrücken."
+    }
+    ausgang bund {
+        titel    = "Der Deutsche Bund"
+        wertung  = gescheitert
+        standard = ja
+        text     = "Der Deutsche Bund besteht weiter, reformiert oder nicht. Ein deutscher Nationalstaat ist nicht entstanden."
+    }
+    ausgang gescheitert {
+        titel   = "Ohne Bund und Reich"
+        wertung = gescheitert
+        text    = "Der alte Bund ist aufgelöst, ein neuer nicht entstanden. Die deutschen Staaten stehen nebeneinander wie nach 1806."
+    }
+}

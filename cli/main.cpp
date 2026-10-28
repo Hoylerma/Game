@@ -527,15 +527,18 @@ std::string events_summary(const World& w) {
         return "keine (vor dem 'seit' in common/ereignisse.chron)";
     }
     std::array<std::size_t, 3> kinds{};
+    std::size_t sourced = 0;            // mit Quelle (Abnahme M11: mindestens 80, ereignisse.md 10)
     std::map<int, std::size_t> decades; // Jahrzehnt des Datums oder Termins; -1 ohne Datum
     for (const uhrwerk::EventDef& e : w.events) {
         kinds[static_cast<std::size_t>(e.kind)] += 1;
+        sourced += e.source.empty() ? 0 : 1;
         const int year = e.has_date ? e.date.year : e.has_fixed_date ? e.fixed_date.year : -1;
         decades[year < 0 ? -1 : year / 10 * 10] += 1;
     }
     std::string text = plural(w.events.size(), "Ereignis", "Ereignisse") + " (" + std::to_string(kinds[0]) +
                        " historisch, " + std::to_string(kinds[1]) + " dynamisch, " +
-                       std::to_string(kinds[2]) + " atmosphärisch), Frist " +
+                       std::to_string(kinds[2]) + " atmosphärisch, " + std::to_string(sourced) +
+                       " mit Quelle), Frist " +
                        plural(static_cast<std::size_t>(w.event_rules.deadline), "Tag", "Tage") + ", " +
                        plural(w.journals.size(), "Journal", "Journale") + ", " +
                        plural(w.votes.size(), "Abstimmung", "Abstimmungen");

@@ -130,6 +130,7 @@ ereignis aut.olmuetz.antwort {
         wirkung {
             welt_merke = union_anerkannt
             beziehung_PRU = 15
+            staat PRU { mobilmachung = nein }
             zustimmung_militaer = -2
             chronik = "Österreich: In dieser Geschichte nimmt Schwarzenberg die preußische Union hin."
         }

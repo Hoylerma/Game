@@ -1,0 +1,359 @@
+# Ereignisse 1852–1862: Reaktion, Krimkrieg, Neue Ära und preußischer Verfassungskonflikt (Meilenstein
+# M11, docs/technik/ereignisse.md Abschnitt 6.2). Format: docs/technik/chronik-skript.md, Abschnitt
+# 3.34. Texte paraphrasiert, Quellen aus der Literatur (Kenntnis, ohne Seitenangaben), alle
+# 'sicherheit = ungeprueft'; Gewichte und Wirkungen sind Spielwerte. Die Datumsfenster enden vor dem
+# Lesezeichen „Düppel“ (1.2.1864); in den Kriegslesezeichen treten diese Ereignisse nicht ein.
+
+ereignis den.londoner_protokoll {
+    titel  = "Das Londoner Protokoll"
+    text   = "Die Großmächte, Schweden und Dänemark garantieren in London die Einheit der dänischen Monarchie. Schleswig und Holstein bleiben beim König von Dänemark, der zusagt, Schleswig nicht enger an das Königreich zu binden als Holstein."
+    datum  = 1852.05.08
+    quelle = "Nipperdey, Deutsche Geschichte 1800–1866 (1983); Clark, Preußen (2007)"
+    sicherheit = ungeprueft
+    art    = historisch
+    wer    = welt
+    bedingung { datum >= 1852.05.01  datum <= 1852.12.31  staat DEN { im_krieg = nein } }
+    wartezeit = 7
+    option unterzeichnen {
+        text = "Die Großmächte garantieren den dänischen Gesamtstaat"
+        historisch = ja
+        gewicht = 1
+        wirkung { welt_merke = londoner_protokoll }
+    }
+}
+
+ereignis polizeiverein {
+    titel  = "Der Polizeiverein"
+    text   = "Die Polizeichefs der großen deutschen Staaten tauschen in vertraulichen Konferenzen Berichte über Demokraten, Flüchtlinge und Arbeitervereine aus. Ohne Beschluss des Bundes entsteht eine Überwachung über die Grenzen hinweg."
+    datum  = 1851.04.09
+    quelle = "Siemann, Gesellschaft im Aufbruch (1990)"
+    sicherheit = ungeprueft
+    art    = atmosphaerisch
+    wer    = welt
+    bedingung { welt_merkmal = bundesreaktion  datum >= 1852.01.01  datum <= 1853.12.31 }
+    wartezeit = 60
+    option ueberwachen {
+        text = "Die Polizeiberichte gehen hin und her"
+        historisch = ja
+        gewicht = 1
+        wirkung { welt_merke = polizeiverein }
+    }
+}
+
+ereignis zollverein.krise {
+    titel  = "Die Zollvereinskrise"
+    text {
+        "Die Verträge des Zollvereins laufen Ende 1853 aus. Österreich wirbt bei den süddeutschen Staaten"
+        "für eine mitteleuropäische Zollunion, Preußen hat mit dem Septembervertrag Hannover und den"
+        "Steuerverein gewonnen. Die Mittelstaaten müssen wählen, wem sie folgen."
+    }
+    datum  = 1852.04.20
+    quelle = "Hahn, Geschichte des Deutschen Zollvereins (1984); Nipperdey (1983)"
+    sicherheit = ungeprueft
+    art    = historisch
+    wendepunkt = ja
+    bedingung { staat = BAV  datum >= 1852.04.01  datum <= 1853.03.31 }
+    wartezeit = 30
+    option verlaengern {
+        text = "Im Zollverein unter Preußen bleiben"
+        historisch = ja
+        gewicht = 75
+        gewicht_wenn { beziehung_PRU >= 25  plus = 15 }
+        wirkung { welt_merke = zollverein_verlaengert  zustimmung_handel_finanzen = 2  beziehung_AUT = -10  beziehung_PRU = 10 }
+    }
+    option oesterreich {
+        text = "Mit Österreich über eine mitteleuropäische Zollunion verhandeln"
+        gewicht = 25
+        gewicht_wenn { beziehung_AUT >= 50  plus = 15 }
+        wirkung { welt_merke = mitteleuropa_zollplan  zustimmung_handel_finanzen = -3  zustimmung_katholische_kirche = 1  beziehung_AUT = 15  beziehung_PRU = -15 }
+    }
+}
+
+ereignis pru.februarvertrag {
+    titel  = "Der Handelsvertrag mit Österreich"
+    text   = "Preußen und Österreich schließen einen Handelsvertrag auf zwölf Jahre. Österreich bekommt Zollermäßigungen und die Aussicht auf Verhandlungen über eine Zolleinigung; der Zollverein bleibt preußisch geführt."
+    datum  = 1853.02.19
+    quelle = "Hahn (1984); Huber, Deutsche Verfassungsgeschichte Bd. 3 (1963)"
+    sicherheit = ungeprueft
+    art    = historisch
+    bedingung { staat = PRU  welt_merkmal = zollverein_verlaengert  datum >= 1853.01.01  datum <= 1853.12.31 }
+    wartezeit = 20
+    option abschliessen {
+        text = "Den Vertrag abschließen und Österreich vertrösten"
+        historisch = ja
+        gewicht = 80
+        wirkung { welt_merke = februarvertrag  beziehung_AUT = 10  zustimmung_handel_finanzen = 1 }
+    }
+    option ablehnen {
+        text = "Keine Zugeständnisse an Österreich"
+        gewicht = 20
+        wirkung { beziehung_AUT = -15  zustimmung_handel_finanzen = -1  zustimmung_militaer = 1 }
+    }
+}
+
+ereignis krimkrieg {
+    titel  = "Der Krimkrieg"
+    text {
+        "Frankreich und Großbritannien kämpfen an der Seite des Osmanischen Reiches gegen Russland. Österreich"
+        "zieht Truppen an der Grenze zusammen und verlangt die Räumung der Donaufürstentümer; Preußen will"
+        "neutral bleiben. Im Bundestag ringen beide um die Stimmen der Mittelstaaten."
+    }
+    datum  = 1854.03.28
+    quelle = "Baumgart, Der Friede von Paris 1856 (1972); Nipperdey (1983)"
+    sicherheit = ungeprueft
+    art    = historisch
+    wendepunkt = ja
+    wer    = welt
+    bedingung { datum >= 1854.03.01  datum <= 1854.12.31  staat PRU { im_krieg = nein }  staat AUT { im_krieg = nein } }
+    wartezeit = 14
+    option neutral {
+        text = "Der Bund bleibt neutral, Preußen bremst Österreich"
+        historisch = ja
+        gewicht = 70
+        wirkung { welt_merke = krimkrieg_neutral  staat PRU { beziehung_AUT = -10 }  staat AUT { beziehung_PRU = -10 } }
+    }
+    option westmaechte {
+        text = "Der Bund stellt sich hinter Österreich und die Westmächte"
+        gewicht = 30
+        wirkung { welt_merke = krimkrieg_westmaechte  staat AUT { beziehung_PRU = 10 }  staat PRU { zustimmung_militaer = -1 } }
+    }
+}
+
+ereignis auswanderung.fuenfziger {
+    titel  = "Die große Auswanderung"
+    text {
+        "Teuerung, Kartoffelkrankheit und die Enttäuschung nach der Revolution treiben Hunderttausende über"
+        "Bremen und Hamburg nach Amerika. Agenten werben in den Dörfern, ganze Familien verkaufen Hof und"
+        "Hausrat. Die Gemeinden zahlen manchem Armen die Überfahrt."
+    }
+    datum  = 1854.01.01
+    quelle = "Bade, Europa in Bewegung (2000); Marschalck, Deutsche Überseewanderung im 19. Jahrhundert (1973)"
+    sicherheit = ungeprueft
+    art    = historisch
+    bedingung { datum >= 1852.01.01  datum <= 1855.12.31  bund = ja  lebensstandard_unten <= 45 }
+    wartezeit = 180
+    option ziehen_lassen {
+        text = "Die Auswanderer ziehen lassen"
+        historisch = ja
+        gewicht = 70
+        wirkung { auswanderung = 0.004  unruhe = -5 }
+    }
+    option foerdern {
+        text = "Die Überfahrt der Armen aus der Gemeindekasse zahlen"
+        gewicht = 20
+        wirkung { auswanderung = 0.006  unruhe = -8  monatseinnahmen = -0.3 }
+    }
+    option erschweren {
+        text = "Die Auswanderung mit Auflagen erschweren"
+        gewicht = 10
+        wirkung { auswanderung = 0.002  unruhe = 5  zustimmung_bauernschaft = -1 }
+    }
+}
+
+ereignis pru.regentschaft {
+    titel  = "Die Neue Ära"
+    text {
+        "Der König ist nach mehreren Schlaganfällen regierungsunfähig, sein Bruder Wilhelm übernimmt die"
+        "Regentschaft. Er entlässt das Ministerium Manteuffel und beruft gemäßigte Liberale; die Wahlen zum"
+        "Abgeordnetenhaus bringen den Liberalen eine Mehrheit. Man spricht von einer neuen Ära."
+    }
+    datum  = 1858.10.07
+    quelle = "Clark (2007); Nipperdey (1983)"
+    sicherheit = ungeprueft
+    art    = historisch
+    bedingung { staat = PRU  datum >= 1858.10.01  datum <= 1859.03.31 }
+    wartezeit = 10
+    option neue_aera {
+        text = "Ein liberales Ministerium berufen"
+        historisch = ja
+        gewicht = 70
+        wirkung { merke = neue_aera  zustimmung_bildungsbuergertum = 3  zustimmung_nationalbewegung = 1  zustimmung_adel = -1  unruhe = -5 }
+    }
+    option weiter_so {
+        text = "Das Ministerium Manteuffel behalten"
+        gewicht = 30
+        wirkung { zustimmung_adel = 1  zustimmung_bildungsbuergertum = -2  unruhe = 5 }
+    }
+}
+
+ereignis italienischer.krieg {
+    titel  = "Der Italienische Krieg"
+    text {
+        "Frankreich und Sardinien führen Krieg gegen Österreich in der Lombardei. Nach Magenta und Solferino"
+        "verlangt Wien die Hilfe des Bundes am Rhein. Preußen macht mobil, will aber den Oberbefehl über"
+        "die Bundestruppen; die Öffentlichkeit ist zwischen Hass auf Napoleon und Abneigung gegen Österreich"
+        "gespalten."
+    }
+    datum  = 1859.04.29
+    quelle = "Nipperdey (1983); Clark (2007)"
+    sicherheit = ungeprueft
+    art    = historisch
+    wendepunkt = ja
+    wer    = welt
+    bedingung { datum >= 1859.04.15  datum <= 1859.08.31  staat AUT { im_krieg = nein }  staat PRU { im_krieg = nein } }
+    wartezeit = 14
+    option abwarten {
+        text = "Preußen verlangt den Oberbefehl, Österreich schließt rasch Frieden"
+        historisch = ja
+        gewicht = 65
+        wirkung { welt_merke = villafranca  staat AUT { beziehung_PRU = -15 }  staat PRU { zustimmung_militaer = 1 } }
+    }
+    option bundeshilfe {
+        text = "Der Bund stellt sich hinter Österreich"
+        gewicht = 35
+        wirkung { welt_merke = bund_fuer_oesterreich  staat AUT { beziehung_PRU = 10 }  staat PRU { zustimmung_nationalbewegung = -1 } }
+    }
+}
+
+ereignis nationalverein {
+    titel  = "Der Deutsche Nationalverein"
+    text   = "In Frankfurt gründen Liberale und Demokraten den Deutschen Nationalverein. Er wirbt für einen Bundesstaat mit einem Parlament und einer starken Zentralgewalt, die er sich unter Preußen vorstellt; bald zählt er über 20.000 Mitglieder."
+    datum  = 1859.09.16
+    quelle = "Biefang, Politisches Bürgertum in Deutschland 1857–1868 (1994); Nipperdey (1983)"
+    sicherheit = ungeprueft
+    art    = historisch
+    wer    = welt
+    bedingung { datum >= 1859.06.01  datum <= 1860.06.30 }
+    wartezeit = 30
+    option gruenden {
+        text = "Der Nationalverein wird gegründet"
+        historisch = ja
+        gewicht = 1
+        wirkung { welt_merke = nationalverein  alle_staaten { zustimmung_nationalbewegung = 1 } }
+    }
+}
+
+ereignis schillerfeier {
+    titel  = "Die Schillerfeier"
+    text   = "Zum hundertsten Geburtstag Friedrich Schillers feiern Städte und Dörfer mit Festzügen, Reden und Illuminationen. Turner, Sänger und Schützen marschieren, und in den Festreden ist viel von der Einheit der Nation die Rede."
+    datum  = 1859.11.10
+    quelle = "Noltenius, Dichterfeiern in Deutschland (1984)"
+    sicherheit = ungeprueft
+    art    = atmosphaerisch
+    wer    = welt
+    bedingung { datum >= 1859.11.01  datum <= 1859.11.30 }
+    termin = 1859.11.10
+    option feiern {
+        text = "Die Nation feiert ihren Dichter"
+        historisch = ja
+        gewicht = 1
+        wirkung { welt_merke = schillerfeier }
+    }
+}
+
+ereignis pru.heeresreform {
+    titel  = "Die Heeresreform"
+    text {
+        "Kriegsminister Roon legt dem Abgeordnetenhaus die Heeresreform vor: drei Jahre Dienstzeit, mehr"
+        "Regimenter, die Landwehr in die zweite Reihe. Die liberale Mehrheit will die Landwehr erhalten und"
+        "die zweijährige Dienstzeit; über das Budget entscheidet das Parlament."
+    }
+    datum  = 1860.02.10
+    quelle = "Clark (2007); Huber Bd. 3 (1963)"
+    sicherheit = ungeprueft
+    art    = historisch
+    bedingung { staat = PRU  datum >= 1860.01.01  datum <= 1861.06.30 }
+    wartezeit = 20
+    option durchsetzen {
+        text = "Die Reform durchsetzen, notfalls mit provisorischen Mitteln"
+        historisch = ja
+        gewicht = 70
+        gewicht_wenn { zustimmung_militaer >= 3  plus = 10 }
+        wirkung { merke = heeresreform  zustimmung_militaer = 3  zustimmung_bildungsbuergertum = -2  monatseinnahmen = -0.5 }
+    }
+    option kompromiss {
+        text = "Mit dem Abgeordnetenhaus über die zweijährige Dienstzeit verhandeln"
+        gewicht = 30
+        wirkung { merke = heeresreform_kompromiss  zustimmung_militaer = -2  zustimmung_bildungsbuergertum = 2 }
+    }
+}
+
+ereignis pru.fortschrittspartei {
+    titel  = "Die Deutsche Fortschrittspartei"
+    text   = "Linksliberale Abgeordnete gründen in Berlin die Deutsche Fortschrittspartei, die erste Partei mit einem festen Programm. Sie verlangt die Durchführung der Verfassung, ein verantwortliches Ministerium und die deutsche Einheit unter Preußen; bei den Wahlen wird sie stärkste Fraktion."
+    datum  = 1861.06.06
+    quelle = "Nipperdey, Deutsche Geschichte 1866–1918 Bd. 2 (1992); Clark (2007)"
+    sicherheit = ungeprueft
+    art    = historisch
+    bedingung { staat = PRU  merkmal = heeresreform  datum >= 1861.01.01  datum <= 1862.06.30 }
+    wartezeit = 30
+    option gruenden {
+        text = "Die Fortschrittspartei zieht in den Wahlkampf"
+        historisch = ja
+        gewicht = 1
+        wirkung { merke = fortschrittspartei  zustimmung_bildungsbuergertum = 1  zustimmung_adel = -1 }
+    }
+}
+
+ereignis pru.verfassungskonflikt {
+    titel  = "Der Verfassungskonflikt"
+    text {
+        "Das Abgeordnetenhaus streicht die Mittel für die Heeresreform. König Wilhelm will lieber abdanken"
+        "als nachgeben und hat die Urkunde schon aufgesetzt. Roon rät, Otto von Bismarck zu berufen, der"
+        "ohne Budget regieren will."
+    }
+    datum  = 1862.09.22
+    quelle = "Clark (2007); Pflanze, Bismarck Bd. 1 (1990)"
+    sicherheit = ungeprueft
+    art    = historisch
+    wendepunkt = ja
+    bedingung { staat = PRU  merkmal = heeresreform  merkmal = fortschrittspartei  datum >= 1862.03.01  datum <= 1863.06.30 }
+    wartezeit = 30
+    option bismarck {
+        text = "Bismarck zum Ministerpräsidenten berufen und ohne Budget regieren"
+        historisch = ja
+        gewicht = 60
+        gewicht_wenn { zustimmung_militaer >= 3  plus = 15 }
+        wirkung {
+            merke = bismarck
+            gesetz_presse = pressegesetz
+            zustimmung_militaer = 2
+            zustimmung_adel = 2
+            zustimmung_bildungsbuergertum = -4
+            unruhe = 10
+        }
+    }
+    option nachgeben {
+        text = "Nachgeben: die zweijährige Dienstzeit und das Budgetrecht anerkennen"
+        gewicht = 25
+        wirkung {
+            merke = konflikt_beigelegt
+            zustimmung_militaer = -4
+            zustimmung_bildungsbuergertum = 3
+            unruhe = -5
+            chronik = "Preußen: In dieser Geschichte gibt der König im Heereskonflikt nach."
+        }
+    }
+    option abdanken {
+        text = "König Wilhelm dankt ab, Kronprinz Friedrich Wilhelm regiert"
+        gewicht = 15
+        wirkung {
+            merke = kronprinz_regiert
+            zustimmung_bildungsbuergertum = 4
+            zustimmung_militaer = -3
+            zustimmung_adel = -2
+            chronik = "Preußen: In dieser Geschichte dankt Wilhelm I. 1862 ab; der Kronprinz regiert mit den Liberalen."
+        }
+    }
+}
+
+ereignis pru.blut_und_eisen {
+    titel  = "Blut und Eisen"
+    text {
+        "In der Budgetkommission sagt Bismarck, nicht durch Reden und Majoritätsbeschlüsse würden die großen"
+        "Fragen der Zeit entschieden, sondern durch Eisen und Blut. Die liberale Presse ist empört, selbst"
+        "der König ist besorgt. Das Wort wird zum Etikett seiner Politik."
+    }
+    datum  = 1862.09.30
+    quelle = "Rede vor der Budgetkommission des Abgeordnetenhauses, 30.9.1862; Pflanze Bd. 1 (1990)"
+    sicherheit = ungeprueft
+    art    = atmosphaerisch
+    bedingung { staat = PRU  merkmal = bismarck  datum <= 1863.12.31 }
+    wartezeit = 7
+    option reden {
+        text = "Die Rede macht Schlagzeilen"
+        historisch = ja
+        gewicht = 1
+        wirkung { zustimmung_bildungsbuergertum = -1  zustimmung_militaer = 1 }
+    }
+}

@@ -3005,6 +3005,7 @@ private:
                           "muedigkeit_monat",
                           "stillstand_monate",
                           "generalstab",
+                          "bund_durchzug",
                           "generalstab_angriff",
                           "generalstab_rueckzug",
                           "generalstab_umkreis_km",
@@ -3078,6 +3079,9 @@ private:
                 optional_days("stillstand_monate", rules.stalemate_months, 1, 120);
                 if (f.has("generalstab")) {
                     rules.staff = f.boolean("generalstab").value_or(false);
+                }
+                if (f.has("bund_durchzug")) { // seit M11 (b3)
+                    rules.federal_passage = f.boolean("bund_durchzug").value_or(false);
                 }
                 optional_fixed("generalstab_angriff", rules.staff_attack, between(fx(1), fx(10)));
                 optional_fixed("generalstab_rueckzug", rules.staff_retreat, between(fx(1), fx(10)));

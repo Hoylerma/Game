@@ -1,0 +1,249 @@
+# Dynamische Ereignisse 1848–1871 (Meilenstein M11, docs/technik/ereignisse.md Abschnitt 6.3):
+# wiederholbar, aus dem Zustand ausgelöst (Preise, Lebensstandard, Gesetze, Unruhe). Die Quellen nennen
+# das historische Muster, nicht einen einzelnen Fall. Format: docs/technik/chronik-skript.md, Abschnitt
+# 3.34; alle 'sicherheit = ungeprueft', Gewichte und Wirkungen sind Spielwerte. Die Arbeiterbewegung
+# steht hier nicht in Bedingungen: In einer Partie ab 1848 entsteht sie erst nach dem Start und ihre
+# Prüfungen wären nie wahr (späterer Inhalt, chronik-skript.md 3.34).
+
+ereignis missernte {
+    titel  = "Missernte und Teuerung"
+    text   = "Nach einem nassen Sommer ist die Ernte schlecht ausgefallen, der Brotpreis steigt Woche um Woche. Händler halten Getreide zurück, in den Städten stehen die Leute vor den Bäckereien an. Die Regierung muss entscheiden, ob sie in den Markt eingreift."
+    quelle = "Abel, Massenarmut und Hungerkrisen im vorindustriellen Europa (1974); Bass, Hungerkrisen in Preußen während der ersten Hälfte des 19. Jahrhunderts (1991)"
+    sicherheit = ungeprueft
+    art    = dynamisch
+    bedingung { preis_getreide >= 1.5 }
+    wartezeit = 30
+    wiederholbar = ja
+    abstand = 1095
+    option magazine {
+        text = "Getreide aus den Staatsmagazinen verbilligt abgeben"
+        gewicht = 40
+        wirkung { unruhe = -10  monatseinnahmen = -0.5 }
+    }
+    option ausfuhrverbot {
+        text = "Die Ausfuhr von Getreide verbieten"
+        gewicht = 35
+        wirkung { unruhe = -5  zustimmung_handel_finanzen = -1  zustimmung_bauernschaft = -1 }
+    }
+    option markt {
+        text = "Dem Markt vertrauen"
+        gewicht = 25
+        wirkung { unruhe = 5  zustimmung_handel_finanzen = 1 }
+    }
+}
+
+ereignis hungerkrawall {
+    titel  = "Ein Hungerkrawall"
+    text   = "Auf dem Markt stürmen Frauen und Tagelöhner die Stände der Bäcker und Kornhändler, Fenster gehen zu Bruch. Die Bürgerwehr zögert, das Militär steht bereit. In der Stadt geht das Wort vom gerechten Preis um."
+    quelle = "Gailus, Straße und Brot. Sozialer Protest in den deutschen Staaten 1847–1849 (1990)"
+    sicherheit = ungeprueft
+    art    = dynamisch
+    bedingung { preis_getreide >= 1.7  unruhe >= 35  aufstand = nein }
+    wartezeit = 60
+    wiederholbar = ja
+    abstand = 1095
+    option brotpreis {
+        text = "Einen Höchstpreis für Brot festsetzen"
+        gewicht = 55
+        wirkung { unruhe = -8  monatseinnahmen = -0.3  zustimmung_mittelstand = -1 }
+    }
+    option militaer {
+        text = "Das Militär räumt den Markt"
+        gewicht = 45
+        wirkung { unruhe = 5  zustimmung_militaer = 1  zustimmung_bildungsbuergertum = -1 }
+    }
+}
+
+ereignis cholera {
+    titel  = "Die Cholera"
+    text {
+        "In den Hafenstädten und an den Flüssen sterben Menschen an der Cholera, die aus dem Osten"
+        "gekommen ist. Die Ärzte streiten, ob sie durch die Luft oder durch das Wasser übertragen wird;"
+        "die Gemeinden sperren Häuser, räuchern Briefe und richten Lazarette ein."
+    }
+    quelle = "Evans, Death in Hamburg (1987); Briese, Angst in den Zeiten der Cholera (2003)"
+    sicherheit = ungeprueft
+    art    = dynamisch
+    bedingung {
+        lebensstandard_unten <= 50
+        oder {
+            alle { datum >= 1849.05.01  datum <= 1849.10.31 }
+            alle { datum >= 1854.06.01  datum <= 1855.10.31 }
+            alle { datum >= 1866.06.01  datum <= 1866.11.30 }
+        }
+    }
+    wartezeit = 120
+    wiederholbar = ja
+    abstand = 1460
+    option quarantaene {
+        text = "Sperren und Lazarette auf Staatskosten"
+        gewicht = 55
+        wirkung { unruhe = -3  monatseinnahmen = -0.3  zustimmung_handel_finanzen = -1 }
+    }
+    option abwarten {
+        text = "Den Gemeinden die Sorge überlassen"
+        gewicht = 45
+        wirkung { unruhe = 5  zustimmung_bildungsbuergertum = -1 }
+    }
+}
+
+ereignis auswanderung.welle {
+    titel  = "Eine Auswanderungswelle"
+    text   = "Briefe aus Amerika erzählen von billigem Land und hohen Löhnen; ganze Dörfer folgen den ersten. In Bremen und Hamburg warten Familien mit ihrem Hausrat auf die Schiffe, Agenten der Reedereien werben auf den Märkten."
+    quelle = "Bade (2000); Marschalck (1973)"
+    sicherheit = ungeprueft
+    art    = dynamisch
+    bedingung { datum >= 1856.01.01  lebensstandard_unten <= 35 }
+    wartezeit = 365
+    wiederholbar = ja
+    abstand = 1825
+    option ziehen_lassen {
+        text = "Die Auswanderer ziehen lassen"
+        gewicht = 70
+        wirkung { auswanderung = 0.003  unruhe = -3 }
+    }
+    option halten {
+        text = "Mit Arbeit im Land halten: Straßen- und Eisenbahnbau"
+        gewicht = 30
+        wirkung { auswanderung = 0.001  monatseinnahmen = -0.4  unruhe = -2 }
+    }
+}
+
+ereignis weberelend {
+    titel  = "Das Elend der Weber"
+    text   = "Gegen die Maschinengarne aus England und den Fabriken kommen die Hausweber nicht an. Die Verleger drücken die Stücklöhne, in den Weberdörfern hungern die Familien. Pfarrer und Ärzte schreiben Berichte, die in den Zeitungen gedruckt werden."
+    quelle = "Kocka, Arbeitsverhältnisse und Arbeiterexistenzen (1990); Hodenberg, Aufstand der Weber (1997)"
+    sicherheit = ungeprueft
+    art    = dynamisch
+    bedingung { staat_in = { PRU SAX }  lebensstandard_unten <= 40  datum <= 1866.12.31 }
+    wartezeit = 365
+    wiederholbar = ja
+    abstand = 1825
+    option unterstuetzen {
+        text = "Notstandsarbeiten und Unterstützung für die Weberdörfer"
+        gewicht = 50
+        wirkung { unruhe = -5  monatseinnahmen = -0.3 }
+    }
+    option nichts {
+        text = "Das ist Sache der Verleger"
+        gewicht = 50
+        wirkung { unruhe = 5  zustimmung_handel_finanzen = 1  zustimmung_bildungsbuergertum = -1 }
+    }
+}
+
+ereignis eisenbahn.eroeffnung {
+    titel  = "Eine Bahn wird eröffnet"
+    text   = "Mit Fahnen, Musik und einer Festrede fährt der erste Zug über die neue Strecke. Honoratioren sitzen im geschmückten Wagen, an den Bahnhöfen drängt sich das Volk. Die Kaufleute rechnen mit billigeren Frachten, die Fuhrleute mit dem Ende ihres Gewerbes."
+    quelle = "Gall/Pohl (Hg.), Die Eisenbahn in Deutschland (1999)"
+    sicherheit = ungeprueft
+    art    = atmosphaerisch
+    bedingung { datum >= 1850.01.01  schatz >= 0 }
+    wartezeit = 1460
+    wiederholbar = ja
+    abstand = 1825
+    option feiern {
+        text = "Die Eröffnung feiern"
+        gewicht = 1
+        wirkung { zustimmung_handel_finanzen = 1  unruhe = -2 }
+    }
+}
+
+ereignis eisenbahn.unglueck {
+    titel  = "Ein Eisenbahnunglück"
+    text   = "Bei einer Weiche ist ein Personenzug entgleist, es gibt Tote und Verletzte. Die Zeitungen fragen nach den Signalen, den übermüdeten Lokomotivführern und der Aufsicht über die Bahngesellschaft."
+    quelle = "Gall/Pohl (1999)"
+    sicherheit = ungeprueft
+    art    = dynamisch
+    bedingung { datum >= 1850.01.01 }
+    wartezeit = 2920
+    wiederholbar = ja
+    abstand = 2920
+    option aufsicht {
+        text = "Eine strengere Aufsicht über die Bahnen anordnen"
+        gewicht = 60
+        wirkung { monatseinnahmen = -0.1  zustimmung_handel_finanzen = -1  zustimmung_bildungsbuergertum = 1 }
+    }
+    option untersuchung {
+        text = "Die Untersuchung der Gesellschaft überlassen"
+        gewicht = 40
+        wirkung { unruhe = 3  zustimmung_handel_finanzen = 1 }
+    }
+}
+
+ereignis streik {
+    titel  = "Ein Streik"
+    text   = "In einer Fabrik legen die Arbeiter die Arbeit nieder: Sie wollen höhere Löhne und einen kürzeren Arbeitstag. Der Unternehmer droht mit Entlassung, die Polizei beruft sich auf das Koalitionsverbot. Die Liberalen sind uneins, ob Arbeiter sich zusammenschließen dürfen."
+    quelle = "Kocka (1990); Tenfelde/Volkmann (Hg.), Streik (1981)"
+    sicherheit = ungeprueft
+    art    = dynamisch
+    bedingung { datum >= 1860.01.01  lebensstandard_unten <= 45  gesetz_vereine != verbot }
+    wartezeit = 365
+    wiederholbar = ja
+    abstand = 730
+    option vermitteln {
+        text = "Ein Schiedsgericht vermitteln"
+        gewicht = 50
+        wirkung { unruhe = -3  zustimmung_handel_finanzen = -1  zustimmung_bildungsbuergertum = 1 }
+    }
+    option verbieten {
+        text = "Den Streik nach dem Koalitionsverbot auflösen"
+        gewicht = 50
+        wirkung { unruhe = 5  zustimmung_handel_finanzen = 1  zustimmung_bildungsbuergertum = -1 }
+    }
+}
+
+ereignis pressprozess {
+    titel  = "Ein Pressprozess"
+    text   = "Die Staatsanwaltschaft klagt den Redakteur einer Oppositionszeitung wegen Beleidigung der Regierung an. Der Prozess füllt den Saal; die Verteidigung spricht von der Freiheit der Presse, die Anklage von der Ordnung."
+    quelle = "Siemann, Gesellschaft im Aufbruch (1990); Requate, Journalismus als Beruf (1995)"
+    sicherheit = ungeprueft
+    art    = dynamisch
+    bedingung { gesetz_presse = pressegesetz  unruhe >= 20 }
+    wartezeit = 365
+    wiederholbar = ja
+    abstand = 1095
+    option verurteilen {
+        text = "Verurteilen und die Zeitung verbieten"
+        gewicht = 60
+        wirkung { unruhe = 3  zustimmung_bildungsbuergertum = -1  zustimmung_beamtenschaft = 1 }
+    }
+    option freispruch {
+        text = "Die Richter sprechen frei"
+        gewicht = 40
+        wirkung { unruhe = -2  zustimmung_bildungsbuergertum = 1  zustimmung_beamtenschaft = -1 }
+    }
+}
+
+ereignis turnfest {
+    titel  = "Ein Turnfest"
+    text   = "Tausende Turner aus allen Teilen Deutschlands ziehen mit Fahnen durch die festlich geschmückte Stadt. Auf dem Festplatz turnen sie, abends reden Abgeordnete vom einigen Vaterland, und die Polizei schreibt mit."
+    quelle = "Düding, Organisierter gesellschaftlicher Nationalismus in Deutschland (1984)"
+    sicherheit = ungeprueft
+    art    = atmosphaerisch
+    bedingung { datum >= 1858.01.01  gesetz_vereine != verbot }
+    wartezeit = 1095
+    wiederholbar = ja
+    abstand = 1460
+    option feiern {
+        text = "Das Fest gewähren lassen"
+        gewicht = 1
+        wirkung { zustimmung_nationalbewegung = 1 }
+    }
+}
+
+ereignis saengerfest {
+    titel  = "Ein Sängerfest"
+    text   = "Die Männergesangvereine der Region treffen sich zum Sängerfest. Auf der Festwiese erklingen Chöre über Wald, Wein und Vaterland, die Wirte machen das Geschäft des Jahres; Humor hat, wer die Festreden bis zum Ende hört."
+    quelle = "Klenke, Der singende „deutsche Mann“ (1998)"
+    sicherheit = ungeprueft
+    art    = atmosphaerisch
+    bedingung { datum >= 1850.01.01  gesetz_vereine != verbot }
+    wartezeit = 1460
+    wiederholbar = ja
+    abstand = 1825
+    option feiern {
+        text = "Ein Hoch auf die Sänger"
+        gewicht = 1
+        wirkung { zustimmung_mittelstand = 1  unruhe = -1 }
+    }
+}

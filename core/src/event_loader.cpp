@@ -1,5 +1,6 @@
 #include "event_loader.hpp"
 
+#include "uhrwerk/military.hpp"
 #include "uhrwerk/script.hpp"
 
 #include <algorithm>
@@ -1180,7 +1181,7 @@ private:
             negation.children.push_back(std::move(c));
             return negation;
         }
-        if (key == "krieg_mit") {
+        if (key == "krieg_mit" || key == "krieg_gewonnen" || key == "krieg_verloren") {
             if (!need_state(node, has_state) || !assign(node)) {
                 return std::nullopt;
             }
@@ -1192,7 +1193,9 @@ private:
             if (is_absent) {
                 return never();
             }
-            c.kind = ConditionKind::WarWith;
+            c.kind = key == "krieg_mit"        ? ConditionKind::WarWith
+                     : key == "krieg_gewonnen" ? ConditionKind::WarWon
+                                               : ConditionKind::WarLost;
             c.a = *state;
             return c;
         }
@@ -1547,6 +1550,9 @@ private:
         if (key == "antrag") {
             return motion(node, has_state, skip);
         }
+        if (key == "krieg" && node.is_block) {
+            return war(node, has_state, skip);
+        }
         if (node.is_block) {
             error(node.line, "unbekannte Wirkung " + quote(key) + " (Vokabular: chronik-skript.md 3.34)");
             return std::nullopt;
@@ -1688,11 +1694,12 @@ private:
             return e;
         }
         if (key == "mobilmachung") {
-            if (node.value != "ja") {
-                error(node.line, "'mobilmachung' erwartet ja");
+            if (node.value != "ja" && node.value != "nein") {
+                error(node.line, "'mobilmachung' erwartet ja oder nein");
                 return std::nullopt;
             }
             e.kind = EffectKind::Mobilize;
+            e.a = node.value == "ja" ? 1 : 0; // seit b3: nein rüstet ab (nicht im Krieg)
             return e;
         }
         struct Amount {
@@ -2086,6 +2093,77 @@ private:
 
     /// antrag { art = reform|zolleinigung|intervention|praesidium ziel = <TAG|zollunion> }
     /// (Bundesversammlung).
+    /// krieg { gegner = TAG  gebiet = <einheit> …  fuehrung = ja  zollunion = ja  annexion = ja
+    /// entschaedigung = n } (seit b3): Kriegserklärung mit Kriegszielen wie im Befehl (militaer.md 4.5).
+    std::optional<Effect> war(const ScriptNode& node, bool has_state, bool& skip) {
+        if (!node.value.empty() || !need_state(node, has_state)) {
+            if (node.value.empty()) {
+                return std::nullopt;
+            }
+            error(node.line, "'krieg' erwartet krieg = TAG oder einen Block: krieg { gegner = TAG … }");
+            return std::nullopt;
+        }
+        Effect e;
+        e.kind = EffectKind::War;
+        const ScriptNode* enemy = node.find("gegner");
+        if (enemy == nullptr || !scalar(*enemy)) {
+            error(node.line, "Pflichtfeld 'gegner' fehlt in krieg");
+            return std::nullopt;
+        }
+        bool is_absent = false;
+        const auto target = state_ref(*enemy, enemy->value, is_absent);
+        if (!target) {
+            return std::nullopt;
+        }
+        skip = is_absent;
+        e.a = *target;
+        bool ok = true;
+        for (const ScriptNode& child : node.children) {
+            if (child.key == "gegner") {
+                continue;
+            }
+            if (!scalar(child)) {
+                ok = false;
+                continue;
+            }
+            if (child.key == "gebiet") {
+                const Index unit = world_.find_admin_unit(child.value);
+                if (unit == kNone) {
+                    error(child.line, "unbekannte Verwaltungseinheit " + quote(child.value) + " in 'krieg'");
+                    ok = false;
+                    continue;
+                }
+                e.goals.push_back(encode_war_goal(WarGoalKind::Territory, unit));
+            } else if (child.key == "fuehrung" || child.key == "zollunion" || child.key == "annexion") {
+                const auto value = boolean(child);
+                if (!value) {
+                    ok = false;
+                } else if (*value) {
+                    e.goals.push_back(child.key == "fuehrung" ? encode_war_goal(WarGoalKind::Leadership, 0)
+                                      : child.key == "zollunion"
+                                          ? encode_war_goal(WarGoalKind::Customs, 0)
+                                          : encode_war_goal(WarGoalKind::Annexation, e.a));
+                }
+            } else if (child.key == "entschaedigung") {
+                const auto months = number(child, Fixed::one(), Fixed::from_int(24));
+                if (!months) {
+                    ok = false;
+                } else {
+                    e.goals.push_back(
+                        encode_war_goal(WarGoalKind::Indemnity, static_cast<Index>(months->round())));
+                }
+            } else {
+                error(child.line, "in 'krieg' sind nur gegner, gebiet, fuehrung, zollunion, annexion und "
+                                  "entschaedigung erlaubt");
+                ok = false;
+            }
+        }
+        if (!ok) {
+            return std::nullopt;
+        }
+        return e;
+    }
+
     std::optional<Effect> motion(const ScriptNode& node, bool has_state, bool& skip) {
         if (!node.is_block || !node.value.empty() || !need_state(node, has_state)) {
             if (node.is_block && node.value.empty()) {

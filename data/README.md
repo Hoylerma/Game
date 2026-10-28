@@ -412,7 +412,11 @@ Kriegslesezeichen nutzen die Daten von 1848 und die datierte Historie bis zu ihr
 | `common/ereignisse/1848_maerz.chron`, `1848_paulskirche.chron`, `1849_reichsverfassung.chron`, `1850_union.chron` | seit b1: 65 Ereignisse der Revolution 1848–1851 (Februarrevolution bis Silvesterpatent; seit b2 mit der Antwort Österreichs auf Olmütz), Texte paraphrasiert, Quellen aus der Literatur ohne Seitenangaben, alle `ungeprueft`; Gewichte und Wirkungen Spielwerte |
 | `common/journale/revolution.chron` | Journal „Revolution 1848/49“: Märzunruhen, Vorparlament, Nationalversammlung, Verfassungswerk, Kaiserkrone, Reichsverfassungskampagne, Union oder Bund; Ausgänge Reich der Paulskirche, Großdeutsche Lösung, Union, Gegenrevolution (am Ende), Republik |
 | `common/abstimmungen.chron` | acht Abstimmungen der Paulskirche (Zentralgewalt, Malmö, Paragraphen 2 und 3, Grundrechte, Wahlrecht, Erbkaiser, Reichsverfassung, Kaiserwahl) mit Neigung je Fraktion (Spielwerte nach den Ergebnissen der Literatur) |
-| `common/ereignisziele_voelkerfruehling.chron` | Korridore des Ereignislabors (vorläufig bis b2) und die Strategien `krone` und `reaktion` für Preußen |
+| `common/ereignisziele_voelkerfruehling.chron` | Korridore des Ereignislabors für die Revolution bis 1851 (kalibriert in b2) und die Strategien `krone` und `reaktion` für Preußen |
+| `common/ereignisse/1852_reaktion.chron`, `1863_einigung.chron` | seit b3: 33 Ereignisse 1852–1871 von Londoner Protokoll und Zollvereinskrise über Neue Ära und Verfassungskonflikt bis zu den Kriegen von 1864 und 1866 (mit Kriegszielen), Norddeutschem Bund, Emser Depesche, Novemberverträgen und Kaiserproklamation; Quellen aus der Literatur, `ungeprueft` |
+| `common/ereignisse/dynamisch.chron` | seit b3: elf wiederholbare Ereignisse aus dem Zustand (Missernte, Hungerkrawall, Cholera, Auswanderung, Weberelend, Bahneröffnung und -unglück, Streik, Pressprozess, Turn- und Sängerfest), Quellen für das Muster |
+| `common/journale/deutsche_frage.chron` | seit b3: Journal „Die deutsche Frage“ bis 1.7.1871 mit den Stufen Deutscher Bund, Deutscher Krieg, Zwei Bünde und den Ausgängen kleindeutsch, großdeutsch, zwei Bünde, Bund (am Ende), ohne Bund und Reich |
+| `common/ereignisziele_voelkerfruehling_1871.chron` | seit b3: Korridore des Ereignislabors für die deutsche Frage bis 1871 (`--ziele`, nicht in jedem CI-Lauf) |
 
 Das Lesezeichen 1648 hat keine Ereignisse (vor dem `seit`); seine Prüfsumme bleibt.
 

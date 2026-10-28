@@ -999,6 +999,9 @@ militaer {
     muedigkeit_verluste    = 100    # 0–1.000; muedigkeit_besetzung 50 (0–1.000), muedigkeit_monat 2 (0–100)
     stillstand_monate      = 12     # Ganzzahl 1–120
     generalstab            = ja     # ja/nein (nein): die Heere stehen beim Start unter dem Generalstab
+    bund_durchzug          = ja     # seit M11 (b3), ja/nein (nein): Heere eines Bundesstaates ziehen durch
+                                    # das Bundesgebiet anderer Bundesstaaten (Etappenstraßen, ohne Besetzung),
+                                    # nicht im Krieg gegen einen Staat mit Hauptstadt im Bundesgebiet
     generalstab_angriff    = 1.2    # 1–10; generalstab_rueckzug 2 (1–10)
     generalstab_umkreis_km = 60     # 1–1.000; generalstab_reichweite_km 300 (1–5.000)
     generalstab_moral      = 0.5    # seit b2, 0–1 (0): darunter erholt sich ein Heer, statt vorzurücken
@@ -1260,6 +1263,7 @@ den Staat gelten nur in Staatsereignissen oder innerhalb von `staat <TAG> { … 
 | `staaten { wenn { … } mindestens = n }` | Zahl der Staaten, für die `wenn` gilt (seit a4) |
 | `bundesversammlung = ruht`/`tagt` | die Bundesversammlung ruht (seit a4) |
 | `krieg_mit = TAG`, `zollunion = <id>`/`keine`, `beziehung_<TAG> >= n` | Krieg, Zollunion, Beziehung |
+| `krieg_gewonnen = TAG`, `krieg_verloren = TAG` | ein beendeter Krieg der beiden als Hauptparteien mit diesem Ausgang (seit b3; `World::war_results`) |
 | `sitze { parlament = <id> stroemung = <id> mindestens = n }` | Sitze nach der letzten Wahl |
 | `soldaten >= n`, `schatz >= n`, `schulden_quote >= x` | Heer und Haushalt |
 
@@ -1275,13 +1279,14 @@ den Staat gelten nur in Staatsereignissen oder innerhalb von `staat <TAG> { … 
 | `beziehung_<TAG> = ±n` (−400…400) | Beziehung zu einem Staat |
 | `auswanderung = x` (0…1) | Anteil der unteren Schicht wandert aus |
 | `verwuestung = x`, `verwuestung { ort = <id> wert = x }` (−1…1) | Verwüstung der Hauptstadt bzw. eines Ortes |
-| `mobilmachung = ja` | Mobilmachung |
+| `mobilmachung = ja`/`nein` | Mobilmachung bzw. Abrüstung (`nein` seit b3; nicht im Krieg) |
 | `aufstand = barrikaden`/`agrarunruhen`/`erhebung` | Aufstand beginnen (seit a3; je Staat höchstens einer) |
 | `journal_<id> = <stufe>` | Journal in eine Stufe oder einen Ausgang setzen (seit a4, auch in der Welt) |
 | `abstimmung = <id>` | Abstimmung im Parlament (seit a4, auch in der Welt; Abschnitt 3.35) |
 | `bundesversammlung = ruht`/`tagt` | Ruhen der Bundesversammlung (seit a4, auch in der Welt) |
 | `antrag { art = reform\|praesidium\|intervention\|zolleinigung ziel = TAG\|<zollunion> }` | Antrag des Staates in der Bundesversammlung (seit a4) |
-| `krieg = TAG` | Kriegserklärung ohne Kriegsziel, mit Bündnisfall (seit a4; nur mit Militär) |
+| `krieg = TAG` | Kriegserklärung ohne Kriegsziel, mit Bündnisfall (seit a4; nur mit Militär); ohne Ziel endet ein Krieg ohne Gewinner |
+| `krieg { gegner = TAG  gebiet = <einheit> …  fuehrung = ja  zollunion = ja  annexion = ja  entschaedigung = n }` | Kriegserklärung mit Kriegszielen wie im Befehl (seit b3; `gebiet` mehrfach, Entschädigung 1–24 Monatseinnahmen); ein ungültiges Ziel entfällt |
 | `intervention = TAG` | Truppen gegen den Aufstand in TAG (seit a3; mit Militär Mobilmachung) |
 | `folge { ereignis = <id> tage = n staat = TAG }` | Folgeereignis nach n Tagen (0), auch für einen anderen Staat |
 | `befristet { tage = n text = "…" steuerertrag = x moral = x unruhe = n beziehung_bund = n }` | Wirkung auf Zeit (seit a2): Steuerertrag und Kampfkraft ±x (−1…1), Unruhe und Beziehung zu allen Bundesstaaten je Monatserstem ±n (−100…100); `tage` (1…36500) und `text` Pflicht, mindestens ein Wert |

@@ -191,6 +191,7 @@ Die Kennung einer Gruppe, eines Gesetzes, Gutes oder Staates hängt mit `_` am S
 | `lebensstandard_unten <= n` | Lebensstandard der unteren Schicht |
 | `preis_<gut> >= x` | Preisfaktor im Markt der Hauptstadt |
 | `im_krieg = ja`, `krieg_mit = TAG`, `mobil = ja` | Krieg und Mobilmachung (M10) |
+| `krieg_gewonnen = TAG`, `krieg_verloren = TAG` | Ausgang eines beendeten Krieges (seit b3) |
 | `bund = ja`, `zollunion = <id>`, `beziehung_<TAG> >= n` | Bund, Zollunion, Beziehung (M7, M9) |
 | `sitze { parlament = <id> stroemung = <id> mindestens = n }` | Sitze nach der letzten Wahl (M8) |
 | `soldaten >= n`, `schatz >= n`, `schulden_quote >= x` | Heer und Haushalt |
@@ -213,7 +214,7 @@ Wirkungen ändern den Zustand am Tag der Wahl; alle sind deterministisch, Zufall
 | `auswanderung = x` | Anteil der unteren Schicht wandert aus (über das Bevölkerungsmodell, M4) |
 | `verwuestung = x`, `verwuestung { ort = <id> wert = x }` | Verwüstung (M1) |
 | `aufstand = <art>` | Aufstand beginnen (4.4, ab Schritt a3) |
-| `mobilmachung = ja`; `krieg = TAG` (seit a4, ohne Kriegsziel) | Militär (M10), mit Bündnisfall; den Frieden schließt der Krieg selbst (M10) |
+| `mobilmachung = ja`/`nein`; `krieg = TAG` (seit a4, ohne Kriegsziel), `krieg { gegner = TAG … }` (seit b3, mit Kriegszielen) | Militär (M10), mit Bündnisfall; den Frieden schließt der Krieg selbst (M10) |
 | `antrag { art = … ziel = … }`, `bundesversammlung = ruht`/`tagt` (seit a4) | Bundesversammlung (M9) und ihr Ruhen 1848–1851 |
 | `journal_<id> = <stufe>` (seit a4) | Journal weiterschalten (Abschnitt 5) |
 | `abstimmung = <id>` (seit a4) | Abstimmung in einem Parlament auslösen (5.3) |
@@ -406,7 +407,9 @@ Militär ein Viertel seines Friedensheeres. Jeder Ausgang schreibt einen Chronik
 Folgeereignis haben (`folge_nachgeben`, `folge_niederschlagung`, `folge_sieg`), das die eigentlichen
 Zugeständnisse, das Standrecht oder die Flucht des Fürsten mit Optionen erzählt. Wirkungen der Unruhe:
 Steuerverweigerung im Haushalt (alle Steuerarten), zusätzliche Auswanderung der unteren Schicht in der
-Bevölkerungsrechnung.
+Bevölkerungsrechnung. Seit b3 rüstet der Helfer nach dem Ende des Aufstands ab, wenn er nicht im Krieg
+steht und keinem anderen Aufstand mehr Truppen stellt (vorher blieb Preußen nach dem März 1848 bis zum
+nächsten Frieden mobil).
 
 ## 5. Journale (M11a/b)
 
@@ -529,6 +532,20 @@ Ziele mit Fortschritt (aus dem Zustand): Anteil der Bundesbevölkerung in der Zo
 Lager in der Bundesversammlung, Verfassungen der Staaten, Stand der Revolution. Ohne Spieler kommt
 eine Reichsgründung 1871 nur über Ereignisse zustande, die Kriege auslösen (Entscheidung 10).
 
+**Umsetzung (seit b3):** `common/journale/deutsche_frage.chron` mit drei Stufen (Deutscher Bund,
+Deutscher Krieg, Zwei Bünde) und den fünf Ausgängen, vom Start bis zum 1.7.1871; am 30.6.1871 wählt
+jede Stufe ihren Ausgang selbst (Bund → `bund`, Krieg → `gescheitert` nach der Auflösung des Bundes,
+sonst `bund`; Zwei Bünde → `zwei_buende`). In einer Partie ab 1848 bleiben Besitz, Bundesgebiet und
+Bundesversammlung die des Starts; die Übergänge lesen daher die Merkmale der Ereignisse:
+`reich_paulskirche` oder `kaiserproklamation` → kleindeutsch, `grossdeutsches_reich` → großdeutsch,
+`deutscher_krieg` oder Krieg Preußen–Österreich → Deutscher Krieg, `norddeutscher_bund` oder die
+Union der Revolution → Zwei Bünde; `bundesreform_oesterreich` (Österreich gewinnt 1866) führt zurück
+zum Bund. In den Lesezeichen 1866 und 1870 beginnt das Journal mit dem Krieg bzw. erkennt den
+Norddeutschen Bund am Bundesgebiet (Österreich nicht, Preußen im Bund). Ein Ergebnis der Kriege
+lesen die Ereignisse mit der Bedingung `krieg_gewonnen`/`krieg_verloren` (seit b3, aus
+`World::war_results`); die Kriege 1864 und 1866 haben Kriegsziele (`krieg { … }`, seit b3): die drei
+Herzogtümer bzw. die Führung im Bund, deren Verlierer den Bund verlässt.
+
 ## 6. Inhalt (M11b)
 
 ### 6.1 Ereignisse 1848–1851 (Revolution)
@@ -579,6 +596,19 @@ Kriege, die Lesezeichen 1864, 1866 und 1870 beginnen danach.
 | 1863–1866 | Alvensleben-Konvention (Preußen), Frankfurter Fürstentag (w), ADAV Lassalles (w), dänische Novemberverfassung und Bundesexekution (w, Krieg 1864), Frieden von Wien, Gasteiner Konvention (Preußen, Österreich), Bündnis mit Italien (Preußen), Bundesreformantrag mit allgemeinem Wahlrecht (Preußen), Mobilmachungsbeschluss des Bundes (w, Krieg 1866), Indemnitätsgesetz (Preußen, W) |
 | 1867–1871 | Norddeutscher Bund (w), Luxemburgkrise (w), Zollparlament (w), Eisenacher Partei (w), Spanische Thronkandidatur und Emser Depesche (Preußen, W: unverändert · zugespitzt · zurückhalten; Krieg 1870), Novemberverträge (Bayern, Württemberg, Baden, Hessen), Kaiserbrief (Bayern), Kaiserproklamation (w) |
 
+**Umsetzung (seit b3):** 33 Ereignisse in `common/ereignisse/1852_reaktion.chron` (Londoner Protokoll,
+Polizeiverein, Zollvereinskrise, Handelsvertrag mit Österreich, Krimkrieg, große Auswanderung, Neue
+Ära, Italienischer Krieg, Nationalverein, Schillerfeier, Heeresreform, Fortschrittspartei,
+Verfassungskonflikt, „Blut und Eisen“) und `1863_einigung.chron` (Alvensleben-Konvention, ADAV,
+Fürstentag, Novemberverfassung, Frieden von Wien, Gastein, Bundesreformantrag, Mobilmachungsbeschluss,
+Prager Frieden oder Österreichs Sieg, Indemnität, Luxemburgkrise, Norddeutscher Bund, Zollparlament,
+Eisenacher Partei, Emser Depesche, Novemberverträge, Kaiserbrief, Kaiserproklamation). Die Fenster der
+Kriegsanlässe enden vor den Lesezeichen „Düppel“ und „Königgrätz“; Frankreich hat in einer Partie ab
+1848 keine Orte, die Emser Depesche führt dann zu keinem Krieg, und die Novemberverträge folgen dem
+Merkmal der nationalen Krise (im Lesezeichen „Sedan“ dem Krieg mit Frankreich). Vereinfacht: Die
+Fortschrittspartei und die Arbeiterparteien sind Merkmale, keine neuen Strömungen; die Annexionen von
+1866 kommen nicht aus dem Prager Frieden, sondern nur aus Kriegszielen.
+
 ### 6.3 Dynamische Ereignisse
 
 Rund 10 wiederholbare Ereignisse aus Generatoren (Kapitel 18, Abschnitt 3.1) mit Bedingungen aus dem
@@ -589,6 +619,14 @@ Zustand: Missernte und Teuerung (Getreidepreis), Hungerkrawall (Teuerung, Unruhe
 
 Zusammen gut 95 Ereignisse; die Abnahme verlangt 80 mit Quellen (die dynamischen zählen mit, wenn
 sie eine Quelle für ihr Muster nennen).
+
+**Umsetzung (seit b3):** elf wiederholbare Ereignisse in `common/ereignisse/dynamisch.chron`: Missernte
+und Teuerung (Getreidepreis ≥ 1,5), Hungerkrawall (≥ 1,7 und Unruhe ≥ 35), Cholera (1849, 1854/55, 1866
+bei niedrigem Lebensstandard), Auswanderungswelle (ab 1856), Weberelend (Preußen, Sachsen bis 1866),
+Bahneröffnung und Eisenbahnunglück, Streik (ab 1860, nur ohne Vereinsverbot), Pressprozess (unter dem
+Pressegesetz), Turn- und Sängerfest; dazu die Schillerfeier 1859 als einmaliges Ereignis. Die Seuchen
+aus M1 bleiben eigene Regeln, die Cholera ist ihr politisches Echo. Zusammen 109 Ereignisse, alle mit
+Quelle (`uhrwerk-cli info`: „109 mit Quelle“, CTest `ereignisse_quellen`).
 
 ### 6.4 Texte, Quellen, Kompass
 
@@ -695,7 +733,7 @@ dem Inhalt (b1, b2).
 
 | Kriterium | Prüfung |
 |---|---|
-| Mindestens 80 Ereignisse 1848–1871 mit Quellen | `uhrwerk-cli pruefen` und `info` zählen Ereignisse mit `quelle` je Jahrzehnt; CTest `ereignisse_daten` |
+| Mindestens 80 Ereignisse 1848–1871 mit Quellen | `uhrwerk-cli pruefen` und `info` zählen Ereignisse mit `quelle` je Jahrzehnt; CTest `ereignisse_quellen` |
 | Die Revolution kann scheitern oder gelingen | Ereignislabor ohne Spieler: alle Ausgänge in ihren Korridoren, keiner in allen Läufen; mit den Strategien `krone` und `reaktion` erreicht Preußen den jeweiligen Ausgang (CI); Klicktest: als Preußen die Krone annehmen und den Ausgang „Reich“ erreichen, als Baden die Märzforderungen ablehnen und einen Aufstand erleben |
 
 Weitere Tests:

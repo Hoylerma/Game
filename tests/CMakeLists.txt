@@ -107,6 +107,11 @@ if(UHRWERK_BUILD_CLI)
                 --bis 1848.12.31)
     set_tests_properties(ereignisse_1848 PROPERTIES PASS_REGULAR_EXPRESSION
         "Märzunruhen \\(1848\\.03\\.01\\) → Vorparlament")
+    # Abnahme M11 (ereignisse.md Abschnitt 10): mindestens 80 Ereignisse 1848–1871 mit Quelle (seit b3).
+    add_test(NAME ereignisse_quellen
+        COMMAND uhrwerk-cli info --daten ${PROJECT_SOURCE_DIR}/data --szenario voelkerfruehling)
+    set_tests_properties(ereignisse_quellen PROPERTIES PASS_REGULAR_EXPRESSION
+        " (8[0-9]|9[0-9]|[1-9][0-9][0-9]+) mit Quelle\\)")
 
     # Ereignislabor (seit M11, docs/technik/ereignisse.md Abschnitt 7): eine kleine Revolution auf der Fixture
     # (tests/daten_ereignisse über tests/daten) gegen ihre Korridore über 16 Seeds, ohne Spieler und mit den
