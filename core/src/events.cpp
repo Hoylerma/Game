@@ -1181,7 +1181,10 @@ void run_events(World& world, Pcg32& rng, EventCache& cache) {
         const JournalDef& journal = world.journals[j];
         const auto index = static_cast<Index>(j);
         if (world.journal_states[j].stage == kNone) {
-            if (journal.has_begin && world.date < journal.begin) {
+            // Vor dem Beginn nicht, und ein Journal, dessen Ende schon vorbei ist (späteres Lesezeichen),
+            // nie.
+            if ((journal.has_begin && world.date < journal.begin) ||
+                (journal.has_end && journal.end <= world.date)) {
                 continue;
             }
             executor.enter_stage(index, 0);

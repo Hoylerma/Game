@@ -100,6 +100,13 @@ if(UHRWERK_BUILD_CLI)
         "Verstöße: keine – alle Kriegsziele erfüllt")
     add_test(NAME krieg_1848
         COMMAND uhrwerk-cli krieg --daten ${PROJECT_SOURCE_DIR}/data --szenario voelkerfruehling --seeds 1)
+    # Ereignislabor 1848 (seit M11b): ein kurzer Lauf bis Ende 1848 prüft nur, dass das Labor mit dem Inhalt
+    # rechnet (die Korridore gelten bis 1851 und prüft der CI-Job "Balancing" mit 16 Seeds).
+    add_test(NAME ereignisse_1848
+        COMMAND uhrwerk-cli ereignisse --daten ${PROJECT_SOURCE_DIR}/data --szenario voelkerfruehling --seeds 1
+                --bis 1848.12.31)
+    set_tests_properties(ereignisse_1848 PROPERTIES PASS_REGULAR_EXPRESSION
+        "Märzunruhen \\(1848\\.03\\.01\\) → Vorparlament")
 
     # Ereignislabor (seit M11, docs/technik/ereignisse.md Abschnitt 7): eine kleine Revolution auf der Fixture
     # (tests/daten_ereignisse über tests/daten) gegen ihre Korridore über 16 Seeds, ohne Spieler und mit den

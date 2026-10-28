@@ -1,0 +1,428 @@
+# Ereignisse Februar bis April 1848 (Meilenstein M11, docs/technik/ereignisse.md Abschnitt 6.1).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.34. Texte paraphrasiert, Quellen aus der Literatur
+# (Kenntnis, ohne Seitenangaben), alle 'sicherheit = ungeprueft'; Gewichte und Wirkungen sind Spielwerte.
+# Gewalt erscheint als Geschehen in Text und Chronik, nie als Belohnung (Abschnitt 6.5).
+
+ereignis paris.februarrevolution {
+    titel  = "Revolution in Paris"
+    text {
+        "Am 24. Februar hat König Louis-Philippe abgedankt, in Paris regiert eine provisorische Regierung"
+        "der Republik. Die Nachricht erreicht die deutschen Staaten in wenigen Tagen, mit der Eisenbahn und"
+        "dem Telegraphen schneller als je eine Revolution zuvor."
+    }
+    datum  = 1848.02.24
+    quelle = "Siemann, Die deutsche Revolution von 1848/49 (1985); Nipperdey, Deutsche Geschichte 1800–1866 (1983)"
+    sicherheit = ungeprueft
+    art    = historisch
+    wer    = welt
+    bedingung { datum <= 1848.03.10 }
+    option weiter {
+        text = "Die Nachricht verbreitet sich"
+        historisch = ja
+        gewicht = 1
+        wirkung { welt_merke = februarrevolution }
+    }
+}
+
+ereignis heidelberg.versammlung {
+    titel  = "Die Heidelberger Versammlung"
+    text   = "Einundfünfzig Liberale und Demokraten aus Süd- und Westdeutschland treffen sich in Heidelberg. Sie beschließen, ein Vorparlament nach Frankfurt einzuberufen, das die Wahl einer Nationalversammlung vorbereiten soll."
+    datum  = 1848.03.05
+    quelle = "Siemann (1985); Valentin, Geschichte der deutschen Revolution 1848–49 (1930/31)"
+    sicherheit = ungeprueft
+    art    = historisch
+    wer    = welt
+    bedingung { datum <= 1848.04.30 }
+    termin = 1848.03.05
+    option einberufen {
+        text = "Ein Siebenerausschuss lädt nach Frankfurt ein"
+        historisch = ja
+        gewicht = 1
+        wirkung { welt_merke = heidelberger_versammlung }
+    }
+}
+
+ereignis maerz.forderungen {
+    titel  = "Die Märzforderungen"
+    text {
+        "Volksversammlungen und Petitionen mit Tausenden Unterschriften verlangen Pressefreiheit,"
+        "Schwurgerichte, Volksbewaffnung und ein deutsches Parlament. Vor dem Schloss stehen Bürger, Studenten"
+        "und Handwerker; die Minister raten zur Vorsicht, die Offiziere zur Härte."
+    }
+    datum  = 1848.03.01
+    quelle = "Siemann (1985); Wehler, Deutsche Gesellschaftsgeschichte Bd. 2 (1987)"
+    sicherheit = ungeprueft
+    art    = historisch
+    wendepunkt = ja
+    bedingung {
+        datum <= 1848.05.31
+        bund = ja
+        nicht { staat_in = { PRU AUT BAV DEN NED } }
+        gesetz_presse = vorzensur
+    }
+    wartezeit = 10
+    option gewaehren {
+        text = "Nachgeben: ein Märzministerium aus Liberalen berufen, Pressefreiheit und Vereinsrecht gewähren"
+        historisch = ja
+        gewicht = 60
+        gewicht_wenn { unruhe >= 40  plus = 20 }
+        wirkung {
+            gesetz_presse = pressefreiheit
+            gesetz_vereine = vereinsfreiheit
+            merke = maerzministerium
+            zustimmung_bildungsbuergertum = 3
+            zustimmung_nationalbewegung = 2
+            zustimmung_adel = -2
+            zustimmung_militaer = -1
+            unruhe = -20
+        }
+    }
+    option hinhalten {
+        text = "Hinhalten: eine Kommission einsetzen und die Antwort vertagen"
+        gewicht = 25
+        wirkung { unruhe = 10  folge { ereignis = maerz.petitionen  tage = 14 } }
+    }
+    option militaer {
+        text = "Das Militär einsetzen und die Versammlungen auflösen"
+        gewicht = 15
+        gewicht_wenn { zustimmung_militaer >= 3  plus = 10 }
+        wirkung {
+            zustimmung_militaer = 2
+            zustimmung_bildungsbuergertum = -4
+            unruhe = 20
+            aufstand = barrikaden
+        }
+    }
+}
+
+ereignis maerz.petitionen {
+    titel  = "Neue Petitionen"
+    text   = "Die Kommission hat nichts beschlossen, die Geduld ist erschöpft. Neue Versammlungen ziehen vor das Schloss, in den Wirtshäusern ist von Barrikaden die Rede."
+    quelle = "Siemann (1985)"
+    sicherheit = ungeprueft
+    art    = dynamisch
+    nur_folge = ja
+    bedingung { gesetz_presse = vorzensur }
+    option gewaehren {
+        text = "Jetzt nachgeben und ein Märzministerium berufen"
+        gewicht = 70
+        wirkung {
+            gesetz_presse = pressefreiheit
+            gesetz_vereine = vereinsfreiheit
+            merke = maerzministerium
+            zustimmung_bildungsbuergertum = 2
+            zustimmung_adel = -2
+            unruhe = -15
+        }
+    }
+    option militaer {
+        text = "Die Ordnung mit Truppen herstellen"
+        gewicht = 30
+        wirkung { zustimmung_militaer = 1  zustimmung_bildungsbuergertum = -4  unruhe = 20  aufstand = barrikaden }
+    }
+}
+
+ereignis aut.metternich {
+    titel  = "Metternichs Sturz"
+    text {
+        "In Wien stürmen Studenten und Arbeiter das Ständehaus, Soldaten schießen in die Menge. Der Hof"
+        "opfert den Staatskanzler: Fürst Metternich, seit vier Jahrzehnten Sinnbild der Restauration, tritt"
+        "zurück und flieht nach England."
+    }
+    datum  = 1848.03.13
+    quelle = "Siemann (1985); Rumpler, Eine Chance für Mitteleuropa (1997)"
+    sicherheit = ungeprueft
+    art    = historisch
+    wendepunkt = ja
+    bedingung { staat = AUT  datum <= 1848.04.30 }
+    termin = 1848.03.13
+    option entlassen {
+        text = "Metternich entlassen, Pressefreiheit und eine Verfassung versprechen"
+        historisch = ja
+        gewicht = 80
+        wirkung {
+            gesetz_presse = pressefreiheit
+            merke = maerzministerium
+            zustimmung_adel = -2
+            zustimmung_bildungsbuergertum = 3
+            unruhe = -15
+        }
+    }
+    option halten {
+        text = "Am Staatskanzler festhalten und die Garnison verstärken"
+        gewicht = 20
+        wirkung { zustimmung_militaer = 1  zustimmung_bildungsbuergertum = -4  unruhe = 25  aufstand = barrikaden }
+    }
+}
+
+ereignis pru.barrikaden {
+    titel  = "Barrikaden in Berlin"
+    text {
+        "Vor dem Schloss fallen zwei Schüsse, aus der Menge wird ein Aufstand. Die ganze Nacht kämpfen Bürger,"
+        "Handwerker und Arbeiter auf Hunderten Barrikaden gegen die Truppen; am Morgen zählt man mehr als"
+        "zweihundert Tote. Friedrich Wilhelm IV. muss entscheiden, ob er weiterkämpfen lässt."
+    }
+    datum  = 1848.03.18
+    quelle = "Siemann (1985); Hachtmann, Berlin 1848 (1997)"
+    sicherheit = ungeprueft
+    art    = historisch
+    wendepunkt = ja
+    bedingung { staat = PRU  datum <= 1848.04.30 }
+    termin = 1848.03.18
+    option abziehen {
+        text = "Die Truppen aus Berlin abziehen und ein liberales Ministerium berufen"
+        historisch = ja
+        gewicht = 70
+        wirkung {
+            gesetz_presse = pressefreiheit
+            gesetz_vereine = vereinsfreiheit
+            merke = maerzministerium
+            zustimmung_militaer = -3
+            zustimmung_bildungsbuergertum = 3
+            zustimmung_nationalbewegung = 2
+            unruhe = -15
+            chronik = "Preußen: Nach den Barrikadenkämpfen in Berlin ziehen die Truppen ab; der König grüßt die Toten im Schlosshof."
+        }
+    }
+    option kaempfen {
+        text = "Den Kampf fortsetzen und die Stadt mit Gewalt räumen"
+        gewicht = 30
+        gewicht_wenn { zustimmung_militaer >= 3  plus = 10 }
+        wirkung {
+            zustimmung_militaer = 2
+            zustimmung_bildungsbuergertum = -5
+            zustimmung_nationalbewegung = -3
+            unruhe = 25
+            aufstand = barrikaden
+            verwuestung { ort = berlin_coelln wert = 0.05 }
+        }
+    }
+}
+
+ereignis pru.umritt {
+    titel  = "Der Umritt des Königs"
+    text   = "Mit einer schwarz-rot-goldenen Armbinde reitet Friedrich Wilhelm IV. durch Berlin. In einem Aufruf erklärt er, Preußen gehe fortan in Deutschland auf; die Offiziere sind entsetzt, die Liberalen hoffen."
+    datum  = 1848.03.21
+    quelle = "Siemann (1985); Clark, Preußen (2007)"
+    sicherheit = ungeprueft
+    art    = historisch
+    bedingung { staat = PRU  datum <= 1848.04.30  geschehen { ereignis = pru.barrikaden option = abziehen } }
+    termin = 1848.03.21
+    option reiten {
+        text = "Sich an die Spitze der nationalen Bewegung stellen"
+        historisch = ja
+        gewicht = 80
+        wirkung { zustimmung_nationalbewegung = 3  zustimmung_militaer = -2  zustimmung_adel = -1 }
+    }
+    option schweigen {
+        text = "Schweigen und in Potsdam abwarten"
+        gewicht = 20
+        wirkung { zustimmung_nationalbewegung = -2  zustimmung_militaer = 1  unruhe = 5 }
+    }
+}
+
+ereignis bav.abdankung {
+    titel  = "Ludwig I. dankt ab"
+    text   = "Die Affäre des Königs mit der Tänzerin Lola Montez hat Bayern seit Monaten in Aufruhr gehalten. Nun fordern auch die Münchner Bürger Reformen; Ludwig I. will kein konstitutioneller Schattenkönig sein."
+    datum  = 1848.03.20
+    quelle = "Siemann (1985); Gollwitzer, Ludwig I. von Bayern (1986)"
+    sicherheit = ungeprueft
+    art    = historisch
+    bedingung { staat = BAV  datum <= 1848.04.30 }
+    termin = 1848.03.20
+    option abdanken {
+        text = "Zugunsten des Kronprinzen Maximilian abdanken; ein Märzministerium folgt"
+        historisch = ja
+        gewicht = 75
+        wirkung {
+            gesetz_presse = pressefreiheit
+            merke = maerzministerium
+            zustimmung_bildungsbuergertum = 2
+            zustimmung_katholische_kirche = -1
+            unruhe = -15
+        }
+    }
+    option bleiben {
+        text = "Bleiben und die Kammer vertagen"
+        gewicht = 25
+        wirkung { zustimmung_bildungsbuergertum = -3  unruhe = 15 }
+    }
+}
+
+ereignis agrarunruhen {
+    titel  = "Unruhen auf dem Land"
+    text {
+        "In vielen Dörfern ziehen Bauern vor die Rentämter und Schlösser, verbrennen Grundbücher und"
+        "verweigern Abgaben und Fronden. Im Odenwald und im Kraichgau richten sich Übergriffe auch gegen"
+        "jüdische Nachbarn; Häuser werden geplündert, Familien fliehen in die Städte."
+    }
+    datum  = 1848.03.08
+    quelle = "Siemann (1985); Wirtz, Widersetzlichkeiten, Excesse, Crawalle, Tumulte und Skandale (1981)"
+    sicherheit = ungeprueft
+    art    = historisch
+    bedingung {
+        datum <= 1848.05.31
+        bund = ja
+        oder { gesetz_grundlasten = grundherrschaft  staat_in = { BAD HED WUE NAS HEK HOH HSI SAX } }
+    }
+    wartezeit = 20
+    option schutz {
+        text = "Ordnung herstellen und die Bedrohten unter den Schutz der Truppen stellen"
+        historisch = ja
+        gewicht = 55
+        wirkung { zustimmung_bauernschaft = -2  zustimmung_militaer = 1  unruhe = -5 }
+    }
+    option ablosung {
+        text = "Die Ablösung der Lasten zusagen und Gemeinden und Juden unter den Schutz des Gesetzes stellen"
+        gewicht = 45
+        wirkung { zustimmung_bauernschaft = 3  zustimmung_adel = -2  unruhe = -10  merke = agrarreform }
+    }
+}
+
+ereignis schleswig.erhebung {
+    titel  = "Erhebung in Schleswig-Holstein"
+    text {
+        "In Kiel bildet sich eine provisorische Regierung der Herzogtümer, nachdem Kopenhagen Schleswig dem"
+        "dänischen Staat einverleiben will. Für die deutschen Liberalen ist Schleswig-Holstein eine"
+        "nationale Sache, für die Dänen ihr eigenes Land; der Bundestag erkennt die Regierung an."
+    }
+    datum  = 1848.03.24
+    quelle = "Siemann (1985); Nipperdey (1983)"
+    sicherheit = ungeprueft
+    art    = historisch
+    wendepunkt = ja
+    wer    = welt
+    bedingung { datum <= 1848.06.30  staat PRU { im_krieg = nein } }
+    termin = 1848.03.24
+    option bundeskrieg {
+        text = "Preußen führt Bundestruppen gegen Dänemark"
+        historisch = ja
+        gewicht = 65
+        wirkung { welt_merke = schleswig_krieg  staat PRU { krieg = DEN } }
+    }
+    option verhandeln {
+        text = "Die Großmächte vermitteln, die Bundestruppen bleiben an der Eider"
+        gewicht = 35
+        wirkung { welt_merke = schleswig_verhandlung  staat DEN { beziehung_PRU = -20 } }
+    }
+}
+
+ereignis vorparlament {
+    titel  = "Das Vorparlament"
+    text {
+        "In der Frankfurter Paulskirche beraten 574 Männer, meist Abgeordnete der Ständeversammlungen."
+        "Hecker und Struve verlangen, dass die Versammlung beisammenbleibt und die Republik ausruft; die"
+        "Mehrheit will Wahlen zu einer Nationalversammlung und einen Fünfzigerausschuss bis dahin."
+    }
+    datum  = 1848.03.31
+    quelle = "Siemann (1985); Valentin (1930/31)"
+    sicherheit = ungeprueft
+    art    = historisch
+    wendepunkt = ja
+    wer    = welt
+    bedingung { welt_merkmal = heidelberger_versammlung  datum <= 1848.05.31 }
+    termin = 1848.03.31
+    option wahlen {
+        text = "Wahlen zur Nationalversammlung, ein Fünfzigerausschuss wacht bis dahin"
+        historisch = ja
+        gewicht = 85
+        wirkung { welt_merke = vorparlament }
+    }
+    option permanenz {
+        text = "Die Versammlung erklärt sich für permanent"
+        gewicht = 15
+        wirkung { welt_merke = vorparlament  welt_merke = permanenz }
+    }
+}
+
+ereignis bund.wahlrecht {
+    titel  = "Der Bundestag beschließt Wahlen"
+    text   = "Der Bundestag, seit Jahrzehnten Werkzeug der Unterdrückung, beschließt selbst die Wahl einer Nationalversammlung: ein Abgeordneter auf 50.000 Einwohner, wählen sollen die volljährigen, selbständigen Männer."
+    datum  = 1848.04.07
+    quelle = "Huber, Deutsche Verfassungsgeschichte Bd. 2 (1960)"
+    sicherheit = ungeprueft
+    art    = atmosphaerisch
+    wer    = welt
+    bedingung { welt_merkmal = vorparlament  datum <= 1848.05.31 }
+    wartezeit = 5
+    option a { text = "Die Wahlen werden vorbereitet" historisch = ja gewicht = 1 }
+}
+
+ereignis bad.heckerzug {
+    titel  = "Der Heckerzug"
+    text {
+        "Friedrich Hecker ruft in Konstanz die Republik aus und zieht mit einigen Tausend Freischärlern in"
+        "Richtung Karlsruhe. Badische und hessische Bundestruppen unter General von Gagern stellen sich ihnen"
+        "entgegen; die Bevölkerung des Seekreises schwankt."
+    }
+    datum  = 1848.04.12
+    quelle = "Siemann (1985); Mommsen, 1848 – Die ungewollte Revolution (1998)"
+    sicherheit = ungeprueft
+    art    = historisch
+    bedingung { staat = BAD  datum >= 1848.04.10  datum <= 1848.05.15  welt_merkmal = vorparlament }
+    wartezeit = 3
+    option bundestruppen {
+        text = "Bundestruppen anfordern und den Zug aufhalten"
+        historisch = ja
+        gewicht = 75
+        wirkung { unruhe = 20  aufstand = erhebung  zustimmung_militaer = 1 }
+    }
+    option amnestie {
+        text = "Verhandeln und den Freischärlern Amnestie anbieten"
+        gewicht = 25
+        wirkung { unruhe = -5  zustimmung_militaer = -2  zustimmung_bildungsbuergertum = 1 }
+    }
+}
+
+ereignis hed.hilfe.baden {
+    titel  = "Bundestruppen für Baden"
+    text   = "Baden bittet um Hilfe gegen die Freischaren. Hessische Truppen könnten in wenigen Tagen im Seekreis stehen."
+    datum  = 1848.04.20
+    quelle = "Siemann (1985)"
+    sicherheit = ungeprueft
+    art    = historisch
+    bedingung { staat = HED  datum <= 1848.12.31  staat BAD { aufstand = ja } }
+    option helfen {
+        text = "Truppen schicken"
+        historisch = ja
+        gewicht = 80
+        wirkung { intervention = BAD  zustimmung_militaer = 1  zustimmung_bildungsbuergertum = -1 }
+    }
+    option abwarten {
+        text = "Die eigenen Truppen im Land behalten"
+        gewicht = 20
+        wirkung { beziehung_BAD = -10 }
+    }
+}
+
+ereignis pru.posen {
+    titel  = "Aufstand in Posen"
+    text {
+        "In der Provinz Posen fordern polnische Komitees die nationale Reorganisation, für viele der erste"
+        "Schritt zu einem wiederhergestellten Polen. Die deutschen Einwohner fürchten um ihre Stellung, die"
+        "Generale um die Grenze. Nach der Konvention von Jarosławiec kommt es zu Kämpfen."
+    }
+    datum  = 1848.04.29
+    quelle = "Siemann (1985); Wehler Bd. 2 (1987)"
+    sicherheit = ungeprueft
+    art    = historisch
+    bedingung { staat = PRU  datum >= 1848.04.01  datum <= 1848.06.15 }
+    wartezeit = 15
+    option reorganisation {
+        text = "An der Reorganisation festhalten und mit den Komitees verhandeln"
+        gewicht = 30
+        wirkung { zustimmung_nationalbewegung = -2  zustimmung_militaer = -2  unruhe = -5 }
+    }
+    option niederschlagung {
+        text = "Die polnischen Verbände entwaffnen lassen"
+        historisch = ja
+        gewicht = 70
+        wirkung {
+            zustimmung_militaer = 1
+            unruhe = 5
+            verwuestung { ort = posen wert = 0.05 }
+            chronik = "Preußen: Preußische Truppen schlagen den polnischen Aufstand in Posen nieder; bei Miłosław und Sokołowo gibt es auf beiden Seiten Tote."
+        }
+    }
+}

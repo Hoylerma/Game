@@ -1,0 +1,86 @@
+# Abstimmungen der Deutschen Nationalversammlung 1848/49 (Meilenstein M11, docs/technik/ereignisse.md 5.3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.35. Neigung = Anteil der Ja-Stimmen je Fraktion
+# (Reihenfolge von rechts nach links wie in parlamente.chron); Fraktionen gibt es erst ab Oktober 1848
+# (fraktionen_ab), davor stimmen alle Abgeordneten nach 'fraktionslos'. Ergebnisse der Literatur in den
+# Kommentaren; die Neigungen sind Spielwerte, die sie mit den Sitzen der historischen Wahl ungefähr
+# treffen. Quellen: Siemann, Die deutsche Revolution von 1848/49 (1985); Botzenhart, Deutscher
+# Parlamentarismus 1848–1850 (1977); Wissensstand ohne Quellenzugang, ungeprüft.
+
+abstimmung zentralgewalt {
+    titel        = "Gesetz über die provisorische Zentralgewalt"   # 28.6.1848: 450 : 100
+    parlament    = nationalversammlung
+    neigung      = { cafe_milani = 0.9 casino = 0.95 landsberg = 0.95 augsburger_hof = 0.9 wuerttemberger_hof = 0.85
+                     westendhall = 0.7 deutscher_hof = 0.5 donnersberg = 0.3 }
+    fraktionslos = 0.82
+    ja   { welt_merke = reichsverweser }
+    nein { welt_merke = keine_zentralgewalt }
+}
+
+abstimmung malmoe {
+    titel        = "Billigung des Waffenstillstands von Malmö"     # 16.9.1848: 258 : 237
+    parlament    = nationalversammlung
+    neigung      = { cafe_milani = 1 casino = 0.95 landsberg = 0.85 augsburger_hof = 0.6 wuerttemberger_hof = 0.35
+                     westendhall = 0.2 deutscher_hof = 0.05 donnersberg = 0 }
+    fraktionslos = 0.52
+    ja   { welt_merke = malmoe_angenommen }
+    nein { welt_merke = malmoe_abgelehnt }
+}
+
+abstimmung grossdeutsch {
+    titel        = "Paragraphen 2 und 3: Kein Teil des Reiches mit nichtdeutschen Ländern zu einem Staat vereint"  # 27.10.1848: 340 : 76
+    parlament    = nationalversammlung
+    neigung      = { cafe_milani = 0.35 casino = 0.75 landsberg = 0.8 augsburger_hof = 0.9 wuerttemberger_hof = 0.95
+                     westendhall = 0.95 deutscher_hof = 0.95 donnersberg = 0.9 }
+    fraktionslos = 0.8
+    ja   { welt_merke = grossdeutsch }
+}
+
+abstimmung grundrechte {
+    titel        = "Grundrechte des deutschen Volkes"                 # Dezember 1848, verkündet 27.12.1848
+    parlament    = nationalversammlung
+    neigung      = { cafe_milani = 0.3 casino = 0.85 landsberg = 0.9 augsburger_hof = 0.95 wuerttemberger_hof = 1
+                     westendhall = 1 deutscher_hof = 1 donnersberg = 1 }
+    fraktionslos = 0.85
+    ja   { welt_merke = grundrechte }
+    nein { welt_merke = grundrechte_abgelehnt }
+}
+
+abstimmung wahlrecht_reich {
+    titel        = "Allgemeines, gleiches und geheimes Wahlrecht zum Volkshaus"   # Anfang März 1849
+    parlament    = nationalversammlung
+    neigung      = { cafe_milani = 0.1 casino = 0.15 landsberg = 0.3 augsburger_hof = 0.6 wuerttemberger_hof = 0.9
+                     westendhall = 0.95 deutscher_hof = 1 donnersberg = 1 }
+    fraktionslos = 0.55
+    ja   { welt_merke = wahlrecht_reich }
+}
+
+abstimmung erbkaiser {
+    titel        = "Erbliches Kaisertum"                               # 27.3.1849: 267 : 263
+    parlament    = nationalversammlung
+    neigung      = { cafe_milani = 0.2 casino = 0.95 landsberg = 0.85 augsburger_hof = 0.4 wuerttemberger_hof = 0.45
+                     westendhall = 0.4 deutscher_hof = 0.25 donnersberg = 0.05 }
+    fraktionslos = 0.5
+    ja   { welt_merke = erbkaiser }
+    nein { welt_merke = direktorium }
+}
+
+abstimmung reichsverfassung {
+    titel        = "Verfassung des Deutschen Reiches"                   # 27./28.3.1849 angenommen
+    parlament    = nationalversammlung
+    neigung      = { cafe_milani = 0.1 casino = 0.9 landsberg = 0.85 augsburger_hof = 0.75 wuerttemberger_hof = 0.85
+                     westendhall = 0.9 deutscher_hof = 0.85 donnersberg = 0.7 }
+    fraktionslos = 0.7
+    ja   { welt_merke = reichsverfassung_beschlossen }
+    nein { welt_merke = reichsverfassung_gescheitert }
+}
+
+abstimmung kaiserwahl {
+    titel        = "Wahl des Königs von Preußen zum Kaiser der Deutschen"   # 28.3.1849: 290 Stimmen, 248 Enthaltungen
+    parlament    = nationalversammlung
+    neigung      = { cafe_milani = 0.1 casino = 0.95 landsberg = 0.9 augsburger_hof = 0.55 wuerttemberger_hof = 0.5
+                     westendhall = 0.45 deutscher_hof = 0.3 donnersberg = 0.05 }
+    fraktionslos = 0.5
+    ja   { welt_merke = kaiser_gewaehlt }
+    nein { welt_merke = kein_kaiser }
+}

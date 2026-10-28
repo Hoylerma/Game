@@ -1,0 +1,534 @@
+# Ereignisse 1849: Verfassungswerk, Kaiserkrone, Reichsverfassungskampagne (Meilenstein M11,
+# docs/technik/ereignisse.md Abschnitt 6.1). Format: docs/technik/chronik-skript.md, Abschnitt 3.34. Quellen
+# aus der Literatur (Kenntnis, ohne Seitenangaben), alle 'sicherheit = ungeprueft'.
+
+ereignis aut.maerzverfassung {
+    titel  = "Die oktroyierte Märzverfassung"
+    text {
+        "Fürst Schwarzenberg löst den Reichstag in Kremsier auf und erlässt eine Verfassung für den ganzen"
+        "Kaiserstaat, Ungarn eingeschlossen. Ein unteilbares Österreich kann nicht mit seinen deutschen"
+        "Ländern allein einem deutschen Reich beitreten."
+    }
+    datum  = 1849.03.04
+    quelle = "Rumpler (1997); Siemann (1985)"
+    sicherheit = ungeprueft
+    art    = historisch
+    wendepunkt = ja
+    bedingung { staat = AUT  datum >= 1849.03.01  datum <= 1849.04.30 }
+    wartezeit = 3
+    option gesamtstaat {
+        text = "Die Verfassung für den Gesamtstaat oktroyieren"
+        historisch = ja
+        gewicht = 85
+        wirkung { verfassung = konstitutionell  welt_merke = oesterreich_gesamtstaat  zustimmung_militaer = 1  zustimmung_nationalbewegung = -2 }
+    }
+    option kremsier {
+        text = "Den Kremsierer Entwurf mit Länderautonomie annehmen"
+        gewicht = 15
+        wirkung { verfassung = konstitutionell  zustimmung_adel = -2  zustimmung_bildungsbuergertum = 2 }
+    }
+}
+
+ereignis nv.wahlrecht {
+    titel  = "Das Wahlrecht der Reichsverfassung"
+    text   = "Soll das Volkshaus nach allgemeinem und gleichem Wahlrecht gewählt werden oder nur von Steuerzahlern? Die Erbkaiserlichen brauchen die Stimmen der Linken; die Linke verlangt das allgemeine Wahlrecht als Preis."
+    datum  = 1849.03.02
+    quelle = "Siemann (1985); Botzenhart (1977)"
+    sicherheit = ungeprueft
+    art    = historisch
+    wer    = welt
+    bedingung { journal_revolution = verfassungswerk  datum >= 1849.02.20  datum <= 1849.04.30 }
+    wartezeit = 7
+    option abstimmen { text = "Die Versammlung stimmt ab" historisch = ja gewicht = 1 wirkung { abstimmung = wahlrecht_reich } }
+}
+
+ereignis nv.erbkaiser {
+    titel  = "Erbkaiser oder Direktorium"
+    text   = "Wer soll an der Spitze des Reiches stehen? Die Kleindeutschen wollen einen erblichen Kaiser aus dem Hause Hohenzollern, die Großdeutschen und die Linke ein Direktorium der Fürsten oder einen gewählten Präsidenten."
+    datum  = 1849.03.27
+    quelle = "Siemann (1985); Botzenhart (1977)"
+    sicherheit = ungeprueft
+    art    = historisch
+    wendepunkt = ja
+    wer    = welt
+    bedingung { journal_revolution = verfassungswerk  datum >= 1849.03.20  datum <= 1849.05.31  geschehen = nv.wahlrecht }
+    wartezeit = 4
+    option abstimmen {
+        text = "Die Versammlung stimmt über das Staatsoberhaupt und die Verfassung ab"
+        historisch = ja
+        gewicht = 1
+        wirkung { abstimmung = erbkaiser  abstimmung = reichsverfassung }
+    }
+}
+
+ereignis nv.kaiserwahl {
+    titel  = "Die Kaiserwahl"
+    text   = "Mit der Verfassung wählt die Versammlung den Kaiser. Einziger Kandidat ist Friedrich Wilhelm IV. von Preußen; die Linke enthält sich, die Österreicher bleiben der Wahl fern."
+    datum  = 1849.03.28
+    quelle = "Siemann (1985)"
+    sicherheit = ungeprueft
+    art    = historisch
+    wendepunkt = ja
+    wer    = welt
+    bedingung { welt_merkmal = erbkaiser  welt_merkmal = reichsverfassung_beschlossen  datum <= 1849.06.30 }
+    option waehlen {
+        text = "Die Versammlung wählt"
+        historisch = ja
+        gewicht = 1
+        wirkung { abstimmung = kaiserwahl  welt_merke = kaiserwahl_erfolgt }
+    }
+}
+
+ereignis nv.direktorium {
+    titel  = "Kein Kaiser"
+    text   = "Die Versammlung hat das Erbkaisertum abgelehnt oder die Verfassung nicht beschlossen. Über ein Direktorium der Fürsten kann sie sich nicht einigen; die Regierungen warten ab."
+    quelle = "Siemann (1985)"
+    sicherheit = ungeprueft
+    art    = dynamisch
+    wer    = welt
+    bedingung {
+        journal_revolution = verfassungswerk
+        oder { welt_merkmal = direktorium  welt_merkmal = reichsverfassung_gescheitert }
+        datum <= 1849.06.30
+    }
+    option warten { text = "Die Verfassung bleibt ohne Oberhaupt" gewicht = 1 wirkung { welt_merke = kein_kaiser  welt_merke = kaiserwahl_erfolgt } }
+}
+
+ereignis pru.kaiserdeputation {
+    titel  = "Die Kaiserdeputation"
+    text {
+        "Zweiunddreißig Abgeordnete unter Eduard Simson tragen Friedrich Wilhelm IV. im Berliner Schloss die"
+        "Kaiserkrone an. Der König verachtet eine Krone aus der Hand eines Parlaments; seine Minister fürchten"
+        "Österreich und Russland. Die Nation wartet auf seine Antwort."
+    }
+    datum  = 1849.04.03
+    quelle = "Siemann (1985); Clark (2007)"
+    sicherheit = ungeprueft
+    art    = historisch
+    wendepunkt = ja
+    bedingung { staat = PRU  welt_merkmal = kaiser_gewaehlt  datum <= 1849.06.30 }
+    wartezeit = 5
+    option annehmen {
+        text = "Die Krone annehmen und die Reichsverfassung anerkennen"
+        gewicht = 15
+        gewicht_wenn { zustimmung_nationalbewegung >= 5  plus = 10 }
+        gewicht_wenn { unruhe >= 60  plus = 10 }
+        wirkung {
+            welt_merke = krone_angenommen
+            merke = reichsverfassung
+            zustimmung_nationalbewegung = 4
+            zustimmung_bildungsbuergertum = 3
+            zustimmung_adel = -3
+            zustimmung_militaer = -2
+            beziehung_AUT = -40
+            chronik = "Preußen: In dieser Geschichte nimmt Friedrich Wilhelm IV. die Kaiserkrone der Paulskirche an."
+        }
+    }
+    option ablehnen {
+        text = "Die Krone ablehnen: ohne die Zustimmung der Fürsten keine Antwort"
+        historisch = ja
+        gewicht = 55
+        wirkung { welt_merke = krone_abgelehnt  zustimmung_nationalbewegung = -4  zustimmung_bildungsbuergertum = -2  zustimmung_adel = 2  unruhe = 10 }
+    }
+    option bedingungen {
+        text = "Eine Union mit den Fürsten anbieten, aber nicht aus der Hand des Parlaments"
+        gewicht = 30
+        wirkung { welt_merke = krone_abgelehnt  welt_merke = unionsplan  zustimmung_nationalbewegung = -2  unruhe = 5 }
+    }
+}
+
+ereignis aut.reichsverfassung {
+    titel  = "Österreich und das Reich"
+    text   = "Mit der Krone für Preußen und dem großdeutschen Grundsatz der Paragraphen 2 und 3 steht Österreich vor der Wahl: seine deutschen Länder ins Reich führen oder den Gesamtstaat zusammenhalten."
+    quelle = "Wollstein (1977)"
+    sicherheit = ungeprueft
+    art    = dynamisch
+    bedingung { staat = AUT  welt_merkmal = krone_angenommen  welt_merkmal = grossdeutsch  datum <= 1849.12.31 }
+    wartezeit = 10
+    option beitreten {
+        text = "Die deutschen Länder treten dem Reich bei"
+        gewicht = 10
+        gewicht_wenn { welt_merkmal = oesterreich_gesamtstaat  plus = -10 }
+        wirkung { merke = reichsverfassung  zustimmung_militaer = -3  zustimmung_adel = -3  zustimmung_nationalbewegung = 4 }
+    }
+    option gesamtstaat {
+        text = "Den Gesamtstaat zusammenhalten und das Reich nicht anerkennen"
+        historisch = ja
+        gewicht = 90
+        wirkung { zustimmung_nationalbewegung = -2  beziehung_PRU = -20 }
+    }
+}
+
+ereignis reichsverfassung.anerkennung {
+    titel  = "Die Anerkennung der Reichsverfassung"
+    text {
+        "Die Reichsverfassung liegt vor, die Regierungen sollen sie anerkennen. Volksversammlungen und"
+        "Märzvereine drängen; die Höfe der Königreiche zögern. Achtundzwanzig Regierungen erklären im April"
+        "ihre Zustimmung."
+    }
+    datum  = 1849.04.14
+    quelle = "Siemann (1985); Huber Bd. 2 (1960)"
+    sicherheit = ungeprueft
+    art    = historisch
+    bedingung {
+        bund = ja
+        nicht { staat_in = { AUT PRU DEN NED LIE } }
+        welt_merkmal = reichsverfassung_beschlossen
+        oder { journal_revolution = kaiserkrone  journal_revolution = kampagne }
+        datum <= 1849.07.31
+    }
+    wartezeit = 12
+    option anerkennen {
+        text = "Die Reichsverfassung anerkennen"
+        historisch = ja
+        gewicht = 70
+        gewicht_wenn { staat_in = { BAV SAX HAN }  plus = -60 }
+        gewicht_wenn { welt_merkmal = krone_angenommen  plus = 30 }
+        gewicht_wenn { unruhe >= 60  plus = 20 }
+        wirkung { merke = reichsverfassung  zustimmung_nationalbewegung = 2  zustimmung_adel = -1  unruhe = -10 }
+    }
+    option ablehnen {
+        text = "Die Anerkennung verweigern"
+        gewicht = 30
+        wirkung { zustimmung_nationalbewegung = -3  zustimmung_bildungsbuergertum = -2  unruhe = 15 }
+    }
+}
+
+ereignis sax.maiaufstand {
+    titel  = "Der Dresdner Maiaufstand"
+    text {
+        "König Friedrich August II. hat die Reichsverfassung abgelehnt und die Kammern aufgelöst. In Dresden"
+        "errichten Bürger, Turner und Arbeiter Barrikaden; Richard Wagner und Gottfried Semper sind unter"
+        "ihnen, Bakunin berät die provisorische Regierung. Der König flieht auf die Festung Königstein."
+    }
+    datum  = 1849.05.03
+    quelle = "Siemann (1985); Weber, Revolution in Sachsen 1848/49 (1970)"
+    sicherheit = ungeprueft
+    art    = historisch
+    wendepunkt = ja
+    bedingung { staat = SAX  journal_revolution = kampagne  nicht { merkmal = reichsverfassung }  datum <= 1849.07.31 }
+    wartezeit = 5
+    option preussen {
+        text = "Preußische Truppen zu Hilfe rufen"
+        historisch = ja
+        gewicht = 70
+        wirkung { unruhe = 30  aufstand = barrikaden  merke = aufstand_1849  zustimmung_bildungsbuergertum = -2 }
+    }
+    option nachgeben {
+        text = "Die Reichsverfassung doch anerkennen"
+        gewicht = 30
+        wirkung { merke = reichsverfassung  zustimmung_adel = -2  zustimmung_militaer = -2  unruhe = -20 }
+    }
+}
+
+ereignis bav.pfalz {
+    titel  = "Der Pfälzer Aufstand"
+    text   = "In der bayerischen Pfalz, links des Rheins, beschließt ein Landesverteidigungsausschuss, die Reichsverfassung gegen die Münchner Regierung durchzusetzen. Viele Soldaten laufen über."
+    datum  = 1849.05.02
+    quelle = "Siemann (1985)"
+    sicherheit = ungeprueft
+    art    = historisch
+    bedingung { staat = BAV  journal_revolution = kampagne  nicht { merkmal = reichsverfassung }  datum <= 1849.07.31 }
+    wartezeit = 7
+    option erhebung {
+        text = "Die Pfalz sagt sich von München los"
+        historisch = ja
+        gewicht = 70
+        wirkung { unruhe = 25  aufstand = agrarunruhen  merke = aufstand_1849 }
+    }
+    option nachgeben {
+        text = "München erkennt die Reichsverfassung an"
+        gewicht = 30
+        wirkung { merke = reichsverfassung  zustimmung_katholische_kirche = -2  zustimmung_adel = -2  unruhe = -15 }
+    }
+}
+
+ereignis bad.revolution {
+    titel  = "Die Badische Revolution"
+    text {
+        "In Rastatt meutert die Garnison, in Offenburg tagt eine Landesversammlung der Volksvereine."
+        "Großherzog Leopold flieht aus Karlsruhe; Lorenz Brentano bildet eine Regierung, die die"
+        "Reichsverfassung verteidigen will. Die badische Armee steht auf der Seite der Revolution."
+    }
+    datum  = 1849.05.13
+    quelle = "Siemann (1985); Mommsen (1998)"
+    sicherheit = ungeprueft
+    art    = historisch
+    wendepunkt = ja
+    bedingung { staat = BAD  journal_revolution = kampagne  datum <= 1849.07.31 }
+    wartezeit = 7
+    option meuterei {
+        text = "Die Armee läuft über, der Großherzog flieht"
+        historisch = ja
+        gewicht = 65
+        wirkung {
+            unruhe = 40
+            aufstand = erhebung
+            merke = aufstand_1849
+            zustimmung_militaer = -5
+            befristet { tage = 75 text = "Meuterei der badischen Armee" moral = -0.5 }
+        }
+    }
+    option halten {
+        text = "Die Garnisonen halten aus"
+        gewicht = 35
+        wirkung { unruhe = 15  zustimmung_militaer = 1 }
+    }
+}
+
+ereignis pru.elberfeld {
+    titel  = "Elberfeld und Iserlohn"
+    text   = "Im Bergischen Land und in der Grafschaft Mark verweigern Landwehrmänner den Dienst gegen die Reichsverfassung. In Elberfeld und Iserlohn entstehen Barrikaden; Friedrich Engels kommt aus Köln."
+    datum  = 1849.05.09
+    quelle = "Siemann (1985)"
+    sicherheit = ungeprueft
+    art    = historisch
+    bedingung { staat = PRU  journal_revolution = kampagne  nicht { merkmal = reichsverfassung }  datum <= 1849.07.31 }
+    wartezeit = 7
+    option militaer {
+        text = "Linientruppen räumen die Barrikaden"
+        historisch = ja
+        gewicht = 75
+        wirkung {
+            zustimmung_militaer = 1
+            unruhe = 10
+            verwuestung { ort = iserlohn wert = 0.05 }
+            merke = aufstand_1849
+            chronik = "Preußen: Truppen schlagen die Aufstände in Elberfeld und Iserlohn nieder; es gibt Tote unter den Aufständischen und den Soldaten."
+        }
+    }
+    option ausbreitung {
+        text = "Die Erhebung greift auf das Rheinland über"
+        gewicht = 25
+        wirkung { unruhe = 25  aufstand = barrikaden  merke = aufstand_1849 }
+    }
+}
+
+ereignis pru.hilfe.sachsen {
+    titel  = "Preußische Truppen nach Dresden"
+    text   = "Der sächsische König bittet um Hilfe gegen den Aufstand in seiner Hauptstadt. Preußische Regimenter stehen an der Grenze."
+    datum  = 1849.05.06
+    quelle = "Siemann (1985)"
+    sicherheit = ungeprueft
+    art    = historisch
+    bedingung { staat = PRU  staat SAX { aufstand = ja }  datum <= 1849.12.31 }
+    option eingreifen {
+        text = "Die Truppen marschieren"
+        historisch = ja
+        gewicht = 85
+        wirkung { intervention = SAX  zustimmung_militaer = 1  zustimmung_nationalbewegung = -1 }
+    }
+    option abwarten {
+        text = "Sachsen sich selbst überlassen"
+        gewicht = 15
+        wirkung { beziehung_SAX = -20 }
+    }
+}
+
+ereignis pru.hilfe.baden {
+    titel  = "Der Feldzug in Baden"
+    text   = "Unter dem Prinzen von Preußen sammelt sich ein Heer aus Preußen und Bundestruppen gegen die badische Revolutionsarmee. Ludwik Mierosławski führt die Verteidiger."
+    datum  = 1849.06.13
+    quelle = "Siemann (1985); Mommsen (1998)"
+    sicherheit = ungeprueft
+    art    = historisch
+    bedingung { staat = PRU  datum <= 1849.12.31  staat BAD { oder { aufstand = ja  merkmal = revolutionsregierung } } }
+    option eingreifen {
+        text = "Das Heer marschiert nach Baden"
+        historisch = ja
+        gewicht = 85
+        wirkung { intervention = BAD  zustimmung_militaer = 2  zustimmung_nationalbewegung = -1 }
+    }
+    option abwarten {
+        text = "Abwarten, ob Württemberg und Hessen allein genügen"
+        gewicht = 15
+        wirkung { beziehung_BAD = -10 }
+    }
+}
+
+ereignis pru.hilfe.pfalz {
+    titel  = "Preußen in der Pfalz"
+    text   = "Bayern kann die Pfalz aus eigener Kraft nicht zurückgewinnen. Preußische Truppen könnten von der Mosel her einrücken."
+    datum  = 1849.06.12
+    quelle = "Siemann (1985)"
+    sicherheit = ungeprueft
+    art    = historisch
+    bedingung { staat = PRU  datum <= 1849.12.31  staat BAV { aufstand = ja } }
+    option eingreifen {
+        text = "Einrücken"
+        historisch = ja
+        gewicht = 80
+        wirkung { intervention = BAV  zustimmung_militaer = 1 }
+    }
+    option abwarten {
+        text = "Bayern um Zugeständnisse bitten lassen"
+        gewicht = 20
+        wirkung { beziehung_BAV = -10 }
+    }
+}
+
+ereignis reaktion.niederwerfung {
+    titel  = "Das Ende der Revolutionsregierung"
+    text {
+        "Fremde Truppen rücken gegen die Revolutionsregierung vor. Ihre Armee aus Bürgerwehren, Meuterern und"
+        "Freischärlern zieht sich in die Festungen zurück; die Führer bereiten die Flucht in die Schweiz vor."
+    }
+    datum  = 1849.07.23
+    quelle = "Siemann (1985); Mommsen (1998)"
+    sicherheit = ungeprueft
+    art    = historisch
+    bedingung {
+        merkmal = revolutionsregierung
+        nicht { welt_merkmal = republik }
+        datum >= 1849.06.01
+        datum <= 1851.12.31
+    }
+    wartezeit = 30
+    option fallen {
+        text = "Die letzte Festung kapituliert"
+        historisch = ja
+        gewicht = 85
+        wirkung {
+            vergiss = revolutionsregierung
+            unruhe = -20
+            auswanderung = 0.01
+            befristet { tage = 180 text = "Kriegsrecht nach der Revolution" unruhe = -2 steuerertrag = -0.1 }
+            folge { ereignis = reaktion.standgerichte  tage = 14 }
+        }
+    }
+    option verhandeln {
+        text = "Mit den Fürsten über eine Amnestie verhandeln"
+        gewicht = 15
+        wirkung { vergiss = revolutionsregierung  merke = reichsverfassung  unruhe = -10  zustimmung_militaer = -2 }
+    }
+}
+
+ereignis reaktion.standgerichte {
+    titel  = "Standgerichte"
+    text {
+        "Nach der Kapitulation der Festung tagen Standgerichte. Sie verurteilen Offiziere, Soldaten und"
+        "Zivilisten zum Tod; viele weitere kommen in Haft. Tausende fliehen über die Grenze in die Schweiz"
+        "und weiter nach Amerika."
+    }
+    datum  = 1849.08.07
+    quelle = "Siemann (1985); Mommsen (1998)"
+    sicherheit = ungeprueft
+    art    = historisch
+    nur_folge = ja
+    option urteile {
+        text = "Die Urteile werden vollstreckt"
+        historisch = ja
+        gewicht = 80
+        wirkung { auswanderung = 0.01  zustimmung_bildungsbuergertum = -2  zustimmung_militaer = 1 }
+    }
+    option gnade {
+        text = "Der Landesherr begnadigt die meisten Verurteilten"
+        gewicht = 20
+        wirkung { auswanderung = 0.005  zustimmung_bildungsbuergertum = 1  zustimmung_militaer = -1 }
+    }
+}
+
+ereignis rumpfparlament {
+    titel  = "Das Rumpfparlament"
+    text {
+        "Preußen und Österreich haben ihre Abgeordneten abberufen, die Liberalen sind gegangen. Gut hundert"
+        "Abgeordnete der Linken ziehen nach Stuttgart und wählen eine Reichsregentschaft. Württembergisches"
+        "Militär sperrt den Sitzungssaal; die Versammlung ist zerstreut."
+    }
+    datum  = 1849.06.18
+    quelle = "Siemann (1985)"
+    sicherheit = ungeprueft
+    art    = historisch
+    wer    = welt
+    bedingung { journal_revolution = kampagne  datum >= 1849.06.01  datum <= 1849.12.31 }
+    wartezeit = 10
+    option zerstreut {
+        text = "Die Nationalversammlung endet"
+        historisch = ja
+        gewicht = 1
+        wirkung { welt_merke = rumpfparlament_aufgeloest }
+    }
+}
+
+ereignis pru.dreiklassen {
+    titel  = "Das Dreiklassenwahlrecht"
+    text {
+        "Die Regierung ändert das Wahlrecht für die Zweite Kammer durch Verordnung: Die Wähler eines Bezirks"
+        "werden nach ihrer Steuerleistung in drei Klassen geteilt, jede wählt ein Drittel der Wahlmänner,"
+        "öffentlich und mündlich."
+    }
+    datum  = 1849.05.30
+    quelle = "Huber Bd. 2 (1960); Clark (2007)"
+    sicherheit = ungeprueft
+    art    = historisch
+    wendepunkt = ja
+    bedingung { staat = PRU  verfassung = konstitutionell  datum >= 1849.05.15  datum <= 1849.12.31 }
+    wartezeit = 7
+    option einfuehren {
+        text = "Das Dreiklassenwahlrecht verordnen"
+        historisch = ja
+        gewicht = 75
+        wirkung { wahlrecht = dreiklassen  zustimmung_adel = 2  zustimmung_handel_finanzen = 1  zustimmung_bildungsbuergertum = -2  unruhe = 5 }
+    }
+    option behalten {
+        text = "Beim allgemeinen Wahlrecht bleiben"
+        gewicht = 25
+        wirkung { zustimmung_adel = -2  zustimmung_bildungsbuergertum = 1  unruhe = -5 }
+    }
+}
+
+ereignis pru.dreikoenigsbuendnis {
+    titel  = "Das Dreikönigsbündnis"
+    text   = "Joseph Maria von Radowitz entwirft eine Union deutscher Fürsten unter preußischer Führung, mit einer Verfassung nach dem Frankfurter Vorbild, aber ohne allgemeines Wahlrecht. Sachsen und Hannover treten bei, mit Vorbehalt."
+    datum  = 1849.05.26
+    quelle = "Siemann (1985); Huber Bd. 2 (1960)"
+    sicherheit = ungeprueft
+    art    = historisch
+    bedingung { staat = PRU  welt_merkmal = krone_abgelehnt  datum >= 1849.05.15  datum <= 1849.12.31 }
+    wartezeit = 7
+    option union {
+        text = "Die Union betreiben"
+        historisch = ja
+        gewicht = 80
+        gewicht_wenn { welt_merkmal = unionsplan  plus = 20 }
+        wirkung { welt_merke = unionspolitik  staat SAX { merke = dreikoenigsbuendnis }  staat HAN { merke = dreikoenigsbuendnis }  beziehung_AUT = -20 }
+    }
+    option verzicht {
+        text = "Auf eine eigene Union verzichten"
+        gewicht = 20
+        wirkung { zustimmung_nationalbewegung = -2  beziehung_AUT = 10 }
+    }
+}
+
+ereignis auswanderung.achtundvierziger {
+    titel  = "Die Achtundvierziger gehen"
+    text   = "Wer auf den Barrikaden stand oder in den Volksvereinen sprach, muss mit Prozessen rechnen. Viele packen ihre Sachen; in Bremen und Le Havre warten die Schiffe nach New York."
+    quelle = "Siemann (1985); Bade, Europa in Bewegung (2000)"
+    sicherheit = ungeprueft
+    art    = dynamisch
+    bedingung { merkmal = aufstand_1849  datum >= 1849.07.01  datum <= 1850.12.31 }
+    wartezeit = 60
+    option gehen { text = "Die Auswanderung beginnt" gewicht = 1 wirkung { auswanderung = 0.005  zustimmung_bildungsbuergertum = -1 } }
+}
+
+ereignis reich.mitglied {
+    titel  = "Die Reichsverfassung tritt in Kraft"
+    text   = "Mit dem Reich gelten die Grundrechte und die Reichsverfassung auch hier: Pressefreiheit, Vereinsrecht, Ende der Standesvorrechte, eine konstitutionelle Regierung."
+    quelle = "Kühne (1985)"
+    sicherheit = ungeprueft
+    art    = dynamisch
+    nur_folge = ja
+    bedingung { merkmal = reichsverfassung }
+    option a {
+        text = "Die Verfassung wird eingeführt"
+        gewicht = 1
+        wirkung {
+            verfassung = konstitutionell
+            gesetz_presse = pressefreiheit
+            gesetz_vereine = vereinsfreiheit
+            zustimmung_nationalbewegung = 3
+            zustimmung_adel = -2
+            unruhe = -15
+        }
+    }
+}

@@ -1959,7 +1959,9 @@ private:
                                  " braucht einen Staat (staat = TAG oder in staat <TAG> { … })");
             return std::nullopt;
         }
-        if (e.days == 0 && !skip) {
+        // Folgen aus Journalen und Abstimmungen (current_ = kNone) gehören zu keinem Ereignis und schließen
+        // keinen Kreis.
+        if (e.days == 0 && !skip && current_ != kNone) {
             follows_.push_back(FollowEdge{current_, e.a, node.line});
         }
         return e;

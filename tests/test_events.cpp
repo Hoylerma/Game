@@ -1181,3 +1181,17 @@ TEST_CASE("Ereignisse: Ereignislabor") {
         }
     }
 }
+
+TEST_CASE("Ereignisse: Journal beginnt nicht nach seinem Ende") {
+    // Das Testjournal endet am 1. Juni 1649; das Szenario jahresbeginn_1650 beginnt danach (wie die
+    // Lesezeichen 1864–1870 nach dem Ende der Revolution 1848/49).
+    const RuleData data("", kJournalEvents);
+    testhilfen::write_file(data.dir() / "common/journale/test.chron", kJournal);
+    uhrwerk::LoadResult result = uhrwerk::load_world(data.dir().path(), "jahresbeginn_1650");
+    INFO(testhilfen::issues_text(result));
+    REQUIRE(result.ok());
+    Simulation sim(std::move(*result.world));
+    sim.step_days(40);
+    CHECK(sim.world().journal_states[0].stage == kNone);
+    CHECK(sim.world().journal_history.empty());
+}

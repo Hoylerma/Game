@@ -57,6 +57,19 @@ freigegeben; Stand je Schritt in Abschnitt 13 dort.
   Korridore in `common/ereignisziele_<szenario>.chron`, Exitcode 1 bei Verstößen. Beendete Aufstände
   stehen im Zustand. Eine kleine Revolution auf der Test-Fixture (`tests/daten_ereignisse`) mit drei
   CTests; 1648 bitgleich.
+- **Inhalt 1848–1851 (Schritt b1):** 64 Ereignisse der Revolution von der Februarrevolution bis zum
+  Silvesterpatent (Märzforderungen in jedem Staat, Barrikaden in Berlin, Metternichs Sturz, Heckerzug,
+  Posen, Schleswig-Holstein, Paulskirche, Malmö, Wiener Oktober, Ministerium Brandenburg, Grundrechte,
+  Kaiserdeputation, Maiaufstände, Badische Revolution, Rumpfparlament, Dreiklassenwahlrecht, Union,
+  Olmütz, Bundesreaktion), das Journal „Revolution 1848/49“ mit sieben Stufen und fünf Ausgängen und
+  acht Abstimmungen der Paulskirche nach Fraktionen. Gewalt erscheint als Geschehen in Text und Chronik,
+  nie als Belohnung. Im Ereignislabor (16 Seeds, vorläufige Korridore) endet die Revolution ohne Spieler
+  zu 75 % mit der Gegenrevolution, zu 19 % im Reich der Paulskirche und zu 6 % in der Union; mit der
+  Strategie `krone` für Preußen immer im Reich, mit `reaktion` immer in der Gegenrevolution. Ein Journal
+  beginnt nicht mehr, wenn sein Ende vor dem Start liegt (Lesezeichen 1864–1870). CI-Schritt
+  „Ereignislabor 1848“, CTest `ereignisse_1848`. Rauch- und Klicktest kennen die Revolution: Preußen
+  darf mobil sein (Eingreifen gegen Aufstände), der Antrag im Diplomatiefenster kommt vor dem Juli 1848,
+  in dem die Bundesversammlung zu ruhen beginnt; 1648 bitgleich.
 
 ### Meilenstein M10 – Militär und Einigungskriege
 

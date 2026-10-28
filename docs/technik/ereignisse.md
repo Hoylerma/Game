@@ -543,6 +543,26 @@ Rund 55 Ereignisse; `w` = Welt, `s` = je Staat, `W` = Wendepunkt.
 | 1849 | Oktroyierte Märzverfassung Österreichs, Abstimmungen über Reichsverfassung, Wahlrecht und Erbkaiser (w), Kaiserwahl (w), Kaiserdeputation (Preußen, W: annehmen · ablehnen · Bedingungen), Anerkennung der Reichsverfassung (s), Dresdner Maiaufstand (Sachsen, Aufstand), Badische Revolution und Festung Rastatt (Baden), Pfälzer Aufstand (Bayern), Elberfeld und Iserlohn (Preußen), Intervention (s: Preußen hilft), Rumpfparlament in Stuttgart (w), Standgerichte (Baden, dokumentarisch), Dreiklassenwahlrecht (Preußen, W), Dreikönigsbündnis (Preußen, Sachsen, Hannover), Auswanderung der Achtundvierziger (s) |
 | 1850–1851 | Erfurter Unionsparlament (w), Frieden von Berlin und Idstedt (Dänemark), Kurhessischer Verfassungskonflikt (Kurhessen, Bundesexekution M9), Olmütz (Preußen, W: nachgeben · Krieg), Dresdner Konferenzen (w), Wiederherstellung der Bundesversammlung (w), Bundesreaktionsbeschluss (w; je Staat Gesetze zurück) |
 
+**Umsetzung (seit b1):** 64 Ereignisse in `common/ereignisse/1848_maerz.chron`, `1848_paulskirche.chron`,
+`1849_reichsverfassung.chron` und `1850_union.chron` (54 historisch, 5 dynamisch, 5 atmosphärisch; die
+je Staat wiederholten Ereignisse wie die Märzforderungen zählen einmal), das Journal
+`common/journale/revolution.chron` (7 Stufen, 5 Ausgänge) und acht Abstimmungen der Paulskirche in
+`common/abstimmungen.chron`. Alle Ereignisse tragen Datumsfenster bis Ende 1851 und treten in den
+Lesezeichen 1864–1870 nicht ein; das Journal beginnt dort nicht (seit b1 beginnt ein Journal nicht, wenn
+sein Ende schon vor dem Start liegt). Einige Mechanismen aus der Liste oben sind vereinfacht:
+- Die Erhebung in Schleswig-Holstein erklärt mit der historischen Option einen preußisch-dänischen Krieg
+  (M10); Malmö ist eine Abstimmung, der Krieg endet nach den Regeln des Krieges, nicht durch das
+  Ereignis.
+- Die Reichsverfassungskampagne besteht aus den Aufständen in Sachsen, der Pfalz (Bayern), Baden und im
+  Rheinland (Preußen) und den Interventionen Preußens; eine siegreiche Revolutionsregierung endet mit
+  dem Ereignis „Das Ende der Revolutionsregierung“ (Rastatt) und den Standgerichten.
+- Ein Reich der Paulskirche oder die großdeutsche Lösung führt die Reichsverfassung in den Staaten ein,
+  die sie anerkannt haben (Merkmal `reichsverfassung`, Folgeereignis `reich.mitglied`).
+- Olmütz: Mit „standhalten“ erklärt Preußen Österreich den Krieg; der Ausgang „Union“ gilt, sobald
+  Preußen danach nicht mehr im Krieg ist.
+- Die Gesetze von 1850–1854 aus `staaten_historie.csv` gelten nur für spätere Lesezeichen; in einer
+  Partie ab 1848 setzt sie der Bundesreaktionsbeschluss (Ereignis „Die Reaktion im eigenen Land“).
+
 ### 6.2 Ereignisse 1852–1871
 
 Rund 30 Ereignisse; viele davon geben einer Partie ab 1848 die historischen Anlässe der späteren
@@ -749,7 +769,7 @@ Weitere Tests:
 | b1 | **Inhalt 1848–1851:** Journal Revolution, ~55 Ereignisse, Gesetze 1848 in `staaten_historie.csv` | Archivar, `pruefen` |
 | b2 | **Kalibrierung** mit dem Ereignislabor; Bilanz, Wahl und Zoll 1848 erneut | Korridore erfüllt, CI |
 | b3 | **Inhalt 1852–1871** und deutsche Frage, dynamische Ereignisse | Zählung ≥ 80 mit Quellen |
-| b4 | **Brücke und Godot:** Ereignisfenster, Journale, Staatsinfo, Kartenmodus „Unruhe“ | Godot-Tests, Screenshots |
+| b4 | **Brücke und Godot:** Ereignisfenster, Journale, Staatsinfo, Kartenmodus „Unruhe“; das Diplomatiefenster zeigt die ruhende Bundesversammlung (seit b1 sperrt sie ab Juli 1848 die Anträge) | Godot-Tests, Screenshots |
 | b5 | **Doku und Review** (Abschluss M11) | CI grün |
 
 ## 13. Umsetzungsstand
@@ -757,6 +777,7 @@ Weitere Tests:
 | Schritt | Stand |
 |---|---|
 | – | Entscheidungen wie empfohlen freigegeben; Umsetzung beginnt mit a1 |
+| b1 | **erledigt:** Inhalt 1848–1851: 64 Ereignisse mit Quellen (Literatur, ungeprüft), Journal „Revolution 1848/49“ mit 7 Stufen und 5 Ausgängen, 8 Abstimmungen der Paulskirche nach Fraktionen, Korridore und Strategien `krone` und `reaktion` in `common/ereignisziele_voelkerfruehling.chron` (vorläufig bis b2); CTest `ereignisse_1848` (bis Ende 1848), CI-Schritt „Ereignislabor 1848“ (16 Seeds, ohne Spieler und mit beiden Strategien). Kernkorrekturen: ein Journal beginnt nicht nach seinem Ende; Folgen aus Journalen gehen nicht in die Kreisprüfung. Erste Läufe siehe CHANGELOG |
 | a5 | **erledigt:** Ereignislabor `uhrwerk-cli ereignisse` (Korridore je Ausgang und Ereignis, `nicht_festgelegt`, Strategien mit bevorzugten Optionen, `--bis`), Bericht je Lauf und über alle Läufe, Exitcode 1 bei Verstößen; beendete Aufstände im Zustand (`revolt_history`, Inhaltsstand 5); Test-Fixture `tests/daten_ereignisse` mit kleiner Revolution und drei CTests (ohne Spieler, `krone`, `reaktion`); Unit-Tests der Korridore |
 | a4 | **erledigt:** Journale (`common/journale/*.chron`) mit Stufen, Zielen, Übergängen und Ausgängen (Wertung, Ausgang am Ende, Wirkungen), Bedingung und Wirkung `journal_<id>`; Abstimmungen (`common/abstimmungen.chron`) nach Fraktionen mit den Sitzen der letzten Wahl, Bedingung `abstimmung_<id> = angenommen|abgelehnt`, Wirkungen bei Annahme und Ablehnung; Bundesversammlung `ruht`/`tagt` (keine Anträge, keine Abstimmung); Wirkungen `antrag { … }` und `krieg = TAG`; Bedingungen `bevoelkerungsanteil` und `staaten`; `info` zählt Journale und Abstimmungen. Inhaltsstand 4. Tests in `test_events.cpp`; 1648 bitgleich |
 | a3 | **erledigt:** Zustimmung und Unruhe nähern sich am Monatsersten ihren Zielwerten (Wünsche der Gruppen; Not, Teuerung, Verfassung, Zensur über `unruhe` an den Gesetzesoptionen, Ansteckung über Nachbarn und das Welt-Merkmal, Zustimmung nach Einfluss); Steuerverweigerung und Auswanderung bei hoher Unruhe; Aufstände mit wöchentlichem Kräftevergleich (Mobilisierung, Elitenspaltung, Loyalität, Intervention) und drei Ausgängen mit Folgeereignissen; Wirkungen `aufstand` und `intervention`, Bedingung `aufstand = ja`; alle Faktoren als Spielwerte in `ereignisse.chron`. Inhaltsstand 3. Tests in `test_events.cpp`; 1648 bitgleich |
