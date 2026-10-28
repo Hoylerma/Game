@@ -110,7 +110,7 @@ ereignis pru.kaiserdeputation {
     wartezeit = 5
     option annehmen {
         text = "Die Krone annehmen und die Reichsverfassung anerkennen"
-        gewicht = 15
+        gewicht = 20
         gewicht_wenn { zustimmung_nationalbewegung >= 5  plus = 10 }
         gewicht_wenn { unruhe >= 60  plus = 10 }
         wirkung {
@@ -127,7 +127,7 @@ ereignis pru.kaiserdeputation {
     option ablehnen {
         text = "Die Krone ablehnen: ohne die Zustimmung der Fürsten keine Antwort"
         historisch = ja
-        gewicht = 55
+        gewicht = 50
         wirkung { welt_merke = krone_abgelehnt  zustimmung_nationalbewegung = -4  zustimmung_bildungsbuergertum = -2  zustimmung_adel = 2  unruhe = 10 }
     }
     option bedingungen {

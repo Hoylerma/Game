@@ -94,7 +94,7 @@ journal revolution {
         text  = "Preußen sucht mit den Fürsten eine Union unter seiner Führung, Österreich will den alten Bund zurück. Im Herbst 1850 stehen die Heere einander gegenüber."
         ziel { text = "Erfurter Unionsparlament" bedingung { welt_merkmal = erfurter_union } }
         ziel { text = "Die Bundesversammlung tagt wieder" bedingung { welt_merkmal = bund_wiederhergestellt } }
-        weiter { zu = union  wenn { welt_merkmal = olmuetz_standgehalten  staat PRU { im_krieg = nein } } }
+        weiter { zu = union  wenn { welt_merkmal = union_anerkannt } }
         weiter { zu = gegenrevolution  wenn { welt_merkmal = bund_wiederhergestellt } }
     }
 

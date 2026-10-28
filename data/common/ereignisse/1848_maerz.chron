@@ -65,7 +65,7 @@ ereignis maerz.forderungen {
     option gewaehren {
         text = "Nachgeben: ein Märzministerium aus Liberalen berufen, Pressefreiheit und Vereinsrecht gewähren"
         historisch = ja
-        gewicht = 60
+        gewicht = 75
         gewicht_wenn { unruhe >= 40  plus = 20 }
         wirkung {
             gesetz_presse = pressefreiheit
@@ -80,12 +80,12 @@ ereignis maerz.forderungen {
     }
     option hinhalten {
         text = "Hinhalten: eine Kommission einsetzen und die Antwort vertagen"
-        gewicht = 25
+        gewicht = 15
         wirkung { unruhe = 10  folge { ereignis = maerz.petitionen  tage = 14 } }
     }
     option militaer {
         text = "Das Militär einsetzen und die Versammlungen auflösen"
-        gewicht = 15
+        gewicht = 10
         gewicht_wenn { zustimmung_militaer >= 3  plus = 10 }
         wirkung {
             zustimmung_militaer = 2
