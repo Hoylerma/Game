@@ -679,7 +679,11 @@ mindestens 50 % der Läufe zum Reich der Paulskirche führen; `--strategie reakt
 zur Gegenrevolution. Eine Strategie ist eine Liste bevorzugter Optionen je Ereignis in der
 Zieldatei.
 
-`--bis 1871.07.01` rechnet die deutsche Frage (langsamer, nicht in jedem CI-Lauf).
+`--bis 1871.07.01` rechnet die deutsche Frage (langsamer, nicht in jedem CI-Lauf). Seit b3 mit eigener
+Zieldatei: `uhrwerk-cli ereignisse --szenario voelkerfruehling --seeds 16 --ziele
+data/common/ereignisziele_voelkerfruehling_1871.chron` (Journal `deutsche_frage`, CI-Schritt
+„Ereignislabor 1871“). Korridore: kleindeutsch 15 … 60 %, zwei Bünde 5 … 45 %, Bund 20 … 65 %, ohne Bund
+und Reich höchstens 15 %, großdeutsch höchstens 10 %, kein Ausgang in allen Läufen.
 
 **Umsetzung (seit a5, `core/src/event_lab.cpp`, `uhrwerk-cli ereignisse`):** Die Korridore stehen in
 `common/ereignisziele_<szenario>.chron` (chronik-skript.md 3.36): ein Block `labor` mit Ende, Journal
@@ -819,6 +823,7 @@ Weitere Tests:
 | Schritt | Stand |
 |---|---|
 | – | Entscheidungen wie empfohlen freigegeben; Umsetzung beginnt mit a1 |
+| b3 | **erledigt:** Inhalt 1852–1871: 33 Ereignisse (6.2), elf dynamische (6.3), Journal „Die deutsche Frage“ (5.4) mit Zieldatei `ereignisziele_voelkerfruehling_1871.chron`; 109 Ereignisse, alle mit Quelle (CTest `ereignisse_quellen`). Kern: Bedingungen `krieg_gewonnen`/`krieg_verloren`, Kriegserklärung mit Zielen `krieg { … }`, `mobilmachung = nein`, Abrüstung des Helfers nach einem Aufstand, Regel `bund_durchzug` (militaer.md 3.4), kein Haushalt für Staaten ohne Orte. Inhaltsstände ereignisse 6, militaer 9. Ohne Spieler bis 1871 (48 Seeds): kleindeutsch 35 % (davon ein Teil aus der Paulskirche), zwei Bünde 23 %, Bund 42 %; Revolution, Bilanz, Wahl, Zoll und alle Kriegslabore in ihren Korridoren; 1648 bitgleich |
 | b2 | **erledigt:** Kalibrierung mit dem Ereignislabor (16 Seeds wie die CI): Märzforderungen gewähren 75 · hinhalten 15 · Militär 10 (vorher 60/25/15), Kaiserdeputation annehmen 20 · ablehnen 50 · Bedingungen 30 (vorher 15/55/30), Olmütz nachgeben 70 · standhalten 30 (vorher 75/25) mit der Antwort Österreichs (`aut.olmuetz.antwort`), Übergang zur Union über `union_anerkannt`. Ohne Spieler mit den Seeds der CI (1648–1663): Gegenrevolution 87,5 %, Reich 6,3 %, Union 6,3 %; mit 48 weiteren Seeds (2000–2047): 62,5 %, 27,1 %, 10,4 %; über alle 64 Läufe 68,8 %, 21,9 %, 9,4 %, Republik und großdeutsche Lösung nie. Märzministerien bis Ende April in 66,4 % aller Staaten (76 % der 33 Staaten mit dem Ereignis), Kaiserwahl in allen Läufen; `krone` 100 % Reich, `reaktion` 100 % Gegenrevolution. Korridor der Märzministerien auf 70 … 100 % der Staaten mit dem Ereignis (0,61 … 0,87), Korridor der Union (höchstens 20 %). Bilanz, Wahl (Nationalversammlung, Preußen 1849), Zoll und Krieg 1848 mit Ereignissen in ihren Zielwerten |
 | b1 | **erledigt:** Inhalt 1848–1851: 64 Ereignisse mit Quellen (Literatur, ungeprüft), Journal „Revolution 1848/49“ mit 7 Stufen und 5 Ausgängen, 8 Abstimmungen der Paulskirche nach Fraktionen, Korridore und Strategien `krone` und `reaktion` in `common/ereignisziele_voelkerfruehling.chron` (vorläufig bis b2); CTest `ereignisse_1848` (bis Ende 1848), CI-Schritt „Ereignislabor 1848“ (16 Seeds, ohne Spieler und mit beiden Strategien). Kernkorrekturen: ein Journal beginnt nicht nach seinem Ende; Folgen aus Journalen gehen nicht in die Kreisprüfung. Erste Läufe siehe CHANGELOG |
 | a5 | **erledigt:** Ereignislabor `uhrwerk-cli ereignisse` (Korridore je Ausgang und Ereignis, `nicht_festgelegt`, Strategien mit bevorzugten Optionen, `--bis`), Bericht je Lauf und über alle Läufe, Exitcode 1 bei Verstößen; beendete Aufstände im Zustand (`revolt_history`, Inhaltsstand 5); Test-Fixture `tests/daten_ereignisse` mit kleiner Revolution und drei CTests (ohne Spieler, `krone`, `reaktion`); Unit-Tests der Korridore |

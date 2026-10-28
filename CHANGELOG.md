@@ -89,8 +89,10 @@ freigegeben; Stand je Schritt in Abschnitt 13 dort.
   `krieg_gewonnen`/`krieg_verloren`, Kriegserklärung mit Kriegszielen `krieg { gegner = … gebiet = …
   fuehrung = ja … }` (ohne Ziel endete jeder Ereigniskrieg ohne Gewinner), `mobilmachung = nein`; wer
   gegen einen Aufstand eingriff, rüstet danach ab (Preußen blieb sonst von 1848 bis 1864 mobil); Regel
-  `bund_durchzug`: Bundesstaaten ziehen durch Bundesgebiet (sonst fand Preußen keinen Weg nach
-  Holstein). Inhaltsstände ereignisse 6, militaer 9; 1648 bitgleich.
+  `bund_durchzug`: Bundesstaaten ziehen durch Bundesgebiet, außer im Krieg gegen einen Staat mit
+  Hauptstadt im Bund (sonst fand Preußen keinen Weg nach Holstein); ein Staat ohne Orte führt keinen
+  Haushalt mehr. Ohne Spieler endet die deutsche Frage über 48 Läufe zu 35 % kleindeutsch, zu 23 % in
+  zwei Bünden und zu 42 % im alten Bund. Inhaltsstände ereignisse 6, militaer 9; 1648 bitgleich.
 
 ### Meilenstein M10 – Militär und Einigungskriege
 
