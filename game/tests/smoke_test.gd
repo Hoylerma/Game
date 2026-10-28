@@ -446,12 +446,15 @@ func _check_diplomacy_1848(sim: SimulationClient) -> void:
 	var austria := sim.get_state_index("AUT")
 	var bavaria := sim.get_state_index("BAV")
 	var overview := sim.get_diplomacy(prussia)
+	# Seit M11 (b1) kann Preußen bis hierher mobil gemacht haben (Eingreifen gegen einen Aufstand der
+	# Märzrevolution, Krieg um Schleswig); dann kostet das Heer mehr, sonst den Friedenssatz.
+	var mobilized := bool(overview.get("mobilized", false))
 	_check(
 		bool(overview.get("active", false)) and bool(overview.get("diet", false))
 		and int(overview.get("envoy_capacity", 0)) >= 1 and roundi(float(overview.get("alliance_min", 0.0))) == 100
 		and bool(sim.get_state(prussia).get("diplomacy", false))
-		and not bool(overview.get("mobilized", true))
-		and is_equal_approx(float(overview.get("army_cost_factor", 0.0)), 1.0),
+		and (float(overview.get("army_cost_factor", 0.0)) > 1.0 if mobilized
+			else is_equal_approx(float(overview.get("army_cost_factor", 0.0)), 1.0)),
 		"get_diplomacy: Preußen mit %d Gesandten, Bündnis ab 100" % int(overview.get("envoy_capacity", 0)),
 		"get_diplomacy: %s" % str(overview)
 	)

@@ -1,0 +1,138 @@
+# Journal „Revolution 1848/49“ (Meilenstein M11, docs/technik/ereignisse.md Abschnitt 5.2).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.35. Die Stufen folgen Kapitel 18, Abschnitt 7; die
+# Übergänge lesen die Merkmale, die die Ereignisse in common/ereignisse/ setzen. Ausgänge nach Entscheidung 6:
+# ein Reich der Paulskirche ist ein Bundesstaat der bestehenden Staaten, kein neuer Staat. Bedingungen und
+# Schwellen sind Spielwerte (Kalibrierung mit dem Ereignislabor, Schritt b2).
+
+journal revolution {
+    titel  = "Revolution 1848/49"
+    text {
+        "Die Nachricht von der Februarrevolution in Paris trifft auf ein Land voller Petitionen, Hunger und"
+        "Hoffnung. Liberale und Demokraten fordern Pressefreiheit, Schwurgerichte, Volksbewaffnung und ein"
+        "deutsches Parlament; die Fürsten schwanken zwischen Zugeständnis und Gewalt."
+        ""
+        "Ob aus der Bewegung ein Reich mit Verfassung wird, ob die Fürsten die alte Ordnung wiederherstellen"
+        "oder ob die Republik siegt, entscheidet sich bis Ende 1851."
+    }
+    beginn = 1848.03.01
+    ende   = 1851.12.31
+
+    stufe maerz {
+        titel = "Märzunruhen"
+        text  = "In den Hauptstädten überreichen Bürgerversammlungen den Regierungen ihre Forderungen. Wer nachgibt, beruft ein Märzministerium; wer das Militär schickt, riskiert Barrikaden."
+        ziel { text = "Märzministerien in den Bundesstaaten" zaehle { merkmal = maerzministerium } soll = 25 }
+        ziel { text = "Das Vorparlament tritt zusammen" bedingung { welt_merkmal = vorparlament } }
+        weiter { zu = vorparlament  wenn { welt_merkmal = vorparlament } }
+    }
+    stufe vorparlament {
+        titel = "Vorparlament"
+        text  = "Gut fünfhundert Männer aus den Ständeversammlungen beraten in Frankfurt über die Wahl einer Nationalversammlung. Die Radikalen um Hecker unterliegen und ziehen aus."
+        ziel { text = "Die Nationalversammlung eröffnet" bedingung { welt_merkmal = paulskirche_eroeffnet } }
+        weiter { zu = nationalversammlung  wenn { welt_merkmal = paulskirche_eroeffnet } }
+    }
+    stufe nationalversammlung {
+        titel = "Nationalversammlung"
+        text  = "In der Paulskirche beraten die gewählten Abgeordneten über eine Zentralgewalt, den Krieg um Schleswig und die Grundrechte. Ihre Macht reicht so weit, wie die Regierungen sie lassen."
+        ziel { text = "Zentralgewalt mit Reichsverweser" bedingung { welt_merkmal = reichsverweser } }
+        ziel { text = "Grundrechte des deutschen Volkes" bedingung { welt_merkmal = grundrechte } }
+        weiter { zu = verfassungswerk  wenn { welt_merkmal = grundrechte_beraten } }
+    }
+    stufe verfassungswerk {
+        titel = "Verfassungswerk"
+        text  = "Die Versammlung ringt um Wahlrecht, Staatsoberhaupt und die Frage, ob Österreich zum Reich gehören kann. Die Fürsten gewinnen Zeit, die Gegenrevolution in Wien und Berlin hat schon gesiegt."
+        ziel { text = "Reichsverfassung beschlossen" bedingung { welt_merkmal = reichsverfassung_beschlossen } }
+        ziel { text = "Ein Kaiser gewählt" bedingung { welt_merkmal = kaiser_gewaehlt } }
+        weiter { zu = kaiserkrone  wenn { welt_merkmal = kaiserwahl_erfolgt } }
+    }
+    stufe kaiserkrone {
+        titel = "Die Kaiserkrone"
+        text  = "Eine Deputation der Nationalversammlung trägt die Krone nach Berlin. Ohne Preußen gibt es kein kleindeutsches Reich, ohne die Anerkennung der Regierungen keine Reichsverfassung."
+        ziel { text = "Preußen nimmt die Krone an" bedingung { welt_merkmal = krone_angenommen } }
+        ziel {
+            text = "Zwei Drittel der Bundesbevölkerung (ohne Österreich) erkennen die Reichsverfassung an"
+            bedingung { bevoelkerungsanteil { wenn { merkmal = reichsverfassung } unter { bund = ja  nicht { staat = AUT } } mindestens = 0.67 } }
+        }
+        weiter {
+            zu = grossdeutsch
+            wenn { welt_merkmal = krone_angenommen  welt_merkmal = grossdeutsch  staat AUT { merkmal = reichsverfassung } }
+        }
+        weiter {
+            zu = reich_paulskirche
+            wenn {
+                welt_merkmal = krone_angenommen
+                bevoelkerungsanteil { wenn { merkmal = reichsverfassung } unter { bund = ja  nicht { staat = AUT } } mindestens = 0.67 }
+            }
+        }
+        weiter { zu = kampagne  wenn { oder { welt_merkmal = krone_abgelehnt  welt_merkmal = kein_kaiser  datum >= 1849.05.01 } } }
+    }
+    stufe kampagne {
+        titel = "Reichsverfassungskampagne"
+        text  = "Wo die Regierungen die Reichsverfassung verweigern, erheben sich Bürgerwehren und Turner. Preußische Truppen stehen bereit, den Fürsten zu helfen."
+        ziel {
+            text = "Revolutionsregierungen in der Hälfte der Bundesbevölkerung (ohne Österreich)"
+            bedingung { bevoelkerungsanteil { wenn { merkmal = revolutionsregierung } unter { bund = ja  nicht { staat = AUT } } mindestens = 0.5 } }
+        }
+        weiter {
+            zu = republik
+            wenn { bevoelkerungsanteil { wenn { merkmal = revolutionsregierung } unter { bund = ja  nicht { staat = AUT } } mindestens = 0.5 } }
+        }
+        weiter {
+            zu = reich_paulskirche
+            wenn {
+                welt_merkmal = krone_angenommen
+                bevoelkerungsanteil { wenn { merkmal = reichsverfassung } unter { bund = ja  nicht { staat = AUT } } mindestens = 0.67 }
+            }
+        }
+        weiter {
+            zu = union_oder_bund
+            wenn { welt_merkmal = rumpfparlament_aufgeloest  datum >= 1849.08.01 }
+        }
+    }
+    stufe union_oder_bund {
+        titel = "Union oder Bund"
+        text  = "Preußen sucht mit den Fürsten eine Union unter seiner Führung, Österreich will den alten Bund zurück. Im Herbst 1850 stehen die Heere einander gegenüber."
+        ziel { text = "Erfurter Unionsparlament" bedingung { welt_merkmal = erfurter_union } }
+        ziel { text = "Die Bundesversammlung tagt wieder" bedingung { welt_merkmal = bund_wiederhergestellt } }
+        weiter { zu = union  wenn { welt_merkmal = olmuetz_standgehalten  staat PRU { im_krieg = nein } } }
+        weiter { zu = gegenrevolution  wenn { welt_merkmal = bund_wiederhergestellt } }
+    }
+
+    ausgang reich_paulskirche {
+        titel   = "Reich der Paulskirche"
+        wertung = gelungen
+        text    = "Die Reichsverfassung tritt in Kraft: ein erblicher Kaiser aus dem Hause Hohenzollern, ein Reichstag nach allgemeinem Wahlrecht, Grundrechte für alle Deutschen. Österreich bleibt draußen."
+        wirkung {
+            welt_merke = reich_paulskirche
+            alle_staaten { folge { ereignis = reich.mitglied } }
+        }
+    }
+    ausgang grossdeutsch {
+        titel   = "Großdeutsche Lösung"
+        wertung = gelungen
+        text    = "Österreich tritt mit seinen deutschen Ländern dem Reich bei. Ein Reich von der Nordsee bis zur Adria entsteht, dessen Völker nicht alle Deutsche sind."
+        wirkung {
+            welt_merke = grossdeutsches_reich
+            alle_staaten { folge { ereignis = reich.mitglied } }
+        }
+    }
+    ausgang union {
+        titel   = "Union unter Preußen"
+        wertung = teilweise
+        text    = "Preußen hat in Olmütz nicht nachgegeben. Die Union der Fürsten unter preußischer Führung besteht neben einem Bund ohne sie."
+        wirkung { welt_merke = union_preussen }
+    }
+    ausgang gegenrevolution {
+        titel    = "Die Gegenrevolution siegt"
+        wertung  = gescheitert
+        standard = ja
+        text     = "Die Bundesversammlung tagt wieder in Frankfurt. Die Grundrechte sind aufgehoben, viele Achtundvierziger sitzen im Gefängnis oder wandern nach Amerika aus."
+        wirkung { welt_merke = gegenrevolution  bundesversammlung = tagt }
+    }
+    ausgang republik {
+        titel   = "Deutsche Republik"
+        wertung = gelungen
+        text    = "Revolutionsregierungen halten die Mehrheit der Bundesbevölkerung außerhalb Österreichs. Die Fürsten sammeln ihre Truppen; der Ausgang des Bürgerkriegs ist offen."
+        wirkung { welt_merke = republik }
+    }
+}

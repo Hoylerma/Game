@@ -644,6 +644,11 @@ void Simulation::run_population(Index location, Scratch& scratch) {
         if (living < rules.emigration_threshold) {
             emigrated =
                 young * rules.emigration_rate * (rules.emigration_threshold - living) / rates_.twelve_hundred;
+            // Hohe Unruhe (seit M11, ereignisse.md Abschnitt 4.3): die untere Schicht wandert mehr aus. Liest
+            // nur die Unruhe des Staates, die in der parallelen Phase niemand ändert.
+            if (!world_.unrest.empty() && profession.stratum == Stratum::Unten) {
+                emigrated = emigrated * unrest_emigration_factor(world_, loc.owner);
+            }
         }
         pop.young = young - moved - emigrated;
         balance.moved_out += moved;

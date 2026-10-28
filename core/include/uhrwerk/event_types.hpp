@@ -6,6 +6,7 @@
 #include "uhrwerk/date.hpp"
 #include "uhrwerk/fixed.hpp"
 
+#include <array>
 #include <cstdint>
 #include <string>
 #include <vector>
@@ -20,6 +21,7 @@ using Index = std::int32_t; // wie in world.hpp
 struct LawOption {
     std::string id; // z. B. "pressefreiheit"
     std::string name;
+    Fixed unrest; // seit a3: Beitrag zum Zielwert der Unruhe (Zensur, Abschnitt 4.3)
 };
 
 /// Gesetzesgruppe (data/common/gesetze.chron), z. B. Presse mit Vorzensur, Pressegesetz und Pressefreiheit.
@@ -44,39 +46,45 @@ enum class CompareOp : std::uint8_t { Eq, Ne, Lt, Le, Gt, Ge };
 
 /// Art einer Prüfung. a, b und value tragen je nach Art Verweise und Vergleichswert.
 enum class ConditionKind : std::uint8_t {
-    All,            // alle Kinder (Block, bedingung { … })
-    Any,            // oder { … }
-    Not,            // nicht { … }: keines der Kinder
-    Date,           // datum <op> date
-    State,          // staat = a
-    StateIn,        // staat_in = { … }: list
-    Happened,       // geschehen = Ereignis a (Option b oder kNone) für diesen Staat bzw. die Welt
-    Flag,           // merkmal = name
-    WorldFlag,      // welt_merkmal = name
-    Law,            // gesetz <a> <op> Option b (op Eq/Ne)
-    Constitution,   // verfassung <op> a (Constitution)
-    Franchise,      // wahlrecht <op> a (Franchise)
-    Approval,       // zustimmung <Gruppe a> <op> value
-    Share,          // anteil <Gruppe a> <op> value
-    Influence,      // einfluss <Gruppe a> <op> value
-    Unrest,         // unruhe <op> value
-    NeighborUnrest, // nachbar_unruhe <op> value: ein Nachbarstaat
-    LivingLower,    // lebensstandard_unten <op> value
-    Price,          // preis <Gut a> <op> value (Markt der Hauptstadt)
-    AtWar,          // im_krieg
-    WarWith,        // krieg_mit = a
-    Mobilized,      // mobil
-    Federal,        // bund
-    CustomsUnion,   // zollunion = a
-    Relation,       // beziehung <Staat a> <op> value
-    Seats,          // sitze <Strömung a> <op> value in Parlament b (letzte Wahl)
-    Soldiers,       // soldaten <op> value
-    Treasury,       // schatz <op> value
-    DebtRatio,      // schulden_quote <op> value (Schulden ÷ Jahreseinnahmen)
-    Player,         // spieler
-    OfState,        // staat <TAG> { … }: die Kinder für den Staat a (kNone: gibt es nicht, nie wahr)
-    AnyState,       // ein_staat { … }: die Kinder für mindestens einen Staat
-    Never,          // Verweis auf etwas, das es zum Startdatum nicht gibt (späterer Inhalt): nie wahr
+    All,             // alle Kinder (Block, bedingung { … })
+    Any,             // oder { … }
+    Not,             // nicht { … }: keines der Kinder
+    Date,            // datum <op> date
+    State,           // staat = a
+    StateIn,         // staat_in = { … }: list
+    Happened,        // geschehen = Ereignis a (Option b oder kNone) für diesen Staat bzw. die Welt
+    Flag,            // merkmal = name
+    WorldFlag,       // welt_merkmal = name
+    Law,             // gesetz <a> <op> Option b (op Eq/Ne)
+    Constitution,    // verfassung <op> a (Constitution)
+    Franchise,       // wahlrecht <op> a (Franchise)
+    Approval,        // zustimmung <Gruppe a> <op> value
+    Share,           // anteil <Gruppe a> <op> value
+    Influence,       // einfluss <Gruppe a> <op> value
+    Unrest,          // unruhe <op> value
+    NeighborUnrest,  // nachbar_unruhe <op> value: ein Nachbarstaat
+    LivingLower,     // lebensstandard_unten <op> value
+    Price,           // preis <Gut a> <op> value (Markt der Hauptstadt)
+    AtWar,           // im_krieg
+    WarWith,         // krieg_mit = a
+    Mobilized,       // mobil
+    Federal,         // bund
+    CustomsUnion,    // zollunion = a
+    Relation,        // beziehung <Staat a> <op> value
+    Seats,           // sitze <Strömung a> <op> value in Parlament b (letzte Wahl)
+    Soldiers,        // soldaten <op> value
+    Treasury,        // schatz <op> value
+    DebtRatio,       // schulden_quote <op> value (Schulden ÷ Jahreseinnahmen)
+    Player,          // spieler
+    OfState,         // staat <TAG> { … }: die Kinder für den Staat a (kNone: gibt es nicht, nie wahr)
+    AnyState,        // ein_staat { … }: die Kinder für mindestens einen Staat
+    Never,           // Verweis auf etwas, das es zum Startdatum nicht gibt (späterer Inhalt): nie wahr
+    InRevolt,        // aufstand = ja (seit a3): im Staat läuft ein Aufstand
+    Journal,         // journal_<a> <op> Stufe b (seit a4, Eq/Ne)
+    Vote,            // abstimmung_<a> = angenommen (b = 1) | abgelehnt (b = 0): letzte Abstimmung (seit a4)
+    PopulationShare, // bevoelkerungsanteil { wenn { … } unter { … } mindestens = value } (seit a4)
+    CountStates,     // staaten { wenn { … } mindestens = value } (seit a4)
+    DietSuspended,   // bundesversammlung = ruht (seit a4)
 };
 
 struct Condition {
@@ -113,6 +121,13 @@ enum class EffectKind : std::uint8_t {
     OfState,        // staat <TAG> { … }: die Kinder für den Staat a
     AllStates,      // alle_staaten { … }: die Kinder für jeden Staat
     Timed,          // befristet { tage = days text = name … }: Werte in timed (seit a2, Abschnitt 3.7)
+    Revolt,         // aufstand = <art> (seit a3): a = RevoltKind
+    Intervention,   // intervention = TAG (seit a3): Truppen gegen den Aufstand im Staat a
+    Journal,        // journal_<a> = Stufe b (seit a4): das Journal springt in die Stufe
+    Vote,           // abstimmung = <a> (seit a4): Abstimmung im Parlament der Abstimmung
+    Diet,           // bundesversammlung = ruht (a = 1) | tagt (a = 0) (seit a4)
+    Motion,         // antrag { art = a ziel = b } (seit a4): Antrag in der Bundesversammlung (MotionKind)
+    War,            // krieg = TAG (seit a4): Kriegserklärung an den Staat a (Militär, mit Bündnisfall)
 };
 
 /// Werte einer befristeten Wirkung (Abschnitt 3.7).
@@ -185,12 +200,141 @@ struct EventDef {
 };
 
 /// Regeln der Ereignisse (data/common/ereignisse.chron).
+/// Art eines Aufstands (Abschnitt 4.4): wer sich erhebt.
+enum class RevoltKind : std::uint8_t { Barricades, Agrarian, Uprising }; // Städter, Bauern, alle
+inline constexpr std::size_t kRevoltKinds = 3;
+
+/// Ausgang eines Aufstands (Abschnitt 4.4).
+enum class RevoltOutcome : std::uint8_t { Concession, Suppression, Victory };
+
 struct EventRules {
     bool active = false;        // ab 'seit'; sonst gibt es keine Ereignisse (1648 bitgleich)
     std::int32_t deadline = 30; // Standardfrist der Wahl des Spielers in Tagen
+
+    // Zustimmung und Unruhe (seit a3, Abschnitte 4.2 und 4.3), am Monatsersten; Spielwerte.
+    Fixed approval_rate = Fixed::from_ratio(1, 5); // Anteil der Lücke zum Zielwert je Monat
+    Fixed unrest_rate = Fixed::from_ratio(1, 4);
+    Fixed misery = Fixed::from_int(20);          // je Punkt Not (0 … 2)
+    Fixed misery_from = Fixed::from_int(50);     // Lebensstandard der unteren Schicht, ab dem Not beginnt
+    Fixed misery_span = Fixed::from_int(25);     // … je Punkt Not
+    Fixed dearth = Fixed::from_int(15);          // je Punkt Teuerung (0 … 2)
+    Index grain = -1;                            // Gut der Teuerung (Markt der Hauptstadt), −1: keine
+    Fixed dearth_from = Fixed::from_ratio(6, 5); // Preisfaktor, ab dem Teuerung beginnt
+    Fixed dearth_span = Fixed::from_ratio(1, 2);
+    std::array<Fixed, 3> constitution = {Fixed::from_int(15), Fixed::from_int(10), Fixed{}}; // je Verfassung
+    Fixed contagion = Fixed::from_int(10); // × Anteil der Nachbarn mit hoher Unruhe
+    Fixed contagion_from = Fixed::from_int(60);
+    std::string contagion_flag;                   // Welt-Merkmal, das als unruhiger Nachbar zählt
+    Fixed approval_weight = Fixed::from_int(2);   // × Σ Einfluss × Zustimmung
+    Fixed tax_refusal_from = Fixed::from_int(50); // Unruhe, ab der Steuern verweigert werden
+    Fixed tax_refusal = Fixed::from_ratio(1, 10); // … Anteil des Steuerertrags
+    Fixed emigration_from = Fixed::from_int(50);  // Unruhe, ab der die untere Schicht mehr auswandert
+    Fixed emigration = Fixed::from_ratio(1, 2);   // … zusätzlicher Anteil
+
+    // Aufstände (seit a3, Abschnitt 4.4).
+    std::int32_t revolt_min_days = 7;                   // erste Entscheidung nach einer Woche
+    std::int32_t revolt_max_days = 60;                  // spätestens dann endet er
+    Fixed revolt_step = Fixed::from_ratio(1, 4);        // Stärke je Woche × (Aufständische − Regierung)
+    Fixed revolt_noise = Fixed::from_ratio(3, 20);      // Zufall je Woche ±
+    Fixed revolt_concession = Fixed::from_ratio(3, 10); // Neigung nachzugeben × Stärke je Woche
+    std::vector<Index> split_groups;                    // Elitenspaltung: Gruppen mit Zustimmung < 0 …
+    std::string split_flag;                             // … und ein Merkmal am Staat (Märzministerium)
+    Fixed split = Fixed::from_ratio(1, 4);              // je Treffer
+    Index loyalty_group = -1;                           // Loyalität: Zustimmung dieser Gruppe (Militär)
+    Fixed soldiers_reference = Fixed::from_int(10);     // Soldaten je 1.000 Einwohner für Loyalität 1
+    Fixed concession_unrest = Fixed::from_int(-30);
+    Fixed suppression_unrest = Fixed::from_int(-20);
+    Fixed suppression_devastation = Fixed::from_ratio(1, 20); // in der Hauptstadt
+    std::string victory_flag = "revolutionsregierung";        // Merkmal nach dem Sieg
+    std::array<Index, 3> outcome_events = {-1, -1, -1};       // je RevoltOutcome ein Folgeereignis
+};
+
+// ─── Journale und Abstimmungen (Abschnitt 5, seit a4) ───────────────────────
+
+/// Übergang einer Stufe: gilt die Bedingung (Welt), wechselt das Journal in die Stufe target.
+struct JournalTransition {
+    Index target = -1;
+    Condition condition;
+};
+
+/// Angezeigtes Ziel einer Stufe: erfüllt, wenn die Bedingung gilt; mit zaehle Fortschritt als Zahl der
+/// bestehenden Staaten, für die die Zählbedingung gilt, von soll.
+struct JournalGoal {
+    std::string text;
+    Condition condition;
+    bool counting = false;
+    Condition count;         // Bedingung je Staat
+    std::int32_t target = 0; // soll
+};
+
+/// Stufe oder Ausgang eines Journals.
+struct JournalStage {
+    std::string id;
+    std::string title;
+    std::string text;
+    bool outcome = false;  // Ausgang: Endstufe
+    std::string rating;    // Ausgang: gelungen, teilweise, gescheitert
+    bool fallback = false; // Ausgang, der am Ende des Journals gilt
+    std::vector<JournalGoal> goals;
+    std::vector<JournalTransition> transitions;
+    std::vector<Effect> effects; // beim Eintritt (Welt)
+};
+
+struct JournalDef {
+    std::string id;
+    std::string title;
+    std::string text;
+    bool has_begin = false; // ohne beginn: ab dem Start
+    Date begin;
+    bool has_end = false; // am Ende gilt der Ausgang mit standard = ja
+    Date end;
+    std::vector<JournalStage> stages; // Stufen und Ausgänge in Dateireihenfolge; die erste Stufe beginnt
+    Index fallback = -1;
+    std::string file;
+    int line = 0;
+};
+
+/// Abstimmung in einem Parlament nach Fraktionen (Abschnitt 5.3).
+struct VoteDef {
+    std::string id;
+    std::string title;
+    Index parliament = -1;
+    std::vector<Fixed> leaning;                // Anteil der Ja-Stimmen je Fraktion des Parlaments
+    Fixed unaligned = Fixed::from_ratio(1, 2); // fraktionslose Abgeordnete
+    Fixed majority = Fixed::from_ratio(1, 2);  // angenommen mit mehr Ja-Stimmen als majority × abgegebene
+    std::vector<Effect> yes;                   // Wirkungen bei Annahme (Welt)
+    std::vector<Effect> no;                    // … bei Ablehnung
 };
 
 // ─── Zustand ────────────────────────────────────────────────────────────────
+
+/// Stand eines Journals (Zustand, seit a4): Stufe (−1 vor dem Beginn) seit einem Datum.
+struct JournalState {
+    Index stage = -1;
+    Date since;
+
+    friend bool operator==(const JournalState&, const JournalState&) = default;
+};
+
+/// Weg eines Journals: jede erreichte Stufe mit Datum (Zustand, seit a4).
+struct JournalStep {
+    Index journal = -1;
+    Index stage = -1;
+    Date date;
+
+    friend bool operator==(const JournalStep&, const JournalStep&) = default;
+};
+
+/// Ergebnis einer Abstimmung (Zustand, seit a4).
+struct VoteResult {
+    Index vote = -1;
+    Date date;
+    std::int32_t yes = 0;
+    std::int32_t no = 0;
+    bool accepted = false;
+
+    friend bool operator==(const VoteResult&, const VoteResult&) = default;
+};
 
 /// Eingetretenes Ereignis mit gewählter Option (Zustand).
 struct EventRecord {
@@ -230,6 +374,29 @@ struct TimedEffect {
     std::string text; // z. B. "Belagerungszustand in Berlin"
 
     friend bool operator==(const TimedEffect&, const TimedEffect&) = default;
+};
+
+/// Laufender Aufstand eines Staates (Zustand, seit a3, Abschnitt 4.4).
+struct Revolt {
+    Index state = -1;
+    RevoltKind kind = RevoltKind::Barricades;
+    Date start;
+    Fixed strength;    // > 0 für die Aufständischen; ±1 entscheidet
+    Index helper = -1; // Staat, der mit Truppen eingreift
+
+    friend bool operator==(const Revolt&, const Revolt&) = default;
+};
+
+/// Beendeter Aufstand mit Ausgang (Zustand, seit a5; Labor und Anzeige).
+struct RevoltRecord {
+    Index state = -1;
+    RevoltKind kind = RevoltKind::Barricades;
+    Date start;
+    Date end;
+    RevoltOutcome outcome = RevoltOutcome::Suppression;
+    Index helper = -1;
+
+    friend bool operator==(const RevoltRecord&, const RevoltRecord&) = default;
 };
 
 /// Merkmal (Flag) eines Staates oder der Welt (state = -1), Zustand.

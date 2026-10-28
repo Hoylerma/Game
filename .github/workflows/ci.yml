@@ -395,6 +395,27 @@ jobs:
           } >> "$GITHUB_STEP_SUMMARY"
           exit "$status"
 
+      # Ereignislabor (M11, docs/technik/ereignisse.md Abschnitt 7): die Revolution 1848/49 ohne Spieler und
+      # mit den Strategien krone und reaktion für Preußen gegen data/common/ereignisziele_voelkerfruehling.chron.
+      - name: Ereignislabor 1848
+        if: ${{ !cancelled() }}
+        run: |
+          status=0
+          for strategie in "" krone reaktion; do
+            name="ereignisse_1848${strategie:+_$strategie}"
+            ./build/release/cli/uhrwerk-cli ereignisse --daten data --szenario voelkerfruehling --seeds 16 \
+              ${strategie:+--strategie "$strategie"} > "$RUNNER_TEMP/$name.txt" 2>&1 || status=1
+            cat "$RUNNER_TEMP/$name.txt"
+            {
+              echo "### Ereignislabor 1848 ${strategie:-ohne Spieler}"
+              echo
+              echo '```'
+              cat "$RUNNER_TEMP/$name.txt"
+              echo '```'
+            } >> "$GITHUB_STEP_SUMMARY"
+          done
+          exit "$status"
+
       # Kriegslabor der Kriegslesezeichen (M10b, Schritt b2): Düppel, Königgrätz und Sedan gegen
       # data/common/kriegsziele_<lesezeichen>.chron, je 16 Seeds.
       - name: Kriegslabor Lesezeichen

@@ -453,11 +453,14 @@ bool run_state_budget(World& world, Index state_index, const std::vector<Index>&
         }
     }
     customs_income(world, state, budget);
-    // Befristete Wirkungen der Ereignisse (seit M11, ereignisse.md Abschnitt 3.7): Steuerertrag ±x.
-    if (!world.timed_effects.empty()) {
-        const Fixed factor = timed_tax_factor(world, state_index);
-        for (Fixed& tax : budget.taxes) {
-            tax = tax * factor;
+    // Ereignisse (seit M11, ereignisse.md Abschnitte 3.7 und 4.3): befristeter Steuerertrag ±x und
+    // Steuerverweigerung bei hoher Unruhe.
+    if (events_active(world)) {
+        const Fixed factor = event_tax_factor(world, state_index);
+        if (factor != Fixed::one()) {
+            for (Fixed& tax : budget.taxes) {
+                tax = tax * factor;
+            }
         }
     }
     budget.hinterland = hinterland_income(world, state_index); // seit dem Review M10

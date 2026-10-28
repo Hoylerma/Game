@@ -1,0 +1,7 @@
+# Testdaten des Ereignislabors (seit M11, Schritt a5): eine Gesetzesgruppe mit Zensur.
+gesetz presse {
+    name     = "Presse"
+    standard = vorzensur
+    option vorzensur      { name = "Vorzensur" unruhe = 10 }
+    option pressefreiheit { name = "Pressefreiheit" }
+}

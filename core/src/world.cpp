@@ -90,6 +90,14 @@ Index World::find_law_group(std::string_view id) const {
     return find_by(law_groups, id, [](const LawGroup& g) -> std::string_view { return g.id; });
 }
 
+Index World::find_journal(std::string_view id) const {
+    return find_by(journals, id, [](const JournalDef& j) -> std::string_view { return j.id; });
+}
+
+Index World::find_vote(std::string_view id) const {
+    return find_by(votes, id, [](const VoteDef& v) -> std::string_view { return v.id; });
+}
+
 Index World::find_event(std::string_view id) const {
     return find_by(events, id, [](const EventDef& e) -> std::string_view { return e.id; });
 }

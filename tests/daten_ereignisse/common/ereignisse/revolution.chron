@@ -1,0 +1,49 @@
+# Testdaten des Ereignislabors (seit M11, Schritt a5): eine kleine Revolution auf der Fixture. Märzforderungen
+# in jedem Staat, die Kaiserkrone für Brandenburg, die Reaktion nach der Ablehnung.
+
+ereignis paris.februar {
+    titel  = "Revolution in Paris"
+    text   = "Testdaten."
+    art    = atmosphaerisch
+    wer    = welt
+    termin = 1648.11.01
+    option a { text = "Weiter" gewicht = 1 wirkung { welt_merke = februarrevolution } }
+}
+
+ereignis maerz.forderungen {
+    titel  = "Märzforderungen"
+    text   = "Testdaten."
+    quelle = "Testdaten"
+    art    = historisch
+    bedingung { datum >= 1648.11.01  gesetz_presse = vorzensur }
+    wartezeit = 10
+    option gewaehren {
+        text = "Gewähren" historisch = ja gewicht = 60
+        wirkung { gesetz_presse = pressefreiheit  merke = maerzministerium  unruhe = -10 }
+    }
+    option militaer {
+        text = "Militär einsetzen" gewicht = 40
+        wirkung { unruhe = 30  aufstand = barrikaden }
+    }
+}
+
+ereignis krone.angebot {
+    titel  = "Die Kaiserkrone"
+    text   = "Testdaten."
+    quelle = "Testdaten"
+    art    = historisch
+    wendepunkt = ja
+    bedingung { staat = BRA  datum >= 1649.03.01 }
+    option annehmen { text = "Annehmen" gewicht = 35 wirkung { welt_merke = krone_angenommen } }
+    option ablehnen { text = "Ablehnen" historisch = ja gewicht = 65 wirkung { welt_merke = krone_abgelehnt } }
+}
+
+ereignis reaktion {
+    titel  = "Die Reaktion"
+    text   = "Testdaten."
+    art    = dynamisch
+    wer    = welt
+    bedingung { welt_merkmal = krone_abgelehnt }
+    wartezeit = 30
+    option a { text = "Weiter" gewicht = 1 wirkung { welt_merke = reaktion  alle_staaten { gesetz_presse = vorzensur } } }
+}

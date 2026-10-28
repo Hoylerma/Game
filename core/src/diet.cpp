@@ -129,7 +129,8 @@ bool votes_yes(const World& world, Index state, Index applicant, Index opponent)
 }
 
 DiplomacyDecision evaluate_motion(const World& world, Index applicant, MotionKind kind, Index target) {
-    if (!has_diet(world) || plenum_votes(world, applicant) <= 0 || !world.motions.empty()) {
+    if (!has_diet(world) || world.diet_suspended != 0 || plenum_votes(world, applicant) <= 0 ||
+        !world.motions.empty()) {
         return DiplomacyDecision::Invalid;
     }
     switch (kind) {
@@ -222,7 +223,8 @@ MotionResult tally_motion(const World& world, const Motion& motion) {
 }
 
 void run_diet(World& world) {
-    if (world.motions.empty() || !(world.motions.front().filed < world.date)) {
+    // Solange die Bundesversammlung ruht (seit M11, ereignisse.md Abschnitt 5.2), wartet ein Antrag.
+    if (world.motions.empty() || !(world.motions.front().filed < world.date) || world.diet_suspended != 0) {
         return;
     }
     const Motion motion = world.motions.front();

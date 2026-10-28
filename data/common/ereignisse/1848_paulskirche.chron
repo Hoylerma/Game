@@ -1,0 +1,396 @@
+# Ereignisse Mai bis Dezember 1848 (Meilenstein M11, docs/technik/ereignisse.md Abschnitt 6.1).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.34; Abstimmungen in common/abstimmungen.chron. Quellen
+# aus der Literatur (Kenntnis, ohne Seitenangaben), alle 'sicherheit = ungeprueft'.
+
+ereignis paulskirche.eroeffnung {
+    titel  = "Die Nationalversammlung tritt zusammen"
+    text {
+        "Unter Glockengeläut ziehen die gewählten Abgeordneten in die Frankfurter Paulskirche ein:"
+        "Professoren, Richter, Beamte, Advokaten, kaum Handwerker und kein Bauer. Zum Präsidenten wählen sie"
+        "Heinrich von Gagern, der verkündet, die Versammlung solle eine Verfassung für Deutschland schaffen."
+    }
+    datum  = 1848.05.18
+    quelle = "Siemann (1985); Wollstein, Das Großdeutschland der Paulskirche (1977)"
+    sicherheit = ungeprueft
+    art    = historisch
+    wendepunkt = ja
+    wer    = welt
+    bedingung { welt_merkmal = vorparlament  datum >= 1848.05.18  datum <= 1848.08.31 }
+    option eroeffnen {
+        text = "Gagern ruft zur Souveränität der Nation auf"
+        historisch = ja
+        gewicht = 1
+        wirkung { welt_merke = paulskirche_eroeffnet }
+    }
+}
+
+ereignis pru.nationalversammlung {
+    titel  = "Die Preußische Nationalversammlung"
+    text   = "Neben der Paulskirche tritt in Berlin eine Preußische Nationalversammlung zusammen, um mit der Krone eine Verfassung zu vereinbaren. Ihre Linke ist stärker als die Frankfurter."
+    datum  = 1848.05.22
+    quelle = "Siemann (1985); Botzenhart (1977)"
+    sicherheit = ungeprueft
+    art    = historisch
+    bedingung { staat = PRU  datum >= 1848.05.22  datum <= 1848.08.31  geschehen = pru.barrikaden }
+    option vereinbaren {
+        text = "Mit der Versammlung über eine Verfassung verhandeln"
+        historisch = ja
+        gewicht = 80
+        wirkung { merke = pr_nationalversammlung  zustimmung_bildungsbuergertum = 1  unruhe = -5 }
+    }
+    option hinhalten {
+        text = "Die Versammlung tagen lassen, aber nichts zusagen"
+        gewicht = 20
+        wirkung { merke = pr_nationalversammlung  zustimmung_bildungsbuergertum = -2  unruhe = 5 }
+    }
+}
+
+ereignis nv.zentralgewalt {
+    titel  = "Eine Zentralgewalt für Deutschland"
+    text   = "Gagern schlägt den kühnen Griff vor: Die Versammlung selbst soll eine provisorische Zentralgewalt schaffen, mit einem Reichsverweser an der Spitze, Erzherzog Johann von Österreich."
+    datum  = 1848.06.28
+    quelle = "Siemann (1985); Huber Bd. 2 (1960)"
+    sicherheit = ungeprueft
+    art    = historisch
+    wer    = welt
+    bedingung { journal_revolution = nationalversammlung  datum >= 1848.06.20  datum <= 1848.09.30 }
+    wartezeit = 6
+    option abstimmen {
+        text = "Die Versammlung stimmt ab"
+        historisch = ja
+        gewicht = 1
+        wirkung { abstimmung = zentralgewalt }
+    }
+}
+
+ereignis bund.uebergabe {
+    titel  = "Der Bundestag übergibt"
+    text   = "Der Bundestag überträgt seine Befugnisse dem Reichsverweser und stellt seine Tätigkeit ein. Die Fürsten behalten ihre Heere und Beamten; ob die Zentralgewalt mehr ist als ein Name, wird sich zeigen."
+    datum  = 1848.07.12
+    quelle = "Huber Bd. 2 (1960)"
+    sicherheit = ungeprueft
+    art    = historisch
+    wer    = welt
+    bedingung { abstimmung_zentralgewalt = angenommen  datum >= 1848.07.01  datum <= 1849.06.30 }
+    wartezeit = 10
+    option uebergeben {
+        text = "Die Bundesversammlung ruht"
+        historisch = ja
+        gewicht = 1
+        wirkung { bundesversammlung = ruht }
+    }
+}
+
+ereignis nv.malmoe {
+    titel  = "Der Waffenstillstand von Malmö"
+    text {
+        "Unter dem Druck Englands und Russlands hat Preußen in Malmö einen Waffenstillstand mit Dänemark"
+        "geschlossen, ohne die Zentralgewalt zu fragen. Die Linke nennt es Verrat an der nationalen Sache;"
+        "die Mehrheit weiß, dass das Reich keine eigenen Truppen hat."
+    }
+    datum  = 1848.09.16
+    quelle = "Siemann (1985); Wollstein (1977)"
+    sicherheit = ungeprueft
+    art    = historisch
+    wendepunkt = ja
+    wer    = welt
+    bedingung { welt_merkmal = schleswig_krieg  journal_revolution = nationalversammlung  datum >= 1848.09.01  datum <= 1848.12.31 }
+    wartezeit = 7
+    option abstimmen {
+        text = "Die Versammlung stimmt über den Waffenstillstand ab"
+        historisch = ja
+        gewicht = 1
+        wirkung { abstimmung = malmoe }
+    }
+}
+
+ereignis frankfurt.septemberunruhen {
+    titel  = "Die Septemberunruhen"
+    text {
+        "Nach der Billigung des Waffenstillstands ziehen Demonstranten vor die Paulskirche, es werden"
+        "Barrikaden gebaut. Zwei Abgeordnete der Rechten, Lichnowsky und Auerswald, werden von einer Menge"
+        "getötet. Die Versammlung ruft preußische und österreichische Truppen aus Mainz zu Hilfe."
+    }
+    datum  = 1848.09.18
+    quelle = "Siemann (1985)"
+    sicherheit = ungeprueft
+    art    = historisch
+    wer    = welt
+    bedingung { welt_merkmal = malmoe_angenommen  datum <= 1848.12.31 }
+    wartezeit = 2
+    option truppen {
+        text = "Truppen aus der Bundesfestung schützen die Versammlung"
+        historisch = ja
+        gewicht = 85
+        wirkung { staat FRA { unruhe = 30  aufstand = barrikaden }  staat PRU { intervention = FRA } }
+    }
+    option ruhe {
+        text = "Die Bürgerwehr hält die Ordnung allein"
+        gewicht = 15
+        wirkung { staat FRA { unruhe = 15 } }
+    }
+}
+
+ereignis bad.struve {
+    titel  = "Der Struve-Putsch"
+    text   = "Gustav Struve ruft in Lörrach die Deutsche Republik aus und lässt Freischärler nach Norden ziehen. Die Truppen des Großherzogs stehen bereit; die Bevölkerung ist erschöpft vom Frühjahr."
+    datum  = 1848.09.21
+    quelle = "Siemann (1985); Mommsen (1998)"
+    sicherheit = ungeprueft
+    art    = historisch
+    bedingung { staat = BAD  datum >= 1848.09.15  datum <= 1848.10.15  welt_merkmal = vorparlament }
+    wartezeit = 4
+    option militaer {
+        text = "Die Freischaren mit Truppen zerstreuen"
+        historisch = ja
+        gewicht = 70
+        wirkung { aufstand = erhebung  zustimmung_militaer = 1  unruhe = 10 }
+    }
+    option einlenken {
+        text = "Den Belagerungszustand verhängen, aber nicht angreifen"
+        gewicht = 30
+        wirkung { befristet { tage = 90 text = "Belagerungszustand im Oberland" unruhe = -2 steuerertrag = -0.05 } }
+    }
+}
+
+ereignis nv.grossdeutsch {
+    titel  = "Die Frage Österreich"
+    text {
+        "Die Versammlung berät, wie weit Deutschland reichen soll. Kein Teil des Reiches, so der Entwurf, darf"
+        "mit nichtdeutschen Ländern zu einem Staat vereinigt sein. Für Österreich mit Ungarn, Böhmen und"
+        "Oberitalien hieße das die Teilung seines Reiches."
+    }
+    datum  = 1848.10.27
+    quelle = "Siemann (1985); Wollstein (1977)"
+    sicherheit = ungeprueft
+    art    = historisch
+    wer    = welt
+    bedingung { journal_revolution = nationalversammlung  datum >= 1848.10.20  datum <= 1849.01.31 }
+    wartezeit = 7
+    option abstimmen {
+        text = "Die Versammlung stimmt über die Paragraphen 2 und 3 ab"
+        historisch = ja
+        gewicht = 1
+        wirkung { abstimmung = grossdeutsch }
+    }
+}
+
+ereignis aut.oktober {
+    titel  = "Der Wiener Oktoberaufstand"
+    text {
+        "Als Grenadiere gegen das revolutionäre Ungarn ausrücken sollen, stellen sich Arbeiter, Studenten und"
+        "Nationalgarden in den Weg. Der Kriegsminister Latour wird gelyncht, der Hof flieht nach Olmütz."
+        "Fürst Windischgrätz zieht seine Truppen um die Stadt zusammen."
+    }
+    datum  = 1848.10.06
+    quelle = "Siemann (1985); Rumpler (1997)"
+    sicherheit = ungeprueft
+    art    = historisch
+    wendepunkt = ja
+    bedingung { staat = AUT  datum >= 1848.10.01  datum <= 1848.11.15 }
+    wartezeit = 4
+    option aufstand {
+        text = "Wien erhebt sich, Windischgrätz belagert die Stadt"
+        historisch = ja
+        gewicht = 75
+        wirkung { unruhe = 30  aufstand = barrikaden  zustimmung_militaer = 2 }
+    }
+    option ausgleich {
+        text = "Den Marschbefehl zurücknehmen und mit dem Reichstag verhandeln"
+        gewicht = 25
+        wirkung { zustimmung_militaer = -3  zustimmung_bildungsbuergertum = 2  unruhe = -10 }
+    }
+}
+
+ereignis aut.blum {
+    titel  = "Die Erschießung Robert Blums"
+    text {
+        "Robert Blum, Abgeordneter der Paulskirche und Führer der gemäßigten Linken, hat in Wien auf den"
+        "Barrikaden gestanden. Ein Standgericht verurteilt ihn trotz seiner Immunität; am 9. November wird er"
+        "in der Brigittenau erschossen. In ganz Deutschland halten Vereine Trauerfeiern."
+    }
+    datum  = 1848.11.09
+    quelle = "Siemann (1985); Valentin (1930/31)"
+    sicherheit = ungeprueft
+    art    = historisch
+    wer    = welt
+    bedingung { datum >= 1848.11.01  datum <= 1848.12.31  staat AUT { geschehen { ereignis = aut.oktober option = aufstand } } }
+    wartezeit = 7
+    option trauer {
+        text = "Die Nachricht erreicht Frankfurt"
+        historisch = ja
+        gewicht = 1
+        wirkung { welt_merke = blum  staat AUT { zustimmung_nationalbewegung = -3 } }
+    }
+}
+
+ereignis pru.brandenburg {
+    titel  = "Ministerium Brandenburg"
+    text {
+        "Friedrich Wilhelm IV. beruft General Graf Brandenburg zum Ministerpräsidenten. Die Nationalversammlung"
+        "soll nach Brandenburg an der Havel verlegt werden; General Wrangel steht mit 13.000 Mann vor Berlin."
+    }
+    datum  = 1848.11.09
+    quelle = "Siemann (1985); Clark (2007)"
+    sicherheit = ungeprueft
+    art    = historisch
+    wendepunkt = ja
+    bedingung { staat = PRU  datum >= 1848.11.01  datum <= 1848.12.15  merkmal = pr_nationalversammlung }
+    wartezeit = 7
+    option belagerungszustand {
+        text = "Wrangel besetzt Berlin, Belagerungszustand und Vertagung der Versammlung"
+        historisch = ja
+        gewicht = 75
+        wirkung {
+            zustimmung_militaer = 2
+            zustimmung_adel = 2
+            zustimmung_bildungsbuergertum = -3
+            vergiss = maerzministerium
+            befristet { tage = 240 text = "Belagerungszustand in Berlin" unruhe = -3 }
+        }
+    }
+    option parlamentsministerium {
+        text = "Ein Ministerium aus der Mehrheit der Versammlung berufen"
+        gewicht = 25
+        wirkung { zustimmung_bildungsbuergertum = 3  zustimmung_militaer = -3  zustimmung_adel = -2  unruhe = -5 }
+    }
+}
+
+ereignis pru.verfassung {
+    titel  = "Die oktroyierte Verfassung"
+    text   = "Mit der Auflösung der Nationalversammlung erlässt der König eine Verfassung aus eigener Macht: Zweikammersystem, Grundrechte, ein allgemeines Wahlrecht für die Zweite Kammer, aber ein absolutes Veto der Krone."
+    datum  = 1848.12.05
+    quelle = "Huber Bd. 2 (1960); Siemann (1985)"
+    sicherheit = ungeprueft
+    art    = historisch
+    wendepunkt = ja
+    bedingung { staat = PRU  datum >= 1848.12.01  datum <= 1849.02.28  geschehen = pru.brandenburg }
+    wartezeit = 5
+    option oktroyieren {
+        text = "Die Verfassung oktroyieren"
+        historisch = ja
+        gewicht = 80
+        wirkung { verfassung = konstitutionell  wahlrecht = allgemein_maenner  zustimmung_bildungsbuergertum = 1  unruhe = -5 }
+    }
+    option vereinbaren {
+        text = "Eine Verfassung mit der Versammlung vereinbaren"
+        gewicht = 20
+        wirkung { verfassung = konstitutionell  wahlrecht = allgemein_maenner  zustimmung_bildungsbuergertum = 3  zustimmung_adel = -3 }
+    }
+}
+
+ereignis nv.grundrechte {
+    titel  = "Die Grundrechte des deutschen Volkes"
+    text {
+        "Nach monatelanger Beratung stimmt die Versammlung über den Katalog der Grundrechte ab: Freizügigkeit,"
+        "Gleichheit vor dem Gesetz, Pressefreiheit, Vereins- und Versammlungsrecht, Abschaffung der Standes-"
+        "vorrechte und der Todesstrafe, Freiheit der Wissenschaft. Sie sollen in allen Staaten gelten."
+    }
+    datum  = 1848.12.21
+    quelle = "Siemann (1985); Kühne, Die Reichsverfassung der Paulskirche (1985)"
+    sicherheit = ungeprueft
+    art    = historisch
+    wer    = welt
+    bedingung { journal_revolution = nationalversammlung  datum >= 1848.12.10  datum <= 1849.02.28 }
+    wartezeit = 7
+    option abstimmen {
+        text = "Die Versammlung stimmt ab"
+        historisch = ja
+        gewicht = 1
+        wirkung { abstimmung = grundrechte  welt_merke = grundrechte_beraten }
+    }
+}
+
+ereignis grundrechte.einfuehrung {
+    titel  = "Einführung der Grundrechte"
+    text   = "Das Reichsgesetzblatt verkündet die Grundrechte. Die Regierung muss entscheiden, ob sie sie in ihrem Staat in Kraft setzt oder auf ihre eigene Verfassung verweist."
+    datum  = 1848.12.27
+    quelle = "Siemann (1985); Kühne (1985)"
+    sicherheit = ungeprueft
+    art    = historisch
+    bedingung {
+        abstimmung_grundrechte = angenommen
+        bund = ja
+        nicht { staat_in = { DEN NED } }
+        datum <= 1849.06.30
+    }
+    wartezeit = 20
+    option einfuehren {
+        text = "Die Grundrechte verkünden"
+        historisch = ja
+        gewicht = 70
+        gewicht_wenn { staat_in = { AUT PRU BAV HAN }  plus = -60 }
+        wirkung {
+            gesetz_presse = pressefreiheit
+            gesetz_vereine = vereinsfreiheit
+            merke = grundrechte_eingefuehrt
+            zustimmung_bildungsbuergertum = 2
+            zustimmung_adel = -2
+            unruhe = -5
+        }
+    }
+    option ablehnen {
+        text = "Auf die eigene Verfassung verweisen"
+        gewicht = 30
+        wirkung { zustimmung_bildungsbuergertum = -2  zustimmung_nationalbewegung = -2  unruhe = 5 }
+    }
+}
+
+ereignis grundlasten.abloesung {
+    titel  = "Ablösung der Grundlasten"
+    text   = "Bauern verlangen das Ende von Zehnt, Fronden und Gerichtsherrschaft. Die Kammer berät ein Gesetz, nach dem die Lasten gegen eine Entschädigung der Herren abgelöst werden."
+    datum  = 1848.06.04
+    quelle = "Wehler Bd. 2 (1987); Siemann (1985)"
+    sicherheit = ungeprueft
+    art    = historisch
+    bedingung { gesetz_grundlasten = grundherrschaft  datum >= 1848.04.01  datum <= 1849.12.31 }
+    wartezeit = 90
+    option abloesen {
+        text = "Die Ablösung gesetzlich anordnen"
+        historisch = ja
+        gewicht = 80
+        gewicht_wenn { merkmal = agrarreform  plus = 40 }
+        wirkung { gesetz_grundlasten = abloesung  zustimmung_bauernschaft = 3  zustimmung_adel = -2  unruhe = -5 }
+    }
+    option verzoegern {
+        text = "Die Beratung vertagen"
+        gewicht = 20
+        wirkung { zustimmung_bauernschaft = -3  unruhe = 10 }
+    }
+}
+
+ereignis arbeiterkongress {
+    titel  = "Der Arbeiterkongress"
+    text   = "In Berlin gründen Delegierte aus vielen Städten die Allgemeine Deutsche Arbeiterverbrüderung. Der Schriftsetzer Stephan Born will Selbsthilfe statt Umsturz: Bildungsvereine, Kassen, Genossenschaften."
+    datum  = 1848.08.23
+    quelle = "Siemann (1985); Kocka, Arbeitsverhältnisse und Arbeiterexistenzen (1990)"
+    sicherheit = ungeprueft
+    art    = atmosphaerisch
+    wer    = welt
+    bedingung { datum >= 1848.08.23  datum <= 1848.12.31 }
+    wartezeit = 5
+    option a { text = "Die Arbeiterverbrüderung entsteht" historisch = ja gewicht = 1 wirkung { welt_merke = arbeiterverbruederung } }
+}
+
+ereignis vereine.gruendung {
+    titel  = "Die Vereine wachsen"
+    text   = "In Städten und Kleinstädten gründen sich Märzvereine, Piusvereine, Turn- und Arbeitervereine. Sie halten Versammlungen, sammeln Unterschriften und lesen die Berichte aus Frankfurt vor."
+    quelle = "Siemann (1985)"
+    sicherheit = ungeprueft
+    art    = atmosphaerisch
+    bedingung { gesetz_vereine = vereinsfreiheit  datum >= 1848.04.15  datum <= 1849.06.30 }
+    wartezeit = 60
+    option a { text = "Die Bewegung organisiert sich" gewicht = 1 wirkung { zustimmung_nationalbewegung = 1  unruhe = -2 } }
+}
+
+ereignis presse.zeitungen {
+    titel  = "Zeitungen ohne Zensor"
+    text   = "Über Nacht entstehen Hunderte Zeitungen und Flugblätter. In den Lesekabinetten streitet man über Republik und Monarchie, im Wirtshaus wird die Neue Rheinische Zeitung vorgelesen."
+    quelle = "Siemann (1985)"
+    sicherheit = ungeprueft
+    art    = atmosphaerisch
+    bedingung { gesetz_presse = pressefreiheit  datum >= 1848.03.15  datum <= 1849.12.31 }
+    wartezeit = 60
+    option a { text = "Die Öffentlichkeit erwacht" gewicht = 1 wirkung { zustimmung_bildungsbuergertum = 1 } }
+}

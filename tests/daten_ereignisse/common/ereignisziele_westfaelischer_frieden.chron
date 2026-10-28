@@ -1,0 +1,21 @@
+# Testdaten des Ereignislabors (seit M11, Schritt a5): Korridore über 16 Seeds.
+labor {
+    bis     = 1650.12.31
+    journal = revolution
+    nicht_festgelegt = ja
+}
+ausgang reich           { anteil = { 0.1 0.7 } }
+ausgang gegenrevolution { anteil = { 0.3 0.9 } }
+ereignis maerz.forderungen { option = gewaehren  bis = 1649.03.01  staaten = { 0.3 0.95 } }
+ereignis krone.angebot     { anteil = { 1 1 } }
+
+strategie krone {
+    spieler = BRA
+    wahl    = { krone.angebot = annehmen }
+    ausgang reich { anteil = { 1 1 } }
+}
+strategie reaktion {
+    spieler = BRA
+    wahl    = { krone.angebot = ablehnen  maerz.forderungen = militaer }
+    ausgang gegenrevolution { anteil = { 1 1 } }
+}

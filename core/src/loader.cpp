@@ -1835,10 +1835,14 @@ private:
                         continue;
                     }
                     check_id(file, child, "Kennung einer Gesetzesoption");
-                    Fields of(child, file.name, "option " + child.value + " in " + what, issues_, {"name"});
+                    Fields of(child, file.name, "option " + child.value + " in " + what, issues_,
+                              {"name", "unruhe"});
                     LawOption o;
                     o.id = child.value;
                     o.name = of.text("name").value_or("");
+                    if (of.has("unruhe")) { // seit M11, Schritt a3: Beitrag zum Zielwert der Unruhe
+                        o.unrest = of.fixed("unruhe", between(fx(-100), fx(100))).value_or(Fixed::zero());
+                    }
                     if (register_id(options, o.id, static_cast<Index>(g.options.size()), file.name,
                                     child.line, "Option von " + what)) {
                         g.options.push_back(std::move(o));

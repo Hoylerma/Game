@@ -36,6 +36,40 @@ freigegeben; Stand je Schritt in Abschnitt 13 dort.
   Wirkungen aus [ereignisse.md](docs/technik/ereignisse.md) 3.3 bis auf Aufstände, Journale und Kriege,
   befristete Wirkungen (`befristet`: Steuerertrag, Moral, Unruhe, Beziehung) und Chronikeinträge der
   gewählten Optionen. Die Testbefehle der Kommandozeile üben die neuen Befehle; 1648 bitgleich.
+- **Zustimmung, Unruhe, Aufstände (Schritt a3):** Am Monatsersten nähern sich die Zustimmung der
+  Gruppen ihrem Zielwert aus den Gesetzen und die Unruhe ihrem Zielwert aus Not, Teuerung des Getreides,
+  Verfassung, Zensur (`unruhe` an den Gesetzesoptionen), Ansteckung und Zustimmung. Ab Unruhe 50
+  verweigern die Untertanen einen Teil der Steuern und wandern mehr aus. Aufstände (`aufstand =
+  barrikaden|agrarunruhen|erhebung`) vergleichen jede Woche Mobilisierung und Elitenspaltung mit der
+  Loyalität der Truppen und einer Intervention (`intervention = TAG`) und enden mit Nachgeben,
+  Niederschlagung oder Sieg der Aufständischen, je mit Chronik und optionalem Folgeereignis. Alle
+  Faktoren sind Spielwerte in `common/ereignisse.chron`; 1648 bitgleich.
+- **Journale und Abstimmungen (Schritt a4):** Journale (`common/journale/*.chron`) als Zustandsautomaten
+  mit Stufen, Zielen, Übergängen und Ausgängen mit Wertung; Abstimmungen
+  (`common/abstimmungen.chron`) nach Fraktionen mit den Sitzen der letzten Wahl und Wirkungen bei
+  Annahme oder Ablehnung; die Bundesversammlung kann ruhen; Ereignisse stellen Anträge in der
+  Bundesversammlung und erklären Kriege (`krieg = TAG`). Neue Bedingungen `journal_<id>`,
+  `abstimmung_<id>`, `bevoelkerungsanteil`, `staaten`, `bundesversammlung`; `info` zählt Journale.
+  1648 bitgleich.
+- **Ereignislabor (Schritt a5):** `uhrwerk-cli ereignisse` rechnet ein Lesezeichen je Seed ohne
+  Spieler oder mit einer Strategie für einen Staat (`--strategie`) bis zum Ende der Korridore und
+  berichtet Ausgang und Weg des Journals, Ereignisse, Wendepunkte, Aufstände, Unruhe und Gesetze;
+  Korridore in `common/ereignisziele_<szenario>.chron`, Exitcode 1 bei Verstößen. Beendete Aufstände
+  stehen im Zustand. Eine kleine Revolution auf der Test-Fixture (`tests/daten_ereignisse`) mit drei
+  CTests; 1648 bitgleich.
+- **Inhalt 1848–1851 (Schritt b1):** 64 Ereignisse der Revolution von der Februarrevolution bis zum
+  Silvesterpatent (Märzforderungen in jedem Staat, Barrikaden in Berlin, Metternichs Sturz, Heckerzug,
+  Posen, Schleswig-Holstein, Paulskirche, Malmö, Wiener Oktober, Ministerium Brandenburg, Grundrechte,
+  Kaiserdeputation, Maiaufstände, Badische Revolution, Rumpfparlament, Dreiklassenwahlrecht, Union,
+  Olmütz, Bundesreaktion), das Journal „Revolution 1848/49“ mit sieben Stufen und fünf Ausgängen und
+  acht Abstimmungen der Paulskirche nach Fraktionen. Gewalt erscheint als Geschehen in Text und Chronik,
+  nie als Belohnung. Im Ereignislabor (16 Seeds, vorläufige Korridore) endet die Revolution ohne Spieler
+  zu 75 % mit der Gegenrevolution, zu 19 % im Reich der Paulskirche und zu 6 % in der Union; mit der
+  Strategie `krone` für Preußen immer im Reich, mit `reaktion` immer in der Gegenrevolution. Ein Journal
+  beginnt nicht mehr, wenn sein Ende vor dem Start liegt (Lesezeichen 1864–1870). CI-Schritt
+  „Ereignislabor 1848“, CTest `ereignisse_1848`. Rauch- und Klicktest kennen die Revolution: Preußen
+  darf mobil sein (Eingreifen gegen Aufstände), der Antrag im Diplomatiefenster kommt vor dem Juli 1848,
+  in dem die Bundesversammlung zu ruhen beginnt; 1648 bitgleich.
 
 ### Meilenstein M10 – Militär und Einigungskriege
 

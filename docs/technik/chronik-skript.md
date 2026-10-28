@@ -86,7 +86,9 @@ data/
 │   ├── militaer.chron      Militär: Regeln, Heerwesen, Garnisonen (seit M10, optional)
 │   ├── gesetze.chron       Gesetzesgruppen mit Optionen (seit M11, optional)
 │   ├── ereignisse.chron    Regeln der Ereignisse (seit M11, optional)
-│   └── ereignisse/*.chron  Ereignisse, eine Datei je Thema (seit M11, optional)
+│   ├── ereignisse/*.chron  Ereignisse, eine Datei je Thema (seit M11, optional)
+│   ├── journale/*.chron    Journale (seit M11, optional)
+│   └── abstimmungen.chron  Abstimmungen in Parlamenten (seit M11, optional)
 ├── history/                generiert aus tabellen/ (tools/archivar), nicht von Hand bearbeiten
 │   ├── staaten/*.chron     Staaten (Reichsstände) mit datierter Historie
 │   ├── kreise/*.chron      Kreise: Gruppen von 4–12 Orten (seit M3)
@@ -1150,14 +1152,16 @@ gesetz presse {
     name     = "Presse"               # Pflicht
     seit     = 1815.06.08             # optional (Abschnitt 3.18)
     standard = vorzensur              # Pflicht: Option, solange die Historie keine andere nennt
-    option vorzensur      { name = "Vorzensur" }       # mindestens zwei Optionen
+    option vorzensur      { name = "Vorzensur" unruhe = 10 }   # mindestens zwei Optionen; unruhe optional
     option pressefreiheit { name = "Pressefreiheit" }
     quelle   = "…"                    # optional
 }
 ```
 
 Fatal sind eine Kennung zweimal (Gruppe oder Option), weniger als zwei Optionen und ein unbekannter
-Standard. Im Kern: `World::law_groups` (`LawGroup`, `LawOption`). Die Staaten nennen ihre Option mit
+Standard. `unruhe` (seit M11a3, −100 … 100, Standard 0) geht in den Zielwert der Unruhe des Staates ein,
+der diese Option hat (Zensur, [ereignisse.md](ereignisse.md) Abschnitt 4.3). Im Kern: `World::law_groups`
+(`LawGroup`, `LawOption`). Die Staaten nennen ihre Option mit
 `gesetz_<gruppe>` (Abschnitt 3.5), die Interessengruppen ihre Wünsche mit `wuensche` (Abschnitt 3.20).
 
 ### 3.34 `common/ereignisse.chron` und `common/ereignisse/*.chron` (seit M11)
@@ -1170,8 +1174,29 @@ dann nicht gelesen und der Zustand bleibt der ohne Ereignisse (1648 bitgleich).
 ereignisse {
     seit  = 1848.01.01   # Pflicht: ab diesem Startdatum gibt es Ereignisse
     frist = 30           # optional (30), 1–365: Tage bis zur Wahl ohne Spieler
+    # seit a3, alle optional (Standardwerte in Klammern), ereignisse.md Abschnitte 4.2–4.4:
+    zustimmung_annaeherung = 0.2   # 0–1: Anteil der Lücke zum Zielwert je Monat (0.2)
+    unruhe_annaeherung = 0.25      # 0–1 (0.25)
+    unruhe_not = 20  not_ab = 50  not_spanne = 25           # Not aus dem Lebensstandard unten
+    unruhe_teuerung = 15  getreide = getreide  teuerung_ab = 1.2  teuerung_spanne = 0.5
+    unruhe_verfassung = { keine = 15 staendisch = 10 konstitutionell = 0 }
+    unruhe_ansteckung = 10  ansteckung_ab = 60  ansteckung_merkmal = februarrevolution
+    unruhe_zustimmung = 2                                     # × Σ Einfluss × Zustimmung
+    steuerverweigerung_ab = 50  steuerverweigerung = 0.1      # Unruhe ab …, Anteil des Steuerertrags
+    auswanderung_ab = 50  auswanderung_unruhe = 0.5           # zusätzliche Auswanderung unten
+    aufstand_tage = { 7 60 }                                  # erste Entscheidung, Höchstdauer
+    aufstand_schritt = 0.25  aufstand_zufall = 0.15  aufstand_nachgeben = 0.3
+    spaltung_gruppen = { beamtenschaft adel }  spaltung_merkmal = maerzministerium  spaltung = 0.25
+    loyalitaet = militaer  soldaten_bezug = 10
+    nachgeben_unruhe = -30  niederschlagung_unruhe = -20  niederschlagung_verwuestung = 0.05
+    sieg_merkmal = revolutionsregierung
+    folge_nachgeben = <ereignis>  folge_niederschlagung = <ereignis>  folge_sieg = <ereignis>
 }
 ```
+
+Fatal sind Werte außerhalb ihres Bereichs, unbekannte Gruppen, Güter und Ereignisse (Gruppen und Güter mit
+späterem `seit` entfallen ohne Fehler), eine Verfassung außer den drei Werten und ein Folgeereignis eines
+Ausgangs, das kein Staatsereignis ist.
 
 Ein Ereignis (Kennung aus a–z, 0–9, `_` und `.`, beginnend mit einem Buchstaben, z. B.
 `maerz.forderungen`):
@@ -1228,6 +1253,12 @@ den Staat gelten nur in Staatsereignissen oder innerhalb von `staat <TAG> { … 
 | `lebensstandard_unten <= n` | Lebensstandard der unteren Schicht, 0…100 |
 | `preis_<gut> >= x` | Preisfaktor im Markt der Hauptstadt |
 | `im_krieg`, `mobil`, `bund`, `spieler` = `ja`/`nein` | Krieg, Mobilmachung, Bund, Spielerstaat |
+| `aufstand = ja`/`nein` | im Staat läuft ein Aufstand (seit a3) |
+| `journal_<id> = <stufe>` (`=`, `!=`) | Stufe oder Ausgang eines Journals (seit a4, Abschnitt 3.35); vor dem Beginn keine |
+| `abstimmung_<id> = angenommen`/`abgelehnt` | Ergebnis der letzten Abstimmung (seit a4); ohne Abstimmung nie wahr |
+| `bevoelkerungsanteil { wenn { … } unter { … } mindestens = x }` | Anteil der Bevölkerung der Staaten aus `unter` (ohne: alle), für die `wenn` gilt (seit a4, 0…1) |
+| `staaten { wenn { … } mindestens = n }` | Zahl der Staaten, für die `wenn` gilt (seit a4) |
+| `bundesversammlung = ruht`/`tagt` | die Bundesversammlung ruht (seit a4) |
 | `krieg_mit = TAG`, `zollunion = <id>`/`keine`, `beziehung_<TAG> >= n` | Krieg, Zollunion, Beziehung |
 | `sitze { parlament = <id> stroemung = <id> mindestens = n }` | Sitze nach der letzten Wahl |
 | `soldaten >= n`, `schatz >= n`, `schulden_quote >= x` | Heer und Haushalt |
@@ -1245,6 +1276,13 @@ den Staat gelten nur in Staatsereignissen oder innerhalb von `staat <TAG> { … 
 | `auswanderung = x` (0…1) | Anteil der unteren Schicht wandert aus |
 | `verwuestung = x`, `verwuestung { ort = <id> wert = x }` (−1…1) | Verwüstung der Hauptstadt bzw. eines Ortes |
 | `mobilmachung = ja` | Mobilmachung |
+| `aufstand = barrikaden`/`agrarunruhen`/`erhebung` | Aufstand beginnen (seit a3; je Staat höchstens einer) |
+| `journal_<id> = <stufe>` | Journal in eine Stufe oder einen Ausgang setzen (seit a4, auch in der Welt) |
+| `abstimmung = <id>` | Abstimmung im Parlament (seit a4, auch in der Welt; Abschnitt 3.35) |
+| `bundesversammlung = ruht`/`tagt` | Ruhen der Bundesversammlung (seit a4, auch in der Welt) |
+| `antrag { art = reform\|praesidium\|intervention\|zolleinigung ziel = TAG\|<zollunion> }` | Antrag des Staates in der Bundesversammlung (seit a4) |
+| `krieg = TAG` | Kriegserklärung ohne Kriegsziel, mit Bündnisfall (seit a4; nur mit Militär) |
+| `intervention = TAG` | Truppen gegen den Aufstand in TAG (seit a3; mit Militär Mobilmachung) |
 | `folge { ereignis = <id> tage = n staat = TAG }` | Folgeereignis nach n Tagen (0), auch für einen anderen Staat |
 | `befristet { tage = n text = "…" steuerertrag = x moral = x unruhe = n beziehung_bund = n }` | Wirkung auf Zeit (seit a2): Steuerertrag und Kampfkraft ±x (−1…1), Unruhe und Beziehung zu allen Bundesstaaten je Monatserstem ±n (−100…100); `tage` (1…36500) und `text` Pflicht, mindestens ein Wert |
 | `chronik = "…"` | eigener Chronikeintrag |
@@ -1264,6 +1302,76 @@ Folgeereignisse ohne Frist (`tage = 0`), die einen Kreis bilden. Die Ereignisse 
 Kennung geordnet (`World::events`, `EventDef`; Regeln `World::event_rules`). Fatal ist seit a2 auch
 `nur_folge` mit `termin` oder `wartezeit`. Auslösung, Wahl und Wirkungen: [ereignisse.md](ereignisse.md),
 Abschnitte 3.4–3.7 (`core/src/events.cpp`).
+
+### 3.35 `common/journale/*.chron` und `common/abstimmungen.chron` (seit M11a4)
+
+Journale und Abstimmungen ([ereignisse.md](ereignisse.md), Abschnitt 5); nur in Welten mit Ereignissen,
+beide dürfen fehlen. Kennungen aus a–z, 0–9 und `_`.
+
+```text
+journal revolution {
+    titel  = "Revolution 1848/49"     # Pflicht
+    text   = "…"                      # optional, wie bei Ereignissen
+    beginn = 1848.03.01               # optional: erste Stufe ab diesem Tag (sonst ab dem Start)
+    ende   = 1851.12.31               # optional: dann gilt der Ausgang mit standard = ja (Pflicht)
+    stufe maerz {                     # die erste Stufe beginnt; Stufen und Ausgänge in beliebiger Folge
+        titel = "Märzunruhen"         # Pflicht
+        text  = "…"
+        ziel { text = "Vorparlament" bedingung { welt_merkmal = vorparlament } }       # Anzeige
+        ziel { text = "Märzministerien" zaehle { merkmal = maerzministerium } soll = 20 }
+        weiter { zu = vorparlament  wenn { welt_merkmal = vorparlament } }  # mehrfach; der erste gilt
+        wirkung { … }                 # beim Eintritt, wie bei Ereignissen (Welt)
+    }
+    ausgang gegenrevolution {
+        titel   = "Die Gegenrevolution siegt"   # Pflicht
+        wertung = gescheitert                   # Pflicht: gelungen, teilweise, gescheitert
+        standard = ja                           # höchstens ein Ausgang
+        wirkung { bundesversammlung = tagt }
+    }
+}
+```
+
+```text
+abstimmung erbkaiser {
+    titel     = "Erbliches Kaisertum"         # Pflicht, steht in der Chronik
+    parlament = nationalversammlung           # Pflicht (späteres Parlament: die Abstimmung entfällt)
+    neigung   = { casino = 0.95 landsberg = 0.9 wuerttemberger_hof = 0.5 donnersberg = 0 }  # Pflicht
+    fraktionslos = 0.5                        # optional (0.5): auch für nicht genannte Fraktionen
+    mehrheit  = 0.5                           # optional (0.5): angenommen mit mehr Ja als mehrheit × Stimmen
+    ja   { welt_merke = erbkaiser }           # optional: Wirkungen (Welt)
+    nein { … }
+}
+```
+
+Fatal sind eine Kennung zweimal (Journal, Stufe, Abstimmung), ein Journal ohne Titel, ohne Stufe am
+Anfang oder ohne Ausgang, mehr als ein Ausgang mit `standard`, ein `ende` ohne ihn oder vor `beginn`,
+ein Ziel ohne Text oder ohne genau eine Art (bedingung oder zaehle mit soll), ein Übergang ohne `zu`
+oder zu einer unbekannten Stufe, ein Ausgang ohne Wertung, unbekannte Parlamente und Fraktionen und
+Anteile außerhalb 0…1. Im Kern: `World::journals` (`JournalDef`), `World::votes` (`VoteDef`).
+
+### 3.36 `common/ereignisziele_<szenario>.chron` (seit M11a5)
+
+Korridore des Ereignislabors (`uhrwerk-cli ereignisse`, [ereignisse.md](ereignisse.md) Abschnitt 7).
+
+```text
+labor {
+    bis     = 1851.12.31            # Pflicht: Ende der Läufe (überschreibbar mit --bis)
+    journal = revolution            # optional: Journal, dessen Ausgänge zählen
+    nicht_festgelegt = ja           # optional: kein Ausgang in allen Läufen (ohne Strategie)
+}
+ausgang gegenrevolution { anteil = { 0.5 0.9 } }     # Anteil der Läufe mit diesem Ausgang
+ereignis kaiserwahl { anteil = { 0.6 1 } }           # Anteil der Läufe, in denen es eintritt
+ereignis maerz.forderungen { option = gewaehren  bis = 1848.04.30  staaten = { 0.7 1 } }
+                                                     # mittlerer Anteil der Staaten mit Ereignis und Option
+strategie krone {
+    spieler = PRU                                    # Pflicht: besteht zum Start
+    wahl    = { kaiserkrone.angebot = annehmen }     # bevorzugte Option je Ereignis
+    ausgang reich_paulskirche { anteil = { 0.5 1 } } # Korridore mit dieser Strategie
+}
+```
+
+Fehler (Exitcode 1): unbekannte Felder, Journale, Ausgänge, Ereignisse, Optionen und Staaten, ein Bereich
+außerhalb von 0 bis 1, ein Ereignis ohne genau eines von `anteil` und `staaten`, ein Ende vor dem Start.
 
 ## 4. Startzustand
 

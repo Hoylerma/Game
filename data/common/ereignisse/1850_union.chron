@@ -1,0 +1,214 @@
+# Ereignisse 1850–1851: Union, Olmütz, Wiederherstellung des Bundes, Reaktion (Meilenstein M11,
+# docs/technik/ereignisse.md Abschnitt 6.1). Format: docs/technik/chronik-skript.md, Abschnitt 3.34. Quellen
+# aus der Literatur (Kenntnis, ohne Seitenangaben), alle 'sicherheit = ungeprueft'.
+
+ereignis erfurt.unionsparlament {
+    titel  = "Das Erfurter Unionsparlament"
+    text   = "In der Augustinerkirche zu Erfurt tritt das Parlament der Union zusammen, gewählt nach einem Dreiklassenwahlrecht. Die Gothaer Liberalen nehmen die Verfassung an; die Fürsten verlieren das Interesse, Sachsen und Hannover sind schon wieder abgefallen."
+    datum  = 1850.03.20
+    quelle = "Siemann (1985); Huber Bd. 2 (1960)"
+    sicherheit = ungeprueft
+    art    = historisch
+    wer    = welt
+    bedingung { welt_merkmal = unionspolitik  datum >= 1850.03.01  datum <= 1850.12.31 }
+    wartezeit = 10
+    option tagen {
+        text = "Die Unionsverfassung wird angenommen"
+        historisch = ja
+        gewicht = 1
+        wirkung { welt_merke = erfurter_union  staat SAX { vergiss = dreikoenigsbuendnis }  staat HAN { vergiss = dreikoenigsbuendnis } }
+    }
+}
+
+ereignis den.frieden {
+    titel  = "Frieden um Schleswig-Holstein"
+    text   = "Preußen schließt in Berlin Frieden mit Dänemark und lässt die Herzogtümer allein. Die schleswig-holsteinische Armee unterliegt bei Idstedt; die Großmächte bestätigen im Londoner Protokoll den dänischen Gesamtstaat."
+    datum  = 1850.07.02
+    quelle = "Siemann (1985); Nipperdey (1983)"
+    sicherheit = ungeprueft
+    art    = atmosphaerisch
+    wer    = welt
+    bedingung { welt_merkmal = schleswig_krieg  datum >= 1850.07.01  datum <= 1851.12.31  staat PRU { krieg_mit = DEN } }
+    wartezeit = 15
+    option frieden { text = "Die Herzogtümer bleiben bei Dänemark" historisch = ja gewicht = 1 wirkung { welt_merke = frieden_von_berlin } }
+}
+
+ereignis hek.verfassungskonflikt {
+    titel  = "Der kurhessische Verfassungskonflikt"
+    text {
+        "Kurfürst Friedrich Wilhelm und sein Minister Hassenpflug erheben Steuern ohne Bewilligung der"
+        "Stände. Richter, Beamte und fast das ganze Offizierskorps verweigern den Gehorsam. Der Kurfürst"
+        "flieht und ruft den wiederbelebten Bundestag an; Preußen sieht seine Militärstraßen bedroht."
+    }
+    datum  = 1850.09.07
+    quelle = "Huber Bd. 2 (1960); Siemann (1985)"
+    sicherheit = ungeprueft
+    art    = historisch
+    wendepunkt = ja
+    bedingung { staat = HEK  datum >= 1850.09.01  datum <= 1850.12.31 }
+    wartezeit = 7
+    option bundesexekution {
+        text = "Den Bund um Exekution bitten"
+        historisch = ja
+        gewicht = 70
+        wirkung {
+            welt_merke = kurhessen_krise
+            zustimmung_beamtenschaft = -3
+            zustimmung_militaer = -2
+            unruhe = 15
+            befristet { tage = 365 text = "Kriegszustand in Kurhessen" steuerertrag = -0.2 unruhe = -1 }
+        }
+    }
+    option verfassung {
+        text = "Die Verfassung achten und mit den Ständen verhandeln"
+        gewicht = 30
+        wirkung { zustimmung_beamtenschaft = 2  zustimmung_adel = -1  unruhe = -5 }
+    }
+}
+
+ereignis pru.olmuetz {
+    titel  = "Olmütz"
+    text {
+        "Bayerische und österreichische Bundestruppen rücken in Kurhessen ein, bei Bronzell fallen Schüsse"
+        "mit preußischen Vorposten. Preußen hat mobil gemacht, aber der Zar steht an Österreichs Seite. In"
+        "Olmütz verlangt Fürst Schwarzenberg den Verzicht auf die Union."
+    }
+    datum  = 1850.11.29
+    quelle = "Siemann (1985); Clark (2007)"
+    sicherheit = ungeprueft
+    art    = historisch
+    wendepunkt = ja
+    bedingung {
+        staat = PRU
+        welt_merkmal = unionspolitik
+        oder { welt_merkmal = kurhessen_krise  datum >= 1850.11.20 }
+        datum >= 1850.10.15
+        datum <= 1851.03.31
+    }
+    wartezeit = 14
+    option nachgeben {
+        text = "Nachgeben: auf die Union verzichten und zum Bund zurückkehren"
+        historisch = ja
+        gewicht = 75
+        wirkung { welt_merke = olmuetz  beziehung_AUT = 20  zustimmung_militaer = -2  zustimmung_nationalbewegung = -3 }
+    }
+    option standhalten {
+        text = "Standhalten: die Union notfalls mit Krieg verteidigen"
+        gewicht = 25
+        gewicht_wenn { zustimmung_militaer >= 3  plus = 10 }
+        wirkung {
+            welt_merke = olmuetz_standgehalten
+            mobilmachung = ja
+            krieg = AUT
+            zustimmung_nationalbewegung = 3
+            chronik = "Preußen: In dieser Geschichte gibt Preußen in Olmütz nicht nach."
+        }
+    }
+}
+
+ereignis dresdner.konferenzen {
+    titel  = "Die Dresdner Konferenzen"
+    text   = "In Dresden beraten die Regierungen über eine Reform des Bundes. Österreich will mit seinem ganzen Staatsgebiet in den Bund, Preußen will die Gleichberechtigung; am Ende bleibt es beim alten Bund."
+    datum  = 1850.12.23
+    quelle = "Huber Bd. 2 (1960)"
+    sicherheit = ungeprueft
+    art    = historisch
+    wer    = welt
+    bedingung { welt_merkmal = olmuetz  datum >= 1850.12.01  datum <= 1851.06.30 }
+    wartezeit = 10
+    option beraten { text = "Die Konferenzen enden ohne Reform" historisch = ja gewicht = 1 wirkung { welt_merke = dresdner_konferenzen } }
+}
+
+ereignis bund.wiederherstellung {
+    titel  = "Die Bundesversammlung tagt wieder"
+    text   = "In Frankfurt versammeln sich die Gesandten aller Regierungen wieder im Palais Thurn und Taxis. Die Nationalversammlung, die Zentralgewalt und die Grundrechte sind nur noch Erinnerung."
+    datum  = 1851.05.30
+    quelle = "Huber Bd. 2 (1960); Siemann (1985)"
+    sicherheit = ungeprueft
+    art    = historisch
+    wendepunkt = ja
+    wer    = welt
+    bedingung {
+        journal_revolution = union_oder_bund
+        oder { welt_merkmal = dresdner_konferenzen  nicht { welt_merkmal = unionspolitik } }
+        datum >= 1851.01.01
+        datum <= 1851.12.31
+    }
+    wartezeit = 30
+    option tagen {
+        text = "Der alte Bund ist wiederhergestellt"
+        historisch = ja
+        gewicht = 1
+        wirkung { bundesversammlung = tagt  welt_merke = bund_wiederhergestellt }
+    }
+}
+
+ereignis bund.reaktionsbeschluss {
+    titel  = "Der Bundesreaktionsbeschluss"
+    text   = "Die Bundesversammlung verlangt von allen Regierungen, ihre Verfassungen und Gesetze mit den Grundsätzen des Bundes in Einklang zu bringen. Ein Ausschuss prüft, was seit 1848 beschlossen wurde; die Grundrechte werden aufgehoben."
+    datum  = 1851.08.23
+    quelle = "Huber Bd. 2 (1960); Siemann, Gesellschaft im Aufbruch (1990)"
+    sicherheit = ungeprueft
+    art    = historisch
+    wer    = welt
+    bedingung { welt_merkmal = bund_wiederhergestellt  datum >= 1851.06.01  datum <= 1851.12.31 }
+    wartezeit = 30
+    option beschliessen {
+        text = "Der Beschluss ergeht an alle Regierungen"
+        historisch = ja
+        gewicht = 1
+        wirkung { welt_merke = bundesreaktion  alle_staaten { folge { ereignis = reaktion.staat } } }
+    }
+}
+
+ereignis reaktion.staat {
+    titel  = "Die Reaktion im eigenen Land"
+    text   = "Der Bund verlangt die Rückkehr zur Ordnung vor 1848. Polizeiaufsicht über Vereine und Presse, Entlassung liberaler Beamter, Prozesse gegen die Führer der Revolution liegen bereit."
+    quelle = "Siemann, Gesellschaft im Aufbruch (1990)"
+    sicherheit = ungeprueft
+    art    = historisch
+    nur_folge = ja
+    bedingung { bund = ja  nicht { staat_in = { DEN NED } } }
+    option umsetzen {
+        text = "Die Gesetze von 1848 zurücknehmen"
+        historisch = ja
+        gewicht = 80
+        wirkung {
+            gesetz_presse = pressegesetz
+            gesetz_vereine = genehmigung
+            vergiss = maerzministerium
+            vergiss = reichsverfassung
+            zustimmung_bildungsbuergertum = -3
+            zustimmung_adel = 2
+            unruhe = -5
+            befristet { tage = 365 text = "Reaktionszeit" unruhe = -1 }
+        }
+    }
+    option zoegern {
+        text = "Die eigene Verfassung verteidigen"
+        gewicht = 20
+        wirkung { zustimmung_bildungsbuergertum = 1  beziehung_AUT = -10 }
+    }
+}
+
+ereignis aut.silvesterpatent {
+    titel  = "Das Silvesterpatent"
+    text   = "Mit den Silvesterpatenten hebt Kaiser Franz Joseph die Märzverfassung von 1849 auf. Österreich wird wieder ohne Verfassung regiert; nur die Bauernbefreiung und die Gleichheit vor dem Gesetz bleiben."
+    datum  = 1851.12.31
+    quelle = "Rumpler (1997)"
+    sicherheit = ungeprueft
+    art    = historisch
+    bedingung { staat = AUT  datum >= 1851.12.01  datum <= 1851.12.31 }
+    termin = 1851.12.31
+    option aufheben {
+        text = "Die Verfassung aufheben"
+        historisch = ja
+        gewicht = 85
+        wirkung { verfassung = keine  zustimmung_adel = 2  zustimmung_bildungsbuergertum = -3 }
+    }
+    option behalten {
+        text = "Die Verfassung beibehalten"
+        gewicht = 15
+        wirkung { zustimmung_bildungsbuergertum = 2  zustimmung_militaer = -1 }
+    }
+}

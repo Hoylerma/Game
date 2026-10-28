@@ -57,6 +57,15 @@ bool choose_event_option(World& world, Pcg32& rng, EventCache& cache, Index stat
 /// Ereignisse eines früheren Spielers bleiben offen und gelten nach ihrer Frist.
 bool set_event_player(World& world, Index state);
 
+/// Zielwert der Unruhe eines Staates (Abschnitt 4.3): Not, Teuerung, Verfassung, Gesetze, Ansteckung,
+/// Zustimmung; 0 … 100.
+Fixed unrest_target(const World& world, const EventCache& cache, Index state);
+
+/// Faktor auf den Steuerertrag aus befristeten Wirkungen und Steuerverweigerung bei hoher Unruhe.
+Fixed event_tax_factor(const World& world, Index state);
+/// Faktor auf die Auswanderung der unteren Schicht bei hoher Unruhe (1 sonst).
+Fixed unrest_emigration_factor(const World& world, Index state);
+
 /// Faktor auf den Steuerertrag und auf die Kampfkraft der Heere aus befristeten Wirkungen (1 ohne).
 Fixed timed_tax_factor(const World& world, Index state);
 Fixed timed_morale_factor(const World& world, Index state);

@@ -100,6 +100,32 @@ if(UHRWERK_BUILD_CLI)
         "Verstöße: keine – alle Kriegsziele erfüllt")
     add_test(NAME krieg_1848
         COMMAND uhrwerk-cli krieg --daten ${PROJECT_SOURCE_DIR}/data --szenario voelkerfruehling --seeds 1)
+    # Ereignislabor 1848 (seit M11b): ein kurzer Lauf bis Ende 1848 prüft nur, dass das Labor mit dem Inhalt
+    # rechnet (die Korridore gelten bis 1851 und prüft der CI-Job "Balancing" mit 16 Seeds).
+    add_test(NAME ereignisse_1848
+        COMMAND uhrwerk-cli ereignisse --daten ${PROJECT_SOURCE_DIR}/data --szenario voelkerfruehling --seeds 1
+                --bis 1848.12.31)
+    set_tests_properties(ereignisse_1848 PROPERTIES PASS_REGULAR_EXPRESSION
+        "Märzunruhen \\(1848\\.03\\.01\\) → Vorparlament")
+
+    # Ereignislabor (seit M11, docs/technik/ereignisse.md Abschnitt 7): eine kleine Revolution auf der Fixture
+    # (tests/daten_ereignisse über tests/daten) gegen ihre Korridore über 16 Seeds, ohne Spieler und mit den
+    # Strategien krone und reaktion für Brandenburg.
+    set(ereignis_daten ${CMAKE_CURRENT_BINARY_DIR}/ereignis_daten)
+    add_test(NAME ereignis_daten
+        COMMAND ${CMAKE_COMMAND} -DQUELLE=${CMAKE_CURRENT_SOURCE_DIR} -DZIEL=${ereignis_daten}
+                -P ${CMAKE_CURRENT_SOURCE_DIR}/ereignis_daten.cmake)
+    set_tests_properties(ereignis_daten PROPERTIES FIXTURES_SETUP ereignis_daten)
+    add_test(NAME pruefen_ereignis_fixture COMMAND uhrwerk-cli pruefen --daten ${ereignis_daten})
+    add_test(NAME ereignisse_fixture COMMAND uhrwerk-cli ereignisse --daten ${ereignis_daten} --seeds 16)
+    add_test(NAME ereignisse_fixture_krone
+        COMMAND uhrwerk-cli ereignisse --daten ${ereignis_daten} --seeds 16 --strategie krone)
+    add_test(NAME ereignisse_fixture_reaktion
+        COMMAND uhrwerk-cli ereignisse --daten ${ereignis_daten} --seeds 16 --strategie reaktion)
+    set_tests_properties(pruefen_ereignis_fixture ereignisse_fixture ereignisse_fixture_krone
+        ereignisse_fixture_reaktion PROPERTIES FIXTURES_REQUIRED ereignis_daten)
+    set_tests_properties(ereignisse_fixture ereignisse_fixture_krone ereignisse_fixture_reaktion
+        PROPERTIES PASS_REGULAR_EXPRESSION "Verstöße: keine – alle Korridore erfüllt")
 
     # Kriegslesezeichen (seit M10b, militaer.md Abschnitt 6.1): Daten, ein kurzer Lauf des Krieges aus
     # dem Lesezeichen und der Speichertest mitten im Krieg 1866. Der kurze Lauf prüft nur, dass das Labor

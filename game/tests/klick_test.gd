@@ -531,9 +531,11 @@ func _check_new_game() -> void:
 		_fail("Politische Legende: Spielerstaat Lübeck fehlt")
 
 	await _check_party_mode(sim)
+	# Die Diplomatie vor dem Wahlabend: Ab Juli 1848 ruht die Bundesversammlung (Ereignis
+	# bund.uebergabe, seit M11), dann ist kein Antrag möglich.
+	await _check_diplomacy_ui(sim)
 	await _check_election_night(sim)
 	await _check_customs_ui(sim)
-	await _check_diplomacy_ui(sim)
 	await _check_war_ui(menu)
 	await _check_war_bookmarks()
 
