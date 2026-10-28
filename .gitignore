@@ -22,6 +22,7 @@ compile_commands.json
 # ── Lokale Werkzeuge und Laufzeitdaten ─────────────────────
 /tools/godot/
 /saves/
+/tools/vic3_berater/probe.jpg
 *.log
 
 # ── Python ─────────────────────────────────────────────────

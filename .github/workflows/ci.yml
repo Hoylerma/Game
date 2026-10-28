@@ -9,7 +9,7 @@
 #   Lasttest            Release-Build, 500.000 Bevölkerungsblöcke, Zeit je Spieljahr (seit M4), Größe
 #                       sowie Schreib- und Ladezeit des Spielstands (seit M6)
 #   Formatierung        clang-format 18 über core/, cli/, tests/, bridge/
-#   Python-Werkzeuge    Tests von Archivar, Kartengenerator und Geodaten (mit numpy, ohne Netz);
+#   Python-Werkzeuge    Tests von Archivar, Kartengenerator, Geodaten (mit numpy, ohne Netz) und Vic3-Berater;
 #                       sind data/history/ und data/karte/ aktuell?
 #   Godot               GDExtension bauen, Einheiten-, Rauch- und Klicktest headless,
 #                       Screenshots der Hauptszene als Artefakt
@@ -505,6 +505,9 @@ jobs:
 
       - name: Tests des Archivars
         run: python3 -m unittest discover -s tools/archivar -v
+
+      - name: Tests des Vic3-Beraters
+        run: python3 -m unittest discover -s tools/vic3_berater -v
 
       - name: Historie aktuell? (data/history/ aus data/tabellen/)
         run: python3 tools/archivar/archivar.py --pruefen

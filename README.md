@@ -175,7 +175,7 @@ Multiplayer und Modding-Werkzeuge. Was sich ändert, steht im [Änderungsprotoko
 | [`bridge/`](bridge/) | GDExtension-Brücke zwischen Uhrwerk und Godot | `core`, `third_party/godot-cpp` |
 | [`game/`](game/) | Godot-4-Projekt (Szenen, Skripte, Shader, Oberfläche) | `bridge` |
 | [`data/`](data/) | Spielinhalte: Tabellen (`tabellen/*.csv`), daraus erzeugtes **Chronik-Skript** (`*.chron`), Karte (`karte/`) | – |
-| [`tools/`](tools/) | Hilfswerkzeuge: [Archivar](tools/archivar/README.md) (Datenpipeline), [Geodaten](tools/geodaten/README.md) (Quellen, Geometrie, Orte des Kernraums), [Kartengenerator](tools/kartengenerator/README.md) | Python 3.10+; Geodaten und Kartengenerator mit numpy |
+| [`tools/`](tools/) | Hilfswerkzeuge: [Archivar](tools/archivar/README.md) (Datenpipeline), [Geodaten](tools/geodaten/README.md) (Quellen, Geometrie, Orte des Kernraums), [Kartengenerator](tools/kartengenerator/README.md); außerdem der [Vic3-Berater](tools/vic3_berater/README.md) (KI-Tipps live in Victoria 3, unabhängig vom Spiel) | Python 3.10+; Geodaten und Kartengenerator mit numpy |
 | [`docs/`](docs/) | Game Design Document, technische Dokumentation in [`docs/technik/`](docs/technik/) | – |
 | `third_party/` | Fremdbibliotheken als Git-Submodule (godot-cpp 4.4.1) | – |
 
