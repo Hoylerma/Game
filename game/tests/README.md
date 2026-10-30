@@ -114,6 +114,14 @@ Prüft die GDExtension und die Kartendaten ohne Szene und ohne Grafikausgabe:
     Farbe. Seit dem Review M9: Hannover gibt in der Krise um den Zollverein nach, sein Beitritt ist
     verbindlich (`customs_request.binding`, Rücknahme `ungueltig`). 1648 gibt es weder Beziehungen
     noch Bundesversammlung noch Krisen
+  - **Ereignisse 1848** (seit M11, Schritt b4): Baden wartet auf seine Ereignisse
+    (`set_event_player`, wirksam am nächsten Tag); das erste offene Ereignis hat Titel, Quelle,
+    mindestens zwei Optionen mit Folgentexten und eine Frist; eine ungültige Option wird abgewiesen,
+    die gewählte steht bis zum nächsten Tag in `chosen_option` und danach im Protokoll
+    (`get_event_log`). Das Journal „Revolution“ hat Ziele und Ausgänge, `get_state_events` Gesetze,
+    Zustimmung und Unruhe, der Kartenmodus „Unruhe“ eine Farbe je Ort; im August 1848 ruht die
+    Bundesversammlung, die Chronik hebt Wendepunkte hervor. 1648 gibt es keine Ereignisse, Journale
+    oder Aufstände, und der Ereignisspieler wird abgewiesen
 
 Am Ende steht `SMOKE OK` (Exitcode 0) oder `SMOKE FEHLGESCHLAGEN` mit allen Fehlern (Exitcode 1).
 
@@ -212,6 +220,17 @@ echten Daten und prüft:
     stärkste Feldheer marschiert per Rechtsklick zur Hauptstadt des Gegners, im Kriegsfenster geht
     das erste Friedensangebot hinaus, das der Gegner laut Vorab-Prüfung annimmt; am nächsten Tag ist
     der Krieg zu Ende.
+13. **Ereignisse** (seit M11, Schritt b4): Ab 1848 wartet der Spielerstaat auf seine Ereignisse. Bei
+    laufender Zeit öffnet das Ereignisfenster und hält sie an; ein Tempo bleibt gesperrt („Erst das
+    Ereignis entscheiden“), die Wahl schließt das Fenster und setzt das gewünschte Tempo fort. Taste
+    J öffnet das Journalfenster mit Reitern und Zielen, Esc schließt es; „Ereignisse“ im Spielmenü
+    zeigt die bisherigen Ereignisse. Taste X schaltet in den Kartenmodus „Unruhe“ mit Legende. Das
+    Diplomatiefenster zeigt die ruhende Bundesversammlung mit gesperrten Anträgen. In den übrigen
+    Abschnitten beantwortet der Test Ereignisse über das Fenster mit der Standardoption.
+14. **Wege der Revolution** (Abnahme M11): Als Baden beantwortet das Ereignisfenster die
+    Märzforderungen mit dem Militär, Baden erlebt Barrikadenkämpfe (`get_revolts`, Text ohne
+    Zeichensalat). Als Preußen nimmt es mit den Wahlen der Strategie `krone` die Kaiserkrone an; bis
+    zum April 1849 erreicht das Journal „Revolution“ das Reich der Paulskirche.
 
 ```bash
 godot --headless --path game --script res://tests/klick_test.gd
@@ -237,7 +256,8 @@ KLICK OK 4542/4542
 
 `n` in `KLICK OK n/n` zählt die Orte mit Fläche, die bei allen drei Zoomstufen richtig
 erkannt wurden. Bei Fehlern steht `KLICK FEHLGESCHLAGEN` mit den ersten 20 Abweichungen
-(Exitcode 1). Laufzeit headless etwa 4 s, unter xvfb etwa 25 s.
+(Exitcode 1). Laufzeit headless etwa 40 s (seit M10 und M11 mit den durchgespielten Lesezeichen und
+den Wegen der Revolution).
 
 ## Leistungstest (`leistung_test.gd`)
 

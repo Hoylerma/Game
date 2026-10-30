@@ -23,7 +23,7 @@ gebaut; Abhängigkeiten stehen jeweils dabei.
 | M8 | Politik, Parteien und Wahlen | 2 – Vertical Slice | M7 | **fertig** (Fachprüfung der Werte offen, siehe unten) |
 | M9 | Diplomatie und Zollverein | 2 – Vertical Slice | M7 | **fertig** (Fachprüfung der Werte offen, siehe unten) |
 | M10 | Militär und Einigungskriege | 2 – Vertical Slice | M9 | **fertig** (Fachprüfung der Werte offen, siehe unten) |
-| M11 | Ereignisse und Revolution 1848/49 | 2 – Vertical Slice | M8 | in Arbeit |
+| M11 | Ereignisse und Revolution 1848/49 | 2 – Vertical Slice | M8 | **fertig** (Fachprüfung der Quellen und Werte offen, siehe unten) |
 | M12 | Künstliche Intelligenz der Staaten | 2 – Vertical Slice | M8–M11 | offen |
 | M13 | Spielbarer Vertical Slice 1848–1871 | 2 – Vertical Slice | M12 | offen |
 
@@ -732,7 +732,7 @@ Abschnitt 12).
 - **Alte Spielstände:** Spielstände aus M9 laden nicht (Format 4), Spielstände 1848 und der Kriegslesezeichen
   aus früheren M10-Schritten ebenso nicht (Inhaltsbereich `militaer`).
 
-### M11 – Ereignisse und Revolution 1848/49
+### M11 – Ereignisse und Revolution 1848/49 ✅
 
 **Ziel:** Ereignisse, Journale und Missionen nach
 [18 Ereignisse, Journale, Missionen](18_ereignisse_journale_missionen.md).
@@ -748,6 +748,69 @@ Abschnitt 13).
 **Abnahme**
 - Mindestens 80 Ereignisse für 1848–1871 mit Quellenangaben
 - Die Revolution kann scheitern oder gelingen; beide Wege sind spielbar
+
+**Ergebnis**
+- **Vertrag** in [technik/ereignisse.md](technik/ereignisse.md) mit dem Stand je Schritt. Umgesetzt in
+  zwei Teilen: M11a (System im Kern auf einer Test-Fixture: Gesetze, Ereignisse, Zustimmung, Unruhe,
+  Aufstände, Journale, Abstimmungen, Ereignislabor) und M11b (Inhalt 1848–1871, Kalibrierung, Brücke
+  und Godot, Review).
+- **Ereignisse im Chronik-Skript:** Bedingungen, Optionen mit Gewichten und Zuschlägen, Wirkungen aus
+  einem festen Vokabular (Gesetze, Verfassung, Wahlrecht, Zustimmung, Unruhe, Beziehungen, Kasse,
+  Folgeereignisse, Befristungen, Aufstände, Anträge im Bund, Kriegserklärung mit Zielen, Merkmale);
+  tägliche Auslösung mit Wartezeit, Termin und Wiederholung. Ohne Spieler wählt der Kern nach Gewicht
+  aus dem Zufallsstrom `Ereignisse`; Ereignisse des Spielerstaates warten bis zur Wahl (Befehle
+  `Ereigniswahl` und `Ereignisspieler`, Frist 30 Tage).
+- **Gesetze, Zustimmung, Unruhe:** drei Gesetzesgruppen (Presse, Vereine, Grundlasten) mit Startwerten
+  je Staat, Wünsche der Interessengruppen, monatliche Annäherung von Zustimmung und Unruhe an ihre
+  Zielwerte (Not, Teuerung, Verfassung, Zensur, Ansteckung), Steuerverweigerung und Auswanderung,
+  Aufstände mit wöchentlichem Kräftevergleich, Intervention und drei Ausgängen.
+- **Journale** „Revolution 1848/49“ (7 Stufen, 5 Ausgänge) und „Die deutsche Frage“ (bis 1871, 5
+  Ausgänge) als Zustandsautomat mit Zielen; acht Abstimmungen der Paulskirche nach Fraktionen mit den
+  Sitzen der Wahl aus M8; die Bundesversammlung ruht ab Juli 1848.
+- **Inhalt:** 109 Ereignisse (83 historisch, 15 dynamisch, 11 atmosphärisch), alle mit Quelle: 65
+  für 1848–1851, 33 für 1852–1871, elf wiederholbare aus dem Zustand (Missernte, Cholera,
+  Auswanderung …); Gesetze 1848 bis 1854 in `staaten_historie.csv`.
+- **Ereignislabor** (`uhrwerk-cli ereignisse`, in der CI): Ohne Spieler endet die Revolution über 64
+  Läufe zu 68,8 % in der Gegenrevolution, zu 21,9 % im Reich der Paulskirche und zu 9,4 % in der
+  Union; mit der Strategie `krone` erreicht Preußen das Reich, mit `reaktion` die Gegenrevolution
+  (jeweils alle Läufe). Die deutsche Frage endet über 48 Läufe zu 35 % kleindeutsch, zu 23 % in zwei
+  Bünden und zu 42 % im alten Bund.
+- **Godot:** Ereignisfenster mit Text, Quelle, Optionen samt Folgen und historischem Kompass, das die
+  Zeit anhält; Journalfenster (Taste J) mit Zielen, Weg, Ausgängen und den bisherigen Ereignissen;
+  Gesetze, Zustimmung, Unruhe und Aufstand in der Staatsinfo; Kartenmodus „Unruhe“ (Taste X);
+  Wendepunkte in der Chronik; die ruhende Bundesversammlung im Diplomatiefenster.
+- **Spielstand Format 5** mit dem Inhaltsbereich `ereignisse` (Stand 6); Zustand der Ereignisse nur in
+  Welten mit Ereignissen.
+- **1648 unverändert:** Die Prüfsumme nach 100 Jahren bleibt `5db13a66d63e6079`.
+- **Tests:** 239 Testfälle (vorher 216); neue CTests `ereignis_daten`, `pruefen_ereignis_fixture`,
+  `ereignisse_fixture` mit den Strategien `krone` und `reaktion`, `ereignisse_1848` und
+  `ereignisse_quellen`; Godot-Einheitentest mit 317 Prüfungen (vorher 302); Rauchtest der Ereignisse
+  1848; Klicktest mit Ereignisfenster, Journalen, Kartenmodus „Unruhe“, ruhender Bundesversammlung und
+  den beiden Wegen der Abnahme; Screenshots des Ereignis- und des Journalfensters in der CI.
+- **Review M11** über Kern, Brücke und Godot, Daten und Doku. Behoben ist, dass die Brücke die
+  Aufstandsart „Barrikadenkämpfe“ und die Ereignisart „atmosphärisch“ als Latin-1 statt UTF-8 an
+  Godot gab („BarrikadenkÃ¤mpfe“); der Klicktest prüft das jetzt.
+
+**Abnahme im Einzelnen**
+
+| Kriterium | Stand |
+|---|---|
+| Mindestens 80 Ereignisse für 1848–1871 mit Quellenangaben | erfüllt: 109 Ereignisse, alle mit `quelle` (`uhrwerk-cli info`: „109 mit Quelle“; CTest `ereignisse_quellen` verlangt mindestens 80); die Quellen sind Literaturangaben ohne Seitenprüfung |
+| Die Revolution kann scheitern oder gelingen; beide Wege sind spielbar | erfüllt: Ohne Spieler treten Gegenrevolution, Reich und Union auf, keiner in allen Läufen (CI-Schritt „Ereignislabor 1848“); die Strategien `krone` und `reaktion` erreichen ihren Ausgang in allen Läufen. Der Klicktest nimmt als Preußen über das Ereignisfenster die Krone an und erreicht am 5. April 1849 das Reich der Paulskirche; als Baden beantwortet er die Märzforderungen mit dem Militär und erlebt Barrikadenkämpfe |
+
+**Bekannte Grenzen**
+- **Fachprüfung offen:** Ereignisse, Daten und Quellen sind `ungeprueft` (Literatur ohne Seitenzugriff),
+  Gewichte und Wirkungen Spielwerte aus der Kalibrierung.
+- **Keine KI:** Die Staaten wählen ihre Optionen nach Gewicht, nicht nach Lage und Zielen (M12).
+- **Parteienmodus ohne eigene Ereignisse:** Entscheidung 9 sieht Ereignisse der gespielten Strömung
+  vor; der Kern kennt sie noch nicht, im Parteienmodus wählt der Staat nach Gewicht.
+- **Deutsche Frage ohne Gebietsänderung aus 1848:** Besitz, Bundesgebiet und Bundesversammlung einer
+  Partie ab 1848 bleiben die des Starts (militaer.md 6.1); ein Reich entsteht als Merkmal und über
+  Kriege der Ereignisse.
+- **Anzeige:** Zustimmung als Zahl statt Balken, Aufstände nur im Kartenmodus „Unruhe“ (kein Symbol
+  in der Hauptstadt).
+- **Alte Spielstände:** Spielstände aus M10 laden nicht (Format 5), Spielstände 1848 aus früheren
+  M11-Schritten ebenso nicht (Inhaltsbereich `ereignisse`).
 
 ### M12 – Künstliche Intelligenz der Staaten
 

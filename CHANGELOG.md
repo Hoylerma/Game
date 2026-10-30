@@ -111,6 +111,13 @@ freigegeben; Stand je Schritt in Abschnitt 13 dort.
   Screenshots in der CI. Tests: Einheitentest des Ereignisfensters, Rauchtest der Ereignisse 1848
   (Baden wählt, Journale, Unruhe, ruhende Bundesversammlung), Klicktest (Ereignis hält die Zeit an,
   Taste J, Spielmenü „Ereignisse“, Taste X, ruhende Bundesversammlung); 1648 bitgleich.
+- **Review und Abschluss (Schritt b5):** Die Abnahme aus [ereignisse.md](docs/technik/ereignisse.md)
+  Abschnitt 10 steht im Klicktest: Als Preußen nimmt das Ereignisfenster die Kaiserkrone an
+  (Wahlen der Strategie `krone`), das Journal erreicht am 5. April 1849 das Reich der Paulskirche;
+  als Baden beantwortet es die Märzforderungen mit dem Militär, Baden erlebt Barrikadenkämpfe.
+  Behoben: Die Brücke gab die Aufstandsart „Barrikadenkämpfe“ und die Ereignisart „atmosphärisch“ als
+  Latin-1 statt UTF-8 an Godot. Meilensteinplan mit Ergebnis, Abnahme und Grenzen; M11 abgeschlossen,
+  1648 bitgleich.
 
 ### Meilenstein M10 – Militär und Einigungskriege
 
