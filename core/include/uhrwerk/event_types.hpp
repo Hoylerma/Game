@@ -85,6 +85,8 @@ enum class ConditionKind : std::uint8_t {
     PopulationShare, // bevoelkerungsanteil { wenn { … } unter { … } mindestens = value } (seit a4)
     CountStates,     // staaten { wenn { … } mindestens = value } (seit a4)
     DietSuspended,   // bundesversammlung = ruht (seit a4)
+    WarWon,          // krieg_gewonnen = a (seit b3): ein beendeter Krieg der Hauptparteien gegen a gewonnen
+    WarLost,         // krieg_verloren = a (seit b3)
 };
 
 struct Condition {
@@ -114,7 +116,7 @@ enum class EffectKind : std::uint8_t {
     Relation,       // beziehung <Staat a> = ±value
     Emigration,     // auswanderung = value (Anteil der unteren Schicht)
     Devastation,    // verwuestung = value in Ort a (kNone: Hauptstadt)
-    Mobilize,       // mobilmachung
+    Mobilize,       // mobilmachung = ja (a = 1) | nein (a = 0, seit b3: Abrüstung, nicht im Krieg)
     Follow,         // folge { ereignis = a tage = days staat = b }
     Chronicle,      // chronik = text
     Random,         // zufall { <gewicht> = { … } … }: genau ein Zweig
@@ -127,7 +129,8 @@ enum class EffectKind : std::uint8_t {
     Vote,           // abstimmung = <a> (seit a4): Abstimmung im Parlament der Abstimmung
     Diet,           // bundesversammlung = ruht (a = 1) | tagt (a = 0) (seit a4)
     Motion,         // antrag { art = a ziel = b } (seit a4): Antrag in der Bundesversammlung (MotionKind)
-    War,            // krieg = TAG (seit a4): Kriegserklärung an den Staat a (Militär, mit Bündnisfall)
+    War,            // krieg = TAG (seit a4): Kriegserklärung an den Staat a (Militär, mit Bündnisfall);
+                    // seit b3 auch krieg { gegner = TAG … } mit Kriegszielen in goals
 };
 
 /// Werte einer befristeten Wirkung (Abschnitt 3.7).
@@ -152,6 +155,8 @@ struct Effect {
     /// Random: je Zweig ein Gewicht (weights[i]) und seine Wirkungen (branches[i]).
     std::vector<Fixed> weights;
     std::vector<std::vector<Effect>> branches;
+    std::vector<std::int64_t>
+        goals; // War (seit b3): Kriegsziele (encode_war_goal), das erste mit der Erklärung
 };
 
 // ─── Ereignisse (Abschnitt 3.1) ─────────────────────────────────────────────

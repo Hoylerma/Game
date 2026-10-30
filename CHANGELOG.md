@@ -79,6 +79,20 @@ freigegeben; Stand je Schritt in Abschnitt 13 dort.
   88 %, 6 %, 6 %); Märzministerien bis Ende April in 76 % der Staaten mit dem Ereignis. Korridore auf die Zielwerte aus ereignisse.md Abschnitt 7 (Märzministerien
   mindestens 70 %, Union höchstens 20 %). Balancing-Bericht, Wahl-, Zoll- und Kriegslabor 1848 bleiben
   mit Ereignissen in ihren Zielwerten; 1648 bitgleich.
+- **Inhalt 1852–1871 und die deutsche Frage (Schritt b3):** 33 Ereignisse von der Zollvereinskrise
+  über Neue Ära, Heereskonflikt und „Blut und Eisen“ bis zu den Kriegen von 1864 und 1866, dem
+  Norddeutschen Bund, der Emser Depesche, den Novemberverträgen und der Kaiserproklamation; elf
+  wiederholbare Ereignisse aus dem Zustand (Missernte, Hungerkrawall, Cholera, Auswanderung,
+  Weberelend, Eisenbahn, Streik, Pressprozess, Turn- und Sängerfest). Zusammen 109 Ereignisse, alle mit
+  Quelle (`info`: „mit Quelle“, CTest `ereignisse_quellen`). Neues Journal „Die deutsche Frage“ bis
+  1871 mit fünf Ausgängen und eigener Zieldatei für das Labor (`--ziele …_1871.chron`). Kern: Bedingungen
+  `krieg_gewonnen`/`krieg_verloren`, Kriegserklärung mit Kriegszielen `krieg { gegner = … gebiet = …
+  fuehrung = ja … }` (ohne Ziel endete jeder Ereigniskrieg ohne Gewinner), `mobilmachung = nein`; wer
+  gegen einen Aufstand eingriff, rüstet danach ab (Preußen blieb sonst von 1848 bis 1864 mobil); Regel
+  `bund_durchzug`: Bundesstaaten ziehen durch Bundesgebiet, außer im Krieg gegen einen Staat mit
+  Hauptstadt im Bund (sonst fand Preußen keinen Weg nach Holstein); ein Staat ohne Orte führt keinen
+  Haushalt mehr. Ohne Spieler endet die deutsche Frage über 48 Läufe zu 35 % kleindeutsch, zu 23 % in
+  zwei Bünden und zu 42 % im alten Bund. Inhaltsstände ereignisse 6, militaer 9; 1648 bitgleich.
 
 ### Meilenstein M10 – Militär und Einigungskriege
 

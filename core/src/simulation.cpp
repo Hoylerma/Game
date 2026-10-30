@@ -707,6 +707,13 @@ void Simulation::book_migration(const Migration& migration) {
 
 // Haushalt eines Staates an seinem Rechentag (wirtschaft.md, Abschnitt 4.6).
 void Simulation::run_economy(Index state) {
+    // Seit M11 (b3): Ein Staat, der untergegangen ist oder die Karte verlassen hat (Hauptstadt kNone, seit
+    // M10 militaer.md 4.5), führt keinen Haushalt mehr; sonst häufte Dänemark nach 1864 Schulden und
+    // Bankrotte an.
+    if (world_.states[static_cast<std::size_t>(state)].capital == kNone &&
+        state_locations_[static_cast<std::size_t>(state)].empty()) {
+        return;
+    }
     if (run_state_budget(world_, state, state_locations_[static_cast<std::size_t>(state)])) {
         const State& s = world_.states[static_cast<std::size_t>(state)];
         ChronicleEntry entry;

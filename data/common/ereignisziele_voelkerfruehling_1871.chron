@@ -1,0 +1,18 @@
+# Korridore des Ereignislabors für die deutsche Frage ab 1848 (Meilenstein M11, Schritt b3;
+# docs/technik/ereignisse.md Abschnitte 5.4 und 7; Format: docs/technik/chronik-skript.md, Abschnitt
+# 3.36). Rechnet bis zum Ende des Journals am 1.7.1871 (langsamer, nicht in jedem CI-Lauf):
+#   uhrwerk-cli ereignisse --szenario voelkerfruehling --seeds 16 --ziele data/common/ereignisziele_voelkerfruehling_1871.chron
+# Kalibriert in b3 mit 48 Seeds (1648–1695): kleindeutsch 35 %, zwei Bünde 23 %, Bund 42 %; mit den 16
+# Seeds der CI 31 %, 25 %, 44 %. Ohne Spieler ist die Reichsgründung offen (Entscheidung 10).
+
+labor {
+    bis     = 1871.07.01
+    journal = deutsche_frage
+    nicht_festgelegt = ja
+}
+
+ausgang kleindeutsch { anteil = { 0.15 0.6 } }
+ausgang zwei_buende  { anteil = { 0.05 0.45 } }
+ausgang bund         { anteil = { 0.2 0.65 } }
+ausgang gescheitert  { anteil = { 0 0.15 } }
+ausgang grossdeutsch { anteil = { 0 0.1 } }

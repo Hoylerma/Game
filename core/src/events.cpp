@@ -190,6 +190,15 @@ public:
             return military_active(w) && in_war(w, state);
         case ConditionKind::WarWith:
             return military_active(w) && at_war(w, state, c.a);
+        case ConditionKind::WarWon:
+        case ConditionKind::WarLost: {
+            // Beendete Kriege der beiden als Hauptparteien; winner 1 = Angreifer, −1 = Verteidiger.
+            const std::int32_t side = c.kind == ConditionKind::WarWon ? 1 : -1;
+            return std::any_of(w.war_results.begin(), w.war_results.end(), [&](const WarResult& r) {
+                return (r.attacker == state && r.defender == c.a && r.winner == side) ||
+                       (r.defender == state && r.attacker == c.a && r.winner == -side);
+            });
+        }
         case ConditionKind::Mobilized:
             return military_active(w) ? mobilization_phase(w, state) != MobilizationPhase::Peace
                                       : mobilized(w, state);
@@ -517,7 +526,7 @@ private:
         }
         case EffectKind::Mobilize:
             if (military_active(w)) {
-                order_mobilization(w, state, true);
+                order_mobilization(w, state, e.a != 0);
             }
             return;
         case EffectKind::Timed:
@@ -535,8 +544,12 @@ private:
             }
             return;
         case EffectKind::War:
-            if (alive(e.a)) {
-                declare_war(w, state, e.a);
+            if (alive(e.a) && declare_war(w, state, e.a, e.goals.empty() ? 0 : e.goals.front())) {
+                // Weitere Kriegsziele (seit b3) wie mit dem Befehl; ein ungültiges entfällt.
+                const std::int64_t id = w.wars.back().id;
+                for (std::size_t g = 1; g < e.goals.size(); ++g) {
+                    add_war_goal(w, state, id, e.goals[g]);
+                }
             }
             return;
         default:
@@ -663,6 +676,14 @@ public:
             }
             chronicle(s.short_name + ": Die Aufständischen siegen, der Landesherr flieht.", revolt.state);
             break;
+        }
+        // Seit b3: Wer gegen den Aufstand eingriff, rüstet danach ab, wenn er nicht im Krieg steht und keinem
+        // anderen Aufstand mehr Truppen stellt (sonst blieb Preußen 1848 bis zum nächsten Frieden mobil).
+        if (in_range(world_.states, revolt.helper) && military_active(world_) &&
+            !in_war(world_, revolt.helper) &&
+            std::none_of(world_.revolts.begin(), world_.revolts.end(),
+                         [&](const Revolt& other) { return other.helper == revolt.helper; })) {
+            order_mobilization(world_, revolt.helper, false);
         }
         const Index event = r.outcome_events[static_cast<std::size_t>(outcome)];
         if (in_range(world_.events, event)) {

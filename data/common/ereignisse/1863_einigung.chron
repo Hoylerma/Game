@@ -1,0 +1,509 @@
+# Ereignisse 1863–1871: Fürstentag, Deutsch-Dänischer Krieg, Deutscher Krieg, Norddeutscher Bund und
+# Reichsgründung (Meilenstein M11, docs/technik/ereignisse.md Abschnitt 6.2). Format:
+# docs/technik/chronik-skript.md, Abschnitt 3.34. Texte paraphrasiert, Quellen aus der Literatur
+# (Kenntnis, ohne Seitenangaben), alle 'sicherheit = ungeprueft'; Gewichte und Wirkungen sind Spielwerte.
+#
+# In einer Partie ab 1848 geben diese Ereignisse den Kriegen von 1864 und 1866 ihre Anlässe; die
+# Kriegserklärungen liegen vor den Lesezeichen „Düppel“ (1.2.1864) und „Königgrätz“ (16.6.1866), die
+# im Krieg beginnen. Die Kriege haben Kriegsziele (krieg { … }, seit b3): 1864 die drei Herzogtümer, 1866
+# die Führung im Bund (der Verlierer verlässt den Bund). Den Ausgang lesen die Friedensereignisse mit
+# krieg_gewonnen (seit b3).
+# Frankreich hat in einer Partie ab 1848 keine Orte (militaer.md 6.1): Die Emser Depesche führt dann zu
+# keinem Krieg, die Novemberverträge folgen dem Merkmal der nationalen Krise.
+
+ereignis pru.alvensleben {
+    titel  = "Die Alvensleben-Konvention"
+    text   = "Im russischen Teil Polens erhebt sich der Januaraufstand. General Alvensleben vereinbart in Sankt Petersburg, dass preußische und russische Truppen Aufständische über die Grenze verfolgen dürfen. Die Westmächte protestieren, die Liberalen im Abgeordnetenhaus auch."
+    datum  = 1863.02.08
+    quelle = "Clark (2007); Pflanze Bd. 1 (1990)"
+    sicherheit = ungeprueft
+    art    = historisch
+    bedingung { staat = PRU  datum >= 1863.02.01  datum <= 1863.06.30 }
+    wartezeit = 10
+    option konvention {
+        text = "Die Konvention mit Russland schließen"
+        historisch = ja
+        gewicht = 60
+        gewicht_wenn { merkmal = bismarck  plus = 20 }
+        wirkung { merke = russlandfreundschaft  zustimmung_bildungsbuergertum = -2  zustimmung_militaer = 1 }
+    }
+    option neutral {
+        text = "Die Grenze sperren und sich heraushalten"
+        gewicht = 40
+        wirkung { zustimmung_bildungsbuergertum = 1 }
+    }
+}
+
+ereignis adav {
+    titel  = "Der Allgemeine Deutsche Arbeiterverein"
+    text   = "In Leipzig gründet Ferdinand Lassalle den Allgemeinen Deutschen Arbeiterverein. Er fordert das allgemeine, gleiche und direkte Wahlrecht und Produktivgenossenschaften mit Staatshilfe; von den Liberalen trennt er die Arbeiterbewegung."
+    datum  = 1863.05.23
+    quelle = "Welskopp, Das Banner der Brüderlichkeit (2000); Nipperdey (1983)"
+    sicherheit = ungeprueft
+    art    = historisch
+    wer    = welt
+    bedingung { datum >= 1863.04.01  datum <= 1863.12.31 }
+    wartezeit = 30
+    option gruenden {
+        text = "Der Arbeiterverein wird gegründet"
+        historisch = ja
+        gewicht = 1
+        wirkung { welt_merke = adav }
+    }
+}
+
+ereignis frankfurter.fuerstentag {
+    titel  = "Der Frankfurter Fürstentag"
+    text {
+        "Kaiser Franz Joseph lädt die deutschen Fürsten nach Frankfurt, um den Bund unter österreichischer"
+        "Führung zu reformieren: ein Direktorium, eine Versammlung von Delegierten der Landtage, ein"
+        "Fürstenrat. König Wilhelm möchte kommen, Bismarck droht mit dem Rücktritt."
+    }
+    datum  = 1863.08.16
+    quelle = "Huber Bd. 3 (1963); Pflanze Bd. 1 (1990)"
+    sicherheit = ungeprueft
+    art    = historisch
+    wendepunkt = ja
+    wer    = welt
+    bedingung { datum >= 1863.07.15  datum <= 1863.10.31  bundesversammlung = tagt  nicht { welt_merkmal = kleindeutsches_reich }  nicht { welt_merkmal = grossdeutsches_reich } }
+    wartezeit = 14
+    option fernbleiben {
+        text = "Preußen bleibt fern, die Reform scheitert"
+        historisch = ja
+        gewicht = 65
+        gewicht_wenn { staat PRU { merkmal = bismarck }  plus = 15 }
+        wirkung { welt_merke = fuerstentag_gescheitert  staat AUT { beziehung_PRU = -15 } }
+    }
+    option reform {
+        text = "König Wilhelm reist nach Frankfurt, der Bund erhält ein Direktorium"
+        gewicht = 35
+        wirkung {
+            welt_merke = bundesreform_1863
+            staat AUT { beziehung_PRU = 15 }
+            staat PRU { zustimmung_militaer = -2  zustimmung_nationalbewegung = -1 }
+            chronik = "In dieser Geschichte nimmt Preußen am Fürstentag teil; der Bund erhält ein Direktorium unter Österreich."
+        }
+    }
+}
+
+ereignis den.novemberverfassung {
+    titel  = "Die dänische Novemberverfassung"
+    text {
+        "Der dänische Reichsrat beschließt eine gemeinsame Verfassung für Dänemark und Schleswig; König"
+        "Christian IX. unterschreibt sie zwei Tage nach seiner Thronbesteigung. Für den Bund ist das ein"
+        "Bruch des Londoner Protokolls. Die Öffentlichkeit verlangt den Krieg für Schleswig-Holstein,"
+        "Preußen und Österreich wollen ihn ohne die Mittelstaaten führen."
+    }
+    datum  = 1863.11.18
+    quelle = "Nipperdey (1983); Buk-Swienty, Schlachtbank Düppel (2011)"
+    sicherheit = ungeprueft
+    art    = historisch
+    wendepunkt = ja
+    wer    = welt
+    bedingung {
+        datum >= 1863.11.01
+        datum <= 1864.01.31
+        staat DEN { im_krieg = nein }
+        staat PRU { im_krieg = nein }
+    }
+    wartezeit = 30
+    option krieg {
+        text = "Preußen und Österreich rücken über die Eider"
+        historisch = ja
+        gewicht = 80
+        gewicht_wenn { staat PRU { merkmal = bismarck }  plus = 15 }
+        wirkung {
+            welt_merke = deutsch_daenischer_krieg
+            staat PRU {
+                krieg { gegner = DEN  gebiet = dk_schleswig  gebiet = dk_holstein  gebiet = dk_lauenburg }
+                zustimmung_nationalbewegung = 2
+            }
+        }
+    }
+    option bundesexekution {
+        text = "Nur die Bundesexekution in Holstein; Dänemark nimmt die Verfassung zurück"
+        gewicht = 20
+        wirkung { welt_merke = novemberverfassung_zurueck  staat DEN { beziehung_PRU = -20 } }
+    }
+}
+
+ereignis wiener.frieden {
+    titel  = "Der Frieden von Wien"
+    text   = "Dänemark tritt Schleswig, Holstein und Lauenburg an Preußen und Österreich ab. Die Herzogtümer sind befreit, aber nicht an den Herzog von Augustenburg gefallen, den die Nationalbewegung wollte; die Sieger müssen sich nun einigen, was mit ihnen geschieht."
+    datum  = 1864.10.30
+    quelle = "Nipperdey (1983); Clark (2007)"
+    sicherheit = ungeprueft
+    art    = historisch
+    wer    = welt
+    bedingung { datum >= 1864.03.01  datum <= 1865.12.31  staat PRU { krieg_gewonnen = DEN } }
+    wartezeit = 10
+    option frieden {
+        text = "Die Herzogtümer kommen unter preußisch-österreichische Verwaltung"
+        historisch = ja
+        gewicht = 1
+        wirkung { welt_merke = wiener_frieden  staat PRU { zustimmung_nationalbewegung = 2  zustimmung_militaer = 2 } }
+    }
+}
+
+ereignis gasteiner.konvention {
+    titel  = "Die Gasteiner Konvention"
+    text   = "In Bad Gastein teilen Preußen und Österreich die Verwaltung der Herzogtümer: Schleswig an Preußen, Holstein an Österreich, Lauenburg kauft der König von Preußen. Der Streit ist vertagt, nicht beigelegt."
+    datum  = 1865.08.14
+    quelle = "Huber Bd. 3 (1963); Pflanze Bd. 1 (1990)"
+    sicherheit = ungeprueft
+    art    = historisch
+    wer    = welt
+    bedingung { welt_merkmal = wiener_frieden  datum >= 1865.05.01  datum <= 1866.03.31 }
+    wartezeit = 30
+    option teilen {
+        text = "Die Verwaltung wird geteilt"
+        historisch = ja
+        gewicht = 70
+        wirkung { welt_merke = gastein  staat PRU { beziehung_AUT = -15 }  staat AUT { beziehung_PRU = -15 } }
+    }
+    option augustenburg {
+        text = "Der Herzog von Augustenburg erhält die Herzogtümer als Bundesstaat"
+        gewicht = 30
+        wirkung { welt_merke = augustenburg  staat PRU { zustimmung_nationalbewegung = 1  zustimmung_militaer = -1 } }
+    }
+}
+
+ereignis pru.bundesreformantrag {
+    titel  = "Der preußische Bundesreformantrag"
+    text {
+        "Preußen beantragt im Bundestag ein deutsches Parlament aus allgemeinen, direkten Wahlen. Der"
+        "Antrag des konservativen Ministerpräsidenten überrascht die Liberalen und erschreckt die Fürsten;"
+        "zugleich hat Berlin ein Bündnis mit Italien geschlossen, das nur drei Monate gilt."
+    }
+    datum  = 1866.04.09
+    quelle = "Huber Bd. 3 (1963); Clark (2007)"
+    sicherheit = ungeprueft
+    art    = historisch
+    wendepunkt = ja
+    bedingung { staat = PRU  oder { welt_merkmal = gastein  merkmal = bismarck }  datum >= 1866.03.01  datum <= 1866.05.31  bundesversammlung = tagt  nicht { welt_merkmal = kleindeutsches_reich }  nicht { welt_merkmal = grossdeutsches_reich } }
+    wartezeit = 14
+    option beantragen {
+        text = "Den Antrag stellen und mit Italien abschließen"
+        historisch = ja
+        gewicht = 70
+        gewicht_wenn { merkmal = bismarck  plus = 20 }
+        wirkung { welt_merke = preussischer_reformantrag  antrag { art = reform }  zustimmung_nationalbewegung = 2  zustimmung_adel = -1 }
+    }
+    option verstaendigung {
+        text = "Mit Österreich über eine gemeinsame Führung des Bundes verhandeln"
+        gewicht = 20
+        wirkung { welt_merke = dualismus  beziehung_AUT = 20  zustimmung_militaer = -1 }
+    }
+}
+
+ereignis bund.mobilmachung {
+    titel  = "Der Mobilmachungsbeschluss des Bundes"
+    text {
+        "Österreich beantragt im Bundestag die Mobilmachung der Bundestruppen gegen Preußen, das in"
+        "Holstein eingerückt ist. Die Mehrheit stimmt zu; der preußische Gesandte erklärt den Bund für"
+        "erloschen und verlässt den Saal. Zwischen Böhmen und Main stehen die Heere bereit."
+    }
+    datum  = 1866.06.14
+    quelle = "Huber Bd. 3 (1963); Wawro, The Austro-Prussian War (1996)"
+    sicherheit = ungeprueft
+    art    = historisch
+    wendepunkt = ja
+    wer    = welt
+    bedingung {
+        welt_merkmal = preussischer_reformantrag
+        datum >= 1866.05.15
+        datum <= 1866.06.15
+        staat PRU { im_krieg = nein }
+        staat AUT { im_krieg = nein }
+    }
+    wartezeit = 10
+    option krieg {
+        text = "Krieg zwischen Preußen und Österreich"
+        historisch = ja
+        gewicht = 75
+        wirkung { welt_merke = deutscher_krieg  staat PRU { krieg { gegner = AUT  fuehrung = ja } } }
+    }
+    option vermittlung {
+        text = "Frankreich und Russland vermitteln, beide Mächte rüsten ab"
+        gewicht = 20
+        wirkung {
+            welt_merke = dualismus
+            staat PRU { beziehung_AUT = 10  zustimmung_militaer = -2 }
+            chronik = "In dieser Geschichte bleibt der Krieg von 1866 aus; der Bund besteht weiter."
+        }
+    }
+}
+
+ereignis prager.frieden {
+    titel  = "Der Prager Frieden"
+    text   = "Österreich erkennt die Auflösung des Deutschen Bundes an und stimmt einer Neugestaltung Deutschlands ohne sich zu. Preußen annektiert Hannover, Kurhessen, Nassau und Frankfurt; nördlich des Mains entsteht ein Bund unter Preußen, die süddeutschen Staaten bleiben selbständig."
+    datum  = 1866.08.23
+    quelle = "Huber Bd. 3 (1963); Nipperdey (1983)"
+    sicherheit = ungeprueft
+    art    = historisch
+    wendepunkt = ja
+    wer    = welt
+    bedingung { datum >= 1866.06.16  datum <= 1867.06.30  staat PRU { krieg_gewonnen = AUT } }
+    wartezeit = 10
+    option frieden {
+        text = "Der Deutsche Bund ist aufgelöst"
+        historisch = ja
+        gewicht = 1
+        wirkung { welt_merke = bund_aufgeloest  bundesversammlung = ruht  staat PRU { zustimmung_nationalbewegung = 3  zustimmung_militaer = 2 } }
+    }
+}
+
+ereignis aut.sieg {
+    titel  = "Österreich behauptet den Bund"
+    text   = "Preußen muss um Frieden bitten. Österreich führt den Bund weiter, nun mit einem Direktorium und einer Versammlung von Delegierten der Landtage; in Berlin wankt die Regierung, die den Krieg begonnen hat."
+    quelle = "Kontrafaktisch nach den Reformplänen von 1863 (Huber Bd. 3, 1963)"
+    sicherheit = ungeprueft
+    art    = dynamisch
+    wendepunkt = ja
+    wer    = welt
+    bedingung { datum >= 1866.06.16  datum <= 1867.06.30  staat AUT { krieg_gewonnen = PRU } }
+    wartezeit = 10
+    option reform {
+        text = "Der Bund wird unter Österreich reformiert"
+        gewicht = 1
+        wirkung {
+            welt_merke = bundesreform_oesterreich
+            staat PRU { zustimmung_militaer = -3  zustimmung_nationalbewegung = -2  unruhe = 10 }
+            chronik = "In dieser Geschichte gewinnt Österreich den Krieg von 1866 und behält die Führung im Bund."
+        }
+    }
+}
+
+ereignis pru.indemnitaet {
+    titel  = "Die Indemnitätsvorlage"
+    text {
+        "Nach dem Sieg bittet die Regierung das Abgeordnetenhaus, die Ausgaben der Konfliktjahre"
+        "nachträglich zu billigen. Die Liberalen spalten sich: Die einen sehen ihr Ziel, die Einheit, in"
+        "Reichweite und stimmen zu, die anderen wollen das Budgetrecht nicht preisgeben."
+    }
+    datum  = 1866.09.03
+    quelle = "Winkler, Preußischer Liberalismus und deutscher Nationalstaat (1964); Clark (2007)"
+    sicherheit = ungeprueft
+    art    = historisch
+    wendepunkt = ja
+    bedingung { staat = PRU  merkmal = bismarck  krieg_gewonnen = AUT  datum >= 1866.07.01  datum <= 1867.03.31 }
+    wartezeit = 14
+    option indemnitaet {
+        text = "Um Indemnität bitten und den Konflikt beenden"
+        historisch = ja
+        gewicht = 75
+        wirkung { merke = indemnitaet  zustimmung_bildungsbuergertum = 3  zustimmung_nationalbewegung = 2  unruhe = -5 }
+    }
+    option weiter_ohne {
+        text = "Ohne Budget weiterregieren"
+        gewicht = 25
+        wirkung { zustimmung_bildungsbuergertum = -3  zustimmung_militaer = 1  unruhe = 5 }
+    }
+}
+
+ereignis luxemburg.krise {
+    titel  = "Die Luxemburgkrise"
+    text   = "Napoleon III. will Luxemburg vom König der Niederlande kaufen, als Ausgleich für den preußischen Machtzuwachs. In Deutschland ist die Empörung groß, in der Festung Luxemburg liegt noch eine preußische Besatzung. Eine Konferenz in London soll den Krieg verhindern."
+    datum  = 1867.04.01
+    quelle = "Nipperdey, Deutsche Geschichte 1866–1918 Bd. 2 (1992); Pflanze Bd. 1 (1990)"
+    sicherheit = ungeprueft
+    art    = historisch
+    wer    = welt
+    bedingung { welt_merkmal = bund_aufgeloest  datum >= 1867.03.01  datum <= 1867.06.30 }
+    wartezeit = 14
+    option neutral {
+        text = "Luxemburg wird neutral, die Preußen räumen die Festung"
+        historisch = ja
+        gewicht = 75
+        wirkung { welt_merke = luxemburg_neutral }
+    }
+    option festung {
+        text = "Preußen bleibt in Luxemburg"
+        gewicht = 25
+        wirkung { welt_merke = luxemburg_krise  staat PRU { zustimmung_nationalbewegung = 2  beziehung_FRK = -50 } }
+    }
+}
+
+ereignis norddeutscher.bund {
+    titel  = "Der Norddeutsche Bund"
+    text {
+        "Die Verfassung des Norddeutschen Bundes tritt in Kraft: ein Bundesrat der Regierungen, ein"
+        "Reichstag aus allgemeinen, gleichen und direkten Wahlen, ein Bundespräsidium beim König von"
+        "Preußen und ein Bundeskanzler. Mit den süddeutschen Staaten verbinden Preußen Schutz- und"
+        "Trutzbündnisse und der Zollverein."
+    }
+    datum  = 1867.07.01
+    quelle = "Huber Bd. 3 (1963); Nipperdey Bd. 2 (1992)"
+    sicherheit = ungeprueft
+    art    = historisch
+    wendepunkt = ja
+    wer    = welt
+    bedingung { welt_merkmal = bund_aufgeloest  datum >= 1867.02.01  datum <= 1867.12.31 }
+    wartezeit = 30
+    option gruenden {
+        text = "Der Norddeutsche Bund wird gegründet"
+        historisch = ja
+        gewicht = 1
+        wirkung { welt_merke = norddeutscher_bund }
+    }
+}
+
+ereignis zollparlament {
+    titel  = "Das Zollparlament"
+    text   = "Zum ersten Mal sitzen Abgeordnete aus Nord und Süd in einem Parlament: Der Reichstag des Norddeutschen Bundes, ergänzt um gewählte Süddeutsche, berät über Zölle und Steuern. In Bayern und Württemberg haben die Gegner eines Anschlusses die Wahlen gewonnen."
+    datum  = 1868.04.27
+    quelle = "Hahn (1984); Nipperdey Bd. 2 (1992)"
+    sicherheit = ungeprueft
+    art    = historisch
+    wer    = welt
+    bedingung { welt_merkmal = norddeutscher_bund  datum >= 1868.02.01  datum <= 1868.12.31 }
+    wartezeit = 30
+    option partikularisten {
+        text = "Die Süddeutschen bleiben beim Zoll stehen"
+        historisch = ja
+        gewicht = 70
+        wirkung { welt_merke = zollparlament }
+    }
+    option anschluss {
+        text = "Die Süddeutschen verlangen den Anschluss an den Norddeutschen Bund"
+        gewicht = 30
+        wirkung { welt_merke = zollparlament  welt_merke = sueden_fuer_anschluss }
+    }
+}
+
+ereignis eisenacher.partei {
+    titel  = "Die Sozialdemokratische Arbeiterpartei"
+    text   = "In Eisenach gründen August Bebel und Wilhelm Liebknecht die Sozialdemokratische Arbeiterpartei. Sie ist großdeutsch, gegen Preußen und für die Internationale; mit den Lassalleanern streitet sie um die Arbeiter."
+    datum  = 1869.08.07
+    quelle = "Welskopp (2000); Nipperdey Bd. 2 (1992)"
+    sicherheit = ungeprueft
+    art    = historisch
+    wer    = welt
+    bedingung { datum >= 1869.06.01  datum <= 1869.12.31 }
+    wartezeit = 30
+    option gruenden {
+        text = "Die Partei wird gegründet"
+        historisch = ja
+        gewicht = 1
+        wirkung { welt_merke = sdap }
+    }
+}
+
+ereignis pru.emser_depesche {
+    titel  = "Die Emser Depesche"
+    text {
+        "Der französische Botschafter hat König Wilhelm in Bad Ems verlangt, auf alle Zeit auf die spanische"
+        "Thronkandidatur eines Hohenzollern zu verzichten. Der König lehnt höflich ab und telegraphiert nach"
+        "Berlin. Bismarck kann die Depesche so veröffentlichen, wie sie ist, oder sie so kürzen, dass sie in"
+        "Paris wie eine Ohrfeige wirkt."
+    }
+    datum  = 1870.07.13
+    quelle = "Pflanze Bd. 1 (1990); Wawro, The Franco-Prussian War (2003)"
+    sicherheit = ungeprueft
+    art    = historisch
+    wendepunkt = ja
+    bedingung { staat = PRU  welt_merkmal = norddeutscher_bund  im_krieg = nein  datum >= 1870.07.01  datum <= 1870.07.18 }
+    wartezeit = 3
+    option zugespitzt {
+        text = "Die gekürzte Fassung veröffentlichen"
+        historisch = ja
+        gewicht = 65
+        gewicht_wenn { merkmal = bismarck  plus = 20 }
+        wirkung { welt_merke = nationalkrieg  zustimmung_nationalbewegung = 3  staat FRK { krieg = PRU } }
+    }
+    option unveraendert {
+        text = "Die Depesche unverändert veröffentlichen"
+        gewicht = 20
+        wirkung { welt_merke = emser_depesche_unveraendert  beziehung_FRK = 10 }
+    }
+    option zurueckhalten {
+        text = "Die Depesche zurückhalten und die Krise auslaufen lassen"
+        gewicht = 15
+        wirkung { zustimmung_nationalbewegung = -2  zustimmung_militaer = -1 }
+    }
+}
+
+ereignis novembervertraege {
+    titel  = "Die Novemberverträge"
+    text {
+        "In Versailles verhandeln die süddeutschen Staaten über den Eintritt in einen Deutschen Bund, den"
+        "der Norddeutsche Bund erweitern soll. Baden und Hessen drängen, Bayern und Württemberg verlangen"
+        "Reservatrechte: eigene Post, eigene Eisenbahnen, im Frieden ein eigenes Heer."
+    }
+    datum  = 1870.11.23
+    quelle = "Huber Bd. 3 (1963); Nipperdey Bd. 2 (1992)"
+    sicherheit = ungeprueft
+    art    = historisch
+    wendepunkt = ja
+    bedingung {
+        staat_in = { BAV WUE BAD HED }
+        oder { welt_merkmal = norddeutscher_bund  staat AUT { bund = nein } }
+        oder { welt_merkmal = nationalkrieg  welt_merkmal = sueden_fuer_anschluss  krieg_mit = FRK  krieg_gewonnen = FRK }
+        datum >= 1870.09.01
+        datum <= 1871.01.10
+    }
+    wartezeit = 20
+    option beitreten {
+        text = "Mit Reservatrechten dem Bund beitreten"
+        historisch = ja
+        gewicht = 75
+        gewicht_wenn { staat_in = { BAD HED }  plus = 15 }
+        gewicht_wenn { welt_merkmal = sueden_fuer_anschluss  plus = 10 }
+        wirkung { merke = reichsbeitritt  zustimmung_nationalbewegung = 3  zustimmung_katholische_kirche = -2 }
+    }
+    option abseits {
+        text = "Selbständig bleiben"
+        gewicht = 25
+        wirkung { zustimmung_nationalbewegung = -3  zustimmung_katholische_kirche = 2  unruhe = 5 }
+    }
+}
+
+ereignis bav.kaiserbrief {
+    titel  = "Der Kaiserbrief"
+    text   = "Bismarck legt König Ludwig II. den Entwurf eines Briefes vor, in dem der König von Bayern im Namen der Fürsten Wilhelm I. die Kaiserwürde anträgt. Ludwig schreibt ihn ab; Jahre später fließen aus dem Welfenfonds Gelder nach München."
+    datum  = 1870.11.30
+    quelle = "Pflanze Bd. 1 (1990); Nipperdey Bd. 2 (1992)"
+    sicherheit = ungeprueft
+    art    = historisch
+    bedingung { staat = BAV  merkmal = reichsbeitritt  datum >= 1870.11.15  datum <= 1871.01.15 }
+    wartezeit = 7
+    option schreiben {
+        text = "Den Brief abschreiben und absenden"
+        historisch = ja
+        gewicht = 80
+        wirkung { welt_merke = kaiserbrief  zustimmung_adel = -1  monatseinnahmen = 0.5 }
+    }
+    option verweigern {
+        text = "Den Brief verweigern"
+        gewicht = 20
+        wirkung { zustimmung_nationalbewegung = -2  zustimmung_katholische_kirche = 1 }
+    }
+}
+
+ereignis kaiserproklamation {
+    titel  = "Die Kaiserproklamation"
+    text {
+        "Im Spiegelsaal von Versailles wird König Wilhelm von Preußen zum Deutschen Kaiser ausgerufen, vor"
+        "Fürsten und Offizieren, ohne Abgeordnete. Das Reich ist ein Bund der Fürsten und freien Städte mit"
+        "dem Reichstag des Norddeutschen Bundes; Österreich steht draußen."
+    }
+    datum  = 1871.01.18
+    quelle = "Nipperdey Bd. 2 (1992); Clark (2007)"
+    sicherheit = ungeprueft
+    art    = historisch
+    wendepunkt = ja
+    wer    = welt
+    bedingung {
+        staaten { wenn { merkmal = reichsbeitritt } mindestens = 3 }
+        oder { welt_merkmal = kaiserbrief  datum >= 1871.03.01 }
+        datum >= 1871.01.01
+        datum <= 1871.06.30
+    }
+    wartezeit = 7
+    option proklamieren {
+        text = "Das Deutsche Reich wird ausgerufen"
+        historisch = ja
+        gewicht = 1
+        wirkung { welt_merke = kaiserproklamation  staat PRU { zustimmung_nationalbewegung = 4 } }
+    }
+}

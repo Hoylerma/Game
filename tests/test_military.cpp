@@ -1907,5 +1907,81 @@ TEST_CASE("Militär: Regeln der Kalibrierung (b2)") {
         CHECK(chronicle_contains(after.world(), "Sachsen verlässt die Karte."));
         CHECK_FALSE(chronicle_contains(after.world(), "Sachsen geht unter."));
         CHECK(after.world().states[at(bra)].debt < debt + Fixed::from_int(123456));
+        // Seit M11 (b3): Ohne Orte führt Sachsen keinen Haushalt mehr (keine Schulden, kein Bankrott).
+        after.step_days(90);
+        CHECK(after.world().states[at(sax)].debt == Fixed::zero());
+        CHECK(after.world().states[at(sax)].bankruptcies == 0);
+        CHECK_FALSE(chronicle_contains(after.world(), "Sachsen erklärt den Staatsbankrott"));
+    }
+}
+
+TEST_CASE("Militär: Durchzug durch Bundesgebiet, Kriegsziele und Abrüstung aus Ereignissen (M11 b3)") {
+    const MilitaryData data;
+    data.add_federation();
+    data.add_diet();
+
+    SUBCASE("Durchzug nur mit der Regel bund_durchzug") {
+        const World closed = data.load();
+        const Index bra = closed.find_state("BRA");
+        const Index dessau = closed.find_location("dessau");
+        REQUIRE(closed.locations[at(dessau)].federal);
+        CHECK_FALSE(uhrwerk::accessible(closed, bra, dessau));
+        data.add_rules("    bund_durchzug = ja\n");
+        const World open = data.load();
+        CHECK(open.military_rules.federal_passage);
+        CHECK(uhrwerk::accessible(open, bra, dessau));
+        // Ein Durchzug besetzt nichts: Anhalt ist nicht im Krieg.
+        CHECK_FALSE(uhrwerk::at_war(open, bra, open.find_state("ANH")));
+        // Im Krieg gegen einen Staat mit Hauptstadt im Bundesgebiet (wie 1866) bleiben die Neutralen
+        // gesperrt.
+        World at_war = open;
+        REQUIRE(uhrwerk::declare_war(at_war, bra, at_war.find_state("SAX")));
+        CHECK_FALSE(uhrwerk::accessible(at_war, bra, dessau));
+    }
+    SUBCASE("krieg { … } mit Kriegszielen") {
+        data.add_unit();
+        testhilfen::write_file(data.dir() / "common/ereignisse.chron",
+                               "ereignisse {\n    seit = 1648.01.01\n}\n");
+        testhilfen::write_file(
+            data.dir() / "common/ereignisse/test.chron",
+            "ereignis k.krieg { titel = \"Krieg\" text = \"x\" art = dynamisch\n"
+            "    bedingung { staat = BRA }\n"
+            "    option a { text = \"a\" gewicht = 1 wirkung {\n"
+            "        krieg { gegner = SAX  gebiet = leipziger_kreis  entschaedigung = 3 } } } }\n");
+        Simulation sim(data.load());
+        sim.step_day();
+        const World& v = sim.world();
+        REQUIRE(v.wars.size() == 1);
+        CHECK(v.wars[0].attackers.front() == v.find_state("BRA"));
+        REQUIRE(v.wars[0].goals.size() == 2);
+        CHECK(v.wars[0].goals[0].kind == uhrwerk::WarGoalKind::Territory);
+        CHECK(v.wars[0].goals[0].param == v.find_admin_unit("leipziger_kreis"));
+        CHECK(v.wars[0].goals[1].kind == uhrwerk::WarGoalKind::Indemnity);
+        CHECK(v.wars[0].goals[1].param == 3);
+        CHECK(chronicle_contains(v, "stellt das Kriegsziel"));
+    }
+    SUBCASE("Der Helfer rüstet nach dem Aufstand ab") {
+        testhilfen::write_file(data.dir() / "common/ereignisse.chron",
+                               "ereignisse {\n    seit = 1648.01.01\n    aufstand_schritt = 4\n"
+                               "    aufstand_zufall = 0\n}\n");
+        testhilfen::write_file(
+            data.dir() / "common/ereignisse/test.chron",
+            "ereignis a.aufstand { titel = \"Aufstand\" text = \"x\" art = dynamisch\n"
+            "    bedingung { staat = SAX }\n"
+            "    option a { text = \"a\" gewicht = 1 wirkung { aufstand = barrikaden } } }\n"
+            "ereignis b.hilfe { titel = \"Hilfe\" text = \"x\" art = dynamisch\n"
+            "    bedingung { staat = BRA  staat SAX { aufstand = ja } }\n"
+            "    option a { text = \"a\" gewicht = 1 wirkung { intervention = SAX } } }\n");
+        Simulation sim(data.load());
+        const World& v = sim.world();
+        const Index bra = v.find_state("BRA");
+        sim.step_day();
+        REQUIRE(v.revolts.size() == 1);
+        CHECK(v.revolts[0].helper == bra);
+        CHECK(v.mobilizations[at(bra)].phase == MobilizationPhase::Mobilizing);
+        sim.step_days(7);
+        CHECK(v.revolts.empty());
+        CHECK(v.mobilizations[at(bra)].phase == MobilizationPhase::Demobilizing);
+        CHECK(chronicle_contains(v, "Brandenburg rüstet ab."));
     }
 }

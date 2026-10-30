@@ -416,6 +416,25 @@ jobs:
           done
           exit "$status"
 
+      # Ereignislabor der deutschen Frage (M11, Schritt b3; ereignisse.md Abschnitt 5.4): das Lesezeichen
+      # 1848 bis zum 1.7.1871 gegen data/common/ereignisziele_voelkerfruehling_1871.chron, 16 Seeds.
+      - name: Ereignislabor 1871 (deutsche Frage)
+        if: ${{ !cancelled() }}
+        run: |
+          status=0
+          ./build/release/cli/uhrwerk-cli ereignisse --daten data --szenario voelkerfruehling --seeds 16 \
+            --ziele data/common/ereignisziele_voelkerfruehling_1871.chron \
+            > "$RUNNER_TEMP/ereignisse_1871.txt" 2>&1 || status=$?
+          cat "$RUNNER_TEMP/ereignisse_1871.txt"
+          {
+            echo "### Ereignislabor 1871 (deutsche Frage)"
+            echo
+            echo '```'
+            cat "$RUNNER_TEMP/ereignisse_1871.txt"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          exit "$status"
+
       # Kriegslabor der Kriegslesezeichen (M10b, Schritt b2): Düppel, Königgrätz und Sedan gegen
       # data/common/kriegsziele_<lesezeichen>.chron, je 16 Seeds.
       - name: Kriegslabor Lesezeichen

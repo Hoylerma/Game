@@ -656,6 +656,8 @@ struct MilitaryRules {
     Fixed points_army_share; // seit b2: ein vernichtetes Heer zählt ab diesem Anteil der Kriegsstärke
     // Lesezeichen im Krieg (seit M10b, Schritt b1).
     Fixed leadership; // Kampfkraft × (1 + leadership × (Führung − 1)) je Heer
+    // Seit M11 (b3): Heere eines Bundesstaates ziehen durch das Gebiet anderer Bundesstaaten (Etappenstraßen)
+    bool federal_passage = false;
 };
 
 /// Festung (seit Schritt a3, Abschnitt 4.3): muss belagert werden. Inhalt.

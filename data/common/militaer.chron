@@ -84,6 +84,7 @@ militaer {
 
     # Generalstab (Abschnitt 5): führt alle Heere, bis ein Befehl 'Marsch' oder 'Generalstab' sie übernimmt.
     generalstab               = ja
+    bund_durchzug             = ja    # seit M11 (b3): Bundesstaaten ziehen durch Bundesgebiet (Etappenstraßen)
     generalstab_angriff       = 1.2
     generalstab_rueckzug      = 2
     generalstab_umkreis_km    = 60

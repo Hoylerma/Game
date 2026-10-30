@@ -194,7 +194,13 @@ marschiert und ein neues Ziel über denselben nächsten Ort bekommt, behält den
 auf der Bahn nimmt ein Heer keine Befehle an. Zugang in a2: eigene und verbündete Orte; seit a3 auch
 die der Kriegsgegner und die Orte, die die eigene Seite besetzt hält. Die Bahn fährt nur zwischen
 Bahnhöfen, die die eigene Seite kontrolliert. Erreicht ein Heer einen Ort mit einem gegnerischen Heer,
-bleibt es dort stehen (Schlacht).
+bleibt es dort stehen (Schlacht). Seit M11 (Schritt b3, Regel `bund_durchzug`, 1848: ja) ziehen die
+Heere eines Bundesstaates auch durch das Bundesgebiet anderer Bundesstaaten, wie auf den Etappenstraßen
+des Bundes (1864 marschierten preußische Truppen durch Mecklenburg und Lauenburg nach Holstein); der
+Durchzug besetzt nichts, die Bahn bleibt auf die eigene Seite beschränkt. In einem Krieg gegen einen
+Staat mit Hauptstadt im Bundesgebiet (1866) bleiben die Neutralen gesperrt; sonst verschob der Durchzug
+das Lesezeichen „Königgrätz“ (Preußen siegte nur noch in 50 statt 69 % der Läufe). Ohne die Regel fand Preußen
+in einer Partie ab 1848 keinen Weg nach Holstein, und ein Krieg um Schleswig endete im Stillstand.
 
 ### 3.5 Versorgung und Zermürbung
 
@@ -553,7 +559,8 @@ Kriegsziele der Spieler:
   der Gegenseite **mit** Hinterland (`ziel_annexion` 80 nur für die ganze Gegenseite); Frieden nach
   Regel auch, wenn die Kriegsmüdigkeit der Gegenseite die Kosten der Ziele erreicht (wie beim
   Friedensangebot). Ein Staat mit Hinterland geht ohne Orte nicht unter, er **verlässt die Karte**
-  (Kasse und Schulden bleiben bei ihm). Regeln: `ziel_gebiet_mindestens` 5, `ziel_fuehrung` 20,
+  (Kasse und Schulden bleiben bei ihm; seit M11, Schritt b3, führt er danach keinen Haushalt mehr, sonst
+  häufte Dänemark in einer Partie ab 1848 nach 1864 Schulden und Bankrotte an). Regeln: `ziel_gebiet_mindestens` 5, `ziel_fuehrung` 20,
   `muedigkeit_besetzung` 100.
 - **Aufmarsch:** `besetzt = { gebiet = … }` im Krieg zum Start (chronik-skript.md 3.32): 1864 halten
   die Verbündeten Holstein und Lauenburg seit der Bundesexekution.

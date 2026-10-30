@@ -5,6 +5,7 @@
 #include "test_hilfen.hpp"
 #include "uhrwerk/event_lab.hpp"
 #include "uhrwerk/events.hpp"
+#include "uhrwerk/military.hpp"
 #include "uhrwerk/savegame.hpp"
 #include "uhrwerk/simulation.hpp"
 
@@ -1194,4 +1195,73 @@ TEST_CASE("Ereignisse: Journal beginnt nicht nach seinem Ende") {
     sim.step_days(40);
     CHECK(sim.world().journal_states[0].stage == kNone);
     CHECK(sim.world().journal_history.empty());
+}
+
+// ─── Schritt b3: Ausgang eines Krieges, Kriegsziele und Abrüstung im Lader ──────────────────────────────
+
+TEST_CASE("Ereignisse: krieg_gewonnen, krieg_verloren und krieg { … } (b3)") {
+    const RuleData data("", R"(
+ereignis s.sieg { titel = "Sieg" text = "x" art = dynamisch
+    bedingung { staat = BRA  krieg_gewonnen = SAX }
+    option a { text = "a" gewicht = 1 wirkung { merke = sieg } } }
+ereignis t.niederlage { titel = "Niederlage" text = "x" art = dynamisch
+    bedingung { staat = SAX  krieg_verloren = BRA }
+    option a { text = "a" gewicht = 1 wirkung { merke = niederlage } } }
+ereignis u.falsch { titel = "Falsch" text = "x" art = dynamisch
+    bedingung { staat = SAX  krieg_gewonnen = BRA }
+    option a { text = "a" gewicht = 1 wirkung { merke = falsch } } }
+ereignis v.krieg { titel = "Krieg" text = "x" art = dynamisch nur_folge = ja
+    option a { text = "a" gewicht = 1 wirkung {
+        krieg { gegner = SAX  fuehrung = ja  zollunion = nein  entschaedigung = 3 }
+        mobilmachung = nein } } }
+)");
+    World start = data.load();
+    const Index bra = state_of(start, "BRA");
+    const Index sax = state_of(start, "SAX");
+    // Lader: Kriegsziele als Codes wie im Befehl, mobilmachung = nein als a = 0.
+    const std::vector<uhrwerk::Effect>& effects = event(start, "v.krieg").options[0].effects;
+    REQUIRE(effects.size() == 2);
+    CHECK(effects[0].kind == EffectKind::War);
+    CHECK(effects[0].a == sax);
+    CHECK(effects[0].goals ==
+          std::vector<std::int64_t>{uhrwerk::encode_war_goal(uhrwerk::WarGoalKind::Leadership, 0),
+                                    uhrwerk::encode_war_goal(uhrwerk::WarGoalKind::Indemnity, 3)});
+    CHECK(effects[1].kind == EffectKind::Mobilize);
+    CHECK(effects[1].a == 0);
+    // Brandenburg hat als Verteidiger gegen Sachsen gewonnen (winner −1).
+    uhrwerk::WarResult result;
+    result.id = 1;
+    result.attacker = sax;
+    result.defender = bra;
+    result.winner = -1;
+    start.war_results.push_back(result);
+    Simulation sim(std::move(start));
+    sim.step_day();
+    const World& w = sim.world();
+    const auto flagged = [&](Index s, std::string_view name) {
+        return std::any_of(w.event_flags.begin(), w.event_flags.end(),
+                           [&](const uhrwerk::EventFlag& f) { return f.state == s && f.name == name; });
+    };
+    CHECK(flagged(bra, "sieg"));
+    CHECK(flagged(sax, "niederlage"));
+    CHECK_FALSE(flagged(sax, "falsch"));
+
+    SUBCASE("Ladefehler") {
+        for (const auto& [effect, message] :
+             {std::pair{"krieg { fuehrung = ja }", "Pflichtfeld 'gegner' fehlt in krieg"},
+              std::pair{"krieg { gegner = SAX gebiet = nirgendwo }",
+                        "unbekannte Verwaltungseinheit 'nirgendwo'"},
+              std::pair{"krieg { gegner = SAX sieg = ja }", "in 'krieg' sind nur gegner, gebiet"},
+              std::pair{"krieg { gegner = SAX entschaedigung = 30 }", "entschaedigung"},
+              std::pair{"mobilmachung = vielleicht", "'mobilmachung' erwartet ja oder nein"}}) {
+            CAPTURE(message);
+            const RuleData bad("", std::string("ereignis x { titel = \"x\" text = \"x\" art = dynamisch\n"
+                                               "    option a { text = \"a\" gewicht = 1 wirkung { ") +
+                                       effect + " } } }\n");
+            const uhrwerk::LoadResult r = bad.result();
+            INFO(testhilfen::issues_text(r));
+            CHECK_FALSE(r.ok());
+            CHECK(testhilfen::has_issue(r, message));
+        }
+    }
 }
