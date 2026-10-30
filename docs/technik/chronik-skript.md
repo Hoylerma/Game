@@ -1232,6 +1232,7 @@ ereignis maerz.forderungen {
         gewicht_wenn { unruhe >= 60  plus = 30 }   # optional, mehrfach: Zuschlag −1000…1000
         bedingung { zustimmung_militaer >= 0 } # optional: Verfügbarkeit
         wirkung { … }                          # optional
+        ki { risiko = -1  reform = 1 }         # optional (seit M12): Bezug zu den Neigungen der KI, je −2 … +2
     }
 }
 ```
@@ -1403,6 +1404,10 @@ ki {
     unruhe_steuern_ab = 50               # Unruhe, ab der Steuern sinken, 0 … 100
     bedrohung_mobil = 1.5                # Bedrohung durch einen mobilen Nachbarn, 0 … 100
     abruestung_monate = 2                # ruhige Monatserste bis zur Abrüstung, 1 … 120
+    # seit a3 (ki.md Abschnitte 6.2 und 6.4)
+    buendnisse = 3                       # Bündnisse, über die hinaus keine angeboten werden, 0 … 100
+    wahlkampf_monate = 4                 # Wahlkampf der Strömungen vor einer Wahl, 0 … 24
+    wahlkampf_ruecklage = 0.2            # Rücklage der Mittel einer Strömung, 0 … 1
 }
 persoenlichkeit machtpolitiker { name = "Machtpolitiker" risiko = 1 expansion = 2 legitimitaet = -1 vermittlung = -1 }
 eigenschaft zauderer { name = "Zauderer" risiko = -2 }

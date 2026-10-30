@@ -34,6 +34,15 @@ Schritt in Abschnitt 13 dort.
   **Mobilmachung:** gegen einen bedrohlichen, feindlichen mobilen Nachbarn; Abrüstung nach zwei
   ruhigen Monatsersten (bisher blieben Staaten nach Kriegen mobil). Inhaltsbereich `ki` Stand 2;
   1648 bitgleich.
+- **Diplomatie und Politik der KI (Schritt a3):** Staaten ohne Spieler entsenden Gesandte (Agenda,
+  Rivale, Verbündete, Nachbarn, Großmächte), bieten Bündnisse gegen einen gemeinsamen Rivalen an und
+  nehmen sie nach Nutzen an (statt „ab Beziehung 100“), garantieren kleine Nachbarn und entscheiden in
+  Krisen nach Stärke und Persönlichkeit (nachgeben, vermitteln, eskalieren). Forderungen, Anträge in
+  der Bundesversammlung und Beitritte zu Zollunionen folgen der Agenda (Daten mit b1).
+  Ereignisoptionen dürfen einen Block `ki { risiko = 1 … }` tragen, der ihr Gewicht nach den Neigungen
+  des Staates verschiebt. Strömungen ohne Spieler führen in den vier Monaten vor einer Wahl Wahlkampf
+  in den knappsten Wahlkreisen; dafür kennt der Kern die Strömung des Spielers (Befehl
+  `Spielerströmung`). Inhaltsbereiche ki Stand 3 und ereignisse Stand 7; 1648 bitgleich.
 
 ### Meilenstein M11 – Ereignisse und Revolution 1848/49
 

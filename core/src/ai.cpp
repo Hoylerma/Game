@@ -1,7 +1,9 @@
 #include "uhrwerk/ai.hpp"
 
+#include "uhrwerk/customs.hpp"
 #include "uhrwerk/diplomacy.hpp"
 #include "uhrwerk/military.hpp"
+#include "uhrwerk/politics.hpp"
 
 #include <algorithm>
 #include <array>
@@ -196,8 +198,10 @@ Fixed ai_threat(const World& world, const EventCache& cache, Index state, Index 
 
 std::string ai_reason_text(const World& world, const AiReason& reason) {
     static constexpr std::array<std::string_view, kAiFactors> names = {
-        "Defizit", "Schuldenquote", "Überschuss",      "Unruhe", "Sparsamkeit",
-        "Reform",  "Risiko",        "Bedrohung durch", "mobil:", "Frieden"};
+        "Defizit",       "Schuldenquote", "Überschuss",      "Unruhe",       "Sparsamkeit",
+        "Reform",        "Risiko",        "Bedrohung durch", "mobil:",       "Frieden",
+        "Agenda",        "Rivale",        "Beziehung zu",    "Stärke gegen", "Nachbar",
+        "verbündet mit", "Expansion",     "Legitimität",     "Vermittlung",  "Bündnisse"};
     std::string text(names[static_cast<std::size_t>(reason.factor)]);
     if (in_range(world.states, reason.other)) {
         text += " " + world.states[at(reason.other)].short_name;
@@ -208,7 +212,15 @@ std::string ai_reason_text(const World& world, const AiReason& reason) {
     return text;
 }
 
-std::string ai_decision_text(const World& /*world*/, const AiDecision& decision) {
+namespace {
+
+std::string other_name(const World& world, Index state) {
+    return in_range(world.states, state) ? world.states[at(state)].short_name : std::string("?");
+}
+
+} // namespace
+
+std::string ai_decision_text(const World& world, const AiDecision& decision) {
     static constexpr std::array<std::string_view, kTaxKinds> taxes = {"die Kontribution", "die Akzise",
                                                                       "den Zoll"};
     switch (decision.kind) {
@@ -225,6 +237,35 @@ std::string ai_decision_text(const World& /*world*/, const AiDecision& decision)
         return "macht mobil";
     case AiDecisionKind::Demobilize:
         return "rüstet ab";
+    case AiDecisionKind::SendEnvoy:
+        return "entsendet einen Gesandten nach " + other_name(world, decision.target);
+    case AiDecisionKind::OfferAlliance:
+        return "bietet " + other_name(world, decision.target) + " ein Bündnis an";
+    case AiDecisionKind::OfferGuarantee:
+        return "garantiert " + other_name(world, decision.target);
+    case AiDecisionKind::Demand: {
+        static constexpr std::array<std::string_view, 3> demands = {
+            "die Führung im Bund", "den Beitritt zur Zollunion", "das Lösen seiner Bündnisse"};
+        const auto kind = static_cast<std::size_t>(decision.value.trunc());
+        return "fordert von " + other_name(world, decision.target) + " " +
+               std::string(kind < demands.size() ? demands[kind] : "etwas");
+    }
+    case AiDecisionKind::Manoeuvre: {
+        static constexpr std::array<std::string_view, 3> moves = {
+            "gibt in der Krise nach", "bietet in der Krise Vermittlung an", "verschärft die Krise"};
+        const auto kind = static_cast<std::size_t>(decision.value.trunc());
+        return std::string(kind < moves.size() ? moves[kind] : "handelt in der Krise");
+    }
+    case AiDecisionKind::Motion: {
+        static constexpr std::array<std::string_view, 4> motions = {
+            "die Bundesreform", "die Zolleinigung", "eine Bundesintervention", "das Präsidium"};
+        const auto kind = static_cast<std::size_t>(decision.value.trunc());
+        return "beantragt " + std::string(kind < motions.size() ? motions[kind] : "etwas");
+    }
+    case AiDecisionKind::JoinUnion:
+        return "beantragt den Beitritt zu " + (in_range(world.customs_unions, decision.target)
+                                                   ? world.customs_unions[at(decision.target)].name
+                                                   : std::string("einer Zollunion"));
     }
     return {};
 }
@@ -269,6 +310,20 @@ public:
             update_strategy(state);
             plan_budget(state);
             plan_mobilization(state);
+            if (diplomacy_active(w_)) {
+                plan_envoy(state);
+                plan_alliance(state);
+                plan_guarantee(state);
+                plan_demand(state);
+                plan_manoeuvre(state);
+                plan_motion(state);
+            }
+            if (!w_.customs_unions.empty()) {
+                plan_customs(state);
+            }
+        }
+        if (!w_.parliaments.empty()) {
+            plan_campaigns();
         }
     }
 
@@ -563,6 +618,519 @@ private:
         record(state, decision, target, Fixed::zero(), option);
     }
 
+    // ── Diplomatie (Abschnitt 6.2) ──
+
+    bool alive(Index other) const { return in_range(cache_.alive, other) && cache_.alive[at(other)] != 0; }
+
+    bool neighbor(Index state, Index other) const {
+        const auto& list = cache_.neighbors[at(state)];
+        return std::find(list.begin(), list.end(), other) != list.end();
+    }
+
+    /// Aktive Ziele der Agenda einer Art (mit Gegenstand target, kNone: jeder).
+    std::vector<const AgendaGoal*> goals(Index state, AgendaKind kind, Index target = kNone) const {
+        std::vector<const AgendaGoal*> result;
+        if (!in_range(w_.agendas, state)) {
+            return result;
+        }
+        for (const AgendaGoal& g : w_.agendas[at(state)].goals) {
+            if (g.kind == kind && (target == kNone || g.target == target) &&
+                agenda_goal_active(w_, cache_, state, g)) {
+                result.push_back(&g);
+            }
+        }
+        return result;
+    }
+
+    Fixed goal_weight(Index state, AgendaKind kind, Index target) const {
+        Fixed best;
+        for (const AgendaGoal* g : goals(state, kind, target)) {
+            best = std::max(best, g->weight);
+        }
+        return best;
+    }
+
+    Fixed ratio(Fixed own, Fixed other) const {
+        if (other <= Fixed::zero()) {
+            return Fixed::from_int(10);
+        }
+        return std::min(own / other, Fixed::from_int(10));
+    }
+
+    std::int64_t alliance_count(Index state) const {
+        std::int64_t n = 0;
+        for (const Treaty& t : w_.treaties) {
+            n += t.kind == TreatyKind::Alliance && (t.from == state || t.to == state) ? 1 : 0;
+        }
+        return n;
+    }
+
+    /// Wichtigkeit eines anderen Staates für Gesandte: Agenda, Rivale, Verbündete, Nachbarschaft, Stärke.
+    Option importance(Index state, Index other, Fixed strongest) const {
+        Option o;
+        Fixed agenda;
+        for (const AgendaGoal& g :
+             in_range(w_.agendas, state) ? w_.agendas[at(state)].goals : std::vector<AgendaGoal>{}) {
+            if (g.target == other && g.kind != AgendaKind::CustomsUnion && g.kind != AgendaKind::Territory &&
+                agenda_goal_active(w_, cache_, state, g)) {
+                agenda = std::max(agenda, Fixed::from_int(30));
+            }
+        }
+        o.add(AiFactor::Agenda, agenda, other);
+        if (w_.ai_strategy[at(state)].rival == other) {
+            o.add(AiFactor::Rival, Fixed::from_int(20), other);
+        }
+        if (allied(w_, state, other) || guarantees(w_, state, other) || guarantees(w_, other, state)) {
+            o.add(AiFactor::Ally, Fixed::from_int(15), other);
+        }
+        if (neighbor(state, other)) {
+            o.add(AiFactor::Neighbor, Fixed::from_int(10), other);
+        }
+        if (strongest > Fixed::zero()) {
+            o.add(AiFactor::Strength, Fixed::from_int(10) * ai_strength(w_, other) / strongest, other);
+        }
+        return o;
+    }
+
+    void plan_envoy(Index state) {
+        if (envoy_count(w_, state) >= envoy_capacity(w_, state) ||
+            cooling(state, AiDecisionKind::SendEnvoy, kNone)) {
+            return;
+        }
+        Fixed strongest;
+        for (std::size_t o = 0; o < w_.states.size(); ++o) {
+            strongest = std::max(strongest, ai_strength(w_, static_cast<Index>(o)));
+        }
+        Index best = kNone;
+        Option best_option;
+        for (std::size_t o = 0; o < w_.states.size(); ++o) {
+            const auto other = static_cast<Index>(o);
+            if (other == state || !alive(other) || has_envoy(w_, state, other) ||
+                evaluate_envoy(w_, state, other, true) != DiplomacyDecision::Accepted) {
+                continue;
+            }
+            Option option = importance(state, other, strongest);
+            if (best == kNone || option.sum() > best_option.sum()) {
+                best = other;
+                best_option = std::move(option);
+            }
+        }
+        if (best == kNone) {
+            return;
+        }
+        best_option.add(AiFactor::Thrift, Fixed::from_int(-5) * inclination(Inclination::Thrift));
+        rate(best_option);
+        if (best_option.utility >= w_.ai_rules.threshold) {
+            Command c;
+            c.type = CommandType::Envoy;
+            c.state = state;
+            c.target = best;
+            c.value = Fixed::one();
+            out_.push_back(c);
+            record(state, AiDecisionKind::SendEnvoy, best, Fixed::zero(), best_option);
+            cool(state, AiDecisionKind::SendEnvoy, kNone, 1); // höchstens ein Gesandter je Monat
+        }
+    }
+
+    /// Gemeinsamer Rivale von state und other (beide Strategien nennen denselben Staat, der keiner von
+    /// beiden ist).
+    Index common_rival(Index state, Index other) const {
+        const Index a = w_.ai_strategy[at(state)].rival;
+        const Index b = in_range(w_.ai_strategy, other) ? w_.ai_strategy[at(other)].rival : kNone;
+        return a != kNone && a == b && a != state && a != other ? a : kNone;
+    }
+
+    void plan_alliance(Index state) {
+        if (alliance_count(state) >= w_.ai_rules.max_alliances ||
+            cooling(state, AiDecisionKind::OfferAlliance, kNone)) {
+            return;
+        }
+        const Fixed own = ai_strength(w_, state);
+        Index best = kNone;
+        Option best_option;
+        for (std::size_t o = 0; o < w_.states.size(); ++o) {
+            const auto other = static_cast<Index>(o);
+            if (other == state || !alive(other) || other == w_.event_player || allied(w_, state, other)) {
+                continue;
+            }
+            const Index rival = common_rival(state, other);
+            const Fixed agenda = goal_weight(state, AgendaKind::Alliance, other);
+            if (rival == kNone && agenda <= Fixed::zero()) {
+                continue; // Bündnisse nur gegen einen gemeinsamen Rivalen oder aus der Agenda
+            }
+            if (evaluate_treaty(w_, state, other, TreatyAction::Alliance) != DiplomacyDecision::Accepted) {
+                continue;
+            }
+            Option option;
+            option.add(AiFactor::Agenda, agenda / Fixed::from_int(2), other);
+            if (rival != kNone) {
+                option.add(AiFactor::Rival, Fixed::from_int(20), rival);
+            }
+            option.add(
+                AiFactor::Strength,
+                std::min(Fixed::from_int(10) * ratio(ai_strength(w_, other), own), Fixed::from_int(20)),
+                other);
+            option.add(AiFactor::Relation, relation(w_, state, other) / Fixed::from_int(20), other);
+            option.add(AiFactor::Alliances, Fixed::from_int(-5) * Fixed::from_int(alliance_count(state)));
+            if (best == kNone || option.sum() > best_option.sum()) {
+                best = other;
+                best_option = std::move(option);
+            }
+        }
+        if (best == kNone) {
+            return;
+        }
+        rate(best_option);
+        if (best_option.utility >= w_.ai_rules.threshold) {
+            order_treaty(state, best, TreatyAction::Alliance, AiDecisionKind::OfferAlliance, best_option);
+        }
+    }
+
+    void plan_guarantee(Index state) {
+        if (cooling(state, AiDecisionKind::OfferGuarantee, kNone)) {
+            return;
+        }
+        // Eine Großmacht (dreifache Stärke) garantiert einen kleinen Nachbarn im eigenen Lager.
+        const Fixed own = ai_strength(w_, state);
+        Index best = kNone;
+        Option best_option;
+        for (const Index other : cache_.neighbors[at(state)]) {
+            if (!alive(other) || other == w_.event_player ||
+                ratio(own, ai_strength(w_, other)) < Fixed::from_int(3) ||
+                evaluate_treaty(w_, state, other, TreatyAction::Guarantee) != DiplomacyDecision::Accepted) {
+                continue;
+            }
+            Option option;
+            option.add(AiFactor::Neighbor, Fixed::from_int(5), other);
+            option.add(AiFactor::Relation, relation(w_, state, other) / Fixed::from_int(10), other);
+            option.add(AiFactor::Legitimacy, Fixed::from_int(5) * inclination(Inclination::Legitimacy));
+            option.add(AiFactor::Agenda,
+                       goal_weight(state, AgendaKind::StatusQuo, kNone) / Fixed::from_int(4));
+            if (best == kNone || option.sum() > best_option.sum()) {
+                best = other;
+                best_option = std::move(option);
+            }
+        }
+        if (best == kNone) {
+            return;
+        }
+        rate(best_option);
+        if (best_option.utility >= w_.ai_rules.threshold) {
+            order_treaty(state, best, TreatyAction::Guarantee, AiDecisionKind::OfferGuarantee, best_option);
+        }
+    }
+
+    void order_treaty(Index state, Index target, TreatyAction action, AiDecisionKind decision,
+                      const Option& option) {
+        Command c;
+        c.type = CommandType::Treaty;
+        c.state = state;
+        c.target = target;
+        c.value = Fixed::from_int(static_cast<std::int64_t>(action));
+        out_.push_back(c);
+        record(state, decision, target, Fixed::zero(), option);
+        cool(state, decision, kNone, w_.ai_rules.tax_cooldown_months);
+    }
+
+    /// Bündnisstärke: eigene Stärke und die der Verbündeten.
+    Fixed alliance_strength(Index state) const {
+        Fixed total = ai_strength(w_, state);
+        for (const Treaty& t : w_.treaties) {
+            if (t.kind == TreatyKind::Alliance && (t.from == state || t.to == state)) {
+                total += ai_strength(w_, t.from == state ? t.to : t.from);
+            }
+        }
+        return total;
+    }
+
+    void plan_demand(Index state) {
+        if (play_of(w_, state) != kNone || (military_active(w_) && in_war(w_, state))) {
+            return;
+        }
+        struct Candidate {
+            Index target;
+            DemandKind kind;
+            Fixed weight;
+        };
+        std::vector<Candidate> candidates;
+        // Führung im Bund: gegen den Rivalen bzw. die Präsidialmacht.
+        for (const AgendaGoal* g : goals(state, AgendaKind::LeadFederation)) {
+            const Index rival = w_.ai_strategy[at(state)].rival;
+            const Index target = rival != kNone ? rival : w_.diet_presidency;
+            if (target != kNone && target != state) {
+                candidates.push_back({target, DemandKind::Leadership, g->weight});
+            }
+        }
+        // Beitritt zur eigenen Zollunion: Nachbarn außerhalb, wenn die Agenda die Union nennt.
+        const Index union_own = w_.states[at(state)].customs_union;
+        if (union_own != kNone && in_range(w_.customs_unions, union_own) &&
+            w_.customs_unions[at(union_own)].leader == state) {
+            for (const AgendaGoal* g : goals(state, AgendaKind::CustomsUnion, union_own)) {
+                for (const Index other : cache_.neighbors[at(state)]) {
+                    if (alive(other) && w_.states[at(other)].customs_union != union_own) {
+                        candidates.push_back({other, DemandKind::CustomsUnion, g->weight});
+                    }
+                }
+            }
+        }
+        // Schwächen: Führung im Bund gegen den Gegner.
+        for (const AgendaGoal* g : goals(state, AgendaKind::Weaken)) {
+            candidates.push_back({g->target, DemandKind::Leadership, g->weight});
+        }
+        const Fixed own = alliance_strength(state);
+        Index best = kNone;
+        DemandKind best_kind = DemandKind::Leadership;
+        Option best_option;
+        for (const Candidate& c : candidates) {
+            if (!alive(c.target) || cooling(state, AiDecisionKind::Demand, c.target) ||
+                evaluate_demand(w_, state, c.target, c.kind) != DiplomacyDecision::Accepted) {
+                continue;
+            }
+            const Fixed r = ratio(own, alliance_strength(c.target));
+            const Fixed needed = Fixed::one() - inclination(Inclination::Risk) * Fixed::from_ratio(15, 100);
+            if (r < needed) {
+                continue;
+            }
+            Option option;
+            option.add(AiFactor::Agenda, c.weight / Fixed::from_int(2), c.target);
+            option.add(AiFactor::Strength, Fixed::from_int(20) * (r - needed), c.target);
+            option.add(AiFactor::Expansion, Fixed::from_int(5) * inclination(Inclination::Expansion));
+            option.add(AiFactor::Risk, Fixed::from_int(5) * inclination(Inclination::Risk));
+            if (best == kNone || option.sum() > best_option.sum()) {
+                best = c.target;
+                best_kind = c.kind;
+                best_option = std::move(option);
+            }
+        }
+        if (best == kNone) {
+            return;
+        }
+        rate(best_option);
+        if (best_option.utility >= w_.ai_rules.threshold) {
+            Command c;
+            c.type = CommandType::Demand;
+            c.state = state;
+            c.target = best;
+            c.value = Fixed::from_int(static_cast<std::int64_t>(best_kind));
+            out_.push_back(c);
+            record(state, AiDecisionKind::Demand, best, c.value, best_option);
+            cool(state, AiDecisionKind::Demand, best, w_.ai_rules.cooldown_months);
+        }
+    }
+
+    void plan_manoeuvre(Index state) {
+        const Index index = play_of(w_, state);
+        if (index == kNone || cooling(state, AiDecisionKind::Manoeuvre, kNone)) {
+            return;
+        }
+        const DiplomaticPlay& play = w_.plays[at(index)];
+        const bool demander = play.demander == state;
+        const Index other = demander ? play.target : play.demander;
+        const Fixed r = ratio(side_strength(w_, play, demander), side_strength(w_, play, !demander));
+        const Fixed risk = inclination(Inclination::Risk);
+        const Fixed yield_below = w_.diplomacy_rules.play_yield - risk * Fixed::from_ratio(1, 10);
+        Option option;
+        Manoeuvre move = Manoeuvre::Mediate;
+        if (r < yield_below) {
+            move = Manoeuvre::Yield;
+            option.add(AiFactor::Strength, Fixed::from_int(10) + Fixed::from_int(20) * (yield_below - r),
+                       other);
+            option.add(AiFactor::Risk, Fixed::from_int(-5) * risk);
+        } else if (r >= Fixed::one() - risk * Fixed::from_ratio(15, 100)) {
+            move = Manoeuvre::Escalate;
+            option.add(AiFactor::Strength, Fixed::from_int(10) + Fixed::from_int(10) * (r - Fixed::one()),
+                       other);
+            option.add(AiFactor::Risk, Fixed::from_int(5) * risk);
+            option.add(AiFactor::Expansion, Fixed::from_int(5) * inclination(Inclination::Expansion));
+        } else if (inclination(Inclination::Mediation) > Fixed::zero()) {
+            option.add(AiFactor::Mediation, Fixed::from_int(10) * inclination(Inclination::Mediation));
+        } else {
+            return; // die Regel der Stufe entscheidet (diplomatie.md 4.5)
+        }
+        if (evaluate_manoeuvre(w_, state, move) == DiplomacyDecision::Invalid) {
+            return;
+        }
+        rate(option);
+        if (option.utility >= w_.ai_rules.threshold) {
+            Command c;
+            c.type = CommandType::Manoeuvre;
+            c.state = state;
+            c.value = Fixed::from_int(static_cast<std::int64_t>(move));
+            out_.push_back(c);
+            record(state, AiDecisionKind::Manoeuvre, other, c.value, option);
+            cool(state, AiDecisionKind::Manoeuvre, kNone, 1);
+        }
+    }
+
+    void plan_motion(Index state) {
+        if (!has_diet(w_) || w_.diet_suspended != 0) {
+            return;
+        }
+        struct Candidate {
+            MotionKind kind;
+            Index target;
+            Fixed weight;
+        };
+        std::vector<Candidate> candidates;
+        for (const AgendaGoal* g : goals(state, AgendaKind::LeadFederation)) {
+            candidates.push_back({w_.diet_presidency == state ? MotionKind::Reform : MotionKind::Presidency,
+                                  kNone, g->weight});
+        }
+        const Index union_own = w_.states[at(state)].customs_union;
+        for (const AgendaGoal* g : goals(state, AgendaKind::CustomsUnion, union_own)) {
+            if (union_own != kNone) {
+                candidates.push_back({MotionKind::CustomsUnification, union_own, g->weight});
+            }
+        }
+        for (const Candidate& c : candidates) {
+            const auto key = static_cast<Index>(c.kind);
+            if (cooling(state, AiDecisionKind::Motion, key) ||
+                evaluate_motion(w_, state, c.kind, c.target) != DiplomacyDecision::Accepted ||
+                !tally_motion(w_, Motion{c.kind, state, c.target, w_.date}).accepted) {
+                continue;
+            }
+            Option option;
+            option.add(AiFactor::Agenda, c.weight / Fixed::from_int(2));
+            option.add(AiFactor::Legitimacy, Fixed::from_int(3) * inclination(Inclination::Legitimacy));
+            rate(option);
+            if (option.utility >= w_.ai_rules.threshold) {
+                Command cmd;
+                cmd.type = CommandType::Motion;
+                cmd.state = state;
+                cmd.target = c.target;
+                cmd.value = Fixed::from_int(static_cast<std::int64_t>(c.kind));
+                out_.push_back(cmd);
+                record(state, AiDecisionKind::Motion, c.target, cmd.value, option);
+                cool(state, AiDecisionKind::Motion, key, w_.ai_rules.cooldown_months);
+                return; // höchstens ein Antrag je Monat
+            }
+        }
+    }
+
+    void plan_customs(Index state) {
+        const Index current = w_.states[at(state)].customs_union;
+        Index best = kNone;
+        Option best_option;
+        for (std::size_t u = 0; u < w_.customs_unions.size(); ++u) {
+            const auto union_index = static_cast<Index>(u);
+            const Fixed weight = goal_weight(state, AgendaKind::CustomsUnion, union_index);
+            if (union_index == current || weight <= Fixed::zero() ||
+                cooling(state, AiDecisionKind::JoinUnion, union_index) ||
+                evaluate_customs_change(w_, state, union_index) != CustomsDecision::Accepted) {
+                continue;
+            }
+            const Index leader = w_.customs_unions[u].leader;
+            Option option;
+            option.add(AiFactor::Agenda, weight / Fixed::from_int(2));
+            if (in_range(w_.states, leader) && leader != state) {
+                option.add(AiFactor::Relation, relation(w_, state, leader) / Fixed::from_int(10), leader);
+                if (w_.ai_strategy[at(state)].rival == leader) {
+                    option.add(AiFactor::Rival, Fixed::from_int(-30), leader);
+                }
+            }
+            if (best == kNone || option.sum() > best_option.sum()) {
+                best = union_index;
+                best_option = std::move(option);
+            }
+        }
+        if (best == kNone) {
+            return;
+        }
+        rate(best_option);
+        if (best_option.utility >= w_.ai_rules.threshold) {
+            Command c;
+            c.type = CommandType::CustomsUnion;
+            c.state = state;
+            c.target = best;
+            out_.push_back(c);
+            record(state, AiDecisionKind::JoinUnion, best, Fixed::zero(), best_option);
+            cool(state, AiDecisionKind::JoinUnion, best, w_.ai_rules.cooldown_months);
+        }
+    }
+
+    // ── Wahlkampf der Strömungen (Abschnitt 6.4) ──
+
+    /// Je Strömung außer der des Spielers in den campaign_months Monaten vor einer Wahl: Versammlungen in
+    /// den Wahlkreisen mit der knappsten Lage, in denen sie erste oder zweite ist, bis die Mittel bis auf die
+    /// Rücklage für die verbleibenden Monate verteilt sind. Lage mit Rauschen ±8 Punkte (wie der
+    /// Stimmungsbericht des Spielers).
+    void plan_campaigns() {
+        const std::size_t currents = w_.currents.size();
+        if (currents == 0 || w_.party_funds.size() != currents) {
+            return;
+        }
+        const auto rally = static_cast<std::size_t>(CampaignAction::Rally);
+        const Fixed cost = w_.election_rules.campaign[rally].cost;
+        if (cost <= Fixed::zero()) {
+            return;
+        }
+        for (std::size_t p = 0; p < w_.parliaments.size(); ++p) {
+            const Parliament& parliament = w_.parliaments[p];
+            const std::int64_t days = to_day_number(parliament.election_day) - to_day_number(w_.date);
+            const std::int64_t months = days / 30 + 1;
+            if (days < 0 || months > w_.ai_rules.campaign_months ||
+                std::any_of(w_.elections.begin(), w_.elections.end(),
+                            [&](const ElectionResult& e) { return e.parliament == static_cast<Index>(p); })) {
+                continue;
+            }
+            // Lage je Wahlkreis einmal für alle Strömungen.
+            struct Seat {
+                Index district;
+                std::vector<Fixed> shares;
+            };
+            std::vector<Seat> seats;
+            for (std::size_t d = 0; d < w_.electoral_districts.size(); ++d) {
+                if (w_.electoral_districts[d].parliament != static_cast<Index>(p)) {
+                    continue;
+                }
+                const DistrictEstimate estimate = estimate_district(w_, static_cast<Index>(d));
+                if (!estimate.boycott && estimate.shares.size() == currents) {
+                    seats.push_back({static_cast<Index>(d), estimate.shares});
+                }
+            }
+            for (std::size_t c = 0; c < currents; ++c) {
+                const auto current = static_cast<Index>(c);
+                if (current == w_.player_current) {
+                    continue;
+                }
+                const Fixed budget = (w_.party_funds[c] * (Fixed::one() - w_.ai_rules.campaign_reserve)) /
+                                     Fixed::from_int(months);
+                std::int64_t actions = (budget / cost).trunc();
+                if (actions <= 0) {
+                    continue;
+                }
+                // Knappheit: Abstand zum Ersten bzw. Vorsprung vor dem Zweiten, mit Rauschen.
+                std::vector<std::pair<Fixed, Index>> close;
+                for (const Seat& seat : seats) {
+                    Fixed best_other;
+                    std::size_t ahead = 0;
+                    for (std::size_t o = 0; o < currents; ++o) {
+                        if (o != c) {
+                            best_other = std::max(best_other, seat.shares[o]);
+                            ahead += seat.shares[o] > seat.shares[c] ? 1 : 0;
+                        }
+                    }
+                    if (ahead > 1) {
+                        continue; // nur wo die Strömung erste oder zweite ist
+                    }
+                    Fixed margin = seat.shares[c] - best_other;
+                    margin = margin < Fixed::zero() ? -margin : margin;
+                    margin += rng_.uniform(Fixed::from_ratio(-8, 100), Fixed::from_ratio(8, 100));
+                    close.emplace_back(margin, seat.district);
+                }
+                std::stable_sort(close.begin(), close.end());
+                for (std::size_t k = 0; k < close.size() && actions > 0; ++k, --actions) {
+                    Command cmd;
+                    cmd.type = CommandType::Campaign;
+                    cmd.state = current;
+                    cmd.target = close[k].second;
+                    cmd.action = CampaignAction::Rally;
+                    out_.push_back(cmd);
+                }
+            }
+        }
+    }
+
     World& w_;
     Pcg32& rng_;
     const EventCache& cache_;
@@ -571,6 +1139,35 @@ private:
 };
 
 } // namespace
+
+bool ai_accepts_alliance(const World& world, Index acceptor, Index proposer) {
+    if (!in_range(world.ai_strategy, acceptor) || !in_range(world.ai_strategy, proposer)) {
+        return false;
+    }
+    Fixed utility = (relation(world, acceptor, proposer) - Fixed::from_int(50)) / Fixed::from_int(5);
+    const Index rival = world.ai_strategy[at(acceptor)].rival;
+    if (rival != kNone && rival == world.ai_strategy[at(proposer)].rival && rival != acceptor &&
+        rival != proposer) {
+        utility += Fixed::from_int(20);
+    }
+    if (rival == proposer) {
+        utility -= Fixed::from_int(30);
+    }
+    return utility >= world.ai_rules.threshold;
+}
+
+Fixed ai_option_factor(const World& world, const EventOption& option, Index state) {
+    if (!option.has_ai || !ai_active(world) || !in_range(world.states, state) ||
+        state == world.event_player) {
+        return Fixed::one();
+    }
+    const Inclinations values = state_inclinations(world, state);
+    Fixed sum;
+    for (std::size_t k = 0; k < kInclinationCount; ++k) {
+        sum += option.ai_lean[k] * values[k];
+    }
+    return std::max(Fixed::one() + sum / Fixed::from_int(4), Fixed::from_ratio(1, 10));
+}
 
 std::vector<Command> run_ai(World& world, Pcg32& rng, EventCache& cache) {
     std::vector<Command> commands;

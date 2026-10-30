@@ -1175,6 +1175,7 @@ struct World {
     std::vector<AiStrategy> ai_strategy;  // seit a2: je Staat
     std::vector<AiDecision> ai_log;       // seit a2: KI-Protokoll in zeitlicher Folge (je Staat begrenzt)
     std::vector<AiCooldown> ai_cooldowns; // seit a2: laufende Abkühlungen nach Staat, Art und Ziel
+    Index player_current = -1;            // seit a3: Strömung des Spielers im Parteienmodus (Befehl)
 
     /// Person im Amt (Herrscher oder leitender Minister) oder -1.
     Index office(Index state, PersonRole role) const;

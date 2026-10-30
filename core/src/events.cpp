@@ -1,5 +1,6 @@
 #include "uhrwerk/events.hpp"
 
+#include "uhrwerk/ai.hpp"
 #include "uhrwerk/diplomacy.hpp"
 #include "uhrwerk/military.hpp"
 #include "uhrwerk/politics.hpp"
@@ -1124,6 +1125,8 @@ std::vector<Fixed> option_weights(const World& world, const EventCache& cache, c
                 weight += m.plus;
             }
         }
+        // Neigungen der KI (seit M12, ki.md 6.4); 1 ohne Block ki { … } oder für den Spielerstaat.
+        weight = weight * ai_option_factor(world, o, state);
         weights.push_back(Fixed::max(weight, Fixed::zero()));
     }
     return weights;
