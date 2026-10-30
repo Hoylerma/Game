@@ -815,6 +815,7 @@ Abschnitt 13).
 ### M12 – Künstliche Intelligenz der Staaten
 
 **Ziel:** Computerstaaten nach [21 Künstliche Intelligenz](21_kuenstliche_intelligenz.md).
+Vertrag: [technik/ki.md](technik/ki.md) (Entwurf, Entscheidungen zur Freigabe in Abschnitt 11).
 
 **Umfang**
 - Entscheidungen zu Haushalt, Steuern, Diplomatie, Krieg und Politik
