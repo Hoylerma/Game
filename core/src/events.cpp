@@ -1295,4 +1295,274 @@ Fixed timed_morale_factor(const World& world, Index state) {
     return Fixed::max(factor, Fixed::zero());
 }
 
+// ─── Anzeige (seit b4) ──────────────────────────────────────────────────────
+
+namespace {
+
+/// Zahl mit Vorzeichen und Dezimalkomma, ohne überflüssige Nullen („+3“, „−0,5“).
+std::string signed_number(Fixed value, int decimals = 2) {
+    std::string text = (value < Fixed::zero() ? -value : value).to_string(decimals);
+    if (text.find('.') != std::string::npos) {
+        while (!text.empty() && text.back() == '0') {
+            text.pop_back();
+        }
+        if (!text.empty() && text.back() == '.') {
+            text.pop_back();
+        }
+    }
+    std::replace(text.begin(), text.end(), '.', ',');
+    // Tausenderpunkte im ganzzahligen Teil („1.000“).
+    const std::size_t comma = text.find(',');
+    for (std::size_t pos = comma == std::string::npos ? text.size() : comma; pos > 3; pos -= 3) {
+        text.insert(pos - 3, ".");
+    }
+    return (value < Fixed::zero() ? "−" : "+") + text;
+}
+
+std::string percent_text(Fixed share) {
+    return signed_number(share * Fixed::from_int(100), 1).substr(1) + " %"; // ohne Vorzeichen (nicht negativ)
+}
+
+std::string state_name(const World& w, Index state) {
+    return in_range(w.states, state) ? w.states[at(state)].short_name : std::string("?");
+}
+
+const char* constitution_text(Constitution c) {
+    switch (c) {
+    case Constitution::None:
+        return "keine Verfassung";
+    case Constitution::Estates:
+        return "ständische Verfassung";
+    case Constitution::Constitutional:
+        return "konstitutionelle Verfassung";
+    }
+    return "";
+}
+
+const char* franchise_text(Franchise f) {
+    switch (f) {
+    case Franchise::None:
+        return "kein Wahlrecht";
+    case Franchise::Estates:
+        return "ständisches Wahlrecht";
+    case Franchise::Census:
+        return "Zensuswahlrecht";
+    case Franchise::ThreeClass:
+        return "Dreiklassenwahlrecht";
+    case Franchise::Manhood:
+        return "allgemeines Männerwahlrecht";
+    }
+    return "";
+}
+
+const char* revolt_text(RevoltKind kind) {
+    switch (kind) {
+    case RevoltKind::Barricades:
+        return "Barrikadenkämpfe in der Hauptstadt";
+    case RevoltKind::Agrarian:
+        return "Agrarunruhen auf dem Land";
+    case RevoltKind::Uprising:
+        return "Erhebung gegen die Regierung";
+    }
+    return "";
+}
+
+const char* motion_text(MotionKind kind) {
+    switch (kind) {
+    case MotionKind::Reform:
+        return "Bundesreform";
+    case MotionKind::CustomsUnification:
+        return "Zolleinigung";
+    case MotionKind::Intervention:
+        return "Bundesintervention";
+    case MotionKind::Presidency:
+        return "Vorsitz im Bund";
+    }
+    return "";
+}
+
+std::string goal_text(const World& w, std::int64_t code, Index enemy) {
+    const std::optional<WarGoal> goal = decode_war_goal(code, true);
+    if (!goal) {
+        return {};
+    }
+    switch (goal->kind) {
+    case WarGoalKind::Territory:
+        return in_range(w.admin_units, goal->param) ? w.admin_units[at(goal->param)].name
+                                                    : std::string("Gebiet");
+    case WarGoalKind::Annexation:
+        return "Annexion von " + state_name(w, enemy);
+    case WarGoalKind::Leadership:
+        return "Führung im Bund";
+    case WarGoalKind::Customs:
+        return "Beitritt zur Zollunion";
+    case WarGoalKind::Indemnity:
+        return "Entschädigung (" + std::to_string(goal->param) + " Monatseinnahmen)";
+    }
+    return {};
+}
+
+void describe(const World& w, const std::vector<Effect>& effects, const std::string& prefix,
+              std::vector<std::string>& out) {
+    for (const Effect& e : effects) {
+        std::string line;
+        switch (e.kind) {
+        case EffectKind::Law:
+            if (in_range(w.law_groups, e.a) && in_range(w.law_groups[at(e.a)].options, e.b)) {
+                line = w.law_groups[at(e.a)].name + ": " + w.law_groups[at(e.a)].options[at(e.b)].name;
+            }
+            break;
+        case EffectKind::Constitution:
+            line = std::string("Verfassung: ") + constitution_text(static_cast<Constitution>(e.a));
+            break;
+        case EffectKind::Franchise:
+            line = std::string("Wahlrecht: ") + franchise_text(static_cast<Franchise>(e.a));
+            break;
+        case EffectKind::Approval:
+            if (in_range(w.interest_groups, e.a)) {
+                line = "Zustimmung " + w.interest_groups[at(e.a)].name + " " + signed_number(e.value);
+            }
+            break;
+        case EffectKind::Unrest:
+            line = "Unruhe " + signed_number(e.value);
+            break;
+        case EffectKind::Treasury:
+            line = "Kasse " + signed_number(e.value, 0);
+            break;
+        case EffectKind::MonthlyIncome:
+            line = "Kasse " + signed_number(e.value) + " Monatseinnahmen";
+            break;
+        case EffectKind::Relation:
+            line = "Beziehung zu " + state_name(w, e.a) + " " + signed_number(e.value, 0);
+            break;
+        case EffectKind::Emigration:
+            line = "Auswanderung " + percent_text(e.value) + " der unteren Schicht";
+            break;
+        case EffectKind::Devastation:
+            line = "Verwüstung " + signed_number(e.value * Fixed::from_int(100), 0) + " Punkte in " +
+                   (in_range(w.locations, e.a) ? w.locations[at(e.a)].name : std::string("der Hauptstadt"));
+            break;
+        case EffectKind::Mobilize:
+            line = e.a == 0 ? "Abrüstung" : "Mobilmachung";
+            break;
+        case EffectKind::Follow:
+            if (in_range(w.events, e.a)) {
+                line = "Folgt: „" + w.events[at(e.a)].title + "“" +
+                       (e.days > 0 ? " in " + std::to_string(e.days) + " Tagen" : std::string()) +
+                       (in_range(w.states, e.b) ? " (" + state_name(w, e.b) + ")" : std::string());
+            }
+            break;
+        case EffectKind::Random:
+            for (std::size_t i = 0; i < e.weights.size() && i < e.branches.size(); ++i) {
+                Fixed total;
+                for (const Fixed weight : e.weights) {
+                    total += weight;
+                }
+                const Fixed share = total > Fixed::zero() ? e.weights[i] / total : Fixed::zero();
+                describe(w, e.branches[i], prefix + "mit " + percent_text(share) + ": ", out);
+            }
+            break;
+        case EffectKind::OfState:
+            describe(w, e.children, prefix + state_name(w, e.a) + ": ", out);
+            break;
+        case EffectKind::AllStates:
+            describe(w, e.children, prefix + "Alle Staaten: ", out);
+            break;
+        case EffectKind::Timed: {
+            std::vector<std::string> parts;
+            if (e.timed.tax != Fixed::zero()) {
+                parts.push_back("Steuerertrag " + signed_number(e.timed.tax * Fixed::from_int(100), 0) +
+                                " %");
+            }
+            if (e.timed.morale != Fixed::zero()) {
+                parts.push_back("Kampfkraft " + signed_number(e.timed.morale * Fixed::from_int(100), 0) +
+                                " %");
+            }
+            if (e.timed.unrest != Fixed::zero()) {
+                parts.push_back("Unruhe " + signed_number(e.timed.unrest) + " je Monat");
+            }
+            if (e.timed.relation != Fixed::zero()) {
+                parts.push_back("Beziehung zum Bund " + signed_number(e.timed.relation, 0) + " je Monat");
+            }
+            line = e.name + " (" + std::to_string(e.days) + " Tage)";
+            for (std::size_t i = 0; i < parts.size(); ++i) {
+                line += (i == 0 ? ": " : ", ") + parts[i];
+            }
+            break;
+        }
+        case EffectKind::Revolt:
+            line = std::string("Aufstand: ") + revolt_text(static_cast<RevoltKind>(e.a));
+            break;
+        case EffectKind::Intervention:
+            line = "Truppen gegen den Aufstand in " + state_name(w, e.a);
+            break;
+        case EffectKind::Journal:
+            if (in_range(w.journals, e.a) && in_range(w.journals[at(e.a)].stages, e.b)) {
+                line = w.journals[at(e.a)].title + ": " + w.journals[at(e.a)].stages[at(e.b)].title;
+            }
+            break;
+        case EffectKind::Vote:
+            if (in_range(w.votes, e.a)) {
+                line = "Abstimmung: " + w.votes[at(e.a)].title;
+            }
+            break;
+        case EffectKind::Diet:
+            line = e.a == 1 ? "Die Bundesversammlung ruht" : "Die Bundesversammlung tagt wieder";
+            break;
+        case EffectKind::Motion:
+            line = std::string("Antrag in der Bundesversammlung: ") +
+                   motion_text(static_cast<MotionKind>(e.a)) +
+                   (in_range(w.states, e.b) ? " gegen " + state_name(w, e.b) : std::string());
+            break;
+        case EffectKind::War: {
+            line = "Krieg gegen " + state_name(w, e.a);
+            std::string goals;
+            for (const std::int64_t code : e.goals) {
+                const std::string text = goal_text(w, code, e.a);
+                if (!text.empty()) {
+                    goals += (goals.empty() ? "" : ", ") + text;
+                }
+            }
+            if (!goals.empty()) {
+                line += " (Ziele: " + goals + ")";
+            }
+            break;
+        }
+        case EffectKind::SetFlag:
+        case EffectKind::ClearFlag:
+        case EffectKind::SetWorldFlag:
+        case EffectKind::ClearWorldFlag:
+        case EffectKind::Chronicle:
+            break; // Buchführung, keine sichtbare Folge
+        }
+        if (!line.empty()) {
+            out.push_back(prefix + line);
+        }
+    }
+}
+
+} // namespace
+
+std::vector<std::string> describe_effects(const World& world, const std::vector<Effect>& effects) {
+    std::vector<std::string> out;
+    describe(world, effects, {}, out);
+    return out;
+}
+
+JournalGoalStatus journal_goal_status(const World& world, const EventCache& cache, const JournalGoal& goal) {
+    JournalGoalStatus status;
+    if (!goal.counting) {
+        status.done = condition_holds(world, cache, goal.condition, kNone);
+        return status;
+    }
+    for (std::size_t s = 0; s < world.states.size(); ++s) {
+        if (s < cache.alive.size() && cache.alive[s] != 0 &&
+            condition_holds(world, cache, goal.count, static_cast<Index>(s))) {
+            ++status.count;
+        }
+    }
+    status.done = status.count >= goal.target;
+    return status;
+}
+
 } // namespace uhrwerk

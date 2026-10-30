@@ -93,6 +93,24 @@ freigegeben; Stand je Schritt in Abschnitt 13 dort.
   Hauptstadt im Bund (sonst fand Preußen keinen Weg nach Holstein); ein Staat ohne Orte führt keinen
   Haushalt mehr. Ohne Spieler endet die deutsche Frage über 48 Läufe zu 35 % kleindeutsch, zu 23 % in
   zwei Bünden und zu 42 % im alten Bund. Inhaltsstände ereignisse 6, militaer 9; 1648 bitgleich.
+- **Ereignisse in Godot (Schritt b4):** Das **Ereignisfenster** hält die Zeit an, sobald ein Ereignis
+  des Spielerstaates wartet (Befehl `Ereignisspieler` beim Start, nach dem Laden und beim
+  Staatswechsel; im Parteienmodus keiner), und sperrt das Tempo, bis es entschieden ist: Kopfzeile
+  „Ereignis“ oder „Wendepunkt“, Datum, Text, Quelle, Optionen mit ihren Folgen als Text (neu im Kern:
+  `describe_effects`, z. B. „Zustimmung Bauernschaft +3 · Unruhe −10“, Zufallszweige „mit 30 %: …“),
+  gesperrte Optionen ausgegraut, historischer Kompass ◆ (abschaltbar). Das **Journalfenster** (Taste
+  J, Knopf „Journale …“) zeigt je Journal Stufe, Ziele mit Fortschritt (`journal_goal_status`), Weg
+  und mögliche Ausgänge, dazu die bisherigen Ereignisse (auch über das Spielmenü „Ereignisse“). Die
+  Staatsinfo „Verfassung und Gruppen“ nennt Gesetze, Zustimmung je Gruppe, Unruhe mit Zielwert,
+  Aufstand und befristete Wirkungen; neuer **Kartenmodus 16 „Unruhe“** (Taste X) mit Legende und
+  Tooltip; das Diplomatiefenster sagt, dass die Bundesversammlung ruht, und sperrt dann die Anträge;
+  Wendepunkte stehen in der Chronik rot. Brücke: `get_open_events`, `choose_event_option`,
+  `set_event_player`, `get_event_player`, `get_event_log`, `get_journals`, `get_state_events`,
+  `get_revolts`, `MAP_UNRUHE`, `turning_point` in `get_chronicle`, `suspended` in `get_diet`
+  ([bridge-api.md](docs/technik/bridge-api.md)). Neue Startoptionen `--ereignis` und `--journal`, zwei
+  Screenshots in der CI. Tests: Einheitentest des Ereignisfensters, Rauchtest der Ereignisse 1848
+  (Baden wählt, Journale, Unruhe, ruhende Bundesversammlung), Klicktest (Ereignis hält die Zeit an,
+  Taste J, Spielmenü „Ereignisse“, Taste X, ruhende Bundesversammlung); 1648 bitgleich.
 
 ### Meilenstein M10 – Militär und Einigungskriege
 

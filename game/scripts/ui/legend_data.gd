@@ -598,5 +598,62 @@ static func war_entries(sim: SimulationClient) -> Array[Dictionary]:
 	return entries
 
 
+## Kartenmodus „Unruhe“ (seit M11, Schritt b4): Farbe wie die Brücke, Papier (0) bis Rot (100),
+## Staaten mit Aufstand violett.
+const REVOLT_COLOR := Color(0.42, 0.16, 0.48)
+## Stufen der Unruhe: Untergrenze, Name.
+const UNREST_BANDS: Array = [
+	[0.0, "ruhig"], [20.0, "unruhig"], [40.0, "gärend"], [60.0, "aufgewühlt"], [80.0, "revolutionär"],
+]
+
+
+static func unrest_color(unrest: float) -> Color:
+	return RELATION_NEUTRAL.lerp(RELATION_FOE, clampf(unrest / 100.0, 0.0, 1.0))
+
+
+## Stufen der Unruhe mit der Zahl der Staaten und der Aufstand; leer ohne Ereignisse (1648).
+static func unrest_entries(sim: SimulationClient) -> Array[Dictionary]:
+	var counts: Array[PackedStringArray] = []
+	for band in UNREST_BANDS:
+		counts.append(PackedStringArray())
+	var any := false
+	for index in sim.get_state_count():
+		if int(sim.get_state(index).get("capital_index", -1)) < 0:
+			continue
+		var events := sim.get_state_events(index)
+		if events.is_empty():
+			return []
+		any = true
+		var unrest := float(events.get("unrest", 0.0))
+		var band := UNREST_BANDS.size() - 1
+		while band > 0 and unrest < float(UNREST_BANDS[band][0]):
+			band -= 1
+		counts[band].append(str(sim.get_state(index).get("short_name", "")))
+	if not any:
+		return []
+	var entries: Array[Dictionary] = []
+	for band in UNREST_BANDS.size():
+		var lower := float(UNREST_BANDS[band][0])
+		var upper := float(UNREST_BANDS[band + 1][0]) if band + 1 < UNREST_BANDS.size() else 100.0
+		var names := counts[band]
+		entries.append({
+			"color": unrest_color((lower + upper) / 2.0),
+			"text": "%s (%d)" % [str(UNREST_BANDS[band][1]), names.size()],
+			"detail": "Unruhe %d–%d: %s" % [
+				int(lower), int(upper), ", ".join(names) if not names.is_empty() else "keine"
+			],
+		})
+	var revolts := sim.get_revolts()
+	var rebels := PackedStringArray()
+	for revolt in revolts:
+		rebels.append("%s (%s)" % [str(revolt.get("state_name", "")), str(revolt.get("kind_text", ""))])
+	entries.append({
+		"color": unrest_color(50.0).lerp(REVOLT_COLOR, 0.6),
+		"text": "Aufstand (%d)" % revolts.size(),
+		"detail": ", ".join(rebels) if not rebels.is_empty() else "kein laufender Aufstand",
+	})
+	return entries
+
+
 static func states_text(count: int) -> String:
 	return "1 Staat" if count == 1 else "%s Staaten" % GermanFormat.integer(count)

@@ -14,6 +14,8 @@ signal close_requested
 signal new_game_requested(scenario_id: String)
 ## Wahlabend der letzten Wahl öffnen (seit M8).
 signal last_election_requested
+## Bisherige Ereignisse zeigen (seit M11).
+signal events_requested
 ## Rolle gewählt (seit M8): Index der Strömung im Parteienmodus, -1 = Staat.
 signal role_selected(current: int)
 
@@ -34,6 +36,7 @@ var _current_scenario := ""
 var _scenario_names := {}
 var _new_game_button: Button = null
 var _last_election_button: Button = null
+var _events_button: Button = null
 var _role_caption: Label = null
 var _role_select: OptionButton = null
 ## „Starten“ verlangt einen zweiten Klick, weil die laufende Partie endet.
@@ -130,6 +133,11 @@ func select_role(current: int) -> void:
 ## Knopf „Letzte Wahl“ nur, wenn schon gewählt wurde (seit M8).
 func show_last_election(available: bool) -> void:
 	_last_election_button.visible = available
+
+
+## Knopf „Ereignisse“ nur in Partien mit Ereignissen (seit M11).
+func show_events(available: bool) -> void:
+	_events_button.visible = available
 
 
 ## Kennungen der angebotenen Szenarien (Tests).
@@ -283,6 +291,11 @@ func _build() -> void:
 	_last_election_button.tooltip_text = "Wahlabend der letzten Wahl mit dem ganzen Ergebnis"
 	_last_election_button.visible = false
 	row.add_child(_last_election_button)
+	_events_button = _button("Ereignisse", func() -> void: events_requested.emit())
+	_events_button.name = "EventsButton"
+	_events_button.tooltip_text = "Bisherige Ereignisse mit der gewählten Option; Journale"
+	_events_button.visible = false
+	row.add_child(_events_button)
 	var spacer := Control.new()
 	spacer.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	row.add_child(spacer)

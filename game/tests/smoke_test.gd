@@ -107,8 +107,10 @@ const MARKET_GOOD_FIELDS: PackedStringArray = [
 const KREIS_FIELDS: PackedStringArray = ["id", "name", "location_count", "source"]
 ## Kartenmodi, in denen Orte ohne Daten Alpha 0 haben (bridge-api.md); im Marktmodus (9)
 ## nur Orte ohne Daten in Märkten ohne Orte mit Daten.
-const NO_DATA_ALPHA_MODES: PackedInt32Array = [0, 1, 2, 4, 6, 7, 8, 10, 11, 12, 13, 14, 15]
-const CHRONICLE_FIELDS: PackedStringArray = ["date_text", "text", "location_index", "state_index"]
+const NO_DATA_ALPHA_MODES: PackedInt32Array = [0, 1, 2, 4, 6, 7, 8, 10, 11, 12, 13, 14, 15, 16]
+const CHRONICLE_FIELDS: PackedStringArray = [
+	"date_text", "text", "location_index", "state_index", "turning_point"
+]
 
 var _failures := PackedStringArray()
 var _check_map := true
@@ -306,6 +308,111 @@ func _check_scenario_1848() -> void:
 	_check_elections_1848(sim)
 	_check_customs_1848(sim)
 	_check_diplomacy_1848(sim)
+	_check_events_1848()
+
+
+## Ereignisse 1848 (seit M11, Schritt b4, ereignisse.md Abschnitt 9): Baden wartet auf seine
+## Ereignisse, wählt eine Option; Journale, Staatsinfo, Kartenmodus Unruhe, ruhende Bundesversammlung.
+func _check_events_1848() -> void:
+	var sim := SimulationClient.create()
+	if not _check(
+		sim.load_scenario(UhrwerkPaths.data_dir(), "voelkerfruehling").is_empty(),
+		"Ereignisse: Szenario 1848 frisch geladen", "Ereignisse: Szenario 1848 nicht geladen"
+	):
+		return
+	var baden := sim.get_state_index("BAD")
+	_check(
+		sim.set_event_player(baden) and not sim.set_event_player(sim.get_state_count()),
+		"set_event_player: Baden (ungültiger Staat abgewiesen)",
+		"set_event_player hat Baden nicht angenommen"
+	)
+	sim.advance_days(1)
+	_check(sim.get_event_player() == baden, "Ereignisspieler ab dem nächsten Tag", "get_event_player: %d" % sim.get_event_player())
+	var open: Array[Dictionary] = []
+	for _day in 150:
+		open = sim.get_open_events()
+		if not open.is_empty():
+			break
+		sim.advance_days(1)
+	if not _check(not open.is_empty(), "offenes Ereignis Badens am %s" % sim.get_date_text(), "kein offenes Ereignis für Baden bis %s" % sim.get_date_text()):
+		return
+	var event := open[0]
+	var options: Array = event.get("options", [])
+	var available := -1
+	var effects_seen := false
+	for option: Variant in options:
+		var o := option as Dictionary
+		effects_seen = effects_seen or not PackedStringArray(o.get("effects", PackedStringArray())).is_empty()
+		if available < 0 and bool(o.get("available", false)):
+			available = int(o.get("index", -1))
+	_check(
+		int(event.get("state_index", -1)) == baden and not str(event.get("title", "")).is_empty()
+		and not str(event.get("source", "")).is_empty() and options.size() >= 2 and available >= 0
+		and effects_seen and int(event.get("chosen_option", 0)) == -1 and int(event.get("days_left", 0)) > 0,
+		"get_open_events: „%s“ mit %d Optionen, Quelle, Folgen" % [event.get("title"), options.size()],
+		"get_open_events: %s" % str(event).left(500)
+	)
+	var index := int(event.get("event_index", -1))
+	_check(
+		not sim.choose_event_option(index, options.size()) and sim.choose_event_option(index, available),
+		"choose_event_option: Option %d gewählt (ungültige abgewiesen)" % available,
+		"choose_event_option abgewiesen"
+	)
+	_check(
+		int(sim.get_open_events()[0].get("chosen_option", -1)) == available,
+		"gewählte Option wartet bis zum nächsten Tag", "chosen_option fehlt"
+	)
+	sim.advance_days(1)
+	var still_open := false
+	for e in sim.get_open_events():
+		still_open = still_open or int(e.get("event_index", -1)) == index
+	var log := sim.get_event_log(50)
+	var logged := false
+	for entry in log:
+		logged = logged or (int(entry.get("event_index", -1)) == index and int(entry.get("state_index", -1)) == baden)
+	_check(not still_open and logged, "Ereignis entschieden und in get_event_log", "Ereignis noch offen oder nicht im Protokoll")
+	var journals := sim.get_journals()
+	var revolution := {}
+	for journal in journals:
+		if str(journal.get("id", "")) == "revolution":
+			revolution = journal
+	_check(
+		bool(revolution.get("started", false)) and not (revolution.get("goals", []) as Array).is_empty()
+		and not (revolution.get("outcomes", []) as Array).is_empty(),
+		"get_journals: %d Journale, Revolution in Stufe „%s“" % [journals.size(), revolution.get("stage_title")],
+		"get_journals: %s" % str(journals).left(500)
+	)
+	var info := sim.get_state_events(baden)
+	_check(
+		not (info.get("laws", []) as Array).is_empty() and not (info.get("approvals", []) as Array).is_empty()
+		and info.has("unrest") and info.has("unrest_target") and info.has("timed"),
+		"get_state_events: Gesetze, Zustimmung, Unruhe %.0f (Ziel %.0f)" % [info.get("unrest", 0.0), info.get("unrest_target", 0.0)],
+		"get_state_events: %s" % str(info).left(500)
+	)
+	_check(
+		sim.get_map_colors(MapModes.MAP_UNRUHE).size() == sim.get_location_count(),
+		"Kartenmodus Unruhe: eine Farbe je Ort", "Kartenmodus Unruhe: falsche Zahl der Farben"
+	)
+	# Bis in den August 1848: Die Bundesversammlung ruht (seit b1, Reichsverweser).
+	sim.advance_days(maxi(0, 165 - _days_since_start(sim)))
+	var revolts := sim.get_revolts()
+	print("  ok  get_revolts: %d Aufstände am %s" % [revolts.size(), sim.get_date_text()])
+	_check(
+		bool(sim.get_diet().get("suspended", false)),
+		"Bundesversammlung ruht am %s" % sim.get_date_text(),
+		"Bundesversammlung tagt noch am %s" % sim.get_date_text()
+	)
+	var chronicle := sim.get_chronicle(0)
+	var turning := 0
+	for entry in chronicle:
+		turning += 1 if bool(entry.get("turning_point", false)) else 0
+	_check(turning > 0, "Chronik: %d Wendepunkte hervorgehoben" % turning, "Chronik ohne Wendepunkte")
+
+
+## Tage seit dem Start des Szenarios 1848 (1. März 1848; grob, für die Testdauer).
+func _days_since_start(sim: SimulationClient) -> int:
+	var date := sim.get_date()
+	return (int(date.get("month", 3)) - 3) * 30 + int(date.get("day", 1))
 
 
 ## Militär im Lesezeichen 1866 (seit M10, Schritt b3, militaer.md Abschnitt 8): Krieg zum Start, Heere,
@@ -1037,6 +1144,15 @@ func _check_invalid_indices(sim: SimulationClient, max_tax: int, player: int) ->
 		and not sim.file_motion(player, SimulationClient.MOTION_REFORM, -1)
 		and not sim.make_demand(player, 0, SimulationClient.DEMAND_LEADERSHIP)
 		and not bool(sim.get_state(player).get("diplomacy", true))
+		# 1648 ohne Ereignisse: nichts offen, kein Ereignisspieler, keine Journale (seit M11).
+		and sim.get_open_events().is_empty()
+		and not sim.choose_event_option(0, 0)
+		and not sim.set_event_player(player)
+		and sim.get_event_player() == -1
+		and sim.get_event_log(5).is_empty()
+		and sim.get_journals().is_empty()
+		and sim.get_state_events(player).is_empty()
+		and sim.get_revolts().is_empty()
 	)
 	_check(
 		rejected,

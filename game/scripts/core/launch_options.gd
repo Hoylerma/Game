@@ -4,9 +4,9 @@ extends RefCounted
 ##
 ##   --screenshot=<pfad>    nach dem Laden simulieren, Bild speichern, beenden
 ##   --tage=<n>             Tage vor dem Screenshot (Standard 60)
-##   --kartenmodus=<0..15>  Kartenmodus (0 Politisch … 5 Kreise, 6 Lebensstandard, 7 Kultur,
+##   --kartenmodus=<0..16>  Kartenmodus (0 Politisch … 5 Kreise, 6 Lebensstandard, 7 Kultur,
 ##                          8 Wirtschaft, 9 Märkte, 10 Verwaltung, 11 Eisenbahnen, 12 Wahlen,
-##                          13 Zollgebiete, 14 Beziehungen, 15 Krieg)
+##                          13 Zollgebiete, 14 Beziehungen, 15 Krieg, 16 Unruhe)
 ##   --ort=<ort_id>         Ort auswählen und Ortsinfo öffnen
 ##   --zoom=<faktor>        Vergrößerung gegenüber der Übersicht (1 = ganze Karte);
 ##                          zentriert auf --ort, sonst auf die Kartenmitte (bis 1: Übersicht)
@@ -23,6 +23,9 @@ extends RefCounted
 ##   --staat=<TAG>          Spielerstaat beim Start (seit M7; Standard: Spieler des Szenarios)
 ##   --wahlabend            Wahlabend der letzten Wahl öffnen, ganz gemeldet (seit M8)
 ##   --partei=<strömung>    Parteienmodus mit dieser Strömung, z. B. liberale (seit M8)
+##   --ereignis             Ereignisse des Spielerstaates warten auf die Wahl; das Ereignisfenster
+##                          zeigt die offenen (seit M11; ohne rechnen Screenshots ohne Spieler)
+##   --journal              Journalfenster öffnen (seit M11)
 
 const DEFAULT_SCREENSHOT_DAYS := 60
 ## Reiter des Fensters „Diplomatie“ für --diplomatie=<reiter>.
@@ -52,6 +55,10 @@ var select_army := false
 var show_game_menu := false
 ## Wahlabend der letzten Wahl vor dem Screenshot öffnen (seit M8).
 var show_election_night := false
+## Ereignisse des Spielerstaates warten auf die Wahl, das Ereignisfenster zeigt sie (seit M11).
+var show_events := false
+## Journalfenster vor dem Screenshot öffnen (seit M11).
+var show_journal := false
 ## Strömung im Parteienmodus beim Start (seit M8); leer = Staat.
 var party_id := ""
 ## Szenario und Spielerstaat beim Start (seit M7); leer = Standard.
@@ -153,6 +160,16 @@ static func parse(args: PackedStringArray) -> LaunchOptions:
 					options.show_election_night = true
 				else:
 					options.problems.append("--wahlabend erwartet keinen Wert, nicht „%s“." % value)
+			"--ereignis":
+				if value.is_empty():
+					options.show_events = true
+				else:
+					options.problems.append("--ereignis erwartet keinen Wert, nicht „%s“." % value)
+			"--journal":
+				if value.is_empty():
+					options.show_journal = true
+				else:
+					options.problems.append("--journal erwartet keinen Wert, nicht „%s“." % value)
 			"--szenario":
 				if value.is_empty():
 					options.problems.append(

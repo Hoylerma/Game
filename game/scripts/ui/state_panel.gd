@@ -16,6 +16,8 @@ signal tax_rate_requested(kind: int, percent: int)
 signal customs_change_requested(customs_union: int)
 ## Fenster „Diplomatie“ öffnen oder schließen (seit M9, Schritt b3).
 signal diplomacy_requested
+## Journalfenster öffnen oder schließen (seit M11, Schritt b4).
+signal journal_requested
 ## Mobilmachung (true) oder Abrüstung gewünscht (seit M10, Schritt b3).
 signal mobilization_requested(mobilize: bool)
 ## Kriegsfenster öffnen oder schließen (seit M10, Schritt b3).
@@ -46,6 +48,9 @@ var _budget_grid: GridContainer = null
 ## Verfassung und Interessengruppen (seit M8): Knopf und Fenster; main.gd liefert die Angaben über
 ## politics_source (SimulationClient.get_state_politics des Spielerstaates).
 var politics_source: Callable = Callable()
+## Seit M11 (b4): events_source (SimulationClient.get_state_events des Spielerstaates) ergänzt das Fenster
+## um Gesetze, Unruhe, Aufstand, befristete Wirkungen und die Zustimmung der Gruppen.
+var events_source: Callable = Callable()
 var _politics_button: Button = null
 var _politics_popup: PopupPanel = null
 var _politics_grid: GridContainer = null
@@ -73,6 +78,11 @@ var _tax_rows: Array[HBoxContainer] = []
 ## Diplomatie (seit M9, Schritt b3): Knopf, nur in Szenarien mit Deutschem Bund.
 var _diplomacy_available := false
 var _diplomacy_button: Button = null
+## Journale (seit M11, Schritt b4): Knopf, nur in Szenarien mit Journalen.
+var _journals_available := false
+var _journal_button: Button = null
+## Zeile mit „Verfassung und Gruppen …“ und „Journale …“ (seit M11).
+var _politics_row: HBoxContainer = null
 ## Zeile mit „Zollunion …“ und „Diplomatie …“ (seit M10), sichtbar, wenn einer der beiden es ist.
 var _window_row: HBoxContainer = null
 ## Militär (seit M10, Schritt b3): Stärke und Stufe der Mobilmachung, Knöpfe; nur in Szenarien mit
@@ -191,6 +201,7 @@ func show_state(state: Dictionary, capital_name: String) -> void:
 	)
 	_update_customs(state)
 	_diplomacy_button.visible = _diplomacy_available
+	_journal_button.visible = _journals_available
 	_window_row.visible = _customs_button.visible or _diplomacy_button.visible
 	_update_military(state)
 	_update_hint()
@@ -198,6 +209,7 @@ func show_state(state: Dictionary, capital_name: String) -> void:
 	if _budget_popup.visible:
 		_fill_budget()
 	_politics_button.visible = bool(state.get("politik", false))
+	_politics_row.visible = _politics_button.visible or _journal_button.visible
 	if _politics_popup.visible:
 		if not _politics_button.visible:
 			_politics_popup.hide()
@@ -230,10 +242,12 @@ func show_unavailable() -> void:
 		_customs_popup.hide()
 	if _diplomacy_button != null:
 		_diplomacy_button.visible = false
+		_journal_button.visible = false
 	if _military_box != null:
 		_military_box.visible = false
 	if _window_row != null:
 		_window_row.visible = false
+		_politics_row.visible = false
 	if _politics_popup != null:
 		_politics_button.visible = false
 		_politics_popup.hide()
@@ -255,6 +269,14 @@ func set_diplomacy_available(available: bool) -> void:
 	_diplomacy_available = available
 	if _diplomacy_button != null and not _state.is_empty():
 		_diplomacy_button.visible = available
+
+
+## Szenario mit Journalen (seit M11, Schritt b4): Knopf „Journale …“ zeigen.
+func set_journals_available(available: bool) -> void:
+	_journals_available = available
+	if _journal_button != null and not _state.is_empty():
+		_journal_button.visible = available
+		_politics_row.visible = _politics_button.visible or available
 
 
 ## Szenario mit Zollunionen (seit M9): Knopf „Zollunion …“ zeigen.
@@ -516,7 +538,7 @@ func _build_politics() -> void:
 	_politics_grid.add_theme_constant_override(&"h_separation", 18)
 	box.add_child(_politics_grid)
 	var caption := Label.new()
-	caption.text = "INTERESSENGRUPPEN (ANTEIL · EINFLUSS)"
+	caption.text = "INTERESSENGRUPPEN (ANTEIL · EINFLUSS · ZUSTIMMUNG)"
 	caption.theme_type_variation = &"CaptionLabel"
 	box.add_child(caption)
 	_politics_groups = VBoxContainer.new()
@@ -565,6 +587,27 @@ func _fill_politics() -> bool:
 			(b as Dictionary).get("influence_percent", 0.0)
 		)
 	)
+	var events: Dictionary = events_source.call() if events_source.is_valid() else {}
+	var approval := {}
+	if not events.is_empty():
+		for law: Variant in events.get("laws", []):
+			_politics_line(str((law as Dictionary).get("group", "")), str((law as Dictionary).get("option", "")))
+		_politics_line("Unruhe", "%d von 100 (Ziel %d)" % [
+			roundi(float(events.get("unrest", 0.0))), roundi(float(events.get("unrest_target", 0.0)))
+		])
+		var revolt: Dictionary = events.get("revolt", {})
+		if not revolt.is_empty():
+			var helper := str(revolt.get("helper_name", ""))
+			_politics_line("Aufstand", "%s seit %s%s" % [
+				str(revolt.get("kind_text", "")), str(revolt.get("since_text", "")),
+				", Truppen aus %s" % helper if not helper.is_empty() else ""
+			])
+		for timed: Variant in events.get("timed", []):
+			_politics_line("Befristet", "%s, bis %s" % [
+				str((timed as Dictionary).get("text", "")), str((timed as Dictionary).get("until_text", ""))
+			])
+		for entry: Variant in events.get("approvals", []):
+			approval[str((entry as Dictionary).get("name", ""))] = float((entry as Dictionary).get("value", 0.0))
 	for entry: Variant in groups:
 		var group := entry as Dictionary
 		var row := HBoxContainer.new()
@@ -583,6 +626,12 @@ func _fill_politics() -> bool:
 			GermanFormat.percent(float(group.get("share_percent", 0.0)), 1),
 			GermanFormat.percent(float(group.get("influence_percent", 0.0)), 1),
 		]
+		var name := str(group.get("name", ""))
+		if approval.has(name):
+			# Zustimmung −10 … +10 (seit M11, ereignisse.md Abschnitt 4.2).
+			values.text += " · %s" % GermanFormat.signed_number(roundi(float(approval[name])))
+			values.tooltip_text = "Anteil · Einfluss · Zustimmung zur Regierung (−10 bis +10)"
+
 		values.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 		row.add_child(values)
 		_politics_groups.add_child(row)
@@ -611,6 +660,23 @@ func _build_diplomacy() -> void:
 	_customs_button.reparent(_window_row)
 	_customs_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_window_row.add_child(_diplomacy_button)
+	_journal_button = Button.new()
+	_journal_button.name = "JournalButton"
+	_journal_button.text = "Journale …"
+	_journal_button.focus_mode = Control.FOCUS_NONE
+	_journal_button.tooltip_text = "Revolution 1848/49 und deutsche Frage: Stufe, Ziele, Weg und Ausgänge (J)"
+	_journal_button.visible = false
+	_journal_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_journal_button.pressed.connect(func() -> void: journal_requested.emit())
+	# „Journale …“ neben „Verfassung und Gruppen …“ (seit M11).
+	_politics_row = HBoxContainer.new()
+	_politics_row.name = "PoliticsRow"
+	_politics_row.add_theme_constant_override(&"separation", 6)
+	parent.add_child(_politics_row)
+	parent.move_child(_politics_row, _politics_button.get_index())
+	_politics_button.reparent(_politics_row)
+	_politics_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_politics_row.add_child(_journal_button)
 
 
 ## Heer und Mobilmachung (seit M10, Schritt b3): Zeile mit den Soldaten unter Waffen und der Stufe,

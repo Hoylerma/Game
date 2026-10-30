@@ -31,6 +31,7 @@ func _initialize() -> void:
 	_test_save_slots()
 	_test_election_tally()
 	_test_party_panel()
+	_test_event_window()
 	if _failures.is_empty():
 		print("UNIT OK (%d Prüfungen)" % _count)
 		quit(0)
@@ -87,13 +88,20 @@ func _test_launch_options() -> void:
 	_true(not defaults.wants_screenshot(), "ohne --screenshot kein Screenshot")
 	var bad_args := PackedStringArray(
 		[
-			"--tage=-3", "--kartenmodus=16", "--unbekannt", "--zoom=0", "--zoom=viel", "--szenario",
+			"--tage=-3", "--kartenmodus=17", "--unbekannt", "--zoom=0", "--zoom=viel", "--szenario",
 			"--staat=", "--partei=", "--verfassung=ja", "--zollunion=ja", "--diplomatie=krieg",
-			"--krieg=frieden", "--heer=1"
+			"--krieg=frieden", "--heer=1", "--ereignis=ja", "--journal=1"
 		]
 	)
 	var bad := LaunchOptions.parse(bad_args)
-	_equal(bad.problems.size(), 13, "fehlerhafte Optionen gemeldet")
+	_equal(bad.problems.size(), 15, "fehlerhafte Optionen gemeldet")
+	_true(not bad.show_events and not bad.show_journal, "fehlerhaftes --ereignis und --journal gelten nicht")
+	var events := LaunchOptions.parse(PackedStringArray(["--ereignis", "--journal", "--kartenmodus=16"]))
+	_true(
+		events.show_events and events.show_journal and events.map_mode == 16 and events.problems.is_empty()
+		and not defaults.show_events and not defaults.show_journal,
+		"Optionen --ereignis, --journal und --kartenmodus=16 (seit M11)"
+	)
 	_true(bad.war_tab == -1 and not bad.select_army, "fehlerhaftes --krieg und --heer öffnen nichts")
 	_equal(bad.diplomacy_tab, -1, "fehlerhaftes --diplomatie öffnet nichts")
 	var party := LaunchOptions.parse(PackedStringArray(["--szenario=voelkerfruehling", "--partei=liberale"]))
@@ -235,7 +243,13 @@ func _test_legend_entries() -> void:
 
 
 func _test_map_modes() -> void:
-	_equal(MapModes.COUNT, 16, "sechzehn Kartenmodi (Krieg seit M10)")
+	_equal(MapModes.COUNT, 17, "siebzehn Kartenmodi (Unruhe seit M11)")
+	_equal(MapModes.MAP_UNRUHE, 16, "Kartenmodus Unruhe = 16 (bridge-api.md)")
+	_equal(MapModes.KEY_HINTS[MapModes.MAP_UNRUHE], "X", "Taste X für Unruhe")
+	_true(InputMap.has_action(&"kartenmodus_unruhe"), "Aktion für den Kartenmodus Unruhe")
+	var x_key := InputEventKey.new()
+	x_key.physical_keycode = KEY_X
+	_equal(MapModes.mode_for_event(x_key), MapModes.MAP_UNRUHE, "Taste X: Unruhe")
 	_equal(MapModes.MAP_KRIEG, 15, "Kartenmodus Krieg = 15 (bridge-api.md)")
 	_equal(MapModes.KEY_HINTS[MapModes.MAP_KRIEG], "Y", "Taste Y (links neben X) für Krieg")
 	_true(InputMap.has_action(&"kartenmodus_krieg"), "Aktion für den Kartenmodus Krieg")
@@ -740,3 +754,40 @@ func _test_party_panel() -> void:
 		"Parteipanel mit nächster und letzter Wahl (%s)" % both
 	)
 	panel.free()
+
+
+func _test_event_window() -> void:
+	var window := EventWindow.new()
+	window._ready() # baut den Inhalt; in _initialize ist der Baum noch nicht bereit
+	_true(not window.is_open(), "Ereignisfenster zu Beginn geschlossen")
+	var effects := PackedStringArray(["Presse: Pressefreiheit", "Unruhe \u221220"])
+	var events: Array[Dictionary] = [
+		{
+			"event_index": 7, "title": "Märzforderungen", "text": "Volksversammlungen fordern …",
+			"state_name": "Baden", "date_text": "", "kind_text": "Ereignis", "turning_point": true,
+			"source": "Siemann 1985", "options": [
+				{"index": 0, "text": "Gewähren", "historical": true, "available": true, "effects": effects},
+				{"index": 1, "text": "Militär", "historical": false, "available": false, "effects": PackedStringArray()},
+			],
+		},
+		{"event_index": 9, "title": "Zweites", "options": []},
+	]
+	window.show_events(events)
+	var text := window.window_text()
+	_true(window.is_open() and text.contains("WENDEPUNKT") and text.contains("1 von 2"), "Wendepunkt und Zähler (%s)" % text)
+	_true(text.contains("◆ Gewähren") and text.contains("[Militär gesperrt]"), "Kompassmarke und gesperrte Option")
+	_true(text.contains("Presse: Pressefreiheit · Unruhe \u221220") and text.contains("ohne unmittelbare Folgen"), "Folgentexte")
+	_true(text.contains("Quelle: Siemann 1985"), "Quelle")
+	window.set_compass(false)
+	_true(not window.window_text().contains("◆"), "Kompass abschaltbar")
+	var chosen: Array[int] = [-1, -1]
+	window.option_chosen.connect(func(e: int, o: int) -> void:
+		chosen[0] = e
+		chosen[1] = o
+	)
+	window.option_button(0).pressed.emit()
+	_true(chosen[0] == 7 and chosen[1] == 0, "Wahl meldet Ereignis und Option")
+	var none: Array[Dictionary] = []
+	window.show_events(none)
+	_true(not window.is_open(), "ohne offene Ereignisse geschlossen")
+	window.free()

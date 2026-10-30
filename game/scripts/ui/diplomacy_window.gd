@@ -719,8 +719,14 @@ func _fill_diet() -> void:
 		GermanFormat.integer(int(_diet.get("plenum_total", 0))),
 		GermanFormat.integer((_diet.get("council", []) as Array).size()),
 	]
+	# Ruht die Versammlung (seit M11, ereignisse.md 5.2), gibt es weder Anträge noch Abstimmungen.
+	var suspended := bool(_diet.get("suspended", false))
+	if suspended:
+		_diet_info.text += " Die Bundesversammlung ruht: keine Anträge, keine Abstimmungen."
 	var motion: Dictionary = _diet.get("motion", {})
-	if motion.is_empty():
+	if suspended:
+		_motion_label.text = "Die Bundesversammlung ruht; Anträge sind erst möglich, wenn sie wieder tagt."
+	elif motion.is_empty():
 		_motion_label.text = "Kein Antrag offen. Je Monat stimmt die Versammlung über höchstens einen ab."
 	else:
 		_motion_label.text = "Offener Antrag von %s: %s – abgestimmt am %s (%s)." % [
@@ -755,7 +761,7 @@ func _fill_diet() -> void:
 		button.name = "Motion%d_%d" % [kind, target]
 		button.set_meta(&"motion", [kind, target])
 		var preview := _sim.get_motion_preview(_player, kind, target)
-		var decision := str(preview.get("decision", "ungueltig"))
+		var decision := str(preview.get("decision", "ungueltig")) if not suspended else "ruht"
 		button.disabled = decision != "angenommen"
 		var text := "%s beantragen" % str(preview.get("text", ""))
 		if decision == "angenommen":
@@ -768,7 +774,11 @@ func _fill_diet() -> void:
 		button.tooltip_text = (
 			"Nötig: %s. Gegner des Antrags: %s. Ein Staat stimmt mit Ja, wenn er uns näher steht als dem Gegner."
 			% [str(preview.get("majority_text", "")), str(preview.get("opponent_name", "–"))]
-			if decision == "angenommen" else "Zur Zeit nicht möglich (offener Antrag oder unpassendes Ziel)."
+			if decision == "angenommen"
+			else (
+				"Die Bundesversammlung ruht." if suspended
+				else "Zur Zeit nicht möglich (offener Antrag oder unpassendes Ziel)."
+			)
 		)
 	var results: Array = _diet.get("results", [])
 	for k in mini(results.size(), MAX_RESULTS):

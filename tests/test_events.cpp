@@ -1265,3 +1265,26 @@ ereignis v.krieg { titel = "Krieg" text = "x" art = dynamisch nur_folge = ja
         }
     }
 }
+
+// ─── Schritt b4: Folgentexte und Ziele der Journale für die Oberfläche ─────────────────────────────────
+
+TEST_CASE("Ereignisse: Folgen als Text und Stand der Journalziele (b4)") {
+    const EventData data;
+    const World w = data.load();
+    const std::vector<std::string> lines =
+        uhrwerk::describe_effects(w, event(w, "test.unruhen").options[0].effects);
+    std::string all;
+    for (const std::string& line : lines) {
+        all += line + "\n";
+    }
+    INFO(all);
+    // Das Vereinsgesetz gilt im Fixture erst ab 1700 (späterer Inhalt), seine Wirkung entfällt beim Laden.
+    REQUIRE(lines.size() == 6);
+    CHECK(lines[0] == "Presse: Pressefreiheit");
+    CHECK(lines[1].find("Zustimmung ") == 0);
+    CHECK(lines[1].find(" +3") != std::string::npos);
+    CHECK(lines[2] == "Unruhe \u221220");
+    CHECK(lines[3] == "Folgt: „Welt“");
+    CHECK(lines[4] == "mit 30 %: Kasse \u22121.000");
+    CHECK(lines[5] == "mit 70 %: Beziehung zu Sachsen +10");
+}
