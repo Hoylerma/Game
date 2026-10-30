@@ -1172,6 +1172,9 @@ struct World {
     // KI (seit M12, Schritt a1), nur mit ai_rules.active: Person im Amt je Staat und Rolle
     // [staat × kPersonRoles + rolle], -1 ohne.
     std::vector<Index> offices;
+    std::vector<AiStrategy> ai_strategy;  // seit a2: je Staat
+    std::vector<AiDecision> ai_log;       // seit a2: KI-Protokoll in zeitlicher Folge (je Staat begrenzt)
+    std::vector<AiCooldown> ai_cooldowns; // seit a2: laufende Abkühlungen nach Staat, Art und Ziel
 
     /// Person im Amt (Herrscher oder leitender Minister) oder -1.
     Index office(Index state, PersonRole role) const;

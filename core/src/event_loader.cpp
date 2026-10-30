@@ -537,6 +537,8 @@ private:
                                                                       : r.ruler_weight_constitutional) = *v;
                         }
                     }
+                } else if (read_ai_rule(child)) {
+                    continue;
                 } else if (child.key == "standard_persoenlichkeit") {
                     if (const auto id = name(child)) {
                         default_personality = *id;
@@ -560,6 +562,53 @@ private:
             }
         }
         r.active = since && *since <= start_;
+    }
+
+    /// Spielwerte der Planer (seit a2, Abschnitte 5 und 6); false bei einem anderen Feld.
+    bool read_ai_rule(const ScriptNode& child) {
+        AiRules& r = world_.ai_rules;
+        struct Value {
+            std::string_view key;
+            Fixed* target;
+            Fixed lo;
+            Fixed hi;
+        };
+        const Value values[] = {
+            {"schwelle", &r.threshold, fx(0), fx(1000)},
+            {"ueberschuss_ab", &r.surplus_from, fx(0), fx(1)},
+            {"unruhe_steuern_ab", &r.unrest_tax_from, fx(0), fx(100)},
+            {"bedrohung_mobil", &r.threat_mobilize, fx(0), fx(100)},
+        };
+        for (const Value& v : values) {
+            if (child.key == v.key) {
+                if (assign(child)) {
+                    if (const auto value = number(child, v.lo, v.hi)) {
+                        *v.target = *value;
+                    }
+                }
+                return true;
+            }
+        }
+        struct Count {
+            std::string_view key;
+            std::int32_t* target;
+            std::int64_t lo;
+            std::int64_t hi;
+        };
+        const Count counts[] = {
+            {"protokoll", &r.log_size, 1, 1000},
+            {"abkuehlung_steuern", &r.tax_cooldown_months, 0, 120},
+            {"abruestung_monate", &r.quiet_months, 1, 120},
+        };
+        for (const Count& c : counts) {
+            if (child.key == c.key) {
+                if (const auto value = integer(child, c.lo, c.hi)) {
+                    *c.target = static_cast<std::int32_t>(*value);
+                }
+                return true;
+            }
+        }
+        return false;
     }
 
     /// Eigenschaften aus einer Liste { kennung kennung … }.

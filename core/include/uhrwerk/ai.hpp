@@ -8,7 +8,11 @@
 #include "uhrwerk/ai_types.hpp"
 #include "uhrwerk/events.hpp"
 #include "uhrwerk/rng.hpp"
+#include "uhrwerk/simulation.hpp"
 #include "uhrwerk/world.hpp"
+
+#include <string>
+#include <vector>
 
 namespace uhrwerk {
 
@@ -36,7 +40,23 @@ Inclinations state_inclinations(const World& world, Index state);
 /// Ist ein Ziel der Agenda aktiv (Zeitfenster und Bedingung im Staat)?
 bool agenda_goal_active(const World& world, const EventCache& cache, Index state, const AgendaGoal& goal);
 
-/// Der Tag der KI (Abschnitt 4.2). Schritt a1: Ämter am Monatsersten.
-void run_ai(World& world, Pcg32& rng, EventCache& cache);
+/// Stärke eines Staates im Lagebild (Abschnitt 4.3): Soldaten unter Waffen, mindestens die Friedensstärke ×
+/// Faktor der Mobilmachung; 0 ohne Militär.
+Fixed ai_strength(const World& world, Index state);
+
+/// Bedrohung des Staates state durch other (Abschnitt 4.3): Stärke von other ÷ eigene Stärke × Feindschaft
+/// × Nähe; 0 ohne Militär oder für sich selbst.
+Fixed ai_threat(const World& world, const EventCache& cache, Index state, Index other);
+
+/// Text eines Grundes, z. B. „Defizit +34“ oder „Bedrohung durch Österreich +12“.
+std::string ai_reason_text(const World& world, const AiReason& reason);
+
+/// Text einer Entscheidung, z. B. „erhöht die Akzise auf 7 %“.
+std::string ai_decision_text(const World& world, const AiDecision& decision);
+
+/// Der Tag der KI (Abschnitt 4.2): am Monatsersten Ämter, Strategie und Planer (Haushalt, Mobilmachung)
+/// für jeden bestehenden Staat außer dem Spielerstaat. Liefert die Befehle der KI; die Simulation reiht sie
+/// ohne Protokoll ein, sie wirken am nächsten Tag.
+std::vector<Command> run_ai(World& world, Pcg32& rng, EventCache& cache);
 
 } // namespace uhrwerk

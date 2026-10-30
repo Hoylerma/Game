@@ -277,8 +277,9 @@ Parlament, Zollunion, Bund und Militär bleibt die Folge der Zufallszahlen wie v
   Protokoll, und in Welten mit Ereignissen tragen die wartenden Befehle Ziel und Aktion. Ohne
   Ereignisse (1648) zählt nichts davon, der Prüfwert der Formatwache bleibt.
 - **Format 6 (M12):** der Inhaltsbereich `ki` (Regeln, Eigenschaften, Staatspersönlichkeiten, Personen,
-  Agenden; eigener Stand `kAiContentVersion`, 1 seit Schritt a1) und in Welten mit KI-Daten im Zustand
-  die Personen im Amt je Staat und Rolle (`aemter`) und der Zufallsstrom `zufall.ki`
+  Agenden; eigener Stand `kAiContentVersion`, 1 seit Schritt a1, 2 seit a2: Spielwerte der Planer) und in
+  Welten mit KI-Daten im Zustand die Personen im Amt je Staat und Rolle (`aemter`), seit a2 die Strategie
+  je Staat, das KI-Protokoll und die Abkühlungen, und der Zufallsstrom `zufall.ki`
   ([ki.md](ki.md), Abschnitt 8). Der Befehl `Ereignisspieler` heißt seit M12 `Spielerstaat` (gleiche
   Nummer im Protokoll). Ein Spielstand im Format 5 zeigt seine Metadaten mit 17 Bereichen an, lädt aber
   nicht. Ohne KI (1648) zählt nichts davon, der Prüfwert der Formatwache bleibt.
