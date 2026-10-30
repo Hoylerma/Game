@@ -42,8 +42,9 @@ constexpr std::uint64_t kMilitaryContentVersion = 9;
 /// Aufstände).
 constexpr std::uint64_t kEventContentVersion = 6;
 
-/// Stand der KI im Zustand (seit M12, Inhaltsbereich ki): 1 = Schritt a1 (Ämter, Strom Ki).
-constexpr std::uint64_t kAiContentVersion = 1;
+/// Stand der KI im Zustand (seit M12, Inhaltsbereich ki): 1 = Schritt a1 (Ämter, Strom Ki), 2 = a2
+/// (Strategie, Protokoll, Abkühlung; Planer Haushalt und Mobilmachung).
+constexpr std::uint64_t kAiContentVersion = 2;
 
 bool fail(std::string* error, std::string message) {
     if (error != nullptr) {
@@ -1145,6 +1146,31 @@ std::string validate_state(const Simulation& sim) {
                 return "Amt mit ungültiger Person";
             }
         }
+        if (w.ai_strategy.size() != S) {
+            return "Strategie der KI ungültig";
+        }
+        for (const AiStrategy& st : w.ai_strategy) {
+            if (!none_or_in(st.rival, S) || st.quiet_months < 0) {
+                return "Strategie der KI ungültig";
+            }
+        }
+        for (const AiDecision& d : w.ai_log) {
+            if (!in(d.state, S) || static_cast<std::size_t>(d.kind) >= kAiDecisionKinds ||
+                d.reason_count > kAiReasons || !is_valid(d.date)) {
+                return "KI-Protokoll ungültig";
+            }
+            for (const AiReason& r : d.reasons) {
+                if (static_cast<std::size_t>(r.factor) >= kAiFactors || !none_or_in(r.other, S)) {
+                    return "KI-Protokoll ungültig";
+                }
+            }
+        }
+        for (const AiCooldown& c : w.ai_cooldowns) {
+            if (!in(c.state, S) || static_cast<std::size_t>(c.kind) >= kAiDecisionKinds ||
+                !is_valid(c.until)) {
+                return "Abkühlung der KI ungültig";
+            }
+        }
     }
     return {};
 }
@@ -1776,6 +1802,13 @@ ContentFingerprint content_fingerprint(const World& w) {
             h.fixed(r.ruler_weight_absolute);
             h.fixed(r.ruler_weight_constitutional);
             h.i64(r.default_personality);
+            h.fixed(r.threshold); // seit a2
+            h.i64(r.log_size);
+            h.i64(r.tax_cooldown_months);
+            h.fixed(r.surplus_from);
+            h.fixed(r.unrest_tax_from);
+            h.fixed(r.threat_mobilize);
+            h.i64(r.quiet_months);
             const auto inclinations = [&h](const Inclinations& values) {
                 for (const Fixed f : values) {
                     h.fixed(f);

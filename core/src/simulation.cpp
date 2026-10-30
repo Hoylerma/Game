@@ -360,9 +360,14 @@ void Simulation::step_day() {
         run_events(world_, rng_events_, event_cache_);
     }
 
-    // 6f. KI der Staaten: Ämter am Monatsersten (seit M12, ki.md Abschnitt 4.2), nur mit KI-Daten.
+    // 6f. KI der Staaten: Ämter, Strategie und Planer am Monatsersten (seit M12, ki.md Abschnitte 4–6), nur
+    //     mit KI-Daten.
+    // Die Befehle der KI wirken wie die des Spielers am nächsten Tag; sie stehen nicht im Protokoll (eine
+    // Wiederholung rechnet sie aus dem Zustand neu).
     if (ai_active(world_)) {
-        run_ai(world_, rng_ai_, event_cache_);
+        for (const Command& command : run_ai(world_, rng_ai_, event_cache_)) {
+            pending_.push_back(command);
+        }
     }
 
     // 7. Jahreswechsel.

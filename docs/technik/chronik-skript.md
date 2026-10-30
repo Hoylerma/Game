@@ -1394,6 +1394,14 @@ ki {
     gewicht_herrscher_absolut = 0.6      # 0 … 1; der leitende Minister erhält den Rest
     gewicht_herrscher_konstitutionell = 0.4
     standard_persoenlichkeit = bewahrer  # für Staaten ohne Agenda
+    # seit a2 (ki.md Abschnitte 5 und 6)
+    schwelle = 10                        # Nutzen, ab dem ein Planer handelt, 0 … 1000
+    protokoll = 20                       # Einträge im KI-Protokoll je Staat, 1 … 1000
+    abkuehlung_steuern = 3               # Monate nach einer Steueränderung, 0 … 120
+    ueberschuss_ab = 0.15                # Überschussanteil, ab dem Steuern sinken, 0 … 1
+    unruhe_steuern_ab = 50               # Unruhe, ab der Steuern sinken, 0 … 100
+    bedrohung_mobil = 1.5                # Bedrohung durch einen mobilen Nachbarn, 0 … 100
+    abruestung_monate = 2                # ruhige Monatserste bis zur Abrüstung, 1 … 120
 }
 persoenlichkeit machtpolitiker { name = "Machtpolitiker" risiko = 1 expansion = 2 legitimitaet = -1 vermittlung = -1 }
 eigenschaft zauderer { name = "Zauderer" risiko = -2 }

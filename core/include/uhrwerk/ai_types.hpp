@@ -35,6 +35,77 @@ struct AiRules {
     Fixed ruler_weight_absolute = Fixed::from_ratio(3, 5);       // Gewicht des Herrschers ohne Verfassung
     Fixed ruler_weight_constitutional = Fixed::from_ratio(2, 5); // … in konstitutionellen Staaten
     Index default_personality = -1;                              // Staatspersönlichkeit ohne Agenda
+    // Seit Schritt a2 (Abschnitte 5 und 6.1, 6.3).
+    Fixed threshold = Fixed::from_int(10);         // Nutzen, ab dem ein Planer handelt (schwelle)
+    std::int32_t log_size = 20;                    // Einträge im KI-Protokoll je Staat (protokoll)
+    std::int32_t tax_cooldown_months = 3;          // Monate nach einer Steueränderung (abkuehlung_steuern)
+    Fixed surplus_from = Fixed::from_ratio(3, 20); // Überschussanteil, ab dem Steuern sinken (ueberschuss_ab)
+    Fixed unrest_tax_from = Fixed::from_int(50);   // Unruhe, ab der Steuern sinken (unruhe_steuern_ab)
+    Fixed threat_mobilize = Fixed::from_ratio(3, 2); // Bedrohung, ab der gegen einen mobilen Nachbarn
+                                                     // mobil gemacht wird (bedrohung_mobil)
+    std::int32_t quiet_months = 2; // Monatserste ohne Krieg und Krise bis zur Abrüstung (abruestung_monate)
+};
+
+/// Faktor eines Nutzens (Abschnitt 5); seine Bezeichnung liefert ai_reason_text.
+enum class AiFactor : std::uint8_t {
+    Deficit,   // Defizit des Vormonats
+    DebtRatio, // Schuldenquote über der Grenze
+    Surplus,   // Überschuss des Vormonats
+    Unrest,    // Unruhe
+    Thrift,    // Neigung Sparsamkeit
+    Reform,    // Neigung Reform
+    Risk,      // Neigung Risiko
+    Threat,    // Bedrohung durch einen Staat (other)
+    Mobilized, // ein Nachbar ist mobil (other)
+    Quiet,     // weder Krieg noch Krise
+};
+inline constexpr std::size_t kAiFactors = 10;
+
+/// Ein Grund: Faktor, betroffener Staat (oder -1) und Beitrag zum Nutzen.
+struct AiReason {
+    AiFactor factor = AiFactor::Deficit;
+    Index other = -1;
+    Fixed value;
+
+    friend bool operator==(const AiReason&, const AiReason&) = default;
+};
+inline constexpr std::size_t kAiReasons = 3;
+
+/// Art einer Entscheidung im KI-Protokoll.
+enum class AiDecisionKind : std::uint8_t { RaiseTax, LowerTax, Mobilize, Demobilize };
+inline constexpr std::size_t kAiDecisionKinds = 4;
+
+/// Eintrag im KI-Protokoll: wer, wann, was, mit welchem Nutzen und den drei wichtigsten Gründen.
+struct AiDecision {
+    Date date;
+    Index state = -1;
+    AiDecisionKind kind = AiDecisionKind::RaiseTax;
+    Index target = -1; // Steuerart bzw. Staat; -1 ohne
+    Fixed value;       // neuer Steuersatz bzw. 0
+    Fixed utility;     // Nutzen mit Rauschen
+    std::uint8_t reason_count = 0;
+    std::array<AiReason, kAiReasons> reasons{};
+
+    friend bool operator==(const AiDecision&, const AiDecision&) = default;
+};
+
+/// Abkühlung: Bis 'until' plant der Staat diese Art gegen dieses Ziel nicht neu.
+struct AiCooldown {
+    Index state = -1;
+    AiDecisionKind kind = AiDecisionKind::RaiseTax;
+    Index target = -1;
+    Date until;
+
+    friend bool operator==(const AiCooldown&, const AiCooldown&) = default;
+};
+
+/// Strategie eines Staates (Abschnitt 4.2), am Monatsersten neu bestimmt.
+struct AiStrategy {
+    Index rival = -1;              // Rivale: Ziel von „schwaechen“ oder größte Bedrohung
+    Index goal = -1;               // Hauptziel: Index in den Zielen der Agenda, -1 ohne
+    std::int32_t quiet_months = 0; // Monatserste mobil ohne Krieg und Krise in Folge
+
+    friend bool operator==(const AiStrategy&, const AiStrategy&) = default;
 };
 
 /// Eigenschaft einer Person (Kapitel 13, Abschnitt 1.2) mit ihrem Beitrag zu den Neigungen.

@@ -23,6 +23,16 @@ Schritt in Abschnitt 13 dort.
   bestimmt; ein Wechsel steht in der Chronik. Der Befehl `Ereignisspieler` heißt jetzt `Spielerstaat`.
   Inhaltsbereich `ki`, Spielstand **Format 6** (Spielstände aus M11 laden nicht mehr); `uhrwerk-cli info`
   mit Zeile „KI“. Personen und Agenden 1848–1871 folgen mit Schritt b1; 1648 bitgleich.
+- **Rahmen der Planer, Haushalt und Mobilmachung (Schritt a2):** Am Monatsersten bestimmt die KI für
+  jeden bestehenden Staat außer dem Spielerstaat Hauptziel und Rivalen (größte Bedrohung aus Stärke,
+  Feindschaft und Nähe) und rechnet ihre Planer. Jede Option ist eine Summe benannter Faktoren mit
+  Rauschen aus dem Strom `Ki`; über der Schwelle gibt die KI denselben Befehl wie ein Spieler (ohne
+  Eintrag im Befehlsprotokoll) und schreibt ihr KI-Protokoll mit den drei wichtigsten Gründen
+  („Schuldenquote +30“). **Haushalt:** Kontribution oder Akzise steigen bei Defizit und hoher
+  Schuldenquote und sinken bei großem Überschuss oder hoher Unruhe, mit drei Monaten Abkühlung.
+  **Mobilmachung:** gegen einen bedrohlichen, feindlichen mobilen Nachbarn; Abrüstung nach zwei
+  ruhigen Monatsersten (bisher blieben Staaten nach Kriegen mobil). Inhaltsbereich `ki` Stand 2;
+  1648 bitgleich.
 
 ### Meilenstein M11 – Ereignisse und Revolution 1848/49
 

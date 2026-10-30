@@ -455,6 +455,32 @@ template <typename Sim, typename V> void StateAccess::visit(Sim& sim, V& v) {
     // Staat und Rolle.
     if (w.ai_rules.active) {
         list(v, "aemter", w.offices, Extent::Content, [&](auto& o) { v.field("", o); });
+        // Seit Schritt a2: Strategie je Staat, KI-Protokoll und Abkühlungen.
+        list(v, "ki_strategie", w.ai_strategy, Extent::Content, [&](auto& s) {
+            v.field("rivale", s.rival);
+            v.field("ziel", s.goal);
+            v.field("ruhig", s.quiet_months);
+        });
+        list(v, "ki_protokoll", w.ai_log, Extent::State, [&](auto& d) {
+            v.field("datum", d.date);
+            v.field("staat", d.state);
+            v.field("art", d.kind);
+            v.field("ziel", d.target);
+            v.field("wert", d.value);
+            v.field("nutzen", d.utility);
+            v.field("gruende", d.reason_count);
+            for (auto& r : d.reasons) {
+                v.field("faktor", r.factor);
+                v.field("staat", r.other);
+                v.field("beitrag", r.value);
+            }
+        });
+        list(v, "ki_abkuehlung", w.ai_cooldowns, Extent::State, [&](auto& c) {
+            v.field("staat", c.state);
+            v.field("art", c.kind);
+            v.field("ziel", c.target);
+            v.field("bis", c.until);
+        });
     }
 
     v.field("zufall.demografie", sim.rng_demography_);

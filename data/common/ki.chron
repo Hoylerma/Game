@@ -14,6 +14,15 @@ ki {
     gewicht_herrscher_absolut         = 0.6   # Herrscher ohne Verfassung oder ständisch; Minister 0,4
     gewicht_herrscher_konstitutionell = 0.4   # … in konstitutionellen Staaten; Minister 0,6
     standard_persoenlichkeit = bewahrer       # Staaten ohne Agenda
+
+    # Planer (seit Schritt a2, Abschnitte 5 und 6)
+    schwelle           = 10     # Nutzen, ab dem ein Planer handelt
+    protokoll          = 20     # Entscheidungen im KI-Protokoll je Staat
+    abkuehlung_steuern = 3      # Monate nach einer Steueränderung (beide Richtungen)
+    ueberschuss_ab     = 0.15   # Überschussanteil der Einnahmen, ab dem Steuern sinken
+    unruhe_steuern_ab  = 50     # Unruhe, ab der Steuern sinken (ohne Krieg)
+    bedrohung_mobil    = 1.5    # Bedrohung durch einen mobilen Nachbarn, ab der der Staat mobil macht
+    abruestung_monate  = 2      # Monatserste mobil ohne Krieg und Krise bis zur Abrüstung
 }
 
 # Staatspersönlichkeiten (Kapitel 21, Abschnitt 3.1; ki.md Abschnitt 3.2). Neigungen je −2 … +2.

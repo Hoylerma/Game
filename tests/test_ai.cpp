@@ -5,6 +5,7 @@
 
 #include "test_hilfen.hpp"
 #include "uhrwerk/ai.hpp"
+#include "uhrwerk/military.hpp"
 #include "uhrwerk/savegame.hpp"
 #include "uhrwerk/simulation.hpp"
 
@@ -107,6 +108,8 @@ public:
     }
 
     uhrwerk::LoadResult result() const { return uhrwerk::load_world(dir_.path()); }
+
+    const testhilfen::TempDir& dir() const { return dir_; }
 
     World load() const {
         uhrwerk::LoadResult r = result();
@@ -319,4 +322,148 @@ TEST_CASE("KI: Spielstand, Fingerabdruck und Spielerstaat") {
     CHECK(a.parts[kAiPart] != 0);
     CHECK(a.parts[kAiPart] != b.parts[kAiPart]);
     CHECK(uhrwerk::content_differences(a, b) == std::vector<std::string_view>{"ki"});
+}
+
+namespace {
+
+/// Monatserster mit gesetztem Haushalt: Einnahmen und Ausgaben des Vormonats, Schulden, Jahreseinnahmen.
+void set_budget(World& w, std::string_view tag, std::int64_t income, std::int64_t expenses,
+                std::int64_t debt) {
+    uhrwerk::State& s = w.states[static_cast<std::size_t>(w.find_state(tag))];
+    s.last_month_income = fx(income);
+    s.last_month_expenses = fx(expenses);
+    s.debt = fx(debt);
+    s.yearly_income = fx(income * 12);
+    s.tax_rates[0] = Fixed::from_ratio(10, 100); // Kontribution
+    s.tax_rates[1] = Fixed::from_ratio(5, 100);  // Akzise
+}
+
+std::string quiet_rules() {
+    std::string rules(kAiRules);
+    rules.replace(rules.find("rauschen = 8"), 12, "rauschen = 0");
+    return rules;
+}
+
+} // namespace
+
+TEST_CASE("KI: Haushalt – Steuern nach Defizit und Überschuss, mit Gründen und Abkühlung") {
+    World w = AiData(quiet_rules()).load();
+    w.date = uhrwerk::Date{1648, 11, 1};
+    uhrwerk::EventCache cache;
+    uhrwerk::rebuild_event_cache(w, cache);
+    uhrwerk::ensure_ai_state(w, cache);
+    // Brandenburg: Defizit 20 % und Schuldenquote 10; Sachsen: Überschuss 40 % ohne Schulden; Anhalt
+    // ausgeglichen.
+    set_budget(w, "BRA", 1000, 1200, 120000);
+    set_budget(w, "SAX", 1000, 600, 0);
+    set_budget(w, "ANH", 1000, 1000, 0);
+    uhrwerk::Pcg32 rng(1, uhrwerk::RngStream::Ki);
+    const std::vector<uhrwerk::Command> commands = uhrwerk::run_ai(w, rng, cache);
+    REQUIRE(commands.size() == 2);
+    const Index bra = w.find_state("BRA");
+    const Index sax = w.find_state("SAX");
+    CHECK(commands[0].type == uhrwerk::CommandType::SetTaxRate);
+    CHECK(commands[0].state == bra);
+    CHECK(commands[0].kind == uhrwerk::TaxKind::Akzise); // die niedrigere steigt
+    CHECK(commands[0].value == Fixed::from_ratio(5, 100) + Fixed::from_ratio(1, 100));
+    CHECK(commands[1].state == sax);
+    CHECK(commands[1].kind == uhrwerk::TaxKind::Kontribution); // die höhere sinkt
+    CHECK(commands[1].value == Fixed::from_ratio(10, 100) - Fixed::from_ratio(1, 100));
+    // Protokoll mit den drei wichtigsten Gründen.
+    REQUIRE(w.ai_log.size() == 2);
+    const uhrwerk::AiDecision& raise = w.ai_log[0];
+    CHECK(raise.kind == uhrwerk::AiDecisionKind::RaiseTax);
+    CHECK(raise.reason_count == 3);
+    CHECK(raise.reasons[0].factor == uhrwerk::AiFactor::DebtRatio); // min(30, 10 × (10 − 3))
+    CHECK(raise.reasons[0].value == fx(30));
+    CHECK(raise.reasons[1].factor == uhrwerk::AiFactor::Deficit);
+    CHECK(raise.reasons[1].value.round() == 20); // 100 × 200 ÷ 1.000
+    CHECK(uhrwerk::ai_reason_text(w, raise.reasons[0]) == "Schuldenquote +30");
+    CHECK(uhrwerk::ai_decision_text(w, raise) == "erhöht die Akzise auf 6 %");
+    CHECK(uhrwerk::ai_decision_text(w, w.ai_log[1]) == "senkt die Kontribution auf 9 %");
+    // Abkühlung: im nächsten Monat keine neue Steueränderung; der Spielerstaat bleibt unberührt.
+    w.date = uhrwerk::Date{1648, 12, 1};
+    w.event_player = w.find_state("ANH");
+    set_budget(w, "ANH", 1000, 1500, 120000);
+    CHECK(uhrwerk::run_ai(w, rng, cache).empty());
+    CHECK(w.ai_cooldowns.size() == 2);
+    // Nach drei Monaten wieder.
+    w.date = uhrwerk::Date{1649, 2, 1};
+    CHECK(uhrwerk::run_ai(w, rng, cache).size() == 2);
+}
+
+TEST_CASE("KI: Protokoll je Staat begrenzt") {
+    std::string rules = quiet_rules();
+    rules.replace(rules.find("abkuehlung = 6"), 14,
+                  "abkuehlung = 6\n    protokoll = 2\n    abkuehlung_steuern = 0");
+    World w = AiData(rules).load();
+    uhrwerk::EventCache cache;
+    uhrwerk::rebuild_event_cache(w, cache);
+    uhrwerk::ensure_ai_state(w, cache);
+    uhrwerk::Pcg32 rng(1, uhrwerk::RngStream::Ki);
+    for (std::int32_t month = 1; month <= 5; ++month) {
+        w.date = uhrwerk::Date{1649, month, 1};
+        set_budget(w, "BRA", 1000, 1200, 120000);
+        uhrwerk::run_ai(w, rng, cache);
+    }
+    std::size_t brandenburg = 0;
+    for (const uhrwerk::AiDecision& d : w.ai_log) {
+        brandenburg += d.state == w.find_state("BRA") ? 1 : 0;
+    }
+    CHECK(brandenburg == 2);
+    CHECK(w.ai_log.back().date == uhrwerk::Date{1649, 5, 1});
+}
+
+namespace {
+
+constexpr std::string_view kNeighbors = "ort_a;ort_b;grenze;fluss\n"
+                                        "berlin_coelln;potsdam;120;0\n"
+                                        "potsdam;zerbst;40;1\n"
+                                        "zerbst;dessau;60;0\n"
+                                        "dessau;leipzig;50;5\n"
+                                        "leipzig;dresden;90;3\n";
+
+constexpr std::string_view kMilitary = "militaer {\n    seit = 1648.01.01\n    fluss_rang = 3\n}\n"
+                                       "heerwesen standard {\n    bewaffnung = 1\n    geschuetze = 2\n    "
+                                       "mobilmachung = 2\n    mobilmachung_tage = 20\n}\n"
+                                       "garnison bra_berlin { staat = BRA ort = berlin_coelln anteil = 1 }\n"
+                                       "garnison sax_dresden { staat = SAX ort = dresden anteil = 1 }\n";
+
+} // namespace
+
+TEST_CASE("KI: Abrüstung nach zwei ruhigen Monatsersten, nicht für den Spielerstaat") {
+    for (const bool player : {false, true}) {
+        CAPTURE(player);
+        AiData data(quiet_rules());
+        testhilfen::write_file(data.dir() / "karte/nachbarn.csv", kNeighbors);
+        testhilfen::write_file(data.dir() / "common/militaer.chron", kMilitary);
+        Simulation sim(data.load());
+        const Index bra = sim.world().find_state("BRA");
+        if (player) {
+            uhrwerk::Command p;
+            p.type = uhrwerk::CommandType::PlayerState;
+            p.state = bra;
+            sim.submit(p);
+        }
+        uhrwerk::Command mobilize;
+        mobilize.type = uhrwerk::CommandType::Mobilization;
+        mobilize.state = bra;
+        mobilize.value = Fixed::one();
+        sim.submit(mobilize);
+        while (sim.world().date < uhrwerk::Date{1648, 12, 3}) {
+            sim.step_day();
+        }
+        const auto phase = uhrwerk::mobilization_phase(sim.world(), bra);
+        const bool demobilized =
+            std::any_of(sim.world().ai_log.begin(), sim.world().ai_log.end(), [&](const auto& d) {
+                return d.state == bra && d.kind == uhrwerk::AiDecisionKind::Demobilize;
+            });
+        if (player) {
+            CHECK_FALSE(demobilized);
+            CHECK(phase != uhrwerk::MobilizationPhase::Demobilizing);
+        } else {
+            CHECK(demobilized);
+            CHECK(phase == uhrwerk::MobilizationPhase::Demobilizing);
+        }
+    }
 }

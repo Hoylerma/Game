@@ -232,6 +232,12 @@ Befehlsprotokoll** (eine Wiederholung rechnet sie neu; Entscheidung 4). Die Plan
 Staaten nacheinander; jeder Staat liest nur das Lagebild, nicht die Befehle der anderen desselben
 Tages. Das hält das Ergebnis unabhängig von der Zahl der Threads.
 
+Präzisiert in Schritt a2: Die Strategie (Hauptziel und Rivale) wird **jeden Monatsersten** vor den
+Planern neu bestimmt; das kostet wenig und folgt Frieden und Amtswechsel ohne eigenen Auslöser. Am
+Monatsersten läuft die KI nach den Ereignissen (Schritt 6f des Tages): erst die Ämter, dann je
+bestehendem Staat außer dem Spielerstaat in der Reihenfolge der Staaten Strategie, Haushalt und
+Mobilmachung.
+
 ### 4.3 Lagebild
 
 Je Staat am Monatsersten, nicht im Spielstand (aus dem Zustand berechenbar):
@@ -241,7 +247,8 @@ Je Staat am Monatsersten, nicht im Spielstand (aus dem Zustand berechenbar):
 - **Bedrohung** durch einen Staat = Stärke des anderen ÷ eigene Stärke × Feindschaft (Beziehung
   unter 0: 1 + |Beziehung|/100, sonst 1 − Beziehung/400) × Nähe (gemeinsame Grenze 1, im Bund 0,6,
   sonst 0,3). Der Staat mit der größten Bedrohung ist der **Rivale**, sofern die Agenda keinen nennt.
-- **Finanzen**: Saldo der letzten drei Monate, Schuldenquote (Schulden ÷ Jahreseinnahmen), Zins.
+- **Finanzen**: Saldo des Vormonats (Einnahmen − Ausgaben; präzisiert in a2 statt drei Monate, die
+  Abkühlung der Steuern glättet), Schuldenquote (Schulden ÷ Jahreseinnahmen).
 - **Innere Lage**: Unruhe, Zielwert der Unruhe, laufender Aufstand, Zustimmung von Militär und Adel.
 - **Bund und Lager**: Lager im Bund, Zollunion, offene Anträge, laufende Spiele und Kriege mit
   Kriegspunkten und Müdigkeit.
@@ -263,7 +270,15 @@ Nutzen(option) = Σ faktor_i        (Festkomma, je Faktor ein Name: „Bedrohung
   schreiben die Chronik mit Gründen und das **KI-Protokoll** des Staates (letzte 20 Entscheidungen
   mit Datum, Art, Ziel und Gründen; im Spielstand).
 - **Abkühlung**: Nach einer Forderung, Kriegserklärung oder einem abgelehnten Angebot wartet der
-  Planer für dieselbe Art und denselben Gegner `ki_abkuehlung` Monate (Standard 12).
+  Planer für dieselbe Art und denselben Gegner `abkuehlung` Monate (Standard 12); nach einer
+  Steueränderung `abkuehlung_steuern` Monate (Standard 3, beide Richtungen), nach einer Mobilmachung
+  ebenso lange.
+
+Präzisiert in Schritt a2: Schwelle `schwelle` (Standard 10) für alle Planer; das Rauschen wird nur für
+Optionen gezogen, deren Bedingung gilt, in fester Reihenfolge. Die Faktoren tragen einen Staat, wo es
+einen gibt („Bedrohung durch Österreich +12“). Das KI-Protokoll hält je Staat die letzten `protokoll`
+Entscheidungen (Standard 20) mit Datum, Art, Ziel, neuem Wert, Nutzen und drei Gründen; in a2 schreibt
+nur die Mobilmachung zusätzlich die Chronik (über den Befehl).
 
 ## 6. Domänen-Planer (M12a)
 
@@ -280,6 +295,17 @@ Ersetzt die festen Sätze der Staaten ohne Spieler (wirtschaft.md 4.6).
   Zollunion (wie beim Spieler).
 - Im Krieg und bei Mobilmachung zählt das Defizit halb; Kredit und Bankrott bleiben Regeln des
   Kerns.
+
+Präzisiert in Schritt a2 (Spielwerte in `common/ki.chron`):
+
+| Option | Bedingung | Faktoren |
+|---|---|---|
+| erhöhen | Saldo < 0 und Schuldenquote > `schulden_grenze` | Defizit = min(50, 100 × Defizit ÷ Einnahmen, im Krieg oder mobil halb); Schuldenquote = min(30, 10 × (Quote − Grenze)); Sparsamkeit = 10 × Neigung; Unruhe = −½ × Unruhe; Reform = −5 × Neigung |
+| senken | Überschuss > `ueberschuss_ab` (15 %) der Einnahmen und Quote < 1, oder Unruhe > `unruhe_steuern_ab` (50) ohne Krieg | Überschuss = min(50, 100 × (Anteil − 15 %)); Unruhe = ½ × (Unruhe − 50); Sparsamkeit = −10 × Neigung; Reform = 5 × Neigung |
+
+Erhöht wird die niedrigere von Kontribution und Akzise (bei Gleichstand die Akzise) um einen Punkt,
+bei einem Defizit-Faktor ab 30 um zwei; gesenkt die höhere (bei Gleichstand die Kontribution) um einen
+Punkt. Gewinnt die größere Option mit Rauschen über der Schwelle. Der Zoll bleibt unberührt.
 
 ### 6.2 Diplomatie
 
@@ -308,6 +334,11 @@ Präsidialmacht eher mit Ja).
   dem Gegner beisteht. Kriegsziel ist das Ziel der Agenda.
 - **Mobilmachung**: bei Krise Stufe 3 (wie der Generalstab), zusätzlich wenn ein Nachbar mobil macht
   und die Bedrohung über 1,5 liegt; **Abrüstung** 60 Tage nach Frieden und Krise.
+  Präzisiert in a2: Mobil gegen einen Nachbarn nur bei Beziehung unter 0 (Faktor Bedrohung =
+  10 + 20 × (Bedrohung − `bedrohung_mobil`), Risiko + 5 × Neigung, Sparsamkeit − 5 × Neigung).
+  Abrüstung nach `abruestung_monate` (2) Monatsersten in Folge, an denen der Staat mobil ist, ohne
+  Krieg, ohne eigene Krise auf Stufe 3, ohne Hilfe gegen einen Aufstand und ohne Mobilmachung einer
+  Krise (Faktor Frieden = 10 × Monate, Sparsamkeit + 5, Risiko − 5 je Neigungspunkt).
 - **Weitere Kriegsziele** im Krieg, wenn die Kriegspunkte die Kosten der eigenen Ziele um 50 %
   übersteigen und die Agenda ein weiteres Ziel gegen die Gegenseite hat.
 - **Frieden**: Angebot und Annahme nach Nutzen: Kriegspunkte gegen Kosten, Müdigkeit beider Seiten,
@@ -482,4 +513,5 @@ Weitere Tests:
 | Schritt | Stand |
 |---|---|
 | – | Entscheidungen 1–14 wie empfohlen freigegeben; Umsetzung beginnt mit a1 |
+| a2 | **erledigt:** Takt am Monatsersten nach den Ereignissen (Ämter, Strategie mit Hauptziel und Rivale, Planer), Lagebild (Stärke, Bedrohung mit Feindschaft und Nähe), Nutzen als Summe benannter Faktoren mit Rauschen aus dem Strom `Ki`, Schwelle, KI-Protokoll je Staat mit drei Gründen (`ai_reason_text`, `ai_decision_text`), Abkühlung; Planer Haushalt (Kontribution und Akzise nach Defizit, Schuldenquote, Überschuss und Unruhe) und Mobilmachung (gegen bedrohliche mobile Nachbarn, Abrüstung nach zwei ruhigen Monatsersten). KI-Befehle gehen ohne Protokoll in die Warteschlange und wirken am nächsten Tag; der Spielerstaat bleibt unberührt. Zustand: Strategie, Protokoll, Abkühlungen; Inhaltsbereich Stand 2. Tests in `test_ai.cpp`; 1648 bitgleich |
 | a1 | **erledigt:** Regeln, sechs Staatspersönlichkeiten und 16 Eigenschaften in `common/ki.chron` (chronik-skript.md 3.37), Personen mit Amt, Amtszeit, Bedingung, Werten und Eigenschaften (`common/persoenlichkeiten.chron`, 3.38), Agenden mit Staatspersönlichkeit und Zielen (`common/agenden.chron`, 3.39) – geladen nur mit Ereignissen und ab `seit`; Neigungen (`state_inclinations`) und aktive Ziele (`agenda_goal_active`); Ämter je Staat und Rolle, beim Start ohne und am Monatsersten mit Eintrag in der Chronik; Befehl `Spielerstaat` (vorher `Ereignisspieler`); Strom `Ki` im Zustand; Inhaltsbereich `ki`, Spielstand Format 6; `uhrwerk-cli info` mit Zeile „KI“. Personen und Agenden 1848–1871 folgen mit b1. Tests in `test_ai.cpp`; 1648 bitgleich |
