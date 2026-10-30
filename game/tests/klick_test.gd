@@ -539,6 +539,7 @@ func _check_new_game() -> void:
 	await _check_customs_ui(sim)
 	await _check_war_ui(menu)
 	await _check_war_bookmarks()
+	_check_revolution_paths()
 
 	# Ein Spielstand von 1648 lässt sich im Spiel von 1848 aus der Liste laden.
 	_main.call("open_game_menu")
@@ -1133,26 +1134,87 @@ func _check_election_night(sim: SimulationClient) -> void:
 	print("  Wahlen 1848: Taste Ä, Wahlabend am 1. Mai (%d Meldungen schrittweise), Ergebnis = Hochrechnung" % partial)
 
 
-## Offene Ereignisse im Ereignisfenster mit der ersten möglichen Option beantworten (seit M11);
-## Zahl der gewählten Optionen.
-func _answer_events() -> int:
+## Offene Ereignisse im Ereignisfenster beantworten (seit M11): mit der bevorzugten Option aus
+## preferred (Kennung des Ereignisses → Kennung der Option), sonst der Standardoption (größtes
+## Gewicht, wie das Ereignislabor), sonst der ersten möglichen; Zahl der gewählten Optionen.
+func _answer_events(preferred: Dictionary = {}) -> int:
 	var window: EventWindow = _main.call("event_window")
 	var answered := 0
 	for _round in 20:
 		if not window.is_open():
 			break
-		var chosen := false
-		for option: Variant in window.current_event().get("options", []):
-			var button := window.option_button(int((option as Dictionary).get("index", -1)))
-			if button != null and not button.disabled:
-				button.pressed.emit()
-				chosen = true
-				answered += 1
-				break
-		if not chosen:
+		var event := window.current_event()
+		var wanted := str(preferred.get(str(event.get("id", "")), ""))
+		var standard := int(event.get("default_option", -1))
+		var target: Button = null
+		var target_rank := 0
+		for option: Variant in event.get("options", []):
+			var index := int((option as Dictionary).get("index", -1))
+			var button := window.option_button(index)
+			if button == null or button.disabled:
+				continue
+			var rank := 3 if str((option as Dictionary).get("id", "")) == wanted else (2 if index == standard else 1)
+			if rank > target_rank:
+				target = button
+				target_rank = rank
+		var chosen := target != null
+		if chosen:
+			target.pressed.emit()
+			answered += 1
+		else:
 			_fail("Ereignisfenster ohne mögliche Option: %s" % window.window_text().left(300))
 			break
 	return answered
+
+
+## Abnahme M11 (ereignisse.md Abschnitt 10): Als Baden die Märzforderungen mit dem Militär
+## beantworten und einen Aufstand erleben; als Preußen die Krone annehmen (Wahlen der Strategie
+## „krone“ des Ereignislabors) und den Ausgang „Reich der Paulskirche“ erreichen. Alle Wahlen gehen
+## über das Ereignisfenster.
+func _check_revolution_paths() -> void:
+	_main.call("start_new_game", "voelkerfruehling", "BAD")
+	var sim: SimulationClient = _main.call("simulation")
+	var baden := sim.get_state_index("BAD")
+	var revolt := ""
+	for _day in 90:
+		sim.advance_days(1)
+		_main.call("_check_open_events")
+		_answer_events({"maerz.forderungen": "militaer"})
+		for entry in sim.get_revolts():
+			if int(entry.get("state_index", -1)) == baden:
+				revolt = "%s seit %s" % [entry.get("kind_text"), entry.get("since_text")]
+		if not revolt.is_empty():
+			break
+	if revolt.is_empty() or revolt.contains("Ã"):
+		_fail("Baden lehnt die Märzforderungen ab: Aufstand „%s“ bis %s" % [revolt, sim.get_date_text()])
+	var revolt_shown := str(sim.get_state_events(baden).get("revolt", {}).get("kind_text", ""))
+	if not revolt.is_empty() and revolt_shown.is_empty():
+		_fail("Aufstand in Baden fehlt in get_state_events")
+	_main.call("start_new_game", "voelkerfruehling", "PRU")
+	sim = _main.call("simulation")
+	var crown := {"pru.kaiserdeputation": "annehmen", "pru.barrikaden": "abziehen", "pru.dreiklassen": "behalten"}
+	var outcome := {}
+	var answered := 0
+	for _day in 500:
+		sim.advance_days(1)
+		_main.call("_check_open_events")
+		answered += _answer_events(crown)
+		for journal in sim.get_journals():
+			if str(journal.get("id", "")) == "revolution" and bool(journal.get("finished", false)):
+				outcome = journal
+		if not outcome.is_empty():
+			break
+	var accepted := false
+	for entry in sim.get_event_log(400):
+		if str(entry.get("title", "")).contains("Kaiserdeputation") and int(entry.get("state_index", -1)) == sim.get_state_index("PRU"):
+			accepted = str(entry.get("option_text", "")).contains("Krone annehmen")
+	if str(outcome.get("stage_id", "")) != "reich_paulskirche" or not accepted:
+		_fail("Krone angenommen: Ausgang „%s“ am %s (Deputation im Protokoll: %s)" % [
+			outcome.get("stage_title", "offen"), sim.get_date_text(), accepted
+		])
+	print("  Revolution: Baden mit dem Militär → Aufstand (%s); Preußen nimmt die Krone an → %s am %s (%d Wahlen im Fenster)" % [
+		revolt, outcome.get("stage_title", "offen"), outcome.get("since_text", "–"), answered
+	])
 
 
 ## Ereignisse und Journale (seit M11, Schritt b4): Das Ereignisfenster hält die Zeit an, das Tempo

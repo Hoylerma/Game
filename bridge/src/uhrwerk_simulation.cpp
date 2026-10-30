@@ -3152,6 +3152,7 @@ std::int64_t UhrwerkSimulation::get_save_format_version() const {
 
 namespace {
 
+// Texte mit Umlauten über to_godot (UTF-8); ein String aus const char* liest Latin-1.
 String event_kind_text(uhrwerk::EventKind kind) {
     switch (kind) {
     case uhrwerk::EventKind::Historical:
@@ -3159,7 +3160,7 @@ String event_kind_text(uhrwerk::EventKind kind) {
     case uhrwerk::EventKind::Dynamic:
         return "dynamisch";
     case uhrwerk::EventKind::Atmospheric:
-        return "atmosphärisch";
+        return to_godot("atmosphärisch");
     }
     return {};
 }
@@ -3167,7 +3168,7 @@ String event_kind_text(uhrwerk::EventKind kind) {
 String revolt_kind_text(uhrwerk::RevoltKind kind) {
     switch (kind) {
     case uhrwerk::RevoltKind::Barricades:
-        return "Barrikadenkämpfe";
+        return to_godot("Barrikadenkämpfe");
     case uhrwerk::RevoltKind::Agrarian:
         return "Agrarunruhen";
     case uhrwerk::RevoltKind::Uprising:
