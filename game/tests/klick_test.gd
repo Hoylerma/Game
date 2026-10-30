@@ -535,6 +535,7 @@ func _check_new_game() -> void:
 	# bund.uebergabe, seit M11), dann ist kein Antrag möglich.
 	await _check_diplomacy_ui(sim)
 	await _check_election_night(sim)
+	await _check_events_ui(sim)
 	await _check_customs_ui(sim)
 	await _check_war_ui(menu)
 	await _check_war_bookmarks()
@@ -1043,10 +1044,14 @@ func _check_election_night(sim: SimulationClient) -> void:
 	var before: Dictionary = sim.get_location(mannheim).get("wahl", {})
 	if before.is_empty() or bool(before.get("held", true)):
 		_fail("Ortsinfo Mannheim vor der Wahl: %s" % str(before))
+	_answer_events()
 	_main.call("set_speed", 5)
 	for _frame in 3000:
 		if night.is_open():
 			break
+		# Ereignisse halten die Zeit an (seit M11); hier gilt jeweils die erste mögliche Option.
+		if _answer_events() > 0:
+			_main.call("set_speed", 5)
 		await process_frame
 	if not night.is_open():
 		_fail("Wahlabend öffnet nicht am Wahltag (%s)" % sim.get_date_text())
@@ -1098,6 +1103,7 @@ func _check_election_night(sim: SimulationClient) -> void:
 		_fail("Ortsinfo Mannheim nach der Wahl ohne Ergebnis (%s)" % str(after))
 	night.close_requested.emit()
 	await _frames(1)
+	_answer_events() # ein Ereignis am Wahltag hält die Zeit weiter an, bis es entschieden ist
 	if night.is_open() or not left.visible or int(_main.call("speed")) != 5:
 		_fail("Wahlabend schließen: offen %s, linke Spalte %s, Tempo %d" % [
 			night.is_open(), left.visible, int(_main.call("speed"))
@@ -1125,6 +1131,106 @@ func _check_election_night(sim: SimulationClient) -> void:
 	night.close_requested.emit()
 	await _frames(1)
 	print("  Wahlen 1848: Taste Ä, Wahlabend am 1. Mai (%d Meldungen schrittweise), Ergebnis = Hochrechnung" % partial)
+
+
+## Offene Ereignisse im Ereignisfenster mit der ersten möglichen Option beantworten (seit M11);
+## Zahl der gewählten Optionen.
+func _answer_events() -> int:
+	var window: EventWindow = _main.call("event_window")
+	var answered := 0
+	for _round in 20:
+		if not window.is_open():
+			break
+		var chosen := false
+		for option: Variant in window.current_event().get("options", []):
+			var button := window.option_button(int((option as Dictionary).get("index", -1)))
+			if button != null and not button.disabled:
+				button.pressed.emit()
+				chosen = true
+				answered += 1
+				break
+		if not chosen:
+			_fail("Ereignisfenster ohne mögliche Option: %s" % window.window_text().left(300))
+			break
+	return answered
+
+
+## Ereignisse und Journale (seit M11, Schritt b4): Das Ereignisfenster hält die Zeit an, das Tempo
+## bleibt gesperrt, die Wahl schließt es und setzt das Tempo fort; Taste J öffnet die Journale, das
+## Spielmenü die bisherigen Ereignisse; Kartenmodus Unruhe (Taste X); die ruhende Bundesversammlung.
+func _check_events_ui(sim: SimulationClient) -> void:
+	var window: EventWindow = _main.call("event_window")
+	var player := sim.get_player_state_index()
+	if sim.get_event_player() != player:
+		_fail("Ereignisspieler %d statt des Spielerstaates %d" % [sim.get_event_player(), player])
+	_answer_events()
+	_main.call("set_speed", 5)
+	for _frame in 3000:
+		if window.is_open():
+			break
+		await process_frame
+	if not window.is_open():
+		_fail("Kein Ereignis für %s bis %s" % [sim.get_state(player).get("short_name"), sim.get_date_text()])
+		_main.call("set_speed", 0)
+		return
+	var text := window.window_text()
+	if int(_main.call("speed")) != 0 or not text.contains("Quelle:") or window.option_button(0) == null:
+		_fail("Ereignisfenster: Tempo %d, „%s“" % [int(_main.call("speed")), text.left(300)])
+	_main.call("set_speed", 3)
+	var bar: TopBar = _main.call("top_bar")
+	if int(_main.call("speed")) != 0 or not bar.speed_line_text().contains("Erst das Ereignis entscheiden"):
+		_fail("Tempo bei offenem Ereignis: %d, Meldung „%s“" % [int(_main.call("speed")), bar.speed_line_text()])
+	var event := window.current_event()
+	var index := int(event.get("event_index", -1))
+	var answered := _answer_events()
+	# Gleich nach der Wahl, vor dem nächsten Bild: Danach läuft die Zeit und das Ereignis ist entschieden.
+	var chosen := false
+	for open in sim.get_open_events():
+		chosen = chosen or (int(open.get("event_index", -1)) == index and int(open.get("chosen_option", -1)) >= 0)
+	if window.is_open() or not chosen or int(_main.call("speed")) != 3:
+		_fail("Nach der Wahl: Fenster offen %s, gewählt %s, Tempo %d" % [window.is_open(), chosen, int(_main.call("speed"))])
+	_main.call("set_speed", 0)
+	_answer_events()
+	# Journale: Taste J, Reiter je Journal und „Bisherige Ereignisse“, Escape schließt.
+	var journal: JournalWindow = _main.call("journal_window")
+	await _key(KEY_J)
+	var journal_text := journal.window_text()
+	if not journal.is_open() or journal.tab_count() < 3 or not journal_text.contains("Stufe „"):
+		_fail("Taste J: Journal offen %s, %d Reiter, „%s“" % [journal.is_open(), journal.tab_count(), journal_text.left(300)])
+	await _key(KEY_ESCAPE)
+	if journal.is_open():
+		_fail("Escape schließt das Journalfenster nicht")
+	var menu: GameMenu = _main.call("game_menu")
+	_main.call("open_game_menu")
+	var events_button := menu.find_child("EventsButton", true, false) as Button
+	if events_button == null or not events_button.visible:
+		_fail("Spielmenü ohne Knopf „Ereignisse“")
+	else:
+		events_button.pressed.emit()
+		await _frames(1)
+		if menu.is_open() or not journal.is_open() or not journal.is_event_log_shown() or not journal.window_text().contains(" · "):
+			_fail("Spielmenü „Ereignisse“: Menü %s, Journal %s, „%s“" % [menu.is_open(), journal.is_open(), journal.window_text().left(300)])
+	_main.call("close_journal")
+	# Kartenmodus Unruhe (Taste X) mit Legende.
+	await _key(KEY_X)
+	var legend := _texts(_main.get("_legend"))
+	if int(_main.call("map_mode")) != MapModes.MAP_UNRUHE or not legend.contains("ruhig"):
+		_fail("Taste X: Modus %d, Legende „%s“" % [int(_main.call("map_mode")), legend.left(200)])
+	_main.call("set_map_mode", MapModes.MAP_POLITICAL)
+	# Ab Juli 1848 ruht die Bundesversammlung: Das Fenster sagt es, Anträge sind gesperrt.
+	if bool(sim.get_diet().get("suspended", false)):
+		_main.call("open_diplomacy", 1)
+		await _frames(1)
+		var diplomacy: DiplomacyWindow = _main.call("diplomacy_window")
+		var reform := diplomacy.find_child("Motion%d_-1" % SimulationClient.MOTION_REFORM, true, false) as Button
+		if not diplomacy.window_text().contains("Die Bundesversammlung ruht") or reform == null or not reform.disabled:
+			_fail("Ruhende Bundesversammlung: „%s“" % diplomacy.window_text().left(400))
+		_main.call("close_diplomacy")
+	else:
+		_fail("Die Bundesversammlung tagt noch am %s" % sim.get_date_text())
+	print("  Ereignisse: „%s“ hält die Zeit an (%d Optionen gewählt), Taste J, Spielmenü „Ereignisse“, Taste X" % [
+		str(event.get("title", "")), answered
+	])
 
 
 ## Texte aller Labels unter node (Tests).

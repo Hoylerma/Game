@@ -123,6 +123,14 @@ const REQUIRED_METHODS: Array[StringName] = [
 	&"add_war_goal",
 	&"get_peace_preview",
 	&"offer_peace",
+	&"get_open_events",
+	&"choose_event_option",
+	&"set_event_player",
+	&"get_event_player",
+	&"get_event_log",
+	&"get_journals",
+	&"get_state_events",
+	&"get_revolts",
 	&"campaign",
 	&"get_party",
 	&"get_campaign",
@@ -379,7 +387,7 @@ func get_chronicle_size() -> int:
 
 
 ## Chronikeinträge ab from_index als Dictionaries
-## { date_text, text, location_index, state_index }.
+## { date_text, text, location_index, state_index, turning_point (seit M11: von einem Wendepunkt) }.
 func get_chronicle(from_index: int) -> Array[Dictionary]:
 	var entries: Array[Dictionary] = []
 	var result: Variant = _native.call(&"get_chronicle", from_index)
@@ -573,6 +581,54 @@ func get_sieges() -> Array[Dictionary]:
 ## attacker_losses, defender_losses, battles, player_side, player_leads }.
 func get_wars() -> Array[Dictionary]:
 	return _as_dictionaries(_native.call(&"get_wars"))
+
+
+## Ereignisse (seit M11, Schritt b4, bridge-api.md): offene Ereignisse des Spielers, je { event_index,
+## id, title, text, state_index, state_name, date_text, since_text, due_text, days_left, source, kind_text,
+## turning_point, chosen_option (-1: noch nicht gewählt), default_option, options: je { index, id, text,
+## historical, available, effects (PackedStringArray) } }.
+func get_open_events() -> Array[Dictionary]:
+	return _as_dictionaries(_native.call(&"get_open_events"))
+
+
+## Option eines offenen Ereignisses wählen (wirksam am nächsten Tag); false, wenn ungültig.
+func choose_event_option(event_index: int, option_index: int) -> bool:
+	return bool(_native.call(&"choose_event_option", event_index, option_index))
+
+
+## Staat, dessen Ereignisse auf die Wahl warten (-1: keiner); false ohne Ereignisse (1648).
+func set_event_player(state_index: int) -> bool:
+	return bool(_native.call(&"set_event_player", state_index))
+
+
+func get_event_player() -> int:
+	return int(_native.call(&"get_event_player"))
+
+
+## Eingetretene Ereignisse, neueste zuerst: je { event_index, title, date_text, state_index, state_name,
+## turning_point, kind_text, option_text, historical }.
+func get_event_log(limit: int) -> Array[Dictionary]:
+	return _as_dictionaries(_native.call(&"get_event_log", limit))
+
+
+## Journale: je { index, id, title, text, end_text, started, stage_id, stage_title, stage_text, finished,
+## rating, since_text, goals: je { text, done, counting, count, target }, history: je { title,
+## date_text, outcome }, outcomes: je { id, title, rating, text, fallback } }.
+func get_journals() -> Array[Dictionary]:
+	return _as_dictionaries(_native.call(&"get_journals"))
+
+
+## Ereignisse eines Staates: { laws: je { group, option }, approvals: je { id, name, color, value }, unrest,
+## unrest_target, revolt: { kind_text, strength, since_text, helper_index, helper_name } oder leer,
+## timed: je { text, until_text }, pending }; leer ohne Ereignisse.
+func get_state_events(state_index: int) -> Dictionary:
+	return _as_dictionary(_native.call(&"get_state_events", state_index))
+
+
+## Laufende Aufstände: je { state_index, state_name, capital_index, kind_text, strength, since_text,
+## helper_index }.
+func get_revolts() -> Array[Dictionary]:
+	return _as_dictionaries(_native.call(&"get_revolts"))
 
 
 ## Mögliche Kriegsziele einer Erklärung an target: je { code, kind, text, cost }; leer, wenn keine

@@ -4,6 +4,7 @@
 #include "uhrwerk/date.hpp"
 #include "uhrwerk/diplomacy.hpp"
 #include "uhrwerk/economy.hpp"
+#include "uhrwerk/events.hpp"
 #include "uhrwerk/loader.hpp"
 #include "uhrwerk/military.hpp"
 #include "uhrwerk/politics.hpp"
@@ -92,6 +93,7 @@ constexpr double kCustomsAlone = 0.62;             // Zollgebiete (seit M9): Sta
 const Color kRelationNeutral(0.94f, 0.91f, 0.83f); // Beziehungen (seit M9, b3): 0 …
 const Color kRelationFriend(0.24f, 0.52f, 0.30f);  // … +100 und mehr
 const Color kRelationFoe(0.70f, 0.16f, 0.10f);     // … −100 und weniger
+const Color kRevoltColor(0.42f, 0.16f, 0.48f);     // Unruhe (seit M11, b4): Staat mit Aufstand
 constexpr double kRelationScale = 100.0;
 constexpr double kWarNeutral =
     0.6; // Krieg (seit M10, b3): Staaten ohne Krieg blass           // volle Farbe ab diesem Betrag
@@ -1200,7 +1202,7 @@ PackedColorArray UhrwerkSimulation::get_map_colors(std::int64_t mode) const {
     if (!w) {
         return colors;
     }
-    ERR_FAIL_COND_V_MSG(mode < MAP_POLITICAL || mode > MAP_KRIEG, colors,
+    ERR_FAIL_COND_V_MSG(mode < MAP_POLITICAL || mode > MAP_UNRUHE, colors,
                         "get_map_colors: unbekannter Kartenmodus.");
 
     const auto count = static_cast<std::int64_t>(w->locations.size());
@@ -1353,6 +1355,19 @@ PackedColorArray UhrwerkSimulation::get_map_colors(std::int64_t mode) const {
             }
             break;
         }
+        case MAP_UNRUHE:
+            // Unruhe (seit M11, b4) des Besitzers von Papier (0) bis Rot (100); Staaten mit laufendem
+            // Aufstand in Violett. Ohne Ereignisse (1648) alles Papier.
+            if (valid_index(w->states, loc.owner)) {
+                const double u =
+                    valid_index(w->unrest, loc.owner) ? at(w->unrest, loc.owner).to_double() / 100.0 : 0.0;
+                color = blend(kRelationNeutral, kRelationFoe, std::clamp(u, 0.0, 1.0));
+                if (std::any_of(w->revolts.begin(), w->revolts.end(),
+                                [&](const uhrwerk::Revolt& r) { return r.state == loc.owner; })) {
+                    color = blend(color, kRevoltColor, 0.6);
+                }
+            }
+            break;
         default:
             break;
         }
@@ -1829,6 +1844,8 @@ Dictionary UhrwerkSimulation::get_diet() const {
     result["results"] = results;
     result["reform_attempts"] = reforms;
     result["reform_accepted"] = reforms_accepted;
+    // Seit M11 (b4): Die Bundesversammlung ruht (1848–1851); dann nimmt sie keine Anträge an.
+    result["suspended"] = w->diet_suspended != 0;
     return result;
 }
 
@@ -2962,6 +2979,34 @@ Array UhrwerkSimulation::get_chronicle(std::int64_t from_index) const {
         return result;
     }
     const auto size = static_cast<std::int64_t>(w->chronicle.size());
+    if (std::max<std::int64_t>(from_index, 0) >= size) {
+        return result;
+    }
+    // Wendepunkte (seit M11, Schritt b4): Einträge, die ein Wendepunkt geschrieben hat, je Tag mit dem
+    // Standardtext „Staat: Titel – Option“ oder den eigenen Chroniktexten der Option (events.cpp).
+    std::unordered_map<std::int32_t, std::vector<std::string>> turning;
+    for (const uhrwerk::EventRecord& r : w->event_log) {
+        if (!valid_index(w->events, r.event) || !at(w->events, r.event).turning_point) {
+            continue;
+        }
+        const uhrwerk::EventDef& e = at(w->events, r.event);
+        if (!valid_index(e.options, r.option)) {
+            continue;
+        }
+        std::vector<std::string>& texts = turning[uhrwerk::to_day_number(r.date)];
+        bool own_entry = false;
+        for (const uhrwerk::Effect& effect : at(e.options, r.option).effects) {
+            if (effect.kind == uhrwerk::EffectKind::Chronicle) {
+                texts.push_back(effect.name);
+                own_entry = true;
+            }
+        }
+        if (!own_entry) {
+            std::string text =
+                valid_index(w->states, r.state) ? at(w->states, r.state).short_name + ": " : "";
+            texts.push_back(text + e.title + " – " + at(e.options, r.option).text);
+        }
+    }
     for (std::int64_t i = std::max<std::int64_t>(from_index, 0); i < size; ++i) {
         const uhrwerk::ChronicleEntry& entry = at(w->chronicle, i);
         Dictionary item;
@@ -2969,6 +3014,9 @@ Array UhrwerkSimulation::get_chronicle(std::int64_t from_index) const {
         item["text"] = to_godot(entry.text);
         item["location_index"] = entry.location;
         item["state_index"] = entry.state;
+        const auto day = turning.find(uhrwerk::to_day_number(entry.date));
+        item["turning_point"] = day != turning.end() && std::find(day->second.begin(), day->second.end(),
+                                                                  entry.text) != day->second.end();
         result.push_back(item);
     }
     return result;
@@ -3100,6 +3148,333 @@ std::int64_t UhrwerkSimulation::get_save_format_version() const {
     return uhrwerk::kSaveFormatVersion;
 }
 
+// ─── Ereignisse (seit M11, Schritt b4, ereignisse.md Abschnitt 9) ──────────────────────────────────────
+
+namespace {
+
+String event_kind_text(uhrwerk::EventKind kind) {
+    switch (kind) {
+    case uhrwerk::EventKind::Historical:
+        return "historisch";
+    case uhrwerk::EventKind::Dynamic:
+        return "dynamisch";
+    case uhrwerk::EventKind::Atmospheric:
+        return "atmosphärisch";
+    }
+    return {};
+}
+
+String revolt_kind_text(uhrwerk::RevoltKind kind) {
+    switch (kind) {
+    case uhrwerk::RevoltKind::Barricades:
+        return "Barrikadenkämpfe";
+    case uhrwerk::RevoltKind::Agrarian:
+        return "Agrarunruhen";
+    case uhrwerk::RevoltKind::Uprising:
+        return "Erhebung";
+    }
+    return {};
+}
+
+PackedStringArray to_godot_lines(const std::vector<std::string>& lines) {
+    PackedStringArray result;
+    for (const std::string& line : lines) {
+        result.append(to_godot(line));
+    }
+    return result;
+}
+
+} // namespace
+
+Array UhrwerkSimulation::get_open_events() const {
+    Array result;
+    const uhrwerk::World* w = world();
+    // Godot fragt jeden Tag: ohne offene Ereignisse ohne den Aufbau des Zwischenspeichers.
+    if (!w || !uhrwerk::events_active(*w) || w->pending_events.empty()) {
+        return result;
+    }
+    uhrwerk::EventCache cache;
+    uhrwerk::rebuild_event_cache(*w, cache);
+    for (const uhrwerk::PendingEvent& p : w->pending_events) {
+        if (!valid_index(w->events, p.event)) {
+            continue;
+        }
+        const uhrwerk::EventDef& e = at(w->events, p.event);
+        Dictionary entry;
+        entry["event_index"] = p.event;
+        entry["id"] = to_godot(e.id);
+        entry["title"] = to_godot(e.title);
+        entry["text"] = to_godot(e.text);
+        entry["state_index"] = p.state;
+        entry["state_name"] = valid_index(w->states, p.state) ? short_name(*w, p.state) : String();
+        entry["date_text"] = e.has_date ? to_godot(uhrwerk::format_date_long(e.date)) : String();
+        entry["since_text"] = to_godot(uhrwerk::format_date_long(p.since));
+        entry["due_text"] = to_godot(uhrwerk::format_date_long(p.due));
+        entry["days_left"] = uhrwerk::to_day_number(p.due) - uhrwerk::to_day_number(w->date);
+        entry["source"] = to_godot(e.source);
+        entry["kind_text"] = event_kind_text(e.kind);
+        entry["turning_point"] = e.turning_point;
+        // Schon gewählt, aber erst am nächsten Tag wirksam (Befehl wartet).
+        std::int64_t chosen = -1;
+        for (const uhrwerk::LoggedCommand& c : simulation_->command_log()) {
+            if (c.day == simulation_->days_elapsed() && c.command.type == uhrwerk::CommandType::EventChoice &&
+                c.command.state == p.state && c.command.value == uhrwerk::Fixed::from_int(p.event)) {
+                chosen = c.command.target;
+            }
+        }
+        entry["chosen_option"] = chosen;
+        const std::vector<uhrwerk::Fixed> weights = uhrwerk::option_weights(*w, cache, e, p.state);
+        Array options;
+        for (std::size_t o = 0; o < e.options.size(); ++o) {
+            const uhrwerk::EventOption& option = e.options[o];
+            Dictionary item;
+            item["index"] = static_cast<std::int64_t>(o);
+            item["id"] = to_godot(option.id);
+            item["text"] = to_godot(option.text);
+            item["historical"] = option.historical;
+            item["available"] = o < weights.size() && weights[o] >= uhrwerk::Fixed::zero();
+            item["effects"] = to_godot_lines(uhrwerk::describe_effects(*w, option.effects));
+            options.append(item);
+        }
+        entry["options"] = options;
+        entry["default_option"] = uhrwerk::default_option(*w, cache, e, p.state);
+        result.append(entry);
+    }
+    return result;
+}
+
+bool UhrwerkSimulation::choose_event_option(std::int64_t event_index, std::int64_t option_index) {
+    const uhrwerk::World* w = world();
+    if (!w || !valid_index(w->events, event_index) ||
+        !valid_index(at(w->events, event_index).options, option_index)) {
+        return false;
+    }
+    const auto pending = std::find_if(w->pending_events.begin(), w->pending_events.end(),
+                                      [&](const uhrwerk::PendingEvent& p) { return p.event == event_index; });
+    if (pending == w->pending_events.end()) {
+        return false;
+    }
+    uhrwerk::EventCache cache;
+    uhrwerk::rebuild_event_cache(*w, cache);
+    const std::vector<uhrwerk::Fixed> weights =
+        uhrwerk::option_weights(*w, cache, at(w->events, event_index), pending->state);
+    if (!valid_index(weights, option_index) || at(weights, option_index) < uhrwerk::Fixed::zero()) {
+        return false; // nicht verfügbar
+    }
+    uhrwerk::Command command;
+    command.type = uhrwerk::CommandType::EventChoice;
+    command.state = pending->state;
+    command.value = uhrwerk::Fixed::from_int(event_index);
+    command.target = static_cast<uhrwerk::Index>(option_index);
+    simulation_->submit(command);
+    return true;
+}
+
+bool UhrwerkSimulation::set_event_player(std::int64_t state_index) {
+    const uhrwerk::World* w = world();
+    if (!w || !uhrwerk::events_active(*w) || (state_index != -1 && !valid_index(w->states, state_index))) {
+        return false;
+    }
+    uhrwerk::Command command;
+    command.type = uhrwerk::CommandType::EventPlayer;
+    command.state = static_cast<uhrwerk::Index>(state_index);
+    simulation_->submit(command);
+    return true;
+}
+
+std::int64_t UhrwerkSimulation::get_event_player() const {
+    const uhrwerk::World* w = world();
+    return w ? w->event_player : -1;
+}
+
+Array UhrwerkSimulation::get_event_log(std::int64_t limit) const {
+    Array result;
+    const uhrwerk::World* w = world();
+    if (!w || limit <= 0) {
+        return result;
+    }
+    // Neueste zuerst.
+    for (auto it = w->event_log.rbegin(); it != w->event_log.rend() && result.size() < limit; ++it) {
+        if (!valid_index(w->events, it->event)) {
+            continue;
+        }
+        const uhrwerk::EventDef& e = at(w->events, it->event);
+        Dictionary entry;
+        entry["event_index"] = it->event;
+        entry["title"] = to_godot(e.title);
+        entry["date_text"] = to_godot(uhrwerk::format_date_long(it->date));
+        entry["state_index"] = it->state;
+        entry["state_name"] = valid_index(w->states, it->state) ? short_name(*w, it->state) : String();
+        entry["turning_point"] = e.turning_point;
+        entry["kind_text"] = event_kind_text(e.kind);
+        const bool has_option = valid_index(e.options, it->option);
+        entry["option_text"] = has_option ? to_godot(at(e.options, it->option).text) : String();
+        entry["historical"] = has_option && at(e.options, it->option).historical;
+        result.append(entry);
+    }
+    return result;
+}
+
+Array UhrwerkSimulation::get_journals() const {
+    Array result;
+    const uhrwerk::World* w = world();
+    if (!w || !uhrwerk::events_active(*w)) {
+        return result;
+    }
+    uhrwerk::EventCache cache;
+    uhrwerk::rebuild_event_cache(*w, cache);
+    for (std::size_t j = 0; j < w->journals.size(); ++j) {
+        const uhrwerk::JournalDef& def = w->journals[j];
+        const uhrwerk::JournalState state =
+            j < w->journal_states.size() ? w->journal_states[j] : uhrwerk::JournalState{};
+        Dictionary entry;
+        entry["index"] = static_cast<std::int64_t>(j);
+        entry["id"] = to_godot(def.id);
+        entry["title"] = to_godot(def.title);
+        entry["text"] = to_godot(def.text);
+        entry["end_text"] = def.has_end ? to_godot(uhrwerk::format_date_long(def.end)) : String();
+        entry["started"] = valid_index(def.stages, state.stage);
+        if (valid_index(def.stages, state.stage)) {
+            const uhrwerk::JournalStage& stage = at(def.stages, state.stage);
+            entry["stage_id"] = to_godot(stage.id);
+            entry["stage_title"] = to_godot(stage.title);
+            entry["stage_text"] = to_godot(stage.text);
+            entry["finished"] = stage.outcome;
+            entry["rating"] = to_godot(stage.rating);
+            entry["since_text"] = to_godot(uhrwerk::format_date_long(state.since));
+            Array goals;
+            for (const uhrwerk::JournalGoal& goal : stage.goals) {
+                const uhrwerk::JournalGoalStatus status = uhrwerk::journal_goal_status(*w, cache, goal);
+                Dictionary g;
+                g["text"] = to_godot(goal.text);
+                g["done"] = status.done;
+                g["counting"] = goal.counting;
+                g["count"] = status.count;
+                g["target"] = goal.target;
+                goals.append(g);
+            }
+            entry["goals"] = goals;
+        } else {
+            entry["finished"] = false;
+            entry["goals"] = Array();
+        }
+        Array history;
+        for (const uhrwerk::JournalStep& step : w->journal_history) {
+            if (step.journal != static_cast<uhrwerk::Index>(j) || !valid_index(def.stages, step.stage)) {
+                continue;
+            }
+            Dictionary h;
+            h["title"] = to_godot(at(def.stages, step.stage).title);
+            h["date_text"] = to_godot(uhrwerk::format_date_long(step.date));
+            h["outcome"] = at(def.stages, step.stage).outcome;
+            history.append(h);
+        }
+        entry["history"] = history;
+        Array outcomes;
+        for (const uhrwerk::JournalStage& stage : def.stages) {
+            if (!stage.outcome) {
+                continue;
+            }
+            Dictionary o;
+            o["id"] = to_godot(stage.id);
+            o["title"] = to_godot(stage.title);
+            o["rating"] = to_godot(stage.rating);
+            o["text"] = to_godot(stage.text);
+            o["fallback"] = stage.fallback;
+            outcomes.append(o);
+        }
+        entry["outcomes"] = outcomes;
+        result.append(entry);
+    }
+    return result;
+}
+
+Dictionary UhrwerkSimulation::get_state_events(std::int64_t state_index) const {
+    Dictionary result;
+    const uhrwerk::World* w = world();
+    if (!w || !uhrwerk::events_active(*w) || !valid_index(w->states, state_index)) {
+        return result;
+    }
+    const auto state = static_cast<uhrwerk::Index>(state_index);
+    const uhrwerk::State& s = at(w->states, state_index);
+    Array laws;
+    for (std::size_t g = 0; g < w->law_groups.size(); ++g) {
+        const uhrwerk::LawGroup& group = w->law_groups[g];
+        const uhrwerk::Index option = g < s.laws.size() ? s.laws[g] : group.standard;
+        Dictionary law;
+        law["group"] = to_godot(group.name);
+        law["option"] =
+            valid_index(group.options, option) ? to_godot(at(group.options, option).name) : String();
+        laws.append(law);
+    }
+    result["laws"] = laws;
+    Array approvals;
+    const std::size_t groups = w->interest_groups.size();
+    for (std::size_t g = 0; g < groups; ++g) {
+        const std::size_t slot = static_cast<std::size_t>(state_index) * groups + g;
+        Dictionary a;
+        a["id"] = to_godot(w->interest_groups[g].id);
+        a["name"] = to_godot(w->interest_groups[g].name);
+        a["color"] = to_godot(w->interest_groups[g].color);
+        a["value"] = slot < w->approval.size() ? w->approval[slot].to_double() : 0.0;
+        approvals.append(a);
+    }
+    result["approvals"] = approvals;
+    uhrwerk::EventCache cache;
+    uhrwerk::rebuild_event_cache(*w, cache);
+    result["unrest"] = valid_index(w->unrest, state_index) ? at(w->unrest, state_index).to_double() : 0.0;
+    result["unrest_target"] = uhrwerk::unrest_target(*w, cache, state).to_double();
+    Dictionary revolt;
+    for (const uhrwerk::Revolt& r : w->revolts) {
+        if (r.state == state) {
+            revolt["kind_text"] = revolt_kind_text(r.kind);
+            revolt["strength"] = r.strength.to_double();
+            revolt["since_text"] = to_godot(uhrwerk::format_date_long(r.start));
+            revolt["helper_index"] = r.helper;
+            revolt["helper_name"] = valid_index(w->states, r.helper) ? short_name(*w, r.helper) : String();
+        }
+    }
+    result["revolt"] = revolt;
+    Array timed;
+    for (const uhrwerk::TimedEffect& t : w->timed_effects) {
+        if (t.state != state) {
+            continue;
+        }
+        Dictionary entry;
+        entry["text"] = to_godot(t.text);
+        entry["until_text"] = to_godot(uhrwerk::format_date_long(t.until));
+        timed.append(entry);
+    }
+    result["timed"] = timed;
+    result["pending"] = static_cast<std::int64_t>(
+        std::count_if(w->pending_events.begin(), w->pending_events.end(),
+                      [&](const uhrwerk::PendingEvent& p) { return p.state == state; }));
+    return result;
+}
+
+Array UhrwerkSimulation::get_revolts() const {
+    Array result;
+    const uhrwerk::World* w = world();
+    if (!w) {
+        return result;
+    }
+    for (const uhrwerk::Revolt& r : w->revolts) {
+        if (!valid_index(w->states, r.state)) {
+            continue;
+        }
+        Dictionary entry;
+        entry["state_index"] = r.state;
+        entry["state_name"] = short_name(*w, r.state);
+        entry["capital_index"] = at(w->states, r.state).capital;
+        entry["kind_text"] = revolt_kind_text(r.kind);
+        entry["strength"] = r.strength.to_double();
+        entry["since_text"] = to_godot(uhrwerk::format_date_long(r.start));
+        entry["helper_index"] = r.helper;
+        result.append(entry);
+    }
+    return result;
+}
+
 void UhrwerkSimulation::_bind_methods() {
     using godot::ClassDB;
 
@@ -3200,6 +3575,15 @@ void UhrwerkSimulation::_bind_methods() {
     ClassDB::bind_method(D_METHOD("get_battles"), &UhrwerkSimulation::get_battles);
     ClassDB::bind_method(D_METHOD("get_sieges"), &UhrwerkSimulation::get_sieges);
     ClassDB::bind_method(D_METHOD("get_wars"), &UhrwerkSimulation::get_wars);
+    ClassDB::bind_method(D_METHOD("get_open_events"), &UhrwerkSimulation::get_open_events);
+    ClassDB::bind_method(D_METHOD("choose_event_option", "event_index", "option_index"),
+                         &UhrwerkSimulation::choose_event_option);
+    ClassDB::bind_method(D_METHOD("set_event_player", "state_index"), &UhrwerkSimulation::set_event_player);
+    ClassDB::bind_method(D_METHOD("get_event_player"), &UhrwerkSimulation::get_event_player);
+    ClassDB::bind_method(D_METHOD("get_event_log", "limit"), &UhrwerkSimulation::get_event_log);
+    ClassDB::bind_method(D_METHOD("get_journals"), &UhrwerkSimulation::get_journals);
+    ClassDB::bind_method(D_METHOD("get_state_events", "state_index"), &UhrwerkSimulation::get_state_events);
+    ClassDB::bind_method(D_METHOD("get_revolts"), &UhrwerkSimulation::get_revolts);
     ClassDB::bind_method(D_METHOD("get_declaration_goals", "state_index", "target"),
                          &UhrwerkSimulation::get_declaration_goals);
     ClassDB::bind_method(D_METHOD("get_declaration_sides", "state_index", "target"),
@@ -3247,6 +3631,7 @@ void UhrwerkSimulation::_bind_methods() {
     BIND_ENUM_CONSTANT(MAP_ZOLLGEBIETE);
     BIND_ENUM_CONSTANT(MAP_BEZIEHUNGEN);
     BIND_ENUM_CONSTANT(MAP_KRIEG);
+    BIND_ENUM_CONSTANT(MAP_UNRUHE);
     BIND_ENUM_CONSTANT(TAX_KONTRIBUTION);
     BIND_ENUM_CONSTANT(TAX_AKZISE);
     BIND_ENUM_CONSTANT(TAX_ZOLL);

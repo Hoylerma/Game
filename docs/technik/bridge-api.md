@@ -1,4 +1,4 @@
-# GDExtension-Brücke: Schnittstelle für GDScript (Meilensteine M1 bis M9)
+# GDExtension-Brücke: Schnittstelle für GDScript (Meilensteine M1 bis M11)
 
 Die Brücke (`bridge/`) stellt dem Godot-Projekt genau eine Klasse bereit: **`UhrwerkSimulation`** (erbt von `RefCounted`). Sie besitzt einen `uhrwerk::Simulation`-Kern und übersetzt zwischen Godot-Typen und Kern-Typen.
 
@@ -65,7 +65,7 @@ Die Brücke (`bridge/`) stellt dem Godot-Projekt genau eine Klasse bereit: **`Uh
 | `set_tax_percent(state_index: int, kind: int, percent: int)` | `bool` | seit M5: wie oben für eine Steuerart (`TAX_KONTRIBUTION` 0, `TAX_AKZISE` 1, `TAX_ZOLL` 2); `false` auch bei unbekannter Art und seit M9 für den Zoll eines Mitglieds einer Zollunion (`customs_locked`) |
 | `get_max_tax_rate_percent()` | `int` | Höchstsatz, gilt für alle drei Steuerarten |
 | `get_chronicle_size()` | `int` | |
-| `get_chronicle(from_index: int)` | `Array` | Einträge ab `from_index` als Dictionaries `{ "date_text": String, "text": String, "location_index": int, "state_index": int }` |
+| `get_chronicle(from_index: int)` | `Array` | Einträge ab `from_index` als Dictionaries `{ "date_text": String, "text": String, "location_index": int, "state_index": int, "turning_point": bool }`; `turning_point` (seit M11) markiert Einträge, die ein Wendepunkt geschrieben hat (Standardtext oder `chronik` der Option am selben Tag) |
 | `get_checksum()` | `String` | Prüfsumme als 16-stellige Hexadezimalzahl |
 
 ### Diplomatie (seit M9, Schritt b3)
@@ -85,7 +85,7 @@ zu der Großmacht, zu der seine Beziehung um mehr als 20 besser ist.
 | `get_diplomacy_actions(state_index: int, target: int)` | `Dictionary` | Vorab-Prüfung je Handlung (Entscheidung als Text): `envoy_send`, `envoy_recall`, `alliance`, `guarantee`, `cancel_alliance`, `cancel_guarantee`, `demand_leadership`, `demand_customs_union`, `demand_break_alliance`, `motion_intervention`; dazu `customs_union_name` (Union für `demand_customs_union`), `own_side`, `other_side` (PackedStringArray, Kurznamen der Seiten einer Krise) und `own_strength`, `other_strength` (Soldaten); leer ohne Diplomatie oder bei `state_index == target` |
 | `send_envoy(state_index: int, target: int, send: bool)` | `bool` | Gesandten entsenden (`true`) oder abberufen (`Envoy`-Befehl) |
 | `propose_treaty(state_index: int, target: int, action: int)` | `bool` | `TREATY_ALLIANCE` (0), `TREATY_GUARANTEE` (1), `TREATY_CANCEL_ALLIANCE` (2), `TREATY_CANCEL_GUARANTEE` (3) (`Treaty`-Befehl) |
-| `get_diet()` | `Dictionary` | `name`, `presidency_index`, `presidency_name`, `seat_name`, `plenum` (je Staat mit Stimmen `{ index, short_name, color, votes, camp }`), `plenum_total`, `council` (je Stimme des Engeren Rats `{ name, state_indices, states }`), `motion` (offener Antrag `{ kind, text, applicant_index, applicant_name, filed_text, vote_text, majority_text }`, sonst leer), `results` (Abstimmungen, älteste zuerst, je `{ kind, text, applicant_index, applicant_name, opponent_name, date_text, plenum_yes, plenum_total, council_yes, council_total, council_body (der Engere Rat entscheidet), majority_text, accepted }`), `reform_attempts`, `reform_accepted`; leer ohne Bundesversammlung |
+| `get_diet()` | `Dictionary` | `name`, `presidency_index`, `presidency_name`, `seat_name`, `plenum` (je Staat mit Stimmen `{ index, short_name, color, votes, camp }`), `plenum_total`, `council` (je Stimme des Engeren Rats `{ name, state_indices, states }`), `motion` (offener Antrag `{ kind, text, applicant_index, applicant_name, filed_text, vote_text, majority_text }`, sonst leer), `results` (Abstimmungen, älteste zuerst, je `{ kind, text, applicant_index, applicant_name, opponent_name, date_text, plenum_yes, plenum_total, council_yes, council_total, council_body (der Engere Rat entscheidet), majority_text, accepted }`), `reform_attempts`, `reform_accepted`, `suspended` (seit M11: die Versammlung ruht, keine Anträge und Abstimmungen); leer ohne Bundesversammlung |
 | `get_motion_preview(applicant: int, kind: int, target: int)` | `Dictionary` | Vorab-Prüfung eines Antrags `MOTION_REFORM` (0), `MOTION_CUSTOMS` (1, `target` = Zollunion), `MOTION_INTERVENTION` (2, `target` = Staat) oder `MOTION_PRESIDENCY` (3) (`target` −1 ohne Ziel): `decision`, `text`, `majority_text`; bei `angenommen` die Auszählung von heute wie in `results` (`plenum_yes` … `accepted`, `opponent_name`) |
 | `file_motion(applicant: int, kind: int, target: int)` | `bool` | Antrag stellen (`Motion`-Befehl); nur bei `angenommen` |
 | `get_diplomatic_plays()` | `Array` | laufende Krisen `{ index, kind, kind_text, demander_index, demander_name, target_index, target_name, stage (1–3), stage_text (Protest, Ultimatum, Mobilmachung), days_left, started_text, demander_strength, target_strength, demander_side, target_side (PackedStringArray, Unterstützer ohne die Hauptpartei), demander_escalates, target_escalates, demander_mediation, target_mediation (Vermittlung dieser Seite: `angenommen` oder `abgelehnt`) }` |
@@ -120,6 +120,22 @@ mobil, 2 mobil, 3 rüstet ab), `mobilization_text`, `in_war`, `soldiers_under_ar
 | `get_peace_preview(state_index: int, war_id: int, terms: int)` | `Dictionary` | Vorab-Prüfung (`PEACE_WHITE` 0, `PEACE_OWN_GOALS` 1, `PEACE_CAPITULATION` 2): `valid`, `accepted`, `text` („Österreich nähme an.“) |
 | `offer_peace(state_index: int, war_id: int, terms: int)` | `bool` | Friedensangebot (`PeaceOffer`); ein abgelehntes geht trotzdem hinaus (Chronik) |
 
+### Ereignisse (seit M11, Schritt b4)
+
+Regeln: [ereignisse.md](ereignisse.md), Abschnitte 3 bis 5 und 9. Ohne Ereignisse (1648, vor `seit`)
+sind die Listen leer und die Befehle werden abgewiesen. Die Befehle wirken am nächsten Tag.
+
+| Methode | Rückgabe | Beschreibung |
+|---|---|---|
+| `set_event_player(state_index: int)` | `bool` | Befehl `Ereignisspieler`: Ereignisse dieses Staates (−1: keiner) warten auf die Wahl. Godot schickt ihn beim Start, nach dem Laden und beim Staatswechsel, im Parteienmodus −1 |
+| `get_event_player()` | `int` | Staat, dessen Ereignisse warten (−1: keiner) |
+| `get_open_events()` | `Array` | offene Ereignisse, je `{ event_index, id, title, text, state_index, state_name, date_text (historisches Datum, sonst leer), since_text, due_text, days_left (bis die Standardoption gilt), source, kind_text, turning_point, chosen_option (schon gewählt, wirksam am nächsten Tag; sonst −1), default_option, options }`; je Option `{ index, id, text, historical, available (Bedingung erfüllt), effects (PackedStringArray, Folgentexte) }` |
+| `choose_event_option(event_index: int, option_index: int)` | `bool` | Befehl `Ereigniswahl`; `false` für ein nicht offenes Ereignis oder eine nicht verfügbare Option |
+| `get_event_log(limit: int)` | `Array` | eingetretene Ereignisse, neueste zuerst, höchstens `limit`, je `{ event_index, title, date_text, state_index, state_name, turning_point, kind_text, option_text, historical }` |
+| `get_journals()` | `Array` | je Journal `{ index, id, title, text, end_text, started, stage_id, stage_title, stage_text, finished (Ausgang erreicht), rating, since_text, goals (je `{ text, done, counting, count, target }`), history (je `{ title, date_text, outcome }`), outcomes (je `{ id, title, rating, text, fallback }`) }`; ohne begonnene Stufe fehlen die Angaben zur Stufe |
+| `get_state_events(state_index: int)` | `Dictionary` | `laws` (je `{ group, option }`), `approvals` (je Interessengruppe `{ id, name, color, value }`, −100 … +100), `unrest`, `unrest_target` (0–100), `revolt` (`{ kind_text, strength, since_text, helper_index, helper_name }`, leer ohne Aufstand), `timed` (befristete Wirkungen `{ text, until_text }`), `pending` (offene Ereignisse) |
+| `get_revolts()` | `Array` | laufende Aufstände `{ state_index, state_name, capital_index, kind_text, strength, since_text, helper_index }` |
+
 ### Spielstände (seit M6)
 
 Format, Prüfungen und Godot-Seite: [speicherstaende.md](speicherstaende.md). Pfade sind
@@ -130,7 +146,7 @@ Dateipfade des Betriebssystems (in GDScript `ProjectSettings.globalize_path("use
 | `save_game(path: String, player_state_index: int)` | `String` | Schreibt den Spielstand (Spielerstaat für die Metadaten; ungültiger Index = bisheriger Spielerstaat; seit M8 auch die Strömung aus `set_player_current`), legt den Ordner an. Leer bei Erfolg, sonst die Meldung |
 | `load_game(data_path: String, path: String)` | `String` | Lädt die Spieldaten des Szenarios aus dem Spielstand frisch und den Zustand hinein. Ersetzt die laufende Simulation **nur bei Erfolg**; danach gelten Spielerstaat und Ladehinweise aus diesem Ladevorgang. Leer bei Erfolg, sonst die Meldung (z. B. „Spielstand passt nicht zu den Spieldaten (abweichend: orte)“) |
 | `get_save_info(path: String)` | `Dictionary` | Ohne zu laden: `ok` (bool, Datei lesbar), `compatible` (bool, passt zum Inhalt der geladenen Spieldaten; ein Spielstand eines anderen Szenarios passt nie, `load_game` prüft ihn gegen sein eigenes), `reason` (String, leer wenn passend), `scenario`, `date` (`{ year, month, day }`), `date_text`, `days` (int), `player_tag`, `player_name` (Kurzname, sonst Kennung; nachgeschlagen nur im laufenden Szenario), `player_current` (seit M8: Kennung der Strömung im Parteienmodus, leer = Staat), `format_version` (int), `game_version`, `checksum` (16-stellig hex). Bei `ok == false` nur `ok`, `compatible` und `reason` |
-| `get_save_format_version()` | `int` | Formatversion, die diese Brücke schreibt (2 seit M8, 3 seit M9, 4 seit M10) |
+| `get_save_format_version()` | `int` | Formatversion, die diese Brücke schreibt (2 seit M8, 3 seit M9, 4 seit M10, 5 seit M11) |
 
 ## Kartenmodi (`get_map_colors`)
 
@@ -152,8 +168,9 @@ Dateipfade des Betriebssystems (in GDScript `ProjectSettings.globalize_path("use
 | 13 | `MAP_ZOLLGEBIETE` | seit M9: Zollunionen in ihrer Farbe (`farbe` in `common/zollunionen.chron`), Staaten ohne Union in der Staatsfarbe, zu 62 % mit Weiß gemischt; Orte ohne Daten Alpha 0. Ohne Zollunion im Szenario (1648) ist jeder Staat blass |
 | 14 | `MAP_BEZIEHUNGEN` | seit M9, Schritt b3: Beziehung des Besitzers zum Spielerstaat (`get_player_state_index`), vom Papierton (0) zu Grün (+100) bzw. Rot (−100); der Spielerstaat in seiner Farbe; Orte ohne Daten Alpha 0. Ohne Beziehungen (1648) alles Papierton |
 | 15 | `MAP_KRIEG` | seit M10, Schritt b3: Farbe dessen, der den Ort hält (`get_location_control`); Staaten ohne Krieg zu 60 % mit dem Papierton gemischt; Orte ohne Daten Alpha 0. Besetzte Orte schraffiert Godot in der Farbe des Besetzers, die Fronten sind die Grenzen der Kontrolle |
+| 16 | `MAP_UNRUHE` | seit M11, Schritt b4: Unruhe des Besitzers vom Papierton (0) bis Rot (100); Staaten mit laufendem Aufstand zu 60 % mit Violett gemischt; Orte ohne Daten Alpha 0. Ohne Ereignisse (1648) alles Papierton |
 
-**Orte ohne Daten** (seit M3) erhalten in den Modi 0, 1, 2, 4, 6, 7, 8, 10, 11, 12, 13, 14 und 15 eine Farbe mit **Alpha 0**;
+**Orte ohne Daten** (seit M3) erhalten in den Modi 0, 1, 2, 4, 6, 7, 8, 10, 11, 12, 13, 14, 15 und 16 eine Farbe mit **Alpha 0**;
 die Godot-Seite zeichnet dort eine Schraffur „keine Daten“. In den Modi 3 und 5 haben sie normale
 Farben (Alpha 1), im Modus 9 dann, wenn ihr Markt Orte mit Daten hat.
 

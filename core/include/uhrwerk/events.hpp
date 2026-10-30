@@ -14,6 +14,7 @@
 #include "uhrwerk/world.hpp"
 
 #include <cstdint>
+#include <string>
 #include <vector>
 
 namespace uhrwerk {
@@ -69,5 +70,19 @@ Fixed unrest_emigration_factor(const World& world, Index state);
 /// Faktor auf den Steuerertrag und auf die Kampfkraft der Heere aus befristeten Wirkungen (1 ohne).
 Fixed timed_tax_factor(const World& world, Index state);
 Fixed timed_morale_factor(const World& world, Index state);
+
+/// Folgen von Wirkungen als Text (seit b4, Ereignisfenster und Kompass, ereignisse.md Abschnitt 9): je
+/// Wirkung eine Zeile („Zustimmung Bildungsbürgertum +3“, „Unruhe −20“, „Krieg gegen Dänemark“).
+/// Merkmale und Chronikeinträge sind Buchführung und erscheinen nicht; Wirkungen auf Staaten ohne Orte
+/// zum Start sind beim Laden schon entfallen.
+std::vector<std::string> describe_effects(const World& world, const std::vector<Effect>& effects);
+
+/// Stand eines Ziels einer Journalstufe (seit b4): erfüllt, und mit zaehle der Fortschritt als Zahl
+/// der bestehenden Staaten, für die die Zählbedingung gilt (von goal.target).
+struct JournalGoalStatus {
+    bool done = false;
+    std::int32_t count = 0;
+};
+JournalGoalStatus journal_goal_status(const World& world, const EventCache& cache, const JournalGoal& goal);
 
 } // namespace uhrwerk

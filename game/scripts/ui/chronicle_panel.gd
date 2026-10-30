@@ -9,6 +9,8 @@ signal location_requested(sim_index: int)
 
 ## Höchstzahl angezeigter Einträge (ältere fallen unten heraus).
 const MAX_VISIBLE_ENTRIES := 250
+## Wendepunkte (seit M11): Kopfzeile in der Farbe des Ereignisfensters.
+const TURNING_POINT_COLOR := EventWindow.TURNING_POINT_COLOR
 
 var _total := 0
 
@@ -69,6 +71,10 @@ func _create_item(entry: Dictionary) -> Control:
 	date.theme_type_variation = &"CaptionLabel"
 	date.text = str(entry.get("date_text", ""))
 	date.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	if bool(entry.get("turning_point", false)):
+		date.name = "TurningPoint"
+		date.text = "%s · WENDEPUNKT" % date.text
+		date.add_theme_color_override(&"font_color", TURNING_POINT_COLOR)
 	box.add_child(date)
 	var text := Label.new()
 	text.text = str(entry.get("text", ""))

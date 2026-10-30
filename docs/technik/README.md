@@ -327,7 +327,7 @@ jeden Pull Request:
 | Lasttest (Linux, Release) | 500.000 Blöcke, 3 Spieljahre, Median höchstens 3 s (Puffer für schwankende Runner), gleiche Prüfsummen mit einem Thread; Messwerte in der Zusammenfassung des Laufs ([bevoelkerung.md, Abschnitt 7](bevoelkerung.md#7-lasttest)) |
 | Formatierung | `clang-format-18 --dry-run --Werror` über `core/`, `cli/`, `tests/`, `bridge/` |
 | Python-Werkzeuge (Python 3.10 mit numpy 2.2.6, Python 3.13 mit numpy 2.5.3) | Tests von Archivar, Kartengenerator und Geodaten (ohne Netz); `data/history/` und `data/karte/` sind aktuell (`--pruefen`) |
-| Godot | Brücke bauen, Projekt headless importieren, Einheitentest `unit_test.gd`, Rauchtest `smoke_test.gd`, Klicktest `klick_test.gd` (jeder Ort in drei Zoomstufen), alle Protokolle ohne Skriptfehler; zwei Screenshots der Hauptszene (Xvfb, OpenGL 3) als Artefakt |
+| Godot | Brücke bauen, Projekt headless importieren, Einheitentest `unit_test.gd`, Rauchtest `smoke_test.gd`, Klicktest `klick_test.gd` (jeder Ort in drei Zoomstufen), alle Protokolle ohne Skriptfehler; 14 Screenshots der Hauptszene (Xvfb, OpenGL 3; seit M11 auch Ereignis- und Journalfenster) als Artefakt |
 
 Nur lokal laufen die Prüfungen, die die Rohdaten im Zwischenspeicher `build/geodaten-cache/`
 brauchen: `python3 tools/geodaten/geodaten.py pruefen` (Geometrie passt zu den Quellen) und

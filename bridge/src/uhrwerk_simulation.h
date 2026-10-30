@@ -48,6 +48,7 @@ public:
         MAP_ZOLLGEBIETE = 13,   // seit M9
         MAP_BEZIEHUNGEN = 14,   // seit M9 (b3)
         MAP_KRIEG = 15,         // seit M10 (b3)
+        MAP_UNRUHE = 16,        // seit M11 (b4)
     };
 
     /// Steuerarten für set_tax_percent (seit M5, wie uhrwerk::TaxKind).
@@ -185,6 +186,16 @@ public:
     godot::Dictionary get_peace_preview(std::int64_t state_index, std::int64_t war_id,
                                         std::int64_t terms) const;
     bool offer_peace(std::int64_t state_index, std::int64_t war_id, std::int64_t terms);
+
+    // Ereignisse (seit M11, Schritt b4, ereignisse.md Abschnitt 9)
+    godot::Array get_open_events() const;
+    bool choose_event_option(std::int64_t event_index, std::int64_t option_index);
+    bool set_event_player(std::int64_t state_index);
+    std::int64_t get_event_player() const;
+    godot::Array get_event_log(std::int64_t limit) const;
+    godot::Array get_journals() const;
+    godot::Dictionary get_state_events(std::int64_t state_index) const;
+    godot::Array get_revolts() const;
 
     // Parteienmodus (seit M8, Schritt b2, politik.md Abschnitt 9)
     bool campaign(std::int64_t current, std::int64_t district, std::int64_t action);

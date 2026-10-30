@@ -27,7 +27,7 @@ const DYNAMIC_LEGEND_MODES: PackedInt32Array = [
 	MapModes.MAP_POLITICAL, MapModes.MAP_DENSITY, MapModes.MAP_CONFESSION,
 	MapModes.MAP_DEVASTATION, MapModes.MAP_LEBENSSTANDARD, MapModes.MAP_KULTUR,
 	MapModes.MAP_WIRTSCHAFT, MapModes.MAP_EISENBAHNEN, MapModes.MAP_WAHLEN, MapModes.MAP_ZOLLGEBIETE,
-	MapModes.MAP_BEZIEHUNGEN, MapModes.MAP_KRIEG,
+	MapModes.MAP_BEZIEHUNGEN, MapModes.MAP_KRIEG, MapModes.MAP_UNRUHE,
 ]
 ## Höchstzahl der Kennungen in einer Hinweismeldung.
 const MAX_LISTED_IDS := 20
@@ -102,6 +102,11 @@ var _war_window: WarWindow = null
 var _battle_reports: BattleReports = null
 ## Der Spielerstaat ist untergegangen oder hat die Karte verlassen (Hinweis einmal, Review M10).
 var _player_gone_noticed := false
+## Ereignisse und Journale (seit M11, Schritt b4, ereignisse.md Abschnitt 9).
+var _event_window: EventWindow = null
+var _journal_window: JournalWindow = null
+## Tempo vor dem Ereignisfenster; nach der letzten Wahl geht es damit weiter.
+var _speed_before_event := 0
 ## Kriege beim letzten Aufbau der Legende im Kartenmodus „Krieg“ (_war_signature).
 var _legend_wars := ""
 var _legend_wars_chronicle := -1
@@ -136,9 +141,12 @@ func _ready() -> void:
 	_build_party_panel()
 	_build_diplomacy()
 	_build_war()
+	_build_events()
 	_state_panel.tax_rate_requested.connect(_on_tax_rate_requested)
 	_state_panel.politics_source = func() -> Dictionary:
 		return _sim.get_state_politics(_player) if _sim != null else {}
+	_state_panel.events_source = func() -> Dictionary:
+		return _sim.get_state_events(_player) if _sim != null else {}
 	_state_panel.customs_change_requested.connect(_on_customs_change_requested)
 	_state_panel.customs_source = func() -> Array:
 		return _sim.get_customs_unions() if _sim != null else []
@@ -163,6 +171,7 @@ func _ready() -> void:
 	_map_labels.set_covering_controls([
 		_top_bar, _state_panel, _party_panel, _chronicle_panel, _location_panel, _legend, _mode_bar,
 		_election_night, _diplomacy_window, _play_bar, _army_panel, _war_window, _battle_reports,
+		_event_window, _journal_window,
 	])
 	_update_place_labels()
 	_update_owners()
@@ -171,6 +180,7 @@ func _ready() -> void:
 	_set_map_mode(MapModes.MAP_POLITICAL)
 	_refresh_all()
 	_apply_party_option()
+	_sync_event_player()
 
 	# Erst nach dem ersten Layout sind die Panelgrößen bekannt.
 	await get_tree().process_frame
@@ -220,6 +230,14 @@ func _unhandled_input(event: InputEvent) -> void:
 			return
 	if event.is_action_pressed(&"auswahl_aufheben", false, true) and _diplomacy_window.is_open():
 		close_diplomacy()
+		get_viewport().set_input_as_handled()
+		return
+	if event.is_action_pressed(&"journal", false, true):
+		toggle_journal()
+		get_viewport().set_input_as_handled()
+		return
+	if event.is_action_pressed(&"auswahl_aufheben", false, true) and _journal_window.is_open():
+		close_journal()
 		get_viewport().set_input_as_handled()
 		return
 	if event.is_action_pressed(&"auswahl_aufheben", false, true) and _war_window.is_open():
@@ -488,6 +506,7 @@ func _refresh_all() -> void:
 	_refresh_map()
 	_update_armies()
 	_war_window.refresh()
+	_journal_window.refresh()
 	_pull_chronicle()
 
 
@@ -519,6 +538,7 @@ func _after_time_passed() -> void:
 	var hovered := _map_view.get_hovered()
 	if hovered >= 0:
 		_on_location_hovered(hovered)
+	_check_open_events()
 
 
 func _refresh_map() -> void:
@@ -781,6 +801,8 @@ func _read_scenario_constants() -> bool:
 	_state_panel.set_customs_available(customs)
 	# Diplomatie (seit M9, Schritt b3): Knopf „Diplomatie …“ und Krisenleiste nur mit dem Bund.
 	_state_panel.set_diplomacy_available(bool(_sim.get_diplomacy(_player).get("active", false)))
+	# Journale (seit M11, Schritt b4): Knopf „Journale …“ nur in Szenarien mit Journalen.
+	_state_panel.set_journals_available(not _sim.get_journals().is_empty())
 	_location_panel.player_index = _player
 	# Wahlen (seit M8): Was schon gewählt ist, öffnet keinen Wahlabend mehr.
 	_elections_seen = _sim.get_election_count()
@@ -1156,6 +1178,13 @@ func _rebuild_legend() -> void:
 			else:
 				war.append_array(no_data)
 				_legend.show_swatches(title, war)
+		MapModes.MAP_UNRUHE:
+			var unrest := LegendData.unrest_entries(_sim)
+			if unrest.is_empty():
+				_legend.show_message(title, "Unruhe und Aufstände gibt es erst mit den Ereignissen (seit 1848).")
+			else:
+				unrest.append_array(no_data)
+				_legend.show_swatches(title, unrest)
 		MapModes.MAP_BEZIEHUNGEN:
 			var relations := LegendData.relation_entries(_sim, _player)
 			if relations.is_empty():
@@ -1222,6 +1251,11 @@ func _set_speed(speed: int) -> void:
 		_top_bar.show_unavailable()
 		return
 	_speed = clampi(speed, 0, SPEED_DAYS_PER_SECOND.size() - 1)
+	if _speed > 0 and _event_window != null and _event_window.is_open():
+		# Die Zeit steht, bis das Ereignis entschieden ist (ereignisse.md 3.6); danach dieses Tempo.
+		_speed_before_event = _speed
+		_speed = 0
+		_top_bar.show_notice("Erst das Ereignis entscheiden")
 	if _speed > 0:
 		_resume_speed = _speed
 	else:
@@ -1391,6 +1425,8 @@ func _tooltip_detail(location: Dictionary) -> String:
 			second = _relation_tooltip(int(location.get("owner_index", -1)))
 		MapModes.MAP_KRIEG when bool(location.get("has_data", true)):
 			second = _war_tooltip(_tooltip_index, int(location.get("owner_index", -1)))
+		MapModes.MAP_UNRUHE when bool(location.get("has_data", true)):
+			second = _unrest_tooltip(int(location.get("owner_index", -1)))
 		_ when not bool(location.get("has_data", true)):
 			second = "%s · %s" % [kreis_text, second]
 	return "%s · %s" % [first, second]
@@ -1418,6 +1454,20 @@ func _war_tooltip(sim_index: int, owner: int) -> String:
 
 
 ## Beziehung des Besitzers zum Spielerstaat im Tooltip (seit M9).
+## Unruhe des Besitzers mit Zielwert und laufendem Aufstand, im Kartenmodus „Unruhe“ (seit M11).
+func _unrest_tooltip(owner: int) -> String:
+	var events := _sim.get_state_events(owner)
+	if events.is_empty():
+		return "keine Unruhe (vor 1848)"
+	var text := "Unruhe %d (Ziel %d)" % [
+		roundi(float(events.get("unrest", 0.0))), roundi(float(events.get("unrest_target", 0.0)))
+	]
+	var revolt: Dictionary = events.get("revolt", {})
+	if not revolt.is_empty():
+		text += ", %s seit %s" % [str(revolt.get("kind_text", "Aufstand")), str(revolt.get("since_text", ""))]
+	return text
+
+
 func _relation_tooltip(owner: int) -> String:
 	if owner == _player:
 		return "Spielerstaat"
@@ -1516,6 +1566,7 @@ func open_diplomacy(tab: int = 0) -> void:
 		return
 	_state_panel.hide_popups()
 	close_war_window()
+	close_journal()
 	_diplomacy_window.open(_sim, _player, tab)
 	_place_diplomacy()
 
@@ -1554,6 +1605,13 @@ func _place_diplomacy() -> void:
 	if _war_window != null:
 		_war_window.size = _war_window.get_combined_minimum_size()
 		_war_window.position = Vector2(left, top)
+	# Journalfenster ebenso (seit M11); das Ereignisfenster mittig.
+	if _journal_window != null:
+		if _journal_window.is_open():
+			_journal_window.fit_height(_mode_bar_area.position.y - 8.0 - top)
+		_journal_window.size = _journal_window.get_combined_minimum_size()
+		_journal_window.position = Vector2(left, top)
+	_place_event_window()
 	_place_reports()
 
 
@@ -1670,6 +1728,7 @@ func open_war_window(tab: int = 0) -> void:
 		return
 	_state_panel.hide_popups()
 	close_diplomacy()
+	close_journal()
 	_war_window.open(_sim, _player, tab)
 	_place_diplomacy()
 
@@ -1701,7 +1760,7 @@ func _place_reports() -> void:
 		return
 	var right := _right_column.get_global_rect().position.x - 12.0
 	var left := _left_column.offset_right + 12.0
-	for window: Control in [_war_window, _diplomacy_window]:
+	for window: Control in [_war_window, _diplomacy_window, _journal_window]:
 		if window != null and window.visible:
 			left = maxf(left, window.position.x + window.size.x + 8.0)
 	var width := clampf(right - left, BattleReports.MIN_WIDTH, BattleReports.MAX_WIDTH)
@@ -1778,6 +1837,7 @@ func _build_game_menu() -> void:
 	_game_menu.close_requested.connect(close_game_menu)
 	_game_menu.new_game_requested.connect(func(id: String) -> void: start_new_game(id))
 	_game_menu.last_election_requested.connect(open_last_election)
+	_game_menu.events_requested.connect(open_event_log)
 	_game_menu.role_selected.connect(set_party)
 
 
@@ -1840,6 +1900,7 @@ func _apply_role() -> void:
 	if party:
 		_party_panel.show_party(_sim.get_party(_player_current))
 	_refresh_location_panel()
+	_sync_event_player()
 
 
 func _on_campaign_requested(district: int, action: int) -> void:
@@ -1857,6 +1918,141 @@ func _on_campaign_requested(district: int, action: int) -> void:
 	else:
 		_top_bar.show_notice("%s nicht möglich: Mittel reichen nicht oder die Wahl ist vorbei" % name_text)
 	_refresh_location_panel()
+
+
+# --- Ereignisse und Journale (seit M11, Schritt b4, ereignisse.md Abschnitt 9) ---------
+
+
+func _build_events() -> void:
+	var root: Control = $UI/Root
+	_journal_window = JournalWindow.new()
+	root.add_child(_journal_window)
+	root.move_child(_journal_window, _top_bar.get_index())
+	_journal_window.close_requested.connect(close_journal)
+	_journal_window.resized.connect(_place_diplomacy)
+	_state_panel.journal_requested.connect(toggle_journal)
+	# Das Ereignisfenster liegt über allem außer dem Spielmenü (wie der Wahlabend).
+	_event_window = EventWindow.new()
+	$UI.add_child(_event_window)
+	$UI.move_child(_event_window, _game_menu.get_index())
+	_event_window.option_chosen.connect(_on_event_option_chosen)
+	# Umbrochene Texte kennen ihre Höhe erst nach dem Layout: bei jeder Änderung neu einpassen.
+	_event_window.minimum_size_changed.connect(_place_event_window)
+
+
+## Ereignisfenster (Zugriff für Tests).
+func event_window() -> EventWindow:
+	return _event_window
+
+
+## Journalfenster (Zugriff für Tests).
+func journal_window() -> JournalWindow:
+	return _journal_window
+
+
+## Öffnet das Journalfenster (Reiter tab, -1: der zuletzt gezeigte); nur in Partien mit Ereignissen.
+func open_journal(tab: int = -1) -> void:
+	if not _events_available():
+		return
+	_state_panel.hide_popups()
+	close_diplomacy()
+	close_war_window()
+	_journal_window.open(_sim, tab)
+	_place_diplomacy()
+
+
+## Spielmenü „Ereignisse“: schließt das Menü (das Tempo von vorher gilt) und zeigt die bisherigen
+## Ereignisse im Journalfenster.
+func open_event_log() -> void:
+	close_game_menu()
+	open_journal()
+	if _journal_window.is_open():
+		_journal_window.show_event_log()
+
+
+## Ob die Partie Ereignisse kennt (Journale oder schon eingetretene Ereignisse).
+func _events_available() -> bool:
+	return _sim != null and (not _sim.get_journals().is_empty() or not _sim.get_event_log(1).is_empty())
+
+
+func close_journal() -> void:
+	if _journal_window != null:
+		_journal_window.close()
+
+
+func toggle_journal() -> void:
+	if _journal_window.is_open():
+		close_journal()
+	else:
+		open_journal()
+
+
+## Welcher Staat auf seine Ereignisse wartet (Befehl Ereignisspieler, ereignisse.md 3.6): der
+## Spielerstaat, im Parteienmodus keiner. Screenshots rechnen wie die Kommandozeile ohne Spieler,
+## außer mit --ereignis.
+func _sync_event_player() -> void:
+	if _sim == null:
+		return
+	var wanted := _player if _player_current < 0 else -1
+	if _options.wants_screenshot() and not _options.show_events:
+		wanted = -1
+	if _sim.get_event_player() != wanted:
+		_sim.set_event_player(wanted)
+
+
+## Offene, noch nicht gewählte Ereignisse des Spielers: Das Fenster zeigt das erste und hält die
+## Zeit an; sind alle gewählt, schließt es und die Zeit läuft mit dem Tempo von vorher weiter.
+func _check_open_events() -> void:
+	if _sim == null:
+		return
+	var open: Array[Dictionary] = []
+	for event in _sim.get_open_events():
+		if int(event.get("chosen_option", -1)) < 0 and int(event.get("state_index", -1)) == _player:
+			open.append(event)
+	if open.is_empty():
+		_close_event_window(true)
+		return
+	if not _event_window.is_open():
+		_speed_before_event = _speed
+		_set_speed(0)
+		_tooltip.hide_tooltip()
+	_event_window.show_events(open)
+	_place_event_window()
+	_place_event_window.call_deferred()
+
+
+func _on_event_option_chosen(event_index: int, option_index: int) -> void:
+	var event := _event_window.current_event()
+	if not _sim.choose_event_option(event_index, option_index):
+		_top_bar.show_notice("Diese Wahl ist nicht möglich")
+		return
+	for option: Variant in event.get("options", []):
+		if int((option as Dictionary).get("index", -1)) == option_index:
+			_top_bar.show_notice(
+				"%s: %s (ab dem nächsten Tag)" % [str(event.get("title", "")), str((option as Dictionary).get("text", ""))]
+			)
+	_check_open_events()
+
+
+## Schließt das Ereignisfenster; resume setzt die Geschwindigkeit von vorher fort.
+func _close_event_window(resume: bool) -> void:
+	if _event_window == null or not _event_window.is_open():
+		return
+	_event_window.close()
+	if resume:
+		_set_speed(_speed_before_event)
+
+
+## Ereignisfenster mittig über der Karte.
+func _place_event_window() -> void:
+	if _event_window == null:
+		return
+	var area := get_viewport().get_visible_rect().size
+	var size := _event_window.get_combined_minimum_size()
+	_event_window.size = size
+	_event_window.position = Vector2(
+		roundf((area.x - size.x) * 0.5), maxf(_left_column.offset_top, roundf((area.y - size.y) * 0.5))
+	)
 
 
 # --- Wahlabend (seit M8) ----------------------------------------------------------
@@ -2005,6 +2201,7 @@ func open_game_menu() -> void:
 		state_name = str(state.get("name", ""))
 	_game_menu.show_scenarios(_sim.get_scenarios(_data_dir), str(_sim.get_scenario().get("id", "")))
 	_game_menu.show_last_election(_sim.get_election_count() > 0)
+	_game_menu.show_events(_events_available())
 	# Parteienmodus nur mit Parlament (Review M8: 1648 hat Strömungen, aber keine Wahl).
 	var roles: Array[Dictionary] = []
 	if not _sim.get_parliaments().is_empty():
@@ -2076,6 +2273,8 @@ func _after_load(new_client: bool = false) -> void:
 		_close_election_night(false)
 	close_diplomacy()
 	close_war_window()
+	close_journal()
+	_close_event_window(false)
 	select_army(-1)
 	_battle_reports.clear()
 	_previous_armies.clear()
@@ -2096,6 +2295,8 @@ func _after_load(new_client: bool = false) -> void:
 	_rebuild_legend()
 	_refresh_all()
 	_update_railways()
+	# Ein Spielstand kann offene Ereignisse mitbringen (die Zeit steht nach dem Laden ohnehin).
+	_check_open_events()
 
 
 ## Neues Spiel (seit M7): lädt das Szenario frisch mit seinem Spielerstaat; die laufende Partie
@@ -2146,9 +2347,11 @@ func play_state(state_index: int) -> void:
 	_state_panel.clear_pending()
 	close_diplomacy()
 	close_war_window()
+	_close_event_window(false)
 	select_army(-1)
 	_battle_reports.clear()
 	_player_gone_noticed = false
+	_sync_event_player()
 	_refresh_all()
 	_rebuild_legend()
 	_top_bar.show_notice("Ihr spielt jetzt %s" % str(_sim.get_state(_player).get("name", "")))
@@ -2227,6 +2430,8 @@ func _run_screenshot() -> void:
 		open_war_window(_options.war_tab)
 	if _options.select_army:
 		_select_strongest_army()
+	if _options.show_journal:
+		open_journal()
 	if _options.show_game_menu:
 		open_game_menu()
 	if _options.show_election_night:

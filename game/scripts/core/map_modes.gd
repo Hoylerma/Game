@@ -19,7 +19,8 @@ const MAP_WAHLEN := 12
 const MAP_ZOLLGEBIETE := 13
 const MAP_BEZIEHUNGEN := 14
 const MAP_KRIEG := 15
-const COUNT := 16
+const MAP_UNRUHE := 16
+const COUNT := 17
 
 ## Anzeigenamen der Modi (Index = Modus).
 const NAMES: PackedStringArray = [
@@ -39,6 +40,7 @@ const NAMES: PackedStringArray = [
 	"Zollgebiete",
 	"Beziehungen",
 	"Krieg",
+	"Unruhe",
 ]
 
 ## Kurznamen für die Knöpfe der Modusleiste (Index = Modus); seit M4 kurz gehalten,
@@ -60,6 +62,7 @@ const SHORT_NAMES: PackedStringArray = [
 	"Zoll",
 	"Beziehung",
 	"Krieg",
+	"Unruhe",
 ]
 
 ## Kurze Erklärung für Tooltips der Modusleiste.
@@ -80,6 +83,7 @@ const DESCRIPTIONS: PackedStringArray = [
 	"Zollunionen in ihrer Farbe, Staaten ohne Union blass: Zwischen den Gebieten wird Zoll erhoben",
 	"Beziehung jedes Staates zum Spielerstaat: grün freundlich, rot feindlich; seit 1848",
 	"Wer die Orte hält: besetzte Orte schraffiert in der Farbe des Besitzers, Fronten als Grenzen; seit 1848",
+	"Unruhe der Staaten von 0 (blass) bis 100 (rot), Staaten mit Aufstand violett; seit 1848",
 ]
 
 ## Aktionen der Eingabebelegung (project.godot), Index = Modus.
@@ -100,15 +104,16 @@ const ACTIONS: Array[StringName] = [
 	&"kartenmodus_zollgebiete",
 	&"kartenmodus_beziehungen",
 	&"kartenmodus_krieg",
+	&"kartenmodus_unruhe",
 ]
 
 ## Tastenbezeichnung für die Anzeige, Index = Modus. Die Belegung nutzt physische
 ## Tasten: „Z“ ist die Taste rechts neben T (auf englischen Tastaturen „Y“), „Ü“ die rechts
 ## neben P (englisch „[“), „+“ die rechts neben Ü (englisch „]“), „Ä“ die rechts neben Ö (englisch
 ## „'“, seit M8), „Ö“ die links neben Ä (englisch „;“, seit M9), „#“ die rechts neben Ä (englisch
-## „\“, seit M9), „Y“ die links unten neben X (englisch „Z“, seit M10).
+## „\“, seit M9), „Y“ die links unten neben X (englisch „Z“, seit M10), „X“ (seit M11).
 const KEY_HINTS: PackedStringArray = [
-	"Q", "W", "E", "R", "T", "Z", "U", "I", "O", "P", "Ü", "+", "Ä", "Ö", "#", "Y"
+	"Q", "W", "E", "R", "T", "Z", "U", "I", "O", "P", "Ü", "+", "Ä", "Ö", "#", "Y", "X"
 ]
 
 ## Modi, deren Farben von der Simulation abhängen; dort erhalten Orte ohne Daten
@@ -129,6 +134,7 @@ const DATA_MODES: PackedInt32Array = [
 	MAP_ZOLLGEBIETE,
 	MAP_BEZIEHUNGEN,
 	MAP_KRIEG,
+	MAP_UNRUHE,
 ]
 
 ## Obergrenze der Dichteskala der Brücke (≥ 120 Einwohner je km² → dunkelste Farbe).
