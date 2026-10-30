@@ -203,7 +203,7 @@ EventLabRun run_event_lab(const World& world, const SimConfig& config, const Eve
     Simulation sim(world, config);
     if (strategy != nullptr) {
         Command player;
-        player.type = CommandType::EventPlayer;
+        player.type = CommandType::PlayerState;
         player.state = strategy->player;
         sim.submit(player);
     }

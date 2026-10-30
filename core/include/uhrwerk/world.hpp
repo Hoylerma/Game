@@ -6,6 +6,7 @@
 // Querverweise sind Indizes, keine Zeiger. Die Reihenfolge aller Vektoren ist
 // durch die Ladereihenfolge festgelegt und damit deterministisch.
 
+#include "uhrwerk/ai_types.hpp"
 #include "uhrwerk/date.hpp"
 #include "uhrwerk/event_types.hpp"
 #include "uhrwerk/fixed.hpp"
@@ -1093,6 +1094,12 @@ struct World {
     std::vector<EventDef> events;                 // seit M11 (a1): nur mit event_rules.active
     std::vector<JournalDef> journals; // seit M11 (a4): common/journale/*.chron, nur mit Ereignissen
     std::vector<VoteDef> votes;       // seit M11 (a4): common/abstimmungen.chron, nur mit Ereignissen
+    // KI der Staaten (seit M12, Schritt a1; ki.md Abschnitt 3), nur mit ai_rules.active.
+    AiRules ai_rules;
+    std::vector<TraitDef> ai_traits;              // common/ki.chron: eigenschaft
+    std::vector<PersonalityDef> ai_personalities; // common/ki.chron: persoenlichkeit
+    std::vector<PersonDef> persons;               // common/persoenlichkeiten.chron, nach Kennung
+    std::vector<AgendaDef> agendas;               // je Staat (common/agenden.chron)
     std::vector<Location> locations;
     std::vector<PopBlock> pops;
     std::vector<ChronicleEntry> chronicle;
@@ -1162,6 +1169,12 @@ struct World {
     std::vector<JournalStep> journal_history; // seit a4: erreichte Stufen in zeitlicher Folge
     std::vector<VoteResult> vote_results;     // seit a4: Abstimmungen in zeitlicher Folge
     std::uint8_t diet_suspended = 0;          // seit a4: 1, solange die Bundesversammlung ruht
+    // KI (seit M12, Schritt a1), nur mit ai_rules.active: Person im Amt je Staat und Rolle
+    // [staat × kPersonRoles + rolle], -1 ohne.
+    std::vector<Index> offices;
+
+    /// Person im Amt (Herrscher oder leitender Minister) oder -1.
+    Index office(Index state, PersonRole role) const;
 
     Index find_state(std::string_view tag) const;
     Index find_location(std::string_view id) const;
@@ -1183,6 +1196,9 @@ struct World {
     Index find_event(std::string_view id) const;          // seit M11
     Index find_journal(std::string_view id) const;        // seit M11 (a4)
     Index find_vote(std::string_view id) const;           // seit M11 (a4)
+    Index find_person(std::string_view id) const;         // seit M12
+    Index find_trait(std::string_view id) const;          // seit M12
+    Index find_personality(std::string_view id) const;    // seit M12
 
     /// Personen in den Blöcken des Ortes und in seinen Zugängen (arrivals).
     Fixed location_population(Index location) const;

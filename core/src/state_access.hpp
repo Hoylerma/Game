@@ -451,11 +451,20 @@ template <typename Sim, typename V> void StateAccess::visit(Sim& sim, V& v) {
         v.field("bundesversammlung_ruht", w.diet_suspended);
     }
 
+    // KI der Staaten (seit M12, Schritt a1): nur mit KI-Daten (1648 bleibt bitgleich). Personen im Amt je
+    // Staat und Rolle.
+    if (w.ai_rules.active) {
+        list(v, "aemter", w.offices, Extent::Content, [&](auto& o) { v.field("", o); });
+    }
+
     v.field("zufall.demografie", sim.rng_demography_);
     v.field("zufall.wirtschaft", sim.rng_economy_);
     v.field("zufall.ereignisse", sim.rng_events_);
     if (w.military_rules.active) {
         v.field("zufall.krieg", sim.rng_war_); // seit M10, Schritt a3
+    }
+    if (w.ai_rules.active) {
+        v.field("zufall.ki", sim.rng_ai_); // seit M12, Schritt a1
     }
 
     list(v, "chronik", w.chronicle, Extent::State, [&](auto& e) {

@@ -265,7 +265,7 @@ festgelegt“). Welt-Ereignisse (`wer = welt`) ohne Staat wählen ebenso.
   das Fenster (Abschnitt 9).
 - Der Spieler wählt per **Befehl `Ereigniswahl`** (Wert = Ereignis, Ziel = Option). Wirksam ab dem
   nächsten Tag wie alle Befehle, im Protokoll für die Wiederholung (M6). Welcher Staat wartet, setzt
-  der **Befehl `Ereignisspieler`** (Staat oder keiner; `World::event_player`, Zustand): Die Oberfläche
+  der **Befehl `Ereignisspieler`** (seit M12 `Spielerstaat`, ki.md 4.1; Staat oder keiner; `World::event_player`, Zustand): Die Oberfläche
   schickt ihn beim Start einer Partie, die Kommandozeile und die Labore spielen ohne ihn. Eine Option,
   deren Bedingung nicht gilt, lässt sich nicht wählen; Folgeereignisse des Spielerstaates warten
   ebenfalls.

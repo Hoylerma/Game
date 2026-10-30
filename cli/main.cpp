@@ -522,6 +522,28 @@ std::string politics_summary(const World& w) {
 }
 
 /// Ereignisse (seit M11, docs/technik/ereignisse.md): Zahl je Art und Jahrzehnt, Gesetze zum Start.
+/// KI der Staaten (seit M12, ki.md Abschnitt 3): Persönlichkeiten, Eigenschaften, Personen und Agenden.
+std::string ai_summary(const World& w) {
+    if (!w.ai_rules.active) {
+        return "keine (ohne common/ki.chron oder vor seinem 'seit')";
+    }
+    std::size_t agendas = 0;
+    std::size_t goals = 0;
+    for (const uhrwerk::AgendaDef& a : w.agendas) {
+        agendas += a.personality != uhrwerk::kNone || !a.goals.empty() ? 1 : 0;
+        goals += a.goals.size();
+    }
+    std::size_t rulers = 0;
+    for (const uhrwerk::PersonDef& p : w.persons) {
+        rulers += p.role == uhrwerk::PersonRole::Ruler ? 1 : 0;
+    }
+    return std::to_string(w.ai_personalities.size()) + " Staatspersönlichkeiten, " +
+           std::to_string(w.ai_traits.size()) + " Eigenschaften, " + std::to_string(w.persons.size()) +
+           " Personen (" + std::to_string(rulers) + " Herrscher, " +
+           std::to_string(w.persons.size() - rulers) + " Minister), " + std::to_string(agendas) +
+           " Agenden mit " + std::to_string(goals) + " Zielen";
+}
+
 std::string events_summary(const World& w) {
     if (!w.event_rules.active) {
         return "keine (vor dem 'seit' in common/ereignisse.chron)";
@@ -925,7 +947,7 @@ Date date_after(const Date& start, std::int64_t days) {
 /// Anträge, Forderungen und Manöver. Mit Militär (seit M10, Schritt a2) Mobilmachung und Abrüstung und
 /// Märsche der Heere (Nummer nach den Garnisonen, meist mit dem eigenen Staat, Ziel zur Hälfte ein Ort
 /// dieses Staates), seit Schritt a3 auch Kriegserklärungen, seit a4 mit Kriegszielen, dazu
-/// Friedensangebote, Kriegsziele und der Generalstab; mit Ereignissen (seit M11) Ereignisspieler und
+/// Friedensangebote, Kriegsziele und der Generalstab; mit Ereignissen (seit M11) Spielerstaat und
 /// Ereigniswahl. Ohne Parlamente, Zollunionen, Bund, Militär und Ereignisse bleibt die Folge der
 /// Zufallszahlen wie bisher.
 std::vector<uhrwerk::LoggedCommand> make_test_commands(const World& w, std::uint64_t seed, std::int64_t count,
@@ -1044,7 +1066,7 @@ std::vector<uhrwerk::LoggedCommand> make_test_commands(const World& w, std::uint
         // Ereigniswahl (Ereignis 0 bis hinter das letzte, Option −1 bis 3; meist ungültig).
         if (events && rng.below(8) == 0) {
             const bool player = rng.below(4) == 0;
-            c.command.type = player ? uhrwerk::CommandType::EventPlayer : uhrwerk::CommandType::EventChoice;
+            c.command.type = player ? uhrwerk::CommandType::PlayerState : uhrwerk::CommandType::EventChoice;
             c.command.state = static_cast<Index>(rng.below(states + 2)) - 1;
             c.command.value =
                 player ? Fixed{}
@@ -1275,6 +1297,7 @@ int cmd_info(const Options& o, const fs::path& data_dir) {
               << "Diplomatie:   " << diplomacy_summary(w) << '\n'
               << "Militär:      " << military_summary(w) << '\n'
               << "Ereignisse:   " << events_summary(w) << '\n'
+              << "KI:           " << ai_summary(w) << '\n'
               << "Bevölkerung:  " << format_int(total.round()) << "\n\n";
 
     std::vector<std::vector<std::string>> rows;

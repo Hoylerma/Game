@@ -1378,6 +1378,82 @@ strategie krone {
 Fehler (Exitcode 1): unbekannte Felder, Journale, Ausgänge, Ereignisse, Optionen und Staaten, ein Bereich
 außerhalb von 0 bis 1, ein Ereignis ohne genau eines von `anteil` und `staaten`, ein Ende vor dem Start.
 
+### 3.37 `common/ki.chron` (seit M12a1)
+
+Regeln der KI der Staaten ([ki.md](ki.md) Abschnitte 3–5), Staatspersönlichkeiten und Eigenschaften. Die
+KI gibt es nur in Welten mit Ereignissen (Abschnitt 3.34) und ab `seit`; davor (1648) wird außer dem
+Block `ki` nichts gelesen, und die Prüfsumme bleibt.
+
+```text
+ki {
+    seit = 1848.01.01                    # Pflicht
+    rauschen = 10                        # ± je Nutzen, 0 … 100 (Strom Ki)
+    abkuehlung = 12                      # Monate, 0 … 120
+    schulden_grenze = 3                  # Schuldenquote, 0 … 100
+    agenda_offen = nein                  # ja: Ziele ohne Zeitfenster (offener Modus)
+    gewicht_herrscher_absolut = 0.6      # 0 … 1; der leitende Minister erhält den Rest
+    gewicht_herrscher_konstitutionell = 0.4
+    standard_persoenlichkeit = bewahrer  # für Staaten ohne Agenda
+}
+persoenlichkeit machtpolitiker { name = "Machtpolitiker" risiko = 1 expansion = 2 legitimitaet = -1 vermittlung = -1 }
+eigenschaft zauderer { name = "Zauderer" risiko = -2 }
+```
+
+Neigungen: `risiko`, `expansion`, `legitimitaet`, `reform`, `sparsamkeit`, `vermittlung`, je −2 … +2,
+fehlende 0. Fehler: fehlendes `seit` oder `name`, doppelte Kennungen, Werte außerhalb des Bereichs, eine
+unbekannte `standard_persoenlichkeit`.
+
+### 3.38 `common/persoenlichkeiten.chron` (seit M12a1)
+
+Personen mit Amt ([ki.md](ki.md) Abschnitt 3.3), nach Kennung geordnet.
+
+```text
+person otto_von_bismarck {
+    name   = "Otto von Bismarck"            # Pflicht, steht in der Chronik
+    staat  = PRU                            # Pflicht; ein Staat, der zum Start fehlt, lässt die Person aus
+    rolle  = minister                       # Pflicht: herrscher oder minister (leitender Minister)
+    amt    = "Ministerpräsident"            # optional: Amt in der Chronik (sonst „Herrscher“ bzw. „leitender Minister“)
+    von    = 1862.09.23                     # Pflicht
+    bis    = 1890.03.20                     # optional, nicht vor 'von'
+    bedingung { merkmal = bismarck }        # optional, Vokabular aus 3.34, im Staat der Person
+    werte  = { staatskunst = 8 diplomatie = 10 kriegskunst = 4 wirkung = 7 }   # je 1 … 10, Standard 5
+    eigenschaften = { machtpolitiker taktiker }                                # aus common/ki.chron
+    quelle = "Gall, Bismarck (1980)"        # Pflicht
+    sicherheit = ungeprueft
+}
+```
+
+Im Amt ist eine Person, wenn das Datum in `von … bis` liegt und ihre Bedingung gilt; von mehreren in
+derselben Rolle die mit dem spätesten `von`. Der Kern besetzt die Ämter beim Start und prüft sie am
+Monatsersten; ein Wechsel schreibt „<Staat>: <Name> wird <Amt>“ in die Chronik.
+
+### 3.39 `common/agenden.chron` (seit M12a1)
+
+Staatspersönlichkeit und Ziele je Staat ([ki.md](ki.md) Abschnitt 3.4).
+
+```text
+agenda PRU {
+    persoenlichkeit = machtpolitiker        # optional, sonst standard_persoenlichkeit
+    ziel { art = fuehrung_bund  gewicht = 60  ab = 1849.04.01 }
+    ziel { art = zollunion  union = zollverein  gewicht = 50 }
+    ziel { art = gebiet  gebiet = dk_holstein  gewicht = 40  ab = 1863.11.15  bis = 1866.12.31 }
+    ziel { art = schwaechen  gegner = AUT  gewicht = 50  bedingung { merkmal = bismarck } }
+}
+```
+
+| `art` | Gegenstand |
+|---|---|
+| `fuehrung_bund`, `status_quo`, `ruhe` | keiner |
+| `zollunion` | `union = <Zollunion>` |
+| `buendnis` | `partner = <TAG>` |
+| `gebiet` | `gebiet = <Verwaltungseinheit>` |
+| `annexion`, `schwaechen` | `gegner = <TAG>` |
+
+`gewicht` (0 … 100) und `art` sind Pflicht; `ab`, `bis` und `bedingung` (im Staat der Agenda) optional.
+Ein Ziel, dessen Staat oder Zollunion zum Start nicht besteht, entfällt ohne Fehler; eine Agenda eines
+fehlenden Staates ebenso. Fehler: unbekannte Art, fehlender oder falscher Gegenstand, doppelte Agenda,
+unbekannte Persönlichkeit, `bis` vor `ab`.
+
 ## 4. Startzustand
 
 Für jeden Ort entstehen Bevölkerungsblöcke **in dieser Reihenfolge**: für jeden Beruf (Ladereihenfolge), darin für jede Konfession des Ortes (Reihenfolge im `konfession`-Block) und darin für jede Kultur (Reihenfolge im `kultur`-Block, seit M4):

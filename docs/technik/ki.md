@@ -1,7 +1,7 @@
 # Künstliche Intelligenz der Staaten (Meilenstein M12)
 
-> **Status: Entwurf** – Entscheidungen 1–14 in Abschnitt 11 stehen zur Freigabe; Umsetzung erst
-> danach. Grundlage sind [21 Künstliche Intelligenz](../21_kuenstliche_intelligenz.md) (Abschnitte
+> **Status: verbindlich** – Entscheidungen 1–14 wie empfohlen freigegeben (Abschnitt 11); Umsetzung
+> läuft, Stand in Abschnitt 13. Grundlage sind [21 Künstliche Intelligenz](../21_kuenstliche_intelligenz.md) (Abschnitte
 > 1–5, 8–11), [13 Persönlichkeiten](../13_persoenlichkeiten.md) (Abschnitte 1 und 3) und der
 > Meilensteinplan ([meilensteine.md](../meilensteine.md#m12--künstliche-intelligenz-der-staaten)).
 > Haushalt steht in [wirtschaft.md](wirtschaft.md), Wahlen in [politik.md](politik.md), Diplomatie und
@@ -136,7 +136,7 @@ Frankreich Hegemon, Dänemark Bewahrer; kleine Staaten ohne Angabe gelten als Be
 
 ### 3.3 Personen
 
-Neue Datei `common/persoenlichkeiten.chron` (Format künftig in chronik-skript.md, Abschnitt 3.37):
+Neue Datei `common/persoenlichkeiten.chron` (Format in chronik-skript.md, Abschnitt 3.38):
 
 ```
 person otto_von_bismarck {
@@ -178,7 +178,7 @@ person otto_von_bismarck {
 
 ### 3.4 Agenden
 
-Neue Datei `common/agenden.chron` (chronik-skript.md, künftig Abschnitt 3.38): je Staat gewichtete Ziele mit Zeitfenster und
+Neue Datei `common/agenden.chron` (chronik-skript.md, Abschnitt 3.39): je Staat gewichtete Ziele mit Zeitfenster und
 Bedingung. Ein Ziel nennt **eine Art**, die ein Planer umsetzen kann:
 
 | Art | Bedeutung | Planer |
@@ -413,7 +413,7 @@ Weitere Tests:
 - **Godot:** Rauchtest der neuen Methoden, Klicktest (Staatsinfo mit Personen, Absichten mit
   Gesandtem, „Warum?“ an einer Forderung der KI), Screenshot der Staatsinfo.
 
-## 11. Entscheidungen (zur Freigabe)
+## 11. Entscheidungen (wie empfohlen freigegeben)
 
 1. **Teilung M12a/M12b.** Empfehlung: **ja** (Abschnitt 1). Alternative: Daten und System zusammen,
    Preußen und Österreich zuerst (schneller sichtbar, schwerer prüfbar).
@@ -481,4 +481,5 @@ Weitere Tests:
 
 | Schritt | Stand |
 |---|---|
-| – | Entwurf; Entscheidungen 1–14 stehen zur Freigabe |
+| – | Entscheidungen 1–14 wie empfohlen freigegeben; Umsetzung beginnt mit a1 |
+| a1 | **erledigt:** Regeln, sechs Staatspersönlichkeiten und 16 Eigenschaften in `common/ki.chron` (chronik-skript.md 3.37), Personen mit Amt, Amtszeit, Bedingung, Werten und Eigenschaften (`common/persoenlichkeiten.chron`, 3.38), Agenden mit Staatspersönlichkeit und Zielen (`common/agenden.chron`, 3.39) – geladen nur mit Ereignissen und ab `seit`; Neigungen (`state_inclinations`) und aktive Ziele (`agenda_goal_active`); Ämter je Staat und Rolle, beim Start ohne und am Monatsersten mit Eintrag in der Chronik; Befehl `Spielerstaat` (vorher `Ereignisspieler`); Strom `Ki` im Zustand; Inhaltsbereich `ki`, Spielstand Format 6; `uhrwerk-cli info` mit Zeile „KI“. Personen und Agenden 1848–1871 folgen mit b1. Tests in `test_ai.cpp`; 1648 bitgleich |

@@ -3277,7 +3277,7 @@ bool UhrwerkSimulation::set_event_player(std::int64_t state_index) {
         return false;
     }
     uhrwerk::Command command;
-    command.type = uhrwerk::CommandType::EventPlayer;
+    command.type = uhrwerk::CommandType::PlayerState;
     command.state = static_cast<uhrwerk::Index>(state_index);
     simulation_->submit(command);
     return true;

@@ -374,7 +374,7 @@ TEST_CASE("Ereignisse: Spielstand und Fingerabdruck") {
     const Bytes bytes = uhrwerk::save_game(sim, SaveMeta{});
     const auto info = uhrwerk::read_save_info(bytes);
     REQUIRE(info);
-    CHECK(info->format_version == 5);
+    CHECK(info->format_version == uhrwerk::kSaveFormatVersion); // 5 seit M11, 6 seit M12
     uhrwerk::LoadedGame loaded = uhrwerk::load_game(bytes, data.load(), 1);
     INFO(loaded.error);
     REQUIRE(loaded.ok());
@@ -552,7 +552,7 @@ TEST_CASE("Ereignisse: Wahl des Spielers, Frist und Befehl") {
     const Index bra = state_of(w, "BRA");
     const Index sax = state_of(w, "SAX");
     const Index sofort = w.find_event("a.sofort");
-    sim.submit(command(CommandType::EventPlayer, bra));
+    sim.submit(command(CommandType::PlayerState, bra));
     sim.step_day();
     CHECK(w.event_player == bra);
     // Brandenburg wartet, Sachsen wählt sofort.
@@ -573,7 +573,7 @@ TEST_CASE("Ereignisse: Wahl des Spielers, Frist und Befehl") {
         // Die Folge ohne Frist wartet ebenfalls auf die Wahl des Spielers.
         REQUIRE(w.pending_events.size() == 1);
         CHECK(w.pending_events[0].event == w.find_event("b.folge"));
-        sim.submit(command(CommandType::EventPlayer, kNone));
+        sim.submit(command(CommandType::PlayerState, kNone));
         sim.submit(command(CommandType::EventChoice, bra, w.find_event("b.folge"), 0));
         sim.step_day();
         CHECK(w.event_player == kNone);
@@ -675,7 +675,7 @@ TEST_CASE("Ereignisse: Determinismus mit 1 und 4 Threads") {
         uhrwerk::SimConfig config;
         config.threads = threads;
         Simulation sim(data.load(), config);
-        sim.submit(command(CommandType::EventPlayer, sim.world().find_state("ANH")));
+        sim.submit(command(CommandType::PlayerState, sim.world().find_state("ANH")));
         sim.step_days(120);
         return sim.checksum();
     };
@@ -807,7 +807,7 @@ ereignis c.standrecht { titel = "Standrecht" text = "x" art = dynamisch nur_folg
         // Ohne Helfer: Brandenburg greift nicht ein.
         Simulation sim(data.load());
         const World& w = sim.world();
-        sim.submit(command(CommandType::EventPlayer, state_of(w, "BRA")));
+        sim.submit(command(CommandType::PlayerState, state_of(w, "BRA")));
         sim.step_days(8);
         CHECK(w.revolts.empty());
         CHECK(flag(w, state_of(w, "SAX"), "revolutionsregierung"));
@@ -820,7 +820,7 @@ ereignis c.standrecht { titel = "Standrecht" text = "x" art = dynamisch nur_folg
             make("100", "erhebung"));
         Simulation sim(data.load());
         const World& w = sim.world();
-        sim.submit(command(CommandType::EventPlayer, state_of(w, "BRA"))); // Brandenburg wartet, hilft nicht
+        sim.submit(command(CommandType::PlayerState, state_of(w, "BRA"))); // Brandenburg wartet, hilft nicht
         sim.step_days(8);
         REQUIRE(w.revolts.size() == 1);
         CHECK(w.revolts[0].strength > Fixed::zero());

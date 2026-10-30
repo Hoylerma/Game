@@ -1,6 +1,7 @@
 #include "uhrwerk/simulation.hpp"
 
 #include "state_access.hpp"
+#include "uhrwerk/ai.hpp"
 #include "uhrwerk/customs.hpp"
 #include "uhrwerk/diplomacy.hpp"
 #include "uhrwerk/economy.hpp"
@@ -58,12 +59,14 @@ Simulation::Simulation(World world, SimConfig config)
     : world_(std::move(world)), config_(config), rates_(derive_rates(world_.rules)),
       rng_demography_(config.seed, RngStream::Demografie), rng_economy_(config.seed, RngStream::Wirtschaft),
       rng_events_(config.seed, RngStream::Ereignisse), rng_war_(config.seed, RngStream::Krieg),
-      topology_(build_economy_topology(world_)), pool_(ThreadPool::resolve_threads(config.threads)) {
+      rng_ai_(config.seed, RngStream::Ki), topology_(build_economy_topology(world_)),
+      pool_(ThreadPool::resolve_threads(config.threads)) {
     build_schedule();
     build_migration_targets();
     prepare_population_state();
     ensure_events_state(world_);
     rebuild_event_cache(world_, event_cache_);
+    ensure_ai_state(world_, event_cache_);
     start_checksum_ = checksum();
 }
 
@@ -357,6 +360,11 @@ void Simulation::step_day() {
         run_events(world_, rng_events_, event_cache_);
     }
 
+    // 6f. KI der Staaten: Ämter am Monatsersten (seit M12, ki.md Abschnitt 4.2), nur mit KI-Daten.
+    if (ai_active(world_)) {
+        run_ai(world_, rng_ai_, event_cache_);
+    }
+
     // 7. Jahreswechsel.
     if (new_year) {
         run_yearly();
@@ -499,7 +507,7 @@ void Simulation::execute(const Command& command) {
         }
         return;
     }
-    case CommandType::EventPlayer:
+    case CommandType::PlayerState:
         set_event_player(world_, command.state);
         return;
     }

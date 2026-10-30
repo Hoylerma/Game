@@ -1987,7 +1987,7 @@ func toggle_journal() -> void:
 		open_journal()
 
 
-## Welcher Staat auf seine Ereignisse wartet (Befehl Ereignisspieler, ereignisse.md 3.6): der
+## Welcher Staat auf seine Ereignisse wartet (Befehl Spielerstaat, ereignisse.md 3.6, ki.md 4.1): der
 ## Spielerstaat, im Parteienmodus keiner. Screenshots rechnen wie die Kommandozeile ohne Spieler,
 ## außer mit --ereignis.
 func _sync_event_player() -> void:

@@ -198,6 +198,7 @@ public:
         current_ = kNone;
         load_journals_and_votes();
         check_follow_cycles();
+        load_ai(); // seit M12 (ki.md Abschnitt 3), nur mit Ereignissen
         // Meldungen nach Datei und Zeile wie im übrigen Lader (gelesen wird nach Kennung).
         std::stable_sort(issues_.begin() + static_cast<std::ptrdiff_t>(first_issue_), issues_.end(),
                          [](const LoadIssue& a, const LoadIssue& b) {
@@ -399,6 +400,477 @@ private:
                                  ")");
         }
         return inserted;
+    }
+
+    // ── KI der Staaten (seit M12, ki.md Abschnitt 3; chronik-skript.md 3.37–3.39) ──
+
+    void load_ai() {
+        const std::string rules_name = "common/ki.chron";
+        std::error_code ec;
+        if (!fs::is_regular_file(data_dir_ / utf8_to_path(rules_name), ec)) {
+            return;
+        }
+        const Source rules = read(rules_name);
+        load_ai_rules(rules);
+        if (!world_.ai_rules.active) {
+            world_.ai_traits.clear();
+            world_.ai_personalities.clear();
+            return;
+        }
+        world_.agendas.assign(world_.states.size(), AgendaDef{});
+        if (fs::is_regular_file(data_dir_ / utf8_to_path("common/persoenlichkeiten.chron"), ec)) {
+            load_persons(read("common/persoenlichkeiten.chron"));
+        }
+        if (fs::is_regular_file(data_dir_ / utf8_to_path("common/agenden.chron"), ec)) {
+            load_agendas(read("common/agenden.chron"));
+        }
+    }
+
+    /// Neigungen aus den Feldern risiko … vermittlung (je −2 … +2); false bei einem anderen Feld.
+    bool inclination(const ScriptNode& node, Inclinations& out) {
+        for (std::size_t k = 0; k < kInclinationCount; ++k) {
+            if (node.key == kInclinationKeys[k]) {
+                if (assign(node)) {
+                    if (const auto v = number(node, fx(-2), fx(2))) {
+                        out[k] = *v;
+                    }
+                }
+                return true;
+            }
+        }
+        return false;
+    }
+
+    void load_ai_rules(const Source& source) {
+        file_ = source.name;
+        AiRules& r = world_.ai_rules;
+        bool found = false;
+        std::optional<Date> since;
+        std::string default_personality;
+        int default_line = 0;
+        std::map<std::string, int, std::less<>> traits_seen;
+        std::map<std::string, int, std::less<>> personalities_seen;
+        for (const ScriptNode& node : source.root.children) {
+            if ((node.key == "eigenschaft" || node.key == "persoenlichkeit") && node.is_block) {
+                if (!is_lower_id(node.value, false)) {
+                    error(node.line,
+                          quote(node.key) + " erwartet eine Kennung: " + node.key + " <kennung> { … }");
+                    continue;
+                }
+                auto& seen = node.key == "eigenschaft" ? traits_seen : personalities_seen;
+                const auto [it, inserted] = seen.emplace(node.value, node.line);
+                if (!inserted) {
+                    error(node.line, "doppelte Kennung " + quote(node.value) + " (zuerst in Zeile " +
+                                         std::to_string(it->second) + ")");
+                    continue;
+                }
+                std::string label;
+                Inclinations values{};
+                std::map<std::string, int, std::less<>> fields;
+                for (const ScriptNode& child : node.children) {
+                    if (!first_time(fields, child, node.value)) {
+                        continue;
+                    }
+                    if (child.key == "name") {
+                        if (const auto t = text(child)) {
+                            label = *t;
+                        }
+                    } else if (!inclination(child, values)) {
+                        warning(child.line, "unbekanntes Feld " + quote(child.key) + " in " + node.key + " " +
+                                                node.value + " wird ignoriert");
+                    }
+                }
+                if (label.empty()) {
+                    error(node.line, "Pflichtfeld 'name' fehlt in " + node.key + " " + node.value);
+                }
+                if (node.key == "eigenschaft") {
+                    world_.ai_traits.push_back(TraitDef{node.value, label, values});
+                } else {
+                    world_.ai_personalities.push_back(PersonalityDef{node.value, label, values});
+                }
+                continue;
+            }
+            if (node.key != "ki" || !node.is_block || !node.value.empty()) {
+                warning(node.line, "unbekannter Eintrag " + quote(node.key.empty() ? node.value : node.key) +
+                                       " wird ignoriert (erwartet: ki { … }, eigenschaft, persoenlichkeit)");
+                continue;
+            }
+            if (found) {
+                error(node.line, "Block 'ki' ist mehrfach angegeben");
+                continue;
+            }
+            found = true;
+            std::map<std::string, int, std::less<>> seen;
+            for (const ScriptNode& child : node.children) {
+                if (!first_time(seen, child, "ki")) {
+                    continue;
+                }
+                if (child.key == "seit") {
+                    if (assign(child)) {
+                        since = date(child);
+                    }
+                } else if (child.key == "rauschen") {
+                    if (assign(child)) {
+                        if (const auto v = number(child, fx(0), fx(100))) {
+                            r.noise = *v;
+                        }
+                    }
+                } else if (child.key == "abkuehlung") {
+                    if (const auto v = integer(child, 0, 120)) {
+                        r.cooldown_months = static_cast<std::int32_t>(*v);
+                    }
+                } else if (child.key == "schulden_grenze") {
+                    if (assign(child)) {
+                        if (const auto v = number(child, fx(0), fx(100))) {
+                            r.debt_limit = *v;
+                        }
+                    }
+                } else if (child.key == "agenda_offen") {
+                    if (const auto v = boolean(child)) {
+                        r.open_agenda = *v;
+                    }
+                } else if (child.key == "gewicht_herrscher_absolut" ||
+                           child.key == "gewicht_herrscher_konstitutionell") {
+                    if (assign(child)) {
+                        if (const auto v = number(child, fx(0), fx(1))) {
+                            (child.key == "gewicht_herrscher_absolut" ? r.ruler_weight_absolute
+                                                                      : r.ruler_weight_constitutional) = *v;
+                        }
+                    }
+                } else if (child.key == "standard_persoenlichkeit") {
+                    if (const auto id = name(child)) {
+                        default_personality = *id;
+                        default_line = child.line;
+                    }
+                } else {
+                    warning(child.line, "unbekanntes Feld " + quote(child.key) + " in ki wird ignoriert");
+                }
+            }
+            if (seen.count("seit") == 0) {
+                error(node.line, "Pflichtfeld 'seit' fehlt in ki");
+            }
+        }
+        if (!found) {
+            error(0, "Block 'ki { seit = … }' fehlt");
+        }
+        if (!default_personality.empty()) {
+            r.default_personality = world_.find_personality(default_personality);
+            if (r.default_personality == kNone) {
+                error(default_line, "unbekannte Persönlichkeit " + quote(default_personality));
+            }
+        }
+        r.active = since && *since <= start_;
+    }
+
+    /// Eigenschaften aus einer Liste { kennung kennung … }.
+    std::vector<Index> trait_list(const ScriptNode& node) {
+        std::vector<Index> result;
+        if (!node.is_block || !assign(node)) {
+            error(node.line, "'eigenschaften' erwartet eine Liste: eigenschaften = { kennung … }");
+            return result;
+        }
+        for (const ScriptNode& entry : node.children) {
+            if (!entry.key.empty() || entry.is_block) {
+                error(entry.line, "in 'eigenschaften' sind nur Kennungen erlaubt");
+                continue;
+            }
+            const Index trait = world_.find_trait(entry.value);
+            if (trait == kNone) {
+                error(entry.line, "unbekannte Eigenschaft " + quote(entry.value) + " (common/ki.chron)");
+            } else if (std::find(result.begin(), result.end(), trait) != result.end()) {
+                error(entry.line, "Eigenschaft " + quote(entry.value) + " ist doppelt angegeben");
+            } else {
+                result.push_back(trait);
+            }
+        }
+        return result;
+    }
+
+    void load_persons(const Source& source) {
+        file_ = source.name;
+        std::map<std::string, int, std::less<>> ids;
+        for (const ScriptNode& node : source.root.children) {
+            if (node.key != "person" || !node.is_block || !is_lower_id(node.value, false)) {
+                error(node.line, "erwartet: person <kennung> { … }");
+                continue;
+            }
+            const auto [it, inserted] = ids.emplace(node.value, node.line);
+            if (!inserted) {
+                error(node.line, "doppelte Kennung " + quote(node.value) + " (zuerst in Zeile " +
+                                     std::to_string(it->second) + ")");
+                continue;
+            }
+            PersonDef p;
+            p.id = node.value;
+            bool ok = true;
+            bool skip = false;
+            const ScriptNode* condition = nullptr;
+            std::map<std::string, int, std::less<>> seen;
+            for (const ScriptNode& child : node.children) {
+                if (!first_time(seen, child, "person " + p.id)) {
+                    continue;
+                }
+                if (child.key == "name" || child.key == "amt" || child.key == "quelle") {
+                    if (const auto t = text(child)) {
+                        (child.key == "name" ? p.name : child.key == "amt" ? p.title : p.source) = *t;
+                    }
+                } else if (child.key == "staat") {
+                    if (!scalar(child) || !assign(child)) {
+                        ok = false;
+                        continue;
+                    }
+                    bool is_absent = false;
+                    const auto state = state_ref(child, child.value, is_absent);
+                    if (!state) {
+                        ok = false;
+                    }
+                    skip = skip || is_absent;
+                    p.state = state.value_or(kNone);
+                } else if (child.key == "rolle") {
+                    if (!scalar(child) || !assign(child)) {
+                        ok = false;
+                    } else if (child.value == "herrscher" || child.value == "minister") {
+                        p.role = child.value == "herrscher" ? PersonRole::Ruler : PersonRole::Minister;
+                    } else {
+                        error(child.line, "ungültige Rolle " + quote(child.value) +
+                                              " (erwartet herrscher oder minister)");
+                        ok = false;
+                    }
+                } else if (child.key == "von" || child.key == "bis") {
+                    const auto d = assign(child) ? date(child) : std::nullopt;
+                    if (!d) {
+                        ok = false;
+                    } else if (child.key == "von") {
+                        p.from = *d;
+                    } else {
+                        p.has_to = true;
+                        p.to = *d;
+                    }
+                } else if (child.key == "bedingung") {
+                    condition = &child;
+                } else if (child.key == "werte") {
+                    if (!child.is_block || !assign(child)) {
+                        error(child.line, "'werte' erwartet einen Block: werte = { staatskunst = 5 … }");
+                        ok = false;
+                        continue;
+                    }
+                    for (const ScriptNode& v : child.children) {
+                        const auto k = std::find(kPersonValueKeys.begin(), kPersonValueKeys.end(), v.key);
+                        if (k == kPersonValueKeys.end()) {
+                            error(v.line, "unbekannter Wert " + quote(v.key) +
+                                              " (erwartet staatskunst, diplomatie, kriegskunst, wirkung)");
+                            continue;
+                        }
+                        if (const auto value = integer(v, 1, 10)) {
+                            p.values[static_cast<std::size_t>(k - kPersonValueKeys.begin())] =
+                                static_cast<std::int32_t>(*value);
+                        }
+                    }
+                } else if (child.key == "eigenschaften") {
+                    p.traits = trait_list(child);
+                } else if (child.key == "sicherheit") {
+                    continue;
+                } else {
+                    warning(child.line, "unbekanntes Feld " + quote(child.key) + " in person " + p.id +
+                                            " wird ignoriert");
+                }
+            }
+            for (const std::string_view field : {"name", "staat", "rolle", "von", "quelle"}) {
+                if (seen.count(field) == 0) {
+                    error(node.line, "Pflichtfeld " + quote(field) + " fehlt in person " + p.id);
+                    ok = false;
+                }
+            }
+            if (ok && p.has_to && p.to < p.from) {
+                error(node.line, "'bis' liegt vor 'von' in person " + p.id);
+                ok = false;
+            }
+            if (condition != nullptr) {
+                p.has_condition = true;
+                p.condition = condition_block(*condition, true);
+            }
+            if (ok && !skip) {
+                world_.persons.push_back(std::move(p));
+            }
+        }
+        std::sort(world_.persons.begin(), world_.persons.end(),
+                  [](const PersonDef& a, const PersonDef& b) { return a.id < b.id; });
+    }
+
+    void load_agendas(const Source& source) {
+        file_ = source.name;
+        std::map<std::string, int, std::less<>> tags;
+        for (const ScriptNode& node : source.root.children) {
+            if (node.key != "agenda" || !node.is_block || node.value.empty()) {
+                error(node.line, "erwartet: agenda <TAG> { … }");
+                continue;
+            }
+            const auto [it, inserted] = tags.emplace(node.value, node.line);
+            if (!inserted) {
+                error(node.line, "Agenda von " + quote(node.value) + " ist doppelt (zuerst in Zeile " +
+                                     std::to_string(it->second) + ")");
+                continue;
+            }
+            bool is_absent = false;
+            const auto state = state_ref(node, node.value, is_absent);
+            if (!state || is_absent) {
+                continue;
+            }
+            AgendaDef agenda;
+            std::map<std::string, int, std::less<>> seen;
+            for (const ScriptNode& child : node.children) {
+                if (child.key == "persoenlichkeit") {
+                    if (!first_time(seen, child, "agenda " + node.value)) {
+                        continue;
+                    }
+                    if (const auto id = name(child)) {
+                        agenda.personality = world_.find_personality(*id);
+                        if (agenda.personality == kNone) {
+                            error(child.line,
+                                  "unbekannte Persönlichkeit " + quote(*id) + " (common/ki.chron)");
+                        }
+                    }
+                } else if (child.key == "ziel" && child.is_block) {
+                    if (auto goal = agenda_goal(child)) {
+                        agenda.goals.push_back(std::move(*goal));
+                    }
+                } else {
+                    warning(child.line, "unbekanntes Feld " + quote(child.key) + " in agenda " + node.value +
+                                            " wird ignoriert");
+                }
+            }
+            world_.agendas[static_cast<std::size_t>(*state)] = std::move(agenda);
+        }
+    }
+
+    /// Ziel einer Agenda; std::nullopt bei Fehlern oder wenn sein Ziel zum Start nicht besteht.
+    std::optional<AgendaGoal> agenda_goal(const ScriptNode& node) {
+        AgendaGoal goal;
+        bool ok = true;
+        bool skip = false;
+        bool has_kind = false;
+        bool has_weight = false;
+        const ScriptNode* target = nullptr;
+        std::map<std::string, int, std::less<>> seen;
+        for (const ScriptNode& child : node.children) {
+            if (!first_time(seen, child, "ziel")) {
+                continue;
+            }
+            if (child.key == "art") {
+                const auto k = std::find(kAgendaKindKeys.begin(), kAgendaKindKeys.end(), child.value);
+                if (!scalar(child) || !assign(child) || k == kAgendaKindKeys.end()) {
+                    error(child.line, "ungültige Art " + quote(child.value) +
+                                          " (erwartet fuehrung_bund, zollunion, buendnis, gebiet, annexion, "
+                                          "schwaechen, status_quo oder ruhe)");
+                    ok = false;
+                    continue;
+                }
+                goal.kind = static_cast<AgendaKind>(k - kAgendaKindKeys.begin());
+                has_kind = true;
+            } else if (child.key == "gewicht") {
+                if (assign(child)) {
+                    if (const auto v = number(child, fx(0), fx(100))) {
+                        goal.weight = *v;
+                        has_weight = true;
+                    }
+                }
+            } else if (child.key == "ab" || child.key == "bis") {
+                const auto d = assign(child) ? date(child) : std::nullopt;
+                if (!d) {
+                    ok = false;
+                } else if (child.key == "ab") {
+                    goal.has_from = true;
+                    goal.from = *d;
+                } else {
+                    goal.has_to = true;
+                    goal.to = *d;
+                }
+            } else if (child.key == "bedingung") {
+                goal.has_condition = true;
+                goal.condition = condition_block(child, true);
+            } else if (child.key == "gegner" || child.key == "partner" || child.key == "union" ||
+                       child.key == "gebiet") {
+                if (target != nullptr) {
+                    error(child.line,
+                          "ein Ziel hat höchstens einen Gegenstand (gegner, partner, union, gebiet)");
+                    ok = false;
+                }
+                target = &child;
+            } else {
+                warning(child.line, "unbekanntes Feld " + quote(child.key) + " in ziel wird ignoriert");
+            }
+        }
+        if (!has_kind || !has_weight) {
+            error(node.line,
+                  std::string("Pflichtfeld ") + (has_kind ? "'gewicht'" : "'art'") + " fehlt in ziel");
+            return std::nullopt;
+        }
+        // Gegenstand je Art (Abschnitt 3.4).
+        std::string_view expected;
+        switch (goal.kind) {
+        case AgendaKind::CustomsUnion:
+            expected = "union";
+            break;
+        case AgendaKind::Alliance:
+            expected = "partner";
+            break;
+        case AgendaKind::Territory:
+            expected = "gebiet";
+            break;
+        case AgendaKind::Annexation:
+        case AgendaKind::Weaken:
+            expected = "gegner";
+            break;
+        case AgendaKind::LeadFederation:
+        case AgendaKind::StatusQuo:
+        case AgendaKind::Calm:
+            break;
+        }
+        if (expected.empty()) {
+            if (target != nullptr) {
+                error(target->line, "Art " +
+                                        std::string(kAgendaKindKeys[static_cast<std::size_t>(goal.kind)]) +
+                                        " hat keinen Gegenstand " + quote(target->key));
+                return std::nullopt;
+            }
+        } else if (target == nullptr || target->key != expected) {
+            error(node.line, "Art " + std::string(kAgendaKindKeys[static_cast<std::size_t>(goal.kind)]) +
+                                 " braucht " + quote(expected));
+            return std::nullopt;
+        } else if (!scalar(*target) || !assign(*target)) {
+            return std::nullopt;
+        } else if (expected == "union") {
+            goal.target = world_.find_customs_union(target->value);
+            if (goal.target == kNone) {
+                if (!absent("zollunion", target->value)) {
+                    error(target->line, "unbekannte Zollunion " + quote(target->value));
+                    ok = false;
+                }
+                skip = true;
+            }
+        } else if (expected == "gebiet") {
+            goal.target = world_.find_admin_unit(target->value);
+            if (goal.target == kNone) {
+                error(target->line, "unbekannte Verwaltungseinheit " + quote(target->value));
+                ok = false;
+            }
+        } else {
+            bool is_absent = false;
+            const auto state = state_ref(*target, target->value, is_absent);
+            if (!state) {
+                ok = false;
+            }
+            skip = skip || is_absent;
+            goal.target = state.value_or(kNone);
+        }
+        if (ok && goal.has_from && goal.has_to && goal.to < goal.from) {
+            error(node.line, "'bis' liegt vor 'ab' in ziel");
+            ok = false;
+        }
+        if (!ok || skip) {
+            return std::nullopt;
+        }
+        return goal;
     }
 
     // ── common/ereignisse.chron ──

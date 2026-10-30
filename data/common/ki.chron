@@ -1,0 +1,44 @@
+# Regeln der KI der Staaten (Meilenstein M12, docs/technik/ki.md Abschnitte 3 bis 5).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.37. Die KI gibt es nur in Welten mit Ereignissen und
+# erst ab 'seit'; Szenarien davor (1648) laufen ohne sie und bleiben bitgleich. Personen stehen in
+# common/persoenlichkeiten.chron, Agenden in common/agenden.chron (ab Schritt b1). Alle Werte außer 'seit'
+# sind Spielwerte (sicherheit = spielwert); die Kalibrierung folgt mit Schritt b2.
+
+ki {
+    seit = 1848.01.01
+    rauschen        = 10     # ± je Nutzen, gleichverteilt aus dem Strom Ki (Abschnitt 5)
+    abkuehlung      = 12     # Monate nach Forderung, Kriegserklärung oder abgelehntem Angebot
+    schulden_grenze = 3      # Schuldenquote (Schulden ÷ Jahreseinnahmen), ab der Steuern steigen (6.1)
+    agenda_offen    = nein   # historischer Modus: Ziele nur in ihrem Zeitfenster (Entscheidung 7)
+    gewicht_herrscher_absolut         = 0.6   # Herrscher ohne Verfassung oder ständisch; Minister 0,4
+    gewicht_herrscher_konstitutionell = 0.4   # … in konstitutionellen Staaten; Minister 0,6
+    standard_persoenlichkeit = bewahrer       # Staaten ohne Agenda
+}
+
+# Staatspersönlichkeiten (Kapitel 21, Abschnitt 3.1; ki.md Abschnitt 3.2). Neigungen je −2 … +2.
+persoenlichkeit machtpolitiker      { name = "Machtpolitiker"      risiko = 1  expansion = 2  legitimitaet = -1  vermittlung = -1 }
+persoenlichkeit bewahrer            { name = "Bewahrer"            risiko = -1 legitimitaet = 2  reform = -1 }
+persoenlichkeit reformer            { name = "Reformer"            reform = 2  vermittlung = 1 }
+persoenlichkeit haendler            { name = "Händler"             risiko = -2 expansion = -1 reform = 1  sparsamkeit = 2  vermittlung = 1 }
+persoenlichkeit hegemon             { name = "Hegemon"             risiko = 1  expansion = 1  sparsamkeit = -1  vermittlung = -1 }
+persoenlichkeit gleichgewichtswahrer { name = "Gleichgewichtswahrer" expansion = -1 legitimitaet = 1  vermittlung = 2 }
+
+# Eigenschaften von Personen (Kapitel 13, Abschnitt 1.2; ki.md Abschnitt 3.3) mit ihrem Beitrag zu den
+# Neigungen. Taktiker und Krisenmanager wirken zusätzlich in den Planern (Abschnitte 6.1 und 6.3).
+eigenschaft machtpolitiker   { name = "Machtpolitiker"   risiko = 1  expansion = 1 }
+eigenschaft zauderer         { name = "Zauderer"         risiko = -2 }
+eigenschaft pragmatiker      { name = "Pragmatiker"      vermittlung = 1  legitimitaet = -1 }
+eigenschaft ideologe         { name = "Ideologe"         vermittlung = -1 }
+eigenschaft bewahrer         { name = "Bewahrer"         legitimitaet = 1  reform = -1 }
+eigenschaft reformer         { name = "Reformer"         reform = 1 }
+eigenschaft fromm            { name = "Fromm"            legitimitaet = 1 }
+eigenschaft sparsam          { name = "Sparsam"          sparsamkeit = 1 }
+eigenschaft prunkliebend     { name = "Prunkliebend"     sparsamkeit = -1 }
+eigenschaft soldatenkoenig   { name = "Soldatenkönig"    risiko = 1  sparsamkeit = -1 }
+eigenschaft ehrlicher_makler { name = "Ehrlicher Makler" vermittlung = 2 }
+eigenschaft taktiker         { name = "Taktiker" }
+eigenschaft draufgaenger     { name = "Draufgänger"      risiko = 2 }
+eigenschaft vorsichtig       { name = "Vorsichtig"       risiko = -1 }
+eigenschaft verwalter        { name = "Verwalter"        sparsamkeit = 1  reform = 1 }
+eigenschaft krisenmanager    { name = "Krisenmanager" }
