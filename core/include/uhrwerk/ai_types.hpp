@@ -41,6 +41,8 @@ struct AiRules {
     std::int32_t tax_cooldown_months = 3;          // Monate nach einer Steueränderung (abkuehlung_steuern)
     Fixed surplus_from = Fixed::from_ratio(3, 20); // Überschussanteil, ab dem Steuern sinken (ueberschuss_ab)
     Fixed unrest_tax_from = Fixed::from_int(50);   // Unruhe, ab der Steuern sinken (unruhe_steuern_ab)
+    Fixed reserve_from = Fixed::one(); // Schatz ÷ Jahreseinnahmen, ab dem ein Überschuss Steuern senkt
+                                       // (ruecklage_ab)
     Fixed threat_mobilize = Fixed::from_ratio(3, 2); // Bedrohung, ab der gegen einen mobilen Nachbarn
                                                      // mobil gemacht wird (bedrohung_mobil)
     std::int32_t quiet_months = 2; // Monatserste ohne Krieg und Krise bis zur Abrüstung (abruestung_monate)

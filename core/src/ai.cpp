@@ -429,7 +429,10 @@ private:
         }
         Option lower;
         bool can_lower = false;
-        const bool rich = saldo > r.surplus_from * income && debt_ratio < Fixed::one();
+        // Ein Überschuss senkt die Steuern erst, wenn eine Rücklage von reserve_from Jahreseinnahmen da ist
+        // (sonst fließt er in Schatz und Tilgung).
+        const bool rich = saldo > r.surplus_from * income && debt_ratio < Fixed::one() &&
+                          s.treasury >= r.reserve_from * std::max(s.yearly_income, Fixed::one());
         const bool restless = unrest > r.unrest_tax_from && !war;
         if (rich || restless) {
             if (rich) {

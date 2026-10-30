@@ -1807,6 +1807,7 @@ ContentFingerprint content_fingerprint(const World& w) {
             h.i64(r.tax_cooldown_months);
             h.fixed(r.surplus_from);
             h.fixed(r.unrest_tax_from);
+            h.fixed(r.reserve_from);
             h.fixed(r.threat_mobilize);
             h.i64(r.quiet_months);
             const auto inclinations = [&h](const Inclinations& values) {

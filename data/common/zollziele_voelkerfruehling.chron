@@ -29,10 +29,11 @@ wechsel hannover {
 }
 
 # Mecklenburg-Schwerin tritt bei (historisch 1868): Handel mit Preußen und Lübeck wächst stark, die
-# Zolleinnahme sinkt.
+# Zolleinnahme sinkt. Seit M12a2 senkt die KI die Steuern reicher Staaten mit Rücklage; der Grenzhandel
+# streut dadurch stärker (Median ×1,28 statt ×1,47 über 8 Seeds), Untergrenze daher 1,2 statt 1,3.
 wechsel mecklenburg {
     staat       = MSC
     union       = zollverein
-    grenzhandel = { 1.3 4 }
+    grenzhandel = { 1.2 4 }
     zoll        = { 0.25 0.9 }
 }

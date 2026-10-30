@@ -1399,6 +1399,7 @@ ki {
     protokoll = 20                       # Einträge im KI-Protokoll je Staat, 1 … 1000
     abkuehlung_steuern = 3               # Monate nach einer Steueränderung, 0 … 120
     ueberschuss_ab = 0.15                # Überschussanteil, ab dem Steuern sinken, 0 … 1
+    ruecklage_ab = 1                     # … wenn der Schatz so viele Jahreseinnahmen hält, 0 … 100
     unruhe_steuern_ab = 50               # Unruhe, ab der Steuern sinken, 0 … 100
     bedrohung_mobil = 1.5                # Bedrohung durch einen mobilen Nachbarn, 0 … 100
     abruestung_monate = 2                # ruhige Monatserste bis zur Abrüstung, 1 … 120

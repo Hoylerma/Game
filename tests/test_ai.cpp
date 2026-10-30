@@ -334,6 +334,7 @@ void set_budget(World& w, std::string_view tag, std::int64_t income, std::int64_
     s.last_month_expenses = fx(expenses);
     s.debt = fx(debt);
     s.yearly_income = fx(income * 12);
+    s.treasury = fx(income * 12);                // Rücklage von einer Jahreseinnahme (ruecklage_ab)
     s.tax_rates[0] = Fixed::from_ratio(10, 100); // Kontribution
     s.tax_rates[1] = Fixed::from_ratio(5, 100);  // Akzise
 }

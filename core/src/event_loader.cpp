@@ -577,6 +577,7 @@ private:
             {"schwelle", &r.threshold, fx(0), fx(1000)},
             {"ueberschuss_ab", &r.surplus_from, fx(0), fx(1)},
             {"unruhe_steuern_ab", &r.unrest_tax_from, fx(0), fx(100)},
+            {"ruecklage_ab", &r.reserve_from, fx(0), fx(100)},
             {"bedrohung_mobil", &r.threat_mobilize, fx(0), fx(100)},
         };
         for (const Value& v : values) {
