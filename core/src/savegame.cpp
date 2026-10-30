@@ -42,6 +42,9 @@ constexpr std::uint64_t kMilitaryContentVersion = 9;
 /// Aufstände).
 constexpr std::uint64_t kEventContentVersion = 6;
 
+/// Stand der KI im Zustand (seit M12, Inhaltsbereich ki): 1 = Schritt a1 (Ämter, Strom Ki).
+constexpr std::uint64_t kAiContentVersion = 1;
+
 bool fail(std::string* error, std::string message) {
     if (error != nullptr) {
         *error = std::move(message);
@@ -452,13 +455,14 @@ public:
     }
     /// Fingerabdruck des Inhalts; Format 1 (bis M7) kennt nur die ersten 13 Bereiche (ohne politik),
     /// Format 2 (M8) die ersten 14 (ohne diplomatie), Format 3 (M9) die ersten 15 (ohne militaer), Format 4
-    /// (M10) die ersten 16 (ohne ereignisse), die übrigen bleiben 0. So zeigt auch ein alter Spielstand seine
-    /// Metadaten an.
+    /// (M10) die ersten 16 (ohne ereignisse), Format 5 (M11) die ersten 17 (ohne ki), die übrigen bleiben 0.
+    /// So zeigt auch ein alter Spielstand seine Metadaten an.
     ContentFingerprint content(std::uint32_t version) {
         const std::size_t count = version == 1   ? 13
                                   : version == 2 ? 14
                                   : version == 3 ? 15
                                   : version == 4 ? 16
+                                  : version == 5 ? 17
                                                  : kContentParts.size();
         ContentFingerprint fp;
         fp.total = hex("inhalt");
@@ -1124,6 +1128,24 @@ std::string validate_state(const Simulation& sim) {
             return "Bundesversammlung ungültig";
         }
     }
+    // KI (seit M12): je Staat und Rolle keine oder eine Person dieses Staates in dieser Rolle.
+    if (w.ai_rules.active) {
+        if (w.offices.size() != S * kPersonRoles) {
+            return "Ämter ungültig";
+        }
+        for (std::size_t i = 0; i < w.offices.size(); ++i) {
+            const Index person = w.offices[i];
+            if (person == kNone) {
+                continue;
+            }
+            if (!in(person, w.persons.size()) ||
+                w.persons[static_cast<std::size_t>(person)].state != static_cast<Index>(i / kPersonRoles) ||
+                static_cast<std::size_t>(w.persons[static_cast<std::size_t>(person)].role) !=
+                    i % kPersonRoles) {
+                return "Amt mit ungültiger Person";
+            }
+        }
+    }
     return {};
 }
 
@@ -1739,6 +1761,78 @@ ContentFingerprint content_fingerprint(const World& w) {
             }
         }
         p[16] = h.value();
+    }
+    // KI (seit M12): Regeln, Eigenschaften, Staatspersönlichkeiten, Personen und Agenden, nur in Welten mit
+    // KI-Daten. Namen der Personen und Ämter stehen in der Chronik und zählen mit.
+    {
+        Fnv h;
+        if (w.ai_rules.active) {
+            h.u64(kAiContentVersion);
+            const AiRules& r = w.ai_rules;
+            h.fixed(r.noise);
+            h.i64(r.cooldown_months);
+            h.fixed(r.debt_limit);
+            h.flag(r.open_agenda);
+            h.fixed(r.ruler_weight_absolute);
+            h.fixed(r.ruler_weight_constitutional);
+            h.i64(r.default_personality);
+            const auto inclinations = [&h](const Inclinations& values) {
+                for (const Fixed f : values) {
+                    h.fixed(f);
+                }
+            };
+            h.u64(w.ai_traits.size());
+            for (const TraitDef& t : w.ai_traits) {
+                h.text(t.id);
+                inclinations(t.inclinations);
+            }
+            h.u64(w.ai_personalities.size());
+            for (const PersonalityDef& pd : w.ai_personalities) {
+                h.text(pd.id);
+                inclinations(pd.inclinations);
+            }
+            h.u64(w.persons.size());
+            for (const PersonDef& pd : w.persons) {
+                h.text(pd.id);
+                h.text(pd.name);
+                h.text(pd.title);
+                h.i64(pd.state);
+                h.u64(static_cast<std::uint64_t>(pd.role));
+                h.i64(to_day_number(pd.from));
+                h.flag(pd.has_to);
+                h.i64(pd.has_to ? to_day_number(pd.to) : 0);
+                h.flag(pd.has_condition);
+                if (pd.has_condition) {
+                    condition_hash(h, pd.condition);
+                }
+                for (const std::int32_t v : pd.values) {
+                    h.i64(v);
+                }
+                h.u64(pd.traits.size());
+                for (const Index t : pd.traits) {
+                    h.i64(t);
+                }
+            }
+            h.u64(w.agendas.size());
+            for (const AgendaDef& a : w.agendas) {
+                h.i64(a.personality);
+                h.u64(a.goals.size());
+                for (const AgendaGoal& g : a.goals) {
+                    h.u64(static_cast<std::uint64_t>(g.kind));
+                    h.fixed(g.weight);
+                    h.i64(g.target);
+                    h.flag(g.has_from);
+                    h.i64(g.has_from ? to_day_number(g.from) : 0);
+                    h.flag(g.has_to);
+                    h.i64(g.has_to ? to_day_number(g.to) : 0);
+                    h.flag(g.has_condition);
+                    if (g.has_condition) {
+                        condition_hash(h, g.condition);
+                    }
+                }
+            }
+        }
+        p[17] = h.value();
     }
     fp.total = MetaReader::content_fingerprint_total(fp.parts);
     return fp;

@@ -418,7 +418,9 @@ Kriegslesezeichen nutzen die Daten von 1848 und die datierte Historie bis zu ihr
 | `common/journale/deutsche_frage.chron` | seit b3: Journal „Die deutsche Frage“ bis 1.7.1871 mit den Stufen Deutscher Bund, Deutscher Krieg, Zwei Bünde und den Ausgängen kleindeutsch, großdeutsch, zwei Bünde, Bund (am Ende), ohne Bund und Reich |
 | `common/ereignisziele_voelkerfruehling_1871.chron` | seit b3: Korridore des Ereignislabors für die deutsche Frage bis 1871 (`--ziele`, nicht in jedem CI-Lauf) |
 
-Das Lesezeichen 1648 hat keine Ereignisse (vor dem `seit`); seine Prüfsumme bleibt.
+| `common/ki.chron` | seit M12: Regeln der KI ab 1848.01.01 (Rauschen, Abkühlung, Schuldengrenze, Gewicht von Herrscher und Minister), sechs Staatspersönlichkeiten und 16 Eigenschaften mit ihren Neigungen ([ki.md](../docs/technik/ki.md) Abschnitt 3); Personen (`persoenlichkeiten.chron`) und Agenden (`agenden.chron`) folgen mit Schritt b1 |
+
+Das Lesezeichen 1648 hat keine Ereignisse und keine KI (vor dem `seit`); seine Prüfsumme bleibt.
 
 ## Bekannte Lücken und Vereinfachungen
 

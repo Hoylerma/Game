@@ -24,7 +24,7 @@ gebaut; Abhängigkeiten stehen jeweils dabei.
 | M9 | Diplomatie und Zollverein | 2 – Vertical Slice | M7 | **fertig** (Fachprüfung der Werte offen, siehe unten) |
 | M10 | Militär und Einigungskriege | 2 – Vertical Slice | M9 | **fertig** (Fachprüfung der Werte offen, siehe unten) |
 | M11 | Ereignisse und Revolution 1848/49 | 2 – Vertical Slice | M8 | **fertig** (Fachprüfung der Quellen und Werte offen, siehe unten) |
-| M12 | Künstliche Intelligenz der Staaten | 2 – Vertical Slice | M8–M11 | offen |
+| M12 | Künstliche Intelligenz der Staaten | 2 – Vertical Slice | M8–M11 | in Arbeit |
 | M13 | Spielbarer Vertical Slice 1848–1871 | 2 – Vertical Slice | M12 | offen |
 
 Phase 1 endet mit M6 (Ziel der Roadmap: „Technikprototyp“). Phase 2 endet mit M13 (Ziel:
@@ -815,6 +815,7 @@ Abschnitt 13).
 ### M12 – Künstliche Intelligenz der Staaten
 
 **Ziel:** Computerstaaten nach [21 Künstliche Intelligenz](21_kuenstliche_intelligenz.md).
+Vertrag: [technik/ki.md](technik/ki.md) (Entscheidungen freigegeben, Stand in Abschnitt 13).
 
 **Umfang**
 - Entscheidungen zu Haushalt, Steuern, Diplomatie, Krieg und Politik

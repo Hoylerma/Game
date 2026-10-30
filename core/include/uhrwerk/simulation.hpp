@@ -65,7 +65,8 @@ enum class CommandType : std::uint8_t {
     PeaceOffer,   // seit M10: state, target = Nummer des Krieges, value = PeaceTerms (militaer.md 4.5)
     Staff,        // seit M10: state, value = Nummer des Heeres, target = 1 übergeben, 0 zurücknehmen (5)
     EventChoice,  // seit M11: state, value = Ereignis, target = Option (ereignisse.md Abschnitt 3.6)
-    EventPlayer,  // seit M11: state = Staat, dessen Ereignisse auf die Wahl warten; kNone: keiner
+    PlayerState,  // seit M11 (Ereignisspieler), seit M12 Spielerstaat: state = Staat des Menschen; seine
+                  // Ereignisse warten auf die Wahl, die KI gibt ihm keine Befehle (ki.md 4.1); kNone: keiner
 };
 
 struct Command {
@@ -222,6 +223,7 @@ private:
     Pcg32 rng_economy_;
     Pcg32 rng_events_;
     Pcg32 rng_war_; // seit M10: Schlachten; im Zustand nur mit Militär
+    Pcg32 rng_ai_;  // seit M12: Rauschen der KI; im Zustand nur mit KI-Daten
     std::int64_t days_elapsed_ = 0;
     std::vector<LoggedCommand> command_log_;
     std::uint64_t start_checksum_ = 0;

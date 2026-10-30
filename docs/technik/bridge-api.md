@@ -127,7 +127,7 @@ sind die Listen leer und die Befehle werden abgewiesen. Die Befehle wirken am n�
 
 | Methode | Rückgabe | Beschreibung |
 |---|---|---|
-| `set_event_player(state_index: int)` | `bool` | Befehl `Ereignisspieler`: Ereignisse dieses Staates (−1: keiner) warten auf die Wahl. Godot schickt ihn beim Start, nach dem Laden und beim Staatswechsel, im Parteienmodus −1 |
+| `set_event_player(state_index: int)` | `bool` | Befehl `Spielerstaat` (bis M11 `Ereignisspieler`): Ereignisse dieses Staates (−1: keiner) warten auf die Wahl, seit M12 lässt ihn die KI aus. Godot schickt ihn beim Start, nach dem Laden und beim Staatswechsel, im Parteienmodus −1 |
 | `get_event_player()` | `int` | Staat, dessen Ereignisse warten (−1: keiner) |
 | `get_open_events()` | `Array` | offene Ereignisse, je `{ event_index, id, title, text, state_index, state_name, date_text (historisches Datum, sonst leer), since_text, due_text, days_left (bis die Standardoption gilt), source, kind_text, turning_point, chosen_option (schon gewählt, wirksam am nächsten Tag; sonst −1), default_option, options }`; je Option `{ index, id, text, historical, available (Bedingung erfüllt), effects (PackedStringArray, Folgentexte) }` |
 | `choose_event_option(event_index: int, option_index: int)` | `bool` | Befehl `Ereigniswahl`; `false` für ein nicht offenes Ereignis oder eine nicht verfügbare Option |

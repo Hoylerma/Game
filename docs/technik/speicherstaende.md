@@ -226,9 +226,9 @@ Parlament, Zollunion, Bund und Militär bleibt die Folge der Zufallszahlen wie v
 
 ## 6. Versionen und Migration
 
-- Die **Formatversion** steht im Kopf (`kSaveFormatVersion = 4` seit M10, 3 in M9, 2 in M8, vorher
-  1). **Neuere** Versionen lehnt der Kern ab („Spielstand aus einer neueren Spielversion (Format 5,
-  unterstützt bis 4)“).
+- Die **Formatversion** steht im Kopf (`kSaveFormatVersion = 6` seit M12, 5 in M11, 4 in M10, 3 in
+  M9, 2 in M8, vorher 1). **Neuere** Versionen lehnt der Kern ab („Spielstand aus einer neueren
+  Spielversion (Format 7, unterstützt bis 6)“).
 - **Format 2 (M8):** die Wahlen und der Wahlkampf im Zustandsverzeichnis, Befehle mit Ziel und
   Aktion (56 statt 40 Byte im Protokoll) und der Inhaltsbereich `politik`. Ein
   Spielstand im Format 1 zeigt seine Metadaten noch an (13 Inhaltsbereiche, der Gesamtwert über
@@ -276,6 +276,12 @@ Parlament, Zollunion, Bund und Militär bleibt die Folge der Zufallszahlen wie v
   Zustand, die Befehle `Ereigniswahl` (Wert = Ereignis, Ziel = Option) und `Ereignisspieler` im
   Protokoll, und in Welten mit Ereignissen tragen die wartenden Befehle Ziel und Aktion. Ohne
   Ereignisse (1648) zählt nichts davon, der Prüfwert der Formatwache bleibt.
+- **Format 6 (M12):** der Inhaltsbereich `ki` (Regeln, Eigenschaften, Staatspersönlichkeiten, Personen,
+  Agenden; eigener Stand `kAiContentVersion`, 1 seit Schritt a1) und in Welten mit KI-Daten im Zustand
+  die Personen im Amt je Staat und Rolle (`aemter`) und der Zufallsstrom `zufall.ki`
+  ([ki.md](ki.md), Abschnitt 8). Der Befehl `Ereignisspieler` heißt seit M12 `Spielerstaat` (gleiche
+  Nummer im Protokoll). Ein Spielstand im Format 5 zeigt seine Metadaten mit 17 Bereichen an, lädt aber
+  nicht. Ohne KI (1648) zählt nichts davon, der Prüfwert der Formatwache bleibt.
 - Jede Änderung am Zustand (neues Feld, neue Reihenfolge) erhöht die Formatversion. Der Test
   „Spielstand: Formatwache“ verhindert, dass das vergessen wird: Er speichert die Test-Fixture nach
   einem Jahr und vergleicht den Prüfwert der Nutzdaten mit einem festgehaltenen Wert. Ändert er

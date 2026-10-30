@@ -8,6 +8,22 @@ Vor Version 1.0 kann sich jede Schnittstelle ändern.
 
 ## [Unveröffentlicht]
 
+### Meilenstein M12 – Künstliche Intelligenz der Staaten
+
+Vertrag: [technik/ki.md](docs/technik/ki.md), Entscheidungen 1–14 wie empfohlen freigegeben; Stand je
+Schritt in Abschnitt 13 dort.
+
+- **Datenmodell (Schritt a1):** Neue Datei `common/ki.chron` ([chronik-skript.md](docs/technik/chronik-skript.md)
+  Abschnitt 3.37) mit den Regeln der KI ab 1848, sechs Staatspersönlichkeiten (Machtpolitiker, Bewahrer,
+  Reformer, Händler, Hegemon, Gleichgewichtswahrer) und 16 Eigenschaften aus Kapitel 13, je mit Beitrag zu
+  sechs Neigungen (Risiko, Expansion, Legitimität, Reform, Sparsamkeit, Vermittlung). Lader für Personen
+  mit Amt, Amtszeit, Bedingung, Werten und Eigenschaften (`common/persoenlichkeiten.chron`, 3.38) und für
+  Agenden mit Staatspersönlichkeit und Zielen (`common/agenden.chron`, 3.39). Die Ämter (Herrscher,
+  leitender Minister) werden beim Start besetzt und am Monatsersten nach Datum und Bedingung neu
+  bestimmt; ein Wechsel steht in der Chronik. Der Befehl `Ereignisspieler` heißt jetzt `Spielerstaat`.
+  Inhaltsbereich `ki`, Spielstand **Format 6** (Spielstände aus M11 laden nicht mehr); `uhrwerk-cli info`
+  mit Zeile „KI“. Personen und Agenden 1848–1871 folgen mit Schritt b1; 1648 bitgleich.
+
 ### Meilenstein M11 – Ereignisse und Revolution 1848/49
 
 Vertrag: [technik/ereignisse.md](docs/technik/ereignisse.md), Entscheidungen 1–13 wie empfohlen

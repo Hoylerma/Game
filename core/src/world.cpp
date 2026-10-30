@@ -98,6 +98,23 @@ Index World::find_vote(std::string_view id) const {
     return find_by(votes, id, [](const VoteDef& v) -> std::string_view { return v.id; });
 }
 
+Index World::find_person(std::string_view id) const {
+    return find_by(persons, id, [](const PersonDef& p) -> std::string_view { return p.id; });
+}
+
+Index World::find_trait(std::string_view id) const {
+    return find_by(ai_traits, id, [](const TraitDef& t) -> std::string_view { return t.id; });
+}
+
+Index World::find_personality(std::string_view id) const {
+    return find_by(ai_personalities, id, [](const PersonalityDef& p) -> std::string_view { return p.id; });
+}
+
+Index World::office(Index state, PersonRole role) const {
+    const std::size_t slot = static_cast<std::size_t>(state) * kPersonRoles + static_cast<std::size_t>(role);
+    return state >= 0 && slot < offices.size() ? offices[slot] : kNone;
+}
+
 Index World::find_event(std::string_view id) const {
     return find_by(events, id, [](const EventDef& e) -> std::string_view { return e.id; });
 }

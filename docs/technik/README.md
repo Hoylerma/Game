@@ -18,6 +18,7 @@ ist (Stand: Meilenstein M3, Karte des Kernraums).
 | [diplomatie.md](diplomatie.md) | **Verbindlich seit M9:** Zollunionen und Zollgebiete je Markt, Zoll im Handel, Vereinskasse, Beitritt und Austritt, Zolllabor; Beziehungen, Gesandte, Bündnisse und Garantien, Bundesversammlung, diplomatische Spiele, deutsche Frage; Entscheidungen, Umsetzungsstand | Daten, Kern, Brücke, Godot-Projekt |
 | [militaer.md](militaer.md) | **Verbindlich seit M10:** Nachbarschaft der Orte, Heere, Mobilmachung, Bewegung mit Eisenbahn, Versorgung, Schlacht, Besetzung und Belagerung, Krieg und Frieden mit Kriegspunkten und Gebietsabtretung, Generalstab nach Regel, Kriegslesezeichen 1864, 1866 und 1870, Kriegslabor; Entscheidungen, Umsetzungsstand | Daten, Werkzeuge, Kern, Brücke, Godot-Projekt |
 | [ereignisse.md](ereignisse.md) | **Verbindlich für M11 (abgeschlossen):** Ereignisse im Chronik-Skript (Bedingungen, Optionen, Wirkungen, Wahl nach Gewicht, Befehl für den Spieler), Gesetze (Presse, Vereine, Grundlasten), Zustimmung der Interessengruppen, Unruhe und Aufstände, Journale „Revolution 1848/49“ und „Deutsche Frage“, Abstimmungen der Paulskirche, 109 Ereignisse 1848–1871, Ereignislabor; Entscheidungen, Umsetzungsstand | Daten, Kern, Brücke, Godot-Projekt |
+| [ki.md](ki.md) | **Verbindlich für M12 (in Arbeit):** KI der Staaten ohne Spieler – Persönlichkeiten (Herrscher, leitende Minister, sechs Neigungen), historische Agenden, Spielerstaat im Kern, Lagebild, Nutzenbewertung mit Gründen, Planer für Haushalt, Diplomatie, Krieg und Politik, KI-Labor mit 100 Partien 1848–1871; Entscheidungen, Umsetzungsstand | Daten, Kern, Brücke, Godot-Projekt |
 
 Die öffentlichen Header in [`core/include/uhrwerk/`](../../core/include/uhrwerk/) sind die
 verbindliche Programmierschnittstelle des Kerns. Jede Datei beginnt mit einem Kommentar, der ihre
@@ -240,7 +241,7 @@ Strom-Kennung:
 | `Demografie` | 1 | angelegt, noch nicht gezogen |
 | `Wirtschaft` | 2 | Erntefaktor je Markt und Jahr (seit M5) |
 | `Ereignisse` | 3 | Seuchen am Jahreswechsel (`chance`, `uniform`) |
-| `Ki` | 4 | reserviert |
+| `Ki` | 4 | seit M12: Rauschen der KI-Planer ([ki.md](ki.md), Abschnitt 5); im Zustand nur mit KI-Daten |
 | `Lasttest` | 5 | Aufbau der Lasttest-Welt (seit M4), nicht in der Simulation |
 | `Testbefehle` | 6 | Testbefehle der Kommandozeile (`--testbefehle`, seit M6), nicht in der Simulation |
 | `Wahlen` | 7 | je Wahl neu aus Seed und Parlament (seit M8), kein Zustand |
