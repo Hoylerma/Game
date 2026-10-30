@@ -515,6 +515,12 @@ void Simulation::execute(const Command& command) {
     case CommandType::PlayerState:
         set_event_player(world_, command.state);
         return;
+    case CommandType::PlayerCurrent:
+        if (command.state == kNone ||
+            (command.state >= 0 && static_cast<std::size_t>(command.state) < world_.currents.size())) {
+            world_.player_current = command.state;
+        }
+        return;
     }
 }
 

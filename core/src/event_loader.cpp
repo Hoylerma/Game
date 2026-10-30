@@ -577,6 +577,8 @@ private:
             {"schwelle", &r.threshold, fx(0), fx(1000)},
             {"ueberschuss_ab", &r.surplus_from, fx(0), fx(1)},
             {"unruhe_steuern_ab", &r.unrest_tax_from, fx(0), fx(100)},
+            {"wahlkampf_ruecklage", &r.campaign_reserve, fx(0), fx(1)},
+            {"ruecklage_ab", &r.reserve_from, fx(0), fx(100)},
             {"bedrohung_mobil", &r.threat_mobilize, fx(0), fx(100)},
         };
         for (const Value& v : values) {
@@ -599,6 +601,8 @@ private:
             {"protokoll", &r.log_size, 1, 1000},
             {"abkuehlung_steuern", &r.tax_cooldown_months, 0, 120},
             {"abruestung_monate", &r.quiet_months, 1, 120},
+            {"buendnisse", &r.max_alliances, 0, 100},
+            {"wahlkampf_monate", &r.campaign_months, 0, 24},
         };
         for (const Count& c : counts) {
             if (child.key == c.key) {
@@ -1369,6 +1373,24 @@ private:
                 continue;
             }
             if (!first_time(seen, child, what)) {
+                continue;
+            }
+            if (child.key == "ki") {
+                // Bezug zu den Neigungen der KI (seit M12, ki.md 6.4): ki { risiko = 1 reform = -1 }.
+                if (!child.is_block) {
+                    error(child.line, "'ki' erwartet einen Block: ki { risiko = 1 … }");
+                    continue;
+                }
+                option.has_ai = true;
+                Inclinations lean{};
+                for (const ScriptNode& k : child.children) {
+                    if (!inclination(k, lean)) {
+                        error(k.line, "unbekannte Neigung " + quote(k.key) +
+                                          " in 'ki' (risiko, expansion, legitimitaet, reform, sparsamkeit, "
+                                          "vermittlung)");
+                    }
+                }
+                option.ai_lean = lean;
                 continue;
             }
             if (child.key == "text") {

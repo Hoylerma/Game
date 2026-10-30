@@ -41,9 +41,15 @@ struct AiRules {
     std::int32_t tax_cooldown_months = 3;          // Monate nach einer Steueränderung (abkuehlung_steuern)
     Fixed surplus_from = Fixed::from_ratio(3, 20); // Überschussanteil, ab dem Steuern sinken (ueberschuss_ab)
     Fixed unrest_tax_from = Fixed::from_int(50);   // Unruhe, ab der Steuern sinken (unruhe_steuern_ab)
+    Fixed reserve_from = Fixed::one(); // Schatz ÷ Jahreseinnahmen, ab dem ein Überschuss Steuern senkt
+                                       // (ruecklage_ab)
     Fixed threat_mobilize = Fixed::from_ratio(3, 2); // Bedrohung, ab der gegen einen mobilen Nachbarn
                                                      // mobil gemacht wird (bedrohung_mobil)
     std::int32_t quiet_months = 2; // Monatserste ohne Krieg und Krise bis zur Abrüstung (abruestung_monate)
+    // Seit Schritt a3 (Abschnitte 6.2 und 6.4).
+    std::int32_t max_alliances = 3;                   // Bündnisse, über die hinaus keine angeboten werden
+    std::int32_t campaign_months = 4;                 // Wahlkampf der Strömungen in den Monaten vor der Wahl
+    Fixed campaign_reserve = Fixed::from_ratio(1, 5); // Rücklage der Mittel einer Strömung
 };
 
 /// Faktor eines Nutzens (Abschnitt 5); seine Bezeichnung liefert ai_reason_text.
@@ -58,8 +64,19 @@ enum class AiFactor : std::uint8_t {
     Threat,    // Bedrohung durch einen Staat (other)
     Mobilized, // ein Nachbar ist mobil (other)
     Quiet,     // weder Krieg noch Krise
+    // seit a3: Diplomatie und Politik
+    Agenda,     // Gewicht eines Ziels der Agenda (other: Gegenstand, wenn ein Staat)
+    Rival,      // gemeinsamer Rivale bzw. der Gegner ist der Rivale (other)
+    Relation,   // Beziehung zum anderen Staat (other)
+    Strength,   // Stärkeverhältnis zum anderen Staat (other)
+    Neighbor,   // gemeinsame Grenze (other)
+    Ally,       // Verbündeter oder Garant (other)
+    Expansion,  // Neigung Expansion
+    Legitimacy, // Neigung Legitimität
+    Mediation,  // Neigung Vermittlung
+    Alliances,  // Zahl der eigenen Bündnisse (dagegen)
 };
-inline constexpr std::size_t kAiFactors = 10;
+inline constexpr std::size_t kAiFactors = 20;
 
 /// Ein Grund: Faktor, betroffener Staat (oder -1) und Beitrag zum Nutzen.
 struct AiReason {
@@ -72,8 +89,21 @@ struct AiReason {
 inline constexpr std::size_t kAiReasons = 3;
 
 /// Art einer Entscheidung im KI-Protokoll.
-enum class AiDecisionKind : std::uint8_t { RaiseTax, LowerTax, Mobilize, Demobilize };
-inline constexpr std::size_t kAiDecisionKinds = 4;
+enum class AiDecisionKind : std::uint8_t {
+    RaiseTax,
+    LowerTax,
+    Mobilize,
+    Demobilize,
+    // seit a3 (Abschnitt 6.2)
+    SendEnvoy,      // Ziel: Staat
+    OfferAlliance,  // Ziel: Staat
+    OfferGuarantee, // Ziel: Staat
+    Demand,         // Ziel: Staat, Wert: DemandKind
+    Manoeuvre,      // Ziel: Gegner im Spiel, Wert: Manoeuvre
+    Motion,         // Ziel: Zollunion oder -1, Wert: MotionKind
+    JoinUnion,      // Ziel: Zollunion
+};
+inline constexpr std::size_t kAiDecisionKinds = 11;
 
 /// Eintrag im KI-Protokoll: wer, wann, was, mit welchem Nutzen und den drei wichtigsten Gründen.
 struct AiDecision {

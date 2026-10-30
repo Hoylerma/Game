@@ -40,11 +40,12 @@ constexpr std::uint64_t kMilitaryContentVersion = 9;
 /// Stand der Ereignisse im Zustand (seit M11, Inhaltsbereich ereignisse): 1 = Schritt a1, 2 = a2 (Auslösung,
 /// Befristung, Spieler), 3 = a3 (Unruhe, Aufstände), 4 = a4 (Journale, Abstimmungen), 5 = a5 (beendete
 /// Aufstände).
-constexpr std::uint64_t kEventContentVersion = 6;
+constexpr std::uint64_t kEventContentVersion = 7; // 7 seit M12a3: Block ki an den Optionen
 
 /// Stand der KI im Zustand (seit M12, Inhaltsbereich ki): 1 = Schritt a1 (Ämter, Strom Ki), 2 = a2
-/// (Strategie, Protokoll, Abkühlung; Planer Haushalt und Mobilmachung).
-constexpr std::uint64_t kAiContentVersion = 2;
+/// (Strategie, Protokoll, Abkühlung; Planer Haushalt und Mobilmachung), 3 = a3
+/// (Diplomatie, Wahlkampf, Spielerströmung).
+constexpr std::uint64_t kAiContentVersion = 3;
 
 bool fail(std::string* error, std::string message) {
     if (error != nullptr) {
@@ -1165,6 +1166,9 @@ std::string validate_state(const Simulation& sim) {
                 }
             }
         }
+        if (w.player_current != kNone && !in(w.player_current, w.currents.size())) {
+            return "Spielerströmung ungültig";
+        }
         for (const AiCooldown& c : w.ai_cooldowns) {
             if (!in(c.state, S) || static_cast<std::size_t>(c.kind) >= kAiDecisionKinds ||
                 !is_valid(c.until)) {
@@ -1252,6 +1256,12 @@ void event_hash(Fnv& h, const EventDef& e) {
         }
         condition_hash(h, o.condition);
         effects_hash(h, o.effects);
+        h.flag(o.has_ai); // seit M12 (a3)
+        if (o.has_ai) {
+            for (const Fixed f : o.ai_lean) {
+                h.fixed(f);
+            }
+        }
     }
 }
 
@@ -1807,8 +1817,12 @@ ContentFingerprint content_fingerprint(const World& w) {
             h.i64(r.tax_cooldown_months);
             h.fixed(r.surplus_from);
             h.fixed(r.unrest_tax_from);
+            h.fixed(r.reserve_from);
             h.fixed(r.threat_mobilize);
             h.i64(r.quiet_months);
+            h.i64(r.max_alliances); // seit a3
+            h.i64(r.campaign_months);
+            h.fixed(r.campaign_reserve);
             const auto inclinations = [&h](const Inclinations& values) {
                 for (const Fixed f : values) {
                     h.fixed(f);

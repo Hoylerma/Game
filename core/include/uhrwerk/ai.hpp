@@ -48,14 +48,24 @@ Fixed ai_strength(const World& world, Index state);
 /// × Nähe; 0 ohne Militär oder für sich selbst.
 Fixed ai_threat(const World& world, const EventCache& cache, Index state, Index other);
 
+/// Annahme eines Bündnisangebots durch einen Staat ohne Spieler (Abschnitt 6.2), ohne Rauschen:
+/// (Beziehung − 50) ÷ 5, gemeinsamer Rivale +20, der Anbieter ist der eigene Rivale −30; angenommen ab der
+/// Schwelle. Ersetzt die Regel „ab Beziehung bündnis_ab“, wenn die KI rechnet.
+bool ai_accepts_alliance(const World& world, Index acceptor, Index proposer);
+
+/// Faktor der KI auf das Gewicht einer Ereignisoption (Abschnitt 6.4): max(0,1; 1 + ¼ × Σ Bezug × Neigung)
+/// für Staaten ohne Spieler mit Bezug; sonst 1.
+Fixed ai_option_factor(const World& world, const EventOption& option, Index state);
+
 /// Text eines Grundes, z. B. „Defizit +34“ oder „Bedrohung durch Österreich +12“.
 std::string ai_reason_text(const World& world, const AiReason& reason);
 
 /// Text einer Entscheidung, z. B. „erhöht die Akzise auf 7 %“.
 std::string ai_decision_text(const World& world, const AiDecision& decision);
 
-/// Der Tag der KI (Abschnitt 4.2): am Monatsersten Ämter, Strategie und Planer (Haushalt, Mobilmachung)
-/// für jeden bestehenden Staat außer dem Spielerstaat. Liefert die Befehle der KI; die Simulation reiht sie
+/// Der Tag der KI (Abschnitt 4.2): am Monatsersten Ämter, Strategie und Planer (Haushalt, Mobilmachung,
+/// Diplomatie) für jeden bestehenden Staat außer dem Spielerstaat, danach der Wahlkampf der Strömungen
+/// außer der des Spielers. Liefert die Befehle der KI; die Simulation reiht sie
 /// ohne Protokoll ein, sie wirken am nächsten Tag.
 std::vector<Command> run_ai(World& world, Pcg32& rng, EventCache& cache);
 

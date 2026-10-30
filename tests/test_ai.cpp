@@ -5,6 +5,8 @@
 
 #include "test_hilfen.hpp"
 #include "uhrwerk/ai.hpp"
+#include "uhrwerk/diplomacy.hpp"
+#include "uhrwerk/events.hpp"
 #include "uhrwerk/military.hpp"
 #include "uhrwerk/savegame.hpp"
 #include "uhrwerk/simulation.hpp"
@@ -334,6 +336,7 @@ void set_budget(World& w, std::string_view tag, std::int64_t income, std::int64_
     s.last_month_expenses = fx(expenses);
     s.debt = fx(debt);
     s.yearly_income = fx(income * 12);
+    s.treasury = fx(income * 12);                // Rücklage von einer Jahreseinnahme (ruecklage_ab)
     s.tax_rates[0] = Fixed::from_ratio(10, 100); // Kontribution
     s.tax_rates[1] = Fixed::from_ratio(5, 100);  // Akzise
 }
@@ -466,4 +469,99 @@ TEST_CASE("KI: Abrüstung nach zwei ruhigen Monatsersten, nicht für den Spieler
             CHECK(phase == uhrwerk::MobilizationPhase::Demobilizing);
         }
     }
+}
+
+namespace {
+
+/// Deutscher Bund im Test: alle Orte mit Kreis im Bundesgebiet, Grundbeziehungen wie angegeben.
+void federation(const AiData& data, int bra_sax, int bra_anh, int sax_anh) {
+    for (const char* file : {"history/orte/10_brandenburg.chron", "history/orte/20_sachsen.chron",
+                             "history/orte/30_anhalt.chron"}) {
+        std::string text = testhilfen::read_file(data.dir() / file);
+        std::string::size_type pos = 0;
+        while ((pos = text.find("\n    kreis", pos)) != std::string::npos) {
+            text.insert(pos + 1, "    bund = ja\n");
+            pos += 20;
+        }
+        testhilfen::write_file(data.dir() / file, text);
+    }
+    std::string relations;
+    const auto add = [&](std::string_view a, std::string_view b, int value) {
+        relations += "beziehung {\n    staaten = { " + std::string(a) + " " + std::string(b) +
+                     " }\n    wert = " + std::to_string(value) + "\n    quelle = \"Testdaten\"\n}\n";
+    };
+    add("BRA", "SAX", bra_sax);
+    add("BRA", "ANH", bra_anh);
+    add("SAX", "ANH", sax_anh);
+    testhilfen::write_file(data.dir() / "history/beziehungen/grundwerte.chron", relations);
+}
+
+} // namespace
+
+TEST_CASE("KI: Bündnis gegen einen gemeinsamen Rivalen, Annahme nach Nutzen") {
+    const std::string agendas =
+        "agenda BRA {\n    ziel { art = schwaechen  gegner = ANH  gewicht = 30 }\n}\n"
+        "agenda SAX {\n    ziel { art = schwaechen  gegner = ANH  gewicht = 30 }\n}\n";
+    AiData data(quiet_rules(), kPersons, agendas);
+    federation(data, 60, -150, -150);
+    Simulation sim(data.load());
+    const Index bra = sim.world().find_state("BRA");
+    const Index sax = sim.world().find_state("SAX");
+    // Nach der Regel aus M9 (bündnis_ab = 100) wäre das Bündnis abgelehnt; mit gemeinsamem Rivalen nimmt
+    // Sachsen an: (60 − 50) ÷ 5 + 20 = 22 ≥ 10.
+    while (sim.world().date < uhrwerk::Date{1648, 11, 3}) {
+        sim.step_day();
+    }
+    const World& w = sim.world();
+    CHECK(w.ai_strategy[static_cast<std::size_t>(bra)].rival == w.find_state("ANH"));
+    CHECK(uhrwerk::allied(w, bra, sax));
+    const auto offer = std::find_if(w.ai_log.begin(), w.ai_log.end(), [](const uhrwerk::AiDecision& d) {
+        return d.kind == uhrwerk::AiDecisionKind::OfferAlliance;
+    });
+    REQUIRE(offer != w.ai_log.end());
+    CHECK(offer->state == sax); // Sachsen plant zuerst (Reihenfolge der Staaten)
+    CHECK(offer->target == bra);
+    CHECK(uhrwerk::ai_decision_text(w, *offer) == "bietet Brandenburg ein Bündnis an");
+    CHECK(std::any_of(offer->reasons.begin(), offer->reasons.begin() + offer->reason_count,
+                      [&](const uhrwerk::AiReason& r) { return r.factor == uhrwerk::AiFactor::Rival; }));
+    // Ohne gemeinsamen Rivalen lehnt ein Staat ohne Spieler ab, der Spielerstaat nach der Regel.
+    World other = data.load();
+    uhrwerk::EventCache cache;
+    uhrwerk::rebuild_event_cache(other, cache);
+    uhrwerk::ensure_ai_state(other, cache);
+    CHECK_FALSE(uhrwerk::ai_accepts_alliance(other, sax, bra));
+}
+
+TEST_CASE("KI: Ereignisoptionen nach Neigung, Befehl Spielerströmung") {
+    AiData data(quiet_rules());
+    testhilfen::write_file(
+        data.dir() / "common/ereignisse/test.chron",
+        "ereignis test.wagnis {\n    titel = \"Wagnis\"\n    text = \"x\"\n    art = dynamisch\n"
+        "    wiederholbar = ja\n    abstand = 365\n"
+        "    option kuehn { text = \"kühn\" gewicht = 10 ki { risiko = 1 expansion = 1 } }\n"
+        "    option still { text = \"still\" gewicht = 10 }\n}\n");
+    Simulation sim(data.load());
+    const World& w = sim.world();
+    const uhrwerk::EventDef& event = w.events[static_cast<std::size_t>(w.find_event("test.wagnis"))];
+    REQUIRE(event.options[0].has_ai);
+    CHECK_FALSE(event.options[1].has_ai);
+    uhrwerk::EventCache cache;
+    uhrwerk::rebuild_event_cache(w, cache);
+    // Brandenburg (Machtpolitiker, Herrscher Machtpolitiker): risiko 1,6, expansion 2 → 1 + ¼ × 3,6 = 1,9.
+    const Index bra = w.find_state("BRA");
+    const auto weights = uhrwerk::option_weights(w, cache, event, bra);
+    CHECK(weights[0].round() == 19);
+    CHECK(weights[1] == fx(10));
+    // Sachsen (Bewahrer): risiko −1 → 1 − ¼ = 0,75.
+    const auto saxony = uhrwerk::option_weights(w, cache, event, w.find_state("SAX"));
+    CHECK(saxony[0] == Fixed::from_ratio(15, 2));
+    // Spielerströmung: gültig gesetzt, ungültig ohne Wirkung.
+    uhrwerk::Command c;
+    c.type = uhrwerk::CommandType::PlayerCurrent;
+    c.state = 0;
+    sim.submit(c);
+    c.state = 99;
+    sim.submit(c);
+    sim.step_day();
+    CHECK(sim.world().player_current == 0);
 }

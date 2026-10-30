@@ -1,5 +1,6 @@
 #include "uhrwerk_simulation.h"
 
+#include "uhrwerk/ai.hpp"
 #include "uhrwerk/customs.hpp"
 #include "uhrwerk/date.hpp"
 #include "uhrwerk/diplomacy.hpp"
@@ -2918,8 +2919,15 @@ bool UhrwerkSimulation::set_player_current(std::int64_t current) {
     if (!w) {
         return false;
     }
+    // Seit M12 (a3) erfährt auch der Kern die Strömung des Spielers (Befehl Spielerströmung): Die KI führt
+    // für sie keinen Wahlkampf.
+    uhrwerk::Command command;
+    command.type = uhrwerk::CommandType::PlayerCurrent;
     if (current < 0) {
         player_current_.clear();
+        if (w->player_current != uhrwerk::kNone) {
+            simulation_->submit(command);
+        }
         return true;
     }
     // Parteienmodus nur in Szenarien mit Parlament (Review M8: 1648 hat Strömungen, aber keine Wahl).
@@ -2927,6 +2935,10 @@ bool UhrwerkSimulation::set_player_current(std::int64_t current) {
         return false;
     }
     player_current_ = at(w->currents, current).id;
+    if (uhrwerk::ai_active(*w) && w->player_current != current) {
+        command.state = static_cast<uhrwerk::Index>(current);
+        simulation_->submit(command);
+    }
     return true;
 }
 

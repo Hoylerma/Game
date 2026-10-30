@@ -303,6 +303,11 @@ Präzisiert in Schritt a2 (Spielwerte in `common/ki.chron`):
 | erhöhen | Saldo < 0 und Schuldenquote > `schulden_grenze` | Defizit = min(50, 100 × Defizit ÷ Einnahmen, im Krieg oder mobil halb); Schuldenquote = min(30, 10 × (Quote − Grenze)); Sparsamkeit = 10 × Neigung; Unruhe = −½ × Unruhe; Reform = −5 × Neigung |
 | senken | Überschuss > `ueberschuss_ab` (15 %) der Einnahmen und Quote < 1, oder Unruhe > `unruhe_steuern_ab` (50) ohne Krieg | Überschuss = min(50, 100 × (Anteil − 15 %)); Unruhe = ½ × (Unruhe − 50); Sparsamkeit = −10 × Neigung; Reform = 5 × Neigung |
 
+Ein Überschuss senkt die Steuern nur, wenn der Schatz mindestens `ruecklage_ab` Jahreseinnahmen hält
+(Standard 1): Ohne diese Bedingung senkten die kleinen Staaten 1848 ihre Kontribution bis auf die
+Hälfte, der Zollanteil des Zollvereins verdoppelte sich bis 1853 und die Steuerquote fiel in 30 Jahren
+auf 0,4 des Starts (Bilanzziel 0,6 … 1,4).
+
 Erhöht wird die niedrigere von Kontribution und Akzise (bei Gleichstand die Akzise) um einen Punkt,
 bei einem Defizit-Faktor ab 30 um zwei; gesenkt die höhere (bei Gleichstand die Kontribution) um einen
 Punkt. Gewinnt die größere Option mit Rauschen über der Schwelle. Der Zoll bleibt unberührt.
@@ -323,6 +328,22 @@ Punkt. Gewinnt die größere Option mit Rauschen über der Schwelle. Der Zoll bl
 Die **Parteinahme** in Krisen und die **Stimmen** in der Bundesversammlung bleiben Regeln
 (diplomatie.md 4.4/4.5), erhalten aber den Faktor legitimitaet (ein Bewahrer stimmt für Anträge der
 Präsidialmacht eher mit Ja).
+
+Präzisiert in Schritt a3 (je Staat und Monatserster höchstens eine Handlung jeder Art):
+
+| Handlung | Bedingung | Faktoren |
+|---|---|---|
+| Gesandter | freier Gesandter, Ziel nimmt ihn an; höchstens einer je Monat | Agenda 30 (Ziel nennt den Staat), Rivale 20, Verbündeter oder Garant 15, Nachbar 10, Stärke 10 × Anteil an der stärksten Macht; Sparsamkeit −5 × Neigung |
+| Bündnis anbieten | weniger als `buendnisse` (3) Bündnisse; gemeinsamer Rivale (beide Strategien nennen denselben Staat) oder Agenda `buendnis`; das Ziel würde annehmen | Agenda ½ × Gewicht, Rivale 20, Stärke min(20, 10 × Verhältnis), Beziehung ÷ 20, Bündnisse −5 je eigenes |
+| Bündnis annehmen (ohne Rauschen) | Regel gegen Bündnisse mit Rivalen bleibt | (Beziehung − 50) ÷ 5, gemeinsamer Rivale +20, Anbieter ist der eigene Rivale −30; ab der Schwelle. Bei Beziehung 100 ohne Rivalen wie die Regel aus M9 |
+| Garantie | Nachbar mit höchstens einem Drittel der eigenen Stärke, Garantie nach Regel möglich | Nachbar 5, Beziehung ÷ 10, Legitimität 5 × Neigung, Agenda `status_quo` ¼ × Gewicht |
+| Forderung | kein eigenes Spiel, kein Krieg; Agenda `fuehrung_bund` (gegen den Rivalen, sonst die Präsidialmacht), `zollunion` (Leitmacht gegen Nachbarn außerhalb) oder `schwaechen` (Führung im Bund gegen den Gegner); Bündnisstärke ≥ 1 − 0,15 × Risiko der des Gegners | Agenda ½ × Gewicht, Stärke 20 × Überschuss über die Grenze, Expansion und Risiko je 5 × Neigung |
+| Manöver | Hauptpartei eines Spiels; höchstens eines je Monat | nachgeben unter `spiel_nachgeben` − 0,1 × Risiko, eskalieren ab 1 − 0,15 × Risiko, sonst vermitteln mit Neigung Vermittlung über 0, sonst entscheidet die Regel der Stufe |
+| Antrag | Bundesversammlung tagt; Agenda `fuehrung_bund` (Präsidium, als Präsidialmacht die Reform) oder `zollunion` (Zolleinigung der eigenen Union); Antrag gültig und mit Mehrheit nach der Vorschau | Agenda ½ × Gewicht, Legitimität 3 × Neigung |
+| Zollunion | Agenda `zollunion` nennt die Union, Beitritt möglich | Agenda ½ × Gewicht, Beziehung zur Leitmacht ÷ 10, Leitmacht ist Rivale −30 |
+
+Forderungen, Anträge und Beitritte folgen allein der Agenda; ohne Agenden (bis b1) handeln die Staaten
+diplomatisch nur mit Gesandten, Bündnissen gegen gemeinsame Rivalen, Garantien und Manövern.
 
 ### 6.3 Krieg
 
@@ -355,6 +376,12 @@ Präsidialmacht eher mit Ja).
 - **Wahlkampf der Strömungen** ohne Spieler (politik.md 9): monatlich bis zur Wahl; Mittel in die
   Wahlkreise mit der knappsten Lage nach dem Stimmungsbericht, den auch der Spieler sieht (mit
   Fehler); Rücklage 20 %.
+  Präzisiert in a3: in den `wahlkampf_monate` (4) Monaten vor einer Wahl, je Strömung außer der des
+  Spielers (neuer Befehl `Spielerströmung`, den die Oberfläche im Parteienmodus schickt). Je Monat
+  Versammlungen in den Wahlkreisen, in denen die Strömung erste oder zweite ist, geordnet nach dem
+  Abstand zwischen ihr und der stärksten anderen (mit Rauschen ±8 Punkte), so viele, wie
+  (Mittel × (1 − Rücklage)) ÷ verbleibende Monate bezahlt. Der Wahlkampf steht nicht im KI-Protokoll
+  (eine Strömung ist kein Staat).
 - **Unruhe**: Ist die Unruhe über 60 und kein Ereignis offen, senkt der Haushaltsplaner Steuern (6.1);
   weitere Mittel gegen Unruhe gibt es ohne Gesetzgebung nicht.
 
@@ -513,5 +540,6 @@ Weitere Tests:
 | Schritt | Stand |
 |---|---|
 | – | Entscheidungen 1–14 wie empfohlen freigegeben; Umsetzung beginnt mit a1 |
-| a2 | **erledigt:** Takt am Monatsersten nach den Ereignissen (Ämter, Strategie mit Hauptziel und Rivale, Planer), Lagebild (Stärke, Bedrohung mit Feindschaft und Nähe), Nutzen als Summe benannter Faktoren mit Rauschen aus dem Strom `Ki`, Schwelle, KI-Protokoll je Staat mit drei Gründen (`ai_reason_text`, `ai_decision_text`), Abkühlung; Planer Haushalt (Kontribution und Akzise nach Defizit, Schuldenquote, Überschuss und Unruhe) und Mobilmachung (gegen bedrohliche mobile Nachbarn, Abrüstung nach zwei ruhigen Monatsersten). KI-Befehle gehen ohne Protokoll in die Warteschlange und wirken am nächsten Tag; der Spielerstaat bleibt unberührt. Zustand: Strategie, Protokoll, Abkühlungen; Inhaltsbereich Stand 2. Tests in `test_ai.cpp`; 1648 bitgleich |
+| a3 | **erledigt:** Planer Diplomatie (Gesandte, Bündnis gegen gemeinsame Rivalen mit Annahme nach Nutzen statt „ab Beziehung 100“, Garantie für kleine Nachbarn, Forderung, Manöver, Antrag und Zollunion aus der Agenda) und Politik (Block `ki { … }` an Ereignisoptionen, Wahlkampf der Strömungen ohne Spieler); Befehl `Spielerströmung` (Brücke: `set_player_current`), im Zustand mit der KI; Inhaltsbereich ki Stand 3, ereignisse Stand 7. Tests in `test_ai.cpp` |
+| a2 | **erledigt** (Labore 1848 mit KI: Revolution, Strategien, deutsche Frage bis 1871 mit 31 % kleindeutsch, 19 % zwei Bünde, 50 % Bund, Kriege, Wahl und Bilanz in ihren Korridoren; im Zolllabor die Untergrenze des Grenzhandels Mecklenburgs auf ×1,2, siehe `zollziele_voelkerfruehling.chron`): Takt am Monatsersten nach den Ereignissen (Ämter, Strategie mit Hauptziel und Rivale, Planer), Lagebild (Stärke, Bedrohung mit Feindschaft und Nähe), Nutzen als Summe benannter Faktoren mit Rauschen aus dem Strom `Ki`, Schwelle, KI-Protokoll je Staat mit drei Gründen (`ai_reason_text`, `ai_decision_text`), Abkühlung; Planer Haushalt (Kontribution und Akzise nach Defizit, Schuldenquote, Überschuss und Unruhe) und Mobilmachung (gegen bedrohliche mobile Nachbarn, Abrüstung nach zwei ruhigen Monatsersten). KI-Befehle gehen ohne Protokoll in die Warteschlange und wirken am nächsten Tag; der Spielerstaat bleibt unberührt. Zustand: Strategie, Protokoll, Abkühlungen; Inhaltsbereich Stand 2. Tests in `test_ai.cpp`; 1648 bitgleich |
 | a1 | **erledigt:** Regeln, sechs Staatspersönlichkeiten und 16 Eigenschaften in `common/ki.chron` (chronik-skript.md 3.37), Personen mit Amt, Amtszeit, Bedingung, Werten und Eigenschaften (`common/persoenlichkeiten.chron`, 3.38), Agenden mit Staatspersönlichkeit und Zielen (`common/agenden.chron`, 3.39) – geladen nur mit Ereignissen und ab `seit`; Neigungen (`state_inclinations`) und aktive Ziele (`agenda_goal_active`); Ämter je Staat und Rolle, beim Start ohne und am Monatsersten mit Eintrag in der Chronik; Befehl `Spielerstaat` (vorher `Ereignisspieler`); Strom `Ki` im Zustand; Inhaltsbereich `ki`, Spielstand Format 6; `uhrwerk-cli info` mit Zeile „KI“. Personen und Agenden 1848–1871 folgen mit b1. Tests in `test_ai.cpp`; 1648 bitgleich |

@@ -178,6 +178,11 @@ struct EventOption {
     std::vector<WeightModifier> weight_modifiers;
     Condition condition; // Verfügbarkeit (leer: immer)
     std::vector<Effect> effects;
+    // KI (seit M12, ki.md Abschnitt 6.4): Bezug der Option zu den sechs Neigungen (risiko … vermittlung),
+    // je −2 … +2; das Gewicht eines Staates ohne Spieler wird mit max(0,1; 1 + ¼ × Σ Bezug × Neigung)
+    // multipliziert. Ohne Block (has_ai false) bleibt das Gewicht wie in M11.
+    bool has_ai = false;
+    std::array<Fixed, 6> ai_lean{};
 };
 
 struct EventDef {

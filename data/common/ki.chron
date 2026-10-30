@@ -19,10 +19,16 @@ ki {
     schwelle           = 10     # Nutzen, ab dem ein Planer handelt
     protokoll          = 20     # Entscheidungen im KI-Protokoll je Staat
     abkuehlung_steuern = 3      # Monate nach einer Steueränderung (beide Richtungen)
-    ueberschuss_ab     = 0.15   # Überschussanteil der Einnahmen, ab dem Steuern sinken
+    ueberschuss_ab     = 0.15   # Überschussanteil der Einnahmen, ab dem Steuern sinken …
+    ruecklage_ab       = 1      # … wenn der Schatz mindestens so viele Jahreseinnahmen hält
     unruhe_steuern_ab  = 50     # Unruhe, ab der Steuern sinken (ohne Krieg)
     bedrohung_mobil    = 1.5    # Bedrohung durch einen mobilen Nachbarn, ab der der Staat mobil macht
     abruestung_monate  = 2      # Monatserste mobil ohne Krieg und Krise bis zur Abrüstung
+
+    # Diplomatie und Wahlkampf (seit Schritt a3, Abschnitte 6.2 und 6.4)
+    buendnisse          = 3     # höchstens so viele Bündnisse, dann kein Angebot mehr
+    wahlkampf_monate    = 4     # Strömungen ohne Spieler führen Wahlkampf in den Monaten vor der Wahl
+    wahlkampf_ruecklage = 0.2   # Anteil der Mittel, den eine Strömung zurückhält
 }
 
 # Staatspersönlichkeiten (Kapitel 21, Abschnitt 3.1; ki.md Abschnitt 3.2). Neigungen je −2 … +2.

@@ -50,23 +50,25 @@ struct SimConfig {
 };
 
 enum class CommandType : std::uint8_t {
-    SetTaxRate,   // state, kind, value = neuer Steuersatz (0..rules.tax_rate_max)
-    Campaign,     // seit M8: state = Strömung, target = Wahlkreis, action = Art (politik.md Abschnitt 9)
-    CustomsUnion, // seit M9: state, target = Zollunion oder kNone für den Austritt (diplomatie.md 3.5)
-    Envoy,        // seit M9: state, target = Staat, value = 1 entsenden, 0 abberufen (Abschnitt 4.2)
-    Treaty,       // seit M9: state, target = Staat, value = TreatyAction (diplomacy.hpp, Abschnitt 4.3)
-    Motion,       // seit M9: state = Antragsteller, value = MotionKind, target = Union bzw. Staat (4.4)
-    Demand,       // seit M9: state = Fordernder, target = Gegner, value = DemandKind (Abschnitt 4.5)
-    Manoeuvre,    // seit M9: state = Hauptpartei eines Spiels, value = Manoeuvre (diplomacy.hpp, 4.5)
-    March,        // seit M10: state, value = Nummer des Heeres, target = Zielort, kNone hält an (3.4)
-    Mobilization, // seit M10: state, value = 1 Mobilmachung, 0 Abrüstung (militaer.md 3.3)
-    DeclareWar,   // seit M10: state, target = Gegner, value = Kriegsziel (encode_war_goal, 0: keines)
-    WarGoal,      // seit M10: state, target = Nummer des Krieges, value = Kriegsziel (militaer.md 4.5)
-    PeaceOffer,   // seit M10: state, target = Nummer des Krieges, value = PeaceTerms (militaer.md 4.5)
-    Staff,        // seit M10: state, value = Nummer des Heeres, target = 1 übergeben, 0 zurücknehmen (5)
-    EventChoice,  // seit M11: state, value = Ereignis, target = Option (ereignisse.md Abschnitt 3.6)
-    PlayerState,  // seit M11 (Ereignisspieler), seit M12 Spielerstaat: state = Staat des Menschen; seine
-                  // Ereignisse warten auf die Wahl, die KI gibt ihm keine Befehle (ki.md 4.1); kNone: keiner
+    SetTaxRate,    // state, kind, value = neuer Steuersatz (0..rules.tax_rate_max)
+    Campaign,      // seit M8: state = Strömung, target = Wahlkreis, action = Art (politik.md Abschnitt 9)
+    CustomsUnion,  // seit M9: state, target = Zollunion oder kNone für den Austritt (diplomatie.md 3.5)
+    Envoy,         // seit M9: state, target = Staat, value = 1 entsenden, 0 abberufen (Abschnitt 4.2)
+    Treaty,        // seit M9: state, target = Staat, value = TreatyAction (diplomacy.hpp, Abschnitt 4.3)
+    Motion,        // seit M9: state = Antragsteller, value = MotionKind, target = Union bzw. Staat (4.4)
+    Demand,        // seit M9: state = Fordernder, target = Gegner, value = DemandKind (Abschnitt 4.5)
+    Manoeuvre,     // seit M9: state = Hauptpartei eines Spiels, value = Manoeuvre (diplomacy.hpp, 4.5)
+    March,         // seit M10: state, value = Nummer des Heeres, target = Zielort, kNone hält an (3.4)
+    Mobilization,  // seit M10: state, value = 1 Mobilmachung, 0 Abrüstung (militaer.md 3.3)
+    DeclareWar,    // seit M10: state, target = Gegner, value = Kriegsziel (encode_war_goal, 0: keines)
+    WarGoal,       // seit M10: state, target = Nummer des Krieges, value = Kriegsziel (militaer.md 4.5)
+    PeaceOffer,    // seit M10: state, target = Nummer des Krieges, value = PeaceTerms (militaer.md 4.5)
+    Staff,         // seit M10: state, value = Nummer des Heeres, target = 1 übergeben, 0 zurücknehmen (5)
+    EventChoice,   // seit M11: state, value = Ereignis, target = Option (ereignisse.md Abschnitt 3.6)
+    PlayerState,   // seit M11 (Ereignisspieler), seit M12 Spielerstaat: state = Staat des Menschen; seine
+                   // Ereignisse warten auf die Wahl, die KI gibt ihm keine Befehle (ki.md 4.1); kNone: keiner
+    PlayerCurrent, // seit M12 (a3): state = Strömung im Parteienmodus (kNone: keine); die KI führt für sie
+                   // keinen Wahlkampf (ki.md 6.4)
 };
 
 struct Command {

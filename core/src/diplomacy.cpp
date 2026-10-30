@@ -1,5 +1,7 @@
 #include "uhrwerk/diplomacy.hpp"
 
+#include "uhrwerk/ai.hpp"
+
 #include <algorithm>
 #include <cstddef>
 #include <string>
@@ -307,7 +309,12 @@ DiplomacyDecision evaluate_treaty(const World& world, Index state, Index target,
         if (allied(world, state, target)) {
             return DiplomacyDecision::Invalid;
         }
-        if (relation(world, state, target) < rules.alliance_min) {
+        // Seit M12 (ki.md 6.2) entscheidet ein Staat ohne Spieler nach Nutzen statt nach bündnis_ab.
+        if (ai_active(world) && target != world.event_player) {
+            if (!ai_accepts_alliance(world, target, state)) {
+                return DiplomacyDecision::Rejected;
+            }
+        } else if (relation(world, state, target) < rules.alliance_min) {
             return DiplomacyDecision::Rejected;
         }
         // Kein Bündnis mit einem Staat, der mit dem eigenen Gegner verbündet ist (in beide Richtungen).
