@@ -821,6 +821,8 @@ func _check_party_mode(sim: SimulationClient) -> void:
 		])
 		return
 	var funds := float(sim.get_party(liberals).get("funds", 0.0))
+	# Seit M12 hat die KI für die Liberalen bis zur Übernahme schon Wahlkampf geführt (Monatserster).
+	var before := int(sim.get_party(liberals).get("campaign_districts", 0))
 	rally.pressed.emit()
 	await _frames(1)
 	if not bar.speed_line_text().contains("Versammlung"):
@@ -829,7 +831,11 @@ func _check_party_mode(sim: SimulationClient) -> void:
 	_main.call("_after_time_passed")
 	await _frames(1)
 	var party := sim.get_party(liberals)
-	if float(party.get("funds", 0.0)) >= funds or not party_panel.facts_text().contains("in 1 Wahlkreis"):
+	var districts := int(party.get("campaign_districts", 0))
+	if (
+		float(party.get("funds", 0.0)) >= funds or districts < maxi(before, 1)
+		or not party_panel.facts_text().contains("in %d Wahlkreis" % districts)
+	):
 		_fail("Wahlkampf am nächsten Tag: %s, Panel „%s“" % [str(party), party_panel.facts_text()])
 	# Der Knopf bleibt derselbe, damit ein Klick bei laufender Zeit nicht verloren geht (Review M8).
 	if not is_instance_valid(rally) or not rally.is_inside_tree() or not rally.is_visible_in_tree():
@@ -955,7 +961,12 @@ func _check_diplomacy_ui(sim: SimulationClient) -> void:
 		return
 	button.pressed.emit()
 	await _frames(2)
-	if not window.is_open() or window.current_tab() != 0 or not window.window_text().contains("Gesandte 0 von"):
+	# Seit M12 kann Preußen vor der Übernahme schon Gesandte entsandt haben (KI).
+	var envoys := int(sim.get_diplomacy(prussia).get("envoy_count", 0))
+	if (
+		not window.is_open() or window.current_tab() != 0
+		or not window.window_text().contains("Gesandte %d von" % envoys)
+	):
 		_fail("Fenster Diplomatie: offen %s, „%s“" % [window.is_open(), window.window_text().left(200)])
 		return
 	# Gesandter nach Bayern.

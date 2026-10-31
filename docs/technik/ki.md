@@ -335,7 +335,7 @@ Präzisiert in Schritt a3 (je Staat und Monatserster höchstens eine Handlung je
 |---|---|---|
 | Gesandter | freier Gesandter, Ziel nimmt ihn an; höchstens einer je Monat | Agenda 30 (Ziel nennt den Staat), Rivale 20, Verbündeter oder Garant 15, Nachbar 10, Stärke 10 × Anteil an der stärksten Macht; Sparsamkeit −5 × Neigung |
 | Bündnis anbieten | weniger als `buendnisse` (3) Bündnisse; gemeinsamer Rivale (beide Strategien nennen denselben Staat) oder Agenda `buendnis`; das Ziel würde annehmen | Agenda ½ × Gewicht, Rivale 20, Stärke min(20, 10 × Verhältnis), Beziehung ÷ 20, Bündnisse −5 je eigenes |
-| Bündnis annehmen (ohne Rauschen) | Regel gegen Bündnisse mit Rivalen bleibt | (Beziehung − 50) ÷ 5, gemeinsamer Rivale +20, Anbieter ist der eigene Rivale −30; ab der Schwelle. Bei Beziehung 100 ohne Rivalen wie die Regel aus M9 |
+| Bündnis annehmen (ohne Rauschen) | Regel gegen Bündnisse mit Rivalen bleibt; beide haben weniger als `buendnisse` Bündnisse (seit a5) | (Beziehung − 50) ÷ 5, gemeinsamer Rivale +20, Anbieter ist der eigene Rivale −30; ab der Schwelle. Bei Beziehung 100 ohne Rivalen wie die Regel aus M9 |
 | Garantie | Nachbar mit höchstens einem Drittel der eigenen Stärke, Garantie nach Regel möglich | Nachbar 5, Beziehung ÷ 10, Legitimität 5 × Neigung, Agenda `status_quo` ¼ × Gewicht |
 | Forderung | kein eigenes Spiel, kein Krieg; Agenda `fuehrung_bund` (gegen den Rivalen, sonst die Präsidialmacht), `zollunion` (Leitmacht gegen Nachbarn außerhalb) oder `schwaechen` (Führung im Bund gegen den Gegner); Bündnisstärke ≥ 1 − 0,15 × Risiko der des Gegners | Agenda ½ × Gewicht, Stärke 20 × Überschuss über die Grenze, Expansion und Risiko je 5 × Neigung |
 | Manöver | Hauptpartei eines Spiels; höchstens eines je Monat | nachgeben unter `spiel_nachgeben` − 0,1 × Risiko, eskalieren ab 1 − 0,15 × Risiko, sonst vermitteln mit Neigung Vermittlung über 0, sonst entscheidet die Regel der Stufe |
@@ -344,6 +344,14 @@ Präzisiert in Schritt a3 (je Staat und Monatserster höchstens eine Handlung je
 
 Forderungen, Anträge und Beitritte folgen allein der Agenda; ohne Agenden (bis b1) handeln die Staaten
 diplomatisch nur mit Gesandten, Bündnissen gegen gemeinsame Rivalen, Garantien und Manövern.
+
+**Bündnisgrenze bei der Annahme** (Schritt a5, nach dem ersten KI-Labor 1848): Die Grenze `buendnisse`
+galt zunächst nur für den Anbietenden. Weil alle Angebote eines Monatsersten am nächsten Tag nacheinander
+wirksam werden, nahm ein Staat beliebig viele an: Am 2. März 1848 entstanden 36 Bündnisse, Ende 1849
+waren es 91 (fast fünf je Staat). Seitdem lehnt ein Staat ohne Spieler ab, wenn er oder der Anbietende die
+Grenze schon erreicht hat: 11 Bündnisse am 2. März 1848, 55 Ende 1849 – nahe der Obergrenze von drei je
+Staat. Wie viele Bündnisse plausibel sind (`buendnisse`, Schwelle, Faktor Rivale), klärt die Kalibrierung
+in b2.
 
 ### 6.3 Krieg
 
@@ -367,6 +375,31 @@ diplomatisch nur mit Gesandten, Bündnissen gegen gemeinsame Rivalen, Garantien 
   deckt“ bleibt als Rückfall (militaer.md 4.5).
 - Die **Heere** führt der Generalstab (militaer.md 5); die KI übergibt ihm alle Heere ihrer
   Staaten.
+
+Präzisiert in Schritt a4:
+
+| Handlung | Bedingung | Faktoren |
+|---|---|---|
+| Kriegserklärung | nicht im Krieg; aktives Agendaziel `gebiet` (Gegner: Besitzer der meisten Orte der Einheit), `annexion` oder `schwaechen`; Erklärung möglich; Seiten nach dem Bündnisfall mit Stärke ≥ `kriegs_staerke` (1,3) − 0,15 × Risiko; Taktiker nur gegen einen Gegner ohne Beistand; Abkühlung je Gegner | Agenda = Gewicht, Stärke min(40, 20 × Überschuss), Expansion und Risiko je 5 × Neigung, Schuldenquote −10 je Punkt über der Grenze, Unruhe −½ je Punkt über 40, gegen einen Bundesstaat Legitimität −10 × Neigung; **doppelte Schwelle** |
+| Kriegsziel der Erklärung | | `gebiet`: die Einheit; `annexion`: der Staat; `schwaechen`: Führung im Bund unter Bundesstaaten, sonst Entschädigung von sechs Monatseinnahmen |
+| weiteres Kriegsziel | Hauptpartei; Kriegspunkte ≥ 1,5 × Kosten der eigenen Ziele; Agendaziel `gebiet` oder `annexion` gültig in diesem Krieg; eines je Monat | Agenda = Gewicht, Kriegspunkte − Kosten, Expansion 5 × Neigung |
+| Friedensangebot | Hauptpartei; die Gegenseite nähme nach der Vorab-Prüfung an; eines je Monat | eigene Ziele, wenn die Punkte die Kosten decken (10 + Punkte − Kosten); Kapitulation, wenn die Gegenseite ihre Ziele deckt und die eigene Müdigkeit 80 − 10 × Risiko erreicht; weißer Frieden ab Müdigkeit 50 − 10 × Risiko unter 25 Punkten, wenn die Gegenseite höchstens 10 Punkte mehr hat und die eigene Seite nicht um `kriegs_staerke` überlegen ist (Müdigkeit − 40, Vermittlung 5 × Neigung) |
+
+Die **Annahme** eines Friedens bleibt die Regel aus militaer.md 4.5 (Kriegspunkte, Müdigkeit), ebenso
+der Frieden nach Regel am Monatsersten; die KI bietet nur an, was angenommen würde. Einzige Ausnahme
+(nach dem Kriegslabor): Einen **weißen Frieden** lehnt eine Gegenseite ohne Spieler zusätzlich ab, wenn
+ihr Gegner kriegsmüder ist als sie oder ihre Seite um `kriegs_staerke` überlegen ist
+(`ai_accepts_white_peace`); den Krieg beendet dann die Regel am Monatsersten, spätestens bei
+Kriegsmüdigkeit 100. Ohne diese Ausnahme bot Frankreich im Lesezeichen Sedan nach einigen Monaten
+weißen Frieden an, den das erschöpfte, aber doppelt so starke Preußen annahm: Der Verteidiger siegte
+nur in 4 von 16 Läufen statt in 13, mit der Ausnahme in 14. Eine
+Kriegserklärung schreibt neben der Chronik des Krieges ihre Gründe („Preußen – Gründe: Agenda
+Österreich +50, Stärke gegen Österreich +12, Risiko +8“).
+
+**Keine Verträge im Krieg** (Schritt a3, nach dem Kriegslabor): Bündnisse und Garantien bietet die KI
+nicht an, solange einer der beiden Staaten im Krieg steht. Ein Bündnis mitten im Krieg machte den
+Partner zur eigenen Seite (Durchmarsch und Versorgung); im Lesezeichen Königgrätz siegte Preußen dann
+nur noch in 3 von 16 Läufen statt in 11.
 
 ### 6.4 Politik
 
@@ -422,6 +455,28 @@ neun Jahre früher endet und der Süden 1871 noch draußen sein darf.
 
 **CI:** je Push 16 Seeds gegen die Korridore (wie die übrigen Labore); die 100 Partien als eigener
 Workflow `ki-partien.yml` (manuell und wöchentlich), Bericht als Artefakt.
+
+Präzisiert in Schritt a5 (`core/src/ai_lab.cpp`, Zieldatei: chronik-skript.md Abschnitt 3.40):
+
+- **Korridore** als Blöcke `einigung` (Ausgänge, die als Einigung zählen), `ausgang`, `krieg TAG { gegen
+  = TAG }` (ein Krieg der beiden als Hauptparteien, gleich wer erklärt), `bankrott { staaten = { … } }` und
+  `labor.hoechstens` (kein Ausgang in mehr Läufen; „kein Ausgang in mehr als 80 %“); Abstürze sind immer
+  ein Verstoß. Die Zieldatei für 1848 entsteht mit der Kalibrierung in b2, bis dahin rechnet das Labor auf
+  der Test-Fixture (`tests/daten_ki`: Brandenburg mit einer Agenda gegen Anhalt).
+- **Je Lauf:** Ausgang mit Datum, Kriege mit Angreifer, Verteidiger, Beginn, Ende und Gewinner (auch
+  laufende), untergegangene Staaten, Bankrotte je Staat, höchste Unruhe eines Staates an einem
+  Monatsersten, Entscheidungen der KI je Art (aus dem KI-Protokoll des Monatsersten), Bündnisse am Ende,
+  Laufzeit und Prüfsumme. Über alle Läufe zusätzlich Kriege je Paar und die Entscheidungen je Art.
+- **Laufzeit der KI:** Die Simulation misst die Rechenzeit von Schritt 6f (`Simulation::ai_seconds`, kein
+  Zustand); der Bericht nennt ihren Anteil und die Zeit je Staat und Monatserstem (Ziel: höchstens 5 ms).
+  Gemessen 1848–1850 (Release, zwei Läufe gleichzeitig): 1,5 ms je Staat und Monat, 36 % der Laufzeit;
+  ein Lauf bis 1871 dauert damit etwa 40 s, 100 Läufe auf vier Kernen etwa 17 Minuten.
+- **`--parallel N`:** N Läufe gleichzeitig, je Lauf ein Thread (mit mehr als einem gleichzeitigen Lauf
+  rechnet jede Simulation einthreadig); die Ergebnisse stehen in der Reihenfolge der Seeds, die Prüfsummen
+  sind dieselben wie nacheinander. Eine Ausnahme in einem Lauf zählt als Absturz, die übrigen rechnen
+  weiter.
+- **`--ohne-ki`:** dieselbe Welt mit abgeschalteter KI (`AiRules::active` aus): keine Planer, keine Annahme
+  nach Nutzen, Ereignisgewichte ohne Neigung – also wie M11.
 
 ## 8. Zustand, Kern und Spielstand
 
@@ -540,6 +595,8 @@ Weitere Tests:
 | Schritt | Stand |
 |---|---|
 | – | Entscheidungen 1–14 wie empfohlen freigegeben; Umsetzung beginnt mit a1 |
+| a5 | **erledigt:** KI-Labor `uhrwerk-cli ki` (`core/src/ai_lab.cpp`) mit Korridoren aus `common/kiziele_<szenario>.chron` (chronik-skript.md 3.40: Einigung, Ausgänge, höchster Anteil eines Ausgangs, Kriege je Paar, Bankrotte, Abstürze), Bericht je Lauf und über alle Läufe, Laufzeit und Anteil der KI (`Simulation::ai_seconds`), `--parallel` (gleiche Prüfsummen) und `--ohne-ki`. CTests `ki_fixture` und `ki_fixture_ohne_ki` auf der Fixture `tests/daten_ki`; Tests in `test_ai.cpp`. Bündnisgrenze auch bei der Annahme (6.2); alle Labore 1848 danach neu gerechnet und in ihren Korridoren (deutsche Frage bis 1871: 25 % kleindeutsch, 12,5 % zwei Bünde, 62,5 % Bund; Sedan 87,5 %, Königgrätz 68,8 %). Die Zieldatei 1848 und der Workflow `ki-partien.yml` folgen mit b2 |
+| a4 | **erledigt** (Labore mit KI: Revolution, Strategien, deutsche Frage bis 1871, die vier Kriegslabore, Zoll, Wahl und Bilanz in ihren Korridoren; weißer Frieden nach dem Sedan-Labor eingeschränkt, siehe 6.3): Kriegserklärung nur aus aktiven Agendazielen bei Übermacht der Seiten (Bündnisfall), mit doppelter Schwelle, Gründen in der Chronik und Abkühlung je Gegner; Kriegsziel aus der Agenda; weitere Kriegsziele bei Punkten über 1,5 × Kosten; Friedensangebote (eigene Ziele, weißer Frieden, Kapitulation) nur, wenn die Gegenseite annähme; keine Bündnisse und Garantien im Krieg. Regel `kriegs_staerke`; Inhaltsbereich ki Stand 4. Tests in `test_ai.cpp` |
 | a3 | **erledigt:** Planer Diplomatie (Gesandte, Bündnis gegen gemeinsame Rivalen mit Annahme nach Nutzen statt „ab Beziehung 100“, Garantie für kleine Nachbarn, Forderung, Manöver, Antrag und Zollunion aus der Agenda) und Politik (Block `ki { … }` an Ereignisoptionen, Wahlkampf der Strömungen ohne Spieler); Befehl `Spielerströmung` (Brücke: `set_player_current`), im Zustand mit der KI; Inhaltsbereich ki Stand 3, ereignisse Stand 7. Tests in `test_ai.cpp` |
 | a2 | **erledigt** (Labore 1848 mit KI: Revolution, Strategien, deutsche Frage bis 1871 mit 31 % kleindeutsch, 19 % zwei Bünde, 50 % Bund, Kriege, Wahl und Bilanz in ihren Korridoren; im Zolllabor die Untergrenze des Grenzhandels Mecklenburgs auf ×1,2, siehe `zollziele_voelkerfruehling.chron`): Takt am Monatsersten nach den Ereignissen (Ämter, Strategie mit Hauptziel und Rivale, Planer), Lagebild (Stärke, Bedrohung mit Feindschaft und Nähe), Nutzen als Summe benannter Faktoren mit Rauschen aus dem Strom `Ki`, Schwelle, KI-Protokoll je Staat mit drei Gründen (`ai_reason_text`, `ai_decision_text`), Abkühlung; Planer Haushalt (Kontribution und Akzise nach Defizit, Schuldenquote, Überschuss und Unruhe) und Mobilmachung (gegen bedrohliche mobile Nachbarn, Abrüstung nach zwei ruhigen Monatsersten). KI-Befehle gehen ohne Protokoll in die Warteschlange und wirken am nächsten Tag; der Spielerstaat bleibt unberührt. Zustand: Strategie, Protokoll, Abkühlungen; Inhaltsbereich Stand 2. Tests in `test_ai.cpp`; 1648 bitgleich |
 | a1 | **erledigt:** Regeln, sechs Staatspersönlichkeiten und 16 Eigenschaften in `common/ki.chron` (chronik-skript.md 3.37), Personen mit Amt, Amtszeit, Bedingung, Werten und Eigenschaften (`common/persoenlichkeiten.chron`, 3.38), Agenden mit Staatspersönlichkeit und Zielen (`common/agenden.chron`, 3.39) – geladen nur mit Ereignissen und ab `seit`; Neigungen (`state_inclinations`) und aktive Ziele (`agenda_goal_active`); Ämter je Staat und Rolle, beim Start ohne und am Monatsersten mit Eintrag in der Chronik; Befehl `Spielerstaat` (vorher `Ereignisspieler`); Strom `Ki` im Zustand; Inhaltsbereich `ki`, Spielstand Format 6; `uhrwerk-cli info` mit Zeile „KI“. Personen und Agenden 1848–1871 folgen mit b1. Tests in `test_ai.cpp`; 1648 bitgleich |

@@ -50,8 +50,14 @@ Fixed ai_threat(const World& world, const EventCache& cache, Index state, Index 
 
 /// Annahme eines Bündnisangebots durch einen Staat ohne Spieler (Abschnitt 6.2), ohne Rauschen:
 /// (Beziehung − 50) ÷ 5, gemeinsamer Rivale +20, der Anbieter ist der eigene Rivale −30; angenommen ab der
-/// Schwelle. Ersetzt die Regel „ab Beziehung bündnis_ab“, wenn die KI rechnet.
+/// Schwelle, wenn keiner der beiden schon 'buendnisse' Bündnisse hat. Ersetzt die Regel „ab Beziehung
+/// bündnis_ab“, wenn die KI rechnet.
 bool ai_accepts_alliance(const World& world, Index acceptor, Index proposer);
+
+/// Annahme eines weißen Friedens durch die Hauptpartei einer Seite ohne Spieler (Abschnitt 6.3): abgelehnt,
+/// wenn die Gegenseite kriegsmüder ist oder die eigene Seite um kriegs_staerke überlegen. Gilt
+/// zusätzlich zur Regel aus militaer.md 4.5, wenn die KI rechnet.
+bool ai_accepts_white_peace(const World& world, const War& war, bool attacker_side);
 
 /// Faktor der KI auf das Gewicht einer Ereignisoption (Abschnitt 6.4): max(0,1; 1 + ¼ × Σ Bezug × Neigung)
 /// für Staaten ohne Spieler mit Bezug; sonst 1.

@@ -44,8 +44,8 @@ constexpr std::uint64_t kEventContentVersion = 7; // 7 seit M12a3: Block ki an d
 
 /// Stand der KI im Zustand (seit M12, Inhaltsbereich ki): 1 = Schritt a1 (Ämter, Strom Ki), 2 = a2
 /// (Strategie, Protokoll, Abkühlung; Planer Haushalt und Mobilmachung), 3 = a3
-/// (Diplomatie, Wahlkampf, Spielerströmung).
-constexpr std::uint64_t kAiContentVersion = 3;
+/// (Diplomatie, Wahlkampf, Spielerströmung), 4 = a4 (Krieg und Frieden).
+constexpr std::uint64_t kAiContentVersion = 4;
 
 bool fail(std::string* error, std::string message) {
     if (error != nullptr) {
@@ -1823,6 +1823,7 @@ ContentFingerprint content_fingerprint(const World& w) {
             h.i64(r.max_alliances); // seit a3
             h.i64(r.campaign_months);
             h.fixed(r.campaign_reserve);
+            h.fixed(r.war_ratio); // seit a4
             const auto inclinations = [&h](const Inclinations& values) {
                 for (const Fixed f : values) {
                     h.fixed(f);

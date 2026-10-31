@@ -578,6 +578,7 @@ private:
             {"ueberschuss_ab", &r.surplus_from, fx(0), fx(1)},
             {"unruhe_steuern_ab", &r.unrest_tax_from, fx(0), fx(100)},
             {"wahlkampf_ruecklage", &r.campaign_reserve, fx(0), fx(1)},
+            {"kriegs_staerke", &r.war_ratio, fx(0), fx(100)},
             {"ruecklage_ab", &r.reserve_from, fx(0), fx(100)},
             {"bedrohung_mobil", &r.threat_mobilize, fx(0), fx(100)},
         };

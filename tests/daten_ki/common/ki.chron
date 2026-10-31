@@ -1,0 +1,9 @@
+# Testdaten des KI-Labors (seit M12, Schritt a5; docs/technik/ki.md Abschnitt 7): Regeln der KI ab 1648 für
+# die Fixture tests/daten mit Militär (tests/daten_krieg) und Ereignissen (tests/daten_ereignisse).
+ki {
+    seit = 1648.01.01
+    standard_persoenlichkeit = bewahrer
+}
+persoenlichkeit machtpolitiker { name = "Machtpolitiker" risiko = 1  expansion = 2  legitimitaet = -1 }
+persoenlichkeit bewahrer       { name = "Bewahrer"       risiko = -1 legitimitaet = 2  reform = -1 }
+eigenschaft sparsam            { name = "Sparsam"        sparsamkeit = 1 }

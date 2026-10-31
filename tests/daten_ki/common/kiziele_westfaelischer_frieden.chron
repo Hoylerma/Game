@@ -1,0 +1,12 @@
+# Korridore des KI-Labors auf der Fixture (seit M12, Schritt a5; Format: docs/technik/chronik-skript.md,
+# Abschnitt 3.40), 16 Seeds: Brandenburg erklärt Anhalt aus seiner Agenda den Krieg (ohne KI nie, CTest
+# ki_fixture_ohne_ki); die Revolution der Fixture endet etwa je zur Hälfte im Reich und in der Gegenrevolution.
+labor {
+    bis        = 1650.12.31
+    journal    = revolution
+    hoechstens = 0.8
+}
+einigung { ausgaenge = { reich }  anteil = { 0.3 0.8 } }
+ausgang gegenrevolution { anteil = { 0.2 0.7 } }
+krieg BRA { gegen = ANH  anteil = { 0.9 1 } }
+bankrott { staaten = { BRA SAX }  anteil = { 0 0.1 } }

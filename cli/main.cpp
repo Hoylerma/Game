@@ -4,6 +4,8 @@
 // spielstand (Hilfe: uhrwerk-cli --hilfe).
 // Exitcodes: 0 in Ordnung, 1 Daten-, Determinismus-, Lasttest- oder Spielstandfehler, 2 Bedienfehler.
 
+#include "uhrwerk/ai.hpp"
+#include "uhrwerk/ai_lab.hpp"
 #include "uhrwerk/balance.hpp"
 #include "uhrwerk/customs_lab.hpp"
 #include "uhrwerk/date.hpp"
@@ -37,6 +39,7 @@
 #include <string>
 #include <string_view>
 #include <system_error>
+#include <thread>
 #include <utility>
 #include <vector>
 
@@ -66,6 +69,7 @@ constexpr std::int64_t kDefaultElectionSeeds = 16;
 constexpr std::int64_t kDefaultCustomsSeeds = 8;
 constexpr std::int64_t kDefaultCustomsYears = 5;
 constexpr std::int64_t kDefaultWarSeeds = 16;
+constexpr std::int64_t kDefaultAiSeeds = 16;
 constexpr std::int64_t kMaxBalanceSeeds = 1000;
 constexpr std::int64_t kMaxTestCommands = 1'000'000;
 constexpr std::int64_t kDefaultSavePoints = 10;
@@ -99,6 +103,11 @@ Befehle:
                  (--bis); Ausgang des Journals mit Weg, Ereignisse je Art, Wendepunkte, Aufstände,
                  Unruhe und Gesetze; über alle Läufe die Verteilung gegen die Korridore; mit
                  --strategie spielt ein Staat nach einer Strategie der Zieldatei (seit M11)
+  ki             KI-Labor: je Seed eine Partie ohne Spieler mit der KI der Staaten bis --bis;
+                 Ausgang der deutschen Frage, Kriege, untergegangene Staaten, Bankrotte, höchste
+                 Unruhe, KI-Entscheidungen je Art, Laufzeit und Anteil der KI; über alle Läufe
+                 Einigung, Form der Einigung, Kriege je Paar und Abstürze gegen die Korridore
+                 (seit M12)
   speichertest   Abnahmetest der Spielstände: Lauf A ohne Unterbrechung; Lauf B speichert an
                  --punkte Stellen in eine Datei, lädt sie mit frisch geladenen Spieldaten und
                  rechnet weiter; alle Jahresprüfsummen müssen gleich sein
@@ -122,13 +131,18 @@ Optionen:
   --bericht      Tabelle je Staat am Ende des Laufs (nur lauf)
   --chronik      Chronik der Partie ausgeben (nur lauf)
   --maerkte      Preise je Markt (nur wirtschaft)
-  --seeds N      bilanz, wahl, zoll, krieg: Zahl der Läufe (Standard: bilanz 32, wahl 16,
-                 zoll 8, krieg 16)
+  --seeds N      bilanz, wahl, zoll, krieg, ereignisse, ki: Zahl der Läufe (Standard: bilanz 32,
+                 wahl 16, zoll 8, krieg, ereignisse und ki 16)
   --ziele DATEI  bilanz: Zielwerte (Standard: common/zielwerte_<szenario>.chron, sonst
                  common/zielwerte.chron im Datenordner); wahl: Wahlziele (Standard:
                  common/wahlziele_<szenario>.chron, wenn vorhanden); zoll: Zollziele
                  (Standard: common/zollziele_<szenario>.chron, wenn vorhanden); krieg:
-                 Kriegsziele (Standard: common/kriegsziele_<szenario>.chron)
+                 Kriegsziele (Standard: common/kriegsziele_<szenario>.chron); ereignisse:
+                 common/ereignisziele_<szenario>.chron; ki: common/kiziele_<szenario>.chron
+  --strategie ID ereignisse: ein Staat spielt nach der Strategie ID der Zieldatei
+  --bis DATUM    ereignisse, ki: Ende der Läufe JJJJ.MM.TT (Standard: 'bis' im Block labor)
+  --parallel N   ki: N Läufe gleichzeitig, je Lauf ein Thread; 0 = alle Kerne (Standard: 1)
+  --ohne-ki      ki: zum Vergleich ohne KI rechnen (wie M11)
   --parlament ID wahl: Parlament (Standard: das erste des Szenarios)
   --wahlkreise   wahl: Ergebnis je Wahlkreis im ersten Lauf
   --beitritt TAG[:UNION]
@@ -148,7 +162,8 @@ Optionen:
 
 Exitcodes:
   0  in Ordnung
-  1  Datenfehler, Determinismusfehler, verfehlte Zielwerte (bilanz, wahl, zoll, krieg),
+  1  Datenfehler, Determinismusfehler, verfehlte Zielwerte (bilanz, wahl, zoll, krieg,
+     ereignisse, ki),
      Spielstand nicht ladbar oder Wiederholung weicht ab
   2  Bedienfehler (unbekannter Befehl, ungültige Option)
 
@@ -163,6 +178,7 @@ Beispiele:
   uhrwerk-cli zoll --szenario voelkerfruehling --beitritt HAN:zollverein --jahre 5
   uhrwerk-cli krieg --szenario voelkerfruehling --seeds 16
   uhrwerk-cli ereignisse --szenario voelkerfruehling --seeds 16 --strategie krone
+  uhrwerk-cli ki --szenario voelkerfruehling --seeds 100 --parallel 4
   uhrwerk-cli lauf --jahre 50 --testbefehle 200 --speichern partie.einigkeit --protokoll partie.protokoll
   uhrwerk-cli lauf --laden partie.einigkeit --jahre 10
   uhrwerk-cli wiederholung partie.protokoll
@@ -190,6 +206,8 @@ struct Options {
     std::optional<std::string> leave;      // --austritt TAG
     std::optional<std::string> strategy;   // --strategie KENNUNG (Ereignislabor, seit M11)
     std::optional<uhrwerk::Date> until;    // --bis JJJJ.MM.TT (Ereignislabor, seit M11)
+    unsigned parallel = 1;                 // --parallel N (KI-Labor, seit M12): gleichzeitige Läufe
+    bool without_ai = false;               // --ohne-ki (KI-Labor, seit M12)
     std::optional<fs::path> file;          // wiederholung, spielstand: Datei als Argument
     std::optional<fs::path> save_file;     // --speichern
     std::optional<fs::path> load_file;     // --laden
@@ -239,12 +257,12 @@ std::int64_t parse_count(std::string_view option, std::string_view text, std::in
 Options parse_options(int argc, char** argv) {
     Options o;
     const std::set<std::string_view> with_value = {
-        "--daten",    "--szenario",  "--jahre",       "--tage",   "--seed",      "--threads",
-        "--bloecke",  "--vergleich", "--grenze",      "--seeds",  "--ziele",     "--speichern",
-        "--laden",    "--protokoll", "--testbefehle", "--punkte", "--parlament", "--beitritt",
-        "--austritt", "--strategie", "--bis"};
-    const std::set<std::string_view> flags = {"--bericht", "--chronik", "--maerkte", "--text",
-                                              "--wahlkreise"};
+        "--daten",    "--szenario",  "--jahre",       "--tage",    "--seed",      "--threads",
+        "--bloecke",  "--vergleich", "--grenze",      "--seeds",   "--ziele",     "--speichern",
+        "--laden",    "--protokoll", "--testbefehle", "--punkte",  "--parlament", "--beitritt",
+        "--austritt", "--strategie", "--bis",         "--parallel"};
+    const std::set<std::string_view> flags = {"--bericht", "--chronik",    "--maerkte",
+                                              "--text",    "--wahlkreise", "--ohne-ki"};
 
     for (int i = 1; i < argc; ++i) {
         const std::string_view arg = argv[i];
@@ -267,6 +285,7 @@ Options parse_options(int argc, char** argv) {
                  : name == "--chronik"    ? o.chronicle
                  : name == "--text"       ? o.text
                  : name == "--wahlkreise" ? o.districts
+                 : name == "--ohne-ki"    ? o.without_ai
                                           : o.markets) = true;
             } else if (with_value.count(name) != 0) {
                 if (!value) {
@@ -336,6 +355,8 @@ Options parse_options(int argc, char** argv) {
                     o.days = parse_count(name, *value, kMaxDays);
                 } else if (name == "--threads") {
                     o.threads = static_cast<unsigned>(parse_count(name, *value, kMaxThreads));
+                } else if (name == "--parallel") {
+                    o.parallel = static_cast<unsigned>(parse_count(name, *value, kMaxThreads));
                 } else if (name == "--bloecke") {
                     o.blocks = parse_count(name, *value, kMaxLoadTestBlocks);
                 } else if (name == "--vergleich") {
@@ -2741,6 +2762,301 @@ int cmd_ereignisse(const Options& o, const fs::path& data_dir) {
     return kExitDataError;
 }
 
+// ─── KI-Labor (seit M12) ────────────────────────────────────────────────────
+
+/// Korridore des KI-Labors (seit M12): common/kiziele_<szenario>.chron.
+fs::path default_ai_targets_file(const fs::path& data_dir, const std::string& scenario) {
+    return data_dir / "common" / ("kiziele_" + scenario + ".chron");
+}
+
+/// Kurzbezeichnung einer Entscheidungsart der KI (Reihenfolge von AiDecisionKind).
+constexpr std::array<std::string_view, uhrwerk::kAiDecisionKinds> kAiDecisionLabels = {
+    "Steuer erhöht",  "Steuer gesenkt",  "Mobilmachung", "Abrüstung",      "Gesandter",
+    "Bündnisangebot", "Garantie",        "Forderung",    "Manöver",        "Antrag",
+    "Zollbeitritt",   "Kriegserklärung", "Kriegsziel",   "Friedensangebot"};
+
+std::string state_tag(const World& w, Index state) {
+    return state != uhrwerk::kNone ? w.states[static_cast<std::size_t>(state)].tag : std::string("–");
+}
+
+int cmd_ki(const Options& o, const fs::path& data_dir) {
+    const auto world = load(data_dir, o.scenario, false);
+    if (!world) {
+        return kExitDataError;
+    }
+    const World& w = *world;
+    if (!uhrwerk::ai_active(w)) {
+        std::cerr << "Das Szenario " << o.scenario
+                  << " hat keine KI (common/ki.chron, 'seit' bis zum Startdatum, mit Ereignissen); das "
+                     "KI-Labor braucht sie (z. B. --szenario voelkerfruehling).\n";
+        return kExitDataError;
+    }
+    const fs::path targets_file =
+        o.targets_file ? *o.targets_file : default_ai_targets_file(data_dir, o.scenario);
+    std::error_code ec;
+    if (!fs::exists(targets_file, ec)) {
+        std::cerr << "Keine Korridore: " << uhrwerk::path_to_utf8(targets_file) << " fehlt.\n";
+        return kExitDataError;
+    }
+    uhrwerk::AiTargetsResult loaded = uhrwerk::load_ai_targets(targets_file, w);
+    if (!loaded.ok()) {
+        for (const std::string& error : loaded.errors) {
+            std::cerr << error << '\n';
+        }
+        std::cerr << "Korridore nicht lesbar: " << uhrwerk::path_to_utf8(targets_file) << '\n';
+        return kExitDataError;
+    }
+    uhrwerk::AiTargets& targets = loaded.targets;
+    if (o.until) {
+        if (*o.until < w.date) {
+            std::cerr << "--bis liegt vor dem Startdatum.\n";
+            return kExitUsageError;
+        }
+        targets.until = *o.until;
+    }
+
+    uhrwerk::AiLabOptions options;
+    options.seed = o.seed;
+    options.seeds = o.seeds.value_or(kDefaultAiSeeds);
+    options.parallel = o.parallel;
+    options.threads = o.threads;
+    options.ai = !o.without_ai;
+    const auto t0 = std::chrono::steady_clock::now();
+    const std::vector<uhrwerk::AiLabRun> runs = uhrwerk::run_ai_lab_seeds(w, targets, options);
+    const double seconds = seconds_since(t0);
+    const uhrwerk::AiLabSummary summary = uhrwerk::summarize_ai_lab(w, targets, runs);
+    const uhrwerk::JournalDef* journal =
+        targets.journal != uhrwerk::kNone ? &w.journals[static_cast<std::size_t>(targets.journal)] : nullptr;
+    const auto stage_title = [&](Index stage) {
+        return journal != nullptr && stage != uhrwerk::kNone
+                   ? journal->stages[static_cast<std::size_t>(stage)].title
+                   : std::string("offen");
+    };
+    const auto pair_name = [&](Index a, Index b) { return state_name(w, a) + " – " + state_name(w, b); };
+
+    double run_seconds = 0;
+    double ai_seconds = 0;
+    std::int64_t state_months = 0;
+    for (const uhrwerk::AiLabRun& run : runs) {
+        run_seconds += run.seconds;
+        ai_seconds += run.ai_seconds;
+        state_months += run.ai_state_months;
+    }
+    const unsigned parallel = o.parallel == 0 ? std::thread::hardware_concurrency() : o.parallel;
+    std::cout << "KI-Labor:    " << w.scenario.name << " (" << w.scenario.id << "), "
+              << uhrwerk::format_date_long(w.date) << " bis " << uhrwerk::format_date_long(targets.until)
+              << ", " << (o.without_ai ? "ohne KI (wie M11)" : "mit KI, ohne Spieler") << '\n'
+              << "Läufe:       " << runs.size() << " (Seeds " << o.seed;
+    if (runs.size() > 1) {
+        std::cout << "–" << o.seed + runs.size() - 1;
+    }
+    std::cout << "), " << std::max(1U, parallel) << " gleichzeitig\n"
+              << "Korridore:   " << uhrwerk::path_to_utf8(targets_file) << '\n'
+              << "Journal:     " << (journal != nullptr ? journal->title : std::string("–")) << '\n'
+              << "Laufzeit:    " << format_seconds(seconds) << " (Läufe zusammen "
+              << format_seconds(run_seconds);
+    if (!o.without_ai && run_seconds > 0) {
+        char buffer[64];
+        std::snprintf(buffer, sizeof buffer, "%.1f", 100.0 * ai_seconds / run_seconds);
+        std::string share = buffer;
+        std::replace(share.begin(), share.end(), '.', ',');
+        std::snprintf(buffer, sizeof buffer, "%.3f",
+                      state_months > 0 ? 1000.0 * ai_seconds / static_cast<double>(state_months) : 0.0);
+        std::string per_state = buffer;
+        std::replace(per_state.begin(), per_state.end(), '.', ',');
+        std::cout << ", davon KI " << share << " %, " << per_state << " ms je Staat und Monat";
+    }
+    std::cout << ")\n\n";
+
+    std::vector<std::vector<std::string>> rows;
+    rows.push_back({"Seed", "Ausgang", "am", "Kriege", "untergegangen", "Bankrotte", "Unruhe höchste",
+                    "KI-Entscheidungen", "Laufzeit", "Prüfsumme"});
+    for (const uhrwerk::AiLabRun& run : runs) {
+        if (run.crashed) {
+            rows.push_back({std::to_string(run.seed), "Absturz", "–", "–", "–", "–", "–", "–", "–", "–"});
+            continue;
+        }
+        std::int64_t decisions = 0;
+        for (const std::int64_t d : run.decisions) {
+            decisions += d;
+        }
+        std::int64_t bankruptcies = 0;
+        for (const auto& [state, count] : run.bankrupt) {
+            bankruptcies += count;
+        }
+        char checksum[24];
+        std::snprintf(checksum, sizeof checksum, "%016llx", static_cast<unsigned long long>(run.checksum));
+        rows.push_back({std::to_string(run.seed), stage_title(run.outcome),
+                        run.outcome != uhrwerk::kNone ? uhrwerk::format_script_date(run.outcome_date) : "–",
+                        std::to_string(run.wars.size()), std::to_string(run.fallen.size()),
+                        std::to_string(bankruptcies),
+                        format_fixed(run.unrest_max, 1) + " " + state_tag(w, run.unrest_state),
+                        std::to_string(decisions), format_seconds(run.seconds), checksum});
+    }
+    print_table(rows, {true, false, false, true, true, true, true, true, true, false}, 0);
+    for (const uhrwerk::AiLabRun& run : runs) {
+        if (run.crashed) {
+            std::cout << "  " << run.seed << ": Absturz: " << run.error << '\n';
+            continue;
+        }
+        std::string line;
+        for (const uhrwerk::AiLabWar& war : run.wars) {
+            line += (line.empty() ? "" : "; ") + state_tag(w, war.attacker) + " gegen " +
+                    state_tag(w, war.defender) + " " + uhrwerk::format_script_date(war.started) + "–" +
+                    (war.ended ? uhrwerk::format_script_date(war.end) + (war.winner > 0   ? " Angreifer"
+                                                                         : war.winner < 0 ? " Verteidiger"
+                                                                                          : " ohne Gewinner")
+                               : std::string("läuft"));
+        }
+        for (const Index s : run.fallen) {
+            line += (line.empty() ? "" : "; ") + std::string("untergegangen: ") + state_tag(w, s);
+        }
+        for (const auto& [state, count] : run.bankrupt) {
+            line += (line.empty() ? "" : "; ") + std::string("Bankrott: ") + state_tag(w, state) +
+                    (count > 1 ? " ×" + std::to_string(count) : "");
+        }
+        if (!line.empty()) {
+            std::cout << "  " << run.seed << ": " << line << '\n';
+        }
+    }
+
+    const std::int64_t total = std::max<std::int64_t>(1, static_cast<std::int64_t>(runs.size()));
+    // Kriege je Paar (Läufe mit mindestens einem Krieg zwischen beiden Hauptparteien), häufigste zuerst.
+    std::map<std::pair<Index, Index>, std::int64_t> pairs;
+    std::int64_t alliances = 0;
+    for (const uhrwerk::AiLabRun& run : runs) {
+        std::set<std::pair<Index, Index>> seen;
+        for (const uhrwerk::AiLabWar& war : run.wars) {
+            seen.insert(std::minmax(war.attacker, war.defender));
+        }
+        for (const auto& p : seen) {
+            pairs[p] += 1;
+        }
+        alliances += run.alliances;
+    }
+    std::vector<std::pair<std::pair<Index, Index>, std::int64_t>> sorted(pairs.begin(), pairs.end());
+    std::stable_sort(sorted.begin(), sorted.end(),
+                     [](const auto& a, const auto& b) { return a.second > b.second; });
+    std::cout << "\nKriege je Paar (Läufe):";
+    if (sorted.empty()) {
+        std::cout << " keine";
+    }
+    for (std::size_t i = 0; i < sorted.size(); ++i) {
+        std::cout << (i == 0 ? " " : "; ") << pair_name(sorted[i].first.first, sorted[i].first.second) << " "
+                  << sorted[i].second;
+    }
+    std::cout << "\nBündnisse am Ende: " << format_fixed(Fixed::from_ratio(alliances, total), 1)
+              << " je Lauf\nKI-Entscheidungen (alle Läufe):";
+    for (std::size_t k = 0; k < uhrwerk::kAiDecisionKinds; ++k) {
+        std::cout << (k == 0 ? " " : ", ") << kAiDecisionLabels[k] << " " << format_int(summary.decisions[k]);
+    }
+    std::cout << '\n';
+
+    using uhrwerk::AiCheck;
+    const auto marked = [&](AiCheck check, std::size_t index) {
+        return std::any_of(
+            summary.violations.begin(), summary.violations.end(),
+            [&](const uhrwerk::AiViolation& v) { return v.check == check && v.index == index; });
+    };
+    rows.clear();
+    rows.push_back({"Messgröße", "Läufe", "Anteil", "Ziel"});
+    if (targets.has_unification) {
+        std::string names;
+        for (const Index s : targets.unification) {
+            names += (names.empty() ? "" : ", ") + journal->stages[static_cast<std::size_t>(s)].id;
+        }
+        rows.push_back({"Einigung (" + names + ")", std::to_string(summary.unified),
+                        format_share(Fixed::from_ratio(summary.unified, total)) +
+                            (marked(AiCheck::Unification, 0) ? " !" : ""),
+                        format_share_range(targets.unification_share)});
+    }
+    if (journal != nullptr) {
+        for (std::size_t s = 0; s < journal->stages.size(); ++s) {
+            if (!journal->stages[s].outcome) {
+                continue;
+            }
+            std::string target = "–";
+            bool hit = marked(AiCheck::MaxOutcome, s);
+            for (std::size_t c = 0; c < targets.outcomes.size(); ++c) {
+                if (targets.outcomes[c].stage == static_cast<Index>(s)) {
+                    target = format_share_range(targets.outcomes[c].share);
+                    hit = hit || marked(AiCheck::Outcome, c);
+                }
+            }
+            rows.push_back({journal->stages[s].title + " (" + journal->stages[s].rating + ")",
+                            std::to_string(summary.outcomes[s]),
+                            format_share(Fixed::from_ratio(summary.outcomes[s], total)) + (hit ? " !" : ""),
+                            target});
+        }
+        rows.push_back({"offen", std::to_string(summary.open),
+                        format_share(Fixed::from_ratio(summary.open, total)), "–"});
+    }
+    for (std::size_t c = 0; c < targets.wars.size(); ++c) {
+        const uhrwerk::AiWarCorridor& corridor = targets.wars[c];
+        rows.push_back({"Krieg " + pair_name(corridor.first, corridor.second),
+                        format_fixed(summary.wars[c] * Fixed::from_int(total), 0),
+                        format_share(summary.wars[c]) + (marked(AiCheck::War, c) ? " !" : ""),
+                        format_share_range(corridor.share)});
+    }
+    for (std::size_t c = 0; c < targets.bankruptcies.size(); ++c) {
+        std::string names;
+        for (const Index s : targets.bankruptcies[c].states) {
+            names += (names.empty() ? "" : " oder ") + state_name(w, s);
+        }
+        rows.push_back({"Bankrott " + names,
+                        format_fixed(summary.bankruptcies[c] * Fixed::from_int(total), 0),
+                        format_share(summary.bankruptcies[c]) + (marked(AiCheck::Bankruptcy, c) ? " !" : ""),
+                        format_share_range(targets.bankruptcies[c].share)});
+    }
+    rows.push_back(
+        {"Abstürze", std::to_string(summary.crashed),
+         format_share(Fixed::from_ratio(summary.crashed, total)) + (summary.crashed > 0 ? " !" : ""),
+         "keine"});
+    std::cout << '\n';
+    print_table(rows, {false, true, true, true}, 0);
+    if (targets.has_max_outcome) {
+        std::cout << "Kein Ausgang in mehr als " << format_share(targets.max_outcome) << " der Läufe.\n";
+    }
+
+    std::cout << '\n';
+    if (summary.violations.empty()) {
+        std::cout << "Verstöße: keine – alle Korridore erfüllt.\n";
+        return kExitOk;
+    }
+    std::cout << "Verstöße (" << summary.violations.size() << ", mit ! markiert):\n";
+    for (const uhrwerk::AiViolation& v : summary.violations) {
+        switch (v.check) {
+        case AiCheck::Unification:
+            std::cout << "  Einigung in " << format_share(v.value) << " der Läufe, Ziel "
+                      << format_share_range(targets.unification_share) << '\n';
+            break;
+        case AiCheck::Outcome:
+            std::cout << "  Ausgang " << stage_title(targets.outcomes[v.index].stage) << " in "
+                      << format_share(v.value) << " der Läufe, Ziel "
+                      << format_share_range(targets.outcomes[v.index].share) << '\n';
+            break;
+        case AiCheck::MaxOutcome:
+            std::cout << "  Ausgang " << stage_title(static_cast<Index>(v.index)) << " in "
+                      << format_share(v.value) << " der Läufe, höchstens "
+                      << format_share(targets.max_outcome) << '\n';
+            break;
+        case AiCheck::War:
+            std::cout << "  Krieg " << pair_name(targets.wars[v.index].first, targets.wars[v.index].second)
+                      << " in " << format_share(v.value) << " der Läufe, Ziel "
+                      << format_share_range(targets.wars[v.index].share) << '\n';
+            break;
+        case AiCheck::Bankruptcy:
+            std::cout << "  Bankrott in " << format_share(v.value) << " der Läufe, Ziel "
+                      << format_share_range(targets.bankruptcies[v.index].share) << '\n';
+            break;
+        case AiCheck::Crash:
+            std::cout << "  " << summary.crashed << " Abstürze\n";
+            break;
+        }
+    }
+    return kExitDataError;
+}
+
 int cmd_determinismus(const Options& o, const fs::path& data_dir) {
     // Jeder Lauf lädt die Daten neu – so fällt auch ein nicht deterministischer Lader auf.
     auto world_a = load(data_dir, o.scenario, true);
@@ -3269,6 +3585,9 @@ int run(int argc, char** argv) {
         } else if (o.command == "ereignisse") {
             check_applicable(o, {"--daten", "--szenario", "--seed", "--threads", "--seeds", "--ziele",
                                  "--strategie", "--bis"});
+        } else if (o.command == "ki") {
+            check_applicable(o, {"--daten", "--szenario", "--seed", "--threads", "--seeds", "--ziele",
+                                 "--bis", "--parallel", "--ohne-ki"});
         } else if (o.command == "speichertest") {
             check_applicable(o, {"--daten", "--szenario", "--jahre", "--tage", "--seed", "--threads",
                                  "--testbefehle", "--punkte"});
@@ -3318,6 +3637,9 @@ int run(int argc, char** argv) {
         }
         if (o.command == "ereignisse") {
             return cmd_ereignisse(o, data_dir);
+        }
+        if (o.command == "ki") {
+            return cmd_ki(o, data_dir);
         }
         if (o.command == "speichertest") {
             return cmd_speichertest(o, data_dir);

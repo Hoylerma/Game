@@ -152,6 +152,10 @@ public:
     void record_trade(bool on) { record_trade_ = on; }
     const std::vector<TradeFlow>& trade_flows() const { return trade_flows_; }
 
+    /// Rechenzeit der KI (Schritt 6f) in Sekunden seit dem Start dieser Simulation (seit M12, KI-Labor).
+    /// Gemessen, kein Zustand.
+    double ai_seconds() const { return ai_seconds_; }
+
 private:
     /// Zustandsverzeichnis (core/src/state_access.hpp): Prüfsumme, Textexport und Spielstände lesen
     /// alle Felder über dieselbe Liste.
@@ -231,6 +235,7 @@ private:
     std::uint64_t start_checksum_ = 0;
     EconomyTopology topology_;           // abgeleitet: Märkte, Nachbarn, Betriebe je Beruf (seit M5)
     bool record_trade_ = false;          // Zolllabor (seit M9): Ströme festhalten
+    double ai_seconds_ = 0;              // KI-Labor (seit M12): Rechenzeit der KI
     EventCache event_cache_;             // abgeleitet (seit M11): letzter Eintritt, Nachbarstaaten
     std::vector<TradeFlow> trade_flows_; // … des letzten Monatsersten, kein Zustand
 

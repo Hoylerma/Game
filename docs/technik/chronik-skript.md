@@ -1408,6 +1408,8 @@ ki {
     buendnisse = 3                       # Bündnisse, über die hinaus keine angeboten werden, 0 … 100
     wahlkampf_monate = 4                 # Wahlkampf der Strömungen vor einer Wahl, 0 … 24
     wahlkampf_ruecklage = 0.2            # Rücklage der Mittel einer Strömung, 0 … 1
+    # seit a4 (ki.md Abschnitt 6.3)
+    kriegs_staerke = 1.3                 # Stärkeverhältnis für eine Kriegserklärung, 0 … 100
 }
 persoenlichkeit machtpolitiker { name = "Machtpolitiker" risiko = 1 expansion = 2 legitimitaet = -1 vermittlung = -1 }
 eigenschaft zauderer { name = "Zauderer" risiko = -2 }
@@ -1467,6 +1469,29 @@ agenda PRU {
 Ein Ziel, dessen Staat oder Zollunion zum Start nicht besteht, entfällt ohne Fehler; eine Agenda eines
 fehlenden Staates ebenso. Fehler: unbekannte Art, fehlender oder falscher Gegenstand, doppelte Agenda,
 unbekannte Persönlichkeit, `bis` vor `ab`.
+
+### 3.40 `common/kiziele_<szenario>.chron` (seit M12a5)
+
+Korridore des KI-Labors (`uhrwerk-cli ki`, [ki.md](ki.md) Abschnitt 7). Jeder Block außer `labor` ist
+optional; `ausgang`, `krieg` und `bankrott` dürfen mehrfach stehen.
+
+```text
+labor {
+    bis        = 1871.07.01     # Pflicht: Ende der Läufe (überschreibbar mit --bis)
+    journal    = deutsche_frage # für einigung und ausgang: Journal, dessen Ausgänge zählen
+    hoechstens = 0.8            # optional: kein Ausgang in mehr als diesem Anteil der Läufe
+}
+einigung { ausgaenge = { kleindeutsch grossdeutsch zwei_buende }  anteil = { 0.55 0.9 } }
+                                # Anteil der Läufe, die in einem dieser Ausgänge enden
+ausgang kleindeutsch { anteil = { 0.3 0.7 } }        # Anteil der Läufe mit diesem Ausgang
+krieg PRU { gegen = AUT  anteil = { 0.4 0.9 } }      # Läufe mit einem Krieg der beiden als Hauptparteien
+                                                     # (gleich, wer erklärt; auch ein laufender)
+bankrott { staaten = { PRU AUT }  anteil = { 0 0.2 } } # Läufe mit einem Staatsbankrott eines der Staaten
+```
+
+Ohne Eintrag gilt: **keine Abstürze**. Fehler (Exitcode 1): unbekannte Felder, Journale, Ausgänge und
+Staaten, ein Ausgang ohne `journal`, ein Bereich außerhalb von 0 bis 1, `gegen` mit demselben Staat, ein
+Ende vor dem Start.
 
 ## 4. Startzustand
 

@@ -43,6 +43,31 @@ Schritt in Abschnitt 13 dort.
   des Staates verschiebt. Strömungen ohne Spieler führen in den vier Monaten vor einer Wahl Wahlkampf
   in den knappsten Wahlkreisen; dafür kennt der Kern die Strömung des Spielers (Befehl
   `Spielerströmung`). Inhaltsbereiche ki Stand 3 und ereignisse Stand 7; 1648 bitgleich.
+- **Krieg und Frieden der KI (Schritt a4):** Staaten ohne Spieler erklären Krieg nur aus einem aktiven
+  Ziel ihrer Agenda (Gebiet, Annexion, Schwächen eines Rivalen) und nur bei Übermacht ihrer Seite
+  nach dem Bündnisfall, mit doppelter Schwelle und Gründen in der Chronik; Taktiker warten, bis der
+  Gegner allein steht. Im Krieg stellen sie bei klarem Vorsprung weitere Ziele aus der Agenda und bieten
+  Frieden (eigene Ziele, weißer Frieden, Kapitulation) nur an, wenn die Gegenseite annähme. Bündnisse
+  und Garantien bietet die KI im Krieg nicht mehr an: Ein Bündnis mitten im Krieg machte den Partner
+  zur eigenen Seite, und im Lesezeichen Königgrätz siegte Preußen mit a3 nur noch in 3 von 16 Läufen
+  (jetzt wieder 11). Einen weißen Frieden nimmt eine Seite ohne Spieler nicht an, solange ihr Gegner
+  kriegsmüder oder ihre Seite klar überlegen ist; sonst bot Frankreich im Lesezeichen Sedan früh weißen
+  Frieden an, und der Verteidiger siegte nur in 4 von 16 Läufen (jetzt 14). Inhaltsbereich ki Stand 4;
+  1648 bitgleich.
+- **KI-Labor (Schritt a5):** `uhrwerk-cli ki` rechnet Partien ohne Spieler bis `--bis` und berichtet je
+  Lauf Ausgang der deutschen Frage, Kriege, untergegangene Staaten, Bankrotte, höchste Unruhe,
+  Entscheidungen der KI je Art, Laufzeit mit dem Anteil der KI und Prüfsumme; über alle Läufe Einigung,
+  Form der Einigung, Kriege je Paar und Abstürze gegen die Korridore aus `common/kiziele_<szenario>.chron`
+  ([chronik-skript.md](docs/technik/chronik-skript.md) Abschnitt 3.40). `--parallel N` rechnet N Läufe
+  gleichzeitig mit denselben Prüfsummen, `--ohne-ki` zum Vergleich wie M11; ein Absturz zählt, der
+  Bericht läuft weiter. CTests auf der Fixture `tests/daten_ki`; die Korridore für 1848 folgen mit der
+  Kalibrierung in b2. In der Hilfe stehen jetzt auch `--strategie` und `--bis`. Das erste Labor 1848
+  zeigte einen Fehler der KI-Diplomatie: Die Grenze von drei Bündnissen galt nur für den Anbietenden,
+  und am 2. März 1848 entstanden 36 Bündnisse auf einmal (Ende 1849: 91). Jetzt lehnt ein Staat ohne
+  Spieler ab, wenn er oder der Anbietende die Grenze erreicht hat. Rauch- und Klicktest rechnen jetzt
+  damit, dass Staaten und Strömungen ohne Spieler handeln: Der Rauchtest meldet Preußen als
+  Spielerstaat und die Liberalen als Spielerströmung, der Klicktest erwartet die Gesandten und
+  Wahlkreise, die die KI vor der Übernahme schon eingesetzt hat.
 
 ### Meilenstein M11 – Ereignisse und Revolution 1848/49
 

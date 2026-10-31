@@ -29,6 +29,9 @@ ki {
     buendnisse          = 3     # höchstens so viele Bündnisse, dann kein Angebot mehr
     wahlkampf_monate    = 4     # Strömungen ohne Spieler führen Wahlkampf in den Monaten vor der Wahl
     wahlkampf_ruecklage = 0.2   # Anteil der Mittel, den eine Strömung zurückhält
+
+    # Krieg (seit Schritt a4, Abschnitt 6.3)
+    kriegs_staerke = 1.3        # Stärkeverhältnis der Seiten für eine Kriegserklärung (− 0,15 je Punkt Risiko)
 }
 
 # Staatspersönlichkeiten (Kapitel 21, Abschnitt 3.1; ki.md Abschnitt 3.2). Neigungen je −2 … +2.
