@@ -418,7 +418,9 @@ Kriegslesezeichen nutzen die Daten von 1848 und die datierte Historie bis zu ihr
 | `common/journale/deutsche_frage.chron` | seit b3: Journal „Die deutsche Frage“ bis 1.7.1871 mit den Stufen Deutscher Bund, Deutscher Krieg, Zwei Bünde und den Ausgängen kleindeutsch, großdeutsch, zwei Bünde, Bund (am Ende), ohne Bund und Reich |
 | `common/ereignisziele_voelkerfruehling_1871.chron` | seit b3: Korridore des Ereignislabors für die deutsche Frage bis 1871 (`--ziele`, nicht in jedem CI-Lauf) |
 
-| `common/ki.chron` | seit M12: Regeln der KI ab 1848.01.01 (Rauschen, Abkühlung, Schuldengrenze, Gewicht von Herrscher und Minister), sechs Staatspersönlichkeiten und 16 Eigenschaften mit ihren Neigungen ([ki.md](../docs/technik/ki.md) Abschnitt 3); Personen (`persoenlichkeiten.chron`) und Agenden (`agenden.chron`) folgen mit Schritt b1 |
+| `common/ki.chron` | seit M12: Regeln der KI ab 1848.01.01 (Rauschen, Abkühlung, Schuldengrenze, Gewicht von Herrscher und Minister), sechs Staatspersönlichkeiten und 16 Eigenschaften mit ihren Neigungen ([ki.md](../docs/technik/ki.md) Abschnitt 3); seit b1 auch in 35 Optionen von 16 Ereignissen ein Block `ki { … }` (Märzforderungen, Barrikaden, Metternich, Krone, Olmütz, Verfassungskonflikt, Emser Depesche …) |
+| `common/persoenlichkeiten.chron` | seit M12b1: 71 Herrscher und leitende Minister 1848–1871 von Preußen, Österreich, Bayern, Sachsen, Hannover, Württemberg, Baden, Hessen-Darmstadt, Kurhessen, Frankreich und Dänemark mit Amtszeit, Werten und Eigenschaften; Wechsel der Revolution an Merkmalen der Ereignisse (`maerzministerium`, `bismarck`, Entlassung Metternichs, Abdankung Ludwigs I.); Amtsdaten aus der Literatur `ungeprueft`, Werte und Eigenschaften Spielwerte |
+| `common/agenden.chron` | seit M12b1: Staatspersönlichkeiten und Agenden von 14 Staaten mit 44 Zielen (Zollverein, Führung im Bund, Bündnisse, Schleswig 1864, Schwächen Österreichs 1866 und Frankreichs 1870 nur mit `bismarck`), Spielwerte; Kalibrierung mit b2 |
 
 Das Lesezeichen 1648 hat keine Ereignisse und keine KI (vor dem `seit`); seine Prüfsumme bleibt.
 

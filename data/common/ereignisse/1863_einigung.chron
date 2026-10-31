@@ -186,12 +186,14 @@ ereignis pru.bundesreformantrag {
         text = "Den Antrag stellen und mit Italien abschließen"
         historisch = ja
         gewicht = 70
+        ki { expansion = 1  risiko = 1 }
         gewicht_wenn { merkmal = bismarck  plus = 20 }
         wirkung { welt_merke = preussischer_reformantrag  antrag { art = reform }  zustimmung_nationalbewegung = 2  zustimmung_adel = -1 }
     }
     option verstaendigung {
         text = "Mit Österreich über eine gemeinsame Führung des Bundes verhandeln"
         gewicht = 20
+        ki { vermittlung = 1 }
         wirkung { welt_merke = dualismus  beziehung_AUT = 20  zustimmung_militaer = -1 }
     }
 }
@@ -408,6 +410,7 @@ ereignis pru.emser_depesche {
         text = "Die gekürzte Fassung veröffentlichen"
         historisch = ja
         gewicht = 65
+        ki { risiko = 1  expansion = 1 }
         gewicht_wenn { merkmal = bismarck  plus = 20 }
         wirkung { welt_merke = nationalkrieg  zustimmung_nationalbewegung = 3  staat FRK { krieg = PRU } }
     }
@@ -419,6 +422,7 @@ ereignis pru.emser_depesche {
     option zurueckhalten {
         text = "Die Depesche zurückhalten und die Krise auslaufen lassen"
         gewicht = 15
+        ki { vermittlung = 1 }
         wirkung { zustimmung_nationalbewegung = -2  zustimmung_militaer = -1 }
     }
 }
@@ -447,6 +451,7 @@ ereignis novembervertraege {
         text = "Mit Reservatrechten dem Bund beitreten"
         historisch = ja
         gewicht = 75
+        ki { reform = 1 }
         gewicht_wenn { staat_in = { BAD HED }  plus = 15 }
         gewicht_wenn { welt_merkmal = sueden_fuer_anschluss  plus = 10 }
         wirkung { merke = reichsbeitritt  zustimmung_nationalbewegung = 3  zustimmung_katholische_kirche = -2 }
@@ -454,6 +459,7 @@ ereignis novembervertraege {
     option abseits {
         text = "Selbständig bleiben"
         gewicht = 25
+        ki { legitimitaet = 1 }
         wirkung { zustimmung_nationalbewegung = -3  zustimmung_katholische_kirche = 2  unruhe = 5 }
     }
 }

@@ -58,12 +58,14 @@ ereignis zollverein.krise {
         text = "Im Zollverein unter Preußen bleiben"
         historisch = ja
         gewicht = 75
+        ki { sparsamkeit = 1 }
         gewicht_wenn { beziehung_PRU >= 25  plus = 15 }
         wirkung { welt_merke = zollverein_verlaengert  zustimmung_handel_finanzen = 2  beziehung_AUT = -10  beziehung_PRU = 10 }
     }
     option oesterreich {
         text = "Mit Österreich über eine mitteleuropäische Zollunion verhandeln"
         gewicht = 25
+        ki { legitimitaet = 1 }
         gewicht_wenn { beziehung_AUT >= 50  plus = 15 }
         wirkung { welt_merke = mitteleuropa_zollplan  zustimmung_handel_finanzen = -3  zustimmung_katholische_kirche = 1  beziehung_AUT = 15  beziehung_PRU = -15 }
     }
@@ -303,6 +305,7 @@ ereignis pru.verfassungskonflikt {
         text = "Bismarck zum Ministerpräsidenten berufen und ohne Budget regieren"
         historisch = ja
         gewicht = 60
+        ki { risiko = 1  expansion = 1 }
         gewicht_wenn { zustimmung_militaer >= 3  plus = 15 }
         wirkung {
             merke = bismarck
@@ -316,6 +319,7 @@ ereignis pru.verfassungskonflikt {
     option nachgeben {
         text = "Nachgeben: die zweijährige Dienstzeit und das Budgetrecht anerkennen"
         gewicht = 25
+        ki { reform = 1  vermittlung = 1 }
         wirkung {
             merke = konflikt_beigelegt
             zustimmung_militaer = -4
@@ -327,6 +331,7 @@ ereignis pru.verfassungskonflikt {
     option abdanken {
         text = "König Wilhelm dankt ab, Kronprinz Friedrich Wilhelm regiert"
         gewicht = 15
+        ki { reform = 1 }
         wirkung {
             merke = kronprinz_regiert
             zustimmung_bildungsbuergertum = 4
