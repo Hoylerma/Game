@@ -1,0 +1,8 @@
+# Agenden der Fixture (KI-Labor): Brandenburg will Anhalt ab 1649, Sachsen bewahrt.
+agenda BRA {
+    persoenlichkeit = machtpolitiker
+    ziel { art = annexion  gegner = ANH  gewicht = 60  ab = 1649.01.01 }
+}
+agenda SAX {
+    ziel { art = status_quo  gewicht = 40 }
+}

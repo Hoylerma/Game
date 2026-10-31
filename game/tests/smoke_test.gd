@@ -252,6 +252,13 @@ func _check_scenario_1848() -> void:
 		"Szenario 1848: %s" % str(scenario)
 	)
 	var prussia := sim.get_state_index("PRU")
+	# Seit M12 handeln Staaten ohne Spieler selbst (KI); Preußen, für das die folgenden Abschnitte handeln,
+	# ist darum der Spielerstaat im Kern – wie im Spiel, wo main.gd den gewählten Staat meldet.
+	_check(
+		sim.set_event_player(prussia),
+		"Spielerstaat im Kern: Preußen ab dem nächsten Tag (keine KI für Preußen)",
+		"set_event_player(Preußen) abgewiesen"
+	)
 	var state := sim.get_state(prussia)
 	_check(
 		str(state.get("customs_union", "")) == "zollverein" and bool(state.get("bund", false)),
@@ -890,6 +897,8 @@ func _check_party_1848(sim: SimulationClient, currents: Array[Dictionary]) -> in
 	for i in currents.size():
 		if str(currents[i].get("id", "")) == "liberale":
 			liberals = i
+	# Seit M12 führen Strömungen ohne Spieler selbst Wahlkampf; die Liberalen sind hier die des Spielers.
+	sim.set_player_current(liberals)
 	sim.advance_days(1) # Spenden am Monatsersten
 	var party := sim.get_party(liberals)
 	var funds := float(party.get("funds", 0.0))

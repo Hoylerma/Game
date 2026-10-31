@@ -133,6 +133,22 @@ if(UHRWERK_BUILD_CLI)
     set_tests_properties(ereignisse_fixture ereignisse_fixture_krone ereignisse_fixture_reaktion
         PROPERTIES PASS_REGULAR_EXPRESSION "Verstöße: keine – alle Korridore erfüllt")
 
+    # KI-Labor (seit M12, docs/technik/ki.md Abschnitt 7): Brandenburg mit einer Agenda gegen Anhalt auf der
+    # Fixture mit Militär und Ereignissen (tests/daten_ki über tests/daten, daten_krieg, daten_ereignisse),
+    # 16 Seeds zu viert gegen die Korridore; ohne KI zum Vergleich kein Krieg.
+    set(ki_daten ${CMAKE_CURRENT_BINARY_DIR}/ki_daten)
+    add_test(NAME ki_daten
+        COMMAND ${CMAKE_COMMAND} -DQUELLE=${CMAKE_CURRENT_SOURCE_DIR} -DZIEL=${ki_daten}
+                -P ${CMAKE_CURRENT_SOURCE_DIR}/ki_daten.cmake)
+    set_tests_properties(ki_daten PROPERTIES FIXTURES_SETUP ki_daten)
+    add_test(NAME pruefen_ki_fixture COMMAND uhrwerk-cli pruefen --daten ${ki_daten})
+    add_test(NAME ki_fixture COMMAND uhrwerk-cli ki --daten ${ki_daten} --seeds 16 --parallel 4)
+    add_test(NAME ki_fixture_ohne_ki COMMAND uhrwerk-cli ki --daten ${ki_daten} --seeds 16 --parallel 4 --ohne-ki)
+    set_tests_properties(pruefen_ki_fixture ki_fixture ki_fixture_ohne_ki PROPERTIES FIXTURES_REQUIRED ki_daten)
+    set_tests_properties(ki_fixture PROPERTIES PASS_REGULAR_EXPRESSION "Verstöße: keine – alle Korridore erfüllt")
+    set_tests_properties(ki_fixture_ohne_ki PROPERTIES PASS_REGULAR_EXPRESSION
+        "Krieg Brandenburg – Anhalt in 0,0 % der Läufe")
+
     # Kriegslesezeichen (seit M10b, militaer.md Abschnitt 6.1): Daten, ein kurzer Lauf des Krieges aus
     # dem Lesezeichen und der Speichertest mitten im Krieg 1866. Der kurze Lauf prüft nur, dass das Labor
     # rechnet; die Korridore (seit b2) prüft das Kriegslabor mit 16 Seeds in der CI.

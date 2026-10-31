@@ -5,6 +5,7 @@
 
 #include "test_hilfen.hpp"
 #include "uhrwerk/ai.hpp"
+#include "uhrwerk/ai_lab.hpp"
 #include "uhrwerk/diplomacy.hpp"
 #include "uhrwerk/events.hpp"
 #include "uhrwerk/military.hpp"
@@ -12,6 +13,7 @@
 #include "uhrwerk/simulation.hpp"
 
 #include <algorithm>
+#include <array>
 #include <cstdint>
 #include <doctest/doctest.h>
 #include <string>
@@ -524,6 +526,13 @@ TEST_CASE("KI: Bündnis gegen einen gemeinsamen Rivalen, Annahme nach Nutzen") {
     CHECK(uhrwerk::ai_decision_text(w, *offer) == "bietet Brandenburg ein Bündnis an");
     CHECK(std::any_of(offer->reasons.begin(), offer->reasons.begin() + offer->reason_count,
                       [&](const uhrwerk::AiReason& r) { return r.factor == uhrwerk::AiFactor::Rival; }));
+    // Bündnisgrenze für beide Seiten (seit a5): mit 'buendnisse = 1' kein zweites für Sachsen oder
+    // Brandenburg.
+    World limited = w;
+    limited.ai_rules.max_alliances = 1;
+    const Index anh = w.find_state("ANH");
+    CHECK_FALSE(uhrwerk::ai_accepts_alliance(limited, anh, sax));
+    CHECK_FALSE(uhrwerk::ai_accepts_alliance(limited, sax, anh));
     // Ohne gemeinsamen Rivalen lehnt ein Staat ohne Spieler ab, der Spielerstaat nach der Regel.
     World other = data.load();
     uhrwerk::EventCache cache;
@@ -604,5 +613,101 @@ TEST_CASE("KI: Kriegserklärung aus der Agenda bei Übermacht, Gründe in der Ch
         CHECK(std::any_of(w.ai_cooldowns.begin(), w.ai_cooldowns.end(), [&](const uhrwerk::AiCooldown& c) {
             return c.state == bra && c.kind == uhrwerk::AiDecisionKind::DeclareWar && c.target == anh;
         }));
+        // Weißer Frieden: Das überlegene Brandenburg lehnt ab; ohne KI gilt die Regel aus M10 (Punkte unter
+        // 25).
+        REQUIRE(w.wars.size() == 1);
+        const std::int64_t id = w.wars.front().id;
+        CHECK_FALSE(uhrwerk::ai_accepts_white_peace(w, w.wars.front(), true));
+        CHECK(uhrwerk::peace_acceptance(w, anh, id, uhrwerk::PeaceTerms::White) == false);
+        World without = w;
+        without.ai_rules.active = false;
+        CHECK(uhrwerk::peace_acceptance(without, anh, id, uhrwerk::PeaceTerms::White) == true);
     }
+}
+
+TEST_CASE("KI-Labor: Korridore lesen, Fehler mit Zeile") {
+    const World w = AiData(quiet_rules()).load();
+    const uhrwerk::AiTargetsResult ok = uhrwerk::parse_ai_targets(R"(
+labor { bis = 1650.12.31  hoechstens = 0.8 }
+krieg BRA { gegen = ANH  anteil = { 0.5 1 } }
+bankrott { staaten = { BRA SAX }  anteil = { 0 0.2 } }
+)",
+                                                                  w);
+    INFO((ok.errors.empty() ? std::string() : ok.errors.front()));
+    REQUIRE(ok.ok());
+    CHECK(ok.targets.until == uhrwerk::Date{1650, 12, 31});
+    CHECK(ok.targets.has_max_outcome);
+    CHECK(ok.targets.max_outcome == Fixed::from_ratio(4, 5));
+    REQUIRE(ok.targets.wars.size() == 1);
+    CHECK(ok.targets.wars[0].first == w.find_state("BRA"));
+    CHECK(ok.targets.wars[0].second == w.find_state("ANH"));
+    REQUIRE(ok.targets.bankruptcies.size() == 1);
+    CHECK(ok.targets.bankruptcies[0].states.size() == 2);
+
+    const auto first_error = [&](std::string_view text) {
+        const uhrwerk::AiTargetsResult r = uhrwerk::parse_ai_targets(text, w, "kiziele.chron");
+        return r.errors.empty() ? std::string() : r.errors.front();
+    };
+    CHECK(first_error("krieg BRA { anteil = { 0 1 } }") == "kiziele.chron:1:1: Block 'labor' fehlt");
+    CHECK(first_error("labor { bis = 1650.12.31 }\nkrieg BRA { gegen = BRA  anteil = { 0 1 } }")
+              .find("'gegen' nennt denselben Staat") != std::string::npos);
+    CHECK(first_error("labor { bis = 1650.12.31 }\nkrieg XXX { gegen = BRA  anteil = { 0 1 } }")
+              .find("unbekannter Staat 'XXX'") != std::string::npos);
+    CHECK(first_error("labor { bis = 1650.12.31 }\nausgang reich { anteil = { 0 1 } }")
+              .find("im Block 'labor' fehlt 'journal'") != std::string::npos);
+    CHECK(first_error("labor { bis = 1650.12.31 }\nbankrott { staaten = { BRA }  anteil = { 0 2 } }")
+              .find("innerhalb von 0 bis 1") != std::string::npos);
+    CHECK(first_error("labor { bis = 1600.01.01 }").find("vor dem Startdatum") != std::string::npos);
+}
+
+TEST_CASE("KI-Labor: parallel gleich, ohne KI kein Krieg, Abstürze zählen") {
+    const std::string agendas =
+        "agenda BRA {\n    ziel { art = annexion  gegner = ANH  gewicht = 60  ab = 1648.11.01 }\n}\n";
+    AiData data(quiet_rules(), kPersons, agendas);
+    testhilfen::write_file(data.dir() / "karte/nachbarn.csv", kNeighbors);
+    testhilfen::write_file(data.dir() / "common/militaer.chron", kMilitary);
+    const World w = data.load();
+    const uhrwerk::AiTargetsResult parsed = uhrwerk::parse_ai_targets(
+        "labor { bis = 1648.12.15 }\nkrieg BRA { gegen = ANH  anteil = { 1 1 } }\n", w);
+    REQUIRE(parsed.ok());
+    uhrwerk::AiLabOptions options;
+    options.seeds = 3;
+    options.threads = 1;
+    const std::vector<uhrwerk::AiLabRun> serial = uhrwerk::run_ai_lab_seeds(w, parsed.targets, options);
+    options.parallel = 3;
+    const std::vector<uhrwerk::AiLabRun> parallel = uhrwerk::run_ai_lab_seeds(w, parsed.targets, options);
+    REQUIRE(serial.size() == 3);
+    REQUIRE(parallel.size() == 3);
+    for (std::size_t i = 0; i < serial.size(); ++i) {
+        CHECK_FALSE(serial[i].crashed);
+        CHECK(serial[i].seed == 1648 + i);
+        CHECK(parallel[i].seed == serial[i].seed);
+        CHECK(parallel[i].checksum == serial[i].checksum);
+        CHECK(parallel[i].decisions == serial[i].decisions);
+        CHECK(serial[i].decisions[static_cast<std::size_t>(uhrwerk::AiDecisionKind::DeclareWar)] == 1);
+        CHECK(serial[i].ai_state_months > 0);
+    }
+    uhrwerk::AiLabSummary summary = uhrwerk::summarize_ai_lab(w, parsed.targets, serial);
+    CHECK(summary.violations.empty());
+    CHECK(summary.wars == std::vector<Fixed>{Fixed::one()});
+
+    options.ai = false;
+    const std::vector<uhrwerk::AiLabRun> without = uhrwerk::run_ai_lab_seeds(w, parsed.targets, options);
+    REQUIRE(without.size() == 3);
+    CHECK(without[0].wars.empty());
+    CHECK(without[0].decisions == std::array<std::int64_t, uhrwerk::kAiDecisionKinds>{});
+    CHECK(without[0].ai_state_months == 0);
+    summary = uhrwerk::summarize_ai_lab(w, parsed.targets, without);
+    REQUIRE(summary.violations.size() == 1);
+    CHECK(summary.violations[0].check == uhrwerk::AiCheck::War);
+
+    // Ein abgestürzter Lauf zählt nur als Absturz.
+    std::vector<uhrwerk::AiLabRun> runs = serial;
+    runs[1] = uhrwerk::AiLabRun{};
+    runs[1].crashed = true;
+    summary = uhrwerk::summarize_ai_lab(w, parsed.targets, runs);
+    CHECK(summary.crashed == 1);
+    REQUIRE(summary.violations.size() == 2);
+    CHECK(summary.violations[0].check == uhrwerk::AiCheck::Crash);
+    CHECK(summary.violations[1].check == uhrwerk::AiCheck::War); // 2 von 3 Läufen
 }

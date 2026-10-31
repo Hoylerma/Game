@@ -6,6 +6,7 @@
 // Kriegspunkte, Kriegsmüdigkeit und Frieden mit Besitzwechsel und Untergang (Abschnitt 4.5).
 
 #include "military_internal.hpp"
+#include "uhrwerk/ai.hpp"
 #include "uhrwerk/customs.hpp"
 #include "uhrwerk/date.hpp"
 #include "uhrwerk/diplomacy.hpp"
@@ -1358,9 +1359,16 @@ std::optional<bool> peace_acceptance(const World& world, Index state, std::int64
     }
     const bool attacker = war->attackers.front() == state;
     switch (terms) {
-    case PeaceTerms::White:
-        return war_score(world, *war, !attacker) < Fixed::from_int(25) ||
-               war_weariness(world, *war, !attacker) >= Fixed::from_int(50);
+    case PeaceTerms::White: {
+        if (war_score(world, *war, !attacker) >= Fixed::from_int(25) &&
+            war_weariness(world, *war, !attacker) < Fixed::from_int(50)) {
+            return false;
+        }
+        // Seit M12 (ki.md 6.3): Eine Gegenseite ohne Spieler lehnt ab, solange die Zeit für sie arbeitet.
+        const Index other = side_of(*war, !attacker).front();
+        return !ai_active(world) || other == world.event_player ||
+               ai_accepts_white_peace(world, *war, !attacker);
+    }
     case PeaceTerms::OwnGoals: {
         const Fixed cost = war_goals_cost(world, *war, attacker);
         if (cost <= Fixed::zero()) {

@@ -10,6 +10,7 @@
 
 #include <algorithm>
 #include <array>
+#include <chrono>
 #include <cstddef>
 #include <cstdint>
 #include <string>
@@ -364,10 +365,12 @@ void Simulation::step_day() {
     //     mit KI-Daten.
     // Die Befehle der KI wirken wie die des Spielers am nächsten Tag; sie stehen nicht im Protokoll (eine
     // Wiederholung rechnet sie aus dem Zustand neu).
-    if (ai_active(world_)) {
+    if (ai_active(world_) && world_.date.day == 1) {
+        const auto t0 = std::chrono::steady_clock::now();
         for (const Command& command : run_ai(world_, rng_ai_, event_cache_)) {
             pending_.push_back(command);
         }
+        ai_seconds_ += std::chrono::duration<double>(std::chrono::steady_clock::now() - t0).count();
     }
 
     // 7. Jahreswechsel.

@@ -1255,7 +1255,11 @@ private:
             terms = PeaceTerms::Capitulation;
             option.add(AiFactor::Weariness, weariness - Fixed::from_int(60), enemy);
         } else if (weariness >= Fixed::from_int(50) - Fixed::from_int(10) * inclination(Inclination::Risk) &&
-                   score < Fixed::from_int(25)) {
+                   score < Fixed::from_int(25) && enemy_score <= score + Fixed::from_int(10) &&
+                   war_side_strength(attacker ? war.attackers : war.defenders) <
+                       war_side_strength(attacker ? war.defenders : war.attackers) * w_.ai_rules.war_ratio) {
+            // Weißer Frieden nur bei ausgeglichenem Krieg: Wer zurückliegt, kämpft weiter oder unterwirft
+            // sich; wer klar überlegen ist (Stärke ab kriegs_staerke), setzt auf den Sieg.
             terms = PeaceTerms::White;
             option.add(AiFactor::Weariness, weariness - Fixed::from_int(40), enemy);
             option.add(AiFactor::Mediation, Fixed::from_int(5) * inclination(Inclination::Mediation));
@@ -1414,6 +1418,15 @@ bool ai_accepts_alliance(const World& world, Index acceptor, Index proposer) {
     if (!in_range(world.ai_strategy, acceptor) || !in_range(world.ai_strategy, proposer)) {
         return false;
     }
+    // Höchstens 'buendnisse' je Staat, für beide Seiten (Angebote eines Tages werden nacheinander wirksam).
+    for (const Index s : {acceptor, proposer}) {
+        const auto count = std::count_if(world.treaties.begin(), world.treaties.end(), [&](const Treaty& t) {
+            return t.kind == TreatyKind::Alliance && (t.from == s || t.to == s);
+        });
+        if (count >= world.ai_rules.max_alliances) {
+            return false;
+        }
+    }
     Fixed utility = (relation(world, acceptor, proposer) - Fixed::from_int(50)) / Fixed::from_int(5);
     const Index rival = world.ai_strategy[at(acceptor)].rival;
     if (rival != kNone && rival == world.ai_strategy[at(proposer)].rival && rival != acceptor &&
@@ -1424,6 +1437,24 @@ bool ai_accepts_alliance(const World& world, Index acceptor, Index proposer) {
         utility -= Fixed::from_int(30);
     }
     return utility >= world.ai_rules.threshold;
+}
+
+bool ai_accepts_white_peace(const World& world, const War& war, bool attacker_side) {
+    // Die Zeit arbeitet für die Seite, deren Gegner müder ist; eine klar überlegene Seite setzt auf den Sieg
+    // (den Krieg beendet sonst die Regel aus militaer.md 4.5, spätestens bei Kriegsmüdigkeit 100).
+    if (war_weariness(world, war, !attacker_side) > war_weariness(world, war, attacker_side)) {
+        return false;
+    }
+    const auto strength = [&](const std::vector<Index>& side) {
+        Fixed total;
+        for (const Index s : side) {
+            total += ai_strength(world, s);
+        }
+        return total;
+    };
+    const Fixed own = strength(attacker_side ? war.attackers : war.defenders);
+    const Fixed other = strength(attacker_side ? war.defenders : war.attackers);
+    return own < other * world.ai_rules.war_ratio;
 }
 
 Fixed ai_option_factor(const World& world, const EventOption& option, Index state) {
