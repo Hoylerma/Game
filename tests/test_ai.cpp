@@ -565,3 +565,44 @@ TEST_CASE("KI: Ereignisoptionen nach Neigung, Befehl Spielerströmung") {
     sim.step_day();
     CHECK(sim.world().player_current == 0);
 }
+
+TEST_CASE("KI: Kriegserklärung aus der Agenda bei Übermacht, Gründe in der Chronik") {
+    for (const bool window : {true, false}) {
+        CAPTURE(window);
+        // Annexion Anhalts: aktiv ab 1648.11.01 bzw. erst ab 1700 (dann kein Krieg).
+        const std::string agendas =
+            std::string("agenda BRA {\n    ziel { art = annexion  gegner = ANH  gewicht = 60  ab = ") +
+            (window ? "1648.11.01" : "1700.01.01") + " }\n}\n";
+        AiData data(quiet_rules(), kPersons, agendas);
+        testhilfen::write_file(data.dir() / "karte/nachbarn.csv", kNeighbors);
+        testhilfen::write_file(data.dir() / "common/militaer.chron", kMilitary);
+        Simulation sim(data.load());
+        const Index bra = sim.world().find_state("BRA");
+        const Index anh = sim.world().find_state("ANH");
+        while (sim.world().date < uhrwerk::Date{1648, 11, 3}) {
+            sim.step_day();
+        }
+        const World& w = sim.world();
+        const auto declared =
+            std::find_if(w.ai_log.begin(), w.ai_log.end(), [](const uhrwerk::AiDecision& d) {
+                return d.kind == uhrwerk::AiDecisionKind::DeclareWar;
+            });
+        if (!window) {
+            CHECK(declared == w.ai_log.end());
+            CHECK_FALSE(uhrwerk::at_war(w, bra, anh));
+            continue;
+        }
+        REQUIRE(declared != w.ai_log.end());
+        CHECK(declared->state == bra);
+        CHECK(declared->target == anh);
+        CHECK(uhrwerk::ai_decision_text(w, *declared) == "erklärt Anhalt den Krieg");
+        CHECK(uhrwerk::at_war(w, bra, anh));
+        CHECK(std::any_of(w.chronicle.begin(), w.chronicle.end(), [](const uhrwerk::ChronicleEntry& e) {
+            return e.text.rfind("Brandenburg – Gründe: Agenda Anhalt +60", 0) == 0;
+        }));
+        // Abkühlung gegen denselben Gegner.
+        CHECK(std::any_of(w.ai_cooldowns.begin(), w.ai_cooldowns.end(), [&](const uhrwerk::AiCooldown& c) {
+            return c.state == bra && c.kind == uhrwerk::AiDecisionKind::DeclareWar && c.target == anh;
+        }));
+    }
+}

@@ -368,6 +368,25 @@ diplomatisch nur mit Gesandten, Bündnissen gegen gemeinsame Rivalen, Garantien 
 - Die **Heere** führt der Generalstab (militaer.md 5); die KI übergibt ihm alle Heere ihrer
   Staaten.
 
+Präzisiert in Schritt a4:
+
+| Handlung | Bedingung | Faktoren |
+|---|---|---|
+| Kriegserklärung | nicht im Krieg; aktives Agendaziel `gebiet` (Gegner: Besitzer der meisten Orte der Einheit), `annexion` oder `schwaechen`; Erklärung möglich; Seiten nach dem Bündnisfall mit Stärke ≥ `kriegs_staerke` (1,3) − 0,15 × Risiko; Taktiker nur gegen einen Gegner ohne Beistand; Abkühlung je Gegner | Agenda = Gewicht, Stärke min(40, 20 × Überschuss), Expansion und Risiko je 5 × Neigung, Schuldenquote −10 je Punkt über der Grenze, Unruhe −½ je Punkt über 40, gegen einen Bundesstaat Legitimität −10 × Neigung; **doppelte Schwelle** |
+| Kriegsziel der Erklärung | | `gebiet`: die Einheit; `annexion`: der Staat; `schwaechen`: Führung im Bund unter Bundesstaaten, sonst Entschädigung von sechs Monatseinnahmen |
+| weiteres Kriegsziel | Hauptpartei; Kriegspunkte ≥ 1,5 × Kosten der eigenen Ziele; Agendaziel `gebiet` oder `annexion` gültig in diesem Krieg; eines je Monat | Agenda = Gewicht, Kriegspunkte − Kosten, Expansion 5 × Neigung |
+| Friedensangebot | Hauptpartei; die Gegenseite nähme nach der Vorab-Prüfung an; eines je Monat | eigene Ziele, wenn die Punkte die Kosten decken (10 + Punkte − Kosten); Kapitulation, wenn die Gegenseite ihre Ziele deckt und die eigene Müdigkeit 80 − 10 × Risiko erreicht; weißer Frieden ab Müdigkeit 50 − 10 × Risiko unter 25 Punkten (Müdigkeit − 40, Vermittlung 5 × Neigung) |
+
+Die **Annahme** eines Friedens bleibt die Regel aus militaer.md 4.5 (Kriegspunkte, Müdigkeit), ebenso
+der Frieden nach Regel am Monatsersten; die KI bietet nur an, was angenommen würde. Eine
+Kriegserklärung schreibt neben der Chronik des Krieges ihre Gründe („Preußen – Gründe: Agenda
+Österreich +50, Stärke gegen Österreich +12, Risiko +8“).
+
+**Keine Verträge im Krieg** (Schritt a3, nach dem Kriegslabor): Bündnisse und Garantien bietet die KI
+nicht an, solange einer der beiden Staaten im Krieg steht. Ein Bündnis mitten im Krieg machte den
+Partner zur eigenen Seite (Durchmarsch und Versorgung); im Lesezeichen Königgrätz siegte Preußen dann
+nur noch in 3 von 16 Läufen statt in 11.
+
 ### 6.4 Politik
 
 - **Ereignisoptionen**: Optionen dürfen einen Block `ki { risiko = 1  reform = -1 … }` tragen; ihr
@@ -540,6 +559,7 @@ Weitere Tests:
 | Schritt | Stand |
 |---|---|
 | – | Entscheidungen 1–14 wie empfohlen freigegeben; Umsetzung beginnt mit a1 |
+| a4 | **erledigt:** Kriegserklärung nur aus aktiven Agendazielen bei Übermacht der Seiten (Bündnisfall), mit doppelter Schwelle, Gründen in der Chronik und Abkühlung je Gegner; Kriegsziel aus der Agenda; weitere Kriegsziele bei Punkten über 1,5 × Kosten; Friedensangebote (eigene Ziele, weißer Frieden, Kapitulation) nur, wenn die Gegenseite annähme; keine Bündnisse und Garantien im Krieg. Regel `kriegs_staerke`; Inhaltsbereich ki Stand 4. Tests in `test_ai.cpp` |
 | a3 | **erledigt:** Planer Diplomatie (Gesandte, Bündnis gegen gemeinsame Rivalen mit Annahme nach Nutzen statt „ab Beziehung 100“, Garantie für kleine Nachbarn, Forderung, Manöver, Antrag und Zollunion aus der Agenda) und Politik (Block `ki { … }` an Ereignisoptionen, Wahlkampf der Strömungen ohne Spieler); Befehl `Spielerströmung` (Brücke: `set_player_current`), im Zustand mit der KI; Inhaltsbereich ki Stand 3, ereignisse Stand 7. Tests in `test_ai.cpp` |
 | a2 | **erledigt** (Labore 1848 mit KI: Revolution, Strategien, deutsche Frage bis 1871 mit 31 % kleindeutsch, 19 % zwei Bünde, 50 % Bund, Kriege, Wahl und Bilanz in ihren Korridoren; im Zolllabor die Untergrenze des Grenzhandels Mecklenburgs auf ×1,2, siehe `zollziele_voelkerfruehling.chron`): Takt am Monatsersten nach den Ereignissen (Ämter, Strategie mit Hauptziel und Rivale, Planer), Lagebild (Stärke, Bedrohung mit Feindschaft und Nähe), Nutzen als Summe benannter Faktoren mit Rauschen aus dem Strom `Ki`, Schwelle, KI-Protokoll je Staat mit drei Gründen (`ai_reason_text`, `ai_decision_text`), Abkühlung; Planer Haushalt (Kontribution und Akzise nach Defizit, Schuldenquote, Überschuss und Unruhe) und Mobilmachung (gegen bedrohliche mobile Nachbarn, Abrüstung nach zwei ruhigen Monatsersten). KI-Befehle gehen ohne Protokoll in die Warteschlange und wirken am nächsten Tag; der Spielerstaat bleibt unberührt. Zustand: Strategie, Protokoll, Abkühlungen; Inhaltsbereich Stand 2. Tests in `test_ai.cpp`; 1648 bitgleich |
 | a1 | **erledigt:** Regeln, sechs Staatspersönlichkeiten und 16 Eigenschaften in `common/ki.chron` (chronik-skript.md 3.37), Personen mit Amt, Amtszeit, Bedingung, Werten und Eigenschaften (`common/persoenlichkeiten.chron`, 3.38), Agenden mit Staatspersönlichkeit und Zielen (`common/agenden.chron`, 3.39) – geladen nur mit Ereignissen und ab `seit`; Neigungen (`state_inclinations`) und aktive Ziele (`agenda_goal_active`); Ämter je Staat und Rolle, beim Start ohne und am Monatsersten mit Eintrag in der Chronik; Befehl `Spielerstaat` (vorher `Ereignisspieler`); Strom `Ki` im Zustand; Inhaltsbereich `ki`, Spielstand Format 6; `uhrwerk-cli info` mit Zeile „KI“. Personen und Agenden 1848–1871 folgen mit b1. Tests in `test_ai.cpp`; 1648 bitgleich |

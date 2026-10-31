@@ -198,10 +198,10 @@ Fixed ai_threat(const World& world, const EventCache& cache, Index state, Index 
 
 std::string ai_reason_text(const World& world, const AiReason& reason) {
     static constexpr std::array<std::string_view, kAiFactors> names = {
-        "Defizit",       "Schuldenquote", "Überschuss",      "Unruhe",       "Sparsamkeit",
-        "Reform",        "Risiko",        "Bedrohung durch", "mobil:",       "Frieden",
-        "Agenda",        "Rivale",        "Beziehung zu",    "Stärke gegen", "Nachbar",
-        "verbündet mit", "Expansion",     "Legitimität",     "Vermittlung",  "Bündnisse"};
+        "Defizit",      "Schuldenquote",   "Überschuss",   "Unruhe",         "Sparsamkeit", "Reform",
+        "Risiko",       "Bedrohung durch", "mobil:",       "Frieden",        "Agenda",      "Rivale",
+        "Beziehung zu", "Stärke gegen",    "Nachbar",      "verbündet mit",  "Expansion",   "Legitimität",
+        "Vermittlung",  "Bündnisse",       "Kriegspunkte", "Kriegsmüdigkeit"};
     std::string text(names[static_cast<std::size_t>(reason.factor)]);
     if (in_range(world.states, reason.other)) {
         text += " " + world.states[at(reason.other)].short_name;
@@ -262,6 +262,17 @@ std::string ai_decision_text(const World& world, const AiDecision& decision) {
         const auto kind = static_cast<std::size_t>(decision.value.trunc());
         return "beantragt " + std::string(kind < motions.size() ? motions[kind] : "etwas");
     }
+    case AiDecisionKind::DeclareWar:
+        return "erklärt " + other_name(world, decision.target) + " den Krieg";
+    case AiDecisionKind::AddWarGoal:
+        return "stellt ein weiteres Kriegsziel gegen " + other_name(world, decision.target);
+    case AiDecisionKind::OfferPeace: {
+        static constexpr std::array<std::string_view, 3> terms = {
+            "einen weißen Frieden", "Frieden zu den eigenen Zielen", "die Kapitulation"};
+        const auto kind = static_cast<std::size_t>(decision.value.trunc());
+        return "bietet " + other_name(world, decision.target) + " " +
+               std::string(kind < terms.size() ? terms[kind] : "Frieden") + " an";
+    }
     case AiDecisionKind::JoinUnion:
         return "beantragt den Beitritt zu " + (in_range(world.customs_unions, decision.target)
                                                    ? world.customs_unions[at(decision.target)].name
@@ -320,6 +331,9 @@ public:
             }
             if (!w_.customs_unions.empty()) {
                 plan_customs(state);
+            }
+            if (military_active(w_)) {
+                plan_war(state);
             }
         }
         if (!w_.parliaments.empty()) {
@@ -740,9 +754,13 @@ private:
         return a != kNone && a == b && a != state && a != other ? a : kNone;
     }
 
+    /// Mitten in einem Krieg schließt die KI keine Verträge (ein Bündnis machte den Partner zur eigenen
+    /// Seite: Durchmarsch und Versorgung, militaer.md 4.1).
+    bool at_war_any(Index state) const { return military_active(w_) && in_war(w_, state); }
+
     void plan_alliance(Index state) {
         if (alliance_count(state) >= w_.ai_rules.max_alliances ||
-            cooling(state, AiDecisionKind::OfferAlliance, kNone)) {
+            cooling(state, AiDecisionKind::OfferAlliance, kNone) || at_war_any(state)) {
             return;
         }
         const Fixed own = ai_strength(w_, state);
@@ -750,7 +768,8 @@ private:
         Option best_option;
         for (std::size_t o = 0; o < w_.states.size(); ++o) {
             const auto other = static_cast<Index>(o);
-            if (other == state || !alive(other) || other == w_.event_player || allied(w_, state, other)) {
+            if (other == state || !alive(other) || other == w_.event_player || allied(w_, state, other) ||
+                at_war_any(other)) {
                 continue;
             }
             const Index rival = common_rival(state, other);
@@ -787,7 +806,7 @@ private:
     }
 
     void plan_guarantee(Index state) {
-        if (cooling(state, AiDecisionKind::OfferGuarantee, kNone)) {
+        if (cooling(state, AiDecisionKind::OfferGuarantee, kNone) || at_war_any(state)) {
             return;
         }
         // Eine Großmacht (dreifache Stärke) garantiert einen kleinen Nachbarn im eigenen Lager.
@@ -795,7 +814,7 @@ private:
         Index best = kNone;
         Option best_option;
         for (const Index other : cache_.neighbors[at(state)]) {
-            if (!alive(other) || other == w_.event_player ||
+            if (!alive(other) || other == w_.event_player || at_war_any(other) ||
                 ratio(own, ai_strength(w_, other)) < Fixed::from_int(3) ||
                 evaluate_treaty(w_, state, other, TreatyAction::Guarantee) != DiplomacyDecision::Accepted) {
                 continue;
@@ -1046,6 +1065,257 @@ private:
             record(state, AiDecisionKind::JoinUnion, best, Fixed::zero(), best_option);
             cool(state, AiDecisionKind::JoinUnion, best, w_.ai_rules.cooldown_months);
         }
+    }
+
+    // ── Krieg (Abschnitt 6.3) ──
+
+    /// Staat, dem die meisten Orte einer Verwaltungseinheit gehören (auch über untere Ebenen), sonst kNone.
+    Index unit_owner(Index unit) const {
+        std::vector<std::int64_t> counts(w_.states.size(), 0);
+        for (const Location& l : w_.locations) {
+            Index u = l.admin;
+            while (u != kNone && u != unit && in_range(w_.admin_units, u)) {
+                u = w_.admin_units[at(u)].parent;
+            }
+            if (u == unit && in_range(w_.states, l.owner)) {
+                ++counts[at(l.owner)];
+            }
+        }
+        const auto best = std::max_element(counts.begin(), counts.end());
+        return best != counts.end() && *best > 0 ? static_cast<Index>(best - counts.begin()) : kNone;
+    }
+
+    bool has_trait(Index state, std::string_view id) const {
+        const Index trait = w_.find_trait(id);
+        if (trait == kNone) {
+            return false;
+        }
+        for (std::size_t r = 0; r < kPersonRoles; ++r) {
+            const Index person = w_.office(state, static_cast<PersonRole>(r));
+            if (in_range(w_.persons, person)) {
+                const auto& traits = w_.persons[at(person)].traits;
+                if (std::find(traits.begin(), traits.end(), trait) != traits.end()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    Fixed war_side_strength(const std::vector<Index>& side) const {
+        Fixed total;
+        for (const Index s : side) {
+            total += ai_strength(w_, s);
+        }
+        return total;
+    }
+
+    void plan_war(Index state) {
+        const War* own = nullptr;
+        for (const War& war : w_.wars) {
+            if (!war.attackers.empty() && !war.defenders.empty() &&
+                (war.attackers.front() == state || war.defenders.front() == state)) {
+                own = &war;
+                break;
+            }
+        }
+        if (own != nullptr) {
+            plan_peace(state, *own);
+            return;
+        }
+        if (in_war(w_, state)) {
+            return; // als Verbündeter im Krieg: die Hauptpartei entscheidet
+        }
+        plan_declaration(state);
+    }
+
+    void plan_declaration(Index state) {
+        const State& s = w_.states[at(state)];
+        const Fixed risk = inclination(Inclination::Risk);
+        const Fixed needed = w_.ai_rules.war_ratio - risk * Fixed::from_ratio(15, 100);
+        const Fixed debt_ratio = s.debt / std::max(s.yearly_income, Fixed::one());
+        const Fixed unrest = in_range(w_.unrest, state) ? w_.unrest[at(state)] : Fixed::zero();
+        const bool tactician = has_trait(state, "taktiker");
+        Index best = kNone;
+        std::int64_t best_goal = 0;
+        Option best_option;
+        if (!in_range(w_.agendas, state)) {
+            return;
+        }
+        for (const AgendaGoal& g : w_.agendas[at(state)].goals) {
+            if ((g.kind != AgendaKind::Territory && g.kind != AgendaKind::Annexation &&
+                 g.kind != AgendaKind::Weaken) ||
+                !agenda_goal_active(w_, cache_, state, g)) {
+                continue;
+            }
+            const Index enemy = g.kind == AgendaKind::Territory ? unit_owner(g.target) : g.target;
+            if (enemy == kNone || enemy == state || !alive(enemy) ||
+                cooling(state, AiDecisionKind::DeclareWar, enemy) || !can_declare_war(w_, state, enemy)) {
+                continue;
+            }
+            std::vector<Index> attackers;
+            std::vector<Index> defenders;
+            war_sides(w_, state, enemy, attackers, defenders);
+            if (tactician && defenders.size() > 1) {
+                continue; // Taktiker warten, bis der Gegner allein steht
+            }
+            const Fixed r = ratio(war_side_strength(attackers), war_side_strength(defenders));
+            if (r < needed) {
+                continue;
+            }
+            std::int64_t goal = 0;
+            switch (g.kind) {
+            case AgendaKind::Territory:
+                goal = encode_war_goal(WarGoalKind::Territory, g.target);
+                break;
+            case AgendaKind::Annexation:
+                goal = encode_war_goal(WarGoalKind::Annexation, enemy);
+                break;
+            default:
+                goal = federal_state(w_, state) && federal_state(w_, enemy)
+                           ? encode_war_goal(WarGoalKind::Leadership, 0)
+                           : encode_war_goal(WarGoalKind::Indemnity, 6);
+                break;
+            }
+            Option option;
+            option.add(AiFactor::Agenda, g.weight, enemy);
+            option.add(AiFactor::Strength, std::min(Fixed::from_int(20) * (r - needed), Fixed::from_int(40)),
+                       enemy);
+            option.add(AiFactor::Expansion, Fixed::from_int(5) * inclination(Inclination::Expansion));
+            option.add(AiFactor::Risk, Fixed::from_int(5) * risk);
+            option.add(AiFactor::DebtRatio,
+                       -Fixed::from_int(10) * std::max(debt_ratio - w_.ai_rules.debt_limit, Fixed::zero()));
+            option.add(AiFactor::Unrest,
+                       -std::max(unrest - Fixed::from_int(40), Fixed::zero()) / Fixed::from_int(2));
+            if (federal_state(w_, state) && federal_state(w_, enemy)) {
+                option.add(AiFactor::Legitimacy, Fixed::from_int(-10) * inclination(Inclination::Legitimacy));
+            }
+            if (best == kNone || option.sum() > best_option.sum()) {
+                best = enemy;
+                best_goal = goal;
+                best_option = std::move(option);
+            }
+        }
+        if (best == kNone) {
+            return;
+        }
+        rate(best_option);
+        // Krieg verlangt die doppelte Schwelle.
+        if (best_option.utility >= w_.ai_rules.threshold * Fixed::from_int(2)) {
+            Command c;
+            c.type = CommandType::DeclareWar;
+            c.state = state;
+            c.target = best;
+            c.value = Fixed::from_int(best_goal);
+            out_.push_back(c);
+            record(state, AiDecisionKind::DeclareWar, best, c.value, best_option);
+            chronicle_reasons(state, best_option);
+            cool(state, AiDecisionKind::DeclareWar, best, w_.ai_rules.cooldown_months);
+        }
+    }
+
+    /// Bedeutende Entscheidung: die Gründe in der Chronik („Preußen – Gründe: Agenda +40, …“).
+    void chronicle_reasons(Index state, const Option& option) {
+        const AiDecision& d = w_.ai_log.back();
+        std::string text = w_.states[at(state)].short_name + " – Gründe: ";
+        for (std::size_t i = 0; i < d.reason_count; ++i) {
+            text += (i > 0 ? ", " : "") + ai_reason_text(w_, d.reasons[i]);
+        }
+        (void)option;
+        ChronicleEntry entry;
+        entry.date = w_.date;
+        entry.state = state;
+        entry.text = std::move(text);
+        w_.chronicle.push_back(std::move(entry));
+    }
+
+    void plan_peace(Index state, const War& war) {
+        if (cooling(state, AiDecisionKind::OfferPeace, kNone)) {
+            return;
+        }
+        const bool attacker = war.attackers.front() == state;
+        const Index enemy = attacker ? war.defenders.front() : war.attackers.front();
+        const Fixed score = war_score(w_, war, attacker);
+        const Fixed cost = war_goals_cost(w_, war, attacker);
+        const Fixed weariness = war_weariness(w_, war, attacker);
+        const Fixed enemy_score = war_score(w_, war, !attacker);
+        const Fixed enemy_cost = war_goals_cost(w_, war, !attacker);
+        // Weiteres Kriegsziel, wenn die Punkte die Kosten der eigenen Ziele um die Hälfte übersteigen.
+        if (cost > Fixed::zero() && score >= cost * Fixed::from_ratio(3, 2) &&
+            plan_more_goals(state, war, attacker, enemy)) {
+            return;
+        }
+        Option option;
+        PeaceTerms terms = PeaceTerms::White;
+        if (cost > Fixed::zero() && score >= cost) {
+            terms = PeaceTerms::OwnGoals;
+            option.add(AiFactor::WarScore, Fixed::from_int(10) + score - cost, enemy);
+        } else if (enemy_cost > Fixed::zero() && enemy_score >= enemy_cost &&
+                   weariness >= Fixed::from_int(80) - Fixed::from_int(10) * inclination(Inclination::Risk)) {
+            terms = PeaceTerms::Capitulation;
+            option.add(AiFactor::Weariness, weariness - Fixed::from_int(60), enemy);
+        } else if (weariness >= Fixed::from_int(50) - Fixed::from_int(10) * inclination(Inclination::Risk) &&
+                   score < Fixed::from_int(25)) {
+            terms = PeaceTerms::White;
+            option.add(AiFactor::Weariness, weariness - Fixed::from_int(40), enemy);
+            option.add(AiFactor::Mediation, Fixed::from_int(5) * inclination(Inclination::Mediation));
+        } else {
+            return; // die Regel des Monatsersten entscheidet (militaer.md 4.5)
+        }
+        const std::optional<bool> accepted = peace_acceptance(w_, state, war.id, terms);
+        if (!accepted || !*accepted) {
+            return;
+        }
+        rate(option);
+        if (option.utility >= w_.ai_rules.threshold) {
+            Command c;
+            c.type = CommandType::PeaceOffer;
+            c.state = state;
+            c.target = static_cast<Index>(war.id);
+            c.value = Fixed::from_int(static_cast<std::int64_t>(terms));
+            out_.push_back(c);
+            record(state, AiDecisionKind::OfferPeace, enemy, c.value, option);
+            cool(state, AiDecisionKind::OfferPeace, kNone, 1);
+        }
+    }
+
+    /// Ein weiteres Ziel der Agenda gegen die Gegenseite (Gebiet mit deren Orten, Annexion eines ihrer
+    /// Staaten); true, wenn ein Befehl entstand.
+    bool plan_more_goals(Index state, const War& war, bool attacker, Index enemy) {
+        if (!in_range(w_.agendas, state) || cooling(state, AiDecisionKind::AddWarGoal, kNone)) {
+            return false;
+        }
+        for (const AgendaGoal& g : w_.agendas[at(state)].goals) {
+            if ((g.kind != AgendaKind::Territory && g.kind != AgendaKind::Annexation) ||
+                !agenda_goal_active(w_, cache_, state, g)) {
+                continue;
+            }
+            const WarGoalKind kind =
+                g.kind == AgendaKind::Territory ? WarGoalKind::Territory : WarGoalKind::Annexation;
+            const WarGoal goal{kind, attacker, g.target};
+            if (!valid_war_goal(w_, war, goal)) {
+                continue;
+            }
+            Option option;
+            option.add(AiFactor::Agenda, g.weight, enemy);
+            option.add(AiFactor::WarScore, war_score(w_, war, attacker) - war_goals_cost(w_, war, attacker),
+                       enemy);
+            option.add(AiFactor::Expansion, Fixed::from_int(5) * inclination(Inclination::Expansion));
+            rate(option);
+            if (option.utility < w_.ai_rules.threshold) {
+                continue;
+            }
+            Command c;
+            c.type = CommandType::WarGoal;
+            c.state = state;
+            c.target = static_cast<Index>(war.id);
+            c.value = Fixed::from_int(encode_war_goal(kind, g.target));
+            out_.push_back(c);
+            record(state, AiDecisionKind::AddWarGoal, enemy, c.value, option);
+            cool(state, AiDecisionKind::AddWarGoal, kNone, 1);
+            return true;
+        }
+        return false;
     }
 
     // ── Wahlkampf der Strömungen (Abschnitt 6.4) ──

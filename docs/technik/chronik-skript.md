@@ -1408,6 +1408,8 @@ ki {
     buendnisse = 3                       # Bündnisse, über die hinaus keine angeboten werden, 0 … 100
     wahlkampf_monate = 4                 # Wahlkampf der Strömungen vor einer Wahl, 0 … 24
     wahlkampf_ruecklage = 0.2            # Rücklage der Mittel einer Strömung, 0 … 1
+    # seit a4 (ki.md Abschnitt 6.3)
+    kriegs_staerke = 1.3                 # Stärkeverhältnis für eine Kriegserklärung, 0 … 100
 }
 persoenlichkeit machtpolitiker { name = "Machtpolitiker" risiko = 1 expansion = 2 legitimitaet = -1 vermittlung = -1 }
 eigenschaft zauderer { name = "Zauderer" risiko = -2 }

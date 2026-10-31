@@ -43,6 +43,14 @@ Schritt in Abschnitt 13 dort.
   des Staates verschiebt. Strömungen ohne Spieler führen in den vier Monaten vor einer Wahl Wahlkampf
   in den knappsten Wahlkreisen; dafür kennt der Kern die Strömung des Spielers (Befehl
   `Spielerströmung`). Inhaltsbereiche ki Stand 3 und ereignisse Stand 7; 1648 bitgleich.
+- **Krieg und Frieden der KI (Schritt a4):** Staaten ohne Spieler erklären Krieg nur aus einem aktiven
+  Ziel ihrer Agenda (Gebiet, Annexion, Schwächen eines Rivalen) und nur bei Übermacht ihrer Seite
+  nach dem Bündnisfall, mit doppelter Schwelle und Gründen in der Chronik; Taktiker warten, bis der
+  Gegner allein steht. Im Krieg stellen sie bei klarem Vorsprung weitere Ziele aus der Agenda und bieten
+  Frieden (eigene Ziele, weißer Frieden, Kapitulation) nur an, wenn die Gegenseite annähme. Bündnisse
+  und Garantien bietet die KI im Krieg nicht mehr an: Ein Bündnis mitten im Krieg machte den Partner
+  zur eigenen Seite, und im Lesezeichen Königgrätz siegte Preußen mit a3 nur noch in 3 von 16 Läufen
+  (jetzt wieder 11). Inhaltsbereich ki Stand 4; 1648 bitgleich.
 
 ### Meilenstein M11 – Ereignisse und Revolution 1848/49
 

@@ -50,6 +50,9 @@ struct AiRules {
     std::int32_t max_alliances = 3;                   // Bündnisse, über die hinaus keine angeboten werden
     std::int32_t campaign_months = 4;                 // Wahlkampf der Strömungen in den Monaten vor der Wahl
     Fixed campaign_reserve = Fixed::from_ratio(1, 5); // Rücklage der Mittel einer Strömung
+    // Seit Schritt a4 (Abschnitt 6.3).
+    Fixed war_ratio = Fixed::from_ratio(13, 10); // Stärkeverhältnis der Seiten für eine Kriegserklärung
+                                                 // (kriegs_staerke; minus 0,15 je Punkt Risiko)
 };
 
 /// Faktor eines Nutzens (Abschnitt 5); seine Bezeichnung liefert ai_reason_text.
@@ -75,8 +78,11 @@ enum class AiFactor : std::uint8_t {
     Legitimacy, // Neigung Legitimität
     Mediation,  // Neigung Vermittlung
     Alliances,  // Zahl der eigenen Bündnisse (dagegen)
+    // seit a4: Krieg
+    WarScore,  // Kriegspunkte gegen die Kosten der Ziele
+    Weariness, // Kriegsmüdigkeit
 };
-inline constexpr std::size_t kAiFactors = 20;
+inline constexpr std::size_t kAiFactors = 22;
 
 /// Ein Grund: Faktor, betroffener Staat (oder -1) und Beitrag zum Nutzen.
 struct AiReason {
@@ -102,8 +108,12 @@ enum class AiDecisionKind : std::uint8_t {
     Manoeuvre,      // Ziel: Gegner im Spiel, Wert: Manoeuvre
     Motion,         // Ziel: Zollunion oder -1, Wert: MotionKind
     JoinUnion,      // Ziel: Zollunion
+    // seit a4 (Abschnitt 6.3)
+    DeclareWar, // Ziel: Staat, Wert: Kriegsziel (encode_war_goal)
+    AddWarGoal, // Ziel: Gegner (Hauptpartei), Wert: Kriegsziel
+    OfferPeace, // Ziel: Gegner (Hauptpartei), Wert: PeaceTerms
 };
-inline constexpr std::size_t kAiDecisionKinds = 11;
+inline constexpr std::size_t kAiDecisionKinds = 14;
 
 /// Eintrag im KI-Protokoll: wer, wann, was, mit welchem Nutzen und den drei wichtigsten Gründen.
 struct AiDecision {
