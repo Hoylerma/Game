@@ -50,6 +50,10 @@ const PEACE_WHITE := 0
 const PEACE_OWN_GOALS := 1
 const PEACE_CAPITULATION := 2
 
+## Arten der KI-Entscheidungen (seit M12, wie AiDecisionKind des Kerns; Feld kind in get_ai_decisions).
+const AI_DEMAND := 7
+const AI_DECLARE_WAR := 11
+
 ## Alle Methoden, die die Oberfläche benutzt.
 const REQUIRED_METHODS: Array[StringName] = [
 	&"load_scenario",
@@ -131,6 +135,9 @@ const REQUIRED_METHODS: Array[StringName] = [
 	&"get_journals",
 	&"get_state_events",
 	&"get_revolts",
+	&"get_state_persons",
+	&"get_intentions",
+	&"get_ai_decisions",
 	&"campaign",
 	&"get_party",
 	&"get_campaign",
@@ -623,6 +630,27 @@ func get_journals() -> Array[Dictionary]:
 ## timed: je { text, until_text }, pending }; leer ohne Ereignisse.
 func get_state_events(state_index: int) -> Dictionary:
 	return _as_dictionary(_native.call(&"get_state_events", state_index))
+
+
+## KI der Staaten (seit M12, Schritt b3, ki.md Abschnitt 9): Herrscher und leitender Minister im Amt, je
+## { id, name, role ("herrscher"/"minister"), title, since_text, values: { staatskunst, diplomatie,
+## kriegskunst, wirkung }, traits, inclinations (Beitrag der Eigenschaften je Neigung), weight, source };
+## leer ohne KI-Daten.
+func get_state_persons(state_index: int) -> Array[Dictionary]:
+	return _as_dictionaries(_native.call(&"get_state_persons", state_index))
+
+
+## Absichten eines Staates: { player, personality, inclinations: { risiko … vermittlung }, inclination_keys,
+## inclination_names, rival_index, rival_name, goal_text, goals: je { kind, text, weight, main } (nur
+## aktive Ziele) }; leer ohne KI-Daten.
+func get_intentions(state_index: int) -> Dictionary:
+	return _as_dictionary(_native.call(&"get_intentions", state_index))
+
+
+## Letzte Entscheidungen der KI für den Staat, neueste zuerst (höchstens limit, 0 = alle aus dem
+## Protokoll): je { date_text, kind, text, target_index, utility, reasons, reasons_text }.
+func get_ai_decisions(state_index: int, limit: int) -> Array[Dictionary]:
+	return _as_dictionaries(_native.call(&"get_ai_decisions", state_index, limit))
 
 
 ## Laufende Aufstände: je { state_index, state_name, capital_index, kind_text, strength, since_text,

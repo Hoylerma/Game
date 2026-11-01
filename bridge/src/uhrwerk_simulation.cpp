@@ -691,7 +691,8 @@ bool UhrwerkSimulation::set_player_state(std::int64_t state_index) {
     if (!w || !valid_index(w->states, state_index)) {
         return false;
     }
-    // Nur die Wahl der Oberfläche (Spielstand, Panels); die Simulation kennt keinen Spieler.
+    // Nur die Wahl der Oberfläche (Spielstand, Panels); den Spielerstaat im Kern meldet main.gd über
+    // set_event_player (Befehl Spielerstaat, seit M11; im Parteienmodus keiner).
     player_tag_ = at(w->states, state_index).tag;
     return true;
 }
@@ -3488,6 +3489,190 @@ Array UhrwerkSimulation::get_revolts() const {
     return result;
 }
 
+// ─── KI der Staaten (seit M12, Schritt b3; ki.md Abschnitt 9) ──────────────
+
+namespace {
+
+constexpr std::array<std::string_view, uhrwerk::kInclinationCount> kInclinationNames = {
+    "Risiko", "Expansion", "Legitimität", "Reform", "Sparsamkeit", "Vermittlung"};
+
+Dictionary inclinations_to_godot(const uhrwerk::Inclinations& values) {
+    Dictionary result;
+    for (std::size_t k = 0; k < uhrwerk::kInclinationCount; ++k) {
+        result[to_godot(uhrwerk::kInclinationKeys[k])] = values[k].to_double();
+    }
+    return result;
+}
+
+Array inclination_names() {
+    Array names;
+    for (const std::string_view name : kInclinationNames) {
+        names.append(to_godot(name));
+    }
+    return names;
+}
+
+std::string state_short(const uhrwerk::World& w, uhrwerk::Index state) {
+    return valid_index(w.states, state) ? at(w.states, state).short_name : std::string();
+}
+
+/// Ziel einer Agenda als Text („Führung im Bund“, „Österreich schwächen“, „Gebiet Herzogtum Schleswig“).
+std::string goal_text(const uhrwerk::World& w, const uhrwerk::AgendaGoal& g) {
+    using uhrwerk::AgendaKind;
+    switch (g.kind) {
+    case AgendaKind::LeadFederation:
+        return "Führung im Bund";
+    case AgendaKind::CustomsUnion:
+        return "Zollunion " + (valid_index(w.customs_unions, g.target) ? at(w.customs_unions, g.target).name
+                                                                       : std::string("?"));
+    case AgendaKind::Alliance:
+        return "Bündnis mit " + state_short(w, g.target);
+    case AgendaKind::Territory:
+        return "Gebiet " +
+               (valid_index(w.admin_units, g.target) ? at(w.admin_units, g.target).name : std::string("?"));
+    case AgendaKind::Annexation:
+        return "Annexion: " + state_short(w, g.target);
+    case AgendaKind::Weaken:
+        return state_short(w, g.target) + " schwächen";
+    case AgendaKind::StatusQuo:
+        return "Bund und Grenzen erhalten";
+    case AgendaKind::Calm:
+        return "Ruhe im Land";
+    }
+    return std::string();
+}
+
+} // namespace
+
+Array UhrwerkSimulation::get_state_persons(std::int64_t state_index) const {
+    Array result;
+    const uhrwerk::World* w = world();
+    if (!w || !uhrwerk::ai_active(*w) || !valid_index(w->states, state_index)) {
+        return result;
+    }
+    for (const uhrwerk::PersonRole role : {uhrwerk::PersonRole::Ruler, uhrwerk::PersonRole::Minister}) {
+        const uhrwerk::Index person = w->office(static_cast<uhrwerk::Index>(state_index), role);
+        if (!valid_index(w->persons, person)) {
+            continue;
+        }
+        const uhrwerk::PersonDef& p = at(w->persons, person);
+        Dictionary entry;
+        entry["id"] = to_godot(p.id);
+        entry["name"] = to_godot(p.name);
+        entry["role"] = role == uhrwerk::PersonRole::Ruler ? String("herrscher") : String("minister");
+        entry["title"] = to_godot(!p.title.empty()                     ? p.title
+                                  : role == uhrwerk::PersonRole::Ruler ? std::string("Herrscher")
+                                                                       : std::string("leitender Minister"));
+        entry["since_text"] = to_godot(uhrwerk::format_date_long(p.from));
+        Dictionary values;
+        for (std::size_t v = 0; v < uhrwerk::kPersonValues; ++v) {
+            values[to_godot(uhrwerk::kPersonValueKeys[v])] = p.values[v];
+        }
+        entry["values"] = values;
+        Array traits;
+        uhrwerk::Inclinations sum{};
+        for (const uhrwerk::Index t : p.traits) {
+            if (!valid_index(w->ai_traits, t)) {
+                continue;
+            }
+            traits.append(to_godot(at(w->ai_traits, t).name));
+            for (std::size_t k = 0; k < uhrwerk::kInclinationCount; ++k) {
+                sum[k] += at(w->ai_traits, t).inclinations[k];
+            }
+        }
+        entry["traits"] = traits;
+        entry["inclinations"] = inclinations_to_godot(sum);
+        const double ruler = uhrwerk::ruler_weight(*w, static_cast<uhrwerk::Index>(state_index)).to_double();
+        entry["weight"] = role == uhrwerk::PersonRole::Ruler ? ruler : 1.0 - ruler; // Anteil an den Neigungen
+        entry["source"] = to_godot(p.source);
+        result.append(entry);
+    }
+    return result;
+}
+
+Dictionary UhrwerkSimulation::get_intentions(std::int64_t state_index) const {
+    Dictionary result;
+    const uhrwerk::World* w = world();
+    if (!w || !uhrwerk::ai_active(*w) || !valid_index(w->states, state_index)) {
+        return result;
+    }
+    const auto state = static_cast<uhrwerk::Index>(state_index);
+    const bool has_agenda = valid_index(w->agendas, state_index);
+    const uhrwerk::Index personality = has_agenda && at(w->agendas, state_index).personality != uhrwerk::kNone
+                                           ? at(w->agendas, state_index).personality
+                                           : w->ai_rules.default_personality;
+    result["player"] = state == w->event_player;
+    result["personality"] = valid_index(w->ai_personalities, personality)
+                                ? to_godot(at(w->ai_personalities, personality).name)
+                                : String();
+    result["inclinations"] = inclinations_to_godot(uhrwerk::state_inclinations(*w, state));
+    Array keys;
+    for (const std::string_view key : uhrwerk::kInclinationKeys) {
+        keys.append(to_godot(key));
+    }
+    result["inclination_keys"] = keys;
+    result["inclination_names"] = inclination_names();
+    const uhrwerk::AiStrategy strategy =
+        valid_index(w->ai_strategy, state_index) ? at(w->ai_strategy, state_index) : uhrwerk::AiStrategy{};
+    result["rival_index"] = strategy.rival;
+    result["rival_name"] = to_godot(state_short(*w, strategy.rival));
+    result["goal_text"] = String();
+    Array goals;
+    if (has_agenda) {
+        uhrwerk::EventCache cache;
+        uhrwerk::rebuild_event_cache(*w, cache);
+        const std::vector<uhrwerk::AgendaGoal>& list = at(w->agendas, state_index).goals;
+        for (std::size_t i = 0; i < list.size(); ++i) {
+            const bool active = uhrwerk::agenda_goal_active(*w, cache, state, list[i]);
+            if (!active) {
+                continue;
+            }
+            Dictionary goal;
+            goal["kind"] = to_godot(uhrwerk::kAgendaKindKeys[static_cast<std::size_t>(list[i].kind)]);
+            goal["text"] = to_godot(goal_text(*w, list[i]));
+            goal["weight"] = list[i].weight.to_double();
+            goal["main"] = static_cast<uhrwerk::Index>(i) == strategy.goal;
+            if (static_cast<uhrwerk::Index>(i) == strategy.goal) {
+                result["goal_text"] = to_godot(goal_text(*w, list[i]));
+            }
+            goals.append(goal);
+        }
+    }
+    result["goals"] = goals;
+    return result;
+}
+
+Array UhrwerkSimulation::get_ai_decisions(std::int64_t state_index, std::int64_t limit) const {
+    Array result;
+    const uhrwerk::World* w = world();
+    if (!w || !uhrwerk::ai_active(*w) || !valid_index(w->states, state_index)) {
+        return result;
+    }
+    for (auto it = w->ai_log.rbegin(); it != w->ai_log.rend() && (limit <= 0 || result.size() < limit);
+         ++it) {
+        if (it->state != static_cast<uhrwerk::Index>(state_index)) {
+            continue;
+        }
+        Dictionary entry;
+        entry["date_text"] = to_godot(uhrwerk::format_date_long(it->date));
+        entry["kind"] = static_cast<std::int64_t>(it->kind);
+        entry["text"] = to_godot(uhrwerk::ai_decision_text(*w, *it));
+        entry["target_index"] = it->target;
+        entry["utility"] = it->utility.to_double();
+        Array reasons;
+        std::string why;
+        for (std::size_t r = 0; r < it->reason_count; ++r) {
+            const std::string text = uhrwerk::ai_reason_text(*w, it->reasons[r]);
+            reasons.append(to_godot(text));
+            why += (r > 0 ? ", " : "") + text;
+        }
+        entry["reasons"] = reasons;
+        entry["reasons_text"] = to_godot(why);
+        result.append(entry);
+    }
+    return result;
+}
+
 void UhrwerkSimulation::_bind_methods() {
     using godot::ClassDB;
 
@@ -3593,6 +3778,10 @@ void UhrwerkSimulation::_bind_methods() {
                          &UhrwerkSimulation::choose_event_option);
     ClassDB::bind_method(D_METHOD("set_event_player", "state_index"), &UhrwerkSimulation::set_event_player);
     ClassDB::bind_method(D_METHOD("get_event_player"), &UhrwerkSimulation::get_event_player);
+    ClassDB::bind_method(D_METHOD("get_state_persons", "state_index"), &UhrwerkSimulation::get_state_persons);
+    ClassDB::bind_method(D_METHOD("get_intentions", "state_index"), &UhrwerkSimulation::get_intentions);
+    ClassDB::bind_method(D_METHOD("get_ai_decisions", "state_index", "limit"),
+                         &UhrwerkSimulation::get_ai_decisions);
     ClassDB::bind_method(D_METHOD("get_event_log", "limit"), &UhrwerkSimulation::get_event_log);
     ClassDB::bind_method(D_METHOD("get_journals"), &UhrwerkSimulation::get_journals);
     ClassDB::bind_method(D_METHOD("get_state_events", "state_index"), &UhrwerkSimulation::get_state_events);

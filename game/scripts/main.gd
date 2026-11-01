@@ -147,6 +147,10 @@ func _ready() -> void:
 		return _sim.get_state_politics(_player) if _sim != null else {}
 	_state_panel.events_source = func() -> Dictionary:
 		return _sim.get_state_events(_player) if _sim != null else {}
+	_state_panel.persons_source = func() -> Array:
+		return _sim.get_state_persons(_player) if _sim != null else []
+	_state_panel.intentions_source = func() -> Dictionary:
+		return _sim.get_intentions(_player) if _sim != null else {}
 	_state_panel.customs_change_requested.connect(_on_customs_change_requested)
 	_state_panel.customs_source = func() -> Array:
 		return _sim.get_customs_unions() if _sim != null else []
@@ -976,7 +980,52 @@ func _pull_chronicle() -> void:
 		# Ein neues Spiel liest die ganze Chronik: nur Schlachten aus dem laufenden Spiel melden.
 		if _chronicle_read > 0:
 			_report_battles(entries)
+			_report_threats(entries)
 		_chronicle_read = count
+
+
+## Gründe der letzten Entscheidung der KI von state gegen target der Art kind (SimulationClient.AI_*,
+## seit M12): Text wie „Agenda Österreich +30, Stärke gegen Österreich +12“, sonst "".
+func _ai_reasons(state: int, target: int, kind: int) -> String:
+	if _sim == null:
+		return ""
+	for decision in _sim.get_ai_decisions(state, 20):
+		if int(decision.get("kind", -1)) == kind and int(decision.get("target_index", -1)) == target:
+			return str(decision.get("reasons_text", ""))
+	return ""
+
+
+## Kriegserklärungen und Forderungen der KI an den Spielerstaat als Hinweis mit den Gründen (seit M12,
+## ki.md Abschnitt 9). Die Chronik schreibt „X erklärt Y den Krieg.“ und „X fordert von Y …“.
+func _report_threats(entries: Array[Dictionary]) -> void:
+	if _player_current >= 0 or _player < 0:
+		return
+	var own := str(_sim.get_state(_player).get("short_name", ""))
+	if own.is_empty():
+		return
+	for entry in entries:
+		var text := str(entry.get("text", ""))
+		var state := int(entry.get("state_index", -1))
+		if state < 0 or state == _player:
+			continue
+		var kind := -1
+		if text.contains(" erklärt %s den Krieg" % own):
+			kind = SimulationClient.AI_DECLARE_WAR
+		elif text.contains(" fordert von %s " % own):
+			kind = SimulationClient.AI_DEMAND
+		if kind < 0:
+			continue
+		var reasons := _ai_reasons(state, _player, kind)
+		# Nur der erste Satz; Kurznamen wie „Reuß ä. L.“ enthalten selbst Punkte.
+		var first := text
+		var cut := text.find(" (Protest)")
+		if cut < 0:
+			cut = text.find(" den Krieg.")
+			if cut >= 0:
+				cut += " den Krieg".length()
+		if cut >= 0:
+			first = text.substr(0, cut)
+		_top_bar.show_notice(first + (" – Gründe: " + reasons if not reasons.is_empty() else ""))
 
 
 ## Schlachtberichte (seit M10): Schlachten, in denen ein eigenes Heer stand (am Vortag oder heute am
@@ -1535,6 +1584,7 @@ func _build_diplomacy() -> void:
 	root.add_child(_diplomacy_window)
 	root.move_child(_diplomacy_window, _top_bar.get_index())
 	_play_bar = PlayBar.new()
+	_play_bar.reasons_source = _ai_reasons
 	root.add_child(_play_bar)
 	root.move_child(_play_bar, _top_bar.get_index())
 	_diplomacy_window.close_requested.connect(close_diplomacy)
@@ -1689,6 +1739,7 @@ func _build_war() -> void:
 	_army_panel.staff_requested.connect(_on_staff_requested)
 	_army_panel.focus_requested.connect(focus_army)
 	_war_window = WarWindow.new()
+	_war_window.reasons_source = _ai_reasons
 	root.add_child(_war_window)
 	root.move_child(_war_window, _top_bar.get_index())
 	_war_window.state_name = _state_short_name

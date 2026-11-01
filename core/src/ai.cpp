@@ -969,6 +969,7 @@ private:
             c.value = Fixed::from_int(static_cast<std::int64_t>(best_kind));
             out_.push_back(c);
             record(state, AiDecisionKind::Demand, best, c.value, best_option);
+            chronicle_reasons(state, best_option); // seit b3: Gründe auch in der Chronik (ki.md 9)
             cool(state, AiDecisionKind::Demand, best, w_.ai_rules.cooldown_months);
             cool(state, AiDecisionKind::Demand, kNone, w_.ai_rules.cooldown_months);
         }

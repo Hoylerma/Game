@@ -92,6 +92,19 @@ var _military_info: Label = null
 var _mobilize_button: Button = null
 var _war_button: Button = null
 var _mobilization_sent := -1
+## Regierung (seit M12, Schritt b3, ki.md Abschnitt 9): Herrscher und leitender Minister mit Eigenschaften
+## und die sechs Neigungen des Staates. main.gd liefert sie über persons_source
+## (SimulationClient.get_state_persons des Spielerstaates) und intentions_source (get_intentions).
+const GOVERNMENT_REFRESH_MS := 1000
+var persons_source: Callable = Callable()
+var intentions_source: Callable = Callable()
+var _minister_caption: Label = null
+var _minister: Label = null
+var _government_inclinations: Label = null
+var _government_lines := PackedStringArray()
+var _ruler_text := ""
+var _government_filled_at := -GOVERNMENT_REFRESH_MS
+var _government_state := ""
 
 @onready var _coat: CoatOfArms = %Coat
 @onready var _name: Label = %StateName
@@ -120,6 +133,7 @@ func _ready() -> void:
 	_build_customs()
 	_build_diplomacy()
 	_build_military()
+	_build_government()
 	show_unavailable()
 
 
@@ -204,6 +218,7 @@ func show_state(state: Dictionary, capital_name: String) -> void:
 	_journal_button.visible = _journals_available
 	_window_row.visible = _customs_button.visible or _diplomacy_button.visible
 	_update_military(state)
+	_update_government(state)
 	_update_hint()
 	_budget_button.disabled = false
 	if _budget_popup.visible:
@@ -556,6 +571,109 @@ func _build_politics() -> void:
 	_politics_popup.add_child(box)
 	add_child(_politics_popup)
 	_politics_popup.add_theme_stylebox_override(&"panel", get_theme_stylebox(&"panel"))
+
+
+## Regierung (seit M12): Zeile „Minister“ in den Angaben zum Staat (der Herrscher steht schon dort) und
+## eine Zeile mit den Neigungen darunter; Amt, Eigenschaften und Werte im Tooltip.
+func _build_government() -> void:
+	var facts := _ruler.get_parent()
+	_minister_caption = Label.new()
+	_minister_caption.name = "MinisterCaption"
+	_minister_caption.text = "Minister"
+	_minister_caption.theme_type_variation = _ruler.get_parent().get_child(_ruler.get_index() - 1).theme_type_variation
+	_minister = Label.new()
+	_minister.name = "Minister"
+	_minister.horizontal_alignment = _ruler.horizontal_alignment
+	_minister.size_flags_horizontal = _ruler.size_flags_horizontal
+	_minister.clip_text = true
+	_minister.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+	_minister.mouse_filter = Control.MOUSE_FILTER_PASS
+	facts.add_child(_minister_caption)
+	facts.move_child(_minister_caption, _ruler.get_index() + 1)
+	facts.add_child(_minister)
+	facts.move_child(_minister, _minister_caption.get_index() + 1)
+	_minister_caption.visible = false
+	_minister.visible = false
+	_government_inclinations = Label.new()
+	_government_inclinations.name = "Inclinations"
+	_government_inclinations.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_government_inclinations.theme_type_variation = &"CaptionLabel"
+	_government_inclinations.mouse_filter = Control.MOUSE_FILTER_PASS
+	_government_inclinations.visible = false
+	var content := facts.get_parent()
+	content.add_child(_government_inclinations)
+	content.move_child(_government_inclinations, facts.get_index() + 1)
+
+
+## Füllt Herrscher, Minister und Neigungen höchstens einmal je Sekunde (die Absichten bauen den
+## Ereignis-Cache neu), bei einem neuen Staat sofort.
+func _update_government(state: Dictionary) -> void:
+	var tag := str(state.get("tag", ""))
+	if tag == _government_state and Time.get_ticks_msec() - _government_filled_at < GOVERNMENT_REFRESH_MS:
+		_ruler.text = _ruler_text if not _ruler_text.is_empty() else _ruler.text
+		return
+	_government_state = tag
+	_government_filled_at = Time.get_ticks_msec()
+	var persons: Array = persons_source.call() if persons_source.is_valid() else []
+	var intentions: Dictionary = intentions_source.call() if intentions_source.is_valid() else {}
+	_government_lines = PackedStringArray()
+	_ruler_text = ""
+	_ruler.tooltip_text = ""
+	_minister_caption.visible = false
+	_minister.visible = false
+	for person: Dictionary in persons:
+		var traits := PackedStringArray(person.get("traits", []))
+		var values: Dictionary = person.get("values", {})
+		var tooltip := (
+			"%s: %s\nEigenschaften: %s\nIm Amt seit %s · Anteil an den Neigungen %d %%\n"
+			+ "Staatskunst %d · Diplomatie %d · Kriegskunst %d · Wirkung %d\nQuelle: %s"
+		) % [
+			str(person.get("title", "")), str(person.get("name", "")),
+			", ".join(traits) if not traits.is_empty() else "keine", str(person.get("since_text", "")),
+			roundi(float(person.get("weight", 0.0)) * 100.0), int(values.get("staatskunst", 0)),
+			int(values.get("diplomatie", 0)), int(values.get("kriegskunst", 0)), int(values.get("wirkung", 0)),
+			str(person.get("source", ""))
+		]
+		var line := "%s: %s%s" % [
+			str(person.get("title", "")), str(person.get("name", "")),
+			(" (" + ", ".join(traits) + ")") if not traits.is_empty() else ""
+		]
+		_government_lines.append(line)
+		_ruler.mouse_filter = Control.MOUSE_FILTER_PASS
+		if str(person.get("role", "")) == "herrscher":
+			_ruler_text = str(person.get("name", ""))
+			_ruler.text = _ruler_text
+			_ruler.tooltip_text = tooltip
+		else:
+			_minister.text = str(person.get("name", ""))
+			_minister.tooltip_text = tooltip
+			_minister_caption.visible = true
+			_minister.visible = true
+	_government_inclinations.visible = not intentions.is_empty()
+	if intentions.is_empty():
+		return
+	var parts := PackedStringArray()
+	var keys: Array = intentions.get("inclination_keys", [])
+	var names: Array = intentions.get("inclination_names", [])
+	var inclinations: Dictionary = intentions.get("inclinations", {})
+	for k in keys.size():
+		parts.append("%s %s" % [str(names[k]), GermanFormat.signed_number(float(inclinations.get(keys[k], 0.0)), 1)])
+	var personality := str(intentions.get("personality", ""))
+	_government_inclinations.text = (
+		("Neigungen (%s): " % personality if not personality.is_empty() else "Neigungen: ") + " · ".join(parts)
+	)
+	_government_inclinations.tooltip_text = (
+		"Neigungen von −2 bis +2: Staatspersönlichkeit und die Eigenschaften von Herrscher und Minister nach "
+		+ "ihrem Anteil. Sie lenken die Entscheidungen der Staaten ohne Spieler und die Wahl bei Ereignissen."
+	)
+
+
+## Herrscher, Minister (mit Amt und Eigenschaften) und Neigungen als Text (Tests).
+func government_text() -> String:
+	var lines := PackedStringArray(_government_lines)
+	if _government_inclinations.visible:
+		lines.append(_government_inclinations.text)
+	return "\n".join(lines)
 
 
 ## Füllt das Fenster aus politics_source; false ohne Angaben.

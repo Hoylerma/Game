@@ -18,6 +18,9 @@ var _yield: Button = null
 var _mediate: Button = null
 var _escalate: Button = null
 var _note: Label = null
+## Begründung der fordernden KI (seit M12, ki.md 9): main.gd liefert sie über reasons_source
+## (Staat, Ziel, SimulationClient.AI_* → Gründe oder "").
+var reasons_source: Callable = Callable()
 
 
 func _ready() -> void:
@@ -46,6 +49,11 @@ func show_plays(plays: Array[Dictionary], player: int) -> void:
 	_title.text = "KRISE: %s fordert von %s: %s" % [
 		str(play.get("demander_name", "")), str(play.get("target_name", "")), str(play.get("kind_text", ""))
 	]
+	var reasons := str(reasons_source.call(demander, target, SimulationClient.AI_DEMAND)) if reasons_source.is_valid() else ""
+	_title.mouse_filter = Control.MOUSE_FILTER_PASS
+	_title.tooltip_text = (
+		"Gründe von %s: %s" % [str(play.get("demander_name", "")), reasons] if not reasons.is_empty() else ""
+	)
 	var days := int(play.get("days_left", 0))
 	_stage.text = "Stufe %d von 3: %s – %s" % [
 		int(play.get("stage", 1)),

@@ -197,6 +197,11 @@ public:
     godot::Dictionary get_state_events(std::int64_t state_index) const;
     godot::Array get_revolts() const;
 
+    // KI der Staaten (seit M12, Schritt b3, ki.md Abschnitt 9)
+    godot::Array get_state_persons(std::int64_t state_index) const;
+    godot::Dictionary get_intentions(std::int64_t state_index) const;
+    godot::Array get_ai_decisions(std::int64_t state_index, std::int64_t limit) const;
+
     // Parteienmodus (seit M8, Schritt b2, politik.md Abschnitt 9)
     bool campaign(std::int64_t current, std::int64_t district, std::int64_t action);
     godot::Dictionary get_party(std::int64_t current) const;

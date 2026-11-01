@@ -54,6 +54,15 @@ Schritt in Abschnitt 13 dort.
   kriegsmüder oder ihre Seite klar überlegen ist; sonst bot Frankreich im Lesezeichen Sedan früh weißen
   Frieden an, und der Verteidiger siegte nur in 4 von 16 Läufen (jetzt 14). Inhaltsbereich ki Stand 4;
   1648 bitgleich.
+- **Brücke und Godot (Schritt b3):** Neue Brückenmethoden `get_state_persons`, `get_intentions` und
+  `get_ai_decisions` ([bridge-api.md](docs/technik/bridge-api.md)). Die **Staatsinfo** zeigt Herrscher
+  und leitenden Minister (Eigenschaften und Werte im Tooltip) und die sechs Neigungen des Staates mit
+  seiner Staatspersönlichkeit. Das **Diplomatiefenster** zeigt für den gewählten Staat die Absichten
+  (Hauptziel, Rivale, aktive Ziele) – nur mit eigenem Gesandten dort – und seine letzten drei
+  Entscheidungen mit „Warum?“ (Gründe im Tooltip). Forderungen der KI schreiben ihre Gründe jetzt auch in
+  die Chronik; Kriegserklärungen und Forderungen an den Spieler erscheinen zusätzlich als Hinweis in der
+  Kopfleiste. Krisenleiste und Kriegsfenster nennen im Tooltip die Gründe der Gegenseite. Rauch- und
+  Klicktest prüfen Personen, Absichten und „Warum?“ 1848; 1648 bitgleich.
 - **Kalibrierung mit 100 Partien (Schritt b2):** Korridore `common/kiziele_voelkerfruehling.chron` (für
   16 Partien je Push `kiziele_voelkerfruehling_16.chron`), CI-Schritt „KI-Labor 1848–1871“ und Workflow
   `ki-partien.yml` mit 100 Partien. Ergebnis: Einigung 67 %, kleindeutsch 44 %, zwei Bünde 23 %, Bund

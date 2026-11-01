@@ -122,6 +122,11 @@ Prüft die GDExtension und die Kartendaten ohne Szene und ohne Grafikausgabe:
     Zustimmung und Unruhe, der Kartenmodus „Unruhe“ eine Farbe je Ort; im August 1848 ruht die
     Bundesversammlung, die Chronik hebt Wendepunkte hervor. 1648 gibt es keine Ereignisse, Journale
     oder Aufstände, und der Ereignisspieler wird abgewiesen
+  - **KI 1848** (seit M12, Schritt b3): Preußen hat Friedrich Wilhelm IV. als Herrscher mit drei
+    Eigenschaften und Ludolf Camphausen als Minister (`get_state_persons`); Österreich ist Bewahrer
+    mit Rivale, aktiven Zielen und sechs Neigungen (`get_intentions`), Preußen als Spielerstaat
+    meldet `player`; nach den ersten Monatsersten hat ein Staat eine Entscheidung mit Gründen
+    (`get_ai_decisions`), der Spielerstaat keine
 
 Am Ende steht `SMOKE OK` (Exitcode 0) oder `SMOKE FEHLGESCHLAGEN` mit allen Fehlern (Exitcode 1).
 
@@ -204,7 +209,10 @@ echten Daten und prüft:
     an Österreich fragt mit den Seiten der Krise nach; am nächsten Tag zeigt die Krisenleiste die
     Krise über dem Fenster (ohne Überlappung, das Fenster bleibt über der Leiste der Kartenmodi),
     „Nachgeben“ beendet sie. Im Reiter „Bundesversammlung“ wird eine Bundesreform beantragt, die am
-    nächsten Tag als offener Antrag erscheint; Esc schließt das Fenster.
+    nächsten Tag als offener Antrag erscheint; Esc schließt das Fenster. Seit M12, Schritt b3:
+    Für Bayern (mit unserem Gesandten) zeigt das Fenster „Absichten: Hauptziel …“, für einen Staat
+    mit Entscheidungen „Warum?“ mit den Gründen im Tooltip; die Staatsinfo Preußens nennt
+    „König: Friedrich Wilhelm IV.“ und die Neigungen des Machtpolitikers.
 11. **Krieg** (seit M10, Schritt b3): Düppel, Königgrätz und Sedan stehen im Menü „Neues Spiel“.
     Lesezeichen Königgrätz; ein Klick auf die Marke der I. Armee wählt sie aus, ein Rechtsklick auf
     Prag gibt den Marschbefehl, am nächsten Tag ist Prag ihr Ziel. Taste Y schaltet in den

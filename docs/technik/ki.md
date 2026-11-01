@@ -520,6 +520,32 @@ Präzisiert in Schritt a5 (`core/src/ai_lab.cpp`, Zieldatei: chronik-skript.md A
     zusätzlich als Hinweis.
   - **Krisenleiste und Kriegsfenster:** Begründung der Gegenseite im Tooltip.
 
+Präzisiert in Schritt b3:
+
+- **Spielerstaat:** `set_player_state` bleibt eine reine Anzeigeauswahl (welchen Staat die Oberfläche
+  zeigt, seit M5). Den Befehl `Spielerstaat` schickt weiter `set_event_player` (M11): Godot ruft ihn
+  beim Start, nach dem Laden und beim Staatswechsel, im Parteienmodus mit −1 (die KI führt dann alle
+  Staaten). Ein zweiter Weg zum selben Befehl wäre nur eine weitere Fehlerquelle.
+- **Personen** (`get_state_persons`): Herrscher und leitender Minister mit `title` (Amtstitel, sonst
+  „Herrscher“ bzw. „leitender Minister“), `since_text`, `values` (Staatskunst, Diplomatie,
+  Kriegskunst, Wirkung), `traits` (Namen), `inclinations` (Summe ihrer Eigenschaften) und `weight`
+  (Anteil an den Neigungen des Staates: Herrscher `gewicht_herrscher_absolut` bzw.
+  `gewicht_herrscher_konstitutionell`, Minister der Rest). Die **Staatsinfo** zeigt beide in der
+  Faktentabelle (Eigenschaften und Werte im Tooltip) und darunter die Neigungen des Staates mit der
+  Staatspersönlichkeit, z. B. „Neigungen (Machtpolitiker): Risiko −0,2 · Expansion +2,0 · …“; sie
+  liest höchstens einmal je Sekunde neu.
+- **Absichten** (`get_intentions`): `personality`, `inclinations` mit `inclination_keys` und
+  `inclination_names`, `rival_index`, `rival_name`, `goal_text` (Hauptziel als Satz) und `goals`
+  (aktive Ziele mit Gewicht, `main` beim Hauptziel); `player` meldet den Spielerstaat, für den die KI
+  keine Absichten hat. Ohne eigenen Gesandten zeigt das Diplomatiefenster „Absichten: unbekannt“ mit
+  dem Hinweis auf den Gesandten; die **Entscheidungen** (die letzten drei, neueste zuerst) sind
+  öffentlich, weil sie Befehle sind, deren Folgen jeder sieht.
+- **Chronik:** Auch Forderungen schreiben ihre Gründe in die Chronik (wie Kriegserklärungen seit a4);
+  Kriegserklärungen und Forderungen an den Spielerstaat erscheinen zusätzlich als Hinweis in der
+  Kopfleiste mit den Gründen der KI.
+- **Krisenleiste und Kriegsfenster:** Der Tooltip des Titels nennt die Gründe der fordernden bzw.
+  erklärenden Hauptpartei, gesucht in ihren letzten 20 Entscheidungen.
+
 ## 10. Tests und Abnahme
 
 | Kriterium | Prüfung |
@@ -610,6 +636,7 @@ Weitere Tests:
 | Schritt | Stand |
 |---|---|
 | – | Entscheidungen 1–14 wie empfohlen freigegeben; Umsetzung beginnt mit a1 |
+| b3 | **erledigt:** Brücke `get_state_persons`, `get_intentions` und `get_ai_decisions` (bridge-api.md, Abschnitt KI der Staaten); Staatsinfo mit Herrscher, Minister und Neigungen; Diplomatiefenster mit Absichten (nur mit Gesandtem) und den letzten drei Entscheidungen mit „Warum?“; Gründe der Forderungen auch in der Chronik; Hinweis bei Kriegserklärungen und Forderungen an den Spieler; Gründe im Tooltip von Krisenleiste und Kriegsfenster. Der Spielerstaat bleibt bei `set_event_player` (Abschnitt 9). Godot-Tests: Rauchtest (Personen, Absichten, Entscheidungen 1848), Klicktest (Absichten, „Warum?“, Staatsinfo), Screenshots der Staatsinfo und des Diplomatiefensters; 1648 bitgleich |
 | b2 | **erledigt:** Korridore `common/kiziele_voelkerfruehling.chron` (Abschnitt 7) und für 16 Partien `kiziele_voelkerfruehling_16.chron`; CI-Schritt „KI-Labor 1848–1871“ (16 Partien), Workflow `ki-partien.yml` (100 Partien, manuell und wöchentlich), CTest `ki_1848`. **100 Partien:** Einigung 67 %, kleindeutsch 44 %, zwei Bünde 23 %, Bund 33 %, großdeutsch und ohne Bund 0 %, Krieg Preußen–Österreich 70 %, keine Bankrotte, keine Abstürze; zweimal gerechnet bitgleich. Laufzeit 24,8 Minuten auf vier Kernen (Ziel 20 verfehlt: die KI braucht nur noch 3,6 % – 0,2 ms je Staat und Monat –, der Rest ist die Simulation). Kalibrierung: Stärken einmal je Monatserstem (vorher 45 % der Rechenzeit); Bündnis gegen einen gemeinsamen Rivalen nur bei Beziehung unter `rival_below` (Bündnisse am Ende 19 statt 55); Taktiker erklären bei gleich vielen Staaten je Seite (Bismarck 1866; vorher erklärte die KI nie); `ki`-Blöcke mit ±0,5 und Vermittlung nur außenpolitisch (6.4); keine Anträge auf Zolleinigung, Zollforderungen nur gegen Mitglieder einer anderen Union, Hannover im Steuerverein bis zum Septembervertrag 1851; Zolllabor ohne KI. Alle Labore 1848 mit KI in ihren Korridoren (Revolution, Strategien, deutsche Frage bis 1871, vier Kriegslabore, Zoll, Wahl, Bilanz) |
 | b1 | **erledigt:** 71 Personen (25 Herrscher, 46 leitende Minister) von elf Staaten in `common/persoenlichkeiten.chron`, Wechsel der Revolution an Ereignissen (Märzministerien mit `maerzministerium`, Metternich bis zu seiner Entlassung, Maximilian II. nach der Abdankung, Bismarck mit `bismarck`); Staatspersönlichkeiten und Agenden von 14 Staaten mit 44 Zielen in `common/agenden.chron`; Blöcke `ki` an 35 Optionen von 16 Staatsereignissen (Welt-Ereignisse wie Krimkrieg und Fürstentag haben keinen Staat, der Faktor gilt dort nicht). Nach der ersten Chronik und den Godot-Tests: höchstens eine Forderung je `abkuehlung`, Zollforderungen nur an Bundesstaaten, Zolleinigung beantragt nur die Leitmacht (6.2); Zoll- und Führungsziele erst nach der Revolution (ab Juli 1849, Österreich ab März 1849). KI-Labor 1848–1871 mit 16 Seeds und den Korridoren aus Abschnitt 7 (Probe): Einigung 75 % (ohne KI 56 %), kleindeutsch 31 %, zwei Bünde 44 % (Probe bis 40 %), Bund 25 %, Krieg Preußen–Österreich 63 %, keine Abstürze; die KI erklärt noch keinen Krieg (Übermacht nach dem Bündnisfall nie erreicht), die Bündnisse sind gesättigt (55 am Ende), KI 29 % der Laufzeit. Kalibrierung mit b2 |
 | a5 | **erledigt:** KI-Labor `uhrwerk-cli ki` (`core/src/ai_lab.cpp`) mit Korridoren aus `common/kiziele_<szenario>.chron` (chronik-skript.md 3.40: Einigung, Ausgänge, höchster Anteil eines Ausgangs, Kriege je Paar, Bankrotte, Abstürze), Bericht je Lauf und über alle Läufe, Laufzeit und Anteil der KI (`Simulation::ai_seconds`), `--parallel` (gleiche Prüfsummen) und `--ohne-ki`. CTests `ki_fixture` und `ki_fixture_ohne_ki` auf der Fixture `tests/daten_ki`; Tests in `test_ai.cpp`. Bündnisgrenze auch bei der Annahme (6.2); alle Labore 1848 danach neu gerechnet und in ihren Korridoren (deutsche Frage bis 1871: 25 % kleindeutsch, 12,5 % zwei Bünde, 62,5 % Bund; Sedan 87,5 %, Königgrätz 68,8 %). Die Zieldatei 1848 und der Workflow `ki-partien.yml` folgen mit b2 |
