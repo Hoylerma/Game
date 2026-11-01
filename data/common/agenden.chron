@@ -53,12 +53,12 @@ agenda SAX {
     ziel { art = buendnis  partner = AUT  gewicht = 30  bis = 1866.10.21 }
 }
 
-# Hannover: Status quo, Steuerverein bis 1853, Beitritt zum Zollverein 1854, an Österreichs Seite 1866.
+# Hannover: Status quo, Steuerverein bis zum Septembervertrag 1851, danach Zollverein, an Österreichs Seite 1866.
 agenda HAN {
     persoenlichkeit = bewahrer
     ziel { art = status_quo  gewicht = 50 }
-    ziel { art = zollunion  union = steuerverein  gewicht = 40  ab = 1849.07.01  bis = 1853.12.31 }
-    ziel { art = zollunion  union = zollverein    gewicht = 40  ab = 1854.01.01 }
+    ziel { art = zollunion  union = steuerverein  gewicht = 40  ab = 1849.07.01  bis = 1851.09.06 }
+    ziel { art = zollunion  union = zollverein    gewicht = 40  ab = 1851.09.07 }
     ziel { art = buendnis  partner = AUT  gewicht = 20  ab = 1866.01.01  bis = 1866.06.30 }
 }
 

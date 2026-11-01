@@ -334,12 +334,12 @@ Präzisiert in Schritt a3 (je Staat und Monatserster höchstens eine Handlung je
 | Handlung | Bedingung | Faktoren |
 |---|---|---|
 | Gesandter | freier Gesandter, Ziel nimmt ihn an; höchstens einer je Monat | Agenda 30 (Ziel nennt den Staat), Rivale 20, Verbündeter oder Garant 15, Nachbar 10, Stärke 10 × Anteil an der stärksten Macht; Sparsamkeit −5 × Neigung |
-| Bündnis anbieten | weniger als `buendnisse` (3) Bündnisse; gemeinsamer Rivale (beide Strategien nennen denselben Staat) oder Agenda `buendnis`; das Ziel würde annehmen | Agenda ½ × Gewicht, Rivale 20, Stärke min(20, 10 × Verhältnis), Beziehung ÷ 20, Bündnisse −5 je eigenes |
+| Bündnis anbieten | weniger als `buendnisse` (3) Bündnisse; gemeinsamer Rivale (beide Strategien nennen denselben Staat, seit b2 nur mit Beziehung des Anbietenden zu ihm unter `rival_below`, also ein Gegner) oder Agenda `buendnis`; das Ziel würde annehmen | Agenda ½ × Gewicht, Rivale 20, Stärke min(20, 10 × Verhältnis), Beziehung ÷ 20, Bündnisse −5 je eigenes |
 | Bündnis annehmen (ohne Rauschen) | Regel gegen Bündnisse mit Rivalen bleibt; beide haben weniger als `buendnisse` Bündnisse (seit a5) | (Beziehung − 50) ÷ 5, gemeinsamer Rivale +20, Anbieter ist der eigene Rivale −30; ab der Schwelle. Bei Beziehung 100 ohne Rivalen wie die Regel aus M9 |
 | Garantie | Nachbar mit höchstens einem Drittel der eigenen Stärke, Garantie nach Regel möglich | Nachbar 5, Beziehung ÷ 10, Legitimität 5 × Neigung, Agenda `status_quo` ¼ × Gewicht |
-| Forderung | kein eigenes Spiel, kein Krieg; Agenda `fuehrung_bund` (gegen den Rivalen, sonst die Präsidialmacht), `zollunion` (Leitmacht gegen benachbarte Bundesstaaten außerhalb, seit b1) oder `schwaechen` (Führung im Bund gegen den Gegner); Bündnisstärke ≥ 1 − 0,15 × Risiko der des Gegners; seit b1 höchstens eine Forderung je `abkuehlung` (zusätzlich zur Abkühlung je Gegner) | Agenda ½ × Gewicht, Stärke 20 × Überschuss über die Grenze, Expansion und Risiko je 5 × Neigung |
+| Forderung | kein eigenes Spiel, kein Krieg; Agenda `fuehrung_bund` (gegen den Rivalen, sonst die Präsidialmacht), `zollunion` (Leitmacht gegen benachbarte Bundesstaaten außerhalb, seit b1; seit b2 nur gegen Mitglieder einer anderen Union, also Zollverein gegen Steuerverein) oder `schwaechen` (Führung im Bund gegen den Gegner); Bündnisstärke ≥ 1 − 0,15 × Risiko der des Gegners; seit b1 höchstens eine Forderung je `abkuehlung` (zusätzlich zur Abkühlung je Gegner) | Agenda ½ × Gewicht, Stärke 20 × Überschuss über die Grenze, Expansion und Risiko je 5 × Neigung |
 | Manöver | Hauptpartei eines Spiels; höchstens eines je Monat | nachgeben unter `spiel_nachgeben` − 0,1 × Risiko, eskalieren ab 1 − 0,15 × Risiko, sonst vermitteln mit Neigung Vermittlung über 0, sonst entscheidet die Regel der Stufe |
-| Antrag | Bundesversammlung tagt; Agenda `fuehrung_bund` (Präsidium, als Präsidialmacht die Reform) oder `zollunion` (Zolleinigung der eigenen Union, seit b1 nur durch ihre Leitmacht); Antrag gültig und mit Mehrheit nach der Vorschau | Agenda ½ × Gewicht, Legitimität 3 × Neigung |
+| Antrag | Bundesversammlung tagt; Agenda `fuehrung_bund` (Präsidium, als Präsidialmacht die Reform) oder `zollunion` (Zolleinigung der eigenen Union; seit b2 stellt die KI diesen Antrag nicht mehr: angenommen führte er 1851 alle Bundesstaaten samt Österreich in den Zollverein, was Preußen historisch gerade verhinderte); Antrag gültig und mit Mehrheit nach der Vorschau | Agenda ½ × Gewicht, Legitimität 3 × Neigung |
 | Zollunion | Agenda `zollunion` nennt die Union, Beitritt möglich | Agenda ½ × Gewicht, Beziehung zur Leitmacht ÷ 10, Leitmacht ist Rivale −30 |
 
 Forderungen, Anträge und Beitritte folgen allein der Agenda; ohne Agenden (bis b1) handeln die Staaten
@@ -359,8 +359,9 @@ in b2.
   (Entscheidung 8). Nutzen: Gewicht des Ziels, Bündnisstärke der eigenen Seite ÷ der Gegenseite
   (aus `get_declaration_sides`, also mit Bündnisfall) gegen die Schwelle 1,3 − 0,15 × risiko, Rivale,
   expansion; dagegen Schuldenquote, Unruhe über 40, laufender Krieg, Kriegsmüdigkeit des letzten
-  Krieges, legitimitaet gegen Bundesstaaten (Bundesrecht). Taktiker erklären nur, wenn kein Dritter
-  dem Gegner beisteht. Kriegsziel ist das Ziel der Agenda.
+  Krieges, legitimitaet gegen Bundesstaaten (Bundesrecht). Taktiker erklären nur bei günstigem
+  Bündnisfall: die Gegenseite hat höchstens so viele Staaten wie die eigene (seit b2; vorher nur gegen einen
+  Gegner ohne Beistand). Kriegsziel ist das Ziel der Agenda.
 - **Mobilmachung**: bei Krise Stufe 3 (wie der Generalstab), zusätzlich wenn ein Nachbar mobil macht
   und die Bedrohung über 1,5 liegt; **Abrüstung** 60 Tage nach Frieden und Krise.
   Präzisiert in a2: Mobil gegen einen Nachbarn nur bei Beziehung unter 0 (Faktor Bedrohung =
@@ -380,7 +381,7 @@ Präzisiert in Schritt a4:
 
 | Handlung | Bedingung | Faktoren |
 |---|---|---|
-| Kriegserklärung | nicht im Krieg; aktives Agendaziel `gebiet` (Gegner: Besitzer der meisten Orte der Einheit), `annexion` oder `schwaechen`; Erklärung möglich; Seiten nach dem Bündnisfall mit Stärke ≥ `kriegs_staerke` (1,3) − 0,15 × Risiko; Taktiker nur gegen einen Gegner ohne Beistand; Abkühlung je Gegner | Agenda = Gewicht, Stärke min(40, 20 × Überschuss), Expansion und Risiko je 5 × Neigung, Schuldenquote −10 je Punkt über der Grenze, Unruhe −½ je Punkt über 40, gegen einen Bundesstaat Legitimität −10 × Neigung; **doppelte Schwelle** |
+| Kriegserklärung | nicht im Krieg; aktives Agendaziel `gebiet` (Gegner: Besitzer der meisten Orte der Einheit), `annexion` oder `schwaechen`; Erklärung möglich; Seiten nach dem Bündnisfall mit Stärke ≥ `kriegs_staerke` (1,3) − 0,15 × Risiko; Taktiker nur, wenn die Gegenseite nach dem Bündnisfall höchstens so viele Staaten hat wie die eigene (seit b2; vorher nur gegen einen Gegner ohne Beistand, sodass Bismarck 1866 nie erklärte); Abkühlung je Gegner | Agenda = Gewicht, Stärke min(40, 20 × Überschuss), Expansion und Risiko je 5 × Neigung, Schuldenquote −10 je Punkt über der Grenze, Unruhe −½ je Punkt über 40, gegen einen Bundesstaat Legitimität −10 × Neigung; **doppelte Schwelle** |
 | Kriegsziel der Erklärung | | `gebiet`: die Einheit; `annexion`: der Staat; `schwaechen`: Führung im Bund unter Bundesstaaten, sonst Entschädigung von sechs Monatseinnahmen |
 | weiteres Kriegsziel | Hauptpartei; Kriegspunkte ≥ 1,5 × Kosten der eigenen Ziele; Agendaziel `gebiet` oder `annexion` gültig in diesem Krieg; eines je Monat | Agenda = Gewicht, Kriegspunkte − Kosten, Expansion 5 × Neigung |
 | Friedensangebot | Hauptpartei; die Gegenseite nähme nach der Vorab-Prüfung an; eines je Monat | eigene Ziele, wenn die Punkte die Kosten decken (10 + Punkte − Kosten); Kapitulation, wenn die Gegenseite ihre Ziele deckt und die eigene Müdigkeit 80 − 10 × Risiko erreicht; weißer Frieden ab Müdigkeit 50 − 10 × Risiko unter 25 Punkten, wenn die Gegenseite höchstens 10 Punkte mehr hat und die eigene Seite nicht um `kriegs_staerke` überlegen ist (Müdigkeit − 40, Vermittlung 5 × Neigung) |
@@ -406,6 +407,12 @@ nur noch in 3 von 16 Läufen statt in 11.
 - **Ereignisoptionen**: Optionen dürfen einen Block `ki { risiko = 1  reform = -1 … }` tragen; ihr
   Gewicht wird mit `1 + 0,25 × Σ Neigung × Faktor` (mindestens 0,1) multipliziert. Ohne Block bleibt
   das Gewicht aus M11 (Entscheidung 9). Die Korridore aus M11 werden mit KI neu geprüft (M12b).
+  Kalibriert in b2: Bezüge je ±0,5 (Faktor also 1 + 0,125 × Σ Neigung), Vermittlung nur an außenpolitischen
+  Optionen. Mit ±1 und Vermittlung an inneren Ereignissen verschob die KI die Revolution zu stark: Die vielen
+  Bewahrer unter den Kleinstaaten gewährten die Märzforderungen seltener (58 % statt mindestens 61 %),
+  Preußen (Machtpolitiker, Vermittlung −1) kämpfte öfter an den Barrikaden, und das Reich der Paulskirche
+  kam in keinem von 16 Läufen zustande; „standhalten“ in Olmütz bekam mit Expansion den Faktor 1,55 und
+  führte in 24 von 100 Läufen zum Krieg von 1850.
 - **Wahlkampf der Strömungen** ohne Spieler (politik.md 9): monatlich bis zur Wahl; Mittel in die
   Wahlkreise mit der knappsten Lage nach dem Stimmungsbericht, den auch der Spieler sieht (mit
   Fehler); Rücklage 20 %.
@@ -470,11 +477,19 @@ Präzisiert in Schritt a5 (`core/src/ai_lab.cpp`, Zieldatei: chronik-skript.md A
 - **Laufzeit der KI:** Die Simulation misst die Rechenzeit von Schritt 6f (`Simulation::ai_seconds`, kein
   Zustand); der Bericht nennt ihren Anteil und die Zeit je Staat und Monatserstem (Ziel: höchstens 5 ms).
   Gemessen 1848–1850 (Release, zwei Läufe gleichzeitig): 1,5 ms je Staat und Monat, 36 % der Laufzeit;
-  ein Lauf bis 1871 dauert damit etwa 40 s, 100 Läufe auf vier Kernen etwa 17 Minuten.
+  ein Lauf bis 1871 dauert damit etwa 40 s, 100 Läufe auf vier Kernen etwa 17 Minuten. Seit b2 berechnet
+  der Planer die Stärken aller Staaten einmal je Monatserstem (sie ändern sich während der Planung nicht,
+  Befehle wirken am nächsten Tag) statt bei jedem Vergleich; danach 0,4 ms je Staat und Monat und rund 5 %
+  der Laufzeit, bitgleich. **100 Partien 1848–1871** (b2): 24,8 Minuten auf vier Kernen, KI 3,6 % (0,2 ms je
+  Staat und Monat); das Ziel von 20 Minuten verfehlt die Simulation selbst, nicht die KI.
 - **`--parallel N`:** N Läufe gleichzeitig, je Lauf ein Thread (mit mehr als einem gleichzeitigen Lauf
   rechnet jede Simulation einthreadig); die Ergebnisse stehen in der Reihenfolge der Seeds, die Prüfsummen
   sind dieselben wie nacheinander. Eine Ausnahme in einem Lauf zählt als Absturz, die übrigen rechnen
   weiter.
+- **Andere Labore** (Entscheidung 12): Alle Labore ohne Spieler rechnen ab 1848 mit der KI, mit einer
+  Ausnahme seit b2: Das **Zolllabor** vergleicht dieselbe Partie mit und ohne einen Wechsel der Zollunion
+  und rechnet deshalb ohne KI – sonst wechselten die Staaten im Vergleichslauf selbst (Preußen setzte den
+  Beitritt Hannovers durch), und der Vergleich mäße nichts mehr.
 - **`--ohne-ki`:** dieselbe Welt mit abgeschalteter KI (`AiRules::active` aus): keine Planer, keine Annahme
   nach Nutzen, Ereignisgewichte ohne Neigung – also wie M11.
 
@@ -595,6 +610,7 @@ Weitere Tests:
 | Schritt | Stand |
 |---|---|
 | – | Entscheidungen 1–14 wie empfohlen freigegeben; Umsetzung beginnt mit a1 |
+| b2 | **erledigt:** Korridore `common/kiziele_voelkerfruehling.chron` (Abschnitt 7) und für 16 Partien `kiziele_voelkerfruehling_16.chron`; CI-Schritt „KI-Labor 1848–1871“ (16 Partien), Workflow `ki-partien.yml` (100 Partien, manuell und wöchentlich), CTest `ki_1848`. **100 Partien:** Einigung 67 %, kleindeutsch 44 %, zwei Bünde 23 %, Bund 33 %, großdeutsch und ohne Bund 0 %, Krieg Preußen–Österreich 70 %, keine Bankrotte, keine Abstürze; zweimal gerechnet bitgleich. Laufzeit 24,8 Minuten auf vier Kernen (Ziel 20 verfehlt: die KI braucht nur noch 3,6 % – 0,2 ms je Staat und Monat –, der Rest ist die Simulation). Kalibrierung: Stärken einmal je Monatserstem (vorher 45 % der Rechenzeit); Bündnis gegen einen gemeinsamen Rivalen nur bei Beziehung unter `rival_below` (Bündnisse am Ende 19 statt 55); Taktiker erklären bei gleich vielen Staaten je Seite (Bismarck 1866; vorher erklärte die KI nie); `ki`-Blöcke mit ±0,5 und Vermittlung nur außenpolitisch (6.4); keine Anträge auf Zolleinigung, Zollforderungen nur gegen Mitglieder einer anderen Union, Hannover im Steuerverein bis zum Septembervertrag 1851; Zolllabor ohne KI. Alle Labore 1848 mit KI in ihren Korridoren (Revolution, Strategien, deutsche Frage bis 1871, vier Kriegslabore, Zoll, Wahl, Bilanz) |
 | b1 | **erledigt:** 71 Personen (25 Herrscher, 46 leitende Minister) von elf Staaten in `common/persoenlichkeiten.chron`, Wechsel der Revolution an Ereignissen (Märzministerien mit `maerzministerium`, Metternich bis zu seiner Entlassung, Maximilian II. nach der Abdankung, Bismarck mit `bismarck`); Staatspersönlichkeiten und Agenden von 14 Staaten mit 44 Zielen in `common/agenden.chron`; Blöcke `ki` an 35 Optionen von 16 Staatsereignissen (Welt-Ereignisse wie Krimkrieg und Fürstentag haben keinen Staat, der Faktor gilt dort nicht). Nach der ersten Chronik und den Godot-Tests: höchstens eine Forderung je `abkuehlung`, Zollforderungen nur an Bundesstaaten, Zolleinigung beantragt nur die Leitmacht (6.2); Zoll- und Führungsziele erst nach der Revolution (ab Juli 1849, Österreich ab März 1849). KI-Labor 1848–1871 mit 16 Seeds und den Korridoren aus Abschnitt 7 (Probe): Einigung 75 % (ohne KI 56 %), kleindeutsch 31 %, zwei Bünde 44 % (Probe bis 40 %), Bund 25 %, Krieg Preußen–Österreich 63 %, keine Abstürze; die KI erklärt noch keinen Krieg (Übermacht nach dem Bündnisfall nie erreicht), die Bündnisse sind gesättigt (55 am Ende), KI 29 % der Laufzeit. Kalibrierung mit b2 |
 | a5 | **erledigt:** KI-Labor `uhrwerk-cli ki` (`core/src/ai_lab.cpp`) mit Korridoren aus `common/kiziele_<szenario>.chron` (chronik-skript.md 3.40: Einigung, Ausgänge, höchster Anteil eines Ausgangs, Kriege je Paar, Bankrotte, Abstürze), Bericht je Lauf und über alle Läufe, Laufzeit und Anteil der KI (`Simulation::ai_seconds`), `--parallel` (gleiche Prüfsummen) und `--ohne-ki`. CTests `ki_fixture` und `ki_fixture_ohne_ki` auf der Fixture `tests/daten_ki`; Tests in `test_ai.cpp`. Bündnisgrenze auch bei der Annahme (6.2); alle Labore 1848 danach neu gerechnet und in ihren Korridoren (deutsche Frage bis 1871: 25 % kleindeutsch, 12,5 % zwei Bünde, 62,5 % Bund; Sedan 87,5 %, Königgrätz 68,8 %). Die Zieldatei 1848 und der Workflow `ki-partien.yml` folgen mit b2 |
 | a4 | **erledigt** (Labore mit KI: Revolution, Strategien, deutsche Frage bis 1871, die vier Kriegslabore, Zoll, Wahl und Bilanz in ihren Korridoren; weißer Frieden nach dem Sedan-Labor eingeschränkt, siehe 6.3): Kriegserklärung nur aus aktiven Agendazielen bei Übermacht der Seiten (Bündnisfall), mit doppelter Schwelle, Gründen in der Chronik und Abkühlung je Gegner; Kriegsziel aus der Agenda; weitere Kriegsziele bei Punkten über 1,5 × Kosten; Friedensangebote (eigene Ziele, weißer Frieden, Kapitulation) nur, wenn die Gegenseite annähme; keine Bündnisse und Garantien im Krieg. Regel `kriegs_staerke`; Inhaltsbereich ki Stand 4. Tests in `test_ai.cpp` |

@@ -283,7 +283,7 @@ jobs:
   balancing:
     name: Balancing (Linux, Release)
     runs-on: ubuntu-24.04
-    timeout-minutes: 40
+    timeout-minutes: 50
     steps:
       - name: Quelltext auschecken
         uses: actions/checkout@v4
@@ -431,6 +431,25 @@ jobs:
             echo
             echo '```'
             cat "$RUNNER_TEMP/ereignisse_1871.txt"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          exit "$status"
+
+      # KI-Labor (M12, Schritt b2; ki.md Abschnitt 7): 16 Partien 1848–1871 ohne Spieler mit der KI, vier
+      # gleichzeitig, gegen die weiteren Korridore für 16 Läufe (data/common/kiziele_voelkerfruehling_16.chron).
+      # Die 100 Partien der Abnahme gegen kiziele_voelkerfruehling.chron rechnet der Workflow ki-partien.yml.
+      - name: KI-Labor 1848–1871 (16 Partien)
+        if: ${{ !cancelled() }}
+        run: |
+          status=0
+          ./build/release/cli/uhrwerk-cli ki --daten data --szenario voelkerfruehling --seeds 16 --parallel 4 \
+            --ziele data/common/kiziele_voelkerfruehling_16.chron > "$RUNNER_TEMP/ki.txt" 2>&1 || status=$?
+          cat "$RUNNER_TEMP/ki.txt"
+          {
+            echo "### KI-Labor 1848–1871 (16 Partien)"
+            echo
+            echo '```'
+            cat "$RUNNER_TEMP/ki.txt"
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
           exit "$status"

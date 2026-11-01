@@ -1,0 +1,22 @@
+# Korridore des KI-Labors für die 16 Partien je Push in der CI (Meilenstein M12, Schritt b2; Format:
+# docs/technik/chronik-skript.md, Abschnitt 3.40). Mit 16 Läufen ist eine Partie 6,25 Punkte; die Korridore
+# aus ki.md Abschnitt 7 gelten für die 100 Partien in kiziele_voelkerfruehling.chron (Workflow
+# ki-partien.yml), hier sind sie um etwa ±10 Punkte weiter:
+#   uhrwerk-cli ki --szenario voelkerfruehling --seeds 16 --parallel 4 --ziele data/common/kiziele_voelkerfruehling_16.chron
+# Kalibriert in b2: Seeds 1648–1663 kleindeutsch 6, zwei Bünde 3, Bund 7, Krieg Preußen–Österreich 11.
+
+labor {
+    bis        = 1871.07.01
+    journal    = deutsche_frage
+    hoechstens = 0.85
+}
+
+einigung { ausgaenge = { kleindeutsch grossdeutsch zwei_buende }  anteil = { 0.45 0.95 } }
+ausgang kleindeutsch { anteil = { 0.2 0.8 } }
+ausgang grossdeutsch { anteil = { 0 0.15 } }
+ausgang zwei_buende  { anteil = { 0.05 0.5 } }
+ausgang bund         { anteil = { 0.05 0.5 } }
+ausgang gescheitert  { anteil = { 0 0.15 } }
+
+krieg PRU { gegen = AUT  anteil = { 0.3 0.95 } }
+bankrott { staaten = { PRU AUT }  anteil = { 0 0.25 } }

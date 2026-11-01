@@ -111,7 +111,7 @@ ereignis pru.kaiserdeputation {
     option annehmen {
         text = "Die Krone annehmen und die Reichsverfassung anerkennen"
         gewicht = 20
-        ki { expansion = 1  risiko = 1 }
+        ki { expansion = 0.5  legitimitaet = -0.5 }
         gewicht_wenn { zustimmung_nationalbewegung >= 5  plus = 10 }
         gewicht_wenn { unruhe >= 60  plus = 10 }
         wirkung {
@@ -129,13 +129,13 @@ ereignis pru.kaiserdeputation {
         text = "Die Krone ablehnen: ohne die Zustimmung der Fürsten keine Antwort"
         historisch = ja
         gewicht = 50
-        ki { legitimitaet = 1 }
+        ki { legitimitaet = 0.5 }
         wirkung { welt_merke = krone_abgelehnt  zustimmung_nationalbewegung = -4  zustimmung_bildungsbuergertum = -2  zustimmung_adel = 2  unruhe = 10 }
     }
     option bedingungen {
         text = "Eine Union mit den Fürsten anbieten, aber nicht aus der Hand des Parlaments"
         gewicht = 30
-        ki { vermittlung = 1 }
+        ki { reform = 0.5 }
         wirkung { welt_merke = krone_abgelehnt  welt_merke = unionsplan  zustimmung_nationalbewegung = -2  unruhe = 5 }
     }
 }
@@ -185,7 +185,7 @@ ereignis reichsverfassung.anerkennung {
         text = "Die Reichsverfassung anerkennen"
         historisch = ja
         gewicht = 70
-        ki { reform = 1 }
+        ki { reform = 0.5 }
         gewicht_wenn { staat_in = { BAV SAX HAN }  plus = -60 }
         gewicht_wenn { welt_merkmal = krone_angenommen  plus = 30 }
         gewicht_wenn { unruhe >= 60  plus = 20 }
@@ -194,7 +194,7 @@ ereignis reichsverfassung.anerkennung {
     option ablehnen {
         text = "Die Anerkennung verweigern"
         gewicht = 30
-        ki { legitimitaet = 1 }
+        ki { legitimitaet = 0.5 }
         wirkung { zustimmung_nationalbewegung = -3  zustimmung_bildungsbuergertum = -2  unruhe = 15 }
     }
 }
@@ -217,13 +217,13 @@ ereignis sax.maiaufstand {
         text = "Preußische Truppen zu Hilfe rufen"
         historisch = ja
         gewicht = 70
-        ki { legitimitaet = 1  reform = -1 }
+        ki { legitimitaet = 0.5  reform = -0.5 }
         wirkung { unruhe = 30  aufstand = barrikaden  merke = aufstand_1849  zustimmung_bildungsbuergertum = -2 }
     }
     option nachgeben {
         text = "Die Reichsverfassung doch anerkennen"
         gewicht = 30
-        ki { reform = 1  vermittlung = 1 }
+        ki { reform = 0.5 }
         wirkung { merke = reichsverfassung  zustimmung_adel = -2  zustimmung_militaer = -2  unruhe = -20 }
     }
 }

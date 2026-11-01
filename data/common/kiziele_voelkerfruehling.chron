@@ -1,0 +1,22 @@
+# Korridore des KI-Labors für 1848–1871 (Meilenstein M12, Schritt b2; docs/technik/ki.md Abschnitt 7,
+# Entscheidung 10; Format: docs/technik/chronik-skript.md, Abschnitt 3.40). 100 Partien ohne Spieler im
+# Workflow ki-partien.yml (16 je Push in der CI gegen die weiteren Korridore in kiziele_voelkerfruehling_16.chron):
+#   uhrwerk-cli ki --szenario voelkerfruehling --seeds 100 --parallel 4
+# Kalibriert in b2 mit 100 Partien: Einigung 67 %, kleindeutsch 44 %, zwei Bünde 23 %, Bund 33 %, Krieg
+# Preußen–Österreich 70 %, keine Bankrotte und Abstürze. Spielwerte; ein Absturz ist immer ein Verstoß.
+
+labor {
+    bis        = 1871.07.01
+    journal    = deutsche_frage
+    hoechstens = 0.8            # kein Ausgang in mehr als 80 % der Läufe
+}
+
+einigung { ausgaenge = { kleindeutsch grossdeutsch zwei_buende }  anteil = { 0.55 0.9 } }
+ausgang kleindeutsch { anteil = { 0.3 0.7 } }
+ausgang grossdeutsch { anteil = { 0 0.1 } }
+ausgang zwei_buende  { anteil = { 0.1 0.4 } }
+ausgang bund         { anteil = { 0.1 0.4 } }
+ausgang gescheitert  { anteil = { 0 0.1 } }
+
+krieg PRU { gegen = AUT  anteil = { 0.4 0.9 } }       # ein Krieg Preußen gegen Österreich
+bankrott { staaten = { PRU AUT }  anteil = { 0 0.2 } } # Bankrott Preußens oder Österreichs

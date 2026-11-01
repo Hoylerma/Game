@@ -254,8 +254,12 @@ CustomsLabRun run_customs_lab(const World& world, const SimConfig& config, std::
         weights.push_back(weights_of(world, change));
     }
 
+    // Ohne KI (seit M12b, ki.md Abschnitt 7): Das Labor vergleicht dieselbe Partie mit und ohne einen
+    // Wechsel; wechselte die KI im Vergleichslauf selbst Zollunionen, mäße es nichts mehr.
+    World without_ai = world;
+    without_ai.ai_rules.active = false;
     CustomsLabRun result;
-    Simulation baseline(world, config);
+    Simulation baseline(without_ai, config);
     const Accumulator base = run_once(baseline, changes, weights, measure_from, end);
     for (std::size_t u = 0; u < world.customs_unions.size(); ++u) {
         result.share.push_back(
@@ -263,7 +267,7 @@ CustomsLabRun run_customs_lab(const World& world, const SimConfig& config, std::
     }
     for (std::size_t c = 0; c < changes.size(); ++c) {
         result.without.push_back(average(base.sums[c], base.months));
-        Simulation sim(world, config);
+        Simulation sim(without_ai, config);
         Command command;
         command.type = CommandType::CustomsUnion;
         command.state = changes[c].state;

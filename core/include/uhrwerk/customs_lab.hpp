@@ -7,7 +7,8 @@
 // gemittelt: der Handel über die frühere Zollgrenze, der Handel der Märkte des Staates, seine
 // Zolleinnahme und das Preisniveau seiner Märkte; dazu im Lauf ohne Wechsel der Anteil des Zolls an
 // den Einnahmen der Mitglieder jeder Union. Zielwerte: common/zollziele_<szenario>.chron (Format:
-// docs/technik/chronik-skript.md, Abschnitt 3.26). Wie der Balancing-Bericht kein Teil der Simulation.
+// docs/technik/chronik-skript.md, Abschnitt 3.26). Seit M12 ohne KI, damit kein Staat im Vergleichslauf
+// selbst die Zollunion wechselt (ki.md Abschnitt 7). Wie der Balancing-Bericht kein Teil der Simulation.
 
 #include "uhrwerk/balance.hpp"
 #include "uhrwerk/fixed.hpp"
