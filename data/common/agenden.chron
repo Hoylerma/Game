@@ -1,0 +1,125 @@
+# Agenden der Staaten 1848–1871 (Meilenstein M12, Schritt b1; docs/technik/ki.md Abschnitt 3.4).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.39. Staatspersönlichkeit nach Vorschlag ki.md 3.2,
+# Ziele mit Gewicht (0 … 100), Zeitfenster und Bedingung. Alles Spielwerte (sicherheit = spielwert); die
+# Fenster folgen den historischen Lagen (Unionspolitik 1849/50, Olmütz, Deutsch-Dänischer, Deutscher und
+# Deutsch-Französischer Krieg), die Gewichte kalibriert Schritt b2. Zoll- und Führungsziele gelten erst nach
+# der Revolution (ab Juli 1849, Österreich ab der Märzverfassung): 1848 forderten die Mächte nichts voneinander. Kriegsziele (gebiet, annexion,
+# schwaechen) nur in engen Fenstern und mit Merkmal – die Kriege selbst entstehen weiter auch aus den
+# Ereignissen (M11, Entscheidung 10); die KI erklärt nur bei Übermacht (ki.md 6.3). Staaten ohne Agenda sind
+# Bewahrer ohne Ziele (standard_persoenlichkeit in common/ki.chron).
+
+# Preußen: Zollverein halten, Führung im Bund (Union 1849/50, ab Bismarck), Schleswig 1864, Österreich 1866
+# und Frankreich 1870 schwächen.
+agenda PRU {
+    persoenlichkeit = machtpolitiker
+    ziel { art = zollunion     union = zollverein  gewicht = 50  ab = 1849.07.01 }
+    ziel { art = fuehrung_bund  gewicht = 40  ab = 1849.04.03  bis = 1850.11.29 }
+    ziel { art = fuehrung_bund  gewicht = 60  ab = 1862.09.23  bedingung { merkmal = bismarck } }
+    ziel { art = gebiet  gebiet = dk_schleswig  gewicht = 40  ab = 1863.11.18  bis = 1864.10.30  bedingung { merkmal = bismarck } }
+    ziel { art = schwaechen  gegner = AUT  gewicht = 50  ab = 1866.04.01  bis = 1866.08.23  bedingung { merkmal = bismarck } }
+    ziel { art = schwaechen  gegner = FRK  gewicht = 30  ab = 1870.07.01  bis = 1871.01.28  bedingung { merkmal = bismarck } }
+}
+
+# Österreich: Präsidium und Führung im Bund bis 1866, Status quo, Druck auf Preußen in der Krise 1850,
+# Bündnisse mit den Mittelstaaten.
+agenda AUT {
+    persoenlichkeit = bewahrer
+    ziel { art = fuehrung_bund  gewicht = 60  ab = 1849.03.07  bis = 1866.08.23 }
+    ziel { art = status_quo     gewicht = 50 }
+    ziel { art = schwaechen  gegner = PRU  gewicht = 30  ab = 1850.09.01  bis = 1850.11.29 }
+    ziel { art = buendnis  partner = BAV  gewicht = 30  bis = 1866.08.23 }
+    ziel { art = buendnis  partner = SAX  gewicht = 30  bis = 1866.08.23 }
+    ziel { art = buendnis  partner = HAN  gewicht = 20  ab = 1866.01.01  bis = 1866.08.23 }
+}
+
+# Bayern: Trias und Status quo, Zollverein, an Österreichs Seite bis 1866, danach Schutz- und Trutzbündnis
+# mit Preußen; Ruhe in der Revolution.
+agenda BAV {
+    persoenlichkeit = bewahrer
+    ziel { art = status_quo  gewicht = 50 }
+    ziel { art = zollunion  union = zollverein  gewicht = 40  ab = 1849.07.01 }
+    ziel { art = ruhe  gewicht = 40  bis = 1849.12.31 }
+    ziel { art = buendnis  partner = AUT  gewicht = 30  bis = 1866.08.22 }
+    ziel { art = buendnis  partner = PRU  gewicht = 20  ab = 1866.08.22 }
+}
+
+# Sachsen: Status quo, Zollverein, an Österreichs Seite bis zum Frieden 1866; Ruhe in der Revolution.
+agenda SAX {
+    persoenlichkeit = bewahrer
+    ziel { art = status_quo  gewicht = 50 }
+    ziel { art = zollunion  union = zollverein  gewicht = 40  ab = 1849.07.01 }
+    ziel { art = ruhe  gewicht = 40  bis = 1849.12.31 }
+    ziel { art = buendnis  partner = AUT  gewicht = 30  bis = 1866.10.21 }
+}
+
+# Hannover: Status quo, Steuerverein bis 1853, Beitritt zum Zollverein 1854, an Österreichs Seite 1866.
+agenda HAN {
+    persoenlichkeit = bewahrer
+    ziel { art = status_quo  gewicht = 50 }
+    ziel { art = zollunion  union = steuerverein  gewicht = 40  ab = 1849.07.01  bis = 1853.12.31 }
+    ziel { art = zollunion  union = zollverein    gewicht = 40  ab = 1854.01.01 }
+    ziel { art = buendnis  partner = AUT  gewicht = 20  ab = 1866.01.01  bis = 1866.06.30 }
+}
+
+# Württemberg: Status quo, Zollverein, mit Bayern bis 1866, danach Bündnis mit Preußen.
+agenda WUE {
+    persoenlichkeit = bewahrer
+    ziel { art = status_quo  gewicht = 40 }
+    ziel { art = zollunion  union = zollverein  gewicht = 40  ab = 1849.07.01 }
+    ziel { art = buendnis  partner = BAV  gewicht = 30  bis = 1866.08.13 }
+    ziel { art = buendnis  partner = PRU  gewicht = 20  ab = 1866.08.13 }
+}
+
+# Baden: Zollverein, Ruhe in der Revolution, nach 1866 Bündnis mit Preußen.
+agenda BAD {
+    persoenlichkeit = reformer
+    ziel { art = zollunion  union = zollverein  gewicht = 50  ab = 1849.07.01 }
+    ziel { art = ruhe  gewicht = 40  bis = 1849.12.31 }
+    ziel { art = buendnis  partner = PRU  gewicht = 30  ab = 1866.08.17 }
+}
+
+# Hessen-Darmstadt: Status quo, Zollverein, an Österreichs Seite bis 1866.
+agenda HED {
+    persoenlichkeit = bewahrer
+    ziel { art = status_quo  gewicht = 40 }
+    ziel { art = zollunion  union = zollverein  gewicht = 40  ab = 1849.07.01 }
+    ziel { art = buendnis  partner = AUT  gewicht = 30  bis = 1866.09.03 }
+}
+
+# Kurhessen: Status quo; in der Verfassungskrise 1850 an Österreichs Seite.
+agenda HEK {
+    persoenlichkeit = bewahrer
+    ziel { art = status_quo  gewicht = 40 }
+    ziel { art = buendnis  partner = AUT  gewicht = 20  ab = 1850.09.01  bis = 1850.11.29 }
+}
+
+# Frankreich: Ruhe in der Zweiten Republik; nach Königgrätz Preußen schwächen und „Kompensationen“ am
+# Rhein suchen (Pfalz 1866/67).
+agenda FRK {
+    persoenlichkeit = hegemon
+    ziel { art = ruhe  gewicht = 40  bis = 1851.12.31 }
+    ziel { art = schwaechen  gegner = PRU  gewicht = 30  ab = 1866.08.01  bis = 1870.09.04 }
+    ziel { art = gebiet  gebiet = by_pfalz  gewicht = 15  ab = 1866.08.01  bis = 1867.06.30 }
+}
+
+# Dänemark: Gesamtstaat und Grenzen halten; 1863/64 Hoffnung auf Schweden.
+agenda DEN {
+    persoenlichkeit = bewahrer
+    ziel { art = status_quo  gewicht = 50 }
+    ziel { art = buendnis  partner = SWE  gewicht = 20  ab = 1863.01.01  bis = 1864.10.30 }
+}
+
+# Hansestädte: Handel, Status quo.
+agenda HAM {
+    persoenlichkeit = haendler
+    ziel { art = status_quo  gewicht = 30 }
+}
+agenda BRE {
+    persoenlichkeit = haendler
+    ziel { art = status_quo  gewicht = 30 }
+}
+agenda LUE {
+    persoenlichkeit = haendler
+    ziel { art = status_quo  gewicht = 30 }
+}

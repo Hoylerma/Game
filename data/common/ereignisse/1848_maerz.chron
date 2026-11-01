@@ -66,6 +66,7 @@ ereignis maerz.forderungen {
         text = "Nachgeben: ein Märzministerium aus Liberalen berufen, Pressefreiheit und Vereinsrecht gewähren"
         historisch = ja
         gewicht = 75
+        ki { reform = 1  vermittlung = 1 }
         gewicht_wenn { unruhe >= 40  plus = 20 }
         wirkung {
             gesetz_presse = pressefreiheit
@@ -81,11 +82,13 @@ ereignis maerz.forderungen {
     option hinhalten {
         text = "Hinhalten: eine Kommission einsetzen und die Antwort vertagen"
         gewicht = 15
+        ki { legitimitaet = 1 }
         wirkung { unruhe = 10  folge { ereignis = maerz.petitionen  tage = 14 } }
     }
     option militaer {
         text = "Das Militär einsetzen und die Versammlungen auflösen"
         gewicht = 10
+        ki { risiko = 1  reform = -1 }
         gewicht_wenn { zustimmung_militaer >= 3  plus = 10 }
         wirkung {
             zustimmung_militaer = 2
@@ -141,6 +144,7 @@ ereignis aut.metternich {
         text = "Metternich entlassen, Pressefreiheit und eine Verfassung versprechen"
         historisch = ja
         gewicht = 80
+        ki { reform = 1 }
         wirkung {
             gesetz_presse = pressefreiheit
             merke = maerzministerium
@@ -152,6 +156,7 @@ ereignis aut.metternich {
     option halten {
         text = "Am Staatskanzler festhalten und die Garnison verstärken"
         gewicht = 20
+        ki { legitimitaet = 1  reform = -1 }
         wirkung { zustimmung_militaer = 1  zustimmung_bildungsbuergertum = -4  unruhe = 25  aufstand = barrikaden }
     }
 }
@@ -174,6 +179,7 @@ ereignis pru.barrikaden {
         text = "Die Truppen aus Berlin abziehen und ein liberales Ministerium berufen"
         historisch = ja
         gewicht = 70
+        ki { vermittlung = 1  reform = 1 }
         wirkung {
             gesetz_presse = pressefreiheit
             gesetz_vereine = vereinsfreiheit
@@ -188,6 +194,7 @@ ereignis pru.barrikaden {
     option kaempfen {
         text = "Den Kampf fortsetzen und die Stadt mit Gewalt räumen"
         gewicht = 30
+        ki { risiko = 1  reform = -1 }
         gewicht_wenn { zustimmung_militaer >= 3  plus = 10 }
         wirkung {
             zustimmung_militaer = 2
@@ -235,6 +242,7 @@ ereignis bav.abdankung {
         text = "Zugunsten des Kronprinzen Maximilian abdanken; ein Märzministerium folgt"
         historisch = ja
         gewicht = 75
+        ki { reform = 1  vermittlung = 1 }
         wirkung {
             gesetz_presse = pressefreiheit
             merke = maerzministerium
@@ -246,6 +254,7 @@ ereignis bav.abdankung {
     option bleiben {
         text = "Bleiben und die Kammer vertagen"
         gewicht = 25
+        ki { legitimitaet = 1 }
         wirkung { zustimmung_bildungsbuergertum = -3  unruhe = 15 }
     }
 }

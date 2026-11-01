@@ -54,6 +54,18 @@ Schritt in Abschnitt 13 dort.
   kriegsmüder oder ihre Seite klar überlegen ist; sonst bot Frankreich im Lesezeichen Sedan früh weißen
   Frieden an, und der Verteidiger siegte nur in 4 von 16 Läufen (jetzt 14). Inhaltsbereich ki Stand 4;
   1648 bitgleich.
+- **Daten 1848–1871 (Schritt b1):** 71 Herrscher und leitende Minister von Preußen, Österreich,
+  Bayern, Sachsen, Hannover, Württemberg, Baden, Hessen-Darmstadt, Kurhessen, Frankreich und Dänemark
+  (`common/persoenlichkeiten.chron`) mit Amtszeit, Werten und Eigenschaften; die Wechsel der Revolution
+  folgen den Ereignissen (Märzministerien, Metternich, Abdankung Ludwigs I., Bismarck). Staats-
+  persönlichkeiten und Agenden von 14 Staaten (`common/agenden.chron`): Zollverein, Führung im Bund,
+  Bündnisse der Mittelstaaten, Schleswig 1864 und das Schwächen Österreichs und Frankreichs nur mit
+  Bismarck. 35 Ereignisoptionen tragen einen Block `ki { … }`. Forderungen der KI höchstens eine je
+  Abkühlung und Zollforderungen nur an Bundesstaaten (vorher forderte Preußen alle zwei Monate von einem
+  anderen Nachbarn den Beitritt zum Zollverein, auch von den Niederlanden); die Zolleinigung beantragt nur
+  noch die Leitmacht, und Zoll- und Führungsziele gelten erst nach der Revolution. Erstes KI-Labor mit
+  16 Partien bis 1871: Einigung 75 %, kleindeutsch 31 %, zwei Bünde 44 %, Bund 25 %, keine Abstürze.
+  Kalibrierung folgt mit b2.
 - **KI-Labor (Schritt a5):** `uhrwerk-cli ki` rechnet Partien ohne Spieler bis `--bis` und berichtet je
   Lauf Ausgang der deutschen Frage, Kriege, untergegangene Staaten, Bankrotte, höchste Unruhe,
   Entscheidungen der KI je Art, Laufzeit mit dem Anteil der KI und Prüfsumme; über alle Läufe Einigung,

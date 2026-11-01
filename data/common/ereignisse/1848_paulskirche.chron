@@ -242,6 +242,7 @@ ereignis pru.brandenburg {
         text = "Wrangel besetzt Berlin, Belagerungszustand und Vertagung der Versammlung"
         historisch = ja
         gewicht = 75
+        ki { risiko = 1  reform = -1 }
         wirkung {
             zustimmung_militaer = 2
             zustimmung_adel = 2
@@ -253,6 +254,7 @@ ereignis pru.brandenburg {
     option parlamentsministerium {
         text = "Ein Ministerium aus der Mehrheit der Versammlung berufen"
         gewicht = 25
+        ki { reform = 1  vermittlung = 1 }
         wirkung { zustimmung_bildungsbuergertum = 3  zustimmung_militaer = -3  zustimmung_adel = -2  unruhe = -5 }
     }
 }

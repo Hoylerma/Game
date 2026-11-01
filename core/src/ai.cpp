@@ -863,7 +863,9 @@ private:
     }
 
     void plan_demand(Index state) {
-        if (play_of(w_, state) != kNone || (military_active(w_) && in_war(w_, state))) {
+        // Höchstens eine Forderung je Abkühlung (seit b1: sonst wechselte der Staat nur das Ziel).
+        if (play_of(w_, state) != kNone || (military_active(w_) && in_war(w_, state)) ||
+            cooling(state, AiDecisionKind::Demand, kNone)) {
             return;
         }
         struct Candidate {
@@ -886,7 +888,8 @@ private:
             w_.customs_unions[at(union_own)].leader == state) {
             for (const AgendaGoal* g : goals(state, AgendaKind::CustomsUnion, union_own)) {
                 for (const Index other : cache_.neighbors[at(state)]) {
-                    if (alive(other) && w_.states[at(other)].customs_union != union_own) {
+                    if (alive(other) && federal_state(w_, other) &&
+                        w_.states[at(other)].customs_union != union_own) {
                         candidates.push_back({other, DemandKind::CustomsUnion, g->weight});
                     }
                 }
@@ -934,6 +937,7 @@ private:
             out_.push_back(c);
             record(state, AiDecisionKind::Demand, best, c.value, best_option);
             cool(state, AiDecisionKind::Demand, best, w_.ai_rules.cooldown_months);
+            cool(state, AiDecisionKind::Demand, kNone, w_.ai_rules.cooldown_months);
         }
     }
 
@@ -995,9 +999,11 @@ private:
             candidates.push_back({w_.diet_presidency == state ? MotionKind::Reform : MotionKind::Presidency,
                                   kNone, g->weight});
         }
+        // Zolleinigung beantragt nur die Leitmacht der eigenen Union (seit b1: sonst jedes Mitglied).
         const Index union_own = w_.states[at(state)].customs_union;
         for (const AgendaGoal* g : goals(state, AgendaKind::CustomsUnion, union_own)) {
-            if (union_own != kNone) {
+            if (union_own != kNone && in_range(w_.customs_unions, union_own) &&
+                w_.customs_unions[at(union_own)].leader == state) {
                 candidates.push_back({MotionKind::CustomsUnification, union_own, g->weight});
             }
         }

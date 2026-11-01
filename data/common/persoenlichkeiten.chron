@@ -1,0 +1,909 @@
+# Personen mit Amt 1848–1871 (Meilenstein M12, Schritt b1; docs/technik/ki.md Abschnitt 3.3).
+#
+# Format: docs/technik/chronik-skript.md, Abschnitt 3.38. Herrscher und leitende Minister von Preußen,
+# Österreich, Bayern, Sachsen, Hannover, Württemberg, Baden, Hessen-Darmstadt, Kurhessen, Frankreich und
+# Dänemark. Amtsdaten aus der Literatur (sicherheit = ungeprueft, Entscheidung 13); Werte und Eigenschaften
+# sind Spielwerte: funktionsbezogen nach Kapitel 13 (Abschnitt 1.7 sinngemäß), keine Wertung der Person.
+# Eigenschaften und ihre Neigungen stehen in common/ki.chron.
+#
+# Ministerwechsel der Revolution hängen an Ereignissen: Märzministerien nur mit dem Merkmal
+# maerzministerium (Märzforderungen gewährt, Barrikaden: Abzug), Metternich bleibt ohne seine Entlassung,
+# Maximilian II. folgt nur nach der Abdankung Ludwigs I., Bismarck nur mit dem Merkmal bismarck. Im Amt ist
+# von mehreren Personen einer Rolle die zuletzt beginnende; fehlt eine, gilt der Staat ohne Person.
+
+# ─── Preußen ─────────────────────────────────────────────────────────────────
+
+person friedrich_wilhelm_iv {
+    name   = "Friedrich Wilhelm IV."
+    staat  = PRU
+    rolle  = herrscher
+    amt    = "König"
+    von    = 1840.06.07
+    bis    = 1858.10.07
+    werte  = { staatskunst = 4  diplomatie = 5  kriegskunst = 3  wirkung = 6 }
+    eigenschaften = { fromm bewahrer zauderer }
+    quelle = "Clark, Preußen (2007); Barclay, Anarchie und guter Wille (1995)"
+    sicherheit = ungeprueft
+}
+person wilhelm_prinzregent {
+    name   = "Prinz Wilhelm von Preußen"
+    staat  = PRU
+    rolle  = herrscher
+    amt    = "Prinzregent"
+    von    = 1858.10.07
+    bis    = 1861.01.02
+    werte  = { staatskunst = 6  diplomatie = 5  kriegskunst = 7  wirkung = 6 }
+    eigenschaften = { soldatenkoenig bewahrer }
+    quelle = "Clark, Preußen (2007)"
+    sicherheit = ungeprueft
+}
+person wilhelm_i {
+    name   = "Wilhelm I."
+    staat  = PRU
+    rolle  = herrscher
+    amt    = "König"
+    von    = 1861.01.02
+    bis    = 1888.03.09
+    werte  = { staatskunst = 6  diplomatie = 5  kriegskunst = 7  wirkung = 6 }
+    eigenschaften = { soldatenkoenig bewahrer }
+    quelle = "Clark, Preußen (2007)"
+    sicherheit = ungeprueft
+}
+person ernst_von_bodelschwingh {
+    name   = "Ernst von Bodelschwingh"
+    staat  = PRU
+    rolle  = minister
+    amt    = "Kabinettsminister"
+    von    = 1845.01.01
+    bis    = 1848.09.21
+    bedingung { nicht { merkmal = maerzministerium } }
+    werte  = { staatskunst = 5  diplomatie = 4  kriegskunst = 2  wirkung = 4 }
+    eigenschaften = { bewahrer verwalter }
+    quelle = "Huber, Deutsche Verfassungsgeschichte Bd. 2 (1960)"
+    sicherheit = ungeprueft
+}
+person ludolf_camphausen {
+    name   = "Ludolf Camphausen"
+    staat  = PRU
+    rolle  = minister
+    amt    = "Ministerpräsident"
+    von    = 1848.03.29
+    bis    = 1848.06.20
+    bedingung { merkmal = maerzministerium }
+    werte  = { staatskunst = 6  diplomatie = 5  kriegskunst = 2  wirkung = 5 }
+    eigenschaften = { reformer pragmatiker }
+    quelle = "Huber, Deutsche Verfassungsgeschichte Bd. 2 (1960); Siemann (1985)"
+    sicherheit = ungeprueft
+}
+person rudolf_von_auerswald {
+    name   = "Rudolf von Auerswald"
+    staat  = PRU
+    rolle  = minister
+    amt    = "Ministerpräsident"
+    von    = 1848.06.25
+    bis    = 1848.09.21
+    bedingung { merkmal = maerzministerium }
+    werte  = { staatskunst = 5  diplomatie = 4  kriegskunst = 2  wirkung = 4 }
+    eigenschaften = { reformer vorsichtig }
+    quelle = "Huber, Deutsche Verfassungsgeschichte Bd. 2 (1960)"
+    sicherheit = ungeprueft
+}
+person ernst_von_pfuel {
+    name   = "Ernst von Pfuel"
+    staat  = PRU
+    rolle  = minister
+    amt    = "Ministerpräsident"
+    von    = 1848.09.21
+    bis    = 1848.11.01
+    werte  = { staatskunst = 4  diplomatie = 4  kriegskunst = 6  wirkung = 4 }
+    eigenschaften = { pragmatiker vorsichtig }
+    quelle = "Huber, Deutsche Verfassungsgeschichte Bd. 2 (1960)"
+    sicherheit = ungeprueft
+}
+person graf_brandenburg {
+    name   = "Friedrich Wilhelm Graf von Brandenburg"
+    staat  = PRU
+    rolle  = minister
+    amt    = "Ministerpräsident"
+    von    = 1848.11.08
+    bis    = 1850.11.06
+    werte  = { staatskunst = 4  diplomatie = 4  kriegskunst = 6  wirkung = 4 }
+    eigenschaften = { bewahrer soldatenkoenig }
+    quelle = "Clark, Preußen (2007); Siemann (1985)"
+    sicherheit = ungeprueft
+}
+person otto_von_manteuffel {
+    name   = "Otto von Manteuffel"
+    staat  = PRU
+    rolle  = minister
+    amt    = "Ministerpräsident"
+    von    = 1850.12.04
+    bis    = 1858.11.06
+    werte  = { staatskunst = 6  diplomatie = 5  kriegskunst = 2  wirkung = 4 }
+    eigenschaften = { bewahrer vorsichtig }
+    quelle = "Clark, Preußen (2007)"
+    sicherheit = ungeprueft
+}
+person karl_anton_von_hohenzollern {
+    name   = "Karl Anton von Hohenzollern-Sigmaringen"
+    staat  = PRU
+    rolle  = minister
+    amt    = "Ministerpräsident"
+    von    = 1858.11.06
+    bis    = 1862.03.11
+    werte  = { staatskunst = 5  diplomatie = 5  kriegskunst = 3  wirkung = 5 }
+    eigenschaften = { reformer vorsichtig }
+    quelle = "Clark, Preußen (2007)"
+    sicherheit = ungeprueft
+}
+person adolf_zu_hohenlohe_ingelfingen {
+    name   = "Adolf zu Hohenlohe-Ingelfingen"
+    staat  = PRU
+    rolle  = minister
+    amt    = "Ministerpräsident"
+    von    = 1862.03.11
+    bis    = 1862.09.23
+    werte  = { staatskunst = 4  diplomatie = 4  kriegskunst = 3  wirkung = 3 }
+    eigenschaften = { bewahrer }
+    quelle = "Huber, Deutsche Verfassungsgeschichte Bd. 3 (1963)"
+    sicherheit = ungeprueft
+}
+person otto_von_bismarck {
+    name   = "Otto von Bismarck"
+    staat  = PRU
+    rolle  = minister
+    amt    = "Ministerpräsident"
+    von    = 1862.09.23
+    bis    = 1890.03.20
+    bedingung { merkmal = bismarck }
+    werte  = { staatskunst = 8  diplomatie = 10  kriegskunst = 4  wirkung = 7 }
+    eigenschaften = { machtpolitiker taktiker }
+    quelle = "Gall, Bismarck (1980); Pflanze, Bismarck Bd. 1 (1990)"
+    sicherheit = ungeprueft
+}
+
+# ─── Österreich ──────────────────────────────────────────────────────────────
+
+person ferdinand_i {
+    name   = "Ferdinand I."
+    staat  = AUT
+    rolle  = herrscher
+    amt    = "Kaiser"
+    von    = 1835.03.02
+    bis    = 1848.12.02
+    werte  = { staatskunst = 2  diplomatie = 2  kriegskunst = 1  wirkung = 4 }
+    eigenschaften = { fromm zauderer }
+    quelle = "Rumpler, Eine Chance für Mitteleuropa (1997)"
+    sicherheit = ungeprueft
+}
+person franz_joseph_i {
+    name   = "Franz Joseph I."
+    staat  = AUT
+    rolle  = herrscher
+    amt    = "Kaiser"
+    von    = 1848.12.02
+    bis    = 1916.11.21
+    werte  = { staatskunst = 5  diplomatie = 5  kriegskunst = 4  wirkung = 6 }
+    eigenschaften = { bewahrer fromm }
+    quelle = "Rumpler, Eine Chance für Mitteleuropa (1997)"
+    sicherheit = ungeprueft
+}
+person klemens_von_metternich {
+    name   = "Klemens Wenzel von Metternich"
+    staat  = AUT
+    rolle  = minister
+    amt    = "Staatskanzler"
+    von    = 1821.05.25
+    bedingung { nicht { geschehen { ereignis = aut.metternich  option = entlassen } } }
+    werte  = { staatskunst = 7  diplomatie = 9  kriegskunst = 2  wirkung = 5 }
+    eigenschaften = { bewahrer taktiker }
+    quelle = "Siemann, Metternich (2016)"
+    sicherheit = ungeprueft
+}
+person franz_von_pillersdorf {
+    name   = "Franz von Pillersdorf"
+    staat  = AUT
+    rolle  = minister
+    amt    = "Ministerpräsident"
+    von    = 1848.05.04
+    bis    = 1848.07.08
+    bedingung { merkmal = maerzministerium }
+    werte  = { staatskunst = 5  diplomatie = 4  kriegskunst = 2  wirkung = 4 }
+    eigenschaften = { reformer vorsichtig }
+    quelle = "Rumpler, Eine Chance für Mitteleuropa (1997)"
+    sicherheit = ungeprueft
+}
+person johann_von_wessenberg {
+    name   = "Johann von Wessenberg"
+    staat  = AUT
+    rolle  = minister
+    amt    = "Ministerpräsident"
+    von    = 1848.07.19
+    bis    = 1848.11.21
+    bedingung { merkmal = maerzministerium }
+    werte  = { staatskunst = 5  diplomatie = 6  kriegskunst = 2  wirkung = 4 }
+    eigenschaften = { pragmatiker }
+    quelle = "Rumpler, Eine Chance für Mitteleuropa (1997)"
+    sicherheit = ungeprueft
+}
+person felix_zu_schwarzenberg {
+    name   = "Felix zu Schwarzenberg"
+    staat  = AUT
+    rolle  = minister
+    amt    = "Ministerpräsident"
+    von    = 1848.11.21
+    bis    = 1852.04.05
+    werte  = { staatskunst = 7  diplomatie = 7  kriegskunst = 4  wirkung = 6 }
+    eigenschaften = { machtpolitiker draufgaenger }
+    quelle = "Rumpler, Eine Chance für Mitteleuropa (1997); Siemann (1985)"
+    sicherheit = ungeprueft
+}
+person karl_ferdinand_von_buol {
+    name   = "Karl Ferdinand von Buol-Schauenstein"
+    staat  = AUT
+    rolle  = minister
+    amt    = "Außenminister"
+    von    = 1852.04.11
+    bis    = 1859.05.17
+    werte  = { staatskunst = 4  diplomatie = 4  kriegskunst = 2  wirkung = 4 }
+    eigenschaften = { bewahrer ideologe }
+    quelle = "Rumpler, Eine Chance für Mitteleuropa (1997)"
+    sicherheit = ungeprueft
+}
+person johann_bernhard_von_rechberg {
+    name   = "Johann Bernhard von Rechberg"
+    staat  = AUT
+    rolle  = minister
+    amt    = "Außenminister"
+    von    = 1859.05.17
+    bis    = 1864.10.27
+    werte  = { staatskunst = 5  diplomatie = 6  kriegskunst = 2  wirkung = 4 }
+    eigenschaften = { bewahrer pragmatiker }
+    quelle = "Rumpler, Eine Chance für Mitteleuropa (1997)"
+    sicherheit = ungeprueft
+}
+person alexander_von_mensdorff {
+    name   = "Alexander von Mensdorff-Pouilly"
+    staat  = AUT
+    rolle  = minister
+    amt    = "Außenminister"
+    von    = 1864.10.27
+    bis    = 1866.10.30
+    werte  = { staatskunst = 4  diplomatie = 4  kriegskunst = 5  wirkung = 4 }
+    eigenschaften = { vorsichtig zauderer }
+    quelle = "Rumpler, Eine Chance für Mitteleuropa (1997)"
+    sicherheit = ungeprueft
+}
+person friedrich_ferdinand_von_beust_aut {
+    name   = "Friedrich Ferdinand von Beust"
+    staat  = AUT
+    rolle  = minister
+    amt    = "Außenminister, ab 1867 Reichskanzler"
+    von    = 1866.10.30
+    bis    = 1871.11.08
+    werte  = { staatskunst = 6  diplomatie = 7  kriegskunst = 2  wirkung = 5 }
+    eigenschaften = { pragmatiker taktiker }
+    quelle = "Rumpler, Eine Chance für Mitteleuropa (1997)"
+    sicherheit = ungeprueft
+}
+
+# ─── Bayern ──────────────────────────────────────────────────────────────────
+
+person ludwig_i {
+    name   = "Ludwig I."
+    staat  = BAV
+    rolle  = herrscher
+    amt    = "König"
+    von    = 1825.10.13
+    bis    = 1868.02.29
+    bedingung { nicht { geschehen { ereignis = bav.abdankung  option = abdanken } } }
+    werte  = { staatskunst = 5  diplomatie = 4  kriegskunst = 2  wirkung = 4 }
+    eigenschaften = { prunkliebend bewahrer }
+    quelle = "Spindler, Handbuch der bayerischen Geschichte Bd. 4 (1974)"
+    sicherheit = ungeprueft
+}
+person maximilian_ii {
+    name   = "Maximilian II."
+    staat  = BAV
+    rolle  = herrscher
+    amt    = "König"
+    von    = 1848.03.20
+    bis    = 1864.03.10
+    bedingung { geschehen { ereignis = bav.abdankung  option = abdanken } }
+    werte  = { staatskunst = 6  diplomatie = 5  kriegskunst = 2  wirkung = 5 }
+    eigenschaften = { verwalter vorsichtig }
+    quelle = "Spindler, Handbuch der bayerischen Geschichte Bd. 4 (1974)"
+    sicherheit = ungeprueft
+}
+person ludwig_ii {
+    name   = "Ludwig II."
+    staat  = BAV
+    rolle  = herrscher
+    amt    = "König"
+    von    = 1864.03.10
+    bis    = 1886.06.13
+    werte  = { staatskunst = 3  diplomatie = 3  kriegskunst = 1  wirkung = 6 }
+    eigenschaften = { prunkliebend zauderer }
+    quelle = "Spindler, Handbuch der bayerischen Geschichte Bd. 4 (1974)"
+    sicherheit = ungeprueft
+}
+person ludwig_von_der_pfordten {
+    name   = "Ludwig von der Pfordten"
+    staat  = BAV
+    rolle  = minister
+    amt    = "Vorsitzender im Ministerrat"
+    von    = 1849.04.18
+    bis    = 1859.03.27
+    werte  = { staatskunst = 6  diplomatie = 6  kriegskunst = 2  wirkung = 5 }
+    eigenschaften = { bewahrer pragmatiker }
+    quelle = "Huber, Deutsche Verfassungsgeschichte Bd. 3 (1963)"
+    sicherheit = ungeprueft
+}
+person karl_von_schrenck {
+    name   = "Karl von Schrenck-Notzing"
+    staat  = BAV
+    rolle  = minister
+    amt    = "Vorsitzender im Ministerrat"
+    von    = 1859.03.27
+    bis    = 1864.12.04
+    werte  = { staatskunst = 5  diplomatie = 4  kriegskunst = 2  wirkung = 4 }
+    eigenschaften = { bewahrer }
+    quelle = "Spindler, Handbuch der bayerischen Geschichte Bd. 4 (1974)"
+    sicherheit = ungeprueft
+}
+person ludwig_von_der_pfordten_1864 {
+    name   = "Ludwig von der Pfordten"
+    staat  = BAV
+    rolle  = minister
+    amt    = "Vorsitzender im Ministerrat"
+    von    = 1864.12.04
+    bis    = 1866.12.29
+    werte  = { staatskunst = 6  diplomatie = 6  kriegskunst = 2  wirkung = 5 }
+    eigenschaften = { bewahrer pragmatiker }
+    quelle = "Huber, Deutsche Verfassungsgeschichte Bd. 3 (1963)"
+    sicherheit = ungeprueft
+}
+person chlodwig_zu_hohenlohe {
+    name   = "Chlodwig zu Hohenlohe-Schillingsfürst"
+    staat  = BAV
+    rolle  = minister
+    amt    = "Vorsitzender im Ministerrat"
+    von    = 1866.12.31
+    bis    = 1870.03.07
+    werte  = { staatskunst = 6  diplomatie = 6  kriegskunst = 2  wirkung = 5 }
+    eigenschaften = { reformer pragmatiker }
+    quelle = "Huber, Deutsche Verfassungsgeschichte Bd. 3 (1963)"
+    sicherheit = ungeprueft
+}
+person otto_von_bray_steinburg {
+    name   = "Otto von Bray-Steinburg"
+    staat  = BAV
+    rolle  = minister
+    amt    = "Vorsitzender im Ministerrat"
+    von    = 1870.03.08
+    bis    = 1871.07.25
+    werte  = { staatskunst = 5  diplomatie = 6  kriegskunst = 2  wirkung = 4 }
+    eigenschaften = { bewahrer pragmatiker }
+    quelle = "Huber, Deutsche Verfassungsgeschichte Bd. 3 (1963)"
+    sicherheit = ungeprueft
+}
+
+# ─── Sachsen ─────────────────────────────────────────────────────────────────
+
+person friedrich_august_ii {
+    name   = "Friedrich August II."
+    staat  = SAX
+    rolle  = herrscher
+    amt    = "König"
+    von    = 1836.06.06
+    bis    = 1854.08.09
+    werte  = { staatskunst = 5  diplomatie = 4  kriegskunst = 2  wirkung = 5 }
+    eigenschaften = { vorsichtig bewahrer }
+    quelle = "Groß, Geschichte Sachsens (2001)"
+    sicherheit = ungeprueft
+}
+person johann_von_sachsen {
+    name   = "Johann"
+    staat  = SAX
+    rolle  = herrscher
+    amt    = "König"
+    von    = 1854.08.09
+    bis    = 1873.10.29
+    werte  = { staatskunst = 6  diplomatie = 5  kriegskunst = 2  wirkung = 5 }
+    eigenschaften = { verwalter fromm }
+    quelle = "Groß, Geschichte Sachsens (2001)"
+    sicherheit = ungeprueft
+}
+person alexander_braun {
+    name   = "Alexander Karl Hermann Braun"
+    staat  = SAX
+    rolle  = minister
+    amt    = "Vorsitzender im Gesamtministerium"
+    von    = 1848.03.16
+    bis    = 1849.02.24
+    bedingung { merkmal = maerzministerium }
+    werte  = { staatskunst = 5  diplomatie = 4  kriegskunst = 2  wirkung = 5 }
+    eigenschaften = { reformer }
+    quelle = "Groß, Geschichte Sachsens (2001)"
+    sicherheit = ungeprueft
+}
+person friedrich_ferdinand_von_beust {
+    name   = "Friedrich Ferdinand von Beust"
+    staat  = SAX
+    rolle  = minister
+    amt    = "Außenminister, ab 1858 Vorsitzender im Gesamtministerium"
+    von    = 1849.02.24
+    bis    = 1866.10.30
+    werte  = { staatskunst = 6  diplomatie = 7  kriegskunst = 2  wirkung = 5 }
+    eigenschaften = { pragmatiker taktiker }
+    quelle = "Groß, Geschichte Sachsens (2001); Huber, Deutsche Verfassungsgeschichte Bd. 3 (1963)"
+    sicherheit = ungeprueft
+}
+person richard_von_friesen {
+    name   = "Richard von Friesen"
+    staat  = SAX
+    rolle  = minister
+    amt    = "Finanzminister, leitend"
+    von    = 1866.10.30
+    bis    = 1876.10.01
+    werte  = { staatskunst = 6  diplomatie = 5  kriegskunst = 2  wirkung = 4 }
+    eigenschaften = { pragmatiker verwalter }
+    quelle = "Groß, Geschichte Sachsens (2001)"
+    sicherheit = ungeprueft
+}
+
+# ─── Hannover ────────────────────────────────────────────────────────────────
+
+person ernst_august {
+    name   = "Ernst August"
+    staat  = HAN
+    rolle  = herrscher
+    amt    = "König"
+    von    = 1837.06.20
+    bis    = 1851.11.18
+    werte  = { staatskunst = 5  diplomatie = 4  kriegskunst = 4  wirkung = 4 }
+    eigenschaften = { bewahrer draufgaenger }
+    quelle = "Huber, Deutsche Verfassungsgeschichte Bd. 2 (1960)"
+    sicherheit = ungeprueft
+}
+person georg_v {
+    name   = "Georg V."
+    staat  = HAN
+    rolle  = herrscher
+    amt    = "König"
+    von    = 1851.11.18
+    bis    = 1866.09.20
+    werte  = { staatskunst = 3  diplomatie = 3  kriegskunst = 2  wirkung = 4 }
+    eigenschaften = { fromm bewahrer ideologe }
+    quelle = "Huber, Deutsche Verfassungsgeschichte Bd. 3 (1963)"
+    sicherheit = ungeprueft
+}
+person johann_carl_bertram_stueve {
+    name   = "Johann Carl Bertram Stüve"
+    staat  = HAN
+    rolle  = minister
+    amt    = "Innenminister, leitend"
+    von    = 1848.03.22
+    bis    = 1850.10.28
+    werte  = { staatskunst = 7  diplomatie = 5  kriegskunst = 2  wirkung = 5 }
+    eigenschaften = { reformer pragmatiker }
+    quelle = "Huber, Deutsche Verfassungsgeschichte Bd. 2 (1960)"
+    sicherheit = ungeprueft
+}
+person adolf_von_platen_hallermund {
+    name   = "Adolf von Platen-Hallermund"
+    staat  = HAN
+    rolle  = minister
+    amt    = "Außenminister"
+    von    = 1855.07.29
+    bis    = 1866.09.20
+    werte  = { staatskunst = 4  diplomatie = 4  kriegskunst = 2  wirkung = 3 }
+    eigenschaften = { bewahrer zauderer }
+    quelle = "Huber, Deutsche Verfassungsgeschichte Bd. 3 (1963)"
+    sicherheit = ungeprueft
+}
+
+# ─── Württemberg ─────────────────────────────────────────────────────────────
+
+person wilhelm_i_wuerttemberg {
+    name   = "Wilhelm I."
+    staat  = WUE
+    rolle  = herrscher
+    amt    = "König"
+    von    = 1816.10.30
+    bis    = 1864.06.25
+    werte  = { staatskunst = 6  diplomatie = 5  kriegskunst = 4  wirkung = 5 }
+    eigenschaften = { pragmatiker verwalter }
+    quelle = "Weller, Württembergische Geschichte (1989)"
+    sicherheit = ungeprueft
+}
+person karl_wuerttemberg {
+    name   = "Karl"
+    staat  = WUE
+    rolle  = herrscher
+    amt    = "König"
+    von    = 1864.06.25
+    bis    = 1891.10.06
+    werte  = { staatskunst = 3  diplomatie = 3  kriegskunst = 2  wirkung = 4 }
+    eigenschaften = { zauderer }
+    quelle = "Weller, Württembergische Geschichte (1989)"
+    sicherheit = ungeprueft
+}
+person friedrich_roemer {
+    name   = "Friedrich Römer"
+    staat  = WUE
+    rolle  = minister
+    amt    = "Justizminister, leitend"
+    von    = 1848.03.09
+    bis    = 1849.10.28
+    bedingung { merkmal = maerzministerium }
+    werte  = { staatskunst = 6  diplomatie = 4  kriegskunst = 2  wirkung = 6 }
+    eigenschaften = { reformer }
+    quelle = "Weller, Württembergische Geschichte (1989)"
+    sicherheit = ungeprueft
+}
+person joseph_von_linden {
+    name   = "Joseph von Linden"
+    staat  = WUE
+    rolle  = minister
+    amt    = "Innenminister, leitend"
+    von    = 1850.07.02
+    bis    = 1864.09.21
+    werte  = { staatskunst = 6  diplomatie = 4  kriegskunst = 2  wirkung = 4 }
+    eigenschaften = { bewahrer verwalter }
+    quelle = "Weller, Württembergische Geschichte (1989)"
+    sicherheit = ungeprueft
+}
+person karl_von_varnbueler {
+    name   = "Karl von Varnbüler"
+    staat  = WUE
+    rolle  = minister
+    amt    = "Außenminister, leitend"
+    von    = 1864.09.21
+    bis    = 1870.08.31
+    werte  = { staatskunst = 5  diplomatie = 5  kriegskunst = 2  wirkung = 4 }
+    eigenschaften = { pragmatiker }
+    quelle = "Weller, Württembergische Geschichte (1989)"
+    sicherheit = ungeprueft
+}
+person hermann_von_mittnacht {
+    name   = "Hermann von Mittnacht"
+    staat  = WUE
+    rolle  = minister
+    amt    = "Justizminister, leitend"
+    von    = 1870.08.31
+    bis    = 1900.11.10
+    werte  = { staatskunst = 6  diplomatie = 5  kriegskunst = 2  wirkung = 4 }
+    eigenschaften = { pragmatiker verwalter }
+    quelle = "Weller, Württembergische Geschichte (1989)"
+    sicherheit = ungeprueft
+}
+
+# ─── Baden ───────────────────────────────────────────────────────────────────
+
+person leopold_baden {
+    name   = "Leopold"
+    staat  = BAD
+    rolle  = herrscher
+    amt    = "Großherzog"
+    von    = 1830.03.30
+    bis    = 1852.04.24
+    werte  = { staatskunst = 4  diplomatie = 4  kriegskunst = 2  wirkung = 4 }
+    eigenschaften = { vorsichtig reformer }
+    quelle = "Engehausen, Kleine Geschichte des Großherzogtums Baden (2005)"
+    sicherheit = ungeprueft
+}
+person friedrich_i_baden {
+    name   = "Friedrich I."
+    staat  = BAD
+    rolle  = herrscher
+    amt    = "Prinzregent, ab 1856 Großherzog"
+    von    = 1852.04.24
+    bis    = 1907.09.28
+    werte  = { staatskunst = 6  diplomatie = 5  kriegskunst = 3  wirkung = 6 }
+    eigenschaften = { reformer pragmatiker }
+    quelle = "Engehausen, Kleine Geschichte des Großherzogtums Baden (2005)"
+    sicherheit = ungeprueft
+}
+person johann_baptist_bekk {
+    name   = "Johann Baptist Bekk"
+    staat  = BAD
+    rolle  = minister
+    amt    = "Innenminister, leitend"
+    von    = 1846.12.01
+    bis    = 1849.05.14
+    werte  = { staatskunst = 5  diplomatie = 4  kriegskunst = 2  wirkung = 4 }
+    eigenschaften = { reformer vorsichtig }
+    quelle = "Engehausen, Kleine Geschichte des Großherzogtums Baden (2005)"
+    sicherheit = ungeprueft
+}
+person franz_von_roggenbach {
+    name   = "Franz von Roggenbach"
+    staat  = BAD
+    rolle  = minister
+    amt    = "Außenminister, leitend"
+    von    = 1861.05.02
+    bis    = 1865.10.19
+    werte  = { staatskunst = 6  diplomatie = 6  kriegskunst = 2  wirkung = 5 }
+    eigenschaften = { reformer }
+    quelle = "Engehausen, Kleine Geschichte des Großherzogtums Baden (2005)"
+    sicherheit = ungeprueft
+}
+person karl_mathy {
+    name   = "Karl Mathy"
+    staat  = BAD
+    rolle  = minister
+    amt    = "Staatsminister"
+    von    = 1866.07.27
+    bis    = 1868.02.03
+    werte  = { staatskunst = 6  diplomatie = 5  kriegskunst = 2  wirkung = 5 }
+    eigenschaften = { reformer verwalter }
+    quelle = "Engehausen, Kleine Geschichte des Großherzogtums Baden (2005)"
+    sicherheit = ungeprueft
+}
+person julius_jolly {
+    name   = "Julius Jolly"
+    staat  = BAD
+    rolle  = minister
+    amt    = "Staatsminister"
+    von    = 1868.02.03
+    bis    = 1876.09.21
+    werte  = { staatskunst = 6  diplomatie = 5  kriegskunst = 2  wirkung = 4 }
+    eigenschaften = { reformer verwalter }
+    quelle = "Engehausen, Kleine Geschichte des Großherzogtums Baden (2005)"
+    sicherheit = ungeprueft
+}
+
+# ─── Hessen-Darmstadt ────────────────────────────────────────────────────────
+
+person ludwig_iii_hessen {
+    name   = "Ludwig III."
+    staat  = HED
+    rolle  = herrscher
+    amt    = "Mitregent, ab Juni 1848 Großherzog"
+    von    = 1848.03.05
+    bis    = 1877.06.13
+    werte  = { staatskunst = 3  diplomatie = 3  kriegskunst = 2  wirkung = 3 }
+    eigenschaften = { bewahrer zauderer }
+    quelle = "Huber, Deutsche Verfassungsgeschichte Bd. 3 (1963)"
+    sicherheit = ungeprueft
+}
+person heinrich_von_gagern {
+    name   = "Heinrich von Gagern"
+    staat  = HED
+    rolle  = minister
+    amt    = "Staatsminister"
+    von    = 1848.03.05
+    bis    = 1848.05.19
+    bedingung { merkmal = maerzministerium }
+    werte  = { staatskunst = 6  diplomatie = 6  kriegskunst = 2  wirkung = 7 }
+    eigenschaften = { reformer ehrlicher_makler }
+    quelle = "Siemann (1985)"
+    sicherheit = ungeprueft
+}
+person reinhard_von_dalwigk {
+    name   = "Reinhard von Dalwigk"
+    staat  = HED
+    rolle  = minister
+    amt    = "Staatsminister"
+    von    = 1850.06.30
+    bis    = 1871.04.15
+    werte  = { staatskunst = 5  diplomatie = 5  kriegskunst = 2  wirkung = 4 }
+    eigenschaften = { bewahrer ideologe }
+    quelle = "Huber, Deutsche Verfassungsgeschichte Bd. 3 (1963)"
+    sicherheit = ungeprueft
+}
+
+# ─── Kurhessen ───────────────────────────────────────────────────────────────
+
+person friedrich_wilhelm_kurhessen {
+    name   = "Friedrich Wilhelm I."
+    staat  = HEK
+    rolle  = herrscher
+    amt    = "Kurfürst"
+    von    = 1847.11.20
+    bis    = 1866.09.20
+    werte  = { staatskunst = 3  diplomatie = 3  kriegskunst = 2  wirkung = 2 }
+    eigenschaften = { ideologe bewahrer }
+    quelle = "Huber, Deutsche Verfassungsgeschichte Bd. 2 (1960)"
+    sicherheit = ungeprueft
+}
+person bernhard_eberhard {
+    name   = "Bernhard Eberhard"
+    staat  = HEK
+    rolle  = minister
+    amt    = "Innenminister, leitend"
+    von    = 1848.03.11
+    bis    = 1850.02.22
+    bedingung { merkmal = maerzministerium }
+    werte  = { staatskunst = 5  diplomatie = 4  kriegskunst = 2  wirkung = 4 }
+    eigenschaften = { reformer }
+    quelle = "Huber, Deutsche Verfassungsgeschichte Bd. 2 (1960)"
+    sicherheit = ungeprueft
+}
+person hans_daniel_hassenpflug {
+    name   = "Hans Daniel Hassenpflug"
+    staat  = HEK
+    rolle  = minister
+    amt    = "Ministerpräsident"
+    von    = 1850.02.22
+    bis    = 1855.10.16
+    werte  = { staatskunst = 4  diplomatie = 3  kriegskunst = 2  wirkung = 3 }
+    eigenschaften = { ideologe draufgaenger }
+    quelle = "Huber, Deutsche Verfassungsgeschichte Bd. 2 (1960)"
+    sicherheit = ungeprueft
+}
+
+# ─── Frankreich ──────────────────────────────────────────────────────────────
+
+person alphonse_de_lamartine {
+    name   = "Alphonse de Lamartine"
+    staat  = FRK
+    rolle  = minister
+    amt    = "Außenminister der Provisorischen Regierung"
+    von    = 1848.02.24
+    bis    = 1848.05.11
+    werte  = { staatskunst = 4  diplomatie = 6  kriegskunst = 1  wirkung = 8 }
+    eigenschaften = { reformer vorsichtig }
+    quelle = "Price, The French Second Republic (1972)"
+    sicherheit = ungeprueft
+}
+person louis_eugene_cavaignac {
+    name   = "Louis-Eugène Cavaignac"
+    staat  = FRK
+    rolle  = herrscher
+    amt    = "Chef der Exekutivgewalt"
+    von    = 1848.06.28
+    bis    = 1848.12.20
+    werte  = { staatskunst = 5  diplomatie = 4  kriegskunst = 6  wirkung = 5 }
+    eigenschaften = { soldatenkoenig bewahrer }
+    quelle = "Price, The French Second Republic (1972)"
+    sicherheit = ungeprueft
+}
+person louis_napoleon_praesident {
+    name   = "Louis-Napoléon Bonaparte"
+    staat  = FRK
+    rolle  = herrscher
+    amt    = "Präsident der Republik"
+    von    = 1848.12.20
+    bis    = 1852.12.02
+    werte  = { staatskunst = 6  diplomatie = 6  kriegskunst = 3  wirkung = 7 }
+    eigenschaften = { machtpolitiker pragmatiker }
+    quelle = "Price, The French Second Empire (2001)"
+    sicherheit = ungeprueft
+}
+person napoleon_iii {
+    name   = "Napoléon III."
+    staat  = FRK
+    rolle  = herrscher
+    amt    = "Kaiser"
+    von    = 1852.12.02
+    bis    = 1870.09.04
+    werte  = { staatskunst = 6  diplomatie = 6  kriegskunst = 3  wirkung = 7 }
+    eigenschaften = { machtpolitiker prunkliebend }
+    quelle = "Price, The French Second Empire (2001)"
+    sicherheit = ungeprueft
+}
+person emile_ollivier {
+    name   = "Émile Ollivier"
+    staat  = FRK
+    rolle  = minister
+    amt    = "Justizminister, Chef des Kabinetts"
+    von    = 1870.01.02
+    bis    = 1870.08.09
+    werte  = { staatskunst = 5  diplomatie = 3  kriegskunst = 1  wirkung = 6 }
+    eigenschaften = { reformer draufgaenger }
+    quelle = "Price, The French Second Empire (2001)"
+    sicherheit = ungeprueft
+}
+person louis_jules_trochu {
+    name   = "Louis Jules Trochu"
+    staat  = FRK
+    rolle  = herrscher
+    amt    = "Präsident der Regierung der nationalen Verteidigung"
+    von    = 1870.09.04
+    bis    = 1871.02.17
+    werte  = { staatskunst = 4  diplomatie = 3  kriegskunst = 5  wirkung = 4 }
+    eigenschaften = { soldatenkoenig vorsichtig }
+    quelle = "Howard, The Franco-Prussian War (1961)"
+    sicherheit = ungeprueft
+}
+person leon_gambetta {
+    name   = "Léon Gambetta"
+    staat  = FRK
+    rolle  = minister
+    amt    = "Innen- und Kriegsminister"
+    von    = 1870.09.04
+    bis    = 1871.02.06
+    werte  = { staatskunst = 6  diplomatie = 4  kriegskunst = 4  wirkung = 9 }
+    eigenschaften = { ideologe draufgaenger }
+    quelle = "Howard, The Franco-Prussian War (1961)"
+    sicherheit = ungeprueft
+}
+person adolphe_thiers {
+    name   = "Adolphe Thiers"
+    staat  = FRK
+    rolle  = herrscher
+    amt    = "Chef der Exekutivgewalt"
+    von    = 1871.02.17
+    bis    = 1873.05.24
+    werte  = { staatskunst = 7  diplomatie = 6  kriegskunst = 3  wirkung = 6 }
+    eigenschaften = { pragmatiker vorsichtig }
+    quelle = "Howard, The Franco-Prussian War (1961)"
+    sicherheit = ungeprueft
+}
+
+# ─── Dänemark ────────────────────────────────────────────────────────────────
+
+person frederik_vii {
+    name   = "Frederik VII."
+    staat  = DEN
+    rolle  = herrscher
+    amt    = "König"
+    von    = 1848.01.20
+    bis    = 1863.11.15
+    werte  = { staatskunst = 3  diplomatie = 3  kriegskunst = 2  wirkung = 6 }
+    eigenschaften = { prunkliebend reformer }
+    quelle = "Bjørn, Danmarks historie (1990)"
+    sicherheit = ungeprueft
+}
+person christian_ix {
+    name   = "Christian IX."
+    staat  = DEN
+    rolle  = herrscher
+    amt    = "König"
+    von    = 1863.11.15
+    bis    = 1906.01.29
+    werte  = { staatskunst = 4  diplomatie = 4  kriegskunst = 3  wirkung = 4 }
+    eigenschaften = { vorsichtig bewahrer }
+    quelle = "Bjørn, Danmarks historie (1990)"
+    sicherheit = ungeprueft
+}
+person adam_wilhelm_moltke {
+    name   = "Adam Wilhelm Moltke"
+    staat  = DEN
+    rolle  = minister
+    amt    = "Konseilspräsident"
+    von    = 1848.03.22
+    bis    = 1852.01.27
+    werte  = { staatskunst = 5  diplomatie = 5  kriegskunst = 2  wirkung = 4 }
+    eigenschaften = { pragmatiker }
+    quelle = "Bjørn, Danmarks historie (1990)"
+    sicherheit = ungeprueft
+}
+person carl_christian_hall {
+    name   = "Carl Christian Hall"
+    staat  = DEN
+    rolle  = minister
+    amt    = "Konseilspräsident"
+    von    = 1857.05.10
+    bis    = 1863.12.31
+    werte  = { staatskunst = 5  diplomatie = 5  kriegskunst = 2  wirkung = 5 }
+    eigenschaften = { ideologe }
+    quelle = "Bjørn, Danmarks historie (1990)"
+    sicherheit = ungeprueft
+}
+person ditlev_gothard_monrad {
+    name   = "Ditlev Gothard Monrad"
+    staat  = DEN
+    rolle  = minister
+    amt    = "Konseilspräsident"
+    von    = 1863.12.31
+    bis    = 1864.07.11
+    werte  = { staatskunst = 4  diplomatie = 3  kriegskunst = 2  wirkung = 5 }
+    eigenschaften = { ideologe draufgaenger }
+    quelle = "Bjørn, Danmarks historie (1990)"
+    sicherheit = ungeprueft
+}
+person christian_albrecht_bluhme {
+    name   = "Christian Albrecht Bluhme"
+    staat  = DEN
+    rolle  = minister
+    amt    = "Konseilspräsident"
+    von    = 1864.07.11
+    bis    = 1865.11.06
+    werte  = { staatskunst = 5  diplomatie = 5  kriegskunst = 2  wirkung = 4 }
+    eigenschaften = { pragmatiker vorsichtig }
+    quelle = "Bjørn, Danmarks historie (1990)"
+    sicherheit = ungeprueft
+}
