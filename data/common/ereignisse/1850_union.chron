@@ -51,7 +51,7 @@ ereignis hek.verfassungskonflikt {
         text = "Den Bund um Exekution bitten"
         historisch = ja
         gewicht = 70
-        ki { legitimitaet = 1  reform = -1 }
+        ki { legitimitaet = 0.5  reform = -0.5 }
         wirkung {
             welt_merke = kurhessen_krise
             zustimmung_beamtenschaft = -3
@@ -63,7 +63,7 @@ ereignis hek.verfassungskonflikt {
     option verfassung {
         text = "Die Verfassung achten und mit den Ständen verhandeln"
         gewicht = 30
-        ki { reform = 1 }
+        ki { reform = 0.5 }
         wirkung { zustimmung_beamtenschaft = 2  zustimmung_adel = -1  unruhe = -5 }
     }
 }
@@ -92,13 +92,13 @@ ereignis pru.olmuetz {
         text = "Nachgeben: auf die Union verzichten und zum Bund zurückkehren"
         historisch = ja
         gewicht = 70
-        ki { vermittlung = 1  risiko = -1 }
+        ki { legitimitaet = 0.5 }
         wirkung { welt_merke = olmuetz  beziehung_AUT = 20  zustimmung_militaer = -2  zustimmung_nationalbewegung = -3 }
     }
     option standhalten {
         text = "Standhalten: die Union notfalls mit Krieg verteidigen"
         gewicht = 30
-        ki { risiko = 1  expansion = 1 }
+        ki { risiko = 0.5 }
         gewicht_wenn { zustimmung_militaer >= 3  plus = 10 }
         wirkung {
             welt_merke = olmuetz_standgehalten
@@ -126,13 +126,13 @@ ereignis aut.olmuetz.antwort {
     option krieg {
         text = "Der Bund vollstreckt die Exekution in Kurhessen, notfalls gegen Preußen"
         gewicht = 60
-        ki { risiko = 1  expansion = 1 }
+        ki { risiko = 0.5 }
         wirkung { welt_merke = bruderkrieg_1850  mobilmachung = ja  krieg = PRU  zustimmung_militaer = 2 }
     }
     option einlenken {
         text = "Die Union hinnehmen und den Bund ohne Preußen weiterführen"
         gewicht = 40
-        ki { vermittlung = 1 }
+        ki { vermittlung = 0.5 }
         wirkung {
             welt_merke = union_anerkannt
             beziehung_PRU = 15

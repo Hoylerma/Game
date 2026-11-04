@@ -54,6 +54,9 @@ var _goal_button: Button = null
 ## Stand der Zielauswahl (_fill_goal_options); leer: neu füllen.
 var _goal_key := ""
 var _note: Label = null
+## Begründung einer Kriegserklärung der KI (seit M12, ki.md 9): main.gd liefert sie über reasons_source
+## (Staat, Ziel, SimulationClient.AI_* → Gründe oder "").
+var reasons_source: Callable = Callable()
 var _army_summary: Label = null
 var _army_rows: VBoxContainer = null
 
@@ -407,6 +410,13 @@ func _fill_detail() -> void:
 		return
 	var side := int(war.get("player_side", 0))
 	_war_title.text = "%s (seit %s)" % [str(war.get("name", "")), str(war.get("started_text", ""))]
+	var attackers: Array = war.get("attackers", [])
+	var defenders: Array = war.get("defenders", [])
+	var reasons := ""
+	if reasons_source.is_valid() and not attackers.is_empty() and not defenders.is_empty():
+		reasons = str(reasons_source.call(int(attackers[0]), int(defenders[0]), SimulationClient.AI_DECLARE_WAR))
+	_war_title.mouse_filter = Control.MOUSE_FILTER_PASS
+	_war_title.tooltip_text = "Gründe der Kriegserklärung: " + reasons if not reasons.is_empty() else ""
 	_side_label("ANGREIFER" + (" (WIR)" if side > 0 else ""), true)
 	_side_label("VERTEIDIGER" + (" (WIR)" if side < 0 else ""), true)
 	_side_label(_names(war.get("attackers", [])), false)

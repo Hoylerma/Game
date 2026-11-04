@@ -169,12 +169,12 @@ Fixed ai_strength(const World& world, Index state) {
     return std::max(state_soldiers(world, state), reserve);
 }
 
-Fixed ai_threat(const World& world, const EventCache& cache, Index state, Index other) {
-    if (state == other || !in_range(world.states, state) || !in_range(world.states, other)) {
-        return Fixed::zero();
-    }
-    const Fixed own = ai_strength(world, state);
-    const Fixed theirs = ai_strength(world, other);
+namespace {
+
+/// Bedrohung aus den Stärken beider Staaten (ai_threat; der Planer reicht seine einmal je Monatserstem
+/// berechneten Stärken herein).
+Fixed threat_from(const World& world, const EventCache& cache, Index state, Index other, Fixed own,
+                  Fixed theirs) {
     if (own <= Fixed::zero() || theirs <= Fixed::zero()) {
         return Fixed::zero();
     }
@@ -192,6 +192,15 @@ Fixed ai_threat(const World& world, const EventCache& cache, Index state, Index 
         proximity = Fixed::from_ratio(3, 5);
     }
     return theirs / own * hostility * proximity;
+}
+
+} // namespace
+
+Fixed ai_threat(const World& world, const EventCache& cache, Index state, Index other) {
+    if (state == other || !in_range(world.states, state) || !in_range(world.states, other)) {
+        return Fixed::zero();
+    }
+    return threat_from(world, cache, state, other, ai_strength(world, state), ai_strength(world, other));
 }
 
 // ─── Gründe und Protokoll (Abschnitt 5) ─────────────────────────────────────
@@ -309,9 +318,25 @@ public:
     Planner(World& world, Pcg32& rng, const EventCache& cache, std::vector<Command>& out)
         : w_(world), rng_(rng), cache_(cache), out_(out) {}
 
+    Fixed strength(Index state) const {
+        return in_range(strength_, state) ? strength_[at(state)] : Fixed::zero();
+    }
+
+    Fixed threat(Index state, Index other) const {
+        if (state == other || !in_range(strength_, state) || !in_range(strength_, other)) {
+            return Fixed::zero();
+        }
+        return threat_from(w_, cache_, state, other, strength(state), strength(other));
+    }
+
     void run() {
         const std::size_t states = w_.states.size();
         expire_cooldowns();
+        // Stärken ändern sich während der Planung nicht (Befehle wirken am nächsten Tag): einmal berechnen.
+        strength_.resize(states);
+        for (std::size_t s = 0; s < states; ++s) {
+            strength_[s] = ai_strength(w_, static_cast<Index>(s));
+        }
         for (std::size_t s = 0; s < states; ++s) {
             const auto state = static_cast<Index>(s);
             if (state == w_.event_player || !in_range(cache_.alive, state) || cache_.alive[s] == 0) {
@@ -453,7 +478,7 @@ private:
                 if (other == state || cache_.alive[o] == 0) {
                     continue;
                 }
-                const Fixed threat = ai_threat(w_, cache_, state, other);
+                const Fixed threat = this->threat(state, other);
                 if (threat > most) {
                     most = threat;
                     rival = other;
@@ -599,7 +624,7 @@ private:
             if (phase != MobilizationPhase::Mobilizing && phase != MobilizationPhase::Mobilized) {
                 continue;
             }
-            const Fixed threat = ai_threat(w_, cache_, state, other);
+            const Fixed threat = this->threat(state, other);
             if (threat > w_.ai_rules.threat_mobilize && relation(w_, state, other) < Fixed::zero() &&
                 threat > most) {
                 most = threat;
@@ -701,26 +726,26 @@ private:
             o.add(AiFactor::Neighbor, Fixed::from_int(10), other);
         }
         if (strongest > Fixed::zero()) {
-            o.add(AiFactor::Strength, Fixed::from_int(10) * ai_strength(w_, other) / strongest, other);
+            o.add(AiFactor::Strength, Fixed::from_int(10) * strength(other) / strongest, other);
         }
         return o;
     }
 
     void plan_envoy(Index state) {
-        if (envoy_count(w_, state) >= envoy_capacity(w_, state) ||
+        if (w_.relations.empty() || envoy_count(w_, state) >= envoy_capacity(w_, state) ||
             cooling(state, AiDecisionKind::SendEnvoy, kNone)) {
             return;
         }
         Fixed strongest;
         for (std::size_t o = 0; o < w_.states.size(); ++o) {
-            strongest = std::max(strongest, ai_strength(w_, static_cast<Index>(o)));
+            strongest = std::max(strongest, strength(static_cast<Index>(o)));
         }
         Index best = kNone;
         Option best_option;
         for (std::size_t o = 0; o < w_.states.size(); ++o) {
             const auto other = static_cast<Index>(o);
-            if (other == state || !alive(other) || has_envoy(w_, state, other) ||
-                evaluate_envoy(w_, state, other, true) != DiplomacyDecision::Accepted) {
+            // Wie evaluate_envoy: Kapazität ist oben geprüft und ändert sich in der Schleife nicht.
+            if (other == state || !alive(other) || has_envoy(w_, state, other)) {
                 continue;
             }
             Option option = importance(state, other, strongest);
@@ -763,7 +788,7 @@ private:
             cooling(state, AiDecisionKind::OfferAlliance, kNone) || at_war_any(state)) {
             return;
         }
-        const Fixed own = ai_strength(w_, state);
+        const Fixed own = strength(state);
         Index best = kNone;
         Option best_option;
         for (std::size_t o = 0; o < w_.states.size(); ++o) {
@@ -772,10 +797,16 @@ private:
                 at_war_any(other)) {
                 continue;
             }
-            const Index rival = common_rival(state, other);
+            // Der gemeinsame Rivale zählt nur, wenn er für den Staat ein Gegner ist (Beziehung unter
+            // rival_below; seit b2: sonst verbündete sich fast jeder Bundesstaat gegen die nächste
+            // Großmacht).
+            Index rival = common_rival(state, other);
+            if (rival != kNone && relation(w_, state, rival) >= w_.diplomacy_rules.rival_below) {
+                rival = kNone;
+            }
             const Fixed agenda = goal_weight(state, AgendaKind::Alliance, other);
             if (rival == kNone && agenda <= Fixed::zero()) {
-                continue; // Bündnisse nur gegen einen gemeinsamen Rivalen oder aus der Agenda
+                continue; // Bündnisse nur gegen einen gemeinsamen Gegner oder aus der Agenda
             }
             if (evaluate_treaty(w_, state, other, TreatyAction::Alliance) != DiplomacyDecision::Accepted) {
                 continue;
@@ -785,10 +816,9 @@ private:
             if (rival != kNone) {
                 option.add(AiFactor::Rival, Fixed::from_int(20), rival);
             }
-            option.add(
-                AiFactor::Strength,
-                std::min(Fixed::from_int(10) * ratio(ai_strength(w_, other), own), Fixed::from_int(20)),
-                other);
+            option.add(AiFactor::Strength,
+                       std::min(Fixed::from_int(10) * ratio(strength(other), own), Fixed::from_int(20)),
+                       other);
             option.add(AiFactor::Relation, relation(w_, state, other) / Fixed::from_int(20), other);
             option.add(AiFactor::Alliances, Fixed::from_int(-5) * Fixed::from_int(alliance_count(state)));
             if (best == kNone || option.sum() > best_option.sum()) {
@@ -810,12 +840,12 @@ private:
             return;
         }
         // Eine Großmacht (dreifache Stärke) garantiert einen kleinen Nachbarn im eigenen Lager.
-        const Fixed own = ai_strength(w_, state);
+        const Fixed own = strength(state);
         Index best = kNone;
         Option best_option;
         for (const Index other : cache_.neighbors[at(state)]) {
             if (!alive(other) || other == w_.event_player || at_war_any(other) ||
-                ratio(own, ai_strength(w_, other)) < Fixed::from_int(3) ||
+                ratio(own, strength(other)) < Fixed::from_int(3) ||
                 evaluate_treaty(w_, state, other, TreatyAction::Guarantee) != DiplomacyDecision::Accepted) {
                 continue;
             }
@@ -853,10 +883,10 @@ private:
 
     /// Bündnisstärke: eigene Stärke und die der Verbündeten.
     Fixed alliance_strength(Index state) const {
-        Fixed total = ai_strength(w_, state);
+        Fixed total = strength(state);
         for (const Treaty& t : w_.treaties) {
             if (t.kind == TreatyKind::Alliance && (t.from == state || t.to == state)) {
-                total += ai_strength(w_, t.from == state ? t.to : t.from);
+                total += strength(t.from == state ? t.to : t.from);
             }
         }
         return total;
@@ -888,8 +918,11 @@ private:
             w_.customs_unions[at(union_own)].leader == state) {
             for (const AgendaGoal* g : goals(state, AgendaKind::CustomsUnion, union_own)) {
                 for (const Index other : cache_.neighbors[at(state)]) {
-                    if (alive(other) && federal_state(w_, other) &&
-                        w_.states[at(other)].customs_union != union_own) {
+                    // Seit b2 nur Mitglieder einer anderen Union (Union gegen Union, etwa Zollverein gegen
+                    // Steuerverein): Staaten ohne Union blieben historisch draußen.
+                    const Index other_union = w_.states[at(other)].customs_union;
+                    if (alive(other) && federal_state(w_, other) && other_union != kNone &&
+                        other_union != union_own) {
                         candidates.push_back({other, DemandKind::CustomsUnion, g->weight});
                     }
                 }
@@ -936,6 +969,7 @@ private:
             c.value = Fixed::from_int(static_cast<std::int64_t>(best_kind));
             out_.push_back(c);
             record(state, AiDecisionKind::Demand, best, c.value, best_option);
+            chronicle_reasons(state, best_option); // seit b3: Gründe auch in der Chronik (ki.md 9)
             cool(state, AiDecisionKind::Demand, best, w_.ai_rules.cooldown_months);
             cool(state, AiDecisionKind::Demand, kNone, w_.ai_rules.cooldown_months);
         }
@@ -999,14 +1033,9 @@ private:
             candidates.push_back({w_.diet_presidency == state ? MotionKind::Reform : MotionKind::Presidency,
                                   kNone, g->weight});
         }
-        // Zolleinigung beantragt nur die Leitmacht der eigenen Union (seit b1: sonst jedes Mitglied).
-        const Index union_own = w_.states[at(state)].customs_union;
-        for (const AgendaGoal* g : goals(state, AgendaKind::CustomsUnion, union_own)) {
-            if (union_own != kNone && in_range(w_.customs_unions, union_own) &&
-                w_.customs_unions[at(union_own)].leader == state) {
-                candidates.push_back({MotionKind::CustomsUnification, union_own, g->weight});
-            }
-        }
+        // Die Zolleinigung des Bundes beantragt die KI nicht (seit b2): Der Beschluss führte alle
+        // Bundesstaaten samt Österreich in die Union der Leitmacht, die das historisch gerade verhinderte.
+        // Ziele der Art zollunion wirken über Forderungen und Beitritte.
         for (const Candidate& c : candidates) {
             const auto key = static_cast<Index>(c.kind);
             if (cooling(state, AiDecisionKind::Motion, key) ||
@@ -1111,7 +1140,7 @@ private:
     Fixed war_side_strength(const std::vector<Index>& side) const {
         Fixed total;
         for (const Index s : side) {
-            total += ai_strength(w_, s);
+            total += strength(s);
         }
         return total;
     }
@@ -1162,8 +1191,9 @@ private:
             std::vector<Index> attackers;
             std::vector<Index> defenders;
             war_sides(w_, state, enemy, attackers, defenders);
-            if (tactician && defenders.size() > 1) {
-                continue; // Taktiker warten, bis der Gegner allein steht
+            if (tactician && defenders.size() > attackers.size()) {
+                continue; // Taktiker warten auf einen günstigen Bündnisfall (Gegner mit höchstens so vielen
+                          // Staaten)
             }
             const Fixed r = ratio(war_side_strength(attackers), war_side_strength(defenders));
             if (r < needed) {
@@ -1415,6 +1445,7 @@ private:
     Pcg32& rng_;
     const EventCache& cache_;
     std::vector<Command>& out_;
+    std::vector<Fixed> strength_; // je Staat, einmal je Monatserstem (run)
     Inclinations inclinations_{};
 };
 

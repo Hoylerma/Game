@@ -56,6 +56,10 @@ var _list_scroll: ScrollContainer = null
 var _row_by_state := {}
 var _detail_title: Label = null
 var _detail_info: Label = null
+## Absichten und letzte Entscheidungen der KI des gewählten Staates (seit M12, Schritt b3, ki.md 9).
+const AI_DECISIONS_SHOWN := 3
+var _intentions: Label = null
+var _decisions: VBoxContainer = null
 var _action_buttons := {}
 var _question_box: VBoxContainer = null
 var _question: Label = null
@@ -150,6 +154,11 @@ func select_state(state: int) -> void:
 	_highlight_rows()
 
 
+## Steht der Staat in der Liste (Tests)?
+func has_state(state: int) -> bool:
+	return _row_by_state.has(state)
+
+
 func selected_state() -> int:
 	return _selected
 
@@ -162,7 +171,7 @@ func show_note(text: String) -> void:
 
 ## Text des Fensters, zeilenweise (für Tests): Zusammenfassung, Auswahl, Knöpfe, Bundesversammlung.
 func window_text() -> String:
-	var lines := PackedStringArray([_summary.text, _detail_title.text, _detail_info.text])
+	var lines := PackedStringArray([_summary.text, _detail_title.text, _detail_info.text, ai_text()])
 	for key: String in _action_buttons:
 		var button: Button = _action_buttons[key]
 		lines.append("[%s%s]" % [button.text, " gesperrt" if button.disabled else ""])
@@ -251,6 +260,14 @@ func _build_states_tab() -> Control:
 	tab.add_child(_detail_title)
 	_detail_info = _label(&"MutedLabel", true)
 	tab.add_child(_detail_info)
+	_intentions = _label(&"MutedLabel", true)
+	_intentions.name = "Intentions"
+	_intentions.mouse_filter = Control.MOUSE_FILTER_PASS
+	tab.add_child(_intentions)
+	_decisions = VBoxContainer.new()
+	_decisions.name = "AiDecisions"
+	_decisions.add_theme_constant_override(&"separation", 1)
+	tab.add_child(_decisions)
 	var grid := GridContainer.new()
 	grid.name = "Actions"
 	grid.columns = 2
@@ -517,6 +534,10 @@ func _fill_detail() -> void:
 	if entry.is_empty():
 		_detail_title.text = "Kein Staat gewählt"
 		_detail_info.text = ""
+		_intentions.visible = false
+		for child in _decisions.get_children():
+			_decisions.remove_child(child)
+			child.queue_free()
 		for key: String in _action_buttons:
 			(_action_buttons[key] as Button).disabled = true
 		_war_button.disabled = true
@@ -542,6 +563,7 @@ func _fill_detail() -> void:
 			GermanFormat.integer(int(actions.get("other_strength", 0))),
 		]
 	)
+	_fill_ai(entry)
 	for action: Array in ACTIONS:
 		var key := str(action[0])
 		var button: Button = _action_buttons[key]
@@ -562,6 +584,55 @@ func _fill_detail() -> void:
 	)
 	if not can_declare:
 		_war_box.visible = false
+
+
+## Absichten (Hauptziel, Rivale, aktive Ziele) nur mit eigenem Gesandten beim Staat (Kapitel 21,
+## Abschnitt 9: Lagebild); die letzten Entscheidungen sind öffentlich, ihre Gründe im Tooltip („Warum?“).
+func _fill_ai(entry: Dictionary) -> void:
+	for child in _decisions.get_children():
+		_decisions.remove_child(child)
+		child.queue_free()
+	var intentions := _sim.get_intentions(_selected)
+	_intentions.visible = not intentions.is_empty()
+	if intentions.is_empty():
+		return
+	if not bool(entry.get("envoy", false)):
+		_intentions.text = "Absichten: unbekannt – dafür braucht es einen Gesandten in %s." % str(
+			entry.get("short_name", "")
+		)
+		_intentions.tooltip_text = ""
+	else:
+		var goal := str(intentions.get("goal_text", ""))
+		var rival := str(intentions.get("rival_name", ""))
+		_intentions.text = "Absichten: Hauptziel %s · Rivale %s" % [
+			goal if not goal.is_empty() else "keines", rival if not rival.is_empty() else "keiner"
+		]
+		var goals := PackedStringArray()
+		for g: Dictionary in intentions.get("goals", []):
+			goals.append("%s (Gewicht %d)" % [str(g.get("text", "")), roundi(float(g.get("weight", 0.0)))])
+		_intentions.tooltip_text = (
+			"Persönlichkeit: %s\nAktive Ziele: %s"
+			% [str(intentions.get("personality", "")), ", ".join(goals) if not goals.is_empty() else "keine"]
+		)
+	var shown := 0
+	for d: Dictionary in _sim.get_ai_decisions(_selected, AI_DECISIONS_SHOWN):
+		var line := _label(&"MutedLabel", true)
+		line.name = "Decision%d" % shown
+		line.text = "%s: %s – Warum?" % [str(d.get("date_text", "")), str(d.get("text", ""))]
+		line.mouse_filter = Control.MOUSE_FILTER_PASS
+		line.tooltip_text = "Gründe: " + str(d.get("reasons_text", ""))
+		_decisions.add_child(line)
+		shown += 1
+
+
+## Text der KI-Angaben zum gewählten Staat mit den Gründen (Tests).
+func ai_text() -> String:
+	var lines := PackedStringArray()
+	if _intentions.visible:
+		lines.append(_intentions.text)
+	for child in _decisions.get_children():
+		lines.append("%s (%s)" % [(child as Label).text, (child as Label).tooltip_text])
+	return "\n".join(lines)
 
 
 func _names_text(names: PackedStringArray) -> String:

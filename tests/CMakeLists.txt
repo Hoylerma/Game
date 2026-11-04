@@ -149,6 +149,13 @@ if(UHRWERK_BUILD_CLI)
     set_tests_properties(ki_fixture_ohne_ki PROPERTIES PASS_REGULAR_EXPRESSION
         "Krieg Brandenburg – Anhalt in 0,0 % der Läufe")
 
+    # KI-Labor 1848 (seit M12b): ein kurzer Lauf bis Ende Juni 1848 prüft nur, dass das Labor mit dem Inhalt
+    # rechnet und nicht abstürzt (die Korridore bis 1871 prüft der CI-Job „Balancing“ mit 16 Partien).
+    add_test(NAME ki_1848
+        COMMAND uhrwerk-cli ki --daten ${PROJECT_SOURCE_DIR}/data --szenario voelkerfruehling --seeds 2 --parallel 2
+                --bis 1848.06.30)
+    set_tests_properties(ki_1848 PROPERTIES PASS_REGULAR_EXPRESSION "Abstürze +0 +0,0 %")
+
     # Kriegslesezeichen (seit M10b, militaer.md Abschnitt 6.1): Daten, ein kurzer Lauf des Krieges aus
     # dem Lesezeichen und der Speichertest mitten im Krieg 1866. Der kurze Lauf prüft nur, dass das Labor
     # rechnet; die Korridore (seit b2) prüft das Kriegslabor mit 16 Seeds in der CI.

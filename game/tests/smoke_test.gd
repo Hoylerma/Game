@@ -315,7 +315,48 @@ func _check_scenario_1848() -> void:
 	_check_elections_1848(sim)
 	_check_customs_1848(sim)
 	_check_diplomacy_1848(sim)
+	_check_ai_1848(sim)
 	_check_events_1848()
+
+
+## KI der Staaten 1848 (seit M12, Schritt b3, ki.md Abschnitt 9): Personen im Amt, Absichten mit
+## Neigungen, Entscheidungen mit Gründen.
+func _check_ai_1848(sim: SimulationClient) -> void:
+	var prussia := sim.get_state_index("PRU")
+	var austria := sim.get_state_index("AUT")
+	var persons := sim.get_state_persons(prussia)
+	var ruler: Dictionary = persons[0] if not persons.is_empty() else {}
+	_check(
+		persons.size() >= 1 and str(ruler.get("role", "")) == "herrscher"
+		and str(ruler.get("name", "")) == "Friedrich Wilhelm IV." and (ruler.get("traits", []) as Array).size() == 3
+		and int((ruler.get("values", {}) as Dictionary).get("diplomatie", 0)) > 0
+		and sim.get_state_persons(-1).is_empty(),
+		"get_state_persons: %s" % ", ".join(persons.map(func(p: Dictionary) -> String: return str(p.get("name", "")))),
+		"get_state_persons: %s" % str(persons)
+	)
+	var intentions := sim.get_intentions(austria)
+	_check(
+		str(intentions.get("personality", "")) == "Bewahrer" and (intentions.get("inclinations", {}) as Dictionary).size() == 6
+		and (intentions.get("inclination_names", []) as Array).size() == 6 and bool(sim.get_intentions(prussia).get("player", false))
+		and intentions.get("goals", null) is Array,
+		"get_intentions: Österreich %s, Rivale %s, %d aktive Ziele" % [
+			intentions.get("personality"), intentions.get("rival_name"), (intentions.get("goals", []) as Array).size()
+		],
+		"get_intentions: %s" % str(intentions)
+	)
+	var decision: Dictionary = {}
+	for state in sim.get_state_count():
+		var list := sim.get_ai_decisions(state, 1)
+		if not list.is_empty():
+			decision = list[0]
+			break
+	_check(
+		not decision.is_empty() and not str(decision.get("text", "")).is_empty()
+		and not str(decision.get("reasons_text", "")).is_empty() and (decision.get("reasons", []) as Array).size() >= 1
+		and sim.get_ai_decisions(prussia, 5).is_empty(),
+		"get_ai_decisions: „%s“ – %s" % [decision.get("text"), decision.get("reasons_text")],
+		"get_ai_decisions: %s" % str(decision)
+	)
 
 
 ## Ereignisse 1848 (seit M11, Schritt b4, ereignisse.md Abschnitt 9): Baden wartet auf seine

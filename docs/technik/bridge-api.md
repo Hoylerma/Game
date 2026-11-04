@@ -136,6 +136,18 @@ sind die Listen leer und die Befehle werden abgewiesen. Die Befehle wirken am n�
 | `get_state_events(state_index: int)` | `Dictionary` | `laws` (je `{ group, option }`), `approvals` (je Interessengruppe `{ id, name, color, value }`, −100 … +100), `unrest`, `unrest_target` (0–100), `revolt` (`{ kind_text, strength, since_text, helper_index, helper_name }`, leer ohne Aufstand), `timed` (befristete Wirkungen `{ text, until_text }`), `pending` (offene Ereignisse) |
 | `get_revolts()` | `Array` | laufende Aufstände `{ state_index, state_name, capital_index, kind_text, strength, since_text, helper_index }` |
 
+### KI der Staaten (seit M12, Schritt b3)
+
+Regeln: [ki.md](ki.md), Abschnitte 3, 5 und 9. Ohne KI (1648, vor `ki.chron seit`) sind die Listen
+leer; `get_intentions` liefert dann nur `player` und leere Ziele. Den Spielerstaat, den die KI
+auslässt, setzt `set_event_player` (Abschnitt Ereignisse).
+
+| Methode | Rückgabe | Beschreibung |
+|---|---|---|
+| `get_state_persons(state_index: int)` | `Array` | Herrscher und leitender Minister im Amt, je `{ id, name, role ("herrscher" oder "minister"), title (Amtstitel, sonst „Herrscher“ bzw. „leitender Minister“), since_text, values ({ staatskunst, diplomatie, kriegskunst, wirkung }), traits (Namen der Eigenschaften), inclinations ({ risiko, expansion, legitimitaet, reform, sparsamkeit, vermittlung }, Summe der Eigenschaften), weight (Anteil an den Neigungen des Staates), source }`; leer ohne Ämter |
+| `get_intentions(state_index: int)` | `Dictionary` | `player` (Spielerstaat, für ihn plant die KI nicht), `personality` (Name der Staatspersönlichkeit), `inclinations` (Neigungen des Staates wie oben), `inclination_keys`, `inclination_names` (Reihenfolge und Anzeigenamen), `rival_index` (−1 ohne), `rival_name`, `goal_text` (Hauptziel als Satz, leer ohne), `goals` (aktive Ziele, je `{ kind, text, weight, main }`); leer bei ungültigem Index |
+| `get_ai_decisions(state_index: int, limit: int)` | `Array` | KI-Protokoll des Staates, neueste zuerst, höchstens `limit`, je `{ date_text, kind (Art wie `AiDecisionKind`: 7 Forderung, 11 Kriegserklärung, …), text („fordert von Österreich die Führung im Bund“), target_index, utility, reasons (höchstens drei Gründe als Texte), reasons_text („Legitimität +10, Rivale +8“) }` |
+
 ### Spielstände (seit M6)
 
 Format, Prüfungen und Godot-Seite: [speicherstaende.md](speicherstaende.md). Pfade sind

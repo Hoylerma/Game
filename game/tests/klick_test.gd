@@ -985,6 +985,29 @@ func _check_diplomacy_ui(sim: SimulationClient) -> void:
 	window.refresh(true)
 	if not window.window_text().contains("unser Gesandter"):
 		_fail("Gesandter am nächsten Tag nicht in der Liste („%s“)" % window.window_text().left(300))
+	# KI (seit M12, ki.md 9): Absichten Bayerns mit eigenem Gesandten, „Warum?“ an einer Entscheidung der KI,
+	# Regierung Preußens in der Staatsinfo.
+	window.select_state(bavaria)
+	await _frames(1)
+	if not window.ai_text().contains("Absichten: Hauptziel"):
+		_fail("Absichten mit Gesandtem in Bayern: „%s“" % window.ai_text())
+	var deciding := -1
+	for state in sim.get_state_count():
+		if state != prussia and not sim.get_ai_decisions(state, 1).is_empty() and window.has_state(state):
+			deciding = state
+			break
+	if deciding < 0:
+		_fail("Keine Entscheidung der KI bis hierher")
+	else:
+		window.select_state(deciding)
+		await _frames(1)
+		var ai := window.ai_text()
+		if not ai.contains("Warum?") or not ai.contains("Gründe: "):
+			_fail("„Warum?“ an einer Entscheidung der KI: „%s“" % ai)
+	state_panel.show_state(sim.get_state(prussia), "")
+	var government := state_panel.government_text()
+	if not government.contains("König: Friedrich Wilhelm IV.") or not government.contains("Neigungen (Machtpolitiker)"):
+		_fail("Staatsinfo Preußen ohne Regierung: „%s“" % government)
 	state_panel.show_budget()
 	await _frames(1)
 	if not state_panel.budget_text().contains("Gesandte"):
@@ -1041,7 +1064,7 @@ func _check_diplomacy_ui(sim: SimulationClient) -> void:
 	if window.is_open():
 		_fail("Escape schließt das Fenster Diplomatie nicht")
 	_main.call("set_map_mode", MapModes.MAP_POLITICAL)
-	print("  Diplomatie: Taste #, Gesandter nach Bayern, Krise um die Führung im Bund mit Nachgeben, Antrag Bundesreform")
+	print("  Diplomatie: Taste #, Gesandter nach Bayern, Absichten Bayerns, „Warum?“ an einer Entscheidung der KI, Regierung Preußens, Krise um die Führung im Bund mit Nachgeben, Antrag Bundesreform")
 
 
 ## Wahlen 1848 (seit M8): Taste Ä, Wahlkreis in der Ortsinfo, Wahlabend am Wahltag mit Meldungen,
