@@ -969,7 +969,7 @@ private:
             c.value = Fixed::from_int(static_cast<std::int64_t>(best_kind));
             out_.push_back(c);
             record(state, AiDecisionKind::Demand, best, c.value, best_option);
-            chronicle_reasons(state, best_option); // seit b3: Gründe auch in der Chronik (ki.md 9)
+            chronicle_reasons(state); // seit b3: Gründe auch in der Chronik (ki.md 9)
             cool(state, AiDecisionKind::Demand, best, w_.ai_rules.cooldown_months);
             cool(state, AiDecisionKind::Demand, kNone, w_.ai_rules.cooldown_months);
         }
@@ -1245,19 +1245,19 @@ private:
             c.value = Fixed::from_int(best_goal);
             out_.push_back(c);
             record(state, AiDecisionKind::DeclareWar, best, c.value, best_option);
-            chronicle_reasons(state, best_option);
+            chronicle_reasons(state);
             cool(state, AiDecisionKind::DeclareWar, best, w_.ai_rules.cooldown_months);
         }
     }
 
-    /// Bedeutende Entscheidung: die Gründe in der Chronik („Preußen – Gründe: Agenda +40, …“).
-    void chronicle_reasons(Index state, const Option& option) {
+    /// Bedeutende Entscheidung: die Gründe des letzten Protokolleintrags (record) in der Chronik
+    /// („Preußen – Gründe: Agenda +40, …“).
+    void chronicle_reasons(Index state) {
         const AiDecision& d = w_.ai_log.back();
         std::string text = w_.states[at(state)].short_name + " – Gründe: ";
         for (std::size_t i = 0; i < d.reason_count; ++i) {
             text += (i > 0 ? ", " : "") + ai_reason_text(w_, d.reasons[i]);
         }
-        (void)option;
         ChronicleEntry entry;
         entry.date = w_.date;
         entry.state = state;

@@ -5,7 +5,7 @@
 > [18 Ereignisse, Journale, Missionen](../18_ereignisse_journale_missionen.md) (Abschnitte 1–4, 6–9),
 > [09 Politik, Staat und Gesetze](../09_politik_staat_und_gesetze.md) (Abschnitte 3, 5, 6 und 13),
 > [20 Verantwortung und Erinnerungskultur](../20_verantwortung_und_erinnerungskultur.md) und der
-> Meilensteinplan ([meilensteine.md](../meilensteine.md#m11--ereignisse-und-revolution-184849)).
+> Meilensteinplan ([meilensteine.md](../meilensteine.md#m11--ereignisse-und-revolution-184849-)).
 > Politik und Wahlen stehen in [politik.md](politik.md), Diplomatie und Bundesversammlung in
 > [diplomatie.md](diplomatie.md), Krieg und Frieden in [militaer.md](militaer.md), die Syntax in
 > [chronik-skript.md](chronik-skript.md).
