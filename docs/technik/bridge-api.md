@@ -138,8 +138,8 @@ sind die Listen leer und die Befehle werden abgewiesen. Die Befehle wirken am n�
 
 ### KI der Staaten (seit M12, Schritt b3)
 
-Regeln: [ki.md](ki.md), Abschnitte 3, 5 und 9. Ohne KI (1648, vor `ki.chron seit`) sind die Listen
-leer; `get_intentions` liefert dann nur `player` und leere Ziele. Den Spielerstaat, den die KI
+Regeln: [ki.md](ki.md), Abschnitte 3, 5 und 9. Ohne KI (1648, vor `ki.chron seit`) sind alle drei
+Rückgaben leer. Den Spielerstaat, den die KI
 auslässt, setzt `set_event_player` (Abschnitt Ereignisse).
 
 | Methode | Rückgabe | Beschreibung |

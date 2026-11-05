@@ -24,7 +24,7 @@ gebaut; Abhängigkeiten stehen jeweils dabei.
 | M9 | Diplomatie und Zollverein | 2 – Vertical Slice | M7 | **fertig** (Fachprüfung der Werte offen, siehe unten) |
 | M10 | Militär und Einigungskriege | 2 – Vertical Slice | M9 | **fertig** (Fachprüfung der Werte offen, siehe unten) |
 | M11 | Ereignisse und Revolution 1848/49 | 2 – Vertical Slice | M8 | **fertig** (Fachprüfung der Quellen und Werte offen, siehe unten) |
-| M12 | Künstliche Intelligenz der Staaten | 2 – Vertical Slice | M8–M11 | in Arbeit |
+| M12 | Künstliche Intelligenz der Staaten | 2 – Vertical Slice | M8–M11 | **fertig** (Fachprüfung der Personen und Agenden offen, siehe unten) |
 | M13 | Spielbarer Vertical Slice 1848–1871 | 2 – Vertical Slice | M12 | offen |
 
 Phase 1 endet mit M6 (Ziel der Roadmap: „Technikprototyp“). Phase 2 endet mit M13 (Ziel:
@@ -812,7 +812,7 @@ Abschnitt 13).
 - **Alte Spielstände:** Spielstände aus M10 laden nicht (Format 5), Spielstände 1848 aus früheren
   M11-Schritten ebenso nicht (Inhaltsbereich `ereignisse`).
 
-### M12 – Künstliche Intelligenz der Staaten
+### M12 – Künstliche Intelligenz der Staaten ✅
 
 **Ziel:** Computerstaaten nach [21 Künstliche Intelligenz](21_kuenstliche_intelligenz.md).
 Vertrag: [technik/ki.md](technik/ki.md) (Entscheidungen freigegeben, Stand in Abschnitt 13).
@@ -825,6 +825,68 @@ Vertrag: [technik/ki.md](technik/ki.md) (Entscheidungen freigegeben, Stand in Ab
 **Abnahme**
 - 100 KI-Partien 1848–1871 ohne Spieler: keine Abstürze, Ergebnisse plausibel verteilt
   (Bericht mit Häufigkeiten: Einigung ja/nein, Form der Einigung)
+
+**Ergebnis**
+- **Vertrag** in [technik/ki.md](technik/ki.md) mit dem Stand je Schritt. Umgesetzt in zwei Teilen:
+  M12a (System im Kern auf einer Test-Fixture: Personen, Agenden, Planer, KI-Labor) und M12b (Daten
+  1848–1871, Kalibrierung mit 100 Partien, Brücke und Godot, Review).
+- **Persönlichkeiten:** sechs Neigungen (Risiko, Expansion, Legitimität, Reform, Sparsamkeit,
+  Vermittlung) aus sechs Staatspersönlichkeiten und 16 Eigenschaften nach Kapitel 13; Herrscher und
+  leitender Minister je Staat mit Amtszeit, Bedingung und Werten, Amtswechsel am Monatsersten mit
+  Chronik (Märzministerien, Metternichs Entlassung, Abdankung Ludwigs I., Bismarck 1862).
+- **Agenden:** Ziele mit Gewicht, Zeitfenster und Bedingung (Zollunion, Führung im Bund, Status quo,
+  Ruhe, Bündnis, Gebiet, Annexion, Schwächen); Hauptziel und Rivale je Staat jeden Monatsersten.
+- **Planer** am Monatsersten nach den Ereignissen, für jeden Staat außer dem Spielerstaat: Haushalt
+  (Kontribution und Akzise nach Defizit, Schuldenquote, Überschuss und Unruhe), Mobilmachung und
+  Abrüstung, Gesandte, Bündnisse gegen einen gemeinsamen Gegner mit Annahme nach Nutzen, Garantien,
+  Forderungen, Manöver in Krisen, Anträge im Bund, Zollunionen, Kriegserklärung aus der Agenda bei
+  Übermacht, weitere Kriegsziele, Frieden nach Nutzen, Wahlkampf der Strömungen und Neigungen an
+  Ereignisoptionen. Jede Option ist eine Summe benannter Faktoren mit Rauschen aus dem Strom `Ki`; die
+  KI gibt dieselben Befehle wie der Spieler (am nächsten Tag wirksam, nicht im Befehlsprotokoll) und
+  schreibt die drei wichtigsten Gründe ins KI-Protokoll.
+- **Daten 1848–1871:** 71 Personen (25 Herrscher, 46 Minister) von elf Staaten, Agenden von 14 Staaten
+  mit 44 Zielen, Blöcke `ki` an 35 Ereignisoptionen.
+- **KI-Labor** (`uhrwerk-cli ki`) mit Korridoren je Szenario, Läufen parallel (`--parallel`, gleiche
+  Prüfsummen) und zum Vergleich ohne KI (`--ohne-ki`); in der CI mit 16 Partien, im Workflow
+  `ki-partien.yml` mit 100 (manuell und wöchentlich).
+- **Godot:** Herrscher, Minister und Neigungen in der Staatsinfo; Absichten (nur mit eigenem
+  Gesandten) und die letzten Entscheidungen mit „Warum?“ im Diplomatiefenster; Hinweise bei
+  Kriegserklärungen und Forderungen an den Spieler; Gründe in Chronik, Krisenleiste und Kriegsfenster.
+- **Befehle** `Spielerstaat` (vorher `Ereignisspieler`) und `Spielerströmung`; **Spielstand Format 6**
+  mit dem Inhaltsbereich `ki`; Zustand der KI nur in Welten mit KI-Daten.
+- **1648 unverändert:** Die Prüfsumme nach 100 Jahren bleibt `5db13a66d63e6079`. 1848 rechnet mit KI
+  anders; alle Labore 1848 (Revolution, Strategien, deutsche Frage, vier Kriegslabore, Zoll, Wahl,
+  Bilanz) wurden mit KI neu gerechnet und halten ihre Korridore.
+- **Tests:** 253 Testfälle (vorher 239); neue CTests `ki_daten`, `pruefen_ki_fixture`, `ki_fixture`,
+  `ki_fixture_ohne_ki` und `ki_1848`; CI-Schritt „KI-Labor 1848–1871“; Rauch- und Klicktest mit
+  Personen, Absichten und „Warum?“ 1848.
+- **Review M12** über Kern, Brücke und Godot, Daten und Doku: Einheitentests und das
+  KI-Labor 1848/49 unter ASan/UBSan, das KI-Labor parallel unter TSan, ohne Befund; die Spielstände mit KI prüft der Speichertest 1848.
+  Behoben ist eine falsche Angabe in der Brücken-Doku (Rückgabe von `get_intentions` ohne KI).
+
+**Abnahme im Einzelnen**
+
+| Kriterium | Stand |
+|---|---|
+| 100 KI-Partien 1848–1871 ohne Spieler, keine Abstürze | erfüllt: `uhrwerk-cli ki --szenario voelkerfruehling --seeds 100` mit 0 Abstürzen und ohne Staatsbankrott, zweimal gerechnet bitgleich (Workflow `ki-partien.yml`); 24,8 Minuten auf vier Kernen, davon die KI 3,6 % (0,2 ms je Staat und Monat, Ziel 5 ms) |
+| Ergebnisse plausibel verteilt, Bericht mit Häufigkeiten (Einigung ja/nein, Form der Einigung) | erfüllt: Einigung 67 % (ohne KI 56 % über 16 Partien), kleindeutsch 44 %, zwei Bünde 23 %, alter Bund 33 %, großdeutsch und ohne Bund 0 %; kein Ausgang in allen Läufen; Krieg Preußen–Österreich in 70 % der Partien. Alle Korridore aus `common/kiziele_voelkerfruehling.chron` erfüllt |
+
+**Bekannte Grenzen**
+- **Fachprüfung offen:** Personen, Eigenschaften, Agenden und Gewichte sind Spielwerte aus der
+  Kalibrierung (`sicherheit = spielwert`), Amtszeiten nach Literatur ohne Seitenprüfung.
+- **Laufzeit der 100 Partien:** 24,8 statt 20 Minuten auf vier Kernen; die KI braucht 3,6 %, der Rest
+  ist die Simulation selbst.
+- **Eine Schwierigkeitsstufe, historischer Modus:** Schwierigkeitsgrade und der offene Modus
+  (Regel `agenda_offen`) werden mit M13 wählbar.
+- **Vollständiges Lagebild:** Die KI kennt alle Stärken (keine Informationslücken und Spionage); nur
+  die Anzeige der Absichten verlangt einen Gesandten.
+- **Keine Feldzugsplanung:** Märsche führt weiter der Generalstab aus M10; die KI entscheidet über
+  Mobilmachung, Krieg, Ziele und Frieden.
+- **Keine Gesetzgebung und Ernennungen durch die KI:** Gesetze ändern sich nur durch Ereignisse;
+  Personen altern und sterben nicht, ihre Amtszeiten stehen fest oder folgen Bedingungen.
+- **Außenmächte:** Außer Frankreich und Dänemark gibt es keine; Russland, Großbritannien und Italien
+  bleiben Text in Ereignissen.
+- **Alte Spielstände:** Spielstände aus M11 laden nicht (Format 6).
 
 ### M13 – Spielbarer Vertical Slice 1848–1871
 

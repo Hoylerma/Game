@@ -54,6 +54,13 @@ Schritt in Abschnitt 13 dort.
   kriegsmüder oder ihre Seite klar überlegen ist; sonst bot Frankreich im Lesezeichen Sedan früh weißen
   Frieden an, und der Verteidiger siegte nur in 4 von 16 Läufen (jetzt 14). Inhaltsbereich ki Stand 4;
   1648 bitgleich.
+- **Review und Abschluss (Schritt b4):** Review über Kern, Brücke und Godot, Daten und Doku; die
+  Einheitentests und das KI-Labor 1848/49 laufen unter ASan/UBSan, das KI-Labor parallel unter TSan,
+  ohne Befund. Behoben:
+  bridge-api.md nannte für Welten ohne KI eine falsche Rückgabe von `get_intentions`; die Gründe in der
+  Chronik kommen ohne den ungenutzten Parameter aus dem Protokoll; die Verweise auf die Abschnitte M11 und
+  M12 im Meilensteinplan zeigen wieder auf ihr Ziel. Meilensteinplan mit Ergebnis, Abnahme (100 Partien ohne Absturz, Einigung 67 %,
+  kleindeutsch 44 %, zwei Bünde 23 %, Bund 33 %) und bekannten Grenzen. **M12 ist abgeschlossen.**
 - **Brücke und Godot (Schritt b3):** Neue Brückenmethoden `get_state_persons`, `get_intentions` und
   `get_ai_decisions` ([bridge-api.md](docs/technik/bridge-api.md)). Die **Staatsinfo** zeigt Herrscher
   und leitenden Minister (Eigenschaften und Werte im Tooltip) und die sechs Neigungen des Staates mit
