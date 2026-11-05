@@ -45,7 +45,7 @@ constexpr std::uint64_t kEventContentVersion = 7; // 7 seit M12a3: Block ki an d
 /// Stand der KI im Zustand (seit M12, Inhaltsbereich ki): 1 = Schritt a1 (Ämter, Strom Ki), 2 = a2
 /// (Strategie, Protokoll, Abkühlung; Planer Haushalt und Mobilmachung), 3 = a3
 /// (Diplomatie, Wahlkampf, Spielerströmung), 4 = a4 (Krieg und Frieden).
-constexpr std::uint64_t kAiContentVersion = 4;
+constexpr std::uint64_t kAiContentVersion = 5;
 
 bool fail(std::string* error, std::string message) {
     if (error != nullptr) {
@@ -1166,6 +1166,10 @@ std::string validate_state(const Simulation& sim) {
                 }
             }
         }
+        if (w.game_settings.difficulty != kNone &&
+            !in(w.game_settings.difficulty, w.ai_difficulties.size())) {
+            return "Spieleinstellung ungültig";
+        }
         if (w.player_current != kNone && !in(w.player_current, w.currents.size())) {
             return "Spielerströmung ungültig";
         }
@@ -1823,7 +1827,17 @@ ContentFingerprint content_fingerprint(const World& w) {
             h.i64(r.max_alliances); // seit a3
             h.i64(r.campaign_months);
             h.fixed(r.campaign_reserve);
-            h.fixed(r.war_ratio); // seit a4
+            h.fixed(r.war_ratio);        // seit a4
+            h.i64(r.default_difficulty); // seit M13a1
+            h.u64(w.ai_difficulties.size());
+            for (const DifficultyDef& d : w.ai_difficulties) {
+                h.text(d.id);
+                h.fixed(d.threshold);
+                h.fixed(d.noise);
+                h.fixed(d.cooldown);
+                h.fixed(d.caution);
+                h.flag(d.player_rival);
+            }
             const auto inclinations = [&h](const Inclinations& values) {
                 for (const Fixed f : values) {
                     h.fixed(f);

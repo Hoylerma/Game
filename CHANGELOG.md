@@ -8,6 +8,22 @@ Vor Version 1.0 kann sich jede Schnittstelle ändern.
 
 ## [Unveröffentlicht]
 
+### Meilenstein M13 – Spielbarer Vertical Slice 1848–1871
+
+Vertrag: [technik/vertical_slice.md](docs/technik/vertical_slice.md), Entscheidungen 1–19 wie empfohlen
+freigegeben; Stand je Schritt in Abschnitt 13 dort.
+
+- **Start und Spieleinstellungen (Schritt a1):** Das Spiel beginnt mit einem **Startbildschirm** statt
+  mit 1648: Neues Spiel, Fortsetzen (jüngster Spielstand), Laden, Beenden. Ein neues Spiel führt über
+  Lesezeichen (1848 und die drei Kriegslesezeichen, 1648 als Technikprototyp unter „Weitere“), Staat
+  (Preußen, Österreich, Bayern und Sachsen empfohlen, mit Schwierigkeit; alle übrigen wählbar) und
+  **Spieleinstellungen**: Schwierigkeit Lehrling, Geselle oder Meister (Faktoren auf Schwelle, Rauschen
+  und Abkühlungen der KI, Meister verbündet sich gegen einen starken Spieler; keine Boni) und
+  Geschichtsverlauf historisch oder offen. Neuer Block `stufe` in `common/ki.chron`, Befehl
+  `Spieleinstellung` am ersten Tag, Spielstand **Format 7** (Spielstände aus M12 laden nicht). Geselle
+  rechnet wie M12. KI-Labor mit `--stufe` und `--offen`; Godot-Startoption `--startbildschirm`. 1648
+  bitgleich.
+
 ### Meilenstein M12 – Künstliche Intelligenz der Staaten
 
 Vertrag: [technik/ki.md](docs/technik/ki.md), Entscheidungen 1–14 wie empfohlen freigegeben; Stand je

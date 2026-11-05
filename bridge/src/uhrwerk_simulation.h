@@ -197,6 +197,10 @@ public:
     godot::Dictionary get_state_events(std::int64_t state_index) const;
     godot::Array get_revolts() const;
 
+    // Spieleinstellungen (seit M13, Schritt a1, vertical_slice.md 3.2)
+    godot::Dictionary get_game_settings() const;
+    bool set_game_settings(const godot::String& difficulty_id, bool open);
+
     // KI der Staaten (seit M12, Schritt b3, ki.md Abschnitt 9)
     godot::Array get_state_persons(std::int64_t state_index) const;
     godot::Dictionary get_intentions(std::int64_t state_index) const;

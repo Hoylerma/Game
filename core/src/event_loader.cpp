@@ -450,7 +450,14 @@ private:
         int default_line = 0;
         std::map<std::string, int, std::less<>> traits_seen;
         std::map<std::string, int, std::less<>> personalities_seen;
+        std::map<std::string, int, std::less<>> difficulties_seen;
+        std::string default_difficulty;
+        int default_difficulty_line = 0;
         for (const ScriptNode& node : source.root.children) {
+            if (node.key == "stufe" && node.is_block) {
+                load_difficulty(node, difficulties_seen);
+                continue;
+            }
             if ((node.key == "eigenschaft" || node.key == "persoenlichkeit") && node.is_block) {
                 if (!is_lower_id(node.value, false)) {
                     error(node.line,
@@ -491,8 +498,9 @@ private:
                 continue;
             }
             if (node.key != "ki" || !node.is_block || !node.value.empty()) {
-                warning(node.line, "unbekannter Eintrag " + quote(node.key.empty() ? node.value : node.key) +
-                                       " wird ignoriert (erwartet: ki { … }, eigenschaft, persoenlichkeit)");
+                warning(node.line,
+                        "unbekannter Eintrag " + quote(node.key.empty() ? node.value : node.key) +
+                            " wird ignoriert (erwartet: ki { … }, eigenschaft, persoenlichkeit, stufe)");
                 continue;
             }
             if (found) {
@@ -544,6 +552,11 @@ private:
                         default_personality = *id;
                         default_line = child.line;
                     }
+                } else if (child.key == "standard_stufe") { // seit M13a1
+                    if (const auto id = name(child)) {
+                        default_difficulty = *id;
+                        default_difficulty_line = child.line;
+                    }
                 } else {
                     warning(child.line, "unbekanntes Feld " + quote(child.key) + " in ki wird ignoriert");
                 }
@@ -561,7 +574,67 @@ private:
                 error(default_line, "unbekannte Persönlichkeit " + quote(default_personality));
             }
         }
+        if (!default_difficulty.empty()) {
+            r.default_difficulty = world_.find_difficulty(default_difficulty);
+            if (r.default_difficulty == kNone) {
+                error(default_difficulty_line, "unbekannte Stufe " + quote(default_difficulty));
+            }
+        }
         r.active = since && *since <= start_;
+    }
+
+    /// Schwierigkeitsstufe (seit M13a1, vertical_slice.md 3.2): Faktoren auf die Regeln der Planer.
+    void load_difficulty(const ScriptNode& node, std::map<std::string, int, std::less<>>& seen_ids) {
+        if (!is_lower_id(node.value, false)) {
+            error(node.line, "'stufe' erwartet eine Kennung: stufe <kennung> { … }");
+            return;
+        }
+        const auto [it, inserted] = seen_ids.emplace(node.value, node.line);
+        if (!inserted) {
+            error(node.line, "doppelte Kennung " + quote(node.value) + " (zuerst in Zeile " +
+                                 std::to_string(it->second) + ")");
+            return;
+        }
+        DifficultyDef d;
+        d.id = node.value;
+        std::map<std::string, int, std::less<>> fields;
+        for (const ScriptNode& child : node.children) {
+            if (!first_time(fields, child, "stufe " + d.id)) {
+                continue;
+            }
+            Fixed* factor = child.key == "schwelle"     ? &d.threshold
+                            : child.key == "rauschen"   ? &d.noise
+                            : child.key == "abkuehlung" ? &d.cooldown
+                                                        : nullptr;
+            if (child.key == "name" || child.key == "text") {
+                if (const auto t = text(child)) {
+                    (child.key == "name" ? d.name : d.text) = *t;
+                }
+            } else if (factor != nullptr) {
+                if (assign(child)) {
+                    if (const auto v = number(child, fx(0), fx(10))) {
+                        *factor = *v;
+                    }
+                }
+            } else if (child.key == "vorsicht") {
+                if (assign(child)) {
+                    if (const auto v = number(child, fx(-1), fx(1))) {
+                        d.caution = *v;
+                    }
+                }
+            } else if (child.key == "spieler_rivale") {
+                if (const auto v = boolean(child)) {
+                    d.player_rival = *v;
+                }
+            } else {
+                warning(child.line,
+                        "unbekanntes Feld " + quote(child.key) + " in stufe " + d.id + " wird ignoriert");
+            }
+        }
+        if (d.name.empty()) {
+            error(node.line, "Pflichtfeld 'name' fehlt in stufe " + d.id);
+        }
+        world_.ai_difficulties.push_back(std::move(d));
     }
 
     /// Spielwerte der Planer (seit a2, Abschnitte 5 und 6); false bei einem anderen Feld.

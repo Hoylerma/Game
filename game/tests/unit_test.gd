@@ -104,6 +104,14 @@ func _test_launch_options() -> void:
 	)
 	_true(bad.war_tab == -1 and not bad.select_army, "fehlerhaftes --krieg und --heer öffnen nichts")
 	_equal(bad.diplomacy_tab, -1, "fehlerhaftes --diplomatie öffnet nichts")
+	var start := LaunchOptions.parse(PackedStringArray(["--startbildschirm=einstellungen"]))
+	var start_bad := LaunchOptions.parse(PackedStringArray(["--startbildschirm=hof"]))
+	_true(
+		start.start_page == 2 and start.problems.is_empty() and defaults.start_page == -1
+		and start_bad.start_page == -1 and start_bad.problems.size() == 1
+		and LaunchOptions.parse(PackedStringArray(["--startbildschirm"])).start_page == 0,
+		"Option --startbildschirm (seit M13)"
+	)
 	var party := LaunchOptions.parse(PackedStringArray(["--szenario=voelkerfruehling", "--partei=liberale"]))
 	_true(party.party_id == "liberale" and party.problems.is_empty(), "Option --partei (seit M8)")
 	_equal(defaults.party_id, "", "ohne --partei spielt man den Staat")

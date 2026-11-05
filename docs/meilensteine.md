@@ -25,7 +25,7 @@ gebaut; Abhängigkeiten stehen jeweils dabei.
 | M10 | Militär und Einigungskriege | 2 – Vertical Slice | M9 | **fertig** (Fachprüfung der Werte offen, siehe unten) |
 | M11 | Ereignisse und Revolution 1848/49 | 2 – Vertical Slice | M8 | **fertig** (Fachprüfung der Quellen und Werte offen, siehe unten) |
 | M12 | Künstliche Intelligenz der Staaten | 2 – Vertical Slice | M8–M11 | **fertig** (Fachprüfung der Personen und Agenden offen, siehe unten) |
-| M13 | Spielbarer Vertical Slice 1848–1871 | 2 – Vertical Slice | M12 | offen |
+| M13 | Spielbarer Vertical Slice 1848–1871 | 2 – Vertical Slice | M12 | in Arbeit |
 
 Phase 1 endet mit M6 (Ziel der Roadmap: „Technikprototyp“). Phase 2 endet mit M13 (Ziel:
 „Spielbare Epoche III 1848–1871“).
@@ -892,8 +892,8 @@ Vertrag: [technik/ki.md](technik/ki.md) (Entscheidungen freigegeben, Stand in Ab
 
 **Ziel:** Eine Epoche, die sich wie das fertige Spiel anfühlt – Grundlage für Förderung,
 Publisher und Early Access.
-Vertrag: [technik/vertical_slice.md](technik/vertical_slice.md) (Entwurf, Entscheidungen zur Freigabe in
-Abschnitt 11).
+Vertrag: [technik/vertical_slice.md](technik/vertical_slice.md) (Entscheidungen freigegeben, Stand in
+Abschnitt 13).
 
 **Umfang**
 - Oberfläche nach [22 UI/UX, Grafik, Audio](22_ui_ux_grafik_audio.md): alle Fenster der Epoche,

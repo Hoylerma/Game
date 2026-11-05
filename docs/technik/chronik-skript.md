@@ -1410,14 +1410,27 @@ ki {
     wahlkampf_ruecklage = 0.2            # Rücklage der Mittel einer Strömung, 0 … 1
     # seit a4 (ki.md Abschnitt 6.3)
     kriegs_staerke = 1.3                 # Stärkeverhältnis für eine Kriegserklärung, 0 … 100
+    # seit M13a1 (vertical_slice.md 3.2)
+    standard_stufe = geselle             # Stufe ohne Spieleinstellung (sonst Regeln wie angegeben)
 }
 persoenlichkeit machtpolitiker { name = "Machtpolitiker" risiko = 1 expansion = 2 legitimitaet = -1 vermittlung = -1 }
 eigenschaft zauderer { name = "Zauderer" risiko = -2 }
+stufe lehrling {                         # seit M13a1: Schwierigkeitsstufe
+    name = "Lehrling"                    # Pflicht
+    text = "…"                           # Kurztext für die Auswahl
+    schwelle = 1.5                       # × schwelle, 0 … 10 (Standard 1)
+    rauschen = 2                         # × rauschen, 0 … 10
+    abkuehlung = 2                       # × abkuehlung und abkuehlung_steuern, 0 … 10 (gerundet)
+    vorsicht = 0.25                      # + nötiges Stärkeverhältnis für Forderung und Krieg, −1 … 1
+    spieler_rivale = nein                # ja: der Spielerstaat wird Rivale, wenn er ¾ so bedrohlich
+}                                        #     ist wie die größte Bedrohung
 ```
 
 Neigungen: `risiko`, `expansion`, `legitimitaet`, `reform`, `sparsamkeit`, `vermittlung`, je −2 … +2,
 fehlende 0. Fehler: fehlendes `seit` oder `name`, doppelte Kennungen, Werte außerhalb des Bereichs, eine
-unbekannte `standard_persoenlichkeit`.
+unbekannte `standard_persoenlichkeit` oder `standard_stufe`. Die Stufe einer Partie wählt der Befehl
+`Spieleinstellung` am ersten Tag (Startbildschirm, KI-Labor `--stufe`); der offene Geschichtsverlauf
+(`--offen`) wirkt wie `agenda_offen = ja`.
 
 ### 3.38 `common/persoenlichkeiten.chron` (seit M12a1)
 

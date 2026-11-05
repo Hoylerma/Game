@@ -136,6 +136,17 @@ sind die Listen leer und die Befehle werden abgewiesen. Die Befehle wirken am n�
 | `get_state_events(state_index: int)` | `Dictionary` | `laws` (je `{ group, option }`), `approvals` (je Interessengruppe `{ id, name, color, value }`, −100 … +100), `unrest`, `unrest_target` (0–100), `revolt` (`{ kind_text, strength, since_text, helper_index, helper_name }`, leer ohne Aufstand), `timed` (befristete Wirkungen `{ text, until_text }`), `pending` (offene Ereignisse) |
 | `get_revolts()` | `Array` | laufende Aufstände `{ state_index, state_name, capital_index, kind_text, strength, since_text, helper_index }` |
 
+### Spieleinstellungen (seit M13, Schritt a1)
+
+Regeln: [vertical_slice.md](vertical_slice.md), Abschnitt 3.2. Die Einstellungen gelten für die ganze
+Partie und lassen sich nur am ersten Tag setzen (Befehl `Spieleinstellung`, wirksam beim ersten
+Schritt); sie stehen im Spielstand.
+
+| Methode | Rückgabe | Beschreibung |
+|---|---|---|
+| `get_game_settings()` | `Dictionary` | `active` (Welt mit KI); mit KI dazu `difficulties` (je `{ id, name, text, default }`), `difficulty_id`, `difficulty_name` (Stufe der Partie, sonst `standard_stufe`), `open` (offener Geschichtsverlauf), `editable` (noch am ersten Tag) |
+| `set_game_settings(difficulty_id: String, open: bool)` | `bool` | reiht den Befehl `Spieleinstellung` ein (`difficulty_id` leer = Standard); `false` ohne KI, nach dem ersten Tag oder bei unbekannter Stufe |
+
 ### KI der Staaten (seit M12, Schritt b3)
 
 Regeln: [ki.md](ki.md), Abschnitte 3, 5 und 9. Ohne KI (1648, vor `ki.chron seit`) sind alle drei

@@ -95,6 +95,8 @@ static func days_until_new_year(date: Dictionary) -> int:
 static func list(sim: SimulationClient, dir: String = DEFAULT_DIR) -> Array[Dictionary]:
 	var result: Array[Dictionary] = []
 	var absolute := absolute_dir(dir)
+	if not DirAccess.dir_exists_absolute(absolute):
+		return result  # noch kein Spielstand (DirAccess.open meldete sonst einen Fehler)
 	var access := DirAccess.open(absolute)
 	if access == null:
 		return result

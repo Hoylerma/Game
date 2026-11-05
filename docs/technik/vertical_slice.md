@@ -1,7 +1,7 @@
 # Spielbarer Vertical Slice 1848–1871 (Meilenstein M13)
 
-> **Status: Entwurf** – Entscheidungen 1–19 in Abschnitt 11 stehen zur Freigabe; Umsetzung erst
-> danach. Grundlage sind [22 UI/UX, Grafik, Audio](../22_ui_ux_grafik_audio.md),
+> **Status: verbindlich** – Entscheidungen 1–19 wie empfohlen freigegeben (Abschnitt 11); Umsetzung
+> läuft, Stand in Abschnitt 13. Grundlage sind [22 UI/UX, Grafik, Audio](../22_ui_ux_grafik_audio.md),
 > [03 Kernspielablauf](../03_kernspielablauf.md) (Abschnitte 6–8), [00 Vision](../00_vision_und_pitch.md)
 > (Abschnitt 7, Vermächtnis), [21 Künstliche Intelligenz](../21_kuenstliche_intelligenz.md) (Abschnitt 8,
 > Schwierigkeitsgrade), [24 Produktion](../24_produktion_roadmap_dlc.md) (Phase 2) und der Meilensteinplan
@@ -431,7 +431,7 @@ Weitere Tests:
   der Zeitung und des Urteils in der CI.
 - **Pakete:** Paketrauchtest je System (Abschnitt 7).
 
-## 11. Entscheidungen (zur Freigabe)
+## 11. Entscheidungen (wie empfohlen freigegeben)
 
 1. **Teilung M13a/M13b.** Empfehlung: **ja** (Abschnitt 1): erst die Partie mit Anfang und Ende, dann
    Präsentation und Auslieferung. Alternative: Oberfläche zuerst (früher vorzeigbar, aber ohne Ende
@@ -513,4 +513,5 @@ Weitere Tests:
 
 | Schritt | Stand |
 |---|---|
-| – | Entwurf; Entscheidungen 1–19 stehen zur Freigabe |
+| – | Entscheidungen 1–19 wie empfohlen freigegeben; Umsetzung beginnt mit a1 |
+| a1 | **erledigt:** Startbildschirm (`game/scripts/ui/start_screen.gd`) mit Hauptmenü (Neues Spiel, Fortsetzen mit dem jüngsten Spielstand, Laden, Beenden; Geschichtsstunde und Einstellungen gesperrt bis b3 bzw. a5), neues Spiel in drei Schritten (Lesezeichen mit 1648 unter „Weitere“, Staat mit den vier empfohlenen und allen übrigen, Spieleinstellungen); hinter ihm ruhen Leisten und Zeit. Stufen Lehrling, Geselle (Standard, rechnet wie M12) und Meister in `common/ki.chron` (Block `stufe`, `standard_stufe`; chronik-skript.md 3.37), angewandt über `effective_ai_rules`; offener Verlauf wie `agenda_offen`. Befehl `Spieleinstellung` nur am ersten Tag; Zustand und Spielstand **Format 7**, Inhaltsbereich ki Stand 5. Brücke `get_game_settings`/`set_game_settings`; KI-Labor `--stufe`/`--offen`, CTests `ki_1848_lehrling` und `ki_1848_meister_offen`; Startoption `--startbildschirm[=lesezeichen|einstellungen]` und zwei Screenshots in der CI. Probe 1848–1850 (2 Seeds): Lehrling 84/82 Entscheidungen, Geselle 112/128 (wie M12), Meister 125/182, offen 141/141. Die empfohlenen Staaten und Texte der Lesezeichen stehen vorerst im Startbildschirm (Präsentation); 1648 bitgleich |

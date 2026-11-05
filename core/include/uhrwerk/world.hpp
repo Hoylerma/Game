@@ -1098,6 +1098,7 @@ struct World {
     AiRules ai_rules;
     std::vector<TraitDef> ai_traits;              // common/ki.chron: eigenschaft
     std::vector<PersonalityDef> ai_personalities; // common/ki.chron: persoenlichkeit
+    std::vector<DifficultyDef> ai_difficulties;   // common/ki.chron: stufe (seit M13a1)
     std::vector<PersonDef> persons;               // common/persoenlichkeiten.chron, nach Kennung
     std::vector<AgendaDef> agendas;               // je Staat (common/agenden.chron)
     std::vector<Location> locations;
@@ -1176,6 +1177,7 @@ struct World {
     std::vector<AiDecision> ai_log;       // seit a2: KI-Protokoll in zeitlicher Folge (je Staat begrenzt)
     std::vector<AiCooldown> ai_cooldowns; // seit a2: laufende Abkühlungen nach Staat, Art und Ziel
     Index player_current = -1;            // seit a3: Strömung des Spielers im Parteienmodus (Befehl)
+    GameSettings game_settings;           // seit M13a1: Stufe und Geschichtsverlauf (Befehl Spieleinstellung)
 
     /// Person im Amt (Herrscher oder leitender Minister) oder -1.
     Index office(Index state, PersonRole role) const;
@@ -1203,6 +1205,7 @@ struct World {
     Index find_person(std::string_view id) const;         // seit M12
     Index find_trait(std::string_view id) const;          // seit M12
     Index find_personality(std::string_view id) const;    // seit M12
+    Index find_difficulty(std::string_view id) const;     // seit M13a1
 
     /// Personen in den Blöcken des Ortes und in seinen Zugängen (arrivals).
     Fixed location_population(Index location) const;

@@ -1,7 +1,7 @@
 // Tests der KI der Staaten (seit M12; docs/technik/ki.md): Schritt a1 Datenmodell – Regeln, Eigenschaften und
 // Staatspersönlichkeiten (common/ki.chron), Personen mit Amtszeit und Bedingung
 // (common/persoenlichkeiten.chron), Agenden (common/agenden.chron), Neigungen, Amtswechsel am Monatsersten,
-// Zustand, Inhaltsbereich ki und Spielstand Format 6.
+// Zustand, Inhaltsbereich ki und Spielstand Format 6; seit M13a1 Spieleinstellungen (Stufen, Verlauf).
 
 #include "test_hilfen.hpp"
 #include "uhrwerk/ai.hpp"
@@ -308,7 +308,7 @@ TEST_CASE("KI: Spielstand, Fingerabdruck und Spielerstaat") {
     const Bytes bytes = uhrwerk::save_game(sim, SaveMeta{});
     const auto info = uhrwerk::read_save_info(bytes);
     REQUIRE(info);
-    CHECK(info->format_version == 6);
+    CHECK(info->format_version == 7);
     uhrwerk::LoadedGame loaded = uhrwerk::load_game(bytes, data.load(), 1);
     INFO(loaded.error);
     REQUIRE(loaded.ok());
@@ -710,4 +710,132 @@ TEST_CASE("KI-Labor: parallel gleich, ohne KI kein Krieg, Abstürze zählen") {
     REQUIRE(summary.violations.size() == 2);
     CHECK(summary.violations[0].check == uhrwerk::AiCheck::Crash);
     CHECK(summary.violations[1].check == uhrwerk::AiCheck::War); // 2 von 3 Läufen
+}
+
+// ─── Spieleinstellungen (seit M13a1, docs/technik/vertical_slice.md 3.2) ─────────────────────────────
+
+namespace {
+
+std::string rules_with_difficulties() {
+    std::string rules(kAiRules);
+    rules.replace(rules.find("standard_persoenlichkeit = bewahrer"), 35,
+                  "standard_persoenlichkeit = bewahrer\n    standard_stufe = geselle");
+    rules += R"(
+stufe lehrling { name = "Lehrling" text = "vorsichtig" schwelle = 1.5 rauschen = 2 abkuehlung = 2 vorsicht = 0.25 }
+stufe geselle { name = "Geselle" }
+stufe meister { name = "Meister" schwelle = 0.8 rauschen = 0.5 abkuehlung = 0.75 vorsicht = -0.1 spieler_rivale = ja }
+)";
+    return rules;
+}
+
+} // namespace
+
+TEST_CASE("Spieleinstellung: Stufen laden und auf die Regeln anwenden") {
+    World w = AiData(rules_with_difficulties()).load();
+    REQUIRE(w.ai_difficulties.size() == 3);
+    const Index lehrling = w.find_difficulty("lehrling");
+    const Index meister = w.find_difficulty("meister");
+    CHECK(w.ai_rules.default_difficulty == w.find_difficulty("geselle"));
+    CHECK(uhrwerk::ai_difficulty(w) == w.find_difficulty("geselle"));
+    CHECK(w.ai_difficulties[static_cast<std::size_t>(lehrling)].text == "vorsichtig");
+
+    // Geselle (ohne Faktoren) rechnet wie ohne Stufe.
+    uhrwerk::AiRules r = uhrwerk::effective_ai_rules(w);
+    CHECK(r.threshold == w.ai_rules.threshold);
+    CHECK(r.noise == fx(8));
+    CHECK(r.cooldown_months == 6);
+    CHECK(r.caution == Fixed::zero());
+    CHECK_FALSE(r.player_rival);
+
+    w.game_settings.difficulty = lehrling;
+    r = uhrwerk::effective_ai_rules(w);
+    CHECK(r.threshold == w.ai_rules.threshold * Fixed::from_ratio(3, 2));
+    CHECK(r.noise == fx(16));
+    CHECK(r.cooldown_months == 12);
+    CHECK(r.tax_cooldown_months == w.ai_rules.tax_cooldown_months * 2);
+    CHECK(r.caution == Fixed::from_ratio(1, 4));
+
+    w.game_settings.difficulty = meister;
+    r = uhrwerk::effective_ai_rules(w);
+    CHECK(r.noise == fx(4));
+    CHECK(r.cooldown_months == 5); // 6 × 0,75 = 4,5, gerundet
+    CHECK(r.caution == -Fixed::from_ratio(1, 10));
+    CHECK(r.player_rival);
+
+    // Offener Verlauf: Ziele gelten auch vor ihrem Fenster (BRA: Annexion ab 1650).
+    uhrwerk::EventCache cache;
+    uhrwerk::rebuild_event_cache(w, cache);
+    const auto& goals = w.agendas[static_cast<std::size_t>(w.find_state("BRA"))].goals;
+    const auto annex = std::find_if(goals.begin(), goals.end(), [](const uhrwerk::AgendaGoal& g) {
+        return g.kind == AgendaKind::Annexation;
+    });
+    REQUIRE(annex != goals.end());
+    const Index bra = w.find_state("BRA");
+    CHECK_FALSE(uhrwerk::agenda_goal_active(w, cache, bra, *annex));
+    w.game_settings.open = true;
+    CHECK(uhrwerk::agenda_goal_active(w, cache, bra, *annex));
+    CHECK(uhrwerk::effective_ai_rules(w).open_agenda);
+}
+
+TEST_CASE("Spieleinstellung: Befehl nur am ersten Tag, im Spielstand") {
+    const std::string rules = rules_with_difficulties();
+    const AiData data(rules);
+    Simulation sim(data.load());
+    const Index meister = sim.world().find_difficulty("meister");
+    uhrwerk::Command bad;
+    bad.type = uhrwerk::CommandType::GameSettings;
+    bad.state = 99; // ungültige Stufe
+    sim.submit(bad);
+    uhrwerk::Command c;
+    c.type = uhrwerk::CommandType::GameSettings;
+    c.state = meister;
+    c.value = Fixed::one();
+    sim.submit(c);
+    sim.step_day();
+    CHECK(sim.world().game_settings.difficulty == meister);
+    CHECK(sim.world().game_settings.open);
+
+    // Später gilt kein neuer Befehl mehr.
+    uhrwerk::Command later = c;
+    later.state = kNone;
+    later.value = Fixed::zero();
+    sim.submit(later);
+    sim.step_days(40);
+    CHECK(sim.world().game_settings.difficulty == meister);
+    CHECK(sim.world().game_settings.open);
+
+    const Bytes bytes = uhrwerk::save_game(sim, SaveMeta{});
+    uhrwerk::LoadedGame loaded = uhrwerk::load_game(bytes, data.load(), 1);
+    INFO(loaded.error);
+    REQUIRE(loaded.ok());
+    CHECK(loaded.simulation->world().game_settings.difficulty == meister);
+    CHECK(loaded.simulation->world().game_settings.open);
+    CHECK(loaded.simulation->checksum() == sim.checksum());
+
+    // Andere Faktoren einer Stufe sind ein anderer Inhalt (Bereich ki).
+    std::string other = rules;
+    other.replace(other.find("schwelle = 0.8"), 14, "schwelle = 0.7");
+    const auto a = uhrwerk::content_fingerprint(data.load());
+    const auto b = uhrwerk::content_fingerprint(AiData(other).load());
+    CHECK(uhrwerk::content_differences(a, b) == std::vector<std::string_view>{"ki"});
+}
+
+TEST_CASE("Spieleinstellung: Ladefehler der Stufen") {
+    const std::pair<std::string_view, std::string_view> cases[] = {
+        {"standard_stufe = geselle", "unbekannte Stufe 'kanzler'"},
+        {"stufe geselle { name = \"Geselle\" }", "Pflichtfeld 'name' fehlt in stufe geselle"},
+        {"schwelle = 1.5", "'schwelle' muss zwischen 0 und 10 liegen"},
+    };
+    const std::string_view replacements[] = {"standard_stufe = kanzler", "stufe geselle { }",
+                                             "schwelle = 11"};
+    for (std::size_t i = 0; i < std::size(cases); ++i) {
+        CAPTURE(cases[i].second);
+        std::string rules = rules_with_difficulties();
+        const auto pos = rules.find(cases[i].first);
+        REQUIRE(pos != std::string::npos);
+        rules.replace(pos, cases[i].first.size(), replacements[i]);
+        const std::string issues = testhilfen::issues_text(AiData(rules).result());
+        CAPTURE(issues);
+        CHECK(issues.find(cases[i].second) != std::string::npos);
+    }
 }

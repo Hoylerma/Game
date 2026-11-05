@@ -29,8 +29,9 @@ namespace uhrwerk {
 /// Formatversion der Spielstände und Protokolle; jede Änderung am Zustandsverzeichnis erhöht sie.
 /// Format 2 seit M8: Wahlen im Zustand, Inhaltsbereich politik. Format 3 seit M9: Inhaltsbereich diplomatie.
 /// Format 4 seit M10: Inhaltsbereich militaer. Format 5 seit M11: Ereignisse im Zustand, Inhaltsbereich
-/// ereignisse. Format 6 seit M12: KI im Zustand (Ämter, Strom Ki), Inhaltsbereich ki.
-inline constexpr std::uint32_t kSaveFormatVersion = 6;
+/// ereignisse. Format 6 seit M12: KI im Zustand (Ämter, Strom Ki), Inhaltsbereich ki. Format 7 seit M13:
+/// Spieleinstellungen (Stufe, Verlauf).
+inline constexpr std::uint32_t kSaveFormatVersion = 7;
 
 /// Bereiche des Inhaltsfingerabdrucks (Abschnitt 3), in dieser Reihenfolge.
 inline constexpr std::array<std::string_view, 18> kContentParts = {

@@ -82,6 +82,9 @@ func _run() -> void:
 	if not without_area.is_empty():
 		print("  ohne Fläche (nicht klickbar): ", ", ".join(without_area))
 
+	# Seit M13: Das Spiel beginnt mit dem Startbildschirm über dem Technikprototyp 1648.
+	await _check_start_screen_menu()
+
 	# Zuerst, solange die Ortsinfo noch nie angezeigt wurde (erste Auswahl der Sitzung).
 	await _check_labels()
 
@@ -114,6 +117,7 @@ func _run() -> void:
 	await _check_economy_ui(sim)
 	await _check_save_ui(sim)
 	await _check_new_game()
+	await _check_start_screen_flow()
 
 	if _failure_count == 0 and all_levels == testable.size() and event_ok == event_total:
 		print("KLICK OK %d/%d" % [all_levels, testable.size()])
@@ -456,6 +460,106 @@ func _check_save_ui(sim: SimulationClient) -> void:
 
 ## Neues Spiel 1848 über das Spielmenü, Modus Verwaltung (Taste Ü), Staatswechsel über die
 ## Ortsinfo (seit M7).
+## Startbildschirm (seit M13, vertical_slice.md 3.1): Hauptmenü und Lesezeichen; schließt ihn danach,
+## damit die übrigen Prüfungen auf der Karte 1648 laufen.
+func _check_start_screen_menu() -> void:
+	var start: StartScreen = _main.call("start_screen")
+	if start == null or not start.is_open() or start.page() != StartScreen.Page.MENU:
+		_fail("Startbildschirm: beim Start nicht offen")
+		return
+	var text := start.page_text()
+	for expected in ["EINIGKEIT", "Neues Spiel", "Fortsetzen", "Laden …", "Geschichtsstunde", "Beenden"]:
+		if not text.contains(expected):
+			_fail("Startbildschirm: Hauptmenü ohne „%s“" % expected)
+	# Tasten erreichen die Karte nicht, solange er offen ist.
+	await _key(KEY_3)
+	if int(_main.call("speed")) != 0:
+		_fail("Startbildschirm: Taste 3 startet die Zeit (%d)" % int(_main.call("speed")))
+	start.menu_button("NewGame").emit_signal("pressed")
+	await _frames(1)
+	text = start.page_text()
+	if start.page() != StartScreen.Page.SCENARIO:
+		_fail("Startbildschirm: „Neues Spiel“ zeigt nicht die Lesezeichen")
+	for expected in ["Völkerfrühling", "Düppel", "Königgrätz", "Sedan", "Weitere", "Technikprototyp"]:
+		if not text.contains(expected):
+			_fail("Startbildschirm: Lesezeichen ohne „%s“" % expected)
+	if start.selected_scenario() != "voelkerfruehling":
+		_fail("Startbildschirm: vorgewählt ist %s statt voelkerfruehling" % start.selected_scenario())
+	await _key(KEY_ESCAPE)
+	if start.page() != StartScreen.Page.MENU:
+		_fail("Startbildschirm: Esc führt nicht zurück ins Hauptmenü")
+	start.close()
+	await _frames(1)
+	print("  Startbildschirm: Hauptmenü, Lesezeichen mit 1648 unter „Weitere“, Esc zurück")
+
+
+## Startbildschirm bis zum Spielbeginn (seit M13): 1848, Bayern, Stufe Meister, offener Verlauf. Läuft
+## zuletzt, weil er die Partie ersetzt.
+func _check_start_screen_flow() -> void:
+	var start: StartScreen = _main.call("start_screen")
+	var dir := "user://klick_test_spielstaende"
+	_clear_saves(dir)
+	_main.set("save_dir", dir)
+	_main.call("open_start_screen")
+	await _frames(1)
+	if not start.is_open():
+		_fail("Startbildschirm: open_start_screen öffnet ihn nicht")
+		return
+	if not start.menu_button("Continue").disabled or not start.menu_button("Load").disabled:
+		_fail("Startbildschirm: „Fortsetzen“ oder „Laden“ ohne Spielstände frei")
+	start.close()
+	_main.call("save_game_as", "Vor dem Start")
+	_main.call("open_start_screen")
+	await _frames(1)
+	if start.menu_button("Continue").disabled:
+		_fail("Startbildschirm: „Fortsetzen“ gesperrt, obwohl ein Spielstand da ist")
+	_clear_saves(dir)
+	start.menu_button("NewGame").emit_signal("pressed")
+	start.select_scenario("voelkerfruehling")
+	start.confirm_scenario()
+	await _frames(2)
+	var sim: SimulationClient = _main.call("simulation")
+	var text := start.page_text()
+	if start.page() != StartScreen.Page.STATE or sim.get_scenario_name() != "Völkerfrühling":
+		_fail("Startbildschirm: nach dem Lesezeichen keine Staatswahl (%s)" % sim.get_scenario_name())
+		return
+	for expected in ["Königreich Preußen  ·  mittel", "Kaisertum Österreich  ·  schwer", "Anderer Staat"]:
+		if not text.contains(expected):
+			_fail("Startbildschirm: Staatswahl ohne „%s“" % expected)
+	if start.selected_state() != "PRU":
+		_fail("Startbildschirm: vorgewählt ist %s statt PRU" % start.selected_state())
+	if not start.choose_state("BAV"):
+		_fail("Startbildschirm: Bayern nicht wählbar")
+	start.confirm_state()
+	await _frames(1)
+	text = start.page_text()
+	if start.page() != StartScreen.Page.SETTINGS:
+		_fail("Startbildschirm: keine Spieleinstellungen nach der Staatswahl")
+		return
+	if not text.contains("Geselle") or not text.contains("Historisch"):
+		_fail("Startbildschirm: Einstellungen ohne Geselle/Historisch: %s" % text.replace("\n", " | "))
+	if not start.choose_difficulty("meister"):
+		_fail("Startbildschirm: Stufe Meister fehlt")
+	start.set_open_course(true)
+	start.start_game()
+	await _frames(2)
+	# Der Befehl wirkt am ersten Tag; danach sind die Einstellungen fest.
+	sim.advance_days(1)
+	var settings := sim.get_game_settings()
+	var player := str(sim.get_state(sim.get_player_state_index()).get("tag", ""))
+	if start.is_open() or player != "BAV" or str(settings.get("difficulty_id", "")) != "meister":
+		_fail("Startbildschirm: Partie als %s, Stufe %s, offen %s" % [
+			player, settings.get("difficulty_id", ""), start.is_open()
+		])
+	if not bool(settings.get("open", false)) or bool(settings.get("editable", true)):
+		_fail("Startbildschirm: offener Verlauf nach dem ersten Tag %s, änderbar %s" % [
+			settings.get("open", false), settings.get("editable", true)
+		])
+	if sim.set_game_settings("lehrling", false):
+		_fail("Startbildschirm: Stufe nach dem ersten Tag noch änderbar")
+	print("  Startbildschirm: 1848 als Bayern, Stufe %s, Verlauf offen" % settings.get("difficulty_name", ""))
+
+
 func _check_new_game() -> void:
 	var menu: GameMenu = _main.call("game_menu")
 	var dir := "user://klick_test_spielstaende"

@@ -143,6 +143,8 @@ Optionen:
   --bis DATUM    ereignisse, ki: Ende der Läufe JJJJ.MM.TT (Standard: 'bis' im Block labor)
   --parallel N   ki: N Läufe gleichzeitig, je Lauf ein Thread; 0 = alle Kerne (Standard: 1)
   --ohne-ki      ki: zum Vergleich ohne KI rechnen (wie M11)
+  --stufe S      ki: Schwierigkeitsstufe S (lehrling, geselle, meister; seit M13)
+  --offen        ki: offener Geschichtsverlauf (Agenden ohne Zeitfenster; seit M13)
   --parlament ID wahl: Parlament (Standard: das erste des Szenarios)
   --wahlkreise   wahl: Ergebnis je Wahlkreis im ersten Lauf
   --beitritt TAG[:UNION]
@@ -208,6 +210,8 @@ struct Options {
     std::optional<uhrwerk::Date> until;    // --bis JJJJ.MM.TT (Ereignislabor, seit M11)
     unsigned parallel = 1;                 // --parallel N (KI-Labor, seit M12): gleichzeitige Läufe
     bool without_ai = false;               // --ohne-ki (KI-Labor, seit M12)
+    std::string difficulty;                // --stufe (KI-Labor, seit M13)
+    bool open_course = false;              // --offen (KI-Labor, seit M13)
     std::optional<fs::path> file;          // wiederholung, spielstand: Datei als Argument
     std::optional<fs::path> save_file;     // --speichern
     std::optional<fs::path> load_file;     // --laden
@@ -257,12 +261,12 @@ std::int64_t parse_count(std::string_view option, std::string_view text, std::in
 Options parse_options(int argc, char** argv) {
     Options o;
     const std::set<std::string_view> with_value = {
-        "--daten",    "--szenario",  "--jahre",       "--tage",    "--seed",      "--threads",
-        "--bloecke",  "--vergleich", "--grenze",      "--seeds",   "--ziele",     "--speichern",
-        "--laden",    "--protokoll", "--testbefehle", "--punkte",  "--parlament", "--beitritt",
-        "--austritt", "--strategie", "--bis",         "--parallel"};
-    const std::set<std::string_view> flags = {"--bericht", "--chronik",    "--maerkte",
-                                              "--text",    "--wahlkreise", "--ohne-ki"};
+        "--daten",    "--szenario",  "--jahre",       "--tage",     "--seed",      "--threads",
+        "--bloecke",  "--vergleich", "--grenze",      "--seeds",    "--ziele",     "--speichern",
+        "--laden",    "--protokoll", "--testbefehle", "--punkte",   "--parlament", "--beitritt",
+        "--austritt", "--strategie", "--bis",         "--parallel", "--stufe"};
+    const std::set<std::string_view> flags = {"--bericht",    "--chronik", "--maerkte", "--text",
+                                              "--wahlkreise", "--ohne-ki", "--offen"};
 
     for (int i = 1; i < argc; ++i) {
         const std::string_view arg = argv[i];
@@ -286,6 +290,7 @@ Options parse_options(int argc, char** argv) {
                  : name == "--text"       ? o.text
                  : name == "--wahlkreise" ? o.districts
                  : name == "--ohne-ki"    ? o.without_ai
+                 : name == "--offen"      ? o.open_course
                                           : o.markets) = true;
             } else if (with_value.count(name) != 0) {
                 if (!value) {
@@ -321,6 +326,11 @@ Options parse_options(int argc, char** argv) {
                         throw UsageError{"Option --strategie erwartet eine Kennung"};
                     }
                     o.strategy = *value;
+                } else if (name == "--stufe") {
+                    if (value->empty()) {
+                        throw UsageError{"Option --stufe erwartet eine Kennung"};
+                    }
+                    o.difficulty = *value;
                 } else if (name == "--bis") {
                     const auto date = uhrwerk::parse_date(*value);
                     if (!date) {
@@ -2821,6 +2831,14 @@ int cmd_ki(const Options& o, const fs::path& data_dir) {
     options.parallel = o.parallel;
     options.threads = o.threads;
     options.ai = !o.without_ai;
+    if (!o.difficulty.empty()) {
+        options.difficulty = w.find_difficulty(o.difficulty);
+        if (options.difficulty == uhrwerk::kNone) {
+            std::cerr << "Unbekannte Stufe '" << o.difficulty << "' (common/ki.chron)\n";
+            return kExitUsageError;
+        }
+    }
+    options.open = o.open_course;
     const auto t0 = std::chrono::steady_clock::now();
     const std::vector<uhrwerk::AiLabRun> runs = uhrwerk::run_ai_lab_seeds(w, targets, options);
     const double seconds = seconds_since(t0);
@@ -2845,8 +2863,17 @@ int cmd_ki(const Options& o, const fs::path& data_dir) {
     const unsigned parallel = o.parallel == 0 ? std::thread::hardware_concurrency() : o.parallel;
     std::cout << "KI-Labor:    " << w.scenario.name << " (" << w.scenario.id << "), "
               << uhrwerk::format_date_long(w.date) << " bis " << uhrwerk::format_date_long(targets.until)
-              << ", " << (o.without_ai ? "ohne KI (wie M11)" : "mit KI, ohne Spieler") << '\n'
-              << "Läufe:       " << runs.size() << " (Seeds " << o.seed;
+              << ", " << (o.without_ai ? "ohne KI (wie M11)" : "mit KI, ohne Spieler");
+    if (!o.without_ai) {
+        const World& settings_world = w;
+        const Index d = options.difficulty != uhrwerk::kNone ? options.difficulty
+                                                             : settings_world.ai_rules.default_difficulty;
+        if (d != uhrwerk::kNone) {
+            std::cout << ", Stufe " << settings_world.ai_difficulties[static_cast<std::size_t>(d)].name;
+        }
+        std::cout << (o.open_course ? ", offener Verlauf" : ", historischer Verlauf");
+    }
+    std::cout << '\n' << "Läufe:       " << runs.size() << " (Seeds " << o.seed;
     if (runs.size() > 1) {
         std::cout << "–" << o.seed + runs.size() - 1;
     }
@@ -3587,7 +3614,7 @@ int run(int argc, char** argv) {
                                  "--strategie", "--bis"});
         } else if (o.command == "ki") {
             check_applicable(o, {"--daten", "--szenario", "--seed", "--threads", "--seeds", "--ziele",
-                                 "--bis", "--parallel", "--ohne-ki"});
+                                 "--bis", "--parallel", "--ohne-ki", "--stufe", "--offen"});
         } else if (o.command == "speichertest") {
             check_applicable(o, {"--daten", "--szenario", "--jahre", "--tage", "--seed", "--threads",
                                  "--testbefehle", "--punkte"});
