@@ -892,6 +892,8 @@ Vertrag: [technik/ki.md](technik/ki.md) (Entscheidungen freigegeben, Stand in Ab
 
 **Ziel:** Eine Epoche, die sich wie das fertige Spiel anfühlt – Grundlage für Förderung,
 Publisher und Early Access.
+Vertrag: [technik/vertical_slice.md](technik/vertical_slice.md) (Entwurf, Entscheidungen zur Freigabe in
+Abschnitt 11).
 
 **Umfang**
 - Oberfläche nach [22 UI/UX, Grafik, Audio](22_ui_ux_grafik_audio.md): alle Fenster der Epoche,
