@@ -524,6 +524,15 @@ void Simulation::execute(const Command& command) {
             world_.player_current = command.state;
         }
         return;
+    case CommandType::GameSettings:
+        // Nur am ersten Tag: Stufe und Verlauf gelten für die ganze Partie.
+        if (days_elapsed_ == 0 && ai_active(world_) &&
+            (command.state == kNone || (command.state >= 0 && static_cast<std::size_t>(command.state) <
+                                                                  world_.ai_difficulties.size()))) {
+            world_.game_settings.difficulty = command.state;
+            world_.game_settings.open = command.value != Fixed::zero();
+        }
+        return;
     }
 }
 

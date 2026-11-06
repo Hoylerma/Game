@@ -155,6 +155,14 @@ if(UHRWERK_BUILD_CLI)
         COMMAND uhrwerk-cli ki --daten ${PROJECT_SOURCE_DIR}/data --szenario voelkerfruehling --seeds 2 --parallel 2
                 --bis 1848.06.30)
     set_tests_properties(ki_1848 PROPERTIES PASS_REGULAR_EXPRESSION "Abstürze +0 +0,0 %")
+    # Schwierigkeitsstufen und offener Verlauf (seit M13a1, vertical_slice.md 3.2): rechnen ohne Absturz.
+    add_test(NAME ki_1848_lehrling
+        COMMAND uhrwerk-cli ki --daten ${PROJECT_SOURCE_DIR}/data --szenario voelkerfruehling --seeds 2 --parallel 2
+                --bis 1848.06.30 --stufe lehrling)
+    add_test(NAME ki_1848_meister_offen
+        COMMAND uhrwerk-cli ki --daten ${PROJECT_SOURCE_DIR}/data --szenario voelkerfruehling --seeds 2 --parallel 2
+                --bis 1848.06.30 --stufe meister --offen)
+    set_tests_properties(ki_1848_lehrling ki_1848_meister_offen PROPERTIES PASS_REGULAR_EXPRESSION "Abstürze +0 +0,0 %")
 
     # Kriegslesezeichen (seit M10b, militaer.md Abschnitt 6.1): Daten, ein kurzer Lauf des Krieges aus
     # dem Lesezeichen und der Speichertest mitten im Krieg 1866. Der kurze Lauf prüft nur, dass das Labor

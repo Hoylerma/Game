@@ -26,6 +26,9 @@ extends RefCounted
 ##   --ereignis             Ereignisse des Spielerstaates warten auf die Wahl; das Ereignisfenster
 ##                          zeigt die offenen (seit M11; ohne rechnen Screenshots ohne Spieler)
 ##   --journal              Journalfenster öffnen (seit M11)
+##   --startbildschirm[=<seite>]  Startbildschirm vor dem Screenshot öffnen, Seite menue (Standard),
+##                          lesezeichen oder einstellungen (seit M13; einstellungen: mit --szenario und
+##                          dem Spielerstaat des Lesezeichens)
 
 const DEFAULT_SCREENSHOT_DAYS := 60
 ## Reiter des Fensters „Diplomatie“ für --diplomatie=<reiter>.
@@ -59,6 +62,10 @@ var show_election_night := false
 var show_events := false
 ## Journalfenster vor dem Screenshot öffnen (seit M11).
 var show_journal := false
+## Startbildschirm vor dem Screenshot (seit M13): 0 Hauptmenü, 1 Lesezeichen, 2 Einstellungen; -1 = keiner.
+var start_page := -1
+## Seiten für --startbildschirm=<seite>.
+const START_PAGES: PackedStringArray = ["menue", "lesezeichen", "einstellungen"]
 ## Strömung im Parteienmodus beim Start (seit M8); leer = Staat.
 var party_id := ""
 ## Szenario und Spielerstaat beim Start (seit M7); leer = Standard.
@@ -170,6 +177,14 @@ static func parse(args: PackedStringArray) -> LaunchOptions:
 					options.show_journal = true
 				else:
 					options.problems.append("--journal erwartet keinen Wert, nicht „%s“." % value)
+			"--startbildschirm":
+				var page := 0 if value.is_empty() else START_PAGES.find(value)
+				if page >= 0:
+					options.start_page = page
+				else:
+					options.problems.append(
+						"--startbildschirm erwartet menue, lesezeichen oder einstellungen, nicht „%s“." % value
+					)
 			"--szenario":
 				if value.is_empty():
 					options.problems.append(

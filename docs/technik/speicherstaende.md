@@ -285,6 +285,11 @@ Parlament, Zollunion, Bund und Militär bleibt die Folge der Zufallszahlen wie v
   ([ki.md](ki.md), Abschnitt 8). Der Befehl `Ereignisspieler` heißt seit M12 `Spielerstaat` (gleiche
   Nummer im Protokoll). Ein Spielstand im Format 5 zeigt seine Metadaten mit 17 Bereichen an, lädt aber
   nicht. Ohne KI (1648) zählt nichts davon, der Prüfwert der Formatwache bleibt.
+- **Format 7 (M13):** in Welten mit KI-Daten im Zustand die Spieleinstellungen der Partie
+  (`spieleinstellung.stufe`, `spieleinstellung.offen`; Befehl `Spieleinstellung` am ersten Tag) und im
+  Inhaltsbereich `ki` die Schwierigkeitsstufen mit ihren Faktoren und `standard_stufe` (Stand
+  `kAiContentVersion` 5; [vertical_slice.md](vertical_slice.md), Abschnitt 3.2). Spielstände im Format 6
+  laden nicht. Ohne KI (1648) zählt nichts davon, der Prüfwert der Formatwache bleibt.
 - Jede Änderung am Zustand (neues Feld, neue Reihenfolge) erhöht die Formatversion. Der Test
   „Spielstand: Formatwache“ verhindert, dass das vergessen wird: Er speichert die Test-Fixture nach
   einem Jahr und vergleicht den Prüfwert der Nutzdaten mit einem festgehaltenen Wert. Ändert er

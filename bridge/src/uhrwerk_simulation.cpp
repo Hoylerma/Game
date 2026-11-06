@@ -3284,6 +3284,55 @@ bool UhrwerkSimulation::choose_event_option(std::int64_t event_index, std::int64
     return true;
 }
 
+Dictionary UhrwerkSimulation::get_game_settings() const {
+    Dictionary result;
+    const uhrwerk::World* w = world();
+    result["active"] = w != nullptr && uhrwerk::ai_active(*w);
+    if (!w || !uhrwerk::ai_active(*w)) {
+        return result;
+    }
+    const uhrwerk::Index chosen = uhrwerk::ai_difficulty(*w);
+    Array levels;
+    for (std::size_t i = 0; i < w->ai_difficulties.size(); ++i) {
+        const uhrwerk::DifficultyDef& d = w->ai_difficulties[i];
+        Dictionary level;
+        level["id"] = to_godot(d.id);
+        level["name"] = to_godot(d.name);
+        level["text"] = to_godot(d.text);
+        level["default"] = static_cast<uhrwerk::Index>(i) == w->ai_rules.default_difficulty;
+        levels.append(level);
+    }
+    result["difficulties"] = levels;
+    result["difficulty_id"] =
+        chosen != uhrwerk::kNone ? to_godot(at(w->ai_difficulties, chosen).id) : String();
+    result["difficulty_name"] =
+        chosen != uhrwerk::kNone ? to_godot(at(w->ai_difficulties, chosen).name) : String();
+    result["open"] = w->ai_rules.open_agenda || w->game_settings.open;
+    // Nur am ersten Tag einer Partie (der Befehl wirkt beim ersten Schritt).
+    result["editable"] = simulation_->days_elapsed() == 0;
+    return result;
+}
+
+bool UhrwerkSimulation::set_game_settings(const String& difficulty_id, bool open) {
+    const uhrwerk::World* w = world();
+    if (!w || !uhrwerk::ai_active(*w) || simulation_->days_elapsed() != 0) {
+        return false;
+    }
+    uhrwerk::Index difficulty = uhrwerk::kNone;
+    if (!difficulty_id.is_empty()) {
+        difficulty = w->find_difficulty(difficulty_id.utf8().get_data());
+        if (difficulty == uhrwerk::kNone) {
+            return false;
+        }
+    }
+    uhrwerk::Command command;
+    command.type = uhrwerk::CommandType::GameSettings;
+    command.state = difficulty;
+    command.value = open ? uhrwerk::Fixed::one() : uhrwerk::Fixed::zero();
+    simulation_->submit(command);
+    return true;
+}
+
 bool UhrwerkSimulation::set_event_player(std::int64_t state_index) {
     const uhrwerk::World* w = world();
     if (!w || !uhrwerk::events_active(*w) || (state_index != -1 && !valid_index(w->states, state_index))) {
@@ -3776,6 +3825,9 @@ void UhrwerkSimulation::_bind_methods() {
     ClassDB::bind_method(D_METHOD("get_open_events"), &UhrwerkSimulation::get_open_events);
     ClassDB::bind_method(D_METHOD("choose_event_option", "event_index", "option_index"),
                          &UhrwerkSimulation::choose_event_option);
+    ClassDB::bind_method(D_METHOD("get_game_settings"), &UhrwerkSimulation::get_game_settings);
+    ClassDB::bind_method(D_METHOD("set_game_settings", "difficulty_id", "open"),
+                         &UhrwerkSimulation::set_game_settings);
     ClassDB::bind_method(D_METHOD("set_event_player", "state_index"), &UhrwerkSimulation::set_event_player);
     ClassDB::bind_method(D_METHOD("get_event_player"), &UhrwerkSimulation::get_event_player);
     ClassDB::bind_method(D_METHOD("get_state_persons", "state_index"), &UhrwerkSimulation::get_state_persons);

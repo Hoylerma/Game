@@ -69,6 +69,8 @@ enum class CommandType : std::uint8_t {
                    // Ereignisse warten auf die Wahl, die KI gibt ihm keine Befehle (ki.md 4.1); kNone: keiner
     PlayerCurrent, // seit M12 (a3): state = Strömung im Parteienmodus (kNone: keine); die KI führt für sie
                    // keinen Wahlkampf (ki.md 6.4)
+    GameSettings,  // seit M13 (a1): state = Stufe (kNone: standard_stufe), value = 1 offener Verlauf; nur am
+                   // ersten Tag einer Partie und mit KI (vertical_slice.md 3.2)
 };
 
 struct Command {

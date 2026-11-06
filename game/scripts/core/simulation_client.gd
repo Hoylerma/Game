@@ -82,6 +82,8 @@ const REQUIRED_METHODS: Array[StringName] = [
 	&"get_scenarios",
 	&"get_scenario",
 	&"set_player_state",
+	&"get_game_settings",
+	&"set_game_settings",
 	&"get_kreis_count",
 	&"get_kreis_index",
 	&"get_kreis",
@@ -638,6 +640,17 @@ func get_state_events(state_index: int) -> Dictionary:
 ## leer ohne KI-Daten.
 func get_state_persons(state_index: int) -> Array[Dictionary]:
 	return _as_dictionaries(_native.call(&"get_state_persons", state_index))
+
+
+## Spieleinstellungen (seit M13, vertical_slice.md 3.2): { active, difficulties: je { id, name, text,
+## default }, difficulty_id, difficulty_name, open, editable (nur am ersten Tag) }; ohne KI nur active.
+func get_game_settings() -> Dictionary:
+	return _as_dictionary(_native.call(&"get_game_settings"))
+
+
+## Stufe (Kennung, leer = Standard) und Geschichtsverlauf; nur am ersten Tag einer Partie mit KI.
+func set_game_settings(difficulty_id: String, open: bool) -> bool:
+	return bool(_native.call(&"set_game_settings", difficulty_id, open))
 
 
 ## Absichten eines Staates: { player, personality, inclinations: { risiko … vermittlung }, inclination_keys,

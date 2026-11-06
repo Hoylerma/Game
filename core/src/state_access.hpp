@@ -481,7 +481,9 @@ template <typename Sim, typename V> void StateAccess::visit(Sim& sim, V& v) {
             v.field("ziel", c.target);
             v.field("bis", c.until);
         });
-        v.field("spielerstroemung", w.player_current); // seit a3
+        v.field("spielerstroemung", w.player_current);                 // seit a3
+        v.field("spieleinstellung.stufe", w.game_settings.difficulty); // seit M13a1
+        v.field("spieleinstellung.offen", w.game_settings.open);
     }
 
     v.field("zufall.demografie", sim.rng_demography_);

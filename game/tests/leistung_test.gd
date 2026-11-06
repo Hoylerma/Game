@@ -45,6 +45,7 @@ func _run() -> void:
 	Engine.max_fps = 0
 	var started := Time.get_ticks_usec()
 	_main = (load(MAIN_SCENE) as PackedScene).instantiate()
+	_main.set("start_screen_enabled", false)  # seit M13: ohne Startbildschirm messen
 	root.add_child(_main)
 	if not bool(_main.get("view_is_ready")):
 		await _main.view_ready

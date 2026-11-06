@@ -101,9 +101,11 @@ AiLabRun run_ai_lab(const World& world, const SimConfig& config, const AiTargets
 struct AiLabOptions {
     std::uint64_t seed = 1648; // erster Seed
     std::int64_t seeds = 1;
-    unsigned parallel = 1; // gleichzeitige Läufe, 0 = alle Kerne
-    unsigned threads = 0;  // Threads je Lauf; mit mehr als einem gleichzeitigen Lauf je Lauf einer
-    bool ai = true;        // false: ohne KI wie in M11 (--ohne-ki)
+    unsigned parallel = 1;    // gleichzeitige Läufe, 0 = alle Kerne
+    unsigned threads = 0;     // Threads je Lauf; mit mehr als einem gleichzeitigen Lauf je Lauf einer
+    bool ai = true;           // false: ohne KI wie in M11 (--ohne-ki)
+    Index difficulty = kNone; // Stufe der Spieleinstellung (--stufe, seit M13a1; kNone: standard_stufe)
+    bool open = false;        // offener Geschichtsverlauf (--offen, seit M13a1)
 };
 
 /// Rechnet die Läufe seed … seed + seeds − 1, Ergebnisse in der Reihenfolge der Seeds.

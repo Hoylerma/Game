@@ -71,6 +71,36 @@ bool ai_active(const World& world) {
     return world.ai_rules.active;
 }
 
+Index ai_difficulty(const World& world) {
+    const Index chosen = world.game_settings.difficulty;
+    if (in_range(world.ai_difficulties, chosen)) {
+        return chosen;
+    }
+    return in_range(world.ai_difficulties, world.ai_rules.default_difficulty)
+               ? world.ai_rules.default_difficulty
+               : kNone;
+}
+
+AiRules effective_ai_rules(const World& world) {
+    AiRules r = world.ai_rules;
+    r.open_agenda = r.open_agenda || world.game_settings.open;
+    const Index difficulty = ai_difficulty(world);
+    if (difficulty == kNone) {
+        return r;
+    }
+    const DifficultyDef& d = world.ai_difficulties[at(difficulty)];
+    const auto months = [&](std::int32_t value) {
+        return static_cast<std::int32_t>((Fixed::from_int(value) * d.cooldown).round());
+    };
+    r.threshold = r.threshold * d.threshold;
+    r.noise = r.noise * d.noise;
+    r.cooldown_months = months(r.cooldown_months);
+    r.tax_cooldown_months = months(r.tax_cooldown_months);
+    r.caution = d.caution;
+    r.player_rival = d.player_rival;
+    return r;
+}
+
 void ensure_ai_state(World& world, const EventCache& cache) {
     if (!ai_active(world)) {
         return;
@@ -151,7 +181,7 @@ Inclinations state_inclinations(const World& world, Index state) {
 }
 
 bool agenda_goal_active(const World& world, const EventCache& cache, Index state, const AgendaGoal& goal) {
-    if (!world.ai_rules.open_agenda) {
+    if (!world.ai_rules.open_agenda && !world.game_settings.open) {
         if ((goal.has_from && world.date < goal.from) || (goal.has_to && goal.to < world.date)) {
             return false;
         }
@@ -316,7 +346,7 @@ struct Option {
 class Planner {
 public:
     Planner(World& world, Pcg32& rng, const EventCache& cache, std::vector<Command>& out)
-        : w_(world), rng_(rng), cache_(cache), out_(out) {}
+        : w_(world), rng_(rng), cache_(cache), out_(out), r_(effective_ai_rules(world)) {}
 
     Fixed strength(Index state) const {
         return in_range(strength_, state) ? strength_[at(state)] : Fixed::zero();
@@ -371,7 +401,7 @@ private:
 
     /// Nutzen mit Rauschen aus dem Strom Ki (nur für Optionen, die ihre Bedingung erfüllen).
     void rate(Option& option) {
-        const Fixed noise = w_.ai_rules.noise;
+        const Fixed noise = r_.noise;
         option.utility = option.sum() + (noise > Fixed::zero() ? rng_.uniform(-noise, noise) : Fixed::zero());
     }
 
@@ -413,7 +443,7 @@ private:
             d.reasons[i] = sorted[i];
         }
         w_.ai_log.push_back(d);
-        const auto limit = static_cast<std::size_t>(std::max(w_.ai_rules.log_size, 1));
+        const auto limit = static_cast<std::size_t>(std::max(r_.log_size, 1));
         std::size_t count = 0;
         for (const AiDecision& e : w_.ai_log) {
             count += e.state == state ? 1 : 0;
@@ -484,6 +514,13 @@ private:
                     rival = other;
                 }
             }
+            // Stufe Meister (seit M13a1): der Spielerstaat ist Rivale, wenn er mindestens drei Viertel so
+            // bedrohlich ist wie die größte Bedrohung (koordinierte Bündnisse gegen den Spieler).
+            const Index player = w_.event_player;
+            if (r_.player_rival && rival != kNone && rival != player && player != state && alive(player) &&
+                this->threat(state, player) * Fixed::from_int(4) >= most * Fixed::from_int(3)) {
+                rival = player;
+            }
         }
         strategy.rival = rival;
     }
@@ -492,7 +529,7 @@ private:
 
     void plan_budget(Index state) {
         const State& s = w_.states[at(state)];
-        const AiRules& r = w_.ai_rules;
+        const AiRules& r = r_;
         const Fixed income = s.last_month_income;
         if (income <= Fixed::zero() || cooling(state, AiDecisionKind::RaiseTax, kNone)) {
             return;
@@ -573,7 +610,7 @@ private:
         out_.push_back(c);
         record(state, decision, static_cast<Index>(kind), rate_new, option);
         // Eine Abkühlung für beide Richtungen (unter der Art RaiseTax ohne Ziel).
-        cool(state, AiDecisionKind::RaiseTax, kNone, w_.ai_rules.tax_cooldown_months);
+        cool(state, AiDecisionKind::RaiseTax, kNone, r_.tax_cooldown_months);
     }
 
     // ── Mobilmachung und Abrüstung (Abschnitt 6.3) ──
@@ -595,13 +632,13 @@ private:
         if (armed) {
             // Abrüstung nach quiet_months Monatsersten ohne Krieg, Krise und Hilfe gegen einen Aufstand.
             strategy.quiet_months = war || crisis || helping || m.crisis ? 0 : strategy.quiet_months + 1;
-            if (strategy.quiet_months >= w_.ai_rules.quiet_months) {
+            if (strategy.quiet_months >= r_.quiet_months) {
                 Option quiet;
                 quiet.add(AiFactor::Quiet, Fixed::from_int(10) * Fixed::from_int(strategy.quiet_months));
                 quiet.add(AiFactor::Thrift, Fixed::from_int(5) * inclination(Inclination::Thrift));
                 quiet.add(AiFactor::Risk, Fixed::from_int(-5) * inclination(Inclination::Risk));
                 rate(quiet);
-                if (quiet.utility >= w_.ai_rules.threshold) {
+                if (quiet.utility >= r_.threshold) {
                     order_mobilization(state, false, AiDecisionKind::Demobilize, kNone, quiet);
                     strategy.quiet_months = 0;
                 }
@@ -625,8 +662,7 @@ private:
                 continue;
             }
             const Fixed threat = this->threat(state, other);
-            if (threat > w_.ai_rules.threat_mobilize && relation(w_, state, other) < Fixed::zero() &&
-                threat > most) {
+            if (threat > r_.threat_mobilize && relation(w_, state, other) < Fixed::zero() && threat > most) {
                 most = threat;
                 source = other;
             }
@@ -636,14 +672,13 @@ private:
         }
         Option mobilize;
         mobilize.add(AiFactor::Threat,
-                     Fixed::from_int(20) * (most - w_.ai_rules.threat_mobilize) + Fixed::from_int(10),
-                     source);
+                     Fixed::from_int(20) * (most - r_.threat_mobilize) + Fixed::from_int(10), source);
         mobilize.add(AiFactor::Risk, Fixed::from_int(5) * inclination(Inclination::Risk));
         mobilize.add(AiFactor::Thrift, Fixed::from_int(-5) * inclination(Inclination::Thrift));
         rate(mobilize);
-        if (mobilize.utility >= w_.ai_rules.threshold) {
+        if (mobilize.utility >= r_.threshold) {
             order_mobilization(state, true, AiDecisionKind::Mobilize, source, mobilize);
-            cool(state, AiDecisionKind::Mobilize, kNone, w_.ai_rules.tax_cooldown_months);
+            cool(state, AiDecisionKind::Mobilize, kNone, r_.tax_cooldown_months);
         }
     }
 
@@ -759,7 +794,7 @@ private:
         }
         best_option.add(AiFactor::Thrift, Fixed::from_int(-5) * inclination(Inclination::Thrift));
         rate(best_option);
-        if (best_option.utility >= w_.ai_rules.threshold) {
+        if (best_option.utility >= r_.threshold) {
             Command c;
             c.type = CommandType::Envoy;
             c.state = state;
@@ -784,7 +819,7 @@ private:
     bool at_war_any(Index state) const { return military_active(w_) && in_war(w_, state); }
 
     void plan_alliance(Index state) {
-        if (alliance_count(state) >= w_.ai_rules.max_alliances ||
+        if (alliance_count(state) >= r_.max_alliances ||
             cooling(state, AiDecisionKind::OfferAlliance, kNone) || at_war_any(state)) {
             return;
         }
@@ -830,7 +865,7 @@ private:
             return;
         }
         rate(best_option);
-        if (best_option.utility >= w_.ai_rules.threshold) {
+        if (best_option.utility >= r_.threshold) {
             order_treaty(state, best, TreatyAction::Alliance, AiDecisionKind::OfferAlliance, best_option);
         }
     }
@@ -864,7 +899,7 @@ private:
             return;
         }
         rate(best_option);
-        if (best_option.utility >= w_.ai_rules.threshold) {
+        if (best_option.utility >= r_.threshold) {
             order_treaty(state, best, TreatyAction::Guarantee, AiDecisionKind::OfferGuarantee, best_option);
         }
     }
@@ -878,7 +913,7 @@ private:
         c.value = Fixed::from_int(static_cast<std::int64_t>(action));
         out_.push_back(c);
         record(state, decision, target, Fixed::zero(), option);
-        cool(state, decision, kNone, w_.ai_rules.tax_cooldown_months);
+        cool(state, decision, kNone, r_.tax_cooldown_months);
     }
 
     /// Bündnisstärke: eigene Stärke und die der Verbündeten.
@@ -942,7 +977,8 @@ private:
                 continue;
             }
             const Fixed r = ratio(own, alliance_strength(c.target));
-            const Fixed needed = Fixed::one() - inclination(Inclination::Risk) * Fixed::from_ratio(15, 100);
+            const Fixed needed =
+                Fixed::one() - inclination(Inclination::Risk) * Fixed::from_ratio(15, 100) + r_.caution;
             if (r < needed) {
                 continue;
             }
@@ -961,7 +997,7 @@ private:
             return;
         }
         rate(best_option);
-        if (best_option.utility >= w_.ai_rules.threshold) {
+        if (best_option.utility >= r_.threshold) {
             Command c;
             c.type = CommandType::Demand;
             c.state = state;
@@ -970,8 +1006,8 @@ private:
             out_.push_back(c);
             record(state, AiDecisionKind::Demand, best, c.value, best_option);
             chronicle_reasons(state); // seit b3: Gründe auch in der Chronik (ki.md 9)
-            cool(state, AiDecisionKind::Demand, best, w_.ai_rules.cooldown_months);
-            cool(state, AiDecisionKind::Demand, kNone, w_.ai_rules.cooldown_months);
+            cool(state, AiDecisionKind::Demand, best, r_.cooldown_months);
+            cool(state, AiDecisionKind::Demand, kNone, r_.cooldown_months);
         }
     }
 
@@ -1008,7 +1044,7 @@ private:
             return;
         }
         rate(option);
-        if (option.utility >= w_.ai_rules.threshold) {
+        if (option.utility >= r_.threshold) {
             Command c;
             c.type = CommandType::Manoeuvre;
             c.state = state;
@@ -1047,7 +1083,7 @@ private:
             option.add(AiFactor::Agenda, c.weight / Fixed::from_int(2));
             option.add(AiFactor::Legitimacy, Fixed::from_int(3) * inclination(Inclination::Legitimacy));
             rate(option);
-            if (option.utility >= w_.ai_rules.threshold) {
+            if (option.utility >= r_.threshold) {
                 Command cmd;
                 cmd.type = CommandType::Motion;
                 cmd.state = state;
@@ -1055,7 +1091,7 @@ private:
                 cmd.value = Fixed::from_int(static_cast<std::int64_t>(c.kind));
                 out_.push_back(cmd);
                 record(state, AiDecisionKind::Motion, c.target, cmd.value, option);
-                cool(state, AiDecisionKind::Motion, key, w_.ai_rules.cooldown_months);
+                cool(state, AiDecisionKind::Motion, key, r_.cooldown_months);
                 return; // höchstens ein Antrag je Monat
             }
         }
@@ -1091,14 +1127,14 @@ private:
             return;
         }
         rate(best_option);
-        if (best_option.utility >= w_.ai_rules.threshold) {
+        if (best_option.utility >= r_.threshold) {
             Command c;
             c.type = CommandType::CustomsUnion;
             c.state = state;
             c.target = best;
             out_.push_back(c);
             record(state, AiDecisionKind::JoinUnion, best, Fixed::zero(), best_option);
-            cool(state, AiDecisionKind::JoinUnion, best, w_.ai_rules.cooldown_months);
+            cool(state, AiDecisionKind::JoinUnion, best, r_.cooldown_months);
         }
     }
 
@@ -1167,7 +1203,7 @@ private:
     void plan_declaration(Index state) {
         const State& s = w_.states[at(state)];
         const Fixed risk = inclination(Inclination::Risk);
-        const Fixed needed = w_.ai_rules.war_ratio - risk * Fixed::from_ratio(15, 100);
+        const Fixed needed = r_.war_ratio - risk * Fixed::from_ratio(15, 100) + r_.caution;
         const Fixed debt_ratio = s.debt / std::max(s.yearly_income, Fixed::one());
         const Fixed unrest = in_range(w_.unrest, state) ? w_.unrest[at(state)] : Fixed::zero();
         const bool tactician = has_trait(state, "taktiker");
@@ -1220,7 +1256,7 @@ private:
             option.add(AiFactor::Expansion, Fixed::from_int(5) * inclination(Inclination::Expansion));
             option.add(AiFactor::Risk, Fixed::from_int(5) * risk);
             option.add(AiFactor::DebtRatio,
-                       -Fixed::from_int(10) * std::max(debt_ratio - w_.ai_rules.debt_limit, Fixed::zero()));
+                       -Fixed::from_int(10) * std::max(debt_ratio - r_.debt_limit, Fixed::zero()));
             option.add(AiFactor::Unrest,
                        -std::max(unrest - Fixed::from_int(40), Fixed::zero()) / Fixed::from_int(2));
             if (federal_state(w_, state) && federal_state(w_, enemy)) {
@@ -1237,7 +1273,7 @@ private:
         }
         rate(best_option);
         // Krieg verlangt die doppelte Schwelle.
-        if (best_option.utility >= w_.ai_rules.threshold * Fixed::from_int(2)) {
+        if (best_option.utility >= r_.threshold * Fixed::from_int(2)) {
             Command c;
             c.type = CommandType::DeclareWar;
             c.state = state;
@@ -1246,7 +1282,7 @@ private:
             out_.push_back(c);
             record(state, AiDecisionKind::DeclareWar, best, c.value, best_option);
             chronicle_reasons(state);
-            cool(state, AiDecisionKind::DeclareWar, best, w_.ai_rules.cooldown_months);
+            cool(state, AiDecisionKind::DeclareWar, best, r_.cooldown_months);
         }
     }
 
@@ -1293,7 +1329,7 @@ private:
         } else if (weariness >= Fixed::from_int(50) - Fixed::from_int(10) * inclination(Inclination::Risk) &&
                    score < Fixed::from_int(25) && enemy_score <= score + Fixed::from_int(10) &&
                    war_side_strength(attacker ? war.attackers : war.defenders) <
-                       war_side_strength(attacker ? war.defenders : war.attackers) * w_.ai_rules.war_ratio) {
+                       war_side_strength(attacker ? war.defenders : war.attackers) * r_.war_ratio) {
             // Weißer Frieden nur bei ausgeglichenem Krieg: Wer zurückliegt, kämpft weiter oder unterwirft
             // sich; wer klar überlegen ist (Stärke ab kriegs_staerke), setzt auf den Sieg.
             terms = PeaceTerms::White;
@@ -1307,7 +1343,7 @@ private:
             return;
         }
         rate(option);
-        if (option.utility >= w_.ai_rules.threshold) {
+        if (option.utility >= r_.threshold) {
             Command c;
             c.type = CommandType::PeaceOffer;
             c.state = state;
@@ -1342,7 +1378,7 @@ private:
                        enemy);
             option.add(AiFactor::Expansion, Fixed::from_int(5) * inclination(Inclination::Expansion));
             rate(option);
-            if (option.utility < w_.ai_rules.threshold) {
+            if (option.utility < r_.threshold) {
                 continue;
             }
             Command c;
@@ -1378,7 +1414,7 @@ private:
             const Parliament& parliament = w_.parliaments[p];
             const std::int64_t days = to_day_number(parliament.election_day) - to_day_number(w_.date);
             const std::int64_t months = days / 30 + 1;
-            if (days < 0 || months > w_.ai_rules.campaign_months ||
+            if (days < 0 || months > r_.campaign_months ||
                 std::any_of(w_.elections.begin(), w_.elections.end(),
                             [&](const ElectionResult& e) { return e.parliament == static_cast<Index>(p); })) {
                 continue;
@@ -1403,8 +1439,8 @@ private:
                 if (current == w_.player_current) {
                     continue;
                 }
-                const Fixed budget = (w_.party_funds[c] * (Fixed::one() - w_.ai_rules.campaign_reserve)) /
-                                     Fixed::from_int(months);
+                const Fixed budget =
+                    (w_.party_funds[c] * (Fixed::one() - r_.campaign_reserve)) / Fixed::from_int(months);
                 std::int64_t actions = (budget / cost).trunc();
                 if (actions <= 0) {
                     continue;
@@ -1445,6 +1481,7 @@ private:
     Pcg32& rng_;
     const EventCache& cache_;
     std::vector<Command>& out_;
+    const AiRules r_;             // Regeln mit Stufe und Verlauf der Partie (seit M13a1)
     std::vector<Fixed> strength_; // je Staat, einmal je Monatserstem (run)
     Inclinations inclinations_{};
 };
@@ -1473,7 +1510,7 @@ bool ai_accepts_alliance(const World& world, Index acceptor, Index proposer) {
     if (rival == proposer) {
         utility -= Fixed::from_int(30);
     }
-    return utility >= world.ai_rules.threshold;
+    return utility >= effective_ai_rules(world).threshold;
 }
 
 bool ai_accepts_white_peace(const World& world, const War& war, bool attacker_side) {

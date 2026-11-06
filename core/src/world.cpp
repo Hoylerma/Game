@@ -110,6 +110,10 @@ Index World::find_personality(std::string_view id) const {
     return find_by(ai_personalities, id, [](const PersonalityDef& p) -> std::string_view { return p.id; });
 }
 
+Index World::find_difficulty(std::string_view id) const {
+    return find_by(ai_difficulties, id, [](const DifficultyDef& d) -> std::string_view { return d.id; });
+}
+
 Index World::office(Index state, PersonRole role) const {
     const std::size_t slot = static_cast<std::size_t>(state) * kPersonRoles + static_cast<std::size_t>(role);
     return state >= 0 && slot < offices.size() ? offices[slot] : kNone;

@@ -492,6 +492,9 @@ Präzisiert in Schritt a5 (`core/src/ai_lab.cpp`, Zieldatei: chronik-skript.md A
   Beitritt Hannovers durch), und der Vergleich mäße nichts mehr.
 - **`--ohne-ki`:** dieselbe Welt mit abgeschalteter KI (`AiRules::active` aus): keine Planer, keine Annahme
   nach Nutzen, Ereignisgewichte ohne Neigung – also wie M11.
+- **`--stufe S` und `--offen`** (seit M13a1, [vertical_slice.md](vertical_slice.md) 3.2): Schwierigkeitsstufe
+  und offener Geschichtsverlauf wie die Spieleinstellung einer Partie; die Korridore gelten für Geselle
+  im historischen Verlauf.
 
 ## 8. Zustand, Kern und Spielstand
 

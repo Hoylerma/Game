@@ -18,6 +18,14 @@ namespace uhrwerk {
 
 bool ai_active(const World& world);
 
+/// Stufe der Partie (Spieleinstellung, sonst standard_stufe) oder -1 ohne Stufen (seit M13a1).
+Index ai_difficulty(const World& world);
+
+/// Regeln der Planer mit den Faktoren der Stufe und dem Geschichtsverlauf der Partie (seit M13a1,
+/// vertical_slice.md 3.2): schwelle, rauschen und Abkühlungen × Faktor, caution und player_rival aus der
+/// Stufe, open_agenda auch bei offenem Verlauf.
+AiRules effective_ai_rules(const World& world);
+
 /// Legt die Ämter an, wenn ihre Größe nicht zur Welt passt, und besetzt sie ohne Eintrag in der Chronik
 /// (Start einer Partie).
 void ensure_ai_state(World& world, const EventCache& cache);

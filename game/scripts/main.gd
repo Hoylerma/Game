@@ -38,6 +38,9 @@ var view_is_ready := false
 var save_dir := SaveSlots.DEFAULT_DIR
 ## Automatischer Spielstand am 1. Januar (seit M6).
 var autosave_enabled := true
+## Startbildschirm beim Start ohne Szenario- und Screenshot-Optionen (seit M13); Tests schalten ihn ab,
+## bevor sie die Szene einhängen.
+var start_screen_enabled := true
 
 var _sim: SimulationClient = null
 var _map: MapData = null
@@ -64,6 +67,7 @@ var _legend_month := -1
 var _mode_key_down_at := {}
 ## Spielmenü (seit M6) und die Geschwindigkeit, die beim Schließen wieder gilt.
 var _game_menu: GameMenu = null
+var _start_screen: StartScreen = null
 var _speed_before_menu := 0
 ## Wahlabend (seit M8) und der Stand seiner Meldungen für die Karte.
 var _election_night: ElectionNight = null
@@ -142,6 +146,7 @@ func _ready() -> void:
 	_build_diplomacy()
 	_build_war()
 	_build_events()
+	_build_start_screen()
 	_state_panel.tax_rate_requested.connect(_on_tax_rate_requested)
 	_state_panel.politics_source = func() -> Dictionary:
 		return _sim.get_state_politics(_player) if _sim != null else {}
@@ -191,6 +196,8 @@ func _ready() -> void:
 	_fit_camera()
 	_apply_launch_view()
 	view_is_ready = true
+	if _wants_start_screen():
+		open_start_screen()
 	view_ready.emit()
 	if _options.wants_screenshot():
 		_run_screenshot()
@@ -224,6 +231,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	if _game_menu != null and _game_menu.is_open():
 		return # Solange das Menü offen ist, ruhen Karte und Zeit (Escape schließt es, GameMenu).
+	if _start_screen != null and _start_screen.is_open():
+		return # Startbildschirm (seit M13): Karte und Zeit ruhen.
 	for speed in SPEED_ACTIONS.size():
 		if event.is_action_pressed(SPEED_ACTIONS[speed], false, true):
 			if speed == 0:
@@ -1892,6 +1901,154 @@ func _build_game_menu() -> void:
 	_game_menu.role_selected.connect(set_party)
 
 
+# --- Startbildschirm (seit M13, vertical_slice.md 3.1) ------------------------------
+
+
+func _build_start_screen() -> void:
+	_start_screen = StartScreen.new()
+	_start_screen.name = "StartScreen"
+	var root := _state_panel.get_parent().get_parent()  # UI/Root
+	root.add_child(_start_screen)
+	root.move_child(_start_screen, _notices.get_index())  # Hinweise bleiben darüber lesbar
+	_start_screen.scenario_chosen.connect(_on_start_scenario)
+	_start_screen.state_chosen.connect(_on_start_state)
+	_start_screen.game_requested.connect(_on_start_game)
+	_start_screen.load_requested.connect(_on_start_load)
+	_start_screen.quit_requested.connect(func() -> void: get_tree().quit())
+	# Hinter dem Startbildschirm nur die Karte: Leisten und Panels der Partie ruhen.
+	_start_screen.shown_changed.connect(func(open: bool) -> void:
+		for control: Control in [_top_bar, _left_column, _right_column, _mode_bar_area, _map_labels]:
+			control.visible = not open)
+
+
+func _wants_start_screen() -> bool:
+	return (
+		start_screen_enabled and _sim != null and not _options.wants_screenshot()
+		and _options.scenario_id.is_empty() and _options.state_tag.is_empty() and _options.party_id.is_empty()
+	)
+
+
+## Startbildschirm (Tests).
+func start_screen() -> StartScreen:
+	return _start_screen
+
+
+## Öffnet das Hauptmenü des Startbildschirms; die Zeit hält an.
+func open_start_screen() -> void:
+	if _sim == null:
+		return
+	close_game_menu(false)
+	_set_speed(0)
+	_tooltip.hide_tooltip()
+	var saves := SaveSlots.list(_sim, save_dir)
+	var newest := ""
+	var newest_time := -1
+	for save in saves:
+		# Auch Spielstände anderer Lesezeichen: das Laden bringt ihr Szenario mit.
+		if int(save.get("modified", 0)) > newest_time:
+			newest_time = int(save.get("modified", 0))
+			newest = str(save.get("path", ""))
+	_start_screen.show_scenarios(_sim.get_scenarios(_data_dir))
+	_start_screen.show_saves(saves)
+	_start_screen.open_menu(newest, not saves.is_empty())
+
+
+## Für Screenshots (--startbildschirm): 0 Hauptmenü, 1 Lesezeichen, 2 Einstellungen des geladenen
+## Lesezeichens mit seinem Spielerstaat.
+func _open_start_page(page: int) -> void:
+	open_start_screen()
+	if page == 1:
+		_start_screen.menu_button("NewGame").emit_signal("pressed")
+	elif page == 2:
+		_start_screen.show_settings(str(_sim.get_state(_player).get("name", "")), _sim.get_game_settings())
+
+
+func _on_start_scenario(scenario_id: String) -> void:
+	var errors := start_new_game(scenario_id, "", true)
+	if not errors.is_empty():
+		_start_screen.show_status("Das Lesezeichen ließ sich nicht laden: " + errors, true)
+		return
+	var scenario := _sim.get_scenario()
+	var playable: PackedStringArray = scenario.get("playable", PackedStringArray())
+	var recommended: Array = StartScreen.RECOMMENDED.get(scenario_id, [])
+	var states: Array[Dictionary] = []
+	var listed := PackedStringArray()
+	for entry: Dictionary in recommended:
+		var index := _sim.get_state_index(str(entry.get("tag", "")))
+		if index >= 0:
+			states.append(_start_state_entry(index, true, str(entry.get("difficulty", "")), str(entry.get("text", ""))))
+			listed.append(str(entry.get("tag", "")))
+	if recommended.is_empty():
+		for tag in playable:
+			var index := _sim.get_state_index(tag)
+			if index >= 0:
+				states.append(_start_state_entry(index, true, "", "Hervorgehobener Staat des Lesezeichens"))
+				listed.append(tag)
+	var others: Array[Dictionary] = []
+	for index in _sim.get_state_count():
+		var state := _sim.get_state(index)
+		if int(state.get("location_count", 0)) > 0 and not listed.has(str(state.get("tag", ""))):
+			others.append(_start_state_entry(index, false, "", ""))
+	others.sort_custom(func(a: Dictionary, b: Dictionary) -> bool:
+		return str(a.get("name", "")).naturalnocasecmp_to(str(b.get("name", ""))) < 0)
+	states.append_array(others)
+	_start_screen.show_states(str(scenario.get("name", "")), states, str(scenario.get("player_tag", "")))
+
+
+func _start_state_entry(index: int, recommended: bool, difficulty: String, text: String) -> Dictionary:
+	var state := _sim.get_state(index)
+	return {
+		"tag": str(state.get("tag", "")), "name": str(state.get("name", "")), "recommended": recommended,
+		"difficulty": difficulty, "text": text,
+	}
+
+
+func _on_start_state(state_tag: String) -> void:
+	var index := _sim.get_state_index(state_tag)
+	if index < 0:
+		return
+	_start_screen.show_settings(str(_sim.get_state(index).get("name", state_tag)), _sim.get_game_settings())
+
+
+## Beginnt die Partie: Spielerstaat, Spieleinstellungen (Befehl am ersten Tag), Kompass.
+func _on_start_game(state_tag: String, difficulty_id: String, open: bool, compass: bool) -> void:
+	var index := _sim.get_state_index(state_tag)
+	if index < 0:
+		return
+	if index != _player:
+		play_state(index)
+	if bool(_sim.get_game_settings().get("active", false)):
+		_sim.set_game_settings(difficulty_id, open)
+	_event_window.set_compass(compass)
+	_start_screen.close()
+	focus_capital()
+	# Der Befehl wirkt beim ersten Schritt; der Name der Stufe kommt aus der Auswahl.
+	var settings := _sim.get_game_settings()
+	var level := str(settings.get("difficulty_name", ""))
+	for entry: Dictionary in settings.get("difficulties", []):
+		if str(entry.get("id", "")) == difficulty_id:
+			level = str(entry.get("name", ""))
+	_top_bar.show_notice(
+		"Neues Spiel: %s, %s%s" % [
+			str(_sim.get_state(_player).get("name", "")), _sim.get_date_text(),
+			(", Stufe %s" % level) if bool(settings.get("active", false)) else ""
+		]
+	)
+	print(
+		"EINIGKEIT: Partie beginnt als %s, Stufe %s, Verlauf %s" % [
+			state_tag, difficulty_id if not difficulty_id.is_empty() else "Standard",
+			"offen" if open else "historisch"
+		]
+	)
+
+
+func _on_start_load(path: String) -> void:
+	if load_game_file(path):
+		_start_screen.close()
+	else:
+		_start_screen.show_status("Der Spielstand ließ sich nicht laden.", true)
+
+
 # --- Parteienmodus (seit M8) ------------------------------------------------------
 
 
@@ -2352,7 +2509,7 @@ func _after_load(new_client: bool = false) -> void:
 
 ## Neues Spiel (seit M7): lädt das Szenario frisch mit seinem Spielerstaat; die laufende Partie
 ## bleibt bei einem Fehler erhalten. Leer bei Erfolg, sonst die Fehler.
-func start_new_game(scenario_id: String, state_tag: String = "") -> String:
+func start_new_game(scenario_id: String, state_tag: String = "", quiet: bool = false) -> String:
 	if _sim == null:
 		return "Keine Simulation geladen."
 	var sim := SimulationClient.create()
@@ -2375,7 +2532,7 @@ func start_new_game(scenario_id: String, state_tag: String = "") -> String:
 	_top_bar.show_notice(
 		"Neues Spiel: %s (%s)" % [str(scenario.get("name", "")), _sim.get_date_text()]
 	)
-	if not playable.is_empty():
+	if not playable.is_empty() and not quiet:
 		_notices.add_notice(
 			"Neues Spiel: %s" % str(scenario.get("name", "")),
 			(
@@ -2487,6 +2644,8 @@ func _run_screenshot() -> void:
 		open_game_menu()
 	if _options.show_election_night:
 		open_last_election()
+	if _options.start_page >= 0:
+		_open_start_page(_options.start_page)
 
 	if DisplayServer.get_name() == "headless":
 		# Ohne Grafikausgabe gibt es kein Bild (und kein frame_post_draw).

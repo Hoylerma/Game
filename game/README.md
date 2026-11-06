@@ -44,6 +44,17 @@ godot --editor --path game
 Der Import ist nötig, weil Godot erst dabei die globalen Klassennamen (`class_name`) registriert
 und das Programmsymbol importiert; der Editor erledigt das beim Öffnen von selbst.
 
+### Startbildschirm
+
+Seit M13 beginnt das Spiel mit dem **Startbildschirm** (ohne `--szenario`, `--staat`, `--partei` und
+`--screenshot`): **Neues Spiel** führt über das Lesezeichen (Völkerfrühling 1848, Düppel, Königgrätz, Sedan;
+1648 als Technikprototyp unter „Weitere“), den Staat (empfohlen Preußen, Österreich, Bayern und Sachsen mit
+Schwierigkeit; „Anderer Staat …“ für alle übrigen) und die **Spieleinstellungen** (Schwierigkeit Lehrling,
+Geselle oder Meister, Geschichtsverlauf historisch oder offen, historischer Kompass) zum Spielbeginn.
+Stufe und Verlauf gelten für die ganze Partie ([docs/technik/vertical_slice.md](../docs/technik/vertical_slice.md),
+Abschnitte 3.1 und 3.2). **Fortsetzen** lädt den jüngsten Spielstand, **Laden …** zeigt alle. Esc führt eine
+Seite zurück. Geschichtsstunde und Einstellungen folgen mit späteren Schritten von M13.
+
 ### Datenordner
 
 Standard ist `../data` relativ zum Projektordner (also `data/` im Repository). Die
@@ -78,6 +89,7 @@ Optionen stehen nach `--` (Benutzerargumente):
 | `--partei=<strömung>` | Parteienmodus mit dieser Strömung beim Start, z. B. `liberale` (seit M8; nur in Szenarien mit Parlament, 1848) |
 | `--ereignis` | Ereignisse des Spielerstaates warten auf die Wahl, das Ereignisfenster zeigt die offenen (seit M11; 1848 z. B. `--staat=BAD --tage=8`). Ohne die Option rechnen Screenshots wie die Kommandozeile ohne Ereignisspieler |
 | `--journal` | Journalfenster vor dem Screenshot öffnen (seit M11; ab 1848) |
+| `--startbildschirm[=<seite>]` | Startbildschirm vor dem Screenshot öffnen, Seite `menue` (Standard), `lesezeichen` oder `einstellungen` (Spieleinstellungen für den Spielerstaat des Lesezeichens, mit `--szenario`; seit M13) |
 
 Auf der Kernraum-Karte bei 1600 × 900 Pixeln reicht die ferne Stufe (Staatsnamen) bis etwa
 `--zoom=2,7`, die mittlere (Kreisnamen) bis etwa `--zoom=6,3`, darüber folgt die nahe

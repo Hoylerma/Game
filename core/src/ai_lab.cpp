@@ -273,11 +273,14 @@ AiLabRun run_ai_lab(const World& world, const SimConfig& config, const AiTargets
 std::vector<AiLabRun> run_ai_lab_seeds(const World& world, const AiTargets& targets,
                                        const AiLabOptions& options) {
     const World* base = &world;
-    std::optional<World> without_ai;
-    if (!options.ai) {
-        without_ai.emplace(world);
-        without_ai->ai_rules.active = false;
-        base = &*without_ai;
+    std::optional<World> changed;
+    if (!options.ai || options.difficulty != kNone || options.open) {
+        changed.emplace(world);
+        changed->ai_rules.active = options.ai;
+        // Spieleinstellung wie der Befehl am ersten Tag (vertical_slice.md 3.2).
+        changed->game_settings.difficulty = options.difficulty;
+        changed->game_settings.open = options.open;
+        base = &*changed;
     }
     const auto count = static_cast<std::size_t>(std::max<std::int64_t>(options.seeds, 0));
     std::vector<AiLabRun> runs(count);

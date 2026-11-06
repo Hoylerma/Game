@@ -32,6 +32,27 @@ ki {
 
     # Krieg (seit Schritt a4, Abschnitt 6.3)
     kriegs_staerke = 1.3        # Stärkeverhältnis der Seiten für eine Kriegserklärung (− 0,15 je Punkt Risiko)
+
+    # Schwierigkeit (seit M13a1, docs/technik/vertical_slice.md 3.2): Stufe ohne Spieleinstellung
+    standard_stufe = geselle
+}
+
+# Schwierigkeitsstufen (Kapitel 21, Abschnitt 8; vertical_slice.md 3.2): Faktoren auf schwelle, rauschen und
+# die Abkühlungen, Zuschlag 'vorsicht' auf das nötige Stärkeverhältnis für Forderung und Kriegserklärung;
+# keine Boni. Geselle rechnet wie M12 (kalibriert, Korridore in kiziele_voelkerfruehling.chron).
+stufe lehrling {
+    name = "Lehrling"
+    text = "Die Staaten reagieren langsam, handeln vorsichtig und verzeihen Fehler."
+    schwelle = 1.5  rauschen = 2  abkuehlung = 2  vorsicht = 0.25
+}
+stufe geselle {
+    name = "Geselle"
+    text = "Die Staaten planen wie ihre historischen Vorbilder (Standard)."
+}
+stufe meister {
+    name = "Meister"
+    text = "Die Staaten planen genauer, nutzen Gelegenheiten und verbünden sich gegen einen starken Spieler."
+    schwelle = 0.8  rauschen = 0.5  abkuehlung = 0.75  vorsicht = -0.1  spieler_rivale = ja
 }
 
 # Staatspersönlichkeiten (Kapitel 21, Abschnitt 3.1; ki.md Abschnitt 3.2). Neigungen je −2 … +2.

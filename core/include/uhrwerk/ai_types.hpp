@@ -53,6 +53,32 @@ struct AiRules {
     // Seit Schritt a4 (Abschnitt 6.3).
     Fixed war_ratio = Fixed::from_ratio(13, 10); // Stärkeverhältnis der Seiten für eine Kriegserklärung
                                                  // (kriegs_staerke; minus 0,15 je Punkt Risiko)
+    // Seit M13a1 (vertical_slice.md 3.2): Schwierigkeitsstufe ohne Spieleinstellung (standard_stufe).
+    Index default_difficulty = -1;
+    // Nur in effective_ai_rules gesetzt (aus der Stufe, kein Datenfeld des Blocks ki): Zuschlag auf das
+    // nötige Stärkeverhältnis für Forderung und Krieg und ob der Spielerstaat als Rivale zählt.
+    Fixed caution;
+    bool player_rival = false;
+};
+
+/// Schwierigkeitsstufe (seit M13a1, vertical_slice.md 3.2; Kapitel 21, Abschnitt 8): Faktoren auf die
+/// Regeln derselben Planer, keine Boni.
+struct DifficultyDef {
+    std::string id;
+    std::string name;
+    std::string text;               // Kurztext für die Auswahl
+    Fixed threshold = Fixed::one(); // × schwelle
+    Fixed noise = Fixed::one();     // × rauschen
+    Fixed cooldown = Fixed::one();  // × abkuehlung und abkuehlung_steuern
+    Fixed caution;                  // + nötiges Stärkeverhältnis für Forderung und Kriegserklärung
+    bool player_rival = false; // der Spielerstaat ist Rivale, wenn er fast so bedrohlich ist wie der größte
+};
+
+/// Spieleinstellungen einer Partie (seit M13a1, Befehl Spieleinstellung am ersten Tag; im Zustand nur mit
+/// KI-Daten).
+struct GameSettings {
+    Index difficulty = -1; // Stufe (-1: standard_stufe)
+    bool open = false;     // Geschichtsverlauf offen (wie agenda_offen)
 };
 
 /// Faktor eines Nutzens (Abschnitt 5); seine Bezeichnung liefert ai_reason_text.

@@ -144,7 +144,11 @@ godot --headless --path game --script res://tests/smoke_test.gd -- --ohne-karte
 ## Klicktest (`klick_test.gd`)
 
 Abnahme M3 „Klickerkennung für alle Orte richtig“. Der Test startet die Hauptszene mit den
-echten Daten und prüft:
+echten Daten. Seit M13 prüft er zuerst den **Startbildschirm** (Hauptmenü, Taste 3 startet keine Zeit,
+Lesezeichen mit 1648 unter „Weitere“, Esc zurück) und schließt ihn; ganz am Ende spielt er ihn bis zum
+Spielbeginn durch (Fortsetzen erst mit einem Spielstand, 1848, Bayern statt des vorgewählten Preußen,
+Stufe Meister und offener Verlauf; nach dem ersten Tag gelten sie und sind nicht mehr änderbar).
+Dazwischen prüft er:
 
 1. **Jeden Ort der `definition.csv` bei drei Zoomstufen** (fern = Übersicht, mittel, nah;
    `MapDetail.LEVEL_SIZES`): Der Beschriftungspunkt des Ortes (ein Pixel, das laut Generator

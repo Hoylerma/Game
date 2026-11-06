@@ -778,6 +778,15 @@ jobs:
             "$GODOT_BIN" --path game --rendering-driver opengl3 --audio-driver Dummy \
             -- --screenshot="$PWD/artefakte/einigkeit_journal.png" --szenario=voelkerfruehling --staat=PRU --tage=120 --journal \
             2>&1 | tee -a "$RUNNER_TEMP/screenshot.log"
+          # Startbildschirm (seit M13): Hauptmenü und Spieleinstellungen für Preußen 1848
+          xvfb-run -a -s "-screen 0 1600x900x24" \
+            "$GODOT_BIN" --path game --rendering-driver opengl3 --audio-driver Dummy \
+            -- --screenshot="$PWD/artefakte/einigkeit_start.png" --tage=0 --startbildschirm \
+            2>&1 | tee -a "$RUNNER_TEMP/screenshot.log"
+          xvfb-run -a -s "-screen 0 1600x900x24" \
+            "$GODOT_BIN" --path game --rendering-driver opengl3 --audio-driver Dummy \
+            -- --screenshot="$PWD/artefakte/einigkeit_start_einstellungen.png" --szenario=voelkerfruehling --tage=0 --startbildschirm=einstellungen \
+            2>&1 | tee -a "$RUNNER_TEMP/screenshot.log"
           if grep -E "SCRIPT ERROR|Parse Error|SHADER ERROR" "$RUNNER_TEMP/screenshot.log"; then
             echo "::error::Skript- oder Shaderfehler bei den Screenshots."
             exit 1
