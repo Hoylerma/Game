@@ -236,7 +236,7 @@ Dazwischen prüft er:
     laufender Zeit öffnet das Ereignisfenster und hält sie an; ein Tempo bleibt gesperrt („Erst das
     Ereignis entscheiden“), die Wahl schließt das Fenster und setzt das gewünschte Tempo fort. Taste
     J öffnet das Journalfenster mit Reitern und Zielen, Esc schließt es; „Ereignisse“ im Spielmenü
-    zeigt die bisherigen Ereignisse. Taste X schaltet in den Kartenmodus „Unruhe“ mit Legende. Das
+    zeigt die bisherigen Ereignisse. Taste X schaltet in den Kartenmodus „Unruhe“ mit Legende, Taste C (seit M13) in den Kartenmodus „Bund“ mit dem Deutschen Bund unter Österreich. Das
     Diplomatiefenster zeigt die ruhende Bundesversammlung mit gesperrten Anträgen. In den übrigen
     Abschnitten beantwortet der Test Ereignisse über das Fenster mit der Standardoption.
 14. **Wege der Revolution** (Abnahme M11): Als Baden beantwortet das Ereignisfenster die

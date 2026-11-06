@@ -40,7 +40,8 @@ constexpr std::uint64_t kMilitaryContentVersion = 9;
 /// Stand der Ereignisse im Zustand (seit M11, Inhaltsbereich ereignisse): 1 = Schritt a1, 2 = a2 (Auslösung,
 /// Befristung, Spieler), 3 = a3 (Unruhe, Aufstände), 4 = a4 (Journale, Abstimmungen), 5 = a5 (beendete
 /// Aufstände).
-constexpr std::uint64_t kEventContentVersion = 7; // 7 seit M12a3: Block ki an den Optionen
+constexpr std::uint64_t kEventContentVersion =
+    8; // 7 seit M12a3: Block ki an den Optionen; 8 seit M13a2: Bund
 
 /// Stand der KI im Zustand (seit M12, Inhaltsbereich ki): 1 = Schritt a1 (Ämter, Strom Ki), 2 = a2
 /// (Strategie, Protokoll, Abkühlung; Planer Haushalt und Mobilmachung), 3 = a3
@@ -1129,6 +1130,11 @@ std::string validate_state(const Simulation& sim) {
         if (w.diet_suspended > 1) {
             return "Bundesversammlung ungültig";
         }
+        if (!none_or_in(w.federation.diet, w.federation_templates.size()) ||
+            (w.federation.diet != kNone && w.federation.members.size() != S) ||
+            (w.federation.diet == kNone && !w.federation.members.empty())) {
+            return "Bund ungültig";
+        }
     }
     // KI (seit M12): je Staat und Rolle keine oder eine Person dieses Staates in dieser Rolle.
     if (w.ai_rules.active) {
@@ -1228,6 +1234,16 @@ void effects_hash(Fnv& h, const std::vector<Effect>& effects) {
         h.u64(e.goals.size()); // seit b3 (Inhaltsstand 6)
         for (const std::int64_t g : e.goals) {
             h.i64(g);
+        }
+        if (e.kind == EffectKind::Federation) { // seit M13a2
+            h.u64(e.states.size());
+            for (const Index st : e.states) {
+                h.i64(st);
+            }
+            h.u64(e.excluded.size());
+            for (const Index st : e.excluded) {
+                h.i64(st);
+            }
         }
     }
 }
@@ -1539,12 +1555,30 @@ ContentFingerprint content_fingerprint(const World& w) {
             for (const std::int32_t votes : w.diet.plenum) {
                 h.i64(votes);
             }
-            h.u64(w.diet.council.size());
-            for (const CouncilVote& vote : w.diet.council) {
-                h.text(vote.id);
-                h.u64(vote.states.size());
-                for (const Index s : vote.states) {
-                    h.i64(s);
+            const auto diet_hash = [&h](const FederalDiet& diet) {
+                h.u64(diet.council.size());
+                for (const CouncilVote& vote : diet.council) {
+                    h.text(vote.id);
+                    h.u64(vote.states.size());
+                    for (const Index s : vote.states) {
+                        h.i64(s);
+                    }
+                }
+            };
+            diet_hash(w.diet);
+            // Seit M13a2: Vorlagen für Bünde zur Laufzeit (nur wenn es welche gibt, sonst bleibt der Wert).
+            if (!w.federation_templates.empty()) {
+                h.u64(w.federation_templates.size());
+                for (const FederalDiet& t : w.federation_templates) {
+                    h.text(t.id);
+                    h.text(t.name);
+                    h.text(t.federation_name);
+                    h.i64(t.presidency);
+                    h.u64(t.plenum.size());
+                    for (const std::int32_t votes : t.plenum) {
+                        h.i64(votes);
+                    }
+                    diet_hash(t);
                 }
             }
         }

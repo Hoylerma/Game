@@ -69,8 +69,23 @@ DiplomacyDecision request_envoy(World& world, Index state, Index target, bool se
 DiplomacyDecision evaluate_treaty(const World& world, Index state, Index target, TreatyAction action);
 DiplomacyDecision request_treaty(World& world, Index state, Index target, TreatyAction action);
 
-/// Bundesstaat: mindestens ein Ort im Bundesgebiet.
+/// Bundesstaat: mindestens ein Ort im Bundesgebiet; seit M13a2 mit einem Bund zur Laufzeit dessen
+/// Mitglieder (die bestehen und ihn nicht verlassen haben).
 bool federal_state(const World& world, Index state);
+
+// ─── Bünde zur Laufzeit (seit M13a2, vertical_slice.md 3.3) ─────────────────
+
+/// Ein Bund wurde zur Laufzeit gegründet (Wirkung bund { … }).
+bool federation_founded(const World& world);
+/// Bundesversammlung, die gilt: die des Bundes zur Laufzeit, sonst die des Starts (World::diet).
+const FederalDiet& active_diet(const World& world);
+/// Ort im Bundesgebiet: mit einem Bund zur Laufzeit gehört er einem Mitglied, sonst das Feld bund.
+bool in_federal_area(const World& world, Index location);
+/// Gründet den Bund aus der Vorlage mit den Mitgliedern (je Staat 1): ersetzt die bisherige
+/// Bundesversammlung, setzt Präsidium und Tagung, verwirft den offenen Antrag; Chronik.
+void found_federation(World& world, Index template_index, const std::vector<std::uint8_t>& members);
+/// Ein Staat tritt dem Bund zur Laufzeit bei (false ohne Bund oder schon Mitglied).
+bool join_federation(World& world, Index state);
 /// Beziehung einmalig ändern (Bundesintervention, diplomatische Spiele), begrenzt auf −200..200.
 void adjust_relation(World& world, Index a, Index b, Fixed delta);
 

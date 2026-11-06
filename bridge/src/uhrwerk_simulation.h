@@ -49,6 +49,7 @@ public:
         MAP_BEZIEHUNGEN = 14,   // seit M9 (b3)
         MAP_KRIEG = 15,         // seit M10 (b3)
         MAP_UNRUHE = 16,        // seit M11 (b4)
+        MAP_BUND = 17,          // seit M13 (a2)
     };
 
     /// Steuerarten für set_tax_percent (seit M5, wie uhrwerk::TaxKind).

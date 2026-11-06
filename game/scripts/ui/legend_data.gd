@@ -655,5 +655,40 @@ static func unrest_entries(sim: SimulationClient) -> Array[Dictionary]:
 	return entries
 
 
+## Kartenmodus „Bund“ (seit M13a2): Präsidialmacht und Mitglieder des Bundes, der gilt (get_diet); leer
+## ohne Bundesversammlung (1648).
+static func federation_entries(sim: SimulationClient) -> Array[Dictionary]:
+	var diet := sim.get_diet()
+	if diet.is_empty():
+		return []
+	var presidency := int(diet.get("presidency_index", -1))
+	var members := PackedStringArray()
+	for index in sim.get_state_count():
+		var state := sim.get_state(index)
+		if bool(state.get("bund", false)) and index != presidency:
+			members.append(str(state.get("short_name", "")))
+	var entries: Array[Dictionary] = []
+	var lead := Color(0.24, 0.52, 0.30)
+	if presidency >= 0:
+		var state := sim.get_state(presidency)
+		lead = state.get("color", lead)
+		entries.append({
+			"color": lead,
+			"text": "Präsidium: %s" % str(state.get("short_name", "")),
+			"detail": "%s – %s" % [str(diet.get("federation_name", "")), str(diet.get("name", ""))],
+		})
+	entries.append({
+		"color": lead.lerp(UiPalette.PAPER, 0.55),
+		"text": "Mitglieder (%d)" % members.size(),
+		"detail": ", ".join(members) if not members.is_empty() else "keine",
+	})
+	entries.append({
+		"color": UiPalette.PAPER,
+		"text": "Außerhalb des Bundes",
+		"detail": "Staaten ohne Bundesgebiet oder nach dem Austritt",
+	})
+	return entries
+
+
 static func states_text(count: int) -> String:
 	return "1 Staat" if count == 1 else "%s Staaten" % GermanFormat.integer(count)

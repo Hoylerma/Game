@@ -1416,6 +1416,11 @@ func _check_events_ui(sim: SimulationClient) -> void:
 	var legend := _texts(_main.get("_legend"))
 	if int(_main.call("map_mode")) != MapModes.MAP_UNRUHE or not legend.contains("ruhig"):
 		_fail("Taste X: Modus %d, Legende „%s“" % [int(_main.call("map_mode")), legend.left(200)])
+	# Kartenmodus Bund (seit M13, Taste C): der Deutsche Bund unter Österreich.
+	await _key(KEY_C)
+	legend = _texts(_main.get("_legend"))
+	if int(_main.call("map_mode")) != MapModes.MAP_BUND or not legend.contains("Präsidium: Österreich") or not legend.contains("Deutscher Bund"):
+		_fail("Taste C: Modus %d, Legende „%s“" % [int(_main.call("map_mode")), legend.left(200)])
 	_main.call("set_map_mode", MapModes.MAP_POLITICAL)
 	# Ab Juli 1848 ruht die Bundesversammlung: Das Fenster sagt es, Anträge sind gesperrt.
 	if bool(sim.get_diet().get("suspended", false)):

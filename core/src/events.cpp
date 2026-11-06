@@ -399,6 +399,33 @@ private:
         world_.chronicle.push_back(std::move(entry));
     }
 
+    /// Wirkung bund (seit M13a2): Mitglieder aus Bundesgebiet zum Start, bisherigem Bund, Merkmal, Liste
+    /// und dem Staat des Ereignisses, ohne die ausgenommenen; nur Staaten mit Orten.
+    void found(const Effect& e, Index state) {
+        World& w = world_;
+        std::vector<std::uint8_t> members(w.states.size(), 0);
+        std::vector<std::uint8_t> owns(w.states.size(), 0);
+        std::vector<std::uint8_t> federal_at_start(w.states.size(), 0);
+        for (const Location& loc : w.locations) {
+            if (in_range(w.states, loc.owner)) {
+                owns[at(loc.owner)] = 1;
+                if (loc.federal) {
+                    federal_at_start[at(loc.owner)] = 1;
+                }
+            }
+        }
+        for (std::size_t s = 0; s < members.size(); ++s) {
+            const auto index = static_cast<Index>(s);
+            const bool in =
+                ((e.b & 1) != 0 && federal_at_start[s] != 0) || ((e.b & 2) != 0 && federal_state(w, index)) ||
+                ((e.b & 4) != 0 && index == state) || (!e.name.empty() && has_flag(w, index, e.name)) ||
+                std::find(e.states.begin(), e.states.end(), index) != e.states.end();
+            const bool out = std::find(e.excluded.begin(), e.excluded.end(), index) != e.excluded.end();
+            members[s] = in && !out && owns[s] != 0 ? 1 : 0;
+        }
+        found_federation(w, e.a, members);
+    }
+
     void apply(const std::vector<Effect>& effects, Index state) {
         for (const Effect& e : effects) {
             apply(e, state);
@@ -461,11 +488,14 @@ private:
         case EffectKind::Vote:
             hold_vote(e.a);
             return;
+        case EffectKind::Federation:
+            found(e, state);
+            return;
         case EffectKind::Diet:
-            if (w.diet_suspended != static_cast<std::uint8_t>(e.a) && !w.diet.id.empty()) {
+            if (w.diet_suspended != static_cast<std::uint8_t>(e.a) && !active_diet(w).id.empty()) {
                 w.diet_suspended = static_cast<std::uint8_t>(e.a);
-                chronicle(e.a != 0 ? "Die " + w.diet.name + " ruht."
-                                   : "Die " + w.diet.name + " tritt wieder zusammen.",
+                chronicle(e.a != 0 ? "Die " + active_diet(w).name + " ruht."
+                                   : "Die " + active_diet(w).name + " tritt wieder zusammen.",
                           kNone);
             }
             return;
@@ -502,6 +532,9 @@ private:
         case EffectKind::SetFlag:
         case EffectKind::ClearFlag:
             set_flag(state, e.name, e.kind == EffectKind::SetFlag);
+            return;
+        case EffectKind::FederationJoin:
+            join_federation(w, state);
             return;
         case EffectKind::Treasury:
             s.treasury += e.value;
@@ -1511,6 +1544,15 @@ void describe(const World& w, const std::vector<Effect>& effects, const std::str
             break;
         case EffectKind::Diet:
             line = e.a == 1 ? "Die Bundesversammlung ruht" : "Die Bundesversammlung tagt wieder";
+            break;
+        case EffectKind::Federation:
+            if (in_range(w.federation_templates, e.a)) {
+                const FederalDiet& d = w.federation_templates[at(e.a)];
+                line = "Gründung: " + (d.federation_name.empty() ? d.name : d.federation_name);
+            }
+            break;
+        case EffectKind::FederationJoin:
+            line = "Beitritt zum Bund";
             break;
         case EffectKind::Motion:
             line = std::string("Antrag in der Bundesversammlung: ") +

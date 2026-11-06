@@ -2170,6 +2170,9 @@ private:
         if (key == "krieg" && node.is_block) {
             return war(node, has_state, skip);
         }
+        if (key == "bund") {
+            return federation(node, has_state);
+        }
         if (node.is_block) {
             error(node.line, "unbekannte Wirkung " + quote(key) + " (Vokabular: chronik-skript.md 3.34)");
             return std::nullopt;
@@ -2216,6 +2219,17 @@ private:
                 error(node.line, "unbekannte Abstimmung " + quote(node.value));
                 return std::nullopt;
             }
+            return e;
+        }
+        if (key == "bund_beitritt") {
+            if (node.value != "ja") {
+                error(node.line, "'bund_beitritt' erwartet ja");
+                return std::nullopt;
+            }
+            if (!need_state(node, has_state)) {
+                return std::nullopt;
+            }
+            e.kind = EffectKind::FederationJoin;
             return e;
         }
         if (key == "bundesversammlung") {
@@ -2774,6 +2788,86 @@ private:
                                   "entschaedigung erlaubt");
                 ok = false;
             }
+        }
+        if (!ok) {
+            return std::nullopt;
+        }
+        return e;
+    }
+
+    /// bund { vorlage = <kennung> bundesgebiet = ja bisherige = ja staat = ja merkmal = <name>
+    /// staaten = { TAG … } ohne = { TAG … } } (seit M13a2, vertical_slice.md 3.3).
+    std::optional<Effect> federation(const ScriptNode& node, bool has_state) {
+        if (!node.is_block || !node.value.empty()) {
+            error(node.line, "'bund' erwartet einen Block: bund { vorlage = … }");
+            return std::nullopt;
+        }
+        Effect e;
+        e.kind = EffectKind::Federation;
+        e.b = 0;
+        bool ok = true;
+        const auto tags = [&](const ScriptNode& child, std::vector<Index>& out) {
+            if (!child.is_block) {
+                error(child.line, quote(child.key) + " erwartet eine Liste: " + child.key + " = { TAG … }");
+                ok = false;
+                return;
+            }
+            for (const ScriptNode& tag : child.children) {
+                bool is_absent = false;
+                const auto state = state_ref(child, tag.value, is_absent);
+                if (!state) {
+                    ok = false;
+                } else if (!is_absent) {
+                    out.push_back(*state);
+                }
+            }
+        };
+        for (const ScriptNode& child : node.children) {
+            if (child.key == "vorlage") {
+                const auto& templates = world_.federation_templates;
+                const auto it = std::find_if(templates.begin(), templates.end(),
+                                             [&](const FederalDiet& d) { return d.id == child.value; });
+                if (it == templates.end()) {
+                    error(child.line, "unbekannte Vorlage " + quote(child.value) +
+                                          " (bundesversammlung mit vorlage = ja)");
+                    ok = false;
+                } else {
+                    e.a = static_cast<Index>(it - templates.begin());
+                }
+            } else if (child.key == "bundesgebiet" || child.key == "bisherige" || child.key == "staat") {
+                if (child.value != "ja" && child.value != "nein") {
+                    error(child.line, quote(child.key) + " erwartet ja oder nein");
+                    ok = false;
+                    continue;
+                }
+                if (child.key == "staat" && child.value == "ja" && !need_state(child, has_state)) {
+                    ok = false;
+                    continue;
+                }
+                const int bit = child.key == "bundesgebiet" ? 1 : child.key == "bisherige" ? 2 : 4;
+                if (child.value == "ja") {
+                    e.b |= bit;
+                }
+            } else if (child.key == "merkmal") {
+                if (const auto flag = name(child)) {
+                    e.name = *flag;
+                } else {
+                    ok = false;
+                }
+            } else if (child.key == "staaten") {
+                tags(child, e.states);
+            } else if (child.key == "ohne") {
+                tags(child, e.excluded);
+            } else {
+                error(child.line,
+                      "in 'bund' sind nur vorlage, bundesgebiet, bisherige, staat, merkmal, staaten "
+                      "und ohne erlaubt");
+                ok = false;
+            }
+        }
+        if (e.a == kNone && ok) {
+            error(node.line, "Pflichtfeld 'vorlage' fehlt in bund");
+            ok = false;
         }
         if (!ok) {
             return std::nullopt;

@@ -2784,13 +2784,15 @@ private:
                 check_id(file, node, "Kennung einer Bundesversammlung");
                 const std::string what = "bundesversammlung " + node.value;
                 Fields f(node, file.name, what, issues_,
-                         {"name", "seit", "bis", "praesidium", "sitz", "plenum", "rat", "quelle"});
+                         {"name", "bund", "seit", "bis", "praesidium", "sitz", "plenum", "rat", "quelle",
+                          "vorlage"});
                 DietRef ref;
                 ref.file = file.name;
                 ref.line = node.line;
                 FederalDiet diet;
                 diet.id = node.value;
                 diet.name = f.text("name").value_or("");
+                diet.federation_name = f.has("bund") ? f.text("bund").value_or("") : "";
                 diet.source = f.text("quelle").value_or("");
                 if (const auto presidency = f.text("praesidium")) {
                     ref.presidency_tag = *presidency;
@@ -2845,6 +2847,14 @@ private:
                         ref.council.push_back(std::move(v));
                     }
                 }
+                // Seit M13a2 (vertical_slice.md 3.3): eine Vorlage kann eine Wirkung bund { … } zur Laufzeit
+                // gründen, unabhängig von seit und bis.
+                if (f.has("vorlage") && f.boolean("vorlage").value_or(false)) {
+                    template_refs_.emplace_back(diet, ref);
+                    if (!f.has("seit")) {
+                        return; // nur Vorlage: besteht nie zum Startdatum
+                    }
+                }
                 if (f.has("seit")) {
                     if (const auto since = f.date("seit"); since && *since > start_) {
                         return; // besteht zum Startdatum noch nicht
@@ -2869,11 +2879,22 @@ private:
     /// Bundesversammlung nach drop_states_without_land: Staaten ohne Ort entfallen, unbekannte sind
     /// fatal; jeder Staat höchstens einmal im Plenum und im Engeren Rat.
     void resolve_diet() {
-        if (!diet_ref_) {
-            return;
+        if (diet_ref_) {
+            resolve_diet_ref(*diet_ref_, world_.diet);
         }
-        const DietRef& ref = *diet_ref_;
-        FederalDiet& diet = world_.diet;
+        // Vorlagen nur in Welten mit Bundesgebiet (1648 kennt ihre Staaten nicht und bleibt bitgleich).
+        const bool federal_area = std::any_of(world_.locations.begin(), world_.locations.end(),
+                                              [](const Location& loc) { return loc.federal; });
+        for (auto& [diet, ref] : template_refs_) {
+            if (!federal_area) {
+                break;
+            }
+            resolve_diet_ref(ref, diet);
+            world_.federation_templates.push_back(std::move(diet));
+        }
+    }
+
+    void resolve_diet_ref(const DietRef& ref, FederalDiet& diet) {
         const auto resolve = [&](const std::string& tag, int line, std::string_view where) {
             const Index state = lookup(states_, tag);
             if (state == kNone && dropped_states_.count(tag) == 0) {
@@ -4793,7 +4814,8 @@ private:
     std::vector<BaseRelationRef> base_relation_refs_; // seit M9 (b1), aufgelöst nach den Staaten
     bool diplomacy_rules_found_ = false;              // common/diplomatie.chron mit diplomatie gelesen
     std::optional<DietRef> diet_ref_;                 // seit M9 (b2), nur wenn sie zum Startdatum besteht
-    std::optional<MilitaryRef> military_ref_;         // seit M10 (a1), common/militaer.chron
+    std::vector<std::pair<FederalDiet, DietRef>> template_refs_; // seit M13a2: vorlage = ja
+    std::optional<MilitaryRef> military_ref_;                    // seit M10 (a1), common/militaer.chron
     // Inhalt ab einem Datum (seit M7): spätere Definitionen als „gut:kohle“ → 'seit'.
     struct LaterDefinition {
         Date date;

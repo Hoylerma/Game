@@ -565,13 +565,13 @@ bool accessible(const World& world, Index state, Index location) {
     // Seit M11 (b3): Durchzug durch Bundesgebiet auf den Etappenstraßen des Bundes, wenn die Regel gilt und
     // beide Staaten zum Bund gehören (1864 Preußen durch Mecklenburg nach Holstein). In einem Krieg gegen
     // einen Staat mit Hauptstadt im Bundesgebiet (1866) bleiben die Neutralen gesperrt.
-    if (!world.military_rules.federal_passage || !world.locations[at(location)].federal ||
+    if (!world.military_rules.federal_passage || !in_federal_area(world, location) ||
         !federal_state(world, state) || !federal_state(world, owner)) {
         return false;
     }
     const auto german_enemy = [&](Index enemy) {
         const Index capital = world.states[at(enemy)].capital;
-        return in_range(world.locations, capital) && world.locations[at(capital)].federal;
+        return in_federal_area(world, capital);
     };
     const auto member = [](const std::vector<Index>& side, Index s) {
         return std::find(side.begin(), side.end(), s) != side.end();

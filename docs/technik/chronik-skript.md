@@ -937,6 +937,23 @@ bundesversammlung bund {
 }
 ```
 
+Seit M13a2 ([vertical_slice.md](vertical_slice.md), Abschnitt 3.3) zusätzlich:
+
+```text
+bundesversammlung norddeutscher_bund {
+    bund       = "Norddeutscher Bund"  # optional: Name des Bundes (Anzeige, Chronik)
+    vorlage    = ja                    # optional: eine Wirkung bund { vorlage = … } kann ihn gründen
+    …
+}
+```
+
+Eine Vorlage ohne `seit` besteht nie zum Startdatum; mit `seit` gilt sie zum Startdatum wie bisher
+(Kriegslesezeichen) und ist zugleich Vorlage. Vorlagen gibt es nur in Welten mit Bundesgebiet (1648 bleibt
+unberührt). Ein gegründeter Bund ersetzt die Bundesversammlung (Stimmen, Präsidium, Tagung; der offene
+Antrag verfällt); seine Mitglieder sind die Bundesstaaten, ihre Orte das Bundesgebiet, und sie führen
+keinen Krieg gegeneinander (Bundespflicht). Im Kern: `World::federation_templates` (Inhalt) und
+`World::federation` (Zustand: Vorlage, Mitglieder, Gründung).
+
 Zum Startdatum darf höchstens eine Bundesversammlung bestehen; eine mit späterem `seit` gehört nicht
 zur Welt (1648), ebenso eine mit `bis` zum Startdatum oder davor (seit M10b: der Deutsche Bund bis
 1866, danach der Bundesrat des Norddeutschen Bundes ab 1867). Staaten ohne Ort zum Startdatum entfallen aus Plenum und Rat; ein unbekannter Staat,
@@ -1286,6 +1303,8 @@ den Staat gelten nur in Staatsereignissen oder innerhalb von `staat <TAG> { … 
 | `abstimmung = <id>` | Abstimmung im Parlament (seit a4, auch in der Welt; Abschnitt 3.35) |
 | `bundesversammlung = ruht`/`tagt` | Ruhen der Bundesversammlung (seit a4, auch in der Welt) |
 | `antrag { art = reform\|praesidium\|intervention\|zolleinigung ziel = TAG\|<zollunion> }` | Antrag des Staates in der Bundesversammlung (seit a4) |
+| `bund { vorlage = <id>  bundesgebiet = ja  bisherige = ja  staat = ja  merkmal = <name>  staaten = { TAG … }  ohne = { TAG … } }` | gründet einen Bund zur Laufzeit aus einer Vorlage (seit M13a2, Abschnitt 3.29; auch in der Welt): Mitglieder sind die Staaten mit Bundesgebiet zum Start (`bundesgebiet`), die Bundesstaaten bisher (`bisherige`), der Staat des Ereignisses (`staat`), die Staaten mit dem Merkmal und die aus `staaten`, ohne die aus `ohne`, nur mit Orten; `vorlage` Pflicht |
+| `bund_beitritt = ja` | der Staat tritt dem Bund zur Laufzeit bei (seit M13a2) |
 | `krieg = TAG` | Kriegserklärung ohne Kriegsziel, mit Bündnisfall (seit a4; nur mit Militär); ohne Ziel endet ein Krieg ohne Gewinner |
 | `krieg { gegner = TAG  gebiet = <einheit> …  fuehrung = ja  zollunion = ja  annexion = ja  entschaedigung = n }` | Kriegserklärung mit Kriegszielen wie im Befehl (seit b3; `gebiet` mehrfach, Entschädigung 1–24 Monatseinnahmen); ein ungültiges Ziel entfällt |
 | `intervention = TAG` | Truppen gegen den Aufstand in TAG (seit a3; mit Militär Mobilmachung) |

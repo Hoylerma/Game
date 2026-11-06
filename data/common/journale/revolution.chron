@@ -104,6 +104,8 @@ journal revolution {
         text    = "Die Reichsverfassung tritt in Kraft: ein erblicher Kaiser aus dem Hause Hohenzollern, ein Reichstag nach allgemeinem Wahlrecht, Grundrechte für alle Deutschen. Österreich bleibt draußen."
         wirkung {
             welt_merke = reich_paulskirche
+            # seit M13a2: das Reich besteht aus den Staaten, die die Reichsverfassung angenommen haben
+            bund { vorlage = reich_paulskirche  merkmal = reichsverfassung  staaten = { PRU } }
             alle_staaten { folge { ereignis = reich.mitglied } }
         }
     }
@@ -113,6 +115,7 @@ journal revolution {
         text    = "Österreich tritt mit seinen deutschen Ländern dem Reich bei. Ein Reich von der Nordsee bis zur Adria entsteht, dessen Völker nicht alle Deutsche sind."
         wirkung {
             welt_merke = grossdeutsches_reich
+            bund { vorlage = grossdeutsches_reich  merkmal = reichsverfassung  staaten = { AUT PRU } }
             alle_staaten { folge { ereignis = reich.mitglied } }
         }
     }

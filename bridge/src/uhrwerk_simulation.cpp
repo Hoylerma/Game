@@ -766,12 +766,9 @@ Dictionary UhrwerkSimulation::get_state(std::int64_t index) const {
     result["population"] = w->state_population(state_index).round();
     const std::vector<uhrwerk::Index> locations = w->state_locations(state_index);
     result["location_count"] = static_cast<std::int64_t>(locations.size());
-    // Mitglied des Deutschen Bundes (seit M7): mindestens ein Ort im Bundesgebiet.
-    bool federal = false;
-    for (const uhrwerk::Index li : locations) {
-        federal = federal || at(w->locations, li).federal;
-    }
-    result["bund"] = federal;
+    // Mitglied des Deutschen Bundes (seit M7): mindestens ein Ort im Bundesgebiet; seit M13a2 Mitglied
+    // des Bundes, der gilt (auch eines Bundes zur Laufzeit).
+    result["bund"] = uhrwerk::federal_state(*w, static_cast<uhrwerk::Index>(state_index));
     // Bilanz des Vorjahres und mittlerer Lebensstandard (seit M4).
     uhrwerk::PopulationBalance balance;
     double living = 0.0;
@@ -868,7 +865,7 @@ Dictionary UhrwerkSimulation::get_location(std::int64_t index) const {
         }
     }
     result["verwaltung"] = admin_chain;
-    result["bundesgebiet"] = loc.federal;
+    result["bundesgebiet"] = uhrwerk::in_federal_area(*w, static_cast<uhrwerk::Index>(location_index));
     // Strecken mit einem eröffneten Abschnitt an diesem Ort (seit M7), mit dem Jahr der Eröffnung.
     PackedStringArray railways;
     for (const uhrwerk::Railway& railway : w->railways) {
@@ -1204,7 +1201,7 @@ PackedColorArray UhrwerkSimulation::get_map_colors(std::int64_t mode) const {
     if (!w) {
         return colors;
     }
-    ERR_FAIL_COND_V_MSG(mode < MAP_POLITICAL || mode > MAP_UNRUHE, colors,
+    ERR_FAIL_COND_V_MSG(mode < MAP_POLITICAL || mode > MAP_BUND, colors,
                         "get_map_colors: unbekannter Kartenmodus.");
 
     const auto count = static_cast<std::int64_t>(w->locations.size());
@@ -1357,6 +1354,18 @@ PackedColorArray UhrwerkSimulation::get_map_colors(std::int64_t mode) const {
             }
             break;
         }
+        case MAP_BUND:
+            // Bund (seit M13a2, vertical_slice.md 3.3): das Bundesgebiet, das gilt, in der Farbe der
+            // Präsidialmacht (blass), sie selbst kräftig; außerhalb Papier.
+            if (uhrwerk::in_federal_area(*w, static_cast<uhrwerk::Index>(i)) &&
+                valid_index(w->states, loc.owner) && uhrwerk::federal_state(*w, loc.owner)) {
+                const uhrwerk::Index presidency = w->diet_presidency;
+                const Color lead = valid_index(w->states, presidency)
+                                       ? to_godot(at(w->states, presidency).color)
+                                       : kRelationFriend;
+                color = loc.owner == presidency ? lead : blend(lead, kRelationNeutral, 0.55);
+            }
+            break;
         case MAP_UNRUHE:
             // Unruhe (seit M11, b4) des Besitzers von Papier (0) bis Rot (100); Staaten mit laufendem
             // Aufstand in Violett. Ohne Ereignisse (1648) alles Papier.
@@ -1622,10 +1631,9 @@ Array UhrwerkSimulation::get_relations(std::int64_t state_index) const {
     // Zielwerte und Bundesstaaten einmal für alle (die Liste wird im Tooltip je Bild gelesen).
     const std::vector<uhrwerk::Fixed> targets = uhrwerk::relation_targets(*w, self);
     std::vector<bool> federal(w->states.size(), false);
-    for (const uhrwerk::Location& loc : w->locations) {
-        if (loc.federal && valid_index(w->states, loc.owner)) {
-            federal[static_cast<std::size_t>(loc.owner)] = true;
-        }
+    for (std::size_t s = 0; s < w->states.size(); ++s) {
+        federal[s] =
+            uhrwerk::federal_state(*w, static_cast<uhrwerk::Index>(s)); // seit M13a2 auch Bund zur Laufzeit
     }
     for (std::size_t s = 0; s < w->states.size(); ++s) {
         const auto other = static_cast<uhrwerk::Index>(s);
@@ -1780,8 +1788,11 @@ Dictionary UhrwerkSimulation::get_diet() const {
     if (!w || !uhrwerk::has_diet(*w)) {
         return result;
     }
-    const uhrwerk::FederalDiet& diet = w->diet;
+    const uhrwerk::FederalDiet& diet = uhrwerk::active_diet(*w); // seit M13a2 auch ein Bund zur Laufzeit
     result["name"] = to_godot(diet.name);
+    result["federation_name"] =
+        to_godot(diet.federation_name.empty() ? std::string("Deutscher Bund") : diet.federation_name);
+    result["founded"] = uhrwerk::federation_founded(*w);
     result["presidency_index"] = w->diet_presidency;
     result["presidency_name"] = short_name(*w, w->diet_presidency);
     result["seat_name"] =
@@ -1982,7 +1993,8 @@ Dictionary UhrwerkSimulation::get_german_question() const {
     double total = 0.0;
     for (std::size_t i = 0; i < w->locations.size(); ++i) {
         const uhrwerk::Location& loc = w->locations[i];
-        if (loc.federal && valid_index(w->states, loc.owner)) {
+        if (uhrwerk::in_federal_area(*w, static_cast<uhrwerk::Index>(i)) &&
+            valid_index(w->states, loc.owner)) {
             const double people = w->location_population(static_cast<uhrwerk::Index>(i)).to_double();
             federal[static_cast<std::size_t>(loc.owner)] += people;
             total += people;
@@ -3886,6 +3898,7 @@ void UhrwerkSimulation::_bind_methods() {
     BIND_ENUM_CONSTANT(MAP_BEZIEHUNGEN);
     BIND_ENUM_CONSTANT(MAP_KRIEG);
     BIND_ENUM_CONSTANT(MAP_UNRUHE);
+    BIND_ENUM_CONSTANT(MAP_BUND);
     BIND_ENUM_CONSTANT(TAX_KONTRIBUTION);
     BIND_ENUM_CONSTANT(TAX_AKZISE);
     BIND_ENUM_CONSTANT(TAX_ZOLL);
