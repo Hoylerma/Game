@@ -84,6 +84,7 @@ var _district_indices := PackedInt32Array()
 var _district_parliament := -2
 ## Wahltage noch nicht abgehaltener Wahlen; die Zeit hält danach an (Wahlabend).
 var _pending_election_days := PackedInt32Array()
+var _pending_month := -1 # Jahr × 12 + Monat der letzten Abfrage (seit M13a3)
 ## Parteienmodus (seit M8): gespielte Strömung (-1 = Staat), Parteipanel, Strömungen des Szenarios.
 var _player_current := -1
 var _party_panel: PartyPanel = null
@@ -533,6 +534,11 @@ func _after_time_passed() -> void:
 		_update_owners(true)
 		if not _quiet_elections:
 			_open_election_night(_elections_seen - 1, _options.wants_screenshot())
+	else:
+		# Ein Bund kann gegründet werden; seine erste Wahl liegt Monate später (seit M13a3).
+		var now := _sim.get_date()
+		if int(now.get("year", 0)) * 12 + int(now.get("month", 0)) != _pending_month:
+			_update_pending_elections()
 	# Besitzer jeden Tag (Review M10: ein Frieden tritt Orte mitten im Monat ab); Grenzen und
 	# Staatsnamen ändern sich nur, wenn sich ein Besitzer geändert hat.
 	_update_owners()
@@ -2362,13 +2368,16 @@ func _close_election_night(resume: bool = true) -> void:
 		_set_speed(_speed_before_election)
 
 
-## Wahltage der Parlamente ohne Wahl (als Tagesnummern, ElectionTally.day_number).
+## Ausstehende Wahltage der Parlamente (als Tagesnummern, ElectionTally.day_number); seit M13a3 auch
+## weitere Wahlen und die Wahlen eines Bundes (pending), deshalb einmal im Monat neu.
 func _update_pending_elections() -> void:
 	_pending_election_days = PackedInt32Array()
 	if _sim == null:
 		return
+	var today := _sim.get_date()
+	_pending_month = int(today.get("year", 0)) * 12 + int(today.get("month", 0))
 	for parliament in _sim.get_parliaments():
-		if int(parliament.get("election_index", -1)) < 0:
+		if bool(parliament.get("pending", false)):
 			_pending_election_days.append(ElectionTally.day_number(parliament.get("election_date", {})))
 
 

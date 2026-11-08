@@ -421,7 +421,9 @@ nur noch in 3 von 16 Läufen statt in 11.
   Versammlungen in den Wahlkreisen, in denen die Strömung erste oder zweite ist, geordnet nach dem
   Abstand zwischen ihr und der stärksten anderen (mit Rauschen ±8 Punkte), so viele, wie
   (Mittel × (1 − Rücklage)) ÷ verbleibende Monate bezahlt. Der Wahlkampf steht nicht im KI-Protokoll
-  (eine Strömung ist kein Staat).
+  (eine Strömung ist kein Staat). Seit M13a3 vor jeder ausstehenden Wahl (`next_election_day`: weitere
+  Wahlen des Abgeordnetenhauses, Reichstag eines Bundes) und nur in Wahlkreisen, die mitwählen
+  ([politik.md](politik.md) 5.4).
 - **Unruhe**: Ist die Unruhe über 60 und kein Ereignis offen, senkt der Haushaltsplaner Steuern (6.1);
   weitere Mittel gegen Unruhe gibt es ohne Gesetzgebung nicht.
 

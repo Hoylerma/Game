@@ -267,7 +267,12 @@ struct Parliament {
     std::string name;
     Index state = kNone;                 // kNone: Deutscher Bund (ebene = bund), sonst der Staat
     std::int32_t seats = 0;              // Sollzahl der Sitze
-    Date election_day;                   // Wahltag
+    Date election_day;                   // Wahltag (erste Wahl; ohne bei einem Parlament eines Bundes)
+    std::vector<Date> re_elections;      // seit M13a3: weitere Wahltage (wiederwahl), aufsteigend
+    std::vector<Index> federations;      // seit M13a3: Vorlagen (World::federation_templates), deren Bund
+                                         // dieses Parlament wählt; leer = feste Wahltage
+    std::int32_t after_founding = 0;     // seit M13a3: Tage von der Gründung des Bundes bis zur ersten Wahl
+    std::int32_t period = 0;             // seit M13a3: Jahre zwischen den Wahlen des Bundes (0 = einmal)
     ElectoralLaw law;                    // Wahlrecht dieser Wahl
     Date faction_day;                    // Stichtag der Fraktionen (vorher gelten die Strömungen)
     std::vector<Index> boycott_cultures; // Wahlkreise mit Mehrheit dieser Kulturen wählen nicht …

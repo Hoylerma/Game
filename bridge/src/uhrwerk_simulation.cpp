@@ -523,20 +523,39 @@ const uhrwerk::ElectionResult* UhrwerkSimulation::latest_election(std::int64_t p
     return nullptr;
 }
 
+namespace {
+
+/// Tag der Wahl, die die Anzeige meint (seit M13a3): die nächste ausstehende, sonst die letzte gehaltene,
+/// sonst der erste Wahltag.
+uhrwerk::Date shown_election_day(const uhrwerk::World& w, std::int64_t parliament) {
+    const auto index = static_cast<uhrwerk::Index>(parliament);
+    if (const std::optional<uhrwerk::Date> next = uhrwerk::next_election_day(w, index)) {
+        return *next;
+    }
+    for (auto it = w.elections.rbegin(); it != w.elections.rend(); ++it) {
+        if (it->parliament == index) {
+            return it->day;
+        }
+    }
+    return w.parliaments[static_cast<std::size_t>(parliament)].election_day;
+}
+
+} // namespace
+
 std::int64_t UhrwerkSimulation::next_parliament() const {
     const uhrwerk::World* w = world();
     std::int64_t next = -1;
+    std::optional<uhrwerk::Date> next_day;
     if (!w) {
         return next;
     }
     for (std::size_t p = 0; p < w->parliaments.size(); ++p) {
-        const auto index = static_cast<std::int64_t>(p);
-        const uhrwerk::Parliament& parliament = w->parliaments[p];
-        if (latest_election(index) != nullptr || parliament.election_day < w->date) {
-            continue;
-        }
-        if (next < 0 || parliament.election_day < at(w->parliaments, next).election_day) {
-            next = index;
+        // Seit M13a3 der nächste ausstehende Wahltag (weitere Wahlen, Wahlen eines Bundes).
+        const std::optional<uhrwerk::Date> day =
+            uhrwerk::next_election_day(*w, static_cast<uhrwerk::Index>(p));
+        if (day && (!next_day || *day < *next_day)) {
+            next = static_cast<std::int64_t>(p);
+            next_day = day;
         }
     }
     return next;
@@ -916,7 +935,11 @@ Dictionary UhrwerkSimulation::get_location(std::int64_t index) const {
         election["district_name"] = to_godot(district.name);
         election["seats"] = district.seats;
         election["election_date_text"] =
-            to_godot(uhrwerk::format_date_long(at(w->parliaments, parliament).election_day));
+            to_godot(uhrwerk::format_date_long(shown_election_day(*w, parliament)));
+        // Seit M13a3: ob der Wahlkreis bei der nächsten Wahl mitwählt (Landtag: Staat; Bund: Bundesgebiet).
+        election["pending"] =
+            uhrwerk::next_election_day(*w, static_cast<uhrwerk::Index>(parliament)).has_value() &&
+            uhrwerk::district_votes(*w, static_cast<uhrwerk::Index>(d));
         const uhrwerk::ElectionResult* latest = latest_election(parliament);
         const uhrwerk::DistrictResult* r = latest != nullptr ? district_result(*latest, d) : nullptr;
         election["held"] = r != nullptr;
@@ -2554,18 +2577,33 @@ Array UhrwerkSimulation::get_parliaments() const {
         entry["name"] = to_godot(parliament.name);
         entry["state_index"] = parliament.state;
         entry["seats"] = parliament.seats;
-        entry["election_date"] = date_dictionary(parliament.election_day);
-        entry["election_date_text"] = to_godot(uhrwerk::format_date_long(parliament.election_day));
+        // Seit M13a3: der nächste ausstehende Wahltag, sonst der letzte; pending, solange eine Wahl aussteht.
+        const uhrwerk::Date shown = shown_election_day(*w, static_cast<std::int64_t>(p));
+        entry["election_date"] = date_dictionary(shown);
+        entry["election_date_text"] = to_godot(uhrwerk::format_date_long(shown));
+        entry["pending"] = uhrwerk::next_election_day(*w, static_cast<uhrwerk::Index>(p)).has_value();
+        entry["federal"] = !parliament.federations.empty();
         entry["faction_date"] = date_dictionary(parliament.faction_day);
         entry["faction_date_text"] = to_godot(uhrwerk::format_date_long(parliament.faction_day));
         entry["seat_index"] = parliament.seat;
         entry["franchise"] = franchise_name(parliament.law.franchise);
         entry["indirect"] = parliament.law.indirect;
+        // Seit M13a3: beim Parlament eines Bundes nur die Wahlkreise im Bundesgebiet (und deren Sitze).
         std::int64_t districts = 0;
-        for (const uhrwerk::ElectoralDistrict& d : w->electoral_districts) {
-            districts += d.parliament == static_cast<uhrwerk::Index>(p) ? 1 : 0;
+        std::int64_t seats = 0;
+        for (std::size_t d = 0; d < w->electoral_districts.size(); ++d) {
+            const uhrwerk::ElectoralDistrict& district = w->electoral_districts[d];
+            if (district.parliament == static_cast<uhrwerk::Index>(p) &&
+                (parliament.federations.empty() ||
+                 uhrwerk::district_votes(*w, static_cast<uhrwerk::Index>(d)))) {
+                ++districts;
+                seats += district.seats;
+            }
         }
         entry["district_count"] = districts;
+        if (!parliament.federations.empty()) {
+            entry["seats"] = seats;
+        }
         std::int64_t latest = -1;
         for (std::size_t e = 0; e < w->elections.size(); ++e) {
             if (w->elections[e].parliament == static_cast<uhrwerk::Index>(p)) {
@@ -2573,6 +2611,9 @@ Array UhrwerkSimulation::get_parliaments() const {
             }
         }
         entry["election_index"] = latest;
+        if (latest >= 0) {
+            entry["last_election_date"] = date_dictionary(w->elections[static_cast<std::size_t>(latest)].day);
+        }
         Array factions;
         for (const uhrwerk::Faction& f : parliament.factions) {
             Dictionary faction;
@@ -2698,13 +2739,8 @@ std::int64_t UhrwerkSimulation::get_shown_parliament() const {
     if (!w->elections.empty()) {
         return w->elections.back().parliament;
     }
-    std::int64_t next = 0;
-    for (std::size_t p = 1; p < w->parliaments.size(); ++p) {
-        if (w->parliaments[p].election_day < at(w->parliaments, next).election_day) {
-            next = static_cast<std::int64_t>(p);
-        }
-    }
-    return next;
+    const std::int64_t next = next_parliament();
+    return next >= 0 ? next : 0;
 }
 
 // ─── Parteienmodus (seit M8, Schritt b2) ────────────────────────────────────
@@ -2800,7 +2836,7 @@ Dictionary UhrwerkSimulation::get_party(std::int64_t current) const {
     if (next >= 0) {
         const uhrwerk::Parliament& p = at(w->parliaments, next);
         result["parliament_name"] = to_godot(p.name);
-        result["election_date_text"] = to_godot(uhrwerk::format_date_long(p.election_day));
+        result["election_date_text"] = to_godot(uhrwerk::format_date_long(shown_election_day(*w, next)));
         std::int64_t districts = 0;
         const std::size_t currents = w->currents.size();
         for (std::size_t d = 0; d < w->electoral_districts.size() &&
@@ -2879,13 +2915,16 @@ Dictionary UhrwerkSimulation::get_campaign(std::int64_t district, std::int64_t c
     const uhrwerk::ElectoralDistrict& d = at(w->electoral_districts, district);
     result["district_name"] = to_godot(d.name);
     result["seats"] = d.seats;
-    bool open = valid_index(w->parliaments, d.parliament) && latest_election(d.parliament) == nullptr &&
-                w->date <= at(w->parliaments, d.parliament).election_day;
+    // Seit M13a3: offen, solange eine Wahl aussteht und der Wahlkreis mitwählt.
+    bool open = valid_index(w->parliaments, d.parliament) &&
+                uhrwerk::next_election_day(*w, d.parliament).has_value() &&
+                uhrwerk::district_votes(*w, static_cast<uhrwerk::Index>(district));
     result["open"] = open;
     if (valid_index(w->parliaments, d.parliament)) {
         const uhrwerk::Parliament& p = at(w->parliaments, d.parliament);
         result["parliament_name"] = to_godot(p.name);
-        result["election_date_text"] = to_godot(uhrwerk::format_date_long(p.election_day));
+        result["election_date_text"] =
+            to_godot(uhrwerk::format_date_long(shown_election_day(*w, d.parliament)));
     }
     if (w->campaign.size() == w->electoral_districts.size() * currents) {
         const uhrwerk::CampaignState& state = w->campaign[static_cast<std::size_t>(district) * currents + c];

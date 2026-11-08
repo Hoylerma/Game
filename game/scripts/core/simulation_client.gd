@@ -414,7 +414,9 @@ func get_currents() -> Array[Dictionary]:
 
 ## Parlamente des Szenarios (seit M8): { index, id, name, state_index, seats, election_date,
 ## election_date_text, faction_date, faction_date_text, seat_index, franchise, indirect,
-## district_count, election_index, factions: [{ id, name, color, from, to }] }.
+## district_count, election_index, factions: [{ id, name, color, from, to }] }. Seit M13a3: election_date
+## ist der nächste ausstehende Wahltag (sonst der letzte), pending ob eine Wahl aussteht, federal für das
+## Parlament eines Bundes, last_election_date (mit einer Wahl) der Tag der letzten Wahl.
 func get_parliaments() -> Array[Dictionary]:
 	return _as_dictionaries(_native.call(&"get_parliaments"))
 

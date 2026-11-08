@@ -2,6 +2,7 @@
 
 #include "uhrwerk/politics.hpp"
 
+#include "uhrwerk/diplomacy.hpp"
 #include "uhrwerk/economy.hpp"
 #include "uhrwerk/parallel.hpp"
 #include "uhrwerk/rng.hpp"
@@ -531,6 +532,73 @@ Index faction_of(const Parliament& parliament, Fixed position) {
     return kNone;
 }
 
+namespace {
+
+bool election_held(const World& world, Index parliament, const Date& day) {
+    return std::any_of(world.elections.begin(), world.elections.end(),
+                       [&](const ElectionResult& e) { return e.parliament == parliament && e.day == day; });
+}
+
+Date add_years(const Date& date, std::int32_t years) {
+    Date out{date.year + years, date.month, date.day};
+    out.day = std::min(out.day, days_in_month(out.year, out.month));
+    return out;
+}
+
+} // namespace
+
+std::optional<Date> next_election_day(const World& world, Index parliament) {
+    if (!in_range(world.parliaments, parliament)) {
+        return std::nullopt;
+    }
+    const Parliament& p = world.parliaments[at(parliament)];
+    if (p.federations.empty()) {
+        if (world.date <= p.election_day && !election_held(world, parliament, p.election_day)) {
+            return p.election_day;
+        }
+        for (const Date& day : p.re_elections) {
+            if (world.date <= day && !election_held(world, parliament, day)) {
+                return day;
+            }
+        }
+        return std::nullopt;
+    }
+    if (!federation_founded(world) ||
+        std::find(p.federations.begin(), p.federations.end(), world.federation.diet) == p.federations.end()) {
+        return std::nullopt;
+    }
+    Date day = from_day_number(to_day_number(world.federation.founded) + p.after_founding);
+    while (day < world.date || election_held(world, parliament, day)) {
+        if (p.period <= 0) {
+            return std::nullopt;
+        }
+        day = add_years(day, p.period);
+    }
+    return day;
+}
+
+bool district_votes(const World& world, Index district) {
+    if (!in_range(world.electoral_districts, district)) {
+        return false;
+    }
+    const ElectoralDistrict& d = world.electoral_districts[at(district)];
+    if (!in_range(world.parliaments, d.parliament) || d.locations.empty()) {
+        return false;
+    }
+    const Parliament& p = world.parliaments[at(d.parliament)];
+    const Index first = d.locations.front();
+    if (!p.federations.empty()) {
+        return federation_founded(world) &&
+               std::find(p.federations.begin(), p.federations.end(), world.federation.diet) !=
+                   p.federations.end() &&
+               in_federal_area(world, first);
+    }
+    if (p.state != kNone) {
+        return world.locations[at(first)].owner == p.state;
+    }
+    return true;
+}
+
 ElectionResult run_election(const World& world, Index parliament, std::uint64_t seed, ThreadPool* pool) {
     ElectionResult result;
     result.parliament = parliament;
@@ -540,10 +608,16 @@ ElectionResult run_election(const World& world, Index parliament, std::uint64_t 
     }
     std::vector<Index> districts;
     for (std::size_t d = 0; d < world.electoral_districts.size(); ++d) {
-        if (world.electoral_districts[d].parliament == parliament) {
+        if (world.electoral_districts[d].parliament == parliament &&
+            district_votes(world, static_cast<Index>(d))) {
             districts.push_back(static_cast<Index>(d));
         }
     }
+    // Seit M13a3: Jede weitere Wahl desselben Parlaments würfelt neu; die erste bleibt, wie sie war.
+    const auto earlier = static_cast<std::uint64_t>(
+        std::count_if(world.elections.begin(), world.elections.end(),
+                      [&](const ElectionResult& e) { return e.parliament == parliament; }));
+    seed += earlier * 0x94D049BB133111EBULL;
     std::vector<DistrictWork> work(districts.size());
     const auto compute = [&](std::size_t begin, std::size_t end) {
         for (std::size_t k = begin; k < end; ++k) {
@@ -605,14 +679,8 @@ Index pending_parliament(const World& world, Index district) {
         return kNone;
     }
     const Index parliament = world.electoral_districts[at(district)].parliament;
-    if (!in_range(world.parliaments, parliament) ||
-        world.date > world.parliaments[at(parliament)].election_day) {
+    if (!next_election_day(world, parliament) || !district_votes(world, district)) {
         return kNone;
-    }
-    for (const ElectionResult& e : world.elections) {
-        if (e.parliament == parliament) {
-            return kNone;
-        }
     }
     return parliament;
 }

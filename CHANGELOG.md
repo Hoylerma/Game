@@ -13,6 +13,13 @@ Vor Version 1.0 kann sich jede Schnittstelle ändern.
 Vertrag: [technik/vertical_slice.md](docs/technik/vertical_slice.md), Entscheidungen 1–19 wie empfohlen
 freigegeben; Stand je Schritt in Abschnitt 13 dort.
 
+- **Wahlen bis 1871 (Schritt a3):** Nach 1849 wird weiter gewählt. Das **preußische Abgeordnetenhaus**
+  wählt an den Urwahltagen 1852 bis 1870 mit dem Dreiklassenwahlrecht in den Wahlkreisen von 1849 (neues
+  Feld `wiederwahl`). Gründet sich ein Bund, wählt drei Monate später der **Reichstag** nach allgemeinem,
+  direktem Männerwahlrecht in den Wahlkreisen der Nationalversammlung im Bundesgebiet, danach alle drei
+  Jahre (Felder `bund`, `nach_gruendung`, `wahlperiode`, `wahlkreise_von`). Jede Wahl öffnet den Wahlabend;
+  Parteienmodus und Wahlkampf der KI gelten bis zur nächsten ausstehenden Wahl. Ein Landtag wählt nur, wo
+  sein Staat noch herrscht. Die erste Wahl jedes Parlaments rechnet wie bisher; 1648 bitgleich.
 - **Bünde zur Laufzeit (Schritt a2):** Die deutsche Frage verändert jetzt die Ordnung im Bund. Die
   Bundesversammlungen in `common/bundesversammlung.chron` können **Vorlagen** sein (Norddeutscher Bund,
   Reich der Paulskirche, großdeutsches Reich, Deutsches Reich 1871); die neue Wirkung `bund { … }` gründet

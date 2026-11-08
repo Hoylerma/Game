@@ -304,7 +304,10 @@ static func election_title(sim: SimulationClient) -> String:
 	var parliaments := sim.get_parliaments()
 	if parliament < 0 or parliament >= parliaments.size():
 		return MapModes.name_of(MapModes.MAP_WAHLEN)
-	var date: Dictionary = parliaments[parliament].get("election_date", {})
+	# Seit M13a3: nach einer Wahl das Jahr dieser Wahl, auch wenn die nächste schon aussteht.
+	var entry: Dictionary = parliaments[parliament]
+	var date: Dictionary = entry.get("last_election_date", {}) if int(entry.get("election_index", -1)) >= 0 \
+		else entry.get("election_date", {})
 	return "Wahlen %d" % int(date.get("year", 0))
 
 

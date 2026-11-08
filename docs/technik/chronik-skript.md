@@ -675,7 +675,12 @@ parlament nationalversammlung {
     sitze         = 649                              # Pflicht: Sollzahl, 1..10000
     seit          = 1848.03.01                       # optional (Abschnitt 3.18)
     bis           = 1849.06.18                       # optional seit M10b: ab diesem Startdatum nicht mehr
-    wahltag       = 1848.05.01                       # Pflicht
+    wahltag       = 1848.05.01                       # Pflicht (ohne 'bund')
+    wiederwahl    = { 1852.10.20 1855.10.08 }        # optional seit M13a3: weitere Wahltage, aufsteigend
+    bund          = { norddeutscher_bund }           # optional seit M13a3: Parlament eines Bundes (Vorlagen)
+    nach_gruendung = 90                              # optional seit M13a3, nur mit 'bund': Tage bis zur ersten Wahl
+    wahlperiode   = 3                                # optional seit M13a3, nur mit 'bund': Jahre, 0 = einmal
+    wahlkreise_von = nationalversammlung             # optional seit M13a3: Wahlkreise eines früheren Parlaments
     wahlrecht     = allgemein_maenner                # Pflicht: keines | staendisch | zensus | dreiklassen | allgemein_maenner
     wahlsystem    = stichwahl                        # optional: stichwahl (Standard) | relativ
     wahl_indirekt = ja                               # optional: Wahl über Wahlmänner, Standard nein
@@ -701,6 +706,20 @@ Weitere Fehler: unbekannte Kulturen im Boykott, `fraktionen_ab` vor dem Wahltag,
 `boykott_maerkte` ohne `boykott`. Gibt es zum Startdatum ein Parlament, braucht die Welt
 die Wahlregeln (Abschnitt 3.23). Die Datei darf fehlen. Im Kern: `World::parliaments` (`Parliament`,
 `Faction`, `ElectoralLaw`).
+
+**Wahlen bis 1871 (seit M13a3, [vertical_slice.md](vertical_slice.md) 3.4).** `wiederwahl` nennt weitere
+Wahltage nach `wahltag`; gewählt wird an jedem, der zum Startdatum noch aussteht. Ein Landtag wählt nur in
+den Wahlkreisen, deren erster Ort am Wahltag noch seinem Staat gehört. Ein Parlament mit `bund` wählt statt
+an festen Tagen, solange ein Bund zur Laufzeit aus einer der genannten Vorlagen besteht (Abschnitt 3.29,
+Wirkung `bund`): zuerst `nach_gruendung` Tage nach dessen Gründung (Standard 0), danach alle `wahlperiode`
+Jahre; gründet sich ein anderer Bund, zählt dessen Gründung. Es wählen die Wahlkreise, deren erster Ort im
+Bundesgebiet liegt. `wahlkreise_von` übernimmt die Wahlkreise eines Parlaments, das in der Datei vorher
+steht, unter der Kennung `<parlament>_<wahlkreis>`; die Summe ihrer Sitze wird nicht gegen `sitze`
+geprüft. Fehlt das Parlament zum Startdatum (`bis`, `seit`), fehlt auch dieses. Fehler: `wahltag` oder
+`wiederwahl` zusammen mit `bund`, `nach_gruendung` oder `wahlperiode` ohne `bund`, ein Wahltag in
+`wiederwahl`, der nicht nach dem vorigen liegt, eine unbekannte Vorlage in `bund` (nur in Welten mit
+Bundesgebiet), ein unbekanntes Parlament in `wahlkreise_von` und eigene Wahlkreise zusammen mit
+`wahlkreise_von`.
 
 ### 3.22 `history/wahlkreise/*.chron` (seit M8)
 
